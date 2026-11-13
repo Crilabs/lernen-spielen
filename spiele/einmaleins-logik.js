@@ -31,6 +31,7 @@ export function aufgabenVon(paket) {
 }
 export const alleAufgaben = () => K.KETTEN.flatMap(n => Array.from({ length: 10 }, (_, i) => aufgabe(i + 1, n)));
 const GUELTIG = new Set(alleAufgaben().map(x => x.key));
+const DATUM = /^\d{4}-\d{2}-\d{2}$/;
 
 export function neuerStand() {
   return { version: 1, aufgaben: {}, frei: K.REIHENFOLGE.slice(0, K.START), neu: null, verlauf: [], zaehler: 0 };
@@ -45,8 +46,10 @@ export function migriere(roh) {
   s.aufgaben = {};
   for (const [k, e] of Object.entries(roh.aufgaben && typeof roh.aufgaben === "object" ? roh.aufgaben : {})) {
     if (!GUELTIG.has(k) || !e || typeof e !== "object") continue;
-    s.aufgaben[k] = { ...e, f: Math.max(0, Math.min(K.GELERNT, zahl(e.f))), t: typeof e.t === "string" ? e.t : "",
+    const r = { ...e, f: Math.max(0, Math.min(K.GELERNT, zahl(e.f))), t: DATUM.test(e.t) ? e.t : "",
       h: Array.isArray(e.h) ? e.h : [] };
+    if (Array.isArray(e.z)) r.z = e.z.filter(Number.isFinite); else delete r.z;
+    s.aufgaben[k] = r;
   }
   if (!Array.isArray(s.verlauf)) s.verlauf = [];
   if (!Number.isFinite(s.zaehler)) s.zaehler = 0;
@@ -101,7 +104,10 @@ export function naechsteAufgabe(stand, { kette = 0, rest = 0, vorher = "", heute
   const frei = stand.frei.flatMap(aufgabenVon);
   const istNeu = (x) => stand.neu && stand.zaehler < stand.neu.bis && paketVon(x.a, x.n) === stand.neu.paket;
   const dran = (x) => faellig(eintrag(stand, x.key), heute);
+  const [vA, vN] = vorher.split("x").map(Number);
   const aufKette = (n) => frei.filter(x => x.n === n && x.key !== vorher);
+  // gegen Reihen-Drill: in derselben Kette nicht den nächstgrößeren Faktor, wenn es anderes gibt
+  const ohneReihe = (xs) => { const r = xs.filter(x => !(x.n === vN && x.a === vA + 1)); return r.length ? r : xs; };
 
   let n = kette, r = rest - 1;
   if (!(rest > 0 && aufKette(kette).length)) {
@@ -114,7 +120,7 @@ export function naechsteAufgabe(stand, { kette = 0, rest = 0, vorher = "", heute
       : mitDran.length ? zufallsEins(mitDran, rnd) : zufallsEins(kand, rnd);
     r = zufallsEins(K.AUFGABEN_JE_KETTE, rnd) - 1;
   }
-  const xs = aufKette(n);
+  const xs = ohneReihe(aufKette(n));
   const neue = xs.filter(istNeu);
   let gruppe;
   if (neue.length && rnd() < K.NEU_ANTEIL) gruppe = neue;

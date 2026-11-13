@@ -111,3 +111,23 @@ test("zahlwort bis 999", () => {
     100: "hundert", 101: "hunderteins", 200: "zweihundert", 342: "dreihundertzweiundvierzig", 999: "neunhundertneunundneunzig" };
   for (const [z, t] of Object.entries(w)) assert.equal(zahlwort(+z), t);
 });
+
+test("migriere: kaputte Zeiten und Daten blockieren nichts", () => {
+  const s = migriere({ version: 1, aufgaben: { "2x2": { f: 1, t: "x", h: [1], z: 5 }, "5x2": { f: 2, t: "2026-11-01", h: [], z: [1200, "y", 800] } } });
+  assert.equal(s.aufgaben["2x2"].t, "");
+  assert.equal(s.aufgaben["2x2"].z, undefined);
+  assert.deepEqual(s.aufgaben["5x2"].z, [1200, 800]);
+  verbuche(s, 2, 2, { ms: 900, heute: HEUTE });          // wirft nicht
+  assert.equal(eintrag(s, "2x2").f, 2);                   // ungültiges Datum gilt als fällig
+});
+
+test("naechsteAufgabe: in derselben Kette nie der nächstgrößere Faktor (kein Reihen-Drill)", () => {
+  const s = neuerStand(); s.frei = ["K2", "A2"];
+  const rnd = lcg(11), gesehen = new Set();
+  for (let i = 0; i < 300; i++) {
+    const x = naechsteAufgabe(s, { kette: 2, rest: 3, vorher: "3x2", heute: HEUTE, rnd });
+    gesehen.add(x.key);
+    assert.notEqual(x.key, "4x2");
+  }
+  assert.ok(gesehen.size >= 5, "sonst ist der Zufall zu schwach: " + [...gesehen]);
+});

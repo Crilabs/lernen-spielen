@@ -109,7 +109,7 @@ img{display:block}
   <g fill="#FFE07A" stroke="#3B2A6B" stroke-width="2.5"><circle cx="358" cy="996" r="12"/><circle cx="1320" cy="1006" r="11"/></g>
 
   <g id="tafel">
-    <rect x="530" y="78" width="380" height="150" rx="40" fill="#fff" stroke="#3B2A6B" stroke-width="5"/>
+    <rect x="460" y="78" width="520" height="150" rx="40" fill="#fff" stroke="#3B2A6B" stroke-width="5"/>
     <text id="aufgabe" class="aufgabe" x="720" y="158"></text>
   </g>
   <g id="drahtG"></g>
@@ -125,7 +125,7 @@ img{display:block}
 <script src="figuren/figuren.js"></script>
 <script src="figuren/einhorn.js"></script>
 <script type="module">
-import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
+import {lade, speichere, sperreTouch, esc, protokoll} from "./lernspiel.js";
 import {K, migriere, eintrag, verbuche, naechsteAufgabe, hilfeVon, ortVon, zahlwort, paketVon, aufgabenVon} from "./einmaleins-logik.js";
 sperreTouch();
 (async function(){
@@ -274,11 +274,16 @@ sperreTouch();
 
   // ---------- Pfeilchen ----------
   // Spitze zeigt nach oben auf die Stelle (x|y = Kettenmitte), das Schild hängt darunter.
+  // Liegt in derselben Reihe schon ein Pfeilchen in der Nähe, hängt das neue eine Stufe tiefer (längerer Stiel).
   function pfeil(text, ort, {art="normal"}={}){
-    const gr = art==="quadrat", w = gr ? 118 : 96, h = gr ? 70 : 58, top = R + 6;
+    const gr = art==="quadrat", w = gr ? 118 : 96, h = gr ? 70 : 58;
+    const belegt = new Set([...$("pfeileG").children].filter(e=>+e.dataset.y===ort.y && Math.abs(+e.dataset.x-ort.x) < 104).map(e=>+e.dataset.stufe));
+    let stufe=0; while(belegt.has(stufe)) stufe++;
+    const top = R + 6 + stufe*72;
     const fill = {normal:"#FFF8EE", quadrat:"#FFE68A", kern:"#E8E0FF", falsch:"#F1EDF6", frage:"#FFFFFF"}[art];
-    const g=el("g",{class:"pfeil"+(gr?" gross":"")},$("pfeileG"));
+    const g=el("g",{class:"pfeil"+(gr?" gross":""),"data-x":ort.x,"data-y":ort.y,"data-stufe":stufe},$("pfeileG"));
     const i=el("g",{},g);
+    if(stufe) el("path",{d:`M0 ${R+6} L0 ${top+2}`,stroke:"#3B2A6B","stroke-width":3,"stroke-linecap":"round"},i);
     const d=`M0 ${top} L14 ${top+18} L${w/2} ${top+18} L${w/2} ${top+18+h} L${-w/2} ${top+18+h} L${-w/2} ${top+18} L-14 ${top+18} Z`;
     el("path",{d, fill, stroke:"#3B2A6B","stroke-width":gr?5:4,"stroke-linejoin":"round","stroke-dasharray": art==="frage"?"8 7":"none"},i);
     const t=el("text",{x:0,y:top+18+h/2+1},i); t.textContent=text;
@@ -433,6 +438,13 @@ sperreTouch();
   async function pruefe(){
     if(busy || !eingabe) return;
     busy=true;
+    try{ await ablauf(); }
+    catch(e){                     // eine Ausnahme darf das Spiel nicht dauerhaft sperren
+      protokoll("einmaleins: " + (e?.stack || e));
+      eingabe=""; zeigeEingabe(); busy=false;
+    }
+  }
+  async function ablauf(){
     const w=+eingabe, a=x.a, p=a*n;
     plopp();
     // Hilfe-Pfeilchen (Kernaufgabe) bleibt liegen, wird aber gleich vom Ergebnis abgelöst
@@ -471,9 +483,10 @@ sperreTouch();
     let wp;
     if(o.ueber){
       // weiter, als die Kette reicht: hinter dem Kettenende vom Teppich gekippt (bleibt im Bild)
-      const ende=stabEnde(10), weit={x:Math.max(110, ende.x - 70), y:ende.y, dir:-1};
+      const ende=stabEnde(10), weit={x:Math.max(70, ende.x - 40), y:ende.y, dir:-1}, unten={x:weit.x-10, y:905};
       wp = await pfeilFliegt(String(w), weit, {art:"falsch"});
-      if(!ruhig) await wp.animate([{transform:`translate(${weit.x}px,${weit.y}px)`},{transform:`translate(${weit.x-20}px,${weit.y+70}px) rotate(-16deg)`}],{duration:520,easing:"ease-in",fill:"forwards"}).finished.catch(()=>{});
+      if(!ruhig) await wp.animate([{transform:`translate(${weit.x}px,${weit.y}px)`},{transform:`translate(${unten.x}px,${unten.y}px) rotate(-14deg)`}],{duration:560,easing:"cubic-bezier(.5,0,.9,.6)"}).finished.catch(()=>{});
+      wp.style.transform=`translate(${unten.x}px,${unten.y}px) rotate(-14deg)`; wp.dataset.y = unten.y;   // liegt nicht mehr an der Kette
     } else {
       wp = await pfeilFliegt(String(w), nachPerlen(w), {art:"falsch"});
     }
@@ -481,7 +494,7 @@ sperreTouch();
     // Am Einhorn: das leere Pfeilchen „?“, wo die Sprünge enden
     pfeil("?", stabEnde(a), {art:"frage"});
     kopf(-14);
-    say(`${gross(W(w))} liegt hier. ${gross(W(a))} Sprünge enden hier.`);
+    say(`${gross(W(w))} liegt hier. ${a===1 ? "Ein Sprung endet" : gross(W(a))+" Sprünge enden"} hier.`);
     await wait(Math.max(0, FEHLER_MS - (Date.now()-start)));
     kopf(0);
     eingabe=""; zeigeEingabe();
