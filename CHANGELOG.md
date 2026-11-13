@@ -2,6 +2,14 @@
 
 ## Unveröffentlicht
 
+- Lernplan: Die Mathe-Spiele folgen jetzt einem gemeinsamen Plan aus vielen kleinen Themen (zum Beispiel „Die 7 zerlegen“ oder „Plus ohne Zehnerübergang bis 20“). Die App sucht das passende Thema selbst aus; das Kind muss nichts wählen.
+- Eine kurze Probe zu Beginn eines neuen Themas überspringt, was das Kind schon kann. Fehler und Hilfen führen ruhig zurück zum Üben; bekannte Aufgaben kommen nach einigen Tagen noch einmal vor.
+- Vor einem neuen Thema erzählt eine kurze Einführung mit dem Einhorn, worum es geht.
+- Neue Seite „Was ich kann“: ein ruhiger Weg mit Stationen zeigt, welche Themen schon gekonnt sind und welches als Nächstes kommt, ohne Punkte, Zähler oder Prozente.
+- Elternbereich: zeigt die Themen mit Hinweis, was man zu Hause tun kann. Themen lassen sich als gekonnt markieren, zurücksetzen oder freigeben.
+- Perlenbrücke: drei Stufen, erst mit den Perlen zum Anfassen, dann nur im Kopf mit Vorstellung, zuletzt ganz im Kopf.
+- Die Computerstimme spricht keine Zahlen mehr; Zahlen stehen groß im Bild oder in der Sprechblase.
+- Spiele mit dem Lernplan (Perlenbrücke, Zahlenzauber) haben auf der Startseite keinen Fortschrittsbalken mehr.
 - Mathe-Spiele lesen keine Zahlen mehr vor: Die Computerstimme sprach Zahlen oft falsch („eins mal fünf“, „fünfter“). Kettenhüpfer und Perlenbrücke zeigen ihre Sätze jetzt in einer Sprechblase mit Ziffern (z. B. „5 · 7 = 35. Und noch ein Stäbchen?“), der Zahlenzauber zeigt nur noch Text. Die Klänge bleiben.
 - Kettenhüpfer: Bei einer falschen Zahl steht kurz und klar „6 Stäbchen sind nicht 48.“
 
