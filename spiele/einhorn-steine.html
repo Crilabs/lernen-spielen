@@ -384,7 +384,7 @@ const AUSWERTUNG = (() => {
   }
   const deutscheStimmen = () => (window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang));
   // Gespeichert wird Position + Name + Kennung: Safari meldet z. B. zwei „Anna“ (kompakt und Premium) mit gleicher Kennung.
-  // "system" = keine Stimme vorgeben, nur Deutsch – dann wählt iOS (Einstellungen › Gesprochene Inhalte › Stimmen).
+  // "system" = keine Stimme vorgeben, nur Deutsch – dann wählt das System (Windows: Standardstimme der Sprachausgabe).
   let voice=null, stimmWahl="";
   const stimmSchluessel = (v,i) => i+"|"+v.name+"|"+v.voiceURI;
   function pickVoice(){
@@ -743,8 +743,9 @@ const AUSWERTUNG = (() => {
       <h2>Am häufigsten zusammengeklebt</h2><ul>${paare.map(([p,n])=>`<li>${esc(p.replace("|"," + "))} <small>· ${n}×</small></li>`).join("")||"<li>–</li>"}</ul>
       <h2>Sätze, die gerade wackeln (${wackel.length})</h2><ul>${wackel.map(([t,e])=>`<li>${esc(t)} <small>· zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`).join("")||"<li>–</li>"}</ul>
       <h2>Stimme auf diesem Gerät</h2>
-      <p>Bessere Stimmen: Einstellungen › Bedienungshilfen › Gesprochene Inhalte › Stimmen › Deutsch – dort z. B. „Anna (Premium)“ oder
-      „Helena (Erweitert)“ laden, dann diese Seite neu öffnen. Die Siri-Stimmen stehen Webseiten leider nicht zur Verfügung.</p>
+      <p>Weitere Stimmen: in Windows unter Einstellungen › Zeit und Sprache › Sprache und Region bzw. › Sprachausgabe
+      eine deutsche Stimme hinzufügen (z. B. „Microsoft Katja“ oder „Microsoft Hedda“), dann die App neu starten.
+      Installierte Stimmen erscheinen in der Liste unten.</p>
       <ul id="stimmen"></ul>
       <p><a class="btn mint" href="einhorn-steine.html">Zum Spiel</a></p>`;
     document.body.appendChild(el);
@@ -759,7 +760,7 @@ const AUSWERTUNG = (() => {
         b.onclick=()=>{ waehle(); sound=true; say("Das Pony frisst Gras. Die Katze schläft auf dem Sofa."); zeigeStimmen(); };
         li.appendChild(b); liste.appendChild(li);
       };
-      zeile("Stimme aus den iPhone-Einstellungen", "· iOS wählt selbst", stimmWahl==="system",
+      zeile("Standardstimme des Geräts", "· Windows wählt selbst", stimmWahl==="system",
         ()=>{ try{ localStorage.setItem("einhorn-stimme","system"); }catch(e){} stimmWahl="system"; voice=null; });
       vs.forEach((v,k)=>zeile(`${k+1}. ${esc(v.name)}`,
         `· ${esc(v.lang)}${v.default?" · Standard":""}${v.localService===false?" · online":""}${stimmWert(v)<0?" · alt/Spaßstimme":""}<br>${esc(v.voiceURI)}`,
