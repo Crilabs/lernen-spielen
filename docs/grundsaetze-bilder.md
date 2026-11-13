@@ -351,8 +351,9 @@ auf dieses Dokument aufnehmen.
 ---------------------------------------------------------------------------------------------------
 ## 15. Offen
 
-- ~~Zauber ohne Zauberin~~ entschieden (Christian, 2026-11-14): Die Kinder der Runde zaubern selbst, mit
-  Utensilien wie Zauberstab, Hut, Umhang ([`figuren.md`](figuren.md) §5).
+- ~~Zauber ohne Zauberin~~ entschieden (Christian, 2026-11-14): Die Kinder der Runde zaubern selbst und
+  können weitere Dinge, die es in echt nicht gibt (schrumpfen, fliegen, Zeitreise …), mit Zubehör wie beim
+  Verkleiden ([`figuren.md`](figuren.md) §5).
 - ~~Die Runde~~ festgelegt im Figurenblatt [`figuren.md`](figuren.md) (Christian, 2026-11-14).
 - **Echt-Zeichen:** Gestalt und Farbe (6.2).
 - **Prüfung in der App:** dieselbe Aufgabe mit und ohne Folge-Animation über einige Tage, gemessen an

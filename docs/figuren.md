@@ -91,27 +91,51 @@ Person.
   (Hautfarbe nie als einzige Unterscheidung, C1: jedes Kind ist auch an Haaren, Form und Hilfsmittel
   erkennbar).
 - **Haltungen, die es von jedem Kind geben muss:** stehen (vorn, Dreiviertel), gehen (Profil), zeigen,
-  tragen, staunen, freuen (zwei Stärken), nachdenken (Hand am Kinn), winken, zaubern (mit Stab, Hut als
-  Zubehör, das jedes Kind tragen kann). Bei Timo jeweils im Rollstuhl,
+  tragen, staunen, freuen (zwei Stärken), nachdenken (Hand am Kinn), winken, und für die Fähigkeiten aus §5 zaubern,
+  schweben und klein/groß werden (Zubehör, das jedes Kind tragen kann). Bei Timo jeweils im Rollstuhl,
   selbst fahrend.
 - **Herstellung:** SVG von Hand nach diesem Blatt (A1: Figuren nie KI-generiert).
 
 ---------------------------------------------------------------------------------------------------
-## 5. Verzaubern (Christian)
+## 5. Was die Kinder können, was es in echt nicht gibt (Christian)
 
-„Etwas verzaubern“ bleibt im Rahmen der Grundsätze (`grundsaetze.md` 8: Zauber als freundliches
-Fantasie-Element). Es gibt keine Zauberin mehr; **die Kinder der Runde zaubern selbst** und dürfen dafür
-Utensilien nutzen: Zauberstab, Hut, Umhang und Ähnliches, wie beim Verkleiden.
+Die Kinder der Runde sind echte Kinder, aber in der Geschichte dürfen sie Dinge, die es in echt nicht gibt.
+Das ist der Fantasierahmen aus `grundsaetze.md` §4 („Fantasie im Rahmen, Wirklichkeit im Lernkern“). Es gibt
+keine eigene Zauber- oder Fantasiefigur dafür (F1); die Kinder tun es selbst, oft mit Zubehör wie beim
+Verkleiden.
 
-- **Zauber verwandelt, lässt wachsen, leuchten, groß oder klein werden.** Er bewirkt die Folge einer
-  Kinderhandlung (N3, B1): Das Kind löst, das Kind der Runde zaubert die Wirkung sichtbar.
-- **Nie** Flüche, Beschwörungen, Zaubersprüche als Formel, okkulte Zeichen, Hexen als Böse (§8, 9.2 Nr. 9).
-- **Fantasie im Rahmen, Wirklichkeit im Lernkern** (§4): Der Zauber wirkt auf die Szene, nie auf die
-  Lernzeichen. Ein Buchstabe bleibt ein Buchstabe; der Zauberer im Großbuchstaben-Spiel macht ihn groß
-  oder klein, verwandelt ihn aber in nichts anderes.
-- **Utensilien sind Kostüm,** kein Merkmal einer Figur: Jedes Kind der Runde kann den Zauberhut tragen.
-  Wer in einem Spiel zaubert, wechselt über die Spiele hinweg (§7 Auszählen).
-- Kein Zauber als Belohnung oder Überraschung aus dem Zufall (N4, B4): Er kommt verlässlich als Folge.
+**Beispiele** (Liste offen, neue Fähigkeiten nach den Regeln unten):
+
+| Fähigkeit | Zubehör (Beispiel) | Wofür in einem Spiel (Beispiel) |
+|---|---|---|
+| **verzaubern:** verwandeln, wachsen lassen, leuchten lassen, groß oder klein machen | Zauberstab, Hut, Umhang | Buchstaben groß oder klein zaubern; ein Beet wachsen lassen, wenn die Rechnung aufgeht |
+| **schrumpfen** und wieder groß werden | Lupenmütze | ganz klein werden, um einen Käfer oder ein Ameisennest aus der Nähe anzusehen |
+| **riesig werden** | Riesenstiefel | über einen Fluss steigen, Dinge von oben zählen |
+| **fliegen oder schweben** | Schirm, Ballon, Papierflieger zum Draufsetzen | eine Welt von oben ansehen, zu einem Ort auf dem Zahlenstrahl fliegen |
+| **in die Zeit reisen** | Zeituhr, Kiste mit Tür | „Früher und heute“ (Kosmik): sehen, wie man früher gewaschen hat |
+| **unter Wasser atmen** | Taucherhelm aus Glas | am Meeresboden Muscheln sortieren |
+| **ins Bild steigen** | Bilderrahmen als Tür | in ein Wimmelbild hineingehen |
+
+**Regeln für jede dieser Fähigkeiten:**
+
+- **Freundlich und sicher:** verwandeln, wachsen lassen, leuchten, schweben, staunen. Nie Flüche,
+  Beschwörungen, Zaubersprüche als Formel, okkulte Zeichen, Hexen als Böse (§8, 9.2 Nr. 9). Keine
+  Fähigkeit bringt ein Kind in Gefahr, auch nicht beim Fliegen oder Tauchen (9.2 Nr. 4, 10): Nichts fällt,
+  niemand geht unter.
+- **Folge der Lösung, nicht Belohnung:** Die Fähigkeit wirkt, *weil* das Kind etwas gelöst hat (N3, B1),
+  verlässlich und nicht als Zufallsüberraschung (N4, B4). Sie ist nie freizuschalten (N5).
+- **Wirkt auf die Szene, nie auf die Lernzeichen:** Ein Buchstabe bleibt ein Buchstabe (groß oder klein, aber
+  nicht in ein Tier verwandelt), eine Perle bleibt eine Perle, eine Menge bleibt gleich groß, auch wenn ein Kind
+  riesig wird.
+- **Sachwissen bleibt echt** (K3, K11): Wer schrumpft, sieht einen echten Käfer mit sechs Beinen, als
+  Sachbild mit Echt-Zeichen. Die Zeitreise zeigt, wie es früher wirklich war. Die Fähigkeit ist der Weg zur
+  Sache, nie die Sache selbst. Was es in echt nicht gibt, wird nie als wahr erzählt („In echt kann niemand
+  schrumpfen“ darf der Erzähler sagen, wenn ein Kind fragt; die Elternansicht nennt die Fantasieelemente).
+- **Zubehör ist Kostüm, kein Merkmal:** Jedes Kind der Runde kann jede Fähigkeit und jedes Zubehör nutzen.
+  Wer was tut, wechselt über die Spiele (§8 Auszählen); keine Fähigkeit gehört fest zu einem Kind.
+- **Keine Tiere mit Fantasiefähigkeiten** (T1): Tiere sprechen nicht, zaubern nicht, verstehen keine Menschen.
+  Auch Dinge werden nicht lebendig und sprechen nicht (F1).
+- **Eine Fähigkeit je Szene** und nur, wenn sie zum Zweck der Szene gehört (L8, Kein Dekor ohne Bedeutung).
 
 ## 6. Gäste (F3)
 
