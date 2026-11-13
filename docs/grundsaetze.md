@@ -3,7 +3,8 @@
 Stand: 2026-11-13 · **freigegeben** (Christian, 2026-11-13)
 Begründungen und Quellen: [`docs/reports/Grundsätze für Lernspiele.md`](reports/Grundsätze%20für%20Lernspiele.md),
 Rohnotizen in `docs/research_notes/Grundsätze für Lernspiele/` (für Abschnitt 9:
-`geschichten_angst_gewalt.md`, noch nicht in den Bericht eingearbeitet).
+`geschichten_angst_gewalt.md`, noch nicht in den Bericht eingearbeitet). Für Abschnitt 10 (Kosmik-Schicht):
+[`docs/reports/Kosmik Sachthemen für Lernspiele.md`](reports/Kosmik%20Sachthemen%20f%C3%BCr%20Lernspiele.md).
 
 Dieses Konzept ist die verbindliche Vorgabe für jedes neue Spiel, jeden Sprechertext, jedes Bild und
 jede Zeile in der Elternansicht. `ideen.txt` bleibt die Ideensammlung für einzelne Spiele; wo sich beide
@@ -115,6 +116,10 @@ Feedbackforschung gut gedeckt.
 | Du hast dich so angestrengt! | Prozesslob als Formel ist auch ein Urteil | Tun beschreiben: „Das war die zehnte Karte.“ |
 | Schaffst du das? / Das ist ganz leicht! | erzeugt Druck bzw. beschämt, wenn es nicht klappt | Aufgabe einfach stellen |
 | besser als …, schneller als gestern | Vergleich mit anderen bzw. mit Tempo | – (Rückblicke nur nach vorn, siehe 3.3) |
+| Ich bin liebenswert / gut, so wie ich bin / stolz auf mich | Selbstwert-Urteil, auch wenn es positiv ist | Ich-Form nur für Rechte, Handlungen und Gefühle: „Ich darf Nein sagen.“ „Ich habe ein Nein-Gefühl.“ (K15) |
+
+Das Thema, das Programme für soziales Lernen „Fehler sind okay“ nennen, heißt im Kindertext **„Wenn etwas
+schiefgeht“**.
 
 Anrede: **Name oder „du“,** ohne Geschlechtsform („Hallo [Name]“, „Du hast …“). Texte so bauen, dass
 sie ohne das Geschlecht des Kindes auskommen – das ergibt sich fast von selbst, weil Personenlob
@@ -132,6 +137,17 @@ sie ohne das Geschlecht des Kindes auskommen – das ergibt sich fast von selbst
 - Rückblicke nur nach vorn („Neu seit letzter Woche: …“), nie „Gestern ging es schneller“.
 - Ein Hinweis für Eltern, der die Begriffe erklärt (siehe 5), z. B. „In der Schule heißt das *Nomen* –
   früher oft *Namenwort* oder *Hauptwort*.“
+- **Welten statt Stand:** Für Sachthemen (Abschnitt 10) zeigt die Elternansicht nur, welche Welten das Kind
+  besucht hat, kein „gekonnt“.
+- **Block „Sicher und stark“** [P] (Kinderschutz Schweiz, AJS NRW): die sieben Botschaften in Elternsprache
+  (Mein Körper gehört mir · Ich vertraue meinem Gefühl · gute, schlechte und komische Berührungen · Ich darf
+  Nein sagen · gute und schlechte Geheimnisse · Ich hole mir Hilfe · Ich bin nicht schuld); der Hinweis,
+  dass Schutz Aufgabe der Erwachsenen ist und die App kein Präventionsprogramm ersetzt; Alltagstipps
+  (Kitzeln stoppen, wenn das Kind Stopp sagt; keine erzwungenen Küsse); wie man reagiert, wenn ein Kind
+  etwas erzählt (ruhig zuhören, glauben, Hilfe holen); warum Körperteile wie Penis und Vulva richtig heißen;
+  Anlaufstellen: Nummer gegen Kummer 116 111, Elterntelefon 0800 111 0 550, Hilfe-Telefon Sexueller
+  Missbrauch 0800 22 55 530. *Annahme:* Sprechzeiten schwanken zwischen den Quellen, vor der Veröffentlichung
+  auf den Seiten der Stellen prüfen. Der Begriff „Missbrauch“ steht nur hier, nie im Kindertext.
 
 ---------------------------------------------------------------------------------------------------
 ## 4. Montessori im Spiel
@@ -149,7 +165,13 @@ sie ohne das Geschlecht des Kindes auskommen – das ergibt sich fast von selbst
 **Fantasie und Einhorn** [b]: Ab sechs Jahren empfahl Montessori selbst märchenhafte Erzählformen. Die
 Regel lautet deshalb: **Fantasie im Rahmen, Wirklichkeit im Lernkern.** Das Einhorn trägt die Geschichte,
 aber Buchstaben bleiben Buchstaben (keine Buchstaben in Tierform), Mengen bleiben neutrale Perlen, und
-Sachwissen über die echte Welt stimmt.
+Sachwissen über die echte Welt stimmt. **Auch Sachfakten sind Lernkern** (Abschnitt 10, K3): Die Maus, über
+die das Kind etwas erfährt, ist eine echte Maus.
+
+**Kosmische Erziehung ohne Plan** [P]: Übernommen werden die Leitideen (erst das Ganze, dann das Detail;
+Zusammenhänge; Warum-Fragen; Erzählung) und die Erzählungen von Zahl und Schrift. Montessoris „kosmischer
+Plan“ und die „kosmische Aufgabe“ jedes Wesens werden nicht übernommen; erzählt werden ökologische
+Funktionen und Ursachen (die Biene bestäubt, der Regenwurm lockert den Boden). Siehe 8.
 
 **Ehrlich festgehalten:** Die Wirksamkeit von Montessori ist für das Gesamtsystem belegt (klein bis
 mittel, meist Vorschule), nicht für Apps. Montessori Deutschland sieht Bildschirmlernen in diesem Alter
@@ -289,7 +311,9 @@ Familien und Hautfarben abzubilden ist Abbildung der Wirklichkeit und keine Part
 - Keine religiösen Aussagen als Tatsache, keine Verspottung von Glauben oder Nichtglauben. Naturwissen
   sachlich, ohne religiöse Deutungen zu behaupten oder zu bestreiten.
 - **Essen:** neutrale Lebensmittel als Standard (Obst, Gemüse, Brot, Nudeln). Schweinefleisch weder
-  Standardbeispiel noch Tabu; Fleisch, Zucker oder Ernährungsweisen nie moralisch bewertet.
+  Standardbeispiel noch Tabu; Fleisch, Zucker oder Ernährungsweisen nie moralisch bewertet. Inhaltsstoffe
+  sachlich ja („In Milch steckt Kalzium für die Knochen“), Einstufung in gesund und ungesund nein, keine
+  „Ungesund“-Kiste – auch wenn der HSU-Lehrplan Lebensmittel bewerten lässt.
 - **Magie:** Zauber ist ein freundliches Fantasie-Element (verwandeln, wachsen lassen, leuchten). Keine
   Flüche, Beschwörungen, Dämonen, Hexen als Böse, Wahrsagerei, okkulte Zeichen. *Annahme:* Wie viele
   Familien Magie-Inhalte ablehnen, ist unbekannt; für das eigene Kind kein Thema, für eine spätere
@@ -351,6 +375,10 @@ Familien und Hautfarben abzubilden ist Abbildung der Wirklichkeit und keine Part
    Kindern oder Tierkindern, Verlassenwerden, Krankheit, Strafen, Mobbing, Krieg, Naturkatastrophen,
    Entführung, Einbruch. Ab etwa 10 dürfen Tod oder Krankheit höchstens als **Sachthema außerhalb der
    Spielgeschichte** vorkommen (z. B. ein Tier im Herbst, Lebenszyklus), sachlich und ruhig.
+   **Natur-Härten** (Nahrungsketten, Dinosaurier, Vulkane) regelt 9.3 nach Stufe. Ausnahme vom „ab etwa 10“:
+   In der Stufe „Abenteuer“ dürfen das Aussterben der Dinosaurier und ein Vulkanausbruch als ruhiger
+   Sachmoment in der Pause vorkommen, nie in der Spielgeschichte, nie mit betroffenen Menschen oder
+   Tierkindern [E].
 9. **Märchen werden bearbeitet:** Motive ja (suchen, finden, helfen, verwandeln, Rätsel, das kluge
    Kleine), Grausamkeiten nein (Fressen, Verbrennen, Verstoßen, Strafen, böse Stiefmutter als Typ). Keine
    Hexe als Bösewicht (siehe 8: Magie freundlich). Das passt zu „Fantasie im Rahmen“ (4).
@@ -375,9 +403,53 @@ in der Elternansicht** mit drei Stufen [E]. Das Alter liefert nur den Vorschlag:
   Kind darauf anzusprechen.
 - Eine Stufe stellt nur der Erwachsene um, nicht das Spiel von selbst. Das Kind kann aber jederzeit
   überspringen (9.2, Nr. 7).
+- **Natur-Härten nach Stufe** [E] (Feld `stufe_ab` der Welten im Lernplan):
+  *Ruhig:* Nahrungsketten, Dinosaurier und Vulkane kommen nicht vor. *Sanft:* sachlich ohne Szene –
+  Nahrungskette als Pfeil im Schaubild, ohne Jagd und ohne benanntes Opfer; Dinosaurier als Zeitleiste,
+  Größe und Nahrung; Vulkane als Erdinneres. *Abenteuer:* zusätzlich Aussterben und Ausbruch, nur als
+  Sachmoment (9.2 Nr. 8).
 
 ---------------------------------------------------------------------------------------------------
-## 10. Barrierefreiheit (Kurzfassung)
+## 10. Kosmik-Schicht – Sachthemen quer zu den Spielen
+
+Kosmik (Montessori), Sachunterricht, Lebenswelt, Miteinander und Schutz sind **kein eigenes Lernfach**,
+sondern eine Schicht über den Mathe- und Deutschspielen: Im Mathespiel erfährt das Kind nebenbei etwas
+über Mäuse. Die Themen stehen als `ueberschriften` und `welten` in `spiele/lernplan.json` (acht
+Überschriften: Tiere und Pflanzen · Erde, Himmel, Wasser und Luft · Zeit, früher und heute · Räume und Wege ·
+Werkzeug, Arbeit und Bauen · Mein Körper und wie es mir geht · Wie wir miteinander umgehen · Sicher und
+stark). „Kosmik“ ist nur ein Arbeitstitel und kommt beim Kind nicht vor.
+
+**Ehrlich festgehalten:** Keine Studie prüft, ob 6- bis 9-Jährige Sachfakten nebenbei in einem Mathespiel
+lernen. Interessante, aber für das Lernziel irrelevante Zusätze senken das Lernen (g ≈ −0,33, vor allem
+Erwachsene; stärker bei wenig Vorwissen und in kurzen Einheiten) [B]. Die Regeln unten sind daraus
+abgeleitet; ein kleiner Vorher-Nachher-Test mit drei Fakten wäre die erste echte Prüfung.
+
+| Nr. | Regel | Stand |
+|---|---|---|
+| K1 | **Drei Plätze, kein vierter.** Ein Sachthema steht als Sachgrund der Aufgabe (bleibt sichtbar), als Welt und Rahmen der Szene oder in der Pause am Rundenende. Während des schweren Schritts wird nichts eingeblendet. | [b] Seductive Details, Fisch |
+| K2 | **Der Sachgrund steckt in der Rechnung.** In Mathe liefern Sachfakten Zahlen und Beziehungen der Aufgabe (Körner auf Mäusenester verteilen, Beine zählen). Ein Themenbild neben einer kahlen Aufgabe zählt nicht. | [b] Walkington; Habgood & Ainsworth |
+| K3 | **Der Sachfakt ist ein Lernkern.** Foto oder naturgetreue Zeichnung, generische Sprache („Mäuse …“). Eine vermenschlichte Figur erzählt keine Sachfakten als Ich-Erlebnis. Keine Mythen („Mäuse lieben Käse“). | [b] Ganea 2014; Strouse 2018 |
+| K4 | **Jeder Fakt geprüft.** Pro Welt ein fester Faktensatz (etwa 5–10) mit Quelle, gefüllt erst, wenn ein Spiel die Welt nutzt. Kein Fakt aus dem Gedächtnis. | [E] |
+| K5 | **Ein Thema, viele Spiele.** Welten kehren über Spiele und Tage wieder und vertiefen sich; ein späteres Spiel nutzt einen früheren Fakt als Aufgabengrund. Das ist die Wiedervorlage der Schicht (L3). | [b] MORE; Fisch |
+| K6 | **Höchstens ein neuer Fakt pro Runde.** Wiederholte Fakten zählen nicht als neu. | [P] |
+| K7 | **Sachwissen ist nie Bedingung.** Keine Sachabfrage zum Weiterkommen, kein „gekonnt“ für Sachfakten. Die Elternansicht zeigt nur besuchte Welten (3.3). | [P] Isolation der Schwierigkeit |
+| K8 | **Der Pausenmoment ist keine Belohnung.** Er kommt nicht nur nach richtigen Antworten, ist immer erreichbar und lässt sich ohne Verlust überspringen (N4, N5). | [E] |
+| K9 | **Das Kind wählt die Welt.** Welten sind kleine Wahlen (N2); der Klassenhinweis ist Orientierung, keine Sperre. Themen werden nie nach Geschlecht zugeschnitten. | [B/b] Personalisierung; N1; 6 |
+| K10 | **In Deutsch näher am Kern.** Sachwörter dürfen Übungswörter sein, Sachsätze Lesetexte, solange die Zielschwierigkeit isoliert bleibt. | [b] MORE |
+| K11 | **Echt-Zeichen.** Was wirklich so ist, trägt ein festes Symbol oder eine feste Rahmung, getrennt vom Fantasierahmen (HSU 1/2: „Geschichte und Geschichten“). | *Annahme:* in Apps ungeprüft |
+| K12 | **Soziale Szenen zwischen Kindern.** Einhorn und Tiere begleiten; das Verhalten zeigen Kinder an Alltagsorten. Gewünschtes Verhalten wird konkret gezeigt und benannt, der Konflikt bleibt kurz, die Lösung ausführlich. Benannt wird das Verhalten („Lena darf mitspielen“), nie die Gruppe (6). | [B] Mares & Woodard; [b] Larsen 2018 |
+| K13 | **Gefühlsfragen haben keine falsche Antwort.** Kein Mechanik-Signal bei „Was sagt dein Bauch?“, Antworten werden nicht kommentiert. Sachregeln bleiben eindeutig („Schlechte Geheimnisse darf man immer weitererzählen“). | [P] AJS |
+| K14 | **Schutz stärkt, warnt nicht.** Die Figur spricht Rechte zu („Du darfst …“), Verantwortung liegt bei Erwachsenen. Keine Täter, keine Fremdenfigur (statt „Geh nicht mit Fremden mit“: „Ich sage Bescheid, wo ich bin“), keine Fragen, ob dem Kind etwas passiert ist, nichts davon wird gespeichert. Körperteile heißen richtig (auch Penis, Vulva, Po, Brust), zuerst im neutralen Körperspiel, mit Elternvorschau. Die App verspricht keine Präventionswirkung. | [B] Cochrane 2015 (keine Angstzunahme); [P] Kinderschutz Schweiz, AJS |
+| K15 | **Ich-Form für Rechte, nicht für Selbstwert.** „Ich darf Nein sagen“ ja, „Ich bin liebenswert“ nein (3.2). | [E] nach 0 und 3.1 |
+
+**Nie in der Schicht** (deckt sich mit 9.2 Nr. 8): sexueller Missbrauch als Begriff oder Geschehen,
+Täterfiguren, bedrohliche Fremde, Nacktheit in Situationen, Strafen, Schuld beim Kind, Krieg, Flucht als
+Erlebnis, Tod von Eltern oder Haustier, schwere Krankheit, Unfälle mit Verletzten, Katastrophen, Entführung,
+Mobbing als ausführliche Opferszene, Trennung der Eltern. Eine Überschrift „Alle sind verschieden“ gibt es
+nicht; sie würde die Kategorie zum Thema machen (6).
+
+---------------------------------------------------------------------------------------------------
+## 11. Barrierefreiheit (Kurzfassung)
 
 - Alles Geschriebene vorlesbar; schwierige Wörter mit Bild.
 - **Information nie nur über Farbe** (Farbsehschwäche betrifft etwa jeden zwölften Jungen [P]); immer
@@ -386,7 +458,7 @@ in der Elternansicht** mit drei Stufen [E]. Das Alter liefert nur den Vorschlag:
 - Stimmen über die Spiele gemischt (verschiedene Sprecherinnen und Sprecher).
 
 ---------------------------------------------------------------------------------------------------
-## 11. Checkliste vor dem Bau eines Spiels
+## 12. Checkliste vor dem Bau eines Spiels
 
 - [ ] **Zweck:** Wozu tut das Kind das in der Spielwelt? Bewirkt die richtige Antwort etwas Bedeutsames?
 - [ ] **Eine Schwierigkeit,** alles andere leicht (kurze Wörter, Vorlesen).
@@ -403,9 +475,11 @@ in der Elternansicht** mit drei Stufen [E]. Das Alter liefert nur den Vorschlag:
 - [ ] **Sprache** nach 7; **Neutralität** nach 8.
 - [ ] **Geschichte** nach 9: Spannungsquelle ohne Gewalt, Sicherheitssignale, Stufe festgelegt, Elternvorschau-Satz.
 - [ ] **Elternansicht:** beschreibend, von Stärken aus, kein Vergleich, keine Defizitwörter.
+- [ ] **Sachthema** an einem der drei Plätze (K1), Fakt aus dem geprüften Faktensatz der Welt (K4), Stufe nach 9.3.
+- [ ] **Soziale Szene / Schutz:** gewünschtes Verhalten gezeigt, Konflikt kurz (K12); Rechte statt Warnung (K14).
 
 ---------------------------------------------------------------------------------------------------
-## 12. Was sich gegenüber `ideen.txt` ändert
+## 13. Was sich gegenüber `ideen.txt` ändert
 
 | In `ideen.txt` | Neu |
 |---|---|
@@ -416,7 +490,7 @@ in der Elternansicht** mit drei Stufen [E]. Das Alter liefert nur den Vorschlag:
 | Wörter-Werkstatt mit „Ding-Kiste, Tu-Kiste, Wie-Kiste“ | Kisten heißen Nomen, Verb, Adjektiv mit Symbol (5). |
 | Wimmelbild lehrt den Einstieg „Nomen = Ding“ | Auch im Einstieg die Artikelprobe als Hilfe, keine Bedeutungsregel (5). |
 | Falsch: „komische Reaktion“ | Eindeutig, aber nie lustiger als die richtige (N7). |
-| – | Neu: Vorhersagen (L2), erst zeigen (L5), Zielkorridor (L9), Transfer (L13), Wahl 3–5 Optionen (N2), Montessori-Fantasie-Regel (4), Vielfalt/Stereotype (6), Sprache (7), Neutralität (8), Geschichten und Angst (9). |
+| – | Neu: Vorhersagen (L2), erst zeigen (L5), Zielkorridor (L9), Transfer (L13), Wahl 3–5 Optionen (N2), Montessori-Fantasie-Regel (4), Vielfalt/Stereotype (6), Sprache (7), Neutralität (8), Geschichten und Angst (9), Kosmik-Schicht (10). |
 
 **Ohne Ausnahme (entschieden 2026-11-13):** Auch Pausenbilder und das Tagesende folgen dem Konzept.
 Pausen haben einen sichtbaren Weiter-Knopf und laufen nicht mit Füllbalken ab; das Spiel beendet sich
