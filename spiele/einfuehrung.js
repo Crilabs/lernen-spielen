@@ -21,7 +21,7 @@
 const PLATZHALTER = /\{\s*([A-Za-z_]\w*)\s*(?:([+-])\s*(\d+)\s*)?\}/g;
 const GANZ_PLATZHALTER = /^\s*\{[^{}]*\}\s*$/;
 const ZIFFER_ODER_PLATZ = /[0-9{}]/;
-const ZAHLWORT = /(?<![\p{L}])(null|eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwanzig|dreißig|hundert|tausend)(?![\p{L}])/iu;
+const ZAHLWORT = /(?<![\p{L}])(null|eins|zwei|zwo|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|(?:drei|vier|fünf|sech|sieb|acht|neun)zehn|zwanzig|dreißig|dreissig|(?:vier|fünf|sech|sieb|acht|neun)zig|(?:ein)?hundert|(?:ein)?tausend)(?![\p{L}])/iu;
 
 function ersetze(text, werte, wo) {
   return text.replace(PLATZHALTER, (_, key, op, k) => {
@@ -76,6 +76,10 @@ const CSS = `
 .einf .blase::before,.einf .blase::after{content:"";position:absolute;left:50%;border:solid transparent}
 .einf .blase::before{bottom:-3.4rem;margin-left:-1.8rem;border-width:3.4rem 1.8rem 0 1.8rem;border-top-color:${INK}}
 .einf .blase::after{bottom:-2.4rem;margin-left:-1.3rem;border-width:2.6rem 1.3rem 0 1.3rem;border-top-color:#fff}
+.einf .haus{position:absolute;top:2rem;left:2.4rem;width:8rem;height:8rem;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;
+  padding:1.7rem;box-shadow:0 .5rem 0 rgba(59,42,107,.15);text-decoration:none;z-index:2}
+.einf .haus img{width:100%;height:100%;display:block}
+.einf .haus:active{transform:translateY(.3rem);box-shadow:0 .2rem 0 rgba(59,42,107,.15)}
 .einf .el{position:absolute;bottom:12rem;transform:translateX(-50%)}
 .einf .el.figur-h{width:32rem}
 .einf .stab{display:flex;margin-bottom:0}
@@ -108,6 +112,8 @@ function stab(n, el) {
 function baueBild(buehne, bild, reduziert) {
   const F = window.Figuren;
   for (const b of bild) {
+    if (!b || typeof b !== "object") continue;
+    try {
     const el = document.createElement("div"); el.className = "el";
     el.style.left = (typeof b.x === "number" ? b.x : 50) + "%";
     if (b.figur) {
@@ -124,14 +130,11 @@ function baueBild(buehne, bild, reduziert) {
       el.classList.add("zahl"); el.textContent = String(b.zahl);
     } else continue;
     buehne.appendChild(el);
+    } catch (e) { /* kaputtes Bildelement: weglassen */ }
   }
 }
 
-function findeHaus() {
-  return document.querySelector("[data-haus], a.rund.l, a[href='index.html'], a[href='./index.html']");
-}
-
-export async function spieleEinfuehrung(pfad, werte, { ton = true, haus } = {}) {
+export async function spieleEinfuehrung(pfad, werte, { ton = true } = {}) {
   let szenen = [];
   try {
     const r = await fetch(new URL(pfad, document.baseURI));
@@ -152,16 +155,14 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, haus } = {}) 
   const blase = document.createElement("div"); blase.className = "blase"; blase.setAttribute("aria-live", "polite");
   wurzel.append(buehne, blase);
   wurzel.addEventListener("pointerdown", e => e.preventDefault());
-  wurzel.addEventListener("click", e => e.preventDefault());
+  wurzel.addEventListener("click", e => { if (!e.target.closest(".haus")) e.preventDefault(); });
   document.body.appendChild(wurzel);
 
-  // Haus-Knopf über das Overlay heben und beim Antippen abbrechen (Navigation läuft weiter).
-  const hausEl = haus || findeHaus();
-  const alt = hausEl ? { position: hausEl.style.position, zIndex: hausEl.style.zIndex } : null;
-  if (hausEl) {
-    if (getComputedStyle(hausEl).position === "static") hausEl.style.position = "relative";
-    hausEl.style.zIndex = "1001";
-  }
+  // Eigener Haus-Knopf im Overlay (ein Knopf des Spiels läge in dessen Stapelkontext unter dem Overlay).
+  const hausEl = document.createElement("a");
+  hausEl.className = "haus"; hausEl.href = new URL("index.html", document.baseURI).href; hausEl.setAttribute("aria-label", "Alle Spiele");
+  const hausBild = document.createElement("img"); hausBild.alt = ""; hausBild.src = new URL("symbole/haus.svg", document.baseURI).href;
+  hausEl.appendChild(hausBild); wurzel.appendChild(hausEl);
 
   return new Promise(resolve => {
     let timer = [], fertig = false, aktuell = -1;
@@ -169,20 +170,20 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, haus } = {}) 
       if (fertig) return; fertig = true;
       timer.forEach(clearTimeout);
       if (mitTon) { try { speechSynthesis.cancel(); } catch (e) {} }
-      if (hausEl) { hausEl.removeEventListener("click", abbruch, true); hausEl.style.position = alt.position; hausEl.style.zIndex = alt.zIndex; }
       wurzel.remove();
       resolve(ergebnis);
     };
-    const abbruch = () => ende("abgebrochen");
-    if (hausEl) hausEl.addEventListener("click", abbruch, true);
+    const abbruch = () => setTimeout(() => ende("abgebrochen"), 0);   // erst nach dem Klick entfernen, sonst bricht der Browser die Navigation ab
+    hausEl.addEventListener("click", abbruch);   // Navigation läuft normal weiter
 
-    const szene = i => {
+    const szene = i => { try { szeneSpielen(i); } catch (e) { ende("abgebrochen"); } };   // egal was passiert: das Versprechen wird eingelöst
+    const szeneSpielen = i => {
       if (fertig) return;
       aktuell = i;
       if (i >= szenen.length) return ende("gesehen");
       const s = szenen[i], text = s.zeig || s.sprich;
-      buehne.replaceChildren(); baueBild(buehne, s.bild, reduziert);
-      blase.textContent = text;
+      try { buehne.replaceChildren(); baueBild(buehne, s.bild, reduziert); blase.textContent = text; }
+      catch (e) { return ende("abgebrochen"); }
       timer.forEach(clearTimeout); timer = [];
       let sprache = !(mitTon && s.sprich), mindest = false;
       const weiter = () => { if (aktuell === i && sprache && mindest) szene(i + 1); };   // alte Szenen melden sich nicht mehr

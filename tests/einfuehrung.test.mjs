@@ -63,3 +63,10 @@ test("fuelleVorlage: leere oder fehlende Vorlage ergibt keine Szenen", () => {
   assert.deepEqual(fuelleVorlage(null, {}), []);
   assert.deepEqual(fuelleVorlage({}, undefined), []);
 });
+
+test("fuelleVorlage: alle Zahlwörter in sprich werden abgelehnt", () => {
+  const wort = ["null", "zwo", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn",
+    "zwanzig", "dreißig", "dreissig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig", "hundert", "einhundert", "tausend", "eintausend"];
+  for (const w of wort) assert.throws(() => fuelleVorlage({ szenen: [{ sprich: `Da sind ${w} Perlen.`, zeig: "" }] }, {}), /sprich/, w);
+  assert.doesNotThrow(() => fuelleVorlage({ szenen: [{ sprich: "Einhorn, Achtung, einmal, Zehnerstab, Vierecke.", zeig: "" }] }, {}));
+});
