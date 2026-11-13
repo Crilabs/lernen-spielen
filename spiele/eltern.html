@@ -134,7 +134,7 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen } from "./lernspiel.js";
 import { pinHash, pinPruefen, pruefeUpdate } from "./eltern.js";
 import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/geraet.js";
-import { sprich, stimmen, setzeStimme } from "./kern/stimme.js";
+import { sprich, stimmen, setzeStimme, stimmWahl } from "./kern/stimme.js";
 import { wertVon } from "./fortschritt/laden.js";
 import { elternThemen, markiereGekonnt, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand }
   from "./lernsteuerung.js";
@@ -448,9 +448,11 @@ function stimme(inh) {
   };
   const zeichne = () => {
     const vs = stimmen();
-    const system = !vs.some(v => v.gewaehlt);
-    ul.replaceChildren(zeile("Standardstimme des Geräts", system, "system"),
-      ...vs.map(v => zeile(v.name, v.gewaehlt, v.schluessel)));
+    const auto = stimmWahl() === "";
+    const system = !auto && !vs.some(v => v.gewaehlt);
+    ul.replaceChildren(zeile("Automatisch (beste Stimme)", auto, ""),
+      zeile("Standardstimme des Geräts", system, "system"),
+      ...vs.map(v => zeile(v.name, !auto && v.gewaehlt, v.schluessel)));
   };
   stimmZeichne = zeichne;
   zeichne();

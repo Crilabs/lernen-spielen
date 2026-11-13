@@ -104,7 +104,7 @@ img{display:block}
 <script type="module">
 import {lade, speichere, sperreTouch, esc, merkeGelernt} from "./lernspiel.js";
 import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
-import {sprich as kernSprich, stille, stimmen, setzeStimme} from "./kern/stimme.js";
+import {sprich as kernSprich, stille, stimmen, setzeStimme, stimmWahl} from "./kern/stimme.js";
 sperreTouch();
 (async function(){
   // ---------- Einstellungen ----------
@@ -507,9 +507,11 @@ sperreTouch();
         b.onclick=()=>{ waehle(); sound=true; say("der Hund – die Katze – das Einhorn"); zeigeStimmen(); };
         li.appendChild(b); liste.appendChild(li);
       };
-      zeile("Standardstimme des Geräts", "· Windows wählt selbst", !vs.some(v=>v.gewaehlt),
+      const auto=stimmWahl()==="";
+      zeile("Automatisch (beste Stimme)", "", auto, ()=>setzeStimme(""));
+      zeile("Standardstimme des Geräts", "· Windows wählt selbst", !auto && !vs.some(v=>v.gewaehlt),
         ()=>setzeStimme("system"));
-      vs.forEach((v,k)=>zeile(`${k+1}. ${esc(v.name)}`, "", v.gewaehlt,
+      vs.forEach((v,k)=>zeile(`${k+1}. ${esc(v.name)}`, "", !auto && v.gewaehlt,
         ()=>setzeStimme(v.schluessel)));
     }
     zeigeStimmen(); window.addEventListener("stimmen", zeigeStimmen);
