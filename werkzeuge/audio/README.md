@@ -1,5 +1,7 @@
 # Audiodateien für die Sprachausgabe
 
+Regeln für gesprochene Texte (Erzähler statt sprechender Figuren): `docs/stimme.md`.
+
 Die Spiele lesen mit vorab erzeugten Dateien vor (`spiele/audio/`). `spiele/kern/stimme.js` spielt die Datei
 zum Text ab. Gibt es keine, spricht die Systemstimme (weiterhin ohne Zahlen). Erzeugt wird am Mac mit
 **Azure Speech**. Die App selbst braucht kein Internet und keinen Schlüssel.
@@ -30,7 +32,9 @@ zum Text ab. Gibt es keine, spricht die Systemstimme (weiterhin ohne Zahlen). Er
    Die gewählte Stimme kommt in `einstellungen.json` (`stimme`; bei Wechsel auch neuer `ordner`).
 2. **Erzeugen:** `npm run audio` sammelt alle Texte (`texte.mjs`), erzeugt fehlende oder geänderte Dateien
    und schreibt `spiele/audio/index.json`. Ein zweiter Lauf erzeugt nichts neu.
-3. **Anhören:** Neue Dateien stehen in `index.json` mit `"gehoert": false`. Nach dem Anhören auf `true` setzen.
+3. **Anhören:** `npm run audio:anhoeren` öffnet unter http://127.0.0.1:8766 eine Liste aller Aufnahmen
+   (Leertaste abspielen, Enter passt und weiter, K korrigieren). „passt“ setzt `gehoert` in `index.json`.
+   Eine Korrektur landet in `aussprache.json` und wird sofort neu erzeugt.
 4. **Korrigieren:** Spricht die Stimme etwas falsch, in `aussprache.json` eine andere Schreibweise (`sprich`),
    SSML (`ssml`, z. B. `<phoneme>`) oder eine von Hand ersetzte Datei (`datei`) eintragen, dann
    `npm run audio`. Von Hand ersetzte Dateien werden nie überschrieben.

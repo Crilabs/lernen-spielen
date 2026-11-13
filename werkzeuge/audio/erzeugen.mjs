@@ -93,24 +93,45 @@ export async function erzeuge({ eintraege, index, einstellungen, aussprache, syn
 
 // ---------------------------------------------------------------- Kommandozeile
 
-async function main() {
-  const hier = dirname(fileURLToPath(import.meta.url));
-  const wurzel = join(hier, "..", "..");
-  const audio = join(wurzel, "spiele", "audio");
-  const indexPfad = join(audio, "index.json");
-  const args = new Set(process.argv.slice(2));
-  const pruefen = args.has("--pruefen");
+export const WURZEL = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+export const AUDIO = join(WURZEL, "spiele", "audio");
+const HIER = join(WURZEL, "werkzeuge", "audio");
+const INDEX = join(AUDIO, "index.json");
+const AUSSPRACHE = join(HIER, "aussprache.json");
 
-  const einstellungen = JSON.parse(readFileSync(join(hier, "einstellungen.json"), "utf8"));
-  const aussprache = JSON.parse(readFileSync(join(hier, "aussprache.json"), "utf8"));
-  /** @type {Index} */
-  const index = existsSync(indexPfad) ? JSON.parse(readFileSync(indexPfad, "utf8")) : { stimme: einstellungen.stimme, texte: {} };
-  const { eintraege, offen } = sammle(wurzel);
+/** @returns {Index} */
+export function ladeIndex() {
+  return existsSync(INDEX) ? JSON.parse(readFileSync(INDEX, "utf8")) : { stimme: "", texte: {} };
+}
 
+/** @param {Index} index */
+export function speichereIndex(index) {
+  mkdirSync(AUDIO, { recursive: true });
+  writeFileSync(INDEX, JSON.stringify(index, null, 1) + "\n");
+}
+
+export function ladeAussprache() {
+  return JSON.parse(readFileSync(AUSSPRACHE, "utf8"));
+}
+
+/** @param {any} aussprache ganze Datei (hinweis + texte) */
+export function speichereAussprache(aussprache) {
+  writeFileSync(AUSSPRACHE, JSON.stringify(aussprache, null, 2) + "\n");
+}
+
+/**
+ * Ein ganzer Lauf über das Projekt: sammeln, erzeugen (ohne Schlüssel oder mit pruefen: nur planen),
+ * Index speichern. Von der Kommandozeile und von der Anhör-Seite genutzt.
+ * @param {{ pruefen?: boolean, aufraeumen?: boolean, melde?: (z: string) => void }} [o]
+ */
+export async function lauf({ pruefen = false, aufraeumen = false, melde = () => {} } = {}) {
+  const einstellungen = JSON.parse(readFileSync(join(HIER, "einstellungen.json"), "utf8"));
+  const aussprache = ladeAussprache();
+  const index = ladeIndex();
+  const { eintraege, offen } = sammle(WURZEL);
   const synth = pruefen
     ? undefined
     : azure({ schluessel: process.env.AZURE_SPEECH_KEY, region: process.env.AZURE_SPEECH_REGION ?? einstellungen.region, format: einstellungen.format });
-
   const { index: neu, bericht } = await erzeuge({
     eintraege,
     index,
@@ -120,19 +141,22 @@ async function main() {
     schreibe: pruefen
       ? undefined
       : (datei, daten) => {
-          const p = join(audio, datei);
+          const p = join(AUDIO, datei);
           mkdirSync(dirname(p), { recursive: true });
           writeFileSync(p, daten);
         },
-    loesche: (datei) => rmSync(join(audio, datei), { force: true }),
-    aufraeumen: args.has("--aufraeumen"),
-    melde: (z) => console.log(z),
+    loesche: (datei) => rmSync(join(AUDIO, datei), { force: true }),
+    aufraeumen,
+    melde,
   });
+  if (!pruefen) speichereIndex(neu);
+  return { neu, bericht, eintraege, offen };
+}
 
-  if (!pruefen) {
-    mkdirSync(audio, { recursive: true });
-    writeFileSync(indexPfad, JSON.stringify(neu, null, 1) + "\n");
-  }
+async function main() {
+  const args = new Set(process.argv.slice(2));
+  const pruefen = args.has("--pruefen");
+  const { neu, bericht, eintraege, offen } = await lauf({ pruefen, aufraeumen: args.has("--aufraeumen"), melde: (z) => console.log(z) });
 
   const ungehoert = Object.values(neu.texte).filter((t) => !t.gehoert).length;
   console.log(

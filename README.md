@@ -17,7 +17,7 @@ Die frühere Web-Fassung mit PHP ist entfernt.
   und keine Seite die Plattform direkt ansprechen; `tests/plattform-regel.test.mjs` prüft das.
 - `spiele/audio/` – vorab erzeugte Sprachausgabe (`index.json` + MP3 je Stimme). Erzeugt mit `npm run audio`
   aus `werkzeuge/audio/` (Azure Speech, Ablauf in `werkzeuge/audio/README.md`). Fehlt eine Datei, spricht die
-  Systemstimme.
+  Systemstimme. Regeln für gesprochene Texte: `docs/stimme.md`.
 - `spiele/fortschritt/` – je Spiel optional ein Modul `<id>.js`, das den Balken auf der Startseite berechnet
   (nur für Spiele mit `"fortschritt": true` in `spiele.json`).
 - `spiele/symbole/` – SVG-Symbole (Kategorien, Spiele, Elternbereich).
