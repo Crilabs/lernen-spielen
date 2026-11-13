@@ -1,0 +1,17 @@
+{ "szenen": [
+  { "sprich": "Am Bach liegt eine Brücke. Vorne der Zehnerstab, dahinter ein kleiner Stab.",
+    "zeig": "13 = 10 + 3",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "steh" }, { "perlen": ["10", "3"], "x": 62 } ] },
+  { "sprich": "Das Einhorn legt noch ein paar Perlen dazu.",
+    "zeig": "13 + 4",
+    "bild": [ { "figur": "einhorn", "x": 15, "aktion": "hop" }, { "perlen": ["10", "3", "4"], "x": 62 } ] },
+  { "sprich": "Der Zehnerstab bleibt, wie er ist. Nur die kleinen Stäbe kommen zusammen.",
+    "zeig": "3 + 4 = 7",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "schau" }, { "perlen": ["10", "7"], "x": 62 } ] },
+  { "sprich": "So lang ist die Brücke jetzt.",
+    "zeig": "13 + 4 = 17",
+    "bild": [ { "perlen": ["10", "7"], "x": 42 }, { "zahl": "17", "x": 86 } ] },
+  { "sprich": "Jetzt rechnest du. Schau zuerst auf die Einer. Der Zehner wartet.",
+    "zeig": "12 + 5 = ?",
+    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "schau" }, { "perlen": ["10", "2", "5"], "x": 62 } ] }
+] }

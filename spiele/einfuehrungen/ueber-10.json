@@ -1,0 +1,17 @@
+{ "szenen": [
+  { "sprich": "Das Einhorn hat einen langen und einen kurzen Stab. Daraus baut es eine Brücke.",
+    "zeig": "{m} + {fehlt+3}",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "steh" }, { "perlen": ["{m}", "{fehlt+3}"], "x": 62 } ] },
+  { "sprich": "Die Brücke soll einen ganzen Zehnerstab bekommen. Dem langen Stab fehlen nur wenige Perlen.",
+    "zeig": "{m} + {fehlt} = 10",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "schau" }, { "perlen": ["{m}", "{fehlt}"], "x": 62 } ] },
+  { "sprich": "Also teilt das Einhorn den kurzen Stab. Ein Teil füllt den Zehner auf, der Rest wartet.",
+    "zeig": "{fehlt+3} = {fehlt} + 3",
+    "bild": [ { "figur": "einhorn", "x": 15, "aktion": "hop" }, { "perlen": ["{m}", "{fehlt}", "3"], "x": 62 } ] },
+  { "sprich": "Jetzt ist der Zehnerstab voll. Der Rest kommt dahinter.",
+    "zeig": "10 + 3 = 13",
+    "bild": [ { "perlen": ["10", "3"], "x": 42 }, { "zahl": "13", "x": 84 } ] },
+  { "sprich": "Erst bis zum Zehner auffüllen, dann den Rest dazu. So kommst du über den Zehner.",
+    "zeig": "{m} + {fehlt+3} = {m} + {fehlt} + 3 = 13",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["10", "3"], "x": 62 } ] }
+] }

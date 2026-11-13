@@ -70,6 +70,31 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 .liste li{word-break:break-word}
 .protokoll{max-height:62rem;overflow:auto}
 .notiz{white-space:pre-wrap}
+/* Lernstand: Themen */
+.karte .dran{margin-top:1.6rem}
+.karte .dran b{font-size:2.4rem}
+.karte .dran p{margin-top:.4rem}
+.themen{list-style:none;display:flex;flex-direction:column;gap:1rem}
+.thema details{border-radius:1.6rem;background:#F8FAFD}
+.thema summary{list-style:none;cursor:pointer;padding:1.4rem 2rem;min-height:7rem;display:flex;flex-direction:column;justify-content:center;gap:.6rem}
+.thema summary::-webkit-details-marker{display:none}
+.thema .kopf{display:flex;align-items:center;gap:1.6rem}
+.thema .name{flex:1;font-size:2.3rem}
+.thema.z-verborgen .name{color:var(--tinte-weich)}
+.chips{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:flex-end}
+.chip{font-size:1.8rem;padding:.6rem 1.4rem;border-radius:99rem;background:#fff;border:.2rem solid var(--rand);white-space:nowrap}
+.z-kann-ich .chip.z{background:#D8F6EA;border-color:#9BDEC4}
+.z-dran .chip.z{background:var(--himmel);border-color:#9FD8F3;font-weight:700}
+.z-verborgen .chip.z{color:var(--tinte-weich)}
+.chip.luecke{background:#FFF3D1;border-color:#F2D38A}
+.thema .wackelig{font-size:2rem;color:var(--fehler);display:flex;flex-wrap:wrap;column-gap:3rem;row-gap:.4rem}
+.thema .wackelig span{white-space:nowrap}
+.thema .innen{padding:0 2rem 2rem}
+.thema .innen p{font-size:2rem}
+.thema .innen p.leise{margin-top:1rem;font-style:italic}
+.knoepfe{display:flex;flex-wrap:wrap;gap:1.4rem}
+.knoepfe .knopf{margin-top:1.6rem}
+.knopf.sicher{background:var(--fehler);color:#fff}
 </style>
 </head>
 <body>
@@ -105,6 +130,8 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen } from "./lernspiel.js";
 import { pinHash, pinPruefen, pruefeUpdate } from "./eltern.js";
 import { wertVon } from "./fortschritt/laden.js";
+import { elternThemen, markiereGekonnt, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand }
+  from "./lernsteuerung.js";
 
 sperreTouch();
 const T = window.__TAURI__;
@@ -262,25 +289,129 @@ async function installieren(update, los, balken, fuell, status) {
   }
 }
 
-// -- Lernstand --
-async function lernstand(inh) {
+// -- Lernstand: Themen je Strang, Lücken, Eingriffe; darunter Spiele ohne Lernplan mit ihrem Balken --
+const ZUSTAND = { "verborgen": "verborgen", "in-sicht": "in Sicht", "dran": "dran", "kann-ich": "kann ich" };
+const STUFE = { material: "Stufe Material", vorstellung: "Stufe Vorstellung", kopf: "Stufe Kopf" };
+const LUECKE = { "ohne-spiel": "noch kein Spiel", "teilweise": "nur teilweise" };
+let lernCtx = null, lernLauf = 0;
+const heuteTag = () => new Date().toLocaleDateString("sv");
+
+async function ladeElternStand() {
+  if (!lernCtx) {
+    const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map(f => fetch(f).then(r => r.json())));
+    lernCtx = { plan, spiele };
+  }
+  // Alte Spielstände übernehmen wie in der Themen-Übersicht (gespeichert erst mit einem Eingriff oder Spiel)
+  return await ladeLernstand(lernCtx, heuteTag());
+}
+
+// Knopf mit Bestätigung auf der Seite: erster Tipp fragt „Wirklich?“, zweiter führt aus (kein confirm-Dialog im Kiosk)
+function eingriffKnopf(text, tun) {
+  const b = el("button", text, "knopf hell"); b.type = "button";
+  let timer = null;
+  b.addEventListener("click", () => {
+    if (!timer) {
+      b.textContent = "Wirklich? Nochmal tippen"; b.classList.add("sicher");
+      timer = setTimeout(() => { timer = null; b.textContent = text; b.classList.remove("sicher"); }, 4000);
+      return;
+    }
+    clearTimeout(timer); timer = null; b.disabled = true;
+    tun();
+  });
+  return b;
+}
+
+async function lernstand(inh, offen) {
+  const lauf = ++lernLauf;
   inh.appendChild(el("h2", "Lernstand"));
+  let stand;
+  try { stand = await ladeElternStand(); }
+  catch (e) { protokoll("Lernstand: " + e); inh.appendChild(el("p", "Der Lernplan konnte nicht geladen werden.", "karte breit")); return; }
+  if (tab !== "lernstand" || lauf !== lernLauf) return; // inzwischen anderer Reiter oder neu gezeichnet
+  const ctx = lernCtx, heute = heuteTag();
+  const liste = elternThemen(ctx, stand, heute);
+  const kats = Object.fromEntries((ctx.spiele.kategorien || []).map(k => [k.id, k]));
+
+  const eingriff = async (tun, id) => {
+    tun();
+    speichere("lernplan", stand); await sofortSpeichern();
+    if (tab !== "lernstand") return;
+    const oben = inh.scrollTop;
+    inh.replaceChildren();
+    await lernstand(inh, id);
+    inh.scrollTop = oben;
+  };
+
+  // Gerade dran
+  const dran = liste.flatMap(s => s.themen).filter(t => t.geradeDran);
+  const k1 = el("div", null, "karte breit neu");
+  k1.appendChild(el("h3", "Gerade dran"));
+  if (!dran.length) k1.appendChild(el("p", "Im Moment ist kein Thema neu dran."));
+  for (const t of dran) {
+    const d = el("div", null, "dran");
+    d.append(el("b", t.name), el("p", t.hinweis || "Zu diesem Thema gibt es noch keinen Hinweis."));
+    k1.appendChild(d);
+  }
+  inh.appendChild(k1);
+
+  // Themen je Strang
+  for (const { strang, themen } of liste) {
+    const karte = el("div", null, "karte breit");
+    karte.appendChild(el("h3", kats[strang]?.name || strang));
+    const ul = el("ul", null, "themen");
+    for (const t of themen) {
+      const li = el("li", null, "thema z-" + t.zustand);
+      const det = el("details"); det.dataset.id = t.id; det.open = t.id === offen;
+      const sum = el("summary");
+      const kopf = el("div", null, "kopf");
+      kopf.appendChild(el("span", t.name, "name"));
+      const chips = el("span", null, "chips");
+      chips.appendChild(el("span", ZUSTAND[t.zustand] || t.zustand, "chip z"));
+      if (t.zustand === "dran") chips.appendChild(el("span", STUFE[t.stufe] || "Probe steht an", "chip"));
+      if (t.frei && t.zustand !== "kann-ich") chips.appendChild(el("span", "freigegeben", "chip"));
+      if (t.luecke) chips.appendChild(el("span", LUECKE[t.luecke], "chip luecke"));
+      kopf.appendChild(chips);
+      sum.appendChild(kopf);
+      if (t.wackelig.length) {
+        const w = el("p", "Wackelt noch:", "wackelig");
+        for (const key of t.wackelig) w.appendChild(el("span", aufgabeLesbar(key)));
+        sum.appendChild(w);
+      }
+      det.appendChild(sum);
+      const innen = el("div", null, "innen");
+      innen.appendChild(el("p", t.hinweis || "Zu diesem Thema gibt es noch keinen Hinweis."));
+      const knoepfe = el("div", null, "knoepfe");
+      const mitSpiel = t.luecke !== "ohne-spiel";
+      if (mitSpiel && t.zustand !== "kann-ich")
+        knoepfe.appendChild(eingriffKnopf("als gekonnt markieren", () => eingriff(() => markiereGekonnt(stand, t.id, heute, ctx), t.id)));
+      if (t.zustand === "dran" || t.zustand === "kann-ich" || t.frei)
+        knoepfe.appendChild(eingriffKnopf("zurücksetzen", () => eingriff(() => setzeZurueck(ctx, stand, t.id), t.id)));
+      if (mitSpiel && t.zustand === "verborgen")
+        knoepfe.appendChild(eingriffKnopf("freigeben", () => eingriff(() => gibFrei(stand, t.id), t.id)));
+      if (!mitSpiel) innen.appendChild(el("p", "Für dieses Thema gibt es noch kein Spiel. Das Kind sieht es nicht.", "leise"));
+      if (knoepfe.children.length) innen.appendChild(knoepfe);
+      det.appendChild(innen);
+      li.appendChild(det); ul.appendChild(li);
+    }
+    karte.appendChild(ul);
+    inh.appendChild(karte);
+  }
+
+  // Spiele: ohne Lernplan (ohne arten) mit ihrem bisherigen Balken, sonst nur der Link zur Elternansicht
   const karte = el("div", null, "karte breit");
-  karte.appendChild(el("h3", "Lernstand auf einen Blick"));
+  karte.appendChild(el("h3", "Spiele"));
   const ul = el("ul", null, "zeilen"); karte.appendChild(ul);
   inh.appendChild(karte);
-  let spiele;
-  try { spiele = (await (await fetch("spiele.json")).json()).spiele; }
-  catch (e) { protokoll("spiele.json: " + e); ul.appendChild(el("li", "Die Spieleliste konnte nicht geladen werden.")); return; }
-  for (const s of spiele) {
+  for (const s of ctx.spiele.spiele || []) {
     const li = el("li");
     const ico = el("span", null, "sym"); const img = document.createElement("img"); img.src = s.symbol; img.alt = ""; ico.appendChild(img);
     const mitte = el("div");
     const link = el("a", s.titel); link.href = s.datei + "?eltern";
     mitte.appendChild(link);
+    li.append(ico, mitte); ul.appendChild(li);
+    if (Array.isArray(s.arten)) { li.appendChild(el("small", "über die Themen")); continue; }
     const weg = el("div", null, "weg"); const fuell = el("i"); fuell.style.width = "0"; weg.appendChild(fuell);
-    const klein = el("small", "…");
-    li.append(ico, mitte, klein); ul.appendChild(li);
+    const klein = el("small", "…"); li.appendChild(klein);
     wertVon(s).then(w => {
       if (w === undefined) klein.textContent = "noch keine Auswertung";
       else { klein.textContent = Math.round(w * 100) + " %"; fuell.style.width = w * 100 + "%"; mitte.appendChild(weg); }

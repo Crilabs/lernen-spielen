@@ -1,0 +1,20 @@
+{ "szenen": [
+  { "sprich": "Diese Brücke ist ganz aus goldenen Zehnerstäben gebaut.",
+    "zeig": "20 = 10 + 10",
+    "bild": [ { "perlen": ["10", "10"], "x": 40 }, { "zahl": "20", "x": 88 } ] },
+  { "sprich": "Das Einhorn soll ein paar Perlen wegnehmen. Es nimmt sie von einem Zehnerstab.",
+    "zeig": "20 − 3",
+    "bild": [ { "perlen": ["10", "7", "3"], "x": 50 } ] },
+  { "sprich": "Ein Zehnerstab bleibt ganz. Vom anderen bleibt ein Stück übrig.",
+    "zeig": "10 − 3 = 7",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["10", "7"], "x": 62 } ] },
+  { "sprich": "So lang ist die Brücke jetzt.",
+    "zeig": "20 − 3 = 17",
+    "bild": [ { "perlen": ["10", "7"], "x": 42 }, { "zahl": "17", "x": 86 } ] },
+  { "sprich": "Nimmt das Einhorn noch mehr weg, geht ein ganzer Zehnerstab mit.",
+    "zeig": "20 − 13 = 7   erst 10 weg, dann 3",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["7", "3"], "x": 55 }, { "zahl": "7", "x": 86 } ] },
+  { "sprich": "Jetzt bist du dran.",
+    "zeig": "20 − 4 = ?",
+    "bild": [ { "perlen": ["10", "10"], "x": 50 } ] }
+] }

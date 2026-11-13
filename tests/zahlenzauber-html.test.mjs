@@ -33,3 +33,45 @@ test("Tipp-Leuchten färbt das Blatt nicht wie ein angetipptes, Hilfe wählt nic
   const hilfe = html.slice(html.indexOf('$("hilfe").addEventListener'), html.indexOf("function nachtippen"));
   assert.doesNotMatch(hilfe, /B\.start=/);
 });
+
+// Lernsteuerung (Task 8): Aufgaben kommen von runde(), kein eigener Aufstieg, kein eigener Lernstand
+test("Lernsteuerung statt eigener Stufen", () => {
+  assert.match(html, /import \{[^}]*\brunde\b[^}]*\} from "\.\/lernsteuerung\.js"/);
+  assert.match(html, /import \{[^}]*\bspieleEinfuehrung\b[^}]*\} from "\.\/einfuehrung\.js"/);
+  assert.doesNotMatch(html, /pruefeAufstieg|STUFEN|istMinusDran|waehleFakt|plusPool|minusPool|save\.fakten/);
+  assert.match(html, /<script src="figuren\/figuren\.js"><\/script>/);
+  assert.match(html, /<script src="figuren\/einhorn\.js"><\/script>/);
+  assert.match(html, /\.naechste\(\)/);
+  assert.match(html, /\.melde\(B\.key, \{ok, hilfe, ms\}\)/);
+  assert.match(html, /max = ziel\.daten\.raum|ziel\.daten\.raum/);
+});
+test("Hilfe für die Lernsteuerung: 2 nach gezeigter Lösung, 1 nach Denkhilfe oder Durchprobieren", () => {
+  assert.match(html, /const hilfe = B\.loesungGezeigt \? 2 : \(B\.hilfe>0 \|\| B\.fehler>=2 \|\| B\.probiert\.size>=RATEN_AB\) \? 1 : 0/);
+});
+test("Einführung vor der ersten Aufgabe, gesehen erst nach „gesehen“", () => {
+  assert.match(html, /einfuehrungFaellig[\s\S]*spieleEinfuehrung\([\s\S]*[!=]== ?"gesehen"[\s\S]*einfuehrungGesehen\(\)[\s\S]*naechste\(\)/);
+});
+test("Spieleigener Stand unter zahlenzauber-spiel, der alte Stand wird nie geschrieben", () => {
+  assert.match(html, /const SPEICHER = "zahlenzauber-spiel"/);
+  assert.doesNotMatch(html, /speichere\("zahlenzauber"/);
+  assert.match(html, /blumenJeThema/);
+  assert.match(html, /EINSTIEG = 6/);
+});
+test("Vorschau und Elternansicht schreiben nie", () => {
+  assert.match(html, /nurAnsehen: vorschau/);
+  assert.match(html, /function persist\(\)\{ if\(!vorschau\)/);
+  assert.match(html, /if\(params\.has\("eltern"\)\)\{[^\n]*return; \}/);
+  const eltern = html.indexOf('if(params.has("eltern"))'), r = html.indexOf("await runde(");
+  assert.ok(eltern > 0 && r > eltern, "Elternansicht kehrt vor runde() zurück");
+  assert.doesNotMatch(html, /stufeMinus|stufePlus/);
+  assert.match(html, /href="eltern\.html"/);
+});
+test("Gekonnt ruhig: Stimme ohne Zahl, Name mit Ziffer in der Blase", () => {
+  assert.match(html, /sprich\("Das kannst du jetzt\."\)/);
+  assert.match(html, /sag\(`\$\{[^}]*name[^}]*\} kannst du jetzt\.`\)/);
+  assert.match(html, /\/\\d\/\.test\(text\)/);   // sprich() spricht nie etwas mit Ziffern
+});
+test("nach einer Wiederholungsrunde: Hinweis auf das Spiel mit Neuem", () => {
+  assert.match(html, /hinweisSpiel/);
+  assert.match(html, /sprich\(sp\.titel\)/);
+});

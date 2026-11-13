@@ -1,0 +1,20 @@
+{ "szenen": [
+  { "sprich": "Ganz unten im Tal wird der Bach zum Fluss. Dort liegen Brücken aus vielen Zehnerstäben.",
+    "zeig": "10, 20, 30, 40 … 100",
+    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "steh" }, { "perlen": ["10"], "x": 62 } ] },
+  { "sprich": "Vorne an der Zahl stehen die Zehnerstäbe, hinten die Einer vom kleinen Stab.",
+    "zeig": "24 = 10 + 10 + 4",
+    "bild": [ { "perlen": ["10", "10", "4"], "x": 50 } ] },
+  { "sprich": "Nimmt das Einhorn Einer weg, nimmt es sie vom kleinen Stab. Die Zehnerstäbe bleiben.",
+    "zeig": "24 − 3 = 21",
+    "bild": [ { "perlen": ["10", "10", "1"], "x": 50 } ] },
+  { "sprich": "Nimmt es einen Zehnerstab weg, ändern sich nur die Zehner. Die Einer bleiben.",
+    "zeig": "24 − 10 = 14",
+    "bild": [ { "figur": "einhorn", "x": 14, "aktion": "hop" }, { "perlen": ["10", "4"], "x": 60 } ] },
+  { "sprich": "Bei großen Zahlen geht es genauso. Das Einhorn nimmt die Einer von den Einern.",
+    "zeig": "48 − 5 = 43   8 − 5 = 3",
+    "bild": [ { "zahl": "48", "x": 20 }, { "perlen": ["3", "5"], "x": 52 }, { "zahl": "43", "x": 84 } ] },
+  { "sprich": "Jetzt rechnest du. Schau zuerst auf die Einer.",
+    "zeig": "Einer von den Einern, Zehner von den Zehnern.",
+    "bild": [ { "figur": "einhorn", "x": 12, "aktion": "schau" }, { "perlen": ["10", "10"], "x": 61 } ] }
+] }

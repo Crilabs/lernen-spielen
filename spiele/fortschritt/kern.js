@@ -3,9 +3,11 @@
 
 // Mittelwert über Spiele mit Fortschritts-Modul. Wer ein Modul hat, aber
 // noch keinen Lernstand, steht mit 0 in `werte`; Spiele ohne Modul haben
-// keinen Eintrag (undefined) und zählen nicht mit.
+// keinen Eintrag (undefined) und zählen nicht mit. Spiele mit `arten` laufen über die
+// Lernsteuerung (Themen-Übersicht) und zählen auch nicht mit.
 export function kategorieWert(spieleDerKategorie, werte) {
   const zahlen = spieleDerKategorie
+    .filter((s) => !s.arten)
     .map((s) => werte[s.id])
     .filter((w) => typeof w === "number");
   if (zahlen.length === 0) return undefined;

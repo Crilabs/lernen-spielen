@@ -1,95 +1,90 @@
 // Perlenbrücke – reine Spiellogik ohne DOM (in Node testbar, siehe tests/perlen-logik.test.mjs).
-// Spec: docs/superpowers/specs/2026-11-13-perlenbruecke-neu-design.md
+// Spec: docs/superpowers/specs/2026-11-13-perlenbruecke-neu-design.md, Lernplan: docs/superpowers/specs/2026-11-13-lernplan-design.md
 //
 // Eine Brücke für die Zahl n wird aus zwei Stäbchen gebaut: a von der linken Spalte, b von der rechten.
-// Geordnete Paare: 2+5 und 5+2 sind verschiedene Paare (Schlüssel "7:2+5").
+// Geordnete Paare: 2+5 und 5+2 sind verschiedene Aufgaben (Schlüssel der Lernsteuerung "zerl:7:2+5").
+// Was dran ist, entscheidet die Lernsteuerung (runde/naechste); hier bleibt nur Spieleigenes:
+// welche Stäbchen in den Spalten liegen und wie oft ein Paar schon gebaut wurde (Abnutzung).
+//
+// Spieleigener Stand (Schlüssel "perlenbruecke-spiel"): { version: 3, reise, c: { [key]: anzahl } }
+// Der alte Stand unter "perlenbruecke" (v2) wird nur gelesen, nie geschrieben (bleibt für ein Zurück liegen).
 
 export const K = {
-  ABSTAND: [0, 1, 3, 7, 21],     // Wiedervorlage in Tagen je Fach (wie Zauberer/Wimmelbild)
-  GELERNT: 4,                    // ab diesem Fach gilt ein Paar als gelernt
   ABNUTZUNG: 0.25,               // so viel weniger Chance je Bau mehr als das seltenste Paar der Zahl
   MIN_CHANCE: 0.15,              // Restchance eines oft gebauten Paares
   MAX_PAARE: 3,                  // höchstens so viele gültige Paare je Brücke
   MAX_PAARE_KLEIN: 2,            // … bei n <= 4 (Ratechance klein halten)
   SPALTE_MAX: 5,                 // Stäbchen je Spalte höchstens
-  START: [3, 4],                 // Erfolg zuerst: klein anfangen
-  REIHENFOLGE: [3, 4, 5, 6, 7, 10, 8, 9],
-  FREI_ANTEIL: 0.8,              // Anteil der Paare (freigeschaltete Zahlen) mit Fach >= 2 für die nächste Zahl
-  FREI_FENSTER: 10,              // … und die letzten so vielen Brücken
-  FREI_QUOTE: 0.8,               // … zu mindestens diesem Anteil fehlerfrei
-  GEWICHT: { 5: 1.5, 10: 2 },    // Kraft der Fünf, Zehnerzerlegungen
-  ANTEIL_FAELLIG: 0.7,           // so oft kommt eine fällige/wackelige Zahl dran (wenn es eine gibt)
-  NEU_ANTEIL: 0.5,               // neue Zahl in der Einführungszeit bei etwa jeder zweiten Brücke
-  NEU_RUNDEN: 1,                 // Einführungszeit in Runden
-  RUNDE: 20,                     // Brücken je Runde (ca. 3-5 Minuten)
+  RUNDE: 20,                     // Brücken je Runde höchstens (ca. 3-5 Minuten)
 };
 
 export const paareVon = (n) =>
   Array.from({ length: n - 1 }, (_, i) => ({ n, a: i + 1, b: n - i - 1, key: `${n}:${i + 1}+${n - i - 1}` }));
 
-export function neuerStand() {
-  return { version: 2, reise: 0, paare: {}, zahlen: {}, frei: [...K.START], neu: null, verlauf: [], pause: "" };
+// "zerl:7:2+5" -> { n: 7, a: 2, b: 5 } (sonst null)
+export function zerlegung(key) {
+  const m = /^zerl:(\d+):(\d+)\+(\d+)$/.exec(typeof key === "string" ? key : "");
+  return m ? { n: +m[1], a: +m[2], b: +m[3] } : null;
 }
 
-// Alter Stand (ungeordnete Paare "pairs") wird verworfen, nur die Brückenzahl bleibt.
+export const neuerStand = () => ({ version: 3, reise: 0, c: {} });
+
+const anzahl = (x) => (Number.isFinite(x) && x >= 0 ? Math.trunc(x) : null);
+const istObjekt = (x) => !!x && typeof x === "object" && !Array.isArray(x);
+
+// v2 (Fächer, Freischalten) → v3: nur die Bauzahl c je Paar und die Reise bleiben.
+// Die Fächer hat die Lernsteuerung beim ersten Start übernommen (migriereSpiele).
 export function migriere(roh) {
-  if (!roh || typeof roh !== "object" || Array.isArray(roh)) return neuerStand();
-  if (roh.version === 2 && roh.paare && typeof roh.paare === "object") {
-    const s = Object.assign(neuerStand(), roh);
-    // Freigeschaltet: nur Zahlen aus REIHENFOLGE, START immer dabei, Reihenfolge wie REIHENFOLGE
-    const frei = new Set([...K.START, ...(Array.isArray(roh.frei) ? roh.frei : [])]);
-    s.frei = K.REIHENFOLGE.filter(z => frei.has(z));
-    // Einträge normalisieren, Kaputtes verwerfen
-    const zahl = (x, d = 0) => (Number.isFinite(x) ? x : d);
-    s.paare = {};
-    for (const [k, e] of Object.entries(roh.paare)) {
-      if (!/^\d+:\d+\+\d+$/.test(k) || !e || typeof e !== "object") continue;
-      s.paare[k] = { ...e, f: Math.max(0, Math.min(K.GELERNT, zahl(e.f))), t: typeof e.t === "string" ? e.t : "",
-        h: Array.isArray(e.h) ? e.h : [], c: Math.max(0, zahl(e.c)) };
-    }
-    if (!Array.isArray(s.verlauf)) s.verlauf = [];
-    if (!s.zahlen || typeof s.zahlen !== "object" || Array.isArray(s.zahlen)) s.zahlen = {};
-    for (const [z, e] of Object.entries(s.zahlen)) if (!e || typeof e !== "object" || !Array.isArray(e.z)) s.zahlen[z] = { w: e?.w ? 1 : 0, t: "", z: [] };
-    if (!Number.isFinite(s.reise)) s.reise = 0;
-    if (s.neu && !(Number.isFinite(s.neu.zahl) && Number.isFinite(s.neu.bis))) s.neu = null;
-    return s;
-  }
   const s = neuerStand();
-  if (Number.isFinite(roh.reise)) s.reise = roh.reise;
+  if (!istObjekt(roh)) return s;
+  if (anzahl(roh.reise) !== null) s.reise = anzahl(roh.reise);
+  if (roh.version === 2 && istObjekt(roh.paare)) {
+    for (const [k, e] of Object.entries(roh.paare)) {
+      const c = istObjekt(e) ? anzahl(e.c) : null;
+      if (/^\d+:\d+\+\d+$/.test(k) && c) s.c["zerl:" + k] = c;
+    }
+  } else if (roh.version === 3 && istObjekt(roh.c)) {
+    for (const [k, x] of Object.entries(roh.c)) if (zerlegung(k) && anzahl(x) !== null) s.c[k] = anzahl(x);
+  }
   return s;
 }
 
-export const eintrag = (stand, key) => stand.paare[key] || { f: 0, t: "", h: [], c: 0 };
+export const SPEICHER = "perlenbruecke-spiel";
+export const SPEICHER_ALT = "perlenbruecke";
 
-export function tage(a, b) {
-  if (!a || !b) return Infinity;
-  return Math.round((Date.parse(b + "T12:00:00Z") - Date.parse(a + "T12:00:00Z")) / 86400000);
+// Stand beim Laden: der neue Schlüssel, solange leer aus dem alten Stand übernommen (immer eine Kopie).
+export function eigenerStand(neu, alt) {
+  return migriere(istObjekt(neu) && Object.keys(neu).length ? neu : alt);
 }
-export const faellig = (e, heute) => e.f === 0 || tage(e.t, heute) >= K.ABSTAND[Math.min(e.f, K.ABSTAND.length - 1)];
+
+// Eine gebaute Brücke zählen (nur Spieleigenes; den Lernstand meldet das Spiel an die Lernsteuerung).
+export function verbucheBau(eigen, key) {
+  eigen.c[key] = (eigen.c[key] || 0) + 1;
+  eigen.reise++;
+  return eigen;
+}
 
 function mische(liste, rnd) {
   const l = [...liste];
   for (let i = l.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [l[i], l[j]] = [l[j], l[i]]; }
   return l;
 }
-const zufallsEins = (liste, rnd) => liste[Math.floor(rnd() * liste.length)];
 
-// Welche Paare diesmal gebaut werden können und welche Stäbchen in den Spalten liegen.
-export function angebot(n, stand, heute, rnd = Math.random) {
-  const ps = paareVon(n).map(p => ({ ...p, e: eintrag(stand, p.key) }));
-  const cmin = Math.min(...ps.map(p => p.e.c));
-  const fest = new Set();
-  fest.add(zufallsEins(ps.filter(p => p.e.c === cmin), rnd).key);                       // seltenstes Paar
-  const dran = ps.filter(p => faellig(p.e, heute));                                      // auch gelernte Paare nach ihrem Abstand
-  if (dran.length) {                                                                     // fälliges/wackeliges Paar
-    const fmin = Math.min(...dran.map(p => p.e.f));
-    fest.add(zufallsEins(dran.filter(p => p.e.f === fmin), rnd).key);
-  }
-  let rest = ps.filter(p => !fest.has(p.key) && rnd() < Math.max(K.MIN_CHANCE, 1 - K.ABNUTZUNG * (p.e.c - cmin)));
+// Angebot für eine Brücke: zielKey ist immer baubar, auchKeys (gleiche Zahl) nach Abnutzung.
+export function angebotAus(n, zielKey, auchKeys = [], eigen = neuerStand(), rnd = Math.random) {
+  const c = (key) => eigen?.c?.[key] || 0;
+  const cmin = Math.min(...paareVon(n).map(p => c("zerl:" + p.key)));
+  const ziel = zerlegung(zielKey);
+  const auch = [...new Set(auchKeys)].filter(k => k !== zielKey && zerlegung(k)?.n === n);
+  let rest = auch.filter(k => rnd() < Math.max(K.MIN_CHANCE, 1 - K.ABNUTZUNG * (c(k) - cmin)));
   // Zu viele: zuerst die meistgebauten streichen (bei Gleichstand zufällig)
-  rest = mische(rest, rnd).sort((x, y) => x.e.c - y.e.c).slice(0, Math.max(0, (n <= 4 ? K.MAX_PAARE_KLEIN : K.MAX_PAARE) - fest.size));
-  const S = ps.filter(p => fest.has(p.key) || rest.includes(p));
+  rest = mische(rest, rnd).sort((x, y) => c(x) - c(y)).slice(0, (n <= 4 ? K.MAX_PAARE_KLEIN : K.MAX_PAARE) - 1);
+  const S = [ziel, ...rest.map(zerlegung)];
+  return { paare: [zielKey, ...rest], ...spalten(n, S, rnd) };
+}
 
+// Stäbchen der Spalten: die Paare aus S plus kurze Ablenker, von denen keiner mit der Gegenseite n ergibt.
+function spalten(n, S, rnd) {
   const fuerL = S.map(p => p.a), fuerR = S.map(p => p.b);
   const min = 3;                                        // immer mindestens drei Stäbchen je Spalte
   const darf = (d, hier, dort) => !hier.has(d) && !dort.has(n - d);
@@ -116,61 +111,6 @@ export function angebot(n, stand, heute, rnd = Math.random) {
     while (sp.size < min && pool.length && [...sp].filter(x => x >= n).length < erlaubt) sp.add(pool.pop());
   }
   const sortiert = s => [...s].sort((x, y) => x - y);
-  return { paare: S.map(p => p.key), links: sortiert(links), rechts: sortiert(rechts) };
+  return { links: sortiert(links), rechts: sortiert(rechts) };
 }
 
-// Nächste Zahl ermitteln, wenn sie freigeschaltet werden darf (sonst null).
-export function freischaltbar(stand) {
-  const naechste = K.REIHENFOLGE.find(z => !stand.frei.includes(z));
-  if (naechste === undefined) return null;
-  const ps = stand.frei.flatMap(paareVon);
-  const sitzen = ps.filter(p => eintrag(stand, p.key).f >= 2).length;
-  if (sitzen < K.FREI_ANTEIL * ps.length) return null;
-  const v = stand.verlauf.slice(-K.FREI_FENSTER);
-  if (v.length < K.FREI_FENSTER || v.filter(Boolean).length < K.FREI_QUOTE * K.FREI_FENSTER) return null;
-  return naechste;
-}
-
-// Eine gelöste Brücke eintragen. fehler = Zahl der Fehlversuche, hilfe = Denkhilfe/Lösung gezeigt.
-export function verbuche(stand, n, a, b, { fehler = 0, hilfe = false, ms = 0, heute }) {
-  const key = `${n}:${a}+${b}`;
-  const e = stand.paare[key] || (stand.paare[key] = { f: 0, t: "", h: [], c: 0 });
-  const sauber = fehler === 0 && !hilfe;
-  if (sauber) {
-    e.c++;
-    if (faellig(e, heute)) { e.f = Math.min(e.f + 1, K.GELERNT); e.t = heute; }
-    if (e.f >= K.GELERNT) e.g = 1;
-  } else { e.f = 0; e.t = heute; }
-  e.h = [...e.h, sauber ? 1 : 0].slice(-6);
-  const z = stand.zahlen[n] || (stand.zahlen[n] = { w: 0, t: "", z: [] });
-  z.w = sauber ? 0 : 1; z.t = heute; z.z = [...(z.z || []), Math.round(ms)].slice(-5);
-  stand.verlauf = [...stand.verlauf, sauber ? 1 : 0].slice(-K.FREI_FENSTER);
-  stand.reise++;
-  const neu = freischaltbar(stand);
-  if (neu !== null) {
-    stand.frei = [...stand.frei, neu];
-    stand.neu = { zahl: neu, bis: stand.reise + K.NEU_RUNDEN * K.RUNDE };
-    stand.verlauf = [];                       // neue Zahl muss sich erst bewähren
-  }
-  return { frei: neu };
-}
-
-const zahlFaellig = (stand, n, heute) =>
-  stand.zahlen[n]?.w === 1 || paareVon(n).some(p => faellig(eintrag(stand, p.key), heute));
-
-function gewichtet(liste, rnd) {
-  const w = liste.map(n => K.GEWICHT[n] || 1);
-  let r = rnd() * w.reduce((s, x) => s + x, 0);
-  for (let i = 0; i < liste.length; i++) { r -= w[i]; if (r <= 0) return liste[i]; }
-  return liste[liste.length - 1];
-}
-
-export function naechsteZahl(stand, { vorher = 0, heute, rnd = Math.random } = {}) {
-  const kand = stand.frei.filter(n => n !== vorher);
-  if (!kand.length) return stand.frei[0];
-  const neu = stand.neu;
-  if (neu && stand.reise < neu.bis && neu.zahl !== vorher && kand.includes(neu.zahl) && rnd() < K.NEU_ANTEIL) return neu.zahl;
-  const dran = kand.filter(n => zahlFaellig(stand, n, heute)), sicher = kand.filter(n => !dran.includes(n));
-  const gruppe = !sicher.length || (dran.length && rnd() < K.ANTEIL_FAELLIG) ? dran : sicher;
-  return gewichtet(gruppe, rnd);
-}

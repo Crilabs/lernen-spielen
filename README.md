@@ -75,6 +75,37 @@ die vorige PIN zusätzlich in `eltern.json.bak`. So setzt du die PIN zurück:
 
 Die Lernstände der Spiele bleiben erhalten (der Hinweis steht auch auf dem PIN-Bildschirm).
 
+## Lernplan
+
+Der Lernplan ordnet kleine Themen (z. B. „Die 7 zerlegen“, „Plus ohne Zehnerübergang bis 20“) in einer festen
+Reihenfolge. Die App wählt für das Kind das passende Thema; Spiele liefern nur die Darstellung.
+
+Dateien:
+
+- `spiele/lernplan.json`: die Themen unter `themen`; die Reihenfolge in der Datei ist die Planreihenfolge.
+  Felder: `id`, `name`, `sprich` (vorlesbarer Name ohne Ziffern und Zahlwörter), `strang` (eine `id` aus
+  `kategorien` in `spiele.json`; bisher `mathe`), `voraussetzungen` (IDs früherer Themen), `aufgaben`
+  (Aufgabenart wie `{ "art": "rechnen", "thema": … }`; `null` heißt „geplant“: noch keine Aufgaben, kein Spiel),
+  `stufen` (`material`, `vorstellung`, `kopf`), `einfuehrung` (`{ "vorlage": "einfuehrungen/<name>.json",
+  "werte": {…} }`), `familie` (optional), `tempo`, `eltern` (Hinweis für Erwachsene).
+- `spiele/aufgabenarten.js`: Aufgaben-Erzeuger. Aufgabenarten: `zerlegung`, `rechnen`, `menge`, `zwillinge`.
+- `spiele/lernsteuerung.js`: Steuerung (reine Logik ohne DOM, in Node testbar) und `runde()` für die Spiele.
+  Sie wählt das Thema, macht bei neuen Themen eine Probe (bekannte Themen werden übersprungen), übt auf den Stufen,
+  legt Aufgaben mit Wiedervorlage (Abstände 0, 1, 3, 7, 21 Tage) wieder vor und stellt Hilfen für den
+  Elternbereich bereit (`elternThemen`, `markiereGekonnt`, `setzeZurueck`, `gibFrei`).
+- `spiele/einfuehrung.js` und `spiele/einfuehrungen/*.json`: kurze Geschichten vor einem neuen Thema.
+  Jeder Text hat `sprich` (wird gesprochen, **nie mit Ziffern oder Zahlwörtern**, die Computerstimme spricht Zahlen
+  oft falsch), `zeig` (Sprechblase, darf Ziffern enthalten) und `bild`.
+- `spiele/themen.html`: die Übersicht „Was ich kann“ (Weg mit Stationen, ruhig, ohne Zähler oder Prozente).
+- `scripts/luecken.mjs`: `npm run luecken` listet Lücken im Plan, z. B. Themen ohne Spiel, das sie bedient.
+
+Lernstand: Schlüssel `lernplan` (im Browser `localStorage` `lernstand-lernplan`, in der App im Lernstand-Ordner).
+Die Spiele speichern ihre eigenen, nicht lernbezogenen Daten unter eigenem Schlüssel (`perlenbruecke-spiel`,
+`zahlenzauber-spiel`). Die alten Stände `perlenbruecke` und `zahlenzauber` werden einmal zur Übernahme gelesen
+und nie mehr geschrieben.
+
+`npm test` prüft den Plan (eindeutige IDs, Voraussetzungen, jede Aufgabe in genau einem Thema, Einführungen).
+
 ## Neues Spiel hinzufügen
 
 1. HTML-Datei in `spiele/` anlegen (Speichern/Laden über `lernspiel.js`).
@@ -82,12 +113,30 @@ Die Lernstände der Spiele bleiben erhalten (der Hinweis steht auch auf dem PIN-
    `kategorien`), `symbol` (z. B. `symbole/<id>.svg`), `datei`, `text` (wird vorgelesen).
 3. Symbol: SVG in `spiele/symbole/` im Stil der vorhandenen (viewBox `0 0 100 100`, Linien `#3B2A6B` 4 px,
    runde Enden, flächige Füllung in Pastell, siehe z. B. `symbole/hilfe.svg`).
-4. Optional Fortschrittsbalken: `spiele/fortschritt/<id>.js` mit
+4. Spiel am Lernplan (für Lernspiele mit Aufgaben): im Eintrag `arten` angeben, z. B.
+   `"arten": [{ "art": "zerlegung", "zahlen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }]`
+   (Perlenbrücke) oder `{ "art": "rechnen", "max": 100, "gleiche": false, "stufen": ["kopf"] }` (Zahlenzauber).
+   Im Spiel `runde()` aus `lernsteuerung.js` verwenden:
+   ```js
+   const r = await runde(id, { wunsch, max, nurAnsehen });
+   if (r.einfuehrungFaellig) { /* Einführung abspielen */ r.einfuehrungGesehen(); }  // vor dem ersten naechste()
+   const angebot = r.naechste();                       // je Angebot
+   r.melde(angebot.key, { ok, hilfe: 0 /* 0|1|2 */, ms });
+   const { hinweisSpiel } = await r.ende();
+   ```
+   Einführungen spielt `einfuehrung.js` (`spieleEinfuehrung`); Vorlagen liegen in `spiele/einfuehrungen/`
+   (Felder `sprich`, `zeig`, `bild`, siehe oben). Eigene Spieldaten, die nichts mit dem Lernen zu tun haben,
+   unter einem eigenen Schlüssel `<id>-spiel` speichern, nicht im Schlüssel `lernplan`.
+   **Vorschau-Parameter** (`?zahl`, `?fehler`, `?eltern` u. ä.) müssen `nurAnsehen: true` übergeben und schreiben
+   nie in den Lernstand.
+5. Fortschrittsbalken (Übergangslösung, nur für Spiele ohne `arten`): `spiele/fortschritt/<id>.js` mit
    `export async function fortschritt(save, holeJson)`, Rückgabe `{ wert: 0..1, text: "…" }`.
    `save` ist der gespeicherte Lernstand des Spiels, `holeJson(pfad)` lädt eine JSON-Datei aus `spiele/`.
    Zusätzlich im Eintrag in `spiele.json` `"fortschritt": true` setzen – nur dann wird das Modul geladen
    (die App liefert für fehlende Dateien die Startseite aus, deshalb wird nicht geraten). Ein Test prüft,
    dass Kennzeichen und Moduldatei zusammenpassen. Ohne Modul zeigt die Startseite keinen Balken.
+   Spiele mit `arten` bekommen keinen Fortschrittsbalken; ihren Stand zeigt „Was ich kann“. Die Module bleiben
+   nur, bis Kettenhüpfer, Wimmelbild, Zauberer und Einhorn-Steine umgestellt sind.
    Beispiel: `spiele/fortschritt/wimmelbild.js`.
 
 ## Wimmelbilder

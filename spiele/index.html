@@ -38,6 +38,9 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
   display:flex;align-items:center;justify-content:center;z-index:5}
 #eltern img{width:4.6rem;height:4.6rem}
 #eltern{touch-action:none}
+#themen{position:absolute;top:14rem;left:2rem;width:11rem;height:11rem;border-radius:50%;background:#fff;padding:2rem;z-index:5;
+  box-shadow:0 .7rem 0 rgba(59,42,107,.15)}
+#themen:active{transform:translateY(.5rem);box-shadow:0 .2rem 0 rgba(59,42,107,.15)}
 #eltern .ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);pointer-events:none}
 #eltern .ring circle{fill:none;stroke:var(--tinte);stroke-width:5;stroke-linecap:round;stroke-dasharray:201.1;stroke-dashoffset:201.1}
 #eltern.haelt .ring circle{stroke-dashoffset:0;transition:stroke-dashoffset 3s linear}
@@ -114,6 +117,7 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
   <div class="start-raster">
     <div class="gruss">
       <h1>Einhorn-Lernspiele<span>Dein Lerngarten</span></h1>
+      <a id="themen" href="themen.html" aria-label="Was ich kann"><img src="symbole/themen.svg" alt=""></a>
       <div class="maskottchen" id="maskottchen"></div>
     </div>
     <div class="beete" id="beete"></div>
@@ -136,10 +140,11 @@ const svg = masko.querySelector("svg");
 masko.addEventListener("click", () => Figuren.hop(svg, { hoehe: 60 }));
 
 // ---------- Vorlesen ----------
-function sag(text) {
+function sag(text, fertig) {
   try {
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
+    if (fertig) u.onend = u.onerror = fertig;
     u.lang = "de-DE"; u.rate = .85;
     let fest = ""; try { fest = localStorage.getItem("einhorn-stimme") || ""; } catch (e) {}
     const vs = speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang));
@@ -191,7 +196,7 @@ async function start() {
     el.innerHTML = `<div class="schild"><div class="sym"><img src="${esc(k.symbol)}" alt=""></div><h2>${esc(k.name)}</h2></div>
       <div class="spiele">${spiele.map(s => {
         const w = werte[s.id];
-        const weg = w === undefined ? "" : `<div class="weg" aria-hidden="true"><i style="width:${w * 100}%"></i><b style="left:${w * 100}%">${kopf(fk)}</b></div>`;
+        const weg = w === undefined || s.arten ? "" : `<div class="weg" aria-hidden="true"><i style="width:${w * 100}%"></i><b style="left:${w * 100}%">${kopf(fk)}</b></div>`;
         return `<a class="kachel" href="${esc(s.datei)}" data-id="${esc(s.id)}" aria-label="${esc(s.titel)}">
           <div class="ico"><img src="${esc(s.symbol)}" alt=""></div>
           <div><h3>${esc(s.titel)}</h3><span class="thema">${esc(s.thema)}</span>${weg}</div>
@@ -210,6 +215,17 @@ async function start() {
   }));
 }
 start();
+
+// ---------- Was ich kann: vorlesen, dann zur Themen-Übersicht ----------
+const themenKnopf = document.getElementById("themen");
+themenKnopf.addEventListener("click", e => {
+  if (e.defaultPrevented || e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  let weg = false;
+  const geh = () => { if (!weg) { weg = true; location.href = themenKnopf.href; } };
+  sag("Was ich kann", geh);
+  setTimeout(geh, 1800);   // falls die Stimme nie „fertig“ meldet
+});
 
 // ---------- Zugang für Erwachsene: Zahnrad 3 Sekunden halten ----------
 const zahnrad = document.getElementById("eltern");
