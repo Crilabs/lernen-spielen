@@ -49,7 +49,7 @@ export function protokoll(text) {
 // --- Speichern ---------------------------------------------------------
 
 export async function lade(spiel, standard) {
-  const kopie = () => ({ ...standard });
+  const kopie = () => structuredClone(standard);
   try {
     let roh;
     if (istApp()) {
@@ -60,7 +60,7 @@ export async function lade(spiel, standard) {
     if (roh == null) return kopie();
     const daten = JSON.parse(roh);
     if (daten === null || typeof daten !== "object" || Array.isArray(daten)) return kopie();
-    return { ...standard, ...daten };
+    return { ...kopie(), ...daten };
   } catch (e) {
     protokoll(`lade ${spiel}: ${e?.message ?? e}`);
     return kopie();
@@ -109,15 +109,20 @@ export function merkeGelernt(eintrag, gelernt) {
 
 // --- Touch-Sperren -----------------------------------------------------
 
+let touchGesperrt = false;
+
 export function sperreTouch() {
   const doc = globalThis.document;
-  if (!doc?.addEventListener) return;
+  if (!doc?.addEventListener || touchGesperrt) return;
+  touchGesperrt = true;
   const stopp = (e) => e.preventDefault();
   doc.addEventListener("contextmenu", stopp);
   doc.addEventListener("dragstart", stopp);
   doc.addEventListener("gesturestart", stopp);
   doc.addEventListener("selectstart", (e) => {
-    if (!e.target?.closest?.(".auswahl")) e.preventDefault();
+    const t = e.target;
+    const el = t?.nodeType === 3 ? t.parentElement : t;
+    if (!el?.closest?.(".auswahl")) e.preventDefault();
   });
   doc.addEventListener("wheel", (e) => { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
   if (doc.documentElement?.style) doc.documentElement.style.touchAction = "manipulation";

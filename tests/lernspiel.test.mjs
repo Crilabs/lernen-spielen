@@ -98,3 +98,13 @@ test("esc maskiert HTML", () => {
   assert.equal(L.esc(5), "5");
   assert.equal(L.esc(null), "");
 });
+
+test("lade liefert tiefe Kopie", async () => {
+  const standard = { a: { b: 1 } };
+  const r1 = await L.lade("x", standard);
+  r1.a.b = 2;
+  assert.equal(standard.a.b, 1);
+  const r2 = await L.lade("x", standard);
+  assert.equal(r2.a.b, 1);
+  assert.notEqual(r1.a, r2.a);
+});
