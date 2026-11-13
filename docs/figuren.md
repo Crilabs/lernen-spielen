@@ -91,7 +91,8 @@ Person.
   (Hautfarbe nie als einzige Unterscheidung, C1: jedes Kind ist auch an Haaren, Form und Hilfsmittel
   erkennbar).
 - **Haltungen, die es von jedem Kind geben muss:** stehen (vorn, Dreiviertel), gehen (Profil), zeigen,
-  tragen, staunen, freuen (zwei Stärken), nachdenken (Hand am Kinn), winken. Bei Timo jeweils im Rollstuhl,
+  tragen, staunen, freuen (zwei Stärken), nachdenken (Hand am Kinn), winken, zaubern (mit Stab, Hut als
+  Zubehör, das jedes Kind tragen kann). Bei Timo jeweils im Rollstuhl,
   selbst fahrend.
 - **Herstellung:** SVG von Hand nach diesem Blatt (A1: Figuren nie KI-generiert).
 
