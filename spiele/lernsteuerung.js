@@ -556,11 +556,13 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
   if (eintragVorher?.z === "dran" && !eintragVorher.stufe) eintragVorher.stufe = stufenFuer(ctx, spielId, themaId)[0] ?? "kopf";
 
   const neu = !!plan && !["dran", "kann-ich"].includes(eintragVorher?.z);
+  // Vorgriff (Spiel hätte sonst nichts): das Thema wird dran wie ein neues Thema, mit Einführung
+  const startet = modus === "thema" || modus === "vorgriff";
   const sitzung = neueSitzung(ctx, stand, spielId, { thema: themaId, modus }, { jetzt: uhr().jetzt, max, rnd });
   const r = {
     thema: plan ? { id: plan.id, name: plan.name, stufe: sitzung.probe ? "kopf" : sitzung.stufe, neu } : null,
     modus,
-    einfuehrungFaellig: modus === "thema" && !!plan?.einfuehrung && !eintragVorher?.e,
+    einfuehrungFaellig: startet && !!plan?.einfuehrung && !eintragVorher?.e,
     einfuehrungGesehen() {
       if (!themaId) return;
       const t = stand.themen[themaId] || (stand.themen[themaId] = {});
@@ -570,7 +572,7 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
     },
     naechste() {
       const { heute, jetzt } = uhr();
-      if (modus === "thema" && themaId && stand.themen[themaId]?.z !== "dran") { startThema(stand, themaId, heute); sichere(); }
+      if (startet && themaId && stand.themen[themaId]?.z !== "dran") { startThema(stand, themaId, heute); sichere(); }
       return naechstesAngebot(ctx, stand, sitzung, rnd, { jetzt, heute });
     },
     melde(key, { ok, hilfe = 0, ms } = {}) {

@@ -31,6 +31,22 @@ test("runde: frisch, Perlenbrücke → zerlegen-2, einfuehrungFaellig", async ()
   assert.equal(r.einfuehrungFaellig, true);
 });
 
+test("runde: frisch, Zahlenzauber → Vorgriff rechnen-3 mit Einführung, Thema wird dran", async () => {
+  const r = await start("zahlenzauber");
+  assert.equal(r.thema.id, "rechnen-3");
+  assert.equal(r.modus, "vorgriff");
+  assert.equal(r.einfuehrungFaellig, true);
+  r.einfuehrungGesehen();
+  r.naechste();
+  await r.ende();
+  assert.equal(stand().themen["rechnen-3"].z, "dran");
+  assert.equal(stand().themen["rechnen-3"].e, "2026-11-13");
+  const r2 = await start("zahlenzauber");
+  assert.equal(r2.thema.id, "rechnen-3");
+  assert.equal(r2.modus, "thema");
+  assert.equal(r2.einfuehrungFaellig, false);
+});
+
 test("runde: abgebrochen vor einfuehrungGesehen → nächster Start wieder Einführung, Thema in Sicht", async () => {
   const r = await start("perlenbruecke");
   await r.ende();
