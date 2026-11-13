@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Farbwelt Lernen Spielen</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,6 +45,7 @@ h1 .zart{display:block;color:var(--tinte-weich);font-size:.5em;font-weight:400;m
 @media (max-width:820px){.bild{grid-template-columns:1fr}}
 .bild svg{width:100%;height:auto;display:block;border-radius:var(--r-gross)}
 .schichten{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.pausentext{display:grid;gap:14px}
 .schichten li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
 .schichten .n{width:34px;height:34px;border-radius:50%;background:var(--tinte);color:var(--papier);display:grid;place-items:center;font-weight:700}
 /* Fachkacheln wie auf der Startseite */
@@ -98,7 +100,7 @@ td:first-child{white-space:nowrap;font-weight:700}
   <header><h2>Fünf Schichten auf jedem Bildschirm</h2>
   <p>Eine Farbe darf auf verschiedenen Schichten vorkommen, auf einer Schicht aber nur eine Bedeutung tragen. Die Schichten sind räumlich getrennt und an der Form zu unterscheiden. Deshalb kann Rot im Mathe-Lernfeld die Perle 1 sein und im Deutsch-Lernfeld das Verb, ohne dass sich etwas widerspricht.</p></header>
   <div class="karte bild">
-    <svg viewBox="0 0 640 400" role="img" aria-label="Beispielbildschirm eines Mathespiels mit Rahmen, Welt, Lernfeld und Knöpfen">
+    <svg viewBox="0 0 640 400" role="img" aria-label="Beispielbildschirm eines Mathespiels: Kopfleiste mit Haus, Fachkachel, Spielname, Thema und Ton; Welt, Lernfeld, Weiter und Hilfe unten rechts">
       <defs><linearGradient id="himmel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFEFFF"/><stop offset="1" stop-color="#EAF7FF"/></linearGradient></defs>
       <!-- Welt -->
       <rect x="0" y="0" width="640" height="400" fill="url(#himmel)"/>
@@ -106,14 +108,16 @@ td:first-child{white-space:nowrap;font-weight:700}
       <path d="M0 300 C120 260 220 280 320 270 C430 258 520 240 640 262 V400 H0Z" fill="#BFE3C9"/>
       <path d="M0 330 C160 310 300 330 420 318 C520 308 590 316 640 312 V400 H0Z" fill="#9ED8A8"/>
       <circle cx="80" cy="318" r="8" fill="#FFC9DE" stroke="#3B2A6B" stroke-width="3"/><circle cx="104" cy="326" r="6" fill="#FFC9DE" stroke="#3B2A6B" stroke-width="3"/>
-      <!-- Rahmen: Kopfleiste in Fachfarbe Mathe -->
-      <rect x="0" y="0" width="640" height="56" fill="#FFE6F2"/>
-      <rect x="18" y="10" width="36" height="36" rx="11" fill="#F06BB0" stroke="#3B2A6B" stroke-width="3"/>
-      <path d="M30 28h12M36 22v12" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-      <text x="66" y="35" font-family="Andika, sans-serif" font-weight="700" font-size="18" fill="#B8327A">Perlenbrücke</text>
-      <!-- Hülle: Knöpfe -->
-      <g><rect x="530" y="8" width="44" height="44" rx="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><path d="M544 30h8l7-7v18l-7-7h-8z" fill="#3B2A6B"/></g>
-      <g><rect x="582" y="8" width="44" height="44" rx="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><circle cx="604" cy="27" r="8" fill="#FFD95A" stroke="#3B2A6B" stroke-width="3"/><path d="M600 38h8" stroke="#3B2A6B" stroke-width="3" stroke-linecap="round"/></g>
+      <!-- Rahmen: Kopfleiste in Fachfarbe Mathe: Haus, Fachkachel (flach), Spielname, Thema, Ton -->
+      <rect x="0" y="0" width="640" height="60" fill="#FFE6F2"/>
+      <g><circle cx="32" cy="33" r="22" fill="#E4DEF0"/><circle cx="32" cy="30" r="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><path d="M22 31 L32 22 L42 31 M25 29 V39 H39 V29" fill="none" stroke="#3B2A6B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <rect x="64" y="12" width="36" height="36" rx="11" fill="#F06BB0" stroke="#3B2A6B" stroke-width="3"/>
+      <path d="M76 30h12M82 24v12" stroke="#3B2A6B" stroke-width="3.5" stroke-linecap="round"/>
+      <text x="112" y="29" font-family="Andika, sans-serif" font-weight="700" font-size="18" fill="#B8327A">Perlenbrücke</text>
+      <text x="112" y="48" font-family="Andika, sans-serif" font-size="13" fill="#6B5C96">Die 7 zerlegen</text>
+      <!-- Hülle: Nebenknöpfe mit hellem Schatten (drückbar) -->
+      <g><circle cx="608" cy="33" r="22" fill="#E4DEF0"/><circle cx="608" cy="30" r="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><path d="M596 26h6l7-7v22l-7-7h-6z" fill="#3B2A6B"/><path d="M613 25c3 3 3 7 0 10" fill="none" stroke="#3B2A6B" stroke-width="2.5" stroke-linecap="round"/></g>
+      <g><circle cx="608" cy="373" r="22" fill="#E4DEF0"/><circle cx="608" cy="370" r="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><circle cx="608" cy="366" r="8" fill="#FFD95A" stroke="#3B2A6B" stroke-width="3"/><path d="M604 378h8" stroke="#3B2A6B" stroke-width="3" stroke-linecap="round"/></g>
       <!-- Lernfeld auf Papier -->
       <rect x="70" y="96" width="500" height="170" rx="26" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><rect x="82" y="108" width="476" height="146" rx="18" fill="none" stroke="#CFC4E3" stroke-width="2.5" stroke-dasharray="7 7"/>
       <text x="100" y="134" font-family="Andika, sans-serif" font-weight="700" font-size="20" fill="#3B2A6B">7 sind 5 und ?</text>
@@ -124,26 +128,55 @@ td:first-child{white-space:nowrap;font-weight:700}
       <rect x="376" y="182" width="100" height="58" rx="29" fill="none" stroke="#3B2A6B" stroke-width="2"/>
       <g id="st2"></g>
       <!-- Weiter -->
-      <rect x="470" y="324" width="140" height="52" rx="26" fill="#24184A"/>
-      <rect x="470" y="318" width="140" height="52" rx="26" fill="#3B2A6B"/>
-      <text x="540" y="350" text-anchor="middle" font-family="Andika, sans-serif" font-weight="700" font-size="19" fill="#FFFCF7">Weiter</text>
+      <rect x="420" y="290" width="140" height="52" rx="26" fill="#24184A"/>
+      <rect x="420" y="284" width="140" height="52" rx="26" fill="#3B2A6B"/>
+      <path d="M440 304h14v-6l10 12-10 12v-6h-14z" fill="#FFFCF7"/>
+      <text x="512" y="316" text-anchor="middle" font-family="Andika, sans-serif" font-weight="700" font-size="19" fill="#FFFCF7">Weiter</text>
       <!-- Schicht-Nummern -->
       <g font-family="Andika, sans-serif" font-weight="700" font-size="15" fill="#FFFCF7">
         <circle cx="620" cy="384" r="0"/>
-        <circle cx="300" cy="28" r="13" fill="#1F1B45"/><text x="300" y="33" text-anchor="middle">2</text>
+        <circle cx="300" cy="30" r="13" fill="#1F1B45"/><text x="300" y="35" text-anchor="middle">2</text>
         <circle cx="40" cy="380" r="13" fill="#1F1B45"/><text x="40" y="385" text-anchor="middle">3</text>
         <circle cx="548" cy="112" r="13" fill="#1F1B45"/><text x="548" y="117" text-anchor="middle">4</text>
-        <circle cx="452" cy="330" r="13" fill="#1F1B45"/><text x="452" y="335" text-anchor="middle">1</text>
+        <circle cx="402" cy="296" r="13" fill="#1F1B45"/><text x="402" y="301" text-anchor="middle">1</text>
         <circle cx="398" cy="174" r="13" fill="#1F1B45"/><text x="398" y="179" text-anchor="middle">5</text>
       </g>
     </svg>
     <ol class="schichten">
-      <li><span class="n">1</span><div><h3>Hülle</h3><p class="klein">Knöpfe, Navigation, Schrift. Tinte und Papier. Was einen Schatten hat, kann man drücken.</p></div></li>
-      <li><span class="n">2</span><div><h3>Rahmen</h3><p class="klein">Kopfleiste, Kachel, Fachsymbol in der Fachfarbe. Zeigt, welches Fach dran ist. Nie im Lernfeld.</p></div></li>
+      <li><span class="n">1</span><div><h3>Hülle</h3><p class="klein">Knöpfe, Navigation, Schrift. Tinte und Papier. Was einen Schatten hat, kann man drücken. Haus oben links, Ton oben rechts, Hilfe unten rechts.</p></div></li>
+      <li><span class="n">2</span><div><h3>Rahmen</h3><p class="klein">Kopfleiste in der Tönung des Fachs mit flacher Fachkachel, Spielname im Tief-Ton und leiser darunter das Thema. Zeigt, welches Fach dran ist. Nie im Lernfeld.</p></div></li>
       <li><span class="n">3</span><div><h3>Welt</h3><p class="klein">Himmel, Landschaft, Gäste. Weich und hell, wechselt mit der Welt und der Tageszeit.</p></div></li>
       <li><span class="n">4</span><div><h3>Lernfeld, die Matte</h3><p class="klein">Liegt immer auf Papier, mit einer feinen Naht am Rand wie eine Arbeitsmatte. Hier stehen die Bedeutungsfarben: satt, flach, mit Tinte-Kontur. Vorrat an Material liegt daneben auf dem Holztablett.</p></div></li>
       <li><span class="n">5</span><div><h3>Aufmerksamkeit</h3><p class="klein">Der Sonnenring heißt: „ausgewählt“ oder „hier geht es weiter“. Er bewertet nichts.</p></div></li>
     </ol>
+  </div>
+</section>
+
+<section class="abschnitt">
+  <header><h2>Pause auf Nacht</h2>
+  <p>Am Rundenende wird es ruhig: Nacht mit ein paar Sternen in Sonne, das Bild auf einer Papierkarte. Darunter zwei Knöpfe aus Papier, gleich groß und gleich gestaltet: Aufhören ist so viel wert wie Weitermachen (Grundsätze N6). Nichts läuft ab, kein Balken füllt sich.</p></header>
+  <div class="karte bild">
+    <svg viewBox="0 0 640 360" role="img" aria-label="Pausenbild auf Nacht mit Sternen, einer Papierkarte und zwei gleich großen Knöpfen Alle Spiele und Weiter">
+      <rect width="640" height="360" fill="#1F1B45"/>
+      <g fill="#FFD95A"><path d="M70 40 q3 8 11 11 q-8 3 -11 11 q-3 -8 -11 -11 q8 -3 11 -11z"/><path d="M560 34 q2 6 8 8 q-6 2 -8 8 q-2 -6 -8 -8 q6 -2 8 -8z"/><path d="M600 200 q2 6 8 8 q-6 2 -8 8 q-2 -6 -8 -8 q6 -2 8 -8z"/><path d="M40 230 q2 5 7 7 q-5 2 -7 7 q-2 -5 -7 -7 q5 -2 7 -7z"/><path d="M330 18 q2 5 7 7 q-5 2 -7 7 q-2 -5 -7 -7 q5 -2 7 -7z"/></g>
+      <g fill="#FFFCF7" opacity=".7"><circle cx="200" cy="30" r="2"/><circle cx="470" cy="70" r="2"/><circle cx="610" cy="120" r="2"/></g>
+      <rect x="150" y="54" width="340" height="170" rx="26" fill="#FFFCF7"/>
+      <g id="pause7"></g>
+      <text x="320" y="196" text-anchor="middle" font-family="Andika, sans-serif" font-size="15" fill="#3B2A6B">Sieben ist so lang wie fünf und zwei.</text>
+      <g font-family="Andika, sans-serif" font-weight="700" font-size="18" fill="#3B2A6B">
+        <rect x="128" y="270" width="180" height="52" rx="26" fill="#E4DEF0"/><rect x="128" y="264" width="180" height="52" rx="26" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/>
+        <path d="M150 292 L162 281 L174 292 M154 290 V302 H170 V290" fill="none" stroke="#3B2A6B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="236" y="296" text-anchor="middle">Alle Spiele</text>
+        <rect x="332" y="270" width="180" height="52" rx="26" fill="#E4DEF0"/><rect x="332" y="264" width="180" height="52" rx="26" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/>
+        <path d="M354 284h14v-6l10 12-10 12v-6h-14z" fill="#9CCBFF" stroke="#3B2A6B" stroke-width="2.5" stroke-linejoin="round"/>
+        <text x="440" y="296" text-anchor="middle">Weiter</text>
+      </g>
+    </svg>
+    <div class="pausentext">
+      <div><h3>Nacht und Sonne</h3><p class="klein">Nacht <span class="mono">#1F1B45</span> deckt das Spiel ganz ab. Die Sterne in Sonne stehen still, sie blinken nicht.</p></div>
+      <div><h3>Papierkarte</h3><p class="klein">Bild oder Sachmoment liegen auf Papier, flach und ohne Schatten: zum Ansehen.</p></div>
+      <div><h3>Zwei gleiche Knöpfe</h3><p class="klein">„Alle Spiele“ und „Weiter“ sind Papier mit Symbol und Wort, gleich breit, nebeneinander. Keiner ist hervorgehoben.</p></div>
+    </div>
   </div>
 </section>
 
@@ -258,6 +291,7 @@ for(let n=1;n<=10;n++){const y=22+(n-1)*31.5;staebchen(tr,n,72,y,12).style.anima
 // Mini-Stäbchen im Beispielbildschirm
 const s7=document.getElementById("st7"),s2=document.getElementById("st2");
 staebchen(s7,7,112,210,13);staebchen(s2,2,409,211,13);
+staebchen(document.getElementById("pause7"),7,214,120,14);
 
 [["#0FA3A3","Einer","#0FA3A3, türkis","Spalte E, rechts"],["#F07C1E","Zehner","#F07C1E, orange","Spalte Z, Mitte. Als Schrift auf Weiß zu hell (2,7:1): nur Fläche mit Kontur."],["#5B6478","Hunderter","#5B6478, schiefergrau","Spalte H, links, 5,8:1"],["#D9A520","Goldenes Material","#D9A520, gold","Einer, Zehnerstab, Hunderterplatte: alles Gold wie die Perle 10. Die Menge zeigt die Größe."]].forEach(a=>feld("stellen",...a));
 

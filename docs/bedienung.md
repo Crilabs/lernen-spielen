@@ -38,27 +38,35 @@ von keinem Spiel neu erfunden.
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│ [⌂] [Fach]  ┌ Sprechblase ……………………… [🔊] ┐            [♪]    │
-│                                                              │
+│ (⌂) [Fach] Spielname                                    (♪)  │  ← Kopfleiste, Band in der
+│            Thema                                             │    Tönung des Fachs
+├──────────────────────────────────────────────────────────────┤
+│          ┌ Sprechblase ………………………………… (🔊) ┐                  │
 │                                                              │
 │                        Spielfeld                             │
 │                  (still, solange das Kind denkt)             │
 │                                                              │
-│                                                       [?]    │
-│              [  Bildschirm-Tastatur, falls nötig  ]          │
+│              [  Bildschirm-Tastatur, falls nötig  ]     (?)  │
 └──────────────────────────────────────────────────────────────┘
+( ) Nebenknopf, drückbar   [ ] flache Kachel, nur Anzeige
 ```
 
 | Platz | Element | Name (gesprochen/Bezeichnung) |
 |---|---|---|
-| oben links | **Alle Spiele** (Haus) | „Alle Spiele“ |
-| oben links, rechts daneben | **Fachsymbol** (Mathe, Lesen, Schreiben, Grammatik, Sachthemen) – nur Anzeige, kein Knopf | – |
-| oben rechts | **Ton** an/aus | „Ton an“ / „Ton aus“ |
+| Kopfleiste, links | **Alle Spiele** (Haus) | „Alle Spiele“ |
+| Kopfleiste, rechts daneben | **Fachsymbol** als flache Kachel in der Fachfarbe (Mathe, Lesen, Schreiben, Grammatik, Geometrie) – nur Anzeige, kein Knopf | – |
+| Kopfleiste, daneben | **Spielname** (fett, im Tief-Ton des Fachs) und darunter leiser das **Thema** der Runde (z. B. „Die 7 zerlegen“) – nur Anzeige | – |
+| Kopfleiste, rechts | **Ton** an/aus | „Ton an“ / „Ton aus“ |
 | in der Sprechblase, rechts | **Noch mal hören** | „Noch mal hören“ |
 | unten rechts | **Hilfe** | „Hilfe“ |
 | unten Mitte | **Bildschirm-Tastatur**, nur in Spielen mit Eingabe | – |
 | Pause/Rundenende, unten Mitte | **Alle Spiele** und **Weiter**, nebeneinander, gleich groß | „Alle Spiele“ / „Weiter“ |
 
+- **Kopfleiste (Christian):** ein Band über die ganze Breite des sicheren Felds, 15,8 rem hoch, in der
+  Tönung des Fachs (Rahmen-Schicht, `grundsaetze-bilder.md` 6.2). Ohne Fachfarbe (Sachthemen, Startseite
+  von Welten) ist das Band Nebel, ohne Kachel, der Name steht in Tinte. Das Spielfeld beginnt darunter.
+- Das Thema kommt aus der Lernsteuerung (`thema` in `spiele.json` bzw. das Thema der Runde) und darf sich
+  während des Spiels ändern. Es wird nicht vorgelesen; Ziffern dürfen darin stehen.
 - Kein Spiel legt etwas anderes auf diese Plätze, und keines verschiebt sie.
 - Die Sprechblase selbst darf das Spiel platzieren. Sie gehört dem **Erzähler** (zur Szene), nie dem Mund
   einer Figur: kein Zipfel, der auf eine Figur zeigt, keine Ich-Sätze darin (`docs/stimme.md`). Der
@@ -71,13 +79,38 @@ von keinem Spiel neu erfunden.
 
 | Element | Größe | Bemerkung |
 |---|---|---|
-| Bedienknopf (Haus, Ton, Hilfe) | 11 rem rund | am Kiosk (1080 px, 21,5″) ≈ 2,9 cm, auf 10″-Tablet (800 px) ≈ 2,3 cm; Mindestmaß K4: 2 × 2 cm **(Annahme, am Tablet prüfen)** |
-| Hauptaktion (Weiter, Alle Spiele in der Pause) | 16 rem rund | |
-| Noch mal hören (in der Blase) | 8 rem | Tippfläche durch Polster auf 11 rem erweitert |
-| Fachsymbol | 8 rem | nur Anzeige |
+| Nebenknopf (Haus, Ton, Hilfe) | 11 rem rund | am Kiosk (1080 px, 21,5″) ≈ 2,9 cm, auf 10″-Tablet (800 px) ≈ 2,3 cm; Mindestmaß K4: 2 × 2 cm **(Annahme, am Tablet prüfen)** |
+| Hauptknopf (Weiter, Fertig) | Pille, 11 rem hoch, mindestens 24 rem breit | Symbol und Wort; Wort 4 rem fett |
+| Pausenknöpfe (Alle Spiele, Weiter) | Pille, 14 rem hoch, beide 50 rem breit | gleich groß (N6); Wort 5 rem fett |
+| Noch mal hören (in der Blase) | 8 rem | Tippfläche auf 11 rem erweitert |
+| Fachsymbol | Kachel 9 rem, Radius 2,6 rem | nur Anzeige, flach |
+| Kopfleiste | 15,8 rem hoch | Spielname 5,2 rem fett, Thema 3,4 rem |
+| Kontur | 0,3 rem Tinte | Knöpfe, Kachel, Blase |
+| Schatten drückbarer Teile | 0,6 rem, beim Drücken 0,3 rem | |
 | Taste der Bildschirm-Tastatur | mindestens 9 × 8,6 rem | |
 | Abstand zwischen Tippzielen | mindestens 2 rem | |
 | Schrift im Spiel | mindestens 3,2 rem, Andika | Kontur und Schrift `#3B2A6B` |
+
+Begründung Hauptknopf (Annahme): Die Pille ist so hoch wie ein Nebenknopf, damit sie in derselben Zeile
+stehen kann; Breite und Wort machen sie zum Hauptknopf, nicht die Höhe. Die alte runde Hauptaktion mit
+16 rem gibt es als `groesse="haupt"` weiter für runde Knöpfe.
+
+### 4.1 Farben (Christian)
+
+Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.html`) und im Code in
+`spiele/rahmen/stil.js` (`FARBE`, `FACH`, `RADIUS`); hier nur, wie die Bedienung sie nutzt:
+
+- **Nebenknopf:** Papier, Tinte-Kontur, Schatten in Linie; nur Symbol, der Name wird beim ersten Tippen
+  gesprochen. Haus, Ton, Noch mal hören, Hilfe.
+- **Hauptknopf:** Tinte gefüllt, Symbol und Wort in Papier, Schatten im dunklen Tinte-Ton. Weiter, Fertig.
+  Neutral, nie grün.
+- **Schatten heißt drückbar:** Nur Knöpfe haben Schatten. Kopfleiste, Fachkachel, Sprechblase und die
+  Karte der Pause sind flach.
+- **Sonnenring:** Fokus, Auswahl und das Aufleuchten der Hilfe sind ein Ring in Sonne (mit feiner
+  Tinte-Kante), nie eine Füllung.
+- **Pause:** Nacht mit Sternen in Sonne, Inhalt auf Papier, Knöpfe aus Papier.
+- Kein Grün und kein Rot für richtig/falsch, keine Farbe je Buchstabe, keine Verläufe in den Bausteinen
+  (Verläufe nur in der Welt).
 
 ---------------------------------------------------------------------------------------------------
 ## 5. Gesten
@@ -95,16 +128,19 @@ von keinem Spiel neu erfunden.
 
 - **Einsinken:** Jeder Knopf sinkt beim Drücken sichtbar ein (0,3 rem, Schatten wird kürzer). Kein
   Federn, kein Glitzern.
+- **Sonnenring (Christian):** Was ausgewählt ist oder den Tastaturfokus hat, bekommt einen Ring in Sonne
+  um den Knopf. Er bewertet nichts und füllt nie eine Fläche.
 - **Name beim ersten Tippen (Christian):** Ein Bedienzeichen spricht beim ersten Antippen je Sitzung
   seinen Namen (K3), sofern der Ton an ist. Danach bleibt es still. Sitzung heißt: seit dem Start der App.
 - **Ton aus** beendet laufende Sprache sofort. Klänge des Spiels verstummen ebenfalls.
 - **Hilfe (Christian):** Der Hilfe-Knopf ist immer da. Nach dem zweiten Versuch, der noch nicht passt,
-  leuchtet er **einmal** ruhig auf (etwa 1 s, kein Blinken in Schleife, B3). Die Hilfe selbst kommt nur
+  leuchtet er **einmal** ruhig auf: ein Sonnenring mit weichem Licht um den Knopf (etwa 1 s, kein
+  Blinken in Schleife, B3). Die Hilfe selbst kommt nur
   auf Tippen: erst eine Denkhilfe (die Probe), beim nächsten Tippen die Lösung mit Begründung, die das
   Kind selbst ausführt (L12). Mit Hilfe Gelöstes meldet das Spiel der Lernsteuerung als „mit Hilfe“.
 - **Noch mal hören** spricht den Text der Blase erneut, im Tempo, in dem er zuerst kam (Diktat langsamer).
-- **Wenig Bewegung:** Bei `prefers-reduced-motion` entfallen Einsinken-Animation und Aufleuchten; das
-  Aufleuchten wird zu einem ruhigen Rahmen, der 1 s sichtbar ist.
+- **Wenig Bewegung:** Bei `prefers-reduced-motion` entfallen Animationen; das Aufleuchten wird zu einem
+  ruhigen Sonnenring, der 1 s steht.
 
 ---------------------------------------------------------------------------------------------------
 ## 7. Abläufe
@@ -115,9 +151,11 @@ von keinem Spiel neu erfunden.
    mit „Wie geht es aus?“ (9.2 Nr. 7). Neue Spieltypen zeigen einmal vor (L5).
 2. **Aufgaben** (3–5 Minuten, L10). Während das Kind denkt, bewegt sich nichts, und es erscheint nichts
    Neues (B3, 3.1 Nr. 6).
-3. **Rundenende:** eine ruhige Pause mit Bild (Stimmungsebene) und zwei gleichwertigen Knöpfen **Alle
-   Spiele** und **Weiter**. Nichts läuft ab, nichts geht von selbst weiter, kein Füllbalken
-   (`grundsaetze.md` 13). Ein Sachmoment (K1, K8) darf hier stehen.
+3. **Rundenende (Christian):** eine ruhige Pause auf Nacht mit stillen Sternen in Sonne; Bild oder
+   Sachmoment (K1, K8) liegen auf einer Papierkarte. Darunter **Alle Spiele** und **Weiter**: gleich
+   groß, gleich gestaltet (Papier, Tinte-Kontur, Symbol und Wort), keiner hervorgehoben, auch nicht durch
+   den Fokus. Aufhören ist gleichwertig (N6). Nichts läuft ab, nichts geht von selbst weiter, kein
+   Füllbalken (`grundsaetze.md` 13).
 
 ### 7.2 Verlassen
 
@@ -129,8 +167,8 @@ von keinem Spiel neu erfunden.
 - **Keine Systemtastatur.** Spiele mit Eingabe nutzen die Bildschirm-Tastatur.
 - Die Tastatur zeigt **nur die Tasten, die die Aufgabe braucht** (z. B. die Buchstaben des Satzes),
   in fester Reihenfolge (alphabetisch bzw. 1–9, 0), dazu Leertaste und Löschen, falls nötig.
-- Tastenfarben dürfen beim Wiederfinden helfen, tragen aber keine Bedeutung allein (C1): Auf jeder Taste
-  steht das Zeichen.
+- **Tasten (Christian):** Papier mit Tinte-Kontur und hellem Schatten, das Zeichen in Tinte. Keine
+  Farbe je Buchstabe (`grundsaetze-bilder.md` 6.4); Vokale werden nicht eingefärbt.
 - Eine angeschlossene Hardware-Tastatur funktioniert zusätzlich.
 
 ---------------------------------------------------------------------------------------------------
@@ -150,15 +188,17 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 
 | Baustein | Aufgabe | Schnittstelle (Kurzform) |
 |---|---|---|
-| `<ls-knopf>` | runder Grundknopf: Symbol, Name, Einsinken, Mindestgröße, Name beim ersten Tippen | Attribute `symbol`, `name`, `groesse="bedien\|haupt\|klein"`; Ereignis `click` |
-| `<ls-leiste>` | Haus, Fachsymbol und Ton an den festen Plätzen | Attribute `spiel`, `fach`; Eigenschaft `ton` (boolean); Ereignis `ton` |
-| `<ls-blase>` | Sprechblase mit Noch-mal-hören | `sage(text, { sprechen = true, tempo })`; Eigenschaft `text` |
-| `<ls-hilfe>` | Hilfe-Knopf unten rechts | `leuchte()`; Ereignis `hilfe` |
+| `<ls-knopf>` | Grundknopf: Neben- oder Hauptknopf, Symbol, Name, Einsinken, Mindestgröße, Name beim ersten Tippen | Attribute `art="neben\|haupt"` (Vorgabe neben), `symbol`, `name`, `wort` (sichtbares Wort, macht den Knopf zur Pille), `groesse="bedien\|haupt\|klein"`, `gespiegelt`, `stumm`, `spiel`; Ereignis `click` |
+| `<ls-leiste>` | Kopfleiste: Haus, Fachkachel, Spielname, Thema, Ton | Attribute `spiel`, `fach`, `titel`, `thema` (zur Laufzeit änderbar); Eigenschaft `ton` (boolean); Ereignisse `ton`, `bereit`; `istBereit`, `bereit()`, `bereitet` (Versprechen, sobald die Einstellungen geladen sind) |
+| `<ls-blase>` | Sprechblase des Erzählers mit Noch-mal-hören, ohne Zipfel | `sage(text, { sprechen = true, tempo })`; Eigenschaft `text` |
+| `<ls-hilfe>` | Hilfe-Knopf unten rechts | `leuchte()` (Sonnenring, einmal ~1 s); Ereignis `hilfe` |
 | `<ls-pause>` | Pause/Rundenende mit Alle Spiele und Weiter | Inhalt (Bild, Sachmoment) per Slot; `await zeige()` → `"weiter"` |
 | `<ls-tastatur>` | Bildschirm-Tastatur | Attribute `tasten` (die benötigten Zeichen), `leertaste`, `loeschen`; Ereignis `taste` mit `detail.zeichen` |
 
-- **Aussehen über CSS-Variablen (Annahme):** `--ls-tinte` (`#3B2A6B`), `--ls-papier`, `--ls-knopf`,
-  `--ls-schatten`. Eine Welt darf Papier und Knopf leicht tönen, nicht Form, Größe oder Platz.
+- **Aussehen über CSS-Variablen:** `--ls-tinte`, `--ls-tinte-weich`, `--ls-papier`, `--ls-nebel`,
+  `--ls-linie`, `--ls-naht`, `--ls-haupt-schatten`, `--ls-sonne`, `--ls-nacht`, `--ls-kontur`,
+  `--ls-radius-gross|--ls-radius|--ls-radius-klein`, `--ls-knopf`, `--ls-schatten`; Werte aus
+  `stil.js` (Farbwelt). Eine Welt ändert sie nicht: Form, Farbe, Größe und Platz der Bedienung sind fest.
 - **Vorschau:** `spiele/rahmen/vorschau.html` zeigt alle Bausteine zum Ansehen und Ausprobieren.
 - **Regel (geplant):** Sobald das erste Spiel umgezogen ist, prüft ein Test, dass umgezogene Spiele Haus-
   und Ton-Knopf nicht selbst bauen.
@@ -166,7 +206,8 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 ---------------------------------------------------------------------------------------------------
 ## 10. Checkliste für jedes neue Spiel
 
-- [ ] `<ls-leiste>` mit `spiel` und `fach`; keine eigenen Haus-/Ton-Knöpfe.
+- [ ] `<ls-leiste>` mit `spiel`, `fach`, `titel` und `thema`; keine eigenen Haus-/Ton-Knöpfe; das
+      Spielfeld beginnt unter der Kopfleiste.
 - [ ] Gesprochene Texte über `<ls-blase>` oder `kern`-`sprich`, mit Noch-mal-hören.
 - [ ] `<ls-hilfe>` mit Hilfe-Leiter (Probe, dann Lösung); `leuchte()` nach dem zweiten Versuch.
 - [ ] Rundenende mit `<ls-pause>`; nichts läuft von selbst weiter.
