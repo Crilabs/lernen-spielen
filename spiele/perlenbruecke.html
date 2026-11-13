@@ -82,7 +82,8 @@ img{display:block}
 .deckel{fill:url(#fels);stroke:rgba(59,42,107,.35);stroke-width:3;opacity:0;transition:opacity .4s;pointer-events:none}
 .deckel.zu{opacity:1}
 .kettenperlen{transition:opacity .4s}
-.kettenperlen.verdeckt{opacity:0}
+.kettenperlen.verdeckt,.luecke.verdeckt{opacity:0}
+.luecke{transition:opacity .3s}
 /* Knöpfe in der Pause nach „kann ich“: Haus und Weiter */
 .pknoepfe{position:absolute;left:0;right:0;bottom:6rem;display:flex;justify-content:center;gap:8rem}
 .pk{width:16rem;height:16rem;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;padding:3.4rem;box-shadow:0 .8rem 0 rgba(0,0,0,.25);text-decoration:none}
@@ -146,6 +147,7 @@ sperreTouch();
   const ZEILE0 = 545, ZEILE = 106;   // Spalten: erste Zeile und Abstand
   const UNI_W = 220, UNI_S = UNI_W/320, UNI_FUSS = 254*UNI_S;
   const STUFEN = ["material","vorstellung","kopf"];
+  const SCHILD_W = P+2*R+108;   // Stufe kopf: Breite jedes Ziffernschilds (wie die Platte eines Zweier-Stäbchens)
 
   const $ = id => document.getElementById(id);
   const NS = "http://www.w3.org/2000/svg";
@@ -158,7 +160,8 @@ sperreTouch();
 
   // ---------- Vorschau (?zahl, ?fehler, ?stufe): schreibt nie in einen Lernstand ----------
   const eigeneAufgabe = params.has("zahl") || params.has("fehler");   // Aufgabe ohne Lernsteuerung
-  const vorschau = eigeneAufgabe || params.has("stufe");
+  // jeder Vorschau-Parameter: runde() nur mit nurAnsehen, spieleigener Stand wird nicht gespeichert
+  const vorschau = eigeneAufgabe || ["stufe","pause","hinweis"].some(x=>params.has(x));
   const vorschauStufe = STUFEN.includes(params.get("stufe")) ? params.get("stufe") : null;
 
   // ---------- Elternansicht (?eltern) ----------
@@ -237,9 +240,13 @@ sperreTouch();
     const gras=$("plaetze"); gras.innerHTML="";
     el("rect",{x:-400,y:Y0-6,width:l+400,height:26,rx:10,fill:"#8EDCA9",stroke:"#3B2A6B","stroke-width":4},gras);
     el("rect",{x:r,y:Y0-6,width:2320-r,height:26,rx:10,fill:"#8EDCA9",stroke:"#3B2A6B","stroke-width":4},gras);
-    for(let i=0;i<n;i++) el("circle",{cx:slotX(i),cy:YB,r:R,class:"platz","data-i":i},gras);
-    if(n>5) el("line",{x1:gapL()+5*P,y1:YB-R-12,x2:gapL()+5*P,y2:YB+R+12,stroke:"#fff","stroke-width":5,"stroke-linecap":"round"},gras);
+    // Plätze und Fünferstrich in der Lücke: bei kopf erst beim Bauen sichtbar (sonst ließe sich n abzählen)
+    luecke=el("g",{class:"luecke"+(stufe==="kopf"?" verdeckt":"")},gras);
+    for(let i=0;i<n;i++) el("circle",{cx:slotX(i),cy:YB,r:R,class:"platz","data-i":i},luecke);
+    if(n>5) el("line",{x1:gapL()+5*P,y1:YB-R-12,x2:gapL()+5*P,y2:YB+R+12,stroke:"#fff","stroke-width":5,"stroke-linecap":"round"},luecke);
   }
+  let luecke=null;
+  const zeigeLuecke = () => luecke?.classList.remove("verdeckt");
   // Zielkette: Zahl im Kreis, daneben die Perlen (bei kopf nur die Zahl; die Perlen erscheinen erst zum Erklären eines Fehlers)
   let kettePerlen=[], ketteG=null;
   function kette(){
@@ -253,7 +260,8 @@ sperreTouch();
   }
   const zeigeKette = () => ketteG?.classList.remove("verdeckt");
   // Spalten: links rechtsbündig zur Lücke, rechts linksbündig; kurz oben, lang unten.
-  // Bei vorstellung/kopf deckt eine Fläche in Ufer-Farbe die Perlen ab, die Ziffern bleiben.
+  // Bei vorstellung deckt eine Fläche in Ufer-Farbe die Perlen ab, die Ziffern bleiben.
+  // Bei kopf ist jedes Stäbchen ein Ziffernschild gleicher Breite (keine Länge zum Vergleichen).
   let staebe = {l:[], r:[]}, deckTimer=0;
   function spalten(ang){
     clearTimeout(deckTimer);
@@ -264,11 +272,21 @@ sperreTouch();
         const y=ZEILE0+i*ZEILE;
         const breite=(len-1)*P+2*R;
         const x0 = seite==="l" ? gapL()-50-breite+R : gapR()+50+R;     // Mitte der ersten Perle
+        if(stufe==="kopf"){
+          const w=SCHILD_W, sx = seite==="l" ? gapL()-50-w : gapR()+50;
+          const g=el("g",{class:"stab schild","data-len":len},box);
+          el("rect",{x:sx,y:y-46,width:w,height:92,rx:30,class:"platte"},g);
+          const z=el("text",{x:sx+w/2,y:y+2,class:"ziffer","text-anchor":"middle"},g); z.textContent=len;
+          const s={seite,len,g,x0:sx+R+18,y};     // Flugstart der ersten Perle: im Schild
+          g.addEventListener("click",()=>tippe(s));
+          staebe[seite].push(s);
+          return;
+        }
         const g=el("g",{class:"stab","data-len":len},box);
         const plX = seite==="l" ? x0-R-90 : x0-R-18, plW = breite+108;
         el("rect",{x:plX,y:y-46,width:plW,height:92,rx:30,class:"platte"},g);
         stab(g, len, x0, y);
-        el("rect",{x:x0-R-12,y:y-R-12,width:breite+24,height:2*R+24,rx:R+12,class:"deckel"+(stufe==="kopf"?" zu":"")},g);
+        if(stufe==="vorstellung") el("rect",{x:x0-R-12,y:y-R-12,width:breite+24,height:2*R+24,rx:R+12,class:"deckel"},g);
         const z=el("text",{x: seite==="l" ? x0-R-22 : x0+breite-R+22, y:y+2, class:"ziffer","text-anchor": seite==="l"?"end":"start"},g); z.textContent=len;
         const s={seite,len,g,x0,y};
         g.addEventListener("click",()=>tippe(s));
@@ -359,6 +377,7 @@ sperreTouch();
     const a=wahl.l.len, b=wahl.r.len, summe=a+b;
     kettePerlen.forEach(p=>p.classList.remove("aus","hell"));
     const br=$("bruecke"); br.innerHTML="";
+    zeigeLuecke();                                // kopf: erst jetzt Plätze und Fünferstrich
     const zielR = summe > n ? a : n-b;            // Startplatz des rechten Stäbchens
     const flieg = (s, platz) => {
       s.g.classList.add("weg");
@@ -394,7 +413,7 @@ sperreTouch();
   async function falsch(a,b,L,Rr,zielR){
     const start=Date.now(), summe=a+b, kurz=summe<n;
     fehler++; boing();
-    zeigeKette();                 // die Rückmeldung erklärt immer an den Perlen
+    zeigeKette(); zeigeLuecke();  // die Rückmeldung erklärt immer an den Perlen
     const alle=[...L.perlen, ...Rr.perlen];
     if(kurz){
       // Einhorn tastet sich bis an das Loch und schaut hinunter
