@@ -1,6 +1,91 @@
 {
  "stimme": "de-DE-Florian:DragonHDLatestNeural",
  "texte": {
+  "Ä von A: Mehrzahl": {
+   "datei": "florian/3e6331d7eeb2.mp3",
+   "h": "831fb28ff7",
+   "gehoert": false
+  },
+  "Ä von A: Steigern": {
+   "datei": "florian/b439960922f2.mp3",
+   "h": "8673bf70bc",
+   "gehoert": false
+  },
+  "Ä von A: Verbformen": {
+   "datei": "florian/86f98c63f109.mp3",
+   "h": "96854a3f1f",
+   "gehoert": false
+  },
+  "Ä von A: Verkleinern": {
+   "datei": "florian/4f5a5921b01c.mp3",
+   "h": "12ce605b68",
+   "gehoert": false
+  },
+  "Ä von A: Wortfamilie": {
+   "datei": "florian/10a0f6098329.mp3",
+   "h": "864aee9d30",
+   "gehoert": false
+  },
+  "Abschreiben Wort für Wort": {
+   "datei": "florian/57000b1ad4da.mp3",
+   "h": "9bb18412be",
+   "gehoert": false
+  },
+  "Abstand halten": {
+   "datei": "florian/c720faf5f96c.mp3",
+   "h": "1d382589e0",
+   "gehoert": false
+  },
+  "Abzählen": {
+   "datei": "florian/7eda23f84770.mp3",
+   "h": "5e9f58eb7a",
+   "gehoert": false
+  },
+  "Achterreihe": {
+   "datei": "florian/c74e73f4033c.mp3",
+   "h": "2ac65c2297",
+   "gehoert": false
+  },
+  "Adjektiv im Fall": {
+   "datei": "florian/d5fcaa0c464d.mp3",
+   "h": "30d381a83a",
+   "gehoert": false
+  },
+  "Adjektiv vor dem Nomen klein": {
+   "datei": "florian/147fe0dde8ac.mp3",
+   "h": "4ab6aa28e6",
+   "gehoert": false
+  },
+  "Adjektive": {
+   "datei": "florian/2e6656c5a43e.mp3",
+   "h": "53f466c45a",
+   "gehoert": false
+  },
+  "Alle finden": {
+   "datei": "florian/7f22172eb9e6.mp3",
+   "h": "21aa9ef350",
+   "gehoert": false
+  },
+  "Alle Laute am Anfang": {
+   "datei": "florian/e10404adef9e.mp3",
+   "h": "340fe7c07a",
+   "gehoert": false
+  },
+  "Alle Laute in der Mitte und am Ende": {
+   "datei": "florian/c91bbb013bed.mp3",
+   "h": "7b6d2dabb8",
+   "gehoert": false
+  },
+  "Alle Möglichkeiten finden": {
+   "datei": "florian/f36f27fab244.mp3",
+   "h": "b680e2478e",
+   "gehoert": false
+  },
+  "Allgemein statt Beispiel": {
+   "datei": "florian/c1a433b459a9.mp3",
+   "h": "fb557d2597",
+   "gehoert": false
+  },
   "Also teilt das Einhorn den kurzen Stab. Ein Teil füllt den Zehner auf, der Rest wartet.": {
    "datei": "florian/616a87d581de.mp3",
    "h": "e583ed6ecd",
@@ -31,6 +116,151 @@
    "h": "f4a4165cbf",
    "gehoert": false
   },
+  "Anfang, Mitte, Ende": {
+   "datei": "florian/2b677702db5e.mp3",
+   "h": "a3faccf71b",
+   "gehoert": false
+  },
+  "Anfang, Mitte, Schluss": {
+   "datei": "florian/6643d2928d67.mp3",
+   "h": "78c671670b",
+   "gehoert": false
+  },
+  "Angabe fehlt": {
+   "datei": "florian/65286b8644ac.mp3",
+   "h": "b208712e2b",
+   "gehoert": false
+  },
+  "Angelhaken": {
+   "datei": "florian/9525cc4f4bf3.mp3",
+   "h": "8685516783",
+   "gehoert": false
+  },
+  "Anker-Schlaufe": {
+   "datei": "florian/331c62a916ad.mp3",
+   "h": "498188bdca",
+   "gehoert": false
+  },
+  "Anlaut bei kurzen Lauten": {
+   "datei": "florian/6d451ea02372.mp3",
+   "h": "51ce60d675",
+   "gehoert": false
+  },
+  "Anlaut bei langen Lauten": {
+   "datei": "florian/a8ac897fee93.mp3",
+   "h": "3954c8df18",
+   "gehoert": false
+  },
+  "Anlaut bei Vokalen": {
+   "datei": "florian/2090df213372.mp3",
+   "h": "73b1398a23",
+   "gehoert": false
+  },
+  "Anna Zahlen erklären": {
+   "datei": "florian/70e1acc1eb80.mp3",
+   "h": "380ef66140",
+   "gehoert": false
+  },
+  "Anna Zahlen und Zahlenmuster": {
+   "datei": "florian/ea2c1da08515.mp3",
+   "h": "bc7dcfa198",
+   "gehoert": false
+  },
+  "Annahme prüfen": {
+   "datei": "florian/c04408541847.mp3",
+   "h": "08e97fb0e4",
+   "gehoert": false
+  },
+  "Ansicht und Gebäude": {
+   "datei": "florian/da8af8e653aa.mp3",
+   "h": "7aa81e9293",
+   "gehoert": false
+  },
+  "Ansichten von Würfelgebäuden": {
+   "datei": "florian/f346ac7af236.mp3",
+   "h": "29c4e799a3",
+   "gehoert": false
+  },
+  "Artikel im Fall": {
+   "datei": "florian/cb2699c7e646.mp3",
+   "h": "41da8a0146",
+   "gehoert": false
+  },
+  "Äu von Au ableiten": {
+   "datei": "florian/7f9dee02eaea.mp3",
+   "h": "fc0af18bfe",
+   "gehoert": false
+  },
+  "Auf die Minute genau": {
+   "datei": "florian/d9eb481c1b1d.mp3",
+   "h": "ebe1014d59",
+   "gehoert": false
+  },
+  "Aufgabe und Zwanzigerfeld": {
+   "datei": "florian/c4d6bdad6b9e.mp3",
+   "h": "34e505fd4f",
+   "gehoert": false
+  },
+  "Aufgaben leichter machen": {
+   "datei": "florian/9cf5b4c3bf5b.mp3",
+   "h": "e02a5fb18d",
+   "gehoert": false
+  },
+  "Aufgabenfamilie": {
+   "datei": "florian/fa0ed816aa41.mp3",
+   "h": "c7f41bb752",
+   "gehoert": false
+  },
+  "Aus Worten wird Rechnung": {
+   "datei": "florian/86f493c5cd2d.mp3",
+   "h": "efe679f53d",
+   "gehoert": false
+  },
+  "Ausgangslage, Ereignis, Ausgang": {
+   "datei": "florian/16853419425e.mp3",
+   "h": "c9ca158fee",
+   "gehoert": false
+  },
+  "Ausreden lassen": {
+   "datei": "florian/3f5e46ad183a.mp3",
+   "h": "81ea0f61ce",
+   "gehoert": false
+  },
+  "Balkendiagramm": {
+   "datei": "florian/7a2e6d63091b.mp3",
+   "h": "d6184692e5",
+   "gehoert": false
+  },
+  "Bandornamente": {
+   "datei": "florian/7b8d6b4d2567.mp3",
+   "h": "66a7181f21",
+   "gehoert": false
+  },
+  "Bastelanleitung": {
+   "datei": "florian/c4cedb88e593.mp3",
+   "h": "239efee8f9",
+   "gehoert": false
+  },
+  "Baumdiagramm": {
+   "datei": "florian/a8b738d62b09.mp3",
+   "h": "c1e99ec57b",
+   "gehoert": false
+  },
+  "Bauplan beschreiben": {
+   "datei": "florian/373e01ea24a8.mp3",
+   "h": "60ec8faad2",
+   "gehoert": false
+  },
+  "Bauplan zeichnen": {
+   "datei": "florian/30b2d6fe75ce.mp3",
+   "h": "96d4ee4da8",
+   "gehoert": false
+  },
+  "Becher und Haken": {
+   "datei": "florian/efd759c4e637.mp3",
+   "h": "9f799fd68c",
+   "gehoert": false
+  },
   "Bei großen Zahlen geht es genauso. Das Einhorn legt die Einer zu den Einern.": {
    "datei": "florian/8855a55ef0c9.mp3",
    "h": "3c7f1cb86c",
@@ -44,6 +274,121 @@
   "Beide Teile zusammen sind so lang wie der ganze Stab. Keine Perle fehlt.": {
    "datei": "florian/8e1fee80dc8a.mp3",
    "h": "6cc26ebbb4",
+   "gehoert": false
+  },
+  "Beide Zahlen wachsen": {
+   "datei": "florian/83e57f588ca2.mp3",
+   "h": "fc6e5c9329",
+   "gehoert": false
+  },
+  "Berg und Tal": {
+   "datei": "florian/e349691dff9f.mp3",
+   "h": "ba81086ed8",
+   "gehoert": false
+  },
+  "Besondere Formen": {
+   "datei": "florian/0dd596c1ba04.mp3",
+   "h": "d5c42af4e5",
+   "gehoert": false
+  },
+  "Betonen und Pause machen": {
+   "datei": "florian/a9f6b0e424fe.mp3",
+   "h": "b245b36f28",
+   "gehoert": false
+  },
+  "Bis zum Hunderter ergänzen": {
+   "datei": "florian/e4acac033b8e.mp3",
+   "h": "c41b45fe02",
+   "gehoert": false
+  },
+  "Bis zum nächsten Zehner": {
+   "datei": "florian/81e0e5b3afc4.mp3",
+   "h": "3cc8a9fcd3",
+   "gehoert": false
+  },
+  "Bitte überzeugend": {
+   "datei": "florian/daaea09ec57b.mp3",
+   "h": "d88cab3778",
+   "gehoert": false
+  },
+  "Blatt gestalten": {
+   "datei": "florian/6484f488969c.mp3",
+   "h": "5d069aeaf2",
+   "gehoert": false
+  },
+  "Blitzrechnen": {
+   "datei": "florian/253da3e9fa58.mp3",
+   "h": "aac7b7037a",
+   "gehoert": false
+  },
+  "Blitzwörter": {
+   "datei": "florian/eceac49abb2a.mp3",
+   "h": "995584bdbb",
+   "gehoert": false
+  },
+  "Bogen und Kellerstab": {
+   "datei": "florian/0a167091b05d.mp3",
+   "h": "fcb8e23ccb",
+   "gehoert": false
+  },
+  "Bogen und Stab": {
+   "datei": "florian/802047cf7394.mp3",
+   "h": "db2b499827",
+   "gehoert": false
+  },
+  "Bogen-Ziffern": {
+   "datei": "florian/7eecda04b1e6.mp3",
+   "h": "f9bbd3f0fe",
+   "gehoert": false
+  },
+  "Brief und E-Mail": {
+   "datei": "florian/34a7eb8fab79.mp3",
+   "h": "55a339a3c0",
+   "gehoert": false
+  },
+  "Brücken": {
+   "datei": "florian/a90e8d12b3cc.mp3",
+   "h": "9ff1088bb3",
+   "gehoert": false
+  },
+  "Brücken-Buchstaben": {
+   "datei": "florian/b113893103e2.mp3",
+   "h": "23cd180853",
+   "gehoert": false
+  },
+  "Brückenbuchstaben": {
+   "datei": "florian/b943ffdd47bc.mp3",
+   "h": "fa7e8b3be3",
+   "gehoert": false
+  },
+  "Buchstabe, Silbe, Wort, Satz": {
+   "datei": "florian/35b175436df5.mp3",
+   "h": "44461d6e19",
+   "gehoert": false
+  },
+  "Buchstabenpaare wie bei Zucker, Buch und Katze": {
+   "datei": "florian/3d05fe3f5380.mp3",
+   "h": "42701ab299",
+   "gehoert": false
+  },
+  "Buchtipp": {
+   "datei": "florian/f21d7a59c992.mp3",
+   "h": "a61e16e613",
+   "gehoert": false
+  },
+  "Chancen gezielt verändern": {
+   "datei": "florian/9307d0653fd3.mp3",
+   "h": "a3ebb1da00",
+   "gehoert": false
+  },
+  "Checkliste für Texte": {
+   "datei": "florian/3b3d7a5dfb64.mp3",
+   "h": "8626cd9e85",
+   "gehoert": false
+  },
+  "ck und tz bei kurzen Wörtern": {
+   "datei": "florian/6b465f93f756.mp3",
+   "h": "93db929f6a",
    "gehoert": false
   },
   "Dahinter kommt ein kleiner Stab.": {
@@ -61,6 +406,21 @@
    "h": "80f38e5ea2",
    "gehoert": false
   },
+  "Daran knüpf ich an": {
+   "datei": "florian/83d2bcec9373.mp3",
+   "h": "ab66eb64dc",
+   "gehoert": false
+  },
+  "Darstellungen bewerten": {
+   "datei": "florian/4d0e9bfe33b2.mp3",
+   "h": "3903b43619",
+   "gehoert": false
+  },
+  "Das Alphabet der Reihe nach": {
+   "datei": "florian/a7407fceb210.mp3",
+   "h": "2f60d3ee1a",
+   "gehoert": false
+  },
   "Das Auto ist rot.": {
    "datei": "florian/cd8b2aa3e3db.mp3",
    "h": "1a15508397",
@@ -71,14 +431,19 @@
    "h": "b397a41e82",
    "gehoert": false
   },
-  "Das Boot sinkt.": {
-   "datei": "florian/b39da73f351a.mp3",
-   "h": "db4e9ed3ee",
+  "Das Boot fährt.": {
+   "datei": "florian/db34fec876b9.mp3",
+   "h": "ddd2d93025",
    "gehoert": false
   },
   "Das Buch ist neu.": {
    "datei": "florian/506c1a3ab387.mp3",
    "h": "ed3f42f803",
+   "gehoert": false
+  },
+  "Das Buchstabenhaus": {
+   "datei": "florian/981290c7319f.mp3",
+   "h": "2fbd10a05d",
    "gehoert": false
   },
   "Das Einhorn dreht die Teile um. Der Stab bleibt genau so lang.": {
@@ -101,9 +466,9 @@
    "h": "42d9991fbd",
    "gehoert": false
   },
-  "Das Einhorn legt die beiden Teile zusammen. Plus heißt: zusammenlegen.": {
-   "datei": "florian/4cbfcdc543f5.mp3",
-   "h": "d4e8edb139",
+  "Das Einhorn legt die beiden Teile zusammen. Zusammen sind sie so lang wie die ganze Brücke.": {
+   "datei": "florian/ad7e22f93591.mp3",
+   "h": "8886876be1",
    "gehoert": false
   },
   "Das Einhorn legt genau so viele Perlen dazu, dass ein neuer Zehner voll wird.": {
@@ -124,6 +489,11 @@
   "Das Einhorn nimmt ein paar Perlen vom kleinen Stab weg. Die Zehnerstäbe bleiben liegen.": {
    "datei": "florian/b401a311dce9.mp3",
    "h": "d95b720e12",
+   "gehoert": false
+  },
+  "Das Einhorn ruht sich aus.": {
+   "datei": "florian/ed4664e6a080.mp3",
+   "h": "01d1e32f6e",
    "gehoert": false
   },
   "Das Einhorn soll ein paar Perlen wegnehmen. Es nimmt sie vom kleinen Stab.": {
@@ -156,9 +526,34 @@
    "h": "eea96cc758",
    "gehoert": false
   },
-  "Das Ergebnis ist größer als die zwei Teile.": {
-   "datei": "florian/e017032c7010.mp3",
-   "h": "a9ba7c6fdc",
+  "Das Ende wie bei Kater": {
+   "datei": "florian/9eaf38ba2ede.mp3",
+   "h": "8eaf4d1c33",
+   "gehoert": false
+  },
+  "Das Ende wie bei Kugel": {
+   "datei": "florian/4653a23206f2.mp3",
+   "h": "49bd8db5ec",
+   "gehoert": false
+  },
+  "Das Ende wie bei rufen": {
+   "datei": "florian/b0f1bc78c540.mp3",
+   "h": "1423bff07b",
+   "gehoert": false
+  },
+  "Das Gleichheitszeichen heißt gleich viel": {
+   "datei": "florian/dba6d0885856.mp3",
+   "h": "9ccab78fe1",
+   "gehoert": false
+  },
+  "Das Ich-mag-Gedicht": {
+   "datei": "florian/6b9d1452c84d.mp3",
+   "h": "e14a5b7453",
+   "gehoert": false
+  },
+  "Das ist schön": {
+   "datei": "florian/e30d0850721d.mp3",
+   "h": "a5f84a584c",
    "gehoert": false
   },
   "Das kannst du jetzt zerlegen.": {
@@ -181,6 +576,16 @@
    "h": "53847579db",
    "gehoert": false
   },
+  "Das leise Ende wie bei Tante": {
+   "datei": "florian/c5de5bdf2c40.mp3",
+   "h": "12e88574a2",
+   "gehoert": false
+  },
+  "Das oder dass?": {
+   "datei": "florian/d5d2dc4b87f7.mp3",
+   "h": "f581690d4c",
+   "gehoert": false
+  },
   "Das Pferd frisst einen Apfel.": {
    "datei": "florian/f99a8405635b.mp3",
    "h": "c1c4c536ba",
@@ -201,14 +606,79 @@
    "h": "45aaaa9bce",
    "gehoert": false
   },
+  "Das Prädikat": {
+   "datei": "florian/ac63aec13a87.mp3",
+   "h": "b647ead328",
+   "gehoert": false
+  },
   "Das Spiel geht gerade nicht.": {
    "datei": "florian/13f719f660b1.mp3",
    "h": "42f08fd67a",
    "gehoert": false
   },
-  "Das stimmt nicht. Probier noch mal.": {
-   "datei": "florian/688f59899ee4.mp3",
-   "h": "1744f67cca",
+  "Das Subjekt": {
+   "datei": "florian/1ace701946de.mp3",
+   "h": "af13fc473e",
+   "gehoert": false
+  },
+  "Das verbindende S": {
+   "datei": "florian/3a9072ce79b7.mp3",
+   "h": "94f0c5857d",
+   "gehoert": false
+  },
+  "Das Wichtigste": {
+   "datei": "florian/83cf0640f7f0.mp3",
+   "h": "c0d113ac79",
+   "gehoert": false
+  },
+  "Daten sammeln und darstellen": {
+   "datei": "florian/6037f15a4796.mp3",
+   "h": "3008f175a3",
+   "gehoert": false
+  },
+  "Den Anfang wie bei Qualle schreiben": {
+   "datei": "florian/6707396cefe6.mp3",
+   "h": "947181c0a6",
+   "gehoert": false
+  },
+  "Den Laut wie bei Auto schreiben": {
+   "datei": "florian/28ff5aed6d67.mp3",
+   "h": "a5ab3a503e",
+   "gehoert": false
+  },
+  "Den Laut wie bei Eis schreiben": {
+   "datei": "florian/c2a37f35a438.mp3",
+   "h": "1baf21e6f4",
+   "gehoert": false
+  },
+  "Den Laut wie bei Eule schreiben": {
+   "datei": "florian/9deb4039a194.mp3",
+   "h": "c545072b1c",
+   "gehoert": false
+  },
+  "Den Laut wie bei Pferd schreiben": {
+   "datei": "florian/dae56e4c7cf9.mp3",
+   "h": "727db19435",
+   "gehoert": false
+  },
+  "Den Laut wie bei Schaf schreiben": {
+   "datei": "florian/8f2f64d29c74.mp3",
+   "h": "ac2732b7ea",
+   "gehoert": false
+  },
+  "Der Ach-Laut wie bei Dach": {
+   "datei": "florian/d7e2b49c0462.mp3",
+   "h": "db690d8e43",
+   "gehoert": false
+  },
+  "Der Anfang wie bei Spinne": {
+   "datei": "florian/fad1d0086ea7.mp3",
+   "h": "bfd3db83a9",
+   "gehoert": false
+  },
+  "Der Anfang wie bei Stern": {
+   "datei": "florian/a6e35efe55c4.mp3",
+   "h": "9aaf1fab55",
    "gehoert": false
   },
   "Der Ball liegt auf dem Dach.": {
@@ -221,6 +691,36 @@
    "h": "d4ce1d477f",
    "gehoert": false
   },
+  "Der Buchstabe aus Vater und Vase": {
+   "datei": "florian/88df0c57c1fd.mp3",
+   "h": "7c6fdf0092",
+   "gehoert": false
+  },
+  "Der Buchstabe wie bei Esel": {
+   "datei": "florian/583109dccfcd.mp3",
+   "h": "b5afb52262",
+   "gehoert": false
+  },
+  "Der Buchstabe wie bei Rose": {
+   "datei": "florian/437724672f20.mp3",
+   "h": "1a347fc79e",
+   "gehoert": false
+  },
+  "Der Buchstabe wie bei Sonne": {
+   "datei": "florian/d1b26a5c17c9.mp3",
+   "h": "51450251a9",
+   "gehoert": false
+  },
+  "Der Buchstabe wie bei Straße": {
+   "datei": "florian/e9c960d634d2.mp3",
+   "h": "93e58fbe57",
+   "gehoert": false
+  },
+  "Der Buchstabe wie bei Tante": {
+   "datei": "florian/516d2d7889fa.mp3",
+   "h": "8a44129b7c",
+   "gehoert": false
+  },
   "Der Bus hupt.": {
    "datei": "florian/daf4db713cdd.mp3",
    "h": "2be7234f93",
@@ -231,9 +731,29 @@
    "h": "044f9f66f7",
    "gehoert": false
   },
+  "Der Erste bis der Zehnte": {
+   "datei": "florian/8dbf61a9b441.mp3",
+   "h": "1f47a1b328",
+   "gehoert": false
+  },
   "Der Frosch springt in den Teich.": {
    "datei": "florian/7546579c383f.mp3",
    "h": "268ef5abc2",
+   "gehoert": false
+  },
+  "Der Fünfertrick": {
+   "datei": "florian/687ca9271798.mp3",
+   "h": "0b88d304f5",
+   "gehoert": false
+  },
+  "Der gute Schluss": {
+   "datei": "florian/424328818b0a.mp3",
+   "h": "dc687b5a9d",
+   "gehoert": false
+  },
+  "Der Hauch zwischen den Silben": {
+   "datei": "florian/cf1dcf6bde5b.mp3",
+   "h": "fd0cd8a0ce",
    "gehoert": false
   },
   "der Hund – die Katze – das Einhorn": {
@@ -261,6 +781,11 @@
    "h": "44c983dbbb",
    "gehoert": false
   },
+  "Der Ich-Laut wie bei Licht": {
+   "datei": "florian/5da7beb6b2a1.mp3",
+   "h": "546ee82fde",
+   "gehoert": false
+  },
   "Der Igel isst.": {
    "datei": "florian/fb2faa9ded24.mp3",
    "h": "3b00859828",
@@ -274,6 +799,226 @@
   "Der Igel sucht im Laub.": {
    "datei": "florian/039e52479224.mp3",
    "h": "d705aeb0fd",
+   "gehoert": false
+  },
+  "Der Knoten": {
+   "datei": "florian/36129a9fcf42.mp3",
+   "h": "a055f787ac",
+   "gehoert": false
+  },
+  "Der lange Laut wie bei Biene": {
+   "datei": "florian/bcd0164bf139.mp3",
+   "h": "ae433c916e",
+   "gehoert": false
+  },
+  "Der lange Laut wie bei Wiese": {
+   "datei": "florian/c83a287b9372.mp3",
+   "h": "03a7d4ae84",
+   "gehoert": false
+  },
+  "Der Laut wie bei Alphabet": {
+   "datei": "florian/db9f09b47211.mp3",
+   "h": "398bae5983",
+   "gehoert": false
+  },
+  "Der Laut wie bei Ameise": {
+   "datei": "florian/146844354fe2.mp3",
+   "h": "4da73dea85",
+   "gehoert": false
+  },
+  "Der Laut wie bei Auto": {
+   "datei": "florian/359185bf427c.mp3",
+   "h": "b7b0a0bf57",
+   "gehoert": false
+  },
+  "Der Laut wie bei Banane": {
+   "datei": "florian/46f2a55daaa7.mp3",
+   "h": "b8257d844a",
+   "gehoert": false
+  },
+  "Der Laut wie bei Bank": {
+   "datei": "florian/eaa94b1bf89f.mp3",
+   "h": "6cb62f34fb",
+   "gehoert": false
+  },
+  "Der Laut wie bei Clown": {
+   "datei": "florian/d2f698c2126b.mp3",
+   "h": "e5665d23c5",
+   "gehoert": false
+  },
+  "Der Laut wie bei Decke": {
+   "datei": "florian/32bce3fe8788.mp3",
+   "h": "355b6faa91",
+   "gehoert": false
+  },
+  "Der Laut wie bei Dose": {
+   "datei": "florian/3e8e2e101ec9.mp3",
+   "h": "358b6704fe",
+   "gehoert": false
+  },
+  "Der Laut wie bei Eis": {
+   "datei": "florian/9db78274138f.mp3",
+   "h": "090b354dbf",
+   "gehoert": false
+  },
+  "Der Laut wie bei Esel": {
+   "datei": "florian/9a1224a1fa75.mp3",
+   "h": "13a7a8b2ff",
+   "gehoert": false
+  },
+  "Der Laut wie bei Eule": {
+   "datei": "florian/7cd5c17bf12e.mp3",
+   "h": "fe863eb603",
+   "gehoert": false
+  },
+  "Der Laut wie bei Feder": {
+   "datei": "florian/5f972f8307ec.mp3",
+   "h": "67a1310ea6",
+   "gehoert": false
+  },
+  "Der Laut wie bei Fuß": {
+   "datei": "florian/5ddf1020a763.mp3",
+   "h": "ccd3546ac6",
+   "gehoert": false
+  },
+  "Der Laut wie bei Gabel": {
+   "datei": "florian/fc315a78cf1c.mp3",
+   "h": "95a23f36ec",
+   "gehoert": false
+  },
+  "Der Laut wie bei Hai, anders geschrieben": {
+   "datei": "florian/f320bcb06edd.mp3",
+   "h": "f194b5e37a",
+   "gehoert": false
+  },
+  "Der Laut wie bei Häuser": {
+   "datei": "florian/c9baf26bdc51.mp3",
+   "h": "657a450b09",
+   "gehoert": false
+  },
+  "Der Laut wie bei Hexe": {
+   "datei": "florian/c42cbaef560f.mp3",
+   "h": "5440a5b5d7",
+   "gehoert": false
+  },
+  "Der Laut wie bei Hose": {
+   "datei": "florian/d63e123793c1.mp3",
+   "h": "c421a1ac15",
+   "gehoert": false
+  },
+  "Der Laut wie bei Igel": {
+   "datei": "florian/77c0f7e315b0.mp3",
+   "h": "645f91115a",
+   "gehoert": false
+  },
+  "Der Laut wie bei Jacke": {
+   "datei": "florian/5c9f8380a834.mp3",
+   "h": "1515c649f6",
+   "gehoert": false
+  },
+  "Der Laut wie bei Käse": {
+   "datei": "florian/682e3ab08023.mp3",
+   "h": "48f4528447",
+   "gehoert": false
+  },
+  "Der Laut wie bei Katze": {
+   "datei": "florian/90887118b3e2.mp3",
+   "h": "44b484a827",
+   "gehoert": false
+  },
+  "Der Laut wie bei Kino": {
+   "datei": "florian/e1137b6936b8.mp3",
+   "h": "385bbe8dd9",
+   "gehoert": false
+  },
+  "Der Laut wie bei Lama": {
+   "datei": "florian/98cd02d3936b.mp3",
+   "h": "51159028b8",
+   "gehoert": false
+  },
+  "Der Laut wie bei Löwe": {
+   "datei": "florian/21b1fe9d6436.mp3",
+   "h": "37b16cf6cb",
+   "gehoert": false
+  },
+  "Der Laut wie bei Mama": {
+   "datei": "florian/362021fc4d2d.mp3",
+   "h": "3ce77ab80d",
+   "gehoert": false
+  },
+  "Der Laut wie bei Nase": {
+   "datei": "florian/9bc80731cab6.mp3",
+   "h": "ca8cb05037",
+   "gehoert": false
+  },
+  "Der Laut wie bei Ofen": {
+   "datei": "florian/d8f5599eaf0c.mp3",
+   "h": "c2c9641f71",
+   "gehoert": false
+  },
+  "Der Laut wie bei Papa": {
+   "datei": "florian/bf435f03d318.mp3",
+   "h": "eb1199dd77",
+   "gehoert": false
+  },
+  "Der Laut wie bei Pferd": {
+   "datei": "florian/f29a02dde659.mp3",
+   "h": "0590fce138",
+   "gehoert": false
+  },
+  "Der Laut wie bei Pony": {
+   "datei": "florian/0d1fc4aaeacf.mp3",
+   "h": "7b678e4aa5",
+   "gehoert": false
+  },
+  "Der Laut wie bei Qualle": {
+   "datei": "florian/9a9ad668a3ba.mp3",
+   "h": "ecdeed283b",
+   "gehoert": false
+  },
+  "Der Laut wie bei Rasen": {
+   "datei": "florian/47f6ef444365.mp3",
+   "h": "973a8d19c6",
+   "gehoert": false
+  },
+  "Der Laut wie bei Ring": {
+   "datei": "florian/a28ce329f8a7.mp3",
+   "h": "844c12afca",
+   "gehoert": false
+  },
+  "Der Laut wie bei Schaf": {
+   "datei": "florian/42671d7b90a1.mp3",
+   "h": "4cb403b1b4",
+   "gehoert": false
+  },
+  "Der Laut wie bei Sofa": {
+   "datei": "florian/f8a3af8af5f9.mp3",
+   "h": "49443700a1",
+   "gehoert": false
+  },
+  "Der Laut wie bei Tomate": {
+   "datei": "florian/7ca37846a529.mp3",
+   "h": "42b5a5ef14",
+   "gehoert": false
+  },
+  "Der Laut wie bei Tür": {
+   "datei": "florian/a2d0b70bf907.mp3",
+   "h": "35a1813f99",
+   "gehoert": false
+  },
+  "Der Laut wie bei Uhu": {
+   "datei": "florian/918329a5c7b6.mp3",
+   "h": "43644c4e66",
+   "gehoert": false
+  },
+  "Der Laut wie bei Wal": {
+   "datei": "florian/a8003f11dcd4.mp3",
+   "h": "e494de270b",
+   "gehoert": false
+  },
+  "Der Laut wie bei Zahn": {
+   "datei": "florian/59b3baa25130.mp3",
+   "h": "fb1c3eca3c",
    "gehoert": false
   },
   "Der Mond ist rund.": {
@@ -291,9 +1036,39 @@
    "h": "90c89f7023",
    "gehoert": false
   },
+  "Der Stamm verändert sich": {
+   "datei": "florian/4452c03c9639.mp3",
+   "h": "2698d31270",
+   "gehoert": false
+  },
+  "Der Stopper wie bei Jacke": {
+   "datei": "florian/8d6be4afcd23.mp3",
+   "h": "ac152ec870",
+   "gehoert": false
+  },
+  "Der Stopper wie bei Spatz": {
+   "datei": "florian/9d204580668c.mp3",
+   "h": "9e450ef889",
+   "gehoert": false
+  },
+  "Der versteckte Laut wie bei Garten": {
+   "datei": "florian/e442f3e49250.mp3",
+   "h": "518792a191",
+   "gehoert": false
+  },
   "Der Wind weht.": {
    "datei": "florian/0da2a378fb41.mp3",
    "h": "01f2a7a4ef",
+   "gehoert": false
+  },
+  "Der Wortstamm bleibt": {
+   "datei": "florian/e5c08cb4f54d.mp3",
+   "h": "39ce42bf41",
+   "gehoert": false
+  },
+  "Der Zauberbogen": {
+   "datei": "florian/1bea03ca24da.mp3",
+   "h": "c2927ede0f",
    "gehoert": false
   },
   "Der Zehner und noch was": {
@@ -306,9 +1081,29 @@
    "h": "e81ab08311",
    "gehoert": false
   },
+  "der, die, das": {
+   "datei": "florian/6823272b065b.mp3",
+   "h": "ef2054c003",
+   "gehoert": false
+  },
+  "Diagramme kritisch lesen": {
+   "datei": "florian/c8e33f7b74ef.mp3",
+   "h": "5977614901",
+   "gehoert": false
+  },
+  "Die beste Überschrift": {
+   "datei": "florian/66a6b68221c4.mp3",
+   "h": "8566e4db01",
+   "gehoert": false
+  },
   "Die Brücke soll einen ganzen Zehnerstab bekommen. Dem langen Stab fehlen nur wenige Perlen.": {
    "datei": "florian/6f084a2fd57c.mp3",
    "h": "19de4964c8",
+   "gehoert": false
+  },
+  "Die Buchstaben wie bei Zebra und Hexe": {
+   "datei": "florian/b5415d860222.mp3",
+   "h": "e786a60be4",
    "gehoert": false
   },
   "Die Ente ist im Teich.": {
@@ -326,6 +1121,11 @@
    "h": "f093c1b97b",
    "gehoert": false
   },
+  "Die Fälle": {
+   "datei": "florian/48a4d3f9ecb1.mp3",
+   "h": "821f0d6098",
+   "gehoert": false
+  },
   "Die Katze miaut.": {
    "datei": "florian/8f2de4a28683.mp3",
    "h": "ffe65d7524",
@@ -339,6 +1139,11 @@
   "Die Katze sitzt im Gras.": {
    "datei": "florian/36e9f24d5b65.mp3",
    "h": "4bbdc3bc9d",
+   "gehoert": false
+  },
+  "Die kleine Aufgabe hilft": {
+   "datei": "florian/26f463348190.mp3",
+   "h": "a57a9342d6",
    "gehoert": false
   },
   "Die kleinen Stäbe werden zu einem goldenen Zehnerstab. Jetzt liegen da nur noch Zehner.": {
@@ -356,6 +1161,16 @@
    "h": "6f2e20b5e4",
    "gehoert": false
   },
+  "Die Laute wie bei ich und Dach schreiben": {
+   "datei": "florian/a6e9e428eb84.mp3",
+   "h": "9ba9ca1680",
+   "gehoert": false
+  },
+  "Die Laute wie bei Ring und Bank schreiben": {
+   "datei": "florian/38e621baf108.mp3",
+   "h": "17cb7f7c35",
+   "gehoert": false
+  },
   "Die Maus piept.": {
    "datei": "florian/66d0421eee79.mp3",
    "h": "3a2f63fc76",
@@ -371,9 +1186,29 @@
    "h": "d04060d48f",
    "gehoert": false
   },
+  "Die richtige Schrift wählen": {
+   "datei": "florian/26c0fc391a49.mp3",
+   "h": "a5213e2e67",
+   "gehoert": false
+  },
+  "Die Schnecke rollt": {
+   "datei": "florian/5e0435fefde7.mp3",
+   "h": "e59cbc51f6",
+   "gehoert": false
+  },
+  "Die schönsten Wörter finden": {
+   "datei": "florian/8918b84adb7e.mp3",
+   "h": "09b35ac7f0",
+   "gehoert": false
+  },
   "Die Sonne lacht.": {
    "datei": "florian/b6f4bb711fc9.mp3",
    "h": "cf9f8e3cbc",
+   "gehoert": false
+  },
+  "Die Straße": {
+   "datei": "florian/025ba0acb513.mp3",
+   "h": "d9cbbd3192",
    "gehoert": false
   },
   "Die Tür ist zu.": {
@@ -384,6 +1219,11 @@
   "Die Uhr tickt.": {
    "datei": "florian/6fc8bd12d1fd.mp3",
    "h": "611ad44d46",
+   "gehoert": false
+  },
+  "Die Vorsilben wie bei verstecken und vorsingen": {
+   "datei": "florian/291b8a8c5f2b.mp3",
+   "h": "99c87cb673",
    "gehoert": false
   },
   "Diese Brücke braucht genau so viele Perlen. Sie sitzen alle auf einem Stab.": {
@@ -401,9 +1241,109 @@
    "h": "6cb8721bab",
    "gehoert": false
   },
-  "Du bist toll.": {
-   "datei": "florian/00acbe452296.mp3",
-   "h": "1228c66034",
+  "Diese zwei passen nicht zusammen.": {
+   "datei": "florian/ac6098cb989e.mp3",
+   "h": "1b312778de",
+   "gehoert": false
+  },
+  "Digitaluhr und Nachmittag": {
+   "datei": "florian/8bc63e7cfd33.mp3",
+   "h": "901ffe3c22",
+   "gehoert": false
+  },
+  "Doppel-S nach kurzem Vokal": {
+   "datei": "florian/8dbe87a2e2a5.mp3",
+   "h": "907ae9b4fa",
+   "gehoert": false
+  },
+  "Doppelauftrag": {
+   "datei": "florian/93662359e06a.mp3",
+   "h": "5450b91294",
+   "gehoert": false
+  },
+  "Doppelt bei kurzen Wörtern": {
+   "datei": "florian/2a9061f3140e.mp3",
+   "h": "e3c400a5dd",
+   "gehoert": false
+  },
+  "Doppelt in Verbformen": {
+   "datei": "florian/d3f2cc7eada6.mp3",
+   "h": "b65a34c89f",
+   "gehoert": false
+  },
+  "Doppelte Konsonanten wie bei Kanne": {
+   "datei": "florian/2bd50d22491e.mp3",
+   "h": "3377804587",
+   "gehoert": false
+  },
+  "Doppelte Konsonanten wie bei knurren": {
+   "datei": "florian/1ff8b6853d9d.mp3",
+   "h": "2a9cbbdb7a",
+   "gehoert": false
+  },
+  "Doppelte Konsonanten wie bei Puppe": {
+   "datei": "florian/07ec8aba57dc.mp3",
+   "h": "ffa5bdf357",
+   "gehoert": false
+  },
+  "Doppelte Konsonanten wie bei Waffel": {
+   "datei": "florian/ba4a9f3f8edf.mp3",
+   "h": "f6c6301c46",
+   "gehoert": false
+  },
+  "Drehen im Kopf": {
+   "datei": "florian/e3d17389a014.mp3",
+   "h": "7ca157489b",
+   "gehoert": false
+  },
+  "Dreierauftrag": {
+   "datei": "florian/3c847292726d.mp3",
+   "h": "c00487da20",
+   "gehoert": false
+  },
+  "Dreierreihe": {
+   "datei": "florian/6ad89265f074.mp3",
+   "h": "b96dc65013",
+   "gehoert": false
+  },
+  "Dreistellige Zahlen lesen und schreiben": {
+   "datei": "florian/95628afca589.mp3",
+   "h": "b780417828",
+   "gehoert": false
+  },
+  "Druck wird Schreibschrift": {
+   "datei": "florian/d67be6129966.mp3",
+   "h": "0d503b566d",
+   "gehoert": false
+  },
+  "Druckschrift und Schreibschrift vergleichen": {
+   "datei": "florian/f4404c690d2c.mp3",
+   "h": "bc01100a24",
+   "gehoert": false
+  },
+  "Du bist dran.": {
+   "datei": "florian/4947d47e34f2.mp3",
+   "h": "11fb0ce1f4",
+   "gehoert": false
+  },
+  "Ecken und Seiten zählen": {
+   "datei": "florian/3db2a4401116.mp3",
+   "h": "bf6f37aef3",
+   "gehoert": false
+  },
+  "Ecken, Kanten, Flächen": {
+   "datei": "florian/3267700ea073.mp3",
+   "h": "875407d7e2",
+   "gehoert": false
+  },
+  "Eigene Knobelaufgabe erfinden": {
+   "datei": "florian/33b663a84004.mp3",
+   "h": "978d7851c3",
+   "gehoert": false
+  },
+  "Eigenen Text durchsehen": {
+   "datei": "florian/ef1f3779f573.mp3",
+   "h": "b349f5cac9",
    "gehoert": false
   },
   "Ein ganzer Stab geht weg, der andere bleibt. Du musst nichts abzählen.": {
@@ -426,14 +1366,99 @@
    "h": "e2ffdaba97",
    "gehoert": false
   },
+  "Einfach oder doppelt": {
+   "datei": "florian/bc654151b8a8.mp3",
+   "h": "43466430e0",
+   "gehoert": false
+  },
+  "Einfache Würfelbauten": {
+   "datei": "florian/a1a12b0e35ad.mp3",
+   "h": "a0022fb18b",
+   "gehoert": false
+  },
   "Einhorn-Steine. Leerzeichen. Hör zu und schreib den Satz mit Abständen.": {
    "datei": "florian/b04f51ff90b2.mp3",
    "h": "659ad4c068",
    "gehoert": false
   },
+  "Einmaleins gemischt": {
+   "datei": "florian/fd13626f6fb8.mp3",
+   "h": "fbb8389c75",
+   "gehoert": false
+  },
+  "Einmaleins sicher": {
+   "datei": "florian/7e77fec5c7cd.mp3",
+   "h": "e68665633e",
+   "gehoert": false
+  },
+  "Einzahl oder Mehrzahl?": {
+   "datei": "florian/b59d0edfb9ac.mp3",
+   "h": "99fed866f5",
+   "gehoert": false
+  },
+  "Elfchen-Gedicht": {
+   "datei": "florian/f84cd5afcc42.mp3",
+   "h": "1ea0c6abaa",
+   "gehoert": false
+  },
+  "Ende oder entdecken?": {
+   "datei": "florian/d13dcfe9dc8a.mp3",
+   "h": "3c87779a1f",
+   "gehoert": false
+  },
+  "Endlaut hören": {
+   "datei": "florian/c5be7fc27f04.mp3",
+   "h": "77a8514d04",
+   "gehoert": false
+  },
+  "Endung wie bei lustig": {
+   "datei": "florian/426eda6b7808.mp3",
+   "h": "9bf6eedf24",
+   "gehoert": false
+  },
+  "Entbündeln über die Nullstelle": {
+   "datei": "florian/8a5ad02ad3d7.mp3",
+   "h": "2bd39d94bf",
+   "gehoert": false
+  },
   "Er hat ein Bild gemalt.": {
    "datei": "florian/a7759188e92c.mp3",
    "h": "4d75513103",
+   "gehoert": false
+  },
+  "Ergänzen statt Abziehen": {
+   "datei": "florian/8c2573a40b13.mp3",
+   "h": "a411b4ef6f",
+   "gehoert": false
+  },
+  "Ergänzen zu Stufenzahlen": {
+   "datei": "florian/4054fed35ba2.mp3",
+   "h": "7e4de2a5dc",
+   "gehoert": false
+  },
+  "Ergänzen zum Hunderter und zu tausend": {
+   "datei": "florian/7d3f1de2c00c.mp3",
+   "h": "268732a1b0",
+   "gehoert": false
+  },
+  "Ergänzen zum vollen Zehner": {
+   "datei": "florian/a75bbe2a9a54.mp3",
+   "h": "66b3fd0844",
+   "gehoert": false
+  },
+  "Erklären für Jüngere": {
+   "datei": "florian/8f5a28dbc56b.mp3",
+   "h": "71ce006527",
+   "gehoert": false
+  },
+  "Erklärung ordnen": {
+   "datei": "florian/28bf3e558a1a.mp3",
+   "h": "d221801390",
+   "gehoert": false
+  },
+  "Ersetzen, weglassen, erweitern": {
+   "datei": "florian/2cb1a9a55ba0.mp3",
+   "h": "0634ab6c77",
    "gehoert": false
   },
   "Erst bis zum Zehner auffüllen, dann den Rest dazu. So kommst du über den Zehner.": {
@@ -446,14 +1471,194 @@
    "h": "344ddfa6a3",
    "gehoert": false
   },
+  "Erst zum vollen Zehner, dann weiter": {
+   "datei": "florian/f364a06a3a79.mp3",
+   "h": "1327235838",
+   "gehoert": false
+  },
+  "Erst, dann, zum Schluss": {
+   "datei": "florian/eaf982665287.mp3",
+   "h": "2faaf4e3c2",
+   "gehoert": false
+  },
+  "Erste Silben lesen": {
+   "datei": "florian/fa0883c03a3a.mp3",
+   "h": "5705234faa",
+   "gehoert": false
+  },
+  "Erste Stelle zu klein": {
+   "datei": "florian/c3258c7a8a72.mp3",
+   "h": "4d59f85600",
+   "gehoert": false
+  },
+  "Erzähl mir von deinem Tag": {
+   "datei": "florian/1fd11c33a075.mp3",
+   "h": "12b66dbabf",
+   "gehoert": false
+  },
   "Es ist kalt.": {
    "datei": "florian/21045bb86b05.mp3",
    "h": "e3f20778c2",
    "gehoert": false
   },
-  "Für heute ist Schluss. Bis morgen!": {
-   "datei": "florian/06b5076fe079.mp3",
-   "h": "6733402b90",
+  "Es war einmal": {
+   "datei": "florian/a6075bcbe3e1.mp3",
+   "h": "24a0ce815e",
+   "gehoert": false
+  },
+  "Euro und Cent": {
+   "datei": "florian/ecdb87eeba5d.mp3",
+   "h": "65d47221ee",
+   "gehoert": false
+  },
+  "Euro-Scheine": {
+   "datei": "florian/b2572efd926f.mp3",
+   "h": "eaf6f35602",
+   "gehoert": false
+  },
+  "Fabel erkennen": {
+   "datei": "florian/ca89ab7a1e9a.mp3",
+   "h": "3a962b1d31",
+   "gehoert": false
+  },
+  "Fachbegriffe Geometrie": {
+   "datei": "florian/c25af92a0c56.mp3",
+   "h": "8817cc8f6a",
+   "gehoert": false
+  },
+  "Fahrpläne": {
+   "datei": "florian/99778889b382.mp3",
+   "h": "1a54a05ef1",
+   "gehoert": false
+  },
+  "Fall nach Verhältniswort": {
+   "datei": "florian/bd2811d9c81e.mp3",
+   "h": "7d6498aa0c",
+   "gehoert": false
+  },
+  "Falten, zerlegen, drehen": {
+   "datei": "florian/c97d756fc3f6.mp3",
+   "h": "04d170bab3",
+   "gehoert": false
+  },
+  "Faltschnitte und Spiegelbilder": {
+   "datei": "florian/df16531e748a.mp3",
+   "h": "ffa5fd0fa2",
+   "gehoert": false
+  },
+  "Fang beim Ganzen an, bei der größten Zahl. Welcher Teil gehört dazu?": {
+   "datei": "florian/190d775a3df2.mp3",
+   "h": "34f10a4674",
+   "gehoert": false
+  },
+  "Fast-Verdoppeln": {
+   "datei": "florian/4aab8edc49a3.mp3",
+   "h": "c3a9e11ed9",
+   "gehoert": false
+  },
+  "Fertig zum Aufhängen": {
+   "datei": "florian/5052cc0f5094.mp3",
+   "h": "56a4a88351",
+   "gehoert": false
+  },
+  "Fettgedrucktes nutzen": {
+   "datei": "florian/9a0badebbaa7.mp3",
+   "h": "a811690441",
+   "gehoert": false
+  },
+  "Figur beschreiben": {
+   "datei": "florian/489cb15505e3.mp3",
+   "h": "c056d9dc5f",
+   "gehoert": false
+  },
+  "Fläche oder Umfang?": {
+   "datei": "florian/49512910b4d3.mp3",
+   "h": "fc7687b22d",
+   "gehoert": false
+  },
+  "Flächen auslegen und vergleichen": {
+   "datei": "florian/fd54162de699.mp3",
+   "h": "1a41e67b47",
+   "gehoert": false
+  },
+  "Flächeninhalt in Kästchen": {
+   "datei": "florian/5fa8d75c3a6d.mp3",
+   "h": "e84fd45160",
+   "gehoert": false
+  },
+  "Flott und flüssig": {
+   "datei": "florian/db76b188bf62.mp3",
+   "h": "7b79e28c43",
+   "gehoert": false
+  },
+  "Formen sortieren": {
+   "datei": "florian/1569c7381219.mp3",
+   "h": "e4a072b7b9",
+   "gehoert": false
+  },
+  "Formen spannen": {
+   "datei": "florian/ea5735b15d4a.mp3",
+   "h": "e3627dca08",
+   "gehoert": false
+  },
+  "Formenmuster fortsetzen": {
+   "datei": "florian/0ba5e8398c0e.mp3",
+   "h": "c6b660c76b",
+   "gehoert": false
+  },
+  "Forschungsbericht ergänzen": {
+   "datei": "florian/27763dd79259.mp3",
+   "h": "96e2de3fdc",
+   "gehoert": false
+  },
+  "Frage finden": {
+   "datei": "florian/0af54402d709.mp3",
+   "h": "479970856f",
+   "gehoert": false
+  },
+  "Frage zum Text": {
+   "datei": "florian/65b8ddf5ae95.mp3",
+   "h": "b925ea42ef",
+   "gehoert": false
+  },
+  "Frage, Rechnung, Antwort": {
+   "datei": "florian/675bdb2a8439.mp3",
+   "h": "b2bb1b941e",
+   "gehoert": false
+  },
+  "Fragen klingen anders": {
+   "datei": "florian/bdb2e790f666.mp3",
+   "h": "298d46edd8",
+   "gehoert": false
+  },
+  "Fragen selbst stellen": {
+   "datei": "florian/ca50b2bcd5ce.mp3",
+   "h": "accce67da3",
+   "gehoert": false
+  },
+  "Fragezeichen und Ausrufezeichen": {
+   "datei": "florian/6c73aae7132a.mp3",
+   "h": "2e711ba2d8",
+   "gehoert": false
+  },
+  "Fremdwörter mit Mustern": {
+   "datei": "florian/635778b08fbe.mp3",
+   "h": "187bdcbb15",
+   "gehoert": false
+  },
+  "Fünferreihe": {
+   "datei": "florian/14b6e683a9c2.mp3",
+   "h": "dff8eeec94",
+   "gehoert": false
+  },
+  "Für wen schreibe ich": {
+   "datei": "florian/74adb24082b2.mp3",
+   "h": "551af43a7a",
+   "gehoert": false
+  },
+  "Ganz rund": {
+   "datei": "florian/80d88da78aea.mp3",
+   "h": "0227aa03c0",
    "gehoert": false
   },
   "Ganz unten im Tal wird der Bach zum Fluss. Dort braucht das Einhorn viele Zehnerstäbe.": {
@@ -466,9 +1671,359 @@
    "h": "8818679d76",
    "gehoert": false
   },
+  "Gedicht lebendig vorlesen": {
+   "datei": "florian/0c1fbc253fcc.mp3",
+   "h": "8f585e7f82",
+   "gehoert": false
+  },
+  "Gedicht umbauen": {
+   "datei": "florian/0b7b6d958169.mp3",
+   "h": "2c157bd324",
+   "gehoert": false
+  },
+  "Gedicht-Bühne": {
+   "datei": "florian/537b6629eea0.mp3",
+   "h": "5df59f7bba",
+   "gehoert": false
+  },
+  "Gefühle und Gedanken groß": {
+   "datei": "florian/a1481db563f0.mp3",
+   "h": "da8f730528",
+   "gehoert": false
+  },
+  "Gegenbeispiel genügt": {
+   "datei": "florian/cc12f6e097c1.mp3",
+   "h": "6fa6952da3",
+   "gehoert": false
+  },
+  "Gegenteile": {
+   "datei": "florian/ebb53ef41312.mp3",
+   "h": "6b40fd72af",
+   "gehoert": false
+  },
+  "Gegenwart": {
+   "datei": "florian/e892b13ed0db.mp3",
+   "h": "c47898e336",
+   "gehoert": false
+  },
+  "Geheimschrift": {
+   "datei": "florian/ba1f33922287.mp3",
+   "h": "ab3fc33ad1",
+   "gehoert": false
+  },
+  "Geht das überhaupt?": {
+   "datei": "florian/fe92e47ba585.mp3",
+   "h": "ed6ef49f03",
+   "gehoert": false
+  },
+  "Geld wechseln": {
+   "datei": "florian/85f628011d11.mp3",
+   "h": "65b7d5da76",
+   "gehoert": false
+  },
+  "Geldbeträge legen": {
+   "datei": "florian/7df4d4533bad.mp3",
+   "h": "ccaefe7733",
+   "gehoert": false
+  },
+  "Geldbeträge mit Komma rechnen": {
+   "datei": "florian/481bc035de31.mp3",
+   "h": "bbcb93c8c0",
+   "gehoert": false
+  },
+  "Genau hinsehen": {
+   "datei": "florian/3e0e3c893788.mp3",
+   "h": "3257191d4c",
+   "gehoert": false
+  },
+  "Genau oder ungefähr?": {
+   "datei": "florian/45c23e8fc2ed.mp3",
+   "h": "3b8240dd84",
+   "gehoert": false
+  },
+  "Gerade Großbuchstaben": {
+   "datei": "florian/e8e00a0714d8.mp3",
+   "h": "1876684249",
+   "gehoert": false
+  },
+  "Gerade oder ungerade, warum": {
+   "datei": "florian/b634b64aded5.mp3",
+   "h": "fec441f607",
+   "gehoert": false
+  },
+  "Gerade und ungerade": {
+   "datei": "florian/73ddbbced051.mp3",
+   "h": "86ed69f2ce",
+   "gehoert": false
+  },
+  "Gerader Kellerstab": {
+   "datei": "florian/3306ace4bfb2.mp3",
+   "h": "cbcf20593a",
+   "gehoert": false
+  },
+  "Gerecht verteilen": {
+   "datei": "florian/502b02f66f04.mp3",
+   "h": "c4be58cf78",
+   "gehoert": false
+  },
+  "Geschichte zur Malaufgabe": {
+   "datei": "florian/79cc98ac6b38.mp3",
+   "h": "74db79bdb9",
+   "gehoert": false
+  },
+  "Geschichten vergleichen": {
+   "datei": "florian/7753a495e1f2.mp3",
+   "h": "6e0bf92901",
+   "gehoert": false
+  },
+  "Gesprächsrollen": {
+   "datei": "florian/5ceedd0ce20d.mp3",
+   "h": "5454e515c3",
+   "gehoert": false
+  },
+  "Gestern, heute, morgen": {
+   "datei": "florian/9e3aa255bf15.mp3",
+   "h": "cfb48de389",
+   "gehoert": false
+  },
+  "Geteilt in allen Reihen": {
+   "datei": "florian/97ef6069d38c.mp3",
+   "h": "f256ca2af4",
+   "gehoert": false
+  },
+  "Geteilt und Mal gehören zusammen": {
+   "datei": "florian/88a74f033669.mp3",
+   "h": "3c60d6fa99",
+   "gehoert": false
+  },
+  "Gewichte schätzen und vergleichen": {
+   "datei": "florian/d075114c0dc1.mp3",
+   "h": "8216f94d59",
+   "gehoert": false
+  },
+  "Gewinnchance begründen": {
+   "datei": "florian/6616657330ed.mp3",
+   "h": "27cb69d776",
+   "gehoert": false
+  },
+  "Gewinnchancen": {
+   "datei": "florian/1fabdaef9a4f.mp3",
+   "h": "075bbf81b3",
+   "gehoert": false
+  },
+  "Gewinnstrategie finden": {
+   "datei": "florian/2297968a87ca.mp3",
+   "h": "7fffa067bc",
+   "gehoert": false
+  },
+  "Gleich große Gruppen": {
+   "datei": "florian/cd0346a6acfa.mp3",
+   "h": "3fdddcd8ee",
+   "gehoert": false
+  },
+  "Gramm und Kilogramm": {
+   "datei": "florian/7bb5f7bf92a3.mp3",
+   "h": "28a4d787eb",
+   "gehoert": false
+  },
+  "Groß oder klein?": {
+   "datei": "florian/88e57c4e09e7.mp3",
+   "h": "669a73b67d",
+   "gehoert": false
+  },
+  "Großbuchstaben mit Bogen-Anschluss": {
+   "datei": "florian/a29b12b70d44.mp3",
+   "h": "21259eee7b",
+   "gehoert": false
+  },
+  "Großbuchstaben ohne Verbindung": {
+   "datei": "florian/f2f6a89082cb.mp3",
+   "h": "60dbef4815",
+   "gehoert": false
+  },
+  "Großbuchstaben und Kleinbuchstaben zuordnen": {
+   "datei": "florian/bc23783cec24.mp3",
+   "h": "968e035f3a",
+   "gehoert": false
+  },
+  "Große Anzahlen schätzen": {
+   "datei": "florian/02fcd78ec423.mp3",
+   "h": "8646b45391",
+   "gehoert": false
+  },
+  "Große Schätzfrage zerlegen": {
+   "datei": "florian/0c7b685f119a.mp3",
+   "h": "e765c4622c",
+   "gehoert": false
+  },
+  "Große Zahlen im Kopf": {
+   "datei": "florian/af3da8d942a3.mp3",
+   "h": "c2051ad7a9",
+   "gehoert": false
+  },
+  "Große Zahlen lesen und schreiben": {
+   "datei": "florian/93bf58970c0d.mp3",
+   "h": "fd4fbb7105",
+   "gehoert": false
+  },
+  "Große Zahlen minus mit Übergang": {
+   "datei": "florian/96025f05603a.mp3",
+   "h": "9ec36a223d",
+   "gehoert": false
+  },
+  "Große Zahlen minus ohne Übergang": {
+   "datei": "florian/7fd926c46e93.mp3",
+   "h": "217222e8c7",
+   "gehoert": false
+  },
+  "Große Zahlen plus mit Übergang": {
+   "datei": "florian/ce288ae1826e.mp3",
+   "h": "875033ba55",
+   "gehoert": false
+  },
+  "Große Zahlen plus ohne Übergang": {
+   "datei": "florian/be97d048be3e.mp3",
+   "h": "771103ce55",
+   "gehoert": false
+  },
+  "Große Zahlen runden": {
+   "datei": "florian/5ef103894b2c.mp3",
+   "h": "d87534e1a1",
+   "gehoert": false
+  },
+  "Große Zahlen zerlegen": {
+   "datei": "florian/0e2b58268995.mp3",
+   "h": "c22e0de22c",
+   "gehoert": false
+  },
+  "Größen vergleichen und ordnen": {
+   "datei": "florian/bf608fc0d2a4.mp3",
+   "h": "2f261c8709",
+   "gehoert": false
+  },
+  "Größer oder kleiner": {
+   "datei": "florian/6807b0079323.mp3",
+   "h": "7551f1d40e",
+   "gehoert": false
+  },
+  "Großer Satzanfang": {
+   "datei": "florian/2eae8d54de6c.mp3",
+   "h": "8eb3dd1925",
+   "gehoert": false
+  },
+  "Größer, kleiner, gleich": {
+   "datei": "florian/b8ef6d3c1678.mp3",
+   "h": "2ca0b3ba0f",
+   "gehoert": false
+  },
+  "Größter und kleinster Deckstein": {
+   "datei": "florian/8280f40280c6.mp3",
+   "h": "b8277a0b3e",
+   "gehoert": false
+  },
+  "Grundform des Verbs": {
+   "datei": "florian/f2d1dd9d85e2.mp3",
+   "h": "6753812a9f",
+   "gehoert": false
+  },
+  "Gut, besser, am besten": {
+   "datei": "florian/71d872d13d1d.mp3",
+   "h": "4471b12539",
+   "gehoert": false
+  },
+  "Halb, Viertel, Dreiviertel": {
+   "datei": "florian/7cdd85580a5f.mp3",
+   "h": "fa5270b36f",
+   "gehoert": false
+  },
+  "Halbe Stunde": {
+   "datei": "florian/ca3cd650b888.mp3",
+   "h": "fb3d10fc6a",
+   "gehoert": false
+  },
+  "Halbieren": {
+   "datei": "florian/ff6afec45293.mp3",
+   "h": "59af5ae222",
+   "gehoert": false
+  },
+  "Halbieren im Zwanzigerraum": {
+   "datei": "florian/a17fbd920715.mp3",
+   "h": "e84974bc8a",
+   "gehoert": false
+  },
+  "Halbschriftlich geteilt": {
+   "datei": "florian/073fff16be46.mp3",
+   "h": "10a288f296",
+   "gehoert": false
+  },
+  "Halbschriftlich geteilt mit Rest": {
+   "datei": "florian/0eebe01bbb00.mp3",
+   "h": "de337e12a4",
+   "gehoert": false
+  },
+  "Halbschriftlich mal": {
+   "datei": "florian/ce85d5d80098.mp3",
+   "h": "a798bdd2c4",
+   "gehoert": false
+  },
+  "Halbschriftlich mal und geteilt mit großen Zahlen": {
+   "datei": "florian/3ed0f7cdd44c.mp3",
+   "h": "b27cec194f",
+   "gehoert": false
+  },
+  "Halbschriftlich plus und minus bis tausend": {
+   "datei": "florian/6ec3584a3d04.mp3",
+   "h": "ec116ee114",
+   "gehoert": false
+  },
+  "Hallo, bitte, danke": {
+   "datei": "florian/fe9f2261c6d7.mp3",
+   "h": "88d4330022",
+   "gehoert": false
+  },
+  "Hauptsatz und Nebensatz": {
+   "datei": "florian/4f1a52cc22ab.mp3",
+   "h": "68b40ea801",
+   "gehoert": false
+  },
   "Heute ist es warm.": {
    "datei": "florian/42afa8d00568.mp3",
    "h": "a7c2fdcb60",
+   "gehoert": false
+  },
+  "Hier fehlt was": {
+   "datei": "florian/1853f4596377.mp3",
+   "h": "34d06b0300",
+   "gehoert": false
+  },
+  "Hilfreicher Tipp": {
+   "datei": "florian/7989f329a07e.mp3",
+   "h": "d0195f3c28",
+   "gehoert": false
+  },
+  "Hilfsaufgabe": {
+   "datei": "florian/5ab095624b99.mp3",
+   "h": "fc486b6942",
+   "gehoert": false
+  },
+  "Hinauf zum Oval": {
+   "datei": "florian/2e41a7d20c15.mp3",
+   "h": "7e28fd7355",
+   "gehoert": false
+  },
+  "Hochzählen statt wegnehmen": {
+   "datei": "florian/b58e5b6525b3.mp3",
+   "h": "3a0b416e59",
+   "gehoert": false
+  },
+  "Hör dich selbst": {
+   "datei": "florian/bb8be30d1877.mp3",
+   "h": "3bbee3c7b6",
+   "gehoert": false
+  },
+  "Hör dir deinen Text an": {
+   "datei": "florian/00f0a0195c56.mp3",
+   "h": "b52d8b8d4d",
    "gehoert": false
   },
   "Hör noch mal hin. Am Abend lese ich.": {
@@ -491,9 +2046,9 @@
    "h": "670a76ec27",
    "gehoert": false
   },
-  "Hör noch mal hin. Das Boot sinkt.": {
-   "datei": "florian/782946cf5c74.mp3",
-   "h": "16086d674f",
+  "Hör noch mal hin. Das Boot fährt.": {
+   "datei": "florian/d2edf98c9c31.mp3",
+   "h": "8f782d5c76",
    "gehoert": false
   },
   "Hör noch mal hin. Das Buch ist neu.": {
@@ -681,9 +2236,9 @@
    "h": "fc03b3ef02",
    "gehoert": false
   },
-  "Hör noch mal hin. Du bist toll.": {
-   "datei": "florian/8435ff24c83f.mp3",
-   "h": "8f0fd7e244",
+  "Hör noch mal hin. Du bist dran.": {
+   "datei": "florian/92a8feb9be51.mp3",
+   "h": "4a87d9e36c",
    "gehoert": false
   },
   "Hör noch mal hin. Ein Hase hüpft.": {
@@ -756,9 +2311,9 @@
    "h": "e470460349",
    "gehoert": false
   },
-  "Hör noch mal hin. Ich kann schon gut lesen.": {
-   "datei": "florian/132dfad71ca1.mp3",
-   "h": "07451e3a31",
+  "Hör noch mal hin. Ich lese gern Bücher.": {
+   "datei": "florian/d612645a9e86.mp3",
+   "h": "61d591e1ab",
    "gehoert": false
   },
   "Hör noch mal hin. Ich mag Eis.": {
@@ -906,14 +2461,59 @@
    "h": "dde87d9169",
    "gehoert": false
   },
+  "Hörspiel-Werkstatt": {
+   "datei": "florian/ff7dd2f65077.mp3",
+   "h": "7921fc2c2a",
+   "gehoert": false
+  },
+  "Hund oder Hunt? Verlängern hilft": {
+   "datei": "florian/34b79076366e.mp3",
+   "h": "86e07c0ae9",
+   "gehoert": false
+  },
+  "Hunderter bündeln": {
+   "datei": "florian/f0c11a604c39.mp3",
+   "h": "523e8af946",
+   "gehoert": false
+  },
+  "Hunderter entbündeln": {
+   "datei": "florian/9f9aead974d8.mp3",
+   "h": "b318e8dca1",
+   "gehoert": false
+  },
+  "Hundertertafel und Hunderterfeld": {
+   "datei": "florian/4d57014e1b46.mp3",
+   "h": "ce4567f136",
+   "gehoert": false
+  },
+  "Hunderterzahlen plus und minus": {
+   "datei": "florian/fc302b095522.mp3",
+   "h": "8369429c2d",
+   "gehoert": false
+  },
+  "Ich beschreib es dir": {
+   "datei": "florian/e2ffa8f01a38.mp3",
+   "h": "9ed4ffd05b",
+   "gehoert": false
+  },
   "Ich bin am See.": {
    "datei": "florian/33fd110e84fc.mp3",
    "h": "dfc607cba0",
    "gehoert": false
   },
+  "Ich bin dran, du bist dran": {
+   "datei": "florian/92bb11a706bc.mp3",
+   "h": "97f974708e",
+   "gehoert": false
+  },
   "Ich bin müde.": {
    "datei": "florian/cb45f25ca4e2.mp3",
    "h": "360aad8952",
+   "gehoert": false
+  },
+  "Ich bin nicht der Wolf": {
+   "datei": "florian/e1c66fe9b8f0.mp3",
+   "h": "c072aab424",
    "gehoert": false
   },
   "Ich esse Brot und Käse.": {
@@ -931,6 +2531,11 @@
    "h": "841ac6d5a5",
    "gehoert": false
   },
+  "Ich fühle mich so": {
+   "datei": "florian/fa7a7e4efd29.mp3",
+   "h": "55a1c72b1d",
+   "gehoert": false
+  },
   "Ich gehe zu Oma.": {
    "datei": "florian/b92c2cd5d119.mp3",
    "h": "0b59895683",
@@ -939,6 +2544,11 @@
   "Ich gehe zur Schule.": {
    "datei": "florian/e7895c9d2a22.mp3",
    "h": "4c9d2da30f",
+   "gehoert": false
+  },
+  "Ich glaube, dass": {
+   "datei": "florian/f9b36316ac7e.mp3",
+   "h": "2076fab5ee",
    "gehoert": false
   },
   "Ich habe Durst.": {
@@ -951,9 +2561,9 @@
    "h": "79b8b25be0",
    "gehoert": false
   },
-  "Ich kann schon gut lesen.": {
-   "datei": "florian/2db74df0ed5e.mp3",
-   "h": "04eb9cba52",
+  "Ich lese gern Bücher.": {
+   "datei": "florian/0501795ce170.mp3",
+   "h": "31325cc15e",
    "gehoert": false
   },
   "Ich mag Eis.": {
@@ -971,9 +2581,44 @@
    "h": "bd2990fbc6",
    "gehoert": false
   },
+  "Ich weiß, weil": {
+   "datei": "florian/8bcd0b25737e.mp3",
+   "h": "a023ed2792",
+   "gehoert": false
+  },
   "Ich ziehe meine Jacke an.": {
    "datei": "florian/8243e478fdb3.mp3",
    "h": "8a752a0b1b",
+   "gehoert": false
+  },
+  "ich, du, er, sie, es, wir, ihr": {
+   "datei": "florian/57fbcee54058.mp3",
+   "h": "fd3b8070ab",
+   "gehoert": false
+  },
+  "Ideen-Baum": {
+   "datei": "florian/21376ab5eb95.mp3",
+   "h": "7e600f0d27",
+   "gehoert": false
+  },
+  "Ideenkiste": {
+   "datei": "florian/2127340af284.mp3",
+   "h": "a403214d5a",
+   "gehoert": false
+  },
+  "Im Inhaltsverzeichnis suchen": {
+   "datei": "florian/705521ad4c09.mp3",
+   "h": "ed3e1cfe19",
+   "gehoert": false
+  },
+  "Im Kalender lesen": {
+   "datei": "florian/de45ddeea6be.mp3",
+   "h": "5f35371473",
+   "gehoert": false
+  },
+  "Im Kopf oder schriftlich?": {
+   "datei": "florian/17b6a0709491.mp3",
+   "h": "07f99f1f5a",
    "gehoert": false
   },
   "Im Tal fließt ein Bach. Das Einhorn baut dort Brücken aus Perlen.": {
@@ -986,9 +2631,74 @@
    "h": "eb9830f3d0",
    "gehoert": false
   },
+  "Im Wörterbuch die Grundform suchen": {
+   "datei": "florian/c22560eef210.mp3",
+   "h": "1f00c81458",
+   "gehoert": false
+  },
+  "Im Zweifel nachschlagen": {
+   "datei": "florian/98025fd81dfe.mp3",
+   "h": "839855d1c3",
+   "gehoert": false
+  },
+  "Immer, manchmal, nie": {
+   "datei": "florian/ac018b3fceba.mp3",
+   "h": "9360d13af5",
+   "gehoert": false
+  },
   "In der Mitte steht jetzt Minus.": {
    "datei": "florian/ed41e9c1d990.mp3",
    "h": "4bf1f9865a",
+   "gehoert": false
+  },
+  "In eigenen Worten wiedergeben": {
+   "datei": "florian/46976642d573.mp3",
+   "h": "eb80afef29",
+   "gehoert": false
+  },
+  "In einem Zug": {
+   "datei": "florian/614b6fca409a.mp3",
+   "h": "1382b77236",
+   "gehoert": false
+  },
+  "In Gruppen aufteilen": {
+   "datei": "florian/29f135c0afb7.mp3",
+   "h": "000c525537",
+   "gehoert": false
+  },
+  "In Schritten zählen": {
+   "datei": "florian/c630e469b70b.mp3",
+   "h": "07817a2d42",
+   "gehoert": false
+  },
+  "Infos verknüpfen": {
+   "datei": "florian/7529f8f61946.mp3",
+   "h": "2d78d82270",
+   "gehoert": false
+  },
+  "Irgendein Hund oder der Hund?": {
+   "datei": "florian/29a66a6f1346.mp3",
+   "h": "c7cc6fd986",
+   "gehoert": false
+  },
+  "Ist die Einladung komplett": {
+   "datei": "florian/ffaff6ef6969.mp3",
+   "h": "e21fca9184",
+   "gehoert": false
+  },
+  "Je mehr, desto": {
+   "datei": "florian/b3a75b833c3c.mp3",
+   "h": "7254ab17f0",
+   "gehoert": false
+  },
+  "Je mehr, desto weniger": {
+   "datei": "florian/37ab48ca4680.mp3",
+   "h": "11ed7f29db",
+   "gehoert": false
+  },
+  "Jede Silbe braucht ihren Vokal": {
+   "datei": "florian/dcd05113dd6d.mp3",
+   "h": "96b803b794",
    "gehoert": false
   },
   "Jetzt baust du solche Brücken.": {
@@ -1026,9 +2736,9 @@
    "h": "a17dffc8e9",
    "gehoert": false
   },
-  "Jetzt nimmt das Einhorn einen Teil weg. Minus heißt: wegnehmen. Der andere Teil bleibt liegen.": {
-   "datei": "florian/301b20033c07.mp3",
-   "h": "dc27356b65",
+  "Jetzt nimmt das Einhorn einen Teil weg. Der andere Teil bleibt liegen.": {
+   "datei": "florian/3f8facd61cb6.mp3",
+   "h": "3347b5cafd",
    "gehoert": false
   },
   "Jetzt rechnest du. Schau zuerst auf den kleinen Stab.": {
@@ -1061,9 +2771,114 @@
    "h": "2eb29f2850",
    "gehoert": false
   },
+  "Jury-Ohr": {
+   "datei": "florian/bedfebe857b2.mp3",
+   "h": "2e29321826",
+   "gehoert": false
+  },
+  "Kantenmodelle": {
+   "datei": "florian/6e14a672084b.mp3",
+   "h": "6720562319",
+   "gehoert": false
+  },
+  "Kein Stopper nach Konsonanten": {
+   "datei": "florian/00bb05c11491.mp3",
+   "h": "867530cc28",
+   "gehoert": false
+  },
+  "Kernaufgaben des Einmaleins": {
+   "datei": "florian/4952760d9213.mp3",
+   "h": "890788e154",
+   "gehoert": false
+  },
   "Kettenhüpfer. Einmaleins. Wie weit hüpft das Einhorn? Tipp die Zahl ein.": {
    "datei": "florian/66419bac82a2.mp3",
    "h": "b7ef6b6a45",
+   "gehoert": false
+  },
+  "Kilometer und Millimeter": {
+   "datei": "florian/38548703219d.mp3",
+   "h": "2ae1258a1b",
+   "gehoert": false
+  },
+  "Kleidung kombinieren": {
+   "datei": "florian/85bd3981cf81.mp3",
+   "h": "ab018d0735",
+   "gehoert": false
+  },
+  "Kleine Lernwörter": {
+   "datei": "florian/7105ea57eac6.mp3",
+   "h": "49cba835c3",
+   "gehoert": false
+  },
+  "Kleine Zahl dazu": {
+   "datei": "florian/87d068baba1c.mp3",
+   "h": "d4eeb39f79",
+   "gehoert": false
+  },
+  "Kleine Zahl dazu über den Zehner": {
+   "datei": "florian/e0dbdf09668d.mp3",
+   "h": "1210ea2b0d",
+   "gehoert": false
+  },
+  "Kleine Zahl weg": {
+   "datei": "florian/4c4f6a010115.mp3",
+   "h": "86dd20369f",
+   "gehoert": false
+  },
+  "Kleine Zahl weg über den Zehner": {
+   "datei": "florian/5fb75fabc7b3.mp3",
+   "h": "0a64f49ae2",
+   "gehoert": false
+  },
+  "Kleine Zahl zuerst? Tauschen!": {
+   "datei": "florian/26fa7f29b3a6.mp3",
+   "h": "564ea8b826",
+   "gehoert": false
+  },
+  "Kleine Zahlen dazu": {
+   "datei": "florian/e76082b45d70.mp3",
+   "h": "60952a68a3",
+   "gehoert": false
+  },
+  "Kleines Detail": {
+   "datei": "florian/2c02f0dc913b.mp3",
+   "h": "d065843e14",
+   "gehoert": false
+  },
+  "Klicken und finden": {
+   "datei": "florian/c9cdcdf7daff.mp3",
+   "h": "5fb5bb0425",
+   "gehoert": false
+  },
+  "Klingt gleich, anders geschrieben": {
+   "datei": "florian/22841066beb8.mp3",
+   "h": "b0892c722e",
+   "gehoert": false
+  },
+  "Knifflige Großbuchstaben": {
+   "datei": "florian/82fa4bb5c9a1.mp3",
+   "h": "54b8277f25",
+   "gehoert": false
+  },
+  "Kombinatorik mit Reihenfolge": {
+   "datei": "florian/461bcb6dda6b.mp3",
+   "h": "c83a5e495d",
+   "gehoert": false
+  },
+  "Komma bei Aufzählungen": {
+   "datei": "florian/d513f08a0866.mp3",
+   "h": "a2031ee507",
+   "gehoert": false
+  },
+  "Komma vor aber, weil, dass": {
+   "datei": "florian/77c184b55f9b.mp3",
+   "h": "e1db6230d7",
+   "gehoert": false
+  },
+  "Kommaschreibweise": {
+   "datei": "florian/4579368142cb.mp3",
+   "h": "1f2be0d42d",
    "gehoert": false
   },
   "Kommen Einer dazu, legt das Einhorn sie zum kleinen Stab. Die Zehnerstäbe bleiben.": {
@@ -1081,9 +2896,144 @@
    "h": "8106a94305",
    "gehoert": false
   },
+  "Körper benennen": {
+   "datei": "florian/7dbd216a2cfe.mp3",
+   "h": "590deeff2e",
+   "gehoert": false
+  },
+  "Körper in der Umwelt": {
+   "datei": "florian/f2d47e6aa8e5.mp3",
+   "h": "48d395bfc3",
+   "gehoert": false
+  },
+  "Kreis, Dreieck, Viereck": {
+   "datei": "florian/a2bd0c4651e7.mp3",
+   "h": "21cf5f6540",
+   "gehoert": false
+  },
+  "Kreise mit dem Zirkel": {
+   "datei": "florian/da3f8ec4aa50.mp3",
+   "h": "58f118fbdd",
+   "gehoert": false
+  },
+  "Krückstock": {
+   "datei": "florian/5eb07316b161.mp3",
+   "h": "9d6fa23470",
+   "gehoert": false
+  },
+  "Kurz gesagt": {
+   "datei": "florian/d404c07d4ecb.mp3",
+   "h": "6427b093ed",
+   "gehoert": false
+  },
+  "Kurze Bildergeschichte ordnen": {
+   "datei": "florian/e97c8fa66158.mp3",
+   "h": "164ac251d0",
+   "gehoert": false
+  },
+  "Kurze Geräuschkette": {
+   "datei": "florian/38391a00d2e6.mp3",
+   "h": "8ccdc08f15",
+   "gehoert": false
+  },
+  "Kurze Vokale lesen": {
+   "datei": "florian/995f0771e07e.mp3",
+   "h": "e8a337780a",
+   "gehoert": false
+  },
+  "Lageplan zeichnen": {
+   "datei": "florian/dce80676da9e.mp3",
+   "h": "0b9ab5ac7f",
+   "gehoert": false
+  },
+  "Lang oder kurz": {
+   "datei": "florian/1a0e4c5701ca.mp3",
+   "h": "eeee15a02e",
+   "gehoert": false
+  },
+  "Lang oder kurz lesen": {
+   "datei": "florian/1da2aa982433.mp3",
+   "h": "4fd01b219b",
+   "gehoert": false
+  },
+  "Lange Bildergeschichte ordnen": {
+   "datei": "florian/5053e9fd2050.mp3",
+   "h": "4eeea9a5ac",
+   "gehoert": false
+  },
+  "Lange Geräuschkette": {
+   "datei": "florian/93c0f63ce49d.mp3",
+   "h": "13791f4132",
+   "gehoert": false
+  },
+  "Lange Wörter in Bausteinen lesen": {
+   "datei": "florian/f836c83fb73e.mp3",
+   "h": "74a35383e4",
+   "gehoert": false
+  },
+  "Lange Wörter in Silben lesen": {
+   "datei": "florian/d4485ca210a0.mp3",
+   "h": "6a8f8a300b",
+   "gehoert": false
+  },
+  "Längen schätzen": {
+   "datei": "florian/c85572c43a9e.mp3",
+   "h": "b9c5ebcdfe",
+   "gehoert": false
+  },
+  "Länger, kürzer": {
+   "datei": "florian/726c30a8bc9d.mp3",
+   "h": "e000e3642d",
+   "gehoert": false
+  },
+  "Langes I ohne Dehnungs-E": {
+   "datei": "florian/3308bbee922d.mp3",
+   "h": "08d0830e7e",
+   "gehoert": false
+  },
+  "Lass die Figur sprechen": {
+   "datei": "florian/aa169648b2ef.mp3",
+   "h": "eaf893b995",
+   "gehoert": false
+  },
+  "Laut oder leise?": {
+   "datei": "florian/80754db55b72.mp3",
+   "h": "89addf1f49",
+   "gehoert": false
+  },
+  "Laute sprechen statt Buchstabennamen": {
+   "datei": "florian/eee30916ef0d.mp3",
+   "h": "dd82cf04e7",
+   "gehoert": false
+  },
+  "Laute tauschen und weglassen": {
+   "datei": "florian/eec2fa16fdae.mp3",
+   "h": "2db49df3dd",
+   "gehoert": false
+  },
+  "Laute zählen": {
+   "datei": "florian/7478d1df359a.mp3",
+   "h": "604c0301b3",
+   "gehoert": false
+  },
+  "Laute zusammenziehen": {
+   "datei": "florian/01acfab10c96.mp3",
+   "h": "2a4c48f05b",
+   "gehoert": false
+  },
+  "Leere Stelle in der Zahl": {
+   "datei": "florian/6b7e3c09d4ff.mp3",
+   "h": "2ff2fe7a51",
+   "gehoert": false
+  },
   "Leg die Perlen zusammen. Welche Zahl ist es?": {
    "datei": "florian/a5cf463df0fa.mp3",
    "h": "bcb9ce524b",
+   "gehoert": false
+  },
+  "Legen und Zusammensetzen": {
+   "datei": "florian/bba164731f20.mp3",
+   "h": "b4ce99846b",
    "gehoert": false
   },
   "Lena hat ein Pferd.": {
@@ -1091,9 +3041,104 @@
    "h": "50ca750ec9",
    "gehoert": false
   },
+  "Liebe Oma": {
+   "datei": "florian/9c7a9ebd1d5b.mp3",
+   "h": "d0304cf25f",
+   "gehoert": false
+  },
+  "Lies und tu": {
+   "datei": "florian/5cef50be073e.mp3",
+   "h": "16367f94b0",
+   "gehoert": false
+  },
   "Lina singt laut.": {
    "datei": "florian/27989c3ba560.mp3",
    "h": "da9671795b",
+   "gehoert": false
+  },
+  "Lineal richtig anlegen": {
+   "datei": "florian/af81cfbdb4de.mp3",
+   "h": "4a7f3caa7e",
+   "gehoert": false
+  },
+  "Links und rechts": {
+   "datei": "florian/3fc4c69b5a16.mp3",
+   "h": "cdb204da1e",
+   "gehoert": false
+  },
+  "Liter und Milliliter": {
+   "datei": "florian/370efa2d41a6.mp3",
+   "h": "0999a7ff44",
+   "gehoert": false
+  },
+  "Lösungsweg verkürzen": {
+   "datei": "florian/36061c78e598.mp3",
+   "h": "f2b81b3ebf",
+   "gehoert": false
+  },
+  "Lückenaufgaben": {
+   "datei": "florian/0e42f2ca5645.mp3",
+   "h": "c2f8683fbd",
+   "gehoert": false
+  },
+  "Luftballon-Schlaufe": {
+   "datei": "florian/0643cf704c6a.mp3",
+   "h": "c5adf72e9b",
+   "gehoert": false
+  },
+  "Luftsprung zum Oval": {
+   "datei": "florian/0278aeb3570e.mp3",
+   "h": "069ce5b20e",
+   "gehoert": false
+  },
+  "Mach, was ich sage": {
+   "datei": "florian/a4ce6a177c09.mp3",
+   "h": "b103f4cef2",
+   "gehoert": false
+  },
+  "Magisches Quadrat ergänzen": {
+   "datei": "florian/f9868c5412dc.mp3",
+   "h": "b40e65537b",
+   "gehoert": false
+  },
+  "Magisches Quadrat verändern": {
+   "datei": "florian/e4f27b3bed84.mp3",
+   "h": "ffe0168d60",
+   "gehoert": false
+  },
+  "Mal Ben, mal er": {
+   "datei": "florian/d4e21dd60e4f.mp3",
+   "h": "732effd4a3",
+   "gehoert": false
+  },
+  "Mal es mit Wörtern": {
+   "datei": "florian/a1dff7f99313.mp3",
+   "h": "b686b0a551",
+   "gehoert": false
+  },
+  "Mal oder Geteilt?": {
+   "datei": "florian/dd7ddb8543c6.mp3",
+   "h": "9da575f248",
+   "gehoert": false
+  },
+  "Mal und geteilt durch Stufenzahlen": {
+   "datei": "florian/2c46001bc36b.mp3",
+   "h": "8c999e1909",
+   "gehoert": false
+  },
+  "Mal Zehnerzahl": {
+   "datei": "florian/26fb5000c6e7.mp3",
+   "h": "23963adaf2",
+   "gehoert": false
+  },
+  "Malaufgabe als Punktefeld": {
+   "datei": "florian/ccf110a1a1f5.mp3",
+   "h": "291ec4ca1f",
+   "gehoert": false
+  },
+  "Malaufgabe zum Bild": {
+   "datei": "florian/ffb8af4e9fef.mp3",
+   "h": "1da22abc2b",
    "gehoert": false
   },
   "Mama holt mich ab.": {
@@ -1121,14 +3166,224 @@
    "h": "2fe607b523",
    "gehoert": false
   },
+  "Männlich, weiblich, sächlich": {
+   "datei": "florian/45798e99960e.mp3",
+   "h": "739bec07d2",
+   "gehoert": false
+  },
+  "Märchen erkennen": {
+   "datei": "florian/03d51d1e8415.mp3",
+   "h": "df84004561",
+   "gehoert": false
+  },
+  "Maßstab im Plan": {
+   "datei": "florian/14a0eaf76461.mp3",
+   "h": "6b18ecb368",
+   "gehoert": false
+  },
+  "Mathekonferenz": {
+   "datei": "florian/8dd0b0ee9898.mp3",
+   "h": "77a0c4e80b",
+   "gehoert": false
+  },
+  "Mathewörter verstehen": {
+   "datei": "florian/fb5e78fd503f.mp3",
+   "h": "86ee316030",
+   "gehoert": false
+  },
+  "Mehr Blitzwörter": {
+   "datei": "florian/9c265c9e5447.mp3",
+   "h": "009f130f87",
+   "gehoert": false
+  },
+  "Mehr kombinieren": {
+   "datei": "florian/3283dd7dbf86.mp3",
+   "h": "f1882e90e5",
+   "gehoert": false
+  },
+  "Mehr, weniger, gleich viele": {
+   "datei": "florian/4c2366ca33d1.mp3",
+   "h": "4e0b83151a",
+   "gehoert": false
+  },
+  "Mehrere Lösungen": {
+   "datei": "florian/2299904b9680.mp3",
+   "h": "53d99f9f0b",
+   "gehoert": false
+  },
+  "Mehrere Überträge": {
+   "datei": "florian/2b4fe1c5a96a.mp3",
+   "h": "e8c6b7e108",
+   "gehoert": false
+  },
+  "Mehrfach entbündeln": {
+   "datei": "florian/33405ed6109b.mp3",
+   "h": "8927e55d19",
+   "gehoert": false
+  },
+  "Mehrfach zusammengesetzt": {
+   "datei": "florian/33ec5a6dabc5.mp3",
+   "h": "26aa7bb97b",
+   "gehoert": false
+  },
+  "Mehrteilige Satzglieder": {
+   "datei": "florian/513218b27bea.mp3",
+   "h": "0179a5c142",
+   "gehoert": false
+  },
+  "Mehrzahl wie bei Äpfel": {
+   "datei": "florian/e5360ac509c5.mp3",
+   "h": "be529a4b2d",
+   "gehoert": false
+  },
+  "Mehrzahl wie bei Autos": {
+   "datei": "florian/5b017d0c0a84.mp3",
+   "h": "febf109a2d",
+   "gehoert": false
+  },
+  "Mehrzahl wie bei Blumen": {
+   "datei": "florian/b7972c846336.mp3",
+   "h": "b99aaf91aa",
+   "gehoert": false
+  },
+  "Mehrzahl wie bei Hunde": {
+   "datei": "florian/da938ae2a7bb.mp3",
+   "h": "45533937d9",
+   "gehoert": false
+  },
+  "Mehrzahl wie bei Kinder": {
+   "datei": "florian/6bb7b6373c26.mp3",
+   "h": "db97caaade",
+   "gehoert": false
+  },
   "Mein Bett ist warm.": {
    "datei": "florian/8b61c0c7ab37.mp3",
    "h": "0d99129e8a",
    "gehoert": false
   },
+  "Mein Kurzreferat": {
+   "datei": "florian/a7ffc87b0f9c.mp3",
+   "h": "55fb57f18e",
+   "gehoert": false
+  },
+  "Mein Lernsatz": {
+   "datei": "florian/06999d302a72.mp3",
+   "h": "a336a7de0e",
+   "gehoert": false
+  },
+  "Mein Name": {
+   "datei": "florian/7ac8c4aa30fb.mp3",
+   "h": "0a395d15d2",
+   "gehoert": false
+  },
+  "Mein Schreibziel": {
+   "datei": "florian/5bf9ec39f452.mp3",
+   "h": "3c5eca03fd",
+   "gehoert": false
+  },
+  "Mein Stichwortzettel": {
+   "datei": "florian/e53c9a511f24.mp3",
+   "h": "302e0370fc",
+   "gehoert": false
+  },
+  "Mein Ziel beim Sprechen": {
+   "datei": "florian/ba452536de15.mp3",
+   "h": "66cb35e769",
+   "gehoert": false
+  },
+  "Mein, dein, sein": {
+   "datei": "florian/4b14770d35a2.mp3",
+   "h": "068d7ad831",
+   "gehoert": false
+  },
+  "Meine eigene Abkürzung": {
+   "datei": "florian/613b6fb65df5.mp3",
+   "h": "77efe9b1d3",
+   "gehoert": false
+  },
+  "Meine Hörfrage": {
+   "datei": "florian/8169c7fd933c.mp3",
+   "h": "ad7f26463b",
+   "gehoert": false
+  },
+  "Meinung mit Grund": {
+   "datei": "florian/7a109a99a5ec.mp3",
+   "h": "2bdcc28de5",
+   "gehoert": false
+  },
+  "Meinung zum Text begründen": {
+   "datei": "florian/aa01338bdc32.mp3",
+   "h": "95c3198038",
+   "gehoert": false
+  },
+  "Menge und Preis": {
+   "datei": "florian/9cfca3bff7f9.mp3",
+   "h": "386b27b51c",
+   "gehoert": false
+  },
+  "Menge, Bild und Ziffer": {
+   "datei": "florian/e5e8ad4513b6.mp3",
+   "h": "540b430482",
+   "gehoert": false
+  },
   "Mengen auf einen Blick": {
    "datei": "florian/6da1870e9d1f.mp3",
    "h": "bd84cb0bc2",
+   "gehoert": false
+  },
+  "Merkwörter mit ä und äu": {
+   "datei": "florian/80953120efc1.mp3",
+   "h": "12d2b74d77",
+   "gehoert": false
+  },
+  "Merkwörter mit Dehnungs-H": {
+   "datei": "florian/676f308c39b2.mp3",
+   "h": "3f1c25e6a8",
+   "gehoert": false
+  },
+  "Merkwörter mit doppeltem Vokal": {
+   "datei": "florian/773780bc8491.mp3",
+   "h": "3df1f48bde",
+   "gehoert": false
+  },
+  "Merkwörter mit stummem Dehnungszeichen": {
+   "datei": "florian/1952857cccd3.mp3",
+   "h": "5f9ea09549",
+   "gehoert": false
+  },
+  "Merkwörter wie Fuchs und Hexe": {
+   "datei": "florian/da651fa93c6a.mp3",
+   "h": "68eb156cd7",
+   "gehoert": false
+  },
+  "Merkwörter wie Mai und Kaiser": {
+   "datei": "florian/f319f45df109.mp3",
+   "h": "9da3fc527c",
+   "gehoert": false
+  },
+  "Merkwörter wie voll und vorne": {
+   "datei": "florian/6cb8e6c072d4.mp3",
+   "h": "6e7dcb9bed",
+   "gehoert": false
+  },
+  "Messen mit dem Lineal": {
+   "datei": "florian/97ad293e60e5.mp3",
+   "h": "9b5608dceb",
+   "gehoert": false
+  },
+  "Meter und Zentimeter": {
+   "datei": "florian/61bc8db62643.mp3",
+   "h": "4839442099",
+   "gehoert": false
+  },
+  "Minus bis zum vollen Zehner": {
+   "datei": "florian/6e43a4a66229.mp3",
+   "h": "39a8d1eb99",
+   "gehoert": false
+  },
+  "Minus gemischt": {
+   "datei": "florian/08be567d2ffc.mp3",
+   "h": "95e323bfe7",
    "gehoert": false
   },
   "Minus im ganz großen Raum": {
@@ -1151,6 +3406,11 @@
    "h": "b62bef7a87",
    "gehoert": false
   },
+  "Minus über den Zehner gemischt": {
+   "datei": "florian/3ddab4ae6f68.mp3",
+   "h": "d953c761a2",
+   "gehoert": false
+  },
   "Minus über den Zehner, viel weg": {
    "datei": "florian/ed660f3cbfa6.mp3",
    "h": "48d4c81ab4",
@@ -1161,9 +3421,39 @@
    "h": "c9773db823",
    "gehoert": false
   },
+  "Minus verstehen": {
+   "datei": "florian/d2726ce8405a.mp3",
+   "h": "046af95fc3",
+   "gehoert": false
+  },
+  "Minus vom vollen Zehner": {
+   "datei": "florian/644e80077834.mp3",
+   "h": "f5960b3643",
+   "gehoert": false
+  },
   "Minus vom Ziel": {
    "datei": "florian/d0746686c7b8.mp3",
    "h": "a8aa576831",
+   "gehoert": false
+  },
+  "Minuten in Fünferschritten": {
+   "datei": "florian/fe05fea49846.mp3",
+   "h": "0cf04d923b",
+   "gehoert": false
+  },
+  "Missverständnis aufklären": {
+   "datei": "florian/b4f875a1b2e2.mp3",
+   "h": "b16dcfecff",
+   "gehoert": false
+  },
+  "Mit anderen Augen": {
+   "datei": "florian/b5a5a934b2fd.mp3",
+   "h": "5fb164305e",
+   "gehoert": false
+  },
+  "Mit Betonung vorlesen": {
+   "datei": "florian/fbd0a078ae53.mp3",
+   "h": "bcd606ca7f",
    "gehoert": false
   },
   "Mit jedem kleinen Stab geht es genauso. Der Zehner bleibt vorne.": {
@@ -1171,9 +3461,54 @@
    "h": "2955afc45c",
    "gehoert": false
   },
+  "Mit Skizze lösen": {
+   "datei": "florian/50871864757d.mp3",
+   "h": "919ca77cb8",
+   "gehoert": false
+  },
+  "Mit ungefähren Zahlen rechnen": {
+   "datei": "florian/f2143e0e00e7.mp3",
+   "h": "24109452bb",
+   "gehoert": false
+  },
+  "Mit wem rede ich?": {
+   "datei": "florian/ef8228aecdd1.mp3",
+   "h": "4e92cf9bfd",
+   "gehoert": false
+  },
+  "Mittelstein zählt doppelt": {
+   "datei": "florian/eab0012ea8bf.mp3",
+   "h": "3014fdafea",
+   "gehoert": false
+  },
   "Morgen fahren wir ans Meer.": {
    "datei": "florian/35635685a368.mp3",
    "h": "2b5b667257",
+   "gehoert": false
+  },
+  "Münzen kennen": {
+   "datei": "florian/4415995906d9.mp3",
+   "h": "3800ba0f49",
+   "gehoert": false
+  },
+  "Muster aus Körpern und Plättchen": {
+   "datei": "florian/e5769d450bb8.mp3",
+   "h": "18a81acb09",
+   "gehoert": false
+  },
+  "Muster in Päckchen": {
+   "datei": "florian/7b0debafde4f.mp3",
+   "h": "12ef556b4c",
+   "gehoert": false
+  },
+  "Musterrätsel": {
+   "datei": "florian/df9b824d13ab.mp3",
+   "h": "60f948b761",
+   "gehoert": false
+  },
+  "Nach dem Alphabet ordnen, wenn der Anfang gleich ist": {
+   "datei": "florian/f7538d47c341.mp3",
+   "h": "f812137c34",
    "gehoert": false
   },
   "Nach der Schule esse ich Nudeln.": {
@@ -1181,14 +3516,109 @@
    "h": "a55253c10c",
    "gehoert": false
   },
+  "Nachbaraufgaben beim Malnehmen": {
+   "datei": "florian/4d986539f2a6.mp3",
+   "h": "2686af0683",
+   "gehoert": false
+  },
+  "Nachbarzahlen": {
+   "datei": "florian/d1f43f8d53d1.mp3",
+   "h": "a8db4ab7e8",
+   "gehoert": false
+  },
+  "Nachbarzahlen und Nachbarzehner": {
+   "datei": "florian/e7487b1c4ad4.mp3",
+   "h": "4c97bb4674",
+   "gehoert": false
+  },
+  "Nachbarzahlen und Zahlenstrahl": {
+   "datei": "florian/9573985a5e32.mp3",
+   "h": "34af87f386",
+   "gehoert": false
+  },
+  "Nachbarzehner und Nachbarhunderter": {
+   "datei": "florian/16874873442d.mp3",
+   "h": "47a99f87c3",
+   "gehoert": false
+  },
+  "Nacherzählen": {
+   "datei": "florian/e322a6483573.mp3",
+   "h": "a4087ca9a0",
+   "gehoert": false
+  },
+  "Nachschlagen in der Wörterliste": {
+   "datei": "florian/4c55fd330b79.mp3",
+   "h": "269561d5c8",
+   "gehoert": false
+  },
+  "Nachsilben bilden Wörter": {
+   "datei": "florian/0e1380a9a54f.mp3",
+   "h": "f7357bd2df",
+   "gehoert": false
+  },
+  "Nachsilben machen Nomen": {
+   "datei": "florian/6b59385d4029.mp3",
+   "h": "ef67be11fc",
+   "gehoert": false
+  },
+  "Nachzeichnen im Gitter": {
+   "datei": "florian/1c358369b33b.mp3",
+   "h": "573ef4e596",
+   "gehoert": false
+  },
+  "Namen groß": {
+   "datei": "florian/1b8d63b9e09b.mp3",
+   "h": "d0570410d6",
+   "gehoert": false
+  },
+  "Neben, zwischen, über, unter, auf": {
+   "datei": "florian/279b2ce58bf3.mp3",
+   "h": "2fef6c8e66",
+   "gehoert": false
+  },
+  "Netz im Kopf falten": {
+   "datei": "florian/d50bfe370413.mp3",
+   "h": "5bf9f841f9",
+   "gehoert": false
+  },
+  "Netz passt, warum?": {
+   "datei": "florian/ebc519beca07.mp3",
+   "h": "70917377cb",
+   "gehoert": false
+  },
+  "Neuer Absatz!": {
+   "datei": "florian/ca84db84f5dc.mp3",
+   "h": "dbd7dd5d5d",
+   "gehoert": false
+  },
+  "Neunerreihe": {
+   "datei": "florian/c0f14b0a07d0.mp3",
+   "h": "8ee6edb69f",
+   "gehoert": false
+  },
+  "Nicht immer dann": {
+   "datei": "florian/530cf1908cc1.mp3",
+   "h": "605dc07754",
+   "gehoert": false
+  },
+  "Nicht jedes Wort verrät die Rechnung": {
+   "datei": "florian/65a66f9b402c.mp3",
+   "h": "c9a212e588",
+   "gehoert": false
+  },
+  "Nichts dazu oder Nachbarzahl": {
+   "datei": "florian/a17f1a239825.mp3",
+   "h": "644094ed0f",
+   "gehoert": false
+  },
+  "Nichts weg, Vorgänger, alles weg": {
+   "datei": "florian/3fb9ece85cad.mp3",
+   "h": "ba7a136432",
+   "gehoert": false
+  },
   "Nimm die Perlen weg. Wie viele bleiben?": {
    "datei": "florian/3965f8467008.mp3",
    "h": "4fa4355130",
-   "gehoert": false
-  },
-  "Nimm eine große Zahl. Was bleibt, wenn eine kleinere weggeht?": {
-   "datei": "florian/5dddd1bebc8b.mp3",
-   "h": "c5dc2e9479",
    "gehoert": false
   },
   "Nimmt das Einhorn Einer weg, nimmt es sie vom kleinen Stab. Die Zehnerstäbe bleiben.": {
@@ -1206,14 +3636,134 @@
    "h": "ee5b939186",
    "gehoert": false
   },
+  "Noch mal, bitte!": {
+   "datei": "florian/db010c0b1936.mp3",
+   "h": "2cd3469f06",
+   "gehoert": false
+  },
+  "Nomen": {
+   "datei": "florian/43ffe9253362.mp3",
+   "h": "f9d8af5228",
+   "gehoert": false
+  },
+  "Nomen genauer machen": {
+   "datei": "florian/9fb565541d36.mp3",
+   "h": "a35fe99afd",
+   "gehoert": false
+  },
+  "Nomen groß schreiben mit der Artikelprobe": {
+   "datei": "florian/ca656b7a5ecb.mp3",
+   "h": "f27aea2f37",
+   "gehoert": false
+  },
+  "Nomen-Proben": {
+   "datei": "florian/220ff00f4b1f.mp3",
+   "h": "55b87ceb40",
+   "gehoert": false
+  },
+  "Nullen als Platzhalter": {
+   "datei": "florian/bead3b9a0904.mp3",
+   "h": "91b84b4ca5",
+   "gehoert": false
+  },
+  "Nullen im Ergebnis": {
+   "datei": "florian/11cd90f86c62.mp3",
+   "h": "35a2fa6827",
+   "gehoert": false
+  },
+  "Nullen im Faktor": {
+   "datei": "florian/21a24a160084.mp3",
+   "h": "d952c38737",
+   "gehoert": false
+  },
+  "Nullen in großen Zahlen": {
+   "datei": "florian/50b69d6bcb8c.mp3",
+   "h": "eb7e84f4da",
+   "gehoert": false
+  },
+  "Nur noch das Mittelband": {
+   "datei": "florian/79d4813626d9.mp3",
+   "h": "ba3f34f663",
+   "gehoert": false
+  },
+  "Oben weiter": {
+   "datei": "florian/d4db93e17b09.mp3",
+   "h": "0ca9c7ab55",
+   "gehoert": false
+  },
+  "Oben, unten, vorne, hinten": {
+   "datei": "florian/5d830095de21.mp3",
+   "h": "16efec81c1",
+   "gehoert": false
+  },
+  "Ober- und Unterlänge": {
+   "datei": "florian/740ea11d87dc.mp3",
+   "h": "dc22eadbb1",
+   "gehoert": false
+  },
+  "Ober- und Unterlängen im Wort": {
+   "datei": "florian/16d01b6f9554.mp3",
+   "h": "aac37363a2",
+   "gehoert": false
+  },
+  "Oberbegriffe": {
+   "datei": "florian/422b5ed3a52b.mp3",
+   "h": "97fdfa43d2",
+   "gehoert": false
+  },
+  "Oberlängen-Schleifen": {
+   "datei": "florian/d9d435c11d45.mp3",
+   "h": "b852babe39",
+   "gehoert": false
+  },
   "Oder es nimmt den anderen Teil weg.": {
    "datei": "florian/520b7babd3cc.mp3",
    "h": "c356040e2d",
    "gehoert": false
   },
+  "Offene und geschlossene Silbe": {
+   "datei": "florian/d58985e5e1c5.mp3",
+   "h": "b8ba0b8d51",
+   "gehoert": false
+  },
   "Oma backt Kekse.": {
    "datei": "florian/9097faccd441.mp3",
    "h": "bff9040703",
+   "gehoert": false
+  },
+  "Ordnung beim Probieren": {
+   "datei": "florian/0acc60de32e2.mp3",
+   "h": "383bc0665d",
+   "gehoert": false
+  },
+  "Orientieren im Ortsplan": {
+   "datei": "florian/0c81d71d826e.mp3",
+   "h": "e7332be66a",
+   "gehoert": false
+  },
+  "Ortsangabe": {
+   "datei": "florian/0c4393cb88a2.mp3",
+   "h": "3e731d61ca",
+   "gehoert": false
+  },
+  "Oval mit Stab": {
+   "datei": "florian/4a8ef20aaf4b.mp3",
+   "h": "17630148bb",
+   "gehoert": false
+  },
+  "Ovale": {
+   "datei": "florian/a4a7b4d42e97.mp3",
+   "h": "04a3c1b043",
+   "gehoert": false
+  },
+  "Paarreim und Kreuzreim": {
+   "datei": "florian/7bad3adf3f14.mp3",
+   "h": "b033532a6b",
+   "gehoert": false
+  },
+  "Päckchen mit Muster": {
+   "datei": "florian/6193ec5f2c9e.mp3",
+   "h": "68b5227808",
    "gehoert": false
   },
   "Papa bringt mich ins Bett.": {
@@ -1231,14 +3781,94 @@
    "h": "8f4be375ff",
    "gehoert": false
   },
+  "Parkettierungen": {
+   "datei": "florian/f13ba2bc1f0c.mp3",
+   "h": "845737968a",
+   "gehoert": false
+  },
+  "Partizip bilden": {
+   "datei": "florian/93830e840c15.mp3",
+   "h": "3324ec05e1",
+   "gehoert": false
+  },
+  "Passt das Ergebnis": {
+   "datei": "florian/272bfb815479.mp3",
+   "h": "f19883e9fd",
+   "gehoert": false
+  },
+  "Passt das Ergebnis zur Situation?": {
+   "datei": "florian/5ab9f8e189ac.mp3",
+   "h": "e8db33c4c0",
+   "gehoert": false
+  },
+  "Passt die Antwort?": {
+   "datei": "florian/51a741c55d24.mp3",
+   "h": "1c2fa75a9d",
+   "gehoert": false
+  },
+  "Passt die Begründung?": {
+   "datei": "florian/55f3e098da5f.mp3",
+   "h": "e2ff1251ff",
+   "gehoert": false
+  },
+  "Passt nicht": {
+   "datei": "florian/335d551fe080.mp3",
+   "h": "b74987f895",
+   "gehoert": false
+  },
+  "Passt nicht zusammen!": {
+   "datei": "florian/04039c0bb175.mp3",
+   "h": "7af36fdbd2",
+   "gehoert": false
+  },
+  "Pentominos": {
+   "datei": "florian/42ea2e2e3ad8.mp3",
+   "h": "6088e577da",
+   "gehoert": false
+  },
+  "Perfekt mit „haben“": {
+   "datei": "florian/2d25fe772860.mp3",
+   "h": "9b797680fc",
+   "gehoert": false
+  },
+  "Perfekt mit „sein“": {
+   "datei": "florian/d913dcafc36c.mp3",
+   "h": "33ee520f24",
+   "gehoert": false
+  },
   "Perlenbrücke. Zahlen zerlegen. Nimm links und rechts ein Perlenstäbchen und bau die Brücke.": {
    "datei": "florian/fbf877b40072.mp3",
    "h": "682bcc90b7",
    "gehoert": false
   },
+  "Pfeile und Farben": {
+   "datei": "florian/27df9e4a492f.mp3",
+   "h": "be7abc85d1",
+   "gehoert": false
+  },
+  "Planen, Schreiben, Prüfen": {
+   "datei": "florian/1009302e70a0.mp3",
+   "h": "2d44c1d9dc",
+   "gehoert": false
+  },
+  "Planquadrate": {
+   "datei": "florian/8998ad84bc63.mp3",
+   "h": "277cdf0bc1",
+   "gehoert": false
+  },
+  "Plötzlich!": {
+   "datei": "florian/dc308956df7c.mp3",
+   "h": "335d5dbee3",
+   "gehoert": false
+  },
   "Plus bis zum Ziel": {
    "datei": "florian/3ec16aa32021.mp3",
    "h": "8f55bbe225",
+   "gehoert": false
+  },
+  "Plus gemischt": {
+   "datei": "florian/d09ded9a42ff.mp3",
+   "h": "b8c3c5c326",
    "gehoert": false
   },
   "Plus im ganz großen Raum": {
@@ -1254,6 +3884,11 @@
   "Plus ohne Übergang": {
    "datei": "florian/49ac39d9e820.mp3",
    "h": "5ef51652f2",
+   "gehoert": false
+  },
+  "Plus über den Zehner gemischt": {
+   "datei": "florian/630a592c4fe6.mp3",
+   "h": "ec8cde796a",
    "gehoert": false
   },
   "Plus über den Zehner mit der größten Zahl": {
@@ -1276,9 +3911,394 @@
    "h": "3d4df7c430",
    "gehoert": false
   },
+  "Plus und minus ohne Übergang bis tausend": {
+   "datei": "florian/24fd10e46fb3.mp3",
+   "h": "a18df7e46b",
+   "gehoert": false
+  },
+  "Plus verstehen": {
+   "datei": "florian/3b2a8a0f6456.mp3",
+   "h": "afb5ab1a3a",
+   "gehoert": false
+  },
+  "Plus zum vollen Zehner": {
+   "datei": "florian/51b6d570c6ff.mp3",
+   "h": "83603c7e4e",
+   "gehoert": false
+  },
+  "Probe bei Minus": {
+   "datei": "florian/a730ce22c73e.mp3",
+   "h": "814e92cbba",
+   "gehoert": false
+  },
+  "Probe beim Teilen": {
+   "datei": "florian/01ae3c339192.mp3",
+   "h": "477eeb2e36",
+   "gehoert": false
+  },
+  "Probe mit der Umkehraufgabe": {
+   "datei": "florian/dc2d172568d4.mp3",
+   "h": "02b1295fd8",
+   "gehoert": false
+  },
+  "Probieren mit Tabelle": {
+   "datei": "florian/cc76f1a19a11.mp3",
+   "h": "1ad7d43c9c",
+   "gehoert": false
+  },
+  "Probieren und prüfen": {
+   "datei": "florian/a06ae2a1755d.mp3",
+   "h": "83367b1933",
+   "gehoert": false
+  },
+  "Pronomen statt Nomen": {
+   "datei": "florian/3ed8e516a12a.mp3",
+   "h": "c704586b98",
+   "gehoert": false
+  },
+  "Psst, hörst du die Stille?": {
+   "datei": "florian/e2b7a60bab36.mp3",
+   "h": "f69b7bd7fc",
+   "gehoert": false
+  },
+  "Punkt am Satzende": {
+   "datei": "florian/30796187d7fc.mp3",
+   "h": "a2c574a7a6",
+   "gehoert": false
+  },
+  "Punkt heißt Pause": {
+   "datei": "florian/149939859aee.mp3",
+   "h": "a5fd3c736a",
+   "gehoert": false
+  },
+  "Pünktchen und Striche": {
+   "datei": "florian/a7b9d7a4c1dc.mp3",
+   "h": "873a3c1c95",
+   "gehoert": false
+  },
+  "Punktefelder": {
+   "datei": "florian/a348f336f856.mp3",
+   "h": "9c3e681ae6",
+   "gehoert": false
+  },
+  "Puzzle im Ohr": {
+   "datei": "florian/072656c8a4c9.mp3",
+   "h": "5732471ea5",
+   "gehoert": false
+  },
+  "Quadernetze": {
+   "datei": "florian/4e057b83720e.mp3",
+   "h": "2f3834d344",
+   "gehoert": false
+  },
+  "Quadrat und Rechteck": {
+   "datei": "florian/ba01c92eb1cc.mp3",
+   "h": "8aeab53584",
+   "gehoert": false
+  },
+  "Quadrataufgaben": {
+   "datei": "florian/cef6182a1965.mp3",
+   "h": "dc7f1521f7",
+   "gehoert": false
+  },
+  "Quadratzahlen": {
+   "datei": "florian/1b7107878b50.mp3",
+   "h": "623409f956",
+   "gehoert": false
+  },
+  "Quatschwörter lesen": {
+   "datei": "florian/2be036ad2e9d.mp3",
+   "h": "e76e658c13",
+   "gehoert": false
+  },
+  "Querstrich zuerst": {
+   "datei": "florian/cab4057330ce.mp3",
+   "h": "ecd9110b4f",
+   "gehoert": false
+  },
+  "Ratekrimi": {
+   "datei": "florian/0c3cc9dd6cf7.mp3",
+   "h": "b4a298e0cd",
+   "gehoert": false
+  },
+  "Rätsel mit Tabelle": {
+   "datei": "florian/5b34b29e6187.mp3",
+   "h": "845d31d7a4",
+   "gehoert": false
+  },
+  "Rauminhalt mit Würfeln": {
+   "datei": "florian/6bf7634e60fc.mp3",
+   "h": "f99d6ce574",
+   "gehoert": false
+  },
+  "Rechenarten verbinden": {
+   "datei": "florian/30979edef7f0.mp3",
+   "h": "dafd85d730",
+   "gehoert": false
+  },
+  "Rechendreieck": {
+   "datei": "florian/f9345d4901cf.mp3",
+   "h": "ae376047f3",
+   "gehoert": false
+  },
+  "Rechendreieck mit Lücken": {
+   "datei": "florian/f4753e5a6780.mp3",
+   "h": "88ea54637e",
+   "gehoert": false
+  },
+  "Rechendreieck rückwärts": {
+   "datei": "florian/b49f4a101967.mp3",
+   "h": "6cce7afca7",
+   "gehoert": false
+  },
+  "Rechengeschichte zum Bild": {
+   "datei": "florian/b7bebc79fb27.mp3",
+   "h": "9138290ee6",
+   "gehoert": false
+  },
+  "Rechenkette": {
+   "datei": "florian/f55d39c77a9d.mp3",
+   "h": "76b0b462dc",
+   "gehoert": false
+  },
+  "Rechenschritte planen": {
+   "datei": "florian/214438788141.mp3",
+   "h": "a777839dcc",
+   "gehoert": false
+  },
+  "Rechenstrich lesen": {
+   "datei": "florian/159c02c8557a.mp3",
+   "h": "d1c098c02c",
+   "gehoert": false
+  },
+  "Rechenvorschrift befolgen und prüfen": {
+   "datei": "florian/4364426986b0.mp3",
+   "h": "ee863077b8",
+   "gehoert": false
+  },
+  "Rechenweg nachspielen": {
+   "datei": "florian/556385387c82.mp3",
+   "h": "4da0f7a038",
+   "gehoert": false
+  },
+  "Rechenweg notieren": {
+   "datei": "florian/1ea5ecbc05a6.mp3",
+   "h": "f7c23a5274",
+   "gehoert": false
+  },
+  "Rechenweg wählen": {
+   "datei": "florian/431d8e3723ad.mp3",
+   "h": "e4bd5ccd8d",
+   "gehoert": false
+  },
+  "Rechenwege vergleichen": {
+   "datei": "florian/50729a71b734.mp3",
+   "h": "f9ad384704",
+   "gehoert": false
+  },
+  "Rechenzeichen lesen": {
+   "datei": "florian/ea3843982a49.mp3",
+   "h": "2bc6c607f1",
+   "gehoert": false
+  },
   "Rechnen mit der Zahl": {
    "datei": "florian/547c142ffcd4.mp3",
    "h": "55bdfad743",
+   "gehoert": false
+  },
+  "Rechnungen nachprüfen": {
+   "datei": "florian/8875c82699d2.mp3",
+   "h": "29bfc8d2db",
+   "gehoert": false
+  },
+  "Rechnungen prüfen": {
+   "datei": "florian/a1afcab61dc6.mp3",
+   "h": "948f62c23d",
+   "gehoert": false
+  },
+  "Rechter Winkel": {
+   "datei": "florian/6423263b7883.mp3",
+   "h": "f2b66e8b57",
+   "gehoert": false
+  },
+  "Regel-Wächter": {
+   "datei": "florian/2a5ba5fae5a1.mp3",
+   "h": "48e02d80c9",
+   "gehoert": false
+  },
+  "Regen fällt": {
+   "datei": "florian/bef35c8f6e8a.mp3",
+   "h": "3268a6c7f3",
+   "gehoert": false
+  },
+  "Reim im Gedicht": {
+   "datei": "florian/19ca763375ec.mp3",
+   "h": "dfe42f2526",
+   "gehoert": false
+  },
+  "Reim-Echo": {
+   "datei": "florian/ac2ce1350e95.mp3",
+   "h": "8537c1dbee",
+   "gehoert": false
+  },
+  "Reimt sich das?": {
+   "datei": "florian/2eb1c21c848f.mp3",
+   "h": "7f3152c40d",
+   "gehoert": false
+  },
+  "Reimwort finden": {
+   "datei": "florian/f798ee62b8cc.mp3",
+   "h": "9b084f18bd",
+   "gehoert": false
+  },
+  "Reizwort-Geschichte": {
+   "datei": "florian/be40756b29fd.mp3",
+   "h": "2e7acc05be",
+   "gehoert": false
+  },
+  "Reporter-Bericht": {
+   "datei": "florian/ffe2ce3cace1.mp3",
+   "h": "2128be4d69",
+   "gehoert": false
+  },
+  "Reporter-Fragen": {
+   "datei": "florian/f92a49719039.mp3",
+   "h": "95d792e2fd",
+   "gehoert": false
+  },
+  "Riesenstimme, Mäusestimme": {
+   "datei": "florian/6f1c4bedc305.mp3",
+   "h": "d57c893d5b",
+   "gehoert": false
+  },
+  "Rollt oder kippt": {
+   "datei": "florian/9907191ffb61.mp3",
+   "h": "a6d22031d7",
+   "gehoert": false
+  },
+  "Rückgeld": {
+   "datei": "florian/210e15975528.mp3",
+   "h": "0935dc0b19",
+   "gehoert": false
+  },
+  "Rückwärts rechnen": {
+   "datei": "florian/f93fd31ef795.mp3",
+   "h": "5c39cb343e",
+   "gehoert": false
+  },
+  "Rückwärts rechnen in Geschichten": {
+   "datei": "florian/d00bbab86c16.mp3",
+   "h": "fa8594b658",
+   "gehoert": false
+  },
+  "Rückwärts zählen": {
+   "datei": "florian/3869057432c5.mp3",
+   "h": "3cac5f78bf",
+   "gehoert": false
+  },
+  "Runde Großbuchstaben": {
+   "datei": "florian/a3191c1efb64.mp3",
+   "h": "433c3389e4",
+   "gehoert": false
+  },
+  "Runde Ziffern": {
+   "datei": "florian/a21c32ee6ea7.mp3",
+   "h": "f569242cfc",
+   "gehoert": false
+  },
+  "Runden auf Zehner und Hunderter": {
+   "datei": "florian/502cb0896977.mp3",
+   "h": "204bc0b226",
+   "gehoert": false
+  },
+  "Sachaufgaben mit Zwischenschritt": {
+   "datei": "florian/85be159f5f61.mp3",
+   "h": "a1ed6751e9",
+   "gehoert": false
+  },
+  "Sachlich oder ausgeschmückt?": {
+   "datei": "florian/ad6ee7096410.mp3",
+   "h": "ffc185a3f3",
+   "gehoert": false
+  },
+  "Sachtext mit Bild": {
+   "datei": "florian/1accad3b7752.mp3",
+   "h": "9120138433",
+   "gehoert": false
+  },
+  "Sag, was du siehst": {
+   "datei": "florian/46600acf2256.mp3",
+   "h": "59dd967344",
+   "gehoert": false
+  },
+  "Sage erkennen": {
+   "datei": "florian/57cf13e1367e.mp3",
+   "h": "ab8c9eb632",
+   "gehoert": false
+  },
+  "Satz oder kein Satz?": {
+   "datei": "florian/bef9b1fe37cc.mp3",
+   "h": "fec6929445",
+   "gehoert": false
+  },
+  "Satz übertragen": {
+   "datei": "florian/35905753e054.mp3",
+   "h": "ccdda77483",
+   "gehoert": false
+  },
+  "Satz zum Bild": {
+   "datei": "florian/4b589fc5e8d1.mp3",
+   "h": "40352b9bef",
+   "gehoert": false
+  },
+  "Satzarten": {
+   "datei": "florian/e3237d09e620.mp3",
+   "h": "a0be25eba3",
+   "gehoert": false
+  },
+  "Sätze mit Bindewörtern verbinden": {
+   "datei": "florian/4261487cabcc.mp3",
+   "h": "ea71648f69",
+   "gehoert": false
+  },
+  "Sätze verbinden": {
+   "datei": "florian/37e3c1efb28a.mp3",
+   "h": "da81184e8f",
+   "gehoert": false
+  },
+  "Sauber verbessern": {
+   "datei": "florian/82a3f4635237.mp3",
+   "h": "020a2ef8dc",
+   "gehoert": false
+  },
+  "Säulendiagramm und Tabelle": {
+   "datei": "florian/d624d5cebd92.mp3",
+   "h": "410f0f83b2",
+   "gehoert": false
+  },
+  "Scharfes S nach langem Vokal": {
+   "datei": "florian/828430fd107a.mp3",
+   "h": "3d33de1bb0",
+   "gehoert": false
+  },
+  "Scharfes S nach Zwielauten": {
+   "datei": "florian/cac405500d2a.mp3",
+   "h": "9899ee9ab6",
+   "gehoert": false
+  },
+  "Scharfes S oder Doppel-S?": {
+   "datei": "florian/f777afcee850.mp3",
+   "h": "5f5b6d57d9",
+   "gehoert": false
+  },
+  "Schätzen und nachmessen": {
+   "datei": "florian/cf5dae360801.mp3",
+   "h": "5d8b5aa793",
+   "gehoert": false
+  },
+  "Schätzung begründen": {
+   "datei": "florian/11cda0e59716.mp3",
+   "h": "81eb8a7cef",
    "gehoert": false
   },
   "Schau auf die Zahl. Vorne steht der Zehner. Hinten stehen die Einer vom kleinen Stab.": {
@@ -1291,9 +4311,204 @@
    "h": "f79615ad1e",
    "gehoert": false
   },
+  "Schaukel": {
+   "datei": "florian/5d421d945d89.mp3",
+   "h": "67c107028b",
+   "gehoert": false
+  },
+  "Schaukel und Stab": {
+   "datei": "florian/fe310b7149c6.mp3",
+   "h": "9c7bd2a120",
+   "gehoert": false
+  },
+  "Schaukel-Buchstaben": {
+   "datei": "florian/659d15c7454c.mp3",
+   "h": "e68b7120b3",
+   "gehoert": false
+  },
+  "Schlangenbuchstabe": {
+   "datei": "florian/c4269a420ac2.mp3",
+   "h": "e334c47422",
+   "gehoert": false
+  },
+  "Schlaufe unten weiter": {
+   "datei": "florian/3ae1eb829ce9.mp3",
+   "h": "272a0df469",
+   "gehoert": false
+  },
+  "Schleifen nicht verwechseln": {
+   "datei": "florian/975090a00a4c.mp3",
+   "h": "e896d7efa5",
+   "gehoert": false
+  },
+  "Schlüsselwort fangen": {
+   "datei": "florian/4547b4930886.mp3",
+   "h": "fe2add37bc",
+   "gehoert": false
+  },
+  "Schnell lesen durch Wiederholen": {
+   "datei": "florian/b1f00a5587db.mp3",
+   "h": "2fc121e0e2",
+   "gehoert": false
+  },
+  "Schönes Wortende": {
+   "datei": "florian/7a5fb50e3b2f.mp3",
+   "h": "b299f19c5c",
+   "gehoert": false
+  },
+  "Schräg und gekreuzt": {
+   "datei": "florian/98986cb729b5.mp3",
+   "h": "c2fb95b249",
+   "gehoert": false
+  },
+  "Schräge Großbuchstaben": {
+   "datei": "florian/6119a58b997b.mp3",
+   "h": "c6138e5756",
+   "gehoert": false
+  },
+  "Schreiben mit der Anlauttabelle": {
+   "datei": "florian/e30b81d6747d.mp3",
+   "h": "4126f754b4",
+   "gehoert": false
+  },
+  "Schreibkonferenz": {
+   "datei": "florian/91091bd94390.mp3",
+   "h": "7b8c358be6",
+   "gehoert": false
+  },
+  "Schreibweisen von Größen wechseln": {
+   "datei": "florian/dbcf9489c1b1.mp3",
+   "h": "a06849573a",
+   "gehoert": false
+  },
+  "Schriftlage und Größe": {
+   "datei": "florian/c81f3f10277e.mp3",
+   "h": "b38d0b6404",
+   "gehoert": false
+  },
+  "Schriftlich geteilt mit Rest": {
+   "datei": "florian/38d8f978a0c7.mp3",
+   "h": "613929f22d",
+   "gehoert": false
+  },
+  "Schriftlich geteilt ohne Rest": {
+   "datei": "florian/05257b379a82.mp3",
+   "h": "c6bc83f2ec",
+   "gehoert": false
+  },
+  "Schriftlich mal mit Übertrag": {
+   "datei": "florian/c52f4288862b.mp3",
+   "h": "c896584e16",
+   "gehoert": false
+  },
+  "Schriftlich mal ohne Übertrag": {
+   "datei": "florian/12d5f537307a.mp3",
+   "h": "c583751d64",
+   "gehoert": false
+  },
+  "Schriftlich minus ohne Entbündeln": {
+   "datei": "florian/2be95df98c8d.mp3",
+   "h": "e21d76dc11",
+   "gehoert": false
+  },
+  "Schriftlich plus mit mehreren Summanden": {
+   "datei": "florian/17042384e838.mp3",
+   "h": "d89a1f29ab",
+   "gehoert": false
+  },
+  "Schriftlich plus mit Übertrag": {
+   "datei": "florian/98f3e46be39c.mp3",
+   "h": "ca3c4b8db8",
+   "gehoert": false
+  },
+  "Schriftlich plus ohne Übertrag": {
+   "datei": "florian/8ea7988c659a.mp3",
+   "h": "b1a3caa72a",
+   "gehoert": false
+  },
+  "Schriftlich plus und minus mit großen Zahlen": {
+   "datei": "florian/17f1c053e0c6.mp3",
+   "h": "7e8a4a575c",
+   "gehoert": false
+  },
+  "Schriftlich teilen mit zweistelligem Teiler": {
+   "datei": "florian/efccc2f0c7e2.mp3",
+   "h": "909d74d5b0",
+   "gehoert": false
+  },
+  "Schritt für Schritt am Rechenstrich": {
+   "datei": "florian/c16aad1277ec.mp3",
+   "h": "2c2fd6cfa6",
+   "gehoert": false
+  },
+  "Sechserreihe": {
+   "datei": "florian/743519db3aa6.mp3",
+   "h": "6a9dd88ea4",
+   "gehoert": false
+  },
+  "Sekunden": {
+   "datei": "florian/3655e933dceb.mp3",
+   "h": "2eff07542c",
+   "gehoert": false
+  },
+  "Sicher, möglich, unmöglich": {
+   "datei": "florian/ec63fe5f31b2.mp3",
+   "h": "f8a2d2f5e5",
+   "gehoert": false
+  },
   "Sie hat rote Schuhe.": {
    "datei": "florian/a862775cd700.mp3",
    "h": "d5f1778a63",
+   "gehoert": false
+  },
+  "Sieb oder Siep? Verlängern hilft": {
+   "datei": "florian/7eb465046671.mp3",
+   "h": "3732f14f42",
+   "gehoert": false
+  },
+  "Siebenerreihe": {
+   "datei": "florian/a0dea3c0ab29.mp3",
+   "h": "0b5c01b7cf",
+   "gehoert": false
+  },
+  "Siegerpodest, Reihenfolge zählt": {
+   "datei": "florian/84ce9c22cc60.mp3",
+   "h": "ad1f15dc7d",
+   "gehoert": false
+  },
+  "Silben klatschen": {
+   "datei": "florian/f1843e8fa429.mp3",
+   "h": "3cad07e071",
+   "gehoert": false
+  },
+  "Silben schwingen beim Schreiben": {
+   "datei": "florian/cf3cb3c0e749.mp3",
+   "h": "752a796fea",
+   "gehoert": false
+  },
+  "Silben zusammensetzen": {
+   "datei": "florian/c510e7bdfbbf.mp3",
+   "h": "0d6ee6cfe7",
+   "gehoert": false
+  },
+  "Situation verändern": {
+   "datei": "florian/54469b1f69ed.mp3",
+   "h": "3dba323406",
+   "gehoert": false
+  },
+  "Skizze statt Kopfchaos": {
+   "datei": "florian/090c21baf09f.mp3",
+   "h": "bc8de1228e",
+   "gehoert": false
+  },
+  "So hab ich's gelernt": {
+   "datei": "florian/889f4788d3f9.mp3",
+   "h": "6d31768b35",
+   "gehoert": false
+  },
+  "So hält der Stift": {
+   "datei": "florian/bd724701b9bb.mp3",
+   "h": "7b675ff93a",
    "gehoert": false
   },
   "So lang ist die Brücke jetzt.": {
@@ -1301,14 +4516,599 @@
    "h": "ff99fae951",
    "gehoert": false
   },
+  "So sagt man es wo": {
+   "datei": "florian/99fff3144ba1.mp3",
+   "h": "876214fb76",
+   "gehoert": false
+  },
+  "Sonderfälle beim Malnehmen": {
+   "datei": "florian/11a9bd0de93b.mp3",
+   "h": "9a086cec4a",
+   "gehoert": false
+  },
+  "Sonderfälle beim Teilen": {
+   "datei": "florian/e25374c42875.mp3",
+   "h": "ee7a175172",
+   "gehoert": false
+  },
+  "Spannung bauen": {
+   "datei": "florian/765f86c34bdf.mp3",
+   "h": "d428ae88a3",
+   "gehoert": false
+  },
+  "Spiegel-Rätsel": {
+   "datei": "florian/e69a4519388c.mp3",
+   "h": "e9fe5f3b9b",
+   "gehoert": false
+  },
+  "Spiegel-Ziffern": {
+   "datei": "florian/0e683d4a13ec.mp3",
+   "h": "e081d87d95",
+   "gehoert": false
+  },
+  "Spiegelbild entdecken": {
+   "datei": "florian/512e93757a54.mp3",
+   "h": "bbc7dabf32",
+   "gehoert": false
+  },
+  "Spiegelbuchstaben unterscheiden": {
+   "datei": "florian/1116375267e0.mp3",
+   "h": "c83de7560e",
+   "gehoert": false
+  },
+  "Spiegeln im Gitter": {
+   "datei": "florian/2c6e7c11024d.mp3",
+   "h": "f07c85360d",
+   "gehoert": false
+  },
+  "Spitz die Ohren": {
+   "datei": "florian/91e7e0da6989.mp3",
+   "h": "7e1b0416af",
+   "gehoert": false
+  },
+  "Spitze oben": {
+   "datei": "florian/a2d935df4302.mp3",
+   "h": "1a45179728",
+   "gehoert": false
+  },
+  "Spitze unten": {
+   "datei": "florian/ee81c7ab3412.mp3",
+   "h": "a746fd0803",
+   "gehoert": false
+  },
+  "Sprachbilder": {
+   "datei": "florian/75ee86fb73c8.mp3",
+   "h": "aa79121ab3",
+   "gehoert": false
+  },
+  "Stab mit Bauch": {
+   "datei": "florian/d87737ecb6c5.mp3",
+   "h": "dea00a9820",
+   "gehoert": false
+  },
+  "Stab und Bauch": {
+   "datei": "florian/041c9fce4ad9.mp3",
+   "h": "8c199b2b56",
+   "gehoert": false
+  },
+  "Stäbchen": {
+   "datei": "florian/4f65465c4ff9.mp3",
+   "h": "27e0a85fa9",
+   "gehoert": false
+  },
+  "Stäbchen mit Kreuz": {
+   "datei": "florian/33cc5ae6120d.mp3",
+   "h": "913888f4db",
+   "gehoert": false
+  },
+  "Standpunkt, Grund, Beispiel": {
+   "datei": "florian/741e0a400c9a.mp3",
+   "h": "8cf6e11a23",
+   "gehoert": false
+  },
+  "Steigern: klein, kleiner, am kleinsten": {
+   "datei": "florian/315da9920ce7.mp3",
+   "h": "2b02b457dc",
+   "gehoert": false
+  },
+  "Stellengerecht untereinander schreiben": {
+   "datei": "florian/3d8f33845ca3.mp3",
+   "h": "e0489c78dd",
+   "gehoert": false
+  },
+  "Stellenweise rechnen": {
+   "datei": "florian/f729c9b461d9.mp3",
+   "h": "01b7ef0889",
+   "gehoert": false
+  },
+  "Stern und Tipp": {
+   "datei": "florian/060418c80aa2.mp3",
+   "h": "0539ca88ea",
+   "gehoert": false
+  },
+  "Stimmt das": {
+   "datei": "florian/fee6ee84a85c.mp3",
+   "h": "85d84b727e",
+   "gehoert": false
+  },
+  "Stimmt das?": {
+   "datei": "florian/c8e52cb71e3d.mp3",
+   "h": "1ff6787deb",
+   "gehoert": false
+  },
+  "Stimmt die Aussage, und warum?": {
+   "datei": "florian/a48a6b7d9c49.mp3",
+   "h": "c6084ca206",
+   "gehoert": false
+  },
+  "Strategien kombinieren": {
+   "datei": "florian/0d59e0c8e022.mp3",
+   "h": "319f8efca6",
+   "gehoert": false
+  },
+  "Strichliste": {
+   "datei": "florian/46d47bb93f4a.mp3",
+   "h": "602a2dd115",
+   "gehoert": false
+  },
+  "Strichliste und Bilddiagramm": {
+   "datei": "florian/91108eae0beb.mp3",
+   "h": "87522cf948",
+   "gehoert": false
+  },
+  "Stunde und Minute": {
+   "datei": "florian/01b31bfb75ee.mp3",
+   "h": "3bbb15cd11",
+   "gehoert": false
+  },
+  "Summe bleibt gleich": {
+   "datei": "florian/4a2a2a52324f.mp3",
+   "h": "bb890f4443",
+   "gehoert": false
+  },
+  "Summen oder Zischen": {
+   "datei": "florian/39b88ffb0cba.mp3",
+   "h": "8db4a0a5e3",
+   "gehoert": false
+  },
+  "Symmetrieachsen einzeichnen": {
+   "datei": "florian/c85a75e20f42.mp3",
+   "h": "7cd631e4ed",
+   "gehoert": false
+  },
+  "Symmetrische Hälfte ergänzen": {
+   "datei": "florian/d6a21cd45331.mp3",
+   "h": "972950ed1f",
+   "gehoert": false
+  },
+  "Szenische Lesung": {
+   "datei": "florian/9a5568061c55.mp3",
+   "h": "1e58856b7a",
+   "gehoert": false
+  },
+  "Tabelle aus Text": {
+   "datei": "florian/47374b2ef29d.mp3",
+   "h": "9b5226e3d2",
+   "gehoert": false
+  },
+  "Tabellen lesen": {
+   "datei": "florian/8a76d3da8d17.mp3",
+   "h": "6234ba6e90",
+   "gehoert": false
+  },
+  "Tabellen und Preislisten lesen": {
+   "datei": "florian/ba00d63863af.mp3",
+   "h": "0feb0dbf53",
+   "gehoert": false
+  },
+  "Tabellen und Schaubilder lesen": {
+   "datei": "florian/13910c7ad877.mp3",
+   "h": "fa4084f533",
+   "gehoert": false
+  },
+  "Tag oder Tak? Verlängern hilft": {
+   "datei": "florian/74d4811cd1dd.mp3",
+   "h": "c821377ff7",
+   "gehoert": false
+  },
+  "Taschenrechner, wann sinnvoll?": {
+   "datei": "florian/133a2c4b16ad.mp3",
+   "h": "9e817ca263",
+   "gehoert": false
+  },
+  "Tauschaufgabe beim Mal begründen": {
+   "datei": "florian/3f9900e8a049.mp3",
+   "h": "83b14f6d2f",
+   "gehoert": false
+  },
+  "Tauschaufgaben": {
+   "datei": "florian/c24a0d1d7617.mp3",
+   "h": "c77bf3b447",
+   "gehoert": false
+  },
+  "Tauschaufgaben beim Malnehmen": {
+   "datei": "florian/dd193b75be7e.mp3",
+   "h": "5acbdfbe86",
+   "gehoert": false
+  },
+  "Tausender bündeln": {
+   "datei": "florian/b249f5d1c882.mp3",
+   "h": "5a0534a7aa",
+   "gehoert": false
+  },
+  "Teilen in den Kernreihen": {
+   "datei": "florian/ce49836df3b4.mp3",
+   "h": "cea70c77fa",
+   "gehoert": false
+  },
+  "Teilen mit Rest": {
+   "datei": "florian/fd74b9eaa703.mp3",
+   "h": "9025a91993",
+   "gehoert": false
+  },
+  "Teilen mit Rest sicher": {
+   "datei": "florian/9f925c2fbe29.mp3",
+   "h": "c4195937cd",
+   "gehoert": false
+  },
+  "Teiler begründen": {
+   "datei": "florian/6561f494c9ed.mp3",
+   "h": "391b4d45d8",
+   "gehoert": false
+  },
+  "Teiler und Vielfache": {
+   "datei": "florian/9bbf880c55c0.mp3",
+   "h": "0468e14392",
+   "gehoert": false
+  },
+  "Tempo und Lautstärke": {
+   "datei": "florian/95b22e28e3c2.mp3",
+   "h": "fb0b6db6e7",
+   "gehoert": false
+  },
+  "Terme vergleichen": {
+   "datei": "florian/4fad1135004c.mp3",
+   "h": "2d8a8225c7",
+   "gehoert": false
+  },
+  "Textlupe": {
+   "datei": "florian/de2b1e4d16cf.mp3",
+   "h": "e116eee75f",
+   "gehoert": false
+  },
+  "Textsorte erkennen": {
+   "datei": "florian/0eb8fbdd7089.mp3",
+   "h": "559e5c1bcc",
+   "gehoert": false
+  },
+  "Tier-Steckbrief": {
+   "datei": "florian/517dbf4adae5.mp3",
+   "h": "dcf8e063f6",
+   "gehoert": false
+  },
+  "Tierbeschreibung": {
+   "datei": "florian/f269f7b2a903.mp3",
+   "h": "2e289a1ee8",
+   "gehoert": false
+  },
   "Tom rennt weg.": {
    "datei": "florian/413879379575.mp3",
    "h": "41bc98035b",
    "gehoert": false
   },
+  "Tonne": {
+   "datei": "florian/17bf885fdc03.mp3",
+   "h": "36933ec187",
+   "gehoert": false
+  },
+  "Trennen am Zeilenende": {
+   "datei": "florian/5bae36b1212b.mp3",
+   "h": "4fbb3ebb75",
+   "gehoert": false
+  },
+  "Trennen bei Doppelkonsonanten": {
+   "datei": "florian/cc92682837bf.mp3",
+   "h": "cf3cf14aff",
+   "gehoert": false
+  },
+  "Trösten und gratulieren": {
+   "datei": "florian/042cc62758d1.mp3",
+   "h": "c345b13a0b",
+   "gehoert": false
+  },
+  "Trotz Lärm verstehen": {
+   "datei": "florian/9f4844e3e586.mp3",
+   "h": "71bb82c593",
+   "gehoert": false
+  },
+  "Tut mir leid": {
+   "datei": "florian/b103a3f03420.mp3",
+   "h": "cb1ebfc91a",
+   "gehoert": false
+  },
+  "Über Bücher sprechen": {
+   "datei": "florian/6760f7c36849.mp3",
+   "h": "8c524774a9",
+   "gehoert": false
+  },
+  "Über die Zeile lesen": {
+   "datei": "florian/7a96be917d03.mp3",
+   "h": "4f075a655b",
+   "gehoert": false
+  },
+  "Über Zehner und Hunderter hinweg": {
+   "datei": "florian/ce342a0c9949.mp3",
+   "h": "d16f0868aa",
+   "gehoert": false
+  },
+  "Überflüssige und fehlende Angaben": {
+   "datei": "florian/110f10ad8e9b.mp3",
+   "h": "89f9faa3fc",
+   "gehoert": false
+  },
+  "Überschlag als Beweis": {
+   "datei": "florian/6ca27792433f.mp3",
+   "h": "f09e529af3",
+   "gehoert": false
+  },
+  "Überschlag beim Mal": {
+   "datei": "florian/9c854b6145e7.mp3",
+   "h": "2b0a02feb9",
+   "gehoert": false
+  },
+  "Überschlag zuerst": {
+   "datei": "florian/f36a7d92808b.mp3",
+   "h": "04245884b7",
+   "gehoert": false
+  },
+  "Überschrift finden": {
+   "datei": "florian/507a30e64061.mp3",
+   "h": "41b1494028",
+   "gehoert": false
+  },
+  "Überschrift verrät": {
+   "datei": "florian/c8b8826a42d5.mp3",
+   "h": "ddb6297f46",
+   "gehoert": false
+  },
+  "Umfang bestimmen": {
+   "datei": "florian/41e1338057ad.mp3",
+   "h": "ccef149326",
+   "gehoert": false
+  },
+  "Umkehraufgaben": {
+   "datei": "florian/05279b2b274b.mp3",
+   "h": "59c01a0b9c",
+   "gehoert": false
+  },
+  "Umkehraufgaben im Zwanzigerraum": {
+   "datei": "florian/e0ecf7ba22ad.mp3",
+   "h": "248b853915",
+   "gehoert": false
+  },
+  "Umstellen": {
+   "datei": "florian/2492e1023d22.mp3",
+   "h": "34b5ad128a",
+   "gehoert": false
+  },
+  "Umstellprobe": {
+   "datei": "florian/a4b1e6092c26.mp3",
+   "h": "7d9419c326",
+   "gehoert": false
+  },
+  "Unbekanntes Wort klären": {
+   "datei": "florian/7d302cc686fd.mp3",
+   "h": "5323be64f9",
+   "gehoert": false
+  },
+  "Ungefähr wie viele?": {
+   "datei": "florian/7e02349f2cd5.mp3",
+   "h": "082a5ec280",
+   "gehoert": false
+  },
+  "Ungleichungen": {
+   "datei": "florian/9239a303d272.mp3",
+   "h": "12b6b7a5a6",
+   "gehoert": false
+  },
+  "Unmöglich?": {
+   "datei": "florian/f5299bb925cf.mp3",
+   "h": "4104265787",
+   "gehoert": false
+  },
   "Unser Hase frisst gern Möhren.": {
    "datei": "florian/12e6a853917b.mp3",
    "h": "668e21b4fb",
+   "gehoert": false
+  },
+  "Unterlängen-Schleifen": {
+   "datei": "florian/4f42e0920d03.mp3",
+   "h": "9945c4a610",
+   "gehoert": false
+  },
+  "Unterschied bleibt gleich": {
+   "datei": "florian/042f20d6c41d.mp3",
+   "h": "4563674518",
+   "gehoert": false
+  },
+  "Unterschied finden": {
+   "datei": "florian/d222d27c35b1.mp3",
+   "h": "24bd9456fa",
+   "gehoert": false
+  },
+  "Verb passt zur Person": {
+   "datei": "florian/37091477d568.mp3",
+   "h": "7ea60c1ba3",
+   "gehoert": false
+  },
+  "Verben": {
+   "datei": "florian/c74b012da725.mp3",
+   "h": "6ae6eb459a",
+   "gehoert": false
+  },
+  "Verben als Nomen": {
+   "datei": "florian/8c2893efad14.mp3",
+   "h": "41abc035b0",
+   "gehoert": false
+  },
+  "Verbindungen wie bei Stern und Spiel": {
+   "datei": "florian/43d91291e312.mp3",
+   "h": "4457d1499a",
+   "gehoert": false
+  },
+  "Verdoppeln": {
+   "datei": "florian/2a838e8f550b.mp3",
+   "h": "1dad8f40c0",
+   "gehoert": false
+  },
+  "Verdoppeln beim Malnehmen": {
+   "datei": "florian/99f6064b39c0.mp3",
+   "h": "c99a2f683a",
+   "gehoert": false
+  },
+  "Verdoppeln und Halbieren": {
+   "datei": "florian/d20bc2e03429.mp3",
+   "h": "c6913e1364",
+   "gehoert": false
+  },
+  "Verdoppeln und Halbieren bis tausend": {
+   "datei": "florian/0173f962918b.mp3",
+   "h": "d4b0f5f44b",
+   "gehoert": false
+  },
+  "Vergangenheit: ging, sah": {
+   "datei": "florian/2fcf61eedda2.mp3",
+   "h": "46e040f001",
+   "gehoert": false
+  },
+  "Vergangenheit: spielte, lachte": {
+   "datei": "florian/6849eb5a2cb0.mp3",
+   "h": "0ba27352db",
+   "gehoert": false
+  },
+  "Vergleichen und ordnen bis tausend": {
+   "datei": "florian/c851050039e5.mp3",
+   "h": "65398ab412",
+   "gehoert": false
+  },
+  "Vergleichen und ordnen bis zur Million": {
+   "datei": "florian/fb2582e49643.mp3",
+   "h": "aa3a1187a2",
+   "gehoert": false
+  },
+  "Vergleichen und prüfen": {
+   "datei": "florian/48dc6317fd18.mp3",
+   "h": "1aa4224f52",
+   "gehoert": false
+  },
+  "Vergrößern und verkleinern": {
+   "datei": "florian/943a2d349e45.mp3",
+   "h": "a126649d67",
+   "gehoert": false
+  },
+  "Verhältniswörter": {
+   "datei": "florian/a2b2e4ad0137.mp3",
+   "h": "31a339d838",
+   "gehoert": false
+  },
+  "Verlängern bei Adjektiven": {
+   "datei": "florian/f780032be10a.mp3",
+   "h": "ea65f8eb15",
+   "gehoert": false
+  },
+  "Verlängern bei Verben": {
+   "datei": "florian/0c948dc5dfd2.mp3",
+   "h": "36e85197ec",
+   "gehoert": false
+  },
+  "Verlängern zeigt doppelte Konsonanten": {
+   "datei": "florian/f0107f133d31.mp3",
+   "h": "4730501cef",
+   "gehoert": false
+  },
+  "Vermutung aufstellen": {
+   "datei": "florian/eb64ccce348f.mp3",
+   "h": "605fdb2ec6",
+   "gehoert": false
+  },
+  "Vermutung testen": {
+   "datei": "florian/779d3c068922.mp3",
+   "h": "d54682093a",
+   "gehoert": false
+  },
+  "Videoanruf-Regeln": {
+   "datei": "florian/ba1bb0b86daf.mp3",
+   "h": "6f05240a1f",
+   "gehoert": false
+  },
+  "Viele Stimmen": {
+   "datei": "florian/c569a0415ef2.mp3",
+   "h": "818eb1dae8",
+   "gehoert": false
+  },
+  "Viererreihe": {
+   "datei": "florian/63b67077639f.mp3",
+   "h": "3613c35640",
+   "gehoert": false
+  },
+  "Viertel nach und Viertel vor": {
+   "datei": "florian/01f47451b13b.mp3",
+   "h": "15540b0ed6",
+   "gehoert": false
+  },
+  "Vokal oder Konsonant?": {
+   "datei": "florian/1193867eb5a2.mp3",
+   "h": "f7d29372e0",
+   "gehoert": false
+  },
+  "Volle Hand plus": {
+   "datei": "florian/dd4773d3ec99.mp3",
+   "h": "fa27328206",
+   "gehoert": false
+  },
+  "Volle Stunde": {
+   "datei": "florian/0b9fbc32251d.mp3",
+   "h": "49135d2368",
+   "gehoert": false
+  },
+  "Vom Bild zur Rechnung": {
+   "datei": "florian/0e367ff2b4cf.mp3",
+   "h": "e5378c9fd3",
+   "gehoert": false
+  },
+  "Von der Rechnung zum Bild": {
+   "datei": "florian/00dda1ccd7a6.mp3",
+   "h": "fd7ecf9703",
+   "gehoert": false
+  },
+  "Von der Zehnerzahl weg": {
+   "datei": "florian/4e64a98c3f05.mp3",
+   "h": "6b72c3c13d",
+   "gehoert": false
+  },
+  "Von links nach rechts": {
+   "datei": "florian/8ab7ed4f3d43.mp3",
+   "h": "d14d5ecf63",
+   "gehoert": false
+  },
+  "Von oben nach unten": {
+   "datei": "florian/5a57a12743fd.mp3",
+   "h": "5b92648e55",
+   "gehoert": false
+  },
+  "Von vorne, von oben, von der Seite": {
+   "datei": "florian/6480d79a9548.mp3",
+   "h": "41a9c761ab",
+   "gehoert": false
+  },
+  "Von wo kommt es?": {
+   "datei": "florian/3282f66c9678.mp3",
+   "h": "25d237787f",
+   "gehoert": false
+  },
+  "Vorgehen ändern": {
+   "datei": "florian/bff06d5e3542.mp3",
+   "h": "327f389f78",
    "gehoert": false
   },
   "Vorne an der Zahl stehen die Zehner. Einer gibt es keine mehr.": {
@@ -1321,9 +5121,129 @@
    "h": "cae968c1c9",
    "gehoert": false
   },
+  "Vorsilben": {
+   "datei": "florian/502bd1f75482.mp3",
+   "h": "26a48586ff",
+   "gehoert": false
+  },
+  "Vorsilben bei Verben": {
+   "datei": "florian/48eed3f1992d.mp3",
+   "h": "fd2bffa7e2",
+   "gehoert": false
+  },
+  "Vorsilben wie bei unfreundlich und vorlesen": {
+   "datei": "florian/94bfb5b50e97.mp3",
+   "h": "8d2a9f15f4",
+   "gehoert": false
+  },
+  "Vorwärts und rückwärts denken": {
+   "datei": "florian/87bb8696ac00.mp3",
+   "h": "cdfe4e3a77",
+   "gehoert": false
+  },
+  "Vorwärts zählen": {
+   "datei": "florian/8c480d674a8c.mp3",
+   "h": "cd001cbbae",
+   "gehoert": false
+  },
+  "Waagerätsel": {
+   "datei": "florian/e22fe76eda8f.mp3",
+   "h": "4e993653a3",
+   "gehoert": false
+  },
+  "Wahrscheinlich oder unwahrscheinlich": {
+   "datei": "florian/ec66e90b5d77.mp3",
+   "h": "333344ea1b",
+   "gehoert": false
+  },
+  "Warum der Mittelstein zählt": {
+   "datei": "florian/153f4d8d0783.mp3",
+   "h": "00d3588383",
+   "gehoert": false
+  },
+  "Warum eigentlich?": {
+   "datei": "florian/93161b70d44b.mp3",
+   "h": "e74edd9005",
+   "gehoert": false
+  },
+  "Warum tut sie das?": {
+   "datei": "florian/73b025149861.mp3",
+   "h": "04b055cba1",
+   "gehoert": false
+  },
+  "Warum versteh ich nichts?": {
+   "datei": "florian/d3f9a06a8a84.mp3",
+   "h": "55130d12f2",
+   "gehoert": false
+  },
+  "Was bedeutet die Redewendung?": {
+   "datei": "florian/912b2dd26d74.mp3",
+   "h": "b7e13cbd51",
+   "gehoert": false
+  },
+  "Was braucht das Verb?": {
+   "datei": "florian/9c14bb96e650.mp3",
+   "h": "d10c992f5c",
+   "gehoert": false
+  },
+  "Was hat mir beim Zuhören geholfen?": {
+   "datei": "florian/2e17d5205a67.mp3",
+   "h": "f606ba86b8",
+   "gehoert": false
+  },
+  "Was heißt das Wort hier?": {
+   "datei": "florian/cec9c139638e.mp3",
+   "h": "d7e5da93f8",
+   "gehoert": false
+  },
   "Was ich kann": {
    "datei": "florian/c1a988531c9b.mp3",
    "h": "68e2ae8948",
+   "gehoert": false
+  },
+  "Was ist erzählenswert?": {
+   "datei": "florian/e7892a000055.mp3",
+   "h": "4e11745354",
+   "gehoert": false
+  },
+  "Was ist mehr?": {
+   "datei": "florian/244d82aefa16.mp3",
+   "h": "018496b579",
+   "gehoert": false
+  },
+  "Was klingt da?": {
+   "datei": "florian/c68dce3f3337.mp3",
+   "h": "03bd0bd992",
+   "gehoert": false
+  },
+  "Was passiert zuerst?": {
+   "datei": "florian/1ac86fefeb22.mp3",
+   "h": "dbb701380a",
+   "gehoert": false
+  },
+  "Was passt dazu": {
+   "datei": "florian/0f7c2082ba0b.mp3",
+   "h": "8473cf1dfa",
+   "gehoert": false
+  },
+  "Was passt nicht?": {
+   "datei": "florian/14deec67414d.mp3",
+   "h": "804820fb08",
+   "gehoert": false
+  },
+  "Was wäre, wenn …?": {
+   "datei": "florian/2d0f8addaa09.mp3",
+   "h": "0bc15d79cf",
+   "gehoert": false
+  },
+  "Weg beschreiben": {
+   "datei": "florian/5b9dfcda6cb7.mp3",
+   "h": "12e4a204c1",
+   "gehoert": false
+  },
+  "Wege folgen": {
+   "datei": "florian/36ddffc49fce.mp3",
+   "h": "1ae71ed632",
    "gehoert": false
   },
   "Weiter unten ist der Bach breiter. Diese Brücke hat Zehnerstäbe und einen kleinen Stab.": {
@@ -1334,6 +5254,176 @@
   "Weiter unten ist der Bach breiter. Dort legt das Einhorn Zehnerstäbe und einen kleinen Stab.": {
    "datei": "florian/fb62c7d74e58.mp3",
    "h": "9f50179bf3",
+   "gehoert": false
+  },
+  "Welche Darstellung hilft?": {
+   "datei": "florian/49b889e98582.mp3",
+   "h": "8243656938",
+   "gehoert": false
+  },
+  "Welche Fläche ist größer": {
+   "datei": "florian/c20761c3975b.mp3",
+   "h": "5c74542d80",
+   "gehoert": false
+  },
+  "Welche Frage passt": {
+   "datei": "florian/03ac628baab8.mp3",
+   "h": "6751479525",
+   "gehoert": false
+  },
+  "Welche Geschichte passt zur Rechnung?": {
+   "datei": "florian/81d4d92ade3a.mp3",
+   "h": "8a5ad0c826",
+   "gehoert": false
+  },
+  "Welche Zeitform?": {
+   "datei": "florian/4ac94f87c5b6.mp3",
+   "h": "9a48916c03",
+   "gehoert": false
+  },
+  "Welcher Rand ist länger": {
+   "datei": "florian/a06c1f678cce.mp3",
+   "h": "eebb42add5",
+   "gehoert": false
+  },
+  "Welcher Trick hilft": {
+   "datei": "florian/f7fd7b7cf220.mp3",
+   "h": "b791149854",
+   "gehoert": false
+  },
+  "Welches passt nicht": {
+   "datei": "florian/989e63840ead.mp3",
+   "h": "7c0a6753d2",
+   "gehoert": false
+  },
+  "Welches Wort passt nicht?": {
+   "datei": "florian/b3c03ef444be.mp3",
+   "h": "5da23f3299",
+   "gehoert": false
+  },
+  "Wellen": {
+   "datei": "florian/d48c62cb00af.mp3",
+   "h": "b7d241869c",
+   "gehoert": false
+  },
+  "Wem-Ergänzung": {
+   "datei": "florian/08763ce9c40c.mp3",
+   "h": "a6b13f5d72",
+   "gehoert": false
+  },
+  "Wen- oder Was-Ergänzung": {
+   "datei": "florian/06886d86b9fa.mp3",
+   "h": "a31f26526b",
+   "gehoert": false
+  },
+  "Wenn nichts da ist": {
+   "datei": "florian/ae3947dc593c.mp3",
+   "h": "1319c820a4",
+   "gehoert": false
+  },
+  "Wer hat das gesagt?": {
+   "datei": "florian/d7e8f6b6c3b1.mp3",
+   "h": "e9379904ec",
+   "gehoert": false
+  },
+  "Wer hat wie gerechnet": {
+   "datei": "florian/fb96e8a6a84b.mp3",
+   "h": "f0fcbb3505",
+   "gehoert": false
+  },
+  "Wer ist mit „er“ gemeint?": {
+   "datei": "florian/e4445eba758a.mp3",
+   "h": "840e7e9336",
+   "gehoert": false
+  },
+  "Wer kommt vor?": {
+   "datei": "florian/7ddc823859a3.mp3",
+   "h": "64525af5a7",
+   "gehoert": false
+  },
+  "Wer, wo, wann?": {
+   "datei": "florian/157da855d642.mp3",
+   "h": "de68e7b76f",
+   "gehoert": false
+  },
+  "Wertetabelle": {
+   "datei": "florian/e627c880226a.mp3",
+   "h": "2c21e01cb5",
+   "gehoert": false
+  },
+  "Wichtig oder unwichtig": {
+   "datei": "florian/eb210a4d545c.mp3",
+   "h": "7fc164c446",
+   "gehoert": false
+  },
+  "Wichtiges markieren": {
+   "datei": "florian/16b85769c682.mp3",
+   "h": "e7c3787ab2",
+   "gehoert": false
+  },
+  "Wie bei Kiste oder wie bei Biene": {
+   "datei": "florian/c471c365aea2.mp3",
+   "h": "210f6ee94b",
+   "gehoert": false
+  },
+  "Wie bei lustig oder fröhlich?": {
+   "datei": "florian/57cc558fe7c5.mp3",
+   "h": "8fb5018196",
+   "gehoert": false
+  },
+  "Wie fühlt sich die Figur?": {
+   "datei": "florian/e29b2e09a944.mp3",
+   "h": "8e18b8f0ef",
+   "gehoert": false
+  },
+  "Wie fühlt sich Mia?": {
+   "datei": "florian/88a3173aba57.mp3",
+   "h": "2b773ac9a4",
+   "gehoert": false
+  },
+  "Wie Gänse von Gans kommt": {
+   "datei": "florian/7fc4b633469a.mp3",
+   "h": "4fa9b318bf",
+   "gehoert": false
+  },
+  "Wie geht es weiter?": {
+   "datei": "florian/0758e38cb0a3.mp3",
+   "h": "8014325ce6",
+   "gehoert": false
+  },
+  "Wie klingt die Stimme?": {
+   "datei": "florian/9d0e9db0ff35.mp3",
+   "h": "6b84d80ca7",
+   "gehoert": false
+  },
+  "Wie lange dauert es?": {
+   "datei": "florian/e77837446901.mp3",
+   "h": "2ae743cefb",
+   "gehoert": false
+  },
+  "Wie oft wird Hände geschüttelt?": {
+   "datei": "florian/9af76075b32c.mp3",
+   "h": "b06b70654d",
+   "gehoert": false
+  },
+  "Wie viele passen": {
+   "datei": "florian/fa5295bca316.mp3",
+   "h": "3c8d9be33b",
+   "gehoert": false
+  },
+  "Wie war es für mich?": {
+   "datei": "florian/c92759053909.mp3",
+   "h": "468de06d89",
+   "gehoert": false
+  },
+  "Wie wurde hier gerechnet?": {
+   "datei": "florian/feaa81fd6f42.mp3",
+   "h": "95b8b95c59",
+   "gehoert": false
+  },
+  "Wie Zäune von Zaun kommt": {
+   "datei": "florian/2ab6397c5e13.mp3",
+   "h": "01bcc0440f",
    "gehoert": false
   },
   "Wimmelbild. Nomen. Zieh die Wörter auf die Dinge im Bild.": {
@@ -1386,19 +5476,459 @@
    "h": "661d86003e",
    "gehoert": false
   },
-  "Zahlenzauber. Plus und Minus. Welche zwei Zahlen ergeben zusammen die dritte?": {
-   "datei": "florian/7a2e048357d6.mp3",
-   "h": "b963c75791",
+  "Wo ist der Laut?": {
+   "datei": "florian/bf74475c6a08.mp3",
+   "h": "4abf57d509",
    "gehoert": false
   },
-  "Zauberer. Großschreibung. Zaubere die Buchstaben groß oder klein.": {
-   "datei": "florian/b5cc65ec5bbf.mp3",
-   "h": "e4282ea22f",
+  "Wo spielt es?": {
+   "datei": "florian/e2152b24708f.mp3",
+   "h": "35acec8f24",
+   "gehoert": false
+  },
+  "Wo steht es?": {
+   "datei": "florian/95e50c819991.mp3",
+   "h": "7feaa9f628",
+   "gehoert": false
+  },
+  "Wochentage und Tageszeiten": {
+   "datei": "florian/003831d0a4f2.mp3",
+   "h": "17261bd760",
+   "gehoert": false
+  },
+  "Wofür Zahlen stehen": {
+   "datei": "florian/9468c8551add.mp3",
+   "h": "2c86861e72",
+   "gehoert": false
+  },
+  "Woher kommt das Wort?": {
+   "datei": "florian/6350e6eff41e.mp3",
+   "h": "7b85d17917",
+   "gehoert": false
+  },
+  "Wohin damit?": {
+   "datei": "florian/de2a73f8c049.mp3",
+   "h": "33949822f9",
+   "gehoert": false
+  },
+  "Wort abschreiben": {
+   "datei": "florian/cf1ef7b1e90d.mp3",
+   "h": "9a51dd55c1",
+   "gehoert": false
+  },
+  "Wort zum Bild": {
+   "datei": "florian/ae2b5f758ec3.mp3",
+   "h": "26fd58a888",
+   "gehoert": false
+  },
+  "Wortart wechseln": {
+   "datei": "florian/d66a2bd4ade9.mp3",
+   "h": "11e971ebf8",
+   "gehoert": false
+  },
+  "Wortbausteine sehen": {
+   "datei": "florian/22a8428c9526.mp3",
+   "h": "a262dbebde",
+   "gehoert": false
+  },
+  "Wortendungen lesen": {
+   "datei": "florian/9a37559cf1d1.mp3",
+   "h": "ea07acc0c9",
+   "gehoert": false
+  },
+  "Wörter aus offenen Silben": {
+   "datei": "florian/91ca046816bb.mp3",
+   "h": "4d640e5921",
+   "gehoert": false
+  },
+  "Wörter im Satz zählen": {
+   "datei": "florian/b2d596c6cc66.mp3",
+   "h": "3d36e34655",
+   "gehoert": false
+  },
+  "Wörter mit Konsonanten am Anfang lesen": {
+   "datei": "florian/8d21642848b1.mp3",
+   "h": "051951ffdc",
+   "gehoert": false
+  },
+  "Wörter mit vielen Konsonanten lesen": {
+   "datei": "florian/128d8d252a0e.mp3",
+   "h": "36f86b8fb7",
+   "gehoert": false
+  },
+  "Wörter zusammensetzen": {
+   "datei": "florian/9122bd510816.mp3",
+   "h": "4dfcba6762",
+   "gehoert": false
+  },
+  "Wörter-Spur": {
+   "datei": "florian/926261793248.mp3",
+   "h": "2c5241c347",
+   "gehoert": false
+  },
+  "Wörter, die mit schp beginnen": {
+   "datei": "florian/2d03e1e2a0d7.mp3",
+   "h": "cad2ede722",
+   "gehoert": false
+  },
+  "Wörter, die mit scht beginnen": {
+   "datei": "florian/b997a959a91e.mp3",
+   "h": "3348aecf6f",
+   "gehoert": false
+  },
+  "Wortfamilien": {
+   "datei": "florian/916d77b156fd.mp3",
+   "h": "83f80ccdd4",
+   "gehoert": false
+  },
+  "Wortfamilien mit anderem Vokal": {
+   "datei": "florian/0a2a22b56251.mp3",
+   "h": "9ebcd05050",
+   "gehoert": false
+  },
+  "Wortfeld „gehen“ im Text": {
+   "datei": "florian/9a8b86cfdc5d.mp3",
+   "h": "741c73aad8",
+   "gehoert": false
+  },
+  "Wortfeld „sagen“ im Text": {
+   "datei": "florian/6f00934453bc.mp3",
+   "h": "f64102a391",
+   "gehoert": false
+  },
+  "Wortfelder „sehen“ und „essen“": {
+   "datei": "florian/d01e6d794810.mp3",
+   "h": "8462ffd430",
+   "gehoert": false
+  },
+  "Wortfelder gehen und sagen": {
+   "datei": "florian/1f3afd0bd4f5.mp3",
+   "h": "c4e1d25caf",
+   "gehoert": false
+  },
+  "Wörtliche Rede erkennen": {
+   "datei": "florian/ac791a6c6236.mp3",
+   "h": "42bd0c0590",
+   "gehoert": false
+  },
+  "Wörtliche Rede: Begleitsatz hinten": {
+   "datei": "florian/4730101755ce.mp3",
+   "h": "f7580ae31d",
+   "gehoert": false
+  },
+  "Wörtliche Rede: Begleitsatz in der Mitte": {
+   "datei": "florian/11e64806680e.mp3",
+   "h": "ecb3da9741",
+   "gehoert": false
+  },
+  "Wörtliche Rede: Begleitsatz vorne": {
+   "datei": "florian/5c7739b1c02f.mp3",
+   "h": "fa63dabf18",
+   "gehoert": false
+  },
+  "Wortstamm sehen": {
+   "datei": "florian/f8d93a4a3348.mp3",
+   "h": "e10d914f52",
+   "gehoert": false
+  },
+  "Worum geht's?": {
+   "datei": "florian/b0124103e44d.mp3",
+   "h": "9651875fa0",
+   "gehoert": false
+  },
+  "Wozu ist der Zettel": {
+   "datei": "florian/615d90b8957f.mp3",
+   "h": "1aafbc1c87",
+   "gehoert": false
+  },
+  "Würfel kippen": {
+   "datei": "florian/3c3b2335610a.mp3",
+   "h": "e8b1a7e3b3",
+   "gehoert": false
+  },
+  "Würfel und Quader vergleichen": {
+   "datei": "florian/eba827787d33.mp3",
+   "h": "d82da53773",
+   "gehoert": false
+  },
+  "Würfelgebäude nach Bauplan": {
+   "datei": "florian/36691a091acd.mp3",
+   "h": "68432b5bce",
+   "gehoert": false
+  },
+  "Würfelgebäude Rätsel": {
+   "datei": "florian/a2cbf93719f6.mp3",
+   "h": "6839ac8633",
+   "gehoert": false
+  },
+  "Würfelnetz im Kopf": {
+   "datei": "florian/cae9f409b4e7.mp3",
+   "h": "a05a92c606",
+   "gehoert": false
+  },
+  "Würfelnetze": {
+   "datei": "florian/10813201f7a2.mp3",
+   "h": "1530541334",
+   "gehoert": false
+  },
+  "Zahlen anders zeigen": {
+   "datei": "florian/fe4303d20e54.mp3",
+   "h": "b69233aeca",
+   "gehoert": false
+  },
+  "Zahlen bis tausend darstellen": {
+   "datei": "florian/f47c80ddb0a2.mp3",
+   "h": "32200f34a2",
+   "gehoert": false
+  },
+  "Zahlen im Zwanzigerraum schreiben": {
+   "datei": "florian/b91eaaf6c7a7.mp3",
+   "h": "b07925b728",
+   "gehoert": false
+  },
+  "Zählen in großen Schritten": {
+   "datei": "florian/aeac7c60e929.mp3",
+   "h": "5304a7b7bd",
+   "gehoert": false
+  },
+  "Zahlen in vielen Formen": {
+   "datei": "florian/3f42c2e63d53.mp3",
+   "h": "3a243976d6",
+   "gehoert": false
+  },
+  "Zahlen nach Stellen zerlegen": {
+   "datei": "florian/794c9bec14e0.mp3",
+   "h": "79a38d82b8",
+   "gehoert": false
+  },
+  "Zahlen ordnen": {
+   "datei": "florian/28e1deccb21d.mp3",
+   "h": "f1badf6e0e",
+   "gehoert": false
+  },
+  "Zahlenfolgen fortsetzen": {
+   "datei": "florian/468bb1c28bea.mp3",
+   "h": "602fd5ddff",
+   "gehoert": false
+  },
+  "Zahlenfolgen und Zahleigenschaften": {
+   "datei": "florian/9e89ecf24d49.mp3",
+   "h": "0f7c778b6a",
+   "gehoert": false
+  },
+  "Zahlenkette rückwärts": {
+   "datei": "florian/dbab688799b7.mp3",
+   "h": "3c66cde35e",
+   "gehoert": false
+  },
+  "Zahlenmauer": {
+   "datei": "florian/3f91f361bba0.mp3",
+   "h": "3b68705e64",
+   "gehoert": false
+  },
+  "Zahlenmauer mit Unbekannter": {
+   "datei": "florian/80452956e370.mp3",
+   "h": "0d3665fdde",
+   "gehoert": false
+  },
+  "Zahlenmauer mit verteilten Lücken": {
+   "datei": "florian/b879e1596308.mp3",
+   "h": "a6eeb16bb6",
+   "gehoert": false
+  },
+  "Zahlenmauer von oben": {
+   "datei": "florian/df6477f98965.mp3",
+   "h": "11301a0865",
+   "gehoert": false
+  },
+  "Zahlenmauer, Rechendreieck und Rechenkette": {
+   "datei": "florian/727422a59fac.mp3",
+   "h": "a80bd601d9",
+   "gehoert": false
+  },
+  "Zahlenmauer: Ziel erreichen": {
+   "datei": "florian/7867a991f463.mp3",
+   "h": "3462c12b30",
+   "gehoert": false
+  },
+  "Zahlenmauern und Rechendreiecke": {
+   "datei": "florian/2b2f67600b26.mp3",
+   "h": "f66dde9025",
+   "gehoert": false
+  },
+  "Zahlenmauern und Zauberdreiecke bis tausend": {
+   "datei": "florian/95b10b69206d.mp3",
+   "h": "e60c774e2c",
+   "gehoert": false
+  },
+  "Zahlenrätsel mit Hinweisen": {
+   "datei": "florian/5cf9e90478ab.mp3",
+   "h": "dfa4c1de82",
+   "gehoert": false
+  },
+  "Zahlenstrahl": {
+   "datei": "florian/771cc86f0a33.mp3",
+   "h": "7643456be4",
+   "gehoert": false
+  },
+  "Zahlenstrahl bis tausend": {
+   "datei": "florian/7cb14d631726.mp3",
+   "h": "7313935d78",
+   "gehoert": false
+  },
+  "Zahlenstrahl mit großen Schritten": {
+   "datei": "florian/7d40b82c36ef.mp3",
+   "h": "bd465c448c",
+   "gehoert": false
+  },
+  "Zahlenzauber. Plus und Minus. Welche zwei Zahlen sind zusammen so viel wie die dritte?": {
+   "datei": "florian/5c0132a7cbe0.mp3",
+   "h": "6cfdd135a6",
+   "gehoert": false
+  },
+  "Zahlwörter und Ziffern": {
+   "datei": "florian/4fdfbc5c3bcf.mp3",
+   "h": "7855446c7b",
+   "gehoert": false
+  },
+  "Zauberin. Großschreibung. Zaubere die Buchstaben groß oder klein.": {
+   "datei": "florian/693772588419.mp3",
+   "h": "9caa92928b",
+   "gehoert": false
+  },
+  "Zaunpfahlfalle": {
+   "datei": "florian/e8d9d8369da3.mp3",
+   "h": "1711340b68",
+   "gehoert": false
+  },
+  "Zehner bündeln": {
+   "datei": "florian/fecaf0c60633.mp3",
+   "h": "b71e09ca57",
+   "gehoert": false
+  },
+  "Zehner dazu": {
+   "datei": "florian/dd2996a9e339.mp3",
+   "h": "71f3701275",
+   "gehoert": false
+  },
+  "Zehner entbündeln": {
+   "datei": "florian/a8556f47d0e1.mp3",
+   "h": "e834c32bdb",
+   "gehoert": false
+  },
+  "Zehner weg": {
+   "datei": "florian/b1ef00365c60.mp3",
+   "h": "514ca71b3d",
+   "gehoert": false
+  },
+  "Zehner weg und zurückgeben": {
+   "datei": "florian/2b19a2e5bf98.mp3",
+   "h": "5fe5d1f627",
+   "gehoert": false
+  },
+  "Zehnereinmaleins": {
+   "datei": "florian/3aee0a19c30f.mp3",
+   "h": "400d0c23c6",
+   "gehoert": false
+  },
+  "Zehnerfeld mit Fünferreihe": {
+   "datei": "florian/3d0c570e1040.mp3",
+   "h": "cd93974887",
+   "gehoert": false
+  },
+  "Zehnerreihe": {
+   "datei": "florian/43a7bc5aa111.mp3",
+   "h": "380f169126",
+   "gehoert": false
+  },
+  "Zehnerstangen und Einerwürfel": {
+   "datei": "florian/0a6bed9dbaad.mp3",
+   "h": "482d9ba3c7",
+   "gehoert": false
+  },
+  "Zehnerzahlen": {
+   "datei": "florian/f495b7574526.mp3",
+   "h": "e3b78571af",
+   "gehoert": false
+  },
+  "Zehnerzahlen plus und minus": {
+   "datei": "florian/8f905fd341a6.mp3",
+   "h": "9a79f98f0c",
+   "gehoert": false
+  },
+  "Zeichnen mit dem Geodreieck": {
+   "datei": "florian/1f27481397f3.mp3",
+   "h": "00c71b0d46",
+   "gehoert": false
+  },
+  "Zeichnen mit dem Lineal": {
+   "datei": "florian/ef236c8a443f.mp3",
+   "h": "2d779cdea6",
+   "gehoert": false
+  },
+  "Zeig es": {
+   "datei": "florian/8adc81ff28ee.mp3",
+   "h": "1a98a98a4d",
+   "gehoert": false
+  },
+  "Zeitangabe": {
+   "datei": "florian/ef4a73a66300.mp3",
+   "h": "d2df8ab51c",
+   "gehoert": false
+  },
+  "Zeitformen prüfen": {
+   "datei": "florian/958fdb506d59.mp3",
+   "h": "6ee6d09dea",
+   "gehoert": false
+  },
+  "Zeitpunkt oder Zeitdauer?": {
+   "datei": "florian/13d07eb068ba.mp3",
+   "h": "ae64302b6a",
+   "gehoert": false
+  },
+  "Zeitreise-Regel": {
+   "datei": "florian/6516bd9499ea.mp3",
+   "h": "1dc2c8db40",
+   "gehoert": false
+  },
+  "Zeitspannen berechnen": {
+   "datei": "florian/58efe25e23a1.mp3",
+   "h": "3b6439ac66",
+   "gehoert": false
+  },
+  "Zeitspannen über Tage": {
+   "datei": "florian/b7412e3398b9.mp3",
+   "h": "d150f95877",
    "gehoert": false
   },
   "Zerlegen": {
    "datei": "florian/6ce196c62d23.mp3",
    "h": "66082972a9",
+   "gehoert": false
+  },
+  "Zerlegen bis tausend": {
+   "datei": "florian/bb8e0584d446.mp3",
+   "h": "894f6b21b7",
+   "gehoert": false
+  },
+  "Zerlegungen ordnen": {
+   "datei": "florian/599cb80e5ee4.mp3",
+   "h": "9ecef69712",
+   "gehoert": false
+  },
+  "Ziffern aus Strichen": {
+   "datei": "florian/6da251e3712d.mp3",
+   "h": "3b76c5b17a",
+   "gehoert": false
+  },
+  "Ziffern lesen": {
+   "datei": "florian/bb79e7601b0e.mp3",
+   "h": "6244f0b775",
+   "gehoert": false
+  },
+  "Zu jedem Bild der passende Satz": {
+   "datei": "florian/3e58261f5dcf.mp3",
+   "h": "4362010747",
    "gehoert": false
   },
   "Zuerst nimmt es den ganzen kleinen Stab weg. Jetzt bleibt genau der Zehner.": {
@@ -1411,9 +5941,54 @@
    "h": "41ad61fb7e",
    "gehoert": false
   },
+  "Zukunft": {
+   "datei": "florian/41ddbc098b70.mp3",
+   "h": "1793b274e1",
+   "gehoert": false
+  },
+  "Zusammengesetzte Nomen": {
+   "datei": "florian/7200bb2cf5f4.mp3",
+   "h": "74870898d3",
+   "gehoert": false
+  },
+  "Zusammensetzen mit Verb oder Adjektiv": {
+   "datei": "florian/3e9d282054d1.mp3",
+   "h": "f210e3e409",
+   "gehoert": false
+  },
+  "Zwanzigerfeld": {
+   "datei": "florian/577afda6fbb9.mp3",
+   "h": "550ccb4db7",
+   "gehoert": false
+  },
+  "Zwei Zahlen sind die Teile, eine ist das Ganze. Welche zwei Teile sind zusammen so viel wie das Ganze?": {
+   "datei": "florian/cad6f286df64.mp3",
+   "h": "3c97be646d",
+   "gehoert": false
+  },
+  "Zweierreihe": {
+   "datei": "florian/c00f9f91c670.mp3",
+   "h": "d492032b99",
+   "gehoert": false
+  },
+  "Zweistelliger Multiplikator": {
+   "datei": "florian/bfc3a5810c7a.mp3",
+   "h": "a50f8bb00a",
+   "gehoert": false
+  },
+  "Zweiteiliges Prädikat": {
+   "datei": "florian/2f3323318c14.mp3",
+   "h": "9b249a651c",
+   "gehoert": false
+  },
   "Zwillingsaufgaben": {
    "datei": "florian/371c8c42b88f.mp3",
    "h": "72e1944069",
+   "gehoert": false
+  },
+  "Zwischen den Zeilen lesen": {
+   "datei": "florian/f71f3999bb2d.mp3",
+   "h": "5d507dfbb3",
    "gehoert": false
   }
  }
