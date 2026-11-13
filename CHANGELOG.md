@@ -1,6 +1,6 @@
 # Änderungen
 
-## v0.1.4
+## v0.1.5
 
 - Schrift: Wörter, Sätze, Zahlen und Knöpfe in normaler Stärke (Andika 400), nur Überschriften etwas kräftiger.
 - Alle Spiele nach den Lern-Grundsätzen nachgeschärft: kürzere Effekte (mehr Aufgaben pro Minute), Hilfe in drei Stufen (Signal, Denkhilfe, Lösung mit Begründung), mit Hilfe oder durch Raten Gelöstes zählt nicht als gekonnt, Deko ohne Bedeutung steht still, keine Fanfaren.

@@ -13,7 +13,7 @@ test("keine Zufallsbesuche, kein Einhorn-Einzug, kein Füllbalken", () => {
   assert.doesNotMatch(html, /BESUCH|EINZUG|zieht auf deine Wiese|id="pbar"/);
 });
 test("Effektzeiten nach der Lösung kurz, Lektion nur nach Fehler/Hilfe", () => {
-  assert.match(html, /await wait\(600\);\n\s*\/\/ Einhorn läuft/);
+  assert.match(html, /await wait\(600\);\r?\n\s*\/\/ Einhorn läuft/);
   assert.match(html, /if\(lernen\) await lektion/);
   assert.match(html, /const lernen = !ok/);
   assert.match(html, /LEKTION_MS = 3000/);
