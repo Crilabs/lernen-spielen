@@ -17,99 +17,89 @@ const hatSpiel = (katalog, thema) => {
 const zahlwoerter = "null eins ein eine einer zwei drei vier fünf sechs sieben acht neun zehn elf zwölf dreizehn vierzehn fünfzehn sechzehn siebzehn achtzehn neunzehn zwanzig hundert".split(" ");
 // ganze Wörter: „Zehner“ ist kein Zahlwort
 const zahlRegel = new RegExp(`(?<![\\p{L}])(${zahlwoerter.join("|")})(?![\\p{L}])`, "iu");
+const vorlageDa = (v) => existsSync(new URL(`../spiele/${v}`, import.meta.url));
+const geplant = (t) => t.aufgaben === null; // geplant: keine Aufgaben, kein Spiel, keine Einführung
 
-// Alle Plan-Prüfungen; wirft bei der ersten Verletzung. Themen mit `aufgaben: null` sind „geplant“.
-function pruefePlan(plan, katalog, vorlageExistiert = (v) => existsSync(new URL(`../spiele/${v}`, import.meta.url))) {
-  const themen = plan.themen;
-  const kategorien = katalog.kategorien.map((k) => k.id);
-  const gesehen = new Set();
-  const besitzer = new Map();
-  for (const t of themen) {
-    assert.ok(!gesehen.has(t.id), `doppelte ID ${t.id}`);
-    for (const v of t.voraussetzungen) assert.ok(gesehen.has(v), `${t.id}: Voraussetzung ${v} fehlt oder steht später`);
-    gesehen.add(t.id);
-
-    assert.ok(kategorien.includes(t.strang), `${t.id}: Strang ${t.strang}`);
-    assert.ok(t.name, `${t.id} ohne name`);
-    assert.ok(t.sprich, `${t.id} ohne sprich`);
-    assert.doesNotMatch(t.sprich, /\d/, `${t.id}: Ziffer in sprich`);
-    assert.doesNotMatch(t.sprich, zahlRegel, `${t.id}: Zahlwort in sprich`);
-    assert.equal(typeof t.eltern, "string", `${t.id}: eltern fehlt`);
-
-    const geplant = t.aufgaben === null;
-    if (!geplant) {
-      assert.ok(t.stufen?.length > 0, `${t.id} ohne Stufen`);
-      for (const s of t.stufen) assert.ok(["material", "vorstellung", "kopf"].includes(s), `${t.id}: Stufe ${s}`);
-      assert.ok(t.eltern.length > 0, `${t.id} ohne eltern`);
+// Die Regeln des Plans, je eine Funktion; sie werfen bei der ersten Verletzung.
+const regeln = {
+  reihenfolge({ themen }) {
+    const gesehen = new Set();
+    for (const t of themen) {
+      assert.ok(!gesehen.has(t.id), `doppelte ID ${t.id}`);
+      for (const v of t.voraussetzungen) assert.ok(gesehen.has(v), `${t.id}: Voraussetzung ${v} fehlt oder steht später`);
+      gesehen.add(t.id);
+    }
+  },
+  aufgaben({ themen }) {
+    const besitzer = new Map();
+    for (const t of themen.filter((t) => !geplant(t))) {
       const aufgaben = aufgabenVon(t.aufgaben);
       assert.ok(aufgaben.length > 0, `${t.id}: keine Aufgaben (unbekannte Art?)`);
       for (const a of aufgaben) {
         assert.ok(!besitzer.has(a.key), `${a.key} in ${besitzer.get(a.key)} und ${t.id}`);
         besitzer.set(a.key, t.id);
       }
-      if (hatSpiel(katalog, t)) {
+    }
+  },
+  einfuehrung({ themen }, katalog, vorlageExistiert = vorlageDa) {
+    for (const t of themen) {
+      if (geplant(t)) {
+        assert.ok(!t.einfuehrung, `${t.id}: geplantes Thema darf keine Einführung haben`);
+      } else if (hatSpiel(katalog, t)) {
         assert.ok(t.einfuehrung?.vorlage, `${t.id} ohne Einführung`);
         assert.ok(vorlageExistiert(t.einfuehrung.vorlage), `${t.id}: Vorlage fehlt`);
       }
-    } else {
+    }
+  },
+  stufenUndStrang({ themen }, katalog) {
+    const kategorien = katalog.kategorien.map((k) => k.id);
+    for (const t of themen) {
+      assert.ok(kategorien.includes(t.strang), `${t.id}: Strang ${t.strang}`);
+      if (!geplant(t)) assert.ok(t.stufen?.length > 0, `${t.id} ohne Stufen`);
       for (const s of t.stufen ?? []) assert.ok(["material", "vorstellung", "kopf"].includes(s), `${t.id}: Stufe ${s}`);
     }
-  }
-}
-
-test("Plan: IDs eindeutig, Voraussetzungen existieren und stehen davor, keine Zyklen", () => {
-  assert.equal(new Set(themen.map((t) => t.id)).size, themen.length);
-  const gesehen = new Set();
-  for (const t of themen) {
-    for (const v of t.voraussetzungen) assert.ok(gesehen.has(v), `${t.id}: Voraussetzung ${v} fehlt oder steht später`);
-    gesehen.add(t.id);
-  }
-});
-
-test("Plan: jede Aufgabe gehört zu genau einem Thema", () => {
-  const besitzer = new Map();
-  for (const t of themen) {
-    const aufgaben = aufgabenVon(t.aufgaben);
-    assert.ok(aufgaben.length > 0, `${t.id} hat keine Aufgaben`);
-    for (const a of aufgaben) {
-      assert.ok(!besitzer.has(a.key), `${a.key} in ${besitzer.get(a.key)} und ${t.id}`);
-      besitzer.set(a.key, t.id);
+  },
+  texte({ themen }) {
+    for (const t of themen) {
+      assert.ok(t.name, `${t.id} ohne name`);
+      assert.ok(t.sprich, `${t.id} ohne sprich`);
+      assert.doesNotMatch(t.sprich, /\d/, `${t.id}: Ziffer in sprich`);
+      assert.doesNotMatch(t.sprich, zahlRegel, `${t.id}: Zahlwort in sprich`);
+      assert.equal(typeof t.eltern, "string", `${t.id}: eltern fehlt`);
+      if (!geplant(t)) assert.ok(t.eltern.length > 0, `${t.id} ohne eltern`);
     }
-  }
-});
+  },
+};
+const pruefePlan = (plan, katalog, vorlageExistiert) => {
+  regeln.reihenfolge(plan);
+  regeln.aufgaben(plan);
+  regeln.einfuehrung(plan, katalog, vorlageExistiert);
+  regeln.stufenUndStrang(plan, katalog);
+  regeln.texte(plan);
+};
 
+test("Plan: IDs eindeutig, Voraussetzungen existieren und stehen davor, keine Zyklen", () => regeln.reihenfolge(plan));
+test("Plan: jede Aufgabe gehört zu genau einem Thema", () => regeln.aufgaben(plan));
 test("Plan: jedes Thema mit Spiel hat eine Einführung, deren Vorlage existiert", () => {
-  for (const t of themen) {
-    if (!hatSpiel(katalog, t)) continue;
-    assert.ok(t.einfuehrung?.vorlage, `${t.id} ohne Einführung`);
-    assert.ok(existsSync(new URL(`../spiele/${t.einfuehrung.vorlage}`, import.meta.url)), `${t.id}: Vorlage fehlt`);
-  }
+  regeln.einfuehrung(plan, katalog);
   assert.ok(themen.some((t) => hatSpiel(katalog, t)));
 });
-
-test("Plan: Stufen nur aus material/vorstellung/kopf, Strang aus den Kategorien von spiele.json", () => {
-  pruefePlan(plan, katalog);
-});
-
-test("Plan: jedes Thema hat `sprich` ohne Ziffern und ohne Zahlwörter (null … zwanzig, hundert)", () => {
-  for (const t of themen) {
-    assert.ok(t.sprich && t.sprich.length > 0, `${t.id} ohne sprich`);
-    assert.doesNotMatch(t.sprich, /\d/, `${t.id}: Ziffer in sprich`);
-    assert.doesNotMatch(t.sprich, zahlRegel, `${t.id}: Zahlwort in sprich`);
-    assert.ok(t.eltern && t.eltern.length > 0, `${t.id} ohne eltern`);
-  }
-});
+test("Plan: Strang aus den Kategorien von spiele.json, Stufen nur material/vorstellung/kopf", () => regeln.stufenUndStrang(plan, katalog));
+test("Plan: `sprich` ohne Ziffern und Zahlwörter (null … zwanzig, hundert), Eltern-Hinweis vorhanden", () => regeln.texte(plan));
 
 test("Plan: deckt alle Zahlenzauber-Schlüssel bis 100 ab", () => {
   const ids = new Set(themen.map((t) => t.id));
   for (const id of new Set(poolRechnen().map(klasseRechnen))) assert.ok(ids.has(id), `Thema ${id} fehlt`);
 });
 
-test("Plan: geplantes Thema (aufgaben null) wird akzeptiert, unbekannte Art nicht", () => {
+test("Plan: der echte Plan besteht alle Prüfungen", () => pruefePlan(plan, katalog));
+
+test("Plan: geplantes Thema (aufgaben null) besteht alle Prüfungen, unbekannte Art und Einführung bei geplant nicht", () => {
   const kat = { kategorien: [{ id: "mathe" }], spiele: [] };
-  const basis = { id: "a", name: "A", sprich: "Anfang", strang: "mathe", voraussetzungen: [], eltern: "" };
-  const geplant = { id: "b", name: "Die 5 kommt", sprich: "Bald", strang: "mathe", voraussetzungen: ["a"], aufgaben: null, eltern: "" };
-  const ersteAufgabe = { ...basis, aufgaben: { art: "menge", bis: 3 }, stufen: ["kopf"], eltern: "Hinweis" };
-  pruefePlan({ themen: [ersteAufgabe, geplant] }, kat);
-  assert.throws(() => pruefePlan({ themen: [{ ...ersteAufgabe, aufgaben: { art: "gibt-es-nicht" } }] }, kat));
+  const basis = { id: "a", name: "A", sprich: "Anfang", strang: "mathe", voraussetzungen: [], eltern: "Hinweis" };
+  const erstes = { ...basis, aufgaben: { art: "menge", bis: 3 }, stufen: ["kopf"] };
+  const noch = { id: "b", name: "Die 5 kommt", sprich: "Bald", strang: "mathe", voraussetzungen: ["a"], aufgaben: null, eltern: "" };
+  pruefePlan({ themen: [erstes, noch] }, kat);
+  assert.throws(() => pruefePlan({ themen: [{ ...erstes, aufgaben: { art: "gibt-es-nicht" } }] }, kat), /keine Aufgaben/);
+  assert.throws(() => pruefePlan({ themen: [erstes, { ...noch, einfuehrung: { vorlage: "x.json" } }] }, kat), /keine Einführung/);
 });
