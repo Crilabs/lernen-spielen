@@ -277,7 +277,11 @@ sperreTouch();
   function overStage(cx,cy){ const r=stage.getBoundingClientRect(); return cx>=r.left&&cx<=r.right&&cy>=r.top&&cy<=r.bottom; }
   function overBin(cx,cy){ const r=bin.getBoundingClientRect(), m=22; return cx>=r.left-m&&cx<=r.right+m&&cy>=r.top-m&&cy<=r.bottom+m; }
   // px/py in % von Bildbreite/-höhe; y-Abstand /ar → ebenfalls in % der Bildbreite, damit TOLERANZ in beide Richtungen gleich weit reicht
-  function onThing(d,px,py){ return d.formen.some(f=>{ const [x1,y1,x2,y2]=bbox(f); const dx=Math.max(x1-px,0,px-x2), dy=Math.max(y1-py,0,py-y2)/ar; return dx<=TOLERANZ && dy<=TOLERANZ; }); }
+  // Toleranz mindestens 3rem (Kinderfinger), umgerechnet in % der aktuellen Bildbreite
+  function onThing(d,px,py){
+    const bw=world.clientWidth, tol=Math.max(TOLERANZ, bw ? 3*rem()/bw*100 : 0);
+    return d.formen.some(f=>{ const [x1,y1,x2,y2]=bbox(f); const dx=Math.max(x1-px,0,px-x2), dy=Math.max(y1-py,0,py-y2)/ar; return dx<=tol && dy<=tol; });
+  }
   addEventListener("resize",()=>{ if(bild && !pruefen){ fullView(); passeKarte(); } });
 
   function hint(d){ for(const f of d.formen){ const p=document.createElementNS(SVGNS,"polygon"); p.setAttribute("points",pts(f)); p.setAttribute("class","hint"); svg.appendChild(p); setTimeout(()=>p.remove(),1500); } }
@@ -362,6 +366,7 @@ sperreTouch();
     if(busy||drag) return;
     e.preventDefault();
     const g=cardEl.cloneNode(true); g.removeAttribute("id"); g.classList.add("ghost"); g.classList.remove("hide");
+    g.style.fontSize=getComputedStyle(cardEl).fontSize;   // außerhalb der Leiste gilt 11cqi nicht mehr
     g.style.left=e.clientX+"px"; g.style.top=(e.clientY-LIFT)+"px";
     document.body.appendChild(g); cardEl.classList.add("away");
     drag={g,id:e.pointerId};
