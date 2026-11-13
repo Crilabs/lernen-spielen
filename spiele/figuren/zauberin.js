@@ -12,8 +12,6 @@
   const svg = `
   <g class="zb-ganz">
    <ellipse cx="150" cy="452" rx="92" ry="9" fill="#000" opacity=".12"/>
-   <!-- Zöpfe hinten -->
-   ${zopf(92)}${zopf(208)}
    <!-- Schuhe -->
    <g stroke="${INK}" stroke-width="4"><ellipse cx="122" cy="444" rx="22" ry="11" fill="${ROSA}"/><ellipse cx="178" cy="444" rx="22" ry="11" fill="${ROSA}"/></g>
    <!-- Umhang -->
@@ -23,6 +21,8 @@
    <path d="M116 220 Q150 250 184 220 Q172 236 150 240 Q128 236 116 220Z" fill="${UMHANG_H}" stroke="${INK}" stroke-width="4"/>
    <!-- Kopf -->
    <g class="zb-kopf">
+    <!-- Zöpfe hängen am Kopf und schwingen mit -->
+    ${zopf(92)}${zopf(208)}
     <path d="M96 150 C92 110 120 92 150 92 C180 92 208 110 204 150 L206 196 L94 196Z" fill="${HAAR}" stroke="${INK}" stroke-width="4"/>
     <circle cx="150" cy="160" r="52" fill="${HAUT}" stroke="${INK}" stroke-width="4"/>
     <path d="M100 146 C104 118 128 106 150 106 C172 106 196 118 200 146 C186 130 170 126 158 134 C150 124 128 124 116 138 C110 140 104 142 100 146Z" fill="${HAAR}" stroke="${INK}" stroke-width="4"/>
@@ -34,6 +34,7 @@
     <g class="zb-brauen" fill="none" stroke="${HAAR_D}" stroke-width="5"><path class="zb-braue-l" d="M116 142 Q128 136 140 141"/><path class="zb-braue-r" d="M160 141 Q172 136 184 142"/></g>
     <circle cx="114" cy="186" r="8" fill="${ROSA}" opacity=".5"/><circle cx="186" cy="186" r="8" fill="${ROSA}" opacity=".5"/>
     <path class="zb-mund" d="M136 190 Q150 202 164 190" fill="none" stroke="${INK}" stroke-width="4"/>
+    <path class="zb-mund-hmm" d="M140 194 Q150 191 160 195" fill="none" stroke="${INK}" stroke-width="4"/>
     <ellipse class="zb-mund-o" cx="150" cy="194" rx="6" ry="7" fill="#C24A6A" stroke="${INK}" stroke-width="3"/>
     <!-- Hut -->
     <path d="M96 110 C110 70 140 34 176 16 C184 34 196 44 214 44 C196 58 196 86 204 110Z" fill="${HUT}" stroke="${INK}" stroke-width="4"/>
@@ -41,7 +42,7 @@
     <ellipse cx="150" cy="112" rx="82" ry="15" fill="${HUT}" stroke="${INK}" stroke-width="4"/>
     ${stern(150,62,11)}${stern(184,84,6)}${stern(122,84,5)}${stern(214,44,8)}
    </g>
-   <!-- freier Arm (Bildseite links): beim Grübeln die Hand am Kinn -->
+   <!-- freier Arm (Bildseite links): beim Grübeln Fingerspitzen an die Schläfe -->
    <g class="zb-arm-frei">
     <path d="M104 236 C92 262 86 292 84 318 L106 322 C108 296 114 270 122 248Z" fill="${AERMEL}" stroke="${INK}" stroke-width="4"/>
     <circle cx="94" cy="330" r="13" fill="${HAUT}" stroke="${INK}" stroke-width="4"/>
@@ -69,7 +70,7 @@
 .zauberin .zb-brauen{transition:transform .35s}
 .zauberin .zb-braue-l{transform-origin:128px 140px;transition:transform .35s}
 .zauberin .zb-lid{transform-origin:150px 164px;transform:scaleY(0);animation:zb-blink 4.2s infinite}
-.zauberin .zb-mund-o{opacity:0}
+.zauberin .zb-mund-o,.zauberin .zb-mund-hmm{opacity:0}
 .zauberin .zb-funken{opacity:0}
 @keyframes zb-blink{0%,93%,100%{transform:scaleY(0)}96%{transform:scaleY(1)}}
 @keyframes zb-schwing{from{transform:rotate(-34deg)}to{transform:rotate(12deg)}}
@@ -78,7 +79,7 @@
 @keyframes zb-neigen{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
 @keyframes zb-scan{from{transform:rotate(-9deg) translateY(5px)}to{transform:rotate(9deg) translateY(5px)}}
 @keyframes zb-scan-aug{from{transform:translate(-6px,6px)}to{transform:translate(6px,6px)}}
-@keyframes zb-kratzen{0%,100%{transform:rotate(-127deg)}50%{transform:rotate(-121deg)}}
+@keyframes zb-kratzen{0%,100%{transform:rotate(165deg)}50%{transform:rotate(161deg)}}
 @keyframes zb-watscheln{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-6px)}}
 /* zaubert: schaut auf den Satz, schwingt den Stab */
 .zauberin.zaubert .zb-pupillen{transform:translate(0,6px)}
@@ -97,12 +98,12 @@
 .zauberin.liest .zb-pupillen{animation:zb-scan-aug var(--lesezeit,4s) linear forwards}
 .zauberin.liest .zb-mund{opacity:0}.zauberin.liest .zb-mund-o{opacity:1}
 .zauberin.liest .zb-arm-frei{transform:rotate(-24deg)}
-/* grübelt: Hand am Kinn, eine Braue hoch */
+/* grübelt: Fingerspitzen an der Schläfe, Kopf zur Hand geneigt, Blick nach oben, Mund „hmm“ */
 .zauberin.gruebelt .zb-arm-frei{animation:zb-kratzen .3s ease-in-out infinite}
-.zauberin.gruebelt .zb-kopf{transform:rotate(7deg)}
+.zauberin.gruebelt .zb-kopf{transform:rotate(-6deg)}
 .zauberin.gruebelt .zb-braue-l{transform:translateY(-7px) rotate(-10deg)}
-.zauberin.gruebelt .zb-pupillen{transform:translate(4px,-3px)}
-.zauberin.gruebelt .zb-mund{opacity:0}.zauberin.gruebelt .zb-mund-o{opacity:1}
+.zauberin.gruebelt .zb-pupillen{transform:translate(4px,-5px)}
+.zauberin.gruebelt .zb-mund{opacity:0}.zauberin.gruebelt .zb-mund-hmm{opacity:1}
 /* zeigt: Stab nach unten auf den Satz */
 .zauberin.zeigt .zb-arm-stab{transform:rotate(-38deg)}
 .zauberin.zeigt .zb-stab{transform:rotate(158deg)}
