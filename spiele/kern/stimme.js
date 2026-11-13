@@ -1,8 +1,12 @@
-// Vorlesen: die eine Stimme für alle Spiele. Einzige Stelle mit speechSynthesis.
-// Zahlen werden nie gesprochen: Text mit Ziffer bleibt still (die Stimme spräche sie falsch oder verriete Lösungen).
-// Die feste Wahl liegt als Geräte-Einstellung "stimme": "" = automatisch (beste Stimme),
+// Vorlesen: die eine Stimme für alle Spiele. Einzige Stelle mit speechSynthesis und Audio.
+// Hauptweg sind vorab erzeugte Audiodateien (spiele/audio/index.json, erzeugt mit werkzeuge/audio/).
+// Fehlt zu einem Text die Datei, spricht die Systemstimme.
+// Die Systemstimme spricht nie Zahlen: Text mit Ziffer bleibt still (sie spräche sie falsch oder verriete
+// Lösungen). Ob eine Datei Zahlen enthalten darf, entscheidet das Sammel-Werkzeug, nicht dieses Modul.
+// Die feste Wahl der Systemstimme liegt als Geräte-Einstellung "stimme": "" = automatisch (beste Stimme),
 // "system" = keine Stimme vorgeben (das System wählt), sonst stimmSchluessel der Stimme.
 
+import { audioSchluessel } from "./audio.js";
 import { einstellung, ladeEinstellungen, setzeEinstellung } from "./einstellungen.js";
 import { protokoll } from "./protokoll.js";
 
@@ -121,13 +125,64 @@ function melde() {
   }
 }
 
+// ---------------------------------------------------------------- Audiodateien
+
+const AUDIO_BASIS = new URL("../audio/", import.meta.url);
+
+/** @type {Promise<Map<string, string>> | null} Schlüssel → URL der Datei */
+let audioIndex = null;
+/** Texte ohne Datei, schon einmal protokolliert. */
+const ohneDatei = new Set();
+
+/** @returns {boolean} */
+function kannAudio() {
+  const g = /** @type {any} */ (globalThis);
+  return typeof g.Audio === "function" && typeof g.fetch === "function";
+}
+
+/**
+ * Lädt einmal das Verzeichnis der erzeugten Dateien. Fehlt es, bleibt es leer (Systemstimme).
+ * @returns {Promise<Map<string, string>>}
+ */
+function ladeAudioIndex() {
+  if (!audioIndex) {
+    audioIndex = !kannAudio()
+      ? Promise.resolve(new Map())
+      : globalThis
+          .fetch(new URL("index.json", AUDIO_BASIS))
+          .then((r) => (r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status))))
+          .then((d) => {
+            /** @type {Record<string, { datei: string }>} */
+            const texte = d?.texte ?? {};
+            return new Map(
+              Object.entries(texte).map(([k, v]) => [k, new URL(v.datei, AUDIO_BASIS).href]),
+            );
+          })
+          .catch((e) => {
+            protokoll("Audio-Verzeichnis nicht geladen: " + e);
+            return new Map();
+          });
+  }
+  return audioIndex;
+}
+
+/** @type {HTMLAudioElement | null} */
+let audioLaeuft = null;
+
 let nummer = 0;
-/** @type {((e: SprichErgebnis) => void) | null} */
+/** @type {((e: SprichErgebnis | "fehler") => void) | null} */
 let laufend = null;
 
 /** Bricht laufende Sprache ab. */
 function brichAb() {
   nummer += 1;
+  // Erst anhalten, dann melden: fertig() vergisst die laufende Datei.
+  try {
+    audioLaeuft?.pause();
+  } catch {
+    // nichts zu stoppen
+  }
+  audioLaeuft = null;
   const l = laufend;
   laufend = null;
   l?.("abgebrochen");
@@ -139,34 +194,107 @@ function brichAb() {
 }
 
 /**
- * Liest einen Text vor. Löst auf, wenn die Stimme fertig ist, spätestens nach der Notbremse.
+ * Spielt eine Audiodatei ab. "fehler": nicht abspielbar, dann darf die Systemstimme einspringen.
+ * @param {string} url
+ * @returns {Promise<SprichErgebnis | "fehler">}
+ */
+function spieleDatei(url) {
+  return new Promise((resolve) => {
+    /** @type {ReturnType<typeof setTimeout> | undefined} */
+    let notbremse;
+    /** @type {HTMLAudioElement | null} */
+    let a = null;
+    /** @param {SprichErgebnis | "fehler"} e */
+    const fertig = (e) => {
+      if (laufend !== fertig && e !== "abgebrochen") return;
+      if (laufend === fertig) laufend = null;
+      if (audioLaeuft === a) audioLaeuft = null;
+      clearTimeout(notbremse);
+      resolve(e);
+    };
+    /** @param {unknown} grund */
+    const kaputt = (grund) => {
+      if (laufend !== fertig) return;
+      protokoll("Audiodatei nicht abspielbar (" + grund + "): " + url);
+      fertig("fehler");
+    };
+    laufend = fertig;
+    try {
+      a = new Audio(url);
+      audioLaeuft = a;
+      a.onended = () => fertig("gesprochen");
+      a.onerror = () => kaputt(a?.error?.code ?? "Fehler");
+      // Notbremse, falls das Ende nie gemeldet wird: Dauer der Datei plus Luft, vorher 30 s.
+      notbremse = setTimeout(() => fertig("gesprochen"), 30000);
+      a.onloadedmetadata = () => {
+        const d = a?.duration;
+        if (laufend !== fertig || !Number.isFinite(d)) return;
+        clearTimeout(notbremse);
+        notbremse = setTimeout(() => fertig("gesprochen"), /** @type {number} */ (d) * 1000 + 2000);
+      };
+      Promise.resolve(a.play()).catch(kaputt);
+    } catch (e) {
+      kaputt(e);
+    }
+  });
+}
+
+/**
+ * Liest einen Text vor: aus der erzeugten Datei, sonst mit der Systemstimme.
+ * Löst auf, wenn die Stimme fertig ist, spätestens nach der Notbremse.
  * @param {string} text
- * @param {{ tempo?: number, hoehe?: number }} [optionen]
+ * @param {{ tempo?: number, hoehe?: number, variante?: string, datei?: boolean }} [optionen]
+ *   tempo und hoehe gelten nur für die Systemstimme; variante (z. B. "diktat") wählt eine eigene Datei;
+ *   datei: false nimmt immer die Systemstimme (Probe im Elternbereich).
  * @returns {Promise<SprichErgebnis>}
  */
-export async function sprich(text, { tempo = 0.85, hoehe = 1 } = {}) {
-  const s = synth();
-  if (!s) return "still";
+export async function sprich(text, { tempo = 0.85, hoehe = 1, variante = "", datei: mitDatei = true } = {}) {
   brichAb();   // auch ein stiller Aufruf beendet, was gerade gesprochen wird
   if (!text) return "still";
+  const meine = nummer;
+  const index = mitDatei ? await ladeAudioIndex() : new Map();
+  if (meine !== nummer) return "abgebrochen";
+  const schluessel = audioSchluessel(text, variante);
+  const datei = index.get(schluessel);
+  if (datei) {
+    const e = await spieleDatei(datei);
+    if (e !== "fehler") return e;
+    if (meine !== nummer) return "abgebrochen";
+  } else if (index.size && !ohneDatei.has(schluessel)) {
+    ohneDatei.add(schluessel);
+    protokoll("Keine Audiodatei: " + schluessel);
+  }
+  return sprichSystem(text, tempo, hoehe, meine);
+}
+
+/**
+ * Systemstimme (Web-Sprache), Rückfall ohne Audiodatei.
+ * @param {string} text
+ * @param {number} tempo
+ * @param {number} hoehe
+ * @param {number} meine Nummer des Aufrufs; ist sie veraltet, wurde abgebrochen
+ * @returns {Promise<SprichErgebnis>}
+ */
+async function sprichSystem(text, tempo, hoehe, meine) {
+  const s = synth();
+  if (!s) return "still";
   if (/\d/.test(text)) {
     protokoll("Zahl nicht gesprochen: " + text);
     return "still";
   }
   beobachte();
-  const meine = nummer;
   await bereit();
   if (meine !== nummer) return "abgebrochen";
 
   return new Promise((resolve) => {
     /** @type {ReturnType<typeof setTimeout> | undefined} */
     let notbremse;
-    /** @param {SprichErgebnis} e */
+    /** @param {SprichErgebnis | "fehler"} e */
     const fertig = (e) => {
       if (laufend !== fertig && e !== "abgebrochen") return;
       if (laufend === fertig) laufend = null;
       clearTimeout(notbremse);
-      resolve(e);
+      resolve(e === "fehler" ? "still" : e);
     };
     laufend = fertig;
     try {
