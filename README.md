@@ -12,7 +12,8 @@ ist **nicht mehr aktuell**. Diese Reste werden in einem späteren Schritt entfer
 - `spiele/` – die Oberfläche der App: `index.html` (Startseite), `eltern.html`/`eltern.js` (Elternbereich),
   `lernspiel.js` (gemeinsame Hilfen: Laden/Speichern, Protokoll), die Spiele als HTML-Dateien,
   `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder), `figuren/`, `saetze/`, `pausenbilder/`.
-- `spiele/fortschritt/` – je Spiel optional ein Modul `<id>.js`, das den Balken auf der Startseite berechnet.
+- `spiele/fortschritt/` – je Spiel optional ein Modul `<id>.js`, das den Balken auf der Startseite berechnet
+  (nur für Spiele mit `"fortschritt": true` in `spiele.json`).
 - `spiele/symbole/` – SVG-Symbole (Kategorien, Spiele, Elternbereich).
 - `spiele/schrift/` – lokal eingebundene Schrift (keine Webzugriffe nötig).
 - `src-tauri/` – Rust-Hülle: Kiosk-Fenster, Lernstand lesen/schreiben, Logdatei, Updater, Installer-Konfiguration.
@@ -63,9 +64,16 @@ es zusätzlich das „Protokoll“.
 
 ## PIN vergessen
 
-Die PIN (als Hash) liegt in `%APPDATA%\de.crilabs.lernen-spielen\lernstand\eltern.json`. Vergessen: App beenden,
-diese Datei löschen, beim nächsten Öffnen des Elternbereichs eine neue PIN festlegen. Die Lernstände der Spiele
-bleiben erhalten (der Hinweis steht auch auf dem PIN-Bildschirm).
+Die PIN (als Hash) liegt in `%APPDATA%\de.crilabs.lernen-spielen\lernstand\eltern.json`, nach einer PIN-Änderung
+die vorige PIN zusätzlich in `eltern.json.bak`. So setzt du die PIN zurück:
+
+1. App ohne PIN beenden: Tastatur anschließen, **Strg+Alt+Entf** → **Task-Manager** → „Einhorn-Lernspiele“
+   auswählen → **Task beenden**. (Bleibt der Task-Manager hinter der App verborgen: Strg+Alt+Entf → **Abmelden**.)
+2. Im Explorer `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` öffnen und **`eltern.json` und
+   `eltern.json.bak`** löschen. Nur eine der beiden zu löschen reicht nicht.
+3. App starten, Zahnrad halten und eine neue PIN festlegen.
+
+Die Lernstände der Spiele bleiben erhalten (der Hinweis steht auch auf dem PIN-Bildschirm).
 
 ## Neues Spiel hinzufügen
 
@@ -77,7 +85,10 @@ bleiben erhalten (der Hinweis steht auch auf dem PIN-Bildschirm).
 4. Optional Fortschrittsbalken: `spiele/fortschritt/<id>.js` mit
    `export async function fortschritt(save, holeJson)`, Rückgabe `{ wert: 0..1, text: "…" }`.
    `save` ist der gespeicherte Lernstand des Spiels, `holeJson(pfad)` lädt eine JSON-Datei aus `spiele/`.
-   Ohne Modul zeigt die Startseite keinen Balken. Beispiel: `spiele/fortschritt/wimmelbild.js`.
+   Zusätzlich im Eintrag in `spiele.json` `"fortschritt": true` setzen – nur dann wird das Modul geladen
+   (die App liefert für fehlende Dateien die Startseite aus, deshalb wird nicht geraten). Ein Test prüft,
+   dass Kennzeichen und Moduldatei zusammenpassen. Ohne Modul zeigt die Startseite keinen Balken.
+   Beispiel: `spiele/fortschritt/wimmelbild.js`.
 
 ## Wimmelbilder
 
