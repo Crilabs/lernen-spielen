@@ -1,6 +1,6 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "Einhorn-Lernspiele",
+  "productName": "Lernen Spielen",
   "version": "0.1.8",
   "identifier": "de.crilabs.lernen-spielen",
   "build": {
@@ -10,7 +10,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "Einhorn-Lernspiele",
+        "title": "Lernen Spielen",
         "fullscreen": true,
         "decorations": false,
         "resizable": false,

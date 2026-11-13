@@ -212,7 +212,7 @@ pub fn run() {
             }
             app.handle().plugin(log.build())?;
             log::info!(
-                "Einhorn-Lernspiele {} gestartet",
+                "Lernen Spielen {} gestartet",
                 app.package_info().version
             );
             // Fenster aus tauri.conf.json übernehmen, aber Navigation einschränken.

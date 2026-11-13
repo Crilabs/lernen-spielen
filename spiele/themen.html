@@ -83,8 +83,6 @@ h1 img{width:6rem;height:6rem}
 .spiel .ico{width:11rem;height:11rem;flex:none;border-radius:2.6rem;background:var(--kt);display:flex;align-items:center;justify-content:center;padding:1.5rem}
 .spiel h3{font:700 3.4rem/1.1 "Andika",sans-serif}
 
-.maskottchen{position:absolute;right:6rem;bottom:3rem;width:24rem;pointer-events:auto}
-.maskottchen svg{display:block;width:100%;height:auto;overflow:visible}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -99,9 +97,9 @@ h1 img{width:6rem;height:6rem}
   <a class="rund l" href="index.html" aria-label="Alle Spiele"><img src="symbole/haus.svg" alt=""></a>
   <h1><img src="symbole/themen.svg" alt="">Was ich kann</h1>
   <div class="straenge" id="straenge"></div>
-  <div class="maskottchen" id="maskottchen" aria-hidden="true"></div>
 </main>
 
+<!-- Figuren nur für die Geschichten (Einführungen der Spiele), kein Maskottchen -->
 <script src="figuren/figuren.js"></script>
 <script src="figuren/einhorn.js"></script>
 <script type="module">
@@ -112,15 +110,7 @@ import { sprich, stille } from "./kern/stimme.js";
 
 sperreTouch();
 
-// ---------- Einhorn ----------
-const masko = document.getElementById("maskottchen");
-if (window.Figuren) {
-  masko.innerHTML = Figuren.svgFigur("einhorn");
-  const svg = masko.querySelector("svg");
-  masko.addEventListener("click", () => Figuren.hop(svg, { hoehe: 40 }));
-}
-
-// ---------- Vorlesen ----------
+// ---------- Vorlesen (wie auf der Startseite) ----------
 const sag = text => { sprich(text); };
 
 // ---------- Stationen ----------

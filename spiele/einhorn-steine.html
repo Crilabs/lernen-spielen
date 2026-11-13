@@ -208,7 +208,7 @@ img{display:block}
 <script src="figuren/figuren.js"></script>
 <script src="figuren/einhorn.js"></script>
 <script type="module">
-import {lade, speichere, sperreTouch, esc, merkeGelernt} from "./lernspiel.js";
+import {lade, speichere, sperreTouch, esc, merkeGelernt, pausenKnoepfe} from "./lernspiel.js";
 import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
 import {sprich as kernSprich, stille, stimmen, setzeStimme, stimmWahl} from "./kern/stimme.js";
 sperreTouch();
@@ -819,8 +819,7 @@ const AUSWERTUNG = (() => {
     neueRunde();
   }
 
-  // ---------- Pause: ruhige Nachtszene am Ufer (Vollbild, PAUSE_MS, ohne Knöpfe; ?pause zeigt sie sofort) ----------
-  const PAUSE_MS = 10000;
+  // ---------- Pause: ruhige Nachtszene am Ufer (Vollbild, Haus- und Weiter-Knopf; ?pause zeigt sie sofort) ----------
   function pausenSzene(){
     const sterne=[[160,120,5],[420,260,4],[720,90,6],[1180,180,4],[1500,110,5],[1780,300,4],[300,430,3],[1620,470,3],[960,60,3]]
       .map(([x,y,r],i)=>`<circle class="${i===3?"stern":""}" cx="${x}" cy="${y}" r="${r}" fill="#FFF6C9" opacity="${i===3?"":".7"}"/>`).join("");
@@ -841,13 +840,12 @@ const AUSWERTUNG = (() => {
       ${uni}
     </svg>`;
   }
-  function pause(ohneBalken){
+  function pause(){
     const el=$("pause");
     return new Promise(async ok=>{
-      el.innerHTML=pausenSzene()+(ohneBalken?"":'<div class="pbar"><div class="pfill"></div></div>');
-      el.style.setProperty("--pause-ms", PAUSE_MS+"ms");
+      el.innerHTML=pausenSzene();
       el.classList.add("on"); void el.offsetWidth; el.classList.add("show");
-      await wait(PAUSE_MS);
+      await pausenKnoepfe(el);   // Pause endet nur auf Wunsch des Kindes (docs/grundsaetze.md N1, N8, 9.2 Nr. 7)
       el.classList.remove("show"); await wait(850); el.classList.remove("on"); el.innerHTML=""; ok();
     });
   }

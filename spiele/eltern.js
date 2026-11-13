@@ -3,7 +3,7 @@
 import { updateSuche } from "./kern/geraet.js";
 
 export async function pinHash(pin) {
-  const bytes = new TextEncoder().encode("einhorn:" + pin);
+  const bytes = new TextEncoder().encode("lernen-spielen:" + pin);
   const hash = await globalThis.crypto.subtle.digest("SHA-256", bytes);
   return [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }

@@ -134,7 +134,7 @@ img{display:block}
 <script src="figuren/figuren.js"></script>
 <script src="figuren/einhorn.js"></script>
 <script type="module">
-import {lade, speichere, sperreTouch, esc, protokoll} from "./lernspiel.js";
+import {lade, speichere, sperreTouch, esc, protokoll, pausenKnoepfe} from "./lernspiel.js";
 import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
 import {K, migriere, eintrag, verbuche, naechsteAufgabe, hilfeVon, ortVon, paketVon, aufgabenVon} from "./einmaleins-logik.js";
 sperreTouch();
@@ -146,7 +146,6 @@ sperreTouch();
   const LOESUNG_MS = 2600;      // 3. Fehler: Lösungspfeilchen so lange sichtbar
   const WIEDER_NACH = 2;        // falsch gelöste Aufgabe kommt nach so vielen anderen wieder
   const WIEDER_MAX = 3;         // höchstens so viele Aufgaben über die Runde hinaus
-  const PAUSE_MS = 10000;
   const FARBE = {1:"#E53935",2:"#43A047",3:"#F48FB1",4:"#FDD835",5:"#64B5F6",6:"#9C27B0",7:"#FFFFFF",8:"#8D6E63",9:"#1E3A8A",10:"#F9A825"};
   // Geometrie (SVG-Einheiten, Bild 1920 × 1080)
   const P = 23, R = 10.5, G = 18, G5 = 6;   // Perlenabstand, -radius, Lücke zwischen Stäbchen, Fünferlücke im Stäbchen
@@ -583,19 +582,18 @@ sperreTouch();
         <text x="0" y="64" text-anchor="middle" dominant-baseline="central" font-family="Andika,sans-serif" font-size="48" fill="#3B2A6B">${nq*nq}</text>
       </g>
       <g transform="translate(${x0+breite+120} ${800-uniH*254/280 - 40})">${F.svgFigur("einhorn").replace("<svg",`<svg class="figur schlaeft" width="${uniW}" height="${uniH}" style="width:${uniW}px;height:${uniH}px"`).replace('class="figur"','')}</g>
-    </svg><div class="pbar"><div class="pfill"></div></div>`;
+    </svg>`;
   }
   async function pause(nq=n){
     const e=$("pause");
     e.innerHTML=pausenSzene(nq);
-    e.style.setProperty("--pause-ms", PAUSE_MS+"ms");
     e.classList.add("on"); void e.offsetWidth; e.classList.add("show");
     if(!ruhig){
       e.querySelectorAll(".qreihe").forEach((g,r)=>g.animate([{opacity:0,transform:"translateX(-260px)"},{opacity:1,transform:"translateX(0)"}],{duration:520,delay:600+r*420,easing:"cubic-bezier(.3,1.2,.5,1)",fill:"backwards"}));
       const qp=e.querySelector(".qpfeil");
       qp.animate([{opacity:0},{opacity:1}],{duration:500,delay:600+nq*420+200,fill:"backwards"});
     }
-    await wait(PAUSE_MS);
+    await pausenKnoepfe(e, {beimTippen: klick});   // Pause endet nur auf Wunsch des Kindes (docs/grundsaetze.md N1, N8, 9.2 Nr. 7)
     e.classList.remove("show"); await wait(600); e.classList.remove("on"); e.innerHTML="";
   }
 

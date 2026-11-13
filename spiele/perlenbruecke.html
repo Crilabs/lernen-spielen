@@ -548,6 +548,7 @@ sperreTouch();
   // Ohne Knöpfe: Balken läuft PAUSE_MS, dann geht es weiter. Mit Knöpfen (nach „kann ich“): Weiter oder Haus.
   // hinweis (nach einer Wiederholungsrunde): ruhiger Hinweis auf das Spiel, das gerade etwas Neues hat (antippbar).
   async function pause({knoepfe=false, hinweis=null}={}){
+    knoepfe=true;   // Pause endet nur auf Wunsch des Kindes (docs/grundsaetze.md N1, N8, 9.2 Nr. 7)
     const e=$("pause");
     e.innerHTML=pausenSzene();
     const sp = hinweis ? spieleListe.find(x=>x.id===hinweis) : null;
