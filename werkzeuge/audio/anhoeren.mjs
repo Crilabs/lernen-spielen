@@ -44,11 +44,24 @@ function texte() {
   };
 }
 
-/** @param {import("node:http").IncomingMessage} req */
+/**
+ * Nur JSON von der eigenen Seite: Content-Type application/json erzwingt bei fremden Seiten im Browser
+ * eine CORS-Vorabfrage, die dieser Server nie erlaubt; Origin muss die eigene Adresse sein.
+ * @param {import("node:http").IncomingMessage} req
+ */
 async function koerper(req) {
+  const herkunft = req.headers.origin;
+  if (herkunft && herkunft !== `http://127.0.0.1:${PORT}`) throw new Error("Fremde Herkunft");
+  if (!String(req.headers["content-type"] ?? "").startsWith("application/json")) throw new Error("Nur JSON");
   let s = "";
   for await (const teil of req) s += teil;
   return JSON.parse(s || "{}");
+}
+
+/** Schlüssel nur als eigener Eintrag des Index, nie __proto__ und Co. */
+function pruefeSchluessel(schluessel, index) {
+  if (typeof schluessel !== "string" || !Object.hasOwn(index.texte, schluessel)) throw new Error("Unbekannter Text");
+  return schluessel;
 }
 
 /** @param {import("node:http").ServerResponse} res */
@@ -74,8 +87,7 @@ const server = createServer(async (req, res) => {
       const { schluessel, gehoert } = await koerper(req);
       await nacheinander(() => {
         const index = ladeIndex();
-        if (!index.texte[schluessel]) throw new Error("Unbekannter Text");
-        index.texte[schluessel].gehoert = !!gehoert;
+        index.texte[pruefeSchluessel(schluessel, index)].gehoert = !!gehoert;
         speichereIndex(index);
       });
       return antworte(res, 200, { ok: true });
@@ -84,6 +96,7 @@ const server = createServer(async (req, res) => {
     if (req.method === "POST" && url.pathname === "/api/korrektur") {
       const { schluessel, sprich } = await koerper(req);
       const meldung = await nacheinander(async () => {
+        pruefeSchluessel(schluessel, ladeIndex());
         const a = ladeAussprache();
         a.texte ??= {};
         const neu = String(sprich ?? "").trim();
