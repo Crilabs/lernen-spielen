@@ -10,6 +10,7 @@ import { GRUND_CSS, MASSE, definiere } from "./stil.js";
 import "./knopf.js";
 
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
+const HAUS_HREF = new URL("../index.html", import.meta.url).href;
 const HAUS_NAME = "Alle Spiele";
 
 const LEISTE_CSS = `
@@ -83,16 +84,19 @@ export class LsLeiste extends HTMLElement {
     wurzel.innerHTML = `<style>${GRUND_CSS}${LEISTE_CSS}</style>
       <div class="feld">
         <div class="links">
-          <a class="haus" href="index.html" aria-label="${HAUS_NAME}"><span class="kreis"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span></a>
+          <a class="haus" href="${HAUS_HREF}" aria-label="${HAUS_NAME}"><span class="kreis"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span></a>
           <img class="fach" alt="" draggable="false" hidden>
         </div>
-        <div class="rechts"><ls-knopf class="tonknopf"></ls-knopf></div>
+        <div class="rechts"><ls-knopf class="tonknopf" stumm></ls-knopf></div>
       </div>`;
     this.haus = /** @type {HTMLAnchorElement} */ (wurzel.querySelector("a.haus"));
     this.fachBild = /** @type {HTMLImageElement} */ (wurzel.querySelector("img.fach"));
     this.tonKnopf = /** @type {HTMLElement} */ (wurzel.querySelector(".tonknopf"));
     this._ton = true;
     this._start = false;
+    this._bereit = false;
+    /** @type {Promise<void>} */
+    this.bereitet = new Promise((ok) => { this._ok = ok; });
     this.haus.addEventListener("click", () => this.sagHaus());
     this.tonKnopf.addEventListener("click", () => this.schalteTon());
   }
@@ -120,6 +124,16 @@ export class LsLeiste extends HTMLElement {
     this.setze(Boolean(an), true);
   }
 
+  /** @returns {boolean} true, sobald die Einstellungen geladen sind (für späte Zuhörer des Ereignisses bereit) */
+  get istBereit() {
+    return this._bereit;
+  }
+
+  /** @returns {Promise<void>} */
+  bereit() {
+    return this.bereitet;
+  }
+
   async lade() {
     try {
       await ladeEinstellungen();
@@ -127,6 +141,8 @@ export class LsLeiste extends HTMLElement {
       protokoll("Leiste: Einstellungen nicht geladen: " + e);
     }
     this.leseTon();
+    this._bereit = true;
+    this._ok();
     this.dispatchEvent(new CustomEvent("bereit"));
   }
 
@@ -151,6 +167,12 @@ export class LsLeiste extends HTMLElement {
 
   schalteTon() {
     this.setze(!this._ton, true);
+    // Der Knopf selbst bleibt stumm (stumm): sonst spräche er den alten Namen. Hier der neue Zustand.
+    const name = this._ton ? "Ton an" : "";
+    if (name && !schonGesagt(name)) {
+      merkeGesagt(name);
+      sprich(name);
+    }
   }
 
   zeichne() {

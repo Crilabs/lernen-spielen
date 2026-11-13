@@ -91,6 +91,7 @@ export class LsKnopf extends HTMLElement {
 
   async sagName() {
     const name = this.name;
+    if (this.hasAttribute("stumm")) return; // der Besitzer spricht selbst (z. B. die Leiste beim Ton-Umschalten)
     if (!name || schonGesagt(name)) return;
     await ladeEinstellungen();
     const spiel = findeSpiel(this);
