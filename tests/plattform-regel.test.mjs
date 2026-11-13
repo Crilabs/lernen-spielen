@@ -2,8 +2,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const SPIELE = new URL("../spiele/", import.meta.url).pathname;
+const SPIELE = fileURLToPath(new URL("../spiele/", import.meta.url));
 
 const MUSTER = {
   speechSynthesis: /\bspeechSynthesis\b/,

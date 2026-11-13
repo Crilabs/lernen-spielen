@@ -2,6 +2,7 @@ import { test, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
 const speicher = new Map();
 globalThis.localStorage = {
@@ -217,7 +218,7 @@ test("runde: hinweisSpiel null ohne neues Thema im anderen Spiel", async () => {
 });
 
 test("luecken-Skript: Ausgabe enthält 'ohne Spiel: Mengen bis 5 auf einen Blick'", () => {
-  const out = execFileSync(process.execPath, [new URL("../scripts/luecken.mjs", import.meta.url).pathname], { encoding: "utf8" });
+  const out = execFileSync(process.execPath, [fileURLToPath(new URL("../scripts/luecken.mjs", import.meta.url))], { encoding: "utf8" });
   assert.match(out, /ohne Spiel: Mengen bis 5 auf einen Blick/);
 });
 
