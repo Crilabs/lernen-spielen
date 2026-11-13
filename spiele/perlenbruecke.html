@@ -51,7 +51,7 @@ img{display:block}
 .bruecke-traegt{animation:traegt .5s ease-out}
 @keyframes traegt{40%{transform:translateY(8px)}100%{transform:translateY(0)}}
 
-/* Pause: eigene Abendszene (SVG) mit Balken, ohne Knöpfe */
+/* Pause: eigene Abendszene (SVG) mit Balken; nach „kann ich“ mit Knöpfen statt Balken */
 .pause{position:fixed;inset:0;z-index:25;background:#1F1B45;display:none;opacity:0;transition:opacity .6s}
 .pause.on{display:block}.pause.show{opacity:1}
 .pause svg.szene{position:absolute;inset:0;width:100%;height:100%}
@@ -78,6 +78,17 @@ img{display:block}
 .blase::before{bottom:-34px;border-width:34px 18px 0 18px;border-top-color:var(--nacht)}
 .blase::after{bottom:-24px;right:59px;border-width:26px 13px 0 13px;border-top-color:#fff}
 .blase.leer{opacity:0}
+/* Stufen vorstellung/kopf: Abdeckung in Ufer-Farbe über den Perlen, die Ziffer bleibt */
+.deckel{fill:url(#fels);stroke:rgba(59,42,107,.35);stroke-width:3;opacity:0;transition:opacity .4s;pointer-events:none}
+.deckel.zu{opacity:1}
+.kettenperlen{transition:opacity .4s}
+.kettenperlen.verdeckt{opacity:0}
+/* Knöpfe in der Pause nach „kann ich“: Haus und Weiter */
+.pknoepfe{position:absolute;left:0;right:0;bottom:6rem;display:flex;justify-content:center;gap:8rem}
+.pk{width:16rem;height:16rem;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;padding:3.4rem;box-shadow:0 .8rem 0 rgba(0,0,0,.25);text-decoration:none}
+.pk img{width:100%;height:100%}
+.pk.weiter img{transform:scaleX(-1)}
+.pk:active{transform:translateY(.4rem);box-shadow:0 .4rem 0 rgba(0,0,0,.25)}
 @media (prefers-reduced-motion:reduce){.bruecke-traegt,.wippe,.perle.zuviel,.platz.blink,.stab.leuchtet .platte{animation:none}.pause{transition:none}.pause .atmen,.pause .blink,.pause .schimmer{animation:none}}
 </style>
 </head>
@@ -109,7 +120,9 @@ img{display:block}
 <script src="figuren/einhorn.js"></script>
 <script type="module">
 import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
-import {K, paareVon, migriere, eintrag, angebot, verbuche, naechsteZahl} from "./perlen-logik.js";
+import {K, paareVon, migriere, angebotAus, verbucheBau, zerlegung} from "./perlen-logik.js";
+import {runde} from "./lernsteuerung.js";
+import {spieleEinfuehrung} from "./einfuehrung.js";
 sperreTouch();
 (async function(){
   // ---------- Einstellungen (Logik-Werte stehen in perlen-logik.js, K) ----------
@@ -117,7 +130,8 @@ sperreTouch();
   const FEHLER_MS = 4800;       // Fehlerszene (ab dem zweiten Tipp, nichts antippbar) dauert höchstens so lange; Zählen passt sich an
   const ZAEHL_MS = 280;         // je gezählte Perle (höchstens; bei vielen Perlen schneller)
   const HILFE_SPERRE_MS = 2500; // Denkhilfe: andere Spalte so lange gesperrt, bis die Frage gesprochen ist
-  const WIEDER_NACH = 2;        // falsch gelöste Zahl kommt in der Runde nach so vielen anderen Brücken wieder
+  const VORSTELLUNG_MS = 1500;  // Stufe vorstellung: so lange sind die Perlen der Stäbchen zu sehen
+  const GEKONNT_MS = 3500;      // Gekonnt-Satz in der Blase, bevor die Pause kommt
   const PAUSE_MS = 10000;
   const FARBE = {1:"#E53935",2:"#43A047",3:"#F48FB1",4:"#FDD835",5:"#64B5F6",6:"#9C27B0",7:"#FFFFFF",8:"#8D6E63",9:"#1E3A8A",10:"#F9A825"};
   // Geometrie (SVG-Einheiten, Bild 1920 × 1080)
@@ -127,6 +141,7 @@ sperreTouch();
   const YK = 200;               // Mitte der Zielkette
   const ZEILE0 = 545, ZEILE = 106;   // Spalten: erste Zeile und Abstand
   const UNI_W = 220, UNI_S = UNI_W/320, UNI_FUSS = 254*UNI_S;
+  const STUFEN = ["material","vorstellung","kopf"];
 
   const $ = id => document.getElementById(id);
   const NS = "http://www.w3.org/2000/svg";
@@ -134,21 +149,21 @@ sperreTouch();
   const params = new URLSearchParams(location.search);
   const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const F = window.Figuren;
-  const heute = () => new Date().toLocaleDateString("sv");
+  const zk = (n,a,b) => `zerl:${n}:${a}+${b}`;
   function el(tag, attrs={}, parent){ const e=document.createElementNS(NS,tag); for(const [k,v] of Object.entries(attrs)) e.setAttribute(k,v); if(parent) parent.appendChild(e); return e; }
 
-  // ---------- Speichern ----------
-  const vorschau = params.has("zahl") || params.has("fehler");
-  let save = migriere(await lade("perlenbruecke", {}));
-  function persist(){ if(!vorschau) speichere("perlenbruecke", save); }
+  // ---------- Vorschau (?zahl, ?fehler, ?stufe): schreibt nie in einen Lernstand ----------
+  const eigeneAufgabe = params.has("zahl") || params.has("fehler");   // Aufgabe ohne Lernsteuerung
+  const vorschau = eigeneAufgabe || params.has("stufe");
+  const vorschauStufe = STUFEN.includes(params.get("stufe")) ? params.get("stufe") : null;
 
   // ---------- Elternansicht (?eltern) ----------
-  if(params.has("eltern")){ elternansicht(); return; }
+  if(params.has("eltern")){ elternansicht(migriere(await lade("perlenbruecke", {}))); return; }
 
   // ---------- Ton ----------
   let sound = true; try{ sound = localStorage.getItem("perlenbruecke-ton")!=="aus"; }catch(e){}
   const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("perlenbruecke-ton",sound?"an":"aus"); }catch(e){} });
+  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("perlenbruecke-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
@@ -161,6 +176,26 @@ sperreTouch();
   const zaehlTon = i => tone(440*Math.pow(2,i/12),440*Math.pow(2,i/12),.12,"sine",.08);
   // Sprechblase des Einhorns. Zahlen werden nicht vorgelesen: Ziffern lesen sich sicherer als eine Computerstimme.
   function sag(text){ const b=$("blase"); if(text) b.textContent=text; b.classList.toggle("leer", !text); }
+  // Stimme nur für Sätze ohne Zahlen (Stimme wie im Einführungs-Abspieler, Wahl im Elternbereich)
+  function sprich(text){
+    if(!sound || !window.speechSynthesis || /\d/.test(text)) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; u.rate=.85;
+      let fest=""; try{ fest=localStorage.getItem("einhorn-stimme")||""; }catch(e){}
+      const v=speechSynthesis.getVoices().filter(v=>/^de/i.test(v.lang)).find((v,k)=>k+"|"+v.name+"|"+v.voiceURI===fest);
+      if(v) u.voice=v;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  // ---------- Lernsteuerung und spieleigener Stand ----------
+  let plan = null;
+  try{ plan = await fetch("lernplan.json").then(x=>x.json()); }catch(e){}
+  const themaPlan = id => plan?.themen?.find(t=>t.id===id) || null;
+  let r = null;                 // aktuelle Runde der Lernsteuerung
+  let eigen = migriere(null);   // Reise und Abnutzung (erst nach runde() laden: die Lernsteuerung übernimmt beim ersten Start den alten Stand)
+  function persist(){ if(!vorschau) speichere("perlenbruecke", eigen); }
 
   // ---------- Geometrie je Zahl ----------
   let n = 7;
@@ -198,18 +233,23 @@ sperreTouch();
     for(let i=0;i<n;i++) el("circle",{cx:slotX(i),cy:YB,r:R,class:"platz","data-i":i},gras);
     if(n>5) el("line",{x1:gapL()+5*P,y1:YB-R-12,x2:gapL()+5*P,y2:YB+R+12,stroke:"#fff","stroke-width":5,"stroke-linecap":"round"},gras);
   }
-  let kettePerlen=[];
+  // Zielkette: Zahl im Kreis, daneben die Perlen (bei kopf nur die Zahl; die Perlen erscheinen erst zum Erklären eines Fehlers)
+  let kettePerlen=[], ketteG=null;
   function kette(){
     const k=$("kette"); k.innerHTML="";
     const bx=gapR()+115;
     el("circle",{cx:bx,cy:YK,r:72,fill:"#fff",stroke:"#3B2A6B","stroke-width":5},k);
     const t=el("text",{x:bx,y:YK+6,class:"zahl"},k); t.textContent=n;
-    el("rect",{x:gapL()-6,y:YK-R-14,width:gapW()+12,height:2*R+28,rx:R+14,fill:"rgba(255,255,255,.55)"},k);
-    kettePerlen = stab(k, n, slotX(0), YK, FARBE[n]).perlen;
+    ketteG=el("g",{class:"kettenperlen"+(stufe==="kopf"?" verdeckt":"")},k);
+    el("rect",{x:gapL()-6,y:YK-R-14,width:gapW()+12,height:2*R+28,rx:R+14,fill:"rgba(255,255,255,.55)"},ketteG);
+    kettePerlen = stab(ketteG, n, slotX(0), YK, FARBE[n]).perlen;
   }
-  // Spalten: links rechtsbündig zur Lücke, rechts linksbündig; kurz oben, lang unten
-  let staebe = {l:[], r:[]};
+  const zeigeKette = () => ketteG?.classList.remove("verdeckt");
+  // Spalten: links rechtsbündig zur Lücke, rechts linksbündig; kurz oben, lang unten.
+  // Bei vorstellung/kopf deckt eine Fläche in Ufer-Farbe die Perlen ab, die Ziffern bleiben.
+  let staebe = {l:[], r:[]}, deckTimer=0;
   function spalten(ang){
+    clearTimeout(deckTimer);
     for(const seite of ["l","r"]){
       const box=$(seite==="l"?"spalteL":"spalteR"); box.innerHTML=""; staebe[seite]=[];
       const werte = seite==="l" ? ang.links : ang.rechts;
@@ -221,12 +261,14 @@ sperreTouch();
         const plX = seite==="l" ? x0-R-90 : x0-R-18, plW = breite+108;
         el("rect",{x:plX,y:y-46,width:plW,height:92,rx:30,class:"platte"},g);
         stab(g, len, x0, y);
+        el("rect",{x:x0-R-12,y:y-R-12,width:breite+24,height:2*R+24,rx:R+12,class:"deckel"+(stufe==="kopf"?" zu":"")},g);
         const z=el("text",{x: seite==="l" ? x0-R-22 : x0+breite-R+22, y:y+2, class:"ziffer","text-anchor": seite==="l"?"end":"start"},g); z.textContent=len;
         const s={seite,len,g,x0,y};
         g.addEventListener("click",()=>tippe(s));
         staebe[seite].push(s);
       });
     }
+    if(stufe==="vorstellung") deckTimer=setTimeout(()=>document.querySelectorAll(".deckel").forEach(d=>d.classList.add("zu")), VORSTELLUNG_MS);
   }
 
   // ---------- Einhorn ----------
@@ -252,8 +294,8 @@ sperreTouch();
   function neuesEinhorn(){ if(uni) uni.g.remove(); uni=figurG("einhorn", uniStart()); uni.g.addEventListener("click",()=>{ if(busy) return; klick(); F.hop(uni.svg,{hoehe:40,dauer:500}); }); }
 
   // ---------- Zustand einer Brücke ----------
-  let ang=null, wahl={l:null,r:null}, fehler=0, busy=true, t0=0, bauTimer=0, sperreBis={l:0,r:0}, loesung=null;
-  let sitzungStart=true, rundeZaehler=0, vorher=0, wieder=[], angesagt=new Set();
+  let ang=null, stufe="material", wahl={l:null,r:null}, fehler=0, busy=true, t0=0, bauTimer=0, sperreBis={l:0,r:0}, loesung=null;
+  let vorher=0;
 
   function zeigeWahl(){
     for(const seite of ["l","r"]) for(const s of staebe[seite]) s.g.classList.toggle("gewaehlt", wahl[seite]===s);
@@ -302,7 +344,8 @@ sperreTouch();
   }
 
   // ---------- Bauen ----------
-  // Stäbchen fliegen in die Lücke: links von links, rechts von rechts (bei zu lang direkt hinter das linke)
+  // Stäbchen fliegen in die Lücke: links von links, rechts von rechts (bei zu lang direkt hinter das linke).
+  // In der Lücke sind die Perlen immer zu sehen: bei vorstellung und kopf wird hier aufgedeckt.
   async function baue(){
     if(busy || !wahl.l || !wahl.r) return;
     busy=true;
@@ -323,26 +366,28 @@ sperreTouch();
   }
 
   async function richtig(a,b,L,Rr){
-    const ms=Date.now()-t0;
-    const r = vorschau ? {frei:null} : verbuche(save, n, a, b, {fehler, hilfe: fehler>=2, ms, heute:heute()});
-    if(fehler) wieder.push({zahl:n, ab: rundeZaehler + WIEDER_NACH + 1});
-    persist();
+    const ms=Date.now()-t0, key=zk(n,a,b);
+    // hilfe: 0 ohne, 1 nach Denkhilfe (2. Fehler), 2 nach gezeigter Lösung (ab dem 3. Fehler)
+    let ereignis=null;
+    if(!eigeneAufgabe) ereignis = r.melde(key, {ok: fehler===0, hilfe: fehler>=3 ? 2 : fehler===2 ? 1 : 0, ms});
+    verbucheBau(eigen, key); persist();
     // verschmelzen zur Farbe der Zahl, Planken
     for(const p of [...L.perlen, ...Rr.perlen]) p.querySelector("circle:nth-of-type(2)").setAttribute("fill", FARBE[n]);
     el("rect",{x:gapL()-20,y:Y0-10,width:gapW()+40,height:14,rx:7,fill:"#E3B27C",stroke:"#3B2A6B","stroke-width":3},$("bruecke"));
+    zeigeKette();
     // Die Brücke trägt: sie setzt sich kurz, das Einhorn läuft hinüber
     plopp(); const brg=$("bruecke"); brg.classList.remove("bruecke-traegt"); void brg.getBBox(); brg.classList.add("bruecke-traegt");
     sag(`${a} und ${b} sind ${n}.`);
     await wait(350);
     await bewege(uni, gapR()+40, 1300);
     await wait(150);
-    rundeZaehler++;
-    await weiter(r.frei);
+    await weiter(ereignis);
   }
 
   async function falsch(a,b,L,Rr,zielR){
     const start=Date.now(), summe=a+b, kurz=summe<n;
     fehler++; boing();
+    zeigeKette();                 // die Rückmeldung erklärt immer an den Perlen
     const alle=[...L.perlen, ...Rr.perlen];
     if(kurz){
       // Einhorn tastet sich bis an das Loch und schaut hinunter
@@ -380,10 +425,9 @@ sperreTouch();
     for(const s of [wahl.l,wahl.r]) s.g.classList.remove("weg");
     wahl={l:null,r:null}; zeigeWahl();
     bewege(uni, uniStart(), 250, {laufen:false});
-    // Hilfe-Leiter
+    // Hilfe-Leiter: ab dem 3. Fehler leuchtet die Ziel-Zerlegung
     if(fehler>=3){
-      const bestes = ang.paare.map(k=>[k, eintrag(save,k).c]).sort((x,y)=>x[1]-y[1])[0][0];
-      const [la, lb] = bestes.split(":")[1].split("+").map(Number);
+      const {a:la, b:lb} = zerlegung(ang.paare[0]);
       loesung={l:la, r:lb};
       for(const seite of ["l","r"]) for(const s of staebe[seite]){ const ok = s.len===loesung[seite]; s.g.classList.toggle("leuchtet", ok); s.g.classList.toggle("zu", !ok); }
       sag(`${n} ist ${la} und ${lb}.`);
@@ -393,33 +437,66 @@ sperreTouch();
   }
 
   // ---------- Ablauf ----------
-  async function weiter(neu){
+  const ausblenden = async () => {
+    if(ruhig) return;
+    [$("bruecke"),$("kette"),$("spalteL"),$("spalteR"),$("plaetze"),$("figuren")].forEach(e=>e.animate([{opacity:1},{opacity:0}],{duration:350,fill:"forwards"}));
+    await wait(360);
+  };
+  async function weiter(ereignis){
     busy=true;
-    if(!ruhig){ const fade=[$("bruecke"),$("kette"),$("spalteL"),$("spalteR"),$("plaetze"),$("figuren")]; fade.forEach(e=>e.animate([{opacity:1},{opacity:0}],{duration:350,fill:"forwards"})); await wait(360); }
-    if(!vorschau && rundeZaehler>0 && rundeZaehler % K.RUNDE === 0){ await pause(); }
-    await neueBruecke(neu);
+    if(ereignis?.typ==="gekonnt"){
+      // ruhig und sachlich: Stimme ohne Zahl, Ziffer in der Blase
+      const z = themaPlan(ereignis.thema)?.aufgaben?.zahl ?? n;
+      await wait(600);
+      sag(`${z} kannst du jetzt zerlegen.`); sprich("Das kannst du jetzt zerlegen.");
+      await wait(GEKONNT_MS);
+      await ausblenden();
+      await r.ende();
+      await pause({knoepfe:true});
+      return neueRunde();
+    }
+    await ausblenden();
+    const a = naechsteAufgabe();
+    if(!a){ await r.ende(); await pause(); return neueRunde(); }
+    neueBruecke(a);
   }
-  function waehleZahl(){
-    if(params.has("zahl")) return Math.min(10, Math.max(3, +params.get("zahl")||7));
-    const w = wieder.findIndex(x=>x.ab<=rundeZaehler && x.zahl!==vorher && save.frei.includes(x.zahl));
-    if(w>=0) return wieder.splice(w,1)[0].zahl;
-    return naechsteZahl(save, {vorher, heute:heute()});
+  // Angebot holen; Vorschau ?zahl/?fehler: eigene Aufgabe ohne Lernsteuerung
+  function naechsteAufgabe(){
+    if(params.get("fehler")) return {n:7, ang: params.get("fehler")==="lang" ? {paare:[zk(7,2,5)],links:[2,4,5],rechts:[1,5,6]} : {paare:[zk(7,2,5)],links:[1,2,4],rechts:[2,4,5]}, stufe: vorschauStufe || "material"};
+    if(params.has("zahl")){
+      const z = Math.min(10, Math.max(2, +params.get("zahl")||7));
+      const alle = paareVon(z).map(p=>"zerl:"+p.key).sort(()=>Math.random()-.5);
+      return {n:z, ang: angebotAus(z, alle[0], alle.slice(1,3), eigen), stufe: vorschauStufe || "material"};
+    }
+    const a = r.naechste(); if(!a) return null;
+    const z = a.ziel.daten.n;
+    return {n:z, ang: angebotAus(z, a.ziel.key, a.auch.map(x=>x.key), eigen), stufe: vorschauStufe || a.stufe};
   }
-  async function neueBruecke(neu){
-    n = waehleZahl(); vorher=n;
-    ang = angebot(n, save, heute());
-    if(params.get("fehler")==="kurz"){ n=7; ang={paare:["7:2+5"],links:[1,2,4],rechts:[2,4,5]}; }
-    if(params.get("fehler")==="lang"){ n=7; ang={paare:["7:2+5"],links:[2,4,5],rechts:[1,5,6]}; }
+  async function neueBruecke(a){
+    n = a.n; ang = a.ang; stufe = STUFEN.includes(a.stufe) ? a.stufe : "material";
     fehler=0; wahl={l:null,r:null}; loesung=null; sperreBis={l:0,r:0}; clearTimeout(sperrTimer);
     $("bruecke").innerHTML="";
     ufer(); kette(); spalten(ang); neuesEinhorn();
     for(const e of [$("bruecke"),$("kette"),$("spalteL"),$("spalteR"),$("plaetze"),$("figuren")]){ e.getAnimations().forEach(x=>x.cancel()); if(!ruhig) e.animate([{opacity:0},{opacity:1}],{duration:400}); }
-    const frisch = (neu===n) || (save.neu?.zahl===n && !angesagt.has(n) && save.reise < save.neu.bis);
-    sag("");
-    if(sitzungStart || frisch){ sag(`Bau eine Brücke für ${n}.`); angesagt.add(n); }
-    sitzungStart=false;
+    sag(n!==vorher ? `Bau eine Brücke für ${n}.` : "");
+    vorher=n;
     t0=Date.now(); busy=false;
-    if(params.has("fehler")){ await wait(900); const l=ang.links.indexOf(params.get("fehler")==="kurz"?2:4), r=ang.rechts.indexOf(params.get("fehler")==="kurz"?4:5); tippe(staebe.l[l]); tippe(staebe.r[r]); }
+    if(params.has("fehler")){ await wait(900); const l=ang.links.indexOf(params.get("fehler")==="lang"?4:2), rr=ang.rechts.indexOf(params.get("fehler")==="lang"?5:4); tippe(staebe.l[l]); tippe(staebe.r[rr]); }
+  }
+  // Neue Runde: Thema von der Lernsteuerung, Einführung falls fällig, dann die erste Brücke
+  async function neueRunde(){
+    busy=true; sag("");
+    r = await runde("perlenbruecke", { wunsch: params.get("thema"), max: K.RUNDE, nurAnsehen: vorschau });
+    eigen = migriere(await lade("perlenbruecke", {}));
+    if(r.einfuehrungFaellig && !vorschau){
+      const e = themaPlan(r.thema?.id)?.einfuehrung;
+      const ergebnis = e ? await spieleEinfuehrung(e.vorlage, e.werte, {ton: sound}) : "abgebrochen";
+      if(ergebnis!=="gesehen"){ location.href="index.html"; return; }
+      r.einfuehrungGesehen();
+    }
+    const a = naechsteAufgabe();
+    if(!a){ await r.ende(); await pause({knoepfe:true}); return neueRunde(); }
+    neueBruecke(a);
   }
 
   // ---------- Pause: Einhorn auf der fertigen Brücke im Abendlicht ----------
@@ -447,38 +524,39 @@ sperreTouch();
       <g transform="translate(810 ${(626-uniH*254/280).toFixed(0)})"><g class="atmen">${F.svgFigur("einhorn").replace("<svg",`<svg width="${uniW}" height="${uniH}" style="width:${uniW}px;height:${uniH}px"`)}</g></g>
     </svg><div class="pbar"><div class="pfill"></div></div>`;
   }
-  async function pause(ohneBalken=false){
+  // Ohne Knöpfe: Balken läuft PAUSE_MS, dann geht es weiter. Mit Knöpfen (nach „kann ich“): Weiter oder Haus.
+  async function pause({knoepfe=false}={}){
     const e=$("pause");
     e.innerHTML=pausenSzene();
-    if(ohneBalken) e.querySelector(".pbar").remove();
+    if(knoepfe){
+      e.querySelector(".pbar").remove();
+      e.insertAdjacentHTML("beforeend",`<div class="pknoepfe"><a class="pk" href="index.html" aria-label="Alle Spiele"><img src="symbole/haus.svg" alt=""></a><button class="pk weiter" aria-label="Weiter"><img src="symbole/zurueck.svg" alt=""></button></div>`);
+    }
     e.style.setProperty("--pause-ms", PAUSE_MS+"ms");
     e.classList.add("on"); void e.offsetWidth; e.classList.add("show");
-    await wait(PAUSE_MS);
+    if(knoepfe) await new Promise(ok=>e.querySelector(".weiter").addEventListener("click",()=>{ klick(); ok(); },{once:true}));
+    else await wait(PAUSE_MS);
     e.classList.remove("show"); await wait(600); e.classList.remove("on"); e.innerHTML="";
   }
-  if(params.has("pause")) pause();
+  if(params.has("pause")) pause({knoepfe: params.get("pause")==="knoepfe"});
 
-  // ---------- Elternansicht ----------
-  function elternansicht(){
+  // ---------- Elternansicht: nur Spieleigenes; den Lernstand zeigt der Elternbereich ----------
+  function elternansicht(eigen){
     document.querySelectorAll("#welt,.rund").forEach(e=>e.remove());
-    const nxt = K.REIHENFOLGE.find(z=>!save.frei.includes(z));
-    const ps = save.frei.flatMap(paareVon), sitzen = ps.filter(p=>eintrag(save,p.key).f>=2).length;
-    const v = save.verlauf || [];
-    const zeile = p => { const e=eintrag(save,p.key); return `<li>${p.a} + ${p.b}
-      <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""} · ${e.c}× fehlerfrei gebaut · zuletzt ${(e.h||[]).map(x=>x?"richtig":"falsch").join(", ")||"–"}</small></li>`; };
-    let html=`<h1>Lernstand Perlenbrücke</h1>
-      <p>Freigeschaltet: ${save.frei.map(esc).join(", ")}. ${nxt ? `Nächste Zahl: ${nxt} – braucht ${Math.round(K.FREI_ANTEIL*100)} % der Zerlegungen in Fach ≥ 2 (jetzt ${sitzen} von ${ps.length}) und ${Math.round(K.FREI_QUOTE*100)} % fehlerfrei in den letzten ${K.FREI_FENSTER} Brücken (jetzt ${v.filter(Boolean).length} von ${v.length}).` : "Alle Zahlen sind freigeschaltet."}
-      Brücken insgesamt: ${esc(save.reise)}. Fach 0 = wackelt, ab Fach ${K.GELERNT} = gelernt, Abstände ${K.ABSTAND.join(" / ")} Tage. „Fehlerfrei gebaut“ zeigt, ob Abwechslung entsteht.</p>`;
-    for(const z of [...save.frei].sort((x,y)=>x-y)){
-      const pz=paareVon(z), zs=save.zahlen[z];
-      const wack=pz.filter(p=>eintrag(save,p.key).f===0), rest=pz.filter(p=>eintrag(save,p.key).f>0);
-      html+=`<h2>${z}${zs?.w?" <small>(wackelt)</small>":""}${zs?.z?.length?` <small>· letzte Zeiten ${zs.z.map(ms=>(ms/1000).toFixed(1)+" s").join(", ")}</small>`:""}</h2><ul>${[...wack,...rest].map(zeile).join("")}</ul>`;
+    let html=`<h1>Perlenbrücke</h1>
+      <p>Was dran ist und was Ihr Kind schon kann, steht bei den Themen im Elternbereich.
+      Hier steht nur, was das Spiel selbst mitzählt: gebaute Brücken insgesamt ${esc(eigen.reise)}.
+      „Gebaut“ zählt, wie oft eine Zerlegung schon als Brücke gebaut wurde; oft gebaute kommen seltener als zusätzliche Wahl, damit Abwechslung entsteht.</p>`;
+    for(let z=2; z<=10; z++){
+      const ps=paareVon(z), c=k=>eigen.c["zerl:"+k]||0;
+      if(!ps.some(p=>c(p.key))) continue;
+      html+=`<h2>${z}</h2><ul>${ps.map(p=>`<li>${p.a} + ${p.b} <small>· ${c(p.key)}× gebaut</small></li>`).join("")}</ul>`;
     }
-    html+=`<p><a class="btn" href="perlenbruecke.html">Zum Spiel</a></p>`;
+    html+=`<p><a class="btn" href="eltern.html">Themen im Elternbereich</a> <a class="btn" href="perlenbruecke.html">Zum Spiel</a></p>`;
     const e=document.createElement("div"); e.className="eltern"; e.innerHTML=html; document.body.appendChild(e);
   }
 
-  await neueBruecke(null);
+  await neueRunde();
 })();
 </script>
 </body>
