@@ -1,5 +1,10 @@
 # Änderungen
 
+## Unveröffentlicht
+
+- Zahlenzauber: Ein Blatt welkt nur noch, solange die zweite Zahl gesucht wird. Sind zwei Zahlen gewählt, steht jedes andere Blatt wieder frisch da – vorher konnte ausgerechnet das Ergebnisblatt welk aussehen. Ein leuchtendes Blatt (Hilfe) ist nie welk.
+- Zahlenzauber: Die Stimme liest Zahlen als Wörter vor („zwei und drei sind zusammen fünf“) statt „fünfter“.
+
 ## v0.1.5
 
 - Schrift: Wörter, Sätze, Zahlen und Knöpfe in normaler Stärke (Andika 400), nur Überschriften etwas kräftiger.

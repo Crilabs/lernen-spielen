@@ -225,7 +225,19 @@ sperreTouch();
     const i=vs.findIndex((v,k)=>(k+"|"+v.name+"|"+v.voiceURI)===fest);
     voice = i>=0 ? vs[i] : (vs.filter(v=>stimmWert(v)>=0).sort((a,b)=>stimmWert(b)-stimmWert(a))[0] || null); }
   if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
-  function say(text){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1.05; speechSynthesis.speak(u); }catch(e){} }
+  // Zahlen als Wörter vorlesen: „5.“ am Satzende liest die Stimme sonst als Ordnungszahl („fünfter“).
+  const EINER=["null","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun","zehn","elf","zwölf","dreizehn","vierzehn",
+    "fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn"];
+  const ZEHNER=["","","zwanzig","dreißig","vierzig","fünfzig","sechzig","siebzig","achtzig","neunzig"];
+  function zahlwort(n){
+    if(n<20) return EINER[n];
+    if(n===100) return "hundert";
+    if(n>100) return String(n);
+    const e=n%10, z=ZEHNER[Math.floor(n/10)];
+    return e ? (e===1?"ein":EINER[e])+"und"+z : z;
+  }
+  const sprechText = t => t.replace(/\d+/g, m=>zahlwort(+m)).replace(/ − /g," weniger ").replace(/ = /g," sind ");
+  function say(text){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(sprechText(text)); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1.05; speechSynthesis.speak(u); }catch(e){} }
   // Sprechblase des Einhorns: nur Text. Gesprochen wird im Spiel nichts – einzig die Perlen-Lektion nach dem Lösen.
   function sag(text){ $("blase").textContent=text; }
 
@@ -417,11 +429,15 @@ sperreTouch();
     B.el=[...blumeEl.querySelectorAll(".blatt")];
     B.el.forEach((g,i)=>g.addEventListener("click",()=>tipp(i)));
   }
+  // Welk heißt „als Partner der Start-Zahl schon probiert“. Das gilt nur, solange der Partner gesucht wird: Mit Start
+  // und Partner ist jedes andere Blatt ein mögliches Ergebnis (auch eins, das als Partner nicht passte), und ein
+  // leuchtendes Blatt (Hilfe, Nachtippen) darf nie welk aussehen.
   function zeigeZustand(){
+    const partnerGesucht = B.start!=null && B.partner==null && !B.nach;
     B.el.forEach((g,i)=>{
       g.classList.toggle("start", i===B.start);
       g.classList.toggle("partner", i===B.partner);
-      g.classList.toggle("welk", B.start!=null && i!==B.start && i!==B.partner && B.probiert.has(paar(B.start,i)));
+      g.classList.toggle("welk", partnerGesucht && i!==B.start && !g.classList.contains("zeig") && B.probiert.has(paar(B.start,i)));
     });
   }
   function wackel(i){ const g=B.el[i]; g.classList.remove("wackel"); void g.getBoundingClientRect(); g.classList.add("wackel"); setTimeout(()=>g.classList.remove("wackel"),500); }
@@ -540,7 +556,7 @@ sperreTouch();
       else sag("Das Ergebnis ist größer als die zwei Teile.");
     }else if(B.hilfe===2){
       if(B.minus){ B.start=c; B.partner=null; zeigeZustand(); zeile(""); leereFeld(); }
-      B.el[c].classList.add("zeig");   // leuchtet, bis die Blume gelöst ist
+      B.el[c].classList.add("zeig"); zeigeZustand();   // leuchtet, bis die Blume gelöst ist
       sag(B.minus?`Fang bei der ${B.nums[c]} an.`:`Das Ergebnis ist ${B.nums[c]}. Welche zwei passen?`);
     }else loesungZeigen();
   });
