@@ -117,6 +117,23 @@ test("zweites sprich bricht erstes ab", async () => {
   assert.equal(await zweites, "gesprochen");
 });
 
+test("sprich mit Zahl oder leerem Text bricht laufende Sprache ab", async () => {
+  const S = await frisch();
+  const erstes = S.sprich("A wie Apfel");
+  await warte();
+  const vorher = abgebrochen;
+  assert.equal(await S.sprich("Die 7"), "still");
+  assert.equal(await erstes, "abgebrochen");
+  assert.ok(abgebrochen > vorher);
+  assert.equal(gesprochen.length, 1);
+  const drittes = S.sprich("B wie Ball");
+  await warte();
+  const vorLeer = abgebrochen;
+  assert.equal(await S.sprich(""), "still");
+  assert.equal(await drittes, "abgebrochen");
+  assert.ok(abgebrochen > vorLeer);
+});
+
 test("stille bricht ab, auch während die Einstellungen noch laden", async () => {
   const S = await frisch();
   const p = S.sprich("Hallo");

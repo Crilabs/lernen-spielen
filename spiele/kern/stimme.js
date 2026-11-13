@@ -146,13 +146,14 @@ function brichAb() {
  */
 export async function sprich(text, { tempo = 0.85, hoehe = 1 } = {}) {
   const s = synth();
-  if (!s || !text) return "still";
+  if (!s) return "still";
+  brichAb();   // auch ein stiller Aufruf beendet, was gerade gesprochen wird
+  if (!text) return "still";
   if (/\d/.test(text)) {
     protokoll("Zahl nicht gesprochen: " + text);
     return "still";
   }
   beobachte();
-  brichAb();
   const meine = nummer;
   await bereit();
   if (meine !== nummer) return "abgebrochen";
