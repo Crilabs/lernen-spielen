@@ -13,7 +13,7 @@ const SYMBOLE = new URL("../symbole/", import.meta.url).href;
  * @param {Element} el
  * @returns {string | null}
  */
-function findeSpiel(el) {
+export function findeSpiel(el) {
   /** @type {Element | null} */
   let k = el;
   while (k) {
