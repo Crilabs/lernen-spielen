@@ -97,6 +97,8 @@ Neue Bilder im Querformat, empfohlen 4:3, z. B. 1600×1200. Pro Bild:
 - `spiele/bilder/<name>.jpg`
 - `spiele/bilder/<name>.json` mit den Dingen; `formen` als `[x1,y1,x2,y2]` in Prozent des Bildes
 - Eintrag (Name ohne Endung) in `spiele/bilder/index.json`
+- Pausenbild `spiele/bilder/<name>-pause.jpg` (Einhorn passend zur Szene), eingetragen als `"pause": "<name>-pause.jpg"` in der JSON;
+  es erscheint nach dem letzten Wort der Runde 10 Sekunden lang (`PAUSE_MS` in `wimmelbild.html`), danach folgt die nächste Szene.
 
 Kontrolle: `wimmelbild.html?pruefen` zeigt alle Bereiche (Tippen zeigt die Koordinate), ein einzelnes Bild mit
 `?pruefen&bild=<name>`.

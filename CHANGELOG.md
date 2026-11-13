@@ -1,5 +1,12 @@
 # Änderungen
 
+## v0.1.2
+
+- Wimmelbild: fünf neue Szenen im Querformat (Dorfplatz, Strand, Weltraum, Safari, Zauberwald) mit neu markierten Dingen.
+- Kein Startbildschirm mehr – das Spiel beginnt sofort.
+- Nach jeder Szene kommt 10 Sekunden lang ein passendes Einhorn-Bild mit kleinem Balken, danach geht es von selbst mit der nächsten Szene weiter.
+- Vorlesen funktioniert auch ohne vorheriges Antippen.
+
 ## v0.1.1
 
 Fehlerbehebungen. Der Lernstand bleibt beim Update erhalten.
