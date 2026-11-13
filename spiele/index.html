@@ -150,16 +150,21 @@ const kopf = farbe => `<svg viewBox="0 0 44 44">${[0, 72, 144, 216, 288].map(a =
 // ---------- Fortschritt je Spiel ----------
 // Modul vorhanden: Zahl (ohne Lernstand 0). Kein Modul: kein Eintrag. Fehler: Protokoll, kein Eintrag.
 async function wertVon(id) {
-  let modul;
-  try { modul = await import("./fortschritt/" + id + ".js"); }
-  catch (e) { return undefined; }
+  const url = "./fortschritt/" + id + ".js";
   try {
+    const kopf = await fetch(url, { method: "HEAD" });
+    if (!kopf.ok) return undefined;          // kein Modul: still
+  } catch (e) { protokoll("Fortschritt " + id + ": " + e); return undefined; }
+  try {
+    const modul = await import(url);
     const roh = await lade(id, {});
     const save = roh && Object.keys(roh).length === 0 ? null : roh;
     const r = await modul.fortschritt(save, p => fetch(p).then(x => x.json()));
-    return typeof r?.wert === "number" ? Math.min(1, Math.max(0, r.wert)) : undefined;
+    return Number.isFinite(r?.wert) ? Math.min(1, Math.max(0, r.wert)) : undefined;
   } catch (e) { protokoll("Fortschritt " + id + ": " + e); return undefined; }
 }
+const FARBE = /^#[0-9a-fA-F]{3,8}$/;
+const farbe = (c, fallback = "#3B2A6B") => FARBE.test(c) ? c : fallback;
 
 async function start() {
   let daten;
@@ -178,14 +183,16 @@ async function start() {
   for (const { kategorie: k, spiele } of kats) {
     const wert = kategorieWert(spiele, werte);
     const voll = wert === undefined ? 0 : Math.floor(wert * 10 + 1e-9);
-    const knospe = wert !== undefined && wert * 10 - voll >= .3 ? 1 : 0;
+    const rest = wert === undefined ? 0 : wert * 10 + 1e-9 - voll;
+    const knospe = rest >= .3 ? 1 : 0;
+    const fk = farbe(k.farbe), fs = farbe(k.schatten), ft = farbe(k.tint, "#EEF9FF");
     const el = document.createElement("section");
     el.className = "beet";
-    el.style.cssText = `--k:${k.farbe};--ks:${k.schatten};--kt:${k.tint}`;
+    el.style.cssText = `--k:${fk};--ks:${fs};--kt:${ft}`;
     el.innerHTML = `<div class="schild"><div class="sym"><img src="${esc(k.symbol)}" alt=""></div><h2>${esc(k.name)}</h2></div>
       <div class="spiele">${spiele.map(s => {
         const w = werte[s.id];
-        const weg = w === undefined ? "" : `<div class="weg" aria-hidden="true"><i style="width:${w * 100}%"></i><b style="left:${w * 100}%">${kopf(k.farbe)}</b></div>`;
+        const weg = w === undefined ? "" : `<div class="weg" aria-hidden="true"><i style="width:${w * 100}%"></i><b style="left:${w * 100}%">${kopf(fk)}</b></div>`;
         return `<a class="kachel" href="${esc(s.datei)}" data-id="${esc(s.id)}" aria-label="${esc(s.titel)}">
           <div class="ico"><img src="${esc(s.symbol)}" alt=""></div>
           <div><h3>${esc(s.titel)}</h3><span class="thema">${esc(s.thema)}</span>${weg}</div>
@@ -193,7 +200,7 @@ async function start() {
         </a>`;
       }).join("")}</div>
       <div class="erde" role="img" aria-label="${esc(k.name)}: ${voll} von 10 Blumen"><div class="boden"></div>
-        <div class="blumen">${Array.from({ length: 10 }, (_, i) => blume(k.farbe, i < voll ? 2 : (i === voll && knospe ? 1 : 0))).join("")}</div></div>`;
+        <div class="blumen">${Array.from({ length: 10 }, (_, i) => blume(fk, i < voll ? 2 : (i === voll && knospe ? 1 : 0))).join("")}</div></div>`;
     beete.appendChild(el);
   }
 
