@@ -104,6 +104,13 @@ test("themen.html: Figuren für die Geschichte, Haus-Knopf, Spiel mit ?thema", (
   assert.match(themen, /\?thema=/);
 });
 
+test("themen.html: Spielzeichen an jeder Station, Weg zeigt die erste dran-Station", () => {
+  assert.match(themen, /class="zeichen"/);
+  assert.match(themen, /spielNach\[s\.spiele\[0\]\]\?\.symbol/);
+  assert.match(themen, /\.station\.dran"\);\s*if \(dran\) dran\.scrollIntoView\(\{ inline: "center", block: "nearest" \}\)/);
+  assert.match(themen, /classList\.toggle\("links", weg\.scrollLeft > 0\)/);
+});
+
 test("themen.html: keine Zählung, keine Prozente", () => {
   assert.doesNotMatch(themen, / von \$\{|%\$\{|\$\{[^}]*\}\s*%|Stern|Pokal/);
 });
