@@ -340,7 +340,7 @@ sperreTouch();
     } else {
       // zu lang: das Stäbchen ragt übers Ufer, die Brücke wippt, das Einhorn rutscht zurück
       await bewege(uni, gapL() - UNI_W + 90, 450);
-      $("bruecke").classList.remove("wippe"); void $("bruecke").getBBox(); $("bruecke").classList.add("wippe");
+      $("bruecke").classList.remove("wippe","bruecke-traegt"); void $("bruecke").getBBox(); $("bruecke").classList.add("wippe");
       F.hop(uni.svg,{hoehe:24,dauer:500});
       await wait(300); await bewege(uni, uniStart()-30, 400, {laufen:false, easing:"ease-out"});
     }
@@ -365,7 +365,7 @@ sperreTouch();
     $("plaetze").querySelectorAll(".blink").forEach(e=>e.classList.remove("blink"));
     const br=$("bruecke");
     if(!ruhig) await br.animate([{opacity:1,transform:"translateY(0)"},{opacity:0,transform:"translateY(-60px)"}],{duration:300,easing:"ease-in"}).finished.catch(()=>{});
-    br.innerHTML=""; br.classList.remove("wippe");
+    br.innerHTML=""; br.classList.remove("wippe","bruecke-traegt");
     for(const s of [wahl.l,wahl.r]) s.g.classList.remove("weg");
     wahl={l:null,r:null}; zeigeWahl();
     bewege(uni, uniStart(), 250, {laufen:false});

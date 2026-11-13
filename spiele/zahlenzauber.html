@@ -211,7 +211,7 @@ sperreTouch();
     paar: ()=>tone(520,780,.14,"triangle",.1),
     welk: ()=>tone(500,380,.16,"sine",.07),
     hm: ()=>{ tone(330,260,.18,"triangle",.14); setTimeout(()=>tone(300,380,.2,"triangle",.12),170); },
-    geloest: ()=>[0,110,220].forEach((d,i)=>setTimeout(()=>tone(660+i*220,900+i*260,.14,"sine",.09),d)),
+    geloest: ()=>tone(520,700,.18,"sine",.08),   // ein leiser Ton statt Fanfare
     happs: ()=>{ tone(600,200,.15,"square",.06); setTimeout(()=>tone(300,700,.12,"sine",.1),140); },
     wachsen: ()=>tone(300,900,.5,"sine",.07)
   };
@@ -503,11 +503,13 @@ sperreTouch();
   async function verpasst(i){
     const A=B.start, P=B.partner;
     B.fehler++; busy=true; sfx.hm(); fragend(); if(i!==A && i!==P) wackel(i);
-    if(B.fehler===1){ sag("Das stimmt nicht. Probier noch mal."); await wait(700); busy=false; return; }
+    // Tippt das Kind eine Zahl des Paares an, lässt es sie los (zählt als Fehler, aber es ist dann frei für einen neuen Versuch)
+    const loslassen = () => { if(i===A){ B.start=null; B.partner=null; zeile(""); } else if(i===P){ B.partner=null; zeile(""); } zeigeZustand(); };
+    if(B.fehler===1){ sag("Das stimmt nicht. Probier noch mal."); await wait(700); loslassen(); busy=false; return; }
     if(B.fehler===2){
       if(B.minus){ const g=Math.max(B.nums[A],B.nums[P]), t=Math.min(B.nums[A],B.nums[P]); await punkte(g-t, t, {fort:true, ohneErgebnis:true}); sag("Nimm die Perlen weg. Wie viele bleiben?"); }
       else{ await punkte(B.nums[A], B.nums[P], {ohneErgebnis:true}); sag("Leg die Perlen zusammen. Welche Zahl ist es?"); }
-      busy=false; return;
+      loslassen(); busy=false; return;
     }
     await loesungZeigen();
   }

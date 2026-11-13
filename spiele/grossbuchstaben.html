@@ -457,8 +457,10 @@ sperreTouch();
   // Probe-Stab: Begleiter ein/eine und Erweiterungsprobe. Nomen: „ein Hund? Ja. Der Hund – der kleine Hund.“ Sonst geht beides nicht.
   function probe(w){
     if(w.nomen){ const n=Z.NOMEN[w.id]; return `${Z.ein(w.id)} ${n.w}? Ja. ${gross(n.a)} ${n.w} – ${n.a} kleine ${n.w}. Das passt.`; }
-    const t=klein(w.t);
-    return `ein ${t}? eine ${t}? Das geht nicht. Der kleine ${t}? Auch nicht.`;
+    const t=klein(w.t), i=satz.woerter.indexOf(w), nach=satz.woerter[i+1];
+    // Adjektiv direkt vor einem Nomen („die kleine Katze“): „eine kleine“ klingt richtig, deshalb das Ding benennen
+    if(nach && nach.nomen && /e$/.test(t)){ const n=Z.NOMEN[nach.id]; return `${t} ${n.w}. Das Ding ist ${n.a} ${n.w}. ${t} sagt nur, wie ${n.a} ${n.w} ist.`; }
+    return `ein ${t}? eine ${t}? Das passt nicht.`;
   }
   stabBtn.addEventListener("click",()=>{ if(busy) return; stabAn=!stabAn; stabBtn.classList.toggle("an",stabAn); satzEl.classList.toggle("stab",stabAn); });
 
@@ -559,7 +561,8 @@ sperreTouch();
   // Falsches Wort kommt nach WIEDER_NACH Sätzen in einem anderen Satz wieder (zählt nicht für den Lernstand)
   function plane(keys){
     const k = keys.find(k=>!k.startsWith("~")) || keys[0];
-    const s = neuerSatz(x=>x.text!==satz.text && x.woerter.some(w=>!w.fest && w.key===k));
+    // Adjektiv-Fehler auch in Runden ohne Adjektiv wiederholen (sonst findet sich kein Satz)
+    const s = neuerSatz(x=>x.text!==satz.text && x.woerter.some(w=>!w.fest && w.key===k), 400, k.startsWith("~") ? "misch" : rundeModus);
     if(!s) return;
     s.wdh=true; wiederholt++;
     runde.splice(Math.min(pos+1+WIEDER_NACH, runde.length), 0, {satz:s});

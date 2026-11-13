@@ -383,10 +383,12 @@ sperreTouch();
       if(!cur.ding){ fehler++; abprallen(g); hilfe(); return; }  // Nicht-Nomen aufs Bild: deutliche Abwehr
       const [px,py]=toPct(x,y);
       if(onThing(cur.ding,px,py)){ treffer(g); return; }
-      // Nomen daneben: beim 1. Mal nur das Signal (Bedienfehler kosten nichts). Ab dem 2. Mal leuchtet das Ding auf
-      // und das Wort gilt als Fehler (Fach 0), weil der Hinweis die Lösung verrät.
+      // Nomen daneben (Hilfe-Leiter fürs Suchen): 1. Mal nur das Signal (Bedienfehler kosten nichts).
+      // 2. Mal Denkhilfe: Die Stimme nennt das Ding mit Artikel, das Wort gilt ab jetzt als Fehler (einmal gezählt).
+      // Ab dem 3. Mal leuchtet das Ding auf.
       daneben++; sfx.boing();
-      if(daneben>=2){ fehler++; hint(cur.ding); }
+      if(daneben===2){ fehler++; setTimeout(()=>say(`${cur.ding.artikel} ${cur.ding.wort}. Schau genau hin.`), 400); }
+      else if(daneben>=3) hint(cur.ding);
     }
     zurueck(g);
   }
@@ -460,7 +462,7 @@ sperreTouch();
     // Szenen von heute zählen; nach RUNDEN_TAG ein natürlicher Halt (keine Sperre: wer wieder öffnet, spielt weiter)
     const h=heute(); if(!save.tag||save.tag.d!==h) save.tag={d:h,n:0};
     save.tag.n++; persist();
-    if(save.tag.n%RUNDEN_TAG===0){ await tagesende(); return; }
+    if(save.tag.n===RUNDEN_TAG){ await tagesende(); return; }   // nur einmal am Tag, keine Sperre: erneut öffnen spielt weiter
     if(!bild.pause){ runde(); return; }
     const el=$("pause"), im=$("pimg");
     im.src=pauseBild ? pauseBild.src : "bilder/"+bild.pause;
