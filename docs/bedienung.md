@@ -204,6 +204,11 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
   `--ls-linie`, `--ls-naht`, `--ls-haupt-schatten`, `--ls-sonne`, `--ls-nacht`, `--ls-kontur`,
   `--ls-radius-gross|--ls-radius|--ls-radius-klein`, `--ls-knopf`, `--ls-neben-schatten`, `--ls-schatten`; Werte aus
   `stil.js` (Farbwelt). Eine Welt ändert sie nicht: Form, Farbe, Größe und Platz der Bedienung sind fest.
+- **Seiten-Grundstil:** `spiele/rahmen/seite.css` (in die Spielseite einbinden): Raster, Andika, dieselben
+  Variablen in `:root`, Ebenen `.welt` (hinter allem, ganzer Bildschirm), `.buehne` (sicheres Feld),
+  `.spielflaeche` (ab `--ls-leiste-hoehe`), Flächen `.lernfeld` (Matte) und `.tablett` (flach, ohne Schatten),
+  `.teil` (ziehbares Teil mit Schatten), `.auswahl` (Sonnenring). `tests/rahmen-stil.test.mjs` prüft die
+  Variablen gegen `TOKENS` in `stil.js`.
 - **Vorschau:** `spiele/rahmen/vorschau.html` zeigt alle Bausteine zum Ansehen und Ausprobieren.
 - **Regel (geplant):** Sobald das erste Spiel umgezogen ist, prüft ein Test, dass umgezogene Spiele Haus-
   und Ton-Knopf nicht selbst bauen.

@@ -1,0 +1,201 @@
+/* Grundstil einer Spielseite (außerhalb der Bausteine, kein Shadow DOM).
+   Einbinden: <link rel="stylesheet" href="../rahmen/seite.css"> (Pfad je nach Ort der Seite).
+
+   Raster (docs/bedienung.md §2): 1rem = 1/108 der Bildhöhe, die Bühne ist das sichere Feld 192 × 108 rem,
+   mittig. Was daneben liegt, gehört der Welt (Stimmungsebene). Farben nach der Farbwelt
+   (docs/grundsaetze-bilder.md §6, docs/farbwelt.html).
+
+   Schichten von hinten nach vorn:
+     .welt          Himmel, Landschaft; füllt den ganzen Bildschirm, auch den Rand neben der Bühne.
+     .buehne        das sichere Feld; darin die Bedeutungsebene.
+       .spielflaeche  freie Fläche unter der Kopfleiste (beginnt bei var(--ls-leiste-hoehe)).
+     <ls-leiste>, <ls-hilfe>, <ls-pause> legen sich selbst darüber.
+
+   Flächen: .lernfeld (Matte), .tablett (Materialvorrat), beide flach und ohne Schatten (6.4: Schatten heißt
+   drückbar). Drückbar ist .teil (ziehbares Teil, spiele/rahmen/ziehen.js). .auswahl ist der Sonnenring.
+
+   Die Variablen in :root sind dieselben wie TOKENS in stil.js (dort ist die Quelle);
+   tests/rahmen-stil.test.mjs prüft, dass sie übereinstimmen. */
+
+@import url("../schrift/schrift.css");
+
+:root {
+  --ls-tinte: #3B2A6B;
+  --ls-tinte-weich: #6B5C96;
+  --ls-papier: #FFFCF7;
+  --ls-nebel: #F4F0FA;
+  --ls-linie: #E4DEF0;
+  --ls-naht: #CFC4E3;
+  --ls-haupt-schatten: #24184A;
+  --ls-sonne: #FFD95A;
+  --ls-nacht: #1F1B45;
+  --ls-ahorn: #EAD5B5;
+  --ls-kante: #B98E5E;
+  --ls-kontur: 0.3rem;
+  --ls-radius-gross: 4rem;
+  --ls-radius: 2.6rem;
+  --ls-radius-klein: 1.6rem;
+  --ls-knopf: 11rem;
+  --ls-neben-schatten: var(--ls-tinte-weich);
+  --ls-schatten: 0 0.6rem 0 var(--ls-neben-schatten);
+  --ls-schatten-unten: 0 0.3rem 0 var(--ls-neben-schatten);
+  /* Vorgabe, bis <ls-leiste> den Wert am <html> setzt. */
+  --ls-leiste-hoehe: calc(15.8rem + env(safe-area-inset-top, 0rem));
+
+  font-size: calc(100dvh / 108);
+  color-scheme: light;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--ls-nebel);
+  color: var(--ls-tinte);
+  font-family: "Andika", sans-serif;
+  font-size: 3.2rem;
+  line-height: 1.3;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, svg { -webkit-user-drag: none; }
+
+/* --- Ebenen ------------------------------------------------------------------------------------ */
+
+.welt {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.buehne {
+  position: fixed;
+  top: 0;
+  left: max(0rem, calc((100vw - 192rem) / 2));
+  width: min(100vw, 192rem);
+  height: 108rem;
+  z-index: 1;
+}
+
+.spielflaeche {
+  position: absolute;
+  top: var(--ls-leiste-hoehe);
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* --- Lernfeld: die Matte ------------------------------------------------------------------------
+   Papier mit Tinte-Kontur, innen eine gestrichelte Naht wie bei einer Arbeitsmatte. Flach. */
+
+.lernfeld {
+  position: relative;
+  background: var(--ls-papier);
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-gross);
+  padding: 3.6rem;
+}
+.lernfeld::before {
+  content: "";
+  position: absolute;
+  inset: 1.3rem;
+  border: 0.25rem dashed var(--ls-naht);
+  border-radius: calc(var(--ls-radius-gross) - 1.3rem);
+  pointer-events: none;
+}
+
+/* --- Tablett: der Materialvorrat ----------------------------------------------------------------
+   Helles Holz (Ahorn) mit einem Rand aus Kante, außen die Tinte-Kontur, innen eine zweite feine
+   Tinte-Linie zum Boden. Der Rand ist ringsum gleich breit: ein Rahmen, kein Schatten (6.4). */
+
+.tablett {
+  position: relative;
+  background: var(--ls-ahorn);
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-gross);
+  box-shadow:
+    inset 0 0 0 1.2rem var(--ls-kante),
+    inset 0 0 0 calc(1.2rem + var(--ls-kontur)) var(--ls-tinte);
+  padding: 3.4rem;
+}
+
+/* --- Sonnenring ---------------------------------------------------------------------------------
+   Ausgewählt: ein Ring in Sonne direkt an der Tinte-Kontur, außen eine feine Tinte-Linie. Nie eine
+   Fläche, bewertet nichts. Liegt als outline außerhalb der Kontur und folgt dem Radius. */
+
+.auswahl,
+.teil.angehoben {
+  outline: 0.8rem solid var(--ls-sonne);
+  outline-offset: 0;
+  box-shadow: 0 0 0 1.1rem var(--ls-tinte);
+}
+
+/* --- Ziehbares Teil -----------------------------------------------------------------------------
+   Drückbar, also mit festem Schatten in Tinte weich. Angetippt hebt es sich an (höher, längerer
+   Schatten) und bekommt den Sonnenring; beim Ziehen folgt es dem Finger. ziehen.js setzt nur Klassen
+   und die Eigenschaft translate; die Form gehört hierher. */
+
+.teil {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 11rem;
+  min-height: 11rem;
+  padding: 0 2.4rem;
+  background: var(--ls-papier);
+  color: var(--ls-tinte);
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius);
+  box-shadow: var(--ls-schatten);
+  font-weight: 700;
+  font-size: 6rem;
+  line-height: 1;
+  cursor: grab;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.teil:focus-visible { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0; }
+.teil.gedrueckt {
+  transform: translateY(0.3rem);
+  box-shadow: var(--ls-schatten-unten);
+}
+.teil.angehoben {
+  transform: translateY(-1rem);
+  box-shadow:
+    0 0 0 1.1rem var(--ls-tinte),
+    0 2.2rem 0 1.1rem var(--ls-tinte-weich);
+  z-index: 20;
+}
+.teil.gezogen {
+  cursor: grabbing;
+  z-index: 40;
+}
+
+/* Ziel: zeigt nur, solange ein Teil angehoben ist oder gezogen wird, dass es etwas aufnimmt.
+   Ruhig gestrichelt in Naht, kein Blinken (B3); liegt das Teil darüber, wird die Linie kräftiger. */
+
+.ziel-frei {
+  outline: 0.5rem dashed var(--ls-naht);
+  outline-offset: 0.8rem;
+}
+.ziel-frei.ziel-ueber {
+  outline-color: var(--ls-tinte-weich);
+}
+
+/* --- Wenig Bewegung (B7) ----------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

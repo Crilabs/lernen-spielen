@@ -33,6 +33,8 @@ export const FARBE = {
   hauptSchatten: "#24184A",
   sonne: "#FFD95A",
   nacht: "#1F1B45",
+  ahorn: "#EAD5B5",
+  kante: "#B98E5E",
 };
 
 /** Radien in rem: groß (Blase, Karten), normal (Kacheln), klein. */
@@ -51,6 +53,40 @@ export const FACH = {
   sprechen: { name: "Aprikose", fuellung: "#F08A4B", tief: "#A44C16", toenung: "#FFEADD" },
 };
 
+/** Höhe der Kopfleiste samt Aussparung; `<ls-leiste>` setzt sie als --ls-leiste-hoehe am Dokument. */
+export const LEISTE_HOEHE = `calc(${MASSE.leiste}rem + env(safe-area-inset-top, 0rem))`;
+
+/**
+ * Die gemeinsamen CSS-Variablen, eine Quelle für die Bausteine (`:host` in GRUND_CSS) und die Seite
+ * (`:root` in seite.css; tests/rahmen-stil.test.mjs prüft, dass beide gleich sind).
+ * @type {Readonly<Record<string, string>>}
+ */
+export const TOKENS = Object.freeze({
+  "--ls-tinte": FARBE.tinte,
+  "--ls-tinte-weich": FARBE.tinteWeich,
+  "--ls-papier": FARBE.papier,
+  "--ls-nebel": FARBE.nebel,
+  "--ls-linie": FARBE.linie,
+  "--ls-naht": FARBE.naht,
+  "--ls-haupt-schatten": FARBE.hauptSchatten,
+  "--ls-sonne": FARBE.sonne,
+  "--ls-nacht": FARBE.nacht,
+  "--ls-ahorn": FARBE.ahorn,
+  "--ls-kante": FARBE.kante,
+  "--ls-kontur": `${MASSE.kontur}rem`,
+  "--ls-radius-gross": `${RADIUS.gross}rem`,
+  "--ls-radius": `${RADIUS.normal}rem`,
+  "--ls-radius-klein": `${RADIUS.klein}rem`,
+  "--ls-knopf": `${MASSE.bedien}rem`,
+  "--ls-neben-schatten": "var(--ls-tinte-weich)",
+  "--ls-schatten": `0 ${MASSE.tiefe}rem 0 var(--ls-neben-schatten)`,
+  "--ls-schatten-unten": `0 ${MASSE.tiefe - MASSE.einsinken}rem 0 var(--ls-neben-schatten)`,
+});
+
+const TOKEN_CSS = Object.entries(TOKENS)
+  .map(([name, wert]) => `  ${name}: ${wert};`)
+  .join("\n");
+
 /**
  * CSS für das Innere jedes Bausteins: Farbwerte, Knopfformen, Einsinken, Sonnenring, reduced motion.
  *
@@ -61,23 +97,7 @@ export const FACH = {
  */
 export const GRUND_CSS = `
 :host {
-  --ls-tinte: ${FARBE.tinte};
-  --ls-tinte-weich: ${FARBE.tinteWeich};
-  --ls-papier: ${FARBE.papier};
-  --ls-nebel: ${FARBE.nebel};
-  --ls-linie: ${FARBE.linie};
-  --ls-naht: ${FARBE.naht};
-  --ls-haupt-schatten: ${FARBE.hauptSchatten};
-  --ls-sonne: ${FARBE.sonne};
-  --ls-nacht: ${FARBE.nacht};
-  --ls-kontur: ${MASSE.kontur}rem;
-  --ls-radius-gross: ${RADIUS.gross}rem;
-  --ls-radius: ${RADIUS.normal}rem;
-  --ls-radius-klein: ${RADIUS.klein}rem;
-  --ls-knopf: ${MASSE.bedien}rem;
-  --ls-neben-schatten: var(--ls-tinte-weich);
-  --ls-schatten: 0 ${MASSE.tiefe}rem 0 var(--ls-neben-schatten);
-  --ls-schatten-unten: 0 ${MASSE.tiefe - MASSE.einsinken}rem 0 var(--ls-neben-schatten);
+${TOKEN_CSS}
   display: inline-block;
   color: var(--ls-tinte);
   font-family: "Andika", sans-serif;
