@@ -21,7 +21,8 @@ export function esc(text) {
 export function linkKlick(e) {
   if (e.defaultPrevented || e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   if (!hatUngespeichertes()) return;
-  const t = e.target;
+  // Im Shadow DOM zeigt target am Dokument auf den Host; composedPath()[0] ist das echte Ziel.
+  const t = e.composedPath?.()[0] ?? e.target;
   const el = t?.nodeType === 3 ? t.parentElement : t;
   const a = el?.closest?.("a[href]");
   if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;

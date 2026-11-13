@@ -200,3 +200,18 @@ test("Link-Tipp speichert erst und wechselt dann die Seite", async () => {
   assert.equal(ort.href, "http://tauri.localhost/index.html");
   delete globalThis.location;
 });
+
+test("Link-Tipp im Shadow DOM: composedPath liefert den Link, obwohl target der Host ist", async () => {
+  globalThis.window.__TAURI__ = { core: { invoke: async () => {} } };
+  const ort = { href: "http://tauri.localhost/wimmelbild.html", origin: "http://tauri.localhost", pathname: "/wimmelbild.html", search: "" };
+  globalThis.location = ort;
+  const a = { href: "http://tauri.localhost/index.html", target: "", hasAttribute: () => false, contains: () => false };
+  const innen = { nodeType: 1, closest: (sel) => (sel === "a[href]" ? a : null) };
+  const host = { nodeType: 1, closest: () => null };
+  let verhindert = false;
+  L.speichere("schatten", { letzte: "Antwort" });
+  await L.linkKlick({ target: host, composedPath: () => [innen, host], button: 0, defaultPrevented: false, preventDefault: () => { verhindert = true; } });
+  assert.equal(verhindert, true);
+  assert.equal(ort.href, "http://tauri.localhost/index.html");
+  delete globalThis.location;
+});
