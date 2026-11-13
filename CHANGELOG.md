@@ -6,6 +6,11 @@
 - Bei „Fertig!“ mit Fehler liest die Zauberin den Satz stumm und grübelt – eine bewusste Pause, in der nichts änderbar ist, damit Durchprobieren länger dauert als Nachdenken. Sie verrät dabei nicht, wo der Fehler steckt.
 - Nach dem 2. Fehlversuch bringt sie die ein/eine-Probe, nach dem 3. zeigt sie auf die falschen Wörter und erklärt sie.
 - Ist der Satz richtig, tritt sie zur Seite und die Szene spielt. Kein Startbildschirm mehr, Pause mit Einhornbild wie im Wimmelbild.
+- Zahlenzauber neu im Querformat: Die Zahlen stehen auf den Blättern einer großen Blume, in der Mitte + oder −. Kein Startbildschirm, keine Seitenleiste – Ton, Haus und Hilfe schweben am Rand, fünf kleine Blumen zeigen die Runde.
+- Das Kind wählt selbst, mit welcher Zahl es anfängt, und tippt dann eine zweite dazu. Eine andere Zahl antippen heißt „nächster Versuch“; schon probierte Blätter welken (blass und hängend), so sieht man, was man mit dieser Zahl schon gerechnet hat. Gelöst ist die Blume, sobald die drei passenden Zahlen gewählt sind – in jeder Reihenfolge.
+- Als Fehler zählt nur, ein richtiges Paar zu verlassen, ohne das Ergebnis anzutippen. Hilfe-Knopf in drei Stufen (Tipp, Ergebnis leuchtet, Lösung zum Nachtippen).
+- Ist die Blume gelöst, frisst das Einhorn sie Blatt für Blatt, danach zeigen Montessori-Perlenstäbchen (Farben wie in der Perlenbrücke) als kurze Pause, was das Kind herausgefunden hat: Die Teile gleiten zusammen, darunter wächst das Ganze gleich lang, über 10 als goldener Zehner und Rest. Nur diese Erklärung wird vorgelesen, sonst spricht das Spiel nicht.
+- Minus-Blumen mit eigener Stufe; Zahlenraum wächst mit dem Tempo (bis 10, 20, 30, 100). Nach fünf Blumen schläft das Einhorn kurz, dann geht es von selbst weiter.
 
 ## v0.1.2
 
