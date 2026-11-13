@@ -351,9 +351,10 @@ auf dieses Dokument aufnehmen.
 ---------------------------------------------------------------------------------------------------
 ## 15. Offen
 
-- **Zauber ohne Zauberin:** `grundsaetze.md` 8 erlaubt Zauber als freundliches Fantasie-Element. Bleibt
-  Verwandeln als Ereignis (ein Kind der Runde zaubert), oder entfällt Magie ganz?
-- **Die Runde:** wie viele Kinder, Namen, Aussehen, Stimmen (Figurenblatt, F9).
+- ~~Zauber ohne Zauberin~~ entschieden (Christian, 2026-11-14): Die Kinder der Runde zaubern selbst und
+  können weitere Dinge, die es in echt nicht gibt (schrumpfen, fliegen, Zeitreise …), mit Zubehör wie beim
+  Verkleiden ([`figuren.md`](figuren.md) §5).
+- ~~Die Runde~~ festgelegt im Figurenblatt [`figuren.md`](figuren.md) (Christian, 2026-11-14).
 - **Echt-Zeichen:** Gestalt und Farbe (6.2).
 - **Prüfung in der App:** dieselbe Aufgabe mit und ohne Folge-Animation über einige Tage, gemessen an
   „gekonnt an verschiedenen Tagen“ und freiwillig gewählten Runden (neben dem Drei-Fakten-Test der
