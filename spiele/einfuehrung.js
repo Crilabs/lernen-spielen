@@ -18,6 +18,8 @@
 // oder eine Figur, wird sie still weggelassen.
 // Der reine Teil (fuelleVorlage) läuft auch in Node; nichts greift beim Import auf das DOM zu.
 
+import { sprich, stille } from "./kern/stimme.js";
+
 const PLATZHALTER = /\{\s*([A-Za-z_]\w*)\s*(?:([+-])\s*(\d+)\s*)?\}/g;
 const GANZ_PLATZHALTER = /^\s*\{[^{}]*\}\s*$/;
 const ZIFFER_ODER_PLATZ = /[0-9{}]/;
@@ -91,16 +93,6 @@ const CSS = `
 @media (prefers-reduced-motion:reduce){.einf *{animation:none!important;transition:none!important}}
 `;
 
-function stimme(text) {
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "de-DE"; u.rate = .85;
-  let fest = ""; try { fest = localStorage.getItem("einhorn-stimme") || ""; } catch (e) {}
-  const vs = speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang));
-  const v = vs.find((v, k) => k + "|" + v.name + "|" + v.voiceURI === fest);
-  if (v) u.voice = v;
-  return u;
-}
-
 function stab(n, el) {
   const d = document.createElement("div"); d.className = "stab";
   d.style.setProperty("--c", PERLE[n] || PERLE[10]);
@@ -144,7 +136,7 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true } = {}) {
   if (!szenen.length) return "abgebrochen";
 
   const reduziert = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
-  const mitTon = !!ton && typeof speechSynthesis !== "undefined" && typeof SpeechSynthesisUtterance !== "undefined";
+  const mitTon = !!ton;   // ohne Web-Sprache bleibt sprich still, dann gilt die Lesezeit
 
   if (!document.getElementById("einf-css")) {
     const st = document.createElement("style"); st.id = "einf-css"; st.textContent = CSS; document.head.appendChild(st);
@@ -169,7 +161,7 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true } = {}) {
     const ende = ergebnis => {
       if (fertig) return; fertig = true;
       timer.forEach(clearTimeout);
-      if (mitTon) { try { speechSynthesis.cancel(); } catch (e) {} }
+      if (mitTon) stille();
       wurzel.remove();
       resolve(ergebnis);
     };
@@ -185,20 +177,17 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true } = {}) {
       try { buehne.replaceChildren(); baueBild(buehne, s.bild, reduziert); blase.textContent = text; }
       catch (e) { return ende("abgebrochen"); }
       timer.forEach(clearTimeout); timer = [];
-      let sprache = !(mitTon && s.sprich), mindest = false;
-      const weiter = () => { if (aktuell === i && sprache && mindest) szene(i + 1); };   // alte Szenen melden sich nicht mehr
-      if (mitTon && s.sprich) {
-        try {
-          speechSynthesis.cancel();
-          const u = stimme(s.sprich);
-          u.onend = u.onerror = () => { sprache = true; weiter(); };
-          speechSynthesis.speak(u);
-          // Notbremse, falls die Stimme nie „fertig“ meldet
-          timer.push(setTimeout(() => { sprache = true; mindest = true; weiter(); }, 8000 + 150 * s.sprich.length));
-        } catch (e) { sprache = true; }
-      }
-      const mindestMs = mitTon && s.sprich ? MIN_MS : MIN_MS + MS_JE_ZEICHEN * text.length;
-      timer.push(setTimeout(() => { mindest = true; weiter(); }, mindestMs));
+      const weiter = () => { if (aktuell === i) szene(i + 1); };   // alte Szenen melden sich nicht mehr
+      const lesezeit = MIN_MS + MS_JE_ZEICHEN * text.length;
+      if (!(mitTon && s.sprich)) { timer.push(setTimeout(weiter, lesezeit)); return; }
+      // Mit Ton: mindestens MIN_MS und bis die Stimme fertig ist (sprich hat eine eigene Notbremse).
+      // Bleibt die Stimme still (keine Web-Sprache), gilt die Lesezeit.
+      const start = Date.now();
+      sprich(s.sprich).then(ergebnis => {
+        if (fertig || aktuell !== i) return;
+        const mindestMs = ergebnis === "still" ? lesezeit : MIN_MS;
+        timer.push(setTimeout(weiter, Math.max(0, start + mindestMs - Date.now())));
+      }, () => { if (aktuell === i) timer.push(setTimeout(weiter, lesezeit)); });
     };
     szene(0);
   });

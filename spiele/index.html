@@ -128,6 +128,7 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 <script src="figuren/einhorn.js"></script>
 <script type="module">
 import { sperreTouch, protokoll, esc } from "./lernspiel.js";
+import { sprich } from "./kern/stimme.js";
 import { wertVon } from "./fortschritt/laden.js";
 import { kategorieWert, sichtbareKategorien } from "./fortschritt/kern.js";
 
@@ -141,17 +142,7 @@ masko.addEventListener("click", () => Figuren.hop(svg, { hoehe: 60 }));
 
 // ---------- Vorlesen ----------
 function sag(text, fertig) {
-  try {
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    if (fertig) u.onend = u.onerror = fertig;
-    u.lang = "de-DE"; u.rate = .85;
-    let fest = ""; try { fest = localStorage.getItem("einhorn-stimme") || ""; } catch (e) {}
-    const vs = speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang));
-    const v = vs.find((v, k) => k + "|" + v.name + "|" + v.voiceURI === fest);
-    if (v) u.voice = v;
-    speechSynthesis.speak(u);
-  } catch (e) { protokoll("Vorlesen fehlgeschlagen: " + e); }
+  sprich(text).then(fertig);
 }
 
 // ---------- Blumen ----------

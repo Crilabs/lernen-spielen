@@ -108,6 +108,7 @@ h1 img{width:6rem;height:6rem}
 import { sperreTouch, protokoll, esc } from "./lernspiel.js";
 import { uebersicht, ladeLernstand } from "./lernsteuerung.js";
 import { spieleEinfuehrung } from "./einfuehrung.js";
+import { sprich, stille } from "./kern/stimme.js";
 
 sperreTouch();
 
@@ -119,20 +120,8 @@ if (window.Figuren) {
   masko.addEventListener("click", () => Figuren.hop(svg, { hoehe: 40 }));
 }
 
-// ---------- Vorlesen (wie auf der Startseite) ----------
-function sag(text) {
-  if (!text) return;
-  try {
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "de-DE"; u.rate = .85;
-    let fest = ""; try { fest = localStorage.getItem("einhorn-stimme") || ""; } catch (e) {}
-    const vs = speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang));
-    const v = vs.find((v, k) => k + "|" + v.name + "|" + v.voiceURI === fest);
-    if (v) u.voice = v;
-    speechSynthesis.speak(u);
-  } catch (e) { protokoll("Vorlesen fehlgeschlagen: " + e); }
-}
+// ---------- Vorlesen ----------
+const sag = text => { sprich(text); };
 
 // ---------- Stationen ----------
 const FARBE = /^#[0-9a-fA-F]{3,8}$/;
@@ -222,7 +211,7 @@ async function start() {
       const r = knopf.getBoundingClientRect(), w = wahl.getBoundingClientRect();
       wahl.style.setProperty("--zeiger", Math.max(40, Math.min(w.width - 40, r.left + r.width / 2 - w.left)) + "px");
       wahl.querySelector(".geschichte")?.addEventListener("click", () => {
-        try { speechSynthesis.cancel(); } catch (e) {}
+        stille();
         // nur ansehen: der Lernstand bleibt, wie er ist
         spieleEinfuehrung(t.einfuehrung.vorlage, t.einfuehrung.werte || {}, { ton: true });
       });
