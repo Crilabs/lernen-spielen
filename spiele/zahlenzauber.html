@@ -143,8 +143,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 <script src="figuren/einhorn.js"></script>
 <script src="figuren/blume.js"></script>
 <script type="module">
-import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
-import {runde} from "./lernsteuerung.js";
+import {lade, speichere, sperreTouch, esc, protokoll} from "./lernspiel.js";
+import {runde, einmal} from "./lernsteuerung.js";
 import {spieleEinfuehrung} from "./einfuehrung.js";
 sperreTouch();
 (async function(){
@@ -167,6 +167,7 @@ sperreTouch();
   const wait = ms => new Promise(r=>setTimeout(r,ms));
   const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
   const params = new URLSearchParams(location.search);
+  const wunsch = einmal(params.get("thema"));   // ?thema= aus der Übersicht gilt nur für die erste Runde
   const F = window.Figuren;
   const istObjekt = x => !!x && typeof x==="object" && !Array.isArray(x);
 
@@ -575,7 +576,9 @@ sperreTouch();
   // Neue Runde: Thema von der Lernsteuerung, Einführung falls fällig, dann die erste Blume
   async function neueRunde(){
     busy=true; sag("");
-    r = await runde("zahlenzauber", { wunsch: params.get("thema"), max: RUNDE, nurAnsehen: vorschau });
+    // Lernplan oder Spiele nicht ladbar: kurzer Satz in der Blase, der Haus-Knopf bleibt (kein Dialog)
+    try{ r = await runde("zahlenzauber", { wunsch: wunsch(), max: RUNDE, nurAnsehen: vorschau }); }
+    catch(e){ protokoll("zahlenzauber: Runde starten: " + (e?.message ?? e)); sag("Das Spiel geht gerade nicht."); $("hilfe").classList.add("aus"); return; }
     if(r.einfuehrungFaellig && !vorschau){
       const e = themaPlan(r.thema?.id)?.einfuehrung;
       const ergebnis = e ? await spieleEinfuehrung(e.vorlage, e.werte, {ton: sound}) : "abgebrochen";

@@ -130,7 +130,7 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen } from "./lernspiel.js";
 import { pinHash, pinPruefen, pruefeUpdate } from "./eltern.js";
 import { wertVon } from "./fortschritt/laden.js";
-import { elternThemen, markiereGekonnt, setzeZurueck, gibFrei, aufgabeLesbar, migriereStand, migriereSpiele, neuerStand }
+import { elternThemen, markiereGekonnt, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand }
   from "./lernsteuerung.js";
 
 sperreTouch();
@@ -296,19 +296,13 @@ const LUECKE = { "ohne-spiel": "noch kein Spiel", "teilweise": "nur teilweise" }
 let lernCtx = null, lernLauf = 0;
 const heuteTag = () => new Date().toLocaleDateString("sv");
 
-async function ladeLernstand() {
+async function ladeElternStand() {
   if (!lernCtx) {
     const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map(f => fetch(f).then(r => r.json())));
     lernCtx = { plan, spiele };
   }
-  const stand = migriereStand(await lade("lernplan", neuerStand()));
   // Alte Spielstände übernehmen wie in der Themen-Übersicht (gespeichert erst mit einem Eingriff oder Spiel)
-  if (!stand.migriert) {
-    const [perlenbruecke, zahlenzauber] = await Promise.all([lade("perlenbruecke", {}), lade("zahlenzauber", {})]);
-    try { migriereSpiele(lernCtx, stand, { perlenbruecke, zahlenzauber, heute: heuteTag() }); }
-    catch (e) { protokoll("Lernstand übernehmen: " + e); }
-  }
-  return stand;
+  return await ladeLernstand(lernCtx, heuteTag());
 }
 
 // Knopf mit Bestätigung auf der Seite: erster Tipp fragt „Wirklich?“, zweiter führt aus (kein confirm-Dialog im Kiosk)
@@ -331,7 +325,7 @@ async function lernstand(inh, offen) {
   const lauf = ++lernLauf;
   inh.appendChild(el("h2", "Lernstand"));
   let stand;
-  try { stand = await ladeLernstand(); }
+  try { stand = await ladeElternStand(); }
   catch (e) { protokoll("Lernstand: " + e); inh.appendChild(el("p", "Der Lernplan konnte nicht geladen werden.", "karte breit")); return; }
   if (tab !== "lernstand" || lauf !== lernLauf) return; // inzwischen anderer Reiter oder neu gezeichnet
   const ctx = lernCtx, heute = heuteTag();

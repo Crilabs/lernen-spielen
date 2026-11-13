@@ -7,9 +7,10 @@
 //
 // Lernstand (Schlüssel "lernplan"):
 //   { version: 1, themen: { [id]: Thema }, aufgaben: { [key]: Aufgabe }, verlauf: [], migriert?: 1, … }
-//   Thema   { z: "dran"|"kann-ich", stufe, e, seit, k, u, frei: 0|1, v: [] }
+//   Thema   { z: "dran"|"kann-ich", stufe, e, seit, k, u, frei: 0|1, v: [], p?: 1, pb?: 1 }
 //           e = Einführung gesehen am, seit = dran seit, k = gekonnt am, u = zuletzt geübt am,
-//           frei = von den Eltern freigegeben (Thema selbst in Sicht, gilt nicht als erfüllte Voraussetzung), v = letzte Ergebnisse (1/0) auf der aktuellen Stufe.
+//           frei = von den Eltern freigegeben (Thema selbst in Sicht, gilt nicht als erfüllte Voraussetzung), v = letzte Ergebnisse (1/0) auf der aktuellen Stufe,
+//           p = übernommenes Thema, Probe steht noch aus; pb = Probe begonnen (mindestens eine Antwort verbucht).
 //           Ohne Eintrag (oder ohne z) wird der Zustand berechnet.
 //   Aufgabe { f, t, h: [], ms: [], g?: 1, kk?: 1 }
 //           f = Fach, t = Tag der letzten Einstufung, h = letzte Ergebnisse, ms = letzte Antwortzeiten,
@@ -19,7 +20,7 @@
 //   { spiel, thema, modus, stufe, probe: key[]|null, gezeigt, wieder: [{key, ab}], start, max, ereignis, letzte }
 
 import { aufgabenVon, darstellbar, schwierigkeit, ZIEL_MS } from "./aufgabenarten.js";
-import { lade, speichere, sofortSpeichern } from "./lernspiel.js";
+import { lade, speichere, sofortSpeichern, protokoll } from "./lernspiel.js";
 
 export const K = {
   ABSTAND: [0, 1, 3, 7, 21], // Wiedervorlage in Tagen je Fach
@@ -33,6 +34,8 @@ export const K = {
   ANTEIL_THEMA: 0.7,         // Anteil des aktuellen Themas in einer Runde
   WIEDER_NACH: [2, 4],       // Fehler kommt nach so vielen anderen Aufgaben wieder (von, bis)
   RUNDE_MS: 240000,          // Rundenlänge
+  GROSS: 40,                 // ab mehr als so vielen darstellbaren Aufgaben ist ein Thema „groß“ …
+  STICHPROBE: 20,            // … und gilt nach dem Üben mit so vielen verschiedenen kk als gekonnt (über alle Klassen verteilt)
 };
 
 const STUFEN = ["material", "vorstellung", "kopf"];
@@ -111,10 +114,64 @@ function imSpiel(ctx, spielId, themaId) {
   return m.get(spielId);
 }
 
-// Aufgaben eines Themas, die irgendein Spiel darstellen kann (nur sie zählen für „kann ich“)
+// Aufgaben eines Themas, die irgendein Spiel darstellen kann (nur sie zählen für „kann ich“);
+// gemerkt je Thema-Objekt und spiele.json
+const cacheDarstellbar = new WeakMap();
 function darstellbareAufgaben(ctx, themaId) {
-  const keys = new Set(spieleVon(ctx).flatMap((s) => imSpiel(ctx, s.id, themaId).map((a) => a.key)));
-  return aufgabenDes(themaVon(ctx, themaId)).filter((a) => keys.has(a.key));
+  const t = themaVon(ctx, themaId);
+  if (!t || !istObjekt(ctx.spiele)) return [];
+  if (!cacheDarstellbar.has(t)) cacheDarstellbar.set(t, new WeakMap());
+  const proSpiele = cacheDarstellbar.get(t);
+  if (!proSpiele.has(ctx.spiele)) {
+    const keys = new Set(spieleVon(ctx).flatMap((s) => imSpiel(ctx, s.id, themaId).map((a) => a.key)));
+    proSpiele.set(ctx.spiele, aufgabenDes(t).filter((a) => keys.has(a.key)));
+  }
+  return proSpiele.get(ctx.spiele);
+}
+
+// ---------- Große Themen (mehr als K.GROSS darstellbare Aufgaben, z. B. plus-bis-100) ----------
+// Dort ist „jede Aufgabe einmal kk“ praktisch nicht zu schaffen, und Fach-1-Einträge für jede Aufgabe
+// würden den Stand aufblähen. Darum: „kann ich“ nach einer Stichprobe über alle Schwierigkeitsklassen,
+// Einträge nur für beantwortete Aufgaben, Wiederholung nur aus Aufgaben mit Eintrag.
+
+const istGross = (ctx, themaId) => darstellbareAufgaben(ctx, themaId).length > K.GROSS;
+
+// Schwierigkeitsklassen eines großen Themas, in denen noch kk fehlen: je Klasse mindestens zwei kk
+// (Klassen mit nur einer Aufgabe: diese eine)
+function offeneKlassen(ctx, stand, themaId) {
+  const noetig = new Map(), da = new Map();
+  for (const a of darstellbareAufgaben(ctx, themaId)) {
+    const k = schwierigkeit(a);
+    noetig.set(k, Math.min(2, (noetig.get(k) ?? 0) + 1));
+    if (stand.aufgaben[a.key]?.kk) da.set(k, (da.get(k) ?? 0) + 1);
+  }
+  return new Set([...noetig].filter(([k, n]) => (da.get(k) ?? 0) < n).map(([k]) => k));
+}
+
+// Kann ich nach dem Üben: kleines Thema – jede darstellbare Aufgabe hat kk;
+// großes Thema – mindestens STICHPROBE verschiedene kk und keine Klasse mehr offen
+function gekonntNachUeben(ctx, stand, themaId) {
+  const d = darstellbareAufgaben(ctx, themaId);
+  if (!d.length) return false;
+  if (d.length <= K.GROSS) return d.every((a) => stand.aufgaben[a.key]?.kk);
+  return d.filter((a) => stand.aufgaben[a.key]?.kk).length >= K.STICHPROBE && offeneKlassen(ctx, stand, themaId).size === 0;
+}
+
+// Thema gilt als gekonnt (Probe, Eltern, Übernahme): Aufgaben ohne Eintrag oder in Fach 0 kommen in Fach 1,
+// damit die Wiederholung nicht überläuft. In großen Themen nur Aufgaben, die schon einen Eintrag haben.
+function inFachEins(ctx, stand, themaId, heute) {
+  const gross = istGross(ctx, themaId);
+  for (const a of aufgabenDes(themaVon(ctx, themaId))) {
+    if (gross && !stand.aufgaben[a.key]) continue;
+    const x = stand.aufgaben[a.key] || (stand.aufgaben[a.key] = { f: 0, t: "", h: [], ms: [] });
+    if (x.f < 1) { x.f = 1; x.t = heute; }
+  }
+}
+
+// Aufgaben eines gekonnten Themas für die Wiederholung (große Themen: nur mit Eintrag)
+function zumWiederholen(ctx, stand, spielId, themaId) {
+  const alle = imSpiel(ctx, spielId, themaId);
+  return istGross(ctx, themaId) ? alle.filter((a) => stand.aufgaben[a.key]) : alle;
 }
 
 export const bedient = (ctx, spielId, themaId) => imSpiel(ctx, spielId, themaId).length > 0;
@@ -159,6 +216,7 @@ export function migriereStand(roh) {
     const t = { ...e, stufe: STUFEN.includes(e.stufe) ? e.stufe : "", e: text(e.e), seit: text(e.seit), k: text(e.k),
       u: text(e.u), frei: e.frei === 1 ? 1 : 0, v: (Array.isArray(e.v) ? e.v : []).filter((x) => x === 0 || x === 1).slice(-K.AUF_FENSTER) };
     if (t.z !== "dran" && t.z !== "kann-ich") delete t.z;
+    if (t.pb !== 1) delete t.pb;
     s.themen[id] = t;
   }
   for (const [key, e] of Object.entries(istObjekt(roh.aufgaben) ? roh.aufgaben : {})) {
@@ -252,9 +310,9 @@ export function themaFuer(ctx, stand, spielId, { wunsch = null } = {}) {
     const erstes = dran.reduce((a, b) => (zuletztGeuebt(stand, b.id) < zuletztGeuebt(stand, a.id) ? b : a));
     return { thema: erstes.id, modus: "thema" };
   }
-  // 3. das erste sichtbare Thema in Sicht, nur wenn im Strang noch keines dran ist
-  const strangMitDran = new Set(themen.filter((t) => z[t.id] === "dran" && spieleFuer(ctx, t.id).length).map((t) => t.strang));
-  const neu = themen.find((t) => z[t.id] === "in-sicht" && sicht.has(t.id) && !strangMitDran.has(t.strang) && dient(t.id));
+  // 3. das erste sichtbare Thema in Sicht. Ein Thema dran, das dieses Spiel übt, hat schon Schritt 2 genommen;
+  //    ein dran-Thema eines anderen Spiels blockiert hier nicht (je Strang und Spiel ein Thema dran).
+  const neu = themen.find((t) => z[t.id] === "in-sicht" && sicht.has(t.id) && dient(t.id));
   if (neu) return { thema: neu.id, modus: "thema" };
   // 4. Wiederholung gekonnter Themen
   if (themen.some((t) => z[t.id] === "kann-ich" && dient(t.id))) return { thema: null, modus: "wiederholung" };
@@ -291,7 +349,9 @@ export function neueSitzung(ctx, stand, spielId, { thema = null, modus = "thema"
     const stufen = thema ? stufenDesSpiels(ctx, spielId, thema)
       : STUFEN.filter((x) => artenVon(ctx, spielId).some((art) => (art.stufen ?? []).includes(x)));
     s.stufe = passendeStufe(stufen, "kopf");
-    s.max = Math.min(max ?? WIEDERHOLUNG_MAX, WIEDERHOLUNG_MAX);
+    // winzige Auswahl: höchstens doppelt so viele Aufgaben wie verschiedene, sonst kommt dieselbe zu oft
+    const verschieden = new Set(wiederholungsAufgaben(ctx, stand, s).map((a) => a.key)).size;
+    s.max = Math.min(max ?? WIEDERHOLUNG_MAX, WIEDERHOLUNG_MAX, 2 * verschieden);
     return s;
   }
   const stufen = stufenFuer(ctx, spielId, thema);
@@ -315,7 +375,8 @@ function niedrigesFach(stand, liste, rnd) {
   return zufallsEins(liste.filter((a) => eintrag(stand, a.key).f === min), rnd);
 }
 
-// Aufgabe des aktuellen Themas: bevorzugt noch ohne kk, dann niedriges Fach
+// Aufgabe des aktuellen Themas: bevorzugt noch ohne kk, dann niedriges Fach.
+// Großes Thema beim Üben: Aufgaben aus Klassen, in denen noch kk fehlen, zuerst.
 function aufgabeDesThemas(ctx, stand, sitzung, rnd) {
   const alle = imSpiel(ctx, sitzung.spiel, sitzung.thema);
   const wieder = new Set(sitzung.wieder.map((w) => w.key));
@@ -323,18 +384,27 @@ function aufgabeDesThemas(ctx, stand, sitzung, rnd) {
   if (!l.length) l = alle.filter((a) => !wieder.has(a.key));
   if (!l.length) l = alle;
   if (!l.length) return null;
-  const rang = (a) => (stand.aufgaben[a.key]?.kk ? 100 : 0) + eintrag(stand, a.key).f;
+  const offen = istGross(ctx, sitzung.thema) && stand.themen[sitzung.thema]?.z !== "kann-ich" ? offeneKlassen(ctx, stand, sitzung.thema) : null;
+  const rang = (a) => (stand.aufgaben[a.key]?.kk ? 100 : 0) + (offen && !offen.has(schwierigkeit(a)) ? 50 : 0) + eintrag(stand, a.key).f;
   const min = Math.min(...l.map(rang));
   return zufallsEins(l.filter((a) => rang(a) === min), rnd);
 }
 
-// Aufgabe zur Wiederholung: fällige zuerst (Familie des aktuellen Themas vorn), sonst gemischt
-function aufgabeZurWiederholung(ctx, stand, sitzung, rnd, heute, nurFaellig) {
+// Aufgaben, aus denen die Wiederholung wählt: das gewünschte gekonnte Thema oder alle gekonnten Themen
+// (ohne das aktuelle). Große Themen nur mit Eintrag; gäbe das gar nichts, alle Aufgaben, damit die
+// Wiederholungsrunde nicht leer bleibt.
+function wiederholungsAufgaben(ctx, stand, sitzung, nurFaellig = false) {
   const z = zustaende(ctx, stand);
   const ids = sitzung.modus === "wiederholung" && sitzung.thema ? [sitzung.thema]
     : themenVon(ctx).filter((t) => z[t.id] === "kann-ich" && t.id !== sitzung.thema).map((t) => t.id);
+  const l = ids.flatMap((id) => zumWiederholen(ctx, stand, sitzung.spiel, id));
+  return l.length || nurFaellig ? l : ids.flatMap((id) => imSpiel(ctx, sitzung.spiel, id));
+}
+
+// Aufgabe zur Wiederholung: fällige zuerst (Familie des aktuellen Themas vorn), sonst gemischt
+function aufgabeZurWiederholung(ctx, stand, sitzung, rnd, heute, nurFaellig) {
   const wieder = new Set(sitzung.wieder.map((w) => w.key));
-  const alle = ids.flatMap((id) => imSpiel(ctx, sitzung.spiel, id)).filter((a) => !wieder.has(a.key));
+  const alle = wiederholungsAufgaben(ctx, stand, sitzung, nurFaellig).filter((a) => !wieder.has(a.key));
   const kand = alle.filter((a) => a.key !== sitzung.letzte);
   const faell = kand.filter((a) => faellig(eintrag(stand, a.key), heute));
   const bezug = sitzung.thema ?? aufgabeZu(ctx, sitzung.letzte)?.thema;
@@ -421,22 +491,21 @@ export function verbucheErgebnis(ctx, stand, sitzung, key, { ok, hilfe = 0, ms, 
   let ereignis = null;
   if (probe) {
     const t = stand.themen[sitzung.thema] || (stand.themen[sitzung.thema] = {});
+    t.pb = 1; // Probe begonnen: bricht das Kind jetzt ab, übt es beim nächsten Start auf der untersten Stufe
     if (sitzt) {
       sitzung.probe = sitzung.probe.filter((k) => k !== key);
       if (!sitzung.probe.length) {
-        // Probe bestanden: alle Aufgaben des Themas in Fach 1, Bestätigung über die Wiederholung
+        // Probe bestanden: Aufgaben des Themas in Fach 1 (große Themen: nur die beantworteten),
+        // Bestätigung über die Wiederholung
         sitzung.probe = null;
-        for (const a of aufgabenDes(thema)) {
-          const x = stand.aufgaben[a.key] || (stand.aufgaben[a.key] = { f: 0, t: "", h: [], ms: [] });
-          if (x.f < 1) { x.f = 1; x.t = heute; }
-        }
-        delete t.p;
+        inFachEins(ctx, stand, thema.id, heute);
+        delete t.p; delete t.pb;
         ereignis = wirdGekonnt(stand, thema.id, heute);
       }
     } else {
       // Probe endet beim ersten Fehler, der ersten Hilfe oder einer mühsamen Antwort
       sitzung.probe = null;
-      delete t.p;
+      delete t.p; delete t.pb;
       const unten = stufenFuer(ctx, sitzung.spiel, sitzung.thema)[0] ?? "kopf";
       t.stufe = unten; t.v = [];
       if (unten !== sitzung.stufe) ereignis = { typ: "stufe", stufe: unten };
@@ -456,11 +525,8 @@ export function verbucheErgebnis(ctx, stand, sitzung, key, { ok, hilfe = 0, ms, 
     }
   }
 
-  // Kann ich nach dem Üben: jede darstellbare Aufgabe des Themas hat kk
-  if (!probe && thema && tStand?.z === "dran") {
-    const d = darstellbareAufgaben(ctx, thema.id);
-    if (d.length && d.every((a) => stand.aufgaben[a.key]?.kk)) ereignis = wirdGekonnt(stand, thema.id, heute);
-  }
+  // Kann ich nach dem Üben (siehe gekonntNachUeben: kleine Themen jede Aufgabe, große eine Stichprobe)
+  if (!probe && thema && tStand?.z === "dran" && gekonntNachUeben(ctx, stand, thema.id)) ereignis = wirdGekonnt(stand, thema.id, heute);
   sitzung.ereignis = ereignis;
   return ereignis;
 }
@@ -527,16 +593,13 @@ export function elternThemen(ctx, stand, heute) {
 // Eingriffe der Eltern. Sie ändern nur den Lernstand, nie Plan oder Spiele (Caches hängen an diesen Objekten).
 
 // Thema als gekonnt markieren. Mit ctx kommen die Aufgaben des Themas ohne Eintrag oder in Fach 0 in
-// Fach 1 (wie nach der Probe und bei der Übernahme), damit die Wiederholung nicht überläuft.
+// Fach 1 (wie nach der Probe und bei der Übernahme), damit die Wiederholung nicht überläuft;
+// in großen Themen nur Aufgaben mit Eintrag.
 export function markiereGekonnt(stand, themaId, heute, ctx = null) {
   const t = stand.themen[themaId] || (stand.themen[themaId] = {});
   Object.assign(t, { z: "kann-ich", k: heute, stufe: "kopf", v: [] });
-  delete t.p;
-  if (ctx)
-    for (const a of aufgabenDes(themaVon(ctx, themaId))) {
-      const x = stand.aufgaben[a.key] || (stand.aufgaben[a.key] = { f: 0, t: "", h: [], ms: [] });
-      if (x.f < 1) { x.f = 1; x.t = heute; }
-    }
+  delete t.p; delete t.pb;
+  if (ctx) inFachEins(ctx, stand, themaId, heute);
   return stand;
 }
 
@@ -594,13 +657,10 @@ export function migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute 
 
   const themen = themenVon(ctx);
   // gekonnt; Aufgaben ohne Eintrag oder in Fach 0 kommen in Fach 1 (wie nach der Probe), damit die
-  // Wiederholung nicht überläuft
+  // Wiederholung nicht überläuft (große Themen: nur übernommene Aufgaben)
   const kannIch = (id) => {
     stand.themen[id] = { ...(stand.themen[id] || {}), z: "kann-ich", k: heute, e: heute };
-    for (const a of aufgabenDes(themaVon(ctx, id))) {
-      const x = stand.aufgaben[a.key] || (stand.aufgaben[a.key] = { f: 0, t: "", h: [], ms: [] });
-      if (x.f < 1) { x.f = 1; x.t = heute; }
-    }
+    inFachEins(ctx, stand, id, heute);
   };
   const gelernt = (key) => { const e = stand.aufgaben[key]; return !!e && (e.g === 1 || e.f >= K.GELERNT); };
   const mitTeilstand = (spiel, id) => aufgabenDes(themaVon(ctx, id)).some((a) => teil[spiel].has(a.key));
@@ -643,24 +703,43 @@ async function ladeCtx() {
 
 const echteUhr = () => ({ heute: new Date().toLocaleDateString("sv"), jetzt: Date.now() });
 
+// Lernstand laden und reparieren; beim ersten Mal alte Spielstände übernehmen (nur im Speicher).
+// { stand, uebernommen }: uebernommen = die Übernahme ist eben gelaufen (noch nicht gespeichert).
+async function ladeMitUebernahme(ctx, heute) {
+  const stand = migriereStand(await lade(STAND_KEY, neuerStand()));
+  if (stand.migriert) return { stand, uebernommen: false };
+  const [perlenbruecke, zahlenzauber] = await Promise.all([lade("perlenbruecke", {}), lade("zahlenzauber", {})]);
+  try { migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute }); }
+  catch (e) { protokoll("Lernstand übernehmen: " + (e?.message ?? e)); }
+  return { stand, uebernommen: !!stand.migriert };
+}
+
+// Lernstand für Seiten, die nur lesen (Themen-Übersicht, Elternbereich): übernommen, aber nie geschrieben
+export async function ladeLernstand(ctx, heute) {
+  return (await ladeMitUebernahme(ctx, heute)).stand;
+}
+
+// Wert, den nur der erste Aufruf bekommt (danach null): ?thema= gilt nur für die erste Runde einer Seite
+export function einmal(wert) {
+  return () => { const w = wert ?? null; wert = null; return w; };
+}
+
 // Eine Runde in einem Spiel. nurAnsehen (Vorschau): nichts wird gespeichert.
 export async function runde(spielId, { wunsch = null, max = null, ctx = null, uhr = echteUhr, rnd = Math.random, nurAnsehen = false } = {}) {
   ctx = ctx ?? (await ladeCtx());
-  const stand = migriereStand(await lade(STAND_KEY, neuerStand()));
+  const { stand, uebernommen } = await ladeMitUebernahme(ctx, uhr().heute);
   const sichere = () => { if (!nurAnsehen) speichere(STAND_KEY, stand); };
-
-  if (!stand.migriert) {
-    const [perlenbruecke, zahlenzauber] = await Promise.all([lade("perlenbruecke", {}), lade("zahlenzauber", {})]);
-    migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute: uhr().heute });
-    sichere();
-  }
+  if (uebernommen) sichere();
 
   const { thema: themaId, modus } = themaFuer(ctx, stand, spielId, { wunsch });
   const plan = themaId ? themaVon(ctx, themaId) : null;
   const eintragVorher = themaId ? stand.themen[themaId] : null;
-  // Probe schon begonnen, aber vor dem Ende abgebrochen: auf der untersten Stufe üben
-  // (nicht bei p = 1: übernommenes Thema, die Probe steht noch aus)
-  if (eintragVorher?.z === "dran" && !eintragVorher.stufe && !eintragVorher.p) eintragVorher.stufe = stufenFuer(ctx, spielId, themaId)[0] ?? "kopf";
+  // Probe begonnen (pb: mindestens eine Antwort verbucht), aber vor dem Ende abgebrochen: auf der untersten
+  // Stufe üben. Ohne pb (Abbruch vor der ersten Antwort, oder p = 1: übernommen) kommt die Probe noch einmal.
+  if (eintragVorher?.z === "dran" && !eintragVorher.stufe && eintragVorher.pb) {
+    eintragVorher.stufe = stufenFuer(ctx, spielId, themaId)[0] ?? "kopf";
+    delete eintragVorher.pb; delete eintragVorher.p;
+  }
 
   const neu = !!plan && !["dran", "kann-ich"].includes(eintragVorher?.z);
   // Vorgriff (Spiel hätte sonst nichts): das Thema wird dran wie ein neues Thema, mit Einführung

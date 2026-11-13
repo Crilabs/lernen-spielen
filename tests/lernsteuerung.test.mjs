@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const L = await import("../spiele/lernsteuerung.js");
-const { aufgabenVon } = await import("../spiele/aufgabenarten.js");
+const { aufgabenVon, schwierigkeit } = await import("../spiele/aufgabenarten.js");
 const {
   K, neuerStand, migriereStand, bedient, spieleFuer, zustaende, sichtbar, themaFuer, startThema,
   probeAufgaben, neueSitzung, naechstesAngebot, verbucheErgebnis, luecken, migriereSpiele, faellig, tage,
@@ -61,7 +61,7 @@ function uebend(ctx, spiel, id, stufe, rnd = lcg(1)) {
 
 test("K: feste Werte", () => {
   assert.deepEqual(K, { ABSTAND: [0, 1, 3, 7, 21], GELERNT: 4, IN_SICHT: 2, PROBE: 5, PROBE_SCHWER: 2, AUF_FENSTER: 5,
-    AUF_OK: 4, AB_FEHLER: 2, ANTEIL_THEMA: 0.7, WIEDER_NACH: [2, 4], RUNDE_MS: 240000 });
+    AUF_OK: 4, AB_FEHLER: 2, ANTEIL_THEMA: 0.7, WIEDER_NACH: [2, 4], RUNDE_MS: 240000, GROSS: 40, STICHPROBE: 20 });
   assert.deepEqual(neuerStand(), { version: 1, themen: {}, aufgaben: {}, verlauf: [] });
 });
 
@@ -153,17 +153,17 @@ test("themaFuer: Wunsch nur, wenn sichtbar und bedient; unbekannt/verborgen → 
   assert.deepEqual(f("zz", "z7"), { thema: "r7", modus: "vorgriff" });
 });
 
-test("themaFuer: dran zuerst (am längsten nicht geübt), in Sicht nur ohne dran im Strang", () => {
+test("themaFuer: dran zuerst (am längsten nicht geübt); dran in einem anderen Spiel blockiert nicht", () => {
   const s = neuerStand();
   s.themen.z5 = { z: "dran", seit: "2026-11-10", u: "2026-11-12" };
   s.themen.z7 = { z: "dran", seit: "2026-11-11", u: "2026-11-11" };
   assert.deepEqual(themaFuer(CTX, s, "pb", { heute: HEUTE }), { thema: "z7", modus: "thema" });
-  // r7 ist in Sicht (z7 freigegeben), aber im Strang ist schon ein Thema dran → Vorgriff statt neues Thema
+  // r7 ist in Sicht (z7 gekonnt); z5 ist dran, aber nur in der Perlenbrücke → der Zahlenzauber bekommt r7 als Thema
   const t = neuerStand();
   t.themen.z5 = { z: "dran" };
   t.themen.z7 = { z: "kann-ich" };
   assert.equal(zustaende(CTX, t).r7, "in-sicht");
-  assert.deepEqual(themaFuer(CTX, t, "zz", { heute: HEUTE }), { thema: "r7", modus: "vorgriff" });
+  assert.deepEqual(themaFuer(CTX, t, "zz", { heute: HEUTE }), { thema: "r7", modus: "thema" });
   t.themen.z5 = { z: "kann-ich" };
   assert.deepEqual(themaFuer(CTX, t, "zz", { heute: HEUTE }), { thema: "r7", modus: "thema" });
 });
@@ -500,4 +500,156 @@ test("migriereSpiele: Perlenbrücke-Paare und Zahlenzauber-Fakten mit Stufe 2", 
   // ohne alte Stände: nichts außer dem Kennzeichen
   const leer = migriereSpiele(ECHT, neuerStand(), { heute: HEUTE });
   assert.deepEqual(leer.themen, {}); assert.equal(leer.migriert, 1);
+});
+
+// ---------- Befunde aus dem Gesamtreview ----------
+
+const plusBis = (id) => aufgabenVon(ECHT.plan.themen.find((t) => t.id === id).aufgaben);
+// je Schwierigkeitsklasse die Aufgaben (Planreihenfolge)
+function klassen(aufgaben) {
+  const m = new Map();
+  for (const a of aufgaben) { const k = schwierigkeit(a); if (!m.has(k)) m.set(k, []); m.get(k).push(a); }
+  return m;
+}
+const kkEintrag = () => ({ f: 1, t: HEUTE, h: [1], ms: [1000], kk: 1 });
+
+test("Befund 1: dran-Thema des einen Spiels blockiert das andere nicht (echter Plan)", () => {
+  const s = neuerStand();
+  startThema(s, "rechnen-3", HEUTE);                      // Zahlenzauber-Vorgriff
+  s.themen["zerlegen-2"] = { z: "kann-ich", e: HEUTE, k: HEUTE, stufe: "kopf" };
+  assert.deepEqual(themaFuer(ECHT, s, "perlenbruecke", { heute: HEUTE }), { thema: "zerlegen-3", modus: "thema" });
+  // ein dran-Thema, das die Perlenbrücke selbst übt, blockiert weiter
+  startThema(s, "zerlegen-3", HEUTE);
+  assert.deepEqual(themaFuer(ECHT, s, "perlenbruecke", { heute: HEUTE }), { thema: "zerlegen-3", modus: "thema" });
+});
+
+test("Befund 4a: großes Thema ist nach dem Üben gekonnt mit Stichprobe über alle Schwierigkeitsklassen", () => {
+  const id = "plus-bis-30", alle = plusBis(id);
+  assert.ok(alle.length > K.GROSS);
+  const kl = klassen(alle);
+  const noetig = [...kl.values()].flatMap((l) => l.slice(0, Math.min(2, l.length)));
+  assert.ok(noetig.length >= K.STICHPROBE);
+  // 1) viele kk, aber alle aus wenigen Klassen → nicht gekonnt
+  {
+    const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf");
+    const wenige = [...kl.values()].filter((l) => l.length >= 5).flat().slice(0, 30);
+    for (const a of wenige.slice(1)) s.aufgaben[a.key] = kkEintrag();
+    assert.equal(verbucheErgebnis(ECHT, s, sitz, wenige[0].key, sauber), null);
+    assert.equal(s.themen[id].z, "dran");
+  }
+  // 2) je Klasse zwei (oder alle der kleinen Klassen), insgesamt ≥ STICHPROBE → gekonnt
+  {
+    const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf");
+    for (const a of noetig.slice(1)) s.aufgaben[a.key] = kkEintrag();
+    assert.deepEqual(verbucheErgebnis(ECHT, s, sitz, noetig[0].key, sauber), { typ: "gekonnt", thema: id });
+  }
+  // 3) eine Klasse mit nur einem kk (von zwei nötigen) → nicht gekonnt
+  {
+    const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf");
+    const gross = [...kl.values()].find((l) => l.length >= 3);
+    const ohne = noetig.filter((a) => a !== gross[1]);
+    for (const a of ohne.slice(1)) s.aufgaben[a.key] = kkEintrag();
+    assert.equal(verbucheErgebnis(ECHT, s, sitz, ohne[0].key, sauber), null);
+  }
+  // 4) zu wenige insgesamt: kleines Thema-Muster (alle Klassen gedeckt), aber < STICHPROBE → nicht gekonnt
+  {
+    const minus = plusBis("minus-bis-100"), km = klassen(minus);
+    const je = [...km.values()].flatMap((l) => l.slice(0, Math.min(2, l.length)));
+    assert.ok(je.length >= K.STICHPROBE); // zehn Klassen × 2
+    const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", "minus-bis-100", "kopf");
+    for (const a of je.slice(2)) s.aufgaben[a.key] = kkEintrag(); // eine Klasse mit nur einem kk
+    assert.equal(verbucheErgebnis(ECHT, s, sitz, je[0].key, sauber), null);
+    assert.deepEqual(verbucheErgebnis(ECHT, s, sitz, je[1].key, sauber), { typ: "gekonnt", thema: "minus-bis-100" });
+  }
+});
+
+test("Befund 4b: bestandene Probe in großem Thema legt nur die beantworteten Aufgaben an (Stand bleibt klein)", () => {
+  const s = neuerStand();
+  startThema(s, "plus-bis-100", HEUTE);
+  const sitz = neueSitzung(ECHT, s, "zahlenzauber", { thema: "plus-bis-100", modus: "thema" }, { jetzt: JETZT, rnd: lcg(2) });
+  assert.equal(sitz.probe.length, K.PROBE);
+  let ereignis = null, n = 0;
+  for (let a; (a = naechstesAngebot(ECHT, s, sitz, lcg(n + 7), opt)); n++) ereignis = verbucheErgebnis(ECHT, s, sitz, a.ziel.key, sauber);
+  assert.deepEqual(ereignis, { typ: "gekonnt", thema: "plus-bis-100" });
+  const keys = Object.keys(s.aufgaben);
+  assert.ok(keys.length < 50, `zu viele Einträge: ${keys.length}`);
+  assert.equal(keys.length, K.PROBE);
+  for (const k of keys) assert.ok(s.aufgaben[k].f >= 1, k);
+  assert.ok(JSON.stringify(s).length < 5000);
+  // kleines Thema: weiter alle Aufgaben in Fach 1 (siehe Probe-Test oben)
+});
+
+test("Befund 4b: markiereGekonnt und Übernahme legen in großen Themen keine neuen Einträge an", () => {
+  const s = neuerStand();
+  s.aufgaben["plus:23+45"] = { f: 0, t: "2026-11-01", h: [0], ms: [] };
+  L.markiereGekonnt(s, "plus-bis-100", HEUTE, ECHT);
+  assert.equal(s.themen["plus-bis-100"].z, "kann-ich");
+  assert.deepEqual(Object.keys(s.aufgaben), ["plus:23+45"]);
+  assert.equal(s.aufgaben["plus:23+45"].f, 1);
+  // kleines Thema: wie bisher alle Aufgaben in Fach 1
+  L.markiereGekonnt(s, "zerlegen-7", HEUTE, ECHT);
+  for (const k of ZERL7) assert.equal(s.aufgaben[k].f, 1, k);
+  // Übernahme: Zahlenzauber-Stufe 5 macht plus-bis-100 und minus-bis-100 gekonnt, ohne tausende Einträge
+  const m = migriereSpiele(ECHT, neuerStand(), { zahlenzauber: { stufe: 5, fakten: { "23+45": { f: 2, t: "2026-11-01", h: [1] } } }, heute: HEUTE });
+  assert.equal(m.themen["plus-bis-100"].z, "kann-ich");
+  assert.equal(m.themen["minus-bis-100"].z, "kann-ich");
+  const gross = ["plus-bis-30", "minus-bis-30", "plus-bis-100", "minus-bis-100", "minus-ohne-20"]
+    .flatMap((id) => plusBis(id).map((a) => a.key)).filter((k) => k in m.aufgaben);
+  assert.deepEqual(gross, ["plus:23+45"]);
+  assert.equal(m.aufgaben["plus:23+45"].f, 2);
+  assert.ok(Object.keys(m.aufgaben).length < 200, "Stand bleibt klein: " + Object.keys(m.aufgaben).length);
+  // kleines Thema bei der Übernahme: alle Aufgaben in Fach 1
+  for (const a of plusBis("zehn-plus")) assert.equal(m.aufgaben[a.key].f, 1, a.key);
+});
+
+test("Befund 4c: Wiederholung großer gekonnter Themen nur aus Aufgaben mit Eintrag", () => {
+  const s = neuerStand();
+  s.themen["plus-bis-100"] = { z: "kann-ich", k: "2026-11-01", stufe: "kopf" };
+  const mit = ["plus:23+45", "plus:31+52", plusBis("plus-bis-100").at(-1).key];
+  for (const k of mit) s.aufgaben[k] = { f: 1, t: "2026-11-01", h: [1], ms: [] };
+  // Wiederholung genau dieses Themas (Wunsch aus der Übersicht)
+  const w = neueSitzung(ECHT, s, "zahlenzauber", { thema: "plus-bis-100", modus: "wiederholung" }, { jetzt: JETZT, rnd: lcg(3) });
+  for (let a, i = 0; (a = naechstesAngebot(ECHT, s, w, lcg(i + 1), opt)); i++) assert.ok(mit.includes(a.ziel.key), a.ziel.key);
+  // fällige Aufgaben beim Üben eines anderen Themas: nur die mit Eintrag
+  s.themen["rechnen-3"] = { z: "dran", stufe: "kopf", e: HEUTE, seit: HEUTE, k: "", frei: 0, v: [] };
+  const sitz = neueSitzung(ECHT, s, "zahlenzauber", { thema: "rechnen-3", modus: "thema" }, { jetzt: JETZT, rnd: lcg(3) });
+  const rnd = lcg(11), gesehen = new Set();
+  for (let i = 0; i < 80; i++) {
+    const a = naechstesAngebot(ECHT, s, sitz, rnd, opt);
+    gesehen.add(a.ziel.thema);
+    if (a.ziel.thema !== "rechnen-3") assert.ok(mit.includes(a.ziel.key), a.ziel.key);
+    sitz.gezeigt = 0; sitz.wieder = [];
+  }
+  assert.ok(gesehen.has("plus-bis-100"), "fällige Aufgaben mit Eintrag kommen dran");
+  // ohne einen einzigen Eintrag bleibt die Wiederholungsrunde nicht leer
+  const leer = neuerStand();
+  leer.themen["plus-bis-100"] = { z: "kann-ich", k: "2026-11-01", stufe: "kopf" };
+  const wl = neueSitzung(ECHT, leer, "zahlenzauber", { thema: "plus-bis-100", modus: "wiederholung" }, { jetzt: JETZT, rnd: lcg(3) });
+  assert.ok(naechstesAngebot(ECHT, leer, wl, lcg(1), opt));
+});
+
+test("Befund 4d: beim Üben eines großen Themas kommen Klassen ohne genug kk zuerst", () => {
+  const id = "plus-bis-30", kl = klassen(plusBis(id));
+  const offen = [...kl.keys()].filter((k) => kl.get(k).length >= 5).slice(0, 2); // zwei große Klassen bleiben offen
+  for (let seed = 1; seed <= 20; seed++) {
+    const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf", lcg(seed));
+    for (const [k, l] of kl) if (!offen.includes(k)) for (const a of l.slice(0, 2)) s.aufgaben[a.key] = kkEintrag();
+    for (const k of offen) s.aufgaben[kl.get(k)[0].key] = kkEintrag(); // je ein kk, eines fehlt noch
+    const a = naechstesAngebot(ECHT, s, sitz, lcg(seed), opt);
+    assert.ok(offen.includes(schwierigkeit(a.ziel)), `seed ${seed}: Klasse ${schwierigkeit(a.ziel)}`);
+    assert.ok(!s.aufgaben[a.ziel.key]?.kk);
+  }
+});
+
+test("Befund 6: Wiederholungsrunde winziger Themen höchstens doppelt so lang wie verschiedene Aufgaben", () => {
+  const s = neuerStand();
+  s.themen["zerlegen-2"] = { z: "kann-ich", k: HEUTE, stufe: "kopf" };
+  const zaehle = (sitz) => { let n = 0; for (let a; (a = naechstesAngebot(ECHT, s, sitz, lcg(n + 1), opt)); n++) verbucheErgebnis(ECHT, s, sitz, a.ziel.key, sauber); return n; };
+  assert.equal(zaehle(neueSitzung(ECHT, s, "perlenbruecke", { thema: null, modus: "wiederholung" }, { jetzt: JETZT, max: 10, rnd: lcg(1) })), 2);
+  s.themen["zerlegen-3"] = { z: "kann-ich", k: HEUTE, stufe: "kopf" };
+  assert.equal(zaehle(neueSitzung(ECHT, s, "perlenbruecke", { thema: "zerlegen-3", modus: "wiederholung" }, { jetzt: JETZT, max: 10, rnd: lcg(1) })), 4);
+  assert.equal(zaehle(neueSitzung(ECHT, s, "perlenbruecke", { thema: null, modus: "wiederholung" }, { jetzt: JETZT, max: 10, rnd: lcg(1) })), 6);
+  // größere Auswahl: wie bisher höchstens 8
+  s.themen["zerlegen-7"] = { z: "kann-ich", k: HEUTE, stufe: "kopf" };
+  assert.equal(zaehle(neueSitzung(ECHT, s, "perlenbruecke", { thema: null, modus: "wiederholung" }, { jetzt: JETZT, max: 10, rnd: lcg(1) })), 8);
 });

@@ -40,6 +40,7 @@ h1 img{width:6rem;height:6rem}
 
 .straenge{position:absolute;left:0;right:0;top:14rem;bottom:18rem;display:flex;flex-direction:column;gap:3rem;padding:0 4rem;overflow-y:auto}
 .strang{position:relative;flex:none}
+.fehler{align-self:center;margin-top:8rem;padding:2.4rem 3.6rem;border-radius:3rem;background:var(--papier);font-size:4rem;box-shadow:0 .5rem 0 rgba(59,42,107,.15)}
 .schild{display:flex;align-items:center;gap:1.4rem;margin:0 0 1rem .6rem}
 .schild .sym{width:6.4rem;height:6.4rem;flex:none;padding:1.2rem;border-radius:2rem;background:var(--k);display:flex;align-items:center;justify-content:center;box-shadow:0 .5rem 0 var(--ks)}
 .schild .sym img{filter:brightness(0) invert(1)}
@@ -104,8 +105,8 @@ h1 img{width:6rem;height:6rem}
 <script src="figuren/figuren.js"></script>
 <script src="figuren/einhorn.js"></script>
 <script type="module">
-import { sperreTouch, protokoll, esc, lade } from "./lernspiel.js";
-import { uebersicht, migriereStand, migriereSpiele, neuerStand } from "./lernsteuerung.js";
+import { sperreTouch, protokoll, esc } from "./lernspiel.js";
+import { uebersicht, ladeLernstand } from "./lernsteuerung.js";
 import { spieleEinfuehrung } from "./einfuehrung.js";
 
 sperreTouch();
@@ -156,26 +157,30 @@ function bild(zustand, k) {
 
 const SPIEL_PLAY = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3 L21 12 L6 21Z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>`;
 
+// Lernplan oder Spiele fehlen: kurzer Text statt leerer Seite, der Haus-Knopf bleibt
+function zeigeFehler() {
+  const p = document.createElement("p");
+  p.className = "fehler";
+  p.textContent = "Das geht gerade nicht. Später noch einmal.";
+  document.getElementById("straenge").replaceChildren(p);
+}
+
 async function start() {
-  let plan, spiele;
+  let plan, spiele, ctx, stand, wege;
   try {
     [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map(f => fetch(f).then(r => r.json())));
-  } catch (e) { protokoll("themen: " + e); return; }
-  const ctx = { plan, spiele };
-  const stand = migriereStand(await lade("lernplan", neuerStand()));
-  // Alte Spielstände nur für die Anzeige übernehmen (gespeichert wird das erst beim nächsten Spiel)
-  if (!stand.migriert) {
-    const [perlenbruecke, zahlenzauber] = await Promise.all([lade("perlenbruecke", {}), lade("zahlenzauber", {})]);
-    try { migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute: new Date().toLocaleDateString("sv") }); }
-    catch (e) { protokoll("themen: " + e); }
-  }
+    ctx = { plan, spiele };
+    // Alte Spielstände nur für die Anzeige übernehmen (gespeichert wird das erst beim nächsten Spiel)
+    stand = await ladeLernstand(ctx, new Date().toLocaleDateString("sv"));
+    wege = uebersicht(ctx, stand);
+  } catch (e) { protokoll("themen: " + e); zeigeFehler(); return; }
 
   const kats = Object.fromEntries((spiele.kategorien || []).map(k => [k.id, k]));
   const spielNach = Object.fromEntries((spiele.spiele || []).map(s => [s.id, s]));
   const themaNach = Object.fromEntries((plan.themen || []).map(t => [t.id, t]));
   const wurzel = document.getElementById("straenge");
 
-  for (const { strang, stationen } of uebersicht(ctx, stand)) {
+  for (const { strang, stationen } of wege) {
     const k = kats[strang] || {};
     const fk = farbe(k.farbe, "#8C6FE0"), fs = farbe(k.schatten, "#6548BC"), ft = farbe(k.tint, "#ECE6FF");
     const el = document.createElement("section");

@@ -92,8 +92,7 @@ const index = readFileSync(new URL("../spiele/index.html", import.meta.url), "ut
 
 test("themen.html schreibt nie in den Lernstand", () => {
   assert.doesNotMatch(themen, /speichere|sofortSpeichern|einfuehrungGesehen|startThema|runde\(/);
-  assert.match(themen, /lade\("lernplan", neuerStand\(\)\)/);
-  assert.match(themen, /migriereStand/);
+  assert.match(themen, /await ladeLernstand\(ctx, /); // lädt, übernimmt alte Stände nur im Speicher
 });
 
 test("themen.html: Figuren für die Geschichte, Haus-Knopf, Spiel mit ?thema", () => {
