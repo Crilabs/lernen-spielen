@@ -61,7 +61,7 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           tagName: ${{ github.ref_name }}
-          releaseName: "Einhorn-Lernspiele ${{ github.ref_name }}"
+          releaseName: "Lernen Spielen ${{ github.ref_name }}"
           releaseBody: ${{ steps.notiz.outputs.text }}
           releaseDraft: false
           includeUpdaterJson: true

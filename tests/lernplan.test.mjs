@@ -70,6 +70,102 @@ const regeln = {
     }
   },
 };
+// Felder aus der Recherche (docs/reports/Grundschul Lernplan Deutsch Mathe.md); Klasse 1–2 voll, 3–4 grob
+const WERTE = {
+  typ: ["regel", "merkwort", "fertigkeit"],
+  schrift: ["alle", "va", "sas", "verbunden"],
+  pruefbar: ["ganz", "teilweise"],
+  land: ["BY"],
+  quelle: ["Q", "E", "Q+E"],
+};
+regeln.felder = ({ themen }) => {
+  const ids = new Set(themen.map((t) => t.id));
+  for (const t of themen) {
+    assert.ok([1, 2, 3, 4].includes(t.klasse), `${t.id}: klasse ${t.klasse}`);
+    for (const [feld, erlaubt] of Object.entries(WERTE)) {
+      if (t[feld] !== undefined) assert.ok(erlaubt.includes(t[feld]), `${t.id}: ${feld} ${t[feld]}`);
+    }
+    for (const g of t.gesichert ?? []) assert.ok(t.voraussetzungen.includes(g), `${t.id}: gesichert ${g} ist keine Voraussetzung`);
+    for (const v of t.verwechslung ?? []) assert.ok(ids.has(v) && v !== t.id, `${t.id}: Verwechslung ${v}`);
+    if (t.klasse <= 2) {
+      for (const feld of ["bereich", "ziel", "zweck", "eltern"]) assert.ok(t[feld]?.trim(), `${t.id} ohne ${feld}`);
+      assert.ok(t.beispiele?.length > 0, `${t.id} ohne beispiele`);
+      assert.ok(t.stufen?.length > 0, `${t.id} ohne stufen`);
+      assert.equal(typeof t.tempo, "boolean", `${t.id}: tempo fehlt`);
+    }
+  }
+};
+// Fehlerbilder (docs/reports/Häufige Fehler Grundschule.md): verweisen nur auf Themen, steuern nichts allein
+const FB = {
+  strang: ["mathe", "geometrie", "lesen", "schreiben", "grammatik", "sprechen"],
+  eingabe: ["ziffern", "zahlwort-lesen", "auswahl", "tastatur", "kacheln-plus", "stift", "ziehen", "zeit"],
+  art: ["antwort", "zeit", "strich", "alignment"],
+  evidenz: ["Q", "F", "A"],
+};
+regeln.fehlerbilder = ({ themen, fehlerbilder = [] }) => {
+  const tids = new Set(themen.map((t) => t.id));
+  const fids = new Set();
+  for (const f of fehlerbilder) {
+    assert.match(f.id, /^[a-z0-9]+(-[a-z0-9]+)*$/, `Fehlerbild-id ${f.id}`);
+    assert.ok(!fids.has(f.id), `doppeltes Fehlerbild ${f.id}`);
+    fids.add(f.id);
+  }
+  for (const f of fehlerbilder) {
+    const wo = `Fehlerbild ${f.id}`;
+    assert.ok(f.name && f.kind_hinweis && f.eltern?.beschreibung, `${wo}: name, kind_hinweis oder eltern fehlt`);
+    assert.ok(FB.strang.includes(f.strang), `${wo}: strang ${f.strang}`);
+    assert.ok(FB.evidenz.includes(f.evidenz), `${wo}: evidenz ${f.evidenz}`);
+    assert.ok(FB.art.includes(f.signatur?.art), `${wo}: signatur.art`);
+    assert.ok(f.eingabe?.length > 0, `${wo}: eingabe fehlt`);
+    for (const e of f.eingabe) assert.ok(FB.eingabe.includes(e), `${wo}: eingabe ${e} (die Stimme spricht nie Zahlen)`);
+    assert.ok(f.themen?.length > 0, `${wo}: keine Themen`);
+    for (const feld of ["themen", "kontrast", "uebung"]) {
+      for (const id of f[feld] ?? []) assert.ok(tids.has(id), `${wo}: ${feld} ${id} fehlt im Plan`);
+    }
+    for (const b of f.probe?.beispiele ?? []) assert.doesNotMatch(String(b), /^hoeren:.*\d/, `${wo}: Probe ${b} würde eine Zahl sprechen`);
+    // kind_hinweis wird vorgelesen: keine Ziffern, keine Zahlwörter (Artikel wie „ein Hund“ und die Stelle „Einer“ sind erlaubt)
+    assert.doesNotMatch(f.kind_hinweis, /\d/, `${wo}: Ziffer im kind_hinweis`);
+    assert.doesNotMatch(f.kind_hinweis.replace(/(?<![\p{L}])(ein|eine|einer)(?![\p{L}])/giu, ""), zahlRegel, `${wo}: Zahlwort im kind_hinweis`);
+    if (f.gegenstueck) assert.ok(fids.has(f.gegenstueck), `${wo}: gegenstueck ${f.gegenstueck}`);
+    const s2 = f.eltern.stufe2;
+    if (s2 && s2 !== "nie") {
+      assert.ok(tids.has(s2.nach_thema), `${wo}: stufe2.nach_thema ${s2.nach_thema}`);
+      for (const m of s2.mit ?? []) assert.ok(fids.has(m), `${wo}: stufe2.mit ${m}`);
+    }
+  }
+};
+// Kosmik-Schicht (docs/grundsaetze.md Abschnitt 10): Sachthemen quer zu den Spielen, kein Lernstand
+const WELT = {
+  art: ["sache", "miteinander", "schutz"],
+  stufe: ["ruhig", "sanft", "abenteuer"],
+  // Wortliste 3.2 und Prävention: nie im Kindertext
+  gesperrt: /(?<![\p{L}])(super|toll|klasse|prima|spitze|perfekt|klug|schlau|brav|fleißig|falsch|leider|schade|fehler|missbrauch\p{L}*)(?![\p{L}])/iu,
+  // K15: Ich-Form nur für Rechte und Handlungen, nie für Selbstwert
+  selbstwert: /Ich bin (gut|liebenswert|stolz|stark|toll|wichtig|richtig)/i,
+};
+regeln.welten = ({ themen, ueberschriften = [], welten = [] }) => {
+  const tids = new Set(themen.map((t) => t.id));
+  const arten = new Map(ueberschriften.map((u) => [u.id, u.art]));
+  for (const u of ueberschriften) assert.ok(WELT.art.includes(u.art) && u.name, `Überschrift ${u.id}: art oder name`);
+  const wids = new Set();
+  for (const w of welten) {
+    const wo = `Welt ${w.id}`;
+    assert.match(w.id, /^[a-z0-9]+(-[a-z0-9]+)*$/, `${wo}: id`);
+    assert.ok(!wids.has(w.id), `doppelte Welt ${w.id}`);
+    wids.add(w.id);
+    assert.ok(arten.has(w.ueberschrift), `${wo}: Überschrift ${w.ueberschrift} fehlt`);
+    assert.ok([1, 2, 3, 4].includes(w.klasse), `${wo}: klasse ${w.klasse}`);
+    assert.ok(WELT.stufe.includes(w.stufe_ab), `${wo}: stufe_ab ${w.stufe_ab}`);
+    assert.ok(w.name && w.anbindung && w.quellen?.length > 0, `${wo}: name, anbindung oder quellen fehlt`);
+    assert.doesNotMatch(w.name, WELT.gesperrt, `${wo}: gesperrtes Wort im name`);
+    assert.doesNotMatch(w.name, WELT.selbstwert, `${wo}: Selbstwert-Satz im name (K15)`);
+    for (const id of w.themen ?? []) assert.ok(tids.has(id), `${wo}: Thema ${id} fehlt im Plan`);
+    if (arten.get(w.ueberschrift) === "schutz") assert.ok(w.eltern, `${wo}: Schutz-Thema ohne eltern`);
+    assert.ok(Array.isArray(w.fakten), `${wo}: fakten fehlt`);
+    for (const f of w.fakten) assert.ok(f.satz && f.quelle, `${wo}: Fakt ohne Quelle (K4)`);
+  }
+};
+
 const pruefePlan = (plan, katalog, vorlageExistiert) => {
   regeln.reihenfolge(plan);
   regeln.aufgaben(plan);
@@ -93,6 +189,41 @@ test("Plan: deckt alle Zahlenzauber-Schlüssel bis 100 ab", () => {
 });
 
 test("Plan: der echte Plan besteht alle Prüfungen", () => pruefePlan(plan, katalog));
+
+test("Plan: Klasse, Felder der Recherche; Klasse 1–2 mit Ziel, Beispielen, Zweck und Eltern-Hinweis", () => regeln.felder(plan));
+
+test("Plan: Fehlerbilder verweisen auf vorhandene Themen und sprechen keine Zahlen", () => {
+  assert.ok((plan.fehlerbilder ?? []).length > 0, "keine Fehlerbilder");
+  regeln.fehlerbilder(plan);
+});
+
+test("Plan: Fehlerbild-Regel erkennt falsche Verweise und gesprochene Zahlen", () => {
+  const themen = [{ id: "t" }];
+  const f = { id: "f", name: "F", strang: "mathe", evidenz: "Q", signatur: { art: "antwort" }, eingabe: ["ziffern"], themen: ["t"], kind_hinweis: "Erst die Zehner.", eltern: { beschreibung: "B", stufe2: "nie" } };
+  regeln.fehlerbilder({ themen, fehlerbilder: [f] });
+  assert.throws(() => regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, themen: ["gibt-es-nicht"] }] }), /fehlt im Plan/);
+  assert.throws(() => regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, eingabe: ["hoeren-ziffern"] }] }), /spricht nie Zahlen/);
+  assert.throws(() => regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, kind_hinweis: "Wie viele sind zwei?" }] }), /Zahlwort/);
+  assert.throws(() => regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, kind_hinweis: "Nimm die 6." }] }), /Ziffer/);
+  regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, kind_hinweis: "Ein Hund, viele …? Reichen die Einer?" }] });
+});
+
+test("Plan: jeder Strang hat Themen in Klasse 1–2 und 3–4", () => {
+  for (const s of ["mathe", "geometrie", "lesen", "schreiben", "grammatik", "sprechen"]) {
+    assert.ok(themen.some((t) => t.strang === s && t.klasse <= 2), `${s}: keine Themen in Klasse 1–2`);
+    assert.ok(themen.some((t) => t.strang === s && t.klasse >= 3), `${s}: keine Themen in Klasse 3–4`);
+  }
+});
+
+test("Plan: Felder-Regel erkennt fehlende Pflichtfelder und falsche Werte", () => {
+  const t = { id: "a", klasse: 1, voraussetzungen: [], bereich: "B", ziel: "Z", zweck: "W", eltern: "E", beispiele: ["x"], stufen: ["kopf"], tempo: false };
+  regeln.felder({ themen: [t] });
+  regeln.felder({ themen: [{ id: "b", klasse: 3, voraussetzungen: [] }] });
+  assert.throws(() => regeln.felder({ themen: [{ ...t, zweck: "" }] }), /ohne zweck/);
+  assert.throws(() => regeln.felder({ themen: [{ ...t, typ: "regeln" }] }), /typ/);
+  assert.throws(() => regeln.felder({ themen: [{ ...t, gesichert: ["x"] }] }), /gesichert/);
+  assert.throws(() => regeln.felder({ themen: [{ ...t, klasse: 5 }] }), /klasse/);
+});
 
 test("Plan: geplantes Thema (aufgaben null) besteht alle Prüfungen, unbekannte Art und Einführung bei geplant nicht", () => {
   const kat = { kategorien: [{ id: "mathe" }], spiele: [] };
@@ -179,4 +310,30 @@ test("Einführungen: Gleichungen in zeig stimmen (mit den Werten jedes Themas)",
     }
   }
   assert.ok(geprueft > 50, `nur ${geprueft} Gleichungen gefunden`);
+});
+
+test("Plan: Welten der Kosmik-Schicht sind vollständig und gültig", () => {
+  assert.ok((plan.welten ?? []).length >= 90, "zu wenige Welten");
+  regeln.welten(plan);
+  for (const u of plan.ueberschriften) assert.ok(plan.welten.some((w) => w.ueberschrift === u.id), `Überschrift ${u.id} ohne Welten`);
+  assert.equal(plan.ueberschriften.length, 8);
+});
+
+test("Plan: Welten-Regel erkennt falsche Verweise, gesperrte Wörter und fehlende Elterntexte", () => {
+  const themen = [{ id: "t" }];
+  const ueberschriften = [{ id: "u", name: "U", art: "sache" }, { id: "s", name: "S", art: "schutz" }];
+  const w = { id: "w", name: "Maus", ueberschrift: "u", klasse: 1, quellen: ["HSU12"], anbindung: "M: zählen", themen: ["t"], stufe_ab: "ruhig", fakten: [] };
+  const pruefe = (x) => regeln.welten({ themen, ueberschriften, welten: [x] });
+  pruefe(w);
+  assert.throws(() => pruefe({ ...w, ueberschrift: "x" }), /Überschrift x fehlt/);
+  assert.throws(() => pruefe({ ...w, themen: ["gibt-es-nicht"] }), /fehlt im Plan/);
+  assert.throws(() => pruefe({ ...w, ueberschrift: "s" }), /ohne eltern/);
+  pruefe({ ...w, ueberschrift: "s", eltern: "E" });
+  assert.throws(() => pruefe({ ...w, fakten: [{ satz: "Mäuse haben Schnurrhaare." }] }), /ohne Quelle/);
+  assert.throws(() => pruefe({ ...w, name: "Fehler sind okay" }), /gesperrtes Wort/);
+  assert.throws(() => pruefe({ ...w, name: "Super gemacht" }), /gesperrtes Wort/);
+  assert.throws(() => pruefe({ ...w, name: "Ich bin liebenswert" }), /Selbstwert/);
+  pruefe({ ...w, name: "Ich darf Nein sagen" });
+  assert.throws(() => pruefe({ ...w, stufe_ab: "wild" }), /stufe_ab/);
+  assert.throws(() => regeln.welten({ themen, ueberschriften, welten: [w, w] }), /doppelte Welt/);
 });

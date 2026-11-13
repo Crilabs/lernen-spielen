@@ -1,4 +1,4 @@
-# Einhorn-Lernspiele
+# Lernen Spielen
 
 Lernspiele für ein Kind, als Windows-Kiosk-App (Tauri 2). Die App zeigt eine Startseite mit
 Kategorien und Spielen (HTML/JS in `spiele/`), speichert den Lernstand lokal, hat einen
@@ -10,7 +10,7 @@ Die frühere Web-Fassung mit PHP ist entfernt.
 
 - `spiele/` – die Oberfläche der App: `index.html` (Startseite), `eltern.html`/`eltern.js` (Elternbereich),
   `lernspiel.js` (gemeinsame Hilfen der Spiele), die Spiele als HTML-Dateien,
-  `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder samt Einhorn-Pausenbildern), `figuren/`, `saetze/`. Die übrigen Spiele zeichnen ihre Pausen selbst (SVG).
+  `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder samt Pausenbildern), `figuren/`, `saetze/`. Die übrigen Spiele zeichnen ihre Pausen selbst (SVG).
 - `spiele/kern/` – der Plattform-Kern: aller Zugriff auf Speicher (je Profil), Einstellungen (Ton je Spiel, Stimme
   je Gerät), Sprache und Gerätefähigkeiten (Update, Beenden, Kiosk). Siehe `dienste.js` (Schnittstellen),
   `speicher.js`, `einstellungen.js`, `stimme.js`, `geraet.js`, `protokoll.js`. Außerhalb von `kern/` darf kein Spiel
@@ -82,7 +82,7 @@ es zusätzlich das „Protokoll“.
 Die PIN (als Hash) liegt in `%APPDATA%\de.crilabs.lernen-spielen\lernstand\eltern.json` (eine Ebene über `kind-1`), nach einer PIN-Änderung
 die vorige PIN zusätzlich in `eltern.json.bak`. So setzt du die PIN zurück:
 
-1. App ohne PIN beenden: Tastatur anschließen, **Strg+Alt+Entf** → **Task-Manager** → „Einhorn-Lernspiele“
+1. App ohne PIN beenden: Tastatur anschließen, **Strg+Alt+Entf** → **Task-Manager** → „Lernen Spielen“
    auswählen → **Task beenden**. (Bleibt der Task-Manager hinter der App verborgen: Strg+Alt+Entf → **Abmelden**.)
 2. Im Explorer `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` öffnen und **`eltern.json` und
    `eltern.json.bak`** löschen. Nur eine der beiden zu löschen reicht nicht.
@@ -93,7 +93,8 @@ Die Lernstände der Spiele (Ordner `kind-1`) bleiben erhalten (der Hinweis steht
 ## Lernplan
 
 Der Lernplan ordnet kleine Themen (z. B. „Die 7 zerlegen“, „Plus ohne Zehnerübergang bis 20“) in einer festen
-Reihenfolge. Die App wählt für das Kind das passende Thema; Spiele liefern nur die Darstellung.
+Reihenfolge. Der Plan ist Orientierung, keine Vorgabe: Das Kind wählt, was es spielen und lernen will; innerhalb
+des gewählten Spiels bereitet die App das passende Thema vor. Spiele liefern nur die Darstellung.
 
 Dateien:
 
@@ -103,6 +104,20 @@ Dateien:
   (Aufgabenart wie `{ "art": "rechnen", "thema": … }`; `null` heißt „geplant“: noch keine Aufgaben, kein Spiel),
   `stufen` (`material`, `vorstellung`, `kopf`), `einfuehrung` (`{ "vorlage": "einfuehrungen/<name>.json",
   "werte": {…} }`), `familie` (optional), `tempo`, `eltern` (Hinweis für Erwachsene).
+  Aus der Recherche (`docs/reports/`) kommen dazu: `klasse` (1–4, nur zur Orientierung am Lehrplan, steuert nichts), `bereich` (Gruppe im Strang), `rid` (Schritt der
+  Themenkarte), `quelle` (`Q` belegt, `E` eigene Unterteilung), `gesichert` (Voraussetzungen, die sicher abrufbar sein
+  müssen, nicht nur eingeführt), `verwechslung` (Themen, die in der Wiederholung gezielt gemischt werden), `typ`
+  (`regel`, `merkwort`, `fertigkeit`), `schrift` (`alle`, `va`, `sas`, `verbunden`), `land` (`BY` für bayerische
+  Sonderwege), `pruefbar` (`ganz` oder `teilweise`). Themen der Klassen 1–2 haben außerdem `ziel` (die eine
+  Schwierigkeit), `beispiele`, `zweck` (wozu ein Kind das im Alltag braucht: nichts ist Selbstzweck) und `eltern`.
+  Themen der Klassen 3–4 sind nur grob angelegt (Name, Bereich, Voraussetzungen).
+  Stränge: `mathe`, `geometrie`, `lesen`, `schreiben`, `grammatik`, `sprechen` (Sprechen und Zuhören).
+  Neben `themen` steht `fehlerbilder`: typische Fehlermuster (z. B. Zahlendreher, Spiegelschrift, „kleiner von größer“),
+  je mit `signatur` (woran die App das Muster an den Antworten erkennt), `themen` (wo es sichtbar wird), `uebung`
+  (Themen, die bei einem Muster häufiger kommen: geübt wird das richtige Verfahren, nicht der Fehler), `probe`
+  (Aufgaben, mit denen sich „nicht betroffen“ bestätigen lässt), `kind_hinweis` (wird vorgelesen: ohne Ziffern und
+  Zahlwörter) und `eltern` (beschreibend; `stufe2` nur bei anhaltenden Mustern). Grundlage:
+  `docs/reports/Häufige Fehler Grundschule.md`. Die Lernsteuerung wertet Fehlerbilder noch nicht aus.
 - `spiele/aufgabenarten.js`: Aufgaben-Erzeuger. Aufgabenarten: `zerlegung`, `rechnen`, `menge`, `zwillinge`.
 - `spiele/lernsteuerung.js`: Steuerung (reine Logik ohne DOM, in Node testbar) und `runde()` für die Spiele.
   Sie wählt das Thema, macht bei neuen Themen eine Probe (bekannte Themen werden übersprungen), übt auf den Stufen,
@@ -165,7 +180,7 @@ Neue Bilder im Querformat, empfohlen 4:3, z. B. 1600×1200. Pro Bild:
 - `spiele/bilder/<name>.jpg`
 - `spiele/bilder/<name>.json` mit den Dingen; `formen` als `[x1,y1,x2,y2]` in Prozent des Bildes
 - Eintrag (Name ohne Endung) in `spiele/bilder/index.json`
-- Pausenbild `spiele/bilder/<name>-pause.jpg` (Einhorn passend zur Szene), eingetragen als `"pause": "<name>-pause.jpg"` in der JSON;
+- Pausenbild `spiele/bilder/<name>-pause.jpg` (passend zur Szene), eingetragen als `"pause": "<name>-pause.jpg"` in der JSON;
   es erscheint nach dem letzten Wort der Runde 10 Sekunden lang (`PAUSE_MS` in `wimmelbild.html`), danach folgt die nächste Szene.
 
 Kontrolle: `wimmelbild.html?pruefen` zeigt alle Bereiche (Tippen zeigt die Koordinate), ein einzelnes Bild mit

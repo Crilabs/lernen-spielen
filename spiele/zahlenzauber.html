@@ -463,7 +463,7 @@ sperreTouch();
     B.fehler++; busy=true; sfx.hm(); fragend(); if(i!==A && i!==P) wackel(i);
     // Tippt das Kind eine Zahl des Paares an, lässt es sie los (zählt als Fehler, aber es ist dann frei für einen neuen Versuch)
     const loslassen = () => { if(i===A){ B.start=null; B.partner=null; zeile(""); } else if(i===P){ B.partner=null; zeile(""); } zeigeZustand(); };
-    if(B.fehler===1){ sag("Das stimmt nicht. Probier noch mal."); await wait(700); loslassen(); busy=false; return; }
+    if(B.fehler===1){ sag("Diese zwei passen nicht zusammen."); await wait(700); loslassen(); busy=false; return; }
     if(B.fehler===2){
       if(B.minus){ const g=Math.max(B.nums[A],B.nums[P]), t=Math.min(B.nums[A],B.nums[P]); await punkte(g-t, t, {fort:true, ohneErgebnis:true}); sag("Nimm die Perlen weg. Wie viele bleiben?"); }
       else{ await punkte(B.nums[A], B.nums[P], {ohneErgebnis:true}); sag("Leg die Perlen zusammen. Welche Zahl ist es?"); }
@@ -493,8 +493,8 @@ sperreTouch();
     sfx.tipp(); B.hilfe++;
     const c=B.loes[2], anfang=B.minus?c:B.loes[0];
     if(B.hilfe===1){
-      if(B.minus) sag("Nimm eine große Zahl. Was bleibt, wenn eine kleinere weggeht?");
-      else sag("Das Ergebnis ist größer als die zwei Teile.");
+      if(B.minus) sag("Fang beim Ganzen an, bei der größten Zahl. Welcher Teil gehört dazu?");
+      else sag("Zwei Zahlen sind die Teile, eine ist das Ganze. Welche zwei Teile sind zusammen so viel wie das Ganze?");
     }else if(B.hilfe===2){
       // Nur zeigen, nicht auswählen: Leuchten (Tipp) und Füllfarbe (angetippt) bleiben unterscheidbar
       B.el[anfang].classList.add("zeig"); zeigeZustand();   // leuchtet, bis die Blume gelöst ist
@@ -609,6 +609,7 @@ sperreTouch();
     await laufe(88, {lauf:1.8});
     F.zustand(uniSvg(),"schlaeft");
     if(!knoepfe) sag("Das Einhorn ist satt und schläft ein bisschen.");
+    knoepfe=true;   // Pause endet nur auf Wunsch des Kindes (docs/grundsaetze.md N1, N8, 9.2 Nr. 7)
     const extra=[];
     const sp = hinweis ? spieleListe.find(x=>x.id===hinweis) : null;
     if(sp){

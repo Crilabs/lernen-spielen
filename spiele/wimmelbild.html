@@ -102,7 +102,7 @@ img{display:block}
 </div>
 
 <script type="module">
-import {lade, speichere, sperreTouch, esc, merkeGelernt} from "./lernspiel.js";
+import {lade, speichere, sperreTouch, esc, merkeGelernt, pausenKnoepfe} from "./lernspiel.js";
 import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
 import {sprich as kernSprich, stille, stimmen, setzeStimme, stimmWahl} from "./kern/stimme.js";
 sperreTouch();
@@ -123,8 +123,6 @@ sperreTouch();
   const WIEDER_MAX = 4;        // höchstens so viele Wiederholungen je Runde (damit die Runde kurz bleibt)
   const HILFE_MS = 15000;   // Vorlese-Hilfe erst nach so langer Zeit je Wort zeigen: erst selbst lesen
   const RUNDEN_TAG = 3;     // nach so vielen Szenen an einem Tag kommt ein ruhiger Abschluss (danach darf es weitergehen)
-  const ENDE_MS = 9000;     // Abschlussbild so lange, dann zurück zur Startseite
-  const PAUSE_MS = 10000;   // Szenenpause nach jeder Runde: Einhornbild so lange, dann kommt die nächste Szene
   // Nicht-Nomen: keine Wörter, die in GROSSBUCHSTABEN auch Nomen sein könnten (LAUT, WILD, ARM, GELB …)
   const ALLGEMEIN = [
     "lacht","rennt","singt","springt","spielt","schläft","malt","liest","schreibt","isst","trinkt","tanzt","klettert","hüpft",
@@ -363,7 +361,7 @@ sperreTouch();
       // 2. Mal Denkhilfe: Die Stimme nennt das Ding mit Artikel, das Wort gilt ab jetzt als Fehler (einmal gezählt).
       // Ab dem 3. Mal leuchtet das Ding auf.
       daneben++; sfx.boing();
-      if(daneben===2){ fehler++; setTimeout(()=>say(`${cur.ding.artikel} ${cur.ding.wort}. Schau genau hin.`), 400); }
+      if(daneben===2){ fehler++; setTimeout(()=>say(`${cur.ding.artikel} ${cur.ding.wort}. Wo ist das im Bild?`), 400); }
       else if(daneben>=3) hint(cur.ding);
     }
     zurueck(g);
@@ -376,8 +374,8 @@ sperreTouch();
     if(fehler===2) setTimeout(()=>say(`ein ${w}? eine ${w}? Hör mal, ob das passt.`), 500);
     else if(fehler>=3){
       if(cur.ding){ const ein = cur.ding.artikel==="die" ? "eine" : "ein";
-        setTimeout(()=>{ say(`${ein} ${W}. Das passt. ${W} ist ein Ding. Such es im Bild!`); hint(cur.ding); }, 500); }
-      else { setTimeout(()=>{ say(`ein ${w}? Das passt nicht. ${W} ist kein Ding. Ab in den Mülleimer!`);
+        setTimeout(()=>{ say(`${ein} ${W}. Das passt. ${W} ist ein Nomen. Wo ist das im Bild?`); hint(cur.ding); }, 500); }
+      else { setTimeout(()=>{ say(`ein ${w}? Das passt nicht. ${W} ist kein Nomen. Es gehört in die Kiste „Kein Nomen“.`);
         bin.animate([{transform:"none"},{transform:"scale(1.08)",background:"#FFF2BF",offset:.3},{transform:"none",offset:.6},{transform:"scale(1.08)",background:"#FFF2BF",offset:.8},{transform:"none"}],{duration:1400}); }, 500); }
     }
   }
@@ -409,7 +407,7 @@ sperreTouch();
     if(save.erklaert[s]===h) return;
     save.erklaert[s]=h; persist();
     const w=cur.text, W=w[0].toUpperCase()+w.slice(1);
-    setTimeout(()=>say(`${W} ist kein Ding.`), 450);
+    setTimeout(()=>say(`${W} ist kein Nomen.`), 450);
   }
   function wegwerfen(g){
     busy=true; sfx.happs();
@@ -432,34 +430,23 @@ sperreTouch();
     weiter();
   }
 
-  // Alle Wörter durch: Einhornbild als Szenenpause (ohne Knöpfe), dann direkt die nächste Szene
+  // Alle Wörter durch: Einhornbild als Szenenpause mit Haus- und Weiter-Knopf, dann die nächste Szene
   async function szenenpause(){
     bin.classList.add("hide"); hilfeVerstecken(); cardEl.style.display="none";
     // Szenen von heute zählen; nach RUNDEN_TAG ein natürlicher Halt (keine Sperre: wer wieder öffnet, spielt weiter)
     const h=heute(); if(!save.tag||save.tag.d!==h) save.tag={d:h,n:0};
     save.tag.n++; persist();
-    if(save.tag.n===RUNDEN_TAG){ await tagesende(); return; }   // nur einmal am Tag, keine Sperre: erneut öffnen spielt weiter
-    if(!bild.pause){ runde(); return; }
+    const ruheSatz = save.tag.n===RUNDEN_TAG;   // nach RUNDEN_TAG Szenen ein ruhiger Satz, kein Ende: das Kind entscheidet
+    if(!bild.pause && !ruheSatz){ runde(); return; }
     const el=$("pause"), im=$("pimg");
     im.src=pauseBild ? pauseBild.src : "bilder/"+bild.pause;
     await im.decode().catch(()=>{});
-    el.style.setProperty("--pause-ms", PAUSE_MS+"ms");
+    el.querySelector(".pbar")?.remove();
     el.classList.add("on"); void el.offsetWidth; el.classList.add("show");
-    await wait(PAUSE_MS);
+    if(ruheSatz){ await wait(700); say("Das Einhorn ruht sich aus."); }
+    await pausenKnoepfe(el);   // Pause endet nur auf Wunsch des Kindes (docs/grundsaetze.md N1, N8, 9.2 Nr. 7)
     await runde();                       // nächste Szene hinter dem Bild vorbereiten
     el.classList.remove("show"); await wait(650); el.classList.remove("on");
-  }
-
-  // Ruhiger Tagesabschluss: Einhornbild, ein kurzer Satz (ohne Lob), Haus-Knopf; nach ENDE_MS zurück zur Startseite
-  async function tagesende(){
-    const el=$("pause"), im=$("pimg");
-    im.src=pauseBild ? pauseBild.src : "bilder/"+(bild.pause||bild.bild);
-    await im.decode().catch(()=>{});
-    el.classList.add("on","ende"); void el.offsetWidth; el.classList.add("show");
-    await wait(700);
-    say("Für heute ist Schluss. Bis morgen!");
-    await wait(ENDE_MS);
-    location.href="index.html";
   }
 
   // ---------- Prüfansicht (?pruefen[&bild=name]) ----------
@@ -493,7 +480,7 @@ sperreTouch();
       + `<h2>Stimme auf diesem Gerät</h2>
       <p>Weitere Stimmen: in Windows unter Einstellungen › Zeit und Sprache › Sprache und Region bzw. › Sprachausgabe
       eine deutsche Stimme hinzufügen (z. B. „Microsoft Katja“ oder „Microsoft Hedda“), dann die App neu starten.
-      Installierte Stimmen erscheinen in der Liste unten. Gilt für alle Einhorn-Spiele auf diesem Gerät.</p><ul id="stimmen"></ul>`
+      Installierte Stimmen erscheinen in der Liste unten. Gilt für alle Spiele auf diesem Gerät.</p><ul id="stimmen"></ul>`
       + `<p><a class="btn mint" href="wimmelbild.html">Zum Spiel</a></p>`;
     document.body.appendChild(el);
     const liste=el.querySelector("#stimmen");
