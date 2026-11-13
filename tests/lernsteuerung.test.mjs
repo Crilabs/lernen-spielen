@@ -471,7 +471,9 @@ test("migriereSpiele: Perlenbrücke-Paare und Zahlenzauber-Fakten mit Stufe 2", 
   const z = (id) => s.themen[id]?.z;
   // Perlenbrücke: zerlegen-3 vollständig gelernt, zerlegen-4 erstes mit Teilstand
   assert.equal(z("zerlegen-3"), "kann-ich"); assert.equal(s.themen["zerlegen-3"].k, HEUTE); assert.equal(s.themen["zerlegen-3"].e, HEUTE);
-  assert.equal(z("zerlegen-4"), "dran"); assert.equal(s.themen["zerlegen-4"].e, HEUTE); assert.equal(s.themen["zerlegen-4"].stufe, "kopf");
+  assert.equal(z("zerlegen-4"), "dran"); assert.equal(s.themen["zerlegen-4"].e, HEUTE);
+  // übernommenes Thema: Probe offen (p: 1), noch ohne Stufe
+  assert.equal(s.themen["zerlegen-4"].stufe, ""); assert.equal(s.themen["zerlegen-4"].p, 1);
   assert.equal(z("zerlegen-7"), undefined);
   assert.equal(z("zerlegen-2"), undefined);
   // Zahlenzauber-Stufe 2: alles aus Stufe 0 und 1 ist gekonnt
@@ -489,7 +491,7 @@ test("migriereSpiele: Perlenbrücke-Paare und Zahlenzauber-Fakten mit Stufe 2", 
   assert.equal(s.aufgaben["zerl:4:2+2"], undefined);
   // rechnen-3 nach g/f gelernt, rechnen-7 erstes mit Teilstand
   assert.equal(z("rechnen-3"), "kann-ich");
-  assert.equal(z("rechnen-7"), "dran"); assert.equal(s.themen["rechnen-7"].stufe, "kopf");
+  assert.equal(z("rechnen-7"), "dran"); assert.equal(s.themen["rechnen-7"].stufe, ""); assert.equal(s.themen["rechnen-7"].p, 1);
   for (const id of ["rechnen-4", "rechnen-5", "rechnen-10", "minus-zehner", "minus-ohne-20", "plus-bis-30"]) assert.equal(z(id), undefined, id);
   // nur einmal
   const vorher = JSON.stringify(s);

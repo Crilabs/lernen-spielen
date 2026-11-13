@@ -12,6 +12,7 @@ globalThis.localStorage = {
 globalThis.window = {};
 const { runde } = await import("../spiele/lernsteuerung.js");
 const { sofortSpeichern } = await import("../spiele/lernspiel.js");
+const AA = await import("../spiele/aufgabenarten.js");
 
 const lies = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), "utf8"));
 const CTX = { plan: lies("../spiele/lernplan.json"), spiele: lies("../spiele/spiele.json") };
@@ -84,12 +85,57 @@ test("runde: halbe Probe abgebrochen → nicht gekonnt, nächster Start übt auf
   r.melde(a.ziel.key, { ok: true, hilfe: 0, ms: 1000 });
   await r.ende();
   assert.equal(stand().themen["zerlegen-4"].z, "dran");
+  assert.equal(stand().themen["zerlegen-4"].p, undefined);   // ohne Probe-offen-Kennzeichen
   const r2 = await start("perlenbruecke");
   assert.equal(r2.thema.id, "zerlegen-4");
   assert.equal(r2.thema.neu, false);
   assert.equal(r2.thema.stufe, "material");
   assert.equal(r2.einfuehrungFaellig, false);
   assert.equal(r2.naechste().stufe, "material");
+});
+
+// alter Zahlenzauber-Stand Stufe 3 mit einer Aufgabe aus minus-bis-30
+const altStufe3 = () => {
+  const { aufgabenVon } = AA;
+  const key = aufgabenVon({ art: "rechnen", thema: "minus-bis-30" })[0].key.replace(/^minus:/, "");
+  speicher.set("lernstand-zahlenzauber", JSON.stringify({ stufe: 3, wiese: 40, fakten: { [key]: { f: 1, t: "2026-11-10", h: [1] } } }));
+};
+
+test("runde: übernommenes Thema (alter Zahlenzauber Stufe 3) startet ohne Einführung mit Probe von 5", async () => {
+  altStufe3();
+  const r = await start("zahlenzauber");
+  assert.equal(r.thema.id, "minus-bis-30");
+  assert.equal(r.modus, "thema");
+  assert.equal(r.einfuehrungFaellig, false);
+  assert.equal(r.thema.stufe, "kopf");
+  let ereignis = null;
+  for (let i = 0; i < 5; i++) {
+    const a = r.naechste();
+    assert.ok(a, "Angebot " + (i + 1));
+    assert.equal(a.ziel.thema, "minus-bis-30");
+    assert.equal(a.stufe, "kopf");
+    assert.deepEqual(a.auch, []);
+    ereignis = r.melde(a.ziel.key, { ok: true, hilfe: 0, ms: 1000 });
+    if (i < 4) assert.equal(ereignis, null);
+  }
+  assert.deepEqual(ereignis, { typ: "gekonnt", thema: "minus-bis-30" });
+  await r.ende();
+  assert.equal(stand().themen["minus-bis-30"].z, "kann-ich");
+  assert.equal(stand().themen["minus-bis-30"].p, undefined, "Probe erledigt: p gelöscht");
+});
+
+test("runde: übernommenes Thema, Probe mit Fehler → p gelöscht, Üben auf der untersten Stufe", async () => {
+  altStufe3();
+  const r = await start("zahlenzauber");
+  assert.equal(r.thema.id, "minus-bis-30");
+  const a = r.naechste();
+  r.melde(a.ziel.key, { ok: false, hilfe: 0, ms: 1000 });
+  await r.ende();
+  const t = stand().themen["minus-bis-30"];
+  assert.equal(t.z, "dran"); assert.equal(t.stufe, "kopf"); assert.equal(t.p, undefined);
+  const r2 = await start("zahlenzauber");
+  const b = r2.naechste();
+  assert.ok(b.auch.length > 0, "keine Probe mehr: Angebot mit weiteren Aufgaben");
 });
 
 test("runde: melde nach Mitternacht nutzt neues Datum", async () => {

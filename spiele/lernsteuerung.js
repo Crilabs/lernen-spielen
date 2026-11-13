@@ -407,11 +407,13 @@ export function verbucheErgebnis(ctx, stand, sitzung, key, { ok, hilfe = 0, ms, 
           const x = stand.aufgaben[a.key] || (stand.aufgaben[a.key] = { f: 0, t: "", h: [], ms: [] });
           if (x.f < 1) { x.f = 1; x.t = heute; }
         }
+        delete t.p;
         ereignis = wirdGekonnt(stand, thema.id, heute);
       }
     } else {
       // Probe endet beim ersten Fehler, der ersten Hilfe oder einer mühsamen Antwort
       sitzung.probe = null;
+      delete t.p;
       const unten = stufenFuer(ctx, sitzung.spiel, sitzung.thema)[0] ?? "kopf";
       t.stufe = unten; t.v = [];
       if (unten !== sitzung.stufe) ereignis = { typ: "stufe", stufe: unten };
@@ -513,10 +515,11 @@ export function migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute 
       const a = aufgabenDes(t);
       if (bedient(ctx, "zahlenzauber", t.id) && a.length && a.every((x) => x.art === "rechnen" && zauberStufe(x) < s)) kannIch(t.id);
     }
-  // je Spiel das erste nicht gekonnte Thema mit Teilstand → dran, Einführung gilt als gesehen
+  // je Spiel das erste nicht gekonnte Thema mit Teilstand → dran, Einführung gilt als gesehen.
+  // Noch ohne Stufe und mit p = 1 („Probe offen“): der erste Start beginnt mit der Probe.
   for (const spiel of ["perlenbruecke", "zahlenzauber"]) {
     const t = themen.find((x) => bedient(ctx, spiel, x.id) && stand.themen[x.id]?.z !== "kann-ich" && mitTeilstand(spiel, x.id));
-    if (t) stand.themen[t.id] = { ...(stand.themen[t.id] || {}), z: "dran", e: heute, seit: heute, k: "", stufe: "kopf", v: [] };
+    if (t) stand.themen[t.id] = { ...(stand.themen[t.id] || {}), z: "dran", e: heute, seit: heute, k: "", stufe: "", p: 1, v: [] };
   }
   stand.migriert = 1;
   return stand;
@@ -553,7 +556,8 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
   const plan = themaId ? themaVon(ctx, themaId) : null;
   const eintragVorher = themaId ? stand.themen[themaId] : null;
   // Probe schon begonnen, aber vor dem Ende abgebrochen: auf der untersten Stufe üben
-  if (eintragVorher?.z === "dran" && !eintragVorher.stufe) eintragVorher.stufe = stufenFuer(ctx, spielId, themaId)[0] ?? "kopf";
+  // (nicht bei p = 1: übernommenes Thema, die Probe steht noch aus)
+  if (eintragVorher?.z === "dran" && !eintragVorher.stufe && !eintragVorher.p) eintragVorher.stufe = stufenFuer(ctx, spielId, themaId)[0] ?? "kopf";
 
   const neu = !!plan && !["dran", "kann-ich"].includes(eintragVorher?.z);
   // Vorgriff (Spiel hätte sonst nichts): das Thema wird dran wie ein neues Thema, mit Einführung
