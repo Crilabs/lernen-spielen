@@ -563,7 +563,8 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/ueber-10.json",
         "werte": {
-          "m": 9
+          "m": 9,
+          "fehlt": 1
         }
       },
       "tempo": true,
@@ -587,7 +588,8 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/ueber-10.json",
         "werte": {
-          "m": 8
+          "m": 8,
+          "fehlt": 2
         }
       },
       "tempo": true,
@@ -611,7 +613,8 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/ueber-10.json",
         "werte": {
-          "m": 7
+          "m": 7,
+          "fehlt": 3
         }
       },
       "tempo": true,

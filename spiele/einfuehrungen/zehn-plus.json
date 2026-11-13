@@ -1,1 +1,17 @@
-{ "szenen": [] }
+{ "szenen": [
+  { "sprich": "Jetzt baut das Einhorn längere Brücken. Zuerst legt es den goldenen Zehnerstab.",
+    "zeig": "10",
+    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "steh" }, { "perlen": ["10"], "x": 62 } ] },
+  { "sprich": "Dahinter kommt ein kleiner Stab.",
+    "zeig": "10 + 3",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["10", "3"], "x": 62 } ] },
+  { "sprich": "Schau auf die Zahl. Vorne steht der Zehner. Hinten stehen die Einer vom kleinen Stab.",
+    "zeig": "10 + 3 = 13",
+    "bild": [ { "perlen": ["10", "3"], "x": 42 }, { "zahl": "13", "x": 84 } ] },
+  { "sprich": "Mit jedem kleinen Stab geht es genauso. Der Zehner bleibt vorne.",
+    "zeig": "10 + 6 = 16",
+    "bild": [ { "perlen": ["10", "6"], "x": 42 }, { "zahl": "16", "x": 86 } ] },
+  { "sprich": "Jetzt baust du solche Brücken.",
+    "zeig": "10 + 4 = ?",
+    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "schau" }, { "perlen": ["10", "4"], "x": 62 } ] }
+] }

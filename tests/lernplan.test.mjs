@@ -103,3 +103,43 @@ test("Plan: geplantes Thema (aufgaben null) besteht alle Prüfungen, unbekannte 
   assert.throws(() => pruefePlan({ themen: [{ ...erstes, aufgaben: { art: "gibt-es-nicht" } }] }, kat), /keine Aufgaben/);
   assert.throws(() => pruefePlan({ themen: [erstes, { ...noch, einfuehrung: { vorlage: "x.json" } }] }, kat), /keine Einführung/);
 });
+
+// ---------------------------------------------------------------- Einführungen (Vorlagen mit den Werten jedes Themas)
+
+const { fuelleVorlage } = await import("../spiele/einfuehrung.js");
+const mitEinfuehrung = themen.filter((t) => t.einfuehrung?.vorlage);
+const figurDa = (id) => existsSync(new URL(`../spiele/figuren/${id}.js`, import.meta.url));
+const ZEICHEN_JE_SEKUNDE = 14;
+
+test("Einführungen: jede Vorlage eines Themas existiert", () => {
+  assert.ok(mitEinfuehrung.length > 0);
+  for (const t of mitEinfuehrung) assert.ok(vorlageDa(t.einfuehrung.vorlage), `${t.id}: ${t.einfuehrung.vorlage} fehlt`);
+});
+
+for (const t of mitEinfuehrung) {
+  test(`Einführung ${t.id} (${t.einfuehrung.vorlage}): 3–6 Szenen, ≤ 60 s, gefüllt, Figuren und Perlen gültig`, () => {
+    const vorlage = lade(`../spiele/${t.einfuehrung.vorlage}`);
+    const szenen = fuelleVorlage(vorlage, t.einfuehrung.werte);   // wirft bei Zahl in sprich oder fehlendem Wert
+    assert.ok(szenen.length >= 3 && szenen.length <= 6, `${t.id}: ${szenen.length} Szenen`);
+    const sekunden = szenen.reduce((n, s) => n + s.sprich.length, 0) / ZEICHEN_JE_SEKUNDE;
+    assert.ok(sekunden <= 60, `${t.id}: ${sekunden.toFixed(1)} s gesprochen`);
+    for (const [i, s] of szenen.entries()) {
+      const wo = `${t.id} Szene ${i + 1}`;
+      assert.ok(s.sprich.trim(), `${wo}: sprich leer`);
+      assert.doesNotMatch(s.zeig, /[{}]/, `${wo}: Platzhalter in zeig`);
+      for (const b of s.bild) {
+        if (b.figur !== undefined) assert.ok(figurDa(b.figur), `${wo}: Figur ${b.figur} fehlt in spiele/figuren/`);
+        else if (b.perlen !== undefined) for (const p of b.perlen) assert.ok(Number.isInteger(p) && p >= 1 && p <= 10, `${wo}: Perlenstab ${p}`);
+        else if (b.zahl !== undefined) assert.ok(typeof b.zahl === "number" || !/[{}]/.test(b.zahl), `${wo}: Zahl ${b.zahl}`);
+        else assert.fail(`${wo}: unbekanntes Bildelement ${JSON.stringify(b)}`);
+        if (b.x !== undefined) assert.ok(typeof b.x === "number" && b.x >= 0 && b.x <= 100, `${wo}: x ${b.x}`);
+      }
+    }
+  });
+}
+
+test("Einführung über die 10: Werte m und fehlt ergeben zusammen den Zehner", () => {
+  const ueber = mitEinfuehrung.filter((t) => t.einfuehrung.vorlage === "einfuehrungen/ueber-10.json");
+  assert.ok(ueber.length > 0);
+  for (const t of ueber) assert.equal(t.einfuehrung.werte.m + t.einfuehrung.werte.fehlt, 10, t.id);
+});

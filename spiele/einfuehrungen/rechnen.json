@@ -1,1 +1,20 @@
-{ "szenen": [] }
+{ "szenen": [
+  { "sprich": "Am Bach liegt wieder der Perlenstab dieser Brücke.",
+    "zeig": "Die Brücke der {n}",
+    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "steh" }, { "perlen": ["{n}"], "x": 60 }, { "zahl": "{n}", "x": 88 } ] },
+  { "sprich": "Das Einhorn legt die beiden Teile zusammen. Plus heißt: zusammenlegen.",
+    "zeig": "2 + {n-2} = {n}",
+    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "hop" }, { "perlen": ["2", "{n-2}"], "x": 62 } ] },
+  { "sprich": "Andersherum geht es auch. Die Brücke ist genauso lang.",
+    "zeig": "{n-2} + 2 = {n}",
+    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "steh" }, { "perlen": ["{n-2}", "2"], "x": 62 } ] },
+  { "sprich": "Jetzt nimmt das Einhorn einen Teil weg. Minus heißt: wegnehmen. Der andere Teil bleibt liegen.",
+    "zeig": "{n} − 2 = {n-2}",
+    "bild": [ { "figur": "einhorn", "x": 14, "aktion": "hop" }, { "perlen": ["2"], "x": 34 }, { "perlen": ["{n-2}"], "x": 70 } ] },
+  { "sprich": "Oder es nimmt den anderen Teil weg.",
+    "zeig": "{n} − {n-2} = 2",
+    "bild": [ { "figur": "einhorn", "x": 14, "aktion": "hop" }, { "perlen": ["{n-2}"], "x": 40 }, { "perlen": ["2"], "x": 78 } ] },
+  { "sprich": "Plus und Minus gehören zusammen. Sie sind eine Familie aus denselben Perlen.",
+    "zeig": "2 + {n-2} = {n}   {n-2} + 2 = {n}   {n} − 2 = {n-2}   {n} − {n-2} = 2",
+    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "steh" }, { "perlen": ["2", "{n-2}"], "x": 62 } ] }
+] }

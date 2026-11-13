@@ -1,1 +1,20 @@
-{ "szenen": [] }
+{ "szenen": [
+  { "sprich": "Am Bach liegt eine Brücke. Vorne der Zehnerstab, dahinter ein kleiner Stab.",
+    "zeig": "17 = 10 + 7",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "steh" }, { "perlen": ["10", "7"], "x": 62 } ] },
+  { "sprich": "Das Einhorn soll ein paar Perlen wegnehmen. Es nimmt sie vom kleinen Stab.",
+    "zeig": "17 − 4",
+    "bild": [ { "figur": "einhorn", "x": 15, "aktion": "schau" }, { "perlen": ["10", "3", "4"], "x": 62 } ] },
+  { "sprich": "Die Perlen sind weg. Der Zehnerstab bleibt ganz.",
+    "zeig": "7 − 4 = 3",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["10", "3"], "x": 62 } ] },
+  { "sprich": "So lang ist die Brücke jetzt.",
+    "zeig": "17 − 4 = 13",
+    "bild": [ { "perlen": ["10", "3"], "x": 42 }, { "zahl": "13", "x": 84 } ] },
+  { "sprich": "Manchmal soll auch der Zehnerstab weg. Dann nimmt das Einhorn ihn mit und dazu Perlen vom kleinen Stab.",
+    "zeig": "19 − 12 = 7   erst 10 weg, dann 2",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["7", "2"], "x": 55 }, { "zahl": "7", "x": 86 } ] },
+  { "sprich": "Jetzt rechnest du. Schau zuerst auf die Einer.",
+    "zeig": "16 − 3 = ?",
+    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "schau" }, { "perlen": ["10", "6"], "x": 62 } ] }
+] }
