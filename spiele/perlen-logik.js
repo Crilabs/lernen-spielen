@@ -6,7 +6,8 @@
 // Was dran ist, entscheidet die Lernsteuerung (runde/naechste); hier bleibt nur Spieleigenes:
 // welche Stäbchen in den Spalten liegen und wie oft ein Paar schon gebaut wurde (Abnutzung).
 //
-// Spieleigener Stand (Schlüssel "perlenbruecke"): { version: 3, reise, c: { [key]: anzahl } }
+// Spieleigener Stand (Schlüssel "perlenbruecke-spiel"): { version: 3, reise, c: { [key]: anzahl } }
+// Der alte Stand unter "perlenbruecke" (v2) wird nur gelesen, nie geschrieben (bleibt für ein Zurück liegen).
 
 export const K = {
   ABNUTZUNG: 0.25,               // so viel weniger Chance je Bau mehr als das seltenste Paar der Zahl
@@ -46,6 +47,14 @@ export function migriere(roh) {
     for (const [k, x] of Object.entries(roh.c)) if (zerlegung(k) && anzahl(x) !== null) s.c[k] = anzahl(x);
   }
   return s;
+}
+
+export const SPEICHER = "perlenbruecke-spiel";
+export const SPEICHER_ALT = "perlenbruecke";
+
+// Stand beim Laden: der neue Schlüssel, solange leer aus dem alten Stand übernommen (immer eine Kopie).
+export function eigenerStand(neu, alt) {
+  return migriere(istObjekt(neu) && Object.keys(neu).length ? neu : alt);
 }
 
 // Eine gebaute Brücke zählen (nur Spieleigenes; den Lernstand meldet das Spiel an die Lernsteuerung).

@@ -88,6 +88,10 @@ img{display:block}
 .pk{width:16rem;height:16rem;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;padding:3.4rem;box-shadow:0 .8rem 0 rgba(0,0,0,.25);text-decoration:none}
 .pk img{width:100%;height:100%}
 .pk.weiter img{transform:scaleX(-1)}
+.phinweis{position:absolute;right:5rem;top:5rem;display:flex;align-items:center;gap:2rem;padding:1.6rem 3.2rem 1.6rem 1.6rem;border-radius:99rem;background:rgba(255,255,255,.92);
+  box-shadow:0 .8rem 0 rgba(0,0,0,.25);text-decoration:none;color:var(--nacht);font:400 4rem/1 "Andika",sans-serif}
+.phinweis img{width:9rem;height:9rem}
+.phinweis:active{transform:translateY(.4rem);box-shadow:0 .4rem 0 rgba(0,0,0,.25)}
 .pk:active{transform:translateY(.4rem);box-shadow:0 .4rem 0 rgba(0,0,0,.25)}
 @media (prefers-reduced-motion:reduce){.bruecke-traegt,.wippe,.perle.zuviel,.platz.blink,.stab.leuchtet .platte{animation:none}.pause{transition:none}.pause .atmen,.pause .blink,.pause .schimmer{animation:none}}
 </style>
@@ -120,7 +124,7 @@ img{display:block}
 <script src="figuren/einhorn.js"></script>
 <script type="module">
 import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
-import {K, paareVon, migriere, angebotAus, verbucheBau, zerlegung} from "./perlen-logik.js";
+import {K, paareVon, migriere, angebotAus, verbucheBau, zerlegung, eigenerStand, SPEICHER, SPEICHER_ALT} from "./perlen-logik.js";
 import {runde} from "./lernsteuerung.js";
 import {spieleEinfuehrung} from "./einfuehrung.js";
 sperreTouch();
@@ -158,7 +162,9 @@ sperreTouch();
   const vorschauStufe = STUFEN.includes(params.get("stufe")) ? params.get("stufe") : null;
 
   // ---------- Elternansicht (?eltern) ----------
-  if(params.has("eltern")){ elternansicht(migriere(await lade("perlenbruecke", {}))); return; }
+  // Spieleigener Stand unter SPEICHER; der alte Stand (SPEICHER_ALT) wird nur gelesen, nie geschrieben
+  const ladeEigen = async () => eigenerStand(await lade(SPEICHER, {}), await lade(SPEICHER_ALT, {}));
+  if(params.has("eltern")){ elternansicht(await ladeEigen()); return; }
 
   // ---------- Ton ----------
   let sound = true; try{ sound = localStorage.getItem("perlenbruecke-ton")!=="aus"; }catch(e){}
@@ -190,12 +196,13 @@ sperreTouch();
   }
 
   // ---------- Lernsteuerung und spieleigener Stand ----------
-  let plan = null;
+  let plan = null, spieleListe = [];
   try{ plan = await fetch("lernplan.json").then(x=>x.json()); }catch(e){}
+  try{ spieleListe = (await fetch("spiele.json").then(x=>x.json())).spiele || []; }catch(e){}
   const themaPlan = id => plan?.themen?.find(t=>t.id===id) || null;
   let r = null;                 // aktuelle Runde der Lernsteuerung
   let eigen = migriere(null);   // Reise und Abnutzung (erst nach runde() laden: die Lernsteuerung übernimmt beim ersten Start den alten Stand)
-  function persist(){ if(!vorschau) speichere("perlenbruecke", eigen); }
+  function persist(){ if(!vorschau) speichere(SPEICHER, eigen); }
 
   // ---------- Geometrie je Zahl ----------
   let n = 7;
@@ -457,7 +464,7 @@ sperreTouch();
     }
     await ausblenden();
     const a = naechsteAufgabe();
-    if(!a){ await r.ende(); await pause(); return neueRunde(); }
+    if(!a){ const {hinweisSpiel} = await r.ende(); await pause({hinweis: hinweisSpiel}); return neueRunde(); }
     neueBruecke(a);
   }
   // Angebot holen; Vorschau ?zahl/?fehler: eigene Aufgabe ohne Lernsteuerung
@@ -487,7 +494,7 @@ sperreTouch();
   async function neueRunde(){
     busy=true; sag("");
     r = await runde("perlenbruecke", { wunsch: params.get("thema"), max: K.RUNDE, nurAnsehen: vorschau });
-    eigen = migriere(await lade("perlenbruecke", {}));
+    eigen = await ladeEigen();
     if(r.einfuehrungFaellig && !vorschau){
       const e = themaPlan(r.thema?.id)?.einfuehrung;
       const ergebnis = e ? await spieleEinfuehrung(e.vorlage, e.werte, {ton: sound}) : "abgebrochen";
@@ -525,9 +532,18 @@ sperreTouch();
     </svg><div class="pbar"><div class="pfill"></div></div>`;
   }
   // Ohne Knöpfe: Balken läuft PAUSE_MS, dann geht es weiter. Mit Knöpfen (nach „kann ich“): Weiter oder Haus.
-  async function pause({knoepfe=false}={}){
+  // hinweis (nach einer Wiederholungsrunde): ruhiger Hinweis auf das Spiel, das gerade etwas Neues hat (antippbar).
+  async function pause({knoepfe=false, hinweis=null}={}){
     const e=$("pause");
     e.innerHTML=pausenSzene();
+    const sp = hinweis ? spieleListe.find(x=>x.id===hinweis) : null;
+    if(sp){
+      const a=document.createElement("a"); a.className="phinweis"; a.href=sp.datei; a.setAttribute("aria-label", sp.titel);
+      const img=document.createElement("img"); img.src=sp.symbol; img.alt="";
+      const t=document.createElement("span"); t.textContent=sp.titel;
+      a.append(img, t); e.appendChild(a);
+      sprich(sp.titel);
+    }
     if(knoepfe){
       e.querySelector(".pbar").remove();
       e.insertAdjacentHTML("beforeend",`<div class="pknoepfe"><a class="pk" href="index.html" aria-label="Alle Spiele"><img src="symbole/haus.svg" alt=""></a><button class="pk weiter" aria-label="Weiter"><img src="symbole/zurueck.svg" alt=""></button></div>`);
@@ -538,7 +554,7 @@ sperreTouch();
     else await wait(PAUSE_MS);
     e.classList.remove("show"); await wait(600); e.classList.remove("on"); e.innerHTML="";
   }
-  if(params.has("pause")) pause({knoepfe: params.get("pause")==="knoepfe"});
+  if(params.has("pause")) pause({knoepfe: params.get("pause")==="knoepfe", hinweis: params.get("hinweis")});   // Sichtprüfung
 
   // ---------- Elternansicht: nur Spieleigenes; den Lernstand zeigt der Elternbereich ----------
   function elternansicht(eigen){

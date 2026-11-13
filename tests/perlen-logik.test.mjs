@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 const L = await import("../spiele/perlen-logik.js");
-const { K, paareVon, neuerStand, migriere, angebotAus, verbucheBau, zerlegung } = L;
+const { K, paareVon, neuerStand, migriere, angebotAus, verbucheBau, zerlegung, eigenerStand, SPEICHER, SPEICHER_ALT } = L;
 
 // Reproduzierbarer Zufall
 const lcg = (seed) => { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32; };
@@ -109,4 +109,24 @@ test("angebotAus: kleine Zahlen – höchstens zwei Paare, drei Stäbchen je Spa
     assert.ok(links.length >= 3 && rechts.length >= 3, `n=${n} seed=${seed}`);
     assert.ok(paare.length / (links.length * rechts.length) <= 1 / 3 + 1e-9, `Ratechance n=${n} seed=${seed}`);
   }
+});
+
+test("eigenerStand: neuer Schlüssel, Start aus dem alten v2-Stand, der alte bleibt unberührt", () => {
+  assert.equal(SPEICHER, "perlenbruecke-spiel");
+  assert.equal(SPEICHER_ALT, "perlenbruecke");
+  assert.match(SPEICHER, /^[a-z0-9-]+$/);
+  const alt = { version: 2, reise: 30, frei: [3, 4], paare: { "7:2+5": { f: 2, t: "2026-11-01", h: [1], c: 6, g: 1 } }, zahlen: {}, verlauf: [] };
+  const kopie = structuredClone(alt);
+  // neuer Schlüssel leer ({} wie lade(..., {}) oder null): aus dem alten Stand übernehmen
+  for (const neu of [{}, null, undefined]) {
+    const s = eigenerStand(neu, alt);
+    assert.deepEqual(s, { version: 3, reise: 30, c: { "zerl:7:2+5": 6 } });
+    verbucheBau(s, "zerl:7:2+5");            // Weiterspielen ändert nur den neuen Stand
+    assert.deepEqual(alt, kopie);
+    assert.notEqual(s.c, alt.paare);
+  }
+  // neuer Schlüssel vorhanden: der alte wird nicht mehr gelesen
+  assert.deepEqual(eigenerStand({ version: 3, reise: 2, c: { "zerl:3:1+2": 1 } }, alt), { version: 3, reise: 2, c: { "zerl:3:1+2": 1 } });
+  assert.deepEqual(eigenerStand({}, {}), neuerStand());
+  assert.deepEqual(alt, kopie);
 });
