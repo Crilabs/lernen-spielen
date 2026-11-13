@@ -1,41 +1,91 @@
 # Einhorn-Lernspiele
 
-Alle Dateien in einen Ordner auf dem Webserver legen (PHP aktiv, Ordner beschreibbar):
+Lernspiele für ein Kind, als Windows-Kiosk-App (Tauri 2). Die App zeigt eine Startseite mit
+Kategorien und Spielen (HTML/JS in `spiele/`), speichert den Lernstand lokal, hat einen
+PIN-geschützten Elternbereich und aktualisiert sich über GitHub-Releases.
 
-- `index.html`        – Übersicht mit Links zu beiden Spielen
-- `zahlenzauber.html` – Zahlenzauber (Kakooma: zwei Blüten ergeben eine dritte; Fäden zeigen geprüfte Paare,
-  Stufen bis 10 → 20 → Minus → 30 → 100 je nach Tempo). Elternansicht: `zahlenzauber.html?eltern`.
-- `zahlen-save.php`   – Lernstand Zahlenzauber → `zahlen.json`
-- `save.php`          – alter Spielstand (`spielstand.json`); nur noch zum einmaligen Übernehmen der Einhörner
-- `perlenbruecke.html`– Perlenbrücke (Zahlzerlegung 2–10 mit Montessori-Perlenstäbchen)
-- `bruecke-save.php`  – Lernstand Perlenbrücke → `bruecke.json`
-- `wimmelbild.html`   – Wimmelbild-Detektiv (Nomen: Wortkärtchen auf Dinge im Bild ziehen)
-- `wimmel-save.php`   – Lernstand Wimmelbild → `wimmel.json` (Elternansicht: `wimmelbild.html?eltern`)
-- `bilder/`           – Wimmelbilder: je Bild `<name>.jpg` + `<name>.json` (Bereiche), Reihenfolge in `bilder/index.json`.
-  Bereiche als `[x1,y1,x2,y2]` in Prozent des Bildes. Kontrolle: `wimmelbild.html?pruefen` (zeigt alle Bereiche,
-  Tippen zeigt die Koordinate), einzelnes Bild mit `?pruefen&bild=<name>`.
-- `einhorn-steine.html` – Einhorn-Steine (Leerzeichen beim Schreiben: diktierten Satz tippen, jedes Wort wird ein Trittstein).
-  Rechtschreibung/Lautsprache zählt nicht, nur die Abstände. Elternansicht: `einhorn-steine.html?eltern`.
-- `steine-save.php`   – Lernstand Einhorn-Steine → `steine.json`
-- `saetze/saetze.json` – Diktatsätze für Einhorn-Steine; eigene Sätze einfach ergänzen (`stufe` 1–3 optional).
-  Test der Auswertung: `node docs/tests/steine-auswertung-test.mjs`
-- `grossbuchstaben.html` – Großbuchstaben-Zauberer (Nomen großschreiben: Wörter antippen, richtiger Satz wird vorgelesen und gespielt).
-  Elternansicht: `grossbuchstaben.html?eltern`, einzelne Szene ansehen: `?szene=<typ>` (ueber, zu, schlaf, frisst, tanz, rollt, versteckt, fliegt, jagt; optional `&d=<ding>&s=<figur>`).
-- `zauber-saetze.js`  – Satz-Baukasten (Figuren × Tätigkeiten × Dinge, Grammatik)
-- `zauber-save.php`   – Lernstand Großbuchstaben-Zauberer → `zauber.json`
-- `figuren/`          – SVG-Figuren und Dinge für den Zauberer, je Datei eine (`figuren.js` = Baukasten und Bewegungen).
-  Galerie zum Ansehen: `docs/superpowers/probe/figuren.html` (lokal öffnen, wird nicht hochgeladen).
-- `pausenbilder/`     – Pausenbilder (z. B. Einhörner), erscheinen nach jeder Wimmelbild-Runde. Neues Bild als JPG
-  ablegen und in `pausenbilder/index.json` eintragen; Häufigkeit über `PAUSE_ALLE` in `wimmelbild.html`.
+Die frühere Web-Fassung (PHP-Dateien `*-save.php`, `save.php`, `deploy.sh`, `.env`-Deployment)
+ist **nicht mehr aktuell**. Diese Reste werden in einem späteren Schritt entfernt.
 
-Beide Spiele haben einen Link zurück zur Übersicht (🏠). Die JSON-Dateien legt PHP beim ersten Speichern an;
-bei Updates nur die HTML-Dateien ersetzen, die Spielstände bleiben. Ohne PHP wird im Browser (localStorage) gespeichert.
+## Aufbau
 
-Einstellungen stehen jeweils oben im Script der HTML-Datei (Zahlenzauber: Stufen, Aufstiegs-Regel, Besuche auf der Wiese;
-Perlenbrücke: Tempo-Schwelle, „gelernt“-Regel, OVERUSE, Überraschungen).
+- `spiele/` – die Oberfläche der App: `index.html` (Startseite), `eltern.html`/`eltern.js` (Elternbereich),
+  `lernspiel.js` (gemeinsame Hilfen: Laden/Speichern, Protokoll), die Spiele als HTML-Dateien,
+  `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder), `figuren/`, `saetze/`, `pausenbilder/`.
+- `spiele/fortschritt/` – je Spiel optional ein Modul `<id>.js`, das den Balken auf der Startseite berechnet.
+- `spiele/symbole/` – SVG-Symbole (Kategorien, Spiele, Elternbereich).
+- `spiele/schrift/` – lokal eingebundene Schrift (keine Webzugriffe nötig).
+- `src-tauri/` – Rust-Hülle: Kiosk-Fenster, Lernstand lesen/schreiben, Logdatei, Updater, Installer-Konfiguration.
+- `tests/` – Node-Tests (`npm test`).
+- `kiosk/` – Prüfliste für die Abnahme am Windows-Rechner.
+- `release.sh`, `.github/workflows/release.yml` – Veröffentlichung.
 
-## Hochladen
+## Entwickeln am Mac
 
-Zugangsdaten in `.env` eintragen, dann `./deploy.sh --test` (zeigt nur an) bzw. `./deploy.sh`.
-Es werden nur geänderte Dateien übertragen, auf dem Server wird nichts gelöscht, Spielstände bleiben unberührt.
-Nicht hochgeladen: `.env`, versteckte Ordner, `docs/`, `README.md`, `ideen.txt`, `deploy.sh`.
+```sh
+npm install
+npm test                      # Node-Tests
+npm run tauri dev             # App im Entwicklungsmodus
+python3 -m http.server -d spiele   # nur im Browser ansehen: http://localhost:8000
+```
+
+Im Browser gibt es kein Tauri; dort wird im localStorage gespeichert. Rust-Tests: `cd src-tauri && cargo test`.
+
+## Release
+
+```sh
+./release.sh 0.2.0 "Kurze Notiz"
+```
+
+Das Skript prüft (Tests), setzt die Version in `package.json`, `tauri.conf.json` und `Cargo.toml`,
+committet, taggt `v0.2.0` und pusht. Danach baut GitHub Actions (`.github/workflows/release.yml`) auf Windows:
+Tests, Installer `*-setup.exe`, Signatur und `latest.json`, und veröffentlicht das Release. Die Release-Notiz
+kommt aus dem Abschnitt `## v0.2.0` in `CHANGELOG.md`, sonst aus der Tag-Nachricht. Installierte Apps finden
+das Update über „Nach Updates suchen“ im Elternbereich.
+
+**Signierschlüssel:** `~/.tauri/lernen-spielen.key` (privat) sicher aufbewahren und sichern. Geht er verloren,
+können bestehende Installationen keine Updates mehr annehmen. Die GitHub-Secrets heißen
+`TAURI_SIGNING_PRIVATE_KEY` und `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`. Der öffentliche Schlüssel steht in
+`src-tauri/tauri.conf.json`.
+
+Abnahme einer Version am Windows-Rechner: `kiosk/pruefliste-v0.1.0.md`.
+
+## Lernstand-Ordner
+
+`%APPDATA%\de.crilabs.lernen-spielen\lernstand\` – je Spiel eine JSON-Datei (plus `.bak` als Sicherung).
+Bei Updates bleibt der Ordner unberührt.
+
+## Logdatei
+
+Die App schreibt über `tauri-plugin-log` in den Log-Ordner der App. Nach der Plugin-Doku ist das unter
+Windows `%LOCALAPPDATA%\de.crilabs.lernen-spielen\logs\` (Dateiname nach dem App-Namen). Im Elternbereich gibt
+es zusätzlich das „Protokoll“.
+
+## PIN vergessen
+
+Die PIN (als Hash) liegt in `%APPDATA%\de.crilabs.lernen-spielen\lernstand\eltern.json`. Vergessen: App beenden,
+diese Datei löschen, beim nächsten Öffnen des Elternbereichs eine neue PIN festlegen. Die Lernstände der Spiele
+bleiben erhalten (der Hinweis steht auch auf dem PIN-Bildschirm).
+
+## Neues Spiel hinzufügen
+
+1. HTML-Datei in `spiele/` anlegen (Speichern/Laden über `lernspiel.js`).
+2. Eintrag in `spiele/spiele.json` unter `spiele`: `id`, `titel`, `thema`, `kategorie` (eine `id` aus
+   `kategorien`), `symbol` (z. B. `symbole/<id>.svg`), `datei`, `text` (wird vorgelesen).
+3. Symbol: SVG in `spiele/symbole/` im Stil der vorhandenen (viewBox `0 0 100 100`, Linien `#3B2A6B` 4 px,
+   runde Enden, flächige Füllung in Pastell, siehe z. B. `symbole/hilfe.svg`).
+4. Optional Fortschrittsbalken: `spiele/fortschritt/<id>.js` mit
+   `export async function fortschritt(save, holeJson)`, Rückgabe `{ wert: 0..1, text: "…" }`.
+   `save` ist der gespeicherte Lernstand des Spiels, `holeJson(pfad)` lädt eine JSON-Datei aus `spiele/`.
+   Ohne Modul zeigt die Startseite keinen Balken. Beispiel: `spiele/fortschritt/wimmelbild.js`.
+
+## Wimmelbilder
+
+Neue Bilder im Querformat, empfohlen 4:3, z. B. 1600×1200. Pro Bild:
+
+- `spiele/bilder/<name>.jpg`
+- `spiele/bilder/<name>.json` mit den Dingen; `formen` als `[x1,y1,x2,y2]` in Prozent des Bildes
+- Eintrag (Name ohne Endung) in `spiele/bilder/index.json`
+
+Kontrolle: `wimmelbild.html?pruefen` zeigt alle Bereiche (Tippen zeigt die Koordinate), ein einzelnes Bild mit
+`?pruefen&bild=<name>`.
