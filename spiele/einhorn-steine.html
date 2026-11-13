@@ -11,7 +11,7 @@
   font-size:calc(100vh / 108)}   /* 1rem = 10 px bei 1080 px Höhe (Full HD), 8 px bei 864 px (125 % Skalierung) */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
-body{font-family:"Andika","Baloo 2",sans-serif;color:var(--nacht);background:var(--bg);
+body{font-family:"Andika",sans-serif;color:var(--nacht);background:var(--bg);
   user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none}
 button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 img{display:block}
@@ -672,7 +672,7 @@ const AUSWERTUNG = (() => {
       if(i>0){ const s=document.createElement("button"); s.className="spalt"; s.dataset.g=i; s.setAttribute("aria-label","hier trennen"); reihe.appendChild(s); }
       const b=document.createElement("span"); b.className="bst"; b.textContent=c; reihe.appendChild(b);
     });
-    const zu=document.createElement("button"); zu.className="zu"; zu.textContent="✕ zu";
+    const zu=document.createElement("button"); zu.className="zu"; zu.innerHTML=`<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" style="vertical-align:-.12em"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> zu`;
     karte.append(reihe,zu); lupe.appendChild(karte); lupe.classList.add("on");
     if(falschTipps>=2) zeigeRiss(reihe, st);
     zu.onclick=()=>lupe.classList.remove("on");
@@ -852,7 +852,7 @@ const AUSWERTUNG = (() => {
       liste.innerHTML="";
       const zeile=(titel, info, aktiv, waehle)=>{
         const li=document.createElement("li");
-        li.innerHTML=`${aktiv?"✅ ":""}${titel} <small>${info}</small> `;
+        li.innerHTML=`${aktiv?`<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" aria-label="aktiv" style="vertical-align:-.15em"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="#2E9E6B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg> `:""}${titel} <small>${info}</small> `;
         const b=document.createElement("button"); b.className="btn mint"; b.style.cssText="font-size:.9rem;padding:4px 14px;margin-left:6px"; b.textContent=aktiv?"Probe":"Wählen";
         b.onclick=()=>{ waehle(); sound=true; say("Das Pony frisst Gras. Die Katze schläft auf dem Sofa."); zeigeStimmen(); };
         li.appendChild(b); liste.appendChild(li);

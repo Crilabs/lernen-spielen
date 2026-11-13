@@ -97,7 +97,7 @@
     return `<svg class="figur" viewBox="0 0 320 280" data-id="${id}"${style} aria-label="${d.wort}">`
       + `<g class="fig"><g class="bob"><g class="breath">${d.svg}</g></g></g>`
       + `<g class="kruemel">${[[0,"#E9B872"],[6,"#FF9ECF"],[-5,"#E9B872"],[3,"#B5E08C"]].map(([dx,c])=>`<circle cx="${d.mund[0]-8+dx}" cy="${d.mund[1]+22}" r="4" fill="${c}" stroke="${F.INK}" stroke-width="1.5"/>`).join("")}</g>`
-      + `<g class="zzz" fill="${F.INK}" font-weight="800" font-family="system-ui,sans-serif">`
+      + `<g class="zzz" fill="${F.INK}" font-weight="700" font-family="Andika,sans-serif">`
       + `<text x="${kx+20}" y="${ky}" font-size="24">z</text><text x="${kx+20}" y="${ky}" font-size="24">z</text><text x="${kx+20}" y="${ky}" font-size="24">Z</text></g>`
       + `</svg>`;
   };

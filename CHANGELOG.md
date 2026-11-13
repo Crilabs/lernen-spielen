@@ -1,7 +1,12 @@
 # Änderungen
 
-## Unveröffentlicht
+## v0.1.3
 
+- Startseite: Das Einhorn steht jetzt auf der Wiese statt darüber zu schweben.
+- Überall die gut lesbare Schrift Andika, nicht mehr die dicke Überschriften-Schrift.
+- Perlenbrücke neu im Querformat: links und rechts je eine Spalte Perlenstäbchen, das Kind baut die Brücke aus zwei Teilen. Bei einem Fehler zeigt das Spiel länger und deutlich, warum es nicht passt. Fortschrittsbalken auf der Startseite.
+- Einhorn-Steine im Querformat mit eigener Regenbogen-Tastatur auf dem Bildschirm und neuer Szene. Keine Emojis mehr.
+- Wimmelbild: Knapp daneben zählt jetzt auch (größerer Treffer-Rand für Kinderfinger). Der Hilfe-Knopf erscheint erst nach 15 Sekunden je Wort.
 - Großbuchstaben-Zauberer im Querformat mit neuer Spielleiterin: Eine Zauberin verhext den Satz (alle Buchstaben flackern), dann ist das Kind dran.
 - Bei „Fertig!“ mit Fehler liest die Zauberin den Satz stumm und grübelt – eine bewusste Pause, in der nichts änderbar ist, damit Durchprobieren länger dauert als Nachdenken. Sie verrät dabei nicht, wo der Fehler steckt.
 - Nach dem 2. Fehlversuch bringt sie die ein/eine-Probe, nach dem 3. zeigt sie auf die falschen Wörter und erklärt sie.
