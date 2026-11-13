@@ -103,17 +103,18 @@ test("elternThemen: geradeDran nur bei dran und seit höchstens 7 Tagen", () => 
   assert.equal(finde(elternThemen(CTX, s, HEUTE), "z7").geradeDran, false);
 });
 
-test("elternThemen: wackelig = gesehene Aufgaben in Fach 0/1 eines gekonnten oder dran-Themas", () => {
+test("elternThemen: wackelig = gesehene Aufgaben eines gekonnten oder dran-Themas, zuletzt nicht sauber oder in Fach 0", () => {
   const s = neuerStand();
   s.themen.z5 = { z: "kann-ich", k: HEUTE, stufe: "kopf" };
-  s.aufgaben["zerl:5:1+4"] = { f: 0, t: HEUTE, h: [1, 0], ms: [] };   // wackelig
-  s.aufgaben["zerl:5:2+3"] = { f: 1, t: HEUTE, h: [1], ms: [] };      // wackelig
+  s.aufgaben["zerl:5:1+4"] = { f: 0, t: HEUTE, h: [1, 0], ms: [] };   // wackelig: zuletzt falsch
+  s.aufgaben["zerl:5:2+3"] = { f: 1, t: HEUTE, h: [1], ms: [] };      // Fach 1 nach Probe, zuletzt richtig: nicht wackelig
   s.aufgaben["zerl:5:3+2"] = { f: 1, t: HEUTE, h: [], ms: [] };       // nie gesehen (nur eingestuft)
-  s.aufgaben["zerl:5:4+1"] = { f: 2, t: HEUTE, h: [0, 1, 1], ms: [] }; // sitzt
+  s.aufgaben["zerl:5:4+1"] = { f: 0, t: HEUTE, h: [1], ms: [] };      // wackelig: Fach 0 nach einer Antwort (z. B. mit Hilfe)
   // Thema in Sicht: Einträge zählen nicht
   s.aufgaben["zerl:7:3+4"] = { f: 0, t: HEUTE, h: [0], ms: [] };
+  s.aufgaben["zerl:7:2+5"] = { f: 2, t: HEUTE, h: [0, 1, 1], ms: [] }; // sitzt
   let l = elternThemen(CTX, s, HEUTE);
-  assert.deepEqual(finde(l, "z5").wackelig, ["zerl:5:1+4", "zerl:5:2+3"]);
+  assert.deepEqual(finde(l, "z5").wackelig, ["zerl:5:1+4", "zerl:5:4+1"]);
   assert.deepEqual(finde(l, "z7").wackelig, []);
   s.themen.z7 = { z: "dran", seit: HEUTE, stufe: "material" };
   l = elternThemen(CTX, s, HEUTE);

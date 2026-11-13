@@ -497,7 +497,8 @@ export function aufgabeLesbar(key) {
 
 // Themenliste für den Elternbereich, je Strang in Planreihenfolge, alle Themen (auch verborgene).
 // [{ strang, themen: [{ id, name, zustand, stufe, wackelig: key[], hinweis, luecke, geradeDran, frei }] }]
-//   wackelig   = Aufgaben eines gekonnten oder dran-Themas in Fach 0 oder 1, die schon einmal gesehen wurden (h nicht leer)
+//   wackelig   = gesehene Aufgaben (h nicht leer) eines gekonnten oder dran-Themas, deren letzte Antwort nicht sauber war
+//                (h endet mit 0) oder die in Fach 0 stehen; Fach 1 nach Probe oder „gekonnt“ zählt nicht
 //   luecke     = "ohne-spiel" | "teilweise" (nicht alle Aufgaben darstellbar) | null
 //   geradeDran = dran und seit höchstens GERADE_DRAN_TAGE Tagen
 //   frei       = von den Eltern freigegeben
@@ -512,7 +513,7 @@ export function elternThemen(ctx, stand, heute) {
     const wackelig = zustand === "dran" || zustand === "kann-ich"
       ? aufgabenDes(t).map((a) => a.key).filter((k) => {
         const x = stand?.aufgaben?.[k];
-        return !!x && x.f <= 1 && Array.isArray(x.h) && x.h.length > 0;
+        return !!x && Array.isArray(x.h) && x.h.length > 0 && (x.h.at(-1) === 0 || x.f === 0);
       })
       : [];
     nachStrang.get(t.strang).themen.push({
