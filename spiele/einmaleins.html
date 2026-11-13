@@ -182,7 +182,20 @@ sperreTouch();
   let voice=null;
   function pickVoice(){ const vs=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang)); voice=vs.find(v=>/Anna|Petra|Helena|Marlene|Katja/i.test(v.name))||vs[0]||null; }
   if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
-  function say(text){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text.replace(/\d+/g,m=>W(+m))); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1.1; speechSynthesis.speak(u); }catch(e){} }
+  // Gibt ein Promise zurück, das endet, wenn der Satz gesprochen ist (spätestens nach geschätzter Sprechdauer).
+  function say(text){
+    if(!sound||!window.speechSynthesis) return Promise.resolve();
+    return new Promise(fertig=>{
+      try{
+        speechSynthesis.cancel();
+        const t=text.replace(/\d+/g,m=>W(+m)), u=new SpeechSynthesisUtterance(t);
+        u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1.1;
+        u.onend=fertig; u.onerror=fertig;
+        setTimeout(fertig, Math.min(4500, 600 + t.length*75));
+        speechSynthesis.speak(u);
+      }catch(e){ fertig(); }
+    });
+  }
 
   // ---------- Geometrie der Kette von n ----------
   // Stäbchen 1–5 laufen in Reihe 1 nach rechts, ein Bogen führt hinunter, Stäbchen 6–10 laufen in Reihe 2 zurück.
@@ -466,11 +479,11 @@ sperreTouch();
     await pfeilFliegt(String(p), stabEnde(a), {art: a===n ? "quadrat" : "normal"});
     eingabe=""; zeigeEingabe();
     F.hop(uni.svg,{hoehe:36,dauer:520});
-    say(`${gross(W(a))} mal ${W(n)} ist ${W(p)}.`);
+    const gesagt = say(`${gross(W(a))} mal ${W(n)} ist ${W(p)}.`);
     const r = vorschau ? {frei:null} : verbuche(save, a, n, {fehler, hilfe: fehler>=2, ms, heute:heute()});
     if(fehler) wieder.push({a, n, key:x.key, ab: rundeIdx + WIEDER_NACH + 1});
     persist();
-    await wait(RICHTIG_MS);
+    await Promise.all([wait(RICHTIG_MS), gesagt]);   // der Ergebnissatz wird nie abgeschnitten
     rundeIdx++;
     await weiter(r.frei);
   }
@@ -491,6 +504,8 @@ sperreTouch();
       wp = await pfeilFliegt(String(w), nachPerlen(w), {art:"falsch"});
     }
     wp.firstChild.classList.add("wackel");
+    const wx=+wp.dataset.x, ux=uni.x+UNI_W/2;
+    if(Math.abs(wx-ux) > 30) blick(wx > ux ? 1 : -1);        // verdutzt zum Pfeilchen schauen
     // Am Einhorn: das leere Pfeilchen „?“, wo die Sprünge enden
     pfeil("?", stabEnde(a), {art:"frage"});
     kopf(-14);
@@ -512,7 +527,8 @@ sperreTouch();
       return {a: ok?a:6, n: ok?nn:7, key: ok?`${a}x${nn}`:"6x7", kette: ok?nn:7, rest: 9};
     }
     if(params.has("fehler")) return {a:6, n:7, key:"6x7", kette:7, rest:9};
-    const wi = wieder.findIndex(e=>e.ab<=rundeIdx && e.key!==vorher);
+    const nachRunde = rundeIdx >= K.RUNDE;      // Runde voll: offene Wiedervorlagen sofort, keine Füllaufgaben
+    const wi = wieder.findIndex(e=>(nachRunde || e.ab<=rundeIdx) && e.key!==vorher);
     if(wi>=0){ const e=wieder.splice(wi,1)[0]; return {...e, kette:e.n, rest: e.n===kette ? rest-1 : 1}; }
     return naechsteAufgabe(save, {kette, rest, vorher, heute:heute()});
   }
@@ -545,7 +561,7 @@ sperreTouch();
     say(`${gross(W(x.a))} mal ${W(n)}`);
     t0=Date.now(); busy=false;
     if(params.has("fehler") && fehler===0){
-      await wait(900); for(const c of String(+params.get("fehler")||48)) drueck(+c); drueck("los");
+      await wait(900); const fz=params.get("fehler"); for(const c of (/^\d{1,3}$/.test(fz) ? fz : "48")) drueck(+c); drueck("los");
     }
   }
 
