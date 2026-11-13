@@ -1,6 +1,7 @@
 // <ls-hilfe spiel="einmaleins">
-// Hilfe-Knopf unten rechts im sicheren Feld (192 × 108 rem, mittig). Tippen löst das Ereignis „hilfe“ aus.
-// leuchte(): einmaliges ruhiges Aufleuchten (~1 s); bei reduced motion ein ruhiger Rahmen für 1 s.
+// Hilfe-Knopf (Nebenknopf) unten rechts im sicheren Feld (192 × 108 rem, mittig). Tippen löst „hilfe“ aus.
+// leuchte(): ein Sonnenring mit weichem Licht um den Knopf, einmal ~1 s (nie eine Füllung, nie in Schleife);
+// bei reduced motion steht der Sonnenring ruhig 1 s.
 
 import { GRUND_CSS, MASSE, definiere } from "./stil.js";
 import "./knopf.js";
@@ -12,7 +13,7 @@ const HILFE_CSS = `
   position: fixed;
   top: 0;
   bottom: 0;
-  left: max(0px, calc((100vw - 192rem) / 2));
+  left: max(0rem, calc((100vw - 192rem) / 2));
   width: min(100vw, 192rem);
   display: block;
   pointer-events: none;
@@ -20,21 +21,33 @@ const HILFE_CSS = `
 }
 .platz {
   position: absolute;
-  right: calc(${MASSE.rand}rem + env(safe-area-inset-right, 0px));
-  bottom: calc(${MASSE.rand}rem + env(safe-area-inset-bottom, 0px));
+  right: calc(${MASSE.rand}rem + env(safe-area-inset-right, 0rem));
+  bottom: calc(${MASSE.rand}rem + env(safe-area-inset-bottom, 0rem));
   width: ${MASSE.bedien}rem;
   height: ${MASSE.bedien}rem;
   border-radius: 50%;
   pointer-events: auto;
 }
 .platz ls-knopf { display: block; }
-.leuchtet { animation: leuchte ${LEUCHT_MS}ms ease-in-out 1; }
+/* Sonnenring wie der Fokusring der Knöpfe, dazu weiches Licht. */
+.platz::after {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * (var(--ls-kontur) + 1.1rem));
+  border: 0.8rem solid var(--ls-sonne);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.3rem var(--ls-tinte), 0 0 4rem 2rem rgba(255, 217, 90, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+.leuchtet::after { animation: leuchte ${LEUCHT_MS}ms ease-in-out 1; }
 @keyframes leuchte {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 214, 90, 0); }
-  50% { box-shadow: 0 0 0 1.6rem rgba(255, 214, 90, 0.85), 0 0 4rem 2rem rgba(255, 214, 90, 0.6); }
+  0% { opacity: 0; transform: scale(0.9); }
+  30%, 70% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .leuchtet { box-shadow: 0 0 0 0.8rem var(--ls-tinte); }
+  .leuchtet::after { opacity: 1; box-shadow: 0 0 0 0.3rem var(--ls-tinte); }
 }
 `;
 

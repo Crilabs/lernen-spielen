@@ -1,17 +1,81 @@
 // Gemeinsame Stil-Grundlage der Rahmen-Bausteine (Shadow DOM, nur rem).
-// 1rem = 1/108 der Bildhöhe.
+// 1rem = 1/108 der Bildhöhe. Farben nach der Farbwelt (docs/grundsaetze-bilder.md 6.2, docs/farbwelt.html).
 
-/** Maße in rem. */
-export const MASSE = { bedien: 11, haupt: 16, klein: 8, rand: 2.4, abstand: 2 };
+/**
+ * Maße in rem.
+ * bedien/haupt/klein: Knopfdurchmesser rund; pille/pilleHaupt: Höhe der Knöpfe mit Wort;
+ * breite: Mindestbreite mit Wort; fach: Kachel des Fachsymbols; leiste: Höhe der Kopfleiste.
+ */
+export const MASSE = {
+  bedien: 11,
+  haupt: 16,
+  klein: 8,
+  pille: 11,
+  pilleHaupt: 14,
+  breite: 24,
+  fach: 9,
+  rand: 2.4,
+  abstand: 2,
+  kontur: 0.3,
+  tiefe: 0.6,
+  einsinken: 0.3,
+  leiste: 15.8,
+};
 
-/** CSS für das Innere jedes Bausteins: Variablen, Grundknopf, Einsinken, reduced motion. */
+/** Grundton und Funktionsfarben der Hülle. */
+export const FARBE = {
+  tinte: "#3B2A6B",
+  tinteWeich: "#6B5C96",
+  papier: "#FFFCF7",
+  nebel: "#F4F0FA",
+  linie: "#E4DEF0",
+  naht: "#CFC4E3",
+  hauptSchatten: "#24184A",
+  sonne: "#FFD95A",
+  nacht: "#1F1B45",
+};
+
+/** Radien in rem: groß (Blase, Karten), normal (Kacheln), klein. */
+export const RADIUS = { gross: 4, normal: 2.6, klein: 1.6 };
+
+/**
+ * Fachfarben (Rahmen): Füllung (Kachel), Tief (Schrift), Tönung (Kopfleiste). Sachthemen haben keine.
+ * @type {Record<string, { name: string, fuellung: string, tief: string, toenung: string }>}
+ */
+export const FACH = {
+  mathe: { name: "Himbeere", fuellung: "#F06BB0", tief: "#B8327A", toenung: "#FFE6F2" },
+  grammatik: { name: "Minze", fuellung: "#3DB98F", tief: "#1B7656", toenung: "#DBF5EA" },
+  schreiben: { name: "Himmelblau", fuellung: "#4C9BD1", tief: "#25689C", toenung: "#DFF0FC" },
+  lesen: { name: "Honig", fuellung: "#F2B630", tief: "#8A5D05", toenung: "#FFF3D1" },
+  geometrie: { name: "Flieder", fuellung: "#8C6FE0", tief: "#5B3FB8", toenung: "#EEE8FF" },
+  sprechen: { name: "Aprikose", fuellung: "#F08A4B", tief: "#A44C16", toenung: "#FFEADD" },
+};
+
+/**
+ * CSS für das Innere jedes Bausteins: Farbwerte, Knopfformen, Einsinken, Sonnenring, reduced motion.
+ *
+ * Aufbau eines Knopfs: `.knopf` (button oder a) ist die Tippfläche, mindestens 11 rem; darin `.form`
+ * als sichtbare Gestalt (`.neben` oder `.haupt`, `.rund` oder `.pille`); darin `.zeichen` (Symbol über
+ * `img`, beim Hauptknopf zusätzlich die Variable `--bild`) und `.wort`. Nur was drückbar ist, hat einen Schatten.
+ */
 export const GRUND_CSS = `
 :host {
-  --ls-tinte: #3B2A6B;
-  --ls-papier: rgba(255, 255, 255, 0.9);
+  --ls-tinte: ${FARBE.tinte};
+  --ls-tinte-weich: ${FARBE.tinteWeich};
+  --ls-papier: ${FARBE.papier};
+  --ls-nebel: ${FARBE.nebel};
+  --ls-linie: ${FARBE.linie};
+  --ls-naht: ${FARBE.naht};
+  --ls-haupt-schatten: ${FARBE.hauptSchatten};
+  --ls-sonne: ${FARBE.sonne};
+  --ls-nacht: ${FARBE.nacht};
+  --ls-kontur: ${MASSE.kontur}rem;
+  --ls-radius-gross: ${RADIUS.gross}rem;
+  --ls-radius: ${RADIUS.normal}rem;
+  --ls-radius-klein: ${RADIUS.klein}rem;
   --ls-knopf: ${MASSE.bedien}rem;
-  --ls-schatten: 0 0.6rem 0 rgba(59, 42, 107, 0.15);
-  --ls-schatten-unten: 0 0.2rem 0 rgba(59, 42, 107, 0.15);
+  --ls-schatten: 0 ${MASSE.tiefe}rem 0 var(--ls-linie);
+  --ls-schatten-unten: 0 ${MASSE.tiefe - MASSE.einsinken}rem 0 var(--ls-linie);
   display: inline-block;
   color: var(--ls-tinte);
   font-family: "Andika", sans-serif;
@@ -19,39 +83,106 @@ export const GRUND_CSS = `
   line-height: 1;
 }
 :host([hidden]) { display: none; }
+
 .knopf {
   box-sizing: border-box;
-  width: var(--ls-knopf);
-  height: var(--ls-knopf);
-  padding: 2rem;
+  min-width: ${MASSE.bedien}rem;
+  min-height: ${MASSE.bedien}rem;
   margin: 0;
+  padding: 0;
   border: 0;
-  border-radius: 50%;
-  background: var(--ls-papier);
+  background: none;
   color: inherit;
   font: inherit;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--ls-schatten);
+  vertical-align: top;
+  text-decoration: none;
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
 }
-.knopf:active {
-  transform: translateY(0.3rem);
-  box-shadow: var(--ls-schatten-unten);
+.knopf:focus-visible { outline: none; }
+
+.form {
+  --schatten-farbe: var(--ls-linie);
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  box-shadow: 0 ${MASSE.tiefe}rem 0 var(--schatten-farbe);
+  font-weight: 700;
+  white-space: nowrap;
 }
-.knopf:focus-visible {
-  outline: 0.4rem solid var(--ls-tinte);
-  outline-offset: 0.4rem;
+.form.neben { background: var(--ls-papier); color: var(--ls-tinte); }
+.form.haupt { --schatten-farbe: var(--ls-haupt-schatten); background: var(--ls-tinte); color: var(--ls-papier); }
+.form.rund { width: var(--ls-knopf); height: var(--ls-knopf); padding: calc(var(--ls-knopf) * 0.17); border-radius: 50%; }
+.form.pille {
+  height: var(--ls-knopf);
+  min-width: max(${MASSE.breite}rem, var(--ls-breite, 0rem));
+  padding: 0 calc(var(--ls-knopf) * 0.36) 0 calc(var(--ls-knopf) * 0.26);
+  border-radius: 999rem;
+  font-size: calc(var(--ls-knopf) * 0.36);
 }
-.knopf img { width: 100%; height: 100%; display: block; pointer-events: none; }
-.knopf.gespiegelt img { transform: scaleX(-1); }
+.knopf:active .form {
+  transform: translateY(${MASSE.einsinken}rem);
+  box-shadow: 0 ${MASSE.tiefe - MASSE.einsinken}rem 0 var(--schatten-farbe);
+}
+
+/* Symbol: der Nebenknopf zeigt das Bild (img), wie es ist; der Hauptknopf zeigt es als Papier-Fläche
+   (Maske über --bild). Ein img statt eines Hintergrundbilds: WebKit malt ein Hintergrundbild, das in einer
+   verborgenen Ebene geladen wurde, sonst nicht nach. */
+.zeichen {
+  flex: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.zeichen img { display: block; width: 100%; height: 100%; -webkit-user-drag: none; }
+.pille .zeichen { width: calc(var(--ls-knopf) * 0.56); height: calc(var(--ls-knopf) * 0.56); }
+.haupt .zeichen {
+  background: var(--ls-papier);
+  -webkit-mask: var(--bild) center / contain no-repeat;
+  mask: var(--bild) center / contain no-repeat;
+}
+.haupt .zeichen img { visibility: hidden; }
+.zeichen[hidden], .wort[hidden] { display: none; }
+.gespiegelt .zeichen { transform: scaleX(-1); }
+.wort { display: block; line-height: 1; padding-bottom: 0.08em; }
+
+/* Sonnenring: Fokus (in ls-hilfe auch das Aufleuchten). Immer ein Ring, nie eine Fläche. */
+.form::after {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * (var(--ls-kontur) + 1.1rem));
+  border: 0.8rem solid var(--ls-sonne);
+  border-radius: 999rem;
+  box-shadow: 0 0 0 0.3rem var(--ls-tinte);
+  opacity: 0;
+  pointer-events: none;
+}
+.knopf:focus-visible .form::after { opacity: 1; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 `;
+
+/**
+ * Wert für die Variable `--bild` aus einer Bild-Adresse (einfache Anführungszeichen: passt in style="…").
+ * @param {string} href
+ * @returns {string}
+ */
+export function bild(href) {
+  return `url('${href}')`;
+}
 
 /**
  * Registriert einen Baustein, falls der Name noch frei ist.

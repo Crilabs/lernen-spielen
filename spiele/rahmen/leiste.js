@@ -1,96 +1,115 @@
-// <ls-leiste spiel="einmaleins" fach="mathe">
-// Feste Plätze oben: Haus (Alle Spiele) links, Fachsymbol rechts daneben, Ton an/aus rechts.
-// Steht fest im sicheren Feld (192 × 108 rem, mittig), 2,4 rem vom Rand.
+// <ls-leiste spiel="perlenbruecke" fach="mathe" titel="Perlenbrücke" thema="Die 7 zerlegen">
+// Kopfleiste (Rahmen-Schicht): ein Band in der Fach-Tönung oben über das sichere Feld (192 × 108 rem, mittig).
+// Links Haus (Alle Spiele, Nebenknopf), daneben das Fachsymbol als flache Kachel (nur Anzeige), dann der
+// Spielname in Fach-Tief und darunter leiser das Thema; rechts Ton an/aus (Nebenknopf).
+// Ohne bekanntes Fach: Band in Nebel, keine Kachel, Name in Tinte. `thema` darf sich zur Laufzeit ändern.
 
 import { ladeEinstellungen, einstellung, setzeEinstellung } from "../kern/einstellungen.js";
 import { sprich, stille } from "../kern/stimme.js";
 import { schonGesagt, merkeGesagt } from "../kern/sitzung.js";
 import { protokoll } from "../kern/protokoll.js";
-import { GRUND_CSS, MASSE, definiere } from "./stil.js";
+import { FACH, GRUND_CSS, MASSE, bild, definiere } from "./stil.js";
 import "./knopf.js";
 
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
 const HAUS_HREF = new URL("../index.html", import.meta.url).href;
 const HAUS_NAME = "Alle Spiele";
+/** Fächer mit eigenem Symbol in spiele/symbole/ (Sprechen hat noch keins). */
+const FACH_SYMBOLE = new Set(["mathe", "lesen", "schreiben", "grammatik", "geometrie"]);
+
+const FACH_CSS = Object.entries(FACH)
+  .map(([fach, f]) => `:host([fach="${fach}"]) { --fach-fuellung: ${f.fuellung}; --fach-tief: ${f.tief}; --fach-toenung: ${f.toenung}; }`)
+  .join("\n");
 
 const LEISTE_CSS = `
 :host {
+  --fach-fuellung: var(--ls-papier);
+  --fach-tief: var(--ls-tinte);
+  --fach-toenung: var(--ls-nebel);
   position: fixed;
   top: 0;
   bottom: 0;
-  left: max(0px, calc((100vw - 192rem) / 2));
+  left: max(0rem, calc((100vw - 192rem) / 2));
   width: min(100vw, 192rem);
   display: block;
   pointer-events: none;
   z-index: 50;
 }
-.feld {
+${FACH_CSS}
+.band {
   position: absolute;
-  inset: 0;
-  padding-top: calc(${MASSE.rand}rem + env(safe-area-inset-top, 0px));
-  padding-right: calc(${MASSE.rand}rem + env(safe-area-inset-right, 0px));
-  padding-left: calc(${MASSE.rand}rem + env(safe-area-inset-left, 0px));
+  top: 0;
+  left: 0;
+  right: 0;
   box-sizing: border-box;
-}
-.links {
-  position: absolute;
-  top: calc(${MASSE.rand}rem + env(safe-area-inset-top, 0px));
-  left: calc(${MASSE.rand}rem + env(safe-area-inset-left, 0px));
+  height: calc(${MASSE.leiste}rem + env(safe-area-inset-top, 0rem));
+  padding: calc(${MASSE.rand}rem + env(safe-area-inset-top, 0rem))
+    calc(${MASSE.rand}rem + env(safe-area-inset-right, 0rem)) ${MASSE.rand}rem
+    calc(${MASSE.rand}rem + env(safe-area-inset-left, 0rem));
   display: flex;
   align-items: center;
-  gap: ${MASSE.abstand}rem;
+  gap: ${MASSE.rand}rem;
+  background: var(--fach-toenung);
+  pointer-events: auto;
 }
-.rechts {
-  position: absolute;
-  top: calc(${MASSE.rand}rem + env(safe-area-inset-top, 0px));
-  right: calc(${MASSE.rand}rem + env(safe-area-inset-right, 0px));
-}
-.links > *, .rechts > * { pointer-events: auto; }
-a.haus {
+.fach {
+  flex: none;
   box-sizing: border-box;
-  width: ${MASSE.bedien}rem;
-  height: ${MASSE.bedien}rem;
+  width: ${MASSE.fach}rem;
+  height: ${MASSE.fach}rem;
+  padding: 1.5rem;
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius);
+  background: var(--fach-fuellung);
   display: block;
-  color: inherit;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
 }
-a.haus .kreis {
-  box-sizing: border-box;
+.fach[hidden] { display: none; }
+.fach i {
+  display: block;
   width: 100%;
   height: 100%;
-  padding: 2rem;
-  border-radius: 50%;
-  background: var(--ls-papier);
-  box-shadow: var(--ls-schatten);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: var(--ls-tinte);
+  -webkit-mask: var(--bild) center / contain no-repeat;
+  mask: var(--bild) center / contain no-repeat;
 }
-a.haus:active .kreis { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
-a.haus:focus-visible { outline: none; }
-a.haus:focus-visible .kreis { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.4rem; }
-a.haus img { width: 100%; height: 100%; display: block; pointer-events: none; }
-.fach { width: ${MASSE.klein}rem; height: ${MASSE.klein}rem; display: block; pointer-events: none; }
-.fach[hidden] { display: none; }
+.titel {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+}
+.name, .thema {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.name { font-size: 5.2rem; line-height: 1.2; font-weight: 700; color: var(--fach-tief); }
+.thema { font-size: 3.4rem; line-height: 1.3; font-weight: 400; color: var(--ls-tinte-weich); }
+.name[hidden], .thema[hidden] { display: none; }
+.ton { margin-left: auto; flex: none; }
 `;
 
 export class LsLeiste extends HTMLElement {
-  static observedAttributes = ["spiel", "fach"];
+  static observedAttributes = ["spiel", "fach", "titel", "thema"];
 
   constructor() {
     super();
     const wurzel = this.attachShadow({ mode: "open" });
     wurzel.innerHTML = `<style>${GRUND_CSS}${LEISTE_CSS}</style>
-      <div class="feld">
-        <div class="links">
-          <a class="haus" href="${HAUS_HREF}" aria-label="${HAUS_NAME}"><span class="kreis"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span></a>
-          <img class="fach" alt="" draggable="false" hidden>
-        </div>
-        <div class="rechts"><ls-knopf class="tonknopf" stumm></ls-knopf></div>
+      <div class="band">
+        <a class="knopf haus" href="${HAUS_HREF}" aria-label="${HAUS_NAME}" draggable="false"><span class="form neben rund"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span></span></a>
+        <span class="fach" hidden><i></i></span>
+        <div class="titel"><p class="name" hidden></p><p class="thema" hidden></p></div>
+        <ls-knopf class="ton tonknopf" stumm></ls-knopf>
       </div>`;
     this.haus = /** @type {HTMLAnchorElement} */ (wurzel.querySelector("a.haus"));
-    this.fachBild = /** @type {HTMLImageElement} */ (wurzel.querySelector("img.fach"));
+    this.fachKachel = /** @type {HTMLElement} */ (wurzel.querySelector(".fach"));
+    this.fachZeichen = /** @type {HTMLElement} */ (wurzel.querySelector(".fach i"));
+    this.nameFeld = /** @type {HTMLElement} */ (wurzel.querySelector(".name"));
+    this.themaFeld = /** @type {HTMLElement} */ (wurzel.querySelector(".thema"));
     this.tonKnopf = /** @type {HTMLElement} */ (wurzel.querySelector(".tonknopf"));
     this._ton = true;
     this._start = false;
@@ -109,9 +128,10 @@ export class LsLeiste extends HTMLElement {
     }
   }
 
-  attributeChangedCallback() {
-    this.zeichne();
-    if (this._start) this.leseTon();
+  /** @param {string} name */
+  attributeChangedCallback(name) {
+    if (name === "spiel" && this._start) this.leseTon();
+    else this.zeichne();
   }
 
   /** @returns {boolean} */
@@ -177,14 +197,20 @@ export class LsLeiste extends HTMLElement {
 
   zeichne() {
     const spiel = this.getAttribute("spiel");
-    const fach = this.getAttribute("fach");
-    if (fach) {
-      this.fachBild.src = SYMBOLE + fach.replace(/[^a-z]/g, "") + ".svg";
-      this.fachBild.hidden = false;
+    const fach = (this.getAttribute("fach") ?? "").replace(/[^a-z]/g, "");
+    if (FACH_SYMBOLE.has(fach)) {
+      this.fachZeichen.style.setProperty("--bild", bild(SYMBOLE + fach + ".svg"));
+      this.fachKachel.hidden = false;
     } else {
-      this.fachBild.removeAttribute("src");
-      this.fachBild.hidden = true;
+      this.fachZeichen.style.removeProperty("--bild");
+      this.fachKachel.hidden = true;
     }
+    const titel = this.getAttribute("titel") ?? "";
+    const thema = this.getAttribute("thema") ?? "";
+    this.nameFeld.textContent = titel;
+    this.nameFeld.hidden = !titel;
+    this.themaFeld.textContent = thema;
+    this.themaFeld.hidden = !thema;
     if (spiel) this.tonKnopf.setAttribute("spiel", spiel);
     this.tonKnopf.setAttribute("symbol", this._ton ? "ton-an.svg" : "ton-aus.svg");
     this.tonKnopf.setAttribute("name", this._ton ? "Ton an" : "Ton aus");

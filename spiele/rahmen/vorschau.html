@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rahmen-Bausteine</title>
+<link rel="stylesheet" href="../schrift/schrift.css">
+<style>
+  /* Vorschau der Rahmen-Bausteine (erste Fassung; Task 7 ergänzt Tastatur, Protokoll und Prüfskript).
+     Adresse: vorschau.html?fach=mathe&titel=Perlenbrücke&thema=Die%207%20zerlegen  (&pause, &leuchte) */
+  html { font-size: calc(100dvh / 108); }
+  body {
+    margin: 0;
+    height: 100dvh;
+    overflow: hidden;
+    font-family: "Andika", sans-serif;
+    color: #3B2A6B;
+    /* Welt-Schicht: der einzige Verlauf auf dem Bildschirm. */
+    background: linear-gradient(#CFEFFF, #EAF7FF 60%);
+  }
+  .huegel { position: fixed; left: 0; right: 0; bottom: 0; height: 34rem; }
+  .buehne { position: fixed; inset: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem); }
+  ls-blase { position: absolute; top: 19rem; left: 50%; transform: translateX(-50%); width: min(110rem, calc(100% - 30rem)); }
+  .matte {
+    position: absolute; top: 40rem; left: 50%; transform: translateX(-50%);
+    width: min(120rem, calc(100% - 34rem)); height: 44rem; box-sizing: border-box;
+    background: #FFFCF7; border: 0.3rem solid #3B2A6B; border-radius: 4rem; padding: 2rem;
+  }
+  .matte::before { content: ""; position: absolute; inset: 1.6rem; border: 0.25rem dashed #CFC4E3; border-radius: 2.8rem; }
+  .matte ls-knopf { position: absolute; right: 4rem; bottom: 4rem; }
+  .matte .aufgabe { position: relative; margin: 2.4rem 3rem; font-size: 4.4rem; font-weight: 700; }
+  .pausen-inhalt { display: grid; gap: 2rem; justify-items: center; font-size: 4rem; text-align: center; max-width: 90rem; }
+  .pausen-inhalt img { width: 22rem; height: 22rem; }
+</style>
+</head>
+<body>
+<svg class="huegel" viewBox="0 0 1920 340" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 120 C360 40 660 100 960 80 C1290 58 1560 20 1920 70 V340 H0Z" fill="#BFE3C9"/>
+  <path d="M0 200 C480 150 900 210 1260 180 C1560 156 1770 170 1920 166 V340 H0Z" fill="#9ED8A8"/>
+</svg>
+<ls-leiste id="leiste" spiel="vorschau"></ls-leiste>
+<div class="buehne">
+  <ls-blase id="blase"></ls-blase>
+  <div class="matte">
+    <div class="aufgabe">7 sind 5 und …</div>
+    <ls-knopf art="haupt" symbol="zurueck.svg" wort="Weiter" gespiegelt></ls-knopf>
+  </div>
+</div>
+<ls-hilfe id="hilfe"></ls-hilfe>
+<ls-pause id="pause">
+  <div class="pausen-inhalt">
+    <img src="../symbole/perlenbruecke.svg" alt="">
+    <div>Die Brücke steht. Ein Perlenstäbchen mit sieben Perlen ist so lang wie eins mit fünf und eins mit zwei.</div>
+  </div>
+</ls-pause>
+<script type="module">
+  import "./leiste.js";
+  import "./blase.js";
+  import "./hilfe.js";
+  import "./pause.js";
+  const q = new URLSearchParams(location.search);
+  const leiste = document.getElementById("leiste");
+  for (const a of ["fach", "titel", "thema"]) if (q.get(a)) leiste.setAttribute(a, q.get(a));
+  document.getElementById("blase").sage("Welches Stäbchen passt an die Fünf, damit es sieben werden?", { sprechen: false });
+  if (q.has("leuchte")) document.getElementById("hilfe").leuchte();
+  if (q.has("pause")) document.getElementById("pause").zeige();
+  if (q.has("leer")) document.querySelector(".pausen-inhalt").remove();
+</script>
+</body>
+</html>

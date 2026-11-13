@@ -1,5 +1,7 @@
 // <ls-blase spiel="einmaleins">
-// Sprechblase: Text links, kleiner „Noch mal hören“-Knopf rechts. Das Spiel platziert den Host per CSS.
+// Sprechblase des Erzählers: Papier mit Tinte-Kontur, großer Radius, ohne Zipfel (gehört keiner Figur).
+// Text links (Andika 3,6 rem, Tinte), kleiner Nebenknopf „Noch mal hören“ rechts. Flach: kein Schatten.
+// Das Spiel platziert den Host per CSS.
 // Spiel-Kennung wie bei ls-knopf (eigenes Attribut, Host-Kette, sonst ls-leiste); ohne Kennung ist der Ton an.
 
 import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
@@ -14,15 +16,16 @@ const BLASE_CSS = `
   display: flex;
   align-items: center;
   gap: ${MASSE.abstand}rem;
-  padding: 2rem 2.4rem;
-  border-radius: 4rem;
+  min-height: 15rem;
+  padding: 1.6rem 1.6rem 1.6rem 4rem;
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-gross);
   background: var(--ls-papier);
-  box-shadow: var(--ls-schatten);
 }
 .text {
   flex: 1 1 auto;
   min-width: 0;
-  font-size: 3.2rem;
+  font-size: 3.6rem;
   line-height: 1.3;
   overflow-wrap: anywhere;
 }
@@ -46,6 +49,11 @@ export class LsBlase extends HTMLElement {
     this.knopf.addEventListener("click", () => {
       if (this._text) this.spricht(this._text, this._tempo);
     });
+  }
+
+  /** @returns {string} der zuletzt gesagte Text */
+  get text() {
+    return this._text;
   }
 
   connectedCallback() {
