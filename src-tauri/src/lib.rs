@@ -20,13 +20,28 @@ fn lernstand_dir(app: &tauri::AppHandle) -> Result<std::path::PathBuf, String> {
 }
 
 #[tauri::command]
-fn lernstand_lesen(app: tauri::AppHandle, spiel: String) -> Result<Option<String>, String> {
-    lernstand::lesen(&lernstand_dir(&app)?, &spiel)
+fn lernstand_lesen(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+    spiel: String,
+) -> Result<Option<String>, String> {
+    lernstand::lesen(&lernstand_dir(&app)?, profil.as_deref(), &spiel)
 }
 
 #[tauri::command]
-fn lernstand_schreiben(app: tauri::AppHandle, spiel: String, daten: String) -> Result<(), String> {
-    lernstand::schreiben(&lernstand_dir(&app)?, &spiel, &daten)
+fn lernstand_schreiben(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+    spiel: String,
+    daten: String,
+) -> Result<(), String> {
+    lernstand::schreiben(&lernstand_dir(&app)?, profil.as_deref(), &spiel, &daten)
+}
+
+/// Betriebssystem der App: "macos", "windows", "linux", "android" oder "ios".
+#[tauri::command]
+fn plattform() -> String {
+    std::env::consts::OS.to_string()
 }
 
 /// Vom Elternbereich vor „App beenden“ und vor der Update-Installation aufgerufen
@@ -156,6 +171,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             lernstand_lesen,
             lernstand_schreiben,
+            plattform,
             kiosk_pause
         ])
         .on_window_event(wachhund)

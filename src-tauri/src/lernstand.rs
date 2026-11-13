@@ -36,8 +36,20 @@ fn gueltigen_inhalt(datei: &Path) -> std::io::Result<Option<String>> {
     }
 }
 
-pub fn lesen(dir: &Path, spiel: &str) -> Result<Option<String>, String> {
+/// Ordner für Profil (`dir/<profil>/`) oder Gerät (`dir/`). Kein Rückgriff dazwischen.
+fn ordner(dir: &Path, profil: Option<&str>) -> Result<PathBuf, String> {
+    match profil {
+        Some(p) => {
+            pruefe_id(p)?;
+            Ok(dir.join(p))
+        }
+        None => Ok(dir.to_path_buf()),
+    }
+}
+
+pub fn lesen(dir: &Path, profil: Option<&str>, spiel: &str) -> Result<Option<String>, String> {
     pruefe_id(spiel)?;
+    let dir = &ordner(dir, profil)?;
     let fehler = |e: std::io::Error| format!("Lernstand {spiel} nicht lesbar: {e}");
     if let Some(t) = gueltigen_inhalt(&pfad(dir, spiel, "")).map_err(fehler)? {
         return Ok(Some(t));
@@ -45,8 +57,9 @@ pub fn lesen(dir: &Path, spiel: &str) -> Result<Option<String>, String> {
     gueltigen_inhalt(&pfad(dir, spiel, ".bak")).map_err(fehler)
 }
 
-pub fn schreiben(dir: &Path, spiel: &str, daten: &str) -> Result<(), String> {
+pub fn schreiben(dir: &Path, profil: Option<&str>, spiel: &str, daten: &str) -> Result<(), String> {
     pruefe_id(spiel)?;
+    let dir = &ordner(dir, profil)?;
     if !ist_gueltig(daten) {
         return Err("Daten sind kein gültiges JSON".to_string());
     }
@@ -81,9 +94,9 @@ mod tests {
     #[test]
     fn schreiben_dann_lesen() {
         let d = tempdir().unwrap();
-        schreiben(d.path(), "wimmelbild", r#"{"a":1}"#).unwrap();
+        schreiben(d.path(), None, "wimmelbild", r#"{"a":1}"#).unwrap();
         assert_eq!(
-            lesen(d.path(), "wimmelbild").unwrap(),
+            lesen(d.path(), None, "wimmelbild").unwrap(),
             Some(r#"{"a":1}"#.to_string())
         );
     }
@@ -91,8 +104,8 @@ mod tests {
     #[test]
     fn zweites_schreiben_legt_bak_an() {
         let d = tempdir().unwrap();
-        schreiben(d.path(), "wimmelbild", r#"{"a":1}"#).unwrap();
-        schreiben(d.path(), "wimmelbild", r#"{"a":2}"#).unwrap();
+        schreiben(d.path(), None, "wimmelbild", r#"{"a":1}"#).unwrap();
+        schreiben(d.path(), None, "wimmelbild", r#"{"a":2}"#).unwrap();
         assert_eq!(
             fs::read_to_string(d.path().join("wimmelbild.json")).unwrap(),
             r#"{"a":2}"#
@@ -108,7 +121,7 @@ mod tests {
         let d = tempdir().unwrap();
         fs::write(d.path().join("wimmelbild.json"), r#"{"a":"#).unwrap();
         fs::write(d.path().join("wimmelbild.json.bak"), r#"{"a":1}"#).unwrap();
-        schreiben(d.path(), "wimmelbild", r#"{"a":2}"#).unwrap();
+        schreiben(d.path(), None, "wimmelbild", r#"{"a":2}"#).unwrap();
         assert_eq!(
             fs::read_to_string(d.path().join("wimmelbild.json")).unwrap(),
             r#"{"a":2}"#
@@ -125,7 +138,7 @@ mod tests {
         fs::write(d.path().join("wimmelbild.json"), "").unwrap();
         fs::write(d.path().join("wimmelbild.json.bak"), r#"{"a":1}"#).unwrap();
         assert_eq!(
-            lesen(d.path(), "wimmelbild").unwrap(),
+            lesen(d.path(), None, "wimmelbild").unwrap(),
             Some(r#"{"a":1}"#.to_string())
         );
     }
@@ -135,21 +148,21 @@ mod tests {
         let d = tempdir().unwrap();
         fs::write(d.path().join("wimmelbild.json"), r#"{"a":"#).unwrap();
         fs::write(d.path().join("wimmelbild.json.bak"), r#"{"a":"#).unwrap();
-        assert_eq!(lesen(d.path(), "wimmelbild").unwrap(), None);
+        assert_eq!(lesen(d.path(), None, "wimmelbild").unwrap(), None);
     }
 
     #[test]
     fn unbekanntes_spiel_ist_none() {
         let d = tempdir().unwrap();
-        assert_eq!(lesen(d.path(), "neu").unwrap(), None);
+        assert_eq!(lesen(d.path(), None, "neu").unwrap(), None);
     }
 
     #[test]
     fn ungueltige_id_wird_abgelehnt() {
         let d = tempdir().unwrap();
         for id in ["../x", "A B"] {
-            assert!(lesen(d.path(), id).is_err());
-            assert!(schreiben(d.path(), id, "{}").is_err());
+            assert!(lesen(d.path(), None, id).is_err());
+            assert!(schreiben(d.path(), None, id, "{}").is_err());
         }
     }
 
@@ -158,8 +171,8 @@ mod tests {
         let d = tempdir().unwrap();
         fs::create_dir(d.path().join("wimmelbild.json")).unwrap();
         fs::write(d.path().join("wimmelbild.json.bak"), r#"{"a":1}"#).unwrap();
-        assert!(lesen(d.path(), "wimmelbild").is_err());
-        assert!(schreiben(d.path(), "wimmelbild", r#"{"a":2}"#).is_err());
+        assert!(lesen(d.path(), None, "wimmelbild").is_err());
+        assert!(schreiben(d.path(), None, "wimmelbild", r#"{"a":2}"#).is_err());
         assert!(d.path().join("wimmelbild.json").is_dir());
         assert_eq!(
             fs::read_to_string(d.path().join("wimmelbild.json.bak")).unwrap(),
@@ -174,7 +187,7 @@ mod tests {
         fs::write(d.path().join("wimmelbild.json"), [0xff, 0xfe, 0x00]).unwrap();
         fs::write(d.path().join("wimmelbild.json.bak"), r#"{"a":1}"#).unwrap();
         assert_eq!(
-            lesen(d.path(), "wimmelbild").unwrap(),
+            lesen(d.path(), None, "wimmelbild").unwrap(),
             Some(r#"{"a":1}"#.to_string())
         );
     }
@@ -191,8 +204,8 @@ mod tests {
         if fs::read_to_string(&haupt).is_ok() {
             return; // läuft als root, Rechte greifen nicht
         }
-        assert!(lesen(d.path(), "wimmelbild").is_err());
-        assert!(schreiben(d.path(), "wimmelbild", r#"{"neu":1}"#).is_err());
+        assert!(lesen(d.path(), None, "wimmelbild").is_err());
+        assert!(schreiben(d.path(), None, "wimmelbild", r#"{"neu":1}"#).is_err());
         fs::set_permissions(&haupt, fs::Permissions::from_mode(0o644)).unwrap();
         assert_eq!(fs::read_to_string(&haupt).unwrap(), r#"{"echt":1}"#);
         assert_eq!(
@@ -204,8 +217,34 @@ mod tests {
     #[test]
     fn kaputte_daten_werden_nicht_geschrieben() {
         let d = tempdir().unwrap();
-        assert!(schreiben(d.path(), "x", "{").is_err());
+        assert!(schreiben(d.path(), None, "x", "{").is_err());
         assert!(!d.path().join("x.json").exists());
         assert!(!d.path().join("x.json.tmp").exists());
+    }
+
+    #[test]
+    fn profil_und_geraet_getrennt() {
+        let d = tempdir().unwrap();
+        schreiben(d.path(), Some("kind-1"), "x", r#"{"a":1}"#).unwrap();
+        assert!(d.path().join("kind-1").join("x.json").exists());
+        assert!(!d.path().join("x.json").exists());
+        assert_eq!(lesen(d.path(), None, "x").unwrap(), None);
+        assert_eq!(
+            lesen(d.path(), Some("kind-1"), "x").unwrap(),
+            Some(r#"{"a":1}"#.to_string())
+        );
+        schreiben(d.path(), None, "eltern", r#"{"b":2}"#).unwrap();
+        assert!(d.path().join("eltern.json").exists());
+        assert!(!d.path().join("kind-1").join("eltern.json").exists());
+        assert_eq!(lesen(d.path(), Some("kind-1"), "eltern").unwrap(), None);
+    }
+
+    #[test]
+    fn ungueltiges_profil_wird_abgelehnt() {
+        let d = tempdir().unwrap();
+        for p in ["../x", "A B", ""] {
+            assert!(lesen(d.path(), Some(p), "x").is_err());
+            assert!(schreiben(d.path(), Some(p), "x", "{}").is_err());
+        }
     }
 }
