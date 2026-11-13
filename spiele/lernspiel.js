@@ -48,15 +48,30 @@ export function protokoll(text) {
 
 // --- Speichern ---------------------------------------------------------
 
+// Spiele, deren Lernstand in der App nicht gelesen werden konnte. Für sie wird
+// nichts gespeichert, damit der Standard nicht den echten Lernstand überschreibt.
+const gesperrt = new Set();
+
 export async function lade(spiel, standard) {
   const kopie = () => structuredClone(standard);
+  let roh;
   try {
-    let roh;
     if (istApp()) {
       roh = await window.__TAURI__.core.invoke("lernstand_lesen", { spiel });
     } else {
       roh = ls()?.getItem("lernstand-" + spiel);
     }
+  } catch (e) {
+    if (istApp() && !gesperrt.has(spiel)) {
+      gesperrt.add(spiel);
+      protokoll(`lade ${spiel}: ${e?.message ?? e} – Speichern für dieses Spiel gesperrt`);
+    } else if (!istApp()) {
+      protokoll(`lade ${spiel}: ${e?.message ?? e}`);
+    }
+    return kopie();
+  }
+  gesperrt.delete(spiel);
+  try {
     if (roh == null) return kopie();
     const daten = JSON.parse(roh);
     if (daten === null || typeof daten !== "object" || Array.isArray(daten)) return kopie();
@@ -68,9 +83,9 @@ export async function lade(spiel, standard) {
 }
 
 const ausstehend = new Map(); // spiel -> { daten, timer }
+const ketten = new Map(); // spiel -> Promise des letzten Schreibvorgangs
 
-async function schreibe(spiel, daten) {
-  const json = JSON.stringify(daten);
+async function schreibeJetzt(spiel, json) {
   try {
     if (istApp()) {
       await window.__TAURI__.core.invoke("lernstand_schreiben", { spiel, daten: json });
@@ -82,6 +97,17 @@ async function schreibe(spiel, daten) {
   }
 }
 
+// Schreibvorgänge je Spiel nacheinander, damit ein älterer Stand nie einen neueren überholt.
+function schreibe(spiel, daten) {
+  if (gesperrt.has(spiel)) return Promise.resolve();
+  const json = JSON.stringify(daten);
+  const vorher = ketten.get(spiel);
+  const jetzt = vorher ? vorher.then(() => schreibeJetzt(spiel, json)) : schreibeJetzt(spiel, json);
+  ketten.set(spiel, jetzt);
+  jetzt.then(() => { if (ketten.get(spiel) === jetzt) ketten.delete(spiel); });
+  return jetzt;
+}
+
 function ausfuehren(spiel) {
   const eintrag = ausstehend.get(spiel);
   if (!eintrag) return Promise.resolve();
@@ -91,6 +117,7 @@ function ausfuehren(spiel) {
 }
 
 export function speichere(spiel, daten) {
+  if (gesperrt.has(spiel)) return;
   const alt = ausstehend.get(spiel);
   if (alt) clearTimeout(alt.timer);
   const timer = setTimeout(() => ausfuehren(spiel), VERZOEGERUNG_MS);
@@ -99,6 +126,30 @@ export function speichere(spiel, daten) {
 
 export async function sofortSpeichern() {
   await Promise.all([...ausstehend.keys()].map(ausfuehren));
+  await Promise.all([...ketten.values()]);
+}
+
+function hatUngespeichertes() {
+  return ausstehend.size > 0 || ketten.size > 0;
+}
+
+// Tipp auf einen Link der eigenen App (z. B. Haus): erst fertig speichern, dann wechseln.
+export function linkKlick(e) {
+  if (e.defaultPrevented || e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  if (!hatUngespeichertes()) return;
+  const t = e.target;
+  const el = t?.nodeType === 3 ? t.parentElement : t;
+  const a = el?.closest?.("a[href]");
+  if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
+  const innen = el.closest("button, [role=button]");
+  if (innen && a.contains(innen)) return;
+  const hier = globalThis.location;
+  let ziel;
+  try { ziel = new URL(a.href, hier?.href); } catch { return; }
+  if (!hier || ziel.origin !== hier.origin) return;
+  if (ziel.hash && ziel.pathname === hier.pathname && ziel.search === hier.search) return;
+  e.preventDefault();
+  return sofortSpeichern().then(() => { hier.href = ziel.href; });
 }
 
 // --- Lernfortschritt ---------------------------------------------------
@@ -136,6 +187,7 @@ if (w?.addEventListener) {
   w.addEventListener("unhandledrejection", (e) => protokoll(`Promise: ${e.reason?.message ?? e.reason}`));
 }
 if (globalThis.document?.addEventListener) {
+  globalThis.document.addEventListener("click", linkKlick, true);
   globalThis.document.addEventListener("visibilitychange", () => {
     if (globalThis.document.visibilityState === "hidden") sofortSpeichern();
   });

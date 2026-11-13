@@ -108,3 +108,95 @@ test("lade liefert tiefe Kopie", async () => {
   assert.equal(r2.a.b, 1);
   assert.notEqual(r1.a, r2.a);
 });
+
+test("lade-Fehler sperrt Speichern für dieses Spiel", async () => {
+  mock.timers.enable({ apis: ["setTimeout"] });
+  aufrufe = [];
+  globalThis.window.__TAURI__ = {
+    core: {
+      invoke: async (befehl, args) => {
+        aufrufe.push([befehl, args]);
+        if (befehl === "lernstand_lesen" && args.spiel === "gesperrt") throw new Error("Zugriff verweigert");
+        return befehl === "lernstand_lesen" ? null : undefined;
+      },
+    },
+  };
+  assert.deepEqual(await L.lade("gesperrt", { a: 1 }), { a: 1 });
+  await L.lade("gesperrt", { a: 1 });
+  assert.equal(L.protokollLesen().filter((z) => z.includes("lade gesperrt")).length, 1);
+  L.speichere("gesperrt", { a: 2 });
+  mock.timers.tick(1000);
+  await L.sofortSpeichern();
+  assert.equal(aufrufe.filter(([b]) => b === "lernstand_schreiben").length, 0);
+  // Andere Spiele speichern weiter.
+  await L.lade("frei", {});
+  L.speichere("frei", { a: 3 });
+  await L.sofortSpeichern();
+  assert.deepEqual(aufrufe.filter(([b]) => b === "lernstand_schreiben"), [
+    ["lernstand_schreiben", { spiel: "frei", daten: '{"a":3}' }],
+  ]);
+});
+
+test("Schreibvorgänge eines Spiels bleiben in Reihenfolge", async () => {
+  const fertig = [];
+  const offen = [];
+  globalThis.window.__TAURI__ = {
+    core: {
+      invoke: (befehl, args) => {
+        if (befehl !== "lernstand_schreiben") return Promise.resolve(null);
+        return new Promise((ok) => offen.push(() => { fertig.push(args.daten); ok(); }));
+      },
+    },
+  };
+  L.speichere("reihe", { n: 1 });
+  const erst = L.sofortSpeichern();
+  L.speichere("reihe", { n: 2 });
+  const zweit = L.sofortSpeichern();
+  await new Promise((r) => setImmediate(r));
+  // Der zweite Aufruf darf erst starten, wenn der erste fertig ist.
+  assert.equal(offen.length, 1);
+  offen.shift()();
+  await new Promise((r) => setImmediate(r));
+  assert.equal(offen.length, 1);
+  offen.shift()();
+  await Promise.all([erst, zweit]);
+  assert.deepEqual(fertig, ['{"n":1}', '{"n":2}']);
+});
+
+test("sofortSpeichern wartet auf laufende Schreibvorgänge", async () => {
+  let loslassen;
+  globalThis.window.__TAURI__ = {
+    core: { invoke: () => new Promise((ok) => { loslassen = ok; }) },
+  };
+  L.speichere("laeuft", { n: 1 });
+  L.sofortSpeichern();
+  let fertig = false;
+  const p = L.sofortSpeichern().then(() => { fertig = true; });
+  await new Promise((r) => setImmediate(r));
+  assert.equal(fertig, false);
+  loslassen();
+  await p;
+  assert.equal(fertig, true);
+});
+
+test("Link-Tipp speichert erst und wechselt dann die Seite", async () => {
+  const geschrieben = [];
+  globalThis.window.__TAURI__ = {
+    core: { invoke: async (b, args) => { if (b === "lernstand_schreiben") geschrieben.push(args.daten); } },
+  };
+  const ort = { href: "http://tauri.localhost/wimmelbild.html", origin: "http://tauri.localhost", pathname: "/wimmelbild.html", search: "" };
+  globalThis.location = ort;
+  const a = { href: "http://tauri.localhost/index.html", target: "", hasAttribute: () => false, contains: () => false };
+  const ziel = { nodeType: 1, closest: (sel) => (sel === "a[href]" ? a : null) };
+  let verhindert = false;
+  const ereignis = { target: ziel, button: 0, defaultPrevented: false, preventDefault: () => { verhindert = true; } };
+  // Nichts zu speichern: Link funktioniert normal.
+  assert.equal(L.linkKlick(ereignis), undefined);
+  assert.equal(verhindert, false);
+  L.speichere("link", { letzte: "Antwort" });
+  await L.linkKlick(ereignis);
+  assert.equal(verhindert, true);
+  assert.deepEqual(geschrieben, ['{"letzte":"Antwort"}']);
+  assert.equal(ort.href, "http://tauri.localhost/index.html");
+  delete globalThis.location;
+});

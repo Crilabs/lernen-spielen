@@ -1,7 +1,7 @@
 //! Lernstand-Dateien: je Spiel eine JSON-Datei mit `.bak`-Sicherung.
 
 use std::fs::{self, File};
-use std::io::Write;
+use std::io::{ErrorKind, Write};
 use std::path::{Path, PathBuf};
 
 fn pruefe_id(spiel: &str) -> Result<(), String> {
@@ -24,14 +24,25 @@ fn pfad(dir: &Path, spiel: &str, endung: &str) -> PathBuf {
     dir.join(format!("{spiel}.json{endung}"))
 }
 
-fn gueltigen_inhalt(datei: &Path) -> Option<String> {
-    fs::read_to_string(datei).ok().filter(|t| ist_gueltig(t))
+/// Inhalt einer Lernstand-Datei, wenn sie gültiges JSON enthält.
+/// `Ok(None)`: Datei fehlt oder ist kaputt (kein JSON, kein UTF-8).
+/// `Err`: Datei ist da, lässt sich aber nicht lesen (gesperrt, keine Rechte, …).
+/// Dann darf niemand so tun, als gäbe es keinen Lernstand.
+fn gueltigen_inhalt(datei: &Path) -> std::io::Result<Option<String>> {
+    match fs::read_to_string(datei) {
+        Ok(t) => Ok(Some(t).filter(|t| ist_gueltig(t))),
+        Err(e) if matches!(e.kind(), ErrorKind::NotFound | ErrorKind::InvalidData) => Ok(None),
+        Err(e) => Err(e),
+    }
 }
 
 pub fn lesen(dir: &Path, spiel: &str) -> Result<Option<String>, String> {
     pruefe_id(spiel)?;
-    Ok(gueltigen_inhalt(&pfad(dir, spiel, ""))
-        .or_else(|| gueltigen_inhalt(&pfad(dir, spiel, ".bak"))))
+    let fehler = |e: std::io::Error| format!("Lernstand {spiel} nicht lesbar: {e}");
+    if let Some(t) = gueltigen_inhalt(&pfad(dir, spiel, "")).map_err(fehler)? {
+        return Ok(Some(t));
+    }
+    gueltigen_inhalt(&pfad(dir, spiel, ".bak")).map_err(fehler)
 }
 
 pub fn schreiben(dir: &Path, spiel: &str, daten: &str) -> Result<(), String> {
@@ -43,11 +54,14 @@ pub fn schreiben(dir: &Path, spiel: &str, daten: &str) -> Result<(), String> {
     fs::create_dir_all(dir).map_err(fehler)?;
     let haupt = pfad(dir, spiel, "");
     let tmp = pfad(dir, spiel, ".tmp");
+    // Lässt sich die bisherige Hauptdatei nicht lesen, nichts anfassen:
+    // sonst würde ein echter Lernstand überschrieben.
+    let haupt_gueltig = gueltigen_inhalt(&haupt).map_err(fehler)?.is_some();
     let schreib = || -> std::io::Result<()> {
         let mut f = File::create(&tmp)?;
         f.write_all(daten.as_bytes())?;
         f.sync_all()?;
-        if gueltigen_inhalt(&haupt).is_some() {
+        if haupt_gueltig {
             fs::rename(&haupt, pfad(dir, spiel, ".bak"))?;
         }
         fs::rename(&tmp, &haupt)
@@ -137,6 +151,54 @@ mod tests {
             assert!(lesen(d.path(), id).is_err());
             assert!(schreiben(d.path(), id, "{}").is_err());
         }
+    }
+
+    #[test]
+    fn verzeichnis_statt_datei_ist_fehler() {
+        let d = tempdir().unwrap();
+        fs::create_dir(d.path().join("wimmelbild.json")).unwrap();
+        fs::write(d.path().join("wimmelbild.json.bak"), r#"{"a":1}"#).unwrap();
+        assert!(lesen(d.path(), "wimmelbild").is_err());
+        assert!(schreiben(d.path(), "wimmelbild", r#"{"a":2}"#).is_err());
+        assert!(d.path().join("wimmelbild.json").is_dir());
+        assert_eq!(
+            fs::read_to_string(d.path().join("wimmelbild.json.bak")).unwrap(),
+            r#"{"a":1}"#
+        );
+        assert!(!d.path().join("wimmelbild.json.tmp").exists());
+    }
+
+    #[test]
+    fn kein_utf8_gilt_als_kaputt() {
+        let d = tempdir().unwrap();
+        fs::write(d.path().join("wimmelbild.json"), [0xff, 0xfe, 0x00]).unwrap();
+        fs::write(d.path().join("wimmelbild.json.bak"), r#"{"a":1}"#).unwrap();
+        assert_eq!(
+            lesen(d.path(), "wimmelbild").unwrap(),
+            Some(r#"{"a":1}"#.to_string())
+        );
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn unlesbare_hauptdatei_wird_nicht_ueberschrieben() {
+        use std::os::unix::fs::PermissionsExt;
+        let d = tempdir().unwrap();
+        let haupt = d.path().join("wimmelbild.json");
+        fs::write(&haupt, r#"{"echt":1}"#).unwrap();
+        fs::write(d.path().join("wimmelbild.json.bak"), r#"{"alt":1}"#).unwrap();
+        fs::set_permissions(&haupt, fs::Permissions::from_mode(0o000)).unwrap();
+        if fs::read_to_string(&haupt).is_ok() {
+            return; // läuft als root, Rechte greifen nicht
+        }
+        assert!(lesen(d.path(), "wimmelbild").is_err());
+        assert!(schreiben(d.path(), "wimmelbild", r#"{"neu":1}"#).is_err());
+        fs::set_permissions(&haupt, fs::Permissions::from_mode(0o644)).unwrap();
+        assert_eq!(fs::read_to_string(&haupt).unwrap(), r#"{"echt":1}"#);
+        assert_eq!(
+            fs::read_to_string(d.path().join("wimmelbild.json.bak")).unwrap(),
+            r#"{"alt":1}"#
+        );
     }
 
     #[test]
