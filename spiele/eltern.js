@@ -1,5 +1,7 @@
 // Elternbereich: PIN-Prüfung und Update-Suche (ohne DOM, testbar in Node).
 
+import { updateSuche } from "./kern/geraet.js";
+
 export async function pinHash(pin) {
   const bytes = new TextEncoder().encode("einhorn:" + pin);
   const hash = await globalThis.crypto.subtle.digest("SHA-256", bytes);
@@ -13,7 +15,7 @@ export async function pinPruefen(pin, gespeichert) {
 
 // Liefert immer ein Ergebnis, auch bei Netzfehler oder Hänger (Zeitlimit).
 export async function pruefeUpdate(
-  check = globalThis.window?.__TAURI__?.updater?.check,
+  check = updateSuche(),
   zeitlimitMs = 15000,
 ) {
   if (typeof check !== "function") return { status: "kein-app" };

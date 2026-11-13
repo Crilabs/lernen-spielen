@@ -16,10 +16,7 @@ const MUSTER = {
 };
 
 // Heute erlaubte Zugriffe je Datei (Pfad relativ zu spiele/). Darf nur schrumpfen.
-const AUSNAHMEN = {
-  "eltern.html": ["__TAURI__"],
-  "eltern.js": ["__TAURI__"],
-};
+const AUSNAHMEN = {};
 
 function dateien(ordner) {
   return readdirSync(ordner, { withFileTypes: true }).flatMap((e) => {

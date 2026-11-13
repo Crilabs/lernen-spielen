@@ -110,21 +110,21 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
     <p id="pin-text" role="status">Bitte die PIN eingeben</p>
     <div class="punkte" id="punkte" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="ziffern" id="ziffern"></div>
-    <p id="pin-hilfe" class="hilfe">PIN vergessen: Tastatur anschließen, Strg+Alt+Entf → Task-Manager → „Einhorn-Lernspiele“ beenden. Dann im Ordner <b class="auswahl">%APPDATA%\de.crilabs.lernen-spielen\lernstand\</b> die Dateien <b class="auswahl">eltern.json</b> und <b class="auswahl">eltern.json.bak</b> löschen und die App neu starten.</p>
+    <p id="pin-hilfe" class="hilfe" hidden>PIN vergessen: Tastatur anschließen, Strg+Alt+Entf → Task-Manager → „Einhorn-Lernspiele“ beenden. Dann im Ordner <b class="auswahl">%APPDATA%\de.crilabs.lernen-spielen\lernstand\</b> die Dateien <b class="auswahl">eltern.json</b> und <b class="auswahl">eltern.json.bak</b> löschen und die App neu starten.</p>
   </div>
 </section>
 
 <section id="bereich" aria-label="Elternbereich" hidden>
   <nav class="el-nav">
     <h1>Für Erwachsene</h1>
-    <button data-tab="updates"><span class="sym"><img src="symbole/update.svg" alt=""></span>Updates</button>
+    <button data-tab="updates" id="tab-updates" hidden><span class="sym"><img src="symbole/update.svg" alt=""></span>Updates</button>
     <button data-tab="lernstand"><span class="sym"><img src="symbole/lernstand.svg" alt=""></span>Lernstand</button>
     <button data-tab="stimme"><span class="sym"><img src="symbole/stimme.svg" alt=""></span>Stimme und Ton</button>
     <button data-tab="protokoll"><span class="sym"><img src="symbole/protokoll.svg" alt=""></span>Protokoll</button>
     <button data-tab="pin"><span class="sym"><img src="symbole/schloss.svg" alt=""></span>PIN ändern</button>
     <div class="unten">
       <button id="zurueck-spiele"><span class="sym"><img src="symbole/haus.svg" alt=""></span>Zurück zu den Spielen</button>
-      <button id="beenden"><span class="sym"><img src="symbole/beenden.svg" alt=""></span>App beenden</button>
+      <button id="beenden" hidden><span class="sym"><img src="symbole/beenden.svg" alt=""></span>App beenden</button>
     </div>
   </nav>
   <div class="el-inhalt auswahl" id="inhalt"></div>
@@ -133,13 +133,14 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 <script type="module">
 import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen } from "./lernspiel.js";
 import { pinHash, pinPruefen, pruefeUpdate } from "./eltern.js";
+import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/geraet.js";
 import { sprich, stimmen, setzeStimme } from "./kern/stimme.js";
 import { wertVon } from "./fortschritt/laden.js";
 import { elternThemen, markiereGekonnt, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand }
   from "./lernsteuerung.js";
 
 sperreTouch();
-const T = window.__TAURI__;
+const kann = await faehigkeiten();
 const $ = id => document.getElementById(id);
 const el = (tag, text, klasse) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (klasse) e.className = klasse; return e; };
 
@@ -164,7 +165,7 @@ function meldung(text, fehler = false) {
 function pinAnsicht(m) {
   modus = m; eingabe = ""; erste = ""; zeichnePunkte();
   $("bereich").hidden = true; $("pin").hidden = false;
-  $("pin-hilfe").hidden = m !== "pruefen";
+  $("pin-hilfe").hidden = m !== "pruefen" || !kann.kiosk;
   $("pin-titel").textContent = m === "pruefen" ? "Für Erwachsene" : "Neue PIN festlegen";
   meldung(m === "pruefen" ? "Bitte die PIN eingeben" : "Wähle eine PIN mit vier Ziffern");
 }
@@ -190,23 +191,23 @@ async function taste(z) {
 }
 
 // ---------- Bereich ----------
-let tab = "updates";
+let tab = "lernstand";
 function zeigeBereich(hinweis) {
   $("pin").hidden = true; $("bereich").hidden = false;
-  waehle("updates", hinweis);
+  waehle(kann.update ? "updates" : "lernstand", hinweis);
 }
+$("tab-updates").hidden = !kann.update;
+$("beenden").hidden = !kann.beenden;
 document.querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => {
   if (b.dataset.tab === "pin") pinAnsicht("neu"); else waehle(b.dataset.tab);
 }));
 $("zurueck-spiele").addEventListener("click", async () => { await sofortSpeichern(); location.href = "index.html"; });
-// Kiosk-Wachhund (lib.rs) anhalten, damit er das Fenster beim Beenden/Update nicht zurückholt.
-async function kioskPause(pause) {
-  try { await T?.core?.invoke("kiosk_pause", { pause }); } catch (e) { protokoll("Kiosk-Pause: " + (e?.message ?? e)); }
-}
 $("beenden").addEventListener("click", async () => {
   await sofortSpeichern();
   await kioskPause(true);
-  try { await T.process.exit(0); } catch (e) { protokoll("App beenden: " + (e?.message ?? e)); await kioskPause(false); location.href = "index.html"; }
+  await beende();
+  // Läuft das Programm noch, ist das Beenden gescheitert.
+  await kioskPause(false); location.href = "index.html";
 });
 
 // Nach 5 Minuten ohne Eingabe zurück zu den Spielen (Elternbereich nicht offen liegen lassen).
@@ -227,6 +228,9 @@ function waehle(name, hinweis) {
   tab = name;
   document.querySelectorAll("[data-tab]").forEach(b => b.classList.toggle("an", b.dataset.tab === name));
   const inh = $("inhalt"); inh.replaceChildren();
+  if (hinweis === "pin-ok" && name !== "updates") {
+    const ok = el("p", "Die neue PIN ist gespeichert."); ok.setAttribute("role", "status"); inh.appendChild(ok);
+  }
   ({ updates, lernstand, stimme, protokollAnsicht })[name === "protokoll" ? "protokollAnsicht" : name](inh, hinweis);
 }
 
@@ -236,7 +240,7 @@ function updates(inh, hinweis) {
   const karte = el("div", null, "karte");
   karte.appendChild(el("h3", "Installiert"));
   const ver = el("div", "Version …", "gross"); karte.appendChild(ver);
-  Promise.resolve(T?.app?.getVersion?.()).then(v => { if (tab === "updates") ver.textContent = v ? "Version " + v : "Version unbekannt"; })
+  appVersion().then(v => { if (tab === "updates") ver.textContent = v ? "Version " + v : "Version unbekannt"; })
     .catch(() => { ver.textContent = "Version unbekannt"; });
   const status = el("p", hinweis === "pin-ok" ? "Die neue PIN ist gespeichert." : "Hier kannst du nach einer neuen Version suchen.");
   status.setAttribute("role", "status");
@@ -284,7 +288,7 @@ async function installieren(update, los, balken, fuell, status) {
       else if (ev.event === "Finished") fuell.style.width = "100%";
     }, { timeout: 10 * 60 * 1000 }), zeit]).finally(() => clearTimeout(timer));
     status.textContent = "Fertig. Die App startet neu …";
-    await T.process.relaunch();
+    await neuStart();
   } catch (e) {
     protokoll("Update installieren: " + (e?.message ?? e));
     installiertGerade = false;
