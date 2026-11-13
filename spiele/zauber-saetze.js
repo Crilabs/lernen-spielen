@@ -62,7 +62,8 @@
         if(Math.random()<.25) return {teile:[...ng(s,"nom",null,adj), wort("fliegt"), ...ng("mond","dat","zu")], szene:{typ:"fliegt",s:[s],d:"mond"}};
         const d=pick(["haus","baum","zaun","bruecke"]);
         return {teile:[...ng(s,"nom",null,adj), ...W("fliegt über"), ...ng(d,"akk")], szene:{typ:"fliegt",s:[s],d}}; } },
-    { typ:"jagt", gewicht:2, bau(s,adj){ const g=pick(figs(f=>f!==s));
+    // gewicht 0: Verfolgung als Spannung widerspricht docs/grundsaetze.md 9.2 Nr. 1/3; Vorlage bleibt für ein späteres freundliches Verb
+    { typ:"jagt", gewicht:0, bau(s,adj){ const g=pick(figs(f=>f!==s));
         return {teile:[...ng(s,"nom",null,adj), wort("jagt"), ...ng(g,"akk")], szene:{typ:"jagt",s:[s],g}}; } },
     { typ:"paar", gewicht:3, zwei:true, bau(s){ const s2=pick(figs(f=>f!==s)); const r=Math.random();
         const kopf=[...ng(s,"nom"), wort("und"), ...ng(s2,"nom")];

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<title>Großbuchstaben-Zauberer</title>
+<title>Großbuchstaben-Zauberin</title>
 <link rel="stylesheet" href="schrift/schrift.css">
 <style>
 :root{--nacht:#3B2A6B;--weich:#6B5C96;--paper:#FFFFFF;--bg:#CDEFFF;--rahmen:#2B2350;--rosa:#FF8ACB;--rosa-s:#D45A9E;--lila:#8F73E6;--lila-s:#6A50C4;
@@ -138,7 +138,7 @@ body.ende .stage>.rund.l{visibility:visible;pointer-events:auto;animation:haus 1
 <script src="figuren/zauberin.js"></script>
 <script src="zauber-saetze.js"></script>
 <script type="module">
-import {lade, speichere, sperreTouch, esc, merkeGelernt} from "./lernspiel.js";
+import {lade, speichere, sperreTouch, esc, merkeGelernt, pausenKnoepfe} from "./lernspiel.js";
 sperreTouch();
 (async function(){
   // ---------- Einstellungen ----------
@@ -147,7 +147,6 @@ sperreTouch();
   const WIEDER_MAX = 2;
   const P_FALSCH = 0.45;        // Anteil verhexter Wörter im Startzustand (fällige Wörter und Nomen bevorzugt)
   const PAUSE_ALLE = 1;         // nach so vielen Runden eine Pause (0 = nie)
-  const PAUSE_MS = 10000;       // so lange bleibt die Pausen-Szene (ohne Knöpfe)
   const VERHEXEN_MS = 1400;     // so lange flackern die Buchstaben, während die Zauberin zaubert
   const LESEN_JE_WORT = 400;    // stummes Lesen nach einem Fehlversuch: so viele ms je Wort (bewusste Pause)
   const SZENE_STEHT_MS = 1200;  // nach der Szene bleibt sie so lange stehen, dann kommt ohne Knopf der nächste Satz
@@ -481,8 +480,8 @@ sperreTouch();
   function probe(w){
     if(w.nomen){ const n=Z.NOMEN[w.id]; return `${Z.ein(w.id)} ${n.w}? Ja. ${gross(n.a)} ${n.w} – ${n.a} kleine ${n.w}. Das passt.`; }
     const t=klein(w.t), i=satz.woerter.indexOf(w), nach=satz.woerter[i+1];
-    // Adjektiv direkt vor einem Nomen („die kleine Katze“): „eine kleine“ klingt richtig, deshalb das Ding benennen
-    if(nach && nach.nomen && /e$/.test(t)){ const n=Z.NOMEN[nach.id]; return `${t} ${n.w}. Das Ding ist ${n.a} ${n.w}. ${t} sagt nur, wie ${n.a} ${n.w} ist.`; }
+    // Adjektiv direkt vor einem Nomen („die kleine Katze“): „eine kleine“ klingt richtig, deshalb das Nomen benennen (Probe, keine Bedeutungsregel)
+    if(nach && nach.nomen && /e$/.test(t)){ const n=Z.NOMEN[nach.id]; return `${n.a} ${t} ${n.w}. Das Nomen ist ${n.w}: ${Z.ein(nach.id)} ${n.w}. ${t} steht nur davor.`; }
     return `ein ${t}? eine ${t}? Das passt nicht.`;
   }
   // Der Browser spricht erst nach der ersten Berührung der Seite: dann den ersten Satz bei dieser Berührung vorlesen
@@ -505,7 +504,7 @@ sperreTouch();
       else {
         const nach=satz.woerter.slice(i+1).find(x=>x.nomen), vor=satz.woerter[i-1];
         if(nach && satz.woerter[i+1]===nach && vor && !vor.nomen && /e$/.test(w.t)){
-          const art=Z.NOMEN[nach.id].a; teile.push(`${vor.t.toLowerCase()} ${klein(w.t)} ${nach.t} – das Ding ist ${art} ${Z.NOMEN[nach.id].w}. ${klein(w.t)} schreibt man klein.`);
+          const art=Z.NOMEN[nach.id].a; teile.push(`${vor.t.toLowerCase()} ${klein(w.t)} ${nach.t} – das Nomen ist ${Z.NOMEN[nach.id].w}: ${Z.ein(nach.id)} ${Z.NOMEN[nach.id].w}. ${klein(w.t)} schreibt man klein.`);
         } else teile.push(`ein ${klein(w.t)}? Das passt nicht. ${klein(w.t)} schreibt man klein.`);
       }
     });
@@ -615,8 +614,7 @@ sperreTouch();
       save.letzte=[...benutzt].slice(-30);
       save.runden++; save.tag = {d:heute(), n:(save.tag.d===heute() ? save.tag.n : 0)+1}; persist();
       runden++;
-      if(tagesende()){ await ende(); return; }
-      if(PAUSE_ALLE && runden%PAUSE_ALLE===0) await pause();
+      if(tagesende() || (PAUSE_ALLE && runden%PAUSE_ALLE===0)) await pause();   // Tagesgrenze ist nur eine ruhige Pause, das Kind entscheidet
       neueRunde();
     }
     leere();
@@ -626,10 +624,7 @@ sperreTouch();
 
   // ---------- Tagesgrenze: nach der TAG_RUNDEN. Runde einmal Pausen-Szene, das Haus wippt (?frei schaltet es ab) ----------
   const tagesende = () => !params.has("frei") && save.tag.d===heute() && save.tag.n===TAG_RUNDEN;   // nur einmal am Tag als natürlicher Halt, keine Sperre
-  async function ende(){
-    document.body.classList.add("ende");
-    await pause(0);
-  }
+  async function ende(){ await pause(); }   // nur noch für ?pause=0 (Sichtprüfung)
 
   // ---------- Pausen-Szene ----------
   let pauseGebaut=false;
@@ -641,13 +636,12 @@ sperreTouch();
     [...kopf.children].slice(-7).forEach(e=>hut.appendChild(e));   // Hut = die letzten 7 Teile im Kopf
     kopf.appendChild(hut);
   }
-  async function pause(ms=PAUSE_MS){   // ms = 0: bleibt stehen, ohne Balken (Tagesende)
+  async function pause(){
     baueSzene();
     const el=$("pause");
+    el.querySelector(".pbar")?.remove();
     el.classList.add("on"); requestAnimationFrame(()=>el.classList.add("show"));
-    if(!ms){ el.querySelector(".pbar").classList.add("hide"); return; }
-    el.style.setProperty("--pause-ms", ms+"ms");
-    await wait(ms);
+    await pausenKnoepfe(el, {beimTippen: klick});   // Pause endet nur auf Wunsch des Kindes (docs/grundsaetze.md N1, N8, 9.2 Nr. 7)
     el.classList.remove("show"); await wait(600); el.classList.remove("on");
   }
 
@@ -659,7 +653,7 @@ sperreTouch();
     const alle=Object.keys(save.woerter).map(s=>[s,eintrag(s)]);
     const gruppe=(titel,l)=>`<h2>${titel} (${l.length})</h2><ul>${l.map(zeile).join("")||"<li>–</li>"}</ul>`;
     const el=document.createElement("div"); el.className="eltern";
-    el.innerHTML=`<h1>Lernstand Großbuchstaben-Zauberer</h1><p>Bewertet wird nur das erste Zaubern je Satz. Fach 0 = wackelt (zuletzt falsch oder neu), Fach 1–3 = wird gefestigt, ab Fach ${GELERNT} = gelernt.
+    el.innerHTML=`<h1>Lernstand Großbuchstaben-Zauberin</h1><p>Bewertet wird nur das erste Zaubern je Satz. Fach 0 = wackelt (zuletzt falsch oder neu), Fach 1–3 = wird gefestigt, ab Fach ${GELERNT} = gelernt.
       Abstände: ${ABSTAND.join(" / ")} Tage. Gespeichert auf diesem Gerät.</p>`
       + gruppe("Wackelt", alle.filter(([s,e])=>e.f===0))
       + gruppe("Wird gefestigt", alle.filter(([s,e])=>e.f>0&&e.f<GELERNT).sort((a,b)=>a[1].f-b[1].f))

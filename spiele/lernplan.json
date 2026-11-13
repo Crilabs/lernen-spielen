@@ -3645,7 +3645,7 @@
       "rid": "AR1-01",
       "ziel": "Eine Rechenaussage selbst nachprüfen, statt sie einfach zu glauben.",
       "beispiele": [
-        "Das Einhorn sagt: „4 + 3 ist mehr als 8.“ Stimmt das?",
+        "Auf einem Zettel steht: „4 + 3 ist mehr als 8.“ Stimmt das?",
         "„6 + 2 ist gleich viel wie 5 + 3.“ Stimmt das?"
       ],
       "zweck": "Merken, wenn jemand beim Teilen behauptet, beide hätten gleich viel, obwohl es nicht stimmt.",
@@ -3811,7 +3811,7 @@
       "rid": "KO1-02",
       "ziel": "Einen Weg im Gitter mit Pfeilen oder Lagewörtern so genau beschreiben, dass jemand anderes ihn findet.",
       "beispiele": [
-        "Lege Pfeile, damit das Einhorn zum Apfel kommt.",
+        "Lege Pfeile, damit die Murmel zum Ziel rollt.",
         "Welche Anweisung fehlt: 2 nach rechts, _, dann bist du am Ziel?"
       ],
       "zweck": "Einem Freund am Telefon erklären, wie er vom Spielplatz zum eigenen Haus kommt.",
@@ -4244,8 +4244,8 @@
     },
     {
       "id": "anlaut-selbstlaut",
-      "name": "Anlaut: Selbstlaut",
-      "sprich": "Anlaut bei Selbstlauten",
+      "name": "Anlaut: Vokal",
+      "sprich": "Anlaut bei Vokalen",
       "strang": "lesen",
       "klasse": 1,
       "bereich": "Laute hören",
@@ -4261,7 +4261,7 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "L1-06",
-      "ziel": "Hören, mit welchem Selbstlaut (a, e, i, o, u) ein Wort beginnt.",
+      "ziel": "Hören, mit welchem Vokal (a, e, i, o, u) ein Wort beginnt.",
       "beispiele": [
         "Igel, Insel: Hörst du denselben Anfang?",
         "Ofen oder Hund: Was fängt wie Opa an?",
@@ -4329,7 +4329,7 @@
         "Gabel, Dach, Bett"
       ],
       "zweck": "Beim Rätsel „Ich sehe was, das fängt so an wie …“ das Ding finden, auch wenn der Anfangslaut nur kurz knallt.",
-      "eltern": "Sprechen Sie kurze Laute immer mit dem folgenden Selbstlaut, also „Ta“ statt „Te“. Fragen Sie: „Fangen Tasse und Topf gleich an?“"
+      "eltern": "Sprechen Sie kurze Laute immer mit dem folgenden Vokal, also „Ta“ statt „Te“. Fragen Sie: „Fangen Tasse und Topf gleich an?“"
     },
     {
       "id": "endlaut-hoeren",
@@ -4561,7 +4561,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-16",
-      "ziel": "Den Selbstlaut „a“ dem Buchstaben A a zuordnen, auch in der kleinen Form.",
+      "ziel": "Den Vokal „a“ dem Buchstaben A a zuordnen, auch in der kleinen Form.",
       "beispiele": [
         "Ameise, Abend",
         "am",
@@ -4591,7 +4591,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-17",
-      "ziel": "Den Selbstlaut „i“ dem Buchstaben I i zuordnen.",
+      "ziel": "Den Vokal „i“ dem Buchstaben I i zuordnen.",
       "beispiele": [
         "Igel, Iris",
         "im",
@@ -4621,7 +4621,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-18",
-      "ziel": "Den Selbstlaut „o“ dem Buchstaben O o zuordnen.",
+      "ziel": "Den Vokal „o“ dem Buchstaben O o zuordnen.",
       "beispiele": [
         "Oma, Opa",
         "Mo",
@@ -4661,7 +4661,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-19",
-      "ziel": "Einen Dauerlaut und einen Selbstlaut gleitend zu einer Silbe verbinden und lesen.",
+      "ziel": "Einen Dauerlaut und einen Vokal gleitend zu einer Silbe verbinden und lesen.",
       "beispiele": [
         "ma, mi, mo",
         "am, im, om",
@@ -4781,7 +4781,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-23",
-      "ziel": "Den Selbstlaut „u“ dem Buchstaben U u zuordnen.",
+      "ziel": "Den Vokal „u“ dem Buchstaben U u zuordnen.",
       "beispiele": [
         "Uli",
         "Mus",
@@ -4811,7 +4811,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-24",
-      "ziel": "Den Selbstlaut „e“ dem Buchstaben E e zuordnen, lang am Anfang und leise am Wortende.",
+      "ziel": "Den Vokal „e“ dem Buchstaben E e zuordnen, lang am Anfang und leise am Wortende.",
       "beispiele": [
         "Esel, Emil",
         "Rose: Das e am Ende klingt leise",
@@ -4938,7 +4938,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-28",
-      "ziel": "Den kurzen Laut „t“ dem Buchstaben T t zuordnen und ihn ohne Dehnen direkt mit dem Selbstlaut verbinden.",
+      "ziel": "Den kurzen Laut „t“ dem Buchstaben T t zuordnen und ihn ohne Dehnen direkt mit dem Vokal verbinden.",
       "beispiele": [
         "Tomate",
         "Tal, Tor",
@@ -5348,7 +5348,7 @@
       "pruefbar": "ganz",
       "quelle": "Q+E",
       "rid": "L1-41",
-      "ziel": "Das ch nach e, i, ei, ä, ö, ü, eu und nach Mitlauten als weichen Ich-Laut lesen.",
+      "ziel": "Das ch nach e, i, ei, ä, ö, ü, eu und nach Konsonanten als weichen Ich-Laut lesen.",
       "beispiele": [
         "mich",
         "Teich",
@@ -6162,8 +6162,8 @@
     },
     {
       "id": "lesen-zwei-mitlaute-anfang",
-      "name": "Zwei Mitlaute am Anfang",
-      "sprich": "Wörter mit Mitlauten am Anfang lesen",
+      "name": "Zwei Konsonanten am Anfang",
+      "sprich": "Wörter mit Konsonanten am Anfang lesen",
       "strang": "lesen",
       "klasse": 1,
       "bereich": "Wörter lesen",
@@ -6181,7 +6181,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-67",
-      "ziel": "Zwei Mitlaute am Wortanfang verschleifen, ohne einen Selbstlaut dazwischenzuschieben.",
+      "ziel": "Zwei Konsonanten am Wortanfang verschleifen, ohne einen Vokal dazwischenzuschieben.",
       "beispiele": [
         "Kro-ne",
         "Bla-se",
@@ -6192,8 +6192,8 @@
     },
     {
       "id": "lesen-kurzer-selbstlaut",
-      "name": "Kurzer Selbstlaut",
-      "sprich": "Kurze Selbstlaute lesen",
+      "name": "Kurzer Vokal",
+      "sprich": "Kurze Vokale lesen",
       "strang": "lesen",
       "klasse": 1,
       "bereich": "Wörter lesen",
@@ -6211,14 +6211,14 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-68",
-      "ziel": "Erkennen, dass der Selbstlaut kurz klingt, wenn die Silbe mit einem Mitlaut endet, und so lesen.",
+      "ziel": "Erkennen, dass der Vokal kurz klingt, wenn die Silbe mit einem Konsonanten endet, und so lesen.",
       "beispiele": [
         "Kis-te",
         "Fal-te",
         "Pin-sel"
       ],
       "zweck": "In einer Bastelanleitung lesen, dass man einen Pinsel und eine Kiste braucht.",
-      "eltern": "Klatschen Sie das Wort in Silben und zeigen Sie, dass die erste Silbe bei „Kis-te“ mit einem Mitlaut endet und der Selbstlaut dann kurz ist."
+      "eltern": "Klatschen Sie das Wort in Silben und zeigen Sie, dass die erste Silbe bei „Kis-te“ mit einem Konsonanten endet und der Vokal dann kurz ist."
     },
     {
       "id": "lesen-lang-oder-kurz",
@@ -6245,7 +6245,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-69",
-      "ziel": "Wortpaare, die sich nur in der Länge des Selbstlauts unterscheiden, lesend auseinanderhalten.",
+      "ziel": "Wortpaare, die sich nur in der Länge des Vokals unterscheiden, lesend auseinanderhalten.",
       "beispiele": [
         "Hü-te / Hüt-te",
         "Ofen / offen",
@@ -6256,8 +6256,8 @@
     },
     {
       "id": "lesen-mitlauthaeufung",
-      "name": "Viele Mitlaute",
-      "sprich": "Wörter mit vielen Mitlauten lesen",
+      "name": "Viele Konsonanten",
+      "sprich": "Wörter mit vielen Konsonanten lesen",
       "strang": "lesen",
       "klasse": 1,
       "bereich": "Wörter lesen",
@@ -6276,7 +6276,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "L1-70",
-      "ziel": "Wörter mit drei Mitlauten am Anfang oder mehreren Mitlauten am Ende vollständig lesen.",
+      "ziel": "Wörter mit drei Konsonanten am Anfang oder mehreren Konsonanten am Ende vollständig lesen.",
       "beispiele": [
         "Strand",
         "Schrank",
@@ -6765,14 +6765,14 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "S1-15",
-      "ziel": "Bei Wörtern mit zwei oder drei Mitlauten am Anfang jeden Laut hören und schreiben, ohne einen zu verschlucken.",
+      "ziel": "Bei Wörtern mit zwei oder drei Konsonanten am Anfang jeden Laut hören und schreiben, ohne einen zu verschlucken.",
       "beispiele": [
         "Glas",
         "Brezel",
         "„Föte“ → Flöte"
       ],
       "zweck": "Eine Nachricht wie „Brezel holen“ schreiben, die Papa ohne Rätselraten lesen kann.",
-      "eltern": "Sprechen Sie Wörter wie „Flöte“ langsam und dehnen Sie den Anfang („Fffllöte“). Ihr Kind zählt mit den Fingern, wie viele Laute vor dem ersten Selbstlaut kommen."
+      "eltern": "Sprechen Sie Wörter wie „Flöte“ langsam und dehnen Sie den Anfang („Fffllöte“). Ihr Kind zählt mit den Fingern, wie viele Laute vor dem ersten Vokal kommen."
     },
     {
       "id": "laute-in-mitte-und-ende",
@@ -6796,7 +6796,7 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "S1-16",
-      "ziel": "Mitlaut-Häufungen am Silbenende und im Wortinneren vollständig schreiben.",
+      "ziel": "Konsonantenhäufungen am Silbenende und im Wortinneren vollständig schreiben.",
       "beispiele": [
         "Obst",
         "Pumpe",
@@ -7230,8 +7230,8 @@
     },
     {
       "id": "planvoll-abschreiben",
-      "name": "Abschreiben wie ein Profi",
-      "sprich": "Abschreiben wie Profis",
+      "name": "Abschreiben Wort für Wort",
+      "sprich": "Abschreiben Wort für Wort",
       "strang": "schreiben",
       "klasse": 1,
       "bereich": "Abschreiben und Lernwörter",
@@ -8289,8 +8289,8 @@
     },
     {
       "id": "spiegelbuchstaben-b-d-p-q",
-      "name": "Spiegel-Detektiv",
-      "sprich": "Spiegel-Detektiv",
+      "name": "Spiegel-Rätsel",
+      "sprich": "Spiegel-Rätsel",
       "strang": "schreiben",
       "klasse": 1,
       "bereich": "Druckschrift klein",
@@ -8974,8 +8974,8 @@
     },
     {
       "id": "selbstlaut-mitlaut",
-      "name": "Selbstlaut oder Mitlaut?",
-      "sprich": "Selbstlaut oder Mitlaut?",
+      "name": "Vokal oder Konsonant?",
+      "sprich": "Vokal oder Konsonant?",
       "strang": "grammatik",
       "klasse": 1,
       "bereich": "Laute",
@@ -8998,19 +8998,19 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "Gr1-02",
-      "ziel": "Selbstlaute (a, e, i, o, u) von Mitlauten unterscheiden.",
+      "ziel": "Vokale (a, e, i, o, u) von Konsonanten unterscheiden.",
       "beispiele": [
         "a, m, o, t sortieren",
         "Bei welchem Laut bleibt der Mund ganz offen: a oder m?",
-        "Igel beginnt mit einem Selbstlaut."
+        "Igel beginnt mit einem Vokal."
       ],
-      "zweck": "Beim Schreiben merken, dass in „Hnd“ etwas fehlt, weil jede Silbe einen Selbstlaut braucht.",
+      "zweck": "Beim Schreiben merken, dass in „Hnd“ etwas fehlt, weil jede Silbe einen Vokal braucht.",
       "eltern": "Singen Sie ein bekanntes Lied nur auf a oder nur auf o und fragen Sie, welche Laute man so singen kann."
     },
     {
       "id": "silbe-hat-selbstlaut",
-      "name": "Jede Silbe hat einen Selbstlaut",
-      "sprich": "Jede Silbe braucht ihren Selbstlaut",
+      "name": "Jede Silbe hat einen Vokal",
+      "sprich": "Jede Silbe braucht ihren Vokal",
       "strang": "schreiben",
       "klasse": 1,
       "bereich": "Lautgetreu schreiben",
@@ -9029,14 +9029,14 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "S1-10",
-      "ziel": "Beim Schreiben prüfen, ob in jeder geschwungenen Silbe ein Selbstlaut steht, und vergessene Selbstlaute ergänzen.",
+      "ziel": "Beim Schreiben prüfen, ob in jeder geschwungenen Silbe ein Vokal steht, und vergessene Vokale ergänzen.",
       "beispiele": [
         "„Rbe“ → Rü-be",
-        "Le-mo-na-de: vier Bögen, vier Selbstlaute",
+        "Le-mo-na-de: vier Bögen, vier Vokale",
         "Ma-le-rin"
       ],
       "zweck": "Ein selbst geschriebenes Wort wie „Rbe“ so reparieren, dass Oma es auf dem Zettel lesen kann.",
-      "eltern": "Wenn ein Wort Ihres Kindes schwer lesbar ist, schwingen Sie es gemeinsam und fragen Sie: „Welcher Selbstlaut klingt in diesem Bogen?“"
+      "eltern": "Wenn ein Wort Ihres Kindes schwer lesbar ist, schwingen Sie es gemeinsam und fragen Sie: „Welcher Vokal klingt in diesem Bogen?“"
     },
     {
       "id": "satz-oder-kein-satz",
@@ -9070,11 +9070,11 @@
     },
     {
       "id": "namenwoerter",
-      "name": "Namenwörter",
-      "sprich": "Namenwörter",
+      "name": "Nomen",
+      "sprich": "Nomen",
       "strang": "grammatik",
       "klasse": 1,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "buchstabe-silbe-wort-satz"
       ],
@@ -9104,7 +9104,7 @@
       "sprich": "der, die, das",
       "strang": "grammatik",
       "klasse": 1,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "namenwoerter"
       ],
@@ -9119,15 +9119,15 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "Gr1-05",
-      "ziel": "Zu Namenwörtern den passenden Begleiter der, die oder das finden.",
+      "ziel": "Zu Nomen den passenden Artikel der, die oder das finden.",
       "beispiele": [
         "der Löffel",
         "die Gabel",
         "das Messer",
         "der, die oder das Kissen?"
       ],
-      "zweck": "Beim Erzählen den richtigen Begleiter wählen, damit andere sofort verstehen, welches Ding gemeint ist.",
-      "eltern": "Räumen Sie gemeinsam die Spülmaschine aus und benennen Sie jedes Teil mit Begleiter: der Teller, die Tasse, das Glas."
+      "zweck": "Beim Erzählen den richtigen Artikel wählen, damit andere sofort verstehen, welches Ding gemeint ist.",
+      "eltern": "Räumen Sie gemeinsam die Spülmaschine aus und benennen Sie jedes Teil mit Artikel: der Teller, die Tasse, das Glas."
     },
     {
       "id": "einzahl-mehrzahl-erkennen",
@@ -9135,7 +9135,7 @@
       "sprich": "Einzahl oder Mehrzahl?",
       "strang": "grammatik",
       "klasse": 1,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "namenwoerter"
       ],
@@ -9150,7 +9150,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "Gr1-06",
-      "ziel": "Erkennen, ob ein Namenwort für ein Ding oder für mehrere steht.",
+      "ziel": "Erkennen, ob ein Nomen in der Einzahl oder in der Mehrzahl steht.",
       "beispiele": [
         "Ball oder Bälle?",
         "Baum – Bäume",
@@ -9161,11 +9161,11 @@
     },
     {
       "id": "tunwoerter",
-      "name": "Tunwörter",
-      "sprich": "Tunwörter",
+      "name": "Verben",
+      "sprich": "Verben",
       "strang": "grammatik",
       "klasse": 1,
-      "bereich": "Tunwörter",
+      "bereich": "Verben",
       "voraussetzungen": [
         "buchstabe-silbe-wort-satz"
       ],
@@ -9190,7 +9190,7 @@
         "Kann man „springen“ tun?"
       ],
       "zweck": "Erzählen, was jemand gerade macht, etwa zu einem Foto vom Ausflug.",
-      "eltern": "Spielen Sie Pantomime: Einer macht etwas vor, der andere sagt das Tunwort, etwa „hüpfen“ oder „trinken“."
+      "eltern": "Spielen Sie Pantomime: Einer macht etwas vor, der andere sagt das Verb, etwa „hüpfen“ oder „trinken“."
     },
     {
       "id": "stille-hoeren",
@@ -11128,8 +11128,8 @@
     },
     {
       "id": "rechenfehler-finden-bis-100",
-      "name": "Rechenfehler finden",
-      "sprich": "Rechenfehler finden",
+      "name": "Rechnungen nachprüfen",
+      "sprich": "Rechnungen nachprüfen",
       "strang": "mathe",
       "klasse": 2,
       "bereich": "Plus und Minus bis 100",
@@ -13698,8 +13698,8 @@
     },
     {
       "id": "fehler-finden-rechnen",
-      "name": "Fehlerdetektiv: Rechnen",
-      "sprich": "Fehlerdetektiv beim Rechnen",
+      "name": "Rechnungen prüfen",
+      "sprich": "Rechnungen prüfen",
       "strang": "mathe",
       "klasse": 2,
       "bereich": "Begründen",
@@ -13726,8 +13726,8 @@
     },
     {
       "id": "fehlerursache-finden",
-      "name": "Fehlerdetektiv: Was hat er falsch gedacht?",
-      "sprich": "Fehlerdetektiv: Was wurde falsch gedacht",
+      "name": "Wie wurde hier gerechnet?",
+      "sprich": "Wie wurde hier gerechnet?",
       "strang": "mathe",
       "klasse": 2,
       "bereich": "Begründen",
@@ -13889,8 +13889,8 @@
     },
     {
       "id": "forscherbericht-ergaenzen",
-      "name": "Forscherbericht ergänzen",
-      "sprich": "Forscherbericht ergänzen",
+      "name": "Forschungsbericht ergänzen",
+      "sprich": "Forschungsbericht ergänzen",
       "strang": "mathe",
       "klasse": 2,
       "bereich": "Mathe erklären",
@@ -14346,8 +14346,8 @@
     },
     {
       "id": "falsches-wort-finden",
-      "name": "Falsches Wort finden",
-      "sprich": "Falsches Wort finden",
+      "name": "Welches Wort passt nicht?",
+      "sprich": "Welches Wort passt nicht?",
       "strang": "lesen",
       "klasse": 2,
       "bereich": "Texte verstehen",
@@ -14690,7 +14690,7 @@
       "sprich": "Lang oder kurz",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Lange und kurze Selbstlaute",
+      "bereich": "Lange und kurze Vokale",
       "voraussetzungen": [
         "lesen-lang-oder-kurz"
       ],
@@ -14705,7 +14705,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "S2-01",
-      "ziel": "Bei gleichem Selbstlautbuchstaben hören, ob er lang oder kurz gesprochen wird.",
+      "ziel": "Bei gleichem Vokalbuchstaben hören, ob er lang oder kurz gesprochen wird.",
       "beispiele": [
         "Rate – Ratte",
         "Kehle – Kelle",
@@ -14720,7 +14720,7 @@
       "sprich": "Offene und geschlossene Silbe",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Lange und kurze Selbstlaute",
+      "bereich": "Lange und kurze Vokale",
       "voraussetzungen": [
         "lang-oder-kurz-hoeren",
         "silben-schwingen-beim-schreiben"
@@ -14736,22 +14736,22 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "S2-02",
-      "ziel": "Erkennen, dass der Selbstlaut lang klingt, wenn die Silbe mit ihm endet, und kurz, wenn die Silbe mit einem Mitlaut schließt.",
+      "ziel": "Erkennen, dass der Vokal lang klingt, wenn die Silbe mit ihm endet, und kurz, wenn die Silbe mit einem Konsonanten schließt.",
       "beispiele": [
         "Ha-se: offen, a lang",
         "Lam-pe: geschlossen, a kurz",
         "Wo endet die erste Silbe bei „Bo-den“?"
       ],
-      "zweck": "Ein nur gehörtes Wort für eine Nachricht selbst richtig aufschreiben, weil man am Klang der Silbe erkennt, was nach dem Selbstlaut kommt.",
-      "eltern": "Schwingen Sie Wörter wie „Ha-se“ und „Lam-pe“ gemeinsam und fragen Sie: „Ist die erste Silbe offen wie ein Tor oder mit einem Mitlaut zu?“"
+      "zweck": "Ein nur gehörtes Wort für eine Nachricht selbst richtig aufschreiben, weil man am Klang der Silbe erkennt, was nach dem Vokal kommt.",
+      "eltern": "Schwingen Sie Wörter wie „Ha-se“ und „Lam-pe“ gemeinsam und fragen Sie: „Ist die erste Silbe offen wie ein Tor oder mit einem Konsonanten zu?“"
     },
     {
       "id": "doppelt-ll-mm-nn",
       "name": "Doppelt: ll, mm, nn",
-      "sprich": "Doppelte Mitlaute wie bei Kanne",
+      "sprich": "Doppelte Konsonanten wie bei Kanne",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Doppelte Mitlaute",
+      "bereich": "Doppelte Konsonanten",
       "voraussetzungen": [
         "offene-geschlossene-silbe"
       ],
@@ -14769,7 +14769,7 @@
       "pruefbar": "ganz",
       "quelle": "Q+E",
       "rid": "S2-03",
-      "ziel": "Nach kurzem Selbstlaut einen Dauerlaut wie l, m oder n, der zwischen zwei Silben steht, doppelt schreiben.",
+      "ziel": "Nach kurzem Vokal einen Dauerlaut wie l, m oder n, der zwischen zwei Silben steht, doppelt schreiben.",
       "beispiele": [
         "Bril-le",
         "Tan-ne",
@@ -14781,10 +14781,10 @@
     {
       "id": "doppelt-tt-pp",
       "name": "Doppelt: tt, pp",
-      "sprich": "Doppelte Mitlaute wie bei Puppe",
+      "sprich": "Doppelte Konsonanten wie bei Puppe",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Doppelte Mitlaute",
+      "bereich": "Doppelte Konsonanten",
       "voraussetzungen": [
         "doppelt-ll-mm-nn"
       ],
@@ -14802,7 +14802,7 @@
       "pruefbar": "ganz",
       "quelle": "Q+E",
       "rid": "S2-04",
-      "ziel": "Nach kurzem Selbstlaut auch die Stopplaute t und p zwischen zwei Silben doppelt schreiben.",
+      "ziel": "Nach kurzem Vokal auch die Stopplaute t und p zwischen zwei Silben doppelt schreiben.",
       "beispiele": [
         "Rat-te",
         "Lap-pen",
@@ -14814,10 +14814,10 @@
     {
       "id": "doppelt-ss-ff",
       "name": "Doppelt: ss, ff",
-      "sprich": "Doppelte Mitlaute wie bei Waffel",
+      "sprich": "Doppelte Konsonanten wie bei Waffel",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Doppelte Mitlaute",
+      "bereich": "Doppelte Konsonanten",
       "voraussetzungen": [
         "doppelt-ll-mm-nn"
       ],
@@ -14835,7 +14835,7 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "S2-05",
-      "ziel": "Nach kurzem Selbstlaut die Reibelaute s und f zwischen zwei Silben doppelt schreiben.",
+      "ziel": "Nach kurzem Vokal die Reibelaute s und f zwischen zwei Silben doppelt schreiben.",
       "beispiele": [
         "Waf-fel",
         "Gas-se",
@@ -14847,10 +14847,10 @@
     {
       "id": "doppelt-rr",
       "name": "Doppelt: rr",
-      "sprich": "Doppelte Mitlaute wie bei knurren",
+      "sprich": "Doppelte Konsonanten wie bei knurren",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Doppelte Mitlaute",
+      "bereich": "Doppelte Konsonanten",
       "voraussetzungen": [
         "doppelt-ll-mm-nn"
       ],
@@ -14868,7 +14868,7 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "S2-06",
-      "ziel": "Die seltene Verdopplung rr nach kurzem Selbstlaut erkennen und schreiben.",
+      "ziel": "Die seltene Verdopplung rr nach kurzem Vokal erkennen und schreiben.",
       "beispiele": [
         "knur-ren",
         "Gi-tar-re",
@@ -14883,7 +14883,7 @@
       "sprich": "Einfach oder doppelt",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Doppelte Mitlaute",
+      "bereich": "Doppelte Konsonanten",
       "voraussetzungen": [
         "lang-oder-kurz-hoeren",
         "doppelt-ll-mm-nn",
@@ -14905,7 +14905,7 @@
       "pruefbar": "ganz",
       "quelle": "Q+E",
       "rid": "S2-07",
-      "ziel": "Bei Wortpaaren am langen oder kurzen Selbstlaut entscheiden, ob ein oder zwei Mitlaute folgen.",
+      "ziel": "Bei Wortpaaren am langen oder kurzen Vokal entscheiden, ob ein oder zwei Konsonanten folgen.",
       "beispiele": [
         "Rate – Ratte",
         "beten – Betten",
@@ -14939,7 +14939,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "S2-08",
-      "ziel": "Nach kurzem Selbstlaut statt kk immer ck schreiben.",
+      "ziel": "Nach kurzem Vokal statt kk immer ck schreiben.",
       "beispiele": [
         "Ja-cke",
         "Zu-cker",
@@ -14973,19 +14973,19 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "S2-09",
-      "ziel": "Nach kurzem Selbstlaut statt zz immer tz schreiben.",
+      "ziel": "Nach kurzem Vokal statt zz immer tz schreiben.",
       "beispiele": [
         "Spatz",
         "Hit-ze",
         "„Plaz“ → Platz"
       ],
       "zweck": "Am Spielhaus ein Schild „Hier ist Platz für alle“ aufhängen, das alle lesen können.",
-      "eltern": "Lassen Sie Ihr Kind bei „Hit-ze“ hören: erst der kurze Selbstlaut, dann der Stopper tz."
+      "eltern": "Lassen Sie Ihr Kind bei „Hit-ze“ hören: erst der kurze Vokal, dann der Stopper tz."
     },
     {
       "id": "k-z-nach-mitlaut",
       "name": "Kein ck oder tz nach l, n, r",
-      "sprich": "Kein Stopper nach Mitlauten",
+      "sprich": "Kein Stopper nach Konsonanten",
       "strang": "schreiben",
       "klasse": 2,
       "bereich": "ck und tz",
@@ -15009,18 +15009,18 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "S2-10",
-      "ziel": "Nach l, n oder r nur k oder z schreiben, obwohl der Selbstlaut davor kurz ist.",
+      "ziel": "Nach l, n oder r nur k oder z schreiben, obwohl der Vokal davor kurz ist.",
       "beispiele": [
         "Falke",
         "Herz",
         "„Holtz“ → Holz"
       ],
       "zweck": "Auf eine Karte für Oma „von Herzen“ schreiben, ohne dass ein überflüssiges t hineinrutscht.",
-      "eltern": "Wenn Ihr Kind „Holtz“ schreibt, sagen Sie: „Nach l, n und r kommt nie tz oder ck. Hör mal, da steht schon ein Mitlaut.“"
+      "eltern": "Wenn Ihr Kind „Holtz“ schreibt, sagen Sie: „Nach l, n und r kommt nie tz oder ck. Hör mal, da steht schon ein Konsonant.“"
     },
     {
       "id": "r-nach-selbstlaut",
-      "name": "r nach Selbstlaut",
+      "name": "r nach Vokal",
       "sprich": "Der versteckte Laut wie bei Garten",
       "strang": "schreiben",
       "klasse": 2,
@@ -15043,7 +15043,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "S2-11",
-      "ziel": "Das nach einem Selbstlaut kaum hörbare r beim Schreiben hörbar machen und mitschreiben.",
+      "ziel": "Das nach einem Vokal kaum hörbare r beim Schreiben hörbar machen und mitschreiben.",
       "beispiele": [
         "Gurke",
         "Torte",
@@ -15058,7 +15058,7 @@
       "sprich": "Der lange Laut wie bei Wiese",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Lange und kurze Selbstlaute",
+      "bereich": "Lange und kurze Vokale",
       "voraussetzungen": [
         "offene-geschlossene-silbe",
         "laut-ie"
@@ -15093,7 +15093,7 @@
       "sprich": "Wie bei Kiste oder wie bei Biene",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Lange und kurze Selbstlaute",
+      "bereich": "Lange und kurze Vokale",
       "voraussetzungen": [
         "ie-bei-langem-i",
         "doppelt-ll-mm-nn"
@@ -15113,7 +15113,7 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "S2-13",
-      "ziel": "Bei Wörtern mit i entscheiden, ob der Selbstlaut kurz ist (i) oder lang (ie).",
+      "ziel": "Bei Wörtern mit i entscheiden, ob der Vokal kurz ist (i) oder lang (ie).",
       "beispiele": [
         "bieten – bitten",
         "Riese – Risse",
@@ -15128,7 +15128,7 @@
       "sprich": "Der Hauch zwischen den Silben",
       "strang": "schreiben",
       "klasse": 2,
-      "bereich": "Lange und kurze Selbstlaute",
+      "bereich": "Lange und kurze Vokale",
       "voraussetzungen": [
         "silben-schwingen-beim-schreiben",
         "laut-h-anfang"
@@ -15147,7 +15147,7 @@
       "pruefbar": "ganz",
       "quelle": "Q+E",
       "rid": "S2-14",
-      "ziel": "Das h schreiben, das beim deutlichen Schwingen zwischen zwei Selbstlauten am Anfang der zweiten Silbe hörbar wird.",
+      "ziel": "Das h schreiben, das beim deutlichen Schwingen zwischen zwei Vokalen am Anfang der zweiten Silbe hörbar wird.",
       "beispiele": [
         "Kü-he",
         "dre-hen",
@@ -15181,7 +15181,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "S2-27",
-      "ziel": "Häufige Wörter mit stummem h nach langem Selbstlaut als Merkwörter sicher schreiben.",
+      "ziel": "Häufige Wörter mit stummem h nach langem Vokal als Merkwörter sicher schreiben.",
       "beispiele": [
         "Stuhl",
         "wohnen",
@@ -15256,8 +15256,8 @@
     },
     {
       "id": "fehler-finden-durch-vergleich",
-      "name": "Fehler finden durch Vergleich",
-      "sprich": "Fehler finden durch Vergleich",
+      "name": "Vergleichen und prüfen",
+      "sprich": "Vergleichen und prüfen",
       "strang": "schreiben",
       "klasse": 2,
       "bereich": "Fehler finden",
@@ -16730,7 +16730,7 @@
       "sprich": "Mehrzahl wie bei Hunde",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "einzahl-mehrzahl-erkennen"
       ],
@@ -16760,7 +16760,7 @@
       "sprich": "Mehrzahl wie bei Blumen",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "mehrzahl-mit-e"
       ],
@@ -16793,7 +16793,7 @@
       "sprich": "Mehrzahl wie bei Kinder",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "mehrzahl-mit-e"
       ],
@@ -16927,8 +16927,8 @@
     },
     {
       "id": "verlaengern-doppelt",
-      "name": "Verlängern bei doppelten Mitlauten",
-      "sprich": "Verlängern zeigt doppelte Mitlaute",
+      "name": "Verlängern bei doppelten Konsonanten",
+      "sprich": "Verlängern zeigt doppelte Konsonanten",
       "strang": "schreiben",
       "klasse": 2,
       "bereich": "Verlängern",
@@ -16950,7 +16950,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "S2-20",
-      "ziel": "Bei einsilbigen Wörtern mit kurzem Selbstlaut über das Verlängern hören, dass am Ende ein doppelter Mitlaut steht.",
+      "ziel": "Bei einsilbigen Wörtern mit kurzem Vokal über das Verlängern hören, dass am Ende ein doppelter Konsonant steht.",
       "beispiele": [
         "Stall → die Ställe",
         "Schiff → die Schiffe",
@@ -16961,8 +16961,8 @@
     },
     {
       "id": "fehlerdetektiv",
-      "name": "Fehlerdetektiv",
-      "sprich": "Fehlerdetektiv",
+      "name": "Was passt nicht?",
+      "sprich": "Was passt nicht?",
       "strang": "schreiben",
       "klasse": 2,
       "bereich": "Fehler finden",
@@ -16999,7 +16999,7 @@
       "sprich": "Mehrzahl wie bei Autos",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "mehrzahl-mit-e",
         "selbstlaut-mitlaut"
@@ -17018,7 +17018,7 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "Gr2-04",
-      "ziel": "Mehrzahlformen mit -s bilden, vor allem bei Wörtern, die auf einen Selbstlaut enden.",
+      "ziel": "Mehrzahlformen mit -s bilden, vor allem bei Wörtern, die auf einen Vokal enden.",
       "beispiele": [
         "Auto – Autos",
         "Sofa – Sofas",
@@ -17033,7 +17033,7 @@
       "sprich": "Mehrzahl wie bei Äpfel",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "mehrzahl-mit-e"
       ],
@@ -17058,7 +17058,7 @@
         "der Koffer – die Koffer"
       ],
       "zweck": "Beim Kofferpacken verstehen, dass „die Koffer“ mehrere sind, obwohl das Wort gleich bleibt.",
-      "eltern": "Fragen Sie: „Ein Koffer, zwei …?“ und lassen Sie Ihr Kind entdecken, dass sich manchmal nur der Begleiter ändert."
+      "eltern": "Fragen Sie: „Ein Koffer, zwei …?“ und lassen Sie Ihr Kind entdecken, dass sich manchmal nur der Artikel ändert."
     },
     {
       "id": "ableiten-ae-von-a",
@@ -17133,7 +17133,7 @@
       "sprich": "Nomen-Proben",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "der-die-das",
         "einzahl-mehrzahl-erkennen",
@@ -17153,19 +17153,19 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "Gr2-06",
-      "ziel": "Prüfen, ob ein Wort ein Nomen ist, indem man einen Begleiter davorsetzt oder die Mehrzahl bildet.",
+      "ziel": "Prüfen, ob ein Wort ein Nomen ist, indem man einen Artikel davorsetzt oder die Mehrzahl bildet.",
       "beispiele": [
         "der Tisch – passt, also Nomen",
         "der laufen? – passt nicht",
         "Sonne – Sonnen: Mehrzahl geht"
       ],
       "zweck": "Herausfinden, ob ein Wort großgeschrieben wird, wenn man eine Karte oder einen Zettel schreibt.",
-      "eltern": "Spielen Sie „Passt der Begleiter?“: Sie nennen ein Wort, und Ihr Kind probiert, ob der, die oder das davor passt."
+      "eltern": "Spielen Sie „Passt der Artikel?“: Sie nennen ein Wort, und Ihr Kind probiert, ob der, die oder das davor passt."
     },
     {
       "id": "nomen-gross-artikelprobe",
       "name": "Nomen groß: die Artikelprobe",
-      "sprich": "Namenwörter groß schreiben mit der Artikelprobe",
+      "sprich": "Nomen groß schreiben mit der Artikelprobe",
       "strang": "schreiben",
       "klasse": 2,
       "bereich": "Großschreibung",
@@ -17199,7 +17199,7 @@
       "sprich": "Irgendein Hund oder der Hund?",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Namenwörter",
+      "bereich": "Nomen",
       "voraussetzungen": [
         "der-die-das"
       ],
@@ -17214,7 +17214,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "Gr2-07",
-      "ziel": "Zwischen bestimmtem Begleiter (der, die, das) und unbestimmtem Begleiter (ein, eine) unterscheiden.",
+      "ziel": "Zwischen bestimmtem Artikel (der, die, das) und unbestimmtem Artikel (ein, eine) unterscheiden.",
       "beispiele": [
         "ein Hund – der Hund",
         "eine Tasse – die Tasse",
@@ -17229,7 +17229,7 @@
       "sprich": "Grundform des Verbs",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Tunwörter",
+      "bereich": "Verben",
       "voraussetzungen": [
         "tunwoerter"
       ],
@@ -17251,7 +17251,7 @@
         "sie wandert → wandern"
       ],
       "zweck": "Ein Verb in der Wörterliste nachschlagen, in der nur die Grundform steht.",
-      "eltern": "Fragen Sie bei einem Satz wie „Papa kocht“: „Wie heißt das Tunwort in der Grundform?“ – kochen."
+      "eltern": "Fragen Sie bei einem Satz wie „Papa kocht“: „Wie heißt das Verb in der Grundform?“ – kochen."
     },
     {
       "id": "verb-personalform",
@@ -17259,7 +17259,7 @@
       "sprich": "Verb passt zur Person",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Tunwörter",
+      "bereich": "Verben",
       "voraussetzungen": [
         "grundform-verb"
       ],
@@ -17290,7 +17290,7 @@
       "sprich": "ich, du, er, sie, es, wir, ihr",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Tunwörter",
+      "bereich": "Verben",
       "voraussetzungen": [
         "verb-personalform"
       ],
@@ -17317,7 +17317,7 @@
     {
       "id": "verlaengern-verben",
       "name": "Verlängern bei Verben",
-      "sprich": "Verlängern bei Tunwörtern",
+      "sprich": "Verlängern bei Verben",
       "strang": "schreiben",
       "klasse": 2,
       "bereich": "Verlängern",
@@ -17353,11 +17353,11 @@
     },
     {
       "id": "wiewoerter",
-      "name": "Wiewörter",
-      "sprich": "Wiewörter",
+      "name": "Adjektive",
+      "sprich": "Adjektive",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Wiewörter",
+      "bereich": "Adjektive",
       "voraussetzungen": [
         "namenwoerter",
         "tunwoerter"
@@ -17421,7 +17421,7 @@
       "sprich": "Nomen genauer machen",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Wiewörter",
+      "bereich": "Adjektive",
       "voraussetzungen": [
         "wiewoerter",
         "der-die-das"
@@ -17437,14 +17437,14 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "Gr2-12",
-      "ziel": "Ein Wiewort zwischen Begleiter und Nomen setzen und es dabei passend beugen.",
+      "ziel": "Ein Adjektiv zwischen Artikel und Nomen setzen und es dabei passend beugen.",
       "beispiele": [
         "das Haus – das blaue Haus",
         "der Hund – der kleine Hund",
         "die Jacke – die neue rote Jacke"
       ],
       "zweck": "Im Laden genau sagen, welche Jacke man meint: „die rote Jacke“ statt nur „die Jacke“.",
-      "eltern": "Fragen Sie beim Anziehen: „Welche Mütze? Die warme oder die dünne?“ und lassen Sie Ihr Kind mit Wiewort antworten."
+      "eltern": "Fragen Sie beim Anziehen: „Welche Mütze? Die warme oder die dünne?“ und lassen Sie Ihr Kind mit Adjektiv antworten."
     },
     {
       "id": "gegenteile",
@@ -17452,7 +17452,7 @@
       "sprich": "Gegenteile",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Wiewörter",
+      "bereich": "Adjektive",
       "voraussetzungen": [
         "wiewoerter"
       ],
@@ -17467,7 +17467,7 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "Gr2-13",
-      "ziel": "Zu einem Wiewort das Gegenteil finden.",
+      "ziel": "Zu einem Adjektiv das Gegenteil finden.",
       "beispiele": [
         "hell – dunkel",
         "nass – trocken",
@@ -17592,7 +17592,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "Gr2-15",
-      "ziel": "Zwei Nomen zu einem neuen Wort zusammensetzen und den Begleiter vom letzten Wort übernehmen.",
+      "ziel": "Zwei Nomen zu einem neuen Wort zusammensetzen und den Artikel vom letzten Wort übernehmen.",
       "beispiele": [
         "der Schnee + der Mann → der Schneemann",
         "das Haus + die Tür → die Haustür",
@@ -17857,7 +17857,7 @@
       "sprich": "Gestern, heute, morgen",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Tunwörter",
+      "bereich": "Verben",
       "voraussetzungen": [
         "tunwoerter"
       ],
@@ -17887,7 +17887,7 @@
       "sprich": "Steigern: klein, kleiner, am kleinsten",
       "strang": "grammatik",
       "klasse": 2,
-      "bereich": "Wiewörter",
+      "bereich": "Adjektive",
       "voraussetzungen": [
         "wiewoerter"
       ],
@@ -17902,7 +17902,7 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "Gr2-21",
-      "ziel": "Wiewörter regelmäßig steigern: Grundform, Vergleichsform mit -er und Höchstform mit am …-sten.",
+      "ziel": "Adjektive regelmäßig steigern: Grundform, Vergleichsform mit -er und Höchstform mit am …-sten.",
       "beispiele": [
         "klein – kleiner – am kleinsten",
         "schnell – schneller – am schnellsten",
@@ -17914,7 +17914,7 @@
     {
       "id": "verlaengern-adjektive",
       "name": "Verlängern bei Adjektiven",
-      "sprich": "Verlängern bei Wiewörtern",
+      "sprich": "Verlängern bei Adjektiven",
       "strang": "schreiben",
       "klasse": 2,
       "bereich": "Verlängern",
@@ -18138,8 +18138,8 @@
     },
     {
       "id": "unbekanntes-wort-erfragen",
-      "name": "Wort-Detektiv",
-      "sprich": "Wort-Detektiv",
+      "name": "Wörter-Spur",
+      "sprich": "Wörter-Spur",
       "strang": "sprechen",
       "klasse": 2,
       "bereich": "Zuhören",
@@ -20262,7 +20262,7 @@
       "sprich": "Doppelt bei kurzen Wörtern",
       "strang": "schreiben",
       "klasse": 3,
-      "bereich": "Doppelte Mitlaute",
+      "bereich": "Doppelte Konsonanten",
       "voraussetzungen": [
         "verlaengern-doppelt"
       ],
@@ -20278,7 +20278,7 @@
       "sprich": "ck und tz bei kurzen Wörtern",
       "strang": "schreiben",
       "klasse": 3,
-      "bereich": "Doppelte Mitlaute",
+      "bereich": "Doppelte Konsonanten",
       "voraussetzungen": [
         "doppelt-bei-einsilbern",
         "ck-statt-kk",
@@ -20296,7 +20296,7 @@
       "sprich": "Doppelt in Verbformen",
       "strang": "schreiben",
       "klasse": 3,
-      "bereich": "Doppelte Mitlaute",
+      "bereich": "Doppelte Konsonanten",
       "voraussetzungen": [
         "verlaengern-verben",
         "doppelt-bei-einsilbern"
@@ -20325,8 +20325,8 @@
     },
     {
       "id": "scharfes-s-nach-langem-vokal",
-      "name": "ß nach langem Selbstlaut",
-      "sprich": "Scharfes S nach langem Selbstlaut",
+      "name": "ß nach langem Vokal",
+      "sprich": "Scharfes S nach langem Vokal",
       "strang": "schreiben",
       "klasse": 3,
       "bereich": "s, ss und ß",
@@ -20342,8 +20342,8 @@
     },
     {
       "id": "ss-nach-kurzem-vokal",
-      "name": "ss nach kurzem Selbstlaut",
-      "sprich": "Doppel-S nach kurzem Selbstlaut",
+      "name": "ss nach kurzem Vokal",
+      "sprich": "Doppel-S nach kurzem Vokal",
       "strang": "schreiben",
       "klasse": 3,
       "bereich": "s, ss und ß",
@@ -20639,7 +20639,7 @@
     {
       "id": "trennen-doppelt-und-ck",
       "name": "Trennen bei Doppelt und ck",
-      "sprich": "Trennen bei Doppelmitlauten",
+      "sprich": "Trennen bei Doppelkonsonanten",
       "strang": "schreiben",
       "klasse": 3,
       "bereich": "Silbentrennung",
@@ -20657,7 +20657,7 @@
     {
       "id": "merkwoerter-aa-ee-oo",
       "name": "Merkwörter mit aa, ee, oo",
-      "sprich": "Merkwörter mit doppeltem Selbstlaut",
+      "sprich": "Merkwörter mit doppeltem Vokal",
       "strang": "schreiben",
       "klasse": 3,
       "bereich": "Merkwörter",
@@ -20838,8 +20838,8 @@
     },
     {
       "id": "handschrift-sauber-korrigieren",
-      "name": "Fehler sauber korrigieren",
-      "sprich": "Fehler sauber korrigieren",
+      "name": "Sauber verbessern",
+      "sprich": "Sauber verbessern",
       "strang": "schreiben",
       "klasse": 3,
       "bereich": "Handschrift",
@@ -21199,8 +21199,8 @@
     },
     {
       "id": "namen-durch-pronomen-ersetzen",
-      "name": "Nicht schon wieder „Ben“!",
-      "sprich": "Nicht schon wieder „Ben“!",
+      "name": "Mal Ben, mal er",
+      "sprich": "Mal Ben, mal er",
       "strang": "schreiben",
       "klasse": 3,
       "bereich": "Treffende Wörter",
@@ -21858,8 +21858,8 @@
     },
     {
       "id": "fermi-schaetzen",
-      "name": "Schätzen wie ein Forscher",
-      "sprich": "Schätzen wie Forscher",
+      "name": "Schätzen und nachmessen",
+      "sprich": "Schätzen und nachmessen",
       "strang": "mathe",
       "klasse": 4,
       "bereich": "Zahlen bis zur Million",
@@ -23229,8 +23229,8 @@
     },
     {
       "id": "eigenen-text-pruefen",
-      "name": "Eigenen Text auf Fehler prüfen",
-      "sprich": "Eigenen Text auf Fehler prüfen",
+      "name": "Eigenen Text durchsehen",
+      "sprich": "Eigenen Text durchsehen",
       "strang": "schreiben",
       "klasse": 4,
       "bereich": "Nachschlagen und prüfen",
@@ -23707,8 +23707,8 @@
     },
     {
       "id": "stammvokalwechsel-wortfamilie",
-      "name": "Wortfamilien mit anderem Selbstlaut",
-      "sprich": "Wortfamilien mit anderem Selbstlaut",
+      "name": "Wortfamilien mit anderem Vokal",
+      "sprich": "Wortfamilien mit anderem Vokal",
       "strang": "grammatik",
       "klasse": 4,
       "bereich": "Wortbildung",
@@ -23775,8 +23775,8 @@
     },
     {
       "id": "einheitliche-zeitform-im-text",
-      "name": "Zeitform-Fehler finden",
-      "sprich": "Zeitform-Fehler finden",
+      "name": "Zeitformen prüfen",
+      "sprich": "Zeitformen prüfen",
       "strang": "grammatik",
       "klasse": 4,
       "bereich": "Zeitformen",
@@ -24937,7 +24937,7 @@
       "familie": "einmaleins-abruf",
       "dialekt": null,
       "nur_typ": null,
-      "kind_hinweis": "Von der Kernaufgabe aus geht es schneller.",
+      "kind_hinweis": "Von der Kernaufgabe aus ist es nur ein Schritt.",
       "eltern": {
         "beschreibung": "Ihr Kind sagt beim Einmaleins die Reihe oft noch von vorn auf, statt das Ergebnis abzurufen. Die App übt gerade Kernaufgaben und Nachbaraufgaben, damit Ihr Kind abkürzen kann.",
         "stufe2": "nie"
@@ -25638,7 +25638,7 @@
       "nur_typ": null,
       "kind_hinweis": "Sprich langsam mit: Was hörst du nach dem ersten Laut?",
       "eltern": {
-        "beschreibung": "Ihr Kind lässt beim Schreiben manchmal einen Laut weg, wenn mehrere Mitlaute aufeinanderfolgen, zum Beispiel „Fosch“ statt „Frosch“. Das ist im ersten Schuljahr häufig. Die App übt gerade, Wörter langsam mitzusprechen und die Laute zu zählen.",
+        "beschreibung": "Ihr Kind lässt beim Schreiben manchmal einen Laut weg, wenn mehrere Konsonanten aufeinanderfolgen, zum Beispiel „Fosch“ statt „Frosch“. Das ist im ersten Schuljahr häufig. Die App übt gerade, Wörter langsam mitzusprechen und die Laute zu zählen.",
         "stufe2": {
           "nach_thema": "laute-in-mitte-und-ende",
           "wochen": 8,
@@ -26028,9 +26028,9 @@
       "familie": "schaerfung",
       "dialekt": null,
       "nur_typ": null,
-      "kind_hinweis": "Ist der Laut davor kurz? Dann kommt der Mitlaut doppelt.",
+      "kind_hinweis": "Ist der Laut davor kurz? Dann kommt der Konsonant doppelt.",
       "eltern": {
-        "beschreibung": "Ihr Kind schreibt nach kurzen Selbstlauten oft nur einen Mitlaut, zum Beispiel „Sone“ statt „Sonne“. Das wird bis in die dritte Klasse gelernt. Die App übt gerade, kurze und lange Selbstlaute zu unterscheiden.",
+        "beschreibung": "Ihr Kind schreibt nach kurzen Vokalen oft nur einen Konsonanten, zum Beispiel „Sone“ statt „Sonne“. Das wird bis in die dritte Klasse gelernt. Die App übt gerade, kurze und lange Vokale zu unterscheiden.",
         "stufe2": "nie"
       },
       "parameter": null,
@@ -26084,9 +26084,9 @@
       "familie": "schaerfung",
       "dialekt": null,
       "nur_typ": null,
-      "kind_hinweis": "Hör genau: Folgt schon ein anderer Mitlaut? Dann wird nicht verdoppelt.",
+      "kind_hinweis": "Hör genau: Folgt schon ein anderer Konsonant? Dann wird nicht verdoppelt.",
       "eltern": {
-        "beschreibung": "Ihr Kind verdoppelt Mitlaute manchmal auch dort, wo es nicht nötig ist. Das zeigt, dass es die Regel kennt und gerade noch ausprobiert, wo sie gilt. Die App übt gerade, wann verdoppelt wird und wann nicht.",
+        "beschreibung": "Ihr Kind verdoppelt Konsonanten manchmal auch dort, wo es nicht nötig ist. Das zeigt, dass es die Regel kennt und gerade noch ausprobiert, wo sie gilt. Die App übt gerade, wann verdoppelt wird und wann nicht.",
         "stufe2": "nie"
       },
       "parameter": null,

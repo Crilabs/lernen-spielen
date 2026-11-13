@@ -192,7 +192,7 @@ sperreTouch();
     try{
       speechSynthesis.cancel();
       const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; u.rate=.85;
-      let fest=""; try{ fest=localStorage.getItem("einhorn-stimme")||""; }catch(e){}
+      let fest=""; try{ fest=localStorage.getItem("stimme")||""; }catch(e){}
       const v=speechSynthesis.getVoices().filter(v=>/^de/i.test(v.lang)).find((v,k)=>k+"|"+v.name+"|"+v.voiceURI===fest);
       if(v) u.voice=v;
       speechSynthesis.speak(u);
@@ -556,6 +556,7 @@ sperreTouch();
   // Ohne Knöpfe: Balken läuft PAUSE_MS, dann geht es weiter. Mit Knöpfen (nach „kann ich“): Weiter oder Haus.
   // hinweis (nach einer Wiederholungsrunde): ruhiger Hinweis auf das Spiel, das gerade etwas Neues hat (antippbar).
   async function pause({knoepfe=false, hinweis=null}={}){
+    knoepfe=true;   // Pause endet nur auf Wunsch des Kindes (docs/grundsaetze.md N1, N8, 9.2 Nr. 7)
     const e=$("pause");
     e.innerHTML=pausenSzene();
     const sp = hinweis ? spieleListe.find(x=>x.id===hinweis) : null;
