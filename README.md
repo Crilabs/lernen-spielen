@@ -4,8 +4,7 @@ Lernspiele für ein Kind, als Windows-Kiosk-App (Tauri 2). Die App zeigt eine St
 Kategorien und Spielen (HTML/JS in `spiele/`), speichert den Lernstand lokal, hat einen
 PIN-geschützten Elternbereich und aktualisiert sich über GitHub-Releases.
 
-Die frühere Web-Fassung (PHP-Dateien `*-save.php`, `save.php`, `deploy.sh`, `.env`-Deployment)
-ist **nicht mehr aktuell**. Diese Reste werden in einem späteren Schritt entfernt.
+Die Web-Fassung mit PHP wurde in v0.2 entfernt.
 
 ## Aufbau
 
