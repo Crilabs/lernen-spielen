@@ -87,3 +87,13 @@ test("faehigkeiten protokolliert, wenn plattform scheitert", async () => {
   assert.deepEqual(e.k, { update: false, beenden: false, kiosk: false });
   assert.match(e.p, /plattform kaputt/);
 });
+
+test("faehigkeiten: schlägt plattform() fehl, entscheiden die Desktop-Plugins", () => {
+  const code = `
+    globalThis.localStorage = { getItem: () => null, setItem() {}, removeItem() {} };
+    globalThis.window = { __TAURI__: { core: { invoke: async () => { throw new Error("weg"); } }, updater: {}, process: {} } };
+    const G = await import(${JSON.stringify(new URL("../spiele/kern/geraet.js", import.meta.url).href)});
+    console.log(JSON.stringify(await G.faehigkeiten()));`;
+  const out = JSON.parse(execFileSync(process.execPath, ["--input-type=module", "-e", code], { encoding: "utf8" }));
+  assert.deepEqual(out, { update: true, beenden: true, kiosk: true });
+});

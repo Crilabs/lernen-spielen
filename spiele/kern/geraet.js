@@ -12,6 +12,9 @@ export async function faehigkeiten() {
     p = await plattform();
   } catch (e) {
     protokoll("Plattform: " + (/** @type {any} */ (e)?.message ?? e));
+    // Plattform unbekannt: Die Desktop-Plugins gibt es nur dort, wo sie registriert sind (Windows-Kiosk).
+    const beenden = !!tauri()?.process;
+    return { update: !!tauri()?.updater, beenden, kiosk: beenden };
   }
   const desktop = p === "windows" || p === "macos" || p === "linux";
   return { update: desktop, beenden: desktop, kiosk: desktop };
