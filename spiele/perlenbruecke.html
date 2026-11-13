@@ -70,6 +70,14 @@ img{display:block}
 .eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:1rem;padding:.6rem 1.4rem;margin:.6rem 0;font-weight:400}
 .eltern small{font-weight:400;opacity:.75}
 .eltern .btn{display:inline-flex;align-items:center;height:7rem;padding:0 3.2rem;border-radius:99rem;font:400 2.6rem/1 "Andika",sans-serif;color:#fff;background:var(--lila);box-shadow:0 .9rem 0 var(--lila-s);text-decoration:none}
+/* Sprechblase: Sätze mit Ziffern lesen statt hören */
+.sprech{width:100%;height:100%;display:flex;align-items:flex-end;padding:6px 8px 34px}
+.blase{position:relative;width:100%;background:#fff;border:5px solid var(--nacht);border-radius:36px;padding:18px 28px;
+  font:400 36px/1.3 "Andika",sans-serif;color:var(--nacht);transition:opacity .3s}
+.blase::before,.blase::after{content:"";position:absolute;right:54px;border:solid transparent}
+.blase::before{bottom:-34px;border-width:34px 18px 0 18px;border-top-color:var(--nacht)}
+.blase::after{bottom:-24px;right:59px;border-width:26px 13px 0 13px;border-top-color:#fff}
+.blase.leer{opacity:0}
 @media (prefers-reduced-motion:reduce){.bruecke-traegt,.wippe,.perle.zuviel,.platz.blink,.stab.leuchtet .platte{animation:none}.pause{transition:none}.pause .atmen,.pause .blink,.pause .schimmer{animation:none}}
 </style>
 </head>
@@ -91,6 +99,7 @@ img{display:block}
   <g id="spalteL"></g><g id="spalteR"></g>
   <g id="bruecke"></g>
   <g id="figuren"></g>
+  <foreignObject x="130" y="10" width="540" height="262"><div xmlns="http://www.w3.org/1999/xhtml" class="sprech"><div class="blase leer" id="blase" aria-live="polite"></div></div></foreignObject>
   </svg>
 <a class="rund l" href="index.html" aria-label="Alle Spiele"><img src="symbole/haus.svg" alt=""></a>
 <button class="rund r" id="snd" aria-label="Ton"><img id="sndimg" src="symbole/ton-an.svg" alt=""></button>
@@ -111,7 +120,6 @@ sperreTouch();
   const WIEDER_NACH = 2;        // falsch gelöste Zahl kommt in der Runde nach so vielen anderen Brücken wieder
   const PAUSE_MS = 10000;
   const FARBE = {1:"#E53935",2:"#43A047",3:"#F48FB1",4:"#FDD835",5:"#64B5F6",6:"#9C27B0",7:"#FFFFFF",8:"#8D6E63",9:"#1E3A8A",10:"#F9A825"};
-  const WORT = ["null","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun","zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn"];
   // Geometrie (SVG-Einheiten, Bild 1920 × 1080)
   const P = 58, R = 26;         // Perlenabstand und -radius
   const Y0 = 420;               // Oberkante der Ufer = Laufbahn
@@ -127,8 +135,6 @@ sperreTouch();
   const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const F = window.Figuren;
   const heute = () => new Date().toLocaleDateString("sv");
-  const W = z => WORT[z] ?? String(z);
-  const gross = t => t.charAt(0).toUpperCase() + t.slice(1);
   function el(tag, attrs={}, parent){ const e=document.createElementNS(NS,tag); for(const [k,v] of Object.entries(attrs)) e.setAttribute(k,v); if(parent) parent.appendChild(e); return e; }
 
   // ---------- Speichern ----------
@@ -139,10 +145,10 @@ sperreTouch();
   // ---------- Elternansicht (?eltern) ----------
   if(params.has("eltern")){ elternansicht(); return; }
 
-  // ---------- Ton und Stimme ----------
+  // ---------- Ton ----------
   let sound = true; try{ sound = localStorage.getItem("perlenbruecke-ton")!=="aus"; }catch(e){}
   const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("perlenbruecke-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
+  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("perlenbruecke-ton",sound?"an":"aus"); }catch(e){} });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
@@ -153,10 +159,8 @@ sperreTouch();
   const plopp = () => tone(500,700,.1,"sine",.1);
   const boing = () => tone(320,180,.35,"triangle",.12);
   const zaehlTon = i => tone(440*Math.pow(2,i/12),440*Math.pow(2,i/12),.12,"sine",.08);
-  let voice=null;
-  function pickVoice(){ const vs=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang)); voice=vs.find(v=>/Anna|Petra|Helena|Marlene|Katja/i.test(v.name))||vs[0]||null; }
-  if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
-  function say(text){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1.1; speechSynthesis.speak(u); }catch(e){} }
+  // Sprechblase des Einhorns. Zahlen werden nicht vorgelesen: Ziffern lesen sich sicherer als eine Computerstimme.
+  function sag(text){ const b=$("blase"); if(text) b.textContent=text; b.classList.toggle("leer", !text); }
 
   // ---------- Geometrie je Zahl ----------
   let n = 7;
@@ -272,6 +276,7 @@ sperreTouch();
   function tippe(s){
     if(!erlaubt(s)) return;
     clearTimeout(bauTimer);
+    if(fehler<2) sag("");            // Ansage oder Fehlersatz verschwindet beim ersten Tipp
     wahl[s.seite] = wahl[s.seite]===s ? null : s;
     klick(); zeigeWahl();
     // Denkhilfe ab dem 2. Fehler: gewählte Perlen in der Zielkette abdecken, Frage stellen, andere Seite kurz sperren.
@@ -281,8 +286,8 @@ sperreTouch();
       const andere = s.seite==="l" ? "r" : "l";
       if(wahl[s.seite] && !wahl[andere]){
         const x=s.len;
-        const fuenf = n>5 ? `${gross(W(n))} ist fünf und ${W(n-5)}. ` : "";
-        say(x>=n ? `${gross(W(x))} ist schon ${x===n?"so lang wie":"länger als"} ${W(n)}.` : `${fuenf}Mit ${W(x)} – wie viele fehlen noch bis ${W(n)}?`);
+        const fuenf = n>5 ? `${n} ist 5 und ${n-5}. ` : "";
+        sag(x>=n ? `${x} ist schon ${x===n?"so lang wie":"länger als"} ${n}.` : `${fuenf}Mit ${x} – wie viele fehlen noch bis ${n}?`);
         sperreBis[andere] = Date.now() + HILFE_SPERRE_MS + (n>5?1500:0);
         zeigeSperre();
       }
@@ -327,7 +332,7 @@ sperreTouch();
     el("rect",{x:gapL()-20,y:Y0-10,width:gapW()+40,height:14,rx:7,fill:"#E3B27C",stroke:"#3B2A6B","stroke-width":3},$("bruecke"));
     // Die Brücke trägt: sie setzt sich kurz, das Einhorn läuft hinüber
     plopp(); const brg=$("bruecke"); brg.classList.remove("bruecke-traegt"); void brg.getBBox(); brg.classList.add("bruecke-traegt");
-    say(`${gross(W(a))} und ${W(b)} sind ${W(n)}.`);
+    sag(`${a} und ${b} sind ${n}.`);
     await wait(350);
     await bewege(uni, gapR()+40, 1300);
     await wait(150);
@@ -351,8 +356,8 @@ sperreTouch();
       await wait(300); await bewege(uni, uniStart()-30, 400, {laufen:false, easing:"ease-out"});
     }
     // Zählen: jede Perle der Brücke und die Perle der Zielkette darüber leuchten nacheinander
-    say(kurz ? `${gross(W(a))} und ${W(b)} sind ${W(summe)}. Bis ${W(n)} ${n-summe===1?"fehlt noch eine Perle":"fehlen noch "+W(n-summe)+" Perlen"}.`
-             : `${gross(W(a))} und ${W(b)} sind ${W(summe)}. Das ist zu lang für ${W(n)}.`);
+    sag(kurz ? `${a} und ${b} sind ${summe}. Bis ${n} ${n-summe===1?"fehlt noch 1 Perle":"fehlen noch "+(n-summe)+" Perlen"}.`
+             : `${a} und ${b} sind ${summe}. Das ist zu lang für ${n}.`);
     const zaehlMs = Math.max(120, Math.min(ZAEHL_MS, (FEHLER_MS - 1200 - (Date.now()-start) - 1000) / alle.length));   // 1200 = Bauen davor, 1000 = Halten, Ausblenden, Rückkehr
     for(let i=0;i<alle.length;i++){
       alle[i].classList.add("zaehl"); if(i<n) kettePerlen[i].classList.add("zaehl"); zaehlTon(i);
@@ -381,7 +386,7 @@ sperreTouch();
       const [la, lb] = bestes.split(":")[1].split("+").map(Number);
       loesung={l:la, r:lb};
       for(const seite of ["l","r"]) for(const s of staebe[seite]){ const ok = s.len===loesung[seite]; s.g.classList.toggle("leuchtet", ok); s.g.classList.toggle("zu", !ok); }
-      say(`${gross(W(n))} ist ${W(la)} und ${W(lb)}.`);
+      sag(`${n} ist ${la} und ${lb}.`);
     }   // ab dem 2. Fehler: Denkhilfe beim ersten Tipp (siehe tippe)
     await wait(100);
     busy=false;
@@ -410,7 +415,8 @@ sperreTouch();
     ufer(); kette(); spalten(ang); neuesEinhorn();
     for(const e of [$("bruecke"),$("kette"),$("spalteL"),$("spalteR"),$("plaetze"),$("figuren")]){ e.getAnimations().forEach(x=>x.cancel()); if(!ruhig) e.animate([{opacity:0},{opacity:1}],{duration:400}); }
     const frisch = (neu===n) || (save.neu?.zahl===n && !angesagt.has(n) && save.reise < save.neu.bis);
-    if(sitzungStart || frisch){ say(`Bau eine Brücke für ${W(n)}.`); angesagt.add(n); }
+    sag("");
+    if(sitzungStart || frisch){ sag(`Bau eine Brücke für ${n}.`); angesagt.add(n); }
     sitzungStart=false;
     t0=Date.now(); busy=false;
     if(params.has("fehler")){ await wait(900); const l=ang.links.indexOf(params.get("fehler")==="kurz"?2:4), r=ang.rechts.indexOf(params.get("fehler")==="kurz"?4:5); tippe(staebe.l[l]); tippe(staebe.r[r]); }

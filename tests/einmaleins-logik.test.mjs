@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 
 const L = await import("../spiele/einmaleins-logik.js");
 const { K, stufeVon, paketVon, aufgabenVon, alleAufgaben, neuerStand, migriere, eintrag, verbuche, freischaltbar,
-  naechsteAufgabe, hilfeVon, ortVon, zahlwort } = L;
+  naechsteAufgabe, hilfeVon, ortVon } = L;
 
 const lcg = (seed) => { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32; };
 const HEUTE = "2026-11-13", MORGEN = "2026-11-14";
@@ -104,12 +104,6 @@ test("ortVon: wo eine Zahl auf der Kette liegt", () => {
   assert.deepEqual(ortVon(70, 7), { staebchen: 10, rest: 0, ueber: false });
   assert.equal(ortVon(71, 7).ueber, true);
   assert.equal(ortVon(999, 7).ueber, true);
-});
-
-test("zahlwort bis 999", () => {
-  const w = { 0: "null", 7: "sieben", 16: "sechzehn", 21: "einundzwanzig", 42: "zweiundvierzig", 71: "einundsiebzig",
-    100: "hundert", 101: "hunderteins", 200: "zweihundert", 342: "dreihundertzweiundvierzig", 999: "neunhundertneunundneunzig" };
-  for (const [z, t] of Object.entries(w)) assert.equal(zahlwort(+z), t);
 });
 
 test("migriere: kaputte Zeiten und Daten blockieren nichts", () => {

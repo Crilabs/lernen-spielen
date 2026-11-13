@@ -48,6 +48,14 @@ img{display:block}
 .taste.druck{transform:translateY(5px)}
 .anzeige text{font:400 92px "Andika",sans-serif;fill:var(--nacht);text-anchor:middle;dominant-baseline:central}
 .figur .head{transition:transform .5s ease-in-out}
+/* Sprechblase: Sätze mit Ziffern lesen statt hören */
+.sprech{width:100%;height:100%;display:flex;align-items:flex-end;padding:6px 8px 34px}
+.blase{position:relative;width:100%;background:#fff;border:5px solid var(--nacht);border-radius:36px;padding:18px 28px;
+  font:400 36px/1.3 "Andika",sans-serif;color:var(--nacht);transition:opacity .3s}
+.blase::before,.blase::after{content:"";position:absolute;left:54px;border:solid transparent}
+.blase::before{bottom:-34px;border-width:34px 18px 0 18px;border-top-color:var(--nacht)}
+.blase::after{bottom:-24px;left:59px;border-width:26px 13px 0 13px;border-top-color:#fff}
+.blase.leer{opacity:0}
 
 /* Pause */
 .pause{position:fixed;inset:0;z-index:25;background:#2B2350;display:none;opacity:0;transition:opacity .6s}
@@ -112,6 +120,7 @@ img{display:block}
     <rect x="460" y="78" width="520" height="150" rx="40" fill="#fff" stroke="#3B2A6B" stroke-width="5"/>
     <text id="aufgabe" class="aufgabe" x="720" y="158"></text>
   </g>
+  <foreignObject x="1000" y="20" width="452" height="320"><div xmlns="http://www.w3.org/1999/xhtml" class="sprech"><div class="blase leer" id="blase" aria-live="polite"></div></div></foreignObject>
   <g id="drahtG"></g>
   <g id="perlenG"></g>
   <g id="pfeileG"></g>
@@ -126,12 +135,12 @@ img{display:block}
 <script src="figuren/einhorn.js"></script>
 <script type="module">
 import {lade, speichere, sperreTouch, esc, protokoll} from "./lernspiel.js";
-import {K, migriere, eintrag, verbuche, naechsteAufgabe, hilfeVon, ortVon, zahlwort, paketVon, aufgabenVon} from "./einmaleins-logik.js";
+import {K, migriere, eintrag, verbuche, naechsteAufgabe, hilfeVon, ortVon, paketVon, aufgabenVon} from "./einmaleins-logik.js";
 sperreTouch();
 (async function(){
   // ---------- Einstellungen (Logik-Werte stehen in einmaleins-logik.js, K) ----------
   const FEHLER_MS = 5000;       // Fehler-Rückmeldung nach dem Hüpfen, nichts antippbar
-  const RICHTIG_MS = 1900;      // nach dem Einrasten, bis es weitergeht
+  const RICHTIG_MS = 2200;      // nach dem Einrasten, bis es weitergeht (Zeit, den Satz in der Blase zu lesen)
   const HOP_MS = 250;           // je Stäbchen
   const LOESUNG_MS = 2600;      // 3. Fehler: Lösungspfeilchen so lange sichtbar
   const WIEDER_NACH = 2;        // falsch gelöste Aufgabe kommt nach so vielen anderen wieder
@@ -152,8 +161,6 @@ sperreTouch();
   const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const F = window.Figuren;
   const heute = () => new Date().toLocaleDateString("sv");
-  const W = z => zahlwort(z);
-  const gross = t => t.charAt(0).toUpperCase() + t.slice(1);
   function el(tag, attrs={}, parent){ const e=document.createElementNS(NS,tag); for(const [k,v] of Object.entries(attrs)) e.setAttribute(k,v); if(parent) parent.appendChild(e); return e; }
   const dauer = ms => ruhig ? Math.min(ms, 120) : ms;
 
@@ -164,10 +171,10 @@ sperreTouch();
 
   if(params.has("eltern")){ elternansicht(); return; }
 
-  // ---------- Ton und Stimme ----------
+  // ---------- Ton ----------
   let sound = true; try{ sound = localStorage.getItem("einmaleins-ton")!=="aus"; }catch(e){}
   const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("einmaleins-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
+  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("einmaleins-ton",sound?"an":"aus"); }catch(e){} });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
@@ -179,23 +186,8 @@ sperreTouch();
   const boing = () => tone(320,180,.35,"triangle",.12);
   const hopTon = i => tone(392*Math.pow(2,i/12),392*Math.pow(2,i/12)*1.05,.11,"sine",.07);
   const rassel = () => { for(let i=0;i<6;i++) setTimeout(()=>tone(1400+Math.random()*500,1200,.04,"triangle",.025), i*35); };
-  let voice=null;
-  function pickVoice(){ const vs=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang)); voice=vs.find(v=>/Anna|Petra|Helena|Marlene|Katja/i.test(v.name))||vs[0]||null; }
-  if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
-  // Gibt ein Promise zurück, das endet, wenn der Satz gesprochen ist (spätestens nach geschätzter Sprechdauer).
-  function say(text){
-    if(!sound||!window.speechSynthesis) return Promise.resolve();
-    return new Promise(fertig=>{
-      try{
-        speechSynthesis.cancel();
-        const t=text.replace(/\d+/g,m=>W(+m)), u=new SpeechSynthesisUtterance(t);
-        u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1.1;
-        u.onend=fertig; u.onerror=fertig;
-        setTimeout(fertig, Math.min(4500, 600 + t.length*75));
-        speechSynthesis.speak(u);
-      }catch(e){ fertig(); }
-    });
-  }
+  // Sprechblase des Einhorns. Zahlen werden nicht vorgelesen: Ziffern lesen sich sicherer als eine Computerstimme.
+  function sag(text){ const b=$("blase"); if(text) b.textContent=text; b.classList.toggle("leer", !text); }
 
   // ---------- Geometrie der Kette von n ----------
   // Stäbchen 1–5 laufen in Reihe 1 nach rechts, ein Bogen führt hinunter, Stäbchen 6–10 laufen in Reihe 2 zurück.
@@ -399,30 +391,30 @@ sperreTouch();
   // ---------- Zustand ----------
   let x=null, kette=0, rest=0, vorher="", fehler=0, busy=true, t0=0, rundeIdx=0, wieder=[], gezeigt=null;
 
-  function satzKern(a){            // Denkhilfe (2. Fehler): Ableitung ansprechen, ohne das Ergebnis zu sagen
+  const WIE = {1:"Und noch ein Stäbchen", "-1":"Ein Stäbchen weniger", 2:"Und noch zwei Stäbchen", "-2":"Zwei Stäbchen weniger"};
+  function satzKern(a){            // Denkhilfe (2. Fehler): Ableitung zeigen, ohne das Ergebnis zu verraten
     const {kernA, schritt}=hilfeVon(a);
-    if(a===1) return `Ein Stäbchen zu ${W(n)}.`;
-    if(a===2) return `${gross(W(n))} und ${W(n)}?`;
-    if(a===10) return `Zehn Stäbchen zu ${W(n)}: ${W(n)} Zehner.`;
-    const kern=`${gross(W(kernA))} mal ${W(n)} ist ${W(kernA*n)}.`;
-    if(schritt===0) return `${kern} Fünf ist die Hälfte von zehn.`;
-    return kern + " " + {1:"Und noch ein Stäbchen?", "-1":"Ein Stäbchen weniger?", 2:"Und noch zwei Stäbchen?", "-2":"Zwei Stäbchen weniger?"}[schritt];
+    if(a===1) return `1 Stäbchen zu ${n}.`;
+    if(a===2) return `${n} und ${n}?`;
+    if(a===10) return `10 Stäbchen zu ${n}: ${n} Zehner.`;
+    const kern=`${kernA} · ${n} = ${kernA*n}.`;
+    if(schritt===0) return `${kern} 5 ist die Hälfte von 10.`;
+    return `${kern} ${WIE[schritt]}?`;
   }
   function satzLoesung(a){         // 3. Fehler: Lösung mit Begründung
     const {kernA, schritt}=hilfeVon(a), p=a*n;
-    if(a===1) return `Ein Stäbchen zu ${W(n)} ist ${W(n)}.`;
-    if(a===2) return `${gross(W(n))} und ${W(n)} ist ${W(p)}.`;
-    if(a===10) return `Zehn mal ${W(n)} ist ${W(p)}.`;
-    const kern=`${gross(W(kernA))} mal ${W(n)} ist ${W(kernA*n)}`;
-    if(schritt===0) return `${kern}. Die Hälfte davon ist ${W(p)}.`;
-    const wie = {1:"und noch ein Stäbchen", "-1":"ein Stäbchen weniger", 2:"und noch zwei Stäbchen", "-2":"zwei Stäbchen weniger"}[schritt];
-    return `${kern}, ${wie} ist ${W(p)}.`;
+    if(a===1) return `1 Stäbchen zu ${n} ist ${n}.`;
+    if(a===2) return `${n} und ${n} ist ${p}.`;
+    if(a===10) return `10 · ${n} = ${p}.`;
+    const kern=`${kernA} · ${n} = ${kernA*n}.`;
+    if(schritt===0) return `${kern} Die Hälfte davon ist ${p}.`;
+    return `${kern} ${WIE[schritt]}: ${p}.`;
   }
   function satzTausch(a){
     if(a<2 || a===n) return "";
     const tkey=`${n}x${a}`;
     if(!save.frei.includes(paketVon(n, a)) || eintrag(save, tkey).f < 2) return "";
-    return `${gross(W(a))} mal ${W(n)} ist so viel wie ${W(n)} mal ${W(a)}. `;
+    return `${a} · ${n} ist so viel wie ${n} · ${a}. `;
   }
 
   // Hilfe-Leiter vor dem nächsten Versuch zeigen
@@ -431,7 +423,7 @@ sperreTouch();
     if(fehler>=3){
       await ausrollen(a);
       gezeigt = pfeil(String(a*n), stabEnde(a), {art: a===n ? "quadrat" : "normal"});
-      say(satzLoesung(a));
+      sag(satzLoesung(a));
       await wait(LOESUNG_MS);
       await pfeileWeg(); gezeigt=null;
       await einrollen();
@@ -443,7 +435,7 @@ sperreTouch();
         await ausrollen(kernA);
         pfeil(String(kernA*n), stabEnde(kernA), {art:"kern"});
       }
-      say(satzTausch(a) + satzKern(a));
+      sag(satzTausch(a) + satzKern(a));
     }
   }
 
@@ -479,11 +471,11 @@ sperreTouch();
     await pfeilFliegt(String(p), stabEnde(a), {art: a===n ? "quadrat" : "normal"});
     eingabe=""; zeigeEingabe();
     F.hop(uni.svg,{hoehe:36,dauer:520});
-    const gesagt = say(`${gross(W(a))} mal ${W(n)} ist ${W(p)}.`);
+    sag(`${a} · ${n} = ${p}`);
     const r = vorschau ? {frei:null} : verbuche(save, a, n, {fehler, hilfe: fehler>=2, ms, heute:heute()});
     if(fehler) wieder.push({a, n, key:x.key, ab: rundeIdx + WIEDER_NACH + 1});
     persist();
-    await Promise.all([wait(RICHTIG_MS), gesagt]);   // der Ergebnissatz wird nie abgeschnitten
+    await wait(RICHTIG_MS);
     rundeIdx++;
     await weiter(r.frei);
   }
@@ -509,11 +501,11 @@ sperreTouch();
     // Am Einhorn: das leere Pfeilchen „?“, wo die Sprünge enden
     pfeil("?", stabEnde(a), {art:"frage"});
     kopf(-14);
-    say(`${gross(W(w))} liegt hier. ${a===1 ? "Ein Sprung endet" : gross(W(a))+" Sprünge enden"} hier.`);
+    sag(a===1 ? `1 Stäbchen ist nicht ${w}.` : `${a} Stäbchen sind nicht ${w}.`);
     await wait(Math.max(0, FEHLER_MS - (Date.now()-start)));
     kopf(0);
     eingabe=""; zeigeEingabe();
-    await pfeileWeg();
+    await pfeileWeg(); sag("");
     await Promise.all([einrollen(), zurueck()]);
     await hilfeZeigen();
     busy=false;
@@ -544,7 +536,7 @@ sperreTouch();
   async function neueAufgabe(){
     const neu=waehle();
     const kettenwechsel = neu.n !== n || !perlen.length;
-    x=neu; kette=neu.kette; rest=neu.rest; vorher=neu.key; fehler=0; eingabe=""; zeigeEingabe();
+    x=neu; kette=neu.kette; rest=neu.rest; vorher=neu.key; fehler=0; eingabe=""; zeigeEingabe(); sag("");
     if(kettenwechsel){
       if(perlen.length && !ruhig){
         await einrollen();
@@ -558,7 +550,6 @@ sperreTouch();
     }
     const t=$("aufgabe"); t.textContent=`${x.a} · ${n}`;
     if(!ruhig) t.animate([{opacity:0,transform:"translateY(-14px)"},{opacity:1,transform:"translateY(0)"}],{duration:300});
-    say(`${gross(W(x.a))} mal ${W(n)}`);
     t0=Date.now(); busy=false;
     if(params.has("fehler") && fehler===0){
       await wait(900); const fz=params.get("fehler"); for(const c of (/^\d{1,3}$/.test(fz) ? fz : "48")) drueck(+c); drueck("los");

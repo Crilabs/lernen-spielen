@@ -144,15 +144,3 @@ export function hilfeVon(a) {
 export function ortVon(zahl, n) {
   return { staebchen: Math.floor(zahl / n), rest: zahl % n, ueber: zahl > 10 * n };
 }
-
-const EINER = ["null", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf",
-  "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
-const ZEHNER = ["", "", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig"];
-// Zahl als Wort (0 … 999), damit die Stimme „42“ nicht als Ordnungszahl oder Ziffern liest.
-export function zahlwort(z) {
-  if (!Number.isInteger(z) || z < 0 || z > 999) return String(z);
-  if (z < 20) return EINER[z];
-  if (z < 100) { const e = z % 10, t = ZEHNER[Math.floor(z / 10)]; return e ? (e === 1 ? "ein" : EINER[e]) + "und" + t : t; }
-  const h = Math.floor(z / 100), r = z % 100;
-  return (h === 1 ? "" : EINER[h]) + "hundert" + (r ? zahlwort(r) : "");
-}

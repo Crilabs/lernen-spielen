@@ -197,10 +197,10 @@ sperreTouch();
     merkeGelernt(e, GELERNT);   // g=1 bleibt auch nach späterer Rückstufung (für den Fortschritt)
   }
 
-  // ---------- Ton und Stimme (Stimmwahl „einhorn-stimme“ gilt für alle Spiele, wählbar in der Wimmelbild-Elternansicht) ----------
+  // ---------- Ton ----------
   let sound = true; try{ sound = localStorage.getItem("zahlenzauber-ton")!=="aus"; }catch(e){}
   const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("zahlenzauber-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
+  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("zahlenzauber-ton",sound?"an":"aus"); }catch(e){} });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
@@ -216,30 +216,7 @@ sperreTouch();
     happs: ()=>{ tone(600,200,.15,"square",.06); setTimeout(()=>tone(300,700,.12,"sine",.1),140); },
     wachsen: ()=>tone(300,900,.5,"sine",.07)
   };
-  const SCHLECHT = /eddy|flo\b|grandma|grandpa|oma|opa|reed|rocko|sandy|shelley|eloquence|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|kathy|ralph|novelty/i;
-  function stimmWert(v){ const n=v.name+" "+v.voiceURI; if(SCHLECHT.test(n)) return -1; let w=0;
-    if(/premium/i.test(n)) w+=40; else if(/enhanced|erweitert|verbessert|natural|neural/i.test(n)) w+=25;
-    if(/google/i.test(n)) w+=15; if(/de[-_]DE/i.test(v.lang)) w+=5; if(/anna|helena|petra|marlene|katja|hedda/i.test(n)) w+=3; return w; }
-  let voice=null;
-  function pickVoice(){ const vs=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang)); let fest=""; try{ fest=localStorage.getItem("einhorn-stimme")||""; }catch(e){}
-    if(fest==="system"){ voice=null; return; }
-    const i=vs.findIndex((v,k)=>(k+"|"+v.name+"|"+v.voiceURI)===fest);
-    voice = i>=0 ? vs[i] : (vs.filter(v=>stimmWert(v)>=0).sort((a,b)=>stimmWert(b)-stimmWert(a))[0] || null); }
-  if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
-  // Zahlen als Wörter vorlesen: „5.“ am Satzende liest die Stimme sonst als Ordnungszahl („fünfter“).
-  const EINER=["null","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun","zehn","elf","zwölf","dreizehn","vierzehn",
-    "fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn"];
-  const ZEHNER=["","","zwanzig","dreißig","vierzig","fünfzig","sechzig","siebzig","achtzig","neunzig"];
-  function zahlwort(n){
-    if(n<20) return EINER[n];
-    if(n===100) return "hundert";
-    if(n>100) return String(n);
-    const e=n%10, z=ZEHNER[Math.floor(n/10)];
-    return e ? (e===1?"ein":EINER[e])+"und"+z : z;
-  }
-  const sprechText = t => t.replace(/\d+/g, m=>zahlwort(+m)).replace(/ − /g," weniger ").replace(/ = /g," sind ");
-  function say(text){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(sprechText(text)); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1.05; speechSynthesis.speak(u); }catch(e){} }
-  // Sprechblase des Einhorns: nur Text. Gesprochen wird im Spiel nichts – einzig die Perlen-Lektion nach dem Lösen.
+  // Sprechblase des Einhorns: nur Text. Zahlen werden nie vorgelesen – Ziffern lesen sich sicherer als eine Computerstimme.
   function sag(text){ $("blase").textContent=text; }
 
   // ---------- Wiese im Hintergrund: eine kleine Blume je gelöster Blume, dahinter die Einhörner ----------
@@ -367,14 +344,12 @@ sperreTouch();
     $("ltitel").textContent = minus ? `${s} − ${y} = ${x}` : `${x} + ${y} = ${s}`;
     L.classList.add("on");
     perlGroesse(feld, L, s, 4.6);
-    const zehnUnd = s>10 && s%10 ? ` Das sind ${s<20?"zehn":Math.floor(s/10)*10} und ${s%10}.` : "";
     const glocke = i => tone(520+i*90, 700+i*90, .25, "sine", .05);
     if(!minus){
       const g1=gruppe(x), g2=gruppe(y), oben=reihe(g1,g2); feld.append(oben);
       g1.animate([{transform:"translateX(-24rem)",opacity:0},{transform:"none",opacity:1}],{duration:600,easing:"cubic-bezier(.2,.8,.3,1)",fill:"backwards"});
       g2.animate([{transform:"translateX(24rem)",opacity:0},{transform:"none",opacity:1}],{duration:600,easing:"cubic-bezier(.2,.8,.3,1)",fill:"backwards"});
       await wait(700);
-      say(`${x} und ${y} sind zusammen ${s}.${zehnUnd}`);
       const unten=gruppe(s); feld.append(reihe(unten));
       const staebe=[...unten.querySelectorAll(".stab")], zahl=unten.querySelector(".zahl");
       staebe.forEach(st=>st.style.opacity=0); zahl.style.opacity=0;
@@ -388,7 +363,6 @@ sperreTouch();
       const ganz=gruppe(s), oben=reihe(ganz); feld.append(oben);
       ganz.animate([{opacity:0},{opacity:1}],{duration:400,fill:"backwards"});
       await wait(600);
-      say(`${s} weniger ${y} sind ${x}.`);
       const perlen=[...oben.querySelectorAll("b")].slice(-y).reverse();
       for(const b of perlen){ b.classList.add("fort"); await wait(Math.max(40, 400/y)); }
       await wait(300);
@@ -537,9 +511,8 @@ sperreTouch();
     const [a,b,c]=B.loes;
     const folge = B.minus ? [c,b,a] : [a,b,c];
     const text = B.minus ? `${B.nums[c]} − ${B.nums[b]} = ${B.nums[a]}` : `${B.nums[a]} + ${B.nums[b]} = ${B.nums[c]}`;
-    const grund = B.minus ? `${B.nums[c]} weniger ${B.nums[b]} sind ${B.nums[a]}.` : `${B.nums[a]} und ${B.nums[b]} sind zusammen ${B.nums[c]}.`;
     B.start=null; B.partner=null; zeigeZustand(); zeile(""); leereFeld();
-    sag(`Schau: ${text}. Tipp es nach!`); say(`${grund} Tipp es nach.`);
+    sag(`Schau: ${text}. Tipp es nach!`);
     for(const i of folge){ B.el[i].classList.add("zeig"); await wait(600); }
     zeile(text);
     await punkte(B.nums[a], B.nums[b], {fort:B.minus});
