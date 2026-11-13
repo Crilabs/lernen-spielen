@@ -26717,5 +26717,1534 @@
         "Fachpraxis [F]"
       ]
     }
+  ],
+  "ueberschriften": [
+    {
+      "id": "tiere-pflanzen",
+      "name": "Tiere und Pflanzen",
+      "art": "sache"
+    },
+    {
+      "id": "erde-himmel",
+      "name": "Erde, Himmel, Wasser und Luft",
+      "art": "sache"
+    },
+    {
+      "id": "zeit",
+      "name": "Zeit, früher und heute",
+      "art": "sache"
+    },
+    {
+      "id": "raeume-wege",
+      "name": "Räume und Wege",
+      "art": "sache"
+    },
+    {
+      "id": "werkzeug-bauen",
+      "name": "Werkzeug, Arbeit und Bauen",
+      "art": "sache"
+    },
+    {
+      "id": "mein-koerper",
+      "name": "Mein Körper und wie es mir geht",
+      "art": "sache"
+    },
+    {
+      "id": "miteinander",
+      "name": "Wie wir miteinander umgehen",
+      "art": "miteinander"
+    },
+    {
+      "id": "sicher-stark",
+      "name": "Sicher und stark",
+      "art": "schutz"
+    }
+  ],
+  "welten": [
+    {
+      "id": "wiese-und-hecke",
+      "name": "Tiere auf Wiese und Hecke",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.1"
+      ],
+      "anbindung": "M: Beine zählen; D: Tiernamen schreiben",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "fell-federn-schuppen",
+      "name": "Fell, Federn, Schuppen",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.1"
+      ],
+      "anbindung": "D: Nomen und Verben sortieren (laufen, fliegen, kriechen)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "tarnen-verstecken",
+      "name": "Tarnen und Verstecken",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.1"
+      ],
+      "anbindung": "M: im Bild finden und zählen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wer-frisst-was",
+      "name": "Wer frisst was?",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.1"
+      ],
+      "anbindung": "M: Reihenfolge; nur als Pfeil im Schaubild, ohne Jagdszene",
+      "stufe_ab": "sanft",
+      "fakten": []
+    },
+    {
+      "id": "wirbeltierklassen",
+      "name": "Fünf Gruppen von Wirbeltieren",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 2,
+      "quellen": [
+        "MK-S"
+      ],
+      "anbindung": "M: sortieren, Mengen vergleichen. Annahme: Fachbegriffe am LehrplanPLUS prüfen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "tiere-der-erdteile",
+      "name": "Tiere auf allen Erdteilen",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 2,
+      "quellen": [
+        "MK-S"
+      ],
+      "anbindung": "M: Mengen je Erdteil vergleichen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "haustiere",
+      "name": "Haustiere und was sie brauchen",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.1"
+      ],
+      "anbindung": "M: Futtermengen über die Woche",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "bauernhof",
+      "name": "Auf dem Bauernhof",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.1",
+        "WAL"
+      ],
+      "anbindung": "M: Eier in Schachteln, Liter Milch",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "teile-der-pflanze",
+      "name": "Wurzel, Stängel, Blatt, Blüte",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.1",
+        "MK*"
+      ],
+      "anbindung": "D: Wörter den Teilen zuordnen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "was-pflanzen-brauchen",
+      "name": "Was Pflanzen brauchen",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "MK*"
+      ],
+      "anbindung": "M: Gießplan über die Woche",
+      "themen": [
+        "wochentage-tageszeiten"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "samen-reisen",
+      "name": "Samen gehen auf Reisen",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 3.1",
+        "GDSU"
+      ],
+      "anbindung": "M: Samen zählen und bündeln",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "obst-gemuese-reif",
+      "name": "Obst und Gemüse und wann es reif ist",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 3.1"
+      ],
+      "anbindung": "M: Monate im Kalender",
+      "themen": [
+        "kalender-lesen"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "unbekannte-pflanzen",
+      "name": "Unbekannte Pflanzen nicht essen",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.1"
+      ],
+      "anbindung": "Sachmoment, nicht als Gefahr erzählt",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "jahreszeiten-natur",
+      "name": "Tiere im Winter, Frühblüher, Herbstfrüchte",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 1,
+      "quellen": [
+        "BOC"
+      ],
+      "anbindung": "M: Jahreszeiten als Strahl",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "vom-ei-zum-tier",
+      "name": "Raupe und Schmetterling, Kaulquappe und Frosch",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 2,
+      "quellen": [
+        "BOC",
+        "HSU34 3.1"
+      ],
+      "anbindung": "M: Tage zählen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wald-und-teich",
+      "name": "Wald und Teich",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 3.1",
+        "GDSU"
+      ],
+      "anbindung": "D: Sachtext lesen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "atmen-und-junge",
+      "name": "Wie Tiere atmen und Junge bekommen",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 3.1"
+      ],
+      "anbindung": "D: Sachtext lesen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "tierbaum-pflanzenbaum",
+      "name": "Tierbaum und Pflanzenbaum",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 3,
+      "quellen": [
+        "MK-S",
+        "MK-P"
+      ],
+      "anbindung": "M: Baumdiagramme",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "pilze-kleinstlebewesen",
+      "name": "Pilze und winzige Lebewesen",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 4,
+      "quellen": [
+        "MK-P"
+      ],
+      "anbindung": "D: Sachwörter",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "mensch-und-natur",
+      "name": "Wie Menschen Wald und Wasser verändern",
+      "ueberschrift": "tiere-pflanzen",
+      "klasse": 4,
+      "quellen": [
+        "HSU34 3.1"
+      ],
+      "anbindung": "D: Sachtext; ohne Haltung (Grundsatz 8)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "was-luft-kann",
+      "name": "Was Luft kann",
+      "ueberschrift": "erde-himmel",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.3"
+      ],
+      "anbindung": "M: erst vorhersagen, dann sehen (L2)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wetter-messen",
+      "name": "Wetter beobachten und messen",
+      "ueberschrift": "erde-himmel",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 3.3"
+      ],
+      "anbindung": "M: Tabelle, Skala ablesen",
+      "themen": [
+        "strichliste"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "gewitter",
+      "name": "Was man bei Gewitter tut",
+      "ueberschrift": "erde-himmel",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.3"
+      ],
+      "anbindung": "Sachmoment, ruhig erzählt",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "stoffe",
+      "name": "Holz, Metall, Glas, Wolle, Papier",
+      "ueberschrift": "erde-himmel",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.2"
+      ],
+      "anbindung": "M: sortieren; D: Adjektive (hart, weich)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "muell-trennen",
+      "name": "Müll trennen",
+      "ueberschrift": "erde-himmel",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.2",
+        "BOC"
+      ],
+      "anbindung": "M: sortieren und zählen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "eis-wasser-dampf",
+      "name": "Eis, Wasser, Dampf",
+      "ueberschrift": "erde-himmel",
+      "klasse": 2,
+      "quellen": [
+        "MK-A",
+        "HSU34 3.3"
+      ],
+      "anbindung": "M: Temperatur ablesen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wasserkreislauf",
+      "name": "Der Weg des Wassers",
+      "ueberschrift": "erde-himmel",
+      "klasse": 3,
+      "quellen": [
+        "MK-A",
+        "HSU34 3.3"
+      ],
+      "anbindung": "M: Kreislauf ordnen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "tag-und-nacht",
+      "name": "Tag und Nacht, Sonne und Erde",
+      "ueberschrift": "erde-himmel",
+      "klasse": 1,
+      "quellen": [
+        "MK-A",
+        "GDSU"
+      ],
+      "anbindung": "M: Uhr und Tageszeiten",
+      "themen": [
+        "wochentage-tageszeiten"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "mond",
+      "name": "Der Mond und seine Gestalten",
+      "ueberschrift": "erde-himmel",
+      "klasse": 3,
+      "quellen": [
+        "GDSU"
+      ],
+      "anbindung": "M: Tage im Monat",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "am-himmel",
+      "name": "Sonne, Sterne, Planeten",
+      "ueberschrift": "erde-himmel",
+      "klasse": 2,
+      "quellen": [
+        "MK-P"
+      ],
+      "anbindung": "M: Reihenfolge, Ordnungszahlen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "steine-boden",
+      "name": "Steine, Sand und Boden",
+      "ueberschrift": "erde-himmel",
+      "klasse": 2,
+      "quellen": [
+        "MK-P"
+      ],
+      "anbindung": "M: Gewichte vergleichen. Annahme: Klasse aus Montessori-Praxis",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "gebirge-vulkane",
+      "name": "Gebirge und das Innere der Erde",
+      "ueberschrift": "erde-himmel",
+      "klasse": 3,
+      "quellen": [
+        "MK-A",
+        "MK-P"
+      ],
+      "anbindung": "D: Sachwörter; Vulkan nur als Erdinneres",
+      "stufe_ab": "sanft",
+      "fakten": []
+    },
+    {
+      "id": "vulkanausbruch",
+      "name": "Wenn ein Vulkan ausbricht",
+      "ueberschrift": "erde-himmel",
+      "klasse": 3,
+      "quellen": [
+        "MK-P"
+      ],
+      "anbindung": "nur Sachmoment in der Pause, nie Spannungsquelle, keine Betroffenen",
+      "stufe_ab": "abenteuer",
+      "eltern": "Ein Vulkanausbruch wird sachlich erklärt (Gestein, Lava, Asche), ohne Menschen oder Tiere, die betroffen sind, und nur außerhalb der Spielgeschichte.",
+      "fakten": []
+    },
+    {
+      "id": "strom",
+      "name": "Strom und Stromkreis",
+      "ueberschrift": "erde-himmel",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 3.2"
+      ],
+      "anbindung": "D: Sachtext",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wasser-sauber",
+      "name": "Wasser sparen und sauber halten",
+      "ueberschrift": "erde-himmel",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 3.3"
+      ],
+      "anbindung": "M: Liter vergleichen; ohne Haltung (Grundsatz 8)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "magnete",
+      "name": "Was Magnete anziehen",
+      "ueberschrift": "erde-himmel",
+      "klasse": 3,
+      "quellen": [
+        "MK-P"
+      ],
+      "anbindung": "M: sortieren. Annahme: fehlt in HSU 1–4",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "mein-tag",
+      "name": "Mein Tag: morgens, mittags, abends",
+      "ueberschrift": "zeit",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 4.1",
+        "ETH 3.1"
+      ],
+      "anbindung": "M: Reihenfolge, Uhr",
+      "themen": [
+        "wochentage-tageszeiten"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "jahreskreis",
+      "name": "Woche, Monat, Jahr",
+      "ueberschrift": "zeit",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 4.1",
+        "MK-P"
+      ],
+      "anbindung": "M: im Kreis und auf dem Strahl zählen",
+      "themen": [
+        "kalender-lesen"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "feste-im-kalender",
+      "name": "Feste im Kalender",
+      "ueberschrift": "zeit",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 4.1",
+        "ETH 3.2"
+      ],
+      "anbindung": "M: Tage bis …; als Brauch, gleichwertig (Grundsatz 8)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "lebenskette",
+      "name": "Vom Baby bis heute",
+      "ueberschrift": "zeit",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 4.2",
+        "MK-S"
+      ],
+      "anbindung": "M: Zeitleiste, Jahre",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "frueher-heute",
+      "name": "Früher und heute: Spielzeug, Schule, Familie",
+      "ueberschrift": "zeit",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 4.2",
+        "GDSU",
+        "BOC"
+      ],
+      "anbindung": "D: Wörter von früher und heute",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "echt-oder-ausgedacht",
+      "name": "Echt oder ausgedacht?",
+      "ueberschrift": "zeit",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 4.3"
+      ],
+      "anbindung": "D: Sachsatz oder Märchensatz",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "zeitleiste-des-lebens",
+      "name": "Die lange Zeitleiste des Lebens",
+      "ueberschrift": "zeit",
+      "klasse": 2,
+      "quellen": [
+        "MK-P",
+        "MK-S"
+      ],
+      "anbindung": "M: große Zahlen als Länge",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "dinosaurier",
+      "name": "Dinosaurier: wie groß, was sie fraßen",
+      "ueberschrift": "zeit",
+      "klasse": 2,
+      "quellen": [
+        "MK-P",
+        "MK-S"
+      ],
+      "anbindung": "M: Längen vergleichen; ohne Aussterben",
+      "themen": [
+        "laenger-kuerzer"
+      ],
+      "stufe_ab": "sanft",
+      "fakten": []
+    },
+    {
+      "id": "dinosaurier-aussterben",
+      "name": "Warum es keine Dinosaurier mehr gibt",
+      "ueberschrift": "zeit",
+      "klasse": 3,
+      "quellen": [
+        "MK-P"
+      ],
+      "anbindung": "nur Sachmoment in der Pause, nie Spannungsquelle",
+      "stufe_ab": "abenteuer",
+      "eltern": "Das Aussterben der Dinosaurier wird sachlich und ruhig erklärt, nur außerhalb der Spielgeschichte. Kommt nur in der Stufe „Abenteuer“ vor.",
+      "fakten": []
+    },
+    {
+      "id": "geschichte-der-zahlen",
+      "name": "Wie die Zahlen entstanden sind",
+      "ueberschrift": "zeit",
+      "klasse": 1,
+      "quellen": [
+        "MK-S",
+        "MK-P"
+      ],
+      "anbindung": "M: im Lernkern (Kerben, Bündeln, die Null)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "geschichte-der-schrift",
+      "name": "Wie die Schrift entstanden ist",
+      "ueberschrift": "zeit",
+      "klasse": 1,
+      "quellen": [
+        "MK-S"
+      ],
+      "anbindung": "D: im Lernkern (Bilderschrift, Alphabet)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "erste-menschen",
+      "name": "Die ersten Menschen: Werkzeug, Feuer, Ackerbau",
+      "ueberschrift": "zeit",
+      "klasse": 3,
+      "quellen": [
+        "MK-S",
+        "MK*"
+      ],
+      "anbindung": "D: Sachtext",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "erfindungen",
+      "name": "Wie Erfindungen sich verändern",
+      "ueberschrift": "zeit",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 4.2",
+        "HSU34 6.1"
+      ],
+      "anbindung": "D: Sachtext",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "jahrhunderte",
+      "name": "Jahr, Jahrzehnt, Jahrhundert",
+      "ueberschrift": "zeit",
+      "klasse": 4,
+      "quellen": [
+        "HSU34 4.1",
+        "HSU34 4.2"
+      ],
+      "anbindung": "M: große Zahlen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "von-oben",
+      "name": "Das Klassenzimmer von oben",
+      "ueberschrift": "raeume-wege",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 5.1"
+      ],
+      "anbindung": "M: Raumlage, links und rechts",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "schulweg",
+      "name": "Mein Schulweg",
+      "ueberschrift": "raeume-wege",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 5.1",
+        "GDSU"
+      ],
+      "anbindung": "M: Wege beschreiben, Schritte zählen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "stadt-und-land",
+      "name": "Nah und fern, Stadt und Land",
+      "ueberschrift": "raeume-wege",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 5.1"
+      ],
+      "anbindung": "D: Gegensatzpaare",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "unterwegs",
+      "name": "Zu Fuß, mit Rad, Bus und Bahn",
+      "ueberschrift": "raeume-wege",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 5.3"
+      ],
+      "anbindung": "M: Plätze im Bus, Fahrplan",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "verkehrszeichen",
+      "name": "Ampel, Zebrastreifen, Verkehrszeichen",
+      "ueberschrift": "raeume-wege",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 5.3"
+      ],
+      "anbindung": "M: Formen der Schilder",
+      "themen": [
+        "symmetrie-erkennen"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "land-und-wasser",
+      "name": "Insel und See, Halbinsel und Bucht",
+      "ueberschrift": "raeume-wege",
+      "klasse": 2,
+      "quellen": [
+        "MK*"
+      ],
+      "anbindung": "M: Paare und Spiegelung. Annahme: aus Montessori-Praxis",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "erdteile-ozeane",
+      "name": "Erdteile und Ozeane",
+      "ueberschrift": "raeume-wege",
+      "klasse": 2,
+      "quellen": [
+        "MK*",
+        "HSU34 5.1"
+      ],
+      "anbindung": "M: Größen vergleichen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "karten",
+      "name": "Himmelsrichtungen und Karten",
+      "ueberschrift": "raeume-wege",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 5.1"
+      ],
+      "anbindung": "M: Maßstab",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "gemeinde-bis-europa",
+      "name": "Gemeinde, Bayern, Deutschland, Europa",
+      "ueberschrift": "raeume-wege",
+      "klasse": 4,
+      "quellen": [
+        "HSU34 5.1"
+      ],
+      "anbindung": "D: Sachtext",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "kinder-anderswo",
+      "name": "Wie Kinder anderswo leben",
+      "ueberschrift": "raeume-wege",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 5.2"
+      ],
+      "anbindung": "D: Sachtext; nicht exotisch (Grundsatz 6.1 Nr. 9)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "werkzeuge",
+      "name": "Werkzeuge und wofür man sie nimmt",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 6.1",
+        "GDSU"
+      ],
+      "anbindung": "D: Nomen mit Artikel",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "berufe",
+      "name": "Berufe in Hof, Werkstatt, Laden und Pflege",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 6.1",
+        "BOC"
+      ],
+      "anbindung": "D: die Mechanikerin, der Erzieher (Grundsatz 6.1 Nr. 1)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "tuerme-bauen",
+      "name": "Türme, die fest stehen",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 6.2"
+      ],
+      "anbindung": "M: Würfel, Quader, Höhe",
+      "themen": [
+        "wuerfelbauten-nachbauen",
+        "koerper-in-der-umwelt"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "was-rollt",
+      "name": "Was rollt? Murmelbahn und Fahrzeuge",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 6.2"
+      ],
+      "anbindung": "M: Kugel und Zylinder; erst vorhersagen",
+      "themen": [
+        "koerper-in-der-umwelt"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "burg-kloster-schloss",
+      "name": "Burg, Kloster, Schloss",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 6.2"
+      ],
+      "anbindung": "M: Formen; Symbole sachlich (Grundsatz 8)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wer-macht-mein-brot",
+      "name": "Wer an meinem Brot mitgearbeitet hat",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 2,
+      "quellen": [
+        "MK-S"
+      ],
+      "anbindung": "M: Kette von Schritten. Annahme: Motiv nicht belegt",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "was-menschen-brauchen",
+      "name": "Was alle Menschen brauchen",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 1,
+      "quellen": [
+        "MK-S",
+        "HSU12 1.2",
+        "ETH 1.4"
+      ],
+      "anbindung": "D: Wortfeld Essen, Wohnen, Kleidung, Geborgenheit",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "ackerbau-hausbau",
+      "name": "Ackerbau, Hausbau, Handwerk",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 3,
+      "quellen": [
+        "WAL"
+      ],
+      "anbindung": "M: Maße",
+      "themen": [
+        "messen-mit-lineal"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "bruecken",
+      "name": "Brücken, die tragen",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 6.2",
+        "GDSU"
+      ],
+      "anbindung": "M: Last und Stabilität",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "hebel-waage",
+      "name": "Wippe, Hebel, Balkenwaage",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 6.1",
+        "HSU34 6.2"
+      ],
+      "anbindung": "M: im Lernkern (Gleichgewicht ist eine Gleichung)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "kleidung",
+      "name": "Wie Kleidung hergestellt wird",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 4,
+      "quellen": [
+        "HSU34 6.1",
+        "GDSU"
+      ],
+      "anbindung": "D: Sachtext",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "koerperteile",
+      "name": "Mein Körper von Kopf bis Fuß",
+      "ueberschrift": "mein-koerper",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 2.1",
+        "KSS"
+      ],
+      "anbindung": "D: Nomen; alle Körperteile mit richtigem Namen, auch Penis, Vulva, Po, Brust",
+      "stufe_ab": "ruhig",
+      "eltern": "Alle Körperteile heißen von Anfang an richtig, auch Penis, Vulva, Po und Brust, neben Arm und Knie und ohne Besonderheit. Kinderschutz-Fachstellen empfehlen das: Wer die Wörter kennt, kann sagen, wenn etwas nicht stimmt.",
+      "fakten": []
+    },
+    {
+      "id": "sinne",
+      "name": "Sehen, hören, riechen, schmecken, tasten",
+      "ueberschrift": "mein-koerper",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 2.1",
+        "BOC"
+      ],
+      "anbindung": "M: Paare und Mengen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "sinne-anders",
+      "name": "Wie man mit Händen oder Ohren mehr wahrnimmt",
+      "ueberschrift": "mein-koerper",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 2.1"
+      ],
+      "anbindung": "beiläufig, aktive Rollen (Grundsatz 6.1 Nr. 5)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "zaehne",
+      "name": "Zähne und wie man sie pflegt",
+      "ueberschrift": "mein-koerper",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 2.1",
+        "BOC"
+      ],
+      "anbindung": "M: Milchzähne zählen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "was-im-essen-steckt",
+      "name": "Was in Lebensmitteln steckt",
+      "ueberschrift": "mein-koerper",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 2.1",
+        "GDSU"
+      ],
+      "anbindung": "M: Einkaufen; Inhaltsstoffe sachlich, nie gesund oder ungesund (Grundsatz 8)",
+      "themen": [
+        "geld-legen-bis-20"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "haende-sonne",
+      "name": "Hände waschen, Sonnenschutz",
+      "ueberschrift": "mein-koerper",
+      "klasse": 1,
+      "quellen": [
+        "Abl."
+      ],
+      "anbindung": "Sachmoment",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "bewegen-schlafen",
+      "name": "Bewegen, Spielen, Ausruhen, Schlafen",
+      "ueberschrift": "mein-koerper",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 2.2"
+      ],
+      "anbindung": "M: Stunden am Tag",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "das-auge",
+      "name": "Das Auge",
+      "ueberschrift": "mein-koerper",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 2.1"
+      ],
+      "anbindung": "D: Sachtext",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wachsen",
+      "name": "Wachsen und sich verändern",
+      "ueberschrift": "mein-koerper",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 2.1"
+      ],
+      "anbindung": "D: Sachtext",
+      "stufe_ab": "ruhig",
+      "eltern": "Es geht sachlich um Wachsen und Veränderungen des Körpers. Ein Satz Vorschau steht vor dem Spiel in der Elternansicht (Grundsatz 9.3).",
+      "fakten": []
+    },
+    {
+      "id": "erste-hilfe",
+      "name": "Erste Hilfe und Notruf",
+      "ueberschrift": "mein-koerper",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 2.1"
+      ],
+      "anbindung": "M: die Notrufnummer",
+      "stufe_ab": "ruhig",
+      "eltern": "Die Notrufnummer 112 und einfache Erste Hilfe werden ruhig erklärt, ohne Unfallszene.",
+      "fakten": []
+    },
+    {
+      "id": "gefuehle",
+      "name": "Wie fühlt sich das an?",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "ETH 1.3",
+        "HSU12 2.2",
+        "SEL"
+      ],
+      "anbindung": "D: Gefühlswörter lesen; keine falsche Antwort (K13)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "gefuehle-erkennen",
+      "name": "Gefühle im Gesicht und im Körper",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "ETH 1.3",
+        "CASEL"
+      ],
+      "anbindung": "keine falsche Antwort (K13)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wenn-die-wut-kommt",
+      "name": "Wenn die Wut kommt",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 2.2",
+        "SEL"
+      ],
+      "anbindung": "M: bis zehn zählen als Pause",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "warten-verlieren",
+      "name": "Warten und verlieren können",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "CASEL"
+      ],
+      "anbindung": "kurzes Vorbild zwischen Kindern (K12)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "mitspielen",
+      "name": "Darf ich mitspielen?",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "CASEL",
+        "KIM"
+      ],
+      "anbindung": "kurzes Vorbild zwischen Kindern (K12)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "streit-versoehnen",
+      "name": "Streiten und sich versöhnen",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "ETH 2.3",
+        "HSU12 1.1"
+      ],
+      "anbindung": "Konflikt kurz, Lösung ausführlich (K12)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "gerecht-teilen",
+      "name": "Gerecht teilen und abwechseln",
+      "ueberschrift": "miteinander",
+      "klasse": 2,
+      "quellen": [
+        "CASEL",
+        "Abl."
+      ],
+      "anbindung": "M: im Lernkern (Verteilen)",
+      "themen": [
+        "gerecht-verteilen",
+        "aufteilen-in-gruppen"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "hilfe-und-danke",
+      "name": "Um Hilfe bitten, helfen, Danke sagen",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "ETH 1.2",
+        "ETH 2.5",
+        "CASEL"
+      ],
+      "anbindung": "kurzes Vorbild zwischen Kindern (K12)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "hoeflich-reden",
+      "name": "Höflich miteinander reden",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "ETH 2.4"
+      ],
+      "anbindung": "D: Bitte-Sätze und Fragesätze",
+      "themen": [
+        "hoeflich-nachfragen"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "regeln",
+      "name": "Wozu Regeln? Gemeinsam abstimmen",
+      "ueberschrift": "miteinander",
+      "klasse": 2,
+      "quellen": [
+        "ETH 2.2",
+        "HSU12 1.1"
+      ],
+      "anbindung": "M: Stimmen zählen mit Strichliste",
+      "themen": [
+        "strichliste"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "familien",
+      "name": "Wer zusammenlebt",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 1.1"
+      ],
+      "anbindung": "beiläufig, nie als Thema einer Aufgabe (Grundsatz 6.1 Nr. 2)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wenn-etwas-schiefgeht",
+      "name": "Wenn etwas schiefgeht",
+      "ueberschrift": "miteinander",
+      "klasse": 1,
+      "quellen": [
+        "SEL",
+        "Abl."
+      ],
+      "anbindung": "und wie es weitergeht; Wortliste 3.2",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "wuensche-taschengeld",
+      "name": "Wünsche, Kaufen, Taschengeld",
+      "ueberschrift": "miteinander",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 1.2",
+        "ETH 1.4"
+      ],
+      "anbindung": "M: Geld",
+      "themen": [
+        "geld-legen-bis-20",
+        "rueckgeld"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "medien-alltag",
+      "name": "Medien im Alltag",
+      "ueberschrift": "miteinander",
+      "klasse": 2,
+      "quellen": [
+        "HSU12 1.2"
+      ],
+      "anbindung": "D: Wörter rund um Medien",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "fuer-andere-einstehen",
+      "name": "Niemand wird ausgelacht",
+      "ueberschrift": "miteinander",
+      "klasse": 2,
+      "quellen": [
+        "CASEL",
+        "SEL"
+      ],
+      "anbindung": "nur als kurzes gutes Vorbild (K12)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "mehrheit",
+      "name": "Mehrheit entscheidet: Klassensprecherin oder Klassensprecher",
+      "ueberschrift": "miteinander",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 1.1",
+        "GDSU"
+      ],
+      "anbindung": "M: mehr und weniger Stimmen",
+      "themen": [
+        "strichliste-und-bilddiagramm"
+      ],
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "kinderrechte",
+      "name": "Kinderrechte",
+      "ueberschrift": "miteinander",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 1.1"
+      ],
+      "anbindung": "D: Sachtext",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "werbung",
+      "name": "Werbung und was sie will",
+      "ueberschrift": "miteinander",
+      "klasse": 3,
+      "quellen": [
+        "HSU34 1.2"
+      ],
+      "anbindung": "M: Preise vergleichen",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
+      "id": "mein-koerper-gehoert-mir",
+      "name": "Mein Körper gehört mir",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "KSS 1",
+        "TPW"
+      ],
+      "anbindung": "D: im neutralen Körperspiel",
+      "stufe_ab": "ruhig",
+      "eltern": "Botschaft 1: Dein Körper gehört dir. Das Kind kennt alle Körperteile mit Namen. Schutz vor Übergriffen ist Aufgabe der Erwachsenen; die App stärkt nur Wortschatz und Zutrauen.",
+      "fakten": []
+    },
+    {
+      "id": "ja-und-nein-gefuehl",
+      "name": "Ja-Gefühl und Nein-Gefühl",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "KSS 2",
+        "TPW"
+      ],
+      "anbindung": "keine falsche Antwort (K13)",
+      "stufe_ab": "ruhig",
+      "eltern": "Botschaft 2: Ich vertraue meinem Gefühl. Jede Antwort des Kindes wird angenommen und nicht kommentiert.",
+      "fakten": []
+    },
+    {
+      "id": "alle-gefuehle",
+      "name": "Alle Gefühle sind richtig",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "KSS"
+      ],
+      "anbindung": "keine falsche Antwort (K13)",
+      "stufe_ab": "ruhig",
+      "eltern": "Gefühle werden nicht bewertet. Das Kind lernt Wörter für sie.",
+      "fakten": []
+    },
+    {
+      "id": "beruehrungen",
+      "name": "Angenehme, unangenehme und komische Berührungen",
+      "ueberschrift": "sicher-stark",
+      "klasse": 2,
+      "quellen": [
+        "KSS 3",
+        "Abl."
+      ],
+      "anbindung": "sortieren ohne Wertung; Beispiele aus dem Alltag (Kitzeln, das nicht aufhört)",
+      "stufe_ab": "ruhig",
+      "eltern": "Botschaft 3: Berührungen fühlen sich verschieden an. Alltagstipp: Kitzeln sofort stoppen, wenn das Kind Stopp sagt; keine erzwungenen Küsse oder Umarmungen.",
+      "fakten": []
+    },
+    {
+      "id": "nein-sagen",
+      "name": "Ich darf Nein sagen",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "KSS 4"
+      ],
+      "anbindung": "und andere dürfen es auch",
+      "stufe_ab": "ruhig",
+      "eltern": "Botschaft 4: Ich darf Nein sagen. Kinder können Übergriffe in der Regel nicht selbst verhindern; ein Nein kann übergangen werden. Dann gilt: Hilfe holen.",
+      "fakten": []
+    },
+    {
+      "id": "gute-schlechte-geheimnisse",
+      "name": "Gute und schlechte Geheimnisse",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "KSS 5",
+        "AJS"
+      ],
+      "anbindung": "eindeutige Sachregel: schlechte Geheimnisse darf man immer erzählen",
+      "stufe_ab": "ruhig",
+      "eltern": "Botschaft 5: Gute Geheimnisse (Überraschung, Geschenk) machen Freude. Schlechte Geheimnisse fühlen sich nicht gut an – die darf und soll das Kind immer weitererzählen, auch wenn jemand gesagt hat, es dürfe das nicht.",
+      "fakten": []
+    },
+    {
+      "id": "hilfe-holen",
+      "name": "Ich hole mir Hilfe",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "KSS 6"
+      ],
+      "anbindung": "D: Wer hilft mir? Weitererzählen, bis jemand hilft",
+      "stufe_ab": "ruhig",
+      "eltern": "Botschaft 6: Ich weiß, wo ich Hilfe hole – und erzähle weiter, bis mir jemand hilft. Anlaufstellen stehen in der Elternansicht.",
+      "fakten": []
+    },
+    {
+      "id": "nicht-schuld",
+      "name": "Ich bin nicht schuld",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "KSS 7"
+      ],
+      "anbindung": "Querschnitt in allen Schutz-Themen, kein eigenes Spiel",
+      "stufe_ab": "ruhig",
+      "eltern": "Botschaft 7: Das Kind ist nie schuld, wenn jemand seine Grenzen überschreitet.",
+      "fakten": []
+    },
+    {
+      "id": "sicher-im-netz",
+      "name": "Wegklicken und Bescheid sagen",
+      "ueberschrift": "sicher-stark",
+      "klasse": 2,
+      "quellen": [
+        "KS",
+        "AJS"
+      ],
+      "anbindung": "Nein sagen, wegklicken, Hilfe holen",
+      "stufe_ab": "ruhig",
+      "eltern": "Im Netz gilt dasselbe: Nein sagen, wegklicken, einem Erwachsenen Bescheid sagen. Für Kinder geeignete Seiten: fragFINN, Internet-ABC.",
+      "fakten": []
+    },
+    {
+      "id": "sicher-ueber-die-strasse",
+      "name": "Sicher über die Straße, Helm beim Rad",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 5.3"
+      ],
+      "anbindung": "siehe Räume und Wege",
+      "stufe_ab": "ruhig",
+      "eltern": "Verkehrsregeln werden als Sachwissen geübt, ohne Unfallszene.",
+      "fakten": []
+    },
+    {
+      "id": "feuer-notruf",
+      "name": "Feuer und Kerzen: Erwachsene holen",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "HSU12 3.2",
+        "Abl."
+      ],
+      "anbindung": "M: die Notrufnummer",
+      "stufe_ab": "ruhig",
+      "eltern": "Feuer wird ruhig erklärt: Erwachsene holen, Notruf 112. Keine Brandszene.",
+      "fakten": []
+    },
+    {
+      "id": "schwimmen-aufsicht",
+      "name": "Schwimmen nur mit Aufsicht",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "Abl."
+      ],
+      "anbindung": "Sachmoment",
+      "stufe_ab": "ruhig",
+      "eltern": "Sachlicher Hinweis ohne Gefahrenszene.",
+      "fakten": []
+    },
+    {
+      "id": "bescheid-sagen",
+      "name": "Ich sage Bescheid, wo ich bin",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "Abl."
+      ],
+      "anbindung": "statt einer Fremdenregel; keine Fremdenfigur. Annahme: an keiner Quelle geprüft",
+      "stufe_ab": "ruhig",
+      "eltern": "Statt „Geh nicht mit Fremden mit“: Das Kind sagt Bescheid, wo es hingeht und mit wem. Die meisten Übergriffe gehen von bekannten Personen aus; eine Fremdenregel führt in die Irre.",
+      "fakten": []
+    },
+    {
+      "id": "verlaufen",
+      "name": "Ich habe mich verlaufen – wen frage ich?",
+      "ueberschrift": "sicher-stark",
+      "klasse": 1,
+      "quellen": [
+        "Abl."
+      ],
+      "anbindung": "ruhig, mit Helfer in Sicht (Grundsatz 9.2 Nr. 5)",
+      "stufe_ab": "ruhig",
+      "eltern": "Das Kind übt, wen es fragen kann (Menschen an der Kasse, Eltern mit Kindern), ohne Angstszene.",
+      "fakten": []
+    }
   ]
 }
