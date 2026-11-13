@@ -36,7 +36,7 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 .ziffern button.leise{background:none;box-shadow:none;font:700 2.4rem/1 "Andika";color:var(--tinte-weich)}
 .zurueck{position:absolute;top:3rem;left:3.5rem;height:7rem;padding:0 2.6rem 0 2rem;border-radius:99rem;background:#fff;
   display:flex;align-items:center;gap:1rem;font:700 2.4rem/1 "Andika";box-shadow:0 .5rem 0 var(--schatten)}
-.hilfe{font-size:1.8rem;color:var(--tinte-weich);max-width:60rem;text-align:center;line-height:1.4}
+.hilfe{font-size:1.8rem;color:var(--tinte-weich);max-width:80rem;text-align:center;line-height:1.4}
 .sym{width:4rem;height:4rem;flex:none}
 
 /* Bereich */
@@ -81,7 +81,7 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
     <p id="pin-text" role="status">Bitte die PIN eingeben</p>
     <div class="punkte" id="punkte" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="ziffern" id="ziffern"></div>
-    <p id="pin-hilfe" class="hilfe">PIN vergessen: Datei <b>eltern.json</b> im Lernstand-Ordner löschen.</p>
+    <p id="pin-hilfe" class="hilfe">PIN vergessen: Datei <b class="auswahl">%APPDATA%\de.crilabs.lernen-spielen\lernstand\eltern.json</b> löschen.</p>
   </div>
 </section>
 
@@ -223,11 +223,13 @@ async function installieren(update, los, balken, fuell, status) {
   try {
     await sofortSpeichern();
     let gesamt = 0, geladen = 0;
-    await update.downloadAndInstall(ev => {
+    let timer;
+    const zeit = new Promise((_, nein) => { timer = setTimeout(() => nein(new Error("Zeitlimit beim Laden")), 10 * 60 * 1000 + 5000); });
+    await Promise.race([update.downloadAndInstall(ev => {
       if (ev.event === "Started") gesamt = ev.data?.contentLength ?? 0;
       else if (ev.event === "Progress") { geladen += ev.data?.chunkLength ?? 0; if (gesamt) fuell.style.width = Math.min(100, geladen / gesamt * 100) + "%"; }
       else if (ev.event === "Finished") fuell.style.width = "100%";
-    });
+    }, { timeout: 10 * 60 * 1000 }), zeit]).finally(() => clearTimeout(timer));
     status.textContent = "Fertig. Die App startet neu …";
     await T.process.relaunch();
   } catch (e) {

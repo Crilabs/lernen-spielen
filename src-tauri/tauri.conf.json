@@ -54,7 +54,7 @@
       "endpoints": [
         "https://github.com/Crilabs/lernen-spielen/releases/latest/download/latest.json"
       ],
-      "pubkey": "PUBKEY_FEHLT",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVDNEZBOUEyRjI0QTA4MjIKUldRaUNFcnlvcWxQN0JJQ3k1ck9qdytOMkpBVHJUMW5xcjg3S2V2bTFVV3BZOE16eXZ6VDVTeUsK",
       "windows": {
         "installMode": "passive"
       }
