@@ -62,6 +62,11 @@ Die Daten des Kindes liegen im Unterordner `lernstand\kind-1\` (das Profil): je 
 (plus `.bak` als Sicherung), zum Beispiel `lernplan.json` und `einstellungen.json` (Ton je Spiel).
 Bei Updates bleibt der Ordner unberührt.
 
+Einmalig beim Wechsel auf die Version mit `kind-1` (Schritte siehe `CHANGELOG.md`, Abschnitt „Unveröffentlicht“):
+App beenden (wie unter „PIN vergessen“), im Ordner `lernstand\` einen Ordner `kind-1` anlegen, alle Dateien
+außer `eltern.json` und `eltern.json.bak` hineinschieben (auch die `.bak`-Dateien; bei der Rückfrage „ersetzen“
+mit ja), App starten. Ohne das beginnt das Kind mit leerem Lernstand, die PIN bleibt.
+
 ## Logdatei
 
 Die App schreibt über `tauri-plugin-log` in den Log-Ordner der App. Nach der Plugin-Doku ist das unter

@@ -2,7 +2,14 @@
 
 ## Unveröffentlicht
 
-- Lernstand je Profil: Die Daten des Kindes liegen jetzt im Unterordner `lernstand\kind-1\`; `eltern.json` (PIN) bleibt im Ordner darüber. **Einmaliger Handgriff beim Aktualisieren des Kiosks:** Vor dem ersten Start der neuen Version im Ordner `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` einen Ordner `kind-1` anlegen und alle Dateien **außer** `eltern.json` und `eltern.json.bak` hineinschieben. Ohne den Handgriff beginnt das Kind mit leerem Lernstand, die PIN bleibt.
+- Lernstand je Profil: Die Daten des Kindes liegen jetzt im Unterordner `lernstand\kind-1\`; `eltern.json` (PIN) bleibt im Ordner darüber. **Einmaliger Handgriff beim Aktualisieren des Kiosks**, vor dem ersten Start der neuen Version:
+  1. Die App beenden, wie unter „PIN vergessen“ im README beschrieben (Strg+Alt+Entf → Task-Manager).
+  2. Im Explorer in die Adresszeile `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` eingeben.
+  3. Dort einen Ordner `kind-1` anlegen (gibt es ihn schon, weil die neue Version schon einmal lief: einfach weiter).
+  4. Alle Dateien **außer** `eltern.json` und `eltern.json.bak` in `kind-1` verschieben, ausdrücklich auch die `.bak`-Dateien. Fragt Windows, ob vorhandene Dateien ersetzt werden sollen: ja, ersetzen (die neuen Dateien in `kind-1` stammen dann vom ersten Start mit leerem Stand).
+  5. App wieder starten.
+
+  Ohne den Handgriff beginnt das Kind mit leerem Lernstand, die PIN bleibt.
 - Eine Stimme für alle Spiele: Die Stimmenwahl gilt jetzt für alle Spiele gemeinsam und wird je Gerät gemerkt. Zahlen werden weiterhin nie gesprochen. Der Ton-Knopf wird je Spiel gemerkt (früher gespeicherte Ton- und Stimmeneinstellungen werden nicht übernommen: Ton an, Stimme automatisch).
 - Elternbereich je Gerät: Update, Beenden und Kiosk erscheinen nur dort, wo das Gerät sie kann (Windows-Kiosk), nicht mehr im Browser oder auf anderen Geräten.
 - Intern: aller Plattform-Zugriff (Speicher, Einstellungen, Sprache, Gerätefunktionen) liegt in `spiele/kern/`; ein Test sorgt dafür, dass Spiele ihn nicht mehr umgehen.
