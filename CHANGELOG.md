@@ -2,11 +2,12 @@
 
 ## Unveröffentlicht
 
-- Lernstand je Profil: Die Daten des Kindes liegen jetzt im Unterordner `lernstand\kind-1\`; `eltern.json` (PIN) bleibt im Ordner darüber. **Einmaliger Handgriff beim Aktualisieren des Kiosks**, vor dem ersten Start der neuen Version:
-  1. Die App beenden, wie unter „PIN vergessen“ im README beschrieben (Strg+Alt+Entf → Task-Manager).
+- Aufgeräumt: Reste der früheren Web-Fassung (PHP, FTP-Upload) sind entfernt.
+- Lernstand je Profil: Die Daten des Kindes liegen jetzt im Unterordner `lernstand\kind-1\`; `eltern.json` (PIN) bleibt im Ordner darüber. **Einmaliger Handgriff beim Aktualisieren des Kiosks**, direkt nach dem Update, bevor das Kind spielt (die App startet nach dem Update einmal selbst neu):
+  1. Die App beenden: im Elternbereich auf „App beenden“ tippen. Nur wenn das nicht geht: Tastatur anschließen, Strg+Alt+Entf → Task-Manager (siehe „PIN vergessen“ im README).
   2. Im Explorer in die Adresszeile `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` eingeben.
   3. Dort einen Ordner `kind-1` anlegen (gibt es ihn schon, weil die neue Version schon einmal lief: einfach weiter).
-  4. Alle Dateien **außer** `eltern.json` und `eltern.json.bak` in `kind-1` verschieben, ausdrücklich auch die `.bak`-Dateien. Fragt Windows, ob vorhandene Dateien ersetzt werden sollen: ja, ersetzen (die neuen Dateien in `kind-1` stammen dann vom ersten Start mit leerem Stand).
+  4. Alle Dateien **außer** `eltern.json`, `eltern.json.bak`, `geraet.json` und `geraet.json.bak` in `kind-1` verschieben (auch die übrigen `.bak`-Dateien). Fragt Windows, ob vorhandene Dateien ersetzt werden sollen: ja, ersetzen (die neuen Dateien in `kind-1` stammen dann vom ersten Start mit leerem Stand).
   5. App wieder starten.
 
   Ohne den Handgriff beginnt das Kind mit leerem Lernstand, die PIN bleibt.

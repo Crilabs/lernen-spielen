@@ -4,7 +4,7 @@ Lernspiele für ein Kind, als Windows-Kiosk-App (Tauri 2). Die App zeigt eine St
 Kategorien und Spielen (HTML/JS in `spiele/`), speichert den Lernstand lokal, hat einen
 PIN-geschützten Elternbereich und aktualisiert sich über GitHub-Releases.
 
-Die Web-Fassung mit PHP wurde in v0.2 entfernt.
+Die frühere Web-Fassung mit PHP ist entfernt.
 
 ## Aufbau
 
@@ -63,9 +63,10 @@ Die Daten des Kindes liegen im Unterordner `lernstand\kind-1\` (das Profil): je 
 Bei Updates bleibt der Ordner unberührt.
 
 Einmalig beim Wechsel auf die Version mit `kind-1` (Schritte siehe `CHANGELOG.md`, Abschnitt „Unveröffentlicht“):
-App beenden (wie unter „PIN vergessen“), im Ordner `lernstand\` einen Ordner `kind-1` anlegen, alle Dateien
-außer `eltern.json` und `eltern.json.bak` hineinschieben (auch die `.bak`-Dateien; bei der Rückfrage „ersetzen“
-mit ja), App starten. Ohne das beginnt das Kind mit leerem Lernstand, die PIN bleibt.
+direkt nach dem Update, bevor das Kind spielt: App beenden (Elternbereich „App beenden“; sonst wie unter
+„PIN vergessen“), im Ordner `lernstand\` einen Ordner `kind-1` anlegen, alle Dateien außer `eltern.json`,
+`eltern.json.bak`, `geraet.json` und `geraet.json.bak` hineinschieben (auch die übrigen `.bak`-Dateien; bei der
+Rückfrage „ersetzen“ mit ja), App starten. Ohne das beginnt das Kind mit leerem Lernstand, die PIN bleibt.
 
 ## Logdatei
 
