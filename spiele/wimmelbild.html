@@ -57,6 +57,8 @@ img{display:block}
 .bin img{width:8rem;height:8rem}
 .bin.open{transform:scale(1.04);background:#FFF2BF;border-color:rgba(59,42,107,.55)}
 .bin.hide,.hilfe.hide{visibility:hidden}
+.hilfe{transition:opacity .8s,visibility .8s}
+.hilfe.hide{opacity:0;transition:none}
 .info{position:fixed;left:1.6rem;top:1.6rem;background:var(--paper);padding:.8rem 1.6rem;border-radius:1.2rem;font-weight:700;font-size:2.2rem;z-index:5}
 .links{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
 .links a{background:var(--paper);color:var(--nacht);border-radius:1.2rem;padding:1rem 1.6rem;font-weight:700;font-size:2.2rem;text-decoration:none}
@@ -115,6 +117,7 @@ sperreTouch();
   const ANTEIL_FAELLIG = 0.7;  // so viel der Runde aus fälligen/wackeligen Wörtern, der Rest aus sicheren
   const WIEDER_NACH = 3;       // ein falsch gelöstes Wort kommt in derselben Runde nach so vielen anderen noch einmal
   const WIEDER_MAX = 4;        // höchstens so viele Wiederholungen je Runde (damit die Runde kurz bleibt)
+  const HILFE_MS = 15000;   // Vorlese-Hilfe erst nach so langer Zeit je Wort zeigen: erst selbst lesen
   const PAUSE_MS = 10000;   // Szenenpause nach jeder Runde: Einhornbild so lange, dann kommt die nächste Szene
   // Nicht-Nomen: keine Wörter, die in GROSSBUCHSTABEN auch Nomen sein könnten (LAUT, WILD, ARM, GELB …)
   const ALLGEMEIN = [
@@ -309,7 +312,7 @@ sperreTouch();
     idx=0;
     fullView();
     await wait(50);
-    bin.classList.remove("hide"); hilfeBtn.classList.remove("hide");
+    bin.classList.remove("hide");
     zeigeWort();
     // Pausenbild der nächsten Szene schon mal laden, damit es sofort da ist
     pauseBild=null;
@@ -323,8 +326,13 @@ sperreTouch();
     const platz=$("mitte").clientWidth*.94, breit=cardEl.scrollWidth;   // .94: Platz für die leichte Drehung
     if(platz && breit>platz){ const fs=parseFloat(getComputedStyle(cardEl).fontSize); cardEl.style.fontSize=Math.floor(fs*platz/breit)+"px"; }
   }
+  // Hilfe-Knopf je Wort erst nach HILFE_MS einblenden – erst, wenn das Kind es wirklich nicht lesen kann
+  let hilfeTimer=0;
+  function hilfeVerstecken(){ clearTimeout(hilfeTimer); hilfeBtn.classList.add("hide"); }
   function zeigeWort(){
     cur=karten[idx]; fehler=0;
+    hilfeVerstecken();
+    hilfeTimer=setTimeout(()=>hilfeBtn.classList.remove("hide"), HILFE_MS);
     zeigePunkte();
     cardEl.textContent=cur.text.toUpperCase();
     passeKarte();
@@ -434,7 +442,7 @@ sperreTouch();
 
   // Alle Wörter durch: Einhornbild als Szenenpause (ohne Knöpfe), dann direkt die nächste Szene
   async function szenenpause(){
-    bin.classList.add("hide"); hilfeBtn.classList.add("hide"); cardEl.style.display="none";
+    bin.classList.add("hide"); hilfeVerstecken(); cardEl.style.display="none";
     if(!bild.pause){ runde(); return; }
     const el=$("pause"), im=$("pimg");
     im.src=pauseBild ? pauseBild.src : "bilder/"+bild.pause;
