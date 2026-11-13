@@ -67,6 +67,7 @@ export function klasseRechnen(key) {
 
 // aufgabenSpec = Feld `aufgaben` eines Themas
 export function aufgabenVon(spec) {
+  if (!spec) return []; // geplantes Thema ohne Aufgaben
   switch (spec.art) {
     case "zerlegung": {
       const n = spec.zahl;

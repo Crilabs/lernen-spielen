@@ -75,6 +75,15 @@ die vorige PIN zusätzlich in `eltern.json.bak`. So setzt du die PIN zurück:
 
 Die Lernstände der Spiele bleiben erhalten (der Hinweis steht auch auf dem PIN-Bildschirm).
 
+## Lernplan
+
+`spiele/lernplan.json` enthält unter `themen` den Lernplan; die Reihenfolge in der Datei ist die Planreihenfolge.
+Felder eines Themas: `id`, `name`, `sprich` (vorlesbarer Name ohne Ziffern und Zahlwörter), `strang` (eine `id` aus
+`kategorien`), `voraussetzungen` (IDs früherer Themen), `aufgaben` (Aufgabenart wie `{ "art": "rechnen", "thema": … }`;
+`null` heißt „geplant“: noch keine Aufgaben, kein Spiel), `stufen` (`material`, `vorstellung`, `kopf`), `einfuehrung`
+(`{ "vorlage": "einfuehrungen/<name>.json", "werte": {…} }`), `familie` (optional), `tempo`, `eltern` (Hinweis für
+Erwachsene). `npm test` prüft den Plan (eindeutige IDs, Voraussetzungen, jede Aufgabe in genau einem Thema, Einführungen).
+
 ## Neues Spiel hinzufügen
 
 1. HTML-Datei in `spiele/` anlegen (Speichern/Laden über `lernspiel.js`).

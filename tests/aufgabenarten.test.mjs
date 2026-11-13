@@ -69,3 +69,8 @@ test("ZIEL_MS: Zielzeiten", () => {
   assert.equal(ZIEL_MS.menge, 4000);
   assert.deepEqual([10, 20, 30, 100].map(ZIEL_MS.rechnen), [12000, 16000, 20000, 30000]);
 });
+
+test("aufgabenVon: null und undefined (geplantes Thema) ergeben keine Aufgaben", () => {
+  assert.deepEqual(aufgabenVon(null), []);
+  assert.deepEqual(aufgabenVon(undefined), []);
+});
