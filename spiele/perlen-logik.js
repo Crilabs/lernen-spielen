@@ -4,6 +4,8 @@
 // Eine Brücke für die Zahl n wird aus zwei Stäbchen gebaut: a von der linken Spalte, b von der rechten.
 // Geordnete Paare: 2+5 und 5+2 sind verschiedene Paare (Schlüssel "7:2+5").
 
+import { tage, faellig } from "./lernsteuerung.js";
+
 export const K = {
   ABSTAND: [0, 1, 3, 7, 21],     // Wiedervorlage in Tagen je Fach (wie Zauberer/Wimmelbild)
   GELERNT: 4,                    // ab diesem Fach gilt ein Paar als gelernt
@@ -61,11 +63,8 @@ export function migriere(roh) {
 
 export const eintrag = (stand, key) => stand.paare[key] || { f: 0, t: "", h: [], c: 0 };
 
-export function tage(a, b) {
-  if (!a || !b) return Infinity;
-  return Math.round((Date.parse(b + "T12:00:00Z") - Date.parse(a + "T12:00:00Z")) / 86400000);
-}
-export const faellig = (e, heute) => e.f === 0 || tage(e.t, heute) >= K.ABSTAND[Math.min(e.f, K.ABSTAND.length - 1)];
+// Fächer-Logik liegt jetzt zentral in der Lernsteuerung
+export { tage, faellig };
 
 function mische(liste, rnd) {
   const l = [...liste];
