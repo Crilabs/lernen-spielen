@@ -52,3 +52,12 @@ test("alte localStorage-Werte werden nicht übernommen", async () => {
   await E.ladeEinstellungen();
   assert.equal(E.einstellung("ton.wimmelbild", true), true);
 });
+
+test("ladeEinstellungen ist idempotent: zweiter Aufruf überschreibt nichts", async () => {
+  const { S, E } = await frisch();
+  await E.ladeEinstellungen();
+  E.setzeEinstellung("ton.x", false);
+  await E.ladeEinstellungen();
+  assert.equal(E.einstellung("ton.x", true), false);
+  await S.sofortSpeichern();
+});

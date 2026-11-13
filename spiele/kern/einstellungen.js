@@ -17,12 +17,19 @@ let geraet = {};
  */
 const amGeraet = (name) => GERAETS_NAMEN.has(name);
 
+/** @type {Promise<void> | null} */
+let geladen = null;
+
 /**
- * Lädt die Einstellungen aus dem Speicher.
+ * Lädt die Einstellungen aus dem Speicher (einmal je Seite; weitere Aufrufe teilen sich das Ergebnis).
  * @returns {Promise<void>}
  */
-export async function ladeEinstellungen() {
-  [profil, geraet] = await Promise.all([lade("einstellungen", {}), lade("geraet", {})]);
+export function ladeEinstellungen() {
+  geladen ??= Promise.all([lade("einstellungen", {}), lade("geraet", {})]).then(([p, g]) => {
+    profil = p;
+    geraet = g;
+  });
+  return geladen;
 }
 
 /**
