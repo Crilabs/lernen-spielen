@@ -70,13 +70,25 @@ pub fn run() {
             lernstand_schreiben
         ])
         .setup(|app| {
+            // Logging in allen Builds: Datei im App-Log-Ordner, im Debug zusätzlich Stdout.
+            let mut log = tauri_plugin_log::Builder::default()
+                .level(log::LevelFilter::Info)
+                .max_file_size(1_000_000)
+                .rotation_strategy(tauri_plugin_log::RotationStrategy::KeepOne)
+                .clear_targets()
+                .target(tauri_plugin_log::Target::new(
+                    tauri_plugin_log::TargetKind::LogDir { file_name: None },
+                ));
             if cfg!(debug_assertions) {
-                app.handle().plugin(
-                    tauri_plugin_log::Builder::default()
-                        .level(log::LevelFilter::Info)
-                        .build(),
-                )?;
+                log = log.target(tauri_plugin_log::Target::new(
+                    tauri_plugin_log::TargetKind::Stdout,
+                ));
             }
+            app.handle().plugin(log.build())?;
+            log::info!(
+                "Einhorn-Lernspiele {} gestartet",
+                app.package_info().version
+            );
             // Fenster aus tauri.conf.json übernehmen, aber Navigation einschränken.
             let config = app.config().app.windows[0].clone();
             let _window = WebviewWindowBuilder::from_config(app.handle(), &config)?
