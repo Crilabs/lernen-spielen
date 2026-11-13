@@ -6,72 +6,87 @@
 <title>Wimmelbild-Detektiv</title>
 <link rel="stylesheet" href="schrift/schrift.css">
 <style>
-:root{--nacht:#3B2A6B;--paper:#FFF8FC;--bg:#D8F3FF;--lila:#B59CFF;--rosa:#FF8ACB;--mint:#7FE8C8;--sonne:#FFD95A}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}}
-:root[data-theme="dark"]{--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}
+:root{--nacht:#3B2A6B;--weich:#6B5C96;--paper:#FFFFFF;--bg:#CDEFFF;--rahmen:#2B2350;--rosa:#FF8ACB;--mint:#7FE8C8;--sonne:#FFD95A;
+  --gram:#3DB98F;--gram-s:#2A8E6C;
+  font-size:calc(100vh / 108)}   /* 1rem = 10 px bei 1080 px Höhe, 8 px bei 864 px */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
-body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;color:var(--nacht);background:var(--bg);
+body{font-family:"Andika","Baloo 2",sans-serif;color:var(--nacht);background:var(--rahmen);
   user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none}
-.app{position:fixed;inset:0;display:flex;flex-direction:column;
-  padding:calc(env(safe-area-inset-top,0px) + 6px) calc(env(safe-area-inset-right,0px) + 8px) env(safe-area-inset-bottom,0px) calc(env(safe-area-inset-left,0px) + 8px)}
-.stage{position:relative;flex:1;min-height:0;width:100%;max-width:640px;margin:0 auto;border-radius:18px;overflow:hidden;background:var(--paper);box-shadow:0 6px 0 rgba(59,42,107,.15)}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+img{display:block}
+/* Querformat: links das Bild in voller Höhe, rechts die Leiste mit dem ganzen restlichen Platz */
+.app{position:fixed;inset:0;display:flex}
+.stage{position:relative;flex:none;height:100%;width:calc(100% - 30rem);overflow:hidden;background:var(--rahmen)}
 .stage.shake{animation:shake .5s}
-@keyframes shake{0%,100%{transform:none}15%{transform:translateX(-14px) rotate(-1.5deg)}35%{transform:translateX(12px) rotate(1.2deg)}55%{transform:translateX(-8px)}75%{transform:translateX(5px)}}
-.world{position:absolute;left:0;top:0;transform-origin:0 0;--s:1}
-.world.pan{transition:transform .7s cubic-bezier(.45,.05,.3,1)}
+@keyframes shake{0%,100%{transform:none}15%{transform:translateX(-1.4rem) rotate(-1deg)}35%{transform:translateX(1.2rem) rotate(.8deg)}55%{transform:translateX(-.8rem)}75%{transform:translateX(.5rem)}}
+.world{position:absolute;left:0;top:0}
 .world img{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .world svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .world svg polygon.chk{fill:rgba(255,138,203,.18);stroke:#FF2E9A;stroke-width:2px;vector-effect:non-scaling-stroke}
 .world svg polygon.hint{fill:rgba(255,217,90,.25);stroke:#FFD95A;stroke-width:4px;vector-effect:non-scaling-stroke;animation:hint 1.4s ease-out forwards}
 @keyframes hint{0%,60%{opacity:1}100%{opacity:0}}
 .world svg text{font:800 2.6px "Baloo 2",sans-serif;fill:#fff;stroke:#3B2A6B;stroke-width:.5px;paint-order:stroke;text-anchor:middle}
-.piece{position:absolute;inset:0;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.45))}
+.piece{position:absolute;inset:0;pointer-events:none;z-index:2;filter:drop-shadow(0 .4rem .6rem rgba(0,0,0,.45))}
 .piece i{position:absolute;inset:0;background-size:100% 100%}
-.tag{position:absolute;transform:translate(-50%,-100%);background:var(--paper);color:var(--nacht);font-weight:800;font-size:calc(15px / var(--s));line-height:1;
-  padding:.3em .6em .22em;border-radius:999px;white-space:nowrap;box-shadow:0 .15em 0 rgba(59,42,107,.25);pointer-events:none;animation:pop .35s cubic-bezier(.2,1.6,.4,1)}
+.tag{position:absolute;z-index:3;transform:translate(-50%,-100%);background:var(--paper);color:var(--nacht);font:700 2.6rem/1 "Andika",sans-serif;
+  padding:.5rem 1.2rem .4rem;border-radius:99rem;white-space:nowrap;box-shadow:0 .3rem 0 rgba(59,42,107,.25);pointer-events:none;animation:pop .35s cubic-bezier(.2,1.6,.4,1)}
 @keyframes pop{from{transform:translate(-50%,-100%) scale(.3)}}
-.corner{position:absolute;top:8px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,248,252,.88);font-size:21px;
-  display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 3px 0 rgba(59,42,107,.2);z-index:3}
-.corner.l{left:8px}.corner.r{right:8px}
-.bar{position:relative;width:100%;max-width:640px;margin:0 auto;height:112px;flex:none;display:flex;align-items:center;justify-content:center;padding-right:96px}
-.bar.end{padding-right:0}
-.card{border:0;border-radius:20px;padding:14px 26px 10px;font:800 2rem "Baloo 2",sans-serif;letter-spacing:.05em;color:var(--nacht);background:var(--paper);
-  box-shadow:0 6px 0 rgba(59,42,107,.22);touch-action:none;cursor:grab;transition:opacity .25s,transform .25s}
+.leiste{position:relative;flex:1;min-width:30rem;container-type:inline-size;background:var(--bg);display:flex;flex-direction:column;align-items:center;
+  padding:3rem 2.4rem 3.4rem;gap:2.4rem}
+.leiste .oben{display:flex;gap:1.6rem;align-self:stretch;justify-content:space-between}
+.rund{width:7rem;height:7rem;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;padding:1.5rem;
+  box-shadow:0 .5rem 0 rgba(59,42,107,.15);text-decoration:none;flex:none}
+.rund img{width:100%;height:100%}
+.rund:active{transform:translateY(.3rem);box-shadow:0 .2rem 0 rgba(59,42,107,.15)}
+.runde{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:1rem;min-height:1.5rem}
+.runde i{width:1.5rem;height:1.5rem;border-radius:50%;background:rgba(59,42,107,.15)}
+.runde i.da{background:var(--gram)}
+.mitte{flex:1;min-height:0;align-self:stretch;display:flex;align-items:center;justify-content:center}
+.card{max-width:100%;background:var(--paper);color:var(--nacht);border-radius:2.6rem;padding:2.6rem 3rem;font:700 min(6.4rem,11cqi)/1 "Andika",sans-serif;
+  letter-spacing:.04em;white-space:nowrap;box-shadow:0 .9rem 0 var(--gram-s);transform:rotate(-2deg);touch-action:none;cursor:grab;transition:opacity .25s,transform .25s}
 .card.away{opacity:0}
-.card.hide{opacity:0;transform:scale(.6);pointer-events:none}
-.ghost{position:fixed;z-index:20;pointer-events:none;margin:0;transform:translate(-50%,-50%) scale(1.08);box-shadow:0 12px 22px rgba(59,42,107,.4);transition:none}
-.bin{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:86px;height:86px;border-radius:24px;background:var(--paper);
-  display:flex;align-items:center;justify-content:center;font-size:52px;box-shadow:0 6px 0 rgba(59,42,107,.18)}
-.bin.open{transform:translateY(-50%) scale(1.12);background:#FFF2BF}
-.bin.hide{opacity:0}
-.next{border:0;border-radius:999px;padding:14px 30px;font:800 1.4rem "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 6px 0 #D45A9E}
-.next:active{transform:translateY(4px);box-shadow:0 1px 0 #D45A9E}
-.start{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;
-  background:var(--bg);background-image:radial-gradient(circle at 15% 20%,rgba(255,138,203,.35) 0 90px,transparent 90px),radial-gradient(circle at 85% 15%,rgba(255,217,90,.45) 0 60px,transparent 60px),radial-gradient(circle at 80% 85%,rgba(181,156,255,.45) 0 110px,transparent 110px),radial-gradient(circle at 10% 90%,rgba(127,232,200,.45) 0 70px,transparent 70px)}
+.card.hide{opacity:0;transform:rotate(-2deg) scale(.6);pointer-events:none}
+.ghost{position:fixed;z-index:20;pointer-events:none;margin:0;transform:translate(-50%,-50%) scale(1.08);box-shadow:0 1.6rem 2.6rem rgba(59,42,107,.4);transition:none}
+.hilfe{height:7rem;padding:0 2.8rem;border-radius:99rem;background:var(--paper);font:700 2.4rem/1 "Andika",sans-serif;display:flex;align-items:center;gap:1rem;
+  box-shadow:0 .5rem 0 rgba(59,42,107,.15);flex:none}
+.hilfe img{width:4rem;height:4rem}
+.hilfe:active{transform:translateY(.3rem);box-shadow:0 .2rem 0 rgba(59,42,107,.15)}
+.bin{width:100%;height:20rem;flex:none;border-radius:3rem;border:.5rem dashed rgba(59,42,107,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;
+  font:700 2.2rem/1 "Andika",sans-serif;color:var(--weich);transition:background .15s,border-color .15s,transform .15s}
+.bin img{width:8rem;height:8rem}
+.bin.open{transform:scale(1.04);background:#FFF2BF;border-color:rgba(59,42,107,.55)}
+.bin.hide,.hilfe.hide{visibility:hidden}
+.next{border:0;border-radius:99rem;padding:2rem 4rem;font:800 3.2rem/1 "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 .7rem 0 #D45A9E}
+.next:active{transform:translateY(.5rem);box-shadow:0 .2rem 0 #D45A9E}
+.start{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4rem;text-align:center;padding:4rem;
+  background:var(--bg);background-image:radial-gradient(circle at 15% 20%,rgba(255,138,203,.35) 0 14rem,transparent 14rem),radial-gradient(circle at 85% 15%,rgba(255,217,90,.45) 0 9rem,transparent 9rem),radial-gradient(circle at 80% 85%,rgba(181,156,255,.45) 0 17rem,transparent 17rem),radial-gradient(circle at 10% 90%,rgba(127,232,200,.45) 0 11rem,transparent 11rem)}
 .start.off{display:none}
-.start .big{font-size:96px;line-height:1;animation:float 3s ease-in-out infinite}
-.start h1{font-size:2.2rem;line-height:1.1}
-.start p{font-size:1.15rem;font-weight:600;max-width:30ch}
-.btn{border:0;border-radius:999px;padding:16px 34px;font:800 1.4rem "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 6px 0 #D45A9E;text-decoration:none}
-.btn.mint{background:var(--mint);color:var(--nacht);box-shadow:0 6px 0 #4FBF9C;font-size:1.1rem;padding:12px 24px}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.info{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 12px);transform:translateX(-50%);background:var(--paper);padding:6px 12px;border-radius:12px;font-weight:800;z-index:5}
-.links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.links a{background:var(--paper);color:var(--nacht);border-radius:12px;padding:6px 12px;font-weight:800}
+.start .big{width:18rem;height:18rem;animation:float 3s ease-in-out infinite}
+.start h1{font:800 6rem/1.1 "Baloo 2",sans-serif}
+.start p{font-size:3rem;font-weight:700;max-width:32ch;line-height:1.3}
+.btn{display:inline-flex;align-items:center;gap:1.2rem;border:0;border-radius:99rem;padding:2.2rem 5rem;font:800 3.6rem/1 "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 .7rem 0 #D45A9E;text-decoration:none}
+.btn.mint{background:var(--mint);color:var(--nacht);box-shadow:0 .7rem 0 #4FBF9C;font-size:2.6rem;padding:1.6rem 3.4rem}
+.btn img{width:3.6rem;height:3.6rem}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6rem)}}
+.info{position:fixed;left:1.6rem;top:1.6rem;background:var(--paper);padding:.8rem 1.6rem;border-radius:1.2rem;font-weight:700;font-size:2.2rem;z-index:5}
+.links{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.links a{background:var(--paper);color:var(--nacht);border-radius:1.2rem;padding:1rem 1.6rem;font-weight:700;font-size:2.2rem;text-decoration:none}
 .pause{position:fixed;inset:0;z-index:25;background:#1F1B45;display:none;overflow:hidden;opacity:0;transition:opacity .8s}
 .pause.on{display:block}.pause.show{opacity:1}
-.pause .pbg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(28px) brightness(.8)}
-.pause img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kenburns 26s ease-in-out infinite alternate}
-@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12) translateY(-2%)}}
-.pause .sparkles span{position:absolute;font-size:22px;opacity:0;animation:glitzer 5s ease-in-out infinite;pointer-events:none}
-@keyframes glitzer{0%{opacity:0;transform:translateY(0) scale(.6)}30%{opacity:.9}100%{opacity:0;transform:translateY(-120px) scale(1.1)}}
-.pweiter{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);opacity:.92}
-.eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 32px;user-select:text;-webkit-user-select:text;touch-action:auto}
-.eltern h1{font-size:1.6rem}.eltern h2{font-size:1.2rem;margin:16px 0 4px}.eltern p{margin:6px 0;font-weight:600;max-width:60ch}
-.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:10px;padding:4px 10px;margin:4px 0;font-weight:800}
-.eltern small{font-weight:600;opacity:.75}
-@media (prefers-reduced-motion:reduce){.start .big{animation:none}.world.pan{transition:none}.pause img,.pause .sparkles span{animation:none}}
+.pause .pbg{position:absolute;inset:-4rem;background-size:cover;background-position:center;filter:blur(2.8rem) brightness(.8)}
+.pause img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08) translateY(-1%)}}
+/* Glitzer ohne Emojis: kleine leuchtende Punkte */
+.pause .sparkles span{position:absolute;width:1.6rem;height:1.6rem;border-radius:50%;opacity:0;pointer-events:none;
+  background:radial-gradient(circle,#fff 0 25%,rgba(255,217,90,.9) 40%,rgba(255,138,203,0) 70%);animation:glitzer 5s ease-in-out infinite}
+@keyframes glitzer{0%{opacity:0;transform:translateY(0) scale(.6)}30%{opacity:.9}100%{opacity:0;transform:translateY(-12rem) scale(1.4)}}
+.pweiter{position:absolute;left:50%;bottom:4rem;transform:translateX(-50%);opacity:.92}
+.eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:3rem 4rem 4rem;user-select:text;-webkit-user-select:text;touch-action:auto;font-size:2rem}
+.eltern h1{font:800 4rem/1.1 "Baloo 2",sans-serif}.eltern h2{font:800 2.8rem/1.1 "Baloo 2",sans-serif;margin:2.4rem 0 .6rem}.eltern p{margin:1rem 0;font-weight:700;max-width:70ch}
+.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:1rem;padding:.6rem 1.4rem;margin:.6rem 0;font-weight:700}
+.eltern small{font-weight:400;opacity:.75}
+@media (prefers-reduced-motion:reduce){.start .big{animation:none}.pause img,.pause .sparkles span{animation:none}}
 </style>
 </head>
 <body>
@@ -81,13 +96,17 @@ body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;co
       <img id="img" alt="">
       <svg id="svg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
     </div>
-    <a class="corner l" href="index.html" aria-label="Alle Spiele">🏠</a>
-    <button class="corner r" id="snd" aria-label="Ton">🔊</button>
   </div>
-  <div class="bar" id="bar">
-    <button class="card hide" id="card"></button>
-    <div class="bin hide" id="bin">🗑️</div>
-  </div>
+  <aside class="leiste" id="bar">
+    <div class="oben">
+      <a class="rund" href="index.html" aria-label="Alle Spiele"><img src="symbole/haus.svg" alt=""></a>
+      <button class="rund" id="snd" aria-label="Ton"><img id="sndimg" src="symbole/ton-an.svg" alt=""></button>
+    </div>
+    <div class="runde" id="punkte" aria-label="Runde"></div>
+    <div class="mitte" id="mitte"><button class="card hide" id="card"></button></div>
+    <button class="hilfe hide" id="hilfe"><img src="symbole/hilfe.svg" alt="">Hilfe</button>
+    <div class="bin hide" id="bin"><img src="symbole/muelleimer.svg" alt="">Kein Nomen</div>
+  </aside>
 </div>
 <div class="pause" id="pause">
   <div class="pbg" id="pbg"></div>
@@ -96,15 +115,15 @@ body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;co
   <button class="btn pweiter" id="pweiter">Weiter ›</button>
 </div>
 <div class="start" id="start">
-  <div class="big">🔍</div>
+  <img class="big" src="symbole/wimmelbild.svg" alt="">
   <h1>Wimmelbild-Detektiv</h1>
   <p>Ist das Wort ein Ding? Dann schieb es auf das Ding im Bild. Wenn nicht – ab in den Mülleimer!</p>
   <button class="btn" id="go">Los geht's!</button>
-  <a class="btn mint" href="index.html">🏠 Alle Spiele</a>
+  <a class="btn mint" href="index.html"><img src="symbole/haus.svg" alt="">Alle Spiele</a>
 </div>
 
 <script type="module">
-import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
+import {lade, speichere, sperreTouch, esc, merkeGelernt} from "./lernspiel.js";
 sperreTouch();
 (async function(){
   // ---------- Einstellungen ----------
@@ -112,7 +131,7 @@ sperreTouch();
   const N_ANDERE = 5;       // Nicht-Nomen je Runde (davon bis zu ANDERE_BILD aus der Liste des Bildes)
   const ANDERE_BILD = 2;
   const TOLERANZ = 2;       // Treffer-Rand um das Ding, in % der Bildbreite
-  const LIFT = 60;          // so viele px schwebt das Kärtchen über dem Finger
+  const LIFT = 40;          // so viele px schwebt das Kärtchen über dem Finger
   // Wiedervorlage über Tage (Fächer): richtig beim ersten Versuch → ein Fach weiter, Fehler → zurück in Fach 0.
   // ABSTAND[f] = so viele Tage nach der letzten Beförderung ist ein Wort in Fach f wieder fällig. Ab Fach GELERNT gilt es als gelernt.
   const ABSTAND = [0, 1, 3, 7, 21];
@@ -120,7 +139,6 @@ sperreTouch();
   const ANTEIL_FAELLIG = 0.7;  // so viel der Runde aus fälligen/wackeligen Wörtern, der Rest aus sicheren
   const WIEDER_NACH = 3;       // ein falsch gelöstes Wort kommt in derselben Runde nach so vielen anderen noch einmal
   const WIEDER_MAX = 4;        // höchstens so viele Wiederholungen je Runde (damit die Runde kurz bleibt)
-  const AUSSCHNITT_MIN = 35, AUSSCHNITT_MAX = 70;   // Breite des Ausschnitts in % der Bildbreite
   const PAUSE_ALLE = 1;     // nach so vielen Runden kommt ein Pausenbild (0 = nie)
   // Nicht-Nomen: keine Wörter, die in GROSSBUCHSTABEN auch Nomen sein könnten (LAUT, WILD, ARM, GELB …)
   const ALLGEMEIN = [
@@ -157,6 +175,7 @@ sperreTouch();
     e.h.push(firstTry?1:0); if(e.h.length>6) e.h.shift();
     if(!firstTry){ e.f=0; e.t=heute(); }
     else if(faellig(s)){ e.f=Math.min(e.f+1, GELERNT); e.t=heute(); }   // vorzeitig richtig (Wort war nicht fällig): Fach bleibt
+    merkeGelernt(e, GELERNT);   // g=1 bleibt auch nach späterer Rückstufung (für den Fortschritt)
     persist();
   }
   // Runde mischen: zuerst fällige Wörter (niedriges Fach zuerst), Rest aus sicheren
@@ -170,7 +189,7 @@ sperreTouch();
 
   // ---------- Ton und Stimme ----------
   let sound = true; try{ sound = localStorage.getItem("wimmelbild-ton")!=="aus"; }catch(e){}
-  const sndBtn=$("snd"); const showSnd=()=>sndBtn.textContent=sound?"🔊":"🔈"; showSnd();
+  const sndBtn=$("snd"); const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
   sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("wimmelbild-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.18){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
@@ -242,47 +261,31 @@ sperreTouch();
   const pts = f => poly(f).map(([x,y])=>`${x},${y}`).join(" ");
   const SVGNS="http://www.w3.org/2000/svg";
 
-  // ---------- Bühne: die „Welt“ (Bild + Umrisse + Schilder) wird verschoben und gezoomt ----------
-  const stage=$("stage"), world=$("world"), img=$("img"), svg=$("svg"), cardEl=$("card"), bin=$("bin"), bar=$("bar");
-  let bild=null, ar=2/3, view=null;   // view: {x,y,w} Ausschnitt in Bild-% (x,w: Breite, y: Höhe)
-  const SW = () => stage.clientWidth, SH = () => stage.clientHeight;
-  function sizeWorld(){ world.style.width=SW()+"px"; world.style.height=(SW()/ar)+"px"; }
-  // Ausschnitt anzeigen: w = Breite in % der Bildbreite; Höhe ergibt sich aus der Bühne
-  function viewH(w){ return w*(SH()/SW())*ar; }
-  function apply(v, animate){
-    view=v; sizeWorld();
-    const s=100/v.w, tx=-v.x/100*SW()*s, ty=-v.y/100*(SW()/ar)*s;
-    world.classList.toggle("pan",!!animate);
-    world.style.transform=`translate(${tx}px,${ty}px) scale(${s})`; world.style.setProperty("--s",s);
-  }
-  function fullView(){   // ganzes Bild einpassen
-    sizeWorld();
-    const s=Math.min(1, SH()/(SW()/ar)), tx=(SW()-SW()*s)/2, ty=(SH()-SW()/ar*s)/2;
-    view=null; world.classList.add("pan");
-    world.style.transform=`translate(${tx}px,${ty}px) scale(${s})`; world.style.setProperty("--s",s);
-  }
-  // Ausschnitt um ein Ding wählen, Ding nicht immer in der Mitte
-  function viewFor(f){
-    const [x1,y1,x2,y2]=bbox(f), tw=x2-x1, th=y2-y1;
-    let w=Math.min(AUSSCHNITT_MAX, Math.max(AUSSCHNITT_MIN, tw*2.6, th*2.2/((SH()/SW())*ar)));
-    while(viewH(w)>100 && w>10) w-=2;
-    const h=viewH(w), cx=(x1+x2)/2, cy=(y1+y2)/2;
-    const rx=rnd(.28,.72), ry=rnd(.28,.72);
-    const x=Math.min(100-w, Math.max(0, cx-rx*w)), y=Math.min(100-h, Math.max(0, cy-ry*h));
-    return {x,y,w};
+  // ---------- Bühne: das ganze Bild in voller Höhe, ohne Zoom ----------
+  // Breite aus dem Seitenverhältnis, höchstens bis die Leiste noch 30rem hat; sonst eingepasst mit Rand.
+  const stage=$("stage"), world=$("world"), img=$("img"), svg=$("svg"), cardEl=$("card"), bin=$("bin"), bar=$("bar"), hilfeBtn=$("hilfe"), punkte=$("punkte");
+  let bild=null, ar=2/3;
+  const rem = () => parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
+  function fullView(){   // einzige Einpassung: Bühne = Bildbreite, Bild mittig darin
+    const H=innerHeight, maxW=Math.max(0, innerWidth-30*rem());
+    const bw=Math.min(maxW, H*ar), bh=bw/ar;
+    stage.style.width=bw+"px";
+    world.style.width=bw+"px"; world.style.height=bh+"px";
+    world.style.left="0px"; world.style.top=((H-bh)/2)+"px";
   }
   function toPct(cx,cy){ const r=world.getBoundingClientRect(); return [(cx-r.left)/r.width*100,(cy-r.top)/r.height*100]; }
   function overStage(cx,cy){ const r=stage.getBoundingClientRect(); return cx>=r.left&&cx<=r.right&&cy>=r.top&&cy<=r.bottom; }
   function overBin(cx,cy){ const r=bin.getBoundingClientRect(), m=22; return cx>=r.left-m&&cx<=r.right+m&&cy>=r.top-m&&cy<=r.bottom+m; }
+  // px/py in % von Bildbreite/-höhe; y-Abstand /ar → ebenfalls in % der Bildbreite, damit TOLERANZ in beide Richtungen gleich weit reicht
   function onThing(d,px,py){ return d.formen.some(f=>{ const [x1,y1,x2,y2]=bbox(f); const dx=Math.max(x1-px,0,px-x2), dy=Math.max(y1-py,0,py-y2)/ar; return dx<=TOLERANZ && dy<=TOLERANZ; }); }
-  addEventListener("resize",()=>{ if(view) apply(view,false); else if(bild) fullView(); });
+  addEventListener("resize",()=>{ if(bild && !pruefen){ fullView(); passeKarte(); } });
 
   function hint(d){ for(const f of d.formen){ const p=document.createElementNS(SVGNS,"polygon"); p.setAttribute("points",pts(f)); p.setAttribute("class","hint"); svg.appendChild(p); setTimeout(()=>p.remove(),1500); } }
 
-  // Ding lebendig werden lassen: Ausschnitt des Bildes als Kopie darüber animieren
+  // Ding lebendig werden lassen: der Ding-Bereich als Kopie an Ort und Stelle über dem Bild, leicht vergrößert
   function beleben(d){
     if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const H=SW()/ar;
+    const H=world.clientHeight;
     const art = d.bewegung || ["huepfen","wackeln","wachsen","drehen"][Math.floor(Math.random()*4)];
     for(const f of d.formen){
       const [x1,y1,x2,y2]=bbox(f), cx=(x1+x2)/2, cy=(y1+y2)/2, hh=(y2-y1)/100*H;
@@ -290,14 +293,14 @@ sperreTouch();
       const i=document.createElement("i"); i.style.backgroundImage=`url("${img.src}")`; i.style.clipPath=i.style.webkitClipPath=clip(f);
       w.appendChild(i); world.insertBefore(w, svg);
       w.style.transformOrigin = art==="drehen"||art==="wachsen" ? `${cx}% ${cy}%` : `${cx}% ${y2}%`;
-      const up=Math.max(hh*.35, H*.015);
+      const up=Math.max(hh*.35, H*.015), S="scale(1.15)";
       const K = {
-        huepfen:[{transform:"none"},{transform:`translateY(${-up}px) scale(1.08)`,offset:.3},{transform:"none",offset:.55},{transform:`translateY(${-up/2}px)`,offset:.75},{transform:"none"}],
-        wackeln:[{transform:"none"},{transform:"rotate(-10deg) scale(1.12)",offset:.2},{transform:"rotate(9deg) scale(1.12)",offset:.45},{transform:"rotate(-5deg) scale(1.08)",offset:.7},{transform:"none"}],
-        wachsen:[{transform:"none"},{transform:"scale(1.3)",offset:.4},{transform:"scale(1.22)",offset:.6},{transform:"none"}],
+        huepfen:[{transform:"none"},{transform:`translateY(${-up}px) ${S}`,offset:.3},{transform:S,offset:.55},{transform:`translateY(${-up/2}px) ${S}`,offset:.75},{transform:"none"}],
+        wackeln:[{transform:"none"},{transform:`rotate(-10deg) ${S}`,offset:.2},{transform:`rotate(9deg) ${S}`,offset:.45},{transform:`rotate(-5deg) ${S}`,offset:.7},{transform:"none"}],
+        wachsen:[{transform:"none"},{transform:"scale(1.3)",offset:.4},{transform:"scale(1.2)",offset:.6},{transform:"none"}],
         drehen:[{transform:"none"},{transform:"rotate(180deg) scale(1.25)",offset:.5},{transform:"rotate(360deg)"}]
       }[art] || [{transform:"none"},{transform:"scale(1.25)"},{transform:"none"}];
-      w.animate(K,{duration:1000,easing:"ease-in-out"}).finished.then(()=>w.remove(),()=>w.remove());
+      w.animate(K,{duration:1100,easing:"ease-in-out"}).finished.then(()=>w.remove(),()=>w.remove());
     }
   }
   function tagFor(d){
@@ -313,7 +316,7 @@ sperreTouch();
     const name=chooseBild(); bild=bilder[name];
     save.letztes=name; save.bilder[name]=Date.now(); persist();
     world.querySelectorAll(".tag,.piece").forEach(e=>e.remove()); svg.innerHTML="";
-    bar.querySelectorAll(".next").forEach(e=>e.remove()); bar.classList.remove("end"); cardEl.style.display="";
+    bar.querySelectorAll(".next").forEach(e=>e.remove()); cardEl.style.display="";
     img.src="bilder/"+bild.bild;
     await img.decode().catch(()=>{});
     ar = img.naturalWidth && img.naturalHeight ? img.naturalWidth/img.naturalHeight : 2/3;
@@ -324,27 +327,31 @@ sperreTouch();
     const andere=ausBild.concat(mische(ALLGEMEIN.filter(w=>!ausBild.includes(w)), w=>"~"+w, N_ANDERE-ausBild.length));
     karten=shuffle([...nomen.map(d=>({text:d.wort, ding:d})), ...andere.map(w=>({text:w, ding:null}))]);
     idx=0;
-    fullView(); world.classList.remove("pan");
+    fullView();
     await wait(50);
-    bin.classList.remove("hide");
+    bin.classList.remove("hide"); hilfeBtn.classList.remove("hide");
     zeigeWort();
   }
-  // Ausschnitt für ein Nicht-Nomen: irgendein Ding, das in dieser Runde nicht gefragt ist
+  // Rundenpunkte: einer je Kärtchen (Wiederholungen kommen dazu), erledigte grün
+  function zeigePunkte(){ punkte.innerHTML=karten.map((k,i)=>`<i${i<idx?' class="da"':""}></i>`).join(""); }
+  // Lange Wörter: Schrift so weit verkleinern, dass das Kärtchen in die Leiste passt
+  function passeKarte(){
+    cardEl.style.fontSize="";
+    const platz=$("mitte").clientWidth*.94, breit=cardEl.scrollWidth;   // .94: Platz für die leichte Drehung
+    if(platz && breit>platz){ const fs=parseFloat(getComputedStyle(cardEl).fontSize); cardEl.style.fontSize=Math.floor(fs*platz/breit)+"px"; }
+  }
   function zeigeWort(){
     cur=karten[idx]; fehler=0;
-    let f;
-    if(cur.ding) f=cur.ding.formen[Math.floor(Math.random()*cur.ding.formen.length)];
-    else { const frei=bild.dinge.filter(d=>!karten.some(k=>k.ding===d)); const d=(frei.length?frei:bild.dinge)[Math.floor(Math.random()*(frei.length||bild.dinge.length))]; f=d.formen[0]; }
-    apply(viewFor(f), true);
+    zeigePunkte();
     cardEl.textContent=cur.text.toUpperCase();
-    cardEl.style.fontSize = cur.text.length>11 ? "1.3rem" : cur.text.length>8 ? "1.6rem" : "2rem";
+    passeKarte();
     cardEl.classList.add("hide");
-    setTimeout(()=>{ cardEl.classList.remove("hide","away"); busy=false; }, 650);
+    setTimeout(()=>{ cardEl.classList.remove("hide","away"); busy=false; }, 350);
   }
   async function weiter(){
     // Falsch gelöst: dasselbe Wort kommt in dieser Runde noch einmal (zählt dann nicht für den Lernstand)
     if(fehler>0 && !cur.wdh && karten.filter(k=>k.wdh).length<WIEDER_MAX) karten.splice(Math.min(karten.length, idx+1+WIEDER_NACH), 0, {...cur, wdh:true});
-    idx++;
+    idx++; zeigePunkte();
     if(idx<karten.length){ await wait(900); zeigeWort(); }
     else { await wait(1100); aufwachen(); }
   }
@@ -397,9 +404,11 @@ sperreTouch();
       if(cur.ding){ const ein = cur.ding.artikel==="die" ? "eine" : "ein";
         setTimeout(()=>{ say(`${ein} ${W}. Das passt. ${W} ist ein Ding. Such es im Bild!`); hint(cur.ding); }, 500); }
       else { setTimeout(()=>{ say(`ein ${w}? Das passt nicht. ${W} ist kein Ding. Ab in den Mülleimer!`);
-        bin.animate([{transform:"translateY(-50%)"},{transform:"translateY(-50%) scale(1.25)",background:"#FFF2BF",offset:.3},{transform:"translateY(-50%)",offset:.6},{transform:"translateY(-50%) scale(1.25)",background:"#FFF2BF",offset:.8},{transform:"translateY(-50%)"}],{duration:1400}); }, 500); }
+        bin.animate([{transform:"none"},{transform:"scale(1.08)",background:"#FFF2BF",offset:.3},{transform:"none",offset:.6},{transform:"scale(1.08)",background:"#FFF2BF",offset:.8},{transform:"none"}],{duration:1400}); }, 500); }
     }
   }
+  // Hilfe-Knopf: liest das Wort vor (lange Wörter sind schwer zu lesen). Kein Fehler, kein Hinweis auf die Lösung.
+  hilfeBtn.addEventListener("click",()=>{ if(cur && !busy) say(cur.text); });
   function homeOf(){ const r=cardEl.getBoundingClientRect(); return [r.left+r.width/2, r.top+r.height/2]; }
   function zurueck(g,ms=380,easing="cubic-bezier(.3,.7,.4,1)"){
     const [hx,hy]=homeOf();
@@ -415,7 +424,7 @@ sperreTouch();
     busy=true; sfx.boing();
     const r=bin.getBoundingClientRect();
     g.style.left=(r.left+r.width/2)+"px"; g.style.top=(r.top+r.height/2)+"px";
-    bin.animate([{transform:"translateY(-50%)"},{transform:"translateY(-50%) rotate(-14deg) scale(1.15)",offset:.3},{transform:"translateY(-50%) rotate(10deg)",offset:.6},{transform:"translateY(-50%)"}],{duration:500});
+    bin.animate([{transform:"none"},{transform:"rotate(-4deg) scale(1.06)",offset:.3},{transform:"rotate(3deg)",offset:.6},{transform:"none"}],{duration:500});
     g.animate([{transform:"translate(-50%,-50%) scale(.6)"},{transform:"translate(-50%,-160%) scale(1.15) rotate(-10deg)",offset:.5},{transform:"translate(-50%,-50%) scale(1.08)"}],{duration:450});
     setTimeout(()=>{ zurueck(g,450,"cubic-bezier(.2,1.4,.4,1)"); setTimeout(()=>busy=false,470); }, 420);
   }
@@ -425,7 +434,7 @@ sperreTouch();
     const r=bin.getBoundingClientRect();
     g.animate([{left:g.style.left,top:g.style.top,opacity:1,transform:"translate(-50%,-50%) scale(1.08)"},
                {left:(r.left+r.width/2)+"px",top:(r.top+r.height/2)+"px",opacity:0,transform:"translate(-50%,-50%) scale(.2) rotate(25deg)"}],{duration:350,easing:"ease-in"}).finished.then(()=>g.remove());
-    setTimeout(()=>bin.animate([{transform:"translateY(-50%)"},{transform:"translateY(-50%) scale(1.18,.85)",offset:.4},{transform:"translateY(-50%)"}],{duration:350}),300);
+    setTimeout(()=>bin.animate([{transform:"none"},{transform:"scale(1.06,.92)",offset:.4},{transform:"none"}],{duration:350}),300);
     cardEl.classList.add("hide"); cardEl.classList.remove("away");
     weiter();
   }
@@ -439,16 +448,15 @@ sperreTouch();
     weiter();
   }
 
-  // Alle Wörter durch: Bild zoomt heraus und wacht auf
+  // Alle Wörter durch: das Bild wacht auf – die gefundenen Dinge der Runde nacheinander
   async function aufwachen(){
-    bin.classList.add("hide"); bar.classList.add("end"); cardEl.style.display="none";
-    fullView();
-    await wait(900);
+    bin.classList.add("hide"); hilfeBtn.classList.add("hide"); cardEl.style.display="none";
+    await wait(400);
     const gef=[...new Set(karten.filter(k=>k.ding).map(k=>k.ding))];
-    for(const d of gef){ beleben(d); await wait(260); }
-    await wait(900);
+    for(const d of gef){ beleben(d); await wait(700); }
+    await wait(600);
     const n=document.createElement("button"); n.className="next"; n.textContent="Nächstes Bild ›";
-    n.addEventListener("click",async()=>{ n.remove(); runden++; if(PAUSE_ALLE && runden%PAUSE_ALLE===0) await pause(); runde(); }); bar.appendChild(n);
+    n.addEventListener("click",async()=>{ n.remove(); runden++; if(PAUSE_ALLE && runden%PAUSE_ALLE===0) await pause(); runde(); }); $("mitte").appendChild(n);
   }
 
   // ---------- Pausenbild: einfach etwas Schönes zum Anschauen ----------
@@ -465,7 +473,7 @@ sperreTouch();
       $("pimg").src=src; $("pbg").style.backgroundImage=`url("${src}")`;
       await $("pimg").decode().catch(()=>{});
       const sp=$("sparkles"); sp.innerHTML="";
-      for(let i=0;i<14;i++){ const s=document.createElement("span"); s.textContent=["✨","⭐","💖","🌟"][i%4];
+      for(let i=0;i<14;i++){ const s=document.createElement("span");
         s.style.left=rnd(5,92)+"%"; s.style.top=rnd(20,95)+"%"; s.style.animationDelay=rnd(0,5)+"s"; sp.appendChild(s); }
       el.classList.add("on"); requestAnimationFrame(()=>el.classList.add("show"));
       $("pweiter").onclick=()=>{ el.classList.remove("show"); setTimeout(()=>{ el.classList.remove("on"); res(); },800); };
@@ -477,13 +485,13 @@ sperreTouch();
     $("start").classList.add("off");
     bild=bilder[chooseBild()]; img.src="bilder/"+bild.bild; await img.decode().catch(()=>{});
     ar=img.naturalWidth/img.naturalHeight; fullView();
+    addEventListener("resize", fullView);
     for(const d of bild.dinge) for(const f of d.formen){
       const p=document.createElementNS(SVGNS,"polygon"); p.setAttribute("points",pts(f)); p.setAttribute("class","chk"); svg.appendChild(p);
       const [x1,y1,x2,y2]=bbox(f); const t=document.createElementNS(SVGNS,"text");
       t.setAttribute("x",(x1+x2)/2); t.setAttribute("y",(y1+y2)/2+1); t.setAttribute("transform-origin",`${(x1+x2)/2} ${(y1+y2)/2}`);
       t.setAttribute("transform",`scale(1 ${ar})`); t.textContent=d.wort; svg.appendChild(t);
     }
-    cardEl.remove(); bin.remove();
     bar.innerHTML=`<div class="links">${namen.map(n=>`<a href="?pruefen&bild=${esc(n)}">${esc(n)}</a>`).join("")}</div>`;
     const info=document.createElement("div"); info.className="info"; info.textContent="Tippen zeigt x / y in %"; document.body.appendChild(info);
     stage.addEventListener("pointerdown",e=>{ const [x,y]=toPct(e.clientX,e.clientY); const d=bild.dinge.find(d=>onThing(d,x,y)); info.textContent=`x ${x.toFixed(1)} · y ${y.toFixed(1)}`+(d?` · ${d.wort}`:""); });
@@ -493,7 +501,7 @@ sperreTouch();
   function elternansicht(){
     $("start").classList.add("off");
     const zeile = ([s,e]) => `<li>${s.startsWith("~") ? esc(s.slice(1))+" <small>(kein Nomen)</small>" : esc(s)}
-      <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`;
+      <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${(e.h||[]).map(x=>x?"✓":"✗").join("")}</small></li>`;
     const alle=Object.entries(save.woerter).map(([s,v])=>[s,eintrag(s)]);
     const gruppe=(titel,l)=>`<h2>${titel} (${l.length})</h2><ul>${l.map(zeile).join("")||"<li>–</li>"}</ul>`;
     const el=document.createElement("div"); el.className="eltern";
@@ -513,8 +521,8 @@ sperreTouch();
       liste.innerHTML="";
       const zeile=(titel, info, aktiv, waehle)=>{
         const li=document.createElement("li");
-        li.innerHTML=`${aktiv?"✅ ":""}${titel} <small>${info}</small> `;
-        const b=document.createElement("button"); b.className="btn mint"; b.style.cssText="font-size:.9rem;padding:4px 14px;margin-left:6px"; b.textContent=aktiv?"Probe":"Wählen";
+        li.innerHTML=`${aktiv?"<b>Aktiv:</b> ":""}${titel} <small>${info}</small> `;
+        const b=document.createElement("button"); b.className="btn mint"; b.style.cssText="font-size:1.8rem;padding:.6rem 1.8rem;margin-left:1rem"; b.textContent=aktiv?"Probe":"Wählen";
         b.onclick=()=>{ waehle(); sound=true; say("der Hund – die Katze – das Einhorn"); zeigeStimmen(); };
         li.appendChild(b); liste.appendChild(li);
       };
