@@ -9,7 +9,7 @@
   "spiele": [
     { "id": "zahlenzauber", "titel": "Zahlenzauber", "thema": "Plus und Minus", "kategorie": "mathe", "symbol": "symbole/zahlenzauber.svg", "datei": "zahlenzauber.html", "text": "Welche zwei Zahlen ergeben zusammen die dritte?" },
     { "id": "perlenbruecke", "titel": "Perlenbrücke", "thema": "Zahlen zerlegen", "kategorie": "mathe", "symbol": "symbole/perlenbruecke.svg", "datei": "perlenbruecke.html", "text": "Bau mit Perlenstäbchen eine Brücke über die Zahl." },
-    { "id": "wimmelbild", "titel": "Wimmelbild", "thema": "Nomen", "kategorie": "grammatik", "symbol": "symbole/wimmelbild.svg", "datei": "wimmelbild.html", "text": "Zieh die Wörter auf die Dinge im Bild." },
+    { "id": "wimmelbild", "titel": "Wimmelbild", "thema": "Nomen", "kategorie": "grammatik", "symbol": "symbole/wimmelbild.svg", "datei": "wimmelbild.html", "fortschritt": true, "text": "Zieh die Wörter auf die Dinge im Bild." },
     { "id": "grossbuchstaben", "titel": "Zauberer", "thema": "Großschreibung", "kategorie": "grammatik", "symbol": "symbole/grossbuchstaben.svg", "datei": "grossbuchstaben.html", "text": "Zaubere die Buchstaben groß oder klein." },
     { "id": "einhorn-steine", "titel": "Einhorn-Steine", "thema": "Leerzeichen", "kategorie": "schreiben", "symbol": "symbole/einhorn-steine.svg", "datei": "einhorn-steine.html", "text": "Hör zu und schreib den Satz mit Abständen." }
   ]

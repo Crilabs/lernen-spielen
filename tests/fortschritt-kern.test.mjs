@@ -21,3 +21,31 @@ test("sichtbareKategorien blendet leere aus", () => {
   const daten = JSON.parse(readFileSync(new URL("../spiele/spiele.json", import.meta.url), "utf8"));
   assert.deepEqual(sichtbareKategorien(daten).map((e) => e.kategorie.id), ["mathe", "grammatik", "schreiben"]);
 });
+
+test("fortschritt-Kennzeichen passt zu den Modulen", async () => {
+  const { readdirSync } = await import("node:fs");
+  const daten = JSON.parse(readFileSync(new URL("../spiele/spiele.json", import.meta.url), "utf8"));
+  const module = readdirSync(new URL("../spiele/fortschritt/", import.meta.url))
+    .filter((f) => f.endsWith(".js") && !["kern.js", "laden.js"].includes(f))
+    .map((f) => f.slice(0, -3))
+    .sort();
+  const markiert = daten.spiele.filter((s) => s.fortschritt === true).map((s) => s.id).sort();
+  assert.deepEqual(markiert, module);
+  for (const s of daten.spiele) assert.ok(s.fortschritt === undefined || s.fortschritt === true, s.id);
+});
+
+test("wertVon lädt ohne Kennzeichen nichts und protokolliert nichts", async () => {
+  const speicher = new Map();
+  globalThis.localStorage = { getItem: (k) => speicher.get(k) ?? null, setItem: (k, v) => speicher.set(k, String(v)) };
+  let abrufe = 0;
+  const altFetch = globalThis.fetch;
+  globalThis.fetch = async () => { abrufe++; throw new Error("kein Netz"); };
+  try {
+    const { wertVon } = await import("../spiele/fortschritt/laden.js");
+    assert.equal(await wertVon({ id: "zahlenzauber" }), undefined);
+    assert.equal(abrufe, 0);
+    assert.equal(speicher.get("protokoll"), undefined);
+  } finally {
+    globalThis.fetch = altFetch;
+  }
+});

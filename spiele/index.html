@@ -162,7 +162,7 @@ async function start() {
   try { daten = await (await fetch("spiele.json")).json(); }
   catch (e) { protokoll("spiele.json: " + e); return; }
   const werte = {};
-  await Promise.all(daten.spiele.map(async s => { const w = await wertVon(s.id); if (w !== undefined) werte[s.id] = w; }));
+  await Promise.all(daten.spiele.map(async s => { const w = await wertVon(s); if (w !== undefined) werte[s.id] = w; }));
 
   const kats = sichtbareKategorien(daten);
   const beete = document.getElementById("beete");
