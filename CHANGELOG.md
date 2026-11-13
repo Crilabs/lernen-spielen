@@ -1,6 +1,6 @@
 # Änderungen
 
-## Unveröffentlicht
+## v0.1.7
 
 - Neues Spiel **Kettenhüpfer** (Mathe, kleines Einmaleins): Eine Montessori-Perlenkette liegt eingerollt auf dem Arbeitsteppich. Das Kind tippt das Ergebnis ein (z. B. 6 · 7), dann rollt die Kette aus und das Einhorn hüpft sechs Stäbchen weit. Richtig: Das Pfeilchen 42 rastet am Stäbchenende ein (beim Quadrat ein großes goldenes). Falsch: Das Pfeilchen zeigt, wo die getippte Zahl wirklich liegt. Ab dem zweiten Fehler hilft die passende Kernaufgabe (5 · 7 = 35, „und noch ein Stäbchen?“), ab dem dritten kommt die Lösung mit Begründung. Kernaufgaben (·1, ·2, ·5, ·10) zuerst, Ableitungen danach, Wiedervorlage über Tage, Pause: die Kette legt sich zum Perlenquadrat. Lernstand für Eltern mit `?eltern`.
 - Startseite: Hat eine Kategorie drei oder mehr Spiele, werden die Kacheln etwas dichter, damit alle Platz haben.
