@@ -70,6 +70,31 @@ const regeln = {
     }
   },
 };
+// Felder aus der Recherche (docs/reports/Grundschul Lernplan Deutsch Mathe.md); Klasse 1–2 voll, 3–4 grob
+const WERTE = {
+  typ: ["regel", "merkwort", "fertigkeit"],
+  schrift: ["alle", "va", "sas", "verbunden"],
+  pruefbar: ["ganz", "teilweise"],
+  land: ["BY"],
+  quelle: ["Q", "E", "Q+E"],
+};
+regeln.felder = ({ themen }) => {
+  const ids = new Set(themen.map((t) => t.id));
+  for (const t of themen) {
+    assert.ok([1, 2, 3, 4].includes(t.klasse), `${t.id}: klasse ${t.klasse}`);
+    for (const [feld, erlaubt] of Object.entries(WERTE)) {
+      if (t[feld] !== undefined) assert.ok(erlaubt.includes(t[feld]), `${t.id}: ${feld} ${t[feld]}`);
+    }
+    for (const g of t.gesichert ?? []) assert.ok(t.voraussetzungen.includes(g), `${t.id}: gesichert ${g} ist keine Voraussetzung`);
+    for (const v of t.verwechslung ?? []) assert.ok(ids.has(v) && v !== t.id, `${t.id}: Verwechslung ${v}`);
+    if (t.klasse <= 2) {
+      for (const feld of ["bereich", "ziel", "zweck", "eltern"]) assert.ok(t[feld]?.trim(), `${t.id} ohne ${feld}`);
+      assert.ok(t.beispiele?.length > 0, `${t.id} ohne beispiele`);
+      assert.ok(t.stufen?.length > 0, `${t.id} ohne stufen`);
+      assert.equal(typeof t.tempo, "boolean", `${t.id}: tempo fehlt`);
+    }
+  }
+};
 const pruefePlan = (plan, katalog, vorlageExistiert) => {
   regeln.reihenfolge(plan);
   regeln.aufgaben(plan);
@@ -93,6 +118,25 @@ test("Plan: deckt alle Zahlenzauber-Schlüssel bis 100 ab", () => {
 });
 
 test("Plan: der echte Plan besteht alle Prüfungen", () => pruefePlan(plan, katalog));
+
+test("Plan: Klasse, Felder der Recherche; Klasse 1–2 mit Ziel, Beispielen, Zweck und Eltern-Hinweis", () => regeln.felder(plan));
+
+test("Plan: jeder Strang hat Themen in Klasse 1–2 und 3–4", () => {
+  for (const s of ["mathe", "geometrie", "lesen", "schreiben", "grammatik", "sprechen"]) {
+    assert.ok(themen.some((t) => t.strang === s && t.klasse <= 2), `${s}: keine Themen in Klasse 1–2`);
+    assert.ok(themen.some((t) => t.strang === s && t.klasse >= 3), `${s}: keine Themen in Klasse 3–4`);
+  }
+});
+
+test("Plan: Felder-Regel erkennt fehlende Pflichtfelder und falsche Werte", () => {
+  const t = { id: "a", klasse: 1, voraussetzungen: [], bereich: "B", ziel: "Z", zweck: "W", eltern: "E", beispiele: ["x"], stufen: ["kopf"], tempo: false };
+  regeln.felder({ themen: [t] });
+  regeln.felder({ themen: [{ id: "b", klasse: 3, voraussetzungen: [] }] });
+  assert.throws(() => regeln.felder({ themen: [{ ...t, zweck: "" }] }), /ohne zweck/);
+  assert.throws(() => regeln.felder({ themen: [{ ...t, typ: "regeln" }] }), /typ/);
+  assert.throws(() => regeln.felder({ themen: [{ ...t, gesichert: ["x"] }] }), /gesichert/);
+  assert.throws(() => regeln.felder({ themen: [{ ...t, klasse: 5 }] }), /klasse/);
+});
 
 test("Plan: geplantes Thema (aufgaben null) besteht alle Prüfungen, unbekannte Art und Einführung bei geplant nicht", () => {
   const kat = { kategorien: [{ id: "mathe" }], spiele: [] };

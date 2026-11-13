@@ -88,6 +88,14 @@ Dateien:
   (Aufgabenart wie `{ "art": "rechnen", "thema": … }`; `null` heißt „geplant“: noch keine Aufgaben, kein Spiel),
   `stufen` (`material`, `vorstellung`, `kopf`), `einfuehrung` (`{ "vorlage": "einfuehrungen/<name>.json",
   "werte": {…} }`), `familie` (optional), `tempo`, `eltern` (Hinweis für Erwachsene).
+  Aus der Recherche (`docs/reports/`) kommen dazu: `klasse` (1–4), `bereich` (Gruppe im Strang), `rid` (Schritt der
+  Themenkarte), `quelle` (`Q` belegt, `E` eigene Unterteilung), `gesichert` (Voraussetzungen, die sicher abrufbar sein
+  müssen, nicht nur eingeführt), `verwechslung` (Themen, die in der Wiederholung gezielt gemischt werden), `typ`
+  (`regel`, `merkwort`, `fertigkeit`), `schrift` (`alle`, `va`, `sas`, `verbunden`), `land` (`BY` für bayerische
+  Sonderwege), `pruefbar` (`ganz` oder `teilweise`). Themen der Klassen 1–2 haben außerdem `ziel` (die eine
+  Schwierigkeit), `beispiele`, `zweck` (wozu ein Kind das im Alltag braucht: nichts ist Selbstzweck) und `eltern`.
+  Themen der Klassen 3–4 sind nur grob angelegt (Name, Bereich, Voraussetzungen).
+  Stränge: `mathe`, `geometrie`, `lesen`, `schreiben`, `grammatik`, `sprechen` (Sprechen und Zuhören).
 - `spiele/aufgabenarten.js`: Aufgaben-Erzeuger. Aufgabenarten: `zerlegung`, `rechnen`, `menge`, `zwillinge`.
 - `spiele/lernsteuerung.js`: Steuerung (reine Logik ohne DOM, in Node testbar) und `runde()` für die Spiele.
   Sie wählt das Thema, macht bei neuen Themen eine Probe (bekannte Themen werden übersprungen), übt auf den Stufen,

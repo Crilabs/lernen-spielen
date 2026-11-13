@@ -2,6 +2,7 @@
 
 ## Unveröffentlicht
 
+- Lernplan für die ganze Grundschule: rund 950 kleine Themen in Mathe, Geometrie, Lesen, Schreiben (mit Druck- und Schreibschrift), Grammatik und dem neuen Bereich Sprechen und Zuhören. Klasse 1 und 2 sind ausführlich beschrieben, mit Ziel, Beispielen, einem Alltagszweck und einem Hinweis für Eltern; Klasse 3 und 4 sind grob angelegt. Themen ohne Spiel bleiben für das Kind unsichtbar, an den vorhandenen Spielen ändert sich nichts.
 - Lernplan: Die Mathe-Spiele folgen jetzt einem gemeinsamen Plan aus vielen kleinen Themen (zum Beispiel „Die 7 zerlegen“ oder „Plus ohne Zehnerübergang bis 20“). Die App sucht das passende Thema selbst aus; das Kind muss nichts wählen.
 - Eine kurze Probe zu Beginn eines neuen Themas überspringt, was das Kind schon kann. Fehler und Hilfen führen ruhig zurück zum Üben; bekannte Aufgaben kommen nach einigen Tagen noch einmal vor.
 - Vor einem neuen Thema erzählt eine kurze Einführung mit dem Einhorn, worum es geht.
