@@ -433,16 +433,20 @@ let stimmZeichne = null;   // die gerade sichtbare Liste; ein einziger Zuhörer 
 window.addEventListener("stimmen", () => { if (tab === "stimme") stimmZeichne?.(); });
 function stimme(inh) {
   inh.appendChild(el("h2", "Stimme und Ton"));
+  const erzeugt = el("div", null, "karte breit");
+  erzeugt.append(el("h3", "Stimme der Spiele"),
+    el("p", "Die Spiele lesen mit einer computererzeugten Stimme vor (Microsoft Azure). Die Sätze wurden vorab erzeugt und liegen auf diesem Gerät; beim Spielen geht nichts ins Internet."));
+  inh.appendChild(erzeugt);
   const karte = el("div", null, "karte breit");
-  karte.appendChild(el("h3", "Stimme auf diesem Gerät"));
+  karte.appendChild(el("h3", "Ersatzstimme auf diesem Gerät"));
   const ul = el("ul", null, "liste stimmwahl");
-  karte.append(ul, el("p", "Gilt für alle Spiele auf diesem Gerät. Weitere Stimmen: in Windows unter Einstellungen › Zeit und Sprache › Sprachausgabe eine deutsche Stimme hinzufügen, dann die App neu starten."));
+  karte.append(ul, el("p", "Spricht nur Sätze, für die es noch keine erzeugte Aufnahme gibt. Gilt für alle Spiele auf diesem Gerät. Weitere Stimmen: in Windows unter Einstellungen › Zeit und Sprache › Sprachausgabe eine deutsche Stimme hinzufügen, dann die App neu starten."));
   inh.appendChild(karte);
   const zeile = (titel, aktiv, schluessel) => {
     const li = el("li", null, aktiv ? "an" : "");
     const name = el("span", (aktiv ? "✓ " : "") + titel);
     const b = el("button", aktiv ? "Probe" : "Wählen", "knopf hell"); b.type = "button";
-    b.addEventListener("click", () => { setzeStimme(schluessel); sprich(PROBE); zeichne(); });
+    b.addEventListener("click", () => { setzeStimme(schluessel); sprich(PROBE, { datei: false }); zeichne(); });
     li.append(name, b);
     return li;
   };

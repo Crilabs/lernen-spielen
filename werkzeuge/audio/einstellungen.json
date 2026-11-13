@@ -1,0 +1,13 @@
+{
+  "hinweis": "stimme: Azure-Stimmname (Vergleich mit npm run audio:vergleich). ordner: Unterordner in spiele/audio/; bei neuer Stimme neuen Ordner wählen. tempo: für alle Sätze (Florian HD: Höhe lässt sich nicht ändern, Tempo schon). zahlen: false = Texte mit Ziffern bekommen keine Datei. varianten: eigene Dateien für sprich(text, { variante }).",
+  "stimme": "de-DE-Florian:DragonHDLatestNeural",
+  "ordner": "florian",
+  "tempo": "-10%",
+  "region": "westeurope",
+  "azure": { "ressource": "lernen-spielen-stimme", "gruppe": "lernen-spielen" },
+  "format": "audio-24khz-48kbitrate-mono-mp3",
+  "zahlen": true,
+  "varianten": {
+    "diktat": { "tempo": "-20%" }
+  }
+}

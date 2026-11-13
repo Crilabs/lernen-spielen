@@ -5,7 +5,10 @@
   "scripts": {
     "test": "tsc -p tsconfig.json && node --test \"tests/*.test.mjs\"",
     "luecken": "node scripts/luecken.mjs",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "audio": "node werkzeuge/audio/erzeugen.mjs",
+    "audio:vergleich": "node werkzeuge/audio/vergleich.mjs",
+    "audio:anhoeren": "node werkzeuge/audio/anhoeren.mjs"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",

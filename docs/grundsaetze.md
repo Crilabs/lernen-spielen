@@ -79,13 +79,17 @@ Deshalb:
 2. **Die Stimme benennt die Sache und das Warum:** „Ein Hund. Den schreibt man groß.“ / „Sieben. Sieben
    Perlen.“ / „Das ist die 34. Die 43 liegt weiter hinten.“
 3. **Keine Zusätze, die urteilen:** kein „super“, „leider“, „schon wieder“, „endlich“.
-4. **Figuren haben Gefühle und zeigen sie** [E]. Reine Sachlichkeit wäre unmenschlich. Die Regel aus der
-   Gewaltfreien Kommunikation: **Jede Figur ist für ihre Gefühle selbst verantwortlich** und benennt sie
-   mit ihrem *eigenen* Bedürfnis, nicht mit dem Kind als Ursache.
-   - Ja: „Ich freu mich so! Ich wollte schon lange über den Bach.“ · „Puh, ich war gespannt, ob die
-     Brücke hält.“ · „Oh, das überrascht mich – das Kärtchen passt nicht. Ich will wissen, warum.“
-   - Nein: „Du machst mich glücklich.“ · „Das hast du toll gemacht!“ (Urteil über das Kind) ·
-     „Ich bin traurig, weil du …“ (Schuld, Steuerung) · „Du hast mich enttäuscht.“
+4. **Figuren haben Gefühle und zeigen sie** [E]. Reine Sachlichkeit wäre unmenschlich. **Figuren sprechen
+   aber nicht selbst (Christian, 2026-11-14):** Die eine Stimme der App ist ein Erzähler und passt nicht zu
+   Kindern und Tieren. Die Figuren zeigen ihre Gefühle mit Körper, Gesicht und Geräusch, der Erzähler benennt
+   sie in der dritten Person (`docs/stimme.md`). Die Regel aus der Gewaltfreien Kommunikation bleibt:
+   **Jede Figur ist für ihre Gefühle selbst verantwortlich**, der Erzähler benennt sie mit ihrem *eigenen*
+   Bedürfnis, nicht mit dem Kind als Ursache.
+   - Ja: „Das Einhorn freut sich. Es wollte schon lange über den Bach.“ · „Puh. Das Einhorn war gespannt,
+     ob die Brücke hält.“ · „Das Einhorn staunt. Das Kärtchen passt nicht. Es will wissen, warum.“
+   - Nein: „Du machst das Einhorn glücklich.“ · „Das hast du toll gemacht!“ (Urteil über das Kind) ·
+     „Das Einhorn ist traurig, weil du …“ (Schuld, Steuerung) · „Das Einhorn ist enttäuscht.“
+   - Nein: Ich-Sätze einer Figur („Ich freu mich so!“), auch nicht als Zitat des Erzählers.
 5. **Gefühle bewerten nicht und steuern nicht.** Die Freude einer Figur gilt der Sache in der Spielwelt
    und ist kein verstecktes Lob; sie ist bei einer richtigen Antwort nicht jedes Mal gleich laut, damit
    sie nicht zur erwarteten Belohnung wird (N5). Nach einer Antwort, die nicht passt, sind die Gefühle
@@ -116,7 +120,7 @@ Feedbackforschung gut gedeckt.
 | Du hast dich so angestrengt! | Prozesslob als Formel ist auch ein Urteil | Tun beschreiben: „Das war die zehnte Karte.“ |
 | Schaffst du das? / Das ist ganz leicht! | erzeugt Druck bzw. beschämt, wenn es nicht klappt | Aufgabe einfach stellen |
 | besser als …, schneller als gestern | Vergleich mit anderen bzw. mit Tempo | – (Rückblicke nur nach vorn, siehe 3.3) |
-| Ich bin liebenswert / gut, so wie ich bin / stolz auf mich | Selbstwert-Urteil, auch wenn es positiv ist | Ich-Form nur für Rechte, Handlungen und Gefühle: „Ich darf Nein sagen.“ „Ich habe ein Nein-Gefühl.“ (K15) |
+| Ich bin liebenswert / gut, so wie ich bin / stolz auf mich | Selbstwert-Urteil, auch wenn es positiv ist | Nur Rechte, Handlungen und Gefühle benennen, erzählt: „Lena darf Nein sagen.“ „Lena hat ein Nein-Gefühl.“ An das Kind: „Du darfst Nein sagen.“ (K15) |
 
 Das Thema, das Programme für soziales Lernen „Fehler sind okay“ nennen, heißt im Kindertext **„Wenn etwas
 schiefgeht“**.
@@ -439,8 +443,8 @@ abgeleitet; ein kleiner Vorher-Nachher-Test mit drei Fakten wäre die erste echt
 | K11 | **Echt-Zeichen.** Was wirklich so ist, trägt ein festes Symbol oder eine feste Rahmung, getrennt vom Fantasierahmen (HSU 1/2: „Geschichte und Geschichten“). | *Annahme:* in Apps ungeprüft |
 | K12 | **Soziale Szenen zwischen Kindern.** Einhorn und Tiere begleiten; das Verhalten zeigen Kinder an Alltagsorten. Gewünschtes Verhalten wird konkret gezeigt und benannt, der Konflikt bleibt kurz, die Lösung ausführlich. Benannt wird das Verhalten („Lena darf mitspielen“), nie die Gruppe (6). | [B] Mares & Woodard; [b] Larsen 2018 |
 | K13 | **Gefühlsfragen haben keine falsche Antwort.** Kein Mechanik-Signal bei „Was sagt dein Bauch?“, Antworten werden nicht kommentiert. Sachregeln bleiben eindeutig („Schlechte Geheimnisse darf man immer weitererzählen“). | [P] AJS |
-| K14 | **Schutz stärkt, warnt nicht.** Die Figur spricht Rechte zu („Du darfst …“), Verantwortung liegt bei Erwachsenen. Keine Täter, keine Fremdenfigur (statt „Geh nicht mit Fremden mit“: „Ich sage Bescheid, wo ich bin“), keine Fragen, ob dem Kind etwas passiert ist, nichts davon wird gespeichert. Körperteile heißen richtig (auch Penis, Vulva, Po, Brust), zuerst im neutralen Körperspiel, mit Elternvorschau. Die App verspricht keine Präventionswirkung. | [B] Cochrane 2015 (keine Angstzunahme); [P] Kinderschutz Schweiz, AJS |
-| K15 | **Ich-Form für Rechte, nicht für Selbstwert.** „Ich darf Nein sagen“ ja, „Ich bin liebenswert“ nein (3.2). | [E] nach 0 und 3.1 |
+| K14 | **Schutz stärkt, warnt nicht.** Der Erzähler spricht Rechte zu („Du darfst …“), Verantwortung liegt bei Erwachsenen. Keine Täter, keine Fremdenfigur (statt „Geh nicht mit Fremden mit“: „Lena sagt Bescheid, wo sie ist.“), keine Fragen, ob dem Kind etwas passiert ist, nichts davon wird gespeichert. Körperteile heißen richtig (auch Penis, Vulva, Po, Brust), zuerst im neutralen Körperspiel, mit Elternvorschau. Die App verspricht keine Präventionswirkung. | [B] Cochrane 2015 (keine Angstzunahme); [P] Kinderschutz Schweiz, AJS |
+| K15 | **Rechte benennen, nicht Selbstwert.** „Lena darf Nein sagen“ / „Du darfst Nein sagen“ ja, „Du bist liebenswert“ nein (3.2). Keine Ich-Form, weil Figuren nicht selbst sprechen (`docs/stimme.md`). | [E] nach 0 und 3.1 |
 
 **Nie in der Schicht** (deckt sich mit 9.2 Nr. 8): sexueller Missbrauch als Begriff oder Geschehen,
 Täterfiguren, bedrohliche Fremde, Nacktheit in Situationen, Strafen, Schuld beim Kind, Krieg, Flucht als
@@ -455,7 +459,8 @@ nicht; sie würde die Kategorie zum Thema machen (6).
 - **Information nie nur über Farbe** (Farbsehschwäche betrifft etwa jeden zwölften Jungen [P]); immer
   zusätzlich Form, Symbol oder Position. Die Wortartensymbole haben deshalb Form *und* Farbe.
 - Druckschrift in den Richtformen der Grundschule (die App nutzt Andika); große Touch-Ziele.
-- Stimmen über die Spiele gemischt (verschiedene Sprecherinnen und Sprecher).
+- Eine Erzählstimme für alle Spiele (Florian, `docs/stimme.md`). Ob später eine Erzählerin dazukommt
+  (früher hier: „Stimmen über die Spiele gemischt“), ist offen.
 
 ---------------------------------------------------------------------------------------------------
 ## 12. Checkliste vor dem Bau eines Spiels

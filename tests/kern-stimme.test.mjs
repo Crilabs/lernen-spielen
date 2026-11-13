@@ -166,3 +166,154 @@ test("stimmen ohne Spaßstimmen, setzeStimme wirkt auf sprich", async () => {
   gesprochen.at(-1).onend();
   await q;
 });
+
+// ---------------------------------------------------------------- Audiodateien
+
+/** Fake für HTMLAudioElement: merkt sich jede erzeugte Datei. */
+let dateien;
+class FakeAudio {
+  constructor(src) {
+    this.src = src;
+    this.pausiert = false;
+    this.onended = this.onerror = this.onloadedmetadata = null;
+    this.ablehnen = FakeAudio.ablehnen;
+    dateien.push(this);
+  }
+  play() {
+    return this.ablehnen ? Promise.reject(new Error("NotAllowedError")) : Promise.resolve();
+  }
+  pause() {
+    this.pausiert = true;
+  }
+}
+
+function fakeAudio(texte, { ok = true } = {}) {
+  dateien = [];
+  FakeAudio.ablehnen = false;
+  globalThis.Audio = FakeAudio;
+  globalThis.fetch = async (url) => {
+    assert.match(String(url), /\/spiele\/audio\/index\.json$/);
+    return { ok, status: ok ? 200 : 404, json: async () => ({ stimme: "test", texte }) };
+  };
+}
+
+function ohneAudio() {
+  delete globalThis.Audio;
+  delete globalThis.fetch;
+}
+
+test("sprich spielt die erzeugte Datei statt der Systemstimme", async (t) => {
+  t.after(ohneAudio);
+  fakeAudio({ "Hallo Einhorn": { datei: "test/ab.mp3" } });
+  const S = await frisch();
+  const p = S.sprich("  Hallo   Einhorn ");
+  await warte();
+  assert.equal(dateien.length, 1);
+  assert.match(dateien[0].src, /\/spiele\/audio\/test\/ab\.mp3$/);
+  assert.equal(gesprochen.length, 0);
+  dateien[0].onended();
+  assert.equal(await p, "gesprochen");
+});
+
+test("Datei darf eine Zahl enthalten, die Systemstimme nicht", async (t) => {
+  t.after(ohneAudio);
+  fakeAudio({ "Drei mal 7": { datei: "test/z.mp3" } });
+  const S = await frisch();
+  const p = S.sprich("Drei mal 7");
+  await warte();
+  dateien[0].onended();
+  assert.equal(await p, "gesprochen");
+  assert.equal(await S.sprich("Vier mal 7"), "still");
+  assert.equal(gesprochen.length, 0);
+});
+
+test("Variante wählt eine eigene Datei", async (t) => {
+  t.after(ohneAudio);
+  fakeAudio({ "Der Hund bellt.": { datei: "test/n.mp3" }, "diktat|Der Hund bellt.": { datei: "test/d.mp3" } });
+  const S = await frisch();
+  S.sprich("Der Hund bellt.", { variante: "diktat" });
+  await warte();
+  assert.match(dateien[0].src, /d\.mp3$/);
+});
+
+test("ohne Datei spricht die Systemstimme", async (t) => {
+  t.after(ohneAudio);
+  fakeAudio({ "Anderes": { datei: "test/x.mp3" } });
+  const S = await frisch();
+  const p = S.sprich("Hallo");
+  await warte();
+  assert.equal(dateien.length, 0);
+  assert.equal(gesprochen.length, 1);
+  gesprochen[0].onend();
+  assert.equal(await p, "gesprochen");
+});
+
+test("fehlendes Verzeichnis: Systemstimme", async (t) => {
+  t.after(ohneAudio);
+  fakeAudio({}, { ok: false });
+  const S = await frisch();
+  const p = S.sprich("Hallo");
+  await warte();
+  assert.equal(gesprochen.length, 1);
+  gesprochen[0].onend();
+  assert.equal(await p, "gesprochen");
+});
+
+test("blockierte Datei: Systemstimme springt ein", async (t) => {
+  t.after(ohneAudio);
+  fakeAudio({ Hallo: { datei: "test/h.mp3" } });
+  FakeAudio.ablehnen = true;
+  const S = await frisch();
+  const p = S.sprich("Hallo");
+  await warte();
+  await warte();
+  assert.equal(dateien.length, 1);
+  assert.equal(gesprochen.length, 1);
+  gesprochen[0].onend();
+  assert.equal(await p, "gesprochen");
+});
+
+test("zweites sprich hält die laufende Datei an", async (t) => {
+  t.after(ohneAudio);
+  fakeAudio({ Eins: { datei: "test/1.mp3" }, Zwei: { datei: "test/2.mp3" } });
+  const S = await frisch();
+  const erstes = S.sprich("Eins");
+  await warte();
+  const zweites = S.sprich("Zwei");
+  assert.equal(await erstes, "abgebrochen");
+  assert.equal(dateien[0].pausiert, true);
+  await warte();
+  dateien[1].onended();
+  assert.equal(await zweites, "gesprochen");
+  S.stille();
+});
+
+test("Notbremse der Datei richtet sich nach ihrer Dauer", async (t) => {
+  t.after(ohneAudio);
+  mock.timers.enable({ apis: ["setTimeout"] });
+  fakeAudio({ Hallo: { datei: "test/h.mp3" } });
+  const S = await frisch();
+  let fertig = null;
+  S.sprich("Hallo").then((e) => (fertig = e));
+  await warte();
+  dateien[0].duration = 1.5;
+  dateien[0].onloadedmetadata();
+  mock.timers.tick(3499);
+  await warte();
+  assert.equal(fertig, null);
+  mock.timers.tick(1);
+  await warte();
+  assert.equal(fertig, "gesprochen");
+});
+
+test("datei: false nimmt die Systemstimme, auch wenn es eine Datei gibt", async (t) => {
+  t.after(ohneAudio);
+  fakeAudio({ Hallo: { datei: "test/h.mp3" } });
+  const S = await frisch();
+  const p = S.sprich("Hallo", { datei: false });
+  await warte();
+  assert.equal(dateien.length, 0);
+  assert.equal(gesprochen.length, 1);
+  gesprochen[0].onend();
+  assert.equal(await p, "gesprochen");
+});

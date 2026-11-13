@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aufnahmen anhören</title>
+<style>
+:root{--grund:#f6f4ef;--karte:#fff;--text:#22201c;--leise:#6d675d;--linie:#e3ded3;--akzent:#2f6b4f;--akzent-hell:#e3f0e8;--warn:#9a5b00;--aktiv:#fff7dc}
+@media (prefers-color-scheme:dark){:root{--grund:#1b1a18;--karte:#252320;--text:#eeeae2;--leise:#a49d90;--linie:#3a3732;--akzent:#7cc39d;--akzent-hell:#21352a;--warn:#e0a54a;--aktiv:#3a3424}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--text);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:2;background:var(--grund);border-bottom:1px solid var(--linie);padding:14px 20px 12px}
+h1{font-size:20px;margin:0 0 2px}
+.unter{color:var(--leise);font-size:14px}
+.balken{height:6px;background:var(--linie);border-radius:3px;margin:10px 0;overflow:hidden}
+.balken>div{height:100%;background:var(--akzent);width:0;transition:width .3s}
+.leiste{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.leiste button,.leiste input{font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;border:1px solid var(--linie);background:var(--karte);color:var(--text)}
+.leiste button[aria-pressed=true]{background:var(--akzent);border-color:var(--akzent);color:#fff}
+.leiste input{flex:1;min-width:160px}
+.tasten{color:var(--leise);font-size:13px;margin-top:8px}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--linie);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--karte)}
+main{padding:12px 20px 80px;max-width:1000px}
+.zeile{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;background:var(--karte);border:1px solid var(--linie);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.zeile.aktiv{background:var(--aktiv);outline:2px solid var(--akzent)}
+.zeile.gehoert .satz{color:var(--leise)}
+.spiel{width:40px;height:40px;border-radius:50%;border:none;background:var(--akzent);color:#fff;font-size:16px;cursor:pointer}
+.satz{font-size:17px}
+.meta{font-size:12.5px;color:var(--leise);margin-top:2px}
+.marke{display:inline-block;font-size:12px;padding:1px 7px;border-radius:10px;background:var(--akzent-hell);color:var(--akzent);margin-left:6px;vertical-align:1px}
+.marke.warn{background:transparent;border:1px solid var(--warn);color:var(--warn)}
+.knoepfe{display:flex;gap:6px}
+.knoepfe button{font:inherit;font-size:14px;padding:6px 10px;border-radius:8px;border:1px solid var(--linie);background:var(--karte);color:var(--text);cursor:pointer}
+.knoepfe button.passt[aria-pressed=true]{background:var(--akzent);border-color:var(--akzent);color:#fff}
+.korrektur{grid-column:2/4;display:flex;gap:8px;flex-wrap:wrap}
+.korrektur input{flex:1;min-width:220px;font:inherit;padding:7px 10px;border-radius:8px;border:1px solid var(--linie);background:var(--grund);color:var(--text)}
+.korrektur button{font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;border:1px solid var(--akzent);background:var(--akzent);color:#fff;cursor:pointer}
+.korrektur button.leer{background:transparent;color:var(--akzent)}
+.korrektur .hilfe{flex-basis:100%;font-size:12.5px;color:var(--leise)}
+#meldung{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--text);color:var(--grund);padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90vw}
+#meldung.an{opacity:1}
+.leer-hinweis{color:var(--leise);padding:30px 0;text-align:center}
+@media (max-width:640px){.zeile{grid-template-columns:40px 1fr}.knoepfe{grid-column:1/3}.korrektur{grid-column:1/3}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Aufnahmen anhören</h1>
+  <div class="unter" id="stand">Lädt …</div>
+  <div class="balken"><div id="fortschritt"></div></div>
+  <div class="leiste">
+    <button data-filter="offen" aria-pressed="true">Offen</button>
+    <button data-filter="alle" aria-pressed="false">Alle</button>
+    <button data-filter="korrigiert" aria-pressed="false">Korrigiert</button>
+    <input id="suche" type="search" placeholder="Suchen (Text oder Quelle)">
+  </div>
+  <div class="tasten"><kbd>Leertaste</kbd> abspielen · <kbd>Enter</kbd> passt, weiter · <kbd>↓</kbd><kbd>↑</kbd> wählen · <kbd>K</kbd> Aussprache korrigieren · <kbd>Esc</kbd> schließen</div>
+</header>
+<main id="liste"></main>
+<div id="meldung" role="status"></div>
+<script>
+const $ = (s) => document.querySelector(s);
+let daten = { texte: [] }, filter = "offen", suche = "", aktiv = 0, offenKorrektur = null;
+const player = new Audio();
+
+async function api(pfad, koerper) {
+  const r = await fetch(pfad, koerper ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(koerper) } : undefined);
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.fehler ?? r.status);
+  return d;
+}
+function melde(t) { const m = $("#meldung"); m.textContent = t; m.classList.add("an"); clearTimeout(melde.z); melde.z = setTimeout(() => m.classList.remove("an"), 3500); }
+
+function sichtbar() {
+  const s = suche.toLowerCase();
+  return daten.texte.filter((t) =>
+    (filter === "alle" || (filter === "offen" ? !t.gehoert || t.zuletzt : t.sprich)) &&
+    (!s || t.text.toLowerCase().includes(s) || t.quellen.join(" ").toLowerCase().includes(s)));
+}
+
+function zeichne() {
+  const g = daten.texte.filter((t) => t.gehoert).length, n = daten.texte.length;
+  $("#stand").textContent = `${g} von ${n} abgehört · Stimme ${daten.stimme}` + (daten.schluessel ? "" : " · ohne Azure-Schlüssel: Korrekturen erst mit npm run audio");
+  $("#fortschritt").style.width = n ? (100 * g / n) + "%" : 0;
+  const liste = sichtbar();
+  aktiv = Math.min(aktiv, Math.max(0, liste.length - 1));
+  const main = $("#liste");
+  main.replaceChildren();
+  if (!liste.length) { main.innerHTML = `<p class="leer-hinweis">${filter === "offen" ? "Alles abgehört." : "Nichts gefunden."}</p>`; return; }
+  liste.forEach((t, i) => {
+    const z = document.createElement("div");
+    z.className = "zeile" + (i === aktiv ? " aktiv" : "") + (t.gehoert ? " gehoert" : "");
+    z.innerHTML = `<button class="spiel" title="Abspielen (Leertaste)">▶</button>
+      <div><div class="satz"></div><div class="meta"></div></div>
+      <div class="knoepfe"><button class="passt" aria-pressed="${t.gehoert}">${t.gehoert ? "✓ passt" : "passt"}</button><button class="korr">Aussprache</button></div>`;
+    z.querySelector(".satz").textContent = t.text;
+    const meta = z.querySelector(".meta");
+    meta.textContent = t.quellen.join(", ") || "nicht mehr gesprochen";
+    if (t.variante) meta.insertAdjacentHTML("beforeend", `<span class="marke">${t.variante}</span>`);
+    if (t.hand) meta.insertAdjacentHTML("beforeend", `<span class="marke">von Hand</span>`);
+    if (t.sprich) { const m = document.createElement("span"); m.className = "marke warn"; m.textContent = "gelesen als: " + t.sprich; meta.append(m); }
+    z.querySelector(".spiel").onclick = () => { aktiv = i; spiele(t); markiere(); };
+    z.querySelector(".passt").onclick = () => { aktiv = i; setzeGehoert(t, !t.gehoert, false); };
+    z.querySelector(".korr").onclick = () => { aktiv = i; oeffneKorrektur(t); };
+    z.onclick = (e) => { if (e.target === z || e.target.closest(".satz,.meta")) { aktiv = i; markiere(); } };
+    if (offenKorrektur === t.schluessel) z.append(korrekturFeld(t));
+    main.append(z);
+  });
+}
+function markiere() { document.querySelectorAll(".zeile").forEach((z, i) => z.classList.toggle("aktiv", i === aktiv)); document.querySelectorAll(".zeile")[aktiv]?.scrollIntoView({ block: "nearest" }); }
+
+function spiele(t) { if (!t) return; player.src = t.url; player.play().catch((e) => melde("Abspielen ging nicht: " + e.message)); }
+
+async function setzeGehoert(t, wert, weiter) {
+  try {
+    await api("/api/gehoert", { schluessel: t.schluessel, gehoert: wert });
+    t.gehoert = wert; t.zuletzt = wert && filter === "offen";   // bleibt sichtbar, bis neu gefiltert wird
+    if (weiter) {
+      const liste = sichtbar(), i = liste.indexOf(t);
+      const naechste = liste.findIndex((x, k) => k > i && !x.gehoert);
+      aktiv = naechste >= 0 ? naechste : i;
+      zeichne(); markiere();
+      if (naechste >= 0) spiele(liste[naechste]);
+    } else zeichne();
+  } catch (e) { melde("Speichern ging nicht: " + e.message); }
+}
+
+function korrekturFeld(t) {
+  const f = document.createElement("div");
+  f.className = "korrektur";
+  f.innerHTML = `<input placeholder="So soll die Stimme es lesen"><button class="los">Neu erzeugen</button>${t.sprich ? '<button class="leer weg">Korrektur entfernen</button>' : ""}
+    <div class="hilfe">Andere Schreibweise nur für die Stimme, z. B. Bindestrich für Silben („Schmet-ter-ling“), Komma für eine Pause, Zahlwort statt Ziffer. Der angezeigte Text im Spiel bleibt gleich.</div>`;
+  const ein = f.querySelector("input");
+  ein.value = t.sprich || t.text;
+  setTimeout(() => { ein.focus(); ein.select(); });
+  const senden = async (wert) => {
+    f.querySelectorAll("button").forEach((b) => (b.disabled = true));
+    melde(daten.schluessel ? "Wird neu erzeugt …" : "Wird gespeichert …");
+    try {
+      const r = await api("/api/korrektur", { schluessel: t.schluessel, sprich: wert });
+      offenKorrektur = null;
+      await lade();
+      melde(r.meldung);
+      const neu = daten.texte.find((x) => x.schluessel === t.schluessel);
+      if (daten.schluessel) spiele(neu);
+    } catch (e) { melde("Ging nicht: " + e.message); f.querySelectorAll("button").forEach((b) => (b.disabled = false)); }
+  };
+  f.querySelector(".los").onclick = () => senden(ein.value === t.text ? "" : ein.value);
+  f.querySelector(".weg")?.addEventListener("click", () => senden(""));
+  ein.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); f.querySelector(".los").click(); } if (e.key === "Escape") { offenKorrektur = null; zeichne(); } e.stopPropagation(); });
+  return f;
+}
+function oeffneKorrektur(t) { offenKorrektur = offenKorrektur === t.schluessel ? null : t.schluessel; zeichne(); }
+
+document.querySelectorAll("[data-filter]").forEach((b) => b.onclick = () => {
+  filter = b.dataset.filter; aktiv = 0; offenKorrektur = null;
+  daten.texte.forEach((t) => (t.zuletzt = false));
+  document.querySelectorAll("[data-filter]").forEach((x) => x.setAttribute("aria-pressed", x === b));
+  zeichne();
+});
+$("#suche").addEventListener("input", (e) => { suche = e.target.value; aktiv = 0; zeichne(); });
+
+document.addEventListener("keydown", (e) => {
+  if (e.target.matches("input")) return;
+  const liste = sichtbar(), t = liste[aktiv];
+  if (e.key === " ") { e.preventDefault(); spiele(t); }
+  else if (e.key === "Enter" && t) { e.preventDefault(); setzeGehoert(t, true, true); }
+  else if (e.key === "ArrowDown") { e.preventDefault(); aktiv = Math.min(aktiv + 1, liste.length - 1); markiere(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); aktiv = Math.max(aktiv - 1, 0); markiere(); }
+  else if ((e.key === "k" || e.key === "K") && t) { e.preventDefault(); oeffneKorrektur(t); }
+  else if (e.key === "Escape") { offenKorrektur = null; zeichne(); }
+});
+
+async function lade() { daten = await api("/api/texte"); zeichne(); }
+lade().catch((e) => { $("#stand").textContent = "Konnte nicht laden: " + e.message; });
+</script>
+</body>
+</html>
