@@ -143,3 +143,40 @@ test("Einführung über die 10: Werte m und fehlt ergeben zusammen den Zehner", 
   assert.ok(ueber.length > 0);
   for (const t of ueber) assert.equal(t.einfuehrung.werte.m + t.einfuehrung.werte.fehlt, 10, t.id);
 });
+
+test("Einführung zerlegen: Werte h und r teilen n nahe der Mitte", () => {
+  const zerl = mitEinfuehrung.filter((t) => t.einfuehrung.vorlage === "einfuehrungen/zerlegen.json");
+  assert.ok(zerl.length > 0);
+  for (const t of zerl) {
+    const { n, h, r } = t.einfuehrung.werte;
+    assert.equal(h + r, n, t.id);
+    assert.ok(h >= 1 && r >= h && r - h <= 1, `${t.id}: ${h} + ${r}`);
+  }
+});
+
+// Ketten wie „17 + 6 = 17 + 3 + 3 = 23“ oder „13 − 5 = 8“: jede Seite von links nach rechts gerechnet, alle gleich, nie negativ.
+const rechne = (ausdruck, wo) => {
+  const teile = ausdruck.replace(/−/g, "-").match(/\d+|[+-]/g);
+  let wert = Number(teile[0]);
+  for (let i = 1; i < teile.length; i += 2) {
+    wert = teile[i] === "+" ? wert + Number(teile[i + 1]) : wert - Number(teile[i + 1]);
+    assert.ok(wert >= 0, `${wo}: negativ in „${ausdruck}“`);
+  }
+  return wert;
+};
+test("Einführungen: Gleichungen in zeig stimmen (mit den Werten jedes Themas)", () => {
+  let geprueft = 0;
+  for (const t of mitEinfuehrung) {
+    const szenen = fuelleVorlage(lade(`../spiele/${t.einfuehrung.vorlage}`), t.einfuehrung.werte);
+    for (const [i, s] of szenen.entries()) {
+      for (const kette of s.zeig.match(/\d+(?:\s*[+\-−=]\s*\d+)+/g) ?? []) {
+        if (!kette.includes("=")) continue;
+        const wo = `${t.id} Szene ${i + 1}`;
+        const seiten = kette.split("=").map((x) => rechne(x, wo));
+        for (const w of seiten) assert.equal(w, seiten[0], `${wo}: „${kette}“`);
+        geprueft++;
+      }
+    }
+  }
+  assert.ok(geprueft > 50, `nur ${geprueft} Gleichungen gefunden`);
+});

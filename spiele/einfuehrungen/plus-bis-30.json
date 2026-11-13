@@ -1,0 +1,17 @@
+{ "szenen": [
+  { "sprich": "Weiter unten ist der Bach breiter. Dort legt das Einhorn Zehnerstäbe und einen kleinen Stab.",
+    "zeig": "22 = 10 + 10 + 2",
+    "bild": [ { "perlen": ["10", "10", "2"], "x": 50 } ] },
+  { "sprich": "Kommen Perlen dazu, bleiben die Zehnerstäbe liegen. Nur die Einer kommen zusammen.",
+    "zeig": "22 + 3 = 25",
+    "bild": [ { "perlen": ["10", "10", "5"], "x": 50 } ] },
+  { "sprich": "Manchmal passen die Perlen nicht mehr auf den kleinen Stab. Dann füllt das Einhorn zuerst einen Zehner auf.",
+    "zeig": "17 + 6 = 17 + 3 + 3",
+    "bild": [ { "perlen": ["10", "7", "3", "3"], "x": 50 } ] },
+  { "sprich": "Der neue Zehnerstab ist voll. Der Rest kommt dahinter.",
+    "zeig": "17 + 6 = 23",
+    "bild": [ { "perlen": ["10", "10", "3"], "x": 50 } ] },
+  { "sprich": "Jetzt rechnest du. Schau zuerst auf die Einer.",
+    "zeig": "21 + 4 = ?",
+    "bild": [ { "perlen": ["10", "10", "1"], "x": 50 } ] }
+] }

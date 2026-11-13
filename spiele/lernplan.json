@@ -38,7 +38,9 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/zerlegen.json",
         "werte": {
-          "n": 2
+          "n": 2,
+          "h": 1,
+          "r": 1
         }
       },
       "familie": "zahl-2",
@@ -65,7 +67,9 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/zerlegen.json",
         "werte": {
-          "n": 3
+          "n": 3,
+          "h": 1,
+          "r": 2
         }
       },
       "familie": "zahl-3",
@@ -92,7 +96,9 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/zerlegen.json",
         "werte": {
-          "n": 4
+          "n": 4,
+          "h": 2,
+          "r": 2
         }
       },
       "familie": "zahl-4",
@@ -119,7 +125,9 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/zerlegen.json",
         "werte": {
-          "n": 5
+          "n": 5,
+          "h": 2,
+          "r": 3
         }
       },
       "familie": "zahl-5",
@@ -146,7 +154,9 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/zerlegen.json",
         "werte": {
-          "n": 6
+          "n": 6,
+          "h": 3,
+          "r": 3
         }
       },
       "familie": "zahl-6",
@@ -173,7 +183,9 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/zerlegen.json",
         "werte": {
-          "n": 7
+          "n": 7,
+          "h": 3,
+          "r": 4
         }
       },
       "familie": "zahl-7",
@@ -200,7 +212,9 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/zerlegen.json",
         "werte": {
-          "n": 8
+          "n": 8,
+          "h": 4,
+          "r": 4
         }
       },
       "familie": "zahl-8",
@@ -227,7 +241,9 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/zerlegen.json",
         "werte": {
-          "n": 9
+          "n": 9,
+          "h": 4,
+          "r": 5
         }
       },
       "familie": "zahl-9",
@@ -254,7 +270,9 @@
       "einfuehrung": {
         "vorlage": "einfuehrungen/zerlegen.json",
         "werte": {
-          "n": 10
+          "n": 10,
+          "h": 5,
+          "r": 5
         }
       },
       "familie": "zahl-10",
@@ -751,10 +769,7 @@
         "kopf"
       ],
       "einfuehrung": {
-        "vorlage": "einfuehrungen/bis-30.json",
-        "werte": {
-          "op": "plus"
-        }
+        "vorlage": "einfuehrungen/plus-bis-30.json"
       },
       "tempo": false,
       "eltern": "Fragen Sie beim Einkaufen: „Zwanzig Cent und noch sieben, wie viel ist das?“"
@@ -776,10 +791,7 @@
         "kopf"
       ],
       "einfuehrung": {
-        "vorlage": "einfuehrungen/bis-30.json",
-        "werte": {
-          "op": "minus"
-        }
+        "vorlage": "einfuehrungen/minus-bis-30.json"
       },
       "tempo": false,
       "eltern": "Fragen Sie: „Dreißig Murmeln, zwölf sind weg, wie viele bleiben?“"
@@ -800,10 +812,7 @@
         "kopf"
       ],
       "einfuehrung": {
-        "vorlage": "einfuehrungen/bis-100.json",
-        "werte": {
-          "op": "plus"
-        }
+        "vorlage": "einfuehrungen/plus-bis-100.json"
       },
       "tempo": false,
       "eltern": "Fragen Sie: „Vierzig und fünfzehn?“ – erst die Zehner, dann die Einer."
@@ -824,10 +833,7 @@
         "kopf"
       ],
       "einfuehrung": {
-        "vorlage": "einfuehrungen/bis-100.json",
-        "werte": {
-          "op": "minus"
-        }
+        "vorlage": "einfuehrungen/minus-bis-100.json"
       },
       "tempo": false,
       "eltern": "Fragen Sie: „Siebzig minus dreißig?“ – erst die Zehner, dann die Einer."
