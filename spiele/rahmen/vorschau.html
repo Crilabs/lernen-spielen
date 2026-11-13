@@ -6,7 +6,7 @@
 <title>Rahmen-Bausteine</title>
 <link rel="stylesheet" href="../schrift/schrift.css">
 <style>
-  /* Vorschau der Rahmen-Bausteine (erste Fassung; Task 7 ergänzt Tastatur, Protokoll und Prüfskript).
+  /* Vorschau der Rahmen-Bausteine (erste Fassung; Task 7 ergänzt Protokoll und Prüfskript).
      Adresse: vorschau.html?fach=mathe&titel=Perlenbrücke&thema=Die%207%20zerlegen  (&pause, &leuchte) */
   html { font-size: calc(100dvh / 108); }
   body {
@@ -22,13 +22,14 @@
   .buehne { position: fixed; inset: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem); }
   ls-blase { position: absolute; top: 19rem; left: 50%; transform: translateX(-50%); width: min(110rem, calc(100% - 30rem)); }
   .matte {
-    position: absolute; top: 40rem; left: 50%; transform: translateX(-50%);
-    width: min(120rem, calc(100% - 34rem)); height: 44rem; box-sizing: border-box;
+    position: absolute; top: 36rem; left: 50%; transform: translateX(-50%);
+    width: min(120rem, calc(100% - 34rem)); height: 32rem; box-sizing: border-box;
     background: #FFFCF7; border: 0.3rem solid #3B2A6B; border-radius: 4rem; padding: 2rem;
   }
   .matte::before { content: ""; position: absolute; inset: 1.6rem; border: 0.25rem dashed #CFC4E3; border-radius: 2.8rem; }
   .matte ls-knopf { position: absolute; right: 4rem; bottom: 4rem; }
   .matte .aufgabe { position: relative; margin: 2.4rem 3rem; font-size: 4.4rem; font-weight: 700; }
+  ls-tastatur { position: absolute; left: 50%; bottom: 2.4rem; transform: translateX(-50%); }
   .pausen-inhalt { display: grid; gap: 2rem; justify-items: center; font-size: 4rem; text-align: center; max-width: 90rem; }
   .pausen-inhalt img { width: 22rem; height: 22rem; }
 </style>
@@ -45,6 +46,7 @@
     <div class="aufgabe">7 sind 5 und …</div>
     <ls-knopf art="haupt" symbol="zurueck.svg" wort="Weiter" gespiegelt></ls-knopf>
   </div>
+  <ls-tastatur id="tastatur" tasten="Die Katze schläft" leertaste loeschen></ls-tastatur>
 </div>
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause">
@@ -58,6 +60,7 @@
   import "./blase.js";
   import "./hilfe.js";
   import "./pause.js";
+  import "./tastatur.js";
   const q = new URLSearchParams(location.search);
   const leiste = document.getElementById("leiste");
   for (const a of ["fach", "titel", "thema"]) if (q.get(a)) leiste.setAttribute(a, q.get(a));
