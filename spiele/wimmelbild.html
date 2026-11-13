@@ -57,36 +57,21 @@ img{display:block}
 .bin img{width:8rem;height:8rem}
 .bin.open{transform:scale(1.04);background:#FFF2BF;border-color:rgba(59,42,107,.55)}
 .bin.hide,.hilfe.hide{visibility:hidden}
-.next{border:0;border-radius:99rem;padding:2rem 4rem;font:800 3.2rem/1 "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 .7rem 0 #D45A9E}
-.next:active{transform:translateY(.5rem);box-shadow:0 .2rem 0 #D45A9E}
-.start{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4rem;text-align:center;padding:4rem;
-  background:var(--bg);background-image:radial-gradient(circle at 15% 20%,rgba(255,138,203,.35) 0 14rem,transparent 14rem),radial-gradient(circle at 85% 15%,rgba(255,217,90,.45) 0 9rem,transparent 9rem),radial-gradient(circle at 80% 85%,rgba(181,156,255,.45) 0 17rem,transparent 17rem),radial-gradient(circle at 10% 90%,rgba(127,232,200,.45) 0 11rem,transparent 11rem)}
-.start.off{display:none}
-.start .big{width:18rem;height:18rem;animation:float 3s ease-in-out infinite}
-.start h1{font:800 6rem/1.1 "Baloo 2",sans-serif}
-.start p{font-size:3rem;font-weight:700;max-width:32ch;line-height:1.3}
-.btn{display:inline-flex;align-items:center;gap:1.2rem;border:0;border-radius:99rem;padding:2.2rem 5rem;font:800 3.6rem/1 "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 .7rem 0 #D45A9E;text-decoration:none}
-.btn.mint{background:var(--mint);color:var(--nacht);box-shadow:0 .7rem 0 #4FBF9C;font-size:2.6rem;padding:1.6rem 3.4rem}
-.btn img{width:3.6rem;height:3.6rem}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6rem)}}
 .info{position:fixed;left:1.6rem;top:1.6rem;background:var(--paper);padding:.8rem 1.6rem;border-radius:1.2rem;font-weight:700;font-size:2.2rem;z-index:5}
 .links{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
 .links a{background:var(--paper);color:var(--nacht);border-radius:1.2rem;padding:1rem 1.6rem;font-weight:700;font-size:2.2rem;text-decoration:none}
-.pause{position:fixed;inset:0;z-index:25;background:#1F1B45;display:none;overflow:hidden;opacity:0;transition:opacity .8s}
+.pause{position:fixed;inset:0;z-index:25;background:#1F1B45;display:none;opacity:0;transition:opacity .6s}
 .pause.on{display:block}.pause.show{opacity:1}
-.pause .pbg{position:absolute;inset:-4rem;background-size:cover;background-position:center;filter:blur(2.8rem) brightness(.8)}
-.pause img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;animation:kenburns 26s ease-in-out infinite alternate}
-@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08) translateY(-1%)}}
-/* Glitzer ohne Emojis: kleine leuchtende Punkte */
-.pause .sparkles span{position:absolute;width:1.6rem;height:1.6rem;border-radius:50%;opacity:0;pointer-events:none;
-  background:radial-gradient(circle,#fff 0 25%,rgba(255,217,90,.9) 40%,rgba(255,138,203,0) 70%);animation:glitzer 5s ease-in-out infinite}
-@keyframes glitzer{0%{opacity:0;transform:translateY(0) scale(.6)}30%{opacity:.9}100%{opacity:0;transform:translateY(-12rem) scale(1.4)}}
-.pweiter{position:absolute;left:50%;bottom:4rem;transform:translateX(-50%);opacity:.92}
+.pause img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pbar{position:absolute;left:30%;width:40%;bottom:3rem;height:1rem;border-radius:99rem;background:rgba(31,27,69,.35);overflow:hidden}
+.pfill{height:100%;width:0;border-radius:99rem;background:rgba(255,255,255,.7)}
+.pause.show .pfill{animation:pfill var(--pause-ms,10s) linear forwards}
+@keyframes pfill{from{width:0}to{width:100%}}
 .eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:3rem 4rem 4rem;user-select:text;-webkit-user-select:text;touch-action:auto;font-size:2rem}
 .eltern h1{font:800 4rem/1.1 "Baloo 2",sans-serif}.eltern h2{font:800 2.8rem/1.1 "Baloo 2",sans-serif;margin:2.4rem 0 .6rem}.eltern p{margin:1rem 0;font-weight:700;max-width:70ch}
 .eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:1rem;padding:.6rem 1.4rem;margin:.6rem 0;font-weight:700}
 .eltern small{font-weight:400;opacity:.75}
-@media (prefers-reduced-motion:reduce){.start .big{animation:none}.pause img,.pause .sparkles span{animation:none}}
+@media (prefers-reduced-motion:reduce){.pause{transition:none}}
 </style>
 </head>
 <body>
@@ -109,17 +94,8 @@ img{display:block}
   </aside>
 </div>
 <div class="pause" id="pause">
-  <div class="pbg" id="pbg"></div>
   <img id="pimg" alt="">
-  <div class="sparkles" id="sparkles"></div>
-  <button class="btn pweiter" id="pweiter">Weiter ›</button>
-</div>
-<div class="start" id="start">
-  <img class="big" src="symbole/wimmelbild.svg" alt="">
-  <h1>Wimmelbild-Detektiv</h1>
-  <p>Ist das Wort ein Ding? Dann schieb es auf das Ding im Bild. Wenn nicht – ab in den Mülleimer!</p>
-  <button class="btn" id="go">Los geht's!</button>
-  <a class="btn mint" href="index.html"><img src="symbole/haus.svg" alt="">Alle Spiele</a>
+  <div class="pbar"><div class="pfill"></div></div>
 </div>
 
 <script type="module">
@@ -139,7 +115,7 @@ sperreTouch();
   const ANTEIL_FAELLIG = 0.7;  // so viel der Runde aus fälligen/wackeligen Wörtern, der Rest aus sicheren
   const WIEDER_NACH = 3;       // ein falsch gelöstes Wort kommt in derselben Runde nach so vielen anderen noch einmal
   const WIEDER_MAX = 4;        // höchstens so viele Wiederholungen je Runde (damit die Runde kurz bleibt)
-  const PAUSE_ALLE = 1;     // nach so vielen Runden kommt ein Pausenbild (0 = nie)
+  const PAUSE_MS = 10000;   // Szenenpause nach jeder Runde: Einhornbild so lange, dann kommt die nächste Szene
   // Nicht-Nomen: keine Wörter, die in GROSSBUCHSTABEN auch Nomen sein könnten (LAUT, WILD, ARM, GELB …)
   const ALLGEMEIN = [
     "lacht","rennt","singt","springt","spielt","schläft","malt","liest","schreibt","isst","trinkt","tanzt","klettert","hüpft",
@@ -236,7 +212,7 @@ sperreTouch();
   try{ namen = await (await fetch("bilder/index.json",{cache:"no-store"})).json(); }catch(e){}
   await Promise.all(namen.map(async n=>{ try{ bilder[n]=await (await fetch(`bilder/${n}.json`,{cache:"no-store"})).json(); }catch(e){} }));
   namen = namen.filter(n=>bilder[n]);
-  if(!namen.length){ $("start").querySelector("p").textContent="Keine Bilder gefunden (bilder/index.json)."; $("go").remove(); return; }
+  if(!namen.length){ $("mitte").textContent="Keine Bilder gefunden (bilder/index.json)."; return; }
 
   function chooseBild(){
     const forced=new URLSearchParams(location.search).get("bild"); if(forced && bilder[forced]) return forced;
@@ -315,12 +291,12 @@ sperreTouch();
   }
 
   // ---------- Runde: ein Wort nach dem anderen ----------
-  let karten=[], idx=0, cur=null, busy=true, fehler=0;
+  let pauseBild=null, karten=[], idx=0, cur=null, busy=true, fehler=0;
   async function runde(){
     const name=chooseBild(); bild=bilder[name];
     save.letztes=name; save.bilder[name]=Date.now(); persist();
     world.querySelectorAll(".tag,.piece").forEach(e=>e.remove()); svg.innerHTML="";
-    bar.querySelectorAll(".next").forEach(e=>e.remove()); cardEl.style.display="";
+    cardEl.style.display="";
     img.src="bilder/"+bild.bild;
     await img.decode().catch(()=>{});
     ar = img.naturalWidth && img.naturalHeight ? img.naturalWidth/img.naturalHeight : 2/3;
@@ -335,6 +311,9 @@ sperreTouch();
     await wait(50);
     bin.classList.remove("hide"); hilfeBtn.classList.remove("hide");
     zeigeWort();
+    // Pausenbild der nächsten Szene schon mal laden, damit es sofort da ist
+    pauseBild=null;
+    if(bild.pause){ pauseBild=new Image(); pauseBild.src="bilder/"+bild.pause; }
   }
   // Rundenpunkte: einer je Kärtchen (Wiederholungen kommen dazu), erledigte grün
   function zeigePunkte(){ punkte.innerHTML=karten.map((k,i)=>`<i${i<idx?' class="da"':""}></i>`).join(""); }
@@ -357,7 +336,7 @@ sperreTouch();
     if(fehler>0 && !cur.wdh && karten.filter(k=>k.wdh).length<WIEDER_MAX) karten.splice(Math.min(karten.length, idx+1+WIEDER_NACH), 0, {...cur, wdh:true});
     idx++; zeigePunkte();
     if(idx<karten.length){ await wait(900); zeigeWort(); }
-    else { await wait(1100); aufwachen(); }
+    else { await wait(1100); szenenpause(); }
   }
 
   // ---------- Ziehen ----------
@@ -453,41 +432,22 @@ sperreTouch();
     weiter();
   }
 
-  // Alle Wörter durch: das Bild wacht auf – die gefundenen Dinge der Runde nacheinander
-  async function aufwachen(){
+  // Alle Wörter durch: Einhornbild als Szenenpause (ohne Knöpfe), dann direkt die nächste Szene
+  async function szenenpause(){
     bin.classList.add("hide"); hilfeBtn.classList.add("hide"); cardEl.style.display="none";
-    await wait(400);
-    const gef=[...new Set(karten.filter(k=>k.ding).map(k=>k.ding))];
-    for(const d of gef){ beleben(d); await wait(700); }
-    await wait(600);
-    const n=document.createElement("button"); n.className="next"; n.textContent="Nächstes Bild ›";
-    n.addEventListener("click",async()=>{ n.remove(); runden++; if(PAUSE_ALLE && runden%PAUSE_ALLE===0) await pause(); runde(); }); $("mitte").appendChild(n);
-  }
-
-  // ---------- Pausenbild: einfach etwas Schönes zum Anschauen ----------
-  let runden=0, pausen=[];
-  try{ pausen = await (await fetch("pausenbilder/index.json",{cache:"no-store"})).json(); }catch(e){}
-  if(!Array.isArray(pausen)) pausen=[];
-  function pause(){
-    if(!pausen.length) return Promise.resolve();
-    const c = pausen.length>1 ? pausen.filter(p=>p!==save.pause) : pausen;
-    const p = c[Math.floor(Math.random()*c.length)];
-    save.pause=p; persist();
-    const el=$("pause"), src="pausenbilder/"+p;
-    return new Promise(async res=>{
-      $("pimg").src=src; $("pbg").style.backgroundImage=`url("${src}")`;
-      await $("pimg").decode().catch(()=>{});
-      const sp=$("sparkles"); sp.innerHTML="";
-      for(let i=0;i<14;i++){ const s=document.createElement("span");
-        s.style.left=rnd(5,92)+"%"; s.style.top=rnd(20,95)+"%"; s.style.animationDelay=rnd(0,5)+"s"; sp.appendChild(s); }
-      el.classList.add("on"); requestAnimationFrame(()=>el.classList.add("show"));
-      $("pweiter").onclick=()=>{ el.classList.remove("show"); setTimeout(()=>{ el.classList.remove("on"); res(); },800); };
-    });
+    if(!bild.pause){ runde(); return; }
+    const el=$("pause"), im=$("pimg");
+    im.src=pauseBild ? pauseBild.src : "bilder/"+bild.pause;
+    await im.decode().catch(()=>{});
+    el.style.setProperty("--pause-ms", PAUSE_MS+"ms");
+    el.classList.add("on"); void el.offsetWidth; el.classList.add("show");
+    await wait(PAUSE_MS);
+    await runde();                       // nächste Szene hinter dem Bild vorbereiten
+    el.classList.remove("show"); await wait(650); el.classList.remove("on");
   }
 
   // ---------- Prüfansicht (?pruefen[&bild=name]) ----------
   async function pruefansicht(){
-    $("start").classList.add("off");
     bild=bilder[chooseBild()]; img.src="bilder/"+bild.bild; await img.decode().catch(()=>{});
     ar=img.naturalWidth/img.naturalHeight; fullView();
     addEventListener("resize", fullView);
@@ -504,7 +464,6 @@ sperreTouch();
 
   // ---------- Elternansicht (?eltern): welche Wörter gerade wackeln. Das Kind sieht davon nichts. ----------
   function elternansicht(){
-    $("start").classList.add("off");
     const zeile = ([s,e]) => `<li>${s.startsWith("~") ? esc(s.slice(1))+" <small>(kein Nomen)</small>" : esc(s)}
       <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${(e.h||[]).map(x=>x?"✓":"✗").join("")}</small></li>`;
     const alle=Object.entries(save.woerter).map(([s,v])=>[s,eintrag(s)]);
@@ -544,11 +503,7 @@ sperreTouch();
 
   if(pruefen){ pruefansicht(); return; }
   if(new URLSearchParams(location.search).has("eltern")){ elternansicht(); return; }
-  $("go").addEventListener("click",()=>{
-    $("start").classList.add("off");
-    say(" ");   // iOS: Stimme mit der ersten Berührung freischalten
-    runde();
-  });
+  runde();
 })();
 </script>
 </body>
