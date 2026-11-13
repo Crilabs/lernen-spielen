@@ -139,6 +139,7 @@ body.ende .stage>.rund.l{visibility:visible;pointer-events:auto;animation:haus 1
 <script src="zauber-saetze.js"></script>
 <script type="module">
 import {lade, speichere, sperreTouch, esc, merkeGelernt} from "./lernspiel.js";
+import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
 sperreTouch();
 (async function(){
   // ---------- Einstellungen ----------
@@ -176,7 +177,7 @@ sperreTouch();
   await Promise.all([...FIGUR_IDS, ...DING_IDS].map(id=>load("figuren/"+id+".js")));
   const vorhanden = id => !!(F.figuren[id] || F.dinge[id]);
 
-  // ---------- Speichern (lernspiel.js: Tauri-Datei oder localStorage "lernstand-grossbuchstaben") ----------
+  // ---------- Speichern (lernspiel.js: Tauri-Datei oder Browser-Speicher "lernstand-kind-1-grossbuchstaben") ----------
   let save = await lade("grossbuchstaben", {woerter:{}, letzte:[], runden:0, tag:{d:"", n:0}});
   if(Array.isArray(save.woerter)) save.woerter={};
   if(!(save.runden>0)) save.runden=0;
@@ -197,9 +198,9 @@ sperreTouch();
   }
 
   // ---------- Ton und Stimme ----------
-  let sound = true; try{ sound = localStorage.getItem("grossbuchstaben-ton")!=="aus"; }catch(e){}
+  await ladeEinstellungen(); let sound = einstellung("ton.grossbuchstaben", true);
   const sndBtn=$("snd"); const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("grossbuchstaben-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
+  sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.grossbuchstaben", sound); if(!sound) window.speechSynthesis?.cancel(); });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;

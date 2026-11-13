@@ -144,6 +144,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 <script src="figuren/blume.js"></script>
 <script type="module">
 import {lade, speichere, sperreTouch, esc, protokoll} from "./lernspiel.js";
+import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
 import {runde, einmal} from "./lernsteuerung.js";
 import {spieleEinfuehrung} from "./einfuehrung.js";
 sperreTouch();
@@ -195,9 +196,9 @@ sperreTouch();
   if(params.has("eltern")){ await eltern(save); return; }
 
   // ---------- Ton und Stimme ----------
-  let sound = true; try{ sound = localStorage.getItem("zahlenzauber-ton")!=="aus"; }catch(e){}
+  await ladeEinstellungen(); let sound = einstellung("ton.zahlenzauber", true);
   const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("zahlenzauber-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
+  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.zahlenzauber", sound); if(!sound) window.speechSynthesis?.cancel(); });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;

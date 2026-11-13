@@ -135,6 +135,7 @@ img{display:block}
 <script src="figuren/einhorn.js"></script>
 <script type="module">
 import {lade, speichere, sperreTouch, esc, protokoll} from "./lernspiel.js";
+import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
 import {K, migriere, eintrag, verbuche, naechsteAufgabe, hilfeVon, ortVon, paketVon, aufgabenVon} from "./einmaleins-logik.js";
 sperreTouch();
 (async function(){
@@ -172,9 +173,9 @@ sperreTouch();
   if(params.has("eltern")){ elternansicht(); return; }
 
   // ---------- Ton ----------
-  let sound = true; try{ sound = localStorage.getItem("einmaleins-ton")!=="aus"; }catch(e){}
+  await ladeEinstellungen(); let sound = einstellung("ton.einmaleins", true);
   const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("einmaleins-ton",sound?"an":"aus"); }catch(e){} });
+  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.einmaleins", sound); });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;

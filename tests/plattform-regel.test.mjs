@@ -19,10 +19,9 @@ const MUSTER = {
 const AUSNAHMEN = {
   "einfuehrung.js": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
   "einhorn-steine.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
-  "einmaleins.html": ["localStorage"],
-  "eltern.html": ["speechSynthesis", "__TAURI__"],
+    "eltern.html": ["speechSynthesis", "__TAURI__"],
   "eltern.js": ["__TAURI__"],
-  "grossbuchstaben.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
+  "grossbuchstaben.html": ["speechSynthesis", "SpeechSynthesisUtterance"],
   "index.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
   "perlenbruecke.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
   "themen.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
