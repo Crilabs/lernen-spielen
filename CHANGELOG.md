@@ -2,6 +2,7 @@
 
 ## Unveröffentlicht
 
+- Die App heißt jetzt **Lernen Spielen**. Startseite und „Was ich kann“ kommen ohne Einhorn aus; die Spiele selbst sind noch unverändert und werden einzeln umgebaut.
 - Lernplan für die ganze Grundschule: rund 950 kleine Themen in Mathe, Geometrie, Lesen, Schreiben (mit Druck- und Schreibschrift), Grammatik und dem neuen Bereich Sprechen und Zuhören. Klasse 1 und 2 sind ausführlich beschrieben, mit Ziel, Beispielen, einem Alltagszweck und einem Hinweis für Eltern; Klasse 3 und 4 sind grob angelegt. Themen ohne Spiel bleiben für das Kind unsichtbar, an den vorhandenen Spielen ändert sich nichts.
 - Lernplan: 42 typische Fehlerbilder (z. B. Zahlendreher, Rechnen durch Zählen, Spiegelschrift, vergessene Wortgrenzen) mit Erkennungsmerkmal, passenden Übungsthemen und ruhigen Hinweisen für Kind und Eltern. Noch ohne Auswertung in den Spielen.
 - Lernplan: Die Mathe-Spiele folgen jetzt einem gemeinsamen Plan aus vielen kleinen Themen (zum Beispiel „Die 7 zerlegen“ oder „Plus ohne Zehnerübergang bis 20“). Die App sucht das passende Thema selbst aus; das Kind muss nichts wählen.

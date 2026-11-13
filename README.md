@@ -1,4 +1,4 @@
-# Einhorn-Lernspiele
+# Lernen Spielen
 
 Lernspiele für ein Kind, als Windows-Kiosk-App (Tauri 2). Die App zeigt eine Startseite mit
 Kategorien und Spielen (HTML/JS in `spiele/`), speichert den Lernstand lokal, hat einen
@@ -11,7 +11,7 @@ ist **nicht mehr aktuell**. Diese Reste werden in einem späteren Schritt entfer
 
 - `spiele/` – die Oberfläche der App: `index.html` (Startseite), `eltern.html`/`eltern.js` (Elternbereich),
   `lernspiel.js` (gemeinsame Hilfen: Laden/Speichern, Protokoll), die Spiele als HTML-Dateien,
-  `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder samt Einhorn-Pausenbildern), `figuren/`, `saetze/`. Die übrigen Spiele zeichnen ihre Pausen selbst (SVG).
+  `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder samt Pausenbildern), `figuren/`, `saetze/`. Die übrigen Spiele zeichnen ihre Pausen selbst (SVG).
 - `spiele/fortschritt/` – je Spiel optional ein Modul `<id>.js`, das den Balken auf der Startseite berechnet
   (nur für Spiele mit `"fortschritt": true` in `spiele.json`).
 - `spiele/symbole/` – SVG-Symbole (Kategorien, Spiele, Elternbereich).
@@ -67,7 +67,7 @@ es zusätzlich das „Protokoll“.
 Die PIN (als Hash) liegt in `%APPDATA%\de.crilabs.lernen-spielen\lernstand\eltern.json`, nach einer PIN-Änderung
 die vorige PIN zusätzlich in `eltern.json.bak`. So setzt du die PIN zurück:
 
-1. App ohne PIN beenden: Tastatur anschließen, **Strg+Alt+Entf** → **Task-Manager** → „Einhorn-Lernspiele“
+1. App ohne PIN beenden: Tastatur anschließen, **Strg+Alt+Entf** → **Task-Manager** → „Lernen Spielen“
    auswählen → **Task beenden**. (Bleibt der Task-Manager hinter der App verborgen: Strg+Alt+Entf → **Abmelden**.)
 2. Im Explorer `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` öffnen und **`eltern.json` und
    `eltern.json.bak`** löschen. Nur eine der beiden zu löschen reicht nicht.
@@ -161,7 +161,7 @@ Neue Bilder im Querformat, empfohlen 4:3, z. B. 1600×1200. Pro Bild:
 - `spiele/bilder/<name>.jpg`
 - `spiele/bilder/<name>.json` mit den Dingen; `formen` als `[x1,y1,x2,y2]` in Prozent des Bildes
 - Eintrag (Name ohne Endung) in `spiele/bilder/index.json`
-- Pausenbild `spiele/bilder/<name>-pause.jpg` (Einhorn passend zur Szene), eingetragen als `"pause": "<name>-pause.jpg"` in der JSON;
+- Pausenbild `spiele/bilder/<name>-pause.jpg` (passend zur Szene), eingetragen als `"pause": "<name>-pause.jpg"` in der JSON;
   es erscheint nach dem letzten Wort der Runde 10 Sekunden lang (`PAUSE_MS` in `wimmelbild.html`), danach folgt die nächste Szene.
 
 Kontrolle: `wimmelbild.html?pruefen` zeigt alle Bereiche (Tippen zeigt die Koordinate), ein einzelnes Bild mit
