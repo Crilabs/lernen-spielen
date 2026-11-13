@@ -481,6 +481,85 @@ export function luecken(ctx) {
   return out;
 }
 
+// ---------- Elternbereich ----------
+
+const GERADE_DRAN_TAGE = 7;
+
+// Aufgabe lesbar für Eltern: zerl:7:3+4 → "7 = 3 + 4", plus:3+4 → "3 + 4", minus:7-4 → "7 − 4", menge:5 → "5"
+export function aufgabeLesbar(key) {
+  let m;
+  if ((m = /^zerl:(\d+):(\d+)\+(\d+)$/.exec(key))) return `${m[1]} = ${m[2]} + ${m[3]}`;
+  if ((m = /^plus:(\d+)\+(\d+)$/.exec(key))) return `${m[1]} + ${m[2]}`;
+  if ((m = /^minus:(\d+)-(\d+)$/.exec(key))) return `${m[1]} − ${m[2]}`;
+  if ((m = /^menge:(\d+)$/.exec(key))) return m[1];
+  return key;
+}
+
+// Themenliste für den Elternbereich, je Strang in Planreihenfolge, alle Themen (auch verborgene).
+// [{ strang, themen: [{ id, name, zustand, stufe, wackelig: key[], hinweis, luecke, geradeDran, frei }] }]
+//   wackelig   = Aufgaben eines gekonnten oder dran-Themas in Fach 0 oder 1, die schon einmal gesehen wurden (h nicht leer)
+//   luecke     = "ohne-spiel" | "teilweise" (nicht alle Aufgaben darstellbar) | null
+//   geradeDran = dran und seit höchstens GERADE_DRAN_TAGE Tagen
+//   frei       = von den Eltern freigegeben
+export function elternThemen(ctx, stand, heute) {
+  const z = zustaende(ctx, stand), out = [], nachStrang = new Map();
+  for (const t of themenVon(ctx)) {
+    if (!nachStrang.has(t.strang)) { const s = { strang: t.strang, themen: [] }; nachStrang.set(t.strang, s); out.push(s); }
+    const e = stand?.themen?.[t.id];
+    const zustand = z[t.id];
+    const luecke = !spieleFuer(ctx, t.id).length ? "ohne-spiel"
+      : darstellbareAufgaben(ctx, t.id).length < aufgabenDes(t).length ? "teilweise" : null;
+    const wackelig = zustand === "dran" || zustand === "kann-ich"
+      ? aufgabenDes(t).map((a) => a.key).filter((k) => {
+        const x = stand?.aufgaben?.[k];
+        return !!x && x.f <= 1 && Array.isArray(x.h) && x.h.length > 0;
+      })
+      : [];
+    nachStrang.get(t.strang).themen.push({
+      id: t.id, name: text(t.name), zustand, stufe: text(e?.stufe), wackelig, hinweis: text(t.eltern), luecke,
+      geradeDran: zustand === "dran" && tage(e?.seit, heute) <= GERADE_DRAN_TAGE, frei: e?.frei === 1,
+    });
+  }
+  return out;
+}
+
+// Eingriffe der Eltern. Sie ändern nur den Lernstand, nie Plan oder Spiele (Caches hängen an diesen Objekten).
+
+// Thema als gekonnt markieren. Mit ctx kommen die Aufgaben des Themas ohne Eintrag oder in Fach 0 in
+// Fach 1 (wie nach der Probe und bei der Übernahme), damit die Wiederholung nicht überläuft.
+export function markiereGekonnt(stand, themaId, heute, ctx = null) {
+  const t = stand.themen[themaId] || (stand.themen[themaId] = {});
+  Object.assign(t, { z: "kann-ich", k: heute, stufe: "kopf", v: [] });
+  delete t.p;
+  if (ctx)
+    for (const a of aufgabenDes(themaVon(ctx, themaId))) {
+      const x = stand.aufgaben[a.key] || (stand.aufgaben[a.key] = { f: 0, t: "", h: [], ms: [] });
+      if (x.f < 1) { x.f = 1; x.t = heute; }
+    }
+  return stand;
+}
+
+// Thema zurücksetzen: Themen-Eintrag weg (auch Einführung und Freigabe), Aufgaben des Themas in Fach 0.
+// kk und g fallen weg, „kann ich“ muss neu erworben werden; h und ms bleiben als Verlauf.
+export function setzeZurueck(ctx, stand, themaId) {
+  delete stand.themen[themaId];
+  for (const a of aufgabenDes(themaVon(ctx, themaId))) {
+    const x = stand.aufgaben[a.key];
+    if (!x) continue;
+    x.f = 0;
+    delete x.kk;
+    delete x.g;
+  }
+  return stand;
+}
+
+// Verborgenes Thema freigeben (kommt in Sicht; erfüllt die Voraussetzungen anderer Themen nicht)
+export function gibFrei(stand, themaId) {
+  const t = stand.themen[themaId] || (stand.themen[themaId] = {});
+  t.frei = 1;
+  return stand;
+}
+
 // ---------- Übernahme alter Spielstände (einmalig) ----------
 
 // Zahlenzauber-Stufe einer Rechenaufgabe (STUFEN in zahlenzauber.html)
