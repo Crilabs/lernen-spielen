@@ -19,6 +19,7 @@
 //   { spiel, thema, modus, stufe, probe: key[]|null, gezeigt, wieder: [{key, ab}], start, max, ereignis, letzte }
 
 import { aufgabenVon, darstellbar, schwierigkeit, ZIEL_MS } from "./aufgabenarten.js";
+import { lade, speichere, sofortSpeichern } from "./lernspiel.js";
 
 export const K = {
   ABSTAND: [0, 1, 3, 7, 21], // Wiedervorlage in Tagen je Fach
@@ -519,4 +520,72 @@ export function migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute 
   }
   stand.migriert = 1;
   return stand;
+}
+
+// ---------- Runde (Async-Schicht für die Spiele) ----------
+
+const STAND_KEY = "lernplan";
+let ctxCache = null;
+
+async function ladeCtx() {
+  if (!ctxCache) {
+    const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map((f) => fetch(f).then((r) => r.json())));
+    ctxCache = { plan, spiele };
+  }
+  return ctxCache;
+}
+
+const echteUhr = () => ({ heute: new Date().toLocaleDateString("sv"), jetzt: Date.now() });
+
+// Eine Runde in einem Spiel. nurAnsehen (Vorschau): nichts wird gespeichert.
+export async function runde(spielId, { wunsch = null, max = null, ctx = null, uhr = echteUhr, rnd = Math.random, nurAnsehen = false } = {}) {
+  ctx = ctx ?? (await ladeCtx());
+  const stand = migriereStand(await lade(STAND_KEY, neuerStand()));
+  const sichere = () => { if (!nurAnsehen) speichere(STAND_KEY, stand); };
+
+  if (!stand.migriert) {
+    const [perlenbruecke, zahlenzauber] = await Promise.all([lade("perlenbruecke", {}), lade("zahlenzauber", {})]);
+    migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute: uhr().heute });
+    sichere();
+  }
+
+  const { thema: themaId, modus } = themaFuer(ctx, stand, spielId, { wunsch });
+  const plan = themaId ? themaVon(ctx, themaId) : null;
+  const eintragVorher = themaId ? stand.themen[themaId] : null;
+  // Probe schon begonnen, aber vor dem Ende abgebrochen: auf der untersten Stufe üben
+  if (eintragVorher?.z === "dran" && !eintragVorher.stufe) eintragVorher.stufe = stufenFuer(ctx, spielId, themaId)[0] ?? "kopf";
+
+  const neu = !!plan && !["dran", "kann-ich"].includes(eintragVorher?.z);
+  const sitzung = neueSitzung(ctx, stand, spielId, { thema: themaId, modus }, { jetzt: uhr().jetzt, max, rnd });
+  const r = {
+    thema: plan ? { id: plan.id, name: plan.name, stufe: sitzung.probe ? "kopf" : sitzung.stufe, neu } : null,
+    modus,
+    einfuehrungFaellig: modus === "thema" && !!plan?.einfuehrung && !eintragVorher?.e,
+    einfuehrungGesehen() {
+      const t = stand.themen[themaId] || (stand.themen[themaId] = {});
+      t.e = uhr().heute;
+      r.einfuehrungFaellig = false;
+      sichere();
+    },
+    naechste() {
+      const { heute, jetzt } = uhr();
+      if (modus === "thema" && themaId && stand.themen[themaId]?.z !== "dran") { startThema(stand, themaId, heute); sichere(); }
+      return naechstesAngebot(ctx, stand, sitzung, rnd, { jetzt, heute });
+    },
+    melde(key, { ok, hilfe = 0, ms } = {}) {
+      const ereignis = verbucheErgebnis(ctx, stand, sitzung, key, { ok, hilfe, ms, heute: uhr().heute, rnd });
+      sichere();
+      return ereignis;
+    },
+    async ende() {
+      if (!nurAnsehen) await sofortSpeichern();
+      let hinweisSpiel = null;
+      if (modus === "wiederholung") {
+        const andere = (ctx.spiele?.spiele ?? []).map((s) => s.id).filter((id) => id !== spielId);
+        hinweisSpiel = andere.find((id) => themaFuer(ctx, stand, id).modus === "thema") ?? null;
+      }
+      return { hinweisSpiel };
+    },
+  };
+  return r;
 }
