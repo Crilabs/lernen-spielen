@@ -1,15 +1,22 @@
 mod lernstand;
 
+#[cfg(desktop)]
 use std::sync::atomic::{AtomicBool, Ordering};
+#[cfg(desktop)]
 use std::time::Duration;
 
-use tauri::{Manager, WebviewWindowBuilder, WindowEvent};
+#[cfg(desktop)]
+use tauri::WindowEvent;
+use tauri::{Manager, WebviewWindowBuilder};
 
 /// Gesetzt, sobald die App beendet wird oder ein Update installiert: dann holt der
 /// Wachhund das Fenster nicht mehr zurück.
+#[cfg(desktop)]
 static KIOSK_PAUSE: AtomicBool = AtomicBool::new(false);
 /// Verhindert, dass mehrere Wachhund-Prüfungen gleichzeitig laufen.
+#[cfg(desktop)]
 static PRUEFUNG_LAEUFT: AtomicBool = AtomicBool::new(false);
+#[cfg(desktop)]
 const WACHHUND_VERZOEGERUNG: Duration = Duration::from_millis(1500);
 
 fn lernstand_dir(app: &tauri::AppHandle) -> Result<std::path::PathBuf, String> {
@@ -46,6 +53,7 @@ fn plattform() -> String {
 
 /// Vom Elternbereich vor „App beenden“ und vor der Update-Installation aufgerufen
 /// (`pause: true`); schlägt das fehl, wieder mit `pause: false`.
+#[cfg(desktop)]
 #[tauri::command]
 fn kiosk_pause(pause: bool) {
     KIOSK_PAUSE.store(pause, Ordering::SeqCst);
@@ -58,6 +66,7 @@ fn kiosk_pause(pause: bool) {
 /// Wachhund: Wird das Hauptfenster minimiert oder versteckt (z. B. Drei-Finger-Wischen nach
 /// unten), holt er es nach kurzer Zeit zurück. Ein bloßer Fokusverlust bei sichtbarem Fenster
 /// wird nicht bekämpft, damit der Task-Manager (Notausgang für Erwachsene) bedienbar bleibt.
+#[cfg(desktop)]
 fn wachhund(window: &tauri::Window, event: &WindowEvent) {
     if cfg!(debug_assertions) || window.label() != "main" {
         return;
@@ -165,16 +174,27 @@ fn webview_einstellungen(window: &tauri::WebviewWindow) -> tauri::Result<()> {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri::Builder::default()
+    let builder = tauri::Builder::default();
+    // Updater, Beenden und Kiosk-Wachhund gibt es nur auf dem Desktop.
+    #[cfg(desktop)]
+    let builder = builder
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_process::init())
-        .invoke_handler(tauri::generate_handler![
-            lernstand_lesen,
-            lernstand_schreiben,
-            plattform,
-            kiosk_pause
-        ])
-        .on_window_event(wachhund)
+        .on_window_event(wachhund);
+    #[cfg(desktop)]
+    let builder = builder.invoke_handler(tauri::generate_handler![
+        lernstand_lesen,
+        lernstand_schreiben,
+        plattform,
+        kiosk_pause
+    ]);
+    #[cfg(mobile)]
+    let builder = builder.invoke_handler(tauri::generate_handler![
+        lernstand_lesen,
+        lernstand_schreiben,
+        plattform
+    ]);
+    builder
         .setup(|app| {
             // Logging in allen Builds: Datei im App-Log-Ordner, im Debug zusätzlich Stdout.
             let mut log = tauri_plugin_log::Builder::default()
