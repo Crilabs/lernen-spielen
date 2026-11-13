@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - run: npm ci
+      - run: npm test
+      - name: Rust-Tests
+        working-directory: src-tauri
+        run: cargo test
+
+      # Release-Notiz: Abschnitt "## vX.Y.Z" aus CHANGELOG.md, sonst die Tag-Nachricht.
+      - name: Release-Notiz
+        id: notiz
+        shell: bash
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          git fetch --tags --force origin "refs/tags/$TAG:refs/tags/$TAG"
+          NOTIZ=""
+          if [ -f CHANGELOG.md ]; then
+            NOTIZ=$(awk -v t="## $TAG" '$0 ~ "^## " && found {exit} index($0, t)==1 {found=1; next} found' CHANGELOG.md)
+          fi
+          if [ -z "$(echo "$NOTIZ" | tr -d '[:space:]')" ]; then
+            NOTIZ=$(git tag -l --format='%(contents)' "$TAG")
+          fi
+          {
+            echo "text<<EOF_NOTIZ"
+            echo "$NOTIZ"
+            echo "EOF_NOTIZ"
+          } >> "$GITHUB_OUTPUT"
+
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "Einhorn-Lernspiele ${{ github.ref_name }}"
+          releaseBody: ${{ steps.notiz.outputs.text }}
+          releaseDraft: false
+          includeUpdaterJson: true

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Für Erwachsene</title>
+<link rel="stylesheet" href="schrift/schrift.css">
+<style>
+:root{
+  --himmel:#CDEFFF; --tinte:#3B2A6B; --tinte-weich:#6B5C96; --papier:#FFFFFF; --rand:#E3E8F0; --schatten:#D5DCE8; --fehler:#B3315A;
+  font-size:calc(100vh / 108);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:"Andika","Baloo 2",sans-serif;color:var(--tinte);background:#F4F7FB;user-select:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;font-weight:800;line-height:1}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible{outline:.4rem solid var(--tinte);outline-offset:.4rem;border-radius:1rem}
+img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.auswahl{user-select:text;-webkit-user-select:text}
+[hidden]{display:none!important}
+
+/* PIN */
+#pin{position:fixed;inset:0}
+.pin-box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3rem}
+.pin-box h2{font-size:4.2rem}
+#pin-text{font-size:2.4rem;color:var(--tinte-weich);margin-top:-1.6rem;min-height:3rem}
+#pin-text.fehler{color:var(--fehler);font-weight:700}
+.punkte{display:flex;gap:2rem}
+.punkte i{width:2.6rem;height:2.6rem;border-radius:50%;border:.35rem solid var(--tinte)}
+.punkte i.voll{background:var(--tinte)}
+.ziffern{display:grid;grid-template-columns:repeat(3,10rem);gap:2rem}
+.ziffern button{height:10rem;border-radius:3rem;background:#fff;font:800 4.4rem/1 "Baloo 2";box-shadow:0 .6rem 0 var(--schatten)}
+.ziffern button:active{transform:translateY(.4rem);box-shadow:0 .2rem 0 var(--schatten)}
+.ziffern button.leise{background:none;box-shadow:none;font:700 2.4rem/1 "Andika";color:var(--tinte-weich)}
+.zurueck{position:absolute;top:3rem;left:3.5rem;height:7rem;padding:0 2.6rem 0 2rem;border-radius:99rem;background:#fff;
+  display:flex;align-items:center;gap:1rem;font:700 2.4rem/1 "Andika";box-shadow:0 .5rem 0 var(--schatten)}
+.hilfe{font-size:1.8rem;color:var(--tinte-weich);max-width:60rem;text-align:center;line-height:1.4}
+.sym{width:4rem;height:4rem;flex:none}
+
+/* Bereich */
+#bereich{position:fixed;inset:0;display:grid;grid-template-columns:40rem 1fr}
+.el-nav{background:#fff;padding:3rem 2.4rem;display:flex;flex-direction:column;gap:.8rem;border-right:.2rem solid var(--rand)}
+.el-nav h1{font-size:3.2rem;margin:1rem 1.4rem 3rem}
+.el-nav button{display:flex;align-items:center;gap:1.4rem;text-align:left;font-size:2.4rem;font-weight:700;padding:1.8rem 1.6rem;border-radius:1.8rem;min-height:7rem}
+.el-nav button.an{background:var(--himmel)}
+.el-nav .unten{margin-top:auto;display:flex;flex-direction:column;gap:.8rem}
+.el-inhalt{padding:5rem 6rem;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-content:start}
+.el-inhalt>h2{grid-column:1/-1;font-size:4rem}
+.karte{background:#fff;border-radius:2.4rem;padding:3rem;box-shadow:0 .4rem 0 var(--rand)}
+.karte.neu{box-shadow:0 .4rem 0 #BFE3F7;border:.3rem solid var(--himmel)}
+.karte h3{font-size:2.8rem;margin-bottom:1.6rem}
+.karte p{font-size:2.2rem;line-height:1.45;color:var(--tinte-weich)}
+.karte .gross{font:800 5rem/1 "Baloo 2";color:var(--tinte);margin:.4rem 0 1.4rem}
+.knopf{display:inline-flex;align-items:center;gap:1rem;margin-top:2.4rem;height:7rem;padding:0 3rem;border-radius:99rem;background:var(--tinte);color:#fff;font:700 2.4rem/1 "Andika"}
+.knopf.hell{background:var(--himmel);color:var(--tinte)}
+.knopf[disabled]{opacity:.5;cursor:default}
+.breit{grid-column:1/-1}
+.balken{height:1.6rem;border-radius:99rem;background:var(--himmel);margin-top:2.4rem;overflow:hidden}
+.balken i{display:block;height:100%;width:0;background:var(--tinte);transition:width .2s}
+.zeilen{list-style:none;display:flex;flex-direction:column;gap:1.8rem}
+.karte .zeilen+p{margin-top:2rem}
+.zeilen li{display:grid;grid-template-columns:4rem 1fr 22rem;align-items:center;gap:1.4rem;font-size:2.2rem;font-weight:700}
+.zeilen .weg{height:1.4rem;border-radius:99rem;background:var(--himmel);margin-top:.6rem}
+.zeilen .weg i{display:block;height:100%;border-radius:99rem;background:var(--tinte)}
+.zeilen small{font-weight:400;color:var(--tinte-weich);text-align:right;font-size:2rem}
+.zeilen a{text-decoration:underline;text-underline-offset:.4rem}
+.liste{list-style:none;display:flex;flex-direction:column;gap:1rem;font-size:2rem;line-height:1.35;color:var(--tinte-weich)}
+.liste li{word-break:break-word}
+.protokoll{max-height:62rem;overflow:auto}
+.notiz{white-space:pre-wrap}
+</style>
+</head>
+<body>
+
+<section id="pin" aria-label="PIN" hidden>
+  <a class="zurueck" href="index.html"><span class="sym"><img src="symbole/haus.svg" alt=""></span>Zurück</a>
+  <div class="pin-box">
+    <h2 id="pin-titel">Für Erwachsene</h2>
+    <p id="pin-text" role="status">Bitte die PIN eingeben</p>
+    <div class="punkte" id="punkte" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="ziffern" id="ziffern"></div>
+    <p id="pin-hilfe" class="hilfe">PIN vergessen: Datei <b>eltern.json</b> im Lernstand-Ordner löschen.</p>
+  </div>
+</section>
+
+<section id="bereich" aria-label="Elternbereich" hidden>
+  <nav class="el-nav">
+    <h1>Für Erwachsene</h1>
+    <button data-tab="updates"><span class="sym"><img src="symbole/update.svg" alt=""></span>Updates</button>
+    <button data-tab="lernstand"><span class="sym"><img src="symbole/lernstand.svg" alt=""></span>Lernstand</button>
+    <button data-tab="stimme"><span class="sym"><img src="symbole/stimme.svg" alt=""></span>Stimme und Ton</button>
+    <button data-tab="protokoll"><span class="sym"><img src="symbole/protokoll.svg" alt=""></span>Protokoll</button>
+    <button data-tab="pin"><span class="sym"><img src="symbole/schloss.svg" alt=""></span>PIN ändern</button>
+    <div class="unten">
+      <button id="zurueck-spiele"><span class="sym"><img src="symbole/haus.svg" alt=""></span>Zurück zu den Spielen</button>
+      <button id="beenden"><span class="sym"><img src="symbole/beenden.svg" alt=""></span>App beenden</button>
+    </div>
+  </nav>
+  <div class="el-inhalt auswahl" id="inhalt"></div>
+</section>
+
+<script type="module">
+import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen } from "./lernspiel.js";
+import { pinHash, pinPruefen, pruefeUpdate } from "./eltern.js";
+import { wertVon } from "./fortschritt/laden.js";
+
+sperreTouch();
+const T = window.__TAURI__;
+const $ = id => document.getElementById(id);
+const el = (tag, text, klasse) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (klasse) e.className = klasse; return e; };
+
+// ---------- PIN ----------
+let daten = await lade("eltern", {});
+const LAENGE = 4;
+let eingabe = "", modus, erste = "";   // modus: pruefen | neu | bestaetigen
+
+const ziffern = $("ziffern");
+for (const z of ["1","2","3","4","5","6","7","8","9","Neu","0","Löschen"]) {
+  const b = el("button", z, /\d/.test(z) ? "" : "leise");
+  b.type = "button";
+  b.addEventListener("click", () => taste(z));
+  ziffern.appendChild(b);
+}
+function zeichnePunkte() {
+  [...$("punkte").children].forEach((p, i) => p.classList.toggle("voll", i < eingabe.length));
+}
+function meldung(text, fehler = false) {
+  const p = $("pin-text"); p.textContent = text; p.classList.toggle("fehler", fehler);
+}
+function pinAnsicht(m) {
+  modus = m; eingabe = ""; erste = ""; zeichnePunkte();
+  $("bereich").hidden = true; $("pin").hidden = false;
+  $("pin-hilfe").hidden = m !== "pruefen";
+  $("pin-titel").textContent = m === "pruefen" ? "Für Erwachsene" : "Neue PIN festlegen";
+  meldung(m === "pruefen" ? "Bitte die PIN eingeben" : "Wähle eine PIN mit vier Ziffern");
+}
+async function taste(z) {
+  if (z === "Neu") eingabe = "";
+  else if (z === "Löschen") eingabe = eingabe.slice(0, -1);
+  else if (eingabe.length < LAENGE) eingabe += z;
+  zeichnePunkte();
+  if (eingabe.length < LAENGE) return;
+  const pin = eingabe;
+  if (modus === "pruefen") {
+    if (await pinPruefen(pin, daten.pinHash)) { zeigeBereich(); }
+    else { eingabe = ""; zeichnePunkte(); meldung("Das war nicht richtig. Bitte nochmal.", true); }
+  } else if (modus === "neu") {
+    erste = pin; eingabe = ""; modus = "bestaetigen"; zeichnePunkte(); meldung("Gib die PIN zur Sicherheit noch einmal ein");
+  } else if (pin === erste) {
+    daten.pinHash = await pinHash(pin);
+    speichere("eltern", daten); await sofortSpeichern();
+    zeigeBereich("pin-ok");
+  } else {
+    eingabe = ""; erste = ""; modus = "neu"; zeichnePunkte(); meldung("Die beiden PINs waren verschieden. Bitte von vorn.", true);
+  }
+}
+
+// ---------- Bereich ----------
+let tab = "updates";
+function zeigeBereich(hinweis) {
+  $("pin").hidden = true; $("bereich").hidden = false;
+  waehle("updates", hinweis);
+}
+document.querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => {
+  if (b.dataset.tab === "pin") pinAnsicht("neu"); else waehle(b.dataset.tab);
+}));
+$("zurueck-spiele").addEventListener("click", async () => { await sofortSpeichern(); location.href = "index.html"; });
+$("beenden").addEventListener("click", async () => {
+  await sofortSpeichern();
+  try { await T.process.exit(0); } catch (e) { protokoll("App beenden: " + (e?.message ?? e)); location.href = "index.html"; }
+});
+
+function waehle(name, hinweis) {
+  tab = name;
+  document.querySelectorAll("[data-tab]").forEach(b => b.classList.toggle("an", b.dataset.tab === name));
+  const inh = $("inhalt"); inh.replaceChildren();
+  ({ updates, lernstand, stimme, protokollAnsicht })[name === "protokoll" ? "protokollAnsicht" : name](inh, hinweis);
+}
+
+// -- Updates --
+function updates(inh, hinweis) {
+  inh.appendChild(el("h2", "Updates"));
+  const karte = el("div", null, "karte");
+  karte.appendChild(el("h3", "Installiert"));
+  const ver = el("div", "Version …", "gross"); karte.appendChild(ver);
+  Promise.resolve(T?.app?.getVersion?.()).then(v => { if (tab === "updates") ver.textContent = v ? "Version " + v : "Version unbekannt"; })
+    .catch(() => { ver.textContent = "Version unbekannt"; });
+  const status = el("p", hinweis === "pin-ok" ? "Die neue PIN ist gespeichert." : "Hier kannst du nach einer neuen Version suchen.");
+  status.setAttribute("role", "status");
+  karte.appendChild(status);
+  const suche = el("button", "Nach Updates suchen", "knopf hell"); suche.type = "button";
+  karte.appendChild(suche);
+  inh.appendChild(karte);
+  const neu = el("div", null, "karte neu"); neu.hidden = true; inh.appendChild(neu);
+
+  suche.addEventListener("click", async () => {
+    suche.disabled = true; neu.hidden = true; neu.replaceChildren();
+    status.textContent = "Ich suche …";
+    const r = await pruefeUpdate();
+    suche.disabled = false;
+    if (tab !== "updates") return;
+    if (r.status === "aktuell") status.textContent = "Alles aktuell.";
+    else if (r.status === "offline") { status.textContent = "Kein Internet – bitte später nochmal."; protokoll("Update-Suche: offline oder Fehler"); }
+    else if (r.status === "kein-app") status.textContent = "Updates gibt es nur in der installierten App.";
+    else {
+      status.textContent = "Version " + r.version + " ist verfügbar.";
+      neu.hidden = false;
+      neu.appendChild(el("h3", "Neu verfügbar"));
+      neu.appendChild(el("div", "Version " + r.version, "gross"));
+      if (r.notiz) neu.appendChild(el("p", r.notiz, "notiz"));
+      const los = el("button", "Installieren und neu starten", "knopf"); los.type = "button";
+      const balken = el("div", null, "balken"); balken.hidden = true;
+      const fuell = el("i"); balken.appendChild(fuell);
+      neu.append(los, balken);
+      los.addEventListener("click", () => installieren(r.update, los, balken, fuell, status));
+    }
+  });
+}
+async function installieren(update, los, balken, fuell, status) {
+  los.disabled = true; balken.hidden = false; status.textContent = "Ich lade das Update …";
+  try {
+    await sofortSpeichern();
+    let gesamt = 0, geladen = 0;
+    await update.downloadAndInstall(ev => {
+      if (ev.event === "Started") gesamt = ev.data?.contentLength ?? 0;
+      else if (ev.event === "Progress") { geladen += ev.data?.chunkLength ?? 0; if (gesamt) fuell.style.width = Math.min(100, geladen / gesamt * 100) + "%"; }
+      else if (ev.event === "Finished") fuell.style.width = "100%";
+    });
+    status.textContent = "Fertig. Die App startet neu …";
+    await T.process.relaunch();
+  } catch (e) {
+    protokoll("Update installieren: " + (e?.message ?? e));
+    status.textContent = "Das Update hat nicht geklappt. Bitte später nochmal versuchen.";
+    los.disabled = false; balken.hidden = true;
+  }
+}
+
+// -- Lernstand --
+async function lernstand(inh) {
+  inh.appendChild(el("h2", "Lernstand"));
+  const karte = el("div", null, "karte breit");
+  karte.appendChild(el("h3", "Lernstand auf einen Blick"));
+  const ul = el("ul", null, "zeilen"); karte.appendChild(ul);
+  inh.appendChild(karte);
+  let spiele;
+  try { spiele = (await (await fetch("spiele.json")).json()).spiele; }
+  catch (e) { protokoll("spiele.json: " + e); ul.appendChild(el("li", "Die Spieleliste konnte nicht geladen werden.")); return; }
+  for (const s of spiele) {
+    const li = el("li");
+    const ico = el("span", null, "sym"); const img = document.createElement("img"); img.src = s.symbol; img.alt = ""; ico.appendChild(img);
+    const mitte = el("div");
+    const link = el("a", s.titel); link.href = s.datei + "?eltern";
+    mitte.appendChild(link);
+    const weg = el("div", null, "weg"); const fuell = el("i"); fuell.style.width = "0"; weg.appendChild(fuell);
+    const klein = el("small", "…");
+    li.append(ico, mitte, klein); ul.appendChild(li);
+    wertVon(s.id).then(w => {
+      if (w === undefined) klein.textContent = "noch keine Auswertung";
+      else { klein.textContent = Math.round(w * 100) + " %"; fuell.style.width = w * 100 + "%"; mitte.appendChild(weg); }
+    });
+  }
+  karte.appendChild(el("p", "Tippe auf ein Spiel für die Elternansicht dieses Spiels."));
+}
+
+// -- Stimme und Ton --
+function stimme(inh) {
+  inh.appendChild(el("h2", "Stimme und Ton"));
+  const karte = el("div", null, "karte breit");
+  karte.appendChild(el("h3", "Verfügbare Stimmen"));
+  const ul = el("ul", null, "liste");
+  karte.append(ul, el("p", "Die Stimme wählst du in der Elternansicht des jeweiligen Spiels (unter Lernstand, Spiel antippen). Dort lässt sie sich auch anhören."));
+  inh.appendChild(karte);
+  const zeichne = () => {
+    if (tab !== "stimme") return;
+    let vs = []; try { vs = speechSynthesis.getVoices(); } catch (e) { protokoll("Stimmen: " + e); }
+    vs = [...vs].sort((a, b) => (/^de/i.test(b.lang) - /^de/i.test(a.lang)) || a.name.localeCompare(b.name));
+    ul.replaceChildren(...(vs.length ? vs.map(v => el("li", v.name + " (" + v.lang + ")")) : [el("li", "Keine Stimmen gefunden.")]));
+  };
+  zeichne();
+  try { speechSynthesis.addEventListener("voiceschanged", zeichne); } catch (e) { /* keine Sprachausgabe */ }
+}
+
+// -- Protokoll --
+function protokollAnsicht(inh) {
+  inh.appendChild(el("h2", "Protokoll"));
+  const karte = el("div", null, "karte breit protokoll");
+  const zeilen = protokollLesen();
+  const ul = el("ul", null, "liste");
+  ul.replaceChildren(...(zeilen.length ? zeilen.slice().reverse().map(z => el("li", z)) : [el("li", "Keine Einträge. Alles in Ordnung.")]));
+  karte.append(el("h3", "Letzte Meldungen"), ul);
+  inh.appendChild(karte);
+}
+
+pinAnsicht(daten.pinHash ? "pruefen" : "neu");
+</script>
+</body>
+</html>

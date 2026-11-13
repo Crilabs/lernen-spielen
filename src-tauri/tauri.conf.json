@@ -46,6 +46,18 @@
       "webviewInstallMode": {
         "type": "downloadBootstrapper"
       }
+    },
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://github.com/Crilabs/lernen-spielen/releases/latest/download/latest.json"
+      ],
+      "pubkey": "PUBKEY_FEHLT",
+      "windows": {
+        "installMode": "passive"
+      }
     }
   }
 }
