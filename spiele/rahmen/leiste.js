@@ -3,6 +3,7 @@
 // Links Haus (Alle Spiele, Nebenknopf), daneben das Fachsymbol als flache Kachel (nur Anzeige), dann der
 // Spielname in Fach-Tief und darunter leiser das Thema; rechts Ton an/aus (Nebenknopf).
 // Ohne bekanntes Fach: Band in Nebel, keine Kachel, Name in Tinte. `thema` darf sich zur Laufzeit ändern.
+// Setzt --ls-leiste-hoehe am <html>: dort beginnt die freie Fläche des Spiels (top: var(--ls-leiste-hoehe)).
 
 import { ladeEinstellungen, einstellung, setzeEinstellung } from "../kern/einstellungen.js";
 import { sprich, stille } from "../kern/stimme.js";
@@ -14,6 +15,8 @@ import "./knopf.js";
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
 const HAUS_HREF = new URL("../index.html", import.meta.url).href;
 const HAUS_NAME = "Alle Spiele";
+/** Höhe der Kopfleiste samt Aussparung; als --ls-leiste-hoehe am Dokument veröffentlicht. */
+const LEISTE_HOEHE = `calc(${MASSE.leiste}rem + env(safe-area-inset-top, 0rem))`;
 /** Fächer mit eigenem Symbol in spiele/symbole/ (Sprechen hat noch keins). */
 const FACH_SYMBOLE = new Set(["mathe", "lesen", "schreiben", "grammatik", "geometrie"]);
 
@@ -42,7 +45,7 @@ ${FACH_CSS}
   left: 0;
   right: 0;
   box-sizing: border-box;
-  height: calc(${MASSE.leiste}rem + env(safe-area-inset-top, 0rem));
+  height: ${LEISTE_HOEHE};
   padding: calc(${MASSE.rand}rem + env(safe-area-inset-top, 0rem))
     calc(${MASSE.rand}rem + env(safe-area-inset-right, 0rem)) ${MASSE.rand}rem
     calc(${MASSE.rand}rem + env(safe-area-inset-left, 0rem));
@@ -121,11 +124,17 @@ export class LsLeiste extends HTMLElement {
   }
 
   connectedCallback() {
+    // Freie Fläche für das Spiel beginnt unter der Kopfleiste (MASSE.leiste plus Aussparung oben).
+    document.documentElement.style.setProperty("--ls-leiste-hoehe", LEISTE_HOEHE);
     this.zeichne();
     if (!this._start) {
       this._start = true;
       this.lade();
     }
+  }
+
+  disconnectedCallback() {
+    document.documentElement.style.removeProperty("--ls-leiste-hoehe");
   }
 
   /** @param {string} name */

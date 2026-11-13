@@ -56,7 +56,8 @@ export const FACH = {
  *
  * Aufbau eines Knopfs: `.knopf` (button oder a) ist die Tippfläche, mindestens 11 rem; darin `.form`
  * als sichtbare Gestalt (`.neben` oder `.haupt`, `.rund` oder `.pille`); darin `.zeichen` (Symbol über
- * `img`, beim Hauptknopf zusätzlich die Variable `--bild`) und `.wort`. Nur was drückbar ist, hat einen Schatten.
+ * `img`, beim Hauptknopf zusätzlich die Variable `--bild`) und `.wort`. Nur was drückbar ist, hat einen Schatten: Nebenknopf in Tinte weich,
+ * Hauptknopf im dunklen Tinte-Ton (grundsaetze-bilder 6.4 „fester Schatten im Tief-Ton“).
  */
 export const GRUND_CSS = `
 :host {
@@ -74,8 +75,9 @@ export const GRUND_CSS = `
   --ls-radius: ${RADIUS.normal}rem;
   --ls-radius-klein: ${RADIUS.klein}rem;
   --ls-knopf: ${MASSE.bedien}rem;
-  --ls-schatten: 0 ${MASSE.tiefe}rem 0 var(--ls-linie);
-  --ls-schatten-unten: 0 ${MASSE.tiefe - MASSE.einsinken}rem 0 var(--ls-linie);
+  --ls-neben-schatten: var(--ls-tinte-weich);
+  --ls-schatten: 0 ${MASSE.tiefe}rem 0 var(--ls-neben-schatten);
+  --ls-schatten-unten: 0 ${MASSE.tiefe - MASSE.einsinken}rem 0 var(--ls-neben-schatten);
   display: inline-block;
   color: var(--ls-tinte);
   font-family: "Andika", sans-serif;
@@ -108,7 +110,7 @@ export const GRUND_CSS = `
 .knopf:focus-visible { outline: none; }
 
 .form {
-  --schatten-farbe: var(--ls-linie);
+  --schatten-farbe: var(--ls-neben-schatten);
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -157,11 +159,12 @@ export const GRUND_CSS = `
 .gespiegelt .zeichen { transform: scaleX(-1); }
 .wort { display: block; line-height: 1; padding-bottom: 0.08em; }
 
-/* Sonnenring: Fokus (in ls-hilfe auch das Aufleuchten). Immer ein Ring, nie eine Fläche. */
+/* Sonnenring: Fokus (in ls-hilfe auch das Aufleuchten). Immer ein Ring, nie eine Fläche; er liegt direkt
+   an der Tinte-Kontur an, damit kein Hintergrund durchscheint. */
 .form::after {
   content: "";
   position: absolute;
-  inset: calc(-1 * (var(--ls-kontur) + 1.1rem));
+  inset: calc(-1 * (var(--ls-kontur) + 0.8rem));
   border: 0.8rem solid var(--ls-sonne);
   border-radius: 999rem;
   box-shadow: 0 0 0 0.3rem var(--ls-tinte);

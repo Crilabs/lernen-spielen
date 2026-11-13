@@ -139,7 +139,7 @@ Bedeutung. Die Schichten sind räumlich getrennt und an der Form zu unterscheide
 | Tinte weich | `#6B5C96` | Nebentext, Vokal-Unterstrich (5,7:1) |
 | Papier | `#FFFCF7` | Lernfeld, Karten, Nebenknöpfe |
 | Nebel | `#F4F0FA` | Grundfläche hinter allem |
-| Linie | `#E4DEF0` | Trennlinien, heller Schatten |
+| Linie | `#E4DEF0` | Trennlinien (nie Schatten eines Knopfs) |
 | Naht | `#CFC4E3` | gestrichelter Rand der Matte |
 | Ahorn / Kante | `#EAD5B5` / `#B98E5E` | Tablett für den Materialvorrat |
 | Nacht | `#1F1B45` | Pausen, Abend |
@@ -150,7 +150,7 @@ Bedeutung. Die Schichten sind räumlich getrennt und an der Form zu unterscheide
 |---|---|---|
 | Sonne | `#FFD95A` | ausgewählt, hier geht es weiter, Hilfe-Licht; als Ring oder Licht, nie als Fläche einer Antwort |
 | Hauptknopf | Tinte, Schatten `#24184A` | Weiter, Fertig; neutral, nicht grün |
-| Nebenknopf | Papier mit Tinte-Kontur | Vorlesen, Ton, Zurück |
+| Nebenknopf | Papier mit Tinte-Kontur, Schatten Tinte weich `#6B5C96` | Haus, Ton, Vorlesen, Hilfe |
 | Beere | `#B3315A` | nur Elternbereich (Löschen, Achtung); beim Kind nie |
 
 Es gibt kein Grün für „richtig“ und kein Rot für „falsch“; ob etwas passt, zeigt die Mechanik (`grundsaetze.md` 3.1).
@@ -230,8 +230,10 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 
 ### 6.4 Stilmerkmale
 
-- **Schatten heißt drückbar:** Knöpfe, Kacheln und ziehbare Teile haben einen festen Schatten im Tief-Ton und
-  sinken beim Drücken ein. Alles Flache ist zum Ansehen.
+- **Schatten heißt drückbar:** Knöpfe, Kacheln und ziehbare Teile haben einen festen, deutlich sichtbaren
+  Schatten im Tief-Ton und sinken beim Drücken ein: Hauptknopf `#24184A`, Nebenknopf und Taste Tinte weich
+  `#6B5C96`, Fachkachel der Startseite im Fach-Tief. Linie und Naht sind nie Schatten. Alles Flache ist zum
+  Ansehen.
 - **Eine Kontur für alles:** Tinte, Strich 3–4, runde Enden.
 - **Verläufe nur in der Welt** (Himmel, Wasser, Licht); Lernzeichen immer flach, ohne Glanz.
 - **Große, weiche Formen,** viel Papier um das Lernfeld.

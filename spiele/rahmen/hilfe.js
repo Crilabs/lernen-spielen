@@ -33,7 +33,7 @@ const HILFE_CSS = `
 .platz::after {
   content: "";
   position: absolute;
-  inset: calc(-1 * (var(--ls-kontur) + 1.1rem));
+  inset: -0.8rem; /* direkt an der Kontur des Knopfs (.platz = Außenkante) */
   border: 0.8rem solid var(--ls-sonne);
   border-radius: 50%;
   box-shadow: 0 0 0 0.3rem var(--ls-tinte), 0 0 4rem 2rem rgba(255, 217, 90, 0.55);

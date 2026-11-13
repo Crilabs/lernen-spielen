@@ -70,7 +70,8 @@ td:first-child{white-space:nowrap;font-weight:700}
 .regel{background:var(--papier);border-radius:var(--r-gross);padding:20px;border:2px solid var(--linie);display:grid;gap:8px;align-content:start}
 .regel .beispiel{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:4px}
 .knopf{font:inherit;font-weight:700;font-size:17px;padding:12px 22px;border-radius:999px;border:3px solid var(--tinte);background:var(--tinte);color:var(--papier);box-shadow:0 5px 0 #24184A;cursor:pointer}
-.knopf.hell{background:var(--papier);color:var(--tinte);box-shadow:0 5px 0 var(--linie)}
+.knopf.hell{background:var(--papier);color:var(--tinte);box-shadow:0 5px 0 var(--tinte-weich)}
+.knopf.hell:active{box-shadow:0 1px 0 var(--tinte-weich)}
 .knopf:active{transform:translateY(4px);box-shadow:0 1px 0 #24184A}
 .knopf:focus-visible{outline:5px solid var(--sonne);outline-offset:3px}
 .flach{padding:12px 18px;border-radius:var(--r);background:var(--nebel);border:2px dashed var(--linie);color:var(--tinte-weich);font-weight:700}
@@ -110,14 +111,14 @@ td:first-child{white-space:nowrap;font-weight:700}
       <circle cx="80" cy="318" r="8" fill="#FFC9DE" stroke="#3B2A6B" stroke-width="3"/><circle cx="104" cy="326" r="6" fill="#FFC9DE" stroke="#3B2A6B" stroke-width="3"/>
       <!-- Rahmen: Kopfleiste in Fachfarbe Mathe: Haus, Fachkachel (flach), Spielname, Thema, Ton -->
       <rect x="0" y="0" width="640" height="60" fill="#FFE6F2"/>
-      <g><circle cx="32" cy="33" r="22" fill="#E4DEF0"/><circle cx="32" cy="30" r="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><path d="M22 31 L32 22 L42 31 M25 29 V39 H39 V29" fill="none" stroke="#3B2A6B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g><circle cx="32" cy="33" r="22" fill="#6B5C96"/><circle cx="32" cy="30" r="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><path d="M22 31 L32 22 L42 31 M25 29 V39 H39 V29" fill="none" stroke="#3B2A6B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
       <rect x="64" y="12" width="36" height="36" rx="11" fill="#F06BB0" stroke="#3B2A6B" stroke-width="3"/>
       <path d="M76 30h12M82 24v12" stroke="#3B2A6B" stroke-width="3.5" stroke-linecap="round"/>
       <text x="112" y="29" font-family="Andika, sans-serif" font-weight="700" font-size="18" fill="#B8327A">Perlenbrücke</text>
       <text x="112" y="48" font-family="Andika, sans-serif" font-size="13" fill="#6B5C96">Die 7 zerlegen</text>
       <!-- Hülle: Nebenknöpfe mit hellem Schatten (drückbar) -->
-      <g><circle cx="608" cy="33" r="22" fill="#E4DEF0"/><circle cx="608" cy="30" r="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><path d="M596 26h6l7-7v22l-7-7h-6z" fill="#3B2A6B"/><path d="M613 25c3 3 3 7 0 10" fill="none" stroke="#3B2A6B" stroke-width="2.5" stroke-linecap="round"/></g>
-      <g><circle cx="608" cy="373" r="22" fill="#E4DEF0"/><circle cx="608" cy="370" r="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><circle cx="608" cy="366" r="8" fill="#FFD95A" stroke="#3B2A6B" stroke-width="3"/><path d="M604 378h8" stroke="#3B2A6B" stroke-width="3" stroke-linecap="round"/></g>
+      <g><circle cx="608" cy="33" r="22" fill="#6B5C96"/><circle cx="608" cy="30" r="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><path d="M596 26h6l7-7v22l-7-7h-6z" fill="#3B2A6B"/><path d="M613 25c3 3 3 7 0 10" fill="none" stroke="#3B2A6B" stroke-width="2.5" stroke-linecap="round"/></g>
+      <g><circle cx="608" cy="373" r="22" fill="#6B5C96"/><circle cx="608" cy="370" r="22" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><circle cx="608" cy="366" r="8" fill="#FFD95A" stroke="#3B2A6B" stroke-width="3"/><path d="M604 378h8" stroke="#3B2A6B" stroke-width="3" stroke-linecap="round"/></g>
       <!-- Lernfeld auf Papier -->
       <rect x="70" y="96" width="500" height="170" rx="26" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/><rect x="82" y="108" width="476" height="146" rx="18" fill="none" stroke="#CFC4E3" stroke-width="2.5" stroke-dasharray="7 7"/>
       <text x="100" y="134" font-family="Andika, sans-serif" font-weight="700" font-size="20" fill="#3B2A6B">7 sind 5 und ?</text>
@@ -164,10 +165,10 @@ td:first-child{white-space:nowrap;font-weight:700}
       <g id="pause7"></g>
       <text x="320" y="196" text-anchor="middle" font-family="Andika, sans-serif" font-size="15" fill="#3B2A6B">Sieben ist so lang wie fünf und zwei.</text>
       <g font-family="Andika, sans-serif" font-weight="700" font-size="18" fill="#3B2A6B">
-        <rect x="128" y="270" width="180" height="52" rx="26" fill="#E4DEF0"/><rect x="128" y="264" width="180" height="52" rx="26" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/>
+        <rect x="128" y="270" width="180" height="52" rx="26" fill="#6B5C96"/><rect x="128" y="264" width="180" height="52" rx="26" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/>
         <path d="M150 292 L162 281 L174 292 M154 290 V302 H170 V290" fill="none" stroke="#3B2A6B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         <text x="236" y="296" text-anchor="middle">Alle Spiele</text>
-        <rect x="332" y="270" width="180" height="52" rx="26" fill="#E4DEF0"/><rect x="332" y="264" width="180" height="52" rx="26" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/>
+        <rect x="332" y="270" width="180" height="52" rx="26" fill="#6B5C96"/><rect x="332" y="264" width="180" height="52" rx="26" fill="#FFFCF7" stroke="#3B2A6B" stroke-width="3"/>
         <path d="M354 284h14v-6l10 12-10 12v-6h-14z" fill="#9CCBFF" stroke="#3B2A6B" stroke-width="2.5" stroke-linejoin="round"/>
         <text x="440" y="296" text-anchor="middle">Weiter</text>
       </g>
@@ -263,14 +264,14 @@ const feld=(ziel,f,name,code,text,extra="")=>{document.getElementById(ziel).inse
  ["#6B5C96","Tinte weich","#6B5C96","Nebentext, Vokal-Strich, 5,7:1"],
  ["#FFFCF7","Papier","#FFFCF7","Lernfeld, Karten, Knöpfe"],
  ["#F4F0FA","Nebel","#F4F0FA","Grundfläche hinter allem"],
- ["#E4DEF0","Linie","#E4DEF0","Trennlinien, heller Schatten"],
+ ["#E4DEF0","Linie","#E4DEF0","Trennlinien, nie Schatten"],
  ["#1F1B45","Nacht","#1F1B45","Pausen, Abend"],
  ["#EAD5B5","Ahorn","#EAD5B5, Kante #B98E5E","Tablett für den Materialvorrat. Holz, wie im Werkraum."],
  ["#CFC4E3","Naht","#CFC4E3","gestrichelter Rand der Arbeitsmatte"]].forEach(a=>feld("grund",...a));
 
 [["#FFD95A","Sonne","#FFD95A","Ausgewählt, hier geht es weiter, Hilfe-Licht. Immer als Ring oder Licht, nie als Fläche einer Antwort."],
  ["#3B2A6B","Tinte gefüllt","#3B2A6B, Schatten #24184A","Der eine Hauptknopf: Weiter, Fertig. Neutral, nicht grün."],
- ["#FFFCF7","Papier mit Kontur","#FFFCF7","Nebenknöpfe: Vorlesen, Ton, Zurück."],
+ ["#FFFCF7","Papier mit Kontur","#FFFCF7, Schatten #6B5C96","Nebenknöpfe: Haus, Ton, Vorlesen, Hilfe. Schatten in Tinte weich."],
  ["#B3315A","Beere","#B3315A, 5,9:1","Nur im Elternbereich: Löschen, Achtung. Beim Kind nie."]].forEach(a=>feld("funktion",...a));
 
 const faecher=[["Mathe","Himbeere","#F06BB0","#B8327A","#FFE6F2","4,7:1"],["Grammatik","Minze","#3DB98F","#1B7656","#DBF5EA","4,8:1"],["Schreiben","Himmelblau","#4C9BD1","#25689C","#DFF0FC","5,1:1"],["Lesen","Honig","#F2B630","#8A5D05","#FFF3D1","5,2:1"],["Geometrie","Flieder","#8C6FE0","#5B3FB8","#EEE8FF","6,2:1"],["Sprechen und Zuhören","Aprikose","#F08A4B","#A44C16","#FFEADD","5,0:1"]];

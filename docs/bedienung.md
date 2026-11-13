@@ -64,7 +64,9 @@ von keinem Spiel neu erfunden.
 
 - **Kopfleiste (Christian):** ein Band über die ganze Breite des sicheren Felds, 15,8 rem hoch, in der
   Tönung des Fachs (Rahmen-Schicht, `grundsaetze-bilder.md` 6.2). Ohne Fachfarbe (Sachthemen, Startseite
-  von Welten) ist das Band Nebel, ohne Kachel, der Name steht in Tinte. Das Spielfeld beginnt darunter.
+  von Welten) ist das Band Nebel, ohne Kachel, der Name steht in Tinte. Das Spielfeld beginnt darunter:
+  `<ls-leiste>` setzt `--ls-leiste-hoehe` am `<html>` (15,8 rem = `MASSE.leiste`, plus
+  `env(safe-area-inset-top)`); das Spiel legt seine Fläche mit `top: var(--ls-leiste-hoehe)` darunter.
 - Das Thema kommt aus der Lernsteuerung (`thema` in `spiele.json` bzw. das Thema der Runde) und darf sich
   während des Spiels ändern. Es wird nicht vorgelesen; Ziffern dürfen darin stehen.
 - Kein Spiel legt etwas anderes auf diese Plätze, und keines verschiebt sie.
@@ -100,7 +102,7 @@ stehen kann; Breite und Wort machen sie zum Hauptknopf, nicht die Höhe. Die alt
 Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.html`) und im Code in
 `spiele/rahmen/stil.js` (`FARBE`, `FACH`, `RADIUS`); hier nur, wie die Bedienung sie nutzt:
 
-- **Nebenknopf:** Papier, Tinte-Kontur, Schatten in Linie; nur Symbol, der Name wird beim ersten Tippen
+- **Nebenknopf:** Papier, Tinte-Kontur, Schatten in Tinte weich; nur Symbol, der Name wird beim ersten Tippen
   gesprochen. Haus, Ton, Noch mal hören, Hilfe.
 - **Hauptknopf:** Tinte gefüllt, Symbol und Wort in Papier, Schatten im dunklen Tinte-Ton. Weiter, Fertig.
   Neutral, nie grün.
@@ -167,7 +169,7 @@ Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.
 - **Keine Systemtastatur.** Spiele mit Eingabe nutzen die Bildschirm-Tastatur.
 - Die Tastatur zeigt **nur die Tasten, die die Aufgabe braucht** (z. B. die Buchstaben des Satzes),
   in fester Reihenfolge (alphabetisch bzw. 1–9, 0), dazu Leertaste und Löschen, falls nötig.
-- **Tasten (Christian):** Papier mit Tinte-Kontur und hellem Schatten, das Zeichen in Tinte. Keine
+- **Tasten (Christian):** Papier mit Tinte-Kontur und Schatten in Tinte weich, das Zeichen in Tinte. Keine
   Farbe je Buchstabe (`grundsaetze-bilder.md` 6.4); Vokale werden nicht eingefärbt.
 - Eine angeschlossene Hardware-Tastatur funktioniert zusätzlich.
 
@@ -189,7 +191,7 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 | Baustein | Aufgabe | Schnittstelle (Kurzform) |
 |---|---|---|
 | `<ls-knopf>` | Grundknopf: Neben- oder Hauptknopf, Symbol, Name, Einsinken, Mindestgröße, Name beim ersten Tippen | Attribute `art="neben\|haupt"` (Vorgabe neben), `symbol`, `name`, `wort` (sichtbares Wort, macht den Knopf zur Pille), `groesse="bedien\|haupt\|klein"`, `gespiegelt`, `stumm`, `spiel`; Ereignis `click` |
-| `<ls-leiste>` | Kopfleiste: Haus, Fachkachel, Spielname, Thema, Ton | Attribute `spiel`, `fach`, `titel`, `thema` (zur Laufzeit änderbar); Eigenschaft `ton` (boolean); Ereignisse `ton`, `bereit`; `istBereit`, `bereit()`, `bereitet` (Versprechen, sobald die Einstellungen geladen sind) |
+| `<ls-leiste>` | Kopfleiste: Haus, Fachkachel, Spielname, Thema, Ton | Attribute `spiel`, `fach`, `titel`, `thema` (zur Laufzeit änderbar); Eigenschaft `ton` (boolean); Ereignisse `ton`, `bereit`; `istBereit`, `bereit()`, `bereitet` (Versprechen, sobald die Einstellungen geladen sind); setzt `--ls-leiste-hoehe` am Dokument |
 | `<ls-blase>` | Sprechblase des Erzählers mit Noch-mal-hören, ohne Zipfel | `sage(text, { sprechen = true, tempo })`; Eigenschaft `text` |
 | `<ls-hilfe>` | Hilfe-Knopf unten rechts | `leuchte()` (Sonnenring, einmal ~1 s); Ereignis `hilfe` |
 | `<ls-pause>` | Pause/Rundenende mit Alle Spiele und Weiter | Inhalt (Bild, Sachmoment) per Slot; `await zeige()` → `"weiter"` |
@@ -197,7 +199,7 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 
 - **Aussehen über CSS-Variablen:** `--ls-tinte`, `--ls-tinte-weich`, `--ls-papier`, `--ls-nebel`,
   `--ls-linie`, `--ls-naht`, `--ls-haupt-schatten`, `--ls-sonne`, `--ls-nacht`, `--ls-kontur`,
-  `--ls-radius-gross|--ls-radius|--ls-radius-klein`, `--ls-knopf`, `--ls-schatten`; Werte aus
+  `--ls-radius-gross|--ls-radius|--ls-radius-klein`, `--ls-knopf`, `--ls-neben-schatten`, `--ls-schatten`; Werte aus
   `stil.js` (Farbwelt). Eine Welt ändert sie nicht: Form, Farbe, Größe und Platz der Bedienung sind fest.
 - **Vorschau:** `spiele/rahmen/vorschau.html` zeigt alle Bausteine zum Ansehen und Ausprobieren.
 - **Regel (geplant):** Sobald das erste Spiel umgezogen ist, prüft ein Test, dass umgezogene Spiele Haus-
