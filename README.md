@@ -78,7 +78,8 @@ Die Lernstände der Spiele bleiben erhalten (der Hinweis steht auch auf dem PIN-
 ## Lernplan
 
 Der Lernplan ordnet kleine Themen (z. B. „Die 7 zerlegen“, „Plus ohne Zehnerübergang bis 20“) in einer festen
-Reihenfolge. Die App wählt für das Kind das passende Thema; Spiele liefern nur die Darstellung.
+Reihenfolge. Der Plan ist Orientierung, keine Vorgabe: Das Kind wählt, was es spielen und lernen will; innerhalb
+des gewählten Spiels bereitet die App das passende Thema vor. Spiele liefern nur die Darstellung.
 
 Dateien:
 
@@ -88,7 +89,7 @@ Dateien:
   (Aufgabenart wie `{ "art": "rechnen", "thema": … }`; `null` heißt „geplant“: noch keine Aufgaben, kein Spiel),
   `stufen` (`material`, `vorstellung`, `kopf`), `einfuehrung` (`{ "vorlage": "einfuehrungen/<name>.json",
   "werte": {…} }`), `familie` (optional), `tempo`, `eltern` (Hinweis für Erwachsene).
-  Aus der Recherche (`docs/reports/`) kommen dazu: `klasse` (1–4), `bereich` (Gruppe im Strang), `rid` (Schritt der
+  Aus der Recherche (`docs/reports/`) kommen dazu: `klasse` (1–4, nur zur Orientierung am Lehrplan, steuert nichts), `bereich` (Gruppe im Strang), `rid` (Schritt der
   Themenkarte), `quelle` (`Q` belegt, `E` eigene Unterteilung), `gesichert` (Voraussetzungen, die sicher abrufbar sein
   müssen, nicht nur eingeführt), `verwechslung` (Themen, die in der Wiederholung gezielt gemischt werden), `typ`
   (`regel`, `merkwort`, `fertigkeit`), `schrift` (`alle`, `va`, `sas`, `verbunden`), `land` (`BY` für bayerische
