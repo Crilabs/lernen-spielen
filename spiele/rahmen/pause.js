@@ -19,7 +19,7 @@ const PAUSE_CSS = `
   z-index: 100;
   background: rgba(255, 255, 255, 0.82);
 }
-:host([hidden]) { display: none; }
+:host(:not([offen])) { display: none; }
 .inhalt {
   position: absolute;
   inset: 0;
@@ -67,7 +67,6 @@ export class LsPause extends HTMLElement {
         <a class="alle" href="${HAUS_HREF}" aria-label="Alle Spiele"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></a>
         <ls-knopf class="weiter" symbol="zurueck.svg" name="Weiter" groesse="haupt" gespiegelt></ls-knopf>
       </div>`;
-    this.hidden = true;
     this.alle = /** @type {HTMLAnchorElement} */ (wurzel.querySelector("a.alle"));
     this.weiter = /** @type {HTMLElement} */ (wurzel.querySelector("ls-knopf.weiter"));
     /** @type {Promise<"weiter"> | null} */
@@ -80,7 +79,6 @@ export class LsPause extends HTMLElement {
 
   connectedCallback() {
     this.gebeSpielWeiter();
-    if (!this._offen) this.hidden = true;
   }
 
   static observedAttributes = ["spiel"];
@@ -103,7 +101,7 @@ export class LsPause extends HTMLElement {
   zeige() {
     if (this._offen) return this._offen;
     this._offen = new Promise((ok) => { this._loese = ok; });
-    this.hidden = false;
+    this.setAttribute("offen", "");
     this.weiter.shadowRoot?.querySelector("button")?.focus({ preventScroll: true });
     return this._offen;
   }
@@ -113,7 +111,7 @@ export class LsPause extends HTMLElement {
     if (!loese) return;
     this._loese = null;
     this._offen = null;
-    this.hidden = true;
+    this.removeAttribute("offen");
     loese("weiter");
   }
 
