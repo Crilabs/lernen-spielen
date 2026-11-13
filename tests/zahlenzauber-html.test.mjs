@@ -22,3 +22,14 @@ test("Hilfe-Leiter: Durchprobieren zählt nicht als gekonnt", () => {
   assert.match(html, /B\.probiert\.size<RATEN_AB/);
   assert.match(html, /B\.fehler===1[\s\S]*B\.fehler===2[\s\S]*loesungZeigen/);
 });
+test("Dritte Zahl ist immer eine Behauptung: löst nur bei wahrer Rechnung, wird nie neuer Partner", () => {
+  const tipp = html.slice(html.indexOf("function tipp(i)"), html.indexOf("function nachStart()"));
+  assert.match(tipp, /B\.nums\[i\]===paarWert\(A,P\) && istLoesung\(A,P,i\)\) return geloest\(\)/);
+  assert.match(tipp, /return verpasst\(i\);\s*\}\s*$/);
+  assert.equal((tipp.match(/waehlePartner\(i\)/g)||[]).length, 1, "nur bei Start ohne Partner");
+});
+test("Tipp-Leuchten färbt das Blatt nicht wie ein angetipptes, Hilfe wählt nichts aus", () => {
+  assert.doesNotMatch(html, /\.blatt\.zeig \.form path\{fill:/);
+  const hilfe = html.slice(html.indexOf('$("hilfe").addEventListener'), html.indexOf("function nachtippen"));
+  assert.doesNotMatch(hilfe, /B\.start=/);
+});

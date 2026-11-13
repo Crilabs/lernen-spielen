@@ -53,9 +53,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .blatt.welk .form{transform:rotate(calc(var(--r) + 9deg)) scale(.86)}
 .blatt.welk .form path{fill:#E4DEEC}
 .blatt.welk text{opacity:.4}
-.blatt.zeig .form path{fill:var(--sonne);animation:leuchten 1s ease-in-out infinite alternate}
+.blatt.zeig .form path{stroke:#fff;stroke-width:6;animation:leuchten 1s ease-in-out infinite alternate}
 .blatt.wackel .form{animation:wackel .45s}
-@keyframes leuchten{to{stroke-width:7;stroke:#E39A00}}
+@keyframes leuchten{from{filter:drop-shadow(0 0 3px #FFD34D)}to{filter:drop-shadow(0 0 14px #FFB800) drop-shadow(0 0 4px #fff)}}
 @keyframes wackel{25%{transform:rotate(calc(var(--r) - 6deg))}75%{transform:rotate(calc(var(--r) + 6deg))}}
 .mitte-zeichen{font:400 62px "Andika",sans-serif;fill:#3B2A6B;text-anchor:middle;dominant-baseline:central;pointer-events:none}
 
@@ -423,7 +423,7 @@ sperreTouch();
   let B=null, busy=true, rundeIdx=0, schon=new Set(), wieder=[], rundenFakten=[];
   const paar = (i,j) => i<j ? i+"-"+j : j+"-"+i;
   // „Entscheidendes“ Paar: Plus = die zwei Teile, Minus = das Ganze mit einem Teil. Wer es verlässt, ohne die dritte Zahl
-  // anzutippen, hat die Lösung übersehen – das ist der einzige Fehler.
+  // anzutippen, hat die Lösung übersehen. Der andere Fehler: eine falsche dritte Zahl als Ergebnis behaupten.
   function entscheidend(i,j){
     const [a,b,c]=B.loes, s=new Set([i,j]);
     if(!B.minus) return s.has(a)&&s.has(b);
@@ -468,16 +468,16 @@ sperreTouch();
       if(B.probiert.has(paar(A,i))){ B.start=i; sfx.tipp(); zeigeZustand(); nachStart(); return; }  // schon probiert → neue Idee
       return waehlePartner(i);
     }
-    // Start und Partner gewählt: dritte Zahl
-    if(i!==A && i!==P && istLoesung(A,P,i)) return geloest();
-    if(entscheidend(A,P)) return verpasst(i);
-    // Falsche dritte Zahl bei einem anderen Paar: klar benennen (Rechnung in der Blase), Paar welkt, zählt mit (Raten)
-    B.probiert.add(paar(A,P)); B.partner=null; sfx.hm(); leereFeld(); sag(`${paarText(A,P)} = ${paarWert(A,P)}`);
-    if(i===A){ B.start=null; zeigeZustand(); zeile(""); return; }
-    if(i===P){ zeigeZustand(); zeile(""); anleitungWelk(A,P); return; }
-    if(B.probiert.has(paar(A,i))){ B.start=i; zeigeZustand(); zeile(""); nachStart(); return; }
-    waehlePartner(i);
-    anleitungWelk(A,P);
+    // Start und Partner gewählt. Partner noch einmal = Paar verwerfen, Start = loslassen (beim Lösungspaar ein Fehler).
+    // Jede andere Zahl ist die Behauptung „A + P = i“: Sie löst nur, wenn die Rechnung stimmt, sonst Fehler-Leiter.
+    // (Früher wurde eine falsche dritte Zahl zum neuen Partner – so ließ sich alles der Reihe nach durchtippen.)
+    if((i===A || i===P) && !entscheidend(A,P)){
+      B.probiert.add(paar(A,P)); B.partner=null; sfx.tipp(); zeile(""); leereFeld();
+      if(i===A){ B.start=null; zeigeZustand(); return; }
+      zeigeZustand(); anleitungWelk(A,P); return;
+    }
+    if(i!==A && i!==P && B.nums[i]===paarWert(A,P) && istLoesung(A,P,i)) return geloest();
+    return verpasst(i);
   }
   function nachStart(){
     zeile(""); leereFeld();
@@ -490,7 +490,7 @@ sperreTouch();
     if(!save.welkErklaert){ save.welkErklaert=1; persist(); sag(`Die blassen Blätter hast du mit der ${B.nums[A]} schon probiert.`); }
   }
 
-  // Fehler-Leiter beim entscheidenden Paar: 1. nur Signal, 2. Denkhilfe (Probe, ohne Ergebnis), 3. Lösung mit Begründung
+  // Fehler-Leiter bei jeder falschen Behauptung: 1. nur Signal, 2. Denkhilfe (Probe, ohne Ergebnis), 3. Lösung mit Begründung
   async function verpasst(i){
     const A=B.start, P=B.partner;
     B.fehler++; busy=true; sfx.hm(); fragend(); if(i!==A && i!==P) wackel(i);
@@ -524,14 +524,14 @@ sperreTouch();
   $("hilfe").addEventListener("click", ()=>{
     if(busy || !B || B.nach) return;
     sfx.tipp(); B.hilfe++;
-    const c=B.loes[2];
+    const c=B.loes[2], anfang=B.minus?c:B.loes[0];
     if(B.hilfe===1){
       if(B.minus) sag("Nimm eine große Zahl. Was bleibt, wenn eine kleinere weggeht?");
       else sag("Das Ergebnis ist größer als die zwei Teile.");
     }else if(B.hilfe===2){
-      if(B.minus){ B.start=c; B.partner=null; zeigeZustand(); zeile(""); leereFeld(); }
-      B.el[c].classList.add("zeig"); zeigeZustand();   // leuchtet, bis die Blume gelöst ist
-      sag(B.minus?`Fang bei der ${B.nums[c]} an.`:`Das Ergebnis ist ${B.nums[c]}. Welche zwei passen?`);
+      // Nur zeigen, nicht auswählen: Leuchten (Tipp) und Füllfarbe (angetippt) bleiben unterscheidbar
+      B.el[anfang].classList.add("zeig"); zeigeZustand();   // leuchtet, bis die Blume gelöst ist
+      sag(`Fang bei der ${B.nums[anfang]} an.`);
     }else loesungZeigen();
   });
   function nachtippen(i){
