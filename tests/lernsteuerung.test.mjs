@@ -505,12 +505,6 @@ test("migriereSpiele: Perlenbrücke-Paare und Zahlenzauber-Fakten mit Stufe 2", 
 // ---------- Befunde aus dem Gesamtreview ----------
 
 const plusBis = (id) => aufgabenVon(ECHT.plan.themen.find((t) => t.id === id).aufgaben);
-// je Schwierigkeitsklasse die Aufgaben (Planreihenfolge)
-function klassen(aufgaben) {
-  const m = new Map();
-  for (const a of aufgaben) { const k = schwierigkeit(a); if (!m.has(k)) m.set(k, []); m.get(k).push(a); }
-  return m;
-}
 const kkEintrag = () => ({ f: 1, t: HEUTE, h: [1], ms: [1000], kk: 1 });
 
 test("Befund 1: dran-Thema des einen Spiels blockiert das andere nicht (echter Plan)", () => {
@@ -523,43 +517,53 @@ test("Befund 1: dran-Thema des einen Spiels blockiert das andere nicht (echter P
   assert.deepEqual(themaFuer(ECHT, s, "perlenbruecke", { heute: HEUTE }), { thema: "zerlegen-3", modus: "thema" });
 });
 
-test("Befund 4a: großes Thema ist nach dem Üben gekonnt mit Stichprobe über alle Schwierigkeitsklassen", () => {
-  const id = "plus-bis-30", alle = plusBis(id);
-  assert.ok(alle.length > K.GROSS);
-  const kl = klassen(alle);
-  const noetig = [...kl.values()].flatMap((l) => l.slice(0, Math.min(2, l.length)));
-  assert.ok(noetig.length >= K.STICHPROBE);
-  // 1) viele kk, aber alle aus wenigen Klassen → nicht gekonnt
+const klassenVon = (id) => L.schwierigkeitsKlassen(ECHT, id);
+const klasseVon = (kl, a) => kl.findIndex((l) => l.some((x) => x.key === a.key));
+
+test("Befund 4a: große Themen in höchstens vier Schwierigkeitsklassen (Quartile, stabil)", () => {
+  for (const id of ["minus-ohne-20", "plus-bis-30", "minus-bis-30", "plus-bis-100", "minus-bis-100"]) {
+    const kl = klassenVon(id), alle = plusBis(id);
+    assert.ok(kl.length >= 1 && kl.length <= 4, `${id}: ${kl.length} Klassen`);
+    assert.deepEqual(kl.flat().map((a) => a.key).sort(), alle.map((a) => a.key).sort(), id);
+    for (let i = 1; i < kl.length; i++)
+      assert.ok(Math.max(...kl[i - 1].map(schwierigkeit)) < Math.min(...kl[i].map(schwierigkeit)), `${id}: gleiche Schwierigkeit in einer Klasse`);
+    assert.deepEqual(klassenVon(id).map((l) => l.map((a) => a.key)), kl.map((l) => l.map((a) => a.key)), "stabil");
+  }
+  assert.equal(klassenVon("plus-bis-100").length, 4);
+  assert.deepEqual(L.schwierigkeitsKlassen(ECHT, "zerlegen-7").length, 0, "kleines Thema: keine Klassen");
+});
+
+test("Befund 4a: großes Thema gekonnt nach genau max(STICHPROBE, 2 × Klassen) kk, je Klasse zwei", () => {
+  for (const id of ["plus-bis-100", "minus-bis-100", "plus-bis-30"]) {
+    const kl = klassenVon(id);
+    const noetig = Math.max(K.STICHPROBE, kl.reduce((n, l) => n + Math.min(2, l.length), 0));
+    if (id === "plus-bis-100") assert.equal(noetig, 20);
+    // je Klasse zwei, dann aufgefüllt aus der ersten Klasse bis noetig
+    const je = kl.flatMap((l) => l.slice(0, Math.min(2, l.length)));
+    const rest = kl.flat().filter((a) => !je.includes(a));
+    const wahl = [...je, ...rest.slice(0, noetig - je.length)];
+    assert.equal(wahl.length, noetig);
+    const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf");
+    for (const a of wahl.slice(2)) s.aufgaben[a.key] = kkEintrag();
+    assert.equal(verbucheErgebnis(ECHT, s, sitz, wahl[0].key, sauber), null, `${id}: noetig − 1 kk reicht nicht`);
+    assert.deepEqual(verbucheErgebnis(ECHT, s, sitz, wahl[1].key, sauber), { typ: "gekonnt", thema: id }, id);
+  }
+  const id = "plus-bis-100", kl = klassenVon(id);
+  // viele kk, aber alle aus einer Klasse → nicht gekonnt
   {
     const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf");
-    const wenige = [...kl.values()].filter((l) => l.length >= 5).flat().slice(0, 30);
-    for (const a of wenige.slice(1)) s.aufgaben[a.key] = kkEintrag();
-    assert.equal(verbucheErgebnis(ECHT, s, sitz, wenige[0].key, sauber), null);
+    const eine = kl[0].slice(0, 30);
+    for (const a of eine.slice(1)) s.aufgaben[a.key] = kkEintrag();
+    assert.equal(verbucheErgebnis(ECHT, s, sitz, eine[0].key, sauber), null);
     assert.equal(s.themen[id].z, "dran");
   }
-  // 2) je Klasse zwei (oder alle der kleinen Klassen), insgesamt ≥ STICHPROBE → gekonnt
+  // 30 kk, aber eine Klasse nur mit einem → nicht gekonnt
   {
     const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf");
-    for (const a of noetig.slice(1)) s.aufgaben[a.key] = kkEintrag();
-    assert.deepEqual(verbucheErgebnis(ECHT, s, sitz, noetig[0].key, sauber), { typ: "gekonnt", thema: id });
-  }
-  // 3) eine Klasse mit nur einem kk (von zwei nötigen) → nicht gekonnt
-  {
-    const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf");
-    const gross = [...kl.values()].find((l) => l.length >= 3);
-    const ohne = noetig.filter((a) => a !== gross[1]);
-    for (const a of ohne.slice(1)) s.aufgaben[a.key] = kkEintrag();
-    assert.equal(verbucheErgebnis(ECHT, s, sitz, ohne[0].key, sauber), null);
-  }
-  // 4) zu wenige insgesamt: kleines Thema-Muster (alle Klassen gedeckt), aber < STICHPROBE → nicht gekonnt
-  {
-    const minus = plusBis("minus-bis-100"), km = klassen(minus);
-    const je = [...km.values()].flatMap((l) => l.slice(0, Math.min(2, l.length)));
-    assert.ok(je.length >= K.STICHPROBE); // zehn Klassen × 2
-    const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", "minus-bis-100", "kopf");
-    for (const a of je.slice(2)) s.aufgaben[a.key] = kkEintrag(); // eine Klasse mit nur einem kk
-    assert.equal(verbucheErgebnis(ECHT, s, sitz, je[0].key, sauber), null);
-    assert.deepEqual(verbucheErgebnis(ECHT, s, sitz, je[1].key, sauber), { typ: "gekonnt", thema: "minus-bis-100" });
+    const wahl = [...kl[0].slice(0, 14), ...kl[1].slice(0, 14), kl[2][0], kl[3][0], kl[3][1]];
+    for (const a of wahl.slice(1)) s.aufgaben[a.key] = kkEintrag();
+    assert.equal(verbucheErgebnis(ECHT, s, sitz, wahl[0].key, sauber), null);
+    assert.deepEqual(verbucheErgebnis(ECHT, s, sitz, kl[2][1].key, sauber), { typ: "gekonnt", thema: id });
   }
 });
 
@@ -629,15 +633,15 @@ test("Befund 4c: Wiederholung großer gekonnter Themen nur aus Aufgaben mit Eint
 });
 
 test("Befund 4d: beim Üben eines großen Themas kommen Klassen ohne genug kk zuerst", () => {
-  const id = "plus-bis-30", kl = klassen(plusBis(id));
-  const offen = [...kl.keys()].filter((k) => kl.get(k).length >= 5).slice(0, 2); // zwei große Klassen bleiben offen
-  for (let seed = 1; seed <= 20; seed++) {
-    const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf", lcg(seed));
-    for (const [k, l] of kl) if (!offen.includes(k)) for (const a of l.slice(0, 2)) s.aufgaben[a.key] = kkEintrag();
-    for (const k of offen) s.aufgaben[kl.get(k)[0].key] = kkEintrag(); // je ein kk, eines fehlt noch
-    const a = naechstesAngebot(ECHT, s, sitz, lcg(seed), opt);
-    assert.ok(offen.includes(schwierigkeit(a.ziel)), `seed ${seed}: Klasse ${schwierigkeit(a.ziel)}`);
-    assert.ok(!s.aufgaben[a.ziel.key]?.kk);
+  for (const id of ["plus-bis-30", "plus-bis-100"]) {
+    const kl = klassenVon(id), offen = [1, kl.length - 1]; // zwei Klassen mit je einem kk, die anderen gedeckt
+    for (let seed = 1; seed <= 20; seed++) {
+      const { stand: s, sitzung: sitz } = uebend(ECHT, "zahlenzauber", id, "kopf", lcg(seed));
+      kl.forEach((l, i) => { for (const a of l.slice(0, offen.includes(i) ? 1 : 2)) s.aufgaben[a.key] = kkEintrag(); });
+      const a = naechstesAngebot(ECHT, s, sitz, lcg(seed), opt);
+      assert.ok(offen.includes(klasseVon(kl, a.ziel)), `${id} seed ${seed}: Klasse ${klasseVon(kl, a.ziel)}`);
+      assert.ok(!s.aufgaben[a.ziel.key]?.kk);
+    }
   }
 });
 

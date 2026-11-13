@@ -35,7 +35,7 @@ export const K = {
   WIEDER_NACH: [2, 4],       // Fehler kommt nach so vielen anderen Aufgaben wieder (von, bis)
   RUNDE_MS: 240000,          // Rundenlänge
   GROSS: 40,                 // ab mehr als so vielen darstellbaren Aufgaben ist ein Thema „groß“ …
-  STICHPROBE: 20,            // … und gilt nach dem Üben mit so vielen verschiedenen kk als gekonnt (über alle Klassen verteilt)
+  STICHPROBE: 20,            // … und gilt nach dem Üben mit so vielen verschiedenen kk als gekonnt (je Klasse zwei, höchstens vier Klassen)
 };
 
 const STUFEN = ["material", "vorstellung", "kopf"];
@@ -136,20 +136,37 @@ function darstellbareAufgaben(ctx, themaId) {
 
 const istGross = (ctx, themaId) => darstellbareAufgaben(ctx, themaId).length > K.GROSS;
 
-// Schwierigkeitsklassen eines großen Themas, in denen noch kk fehlen: je Klasse mindestens zwei kk
-// (Klassen mit nur einer Aufgabe: diese eine)
-function offeneKlassen(ctx, stand, themaId) {
-  const noetig = new Map(), da = new Map();
-  for (const a of darstellbareAufgaben(ctx, themaId)) {
-    const k = schwierigkeit(a);
-    noetig.set(k, Math.min(2, (noetig.get(k) ?? 0) + 1));
-    if (stand.aufgaben[a.key]?.kk) da.set(k, (da.get(k) ?? 0) + 1);
+// Schwierigkeitsklassen eines großen Themas: höchstens vier, nach den Quartilen von schwierigkeit.
+// Grenzen = Schwierigkeit an den Stellen ¼, ½, ¾ der sortierten Aufgaben; gleiche Schwierigkeit bleibt in
+// einer Klasse (fallen Grenzen zusammen, gibt es weniger Klassen). [[Aufgabe]] von leicht nach schwer,
+// innerhalb einer Klasse in Planreihenfolge; kleines Thema: [].
+const cacheKlassen = new WeakMap();
+export function schwierigkeitsKlassen(ctx, themaId) {
+  const d = darstellbareAufgaben(ctx, themaId);
+  if (d.length <= K.GROSS) return [];
+  if (!cacheKlassen.has(d)) {
+    const werte = d.map(schwierigkeit).sort((a, b) => a - b);
+    const grenzen = [1, 2, 3].map((i) => werte[Math.floor((i * werte.length) / 4)]);
+    const klasse = (a) => grenzen.filter((g) => schwierigkeit(a) >= g).length;
+    const nach = new Map();
+    for (const a of d) { const k = klasse(a); if (!nach.has(k)) nach.set(k, []); nach.get(k).push(a); }
+    cacheKlassen.set(d, [...nach.keys()].sort((a, b) => a - b).map((k) => nach.get(k)));
   }
-  return new Set([...noetig].filter(([k, n]) => (da.get(k) ?? 0) < n).map(([k]) => k));
+  return cacheKlassen.get(d);
+}
+
+// Klassen (Index in schwierigkeitsKlassen) eines großen Themas, in denen noch kk fehlen:
+// je Klasse mindestens zwei kk (Klassen mit weniger Aufgaben: alle)
+function offeneKlassen(ctx, stand, themaId) {
+  const offen = new Set();
+  schwierigkeitsKlassen(ctx, themaId).forEach((l, i) => {
+    if (l.filter((a) => stand.aufgaben[a.key]?.kk).length < Math.min(2, l.length)) offen.add(i);
+  });
+  return offen;
 }
 
 // Kann ich nach dem Üben: kleines Thema – jede darstellbare Aufgabe hat kk;
-// großes Thema – mindestens STICHPROBE verschiedene kk und keine Klasse mehr offen
+// großes Thema – mindestens STICHPROBE verschiedene kk und keine der (höchstens vier) Klassen mehr offen
 function gekonntNachUeben(ctx, stand, themaId) {
   const d = darstellbareAufgaben(ctx, themaId);
   if (!d.length) return false;
@@ -385,7 +402,8 @@ function aufgabeDesThemas(ctx, stand, sitzung, rnd) {
   if (!l.length) l = alle;
   if (!l.length) return null;
   const offen = istGross(ctx, sitzung.thema) && stand.themen[sitzung.thema]?.z !== "kann-ich" ? offeneKlassen(ctx, stand, sitzung.thema) : null;
-  const rang = (a) => (stand.aufgaben[a.key]?.kk ? 100 : 0) + (offen && !offen.has(schwierigkeit(a)) ? 50 : 0) + eintrag(stand, a.key).f;
+  const zu = offen?.size ? new Set([...offen].flatMap((i) => schwierigkeitsKlassen(ctx, sitzung.thema)[i].map((a) => a.key))) : null;
+  const rang = (a) => (stand.aufgaben[a.key]?.kk ? 100 : 0) + (zu && !zu.has(a.key) ? 50 : 0) + eintrag(stand, a.key).f;
   const min = Math.min(...l.map(rang));
   return zufallsEins(l.filter((a) => rang(a) === min), rnd);
 }
