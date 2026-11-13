@@ -76,6 +76,13 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 .s4 .thema{font-size:1.9rem}
 .s4 .erde svg{width:3rem}
 /* Ab fünf Kategorien: zwei Reihen */
+/* Drei oder mehr Spiele in einer Kategorie: Kacheln dichter, damit alle über dem Beet Platz haben */
+.beete.dicht .spiele{gap:2rem}
+.dicht .kachel{grid-template-columns:11rem minmax(0,1fr);gap:1.8rem;min-height:18rem;padding:1.4rem 2.2rem 1.4rem 1.6rem}
+.dicht .kachel .ico{width:11rem;height:11rem;padding:1.5rem;border-radius:2.6rem}
+.dicht .kachel h3{font-size:3.2rem;margin-bottom:.5rem}
+.dicht .thema{margin-bottom:1rem}
+.dicht .erde{height:10rem;margin-bottom:2rem}
 .beete.zwei{grid-template-rows:repeat(2,minmax(0,1fr));gap:1.4rem 3.2rem;padding-top:9rem;padding-bottom:11rem;align-items:stretch}
 .zwei .beet{max-height:none}
 .zwei .schild{margin-bottom:1rem}
@@ -170,6 +177,7 @@ async function start() {
   beete.style.setProperty("--spalten", n >= 5 ? 3 : Math.max(1, n));
   if (n === 4) beete.classList.add("s4");
   if (n >= 5) beete.classList.add("zwei");
+  if (n < 5 && Math.max(...kats.map(e => e.spiele.length)) >= 3) beete.classList.add("dicht");
 
   for (const { kategorie: k, spiele } of kats) {
     const wert = kategorieWert(spiele, werte);
