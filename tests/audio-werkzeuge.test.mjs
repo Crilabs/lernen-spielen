@@ -25,6 +25,9 @@ test("SSML: Stimme, Maskierung, Tempo der Variante, Korrektur", () => {
   assert.match(ssml({ text: "Schmet … terling?" }, EIN, { sprich: "Schmett … terling?" }), />Schmett … terling\?</);
   assert.match(ssml({ text: "Ei" }, EIN, { ssml: '<phoneme ph="aɪ">Ei</phoneme>' }), /<phoneme ph="aɪ">Ei<\/phoneme>/);
   assert.throws(() => ssml({ text: "x", variante: "flüstern" }, EIN), /Unbekannte Variante/);
+  const langsam = { ...EIN, tempo: "-10%" };
+  assert.match(ssml({ text: "Hund" }, langsam), /<prosody rate="-10%">Hund<\/prosody>/);
+  assert.match(ssml({ text: "Hund", variante: "diktat" }, langsam), /<prosody rate="-15%">Hund<\/prosody>/);
 });
 
 test("Literale im Spielcode: nur feste Zeichenketten, Rest zählt als offen", () => {

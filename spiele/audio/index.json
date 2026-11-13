@@ -1,0 +1,1420 @@
+{
+ "stimme": "de-DE-Florian:DragonHDLatestNeural",
+ "texte": {
+  "Also teilt das Einhorn den kurzen Stab. Ein Teil füllt den Zehner auf, der Rest wartet.": {
+   "datei": "florian/616a87d581de.mp3",
+   "h": "e583ed6ecd",
+   "gehoert": false
+  },
+  "Am Abend lese ich.": {
+   "datei": "florian/cca192f56272.mp3",
+   "h": "bc11511ead",
+   "gehoert": false
+  },
+  "Am Bach liegt eine Brücke. Vorne der Zehnerstab, dahinter ein kleiner Stab.": {
+   "datei": "florian/a7dcc76820cc.mp3",
+   "h": "14ec8479f8",
+   "gehoert": false
+  },
+  "Am Bach liegt wieder der Perlenstab dieser Brücke.": {
+   "datei": "florian/4deae3d1dac9.mp3",
+   "h": "2087e03898",
+   "gehoert": false
+  },
+  "Am Morgen trinke ich Milch.": {
+   "datei": "florian/70325a1369e9.mp3",
+   "h": "7b639701ad",
+   "gehoert": false
+  },
+  "Andersherum geht es auch. Die Brücke ist genauso lang.": {
+   "datei": "florian/303bf15f1fe1.mp3",
+   "h": "f4a4165cbf",
+   "gehoert": false
+  },
+  "Bei großen Zahlen geht es genauso. Das Einhorn legt die Einer zu den Einern.": {
+   "datei": "florian/8855a55ef0c9.mp3",
+   "h": "3c7f1cb86c",
+   "gehoert": false
+  },
+  "Bei großen Zahlen geht es genauso. Das Einhorn nimmt die Einer von den Einern.": {
+   "datei": "florian/746775ec04d3.mp3",
+   "h": "156d045c38",
+   "gehoert": false
+  },
+  "Beide Teile zusammen sind so lang wie der ganze Stab. Keine Perle fehlt.": {
+   "datei": "florian/8e1fee80dc8a.mp3",
+   "h": "6cc26ebbb4",
+   "gehoert": false
+  },
+  "Dahinter kommt ein kleiner Stab.": {
+   "datei": "florian/7603d0fb8713.mp3",
+   "h": "d313ec0568",
+   "gehoert": false
+  },
+  "Dann nimmt es den Rest vom Zehnerstab.": {
+   "datei": "florian/8162b6e109d1.mp3",
+   "h": "03701a4b1b",
+   "gehoert": false
+  },
+  "Dann nimmt es den Rest von einem Zehnerstab.": {
+   "datei": "florian/a4d4115bb9f9.mp3",
+   "h": "80f38e5ea2",
+   "gehoert": false
+  },
+  "Das Auto ist rot.": {
+   "datei": "florian/cd8b2aa3e3db.mp3",
+   "h": "1a15508397",
+   "gehoert": false
+  },
+  "Das Baby weint.": {
+   "datei": "florian/5493cd602135.mp3",
+   "h": "b397a41e82",
+   "gehoert": false
+  },
+  "Das Boot sinkt.": {
+   "datei": "florian/b39da73f351a.mp3",
+   "h": "db4e9ed3ee",
+   "gehoert": false
+  },
+  "Das Buch ist neu.": {
+   "datei": "florian/506c1a3ab387.mp3",
+   "h": "ed3f42f803",
+   "gehoert": false
+  },
+  "Das Einhorn dreht die Teile um. Der Stab bleibt genau so lang.": {
+   "datei": "florian/6f9f587fbec1.mp3",
+   "h": "0c17757e12",
+   "gehoert": false
+  },
+  "Das Einhorn hat ein buntes Horn.": {
+   "datei": "florian/eea9015bdf7c.mp3",
+   "h": "9742194f9f",
+   "gehoert": false
+  },
+  "Das Einhorn hat einen langen und einen kurzen Stab. Daraus baut es eine Brücke.": {
+   "datei": "florian/29a16a900312.mp3",
+   "h": "9ec271ca70",
+   "gehoert": false
+  },
+  "Das Einhorn ist satt und schläft ein bisschen.": {
+   "datei": "florian/d084aeed4e66.mp3",
+   "h": "42d9991fbd",
+   "gehoert": false
+  },
+  "Das Einhorn legt die beiden Teile zusammen. Plus heißt: zusammenlegen.": {
+   "datei": "florian/4cbfcdc543f5.mp3",
+   "h": "d4e8edb139",
+   "gehoert": false
+  },
+  "Das Einhorn legt genau so viele Perlen dazu, dass ein neuer Zehner voll wird.": {
+   "datei": "florian/28963bd9f93d.mp3",
+   "h": "60231f3c2d",
+   "gehoert": false
+  },
+  "Das Einhorn legt noch ein paar Perlen dazu.": {
+   "datei": "florian/1bfebd99c028.mp3",
+   "h": "7746e0ce45",
+   "gehoert": false
+  },
+  "Das Einhorn nimmt den ganzen Zehnerstab weg. Übrig bleibt der kleine Stab.": {
+   "datei": "florian/388105fe30cf.mp3",
+   "h": "bb2966a2fd",
+   "gehoert": false
+  },
+  "Das Einhorn nimmt ein paar Perlen vom kleinen Stab weg. Die Zehnerstäbe bleiben liegen.": {
+   "datei": "florian/b401a311dce9.mp3",
+   "h": "d95b720e12",
+   "gehoert": false
+  },
+  "Das Einhorn soll ein paar Perlen wegnehmen. Es nimmt sie vom kleinen Stab.": {
+   "datei": "florian/eb5505f702e0.mp3",
+   "h": "e524d25631",
+   "gehoert": false
+  },
+  "Das Einhorn soll ein paar Perlen wegnehmen. Es nimmt sie von einem Zehnerstab.": {
+   "datei": "florian/4702945ef5a1.mp3",
+   "h": "318c7e4879",
+   "gehoert": false
+  },
+  "Das Einhorn soll mehr Perlen wegnehmen, als der kleine Stab hat.": {
+   "datei": "florian/44ccb5f4ded3.mp3",
+   "h": "646f682cc6",
+   "gehoert": false
+  },
+  "Das Einhorn springt über den Zaun.": {
+   "datei": "florian/d296ba43f0c3.mp3",
+   "h": "9ace831100",
+   "gehoert": false
+  },
+  "Das Einhorn teilt den Stab. Jetzt liegt links ein Teil und rechts ein Teil.": {
+   "datei": "florian/000194b92a37.mp3",
+   "h": "8b490ace00",
+   "gehoert": false
+  },
+  "Das Eis ist kalt.": {
+   "datei": "florian/fdda8067015a.mp3",
+   "h": "eea96cc758",
+   "gehoert": false
+  },
+  "Das Ergebnis ist größer als die zwei Teile.": {
+   "datei": "florian/e017032c7010.mp3",
+   "h": "a9ba7c6fdc",
+   "gehoert": false
+  },
+  "Das kannst du jetzt zerlegen.": {
+   "datei": "florian/e9f44f4cf882.mp3",
+   "h": "0fbdb80b2e",
+   "gehoert": false
+  },
+  "Das kannst du jetzt.": {
+   "datei": "florian/ad3afa068eee.mp3",
+   "h": "89f5e9c0d0",
+   "gehoert": false
+  },
+  "Das Kind lacht und tanzt.": {
+   "datei": "florian/90e65015554e.mp3",
+   "h": "7f65838ed2",
+   "gehoert": false
+  },
+  "Das kleine Einhorn ist müde.": {
+   "datei": "florian/0c0b64cb20c3.mp3",
+   "h": "53847579db",
+   "gehoert": false
+  },
+  "Das Pferd frisst einen Apfel.": {
+   "datei": "florian/f99a8405635b.mp3",
+   "h": "c1c4c536ba",
+   "gehoert": false
+  },
+  "Das Pony frisst Gras.": {
+   "datei": "florian/187e92f74567.mp3",
+   "h": "7c6cc77e9a",
+   "gehoert": false
+  },
+  "Das Pony frisst Gras. Die Katze schläft auf dem Sofa.": {
+   "datei": "florian/31cc71c5bad3.mp3",
+   "h": "8dddab8189",
+   "gehoert": false
+  },
+  "Das Pony läuft.": {
+   "datei": "florian/6dfbaa6b948d.mp3",
+   "h": "45aaaa9bce",
+   "gehoert": false
+  },
+  "Das Spiel geht gerade nicht.": {
+   "datei": "florian/13f719f660b1.mp3",
+   "h": "42f08fd67a",
+   "gehoert": false
+  },
+  "Das stimmt nicht. Probier noch mal.": {
+   "datei": "florian/688f59899ee4.mp3",
+   "h": "1744f67cca",
+   "gehoert": false
+  },
+  "Der Ball liegt auf dem Dach.": {
+   "datei": "florian/5179dc35f6c3.mp3",
+   "h": "c9d0a678cd",
+   "gehoert": false
+  },
+  "Der Ball rollt.": {
+   "datei": "florian/c57ac5ce4acb.mp3",
+   "h": "d4ce1d477f",
+   "gehoert": false
+  },
+  "Der Bus hupt.": {
+   "datei": "florian/daf4db713cdd.mp3",
+   "h": "2be7234f93",
+   "gehoert": false
+  },
+  "Der Bus kommt zu spät.": {
+   "datei": "florian/d1f225d36715.mp3",
+   "h": "044f9f66f7",
+   "gehoert": false
+  },
+  "Der Frosch springt in den Teich.": {
+   "datei": "florian/7546579c383f.mp3",
+   "h": "268ef5abc2",
+   "gehoert": false
+  },
+  "der Hund – die Katze – das Einhorn": {
+   "datei": "florian/1f16e24f140b.mp3",
+   "h": "de8f596570",
+   "gehoert": false
+  },
+  "Der Hund bellt im Garten.": {
+   "datei": "florian/8ac046d5dc9a.mp3",
+   "h": "72af04dcc2",
+   "gehoert": false
+  },
+  "Der Hund bellt laut am Zaun.": {
+   "datei": "florian/78c09e1d2975.mp3",
+   "h": "0f47b85020",
+   "gehoert": false
+  },
+  "Der Hund bellt.": {
+   "datei": "florian/602fe60eb57f.mp3",
+   "h": "d6cd753a47",
+   "gehoert": false
+  },
+  "Der Hund liegt am Bach.": {
+   "datei": "florian/0c47996d49a8.mp3",
+   "h": "44c983dbbb",
+   "gehoert": false
+  },
+  "Der Igel isst.": {
+   "datei": "florian/fb2faa9ded24.mp3",
+   "h": "3b00859828",
+   "gehoert": false
+  },
+  "Der Igel ist ganz klein.": {
+   "datei": "florian/aa33e5cb204b.mp3",
+   "h": "4f6a501508",
+   "gehoert": false
+  },
+  "Der Igel sucht im Laub.": {
+   "datei": "florian/039e52479224.mp3",
+   "h": "d705aeb0fd",
+   "gehoert": false
+  },
+  "Der Mond ist rund.": {
+   "datei": "florian/7a596147465d.mp3",
+   "h": "1ac418465e",
+   "gehoert": false
+  },
+  "Der neue Zehnerstab ist voll. Der Rest kommt dahinter.": {
+   "datei": "florian/c47eeabfd2c6.mp3",
+   "h": "fe9a4ff674",
+   "gehoert": false
+  },
+  "Der Opa liest.": {
+   "datei": "florian/e7e71195e094.mp3",
+   "h": "90c89f7023",
+   "gehoert": false
+  },
+  "Der Wind weht.": {
+   "datei": "florian/0da2a378fb41.mp3",
+   "h": "01f2a7a4ef",
+   "gehoert": false
+  },
+  "Der Zehner und noch was": {
+   "datei": "florian/5560991ab806.mp3",
+   "h": "1917f6ac53",
+   "gehoert": false
+  },
+  "Der Zehnerstab bleibt, wie er ist. Nur die kleinen Stäbe kommen zusammen.": {
+   "datei": "florian/5ac37efdc58c.mp3",
+   "h": "e81ab08311",
+   "gehoert": false
+  },
+  "Die Brücke soll einen ganzen Zehnerstab bekommen. Dem langen Stab fehlen nur wenige Perlen.": {
+   "datei": "florian/6f084a2fd57c.mp3",
+   "h": "19de4964c8",
+   "gehoert": false
+  },
+  "Die Ente ist im Teich.": {
+   "datei": "florian/1eeaa5b04da3.mp3",
+   "h": "9d85a28f3f",
+   "gehoert": false
+  },
+  "Die Ente quakt.": {
+   "datei": "florian/c5a7f12e143b.mp3",
+   "h": "fdcf7f22e6",
+   "gehoert": false
+  },
+  "Die Ente schwimmt auf dem See.": {
+   "datei": "florian/87674ba76262.mp3",
+   "h": "f093c1b97b",
+   "gehoert": false
+  },
+  "Die Katze miaut.": {
+   "datei": "florian/8f2de4a28683.mp3",
+   "h": "ffe65d7524",
+   "gehoert": false
+  },
+  "Die Katze schläft auf dem Sofa.": {
+   "datei": "florian/1d03d0a4e332.mp3",
+   "h": "c8d6b9e4d5",
+   "gehoert": false
+  },
+  "Die Katze sitzt im Gras.": {
+   "datei": "florian/36e9f24d5b65.mp3",
+   "h": "4bbdc3bc9d",
+   "gehoert": false
+  },
+  "Die kleinen Stäbe werden zu einem goldenen Zehnerstab. Jetzt liegen da nur noch Zehner.": {
+   "datei": "florian/29ed6554df6c.mp3",
+   "h": "b274661c15",
+   "gehoert": false
+  },
+  "Die Kuh muht.": {
+   "datei": "florian/3c928556499c.mp3",
+   "h": "3d362bea53",
+   "gehoert": false
+  },
+  "Die Kuh steht im Stall.": {
+   "datei": "florian/f8741c98c198.mp3",
+   "h": "6f2e20b5e4",
+   "gehoert": false
+  },
+  "Die Maus piept.": {
+   "datei": "florian/66d0421eee79.mp3",
+   "h": "3a2f63fc76",
+   "gehoert": false
+  },
+  "Die Maus sitzt im Haus.": {
+   "datei": "florian/f664f50f3cce.mp3",
+   "h": "4a1a632b85",
+   "gehoert": false
+  },
+  "Die Perlen sind weg. Der Zehnerstab bleibt ganz.": {
+   "datei": "florian/aa89ff96e47e.mp3",
+   "h": "d04060d48f",
+   "gehoert": false
+  },
+  "Die Sonne lacht.": {
+   "datei": "florian/b6f4bb711fc9.mp3",
+   "h": "cf9f8e3cbc",
+   "gehoert": false
+  },
+  "Die Tür ist zu.": {
+   "datei": "florian/e61f4fe8c079.mp3",
+   "h": "8ebb53b091",
+   "gehoert": false
+  },
+  "Die Uhr tickt.": {
+   "datei": "florian/6fc8bd12d1fd.mp3",
+   "h": "611ad44d46",
+   "gehoert": false
+  },
+  "Diese Brücke braucht genau so viele Perlen. Sie sitzen alle auf einem Stab.": {
+   "datei": "florian/eb4ff65a86fe.mp3",
+   "h": "abc8a6b66a",
+   "gehoert": false
+  },
+  "Diese Brücke hat einen Zehnerstab und einen kleinen Stab.": {
+   "datei": "florian/4cad100ca9ab.mp3",
+   "h": "02b5f115d1",
+   "gehoert": false
+  },
+  "Diese Brücke ist ganz aus goldenen Zehnerstäben gebaut.": {
+   "datei": "florian/ad3f99c3704f.mp3",
+   "h": "6cb8721bab",
+   "gehoert": false
+  },
+  "Du bist toll.": {
+   "datei": "florian/00acbe452296.mp3",
+   "h": "1228c66034",
+   "gehoert": false
+  },
+  "Ein ganzer Stab geht weg, der andere bleibt. Du musst nichts abzählen.": {
+   "datei": "florian/45664566b315.mp3",
+   "h": "fb4dec3782",
+   "gehoert": false
+  },
+  "Ein Hase hüpft.": {
+   "datei": "florian/f90437e59eb0.mp3",
+   "h": "f34e7b3c1a",
+   "gehoert": false
+  },
+  "Ein Vogel singt im Baum.": {
+   "datei": "florian/e5623f9d0c3d.mp3",
+   "h": "d4b735acf7",
+   "gehoert": false
+  },
+  "Ein Zehnerstab bleibt ganz. Vom anderen bleibt ein Stück übrig.": {
+   "datei": "florian/73dcb967957b.mp3",
+   "h": "e2ffdaba97",
+   "gehoert": false
+  },
+  "Einhorn-Steine. Leerzeichen. Hör zu und schreib den Satz mit Abständen.": {
+   "datei": "florian/b04f51ff90b2.mp3",
+   "h": "659ad4c068",
+   "gehoert": false
+  },
+  "Er hat ein Bild gemalt.": {
+   "datei": "florian/a7759188e92c.mp3",
+   "h": "4d75513103",
+   "gehoert": false
+  },
+  "Erst bis zum Zehner auffüllen, dann den Rest dazu. So kommst du über den Zehner.": {
+   "datei": "florian/dbcee81ad837.mp3",
+   "h": "36cd3b6013",
+   "gehoert": false
+  },
+  "Erst bis zum Zehner wegnehmen, dann den Rest. Jetzt rechnest du so.": {
+   "datei": "florian/2cbddf048205.mp3",
+   "h": "344ddfa6a3",
+   "gehoert": false
+  },
+  "Es ist kalt.": {
+   "datei": "florian/21045bb86b05.mp3",
+   "h": "e3f20778c2",
+   "gehoert": false
+  },
+  "Für heute ist Schluss. Bis morgen!": {
+   "datei": "florian/06b5076fe079.mp3",
+   "h": "6733402b90",
+   "gehoert": false
+  },
+  "Ganz unten im Tal wird der Bach zum Fluss. Dort braucht das Einhorn viele Zehnerstäbe.": {
+   "datei": "florian/1759cc77dab3.mp3",
+   "h": "33964a698c",
+   "gehoert": false
+  },
+  "Ganz unten im Tal wird der Bach zum Fluss. Dort liegen Brücken aus vielen Zehnerstäben.": {
+   "datei": "florian/d7f78ff39a7a.mp3",
+   "h": "8818679d76",
+   "gehoert": false
+  },
+  "Heute ist es warm.": {
+   "datei": "florian/42afa8d00568.mp3",
+   "h": "a7c2fdcb60",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Am Abend lese ich.": {
+   "datei": "florian/138bd30cd4fc.mp3",
+   "h": "e8e7fa881c",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Am Morgen trinke ich Milch.": {
+   "datei": "florian/46b0dc82d7b3.mp3",
+   "h": "7ddbd378d6",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Auto ist rot.": {
+   "datei": "florian/e9d5b2b5eb0d.mp3",
+   "h": "d302470310",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Baby weint.": {
+   "datei": "florian/6c045b1e8dd5.mp3",
+   "h": "670a76ec27",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Boot sinkt.": {
+   "datei": "florian/782946cf5c74.mp3",
+   "h": "16086d674f",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Buch ist neu.": {
+   "datei": "florian/9fd99bccc36c.mp3",
+   "h": "1e2de98e44",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Einhorn hat ein buntes Horn.": {
+   "datei": "florian/27550a3ba8ec.mp3",
+   "h": "9b5cea70b6",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Einhorn springt über den Zaun.": {
+   "datei": "florian/daf95f3764e1.mp3",
+   "h": "2daa9f1794",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Eis ist kalt.": {
+   "datei": "florian/523191fce713.mp3",
+   "h": "51d47f46b7",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Kind lacht und tanzt.": {
+   "datei": "florian/18985c1cb827.mp3",
+   "h": "9dd87b63fe",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das kleine Einhorn ist müde.": {
+   "datei": "florian/6e8c9577471b.mp3",
+   "h": "99e7c9efe5",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Pferd frisst einen Apfel.": {
+   "datei": "florian/7a526adebcca.mp3",
+   "h": "826396b6b4",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Pony frisst Gras.": {
+   "datei": "florian/26ae34d96571.mp3",
+   "h": "948d1fa695",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Das Pony läuft.": {
+   "datei": "florian/3f05b7048770.mp3",
+   "h": "1f24399e3b",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Ball liegt auf dem Dach.": {
+   "datei": "florian/279c313eacf9.mp3",
+   "h": "a6c4dd0382",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Ball rollt.": {
+   "datei": "florian/9bde81d10b15.mp3",
+   "h": "51cc892229",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Bus hupt.": {
+   "datei": "florian/27b4b53a94a2.mp3",
+   "h": "6355b57008",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Bus kommt zu spät.": {
+   "datei": "florian/1f6f4d3a3a5e.mp3",
+   "h": "ad38fbb2da",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Frosch springt in den Teich.": {
+   "datei": "florian/32480e27f553.mp3",
+   "h": "59f6678e75",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Hund bellt im Garten.": {
+   "datei": "florian/80a67e011b3b.mp3",
+   "h": "bdac067b81",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Hund bellt laut am Zaun.": {
+   "datei": "florian/d82c6fc0997b.mp3",
+   "h": "6d7feddebc",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Hund bellt.": {
+   "datei": "florian/c6a2fa305379.mp3",
+   "h": "fbfcf83b02",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Hund liegt am Bach.": {
+   "datei": "florian/780853317158.mp3",
+   "h": "97d4cc8645",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Igel isst.": {
+   "datei": "florian/ff676a181139.mp3",
+   "h": "61c47d18da",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Igel ist ganz klein.": {
+   "datei": "florian/51c94c25ac91.mp3",
+   "h": "bd66b08de6",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Igel sucht im Laub.": {
+   "datei": "florian/5ba284c63612.mp3",
+   "h": "f9b8cc5afa",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Mond ist rund.": {
+   "datei": "florian/cdb1c27e616e.mp3",
+   "h": "61c8030ce4",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Opa liest.": {
+   "datei": "florian/1d04a9fc5d4e.mp3",
+   "h": "c5eb6446ba",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Der Wind weht.": {
+   "datei": "florian/1a102d8c1ad3.mp3",
+   "h": "61dbedf5c0",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Ente ist im Teich.": {
+   "datei": "florian/122b23d02446.mp3",
+   "h": "5094899059",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Ente quakt.": {
+   "datei": "florian/582fb75e730d.mp3",
+   "h": "0dd46cf2f9",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Ente schwimmt auf dem See.": {
+   "datei": "florian/b2325a3f541f.mp3",
+   "h": "211dac70f7",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Katze miaut.": {
+   "datei": "florian/fb38b40e621e.mp3",
+   "h": "4e05e58e49",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Katze schläft auf dem Sofa.": {
+   "datei": "florian/3f4e12b1f3a1.mp3",
+   "h": "b135c3cb93",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Katze sitzt im Gras.": {
+   "datei": "florian/75b31a66e83d.mp3",
+   "h": "313a12c05a",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Kuh muht.": {
+   "datei": "florian/72a3a4fc7d43.mp3",
+   "h": "41d6080eda",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Kuh steht im Stall.": {
+   "datei": "florian/e132525a84ba.mp3",
+   "h": "c527038756",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Maus piept.": {
+   "datei": "florian/59794cd3e616.mp3",
+   "h": "e7096e16e8",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Maus sitzt im Haus.": {
+   "datei": "florian/6ceb80257cdb.mp3",
+   "h": "f660dc841e",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Sonne lacht.": {
+   "datei": "florian/fb8cd13b454d.mp3",
+   "h": "b6af50fa4a",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Tür ist zu.": {
+   "datei": "florian/770e2542cbab.mp3",
+   "h": "1e1c4f5766",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Die Uhr tickt.": {
+   "datei": "florian/bcd678e3f4cd.mp3",
+   "h": "fc03b3ef02",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Du bist toll.": {
+   "datei": "florian/8435ff24c83f.mp3",
+   "h": "8f0fd7e244",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ein Hase hüpft.": {
+   "datei": "florian/5c8a9cbb085b.mp3",
+   "h": "eb033a87b2",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ein Vogel singt im Baum.": {
+   "datei": "florian/b77562b2b7e9.mp3",
+   "h": "722492d523",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Er hat ein Bild gemalt.": {
+   "datei": "florian/fcda935d33aa.mp3",
+   "h": "ea36fbcd7e",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Es ist kalt.": {
+   "datei": "florian/edbf33a95614.mp3",
+   "h": "a27e8d744a",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Heute ist es warm.": {
+   "datei": "florian/adadfef1fecb.mp3",
+   "h": "fc42b4ebf6",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich bin am See.": {
+   "datei": "florian/1bc46afa953b.mp3",
+   "h": "4da30b48c5",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich bin müde.": {
+   "datei": "florian/c27865ce8c65.mp3",
+   "h": "3c47494644",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich esse Brot und Käse.": {
+   "datei": "florian/c040e46cb080.mp3",
+   "h": "c588d55456",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich esse Brot.": {
+   "datei": "florian/2518518350e5.mp3",
+   "h": "bbbf42be08",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich esse einen Apfel.": {
+   "datei": "florian/7829330293a5.mp3",
+   "h": "fd0001acad",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich gehe zu Oma.": {
+   "datei": "florian/0526525374bd.mp3",
+   "h": "3cd0efc83c",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich gehe zur Schule.": {
+   "datei": "florian/bdbe22503dfa.mp3",
+   "h": "a43822b665",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich habe Durst.": {
+   "datei": "florian/b5b6f978e9ef.mp3",
+   "h": "4d4011a548",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich habe einen Hund.": {
+   "datei": "florian/6bc825d6a7ae.mp3",
+   "h": "e470460349",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich kann schon gut lesen.": {
+   "datei": "florian/132dfad71ca1.mp3",
+   "h": "07451e3a31",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich mag Eis.": {
+   "datei": "florian/b652838b3067.mp3",
+   "h": "b64c01432b",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich male ein Bild für Oma.": {
+   "datei": "florian/dcf330b2a023.mp3",
+   "h": "eab1f226ec",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich putze mir die Zähne.": {
+   "datei": "florian/4fbb105b9070.mp3",
+   "h": "ebb51a4ca9",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Ich ziehe meine Jacke an.": {
+   "datei": "florian/b688de5a22b4.mp3",
+   "h": "79b7cd70b6",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Im Winter fällt viel Schnee.": {
+   "datei": "florian/b7f7a7df17d7.mp3",
+   "h": "13001e9eec",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Lena hat ein Pferd.": {
+   "datei": "florian/e3e3c513050b.mp3",
+   "h": "f9eb756ae5",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Lina singt laut.": {
+   "datei": "florian/1926d82afb4f.mp3",
+   "h": "9c25a9814b",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Mama holt mich ab.": {
+   "datei": "florian/cac789c6db35.mp3",
+   "h": "b6c65f2345",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Mama lacht laut.": {
+   "datei": "florian/ae2b0c99d638.mp3",
+   "h": "f22439ad52",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Mama liest mir ein Buch vor.": {
+   "datei": "florian/b430fc046c1f.mp3",
+   "h": "a18bdd4184",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Mein Bett ist warm.": {
+   "datei": "florian/4e05f5e0da64.mp3",
+   "h": "39552816b1",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Morgen fahren wir ans Meer.": {
+   "datei": "florian/322849284bb6.mp3",
+   "h": "2f4ab8b07c",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Nach der Schule esse ich Nudeln.": {
+   "datei": "florian/ba0be99b05e3.mp3",
+   "h": "c21beccc12",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Oma backt Kekse.": {
+   "datei": "florian/011a2f5d3838.mp3",
+   "h": "e14091902c",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Papa bringt mich ins Bett.": {
+   "datei": "florian/de15a793f2c1.mp3",
+   "h": "4b416b0abc",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Papa fährt mit dem Rad.": {
+   "datei": "florian/2e61daf9141a.mp3",
+   "h": "53ee87b81f",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Papa kocht Reis.": {
+   "datei": "florian/a138277dd4a7.mp3",
+   "h": "6f22c5fb66",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Sie hat rote Schuhe.": {
+   "datei": "florian/f56c45e6a69e.mp3",
+   "h": "606bcd6d62",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Tom rennt weg.": {
+   "datei": "florian/6b8fa22f09dc.mp3",
+   "h": "3467bb42b2",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Unser Hase frisst gern Möhren.": {
+   "datei": "florian/11a2594ade51.mp3",
+   "h": "7f36c99fae",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Wir backen heute einen Kuchen.": {
+   "datei": "florian/66851f49a818.mp3",
+   "h": "6f55225d24",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Wir essen heute Suppe.": {
+   "datei": "florian/26771fd7428c.mp3",
+   "h": "71b3218be6",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Wir fahren mit dem Bus.": {
+   "datei": "florian/fc505e4ef461.mp3",
+   "h": "ffd5792360",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Wir gehen in den Wald.": {
+   "datei": "florian/f929c4eb8cac.mp3",
+   "h": "ca93e6623d",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Wir gehen raus.": {
+   "datei": "florian/2cecb5f46a5d.mp3",
+   "h": "b2d36d9979",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Wir malen bunt.": {
+   "datei": "florian/b122be9bcb8b.mp3",
+   "h": "d06c684b66",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Wir malen mit Mama.": {
+   "datei": "florian/e0672eda3066.mp3",
+   "h": "fa68a8a560",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Wir sind da.": {
+   "datei": "florian/198bf0320e49.mp3",
+   "h": "9686470a2a",
+   "gehoert": false
+  },
+  "Hör noch mal hin. Wir spielen heute im Garten.": {
+   "datei": "florian/ed1ca2ac87a7.mp3",
+   "h": "dde87d9169",
+   "gehoert": false
+  },
+  "Ich bin am See.": {
+   "datei": "florian/33fd110e84fc.mp3",
+   "h": "dfc607cba0",
+   "gehoert": false
+  },
+  "Ich bin müde.": {
+   "datei": "florian/cb45f25ca4e2.mp3",
+   "h": "360aad8952",
+   "gehoert": false
+  },
+  "Ich esse Brot und Käse.": {
+   "datei": "florian/caa12015799f.mp3",
+   "h": "c15dc9d8bf",
+   "gehoert": false
+  },
+  "Ich esse Brot.": {
+   "datei": "florian/b6fed8a4cbd8.mp3",
+   "h": "897cb2814e",
+   "gehoert": false
+  },
+  "Ich esse einen Apfel.": {
+   "datei": "florian/0c1a9db7a525.mp3",
+   "h": "841ac6d5a5",
+   "gehoert": false
+  },
+  "Ich gehe zu Oma.": {
+   "datei": "florian/b92c2cd5d119.mp3",
+   "h": "0b59895683",
+   "gehoert": false
+  },
+  "Ich gehe zur Schule.": {
+   "datei": "florian/e7895c9d2a22.mp3",
+   "h": "4c9d2da30f",
+   "gehoert": false
+  },
+  "Ich habe Durst.": {
+   "datei": "florian/0d21ee3cb07c.mp3",
+   "h": "69ca1fd0b7",
+   "gehoert": false
+  },
+  "Ich habe einen Hund.": {
+   "datei": "florian/40016718faa5.mp3",
+   "h": "79b8b25be0",
+   "gehoert": false
+  },
+  "Ich kann schon gut lesen.": {
+   "datei": "florian/2db74df0ed5e.mp3",
+   "h": "04eb9cba52",
+   "gehoert": false
+  },
+  "Ich mag Eis.": {
+   "datei": "florian/a3ba61aa3feb.mp3",
+   "h": "6546f65dd6",
+   "gehoert": false
+  },
+  "Ich male ein Bild für Oma.": {
+   "datei": "florian/9344fbe1bfaa.mp3",
+   "h": "c354125f57",
+   "gehoert": false
+  },
+  "Ich putze mir die Zähne.": {
+   "datei": "florian/59611feb206b.mp3",
+   "h": "bd2990fbc6",
+   "gehoert": false
+  },
+  "Ich ziehe meine Jacke an.": {
+   "datei": "florian/8243e478fdb3.mp3",
+   "h": "8a752a0b1b",
+   "gehoert": false
+  },
+  "Im Tal fließt ein Bach. Das Einhorn baut dort Brücken aus Perlen.": {
+   "datei": "florian/69b83327b742.mp3",
+   "h": "b711a9a097",
+   "gehoert": false
+  },
+  "Im Winter fällt viel Schnee.": {
+   "datei": "florian/9a4f49922268.mp3",
+   "h": "eb9830f3d0",
+   "gehoert": false
+  },
+  "In der Mitte steht jetzt Minus.": {
+   "datei": "florian/ed41e9c1d990.mp3",
+   "h": "4bf1f9865a",
+   "gehoert": false
+  },
+  "Jetzt baust du solche Brücken.": {
+   "datei": "florian/7880e7f2e396.mp3",
+   "h": "6191911b36",
+   "gehoert": false
+  },
+  "Jetzt baut das Einhorn längere Brücken. Zuerst legt es den goldenen Zehnerstab.": {
+   "datei": "florian/ad704dec765a.mp3",
+   "h": "08991bfc8f",
+   "gehoert": false
+  },
+  "Jetzt baut es die Brücke neu. Diesmal nimmt es den kleinen Stab weg. Übrig bleibt der Zehner.": {
+   "datei": "florian/b38d40c6a897.mp3",
+   "h": "d5b0dd09f2",
+   "gehoert": false
+  },
+  "Jetzt bist du dran.": {
+   "datei": "florian/663010a8efcd.mp3",
+   "h": "fc7e8058e6",
+   "gehoert": false
+  },
+  "Jetzt bist du dran. Welcher Stab bleibt übrig?": {
+   "datei": "florian/fe913d8b66c1.mp3",
+   "h": "6077c2f4f4",
+   "gehoert": false
+  },
+  "Jetzt bist du dran. Wie viele Perlen fehlen bis zum vollen Zehner?": {
+   "datei": "florian/dab682275bc6.mp3",
+   "h": "6f78c60585",
+   "gehoert": false
+  },
+  "Jetzt ist der Zehnerstab voll. Der Rest kommt dahinter.": {
+   "datei": "florian/e114b98e34b2.mp3",
+   "h": "a17dffc8e9",
+   "gehoert": false
+  },
+  "Jetzt nimmt das Einhorn einen Teil weg. Minus heißt: wegnehmen. Der andere Teil bleibt liegen.": {
+   "datei": "florian/301b20033c07.mp3",
+   "h": "dc27356b65",
+   "gehoert": false
+  },
+  "Jetzt rechnest du. Schau zuerst auf den kleinen Stab.": {
+   "datei": "florian/5140546b416f.mp3",
+   "h": "62cb37e8ee",
+   "gehoert": false
+  },
+  "Jetzt rechnest du. Schau zuerst auf die Einer.": {
+   "datei": "florian/04b60c8ab4de.mp3",
+   "h": "99b14602e0",
+   "gehoert": false
+  },
+  "Jetzt rechnest du. Schau zuerst auf die Einer. Der Zehner wartet.": {
+   "datei": "florian/a512da147ae7.mp3",
+   "h": "2fed42218a",
+   "gehoert": false
+  },
+  "Jetzt rechnest du. Zehner zu den Zehnern, Einer zu den Einern.": {
+   "datei": "florian/7e99a6364d75.mp3",
+   "h": "31b8729c07",
+   "gehoert": false
+  },
+  "Jetzt soll es mehr Perlen wegnehmen, als der kleine Stab hat.": {
+   "datei": "florian/a4c0ac3f4053.mp3",
+   "h": "024dbf0d3e",
+   "gehoert": false
+  },
+  "Jetzt teilst du den Stab. Wie viele Perlen hat jeder Teil?": {
+   "datei": "florian/a9a01176f725.mp3",
+   "h": "2eb29f2850",
+   "gehoert": false
+  },
+  "Kettenhüpfer. Einmaleins. Wie weit hüpft das Einhorn? Tipp die Zahl ein.": {
+   "datei": "florian/66419bac82a2.mp3",
+   "h": "b7ef6b6a45",
+   "gehoert": false
+  },
+  "Kommen Einer dazu, legt das Einhorn sie zum kleinen Stab. Die Zehnerstäbe bleiben.": {
+   "datei": "florian/db3c6d30ef6e.mp3",
+   "h": "155d8bfa33",
+   "gehoert": false
+  },
+  "Kommen Perlen dazu, bleiben die Zehnerstäbe liegen. Nur die Einer kommen zusammen.": {
+   "datei": "florian/95873796b61e.mp3",
+   "h": "e7efa08168",
+   "gehoert": false
+  },
+  "Kommt ein Zehnerstab dazu, ändern sich nur die Zehner. Die Einer bleiben.": {
+   "datei": "florian/0ec93b86df5d.mp3",
+   "h": "8106a94305",
+   "gehoert": false
+  },
+  "Leg die Perlen zusammen. Welche Zahl ist es?": {
+   "datei": "florian/a5cf463df0fa.mp3",
+   "h": "bcb9ce524b",
+   "gehoert": false
+  },
+  "Lena hat ein Pferd.": {
+   "datei": "florian/824a8851f6c9.mp3",
+   "h": "50ca750ec9",
+   "gehoert": false
+  },
+  "Lina singt laut.": {
+   "datei": "florian/27989c3ba560.mp3",
+   "h": "da9671795b",
+   "gehoert": false
+  },
+  "Mama holt mich ab.": {
+   "datei": "florian/8fc85a721a84.mp3",
+   "h": "31487139e8",
+   "gehoert": false
+  },
+  "Mama lacht laut.": {
+   "datei": "florian/981555b05198.mp3",
+   "h": "9baa52fda4",
+   "gehoert": false
+  },
+  "Mama liest mir ein Buch vor.": {
+   "datei": "florian/d04ca520710d.mp3",
+   "h": "10a40cce42",
+   "gehoert": false
+  },
+  "Manchmal passen die Perlen nicht mehr auf den kleinen Stab. Dann füllt das Einhorn zuerst einen Zehner auf.": {
+   "datei": "florian/e4b1754c1c89.mp3",
+   "h": "07d12af323",
+   "gehoert": false
+  },
+  "Manchmal soll auch der Zehnerstab weg. Dann nimmt das Einhorn ihn mit und dazu Perlen vom kleinen Stab.": {
+   "datei": "florian/bb67a8fd7ab1.mp3",
+   "h": "2fe607b523",
+   "gehoert": false
+  },
+  "Mein Bett ist warm.": {
+   "datei": "florian/8b61c0c7ab37.mp3",
+   "h": "0d99129e8a",
+   "gehoert": false
+  },
+  "Mengen auf einen Blick": {
+   "datei": "florian/6da1870e9d1f.mp3",
+   "h": "bd84cb0bc2",
+   "gehoert": false
+  },
+  "Minus im ganz großen Raum": {
+   "datei": "florian/0f20dd474002.mp3",
+   "h": "b0e7054d18",
+   "gehoert": false
+  },
+  "Minus im größeren Raum": {
+   "datei": "florian/3cf00cbc2e4a.mp3",
+   "h": "143f4115b1",
+   "gehoert": false
+  },
+  "Minus mit ganzen Zehnern": {
+   "datei": "florian/c67dfb059cda.mp3",
+   "h": "862d05bfeb",
+   "gehoert": false
+  },
+  "Minus ohne Übergang": {
+   "datei": "florian/52b3766de2f1.mp3",
+   "h": "b62bef7a87",
+   "gehoert": false
+  },
+  "Minus über den Zehner, viel weg": {
+   "datei": "florian/ed660f3cbfa6.mp3",
+   "h": "48d4c81ab4",
+   "gehoert": false
+  },
+  "Minus über den Zehner, wenig weg": {
+   "datei": "florian/534eb9a5c87b.mp3",
+   "h": "c9773db823",
+   "gehoert": false
+  },
+  "Minus vom Ziel": {
+   "datei": "florian/d0746686c7b8.mp3",
+   "h": "a8aa576831",
+   "gehoert": false
+  },
+  "Mit jedem kleinen Stab geht es genauso. Der Zehner bleibt vorne.": {
+   "datei": "florian/387cedcd5a29.mp3",
+   "h": "2955afc45c",
+   "gehoert": false
+  },
+  "Morgen fahren wir ans Meer.": {
+   "datei": "florian/35635685a368.mp3",
+   "h": "2b5b667257",
+   "gehoert": false
+  },
+  "Nach der Schule esse ich Nudeln.": {
+   "datei": "florian/fb8a27c311f0.mp3",
+   "h": "a55253c10c",
+   "gehoert": false
+  },
+  "Nimm die Perlen weg. Wie viele bleiben?": {
+   "datei": "florian/3965f8467008.mp3",
+   "h": "4fa4355130",
+   "gehoert": false
+  },
+  "Nimm eine große Zahl. Was bleibt, wenn eine kleinere weggeht?": {
+   "datei": "florian/5dddd1bebc8b.mp3",
+   "h": "c5dc2e9479",
+   "gehoert": false
+  },
+  "Nimmt das Einhorn Einer weg, nimmt es sie vom kleinen Stab. Die Zehnerstäbe bleiben.": {
+   "datei": "florian/9fc1e65e914a.mp3",
+   "h": "d89195797e",
+   "gehoert": false
+  },
+  "Nimmt das Einhorn noch mehr weg, geht ein ganzer Zehnerstab mit.": {
+   "datei": "florian/62afcf147071.mp3",
+   "h": "7ddadb6c50",
+   "gehoert": false
+  },
+  "Nimmt es einen Zehnerstab weg, ändern sich nur die Zehner. Die Einer bleiben.": {
+   "datei": "florian/2fe6f1b72cc4.mp3",
+   "h": "ee5b939186",
+   "gehoert": false
+  },
+  "Oder es nimmt den anderen Teil weg.": {
+   "datei": "florian/520b7babd3cc.mp3",
+   "h": "c356040e2d",
+   "gehoert": false
+  },
+  "Oma backt Kekse.": {
+   "datei": "florian/9097faccd441.mp3",
+   "h": "bff9040703",
+   "gehoert": false
+  },
+  "Papa bringt mich ins Bett.": {
+   "datei": "florian/b36da75f8755.mp3",
+   "h": "8b3f62f3ad",
+   "gehoert": false
+  },
+  "Papa fährt mit dem Rad.": {
+   "datei": "florian/1e83faa2ecc1.mp3",
+   "h": "ccffaed8c6",
+   "gehoert": false
+  },
+  "Papa kocht Reis.": {
+   "datei": "florian/36b4395e5363.mp3",
+   "h": "8f4be375ff",
+   "gehoert": false
+  },
+  "Perlenbrücke. Zahlen zerlegen. Nimm links und rechts ein Perlenstäbchen und bau die Brücke.": {
+   "datei": "florian/fbf877b40072.mp3",
+   "h": "682bcc90b7",
+   "gehoert": false
+  },
+  "Plus bis zum Ziel": {
+   "datei": "florian/3ec16aa32021.mp3",
+   "h": "8f55bbe225",
+   "gehoert": false
+  },
+  "Plus im ganz großen Raum": {
+   "datei": "florian/236f5c4006b9.mp3",
+   "h": "3a57e3778e",
+   "gehoert": false
+  },
+  "Plus im größeren Raum": {
+   "datei": "florian/6c57fdd8f8f0.mp3",
+   "h": "43867d6a77",
+   "gehoert": false
+  },
+  "Plus ohne Übergang": {
+   "datei": "florian/49ac39d9e820.mp3",
+   "h": "5ef51652f2",
+   "gehoert": false
+  },
+  "Plus über den Zehner mit der größten Zahl": {
+   "datei": "florian/432792230f69.mp3",
+   "h": "5eaa9461f7",
+   "gehoert": false
+  },
+  "Plus über den Zehner mit der nächsten Zahl": {
+   "datei": "florian/fe85e19816cc.mp3",
+   "h": "1b707ecd82",
+   "gehoert": false
+  },
+  "Plus über den Zehner mit kleineren Zahlen": {
+   "datei": "florian/27456d159d70.mp3",
+   "h": "4f9e163149",
+   "gehoert": false
+  },
+  "Plus und Minus gehören zusammen. Sie sind eine Familie aus denselben Perlen.": {
+   "datei": "florian/16e52745fbe1.mp3",
+   "h": "3d4df7c430",
+   "gehoert": false
+  },
+  "Rechnen mit der Zahl": {
+   "datei": "florian/547c142ffcd4.mp3",
+   "h": "55bdfad743",
+   "gehoert": false
+  },
+  "Schau auf die Zahl. Vorne steht der Zehner. Hinten stehen die Einer vom kleinen Stab.": {
+   "datei": "florian/60d81c3ba894.mp3",
+   "h": "eadf07f6a7",
+   "gehoert": false
+  },
+  "Schau auf die Zahl. Vorne steht, wie viele Zehnerstäbe es sind. Hinten stehen die Einer.": {
+   "datei": "florian/6653877e7aa4.mp3",
+   "h": "f79615ad1e",
+   "gehoert": false
+  },
+  "Sie hat rote Schuhe.": {
+   "datei": "florian/a862775cd700.mp3",
+   "h": "d5f1778a63",
+   "gehoert": false
+  },
+  "So lang ist die Brücke jetzt.": {
+   "datei": "florian/27f08a5283e3.mp3",
+   "h": "ff99fae951",
+   "gehoert": false
+  },
+  "Tom rennt weg.": {
+   "datei": "florian/413879379575.mp3",
+   "h": "41bc98035b",
+   "gehoert": false
+  },
+  "Unser Hase frisst gern Möhren.": {
+   "datei": "florian/12e6a853917b.mp3",
+   "h": "668e21b4fb",
+   "gehoert": false
+  },
+  "Vorne an der Zahl stehen die Zehner. Einer gibt es keine mehr.": {
+   "datei": "florian/5f856243ce9f.mp3",
+   "h": "27cf0643ea",
+   "gehoert": false
+  },
+  "Vorne an der Zahl stehen die Zehnerstäbe, hinten die Einer vom kleinen Stab.": {
+   "datei": "florian/4e21b36c8e24.mp3",
+   "h": "cae968c1c9",
+   "gehoert": false
+  },
+  "Was ich kann": {
+   "datei": "florian/c1a988531c9b.mp3",
+   "h": "68e2ae8948",
+   "gehoert": false
+  },
+  "Weiter unten ist der Bach breiter. Diese Brücke hat Zehnerstäbe und einen kleinen Stab.": {
+   "datei": "florian/3b4e51398160.mp3",
+   "h": "fae31f15d5",
+   "gehoert": false
+  },
+  "Weiter unten ist der Bach breiter. Dort legt das Einhorn Zehnerstäbe und einen kleinen Stab.": {
+   "datei": "florian/fb62c7d74e58.mp3",
+   "h": "9f50179bf3",
+   "gehoert": false
+  },
+  "Wimmelbild. Nomen. Zieh die Wörter auf die Dinge im Bild.": {
+   "datei": "florian/5b07b3f077df.mp3",
+   "h": "d99d64debb",
+   "gehoert": false
+  },
+  "Wir backen heute einen Kuchen.": {
+   "datei": "florian/55aac5602d73.mp3",
+   "h": "7e5f693092",
+   "gehoert": false
+  },
+  "Wir essen heute Suppe.": {
+   "datei": "florian/a68b6b2ef34d.mp3",
+   "h": "5ecb4bd2b0",
+   "gehoert": false
+  },
+  "Wir fahren mit dem Bus.": {
+   "datei": "florian/9a3a0633bf59.mp3",
+   "h": "c8b7facfdf",
+   "gehoert": false
+  },
+  "Wir gehen in den Wald.": {
+   "datei": "florian/5ef41fcd7e2b.mp3",
+   "h": "aab07f43c9",
+   "gehoert": false
+  },
+  "Wir gehen raus.": {
+   "datei": "florian/8c302739ad5b.mp3",
+   "h": "e647909d07",
+   "gehoert": false
+  },
+  "Wir malen bunt.": {
+   "datei": "florian/8522bfd6edc9.mp3",
+   "h": "fe159c2852",
+   "gehoert": false
+  },
+  "Wir malen mit Mama.": {
+   "datei": "florian/edf29b67342e.mp3",
+   "h": "16c4da95b2",
+   "gehoert": false
+  },
+  "Wir sind da.": {
+   "datei": "florian/3b104e3e12e3.mp3",
+   "h": "790af285d9",
+   "gehoert": false
+  },
+  "Wir spielen heute im Garten.": {
+   "datei": "florian/862fc4d0a19a.mp3",
+   "h": "661d86003e",
+   "gehoert": false
+  },
+  "Zahlenzauber. Plus und Minus. Welche zwei Zahlen ergeben zusammen die dritte?": {
+   "datei": "florian/7a2e048357d6.mp3",
+   "h": "b963c75791",
+   "gehoert": false
+  },
+  "Zauberer. Großschreibung. Zaubere die Buchstaben groß oder klein.": {
+   "datei": "florian/b5cc65ec5bbf.mp3",
+   "h": "e4282ea22f",
+   "gehoert": false
+  },
+  "Zerlegen": {
+   "datei": "florian/6ce196c62d23.mp3",
+   "h": "66082972a9",
+   "gehoert": false
+  },
+  "Zuerst nimmt es den ganzen kleinen Stab weg. Jetzt bleibt genau der Zehner.": {
+   "datei": "florian/5df6974c0380.mp3",
+   "h": "7a8aaa0d69",
+   "gehoert": false
+  },
+  "Zuerst nimmt es den ganzen kleinen Stab weg. Jetzt liegen da nur noch Zehnerstäbe.": {
+   "datei": "florian/0aa316e49887.mp3",
+   "h": "41ad61fb7e",
+   "gehoert": false
+  },
+  "Zwillingsaufgaben": {
+   "datei": "florian/371c8c42b88f.mp3",
+   "h": "72e1944069",
+   "gehoert": false
+  }
+ }
+}
