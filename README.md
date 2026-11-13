@@ -97,6 +97,12 @@ Dateien:
   Schwierigkeit), `beispiele`, `zweck` (wozu ein Kind das im Alltag braucht: nichts ist Selbstzweck) und `eltern`.
   Themen der Klassen 3–4 sind nur grob angelegt (Name, Bereich, Voraussetzungen).
   Stränge: `mathe`, `geometrie`, `lesen`, `schreiben`, `grammatik`, `sprechen` (Sprechen und Zuhören).
+  Neben `themen` steht `fehlerbilder`: typische Fehlermuster (z. B. Zahlendreher, Spiegelschrift, „kleiner von größer“),
+  je mit `signatur` (woran die App das Muster an den Antworten erkennt), `themen` (wo es sichtbar wird), `uebung`
+  (Themen, die bei einem Muster häufiger kommen: geübt wird das richtige Verfahren, nicht der Fehler), `probe`
+  (Aufgaben, mit denen sich „nicht betroffen“ bestätigen lässt), `kind_hinweis` (wird vorgelesen: ohne Ziffern und
+  Zahlwörter) und `eltern` (beschreibend; `stufe2` nur bei anhaltenden Mustern). Grundlage:
+  `docs/reports/Häufige Fehler Grundschule.md`. Die Lernsteuerung wertet Fehlerbilder noch nicht aus.
 - `spiele/aufgabenarten.js`: Aufgaben-Erzeuger. Aufgabenarten: `zerlegung`, `rechnen`, `menge`, `zwillinge`.
 - `spiele/lernsteuerung.js`: Steuerung (reine Logik ohne DOM, in Node testbar) und `runde()` für die Spiele.
   Sie wählt das Thema, macht bei neuen Themen eine Probe (bekannte Themen werden übersprungen), übt auf den Stufen,

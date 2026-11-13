@@ -95,6 +95,45 @@ regeln.felder = ({ themen }) => {
     }
   }
 };
+// Fehlerbilder (docs/reports/Häufige Fehler Grundschule.md): verweisen nur auf Themen, steuern nichts allein
+const FB = {
+  strang: ["mathe", "geometrie", "lesen", "schreiben", "grammatik", "sprechen"],
+  eingabe: ["ziffern", "zahlwort-lesen", "auswahl", "tastatur", "kacheln-plus", "stift", "ziehen", "zeit"],
+  art: ["antwort", "zeit", "strich", "alignment"],
+  evidenz: ["Q", "F", "A"],
+};
+regeln.fehlerbilder = ({ themen, fehlerbilder = [] }) => {
+  const tids = new Set(themen.map((t) => t.id));
+  const fids = new Set();
+  for (const f of fehlerbilder) {
+    assert.match(f.id, /^[a-z0-9]+(-[a-z0-9]+)*$/, `Fehlerbild-id ${f.id}`);
+    assert.ok(!fids.has(f.id), `doppeltes Fehlerbild ${f.id}`);
+    fids.add(f.id);
+  }
+  for (const f of fehlerbilder) {
+    const wo = `Fehlerbild ${f.id}`;
+    assert.ok(f.name && f.kind_hinweis && f.eltern?.beschreibung, `${wo}: name, kind_hinweis oder eltern fehlt`);
+    assert.ok(FB.strang.includes(f.strang), `${wo}: strang ${f.strang}`);
+    assert.ok(FB.evidenz.includes(f.evidenz), `${wo}: evidenz ${f.evidenz}`);
+    assert.ok(FB.art.includes(f.signatur?.art), `${wo}: signatur.art`);
+    assert.ok(f.eingabe?.length > 0, `${wo}: eingabe fehlt`);
+    for (const e of f.eingabe) assert.ok(FB.eingabe.includes(e), `${wo}: eingabe ${e} (die Stimme spricht nie Zahlen)`);
+    assert.ok(f.themen?.length > 0, `${wo}: keine Themen`);
+    for (const feld of ["themen", "kontrast", "uebung"]) {
+      for (const id of f[feld] ?? []) assert.ok(tids.has(id), `${wo}: ${feld} ${id} fehlt im Plan`);
+    }
+    for (const b of f.probe?.beispiele ?? []) assert.doesNotMatch(String(b), /^hoeren:.*\d/, `${wo}: Probe ${b} würde eine Zahl sprechen`);
+    // kind_hinweis wird vorgelesen: keine Ziffern, keine Zahlwörter (Artikel wie „ein Hund“ und die Stelle „Einer“ sind erlaubt)
+    assert.doesNotMatch(f.kind_hinweis, /\d/, `${wo}: Ziffer im kind_hinweis`);
+    assert.doesNotMatch(f.kind_hinweis.replace(/(?<![\p{L}])(ein|eine|einer)(?![\p{L}])/giu, ""), zahlRegel, `${wo}: Zahlwort im kind_hinweis`);
+    if (f.gegenstueck) assert.ok(fids.has(f.gegenstueck), `${wo}: gegenstueck ${f.gegenstueck}`);
+    const s2 = f.eltern.stufe2;
+    if (s2 && s2 !== "nie") {
+      assert.ok(tids.has(s2.nach_thema), `${wo}: stufe2.nach_thema ${s2.nach_thema}`);
+      for (const m of s2.mit ?? []) assert.ok(fids.has(m), `${wo}: stufe2.mit ${m}`);
+    }
+  }
+};
 const pruefePlan = (plan, katalog, vorlageExistiert) => {
   regeln.reihenfolge(plan);
   regeln.aufgaben(plan);
@@ -120,6 +159,22 @@ test("Plan: deckt alle Zahlenzauber-Schlüssel bis 100 ab", () => {
 test("Plan: der echte Plan besteht alle Prüfungen", () => pruefePlan(plan, katalog));
 
 test("Plan: Klasse, Felder der Recherche; Klasse 1–2 mit Ziel, Beispielen, Zweck und Eltern-Hinweis", () => regeln.felder(plan));
+
+test("Plan: Fehlerbilder verweisen auf vorhandene Themen und sprechen keine Zahlen", () => {
+  assert.ok((plan.fehlerbilder ?? []).length > 0, "keine Fehlerbilder");
+  regeln.fehlerbilder(plan);
+});
+
+test("Plan: Fehlerbild-Regel erkennt falsche Verweise und gesprochene Zahlen", () => {
+  const themen = [{ id: "t" }];
+  const f = { id: "f", name: "F", strang: "mathe", evidenz: "Q", signatur: { art: "antwort" }, eingabe: ["ziffern"], themen: ["t"], kind_hinweis: "Erst die Zehner.", eltern: { beschreibung: "B", stufe2: "nie" } };
+  regeln.fehlerbilder({ themen, fehlerbilder: [f] });
+  assert.throws(() => regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, themen: ["gibt-es-nicht"] }] }), /fehlt im Plan/);
+  assert.throws(() => regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, eingabe: ["hoeren-ziffern"] }] }), /spricht nie Zahlen/);
+  assert.throws(() => regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, kind_hinweis: "Wie viele sind zwei?" }] }), /Zahlwort/);
+  assert.throws(() => regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, kind_hinweis: "Nimm die 6." }] }), /Ziffer/);
+  regeln.fehlerbilder({ themen, fehlerbilder: [{ ...f, kind_hinweis: "Ein Hund, viele …? Reichen die Einer?" }] });
+});
 
 test("Plan: jeder Strang hat Themen in Klasse 1–2 und 3–4", () => {
   for (const s of ["mathe", "geometrie", "lesen", "schreiben", "grammatik", "sprechen"]) {

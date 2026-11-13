@@ -130,10 +130,10 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "M1-05",
-      "ziel": "Die Ziffern 0 bis 9 und die Zahl 10 erkennen und dem gesprochenen Zahlwort zuordnen.",
+      "ziel": "Die Ziffern 0 bis 9 und die Zahl 10 erkennen und dem Zahlwort zuordnen (Zahlwort als aufgenommene Menschenstimme, nie Computerstimme).",
       "beispiele": [
         "Tippe auf die 3",
-        "Du hörst „sieben“ – welche Ziffer ist das?",
+        "Eine aufgenommene Stimme sagt „sieben“ – welche Ziffer ist das?",
         "6 oder 9 – welche ist die Sechs?"
       ],
       "zweck": "Im Aufzug, auf der Fernbedienung oder an der Haustür die richtige Zahl finden.",
@@ -1826,10 +1826,10 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "M1-46",
-      "ziel": "Ein gehörtes Zahlwort von 11 bis 20 in Ziffern schreiben und dabei trotz der Sprechweise den Zehner zuerst schreiben.",
+      "ziel": "Ein Zahlwort von 11 bis 20 in Ziffern schreiben und dabei trotz der Sprechweise den Zehner zuerst schreiben (Zahlwort als aufgenommene Menschenstimme oder geschrieben, nie Computerstimme).",
       "beispiele": [
-        "Diktat: siebzehn",
-        "Du hörst „vierzehn“ – 41 oder 14?",
+        "Aufnahme „siebzehn“ → 17",
+        "„vierzehn“ – 41 oder 14?",
         "Schreibe neunzehn"
       ],
       "zweck": "Eine gehörte Hausnummer richtig notieren, damit man das Haus später auch findet.",
@@ -3974,10 +3974,10 @@
       "pruefbar": "ganz",
       "quelle": "Q",
       "rid": "DA1-01",
-      "ziel": "Dieselbe Anzahl als Plättchen, Würfelbild, gesprochenes Zahlwort und Ziffer erkennen und einander zuordnen.",
+      "ziel": "Dieselbe Anzahl als Plättchen, Würfelbild, Zahlwort und Ziffer erkennen und einander zuordnen (Zahlwort geschrieben oder als aufgenommene Menschenstimme).",
       "beispiele": [
         "Finde alle Karten zur 3: Plättchen, Finger, Würfelbild, Ziffer.",
-        "Welche Karte gehört nicht zur 5: Würfelbild mit 5 Augen, das gesprochene „fünf“, die Ziffer 6?"
+        "Welche Karte gehört nicht zur 5: Würfelbild mit 5 Augen, das Wort „fünf“, die Ziffer 6?"
       ],
       "zweck": "Eine Zahl überall wiedererkennen: auf dem Würfel, an den Fingern, auf einem Schild oder wenn jemand sie sagt.",
       "eltern": "Zeigen Sie eine Zahl mit den Fingern und lassen Sie Ihr Kind dieselbe Zahl mit Löffeln legen und die Ziffer dazu zeigen."
@@ -9922,7 +9922,7 @@
       "pruefbar": "ganz",
       "quelle": "E",
       "rid": "M2-03",
-      "ziel": "Gesprochene Zahlwörter bis 100 in Ziffern schreiben und umgekehrt, obwohl das Zahlwort die Einer zuerst nennt.",
+      "ziel": "Zahlwörter bis 100 in Ziffern schreiben und umgekehrt, obwohl das Zahlwort die Einer zuerst nennt (Zahlwort geschrieben oder als aufgenommene Menschenstimme, nie Computerstimme).",
       "beispiele": [
         "„dreiundvierzig“ → 43, nicht 34",
         "„sechsundfünfzig“: Welche Ziffer steht vorne?",
@@ -24111,6 +24111,2611 @@
       "quelle": "Q",
       "rid": "SZ4-15",
       "eltern": ""
+    }
+  ],
+  "fehlerbilder": [
+    {
+      "id": "zaehlendes-rechnen",
+      "name": "Rechnen durch Zählen",
+      "strang": "mathe",
+      "klasse_ab": 1,
+      "normal_bis": "2-anfang",
+      "eingabe": [
+        "ziffern",
+        "zeit"
+      ],
+      "signatur": {
+        "art": "zeit",
+        "regel": "zeit-steigung-kleiner-operand",
+        "nur_bei": "plus-minus-bis-100",
+        "beschreibung": "Lösezeit steigt mit dem kleineren Summanden bzw. dem Subtrahenden, relativ zur eigenen Basisgeschwindigkeit; Verdopplungen sind nicht schneller als ihre Nachbaraufgaben; dazu gehäuft Antworten um 1 daneben. Zeiten allein reichen nie."
+      },
+      "themen": [
+        "plus-bis-10-gemischt",
+        "minus-bis-10-gemischt",
+        "plus-uebergang-gemischt",
+        "minus-uebergang-gemischt",
+        "blitzrechnen-bis-20",
+        "plus-ueber-den-zehner-bis-100",
+        "minus-ueber-den-zehner-bis-100"
+      ],
+      "kontrast": [
+        "zwillinge"
+      ],
+      "uebung": [
+        "zerlegen-5",
+        "zerlegen-6",
+        "zerlegen-7",
+        "zerlegen-8",
+        "zerlegen-9",
+        "zerlegen-10",
+        "zerlegungen-ordnen",
+        "verdoppeln-bis-10",
+        "zwillinge",
+        "fast-verdoppeln",
+        "fuenfertrick",
+        "erst-zur-10",
+        "zehnerfeld-fuenf-und-noch",
+        "zwanzigerfeld"
+      ],
+      "probe": {
+        "beispiele": [
+          "plus:6+6",
+          "plus:6+7",
+          "plus:4+4",
+          "plus:4+5",
+          "plus:2+9",
+          "plus:7+2",
+          "plus:38+7",
+          "minus:61-6"
+        ],
+        "min": 8,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "abruf-plus-minus",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Schau aufs Zehnerfeld: Wie viele fehlen, bis es voll ist?",
+      "eltern": {
+        "beschreibung": "Ihr Kind rechnet einfache Plus- und Minusaufgaben oft noch, indem es weiterzählt. Das ist am Anfang üblich. Die App übt gerade Zerlegen, Verdoppeln und den Weg über die 10, damit Ihr Kind Ergebnisse häufiger direkt weiß.",
+        "stufe2": {
+          "nach_thema": "plus-ueber-den-zehner-bis-100",
+          "wochen": 8,
+          "mit": []
+        }
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "Schipper, Handreichung Rechenstörungen",
+        "Gaidoschik",
+        "Gasteiger",
+        "Zeitgrenzen abgeleitet [A]"
+      ]
+    },
+    {
+      "id": "zehneruebergang-unsicher",
+      "name": "Zehnerübergang unsicher",
+      "strang": "mathe",
+      "klasse_ab": 1,
+      "normal_bis": "1-ende",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "fehler-nur-mit-uebergang",
+        "nur_bei": "uebergang-ueber-10",
+        "beschreibung": "Falsche Antworten fast nur bei Aufgaben mit Zehnerübergang (8 + 5 = 12 oder 14), gleich schwere Aufgaben ohne Übergang richtig."
+      },
+      "themen": [
+        "plus-uebergang-gemischt",
+        "minus-uebergang-gemischt",
+        "ueber-10-mit-7",
+        "minus-ueber-10-ab-6",
+        "plus-zweistellig-mit-uebergang"
+      ],
+      "kontrast": [
+        "plus-ohne-20",
+        "minus-ohne-20"
+      ],
+      "uebung": [
+        "ergaenzen-bis-10",
+        "zerlegen-10",
+        "erst-zur-10",
+        "minus-bis-zur-10",
+        "fuenfertrick"
+      ],
+      "probe": {
+        "beispiele": [
+          "plus:8+5",
+          "plus:7+6",
+          "minus:13-5",
+          "minus:12-4",
+          "plus:9+4",
+          "minus:15-7"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "zehneruebergang",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Erst das Zehnerfeld füllen, dann den Rest.",
+      "eltern": {
+        "beschreibung": "Bei Aufgaben, die über die 10 gehen, landet Ihr Kind öfter knapp neben dem Ergebnis. Die App übt gerade, Zahlen bis 10 zu ergänzen und in zwei Schritten über die 10 zu rechnen.",
+        "stufe2": {
+          "nach_thema": "plus-uebergang-gemischt",
+          "wochen": 8,
+          "mit": [
+            "zaehlendes-rechnen"
+          ]
+        }
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "Gaidoschik",
+        "Signatur abgeleitet [A]"
+      ]
+    },
+    {
+      "id": "zahlendreher",
+      "name": "Zehner und Einer vertauscht",
+      "strang": "mathe",
+      "klasse_ab": 1,
+      "normal_bis": "2-ende",
+      "eingabe": [
+        "zahlwort-lesen"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "inversion",
+        "nur_bei": "zweistellig-verschiedene-ziffern",
+        "beschreibung": "Antwort ist die Zielzahl mit getauschten Zehnern und Einern (siebenundvierzig → 74); Zahlen mit gleichen Ziffern und Zehnerzahlen sind keine Gelegenheit (erst, wenn das Kind Zahlwörter lesen kann)."
+      },
+      "themen": [
+        "zahlen-bis-20-schreiben",
+        "zahlwort-ziffern-bis-100",
+        "dreistellige-zahlen-lesen"
+      ],
+      "kontrast": [
+        "zehnerzahlen-bis-100"
+      ],
+      "uebung": [
+        "zehner-und-einer-bis-20",
+        "buendeln-zehner-einer",
+        "zerlegen-zehner-einer",
+        "zahl-darstellungen-bis-100",
+        "zahlenstrahl-bis-100",
+        "hundertertafel"
+      ],
+      "probe": {
+        "beispiele": [
+          "zahlwort:47",
+          "zahlwort:63",
+          "zahlwort:18",
+          "zahlwort:92",
+          "zahlwort:35",
+          "zahlwort:71"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "stellenwert",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Erst die Zehner: Welcher Zehner steht im Wort?",
+      "eltern": {
+        "beschreibung": "Beim Schreiben von Zahlen, die als Wort dastehen, hat Ihr Kind Zehner und Einer mehrfach vertauscht. Das liegt oft an der deutschen Sprechweise, die die Einer zuerst nennt. Die App übt gerade Zehner und Einer mit Bildern und am Zahlenstrahl.",
+        "stufe2": {
+          "nach_thema": "zahlwort-ziffern-bis-100",
+          "wochen": 8,
+          "mit": [
+            "rechenzeichen-verwechselt"
+          ]
+        }
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Moeller et al. 2015",
+        "Schipper, Handreichung Rechenstörungen",
+        "„normal bis“ abgeleitet [A]"
+      ]
+    },
+    {
+      "id": "stellenwert-additiv",
+      "name": "Zahlwortteile einzeln notiert",
+      "strang": "mathe",
+      "klasse_ab": 2,
+      "normal_bis": "3-ende",
+      "eingabe": [
+        "zahlwort-lesen"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "stellenwert-additiv",
+        "nur_bei": "innere-null-oder-hunderter",
+        "beschreibung": "Zahlwortteile werden einzeln aneinandergeschrieben: „zweihundertsieben“ → 2007 (zu viele Nullen) oder 27 (fehlende Null) (erst, wenn das Kind Zahlwörter lesen kann)."
+      },
+      "themen": [
+        "dreistellige-zahlen-lesen",
+        "null-platzhalter-bis-1000",
+        "grosse-zahlen-lesen",
+        "null-in-grossen-zahlen"
+      ],
+      "kontrast": [
+        "zahlwort-ziffern-bis-100"
+      ],
+      "uebung": [
+        "hunderter-buendeln",
+        "darstellungen-bis-1000",
+        "zerlegen-bis-1000",
+        "zahlen-mit-null-bis-100"
+      ],
+      "probe": {
+        "beispiele": [
+          "zahlwort:207",
+          "zahlwort:405",
+          "zahlwort:3060",
+          "zahlwort:610",
+          "zahlwort:1009",
+          "zahlwort:830"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "stellenwert",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Schau auf die Stellentafel. Welche Stelle bleibt leer?",
+      "eltern": {
+        "beschreibung": "Beim Schreiben großer Zahlen, die als Wort dastehen, schreibt Ihr Kind die Teile manchmal einzeln hintereinander und bekommt so zu viele oder zu wenige Nullen. Die App übt gerade die Stellentafel mit Hundertern, Zehnern und Einern.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Moeller et al. 2015"
+      ]
+    },
+    {
+      "id": "ziffernweises-rechnen",
+      "name": "Ziffern statt Zahlen gerechnet",
+      "strang": "mathe",
+      "klasse_ab": 2,
+      "normal_bis": "nie",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "stellen-aneinandergehaengt",
+        "nur_bei": "einersumme-ab-10",
+        "beschreibung": "Zehnersumme und Einersumme werden aneinandergehängt (28 + 36 = 514); nur Aufgaben mit Einersumme ab 10 sind Gelegenheiten."
+      },
+      "themen": [
+        "plus-zweistellig-mit-uebergang",
+        "plus-bis-100",
+        "minus-zweistellig-mit-uebergang"
+      ],
+      "kontrast": [
+        "plus-zweistellig-ohne-uebergang"
+      ],
+      "uebung": [
+        "buendeln-zehner-einer",
+        "schrittweise-rechenstrich",
+        "zerlegen-zehner-einer",
+        "zahl-darstellungen-bis-100"
+      ],
+      "probe": {
+        "beispiele": [
+          "plus:28+36",
+          "plus:47+25",
+          "plus:19+54",
+          "plus:36+48",
+          "plus:57+16",
+          "plus:29+39"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "stellenwert-rechnen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Sind es so viele Einer, dass sie einen Zehner füllen? Dann bündle sie.",
+      "eltern": {
+        "beschreibung": "Bei Plusaufgaben mit zweistelligen Zahlen schreibt Ihr Kind Zehner- und Einerergebnis manchmal einfach nebeneinander. Die App übt gerade das Bündeln von Einern zu Zehnern und das Rechnen in Schritten am Rechenstrich.",
+        "stufe2": {
+          "nach_thema": "plus-zweistellig-mit-uebergang",
+          "wochen": 8,
+          "mit": []
+        }
+      },
+      "parameter": {
+        "stufe2_zusatz": "wiederholt an mindestens 3 Tagen"
+      },
+      "evidenz": "Q",
+      "quellen": [
+        "Schipper, Handreichung Rechenstörungen"
+      ]
+    },
+    {
+      "id": "rechenzeichen-verwechselt",
+      "name": "Plus und Minus vertauscht",
+      "strang": "mathe",
+      "klasse_ab": 1,
+      "normal_bis": "immer",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "andere-rechenart",
+        "nur_bei": "gemischte-rechenarten",
+        "beschreibung": "Antwort ist das Ergebnis der anderen Rechenart mit denselben Zahlen (7 − 2 = 9); gehäuft in gemischten Päckchen. Gelegentlich auch bei sicheren Rechnern."
+      },
+      "themen": [
+        "plus-bis-10-gemischt",
+        "minus-bis-10-gemischt",
+        "minus-uebergang-gemischt",
+        "punkt-vor-strich"
+      ],
+      "kontrast": [
+        "plus-ohne-20",
+        "minus-ohne-20"
+      ],
+      "uebung": [
+        "rechenzeichen-lesen",
+        "plus-verstehen",
+        "minus-verstehen",
+        "umkehraufgaben-bis-10",
+        "aufgabenfamilie-bis-10"
+      ],
+      "probe": {
+        "beispiele": [
+          "minus:7-2",
+          "plus:7+2",
+          "minus:9-4",
+          "plus:5+4",
+          "minus:8-3",
+          "plus:3+5"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "rechenzeichen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Schau zuerst aufs Zeichen.",
+      "eltern": {
+        "beschreibung": "In gemischten Päckchen rechnet Ihr Kind manchmal plus statt minus oder umgekehrt. Das passiert vielen Kindern ab und zu. Die App übt gerade, zuerst auf das Rechenzeichen zu achten.",
+        "stufe2": {
+          "nach_thema": "minus-bis-10-gemischt",
+          "wochen": 8,
+          "mit": [
+            "zahlendreher"
+          ]
+        }
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Schipper, Handreichung Rechenstörungen"
+      ]
+    },
+    {
+      "id": "kleiner-von-groesser",
+      "name": "Kleinere Ziffer von größerer",
+      "strang": "mathe",
+      "klasse_ab": 2,
+      "normal_bis": "nach-thematisierung",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "betrag-je-stelle",
+        "nur_bei": "untere-ziffer-groesser",
+        "beschreibung": "Je Stelle wird der Betrag der Differenz genommen (42 − 17 = 35, 13 − 5 = 12); nur Aufgaben, bei denen die untere Ziffer größer ist, sind Gelegenheiten."
+      },
+      "themen": [
+        "minus-ueber-den-zehner-bis-100",
+        "minus-zweistellig-mit-uebergang",
+        "entbuendeln-zehner",
+        "entbuendeln-hunderter",
+        "zweifach-entbuendeln"
+      ],
+      "kontrast": [
+        "minus-zweistellig-ohne-uebergang",
+        "schriftlich-minus-ohne-entbuendeln"
+      ],
+      "uebung": [
+        "minus-bis-zur-10",
+        "ergaenzen-statt-abziehen-bis-100",
+        "buendeln-zehner-einer",
+        "probe-schriftlich-minus",
+        "ueberschlag-plus-minus"
+      ],
+      "probe": {
+        "beispiele": [
+          "minus:42-17",
+          "minus:63-28",
+          "minus:512-137",
+          "minus:13-5",
+          "minus:71-46",
+          "minus:350-128"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "minus-entbuendeln",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Reichen die Einer oben? Sonst einen Zehner entbündeln.",
+      "eltern": {
+        "beschreibung": "Bei Minusaufgaben zieht Ihr Kind manchmal an jeder Stelle die kleinere Ziffer von der größeren ab, auch wenn sie unten steht. Das ist ein bekannter Zwischenschritt beim Lernen. Die App übt gerade das Entbündeln und die Probe mit Plus.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Lüken, Jensen & Gasteiger",
+        "VanLehn"
+      ]
+    },
+    {
+      "id": "uebertrag-vergessen",
+      "name": "Übertrag vergessen",
+      "strang": "mathe",
+      "klasse_ab": 3,
+      "normal_bis": "3-kurz-nach-einfuehrung",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "uebertrag-fehlt",
+        "nur_bei": "uebertrag-noetig",
+        "beschreibung": "Antwort ist das Ziel minus 10 (bzw. 100) je vergessenem Übertrag (47 + 38 = 75); bei Minus ein unnötiger Übertrag ohne Übergang. Ziffern je Stelle."
+      },
+      "themen": [
+        "schriftlich-plus-uebertrag",
+        "schriftlich-plus-mehrere-uebertraege",
+        "schriftlich-plus-minus-million",
+        "schriftlich-mal-uebertrag"
+      ],
+      "kontrast": [
+        "schriftlich-plus-ohne-uebertrag",
+        "schriftlich-mal-ohne-uebertrag"
+      ],
+      "uebung": [
+        "buendeln-zehner-einer",
+        "hunderter-buendeln",
+        "stellengerecht-untereinander",
+        "ueberschlag-plus-minus"
+      ],
+      "probe": {
+        "beispiele": [
+          "plus:47+38",
+          "plus:256+167",
+          "plus:389+245",
+          "plus:168+57"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "schriftlich-uebertrag",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Schreib den Übertrag klein dazu.",
+      "eltern": {
+        "beschreibung": "Beim schriftlichen Rechnen vergisst Ihr Kind manchmal den Übertrag in die nächste Stelle. Das ist kurz nach der Einführung häufig. Die App übt gerade das Bündeln und das stellengerechte Untereinanderschreiben.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Lüken, Jensen & Gasteiger"
+      ]
+    },
+    {
+      "id": "entbuendeln-ueber-null",
+      "name": "Null im Minuenden übersprungen",
+      "strang": "mathe",
+      "klasse_ab": 3,
+      "normal_bis": "offen",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "null-stelle-falsch",
+        "nur_bei": "null-im-minuenden",
+        "beschreibung": "Fehler nur bei einer 0 im Minuenden (403 − 127); an der Nullstelle 0 − 7 = 0 oder 7. Ziffern je Stelle."
+      },
+      "themen": [
+        "entbuendeln-ueber-null",
+        "zweifach-entbuendeln"
+      ],
+      "kontrast": [
+        "entbuendeln-zehner",
+        "entbuendeln-hunderter"
+      ],
+      "uebung": [
+        "hunderter-buendeln",
+        "null-platzhalter-bis-1000",
+        "entbuendeln-hunderter"
+      ],
+      "probe": {
+        "beispiele": [
+          "minus:403-127",
+          "minus:702-345",
+          "minus:500-268",
+          "minus:604-219"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "minus-entbuendeln",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "An dieser Stelle ist nichts. Hol dir erst einen Hunderter.",
+      "eltern": {
+        "beschreibung": "Bei schriftlichen Minusaufgaben mit einer Null in der oberen Zahl kommt Ihr Kind öfter durcheinander. Die App übt gerade, wie man einen Hunderter in Zehner und Einer tauscht.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Lüken, Jensen & Gasteiger",
+        "DZLM (Sekundärquelle)"
+      ]
+    },
+    {
+      "id": "null-regel-vertauscht",
+      "name": "Null wie Eins behandelt",
+      "strang": "mathe",
+      "klasse_ab": 1,
+      "normal_bis": "nach-einfuehrung",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "null-regel-vertauscht",
+        "nur_bei": "operand-null",
+        "beschreibung": "Bei Aufgaben mit 0 ist die Antwort 0 oder der andere Operand, aber nach der falschen Regel (5 + 0 = 0, 3 · 0 = 3, 0 · 7 = 7)."
+      },
+      "themen": [
+        "plus-0-und-1",
+        "minus-0-1-alles-weg",
+        "mal-eins-mal-null",
+        "schriftlich-mal-null"
+      ],
+      "kontrast": [
+        "plus-bis-10-gemischt",
+        "kernaufgaben-einmaleins"
+      ],
+      "uebung": [
+        "die-null",
+        "mal-eins-mal-null",
+        "punktefeld-reihen-spalten"
+      ],
+      "probe": {
+        "beispiele": [
+          "plus:3+0",
+          "mal:3*0",
+          "mal:0*7",
+          "plus:0+6",
+          "minus:5-0",
+          "mal:1*8"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "null-und-eins",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Plus nichts: Es kommt nichts dazu. Mal nichts: Keine Reihe, also nichts.",
+      "eltern": {
+        "beschreibung": "Bei Aufgaben mit der Null verwechselt Ihr Kind manchmal, was bei Plus und was bei Mal passiert. Die App übt gerade mit Bildern, was die Null bei jeder Rechenart bedeutet.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "nicht eigens belegt, abgeleitet [A]"
+      ]
+    },
+    {
+      "id": "gleichheitszeichen-ergibt",
+      "name": "Gleichheitszeichen als „ergibt“",
+      "strang": "mathe",
+      "klasse_ab": 1,
+      "normal_bis": "offen",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "gleich-als-ergibt",
+        "nur_bei": "rechnung-auf-beiden-seiten",
+        "beschreibung": "Bei 3 + 4 = _ + 5 ist die Antwort 7 (Summe links) oder 12 (Summe aller Zahlen). Hält oft über die Grundschule hinaus an."
+      },
+      "themen": [
+        "lueckenaufgaben-bis-10",
+        "rechendreieck-bis-10",
+        "waage-raetsel",
+        "terme-vergleichen"
+      ],
+      "kontrast": [
+        "plus-bis-10-gemischt"
+      ],
+      "uebung": [
+        "gleichheitszeichen-gleich-viel",
+        "waage-raetsel",
+        "aufgabenfamilie-bis-10"
+      ],
+      "probe": {
+        "beispiele": [
+          "gleich:_=3+4",
+          "gleich:3+4=_+5",
+          "gleich:6+2=_+3",
+          "gleich:_+4=5+3"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "gleichheit",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Links und rechts muss gleich viel sein, wie bei der Waage.",
+      "eltern": {
+        "beschreibung": "Ihr Kind liest das Gleichheitszeichen oft als „das Ergebnis kommt“. Bei Aufgaben mit Rechnungen auf beiden Seiten führt das zu falschen Antworten. Die App übt gerade mit der Waage, dass beide Seiten gleich viel sind.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "McNeil & Chesney 2014"
+      ]
+    },
+    {
+      "id": "einmaleins-nachbar",
+      "name": "Einmaleins-Nachbar abgerufen",
+      "strang": "mathe",
+      "klasse_ab": 2,
+      "normal_bis": "immer",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "einmaleins-nachbar",
+        "nur_bei": "kein-kernfaktor",
+        "beschreibung": "Antwort ist das Ergebnis einer Nachbaraufgabe: a · (b ± 1) oder (a ± 1) · b (6 · 7 = 48). Kommt auch bei Erwachsenen vor."
+      },
+      "themen": [
+        "einmaleins-gemischt",
+        "sechserreihe",
+        "siebenerreihe",
+        "achterreihe",
+        "neunerreihe",
+        "einmaleins-sicher"
+      ],
+      "kontrast": [
+        "zweierreihe",
+        "fuenferreihe",
+        "zehnerreihe"
+      ],
+      "uebung": [
+        "kernaufgaben-einmaleins",
+        "nachbaraufgabe-mal",
+        "verdoppeln-beim-mal",
+        "quadrataufgaben"
+      ],
+      "probe": {
+        "beispiele": [
+          "mal:6*7",
+          "mal:6*8",
+          "mal:7*8",
+          "mal:8*9",
+          "mal:7*7",
+          "mal:9*6"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "einmaleins-abruf",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Nimm eine Aufgabe, die du sicher weißt, und geh von dort einen Schritt.",
+      "eltern": {
+        "beschreibung": "Bei schweren Einmaleinsaufgaben nennt Ihr Kind manchmal das Ergebnis der Nachbaraufgabe. Das ist eine sehr verbreitete Verwechslung. Die App übt gerade, von sicheren Kernaufgaben aus zu rechnen.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Frontiers in Psychology 2015"
+      ]
+    },
+    {
+      "id": "einmaleins-hochzaehlen",
+      "name": "Reihe hochgesagt statt abgerufen",
+      "strang": "mathe",
+      "klasse_ab": 2,
+      "normal_bis": "3-anfang",
+      "eingabe": [
+        "ziffern",
+        "zeit"
+      ],
+      "signatur": {
+        "art": "zeit",
+        "regel": "zeit-steigung-zweiter-faktor",
+        "nur_bei": "einmaleins-reihe",
+        "beschreibung": "Lösezeit steigt mit dem zweiten Faktor, relativ zur eigenen Basisgeschwindigkeit; Fehler liegen genau einen Reihenschritt daneben."
+      },
+      "themen": [
+        "einmaleins-gemischt",
+        "einmaleins-sicher"
+      ],
+      "kontrast": [
+        "kernaufgaben-einmaleins"
+      ],
+      "uebung": [
+        "kernaufgaben-einmaleins",
+        "nachbaraufgabe-mal",
+        "verdoppeln-beim-mal"
+      ],
+      "probe": {
+        "beispiele": [
+          "mal:7*8",
+          "mal:7*2",
+          "mal:6*9",
+          "mal:6*2",
+          "mal:8*7",
+          "mal:4*9"
+        ],
+        "min": 6,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "einmaleins-abruf",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Von der Kernaufgabe aus geht es schneller.",
+      "eltern": {
+        "beschreibung": "Ihr Kind sagt beim Einmaleins die Reihe oft noch von vorn auf, statt das Ergebnis abzurufen. Die App übt gerade Kernaufgaben und Nachbaraufgaben, damit Ihr Kind abkürzen kann.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "abgeleitet [A]"
+      ]
+    },
+    {
+      "id": "quotient-null-vergessen",
+      "name": "Null im Ergebnis vergessen",
+      "strang": "mathe",
+      "klasse_ab": 4,
+      "normal_bis": "offen",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "quotient-ohne-null",
+        "nur_bei": "innere-null-im-quotienten",
+        "beschreibung": "Antwort ist das Ziel ohne die innere Null (618 : 6 = 13 statt 103)."
+      },
+      "themen": [
+        "schriftlich-geteilt-null-ergebnis"
+      ],
+      "kontrast": [
+        "schriftlich-geteilt-ohne-rest"
+      ],
+      "uebung": [
+        "halbschriftlich-geteilt",
+        "probe-teilen",
+        "null-in-grossen-zahlen"
+      ],
+      "probe": {
+        "beispiele": [
+          "geteilt:618:6",
+          "geteilt:824:4",
+          "geteilt:915:3",
+          "geteilt:707:7"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "schriftlich-teilen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Passt der Teiler nicht hinein? Dann bleibt die Stelle im Ergebnis trotzdem nicht leer.",
+      "eltern": {
+        "beschreibung": "Beim schriftlichen Teilen lässt Ihr Kind manchmal eine Null im Ergebnis weg. Die App übt gerade das halbschriftliche Teilen und die Probe mit Mal.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "abgeleitet [A]"
+      ]
+    },
+    {
+      "id": "lineal-ab-eins",
+      "name": "Lineal bei 1 statt 0",
+      "strang": "mathe",
+      "klasse_ab": 1,
+      "normal_bis": "4-ende",
+      "eingabe": [
+        "auswahl",
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "lineal-endmarke",
+        "nur_bei": "lineal-start-nicht-null",
+        "beschreibung": "Bei verschobenem Lineal ist die Antwort die Endmarke oder die Länge ± 1."
+      },
+      "themen": [
+        "messen-mit-lineal",
+        "meter-zentimeter"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "laenger-kuerzer",
+        "messen-mit-lineal"
+      ],
+      "probe": {
+        "beispiele": [
+          "lineal:2-7",
+          "lineal:3-9",
+          "lineal:1-6",
+          "lineal:4-8"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "messen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Zähl die Abstände, nicht die Striche.",
+      "eltern": {
+        "beschreibung": "Beim Messen mit dem Lineal liest Ihr Kind manchmal einfach die Zahl am Ende ab, auch wenn der Gegenstand nicht bei 0 beginnt. Das kommt in der ganzen Grundschule häufig vor. Die App übt gerade, die Zentimeter-Abstände zu zählen.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "NZCER"
+      ]
+    },
+    {
+      "id": "uhr-zeiger-vertauscht",
+      "name": "Stunden- und Minutenzeiger vertauscht",
+      "strang": "mathe",
+      "klasse_ab": 2,
+      "normal_bis": "3-ende",
+      "eingabe": [
+        "auswahl",
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "zeiger-vertauscht",
+        "nur_bei": "zeiger-unterscheidbar",
+        "beschreibung": "Stunden- und Minutenzeiger werden vertauscht (3:45 als 9:15) oder bei mehr als 30 Minuten wird die Stunde um 1 zu hoch abgelesen. „viertel acht“ (Bayern) ist kein Fehler."
+      },
+      "themen": [
+        "uhr-halbe-stunde",
+        "uhr-viertel",
+        "uhr-fuenf-minuten",
+        "uhr-minutengenau"
+      ],
+      "kontrast": [
+        "volle-stunde"
+      ],
+      "uebung": [
+        "volle-stunde",
+        "stunde-und-minute"
+      ],
+      "probe": {
+        "beispiele": [
+          "uhr:2:50",
+          "uhr:9:15",
+          "uhr:3:45",
+          "uhr:6:40"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "uhrzeit",
+      "dialekt": "BY",
+      "nur_typ": null,
+      "kind_hinweis": "Der kurze Zeiger zeigt die Stunde.",
+      "eltern": {
+        "beschreibung": "Beim Ablesen der Uhr vertauscht Ihr Kind manchmal den kurzen und den langen Zeiger. Die App übt gerade, zuerst den kurzen Zeiger für die Stunde zu lesen.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "nur Ratgeberliteratur",
+        "Signatur abgeleitet [A]"
+      ]
+    },
+    {
+      "id": "signalwort-falle",
+      "name": "Signalwort statt Situation",
+      "strang": "mathe",
+      "klasse_ab": 2,
+      "normal_bis": "offen",
+      "eingabe": [
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "signalwort-rechenart",
+        "nur_bei": "inkonsistent-oder-kapitaen",
+        "beschreibung": "Inkonsistent formulierte Aufgaben („3 mehr als“, gesucht ist die kleinere Zahl) falsch, konsistente richtig; Kapitänsaufgaben werden mit einer Zahl beantwortet statt mit „geht nicht“."
+      },
+      "themen": [
+        "signalwoerter-falle",
+        "kapitaensaufgabe-erkennen",
+        "unwichtige-zahl-erkennen"
+      ],
+      "kontrast": [
+        "sachaufgabe-frage-rechnung-antwort"
+      ],
+      "uebung": [
+        "sachaufgabe-skizze",
+        "rechnung-zu-bild",
+        "passende-frage-waehlen",
+        "fehlende-angabe-finden"
+      ],
+      "probe": {
+        "beispiele": [
+          "sach:mehr-als-kleinere-gesucht",
+          "sach:weniger-als-groessere-gesucht",
+          "sach:kapitaen-alter"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "sachaufgaben",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Mal es dir auf: Wer hat mehr?",
+      "eltern": {
+        "beschreibung": "Bei Sachaufgaben richtet sich Ihr Kind oft nach einzelnen Wörtern wie „mehr“ statt nach der Geschichte. Die App übt gerade, Aufgaben erst zu skizzieren und dann zu rechnen.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "DZLM (Sekundärquelle)",
+        "Signalwort abgeleitet [A]"
+      ]
+    },
+    {
+      "id": "flaeche-umfang-verwechselt",
+      "name": "Fläche und Umfang vertauscht",
+      "strang": "geometrie",
+      "klasse_ab": 3,
+      "normal_bis": "offen",
+      "eingabe": [
+        "ziffern"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "anderer-wert-rechteck",
+        "nur_bei": "flaeche-ungleich-umfang",
+        "beschreibung": "Antwort ist der jeweils andere Wert am selben Rechteck (3 × 5: Fläche 15, Umfang 16); nur Rechtecke mit verschiedenen Werten sind Gelegenheiten."
+      },
+      "themen": [
+        "flaeche-oder-umfang",
+        "umfang-bestimmen",
+        "flaecheninhalt-kaestchen"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "flaechen-vergleichen",
+        "rand-vergleichen",
+        "flaechen-auslegen"
+      ],
+      "probe": {
+        "beispiele": [
+          "rechteck:3x5:flaeche",
+          "rechteck:3x5:umfang",
+          "rechteck:2x6:umfang",
+          "rechteck:4x5:flaeche"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "flaeche-umfang",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Fläche: Kästchen innen. Umfang: rundherum am Rand.",
+      "eltern": {
+        "beschreibung": "Bei Rechtecken verwechselt Ihr Kind manchmal Fläche und Umfang. Die App übt gerade mit Kästchen und Rand, was jeweils gemessen wird.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Lemberger",
+        "QUA-LiS NRW"
+      ]
+    },
+    {
+      "id": "form-nach-lage",
+      "name": "Gedrehte Form nicht erkannt",
+      "strang": "geometrie",
+      "klasse_ab": 1,
+      "normal_bis": "offen",
+      "eingabe": [
+        "auswahl",
+        "ziehen"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "form-nach-lage",
+        "nur_bei": "form-gedreht",
+        "beschreibung": "Ein gedrehtes Quadrat wird als „kein Quadrat“ einsortiert, ein aufrechtes richtig. Häufig."
+      },
+      "themen": [
+        "quadrat-und-rechteck",
+        "formen-sortieren"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "ecken-und-seiten-zaehlen",
+        "quadrat-und-rechteck"
+      ],
+      "probe": {
+        "beispiele": [
+          "form:quadrat-45",
+          "form:quadrat-30",
+          "form:rechteck-gedreht",
+          "form:dreieck-kopf"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "formen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Zähl die Ecken und vergleich die Seiten.",
+      "eltern": {
+        "beschreibung": "Ihr Kind erkennt eine Form manchmal nicht, wenn sie gedreht ist. Das ist häufig. Die App übt gerade, Formen an Ecken und Seiten zu erkennen.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "QUA-LiS NRW"
+      ]
+    },
+    {
+      "id": "spiegelschrift",
+      "name": "Zeichen gespiegelt geschrieben",
+      "strang": "schreiben",
+      "klasse_ab": 0,
+      "normal_bis": "1-ende",
+      "eingabe": [
+        "stift"
+      ],
+      "signatur": {
+        "art": "strich",
+        "regel": "strich-gespiegelt",
+        "nur_bei": "aus-dem-gedaechtnis",
+        "beschreibung": "Strichverlauf passt zur gespiegelten Vorlage, vor allem bei 3, 7, 9, J, Z, s, z, d; nur beim Schreiben aus dem Gedächtnis gewertet, nur mit Strichaufzeichnung. Spätestens Ende Klasse 2 sollte es selten sein."
+      },
+      "themen": [
+        "spiegelziffern",
+        "ziffern-schreiben-rund",
+        "ziffern-schreiben-bogen",
+        "druck-klein-j",
+        "druck-klein-s",
+        "druck-klein-x-k-y-z",
+        "druck-gross-u-j",
+        "druck-gross-schraeg"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "schreibrichtung-zeile",
+        "spiegelziffern",
+        "spiegelbuchstaben-b-d-p-q",
+        "buchstabenhaus"
+      ],
+      "probe": {
+        "beispiele": [
+          "zeichen:3",
+          "zeichen:7",
+          "zeichen:9",
+          "zeichen:J",
+          "zeichen:Z",
+          "zeichen:s"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "schreibrichtung",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Schau, wo das Zeichen anfängt, und schreib es dort weiter.",
+      "eltern": {
+        "beschreibung": "Ihr Kind schreibt einzelne Ziffern oder Buchstaben manchmal spiegelverkehrt, wenn es sie aus dem Gedächtnis schreibt. Das ist bis in die erste Klasse sehr verbreitet. Die App übt gerade die Schreibrichtung mit Startpunkt und Pfeil.",
+        "stufe2": {
+          "nach_thema": "spiegelziffern",
+          "wochen": 8,
+          "mit": []
+        }
+      },
+      "parameter": {
+        "stufe2_zusatz": "oder auch beim Abschreiben gespiegelt; nie als Hinweis auf Lese-Rechtschreib-Schwierigkeiten"
+      },
+      "evidenz": "Q",
+      "quellen": [
+        "Fischer & Luxembourger 2018",
+        "„normal bis“ Fachpraxis [F]"
+      ]
+    },
+    {
+      "id": "strichfolge-abweichend",
+      "name": "Startpunkt oder Strichrichtung anders",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "2-ende",
+      "eingabe": [
+        "stift"
+      ],
+      "signatur": {
+        "art": "strich",
+        "regel": "strichfolge-abweichend",
+        "nur_bei": "rundform",
+        "beschreibung": "Strichfolge weicht von der Vorlage ab: o im Uhrzeigersinn, 8 aus zwei Kreisen, Start unten."
+      },
+      "themen": [
+        "druck-klein-o",
+        "druck-klein-a-d",
+        "ziffern-schreiben-rund",
+        "schwung-kreis-linksherum"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "druck-klein-o",
+        "druck-klein-a-d",
+        "ziffern-schreiben-rund",
+        "schwung-kreis-linksherum"
+      ],
+      "probe": {
+        "beispiele": [
+          "zeichen:o",
+          "zeichen:a",
+          "zeichen:8",
+          "zeichen:d"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "schreibrichtung",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Fang am Punkt an und folge dem Pfeil.",
+      "eltern": {
+        "beschreibung": "Ihr Kind beginnt runde Buchstaben und Ziffern manchmal an einer anderen Stelle oder schreibt sie in der Gegenrichtung. Die App übt gerade das Nachspuren mit Startpunkt und Pfeil.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "Fachpraxis [F]",
+        "abgeleitet [A]",
+        "keine Studie gefunden"
+      ]
+    },
+    {
+      "id": "b-d-lesen",
+      "name": "b und d beim Lesen vertauscht",
+      "strang": "lesen",
+      "klasse_ab": 1,
+      "normal_bis": "2-ende",
+      "eingabe": [
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "distraktor-b-d",
+        "nur_bei": "b-d-distraktor",
+        "beschreibung": "Das Kind wählt zum Bild das Wort mit vertauschtem b/d häufiger als andere Distraktoren (Bein → dein)."
+      },
+      "themen": [
+        "b-d-p-unterscheiden",
+        "laut-b",
+        "laut-d",
+        "lesen-wort-zum-bild"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "laut-b",
+        "laut-d",
+        "laut-p",
+        "anlaut-stopplaut",
+        "spiegelbuchstaben-b-d-p-q"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Bein",
+          "wort:Dach",
+          "wort:Bad",
+          "wort:Dose"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "b-d-p",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Beim b kommt erst der Strich, dann der Bauch.",
+      "eltern": {
+        "beschreibung": "Beim Lesen verwechselt Ihr Kind manchmal b und d. Das ist im ersten Lesejahr häufig. Die App übt gerade Laut und Form der beiden Buchstaben getrennt und dann gemischt.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Fischer 2022",
+        "OLFA"
+      ]
+    },
+    {
+      "id": "wortgrenzen-fehlen",
+      "name": "Wörter zusammengeschrieben",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "1-ende",
+      "eingabe": [
+        "tastatur"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "wortgrenze-fehlt",
+        "nur_bei": "freier-satz",
+        "beschreibung": "Weniger Leerzeichen als Wortgrenzen, typisch Artikel + Nomen und Präposition + Wort („amsonntag“)."
+      },
+      "themen": [
+        "wortabstand",
+        "punkt-am-satzende",
+        "satzanfang-gross"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "woerter-im-satz-zaehlen",
+        "buchstabe-silbe-wort-satz",
+        "satz-oder-kein-satz",
+        "wortabstand"
+      ],
+      "probe": {
+        "beispiele": [
+          "satz:Am Sonntag spielen wir.",
+          "satz:Der Hund schläft im Korb.",
+          "satz:Im Garten ist es warm."
+        ],
+        "min": 2,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": "wort-zerrissen",
+      "familie": "wortgrenzen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Wie viele Wörter hat der Satz? Lass nach jedem Platz.",
+      "eltern": {
+        "beschreibung": "Ihr Kind schreibt kurze Wörter wie „am“ oder „der“ manchmal mit dem nächsten Wort zusammen. Am Anfang des Schreibens ist das üblich. Die App übt gerade, Wörter im Satz zu zählen und Abstand zu lassen.",
+        "stufe2": {
+          "nach_thema": "wortabstand",
+          "wochen": 8,
+          "mit": [
+            "laute-ausgelassen",
+            "laute-vertauscht",
+            "endung-ausgelassen"
+          ]
+        }
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "Fachpraxis [F]",
+        "abgeleitet [A]",
+        "Forschungslücke"
+      ]
+    },
+    {
+      "id": "wort-zerrissen",
+      "name": "Wort in Teile getrennt",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "2-ende",
+      "eingabe": [
+        "tastatur"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "leerzeichen-im-wort",
+        "nur_bei": "mehrsilbiges-wort",
+        "beschreibung": "Leerzeichen innerhalb eines Zielworts („gra ben“)."
+      },
+      "themen": [
+        "wortabstand",
+        "endung-en",
+        "vorsilben-ver-vor"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "silben-zusammenhoeren",
+        "lesen-lange-woerter",
+        "buchstabe-silbe-wort-satz"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Graben",
+          "wort:Tasche",
+          "wort:verlieren",
+          "wort:Wolke"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": "wortgrenzen-fehlen",
+      "familie": "wortgrenzen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Das ist ein Wort. Schreib es ohne Lücke.",
+      "eltern": {
+        "beschreibung": "Ihr Kind trennt längere Wörter beim Schreiben manchmal mit einer Lücke in Teile. Die App übt gerade, Silben zu einem ganzen Wort zusammenzuhören.",
+        "stufe2": {
+          "nach_thema": "wortabstand",
+          "wochen": 8,
+          "mit": []
+        }
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA Nr. 41"
+      ]
+    },
+    {
+      "id": "laute-ausgelassen",
+      "name": "Laut in der Häufung fehlt",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "1-ende",
+      "eingabe": [
+        "tastatur",
+        "kacheln-plus"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "auslassung-in-haeufung",
+        "nur_bei": "konsonantenhaeufung",
+        "beschreibung": "Auslassung an zweiter Stelle einer Konsonantenhäufung (schr, fr, st, -nk); bei Kacheln nur mit Zusatzbuchstaben erkennbar."
+      },
+      "themen": [
+        "laute-am-wortanfang",
+        "laute-in-mitte-und-ende",
+        "lesen-zwei-mitlaute-anfang",
+        "lesen-mitlauthaeufung"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "laute-zaehlen",
+        "laut-in-der-mitte",
+        "laute-verschmelzen-hoeren",
+        "silben-schwingen-beim-schreiben",
+        "laut-tauschen"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Frosch",
+          "wort:Stern",
+          "wort:schreiben",
+          "wort:Bank",
+          "wort:Brot",
+          "wort:Kranz",
+          "wort:trinken",
+          "wort:Glas"
+        ],
+        "min": 15,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "lautfolge",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Sprich langsam mit: Was hörst du nach dem ersten Laut?",
+      "eltern": {
+        "beschreibung": "Ihr Kind lässt beim Schreiben manchmal einen Laut weg, wenn mehrere Mitlaute aufeinanderfolgen, zum Beispiel „Fosch“ statt „Frosch“. Das ist im ersten Schuljahr häufig. Die App übt gerade, Wörter langsam mitzusprechen und die Laute zu zählen.",
+        "stufe2": {
+          "nach_thema": "laute-in-mitte-und-ende",
+          "wochen": 8,
+          "mit": []
+        }
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA",
+        "Phonics-Training g = 0,68 (Sekundärquelle)"
+      ]
+    },
+    {
+      "id": "laute-vertauscht",
+      "name": "Laute in falscher Reihenfolge",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "1-ende",
+      "eingabe": [
+        "tastatur",
+        "kacheln-plus"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "nachbarn-vertauscht",
+        "nur_bei": "konsonantenhaeufung",
+        "beschreibung": "Benachbarte Grapheme vertauscht („Fsich“); bei Kacheln richtige Menge, falsche Ordnung."
+      },
+      "themen": [
+        "laute-in-mitte-und-ende",
+        "lesen-mitlauthaeufung"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "laute-zaehlen",
+        "laut-in-der-mitte",
+        "laute-verschmelzen-hoeren"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Fisch",
+          "wort:Kerze",
+          "wort:Garten",
+          "wort:Brief",
+          "wort:Wurst"
+        ],
+        "min": 10,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "lautfolge",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Sprich langsam mit und schreib die Laute in dieser Reihenfolge.",
+      "eltern": {
+        "beschreibung": "Ihr Kind schreibt die Buchstaben eines Wortes manchmal in einer anderen Reihenfolge. Die App übt gerade, die Laute eines Wortes der Reihe nach zu hören.",
+        "stufe2": {
+          "nach_thema": "laute-in-mitte-und-ende",
+          "wochen": 8,
+          "mit": []
+        }
+      },
+      "parameter": null,
+      "evidenz": "A",
+      "quellen": [
+        "Fachpraxis [F]",
+        "abgeleitet [A]"
+      ]
+    },
+    {
+      "id": "endung-ausgelassen",
+      "name": "Endung oder Silbe fehlt",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "1-ende",
+      "eingabe": [
+        "tastatur",
+        "kacheln-plus"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "endung-fehlt",
+        "nur_bei": "endung-en-er-el",
+        "beschreibung": "Fehlende Teilfolge -en, -er oder -el am Wortende; bei Kacheln nur mit Zusatzbuchstaben erkennbar."
+      },
+      "themen": [
+        "endung-en",
+        "endung-er",
+        "endung-el",
+        "lesen-endungen-en-er"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "silben-klatschen",
+        "endlaut-hoeren",
+        "silben-schwingen-beim-schreiben"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Kinder",
+          "wort:laufen",
+          "wort:Esel",
+          "wort:Butter",
+          "wort:Nudel",
+          "wort:malen"
+        ],
+        "min": 6,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "lautfolge",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Schwing die Silben mit: Was hörst du am Ende?",
+      "eltern": {
+        "beschreibung": "Ihr Kind lässt beim Schreiben manchmal die Endung eines Wortes weg, etwa bei „-en“ oder „-er“. Die App übt gerade, Silben zu schwingen und auf das Wortende zu hören.",
+        "stufe2": {
+          "nach_thema": "endung-en",
+          "wochen": 8,
+          "mit": []
+        }
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA"
+      ]
+    },
+    {
+      "id": "aehnliche-laute",
+      "name": "Ähnlich klingende Laute verwechselt",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "1-ende",
+      "eingabe": [
+        "tastatur",
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "laut-ersetzt",
+        "nur_bei": "an-und-inlaut",
+        "beschreibung": "Ersetzung d↔t, g↔k, b↔p, m↔n, f↔w im An- und Inlaut, nicht im Auslaut; dazu ein Hörspiel mit Minimalpaaren (die Stimme spricht Wörter, das Kind wählt). Im Anlaut zuerst als Dialekt werten."
+      },
+      "themen": [
+        "laut-d",
+        "laut-t",
+        "laut-b",
+        "laut-p",
+        "laut-g",
+        "laut-k",
+        "laut-n",
+        "laut-m"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "laut-d",
+        "laut-t",
+        "laut-b",
+        "laut-p",
+        "laut-g",
+        "laut-k",
+        "laut-n",
+        "laut-m",
+        "anlaut-stopplaut",
+        "laut-tauschen"
+      ],
+      "probe": {
+        "beispiele": [
+          "hoeren:Tante/Dante",
+          "hoeren:Kasse/Gasse",
+          "hoeren:Bein/Pein",
+          "wort:Garten",
+          "wort:Puppe",
+          "wort:Nase",
+          "wort:Dose",
+          "wort:Tasse"
+        ],
+        "min": 10,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "lautunterscheidung",
+      "dialekt": "BY",
+      "nur_typ": null,
+      "kind_hinweis": "Halt die Hand vor den Mund: Spürst du Luft?",
+      "eltern": {
+        "beschreibung": "Ihr Kind verwechselt beim Schreiben manchmal ähnlich klingende Laute wie d und t oder g und k. In Bayern ist das wegen der Aussprache häufig und länger üblich. Die App übt gerade, die Laute genau zu hören und zu unterscheiden.",
+        "stufe2": {
+          "nach_thema": "anlaut-stopplaut",
+          "wochen": 8,
+          "mit": []
+        }
+      },
+      "parameter": {
+        "stufe2_zusatz": "nur wenn auch im Hörspiel mit Minimalpaaren viele Fehler auftreten; Schreibfehler im Anlaut zählen als Dialekt nicht"
+      },
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA",
+        "Dialekt Fachpraxis [F]"
+      ]
+    },
+    {
+      "id": "hochdeutsch-hoeren",
+      "name": "Dialektlaute geschrieben",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "3-ende",
+      "eingabe": [
+        "tastatur"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "dialekt-vokal",
+        "nur_bei": "ue-oe-eu",
+        "beschreibung": "ü→i, ö→e, eu→ei/ai gehäuft, ü→u dagegen selten; „Kiache“-Diphthonge."
+      },
+      "themen": [
+        "laut-ue",
+        "laut-oe",
+        "laut-eu",
+        "eu-schreiben"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "laut-ue",
+        "laut-oe",
+        "laut-eu",
+        "ableiten-aeu-von-au"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Tür",
+          "wort:Möhre",
+          "wort:heute",
+          "wort:müde",
+          "wort:schön",
+          "wort:Feuer"
+        ],
+        "min": 6,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "vokale-ue-oe-eu",
+      "dialekt": "BY",
+      "nur_typ": null,
+      "kind_hinweis": "Sprich es wie im Hörbuch: Spitz die Lippen beim ü.",
+      "eltern": {
+        "beschreibung": "Ihr Kind schreibt manche Laute so, wie sie im Dialekt klingen, zum Beispiel „i“ statt „ü“. Das ist in Bayern üblich und kein Grund zur Sorge. Die App übt gerade die Laute ü, ö und eu.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "F",
+      "quellen": [
+        "Fachpraxis [F]",
+        "Einfluss klein (graue Literatur) [Q]"
+      ]
+    },
+    {
+      "id": "lautgetreu-statt-merkwort",
+      "name": "Merkwort lautgetreu geschrieben",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "1-ende",
+      "eingabe": [
+        "tastatur"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "phonetisch-plausibel",
+        "nur_bei": "merkwort-thema",
+        "beschreibung": "Antwort ist phonetisch plausibel, aber nicht orthografisch („Fater“); nur in Themen mit typ „merkwort“ gewertet. In Klasse 1 erwünscht, ab Klasse 2 werden Merkwörter gelernt."
+      },
+      "themen": [
+        "merkwoerter-v",
+        "merkwoerter-dehnungs-h",
+        "lernwoerter-kleine-woerter",
+        "merkwoerter-aa-ee-oo",
+        "merkwoerter-langes-i-ohne-ie"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "planvoll-abschreiben",
+        "fehler-finden-durch-vergleich",
+        "merkwoerter-v",
+        "merkwoerter-dehnungs-h",
+        "lernwoerter-kleine-woerter",
+        "merkwoerter-aa-ee-oo",
+        "merkwoerter-langes-i-ohne-ie"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Vater",
+          "wort:Vogel",
+          "wort:fahren",
+          "wort:Boot",
+          "wort:Tiger",
+          "wort:und"
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "merkwoerter",
+      "dialekt": null,
+      "nur_typ": "merkwort",
+      "kind_hinweis": "Das ist ein Merkwort. Schau es dir an, deck es zu und schreib es.",
+      "eltern": {
+        "beschreibung": "Ihr Kind schreibt Merkwörter noch so, wie man sie hört, zum Beispiel „Fater“. Am Anfang ist das ein gutes Zeichen, weil es genau hinhört. Die App übt gerade, Merkwörter anzusehen, abzudecken und aus dem Gedächtnis zu schreiben.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA Gruppe II",
+        "Cover-Copy-Compare"
+      ]
+    },
+    {
+      "id": "schaerfung-fehlt",
+      "name": "Verdopplung fehlt",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "3-ende",
+      "eingabe": [
+        "tastatur",
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "einzel-statt-doppel",
+        "nur_bei": "nach-kurzvokal",
+        "beschreibung": "Einzelgraphem statt Doppelgraphem nach kurzem Vokal („Sone“, „Kaze“, „Zuker“)."
+      },
+      "themen": [
+        "doppelt-ll-mm-nn",
+        "doppelt-tt-pp",
+        "doppelt-ss-ff",
+        "doppelt-rr",
+        "ck-statt-kk",
+        "tz-statt-zz",
+        "doppelt-bei-einsilbern",
+        "ck-tz-bei-einsilbern"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "lang-oder-kurz-hoeren",
+        "offene-geschlossene-silbe",
+        "einfach-oder-doppelt",
+        "verlaengern-doppelt"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Sonne",
+          "wort:Katze",
+          "wort:Zucker",
+          "wort:Teller",
+          "wort:Mutter",
+          "wort:Kasse",
+          "wort:Ball",
+          "wort:Herr"
+        ],
+        "min": 15,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": "schaerfung-uebergeneralisiert",
+      "familie": "schaerfung",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Ist der Laut davor kurz? Dann kommt der Mitlaut doppelt.",
+      "eltern": {
+        "beschreibung": "Ihr Kind schreibt nach kurzen Selbstlauten oft nur einen Mitlaut, zum Beispiel „Sone“ statt „Sonne“. Das wird bis in die dritte Klasse gelernt. Die App übt gerade, kurze und lange Selbstlaute zu unterscheiden.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA Nr. 42",
+        "Regeltraining g = 0,67 (Sekundärquelle)"
+      ]
+    },
+    {
+      "id": "schaerfung-uebergeneralisiert",
+      "name": "Verdopplung zu viel",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "2-ende",
+      "eingabe": [
+        "tastatur"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "doppel-ohne-grund",
+        "nur_bei": "nicht-fall-schaerfung",
+        "beschreibung": "Doppelkonsonant ohne Kurzvokal oder nach zwei Konsonanten („kallt“, „hatt“); immer im Verhältnis zu schaerfung-fehlt lesen. In Klasse 1–2 ein positives Zeichen."
+      },
+      "themen": [
+        "einfach-oder-doppelt",
+        "k-z-nach-mitlaut"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "k-z-nach-mitlaut",
+        "lang-oder-kurz-hoeren",
+        "offene-geschlossene-silbe"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:kalt",
+          "wort:Bank",
+          "wort:Hund",
+          "wort:Wolke",
+          "wort:Herz",
+          "wort:hat"
+        ],
+        "min": 6,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": "schaerfung-fehlt",
+      "familie": "schaerfung",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Hör genau: Folgt schon ein anderer Mitlaut? Dann wird nicht verdoppelt.",
+      "eltern": {
+        "beschreibung": "Ihr Kind verdoppelt Mitlaute manchmal auch dort, wo es nicht nötig ist. Das zeigt, dass es die Regel kennt und gerade noch ausprobiert, wo sie gilt. Die App übt gerade, wann verdoppelt wird und wann nicht.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA Nr. 43"
+      ]
+    },
+    {
+      "id": "ie-unsicher",
+      "name": "i und ie vertauscht",
+      "strang": "schreiben",
+      "klasse_ab": 2,
+      "normal_bis": "3-ende",
+      "eingabe": [
+        "tastatur",
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "i-ie-vertauscht",
+        "nur_bei": "i-laut",
+        "beschreibung": "i statt ie bei langem i oder ie bei kurzem i („Kiend“)."
+      },
+      "themen": [
+        "ie-bei-langem-i",
+        "i-oder-ie",
+        "merkwoerter-langes-i-ohne-ie"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "lang-oder-kurz-hoeren",
+        "lesen-lang-oder-kurz",
+        "ie-bei-langem-i"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Biene",
+          "wort:Kind",
+          "wort:Wiese",
+          "wort:Fisch",
+          "wort:spielen",
+          "wort:Wind"
+        ],
+        "min": 6,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "langes-i",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Klingt das i lang? Dann schreib ie.",
+      "eltern": {
+        "beschreibung": "Ihr Kind verwechselt beim Schreiben manchmal i und ie. Die App übt gerade, lange und kurze i-Laute zu hören.",
+        "stufe2": {
+          "nach_thema": "ie-bei-langem-i",
+          "wochen": 8,
+          "mit": [
+            "laute-ausgelassen",
+            "laute-vertauscht",
+            "endung-ausgelassen"
+          ]
+        }
+      },
+      "parameter": {
+        "stufe2_zusatz": "nur wenn ie bei kurzem i gehäuft auftritt"
+      },
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA-Fallbeispiel"
+      ]
+    },
+    {
+      "id": "dehnung-unsicher",
+      "name": "Dehnungszeichen fehlt oder zu viel",
+      "strang": "schreiben",
+      "klasse_ab": 2,
+      "normal_bis": "3-ende",
+      "eingabe": [
+        "tastatur"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "dehnung-abweichend",
+        "nur_bei": "langvokal",
+        "beschreibung": "Fehlendes Dehnungs-h oder fehlender Doppelvokal („faren“), h nach Langvokal ohne Grund („kahm“)."
+      },
+      "themen": [
+        "merkwoerter-dehnungs-h",
+        "silbentrennendes-h",
+        "merkwoerter-dehnungs-h-3",
+        "merkwoerter-aa-ee-oo"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "lang-oder-kurz-hoeren",
+        "silbentrennendes-h",
+        "planvoll-abschreiben"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:fahren",
+          "wort:Zahn",
+          "wort:Boot",
+          "wort:kam",
+          "wort:Tor",
+          "wort:gehen"
+        ],
+        "min": 6,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "dehnung",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Dieses Wort musst du dir merken. Schau es dir noch mal an.",
+      "eltern": {
+        "beschreibung": "Ihr Kind lässt das Dehnungs-h manchmal weg oder setzt es, wo es nicht hingehört. Die App übt gerade Wörter mit und ohne Dehnungszeichen.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA Nr. 44",
+        "Günther-Modell"
+      ]
+    },
+    {
+      "id": "ei-ie-vertauscht",
+      "name": "ei und ie vertauscht",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "2-ende",
+      "eingabe": [
+        "tastatur",
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "ei-ie-vertauscht",
+        "nur_bei": "ei-oder-ie",
+        "beschreibung": "ie und ei an derselben Stelle vertauscht (Biene/Beine)."
+      },
+      "themen": [
+        "laut-ei",
+        "laut-ie",
+        "ei-schreiben",
+        "ie-bei-langem-i"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "laut-ei",
+        "laut-ie",
+        "ei-schreiben"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Biene",
+          "wort:Beine",
+          "wort:Wiese",
+          "wort:weise",
+          "wort:Lied",
+          "wort:leid"
+        ],
+        "min": 6,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "ei-ie",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Sprich es: Hörst du ei oder ein langes i?",
+      "eltern": {
+        "beschreibung": "Ihr Kind vertauscht beim Schreiben manchmal „ei“ und „ie“. Die App übt gerade, die beiden Laute zu hören und zu unterscheiden.",
+        "stufe2": {
+          "nach_thema": "ei-schreiben",
+          "wochen": 8,
+          "mit": [
+            "laute-ausgelassen",
+            "laute-vertauscht",
+            "endung-ausgelassen"
+          ]
+        }
+      },
+      "parameter": null,
+      "evidenz": "F",
+      "quellen": [
+        "Fachpraxis [F]"
+      ]
+    },
+    {
+      "id": "auslautverhaertung",
+      "name": "Auslaut nach Gehör geschrieben",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "3-ende",
+      "eingabe": [
+        "tastatur",
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "auslaut-verhaertet",
+        "nur_bei": "auslaut-d-g-b",
+        "beschreibung": "Am Wortende t, k oder p statt d, g oder b, wenn das Zielwort auf d, g oder b endet („Hunt“); Nicht-Fälle (Hut) werden mitgeprüft."
+      },
+      "themen": [
+        "verlaengern-nomen-d-t",
+        "verlaengern-nomen-g-k",
+        "verlaengern-nomen-b-p",
+        "verlaengern-verben",
+        "verlaengern-adjektive",
+        "endung-ig-wie-ich"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "einzahl-mehrzahl-erkennen",
+        "mehrzahl-mit-e",
+        "verlaengern-nomen-d-t",
+        "verlaengern-nomen-g-k",
+        "verlaengern-nomen-b-p",
+        "verlaengern-doppelt",
+        "verlaengern-verben",
+        "verlaengern-adjektive"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Hund",
+          "wort:Zwerg",
+          "wort:Korb",
+          "wort:Hut",
+          "wort:Rad",
+          "wort:Berg",
+          "wort:gelb",
+          "wort:Brot"
+        ],
+        "min": 15,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "auslaut",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Verlängere das Wort: ein Hund, viele …?",
+      "eltern": {
+        "beschreibung": "Ihr Kind schreibt das Wortende so, wie es klingt, zum Beispiel „Hunt“ statt „Hund“. Das ist bis in die dritte Klasse häufig. Die App übt gerade, Wörter zu verlängern, um das Ende zu hören.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Morphemtraining g = 0,80 (Sekundärquelle)"
+      ]
+    },
+    {
+      "id": "ableitung-ae-aeu",
+      "name": "ä/äu nicht abgeleitet",
+      "strang": "schreiben",
+      "klasse_ab": 2,
+      "normal_bis": "4-ende",
+      "eingabe": [
+        "tastatur",
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "ableitung-fehlt",
+        "nur_bei": "verwandte-a-au-form",
+        "beschreibung": "e statt ä, eu statt äu bei Wörtern mit verwandter a- oder au-Form („Hende“); Merkwörter ohne a-Form werden mitgeprüft."
+      },
+      "themen": [
+        "ableiten-ae-von-a",
+        "ableiten-aeu-von-au",
+        "ableiten-ae-mehrzahl",
+        "ableiten-ae-wortfamilie",
+        "aeu-ableiten-vertiefen"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "ableiten-ae-wortfamilie",
+        "wortstamm-bleibt-gleich",
+        "wortstamm-lesen"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Hände",
+          "wort:Bäume",
+          "wort:Äpfel",
+          "wort:läuft",
+          "wort:Häuser",
+          "wort:kälter",
+          "wort:Bär",
+          "wort:Käse",
+          "wort:Mädchen"
+        ],
+        "min": 9,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "ableitung",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Gibt es ein verwandtes Wort mit a?",
+      "eltern": {
+        "beschreibung": "Ihr Kind schreibt bei Wörtern wie „Hände“ manchmal „e“ statt „ä“. Die App übt gerade, verwandte Wörter zu suchen, aus denen man die Schreibweise ableiten kann.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "Morphemtraining"
+      ]
+    },
+    {
+      "id": "nomen-klein",
+      "name": "Nomen kleingeschrieben",
+      "strang": "schreiben",
+      "klasse_ab": 2,
+      "normal_bis": "4-ende",
+      "eingabe": [
+        "tastatur"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "nomen-klein",
+        "nur_bei": "nomen-nach-thema",
+        "beschreibung": "Nomen am Wortanfang klein; nur gewertet, wenn das Thema behandelt ist."
+      },
+      "themen": [
+        "nomen-gross-artikelprobe",
+        "abstrakte-nomen-gross",
+        "nachsilben-ung-heit-keit-nis"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "nomen-proben",
+        "namenwoerter",
+        "der-die-das"
+      ],
+      "probe": {
+        "beispiele": [
+          "satz:Der Hund bellt laut.",
+          "satz:Die Freude ist groß.",
+          "satz:Wir spielen im Garten.",
+          "wort:Zeitung"
+        ],
+        "min": 6,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "grossschreibung",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Kannst du der, die oder das davorsetzen? Dann schreib groß.",
+      "eltern": {
+        "beschreibung": "Ihr Kind schreibt Nomen manchmal noch klein. Die Großschreibung wird bis in die vierte Klasse aufgebaut. Die App übt gerade die Artikelprobe.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "Q",
+      "quellen": [
+        "OLFA (zählt in Kl. 1–2 nicht)"
+      ]
+    },
+    {
+      "id": "satzzeichen-fehlen",
+      "name": "Satzschlusszeichen fehlt",
+      "strang": "schreiben",
+      "klasse_ab": 1,
+      "normal_bis": "3-ende",
+      "eingabe": [
+        "tastatur"
+      ],
+      "signatur": {
+        "art": "alignment",
+        "regel": "satzende-ohne-zeichen",
+        "nur_bei": "freier-satz",
+        "beschreibung": "Satzende ohne Punkt, Fragezeichen oder Ausrufezeichen."
+      },
+      "themen": [
+        "punkt-am-satzende",
+        "frage-und-ausrufezeichen"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "punkt-heisst-pause",
+        "satzarten",
+        "fragen-betont-lesen"
+      ],
+      "probe": {
+        "beispiele": [
+          "satz:Die Katze schläft.",
+          "satz:Kommst du mit?",
+          "satz:Wir gehen baden."
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "satzzeichen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Der Satz ist fertig. Was kommt ans Ende?",
+      "eltern": {
+        "beschreibung": "Ihr Kind lässt am Satzende manchmal den Punkt oder das Fragezeichen weg. Die App übt gerade, beim Lesen am Punkt eine Pause zu machen und Satzarten zu erkennen.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "F",
+      "quellen": [
+        "HSP-Lupenstellen [Q]",
+        "Fachpraxis [F]"
+      ]
+    },
+    {
+      "id": "anfang-raten",
+      "name": "Wort nach dem Anfang geraten",
+      "strang": "lesen",
+      "klasse_ab": 1,
+      "normal_bis": "1-ende",
+      "eingabe": [
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "distraktor-gleicher-anfang",
+        "nur_bei": "anfangs-distraktor",
+        "beschreibung": "Das Kind wählt Distraktoren mit gleichem Anfang und anderem Ende (Haus → Hase) häufiger als andere Distraktoren."
+      },
+      "themen": [
+        "lesen-wort-zum-bild",
+        "blitzwoerter-1",
+        "lesen-satz-zum-bild"
+      ],
+      "kontrast": [],
+      "uebung": [
+        "laute-verschmelzen-hoeren",
+        "erste-silben-lesen",
+        "lesen-offene-silben",
+        "quatschwoerter-lesen",
+        "genau-hinsehen-lesen"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Haus",
+          "wort:Tasse",
+          "wort:Mond",
+          "wort:Rose"
+        ],
+        "min": 4,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "genau-lesen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Lies das Wort bis zum Ende.",
+      "eltern": {
+        "beschreibung": "Ihr Kind liest manchmal nur den Anfang eines Wortes und rät den Rest. Die App übt gerade, Wörter Silbe für Silbe bis zum Ende zu lesen.",
+        "stufe2": {
+          "nach_thema": "lesen-offene-silben",
+          "wochen": 8,
+          "mit": []
+        }
+      },
+      "parameter": {
+        "stufe2_zusatz": "nur wenn das Lesen zugleich langsam ist"
+      },
+      "evidenz": "F",
+      "quellen": [
+        "Fachpraxis [F]",
+        "Phonics (Sekundärquelle) [Q]"
+      ]
+    },
+    {
+      "id": "plural-uebergeneralisiert",
+      "name": "Mehrzahl nach falschem Muster",
+      "strang": "grammatik",
+      "klasse_ab": 0,
+      "normal_bis": "0-ende",
+      "eingabe": [
+        "auswahl",
+        "tastatur"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "plural-anderes-muster",
+        "nur_bei": "plural-muster",
+        "beschreibung": "Endung der Antwort (-s, -n, -e, -er, Umlaut) passt zu einem anderen Pluralmuster („die Hunds“). Bei mehrsprachigen Kindern länger üblich."
+      },
+      "themen": [
+        "mehrzahl-mit-e",
+        "mehrzahl-mit-en",
+        "mehrzahl-mit-er",
+        "mehrzahl-mit-s",
+        "mehrzahl-umlaut-ohne-endung"
+      ],
+      "kontrast": [
+        "einzahl-mehrzahl-erkennen"
+      ],
+      "uebung": [
+        "mehrzahl-mit-e",
+        "mehrzahl-mit-en",
+        "mehrzahl-mit-er",
+        "mehrzahl-mit-s",
+        "mehrzahl-umlaut-ohne-endung",
+        "einzahl-mehrzahl-erkennen"
+      ],
+      "probe": {
+        "beispiele": [
+          "wort:Hunde",
+          "wort:Kinder",
+          "wort:Autos",
+          "wort:Blumen",
+          "wort:Vögel",
+          "wort:Äpfel",
+          "wort:Bilder",
+          "wort:Katzen",
+          "wort:Tische",
+          "wort:Omas"
+        ],
+        "min": 10,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "mehrzahl",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Ein Hund, viele …? Hör, wie es klingt.",
+      "eltern": {
+        "beschreibung": "Ihr Kind bildet die Mehrzahl manchmal nach einem anderen Muster, zum Beispiel „Hunds“. Das gehört zum Spracherwerb und dauert bei Kindern, die mehrere Sprachen lernen, oft länger. Die App übt gerade die verschiedenen Mehrzahlformen.",
+        "stufe2": {
+          "nach_thema": "mehrzahl-mit-e",
+          "wochen": 8,
+          "mit": [
+            "verbform-uebergeneralisiert"
+          ]
+        }
+      },
+      "parameter": {
+        "stufe2_zusatz": "nur zusammen mit anderen Auffälligkeiten beim Sprechen; bei mehrsprachigen Kindern nie allein"
+      },
+      "evidenz": "Q",
+      "quellen": [
+        "Behrens 2011",
+        "Zaretsky 2013"
+      ]
+    },
+    {
+      "id": "verbform-uebergeneralisiert",
+      "name": "Starkes Verb schwach gebildet",
+      "strang": "grammatik",
+      "klasse_ab": 0,
+      "normal_bis": "2-ende",
+      "eingabe": [
+        "auswahl"
+      ],
+      "signatur": {
+        "art": "antwort",
+        "regel": "verb-regelmaessig-gebildet",
+        "nur_bei": "starkes-verb",
+        "beschreibung": "Starkes Verb nach der regelmäßigen Form gebildet („ich gehte“, „du geht“), im Lückensatz mit Auswahl."
+      },
+      "themen": [
+        "verb-personalform",
+        "praeteritum-unregelmaessig"
+      ],
+      "kontrast": [
+        "praeteritum-regelmaessig"
+      ],
+      "uebung": [
+        "verb-personalform",
+        "personalpronomen",
+        "praeteritum-regelmaessig"
+      ],
+      "probe": {
+        "beispiele": [
+          "satz:Gestern ging ich nach Hause.",
+          "satz:Er sang ein Lied.",
+          "satz:Wir liefen schnell.",
+          "satz:Du gehst zur Schule."
+        ],
+        "min": 3,
+        "wieder_nach_tagen": [
+          7,
+          21
+        ]
+      },
+      "gegenstueck": null,
+      "familie": "verbformen",
+      "dialekt": null,
+      "nur_typ": null,
+      "kind_hinweis": "Hör dir den Satz an: Klingt das so?",
+      "eltern": {
+        "beschreibung": "Ihr Kind bildet unregelmäßige Verben manchmal nach der regelmäßigen Form, zum Beispiel „ich gehte“. Das ist im Spracherwerb üblich. Die App übt gerade Verbformen in kurzen Sätzen.",
+        "stufe2": "nie"
+      },
+      "parameter": null,
+      "evidenz": "F",
+      "quellen": [
+        "Fachpraxis [F]"
+      ]
     }
   ]
 }
