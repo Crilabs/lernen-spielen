@@ -562,6 +562,7 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
     modus,
     einfuehrungFaellig: modus === "thema" && !!plan?.einfuehrung && !eintragVorher?.e,
     einfuehrungGesehen() {
+      if (!themaId) return;
       const t = stand.themen[themaId] || (stand.themen[themaId] = {});
       t.e = uhr().heute;
       r.einfuehrungFaellig = false;

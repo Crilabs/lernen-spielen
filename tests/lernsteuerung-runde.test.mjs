@@ -119,6 +119,41 @@ test("runde: ende speichert vor dem Auflösen", async () => {
   await sofortSpeichern();
 });
 
+const mini = (id, voraus, zahl) => ({ id, name: id, sprich: id, strang: "mathe", voraussetzungen: voraus,
+  aufgaben: { art: "zerlegung", zahl }, stufen: ["material", "vorstellung", "kopf"], einfuehrung: { vorlage: "x.json" }, tempo: true, eltern: "" });
+const MINI = {
+  plan: { themen: [mini("t1", [], 5), mini("t2", ["t1"], 6)] },
+  spiele: { spiele: [
+    { id: "a", arten: [{ art: "zerlegung", zahlen: [5, 5], stufen: ["material", "vorstellung", "kopf"] }] },
+    { id: "b", arten: [{ art: "zerlegung", zahlen: [6, 6], stufen: ["material", "vorstellung", "kopf"] }] },
+  ] },
+};
+const setzeStand = (themen) => speicher.set("lernstand-lernplan", JSON.stringify({ version: 1, migriert: 1, verlauf: [], aufgaben: {}, themen }));
+const gekonnt = { z: "kann-ich", e: "2026-11-01", k: "2026-11-02" };
+
+test("runde: einfuehrungGesehen ohne Thema tut nichts", async () => {
+  setzeStand({ t1: gekonnt, t2: gekonnt });
+  const r = await runde("a", { ctx: MINI, uhr, rnd: lcg(3) });
+  assert.equal(r.thema, null);
+  r.einfuehrungGesehen();
+  await r.ende();
+  assert.deepEqual(Object.keys(stand().themen).sort(), ["t1", "t2"]);
+});
+
+test("runde: hinweisSpiel nennt anderes Spiel mit neuem Thema", async () => {
+  setzeStand({ t1: gekonnt });
+  const r = await runde("a", { ctx: MINI, uhr, rnd: lcg(3) });
+  assert.equal(r.modus, "wiederholung");
+  assert.deepEqual(await r.ende(), { hinweisSpiel: "b" });
+});
+
+test("runde: hinweisSpiel null ohne neues Thema im anderen Spiel", async () => {
+  setzeStand({ t1: gekonnt, t2: gekonnt });
+  const r = await runde("a", { ctx: MINI, uhr, rnd: lcg(3) });
+  assert.equal(r.modus, "wiederholung");
+  assert.deepEqual(await r.ende(), { hinweisSpiel: null });
+});
+
 test("luecken-Skript: Ausgabe enthält 'ohne Spiel: Mengen bis 5 auf einen Blick'", () => {
   const out = execFileSync(process.execPath, [new URL("../scripts/luecken.mjs", import.meta.url).pathname], { encoding: "utf8" });
   assert.match(out, /ohne Spiel: Mengen bis 5 auf einen Blick/);
