@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>Großbuchstaben-Zauberer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="schrift/schrift.css">
 <style>
 :root{--nacht:#3B2A6B;--paper:#FFF8FC;--bg:#D8F3FF;--lila:#B59CFF;--rosa:#FF8ACB;--mint:#7FE8C8;--sonne:#FFD95A}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}}
@@ -115,7 +114,9 @@ body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;co
 
 <script src="figuren/figuren.js"></script>
 <script src="zauber-saetze.js"></script>
-<script>
+<script type="module">
+import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
+sperreTouch();
 (async function(){
   // ---------- Einstellungen ----------
   const RUNDE = 5;              // Sätze je Runde (plus bis zu WIEDER_MAX Wiederholungen)
@@ -143,20 +144,11 @@ body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;co
   await Promise.all([...FIGUR_IDS, ...DING_IDS].map(id=>load("figuren/"+id+".js")));
   const vorhanden = id => !!(F.figuren[id] || F.dinge[id]);
 
-  // ---------- Speichern: zauber.json über zauber-save.php, Fallback localStorage ----------
-  let save = {woerter:{}, letzte:[], pause:""};
-  let serverOk = false;
-  try{ const r=await fetch("zauber-save.php",{cache:"no-store"}); if(r.ok){ const j=await r.json(); if(j && j.woerter) save=Object.assign(save,j); serverOk=true; } }catch(e){}
-  if(!serverOk){ try{ const s=localStorage.getItem("grossbuchstaben"); if(s) save=Object.assign(save,JSON.parse(s)); }catch(e){} }
+  // ---------- Speichern (lernspiel.js: Tauri-Datei oder localStorage "lernstand-grossbuchstaben") ----------
+  let save = await lade("grossbuchstaben", {woerter:{}, letzte:[], pause:""});
   if(Array.isArray(save.woerter)) save.woerter={};
   if(!Array.isArray(save.letzte)) save.letzte=[];
-  let saveTimer;
-  function persist(){
-    try{ localStorage.setItem("grossbuchstaben", JSON.stringify(save)); }catch(e){}
-    if(!serverOk) return;
-    clearTimeout(saveTimer);
-    saveTimer=setTimeout(()=>fetch("zauber-save.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(save)}).catch(()=>{}),300);
-  }
+  function persist(){ speichere("grossbuchstaben", save); }
   // Lernstand je Wort: Nomen als „der Hund“, andere als „~springt“. Eintrag {f: Fach, t: Tag, h: letzte 6 (1/0)}
   const heute = () => new Date().toLocaleDateString("sv");
   const tage = (a,b) => a ? Math.round((Date.parse(b)-Date.parse(a))/864e5) : 999;
@@ -541,13 +533,13 @@ body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;co
   // ---------- Elternansicht (?eltern) ----------
   function elternansicht(){
     $("start").classList.add("off");
-    const zeile = ([s,e]) => `<li>${s.startsWith("~") ? s.slice(1)+" <small>(klein)</small>" : s}
-      <small>· Fach ${e.f}${e.t?" seit "+e.t:""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`;
+    const zeile = ([s,e]) => `<li>${s.startsWith("~") ? esc(s.slice(1))+" <small>(klein)</small>" : esc(s)}
+      <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`;
     const alle=Object.keys(save.woerter).map(s=>[s,eintrag(s)]);
     const gruppe=(titel,l)=>`<h2>${titel} (${l.length})</h2><ul>${l.map(zeile).join("")||"<li>–</li>"}</ul>`;
     const el=document.createElement("div"); el.className="eltern";
     el.innerHTML=`<h1>Lernstand Großbuchstaben-Zauberer</h1><p>Bewertet wird nur das erste Zaubern je Satz. Fach 0 = wackelt (zuletzt falsch oder neu), Fach 1–3 = wird gefestigt, ab Fach ${GELERNT} = gelernt.
-      Abstände: ${ABSTAND.join(" / ")} Tage. ${serverOk?"Gespeichert auf dem Server.":"Nur in diesem Browser gespeichert."}</p>`
+      Abstände: ${ABSTAND.join(" / ")} Tage. Gespeichert auf diesem Gerät.</p>`
       + gruppe("Wackelt", alle.filter(([s,e])=>e.f===0))
       + gruppe("Wird gefestigt", alle.filter(([s,e])=>e.f>0&&e.f<GELERNT).sort((a,b)=>a[1].f-b[1].f))
       + gruppe("Gelernt", alle.filter(([s,e])=>e.f>=GELERNT))

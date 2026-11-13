@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Einhorn-Zahlenzauber</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="schrift/schrift.css">
 <style>
 :root{--sky:#D8F3FF;--lila:#B59CFF;--rosa:#FF8ACB;--mint:#7FE8C8;--sonne:#FFD95A;--nacht:#3B2A6B;--petal:#ffffff;--paper:#FFF8FC;
   --faden:#B59CFF;--wiese1:#BDEB9C;--wiese2:#8ED07A;--punkt-a:#FF8ACB;--punkt-b:#8C6CF0;--leer:rgba(59,42,107,.10)}
@@ -127,7 +126,9 @@ h1{font-size:2.1rem;line-height:1.1;font-weight:800}
 </div>
 
 <script src="figuren/figuren.js"></script>
-<script>
+<script type="module">
+import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
+sperreTouch();
 (async function(){
   // ---------- Einstellungen ----------
   // Stufen: max = Zahlenraum, minus = nach dem Erblühen manchmal eine Minus-Aufgabe, schnell = Median-Zeit (ms) einer
@@ -171,28 +172,11 @@ h1{font-size:2.1rem;line-height:1.1;font-weight:800}
   const load = src => new Promise(r=>{ const s=document.createElement("script"); s.src=src; s.onload=s.onerror=r; document.head.appendChild(s); });
   await Promise.all(["einhorn","blume",...BESUCHER].map(id=>load("figuren/"+id+".js")));
 
-  // ---------- Speichern: zahlen.json über zahlen-save.php, Fallback localStorage ----------
-  let save = {fakten:{}, verlauf:[], stufe:0, einhoerner:null, wiese:0, runden:0, letzterBesuch:0, anleitung:0};
-  let serverOk = false;
-  try{ const r=await fetch("zahlen-save.php",{cache:"no-store"}); if(r.ok){ const j=await r.json(); if(j && j.fakten) save=Object.assign(save,j); serverOk=true; } }catch(e){}
-  if(!serverOk){ try{ const s=localStorage.getItem("zahlenzauber"); if(s) save=Object.assign(save,JSON.parse(s)); }catch(e){} }
+  // ---------- Speichern (lernspiel.js: Tauri-Datei oder localStorage "lernstand-zahlenzauber") ----------
+  let save = await lade("zahlenzauber", {fakten:{}, verlauf:[], stufe:0, einhoerner:1, wiese:0, runden:0, letzterBesuch:0, anleitung:0});
   if(Array.isArray(save.fakten)) save.fakten={};
   if(!Array.isArray(save.verlauf)) save.verlauf=[];
-  // Einhörner aus dem alten Stall übernehmen (einmalig): Schwellen 0, 12, 26, 42 … Sterne wie im alten Spiel
-  if(save.einhoerner==null){
-    let sterne=0;
-    try{ const r=await fetch("save.php",{cache:"no-store"}); if(r.ok){ const j=await r.json(); sterne=j.stars|0; } }catch(e){}
-    try{ const s=JSON.parse(localStorage.getItem("einhorn-kakooma")||"{}"); sterne=Math.max(sterne, s.stars|0); }catch(e){}
-    let n=1; for(let i=0,t=0;i<EINHOERNER.length-1;i++){ t+=12+2*i; if(sterne>=t) n++; }
-    save.einhoerner=n;
-  }
-  let saveTimer;
-  function persist(){
-    try{ localStorage.setItem("zahlenzauber", JSON.stringify(save)); }catch(e){}
-    if(!serverOk) return;
-    clearTimeout(saveTimer);
-    saveTimer=setTimeout(()=>fetch("zahlen-save.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(save)}).catch(()=>{}),300);
-  }
+  function persist(){ speichere("zahlenzauber", save); }
   persist();
 
   // Lernstand je Aufgabe ("3+9", "12-9"): {f: Fach, t: Tag, h: letzte 6 (1/0)}
@@ -635,7 +619,7 @@ h1{font-size:2.1rem;line-height:1.1;font-weight:800}
         Median jetzt ${sek(median(letzte.filter(e=>e.ok).map(e=>e.ms)))}, am Anfang ${sek(median(v5.slice(0,AUF_N).filter(e=>e.ok).map(e=>e.ms)))} (schnell genug: ≤ ${sek(st.schnell)} oder −${Math.round((1-AUF_FAKTOR)*100)} %).</p>
       <p><button class="btn" id="stufeMinus">Stufe −</button> <button class="btn" id="stufePlus">Stufe +</button></p>
       <h2>Aufgaben (Fach 0 = wackelt, ab Fach ${GELERNT} gelernt)</h2>
-      <ul>${wack.map(([k,e])=>`<li><b>${k.replace("-"," − ").replace("+"," + ")}</b> <small>· Fach ${e.f}${e.t?" seit "+e.t:""}${faellig(k)&&e.f<GELERNT?" · fällig":""} · zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`).join("") || "<li>Noch nichts gespielt.</li>"}</ul>
+      <ul>${wack.map(([k,e])=>`<li><b>${esc(k.replace("-"," − ").replace("+"," + "))}</b> <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(k)&&e.f<GELERNT?" · fällig":""} · zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`).join("") || "<li>Noch nichts gespielt.</li>"}</ul>
       <p><a class="btn" href="zahlenzauber.html" style="text-decoration:none;display:inline-block">Zum Spiel</a></p>`;
     $("stufeMinus").onclick=()=>{ save.stufe=Math.max(0,save.stufe-1); persist(); eltern(); };
     $("stufePlus").onclick=()=>{ save.stufe=Math.min(STUFEN.length-1,save.stufe+1); persist(); eltern(); };

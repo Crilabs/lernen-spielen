@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <title>Einhorn-Steine</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="schrift/schrift.css">
 <style>
 :root{--ink:#3B2A6B;--nacht:#3B2A6B;--paper:#FFF8FC;--bg:#D8F3FF;--lila:#B59CFF;--rosa:#FF8ACB;--mint:#7FE8C8;--sonne:#FFD95A;
   --himmel1:#CDEBFF;--himmel2:#EAF7FF;--gras:#9EDB7E;--gras2:#7CC45E;--wasser:#7CC8F2;--wasser2:#5AAFE0;--stein:#D9D2E6;--stein2:#BDB3CF}
@@ -181,7 +180,9 @@ body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;co
   <a class="btn mint" href="index.html">🏠 Alle Spiele</a>
 </div>
 
-<script>
+<script type="module">
+import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
+sperreTouch();
 // ==AUSWERTUNG-START==  (reine Funktionen, ohne Browser; getestet in docs/tests/steine-auswertung-test.mjs)
 // Bewertet werden nur die Wortgrenzen. Rechtschreibung, Lautschreibung, Groß/klein und Satzzeichen zählen nicht.
 const AUSWERTUNG = (() => {
@@ -348,21 +349,12 @@ const AUSWERTUNG = (() => {
   const heute = () => new Date().toLocaleDateString("sv");
   const tage = (a,b) => a ? Math.round((Date.parse(b)-Date.parse(a))/864e5) : 999;
 
-  // ---------- Speichern: steine.json über steine-save.php, Fallback localStorage ----------
-  let save = {saetze:{}, paare:{}, tage:{}, runden:[], stufe:1, pause:""};
-  let serverOk=false;
-  try{ const r=await fetch("steine-save.php",{cache:"no-store"}); if(r.ok){ const j=await r.json(); if(j && j.saetze) save=Object.assign(save,j); serverOk=true; } }catch(e){}
-  if(!serverOk){ try{ const s=localStorage.getItem("einhorn-steine"); if(s) save=Object.assign(save,JSON.parse(s)); }catch(e){} }
+  // ---------- Speichern (lernspiel.js: Tauri-Datei oder localStorage "lernstand-einhorn-steine") ----------
+  let save = await lade("einhorn-steine", {saetze:{}, paare:{}, tage:{}, runden:[], stufe:1, pause:""});
   for(const k of ["saetze","paare","tage"]) if(!save[k] || Array.isArray(save[k])) save[k]={};
   if(!Array.isArray(save.runden)) save.runden=[];
   save.stufe = Math.min(3, Math.max(1, save.stufe|0 || 1));
-  let saveTimer;
-  function persist(){
-    try{ localStorage.setItem("einhorn-steine", JSON.stringify(save)); }catch(e){}
-    if(!serverOk) return;
-    clearTimeout(saveTimer);
-    saveTimer=setTimeout(()=>fetch("steine-save.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(save)}).catch(()=>{}),300);
-  }
+  function persist(){ speichere("einhorn-steine", save); }
 
   // ---------- Ton und Stimme ----------
   let sound=true; try{ sound=localStorage.getItem("einhorn-steine-ton")!=="aus"; }catch(e){}
@@ -740,16 +732,16 @@ const AUSWERTUNG = (() => {
   function elternansicht(){
     $("start").classList.add("off");
     const d=heute(), zeilen=[];
-    for(let i=0;i<14;i++){ const t=new Date(Date.now()-i*864e5).toLocaleDateString("sv"); const e=save.tage[t]; if(e&&e.n) zeilen.push(`<li>${t}: ${e.ok} von ${e.n} Sätzen ohne Kleben <small>(${Math.round(100*e.ok/e.n)} %)</small></li>`); }
+    for(let i=0;i<14;i++){ const t=new Date(Date.now()-i*864e5).toLocaleDateString("sv"); const e=save.tage[t]; if(e&&e.n) zeilen.push(`<li>${esc(t)}: ${esc(e.ok)} von ${esc(e.n)} Sätzen ohne Kleben <small>(${Math.round(100*e.ok/e.n)} %)</small></li>`); }
     const paare=Object.entries(save.paare).map(([p,l])=>[p,l.filter(x=>tage(x,d)<=14).length]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,12);
     const wackel=Object.entries(save.saetze).filter(([t,e])=>e.f===0);
     const el=document.createElement("div"); el.className="eltern";
     el.innerHTML=`<h1>Lernstand Einhorn-Steine</h1>
       <p>Gezählt wird nur der erste Versuch jedes Satzes (Wiederholungen in derselben Runde nicht). Rechtschreibung zählt nicht, nur die Abstände.
-      Stufe ${save.stufe} von 3. ${serverOk?"Gespeichert auf dem Server.":"Nur in diesem Browser gespeichert."}</p>
+      Stufe ${save.stufe} von 3. Gespeichert auf diesem Gerät.</p>
       <h2>Von selbst an die Abstände gedacht (14 Tage)</h2><ul>${zeilen.join("")||"<li>–</li>"}</ul>
-      <h2>Am häufigsten zusammengeklebt</h2><ul>${paare.map(([p,n])=>`<li>${p.replace("|"," + ")} <small>· ${n}×</small></li>`).join("")||"<li>–</li>"}</ul>
-      <h2>Sätze, die gerade wackeln (${wackel.length})</h2><ul>${wackel.map(([t,e])=>`<li>${t} <small>· zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`).join("")||"<li>–</li>"}</ul>
+      <h2>Am häufigsten zusammengeklebt</h2><ul>${paare.map(([p,n])=>`<li>${esc(p.replace("|"," + "))} <small>· ${n}×</small></li>`).join("")||"<li>–</li>"}</ul>
+      <h2>Sätze, die gerade wackeln (${wackel.length})</h2><ul>${wackel.map(([t,e])=>`<li>${esc(t)} <small>· zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`).join("")||"<li>–</li>"}</ul>
       <h2>Stimme auf diesem Gerät</h2>
       <p>Bessere Stimmen: Einstellungen › Bedienungshilfen › Gesprochene Inhalte › Stimmen › Deutsch – dort z. B. „Anna (Premium)“ oder
       „Helena (Erweitert)“ laden, dann diese Seite neu öffnen. Die Siri-Stimmen stehen Webseiten leider nicht zur Verfügung.</p>
@@ -769,8 +761,8 @@ const AUSWERTUNG = (() => {
       };
       zeile("Stimme aus den iPhone-Einstellungen", "· iOS wählt selbst", stimmWahl==="system",
         ()=>{ try{ localStorage.setItem("einhorn-stimme","system"); }catch(e){} stimmWahl="system"; voice=null; });
-      vs.forEach((v,k)=>zeile(`${k+1}. ${v.name}`,
-        `· ${v.lang}${v.default?" · Standard":""}${v.localService===false?" · online":""}${stimmWert(v)<0?" · alt/Spaßstimme":""}<br>${v.voiceURI}`,
+      vs.forEach((v,k)=>zeile(`${k+1}. ${esc(v.name)}`,
+        `· ${esc(v.lang)}${v.default?" · Standard":""}${v.localService===false?" · online":""}${stimmWert(v)<0?" · alt/Spaßstimme":""}<br>${esc(v.voiceURI)}`,
         stimmWahl!=="system" && voice===v,
         ()=>{ const key=stimmSchluessel(v,k); try{ localStorage.setItem("einhorn-stimme",key); }catch(e){} stimmWahl=key; voice=v; }));
     }

@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Die Perlenbrücke</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="schrift/schrift.css">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
   --paper:#FFF8FC;--nacht:#3B2A6B;--lila:#B59CFF;--rosa:#FF8ACB;--bead:26px;
@@ -126,7 +125,9 @@ body{height:100%;font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",s
   </section>
 </div>
 
-<script>
+<script type="module">
+import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
+sperreTouch();
 (async function(){
   // ---------- Montessori-Perlenfarben ----------
   const COLOR = {1:"#E53935",2:"#43A047",3:"#F48FB1",4:"#FDD835",5:"#64B5F6",6:"#9C27B0",7:"#FFFFFF",8:"#8D6E63",9:"#1E3A8A",10:"#F9A825"};
@@ -140,19 +141,11 @@ body{height:100%;font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",s
 
   const $ = id=>document.getElementById(id);
 
-  // ---------- Speichern ----------
-  let save = {reise:0, pairs:{}};
-  let serverOk=false;
-  try{ const r=await fetch("bruecke-save.php",{cache:"no-store"}); if(r.ok){ const j=await r.json(); if(j&&j.pairs) save=j; serverOk=true; } }catch(e){}
-  if(!serverOk){ try{ const s=localStorage.getItem("perlenbruecke"); if(s) save=JSON.parse(s); }catch(e){} }
-  let saveTimer=null;
-  function persist(){
-    try{ localStorage.setItem("perlenbruecke", JSON.stringify(save)); }catch(e){}
-    if(!serverOk) return;
-    clearTimeout(saveTimer);
-    saveTimer=setTimeout(()=>fetch("bruecke-save.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(save)}).catch(()=>{}),300);
-  }
-  $("savedNote").textContent = serverOk ? "Fortschritt wird auf dem Server gespeichert." : "Fortschritt wird auf diesem Gerät gespeichert.";
+  // ---------- Speichern (lernspiel.js: Tauri-Datei oder localStorage "lernstand-perlenbruecke") ----------
+  let save = await lade("perlenbruecke", {reise:0, pairs:{}});
+
+  function persist(){ speichere("perlenbruecke", save); }
+  $("savedNote").textContent = "Fortschritt wird auf diesem Gerät gespeichert.";
 
   // ---------- Töne ----------
   let ctx=null, sound=true;
