@@ -93,6 +93,8 @@ img{display:block}
 .zeile .cursor{display:inline-block;width:.6rem;height:1.05em;background:var(--rosa);margin-left:.4rem;border-radius:.3rem;animation:blinken 1.1s steps(1) infinite}
 @keyframes blinken{50%{opacity:0}}
 .zeile.vorbild{border-color:var(--mint)}
+.zeile.wackel{animation:schuetteln .6s}
+@keyframes schuetteln{20%{transform:translateX(-1.6rem)}40%{transform:translateX(1.4rem)}60%{transform:translateX(-1rem)}80%{transform:translateX(.6rem)}}
 .zeile.vorbild .cursor,.zeile.ruhe .cursor{display:none}
 /* ---------- Eigene Tastatur: nur die Buchstaben des Satzes, alphabetisch, jede Taste mit fester Regenbogenfarbe ---------- */
 .tastatur{flex:none;display:flex;flex-direction:column;gap:1.4rem;align-items:center}
@@ -795,7 +797,7 @@ const AUSWERTUNG = (() => {
   async function abgeben(){
     if(!eingabe.trim()){ okTaste.classList.remove("wackel"); void okTaste.offsetWidth; okTaste.classList.add("wackel"); diktat(); return; }
     const r=auswerten(satz.text, eingabe);
-    if(r.status==="unbewertet"){ say("Hör noch mal hin. "+satz.text, DIKTAT_TEMPO); return; }
+    if(r.status==="unbewertet"){ nochmalHinhoeren(); return; }
     res=r; fehlerImSatz = r.status==="fehler";
     if(!satz.wieder){
       rundeN++; if(!fehlerImSatz) rundeOk++;
@@ -806,6 +808,21 @@ const AUSWERTUNG = (() => {
     zeichneSteine(); setzeUni(-1);
     await wait(res.stuecke.length*70+380);
     laufen();
+  }
+
+  // Eingabe zu weit vom Satz weg: sichtbar zeigen, dass nichts ausgewertet wird, die Zeile leeren und neu diktieren.
+  // Bliebe der Text stehen, hängte das Kind den nächsten Versuch daran und die Eingabe bliebe für immer unbewertet
+  // (ohne Ton sah das wie ein Hänger aus).
+  async function nochmalHinhoeren(){
+    phase="hinhoeren"; tastenStand();
+    zeile.classList.remove("wackel"); void zeile.offsetWidth; zeile.classList.add("wackel");
+    uni.classList.remove("ratlos"); void uni.offsetWidth; uni.classList.add("ratlos");
+    sfx.boing();
+    await wait(900);
+    if(phase!=="hinhoeren") return;
+    zeile.classList.remove("wackel");
+    eingabe=""; zeigeText(); phase="tippen"; tastenStand();
+    say("Hör noch mal hin. "+satz.text, DIKTAT_TEMPO);
   }
 
   async function geschafft(){

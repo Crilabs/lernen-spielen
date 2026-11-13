@@ -4,6 +4,7 @@
 
 - Mathe-Spiele lesen keine Zahlen mehr vor: Die Computerstimme sprach Zahlen oft falsch („eins mal fünf“, „fünfter“). Kettenhüpfer und Perlenbrücke zeigen ihre Sätze jetzt in einer Sprechblase mit Ziffern (z. B. „5 · 7 = 35. Und noch ein Stäbchen?“), der Zahlenzauber zeigt nur noch Text. Die Klänge bleiben.
 - Kettenhüpfer: Bei einer falschen Zahl steht kurz und klar „6 Stäbchen sind nicht 48.“
+- Einhorn-Steine: Das Spiel bleibt nicht mehr hängen, wenn die Eingabe ganz anders ist als der Satz. Die Zeile schüttelt sich, das Einhorn schaut ratlos, dann wird die Zeile geleert und der Satz noch einmal diktiert. Bisher blieb der Text stehen, der nächste Versuch hängte sich daran, und ohne Ton passierte scheinbar nichts mehr.
 
 ## v0.1.8
 
