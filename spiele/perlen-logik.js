@@ -10,6 +10,7 @@ export const K = {
   ABNUTZUNG: 0.25,               // so viel weniger Chance je Bau mehr als das seltenste Paar der Zahl
   MIN_CHANCE: 0.15,              // Restchance eines oft gebauten Paares
   MAX_PAARE: 3,                  // höchstens so viele gültige Paare je Brücke
+  MAX_PAARE_KLEIN: 2,            // … bei n <= 4 (Ratechance klein halten)
   SPALTE_MAX: 5,                 // Stäbchen je Spalte höchstens
   START: [3, 4],                 // Erfolg zuerst: klein anfangen
   REIHENFOLGE: [3, 4, 5, 6, 7, 10, 8, 9],
@@ -19,8 +20,8 @@ export const K = {
   GEWICHT: { 5: 1.5, 10: 2 },    // Kraft der Fünf, Zehnerzerlegungen
   ANTEIL_FAELLIG: 0.7,           // so oft kommt eine fällige/wackelige Zahl dran (wenn es eine gibt)
   NEU_ANTEIL: 0.5,               // neue Zahl in der Einführungszeit bei etwa jeder zweiten Brücke
-  NEU_RUNDEN: 2,                 // Einführungszeit in Runden
-  RUNDE: 8,                      // Brücken je Runde
+  NEU_RUNDEN: 1,                 // Einführungszeit in Runden
+  RUNDE: 20,                     // Brücken je Runde (ca. 3-5 Minuten)
 };
 
 export const paareVon = (n) =>
@@ -79,27 +80,41 @@ export function angebot(n, stand, heute, rnd = Math.random) {
   const cmin = Math.min(...ps.map(p => p.e.c));
   const fest = new Set();
   fest.add(zufallsEins(ps.filter(p => p.e.c === cmin), rnd).key);                       // seltenstes Paar
-  const dran = ps.filter(p => p.e.f < K.GELERNT && faellig(p.e, heute));
+  const dran = ps.filter(p => faellig(p.e, heute));                                      // auch gelernte Paare nach ihrem Abstand
   if (dran.length) {                                                                     // fälliges/wackeliges Paar
     const fmin = Math.min(...dran.map(p => p.e.f));
     fest.add(zufallsEins(dran.filter(p => p.e.f === fmin), rnd).key);
   }
   let rest = ps.filter(p => !fest.has(p.key) && rnd() < Math.max(K.MIN_CHANCE, 1 - K.ABNUTZUNG * (p.e.c - cmin)));
   // Zu viele: zuerst die meistgebauten streichen (bei Gleichstand zufällig)
-  rest = mische(rest, rnd).sort((x, y) => x.e.c - y.e.c).slice(0, Math.max(0, K.MAX_PAARE - fest.size));
+  rest = mische(rest, rnd).sort((x, y) => x.e.c - y.e.c).slice(0, Math.max(0, (n <= 4 ? K.MAX_PAARE_KLEIN : K.MAX_PAARE) - fest.size));
   const S = ps.filter(p => fest.has(p.key) || rest.includes(p));
 
-  const links = new Set(S.map(p => p.a)), rechts = new Set(S.map(p => p.b));
-  const min = n <= 5 ? 2 : 3;
-  const ziel = () => Math.min(K.SPALTE_MAX, Math.max(min, 3 + Math.floor(rnd() * 3)));
-  const zielL = ziel(), zielR = ziel();
+  const fuerL = S.map(p => p.a), fuerR = S.map(p => p.b);
+  const min = 3;                                        // immer mindestens drei Stäbchen je Spalte
   const darf = (d, hier, dort) => !hier.has(d) && !dort.has(n - d);
-  for (const d of mische(Array.from({ length: n - 1 }, (_, i) => i + 1), rnd)) {
-    const reihenfolge = links.size <= rechts.size ? [[links, rechts, zielL], [rechts, links, zielR]] : [[rechts, links, zielR], [links, rechts, zielL]];
-    for (const [hier, dort, z] of reihenfolge) if (hier.size < z && darf(d, hier, dort)) { hier.add(d); break; }
+  let links, rechts;
+  // Kurze Ablenker verteilen; blockiert eine Spalte die andere (zu wenig Stäbchen), neu würfeln
+  for (let versuch = 0; versuch < 20; versuch++) {
+    links = new Set(fuerL); rechts = new Set(fuerR);
+    const ziel = () => Math.min(K.SPALTE_MAX, 3 + Math.floor(rnd() * 3));
+    const zielL = ziel(), zielR = ziel();
+    for (const d of mische(Array.from({ length: n - 1 }, (_, i) => i + 1), rnd)) {
+      const reihenfolge = links.size <= rechts.size ? [[links, rechts, zielL], [rechts, links, zielR]] : [[rechts, links, zielR], [links, rechts, zielL]];
+      for (const [hier, dort, z] of reihenfolge) if (hier.size < z && darf(d, hier, dort)) { hier.add(d); break; }
+    }
+    if (links.size >= min && rechts.size >= min) break;
   }
-  // Kleine Zahlen: reicht der Vorrat nicht, höchstens ein zu langes Stäbchen je Spalte
-  for (const sp of [links, rechts]) if (sp.size < min) sp.add(n + Math.floor(rnd() * Math.min(3, 10 - n)));
+  // Notlösung: Spalte zu kurz -> unnötige Ablenker der anderen Spalte (nicht aus den Paaren) entfernen und stattdessen auffüllen
+  for (const [hier, dort, fest] of [[links, rechts, fuerR], [rechts, links, fuerL]])
+    for (const d of mische(Array.from({ length: n - 1 }, (_, i) => i + 1), rnd))
+      if (hier.size < min && !hier.has(d) && (!dort.has(n - d) || (!fest.includes(n - d) && dort.size > min))) { dort.delete(n - d); hier.add(d); }
+  // Reicht der Vorrat nicht (kleine Zahlen): mit zu langen Stäbchen auffüllen, bei n <= 4 bis zu zwei je Spalte
+  for (const sp of [links, rechts]) {
+    const pool = mische(Array.from({ length: Math.min(9, n + 4) - n + 1 }, (_, i) => n + i), rnd).filter(x => !sp.has(x));
+    const erlaubt = n <= 4 ? 2 : 1;
+    while (sp.size < min && pool.length && [...sp].filter(x => x >= n).length < erlaubt) sp.add(pool.pop());
+  }
   const sortiert = s => [...s].sort((x, y) => x - y);
   return { paare: S.map(p => p.key), links: sortiert(links), rechts: sortiert(rechts) };
 }
@@ -141,7 +156,7 @@ export function verbuche(stand, n, a, b, { fehler = 0, hilfe = false, ms = 0, he
 }
 
 const zahlFaellig = (stand, n, heute) =>
-  stand.zahlen[n]?.w === 1 || paareVon(n).some(p => { const e = eintrag(stand, p.key); return e.f < K.GELERNT && faellig(e, heute); });
+  stand.zahlen[n]?.w === 1 || paareVon(n).some(p => faellig(eintrag(stand, p.key), heute));
 
 function gewichtet(liste, rnd) {
   const w = liste.map(n => K.GEWICHT[n] || 1);

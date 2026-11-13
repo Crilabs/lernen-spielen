@@ -18,32 +18,22 @@ img{display:block}
 .app{position:fixed;inset:0;display:flex;flex-direction:column;gap:1.4rem;padding:1.6rem 2.4rem 2.2rem}
 /* ---------- Bühne: Bach mit zwei Ufern ---------- */
 .stage{position:relative;flex:1;min-height:0;border-radius:2.4rem;overflow:hidden;background:#CDEBFF;box-shadow:0 .6rem 0 rgba(59,42,107,.15)}
-/* Kulisse: Himmel, Sonne, ziehende Wolken, Hügel – reicht bis an die Ränder */
+/* Kulisse: Himmel, Sonne, Wolken, Hügel – reicht bis an die Ränder */
 .kulisse{position:absolute;inset:0;width:100%;height:100%}
-.kulisse .wolke{animation:wolke var(--d,140s) linear infinite;animation-delay:var(--v,0s)}
-@keyframes wolke{from{transform:translateX(-500px)}to{transform:translateX(2400px)}}
-.kulisse .strahlen{transform-box:fill-box;transform-origin:50% 50%;animation:drehen 80s linear infinite}
-@keyframes drehen{to{transform:rotate(360deg)}}
-.kulisse .krone{transform-box:fill-box;transform-origin:50% 100%;animation:wiegen 6s ease-in-out infinite alternate}
-@keyframes wiegen{from{transform:rotate(-1.5deg)}to{transform:rotate(1.5deg)}}
+/* Kulisse steht still: Sonne, Wolken und Bäume bewegen sich nicht (Bewegung nur, wenn sie zur Handlung gehört) */
 /* Bach */
 .wasser{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(#86CFF5,#4FA6DC)}
-.welle{position:absolute;left:0;width:200%;height:2.6rem;animation:welle var(--d,9s) linear infinite}
+.welle{position:absolute;left:0;width:200%;height:2.6rem}
 .welle.w1{top:-1.3rem}.welle.w2{top:3rem;opacity:.5;--d:14s;animation-direction:reverse}.welle.w3{top:9rem;opacity:.35;--d:19s}
-@keyframes welle{to{transform:translateX(-50%)}}
-.glitzer{position:absolute;width:2.2rem;height:.5rem;border-radius:50%;background:#fff;opacity:0;animation:glitzer 4s ease-in-out infinite;animation-delay:var(--v,0s)}
-@keyframes glitzer{0%,100%{opacity:0;transform:scaleX(.4)}50%{opacity:.8;transform:scaleX(1)}}
+.glitzer{position:absolute;width:2.2rem;height:.5rem;border-radius:50%;background:#fff;opacity:.55}
 .schilf{position:absolute;bottom:22%;width:7rem;height:16rem;z-index:1}
 .schilf.l{left:10%}.schilf.r{right:10%;transform:scaleX(-1)}
-.schilf g{transform-box:fill-box;transform-origin:50% 100%;animation:wiegen 3.4s ease-in-out infinite alternate}
-.schilf g:nth-child(2){animation-duration:4.1s;animation-delay:-1s}.schilf g:nth-child(3){animation-duration:2.9s;animation-delay:-2s}
 /* Ufer mit Gras, Erde und Blumen */
 .ufer{position:absolute;bottom:0;width:11%;height:42%;border:.4rem solid var(--ink);border-bottom:0;
   background:linear-gradient(#A6E08A 0 2.4rem,#7CC45E 2.4rem 3.4rem,#C99B6C 3.4rem,#A97B52)}
 .ufer.l{left:-.4rem;border-radius:0 4rem 0 0}.ufer.r{right:-.4rem;border-radius:4rem 0 0 0}
 .ufer .deko{position:absolute;bottom:calc(100% - .6rem);width:100%;height:7rem;pointer-events:none}
 .steine{position:absolute;left:11%;right:11%;bottom:11%;display:flex;align-items:flex-end;justify-content:center;gap:var(--lücke,1.4rem);padding:0 1rem;z-index:1}
-.ufer .blume{transform-box:fill-box;transform-origin:50% 100%;animation:wiegen 2.6s ease-in-out infinite alternate}
 /* Regenbogen über dem Bach, wenn das Einhorn drüben ist */
 .regenbogen{position:absolute;left:4%;width:92%;bottom:30%;height:64%;pointer-events:none;z-index:1;opacity:0;transition:opacity .8s}
 .regenbogen path{fill:none;stroke-width:15;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
@@ -51,14 +41,14 @@ img{display:block}
 .regenbogen.zeigen path{animation:bogen 1.1s ease-out forwards;animation-delay:calc(var(--i) * 70ms)}
 .regenbogen.weg{opacity:0}
 @keyframes bogen{to{stroke-dashoffset:0}}
-.stein{position:relative;border:.4rem solid var(--ink);background:radial-gradient(ellipse at 35% 25%,#EDE8F4 0 30%,transparent 55%),linear-gradient(var(--stein),var(--stein2));color:#3B2A6B;font:700 var(--fs,5rem)/1 "Andika",sans-serif;
+.stein{position:relative;border:.4rem solid var(--ink);background:radial-gradient(ellipse at 35% 25%,#EDE8F4 0 30%,transparent 55%),linear-gradient(var(--stein),var(--stein2));color:#3B2A6B;font:400 var(--fs,5rem)/1 "Andika",sans-serif;
   padding:.3em .45em .25em;border-radius:46% 46% 38% 38% / 60% 60% 40% 40%;white-space:pre;box-shadow:0 .7rem 0 rgba(30,40,80,.25);
   transform-origin:50% 100%;animation:auftauchen .35s cubic-bezier(.2,1.5,.4,1) backwards}
 @keyframes auftauchen{from{transform:translateY(40%) scale(.4);opacity:0}}
 .stein::before{content:"";position:absolute;left:12%;right:30%;top:-.25rem;height:.9rem;border-radius:1rem 1rem .4rem .4rem;background:#9FD07F;opacity:.85}
 .stein::after{content:"";position:absolute;left:-14%;right:-14%;bottom:-1.2rem;height:2rem;border-radius:50%;border:.3rem solid rgba(255,255,255,.65);
-  z-index:-1;animation:ring 3.2s ease-out infinite;animation-delay:inherit}
-@keyframes ring{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+  z-index:-1;animation:ring .9s ease-out backwards;animation-delay:inherit}   /* Ring läuft nur einmal, wenn der Stein erscheint */
+@keyframes ring{from{transform:scale(.8);opacity:0}}
 .stein.kippelt{animation:kippeln .7s ease-in-out}
 @keyframes kippeln{0%,100%{transform:rotate(0)}20%{transform:rotate(-9deg)}45%{transform:rotate(8deg)}70%{transform:rotate(-6deg)}85%{transform:rotate(3deg)}}
 .stein.kaputt{transform:rotate(-5deg) translateY(.8rem);background:linear-gradient(#E9E2F3,#C9BEDB)}
@@ -68,6 +58,7 @@ img{display:block}
 .riss::after{content:"";position:absolute;left:50%;top:15%;bottom:0;width:.6rem;transform:translateX(-50%);
   background:repeating-linear-gradient(var(--ink) 0 .8rem,transparent .8rem 1.4rem)}
 .korrektur .stein.kaputt,.korrektur .riss{animation:hinweis 1.6s ease-in-out infinite}
+.riss.loesung::after{width:1rem;background:repeating-linear-gradient(var(--rosa) 0 .8rem,transparent .8rem 1.4rem)}
 @keyframes hinweis{50%{filter:brightness(1.12) drop-shadow(0 0 .8rem #fff)}}
 .uni{position:absolute;left:0;top:0;width:var(--uw,100px);pointer-events:none;z-index:2;will-change:transform}
 .uni .uschatten{position:absolute;left:24%;right:24%;top:87%;height:6%;border-radius:50%;background:rgba(0,0,0,.14)}
@@ -89,16 +80,16 @@ img{display:block}
 .lupe.on{display:flex}
 .lupe .karte{background:var(--paper);border-radius:3rem;padding:3rem 3rem 2rem;box-shadow:0 1rem 0 rgba(59,42,107,.25);max-width:100%}
 .lupe .buchst{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;row-gap:1rem}
-.lupe .bst{font:700 9rem/1.15 "Andika",sans-serif;color:var(--nacht);padding:0 .2rem}
+.lupe .bst{font:400 9rem/1.15 "Andika",sans-serif;color:var(--nacht);padding:0 .2rem}
 .lupe .spalt{width:4.6rem;border-radius:1.2rem;position:relative}
 .lupe .spalt::after{content:"";position:absolute;left:50%;bottom:6%;width:1.2rem;height:1.2rem;transform:translateX(-50%);background:rgba(59,42,107,.22);border-radius:50%}
 .lupe .spalt:active{background:rgba(181,156,255,.3)}
 .lupe .spalt.tipp::after{top:6%;bottom:6%;height:auto;border-radius:.3rem;background:repeating-linear-gradient(var(--rosa) 0 .9rem,transparent .9rem 1.4rem);width:.7rem;animation:hinweis 1.2s infinite}
 .lupe .buchst.wackel{animation:kippeln .6s}
-.lupe .zu{display:block;margin:2rem auto 0;font:700 3rem "Andika",sans-serif;color:var(--nacht);opacity:.7;padding:.6rem 2rem}
+.lupe .zu{display:block;margin:2rem auto 0;font:400 3rem "Andika",sans-serif;color:var(--nacht);opacity:.7;padding:.6rem 2rem}
 /* ---------- Schreibzeile ---------- */
 .zeile{flex:none;height:11rem;display:flex;align-items:center;justify-content:center;background:var(--paper);border-radius:2.4rem;
-  border:.5rem solid var(--lila);font:700 6.4rem/1 "Andika",sans-serif;padding:0 3rem;white-space:pre;overflow:hidden;box-shadow:0 .6rem 0 rgba(59,42,107,.12)}
+  border:.5rem solid var(--lila);font:400 6.8rem/1 "Andika",sans-serif;padding:0 3rem;white-space:pre;overflow:hidden;box-shadow:0 .6rem 0 rgba(59,42,107,.12)}
 .zeile .cursor{display:inline-block;width:.6rem;height:1.05em;background:var(--rosa);margin-left:.4rem;border-radius:.3rem;animation:blinken 1.1s steps(1) infinite}
 @keyframes blinken{50%{opacity:0}}
 .zeile.vorbild{border-color:var(--mint)}
@@ -110,8 +101,8 @@ img{display:block}
 .tasten .taste{min-width:0;padding:0;height:8.6rem}
 .tasten .taste.leerfeld{visibility:hidden}
 .tasten.eng{gap:.8rem .5rem}
-.tasten.eng .taste{font-size:4.2rem;border-radius:1.4rem;border-width:.25rem}
-.taste{height:9.6rem;min-width:9rem;padding:0 1.6rem;border-radius:2rem;font:700 6rem/1 "Andika",sans-serif;color:var(--ink);
+.tasten.eng .taste{font-size:4.6rem;border-radius:1.4rem;border-width:.25rem}
+.taste{height:9.6rem;min-width:9rem;padding:0 1.6rem;border-radius:2rem;font:400 6.6rem/1 "Andika",sans-serif;color:var(--ink);
   background:var(--farbe,#fff);border:.35rem solid rgba(59,42,107,.45);box-shadow:0 .8rem 0 var(--schatten,rgba(59,42,107,.3));
   display:flex;align-items:center;justify-content:center;gap:1rem;touch-action:none;transition:opacity .2s}
 .taste.drueck{transform:translateY(.7rem);box-shadow:0 .1rem 0 var(--schatten,rgba(59,42,107,.3))}
@@ -130,16 +121,13 @@ img{display:block}
 .funke{position:fixed;width:3rem;height:3rem;margin:-1.5rem 0 0 -1.5rem;pointer-events:none;z-index:50;background:var(--f);
   clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:funkeflug .9s cubic-bezier(.2,.8,.4,1) forwards}
 @keyframes funkeflug{0%{transform:translate(0,0) scale(.4) rotate(0);opacity:1}70%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(var(--rot));opacity:0}}
-.zeile .luecke{display:inline-block;width:.5em;position:relative}
-.zeile .luecke.neu::after{content:"";position:absolute;left:50%;top:50%;width:.6em;height:.6em;margin:-.3em 0 0 -.3em;background:#FFD95A;
-  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:lueckenstern .7s ease-out forwards}
-@keyframes lueckenstern{0%{transform:scale(.2) rotate(0);opacity:1}50%{transform:scale(1.3) rotate(40deg);opacity:1}100%{transform:scale(.6) rotate(80deg);opacity:0}}
+.zeile .luecke{display:inline-block;width:.5em}
 .taste.ok{min-width:24rem;background:var(--mint);--schatten:#3FA987;font-size:4.8rem}
 .taste.ok.weiter{background:var(--rosa);--schatten:#D45A9E;color:#fff}
 .taste.wackel{animation:kippeln .5s}
 .tastatur.aus .taste{opacity:.35;pointer-events:none}
 .tastatur.aus .taste.ok.an{opacity:1;pointer-events:auto}
-.btn{border-radius:99rem;padding:1.6rem 4rem;font:700 3rem "Andika",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 .7rem 0 #D45A9E;text-decoration:none;display:inline-block}
+.btn{border-radius:99rem;padding:1.6rem 4rem;font:400 3rem "Andika",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 .7rem 0 #D45A9E;text-decoration:none;display:inline-block}
 .btn.mint{background:var(--mint);color:#3B2A6B;box-shadow:0 .6rem 0 #4FBF9C;font-size:2.2rem;padding:1rem 2.6rem}
 .pause{position:fixed;inset:0;z-index:25;background:#1F1B45;display:none;overflow:hidden;opacity:0;transition:opacity .8s}
 .pause.on{display:block}.pause.show{opacity:1}
@@ -149,9 +137,9 @@ img{display:block}
 .pweiter{position:absolute;left:50%;bottom:4rem;transform:translateX(-50%);opacity:.92}
 .eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:3rem 4rem 4rem;user-select:text;-webkit-user-select:text;touch-action:auto;font-size:2.2rem}
 .eltern h1{font-size:4rem}.eltern h2{font-size:2.8rem;margin:2.4rem 0 .6rem}.eltern p{margin:.8rem 0;max-width:80ch}
-.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:1.2rem;padding:.6rem 1.4rem;margin:.6rem 0;font-weight:700;max-width:90ch}
+.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:1.2rem;padding:.6rem 1.4rem;margin:.6rem 0;font-weight:400;max-width:90ch}
 .eltern small{font-weight:400;opacity:.75}
-@media (prefers-reduced-motion:reduce){.pause img,.zeile .cursor,.kulisse *,.welle,.glitzer,.schilf g,.ufer .blume,.stein::after{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.pause img,.zeile .cursor,.stein::after{animation:none!important}}
 </style>
 </head>
 <body>
@@ -364,13 +352,13 @@ const AUSWERTUNG = (() => {
 
 (async function(){
   // ---------- Einstellungen ----------
-  const SAETZE_JE_RUNDE = 8;
+  const SAETZE_JE_RUNDE = 6;       // 6 Sätze + höchstens 2 Wiederholungen = 3-5 min
   const ANTEIL_ALT = 0.2;          // so viel der Runde aus älteren Stufen
   const ANTEIL_FAELLIG = 0.7;      // höchstens so viel fällige/wackelige Sätze, der Rest sichere
   const ABSTAND = [0, 1, 3, 7];    // Tage bis ein Satz in Fach f wieder fällig ist (Fach 3 = sitzt)
   const WIEDER_NACH = 3;           // ein Satz mit Fehler kommt in derselben Runde nach so vielen anderen noch einmal
-  const WIEDER_MAX = 4;            // höchstens so viele Wiederholungen je Runde
-  const STUFE_OK = 6;              // Stufe geschafft, wenn an STUFE_TAGE verschiedenen Tagen eine Runde mit mind. STUFE_OK Sätzen ohne Fehler
+  const WIEDER_MAX = 2;            // höchstens so viele Wiederholungen je Runde
+  const STUFE_OK = 5;              // Stufe geschafft, wenn an STUFE_TAGE verschiedenen Tagen eine Runde mit mind. STUFE_OK Sätzen ohne Fehler
   const STUFE_TAGE = 2;
   const OFT_PAAR = 2;              // so oft in OFT_TAGE Tagen geklebt = „oft geklebt“ (wird bevorzugt geübt)
   const OFT_TAGE = 14;
@@ -404,7 +392,7 @@ const AUSWERTUNG = (() => {
     o.frequency.setValueAtTime(f1,t); o.frequency.exponentialRampToValueAtTime(f2,t+dur*.8);
     g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
     o.connect(g).connect(actx.destination); o.start(t); o.stop(t+dur+.02); }catch(e){} }
-  // Glockenton der Leertaste: steigt je Lücke im Satz eine Stufe (Pentatonik), klingt immer freundlich
+  // Glockenton beim Hüpfen über eine richtige Lücke: steigt je Lücke im Satz eine Stufe (Pentatonik), klingt immer freundlich
   const PENTA=[523.25,587.33,659.25,783.99,880,1046.5,1174.66,1318.51,1567.98,1760];
   let leerNote=0;
   function glocke(f, laut=.2){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); const t=actx.currentTime;
@@ -412,7 +400,8 @@ const AUSWERTUNG = (() => {
       g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(v,t+.006); g.gain.exponentialRampToValueAtTime(.0001,t+d); o.connect(g).connect(actx.destination); o.start(t); o.stop(t+d+.05); } }catch(e){} }
   const sfx={ glocke:()=>{ glocke(PENTA[Math.min(leerNote,PENTA.length-1)]); leerNote++; },
     ankunft:()=>[0,2,4,7].forEach((n,k)=>setTimeout(()=>glocke(PENTA[n],.13),k*110)),
-    hopp:()=>tone(420,640,.12,"sine",.08), plopp:()=>tone(520,880,.18), platsch:()=>{ tone(300,90,.35,"triangle",.2); setTimeout(()=>tone(900,300,.2,"sine",.06),80); } };
+    hopp:()=>tone(420,640,.12,"sine",.08), tick:()=>tone(700,560,.05,"sine",.05),
+    boing:()=>{ tone(180,420,.16,"triangle",.16); setTimeout(()=>tone(420,230,.2,"triangle",.14),130); }, plopp:()=>tone(520,880,.18), platsch:()=>{ tone(300,90,.35,"triangle",.2); setTimeout(()=>tone(900,300,.2,"sine",.06),80); } };
   // Stimme: beste deutsche Systemstimme (Premium > Erweitert > kompakt). Eloquence- und Spaßstimmen von Apple
   // (Eddy, Flo, Grandma, Reed, Sandy, Shelley, Zarvox …) klingen nach 90er-Synthesizer und fallen raus.
   // In der Elternansicht (?eltern) lässt sich auf dem Gerät eine Stimme fest wählen (localStorage).
@@ -589,7 +578,7 @@ const AUSWERTUNG = (() => {
     if(!res||!steineEl.children.length) return;
     const r=rem(), W=steineEl.clientWidth-2*r, n=res.stuecke.length;
     const zeichen=res.stuecke.reduce((a,s)=>a+s.text.length,0);
-    const fs=Math.max(2.4*r, Math.min(7*r, (W-(n-1)*1.4*r)/(zeichen*.6+n*1.3)));
+    const fs=Math.max(2.4*r, Math.min(7.6*r, (W-(n-1)*1.4*r)/(zeichen*.56+n*1.3)));
     steineEl.style.setProperty("--fs", fs+"px");
     steineEl.style.setProperty("--lücke", Math.max(.8*r,Math.min(2*r,fs*.4))+"px");
   }
@@ -613,7 +602,7 @@ const AUSWERTUNG = (() => {
         const a=res.stuecke[k-1].text, b=res.stuecke[k].text;
         say(nurBuchstaben(a)+" … "+nurBuchstaben(b)+"?");
         await platsch(p, anker(pos));
-        fehlerZiel={art:"bruch", k}; phase="korrektur"; markiereFehler(); return;
+        fehlerZiel={art:"bruch", k}; falschTipps=0; phase="korrektur"; markiereFehler(); return;
       }
       if(k<n && res.stuecke[k].kleb.length){
         const el=steineEl.querySelector(`.stein[data-k="${k}"]`);
@@ -625,6 +614,7 @@ const AUSWERTUNG = (() => {
         fehlerZiel={art:"kleb", k}; falschTipps=0; phase="korrektur"; markiereFehler(); return;
       }
       await hopp(anker(pos), anker(k)); pos=k;
+      if(k<n){ sfx.glocke(); const a=anker(k), s=stage.getBoundingClientRect(); funken(s.left+a.x, s.top+a.y-uniH()*.5); }   // Lücke stimmt: Glocke und Funken
       await wait(60);
     }
     geschafft();
@@ -636,10 +626,26 @@ const AUSWERTUNG = (() => {
     if(fehlerZiel.art==="bruch"){
       const k=fehlerZiel.k;
       const hit = t.dataset.riss ? +t.dataset.riss===k : (+t.dataset.k===k||+t.dataset.k===k-1);
-      if(!hit) return;
+      if(!hit){ falschAntippen(t); return; }
       zusammenfuegen(k);
     } else if(+t.dataset.k===fehlerZiel.k) oeffneLupe(fehlerZiel.k);
+    else falschAntippen(t);
   });
+  // Falscher Stein/Riss: Stein kippelt, komischer Boing-Ton, Einhorn schaut ratlos. Hilfe-Leiter: 1.-2. Mal nur das Signal,
+  // nach dem 3. Mal zeigt der Riss die Lösung und die Stimme begründet sie; das Kind führt sie selbst aus (zählt nicht als gekonnt).
+  function falschAntippen(t){
+    falschTipps++;
+    t.classList.remove("kippelt"); void t.offsetWidth; t.classList.add("kippelt");
+    uni.classList.remove("ratlos"); void uni.offsetWidth; uni.classList.add("ratlos");
+    sfx.boing();
+    if(falschTipps===3) zeigeLoesung();
+  }
+  function zeigeLoesung(){
+    if(fehlerZiel?.art!=="bruch") return;
+    const k=fehlerZiel.k, a=nurBuchstaben(res.stuecke[k-1].text), b=nurBuchstaben(res.stuecke[k].text);
+    steineEl.querySelector(`.riss[data-riss="${k}"]`)?.classList.add("loesung");
+    say(a+b+": "+a+" und "+b+" gehören zusammen. Das ist ein Wort.");
+  }
   function zusammenfuegen(k){
     const a=res.stuecke[k-1], b=res.stuecke[k];
     a.kleb.push(...b.kleb.map(x=>({...x,o:x.o+a.text.length})));
@@ -674,7 +680,7 @@ const AUSWERTUNG = (() => {
     });
     const zu=document.createElement("button"); zu.className="zu"; zu.innerHTML=`<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" style="vertical-align:-.12em"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> zu`;
     karte.append(reihe,zu); lupe.appendChild(karte); lupe.classList.add("on");
-    if(falschTipps>=2) zeigeRiss(reihe, st);
+    if(falschTipps>=3){ zeigeRiss(reihe, st); sagLoesung(st); }
     zu.onclick=()=>lupe.classList.remove("on");
     lupe.onclick=e=>{ if(e.target===lupe) lupe.classList.remove("on"); };
     reihe.onclick=e=>{
@@ -683,10 +689,14 @@ const AUSWERTUNG = (() => {
       if(treffer){ lupe.classList.remove("on"); teilen(k,g,treffer); return; }
       falschTipps++;
       reihe.classList.remove("wackel"); void reihe.offsetWidth; reihe.classList.add("wackel");
-      say(nurBuchstaben(st.text.slice(0,g))+" … "+nurBuchstaben(st.text.slice(g))+"?");
-      if(falschTipps>=2) zeigeRiss(reihe, st);
+      sfx.boing();
+      if(falschTipps<3) say(nurBuchstaben(st.text.slice(0,g))+" … "+nurBuchstaben(st.text.slice(g))+"?");
+      else { zeigeRiss(reihe, st); if(falschTipps===3) sagLoesung(st); }   // Stufe 3: Lösung zeigen und begründen
     };
   }
+  // Lösung mit kurzer Begründung, z. B. „das Pony: das und Pony, das sind zwei Wörter“
+  function sagLoesung(st){ const p=(st.kleb[0]?.paar||"").split("|"); if(p.length<2) return;
+    say(p[0]+p[1]+": "+p[0]+" und "+p[1]+". Das sind zwei Wörter."); }
   function zeigeRiss(reihe, st){ const o=st.kleb[0]?.o; const s=o&&reihe.querySelector(`.spalt[data-g="${o}"]`); if(s) s.classList.add("tipp"); }
 
   // ---------- Eigene Tastatur ----------
@@ -710,24 +720,28 @@ const AUSWERTUNG = (() => {
       tasten.appendChild(b);
     }
   }
-  // Leerzeichen als sichtbare Lücke; eine frisch gesetzte Lücke blitzt kurz mit einem Sternchen auf
-  function zeigeText(text=eingabe, neueLuecke=false){
-    textEl.innerHTML=[...text].map((c,i)=>c===" " ? `<span class="luecke${neueLuecke&&i===text.length-1?" neu":""}"></span>` : esc(c)).join("");
+  // Leerzeichen als sichtbare Lücke
+  function zeigeText(text=eingabe){
+    textEl.innerHTML=[...text].map(c=>c===" " ? `<span class="luecke"></span>` : esc(c)).join("");
   }
-  function einfuegen(z){ if(phase!=="tippen" || eingabe.length>=90) return false; eingabe+=z; zeigeText(eingabe, z===" "); return true; }
-  function loeschen(){ if(eingabe.endsWith(" ")) leerNote=Math.max(0,leerNote-1); eingabe=eingabe.slice(0,-1); zeigeText(); }
-  // Die Leertaste soll Freude machen: Taste federt, Regenbogen-Schimmer, Sternchen fliegen, Glockenton steigt je Lücke
+  function einfuegen(z){ if(phase!=="tippen" || eingabe.length>=90) return false; eingabe+=z; zeigeText(eingabe); return true; }
+  function loeschen(){ eingabe=eingabe.slice(0,-1); zeigeText(); }
+  // Die Leertaste federt und klickt leise, sonst nichts: Glocke und Funken gibt es erst beim Prüfen,
+  // wenn das Einhorn über eine richtig gesetzte Lücke hüpft (laufen). So belohnt das Drücken nichts Falsches und verrät nichts.
   const leerTaste=$("t-leer");
-  function leerFreude(x){
+  function leerFreude(){
     if(!einfuegen(" ")) return;
     leerTaste.classList.remove("jubel"); void leerTaste.offsetWidth; leerTaste.classList.add("jubel");
-    sfx.glocke();
-    const r=leerTaste.getBoundingClientRect(), cx=x ?? r.left+r.width/2, R=rem();
+    sfx.tick();
+  }
+  // Funken an einer Stelle (Bildschirmkoordinaten), z. B. dort, wo das Einhorn über eine richtige Lücke landet
+  function funken(cx, cy){
+    const R=rem();
     for(let k=0;k<9;k++){
       const f=document.createElement("span"); f.className="funke";
-      f.style.left=(cx+(Math.random()-.5)*8*R)+"px"; f.style.top=(r.top+r.height*.4)+"px";
+      f.style.left=(cx+(Math.random()-.5)*4*R)+"px"; f.style.top=cy+"px";
       f.style.setProperty("--f",`hsl(${k*40} 92% 66%)`);
-      f.style.setProperty("--dx",((Math.random()-.5)*30*R)+"px"); f.style.setProperty("--dy",(-(8+Math.random()*16)*R)+"px");
+      f.style.setProperty("--dx",((Math.random()-.5)*16*R)+"px"); f.style.setProperty("--dy",(-(4+Math.random()*9)*R)+"px");
       f.style.setProperty("--rot",(Math.random()*360-180)+"deg");
       document.body.appendChild(f); setTimeout(()=>f.remove(),950);
     }
@@ -748,7 +762,7 @@ const AUSWERTUNG = (() => {
     if(b===okTaste){ okGedrueckt(); return; }
     if(b.id==="t-nochmal"){ if(satz) diktat(); return; }
     if(phase!=="tippen") return;
-    if(b.id==="t-leer") leerFreude(e.clientX);
+    if(b.id==="t-leer") leerFreude();
     else if(b.id==="t-weg") loeschen();
   });
   // Echte Tastatur (falls angeschlossen) geht auch
@@ -838,7 +852,7 @@ const AUSWERTUNG = (() => {
       Stufe ${save.stufe} von 3. Gespeichert auf diesem Gerät.</p>
       <h2>Von selbst an die Abstände gedacht (14 Tage)</h2><ul>${zeilen.join("")||"<li>–</li>"}</ul>
       <h2>Am häufigsten zusammengeklebt</h2><ul>${paare.map(([p,n])=>`<li>${esc(p.replace("|"," + "))} <small>· ${n}×</small></li>`).join("")||"<li>–</li>"}</ul>
-      <h2>Sätze, die gerade wackeln (${wackel.length})</h2><ul>${wackel.map(([t,e])=>`<li>${esc(t)} <small>· zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`).join("")||"<li>–</li>"}</ul>
+      <h2>Sätze, die gerade wackeln (${wackel.length})</h2><ul>${wackel.map(([t,e])=>`<li>${esc(t)} <small>· zuletzt ${e.h.map(x=>x?"richtig":"geklebt").join(", ")}</small></li>`).join("")||"<li>–</li>"}</ul>
       <h2>Stimme auf diesem Gerät</h2>
       <p>Weitere Stimmen: in Windows unter Einstellungen › Zeit und Sprache › Sprache und Region bzw. › Sprachausgabe
       eine deutsche Stimme hinzufügen (z. B. „Microsoft Katja“ oder „Microsoft Hedda“), dann die App neu starten.

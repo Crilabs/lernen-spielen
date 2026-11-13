@@ -53,10 +53,10 @@ test("angebot: Spalten ergeben genau die angebotenen Paare", () => {
     assert.ok(paare.length >= 1 && paare.length <= K.MAX_PAARE);
     const cs = paareVon(n).map(p => eintrag(s, p.key).c), cmin = Math.min(...cs);
     assert.ok(paare.some(k => eintrag(s, k).c === cmin), "seltenstes Paar fehlt");
-    const min = n <= 5 ? 2 : 3;
+    const min = 3;
     for (const sp of [links, rechts]) {
       assert.ok(sp.length >= min && sp.length <= K.SPALTE_MAX, `Länge ${sp.length} n=${n}`);
-      assert.ok(sp.filter(x => x >= n).length <= 1, "mehr als ein zu langes");
+      assert.ok(sp.filter(x => x >= n).length <= (n <= 4 ? 2 : 1), "zu viele zu lange");
       assert.equal(new Set(sp).size, sp.length);
       assert.deepEqual(sp, [...sp].sort((x, y) => x - y));
       assert.ok(sp.every(x => x >= 1 && x <= 9));
@@ -137,4 +137,39 @@ test("naechsteZahl: fällige Zahlen kommen häufiger", () => {
   const rnd = lcg(11); let vier = 0;
   for (let i = 0; i < 3000; i++) if (naechsteZahl(s, { vorher: 0, heute: HEUTE, rnd }) === 4) vier++;
   assert.ok(vier / 3000 > 0.6, `vier ${vier}`);
+});
+
+test("angebot: gelerntes Paar (Fach 4) kommt nach 21 Tagen wieder dran", () => {
+  const s = neuerStand();
+  for (const p of paareVon(7)) s.paare[p.key] = { f: 4, t: HEUTE, h: [], c: 1 };
+  s.paare["7:2+5"] = { f: 4, t: "2026-10-01", h: [], c: 9 };   // 43 Tage her, am häufigsten gebaut
+  for (let seed = 1; seed <= 300; seed++) assert.ok(angebot(7, s, HEUTE, lcg(seed)).paare.includes("7:2+5"), `seed=${seed}`);
+  // Noch im 21-Tage-Abstand: kein Zwang
+  s.paare["7:2+5"].t = "2026-11-01";
+  assert.ok(Array.from({ length: 300 }, (_, i) => angebot(7, s, HEUTE, lcg(i + 1)).paare.includes("7:2+5")).some(x => !x));
+});
+
+test("naechsteZahl: Zahl mit abgelaufenem Fach-4-Paar kommt häufiger", () => {
+  const s = neuerStand(); s.frei = [3, 4, 5];
+  for (const n of s.frei) for (const p of paareVon(n)) s.paare[p.key] = { f: 4, t: HEUTE, h: [], c: 1 };
+  s.paare["4:1+3"].t = "2026-10-01";
+  const rnd = lcg(5); let vier = 0;
+  for (let i = 0; i < 3000; i++) if (naechsteZahl(s, { vorher: 0, heute: HEUTE, rnd }) === 4) vier++;
+  assert.ok(vier / 3000 > 0.6, `vier ${vier}`);
+});
+
+test("verbuche: gelerntes Paar bleibt in Fach 4, Stempel wird erneuert", () => {
+  const s = neuerStand();
+  s.paare["7:2+5"] = { f: 4, t: "2026-10-01", h: [], c: 3 };
+  verbuche(s, 7, 2, 5, { fehler: 0, hilfe: false, ms: 2000, heute: HEUTE });
+  assert.equal(s.paare["7:2+5"].f, 4); assert.equal(s.paare["7:2+5"].t, HEUTE);
+});
+
+test("angebot: kleine Zahlen haben drei Stäbchen je Spalte und höchstens 1/3 Treffer", () => {
+  for (const n of [3, 4]) for (let seed = 1; seed <= 400; seed++) {
+    const rnd = lcg(seed * 17 + n), s = zufallsStand(n, rnd);
+    const { paare, links, rechts } = angebot(n, s, HEUTE, rnd);
+    assert.ok(links.length >= 3 && rechts.length >= 3, `n=${n} seed=${seed}`);
+    assert.ok(paare.length / (links.length * rechts.length) <= 1 / 3 + 1e-9, `Ratechance n=${n} seed=${seed}`);
+  }
 });

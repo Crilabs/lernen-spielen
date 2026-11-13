@@ -30,22 +30,22 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 #uni{width:42rem;left:26rem;top:103rem;z-index:6}
 
 .blase{position:absolute;left:3rem;top:3rem;width:44rem;min-height:9rem;background:var(--paper);border-radius:3rem;padding:2rem 2.6rem;
-  font:700 3.2rem/1.25 "Andika",sans-serif;box-shadow:0 .6rem 0 rgba(59,42,107,.15);z-index:8;display:flex;align-items:center;transition:opacity .3s}
+  font:400 3.2rem/1.25 "Andika",sans-serif;box-shadow:0 .6rem 0 rgba(59,42,107,.15);z-index:8;display:flex;align-items:center;transition:opacity .3s}
 .blase::after{content:"";position:absolute;left:14rem;bottom:-2.4rem;border:1.4rem solid transparent;border-top:1.6rem solid var(--paper);border-bottom:0}
 .blase:empty{opacity:0}
 
 /* Blume: Blüte (viewBox -100…100) mit Stiel bis y = 215 */
 .blume{position:absolute;left:92rem;top:5rem;width:66rem;transform:translateX(-50%);transform-origin:50% 100%;z-index:5;
   transition:transform .9s cubic-bezier(.3,1.4,.5,1),opacity .6s}
-.blume.klein{transform:translateX(-50%) scale(.24);transition:transform 1s ease-in-out}
-.blume.weg{transform:translateX(-50%) scale(.24);opacity:0;transition:opacity .5s}
+.blume.klein{transform:translateX(-50%) scale(.24);transition:transform .5s ease-in-out}
+.blume.weg{transform:translateX(-50%) scale(.24);opacity:0;transition:opacity .3s}
 .blume .gegessen{opacity:0;transition:opacity .2s}
 .blume.keim{transform:translateX(-50%) scale(0);transition:none}
 .blume svg{display:block;width:100%;height:auto;overflow:visible}
 .blatt{cursor:pointer}
 .blatt .form{transform-box:view-box;transform-origin:0 0;transform:rotate(var(--r)) scale(1);transition:transform .35s,fill .25s}
 .blatt .form path{fill:var(--farbe);stroke:#3B2A6B;stroke-width:3.2;transition:fill .25s,stroke-width .2s}
-.blatt text{font-family:"Andika",sans-serif;font-weight:700;fill:#3B2A6B;text-anchor:middle;dominant-baseline:central;pointer-events:none;transition:opacity .3s}
+.blatt text{font-family:"Andika",sans-serif;font-weight:400;fill:#3B2A6B;text-anchor:middle;dominant-baseline:central;pointer-events:none;transition:opacity .3s}
 .kranz{pointer-events:none}
 .blatt.start .form path{fill:var(--sonne);stroke-width:5}
 .blatt.partner .form path{fill:var(--rosa);stroke-width:5}
@@ -57,11 +57,11 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .blatt.wackel .form{animation:wackel .45s}
 @keyframes leuchten{to{stroke-width:7;stroke:#E39A00}}
 @keyframes wackel{25%{transform:rotate(calc(var(--r) - 6deg))}75%{transform:rotate(calc(var(--r) + 6deg))}}
-.mitte-zeichen{font:700 62px "Andika",sans-serif;fill:#3B2A6B;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.mitte-zeichen{font:400 62px "Andika",sans-serif;fill:#3B2A6B;text-anchor:middle;dominant-baseline:central;pointer-events:none}
 
 /* Rechenzeile + Punktefeld rechts auf der Bühne */
 .rechnen{position:absolute;left:132rem;right:4rem;top:24rem;display:flex;flex-direction:column;align-items:center;gap:3rem;z-index:7}
-.rechnung{font:700 8rem/1 "Andika",sans-serif;min-height:9rem;white-space:nowrap;text-shadow:0 .3rem 0 rgba(255,255,255,.7)}
+.rechnung{font:400 8rem/1 "Andika",sans-serif;min-height:9rem;white-space:nowrap;text-shadow:0 .3rem 0 rgba(255,255,255,.7)}
 .rechnung .fr{color:var(--mathe)}
 /* Montessori-Perlenstäbchen (Farben wie in der Perlenbrücke): 1 rot, 2 grün, 3 rosa, 4 gelb, 5 hellblau, 6 lila, 7 weiß,
    8 braun, 9 dunkelblau, 10 gold. Alle Perlen gleich breit, damit gleich lange Reihen gleich viel bedeuten. */
@@ -69,7 +69,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .perlreihe{display:flex;gap:calc(var(--p) * .08);align-items:flex-start}
 .gruppe{display:flex;flex-direction:column;align-items:center;gap:.6rem}
 .gruppe .staebe{display:flex;gap:calc(var(--p) * .08)}
-.gruppe .zahl{font:700 calc(var(--p) * .9 + 1rem)/1 "Andika",sans-serif;color:var(--nacht)}
+.gruppe .zahl{font:400 calc(var(--p) * .9 + 1rem)/1 "Andika",sans-serif;color:var(--nacht)}
 .stab{display:flex;gap:calc(var(--p) * .08);padding:calc(var(--p) * .06);border-radius:99rem;background:rgba(59,42,107,.18)}
 .stab b{width:var(--p);height:var(--p);border-radius:50%;background:var(--c);flex:none;
   box-shadow:inset calc(var(--p) * -.1) calc(var(--p) * -.14) 0 rgba(0,0,0,.18),inset calc(var(--p) * .1) calc(var(--p) * .1) 0 rgba(255,255,255,.45);border:1px solid rgba(0,0,0,.15);
@@ -77,17 +77,10 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .stab b.fort{opacity:.25;transform:translateY(calc(var(--p) * -.9)) scale(.85)}
 /* Perlen-Lektion nach dem Lösen: ruhig, mitten auf der Bühne */
 .lektion{position:absolute;left:50rem;right:20rem;top:16rem;display:flex;flex-direction:column;align-items:center;gap:4rem;z-index:7;
-  opacity:0;transition:opacity .5s;pointer-events:none}
+  opacity:0;transition:opacity .3s;pointer-events:none}
 .lektion.on{opacity:1}
-.lektion .titel{font:700 9rem/1 "Andika",sans-serif;text-shadow:0 .3rem 0 rgba(255,255,255,.7)}
+.lektion .titel{font:400 9rem/1 "Andika",sans-serif;text-shadow:0 .3rem 0 rgba(255,255,255,.7)}
 .lektion .feld{gap:3.4rem}
-
-/* Schlafpause */
-.pbar{position:absolute;left:30%;width:40%;bottom:3rem;height:1.2rem;border-radius:99rem;background:rgba(59,42,107,.25);overflow:hidden;z-index:9;display:none}
-.pbar.on{display:block}
-.pfill{height:100%;width:0;border-radius:99rem;background:#fff}
-.pbar.on .pfill{animation:pfill var(--pause-ms,10s) linear forwards}
-@keyframes pfill{from{width:0}to{width:100%}}
 
 /* ---------- Schwebende Knöpfe ---------- */
 .knoepfe{position:absolute;top:3rem;right:3rem;display:flex;gap:1.6rem;z-index:10}
@@ -100,7 +93,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .runde i{width:3.4rem;display:block;filter:grayscale(1) opacity(.35);transition:filter .6s}
 .runde i.da{filter:none;animation:spriessen2 .7s cubic-bezier(.2,1.6,.4,1)}
 @keyframes spriessen2{from{transform:scale(.3)}}
-.hilfe{position:absolute;right:3rem;bottom:3rem;z-index:10;height:8rem;padding:0 3rem;border-radius:99rem;background:rgba(255,255,255,.9);font:700 2.8rem/1 "Andika",sans-serif;display:flex;align-items:center;gap:1.2rem;
+.hilfe{position:absolute;right:3rem;bottom:3rem;z-index:10;height:8rem;padding:0 3rem;border-radius:99rem;background:rgba(255,255,255,.9);font:400 2.8rem/1 "Andika",sans-serif;display:flex;align-items:center;gap:1.2rem;
   box-shadow:0 .5rem 0 rgba(59,42,107,.15)}
 .hilfe img{width:4.4rem;height:4.4rem}
 .hilfe:active{transform:translateY(.3rem);box-shadow:0 .2rem 0 rgba(59,42,107,.15)}
@@ -109,10 +102,10 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 /* ---------- Elternansicht ---------- */
 .eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:3rem 4rem 4rem;user-select:text;-webkit-user-select:text;touch-action:auto;font-size:2rem;display:none}
 .eltern.on{display:block}
-.eltern h1{font:700 4rem/1.1 "Andika",sans-serif}.eltern h2{font:700 2.8rem/1.1 "Andika",sans-serif;margin:2.4rem 0 .6rem}.eltern p{margin:1rem 0;font-weight:700;max-width:90ch}
-.eltern ul{list-style:none;columns:3}.eltern li{background:var(--paper);border-radius:1rem;padding:.6rem 1.4rem;margin:0 0 .6rem;font-weight:700;break-inside:avoid}
+.eltern h1{font:700 4rem/1.1 "Andika",sans-serif}.eltern h2{font:700 2.8rem/1.1 "Andika",sans-serif;margin:2.4rem 0 .6rem}.eltern p{margin:1rem 0;font-weight:400;max-width:90ch}
+.eltern ul{list-style:none;columns:3}.eltern li{background:var(--paper);border-radius:1rem;padding:.6rem 1.4rem;margin:0 0 .6rem;font-weight:400;break-inside:avoid}
 .eltern small{font-weight:400;opacity:.75}
-.eltern .knopf{display:inline-block;background:var(--paper);border-radius:1.2rem;padding:1rem 1.8rem;font-weight:700;font-size:2.2rem;text-decoration:none;color:var(--nacht);margin-right:1rem}
+.eltern .knopf{display:inline-block;background:var(--paper);border-radius:1.2rem;padding:1rem 1.8rem;font-weight:400;font-size:2.2rem;text-decoration:none;color:var(--nacht);margin-right:1rem}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -125,7 +118,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
     <div class="akteur" id="uni"><div class="schatten"></div><div class="dreh" id="unidreh"></div></div>
     <div class="rechnen"><div class="rechnung" id="rechnung"></div><div class="feld" id="feld"></div></div>
     <div class="lektion" id="lektion"><div class="titel" id="ltitel"></div><div class="feld" id="lfeld"></div></div>
-    <div class="pbar" id="pbar"><div class="pfill"></div></div>
     <div class="runde" id="punkte" aria-label="Runde"></div>
     <div class="knoepfe">
       <button class="rund" id="snd" aria-label="Ton"><img id="sndimg" src="symbole/ton-an.svg" alt=""></button>
@@ -164,10 +156,8 @@ sperreTouch();
   // und Median-Zeit ≤ AUF_FAKTOR × Median der ersten AUF_N Blumen der Stufe (oder ≤ schnell der Stufe).
   const AUF_N = 10, AUF_QUOTE = 0.8, AUF_TAGE = 2, AUF_FAKTOR = 0.7;
   const PAUSE_MS = 10000;
-  const LEKTION_MS = 5200;     // Perlen-Lektion nach jeder gelösten Blume (zugleich kurze Pause)      // Schlafpause nach jeder Runde
-  const P_BESUCH = 0.25;       // nach einer Runde: so wahrscheinlich kommt jemand auf die Wiese …
-  const BESUCH_ABSTAND = 3;    // … frühestens nach so vielen Runden seit dem letzten Besuch
-  const P_EINZUG = 0.4;        // Anteil der Besuche, bei denen ein neues Einhorn einzieht (sonst besucht ein Tier)
+  const LEKTION_MS = 3000;     // Perlen-Lektion, nur nach Fehler oder Hilfe (Pause nach jeder Runde: PAUSE_MS)
+  const RATEN_AB = 3;          // so viele verworfene Paare je Blume: durchprobiert, zählt nicht als gekonnt
   const ANLEITUNG = 3;         // so viele Blumen überhaupt mit ausführlicher Ansage
   const EINHOERNER = [
     ["Luna","#ffffff"],["Regenbogen-Rosi","#FFD6EC"],["Sternchen","#FFF3B0"],["Zuckerwolke","#E8DEFF"],
@@ -175,7 +165,6 @@ sperreTouch();
     ["Flatterli","#DDF6E5"],["Erdbeerchen","#FFC9C9"],["Schneeflocke","#EEF7FF"],["Königin Perla","#FFEFD6"]];
   const BLATTFARBEN = ["#FFB3D9","#D6C8FF","#B8E6FF","#FFD0A8","#C8F0C0","#FFC2C2"];
   const BLUMENFARBEN = ["#FF9ECF","#B59CFF","#FFD95A","#8AD1FF","#FFB27F","#FF8A8A","#ffffff"];
-  const BESUCHER = ["hase","igel","eule","ente","frosch","maus","katze"];
 
   const $ = id => document.getElementById(id);
   const wait = ms => new Promise(r=>setTimeout(r,ms));
@@ -184,13 +173,13 @@ sperreTouch();
   const params = new URLSearchParams(location.search);
   const F = window.Figuren;
   const load = src => new Promise(r=>{ const s=document.createElement("script"); s.src=src; s.onload=s.onerror=r; document.head.appendChild(s); });
-  await Promise.all(["einhorn","blume",...BESUCHER].map(id=>load("figuren/"+id+".js")));
+  await Promise.all(["einhorn","blume"].map(id=>load("figuren/"+id+".js")));
 
   // ---------- Speichern (lernspiel.js: Tauri-Datei oder localStorage "lernstand-zahlenzauber") ----------
-  let save = await lade("zahlenzauber", {fakten:{}, verlauf:[], stufe:0, einhoerner:1, wiese:0, runden:0, letzterBesuch:0, anleitung:0, minusAnleitung:0, welkErklaert:0});
+  let save = await lade("zahlenzauber", {fakten:{}, verlauf:[], stufe:0, einhoerner:1, wiese:0, runden:0, anleitung:0, minusAnleitung:0, welkErklaert:0});
   if(!save.fakten || typeof save.fakten!=="object" || Array.isArray(save.fakten)) save.fakten={};
   if(!Array.isArray(save.verlauf)) save.verlauf=[];
-  for(const k of ["stufe","einhoerner","wiese","runden","letzterBesuch","anleitung","minusAnleitung"]) if(!Number.isFinite(save[k])) save[k]=k==="einhoerner"?1:0;
+  for(const k of ["stufe","einhoerner","wiese","runden","anleitung","minusAnleitung"]) if(!Number.isFinite(save[k])) save[k]=k==="einhoerner"?1:0;
   save.stufe=Math.min(Math.max(0,save.stufe|0), STUFEN.length-1);
   save.einhoerner=Math.min(Math.max(1,save.einhoerner|0), EINHOERNER.length);
   function persist(){ speichere("zahlenzauber", save); }
@@ -251,15 +240,6 @@ sperreTouch();
       const y=56+pr(i,2)*42, w=1.6+y*.045;
       d.style.left=(2+pr(i,1)*96)+"%"; d.style.top=y+"%"; d.style.width=w+"rem"; d.style.zIndex=Math.round(y);
       d.innerHTML=F.svgDing("blume").replace('fill="#FF9ECF"', `fill="${BLUMENFARBEN[Math.floor(pr(i,3)*BLUMENFARBEN.length)]}"`);
-      hinten.appendChild(d);
-    }
-    // Herde rechts hinten am Waldrand, klein, damit sie die Blume nicht stört
-    for(let i=0;i<save.einhoerner;i++){
-      const [,fell]=EINHOERNER[i];
-      const d=document.createElement("div"); d.className="w";
-      const y=57+(i%3)*2.2+pr(i,7)*1.5;
-      d.style.left=(92-i*3.4-pr(i,5)*2)+"%"; d.style.top=y+"%"; d.style.width=(8.5+y*.05)+"rem"; d.style.zIndex=Math.round(y)+1;
-      d.innerHTML=`<div style="${pr(i,6)<.5?"transform:scaleX(-1)":""}">${F.svgFigur("einhorn",{fell})}</div>`;
       hinten.appendChild(d);
     }
   }
@@ -354,14 +334,15 @@ sperreTouch();
 
   // Rechts neben der Blume (Fehler, Hilfe): oben die Teile, unten das Ganze. Minus (fort): oben das Ganze, die
   // weggenommenen Perlen heben sich ab, unten der Rest.
-  async function punkte(x, y, {fort=false}={}){
+  async function punkte(x, y, {fort=false, ohneErgebnis=false}={}){
     const feld=$("feld"); feld.innerHTML=""; const s=x+y;
     perlGroesse(feld, document.querySelector(".rechnen"), s, 3);
-    if(!fort){ feld.append(reihe(gruppe(x), gruppe(y)), reihe(gruppe(s))); return; }
+    if(!fort){ feld.append(reihe(gruppe(x), gruppe(y))); if(!ohneErgebnis) feld.append(reihe(gruppe(s))); return; }
     const oben=reihe(gruppe(s)); feld.append(oben);
-    await wait(500);
+    await wait(400);
     [...oben.querySelectorAll("b")].slice(-y).forEach(b=>b.classList.add("fort"));
-    await wait(500);
+    if(ohneErgebnis) return;      // Denkhilfe: der Rest bleibt für das Kind
+    await wait(400);
     feld.append(reihe(gruppe(x)));
   }
 
@@ -377,32 +358,32 @@ sperreTouch();
     const glocke = i => tone(520+i*90, 700+i*90, .25, "sine", .05);
     if(!minus){
       const g1=gruppe(x), g2=gruppe(y), oben=reihe(g1,g2); feld.append(oben);
-      g1.animate([{transform:"translateX(-24rem)",opacity:0},{transform:"none",opacity:1}],{duration:900,easing:"cubic-bezier(.2,.8,.3,1)",fill:"backwards"});
-      g2.animate([{transform:"translateX(24rem)",opacity:0},{transform:"none",opacity:1}],{duration:900,easing:"cubic-bezier(.2,.8,.3,1)",fill:"backwards"});
-      await wait(1100);
+      g1.animate([{transform:"translateX(-24rem)",opacity:0},{transform:"none",opacity:1}],{duration:600,easing:"cubic-bezier(.2,.8,.3,1)",fill:"backwards"});
+      g2.animate([{transform:"translateX(24rem)",opacity:0},{transform:"none",opacity:1}],{duration:600,easing:"cubic-bezier(.2,.8,.3,1)",fill:"backwards"});
+      await wait(700);
       say(`${x} und ${y} sind zusammen ${s}.${zehnUnd}`);
       const unten=gruppe(s); feld.append(reihe(unten));
       const staebe=[...unten.querySelectorAll(".stab")], zahl=unten.querySelector(".zahl");
       staebe.forEach(st=>st.style.opacity=0); zahl.style.opacity=0;
       for(const [i,st] of staebe.entries()){
         st.style.opacity=1; glocke(i);
-        st.animate([{transform:"scaleX(0)"},{transform:"none"}],{duration:650,easing:"ease-out"}).finished.catch(()=>{});
-        st.style.transformOrigin="0 50%"; await wait(700);
+        st.animate([{transform:"scaleX(0)"},{transform:"none"}],{duration:300,easing:"ease-out"}).finished.catch(()=>{});
+        st.style.transformOrigin="0 50%"; await wait(320);
       }
       zahl.style.transition="opacity .4s"; zahl.style.opacity=1;
     }else{
       const ganz=gruppe(s), oben=reihe(ganz); feld.append(oben);
-      ganz.animate([{opacity:0},{opacity:1}],{duration:600,fill:"backwards"});
-      await wait(900);
+      ganz.animate([{opacity:0},{opacity:1}],{duration:400,fill:"backwards"});
+      await wait(600);
       say(`${s} weniger ${y} sind ${x}.`);
       const perlen=[...oben.querySelectorAll("b")].slice(-y).reverse();
-      for(const b of perlen){ b.classList.add("fort"); await wait(Math.max(60, 600/y)); }
-      await wait(500);
+      for(const b of perlen){ b.classList.add("fort"); await wait(Math.max(40, 400/y)); }
+      await wait(300);
       const rest=gruppe(x); feld.append(reihe(rest)); glocke(0);
-      rest.animate([{transform:"translateY(-3rem)",opacity:0},{transform:"none",opacity:1}],{duration:700,easing:"ease-out",fill:"backwards"});
+      rest.animate([{transform:"translateY(-3rem)",opacity:0},{transform:"none",opacity:1}],{duration:500,easing:"ease-out",fill:"backwards"});
     }
-    await wait(Math.max(1200, LEKTION_MS-(Date.now()-t0)));
-    L.classList.remove("on"); await wait(500); feld.innerHTML="";
+    await wait(Math.max(800, LEKTION_MS-(Date.now()-t0)));
+    L.classList.remove("on"); await wait(350); feld.innerHTML="";
   }
   const leereFeld = () => { $("feld").innerHTML=""; };
   const zeile = html => { $("rechnung").innerHTML=html; };
@@ -417,7 +398,7 @@ sperreTouch();
     B.nums.forEach((v,i)=>{
       const w=i*360/n;
       blaetter+=`<g class="blatt" data-i="${i}" style="--r:${w}deg;--farbe:${farbe}" role="button" aria-label="${v}">
-        <g class="form"><path d="${BLATT}"/><text x="0" y="-70" transform="rotate(${-w} 0 -70)" font-size="${v>=100?30:38}">${v}</text></g></g>`;
+        <g class="form"><path d="${BLATT}"/><text x="0" y="-70" transform="rotate(${-w} 0 -70)" font-size="${v>=100?33:42}">${v}</text></g></g>`;
     });
     // zweiter Kranz dahinter (nicht antippbar), damit die Blume voll aussieht
     let kranz="";
@@ -499,7 +480,8 @@ sperreTouch();
     // Start und Partner gewählt: dritte Zahl
     if(i!==A && i!==P && istLoesung(A,P,i)) return geloest();
     if(entscheidend(A,P)) return verpasst(i);
-    B.probiert.add(paar(A,P)); B.partner=null; sfx.welk();
+    // Falsche dritte Zahl bei einem anderen Paar: klar benennen (Rechnung in der Blase), Paar welkt, zählt mit (Raten)
+    B.probiert.add(paar(A,P)); B.partner=null; sfx.hm(); leereFeld(); sag(`${paarText(A,P)} = ${paarWert(A,P)}`);
     if(i===A){ B.start=null; zeigeZustand(); zeile(""); return; }
     if(i===P){ zeigeZustand(); zeile(""); anleitungWelk(A,P); return; }
     if(B.probiert.has(paar(A,i))){ B.start=i; zeigeZustand(); zeile(""); nachStart(); return; }
@@ -517,23 +499,40 @@ sperreTouch();
     if(!save.welkErklaert){ save.welkErklaert=1; persist(); sag(`Die blassen Blätter hast du mit der ${B.nums[A]} schon probiert.`); }
   }
 
+  // Fehler-Leiter beim entscheidenden Paar: 1. nur Signal, 2. Denkhilfe (Probe, ohne Ergebnis), 3. Lösung mit Begründung
   async function verpasst(i){
-    const A=B.start, P=B.partner, v=paarWert(A,P);
+    const A=B.start, P=B.partner;
     B.fehler++; busy=true; sfx.hm(); fragend(); if(i!==A && i!==P) wackel(i);
-    zeile(`${paarText(A,P)} = ${v}`);
-    if(B.minus){ const g=Math.max(B.nums[A],B.nums[P]), t=Math.min(B.nums[A],B.nums[P]); await punkte(g-t, t, {fort:true}); }
-    else await punkte(B.nums[A], B.nums[P]);
-    const k=B.nums.indexOf(v);
-    if(B.fehler>=2){ B.el[k].classList.add("zeig"); sag(`${paarText(A,P)} = ${v}. Da ist die ${v}!`); }
-    else sag(`${paarText(A,P)} = ${v}. Such die ${v}!`);
-    busy=false;
+    if(B.fehler===1){ sag("Das stimmt nicht. Probier noch mal."); await wait(700); busy=false; return; }
+    if(B.fehler===2){
+      if(B.minus){ const g=Math.max(B.nums[A],B.nums[P]), t=Math.min(B.nums[A],B.nums[P]); await punkte(g-t, t, {fort:true, ohneErgebnis:true}); sag("Nimm die Perlen weg. Wie viele bleiben?"); }
+      else{ await punkte(B.nums[A], B.nums[P], {ohneErgebnis:true}); sag("Leg die Perlen zusammen. Welche Zahl ist es?"); }
+      busy=false; return;
+    }
+    await loesungZeigen();
+  }
+
+  // Lösung zeigen und gesprochen begründen; das Kind tippt sie danach selbst nach (zählt nicht als gekonnt)
+  async function loesungZeigen(){
+    busy=true; $("hilfe").classList.add("aus"); B.loesungGezeigt=true;
+    const [a,b,c]=B.loes;
+    const folge = B.minus ? [c,b,a] : [a,b,c];
+    const text = B.minus ? `${B.nums[c]} − ${B.nums[b]} = ${B.nums[a]}` : `${B.nums[a]} + ${B.nums[b]} = ${B.nums[c]}`;
+    const grund = B.minus ? `${B.nums[c]} weniger ${B.nums[b]} sind ${B.nums[a]}.` : `${B.nums[a]} und ${B.nums[b]} sind zusammen ${B.nums[c]}.`;
+    B.start=null; B.partner=null; zeigeZustand(); zeile(""); leereFeld();
+    sag(`Schau: ${text}. Tipp es nach!`); say(`${grund} Tipp es nach.`);
+    for(const i of folge){ B.el[i].classList.add("zeig"); await wait(600); }
+    zeile(text);
+    await punkte(B.nums[a], B.nums[b], {fort:B.minus});
+    await wait(900); B.el.forEach(e=>e.classList.remove("zeig")); zeile(""); leereFeld();
+    B.nach={folge, schritt:0}; B.el[folge[0]].classList.add("zeig"); busy=false;
   }
 
   // ---------- Hilfe-Knopf: 1. Strategie, 2. ein Teil leuchtet, 3. Lösung zum Nachtippen ----------
-  $("hilfe").addEventListener("click", async ()=>{
+  $("hilfe").addEventListener("click", ()=>{
     if(busy || !B || B.nach) return;
     sfx.tipp(); B.hilfe++;
-    const [a,b,c]=B.loes;
+    const c=B.loes[2];
     if(B.hilfe===1){
       if(B.minus) sag("Nimm eine große Zahl. Was bleibt, wenn eine kleinere weggeht?");
       else sag("Das Ergebnis ist größer als die zwei Teile.");
@@ -541,18 +540,7 @@ sperreTouch();
       if(B.minus){ B.start=c; B.partner=null; zeigeZustand(); zeile(""); leereFeld(); }
       B.el[c].classList.add("zeig");   // leuchtet, bis die Blume gelöst ist
       sag(B.minus?`Fang bei der ${B.nums[c]} an.`:`Das Ergebnis ist ${B.nums[c]}. Welche zwei passen?`);
-    }else{
-      busy=true; $("hilfe").classList.add("aus");
-      const folge = B.minus ? [c,b,a] : [a,b,c];
-      const text = B.minus ? `${B.nums[c]} − ${B.nums[b]} = ${B.nums[a]}` : `${B.nums[a]} + ${B.nums[b]} = ${B.nums[c]}`;
-      B.start=null; B.partner=null; zeigeZustand();
-      sag(`Schau: ${text}. Tipp es nach!`);
-      for(const i of folge){ B.el[i].classList.add("zeig"); await wait(600); }
-      zeile(text);
-      if(B.minus) await punkte(B.nums[a], B.nums[b], {fort:true}); else await punkte(B.nums[a], B.nums[b]);
-      await wait(900); B.el.forEach(e=>e.classList.remove("zeig")); zeile(""); leereFeld();
-      B.nach={folge, schritt:0}; B.el[folge[0]].classList.add("zeig"); busy=false;
-    }
+    }else loesungZeigen();
   });
   function nachtippen(i){
     const N=B.nach, soll=N.folge[N.schritt];
@@ -569,7 +557,7 @@ sperreTouch();
   async function geloest(){
     busy=true; $("hilfe").classList.add("aus");
     const [a,b,c]=B.loes, x=B.nums[a], y=B.nums[b];
-    const ok=B.fehler===0 && B.hilfe===0, ms=Date.now()-B.t0;
+    const ok=B.fehler===0 && B.hilfe===0 && B.probiert.size<RATEN_AB, ms=Date.now()-B.t0;
     record(B.fakt, ok);
     if(!ok && wieder.length<WIEDER_MAX && !wieder.some(w=>w.fakt===B.fakt) && !rundenFakten.includes(B.fakt+"#w")){ wieder.push({fakt:B.fakt, ab:rundeIdx+1+WIEDER_NACH}); rundenFakten.push(B.fakt+"#w"); }
     save.verlauf.push({d:heute(), s:save.stufe, n:B.nums.length, m:B.minus?1:0, ms, ok:ok?1:0}); if(save.verlauf.length>300) save.verlauf.shift();
@@ -582,15 +570,16 @@ sperreTouch();
     sfx.geloest();
     F.hop(uniSvg(), {hoehe:50, dauer:650, mal:1});
     leereFeld();
-    await wait(1600);
-    // Einhorn läuft zur Blume, die Blume neigt sich herunter, das Einhorn frisst sie
+    await wait(600);
+    // Einhorn läuft zur Blume, die Blume neigt sich herunter, das Einhorn frisst sie (zusammen ca. 2 s)
+    const lernen = !ok && !B.loesungGezeigt;   // Lektion nur nach Fehler/Hilfe/Raten; nach gezeigter Lösung wäre sie doppelt
     B.el.forEach(e=>e.classList.remove("zeig"));
     blumeEl.classList.add("klein");
-    await laufe(70, {lauf:1.1});
+    await laufe(70, {lauf:.5});
     F.zustand(uniSvg(),"frisst"); sfx.happs();
-    for(const g of shuffle([...B.el, ...blumeEl.querySelectorAll(".kranz path")])){ g.classList.add("gegessen"); await wait(150); }   // Blatt für Blatt wegknabbern
+    for(const g of shuffle([...B.el, ...blumeEl.querySelectorAll(".kranz path")])){ g.classList.add("gegessen"); await wait(45); }   // Blatt für Blatt wegknabbern
     blumeEl.classList.add("weg");
-    await wait(500);
+    await wait(250);
     F.zustand(uniSvg(),"");
     save.wiese++;
     if(pruefeAufstieg()) save.stufe++;
@@ -598,9 +587,9 @@ sperreTouch();
     zeichneWiese(true);
     rundeIdx++; zeigePunkte();
     zeile(""); leereFeld(); $("blase").textContent="";
-    await laufe(UNI_HEIM, {lauf:1.1});
+    await laufe(UNI_HEIM, {lauf:.5});
     blumeEl.innerHTML=""; blumeEl.className="blume";
-    await lektion(x, y, B.minus);   // Pause mit Perlen: was sie gerade herausgefunden hat
+    if(lernen) await lektion(x, y, B.minus);   // Perlen: was sie gerade herausgefunden hat
     if(rundeIdx>=RUNDE && (wieder.length===0 || rundeIdx>=RUNDE+WIEDER_MAX)) return schlafpause();
     await wachse();
   }
@@ -609,7 +598,7 @@ sperreTouch();
     neueBlume();
     blumeEl.className="blume keim"; void blumeEl.offsetWidth;
     blumeEl.className="blume"; sfx.wachsen();
-    await wait(950);
+    await wait(650);
     B.t0=Date.now(); busy=false; ansageStart();
   }
   function zeigePunkte(){ $("punkte").innerHTML=Array.from({length:Math.max(RUNDE, rundeIdx+wieder.length)},(_,i)=>`<i${i<rundeIdx?' class="da"':""}>${F.svgDing("blume").replace('fill="#FF9ECF"', `fill="${BLUMENFARBEN[i%BLUMENFARBEN.length]}"`)}</i>`).join(""); }
@@ -621,36 +610,12 @@ sperreTouch();
     await wachse();
   }
   async function schlafpause(){
-    busy=true; save.runden++;
-    let besuch=null;
-    if(save.runden-save.letzterBesuch>=BESUCH_ABSTAND && Math.random()<P_BESUCH){
-      besuch = (save.einhoerner<EINHOERNER.length && Math.random()<P_EINZUG) ? "einhorn" : BESUCHER[Math.floor(Math.random()*BESUCHER.length)];
-      save.letzterBesuch=save.runden;
-    }
-    persist();
+    busy=true; save.runden++; persist();
     $("hilfe").classList.add("aus");
     await laufe(88, {lauf:1.8});
     F.zustand(uniSvg(),"schlaeft");
     sag("Das Einhorn ist satt und schläft ein bisschen.");
-    const bar=$("pbar"); bar.style.setProperty("--pause-ms", PAUSE_MS+"ms"); bar.classList.remove("on"); void bar.offsetWidth; bar.classList.add("on");
-    const ende=Date.now()+PAUSE_MS;
-    if(besuch){
-      await wait(2500);
-      const fell = besuch==="einhorn" ? EINHOERNER[save.einhoerner][1] : undefined;
-      const g=document.createElement("div"); g.className="akteur"; g.style.cssText=`width:${besuch==="einhorn"?26:16}rem;left:210rem;top:102rem;z-index:6;--lauf:2.6s`;
-      g.innerHTML=`<div class="schatten"></div><div class="dreh links">${F.svgFigur(besuch,{fell})}</div>`;
-      $("stage").appendChild(g); const svg=g.querySelector("svg"); F.zustand(svg,"laeuft");
-      await wait(60); g.style.left="130rem"; await wait(2700); F.zustand(svg, besuch==="einhorn"?"":"frisst");
-      if(besuch==="einhorn"){
-        const name=EINHOERNER[save.einhoerner][0]; save.einhoerner++; persist();
-        F.hop(svg,{hoehe:40,dauer:600,mal:2}); sag(`${name} zieht auf deine Wiese!`);
-      }else{
-        const d=F.figuren[besuch]; sag(`Besuch! ${d.artikel==="die"?"Eine":"Ein"} ${d.wort} schaut vorbei.`);
-      }
-      await wait(Math.max(0, ende-Date.now()));
-      g.remove(); zeichneWiese();
-    }else await wait(Math.max(0, ende-Date.now()));
-    bar.classList.remove("on");
+    await wait(PAUSE_MS);
     F.zustand(uniSvg(),"");
     $("blase").textContent="";
     await laufe(UNI_HEIM, {lauf:1.8});
@@ -664,14 +629,14 @@ sperreTouch();
     const sek = ms => isFinite(ms) ? (ms/1000).toFixed(1)+" s" : "–";
     const liste=Object.entries(save.fakten).sort((a,b)=>a[1].f-b[1].f || a[0].localeCompare(b[0],undefined,{numeric:true}));
     el.innerHTML=`<h1>Lernstand Zahlenzauber</h1>
-      <p>Stufe ${esc(save.stufe+1)} von ${STUFEN.length}: bis ${st.max}${st.minus?" mit Minus":""} · ${v.length} Blumen in dieser Stufe (davon ${v.filter(e=>e.m).length} Minus) · ${esc(save.runden)} Runden · ${esc(save.wiese)} Blumen gesamt · ${esc(save.einhoerner)} Einhörner</p>
+      <p>Stufe ${esc(save.stufe+1)} von ${STUFEN.length}: bis ${st.max}${st.minus?" mit Minus":""} · ${v.length} Blumen in dieser Stufe (davon ${v.filter(e=>e.m).length} Minus) · ${esc(save.runden)} Runden · ${esc(save.wiese)} Blumen gesamt</p>
       <h2>Aufstieg in die nächste Stufe</h2>
       <p>Letzte ${letzte.length} Blumen mit 5 Blättern: ${letzte.filter(e=>e.ok).length} ohne Fehler und Hilfe (nötig ${Math.ceil(AUF_N*AUF_QUOTE)} von ${AUF_N}),
         an ${new Set(letzte.map(e=>e.d)).size} Tagen (nötig ${AUF_TAGE}). Zeit (Median) jetzt ${sek(median(letzte.filter(e=>e.ok).map(e=>e.ms)))},
         am Anfang der Stufe ${sek(median(v5.slice(0,AUF_N).filter(e=>e.ok).map(e=>e.ms)))}. Schnell genug: ≤ ${sek(st.schnell)} oder ${Math.round((1-AUF_FAKTOR)*100)} % schneller als am Anfang.</p>
       <p><button class="knopf" id="stufeMinus">Stufe −</button><button class="knopf" id="stufePlus">Stufe +</button><a class="knopf" href="index.html">Zur Übersicht</a></p>
       <h2>Aufgaben (Fach 0 = wackelt, ab Fach ${GELERNT} gelernt)</h2>
-      <ul>${liste.map(([k,e])=>`<li>${esc(k.replace("-"," − ").replace("+"," + "))} <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(k)&&e.f<GELERNT?" · fällig":""} · ${(Array.isArray(e.h)?e.h:[]).map(x=>x?"✓":"✗").join("")}</small></li>`).join("") || "<li>Noch nichts gespielt.</li>"}</ul>`;
+      <ul>${liste.map(([k,e])=>`<li>${esc(k.replace("-"," − ").replace("+"," + "))} <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(k)&&e.f<GELERNT?" · fällig":""} · ${(Array.isArray(e.h)?e.h:[]).map(x=>x?"richtig":"falsch").join(", ")}</small></li>`).join("") || "<li>Noch nichts gespielt.</li>"}</ul>`;
     $("stufeMinus").onclick=()=>{ save.stufe=Math.max(0,save.stufe-1); persist(); eltern(); };
     $("stufePlus").onclick=()=>{ save.stufe=Math.min(STUFEN.length-1,save.stufe+1); persist(); eltern(); };
   }

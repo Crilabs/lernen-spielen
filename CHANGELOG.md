@@ -1,5 +1,15 @@
 # Änderungen
 
+## Unveröffentlicht
+
+- Schrift: Wörter, Sätze, Zahlen und Knöpfe in normaler Stärke (Andika 400), nur Überschriften etwas kräftiger.
+- Alle Spiele nach den Lern-Grundsätzen nachgeschärft: kürzere Effekte (mehr Aufgaben pro Minute), Hilfe in drei Stufen (Signal, Denkhilfe, Lösung mit Begründung), mit Hilfe oder durch Raten Gelöstes zählt nicht als gekonnt, Deko ohne Bedeutung steht still, keine Fanfaren.
+- Zahlenzauber: Fressen dauert nur noch etwa 2 s, die Perlen-Erklärung kommt nur nach Fehler oder Hilfe. Keine Besuche und keine Einhorn-Herde mehr.
+- Perlenbrücke: Gelernte Aufgaben kommen nach 21 Tagen wieder (vorher nie). Fehlerszene höchstens 5 s, bei richtiger Brücke läuft das Einhorn hinüber statt Fanfare. Runden sind länger (20 Brücken), Raten lohnt sich weniger.
+- Wimmelbild: Erst beim zweiten Daneben leuchtet das richtige Ding auf, das Wort zählt dann als Fehler. Kein Rundenpunkt mehr. Nach drei Szenen am Tag ein ruhiger Abschluss.
+- Zauberer: Nur Wörter zählen, die verhext waren oder angetippt wurden. Die Zauberin niest bei Fehlern, wartet nur noch halb so lang, und der Probe-Stab zeigt auch die Erweiterungsprobe („der Hund – der kleine Hund“). Adjektiv-Fallen erst ab Runde 2. Nach drei Runden am Tag einmal ein ruhiger Halt.
+- Einhorn-Steine: Riss mit gesprochener Lösung erst nach dem dritten Fehler, Glocke und Funken nur bei richtig gesetzter Lücke, ruhiger Hintergrund, Runden mit 6 Sätzen.
+
 ## v0.1.3
 
 - Startseite: Das Einhorn steht jetzt auf der Wiese statt darüber zu schweben.

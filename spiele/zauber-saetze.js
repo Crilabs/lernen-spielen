@@ -72,12 +72,13 @@
   ];
 
   // Einen zufälligen Satz bauen. Optional: muss Schlüssel `mit` enthalten.
-  function zufall(){
-    const pool=[]; for(const v of VORLAGEN) for(let i=0;i<v.gewicht;i++) pool.push(v);
+  // adjModus: "nie" = kein Adjektiv, "immer" = jeder Satz mit Adjektiv (nur Vorlagen, die eins tragen), "misch" = gelegentlich (35 %)
+  function zufall(adjModus="misch"){
+    const pool=[]; for(const v of VORLAGEN) if(!(adjModus==="immer" && v.zwei)) for(let i=0;i<v.gewicht;i++) pool.push(v);
     const v=pick(pool);
     const s=pick(v.nurFlieger ? figs(f=>FIG[f].fliegt) : figs());
     let adj=null;
-    if(!v.zwei && Math.random()<.35){ const ok=Object.keys(ADJ).filter(a=>!ADJ[a].nur||ADJ[a].nur.includes(v.typ)); adj=pick(ok); }
+    if(!v.zwei && (adjModus==="immer" || (adjModus==="misch" && Math.random()<.35))){ const ok=Object.keys(ADJ).filter(a=>!ADJ[a].nur||ADJ[a].nur.includes(v.typ)); adj=pick(ok); }
     const {teile, szene} = v.bau(s, adj);
     if(adj) szene.adj = ADJ[adj].fx;
     // Satzanfang: erstes Wort groß und fest

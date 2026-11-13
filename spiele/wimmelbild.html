@@ -26,10 +26,10 @@ img{display:block}
 .world svg polygon.chk{fill:rgba(255,138,203,.18);stroke:#FF2E9A;stroke-width:2px;vector-effect:non-scaling-stroke}
 .world svg polygon.hint{fill:rgba(255,217,90,.25);stroke:#FFD95A;stroke-width:4px;vector-effect:non-scaling-stroke;animation:hint 1.4s ease-out forwards}
 @keyframes hint{0%,60%{opacity:1}100%{opacity:0}}
-.world svg text{font:700 2.6px "Andika",sans-serif;fill:#fff;stroke:#3B2A6B;stroke-width:.5px;paint-order:stroke;text-anchor:middle}
+.world svg text{font:400 2.6px "Andika",sans-serif;fill:#fff;stroke:#3B2A6B;stroke-width:.5px;paint-order:stroke;text-anchor:middle}
 .piece{position:absolute;inset:0;pointer-events:none;z-index:2;filter:drop-shadow(0 .4rem .6rem rgba(0,0,0,.45))}
 .piece i{position:absolute;inset:0;background-size:100% 100%}
-.tag{position:absolute;z-index:3;transform:translate(-50%,-100%);background:var(--paper);color:var(--nacht);font:700 2.6rem/1 "Andika",sans-serif;
+.tag{position:absolute;z-index:3;transform:translate(-50%,-100%);background:var(--paper);color:var(--nacht);font:400 2.6rem/1 "Andika",sans-serif;
   padding:.5rem 1.2rem .4rem;border-radius:99rem;white-space:nowrap;box-shadow:0 .3rem 0 rgba(59,42,107,.25);pointer-events:none;animation:pop .35s cubic-bezier(.2,1.6,.4,1)}
 @keyframes pop{from{transform:translate(-50%,-100%) scale(.3)}}
 .leiste{position:relative;flex:1;min-width:30rem;container-type:inline-size;background:var(--bg);display:flex;flex-direction:column;align-items:center;
@@ -39,40 +39,41 @@ img{display:block}
   box-shadow:0 .5rem 0 rgba(59,42,107,.15);text-decoration:none;flex:none}
 .rund img{width:100%;height:100%}
 .rund:active{transform:translateY(.3rem);box-shadow:0 .2rem 0 rgba(59,42,107,.15)}
-.runde{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:1rem;min-height:1.5rem}
-.runde i{width:1.5rem;height:1.5rem;border-radius:50%;background:rgba(59,42,107,.15)}
-.runde i.da{background:var(--gram)}
 .mitte{flex:1;min-height:0;align-self:stretch;display:flex;align-items:center;justify-content:center}
-.card{max-width:100%;background:var(--paper);color:var(--nacht);border-radius:2.6rem;padding:2.6rem 3rem;font:700 min(6.4rem,11cqi)/1 "Andika",sans-serif;
+.card{max-width:100%;background:var(--paper);color:var(--nacht);border-radius:2.6rem;padding:2.6rem 3rem;font:400 min(6.4rem,11cqi)/1 "Andika",sans-serif;
   letter-spacing:.04em;white-space:nowrap;box-shadow:0 .9rem 0 var(--gram-s);transform:rotate(-2deg);touch-action:none;cursor:grab;transition:opacity .25s,transform .25s}
 .card.away{opacity:0}
 .card.hide{opacity:0;transform:rotate(-2deg) scale(.6);pointer-events:none}
 .ghost{position:fixed;z-index:20;pointer-events:none;margin:0;transform:translate(-50%,-50%) scale(1.08);box-shadow:0 1.6rem 2.6rem rgba(59,42,107,.4);transition:none}
-.hilfe{height:7rem;padding:0 2.8rem;border-radius:99rem;background:var(--paper);font:700 2.4rem/1 "Andika",sans-serif;display:flex;align-items:center;gap:1rem;
+.hilfe{height:7rem;padding:0 2.8rem;border-radius:99rem;background:var(--paper);font:400 2.4rem/1 "Andika",sans-serif;display:flex;align-items:center;gap:1rem;
   box-shadow:0 .5rem 0 rgba(59,42,107,.15);flex:none}
 .hilfe img{width:4rem;height:4rem}
 .hilfe:active{transform:translateY(.3rem);box-shadow:0 .2rem 0 rgba(59,42,107,.15)}
 .bin{width:100%;height:20rem;flex:none;border-radius:3rem;border:.5rem dashed rgba(59,42,107,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;
-  font:700 2.2rem/1 "Andika",sans-serif;color:var(--weich);transition:background .15s,border-color .15s,transform .15s}
+  font:400 2.2rem/1 "Andika",sans-serif;color:var(--weich);transition:background .15s,border-color .15s,transform .15s}
 .bin img{width:8rem;height:8rem}
 .bin.open{transform:scale(1.04);background:#FFF2BF;border-color:rgba(59,42,107,.55)}
 .bin.hide,.hilfe.hide{visibility:hidden}
 .hilfe{transition:opacity .8s,visibility .8s}
 .hilfe.hide{opacity:0;transition:none}
-.info{position:fixed;left:1.6rem;top:1.6rem;background:var(--paper);padding:.8rem 1.6rem;border-radius:1.2rem;font-weight:700;font-size:2.2rem;z-index:5}
+.info{position:fixed;left:1.6rem;top:1.6rem;background:var(--paper);padding:.8rem 1.6rem;border-radius:1.2rem;font-weight:400;font-size:2.2rem;z-index:5}
 .links{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
-.links a{background:var(--paper);color:var(--nacht);border-radius:1.2rem;padding:1rem 1.6rem;font-weight:700;font-size:2.2rem;text-decoration:none}
+.links a{background:var(--paper);color:var(--nacht);border-radius:1.2rem;padding:1rem 1.6rem;font-weight:400;font-size:2.2rem;text-decoration:none}
 .pause{position:fixed;inset:0;z-index:25;background:#1F1B45;display:none;opacity:0;transition:opacity .6s}
 .pause.on{display:block}.pause.show{opacity:1}
-.pause img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pause>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pbar{position:absolute;left:30%;width:40%;bottom:3rem;height:1.2rem;border-radius:99rem;background:rgba(59,42,107,.35);box-shadow:0 0 0 .2rem rgba(59,42,107,.35);overflow:hidden}
 .pfill{height:100%;width:0;border-radius:99rem;background:#fff}
 .pause.show .pfill{animation:pfill var(--pause-ms,10s) linear forwards}
 @keyframes pfill{from{width:0}to{width:100%}}
 .eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:3rem 4rem 4rem;user-select:text;-webkit-user-select:text;touch-action:auto;font-size:2rem}
-.eltern h1{font:700 4rem/1.1 "Andika",sans-serif}.eltern h2{font:700 2.8rem/1.1 "Andika",sans-serif;margin:2.4rem 0 .6rem}.eltern p{margin:1rem 0;font-weight:700;max-width:70ch}
-.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:1rem;padding:.6rem 1.4rem;margin:.6rem 0;font-weight:700}
+.eltern h1{font:700 4rem/1.1 "Andika",sans-serif}.eltern h2{font:700 2.8rem/1.1 "Andika",sans-serif;margin:2.4rem 0 .6rem}.eltern p{margin:1rem 0;font-weight:400;max-width:70ch}
+.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:1rem;padding:.6rem 1.4rem;margin:.6rem 0;font-weight:400}
 .eltern small{font-weight:400;opacity:.75}
+.btn{display:inline-block;font:400 2rem/1 "Andika",sans-serif;color:var(--nacht);text-decoration:none;background:var(--paper);border-radius:99rem;padding:1rem 2.4rem;box-shadow:0 .4rem 0 rgba(59,42,107,.25)}
+.btn.mint{background:var(--mint)}
+.pause .rund{position:absolute;left:2.4rem;top:2.4rem;display:none}
+.pause.ende .rund{display:flex}.pause.ende .pbar{display:none}
 @media (prefers-reduced-motion:reduce){.pause{transition:none}}
 </style>
 </head>
@@ -89,7 +90,6 @@ img{display:block}
       <a class="rund" href="index.html" aria-label="Alle Spiele"><img src="symbole/haus.svg" alt=""></a>
       <button class="rund" id="snd" aria-label="Ton"><img id="sndimg" src="symbole/ton-an.svg" alt=""></button>
     </div>
-    <div class="runde" id="punkte" aria-label="Runde"></div>
     <div class="mitte" id="mitte"><button class="card hide" id="card"></button></div>
     <button class="hilfe hide" id="hilfe"><img src="symbole/hilfe.svg" alt="">Hilfe</button>
     <div class="bin hide" id="bin"><img src="symbole/muelleimer.svg" alt="">Kein Nomen</div>
@@ -97,6 +97,7 @@ img{display:block}
 </div>
 <div class="pause" id="pause">
   <img id="pimg" alt="">
+  <a class="rund" href="index.html" aria-label="Alle Spiele"><img src="symbole/haus.svg" alt=""></a>
   <div class="pbar"><div class="pfill"></div></div>
 </div>
 
@@ -119,6 +120,8 @@ sperreTouch();
   const WIEDER_NACH = 3;       // ein falsch gelöstes Wort kommt in derselben Runde nach so vielen anderen noch einmal
   const WIEDER_MAX = 4;        // höchstens so viele Wiederholungen je Runde (damit die Runde kurz bleibt)
   const HILFE_MS = 15000;   // Vorlese-Hilfe erst nach so langer Zeit je Wort zeigen: erst selbst lesen
+  const RUNDEN_TAG = 3;     // nach so vielen Szenen an einem Tag kommt ein ruhiger Abschluss (danach darf es weitergehen)
+  const ENDE_MS = 9000;     // Abschlussbild so lange, dann zurück zur Startseite
   const PAUSE_MS = 10000;   // Szenenpause nach jeder Runde: Einhornbild so lange, dann kommt die nächste Szene
   // Nicht-Nomen: keine Wörter, die in GROSSBUCHSTABEN auch Nomen sein könnten (LAUT, WILD, ARM, GELB …)
   const ALLGEMEIN = [
@@ -243,7 +246,7 @@ sperreTouch();
 
   // ---------- Bühne: das ganze Bild in voller Höhe, ohne Zoom ----------
   // Breite aus dem Seitenverhältnis, höchstens bis die Leiste noch 30rem hat; sonst eingepasst mit Rand.
-  const stage=$("stage"), world=$("world"), img=$("img"), svg=$("svg"), cardEl=$("card"), bin=$("bin"), bar=$("bar"), hilfeBtn=$("hilfe"), punkte=$("punkte");
+  const stage=$("stage"), world=$("world"), img=$("img"), svg=$("svg"), cardEl=$("card"), bin=$("bin"), bar=$("bar"), hilfeBtn=$("hilfe");
   let bild=null, ar=2/3;
   const rem = () => parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
   function fullView(){   // einzige Einpassung: Bühne = Bildbreite, Bild mittig darin
@@ -295,7 +298,7 @@ sperreTouch();
   }
 
   // ---------- Runde: ein Wort nach dem anderen ----------
-  let pauseBild=null, karten=[], idx=0, cur=null, busy=true, fehler=0;
+  let pauseBild=null, karten=[], idx=0, cur=null, busy=true, fehler=0, daneben=0;
   async function runde(){
     const name=chooseBild(); bild=bilder[name];
     save.letztes=name; save.bilder[name]=Date.now(); persist();
@@ -319,8 +322,6 @@ sperreTouch();
     pauseBild=null;
     if(bild.pause){ pauseBild=new Image(); pauseBild.src="bilder/"+bild.pause; }
   }
-  // Rundenpunkte: einer je Kärtchen (Wiederholungen kommen dazu), erledigte grün
-  function zeigePunkte(){ punkte.innerHTML=karten.map((k,i)=>`<i${i<idx?' class="da"':""}></i>`).join(""); }
   // Lange Wörter: Schrift so weit verkleinern, dass das Kärtchen in die Leiste passt
   function passeKarte(){
     cardEl.style.fontSize="";
@@ -331,10 +332,9 @@ sperreTouch();
   let hilfeTimer=0;
   function hilfeVerstecken(){ clearTimeout(hilfeTimer); hilfeBtn.classList.add("hide"); }
   function zeigeWort(){
-    cur=karten[idx]; fehler=0;
+    cur=karten[idx]; fehler=0; daneben=0;
     hilfeVerstecken();
     hilfeTimer=setTimeout(()=>hilfeBtn.classList.remove("hide"), HILFE_MS);
-    zeigePunkte();
     cardEl.textContent=cur.text.toUpperCase();
     passeKarte();
     cardEl.classList.add("hide");
@@ -343,7 +343,7 @@ sperreTouch();
   async function weiter(){
     // Falsch gelöst: dasselbe Wort kommt in dieser Runde noch einmal (zählt dann nicht für den Lernstand)
     if(fehler>0 && !cur.wdh && karten.filter(k=>k.wdh).length<WIEDER_MAX) karten.splice(Math.min(karten.length, idx+1+WIEDER_NACH), 0, {...cur, wdh:true});
-    idx++; zeigePunkte();
+    idx++;
     if(idx<karten.length){ await wait(900); zeigeWort(); }
     else { await wait(1100); szenenpause(); }
   }
@@ -383,7 +383,10 @@ sperreTouch();
       if(!cur.ding){ fehler++; abprallen(g); hilfe(); return; }  // Nicht-Nomen aufs Bild: deutliche Abwehr
       const [px,py]=toPct(x,y);
       if(onThing(cur.ding,px,py)){ treffer(g); return; }
-      hint(cur.ding);                                   // Nomen daneben: kein Fehler, nur ein Hinweis
+      // Nomen daneben: beim 1. Mal nur das Signal (Bedienfehler kosten nichts). Ab dem 2. Mal leuchtet das Ding auf
+      // und das Wort gilt als Fehler (Fach 0), weil der Hinweis die Lösung verrät.
+      daneben++; sfx.boing();
+      if(daneben>=2){ fehler++; hint(cur.ding); }
     }
     zurueck(g);
   }
@@ -421,9 +424,19 @@ sperreTouch();
     g.animate([{transform:"translate(-50%,-50%) scale(.6)"},{transform:"translate(-50%,-160%) scale(1.15) rotate(-10deg)",offset:.5},{transform:"translate(-50%,-50%) scale(1.08)"}],{duration:450});
     setTimeout(()=>{ zurueck(g,450,"cubic-bezier(.2,1.4,.4,1)"); setTimeout(()=>busy=false,470); }, 420);
   }
+  // Richtig weggeworfen: die Regel einmal je Wort und Tag hörbar machen (ohne Lob), sonst still
+  function erklaere(){
+    if(fehler>0||cur.wdh) return;
+    const s=wkey(cur), h=heute(); save.erklaert=save.erklaert||{};
+    if(save.erklaert[s]===h) return;
+    save.erklaert[s]=h; persist();
+    const w=cur.text, W=w[0].toUpperCase()+w.slice(1);
+    setTimeout(()=>say(`${W} ist kein Ding.`), 450);
+  }
   function wegwerfen(g){
     busy=true; sfx.happs();
     if(!cur.wdh) record(cur, fehler===0);
+    erklaere();
     const r=bin.getBoundingClientRect();
     g.animate([{left:g.style.left,top:g.style.top,opacity:1,transform:"translate(-50%,-50%) scale(1.08)"},
                {left:(r.left+r.width/2)+"px",top:(r.top+r.height/2)+"px",opacity:0,transform:"translate(-50%,-50%) scale(.2) rotate(25deg)"}],{duration:350,easing:"ease-in"}).finished.then(()=>g.remove());
@@ -444,6 +457,10 @@ sperreTouch();
   // Alle Wörter durch: Einhornbild als Szenenpause (ohne Knöpfe), dann direkt die nächste Szene
   async function szenenpause(){
     bin.classList.add("hide"); hilfeVerstecken(); cardEl.style.display="none";
+    // Szenen von heute zählen; nach RUNDEN_TAG ein natürlicher Halt (keine Sperre: wer wieder öffnet, spielt weiter)
+    const h=heute(); if(!save.tag||save.tag.d!==h) save.tag={d:h,n:0};
+    save.tag.n++; persist();
+    if(save.tag.n%RUNDEN_TAG===0){ await tagesende(); return; }
     if(!bild.pause){ runde(); return; }
     const el=$("pause"), im=$("pimg");
     im.src=pauseBild ? pauseBild.src : "bilder/"+bild.pause;
@@ -453,6 +470,18 @@ sperreTouch();
     await wait(PAUSE_MS);
     await runde();                       // nächste Szene hinter dem Bild vorbereiten
     el.classList.remove("show"); await wait(650); el.classList.remove("on");
+  }
+
+  // Ruhiger Tagesabschluss: Einhornbild, ein kurzer Satz (ohne Lob), Haus-Knopf; nach ENDE_MS zurück zur Startseite
+  async function tagesende(){
+    const el=$("pause"), im=$("pimg");
+    im.src=pauseBild ? pauseBild.src : "bilder/"+(bild.pause||bild.bild);
+    await im.decode().catch(()=>{});
+    el.classList.add("on","ende"); void el.offsetWidth; el.classList.add("show");
+    await wait(700);
+    say("Für heute ist Schluss. Bis morgen!");
+    await wait(ENDE_MS);
+    location.href="index.html";
   }
 
   // ---------- Prüfansicht (?pruefen[&bild=name]) ----------
@@ -474,7 +503,7 @@ sperreTouch();
   // ---------- Elternansicht (?eltern): welche Wörter gerade wackeln. Das Kind sieht davon nichts. ----------
   function elternansicht(){
     const zeile = ([s,e]) => `<li>${s.startsWith("~") ? esc(s.slice(1))+" <small>(kein Nomen)</small>" : esc(s)}
-      <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${(e.h||[]).map(x=>x?"✓":"✗").join("")}</small></li>`;
+      <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${(e.h||[]).map(x=>x?"richtig":"falsch").join(", ")}</small></li>`;
     const alle=Object.entries(save.woerter).map(([s,v])=>[s,eintrag(s)]);
     const gruppe=(titel,l)=>`<h2>${titel} (${l.length})</h2><ul>${l.map(zeile).join("")||"<li>–</li>"}</ul>`;
     const el=document.createElement("div"); el.className="eltern";
@@ -495,7 +524,7 @@ sperreTouch();
       liste.innerHTML="";
       const zeile=(titel, info, aktiv, waehle)=>{
         const li=document.createElement("li");
-        li.innerHTML=`${aktiv?"<b>Aktiv:</b> ":""}${titel} <small>${info}</small> `;
+        li.innerHTML=`${aktiv?"Aktiv: ":""}${titel} <small>${info}</small> `;
         const b=document.createElement("button"); b.className="btn mint"; b.style.cssText="font-size:1.8rem;padding:.6rem 1.8rem;margin-left:1rem"; b.textContent=aktiv?"Probe":"Wählen";
         b.onclick=()=>{ waehle(); sound=true; say("der Hund – die Katze – das Einhorn"); zeigeStimmen(); };
         li.appendChild(b); liste.appendChild(li);

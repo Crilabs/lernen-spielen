@@ -40,7 +40,7 @@ img{display:block}
 .unten{flex:none;height:27rem;display:flex;align-items:center;gap:3rem;padding:2rem 4rem 3rem;background:var(--bg)}
 .seite{flex:none;width:26rem;display:flex;justify-content:center}
 .satz{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:1.6rem 1.2rem}
-.wort{text-align:center;border-radius:2rem;padding:1.4rem 2.4rem 1.2rem;font:700 5.6rem/1 "Andika",sans-serif;color:var(--nacht);background:var(--paper);
+.wort{text-align:center;border-radius:2rem;padding:1.4rem 2.4rem 1.2rem;font:400 5.6rem/1 "Andika",sans-serif;color:var(--nacht);background:var(--paper);
   box-shadow:0 .7rem 0 rgba(59,42,107,.2);min-width:7rem;transition:transform .15s,box-shadow .2s;white-space:nowrap}
 .wort:active{transform:translateY(.4rem);box-shadow:0 .3rem 0 rgba(59,42,107,.2)}
 .wort.fest{background:none;box-shadow:none;padding-left:.4rem;padding-right:.4rem}
@@ -51,8 +51,17 @@ img{display:block}
 @keyframes wackel{0%,100%{transform:rotate(0)}20%{transform:rotate(-7deg)}40%{transform:rotate(6deg)}60%{transform:rotate(-4deg)}80%{transform:rotate(2deg)}}
 .wort.lesen{box-shadow:0 0 0 .7rem var(--sonne),0 .7rem 0 rgba(59,42,107,.2);transform:translateY(-.4rem)}
 .satz.zu .wort{pointer-events:none}
+/* Fehlersignal: Zauberin niest, Zauberstaub verpufft */
+.puff{position:absolute;pointer-events:none;width:5rem;height:5rem;border-radius:50%;background:#fff;border:.3rem solid var(--lila);opacity:0;transform:translate(-50%,-50%);animation:puff .9s ease-out forwards;z-index:8}
+@keyframes puff{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}25%{opacity:.95}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.5)}}
+/* Tagesende: Haus-Symbol über dem Pausenbild, wippt leise */
+body.ende .app{z-index:30;pointer-events:none}
+body.ende .stage{background:none}
+body.ende .stage>*,body.ende .unten{visibility:hidden}
+body.ende .stage>.rund.l{visibility:visible;pointer-events:auto;animation:haus 1.6s ease-in-out infinite}
+@keyframes haus{50%{transform:translateY(-.8rem)}}
 .satz.stab .wort:not(.fest):not(.punkt){outline:.5rem dashed var(--lila);outline-offset:.4rem}
-.btn{height:11rem;padding:0 4.4rem;border-radius:99rem;font:700 4.4rem/1 "Andika",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 .9rem 0 var(--rosa-s);white-space:nowrap}
+.btn{height:11rem;padding:0 4.4rem;border-radius:99rem;font:400 4.4rem/1 "Andika",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 .9rem 0 var(--rosa-s);white-space:nowrap}
 .btn:active{transform:translateY(.6rem);box-shadow:0 .3rem 0 var(--rosa-s)}
 .btn.lila{background:var(--lila);box-shadow:0 .9rem 0 var(--lila-s);font-size:3.6rem;padding:0 3.2rem}
 .btn.an{background:var(--sonne);color:var(--nacht);box-shadow:0 .9rem 0 #D9AE2C}
@@ -69,11 +78,11 @@ img{display:block}
 .pause.show .pfill{animation:pfill var(--pause-ms,10s) linear forwards}
 @keyframes pfill{from{width:0}to{width:100%}}
 .eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:3rem 4rem 4rem;user-select:text;-webkit-user-select:text;touch-action:auto;font-size:2rem}
-.eltern h1{font:700 4rem/1.1 "Andika",sans-serif}.eltern h2{font:700 2.8rem/1.1 "Andika",sans-serif;margin:2.4rem 0 .6rem}.eltern p{margin:1rem 0;font-weight:700;max-width:70ch}
-.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:1rem;padding:.6rem 1.4rem;margin:.6rem 0;font-weight:700}
+.eltern h1{font:700 4rem/1.1 "Andika",sans-serif}.eltern h2{font:700 2.8rem/1.1 "Andika",sans-serif;margin:2.4rem 0 .6rem}.eltern p{margin:1rem 0;font-weight:400;max-width:70ch}
+.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:1rem;padding:.6rem 1.4rem;margin:.6rem 0;font-weight:400}
 .eltern small{font-weight:400;opacity:.75}
 .eltern .btn{display:inline-flex;align-items:center;height:7rem;font-size:2.6rem;text-decoration:none}
-@media (prefers-reduced-motion:reduce){.wort.wackelt,.btn.neu{animation:none}.pause{transition:none}}
+@media (prefers-reduced-motion:reduce){.wort.wackelt,.btn.neu,body.ende .rund.l{animation:none}.puff{animation-duration:.01s}.pause{transition:none}}
 </style>
 </head>
 <body>
@@ -93,7 +102,7 @@ img{display:block}
     <button class="rund r" id="snd" aria-label="Ton"><img id="sndimg" src="symbole/ton-an.svg" alt=""></button>
   </div>
   <div class="unten">
-    <div class="seite"><button class="btn lila hide" id="stab" aria-label="Probe ein oder eine">ein / eine?</button></div>
+    <div class="seite"><button class="btn lila hide" id="stab" aria-label="Probe">Probe</button></div>
     <div class="satz zu" id="satz"></div>
     <div class="seite"><button class="btn" id="fertig">Fertig!</button></div>
   </div>
@@ -117,10 +126,14 @@ sperreTouch();
   const P_FALSCH = 0.45;        // Anteil verhexter Wörter im Startzustand (fällige Wörter und Nomen bevorzugt)
   const PAUSE_ALLE = 1;         // nach so vielen Runden ein Pausenbild (0 = nie)
   const PAUSE_MS = 10000;       // so lange bleibt das Pausenbild (ohne Knöpfe)
-  const VERHEXEN_MS = 2600;     // so lange flackern die Buchstaben, während die Zauberin zaubert
-  const LESEN_JE_WORT = 600;    // stummes Lesen nach einem Fehlversuch: so viele ms je Wort (bewusste Pause)
-  const SZENE_STEHT_MS = 3000;  // nach der Szene bleibt sie so lange stehen, dann kommt ohne Knopf der nächste Satz
-  const GRUEBELN_MS = 4500;     // danach grübelt die Zauberin so lange (gewollt lästige Pause gegen Durchprobieren)
+  const VERHEXEN_MS = 1400;     // so lange flackern die Buchstaben, während die Zauberin zaubert
+  const LESEN_JE_WORT = 400;    // stummes Lesen nach einem Fehlversuch: so viele ms je Wort (bewusste Pause)
+  const SZENE_STEHT_MS = 1200;  // nach der Szene bleibt sie so lange stehen, dann kommt ohne Knopf der nächste Satz
+  const GRUEBELN_MS = 1500;     // danach grübelt die Zauberin so lange (kurze, gewollte Pause gegen Durchprobieren)
+  const GANG_MS = 600;          // Weg der Zauberin zur Seite und zurück
+  const TAG_RUNDEN = 3;         // nach so vielen Runden am Tag einmal ein ruhiger Halt (Pausenbild, Haus wippt); erneut öffnen geht weiter
+  const ADJ_AB_RUNDE = 2;     // Adjektiv-Sätze ab dieser Runde (insgesamt gezählt): erst als Block, danach gemischt
+  const ADJ_BLOCK = 2;          // so viele Adjektiv-Sätze hintereinander in der Einführungsrunde
   const ABSTAND = [0, 1, 3, 7, 21];   // Wiedervorlage über Tage, wie im Wimmelbild
   const GELERNT = 4;
   const ANTEIL_FAELLIG = 0.7;
@@ -142,8 +155,10 @@ sperreTouch();
   const vorhanden = id => !!(F.figuren[id] || F.dinge[id]);
 
   // ---------- Speichern (lernspiel.js: Tauri-Datei oder localStorage "lernstand-grossbuchstaben") ----------
-  let save = await lade("grossbuchstaben", {woerter:{}, letzte:[], pause:""});
+  let save = await lade("grossbuchstaben", {woerter:{}, letzte:[], pause:"", runden:0, tag:{d:"", n:0}});
   if(Array.isArray(save.woerter)) save.woerter={};
+  if(!(save.runden>0)) save.runden=0;
+  if(!save.tag || typeof save.tag!=="object") save.tag={d:"", n:0};
   if(!Array.isArray(save.letzte)) save.letzte=[];
   function persist(){ speichere("grossbuchstaben", save); }
   // Lernstand je Wort: Nomen als „der Hund“, andere als „~springt“. Eintrag {f: Fach, t: Tag, h: letzte 6 (1/0)}
@@ -179,8 +194,10 @@ sperreTouch();
   // ---------- Bühne ----------
   const stage=$("stage"), welt=$("welt"), akteure=$("akteure");
   const ids = s => [...s.s, s.d, s.g].filter(Boolean);
-  function neuerSatz(pruef, versuche=400){
-    for(let i=0;i<versuche;i++){ const s=Z.zufall(); if(ids(s.szene).every(vorhanden) && (!pruef || pruef(s))) return s; }
+  // Adjektiv-Sätze (Stolperfalle) erst ab Runde 2: dort als Block, danach gemischt. Wiederholungssätze folgen dem Modus der Runde.
+  let rundeModus = "nie";
+  function neuerSatz(pruef, versuche=400, modus=rundeModus){
+    for(let i=0;i<versuche;i++){ const s=Z.zufall(modus); if(ids(s.szene).every(vorhanden) && (!pruef || pruef(s))) return s; }
     return null;
   }
 
@@ -374,7 +391,7 @@ sperreTouch();
   async function zbGeh(zurSeite){
     if(zbSeite===zurSeite) return; zbSeite=zurSeite;
     const von=zurSeite?"50%":"11%", nach=zurSeite?"11%":"50%";
-    if(!ruhig){ zb("geht"); await zbEl.animate([{left:von},{left:nach}],{duration:1000,easing:"ease-in-out"}).finished.catch(()=>{}); }
+    if(!ruhig){ zb("geht"); await zbEl.animate([{left:von},{left:nach}],{duration:GANG_MS,easing:"ease-in-out"}).finished.catch(()=>{}); }
     zbEl.style.left=nach; zb("");
   }
 
@@ -392,9 +409,12 @@ sperreTouch();
   function verhexe(s){
     const ws=s.woerter.filter(w=>!w.fest);
     ws.forEach(w=>w.gross=w.nomen);
-    const n=Math.max(1, Math.round(ws.length*P_FALSCH));
+    const n=Math.max(ws.length>=4 ? 2 : 1, Math.round(ws.length*P_FALSCH));
     const gewicht=w=>Math.random()*(faellig(w.key)?1.6:1)*(w.nomen?1.3:1);
     ws.map(w=>[gewicht(w),w]).sort((a,b)=>b[0]-a[0]).slice(0,n).forEach(([,w])=>w.gross=!w.nomen);
+    // Gewertet wird nur, was das Kind aktiv entschieden hat: verhexte Wörter und alles, was es antippt.
+    // Ein schon richtig stehendes, unberührtes Wort ist ein Zufallstreffer und zählt nicht.
+    ws.forEach(w=>w.zaehlt = w.gross!==w.nomen);
   }
   function zeigeSatz(){
     satzEl.innerHTML=""; satzEl.classList.remove("stab");
@@ -428,11 +448,17 @@ sperreTouch();
     if(busy) return;
     if(stabAn){   // Probe: ein/eine davor? – verrät nichts, klappt nicht um
       stabAn=false; stabBtn.classList.remove("an"); satzEl.classList.remove("stab");
-      const t=klein(w.t); say(`ein ${t}? eine ${t}?`); return;
+      say(probe(w)); return;
     }
-    w.gross=!w.gross; klick();
+    w.gross=!w.gross; w.zaehlt=true; klick();
     w.el.classList.remove("flip","wackelt"); void w.el.offsetWidth; w.el.classList.add("flip");
     setTimeout(()=>w.el.textContent=zeige(w),160);
+  }
+  // Probe-Stab: Begleiter ein/eine und Erweiterungsprobe. Nomen: „ein Hund? Ja. Der Hund – der kleine Hund.“ Sonst geht beides nicht.
+  function probe(w){
+    if(w.nomen){ const n=Z.NOMEN[w.id]; return `${Z.ein(w.id)} ${n.w}? Ja. ${gross(n.a)} ${n.w} – ${n.a} kleine ${n.w}. Das passt.`; }
+    const t=klein(w.t);
+    return `ein ${t}? eine ${t}? Das geht nicht. Der kleine ${t}? Auch nicht.`;
   }
   stabBtn.addEventListener("click",()=>{ if(busy) return; stabAn=!stabAn; stabBtn.classList.toggle("an",stabAn); satzEl.classList.toggle("stab",stabAn); });
 
@@ -453,6 +479,19 @@ sperreTouch();
     say(teile.join(" "));
   }
 
+  // Fehlersignal: die Zauberin niest, ihr Zauberstaub verpufft. Alle Wörter hüpfen gleich mit, es verrät keinen Ort.
+  async function niesen(){
+    zb("");
+    tone(500,950,.16,"sine",.07); setTimeout(()=>tone(900,160,.3,"triangle",.09),190);
+    if(ruhig){ await wait(300); return; }
+    for(let i=0;i<7;i++){ const p=document.createElement("span"); p.className="puff"; const w=Math.random()*Math.PI*2;
+      p.style.left=(40+Math.random()*30)+"%"; p.style.top=(24+Math.random()*10)+"%";
+      p.style.setProperty("--dx",Math.cos(w)*150+"px"); p.style.setProperty("--dy",Math.sin(w)*100-30+"px"); zbEl.appendChild(p); setTimeout(()=>p.remove(),950); }
+    zbSvg.animate([{transform:"none"},{transform:"rotate(-5deg) translateY(-1.2%)",offset:.35},{transform:"rotate(4deg) scale(1.03,.95)",offset:.55},{transform:"none"}],{duration:650,easing:"ease-in-out"});
+    satz.woerter.forEach(w=>w.el.animate([{transform:"none"},{transform:"translateY(-1rem)",offset:.4},{transform:"none"}],{duration:420,easing:"ease-out"}));
+    await wait(750);
+  }
+
   // Stummes Lesen nach einem Fehlversuch: gleichmäßig über alle Wörter, verrät nichts. Bewusste Pause.
   async function liesStumm(){
     const ws=[...satz.woerter.map(w=>w.el), satzEl.querySelector(".punkt")];
@@ -470,13 +509,14 @@ sperreTouch();
     versuche++;
     const falsch=tippbar().filter(w=>!korrekt(w));
     if(versuche===1 && !satz.wdh){   // nur der erste Versuch zählt für den Lernstand
-      const je={}; for(const w of tippbar()) je[w.key] = (je[w.key]??true) && korrekt(w);
+      const je={}; for(const w of tippbar().filter(w=>w.zaehlt)) je[w.key] = (je[w.key]??true) && korrekt(w);
       for(const [k,v] of Object.entries(je)) record(k,v);
       persist();
       if(wiederholt<WIEDER_MAX){ const k=Object.keys(je).filter(k=>!je[k]); if(k.length) plane(k); }
     }
     if(!falsch.length){ gelungen(); return; }
     sperre(true);
+    await niesen();
     await liesStumm();
     if(versuche===2){ stabBtn.classList.remove("hide","neu"); void stabBtn.offsetWidth; stabBtn.classList.add("neu"); zb("zaubert"); glitzer(); await wait(700); }
     if(versuche>=3){ zb("zeigt"); erklaere(); await wait(1600); }
@@ -499,9 +539,9 @@ sperreTouch();
   // ---------- Runde: Satzwahl mit Wiedervorlage ----------
   let runde=[], pos=0, wiederholt=0, benutzt=new Set(), runden=0;
   const punkte = s => s.woerter.filter(w=>!w.fest).reduce((p,w)=> p + (faellig(w.key) ? (w.nomen?3:1)*(GELERNT-eintrag(w.key).f) : 0), 0);
-  function waehle(dran){
-    const kand=[]; for(let i=0;i<120;i++){ const s=neuerSatz(); if(s && !benutzt.has(s.text) && !save.letzte.includes(s.text)) kand.push(s); }
-    if(!kand.length) return neuerSatz();
+  function waehle(dran, modus){
+    const kand=[]; for(let i=0;i<120;i++){ const s=neuerSatz(null, 400, modus); if(s && !benutzt.has(s.text) && !save.letzte.includes(s.text)) kand.push(s); }
+    if(!kand.length) return neuerSatz(null, 400, modus);
     kand.forEach(s=>s.p=punkte(s)+Math.random());
     if(dran){ kand.sort((a,b)=>b.p-a.p); return kand[0]; }
     const sicher=kand.filter(s=>s.woerter.every(w=>w.fest || !w.nomen || !faellig(w.key)));
@@ -511,7 +551,10 @@ sperreTouch();
     benutzt=new Set(); pos=0; wiederholt=0;
     const nDue=Math.round(RUNDE*ANTEIL_FAELLIG);
     runde=shuffle(Array.from({length:RUNDE},(_,i)=>i<nDue));
-    runde=runde.map(dran=>({dran}));
+    // Adjektive: Runde 1 keine, Runde 2 als Block (zwei hintereinander), danach gemischt
+    const nr=save.runden+1;
+    rundeModus = nr>ADJ_AB_RUNDE ? "misch" : "nie";
+    runde=runde.map((dran,i)=>({dran, modus: nr===ADJ_AB_RUNDE && i>=1 && i<1+ADJ_BLOCK ? "immer" : rundeModus}));
   }
   // Falsches Wort kommt nach WIEDER_NACH Sätzen in einem anderen Satz wieder (zählt nicht für den Lernstand)
   function plane(keys){
@@ -523,7 +566,7 @@ sperreTouch();
   }
   async function naechster(){
     if(pos>=runde.length){ return false; }
-    const r=runde[pos]; satz = r.satz || waehle(r.dran); pos++;
+    const r=runde[pos]; satz = r.satz || waehle(r.dran, r.modus); pos++;
     benutzt.add(satz.text);
     verhexe(satz); versuche=0; stabAn=false;
     leere(); zeigeSatz();
@@ -534,8 +577,11 @@ sperreTouch();
   async function weiterGehen(){
     busy=true;
     if(pos>=runde.length){
-      save.letzte=[...benutzt].slice(-30); persist();
-      runden++; if(PAUSE_ALLE && runden%PAUSE_ALLE===0) await pause();
+      save.letzte=[...benutzt].slice(-30);
+      save.runden++; save.tag = {d:heute(), n:(save.tag.d===heute() ? save.tag.n : 0)+1}; persist();
+      runden++;
+      if(tagesende()){ await ende(); return; }
+      if(PAUSE_ALLE && runden%PAUSE_ALLE===0) await pause();
       neueRunde();
     }
     leere();
@@ -543,27 +589,36 @@ sperreTouch();
     await naechster();
   }
 
+  // ---------- Tagesgrenze: nach der TAG_RUNDEN. Runde einmal Pausenbild, das Haus wippt (?frei schaltet es ab) ----------
+  const tagesende = () => !params.has("frei") && save.tag.d===heute() && save.tag.n===TAG_RUNDEN;   // nur einmal am Tag als natürlicher Halt, keine Sperre
+  async function ende(){
+    document.body.classList.add("ende");
+    await pause(0);
+  }
+
   // ---------- Pausenbild ----------
   let pausen=[];
   try{ pausen = await (await fetch("pausenbilder/index.json",{cache:"no-store"})).json(); }catch(e){}
   if(!Array.isArray(pausen)) pausen=[];
-  async function pause(){
-    if(!pausen.length) return;
+  async function pause(ms=PAUSE_MS){   // ms = 0: bleibt stehen, ohne Balken (Tagesende)
+    if(!pausen.length){ if(!ms){ const el=$("pause"); el.classList.add("on"); requestAnimationFrame(()=>el.classList.add("show")); $("pimg").removeAttribute("src"); el.querySelector(".pbar").classList.add("hide"); } return; }
     const c = pausen.length>1 ? pausen.filter(p=>p!==save.pause) : pausen;
     const p = c[Math.floor(Math.random()*c.length)];
     save.pause=p; persist();
     const el=$("pause"), im=$("pimg");
     im.src="pausenbilder/"+p; await im.decode().catch(()=>{});
-    el.style.setProperty("--pause-ms", PAUSE_MS+"ms");
     el.classList.add("on"); requestAnimationFrame(()=>el.classList.add("show"));
-    await wait(PAUSE_MS);
+    if(!ms){ el.querySelector(".pbar").classList.add("hide"); return; }
+    el.style.setProperty("--pause-ms", ms+"ms");
+    await wait(ms);
     el.classList.remove("show"); await wait(600); el.classList.remove("on");
   }
 
   // ---------- Elternansicht (?eltern) ----------
   function elternansicht(){
+    const nachfrage = s => s.startsWith("~") ? `Schreibt man „${esc(s.slice(1))}“ groß oder klein?` : `Schreibt man „${esc(s.split(" ").slice(1).join(" "))}“ groß?`;
     const zeile = ([s,e]) => `<li>${s.startsWith("~") ? esc(s.slice(1))+" <small>(klein)</small>" : esc(s)}
-      <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`;
+      <small>· Fach ${esc(e.f)}${e.t?" seit "+esc(e.t):""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${e.h.map(x=>x?"richtig":"falsch").join(", ")}</small>${e.f===0 ? `<br><small>Nachfragen: ${nachfrage(s)}</small>` : ""}</li>`;
     const alle=Object.keys(save.woerter).map(s=>[s,eintrag(s)]);
     const gruppe=(titel,l)=>`<h2>${titel} (${l.length})</h2><ul>${l.map(zeile).join("")||"<li>–</li>"}</ul>`;
     const el=document.createElement("div"); el.className="eltern";
@@ -579,7 +634,7 @@ sperreTouch();
   // ---------- Vorschau einer Szene (?szene=typ) – zum Prüfen, ohne Lernstand ----------
   if(params.has("szene")){
     const typ=params.get("szene");
-    const s=neuerSatz(x=>x.szene.typ===typ && (!params.get("d")||x.szene.d===params.get("d")) && (!params.get("s")||x.szene.s[0]===params.get("s")), 20000);
+    const s=neuerSatz(x=>x.szene.typ===typ && (!params.get("d")||x.szene.d===params.get("d")) && (!params.get("s")||x.szene.s[0]===params.get("s")), 20000, "misch");
     satz=s; s.woerter.forEach(w=>{ if(!w.fest) w.gross=w.nomen; }); zeigeSatz();
     fertigBtn.classList.add("hide"); zbEl.style.left="11%"; zbSeite=true;
     await wait(300); spiele(s.szene);
@@ -588,7 +643,7 @@ sperreTouch();
   if(params.has("eltern")){ elternansicht(); return; }
   // Kein Startbildschirm: das Spiel beginnt sofort
   await document.fonts.ready;
-  neueRunde(); naechster();
+  neueRunde(); naechster();   // kein Sperren: wer am selben Tag wieder öffnet, spielt weiter
 })();
 </script>
 </body>
