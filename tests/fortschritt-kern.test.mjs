@@ -17,6 +17,12 @@ test("kategorieWert ohne Werte ist undefined", () => {
   assert.equal(kategorieWert([{ id: "a" }, { id: "b" }], {}), undefined);
 });
 
+test("kategorieWert ignoriert Spiele mit arten (Lernsteuerung statt Balken)", () => {
+  const w = kategorieWert([{ id: "a", arten: [{ art: "zerlegung" }] }, { id: "b" }], { a: 1, b: 0.2 });
+  assert.ok(Math.abs(w - 0.2) < 1e-9);
+  assert.equal(kategorieWert([{ id: "a", arten: [] }], { a: 0.5 }), undefined);
+});
+
 test("sichtbareKategorien blendet leere aus", () => {
   const daten = JSON.parse(readFileSync(new URL("../spiele/spiele.json", import.meta.url), "utf8"));
   assert.deepEqual(sichtbareKategorien(daten).map((e) => e.kategorie.id), ["mathe", "grammatik", "schreiben"]);

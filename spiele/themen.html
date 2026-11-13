@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Was ich kann</title>
+<link rel="stylesheet" href="schrift/schrift.css">
+<style>
+/* Themen-Übersicht für das Kind. Spec: docs/superpowers/specs/2026-11-13-lernplan-design.md („Themen-Übersicht (Kind)“).
+   Je Strang ein Weg mit Stationen: kann ich = Blüte, dran = Knospe, in Sicht = kleiner Kreis.
+   Keine Zahlen, keine Zählung; die Ziffer eines Themas steht groß an der Station (vorgelesen wird nur `sprich`).
+   Diese Seite liest den Lernstand nur, sie schreibt ihn nie. */
+:root{
+  --himmel:#CDEFFF; --himmel-hell:#EEF9FF; --tinte:#3B2A6B; --tinte-weich:#6B5C96; --papier:#FFFFFF;
+  --gras:#8EDCA9; --erde:#C79A7E; --erde-dunkel:#9C6F57;
+  font-size:calc(100vh / 108);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:"Andika",sans-serif;color:var(--tinte);background:var(--himmel);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+h1,h2{font-family:"Andika",sans-serif;font-weight:700;line-height:1}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:.4rem solid var(--tinte);outline-offset:.4rem;border-radius:1rem}
+img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+
+#seite{position:fixed;inset:0;background:linear-gradient(var(--himmel-hell),var(--himmel) 60%)}
+.huegel{position:absolute;left:0;right:0;bottom:0;height:22rem;pointer-events:none}
+.wolke{position:absolute;background:#fff;border-radius:99rem;opacity:.9;pointer-events:none}
+.wolke::before,.wolke::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.wolke::before{width:55%;height:180%;left:15%;bottom:20%}
+.wolke::after{width:40%;height:140%;right:12%;bottom:25%}
+
+.rund{position:fixed;top:2rem;width:8rem;height:8rem;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;padding:1.7rem;
+  box-shadow:0 .5rem 0 rgba(59,42,107,.15);z-index:9}
+.rund:active{transform:translateY(.3rem);box-shadow:0 .2rem 0 rgba(59,42,107,.15)}
+.rund.l{left:2.4rem}
+h1{position:absolute;top:3.4rem;left:13rem;font-size:4.6rem;letter-spacing:-.01em;display:flex;align-items:center;gap:1.6rem}
+h1 img{width:6rem;height:6rem}
+
+.straenge{position:absolute;left:0;right:0;top:14rem;bottom:18rem;display:flex;flex-direction:column;gap:3rem;padding:0 4rem;overflow-y:auto}
+.strang{position:relative;flex:none}
+.schild{display:flex;align-items:center;gap:1.4rem;margin:0 0 1rem .6rem}
+.schild .sym{width:6.4rem;height:6.4rem;flex:none;padding:1.2rem;border-radius:2rem;background:var(--k);display:flex;align-items:center;justify-content:center;box-shadow:0 .5rem 0 var(--ks)}
+.schild .sym img{filter:brightness(0) invert(1)}
+.schild h2{font-size:4.4rem}
+
+/* Der Weg: waagerecht, bei vielen Stationen seitlich verschiebbar */
+.weg{position:relative;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-x;padding:0 2rem}
+.weg::-webkit-scrollbar{display:none}
+.reihe{position:relative;display:flex;align-items:flex-end;gap:2rem;width:max-content;padding:1rem 14rem 0 0}
+/* der Weg läuft hinter der letzten Station sanft aus (es geht weiter, ohne zu zählen) */
+.reihe::before{content:"";position:absolute;left:4rem;right:0;bottom:8.6rem;height:2.4rem;border-radius:99rem;background:var(--erde);box-shadow:inset 0 -.6rem 0 var(--erde-dunkel);
+  -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 16rem),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 16rem),transparent)}
+.station{position:relative;width:15rem;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.station .bild{width:12rem;height:19rem;display:flex;align-items:flex-end;justify-content:center}
+.station .bild svg{display:block;width:100%;height:100%;overflow:visible}
+.station .ziffer{height:7rem;min-width:7rem;margin-top:1rem;padding:0 1.6rem;border-radius:99rem;background:var(--papier);box-shadow:0 .5rem 0 var(--kt);
+  display:flex;align-items:center;justify-content:center;font:700 5rem/1 "Andika",sans-serif}
+.station .ziffer.leer{background:none;box-shadow:none}
+.station.in-sicht .ziffer{color:var(--tinte-weich);font-size:4rem;height:6rem;min-width:6rem}
+.station[aria-expanded="true"] .ziffer{background:var(--k);color:#fff;box-shadow:0 .5rem 0 var(--ks)}
+.station:active .bild{transform:translateY(.4rem)}
+
+/* Auswahl unter dem Weg: Geschichte und Spiele des Themas */
+.wahl{position:relative;margin:2.6rem 2rem 0;padding:2.4rem 2.8rem;border-radius:3.2rem;background:var(--papier);box-shadow:0 .9rem 0 var(--ks);
+  display:flex;flex-wrap:wrap;align-items:center;gap:2.4rem}
+.wahl[hidden]{display:none}
+.wahl::before{content:"";position:absolute;top:-2rem;left:var(--zeiger,10rem);margin-left:-2rem;border:solid transparent;border-width:0 2rem 2.2rem;border-bottom-color:var(--papier)}
+.wahl .name{flex:1 1 100%;font:700 4rem/1.1 "Andika",sans-serif}
+.geschichte{display:flex;align-items:center;gap:1.4rem;min-height:11rem;padding:1.4rem 3rem 1.4rem 1.6rem;border-radius:99rem;background:var(--kt);box-shadow:0 .6rem 0 var(--ks);font:400 3.2rem/1.1 "Andika",sans-serif}
+.geschichte .play{width:8rem;height:8rem;flex:none;border-radius:50%;background:var(--k);display:flex;align-items:center;justify-content:center}
+.geschichte .play svg{width:3.6rem;height:3.6rem;margin-left:.6rem}
+.geschichte:active,.spiel:active{transform:translateY(.5rem);box-shadow:0 .1rem 0 var(--ks)}
+.spiel{display:flex;align-items:center;gap:2rem;min-height:14rem;padding:1.6rem 3.2rem 1.6rem 1.6rem;border-radius:3rem;background:var(--papier);box-shadow:0 .7rem 0 var(--ks),0 0 0 .3rem var(--kt)}
+.spiel .ico{width:11rem;height:11rem;flex:none;border-radius:2.6rem;background:var(--kt);display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.spiel h3{font:700 3.4rem/1.1 "Andika",sans-serif}
+
+.maskottchen{position:absolute;right:6rem;bottom:3rem;width:24rem;pointer-events:auto}
+.maskottchen svg{display:block;width:100%;height:auto;overflow:visible}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main id="seite" aria-label="Was ich kann">
+  <div class="wolke" style="width:22rem;height:6rem;left:92rem;top:5rem"></div>
+  <div class="wolke" style="width:16rem;height:4.6rem;left:150rem;top:3rem;opacity:.7"></div>
+  <svg class="huegel" viewBox="0 0 1920 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 120 C260 40 520 60 760 110 C1000 160 1240 70 1500 80 C1700 88 1820 120 1920 100 L1920 220 L0 220Z" fill="#B7EAC6"/>
+    <path d="M0 170 C300 110 600 130 900 160 C1200 190 1500 120 1920 150 L1920 220 L0 220Z" fill="var(--gras)"/>
+  </svg>
+  <a class="rund l" href="index.html" aria-label="Alle Spiele"><img src="symbole/haus.svg" alt=""></a>
+  <h1><img src="symbole/themen.svg" alt="">Was ich kann</h1>
+  <div class="straenge" id="straenge"></div>
+  <div class="maskottchen" id="maskottchen" aria-hidden="true"></div>
+</main>
+
+<script src="figuren/figuren.js"></script>
+<script src="figuren/einhorn.js"></script>
+<script type="module">
+import { sperreTouch, protokoll, esc, lade } from "./lernspiel.js";
+import { uebersicht, migriereStand, migriereSpiele, neuerStand } from "./lernsteuerung.js";
+import { spieleEinfuehrung } from "./einfuehrung.js";
+
+sperreTouch();
+
+// ---------- Einhorn ----------
+const masko = document.getElementById("maskottchen");
+if (window.Figuren) {
+  masko.innerHTML = Figuren.svgFigur("einhorn");
+  const svg = masko.querySelector("svg");
+  masko.addEventListener("click", () => Figuren.hop(svg, { hoehe: 40 }));
+}
+
+// ---------- Vorlesen (wie auf der Startseite) ----------
+function sag(text) {
+  if (!text) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "de-DE"; u.rate = .85;
+    let fest = ""; try { fest = localStorage.getItem("einhorn-stimme") || ""; } catch (e) {}
+    const vs = speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang));
+    const v = vs.find((v, k) => k + "|" + v.name + "|" + v.voiceURI === fest);
+    if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  } catch (e) { protokoll("Vorlesen fehlgeschlagen: " + e); }
+}
+
+// ---------- Stationen ----------
+const FARBE = /^#[0-9a-fA-F]{3,8}$/;
+const farbe = (c, fallback) => FARBE.test(c) ? c : fallback;
+const TINTE = "#3B2A6B";
+
+// kann ich: aufgeblühte Blume, dran: Knospe, in Sicht: kleiner Kreis (alle stehen auf dem Weg)
+function bild(zustand, k) {
+  const stiel = `<path d="M60 186 V96" stroke="#5DBE84" stroke-width="6" stroke-linecap="round"/>`;
+  if (zustand === "kann-ich") return `<svg viewBox="0 0 120 190" aria-hidden="true">${stiel}
+    <path d="M60 150 C40 150 30 136 34 128 C50 128 60 138 60 150Z" fill="#8EDCA9" stroke="${TINTE}" stroke-width="3.5"/>
+    ${[0, 72, 144, 216, 288].map(a => `<ellipse cx="60" cy="30" rx="17" ry="24" transform="rotate(${a} 60 60)" fill="${k}" stroke="${TINTE}" stroke-width="4"/>`).join("")}
+    <circle cx="60" cy="60" r="14" fill="#FFE07A" stroke="${TINTE}" stroke-width="4"/></svg>`;
+  if (zustand === "dran") return `<svg viewBox="0 0 120 190" aria-hidden="true">${stiel}
+    <path d="M60 156 C40 156 30 142 34 134 C50 134 60 144 60 156Z" fill="#8EDCA9" stroke="${TINTE}" stroke-width="3.5"/>
+    <path d="M60 142 C78 136 84 124 82 118 C70 118 60 128 60 142Z" fill="#8EDCA9" stroke="${TINTE}" stroke-width="3.5"/>
+    <path d="M60 104 C42 100 38 80 46 62 C50 54 56 48 60 44 C64 48 70 54 74 62 C82 80 78 100 60 104Z" fill="${k}" stroke="${TINTE}" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M60 104 C52 94 52 70 60 52" stroke="${TINTE}" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M44 96 C50 106 70 106 76 96" fill="#8EDCA9" stroke="${TINTE}" stroke-width="3.5" stroke-linejoin="round"/></svg>`;
+  return `<svg viewBox="0 0 120 190" aria-hidden="true"><circle cx="60" cy="162" r="18" fill="var(--kt)" stroke="${TINTE}" stroke-width="4"/></svg>`;
+}
+
+const SPIEL_PLAY = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3 L21 12 L6 21Z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>`;
+
+async function start() {
+  let plan, spiele;
+  try {
+    [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map(f => fetch(f).then(r => r.json())));
+  } catch (e) { protokoll("themen: " + e); return; }
+  const ctx = { plan, spiele };
+  const stand = migriereStand(await lade("lernplan", neuerStand()));
+  // Alte Spielstände nur für die Anzeige übernehmen (gespeichert wird das erst beim nächsten Spiel)
+  if (!stand.migriert) {
+    const [perlenbruecke, zahlenzauber] = await Promise.all([lade("perlenbruecke", {}), lade("zahlenzauber", {})]);
+    try { migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute: new Date().toLocaleDateString("sv") }); }
+    catch (e) { protokoll("themen: " + e); }
+  }
+
+  const kats = Object.fromEntries((spiele.kategorien || []).map(k => [k.id, k]));
+  const spielNach = Object.fromEntries((spiele.spiele || []).map(s => [s.id, s]));
+  const themaNach = Object.fromEntries((plan.themen || []).map(t => [t.id, t]));
+  const wurzel = document.getElementById("straenge");
+
+  for (const { strang, stationen } of uebersicht(ctx, stand)) {
+    const k = kats[strang] || {};
+    const fk = farbe(k.farbe, "#8C6FE0"), fs = farbe(k.schatten, "#6548BC"), ft = farbe(k.tint, "#ECE6FF");
+    const el = document.createElement("section");
+    el.className = "strang";
+    el.style.cssText = `--k:${fk};--ks:${fs};--kt:${ft}`;
+    el.innerHTML = `<div class="schild">${k.symbol ? `<div class="sym"><img src="${esc(k.symbol)}" alt=""></div>` : ""}<h2>${esc(k.name || strang)}</h2></div>
+      <div class="weg"><div class="reihe">${stationen.map(s => `
+        <button class="station ${esc(s.zustand)}" data-id="${esc(s.id)}" aria-label="${esc(s.name)}" aria-expanded="false">
+          <span class="bild">${bild(s.zustand, fk)}</span>
+          <span class="ziffer${s.ziffer ? "" : " leer"}">${esc(s.ziffer)}</span>
+        </button>`).join("")}</div></div>
+      <div class="wahl" hidden></div>`;
+    wurzel.appendChild(el);
+
+    const weg = el.querySelector(".weg"), wahl = el.querySelector(".wahl");
+    weg.scrollLeft = weg.scrollWidth;   // die neuesten Stationen (dran, in Sicht) stehen rechts
+    const nach = Object.fromEntries(stationen.map(s => [s.id, s]));
+
+    el.querySelectorAll(".station").forEach(knopf => knopf.addEventListener("click", () => {
+      const s = nach[knopf.dataset.id];
+      const offen = knopf.getAttribute("aria-expanded") === "true";
+      el.querySelectorAll(".station").forEach(b => b.setAttribute("aria-expanded", "false"));
+      sag(s.sprich);
+      if (offen) { wahl.hidden = true; return; }
+      knopf.setAttribute("aria-expanded", "true");
+      const t = themaNach[s.id];
+      const geschichte = s.geschichte && t?.einfuehrung?.vorlage;
+      wahl.innerHTML = `<div class="name">${esc(s.name)}</div>
+        ${geschichte ? `<button class="geschichte" aria-label="Geschichte ansehen"><span class="play">${SPIEL_PLAY}</span>Geschichte ansehen</button>` : ""}
+        ${s.spiele.map(id => spielNach[id]).filter(Boolean).map(sp => `
+          <a class="spiel" href="${esc(sp.datei)}?thema=${encodeURIComponent(s.id)}" aria-label="${esc(sp.titel)}">
+            <span class="ico"><img src="${esc(sp.symbol)}" alt=""></span><h3>${esc(sp.titel)}</h3>
+          </a>`).join("")}`;
+      wahl.hidden = false;
+      const r = knopf.getBoundingClientRect(), w = wahl.getBoundingClientRect();
+      wahl.style.setProperty("--zeiger", Math.max(40, Math.min(w.width - 40, r.left + r.width / 2 - w.left)) + "px");
+      wahl.querySelector(".geschichte")?.addEventListener("click", () => {
+        try { speechSynthesis.cancel(); } catch (e) {}
+        // nur ansehen: der Lernstand bleibt, wie er ist
+        spieleEinfuehrung(t.einfuehrung.vorlage, t.einfuehrung.werte || {}, { ton: true });
+      });
+      wahl.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }));
+  }
+}
+start();
+</script>
+</body>
+</html>

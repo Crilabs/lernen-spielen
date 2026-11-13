@@ -212,6 +212,29 @@ export function sichtbar(ctx, stand) {
   return out;
 }
 
+// Themen-Übersicht für das Kind (themen.html): je Strang mit sichtbaren Stationen, in Planreihenfolge.
+// [{ strang, stationen: [{ id, name, sprich, ziffer, zustand, spiele: spielId[], geschichte }] }]
+//   ziffer     = letzte Zahl im Namen („Die 7 zerlegen“ → "7", „Über die 10 mit der 9“ → "9"), sonst "";
+//                steht groß an der Station, vorgelesen wird nur sprich (die Stimme spricht keine Zahlen).
+//   geschichte = Einführung schon gesehen (e gesetzt), dann darf sie noch einmal angesehen werden.
+export function uebersicht(ctx, stand) {
+  const z = zustaende(ctx, stand), sicht = sichtbar(ctx, stand);
+  const out = [];
+  for (const [strang, liste] of Object.entries(sicht)) {
+    if (!liste.length) continue;
+    out.push({
+      strang,
+      stationen: liste.map((id) => {
+        const t = themaVon(ctx, id);
+        const name = text(t.name);
+        return { id, name, sprich: text(t.sprich), ziffer: name.match(/\d+/g)?.at(-1) ?? "", zustand: z[id],
+          spiele: spieleFuer(ctx, id), geschichte: !!stand?.themen?.[id]?.e };
+      }),
+    });
+  }
+  return out;
+}
+
 // ---------- Welches Thema bekommt ein Spiel? ----------
 
 const zuletztGeuebt = (stand, id) => stand.themen[id]?.u || stand.themen[id]?.seit || "";
