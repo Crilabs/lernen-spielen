@@ -3,12 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test \"tests/*.test.mjs\"",
+    "test": "tsc -p tsconfig.json && node --test \"tests/*.test.mjs\"",
     "luecken": "node scripts/luecken.mjs",
     "tauri": "tauri"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2"
+    "@tauri-apps/cli": "^2",
+    "typescript": "^7.0.2"
   },
   "version": "0.1.8"
 }

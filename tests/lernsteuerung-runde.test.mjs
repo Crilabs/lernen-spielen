@@ -20,7 +20,7 @@ const lcg = (seed) => { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 
 let datum;
 const uhr = () => ({ heute: datum, jetzt: 1_000_000 });
 const start = (spiel, opt = {}) => runde(spiel, { ctx: CTX, uhr, rnd: lcg(7), ...opt });
-const stand = () => JSON.parse(speicher.get("lernstand-lernplan") ?? "null");
+const stand = () => JSON.parse(speicher.get("lernstand-kind-1-lernplan") ?? "null");
 
 beforeEach(() => { speicher.clear(); datum = "2026-11-13"; });
 
@@ -76,7 +76,7 @@ test("runde: Einführung gesehen, dann erstes naechste startet das Thema mit der
 
 test("runde: halbe Probe abgebrochen → nicht gekonnt, nächster Start übt auf material", async () => {
   // zerlegen-2 und -3 gekonnt: zerlegen-4 hat drei Probe-Aufgaben
-  speicher.set("lernstand-lernplan", JSON.stringify({ version: 1, migriert: 1, verlauf: [], aufgaben: {},
+  speicher.set("lernstand-kind-1-lernplan", JSON.stringify({ version: 1, migriert: 1, verlauf: [], aufgaben: {},
     themen: { "zerlegen-2": { z: "kann-ich", e: "2026-11-01", k: "2026-11-02" }, "zerlegen-3": { z: "kann-ich", e: "2026-11-01", k: "2026-11-02" } } }));
   const r = await start("perlenbruecke");
   assert.equal(r.thema.id, "zerlegen-4");
@@ -98,7 +98,7 @@ test("runde: halbe Probe abgebrochen → nicht gekonnt, nächster Start übt auf
 const altStufe3 = () => {
   const { aufgabenVon } = AA;
   const key = aufgabenVon({ art: "rechnen", thema: "minus-bis-30" })[0].key.replace(/^minus:/, "");
-  speicher.set("lernstand-zahlenzauber", JSON.stringify({ stufe: 3, wiese: 40, fakten: { [key]: { f: 1, t: "2026-11-10", h: [1] } } }));
+  speicher.set("lernstand-kind-1-zahlenzauber", JSON.stringify({ stufe: 3, wiese: 40, fakten: { [key]: { f: 1, t: "2026-11-10", h: [1] } } }));
 };
 
 test("runde: übernommenes Thema (alter Zahlenzauber Stufe 3) startet ohne Einführung mit Probe von 5", async () => {
@@ -154,17 +154,17 @@ test("runde: nurAnsehen speichert nichts", async () => {
   const a = r.naechste();
   r.melde(a.ziel.key, { ok: true, hilfe: 0, ms: 1000 });
   await r.ende();
-  assert.equal(speicher.has("lernstand-lernplan"), false);
+  assert.equal(speicher.has("lernstand-kind-1-lernplan"), false);
 });
 
 test("runde: Migration läuft einmal, zweiter Start ändert nichts", async () => {
-  speicher.set("lernstand-perlenbruecke", JSON.stringify({ paare: { "2:1+1": { f: 4, t: "2026-11-01", h: [1, 1], g: 1 } } }));
+  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ paare: { "2:1+1": { f: 4, t: "2026-11-01", h: [1, 1], g: 1 } } }));
   const r = await start("perlenbruecke");
   await r.ende();
   const s1 = stand();
   assert.equal(s1.migriert, 1);
   assert.equal(s1.themen["zerlegen-2"].z, "kann-ich");
-  speicher.set("lernstand-perlenbruecke", JSON.stringify({ paare: {} }));
+  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ paare: {} }));
   datum = "2026-11-20";
   const r2 = await start("perlenbruecke");
   await r2.ende();
@@ -190,7 +190,7 @@ const MINI = {
     { id: "b", arten: [{ art: "zerlegung", zahlen: [6, 6], stufen: ["material", "vorstellung", "kopf"] }] },
   ] },
 };
-const setzeStand = (themen) => speicher.set("lernstand-lernplan", JSON.stringify({ version: 1, migriert: 1, verlauf: [], aufgaben: {}, themen }));
+const setzeStand = (themen) => speicher.set("lernstand-kind-1-lernplan", JSON.stringify({ version: 1, migriert: 1, verlauf: [], aufgaben: {}, themen }));
 const gekonnt = { z: "kann-ich", e: "2026-11-01", k: "2026-11-02" };
 
 test("runde: einfuehrungGesehen ohne Thema tut nichts", async () => {
@@ -247,8 +247,8 @@ test("Befund 1: frisch, erst Zahlenzauber, dann Perlenbrücke → nach zerlegen-
 });
 
 test("Befund 1: übernommenes Kind mit beiden Ständen → nach rechnen-7 bekommt der Zahlenzauber ein neues Thema", async () => {
-  speicher.set("lernstand-zahlenzauber", JSON.stringify({ stufe: 2, fakten: { "3+4": { f: 2, t: "2026-11-01", h: [1] }, "7-4": { f: 1, t: "2026-11-01", h: [1] } } }));
-  speicher.set("lernstand-perlenbruecke", JSON.stringify({ version: 2, paare: { "5:2+3": { f: 4, t: "2026-11-01", h: [1], g: 1 }, "7:3+4": { f: 1, t: "x", h: [0] } } }));
+  speicher.set("lernstand-kind-1-zahlenzauber", JSON.stringify({ stufe: 2, fakten: { "3+4": { f: 2, t: "2026-11-01", h: [1] }, "7-4": { f: 1, t: "2026-11-01", h: [1] } } }));
+  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ version: 2, paare: { "5:2+3": { f: 4, t: "2026-11-01", h: [1], g: 1 }, "7:3+4": { f: 1, t: "x", h: [0] } } }));
   const { r, ereignis } = await spieleRunde("zahlenzauber");
   assert.equal(r.thema.id, "rechnen-7");
   assert.deepEqual(ereignis, { typ: "gekonnt", thema: "rechnen-7" });
@@ -348,12 +348,12 @@ test("Befund 3: übernommenes Thema (p = 1), Abbruch vor der ersten Antwort → 
 });
 
 test("Befund 5: ladeLernstand übernimmt alte Stände, schreibt aber nichts", async () => {
-  speicher.set("lernstand-perlenbruecke", JSON.stringify({ paare: { "2:1+1": { f: 4, t: "2026-11-01", h: [1, 1], g: 1 } } }));
+  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ paare: { "2:1+1": { f: 4, t: "2026-11-01", h: [1, 1], g: 1 } } }));
   const s = await ladeLernstand(CTX, "2026-11-13");
   assert.equal(s.migriert, 1);
   assert.equal(s.themen["zerlegen-2"].z, "kann-ich");
   await sofortSpeichern();
-  assert.equal(speicher.has("lernstand-lernplan"), false);
+  assert.equal(speicher.has("lernstand-kind-1-lernplan"), false);
   // schon übernommen: alte Stände werden nicht noch einmal gelesen
   setzeStand({ "zerlegen-3": gekonnt });
   const t = await ladeLernstand(CTX, "2026-11-13");
@@ -361,7 +361,7 @@ test("Befund 5: ladeLernstand übernimmt alte Stände, schreibt aber nichts", as
   assert.equal(t.themen["zerlegen-3"].z, "kann-ich");
   // runde() speichert die Übernahme weiter sofort
   speicher.clear();
-  speicher.set("lernstand-perlenbruecke", JSON.stringify({ paare: { "2:1+1": { f: 4, t: "2026-11-01", h: [1, 1], g: 1 } } }));
+  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ paare: { "2:1+1": { f: 4, t: "2026-11-01", h: [1, 1], g: 1 } } }));
   await (await start("perlenbruecke")).ende();
   assert.equal(stand().migriert, 1);
 });

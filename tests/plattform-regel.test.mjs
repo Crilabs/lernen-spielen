@@ -24,7 +24,6 @@ const AUSNAHMEN = {
   "eltern.js": ["__TAURI__"],
   "grossbuchstaben.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
   "index.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
-  "lernspiel.js": ["localStorage", "__TAURI__"],
   "perlenbruecke.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
   "themen.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
   "wimmelbild.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],

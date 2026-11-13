@@ -34,12 +34,12 @@ test("lade liefert Standard ohne Daten", async () => {
 });
 
 test("lade mischt gespeicherte Daten über Standard", async () => {
-  speicher.set("lernstand-x", '{"b":2}');
+  speicher.set("lernstand-kind-1-x", '{"b":2}');
   assert.deepEqual(await L.lade("x", { a: 1 }), { a: 1, b: 2 });
 });
 
 test("lade liefert Standard bei kaputtem JSON", async () => {
-  speicher.set("lernstand-x", "{");
+  speicher.set("lernstand-kind-1-x", "{");
   assert.deepEqual(await L.lade("x", { a: 1 }), { a: 1 });
 });
 
@@ -47,7 +47,7 @@ test("lade nutzt Tauri in der App", async () => {
   fakeApp('{"b":2}');
   assert.equal(L.istApp(), true);
   assert.deepEqual(await L.lade("x", { a: 1 }), { a: 1, b: 2 });
-  assert.deepEqual(aufrufe, [["lernstand_lesen", { spiel: "x" }]]);
+  assert.deepEqual(aufrufe, [["lernstand_lesen", { profil: "kind-1", spiel: "x" }]]);
 });
 
 test("speichere bündelt Aufrufe", async () => {
@@ -61,7 +61,7 @@ test("speichere bündelt Aufrufe", async () => {
   mock.timers.tick(1);
   assert.equal(aufrufe.length, 1);
   assert.equal(aufrufe[0][0], "lernstand_schreiben");
-  assert.deepEqual(aufrufe[0][1], { spiel: "x", daten: '{"n":3}' });
+  assert.deepEqual(aufrufe[0][1], { profil: "kind-1", spiel: "x", daten: '{"n":3}' });
 });
 
 test("sofortSpeichern schreibt ausstehende Daten", async () => {
@@ -133,7 +133,7 @@ test("lade-Fehler sperrt Speichern für dieses Spiel", async () => {
   L.speichere("frei", { a: 3 });
   await L.sofortSpeichern();
   assert.deepEqual(aufrufe.filter(([b]) => b === "lernstand_schreiben"), [
-    ["lernstand_schreiben", { spiel: "frei", daten: '{"a":3}' }],
+    ["lernstand_schreiben", { profil: "kind-1", spiel: "frei", daten: '{"a":3}' }],
   ]);
 });
 
