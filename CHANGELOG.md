@@ -1,5 +1,12 @@
 # Änderungen
 
+## Unveröffentlicht
+
+- Großbuchstaben-Zauberer im Querformat mit neuer Spielleiterin: Eine Zauberin verhext den Satz (alle Buchstaben flackern), dann ist das Kind dran.
+- Bei „Fertig!“ mit Fehler liest die Zauberin den Satz stumm und grübelt – eine bewusste Pause, in der nichts änderbar ist, damit Durchprobieren länger dauert als Nachdenken. Sie verrät dabei nicht, wo der Fehler steckt.
+- Nach dem 2. Fehlversuch bringt sie die ein/eine-Probe, nach dem 3. zeigt sie auf die falschen Wörter und erklärt sie.
+- Ist der Satz richtig, tritt sie zur Seite und die Szene spielt. Kein Startbildschirm mehr, Pause mit Einhornbild wie im Wimmelbild.
+
 ## v0.1.2
 
 - Wimmelbild: fünf neue Szenen im Querformat (Dorfplatz, Strand, Weltraum, Safari, Zauberwald) mit neu markierten Dingen.
