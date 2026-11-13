@@ -47,7 +47,7 @@ pub fn schreiben(dir: &Path, spiel: &str, daten: &str) -> Result<(), String> {
         let mut f = File::create(&tmp)?;
         f.write_all(daten.as_bytes())?;
         f.sync_all()?;
-        if haupt.exists() {
+        if gueltigen_inhalt(&haupt).is_some() {
             fs::rename(&haupt, pfad(dir, spiel, ".bak"))?;
         }
         fs::rename(&tmp, &haupt)
@@ -78,6 +78,22 @@ mod tests {
     fn zweites_schreiben_legt_bak_an() {
         let d = tempdir().unwrap();
         schreiben(d.path(), "wimmelbild", r#"{"a":1}"#).unwrap();
+        schreiben(d.path(), "wimmelbild", r#"{"a":2}"#).unwrap();
+        assert_eq!(
+            fs::read_to_string(d.path().join("wimmelbild.json")).unwrap(),
+            r#"{"a":2}"#
+        );
+        assert_eq!(
+            fs::read_to_string(d.path().join("wimmelbild.json.bak")).unwrap(),
+            r#"{"a":1}"#
+        );
+    }
+
+    #[test]
+    fn kaputte_hauptdatei_ueberschreibt_bak_nicht() {
+        let d = tempdir().unwrap();
+        fs::write(d.path().join("wimmelbild.json"), r#"{"a":"#).unwrap();
+        fs::write(d.path().join("wimmelbild.json.bak"), r#"{"a":1}"#).unwrap();
         schreiben(d.path(), "wimmelbild", r#"{"a":2}"#).unwrap();
         assert_eq!(
             fs::read_to_string(d.path().join("wimmelbild.json")).unwrap(),

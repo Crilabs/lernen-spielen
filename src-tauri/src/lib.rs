@@ -81,9 +81,12 @@ pub fn run() {
             let config = app.config().app.windows[0].clone();
             let _window = WebviewWindowBuilder::from_config(app.handle(), &config)?
                 .on_navigation(navigation_erlaubt)
+                .on_new_window(|_url, _features| tauri::webview::NewWindowResponse::Deny)
                 .build()?;
             #[cfg(windows)]
-            webview_einstellungen(&_window)?;
+            if let Err(e) = webview_einstellungen(&_window) {
+                log::error!("WebView2-Einstellungen nicht anwendbar: {e}");
+            }
             Ok(())
         })
         .run(tauri::generate_context!())
