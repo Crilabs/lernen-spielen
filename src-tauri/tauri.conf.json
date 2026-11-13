@@ -15,7 +15,6 @@
         "decorations": false,
         "resizable": false,
         "alwaysOnTop": true,
-        "skipTaskbar": true,
         "create": false
       }
     ],

@@ -1,6 +1,16 @@
 mod lernstand;
 
-use tauri::{Manager, WebviewWindowBuilder};
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::time::Duration;
+
+use tauri::{Manager, WebviewWindowBuilder, WindowEvent};
+
+/// Gesetzt, sobald die App beendet wird oder ein Update installiert: dann holt der
+/// Wachhund das Fenster nicht mehr zurück.
+static KIOSK_PAUSE: AtomicBool = AtomicBool::new(false);
+/// Verhindert, dass mehrere Wachhund-Prüfungen gleichzeitig laufen.
+static PRUEFUNG_LAEUFT: AtomicBool = AtomicBool::new(false);
+const WACHHUND_VERZOEGERUNG: Duration = Duration::from_millis(1500);
 
 fn lernstand_dir(app: &tauri::AppHandle) -> Result<std::path::PathBuf, String> {
     app.path()
@@ -17,6 +27,66 @@ fn lernstand_lesen(app: tauri::AppHandle, spiel: String) -> Result<Option<String
 #[tauri::command]
 fn lernstand_schreiben(app: tauri::AppHandle, spiel: String, daten: String) -> Result<(), String> {
     lernstand::schreiben(&lernstand_dir(&app)?, &spiel, &daten)
+}
+
+/// Vom Elternbereich vor „App beenden“ und vor der Update-Installation aufgerufen
+/// (`pause: true`); schlägt das fehl, wieder mit `pause: false`.
+#[tauri::command]
+fn kiosk_pause(pause: bool) {
+    KIOSK_PAUSE.store(pause, Ordering::SeqCst);
+    log::info!(
+        "Kiosk-Wachhund {}",
+        if pause { "pausiert" } else { "aktiv" }
+    );
+}
+
+/// Wachhund: Wird das Hauptfenster minimiert oder versteckt (z. B. Drei-Finger-Wischen nach
+/// unten), holt er es nach kurzer Zeit zurück. Ein bloßer Fokusverlust bei sichtbarem Fenster
+/// wird nicht bekämpft, damit der Task-Manager (Notausgang für Erwachsene) bedienbar bleibt.
+fn wachhund(window: &tauri::Window, event: &WindowEvent) {
+    if cfg!(debug_assertions) || window.label() != "main" {
+        return;
+    }
+    if !matches!(event, WindowEvent::Focused(false) | WindowEvent::Resized(_)) {
+        return;
+    }
+    if KIOSK_PAUSE.load(Ordering::SeqCst) || PRUEFUNG_LAEUFT.swap(true, Ordering::SeqCst) {
+        return;
+    }
+    let window = window.clone();
+    std::thread::spawn(move || {
+        std::thread::sleep(WACHHUND_VERZOEGERUNG);
+        PRUEFUNG_LAEUFT.store(false, Ordering::SeqCst);
+        if KIOSK_PAUSE.load(Ordering::SeqCst) {
+            return;
+        }
+        let minimiert = window.is_minimized().unwrap_or(false);
+        let sichtbar = window.is_visible().unwrap_or(true);
+        if !minimiert && sichtbar {
+            return;
+        }
+        log::info!(
+            "Kiosk-Wachhund: Fenster zurückgeholt (minimiert: {minimiert}, sichtbar: {sichtbar})"
+        );
+        let schritte = [
+            ("unminimize", window.unminimize()),
+            ("show", window.show()),
+            (
+                "fullscreen",
+                if window.is_fullscreen().unwrap_or(true) {
+                    Ok(())
+                } else {
+                    window.set_fullscreen(true)
+                },
+            ),
+            ("set_focus", window.set_focus()),
+        ];
+        for (name, ergebnis) in schritte {
+            if let Err(e) = ergebnis {
+                log::warn!("Kiosk-Wachhund {name}: {e}");
+            }
+        }
+    });
 }
 
 /// Nur die eigene App-Oberfläche darf geladen werden (keine neuen Fenster, keine Fremdseiten).
@@ -36,28 +106,44 @@ fn webview_einstellungen(window: &tauri::WebviewWindow) -> tauri::Result<()> {
     use windows::core::Interface;
 
     window.with_webview(|webview| {
-        let einstellen = || -> windows::core::Result<()> {
-            unsafe {
-                let settings = webview.controller().CoreWebView2()?.Settings()?;
-                settings
-                    .cast::<ICoreWebView2Settings6>()?
-                    .SetIsSwipeNavigationEnabled(false)?;
-                settings
-                    .cast::<ICoreWebView2Settings5>()?
-                    .SetIsPinchZoomEnabled(false)?;
-                settings.SetIsZoomControlEnabled(false)?;
-                settings.SetIsStatusBarEnabled(false)?;
-                if !cfg!(debug_assertions) {
-                    settings.SetAreDefaultContextMenusEnabled(false)?;
-                    settings
-                        .cast::<ICoreWebView2Settings3>()?
-                        .SetAreBrowserAcceleratorKeysEnabled(false)?;
-                }
+        // Jede Einstellung für sich: scheitert eine, werden die anderen trotzdem gesetzt.
+        fn melde(name: &str, ergebnis: windows::core::Result<()>) {
+            if let Err(e) = ergebnis {
+                log::error!("WebView2-Einstellung {name} fehlgeschlagen: {e}");
             }
-            Ok(())
+        }
+        let settings = match unsafe { webview.controller().CoreWebView2() }
+            .and_then(|core| unsafe { core.Settings() })
+        {
+            Ok(s) => s,
+            Err(e) => {
+                log::error!("WebView2-Einstellungen nicht erreichbar: {e}");
+                return;
+            }
         };
-        if let Err(e) = einstellen() {
-            log::error!("WebView2-Einstellungen fehlgeschlagen: {e}");
+        melde("Wischnavigation", unsafe {
+            settings
+                .cast::<ICoreWebView2Settings6>()
+                .and_then(|s| s.SetIsSwipeNavigationEnabled(false))
+        });
+        melde("Pinch-Zoom", unsafe {
+            settings
+                .cast::<ICoreWebView2Settings5>()
+                .and_then(|s| s.SetIsPinchZoomEnabled(false))
+        });
+        melde("Zoom", unsafe { settings.SetIsZoomControlEnabled(false) });
+        melde("Statusleiste", unsafe {
+            settings.SetIsStatusBarEnabled(false)
+        });
+        if !cfg!(debug_assertions) {
+            melde("Kontextmenü", unsafe {
+                settings.SetAreDefaultContextMenusEnabled(false)
+            });
+            melde("Browser-Tastenkürzel", unsafe {
+                settings
+                    .cast::<ICoreWebView2Settings3>()
+                    .and_then(|s| s.SetAreBrowserAcceleratorKeysEnabled(false))
+            });
         }
     })
 }
@@ -69,8 +155,10 @@ pub fn run() {
         .plugin(tauri_plugin_process::init())
         .invoke_handler(tauri::generate_handler![
             lernstand_lesen,
-            lernstand_schreiben
+            lernstand_schreiben,
+            kiosk_pause
         ])
+        .on_window_event(wachhund)
         .setup(|app| {
             // Logging in allen Builds: Datei im App-Log-Ordner, im Debug zusätzlich Stdout.
             let mut log = tauri_plugin_log::Builder::default()

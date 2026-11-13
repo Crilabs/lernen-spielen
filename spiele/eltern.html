@@ -167,10 +167,29 @@ document.querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click",
   if (b.dataset.tab === "pin") pinAnsicht("neu"); else waehle(b.dataset.tab);
 }));
 $("zurueck-spiele").addEventListener("click", async () => { await sofortSpeichern(); location.href = "index.html"; });
+// Kiosk-Wachhund (lib.rs) anhalten, damit er das Fenster beim Beenden/Update nicht zurückholt.
+async function kioskPause(pause) {
+  try { await T?.core?.invoke("kiosk_pause", { pause }); } catch (e) { protokoll("Kiosk-Pause: " + (e?.message ?? e)); }
+}
 $("beenden").addEventListener("click", async () => {
   await sofortSpeichern();
-  try { await T.process.exit(0); } catch (e) { protokoll("App beenden: " + (e?.message ?? e)); location.href = "index.html"; }
+  await kioskPause(true);
+  try { await T.process.exit(0); } catch (e) { protokoll("App beenden: " + (e?.message ?? e)); await kioskPause(false); location.href = "index.html"; }
 });
+
+// Nach 5 Minuten ohne Eingabe zurück zu den Spielen (Elternbereich nicht offen liegen lassen).
+const RUHE_MS = 5 * 60 * 1000;
+let ruheTimer;
+let installiertGerade = false;
+function ruheNeu() {
+  clearTimeout(ruheTimer);
+  ruheTimer = setTimeout(async () => {
+    if (installiertGerade) { ruheNeu(); return; }
+    await sofortSpeichern(); location.href = "index.html";
+  }, RUHE_MS);
+}
+for (const typ of ["pointerdown", "keydown"]) document.addEventListener(typ, ruheNeu, true);
+ruheNeu();
 
 function waehle(name, hinweis) {
   tab = name;
@@ -220,8 +239,10 @@ function updates(inh, hinweis) {
 }
 async function installieren(update, los, balken, fuell, status) {
   los.disabled = true; balken.hidden = false; status.textContent = "Ich lade das Update …";
+  installiertGerade = true;
   try {
     await sofortSpeichern();
+    await kioskPause(true);
     let gesamt = 0, geladen = 0;
     let timer;
     const zeit = new Promise((_, nein) => { timer = setTimeout(() => nein(new Error("Zeitlimit beim Laden")), 10 * 60 * 1000 + 5000); });
@@ -234,6 +255,8 @@ async function installieren(update, los, balken, fuell, status) {
     await T.process.relaunch();
   } catch (e) {
     protokoll("Update installieren: " + (e?.message ?? e));
+    installiertGerade = false;
+    await kioskPause(false);
     status.textContent = "Das Update hat nicht geklappt. Bitte später nochmal versuchen.";
     los.disabled = false; balken.hidden = true;
   }
