@@ -145,6 +145,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 <script type="module">
 import {lade, speichere, sperreTouch, esc, protokoll} from "./lernspiel.js";
 import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
+import {sprich as kernSprich, stille} from "./kern/stimme.js";
 import {runde, einmal} from "./lernsteuerung.js";
 import {spieleEinfuehrung} from "./einfuehrung.js";
 sperreTouch();
@@ -198,7 +199,7 @@ sperreTouch();
   // ---------- Ton und Stimme ----------
   await ladeEinstellungen(); let sound = einstellung("ton.zahlenzauber", true);
   const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.zahlenzauber", sound); if(!sound) window.speechSynthesis?.cancel(); });
+  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.zahlenzauber", sound); if(!sound) stille(); });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
@@ -217,17 +218,7 @@ sperreTouch();
   // Sprechblase des Einhorns: nur Text. Zahlen werden nie vorgelesen – Ziffern lesen sich sicherer als eine Computerstimme.
   function sag(text){ $("blase").textContent=text; }
   // Stimme nur für Sätze ohne Zahlen (Gekonnt-Satz, Spielname im Hinweis); Stimme wie im Einführungs-Abspieler
-  function sprich(text){
-    if(!sound || !window.speechSynthesis || /\d/.test(text)) return;
-    try{
-      speechSynthesis.cancel();
-      const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; u.rate=.85;
-      let fest=""; try{ fest=localStorage.getItem("einhorn-stimme")||""; }catch(e){}
-      const v=speechSynthesis.getVoices().filter(v=>/^de/i.test(v.lang)).find((v,k)=>k+"|"+v.name+"|"+v.voiceURI===fest);
-      if(v) u.voice=v;
-      speechSynthesis.speak(u);
-    }catch(e){}
-  }
+  function sprich(text){ if(!sound) return; kernSprich(text); }
 
   // ---------- Lernsteuerung ----------
   let plan = null, spieleListe = [];

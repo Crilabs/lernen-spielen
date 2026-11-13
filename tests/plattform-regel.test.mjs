@@ -17,13 +17,8 @@ const MUSTER = {
 
 // Heute erlaubte Zugriffe je Datei (Pfad relativ zu spiele/). Darf nur schrumpfen.
 const AUSNAHMEN = {
-  "einhorn-steine.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
   "eltern.html": ["__TAURI__"],
   "eltern.js": ["__TAURI__"],
-  "grossbuchstaben.html": ["speechSynthesis", "SpeechSynthesisUtterance"],
-  "perlenbruecke.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
-  "wimmelbild.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
-  "zahlenzauber.html": ["speechSynthesis", "SpeechSynthesisUtterance", "localStorage"],
 };
 
 function dateien(ordner) {

@@ -140,6 +140,7 @@ body.ende .stage>.rund.l{visibility:visible;pointer-events:auto;animation:haus 1
 <script type="module">
 import {lade, speichere, sperreTouch, esc, merkeGelernt} from "./lernspiel.js";
 import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
+import {sprich as kernSprich, stille} from "./kern/stimme.js";
 sperreTouch();
 (async function(){
   // ---------- Einstellungen ----------
@@ -200,7 +201,7 @@ sperreTouch();
   // ---------- Ton und Stimme ----------
   await ladeEinstellungen(); let sound = einstellung("ton.grossbuchstaben", true);
   const sndBtn=$("snd"); const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.grossbuchstaben", sound); if(!sound) window.speechSynthesis?.cancel(); });
+  sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.grossbuchstaben", sound); if(!sound) stille(); });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
@@ -210,10 +211,7 @@ sperreTouch();
   const klick = () => tone(900,1300,.09,"sine",.08);
   const murmeln = () => tone(260,220,.16,"triangle",.05);
   const glitzer = () => { [0,90,180].forEach((d,i)=>setTimeout(()=>tone(1200+i*300,1600+i*300,.12,"sine",.07),d)); };
-  let voice=null;
-  function pickVoice(){ const vs=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang)); voice=vs.find(v=>/Anna|Petra|Helena|Marlene/i.test(v.name))||vs[0]||null; }
-  if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
-  function say(text){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1.1; speechSynthesis.speak(u); }catch(e){} }
+  function say(text){ if(!sound) return; kernSprich(text, { tempo: .85, hoehe: 1.1 }); }
 
   // ---------- Bühne ----------
   const stage=$("stage"), welt=$("welt"), akteure=$("akteure");

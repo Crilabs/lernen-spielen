@@ -126,6 +126,7 @@ img{display:block}
 <script type="module">
 import {lade, speichere, sperreTouch, esc, protokoll} from "./lernspiel.js";
 import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
+import {sprich as kernSprich, stille} from "./kern/stimme.js";
 import {K, paareVon, migriere, angebotAus, verbucheBau, zerlegung, eigenerStand, SPEICHER, SPEICHER_ALT} from "./perlen-logik.js";
 import {runde, einmal} from "./lernsteuerung.js";
 import {spieleEinfuehrung} from "./einfuehrung.js";
@@ -174,7 +175,7 @@ sperreTouch();
   // ---------- Ton ----------
   await ladeEinstellungen(); let sound = einstellung("ton.perlenbruecke", true);
   const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.perlenbruecke", sound); if(!sound) window.speechSynthesis?.cancel(); });
+  $("snd").addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.perlenbruecke", sound); if(!sound) stille(); });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
@@ -188,17 +189,7 @@ sperreTouch();
   // Sprechblase des Einhorns. Zahlen werden nicht vorgelesen: Ziffern lesen sich sicherer als eine Computerstimme.
   function sag(text){ const b=$("blase"); if(text) b.textContent=text; b.classList.toggle("leer", !text); }
   // Stimme nur für Sätze ohne Zahlen (Stimme wie im Einführungs-Abspieler, Wahl im Elternbereich)
-  function sprich(text){
-    if(!sound || !window.speechSynthesis || /\d/.test(text)) return;
-    try{
-      speechSynthesis.cancel();
-      const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; u.rate=.85;
-      let fest=""; try{ fest=localStorage.getItem("einhorn-stimme")||""; }catch(e){}
-      const v=speechSynthesis.getVoices().filter(v=>/^de/i.test(v.lang)).find((v,k)=>k+"|"+v.name+"|"+v.voiceURI===fest);
-      if(v) u.voice=v;
-      speechSynthesis.speak(u);
-    }catch(e){}
-  }
+  function sprich(text){ if(!sound) return; kernSprich(text); }
 
   // ---------- Lernsteuerung und spieleigener Stand ----------
   let plan = null, spieleListe = [];

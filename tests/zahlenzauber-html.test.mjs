@@ -69,7 +69,7 @@ test("Vorschau und Elternansicht schreiben nie", () => {
 test("Gekonnt ruhig: Stimme ohne Zahl, Name mit Ziffer in der Blase", () => {
   assert.match(html, /sprich\("Das kannst du jetzt\."\)/);
   assert.match(html, /sag\(`\$\{[^}]*name[^}]*\} kannst du jetzt\.`\)/);
-  assert.match(html, /\/\\d\/\.test\(text\)/);   // sprich() spricht nie etwas mit Ziffern
+  assert.match(html, /kernSprich\(text\)/);   // Ziffern spricht kern/stimme.js nie
 });
 test("nach einer Wiederholungsrunde: Hinweis auf das Spiel mit Neuem", () => {
   assert.match(html, /hinweisSpiel/);

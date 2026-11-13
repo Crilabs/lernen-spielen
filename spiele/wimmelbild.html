@@ -104,6 +104,7 @@ img{display:block}
 <script type="module">
 import {lade, speichere, sperreTouch, esc, merkeGelernt} from "./lernspiel.js";
 import {ladeEinstellungen, einstellung, setzeEinstellung} from "./kern/einstellungen.js";
+import {sprich as kernSprich, stille, stimmen, setzeStimme} from "./kern/stimme.js";
 sperreTouch();
 (async function(){
   // ---------- Einstellungen ----------
@@ -174,7 +175,7 @@ sperreTouch();
   // ---------- Ton und Stimme ----------
   await ladeEinstellungen(); let sound = einstellung("ton.wimmelbild", true);
   const sndBtn=$("snd"); const showSnd=()=>$("sndimg").src=sound?"symbole/ton-an.svg":"symbole/ton-aus.svg"; showSnd();
-  sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.wimmelbild", sound); if(!sound) window.speechSynthesis?.cancel(); });
+  sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); setzeEinstellung("ton.wimmelbild", sound); if(!sound) stille(); });
   let actx;
   function tone(f1,f2,dur,type="sine",vol=.18){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
     const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
@@ -186,34 +187,8 @@ sperreTouch();
     boing: ()=>{ tone(180,420,.12,"triangle",.25); setTimeout(()=>tone(420,140,.28,"triangle",.22),110); },
     happs: ()=>{ tone(600,200,.15,"square",.08); setTimeout(()=>tone(300,700,.12,"sine",.12),140); }
   };
-  // Stimme: beste deutsche Systemstimme (Premium > Erweitert > kompakt). Eloquence- und Spaßstimmen von Apple
-  // (Eddy, Flo, Grandma, Reed, Sandy, Shelley, Zarvox …) klingen nach 90er-Synthesizer und fallen raus.
-  // In der Elternansicht (?eltern) lässt sich eine Stimme fest wählen; gilt auf dem Gerät für alle Einhorn-Spiele.
-  const SCHLECHT = /eddy|flo\b|grandma|grandpa|oma|opa|reed|rocko|sandy|shelley|eloquence|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|kathy|ralph|novelty/i;
-  function stimmWert(v){
-    const n=(v.name+" "+v.voiceURI);
-    if(SCHLECHT.test(n)) return -1;
-    let w=0;
-    if(/premium/i.test(n)) w+=40; else if(/enhanced|erweitert|verbessert|natural|neural/i.test(n)) w+=25;
-    if(/google/i.test(n)) w+=15;
-    if(/de[-_]DE/i.test(v.lang)) w+=5;
-    if(/anna|helena|petra|marlene|katja|martin|markus|yannick|viktor/i.test(n)) w+=3;
-    return w;
-  }
-  const deutscheStimmen = () => (window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang));
-  // Gespeichert wird Position + Name + Kennung: Safari meldet z. B. zwei „Anna“ (kompakt und Premium) mit gleicher Kennung.
-  // "system" = keine Stimme vorgeben, nur Deutsch – dann wählt das System (Windows: Standardstimme der Sprachausgabe).
-  let voice=null, stimmWahl="";
-  const stimmSchluessel = (v,i) => i+"|"+v.name+"|"+v.voiceURI;
-  function pickVoice(){
-    const vs=deutscheStimmen(); let fest=""; try{ fest=localStorage.getItem("einhorn-stimme")||""; }catch(e){}
-    stimmWahl=fest;
-    if(fest==="system"){ voice=null; return; }
-    const i=vs.findIndex((v,k)=>stimmSchluessel(v,k)===fest);
-    voice = i>=0 ? vs[i] : (vs.filter(v=>stimmWert(v)>=0).sort((a,b)=>stimmWert(b)-stimmWert(a))[0] || null);
-  }
-  if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=()=>{ pickVoice(); window.dispatchEvent(new Event("stimmen")); }; }
-  function say(text){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1; speechSynthesis.speak(u); }catch(e){} }
+  // Stimme: kern/stimme.js (beste deutsche Systemstimme; in der Elternansicht ?eltern fest wählbar, gilt für alle Einhorn-Spiele).
+  function say(text){ if(!sound) return; kernSprich(text, { tempo: .85 }); }
 
   // ---------- Bilder laden ----------
   let namen=[]; const bilder={};
@@ -523,7 +498,7 @@ sperreTouch();
     document.body.appendChild(el);
     const liste=el.querySelector("#stimmen");
     function zeigeStimmen(){
-      const vs=deutscheStimmen();
+      const vs=stimmen();
       liste.innerHTML="";
       const zeile=(titel, info, aktiv, waehle)=>{
         const li=document.createElement("li");
@@ -532,12 +507,10 @@ sperreTouch();
         b.onclick=()=>{ waehle(); sound=true; say("der Hund – die Katze – das Einhorn"); zeigeStimmen(); };
         li.appendChild(b); liste.appendChild(li);
       };
-      zeile("Standardstimme des Geräts", "· Windows wählt selbst", stimmWahl==="system",
-        ()=>{ try{ localStorage.setItem("einhorn-stimme","system"); }catch(e){} stimmWahl="system"; voice=null; });
-      vs.forEach((v,k)=>zeile(`${k+1}. ${esc(v.name)}`,
-        `· ${esc(v.lang)}${v.default?" · Standard":""}${v.localService===false?" · online":""}${stimmWert(v)<0?" · alt/Spaßstimme":""}<br>${esc(v.voiceURI)}`,
-        stimmWahl!=="system" && voice===v,
-        ()=>{ const key=stimmSchluessel(v,k); try{ localStorage.setItem("einhorn-stimme",key); }catch(e){} stimmWahl=key; voice=v; }));
+      zeile("Standardstimme des Geräts", "· Windows wählt selbst", !vs.some(v=>v.gewaehlt),
+        ()=>setzeStimme("system"));
+      vs.forEach((v,k)=>zeile(`${k+1}. ${esc(v.name)}`, "", v.gewaehlt,
+        ()=>setzeStimme(v.schluessel)));
     }
     zeigeStimmen(); window.addEventListener("stimmen", zeigeStimmen);
   }
