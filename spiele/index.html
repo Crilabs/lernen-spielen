@@ -2,69 +2,208 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Einhorn-Lernspiele</title>
 <link rel="stylesheet" href="schrift/schrift.css">
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--nacht:#3B2A6B;--paper:#FFF8FC;--bg:#D8F3FF}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}}
-:root[data-theme="dark"]{--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}
+:root{
+  --himmel:#CDEFFF; --himmel-hell:#EEF9FF; --tinte:#3B2A6B; --tinte-weich:#6B5C96; --papier:#FFFFFF;
+  --gras:#8EDCA9; --erde:#C79A7E; --erde-dunkel:#9C6F57;
+  font-size:calc(100vh / 108);
+}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;color:var(--nacht);background:var(--bg);background-image:
-  radial-gradient(circle at 15% 20%,rgba(255,138,203,.35) 0 90px,transparent 90px),
-  radial-gradient(circle at 85% 15%,rgba(255,217,90,.45) 0 60px,transparent 60px),
-  radial-gradient(circle at 80% 85%,rgba(181,156,255,.45) 0 110px,transparent 110px),
-  radial-gradient(circle at 10% 90%,rgba(127,232,200,.45) 0 70px,transparent 70px)}
-.app{max-width:480px;margin:0 auto;padding:28px 18px 32px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
-.corn{font-size:96px;line-height:1;animation:float 3s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-h1{font-size:2.3rem;line-height:1.1;font-weight:800}
-.lead{font-size:1.15rem;font-weight:600;opacity:.85}
-.card{display:flex;align-items:center;gap:16px;width:100%;padding:18px;border-radius:28px;background:var(--paper);text-decoration:none;color:inherit;box-shadow:0 8px 0 var(--shade);transition:transform .1s,box-shadow .1s;text-align:left}
-.card:active{transform:translateY(6px);box-shadow:0 2px 0 var(--shade)}
-.card .ico{width:84px;height:84px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:50px;background:var(--tint);flex:none}
-.card h2{font-size:1.5rem;line-height:1.1}
-.card p{font-weight:600;font-size:1rem;opacity:.8;margin-top:4px}
-.card .go{margin-left:auto;font-size:1.8rem;opacity:.5}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+html,body{height:100%;overflow:hidden}
+body{font-family:"Andika","Baloo 2",sans-serif;color:var(--tinte);background:var(--himmel);user-select:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;font-weight:800;line-height:1}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:.4rem solid var(--tinte);outline-offset:.4rem;border-radius:1rem}
+img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+
+#start{position:fixed;inset:0;background:linear-gradient(var(--himmel-hell),var(--himmel) 60%)}
+.huegel{position:absolute;left:0;right:0;bottom:0;height:22rem;pointer-events:none}
+.wolke{position:absolute;background:#fff;border-radius:99rem;opacity:.9}
+.wolke::before,.wolke::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.wolke::before{width:55%;height:180%;left:15%;bottom:20%}
+.wolke::after{width:40%;height:140%;right:12%;bottom:25%}
+
+.start-raster{position:absolute;inset:0;display:grid;grid-template-columns:40rem minmax(0,1fr);padding:4rem 4rem 0 3rem}
+.gruss{position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:12rem}
+.gruss h1{font-size:4.6rem;position:absolute;top:0;left:2rem;white-space:nowrap;letter-spacing:-.01em}
+.gruss h1 span{display:block;font-size:2.4rem;font-weight:600;color:var(--tinte-weich);letter-spacing:0;margin-top:.6rem}
+.maskottchen{width:38rem;margin-left:1rem;filter:drop-shadow(0 1.2rem 0 rgba(59,42,107,.08))}
+.maskottchen svg{display:block;width:100%;height:auto;overflow:visible}
+
+#eltern{position:absolute;top:3rem;right:3.5rem;width:7rem;height:7rem;border-radius:50%;background:rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;z-index:5}
+#eltern img{width:4.6rem;height:4.6rem}
+
+.beete{display:grid;grid-template-columns:repeat(var(--spalten,3),minmax(0,1fr));gap:3.2rem;align-items:end;padding-top:10rem;height:100%}
+.beet{position:relative;display:flex;flex-direction:column;height:100%;max-height:88rem;min-width:0}
+.schild{display:flex;align-items:center;gap:1.4rem;margin:0 0 2rem .6rem}
+.schild .sym{width:6.4rem;height:6.4rem;flex:none;padding:1.2rem;border-radius:2rem;background:var(--k);display:flex;align-items:center;justify-content:center;box-shadow:0 .5rem 0 var(--ks)}
+.schild .sym img{filter:brightness(0) invert(1)}
+.schild h2{font-size:4.4rem}
+.spiele{display:flex;flex-direction:column;gap:3rem;flex:1}
+.kachel{position:relative;display:grid;grid-template-columns:15rem minmax(0,1fr);align-items:center;gap:2.2rem;padding:2rem 2.6rem 2rem 2rem;min-height:25rem;
+  background:var(--papier);border-radius:3.2rem;box-shadow:0 .9rem 0 var(--ks);text-align:left;width:100%;transition:transform .08s,box-shadow .08s}
+.kachel:active{transform:translateY(.7rem);box-shadow:0 .2rem 0 var(--ks)}
+.kachel .ico{width:15rem;height:15rem;border-radius:3.4rem;background:var(--kt);display:flex;align-items:center;justify-content:center;padding:2rem}
+.kachel h3{font-size:3.8rem;margin-bottom:.8rem;font-family:"Andika",sans-serif;font-weight:700;letter-spacing:-.01em}
+.thema{display:inline-block;margin-bottom:1.6rem;padding:.5rem 1.4rem .4rem;border-radius:99rem;background:var(--kt);color:var(--ks);font:700 2.2rem/1.1 "Andika",sans-serif}
+.weg{position:relative;height:2rem;border-radius:99rem;background:var(--kt);margin-right:1.6rem}
+.weg i{position:absolute;inset:0 auto 0 0;border-radius:99rem;background:var(--k)}
+.weg b{position:absolute;top:50%;width:4rem;height:4rem;transform:translate(-50%,-50%)}
+.weg b svg{width:100%;height:100%;display:block}
+.hoeren{position:absolute;top:-1.8rem;right:-1.4rem;width:6.4rem;height:6.4rem;border-radius:50%;background:#fff;box-shadow:0 .4rem 0 var(--kt),0 0 0 .3rem var(--kt);
+  display:flex;align-items:center;justify-content:center;padding:1.3rem}
+
+.erde{position:relative;margin-top:auto;height:12rem;margin-bottom:3rem}
+.erde .boden{position:absolute;left:0;right:0;bottom:0;height:5rem;border-radius:3rem 3rem 2rem 2rem;background:var(--erde);box-shadow:inset 0 -.8rem 0 var(--erde-dunkel)}
+.erde .blumen{position:absolute;left:2rem;right:2rem;bottom:2.6rem;display:flex;justify-content:space-between;align-items:flex-end}
+.erde svg{width:3.8rem;height:auto;overflow:visible}
+
+/* Vier Kategorien: schmalere Spalten */
+.beete.s4{gap:2.2rem}
+.s4 .schild h2{font-size:3.6rem}
+.s4 .kachel{grid-template-columns:11rem minmax(0,1fr);gap:1.6rem;padding:1.6rem 2rem 1.6rem 1.6rem}
+.s4 .kachel .ico{width:11rem;height:11rem;padding:1.5rem;border-radius:2.6rem}
+.s4 .kachel h3{font-size:3rem}
+.s4 .thema{font-size:1.9rem}
+.s4 .erde svg{width:3rem}
+/* Ab fünf Kategorien: zwei Reihen */
+.beete.zwei{grid-template-rows:repeat(2,minmax(0,1fr));gap:1.4rem 3.2rem;padding-top:9rem;padding-bottom:11rem;align-items:stretch}
+.zwei .beet{max-height:none}
+.zwei .schild{margin-bottom:1rem}
+.zwei .schild .sym{width:5rem;height:5rem;padding:.9rem;border-radius:1.5rem}
+.zwei .schild h2{font-size:3.4rem}
+.zwei .spiele{flex-direction:row;gap:1.6rem}
+.zwei .kachel{grid-template-columns:1fr;min-height:0;padding:1.4rem;gap:.8rem;justify-items:start;align-content:center}
+.zwei .kachel .ico{width:7rem;height:7rem;padding:1rem;border-radius:1.8rem}
+.zwei .kachel h3{font-size:2.4rem;margin-bottom:.4rem}
+.zwei .thema{font-size:1.6rem;margin-bottom:.8rem}
+.zwei .erde{height:7rem;margin-bottom:0}
+.zwei .erde .boden{height:3rem}
+.zwei .erde .blumen{bottom:1.4rem}
+.zwei .erde svg{width:2.4rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="corn">🦄</div>
-  <h1>Einhorn-Lernspiele</h1>
-  <p class="lead">Such dir ein Spiel aus!</p>
+<main id="start" aria-label="Startseite">
+  <div class="wolke" style="width:22rem;height:6rem;left:52rem;top:6rem"></div>
+  <div class="wolke" style="width:16rem;height:4.6rem;left:128rem;top:4rem;opacity:.7"></div>
+  <svg class="huegel" viewBox="0 0 1920 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 120 C260 40 520 60 760 110 C1000 160 1240 70 1500 80 C1700 88 1820 120 1920 100 L1920 220 L0 220Z" fill="#B7EAC6"/>
+    <path d="M0 170 C300 110 600 130 900 160 C1200 190 1500 120 1920 150 L1920 220 L0 220Z" fill="var(--gras)"/>
+  </svg>
 
-  <a class="card" href="zahlenzauber.html" style="--shade:#D45A9E;--tint:#FFD6EC">
-    <div class="ico">🌼</div>
-    <div><h2>Zahlenzauber</h2><p>Welche zwei Zahlen ergeben eine dritte? Spann Fäden und lass die Wiese wachsen.</p></div>
-    <div class="go">›</div>
-  </a>
+  <button id="eltern" aria-label="Für Erwachsene (gedrückt halten)"><img src="symbole/zahnrad.svg" alt=""></button>
 
-  <a class="card" href="perlenbruecke.html" style="--shade:#7A5FD1;--tint:#E3DAFF">
-    <div class="ico">🌉</div>
-    <div><h2>Perlenbrücke</h2><p>Baue mit Perlenstäbchen die Brücke über die Zahl und hilf dem Einhorn hinüber.</p></div>
-    <div class="go">›</div>
-  </a>
+  <div class="start-raster">
+    <div class="gruss">
+      <h1>Einhorn-Lernspiele<span>Dein Lerngarten</span></h1>
+      <div class="maskottchen" id="maskottchen"></div>
+    </div>
+    <div class="beete" id="beete"></div>
+  </div>
+</main>
 
-  <a class="card" href="wimmelbild.html" style="--shade:#4FBF9C;--tint:#D2F7EA">
-    <div class="ico">🔍</div>
-    <div><h2>Wimmelbild-Detektiv</h2><p>Zieh die Wörter auf die Dinge im Bild – und sieh, was lebendig wird.</p></div>
-    <div class="go">›</div>
-  </a>
+<script src="figuren/figuren.js"></script>
+<script src="figuren/einhorn.js"></script>
+<script type="module">
+import { lade, sperreTouch, protokoll, esc } from "./lernspiel.js";
+import { kategorieWert, sichtbareKategorien } from "./fortschritt/kern.js";
 
-  <a class="card" href="grossbuchstaben.html" style="--shade:#E0A42A;--tint:#FFF1C2">
-    <div class="ico">🪄</div>
-    <div><h2>Großbuchstaben-Zauberer</h2><p>Zaubere die Buchstaben groß oder klein – stimmt der Satz, wird er lebendig.</p></div>
-    <div class="go">›</div>
-  </a>
+sperreTouch();
 
-  <a class="card" href="einhorn-steine.html" style="--shade:#4C9BD1;--tint:#D6EEFF">
-    <div class="ico">🪨</div>
-    <div><h2>Einhorn-Steine</h2><p>Hör zu, schreib den Satz – und bau dem Einhorn Steine über den Bach.</p></div>
-    <div class="go">›</div>
-  </a>
-</div>
+// ---------- Einhorn ----------
+const masko = document.getElementById("maskottchen");
+masko.innerHTML = Figuren.svgFigur("einhorn");
+const svg = masko.querySelector("svg");
+masko.addEventListener("click", () => Figuren.hop(svg, { hoehe: 60 }));
+
+// ---------- Vorlesen ----------
+function sag(text) {
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "de-DE"; u.rate = .85;
+    let fest = ""; try { fest = localStorage.getItem("einhorn-stimme") || ""; } catch (e) {}
+    const vs = speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang));
+    const v = vs.find((v, k) => k + "|" + v.name + "|" + v.voiceURI === fest);
+    if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  } catch (e) { protokoll("Vorlesen fehlgeschlagen: " + e); }
+}
+
+// ---------- Blumen ----------
+const blume = (farbe, stufe) => {   // 0 Erde, 1 Knospe, 2 Blüte
+  if (stufe === 0) return `<svg viewBox="0 0 40 40"><ellipse cx="20" cy="38" rx="6" ry="2.5" fill="#9C6F57"/></svg>`;
+  if (stufe === 1) return `<svg viewBox="0 0 40 60"><path d="M20 58 V34" stroke="#5DBE84" stroke-width="4" stroke-linecap="round"/><path d="M20 44 C10 40 8 32 12 30 C18 32 20 38 20 44Z" fill="#8EDCA9" stroke="#3B2A6B" stroke-width="2"/><ellipse cx="20" cy="28" rx="6" ry="8" fill="${farbe}" stroke="#3B2A6B" stroke-width="2.4"/></svg>`;
+  return `<svg viewBox="0 0 40 70"><path d="M20 68 V34" stroke="#5DBE84" stroke-width="4" stroke-linecap="round"/><path d="M20 52 C9 49 6 40 10 37 C17 39 20 45 20 52Z" fill="#8EDCA9" stroke="#3B2A6B" stroke-width="2"/>
+    ${[0, 72, 144, 216, 288].map(a => `<ellipse cx="20" cy="12" rx="7" ry="10" transform="rotate(${a} 20 22)" fill="${farbe}" stroke="#3B2A6B" stroke-width="2.4"/>`).join("")}
+    <circle cx="20" cy="22" r="6" fill="#FFE07A" stroke="#3B2A6B" stroke-width="2.4"/></svg>`;
+};
+const kopf = farbe => `<svg viewBox="0 0 44 44">${[0, 72, 144, 216, 288].map(a => `<ellipse cx="22" cy="11" rx="7.5" ry="10" transform="rotate(${a} 22 22)" fill="${farbe}" stroke="#3B2A6B" stroke-width="2.6"/>`).join("")}<circle cx="22" cy="22" r="6.5" fill="#FFE07A" stroke="#3B2A6B" stroke-width="2.6"/></svg>`;
+
+// ---------- Fortschritt je Spiel ----------
+// Modul vorhanden: Zahl (ohne Lernstand 0). Kein Modul: kein Eintrag. Fehler: Protokoll, kein Eintrag.
+async function wertVon(id) {
+  let modul;
+  try { modul = await import("./fortschritt/" + id + ".js"); }
+  catch (e) { return undefined; }
+  try {
+    const roh = await lade(id, {});
+    const save = roh && Object.keys(roh).length === 0 ? null : roh;
+    const r = await modul.fortschritt(save, p => fetch(p).then(x => x.json()));
+    return typeof r?.wert === "number" ? Math.min(1, Math.max(0, r.wert)) : undefined;
+  } catch (e) { protokoll("Fortschritt " + id + ": " + e); return undefined; }
+}
+
+async function start() {
+  let daten;
+  try { daten = await (await fetch("spiele.json")).json(); }
+  catch (e) { protokoll("spiele.json: " + e); return; }
+  const werte = {};
+  await Promise.all(daten.spiele.map(async s => { const w = await wertVon(s.id); if (w !== undefined) werte[s.id] = w; }));
+
+  const kats = sichtbareKategorien(daten);
+  const beete = document.getElementById("beete");
+  const n = kats.length;
+  beete.style.setProperty("--spalten", n >= 5 ? 3 : Math.max(1, n));
+  if (n === 4) beete.classList.add("s4");
+  if (n >= 5) beete.classList.add("zwei");
+
+  for (const { kategorie: k, spiele } of kats) {
+    const wert = kategorieWert(spiele, werte);
+    const voll = wert === undefined ? 0 : Math.floor(wert * 10 + 1e-9);
+    const knospe = wert !== undefined && wert * 10 - voll >= .3 ? 1 : 0;
+    const el = document.createElement("section");
+    el.className = "beet";
+    el.style.cssText = `--k:${k.farbe};--ks:${k.schatten};--kt:${k.tint}`;
+    el.innerHTML = `<div class="schild"><div class="sym"><img src="${esc(k.symbol)}" alt=""></div><h2>${esc(k.name)}</h2></div>
+      <div class="spiele">${spiele.map(s => {
+        const w = werte[s.id];
+        const weg = w === undefined ? "" : `<div class="weg" aria-hidden="true"><i style="width:${w * 100}%"></i><b style="left:${w * 100}%">${kopf(k.farbe)}</b></div>`;
+        return `<a class="kachel" href="${esc(s.datei)}" data-id="${esc(s.id)}" aria-label="${esc(s.titel)}">
+          <div class="ico"><img src="${esc(s.symbol)}" alt=""></div>
+          <div><h3>${esc(s.titel)}</h3><span class="thema">${esc(s.thema)}</span>${weg}</div>
+          <span class="hoeren" role="button" aria-label="Vorlesen"><img src="symbole/vorlesen.svg" alt=""></span>
+        </a>`;
+      }).join("")}</div>
+      <div class="erde" role="img" aria-label="${esc(k.name)}: ${voll} von 10 Blumen"><div class="boden"></div>
+        <div class="blumen">${Array.from({ length: 10 }, (_, i) => blume(k.farbe, i < voll ? 2 : (i === voll && knospe ? 1 : 0))).join("")}</div></div>`;
+    beete.appendChild(el);
+  }
+
+  const text = Object.fromEntries(daten.spiele.map(s => [s.id, `${s.titel}. ${s.thema}. ${s.text}`]));
+  beete.querySelectorAll(".hoeren").forEach(h => h.addEventListener("click", e => {
+    e.preventDefault(); e.stopPropagation();
+    sag(text[h.closest(".kachel").dataset.id]);
+  }));
+}
+start();
+</script>
 </body>
 </html>
