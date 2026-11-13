@@ -50,3 +50,16 @@ export function reihen(tasten, maxJeReihe = 10) {
   for (let i = 0; i < tasten.length; i += maxJeReihe) r.push(tasten.slice(i, i + maxJeReihe));
   return r;
 }
+
+/**
+ * Wie `reihen`, aber gleichmäßig: Anzahl der Reihen = aufgerundet n / max, je Reihe aufgerundet n / Reihen
+ * (13 Tasten: 7/6 statt 10/3), damit keine kurze Restreihe übrig bleibt.
+ * @param {string[]} tasten
+ * @param {number} [maxJeReihe]
+ * @returns {string[][]}
+ */
+export function ausgeglichen(tasten, maxJeReihe = 10) {
+  if (!tasten.length) return [];
+  const anzahl = Math.ceil(tasten.length / maxJeReihe);
+  return reihen(tasten, Math.ceil(tasten.length / anzahl));
+}

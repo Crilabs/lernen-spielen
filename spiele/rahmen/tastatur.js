@@ -6,13 +6,13 @@
 // Der Host ist ein Block: wohin die Tastatur kommt (unten Mitte), bestimmt das Spiel.
 
 import { GRUND_CSS, definiere } from "./stil.js";
-import { tastenFuer, reihen } from "./tasten.js";
+import { tastenFuer, ausgeglichen } from "./tasten.js";
 
-const TASTE = { breite: 9.4, hoehe: 8.6, abstand: 1, tiefe: 0.8, einsinken: 0.7, radius: 2.2 };
+const TASTE = { breite: 9.4, hoehe: 8.6, abstand: 1.6, tiefe: 0.8, einsinken: 0.7, radius: 2.2 };
 
 const TASTATUR_CSS = `
 :host { display: block; line-height: 0; --ls-neben-schatten: var(--ls-tinte-weich); }
-.feld { display: flex; flex-direction: column; align-items: center; gap: ${TASTE.abstand + 0.6}rem; padding-bottom: ${TASTE.tiefe}rem; }
+.feld { display: flex; flex-direction: column; align-items: center; gap: ${TASTE.tiefe + 1.6}rem; padding-bottom: ${TASTE.tiefe}rem; }
 .reihe { display: flex; justify-content: center; gap: ${TASTE.abstand}rem; }
 .taste {
   position: relative;
@@ -56,11 +56,14 @@ const TASTATUR_CSS = `
 }
 .taste:focus-visible::after { opacity: 1; }
 .leer { min-width: 56rem; }
+.leer svg { width: 9rem; height: 6rem; display: block; pointer-events: none; }
 .weg { min-width: 16rem; }
 .weg svg { width: 6.4rem; height: 6.4rem; display: block; pointer-events: none; }
 `;
 
 const LOESCHEN_SVG = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h12v14H9l-7-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12.5 9l5 6M17.5 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+
+const LEER_SVG = `<svg viewBox="0 0 36 24" aria-hidden="true"><path d="M4 8v9h28V8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 /** @type {Record<string, string>} */
 const ENTITAET = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" };
@@ -99,11 +102,11 @@ export class LsTastatur extends HTMLElement {
   }
 
   zeichne() {
-    const zeilen = reihen(this.tastenListe)
+    const zeilen = ausgeglichen(this.tastenListe)
       .map((r) => `<div class="reihe">${r.map((z) => `<button class="taste" type="button" data-z="${esc(z)}">${esc(z)}</button>`).join("")}</div>`)
       .join("");
     const fn = [];
-    if (this.hasAttribute("leertaste")) fn.push(`<button class="taste leer" type="button" data-z=" " aria-label="Leertaste"></button>`);
+    if (this.hasAttribute("leertaste")) fn.push(`<button class="taste leer" type="button" data-z=" " aria-label="Leertaste">${LEER_SVG}</button>`);
     if (this.hasAttribute("loeschen")) fn.push(`<button class="taste weg" type="button" data-z="loeschen" aria-label="Löschen">${LOESCHEN_SVG}</button>`);
     this.wurzel.innerHTML = `<style>${GRUND_CSS}${TASTATUR_CSS}</style><div class="feld">${zeilen}${fn.length ? `<div class="reihe">${fn.join("")}</div>` : ""}</div>`;
   }

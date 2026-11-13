@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { tastenFuer, reihen } from "../spiele/rahmen/tasten.js";
+import { tastenFuer, reihen, ausgeglichen } from "../spiele/rahmen/tasten.js";
 
 test("tastenFuer: jede Taste einmal, ohne Leerzeichen, Satzzeichen am Ende", () => {
   const t = tastenFuer("Die Katze schläft.");
@@ -32,4 +32,15 @@ test("reihen teilt 23 Tasten in 10/10/3", () => {
   assert.deepEqual(reihen(t).map((r) => r.length), [10, 10, 3]);
   assert.deepEqual(reihen(t, 8).map((r) => r.length), [8, 8, 7]);
   assert.deepEqual(reihen([]), []);
+});
+
+test("ausgeglichen: keine kurze Restreihe", () => {
+  const k = (n) => Array.from({ length: n }, (_, i) => String(i));
+  const len = (n) => ausgeglichen(k(n)).map((r) => r.length);
+  assert.deepEqual(len(13), [7, 6]);
+  assert.deepEqual(len(23), [8, 8, 7]);
+  assert.deepEqual(len(10), [10]);
+  assert.deepEqual(len(1), [1]);
+  assert.deepEqual(len(0), []);
+  assert.deepEqual(ausgeglichen(k(13)).flat(), k(13));
 });

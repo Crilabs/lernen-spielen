@@ -171,7 +171,10 @@ Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.
   in fester Reihenfolge (alphabetisch bzw. 1–9, 0), dazu Leertaste und Löschen, falls nötig.
 - **Tasten (Christian):** Papier mit Tinte-Kontur und Schatten in Tinte weich, das Zeichen in Tinte. Keine
   Farbe je Buchstabe (`grundsaetze-bilder.md` 6.4); Vokale werden nicht eingefärbt.
-- Eine angeschlossene Hardware-Tastatur funktioniert zusätzlich.
+- Eine angeschlossene Hardware-Tastatur funktioniert zusätzlich. Sie nimmt Groß- und Kleinbuchstaben genau
+  wie die Bildschirm-Tasten (k ≠ K), weil Groß/Klein selbst das Lernziel sein kann.
+- Tasten in Reihen gleichmäßig verteilt (13 Tasten: 7/6, nicht 10/3); Abstand in der Reihe 1,6 rem, damit
+  der Fokusring die Nachbarn nicht überdeckt.
 
 ---------------------------------------------------------------------------------------------------
 ## 8. Was es nicht gibt
