@@ -59,12 +59,10 @@ Auch erzählt gilt: kein „Du machst das Einhorn glücklich“, kein Lob, keine
 
 ### Was heute noch anders ist (anzupassen)
 
-- `docs/grundsaetze.md` §2 Punkt 4 zeigt Beispiele in Ich-Form, K14/K15 lassen Figuren Rechte zusprechen
-  bzw. in Ich-Form sprechen. Bei der nächsten Überarbeitung der Grundsätze an diese Regel anpassen.
-- Grundsätze §11 „Stimmen über die Spiele gemischt (verschiedene Sprecherinnen und Sprecher)“: Heute gibt es
-  einen Erzähler. Ob später eine Erzählerin dazukommt (z. B. je Welt), ist offen.
-- Sprechblasen in Kettenhüpfer, Perlenbrücke, Zahlenzauber und den Einführungen prüfen: Gehört die Blase
-  einer Figur, wird sie zum Erzählfeld.
+- `docs/grundsaetze.md` (§2 Punkt 4, §3.2, K14, K15, §11) und `docs/bedienung.md` (Sprechblase) sind an diese
+  Regel angepasst (2026-11-14). Ob später eine Erzählerin dazukommt (z. B. je Welt), ist offen.
+- Sprechblasen in Kettenhüpfer, Perlenbrücke, Zahlenzauber und den Einführungen prüfen: Zeigt der Zipfel
+  der Blase auf eine Figur oder steht darin ein Ich-Satz, wird sie zur Erzählblase.
 
 ## 2. Texte für die Stimme schreiben
 

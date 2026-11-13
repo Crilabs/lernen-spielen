@@ -6,7 +6,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { azure } from "./azure.mjs";
+import { azure, holeSchluessel } from "./azure.mjs";
 import { ssml, xml } from "./ssml.mjs";
 
 const KANDIDATEN = [
@@ -37,7 +37,7 @@ const PROBEN = [
 const hier = dirname(fileURLToPath(import.meta.url));
 const ziel = join(hier, "vergleich");
 const einstellungen = JSON.parse(readFileSync(join(hier, "einstellungen.json"), "utf8"));
-const schluessel = process.env.AZURE_SPEECH_KEY;
+const schluessel = holeSchluessel(einstellungen);
 const region = process.env.AZURE_SPEECH_REGION ?? einstellungen.region;
 const synth = azure({ schluessel, region, format: einstellungen.format });
 

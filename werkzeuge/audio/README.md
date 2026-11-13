@@ -17,13 +17,8 @@ zum Text ab. Gibt es keine, spricht die Systemstimme (weiterhin ohne Zahlen). Er
      --kind SpeechServices --sku S0 -l westeurope --yes
    ```
 
-2. Schlüssel für die Shell setzen (nicht ins Repo):
-
-   ```sh
-   export AZURE_SPEECH_REGION=westeurope
-   export AZURE_SPEECH_KEY=$(az cognitiveservices account keys list \
-     -n lernen-spielen-stimme -g lernen-spielen --query key1 -o tsv)
-   ```
+2. Schlüssel: Die Skripte holen ihn selbst über die angemeldete Azure-CLI (`az login`) aus der Ressource in
+   `einstellungen.json › azure`. Wer ohne CLI arbeitet, setzt `AZURE_SPEECH_KEY` in der Shell (nie ins Repo).
 
 ## Ablauf
 

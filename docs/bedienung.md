@@ -60,7 +60,8 @@ von keinem Spiel neu erfunden.
 | Pause/Rundenende, unten Mitte | **Alle Spiele** und **Weiter**, nebeneinander, gleich groß | „Alle Spiele“ / „Weiter“ |
 
 - Kein Spiel legt etwas anderes auf diese Plätze, und keines verschiebt sie.
-- Die Sprechblase selbst darf das Spiel platzieren (sie gehört zur Figur oder zur Szene). Der
+- Die Sprechblase selbst darf das Spiel platzieren. Sie gehört dem **Erzähler** (zur Szene), nie dem Mund
+  einer Figur: kein Zipfel, der auf eine Figur zeigt, keine Ich-Sätze darin (`docs/stimme.md`). Der
   Noch-mal-hören-Knopf sitzt immer rechts in der Blase, weil er zu genau diesem Text gehört.
 - Die Startseite hat ihre eigene Ordnung (Fächer, Spiele, Zahnrad für Erwachsene). Diese Datei regelt
   die Spielseiten.

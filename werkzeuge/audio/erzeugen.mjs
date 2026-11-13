@@ -11,7 +11,7 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { azure } from "./azure.mjs";
+import { azure, holeSchluessel } from "./azure.mjs";
 import { ssml } from "./ssml.mjs";
 import { sammle } from "./texte.mjs";
 
@@ -131,7 +131,7 @@ export async function lauf({ pruefen = false, aufraeumen = false, melde = () => 
   const { eintraege, offen } = sammle(WURZEL);
   const synth = pruefen
     ? undefined
-    : azure({ schluessel: process.env.AZURE_SPEECH_KEY, region: process.env.AZURE_SPEECH_REGION ?? einstellungen.region, format: einstellungen.format });
+    : azure({ schluessel: holeSchluessel(einstellungen), region: process.env.AZURE_SPEECH_REGION ?? einstellungen.region, format: einstellungen.format });
   const { index: neu, bericht } = await erzeuge({
     eintraege,
     index,

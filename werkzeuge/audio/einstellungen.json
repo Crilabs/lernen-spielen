@@ -4,6 +4,7 @@
   "ordner": "florian",
   "tempo": "-10%",
   "region": "westeurope",
+  "azure": { "ressource": "lernen-spielen-stimme", "gruppe": "lernen-spielen" },
   "format": "audio-24khz-48kbitrate-mono-mp3",
   "zahlen": true,
   "varianten": {

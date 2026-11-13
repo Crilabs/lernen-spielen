@@ -4,11 +4,13 @@
 // „passt“ setzt gehoert in spiele/audio/index.json. Eine Korrektur landet in aussprache.json und wird sofort
 // neu erzeugt, wenn AZURE_SPEECH_KEY gesetzt ist (sonst beim nächsten npm run audio).
 
+import { execFile } from "node:child_process";
 import { createServer } from "node:http";
 import { existsSync, readFileSync } from "node:fs";
 import { extname, join, normalize, sep } from "node:path";
 import { AUDIO, WURZEL, ladeAussprache, ladeIndex, lauf, speichereAussprache, speichereIndex } from "./erzeugen.mjs";
 import { sammle } from "./texte.mjs";
+import { holeSchluessel } from "./azure.mjs";
 
 const PORT = Number(process.env.PORT ?? 8766);
 const SEITE = join(WURZEL, "werkzeuge", "audio", "anhoeren.html");
@@ -120,7 +122,10 @@ const server = createServer(async (req, res) => {
   }
 });
 
+holeSchluessel(JSON.parse(readFileSync(join(WURZEL, "werkzeuge", "audio", "einstellungen.json"), "utf8")));
 server.listen(PORT, "127.0.0.1", () => {
-  console.log(`Anhören: http://127.0.0.1:${PORT}`);
-  if (!process.env.AZURE_SPEECH_KEY) console.log("Ohne AZURE_SPEECH_KEY: Korrekturen werden gespeichert, aber erst mit npm run audio erzeugt.");
+  const adresse = `http://127.0.0.1:${PORT}`;
+  console.log(`Anhören: ${adresse}   (beenden mit Ctrl+C)`);
+  if (!process.env.AZURE_SPEECH_KEY) console.log("Kein Azure-Schlüssel: Korrekturen werden gespeichert, aber erst mit npm run audio erzeugt.");
+  if (process.platform === "darwin" && !process.env.NICHT_OEFFNEN) execFile("open", [adresse]);
 });
