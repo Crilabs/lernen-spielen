@@ -94,7 +94,7 @@ const CSS = `
 function stimme(text) {
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "de-DE"; u.rate = .85;
-  let fest = ""; try { fest = localStorage.getItem("einhorn-stimme") || ""; } catch (e) {}
+  let fest = ""; try { fest = localStorage.getItem("stimme") || ""; } catch (e) {}
   const vs = speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang));
   const v = vs.find((v, k) => k + "|" + v.name + "|" + v.voiceURI === fest);
   if (v) u.voice = v;
