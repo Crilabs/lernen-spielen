@@ -92,7 +92,18 @@ test("sichtbar: höchstens zwei in Sicht je Strang, verborgene fehlen", () => {
   const f = neuerStand();
   f.themen.z7 = { frei: 1 };
   assert.equal(zustaende(CTX, f).z7, "in-sicht");
-  assert.equal(zustaende(CTX, f).r7, "in-sicht"); // freigegebene Voraussetzung gilt als erfüllt
+  assert.equal(zustaende(CTX, f).r7, "verborgen"); // Freigabe gilt nicht als erfüllte Voraussetzung
+});
+
+test("Freigabe: verborgenes Thema wird in Sicht, sein Nachfolger bleibt verborgen", () => {
+  const s = neuerStand();
+  assert.equal(zustaende(CTX, s).z7, "verborgen");
+  s.themen.z7 = { frei: 1 };
+  const z = zustaende(CTX, s);
+  assert.equal(z.z7, "in-sicht"); assert.equal(z.r7, "verborgen"); assert.equal(z.z5, "in-sicht");
+  assert.deepEqual(sichtbar(CTX, s), { mathe: ["z5", "z7"] });
+  s.themen.z7 = { frei: 1, z: "kann-ich" };
+  assert.equal(zustaende(CTX, s).r7, "in-sicht"); // erst gekonnt öffnet den Nachfolger
 });
 
 test("zustaende: neues Thema vor gekonnten eingefügt – gekonnte bleiben gekonnt", () => {
@@ -467,6 +478,15 @@ test("migriereSpiele: Perlenbrücke-Paare und Zahlenzauber-Fakten mit Stufe 2", 
   for (const id of ["zehn-plus", "plus-ohne-20", "plus-zur-20", "ueber-10-mit-9", "ueber-10-mit-8", "ueber-10-mit-7"]) {
     assert.equal(z(id), "kann-ich", id); assert.equal(s.themen[id].k, HEUTE);
   }
+  // gekonnt durch Migration: Aufgaben ohne Eintrag oder in Fach 0 → Fach 1, höhere bleiben
+  for (const x of aufgabenVon({ art: "rechnen", thema: "zehn-plus" })) {
+    assert.equal(s.aufgaben[x.key].f, 1, x.key); assert.equal(s.aufgaben[x.key].t, HEUTE);
+  }
+  assert.equal(s.aufgaben["zerl:3:1+2"].f, 4); assert.equal(s.aufgaben["zerl:3:1+2"].t, "2026-11-01");
+  assert.equal(s.aufgaben["minus:3-1"].f, 2);
+  assert.equal(s.aufgaben["zerl:4:1+3"].f, 1); assert.equal(s.aufgaben["zerl:4:1+3"].t, "2026-11-01"); // dran: unverändert
+  assert.equal(s.aufgaben["minus:7-4"].t, "2026-11-02");
+  assert.equal(s.aufgaben["zerl:4:2+2"], undefined);
   // rechnen-3 nach g/f gelernt, rechnen-7 erstes mit Teilstand
   assert.equal(z("rechnen-3"), "kann-ich");
   assert.equal(z("rechnen-7"), "dran"); assert.equal(s.themen["rechnen-7"].stufe, "kopf");

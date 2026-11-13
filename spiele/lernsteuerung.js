@@ -9,7 +9,7 @@
 //   { version: 1, themen: { [id]: Thema }, aufgaben: { [key]: Aufgabe }, verlauf: [], migriert?: 1, … }
 //   Thema   { z: "dran"|"kann-ich", stufe, e, seit, k, u, frei: 0|1, v: [] }
 //           e = Einführung gesehen am, seit = dran seit, k = gekonnt am, u = zuletzt geübt am,
-//           frei = von den Eltern freigegeben, v = letzte Ergebnisse (1/0) auf der aktuellen Stufe.
+//           frei = von den Eltern freigegeben (Thema selbst in Sicht, gilt nicht als erfüllte Voraussetzung), v = letzte Ergebnisse (1/0) auf der aktuellen Stufe.
 //           Ohne Eintrag (oder ohne z) wird der Zustand berechnet.
 //   Aufgabe { f, t, h: [], ms: [], g?: 1, kk?: 1 }
 //           f = Fach, t = Tag der letzten Einstufung, h = letzte Ergebnisse, ms = letzte Antwortzeiten,
@@ -180,7 +180,7 @@ export function zustaende(ctx, stand) {
   const gespeichert = (id) => stand?.themen?.[id];
   const memo = new Map();
   const erfuellt = (id) =>
-    !nachId.has(id) || zustand(id) === "kann-ich" || spieleFuer(ctx, id).length === 0 || gespeichert(id)?.frei === 1;
+    !nachId.has(id) || zustand(id) === "kann-ich" || spieleFuer(ctx, id).length === 0; // frei zählt hier nicht
   function zustand(id) {
     if (memo.has(id)) return memo.get(id);
     memo.set(id, "verborgen"); // Schutz gegen Zyklen
@@ -188,7 +188,7 @@ export function zustaende(ctx, stand) {
     let z;
     if (e?.z === "dran" || e?.z === "kann-ich") z = e.z;
     else if (spieleFuer(ctx, id).length === 0) z = "verborgen";               // ohne Spiel: nie für das Kind
-    else if (e?.frei === 1 || (t.voraussetzungen ?? []).every(erfuellt)) z = "in-sicht";
+    else if (e?.frei === 1 || (t.voraussetzungen ?? []).every(erfuellt)) z = "in-sicht"; // frei: von den Eltern freigegeben
     else z = "verborgen";
     memo.set(id, z);
     return z;
@@ -487,7 +487,15 @@ export function migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute 
     }
 
   const themen = themenVon(ctx);
-  const kannIch = (id) => { stand.themen[id] = { ...(stand.themen[id] || {}), z: "kann-ich", k: heute, e: heute }; };
+  // gekonnt; Aufgaben ohne Eintrag oder in Fach 0 kommen in Fach 1 (wie nach der Probe), damit die
+  // Wiederholung nicht überläuft
+  const kannIch = (id) => {
+    stand.themen[id] = { ...(stand.themen[id] || {}), z: "kann-ich", k: heute, e: heute };
+    for (const a of aufgabenDes(themaVon(ctx, id))) {
+      const x = stand.aufgaben[a.key] || (stand.aufgaben[a.key] = { f: 0, t: "", h: [], ms: [] });
+      if (x.f < 1) { x.f = 1; x.t = heute; }
+    }
+  };
   const gelernt = (key) => { const e = stand.aufgaben[key]; return !!e && (e.g === 1 || e.f >= K.GELERNT); };
   const mitTeilstand = (spiel, id) => aufgabenDes(themaVon(ctx, id)).some((a) => teil[spiel].has(a.key));
 
