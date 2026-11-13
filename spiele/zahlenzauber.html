@@ -612,7 +612,7 @@ sperreTouch();
     const sek = ms => isFinite(ms) ? (ms/1000).toFixed(1)+" s" : "–";
     const wack=Object.entries(save.fakten).sort((a,b)=>a[1].f-b[1].f || a[0].localeCompare(b[0],undefined,{numeric:true}));
     $("eltern").innerHTML=`<h1>Lernstand Zahlenzauber</h1>
-      <p>Stufe ${save.stufe+1} von ${STUFEN.length}: bis ${st.max}${st.minus?" mit Minus":""} · ${v.length} Blüten in dieser Stufe · ${save.runden} Runden · ${save.wiese} Blumen · ${save.einhoerner} Einhörner</p>
+      <p>Stufe ${esc(save.stufe+1)} von ${STUFEN.length}: bis ${st.max}${st.minus?" mit Minus":""} · ${v.length} Blüten in dieser Stufe · ${esc(save.runden)} Runden · ${esc(save.wiese)} Blumen · ${esc(save.einhoerner)} Einhörner</p>
       <h2>Aufstieg</h2>
       <p>Letzte ${letzte.length} Blüten (5 Zahlen): ${letzte.filter(e=>e.ok).length} fehlerfrei (nötig ${Math.ceil(AUF_N*AUF_QUOTE)} von ${AUF_N}),
         Tage: ${new Set(letzte.map(e=>e.d)).size} (nötig ${AUF_TAGE}),
