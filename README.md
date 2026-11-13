@@ -11,7 +11,7 @@ ist **nicht mehr aktuell**. Diese Reste werden in einem späteren Schritt entfer
 
 - `spiele/` – die Oberfläche der App: `index.html` (Startseite), `eltern.html`/`eltern.js` (Elternbereich),
   `lernspiel.js` (gemeinsame Hilfen: Laden/Speichern, Protokoll), die Spiele als HTML-Dateien,
-  `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder), `figuren/`, `saetze/`, `pausenbilder/`.
+  `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder samt Einhorn-Pausenbildern), `figuren/`, `saetze/`. Die übrigen Spiele zeichnen ihre Pausen selbst (SVG).
 - `spiele/fortschritt/` – je Spiel optional ein Modul `<id>.js`, das den Balken auf der Startseite berechnet
   (nur für Spiele mit `"fortschritt": true` in `spiele.json`).
 - `spiele/symbole/` – SVG-Symbole (Kategorien, Spiele, Elternbereich).

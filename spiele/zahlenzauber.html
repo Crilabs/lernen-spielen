@@ -130,7 +130,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 
 <script src="figuren/figuren.js"></script>
 <script type="module">
-import {lade, speichere, sperreTouch, esc} from "./lernspiel.js";
+import {lade, speichere, sperreTouch, esc, merkeGelernt} from "./lernspiel.js";
 sperreTouch();
 (async function(){
   // ---------- Einstellungen ----------
@@ -194,6 +194,7 @@ sperreTouch();
     e.h.push(richtig?1:0); if(e.h.length>6) e.h.shift();
     if(!richtig){ e.f=0; e.t=heute(); }
     else if(faellig(s)){ e.f=Math.min(e.f+1, GELERNT); e.t=heute(); }
+    merkeGelernt(e, GELERNT);   // g=1 bleibt auch nach späterer Rückstufung (für den Fortschritt)
   }
 
   // ---------- Ton und Stimme (Stimmwahl „einhorn-stimme“ gilt für alle Spiele, wählbar in der Wimmelbild-Elternansicht) ----------

@@ -5,8 +5,10 @@
 - Zahlenzauber: Ein Blatt welkt nur noch, solange die zweite Zahl gesucht wird. Sind zwei Zahlen gewählt, steht jedes andere Blatt wieder frisch da – vorher konnte ausgerechnet das Ergebnisblatt welk aussehen. Ein leuchtendes Blatt (Hilfe) ist nie welk.
 - Zahlenzauber: Die Stimme liest Zahlen als Wörter vor („zwei und drei sind zusammen fünf“) statt „fünfter“.
 
-## v0.1.5
+## Unveröffentlicht
 
+- Einhornfotos als Pause gibt es nur noch im Wimmelbild. Perlenbrücke (Einhorn auf der Perlenbrücke im Abendlicht), Zauberer (Zauberin döst unter dem Sternenhimmel) und Einhorn-Steine (Einhorn schläft am Ufer, der Mond spiegelt sich) haben eigene gezeichnete Pausen: 10 Sekunden, kleiner Balken, keine Knöpfe.
+- Fortschrittsbalken auf der Startseite jetzt für alle Spiele: Zahlenzauber (Plus und Minus bis 20), Zauberer (Nomen), Einhorn-Steine (Sätze). Schon Gelerntes zählt sofort, der Balken wächst nur.
 - Schrift: Wörter, Sätze, Zahlen und Knöpfe in normaler Stärke (Andika 400), nur Überschriften etwas kräftiger.
 - Alle Spiele nach den Lern-Grundsätzen nachgeschärft: kürzere Effekte (mehr Aufgaben pro Minute), Hilfe in drei Stufen (Signal, Denkhilfe, Lösung mit Begründung), mit Hilfe oder durch Raten Gelöstes zählt nicht als gekonnt, Deko ohne Bedeutung steht still, keine Fanfaren.
 - Zahlenzauber: Fressen dauert nur noch etwa 2 s, die Perlen-Erklärung kommt nur nach Fehler oder Hilfe. Keine Besuche und keine Einhorn-Herde mehr.
