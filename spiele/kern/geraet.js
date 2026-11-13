@@ -10,8 +10,8 @@ export async function faehigkeiten() {
   let p = "browser";
   try {
     p = await plattform();
-  } catch {
-    /* unbekannt: nichts anbieten */
+  } catch (e) {
+    protokoll("Plattform: " + (/** @type {any} */ (e)?.message ?? e));
   }
   const desktop = p === "windows" || p === "macos" || p === "linux";
   return { update: desktop, beenden: desktop, kiosk: desktop };
@@ -32,21 +32,25 @@ export async function appVersion() {
   }
 }
 
-/** @returns {Promise<void>} */
+/** @returns {Promise<boolean>} true, wenn der Aufruf durchging */
 export async function beende() {
   try {
     await tauri()?.process?.exit?.(0);
+    return true;
   } catch (e) {
     protokoll("App beenden: " + (/** @type {any} */ (e)?.message ?? e));
+    return false;
   }
 }
 
-/** @returns {Promise<void>} */
+/** @returns {Promise<boolean>} true, wenn der Aufruf durchging */
 export async function neuStart() {
   try {
     await tauri()?.process?.relaunch?.();
+    return true;
   } catch (e) {
     protokoll("Neustart: " + (/** @type {any} */ (e)?.message ?? e));
+    return false;
   }
 }
 

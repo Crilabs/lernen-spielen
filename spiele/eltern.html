@@ -205,9 +205,7 @@ $("zurueck-spiele").addEventListener("click", async () => { await sofortSpeicher
 $("beenden").addEventListener("click", async () => {
   await sofortSpeichern();
   await kioskPause(true);
-  await beende();
-  // Läuft das Programm noch, ist das Beenden gescheitert.
-  await kioskPause(false); location.href = "index.html";
+  if (!(await beende())) { await kioskPause(false); location.href = "index.html"; }
 });
 
 // Nach 5 Minuten ohne Eingabe zurück zu den Spielen (Elternbereich nicht offen liegen lassen).
@@ -288,7 +286,7 @@ async function installieren(update, los, balken, fuell, status) {
       else if (ev.event === "Finished") fuell.style.width = "100%";
     }, { timeout: 10 * 60 * 1000 }), zeit]).finally(() => clearTimeout(timer));
     status.textContent = "Fertig. Die App startet neu …";
-    await neuStart();
+    if (!(await neuStart())) throw new Error("Neustart gescheitert");
   } catch (e) {
     protokoll("Update installieren: " + (e?.message ?? e));
     installiertGerade = false;

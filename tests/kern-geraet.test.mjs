@@ -61,3 +61,29 @@ test("updateSuche und appVersion", async () => {
   assert.equal(B.updateSuche(), undefined);
   assert.equal(await B.appVersion(), null);
 });
+
+test("beende und neuStart: false und Protokoll bei Fehler, true bei Erfolg", async () => {
+  const schlecht = await geraet(appMit("windows", { process: {
+    exit: async () => { throw new Error("exit kaputt"); },
+    relaunch: async () => { throw new Error("relaunch kaputt"); },
+  } }));
+  assert.equal(await schlecht.beende(), false);
+  assert.equal(await schlecht.neuStart(), false);
+  assert.match(speicher.get("protokoll"), /exit kaputt/);
+  assert.match(speicher.get("protokoll"), /relaunch kaputt/);
+  const gut = await geraet(appMit("windows", { process: { exit: async () => {}, relaunch: async () => {} } }));
+  assert.equal(await gut.beende(), true);
+  assert.equal(await gut.neuStart(), true);
+});
+
+test("faehigkeiten protokolliert, wenn plattform scheitert", async () => {
+  const code = `
+    const s = new Map();
+    globalThis.localStorage = { getItem: k => s.get(k) ?? null, setItem: (k, v) => s.set(k, v) };
+    globalThis.window = { __TAURI__: { core: { invoke: async () => { throw new Error("plattform kaputt"); } } } };
+    const G = await import(${JSON.stringify(new URL("../spiele/kern/geraet.js", import.meta.url).href)});
+    console.log(JSON.stringify({ k: await G.faehigkeiten(), p: s.get("protokoll") }));`;
+  const e = JSON.parse(execFileSync(process.execPath, ["--input-type=module", "-e", code], { encoding: "utf8" }));
+  assert.deepEqual(e.k, { update: false, beenden: false, kiosk: false });
+  assert.match(e.p, /plattform kaputt/);
+});
