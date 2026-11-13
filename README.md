@@ -9,8 +9,12 @@ Die Web-Fassung mit PHP wurde in v0.2 entfernt.
 ## Aufbau
 
 - `spiele/` – die Oberfläche der App: `index.html` (Startseite), `eltern.html`/`eltern.js` (Elternbereich),
-  `lernspiel.js` (gemeinsame Hilfen: Laden/Speichern, Protokoll), die Spiele als HTML-Dateien,
+  `lernspiel.js` (gemeinsame Hilfen der Spiele), die Spiele als HTML-Dateien,
   `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder samt Einhorn-Pausenbildern), `figuren/`, `saetze/`. Die übrigen Spiele zeichnen ihre Pausen selbst (SVG).
+- `spiele/kern/` – der Plattform-Kern: aller Zugriff auf Speicher (je Profil), Einstellungen (Ton je Spiel, Stimme
+  je Gerät), Sprache und Gerätefähigkeiten (Update, Beenden, Kiosk). Siehe `dienste.js` (Schnittstellen),
+  `speicher.js`, `einstellungen.js`, `stimme.js`, `geraet.js`, `protokoll.js`. Außerhalb von `kern/` darf kein Spiel
+  und keine Seite die Plattform direkt ansprechen; `tests/plattform-regel.test.mjs` prüft das.
 - `spiele/fortschritt/` – je Spiel optional ein Modul `<id>.js`, das den Balken auf der Startseite berechnet
   (nur für Spiele mit `"fortschritt": true` in `spiele.json`).
 - `spiele/symbole/` – SVG-Symbole (Kategorien, Spiele, Elternbereich).
@@ -52,7 +56,10 @@ Abnahme einer Version am Windows-Rechner: `kiosk/pruefliste-v0.1.0.md`.
 
 ## Lernstand-Ordner
 
-`%APPDATA%\de.crilabs.lernen-spielen\lernstand\` – je Spiel eine JSON-Datei (plus `.bak` als Sicherung).
+`%APPDATA%\de.crilabs.lernen-spielen\lernstand\` – hier liegen die Dateien, die zum Gerät gehören
+(`eltern.json` mit der PIN, `geraet.json`).
+Die Daten des Kindes liegen im Unterordner `lernstand\kind-1\` (das Profil): je Schlüssel eine JSON-Datei
+(plus `.bak` als Sicherung), zum Beispiel `lernplan.json` und `einstellungen.json` (Ton je Spiel).
 Bei Updates bleibt der Ordner unberührt.
 
 ## Logdatei
@@ -63,7 +70,7 @@ es zusätzlich das „Protokoll“.
 
 ## PIN vergessen
 
-Die PIN (als Hash) liegt in `%APPDATA%\de.crilabs.lernen-spielen\lernstand\eltern.json`, nach einer PIN-Änderung
+Die PIN (als Hash) liegt in `%APPDATA%\de.crilabs.lernen-spielen\lernstand\eltern.json` (eine Ebene über `kind-1`), nach einer PIN-Änderung
 die vorige PIN zusätzlich in `eltern.json.bak`. So setzt du die PIN zurück:
 
 1. App ohne PIN beenden: Tastatur anschließen, **Strg+Alt+Entf** → **Task-Manager** → „Einhorn-Lernspiele“
@@ -72,7 +79,7 @@ die vorige PIN zusätzlich in `eltern.json.bak`. So setzt du die PIN zurück:
    `eltern.json.bak`** löschen. Nur eine der beiden zu löschen reicht nicht.
 3. App starten, Zahnrad halten und eine neue PIN festlegen.
 
-Die Lernstände der Spiele bleiben erhalten (der Hinweis steht auch auf dem PIN-Bildschirm).
+Die Lernstände der Spiele (Ordner `kind-1`) bleiben erhalten (der Hinweis steht auch auf dem PIN-Bildschirm).
 
 ## Lernplan
 
@@ -98,7 +105,7 @@ Dateien:
 - `spiele/themen.html`: die Übersicht „Was ich kann“ (Weg mit Stationen, ruhig, ohne Zähler oder Prozente).
 - `scripts/luecken.mjs`: `npm run luecken` listet Lücken im Plan, z. B. Themen ohne Spiel, das sie bedient.
 
-Lernstand: Schlüssel `lernplan` (im Browser `localStorage` `lernstand-lernplan`, in der App im Lernstand-Ordner).
+Lernstand: Schlüssel `lernplan` (gespeichert über `kern/speicher.js`, in der App im Ordner `lernstand\kind-1\`).
 Die Spiele speichern ihre eigenen, nicht lernbezogenen Daten unter eigenem Schlüssel (`perlenbruecke-spiel`,
 `zahlenzauber-spiel`). Die alten Stände `perlenbruecke` und `zahlenzauber` werden einmal zur Übernahme gelesen
 und nie mehr geschrieben.
@@ -107,7 +114,11 @@ und nie mehr geschrieben.
 
 ## Neues Spiel hinzufügen
 
-1. HTML-Datei in `spiele/` anlegen (Speichern/Laden über `lernspiel.js`).
+1. HTML-Datei in `spiele/` anlegen. Speichern, Einstellungen, Sprache und Gerätefunktionen laufen nur über
+   `spiele/kern/` (`lade`/`speichere`, `einstellung`/`setzeEinstellung`, `sprich`/`stille`, `faehigkeiten`).
+   **Regel:** Kein Plattform-Zugriff außerhalb von `spiele/kern/` – also kein `localStorage`, `sessionStorage`,
+   `speechSynthesis`, `SpeechSynthesisUtterance`, `__TAURI__`, `navigator.mediaDevices` und kein `new Audio(`.
+   `npm test` schlägt sonst fehl (`tests/plattform-regel.test.mjs`).
 2. Eintrag in `spiele/spiele.json` unter `spiele`: `id`, `titel`, `thema`, `kategorie` (eine `id` aus
    `kategorien`), `symbol` (z. B. `symbole/<id>.svg`), `datei`, `text` (wird vorgelesen).
 3. Symbol: SVG in `spiele/symbole/` im Stil der vorhandenen (viewBox `0 0 100 100`, Linien `#3B2A6B` 4 px,

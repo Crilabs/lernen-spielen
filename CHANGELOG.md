@@ -2,6 +2,10 @@
 
 ## Unveröffentlicht
 
+- Lernstand je Profil: Die Daten des Kindes liegen jetzt im Unterordner `lernstand\kind-1\`; `eltern.json` (PIN) bleibt im Ordner darüber. **Einmaliger Handgriff beim Aktualisieren des Kiosks:** Vor dem ersten Start der neuen Version im Ordner `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` einen Ordner `kind-1` anlegen und alle Dateien **außer** `eltern.json` und `eltern.json.bak` hineinschieben. Ohne den Handgriff beginnt das Kind mit leerem Lernstand, die PIN bleibt.
+- Eine Stimme für alle Spiele: Die Stimmenwahl gilt jetzt für alle Spiele gemeinsam und wird je Gerät gemerkt. Zahlen werden weiterhin nie gesprochen. Der Ton-Knopf wird je Spiel gemerkt (früher gespeicherte Ton- und Stimmeneinstellungen werden nicht übernommen: Ton an, Stimme automatisch).
+- Elternbereich je Gerät: Update, Beenden und Kiosk erscheinen nur dort, wo das Gerät sie kann (Windows-Kiosk), nicht mehr im Browser oder auf anderen Geräten.
+- Intern: aller Plattform-Zugriff (Speicher, Einstellungen, Sprache, Gerätefunktionen) liegt in `spiele/kern/`; ein Test sorgt dafür, dass Spiele ihn nicht mehr umgehen.
 - Lernplan: Die Mathe-Spiele folgen jetzt einem gemeinsamen Plan aus vielen kleinen Themen (zum Beispiel „Die 7 zerlegen“ oder „Plus ohne Zehnerübergang bis 20“). Die App sucht das passende Thema selbst aus; das Kind muss nichts wählen.
 - Eine kurze Probe zu Beginn eines neuen Themas überspringt, was das Kind schon kann. Fehler und Hilfen führen ruhig zurück zum Üben; bekannte Aufgaben kommen nach einigen Tagen noch einmal vor.
 - Vor einem neuen Thema erzählt eine kurze Einführung mit dem Einhorn, worum es geht.
