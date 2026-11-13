@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Einhorn-Lernspiele</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--nacht:#3B2A6B;--paper:#FFF8FC;--bg:#D8F3FF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}}
+:root[data-theme="dark"]{--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;color:var(--nacht);background:var(--bg);background-image:
+  radial-gradient(circle at 15% 20%,rgba(255,138,203,.35) 0 90px,transparent 90px),
+  radial-gradient(circle at 85% 15%,rgba(255,217,90,.45) 0 60px,transparent 60px),
+  radial-gradient(circle at 80% 85%,rgba(181,156,255,.45) 0 110px,transparent 110px),
+  radial-gradient(circle at 10% 90%,rgba(127,232,200,.45) 0 70px,transparent 70px)}
+.app{max-width:480px;margin:0 auto;padding:28px 18px 32px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+.corn{font-size:96px;line-height:1;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+h1{font-size:2.3rem;line-height:1.1;font-weight:800}
+.lead{font-size:1.15rem;font-weight:600;opacity:.85}
+.card{display:flex;align-items:center;gap:16px;width:100%;padding:18px;border-radius:28px;background:var(--paper);text-decoration:none;color:inherit;box-shadow:0 8px 0 var(--shade);transition:transform .1s,box-shadow .1s;text-align:left}
+.card:active{transform:translateY(6px);box-shadow:0 2px 0 var(--shade)}
+.card .ico{width:84px;height:84px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:50px;background:var(--tint);flex:none}
+.card h2{font-size:1.5rem;line-height:1.1}
+.card p{font-weight:600;font-size:1rem;opacity:.8;margin-top:4px}
+.card .go{margin-left:auto;font-size:1.8rem;opacity:.5}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="corn">🦄</div>
+  <h1>Einhorn-Lernspiele</h1>
+  <p class="lead">Such dir ein Spiel aus!</p>
+
+  <a class="card" href="zahlenzauber.html" style="--shade:#D45A9E;--tint:#FFD6EC">
+    <div class="ico">🌼</div>
+    <div><h2>Zahlenzauber</h2><p>Welche zwei Zahlen ergeben eine dritte? Spann Fäden und lass die Wiese wachsen.</p></div>
+    <div class="go">›</div>
+  </a>
+
+  <a class="card" href="perlenbruecke.html" style="--shade:#7A5FD1;--tint:#E3DAFF">
+    <div class="ico">🌉</div>
+    <div><h2>Perlenbrücke</h2><p>Baue mit Perlenstäbchen die Brücke über die Zahl und hilf dem Einhorn hinüber.</p></div>
+    <div class="go">›</div>
+  </a>
+
+  <a class="card" href="wimmelbild.html" style="--shade:#4FBF9C;--tint:#D2F7EA">
+    <div class="ico">🔍</div>
+    <div><h2>Wimmelbild-Detektiv</h2><p>Zieh die Wörter auf die Dinge im Bild – und sieh, was lebendig wird.</p></div>
+    <div class="go">›</div>
+  </a>
+
+  <a class="card" href="grossbuchstaben.html" style="--shade:#E0A42A;--tint:#FFF1C2">
+    <div class="ico">🪄</div>
+    <div><h2>Großbuchstaben-Zauberer</h2><p>Zaubere die Buchstaben groß oder klein – stimmt der Satz, wird er lebendig.</p></div>
+    <div class="go">›</div>
+  </a>
+
+  <a class="card" href="einhorn-steine.html" style="--shade:#4C9BD1;--tint:#D6EEFF">
+    <div class="ico">🪨</div>
+    <div><h2>Einhorn-Steine</h2><p>Hör zu, schreib den Satz – und bau dem Einhorn Steine über den Bach.</p></div>
+    <div class="go">›</div>
+  </a>
+</div>
+</body>
+</html>

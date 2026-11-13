@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<title>Einhorn-Steine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3B2A6B;--nacht:#3B2A6B;--paper:#FFF8FC;--bg:#D8F3FF;--lila:#B59CFF;--rosa:#FF8ACB;--mint:#7FE8C8;--sonne:#FFD95A;
+  --himmel1:#CDEBFF;--himmel2:#EAF7FF;--gras:#9EDB7E;--gras2:#7CC45E;--wasser:#7CC8F2;--wasser2:#5AAFE0;--stein:#D9D2E6;--stein2:#BDB3CF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45;--himmel1:#2B2766;--himmel2:#3C3780;--gras:#4E8A52;--gras2:#3E7243;--wasser:#2F6FA8;--wasser2:#245C8E}}
+:root[data-theme="dark"]{--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45;--himmel1:#2B2766;--himmel2:#3C3780;--gras:#4E8A52;--gras2:#3E7243;--wasser:#2F6FA8;--wasser2:#245C8E}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;color:var(--nacht);background:var(--bg);
+  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.app{position:fixed;left:0;right:0;top:0;height:100%;display:flex;flex-direction:column;gap:8px;
+  padding:calc(env(safe-area-inset-top,0px) + 6px) calc(env(safe-area-inset-right,0px) + 8px) calc(env(safe-area-inset-bottom,0px) + 8px) calc(env(safe-area-inset-left,0px) + 8px)}
+/* ---------- Bühne: Bach mit zwei Ufern ---------- */
+.stage{position:relative;flex:1;min-height:150px;width:100%;max-width:900px;margin:0 auto;border-radius:18px;overflow:hidden;
+  background:linear-gradient(var(--himmel1),var(--himmel2) 58%);box-shadow:0 6px 0 rgba(59,42,107,.15)}
+.wasser{position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(var(--wasser),var(--wasser2))}
+.wasser::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:rgba(255,255,255,.35)}
+.ufer{position:absolute;bottom:0;width:13%;height:36%;background:linear-gradient(var(--gras),var(--gras2));border:3px solid var(--ink);border-bottom:0}
+.ufer.l{left:-3px;border-radius:0 28px 0 0}.ufer.r{right:-3px;border-radius:28px 0 0 0}
+.steine{position:absolute;left:13%;right:13%;bottom:17%;display:flex;align-items:flex-end;justify-content:center;gap:var(--lücke,10px);padding:0 6px}
+.stein{border:3px solid var(--ink);background:linear-gradient(var(--stein),var(--stein2));color:#3B2A6B;font:800 var(--fs,24px)/1 "Baloo 2",sans-serif;
+  padding:.32em .42em .2em;border-radius:46% 46% 38% 38% / 60% 60% 40% 40%;white-space:nowrap;box-shadow:0 5px 0 rgba(30,40,80,.25);
+  transform-origin:50% 100%;animation:auftauchen .35s cubic-bezier(.2,1.5,.4,1) backwards}
+@keyframes auftauchen{from{transform:translateY(40%) scale(.4);opacity:0}}
+.stein.kippelt{animation:kippeln .7s ease-in-out}
+@keyframes kippeln{0%,100%{transform:rotate(0)}20%{transform:rotate(-9deg)}45%{transform:rotate(8deg)}70%{transform:rotate(-6deg)}85%{transform:rotate(3deg)}}
+.stein.kaputt{transform:rotate(-5deg) translateY(6px);background:linear-gradient(#E9E2F3,#C9BEDB)}
+.stein.halb-l{border-radius:46% 12% 12% 38% / 60% 20% 20% 40%;margin-right:calc(-1 * var(--lücke,10px) + 2px)}
+.stein.halb-r{border-radius:12% 46% 38% 12% / 20% 60% 40% 20%}
+.riss{align-self:stretch;width:22px;margin:0 -2px;border:0;background:none;position:relative}
+.riss::after{content:"";position:absolute;left:50%;top:15%;bottom:0;width:4px;transform:translateX(-50%);
+  background:repeating-linear-gradient(var(--ink) 0 6px,transparent 6px 10px)}
+.korrektur .stein.kaputt,.korrektur .riss{cursor:pointer;animation:hinweis 1.6s ease-in-out infinite}
+@keyframes hinweis{50%{filter:brightness(1.12) drop-shadow(0 0 6px #fff)}}
+.uni{position:absolute;left:0;top:0;width:var(--uw,100px);pointer-events:none;z-index:2;will-change:transform}
+.uni svg{width:100%;height:auto;display:block;overflow:visible}
+.uni svg *{stroke-linejoin:round;stroke-linecap:round}
+.leg,.tail,.head,.body,.lid{transform-box:fill-box}
+.leg{transform-origin:50% 0}
+.tail{transform-origin:100% 20%;animation:wedel 2.4s ease-in-out infinite}
+.lid{transform-origin:50% 50%;transform:scaleY(0);animation:blink 4.5s infinite}
+@keyframes wedel{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(0)}95%{transform:scaleY(1)}}
+#fig{transform-box:fill-box;transform-origin:50% 100%}
+.uni.freude #fig{animation:freude .6s cubic-bezier(.3,0,.4,1) 2}
+@keyframes freude{0%,100%{transform:translateY(0)}12%{transform:translateY(0) scale(1.08,.9)}45%{transform:translateY(-40%) scale(.94,1.08)}78%{transform:translateY(0) scale(1.1,.88)}}
+.uni.ratlos .head{transform-origin:20% 90%;animation:ratlos .9s ease-in-out}
+@keyframes ratlos{30%{transform:rotate(-10deg)}60%{transform:rotate(8deg)}}
+.splash{position:absolute;left:0;top:0;font-size:40px;opacity:0;pointer-events:none;z-index:3;transform:translate(-50%,-50%)}
+.splash.on{animation:platsch .9s ease-out}
+@keyframes platsch{0%{opacity:0;transform:translate(-50%,-30%) scale(.4)}25%{opacity:1;transform:translate(-50%,-70%) scale(1.2)}100%{opacity:0;transform:translate(-50%,-90%) scale(1.4)}}
+.corner{position:absolute;top:8px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,248,252,.88);font-size:21px;
+  display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 3px 0 rgba(59,42,107,.2);z-index:4}
+.corner.l{left:8px}.corner.r{right:8px}
+/* Lupe zum Teilen eines Klebesteins */
+.lupe{position:absolute;inset:0;z-index:5;display:none;align-items:center;justify-content:center;background:rgba(31,27,69,.35);padding:12px}
+.lupe.on{display:flex}
+.lupe .karte{background:var(--paper);border-radius:22px;padding:18px 12px 14px;box-shadow:0 8px 0 rgba(59,42,107,.25);max-width:100%}
+.lupe .buchst{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;row-gap:8px}
+.lupe .bst{font:800 clamp(28px,8vw,44px)/1.1 "Baloo 2",sans-serif;color:var(--nacht);padding:0 1px}
+.lupe .spalt{width:clamp(18px,5vw,26px);border:0;border-radius:8px;background:transparent;position:relative}
+.lupe .spalt::after{content:"";position:absolute;left:50%;bottom:4%;width:7px;height:7px;transform:translateX(-50%);background:rgba(59,42,107,.22);border-radius:50%}
+.lupe .spalt:active{background:rgba(181,156,255,.3)}
+.lupe .spalt.tipp::after{top:6%;bottom:6%;height:auto;border-radius:2px;background:repeating-linear-gradient(var(--rosa) 0 6px,transparent 6px 9px);width:4px;animation:hinweis 1.2s infinite}
+.lupe .buchst.wackel{animation:kippeln .6s}
+.lupe .zu{display:block;margin:12px auto 0;border:0;background:none;font:800 1rem "Baloo 2",sans-serif;color:var(--nacht);opacity:.7}
+/* ---------- Unten: Vorbild, Eingabe, Weiter ---------- */
+.vorbild{flex:none;max-width:900px;width:100%;margin:0 auto;text-align:center;font-weight:800;font-size:1.25rem;min-height:1.6em;opacity:0;transition:opacity .4s}
+.vorbild.on{opacity:1}
+.eingabe{flex:none;display:flex;gap:8px;width:100%;max-width:900px;margin:0 auto;align-items:center}
+.feld{flex:1;min-width:0;font:800 26px "Baloo 2",sans-serif;color:var(--nacht);background:var(--paper);border:3px solid var(--lila);border-radius:18px;
+  padding:10px 14px 6px;outline:none;user-select:text;-webkit-user-select:text}
+.feld:focus{border-color:var(--rosa)}
+.rund{flex:none;width:56px;height:56px;border-radius:50%;border:0;font-size:26px;background:var(--paper);box-shadow:0 4px 0 rgba(59,42,107,.22);color:var(--nacht)}
+.rund.ok{background:var(--mint);box-shadow:0 4px 0 #4FBF9C;font-weight:800}
+.rund:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(59,42,107,.22)}
+.rund.wackel{animation:kippeln .5s}
+.weiterzeile{flex:none;display:flex;justify-content:center;min-height:56px}
+.hidden{display:none!important}
+.btn{border:0;border-radius:999px;padding:14px 32px;font:800 1.4rem "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 6px 0 #D45A9E;text-decoration:none;display:inline-block}
+.btn:disabled{opacity:.6}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #D45A9E}
+.btn.mint{background:var(--mint);color:#3B2A6B;box-shadow:0 6px 0 #4FBF9C;font-size:1.1rem;padding:12px 24px}
+.start{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;
+  background:var(--bg);background-image:radial-gradient(circle at 15% 20%,rgba(255,138,203,.35) 0 90px,transparent 90px),radial-gradient(circle at 85% 15%,rgba(255,217,90,.45) 0 60px,transparent 60px),radial-gradient(circle at 80% 85%,rgba(181,156,255,.45) 0 110px,transparent 110px),radial-gradient(circle at 10% 90%,rgba(127,232,200,.45) 0 70px,transparent 70px)}
+.start.off{display:none}
+.start .big{font-size:96px;line-height:1;animation:float 3s ease-in-out infinite}
+.start h1{font-size:2.2rem;line-height:1.1}
+.start p{font-size:1.15rem;font-weight:600;max-width:32ch}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.pause{position:fixed;inset:0;z-index:25;background:#1F1B45;display:none;overflow:hidden;opacity:0;transition:opacity .8s}
+.pause.on{display:block}.pause.show{opacity:1}
+.pause .pbg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(28px) brightness(.8)}
+.pause img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12) translateY(-2%)}}
+.pweiter{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);opacity:.92}
+.eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 32px;user-select:text;-webkit-user-select:text}
+.eltern h1{font-size:1.6rem}.eltern h2{font-size:1.2rem;margin:16px 0 4px}.eltern p{margin:6px 0;font-weight:600;max-width:60ch}
+.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:10px;padding:4px 10px;margin:4px 0;font-weight:800;max-width:60ch}
+.eltern small{font-weight:600;opacity:.75}
+@media (prefers-reduced-motion:reduce){.start .big,.tail,.pause img{animation:none}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="stage" id="stage">
+    <div class="wasser"></div>
+    <div class="ufer l" id="uferL"></div>
+    <div class="ufer r" id="uferR"></div>
+    <div class="steine" id="steine"></div>
+    <div class="uni" id="uni">
+      <svg viewBox="0 0 320 280" aria-label="Einhorn">
+       <defs>
+        <linearGradient id="horn" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FFC94D"/><stop offset="1" stop-color="#FFF1A8"/></linearGradient>
+        <radialGradient id="koerper" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#F1ECFF"/></radialGradient>
+       </defs>
+       <ellipse cx="160" cy="268" rx="95" ry="9" fill="#000" opacity=".12"/>
+       <g id="fig">
+        <g class="tail">
+         <path d="M88 150 C60 140 46 160 52 185 C56 200 48 214 38 220 C62 222 76 204 72 186 C70 172 78 162 92 160Z" fill="#FF9ECF" stroke="#3B2A6B" stroke-width="4"/>
+         <path d="M90 156 C72 160 66 176 70 192 C74 206 70 216 62 224 C84 220 90 202 86 188 C84 176 90 168 98 166Z" fill="#B49CFF" stroke="#3B2A6B" stroke-width="4"/>
+        </g>
+        <g class="leg b"><rect x="104" y="186" width="22" height="62" rx="11" fill="#E4DCFA" stroke="#3B2A6B" stroke-width="4"/><rect x="104" y="236" width="22" height="14" rx="6" fill="#9C86E8" stroke="#3B2A6B" stroke-width="4"/></g>
+        <g class="leg a"><rect x="182" y="186" width="22" height="62" rx="11" fill="#E4DCFA" stroke="#3B2A6B" stroke-width="4"/><rect x="182" y="236" width="22" height="14" rx="6" fill="#9C86E8" stroke="#3B2A6B" stroke-width="4"/></g>
+        <path d="M180 160 C192 124 204 104 214 92 L246 112 C236 128 230 150 226 176Z" fill="#fff" stroke="#3B2A6B" stroke-width="4"/>
+        <ellipse cx="155" cy="168" rx="78" ry="48" fill="url(#koerper)" stroke="#3B2A6B" stroke-width="4"/>
+        <g class="leg a"><rect x="122" y="190" width="22" height="62" rx="11" fill="#fff" stroke="#3B2A6B" stroke-width="4"/><rect x="122" y="240" width="22" height="14" rx="6" fill="#B49CFF" stroke="#3B2A6B" stroke-width="4"/></g>
+        <g class="leg b"><rect x="200" y="190" width="22" height="62" rx="11" fill="#fff" stroke="#3B2A6B" stroke-width="4"/><rect x="200" y="240" width="22" height="14" rx="6" fill="#B49CFF" stroke="#3B2A6B" stroke-width="4"/></g>
+        <g class="head">
+         <circle cx="236" cy="86" r="38" fill="#fff" stroke="#3B2A6B" stroke-width="4"/>
+         <ellipse cx="266" cy="104" rx="30" ry="23" fill="#FFE3F1" stroke="#3B2A6B" stroke-width="4"/>
+         <circle cx="272" cy="100" r="3" fill="#3B2A6B"/><circle cx="284" cy="104" r="3" fill="#3B2A6B"/>
+         <path d="M258 116 Q268 124 280 116" fill="none" stroke="#3B2A6B" stroke-width="3.5"/>
+         <path d="M216 56 L210 30 L232 50Z" fill="#fff" stroke="#3B2A6B" stroke-width="4"/>
+         <path d="M216 50 L213 38 L224 48Z" fill="#FF9ECF"/>
+         <path d="M238 52 L262 14 L252 58Z" fill="url(#horn)" stroke="#3B2A6B" stroke-width="4"/>
+         <path d="M243 48 L254 44 M247 38 L257 34 M252 29 L259 26" stroke="#E0A42A" stroke-width="3"/>
+         <g stroke="#3B2A6B" stroke-width="4">
+          <circle cx="212" cy="62" r="15" fill="#FF9ECF"/><circle cx="202" cy="84" r="15" fill="#B49CFF"/>
+          <circle cx="200" cy="106" r="14" fill="#8FD3FF"/><circle cx="202" cy="128" r="13" fill="#FF9ECF"/>
+          <circle cx="226" cy="52" r="12" fill="#8FD3FF"/>
+         </g>
+         <ellipse cx="240" cy="82" rx="8" ry="10" fill="#3B2A6B"/><circle cx="243" cy="78" r="3" fill="#fff"/>
+         <g class="lid"><ellipse cx="240" cy="82" rx="11" ry="13" fill="#fff"/><path d="M230 82 Q240 92 250 82" fill="none" stroke="#3B2A6B" stroke-width="4"/></g>
+         <circle cx="250" cy="100" r="7" fill="#FF9ECF" opacity=".6"/>
+        </g>
+       </g>
+      </svg>
+    </div>
+    <div class="splash" id="splash">💦</div>
+    <a class="corner l" href="index.html" aria-label="Alle Spiele">🏠</a>
+    <button class="corner r" id="snd" aria-label="Ton">🔊</button>
+    <div class="lupe" id="lupe"></div>
+  </div>
+  <div class="vorbild" id="vorbild"></div>
+  <form class="eingabe hidden" id="form" autocomplete="off">
+    <button type="button" class="rund" id="nochmal" aria-label="Noch mal hören">🔁</button>
+    <input class="feld" id="feld" type="text" inputmode="text" enterkeyhint="done" maxlength="90"
+      autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Hier schreiben">
+    <button type="submit" class="rund ok" id="fertig" aria-label="Fertig">✓</button>
+  </form>
+  <div class="weiterzeile hidden" id="weiterzeile"><button class="btn" id="weiter">Weiter ›</button></div>
+</div>
+<div class="pause" id="pause">
+  <div class="pbg" id="pbg"></div>
+  <img id="pimg" alt="">
+  <button class="btn pweiter" id="pweiter">Weiter ›</button>
+</div>
+<div class="start" id="start">
+  <div class="big">🦄</div>
+  <h1>Einhorn-Steine</h1>
+  <p>Hör gut zu und schreib den Satz. Jedes Wort wird ein Stein im Bach – und das Einhorn hüpft darüber.</p>
+  <button class="btn" id="go" disabled>Moment …</button>
+  <a class="btn mint" href="index.html">🏠 Alle Spiele</a>
+</div>
+
+<script>
+// ==AUSWERTUNG-START==  (reine Funktionen, ohne Browser; getestet in docs/tests/steine-auswertung-test.mjs)
+// Bewertet werden nur die Wortgrenzen. Rechtschreibung, Lautschreibung, Groß/klein und Satzzeichen zählen nicht.
+const AUSWERTUNG = (() => {
+  const TOL_GRENZE = 2;        // so viele (vereinfachte) Laute darf ein Leerzeichen neben der erwarteten Wortgrenze liegen
+  const UNSICHER_AB = 0.35;    // ab diesem Abstand (Anteil der Ziel-Laute) nur noch die Wortzahl zählen
+  const UNBEWERTET_AB = 0.6;   // ab hier gar nicht bewerten („Hör noch mal hin“)
+  const VOKALE = new Set(["a","e","i","o","u","ö","ü","A","O"]);
+  const AEHNLICH = [["d","t"],["g","k"],["b","p"],["s","z"],["f","w"],["S","s"],["X","k"],["m","n"]];
+  const EINZELN = {"ä":"e","y":"i","c":"k","q":"k","v":"f","ß":"s"};
+  const BUCHSTABE = /[a-zäöüß]/;
+
+  // Lautnormalisierung: macht aus einem Wort eine Folge vereinfachter Laute. Jeder Laut merkt sich,
+  // an welcher Stelle der Eingabe er beginnt (s) und zu welchem Stück/Wort er gehört (p).
+  function lautfolge(text, base, p){
+    const L=[];
+    for(let i=0;i<text.length;i++){ const ch=text[i].toLowerCase(); if(BUCHSTABE.test(ch)) L.push({ch, i:base+i}); }
+    const at=j=>L[j]?L[j].ch:"";
+    const out=[]; const push=(c,s)=>out.push({c,s,p});
+    let k=0;
+    while(k<L.length){
+      const c=at(k), c2=c+at(k+1), c3=c2+at(k+2), s=L[k].i;
+      if(c3==="sch"){ push("S",s); k+=3; continue; }
+      if(k===0 && (c2==="sp"||c2==="st")){ push("S",s); push(c2[1],L[k+1].i); k+=2; continue; }   // „schpielt“ = „spielt“
+      if(c2==="ch"){ push("X",s); k+=2; continue; }
+      if(c2==="ck"){ push("k",s); k+=2; continue; }
+      if(c2==="tz"){ push("z",s); k+=2; continue; }
+      if(c2==="ph"){ push("f",s); k+=2; continue; }
+      if(c2==="qu"){ push("k",s); push("w",L[k+1].i); k+=2; continue; }
+      if(c2==="dt"){ push("t",s); k+=2; continue; }
+      if(c2==="ie"||c2==="ih"){ push("i",s); k+=2; continue; }
+      if(c2==="äu"||c2==="eu"||c2==="oi"){ push("O",s); k+=2; continue; }
+      if(c2==="ai"||c2==="ei"||c2==="ay"||c2==="ey"){ push("A",s); k+=2; continue; }
+      if(c==="h" && k>0 && VOKALE.has(at(k-1)) && !VOKALE.has(at(k+1))){ k++; continue; }   // Dehnungs-h
+      if(c==="x"){ push("k",s); push("s",s); k++; continue; }
+      push(EINZELN[c]||c, s); k++;
+    }
+    const z=out;   // Doppelbuchstaben bleiben stehen (sonst verschmilzt „AmMorgen“), kosten beim Vergleich aber fast nichts
+    if(z.length>=3 && z[z.length-2].c==="e" && z[z.length-1].c==="r"){ const e=z.splice(-2,2)[0]; z.push({c:"a",s:e.s,p}); }  // „Vata“ = „Vater“
+    const l=z[z.length-1]; if(l){ const h={d:"t",g:"k",b:"p"}[l.c]; if(h) l.c=h; }   // Auslautverhärtung
+    return z;
+  }
+  function kosten(a,b){
+    if(a===b) return 0;
+    if(VOKALE.has(a)&&VOKALE.has(b)) return .5;
+    for(const [x,y] of AEHNLICH) if((a===x&&b===y)||(a===y&&b===x)) return .5;
+    return 1;
+  }
+  const nurBuchstaben = t => t.toLowerCase().replace(/[^a-zäöüß]/g,"");
+
+  function auswerten(ziel, eingabe){
+    const woerter=(ziel.match(/\S+/g)||[]).filter(w=>BUCHSTABE.test(w.toLowerCase()));
+    const B=[], grenzen=[];
+    woerter.forEach((w,wi)=>{ if(wi>0) grenzen.push(B.length); B.push(...lautfolge(w,0,wi)); });
+    const stuecke=[]; const re=/\S+/g; let m;
+    while((m=re.exec(eingabe||""))) if(BUCHSTABE.test(m[0].toLowerCase())) stuecke.push({text:m[0], start:m.index, kleb:[]});
+    const A=[], starts=[];
+    stuecke.forEach((st,pi)=>{ if(pi>0) starts.push(A.length); A.push(...lautfolge(st.text, st.start, pi)); });
+    const leer={status:"unbewertet", unsicher:true, abstand:1, stuecke, brueche:[], paare:[], woerter:woerter.length};
+    if(!A.length || !B.length) return leer;
+
+    // 1) Laute ausrichten (Levenshtein mit Rückverfolgung)
+    const n=A.length, M=B.length;
+    const D=Array.from({length:n+1},()=>new Float64Array(M+1));
+    const einA=i=> i>1&&A[i-2].c===A[i-1].c ? .25 : 1, wegB=j=> j>1&&B[j-2].c===B[j-1].c ? .25 : 1;   // doppelter Laut extra/fehlt
+    for(let i=1;i<=n;i++) D[i][0]=D[i-1][0]+einA(i); for(let j=1;j<=M;j++) D[0][j]=D[0][j-1]+wegB(j);
+    for(let i=1;i<=n;i++) for(let j=1;j<=M;j++)
+      D[i][j]=Math.min(D[i-1][j-1]+kosten(A[i-1].c,B[j-1].c), D[i-1][j]+einA(i), D[i][j-1]+wegB(j));
+    const abstand=D[n][M]/M;
+    if(abstand>UNBEWERTET_AB) return {...leer, abstand};
+    const ops=[]; { let i=n, j=M;
+      while(i>0||j>0){
+        if(i>0&&j>0&&D[i][j]===D[i-1][j-1]+kosten(A[i-1].c,B[j-1].c)){ ops.push("m"); i--; j--; }
+        else if(i>0&&D[i][j]===D[i-1][j]+einA(i)){ ops.push("i"); i--; }
+        else { ops.push("d"); j--; }
+      } ops.reverse(); }
+    // Für jede Wortgrenze im Ziel: Bereich [lo,hi] der Stellen in der Eingabe, an denen sie liegen müsste
+    const schnitt=grenzen.map(()=>null);
+    const treffer=stuecke.map(()=>({}));   // je Stück: wie viele Laute welches Zielwort treffen
+    { let i=0, j=0;
+      const merke=()=>grenzen.forEach((b,g)=>{ if(j===b){ if(!schnitt[g]) schnitt[g]=[i,i]; else schnitt[g][1]=i; } });
+      merke();
+      for(const op of ops){
+        if(op==="m"){ if(kosten(A[i].c,B[j].c)<1){ const t=treffer[A[i].p]; t[B[j].p]=(t[B[j].p]||0)+1; } i++; j++; }
+        else if(op==="i") i++; else j++;
+        merke(); } }
+    // Ein Zielwort zählt für ein Stück erst ab 2 getroffenen Lauten (bei einlautigen Wörtern ab 1),
+    // damit ein zufällig passender Einzellaut (das „i“ von „Poni“ ↔ „frisst“) nicht reicht.
+    const laenge=woerter.map((_,w)=>B.filter(x=>x.p===w).length);
+    const wortbereich=treffer.map(t=>{ const ws=Object.keys(t).map(Number).filter(w=>t[w]>=Math.min(2,laenge[w])); return ws.length?[Math.min(...ws),Math.max(...ws)]:[Infinity,-Infinity]; });
+
+    // 2) Wortgrenzen und Leerzeichen paarweise optimal zuordnen (beide sind geordnet)
+    const G=grenzen.length, S=starts.length, SKIP=3;
+    const dist=(s,[lo,hi])=> s<lo ? lo-s : s>hi ? s-hi : 0;
+    const T=Array.from({length:G+1},()=>new Array(S+1).fill(0));
+    for(let g=0;g<=G;g++) for(let s=0;s<=S;s++){
+      if(!g&&!s) continue;
+      let best=Infinity;
+      if(g) best=Math.min(best,T[g-1][s]+SKIP);
+      if(s) best=Math.min(best,T[g][s-1]+SKIP);
+      if(g&&s){ const d=dist(starts[s-1],schnitt[g-1]); if(d<=TOL_GRENZE) best=Math.min(best,T[g-1][s-1]+d); }
+      T[g][s]=best;
+    }
+    const grenzeOk=new Array(G).fill(false), startOk=new Array(S).fill(false);
+    { let g=G, s=S;
+      while(g>0||s>0){
+        if(g&&s){ const d=dist(starts[s-1],schnitt[g-1]); if(d<=TOL_GRENZE && T[g][s]===T[g-1][s-1]+d){ grenzeOk[g-1]=true; startOk[s-1]=true; g--; s--; continue; } }
+        if(g && T[g][s]===T[g-1][s]+SKIP){ g--; continue; }
+        s--;
+      } }
+    const unsicher = abstand>UNSICHER_AB;
+    if(unsicher && stuecke.length===woerter.length)   // Rückfallebene: nur die Wortzahl zählt
+      return {status:"ok", unsicher, abstand, stuecke, brueche:[], paare:[], woerter:woerter.length};
+
+    // 3) Klebestellen: fehlende Wortgrenze mitten in einem Stück. Liegt sie genau auf einem gesetzten
+    //    Leerzeichen, fehlt eher ein ganzes Wort – das ist kein Leerzeichenfehler und zählt nicht.
+    const paare=[];
+    grenzen.forEach((b,g)=>{
+      if(grenzeOk[g]) return;
+      const [lo,hi]=schnitt[g];
+      for(let c=lo;c<=hi;c++){
+        if(c<1 || c>=A.length || A[c-1].p!==A[c].p) continue;
+        const st=stuecke[A[c].p], o=A[c].s-st.start, wb=wortbereich[A[c].p];
+        if(o<1 || o>=st.text.length) continue;
+        if(!(wb[0]<=g && wb[1]>=g+1)) continue;   // Stück enthält nur ein Zielwort (z. B. Nachbarwort vergessen)
+        st.kleb.push({o, sicher:!unsicher, paar:nurBuchstaben(woerter[g])+"|"+nurBuchstaben(woerter[g+1])});
+        paare.push(nurBuchstaben(woerter[g])+"|"+nurBuchstaben(woerter[g+1]));
+        return;
+      }
+    });
+    const brueche=[]; startOk.forEach((ok,s)=>{ if(!ok) brueche.push(s+1); });   // Bruch zwischen Stück s und s+1
+    for(const st of stuecke) st.kleb.sort((a,b)=>a.o-b.o);
+    const fehler = paare.length || brueche.length;
+    return {status: fehler?"fehler":"ok", unsicher, abstand, stuecke, brueche, paare, woerter:woerter.length};
+  }
+
+  // Ist das Antippen der Lücke g (Zeichen-Index im Stück) eine richtige Teilung für eine der Klebestellen?
+  function teilungPasst(stueck, g){
+    const links=nurBuchstaben(stueck.text.slice(0,g)).length, rechts=nurBuchstaben(stueck.text.slice(g)).length;
+    return stueck.kleb.find(k => Math.abs(g-k.o)<=1 || (!k.sicher && links>=2 && rechts>=2)) || null;
+  }
+  return {auswerten, teilungPasst, lautfolge, nurBuchstaben};
+})();
+// ==AUSWERTUNG-ENDE==
+
+(async function(){
+  // ---------- Einstellungen ----------
+  const SAETZE_JE_RUNDE = 8;
+  const ANTEIL_ALT = 0.2;          // so viel der Runde aus älteren Stufen
+  const ANTEIL_FAELLIG = 0.7;      // höchstens so viel fällige/wackelige Sätze, der Rest sichere
+  const ABSTAND = [0, 1, 3, 7];    // Tage bis ein Satz in Fach f wieder fällig ist (Fach 3 = sitzt)
+  const WIEDER_NACH = 3;           // ein Satz mit Fehler kommt in derselben Runde nach so vielen anderen noch einmal
+  const WIEDER_MAX = 4;            // höchstens so viele Wiederholungen je Runde
+  const STUFE_OK = 6;              // Stufe geschafft, wenn an STUFE_TAGE verschiedenen Tagen eine Runde mit mind. STUFE_OK Sätzen ohne Fehler
+  const STUFE_TAGE = 2;
+  const OFT_PAAR = 2;              // so oft in OFT_TAGE Tagen geklebt = „oft geklebt“ (wird bevorzugt geübt)
+  const OFT_TAGE = 14;
+  const DIKTAT_TEMPO = 0.95;       // Stimme beim Diktat (1 = normal)
+  const PAUSE_ALLE = 1;            // nach so vielen Runden ein Pausenbild (0 = nie)
+
+  const $ = id => document.getElementById(id);
+  const {auswerten, teilungPasst, nurBuchstaben} = AUSWERTUNG;
+  const wait = ms => new Promise(r=>setTimeout(r,ms));
+  const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+  const heute = () => new Date().toLocaleDateString("sv");
+  const tage = (a,b) => a ? Math.round((Date.parse(b)-Date.parse(a))/864e5) : 999;
+
+  // ---------- Speichern: steine.json über steine-save.php, Fallback localStorage ----------
+  let save = {saetze:{}, paare:{}, tage:{}, runden:[], stufe:1, pause:""};
+  let serverOk=false;
+  try{ const r=await fetch("steine-save.php",{cache:"no-store"}); if(r.ok){ const j=await r.json(); if(j && j.saetze) save=Object.assign(save,j); serverOk=true; } }catch(e){}
+  if(!serverOk){ try{ const s=localStorage.getItem("einhorn-steine"); if(s) save=Object.assign(save,JSON.parse(s)); }catch(e){} }
+  for(const k of ["saetze","paare","tage"]) if(!save[k] || Array.isArray(save[k])) save[k]={};
+  if(!Array.isArray(save.runden)) save.runden=[];
+  save.stufe = Math.min(3, Math.max(1, save.stufe|0 || 1));
+  let saveTimer;
+  function persist(){
+    try{ localStorage.setItem("einhorn-steine", JSON.stringify(save)); }catch(e){}
+    if(!serverOk) return;
+    clearTimeout(saveTimer);
+    saveTimer=setTimeout(()=>fetch("steine-save.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(save)}).catch(()=>{}),300);
+  }
+
+  // ---------- Ton und Stimme ----------
+  let sound=true; try{ sound=localStorage.getItem("einhorn-steine-ton")!=="aus"; }catch(e){}
+  const sndBtn=$("snd"); const showSnd=()=>sndBtn.textContent=sound?"🔊":"🔈"; showSnd();
+  sndBtn.addEventListener("pointerdown",e=>e.preventDefault());
+  sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("einhorn-steine-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
+  let actx;
+  function tone(f1,f2,dur,type="sine",vol=.16){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
+    o.frequency.setValueAtTime(f1,t); o.frequency.exponentialRampToValueAtTime(f2,t+dur*.8);
+    g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g).connect(actx.destination); o.start(t); o.stop(t+dur+.02); }catch(e){} }
+  const sfx={ hopp:()=>tone(420,640,.12,"sine",.08), plopp:()=>tone(520,880,.18), platsch:()=>{ tone(300,90,.35,"triangle",.2); setTimeout(()=>tone(900,300,.2,"sine",.06),80); } };
+  // Stimme: beste deutsche Systemstimme (Premium > Erweitert > kompakt). Eloquence- und Spaßstimmen von Apple
+  // (Eddy, Flo, Grandma, Reed, Sandy, Shelley, Zarvox …) klingen nach 90er-Synthesizer und fallen raus.
+  // In der Elternansicht (?eltern) lässt sich auf dem Gerät eine Stimme fest wählen (localStorage).
+  const SCHLECHT = /eddy|flo\b|grandma|grandpa|oma|opa|reed|rocko|sandy|shelley|eloquence|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|kathy|ralph|novelty/i;
+  function stimmWert(v){
+    const n=(v.name+" "+v.voiceURI);
+    if(SCHLECHT.test(n)) return -1;
+    let w=0;
+    if(/premium/i.test(n)) w+=40; else if(/enhanced|erweitert|verbessert|natural|neural/i.test(n)) w+=25;
+    if(/google/i.test(n)) w+=15;
+    if(/de[-_]DE/i.test(v.lang)) w+=5;
+    if(/anna|helena|petra|marlene|katja|martin|markus|yannick|viktor/i.test(n)) w+=3;
+    return w;
+  }
+  const deutscheStimmen = () => (window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang));
+  // Gespeichert wird Position + Name + Kennung: Safari meldet z. B. zwei „Anna“ (kompakt und Premium) mit gleicher Kennung.
+  // "system" = keine Stimme vorgeben, nur Deutsch – dann wählt iOS (Einstellungen › Gesprochene Inhalte › Stimmen).
+  let voice=null, stimmWahl="";
+  const stimmSchluessel = (v,i) => i+"|"+v.name+"|"+v.voiceURI;
+  function pickVoice(){
+    const vs=deutscheStimmen(); let fest=""; try{ fest=localStorage.getItem("einhorn-stimme")||""; }catch(e){}
+    stimmWahl=fest;
+    if(fest==="system"){ voice=null; return; }
+    const i=vs.findIndex((v,k)=>stimmSchluessel(v,k)===fest);
+    voice = i>=0 ? vs[i] : (vs.filter(v=>stimmWert(v)>=0).sort((a,b)=>stimmWert(b)-stimmWert(a))[0] || null);
+  }
+  if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=()=>{ pickVoice(); window.dispatchEvent(new Event("stimmen")); }; }
+  function say(text, rate=.9){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=rate; u.pitch=1; speechSynthesis.speak(u); }catch(e){} }
+
+  // ---------- Sätze ----------
+  let SAETZE=[];
+  try{ const j=await (await fetch("saetze/saetze.json",{cache:"no-store"})).json(); SAETZE=(j.saetze||[]).filter(s=>s && typeof s.text==="string" && s.text.trim()); }catch(e){}
+  const woerterVon = t => (t.match(/\S+/g)||[]).map(nurBuchstaben).filter(Boolean);
+  for(const s of SAETZE){
+    s.text=s.text.trim(); const w=woerterVon(s.text), lang=Math.max(...w.map(x=>x.length));
+    if(![1,2,3].includes(s.stufe)) s.stufe = w.length<=3&&lang<=5 ? 1 : w.length<=5&&lang<=6 ? 2 : 3;
+  }
+
+  // ---------- Wiedervorlage und Auswahl ----------
+  const eintrag = t => save.saetze[t];
+  const faellig = t => { const e=eintrag(t); return !!e && (e.f===0 || tage(e.t,heute())>=ABSTAND[Math.min(e.f,ABSTAND.length-1)]); };
+  function oftGeklebt(){
+    const paare=new Set(), klein={};
+    for(const [p,daten] of Object.entries(save.paare)){
+      const n=daten.filter(d=>tage(d,heute())<=OFT_TAGE).length;
+      if(n>=OFT_PAAR) paare.add(p);
+      const w=p.split("|")[0]; if(w.length<=3) klein[w]=(klein[w]||0)+n;
+    }
+    return {paare, klein:new Set(Object.keys(klein).filter(w=>klein[w]>=OFT_PAAR))};
+  }
+  function bevorzugt(t, oft){
+    const w=woerterVon(t);
+    for(let i=0;i<w.length-1;i++) if(oft.paare.has(w[i]+"|"+w[i+1]) || oft.klein.has(w[i])) return true;
+    return false;
+  }
+  function waehle(pool, n, oft){
+    if(n<=0) return [];
+    const vor = t => bevorzugt(t,oft) ? 0 : 1;
+    const due=shuffle(pool.filter(s=>faellig(s.text))).sort((a,b)=>vor(a.text)-vor(b.text) || eintrag(a.text).f-eintrag(b.text).f);
+    const neu=shuffle(pool.filter(s=>!eintrag(s.text))).sort((a,b)=>vor(a.text)-vor(b.text));
+    const sicher=shuffle(pool.filter(s=>eintrag(s.text)&&!faellig(s.text))).sort((a,b)=>vor(a.text)-vor(b.text) || (eintrag(a.text).l||"").localeCompare(eintrag(b.text).l||""));
+    const nDue=Math.min(due.length, Math.ceil(n*ANTEIL_FAELLIG));
+    const out=due.slice(0,nDue);
+    const nSicher=Math.min(sicher.length, n-out.length, n-Math.ceil(n*ANTEIL_FAELLIG));
+    out.push(...sicher.slice(0,nSicher));
+    for(const rest of [neu, sicher.slice(nSicher), due.slice(nDue)]) for(const s of rest){ if(out.length>=n) break; out.push(s); }
+    return out;
+  }
+  function rundeZusammenstellen(){
+    const oft=oftGeklebt();
+    const akt=SAETZE.filter(s=>s.stufe===save.stufe), alt=SAETZE.filter(s=>s.stufe<save.stufe);
+    const nAlt=alt.length ? Math.round(SAETZE_JE_RUNDE*ANTEIL_ALT) : 0;
+    let liste=waehle(alt,nAlt,oft); liste.push(...waehle(akt,SAETZE_JE_RUNDE-liste.length,oft));
+    if(liste.length<SAETZE_JE_RUNDE) liste.push(...waehle(SAETZE.filter(s=>!liste.includes(s)),SAETZE_JE_RUNDE-liste.length,oft));
+    return shuffle(liste).map(s=>({text:s.text, wieder:false}));
+  }
+  function erstversuch(text, ok, paare){
+    const d=heute();
+    const e=save.saetze[text]||(save.saetze[text]={f:0,t:"",l:"",h:[]});
+    if(!ok){ e.f=0; e.t=d; }
+    else if(!e.h.length || faellig(text)){ e.f=Math.min(e.f+1, ABSTAND.length-1); e.t=d; }
+    e.h.push(ok?1:0); if(e.h.length>6) e.h.shift(); e.l=d;
+    const tg=save.tage[d]||(save.tage[d]={n:0,ok:0}); tg.n++; if(ok) tg.ok++;
+    for(const p of paare){ const l=save.paare[p]||(save.paare[p]=[]); l.push(d); if(l.length>10) l.shift(); }
+    persist();
+  }
+  function rundeAbschliessen(n, ok){
+    save.runden.push({d:heute(), s:save.stufe, n, ok}); if(save.runden.length>60) save.runden.shift();
+    const guteTage=new Set(save.runden.filter(r=>r.s===save.stufe && r.n>=SAETZE_JE_RUNDE && r.ok>=STUFE_OK).map(r=>r.d));
+    if(guteTage.size>=STUFE_TAGE && save.stufe<3) save.stufe++;
+    // Alte Tage aufräumen (Elternansicht zeigt 14 Tage)
+    const tg=Object.keys(save.tage).sort(); while(tg.length>60) delete save.tage[tg.shift()];
+    persist();
+  }
+
+  // ---------- Layout: sichtbare Höhe folgen (iPhone-Tastatur) ----------
+  const app=$("app"), stage=$("stage"), steineEl=$("steine"), uni=$("uni"), feld=$("feld"), form=$("form");
+  function fit(){
+    const vv=window.visualViewport;
+    app.style.height=(vv?vv.height:innerHeight)+"px";
+    app.style.transform=vv&&vv.offsetTop?`translateY(${vv.offsetTop}px)`:"";
+    const w=Math.max(56, Math.min(130, stage.clientHeight*.34, stage.clientWidth*.2));
+    stage.style.setProperty("--uw", w+"px");
+    passeSteineAn(); setzeUni(pos);
+  }
+  window.visualViewport?.addEventListener("resize",fit); window.visualViewport?.addEventListener("scroll",fit); addEventListener("resize",fit);
+
+  // ---------- Steine und Einhorn ----------
+  let res=null;          // Auswertung des aktuellen Satzes
+  let pos=-1;            // wo steht das Einhorn: -1 = linkes Ufer, 0..n-1 = Stein, n = rechtes Ufer
+  let phase="start";     // tippen | laufen | korrektur | fertig
+  let fehlerZiel=null;   // {art:"kleb"|"bruch", k}
+  let falschTipps=0;
+  const uniW = () => parseFloat(getComputedStyle(stage).getPropertyValue("--uw"))||100;
+  const uniH = () => uniW()*280/320;
+  function rel(el){ const a=el.getBoundingClientRect(), s=stage.getBoundingClientRect(); return {x:a.left-s.left, y:a.top-s.top, w:a.width, h:a.height}; }
+  function anker(k){
+    const n=res?res.stuecke.length:0;
+    const W=stage.clientWidth, halb=uniW()*.52;   // Einhorn bleibt ganz auf der Bühne
+    if(k<0||!res){ const r=rel($("uferL")); return {x:Math.max(halb+4, r.x+r.w*.55), y:r.y+3}; }
+    if(k>=n){ const r=rel($("uferR")); return {x:Math.min(W-halb-4, r.x+r.w*.45), y:r.y+3}; }
+    const r=rel(steineEl.querySelector(`.stein[data-k="${k}"]`)); return {x:r.x+r.w/2, y:r.y+4};
+  }
+  const uniXY = p => ({x:p.x-uniW()*.52, y:p.y-uniH()*.95});
+  function setzeUni(k){ const {x,y}=uniXY(anker(k)); uni.style.transform=`translate(${x}px,${y}px)`; uni.style.opacity=1; }
+  function hopp(von, nach, ms=430){
+    const a=uniXY(von), b=uniXY(nach), top=Math.min(a.y,b.y)-uniH()*.35;
+    sfx.hopp();
+    const an=uni.animate([{transform:`translate(${a.x}px,${a.y}px)`},{transform:`translate(${(a.x+b.x)/2}px,${top}px)`,offset:.5},{transform:`translate(${b.x}px,${b.y}px)`}],{duration:ms,easing:"ease-in-out"});
+    uni.style.transform=`translate(${b.x}px,${b.y}px)`;
+    return an.finished.catch(()=>{});
+  }
+  async function platsch(p, zurueck){
+    const start=uniXY(p);
+    const wy=stage.clientHeight*.82;
+    sfx.platsch();
+    const sp=$("splash"); sp.style.left=p.x+"px"; sp.style.top=wy+"px"; sp.classList.remove("on"); void sp.offsetWidth; sp.classList.add("on");
+    await uni.animate([{transform:`translate(${start.x}px,${start.y}px) rotate(0)`,opacity:1},
+      {transform:`translate(${start.x}px,${wy-uniH()*.5}px) rotate(18deg)`,opacity:.25}],{duration:550,easing:"ease-in"}).finished.catch(()=>{});
+    uni.style.opacity=0;
+    await wait(350);
+    const z=uniXY(zurueck);
+    uni.style.transform=`translate(${z.x}px,${z.y+uniH()*.3}px)`;
+    await uni.animate([{transform:`translate(${z.x}px,${z.y+uniH()*.3}px)`,opacity:0},{transform:`translate(${z.x}px,${z.y}px)`,opacity:1}],{duration:450,easing:"ease-out"}).finished.catch(()=>{});
+    uni.style.transform=`translate(${z.x}px,${z.y}px)`; uni.style.opacity=1;
+    uni.classList.remove("ratlos"); void uni.offsetWidth; uni.classList.add("ratlos");
+  }
+
+  function zeichneSteine(){
+    steineEl.innerHTML="";
+    if(!res) return;
+    res.stuecke.forEach((st,k)=>{
+      if(k>0 && res.brueche.includes(k)){ const r=document.createElement("button"); r.className="riss"; r.dataset.riss=k; r.setAttribute("aria-label","Riss"); steineEl.appendChild(r); }
+      const b=document.createElement("button"); b.className="stein"; b.dataset.k=k; b.textContent=st.text;
+      b.style.animationDelay=(k*70)+"ms";
+      if(res.brueche.includes(k+1)) b.classList.add("halb-l");
+      if(res.brueche.includes(k)) b.classList.add("halb-r");
+      steineEl.appendChild(b);
+    });
+    passeSteineAn();
+    markiereFehler();
+  }
+  function passeSteineAn(){
+    if(!res||!steineEl.children.length) return;
+    const W=steineEl.clientWidth-12, n=res.stuecke.length;
+    const zeichen=res.stuecke.reduce((a,s)=>a+s.text.length,0);
+    const fs=Math.max(13, Math.min(42, (W-(n-1)*10)/(zeichen*.62+n*1.1)));
+    steineEl.style.setProperty("--fs", fs+"px");
+    steineEl.style.setProperty("--lücke", Math.max(6,Math.min(16,fs*.45))+"px");
+  }
+  function markiereFehler(){
+    steineEl.querySelectorAll(".kaputt").forEach(e=>e.classList.remove("kaputt"));
+    stage.classList.toggle("korrektur", phase==="korrektur");
+    if(phase!=="korrektur"||!fehlerZiel) return;
+    if(fehlerZiel.art==="kleb") steineEl.querySelector(`.stein[data-k="${fehlerZiel.k}"]`)?.classList.add("kaputt");
+    else { steineEl.querySelector(`.stein[data-k="${fehlerZiel.k-1}"]`)?.classList.add("kaputt"); steineEl.querySelector(`.stein[data-k="${fehlerZiel.k}"]`)?.classList.add("kaputt"); }
+  }
+
+  // Einhorn läuft ab pos bis zum nächsten Fehler oder ans andere Ufer
+  async function laufen(){
+    phase="laufen"; markiereFehler();
+    const n=res.stuecke.length;
+    for(let k=pos+1;k<=n;k++){
+      if(k<n && k>0 && res.brueche.includes(k)){
+        const r=rel(steineEl.querySelector(`.riss[data-riss="${k}"]`));
+        const p={x:r.x+r.w/2, y:anker(k).y};
+        await hopp(anker(pos), p);
+        const a=res.stuecke[k-1].text, b=res.stuecke[k].text;
+        say(nurBuchstaben(a)+" … "+nurBuchstaben(b)+"?");
+        await platsch(p, anker(pos));
+        fehlerZiel={art:"bruch", k}; phase="korrektur"; markiereFehler(); return;
+      }
+      if(k<n && res.stuecke[k].kleb.length){
+        const el=steineEl.querySelector(`.stein[data-k="${k}"]`);
+        await hopp(anker(pos), anker(k));
+        el.classList.remove("kippelt"); void el.offsetWidth; el.classList.add("kippelt");
+        say(nurBuchstaben(res.stuecke[k].text)+"?");
+        await wait(380);
+        await platsch(anker(k), anker(pos));
+        fehlerZiel={art:"kleb", k}; falschTipps=0; phase="korrektur"; markiereFehler(); return;
+      }
+      await hopp(anker(pos), anker(k)); pos=k;
+      await wait(60);
+    }
+    geschafft();
+  }
+
+  steineEl.addEventListener("click", e=>{
+    if(phase!=="korrektur"||!fehlerZiel) return;
+    const t=e.target.closest(".stein,.riss"); if(!t) return;
+    if(fehlerZiel.art==="bruch"){
+      const k=fehlerZiel.k;
+      const hit = t.dataset.riss ? +t.dataset.riss===k : (+t.dataset.k===k||+t.dataset.k===k-1);
+      if(!hit) return;
+      zusammenfuegen(k);
+    } else if(+t.dataset.k===fehlerZiel.k) oeffneLupe(fehlerZiel.k);
+  });
+  function zusammenfuegen(k){
+    const a=res.stuecke[k-1], b=res.stuecke[k];
+    a.kleb.push(...b.kleb.map(x=>({...x,o:x.o+a.text.length})));
+    a.text=a.text+b.text;
+    res.stuecke.splice(k,1);
+    res.brueche=res.brueche.filter(x=>x!==k).map(x=>x>k?x-1:x);
+    sfx.plopp(); weiterNachKorrektur();
+  }
+  function teilen(k, g, treffer){
+    const st=res.stuecke[k];
+    const links={text:st.text.slice(0,g), start:st.start, kleb:[]}, rechts={text:st.text.slice(g), start:st.start+g, kleb:[]};
+    for(const x of st.kleb){ if(x===treffer) continue; if(x.o<g) links.kleb.push(x); else rechts.kleb.push({...x,o:x.o-g}); }
+    res.stuecke.splice(k,1,links,rechts);
+    res.brueche=res.brueche.map(x=>x>k?x+1:x);
+    sfx.plopp(); weiterNachKorrektur();
+  }
+  async function weiterNachKorrektur(){
+    fehlerZiel=null; phase="laufen";
+    zeichneSteine(); await wait(30); setzeUni(pos);
+    await wait(250); laufen();
+  }
+
+  // Lupe: Klebestein groß, zwischen jedem Buchstaben eine antippbare Lücke
+  const lupe=$("lupe");
+  function oeffneLupe(k){
+    const st=res.stuecke[k];
+    lupe.innerHTML=""; const karte=document.createElement("div"); karte.className="karte";
+    const reihe=document.createElement("div"); reihe.className="buchst";
+    [...st.text].forEach((c,i)=>{
+      if(i>0){ const s=document.createElement("button"); s.className="spalt"; s.dataset.g=i; s.setAttribute("aria-label","hier trennen"); reihe.appendChild(s); }
+      const b=document.createElement("span"); b.className="bst"; b.textContent=c; reihe.appendChild(b);
+    });
+    const zu=document.createElement("button"); zu.className="zu"; zu.textContent="✕ zu";
+    karte.append(reihe,zu); lupe.appendChild(karte); lupe.classList.add("on");
+    if(falschTipps>=2) zeigeRiss(reihe, st);
+    zu.onclick=()=>lupe.classList.remove("on");
+    lupe.onclick=e=>{ if(e.target===lupe) lupe.classList.remove("on"); };
+    reihe.onclick=e=>{
+      const s=e.target.closest(".spalt"); if(!s) return;
+      const g=+s.dataset.g, treffer=teilungPasst(st,g);
+      if(treffer){ lupe.classList.remove("on"); teilen(k,g,treffer); return; }
+      falschTipps++;
+      reihe.classList.remove("wackel"); void reihe.offsetWidth; reihe.classList.add("wackel");
+      say(nurBuchstaben(st.text.slice(0,g))+" … "+nurBuchstaben(st.text.slice(g))+"?");
+      if(falschTipps>=2) zeigeRiss(reihe, st);
+    };
+  }
+  function zeigeRiss(reihe, st){ const o=st.kleb[0]?.o; const s=o&&reihe.querySelector(`.spalt[data-g="${o}"]`); if(s) s.classList.add("tipp"); }
+
+  // ---------- Ablauf einer Runde ----------
+  let runde=[], idx=0, rundeOk=0, rundeN=0, wiederholungen=0, runden=0, satz=null, fehlerImSatz=false;
+  const vorbild=$("vorbild"), weiterzeile=$("weiterzeile");
+  function zeige(was){ form.classList.toggle("hidden", was!=="tippen"); weiterzeile.classList.toggle("hidden", was!=="weiter"); }
+  function diktat(){ say(satz.text, DIKTAT_TEMPO); }
+  function neuerSatz(){
+    satz=runde[idx]; res=null; pos=-1; fehlerZiel=null; fehlerImSatz=false;
+    steineEl.innerHTML=""; vorbild.classList.remove("on"); vorbild.textContent="";
+    feld.value=""; letzterWert="";
+    phase="tippen"; zeige("tippen"); markiereFehler();
+    feld.focus();               // in derselben Berührung, damit Safari die Tastatur öffnet
+    diktat();
+    requestAnimationFrame(()=>{ fit(); setzeUni(-1); });
+  }
+  function neueRunde(){ runde=rundeZusammenstellen(); idx=0; rundeOk=0; rundeN=0; wiederholungen=0; neuerSatz(); }
+
+  for(const b of [$("nochmal"), $("fertig")]) b.addEventListener("pointerdown", e=>e.preventDefault());   // Tastatur offen lassen
+  $("nochmal").addEventListener("click", ()=>{ diktat(); feld.focus(); });
+
+  // Leerzeichen zählen nur, wenn das Kind sie selbst getippt hat (nicht aus Wortvorschlägen, Autokorrektur, Einfügen)
+  let letzterWert="";
+  feld.addEventListener("input", e=>{
+    const v=feld.value, alt=letzterWert;
+    const selbst = e.inputType==="insertText" && (e.data===" " || e.data===". " || (e.data && e.data.length===1));
+    if(!selbst){
+      let p=0; while(p<alt.length && p<v.length && alt[p]===v[p]) p++;
+      let q=0; while(q<alt.length-p && q<v.length-p && alt[alt.length-1-q]===v[v.length-1-q]) q++;
+      const neu=v.slice(p, v.length-q);
+      if(/\s/.test(neu) && neu.trim()!=="." ){
+        const sauber=neu.replace(/\s+/g,"");
+        feld.value=v.slice(0,p)+sauber+v.slice(v.length-q);
+        feld.setSelectionRange(p+sauber.length, p+sauber.length);
+      }
+    }
+    letzterWert=feld.value;
+  });
+
+  form.addEventListener("submit", async e=>{
+    e.preventDefault();
+    if(phase!=="tippen") return;
+    if(!feld.value.trim()){ const b=$("fertig"); b.classList.remove("wackel"); void b.offsetWidth; b.classList.add("wackel"); diktat(); return; }
+    const r=auswerten(satz.text, feld.value);
+    if(r.status==="unbewertet"){ say("Hör noch mal hin. "+satz.text, DIKTAT_TEMPO); return; }
+    res=r; fehlerImSatz = r.status==="fehler";
+    if(!satz.wieder){
+      rundeN++; if(!fehlerImSatz) rundeOk++;
+      erstversuch(satz.text, !fehlerImSatz, r.paare);
+      if(fehlerImSatz && wiederholungen<WIEDER_MAX){ runde.splice(Math.min(runde.length, idx+1+WIEDER_NACH),0,{text:satz.text, wieder:true}); wiederholungen++; }
+    }
+    phase="laufen"; feld.blur(); zeige("");
+    await wait(380);            // Tastatur schließt, Bühne bekommt die volle Höhe
+    fit(); zeichneSteine(); setzeUni(-1);
+    await wait(res.stuecke.length*70+380);
+    laufen();
+  });
+
+  async function geschafft(){
+    phase="fertig"; markiereFehler(); pos=res.stuecke.length;
+    uni.classList.remove("freude"); void uni.offsetWidth; uni.classList.add("freude");
+    say(satz.text);
+    vorbild.textContent=satz.text; vorbild.classList.add("on");
+    await wait(900);
+    zeige("weiter");
+  }
+  $("weiter").addEventListener("click", async ()=>{
+    idx++;
+    if(idx<runde.length){ neuerSatz(); return; }
+    zeige(""); rundeAbschliessen(rundeN, rundeOk); runden++;
+    if(PAUSE_ALLE && runden%PAUSE_ALLE===0) await pause();
+    ende();
+  });
+  function ende(){
+    const s=$("start"); s.querySelector("h1").textContent="Das Einhorn ist drüben!";
+    s.querySelector("p").textContent="Noch eine Runde über den Bach?";
+    $("go").textContent="Noch eine Runde"; s.classList.remove("off");
+  }
+
+  // ---------- Pausenbild ----------
+  let pausen=[];
+  try{ pausen=await (await fetch("pausenbilder/index.json",{cache:"no-store"})).json(); }catch(e){}
+  if(!Array.isArray(pausen)) pausen=[];
+  function pause(){
+    if(!pausen.length) return Promise.resolve();
+    const c=pausen.length>1 ? pausen.filter(p=>p!==save.pause) : pausen;
+    const p=c[Math.floor(Math.random()*c.length)]; save.pause=p; persist();
+    const el=$("pause"), src="pausenbilder/"+p;
+    return new Promise(async ok=>{
+      $("pimg").src=src; $("pbg").style.backgroundImage=`url("${src}")`;
+      await $("pimg").decode().catch(()=>{});
+      el.classList.add("on"); requestAnimationFrame(()=>el.classList.add("show"));
+      $("pweiter").onclick=()=>{ el.classList.remove("show"); setTimeout(()=>{ el.classList.remove("on"); ok(); },800); };
+    });
+  }
+
+  // ---------- Elternansicht (?eltern) ----------
+  function elternansicht(){
+    $("start").classList.add("off");
+    const d=heute(), zeilen=[];
+    for(let i=0;i<14;i++){ const t=new Date(Date.now()-i*864e5).toLocaleDateString("sv"); const e=save.tage[t]; if(e&&e.n) zeilen.push(`<li>${t}: ${e.ok} von ${e.n} Sätzen ohne Kleben <small>(${Math.round(100*e.ok/e.n)} %)</small></li>`); }
+    const paare=Object.entries(save.paare).map(([p,l])=>[p,l.filter(x=>tage(x,d)<=14).length]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,12);
+    const wackel=Object.entries(save.saetze).filter(([t,e])=>e.f===0);
+    const el=document.createElement("div"); el.className="eltern";
+    el.innerHTML=`<h1>Lernstand Einhorn-Steine</h1>
+      <p>Gezählt wird nur der erste Versuch jedes Satzes (Wiederholungen in derselben Runde nicht). Rechtschreibung zählt nicht, nur die Abstände.
+      Stufe ${save.stufe} von 3. ${serverOk?"Gespeichert auf dem Server.":"Nur in diesem Browser gespeichert."}</p>
+      <h2>Von selbst an die Abstände gedacht (14 Tage)</h2><ul>${zeilen.join("")||"<li>–</li>"}</ul>
+      <h2>Am häufigsten zusammengeklebt</h2><ul>${paare.map(([p,n])=>`<li>${p.replace("|"," + ")} <small>· ${n}×</small></li>`).join("")||"<li>–</li>"}</ul>
+      <h2>Sätze, die gerade wackeln (${wackel.length})</h2><ul>${wackel.map(([t,e])=>`<li>${t} <small>· zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`).join("")||"<li>–</li>"}</ul>
+      <h2>Stimme auf diesem Gerät</h2>
+      <p>Bessere Stimmen: Einstellungen › Bedienungshilfen › Gesprochene Inhalte › Stimmen › Deutsch – dort z. B. „Anna (Premium)“ oder
+      „Helena (Erweitert)“ laden, dann diese Seite neu öffnen. Die Siri-Stimmen stehen Webseiten leider nicht zur Verfügung.</p>
+      <ul id="stimmen"></ul>
+      <p><a class="btn mint" href="einhorn-steine.html">Zum Spiel</a></p>`;
+    document.body.appendChild(el);
+    const liste=el.querySelector("#stimmen");
+    function zeigeStimmen(){
+      const vs=deutscheStimmen();
+      liste.innerHTML="";
+      const zeile=(titel, info, aktiv, waehle)=>{
+        const li=document.createElement("li");
+        li.innerHTML=`${aktiv?"✅ ":""}${titel} <small>${info}</small> `;
+        const b=document.createElement("button"); b.className="btn mint"; b.style.cssText="font-size:.9rem;padding:4px 14px;margin-left:6px"; b.textContent=aktiv?"Probe":"Wählen";
+        b.onclick=()=>{ waehle(); sound=true; say("Das Pony frisst Gras. Die Katze schläft auf dem Sofa."); zeigeStimmen(); };
+        li.appendChild(b); liste.appendChild(li);
+      };
+      zeile("Stimme aus den iPhone-Einstellungen", "· iOS wählt selbst", stimmWahl==="system",
+        ()=>{ try{ localStorage.setItem("einhorn-stimme","system"); }catch(e){} stimmWahl="system"; voice=null; });
+      vs.forEach((v,k)=>zeile(`${k+1}. ${v.name}`,
+        `· ${v.lang}${v.default?" · Standard":""}${v.localService===false?" · online":""}${stimmWert(v)<0?" · alt/Spaßstimme":""}<br>${v.voiceURI}`,
+        stimmWahl!=="system" && voice===v,
+        ()=>{ const key=stimmSchluessel(v,k); try{ localStorage.setItem("einhorn-stimme",key); }catch(e){} stimmWahl=key; voice=v; }));
+    }
+    zeigeStimmen(); window.addEventListener("stimmen", zeigeStimmen);
+  }
+
+  if(new URLSearchParams(location.search).has("eltern")){ elternansicht(); return; }
+  fit(); setzeUni(-1);
+  $("go").disabled=false; $("go").textContent="Los geht's!";
+  $("go").addEventListener("click", ()=>{
+    $("start").classList.add("off");
+    if(!SAETZE.length){ say("Keine Sätze gefunden."); return; }
+    neueRunde();
+  });
+})();
+</script>
+</body>
+</html>

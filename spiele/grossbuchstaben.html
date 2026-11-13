@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Großbuchstaben-Zauberer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--nacht:#3B2A6B;--paper:#FFF8FC;--bg:#D8F3FF;--lila:#B59CFF;--rosa:#FF8ACB;--mint:#7FE8C8;--sonne:#FFD95A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}}
+:root[data-theme="dark"]{--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;color:var(--nacht);background:var(--bg);
+  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+.app{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:calc(env(safe-area-inset-top,0px) + 6px) calc(env(safe-area-inset-right,0px) + 8px) calc(env(safe-area-inset-bottom,0px) + 10px) calc(env(safe-area-inset-left,0px) + 8px)}
+/* Bühne: Welt 1000 × 700 Einheiten, Boden bei y = 600 */
+.stage{position:relative;flex:none;width:100%;max-width:640px;aspect-ratio:1000/700;border-radius:18px;overflow:hidden;box-shadow:0 6px 0 rgba(59,42,107,.15);background:#CDEBFF}
+.stage>svg.kulisse{position:absolute;inset:0;width:100%;height:100%}
+.akteur{position:absolute;transform-origin:50% 90%}
+.akteur .dreh{transition:transform .3s;transform-origin:50% 50%}
+.akteur .dreh.links{transform:scaleX(-1)}
+.akteur .schatten{position:absolute;left:18%;right:18%;height:7%;border-radius:50%;background:rgba(0,0,0,.13);top:calc(var(--boden) - 3.5%)}
+.akteur.luft .schatten{display:none}
+.wolke{position:absolute;width:19%;aspect-ratio:1.4;transform:translate(-50%,-100%)}
+.funken{position:absolute;pointer-events:none;font-size:20px;transform:translate(-50%,-50%);animation:funke .7s ease-out forwards}
+@keyframes funke{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}30%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.1)}}
+.corner{position:absolute;top:8px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,248,252,.88);font-size:21px;
+  display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 3px 0 rgba(59,42,107,.2);z-index:9;color:#3B2A6B}
+.corner.l{left:8px}.corner.r{right:8px}
+/* Satz */
+.satz{flex:1;min-height:0;width:100%;max-width:640px;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:10px 8px;padding:4px 2px}
+.wort{border:0;border-radius:16px;padding:8px 14px 4px;font:800 1.75rem/1.1 "Baloo 2",sans-serif;color:var(--nacht);background:var(--paper);
+  box-shadow:0 5px 0 rgba(59,42,107,.22);min-width:48px;min-height:52px;transition:transform .15s}
+.wort:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(59,42,107,.22)}
+.wort.fest{background:none;box-shadow:none;padding-left:4px;padding-right:4px}
+.wort.punkt{background:none;box-shadow:none;padding:8px 0 4px;min-width:0;margin-left:-8px}
+.wort.flip{animation:flip .32s ease-in-out}
+@keyframes flip{50%{transform:rotateX(90deg)}}
+.wort.wackelt{animation:wackel .9s ease-in-out infinite;background:#FFF2BF;color:#3B2A6B}
+@keyframes wackel{0%,100%{transform:rotate(0)}20%{transform:rotate(-7deg)}40%{transform:rotate(6deg)}60%{transform:rotate(-4deg)}80%{transform:rotate(2deg)}}
+.satz.fertig .wort{pointer-events:none}
+.satz.stab .wort:not(.fest):not(.punkt){outline:3px dashed var(--lila);outline-offset:2px}
+/* Leiste */
+.leiste{flex:none;width:100%;max-width:640px;display:flex;align-items:center;justify-content:center;gap:12px;min-height:72px}
+.btn{border:0;border-radius:999px;padding:14px 30px;font:800 1.4rem "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 6px 0 #D45A9E;text-decoration:none}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #D45A9E}
+.btn.lila{background:#8F73E6;box-shadow:0 6px 0 #6A50C4}
+.btn.mint{background:var(--mint);color:#3B2A6B;box-shadow:0 6px 0 #4FBF9C;font-size:1.1rem;padding:12px 24px}
+.btn.klein{font-size:1.1rem;padding:12px 18px}
+.btn.an{background:#FFD95A;color:#3B2A6B;box-shadow:0 6px 0 #D9AE2C}
+.btn.wackel{animation:wackel .6s ease-in-out}
+.hide{display:none!important}
+/* Start, Pause, Eltern wie im Wimmelbild */
+.start{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;
+  background:var(--bg);background-image:radial-gradient(circle at 15% 20%,rgba(255,138,203,.35) 0 90px,transparent 90px),radial-gradient(circle at 85% 15%,rgba(255,217,90,.45) 0 60px,transparent 60px),radial-gradient(circle at 80% 85%,rgba(181,156,255,.45) 0 110px,transparent 110px),radial-gradient(circle at 10% 90%,rgba(127,232,200,.45) 0 70px,transparent 70px)}
+.start.off{display:none}
+.start .big{font-size:96px;line-height:1;animation:float 3s ease-in-out infinite}
+.start h1{font-size:2.2rem;line-height:1.1}
+.start p{font-size:1.15rem;font-weight:600;max-width:30ch}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.pause{position:fixed;inset:0;z-index:25;background:#1F1B45;display:none;overflow:hidden;opacity:0;transition:opacity .8s}
+.pause.on{display:block}.pause.show{opacity:1}
+.pause .pbg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(28px) brightness(.8)}
+.pause img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12) translateY(-2%)}}
+.pause .sparkles span{position:absolute;font-size:22px;opacity:0;animation:glitzer 5s ease-in-out infinite;pointer-events:none}
+@keyframes glitzer{0%{opacity:0;transform:translateY(0) scale(.6)}30%{opacity:.9}100%{opacity:0;transform:translateY(-120px) scale(1.1)}}
+.pweiter{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);opacity:.92}
+.eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 32px;user-select:text;-webkit-user-select:text;touch-action:auto}
+.eltern h1{font-size:1.6rem}.eltern h2{font-size:1.2rem;margin:16px 0 4px}.eltern p{margin:6px 0;font-weight:600;max-width:60ch}
+.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:10px;padding:4px 10px;margin:4px 0;font-weight:800}
+.eltern small{font-weight:600;opacity:.75}
+@media (max-height:640px){.wort{font-size:1.45rem;min-height:46px;padding:6px 11px 3px}.btn{padding:11px 24px;font-size:1.25rem}}
+@media (prefers-reduced-motion:reduce){.start .big,.wort.wackelt,.pause img,.pause .sparkles span{animation:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="stage" id="stage">
+    <svg class="kulisse" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
+      <defs><linearGradient id="himmel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFE6FF"/><stop offset="1" stop-color="#E8F7FF"/></linearGradient></defs>
+      <rect width="1000" height="700" fill="url(#himmel)"/>
+      <g fill="#fff" opacity=".85"><ellipse cx="170" cy="110" rx="70" ry="24"/><ellipse cx="215" cy="96" rx="44" ry="26"/><ellipse cx="640" cy="70" rx="56" ry="18"/><ellipse cx="672" cy="60" rx="34" ry="20"/></g>
+      <path d="M0 560 Q160 470 330 540 T680 520 T1000 530 V700 H0Z" fill="#A9DE8C"/>
+      <path d="M0 600 Q250 575 500 592 T1000 588 V700 H0Z" fill="#BDE6A0"/>
+      <g fill="#93CF77"><circle cx="90" cy="650" r="5"/><circle cx="300" cy="672" r="4"/><circle cx="560" cy="640" r="5"/><circle cx="820" cy="668" r="4"/><circle cx="930" cy="630" r="3"/></g>
+    </svg>
+    <div id="akteure"></div>
+    <a class="corner l" href="index.html" aria-label="Alle Spiele">🏠</a>
+    <button class="corner r" id="snd" aria-label="Ton">🔊</button>
+  </div>
+  <div class="satz" id="satz"></div>
+  <div class="leiste">
+    <button class="btn lila klein hide" id="stab" aria-label="Probe ein oder eine">🪄 ein/eine?</button>
+    <button class="btn" id="zaubern">✨ Zaubern</button>
+    <button class="btn hide" id="weiter">Nächster Satz ›</button>
+  </div>
+</div>
+<div class="pause" id="pause">
+  <div class="pbg" id="pbg"></div>
+  <img id="pimg" alt="">
+  <div class="sparkles" id="sparkles"></div>
+  <button class="btn pweiter" id="pweiter">Weiter ›</button>
+</div>
+<div class="start" id="start">
+  <div class="big">🪄</div>
+  <h1>Großbuchstaben-Zauberer</h1>
+  <p>Ein Zauber hat die Buchstaben verhext! Tipp ein Wort an – dann wird der erste Buchstabe groß oder klein. Stimmt alles, wird der Satz lebendig.</p>
+  <button class="btn" id="go">Los geht's!</button>
+  <a class="btn mint" href="index.html">🏠 Alle Spiele</a>
+</div>
+
+<script src="figuren/figuren.js"></script>
+<script src="zauber-saetze.js"></script>
+<script>
+(async function(){
+  // ---------- Einstellungen ----------
+  const RUNDE = 5;              // Sätze je Runde (plus bis zu WIEDER_MAX Wiederholungen)
+  const WIEDER_NACH = 2;        // ein falsches Wort kommt nach so vielen anderen Sätzen in einem anderen Satz wieder
+  const WIEDER_MAX = 2;
+  const P_FALSCH = 0.45;        // Anteil verhexter Wörter im Startzustand (fällige Wörter und Nomen bevorzugt)
+  const PAUSE_ALLE = 1;         // nach so vielen Runden ein Pausenbild (0 = nie)
+  const ABSTAND = [0, 1, 3, 7, 21];   // Wiedervorlage über Tage, wie im Wimmelbild
+  const GELERNT = 4;
+  const ANTEIL_FAELLIG = 0.7;
+  const SK = 1.15;              // Maßstab Figuren/Dinge auf der Bühne (Welt 1000 × 700)
+  const BODEN = 600;
+
+  const FIGUR_IDS = ["einhorn","hund","katze","maus","ente","schwein","frosch","hase","igel","eule","pferd","drache"];
+  const DING_IDS = ["zaun","apfel","bett","ball","baum","haus","mond","kuchen","blume","bruecke"];
+  const $ = id => document.getElementById(id);
+  const wait = ms => new Promise(r=>setTimeout(r,ms));
+  const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+  const params = new URLSearchParams(location.search);
+  const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const Z = window.ZauberSaetze, F = window.Figuren;
+
+  // Figuren nachladen (je Datei eine Figur)
+  const load = src => new Promise(r=>{ const s=document.createElement("script"); s.src=src; s.onload=s.onerror=r; document.head.appendChild(s); });
+  await Promise.all([...FIGUR_IDS, ...DING_IDS].map(id=>load("figuren/"+id+".js")));
+  const vorhanden = id => !!(F.figuren[id] || F.dinge[id]);
+
+  // ---------- Speichern: zauber.json über zauber-save.php, Fallback localStorage ----------
+  let save = {woerter:{}, letzte:[], pause:""};
+  let serverOk = false;
+  try{ const r=await fetch("zauber-save.php",{cache:"no-store"}); if(r.ok){ const j=await r.json(); if(j && j.woerter) save=Object.assign(save,j); serverOk=true; } }catch(e){}
+  if(!serverOk){ try{ const s=localStorage.getItem("grossbuchstaben"); if(s) save=Object.assign(save,JSON.parse(s)); }catch(e){} }
+  if(Array.isArray(save.woerter)) save.woerter={};
+  if(!Array.isArray(save.letzte)) save.letzte=[];
+  let saveTimer;
+  function persist(){
+    try{ localStorage.setItem("grossbuchstaben", JSON.stringify(save)); }catch(e){}
+    if(!serverOk) return;
+    clearTimeout(saveTimer);
+    saveTimer=setTimeout(()=>fetch("zauber-save.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(save)}).catch(()=>{}),300);
+  }
+  // Lernstand je Wort: Nomen als „der Hund“, andere als „~springt“. Eintrag {f: Fach, t: Tag, h: letzte 6 (1/0)}
+  const heute = () => new Date().toLocaleDateString("sv");
+  const tage = (a,b) => a ? Math.round((Date.parse(b)-Date.parse(a))/864e5) : 999;
+  const eintrag = s => save.woerter[s] || {f:0, t:"", h:[]};
+  const faellig = s => { const e=eintrag(s); return e.f===0 || tage(e.t, heute()) >= ABSTAND[Math.min(e.f, ABSTAND.length-1)]; };
+  function record(s, richtig){
+    const e=save.woerter[s]||(save.woerter[s]={f:0,t:"",h:[]});
+    e.h.push(richtig?1:0); if(e.h.length>6) e.h.shift();
+    if(!richtig){ e.f=0; e.t=heute(); }
+    else if(faellig(s)){ e.f=Math.min(e.f+1, GELERNT); e.t=heute(); }
+  }
+
+  // ---------- Ton und Stimme ----------
+  let sound = true; try{ sound = localStorage.getItem("grossbuchstaben-ton")!=="aus"; }catch(e){}
+  const sndBtn=$("snd"); const showSnd=()=>sndBtn.textContent=sound?"🔊":"🔈"; showSnd();
+  sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("grossbuchstaben-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
+  let actx;
+  function tone(f1,f2,dur,type="sine",vol=.15){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
+    o.frequency.setValueAtTime(f1,t); o.frequency.exponentialRampToValueAtTime(f2,t+dur*.8);
+    g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g).connect(actx.destination); o.start(t); o.stop(t+dur+.02); }catch(e){} }
+  const klick = () => tone(900,1300,.09,"sine",.08);
+  const glitzer = () => { [0,90,180].forEach((d,i)=>setTimeout(()=>tone(1200+i*300,1600+i*300,.12,"sine",.07),d)); };
+  let voice=null;
+  function pickVoice(){ const vs=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang)); voice=vs.find(v=>/Anna|Petra|Helena|Marlene/i.test(v.name))||vs[0]||null; }
+  if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+  function say(text){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1.1; speechSynthesis.speak(u); }catch(e){} }
+
+  // ---------- Bühne ----------
+  const stage=$("stage"), akteure=$("akteure");
+  const ids = s => [...s.s, s.d, s.g].filter(Boolean);
+  function neuerSatz(pruef, versuche=400){
+    for(let i=0;i<versuche;i++){ const s=Z.zufall(); if(ids(s.szene).every(vorhanden) && (!pruef || pruef(s))) return s; }
+    return null;
+  }
+
+  // Ein Akteur: Figur oder Ding als absolut platzierte Box. x = Mitte, y = Standlinie (Welt-Einheiten).
+  function figur(id, {x, y=BODEN, s=1, links=false, z=3, fell, muede, tempo}={}){
+    const d=F.figuren[id], sc=SK*d.groesse*s;
+    const el=document.createElement("div"); el.className="akteur";
+    el.style.width=(320*sc/10)+"%"; el.style.zIndex=z; el.style.setProperty("--boden",(254/280*100)+"%");
+    el.innerHTML=`<div class="schatten"></div><div class="dreh${links?" links":""}">${F.svgFigur(id,{fell})}</div>`;
+    const a={el, id, sc, cx:160, boden:254, dreh:el.querySelector(".dreh"), svg:el.querySelector("svg"), breite:300*sc, hoehe:254*sc, d};
+    if(muede) a.svg.classList.add("muede");
+    if(tempo) a.svg.style.setProperty("--tempo", tempo+"s");
+    akteure.appendChild(el); setPos(a,x,y); return a;
+  }
+  function ding(id, {x, y, z=2, s=1}={}){
+    const d=F.dinge[id], sc=SK*s;
+    if(y==null) y = d.himmel ? 200 : BODEN;
+    const mk = (teil, zz) => { const el=document.createElement("div"); el.className="akteur"; el.style.width=(d.w*sc/10)+"%"; el.style.zIndex=zz;
+      el.innerHTML=`<div class="dreh">${F.svgDing(id,teil)}</div>`; akteure.appendChild(el); return el; };
+    const el=mk("svg", z);
+    const a={el, id, sc, cx:d.w/2, boden:d.boden, dreh:el.querySelector(".dreh"), breite:d.w*sc, hoehe:d.boden*sc, d, oben: d.oben!=null ? (d.boden-d.oben)*sc : null};
+    if(d.vorne) a.vorne=mk("vorne", z+3);
+    setPos(a,x,y); return a;
+  }
+  const L = (a,x) => (x - a.cx*a.sc)/10;
+  const T = (a,y) => (y - a.boden*a.sc)/7;
+  function setPos(a,x,y){ a.x=x; a.y=y; for(const el of [a.el, a.vorne].filter(Boolean)){ el.style.left=L(a,x)+"%"; el.style.top=T(a,y)+"%"; } }
+  // Bewegung über Punkte [{x,y}], gibt Promise zurück
+  function bewege(a, punkte, ms, easing="linear"){
+    if(ruhig || ms<=0){ const p=punkte[punkte.length-1]; setPos(a,p.x,p.y); return Promise.resolve(); }
+    const frames=[{left:L(a,a.x)+"%", top:T(a,a.y)+"%"}, ...punkte.map(p=>({left:L(a,p.x)+"%", top:T(a,p.y)+"%"}))];
+    const els=[a.el, a.vorne].filter(Boolean);
+    const anims=els.map(el=>el.animate(frames,{duration:ms, easing, fill:"forwards"}));
+    const p=punkte[punkte.length-1];
+    return anims[0].finished.then(()=>{ setPos(a,p.x,p.y); anims.forEach(x=>x.cancel()); }, ()=>{});
+  }
+  const bogen = (a, x2, y2, hoehe, n=14) => Array.from({length:n},(_,i)=>{ const t=(i+1)/n; return {x:a.x+(x2-a.x)*t, y:a.y+(y2-a.y)*t - hoehe*4*t*(1-t)}; });
+  const blick = (a, links) => a.dreh.classList.toggle("links", links);
+  async function geh(a, x, ms, y=a.y){ blick(a, x<a.x); F.zustand(a.svg,"laeuft"); await bewege(a,[{x,y}],ms); F.zustand(a.svg,""); }
+  function hop(a, opt){ if(ruhig) return Promise.resolve(); const an=F.hop(a.svg,opt); return an ? an.finished.catch(()=>{}) : Promise.resolve(); }
+  function funken(x, y, n=6){
+    for(let i=0;i<n;i++){ const s=document.createElement("span"); s.className="funken"; s.textContent=["✨","⭐","💫"][i%3];
+      s.style.left=(x/10)+"%"; s.style.top=(y/7)+"%"; const w=Math.random()*Math.PI*2; s.style.setProperty("--dx",Math.cos(w)*50+"px"); s.style.setProperty("--dy",Math.sin(w)*40-20+"px");
+      stage.appendChild(s); setTimeout(()=>s.remove(),750); }
+  }
+  async function erscheine(...as){
+    for(const a of as){ if(!a) continue;
+      funken(a.x, a.y - a.hoehe/2);
+      if(!ruhig) for(const el of [a.el,a.vorne].filter(Boolean)) el.animate([{transform:"scale(0)",opacity:0},{transform:"scale(1.12)",opacity:1,offset:.7},{transform:"scale(1)"}],{duration:420,easing:"ease-out"});
+      await wait(180);
+    }
+    await wait(300);
+  }
+  function leere(){ akteure.innerHTML=""; stage.querySelectorAll(".wolke,.funken").forEach(e=>e.remove()); }
+
+  // Figur des Satzsubjekts mit Adjektiv-Wirkung
+  function subjekt(id, adj, opt={}){
+    const o=Object.assign({}, opt);
+    if(adj==="klein") o.s=(o.s||1)*.65;
+    if(adj==="gross") o.s=(o.s||1)*1.3;
+    if(adj==="rot") o.fell="#FF9A9A";
+    if(adj==="blau") o.fell="#9CC8FF";
+    if(adj==="muede"){ o.muede=true; }
+    if(adj==="schnell") o.tempo=.28;
+    return figur(id,o);
+  }
+  const takt = adj => adj==="schnell" ? .5 : adj==="muede" ? 1.35 : 1;
+
+  // ---------- Szenen (je höchstens ~5 s) ----------
+  const SZENE = {
+    async ueber(sz){ const k=takt(sz.adj);
+      const D=ding(sz.d,{x:520}); const S=subjekt(sz.s[0], sz.adj, {x:200});
+      await erscheine(D,S);
+      const abstand=S.breite/2 + D.breite/2 + 10;
+      await geh(S, 520-abstand, 900*k);
+      if(!ruhig) F.hop(S.svg,{hoehe:30, dauer:900*k});
+      await bewege(S, bogen(S, 520+abstand, BODEN, D.hoehe+60), 900*k, "ease-in-out");
+      await hop(S,{hoehe:20,dauer:420}); blick(S,true); await wait(500); blick(S,false);
+    },
+    async zu(sz){ const k=takt(sz.adj);
+      const D=ding(sz.d,{x:790}); const S=subjekt(sz.s[0], sz.adj, {x:170});
+      const S2=sz.s[1] ? figur(sz.s[1],{x:60, z:4}) : null;
+      await erscheine(D,S,S2);
+      const ziel=790 - D.breite/2 - S.breite/2 + 30;
+      await Promise.all([geh(S, ziel, 2200*k), S2 && geh(S2, ziel - S.breite/2 - S2.breite/2 + 20, 2400)]);
+      await Promise.all([hop(S,{hoehe:40}), S2 && hop(S2,{hoehe:40})]);
+    },
+    async schlaf(sz){ const k=takt(sz.adj), d=sz.d;
+      const pos = {bett:530, baum:720, haus:740, mond:780, bruecke:520}[d];
+      const S=subjekt(sz.s[0], sz.adj, {x:150});
+      const D=ding(d,{x:pos, s: d==="bett" ? Math.max(1, S.breite/(300*SK)*1.1) : 1});   // großes Tier, großes Bett
+      const S2=sz.s[1] ? figur(sz.s[1],{x:40, z:3}) : null;
+      await erscheine(D,S,S2);
+      if(d==="bett"){ S.el.style.zIndex=4; await geh(S, pos-60, 1300*k); await bewege(S, bogen(S, pos, BODEN-D.oben, 60), 600, "ease-in-out"); }
+      else if(d==="bruecke"){ const r=D.breite/2; await geh(S, pos-r+10, 1000*k); F.zustand(S.svg,"laeuft"); await bewege(S,[{x:pos, y:BODEN-D.oben}], 900*k); F.zustand(S.svg,""); }
+      else if(d==="mond"){ await geh(S, 430, 1400*k); }
+      else { const x = d==="baum" ? pos-40 : pos - D.breite/2 - S.breite/2 + 20;
+        await Promise.all([geh(S, S2 ? x - 40 : x, 1500*k), S2 && geh(S2, (S2 && (x - 40 - S.breite/2 - S2.breite/2 + 10)), 1600)]); }
+      await wait(250);
+      if(d==="bett") blick(S,true);   // Kissen liegt links
+      F.zustand(S.svg,"schlaeft"); if(S2) F.zustand(S2.svg,"schlaeft");
+      await wait(2200);
+    },
+    async frisst(sz){ const k=takt(sz.adj);
+      const S=subjekt(sz.s[0], sz.adj, {x:200});
+      const D=ding(sz.d,{x:620, z:4, s:Math.min(1, .35+S.d.groesse*.75)});   // kleines Tier, kleiner Bissen
+      await erscheine(D,S);
+      const ziel = 620 - (S.d.mund[0]-160)*S.sc - D.breite*.6;
+      await geh(S, ziel, 1300*k);
+      // Futter hüpft ins Maul (so tief kommt kein Kopf), dann Biss für Biss kleiner
+      const mx = S.x + (S.d.mund[0]-160)*S.sc + D.breite*.15, my = BODEN - (254-S.d.mund[1])*S.sc + 40*S.sc + D.hoehe*.5;
+      await bewege(D, bogen(D, mx, my, 50), 450, "ease-out");
+      F.zustand(S.svg,"frisst");
+      D.dreh.style.transformOrigin="50% 50%";
+      for(const sk of [.75,.5,.25]){ await wait(520); D.dreh.animate([{transform:`scale(${sk+.15})`},{transform:`scale(${sk})`}],{duration:200,fill:"forwards"}); }
+      await wait(450); D.el.remove(); if(D.vorne) D.vorne.remove();
+      await wait(500); F.zustand(S.svg,""); await hop(S,{hoehe:25});
+    },
+    async tanz(sz){ const d=sz.d;
+      const pos={bruecke:500, mond:780, haus:760, blume:640, baum:720}[d];
+      const D=ding(d,{x:pos, z: d==="bruecke"?2:1});
+      const zwei=!!sz.s[1];
+      let x1 = d==="bruecke" ? (zwei?420:500) : d==="blume" ? 450 : (zwei?300:420);
+      const y = d==="bruecke" ? BODEN-D.oben : BODEN;
+      const S=subjekt(sz.s[0], sz.adj, {x:x1, y, z:3});
+      const S2=zwei ? figur(sz.s[1],{x: d==="bruecke" ? 600 : x1+230, y, z:3, links:true}) : null;
+      await erscheine(D,S,S2);
+      F.zustand(S.svg,"tanzt"); if(S2) F.zustand(S2.svg,"tanzt");
+      await wait(1300); blick(S,true); if(S2) blick(S2,false);
+      await wait(1300); blick(S,false); if(S2) blick(S2,true);
+      await wait(600);
+      F.zustand(S.svg,""); if(S2) F.zustand(S2.svg,"");
+    },
+    async rollt(sz){ const k=takt(sz.adj);
+      const B=ding("ball",{x:420, z:4}); const S=subjekt(sz.s[0], sz.adj, {x:170});
+      const G=sz.g ? figur(sz.g,{x:870, links:true}) : null;
+      await erscheine(B,S,G);
+      await geh(S, 420 - B.breite/2 - S.breite*.42, 800*k);
+      const ziel = G ? 870 - G.breite/2 - B.breite/2 + 10 : 860;
+      const weg = ziel-420, grad = weg/(B.breite/2)*57.3;
+      if(!ruhig) B.dreh.animate([{transform:"rotate(0)"},{transform:`rotate(${grad}deg)`}],{duration:1500*k, easing:"cubic-bezier(.2,.6,.4,1)", fill:"forwards"});
+      await Promise.all([ bewege(B,[{x:ziel,y:BODEN}],1500*k,"cubic-bezier(.2,.6,.4,1)"), geh(S, S.x+80, 500*k) ]);
+      if(G) await hop(G,{hoehe:50, mal:2, dauer:600}); else await hop(S,{hoehe:30});
+    },
+    async versteckt(sz){ const k=takt(sz.adj);
+      const pos={baum:650, haus:680, zaun:640, bett:640}[sz.d];
+      const D=ding(sz.d,{x:pos, z:5}); const S=subjekt(sz.s[0], sz.adj, {x:150, z:3});
+      await erscheine(D,S);
+      await geh(S, pos, 2000*k);
+      await wait(500);
+      const rand = pos - D.breite/2 - S.breite*.05;
+      await geh(S, rand, 450); blick(S,false); await wait(700);
+      await geh(S, pos, 450); blick(S,false);
+    },
+    async fliegt(sz){ const k=takt(sz.adj);
+      if(sz.d==="mond"){
+        const D=ding("mond",{x:790, y:190}); const S=subjekt(sz.s[0], sz.adj, {x:150});
+        await erscheine(D,S);
+        F.zustand(S.svg,"fliegt"); S.el.classList.add("luft");
+        await bewege(S, bogen(S, 640, 330, 80), 3000*k, "ease-in-out");
+        return;
+      }
+      const D=ding(sz.d,{x:520}); const S=subjekt(sz.s[0], sz.adj, {x:110});
+      await erscheine(D,S);
+      F.zustand(S.svg,"fliegt"); S.el.classList.add("luft");
+      await bewege(S, bogen(S, 880, BODEN, D.hoehe + 120, 20), 3000*k, "ease-in-out");
+      S.el.classList.remove("luft"); F.zustand(S.svg,""); await hop(S,{hoehe:20});
+    },
+    async jagt(sz){ const k=takt(sz.adj);
+      const G=figur(sz.g,{x:520}); const S=subjekt(sz.s[0], sz.adj, {x:180});
+      await erscheine(G,S);
+      G.svg.style.setProperty("--tempo",".28s"); S.svg.style.getPropertyValue("--tempo") || S.svg.style.setProperty("--tempo",".3s");
+      hop(G,{hoehe:40});
+      await wait(250);
+      await Promise.all([geh(G, 1180, 1500), (async()=>{ await wait(250); await geh(S, 1180, 1700*k); })()]);
+      setPos(G, 1180, BODEN); setPos(S, 1180+S.breite, BODEN);
+      await Promise.all([geh(G, 260, 1700), (async()=>{ await wait(300); await geh(S, 560, 1500*k); })()]);
+      blick(G,false); await hop(G,{hoehe:50});
+    }
+  };
+  async function spiele(szene){
+    leere();
+    try{ await SZENE[szene.typ](szene); }catch(e){ console.error(e); }
+  }
+
+  // Schatten: so viele graue Wolken mit „?“, wie Wörter falsch sind – alle gleich
+  function schatten(n){
+    leere();
+    for(let i=0;i<n;i++){
+      const w=document.createElement("div"); w.className="wolke";
+      w.style.left=((i+1)/(n+1)*100)+"%"; w.style.top=(BODEN/7)+"%";
+      w.innerHTML=`<svg viewBox="0 0 140 100"><g fill="#9C95B5" opacity=".75"><circle cx="45" cy="60" r="30"/><circle cx="75" cy="45" r="34"/><circle cx="102" cy="64" r="26"/><rect x="30" y="62" width="88" height="28" rx="14"/></g><text x="72" y="74" text-anchor="middle" font-size="46" font-weight="800" fill="#fff" font-family="Baloo 2,sans-serif">?</text></svg>`;
+      stage.appendChild(w);
+      if(!ruhig) w.animate([{opacity:0,transform:"translate(-50%,-100%) scale(.5)"},{opacity:1,transform:"translate(-50%,-100%) scale(1)",offset:.15},{opacity:1,offset:.75},{opacity:0,transform:"translate(-50%,-120%) scale(1.15)"}],{duration:2600,fill:"forwards"});
+      setTimeout(()=>w.remove(),2700);
+    }
+  }
+
+  // ---------- Satz und Wörter ----------
+  const satzEl=$("satz"), zauberBtn=$("zaubern"), stabBtn=$("stab"), weiterBtn=$("weiter");
+  const gross = t => t[0].toUpperCase()+t.slice(1);
+  const klein = t => t[0].toLowerCase()+t.slice(1);
+  let satz=null, versuche=0, stabAn=false, busy=false;
+  const tippbar = () => satz.woerter.filter(w=>!w.fest);
+  const korrekt = w => w.gross === w.nomen;
+  const zeige = w => w.gross ? gross(w.t) : klein(w.t);
+
+  // Durcheinander: etwa die Hälfte der antippbaren Wörter verhexen (mind. 1), fällige Wörter bevorzugt
+  function verhexe(s){
+    const ws=s.woerter.filter(w=>!w.fest);
+    ws.forEach(w=>w.gross=w.nomen);
+    const n=Math.max(1, Math.round(ws.length*P_FALSCH));
+    const gewicht=w=>Math.random()*(faellig(w.key)?1.6:1)*(w.nomen?1.3:1);
+    ws.map(w=>[gewicht(w),w]).sort((a,b)=>b[0]-a[0]).slice(0,n).forEach(([,w])=>w.gross=!w.nomen);
+  }
+  function zeigeSatz(){
+    satzEl.innerHTML=""; satzEl.classList.remove("fertig","stab");
+    satz.woerter.forEach((w,i)=>{
+      const b=document.createElement(w.fest?"span":"button"); b.className="wort"+(w.fest?" fest":"");
+      b.textContent = w.fest ? w.t : zeige(w); w.el=b;
+      if(!w.fest) b.addEventListener("click",()=>tippe(w));
+      satzEl.appendChild(b);
+    });
+    const p=document.createElement("span"); p.className="wort punkt"; p.textContent="."; satzEl.appendChild(p);
+  }
+  function tippe(w){
+    if(busy) return;
+    if(stabAn){   // Probe: ein/eine davor? – verrät nichts, klappt nicht um
+      stabAn=false; stabBtn.classList.remove("an"); satzEl.classList.remove("stab");
+      const t=klein(w.t); say(`ein ${t}? eine ${t}?`); return;
+    }
+    w.gross=!w.gross; klick();
+    w.el.classList.remove("flip","wackelt"); void w.el.offsetWidth; w.el.classList.add("flip");
+    setTimeout(()=>w.el.textContent=zeige(w),160);
+    const r=w.el.getBoundingClientRect(), sr=stage.getBoundingClientRect();
+  }
+  stabBtn.addEventListener("click",()=>{ stabAn=!stabAn; stabBtn.classList.toggle("an",stabAn); satzEl.classList.toggle("stab",stabAn); });
+
+  // Lösung erklären (nach dem 3. Fehlversuch): falsche Wörter wackeln, Stimme sagt den Grund
+  function erklaere(){
+    const teile=[];
+    satz.woerter.forEach((w,i)=>{
+      if(w.fest || korrekt(w)) return;
+      w.el.classList.add("wackelt");
+      if(w.nomen){ const id=w.id; teile.push(`${Z.ein(id)} ${w.t} – das passt. ${w.t} schreibt man groß.`); }
+      else {
+        const nach=satz.woerter.slice(i+1).find(x=>x.nomen), vor=satz.woerter[i-1];
+        if(nach && satz.woerter[i+1]===nach && vor && !vor.nomen && /e$/.test(w.t)){
+          const art=Z.NOMEN[nach.id].a; teile.push(`${vor.t.toLowerCase()} ${klein(w.t)} ${nach.t} – das Ding ist ${art} ${Z.NOMEN[nach.id].w}. ${klein(w.t)} schreibt man klein.`);
+        } else teile.push(`ein ${klein(w.t)}? Das passt nicht. ${klein(w.t)} schreibt man klein.`);
+      }
+    });
+    say(teile.join(" "));
+  }
+
+  zauberBtn.addEventListener("click", async()=>{
+    if(busy) return;
+    stabAn=false; stabBtn.classList.remove("an"); satzEl.classList.remove("stab");
+    versuche++;
+    const falsch=tippbar().filter(w=>!korrekt(w));
+    if(versuche===1 && !satz.wdh){   // nur der erste Versuch zählt für den Lernstand
+      const je={}; for(const w of tippbar()) je[w.key] = (je[w.key]??true) && korrekt(w);
+      for(const [k,v] of Object.entries(je)) record(k,v);
+      persist();
+      if(wiederholt<WIEDER_MAX){ const k=Object.keys(je).filter(k=>!je[k]); if(k.length) plane(k); }
+    }
+    if(!falsch.length){ gelungen(); return; }
+    if(versuche===1){ glitzer(); schatten(falsch.length); return; }
+    zauberBtn.classList.remove("wackel"); void zauberBtn.offsetWidth; zauberBtn.classList.add("wackel");
+    if(versuche===2){ stabBtn.classList.remove("hide"); return; }
+    erklaere();
+  });
+
+  async function gelungen(){
+    busy=true; satzEl.classList.add("fertig"); zauberBtn.classList.add("hide"); stabBtn.classList.add("hide");
+    satz.woerter.forEach(w=>w.el?.classList.remove("wackelt"));
+    glitzer();
+    say(satz.text);
+    await spiele(satz.szene);
+    await wait(400);
+    weiterBtn.classList.remove("hide"); busy=false;
+  }
+
+  // ---------- Runde: Satzwahl mit Wiedervorlage ----------
+  let runde=[], pos=0, wiederholt=0, benutzt=new Set(), runden=0;
+  const punkte = s => s.woerter.filter(w=>!w.fest).reduce((p,w)=> p + (faellig(w.key) ? (w.nomen?3:1)*(GELERNT-eintrag(w.key).f) : 0), 0);
+  function waehle(dran){
+    const kand=[]; for(let i=0;i<120;i++){ const s=neuerSatz(); if(s && !benutzt.has(s.text) && !save.letzte.includes(s.text)) kand.push(s); }
+    if(!kand.length) return neuerSatz();
+    kand.forEach(s=>s.p=punkte(s)+Math.random());
+    if(dran){ kand.sort((a,b)=>b.p-a.p); return kand[0]; }
+    const sicher=kand.filter(s=>s.woerter.every(w=>w.fest || !w.nomen || !faellig(w.key)));
+    return (sicher.length?sicher:kand.sort((a,b)=>a.p-b.p))[0];
+  }
+  function neueRunde(){
+    benutzt=new Set(); pos=0; wiederholt=0;
+    const nDue=Math.round(RUNDE*ANTEIL_FAELLIG);
+    runde=shuffle(Array.from({length:RUNDE},(_,i)=>i<nDue));
+    runde=runde.map(dran=>({dran}));
+  }
+  // Falsches Wort kommt nach WIEDER_NACH Sätzen in einem anderen Satz wieder (zählt nicht für den Lernstand)
+  function plane(keys){
+    const k = keys.find(k=>!k.startsWith("~")) || keys[0];
+    const s = neuerSatz(x=>x.text!==satz.text && x.woerter.some(w=>!w.fest && w.key===k));
+    if(!s) return;
+    s.wdh=true; wiederholt++;
+    runde.splice(Math.min(pos+1+WIEDER_NACH, runde.length), 0, {satz:s});
+  }
+  function naechster(){
+    if(pos>=runde.length){ return false; }
+    const r=runde[pos]; satz = r.satz || waehle(r.dran); pos++;
+    benutzt.add(satz.text);
+    verhexe(satz); versuche=0; stabAn=false;
+    leere(); zeigeSatz();
+    zauberBtn.classList.remove("hide"); stabBtn.classList.add("hide"); weiterBtn.classList.add("hide");
+    return true;
+  }
+  weiterBtn.addEventListener("click", async()=>{
+    weiterBtn.classList.add("hide");
+    if(!naechster()){
+      save.letzte=[...benutzt].slice(-30); persist();
+      runden++; if(PAUSE_ALLE && runden%PAUSE_ALLE===0) await pause();
+      neueRunde(); naechster();
+    }
+  });
+
+  // ---------- Pausenbild ----------
+  let pausen=[];
+  try{ pausen = await (await fetch("pausenbilder/index.json",{cache:"no-store"})).json(); }catch(e){}
+  if(!Array.isArray(pausen)) pausen=[];
+  function pause(){
+    if(!pausen.length) return Promise.resolve();
+    const c = pausen.length>1 ? pausen.filter(p=>p!==save.pause) : pausen;
+    const p = c[Math.floor(Math.random()*c.length)];
+    save.pause=p; persist();
+    const el=$("pause"), src="pausenbilder/"+p;
+    return new Promise(async res=>{
+      $("pimg").src=src; $("pbg").style.backgroundImage=`url("${src}")`;
+      await $("pimg").decode().catch(()=>{});
+      const sp=$("sparkles"); sp.innerHTML="";
+      for(let i=0;i<14;i++){ const s=document.createElement("span"); s.textContent=["✨","⭐","💖","🌟"][i%4];
+        s.style.left=(5+Math.random()*87)+"%"; s.style.top=(20+Math.random()*75)+"%"; s.style.animationDelay=(Math.random()*5)+"s"; sp.appendChild(s); }
+      el.classList.add("on"); requestAnimationFrame(()=>el.classList.add("show"));
+      $("pweiter").onclick=()=>{ el.classList.remove("show"); setTimeout(()=>{ el.classList.remove("on"); res(); },800); };
+    });
+  }
+
+  // ---------- Elternansicht (?eltern) ----------
+  function elternansicht(){
+    $("start").classList.add("off");
+    const zeile = ([s,e]) => `<li>${s.startsWith("~") ? s.slice(1)+" <small>(klein)</small>" : s}
+      <small>· Fach ${e.f}${e.t?" seit "+e.t:""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`;
+    const alle=Object.keys(save.woerter).map(s=>[s,eintrag(s)]);
+    const gruppe=(titel,l)=>`<h2>${titel} (${l.length})</h2><ul>${l.map(zeile).join("")||"<li>–</li>"}</ul>`;
+    const el=document.createElement("div"); el.className="eltern";
+    el.innerHTML=`<h1>Lernstand Großbuchstaben-Zauberer</h1><p>Bewertet wird nur das erste Zaubern je Satz. Fach 0 = wackelt (zuletzt falsch oder neu), Fach 1–3 = wird gefestigt, ab Fach ${GELERNT} = gelernt.
+      Abstände: ${ABSTAND.join(" / ")} Tage. ${serverOk?"Gespeichert auf dem Server.":"Nur in diesem Browser gespeichert."}</p>`
+      + gruppe("Wackelt", alle.filter(([s,e])=>e.f===0))
+      + gruppe("Wird gefestigt", alle.filter(([s,e])=>e.f>0&&e.f<GELERNT).sort((a,b)=>a[1].f-b[1].f))
+      + gruppe("Gelernt", alle.filter(([s,e])=>e.f>=GELERNT))
+      + `<p><a class="btn mint" href="grossbuchstaben.html">Zum Spiel</a></p>`;
+    document.body.appendChild(el);
+  }
+
+  // ---------- Vorschau einer Szene (?szene=typ) – zum Prüfen, ohne Lernstand ----------
+  if(params.has("szene")){
+    $("start").classList.add("off");
+    const typ=params.get("szene");
+    const s=neuerSatz(x=>x.szene.typ===typ && (!params.get("d")||x.szene.d===params.get("d")) && (!params.get("s")||x.szene.s[0]===params.get("s")), 20000);
+    satz=s; s.woerter.forEach(w=>{ if(!w.fest) w.gross=w.nomen; }); zeigeSatz();
+    zauberBtn.classList.add("hide");
+    await wait(300); spiele(s.szene);
+    return;
+  }
+  if(params.has("eltern")){ elternansicht(); return; }
+  $("go").addEventListener("click",()=>{
+    $("start").classList.add("off");
+    say(" ");   // iOS: Stimme mit der ersten Berührung freischalten
+    neueRunde(); naechster();
+  });
+})();
+</script>
+</body>
+</html>

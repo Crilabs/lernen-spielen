@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Die Perlenbrücke</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --paper:#FFF8FC;--nacht:#3B2A6B;--lila:#B59CFF;--rosa:#FF8ACB;--bead:26px;
+  --sky1:#BFE9FF;--sky2:#E8F8FF;--grass:#7CCB5E;--grass2:#4FA83D;--rock:#8C6D4F}
+:root{--bg:#D9F0FF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#2F2A5A;--nacht:#F6EEFF;--bg:#1F1B45}}
+:root[data-theme="dark"]{--paper:#2F2A5A;--nacht:#F6EEFF;--bg:#1F1B45}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{height:100%;font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;color:var(--nacht);background:var(--bg);overflow-x:hidden;user-select:none}
+.app{min-height:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column}
+.screen{display:none;flex-direction:column;flex:1}.screen.on{display:flex}
+
+/* ---------- Szene ---------- */
+.scene{position:relative;height:300px;overflow:hidden;background:linear-gradient(var(--sky1),var(--sky2) 70%);transition:background 1.2s}
+.scene.s1{--sky1:#BFE9FF;--sky2:#E8F8FF;--grass:#7CCB5E;--grass2:#4FA83D}
+.scene.s2{--sky1:#FFD29C;--sky2:#FFF1D6;--grass:#B9D96B;--grass2:#7FA83B}
+.scene.s3{--sky1:#C7B8FF;--sky2:#FFD5EE;--grass:#8FD4C1;--grass2:#4BA88D}
+.scene.s4{--sky1:#2B2A6B;--sky2:#6B4FA8;--grass:#3F7A5A;--grass2:#2C5A40}
+.scene.s5{--sky1:#FFB3C8;--sky2:#FFF0F5;--grass:#A5E3A0;--grass2:#5FBF60}
+.deco{position:absolute;font-size:34px;pointer-events:none;opacity:.9}
+.deco.cloud{animation:drift 30s linear infinite}
+@keyframes drift{from{transform:translateX(-80px)}to{transform:translateX(520px)}}
+.cliff{position:absolute;bottom:0;height:120px;background:linear-gradient(var(--grass) 0 18px,var(--grass2) 18px 34px,var(--rock) 34px);border-radius:18px 18px 0 0;transition:background .8s}
+.cliff.l{left:0;right:calc(50% + var(--gapw)/2)}
+.cliff.r{right:0;left:calc(50% + var(--gapw)/2)}
+.gap{position:absolute;bottom:0;left:calc(50% - var(--gapw)/2);width:var(--gapw);height:120px}
+.slots{position:absolute;left:0;right:0;top:0;height:var(--bead);display:flex;gap:2px;padding:0 1px}
+.slots i{flex:1;border-radius:50%;border:2px dashed rgba(255,255,255,.75);background:rgba(0,0,0,.08)}
+.slots i.five{border-color:rgba(255,255,255,.95);background:rgba(255,255,255,.28)}
+.fiveline{position:absolute;top:-6px;height:calc(var(--bead) + 12px);width:3px;background:rgba(255,255,255,.85);border-radius:2px;left:calc(5*(var(--bead) + 2px) + 1px);pointer-events:none}
+.placed{position:absolute;left:0;top:0;height:var(--bead);display:flex;gap:2px;padding:0 1px}
+.placed .bar{cursor:pointer}
+.placed .bar.out{animation:out .5s forwards}
+@keyframes out{30%{transform:translateX(-6px) rotate(-6deg)}100%{transform:translateY(-110px) scale(.7);opacity:0}}
+.bar{display:flex;gap:2px}
+.bar b{width:var(--bead);height:var(--bead);border-radius:50%;background:var(--c);box-shadow:inset -3px -4px 0 rgba(0,0,0,.18),inset 3px 3px 0 rgba(255,255,255,.45);border:1px solid rgba(0,0,0,.12)}
+.bar.in{animation:drop .35s cubic-bezier(.2,1.4,.4,1)}
+.placed .bar b{transition:background .7s,box-shadow .7s}
+.placed.merge .bar b{background:var(--sumc)!important;box-shadow:inset -3px -4px 0 rgba(0,0,0,.18),inset 3px 3px 0 rgba(255,255,255,.6),0 0 10px var(--sumc)}
+.placed.merge{animation:mergepulse .8s}
+@keyframes mergepulse{50%{transform:scale(1.08)}}
+.echo{position:absolute;left:50%;top:calc(var(--bead) - 4px);transform:translateX(-50%);display:flex;align-items:center;gap:5px;white-space:nowrap;--bead:18px;z-index:3;pointer-events:none;opacity:0;animation:rise 3s ease-out forwards}
+.echo .op{font-weight:800;font-size:1.4rem;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.3)}
+.echo .bar{filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+@keyframes rise{0%{opacity:0;transform:translate(-50%,0) scale(.8)}15%{opacity:1;transform:translate(-50%,-14px) scale(1)}75%{opacity:1;transform:translate(-50%,-80px) scale(1.1)}100%{opacity:0;transform:translate(-50%,-120px) scale(1.2);filter:blur(2px)}}
+@keyframes drop{from{transform:translateY(-120px) scale(1.2)}}
+.planks{position:absolute;left:-6px;right:-6px;top:calc(var(--bead) + 2px);height:14px;border-radius:8px;background:repeating-linear-gradient(90deg,#C8915A 0 22px,#A9743F 22px 26px);transform:scaleX(0);transition:transform .5s;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+.planks.on{transform:scaleX(1)}
+.rainbow{position:absolute;left:calc(50% - var(--gapw)/2 - 30px);width:calc(var(--gapw) + 60px);bottom:100px;aspect-ratio:2/1;border-radius:999px 999px 0 0;
+  border:9px solid transparent;border-bottom:0;background:linear-gradient(#0000,#0000) padding-box,conic-gradient(from 180deg at 50% 100%,#FF6B6B,#FFD93D,#6BCB77,#4D96FF,#C77DFF,#FF6B6B) border-box;opacity:0;transition:opacity .6s;pointer-events:none}
+.rainbow.on{opacity:.9}
+.uni{position:absolute;bottom:104px;font-size:66px;line-height:1;transform:scaleX(-1);cursor:pointer;z-index:3;filter:drop-shadow(0 6px 4px rgba(0,0,0,.2))}
+.uni.idle{animation:breathe 2.6s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scaleX(-1) translateY(0)}50%{transform:scaleX(-1) translateY(-4px)}}
+.uni.hop{animation:hop .5s}
+@keyframes hop{30%{transform:scaleX(-1) translateY(-26px) rotate(-8deg)}}
+.uni.hm{animation:hm .6s}
+@keyframes hm{25%{transform:scaleX(-1) rotate(-10deg)}75%{transform:scaleX(-1) rotate(8deg)}}
+.bubble{position:absolute;z-index:4;background:#fff;color:#3B2A6B;border-radius:18px;padding:8px 14px;font-weight:800;font-size:1.05rem;opacity:0;transform:translateY(8px);transition:all .3s;white-space:nowrap;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+.bubble::after{content:"";position:absolute;left:18px;bottom:-9px;border:9px solid transparent;border-top-color:#fff;border-bottom:0}
+.bubble.on{opacity:1;transform:translateY(0)}
+.spark{position:absolute;font-size:22px;pointer-events:none;animation:sparkle 1s ease-out forwards;z-index:5}
+@keyframes sparkle{from{opacity:1;transform:translateY(0) scale(.6)}to{opacity:0;transform:translateY(-50px) scale(1.4) rotate(40deg)}}
+.num{position:absolute;left:50%;transform:translateX(-50%);bottom:132px;background:#fff;color:#3B2A6B;border-radius:999px;padding:4px 16px;font-weight:800;font-size:1.5rem;box-shadow:0 4px 0 rgba(0,0,0,.12);z-index:2}
+.topbar{position:absolute;top:8px;left:8px;right:8px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.iconbtn{border:0;background:rgba(255,255,255,.85);border-radius:999px;width:44px;height:44px;font-size:22px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.hint{text-align:center;font-weight:800;font-size:1.15rem;padding:10px 16px 4px;min-height:2.6em}
+
+/* ---------- Ablage ---------- */
+.tray{display:flex;flex-direction:column;gap:10px;padding:10px 16px 28px;align-items:flex-start}
+.tray .bar{padding:6px 10px 6px 6px;border-radius:999px;background:var(--paper);cursor:pointer;box-shadow:0 5px 0 rgba(59,42,107,.15);transition:transform .1s,opacity .3s;align-items:center}
+.tray .bar:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(59,42,107,.15)}
+.tray .bar.no{animation:shake .45s;opacity:.5}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.tray .bar span{font-weight:800;font-size:1rem;margin-left:8px;opacity:.75}
+
+/* ---------- Perlenkarte ---------- */
+.karte{padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--paper);min-height:100%}
+.karte h1{font-size:1.8rem}
+.karte .lead{font-weight:600;line-height:1.3}
+.row{display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:16px;background:rgba(0,0,0,.04)}
+.row .n{font-weight:800;font-size:1.6rem;width:34px;text-align:center}
+.pairs{display:flex;flex-wrap:wrap;gap:8px 14px}
+.pair{display:flex;gap:4px;align-items:center;--bead:14px}
+.pair.learned{filter:none}.pair.seen{opacity:.55}.pair.new{opacity:.22;filter:grayscale(1)}
+.pair small{font-weight:800;font-size:.8rem;margin-left:4px}
+.btn{border:0;border-radius:999px;padding:14px 26px;font:800 1.15rem "Baloo 2",sans-serif;color:#fff;background:var(--lila);cursor:pointer;box-shadow:0 6px 0 #7A5FD1;align-self:center}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 #7A5FD1}
+.foot{font-size:.85rem;opacity:.7;text-align:center}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="screen on" id="spiel">
+    <div class="scene s1" id="scene">
+      <div class="topbar"><div style="display:flex;gap:8px"><a class="iconbtn" href="index.html" title="Alle Spiele" style="display:flex;align-items:center;justify-content:center;text-decoration:none">🏠</a><button class="iconbtn" id="toKarte" title="Perlenkarte">🗺️</button></div><button class="iconbtn" id="snd" title="Ton">🔊</button></div>
+      <div class="rainbow" id="rainbow"></div>
+      <div class="cliff l"></div><div class="cliff r"></div>
+      <div class="gap" id="gap"><div class="slots" id="slots"></div><div class="placed" id="placed"></div><div class="planks" id="planks"></div></div>
+      <div class="num" id="num">7</div>
+      <div class="uni idle" id="uni">🦄</div>
+      <div class="bubble" id="bubble"></div>
+    </div>
+    <div class="hint" id="hint"></div>
+    <div class="tray" id="tray"></div>
+  </section>
+
+  <section class="screen" id="karte">
+    <div class="karte">
+      <h1>Perlenkarte</h1>
+      <p class="lead" id="karteText"></p>
+      <div id="karteRows"></div>
+      <button class="btn" id="back">Zurück zur Brücke</button>
+      <p class="foot" id="savedNote"></p>
+    </div>
+  </section>
+</div>
+
+<script>
+(async function(){
+  // ---------- Montessori-Perlenfarben ----------
+  const COLOR = {1:"#E53935",2:"#43A047",3:"#F48FB1",4:"#FDD835",5:"#64B5F6",6:"#9C27B0",7:"#FFFFFF",8:"#8D6E63",9:"#1E3A8A",10:"#F9A825"};
+  const FAST_MS = 8000;      // "schnell" = Brücke in unter 8 s
+  const NEED_RUNS = 2;       // gelernt = die letzten 2 Versuche fehlerfrei und schnell
+  const START_MAX = 5;       // anfangs Zahlen 2–5, weitere werden freigeschaltet
+  const OVERUSE = 20;        // eine Kombination (z. B. 3+3) wird erst ausgeblendet, wenn sie so oft gebaut wurde und andere Wege der Zahl noch fehlen
+  const CHEERS = ["Juhu!","Danke!","Perfekt gebaut!","Da bin ich!","Hui, das hält!","Super Brücke!","Weiter geht's!"];
+  const HMS = ["Hm, das passt nicht…","Zu lang!","Die ist zu groß.","Das klemmt."];
+  const TAPS = ["Hihi!","Bau mir eine Brücke!","Ich warte hier.","Kitzelt!","Pfff!"];
+
+  const $ = id=>document.getElementById(id);
+
+  // ---------- Speichern ----------
+  let save = {reise:0, pairs:{}};
+  let serverOk=false;
+  try{ const r=await fetch("bruecke-save.php",{cache:"no-store"}); if(r.ok){ const j=await r.json(); if(j&&j.pairs) save=j; serverOk=true; } }catch(e){}
+  if(!serverOk){ try{ const s=localStorage.getItem("perlenbruecke"); if(s) save=JSON.parse(s); }catch(e){} }
+  let saveTimer=null;
+  function persist(){
+    try{ localStorage.setItem("perlenbruecke", JSON.stringify(save)); }catch(e){}
+    if(!serverOk) return;
+    clearTimeout(saveTimer);
+    saveTimer=setTimeout(()=>fetch("bruecke-save.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(save)}).catch(()=>{}),300);
+  }
+  $("savedNote").textContent = serverOk ? "Fortschritt wird auf dem Server gespeichert." : "Fortschritt wird auf diesem Gerät gespeichert.";
+
+  // ---------- Töne ----------
+  let ctx=null, sound=true;
+  function tone(freqs,dur=0.12,type="sine"){ if(!sound) return;
+    try{ ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
+      freqs.forEach((f,i)=>{ const o=ctx.createOscillator(),g=ctx.createGain(); o.type=type; o.frequency.value=f; const t=ctx.currentTime+i*dur;
+        g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.2,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+        o.connect(g).connect(ctx.destination); o.start(t); o.stop(t+dur+0.05); }); }catch(e){} }
+  const sfx={ drop:()=>tone([392],0.08), fit:()=>tone([523,659],0.1), no:()=>tone([200,160],0.15,"triangle"),
+    cross:()=>tone([523,587,659,784,880,1047],0.11), trot:()=>tone([330],0.05,"triangle"), tap:()=>tone([660,880],0.07) };
+  $("snd").addEventListener("click",()=>{ sound=!sound; $("snd").textContent=sound?"🔊":"🔇"; });
+
+  // ---------- Lernstand ----------
+  // Alle Zerlegungen in zwei Teile: n = a + b mit 1 <= a <= b
+  const ALL=[]; for(let n=2;n<=10;n++) for(let a=1;a<=n/2;a++) ALL.push({n,a,b:n-a,key:`${n}:${a}+${n-a}`});
+  const hist = p => (save.pairs[p.key]&&save.pairs[p.key].h)||[];
+  const learned = p => { const h=hist(p); return h.length>=NEED_RUNS && h.slice(-NEED_RUNS).every(x=>x.e===0 && x.t<=FAST_MS); };
+  const count = p => (save.pairs[p.key]&&save.pairs[p.key].c)||0;
+  function record(p,errors,ms){ const e=save.pairs[p.key]||(save.pairs[p.key]={h:[],c:0}); e.h.push({e:errors,t:ms}); if(e.h.length>6) e.h.shift(); e.c=(e.c||0)+1; persist(); }
+  function maxN(){ // nächste Zahl kommt dazu, sobald 60 % der Zerlegungen bis dahin gelernt sind
+    let m=START_MAX;
+    while(m<10){ const ps=ALL.filter(p=>p.n<=m); if(ps.filter(learned).length>=Math.ceil(ps.length*0.6)) m++; else break; }
+    return m;
+  }
+  let lastKey=null;
+  function choosePair(){
+    const m=maxN(); const cands=ALL.filter(p=>p.n<=m && p.key!==lastKey);
+    // Gewichtung: nie gesehen 4, angefangen 3, gelernt 0.6 (zum Wiederholen)
+    const w=cands.map(p=>hist(p).length===0?4: learned(p)?0.6:3);
+    let r=Math.random()*w.reduce((s,x)=>s+x,0); for(let i=0;i<cands.length;i++){ r-=w[i]; if(r<=0) return cands[i]; }
+    return cands[cands.length-1];
+  }
+  // Ablage: die ganze Perlentreppe 1 bis n-1. Nur eine Kombination, die schon OVERUSE-mal gebaut wurde,
+  // wird ausgeblendet – und auch nur, solange für diese Zahl noch andere Wege ungelernt sind.
+  function buildTray(p,preplaced){
+    const pairsN=ALL.filter(q=>q.n===p.n);
+    const hidden=new Set();
+    if(pairsN.some(q=>!learned(q))) pairsN.forEach(q=>{ if(count(q)>=OVERUSE && learned(q) && q.a!==preplaced && q.b!==preplaced){ hidden.add(q.a); hidden.add(q.b); } });
+    const bars=[]; for(let x=1;x<p.n;x++) if(!hidden.has(x)) bars.push(x);
+    return bars;
+  }
+  const pairOf = (n,a,b) => ALL.find(q=>q.n===n && q.a===Math.min(a,b) && q.b===Math.max(a,b));
+
+  // ---------- Szene ----------
+  let cur=null, placed=[], errors=0, t0=0, busy=false, preplaced=0, crossings=0;
+  const beadPx = Math.min(28, Math.floor((Math.min(window.innerWidth,520)-130)/10));
+  document.documentElement.style.setProperty("--bead",beadPx+"px");
+  const gapW = n => n*(beadPx+2)+2;
+  function barEl(len,cls){ const d=document.createElement("div"); d.className="bar "+(cls||""); d.style.setProperty("--c",COLOR[len]);
+    for(let i=0;i<len;i++) d.appendChild(document.createElement("b")); return d; }
+  function bubble(txt,ms=1500){ const b=$("bubble"); b.textContent=txt; const u=$("uni");
+    b.style.left=(u.offsetLeft+6)+"px"; b.style.bottom=(u.offsetHeight+112)+"px"; b.classList.add("on"); clearTimeout(bubble.t); bubble.t=setTimeout(()=>b.classList.remove("on"),ms); }
+  function sparkles(x,y,n=8){ const sc=$("scene"); const E=["✨","⭐","💖","🌟"];
+    for(let i=0;i<n;i++){ const s=document.createElement("span"); s.className="spark"; s.textContent=E[i%E.length];
+      s.style.left=(x+(Math.random()-.5)*90)+"px"; s.style.top=(y+(Math.random()-.5)*50)+"px"; s.style.animationDelay=(Math.random()*.3)+"s"; sc.appendChild(s); setTimeout(()=>s.remove(),1500); } }
+  function decorate(){ const sc=$("scene"); sc.querySelectorAll(".deco").forEach(d=>d.remove());
+    const k=(crossings%5)+1; sc.className="scene s"+k;
+    const sets={1:["☀️","☁️","🌼"],2:["🌅","🦋","🌻"],3:["🌈","🐝","🌷"],4:["🌙","⭐","🦉"],5:["🌸","🐞","🌺"]}[k];
+    const pos=[[20,18],[300,26],[420,70]];
+    sets.forEach((e,i)=>{ const d=document.createElement("div"); d.className="deco"+(i===1?" cloud":""); d.textContent=e; d.style.left=pos[i][0]+"px"; d.style.top=pos[i][1]+"px"; sc.appendChild(d); }); }
+
+  function placeUnicornLeft(){ const u=$("uni"); u.getAnimations().forEach(a=>a.cancel()); u.style.transition="none"; u.style.left=`calc(50% - ${gapW(cur.n)/2}px - 76px)`; u.style.transform=""; u.className="uni idle"; }
+
+  function newBridge(){
+    cur=choosePair(); lastKey=cur.key; placed=[]; errors=0; busy=false;
+    preplaced = (hist(cur).length>=1 && Math.random()<0.6) ? (Math.random()<0.5?cur.a:cur.b) : 0;   // Ergänzen-Modus
+    document.documentElement.style.setProperty("--gapw",gapW(cur.n)+"px");
+    $("num").textContent=cur.n;
+    const sl=$("slots"); sl.innerHTML=""; for(let i=0;i<cur.n;i++){ const e=document.createElement("i"); if(i>=5) e.className="five"; sl.appendChild(e); }
+    $("gap").querySelectorAll(".fiveline").forEach(e=>e.remove()); if(cur.n>5){ const fl=document.createElement("div"); fl.className="fiveline"; $("gap").appendChild(fl); }
+    $("placed").innerHTML=""; $("placed").classList.remove("merge"); $("gap").querySelectorAll(".echo").forEach(e=>e.remove()); $("planks").classList.remove("on"); $("rainbow").classList.remove("on");
+    decorate(); placeUnicornLeft();
+    const tray=$("tray"); tray.innerHTML="";
+    buildTray(cur,preplaced).forEach(len=>{ const b=barEl(len); const s=document.createElement("span"); s.textContent=len; b.appendChild(s); b.addEventListener("click",()=>put(len,b)); tray.appendChild(b); });
+    if(preplaced){ placed.push(preplaced); $("placed").appendChild(barEl(preplaced,"in")); $("hint").textContent=`Ein Stäbchen liegt schon da. Welches füllt die ${cur.n} genau auf?`; }
+    else $("hint").textContent=`Baue die Brücke über die ${cur.n} – mit zwei Stäbchen.`;
+    t0=Date.now();
+  }
+
+  function put(len,btn){
+    if(busy) return;
+    const sum=placed.reduce((s,x)=>s+x,0);
+    if(sum+len>cur.n){ errors++; sfx.no(); btn.classList.add("no"); setTimeout(()=>btn.classList.remove("no"),500);
+      $("uni").className="uni hm"; setTimeout(()=>$("uni").className="uni idle",650); bubble(HMS[Math.floor(Math.random()*HMS.length)]); return; }
+    const el=barEl(len,"in"); placed.push(len); $("placed").appendChild(el); sfx.drop();
+    if(placed.length<2){
+      // Zurücknehmen durch Antippen
+      el.addEventListener("click",()=>{ if(busy||placed.length!==1||len===preplaced) return; takeBack(el,btn,len,false); });
+      // Geht es mit diesem Stäbchen überhaupt weiter? Sonst rutscht es nach kurzem Moment zurück.
+      const rest=cur.n-len, fits=[...$("tray").querySelectorAll(".bar")].some(b=>+b.querySelector("span").textContent===rest);
+      if(!fits){ busy=true; setTimeout(()=>{ errors++; sfx.no(); $("uni").className="uni hm"; setTimeout(()=>$("uni").className="uni idle",650);
+        bubble("Damit geht es nicht weiter!",1600); takeBack(el,btn,len,true); busy=false; },1000); }
+      return;
+    }
+    if(sum+len===cur.n){ cross(); }
+    else{ // zwei Stäbchen, aber Lücke bleibt: Brücke sackt weg, Stäbchen kommen zurück
+      errors++; busy=true; sfx.no(); bubble("Da ist noch ein Loch!",1600);
+      setTimeout(()=>{ placed=preplaced?[preplaced]:[]; $("placed").innerHTML=""; if(preplaced) $("placed").appendChild(barEl(preplaced));
+        busy=false; },900);
+    }
+  }
+
+  function takeBack(el,btn,len,anim){ const i=placed.lastIndexOf(len); if(i>=0) placed.splice(i,1); if(anim){ el.classList.add("out"); setTimeout(()=>el.remove(),500); } else { el.remove(); sfx.drop(); } }
+
+  function cross(){
+    busy=true; const ms=Date.now()-t0; record(pairOf(cur.n,placed[0],placed[1]),errors,ms);
+    $("planks").classList.add("on"); sfx.fit();
+    const a=placed[0], b=placed[1];
+    // Die beiden Stäbchen verschmelzen zur Farbe der Zahl
+    setTimeout(()=>{ $("placed").style.setProperty("--sumc",COLOR[cur.n]); $("placed").classList.add("merge"); tone(cur.n===10?[784,988,1319]:[659,784],0.12);
+      const g=$("gap").getBoundingClientRect(), sc=$("scene").getBoundingClientRect(); sparkles(g.left-sc.left+g.width/2,g.top-sc.top+10,cur.n===10?10:5); },600);
+    // Nach dem Überqueren steigt die Lösung dezent aus der Brücke auf und verblasst
+    const echo=()=>{ const f=document.createElement("div"); f.className="echo";
+      [barEl(a),Object.assign(document.createElement("span"),{className:"op",textContent:"+"}),barEl(b)].forEach(el=>f.appendChild(el));
+      $("gap").appendChild(f); setTimeout(()=>f.remove(),3100); };
+    const u=$("uni"); const dist=gapW(cur.n)+150;
+    setTimeout(()=>{
+      $("rainbow").classList.add("on"); sfx.cross(); bubble(CHEERS[Math.floor(Math.random()*CHEERS.length)],1800);
+      u.className="uni";
+      const steps=8, dur=1900;
+      u.animate([{transform:"scaleX(-1) translate(0,0)"},...Array.from({length:steps},(_,i)=>({transform:`scaleX(-1) translate(${-dist*(i+1)/steps}px,${i%2?-14:0}px)`}))],{duration:dur,easing:"ease-in-out",fill:"forwards"});
+      let i=0; const tr=setInterval(()=>{ sfx.trot(); const r=u.getBoundingClientRect(), s=$("scene").getBoundingClientRect(); sparkles(r.left-s.left+30,r.top-s.top+30,2); if(++i>=steps) clearInterval(tr); },dur/steps);
+      setTimeout(echo, dur-200);
+      setTimeout(async()=>{ crossings++; save.reise++;
+        if(!save.nextEvent) save.nextEvent=save.reise+10+Math.floor(Math.random()*11);
+        if(save.reise>=save.nextEvent){ save.nextEvent=save.reise+10+Math.floor(Math.random()*11); persist(); await surprise(); }
+        persist(); $("scene").style.opacity=0; setTimeout(()=>{ newBridge(); $("scene").style.opacity=1; },400); }, dur+2600);
+    }, 1700);
+  }
+  $("scene").style.transition="opacity .4s";
+
+  // ---------- Überraschungen ----------
+  const wait = ms => new Promise(r=>setTimeout(r,ms));
+  function talk(el,txt,ms){ const b=document.createElement("div"); b.className="bubble on"; b.textContent=txt; b.style.left=(el.offsetLeft-10)+"px"; b.style.bottom=(el.offsetHeight+112)+"px"; $("scene").appendChild(b); setTimeout(()=>b.remove(),ms); }
+  const SURPRISES = [
+    async function besuch(){ // ein Tier kommt vorbei, kurzes Gespräch
+      const u=$("uni"); const T=[["🦊","Hallo Fuchs!","Schöne Brücke, Einhorn!","Danke, die hab ich gebaut!","Bis bald! 🦊"],
+        ["🐸","Quak! Darf ich mit?","Klar, spring auf!","Juhu, ich reite mit!","Hopp!"],["🦉","Huhu, Einhorn!","Huhu, Eule!","Du baust so schnell!","Mit Perlen geht alles!"],
+        ["🐇","Hoppel hoppel!","Hallo Hase!","Hast du eine Möhre?","Nein, nur Perlen!"]][Math.floor(Math.random()*4)];
+      const g=document.createElement("div"); g.className="uni"; g.textContent=T[0]; g.style.transform="none"; g.style.left="calc(100% + 10px)"; g.style.fontSize="52px"; $("scene").appendChild(g);
+      g.animate([{left:"calc(100% + 10px)"},{left:"calc(100% - 130px)"}],{duration:1200,fill:"forwards",easing:"ease-out"}); tone([659,784],0.1);
+      await wait(1300); talk(g,T[1],1700); await wait(1800); talk(u,T[2],1700); await wait(1800); talk(g,T[3],1700); await wait(1800); talk(u,T[4],1500); await wait(1200);
+      g.animate([{left:"calc(100% - 130px)"},{left:"calc(100% + 10px)"}],{duration:900,fill:"forwards"}); await wait(900); g.remove(); },
+    async function regenbogen(){ // Einhorn läuft über einen großen Regenbogen davon
+      const u=$("uni"); const rb=document.createElement("div"); rb.className="rainbow on"; rb.style.left="-40px"; rb.style.width="calc(100% + 80px)"; rb.style.bottom="60px"; rb.style.opacity=0; $("scene").appendChild(rb);
+      rb.animate([{opacity:0},{opacity:.95}],{duration:800,fill:"forwards"}); bubble("Ein Regenbogen! Da lauf ich drüber!",1800); tone([523,659,784,1047],0.12); await wait(1400);
+      const x0=u.offsetLeft; const W=$("scene").clientWidth;
+      u.animate([{transform:"scaleX(-1) translate(0,0)"},{transform:`scaleX(-1) translate(${-(W/2-x0-30)}px,-150px)`},{transform:`scaleX(-1) translate(${-(W-x0+80)}px,-20px)`}],{duration:2600,easing:"ease-in-out",fill:"forwards"});
+      for(let i=0;i<10;i++){ await wait(230); const r=u.getBoundingClientRect(), sc=$("scene").getBoundingClientRect(); sparkles(r.left-sc.left+30,r.top-sc.top+30,2); if(i%3==0) sfx.trot(); }
+      await wait(400); rb.remove(); },
+    async function tanz(){ // kleiner Freudentanz mit Blumenregen
+      const u=$("uni"); bubble("Lust auf einen Tanz?",1500); tone([523,659,523,659,784],0.1);
+      const F=["🌸","🌼","🌷","🌺","💮"]; for(let i=0;i<26;i++){ const f=document.createElement("span"); f.className="spark"; f.textContent=F[i%5]; f.style.left=(Math.random()*100)+"%"; f.style.top="-30px";
+        f.style.animation="none"; $("scene").appendChild(f); f.animate([{transform:"translateY(0) rotate(0)"},{transform:"translateY(320px) rotate(360deg)"}],{duration:2500+Math.random()*1500,delay:i*90,fill:"forwards",easing:"ease-in"}); setTimeout(()=>f.remove(),5000); }
+      u.animate([{transform:"scaleX(-1) rotate(0)"},{transform:"scaleX(-1) translateY(-30px) rotate(-15deg)"},{transform:"scaleX(-1) rotate(0)"},{transform:"scaleX(-1) translateY(-30px) rotate(15deg)"},{transform:"scaleX(-1) rotate(0)"},{transform:"scaleX(-1) translateY(-40px) rotate(360deg)"},{transform:"scaleX(-1) rotate(0)"}],{duration:3000,easing:"ease-in-out"});
+      for(let i=0;i<6;i++){ await wait(500); tone([392+i*60],0.08); } bubble("Das war schön!",1400); await wait(1500); },
+    async function sternschnuppe(){ // Sternschnuppen über dem Himmel
+      bubble("Schau, Sternschnuppen! Wünsch dir was!",2200);
+      for(let i=0;i<4;i++){ const st=document.createElement("span"); st.className="spark"; st.textContent="🌠"; st.style.animation="none"; st.style.fontSize="30px"; st.style.left="100%"; st.style.top=(10+Math.random()*60)+"px"; $("scene").appendChild(st);
+        st.animate([{transform:"translate(0,0)",opacity:1},{transform:"translate(-560px,120px)",opacity:0}],{duration:1500,fill:"forwards",easing:"ease-out"}); tone([1319,988],0.1); setTimeout(()=>st.remove(),1600); await wait(700); }
+      await wait(1500); }
+  ];
+  async function surprise(){ busy=true; try{ await SURPRISES[Math.floor(Math.random()*SURPRISES.length)](); }catch(e){} }
+
+  $("uni").addEventListener("click",()=>{ if(busy) return; sfx.tap(); const u=$("uni"); u.className="uni hop"; setTimeout(()=>u.className="uni idle",550);
+    const r=u.getBoundingClientRect(), s=$("scene").getBoundingClientRect(); sparkles(r.left-s.left+30,r.top-s.top+20,5); bubble(TAPS[Math.floor(Math.random()*TAPS.length)],1200); });
+
+  // ---------- Perlenkarte ----------
+  function renderKarte(){
+    const rows=$("karteRows"); rows.innerHTML=""; const m=maxN();
+    for(let n=2;n<=10;n++){ const row=document.createElement("div"); row.className="row"; row.style.opacity = n<=m?1:.35;
+      const nn=document.createElement("div"); nn.className="n"; nn.textContent=n; row.appendChild(nn);
+      const ps=document.createElement("div"); ps.className="pairs";
+      ALL.filter(p=>p.n===n).forEach(p=>{ const d=document.createElement("div"); d.className="pair "+(learned(p)?"learned":hist(p).length?"seen":"new");
+        d.appendChild(barEl(p.a)); d.appendChild(barEl(p.b)); const s=document.createElement("small"); s.textContent=`${p.a}+${p.b}`; d.appendChild(s); ps.appendChild(d); });
+      row.appendChild(ps); rows.appendChild(row); }
+    const L=ALL.filter(learned).length;
+    $("karteText").textContent=`${L} von ${ALL.length} Zerlegungen sitzen (fehlerfrei und schnell, zweimal in Folge). Gerade geübt werden die Zahlen 2 bis ${m}. Brücken bisher: ${save.reise}.`;
+  }
+  $("toKarte").addEventListener("click",()=>{ renderKarte(); $("spiel").classList.remove("on"); $("karte").classList.add("on"); });
+  $("back").addEventListener("click",()=>{ $("karte").classList.remove("on"); $("spiel").classList.add("on"); });
+
+  crossings=save.reise||0;
+  newBridge();
+})();
+</script>
+</body>
+</html>

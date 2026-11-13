@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Wimmelbild-Detektiv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--nacht:#3B2A6B;--paper:#FFF8FC;--bg:#D8F3FF;--lila:#B59CFF;--rosa:#FF8ACB;--mint:#7FE8C8;--sonne:#FFD95A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}}
+:root[data-theme="dark"]{--nacht:#F6EEFF;--paper:#2F2A5A;--bg:#1F1B45}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{font-family:"Baloo 2","Comic Sans MS","Arial Rounded MT Bold",sans-serif;color:var(--nacht);background:var(--bg);
+  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none}
+.app{position:fixed;inset:0;display:flex;flex-direction:column;
+  padding:calc(env(safe-area-inset-top,0px) + 6px) calc(env(safe-area-inset-right,0px) + 8px) env(safe-area-inset-bottom,0px) calc(env(safe-area-inset-left,0px) + 8px)}
+.stage{position:relative;flex:1;min-height:0;width:100%;max-width:640px;margin:0 auto;border-radius:18px;overflow:hidden;background:var(--paper);box-shadow:0 6px 0 rgba(59,42,107,.15)}
+.stage.shake{animation:shake .5s}
+@keyframes shake{0%,100%{transform:none}15%{transform:translateX(-14px) rotate(-1.5deg)}35%{transform:translateX(12px) rotate(1.2deg)}55%{transform:translateX(-8px)}75%{transform:translateX(5px)}}
+.world{position:absolute;left:0;top:0;transform-origin:0 0;--s:1}
+.world.pan{transition:transform .7s cubic-bezier(.45,.05,.3,1)}
+.world img{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.world svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.world svg polygon.chk{fill:rgba(255,138,203,.18);stroke:#FF2E9A;stroke-width:2px;vector-effect:non-scaling-stroke}
+.world svg polygon.hint{fill:rgba(255,217,90,.25);stroke:#FFD95A;stroke-width:4px;vector-effect:non-scaling-stroke;animation:hint 1.4s ease-out forwards}
+@keyframes hint{0%,60%{opacity:1}100%{opacity:0}}
+.world svg text{font:800 2.6px "Baloo 2",sans-serif;fill:#fff;stroke:#3B2A6B;stroke-width:.5px;paint-order:stroke;text-anchor:middle}
+.piece{position:absolute;inset:0;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.45))}
+.piece i{position:absolute;inset:0;background-size:100% 100%}
+.tag{position:absolute;transform:translate(-50%,-100%);background:var(--paper);color:var(--nacht);font-weight:800;font-size:calc(15px / var(--s));line-height:1;
+  padding:.3em .6em .22em;border-radius:999px;white-space:nowrap;box-shadow:0 .15em 0 rgba(59,42,107,.25);pointer-events:none;animation:pop .35s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:translate(-50%,-100%) scale(.3)}}
+.corner{position:absolute;top:8px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,248,252,.88);font-size:21px;
+  display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 3px 0 rgba(59,42,107,.2);z-index:3}
+.corner.l{left:8px}.corner.r{right:8px}
+.bar{position:relative;width:100%;max-width:640px;margin:0 auto;height:112px;flex:none;display:flex;align-items:center;justify-content:center;padding-right:96px}
+.bar.end{padding-right:0}
+.card{border:0;border-radius:20px;padding:14px 26px 10px;font:800 2rem "Baloo 2",sans-serif;letter-spacing:.05em;color:var(--nacht);background:var(--paper);
+  box-shadow:0 6px 0 rgba(59,42,107,.22);touch-action:none;cursor:grab;transition:opacity .25s,transform .25s}
+.card.away{opacity:0}
+.card.hide{opacity:0;transform:scale(.6);pointer-events:none}
+.ghost{position:fixed;z-index:20;pointer-events:none;margin:0;transform:translate(-50%,-50%) scale(1.08);box-shadow:0 12px 22px rgba(59,42,107,.4);transition:none}
+.bin{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:86px;height:86px;border-radius:24px;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;font-size:52px;box-shadow:0 6px 0 rgba(59,42,107,.18)}
+.bin.open{transform:translateY(-50%) scale(1.12);background:#FFF2BF}
+.bin.hide{opacity:0}
+.next{border:0;border-radius:999px;padding:14px 30px;font:800 1.4rem "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 6px 0 #D45A9E}
+.next:active{transform:translateY(4px);box-shadow:0 1px 0 #D45A9E}
+.start{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;
+  background:var(--bg);background-image:radial-gradient(circle at 15% 20%,rgba(255,138,203,.35) 0 90px,transparent 90px),radial-gradient(circle at 85% 15%,rgba(255,217,90,.45) 0 60px,transparent 60px),radial-gradient(circle at 80% 85%,rgba(181,156,255,.45) 0 110px,transparent 110px),radial-gradient(circle at 10% 90%,rgba(127,232,200,.45) 0 70px,transparent 70px)}
+.start.off{display:none}
+.start .big{font-size:96px;line-height:1;animation:float 3s ease-in-out infinite}
+.start h1{font-size:2.2rem;line-height:1.1}
+.start p{font-size:1.15rem;font-weight:600;max-width:30ch}
+.btn{border:0;border-radius:999px;padding:16px 34px;font:800 1.4rem "Baloo 2",sans-serif;color:#fff;background:var(--rosa);box-shadow:0 6px 0 #D45A9E;text-decoration:none}
+.btn.mint{background:var(--mint);color:var(--nacht);box-shadow:0 6px 0 #4FBF9C;font-size:1.1rem;padding:12px 24px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.info{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 12px);transform:translateX(-50%);background:var(--paper);padding:6px 12px;border-radius:12px;font-weight:800;z-index:5}
+.links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.links a{background:var(--paper);color:var(--nacht);border-radius:12px;padding:6px 12px;font-weight:800}
+.pause{position:fixed;inset:0;z-index:25;background:#1F1B45;display:none;overflow:hidden;opacity:0;transition:opacity .8s}
+.pause.on{display:block}.pause.show{opacity:1}
+.pause .pbg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(28px) brightness(.8)}
+.pause img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12) translateY(-2%)}}
+.pause .sparkles span{position:absolute;font-size:22px;opacity:0;animation:glitzer 5s ease-in-out infinite;pointer-events:none}
+@keyframes glitzer{0%{opacity:0;transform:translateY(0) scale(.6)}30%{opacity:.9}100%{opacity:0;transform:translateY(-120px) scale(1.1)}}
+.pweiter{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);opacity:.92}
+.eltern{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--bg);padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 32px;user-select:text;-webkit-user-select:text;touch-action:auto}
+.eltern h1{font-size:1.6rem}.eltern h2{font-size:1.2rem;margin:16px 0 4px}.eltern p{margin:6px 0;font-weight:600;max-width:60ch}
+.eltern ul{list-style:none}.eltern li{background:var(--paper);border-radius:10px;padding:4px 10px;margin:4px 0;font-weight:800}
+.eltern small{font-weight:600;opacity:.75}
+@media (prefers-reduced-motion:reduce){.start .big{animation:none}.world.pan{transition:none}.pause img,.pause .sparkles span{animation:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="stage" id="stage">
+    <div class="world" id="world">
+      <img id="img" alt="">
+      <svg id="svg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+    </div>
+    <a class="corner l" href="index.html" aria-label="Alle Spiele">🏠</a>
+    <button class="corner r" id="snd" aria-label="Ton">🔊</button>
+  </div>
+  <div class="bar" id="bar">
+    <button class="card hide" id="card"></button>
+    <div class="bin hide" id="bin">🗑️</div>
+  </div>
+</div>
+<div class="pause" id="pause">
+  <div class="pbg" id="pbg"></div>
+  <img id="pimg" alt="">
+  <div class="sparkles" id="sparkles"></div>
+  <button class="btn pweiter" id="pweiter">Weiter ›</button>
+</div>
+<div class="start" id="start">
+  <div class="big">🔍</div>
+  <h1>Wimmelbild-Detektiv</h1>
+  <p>Ist das Wort ein Ding? Dann schieb es auf das Ding im Bild. Wenn nicht – ab in den Mülleimer!</p>
+  <button class="btn" id="go">Los geht's!</button>
+  <a class="btn mint" href="index.html">🏠 Alle Spiele</a>
+</div>
+
+<script>
+(async function(){
+  // ---------- Einstellungen ----------
+  const N_NOMEN = 5;        // Nomen je Runde
+  const N_ANDERE = 5;       // Nicht-Nomen je Runde (davon bis zu ANDERE_BILD aus der Liste des Bildes)
+  const ANDERE_BILD = 2;
+  const TOLERANZ = 2;       // Treffer-Rand um das Ding, in % der Bildbreite
+  const LIFT = 60;          // so viele px schwebt das Kärtchen über dem Finger
+  // Wiedervorlage über Tage (Fächer): richtig beim ersten Versuch → ein Fach weiter, Fehler → zurück in Fach 0.
+  // ABSTAND[f] = so viele Tage nach der letzten Beförderung ist ein Wort in Fach f wieder fällig. Ab Fach GELERNT gilt es als gelernt.
+  const ABSTAND = [0, 1, 3, 7, 21];
+  const GELERNT = 4;
+  const ANTEIL_FAELLIG = 0.7;  // so viel der Runde aus fälligen/wackeligen Wörtern, der Rest aus sicheren
+  const WIEDER_NACH = 3;       // ein falsch gelöstes Wort kommt in derselben Runde nach so vielen anderen noch einmal
+  const WIEDER_MAX = 4;        // höchstens so viele Wiederholungen je Runde (damit die Runde kurz bleibt)
+  const AUSSCHNITT_MIN = 35, AUSSCHNITT_MAX = 70;   // Breite des Ausschnitts in % der Bildbreite
+  const PAUSE_ALLE = 1;     // nach so vielen Runden kommt ein Pausenbild (0 = nie)
+  // Nicht-Nomen: keine Wörter, die in GROSSBUCHSTABEN auch Nomen sein könnten (LAUT, WILD, ARM, GELB …)
+  const ALLGEMEIN = [
+    "lacht","rennt","singt","springt","spielt","schläft","malt","liest","schreibt","isst","trinkt","tanzt","klettert","hüpft",
+    "ruft","sucht","findet","baut","kocht","weint","kichert","flüstert","wackelt","rollt","fällt","schaut","hört","kommt","hilft",
+    "klein","groß","schnell","langsam","weich","hart","müde","lustig","fröhlich","leise","warm","kalt","nett","süß","schön",
+    "frech","glatt","dick","dünn","nass","trocken",
+    "und","oder","mit","hier","dort","oft","sehr","auch","unter","über","neben","aber","gern","bald"];
+
+  const $ = id => document.getElementById(id);
+  const pruefen = new URLSearchParams(location.search).has("pruefen");
+  const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+  const wait = ms => new Promise(r=>setTimeout(r,ms));
+  const key = d => d.artikel+" "+d.wort;
+  const rnd = (a,b) => a+Math.random()*(b-a);
+
+  // ---------- Speichern: wimmel.json über wimmel-save.php, Fallback localStorage ----------
+  let save = {woerter:{}, bilder:{}, letztes:""};
+  let serverOk = false;
+  try{ const r=await fetch("wimmel-save.php",{cache:"no-store"}); if(r.ok){ const j=await r.json(); if(j && j.woerter) save=Object.assign(save,j); serverOk=true; } }catch(e){}
+  if(!serverOk){ try{ const s=localStorage.getItem("wimmelbild"); if(s) save=Object.assign(save,JSON.parse(s)); }catch(e){} }
+  if(Array.isArray(save.woerter)) save.woerter={};
+  if(Array.isArray(save.bilder)) save.bilder={};
+  let saveTimer;
+  function persist(){
+    try{ localStorage.setItem("wimmelbild", JSON.stringify(save)); }catch(e){}
+    if(!serverOk) return;
+    clearTimeout(saveTimer);
+    saveTimer=setTimeout(()=>fetch("wimmel-save.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(save)}).catch(()=>{}),300);
+  }
+  // Lernstand je Wort: Nomen als „der Hund“, Nicht-Nomen als „~rennt“.
+  // Eintrag: {f: Fach, t: Tag der letzten Beförderung/Rückstufung "JJJJ-MM-TT", h: letzte 6 Versuche (1/0)}
+  const heute = () => new Date().toLocaleDateString("sv");
+  const tage = (a,b) => a ? Math.round((Date.parse(b)-Date.parse(a))/864e5) : 999;
+  for(const [s,v] of Object.entries(save.woerter)){   // alter Spielstand: nur Liste der Versuche
+    if(Array.isArray(v)) save.woerter[s] = {f: v.length>=2 && v.slice(-2).every(x=>x===1) ? 1 : 0, t:"", h:v};
+  }
+  const wkey = k => k.ding ? key(k.ding) : "~"+k.text;
+  const eintrag = s => save.woerter[s] || {f:0, t:"", h:[]};
+  const faellig = s => { const e=eintrag(s); return e.f===0 || tage(e.t, heute()) >= ABSTAND[Math.min(e.f, ABSTAND.length-1)]; };
+  function record(k, firstTry){
+    const s=wkey(k), e=save.woerter[s]||(save.woerter[s]={f:0,t:"",h:[]});
+    e.h.push(firstTry?1:0); if(e.h.length>6) e.h.shift();
+    if(!firstTry){ e.f=0; e.t=heute(); }
+    else if(faellig(s)){ e.f=Math.min(e.f+1, GELERNT); e.t=heute(); }   // vorzeitig richtig (Wort war nicht fällig): Fach bleibt
+    persist();
+  }
+  // Runde mischen: zuerst fällige Wörter (niedriges Fach zuerst), Rest aus sicheren
+  function mische(liste, keyOf, n){
+    const due=shuffle(liste.filter(x=>faellig(keyOf(x)))).sort((a,b)=>eintrag(keyOf(a)).f-eintrag(keyOf(b)).f);
+    const sicher=shuffle(liste.filter(x=>!faellig(keyOf(x))));
+    const nDue=Math.min(due.length, Math.ceil(n*ANTEIL_FAELLIG));
+    const out=due.slice(0,nDue).concat(sicher.slice(0,n-nDue));
+    return out.concat(due.slice(nDue)).slice(0,n);   // reicht der sichere Rest nicht, mit fälligen auffüllen
+  }
+
+  // ---------- Ton und Stimme ----------
+  let sound = true; try{ sound = localStorage.getItem("wimmelbild-ton")!=="aus"; }catch(e){}
+  const sndBtn=$("snd"); const showSnd=()=>sndBtn.textContent=sound?"🔊":"🔈"; showSnd();
+  sndBtn.addEventListener("click",()=>{ sound=!sound; showSnd(); try{ localStorage.setItem("wimmelbild-ton",sound?"an":"aus"); }catch(e){} if(!sound) window.speechSynthesis?.cancel(); });
+  let actx;
+  function tone(f1,f2,dur,type="sine",vol=.18){ if(!sound) return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    const o=actx.createOscillator(), g=actx.createGain(), t=actx.currentTime; o.type=type;
+    o.frequency.setValueAtTime(f1,t); o.frequency.exponentialRampToValueAtTime(f2,t+dur*.8);
+    g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g).connect(actx.destination); o.start(t); o.stop(t+dur+.02); }catch(e){} }
+  const sfx = {
+    plopp: ()=>tone(520,880,.18),
+    boing: ()=>{ tone(180,420,.12,"triangle",.25); setTimeout(()=>tone(420,140,.28,"triangle",.22),110); },
+    happs: ()=>{ tone(600,200,.15,"square",.08); setTimeout(()=>tone(300,700,.12,"sine",.12),140); }
+  };
+  // Stimme: beste deutsche Systemstimme (Premium > Erweitert > kompakt). Eloquence- und Spaßstimmen von Apple
+  // (Eddy, Flo, Grandma, Reed, Sandy, Shelley, Zarvox …) klingen nach 90er-Synthesizer und fallen raus.
+  // In der Elternansicht (?eltern) lässt sich eine Stimme fest wählen; gilt auf dem Gerät für alle Einhorn-Spiele.
+  const SCHLECHT = /eddy|flo\b|grandma|grandpa|oma|opa|reed|rocko|sandy|shelley|eloquence|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|kathy|ralph|novelty/i;
+  function stimmWert(v){
+    const n=(v.name+" "+v.voiceURI);
+    if(SCHLECHT.test(n)) return -1;
+    let w=0;
+    if(/premium/i.test(n)) w+=40; else if(/enhanced|erweitert|verbessert|natural|neural/i.test(n)) w+=25;
+    if(/google/i.test(n)) w+=15;
+    if(/de[-_]DE/i.test(v.lang)) w+=5;
+    if(/anna|helena|petra|marlene|katja|martin|markus|yannick|viktor/i.test(n)) w+=3;
+    return w;
+  }
+  const deutscheStimmen = () => (window.speechSynthesis?.getVoices()||[]).filter(v=>/^de/i.test(v.lang));
+  // Gespeichert wird Position + Name + Kennung: Safari meldet z. B. zwei „Anna“ (kompakt und Premium) mit gleicher Kennung.
+  // "system" = keine Stimme vorgeben, nur Deutsch – dann wählt iOS (Einstellungen › Gesprochene Inhalte › Stimmen).
+  let voice=null, stimmWahl="";
+  const stimmSchluessel = (v,i) => i+"|"+v.name+"|"+v.voiceURI;
+  function pickVoice(){
+    const vs=deutscheStimmen(); let fest=""; try{ fest=localStorage.getItem("einhorn-stimme")||""; }catch(e){}
+    stimmWahl=fest;
+    if(fest==="system"){ voice=null; return; }
+    const i=vs.findIndex((v,k)=>stimmSchluessel(v,k)===fest);
+    voice = i>=0 ? vs[i] : (vs.filter(v=>stimmWert(v)>=0).sort((a,b)=>stimmWert(b)-stimmWert(a))[0] || null);
+  }
+  if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=()=>{ pickVoice(); window.dispatchEvent(new Event("stimmen")); }; }
+  function say(text){ if(!sound||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="de-DE"; if(voice) u.voice=voice; u.rate=.85; u.pitch=1; speechSynthesis.speak(u); }catch(e){} }
+
+  // ---------- Bilder laden ----------
+  let namen=[]; const bilder={};
+  try{ namen = await (await fetch("bilder/index.json",{cache:"no-store"})).json(); }catch(e){}
+  await Promise.all(namen.map(async n=>{ try{ bilder[n]=await (await fetch(`bilder/${n}.json`,{cache:"no-store"})).json(); }catch(e){} }));
+  namen = namen.filter(n=>bilder[n]);
+  if(!namen.length){ $("start").querySelector("p").textContent="Keine Bilder gefunden (bilder/index.json)."; $("go").remove(); return; }
+
+  function chooseBild(){
+    const forced=new URLSearchParams(location.search).get("bild"); if(forced && bilder[forced]) return forced;
+    // Reihum: das am längsten nicht gespielte Bild (nie gespielte zuerst, in zufälliger Reihenfolge).
+    // Bilder ohne fällige Wörter nur, wenn es keine anderen gibt; nie zweimal dasselbe hintereinander.
+    let c = namen.length>1 ? namen.filter(n=>n!==save.letztes) : namen.slice();
+    const offen = n => bilder[n].dinge.some(d=>faellig(key(d)));
+    if(c.some(offen)) c = c.filter(offen);
+    c = shuffle(c).sort((a,b)=> (save.bilder[a]||0)-(save.bilder[b]||0));
+    return c[0];
+  }
+
+  // ---------- Formen ----------
+  // Ein Bereich ist [x1,y1,x2,y2] in % oder eine Liste von Punkten [[x,y],...] in %.
+  function poly(f){
+    if(typeof f[0]==="number"){ const [x1,y1,x2,y2]=f, cx=(x2-x1)*.25, cy=(y2-y1)*.25;
+      return [[x1+cx,y1],[x2-cx,y1],[x2,y1+cy],[x2,y2-cy],[x2-cx,y2],[x1+cx,y2],[x1,y2-cy],[x1,y1+cy]]; }
+    return f;
+  }
+  function bbox(f){ const p=poly(f), xs=p.map(q=>q[0]), ys=p.map(q=>q[1]); return [Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)]; }
+  const clip = f => "polygon("+poly(f).map(([x,y])=>`${x}% ${y}%`).join(",")+")";
+  const pts = f => poly(f).map(([x,y])=>`${x},${y}`).join(" ");
+  const SVGNS="http://www.w3.org/2000/svg";
+
+  // ---------- Bühne: die „Welt“ (Bild + Umrisse + Schilder) wird verschoben und gezoomt ----------
+  const stage=$("stage"), world=$("world"), img=$("img"), svg=$("svg"), cardEl=$("card"), bin=$("bin"), bar=$("bar");
+  let bild=null, ar=2/3, view=null;   // view: {x,y,w} Ausschnitt in Bild-% (x,w: Breite, y: Höhe)
+  const SW = () => stage.clientWidth, SH = () => stage.clientHeight;
+  function sizeWorld(){ world.style.width=SW()+"px"; world.style.height=(SW()/ar)+"px"; }
+  // Ausschnitt anzeigen: w = Breite in % der Bildbreite; Höhe ergibt sich aus der Bühne
+  function viewH(w){ return w*(SH()/SW())*ar; }
+  function apply(v, animate){
+    view=v; sizeWorld();
+    const s=100/v.w, tx=-v.x/100*SW()*s, ty=-v.y/100*(SW()/ar)*s;
+    world.classList.toggle("pan",!!animate);
+    world.style.transform=`translate(${tx}px,${ty}px) scale(${s})`; world.style.setProperty("--s",s);
+  }
+  function fullView(){   // ganzes Bild einpassen
+    sizeWorld();
+    const s=Math.min(1, SH()/(SW()/ar)), tx=(SW()-SW()*s)/2, ty=(SH()-SW()/ar*s)/2;
+    view=null; world.classList.add("pan");
+    world.style.transform=`translate(${tx}px,${ty}px) scale(${s})`; world.style.setProperty("--s",s);
+  }
+  // Ausschnitt um ein Ding wählen, Ding nicht immer in der Mitte
+  function viewFor(f){
+    const [x1,y1,x2,y2]=bbox(f), tw=x2-x1, th=y2-y1;
+    let w=Math.min(AUSSCHNITT_MAX, Math.max(AUSSCHNITT_MIN, tw*2.6, th*2.2/((SH()/SW())*ar)));
+    while(viewH(w)>100 && w>10) w-=2;
+    const h=viewH(w), cx=(x1+x2)/2, cy=(y1+y2)/2;
+    const rx=rnd(.28,.72), ry=rnd(.28,.72);
+    const x=Math.min(100-w, Math.max(0, cx-rx*w)), y=Math.min(100-h, Math.max(0, cy-ry*h));
+    return {x,y,w};
+  }
+  function toPct(cx,cy){ const r=world.getBoundingClientRect(); return [(cx-r.left)/r.width*100,(cy-r.top)/r.height*100]; }
+  function overStage(cx,cy){ const r=stage.getBoundingClientRect(); return cx>=r.left&&cx<=r.right&&cy>=r.top&&cy<=r.bottom; }
+  function overBin(cx,cy){ const r=bin.getBoundingClientRect(), m=22; return cx>=r.left-m&&cx<=r.right+m&&cy>=r.top-m&&cy<=r.bottom+m; }
+  function onThing(d,px,py){ return d.formen.some(f=>{ const [x1,y1,x2,y2]=bbox(f); const dx=Math.max(x1-px,0,px-x2), dy=Math.max(y1-py,0,py-y2)/ar; return dx<=TOLERANZ && dy<=TOLERANZ; }); }
+  addEventListener("resize",()=>{ if(view) apply(view,false); else if(bild) fullView(); });
+
+  function hint(d){ for(const f of d.formen){ const p=document.createElementNS(SVGNS,"polygon"); p.setAttribute("points",pts(f)); p.setAttribute("class","hint"); svg.appendChild(p); setTimeout(()=>p.remove(),1500); } }
+
+  // Ding lebendig werden lassen: Ausschnitt des Bildes als Kopie darüber animieren
+  function beleben(d){
+    if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const H=SW()/ar;
+    const art = d.bewegung || ["huepfen","wackeln","wachsen","drehen"][Math.floor(Math.random()*4)];
+    for(const f of d.formen){
+      const [x1,y1,x2,y2]=bbox(f), cx=(x1+x2)/2, cy=(y1+y2)/2, hh=(y2-y1)/100*H;
+      const w=document.createElement("div"); w.className="piece";
+      const i=document.createElement("i"); i.style.backgroundImage=`url("${img.src}")`; i.style.clipPath=i.style.webkitClipPath=clip(f);
+      w.appendChild(i); world.insertBefore(w, svg);
+      w.style.transformOrigin = art==="drehen"||art==="wachsen" ? `${cx}% ${cy}%` : `${cx}% ${y2}%`;
+      const up=Math.max(hh*.35, H*.015);
+      const K = {
+        huepfen:[{transform:"none"},{transform:`translateY(${-up}px) scale(1.08)`,offset:.3},{transform:"none",offset:.55},{transform:`translateY(${-up/2}px)`,offset:.75},{transform:"none"}],
+        wackeln:[{transform:"none"},{transform:"rotate(-10deg) scale(1.12)",offset:.2},{transform:"rotate(9deg) scale(1.12)",offset:.45},{transform:"rotate(-5deg) scale(1.08)",offset:.7},{transform:"none"}],
+        wachsen:[{transform:"none"},{transform:"scale(1.3)",offset:.4},{transform:"scale(1.22)",offset:.6},{transform:"none"}],
+        drehen:[{transform:"none"},{transform:"rotate(180deg) scale(1.25)",offset:.5},{transform:"rotate(360deg)"}]
+      }[art] || [{transform:"none"},{transform:"scale(1.25)"},{transform:"none"}];
+      w.animate(K,{duration:1000,easing:"ease-in-out"}).finished.then(()=>w.remove(),()=>w.remove());
+    }
+  }
+  function tagFor(d){
+    const [x1,y1,x2]=bbox(d.formen[0]);
+    const t=document.createElement("div"); t.className="tag"; t.textContent=key(d);
+    t.style.left=Math.min(85,Math.max(15,(x1+x2)/2))+"%"; t.style.top=Math.max(3,y1)+"%";
+    world.appendChild(t);
+  }
+
+  // ---------- Runde: ein Wort nach dem anderen ----------
+  let karten=[], idx=0, cur=null, busy=true, fehler=0;
+  async function runde(){
+    const name=chooseBild(); bild=bilder[name];
+    save.letztes=name; save.bilder[name]=Date.now(); persist();
+    world.querySelectorAll(".tag,.piece").forEach(e=>e.remove()); svg.innerHTML="";
+    bar.querySelectorAll(".next").forEach(e=>e.remove()); bar.classList.remove("end"); cardEl.style.display="";
+    img.src="bilder/"+bild.bild;
+    await img.decode().catch(()=>{});
+    ar = img.naturalWidth && img.naturalHeight ? img.naturalWidth/img.naturalHeight : 2/3;
+
+    bild.dinge.forEach(d=>d.gefunden=false);
+    const nomen=mische(bild.dinge, key, N_NOMEN);
+    const ausBild=mische(bild.andere||[], w=>"~"+w, ANDERE_BILD);
+    const andere=ausBild.concat(mische(ALLGEMEIN.filter(w=>!ausBild.includes(w)), w=>"~"+w, N_ANDERE-ausBild.length));
+    karten=shuffle([...nomen.map(d=>({text:d.wort, ding:d})), ...andere.map(w=>({text:w, ding:null}))]);
+    idx=0;
+    fullView(); world.classList.remove("pan");
+    await wait(50);
+    bin.classList.remove("hide");
+    zeigeWort();
+  }
+  // Ausschnitt für ein Nicht-Nomen: irgendein Ding, das in dieser Runde nicht gefragt ist
+  function zeigeWort(){
+    cur=karten[idx]; fehler=0;
+    let f;
+    if(cur.ding) f=cur.ding.formen[Math.floor(Math.random()*cur.ding.formen.length)];
+    else { const frei=bild.dinge.filter(d=>!karten.some(k=>k.ding===d)); const d=(frei.length?frei:bild.dinge)[Math.floor(Math.random()*(frei.length||bild.dinge.length))]; f=d.formen[0]; }
+    apply(viewFor(f), true);
+    cardEl.textContent=cur.text.toUpperCase();
+    cardEl.style.fontSize = cur.text.length>11 ? "1.3rem" : cur.text.length>8 ? "1.6rem" : "2rem";
+    cardEl.classList.add("hide");
+    setTimeout(()=>{ cardEl.classList.remove("hide","away"); busy=false; }, 650);
+  }
+  async function weiter(){
+    // Falsch gelöst: dasselbe Wort kommt in dieser Runde noch einmal (zählt dann nicht für den Lernstand)
+    if(fehler>0 && !cur.wdh && karten.filter(k=>k.wdh).length<WIEDER_MAX) karten.splice(Math.min(karten.length, idx+1+WIEDER_NACH), 0, {...cur, wdh:true});
+    idx++;
+    if(idx<karten.length){ await wait(900); zeigeWort(); }
+    else { await wait(1100); aufwachen(); }
+  }
+
+  // ---------- Ziehen ----------
+  let drag=null;
+  cardEl.addEventListener("pointerdown",e=>{
+    if(busy||drag) return;
+    e.preventDefault();
+    const g=cardEl.cloneNode(true); g.removeAttribute("id"); g.classList.add("ghost"); g.classList.remove("hide");
+    g.style.left=e.clientX+"px"; g.style.top=(e.clientY-LIFT)+"px";
+    document.body.appendChild(g); cardEl.classList.add("away");
+    drag={g,id:e.pointerId};
+    try{ cardEl.setPointerCapture(e.pointerId); }catch(_){}
+  });
+  cardEl.addEventListener("pointermove",e=>{
+    if(!drag||e.pointerId!==drag.id) return;
+    const x=e.clientX, y=e.clientY-LIFT;
+    drag.g.style.left=x+"px"; drag.g.style.top=y+"px";
+    bin.classList.toggle("open", overBin(x,y));
+  });
+  cardEl.addEventListener("pointerup",e=>ende(e,false));
+  cardEl.addEventListener("pointercancel",e=>ende(e,true));
+
+  function ende(e,cancel){
+    if(!drag||e.pointerId!==drag.id) return;
+    const g=drag.g; drag=null; bin.classList.remove("open");
+    const x=e.clientX, y=e.clientY-LIFT;
+    if(cancel){ zurueck(g); return; }
+    if(overBin(x,y)){
+      if(cur.ding){ fehler++; ausspucken(g); hilfe(); } // Nomen in den Mülleimer: kommt wieder raus
+      else wegwerfen(g);                                // Nicht-Nomen: Mülleimer schluckt es
+      return;
+    }
+    if(overStage(x,y)){
+      if(!cur.ding){ fehler++; abprallen(g); hilfe(); return; }  // Nicht-Nomen aufs Bild: deutliche Abwehr
+      const [px,py]=toPct(x,y);
+      if(onThing(cur.ding,px,py)){ treffer(g); return; }
+      hint(cur.ding);                                   // Nomen daneben: kein Fehler, nur ein Hinweis
+    }
+    zurueck(g);
+  }
+  // Hilfe-Leiter: 1. Fehler nur das Signal, 2. Fehler die Artikelprobe zum Hören, ab dem 3. die Lösung mit Grund.
+  // Ausführen muss das Kind selbst; ein Wort mit Fehler zählt nicht als gekonnt.
+  function hilfe(){
+    const w=cur.text, W=w[0].toUpperCase()+w.slice(1);
+    // Probe mit „ein/eine“, nicht mit „der“: „der rennt“ geht als Satz („Der rennt schnell.“), „ein rennt“ nicht.
+    if(fehler===2) setTimeout(()=>say(`ein ${w}? eine ${w}? Hör mal, ob das passt.`), 500);
+    else if(fehler>=3){
+      if(cur.ding){ const ein = cur.ding.artikel==="die" ? "eine" : "ein";
+        setTimeout(()=>{ say(`${ein} ${W}. Das passt. ${W} ist ein Ding. Such es im Bild!`); hint(cur.ding); }, 500); }
+      else { setTimeout(()=>{ say(`ein ${w}? Das passt nicht. ${W} ist kein Ding. Ab in den Mülleimer!`);
+        bin.animate([{transform:"translateY(-50%)"},{transform:"translateY(-50%) scale(1.25)",background:"#FFF2BF",offset:.3},{transform:"translateY(-50%)",offset:.6},{transform:"translateY(-50%) scale(1.25)",background:"#FFF2BF",offset:.8},{transform:"translateY(-50%)"}],{duration:1400}); }, 500); }
+    }
+  }
+  function homeOf(){ const r=cardEl.getBoundingClientRect(); return [r.left+r.width/2, r.top+r.height/2]; }
+  function zurueck(g,ms=380,easing="cubic-bezier(.3,.7,.4,1)"){
+    const [hx,hy]=homeOf();
+    g.animate([{left:g.style.left,top:g.style.top},{left:hx+"px",top:hy+"px"}],{duration:ms,easing}).finished.then(()=>{ g.remove(); cardEl.classList.remove("away"); });
+  }
+  function abprallen(g){
+    busy=true; sfx.boing();
+    stage.classList.remove("shake"); void stage.offsetWidth; stage.classList.add("shake");
+    g.animate([{transform:"translate(-50%,-50%) scale(1.08)"},{transform:"translate(-50%,-50%) scale(1.25) rotate(-12deg)",offset:.25},{transform:"translate(-50%,-50%) scale(.95) rotate(8deg)",offset:.55},{transform:"translate(-50%,-50%) scale(1.08)"}],{duration:450});
+    setTimeout(()=>{ zurueck(g,500,"cubic-bezier(.2,1.5,.4,1)"); setTimeout(()=>busy=false,520); }, 380);
+  }
+  function ausspucken(g){
+    busy=true; sfx.boing();
+    const r=bin.getBoundingClientRect();
+    g.style.left=(r.left+r.width/2)+"px"; g.style.top=(r.top+r.height/2)+"px";
+    bin.animate([{transform:"translateY(-50%)"},{transform:"translateY(-50%) rotate(-14deg) scale(1.15)",offset:.3},{transform:"translateY(-50%) rotate(10deg)",offset:.6},{transform:"translateY(-50%)"}],{duration:500});
+    g.animate([{transform:"translate(-50%,-50%) scale(.6)"},{transform:"translate(-50%,-160%) scale(1.15) rotate(-10deg)",offset:.5},{transform:"translate(-50%,-50%) scale(1.08)"}],{duration:450});
+    setTimeout(()=>{ zurueck(g,450,"cubic-bezier(.2,1.4,.4,1)"); setTimeout(()=>busy=false,470); }, 420);
+  }
+  function wegwerfen(g){
+    busy=true; sfx.happs();
+    if(!cur.wdh) record(cur, fehler===0);
+    const r=bin.getBoundingClientRect();
+    g.animate([{left:g.style.left,top:g.style.top,opacity:1,transform:"translate(-50%,-50%) scale(1.08)"},
+               {left:(r.left+r.width/2)+"px",top:(r.top+r.height/2)+"px",opacity:0,transform:"translate(-50%,-50%) scale(.2) rotate(25deg)"}],{duration:350,easing:"ease-in"}).finished.then(()=>g.remove());
+    setTimeout(()=>bin.animate([{transform:"translateY(-50%)"},{transform:"translateY(-50%) scale(1.18,.85)",offset:.4},{transform:"translateY(-50%)"}],{duration:350}),300);
+    cardEl.classList.add("hide"); cardEl.classList.remove("away");
+    weiter();
+  }
+  function treffer(g){
+    busy=true; const d=cur.ding;
+    if(!cur.wdh) record(cur, fehler===0);
+    g.animate([{opacity:1},{opacity:0,transform:"translate(-50%,-50%) scale(.4)"}],{duration:250}).finished.then(()=>g.remove());
+    cardEl.classList.add("hide"); cardEl.classList.remove("away");
+    sfx.plopp(); say(key(d)); if(!d.gefunden) tagFor(d); beleben(d);
+    d.gefunden=true;
+    weiter();
+  }
+
+  // Alle Wörter durch: Bild zoomt heraus und wacht auf
+  async function aufwachen(){
+    bin.classList.add("hide"); bar.classList.add("end"); cardEl.style.display="none";
+    fullView();
+    await wait(900);
+    const gef=[...new Set(karten.filter(k=>k.ding).map(k=>k.ding))];
+    for(const d of gef){ beleben(d); await wait(260); }
+    await wait(900);
+    const n=document.createElement("button"); n.className="next"; n.textContent="Nächstes Bild ›";
+    n.addEventListener("click",async()=>{ n.remove(); runden++; if(PAUSE_ALLE && runden%PAUSE_ALLE===0) await pause(); runde(); }); bar.appendChild(n);
+  }
+
+  // ---------- Pausenbild: einfach etwas Schönes zum Anschauen ----------
+  let runden=0, pausen=[];
+  try{ pausen = await (await fetch("pausenbilder/index.json",{cache:"no-store"})).json(); }catch(e){}
+  if(!Array.isArray(pausen)) pausen=[];
+  function pause(){
+    if(!pausen.length) return Promise.resolve();
+    const c = pausen.length>1 ? pausen.filter(p=>p!==save.pause) : pausen;
+    const p = c[Math.floor(Math.random()*c.length)];
+    save.pause=p; persist();
+    const el=$("pause"), src="pausenbilder/"+p;
+    return new Promise(async res=>{
+      $("pimg").src=src; $("pbg").style.backgroundImage=`url("${src}")`;
+      await $("pimg").decode().catch(()=>{});
+      const sp=$("sparkles"); sp.innerHTML="";
+      for(let i=0;i<14;i++){ const s=document.createElement("span"); s.textContent=["✨","⭐","💖","🌟"][i%4];
+        s.style.left=rnd(5,92)+"%"; s.style.top=rnd(20,95)+"%"; s.style.animationDelay=rnd(0,5)+"s"; sp.appendChild(s); }
+      el.classList.add("on"); requestAnimationFrame(()=>el.classList.add("show"));
+      $("pweiter").onclick=()=>{ el.classList.remove("show"); setTimeout(()=>{ el.classList.remove("on"); res(); },800); };
+    });
+  }
+
+  // ---------- Prüfansicht (?pruefen[&bild=name]) ----------
+  async function pruefansicht(){
+    $("start").classList.add("off");
+    bild=bilder[chooseBild()]; img.src="bilder/"+bild.bild; await img.decode().catch(()=>{});
+    ar=img.naturalWidth/img.naturalHeight; fullView();
+    for(const d of bild.dinge) for(const f of d.formen){
+      const p=document.createElementNS(SVGNS,"polygon"); p.setAttribute("points",pts(f)); p.setAttribute("class","chk"); svg.appendChild(p);
+      const [x1,y1,x2,y2]=bbox(f); const t=document.createElementNS(SVGNS,"text");
+      t.setAttribute("x",(x1+x2)/2); t.setAttribute("y",(y1+y2)/2+1); t.setAttribute("transform-origin",`${(x1+x2)/2} ${(y1+y2)/2}`);
+      t.setAttribute("transform",`scale(1 ${ar})`); t.textContent=d.wort; svg.appendChild(t);
+    }
+    cardEl.remove(); bin.remove();
+    bar.innerHTML=`<div class="links">${namen.map(n=>`<a href="?pruefen&bild=${n}">${n}</a>`).join("")}</div>`;
+    const info=document.createElement("div"); info.className="info"; info.textContent="Tippen zeigt x / y in %"; document.body.appendChild(info);
+    stage.addEventListener("pointerdown",e=>{ const [x,y]=toPct(e.clientX,e.clientY); const d=bild.dinge.find(d=>onThing(d,x,y)); info.textContent=`x ${x.toFixed(1)} · y ${y.toFixed(1)}`+(d?` · ${d.wort}`:""); });
+  }
+
+  // ---------- Elternansicht (?eltern): welche Wörter gerade wackeln. Das Kind sieht davon nichts. ----------
+  function elternansicht(){
+    $("start").classList.add("off");
+    const zeile = ([s,e]) => `<li>${s.startsWith("~") ? s.slice(1)+" <small>(kein Nomen)</small>" : s}
+      <small>· Fach ${e.f}${e.t?" seit "+e.t:""}${faellig(s)&&e.f<GELERNT?" · fällig":""} · zuletzt ${e.h.map(x=>x?"✓":"✗").join("")}</small></li>`;
+    const alle=Object.entries(save.woerter).map(([s,v])=>[s,eintrag(s)]);
+    const gruppe=(titel,l)=>`<h2>${titel} (${l.length})</h2><ul>${l.map(zeile).join("")||"<li>–</li>"}</ul>`;
+    const el=document.createElement("div"); el.className="eltern";
+    el.innerHTML=`<h1>Lernstand Wimmelbild</h1><p>Fach 0 = wackelt (zuletzt falsch oder neu), Fach 1–3 = wird gefestigt, ab Fach ${GELERNT} = gelernt.
+      Abstände: ${ABSTAND.join(" / ")} Tage. ${serverOk?"Gespeichert auf dem Server.":"Nur in diesem Browser gespeichert."}</p>`
+      + gruppe("Wackelt", alle.filter(([s,e])=>e.f===0))
+      + gruppe("Wird gefestigt", alle.filter(([s,e])=>e.f>0&&e.f<GELERNT).sort((a,b)=>a[1].f-b[1].f))
+      + gruppe("Gelernt", alle.filter(([s,e])=>e.f>=GELERNT))
+      + `<h2>Stimme auf diesem Gerät</h2>
+      <p>Bessere Stimmen: Einstellungen › Bedienungshilfen › Gesprochene Inhalte › Stimmen › Deutsch – dort z. B. „Anna (Premium)“ oder
+      „Helena (Erweitert)“ laden, dann diese Seite neu öffnen. Gilt für alle Einhorn-Spiele auf diesem Gerät.</p><ul id="stimmen"></ul>`
+      + `<p><a class="btn mint" href="wimmelbild.html">Zum Spiel</a></p>`;
+    document.body.appendChild(el);
+    const liste=el.querySelector("#stimmen");
+    function zeigeStimmen(){
+      const vs=deutscheStimmen();
+      liste.innerHTML="";
+      const zeile=(titel, info, aktiv, waehle)=>{
+        const li=document.createElement("li");
+        li.innerHTML=`${aktiv?"✅ ":""}${titel} <small>${info}</small> `;
+        const b=document.createElement("button"); b.className="btn mint"; b.style.cssText="font-size:.9rem;padding:4px 14px;margin-left:6px"; b.textContent=aktiv?"Probe":"Wählen";
+        b.onclick=()=>{ waehle(); sound=true; say("der Hund – die Katze – das Einhorn"); zeigeStimmen(); };
+        li.appendChild(b); liste.appendChild(li);
+      };
+      zeile("Stimme aus den iPhone-Einstellungen", "· iOS wählt selbst", stimmWahl==="system",
+        ()=>{ try{ localStorage.setItem("einhorn-stimme","system"); }catch(e){} stimmWahl="system"; voice=null; });
+      vs.forEach((v,k)=>zeile(`${k+1}. ${v.name}`,
+        `· ${v.lang}${v.default?" · Standard":""}${v.localService===false?" · online":""}${stimmWert(v)<0?" · alt/Spaßstimme":""}<br>${v.voiceURI}`,
+        stimmWahl!=="system" && voice===v,
+        ()=>{ const key=stimmSchluessel(v,k); try{ localStorage.setItem("einhorn-stimme",key); }catch(e){} stimmWahl=key; voice=v; }));
+    }
+    zeigeStimmen(); window.addEventListener("stimmen", zeigeStimmen);
+  }
+
+  if(pruefen){ pruefansicht(); return; }
+  if(new URLSearchParams(location.search).has("eltern")){ elternansicht(); return; }
+  $("go").addEventListener("click",()=>{
+    $("start").classList.add("off");
+    say(" ");   // iOS: Stimme mit der ersten Berührung freischalten
+    runde();
+  });
+})();
+</script>
+</body>
+</html>

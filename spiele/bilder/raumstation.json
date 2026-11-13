@@ -1,0 +1,360 @@
+{
+ "titel": "Auf der Raumstation",
+ "bild": "raumstation.jpg",
+ "dinge": [
+  {
+   "wort": "Katze",
+   "artikel": "die",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     3.7,
+     6.4,
+     11.5,
+     10.9
+    ]
+   ]
+  },
+  {
+   "wort": "Alien",
+   "artikel": "das",
+   "bewegung": "huepfen",
+   "formen": [
+    [
+     15.4,
+     7.3,
+     25.6,
+     14.8
+    ],
+    [
+     2.7,
+     47.7,
+     10.9,
+     55.5
+    ],
+    [
+     85.2,
+     42.4,
+     90.6,
+     48.3
+    ]
+   ]
+  },
+  {
+   "wort": "Fahne",
+   "artikel": "die",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     29.6,
+     12.7,
+     36.8,
+     18.4
+    ]
+   ]
+  },
+  {
+   "wort": "Fernrohr",
+   "artikel": "das",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     38.4,
+     10.6,
+     47.6,
+     19.3
+    ]
+   ]
+  },
+  {
+   "wort": "Planet",
+   "artikel": "der",
+   "bewegung": "drehen",
+   "formen": [
+    [
+     58.4,
+     2.5,
+     68.6,
+     7.0
+    ],
+    [
+     55.5,
+     9.0,
+     61.2,
+     12.8
+    ]
+   ]
+  },
+  {
+   "wort": "Rakete",
+   "artikel": "die",
+   "bewegung": "huepfen",
+   "formen": [
+    [
+     82.3,
+     0.8,
+     90.6,
+     5.3
+    ]
+   ]
+  },
+  {
+   "wort": "Astronaut",
+   "artikel": "der",
+   "bewegung": "huepfen",
+   "formen": [
+    [
+     68.7,
+     5.3,
+     87.6,
+     14.8
+    ],
+    [
+     41.3,
+     43.5,
+     49.5,
+     50.3
+    ]
+   ]
+  },
+  {
+   "wort": "Satellit",
+   "artikel": "der",
+   "bewegung": "drehen",
+   "formen": [
+    [
+     53.0,
+     14.2,
+     67.6,
+     22.6
+    ]
+   ]
+  },
+  {
+   "wort": "Roboter",
+   "artikel": "der",
+   "bewegung": "huepfen",
+   "formen": [
+    [
+     82.8,
+     19.4,
+     93.9,
+     27.5
+    ],
+    [
+     66.2,
+     30.7,
+     78.8,
+     36.3
+    ],
+    [
+     32.0,
+     75.8,
+     42.7,
+     84.6
+    ]
+   ]
+  },
+  {
+   "wort": "Bildschirm",
+   "artikel": "der",
+   "bewegung": "wachsen",
+   "formen": [
+    [
+     77.4,
+     32.0,
+     93.5,
+     38.5
+    ]
+   ]
+  },
+  {
+   "wort": "Mikroskop",
+   "artikel": "das",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     88.2,
+     43.8,
+     95.4,
+     54.2
+    ]
+   ]
+  },
+  {
+   "wort": "Bett",
+   "artikel": "das",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     10.1,
+     31.1,
+     25.6,
+     36.6
+    ]
+   ]
+  },
+  {
+   "wort": "Teddy",
+   "artikel": "der",
+   "bewegung": "huepfen",
+   "formen": [
+    [
+     80.9,
+     73.7,
+     91.5,
+     82.2
+    ]
+   ]
+  },
+  {
+   "wort": "Tafel",
+   "artikel": "die",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     23.7,
+     39.6,
+     30.5,
+     45.7
+    ]
+   ]
+  },
+  {
+   "wort": "Tisch",
+   "artikel": "der",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     12.5,
+     55.5,
+     32.4,
+     65.2
+    ]
+   ]
+  },
+  {
+   "wort": "Ball",
+   "artikel": "der",
+   "bewegung": "drehen",
+   "formen": [
+    [
+     31.2,
+     70.8,
+     37.5,
+     74.7
+    ]
+   ]
+  },
+  {
+   "wort": "Ente",
+   "artikel": "die",
+   "bewegung": "huepfen",
+   "formen": [
+    [
+     25.2,
+     74.7,
+     31.4,
+     78.3
+    ]
+   ]
+  },
+  {
+   "wort": "Banane",
+   "artikel": "die",
+   "bewegung": "drehen",
+   "formen": [
+    [
+     39.4,
+     74.9,
+     44.1,
+     78.5
+    ]
+   ]
+  },
+  {
+   "wort": "Hund",
+   "artikel": "der",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     0.0,
+     82.2,
+     29.5,
+     92.6
+    ]
+   ]
+  },
+  {
+   "wort": "Buch",
+   "artikel": "das",
+   "bewegung": "wachsen",
+   "formen": [
+    [
+     65.7,
+     85.2,
+     95.4,
+     95.2
+    ],
+    [
+     60.4,
+     81.2,
+     67.6,
+     86.1
+    ]
+   ]
+  },
+  {
+   "wort": "Tasse",
+   "artikel": "die",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     56.9,
+     87.8,
+     63.7,
+     93.9
+    ]
+   ]
+  },
+  {
+   "wort": "Raumschiff",
+   "artikel": "das",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     76.0,
+     68.2,
+     96.9,
+     75.3
+    ]
+   ]
+  },
+  {
+   "wort": "Leiter",
+   "artikel": "die",
+   "bewegung": "wackeln",
+   "formen": [
+    [
+     35.0,
+     25.9,
+     39.7,
+     37.9
+    ]
+   ]
+  }
+ ],
+ "andere": [
+  "schwebt",
+  "fliegt",
+  "schläft",
+  "isst",
+  "winkt",
+  "leuchtet",
+  "rund",
+  "fröhlich",
+  "weit",
+  "schwer",
+  "funkelt"
+ ]
+}
