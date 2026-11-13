@@ -1,0 +1,833 @@
+{
+  "themen": [
+    {
+      "id": "mengen-5",
+      "name": "Mengen bis 5 auf einen Blick",
+      "sprich": "Mengen auf einen Blick",
+      "strang": "mathe",
+      "voraussetzungen": [],
+      "aufgaben": {
+        "art": "menge",
+        "bis": 5
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "tempo": true,
+      "eltern": "Legen Sie bis zu fünf Murmeln hin und lassen Sie Ihr Kind die Anzahl nennen, ohne zu zählen."
+    },
+    {
+      "id": "zerlegen-2",
+      "name": "Die 2 zerlegen",
+      "sprich": "Zerlegen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "mengen-5"
+      ],
+      "aufgaben": {
+        "art": "zerlegung",
+        "zahl": 2
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zerlegen.json",
+        "werte": {
+          "n": 2
+        }
+      },
+      "familie": "zahl-2",
+      "tempo": true,
+      "eltern": "Verteilen Sie 2 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"
+    },
+    {
+      "id": "zerlegen-3",
+      "name": "Die 3 zerlegen",
+      "sprich": "Zerlegen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-2"
+      ],
+      "aufgaben": {
+        "art": "zerlegung",
+        "zahl": 3
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zerlegen.json",
+        "werte": {
+          "n": 3
+        }
+      },
+      "familie": "zahl-3",
+      "tempo": true,
+      "eltern": "Verteilen Sie 3 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"
+    },
+    {
+      "id": "zerlegen-4",
+      "name": "Die 4 zerlegen",
+      "sprich": "Zerlegen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-3"
+      ],
+      "aufgaben": {
+        "art": "zerlegung",
+        "zahl": 4
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zerlegen.json",
+        "werte": {
+          "n": 4
+        }
+      },
+      "familie": "zahl-4",
+      "tempo": true,
+      "eltern": "Verteilen Sie 4 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"
+    },
+    {
+      "id": "zerlegen-5",
+      "name": "Die 5 zerlegen",
+      "sprich": "Zerlegen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-4"
+      ],
+      "aufgaben": {
+        "art": "zerlegung",
+        "zahl": 5
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zerlegen.json",
+        "werte": {
+          "n": 5
+        }
+      },
+      "familie": "zahl-5",
+      "tempo": true,
+      "eltern": "Verteilen Sie 5 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"
+    },
+    {
+      "id": "zerlegen-6",
+      "name": "Die 6 zerlegen",
+      "sprich": "Zerlegen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-5"
+      ],
+      "aufgaben": {
+        "art": "zerlegung",
+        "zahl": 6
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zerlegen.json",
+        "werte": {
+          "n": 6
+        }
+      },
+      "familie": "zahl-6",
+      "tempo": true,
+      "eltern": "Verteilen Sie 6 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"
+    },
+    {
+      "id": "zerlegen-7",
+      "name": "Die 7 zerlegen",
+      "sprich": "Zerlegen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-6"
+      ],
+      "aufgaben": {
+        "art": "zerlegung",
+        "zahl": 7
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zerlegen.json",
+        "werte": {
+          "n": 7
+        }
+      },
+      "familie": "zahl-7",
+      "tempo": true,
+      "eltern": "Verteilen Sie 7 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"
+    },
+    {
+      "id": "zerlegen-8",
+      "name": "Die 8 zerlegen",
+      "sprich": "Zerlegen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-7"
+      ],
+      "aufgaben": {
+        "art": "zerlegung",
+        "zahl": 8
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zerlegen.json",
+        "werte": {
+          "n": 8
+        }
+      },
+      "familie": "zahl-8",
+      "tempo": true,
+      "eltern": "Verteilen Sie 8 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"
+    },
+    {
+      "id": "zerlegen-9",
+      "name": "Die 9 zerlegen",
+      "sprich": "Zerlegen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-8"
+      ],
+      "aufgaben": {
+        "art": "zerlegung",
+        "zahl": 9
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zerlegen.json",
+        "werte": {
+          "n": 9
+        }
+      },
+      "familie": "zahl-9",
+      "tempo": true,
+      "eltern": "Verteilen Sie 9 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"
+    },
+    {
+      "id": "zerlegen-10",
+      "name": "Die 10 zerlegen",
+      "sprich": "Zerlegen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-9"
+      ],
+      "aufgaben": {
+        "art": "zerlegung",
+        "zahl": 10
+      },
+      "stufen": [
+        "material",
+        "vorstellung",
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zerlegen.json",
+        "werte": {
+          "n": 10
+        }
+      },
+      "familie": "zahl-10",
+      "tempo": true,
+      "eltern": "Verteilen Sie 10 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"
+    },
+    {
+      "id": "rechnen-3",
+      "name": "Rechnen mit der 3",
+      "sprich": "Rechnen mit der Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-3"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "rechnen-3"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/rechnen.json",
+        "werte": {
+          "n": 3
+        }
+      },
+      "familie": "zahl-3",
+      "tempo": true,
+      "eltern": "Fragen Sie beim Tischdecken: „Zwei Teller stehen schon, wie viele fehlen für drei?“"
+    },
+    {
+      "id": "rechnen-4",
+      "name": "Rechnen mit der 4",
+      "sprich": "Rechnen mit der Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-4"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "rechnen-4"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/rechnen.json",
+        "werte": {
+          "n": 4
+        }
+      },
+      "familie": "zahl-4",
+      "tempo": true,
+      "eltern": "Legen Sie vier Bausteine hin, nehmen Sie einen weg und fragen Sie, wie viele noch da sind."
+    },
+    {
+      "id": "rechnen-5",
+      "name": "Rechnen mit der 5",
+      "sprich": "Rechnen mit der Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-5"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "rechnen-5"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/rechnen.json",
+        "werte": {
+          "n": 5
+        }
+      },
+      "familie": "zahl-5",
+      "tempo": true,
+      "eltern": "Lassen Sie Ihr Kind an einer Hand die Finger zeigen: „Drei oben, wie viele unten bis fünf?“"
+    },
+    {
+      "id": "rechnen-6",
+      "name": "Rechnen mit der 6",
+      "sprich": "Rechnen mit der Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-6"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "rechnen-6"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/rechnen.json",
+        "werte": {
+          "n": 6
+        }
+      },
+      "familie": "zahl-6",
+      "tempo": true,
+      "eltern": "Fragen Sie beim Eierkarton: „Vier Eier liegen drin, wie viele brauchen wir noch für sechs?“"
+    },
+    {
+      "id": "rechnen-7",
+      "name": "Rechnen mit der 7",
+      "sprich": "Rechnen mit der Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-7"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "rechnen-7"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/rechnen.json",
+        "werte": {
+          "n": 7
+        }
+      },
+      "familie": "zahl-7",
+      "tempo": true,
+      "eltern": "Fragen Sie beim Wochenplan: „Es sind schon drei Tage vorbei, wie viele bis Sonntag?“"
+    },
+    {
+      "id": "rechnen-8",
+      "name": "Rechnen mit der 8",
+      "sprich": "Rechnen mit der Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-8"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "rechnen-8"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/rechnen.json",
+        "werte": {
+          "n": 8
+        }
+      },
+      "familie": "zahl-8",
+      "tempo": true,
+      "eltern": "Fragen Sie an der Spinne: „Sie hat acht Beine, fünf sind versteckt, wie viele sehen wir?“"
+    },
+    {
+      "id": "rechnen-9",
+      "name": "Rechnen mit der 9",
+      "sprich": "Rechnen mit der Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-9"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "rechnen-9"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/rechnen.json",
+        "werte": {
+          "n": 9
+        }
+      },
+      "familie": "zahl-9",
+      "tempo": true,
+      "eltern": "Legen Sie neun Karten in ein Feld aus drei mal drei und decken Sie vier zu: „Wie viele sind noch sichtbar?“"
+    },
+    {
+      "id": "rechnen-10",
+      "name": "Rechnen mit der 10",
+      "sprich": "Rechnen mit der Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zerlegen-10"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "rechnen-10"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/rechnen.json",
+        "werte": {
+          "n": 10
+        }
+      },
+      "familie": "zahl-10",
+      "tempo": true,
+      "eltern": "Fragen Sie an den zehn Fingern: „Sieben sind oben, wie viele sind unten?“"
+    },
+    {
+      "id": "zwillinge",
+      "name": "Zwillingsaufgaben",
+      "sprich": "Zwillingsaufgaben",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "rechnen-10"
+      ],
+      "aufgaben": {
+        "art": "zwillinge"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "tempo": true,
+      "eltern": "Üben Sie beim Treppensteigen: „Sechs und sechs?“ – doppelt so viele Stufen."
+    },
+    {
+      "id": "zehn-plus",
+      "name": "Zehn und noch was",
+      "sprich": "Der Zehner und noch was",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "rechnen-10"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "zehn-plus"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/zehn-plus.json"
+      },
+      "familie": "zehn-plus",
+      "tempo": true,
+      "eltern": "Zeigen Sie an den Fingern: Zehn Finger plus drei Murmeln sind dreizehn."
+    },
+    {
+      "id": "plus-ohne-20",
+      "name": "Plus bis 20 ohne Übergang",
+      "sprich": "Plus ohne Übergang",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zehn-plus"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "plus-ohne-20"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/plus-ohne-20.json"
+      },
+      "familie": "plus-ohne-20",
+      "tempo": true,
+      "eltern": "Fragen Sie: „Zwölf und drei?“ – erst die Einer rechnen, dann die Zehn davor setzen."
+    },
+    {
+      "id": "plus-zur-20",
+      "name": "Plus bis zur 20",
+      "sprich": "Plus bis zum Ziel",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "plus-ohne-20"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "plus-zur-20"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/plus-zur-20.json"
+      },
+      "familie": "plus-zur-20",
+      "tempo": true,
+      "eltern": "Fragen Sie: „Dreizehn und sieben, wo landen wir?“ – bei den Fingern beider Hände zweimal."
+    },
+    {
+      "id": "ueber-10-mit-9",
+      "name": "Über die 10 mit der 9",
+      "sprich": "Plus über den Zehner mit der größten Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "plus-ohne-20",
+        "zwillinge"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "ueber-10-mit-9"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/ueber-10.json",
+        "werte": {
+          "m": 9
+        }
+      },
+      "tempo": true,
+      "eltern": "Neun und sechs: Erst eine Murmel zur Neun geben, dann bleiben fünf – also zehn und fünf."
+    },
+    {
+      "id": "ueber-10-mit-8",
+      "name": "Über die 10 mit der 8",
+      "sprich": "Plus über den Zehner mit der nächsten Zahl",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "ueber-10-mit-9"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "ueber-10-mit-8"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/ueber-10.json",
+        "werte": {
+          "m": 8
+        }
+      },
+      "tempo": true,
+      "eltern": "Acht und fünf: Zwei Murmeln füllen die Acht auf Zehn, drei bleiben übrig."
+    },
+    {
+      "id": "ueber-10-mit-7",
+      "name": "Über die 10 mit kleineren Zahlen",
+      "sprich": "Plus über den Zehner mit kleineren Zahlen",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "ueber-10-mit-8"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "ueber-10-mit-7"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/ueber-10.json",
+        "werte": {
+          "m": 7
+        }
+      },
+      "tempo": true,
+      "eltern": "Sechs und fünf: Rechnen Sie erst bis zur Zehn und dann den Rest dazu."
+    },
+    {
+      "id": "minus-zehner",
+      "name": "Minus mit ganzen Zehnern",
+      "sprich": "Minus mit ganzen Zehnern",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "zehn-plus"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "minus-zehner"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/minus-zehner.json"
+      },
+      "familie": "zehn-plus",
+      "tempo": true,
+      "eltern": "Fragen Sie: „Dreizehn Murmeln, ich nehme zehn weg, wie viele bleiben?“"
+    },
+    {
+      "id": "minus-ohne-20",
+      "name": "Minus bis 20 ohne Übergang",
+      "sprich": "Minus ohne Übergang",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "minus-zehner"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "minus-ohne-20"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/minus-ohne-20.json"
+      },
+      "familie": "plus-ohne-20",
+      "tempo": true,
+      "eltern": "Fragen Sie: „Sechzehn minus zwei?“ – nur die Einer ändern sich."
+    },
+    {
+      "id": "minus-von-20",
+      "name": "Minus von der 20",
+      "sprich": "Minus vom Ziel",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "minus-ohne-20"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "minus-von-20"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/minus-von-20.json"
+      },
+      "tempo": true,
+      "eltern": "Fragen Sie: „Zwanzig Stifte, sieben sind verliehen, wie viele sind da?“"
+    },
+    {
+      "id": "minus-ueber-10-bis-5",
+      "name": "Minus über die 10, bis 5 weg",
+      "sprich": "Minus über den Zehner, wenig weg",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "minus-ohne-20",
+        "ueber-10-mit-9"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "minus-ueber-10-bis-5"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/minus-ueber-10.json",
+        "werte": {
+          "grenze": "bis-5"
+        }
+      },
+      "tempo": true,
+      "eltern": "Fragen Sie: „Dreizehn minus vier?“ – erst die drei Einer weg, dann noch eins von der Zehn."
+    },
+    {
+      "id": "minus-ueber-10-ab-6",
+      "name": "Minus über die 10, ab 6 weg",
+      "sprich": "Minus über den Zehner, viel weg",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "minus-ueber-10-bis-5"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "minus-ueber-10-ab-6"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/minus-ueber-10.json",
+        "werte": {
+          "grenze": "ab-6"
+        }
+      },
+      "tempo": true,
+      "eltern": "Fragen Sie: „Dreizehn minus acht?“ – erst bis zur Zehn zurück, dann den Rest."
+    },
+    {
+      "id": "plus-bis-30",
+      "name": "Plus bis 30",
+      "sprich": "Plus im größeren Raum",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "plus-zur-20",
+        "ueber-10-mit-7"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "plus-bis-30"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/bis-30.json",
+        "werte": {
+          "op": "plus"
+        }
+      },
+      "tempo": false,
+      "eltern": "Fragen Sie beim Einkaufen: „Zwanzig Cent und noch sieben, wie viel ist das?“"
+    },
+    {
+      "id": "minus-bis-30",
+      "name": "Minus bis 30",
+      "sprich": "Minus im größeren Raum",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "minus-ueber-10-ab-6",
+        "minus-von-20"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "minus-bis-30"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/bis-30.json",
+        "werte": {
+          "op": "minus"
+        }
+      },
+      "tempo": false,
+      "eltern": "Fragen Sie: „Dreißig Murmeln, zwölf sind weg, wie viele bleiben?“"
+    },
+    {
+      "id": "plus-bis-100",
+      "name": "Plus bis 100",
+      "sprich": "Plus im ganz großen Raum",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "plus-bis-30"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "plus-bis-100"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/bis-100.json",
+        "werte": {
+          "op": "plus"
+        }
+      },
+      "tempo": false,
+      "eltern": "Fragen Sie: „Vierzig und fünfzehn?“ – erst die Zehner, dann die Einer."
+    },
+    {
+      "id": "minus-bis-100",
+      "name": "Minus bis 100",
+      "sprich": "Minus im ganz großen Raum",
+      "strang": "mathe",
+      "voraussetzungen": [
+        "minus-bis-30"
+      ],
+      "aufgaben": {
+        "art": "rechnen",
+        "thema": "minus-bis-100"
+      },
+      "stufen": [
+        "kopf"
+      ],
+      "einfuehrung": {
+        "vorlage": "einfuehrungen/bis-100.json",
+        "werte": {
+          "op": "minus"
+        }
+      },
+      "tempo": false,
+      "eltern": "Fragen Sie: „Siebzig minus dreißig?“ – erst die Zehner, dann die Einer."
+    }
+  ]
+}

@@ -7,8 +7,8 @@
     { "id": "geometrie", "name": "Geometrie", "symbol": "symbole/geometrie.svg", "farbe": "#8C6FE0", "schatten": "#6548BC", "tint": "#ECE6FF" }
   ],
   "spiele": [
-    { "id": "zahlenzauber", "titel": "Zahlenzauber", "thema": "Plus und Minus", "kategorie": "mathe", "symbol": "symbole/zahlenzauber.svg", "datei": "zahlenzauber.html", "fortschritt": true, "text": "Welche zwei Zahlen ergeben zusammen die dritte?" },
-    { "id": "perlenbruecke", "titel": "Perlenbrücke", "thema": "Zahlen zerlegen", "kategorie": "mathe", "symbol": "symbole/perlenbruecke.svg", "datei": "perlenbruecke.html", "fortschritt": true, "text": "Nimm links und rechts ein Perlenstäbchen und bau die Brücke." },
+    { "id": "zahlenzauber", "titel": "Zahlenzauber", "thema": "Plus und Minus", "kategorie": "mathe", "symbol": "symbole/zahlenzauber.svg", "datei": "zahlenzauber.html", "fortschritt": true, "arten": [{ "art": "rechnen", "max": 100, "gleiche": false, "stufen": ["kopf"] }], "text": "Welche zwei Zahlen ergeben zusammen die dritte?" },
+    { "id": "perlenbruecke", "titel": "Perlenbrücke", "thema": "Zahlen zerlegen", "kategorie": "mathe", "symbol": "symbole/perlenbruecke.svg", "datei": "perlenbruecke.html", "fortschritt": true, "arten": [{ "art": "zerlegung", "zahlen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }], "text": "Nimm links und rechts ein Perlenstäbchen und bau die Brücke." },
     { "id": "einmaleins", "titel": "Kettenhüpfer", "thema": "Einmaleins", "kategorie": "mathe", "symbol": "symbole/einmaleins.svg", "datei": "einmaleins.html", "fortschritt": true, "text": "Wie weit hüpft das Einhorn? Tipp die Zahl ein." },
     { "id": "wimmelbild", "titel": "Wimmelbild", "thema": "Nomen", "kategorie": "grammatik", "symbol": "symbole/wimmelbild.svg", "datei": "wimmelbild.html", "fortschritt": true, "text": "Zieh die Wörter auf die Dinge im Bild." },
     { "id": "grossbuchstaben", "titel": "Zauberer", "thema": "Großschreibung", "kategorie": "grammatik", "symbol": "symbole/grossbuchstaben.svg", "datei": "grossbuchstaben.html", "fortschritt": true, "text": "Zaubere die Buchstaben groß oder klein." },
