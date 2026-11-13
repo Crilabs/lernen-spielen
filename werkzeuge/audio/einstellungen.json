@@ -4,7 +4,7 @@
   "ordner": "seraphina",
   "region": "westeurope",
   "format": "audio-24khz-48kbitrate-mono-mp3",
-  "zahlen": false,
+  "zahlen": true,
   "varianten": {
     "diktat": { "tempo": "-15%" }
   }

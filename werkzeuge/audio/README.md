@@ -51,10 +51,10 @@ erzeugt dann alle Belegungen. Beim 1×1 sind das ein paar hundert Sätze, also o
 
 ## Zahlen
 
-`einstellungen.json › zahlen` ist aus: Texte mit Ziffern bekommen keine Datei (Regel „Zahlen werden nie
-gesprochen“). Die Regel kam, weil die Systemstimme Zahlen falsch spricht. Mit erzeugten und angehörten Dateien
-fällt dieser Grund weg. Wird `zahlen` eingeschaltet, sollten Zahlen als Zahlwort in den Text oder per
-`<say-as interpret-as="cardinal">` in `aussprache.json`. Die Systemstimme spricht Ziffern weiterhin nie.
+`einstellungen.json › zahlen` ist an (Christian, 2026-11-13): Erzeugte und angehörte Aufnahmen dürfen Zahlen
+sprechen. Die Regel „Zahlen werden nie gesprochen“ gilt weiter für die Systemstimme, die Zahlen falsch spricht.
+Spricht Azure eine Zahl falsch (z. B. als Ordinalzahl), hilft in `aussprache.json` ein Zahlwort (`sprich`) oder
+`<say-as interpret-as="cardinal">`. Ob ein Satz eine Lösung verrät, entscheidet weiter jedes Spiel.
 
 ## Warum Azure (Stand 2026-11-13)
 
