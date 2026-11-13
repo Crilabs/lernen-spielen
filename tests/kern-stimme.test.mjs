@@ -305,3 +305,15 @@ test("Notbremse der Datei richtet sich nach ihrer Dauer", async (t) => {
   await warte();
   assert.equal(fertig, "gesprochen");
 });
+
+test("datei: false nimmt die Systemstimme, auch wenn es eine Datei gibt", async (t) => {
+  t.after(ohneAudio);
+  fakeAudio({ Hallo: { datei: "test/h.mp3" } });
+  const S = await frisch();
+  const p = S.sprich("Hallo", { datei: false });
+  await warte();
+  assert.equal(dateien.length, 0);
+  assert.equal(gesprochen.length, 1);
+  gesprochen[0].onend();
+  assert.equal(await p, "gesprochen");
+});

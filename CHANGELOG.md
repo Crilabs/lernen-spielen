@@ -2,6 +2,8 @@
 
 ## Unveröffentlicht
 
+- Natürliche Stimme vorbereitet: Die Spiele spielen vorab erzeugte Aufnahmen (Azure Speech) ab, sobald es sie gibt, sonst spricht wie bisher die Systemstimme. Im Elternbereich heißt die Systemstimme jetzt „Ersatzstimme“, dazu ein Hinweis, dass die Stimme computererzeugt ist.
+
 - Aufgeräumt: Reste der früheren Web-Fassung (PHP, FTP-Upload) sind entfernt.
 - Lernstand je Profil: Die Daten des Kindes liegen jetzt im Unterordner `lernstand\kind-1\`; `eltern.json` (PIN) bleibt im Ordner darüber. **Einmaliger Handgriff beim Aktualisieren des Kiosks**, direkt nach dem Update, bevor das Kind spielt (die App startet nach dem Update einmal selbst neu):
   1. Die App beenden: im Elternbereich auf „App beenden“ tippen. Nur wenn das nicht geht: Tastatur anschließen, Strg+Alt+Entf → Task-Manager (siehe „PIN vergessen“ im README).

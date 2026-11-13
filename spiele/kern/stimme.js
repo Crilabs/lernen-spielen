@@ -243,15 +243,16 @@ function spieleDatei(url) {
  * Liest einen Text vor: aus der erzeugten Datei, sonst mit der Systemstimme.
  * Löst auf, wenn die Stimme fertig ist, spätestens nach der Notbremse.
  * @param {string} text
- * @param {{ tempo?: number, hoehe?: number, variante?: string }} [optionen]
- *   tempo und hoehe gelten nur für die Systemstimme; variante (z. B. "diktat") wählt eine eigene Datei.
+ * @param {{ tempo?: number, hoehe?: number, variante?: string, datei?: boolean }} [optionen]
+ *   tempo und hoehe gelten nur für die Systemstimme; variante (z. B. "diktat") wählt eine eigene Datei;
+ *   datei: false nimmt immer die Systemstimme (Probe im Elternbereich).
  * @returns {Promise<SprichErgebnis>}
  */
-export async function sprich(text, { tempo = 0.85, hoehe = 1, variante = "" } = {}) {
+export async function sprich(text, { tempo = 0.85, hoehe = 1, variante = "", datei: mitDatei = true } = {}) {
   brichAb();   // auch ein stiller Aufruf beendet, was gerade gesprochen wird
   if (!text) return "still";
   const meine = nummer;
-  const index = await ladeAudioIndex();
+  const index = mitDatei ? await ladeAudioIndex() : new Map();
   if (meine !== nummer) return "abgebrochen";
   const schluessel = audioSchluessel(text, variante);
   const datei = index.get(schluessel);
