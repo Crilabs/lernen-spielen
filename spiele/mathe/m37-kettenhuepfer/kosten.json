@@ -258,5 +258,57 @@
   "notiz": "Bau-Agent Befunde B R2",
   "cache_lesen": 16238018,
   "cache_schreiben": 251630
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 50,
+  "ausgabe": 19016,
+  "einheit": "tokens",
+  "menge": 2809831,
+  "notiz": "Prüfer B-Didaktik, Runde 3",
+  "cache_lesen": 2660704,
+  "cache_schreiben": 130061
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 98,
+  "ausgabe": 28491,
+  "einheit": "tokens",
+  "menge": 7276220,
+  "notiz": "Prüfer B-Welt, Runde 3",
+  "cache_lesen": 7064190,
+  "cache_schreiben": 183441
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 52,
+  "ausgabe": 26564,
+  "einheit": "tokens",
+  "menge": 3338598,
+  "notiz": "Prüfer B-Bedienung, Runde 3",
+  "cache_lesen": 3164717,
+  "cache_schreiben": 147265
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "prototyp",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 4,
+  "ausgabe": 104,
+  "einheit": "tokens",
+  "menge": 274059,
+  "notiz": "Bau-Agent Befunde B R2 (Rest)",
+  "cache_lesen": 19281,
+  "cache_schreiben": 254670
  }
 ]
