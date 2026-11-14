@@ -12,28 +12,30 @@ quellen:
 
 ## Am Tisch: Eierkartons für den Einkauf
 
-Ihr braucht: einen Sechser-Eierkarton, voll oder leer, Zettel, Stift. Die Eier bleiben drin.
+Ihr braucht: einen Sechser-Eierkarton, voll oder leer, Zettel, Stift.
 
-1. Ihr plant Eier zum Backen. Wie viele sind in 4 Kartons?
-2. Schaut in den Karton: vorne 3 Mulden, hinten 3. In einem Karton sind zwei Dreier.
-3. Rechnet die vorderen Reihen von 4 Kartons: „4 mal 3 ist gleich 12.“
-4. Hinten sind es genauso viele: „12 plus 12 ist gleich 24. 4 mal 6 ist gleich 24.“
-5. Schreibt auf: 4 Kartons, 24 Eier.
+1. Schaut in den Karton, die Eier bleiben drin: vorne 3 Mulden, hinten 3.
+2. Plant Eier für Kuchen, Frühstück oder Besuch. Wie viele Kartons braucht ihr? Zum Beispiel 4.
+3. Rechnet erst die vorderen Reihen: „4 mal 3 ist gleich …“
+4. Hinten sind es genauso viele. Verdoppelt: „4 mal 6 ist gleich …“
+5. Schreibt Kartons und Eier auf.
+6. Plant das Nächste mit einer anderen Zahl Kartons, zum Beispiel 3, 8 oder 10.
 
 **Darauf kommt es an:** Im Sechserkarton liegen zwei Reihen zu drei. Darum ist jede Sechseraufgabe das Doppelte der Dreieraufgabe.
 
-**Leichter:** 2 Kartons: vorne 6, hinten 6, zusammen 12. **Schwerer:** 6 Kartons, von 5 aus: „5 mal 6 ist gleich 30, plus 6 ist gleich 36.“
+**Leichter:** 1 bis 3 Kartons. **Schwerer:** 6 oder 7 Kartons, von 5 aus: „5 mal 6 ist gleich …“, dann einen oder zwei Sechser dazu.
 
 ## Unterwegs: Am Eierregal
 
 Ihr braucht: das Eierregal im Laden. Die Kartons bleiben zu.
 
-1. Ihr kauft Eier für die Woche, zum Beispiel 3 Kartons.
+1. Ihr kauft Eier für die Woche. Wie viele Kartons nehmt ihr? Zum Beispiel 3.
 2. Denkt an einen offenen Karton: zwei Reihen zu drei.
-3. Rechnet die vorderen Reihen: „3 mal 3 ist gleich 9.“
-4. Die hinteren Reihen noch einmal: „9 plus 9 ist gleich 18. 3 mal 6 ist gleich 18.“
-5. Legt die Kartons in den Einkaufswagen.
+3. Rechnet die vorderen Reihen: „3 mal 3 ist gleich …“
+4. Verdoppelt für die hinteren Reihen: „3 mal 6 ist gleich …“
+5. Schaut auf eine Reihe Kartons im Regal. Zählt die Kartons und rechnet genauso, wie viele Eier darin sind.
+6. Legt eure Kartons in den Einkaufswagen.
 
 **Darauf kommt es an:** In einem Sechserkarton sind zwei Dreier. Das Doppelte der Dreieraufgabe ist die Sechseraufgabe.
 
-**Leichter:** 2 Kartons. **Schwerer:** 7 Kartons. Geht von 5 Kartons aus: „5 mal 6 ist gleich 30. Dazu 2 Sechser: 30 plus 12 ist gleich 42.“
+**Leichter:** 2 Kartons. **Schwerer:** 7 Kartons. Geht von 5 Kartons aus und legt 2 Sechser dazu.
