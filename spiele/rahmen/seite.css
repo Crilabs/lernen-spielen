@@ -130,7 +130,7 @@ img, svg { -webkit-user-drag: none; }
    Fläche, bewertet nichts. Liegt als outline außerhalb der Kontur und folgt dem Radius. */
 
 .auswahl,
-.teil.angehoben {
+.angehoben {
   outline: 0.8rem solid var(--ls-sonne);
   outline-offset: 0;
   box-shadow: 0 0 0 1.1rem var(--ls-tinte);
@@ -161,6 +161,7 @@ img, svg { -webkit-user-drag: none; }
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
+  transition: transform 0.12s ease-out;
 }
 .teil:focus-visible { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0; }
 .teil.gedrueckt {
@@ -169,15 +170,16 @@ img, svg { -webkit-user-drag: none; }
 }
 .teil.angehoben {
   transform: translateY(-1rem);
+  /* Ring (outline) und Tinte-Linie wie bei .auswahl; darunter ein längerer Schatten: es liegt höher. */
   box-shadow:
     0 0 0 1.1rem var(--ls-tinte),
-    0 2.2rem 0 1.1rem var(--ls-tinte-weich);
+    0 2.6rem 0 0 var(--ls-tinte-weich);
   z-index: 20;
 }
-.teil.gezogen {
-  cursor: grabbing;
-  z-index: 40;
-}
+.gezogen { z-index: 40; }
+/* Liegt fest an seinem Platz (nicht mehr ziehbar): flach, zum Ansehen. */
+.teil.gesetzt { box-shadow: none; cursor: default; }
+.teil.gezogen { cursor: grabbing; }
 
 /* Ziel: zeigt nur, solange ein Teil angehoben ist oder gezogen wird, dass es etwas aufnimmt.
    Ruhig gestrichelt in Naht, kein Blinken (B3); liegt das Teil darüber, wird die Linie kräftiger. */

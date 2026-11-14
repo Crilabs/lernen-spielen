@@ -199,6 +199,7 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 | `<ls-hilfe>` | Hilfe-Knopf unten rechts | `leuchte()` (Sonnenring, einmal ~1 s); Ereignis `hilfe` |
 | `<ls-pause>` | Pause/Rundenende mit Alle Spiele und Weiter | Inhalt (Bild, Sachmoment) per Slot; `await zeige()` → `"weiter"` |
 | `<ls-tastatur>` | Bildschirm-Tastatur | Attribute `tasten` (die benötigten Zeichen), `leertaste`, `loeschen`; Ereignis `taste` mit `detail.zeichen` |
+| `ziehbar()` (`ziehen.js`) | Ziehen mit Tipp-Alternative (§5): ziehen ab 1 rem Bewegung, sonst antippen → angehoben mit Sonnenring → Ziel antippen; Enter/Leertaste auf Teil und Ziel | `ziehbar(teil, { ziele, beimAblegen(teil, ziel) })` → `loesen()`; das Spiel ruft `setze(teil, ziel)` oder `zurueck(teil)` (0,3 s, bei wenig Bewegung sofort); Klassen `angehoben`, `gezogen`, `gedrueckt`, an Zielen `ziel-frei`, `ziel-ueber`; Zustand ohne DOM in `ziehen-zustand.js` |
 
 - **Aussehen über CSS-Variablen:** `--ls-tinte`, `--ls-tinte-weich`, `--ls-papier`, `--ls-nebel`,
   `--ls-linie`, `--ls-naht`, `--ls-haupt-schatten`, `--ls-sonne`, `--ls-nacht`, `--ls-kontur`,

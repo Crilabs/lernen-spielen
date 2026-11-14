@@ -7,7 +7,8 @@
 <link rel="stylesheet" href="seite.css">
 <style>
   /* Vorschau der Rahmen-Bausteine auf dem Seiten-Grundstil (seite.css).
-     Adresse: vorschau.html?fach=mathe&titel=Perlenbrücke&thema=Die%207%20zerlegen  (&pause, &leuchte) */
+     Adresse: vorschau.html?fach=mathe&titel=Perlenbrücke&thema=Die%207%20zerlegen  (&pause, &leuchte)
+     &ziehen zeigt statt Matte und Tastatur das Ziehen: Tablett mit drei Teilen, Matte mit zwei Lücken. */
   /* Welt-Schicht: der einzige Verlauf auf dem Bildschirm. */
   .welt { background: linear-gradient(#CFEFFF, #EAF7FF 60%); }
   .huegel { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 34rem; }
@@ -19,6 +20,24 @@
   .matte ls-knopf { position: absolute; right: 4rem; bottom: 4rem; }
   .matte .aufgabe { position: relative; margin: 2.4rem 3rem; font-size: 4.4rem; font-weight: 700; line-height: 1; }
   ls-tastatur { position: absolute; left: 50%; bottom: 2.4rem; transform: translateX(-50%); }
+  /* Ziehen (&ziehen): Matte mit zwei Lücken, darunter das Tablett mit dem Vorrat. */
+  .ziehen-demo[hidden] { display: none; }
+  .ziehen-matte {
+    position: absolute; top: 36rem; left: 50%; transform: translateX(-50%);
+    display: grid; gap: 3rem; padding: 3.6rem 7rem;
+    font-size: 6rem; font-weight: 700; line-height: 1;
+  }
+  .zeile { display: flex; align-items: center; gap: 2.4rem; }
+  .luecke {
+    display: grid; place-items: center; width: 15rem; height: 14rem;
+    background: var(--ls-nebel); border: var(--ls-kontur) solid var(--ls-linie); border-radius: var(--ls-radius);
+  }
+  .luecke:has(.teil) { background: none; border-color: transparent; }
+  .ziehen-tablett {
+    position: absolute; top: 76rem; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 4rem;
+  }
+  .ziehen-tablett .platz { display: grid; place-items: center; width: 15rem; height: 14rem; }
   .pausen-inhalt { display: grid; gap: 2rem; justify-items: center; font-size: 4rem; text-align: center; max-width: 90rem; }
   .pausen-inhalt img { width: 22rem; height: 22rem; }
 </style>
@@ -38,6 +57,17 @@
     <ls-knopf art="haupt" symbol="zurueck.svg" wort="Weiter" gespiegelt></ls-knopf>
   </div>
   <ls-tastatur id="tastatur" tasten="Die Katze schläft" leertaste loeschen></ls-tastatur>
+  <div class="ziehen-demo" hidden>
+    <div class="lernfeld ziehen-matte">
+      <div class="zeile">5 sind 3 und <span class="luecke" data-passt="2"></span></div>
+      <div class="zeile">5 sind 4 und <span class="luecke" data-passt="1"></span></div>
+    </div>
+    <div class="tablett ziehen-tablett">
+      <span class="platz"><span class="teil" data-wert="1">1</span></span>
+      <span class="platz"><span class="teil" data-wert="2">2</span></span>
+      <span class="platz"><span class="teil" data-wert="3">3</span></span>
+    </div>
+  </div>
 </div>
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause">
@@ -52,10 +82,34 @@
   import "./hilfe.js";
   import "./pause.js";
   import "./tastatur.js";
+  import { ziehbar, setze, zurueck } from "./ziehen.js";
   const q = new URLSearchParams(location.search);
   const leiste = document.getElementById("leiste");
   for (const a of ["fach", "titel", "thema"]) if (q.get(a)) leiste.setAttribute(a, q.get(a));
-  document.getElementById("blase").sage("Welches Stäbchen passt an die Fünf, damit es sieben werden?", { sprechen: false });
+  const blase = document.getElementById("blase");
+  if (q.has("ziehen")) {
+    for (const el of document.querySelectorAll(".matte, ls-tastatur")) el.hidden = true;
+    document.querySelector(".ziehen-demo").hidden = false;
+    blase.sage("Welche Zahl passt in die Lücke?", { sprechen: false });
+    // Platzhalter-Spiel: passt die Zahl, bleibt sie in der Lücke, sonst kehrt sie aufs Tablett zurück.
+    window.abgelegt = [];
+    const freieLuecken = () => [...document.querySelectorAll(".luecke")].filter((l) => !l.querySelector(".teil"));
+    for (const teil of document.querySelectorAll(".ziehen-demo .teil")) {
+      const loesen = ziehbar(teil, {
+        ziele: freieLuecken,
+        beimAblegen(teil, luecke) {
+          window.abgelegt.push([teil.dataset.wert, luecke.dataset.passt]);
+          if (teil.dataset.wert === luecke.dataset.passt) {
+            setze(teil, luecke);
+            loesen();
+            teil.classList.add("gesetzt");
+          } else zurueck(teil);
+        },
+      });
+    }
+  } else {
+    blase.sage("Welches Stäbchen passt an die Fünf, damit es sieben werden?", { sprechen: false });
+  }
   if (q.has("leuchte")) document.getElementById("hilfe").leuchte();
   if (q.has("pause")) document.getElementById("pause").zeige();
   if (q.has("leer")) document.querySelector(".pausen-inhalt").remove();
