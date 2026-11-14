@@ -109,6 +109,11 @@ export function sammle(wurzel) {
   for (const p of dateien(join(spiele, "einfuehrungen"), [".json"]))
     for (const t of felder(json(p), "sprich")) neu(t, relative(spiele, p));
 
+  // Diktatsätze (Material für die Schreibspiele): der Satz selbst, ohne Variante, wie bisher aufgenommen.
+  // Einleitungen wie „Hör noch mal hin. …“ gehören zum jeweiligen Spiel und kommen mit ihm.
+  for (const s of json(join(spiele, "saetze", "saetze.json")).saetze ?? [])
+    if (typeof s?.text === "string") neu(s.text, "saetze/saetze.json");
+
   // Feste Sätze im Spielcode
   for (const p of dateien(spiele, [".html", ".js"], ["kern", "audio"])) {
     const { texte, offen: n } = literaleAusCode(readFileSync(p, "utf8"));

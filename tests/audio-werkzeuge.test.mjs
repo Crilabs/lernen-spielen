@@ -78,6 +78,13 @@ test("sammle findet Lernplan, Einführungen und feste Sätze", () => {
   assert.ok(eintraege.some((e) => /\.(html|js)$/.test(e.quellen[0])));
 });
 
+test("sammle findet jeden Diktatsatz aus saetze.json", () => {
+  const texte = new Set(sammle(WURZEL).eintraege.filter((e) => e.quellen.includes("saetze/saetze.json")).map((e) => e.text));
+  const saetze = JSON.parse(readFileSync(join(WURZEL, "spiele/saetze/saetze.json"), "utf8")).saetze;
+  assert.ok(saetze.length > 0);
+  for (const s of saetze) assert.ok(texte.has(normalisiere(s.text)), s.text);
+});
+
 test("erzeuge: neue Datei, unverändert, Zahl, von Hand, verwaist", async () => {
   const geschrieben = [];
   const synth = async (s) => Buffer.from(s);
