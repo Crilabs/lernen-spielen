@@ -1,5 +1,18 @@
 {
  "themen": {
+  "einmaleins-gemischt": {
+   "fach": "mathe",
+   "name": "Einmaleins gemischt",
+   "titel": "Malaufgaben an der Hauswand",
+   "formen": [
+    {
+     "situation": "unterwegs",
+     "name": "Fenster rechnen"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/einmaleins-gemischt.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
