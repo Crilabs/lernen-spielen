@@ -883,12 +883,13 @@ function steheSatz(gesagt) {
 /**
  * Sanft (Standard) und Abenteuer (Entwurf §7): Vor dem Rundenende ist eine Zeile der Vorratsliste verwischt (die
  * letzte des Kindes, logik.js verwischteZeile): „a · n = ▢“, die Kurzkette bleibt. Der Erzähler sagt es, dann tippt das
- * Kind das Ergebnis neu, eine Aufgabe mehr, wie jede andere gemeldet (die Lernsteuerung bucht eine zweite richtige
- * Antwort am selben Tag nicht doppelt, faellig()). Die Kette wechselt vorher, wenn die Zeile zu einer anderen gehört;
- * ihr Pfeilchen ist leer, die Zeile verdeckt, bis getippt ist (§2 Satz 6). Ruhig: keine.
- * @param {string} zeile "a*n" @param {any} r Runde @param {string | null} stufe Lernstufe der letzten Aufgabe
+ * Kind das Ergebnis neu, eine Aufgabe mehr. Sie geht **nicht** an die Lernsteuerung: Das Kind hat sie eben erst gelöst,
+ * eine zweite Antwort so kurz danach sagt nichts über das Behalten und darf keine Probe voranbringen. Für die
+ * Browser-Prüfung kommt sie als ls-ergebnis mit `zusatz: true`. Die Kette wechselt vorher, wenn die Zeile zu einer
+ * anderen gehört; ihr Pfeilchen ist leer, die Zeile verdeckt, bis getippt ist (§2 Satz 6). Ruhig: keine.
+ * @param {string} zeile "a*n" @param {string | null} stufe Lernstufe der letzten Aufgabe
  */
-async function spieleVerwischt(zeile, r, stufe) {
+async function spieleVerwischt(zeile, stufe) {
   const aufgabe = { ziel: { key: `mal:${zeile}` }, stufe: stufe ?? "material" };
   raeumeAuf();
   await wechsleKette(aufgabe);
@@ -901,8 +902,7 @@ async function spieleVerwischt(zeile, r, stufe) {
   await steheSatz(blase.sage("Auf der Liste ist eine Zeile verwischt. Die Kette daneben zeigt, wohin sie gehört."));
   erzaehler.auftrag(true);
   const e = await spieleAufgabe(aufgabe);
-  const ergebnis = { key: e.key, ok: e.versuche === 0, hilfe: e.hilfe, ms: e.ms };
-  r.melde(e.key, ergebnis);
+  const ergebnis = { key: e.key, ok: e.versuche === 0, hilfe: e.hilfe, ms: e.ms, zusatz: true };
   document.dispatchEvent(new CustomEvent("ls-ergebnis", { detail: ergebnis }));
   await warteFolge();
 }
@@ -971,7 +971,7 @@ async function spieleRunde(vorschau) {
 
   ueberspringeAlles();
   const verwischt = verwischteZeile([...liste.children].map((z) => /** @type {HTMLElement} */ (z).dataset.aufgabe ?? ""), geschichtenStufe());
-  if (verwischt) await spieleVerwischt(verwischt, r, letzteStufe);
+  if (verwischt) await spieleVerwischt(verwischt, letzteStufe);
   ueberspringeAlles();
   await Promise.all([erzaehler.rundenende(gespielt >= AUFGABEN_JE_RUNDE, kernRunde), warte(1500)]);
   const { hinweisSpiel } = await r.ende();

@@ -243,10 +243,13 @@ class Spieler {
 
   /** Wartet, bis das Spiel einen Zug erwartet (Aufgabe oder Pause) oder im Fehler steht. */
   async warteAufZug() {
-    const t0 = Date.now();
+    let t0 = Date.now();
     let z = await this.zustand();
+    let phase = z.phase;
     while (!["aufgabe", "pause", "fehler"].includes(z.phase)) {
       if (!PHASEN.includes(z.phase)) throw new Haenger(`unbekannte Phase ${z.phase}`);
+      // Jede Phase hat ihre eigene Grenze: nach der Einführung kann eine Folge kommen (M37: Timo legt vor).
+      if (z.phase !== phase) { phase = z.phase; t0 = Date.now(); }
       const grenze = z.phase === "einfuehrung" ? MAX_EINFUEHRUNG_MS : MAX_WARTEN_MS;
       if (Date.now() - t0 > grenze) throw new Haenger(`hängt: ${Math.round(grenze / 1000)} s in Phase „${z.phase}“ ohne Zug`);
       await warte(150);

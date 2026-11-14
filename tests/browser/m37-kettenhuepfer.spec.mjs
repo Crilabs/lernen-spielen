@@ -12,7 +12,7 @@
 //    - Der Korb bekommt erst etwas, wenn die Packungen gelandet sind (nicht schon beim Tippen auf Fertig); nach dem
 //      Wegtippen liegen je Lösung a · n (samt Timos) a Packungen der Reihe darin (Ausbau: jede geflogene bleibt).
 //    - Sanft (Standard): vor dem Rundenende ist die letzte Zeile des Kindes verwischt und kommt als Aufgabe noch einmal
-//      (Pfeilchen leer, Zeile „▢“), danach steht sie wieder da.
+//      (Pfeilchen leer, Zeile „▢“), danach steht sie wieder da; sie geht nicht an die Lernsteuerung (ls-ergebnis zusatz).
 //    - Timo steht still, sobald die erste Aufgabe dasteht.
 // 2. Kernaufgaben (Kette wechselt von Aufgabe zu Aufgabe), 1280 × 800: Ab Phase `aufgabe` ändert sich die Blase nicht
 //    mehr von selbst, auch nach einem Kettenwechsel (Prüfstand B, Runde 2: der Auftrag ersetzte den Wechselsatz still,
@@ -110,7 +110,8 @@ try {
         const v = (await sp.bild()).verwischt;
         if (v) {
           verwischt.push(v);
-          pruefe(`R${runde}: die verwischte Zeile ist die letzte des Kindes und die Aufgabe`, `mal:${v}` === z.aufgabe && v === gesehen[gesehen.length - 1], `${v}, ${z.aufgabe}, zuletzt ${gesehen[gesehen.length - 1]}`);
+          const letzte = await seite.evaluate(() => /** @type {HTMLElement} */ (document.querySelector("#liste .zeile:last-child")).dataset.aufgabe);
+          pruefe(`R${runde}: die verwischte Zeile ist die letzte des Kindes auf der Liste und die Aufgabe`, `mal:${v}` === z.aufgabe && v === letzte && v !== timo && gesehen.includes(v), `${v}, ${z.aufgabe}, letzte ${letzte}, Timo ${timo}`);
         } else folge.push(z.aufgabe);
         await seite.waitForTimeout(80);
         for (const wann of ["80 ms", "600 ms"]) {
@@ -133,10 +134,13 @@ try {
         if (v) pruefe(`R${runde}: die verwischte Zeile steht nach dem Tippen wieder da`, await seite.evaluate((v) => !document.querySelector(`#liste [data-aufgabe="${v}"]`).classList.contains("verwischt"), v));
       }
       pruefe(`Runde ${runde}: Sanft, genau eine verwischte Zeile`, verwischt.length === 1, verwischt.join(" "));
-      pruefe(`Runde ${runde}: ${AUFGABEN_JE_RUNDE} Aufgaben (${folge.length}: ${folge.join(" ")})`, folge.length === AUFGABEN_JE_RUNDE);
+      // Die Lernsteuerung darf eine Runde früher beenden (Ereignis „gekonnt“ nach der Probe, seit es drei Lernstufen
+      // gibt in Runde 3 möglich); dann fehlt „Die Vorratsliste ist voll“, sonst hat jede Runde AUFGABEN_JE_RUNDE.
+      const frueh = folge.length < AUFGABEN_JE_RUNDE;
+      pruefe(`Runde ${runde}: ${AUFGABEN_JE_RUNDE} Aufgaben oder früher beendet (${folge.length}: ${folge.join(" ")})`, folge.length === AUFGABEN_JE_RUNDE || (frueh && runde > 1));
       pruefe(`Runde ${runde}: keine Aufgabe zweimal direkt hintereinander`, folge.every((k, i) => i === 0 || k !== folge[i - 1]), folge.join(" "));
       const ende = await sp.blase();
-      pruefe(`Runde ${runde}: „Die Vorratsliste ist voll“`, ende.startsWith("Die Vorratsliste ist voll"), ende);
+      pruefe(`Runde ${runde}: ${frueh ? "„Im Korb liegen die Packungen.“" : "„Die Vorratsliste ist voll“"}`, frueh ? ende === "Im Korb liegen die Packungen." : ende.startsWith("Die Vorratsliste ist voll"), ende);
       await sp.weiter();
       await seite.waitForFunction(() => window.lsPruefen.zustand().phase !== "pause", null, { timeout: 10000 });
     }
