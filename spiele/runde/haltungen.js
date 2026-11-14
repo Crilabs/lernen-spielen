@@ -53,7 +53,8 @@ meldeHaltung({
 
 meldeHaltung({
   id: "nachdenken", ansicht: "dreiviertel", wort: "denkt nach", gesicht: "nachdenken",
-  winkel: { "arm-vorn-oben": 38, "arm-vorn-unten": 142, "arm-hinten-oben": -14, "arm-hinten-unten": -62, kopf: 7 },
+  winkel: { "arm-vorn-oben": 30, "arm-vorn-unten": 128, "arm-hinten-oben": -14, "arm-hinten-unten": -62, kopf: 7 },
+  haende: { vorn: "faust" },
 });
 
 meldeHaltung({
