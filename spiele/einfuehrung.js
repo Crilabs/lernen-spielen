@@ -65,41 +65,31 @@ export function fuelleVorlage(vorlage, werte) {
 // ---------------------------------------------------------------- DOM-Teil
 
 const MIN_MS = 2500, MS_JE_ZEICHEN = 60;
-const PERLE = { 1: "#E53935", 2: "#43A047", 3: "#F48FB1", 4: "#FDD835", 5: "#64B5F6", 6: "#9C27B0", 7: "#FFFFFF", 8: "#8D6E63", 9: "#1E3A8A", 10: "#F9A825" };
-const INK = "#3B2A6B";
 
+// Aussehen nach den Rahmen-Bausteinen (docs/bedienung.md §9, Farbwelt): Hintergrund der Spielwelt (Option
+// `hintergrund`, sonst Nebel), Erzählblase ohne Zipfel (docs/stimme.md: es spricht der Erzähler), Perlen als
+// <ls-perlenstab> (grundsaetze-bilder.md M1–M3) auf einer flachen Matte aus Papier. Werte aus rahmen/stil.js.
 const CSS = `
-.einf{position:fixed;inset:0;z-index:1000;font-size:calc(100vh / 108);font-family:"Andika",sans-serif;color:${INK};
-  background:rgba(232,247,255,.97);touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden}
+.einf{position:fixed;inset:0;z-index:1000;font-size:calc(100vh / 108);font-family:"Andika",sans-serif;color:var(--ls-tinte,#3B2A6B);
+  background:var(--einf-hintergrund,var(--ls-nebel,#F1EEF8)) center / cover no-repeat;touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden}
 .einf *{box-sizing:border-box}
-.einf .buehne{position:absolute;left:0;right:0;top:0;bottom:0}
-.einf .blase{position:absolute;left:50%;top:7rem;transform:translateX(-50%);width:min(110rem,72%);min-height:10rem;background:#fff;border:.5rem solid ${INK};
-  border-radius:3.6rem;padding:1.8rem 2.8rem;font:400 3.8rem/1.3 "Andika",sans-serif;text-align:center;display:flex;align-items:center;justify-content:center}
-.einf .blase::before,.einf .blase::after{content:"";position:absolute;left:50%;border:solid transparent}
-.einf .blase::before{bottom:-3.4rem;margin-left:-1.8rem;border-width:3.4rem 1.8rem 0 1.8rem;border-top-color:${INK}}
-.einf .blase::after{bottom:-2.4rem;margin-left:-1.3rem;border-width:2.6rem 1.3rem 0 1.3rem;border-top-color:#fff}
-.einf .haus{position:absolute;top:2rem;left:2.4rem;width:8rem;height:8rem;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;
-  padding:1.7rem;box-shadow:0 .5rem 0 rgba(59,42,107,.15);text-decoration:none;z-index:2}
+.einf .blase{position:absolute;left:50%;top:4rem;transform:translateX(-50%);width:min(130rem,80%);min-height:12rem;
+  background:var(--ls-papier,#FFFDF7);border:var(--ls-kontur,.3rem) solid var(--ls-tinte,#3B2A6B);border-radius:var(--ls-radius,3rem);
+  padding:2.2rem 4rem;font:400 4rem/1.3 "Andika",sans-serif;text-align:center;display:flex;align-items:center;justify-content:center}
+.einf .einf-buehne{position:absolute;left:30rem;right:30rem;top:30rem;bottom:16rem;background:var(--ls-papier,#FFFDF7);
+  border:var(--ls-kontur,.3rem) solid var(--ls-tinte,#3B2A6B);border-radius:var(--ls-radius-gross,4rem)}
+.einf .haus{position:absolute;top:4rem;left:3rem;width:11rem;height:11rem;border-radius:50%;background:var(--ls-papier,#FFFDF7);
+  border:var(--ls-kontur,.3rem) solid var(--ls-tinte,#3B2A6B);display:flex;align-items:center;justify-content:center;
+  padding:2.4rem;box-shadow:0 .6rem 0 var(--ls-tinte-weich,#8C7FB0);text-decoration:none;z-index:2}
 .einf .haus img{width:100%;height:100%;display:block}
-.einf .haus:active{transform:translateY(.3rem);box-shadow:0 .2rem 0 rgba(59,42,107,.15)}
-.einf .el{position:absolute;bottom:12rem;transform:translateX(-50%)}
-.einf .el.figur-h{width:32rem}
-.einf .stab{display:flex;margin-bottom:0}
-.einf .perlen{display:flex;gap:4rem;align-items:flex-end}
-.einf .stab{padding:.5rem;border:.4rem solid ${INK};border-radius:99rem;background:var(--c);box-shadow:0 .6rem 0 rgba(59,42,107,.15)}
-.einf .stab b{display:block;width:var(--d);height:var(--d);border-radius:50%;background:var(--c);border:.3rem solid ${INK};
-  background-image:radial-gradient(circle at 32% 30%,rgba(255,255,255,.75) 0 14%,transparent 16%)}
+.einf .haus:active{transform:translateY(.3rem);box-shadow:0 .3rem 0 var(--ls-tinte-weich,#8C7FB0)}
+.einf .el{position:absolute;top:50%;transform:translate(-50%,-50%)}
+.einf .el.figur-h{width:32rem;top:auto;bottom:4rem;transform:translateX(-50%)}
+.einf .perlen{display:flex;gap:3rem;align-items:center}
+.einf .perlen ls-perlenstab{height:var(--einf-stab,9rem)}
 .einf .zahl{font:700 18rem/1 "Andika",sans-serif}
 @media (prefers-reduced-motion:reduce){.einf *{animation:none!important;transition:none!important}}
 `;
-
-function stab(n, el) {
-  const d = document.createElement("div"); d.className = "stab";
-  d.style.setProperty("--c", PERLE[n] || PERLE[10]);
-  d.style.setProperty("--d", Math.min(6, 60 / n) + "em");
-  for (let i = 0; i < n; i++) d.appendChild(document.createElement("b"));
-  el.appendChild(d);
-}
 
 function baueBild(buehne, bild, reduziert) {
   const F = window.Figuren;
@@ -117,7 +107,15 @@ function baueBild(buehne, bild, reduziert) {
       if (svg && b.aktion === "schau") { const h = svg.querySelector(".head"); if (h) h.style.transform = "rotate(-6deg)"; }
     } else if (Array.isArray(b.perlen)) {
       el.classList.add("perlen");
-      for (const n of b.perlen) if (Number.isInteger(n) && n > 0) stab(n, el);
+      const werte = b.perlen.filter(n => Number.isInteger(n) && n > 0 && n <= 10);
+      // Perlengröße so, dass alle Stäbe der Szene auf die Matte passen (gleiche Größe für alle, Länge proportional)
+      const lang = werte.reduce((s, n) => s + n * 1.12 + (n > 5 ? 0.6 : 0), 0) + (werte.length - 1) * 2.4;
+      el.style.setProperty("--einf-stab", Math.min(9, (110 / Math.max(lang, 1)) * 1.4).toFixed(2) + "rem");
+      for (const n of werte) {
+        const st = document.createElement("ls-perlenstab");
+        st.setAttribute("wert", String(n));
+        el.appendChild(st);
+      }
     } else if (b.zahl !== undefined) {
       el.classList.add("zahl"); el.textContent = String(b.zahl);
     } else continue;
@@ -126,7 +124,8 @@ function baueBild(buehne, bild, reduziert) {
   }
 }
 
-export async function spieleEinfuehrung(pfad, werte, { ton = true } = {}) {
+// hintergrund: CSS-Bild der Spielwelt, z. B. 'url("bilder/zerlegungshaus/wiese.jpg")' (sonst Nebel).
+export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund = "" } = {}) {
   let szenen = [];
   try {
     const r = await fetch(new URL(pfad, document.baseURI));
@@ -141,9 +140,11 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true } = {}) {
   if (!document.getElementById("einf-css")) {
     const st = document.createElement("style"); st.id = "einf-css"; st.textContent = CSS; document.head.appendChild(st);
   }
+  try { await import("./rahmen/perlenstab.js"); } catch (e) { /* ohne Baustein bleiben die Perlen weg */ }
   const wurzel = document.createElement("div"); wurzel.className = "einf";
+  if (hintergrund) wurzel.style.setProperty("--einf-hintergrund", hintergrund);
   wurzel.setAttribute("role", "dialog");
-  const buehne = document.createElement("div"); buehne.className = "buehne";
+  const buehne = document.createElement("div"); buehne.className = "einf-buehne";
   const blase = document.createElement("div"); blase.className = "blase"; blase.setAttribute("aria-live", "polite");
   wurzel.append(buehne, blase);
   wurzel.addEventListener("pointerdown", e => e.preventDefault());
