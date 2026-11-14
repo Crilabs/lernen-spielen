@@ -1,7 +1,6 @@
 ---
 thema: nachsilben-ung-heit-keit-nis
 fach: schreiben
-entwurf: true
 bild: { figur: nudelpackung, zustand: steht }
 quellen:
   - Sprachwelt 2, Arbeitsheft Sprache erforschen, Grossschreibung in Sätzen – Nachmorpheme für die Grossschreibung nutzen, Schulverlag plus, https://www.schulverlag.ch/assets/SPRACHWELT/AH_Sprache_erforschen_SPRACHWELT-2_Grossschreibung_web.pdf, abgerufen 2026-11-14
