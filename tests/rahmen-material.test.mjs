@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
-const { materialFuer } = await import("../spiele/rahmen/material.js");
+const { materialFuer, WORTART } = await import("../spiele/rahmen/material.js");
 const t = (id, extra = {}) => ({ id, name: id, strang: "mathe", art: null, zahl: null, ...extra });
 
 test("Zerlegung mit Zahl 1 bis 10 → Perlenstab dieser Zahl", () => {
@@ -20,21 +21,29 @@ test("rechnen ohne Zahl oder mit Zahl über 10 → Karte (Fachsymbol bleibt der 
   assert.deepEqual(materialFuer(t("z", { art: "zerlegung", zahl: 0, name: "Null" })), { baustein: "karte", wert: "N" });
 });
 
-test("Wortarten: Nomen, Verb, Adjektiv, Artikel (Id oder Bereich im Fach Grammatik)", () => {
-  const g = (id, extra) => t(id, { strang: "grammatik", ...extra });
-  assert.deepEqual(materialFuer(g("nomen-proben", { name: "Nomen-Proben" })), { baustein: "wortart", wert: "nomen" });
-  assert.deepEqual(materialFuer(g("namenwoerter", { name: "Nomen", bereich: "Nomen" })), { baustein: "wortart", wert: "nomen" });
-  assert.deepEqual(materialFuer(g("tunwoerter", { name: "Verben", bereich: "Verben" })), { baustein: "wortart", wert: "verb" });
-  assert.deepEqual(materialFuer(g("grundform-verb", { bereich: "Verben" })), { baustein: "wortart", wert: "verb" });
-  assert.deepEqual(materialFuer(g("wiewoerter", { name: "Adjektive", bereich: "Adjektive" })), { baustein: "wortart", wert: "adjektiv" });
-  assert.deepEqual(materialFuer(g("adjektive-steigern", { name: "Steigern" })), { baustein: "wortart", wert: "adjektiv" });
-  assert.deepEqual(materialFuer(g("artikel-im-fall", { name: "Artikel im Fall" })), { baustein: "wortart", wert: "artikel" });
+test("Wortarten: nur Themen der Liste, mit den echten Ids", () => {
+  const g = (id) => t(id, { strang: "grammatik" });
+  const w = (id) => materialFuer(g(id));
+  assert.deepEqual(w("namenwoerter"), { baustein: "wortart", wert: "nomen" });
+  assert.deepEqual(w("nomen-proben"), { baustein: "wortart", wert: "nomen" });
+  assert.deepEqual(w("tunwoerter"), { baustein: "wortart", wert: "verb" });
+  assert.deepEqual(w("wiewoerter"), { baustein: "wortart", wert: "adjektiv" });
+  assert.deepEqual(w("der-die-das"), { baustein: "wortart", wert: "artikel" });
+  assert.deepEqual(w("bestimmter-unbestimmter-begleiter"), { baustein: "wortart", wert: "artikel" });
 });
 
-test("Wortart nur am Anfang der Id oder über den Bereich: Rechtschreibung über Nomen ist keine Wortart", () => {
-  assert.equal(materialFuer(t("verlaengern-nomen-d-t", { strang: "schreiben", name: "Verlängern: d oder t?" })).baustein, "karte");
-  assert.equal(materialFuer(t("verlaengern-verben", { strang: "grammatik", name: "Verlängern bei Verben", bereich: "Wortbildung" })).baustein, "karte");
-  assert.equal(materialFuer(t("verben-als-nomen", { strang: "grammatik", name: "Verben als Nomen", bereich: "Wortbildung" })).baustein, "wortart");
+test("echte Ids ohne Wortart-Ziel → Karte", () => {
+  for (const id of ["personalpronomen", "nomen-gross-artikelprobe", "nomen-genauer-machen", "verlaengern-nomen-d-t", "verlaengern-verben",
+    "grundform-verb", "adjektive-steigern", "artikel-im-fall", "verben-als-nomen", "pronomen-statt-nomen"]) {
+    assert.equal(materialFuer(t(id, { strang: "grammatik", bereich: "Nomen", name: "Xyz" })).baustein, "karte", id);
+  }
+});
+
+test("jede Id der Liste gibt es im echten Lernplan (Fach grammatik)", () => {
+  const plan = JSON.parse(readFileSync(new URL("../spiele/lernplan.json", import.meta.url), "utf8"));
+  for (const id of Object.keys(WORTART)) {
+    assert.equal(plan.themen.find((x) => x.id === id)?.strang, "grammatik", id);
+  }
 });
 
 test("alles andere → Karte mit Ziffer oder erstem Buchstaben", () => {

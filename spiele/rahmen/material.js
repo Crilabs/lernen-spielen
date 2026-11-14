@@ -4,12 +4,10 @@
 // Regeln in dieser Reihenfolge:
 //   1. Aufgabenart zerlegung / rechnen / zwillinge / menge mit ganzer Zahl 1 bis 10 → Perlenstab dieser Zahl
 //      (ls-perlenstab zeichnet nur 1 bis 10).
-//   2. Thema einer Wortart → Wortart-Zeichen. Erkannt an
-//      a) dem ersten Wort der Id (nomen-proben, namenwoerter, verb…, tunwoerter, adjektiv…, wiewoerter, artikel…)
-//         oder
-//      b) dem Bereich des Themas (Feld `bereich` aus dem Lernplan) im Fach Grammatik: Nomen, Verben,
-//         Adjektive, Artikel.
-//      Wörter mitten in der Id zählen nicht („verlaengern-nomen-d-t“ ist Rechtschreibung).
+//   2. Thema, dessen Lernziel die Wortart selbst ist → Wortart-Zeichen. Nur über die ausdrückliche Liste WORTART
+//      (Themen-Id → Wortart, aus dem Fach grammatik von lernplan.json; ein Test prüft, dass jede Id dort existiert).
+//      Keine Erkennung über Namen oder Bereich: Pronomen, Rechtschreibung über Nomen, Formenbildung usw. bekommen
+//      kein Wortart-Zeichen (in Kl. 1–2 gibt es nur Nomen, Artikel, Adjektiv, Verb).
 //   3. alles andere → Karte mit der Ziffer (letzte Zahl im Namen) oder dem ersten Buchstaben des Namens.
 
 /** @typedef {{ id: string, name?: string, strang?: string, bereich?: string, art?: string|null, zahl?: number|null }} Material */
@@ -17,25 +15,25 @@
 
 const MIT_ZAHL = new Set(["zerlegung", "rechnen", "zwillinge", "menge"]);
 
-/** @type {Record<string, "nomen"|"verb"|"adjektiv"|"artikel">} */
-const NACH_ID = {
-  nomen: "nomen", namenwoerter: "nomen",
-  verb: "verb", verben: "verb", tunwoerter: "verb",
-  adjektiv: "adjektiv", adjektive: "adjektiv", wiewoerter: "adjektiv",
-  artikel: "artikel",
+/**
+ * Themen-Id → Wortart (nur Themen, deren Lernziel die Wortart selbst ist).
+ * @type {Record<string, "nomen"|"verb"|"adjektiv"|"artikel">}
+ */
+export const WORTART = {
+  namenwoerter: "nomen",                        // Nomen erkennen
+  "nomen-proben": "nomen",                      // Prüfen, ob ein Wort ein Nomen ist
+  tunwoerter: "verb",                           // Verben erkennen
+  wiewoerter: "adjektiv",                       // Adjektive erkennen
+  "der-die-das": "artikel",                     // Artikel zum Nomen
+  "bestimmter-unbestimmter-begleiter": "artikel", // bestimmter und unbestimmter Artikel
 };
-/** @type {Record<string, "nomen"|"verb"|"adjektiv"|"artikel">} */
-const NACH_BEREICH = { Nomen: "nomen", Verben: "verb", Adjektive: "adjektiv", Artikel: "artikel" };
 
 /**
  * Wortart eines Themas oder null.
  * @param {Material} thema
  */
 export function wortartVon(thema) {
-  const erstes = String(thema.id ?? "").split("-")[0];
-  if (Object.hasOwn(NACH_ID, erstes)) return NACH_ID[erstes];
-  if (thema.strang === "grammatik" && typeof thema.bereich === "string" && Object.hasOwn(NACH_BEREICH, thema.bereich)) return NACH_BEREICH[thema.bereich];
-  return null;
+  return Object.hasOwn(WORTART, thema.id) ? WORTART[thema.id] : null;
 }
 
 /**

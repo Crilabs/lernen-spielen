@@ -98,3 +98,10 @@ test("dranThemen: gekonnte Themen und leerer Stand → leer", () => {
   assert.deepEqual(dranThemen(CTX, stand), []);
   assert.deepEqual(dranThemen(CTX, undefined), []);
 });
+
+test("gekonnteThemen: Aufgabenart ohne Zahl und ohne Ziffer im Namen → zahl null", () => {
+  const ctx = { plan: { themen: [thema("zw", [], { art: "zwillinge" }, { name: "Zwillingsaufgaben" })] }, spiele: { spiele: [] } };
+  const stand = neuerStand();
+  markiereGekonnt(stand, "zw", "2026-11-12");
+  assert.equal(gekonnteThemen(ctx, stand)[0].zahl, null);
+});
