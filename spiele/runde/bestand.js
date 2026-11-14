@@ -23,7 +23,8 @@ import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, gelenkeFuer } fro
  * @typedef {{id: string, ansicht: Ansicht, schritte: Schritt[], mal?: number, ende: string, braucht?: string[],
  *            rollstuhl?: {schritte: Schritt[]}}} Bewegung
  * @typedef {Partial<Record<Ansicht, Fassung>>} ZubehoerSvg
- * @typedef {{platz: string, ebene: "vorne"|"hinten", svg: ZubehoerSvg, zustaende?: Record<string, ZubehoerSvg>}} ZubehoerTeil
+ * @typedef {{platz: string, ebene: "vorne"|"hinten", svg: ZubehoerSvg, zustaende?: Record<string, ZubehoerSvg>, greift?: boolean}} ZubehoerTeil
+ *   greift: an einem Hand-Platz schließt sich die Hand zur Faust (wenn die Haltung keine andere Form wählt)
  * @typedef {{id: string, wort: string, nurAnsicht?: Ansicht, teile: ZubehoerTeil[], verdeckt?: string[],
  *            je?: Record<string, {versatz?: [number, number], mass?: number}>}} Zubehoer
  */

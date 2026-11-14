@@ -88,9 +88,10 @@ export function labelFuer(kindId, haltungId) {
 
 /**
  * Zeichnet eine aufgelöste Pose.
- * @param {string} kindId @param {Pose} p @param {Ausstattung} [aus]
+ * @param {string} kindId @param {Pose} pose @param {Ausstattung} [aus]
  */
-export function zeichnePose(kindId, p, aus = {}) {
+export function zeichnePose(kindId, pose, aus = {}) {
+  let p = pose;
   const k = kind(kindId);
   const ans = ansichtVon(kindId, p.ansicht);
   const zustaende = { ...p.zustaende, ...(aus.zustaende ?? {}) };
@@ -101,6 +102,13 @@ export function zeichnePose(kindId, p, aus = {}) {
     return zb;
   }).filter((zb) => !zb.nurAnsicht || zb.nurAnsicht === p.ansicht);
   const verdeckt = new Set(aktiv.flatMap((zb) => zb.verdeckt ?? []));
+  // Zubehör, das greift: die offene Hand an diesem Platz schließt sich zur Faust.
+  for (const zb of aktiv) {
+    for (const t of zb.teile) {
+      const seite = t.platz === "hand-vorn" ? "vorn" : t.platz === "hand-hinten" ? "hinten" : null;
+      if (t.greift && seite && p.haende[seite] === "offen") p = { ...p, haende: { ...p.haende, [seite]: "faust" } };
+    }
+  }
 
   /** @param {string} gelenk @param {"vorne"|"hinten"} ebene @param {"flaeche"|"kontur"} modus */
   const zubehoerAn = (gelenk, ebene, modus) => aktiv.flatMap((zb) => zb.teile.map((t, i) => {

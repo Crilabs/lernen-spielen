@@ -63,8 +63,8 @@ meldeBewegung({
   schritte: [
     { ms: 400, haltung: "zaubern" },
     { ms: 200, winkel: { "arm-vorn-oben": -95 } },
-    { ms: 250, winkel: { "arm-vorn-oben": -128 } },
-    { ms: 500, winkel: { "arm-vorn-oben": -122 } },
+    { ms: 250, winkel: { "arm-vorn-oben": -128 }, zustaende: { "zauberstab-umhang": "leuchtet" } },
+    { ms: 500, winkel: { "arm-vorn-oben": -122 }, zustaende: { "zauberstab-umhang": "" } },
   ],
 });
 

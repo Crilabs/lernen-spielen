@@ -24,6 +24,7 @@ beforeEach(() => {
     id: "test-stab", wort: "der Stab",
     teile: [{ platz: "hand-vorn", ebene: "vorne", svg: svgZ("stab"), zustaende: { leuchtet: svgZ("stab-hell") } }],
   });
+  meldeZubehoer({ id: "test-stock", wort: "der Stock", teile: [{ platz: "hand-vorn", ebene: "hinten", greift: true, svg: svgZ("stock") }] });
   meldeZubehoer({ id: "test-decke", wort: "die Decke", teile: [{ platz: "schoss", ebene: "vorne", svg: svgZ("decke") }] });
   meldeZubehoer({ id: "test-umhang", wort: "der Umhang", teile: [{ platz: "ruecken", ebene: "hinten", svg: svgZ("umhang") }] });
   meldeZubehoer({
@@ -180,4 +181,11 @@ test("Kind kann Farbwerte als CSS-Variablen mitgeben (Gesichtsfarben je Kind)", 
   meldeKind(k);
   assert.match(zeichne("test-farbig"), /^<svg [^>]*style="--lippe:#3A1A14"/);
   assert.doesNotMatch(zeichne("test-geht"), /^<svg [^>]*style=/);
+});
+
+test("Zubehör, das greift, schließt die Hand zur Faust und liegt hinter der Hand", () => {
+  const svg = F(zeichne("test-geht", { zubehoer: ["test-stock"] }));
+  assert.ok(svg.includes('data-test="hand-faust"') && !svg.includes('data-test="hand-offen"'));
+  assert.ok(svg.indexOf('data-test="stock-d"') < svg.indexOf('data-test="hand-faust"'), "Stock liegt hinter der Faust");
+  assert.ok(F(zeichne("test-geht", { haltung: "deuten", zubehoer: ["test-stock"] })).includes('data-test="hand-zeigen"'), "eine gewählte Handform bleibt");
 });

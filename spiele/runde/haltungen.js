@@ -62,13 +62,14 @@ meldeHaltung({
 });
 
 meldeHaltung({
-  id: "zaubern", ansicht: "dreiviertel", wort: "zaubert", gesicht: "freuen-klein",
-  winkel: { "arm-vorn-oben": -120, "arm-vorn-unten": -12, "arm-hinten-oben": 10 },
+  id: "zaubern", ansicht: "dreiviertel", wort: "zaubert", gesicht: "freuen-klein", braucht: ["zauberstab-umhang"],
+  winkel: { "arm-vorn-oben": -120, "arm-vorn-unten": -12, "arm-hinten-oben": 10 }, haende: { vorn: "faust" },
 });
 
 meldeHaltung({
-  id: "schweben", ansicht: "dreiviertel", wort: "schwebt", gesicht: "freuen-klein",
-  winkel: { "arm-vorn-oben": -172, "arm-vorn-unten": 0, "arm-hinten-oben": 22, "arm-hinten-unten": 10 },
+  id: "schweben", ansicht: "dreiviertel", wort: "schwebt", gesicht: "freuen-klein", braucht: ["schirm"], zustaende: { schirm: "auf" },
+  haende: { vorn: "faust" },
+  winkel: { "arm-vorn-oben": -146, "arm-vorn-unten": -16, "arm-hinten-oben": 22, "arm-hinten-unten": 10 },
   versatz: [0, -60],
 });
 

@@ -5,6 +5,9 @@
 import "./gesichter.js";
 import "./haltungen.js";
 import "./bewegungen.js";
+import "./zubehoer/zauberstab-umhang.js";
+import "./zubehoer/lupenmuetze.js";
+import "./zubehoer/schirm.js";
 import "./kinder/ela.js";
 import "./kinder/kofi.js";
 import "./kinder/lena.js";

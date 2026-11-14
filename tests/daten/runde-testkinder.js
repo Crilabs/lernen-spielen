@@ -30,6 +30,7 @@ function ansicht(bewegt) {
       { teil: "hand", formen: {
         offen: { svg: `<path data-test="hand-offen"/>`, kontur: `<path data-test="hand-offen-kontur"/>` },
         zeigen: `<path data-test="hand-zeigen"/>`,
+        faust: `<path data-test="hand-faust"/>`,
       } },
     ],
   };

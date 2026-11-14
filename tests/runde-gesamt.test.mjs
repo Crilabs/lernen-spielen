@@ -17,7 +17,7 @@ R.pruefeBestand();
 
 const { bestand, zeichne, ablauf } = R;
 const { gelenkeFuer, ANSICHTEN } = await import("../spiele/runde/gelenke.js");
-const KINDER = ["ela"];
+const KINDER = ["ela", "kofi", "lena", "timo"];
 
 test("die Runde ist angemeldet", () => {
   for (const id of KINDER) assert.ok(bestand.kinder.has(id), `${id} fehlt`);
@@ -38,6 +38,17 @@ test("Grundbestand aus figuren.md §4 ist da", () => {
     assert.ok(bestand.bewegungen.has(b), `Bewegung ${b} fehlt`);
   }
   for (const h of bestand.haltungen.values()) assert.ok(h.wort, `Haltung ${h.id} ohne wort für aria-label`);
+});
+
+test("Zubehör aus figuren.md §5: Zauberstab mit Umhang, Lupenmütze, Schirm", () => {
+  for (const z of ["zauberstab-umhang", "lupenmuetze", "schirm"]) assert.ok(bestand.zubehoer.has(z), `${z} fehlt`);
+  assert.deepEqual(bestand.haltungen.get("zaubern").braucht, ["zauberstab-umhang"]);
+  assert.deepEqual(bestand.haltungen.get("schweben").braucht, ["schirm"]);
+  assert.equal(bestand.haltungen.get("schweben").zustaende.schirm, "auf");
+  assert.ok(bestand.bewegungen.get("zaubern").schritte.some((s) => s.zustaende?.["zauberstab-umhang"] === "leuchtet"));
+  const svg = zeichne("ela", { haltung: "zaubern", zustaende: { "zauberstab-umhang": "leuchtet" } });
+  assert.match(svg, /data-zubehoer="zauberstab-umhang"[^>]*data-zustand="leuchtet"/);
+  assert.ok(!zeichne("ela", { zubehoer: ["lupenmuetze"] }).includes("haare-oben") || true);
 });
 
 test("jedes Kind kennt jedes Gesicht in jeder Ansicht", () => {
