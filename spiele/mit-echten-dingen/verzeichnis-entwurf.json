@@ -31,11 +31,11 @@
   "kernaufgaben-einmaleins": {
    "fach": "mathe",
    "name": "Kernaufgaben: mal 1, 2, 5, 10",
-   "titel": "Packungen fürs Fest planen",
+   "titel": "Eier einkaufen: Packungen zählen",
    "formen": [
     {
      "situation": "tisch",
-     "name": "Eierkarton und Geschirrtuch"
+     "name": "Einkaufszettel mit Geschirrtuch"
     }
    ],
    "entwurf": true
