@@ -162,6 +162,22 @@ export function locke(b, t, breite, bogen, farbe, o = {}) {
 }
 
 /**
+ * Pfad durch abwechselnd Kerben und Spitzen, jedes Stück leicht gewölbt (Haarschopf aus einem Stück).
+ * @param {[number, number][]} punkte @param {number} [bogen] Wölbung relativ zur Stücklänge
+ */
+export function zacken(punkte, bogen = 0.18) {
+  let d = `M${z(punkte[0][0])} ${z(punkte[0][1])}`;
+  for (let i = 1; i < punkte.length; i++) {
+    const [ax, ay] = punkte[i - 1];
+    const [bx, by] = punkte[i];
+    const dx = bx - ax;
+    const dy = by - ay;
+    d += ` Q${z((ax + bx) / 2 - dy * bogen)} ${z((ay + by) / 2 + dx * bogen)} ${z(bx)} ${z(by)}`;
+  }
+  return d + " Z";
+}
+
+/**
  * Handformen an einem Handgelenk w; die Hand zeigt in Richtung +y (Arm hängt) und dreht mit dem Unterarm.
  * daumen = +1: Daumen rechts, -1: links.
  * @param {[number, number]} w @param {string} haut @param {1|-1} daumen
@@ -170,22 +186,24 @@ export function locke(b, t, breite, bogen, farbe, o = {}) {
 export function haende(w, haut, daumen) {
   const [mx, wy] = w;
   const my = wy + 9;
+  const fein = dunkler(haut, 0.55);
+  /** Fläche mit feiner Linie im dunklen Hautton, damit Finger einzeln lesbar bleiben. @param {string} geo */
+  const hautteil = (geo) => ({ svg: `<${geo} fill="${haut}" stroke="${fein}" stroke-width="1.8"/>`, kontur: `<${geo}/>` });
   /** @param {number} grad @param {number} laenge @param {number} [r] */
-  const finger = (grad, laenge, r = 3.4) => {
+  const finger = (grad, laenge, r = 3.3) => {
     const a = (grad * Math.PI) / 180;
     const p1 = /** @type {[number, number]} */ ([mx + Math.sin(a) * 4, my + Math.cos(a) * 4]);
-    const p2 = /** @type {[number, number]} */ ([mx + Math.sin(a) * (6 + laenge), my + Math.cos(a) * (6 + laenge)]);
-    return flach(kapsel(p1, r, p2, r * 0.9), haut);
+    const p2 = /** @type {[number, number]} */ ([mx + Math.sin(a) * (7 + laenge), my + Math.cos(a) * (7 + laenge)]);
+    return hautteil(kapsel(p1, r, p2, r * 0.88));
   };
-  const d = flach(kapsel([mx + daumen * 5, my - 3], 4, [mx + daumen * 12, my + 3], 3.4), haut);
-  const teller = flach(oval(mx, my, 9, 9), haut);
+  const d = hautteil(kapsel([mx + daumen * 5, my - 3], 4, [mx + daumen * 12.5, my + 3.5], 3.3));
+  const teller = { svg: `<ellipse cx="${z(mx)}" cy="${z(my)}" rx="9" ry="9" fill="${haut}" stroke="none"/>`, kontur: `<${oval(mx, my, 9, 9)}/>` };
   const schatten = falte(`M${z(mx + 2)} ${z(my - 8)} C${z(mx + 9)} ${z(my - 5)} ${z(mx + 10)} ${z(my + 5)} ${z(mx + 4)} ${z(my + 9)}`
     + ` C${z(mx + 7)} ${z(my + 3)} ${z(mx + 7)} ${z(my - 3)} ${z(mx + 2)} ${z(my - 8)} Z`, haut, 0.25);
-  const fingerschatten = naht(`M${z(mx - 3)} ${z(my + 8)} l0 4 M${z(mx + 2)} ${z(my + 8)} l0 4`, haut, 1.6);
-  const faust = zusammen(flach(oval(mx, my + 1, 9.5, 9), haut), schatten,
+  const faust = zusammen(hautteil(oval(mx, my + 1, 9.5, 9)), schatten,
     naht(`M${z(mx - 5)} ${z(my + 4)} Q${z(mx)} ${z(my + 7)} ${z(mx + 5)} ${z(my + 4)}`, haut));
   return {
-    offen: zusammen(...[-38, -13, 12, 36].map((g, i) => finger(g, i === 0 || i === 3 ? 5 : 7)), teller, d, schatten, fingerschatten),
+    offen: zusammen(...[-40, -14, 12, 38].map((g, i) => finger(g, i === 0 || i === 3 ? 5 : 7)), teller, d, schatten),
     faust: zusammen(faust, d),
     zeigen: zusammen(faust, finger(0, 12, 3.6)),
   };

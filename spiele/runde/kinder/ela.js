@@ -34,37 +34,38 @@ const zopfS = (x, y) => S.zusammen(
   S.form(S.pfad(`M${x - 8} ${y + 38} l8 -6 l8 6 l-8 6 Z`), BAND, [x - 3, y + 36], { s: 0.8 }),
 );
 
-/** Locke vorn (heller, mit Licht). @param {[number, number]} b @param {[number, number]} t @param {number} w @param {number} bg */
-const vorn = (b, t, w, bg) => S.locke(b, t, w, bg, HAAR_VORN, { licht: true });
-/** Locke hinten (dunkler). @param {[number, number]} b @param {[number, number]} t @param {number} w @param {number} bg */
-const hinten = (b, t, w, bg) => S.locke(b, t, w, bg, farben.haar);
+// Haarschopf aus einem Stück: Rand abwechselnd Kerbe und Spitze. Pony von links nach rechts, dann über den Wirbel zurück.
+const SCHOPF = /** @type {[number, number][]} */ ([
+  [117, 92], [127, 58], [136, 67], [146, 47], [155, 60], [163, 45], [174, 59], [182, 46], [194, 62], [199, 52], [208, 84],
+  [210, 64], [213, 47], [203, 39], [202, 27], [190, 30], [180, 19], [169, 28], [155, 21], [148, 31], [134, 28],
+  [132, 40], [120, 45], [123, 56], [115, 67],
+]);
+/** Kerben: dunkle Keile, die die Locken trennen (Spitze innen, Basis an der Kerbe des Randes). */
+const KERBEN = [
+  [[127, 58], [133, 42]], [[146, 47], [150, 34]], [[163, 45], [164, 33]], [[182, 46], [180, 34]], [[199, 52], [194, 40]],
+  [[203, 39], [193, 45]], [[190, 30], [184, 40]], [[169, 28], [168, 38]], [[148, 31], [152, 41]], [[132, 40], [141, 45]],
+];
+/** @param {number[]} a @param {number[]} b */
+const kerbe = (a, b) => {
+  const dx = b[0] - a[0];
+  const dy = b[1] - a[1];
+  const l = Math.hypot(dx, dy);
+  const n = [(-dy / l) * 3.2, (dx / l) * 3.2];
+  return `M${a[0] - n[0]} ${a[1] - n[1]} Q${(a[0] + b[0]) / 2} ${(a[1] + b[1]) / 2 + 1} ${b[0]} ${b[1]} Q${(a[0] + b[0]) / 2 + n[0] * 0.4} ${(a[1] + b[1]) / 2} ${a[0] + n[0]} ${a[1] + n[1]} Z`;
+};
+/** Lichtflächen auf den Locken (Licht von oben links), als schmale Linsen. */
+const LICHT = [
+  "M139 46 Q141 38 148 33 Q143 41 143 50 Z", "M157 42 Q158 35 163 30 Q161 37 161 46 Z",
+  "M172 41 Q175 34 181 30 Q177 37 176 44 Z", "M136 38 Q142 31 151 28 Q144 34 140 41 Z", "M161 30 Q167 25 175 24 Q168 28 164 33 Z",
+];
 
 const kopfDreiviertel = {
-  haareHinten: S.zusammen(
-    S.form(S.oval(162, 66, 46, 43), HAAR_HINTEN, [146, 44], { s: 0.9 }),
-    zopfS(118, 100), zopfS(205, 96),
-  ),
+  zoepfe: S.zusammen(zopfS(118, 100), zopfS(205, 96)),
+  haareHinten: S.form(S.oval(162, 66, 46, 43), HAAR_HINTEN, [146, 44], { s: 0.9 }),
   haareOben: S.zusammen(
-    // Kappe über dem Schädel, unten offen für die Stirn
-    S.form(S.pfad("M119 82 C113 42 138 23 164 23 C195 23 213 42 207 78 C200 60 186 48 164 46 C142 46 126 58 119 82 Z"),
-      farben.haar, [140, 32], { s: 0.9 }),
-    // Wirbel oben: kleine Büschel, die aus der Silhouette ragen
-    hinten([146, 34], [134, 24], 16, -4),
-    hinten([162, 30], [160, 19], 16, 4),
-    hinten([178, 32], [190, 23], 16, 4),
-    hinten([196, 46], [208, 44], 14, 4),
-    vorn([138, 38], [128, 30], 12, -3),
-    vorn([170, 29], [175, 21], 12, 3),
-    // seitliche Strähne vor dem Ohr
-    hinten([126, 56], [116, 94], 14, -5),
-    // Pony: Locken fallen über die Stirn, nach rechts geschwungen
-    hinten([130, 44], [121, 80], 16, -4),
-    hinten([196, 44], [208, 78], 16, 4),
-    vorn([142, 38], [140, 68], 17, -5),
-    vorn([156, 36], [162, 66], 17, 4),
-    vorn([172, 36], [184, 63], 17, 5),
-    vorn([186, 40], [200, 66], 15, 5),
-    vorn([150, 40], [150, 60], 12, 3),
+    S.form(S.pfad(S.zacken(SCHOPF, 0.16)), farben.haar, [138, 32], { s: 0.9 }),
+    { svg: KERBEN.map(([a, b]) => `<path d="${kerbe(a, b)}" fill="${S.dunkler(farben.haar, 0.45)}" stroke="none"/>`).join(""), kontur: "" },
+    { svg: LICHT.map((d) => `<path d="${d}" fill="${HAAR_VORN}" stroke="none"/>`).join(""), kontur: "" },
   ),
   nachGesicht: {
     svg: `<path d="M146 80 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 M173 80 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0`

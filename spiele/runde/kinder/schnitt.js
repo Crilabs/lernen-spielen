@@ -40,7 +40,7 @@ export const strich = (d, w = 3) => `<path d="${d}" fill="none" stroke="${INK}" 
 
 /**
  * @typedef {import("./stil.js").Stueck} Stueck
- * @typedef {{haareHinten?: Stueck, haareOben?: Stueck, nachGesicht?: Stueck, ohr?: Stueck}} KopfStuecke
+ * @typedef {{haareHinten?: Stueck, haareOben?: Stueck, nachGesicht?: Stueck, ohr?: Stueck, zoepfe?: Stueck}} KopfStuecke  zoepfe: hängen hinter dem Körper
  */
 
 /** Teil aus einem Stück (Fläche + Kontur). @param {string} teil @param {Stueck} st @returns {Teil} */
@@ -63,20 +63,25 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
     + ` C${z(X(-31))} 165 ${z(X(-28))} 140 ${z(X(-23))} 118 Z`;
   const huefte = `M${z(X(-27))} 172 L${z(X(27))} 172 C${z(X(30))} 182 ${z(X(30))} 192 ${z(X(27))} 201`
     + ` L${z(X(-27))} 201 C${z(X(-30))} 192 ${z(X(-30))} 182 ${z(X(-27))} 172 Z`;
-  /** Turnschuh mit Kappe und Sohle, Spitze nach rechts. @param {number} x */
-  const schuh = (x) => S.zusammen(
-    S.form(S.pfad(`M${z(x - 13)} 247 C${z(x - 14)} 236 ${z(x - 6)} 231 ${z(x + 2)} 232 C${z(x + 9)} 232 ${z(x + 12)} 237 ${z(x + 15)} 239`
-      + ` C${z(x + 24)} 240 ${z(x + 26)} 244 ${z(x + 26)} 248 L${z(x - 13)} 248 Z`), f.schuhe, P(x - 7, 236)),
-    S.flach(S.pfad(`M${z(x - 14)} 246 L${z(x + 27)} 246 L${z(x + 27)} 250 Q${z(x + 27)} 255 ${z(x + 21)} 255`
-      + ` L${z(x - 9)} 255 Q${z(x - 14)} 255 ${z(x - 14)} 250 Z`), f.sohle ?? "#FFFCF7"),
-    S.naht(`M${z(x + 13)} 239 C${z(x + 12)} 243 ${z(x + 13)} 245 ${z(x + 15)} 246`, f.schuhe, 2.2),
-    S.naht(`M${z(x)} 236 l6 2.5 M${z(x + 3)} 234 l6 2.5`, f.schuhe, 2.4),
-    S.glanz(`M${z(x - 9)} 241 C${z(x - 8)} 237 ${z(x - 5)} 235 ${z(x - 2)} 234 M${z(x + 17)} 241 l4 1`, f.schuhe, 2.6),
-    S.naht(`M${z(x - 14)} 251 L${z(x + 27)} 251`, f.sohle ?? "#FFFCF7", 1.6),
-  );
+  /** Turnschuh von vorn (Dreiviertel: leicht nach rechts gedreht): Kappe zum Betrachter, Schnürung oben, Sohle als Rand.
+   * hinten: im Schatten. @param {number} x @param {boolean} hinten */
+  const schuh = (x, hinten) => {
+    const farbe = hinten ? S.dunkler(f.schuhe, 0.16) : f.schuhe;
+    const sohle = hinten ? S.dunkler(f.sohle ?? "#F4EEE4", 0.14) : (f.sohle ?? "#F4EEE4");
+    const y = hinten ? -1.5 : 0;
+    const Y = (/** @type {number} */ v) => z(v + y);
+    return S.zusammen(
+      S.form(S.pfad(`M${z(x - 13)} ${Y(249)} C${z(x - 14)} ${Y(240)} ${z(x - 9)} ${Y(233)} ${z(x - 2)} ${Y(232)} L${z(x + 7)} ${Y(232)}`
+        + ` C${z(x + 14)} ${Y(233)} ${z(x + 18)} ${Y(240)} ${z(x + 17)} ${Y(249)} Z`), farbe, P(x - 8, 236 + y)),
+      { svg: `<path d="M${z(x - 10)} ${Y(248)} C${z(x - 9)} ${Y(242)} ${z(x + 12)} ${Y(242)} ${z(x + 14)} ${Y(248)} Z" fill="${S.heller(farbe, 0.3)}" stroke="none"/>`, kontur: "" },
+      S.naht(`M${z(x - 1)} ${Y(239)} l6 2.5 M${z(x + 5)} ${Y(239)} l-6 2.5 M${z(x - 1)} ${Y(243)} l6 2 M${z(x + 5)} ${Y(243)} l-6 2`, farbe, 1.7),
+      S.form(S.pfad(`M${z(x - 15)} ${Y(248)} L${z(x + 19)} ${Y(248)} C${z(x + 21)} ${Y(250)} ${z(x + 20)} ${Y(254)} ${z(x + 16)} ${Y(254.5)}`
+        + ` L${z(x - 12)} ${Y(254.5)} C${z(x - 16)} ${Y(254)} ${z(x - 17)} ${Y(250)} ${z(x - 15)} ${Y(248)} Z`), sohle, P(x - 10, 248 + y), { s: 0.9 }),
+    );
+  };
   /** Weites Hosenbein, ein Stück bis zum Saum: Schattenstreifen rechts in einer Flucht mit der Hüfte. @param {number} cx @param {1|-1} o */
   const hosenbein = (cx, o) => {
-    const u = cx + o * 5;
+    const u = cx + o * 7;
     const bein = `M${z(cx - 12)} 182 C${z(cx - 13)} 200 ${z(cx - 12 + o * 2)} 214 ${z(u - 13)} 238`
       + ` L${z(u + 13)} 238 C${z(cx + 11 + o * 2)} 214 ${z(cx + 13)} 200 ${z(cx + 12)} 182 Z`;
     return {
@@ -94,21 +99,15 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
   /** @param {number} dx @param {1|-1} o @returns {Teil[]} */
   const bein = (dx, o) => [
     T("bein", hosenbein(X(dx), o)),
-    T("schuh", schuh(X(dx) + o * 5)),
+    T("schuh", schuh(X(dx) + o * 7, o < 0)),
   ];
   /** Arm mit Ärmel, der zum Bündchen weiter wird. @param {number} dx @param {number} ex @param {1|-1} daumen @param {boolean} trenn */
   const arm = (dx, ex, daumen, trenn) => {
     const w = P(X(ex) - Math.sign(dx), 166);
     return {
-      oben: [T("oberarm", S.zusammen(
-        S.glied(P(X(dx), schulterY), 9.5, P(X(ex), 146), 8.5, f.oben, { trenn, ansatz: true }),
-        S.falte(`M${z(X(ex) - 7)} 140 q7 5 13 -1 q-6 3 -13 4 Z`, f.oben),
-      ))],
+      oben: [T("oberarm", S.glied(P(X(dx), schulterY), 9.5, P(X(ex), 146), 8.8, f.oben, { trenn, ansatz: true }))],
       unten: [
-        T("unterarm", S.zusammen(
-          S.glied(P(X(ex), 146), 8.5, P(w[0], 160), 9.5, f.oben, { trenn }),
-          S.naht(`M${z(w[0] - 8)} 157 Q${z(w[0])} 160 ${z(w[0] + 8)} 157`, f.oben),
-        )),
+        T("unterarm", S.glied(P(X(ex), 146), 8.8, P(w[0], 160), 9.4, f.oben, { trenn })),
         { teil: "hand", formen: S.haende(w, f.haut, daumen) },
       ],
     };
@@ -142,7 +141,7 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
       "bein-hinten": [X(-13), hueftY], "bein-vorn": [X(13), hueftY],
     },
     teile: {
-      koerper: [],
+      koerper: kopf.zoepfe ? [T("zoepfe", kopf.zoepfe)] : [],
       "bein-hinten": bein(-13, -1),
       "bein-vorn": bein(13, 1),
       rumpf: [
@@ -164,10 +163,10 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
           S.naht("M125 76 Q119 82 125 89", f.haut, 2.2))),
         T("kopf", S.form(S.pfad("M162 30 C190 30 206 48 206 72 C206 93 196 108 178 113 C168 116 152 116 142 110"
           + " C127 102 119 88 120 70 C122 46 138 30 162 30 Z"), f.haut, P(146, 54), { s: 0.9, trenn: true })),
-        T("stirnschatten", S.falte("M124 74 C134 62 146 58 152 62 C160 66 170 66 176 60 C184 58 196 62 204 76"
-          + " C200 70 192 66 184 66 C176 72 162 74 152 68 C142 66 132 70 124 80 Z", f.haut, 0.34)),
+        T("stirnschatten", S.falte("M124 70 C132 58 142 52 150 56 C158 60 168 60 176 54 C186 52 198 58 205 72"
+          + " C200 66 192 62 184 61 C176 66 162 67 152 63 C142 61 132 64 124 76 Z", f.haut, 0.3)),
         T("wangen", S.zusammen(S.roete(148, 95, 8, 5), S.roete(191, 94, 6, 4.5))),
-        T("nase", S.zusammen(S.falte("M174 89 Q180 95 172 100 Q176 95 174 89 Z", f.haut, 0.4), S.naht("M172 90 Q178 95 171 99", f.haut, 2.6))),
+        T("nase", S.zusammen(S.falte("M174 86 Q179 90 173 94 Q176 90 174 86 Z", f.haut, 0.4), S.naht("M173 87 Q177 90.5 172 93.5", f.haut, 2.4))),
         { teil: "gesicht" },
         ...(kopf.haareOben ? [T("haare-oben", kopf.haareOben)] : []),
         ...(kopf.nachGesicht ? [T("hilfsmittel", kopf.nachGesicht)] : []),
