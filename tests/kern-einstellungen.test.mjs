@@ -74,3 +74,17 @@ test("geschichten: Standard sanft, am Profil, unbekannte Werte zählen als sanft
   assert.equal(E.geschichtenStufe(), "sanft");
   assert.deepEqual([...E.GESCHICHTEN], ["ruhig", "sanft", "abenteuer"]);
 });
+
+test("schrift: Standard sas, am Profil, unbekannte Werte zählen als sas", async () => {
+  const { S, E } = await frisch();
+  await E.ladeEinstellungen();
+  assert.equal(E.schriftPfad(), "sas");
+  E.setzeEinstellung("schrift", "va");
+  assert.equal(E.schriftPfad(), "va");
+  await S.sofortSpeichern();
+  assert.equal(JSON.parse(speicher.get("lernstand-kind-1-einstellungen")).schrift, "va");
+  assert.equal(JSON.parse(speicher.get("lernstand-geraet") ?? "{}").schrift, undefined);
+  E.setzeEinstellung("schrift", "la");
+  assert.equal(E.schriftPfad(), "sas");
+  assert.deepEqual([...E.SCHRIFTEN], ["sas", "va"]);
+});
