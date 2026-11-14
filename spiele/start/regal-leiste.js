@@ -2,7 +2,7 @@
 // Liste, nicht grafisch, hierarchisch Fach → Thema → Detail. Jedes Thema mit seinem Namen und klein dem Material,
 // das das Kind aus dem Spiel kennt; im Detail die Spiele zum Nochmal-Spielen und „Mit echten Dingen“.
 // Ohne Zahl, ohne Datum (N5, N8). Daten vom Aufrufer (gekonnteThemen, spieleFuer aus lernsteuerung.js).
-import { FACH_SYMBOLE } from "../rahmen/stil.js";
+import { FACH, FACH_SYMBOLE } from "../rahmen/stil.js";
 import { materialFuer, bausteinHtml } from "../rahmen/material.js";
 import { esc } from "./zeichnen.js";
 
@@ -48,7 +48,8 @@ export function regalHtml(baum) {
       return `<li><details class="thema" data-thema="${esc(t.id)}"><summary><span class="material">${bausteinHtml(materialFuer(t))}</span>`
         + `<span class="name">${esc(t.name)}</span></summary><div class="detail">${spiele}${echt}</div></details></li>`;
     }).join("");
-    return `<details class="fach" data-fach="${esc(f.fach)}"><summary><span class="knopf" aria-hidden="true">${zeichen}</span>`
+    const fuellung = FACH[/** @type {keyof typeof FACH} */ (f.fach)]?.fuellung ?? "#F4F0FA";
+    return `<details class="fach" data-fach="${esc(f.fach)}" style="--fach-fuellung:${fuellung}"><summary><span class="knopf" aria-hidden="true">${zeichen}</span>`
       + `<span class="name">${esc(f.name)}</span></summary><ul>${themen}</ul></details>`;
   }).join("") + `</section>`;
 }

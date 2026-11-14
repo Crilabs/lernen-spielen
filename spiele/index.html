@@ -6,304 +6,201 @@
 <title>Lernen Spielen</title>
 <link rel="stylesheet" href="rahmen/seite.css">
 <style>
-/* Startseite „Der Treffpunkt“ (Spec docs/superpowers/specs/2026-11-14-startseite-treffpunkt-design.md).
-   Eine Szene statt eines Menüs: Wiese mit Baumhaus, die Runde und ein paar Tiere stehen vorne. Bis zu drei Dran-Spiele
-   sind Tore auf der Anhöhe, die Fächer runde Knöpfe am linken Rand, das Regal steht im Baumhaus. Keine Zahl, keine Zählung, kein
-   Klassenbezug (N5, N8). Diese Seite liest den Lernstand nur, sie schreibt ihn nie.
-   Aufbau: .box ist 288 × 108 rem groß und waagrecht mittig; SVG (viewBox 0 0 2880 1080) und bedienbare Teile nutzen
-   dieselben Koordinaten (1 rem = 10 Einheiten). Bei 16:9 sieht man x 48–240 rem, bei 4:3 x 72–216 rem; alles
-   Bedienbare liegt in 72–216 rem (ORTE in start/szene.js).
+/* Startseite „Karten“ (Spec docs/superpowers/specs/2026-11-14-startseite-karten-design.md).
+   Links und in der Mitte die Karten, je Fach ein Abschnitt mit höchstens 5 Spielen und den Karten „Mit echten
+   Dingen“; rechts das Regal „Was ich kann“ als aufklappbare Liste (Fach → Thema → Detail), darüber ein Kind der Runde.
+   Dahinter eine dezente Landschaft in Grundtönen. Keine Zahl, keine Zählung, kein Klassenbezug (N5, N8).
+   Diese Seite liest den Lernstand nur, sie schreibt ihn nie.
    Zahnrad für Erwachsene rechts in der Kopfleiste: gedrückt halten, dabei läuft leise ein Ring herum. */
-body {
-  -webkit-user-select: none;
-  user-select: none;
-  background: #8FCBF2;
-}
+body { -webkit-user-select: none; user-select: none; }
+.hintergrund, .hintergrund svg { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
 
-.treffpunkt { position: fixed; inset: 0; overflow: hidden; }
-.box { position: absolute; top: 0; left: calc(50% - 144rem); width: 288rem; height: 108rem; }
-.szene, .szene svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-
-/* --- Die Runde: vor der Anhöhe; nur die gemalten Flächen nehmen Tippen an ------------------------ */
-.runde { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.kind { position: absolute; pointer-events: none; -webkit-tap-highlight-color: transparent; }
-.kind svg { width: 100%; height: 100%; display: block; overflow: visible; }
-.kind svg * { pointer-events: visiblePainted; }
-
-/* --- Bedienbare Teile -------------------------------------------------------------------------- */
-.bedienung { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-.bedienung a {
-  pointer-events: auto;
-  color: var(--ls-tinte);
-  text-decoration: none;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-.bedienung a > * { pointer-events: none; }
-.bedienung a:focus-visible { outline: none; }
-
-/* Tore: Weidenbogen mit Blick in die Welt, darunter ein Schild mit Spielsymbol und Name. Drückbar ist das Schild
-   (fester Schatten im Fach-Tief, sinkt ein). */
-.tore { position: absolute; inset: 0; }
-.tor { position: absolute; width: 28rem; height: 44.3rem; }
-.tor .bogen { display: block; width: 28rem; height: 44.3rem; }
-/* Namensbrett quer über beide Pfosten (Pfosten außen bei 2,6 und 25,4 rem), oben darauf das Spielsymbol. */
-.tor .text {
+.start {
   position: absolute;
-  left: 50%;
-  top: 28rem;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: max-content;
-  min-width: 25rem;
-  max-width: 30rem;
-  padding: 4.6rem 2rem 1.2rem;
-  border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: var(--ls-radius-klein);
-  background: var(--ls-papier);
-  box-shadow: 0 0.6rem 0 var(--fach-tief);
-  text-align: center;
-}
-.tor .schild {
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  top: 22.4rem;
-  transform: translateX(-50%);
+  inset: var(--ls-leiste-hoehe) 0 0 0;
   display: grid;
-  place-items: center;
-  width: 10.4rem;
-  height: 10.4rem;
-  border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: 50%;
-  background: var(--fach-fuellung);
-  box-shadow: 0 0.6rem 0 var(--fach-tief);
+  grid-template-columns: 1fr 42rem;
+  gap: 3.2rem;
+  padding: 0 3.2rem 0 4.4rem;
 }
-.tor .schild img { display: block; width: 6.8rem; height: 6.8rem; object-fit: contain; }
-.tor b { font-size: 3.8rem; line-height: 1.1; color: var(--fach-tief); hyphens: manual; }
-.tor .thema { font-size: 2.6rem; line-height: 1.2; color: var(--ls-tinte-weich); }
-.tor:active .schild, .tor:active .text { transform: translate(-50%, 0.3rem); box-shadow: 0 0.3rem 0 var(--fach-tief); }
-.tor:focus-visible .text { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
 
-/* Fach-Knöpfe: Navigation am linken Rand. Runder Knopf in der Fachfüllung mit Tinte-Kontur und festem Schatten im
-   Fach-Tief (drückbar), Fachsymbol in Tinte; der Name klein darunter auf Papier, damit er auf der Wiese lesbar ist.
-   Bis drei Fächer eine Spalte, ab vier zwei. */
-.faecher { position: absolute; display: grid; grid-template-columns: 1fr; justify-items: center; gap: 1.6rem; }
-.faecher.zwei { grid-template-columns: 1fr 1fr; column-gap: 1rem; }
-.fach { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; width: 13rem; }
-.fach .knopf {
-  display: grid;
-  place-items: center;
-  width: 11rem;
-  height: 11rem;
-  border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: 50%;
-  background: var(--fach-fuellung);
-  box-shadow: 0 0.6rem 0 var(--fach-tief);
+/* --- Karten-Raster ----------------------------------------------------------------------------- */
+.raster { overflow-y: auto; padding: 1rem 1rem 6rem 0; scrollbar-width: none; }
+.raster::-webkit-scrollbar { display: none; }
+.raster .leer { margin: 8rem 0 0; font-size: 4rem; color: var(--ls-tinte-weich); }
+.fach-abschnitt + .fach-abschnitt { margin-top: 4.4rem; }
+.fach-kopf { display: inline-flex; align-items: center; gap: 1.6rem; margin-bottom: 2rem; color: var(--ls-tinte); text-decoration: none; }
+.fach-kopf .knopf, .karte .knopf {
+  flex: none; display: grid; place-items: center; width: 7rem; height: 7rem;
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 50%; background: var(--fach-fuellung);
 }
-.fach .knopf i {
-  display: block;
-  width: 6.4rem;
-  height: 6.4rem;
-  background: var(--ls-tinte);
-  -webkit-mask: var(--bild) center / contain no-repeat;
-  mask: var(--bild) center / contain no-repeat;
-}
-.fach b {
-  padding: 0.2rem 1rem;
-  border-radius: 1rem;
-  background: var(--ls-papier);
-  font-size: 2.4rem;
-  line-height: 1.1;
-  text-align: center;
-  hyphens: manual;
-}
-.fach:active .knopf { transform: translateY(0.3rem); box-shadow: 0 0.3rem 0 var(--fach-tief); }
-.fach:focus-visible .knopf { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
+.fach-kopf .knopf { box-shadow: 0 0.5rem 0 var(--fach-tief); }
+.fach-kopf .knopf i { display: block; width: 4.2rem; height: 4.2rem; background: var(--ls-tinte);
+  -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
+.fach-kopf b { font-size: 4.4rem; line-height: 1.1; }
+.fach-kopf:active .knopf { transform: translateY(0.3rem); box-shadow: 0 0.2rem 0 var(--fach-tief); }
 
-/* Baumhaus: die Öffnung ist der Link zum Regal; darin ein Regalbrett mit den drei zuletzt gekonnten Dingen. */
-.baumhaus {
-  position: absolute;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 0 2rem 2rem;
-  border-radius: 2.2rem;
+.karten { display: flex; flex-wrap: wrap; gap: 2.8rem; }
+.karte {
+  display: flex; flex-direction: column; width: 26rem; padding: 0; overflow: hidden;
+  color: var(--ls-tinte); text-align: left; text-decoration: none; font: inherit;
+  background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
+  box-shadow: var(--ls-schatten); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
-.baumhaus .brett-holz {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 2rem;
-  width: 100%;
-  min-height: 3.2rem;
-  padding: 0 1.6rem;
-  position: relative;
-  padding-bottom: 3rem;
+.karte > * { pointer-events: none; }
+.karte:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+.karte:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
+.karte .bild { display: block; height: 13.9rem; border-bottom: var(--ls-kontur) solid var(--ls-tinte); background: var(--fach-toenung); }
+.karte .bild svg { display: block; width: 100%; height: 100%; }
+.karte .bild.ohne { display: grid; place-items: center; }
+.karte .bild img { width: 7rem; height: 7rem; }
+.karte { position: relative; }
+.karte .unten { display: flex; padding: 4.4rem 1.8rem 2rem; min-height: 12rem; }
+/* Fachsymbol als Plakette auf dem Rand zwischen Bild und Text */
+.karte .knopf { position: absolute; left: 1.6rem; top: 10.4rem; }
+.karte .knopf img { width: 4.4rem; height: 4.4rem; }
+.karte.echt .unten { padding-top: 2rem; }
+.karte .text { display: flex; flex-direction: column; min-width: 0; }
+.karte b { font-size: 3.2rem; line-height: 1.1; hyphens: manual; }
+.karte .thema { font-size: 2.4rem; line-height: 1.2; color: var(--ls-tinte-weich); }
+/* Mit echten Dingen: Papier mit Naht wie die Matte, Hand-Zeichen auf Ahorn statt Welt. */
+.karte.echt { position: relative; }
+.karte.echt::after { content: ""; position: absolute; inset: 1rem; border: 0.25rem dashed var(--ls-naht);
+  border-radius: calc(var(--ls-radius) - 1rem); pointer-events: none; }
+.karte.echt .bild { display: grid; place-items: center; background: var(--ls-ahorn); }
+.karte.echt .bild img { width: 8rem; height: 8rem; }
+
+/* --- Seitenleiste rechts: Kind und Regal -------------------------------------------------------- */
+.seite { display: flex; flex-direction: column; min-height: 0; padding-bottom: 3rem; }
+.kind { flex: none; align-self: center; width: 30rem; height: 26rem; }
+.kind svg { width: 100%; height: 100%; overflow: visible; }
+.regal-leiste {
+  flex: 1; min-height: 0; overflow-y: auto; padding: 2.4rem 2.4rem 3rem;
+  background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
 }
-/* Das Brett: Ahorn mit Kante, Tinte-Kontur, fester Schatten (drückbar wie alles, was hinführt). */
-.baumhaus .brett-holz::after {
-  content: "";
-  position: absolute;
-  left: -0.6rem; right: -0.6rem; bottom: 0;
-  height: 3rem;
-  border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: 0.8rem;
-  background: var(--ls-ahorn);
-  box-shadow: inset 0 -1rem 0 var(--ls-kante), 0 0.6rem 0 var(--ls-tinte-weich);
+.regal-leiste h2 { margin: 0 0 1.6rem; font-size: 3.6rem; }
+.regal-leiste .leer { margin: 0; font-size: 2.8rem; color: var(--ls-tinte-weich); }
+.regal-leiste ul { list-style: none; margin: 0.4rem 0 0; padding: 0 0 0 2rem; }
+.regal-leiste summary { display: flex; align-items: center; gap: 1.2rem; min-height: 6rem; cursor: pointer; list-style: none; }
+.regal-leiste summary::-webkit-details-marker { display: none; }
+.regal-leiste summary:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.3rem; border-radius: 1rem; }
+.regal-leiste .fach + .fach { margin-top: 0.8rem; border-top: 0.2rem solid var(--ls-linie); padding-top: 0.8rem; }
+.regal-leiste .fach > summary .name { font-size: 3rem; font-weight: 700; }
+.regal-leiste .fach > summary .knopf { flex: none; display: grid; place-items: center; width: 5rem; height: 5rem;
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 50%; background: var(--fach-fuellung, var(--ls-nebel)); }
+.regal-leiste .fach > summary .knopf i { display: block; width: 3rem; height: 3rem; background: var(--ls-tinte);
+  -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
+.regal-leiste .thema > summary .name { font-size: 2.6rem; }
+.regal-leiste .material { flex: none; display: flex; align-items: center; justify-content: center; width: 6rem; }
+.regal-leiste .material ls-perlenstab { height: 1.8rem; }
+.regal-leiste .material ls-wortart { height: 3.4rem; }
+.regal-leiste .material .karte { display: grid; place-items: center; width: auto; min-width: 3.4rem; height: 4rem; padding: 0 0.8rem;
+  border-radius: 0.8rem; box-shadow: none; font-size: 2rem; font-weight: 700; }
+.regal-leiste .material .karte i { width: 2rem; height: 2rem; background: var(--ls-tinte); -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
+.regal-leiste .detail { display: flex; flex-wrap: wrap; gap: 1rem; padding: 0.6rem 0 1.4rem 7.2rem; }
+.regal-leiste .detail a, .regal-leiste .detail button {
+  padding: 1rem 1.8rem; border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 2rem; background: var(--ls-papier);
+  box-shadow: 0 0.4rem 0 var(--ls-tinte-weich); color: var(--ls-tinte); font: inherit; font-size: 2.4rem; text-decoration: none; cursor: pointer;
 }
-.baumhaus .ding { position: relative; z-index: 1; }
-.baumhaus .ding { display: flex; align-items: flex-end; margin-bottom: 2.6rem; }
-.baumhaus ls-perlenstab { height: 2.6rem; }
-.baumhaus ls-wortart { height: 6.4rem; }
-.baumhaus .karte {
-  display: grid;
-  place-items: center;
-  min-width: 5.6rem;
-  height: 7.6rem;
-  padding: 0 1.6rem;
-  white-space: nowrap;
-  border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: var(--ls-radius-klein);
-  background: var(--ls-papier);
-  box-shadow: inset 0 0 0 0.7rem var(--ls-papier), inset 0 0 0 1rem var(--fach-fuellung);
-  font-size: 3.4rem;
-  font-weight: 700;
-  line-height: 1;
-}
-.baumhaus .karte.symbol { padding: 0; }
-.baumhaus .karte i {
-  display: block;
-  width: 3rem;
-  height: 3rem;
-  background: var(--ls-tinte);
-  -webkit-mask: var(--bild) center / contain no-repeat;
-  mask: var(--bild) center / contain no-repeat;
-}
-.baumhaus:active .brett-holz { transform: translateY(0.3rem); }
-.baumhaus:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.4rem; }
+.regal-leiste .detail button { background: var(--ls-ahorn); }
+.regal-leiste .detail a:active, .regal-leiste .detail button:active { transform: translateY(0.2rem); box-shadow: 0 0.2rem 0 var(--ls-tinte-weich); }
 
 /* --- Zahnrad für Erwachsene (im Slot rechts der Kopfleiste) ------------------------------------ */
-.zahnrad {
-  position: relative;
-  display: flex;
-  width: 11rem;
-  height: 11rem;
-  touch-action: none;
-}
-.zahnrad svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.zahnrad circle {
-  fill: none;
-  stroke: var(--ls-tinte-weich);
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-}
+.zahnrad { position: relative; display: flex; width: 11rem; height: 11rem; touch-action: none; }
+.zahnrad svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+.zahnrad circle { fill: none; stroke: var(--ls-tinte-weich); stroke-width: 1.7; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; }
 .zahnrad.haelt svg { opacity: 1; }
 .zahnrad.haelt circle { stroke-dashoffset: 0; transition: stroke-dashoffset var(--halten) linear; }
+
+@media (max-aspect-ratio: 4/3) {
+  .start { grid-template-columns: 1fr 36rem; padding-left: 3rem; gap: 2.4rem; }
+  .karten { gap: 2.2rem; }
+  .karte { width: 24rem; }
+}
 </style>
 </head>
 <body>
+<div class="hintergrund" id="hintergrund"></div>
 <ls-leiste id="leiste" spiel="ansichten" titel="Lernen Spielen" ohne-haus durchsichtig>
   <span class="zahnrad" id="zahnrad" slot="rechts"><ls-knopf id="eltern" symbol="zahnrad.svg" name="Für Erwachsene: gedrückt halten" groesse="klein" stumm></ls-knopf><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.6" pathLength="100"/></svg></span>
 </ls-leiste>
-<main class="treffpunkt">
-  <div class="box" id="box">
-    <div class="szene" id="szene"></div>
-    <div class="runde" id="runde"></div>
-    <div class="runde" id="tiere"></div>
-    <nav class="bedienung" aria-label="Lernen Spielen">
-      <div class="tore" id="dran"></div>
-      <div class="faecher" id="faecher"></div>
-      <a class="baumhaus" id="regal" href="regal.html" aria-label="Mein Regal"><span class="brett-holz" id="dinge"></span></a>
-    </nav>
-  </div>
+<main class="start">
+  <div class="raster" id="raster" aria-label="Spiele"></div>
+  <aside class="seite" id="seite">
+    <div class="kind" id="kind"></div>
+    <div id="regal"></div>
+  </aside>
 </main>
+<ls-anregung id="anregung"></ls-anregung>
 
 <script type="module">
-import { sperreTouch, protokoll, esc, linkKlick } from "./lernspiel.js";
-import { ladeLernstand, gekonnteThemen, dranThemen } from "./lernsteuerung.js";
+import { sperreTouch, protokoll, linkKlick } from "./lernspiel.js";
+import { ladeLernstand, gekonnteThemen, uebersicht, spieleFuer } from "./lernsteuerung.js";
 import { sprich } from "./kern/stimme.js";
 import { sageEinmal } from "./kern/sitzung.js";
-import { FACH } from "./rahmen/stil.js";
-import { materialFuer, bausteinHtml } from "./rahmen/material.js";
 import "./rahmen/leiste.js";
 import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
-import { szeneSvg, ORTE } from "./start/szene.js";
-import { torHtml } from "./start/tore.js";
-import { faecherHtml } from "./start/faecher.js";
-import { setzeRunde, setzeTiere } from "./start/runde-auf-start.js";
+import "./rahmen/anregung.js";
+import { startKarten } from "./start/auswahl.js";
+import { paletteFuer, vignetteSvg } from "./start/welten.js";
+import { spielKarteHtml, echtKarteHtml, abschnittHtml } from "./start/karten.js";
+import { regalBaum, regalHtml } from "./start/regal-leiste.js";
+import { hintergrundSvg } from "./start/hintergrund.js";
+import { setzeKind } from "./start/runde-auf-start.js";
 
 /** So lange hält ein Erwachsener das Zahnrad (wie bisher). */
 const HALTEN_MS = 3000;
 
 sperreTouch();
 const leiste = document.getElementById("leiste");
+const anregung = document.getElementById("anregung");
+document.getElementById("hintergrund").innerHTML = hintergrundSvg();
 zahnrad();
-document.getElementById("szene").innerHTML = szeneSvg({ jahreszeit: "sommer", tageszeit: "tag" });
-setzeRunde(document.getElementById("runde"), { ton: () => leiste.ton });
-setzeTiere(document.getElementById("tiere"), { ton: () => leiste.ton });
-Object.assign(document.getElementById("regal").style,
-  { left: `${ORTE.regal.x}rem`, top: `${ORTE.regal.y}rem`, width: `${ORTE.regal.b}rem`, height: `${ORTE.regal.h}rem` });
+setzeKind(document.getElementById("kind"), { ton: () => leiste.ton });
 start();
 
 async function start() {
+  const heute = new Date().toLocaleDateString("sv");
   let ctx = null, stand = null;
   try {
     const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map((d) => fetch(d).then((r) => r.json())));
     ctx = { plan, spiele };
-    stand = await ladeLernstand(ctx, new Date().toLocaleDateString("sv"));
-  } catch (e) { ctx = null; protokoll("start: " + e); } // ohne Daten: Szene, Runde und leeres Regal, ohne Meldung
+    stand = await ladeLernstand(ctx, heute);
+  } catch (e) { ctx = null; protokoll("start: " + e); } // ohne Daten: leeres Raster und leeres Regal, ohne Meldung
   await leiste.bereit();
 
-  const spiele = ctx?.spiele.spiele ?? [];
-  const spielNach = new Map(spiele.map((s) => [s.id, s]));
-  const farbe = (f) => FACH[f] ?? { fuellung: "var(--ls-papier)", tief: "var(--ls-tinte)", toenung: "var(--ls-linie)" };
+  const themaNach = new Map((ctx?.plan.themen ?? []).map((t) => [t.id, t]));
+  const kategorien = new Map((ctx?.spiele.kategorien ?? []).map((k) => [k.id, k]));
 
-  // Tore: bis zu drei Themen mit Spiel, zuletzt geübt zuerst; das Tor führt mit ?thema ins Spiel. Mittig auf der
-  // Anhöhe verteilt, auch wenn es weniger als drei sind.
-  const dran = ctx ? dranThemen(ctx, stand).map((t) => ({ ...t, spiel: spielNach.get(t.spiel) })).filter((t) => t.spiel)
-    .slice(0, ORTE.tore.length) : [];
-  const tore = document.getElementById("dran");
-  tore.innerHTML = dran.map((t) => torHtml(t)).join("");
-  const [links, mitte] = ORTE.tore;
-  tore.querySelectorAll("a").forEach((a, i) => {
-    const schritt = i - (dran.length - 1) / 2; // −1, 0, 1 bei drei; ±½ bei zwei
-    a.style.left = `${mitte.x + schritt * (mitte.x - links.x)}rem`;
-    a.style.top = `${mitte.y + Math.abs(schritt) * (links.y - mitte.y)}rem`;
-    nenne(a, dran[i].spiel.titel);
-  });
+  // Karten je Fach
+  const raster = document.getElementById("raster");
+  const faecher = ctx ? startKarten(uebersicht(ctx, stand), ctx, stand, heute) : [];
+  raster.innerHTML = faecher.length ? faecher.map((f) => abschnittHtml(kategorien.get(f.fach) ?? { id: f.fach, name: f.fach },
+    f.spiele.map((k) => {
+      const palette = paletteFuer(ctx, k.spiel.welt);
+      return spielKarteHtml(k, f.fach, palette ? vignetteSvg(palette) : null);
+    }).join("") + f.echt.map((k) => echtKarteHtml(k, f.fach)).join(""))).join("")
+    : `<p class="leer">Hier kommen bald Spiele.</p>`;
+  raster.querySelectorAll("a.karte").forEach((a) => nenne(a, a.querySelector("b").textContent));
+  raster.querySelectorAll("a.fach-kopf").forEach((a) => nenne(a, a.querySelector("b").textContent));
 
-  // Fach-Knöpfe am linken Rand: nur Fächer mit mindestens einem Spiel, in der Reihenfolge der Kategorien.
-  const faecher = (ctx?.spiele.kategorien ?? []).filter((k) => Object.hasOwn(FACH, k.id) && spiele.some((s) => s.kategorie === k.id));
-  const nav = document.getElementById("faecher");
-  nav.innerHTML = faecherHtml(faecher);
-  nav.classList.toggle("zwei", faecher.length > 3);
-  Object.assign(nav.style, { left: `${ORTE.faecher.x}rem`, top: `${ORTE.faecher.y}rem`, width: `${ORTE.faecher.b}rem` });
-  nav.querySelectorAll("a").forEach((a, i) => nenne(a, faecher[i].name));
+  // Regal rechts
+  const regal = document.getElementById("regal");
+  regal.outerHTML = regalHtml(ctx ? regalBaum(gekonnteThemen(ctx, stand), ctx, spieleFuer) : []);
+  const leisteRegal = document.querySelector(".regal-leiste");
+  leisteRegal.querySelectorAll("details.thema").forEach((d) => d.addEventListener("toggle", () => {
+    const t = themaNach.get(d.dataset.thema);
+    if (d.open && t?.sprich && leiste.ton) sprich(t.sprich);
+  }));
+  leisteRegal.querySelectorAll("a.nochmal").forEach((a) => nenne(a, a.textContent));
 
-  // Regal: die drei zuletzt gekonnten Dinge, das neueste rechts (wie im Regal). Ohne Gekonntes: leeres Holz.
-  const zuletzt = ctx ? gekonnteThemen(ctx, stand).slice(-3) : [];
-  document.getElementById("dinge").innerHTML = zuletzt.map((g) =>
-    `<span class="ding" style="--fach-fuellung:${farbe(g.strang).fuellung}">${bausteinHtml(materialFuer(g))}</span>`).join("");
-  document.getElementById("regal").addEventListener("click", (e) => {
-    if (leiste.ton) sageEinmal("Mein Regal", () => sprich("Mein Regal"));
-    linkKlick(e);
-  });
+  // Mit echten Dingen (Karten und Regal): die Anleitung für den Erwachsenen
+  document.querySelectorAll("[data-thema].echt, .karte.echt").forEach((b) => b.addEventListener("click", () => {
+    const t = themaNach.get(b.dataset.thema);
+    if (t?.eltern) anregung.oeffne({ titel: t.name, text: t.eltern });
+  }));
 }
 
 // Name beim ersten Tippen je Sitzung; der Link wechselt sofort (vorher speichern über linkKlick).

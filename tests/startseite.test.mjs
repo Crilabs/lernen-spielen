@@ -1,13 +1,15 @@
-// Vorgaben an die Startseite (spiele/index.html): dran, Fächer, Regal; Zahnrad für Erwachsene; nur lesen, nichts zählen.
+// Vorgaben an die Startseite (spiele/index.html), Spec 2026-11-14-startseite-karten-design.md: Karten je Fach,
+// Regal als Seitenleiste rechts, dezenter Hintergrund, ein Kind; Zahnrad für Erwachsene; nur lesen, nichts zählen.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const html = readFileSync(new URL("../spiele/index.html", import.meta.url), "utf8");
 const skript = html.slice(html.indexOf('<script type="module">'));
+const kindQuelle = readFileSync(new URL("../spiele/start/runde-auf-start.js", import.meta.url), "utf8");
 const { literaleAusCode, knopfNamen, sammle } = await import("../werkzeuge/audio/texte.mjs");
 
-test("Startseite: Kopfleiste „Lernen Spielen“ ohne Fach, ohne Haus, durchsichtig über dem Himmel, Zahnrad im Slot rechts", () => {
+test("Startseite: Kopfleiste „Lernen Spielen“ ohne Fach, ohne Haus, durchsichtig, Zahnrad im Slot rechts", () => {
   assert.match(html, /<ls-leiste id="leiste" spiel="ansichten" titel="Lernen Spielen" ohne-haus durchsichtig>/);
   assert.doesNotMatch(html, /<ls-leiste[^>]*\bfach=/);
   assert.match(html, /<span class="zahnrad" id="zahnrad" slot="rechts"><ls-knopf id="eltern" symbol="zahnrad\.svg"[^>]*\bstumm>/);
@@ -20,41 +22,39 @@ test("Startseite: Zahnrad gedrückt halten führt zu eltern.html, loslassen bric
   assert.match(skript, /\["pointerup", "pointercancel", "lostpointercapture"\]\.forEach/);
 });
 
-test("Startseite: Tore aus dranThemen (höchstens drei), Fach-Knöpfe nur für Fächer mit Spielen, Regal aus gekonnteThemen", () => {
-  assert.match(skript, /dranThemen\(ctx, stand\)/);
-  assert.match(skript, /\.slice\(0, ORTE\.tore\.length\)/);
-  assert.match(skript, /torHtml\(/);
-  assert.match(skript, /spiele\.some\(\(s\) => s\.kategorie === k\.id\)/);
-  assert.match(skript, /faecherHtml\(faecher\)/);
-  assert.match(skript, /gekonnteThemen\(ctx, stand\)\.slice\(-3\)/);
-  assert.match(skript, /bausteinHtml\(materialFuer\(g\)\)/);
-  assert.match(html, /<a class="baumhaus" id="regal" href="regal\.html" aria-label="Mein Regal">/);
-  assert.match(html, /id="dran"/);
-  assert.match(html, /id="faecher"/);
-  assert.match(html, /id="dinge"/);
+test("Startseite: Karten aus startKarten (uebersicht), Abschnitte je Fach, Vignette aus der Welt-Palette", () => {
+  assert.match(skript, /startKarten\(uebersicht\(ctx, stand\), ctx, stand, heute\)/);
+  assert.match(skript, /abschnittHtml\(/);
+  assert.match(skript, /spielKarteHtml\(/);
+  assert.match(skript, /echtKarteHtml\(/);
+  assert.match(skript, /vignetteSvg\(/);
+  assert.match(html, /id="raster"/);
 });
 
-test("Startseite: Szene im Hintergrund, die Runde steht darin", () => {
-  assert.match(skript, /szeneSvg\(/);
-  assert.match(skript, /setzeRunde\(/);
+test("Startseite: Regal als Seitenleiste rechts aus gekonnteThemen und spieleFuer", () => {
+  assert.match(skript, /regalBaum\(gekonnteThemen\(ctx, stand\), ctx, spieleFuer\)/);
+  assert.match(skript, /regalHtml\(/);
+  assert.match(html, /<aside class="seite" id="seite">/);
+  assert.ok(html.indexOf('id="raster"') < html.indexOf('id="seite"'), "Regal rechts vom Raster");
 });
 
-test("Startseite: Tiere stehen in der Szene (Feldhase, Hausmaus, Rotkehlchen), Namen sammelbar", () => {
-  assert.match(skript, /setzeTiere\(/);
-  const quelle = readFileSync(new URL("../spiele/start/runde-auf-start.js", import.meta.url), "utf8");
-  for (const name of ["Feldhase", "Hausmaus", "Rotkehlchen"]) assert.ok(literaleAusCode(quelle).texte.includes(name), name);
+test("Startseite: dezenter Hintergrund, ein Kind der Runde mit sammelbaren Namen", () => {
+  assert.match(skript, /hintergrundSvg\(\)/);
+  assert.match(skript, /setzeKind\(/);
+  for (const name of ["Ela", "Kofi", "Lena", "Timo"]) assert.ok(literaleAusCode(kindQuelle).texte.includes(name), name);
 });
 
-test("Startseite: jede Kachel ist ein Link, spricht ihren Namen einmal je Sitzung und speichert vor dem Wechsel", () => {
-  assert.doesNotMatch(html, /<button\b/);
-  assert.equal(skript.match(/linkKlick\(e\)/g)?.length, 2);
-  for (const name of ["Ela", "Kofi", "Lena", "Timo"])
-    assert.ok(literaleAusCode(readFileSync(new URL("../spiele/start/runde-auf-start.js", import.meta.url), "utf8")).texte.includes(name), name);
+test("Startseite: Mit echten Dingen öffnet die Karte (ls-anregung)", () => {
+  assert.match(html, /<ls-anregung id="anregung"><\/ls-anregung>/);
+  assert.match(skript, /anregung\.oeffne\(/);
+});
+
+test("Startseite: Links sprechen ihren Namen einmal je Sitzung und speichern vor dem Wechsel", () => {
+  assert.match(skript, /linkKlick\(e\)/);
   assert.match(skript, /sageEinmal\(name, sprich\)/);
-  assert.ok(literaleAusCode(skript).texte.includes("Mein Regal"), "„Mein Regal“ ist sammelbar");
 });
 
-test("Startseite: Namen der Fächer und Spiele sammelt das Audio-Werkzeug", () => {
+test("Startseite: Namen der Fächer sammelt das Audio-Werkzeug", () => {
   const texte = sammle(new URL("..", import.meta.url).pathname).eintraege.map((e) => e.text);
   for (const k of JSON.parse(readFileSync(new URL("../spiele/spiele.json", import.meta.url), "utf8")).kategorien)
     assert.ok(texte.includes(k.name), k.name);
