@@ -53,6 +53,9 @@ export const FACH = {
   sprechen: { name: "Aprikose", fuellung: "#F08A4B", tief: "#A44C16", toenung: "#FFEADD" },
 };
 
+/** Fächer mit eigenem Symbol in spiele/symbole/<fach>.svg (Sprechen hat noch keins). */
+export const FACH_SYMBOLE = new Set(["mathe", "lesen", "schreiben", "grammatik", "geometrie"]);
+
 /**
  * Bedeutungsfarben des Lernfelds (Farbwelt 6.2), nur für die Lernzeichen. Nie allein (C1): die Perle trägt
  * Länge, Lücke und Marke, die Wortart ihre Form und Größe.

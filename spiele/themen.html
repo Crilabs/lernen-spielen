@@ -100,13 +100,24 @@ body {
   box-sizing: border-box;
   display: grid;
   place-items: center;
-  width: 8rem;
+  min-width: 8rem;
   height: 8rem;
+  padding: 0 1.4rem;
   border: 0.4rem solid var(--fach-fuellung);
-  border-radius: 50%;
+  border-radius: 999rem;
   font-size: 4.4rem;
   font-weight: 700;
   line-height: 1;
+  white-space: nowrap;
+}
+/* Karte ohne Graphem: das Fachsymbol in Tinte (wie die Fachkachel). */
+.station .karte i {
+  display: block;
+  width: 4.4rem;
+  height: 4.4rem;
+  background: var(--ls-tinte);
+  -webkit-mask: var(--bild) center / contain no-repeat;
+  mask: var(--bild) center / contain no-repeat;
 }
 /* dran: groß, mit dem Sonnenring (hier geht es weiter). */
 .station.dran {
@@ -118,7 +129,8 @@ body {
 }
 .station.dran ls-perlenstab { height: 3.8rem; }
 .station.dran ls-wortart { height: 9rem; }
-.station.dran .karte { width: 11rem; height: 11rem; font-size: 6rem; border-width: 0.5rem; }
+.station.dran .karte { min-width: 11rem; height: 11rem; font-size: 6rem; border-width: 0.5rem; }
+.station.dran .karte i { width: 6rem; height: 6rem; }
 /* in Sicht: zart, Umriss und Schatten in Naht, nur das Zeichen des Themas in Tinte weich. */
 .station.in-sicht {
   border-color: var(--ls-naht);
@@ -404,7 +416,10 @@ function remPx() {
 function zeichen(s) {
   const m = s.material ? materialFuer(s.material) : { baustein: "karte", wert: "" };
   if (s.zustand === "in-sicht") {
-    const wert = m.baustein === "karte" ? m.wert : materialFuer({ id: "", name: s.material?.name ?? "" }).wert;
+    // Graphem, wenn das Thema eins lehrt; sonst die letzte Zahl im Namen oder sein erster Buchstabe.
+    const n = s.material?.name ?? "";
+    const wert = m.baustein === "karte" && m.wert ? m.wert
+      : n.match(/\d+/g)?.at(-1) ?? (n.match(/\p{L}/u)?.[0] ?? "").toLocaleUpperCase("de");
     return `<span class="zeichen" aria-hidden="true">${esc(wert)}</span>`;
   }
   return bausteinHtml(m);

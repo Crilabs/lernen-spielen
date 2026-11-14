@@ -38,3 +38,13 @@ test("Regal: keine Zählung, kein „von“, kein Klassenbezug beim Kind", () =>
   assert.doesNotMatch(html, / von \$\{|Klasse|Prozent|%\}/);
   assert.match(skript, /anregung\.oeffne\(\{ titel: g\.name, text: g\.eltern \}\)/);
 });
+
+test("Regal: Bretter sind Gruppen mit Fachnamen, das Schild ist nicht live, nur der Name", () => {
+  assert.match(skript, /class="brett" role="group"[^`]*aria-label="\$\{esc\(name\(f\)\)\}"/);
+  assert.doesNotMatch(html, /role="status"/);
+  assert.match(html, /<h2 id="name" aria-live="polite" tabindex="-1"><\/h2>/);
+});
+
+test("Regal: die Reihen sperren das senkrechte Rollen nicht (kein touch-action: pan-x)", () => {
+  assert.doesNotMatch(html, /touch-action:\s*pan-x/);
+});

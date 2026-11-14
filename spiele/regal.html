@@ -40,7 +40,6 @@ body {
   background: var(--ls-kante);
   border: var(--ls-kontur) solid var(--ls-tinte);
   border-radius: var(--ls-radius);
-  list-style: none;
 }
 .brett {
   position: relative;
@@ -81,7 +80,6 @@ body {
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
-  touch-action: pan-x;
 }
 .dinge::-webkit-scrollbar { display: none; }
 .dinge.links { -webkit-mask-image: linear-gradient(to right, transparent, #000 10rem); mask-image: linear-gradient(to right, transparent, #000 10rem); }
@@ -124,12 +122,15 @@ body {
 .ding:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0; }
 .ding ls-perlenstab { height: 4rem; }
 .ding ls-wortart { height: 8.4rem; }
-/* Kärtchen: steht aufrecht, Papier mit Tinte-Kontur, innen ein feiner Rand in der Fachfarbe. */
+/* Kärtchen: steht aufrecht, Papier mit Tinte-Kontur, innen ein feiner Rand in der Fachfarbe. Darauf das Graphem
+   (nur bei Themen, die eins lehren) oder das Fachsymbol in Tinte. */
 .ding .karte {
   display: grid;
   place-items: center;
-  width: 7.6rem;
+  min-width: 7.6rem;
   height: 10rem;
+  padding: 0 2.6rem;
+  white-space: nowrap;
   border: var(--ls-kontur) solid var(--ls-tinte);
   border-radius: var(--ls-radius-klein);
   background: var(--ls-papier);
@@ -137,6 +138,15 @@ body {
   font-size: 4.4rem;
   font-weight: 700;
   line-height: 1;
+}
+.ding .karte.symbol { padding: 0; }
+.ding .karte i {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  background: var(--ls-tinte);
+  -webkit-mask: var(--bild) center / contain no-repeat;
+  mask: var(--bild) center / contain no-repeat;
 }
 
 /* Neu seit dem letzten Besuch: einmal der Sonnenring (wie .markiert in seite.css), sanft an und wieder aus.
@@ -182,6 +192,7 @@ body {
 @keyframes auf { from { opacity: 0; } }
 .schild h2 {
   margin: 0;
+  outline: none;
   min-width: 0;
   font-size: 4.4rem;
   line-height: 1.2;
@@ -221,10 +232,12 @@ body {
 <ls-leiste id="leiste" spiel="regal" titel="Mein Regal"></ls-leiste>
 <main class="buehne">
   <div class="spielflaeche" id="flaeche">
-    <div class="raum" id="raum"><ul class="regal" id="regal" aria-label="Mein Regal"></ul></div>
-    <div class="schild" id="schild" hidden role="status">
+    <div class="raum" id="raum"><div class="regal" id="regal"></div></div>
+    <!-- Das Schild wandert beim Antippen in das Brett des Dings (gleich nach der Reihe): so erreicht die Tastatur
+         „Mit echten Dingen“ direkt nach dem Ding, und das Schild rollt mit dem Regal. -->
+    <div class="schild" id="schild" hidden>
       <span class="spitze" aria-hidden="true"></span>
-      <h2 id="name"></h2>
+      <h2 id="name" aria-live="polite" tabindex="-1"></h2>
       <ls-knopf id="hoeren" symbol="vorlesen.svg" name="Noch mal hören" groesse="klein" stumm></ls-knopf>
       <ls-knopf id="echt" symbol="hand.svg" wort="Mit echten Dingen" hidden></ls-knopf>
     </div>
@@ -238,9 +251,9 @@ import { ladeLernstand, gekonnteThemen } from "./lernsteuerung.js";
 import { sprich } from "./kern/stimme.js";
 import { schonGesagt, merkeGesagt, vergissGesagt, sageEinmal } from "./kern/sitzung.js";
 import { ladeEinstellungen, einstellung, setzeEinstellung } from "./kern/einstellungen.js";
-import { FACH } from "./rahmen/stil.js";
+import { FACH, FACH_SYMBOLE } from "./rahmen/stil.js";
 import { materialFuer, bausteinHtml, neuSeit } from "./rahmen/material.js";
-import { FACH_SYMBOLE } from "./rahmen/leiste.js";
+import "./rahmen/leiste.js";
 import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
@@ -293,32 +306,33 @@ async function start() {
       dinge.push(g);
       return `<li><button class="ding" type="button" data-i="${dinge.length - 1}" aria-label="${esc(g.name)}">${bausteinHtml(g.baustein)}</button></li>`;
     }).join("");
-    return `<li class="brett" style="--fach-fuellung:${farbe.fuellung}" aria-label="${esc(name(f))}">
+    return `<div class="brett" role="group" style="--fach-fuellung:${farbe.fuellung}" aria-label="${esc(name(f))}">
       <span class="fach" aria-hidden="true">${bild}</span>
-      <div class="dinge"><ul>${knoepfe}</ul></div></li>`;
+      <div class="dinge"><ul>${knoepfe}</ul></div></div>`;
   }).join("");
   const knopfVon = [...regal.querySelectorAll(".ding")];
 
   // --- Schild beim Antippen ---------------------------------------------------------------------
-  const flaeche = document.getElementById("flaeche"), raum = document.getElementById("raum");
+  const raum = document.getElementById("raum");
   const schild = document.getElementById("schild"), nameFeld = document.getElementById("name");
   const hoeren = document.getElementById("hoeren"), echt = document.getElementById("echt");
   const anregung = document.getElementById("anregung");
   let jetzt = -1;
 
+  // Lage des Schilds im Brett (es liegt dort im DOM): über dem Ding, wenn im sichtbaren Raum Platz ist, sonst darunter.
   function stelleSchild() {
     if (jetzt < 0) return;
-    const k = knopfVon[jetzt], r = k.getBoundingClientRect(), f = flaeche.getBoundingClientRect();
-    const reihe = k.closest(".dinge").getBoundingClientRect();
-    const sichtbar = r.right > reihe.left + 8 && r.left < reihe.right - 8 && r.bottom > f.top && r.top < f.bottom;
+    const k = knopfVon[jetzt], r = k.getBoundingClientRect(), b = k.closest(".brett").getBoundingClientRect();
+    const reihe = k.closest(".dinge").getBoundingClientRect(), sicht = raum.getBoundingClientRect();
+    const sichtbar = r.right > reihe.left + 8 && r.left < reihe.right - 8 && r.bottom > sicht.top && r.top < sicht.bottom;
     schild.style.visibility = sichtbar ? "" : "hidden";
-    const s = schild.getBoundingClientRect(), rem = remPx(), mitte = r.left + r.width / 2 - f.left;
-    const links = Math.min(Math.max(mitte - s.width / 2, 2.4 * rem), f.width - s.width - 2.4 * rem);
-    const oben = r.top - f.top - s.height - 2.4 * rem >= 0; // passt das Schild über das Ding?
+    const s = schild.getBoundingClientRect(), rem = remPx(), luft = 2.4 * rem, mitte = r.left + r.width / 2 - b.left;
+    const links = Math.min(Math.max(mitte - s.width / 2, 0), b.width - s.width);
+    const oben = r.top - sicht.top - s.height - luft >= 0;
     schild.classList.toggle("oben", oben);
     schild.classList.toggle("unten", !oben);
     schild.style.left = links + "px";
-    schild.style.top = (oben ? r.top - f.top - s.height - 2.4 * rem : r.bottom - f.top + 2.4 * rem) + "px";
+    schild.style.top = (oben ? r.top - b.top - s.height - luft : r.bottom - b.top + luft) + "px";
     schild.style.setProperty("--spitze", mitte - links + "px");
   }
 
@@ -327,13 +341,16 @@ async function start() {
     const g = dinge[i];
     nameFeld.textContent = g.name;
     echt.hidden = !g.eltern;
+    knopfVon[i].closest(".brett").append(schild);
     schild.hidden = false;
     stelleSchild();
   }
   function verberge() { jetzt = -1; schild.hidden = true; }
 
-  knopfVon.forEach((k, i) => k.addEventListener("click", () => {
+  knopfVon.forEach((k, i) => k.addEventListener("click", (e) => {
     zeige(i);
+    // Mit der Tastatur geöffnet (detail 0): Fokus auf den Namen, Tab führt dann gleich zu „Mit echten Dingen“.
+    if (e.detail === 0) nameFeld.focus({ preventScroll: true });
     // Name einmal je Sitzung und je Thema (viele Themen teilen dasselbe sprich), wie auf der Fach-Seite.
     const g = dinge[i];
     if (leiste.ton && g.sprich) sageEinmal("thema:" + g.id, () => sprich(g.sprich));
@@ -348,7 +365,13 @@ async function start() {
     const pfad = e.composedPath();
     if (!pfad.includes(schild) && !knopfVon.some((k) => pfad.includes(k))) verberge();
   });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !anregung.offen) verberge(); });
+  // Escape schließt das Schild; der Fokus geht zurück auf das Ding.
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || anregung.offen || schild.hidden) return;
+    const ding = knopfVon[jetzt];
+    verberge();
+    ding?.focus({ preventScroll: true });
+  });
 
   // --- Rollen: neueste rechts sichtbar, Ränder laufen aus, das Schild folgt ---------------------
   for (const reihe of regal.querySelectorAll(".dinge")) {
@@ -376,8 +399,8 @@ async function start() {
 
 // Noch nichts gekonnt: ein leeres Fach mit dem Satz des Erzählers, beim Ankommen einmal je Sitzung gesprochen.
 function leer(regal, leiste) {
-  regal.innerHTML = `<li class="brett leer"><p>Hier stellst du hin, was du kannst.</p>
-    <ls-knopf id="leer-hoeren" symbol="vorlesen.svg" name="Noch mal hören" groesse="klein" stumm></ls-knopf></li>`;
+  regal.innerHTML = `<div class="brett leer"><p>Hier stellst du hin, was du kannst.</p>
+    <ls-knopf id="leer-hoeren" symbol="vorlesen.svg" name="Noch mal hören" groesse="klein" stumm></ls-knopf></div>`;
   const merker = "regal:leer";
   const sag = () => sprich("Hier stellst du hin, was du kannst.");
   regal.querySelector("#leer-hoeren").addEventListener("click", () => { if (leiste.ton) sag(); });
