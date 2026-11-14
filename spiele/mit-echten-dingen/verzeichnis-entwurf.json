@@ -1,5 +1,18 @@
 {
  "themen": {
+  "achterreihe": {
+   "fach": "mathe",
+   "name": "Achterreihe",
+   "titel": "Achter aus gefaltetem Papier",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Merkzettel falten"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/achterreihe.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
