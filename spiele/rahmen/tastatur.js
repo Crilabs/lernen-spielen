@@ -4,6 +4,7 @@
 // keine Farbe je Buchstabe. Ereignis `taste` mit detail.zeichen (" " für Leertaste, "loeschen" für Löschen).
 // Die Tasten sprechen nichts; was gesagt wird, entscheidet das Spiel. Eine Hardware-Tastatur geht zusätzlich.
 // Der Host ist ein Block: wohin die Tastatur kommt (unten Mitte), bestimmt das Spiel.
+// Hilfe Stufe 2 (Lösung): markiere(zeichen) gibt der Taste den Sonnenring (Klasse `markiert`), markiere(null) nimmt ihn.
 
 import { GRUND_CSS, definiere } from "./stil.js";
 import { tastenFuer, ausgeglichen } from "./tasten.js";
@@ -54,7 +55,7 @@ const TASTATUR_CSS = `
   opacity: 0;
   pointer-events: none;
 }
-.taste:focus-visible::after { opacity: 1; }
+.taste:focus-visible::after, .taste.markiert::after { opacity: 1; }
 .leer { min-width: 56rem; }
 .leer svg { width: 9rem; height: 6rem; display: block; pointer-events: none; }
 .weg { min-width: 16rem; }
@@ -109,6 +110,23 @@ export class LsTastatur extends HTMLElement {
     if (this.hasAttribute("leertaste")) fn.push(`<button class="taste leer" type="button" tabindex="0" data-z=" " aria-label="Leertaste">${LEER_SVG}</button>`);
     if (this.hasAttribute("loeschen")) fn.push(`<button class="taste weg" type="button" tabindex="0" data-z="loeschen" aria-label="Löschen">${LOESCHEN_SVG}</button>`);
     this.wurzel.innerHTML = `<style>${GRUND_CSS}${TASTATUR_CSS}</style><div class="feld">${zeilen}${fn.length ? `<div class="reihe">${fn.join("")}</div>` : ""}</div>`;
+  }
+
+  /**
+   * Sonnenring an der Taste für `zeichen` ("loeschen" für Löschen), an keiner bei null.
+   * @param {string | null} zeichen
+   * @returns {HTMLElement | null} die markierte Taste
+   */
+  markiere(zeichen) {
+    /** @type {HTMLElement | null} */
+    let treffer = null;
+    for (const k of this.wurzel.querySelectorAll("button[data-z]")) {
+      const b = /** @type {HTMLElement} */ (k);
+      const ja = zeichen !== null && b.dataset.z === zeichen;
+      b.classList.toggle("markiert", ja);
+      if (ja) treffer = b;
+    }
+    return treffer;
   }
 
   /** @param {string} zeichen */

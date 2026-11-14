@@ -7,5 +7,10 @@
     { "id": "geometrie", "name": "Geometrie", "symbol": "symbole/geometrie.svg", "farbe": "#8C6FE0", "schatten": "#6548BC", "tint": "#ECE6FF" },
     { "id": "sprechen", "name": "Sprechen und Zuhören", "symbol": "symbole/sprechen.svg", "farbe": "#F08A4B", "schatten": "#C2652A", "tint": "#FFE9DB" }
   ],
-  "spiele": []
+  "spiele": [
+    { "id": "kettenhuepfer", "titel": "Kettenhüpfer", "thema": "Einmaleins", "kategorie": "mathe",
+      "symbol": "mathe/m37-kettenhuepfer/symbol.svg", "datei": "mathe/m37-kettenhuepfer/index.html",
+      "text": "Ergebnis tippen, das Pfeilchen hüpft auf der Perlenkette, die Packungen kommen in den Korb.",
+      "arten": [{ "art": "mal", "reihen": [2, 10], "stufen": ["material"] }] }
+  ]
 }

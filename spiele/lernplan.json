@@ -11315,7 +11315,7 @@
         "gleich-grosse-gruppen",
         "zwillinge"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "reihe": 2 },
       "stufen": [
         "material",
         "vorstellung",
@@ -11345,7 +11345,7 @@
         "gleich-grosse-gruppen",
         "zehnerzahlen-bis-100"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "reihe": 10 },
       "stufen": [
         "material",
         "vorstellung",
@@ -11375,7 +11375,7 @@
         "zehnerreihe",
         "verdoppeln-halbieren-bis-100"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "reihe": 5 },
       "stufen": [
         "material",
         "vorstellung",
@@ -11408,7 +11408,7 @@
         "zehnerreihe",
         "fuenferreihe"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "kern": true },
       "stufen": [
         "material",
         "vorstellung",
@@ -11529,7 +11529,7 @@
         "verdoppeln-beim-mal",
         "zweierreihe"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "reihe": 4 },
       "stufen": [
         "material",
         "vorstellung",
@@ -11559,7 +11559,7 @@
         "viererreihe",
         "nachbaraufgabe-mal"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "reihe": 8 },
       "stufen": [
         "material",
         "vorstellung",
@@ -11589,7 +11589,7 @@
         "nachbaraufgabe-mal",
         "verdoppeln-beim-mal"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "reihe": 3 },
       "stufen": [
         "material",
         "vorstellung",
@@ -11618,7 +11618,7 @@
       "voraussetzungen": [
         "dreierreihe"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "reihe": 6 },
       "stufen": [
         "material",
         "vorstellung",
@@ -11647,7 +11647,7 @@
       "voraussetzungen": [
         "nachbaraufgabe-mal"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "reihe": 9 },
       "stufen": [
         "material",
         "vorstellung",
@@ -11677,7 +11677,7 @@
         "kernaufgaben-einmaleins",
         "nachbaraufgabe-mal"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "mal", "reihe": 7 },
       "stufen": [
         "material",
         "vorstellung",
@@ -24902,9 +24902,9 @@
       ],
       "signatur": {
         "art": "zeit",
-        "regel": "zeit-steigung-zweiter-faktor",
+        "regel": "zeit-steigung-schrittzahl",
         "nur_bei": "einmaleins-reihe",
-        "beschreibung": "Lösezeit steigt mit dem zweiten Faktor, relativ zur eigenen Basisgeschwindigkeit; Fehler liegen genau einen Reihenschritt daneben."
+        "beschreibung": "Lösezeit steigt mit der Schrittzahl a (a · n: a Gruppen zu je n, in den Aufgaben daten.a), relativ zur eigenen Basisgeschwindigkeit; Fehler liegen genau einen Reihenschritt daneben."
       },
       "themen": [
         "einmaleins-gemischt",
@@ -26783,7 +26783,11 @@
       ],
       "anbindung": "M: Einmaleins in festen Gruppen (Paar, Tüte, Karton, Münze)",
       "stufe_ab": "ruhig",
-      "fakten": []
+      "fakten": [
+        { "satz": "In echt hat ein Schuhpaar zwei Schuhe.", "quelle": "de.wikipedia.org/wiki/Paar („eine Zweiergruppe“), abgerufen 2026-11-14" },
+        { "satz": "In echt hat eine Woche sieben Tage.", "quelle": "de.wikipedia.org/wiki/Woche („Zeiteinheit von sieben Tagen“), abgerufen 2026-11-14" },
+        { "satz": "In echt ist eine Zehn-Cent-Münze zehn Cent wert.", "quelle": "de.wikipedia.org/wiki/Euro-Münzen (Nennwerte 1, 2, 5, 10, 20, 50 Cent, 1 und 2 Euro), abgerufen 2026-11-14" }
+      ]
     },
     {
       "id": "fell-federn-schuppen",

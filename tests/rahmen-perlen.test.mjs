@@ -68,3 +68,27 @@ test("Farben der Lernzeichen nach der Farbwelt 6.2", () => {
   });
   assert.deepEqual({ ...LERNFARBE.wortart }, { nomen: "#1E1A2E", artikel: "#7CC4F0", adjektiv: "#2F5BC4", verb: "#E5484D" });
 });
+
+test("Perlenkette: zehn Stäbchen in zwei Reihen zu fünf, Orte am Ende der Stäbchen und dazwischen", async () => {
+  const { perlenkette, laenge, GLIED } = await import("../spiele/rahmen/perlen-geometrie.js");
+  const k = perlenkette(7);
+  assert.equal(k.staebchen.length, 10);
+  assert.equal(k.reihen, 2);
+  assert.deepEqual(k.staebchen.map((s) => s.reihe), [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]);
+  assert.ok(Math.abs(k.breite - (5 * laenge(7) + 4 * GLIED)) < 1e-9);
+  assert.equal(k.staebchen[5].x0, 0);
+  assert.equal(k.staebchen[0].perlen.length, 7);
+  assert.notEqual(k.staebchen[0].marke, null);
+  const ende3 = k.ort(21);
+  assert.equal(ende3.reihe, 0);
+  assert.ok(Math.abs(ende3.x - (k.staebchen[2].x1 + GLIED / 2)) < 1e-9);
+  assert.equal(k.ort(42).reihe, 1);
+  const mitten = k.ort(15);
+  assert.ok(mitten.x > k.staebchen[2].perlen[0] && mitten.x < k.staebchen[2].perlen[1]);
+  assert.equal(k.ort(71).ueber, true);
+  assert.equal(k.ort(70).ueber, false);
+  const kurz = perlenkette(4, { staebchen: 3, jeReihe: 3 });
+  assert.equal(kurz.reihen, 1);
+  assert.equal(perlenkette(11), null);
+  assert.equal(perlenkette(4, { staebchen: 0 }), null);
+});

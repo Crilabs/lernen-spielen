@@ -74,3 +74,45 @@ test("aufgabenVon: null und undefined (geplantes Thema) ergeben keine Aufgaben",
   assert.deepEqual(aufgabenVon(null), []);
   assert.deepEqual(aufgabenVon(undefined), []);
 });
+
+// --- mal (Einmaleins; Entwurf docs/spiele/mathe/m37-kettenhuepfer.md §10) ---------------------------------
+const { malAus, faktorenDerReihe, KERN_FAKTOREN } = await import("../spiele/aufgabenarten.js");
+const REIHEN = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+const malPool = () => [...REIHEN.map((n) => ({ art: "mal", reihe: n })), { art: "mal", kern: true }].map(aufgabenVon);
+
+test("mal: Schlüssel und daten (a Gruppen zu je b)", () => {
+  const z = aufgabenVon({ art: "mal", reihe: 2 });
+  assert.deepEqual(z.map((a) => a.key), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((a) => `mal:${a}*2`));
+  assert.deepEqual(aufgabenVon({ art: "mal", reihe: 7 }).find((a) => a.key === "mal:6*7").daten, { a: 6, b: 7, c: 42 });
+  assert.deepEqual(malAus("mal:6*7"), { a: 6, b: 7, c: 42 });
+  assert.equal(malAus("plus:6+7"), null);
+});
+test("mal: Reihen 2, 5, 10 ganz, übrige Reihen ohne die Kernaufgaben, Kern mal 1, 2, 5, 10 der übrigen Reihen", () => {
+  for (const n of [2, 5, 10]) assert.equal(aufgabenVon({ art: "mal", reihe: n }).length, 10);
+  for (const n of [3, 4, 6, 7, 8, 9]) assert.deepEqual(aufgabenVon({ art: "mal", reihe: n }).map((a) => a.daten.a), [3, 4, 6, 7, 8, 9]);
+  const kern = aufgabenVon({ art: "mal", kern: true });
+  assert.equal(kern.length, 24);
+  assert.ok(kern.every((a) => KERN_FAKTOREN.includes(a.daten.a) && ![2, 5, 10].includes(a.daten.b)));
+  assert.deepEqual(faktorenDerReihe(9), [3, 4, 6, 7, 8, 9]);
+});
+test("mal: alle Themen zusammen sind das ganze kleine Einmaleins (a 1–10, n 2–10), ohne Überschneidung", () => {
+  const alle = malPool().flat().map((a) => a.key);
+  assert.equal(alle.length, 90);
+  assert.equal(new Set(alle).size, 90);
+  for (const k of ["mal:1*9", "mal:2*9", "mal:5*9", "mal:10*9", "mal:7*8", "mal:10*10"]) assert.ok(alle.includes(k), k);
+});
+test("mal: faktoren und reihen ausdrücklich (für andere Spiele, z. B. Punktefeld)", () => {
+  assert.deepEqual(aufgabenVon({ art: "mal", reihe: 4, faktoren: [2, 3] }).map((a) => a.key), ["mal:2*4", "mal:3*4"]);
+  assert.deepEqual(aufgabenVon({ art: "mal", kern: true, reihen: [7], faktoren: [5] }).map((a) => a.key), ["mal:5*7"]);
+  assert.deepEqual(aufgabenVon({ art: "mal" }), []);
+});
+test("mal: Schwierigkeit nach dem Abstand zur Kernaufgabe, Zielzeit, darstellbar nach Reihen", () => {
+  const s = (key) => schwierigkeit({ art: "mal", daten: malAus(key) });
+  assert.deepEqual(["mal:5*7", "mal:6*7", "mal:9*7", "mal:7*7", "mal:8*7"].map(s), [0, 1, 1, 2, 2]);
+  assert.equal(ZIEL_MS.mal, 8000);
+  const a = aufgabenVon({ art: "mal", reihe: 7 })[0];
+  assert.equal(darstellbar(a, { art: "mal", reihen: [2, 10] }), true);
+  assert.equal(darstellbar(a, { art: "mal", reihen: [2, 5] }), false);
+  assert.equal(darstellbar(a, { art: "mal" }), true);
+  assert.equal(darstellbar(a, { art: "rechnen", max: 100 }), false);
+});

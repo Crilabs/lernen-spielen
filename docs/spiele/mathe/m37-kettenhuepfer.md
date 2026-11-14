@@ -120,6 +120,18 @@ Nach dem zweiten Versuch, der nicht passt, leuchtet Hilfe einmal; mit Hilfe Gel�
 - **Neu:** Lernzeichen `<ls-perlenkette>` in `spiele/rahmen/` (Attribute `reihe`, `pfeile`, `verdeckt`, `kurz`; Einträge in `grundsaetze-bilder.md` §4, `bedienung.md` §9, Regal-Regel); Art `mal`; Objekte `einkaufskorb`, `ballroehre`, `wochenschachtel`, `stiftebox`, `muffinkarton`; Welt in `lernplan.json`.
 - Die Vorratsliste ist kein neues Lernzeichen: Zeilen aus `<ls-perlenkette kurz>` und Gleichung. `kern/`, `lernsteuerung.js` und der RAHMEN der Vorlage bleiben; Einführung über `EINFUEHRUNG`.
 
+## Prototyp (Bau 2026-11-14)
+- **Gebaut:** eine Stufe (`material`), eine Runde über die echte Lernsteuerung (Art `mal`, `spiele.json` `kettenhuepfer` mit `stufen: [material]`); Systemstimme, kein Bild. `<ls-perlenkette>` (`spiele/rahmen/perlenkette.js`, Geometrie `perlenkette()` in `perlen-geometrie.js`), Objekt `einkaufskorb`, Sätze aus Daten in `texte.json` (alle 90 Aufträge ausgeschrieben), feste Sätze im Aufruf `blase.sage`.
+- **(Annahme) Timo legt 1 · n vor** (statt der ersten Aufgabe der Lernsteuerung, die dann dem Kind fehlen und falsch gebucht würde): Rundenanfang, Timo denkt nach, zeigt, tippt n, das Pfeilchen hüpft auf das erste Stäbchen, Zeile „1 · n = n“. Zählt nicht. Dafür eine Zeile im RAHMEN (`await vorzeigen(aufgabe)` vor der ersten Aufgabe), damit die Zeit der Aufgabe erst danach läuft; Kandidat für die Vorlage.
+- **(Annahme) Gemeldet wird beim Tippen auf Fertig;** Hüpfen und Flüge laufen in der Folge (sonst zählte die Animation zu `ms`).
+- **(Annahme) Kernpfeilchen:** nur das von Timo (1 · n) steht von Anfang an mit Zahl; weitere zeigt die Hilfe Stufe 1. Das Pfeilchen der laufenden Aufgabe ist immer ohne Zahl; eine wiederholte Zeile der Liste zeigt „a · n = ▢“, bis getippt ist (Satz 6).
+- **(Annahme) Kurzkette der Liste** als schmale Stäbe in der Farbe von n, ohne Einzelperlen (wiedererkennen, nicht zählen; auch in `kopf`).
+- **(Annahme) Passt-Satz** „Alles liegt jetzt im Korb.“ statt „So viele Packungen …“ (passte nicht zu Münzen und Schuhpaaren, Hinweis A4).
+- **(Annahme) Welt-Palette** „Werkstatt“ (6.2), bis Vorrat und Packungen eine eigene hat; Kette in zwei Reihen zu fünf, beide von links nach rechts.
+- **Hilfe Stufe 2:** Sonnenring an der nächsten Taste; dafür `markiere(zeichen)` an `<ls-tastatur>` (kleine Erweiterung des Bausteins, gleicher Sonnenring wie beim Fokus).
+- **Test-Schnittstelle:** Züge sind Tasten zu Ergebnis und Nachbarn um ein Stäbchen (`kandidaten`), `fehlversuche: true`.
+- **Offen für den Ausbau:** Stufen `vorstellung`/`kopf` am Gerät prüfen (im Code angelegt), Einführung in der Welt, `karte`/`regal`, Objekte `ballroehre`, `wochenschachtel`, `stiftebox`, `muffinkarton` (bis dahin Platzhalter-Päckchen), Zehn-Cent-Variante von `muenze`, Regal-Regel in `material.js`, Sanft und Abenteuer, Audio-Sammler für `texte.json` (sammelt heute nur Literale und `sprich`-Felder).
+
 ## Freigabe nötig (Christian)
 - Keine neue Frage: Perlenkette, Art `mal` und die Welt deckt Christians Auftrag (2026-11-14). **(Annahme)** zur Kenntnis: neun Packungen mit je eigenem Ding, davon vier neue Objekte und die Figur `einkaufskorb`.
 

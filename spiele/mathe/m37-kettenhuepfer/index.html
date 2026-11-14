@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Kettenhüpfer</title>
+<!-- M37 Kettenhüpfer (Entwurf docs/spiele/mathe/m37-kettenhuepfer.md). Kopie der Spielvorlage: Markup, Grundstil
+     (rahmen/seite.css), ein paar Zeilen Anordnung, ein Modul. Prototyp: eine Stufe (material), ohne Bild und Aufnahmen. -->
+<link rel="stylesheet" href="../../rahmen/seite.css">
+<style>
+  /* ===== SPIELWELT: Vorrat und Packungen. Alles in rem (1rem = Bildhöhe/108). =====
+     Welt (Annahme: Palette „Werkstatt“ aus grundsaetze-bilder 6.2, bis die Welt eine eigene hat): eine Vorratskammer,
+     hinten die Wand mit einem Regalbrett, vorn der Boden. Verläufe nur hier, flach von Hand. */
+  .welt {
+    background:
+      linear-gradient(#EFE7DD 0 24%, #BFA58A 24% 25.6%, #6E5A4A 25.6% 26.2%, #EFE7DD 26.2% 76%, #D9C7B3 76% 100%);
+  }
+
+  .spielflaeche {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    justify-items: center;
+    row-gap: 1.6rem;
+    padding: 1.6rem 2.4rem 2rem;
+  }
+  ls-blase { width: min(160rem, 100%); }
+
+  /* Arbeit: links in der Welt Timo und der Korb, in der Mitte die Matte mit der Kette, rechts die Vorratsliste. */
+  .arbeit {
+    display: grid;
+    grid-template-columns: 30rem minmax(0, 1fr) 38rem;
+    align-items: stretch;
+    column-gap: 2rem;
+    width: 100%;
+    min-height: 0;
+  }
+  .vorrat { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 0.5rem; }
+  .vorrat .timo { width: 24rem; height: 21rem; }
+  .vorrat .timo svg { width: 100%; height: 100%; display: block; }
+  .vorrat ls-objekt { height: 17rem; }
+
+  /* Matte: oben die Aufgabe, darunter die Kette. */
+  .matte { display: flex; flex-direction: column; align-items: center; gap: 1.6rem; padding: 2.6rem 3rem; min-height: 0; }
+  .aufgabe { display: flex; align-items: center; gap: 4rem; min-height: 8.4rem; }
+  .gleichung { display: flex; align-items: center; gap: 1.6rem; font-size: 6rem; font-weight: 700; line-height: 1; }
+  .feld {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 13rem; height: 8.4rem; padding: 0 1.6rem;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
+  }
+  .rechnung { font-size: 4.4rem; font-weight: 700; color: var(--ls-tinte); }
+  .rechnung:empty { display: none; }
+  .tausch { display: flex; align-items: center; gap: 1.2rem; }
+  .tausch ls-perlenstab { height: 3.2rem; }
+  .kette-platz { flex: 1 1 0; align-self: stretch; display: flex; align-items: center; justify-content: center; min-height: 0; }
+  .kette-platz.zu ls-perlenkette { visibility: hidden; }
+
+  /* Vorratsliste: flaches Papier, je Zeile die Gleichung und die Kurzkette. */
+  .liste { display: flex; flex-direction: column; gap: 0.6rem; padding: 2.6rem 2.6rem; min-height: 0; overflow: hidden; }
+  .liste .zeile { display: grid; grid-template-columns: 19rem 1fr; align-items: center; column-gap: 1rem; min-height: 4.4rem; font-size: 3.6rem; font-weight: 700; line-height: 1; }
+
+  /* Eingabe unten Mitte: Ziffern und Löschen (ls-tastatur), daneben Fertig (Hauptknopf). */
+  .eingabe { display: flex; align-items: flex-end; gap: 3rem; }
+
+  /* Packung im Flug (Wirkung, nie Zählmaterial): liegt über allem, nimmt keine Tipps. */
+  .flug { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
+  .flug > * { position: absolute; height: 7rem; }
+  .paeckchen { width: 8rem; height: 6rem; border: 0.3rem solid var(--ls-tinte); border-radius: 1rem; background: #BFA58A; }
+
+  /* Pause: Sachmoment auf der Papierkarte. */
+  .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
+  .sachmoment .hinweis {
+    display: inline-flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 4rem 1.6rem 1.6rem;
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-papier);
+    box-shadow: var(--ls-schatten); color: var(--ls-tinte); font-weight: 700; text-decoration: none;
+  }
+  .sachmoment .hinweis img { width: 8rem; height: 8rem; }
+  .sachmoment .hinweis:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+
+  .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
+  .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
+  .eltern p { max-width: 70ch; }
+  .eltern a { color: var(--ls-tinte); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="welt" aria-hidden="true"></div>
+
+<ls-leiste id="leiste" spiel="kettenhuepfer" fach="mathe" titel="Kettenhüpfer" thema=""></ls-leiste>
+
+<div class="buehne">
+  <main class="spielflaeche">
+    <ls-blase id="blase"></ls-blase>
+    <div class="arbeit">
+      <div class="vorrat" aria-hidden="true">
+        <div class="timo" id="timo"></div>
+        <ls-objekt id="korb" art="einkaufskorb" zustand="leer"></ls-objekt>
+      </div>
+      <section class="lernfeld matte" id="matte" aria-label="Matte">
+        <div class="aufgabe">
+          <div class="gleichung" id="gleichung" aria-live="polite"></div>
+          <div class="rechnung" id="rechnung"></div>
+        </div>
+        <div class="kette-platz" id="kette-platz"><ls-perlenkette id="kette" reihe="2" breite="100" perle="4"></ls-perlenkette></div>
+      </section>
+      <section class="lernfeld liste" id="liste" aria-label="Vorratsliste"></section>
+    </div>
+    <div class="eingabe">
+      <ls-tastatur id="tastatur" tasten="1234567890" loeschen></ls-tastatur>
+      <ls-knopf id="fertig" art="haupt" wort="Fertig"></ls-knopf>
+    </div>
+  </main>
+</div>
+<div class="flug" id="flug" aria-hidden="true"></div>
+
+<ls-hilfe id="hilfe"></ls-hilfe>
+<ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
+
+<script type="module" src="spiel.js"></script>
+</body>
+</html>

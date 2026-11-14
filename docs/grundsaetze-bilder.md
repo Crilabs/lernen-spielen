@@ -84,6 +84,7 @@ Figuren, Wortbilder und Bedienzeichen als eine Familie zusammen.
 | M5 | **Stellenwertfarben nur zusätzlich.** Einer türkis, Zehner orange, Hunderter schiefergrau, immer zusammen mit Spalte, Beschriftung E/Z/H und Ziffer; ausblendbar und später ausgeblendet. Die Montessori-Stellenwertfarben (grün, blau, rot) werden nicht übernommen, weil sie mit den Perlenfarben kollidieren (Rot wäre die 1 und der Hunderter, Grün die 2 und der Einer, Blau die 5/9 und der Zehner). | [E] Farbwahl; [P] keine Wirkungsstudie |
 | M6 | **Zahlenstrahl linear,** nie kreisförmig, Zehner gegliedert. Hunderterfeld 10 × 10 mit Fünferbruch, Verbindung zum Zahlenstrahl sichtbar. | [B] Siegler & Ramani 2008; Hunderterfeld [P] |
 | M7 | **Material und Zeichen verbinden.** Wo Perlen stehen, steht (nach dem Festlegen, L2) auch die Ziffer; der Übergang Ding → Bild → Zeichen ist sichtbar. | [B] Carbonneau 2013 (Anleitung verstärkt den Effekt); L7 |
+| M8 | **Perlenkette fürs Einmaleins** (`<ls-perlenkette>`): zehn gleiche Stäbchen zu je n Perlen (M2, M3) hintereinander, in zwei Reihen zu fünf; am Ende jedes Stäbchens ein Pfeilchen mit k · n (Montessori-Pfeilkärtchen, erst nach dem Festlegen, M7). Ein Stäbchen ist eine Gruppe, die Kette viele gleiche Gruppen. | Christian 2026-11-14 (M37); [P] Montessori-Kurzketten |
 
 ---------------------------------------------------------------------------------------------------
 ## 5. Lernzeichen Deutsch

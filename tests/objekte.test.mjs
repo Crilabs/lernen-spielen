@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 
 const { objekte, meldeObjekt, bild, dauerVon, KONTUR } = await import("../spiele/objekte/objekt.js");
-const ARTEN = ["papier", "dose", "papiertonne", "wertstofftonne", "schuhpaar", "muenze", "broetchen", "eierkarton", "gedeck"];
+const ARTEN = ["papier", "dose", "papiertonne", "wertstofftonne", "schuhpaar", "muenze", "broetchen", "eierkarton", "gedeck", "einkaufskorb"];
 for (const art of ARTEN) await import(`../spiele/objekte/${art}.js`);
 
 const teileIn = (svg) => new Set([...svg.matchAll(/data-teil="([^"]+)"/g)].map((m) => m[1]));
@@ -89,4 +89,17 @@ test("kein Plattform-Zugriff und kein Zugriff auf Attribute im Konstruktor", () 
   const quelle = readFileSync(new URL("../spiele/objekte/objekt.js", import.meta.url), "utf8");
   const konstruktor = quelle.slice(quelle.indexOf("constructor()"), quelle.indexOf("connectedCallback()"));
   assert.doesNotMatch(konstruktor, /setAttribute|getAttribute/);
+});
+
+test("Einkaufskorb (M37): leer und gefuellt, Packungen nur gefuellt, Bewegungen treffen vorhandene Teile, Einwurf", () => {
+  const def = objekte.get("einkaufskorb");
+  assert.deepEqual(def.zustaende, ["leer", "gefuellt"]);
+  const svg = def.zeichne("leer", { wert: "" });
+  const teile = teileIn(svg);
+  for (const t of ["ganz", "inhalt"]) assert.ok(teile.has(t), t);
+  assert.match(svg, /data-in="gefuellt"/);
+  assert.doesNotMatch(svg, /<text/);
+  for (const s of [...def.bewegung("leer", "gefuellt"), ...def.anstoss("schuhpaar")]) assert.ok(teile.has(s.teil), s.teil);
+  assert.ok(dauerVon(def.bewegung("leer", "gefuellt")) <= 1200);
+  assert.equal(def.einwurf.length, 3);
 });
