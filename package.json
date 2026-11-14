@@ -8,7 +8,8 @@
     "tauri": "tauri",
     "audio": "node werkzeuge/audio/erzeugen.mjs",
     "audio:vergleich": "node werkzeuge/audio/vergleich.mjs",
-    "audio:anhoeren": "node werkzeuge/audio/anhoeren.mjs"
+    "audio:anhoeren": "node werkzeuge/audio/anhoeren.mjs",
+    "schrift:ansehen": "node werkzeuge/schrift/ansehen.mjs"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",
