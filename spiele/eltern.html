@@ -137,6 +137,14 @@ details > summary::-webkit-details-marker { display: none; }
 .stufe .gewaehlt { font-weight: 700; min-height: 11rem; display: flex; align-items: center; }
 .stufe.markiert { border-color: var(--ls-tinte); }
 
+/* --- Spielzeit ----------------------------------------------------------------------------------- */
+/* Tage als Reihe gleich breiter Knöpfe (erlaubt = Hauptknopf gefüllt), Grenzen als Zeile Wert mit Weniger/Mehr. */
+.tage { --ls-breite: 15rem; display: flex; flex-wrap: wrap; gap: 1.6rem 2rem; }
+.grenze { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1.6rem 4rem; }
+.grenze .wert { font-size: 3.4rem; font-weight: 700; line-height: 1.2; }
+.grenze .knoepfe { margin-top: 0; }
+.zeit-stand { display: flex; flex-direction: column; gap: 0.6rem; }
+.zeit-stand .lage { font-weight: 700; }
 /* --- Gerät ---------------------------------------------------------------------------------------- */
 .version { font-size: 4.4rem; font-weight: 700; line-height: 1.1; }
 .notiz { white-space: pre-wrap; }
@@ -158,7 +166,7 @@ details > summary::-webkit-details-marker { display: none; }
 
 /* Schmal (hochkant): Spalten untereinander. */
 @media (max-aspect-ratio: 4/3) {
-  .stand, .stufe { grid-template-columns: 1fr; }
+  .stand, .stufe, .grenze { grid-template-columns: 1fr; }
   .stufe .wahl { justify-self: start; }
 }
 </style>
@@ -181,6 +189,7 @@ details > summary::-webkit-details-marker { display: none; }
     <h1>Für Erwachsene</h1>
     <ls-knopf data-tab="lernstand" symbol="lernstand.svg" wort="Lernstand" stumm></ls-knopf>
     <ls-knopf data-tab="geschichten" symbol="buch.svg" wort="Geschichten" stumm></ls-knopf>
+    <ls-knopf data-tab="spielzeit" symbol="uhr.svg" wort="Spielzeit" stumm></ls-knopf>
     <ls-knopf data-tab="geraet" symbol="update.svg" wort="Gerät" stumm></ls-knopf>
     <ls-knopf data-tab="hinweise" symbol="hilfe.svg" wort="Hinweise" stumm></ls-knopf>
     <ls-knopf data-tab="sicherheit" symbol="schloss.svg" wort="Sicherheit" stumm></ls-knopf>
@@ -193,7 +202,9 @@ details > summary::-webkit-details-marker { display: none; }
 import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen } from "./lernspiel.js";
 import { pinHash, pinPruefen, pruefeUpdate } from "./eltern.js";
 import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/geraet.js";
-import { ladeEinstellungen, setzeEinstellung, geschichtenStufe } from "./kern/einstellungen.js";
+import { ladeEinstellungen, setzeEinstellung, geschichtenStufe, einstellung } from "./kern/einstellungen.js";
+import { regeln, aktuell, lage as spielLage, gibZugabe, ZUGABE_MINUTEN } from "./kern/spielzeit.js";
+import { STAND as SPIELZEIT_STAND } from "./rahmen/spielzeit.js";
 import { elternThemen, markiereGekonnt, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, gekonnteThemen, luecken }
   from "./lernsteuerung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
@@ -296,7 +307,7 @@ function ruheNeu() {
 for (const typ of ["pointerdown", "keydown"]) document.addEventListener(typ, ruheNeu, true);
 ruheNeu();
 
-const ANSICHTEN = { lernstand, geschichten, geraet, hinweise, sicherheit };
+const ANSICHTEN = { lernstand, geschichten, spielzeit, geraet, hinweise, sicherheit };
 function waehle(name, hinweis) {
   tab = name;
   document.querySelectorAll("[data-tab]").forEach((b) => {
@@ -602,6 +613,131 @@ async function geschichten(spalte) {
   warn.append(el("h3", "Wann eine Stufe ruhiger?"),
     el("p", "Wenn das Kind Geschichten oft überspringt, den Ton abschaltet, ein Spiel meidet oder abends noch darüber spricht: dann eine Stufe ruhiger stellen und in Ruhe darüber reden."));
   spalte.appendChild(warn);
+}
+
+// ---------- Spielzeit ----------
+// Grenzen für digitale Spiele (Spec 2026-11-14-spielzeit). Alles im Standard aus; Startseite, Regal und
+// „Mit echten Dingen“ sind nie gesperrt. Jede Änderung wird sofort gespeichert.
+const WOCHENTAGE = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
+const TAG_WERTE = [null, ...Array.from({ length: 23 }, (_, i) => 10 + 5 * i)];      // aus, 10 … 120
+const WOCHE_WERTE = [null, ...Array.from({ length: 55 }, (_, i) => 30 + 15 * i)];   // aus, 30 … 840
+const LAGE_TEXT = {
+  frei: "Ihr Kind kann gerade digitale Spiele spielen.",
+  tag: "Heute ist kein Spieltag.",
+  "tag-voll": "Die Spielzeit für heute ist um.",
+  "woche-voll": "Die Spielzeit für diese Woche ist um.",
+  aus: "Digitale Spiele sind ausgeblendet.",
+};
+// 75 → "1 Stunde 15 Minuten"; 1 → "1 Minute"
+function dauer(min) {
+  const h = Math.floor(min / 60), m = min % 60;
+  const teile = [];
+  if (h) teile.push(h === 1 ? "1 Stunde" : `${h} Stunden`);
+  if (m || !h) teile.push(m === 1 ? "1 Minute" : `${m} Minuten`);
+  return teile.join(" ");
+}
+const minutenAus = (sek) => Math.floor(sek / 60);
+
+async function spielzeit(spalte) {
+  spalte.append(el("h2", "Spielzeit"),
+    el("p", "Wann und wie lange Ihr Kind digitale Spiele spielen darf. Startseite, Regal und „Mit echten Dingen“ sind nie gesperrt und zählen nicht mit. Im Standard ist alles aus: Die App selbst setzt keine Zeit fest. Ist die Zeit um, spielt Ihr Kind die laufende Runde zu Ende.", "vorspann"));
+  try { await ladeEinstellungen(); } catch (e) { protokoll("Einstellungen: " + e); }
+  let st = aktuell(await lade(SPIELZEIT_STAND, {}), new Date());
+  if (tab !== "spielzeit") return;
+  const status = el("p", "", "status leise");
+  status.setAttribute("role", "status");
+  const r = () => regeln(einstellung("spielzeit", null));
+  const setze = async (aenderung, meldung) => {
+    setzeEinstellung("spielzeit", { ...r(), ...aenderung });
+    await sofortSpeichern();
+    status.textContent = meldung;
+    zeichne();
+  };
+
+  // Stand: heute, diese Woche, Zugabe
+  const standFlaeche = el("section", null, "flaeche");
+  standFlaeche.setAttribute("aria-label", "Stand");
+  // Tage
+  const tageFlaeche = el("section", null, "flaeche");
+  tageFlaeche.setAttribute("aria-label", "Spieltage");
+  // Grenzen
+  const grenzenFlaeche = el("section", null, "flaeche");
+  grenzenFlaeche.setAttribute("aria-label", "Höchstens");
+  // Ausblenden
+  const ausFlaeche = el("section", null, "flaeche");
+  ausFlaeche.setAttribute("aria-label", "Digitale Spiele ausblenden");
+
+  const grenze = (titel, wert, werte, feld) => {
+    const zeile = el("div", null, "grenze");
+    const links = el("div", null, "spalten");
+    links.append(el("h4", titel), el("p", wert === null ? "Aus" : dauer(wert), "wert"));
+    const i = Math.max(0, werte.indexOf(wert));
+    const weniger = knopf("Weniger", { klasse: i === 0 ? "aus" : "" });
+    const mehr = knopf("Mehr", { klasse: i === werte.length - 1 ? "aus" : "" });
+    weniger.setAttribute("name", titel + ": weniger");
+    mehr.setAttribute("name", titel + ": mehr");
+    const neu = (w) => setze({ [feld]: w }, `${titel}: ${w === null ? "aus" : dauer(w)}.`);
+    weniger.addEventListener("click", () => { if (i > 0) neu(werte[i - 1]); });
+    mehr.addEventListener("click", () => { if (i < werte.length - 1) neu(werte[i + 1]); });
+    zeile.append(links, reihe(weniger, mehr));
+    return zeile;
+  };
+
+  function zeichne() {
+    const regel = r(), jetzt = new Date();
+    const l = spielLage(regel, st, jetzt);
+
+    const heute = minutenAus(l.heute), woche = minutenAus(l.woche);
+    const zeilen = el("div", null, "zeit-stand");
+    zeilen.append(
+      el("p", l.frei ? LAGE_TEXT.frei : LAGE_TEXT[l.grund], "lage"),
+      el("p", regel.proTag === null ? `Heute gespielt: ${dauer(heute)}.` : `Heute: ${dauer(heute)} von ${dauer(regel.proTag)}.`),
+      el("p", regel.proWoche === null ? `Diese Woche gespielt: ${dauer(woche)}.` : `Diese Woche: ${dauer(woche)} von ${dauer(regel.proWoche)}.`));
+    if (l.zugabe) zeilen.append(el("p", `Heute dazugegeben: ${dauer(l.zugabe)}.`, "leise"));
+    const mehr = knopf(`Heute ${ZUGABE_MINUTEN} Minuten mehr`, { klasse: regel.ausgeblendet ? "aus" : "" });
+    mehr.addEventListener("click", async () => {
+      if (r().ausgeblendet) return;
+      st = gibZugabe(st, ZUGABE_MINUTEN, new Date());
+      speichere(SPIELZEIT_STAND, st);
+      await sofortSpeichern();
+      status.textContent = `Heute ${ZUGABE_MINUTEN} Minuten mehr.`;
+      zeichne();
+    });
+    standFlaeche.replaceChildren(el("h3", "Heute"), zeilen, reihe(mehr),
+      el("p", "Gilt nur für heute, auch an einem Tag ohne Spiele und über die Grenze der Woche hinaus.", "leise klein"));
+
+    const tage = el("div", null, "tage");
+    tage.append(...WOCHENTAGE.map((name, i) => {
+      const nr = i + 1, an = regel.tage.includes(nr);
+      const k = knopf(name.slice(0, 2), { art: an ? "haupt" : undefined });
+      k.setAttribute("name", `${name}: ${an ? "erlaubt" : "keine Spiele"}`);
+      k.setAttribute("aria-pressed", String(an));
+      k.addEventListener("click", () => {
+        const neu = an ? regel.tage.filter((t) => t !== nr) : [...regel.tage, nr];
+        setze({ tage: neu }, `${name}: ${an ? "keine digitalen Spiele" : "erlaubt"}.`);
+      });
+      return k;
+    }));
+    tageFlaeche.replaceChildren(el("h3", "An diesen Tagen"), tage,
+      el("p", "Gefüllt heißt: An diesem Tag sind digitale Spiele erlaubt. Die Woche läuft von Montag bis Sonntag.", "leise klein"));
+
+    grenzenFlaeche.replaceChildren(el("h3", "Höchstens"),
+      grenze("Am Tag", regel.proTag, TAG_WERTE, "proTag"),
+      grenze("In der Woche", regel.proWoche, WOCHE_WERTE, "proWoche"),
+      el("p", "Gezählt wird nur, solange ein digitales Spiel offen ist und Ihr Kind darin etwas tut. Sind weniger als fünf Minuten übrig, sagt der Erzähler am Ende einer Runde einmal: „Gleich ist für heute Schluss.“", "leise klein"));
+
+    const schalter = knopf(regel.ausgeblendet ? "Wieder zeigen" : "Ausblenden", { art: regel.ausgeblendet ? "haupt" : undefined });
+    schalter.setAttribute("aria-pressed", String(regel.ausgeblendet));
+    schalter.addEventListener("click", () => setze({ ausgeblendet: !regel.ausgeblendet },
+      regel.ausgeblendet ? "Digitale Spiele werden wieder gezeigt." : "Digitale Spiele sind ausgeblendet."));
+    ausFlaeche.replaceChildren(el("h3", "Digitale Spiele ausblenden"),
+      el("p", regel.ausgeblendet
+        ? "Ausgeblendet: Die Startseite zeigt keine digitalen Spiele, auch nicht mit „Heute mehr“. Regal, Fächer und „Mit echten Dingen“ bleiben."
+        : "Die Startseite zeigt dann keine digitalen Spiele mehr. Regal, Fächer und „Mit echten Dingen“ bleiben."),
+      reihe(schalter));
+  }
+  zeichne();
+  spalte.append(standFlaeche, tageFlaeche, grenzenFlaeche, ausFlaeche, status);
 }
 
 // ---------- Gerät ----------

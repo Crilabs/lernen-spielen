@@ -281,6 +281,7 @@ import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
 import "./rahmen/anregung.js";
+import { spielzeitLage } from "./rahmen/spielzeit.js";
 
 const ZUSTAND = { "kann-ich": "kann ich", dran: "dran", "in-sicht": "in Sicht" };
 const fach = new URLSearchParams(location.search).get("fach") ?? "";
@@ -300,6 +301,9 @@ async function start() {
     ctx = { plan, spiele };
     stand = await ladeLernstand(ctx, new Date().toLocaleDateString("sv"));
   } catch (e) { protokoll("themen: " + e); zeigeFehler(); return; }
+  // Spielzeit der Eltern: gesperrt fehlen nur die Spiel-Links; Name, Geschichte und „Mit echten Dingen“ bleiben.
+  const zeit = await spielzeitLage().catch((e) => { protokoll("Spielzeit: " + e); return null; });
+  const spielFrei = !zeit || zeit.lage.frei;
   const kategorie = (ctx.spiele.kategorien ?? []).find((k) => k.id === fach);
   leiste.setAttribute("titel", kategorie?.name ?? fach);
   await leiste.bereit();
@@ -351,7 +355,7 @@ async function start() {
     knoepfe.forEach((k, i) => k.setAttribute("aria-expanded", String(stationen[i] === s)));
     nameFeld.textContent = s.name;
     echt.hidden = !s.eltern;
-    spieleFeld.innerHTML = s.spiele.map((sp) => `<a class="spiel" href="${esc(sp.datei)}?thema=${encodeURIComponent(s.id)}"
+    spieleFeld.innerHTML = (spielFrei ? s.spiele : []).map((sp) => `<a class="spiel" href="${esc(sp.datei)}?thema=${encodeURIComponent(s.id)}"
         aria-label="${esc(sp.titel)}"><span class="ico"><img src="${esc(sp.symbol)}" alt=""></span><b>${esc(sp.titel)}</b></a>`).join("")
       + (s.geschichte ? `<ls-knopf class="geschichte" symbol="buch.svg" wort="Geschichte ansehen"></ls-knopf>` : "");
     spieleFeld.querySelectorAll("a.spiel").forEach((a, i) => a.addEventListener("click", (e) => {

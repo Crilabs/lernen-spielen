@@ -2,7 +2,8 @@
 // Vollflächige Ebene über dem Spiel auf Nacht mit ruhigen Sternen in Sonne, verborgen bis zeige().
 // Der Inhalt kommt per <slot> auf eine Papierkarte (ohne Inhalt keine Karte).
 // Unten Mitte „Alle Spiele“ und „Weiter“: gleich groß, gleich gestaltet (Papier, Symbol und Wort), N6.
-// Kein Timer, kein Ablauf.
+// Kein Timer, kein Ablauf. Spielzeit (Spec 2026-11-14-spielzeit): zeige({ satz, schluss }) stellt einen ruhigen
+// Satz über die Knöpfe (Vorwarnung oder Schluss); bei schluss gibt es kein Weiter, nur „Alle Spiele“.
 
 import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
 import { sprich } from "../kern/stimme.js";
@@ -64,6 +65,19 @@ const PAUSE_CSS = `
   gap: 8rem;
 }
 .aktionen:focus { outline: none; }
+.satz {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(${UNTEN + MASSE.pilleGross + 2}rem + env(safe-area-inset-bottom, 0rem));
+  margin: 0;
+  padding: 0 ${MASSE.rand}rem;
+  text-align: center;
+  font-size: 3.2rem;
+  line-height: 1.3;
+  color: var(--ls-papier);
+}
+.satz:empty { display: none; }
 a.alle { --ls-knopf: ${MASSE.pilleGross}rem; }
 `;
 
@@ -76,6 +90,7 @@ export class LsPause extends HTMLElement {
         <g class="sterne">${STERNE}</g><g class="punkte">${PUNKTE}</g>
       </svg>
       <div class="inhalt"><div class="karte leer"><slot></slot></div></div>
+      <p class="satz" role="status"></p>
       <div class="aktionen" tabindex="-1">
         <a class="knopf alle" href="${HAUS_HREF}" aria-label="Alle Spiele" draggable="false"><span class="form neben pille"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span><span class="wort">Alle Spiele</span></span></a>
         <ls-knopf class="weiter" symbol="zurueck.svg" name="Weiter" wort="Weiter" groesse="gross" gespiegelt></ls-knopf>
@@ -90,6 +105,7 @@ export class LsPause extends HTMLElement {
     this.aktionen = /** @type {HTMLElement} */ (wurzel.querySelector(".aktionen"));
     this.alle = /** @type {HTMLAnchorElement} */ (wurzel.querySelector("a.alle"));
     this.weiter = /** @type {HTMLElement} */ (wurzel.querySelector("ls-knopf.weiter"));
+    this.satz = /** @type {HTMLElement} */ (wurzel.querySelector(".satz"));
     /** @type {Promise<"weiter"> | null} */
     this._offen = null;
     /** @type {((w: "weiter") => void) | null} */
@@ -116,12 +132,16 @@ export class LsPause extends HTMLElement {
 
   /**
    * Macht die Ebene sichtbar; löst beim Tippen auf Weiter genau einmal auf. Während sie offen ist,
-   * liefert jeder weitere Aufruf dasselbe Versprechen.
+   * liefert jeder weitere Aufruf dasselbe Versprechen. Mit schluss gibt es kein Weiter: das Versprechen
+   * bleibt offen, der Weg führt über „Alle Spiele“ zur Startseite.
+   * @param {{ satz?: string | null, schluss?: boolean }} [optionen] satz zeigt die Pause (sprechen tut das Spiel)
    * @returns {Promise<"weiter">}
    */
-  zeige() {
+  zeige({ satz = null, schluss = false } = {}) {
     if (this._offen) return this._offen;
     this._offen = new Promise((ok) => { this._loese = ok; });
+    this.satz.textContent = satz ?? "";
+    this.weiter.hidden = schluss;
     this.setAttribute("offen", "");
     // Fokus auf die Knopfgruppe, nicht auf Weiter: keiner der beiden Wege wird hervorgehoben (N6).
     this.aktionen.focus({ preventScroll: true });
