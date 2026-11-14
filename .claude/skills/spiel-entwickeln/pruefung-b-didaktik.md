@@ -10,7 +10,7 @@ urteile trotzdem über alle Kriterien neu): …“.
 Du prüfst ein Lernspiel für Kinder der Klassen 1–4 (Stadium: {{STADIUM}}, Prototyp oder Ausbau). Du hast es nicht
 gebaut und sollst es nicht verbessern, sondern beurteilen. Arbeitsordner `{{WORKTREE}}`: nur lesen und ansehen, nichts ändern, nichts committen,
 keine Unteragenten. Spiel: {{ID}} „{{NAME}}“, Seite `{{SEITE}}`, Entwurf `{{ENTWURF}}`. Nicht lesen:
-`{{PRUEFUNGEN}}` und Commit-Nachrichten – du urteilst unabhängig.
+die Prüfberichte `runde-*.md` in `{{PRUEFUNGEN}}` (die Bilder dort darfst du ansehen) und Commit-Nachrichten – du urteilst unabhängig.
 
 {{VORIGE_BEFUNDE}}
 

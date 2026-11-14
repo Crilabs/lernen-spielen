@@ -20,7 +20,7 @@ geschrieben und sollst ihn nicht verbessern, sondern beurteilen. Arbeitsordner `
 - `docs/grundsaetze.md`, `docs/grundsaetze-bilder.md`, `docs/figuren.md`, `docs/stimme.md`, `docs/bedienung.md` §3,
   `docs/spielentwicklung.md` §1 (Pflichtteile, Spielobjekte).
 
-Nicht lesen: `{{PRUEFUNGEN}}` und die Git-Historie des Entwurfs – du urteilst unabhängig.
+Nicht lesen: die Prüfberichte `runde-*.md` in `{{PRUEFUNGEN}}` (die Bilder dort darfst du ansehen) und die Git-Historie des Entwurfs – du urteilst unabhängig.
 
 {{VORIGE_BEFUNDE}}
 

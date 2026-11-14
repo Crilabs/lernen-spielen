@@ -14,7 +14,7 @@ Arbeitsordner `{{WORKTREE}}`: nur lesen, nichts ändern, nichts committen, keine
 
 **Lies nur:** die Datei `spiele/mit-echten-dingen/{{FACH}}/{{THEMA}}.md`, den Eintrag mit `"id": "{{THEMA}}"` in
 `spiele/lernplan.json`, `docs/mit-echten-dingen.md` (ganz) und `docs/grundsaetze.md`. Nicht die Git-Historie, keine
-anderen Anleitungen, nicht `{{PRUEFUNGEN}}`. Öffne mindestens eine der Quellen im Kopf der Datei (Web) und vergleiche
+anderen Anleitungen, nicht die Prüfberichte `runde-*.md` in `{{PRUEFUNGEN}}` (die Bilder dort darfst du ansehen). Öffne mindestens eine der Quellen im Kopf der Datei (Web) und vergleiche
 (E7). Für E10: das Objekt aus `bild` im Kopf (`spiele/objekte/<figur>.js`) im genannten Zustand ansehen
 (`NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/objektbilder.mjs <Scratchpad>/objekte
 spiele/objekte/<figur>.js`) und mit den Bildern der anderen Anleitungen des Fachs vergleichen (je `bild` im Kopf).

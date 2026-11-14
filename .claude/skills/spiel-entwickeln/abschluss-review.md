@@ -13,7 +13,7 @@ bei Rahmen und Ansichten: Ist das fertig, richtig und sauber? Du hast nicht dara
 
 **Lies:** `git diff {{BASIS}}...HEAD` (ganz) und `git log {{BASIS}}..HEAD --oneline`; den Entwurf `{{ENTWURF}}`;
 `docs/spielentwicklung.md` (ganz, besonders „Ablage“, „Spielobjekte“, §5, §6); `docs/bedienung.md` §10;
-`docs/grundsaetze.md` §12; `spiele/vorlage/spiel.js` (Kopf). Nicht lesen: `{{PRUEFUNGEN}}`.
+`docs/grundsaetze.md` §12; `spiele/vorlage/spiel.js` (Kopf). Nicht lesen: die Prüfberichte `runde-*.md` in `{{PRUEFUNGEN}}` (die Bilder dort darfst du ansehen).
 
 **Führe aus und zitiere die Ausgabe (gekürzt):**
 ```bash
