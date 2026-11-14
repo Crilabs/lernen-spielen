@@ -1,6 +1,9 @@
 > Teil des Spielkatalogs (`docs/spielkatalog.md`). **Die Entscheidungen im Hauptdokument gehen vor**: Sie beantworten die
 > offenen Fragen am Ende dieser Datei (u. a. alle Spiele bleiben getrennt, Kontrollkarte, Stimmen, Sachwelt je Spiel).
-> Die Heimatwelt jedes Spiels steht in der Übersicht des Hauptdokuments.
+> Heimatwelt und Geschichte je Spiel (Zeilen „Heimatwelt“ bis „Abenteuer“) sind am 2026-11-14 aus
+> [`welten.md`](welten.md) übernommen und gelten. Jedes Spiel hat alle drei Stufen; Stellen in den Überblicken, die noch
+> „ruhig fest“ nennen, sind überholt. Beispiele für Szenen in den Zeilen Handlung, Figuren und Mach mit, die nicht zur
+> Heimatwelt passen, sind ebenfalls überholt (Hauptdokument 8a).
 
 # Spielkatalog Schreiben und Grammatik (Kl. 1–4)
 
@@ -85,10 +88,12 @@ Lernhandlung.
   bewegliche Alphabet ist dafür Montessoris eigenes Material, und Schreiben kommt vor dem Lesen.
 - Bewusst nicht drin: silben-schwingen-beim-schreiben → S02 (Einheit ist die Silbe, nicht der Laut);
   merkwoerter-v → S07 (nicht hörbar, also nicht herleitbar); die Form der Buchstaben → S18.
-- Sachgrund der Heimatwelt: Dinge beschriften, damit andere sie finden · Kandidaten: bauernhof, werkzeuge,
-  obst-gemuese-reif
-- Stimmung: anpassbar. Ruhig: Schilder im Hofladen. Sanft: ein Gast sucht etwas, das Schild fehlt noch.
-  Abenteuer: Wegweiser für eine Wanderung, jedes Schild öffnet das nächste Wegstück, Ende am Rastplatz.
+- Heimatwelt: Wurzel, Stängel, Blatt, Blüte (`teile-der-pflanze`)
+  - Sachgrund: Pflanzenteile werden beschriftet (Montessori-Nomenklaturkarten): Wurzel, Stängel, Blatt, Blüte.
+  - Rahmen: Versorgen · Spannung aus: Lücke · Fähigkeit: schrumpfen
+  - Ruhig: Im Schulgarten bekommen die Pflanzen Schilder. Jedes gelegte Wort wird ein Schild; mit Schild findet die Gärtnerin, was sie sucht.
+  - Sanft: Der Regen hat ein Schild abgewaschen, nur der erste Buchstabe ist noch da. Welches Wort war es?
+  - Abenteuer: Die Runde schrumpft und klettert über mehrere Runden an einer Sonnenblume hoch: Wurzel, Stängel, Blatt, Blüte. An jeder Station legt das Kind das Wort. Oben brummt es: Eine Hummel landet nebenan (Sachbild).
 - Regal-Material: Kärtchen mit Buchstabengruppe des Themas (ei, sch, pf …) statt erstem Buchstaben des Themas.
 - Fachübergreifend: Lesen (Anlaute, laute-verschmelzen-hoeren) mit demselben Alphabet in umgekehrter Richtung.
 
@@ -117,9 +122,12 @@ Lernhandlung.
   Vokal“ wird im Bogen sichtbar, und die unbetonten Endsilben -e, -en, -er, -el bekommen ihren eigenen Bogen.
 - Bewusst nicht drin: offene-geschlossene-silbe und Verdopplung → S03 (eine zweite Schwierigkeit:
   Vokallänge); trennen-am-zeilenende → S09 (Handlung ist Schneiden).
-- Sachgrund der Heimatwelt: etwas Langes aus gleichartigen Abschnitten · Kandidaten: vom-ei-zum-tier (Raupe),
-  bruecken, unterwegs (Zug mit Wagen)
-- Stimmung: ruhig fest (Hörarbeit braucht Stille)
+- Heimatwelt: Raupe und Schmetterling, Kaulquappe und Frosch (`vom-ei-zum-tier`)
+  - Sachgrund: Eine Raupe hat viele gleiche Abschnitte und wird zum Schmetterling; lange Wörter haben gleiche Silben.
+  - Rahmen: Versorgen · Spannung aus: Verwandlung
+  - Ruhig: Im Raupenkasten: Jede volle Silbe wird ein Glied der Raupe. Ist das Wort fertig, frisst sie ein Blatt. (Während das Kind hört und schwingt, ist es still.)
+  - Sanft: Die Raupe ist weg. Am Zweig hängt etwas Neues: eine Puppe. Jedes Wort bringt einen Tag weiter.
+  - Abenteuer: Vom Ei zum Falter über mehrere Runden: Ei, Raupe, Puppe. Mit jedem Wort vergeht Zeit. In der letzten Runde wackelt die Puppe und reißt auf. Ein Schmetterling trocknet seine Flügel.
 - Regal-Material: Kärtchen mit zwei Silbenbögen.
 - Fachübergreifend: Lesen und Sprechen (silben-klatschen, lesen-offene-silben, lesen-endungen-en-er) mit
   demselben Bogen.
@@ -152,9 +160,12 @@ Lernhandlung.
   Beobachtung am Zweisilber (silbenanalytischer Ansatz nach Röber) [P]. Die Tür macht die Regel zur Sache.
 - Bewusst nicht drin: Einsilber (Stall, Fluss) → S04 (erst verlängern, dann hier prüfen); merkwoerter-dehnungs-h
   → S07 (kein Haus erklärt das h in „Stuhl“).
-- Sachgrund der Heimatwelt: Häuser und Ställe, die offen oder dicht sein müssen · Kandidaten: ackerbau-hausbau,
-  bauernhof, burg-kloster-schloss
-- Stimmung: ruhig fest
+- Heimatwelt: Ackerbau, Hausbau, Handwerk (`ackerbau-hausbau`)
+  - Sachgrund: Die Wörter vom Bauen sind die Übungswörter (K10): Ho-bel und Ham-mer, Sä-ge und Lat-te, Na-gel und Bal-ken. Wie man früher ein Haus aus Holz und Lehm baute, zeigt die Szene.
+  - Rahmen: Bauen · Spannung aus: Durcheinander · Fähigkeit: in die Zeit reisen
+  - Ruhig: Ein Haus wie früher wird gebaut. Jedes Wort aus der Zimmerei (Hobel, Hammer) bekommt sein Silbenhaus mit offener oder geschlossener Tür; stimmt es, kommt das Werkzeug an die Wand.
+  - Sanft: Zwei Schilder klingen fast gleich (Hüte, Hütte). Welches gehört an die Tür? Das Silbenhaus zeigt es.
+  - Abenteuer: Mit der Zeituhr über mehrere Runden auf einer Baustelle von früher: Schwelle, Ständer, Riegel, Dach. Jedes Wort setzt ein Teil. Beim Richtfest hängt die Runde den Kranz auf.
 - Regal-Material: Kärtchen mit Doppelbuchstaben des Themas (ll, ck, ie, ß).
 - Fachübergreifend: Lesen (lesen-lang-oder-kurz) mit demselben Längenzeichen.
 
@@ -184,10 +195,13 @@ Lernhandlung.
   Wort, nicht in einer Regel. Dieselbe Handlung trägt d/t, g/k, b/p, Doppelkonsonant am Ende, ß/ss und -ig.
 - Bewusst nicht drin: ä/äu → S05 (die Probe sucht einen Verwandten, nicht die Langform); Mehrzahl bilden als
   Grammatik → G08.
-- Sachgrund der Heimatwelt: aus einem werden viele · Kandidaten: bauernhof (Tierjunge), samen-reisen,
-  wiese-und-hecke
-- Stimmung: anpassbar. Ruhig: Bestandsliste auf dem Hof. Sanft: die Liste ist durcheinandergeraten, ein Kind
-  ordnet sie. Abenteuer: Spuren im Schnee (ein Tier, viele Tiere), die Spur führt zur Futterstelle.
+- Heimatwelt: Auf dem Bauernhof (`bauernhof`)
+  - Sachgrund: Auf dem Hof gibt es Pferde, Rinder, Kälber: die Mehrzahl zeigt beim Verlängern, wie man schreibt.
+  - Sache wächst mit: Kl. 2: Tiere und Dinge auf dem Hof in Einzahl und Mehrzahl. Kl. 3: Arbeit auf dem Hof durchs Jahr (melken, mähen, ernten), Wörter mit wir-Form und Adjektiv.
+  - Rahmen: Spur · Spannung aus: Rätsel
+  - Ruhig: Die Bestandsliste für den Hof: ein Kalb, viele Kälber. Das lange Wort lässt den Laut hören; richtig geschrieben, kommt das Tier in die Liste.
+  - Sanft: Die Liste ist nass geworden, die letzten Buchstaben sind verlaufen: Hun_, Pfer_. Verlängern bringt sie zurück.
+  - Abenteuer: Spuren im Schnee über mehrere Runden: eine Spur, viele Spuren. Wer war am Futtertrog? Jedes verlängerte Wort deckt eine Spur auf (Hund, Hunde). Die letzte führt in die Scheune: Dort liegt die Katze mit ihren Jungen im Stroh.
 - Regal-Material: Kärtchen mit dem Buchstabenpaar des Themas (d/t, g/k, b/p).
 - Fachübergreifend: Grammatik G08 (Mehrzahl) und G02 (wir-Form) liefern die Langformen.
 
@@ -213,10 +227,12 @@ Lernhandlung.
 - Warum perfekt: Ableiten heißt die Verwandtschaft sehen; der Stamm bleibt gleich (Morphemprinzip). Ein Baum
   zeigt Verwandtschaft so, wie Kinder sie aus Familien kennen, und nimmt auch die Herkunft als Wurzel auf.
 - Bewusst nicht drin: Vorsilben und Nachsilben als Bausteine → G12 (Handlung ist Stecken, nicht Hängen).
-- Sachgrund der Heimatwelt: was aus einer Wurzel wächst · Kandidaten: tierbaum-pflanzenbaum, teile-der-pflanze,
-  geschichte-der-schrift
-- Stimmung: anpassbar. Ruhig: Baum im Garten. Sanft: ein Sturm hat Blätter gelöst, sie gehören zurück an ihre
-  Äste. Abenteuer: Zeitreise zur Wurzel eines Wortes (nur Kl. 4), Rückkehr in den hellen Garten.
+- Heimatwelt: Tierbaum und Pflanzenbaum (`tierbaum-pflanzenbaum`)
+  - Sachgrund: Tiere und Pflanzen ordnet man nach Verwandtschaft, nicht nach Aussehen (der Wal ist kein Fisch). Bei Wörtern ist es genauso: Verwandt ist, was denselben Stamm hat (backen, Bäcker).
+  - Rahmen: Forschen · Spannung aus: Rätsel
+  - Ruhig: Neben dem Tierbaum im Klassenzimmer wächst ein Wortbaum. Jedes abgeleitete Wort treibt ein Blatt am Ast seiner Familie.
+  - Sanft: Ein Blatt hängt am falschen Ast: Es sieht nach Verwandtschaft aus, ist aber keine (wie Wal und Fisch). Der Stamm zeigt, wohin es gehört.
+  - Abenteuer: Verwandte suchen über mehrere Runden: Die Runde bekommt Karten mit Tieren und Wörtern, die sich ähnlich sehen. Wer ist wirklich verwandt? Am Ende ist klar: Die Fledermaus gehört zu den Säugetieren und „Bäcker“ zu „backen“.
 - Regal-Material: Kärtchen mit ä oder äu.
 - Fachübergreifend: Lesen (wortstamm-lesen) mit derselben Stammrahmung.
 
@@ -243,10 +259,13 @@ Lernhandlung.
 - Warum perfekt: Die Großschreibung hängt an der Probe, nicht an der Bedeutung (Grundsatz §5). Hier ist die
   Probe die Handlung, und die Wirkung (groß werden) ist genau das Lernziel.
 - Bewusst nicht drin: satzanfang-gross → S11 (Grund ist die Satzgrenze); Wortarten bestimmen → G01.
-- Sachgrund der Heimatwelt: Lebewesen und Dinge beim Namen nennen · Kandidaten: koerperteile, werkzeuge,
-  haustiere
-- Stimmung: anpassbar. Ruhig: Brief an die Oma. Sanft: Tischkärtchen für ein Fest, ein Name fehlt noch.
-  Abenteuer: Schatzkarte, deren Orte erst lesbar werden, wenn die Nomen groß sind; Ende am Picknickplatz.
+- Heimatwelt: Mein Körper von Kopf bis Fuß (`koerperteile`)
+  - Sachgrund: Alle Körperteile haben richtige Namen (auch Penis, Vulva, Po, Brust); Nomen erkennt man an der Probe.
+  - Sache wächst mit: Kl. 1–2: Körperteile von Kopf bis Fuß, alle mit richtigem Namen. Kl. 3–4: Organe und was sie tun (Herz, Lunge, Magen), abstrakte Nomen (das Laufen, der Hunger).
+  - Rahmen: Entdecken · Spannung aus: Lücke · Fähigkeit: schrumpfen
+  - Ruhig: Ein Körperplakat für die Klasse: Besteht ein Wort die Artikelprobe, zaubert ein Kind der Runde den Anfang groß, und das Schild klebt an seiner Stelle.
+  - Sanft: Ein Wort macht Mühe: „das Laufen“. Groß oder klein? Die Probe entscheidet.
+  - Abenteuer: Über mehrere Runden schrumpft die Runde und geht durch ein begehbares Körpermodell im Museum: Ohr, Lunge, Herz. Jedes Schild muss stimmen, dann geht die Tür zum nächsten Raum auf. Im Herzraum pocht es: ein Lautsprecher.
 - Regal-Material: Wortart-Baustein Nomen (`<ls-wortart>`), passt zum Regal.
 - Fachübergreifend: Grammatik G01 (dieselbe Artikelprobe, anderes Ziel).
 
@@ -273,9 +292,13 @@ Lernhandlung.
   vergleichen ist genau der Abruf, mit Fehlerkontrolle durch das Kind selbst, und es wiederholt über Tage (L3).
 - Bewusst nicht drin: Wörter, die eine Probe erklärt (Hund, Brille) → S03, S04; das Kind soll nicht Herleitbares
   auswendig lernen.
-- Sachgrund der Heimatwelt: sich etwas merken, das gleich verschwindet (Tarnung) · Kandidaten:
-  tarnen-verstecken, am-himmel
-- Stimmung: ruhig fest
+- Heimatwelt: Tarnen und Verstecken (`tarnen-verstecken`)
+  - Sachgrund: Getarnte Tiere sieht man nur kurz und muss sie sich merken; das Wort verschwindet auch.
+  - Sache wächst mit: Kl. 1–2: getarnte Tiere bei uns (Frosch, Reh, Falter). Kl. 3–4: Tarnen als Anpassung, Tiere im Meer und in anderen Ländern.
+  - Rahmen: Spur · Spannung aus: Rätsel · Fähigkeit: unter Wasser atmen
+  - Ruhig: Im Bild verstecken sich Tiere. Der Name wird gezeigt, vom Kind selbst abgedeckt und aus dem Kopf geschrieben; stimmt er, wird das Tier sichtbar (Sachbild).
+  - Sanft: Etwas hat sich bewegt, aber wo? Das nächste Wort deckt es auf: eine Stabheuschrecke am Zweig.
+  - Abenteuer: Mit dem Taucherhelm über mehrere Runden durchs Riff: Scholle im Sand, Seepferdchen im Seegras, Krake am Fels. Jedes Merkwort lässt eines auftauchen. Der letzte Stein wechselt die Farbe: ein Tintenfisch.
 - Regal-Material: Kärtchen mit dem Merkbuchstaben (h, v, aa).
 - Fachübergreifend: Lesen (blitzwoerter-1) mit derselben Wortkarte.
 
@@ -302,9 +325,13 @@ Lernhandlung.
 - Warum perfekt: Das Lernziel ist die Wahl der Strategie. Die Werkzeugkiste macht die Wahl zur Handlung, und
   die Fehlerkontrolle ist das Werkzeug selbst.
 - Bewusst nicht drin: die einzelnen Strategien als Erstbegegnung → S02 bis S05 (erst einzeln, dann gemischt, L6).
-- Sachgrund der Heimatwelt: das passende Werkzeug für eine Arbeit wählen · Kandidaten: werkzeuge, berufe
-- Stimmung: anpassbar. Ruhig: Brief an Oma. Sanft: ein Zettel für den Kaufladen, der morgen öffnet.
-  Abenteuer: Wörter auf einer alten Karte, Werkzeug für Werkzeug wird der Weg lesbar.
+- Heimatwelt: Werkzeuge und wofür man sie nimmt (`werkzeuge`)
+  - Sachgrund: In der Werkstatt hängen Schilder an der Werkzeugwand (Hammer, Säge, Zange); falsche Schilder mit der passenden Probe richtig machen.
+  - Sache wächst mit: Kl. 2: Hammer, Säge, Zange. Kl. 4: Fachwörter und Berufe der Werkstatt (Schraubzwinge, Wasserwaage, Schreinerin), Nachschlagen im Wörterbuch.
+  - Rahmen: Werkstatt · Spannung aus: Rätsel
+  - Ruhig: In der Werkstatt hängen Schilder an der Werkzeugwand, bei manchen ist die Schreibung unsicher. Das Kind wählt die Probe; das geprüfte Schild kommt zurück an die Wand.
+  - Sanft: Ein Bestellzettel soll heute noch zum Baumarkt, zwei Wörter sind unsicher. Geprüft, geht er ab.
+  - Abenteuer: Die Werkstatt zieht um, über mehrere Runden: Kisten beschriften, Regale, Türschilder. In einer alten Kiste liegt ein Werkzeug, das niemand kennt. Nachgeschlagen: ein Schusterhammer.
 - Regal-Material: Kärtchen mit Werkzeugkiste (Fachsymbol Schreiben) statt Buchstabe.
 - Fachübergreifend: keine.
 
@@ -330,8 +357,13 @@ Lernhandlung.
 - Warum perfekt: Wortgrenzen und Einheiten der Sprache werden greifbar, wenn man sie schneidet. „Ichmageis“
   ist kein Problem der Hand, sondern des Begriffs Wort; die Schere macht den Begriff zur Handlung.
 - Bewusst nicht drin: Satzschlusszeichen → S11; den Abstand mit der Hand übt S18 als zweiter Zugang.
-- Sachgrund der Heimatwelt: ein Band an den richtigen Stellen teilen · Kandidaten: kleidung, werkzeuge
-- Stimmung: ruhig fest
+- Heimatwelt: Wie die Schrift entstanden ist (`geschichte-der-schrift`)
+  - Sachgrund: Früher schrieb man ohne Wortabstände; Wörter und Sätze richtig trennen macht Schrift lesbar.
+  - Sache wächst mit: Kl. 1: Wörter trennen macht lesbar. Kl. 3: Schreiben früher (Stein, Ton, Feder), Trennen am Zeilenende beim Abschreiben von Hand.
+  - Rahmen: Zeitreise · Spannung aus: Rätsel · Fähigkeit: in die Zeit reisen
+  - Ruhig: Eine alte Schriftrolle ohne Abstände. Jeder richtige Schnitt trennt ein Wort; ist die Zeile lesbar, wird sie vorgelesen.
+  - Sanft: Eine Stelle lässt sich auf zwei Arten schneiden. Nur eine ergibt Sinn; vorgelesen hört man es.
+  - Abenteuer: Mit der Zeituhr über mehrere Runden in eine Schreibstube von früher: Die Runde hilft, eine Nachricht zu entziffern, die jemand in Stein geritzt hat. Am Ende heißt sie: „Hier gibt es gutes Brot.“
 - Regal-Material: Kärtchen mit Schere.
 - Fachübergreifend: Lesen und Sprechen (woerter-im-satz-zaehlen).
 
@@ -356,9 +388,13 @@ Lernhandlung.
 - Warum perfekt: Das Alphabet ist eine Ordnung zum Finden. Einordnen und Nachschlagen sind beide Finden nach
   dieser Ordnung, mit sichtbarer Kontrolle durch die Nachbarn.
 - Bewusst nicht drin: Rechtschreibstrategie wählen → S08.
-- Sachgrund der Heimatwelt: eine Ordnung, nach der man findet · Kandidaten: berufe (Bücherei),
-  geschichte-der-schrift
-- Stimmung: ruhig fest
+- Heimatwelt: Wie die Schrift entstanden ist (`geschichte-der-schrift`)
+  - Sachgrund: Das Alphabet ist eine alte Erfindung und ordnet Bücher, Lexika und Wörterbücher.
+  - Sache wächst mit: Kl. 1–2: das ABC ordnet. Kl. 3–4: woher das Alphabet kommt, Wörterbuch und Lexikon mit Leitwörtern.
+  - Rahmen: Spur · Spannung aus: Rätsel
+  - Ruhig: Die Schulbücherei wird nach dem ABC geordnet. Steht jedes Buch an seinem Platz, findet der Bibliothekar sofort, was ein Kind sucht.
+  - Sanft: Ein Kind sucht ein Buch über Wale. Es steht falsch, bei M. Wohin gehört es, und wer steht davor und dahinter?
+  - Abenteuer: Bücher-Schnitzeljagd über mehrere Runden: In jedem gefundenen Buch steckt ein Zettel mit dem nächsten Stichwort. Das letzte führt ins Wörterbuch zum Wort „Alphabet“ und zu den ersten beiden Buchstaben der Griechen.
 - Regal-Material: Kärtchen ABC.
 - Fachübergreifend: Lesen.
 
@@ -390,11 +426,13 @@ Lernhandlung.
 - Warum perfekt: Satzzeichen sind Anweisungen an den Leser. Wenn das Zeichen eine Reaktion auslöst, ist ihr Zweck
   die Fehlerkontrolle (Nichts ist Selbstzweck).
 - Bewusst nicht drin: Komma vor weil und dass → G07 (Grund ist der Nebensatz); das/dass → G07.
-- Sachgrund der Heimatwelt: Zeichen, nach denen sich andere richten · Kandidaten: verkehrszeichen, unterwegs,
-  hoeflich-reden
-- Stimmung: anpassbar. Ruhig: Nachrichten in der Familie. Sanft: Proben fürs Puppentheater, ein Satz klingt
-  noch falsch. Abenteuer: Funknachrichten auf einer Schiffsreise, jedes Zeichen bringt das Boot weiter, Ankunft
-  im Hafen.
+- Heimatwelt: Ich darf Nein sagen (`nein-sagen`)
+  - Sachgrund: Ein deutliches Nein hat ein Ausrufezeichen; jeder darf Nein sagen, und andere dürfen es auch.
+  - Sache wächst mit: Kl. 1–2: Stopp sagen und gehört werden, Punkt, Fragezeichen, Ausrufezeichen. Kl. 3–4: Nein sagen auch zu Freunden und in Gruppen, das Nein der anderen achten; wörtliche Rede und Komma.
+  - Rahmen: Fest · Spannung aus: Verwandlung
+  - Ruhig: Die Runde macht ein Bilderbuch, in dem jedes Zeichen etwas bewirkt: Nach dem Fragezeichen antwortet ein Kind, nach dem Ausrufezeichen hört das andere auf. „Stopp!“, und das Kitzeln hört auf.
+  - Sanft: Ein Satz klingt beim Vorlesen noch wie eine Frage. Mit dem richtigen Zeichen wird er ein deutliches Nein.
+  - Abenteuer: Puppentheater über mehrere Runden: Die Runde schreibt ein Stück mit wörtlicher Rede und probt es. Bei der Aufführung sagt eine Puppe Nein, und das Stück geht gut weiter. (Die Spannung kommt aus der Aufführung, nie aus einer Bedrängnis.)
 - Regal-Material: Kärtchen mit dem Satzzeichen des Themas.
 - Fachübergreifend: Lesen und Sprechen (fragen-betont-lesen, punkt-heisst-pause).
 
@@ -421,10 +459,13 @@ Lernhandlung.
 - Warum perfekt: Schreibzweck und Leser sind keine Eigenschaft des Textes, sondern seine Wirkung beim
   Empfänger. Zustellen ist die Handlung, die genau diese Wirkung prüft.
 - Bewusst nicht drin: fehlende Angaben → S13; Aufbau einer Karte → S14.
-- Sachgrund der Heimatwelt: Nachrichten erreichen den Richtigen · Kandidaten: bescheid-sagen, unterwegs,
-  medien-alltag
-- Stimmung: anpassbar. Ruhig: Post im Haus. Sanft: ein Brief ist zu früh angekommen, wo gehört er hin.
-  Abenteuer: Postfahrt mit dem Rad durchs Dorf, letzte Station ist zu Hause.
+- Heimatwelt: Ich sage Bescheid, wo ich bin (`bescheid-sagen`)
+  - Sachgrund: Wer Bescheid sagt, wo er ist, schreibt einen Zettel für den Richtigen; wozu und für wen ist der Text.
+  - Sache wächst mit: Kl. 1–2: Zettel schreiben, wo ich bin. Kl. 4: Absprachen für längere Wege und Ausflüge, Nachricht, Plan und Einladung unterscheiden.
+  - Rahmen: Reise · Spannung aus: Durcheinander
+  - Ruhig: Zettel, Karten und Briefe kommen an den Ort, an dem sie gebraucht werden. Lenas Zettel „Bin bei Kofi“ kommt an die Tür; dann geht sie los.
+  - Sanft: Zwei Zettel sind vertauscht: Das Rezept hängt an der Tür, der Zettel für Mama am Herd. Wohin gehört welcher?
+  - Abenteuer: Zettel-Rallye durchs Dorf über mehrere Runden: An jeder Station hängt ein Text für die nächste (Einladung, Rezept, Plan). Vor dem Losgehen schreibt die Runde auf, wo sie ist. Die letzte Station ist zu Hause, wo der erste Zettel noch hängt.
 - Regal-Material: Kärtchen mit Briefumschlag.
 - Fachübergreifend: Sprechen und Zuhören (mundart: dieselbe Handlung mit gesprochenen Grüßen, keine falsche
   Mundart, nur Verständnis zählt).
@@ -452,9 +493,12 @@ Lernhandlung.
 - Bewusst nicht drin: Tierbeschreibung (Aussehen genau) → G10. Aufgenommen: standpunkt-grund-beispiel und
   buchtipp-schreiben: Die Leserin fragt „Warum?“ und „Zum Beispiel?“; ein Grund, der nicht zur Meinung gehört,
   beantwortet die Frage nicht (sie schaut weiter fragend).
-- Sachgrund der Heimatwelt: einen Treffpunkt finden · Kandidaten: feste-im-kalender, karten, jahreskreis
-- Stimmung: anpassbar. Ruhig: Geburtstag im Garten. Sanft: ein Gast fragt nach, weil etwas fehlt. Abenteuer:
-  Treffpunkt für eine Nachtwanderung mit Laternen, alle kommen an.
+- Heimatwelt: Erste Hilfe und Notruf (`erste-hilfe`)
+  - Sachgrund: Ein Notruf braucht die richtigen Angaben (wo, was, wer); was fehlt, fragt die Leitstelle.
+  - Rahmen: Miteinander · Spannung aus: Lücke
+  - Ruhig: Erste-Hilfe-Kurs der Klasse: Am Übungstelefon wird der Notruf geübt. Jede ergänzte Angabe (wo, was, wer) macht die Meldung vollständig; dann weiß die Leitstelle, wohin.
+  - Sanft: Die Sanitäterin am Übungstelefon fragt nach: „Wo genau?“ Welche Angabe fehlt?
+  - Abenteuer: Übungstag in der Rettungswache über mehrere Runden: Meldungen kommen per Funk, die Runde schreibt Berichte fürs Wachbuch. Bei der Abschlussübung liegt eine Puppe im Hof, und alles läuft nach Plan. (Nur Übung, keine Unfallszene.)
 - Regal-Material: Kärtchen mit Fragezeichen.
 - Fachübergreifend: Lesen (wer-wo-wann-lesen).
 
@@ -477,9 +521,13 @@ Lernhandlung.
 - Warum perfekt: Aufbau einer Seite heißt Lesefolge für den Empfänger. Vorlesen von oben nach unten macht die
   Folge hörbar.
 - Bewusst nicht drin: die Handschrift auf dem Blatt → S20.
-- Sachgrund der Heimatwelt: eine Karte oder ein Plakat für andere · Kandidaten: hilfe-und-danke,
-  feste-im-kalender
-- Stimmung: ruhig fest
+- Heimatwelt: Gute und schlechte Geheimnisse (`gute-schlechte-geheimnisse`)
+  - Sachgrund: Eine Überraschungskarte ist ein gutes Geheimnis: Es macht Freude und kommt bald heraus; schlechte Geheimnisse darf man immer erzählen.
+  - Sache wächst mit: Kl. 1–2: Überraschung als gutes Geheimnis. Kl. 4: Geheimnisse unter Freunden und in Gruppen; was Bauchweh macht, darf man immer erzählen. Dazu Brief, Einladung und Plakat einrichten.
+  - Rahmen: Fest · Spannung aus: Wissensvorsprung
+  - Ruhig: Eine Überraschungskarte für Opas Geburtstag: Anrede, Text und Gruß kommen an ihren Platz. Fertig, wird sie überreicht. Ein gutes Geheimnis kommt bald heraus und macht Freude.
+  - Sanft: Opa kommt herein, während die Karte auf dem Tisch liegt. Ela legt ein Heft darüber; er schmunzelt und fragt nicht.
+  - Abenteuer: Die geheime Feier über mehrere Runden: Einladungen, Plan, Türschild. Das Kind weiß, was Opa noch nicht weiß. Am Ende geht die Tür auf. In der Pause: Ein Geheimnis, das Bauchweh macht, darf man immer erzählen.
 - Regal-Material: Kärtchen mit Postkarte.
 - Fachübergreifend: keine.
 
@@ -511,10 +559,13 @@ Lernhandlung.
   aus-anderer-sicht-erzaehlen (die Kamera sitzt beim Hund, Szenen, die er nicht sehen kann, bleiben dunkel),
   gefuehle-der-figur-schreiben (das Gefühlswort muss zum Gesicht im Film passen; Gefühle des spielenden Kindes
   werden nie abgefragt, K13).
-- Sachgrund der Heimatwelt: Abläufe, bei denen eins aufs andere folgt · Kandidaten: vom-ei-zum-tier,
-  wer-macht-mein-brot, eis-wasser-dampf
-- Stimmung: anpassbar. Ruhig: Alltagsfilme (Glas umgefallen, aufgewischt). Sanft: kleines Problem mit Lösung
-  (Drachen im Baum). Abenteuer: Film über eine Expedition mit kurzem Nebel, es ist eine Eule, Ende am Lagerfeuer.
+- Heimatwelt: Wenn etwas schiefgeht (`wenn-etwas-schiefgeht`)
+  - Sachgrund: Wenn etwas schiefgeht, geht es weiter: Glas umgefallen, aufwischen, neu einschenken; Reihenfolgen, die etwas bewirken.
+  - Sache wächst mit: Kl. 1–2: kleine Missgeschicke im Alltag (Glas umgefallen). Kl. 3–4: wenn ein Plan nicht aufgeht, neu planen; Anleitung, Bericht und Erzählung mit Höhepunkt.
+  - Rahmen: Fest · Spannung aus: Durcheinander
+  - Ruhig: Kurze Filme aus dem Alltag: Glas umgefallen, aufgewischt, neu eingeschenkt. Richtig gelegt, läuft der Film bis zum guten Ende.
+  - Sanft: Der Drachen hängt im Baum. Die Bilder mit der Lösung liegen durcheinander: erst die Leiter holen oder erst Papa rufen?
+  - Abenteuer: Ein Film in Fortsetzungen über mehrere Runden: Die Runde baut ein Floß, und in jeder Folge geht eine Kleinigkeit schief (Knoten auf, Paddel vergessen, Segel verkehrt herum). Jede Folge endet mit der Lösung, die letzte mit der Fahrt über den Teich.
 - Regal-Material: Kärtchen mit Filmstreifen.
 - Fachübergreifend: Lesen und Sprechen (geraeuschkette-kurz, erzaehlen-mit-reihenfolgewoertern); Mathe
   (Reihenfolge).
@@ -546,8 +597,13 @@ Lernhandlung.
   Woche wählen, keine falsche Antwort), schreibkonferenz (zwei Kinder der Runde zeigen je einen Tipp auf eine
   Stelle; das Kind probiert sie aus), planen-schreiben-pruefen (die Lupe als letzter Schritt nach Ideenbaum und
   Film).
-- Sachgrund der Heimatwelt: genau hinsehen · Kandidaten: pilze-kleinstlebewesen, das-auge
-- Stimmung: ruhig fest
+- Heimatwelt: Das Auge (`das-auge`)
+  - Sachgrund: Das Auge hat eine Linse wie die Lupe; Forscherberichte über das Auge genau lesen und verbessern.
+  - Sache wächst mit: Kl. 1–2: Was das Auge kann und wie man es schützt. Kl. 3–4: Pupille, Linse, Netzhaut; Berichte über Versuche.
+  - Rahmen: Forschen · Spannung aus: Vorhersage
+  - Ruhig: Ein Forscherbericht über das Auge für die Schülerzeitung. Die Lupe zeigt eine Stelle; geändert, klingt der Text beim Vorlesen klarer.
+  - Sanft: Ein Leser versteht einen Satz nicht („Es ist rund. Es ist nass.“ Was ist „es“?). Die Lupe findet die Stelle.
+  - Abenteuer: Sehforscher über mehrere Runden: Die Runde macht Versuche (die Pupille im Hellen und im Dunkeln, Lupe und Linse) und schreibt nach jedem den Bericht besser. Am Ende wird die Zeitung gedruckt und verteilt.
 - Regal-Material: Kärtchen mit Lupe.
 - Fachübergreifend: Sprechen und Zuhören (Text anhören).
 
@@ -570,8 +626,12 @@ Lernhandlung.
 - Warum perfekt: Gedichte schreiben in der Grundschule heißt Muster füllen; das Muster ist die Sache.
 - Bewusst nicht drin: freie Gedichte → Mach mit. Aufgenommen: mein-lernsatz als Satzmuster („Neu war für mich …“
   mit Bildkarte), ohne Smiley und ohne Bewertung (3.2).
-- Sachgrund der Heimatwelt: Jahreszeiten beobachten · Kandidaten: jahreszeiten-natur, tag-und-nacht
-- Stimmung: ruhig fest
+- Heimatwelt: Ja-Gefühl und Nein-Gefühl (`ja-und-nein-gefuehl`)
+  - Sachgrund: Ja-Gefühl und Nein-Gefühl: was ich mag und nicht mag, hat keine falsche Antwort; das Gedicht hat ein festes Muster.
+  - Rahmen: Fest · Spannung aus: Lücke
+  - Ruhig: Ein Gedichtbuch „Ich mag, ich mag nicht“. Jede gefüllte Zeile wird eine Seite. Geprüft wird nur das Muster; was jemand mag, ist nie falsch.
+  - Sanft: Eine Zeile hat ein Wort zu viel für das Elfchen. Welches darf gehen?
+  - Abenteuer: Gedichte-Leine über mehrere Runden: Die Runde hängt ihre Gedichte im Hof auf, andere Kinder dürfen eine Zeile dazuschreiben. Ein Blatt kommt mit einer neuen Strophe zurück, ohne Namen. Sie ist von der Lehrerin.
 - Regal-Material: Kärtchen mit Gedichtzeilen.
 - Fachübergreifend: Lesen und Sprechen (reimwort-finden, reim-im-gedicht).
 
@@ -610,9 +670,12 @@ Lernhandlung.
   nie „gekonnt“ nennen.
 - Bewusst nicht drin: Schreibschrift → S20 (andere Vorlage, verbundene Schrift, Stift empfohlen);
   wortabstand → S09 (Begriff Wort, nicht Hand).
-- Sachgrund der Heimatwelt: echte Schilder und Nummern für einen Ort · Kandidaten: berufe (Laden), schulweg
-  (Hausnummern), unterwegs
-- Stimmung: ruhig fest
+- Heimatwelt: Mein Schulweg (`schulweg`)
+  - Sachgrund: Auf dem Schulweg stehen Schilder und Hausnummern; schreiben lernen heißt Schilder selbst schreiben.
+  - Rahmen: Bauen · Spannung aus: Lücke
+  - Ruhig: Schilder für den Schulweg-Plan: Jeder geschriebene Buchstabe wird Teil eines Schildes (das A an der Ampel, die Hausnummer an der Tür).
+  - Sanft: Am Laden der Bäckerin fehlt ein Buchstabe im Schild: B_CKEREI. Der Bote sucht die Tür; mit dem Buchstaben findet er sie.
+  - Abenteuer: Kreidespur über mehrere Runden: Die Runde schreibt mit Straßenkreide Buchstaben auf den Schulweg, an jede Ecke einen. Wer den Weg geht, liest am Ende ein Wort. Jede Runde ergibt ein neues.
 - Regal-Material: Kärtchen mit dem Buchstaben oder der Ziffer des Themas (passt zur Regel „Ziffer oder
   Buchstabe“, hier aber der geschriebene Buchstabe des Themas, nicht der erste des Themennamens).
 - Fachübergreifend: Mathe (Ziffern schreiben); Lesen (b-d-p-unterscheiden).
@@ -645,8 +708,13 @@ Lernhandlung.
   (handschrift-schoenste-woerter und handschrift-eigene-abkuerzung haben keine falsche Antwort, nur Lesbarkeit:
   die Stimme liest das eigene Wort vor, wenn die Erkennung es lesen kann).
 - Bewusst nicht drin: Schreibschrift lesen → S19.
-- Sachgrund der Heimatwelt: Post, die mit der Hand geschrieben ist · Kandidaten: frueher-heute, unterwegs
-- Stimmung: ruhig fest
+- Heimatwelt: Um Hilfe bitten, helfen, Danke sagen (`hilfe-und-danke`)
+  - Sachgrund: Ein Dankesbrief mit der Hand ist eine Form, Danke zu sagen.
+  - Sache wächst mit: Kl. 2: Danke sagen mit einer Karte. Kl. 3: Wer arbeitet für uns alle (Müllabfuhr, Busfahrerin, Köchin), Briefe an Menschen außerhalb der Schule.
+  - Rahmen: Miteinander · Spannung aus: Wissensvorsprung
+  - Ruhig: Ein Dankesbrief an die Hausmeisterin. Jedes verbundene Wort kommt auf die Karte; fertig, wird sie eingeworfen.
+  - Sanft: Bei einem Wort ist der Strich abgerissen. In einem Zug neu geschrieben, hält es zusammen.
+  - Abenteuer: Dankespost über mehrere Runden: Wer hat der Klasse in diesem Jahr geholfen? Busfahrer, Köchin, Bibliothekar. Jede Runde eine Karte. Nach der letzten kommt Post zurück, in Schreibschrift.
 - Regal-Material: Kärtchen mit Schreibschrift-Buchstabe des Themas.
 - Fachübergreifend: Lesen (Handschrift lesen, S19).
 
@@ -670,9 +738,12 @@ Lernhandlung.
 - Weitere Zugänge: schreibschrift-z-x → S20, druck-zu-schreibschrift → S20
 - Warum perfekt: Das Thema verlangt Zuordnen zweier Schriften, also Lesen. Das trägt der Bildschirm ganz.
 - Bewusst nicht drin: Schreibschrift schreiben → S20.
-- Sachgrund der Heimatwelt: alte Handschrift entziffern · Kandidaten: frueher-heute, geschichte-der-schrift
-- Stimmung: anpassbar. Ruhig: Omas Rezept. Sanft: ein Zettel ohne Unterschrift, von wem ist er. Abenteuer:
-  eine alte Schatzkarte in Handschrift, der Schatz ist ein Gartenfest.
+- Heimatwelt: Früher und heute: Spielzeug, Schule, Familie (`frueher-heute`)
+  - Sachgrund: Früher schrieb man mit der Hand in Schreibschrift; Omas Rezept lesen.
+  - Rahmen: Zeitreise · Spannung aus: Rätsel
+  - Ruhig: Omas Rezeptbuch in Schreibschrift. Jedes entzifferte Wort kommt in die Abschrift; ist das Rezept lesbar, wird gebacken.
+  - Sanft: Im Buch liegt ein Zettel ohne Unterschrift. Die Schrift verrät, von wem er ist: dieselbe Schleife am g wie bei Opa.
+  - Abenteuer: Ein Brief vom Dachboden über mehrere Runden: geschrieben von einem Kind vor siebzig Jahren, Zeile für Zeile entziffert. Er erzählt von einem Versteck im Garten. Dort liegt eine Blechdose mit Glasmurmeln.
 - Regal-Material: Kärtchen mit Schreibschrift-Buchstaben.
 - Fachübergreifend: Lesen (Handschrift lesen); vielleicht dort besser aufgehoben, Christian führt zusammen.
 
@@ -701,9 +772,12 @@ Lernhandlung.
   den Begriff, die Probe ist die Fehlerkontrolle; so arbeitet auch Montessori mit den Symbolen.
 - Bewusst nicht drin: Großschreibung → S06; Pronomen und Verhältniswörter als Symbol → nicht vorgesehen (D2),
   sie haben ihre Handlung in G02 und G11.
-- Sachgrund der Heimatwelt: Tiere und Dinge nach Merkmalen sortieren · Kandidaten: fell-federn-schuppen
-  (Nomen und Verben: laufen, fliegen), stoffe (Adjektive: hart, weich)
-- Stimmung: ruhig fest
+- Heimatwelt: Fell, Federn, Schuppen (`fell-federn-schuppen`)
+  - Sachgrund: Tiere unterscheiden sich durch Fell, Federn, Schuppen und Bewegung; Nomen und Verben sortieren (der Vogel, fliegen).
+  - Rahmen: Fest · Spannung aus: Rätsel
+  - Ruhig: Tierkarten für eine Ausstellung: Der Vogel fliegt, der Fisch schwimmt. Jedes Wort bekommt sein Symbol; ist der Satz belegt, kommt er zur Karte seines Tiers.
+  - Sanft: Ein Wort macht Mühe: „fliegen“ oder „die Fliege“? Die Probe entscheidet, welches Symbol es bekommt.
+  - Abenteuer: Unbekannte Tiere über mehrere Runden: Im Naturkundemuseum liegen nur Hinweise in Sätzen („Es hat Federn. Es taucht.“). Symbol für Symbol wird klar, wer es ist. Das letzte hat Fell und legt Eier: das Schnabeltier.
 - Regal-Material: Wortart-Baustein (`<ls-wortart>`) der jeweiligen Wortart, passt.
 - Fachübergreifend: keine.
 
@@ -730,8 +804,13 @@ Lernhandlung.
 - Warum perfekt: Personalform und Pronomen zeigen auf Personen. Wenn die gemeinte Person in der Szene reagiert,
   ist der Bezug die Sache.
 - Bewusst nicht drin: Zeitformen → G03.
-- Sachgrund der Heimatwelt: abwechseln und teilen, wer was tut · Kandidaten: gerecht-teilen, mitspielen
-- Stimmung: ruhig fest
+- Heimatwelt: Darf ich mitspielen? (`mitspielen`)
+  - Sachgrund: Beim Mitspielen wechseln ich, du, wir; wer fragt und wer antwortet, zeigt die Personalform.
+  - Sache wächst mit: Kl. 2: mitspielen und fragen. Kl. 3: Mannschaften bilden, Regeln aushandeln, jemanden dazuholen, der am Rand steht.
+  - Rahmen: Miteinander · Spannung aus: Hilfe
+  - Ruhig: Auf dem Hof fragt Timo, ob er mitspielen darf. Die Personenscheibe zeigt, wer handelt; mit der passenden Verbform geht das Spiel einen Zug weiter.
+  - Sanft: Zwei Kinder wollen gleichzeitig werfen. „Du wirfst, dann werfe ich“: Die Formen klären, wer dran ist.
+  - Abenteuer: Ein neues Kind kommt in die Klasse, über mehrere Runden: Es kennt die Spiele noch nicht. Die Runde erklärt (ich fange, du läufst, wir zählen) und lernt dafür sein Spiel. Am Ende spielen alle beides.
 - Regal-Material: Wortart-Baustein Verb für Personalform; Kärtchen „ich“ für Pronomen.
 - Fachübergreifend: Sprechen und Zuhören.
 
@@ -757,9 +836,13 @@ Lernhandlung.
 - Warum perfekt: Zeitform heißt Zeitbezug. Die Zeitreise macht den Bezug zur Wirkung, und dieselbe Uhr prüft
   einen ganzen Text.
 - Bewusst nicht drin: Personalform → G02.
-- Sachgrund der Heimatwelt: früher, heute, später · Kandidaten: frueher-heute, lebenskette, mein-tag
-- Stimmung: anpassbar. Ruhig: Fotoalbum der Familie. Sanft: ein Foto ist in der falschen Zeit gelandet.
-  Abenteuer: Zeitreise in die Burg, Rückkehr in die Gegenwart am Ende jeder Runde.
+- Heimatwelt: Früher und heute: Spielzeug, Schule, Familie (`frueher-heute`)
+  - Sachgrund: Früher, heute, später: Spielzeug, Schule und Familie von früher erzählt man in der Vergangenheit.
+  - Sache wächst mit: Kl. 2: Spielzeug und Schule früher. Kl. 3–4: Woher weiß man, wie es war (Fotos, Dinge, Erzählungen)? Kindheit der Großeltern und Urgroßeltern auf dem Zeitstrahl.
+  - Rahmen: Zeitreise · Spannung aus: Durcheinander · Fähigkeit: in die Zeit reisen
+  - Ruhig: Das Fotoalbum: Was war, was ist, was kommt? Die richtige Zeitform klebt das Foto an seine Stelle.
+  - Sanft: Ein Foto ist in die falsche Zeit gerutscht: „Morgen fuhren wir“? Das Kind stellt den Satz richtig.
+  - Abenteuer: Mit der Zeituhr über mehrere Runden in Omas Kindheit: Schulbank, Spielzeug, Waschtag. Erzählt wird in der Vergangenheit, geplant in der Zukunft. Jede Runde endet im Heute, mit einem Ding, das es immer noch gibt: dem Kreisel.
 - Regal-Material: Wortart-Baustein Verb.
 - Fachübergreifend: Mathe (Zeit, Kalender, Zeitstrahl).
 
@@ -781,8 +864,12 @@ Lernhandlung.
 - Weitere Zugänge: satz-pro-bild → S15, satzarten → S11
 - Warum perfekt: Ein Satz ist eine Einheit, die etwas sagt. Wenn er das Bild bewegt, sagt er etwas.
 - Bewusst nicht drin: Satzglieder umstellen → G05.
-- Sachgrund der Heimatwelt: was Tiere gerade tun · Kandidaten: wiese-und-hecke, haustiere
-- Stimmung: ruhig fest
+- Heimatwelt: Wer frisst was? (`wer-frisst-was`)
+  - Sachgrund: Wer frisst was: Raupen fressen Blätter, Eichhörnchen Nüsse (auf ruhig nur Pflanzenfutter, ab sanft auch Pfeile im Schaubild ohne Jagd).
+  - Rahmen: Versorgen · Spannung aus: Durcheinander
+  - Ruhig: Fütterung im Wildpark nach Plan: „Die Raupe frisst das Blatt.“ Ist es ein Satz, kommt das Futter an seinen Platz. (Auf „ruhig“ nur Pflanzenfutter.)
+  - Sanft: Am Trog liegt das falsche Futter. Der Satz zeigt, wer was frisst; ab „sanft“ auch als Pfeil im Schaubild, ohne Jagd.
+  - Abenteuer: Ein Tag mit dem Tierpfleger über mehrere Runden: vom Streichelgehege bis zur Voliere. In der Futterküche fehlt etwas aus der Schüssel. Ein Rabe hat sich eine Nuss geholt. (Keine Jagd, kein benanntes Opfer.)
 - Regal-Material: Kärtchen mit Satzzeile.
 - Fachübergreifend: Lesen (lesen-satz-zum-bild).
 
@@ -809,9 +896,12 @@ Lernhandlung.
 - Warum perfekt: Satzglieder sind, was beim Umstellen zusammenbleibt. Der Zug macht das Zusammenbleiben zur
   Kupplung und die Probe zur Fahrt.
 - Bewusst nicht drin: Objekte und Fälle → G06; Sätze verbinden → G07.
-- Sachgrund der Heimatwelt: Waren mit dem Zug liefern · Kandidaten: unterwegs, bruecken
-- Stimmung: anpassbar. Ruhig: Güterzug im Tal. Sanft: eine Weiche klemmt, ein umgestellter Satz löst sie.
-  Abenteuer: Bergbahn durch einen kurzen Tunnel, am Ende Aussicht im Hellen.
+- Heimatwelt: Brücken, die tragen (`bruecken`)
+  - Sachgrund: Sätze über Brücken und Züge sind die Übungssätze (K10); der Zug fährt in jeder Runde über eine andere Brückenart (Balkenbrücke, Bogenbrücke, Hängebrücke), die das Sachbild zeigt.
+  - Rahmen: Reise · Spannung aus: Durcheinander
+  - Ruhig: Ein Güterzug im Tal: Die Wagen sind Satzglieder, die Lok ist das Prädikat an zweiter Stelle. Jede gültige Umstellung fährt den Zug über die Brücke zum nächsten Bahnhof.
+  - Sanft: Eine Weiche klemmt. Erst der umgestellte Satz mit einem anderen Satzglied vorn stellt sie.
+  - Abenteuer: Bergbahn über mehrere Runden: Viadukt, kurzer Tunnel, Hängebrücke. Im Tunnel pfeift es: die eigene Lok. Am Gipfelbahnhof ist Aussicht im Hellen.
 - Regal-Material: Kärtchen mit Zug; besser: Verb-Baustein für Prädikat.
 - Fachübergreifend: keine.
 
@@ -834,8 +924,12 @@ Lernhandlung.
 - Weitere Zugänge: keine
 - Warum perfekt: Fälle und Objekte folgen aus dem, was das Verb verlangt. Rollen besetzen zeigt genau das.
 - Bewusst nicht drin: Fall nach Verhältniswort → G11 (Wo oder wohin zeigt die Bühne).
-- Sachgrund der Heimatwelt: wer gibt wem was · Kandidaten: wer-macht-mein-brot, gerecht-teilen, hilfe-und-danke
-- Stimmung: ruhig fest
+- Heimatwelt: Wie Menschen Wald und Wasser verändern (`mensch-und-natur`)
+  - Sachgrund: Menschen verändern Wald und Wasser (der Förster pflanzt den Baum, die Gemeinde gibt dem Bach Platz): wer tut wem was.
+  - Rahmen: Forschen · Spannung aus: Lücke
+  - Ruhig: Eine Bildtafel für den Naturpfad: „Die Försterin gibt dem jungen Baum einen Pfahl.“ Sind alle Rollen besetzt, spielt die Szene, und das Bild kommt auf die Tafel.
+  - Sanft: In einem Satz fehlt, wem etwas gegeben wird. Die Szene bleibt stehen, bis die Rolle besetzt ist.
+  - Abenteuer: Ein Bach bekommt sein Bett zurück, über mehrere Runden: Die Runde begleitet den Umbau und schreibt die Tafeln dazu. Wer tut was für wen? Im letzten Bild sitzt ein Eisvogel am Ufer. (Sachlich, ohne Haltung.)
 - Regal-Material: Verb-Baustein.
 - Fachübergreifend: keine.
 
@@ -858,8 +952,12 @@ Lernhandlung.
 - Weitere Zugänge: saetze-im-text-verbinden → S16
 - Warum perfekt: Verbinden ist die Handlung, die Haupt- und Nebensatz, Kommasetzung und dass gemeinsam tragen.
 - Bewusst nicht drin: Komma bei Aufzählung → S11.
-- Sachgrund der Heimatwelt: Ursache und Wirkung · Kandidaten: was-luft-kann, wetter-messen, eis-wasser-dampf
-- Stimmung: ruhig fest
+- Heimatwelt: Strom und Stromkreis (`strom`)
+  - Sachgrund: Ein Stromkreis ist Ursache und Wirkung: die Lampe leuchtet, weil der Kreis geschlossen ist.
+  - Rahmen: Bauen · Spannung aus: Rätsel
+  - Ruhig: Stromkreise mit Batterie und Lämpchen: „Die Lampe leuchtet, weil der Kreis geschlossen ist.“ Jeder richtig verbundene Satz schließt einen Kreis.
+  - Sanft: Ein Lämpchen bleibt dunkel. Welcher Satz erklärt es? „… weil der Draht nicht an der Batterie ist.“ Angeschlossen, leuchtet es.
+  - Abenteuer: Über mehrere Runden baut die Runde ein beleuchtetes Modellhaus mit Schaltern. In einem Zimmer geht das Licht an und aus: ein Wackelkontakt, den der weil-Satz findet. Am Ende leuchtet das ganze Haus.
 - Regal-Material: Kärtchen mit Komma.
 - Fachübergreifend: keine.
 
@@ -882,8 +980,12 @@ Lernhandlung.
 - Weitere Zugänge: keine
 - Warum perfekt: Die Mehrzahl ist die Form für „viele“; sie wird gebildet, wenn viele da sind.
 - Bewusst nicht drin: Mehrzahl als Verlängerungsprobe → S04.
-- Sachgrund der Heimatwelt: Eier, Samen, Tiere zählen · Kandidaten: bauernhof, samen-reisen
-- Stimmung: ruhig fest
+- Heimatwelt: Samen gehen auf Reisen (`samen-reisen`)
+  - Sachgrund: Samen gibt es immer viele: der Kern, die Kerne; die Nuss, die Nüsse; das Korn, die Körner.
+  - Rahmen: Versorgen · Spannung aus: Verwandlung · Fähigkeit: verzaubern
+  - Ruhig: Samen sammeln im Herbst: eine Nuss, viele Nüsse. Mit der gebildeten Mehrzahl zaubert ein Kind der Runde aus einem viele; die Kontrollkarte zeigt, ob die Form stimmt, und das Glas ist voll.
+  - Sanft: Ein Glas hat kein Schild mehr: Kerne oder Körner? Die Form passt zu dem, was darin liegt.
+  - Abenteuer: Samentausch über mehrere Runden: Die Runde tauscht mit einer anderen Schule Samen und beschriftet die Tütchen. Aus einem Tütchen ohne Schild wächst etwas, das keiner kennt. Im Herbst ist es ein riesiger Kürbis.
 - Regal-Material: Wortart-Baustein Nomen.
 - Fachübergreifend: Mathe (eins und viele).
 
@@ -906,8 +1008,13 @@ Lernhandlung.
 - Weitere Zugänge: keine
 - Warum perfekt: Artikel lernen heißt Artikel und Nomen verbinden; das Plättchen am Ding ist genau das.
 - Bewusst nicht drin: ein/eine → G10 (Bedeutung: irgendeins oder dieses).
-- Sachgrund der Heimatwelt: Werkzeug beschriften · Kandidaten: werkzeuge, berufe, koerperteile
-- Stimmung: ruhig fest
+- Heimatwelt: Mein Körper gehört mir (`mein-koerper-gehoert-mir`)
+  - Sachgrund: Mein Körper gehört mir, und alle Teile haben Namen mit Artikel: der Arm, die Vulva, das Knie.
+  - Sache wächst mit: Kl. 1: Körperteile mit Artikel. Kl. 3: Artikel bei schwierigen und zusammengesetzten Nomen; was zu mir gehört, bestimme ich.
+  - Rahmen: Fest · Spannung aus: Lücke
+  - Ruhig: Ein Körperbild für das Klassenzimmer: der Arm, die Vulva, das Knie. Das Kind legt den Artikel, dreht die Kontrollkarte um und klebt das Schild an.
+  - Sanft: Zwei Schilder haben sich gelöst. Zu welchem Wort gehört „das“?
+  - Abenteuer: Über mehrere Runden gestaltet die Runde ein großes Buch „Mein Körper“, jede Runde eine Seite. Am Ende liegt es in der Leseecke. (Schutz-Welt: Auf jeder Stufe gleich sachlich; alle Namen wie Arm und Knie; Elternvorschau.)
 - Regal-Material: Wortart-Baustein Artikel.
 - Fachübergreifend: keine.
 
@@ -932,10 +1039,13 @@ Lernhandlung.
 - Weitere Zugänge: wiewoerter → G01, beschreibung-ordnen → S15, adjektiv-im-fall → G06, verlaengern-adjektive → S04, ableiten-ae-steigerung → S05
 - Warum perfekt: Adjektive und Vergleichsformen machen etwas unterscheidbar. Das Fundbüro prüft genau das.
 - Bewusst nicht drin: Adjektive als Wortart erkennen → G01.
-- Sachgrund der Heimatwelt: eins unter vielen an Merkmalen erkennen (bestimmen) · Kandidaten:
-  fell-federn-schuppen, steine-boden, wiese-und-hecke
-- Stimmung: anpassbar. Ruhig: Fundbüro der Schule. Sanft: das Kuscheltier ist weg, es ist im Fundbüro.
-  Abenteuer: Tiere im Wald bestimmen nach Merkmalen, Ende mit Sachbild am Waldrand.
+- Heimatwelt: Holz, Metall, Glas, Wolle, Papier (`stoffe`)
+  - Sachgrund: Dinge sind aus Holz, Metall, Glas, Wolle, Papier; genau beschreiben (der weiche Wollschal) findet das Richtige.
+  - Sache wächst mit: Kl. 2: Woraus ist das Ding (Holz, Metall, Glas, Wolle, Papier)? Kl. 3–4: Eigenschaften von Stoffen (biegsam, durchsichtig, wasserfest), Vergleichsformen.
+  - Rahmen: Spur · Spannung aus: Rätsel
+  - Ruhig: Im Fundbüro der Schule sucht ein Kind seinen Schal. Mit jedem genauen Wort (der weiche, wollene) gehen die Dinge zurück, die nicht passen; bleibt eines, ist es gefunden.
+  - Sanft: Zwei Schals bleiben übrig. Welches Wort unterscheidet sie? „Der längere.“
+  - Abenteuer: Das große Aufräumen nach dem Schulfest über mehrere Runden: Kisten voller Fundsachen aus Holz, Metall, Glas, Wolle. Ein Ding kennt niemand. Genau beschrieben, erkennt es der Hausmeister: die Kurbel seiner Kaffeemühle.
 - Regal-Material: Wortart-Baustein Adjektiv.
 - Fachübergreifend: Mathe (Größen vergleichen), Sachthemen (Bestimmen).
 
@@ -960,9 +1070,12 @@ Lernhandlung.
 - Warum perfekt: Wortfeld, Gegenteil und Verhältniswort unterscheiden sich in der Bedeutung, und die Bühne zeigt
   Bedeutung unmittelbar.
 - Bewusst nicht drin: Rollen des Verbs → G06.
-- Sachgrund der Heimatwelt: wie Tiere sich bewegen und wo sie sind · Kandidaten: fell-federn-schuppen, von-oben
-- Stimmung: anpassbar. Ruhig: Kindertheater. Sanft: eine Szene ist durcheinander, das Stück wird geprobt.
-  Abenteuer: Tierbeobachtung im Schilf, Wort für Wort kommt man näher, Ende mit Sachbild.
+- Heimatwelt: Nah und fern, Stadt und Land (`stadt-und-land`)
+  - Sachgrund: Stadt und Land, nah und fern sind Gegensatzpaare; Wortfelder und Lagewörter beschreiben Orte.
+  - Rahmen: Fest · Spannung aus: Verwandlung
+  - Ruhig: Kindertheater: eine Reise von der Stadt aufs Land. Die Bühne spielt genau das gewählte Wort (schleichen oder rennen, laut oder still).
+  - Sanft: Die Kulissen stehen verkehrt: Der Traktor ist in der Stadt, die Straßenbahn auf dem Feld. Das Gegenteil stellt sie um.
+  - Abenteuer: Tournee über mehrere Runden: Die Runde spielt ihr Stück im Dorf, in der Kleinstadt, in der Großstadt. Überall tauscht das Publikum ein Wort, und die Bühne spielt es. Bei der letzten Vorstellung geht kurz das Licht aus: Die Technikerin hat den falschen Schalter erwischt.
 - Regal-Material: Wortart-Baustein Verb (Wortfelder), Adjektiv (Gegenteile), Kärtchen für Verhältniswörter.
 - Fachübergreifend: Geometrie (oben-unten-vorne-hinten, auftrag-mit-lagewort).
 
@@ -987,9 +1100,12 @@ Lernhandlung.
 - Warum perfekt: Wortbildung heißt Bausteine verbinden; die feste Schreibung der Bausteine (ver-, -ung) folgt aus
   derselben Handlung.
 - Bewusst nicht drin: Stamm finden → S05.
-- Sachgrund der Heimatwelt: neue Dinge brauchen neue Namen · Kandidaten: erfindungen, werkzeuge
-- Stimmung: anpassbar. Ruhig: Werkstatt. Sanft: eine Erfindung hat noch keinen Namen. Abenteuer: Erfinderfest,
-  das Kind stellt seine Erfindung vor.
+- Heimatwelt: Wie Erfindungen sich verändern (`erfindungen`)
+  - Sachgrund: Neue Erfindungen brauchen neue Namen (Fahr-rad, Kühl-schrank); Wörter zusammensetzen.
+  - Rahmen: Werkstatt · Spannung aus: Verwandlung
+  - Ruhig: Im Erfindermuseum bekommt jede Erfindung ihren Namen aus Bausteinen (Fahr-rad, Kühl-schrank). Das gesteckte Wort beschriftet das Ding.
+  - Sanft: Eine Erfindung hat noch keinen Namen. Was tut sie? Aus den Bausteinen entsteht er: Regenschirmhalter.
+  - Abenteuer: Erfinderfest über mehrere Runden: Die Runde baut eigene Erfindungen und gibt ihnen Namen. Die Werkstatt baut wörtlich, was dasteht, auch einen Handschuhlöffel. Am Fest stellt jedes Kind eine vor.
 - Regal-Material: Kärtchen mit Baustein.
 - Fachübergreifend: Lesen (wortbausteine-lesen).
 
@@ -1012,9 +1128,12 @@ Lernhandlung.
 - Warum perfekt: Oberbegriff und Ideensammlung sind beide Ordnen nach Zugehörigkeit; die Kiste ist das Material
   dafür.
 - Bewusst nicht drin: Steckbrief → S13.
-- Sachgrund der Heimatwelt: sortieren für einen Zweck · Kandidaten: muell-trennen, was-menschen-brauchen
-- Stimmung: anpassbar. Ruhig: Laden einräumen. Sanft: für den Ausflug packen, eine Kiste ist zu voll.
-  Abenteuer: Packen für eine Inselreise, Ankunft am Strand.
+- Heimatwelt: Fünf Gruppen von Wirbeltieren (`wirbeltierklassen`)
+  - Sachgrund: Wirbeltiere bilden fünf Gruppen (Säugetiere, Vögel, Fische, Kriechtiere, Lurche): Oberbegriffe sind Kisten.
+  - Rahmen: Spur · Spannung aus: Rätsel
+  - Ruhig: Die Tiersammlung des Museums wird eingeräumt: Säugetiere, Vögel, Fische, Kriechtiere, Lurche. Jedes Tier kommt in seine Kiste.
+  - Sanft: Ein Tier will in keine Kiste passen: Der Pinguin schwimmt und fliegt nicht und ist doch ein Vogel. Die Federn entscheiden.
+  - Abenteuer: Abends im Museum über mehrere Runden, mit der Museumsleiterin und Taschenlampe: Die Runde richtet eine neue Ausstellung ein. In einem Saal hängt etwas von der Decke: eine Fledermaus aus Stoff. In welche Kiste gehört die echte? Zu den Säugetieren.
 - Regal-Material: Kärtchen mit Kiste.
 - Fachübergreifend: Mathe (sortieren), Sachthemen.
 

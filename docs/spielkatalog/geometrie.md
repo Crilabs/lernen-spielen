@@ -1,6 +1,9 @@
 > Teil des Spielkatalogs (`docs/spielkatalog.md`). **Die Entscheidungen im Hauptdokument gehen vor**: Sie beantworten die
 > offenen Fragen am Ende dieser Datei (u. a. alle Spiele bleiben getrennt, Kontrollkarte, Stimmen, Sachwelt je Spiel).
-> Die Heimatwelt jedes Spiels steht in der Übersicht des Hauptdokuments.
+> Heimatwelt und Geschichte je Spiel (Zeilen „Heimatwelt“ bis „Abenteuer“) sind am 2026-11-14 aus
+> [`welten.md`](welten.md) übernommen und gelten. Jedes Spiel hat alle drei Stufen; Stellen in den Überblicken, die noch
+> „ruhig fest“ nennen, sind überholt. Beispiele für Szenen in den Zeilen Handlung, Figuren und Mach mit, die nicht zur
+> Heimatwelt passen, sind ebenfalls überholt (Hauptdokument 8a).
 
 # Spielkatalog Geometrie (Kl. 1–4)
 
@@ -78,11 +81,12 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
   Reihenfolge nach Voraussetzungen: oben/unten/vorne/hinten → links/rechts und neben/zwischen.
 - Bewusst nicht drin: planquadrate → R17 (Ortsangabe im Gitter ist anderes Material); „Heb die rechte
   Hand“ → Mach mit (Körper, nicht Bildschirm).
-- Sachgrund der Heimatwelt: Dinge in einem Raum wiederfinden, aufräumen, sich zum Losgehen fertig machen ·
-  Kandidaten: von-oben, tarnen-verstecken (Tiere im Bild finden), haustiere
-- Stimmung: anpassbar. ruhig: Aufräumen im Zimmer · sanft: Ein Kind sucht seine Sachen für den Ausflug,
-  eine fehlt kurz · abenteuer: Schatzsuche im Nebelgarten, die Hinweise sind Lagewörter, das Geräusch im
-  Busch ist eine Amsel. Die Handlung bleibt gleich.
+- Heimatwelt: Ich habe mich verlaufen – wen frage ich? (`verlaufen`)
+  - Sachgrund: Wer sagen kann, wo etwas ist (neben, hinter, vor), findet sich und andere wieder. Vor einem Ausflug macht man einen Treffpunkt aus; wer jemanden nicht findet, bleibt stehen und fragt an der Kasse oder Eltern mit Kindern.
+  - Rahmen: Reise · Spannung aus: Rätsel
+  - Ruhig: Vor dem Ausflug in den Zoo macht die Runde einen Treffpunkt aus: „neben dem Brunnen, vor dem Kiosk“. Das Kind legt die Dinge im Plan dorthin, wo der Erzähler sagt; dann wissen alle, wo man sich trifft. (Auf keiner Stufe geht ein Kind verloren.)
+  - Sanft: Lenas Mütze ist weg. Sie beschreibt der Frau an der Kasse, wo sie zuletzt saß („auf der Bank hinter dem Karussell“). Dort liegt sie.
+  - Abenteuer: Zoo-Rallye über mehrere Runden, immer zu zweit und mit Treffpunkt: Die Hinweise sind Lagewörter („unter der Brücke, zwischen den Bambusstäben“). Am Ziel hängt etwas hinter der Scheibe und rührt sich nicht: ein Faultier.
 - Gesten: Ziehen (Ding hinlegen) mit Tipp-Alternative, Tippen (Ort, Lagewort-Karte). Nichts Neues.
 - Lernzeichen: keine Mathe-Zeichen; neu: **Lagewort-Karten** (Papier, Wort in Andika, kleines Lagebild aus
   Würfel und Strich). Bezugsdinge sind Wortbilder (stilisiert).
@@ -121,10 +125,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
   selbst. Im Ortsplan kommt das Drehen der Sicht dazu, die eigentliche Schwierigkeit von Kl. 3.
 - Bewusst nicht drin: weg-beschreiben → R03 (selbst legen ist eine andere Handlung); nachzeichnen-im-gitter
   → R16.
-- Sachgrund der Heimatwelt: etwas zu jemandem bringen, der Weg ist beschrieben · Kandidaten: schulweg,
-  unterwegs, karten
-- Stimmung: anpassbar. ruhig: Brief zur Nachbarin · sanft: der Weg führt um eine Baustelle, die vorher nicht
-  da war · abenteuer: Schatzkarte auf einer Insel über mehrere Runden, am Ende eine Kiste mit Muscheln.
+- Heimatwelt: Sicher über die Straße, Helm beim Rad (`sicher-ueber-die-strasse`)
+  - Sachgrund: Der sichere Weg führt über Ampel und Zebrastreifen; Pfeilwegen folgen.
+  - Sache wächst mit: Kl. 1: der sichere Weg über Ampel und Zebrastreifen. Kl. 3: Wege im Ortsplan beschreiben, Radwege und Regeln für das Rad.
+  - Rahmen: Reise · Spannung aus: Durcheinander
+  - Ruhig: Ein Brief für die Nachbarin. Das Kind liest die Pfeilkette und tippt vorher, wo der Weg endet; dann geht Ela ihn über Ampel und Zebrastreifen.
+  - Sanft: Eine Baustelle versperrt den Gehweg. Die neue Pfeilkette führt über die Ampel. Wo kommt sie an?
+  - Abenteuer: Schulweg-Karte über mehrere Runden: Die Runde probiert Wege für die neuen Erstklässler aus und markiert den sichersten. An einer Ecke steht jeden Morgen jemand in Gelb: der Schülerlotse. Am Ende steht er mit auf dem Plan.
 - Gesten: Ziehen (Figur) mit Tipp-Alternative, Tippen (Zielfeld). Nichts Neues.
 - Lernzeichen: neu: **Kästchengitter** (Papier, Linie `#E4DEF0`) und **Pfeilkarten** (Tinte auf Papier);
   Ortsplan als schlichter Plan, Straßennamen gesetzt, nicht im Bild.
@@ -159,11 +166,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Warum perfekt: „So genau beschreiben, dass ein anderer es findet“ prüft sich nur, indem der andere es
   ausführt. Die Murmel ist der andere. Missverständnis aufklären ist dieselbe Handlung rückwärts.
 - Bewusst nicht drin: ortsplan-orientieren → R02.
-- Sachgrund der Heimatwelt: jemandem den Weg erklären, Murmelbahn, Gänge im Bau · Kandidaten: was-rollt,
-  schulweg, wiese-und-hecke (Weg durch die Hecke)
-- Stimmung: anpassbar. ruhig: Murmelbahn auf dem Tisch · sanft: ein Ast liegt quer, der Weg muss außen
-  herum · abenteuer: Weg durch ein Labyrinth aus Maisstauden, am Ende eine Vogelscheuche, die nur ein Mantel
-  ist.
+- Heimatwelt: Was rollt? Murmelbahn und Fahrzeuge (`was-rollt`)
+  - Sachgrund: Kugeln und Zylinder rollen; eine Murmelbahn braucht einen gelegten Weg.
+  - Sache wächst mit: Kl. 1: Was rollt, kommt an. Kl. 3: Gefälle, Schwung und Kurven; Wegbeschreibungen mit Fehler finden.
+  - Rahmen: Bauen · Spannung aus: Vorhersage
+  - Ruhig: Eine Murmelbahn: Die Pfeilkarten legen den Weg. Erst wenn alle liegen, rollt die Murmel los. Kommt sie ins Ziel?
+  - Sanft: Ein Bauklotz liegt im Weg. Der Weg muss außen herum; welche Karte wird getauscht?
+  - Abenteuer: Die längste Bahn der Schule über mehrere Runden: vom Fensterbrett durchs Klassenzimmer bis in den Flur, mit Trichter, Wippe und Glocke. Jede Runde ein Abschnitt. In der letzten rollt die Murmel durch alle und läutet die Glocke.
 - Gesten: Ziehen (Karte in Leiste) mit Tipp-Alternative, Tippen „Los“. **Neu:** ein Knopf „Los“ im Lernfeld
   (Hauptaktion, Name gesprochen); er gehört zum Spiel, nicht auf einen festen Platz. Annahme: zulässig wie
   „Fertig“.
@@ -198,9 +207,12 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
   Quadrat ist ein Rechteck“ wird nicht erklärt, sondern erlebt: die Rechteck-Kiste nimmt das Quadrat.
 - Bewusst nicht drin: koerper-benennen → R05 (Körper, anderes Material), quadrat-und-rechteck → R10
   (Seitenlängen zeigt das Nagelbrett besser).
-- Sachgrund der Heimatwelt: Bauteile, Knöpfe, Fliesen für eine Werkstatt ordnen · Kandidaten: werkzeuge,
-  verkehrszeichen (Schilder nach Form), burg-kloster-schloss (Fensterformen)
-- Stimmung: ruhig fest (Ordnen trägt keinen Bogen).
+- Heimatwelt: Ampel, Zebrastreifen, Verkehrszeichen (`verkehrszeichen`)
+  - Sachgrund: Verkehrszeichen haben feste Formen (Dreieck warnt, Kreis gebietet, Viereck weist hin).
+  - Rahmen: Spur · Spannung aus: Rätsel
+  - Ruhig: Schilder für den Verkehrsgarten: runde, dreieckige, viereckige. Jedes kommt in die Kiste mit seinem Merkmal und dann an seinen Pfahl.
+  - Sanft: Ein Schild ist eingeschneit, man sieht nur die Form: acht Ecken. Davon gibt es nur eines, das Stoppschild.
+  - Abenteuer: Schilder-Suche über mehrere Runden durch die Stadt, mit der Polizistin: Welche Formen gibt es, und was sagen sie? Die Runde sammelt Fotos nach Merkmalen. Eines hat keine der Formen: das Andreaskreuz am Bahnübergang.
 - Gesten: Ziehen mit Tipp-Alternative. **Drehen** eines Plättchens (material-Stufe) braucht einen neuen
   **Drehgriff** am angehobenen Teil (Tippen dreht um 45°). Siehe Frage 4.
 - Lernzeichen: neu: **Formplättchen** (flach, Tinte-Kontur). Wenn Farbe ein Sortiermerkmal ist, eine
@@ -237,9 +249,12 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Warum perfekt: Der Zweck „Gib mir mal den Zylinder“ ist die Handlung. Die Drei-Stufen-Lektion ist
   Montessoris eigener Weg zum Fachbegriff und trägt die drei Stufen.
 - Bewusst nicht drin: ecken-kanten-flaechen → R06 (Zählen ist eine andere Handlung).
-- Sachgrund der Heimatwelt: gemeinsam bauen oder ein Regal im Laden einräumen · Kandidaten: tuerme-bauen,
-  burg-kloster-schloss, bruecken
-- Stimmung: ruhig fest.
+- Heimatwelt: Berufe in Hof, Werkstatt, Laden und Pflege (`berufe`)
+  - Sachgrund: Im Laden räumt die Verkäuferin Dosen (Zylinder), Kartons (Quader) und Bälle (Kugeln) ein.
+  - Rahmen: Werkstatt · Spannung aus: Rätsel
+  - Ruhig: Im Laden wird eingeräumt: Dosen zu den Zylindern, Kartons zu den Quadern. Das Kind gibt den bestellten Körper; ist das Regal voll, öffnet der Laden.
+  - Sanft: Ein Ding passt in keine Reihe: die Eistüte. Welcher Körper ist das? Ein Kegel.
+  - Abenteuer: Ein Tag in vier Berufen über mehrere Runden: Bäckerin, Maurer, Töpferin, Eisverkäufer. Überall wird ein Körper bestellt. Am Abend baut die Runde aus leeren Verpackungen eine Stadt.
 - Gesten: Tippen oder Ziehen (Teil in den Bau). Nichts Neues.
 - Lernzeichen: neu: **Holzkörper** (Ahorn, Kanten in Tinte, keine Schattierung außer einer flachen
   dunkleren Seitenfläche). Alltagsdinge als Sachbild mit Echt-Zeichen, wo es um die echte Welt geht.
@@ -276,9 +291,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
   macht beides sichtbar. Der Zweck aus dem Lernplan (Streichhölzer zum Nachlegen, Schachtel bekleben) ist
   die Handlung.
 - Bewusst nicht drin: wuerfelnetze → R19.
-- Sachgrund der Heimatwelt: Modelle bauen, Geschenke bekleben, Werkstatt · Kandidaten: werkzeuge,
-  ackerbau-hausbau (Dachgerüst), bruecken
-- Stimmung: ruhig fest.
+- Heimatwelt: Werkzeuge und wofür man sie nimmt (`werkzeuge`)
+  - Sachgrund: Modelle baut man in der Werkstatt aus Stäben und Kugeln; jedes Werkzeug hat seinen Zweck.
+  - Sache wächst mit: Kl. 1–2: Ecken und Seiten an Formen legen. Kl. 3–4: Kantenmodelle wie im Gerüstbau, Bauwerke aus Dreiecken.
+  - Rahmen: Bauen · Spannung aus: Vorhersage
+  - Ruhig: In Elas Werkstatt entstehen Kantenmodelle: auf jede Kante ein Stab, an jede Ecke eine Kugel. Ist nichts mehr frei, steht das Modell; dann wird gezählt.
+  - Sanft: Für den Würfel liegen nur elf Stäbe da. Reicht das? Erst vorhersagen, dann bauen: Eine Kante bleibt offen.
+  - Abenteuer: Kuppelbau über mehrere Runden: Aus Stäben und Kugeln entsteht erst ein Würfel, dann eine Pyramide, zuletzt eine Kuppel aus Dreiecken, groß genug zum Hineinsetzen. Vor jedem Schritt: Wie viele Stäbe? Am Ende sitzt die Runde darin.
 - Gesten: Ziehen und Tippen. **Neu:** Drehpfeile am Körper (Tippen dreht den Körper um 90° nach links,
   rechts, oben), weil Wischen verboten ist. Gilt auch für R12, R14, R19.
 - Lernzeichen: neu: **Stäbe** (schlicht, Tinte-Kontur; Länge zeigt Länge, in einer Farbe), **Kugeln**,
@@ -314,10 +333,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
   gleiche, nur mit mehr Teilen und am Ende im Kopf.
 - Bewusst nicht drin: flaechen-vergleichen → R08 (gleiche Einheiten zählen ist Messen, nicht Puzzeln);
   bandornamente → R18.
-- Sachgrund der Heimatwelt: Fliesen legen, Fenster einsetzen, Mosaik · Kandidaten: burg-kloster-schloss
-  (Mosaik, Fenster), ackerbau-hausbau, kleidung (Flicken)
-- Stimmung: anpassbar. ruhig: Mosaik im Bad · sanft: ein Fenster im Schloss ist zerbrochen und wird neu
-  gesetzt · abenteuer: eine Tür mit Steinmosaik öffnet sich zu einem Gang, dahinter liegt ein heller Hof.
+- Heimatwelt: Schwimmen nur mit Aufsicht (`schwimmen-aufsicht`)
+  - Sachgrund: Im Schwimmbad geht es erst ins Wasser, wenn die Aufsicht da ist. Bis dahin wird am Beckenrand aufgebaut: Matten und Bretter füllen ihren Platz lückenlos, und Mosaike am Becken bestehen aus Formen ohne Lücke.
+  - Sache wächst mit: Kl. 1: Baderegeln (nur mit Aufsicht, nicht rennen). Kl. 3–4: Schwimmabzeichen und was man dafür können muss; Mosaike und Parkette als Muster.
+  - Rahmen: Bauen · Spannung aus: Lücke
+  - Ruhig: Vor dem Schwimmen: Bretter und Matten gehören lückenlos in ihren Rahmen am Beckenrand. Ist das Bild gelegt und die Bademeisterin an ihrem Platz, geht es ins Wasser.
+  - Sanft: Ein Teil passt nur gedreht. Das Kind dreht es, und die Lücke schließt sich.
+  - Abenteuer: Über mehrere Runden legt die Runde mit der Bademeisterin ein neues Mosaik für die Schwimmhalle: Welle, Fisch, Boot. Das letzte Bild ist ein Rätsel aus Umrissen. Gelegt, zeigt es die Bademeisterin auf ihrem Hochsitz.
 - Gesten: Ziehen mit Tipp-Alternative; **Drehgriff** (neu, wie R04). In der kopf-Stufe Tippen auf
   Drehung 0/90/180/270 vor dem Ablegen.
 - Lernzeichen: Formplättchen (R04), für Pentominos 5 Kästchen mit sichtbaren Fugen.
@@ -348,10 +370,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Warum perfekt: Fläche heißt „wie viele gleiche Stücke passen hinein“; das ist die Handlung. Das lange
   schmale gegen das fast quadratische Beet widerlegt die Täuschung durch Länge.
 - Bewusst nicht drin: rand-vergleichen → R09.
-- Sachgrund der Heimatwelt: Beete, Decken, Teppiche, Kisten füllen · Kandidaten: was-pflanzen-brauchen,
-  bauernhof, obst-gemuese-reif. **Gleiche Welt wie R09 empfohlen**, damit Fläche und Umfang dort gemischt
-  werden können.
-- Stimmung: ruhig fest.
+- Heimatwelt: Was Pflanzen brauchen (`was-pflanzen-brauchen`)
+  - Sachgrund: Pflanzen brauchen Platz, Licht und Wasser; jedes Beet bekommt so viele Plätze, wie es Fläche hat.
+  - Sache wächst mit: Kl. 2: Pflanzen brauchen Platz, Licht und Wasser. Kl. 3–4: Beetplanung im Schulgarten (wer braucht wie viel Platz, Fruchtfolge), Flächen in Quadratzentimetern und Quadratmetern.
+  - Rahmen: Versorgen · Spannung aus: Vorhersage
+  - Ruhig: Zwei Beete: Welches ist größer? Mit gleichen Platten ausgelegt und gezählt, zeigt es sich; aufs größere kommen die Kürbisse, die viel Platz brauchen.
+  - Sanft: Ein Beet ist lang und schmal, eines kurz und breit. Kofi tippt auf das lange. Ausgelegt sind beide gleich groß.
+  - Abenteuer: Der Schulgarten wird über mehrere Runden neu geplant: Radieschen brauchen wenig Platz, Kürbisse viel. Die Runde legt aus und sät. Im Sommer zeigt sich, ob der Kürbis im Beet geblieben ist: Er ist über den Weg gewachsen.
 - Gesten: Ziehen (Plättchen, auch reihenweise als Streifen) mit Tipp-Alternative. Kiste mit Würfeln: von
   schräg oben gesehen, Würfel lagenweise; Drehpfeile wie R06.
 - Lernzeichen: Einheitsquadrate (neu, schlicht, eine Farbe), Kästchengitter, Holzwürfel (R05).
@@ -384,9 +409,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Warum perfekt: Umfang ist „wie viel Zaun“, und das Zaunsetzen trennt den Rand handgreiflich von der
   Fläche. flaeche-oder-umfang mischt die Verwechslungspartner (L6), deshalb hier mit beiden Vorräten.
 - Bewusst nicht drin: flaechen-vergleichen → R08.
-- Sachgrund der Heimatwelt: Gehege, Beetzaun, Rahmen und Bänder · Kandidaten: bauernhof,
-  was-pflanzen-brauchen (gleiche Welt wie R08)
-- Stimmung: ruhig fest.
+- Heimatwelt: Was Pflanzen brauchen (`was-pflanzen-brauchen`)
+  - Sachgrund: Ein Beet braucht einen Zaun, damit nichts hineintritt; der Rand ist der Umfang (gleiche Welt wie R08 zum Mischen).
+  - Sache wächst mit: Kl. 2: Ein Zaun schützt das Beet. Kl. 4: Wer frisst am Salat und was hilft; gleiche Fläche, verschiedener Umfang.
+  - Rahmen: Forschen · Spannung aus: Vorhersage
+  - Ruhig: Die Beete bekommen einen niedrigen Zaun, damit niemand hineintritt. Latte für Latte um den Rand: Welches Beet braucht mehr?
+  - Sanft: Zwei Beete sind gleich groß, aber eines braucht mehr Zaun. Wie kann das sein? Nachgelegt sieht man es.
+  - Abenteuer: Schneckenforscher über mehrere Runden: Etwas knabbert am Salat. Die Runde baut einen Schneckenzaun und will mit denselben Latten möglichst viel Beet schützen. Welche Form nimmt man? Am Morgen sitzt die Schnecke außen am Zaun.
 - Gesten: Tippen (Kästchenseite bekommt Latte) oder Ziehen der Latte. Nichts Neues.
 - Lernzeichen: Kästchengitter, Zaunlatte als neues schlichtes Zeichen (dünner Stab in der Stabfarbe aus R06).
 - Stimme: wenig.
@@ -417,9 +446,12 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
   abzählbar und selbst gemacht (L1 konstruieren statt wählen). Der Zweck des Geobretts im Lernplan
   (Gehege abstecken) wird wörtlich gespielt.
 - Bewusst nicht drin: formen-sortieren → R04.
-- Sachgrund der Heimatwelt: Beete und Gehege mit Schnur und Stöcken abstecken · Kandidaten: bauernhof,
-  was-pflanzen-brauchen, ackerbau-hausbau (Grundriss abstecken)
-- Stimmung: ruhig fest.
+- Heimatwelt: Auf dem Bauernhof (`bauernhof`)
+  - Sachgrund: Auf dem Hof steckt man Gehege und Weiden mit Schnur und Pflöcken ab.
+  - Rahmen: Versorgen · Spannung aus: Durcheinander
+  - Ruhig: Neue Weiden für die Ziegen: Mit Schnur und Pflöcken spannt das Kind die Form, die die Bäuerin braucht. Steht das Gehege, kommen die Ziegen.
+  - Sanft: „Ein Rechteck, das kein Quadrat ist.“ Die erste Schnur ergibt ein Quadrat; ein Pflock wird umgesteckt.
+  - Abenteuer: Weidewechsel über mehrere Runden: Jede Woche brauchen die Ziegen frisches Gras, also eine neue Form um Baum, Teich und Stall herum. Eine Ziege steht jedes Mal schon auf dem Stalldach und schaut zu.
 - Gesten: Tippen (Nägel nacheinander), Tippen auf den ersten Nagel schließt die Form; ein „Zurück“-Knopf
   im Lernfeld nimmt den letzten Nagel. **Neu:** dieser Zurück-Knopf (im Spiel, nicht auf festem Platz).
 - Lernzeichen: neu: **Punktgitter** und Gummi in Tinte. Winkelmarke aus R04.
@@ -456,9 +488,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
   kann die App nicht sehen; es ist der Mach-mit-Moment und zählt nicht für „gekonnt“. Ehrlich: bei
   zeichnen-mit-lineal und kreise-zirkel prüft das Spiel nur die Hälfte des Lernplan-Ziels.
 - Bewusst nicht drin: umfang-bestimmen → R09.
-- Sachgrund der Heimatwelt: Werkstatt, Zuschnitt, Wanderkarte · Kandidaten: werkzeuge, ackerbau-hausbau,
-  karten (für den Maßstab)
-- Stimmung: ruhig fest.
+- Heimatwelt: Himmelsrichtungen und Karten (`karten`)
+  - Sachgrund: Auf Karten misst man mit dem Lineal ab Null; der Maßstab macht aus Zentimetern Kilometer.
+  - Sache wächst mit: Kl. 2: mit dem Lineal messen und zeichnen. Kl. 3–4: Karte, Himmelsrichtungen, Maßstab, rechter Winkel beim Planen.
+  - Rahmen: Reise · Spannung aus: Vorhersage
+  - Ruhig: Eine Wanderung wird geplant: Lineal mit der Null an den Start, Maßstabsleiste an den Weg. Jede Messung zeichnet ein Wegstück.
+  - Sanft: Zwei Wege führen zur Hütte. Welcher ist kürzer? Erst schätzen, dann messen.
+  - Abenteuer: Schatzkarte der Klasse über mehrere Runden: Die Runde versteckt etwas im Stadtpark und zeichnet die Karte dazu, mit Himmelsrichtung, Winkel und Maß. Eine andere Klasse sucht danach und findet es beim ersten Versuch.
 - Gesten: Ziehen (Werkzeug verschieben) mit Tipp-Alternative, **Drehgriff** am Werkzeug (neu, wie R04;
   Geodreieck und Lineal brauchen feinere Schritte: 15° oder Einrasten an Linien, Annahme). Ablesen per
   **Bildschirm-Tastatur** mit Ziffern 0–9.
@@ -497,9 +533,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Warum perfekt: Aus einer Darstellung das Ding machen ist die Handlung aller drei; Fehlerkontrolle durch
   Überlagern ist eindeutig.
 - Bewusst nicht drin: bauplan-zeichnen → R13 (Gebäude → Plan ist die Umkehrung).
-- Sachgrund der Heimatwelt: Häuser und Türme bauen, die fest stehen · Kandidaten: tuerme-bauen,
-  burg-kloster-schloss, ackerbau-hausbau
-- Stimmung: ruhig fest.
+- Heimatwelt: Türme, die fest stehen (`tuerme-bauen`)
+  - Sachgrund: Türme stehen fest, wenn Würfel richtig aufeinander lasten.
+  - Sache wächst mit: Kl. 2: Türme, die stehen bleiben. Kl. 3–4: Bauplan und Ansichten, wie Architektinnen ein Haus von allen Seiten zeichnen.
+  - Rahmen: Bauen · Spannung aus: Rätsel · Fähigkeit: schrumpfen
+  - Ruhig: Türme nach Foto: Das Kind baut nach, was das Bild zeigt. Steht der Turm wie auf dem Foto, wird er fotografiert.
+  - Sanft: Auf dem Foto ist ein Würfel nicht zu sehen. Er muss aber da sein, sonst würde der obere schweben.
+  - Abenteuer: Die Würfelstadt über mehrere Runden: jede Runde ein Gebäude nach Plan. Dann schrumpft die Runde und geht durch ihre Straßen. Von unten sieht ein Turm anders aus als auf dem Plan. Von oben stimmt er.
 - Gesten: Tippen auf ein Kästchen der Baufläche setzt einen Würfel oben auf den Stapel; ein Zurück-Knopf
   nimmt den obersten. Damit ist 3D ohne neue Geste baubar. **Neu:** Drehpfeile (R06), Zurück-Knopf (R10).
 - Lernzeichen: Holzwürfel (R05), Bauplan als Kästchen mit Ziffern (neu, Ziffern in Tinte).
@@ -531,9 +571,12 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Warum perfekt: Ein Plan ist gut, wenn ein anderer danach dasselbe baut; genau das prüft das Spiel.
   bauplan-diktieren ist dieselbe Handlung in Schritten.
 - Bewusst nicht drin: ansichten-zuordnen → R14; planquadrate → R17.
-- Sachgrund der Heimatwelt: Pläne für Bauleute, ein Zimmer umziehen · Kandidaten: von-oben (Klassenzimmer
-  von oben), ackerbau-hausbau, burg-kloster-schloss
-- Stimmung: ruhig fest.
+- Heimatwelt: Himmelsrichtungen und Karten (`karten`)
+  - Sachgrund: Lagepläne zeigen Orte von oben; Karten haben Himmelsrichtungen.
+  - Rahmen: Entdecken · Spannung aus: Vorhersage · Fähigkeit: schweben
+  - Ruhig: Ein Lageplan des Schulgeländes für neue Kinder: Jedes Gebäude wird von oben eingetragen. Hängt der Plan am Eingang, findet ein Gast die Turnhalle.
+  - Sanft: Ein Gast steht mit dem Plan vor der falschen Tür. Was ist falsch eingetragen?
+  - Abenteuer: Mit dem Ballon schwebt die Runde über mehrere Runden über Schule, Dorf und Tal und zeichnet, was sie von oben sieht. Zurück am Boden geht sie einen Weg nach dem eigenen Plan. Stimmt er, kommt sie am Badesee an.
 - Gesten: Tippen auf ein Feld, dann Ziffer auf der Bildschirm-Tastatur (nur 0–4); Ziehen der Möbel-Zeichen.
 - Lernzeichen: Bauplan (R12), neu: **Planzeichen** für Möbel (schlichte Draufsicht-Umrisse in Tinte).
 - Stimme: wenig.
@@ -563,9 +606,12 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Warum perfekt: Der Zweck „andere sehen etwas anders als ich“ ist die Handlung: sich an einen anderen Platz
   denken, dann nachsehen.
 - Bewusst nicht drin: bauplan-zeichnen → R13 (Draufsicht mit Zahlen ist ein Plan, keine Ansicht).
-- Sachgrund der Heimatwelt: Fotografieren, Malen nach Vorlage, Fernrohr · Kandidaten: von-oben, am-himmel
-  (Erde von oben, Annahme), burg-kloster-schloss
-- Stimmung: ruhig fest.
+- Heimatwelt: Der Mond und seine Gestalten (`mond`)
+  - Sachgrund: Die Mondgestalten entstehen, weil wir die beleuchtete Hälfte von verschiedenen Seiten sehen (Ansichten).
+  - Rahmen: Forschen · Spannung aus: Vorhersage · Fähigkeit: schweben
+  - Ruhig: Ball und Lampe im Guckkasten: Durch welches Loch sieht man den Ball halb hell? Jede richtige Ansicht zeigt eine Mondgestalt.
+  - Sanft: Kofi und Lena sehen denselben Ball verschieden. Wer sitzt wo? Die Ansicht verrät den Platz.
+  - Abenteuer: Ein Monat mit dem Mond über mehrere Runden: Jeden Abend schaut die Runde aus dem Fenster und sagt vorher, wie er morgen aussieht. Am Ende schwebt sie im Ballon so weit hinaus, dass Sonne, Erde und Mond zugleich zu sehen sind (Sachbild).
 - Gesten: Tippen (Ansicht, Platz), Drehpfeile (neu, R06), in Kl. 3 Tippen von Gitterfeldern.
 - Lernzeichen: Holzwürfel, Kästchengitter; Alltagsdinge als Wortbilder.
 - Stimme: wenig.
@@ -595,10 +641,12 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Warum perfekt: Symmetrie ist im Lernplan über Falten definiert; Falten ist auch die Fehlerkontrolle. Vorher
   festlegen, dann falten ist L2 in reiner Form.
 - Bewusst nicht drin: Drehen aus falten-zerlegen-drehen → R07 (Nebenzugang); spiegeln-im-gitter → R16.
-- Sachgrund der Heimatwelt: Basteln für ein Fest, Schmetterlinge (Flügel sind symmetrisch), Fensterbilder ·
-  Kandidaten: vom-ei-zum-tier (Schmetterling), feste-im-kalender (Fensterbilder, als Brauch gleichwertig),
-  wiese-und-hecke
-- Stimmung: ruhig fest.
+- Heimatwelt: Raupe und Schmetterling, Kaulquappe und Frosch (`vom-ei-zum-tier`)
+  - Sachgrund: Schmetterlingsflügel sind symmetrisch; vom Ei über Raupe und Puppe zum Falter.
+  - Rahmen: Forschen · Spannung aus: Vorhersage
+  - Ruhig: Schmetterlinge fürs Fenster: Ein halber Flügel ist gemalt. Wie sieht er aufgeklappt aus? Erst vorhersagen, dann aufklappen.
+  - Sanft: Ein Fleck sitzt nah an der Faltlinie. Wo landet er auf der anderen Seite?
+  - Abenteuer: Im Schmetterlingshaus über mehrere Runden: Die Runde sucht Falter nach halben Bildern. Ein Flügel hat einen Fleck, der wie ein Auge aussieht: das Tagpfauenauge (Sachbild). Am Ende schlüpft im Kasten ein Falter und klappt die Flügel auf.
 - Gesten: Tippen (zwei Punkte der Faltlinie, Vorhersage). Falten als Animation (B2), anhaltbar.
 - Lernzeichen: Papierblatt, Faltlinie gestrichelt in Tinte weich; Kästchengitter für Faltschnitt kopf.
 - Stimme: wenig.
@@ -633,9 +681,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Warum perfekt: Alle vier Themen sind „Kästchen zählen und übertragen“, nur die Regel der Übertragung
   wechselt. Die Fehlerkontrolle (überlegen, falten, zurückschrumpfen) liegt in der Sache.
 - Bewusst nicht drin: drehen-im-kopf → R07; zeichnen-mit-lineal → R11.
-- Sachgrund der Heimatwelt: Fensterbilder, Stickmuster, Mosaikvorlagen · Kandidaten: kleidung (Stickmuster),
-  burg-kloster-schloss (Wappen ohne Bekenntnis, Fenster), land-und-wasser (Spiegelung im See, Annahme)
-- Stimmung: ruhig fest.
+- Heimatwelt: Insel und See, Halbinsel und Bucht (`land-und-wasser`)
+  - Sachgrund: Inseln spiegeln sich im See; Land- und Wasserformen im Gitter abzeichnen und vergrößern.
+  - Sache wächst mit: Kl. 1–2: Insel, See, Bucht abzeichnen. Kl. 4: Karten vergrößern und verkleinern (Maßstab), Küstenformen mit Namen.
+  - Rahmen: Bauen · Spannung aus: Verwandlung
+  - Ruhig: Eine Seenkarte wird ins Gitter abgezeichnet, Kästchen für Kästchen. Fertig, wird sie gerahmt.
+  - Sanft: Die Karte soll doppelt so groß an die Wand. Aus einem Kästchen werden vier. Stimmt die Insel noch?
+  - Abenteuer: Die Insel der Runde über mehrere Runden: Sie erfindet eine Insel, zeichnet sie ab, spiegelt sie zur Zwillingsinsel und vergrößert sie zur Wandkarte. Am Ende fährt ein Papierschiff im Sandkasten um die gebaute Insel.
 - Gesten: Tippen (Gitterpunkt, Gitterpunkt = Linie; Linie antippen löscht sie). Nichts Neues; kein freies
   Zeichnen (Waldorf-Bericht: Nachspuren bringt nichts, eigener Stoff zählt).
 - Lernzeichen: Kästchengitter, Symmetrieachse als kräftige Linie in Tinte.
@@ -664,9 +716,12 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Weitere Zugänge: ortsplan-orientieren (R02)
 - Warum perfekt: Planquadrate sind eine Adresse; Post zustellen ist ihr Zweck.
 - Bewusst nicht drin: lageplan-zeichnen → R13.
-- Sachgrund der Heimatwelt: Post, Stadtplan, Ausflug · Kandidaten: stadt-und-land, karten, unterwegs
-- Stimmung: anpassbar. ruhig: Post im Dorf · sanft: ein Brief hat keinen Namen, nur ein Planquadrat ·
-  abenteuer: Schatzkarte mit Planquadraten auf einer Insel (Bogen über Runden).
+- Heimatwelt: Nah und fern, Stadt und Land (`stadt-und-land`)
+  - Sachgrund: Stadt und Land haben Pläne mit Planquadraten; die Post findet so jedes Haus.
+  - Rahmen: Reise · Spannung aus: Rätsel
+  - Ruhig: Post austragen im Dorf: Auf jedem Brief steht ein Planquadrat. Richtig gefunden, kommt der Brief an.
+  - Sanft: Auf einem Brief ist das Quadrat verwischt: B und eine Zahl. Im Brief steht „neben der Kirche“.
+  - Abenteuer: Vertretung für die Briefträgerin über mehrere Runden: erst das Dorf, dann die Kleinstadt, dann ein Viertel der Großstadt. Ein Brief hat ein Quadrat, in dem nur Wasser ist. Er geht an das Hausboot.
 - Gesten: Ziehen (Brief) mit Tipp-Alternative; Bildschirm-Tastatur mit nur A–F und 1–6.
 - Lernzeichen: Ortsplan mit Gitter, Buchstaben und Ziffern in Tinte am Rand.
 - Stimme: wenig (36 Planquadrate als Aufnahmen „B 3“).
@@ -693,9 +748,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Weitere Zugänge: keine
 - Warum perfekt: Der Zweck „damit es ringsum passt“ ist die Fehlerkontrolle: das Band schließt sich.
 - Bewusst nicht drin: parkettierungen → R07 (Fläche lückenlos füllen, nicht eine Reihe fortsetzen).
-- Sachgrund der Heimatwelt: Ketten, Rahmen, Stoffbänder, Zäune bemalen · Kandidaten: kleidung, feste-im-kalender,
-  burg-kloster-schloss
-- Stimmung: ruhig fest.
+- Heimatwelt: Feste im Kalender (`feste-im-kalender`)
+  - Sachgrund: Feste haben Schmuck mit Mustern (Girlanden, Bänder), als Brauch gleichwertig.
+  - Sache wächst mit: Kl. 1: Girlanden und Bänder. Kl. 3: Muster in Bräuchen vieler Feste (Laternen, Rangoli, Ostereier, Sterne), immer als Brauch und gleichwertig.
+  - Rahmen: Fest · Spannung aus: Durcheinander
+  - Ruhig: Der Raum wird für ein Fest geschmückt. Jedes fortgesetzte Muster verlängert die Girlande; reicht sie durch den Raum, wird gefeiert.
+  - Sanft: In der Girlande ist ein Stück falsch aufgefädelt. Wo bricht das Muster?
+  - Abenteuer: Feste des Jahres über mehrere Runden: Laternen, Girlanden, Muster aus Farbpulver am Boden, bemalte Eier. Jede Runde ein Fest mit seinem Muster. Das letzte Muster erfindet die Runde selbst, für das Klassenfest.
 - Gesten: Ziehen mit Tipp-Alternative; Klammer per Tippen auf Anfang und Ende. Drehgriff für „Lage“ als
   Merkmal (neu, wie R04).
 - Lernzeichen: Formplättchen, Holzkörper; Farbe als Merkmal braucht die Merkmalspalette (Frage 3).
@@ -729,9 +788,13 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
   unmittelbar. Würfel kippen gehört dazu, weil ein abrollender Würfel sein Netz auf den Boden druckt
   (unsicherste Passung, siehe Überblick).
 - Bewusst nicht drin: kantenmodelle → R06.
-- Sachgrund der Heimatwelt: Schachteln für Geschenke, Spielwürfel, Verpackungen · Kandidaten: werkzeuge,
-  feste-im-kalender, wer-macht-mein-brot (Verpackung, Annahme)
-- Stimmung: ruhig fest.
+- Heimatwelt: Wer an meinem Brot mitgearbeitet hat (`wer-macht-mein-brot`)
+  - Sachgrund: Brot und Brezen werden in gefalteten Schachteln geliefert; Netze falten.
+  - Sache wächst mit: Die Welt gehört zu Kl. 2, das Spiel zu Kl. 3–4. Hier geht es deshalb um Verpackung und Lieferung: wie Brot und Kuchen heil ankommen, wie man Karton spart.
+  - Rahmen: Werkstatt · Spannung aus: Vorhersage
+  - Ruhig: Schachteln für die Bäckerei: Welches Netz ergibt eine Schachtel? Erst vorhersagen, dann falten.
+  - Sanft: Ein Netz sieht richtig aus und bleibt an einer Seite offen. Welche Fläche muss umziehen?
+  - Abenteuer: Über mehrere Runden entwirft die Runde eigene Verpackungen: für eine Breze, ein Brot, eine Torte. Wenig Karton, nichts darf wackeln. Am Markttag trägt die Bäckerin die Torte darin über den Platz. Sie kommt heil an.
 - Gesten: Tippen (Netz passt / passt nicht; zwei Flächen als Gegenflächen; Bild für „oben“). Drehpfeile
   (neu, R06). Falten als anhaltbare Animation.
 - Lernzeichen: Netze aus Papierquadraten, Würfel mit schlichten Bildzeichen (keine Perlen; Augen auf dem
@@ -759,8 +822,12 @@ Stufen; die Stufen in den Einträgen gelten für die Kl.-1–2-Themen.
 - Weitere Zugänge: koerper-in-der-umwelt, koerper-benennen (R05)
 - Warum perfekt: Die Frage wird mit dem Versuch selbst beantwortet; L2 vorhersagen, dann sehen.
 - Bewusst nicht drin: koerper-benennen → R05.
-- Sachgrund der Heimatwelt: Murmelbahn, Fahrzeuge, Fässer im Laden · Kandidaten: was-rollt, tuerme-bauen
-- Stimmung: ruhig fest.
+- Heimatwelt: Was rollt? Murmelbahn und Fahrzeuge (`was-rollt`)
+  - Sachgrund: Was rollt und was kippt: Kugeln rollen in alle Richtungen, Zylinder geradeaus.
+  - Rahmen: Forschen · Spannung aus: Vorhersage
+  - Ruhig: Dinge auf der Rampe: Rollt es oder kippt es? Erst vorhersagen, dann loslassen. Jede Vorhersage kommt ins Testheft.
+  - Sanft: Die Dose rollt, aber nur auf der Seite. Hingestellt bleibt sie stehen. Wie muss sie liegen?
+  - Abenteuer: Seifenkisten über mehrere Runden: Die Runde baut ein Fahrzeug und probiert Räder aus (Scheiben, Kugeln, eine Walze, zum Spaß auch eckige). Vor jedem Start wird vorhergesagt. Die Kiste mit den eckigen Rädern hoppelt einen Meter und bleibt stehen.
 - Gesten: Tippen (Vorhersage), Ziehen (Körper auf die Rampe). Nichts Neues.
 - Lernzeichen: Holzkörper (R05), Rampe als Szene.
 - Stimme: wenig.
