@@ -13,6 +13,23 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "neunerreihe": {
+   "fach": "mathe",
+   "name": "Neunerreihe",
+   "titel": "Neun ist eins weniger als zehn",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Hände der Runde"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Bezahlen mit Zehnern"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/neunerreihe.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
