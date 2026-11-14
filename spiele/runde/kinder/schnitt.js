@@ -34,14 +34,22 @@ export const strich = (d, w = 3) => `<path d="${d}" fill="none" stroke="${INK}" 
 
 /**
  * @typedef {{haut: string, haar: string, oben: string, unten: string, schuhe: string}} Farben
- * @typedef {{teil: string, svg?: string}} Teil
+ * @typedef {import("../bestand.js").Teil} Teil
  * @typedef {{haareHinten?: string, haareOben?: string, nachGesicht?: string, ohr?: string}} Kopfteile
  */
 
 /**
- * Dreiviertelansicht eines gehenden Kindes im Stil mit Schattenstufe (kinder/stil.js).
- * kleidung.hemd: sichtbares Hemd unter offener Jacke (sonst geschlossenes Oberteil).
- * @param {{breite: number, farben: Farben & {hemd?: string, sohle?: string}, kopf: Kopfteile}} k breite 1 = Grundmaß
+ * @typedef {import("./stil.js").Stueck} Stueck
+ * @typedef {{haareHinten?: Stueck, haareOben?: Stueck, nachGesicht?: Stueck, ohr?: Stueck}} KopfStuecke
+ */
+
+/** Teil aus einem Stück (Fläche + Kontur). @param {string} teil @param {Stueck} st @returns {Teil} */
+const T = (teil, st) => ({ teil, svg: st.svg, kontur: st.kontur });
+
+/**
+ * Dreiviertelansicht eines gehenden Kindes, aus einem Guss: Tinte nur um die Silhouette (kinder/stil.js).
+ * farben.hemd: sichtbares Hemd unter offener Jacke (sonst geschlossenes Oberteil).
+ * @param {{breite: number, farben: Farben & {hemd?: string, sohle?: string}, kopf: KopfStuecke}} k breite 1 = Grundmaß
  * @returns {import("../bestand.js").KindAnsicht}
  */
 export function dreiviertel({ breite: b, farben: f, kopf }) {
@@ -49,41 +57,48 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
   const hueftY = 184;
   const schulterY = 126;
   const P = (/** @type {number} */ x, /** @type {number} */ y) => /** @type {[number, number]} */ ([x, y]);
-  const rumpf = `M${z(X(-28))} 124 Q${z(X(-28))} 112 ${z(X(-16))} 112 L${z(X(16))} 112 Q${z(X(28))} 112 ${z(X(28))} 124`
-    + ` L${z(X(31))} 176 Q${z(X(31))} 186 ${z(X(22))} 186 L${z(X(-22))} 186 Q${z(X(-31))} 186 ${z(X(-31))} 176 Z`;
-  const huefte = `M${z(X(-27))} 172 L${z(X(27))} 172 L${z(X(27))} 192 Q${z(X(27))} 200 ${z(X(19))} 200`
-    + ` L${z(X(-19))} 200 Q${z(X(-27))} 200 ${z(X(-27))} 192 Z`;
+  const rumpf = `M${z(X(-27))} 124 Q${z(X(-27))} 111 ${z(X(-14))} 111 L${z(X(14))} 111 Q${z(X(27))} 111 ${z(X(27))} 124`
+    + ` L${z(X(30))} 177 Q${z(X(30))} 187 ${z(X(21))} 187 L${z(X(-21))} 187 Q${z(X(-30))} 187 ${z(X(-30))} 177 Z`;
+  const huefte = `M${z(X(-26))} 172 L${z(X(26))} 172 L${z(X(26))} 192 Q${z(X(26))} 200 ${z(X(18))} 200`
+    + ` L${z(X(-18))} 200 Q${z(X(-26))} 200 ${z(X(-26))} 192 Z`;
   /** Turnschuh mit Sohle, Spitze nach rechts. @param {number} x */
-  const schuh = (x) => S.form(S.pfad(`M${z(x - 12)} 246 Q${z(x - 12)} 233 ${z(x + 1)} 233 Q${z(x + 10)} 233 ${z(x + 14)} 239`
-      + ` Q${z(x + 23)} 241 ${z(x + 23)} 248 L${z(x + 23)} 249 L${z(x - 12)} 249 Z`), f.schuhe, P(x - 6, 237))
-    + S.flach(S.pfad(`M${z(x - 13)} 248 L${z(x + 24)} 248 L${z(x + 24)} 250 Q${z(x + 24)} 255 ${z(x + 18)} 255`
-      + ` L${z(x - 8)} 255 Q${z(x - 13)} 255 ${z(x - 13)} 250 Z`), f.sohle ?? "#FFFCF7", 3.5)
-    + S.linie(`M${z(x + 2)} 237 l5 2 M${z(x + 5)} 235 l5 2`, 2.2);
+  const schuh = (x) => S.zusammen(
+    S.form(S.pfad(`M${z(x - 12)} 247 Q${z(x - 12)} 233 ${z(x + 1)} 233 Q${z(x + 10)} 233 ${z(x + 14)} 239`
+      + ` Q${z(x + 23)} 241 ${z(x + 23)} 248 L${z(x - 12)} 248 Z`), f.schuhe, P(x - 6, 237)),
+    S.flach(S.pfad(`M${z(x - 13)} 247 L${z(x + 24)} 247 L${z(x + 24)} 250 Q${z(x + 24)} 255 ${z(x + 18)} 255`
+      + ` L${z(x - 8)} 255 Q${z(x - 13)} 255 ${z(x - 13)} 250 Z`), f.sohle ?? "#FFFCF7"),
+    S.naht(`M${z(x + 1)} 237 l5 2 M${z(x + 4)} 235 l5 2`, f.schuhe, 2.4),
+  );
   /** @param {number} dx @returns {Teil[]} */
   const bein = (dx) => [
-    { teil: "bein", svg: S.glied(P(X(dx), 190), 11.5, P(X(dx) + 1, 234), 10, f.unten) },
-    { teil: "schuh", svg: schuh(X(dx) + 1) },
+    T("bein", S.glied(P(X(dx), 190), 11.5, P(X(dx) + 1, 236), 10, f.unten)),
+    T("schuh", schuh(X(dx) + 1)),
   ];
-  /** @param {number} dx @param {number} hx @param {1|-1} daumen */
-  const arm = (dx, hx, daumen) => {
+  /** @param {number} dx @param {number} hx @param {1|-1} daumen @param {boolean} trenn */
+  const arm = (dx, hx, daumen, trenn) => {
     const w = P(X(hx) - Math.sign(dx), 165);
+    const haende = S.haende(w, f.haut, daumen);
     return {
-      oben: [{ teil: "oberarm", svg: S.glied(P(X(dx), schulterY), 9, P(X(hx), 146), 8, f.oben) }],
+      oben: [T("oberarm", S.glied(P(X(dx), schulterY), 9, P(X(hx), 146), 8, f.oben, { trenn }))],
       unten: [
-        { teil: "unterarm", svg: S.glied(P(X(hx), 146), 7.8, P(w[0], 160), 7, f.oben) },
-        { teil: "aermel", svg: S.form(S.kapsel(P(w[0] - 6, 160), 4, P(w[0] + 6, 160), 4), f.oben, P(w[0] - 6, 158), 0.8, 3.5) },
-        { teil: "hand", formen: S.haende(w, f.haut, daumen) },
+        T("unterarm", S.zusammen(S.glied(P(X(hx), 146), 8, P(w[0], 162), 7.2, f.oben, { trenn }),
+          S.naht(`M${z(w[0] - 6)} 158 L${z(w[0] + 6)} 158`, f.oben))),
+        { teil: "hand", formen: haende },
       ],
     };
   };
-  const vorn = arm(26, 30, -1);
-  const hinten = arm(-26, -30, 1);
-  const hemd = f.hemd
-    ? S.flach(S.pfad(`M${z(X(-4))} 113 Q${z(X(6))} 121 ${z(X(16))} 113 L${z(X(19))} 186 L${z(X(-3))} 186 Z`), f.hemd, 0)
-      + `<path d="M${z(X(-3))} 142 L${z(X(18))} 142 M${z(X(-3))} 160 L${z(X(19))} 160" stroke="#6B5C96" stroke-width="3" fill="none"/>`
-      + S.linie(`M${z(X(-4))} 113 L${z(X(-3))} 186 M${z(X(16))} 113 L${z(X(19))} 186`, 3.5)
-      + S.linie(`M${z(X(-4))} 113 L${z(X(-11))} 124 L${z(X(-2))} 128 M${z(X(16))} 113 L${z(X(22))} 123 L${z(X(15))} 127`, 3)
-    : S.linie(`M${z(X(-10))} 113 Q160 121 ${z(X(10))} 113`);
+  const vorn = arm(26, 30, -1, true);
+  const hinten = arm(-26, -30, 1, false);
+  const oberteil = f.hemd
+    ? S.zusammen(
+      S.form(S.pfad(rumpf), f.oben, P(X(-22), 118), { s: 0.86 }),
+      S.flach(S.pfad(`M${z(X(-4))} 112 Q${z(X(6))} 120 ${z(X(16))} 112 L${z(X(19))} 187 L${z(X(-3))} 187 Z`), f.hemd),
+      S.naht(`M${z(X(-3))} 142 L${z(X(18))} 142 M${z(X(-3))} 160 L${z(X(19))} 160`, f.hemd, 3),
+      S.naht(`M${z(X(-4))} 112 L${z(X(-3))} 187 M${z(X(16))} 112 L${z(X(19))} 187`, f.oben, 2.6),
+      S.naht(`M${z(X(-4))} 113 L${z(X(-11))} 124 L${z(X(-2))} 128 M${z(X(16))} 113 L${z(X(22))} 123 L${z(X(15))} 127`, f.oben, 2.4),
+      S.naht(`M${z(X(-24))} 160 L${z(X(-12))} 160`, f.oben, 2.6),
+    )
+    : S.zusammen(S.form(S.pfad(rumpf), f.oben, P(X(-22), 118), { s: 0.86 }), S.naht(`M${z(X(-10))} 113 Q160 121 ${z(X(10))} 113`, f.oben));
   return {
     drehpunkte: {
       koerper: [160, 254], rumpf: [160, hueftY], kopf: [160, 110],
@@ -96,20 +111,18 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
       "bein-hinten": bein(-12),
       "bein-vorn": bein(12),
       rumpf: [
-        { teil: "hals", svg: S.form(S.pfad("M152 98 L168 98 L168 118 L152 118 Z"), f.haut, P(152, 98), 0.7) },
-        { teil: "huefte", svg: S.form(S.pfad(huefte), f.unten, P(X(-24), 174)) },
-        { teil: "oberteil", svg: S.form(S.pfad(rumpf), f.oben, P(X(-22), 118), 0.86) },
-        { teil: "hemd", svg: hemd },
-        { teil: "tasche", svg: S.linie(`M${z(X(-24))} 160 L${z(X(-12))} 160`, 3) },
+        T("hals", S.form(S.pfad("M152 96 L168 96 L168 118 L152 118 Z"), f.haut, P(152, 96), { s: 0.7 })),
+        T("huefte", S.form(S.pfad(huefte), f.unten, P(X(-24), 174))),
+        T("oberteil", oberteil),
       ],
       kopf: [
-        ...(kopf.haareHinten ? [{ teil: "haare-hinten", svg: kopf.haareHinten }] : []),
-        { teil: "ohr", svg: kopf.ohr ?? S.form(S.oval(123, 80, 7, 10), f.haut, P(120, 76), 0.8) },
-        { teil: "kopf", svg: S.form(S.oval(162, 72, 42, 41), f.haut, P(146, 56), 0.9) },
-        { teil: "nase", svg: S.linie("M172 92 Q176 95 171 98") },
+        ...(kopf.haareHinten ? [T("haare-hinten", kopf.haareHinten)] : []),
+        T("ohr", kopf.ohr ?? S.form(S.oval(123, 80, 7, 10), f.haut, P(120, 76), { s: 0.8 })),
+        T("kopf", S.form(S.oval(162, 72, 42, 41), f.haut, P(146, 56), { s: 0.9, trenn: true })),
+        T("nase", S.naht("M172 91 Q177 95 171 98", f.haut, 2.8)),
         { teil: "gesicht" },
-        ...(kopf.haareOben ? [{ teil: "haare-oben", svg: kopf.haareOben }] : []),
-        ...(kopf.nachGesicht ? [{ teil: "hilfsmittel", svg: kopf.nachGesicht }] : []),
+        ...(kopf.haareOben ? [T("haare-oben", kopf.haareOben)] : []),
+        ...(kopf.nachGesicht ? [T("hilfsmittel", kopf.nachGesicht)] : []),
       ],
       "arm-hinten-oben": hinten.oben, "arm-hinten-unten": hinten.unten,
       "arm-vorn-oben": vorn.oben, "arm-vorn-unten": vorn.unten,
@@ -117,8 +130,8 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
     gesicht: /** @type {[number, number]} */ (GESICHT.dreiviertel),
     plaetze: {
       kopf: { gelenk: "kopf", punkt: [162, 32] },
-      "hand-vorn": { gelenk: "arm-vorn-unten", punkt: [X(29), 175] },
-      "hand-hinten": { gelenk: "arm-hinten-unten", punkt: [X(-29), 175] },
+      "hand-vorn": { gelenk: "arm-vorn-unten", punkt: [X(29), 174] },
+      "hand-hinten": { gelenk: "arm-hinten-unten", punkt: [X(-29), 174] },
       ruecken: { gelenk: "rumpf", punkt: [160, 116] },
       fuesse: { gelenk: "koerper", punkt: [160, 250] },
       schoss: { gelenk: "rumpf", punkt: [160, 182] },
