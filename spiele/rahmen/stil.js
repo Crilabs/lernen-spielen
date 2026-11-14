@@ -3,15 +3,15 @@
 
 /**
  * Maße in rem.
- * bedien/haupt/klein: Knopfdurchmesser rund; pille/pilleHaupt: Höhe der Knöpfe mit Wort;
+ * bedien/gross/klein: Knopfdurchmesser rund; pille/pilleGross: Höhe der Knöpfe mit Wort;
  * breite: Mindestbreite mit Wort; fach: Kachel des Fachsymbols; leiste: Höhe der Kopfleiste.
  */
 export const MASSE = {
   bedien: 11,
-  haupt: 16,
+  gross: 16,
   klein: 8,
   pille: 11,
-  pilleHaupt: 14,
+  pilleGross: 14,
   breite: 24,
   fach: 9,
   rand: 2.4,

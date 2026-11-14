@@ -51,11 +51,10 @@
   /* Tablett: der Vorrat an Stäben, gemischt (die Paare liegen nicht nebeneinander). */
   .tablett { display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 2.4rem 3rem; width: 94rem; min-height: 40rem; padding: 4.4rem; }
 
-  /* Stab als Teil: Papierkarte mit Schatten (drückbar), Tippfläche 11 rem. In der Rinne flach und ohne Karte. */
-  .stab.teil { height: 11rem; padding: 2rem 2.4rem; }
+  /* Stab als Teil: Papierkarte mit Schatten (drückbar), Tippfläche 11 rem (Grundmaß in seite.css,
+     ls-perlenstab.teil). In der Rinne flach und ohne Karte. */
   .rinne .stab.teil { height: var(--stab); min-width: 0; min-height: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
   .rinne .stab.teil + .stab.teil { margin-left: var(--fuge, 0rem); }
-
 
   /* Pause: Sachmoment auf der Papierkarte. */
   .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }

@@ -4,10 +4,12 @@
 // Spielname in Fach-Tief und darunter leiser das Thema; rechts Ton an/aus (Nebenknopf).
 // Ohne bekanntes Fach: Band in Nebel, keine Kachel, Name in Tinte. `thema` darf sich zur Laufzeit ändern.
 // Setzt --ls-leiste-hoehe am <html>: dort beginnt die freie Fläche des Spiels (top: var(--ls-leiste-hoehe)).
+// Bereit: `await leiste.bereit()` (Versprechen, auch für späte Aufrufer) oder Ereignis `bereit`, sobald die
+// Einstellungen geladen sind und `ton` stimmt.
 
 import { ladeEinstellungen, einstellung, setzeEinstellung } from "../kern/einstellungen.js";
 import { sprich, stille } from "../kern/stimme.js";
-import { schonGesagt, merkeGesagt } from "../kern/sitzung.js";
+import { sageEinmal } from "../kern/sitzung.js";
 import { protokoll } from "../kern/protokoll.js";
 import { FACH, GRUND_CSS, LEISTE_HOEHE, MASSE, bild, definiere } from "./stil.js";
 import "./knopf.js";
@@ -94,6 +96,11 @@ ${FACH_CSS}
 `;
 
 export class LsLeiste extends HTMLElement {
+  /** @type {() => void} */
+  #ok = () => {};
+  /** @type {Promise<void>} */
+  #bereitet = new Promise((ok) => { this.#ok = ok; });
+
   static observedAttributes = ["spiel", "fach", "titel", "thema"];
 
   constructor() {
@@ -114,9 +121,6 @@ export class LsLeiste extends HTMLElement {
     this.tonKnopf = /** @type {HTMLElement} */ (wurzel.querySelector(".tonknopf"));
     this._ton = true;
     this._start = false;
-    this._bereit = false;
-    /** @type {Promise<void>} */
-    this.bereitet = new Promise((ok) => { this._ok = ok; });
     this.haus.addEventListener("click", () => this.sagHaus());
     this.tonKnopf.addEventListener("click", () => this.schalteTon());
   }
@@ -151,14 +155,9 @@ export class LsLeiste extends HTMLElement {
     this.setze(Boolean(an), true);
   }
 
-  /** @returns {boolean} true, sobald die Einstellungen geladen sind (für späte Zuhörer des Ereignisses bereit) */
-  get istBereit() {
-    return this._bereit;
-  }
-
-  /** @returns {Promise<void>} */
+  /** @returns {Promise<void>} löst auf, sobald die Einstellungen geladen sind (auch, wenn das schon war) */
   bereit() {
-    return this.bereitet;
+    return this.#bereitet;
   }
 
   async lade() {
@@ -168,8 +167,7 @@ export class LsLeiste extends HTMLElement {
       protokoll("Leiste: Einstellungen nicht geladen: " + e);
     }
     this.leseTon();
-    this._bereit = true;
-    this._ok();
+    this.#ok();
     this.dispatchEvent(new CustomEvent("bereit"));
   }
 
@@ -195,11 +193,7 @@ export class LsLeiste extends HTMLElement {
   schalteTon() {
     this.setze(!this._ton, true);
     // Der Knopf selbst bleibt stumm (stumm): sonst spräche er den alten Namen. Hier der neue Zustand.
-    const name = this._ton ? "Ton an" : "";
-    if (name && !schonGesagt(name)) {
-      merkeGesagt(name);
-      sprich(name);
-    }
+    if (this._ton) sageEinmal("Ton an", sprich);
   }
 
   zeichne() {
@@ -223,11 +217,10 @@ export class LsLeiste extends HTMLElement {
     this.tonKnopf.setAttribute("name", this._ton ? "Ton an" : "Ton aus");
   }
 
-  // Name beim ersten Tippen: nie die Navigation aufhalten, die Sprache darf abgeschnitten werden.
+  // Name beim ersten Tippen: nie die Navigation aufhalten, die Sprache darf abgeschnitten werden
+  // (sageEinmal merkt ihn, sobald er beginnt; nur ein Abbruch durch anderen Inhalt nimmt das zurück).
   sagHaus() {
-    if (!this._ton || schonGesagt(HAUS_NAME)) return;
-    merkeGesagt(HAUS_NAME);
-    sprich(HAUS_NAME);
+    if (this._ton) sageEinmal(HAUS_NAME, sprich);
   }
 }
 

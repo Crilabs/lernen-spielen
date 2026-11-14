@@ -51,3 +51,36 @@ export function merkeGesagt(name) {
     // Speicher voll oder gesperrt: der Merker im Speicher genügt.
   }
 }
+
+/**
+ * @param {string} name
+ * @returns {void}
+ */
+export function vergissGesagt(name) {
+  imSpeicher.delete(name);
+  const liste = lies();
+  if (!liste || !liste.includes(name)) return;
+  try {
+    sitzungsSpeicher()?.setItem(SCHLUESSEL, JSON.stringify(liste.filter((n) => n !== name)));
+  } catch {
+    // Speicher gesperrt: der Merker im Speicher ist schon zurückgenommen.
+  }
+}
+
+/**
+ * Name beim ersten Tippen (docs/bedienung.md 6): spricht `name` einmal je Sitzung. Er gilt als gesagt, sobald
+ * er beginnt (ein zweites Tippen wiederholt ihn nicht, ein Link darf sofort navigieren), aber nur, wenn ihn
+ * nichts abbricht: Bricht anderer Inhalt ihn ab (sprich liefert "abgebrochen", z. B. die Probe der Hilfe),
+ * hat der Inhalt Vorrang, und der Name kommt bei einem späteren Tippen.
+ * Ob der Ton an ist, prüft der Aufrufer vorher.
+ * @param {string} name
+ * @param {(text: string) => Promise<string>} sprich
+ * @returns {Promise<string | null>} Ergebnis von sprich; null, wenn nichts zu sagen war
+ */
+export async function sageEinmal(name, sprich) {
+  if (!name || schonGesagt(name)) return null;
+  merkeGesagt(name);
+  const ergebnis = await sprich(name);
+  if (ergebnis === "abgebrochen") vergissGesagt(name);
+  return ergebnis;
+}

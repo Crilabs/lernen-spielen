@@ -25,6 +25,8 @@ import { RUHE, schritt } from "./ziehen-zustand.js";
 
 /** Dauer der Rückkehr und des Einsetzens in ms (kurz, B6). */
 const DAUER = 300;
+/** Rückgabe, wenn nichts geliehen wurde. */
+const NICHTS = () => {};
 
 /**
  * @typedef {Iterable<Element> | (() => Iterable<Element>)} Ziele
@@ -38,8 +40,8 @@ let zustand = RUHE;
 const teile = new WeakMap();
 /** Ziele, an denen schon ein Hörer hängt. @type {WeakSet<Element>} */
 const bekannteZiele = new WeakSet();
-/** Ziele, die gerade als frei gezeigt werden. @type {Set<Element>} */
-const freieZiele = new Set();
+/** Ziele, die gerade als frei gezeigt werden, mit der Rückgabe des Geliehenen. @type {Map<Element, (() => void)[]>} */
+const freieZiele = new Map();
 /** Das Ablegen kam von der Tastatur: danach den Fokus ans Teil geben. */
 let perTastatur = false;
 
@@ -52,15 +54,21 @@ globalThis.document?.addEventListener("lostpointercapture", () => {
  * Macht ein Element ziehbar (und antippbar).
  * @param {HTMLElement} element
  * @param {Optionen} optionen
- * @returns {() => void} löst das Element wieder
+ * @returns {() => void} löst das Element wieder und gibt zurück, was ziehbar gesetzt hat (tabindex, role,
+ *   aria-pressed, touch-action, user-select); was das Element vorher selbst hatte, bleibt unberührt
  */
 export function ziehbar(element, optionen) {
   teile.set(element, optionen);
-  element.style.touchAction = "none";
-  element.style.userSelect = "none";
-  element.style.setProperty("-webkit-user-select", "none");
-  if (!istFokussierbar(element)) element.tabIndex = 0;
-  if (!(element instanceof HTMLButtonElement) && !element.hasAttribute("role")) element.setAttribute("role", "button");
+  // Geliehen wie bei den Zielen (zeigeZiele): was das Element schon hatte, bleibt; loesen gibt den Rest zurück.
+  /** @type {(() => void)[]} */
+  const rueckgabe = [
+    leiheStil(element, "touch-action", "none"),
+    leiheStil(element, "user-select", "none"),
+    leiheStil(element, "-webkit-user-select", "none"),
+    istFokussierbar(element) ? NICHTS : leihe(element, "tabindex", "0"),
+    element instanceof HTMLButtonElement ? NICHTS : leihe(element, "role", "button"),
+    behalte(element, "aria-pressed"),
+  ];
   element.setAttribute("aria-pressed", "false");
   for (const z of zieleVon(element)) beobachteZiel(z);
 
@@ -93,7 +101,7 @@ export function ziehbar(element, optionen) {
     }
     element.style.translate = `${dx}px ${dy}px`;
     const ueber = zielUnter(element, e.clientX, e.clientY);
-    for (const z of freieZiele) z.classList.toggle("ziel-ueber", z === ueber);
+    for (const z of freieZiele.keys()) z.classList.toggle("ziel-ueber", z === ueber);
   };
   /** @param {PointerEvent} e */
   const oben = (e) => {
@@ -142,8 +150,10 @@ export function ziehbar(element, optionen) {
     element.removeEventListener("pointercancel", abgebrochen);
     element.removeEventListener("lostpointercapture", ohneCapture);
     element.removeEventListener("keydown", taste);
-    element.removeAttribute("aria-pressed");
+    element.classList.remove("angehoben", "gezogen", "gedrueckt");
     teile.delete(element);
+    // Rückwärts wie ein Stapel: so stimmt es auch bei Alias-Eigenschaften (user-select / -webkit-user-select).
+    for (const gib of rueckgabe.splice(0).reverse()) gib();
   };
 }
 
@@ -271,46 +281,64 @@ function gleite(teil, von) {
   setTimeout(fertig, DAUER + 50);
 }
 
-/** Was zeigeZiele an einem Ziel gesetzt hat und wieder entfernt. */
-const GELIEHEN = [
-  ["tabindex", "lsTabindex"],
-  ["role", "lsRole"],
-  ["aria-label", "lsLabel"],
-];
+// --- Geliehen: setzen, was fehlt, und genau das wieder zurückgeben -----------------------------
+
+/**
+ * Setzt `attr`, falls das Element es noch nicht hat. Liefert die Rückgabe (entfernt nur, was hier gesetzt wurde).
+ * @param {Element} el @param {string} attr @param {string} wert
+ * @returns {() => void}
+ */
+function leihe(el, attr, wert) {
+  if (el.hasAttribute(attr)) return NICHTS;
+  el.setAttribute(attr, wert);
+  return () => el.removeAttribute(attr);
+}
+
+/**
+ * Merkt sich den Wert von `attr` (oder dass es fehlte) und stellt ihn bei der Rückgabe wieder her.
+ * @param {Element} el @param {string} attr
+ * @returns {() => void}
+ */
+function behalte(el, attr) {
+  const vorher = el.getAttribute(attr);
+  return () => (vorher === null ? el.removeAttribute(attr) : el.setAttribute(attr, vorher));
+}
+
+/**
+ * Setzt eine Inline-Stileigenschaft; die Rückgabe stellt den vorherigen Inline-Wert her (oder entfernt sie).
+ * @param {HTMLElement} el @param {string} eigenschaft @param {string} wert
+ * @returns {() => void}
+ */
+function leiheStil(el, eigenschaft, wert) {
+  const vorher = el.style.getPropertyValue(eigenschaft);
+  const prio = el.style.getPropertyPriority(eigenschaft);
+  el.style.setProperty(eigenschaft, wert);
+  return () => (vorher ? el.style.setProperty(eigenschaft, vorher, prio) : el.style.removeProperty(eigenschaft));
+}
 
 /**
  * Zeigt die Ziele eines Teils als frei (oder nimmt die Anzeige zurück). Ziele werden dabei fokussierbar,
- * mit role="button" und einem Namen; was sie vorher schon hatten, bleibt unberührt.
+ * mit role="button" und einem Namen; was sie vorher schon hatten, bleibt unberührt (geliehen).
  * @param {HTMLElement | null} teil
  */
 function zeigeZiele(teil) {
-  for (const z of freieZiele) {
+  for (const [z, rueckgabe] of freieZiele) {
     z.classList.remove("ziel-frei", "ziel-ueber");
-    if (!(z instanceof HTMLElement)) continue;
-    for (const [attr, merker] of GELIEHEN) {
-      if (z.dataset[merker] === "") {
-        z.removeAttribute(attr);
-        delete z.dataset[merker];
-      }
-    }
+    for (const gib of rueckgabe.reverse()) gib();
   }
   freieZiele.clear();
   if (!teil) return;
   for (const z of zieleVon(teil)) {
     beobachteZiel(z);
     z.classList.add("ziel-frei");
+    /** @type {(() => void)[]} */
+    const rueckgabe = [];
     if (z instanceof HTMLElement) {
-      /** @param {string} attr @param {string} merker @param {string} wert */
-      const leihe = (attr, merker, wert) => {
-        if (z.hasAttribute(attr)) return;
-        z.setAttribute(attr, wert);
-        z.dataset[merker] = "";
-      };
-      if (!istFokussierbar(z)) leihe("tabindex", "lsTabindex", "0");
-      if (!(z instanceof HTMLButtonElement)) leihe("role", "lsRole", "button");
-      leihe("aria-label", "lsLabel", z.getAttribute("name") || "Ablage");
+      if (!istFokussierbar(z)) rueckgabe.push(leihe(z, "tabindex", "0"));
+      if (!(z instanceof HTMLButtonElement)) rueckgabe.push(leihe(z, "role", "button"));
+      rueckgabe.push(leihe(z, "aria-label", z.getAttribute("name") || "Ablage"));
     }
-    freieZiele.add(z);
+    freieZiele.set(z, rueckgabe);
   }
 }
 

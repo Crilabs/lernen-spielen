@@ -6,7 +6,7 @@
 
 import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
 import { sprich } from "../kern/stimme.js";
-import { schonGesagt, merkeGesagt } from "../kern/sitzung.js";
+import { schonGesagt, sageEinmal } from "../kern/sitzung.js";
 import { GRUND_CSS, MASSE, definiere } from "./stil.js";
 import { findeSpiel } from "./knopf.js";
 
@@ -35,7 +35,7 @@ const PAUSE_CSS = `
   top: 8rem;
   left: 0;
   right: 0;
-  bottom: calc(${UNTEN + MASSE.pilleHaupt + 6}rem + env(safe-area-inset-bottom, 0rem));
+  bottom: calc(${UNTEN + MASSE.pilleGross + 6}rem + env(safe-area-inset-bottom, 0rem));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,7 +64,7 @@ const PAUSE_CSS = `
   gap: 8rem;
 }
 .aktionen:focus { outline: none; }
-a.alle { --ls-knopf: ${MASSE.pilleHaupt}rem; }
+a.alle { --ls-knopf: ${MASSE.pilleGross}rem; }
 `;
 
 export class LsPause extends HTMLElement {
@@ -78,7 +78,7 @@ export class LsPause extends HTMLElement {
       <div class="inhalt"><div class="karte leer"><slot></slot></div></div>
       <div class="aktionen" tabindex="-1">
         <a class="knopf alle" href="${HAUS_HREF}" aria-label="Alle Spiele" draggable="false"><span class="form neben pille"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span><span class="wort">Alle Spiele</span></span></a>
-        <ls-knopf class="weiter" symbol="zurueck.svg" name="Weiter" wort="Weiter" groesse="haupt" gespiegelt></ls-knopf>
+        <ls-knopf class="weiter" symbol="zurueck.svg" name="Weiter" wort="Weiter" groesse="gross" gespiegelt></ls-knopf>
       </div>`;
     this.karte = /** @type {HTMLElement} */ (wurzel.querySelector(".karte"));
     const slot = /** @type {HTMLSlotElement} */ (wurzel.querySelector("slot"));
@@ -137,7 +137,8 @@ export class LsPause extends HTMLElement {
     loese("weiter");
   }
 
-  // Der Link navigiert sofort (linkKlick speichert vorher); der Name wird nur beim ersten Tippen und bei Ton an gesprochen.
+  // Der Link navigiert sofort (linkKlick speichert vorher); der Name wird nur beim ersten Tippen und bei Ton an
+  // gesprochen (sageEinmal: bricht Inhalt ihn ab, kommt er beim nächsten Tippen).
   async sagAlle() {
     const name = "Alle Spiele";
     if (schonGesagt(name)) return;
@@ -148,8 +149,7 @@ export class LsPause extends HTMLElement {
     }
     const spiel = findeSpiel(this);
     if (spiel && einstellung(`ton.${spiel}`, true) === false) return;
-    merkeGesagt(name);
-    sprich(name);
+    sageEinmal(name, sprich); // gilt als gesagt, sobald er beginnt; nur ein Abbruch durch Inhalt nimmt das zurück
   }
 }
 

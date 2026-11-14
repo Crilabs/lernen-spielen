@@ -166,16 +166,23 @@ img, svg { -webkit-user-drag: none; }
 }
 /* Tastaturfokus: eine Tinte-Linie mit Abstand, deutlich anders als der Sonnenring des angehobenen Teils. */
 .teil:focus-visible:not(.angehoben) { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.8rem; }
-.teil.gedrueckt {
-  transform: translateY(0.3rem);
-  box-shadow: var(--ls-schatten-unten);
-}
 /* Markiert (Sonnenring, z. B. Hilfe Stufe 2), aber noch drückbar: Ring und Tinte-Kante wie .markiert, darunter
    der Schatten, um die Kante verlängert (sonst überdeckt der Schatten von .teil die Tinte-Kante). */
 .teil.markiert {
   box-shadow:
     0 0 0 1.1rem var(--ls-tinte),
     0 1.7rem 0 0 var(--ls-neben-schatten);
+}
+/* Gedrückt sinkt jedes Teil ein (0,3 rem, Schatten 0,3 rem kürzer), auch ein markiertes: steht deshalb nach
+   .teil.markiert. */
+.teil.gedrueckt {
+  transform: translateY(0.3rem);
+  box-shadow: var(--ls-schatten-unten);
+}
+.teil.markiert.gedrueckt {
+  box-shadow:
+    0 0 0 1.1rem var(--ls-tinte),
+    0 1.4rem 0 0 var(--ls-neben-schatten);
 }
 .teil.angehoben {
   transform: translateY(-1rem);
@@ -186,6 +193,9 @@ img, svg { -webkit-user-drag: none; }
   z-index: 20;
 }
 .gezogen { z-index: 40; }
+/* Perlenstab als Teil: Papierkarte mit 11 rem Tippfläche, darin der Stab (Dicke = Höhe minus Polster und
+   Kontur, 6,4 rem). Ohne dieses Grundmaß füllte der Stab die ganze Karte. Ein Spiel darf es überschreiben. */
+ls-perlenstab.teil { height: 11rem; padding: 2rem 2.4rem; }
 /* Liegt fest an seinem Platz (nicht mehr ziehbar): flach, zum Ansehen. */
 .teil.gesetzt { box-shadow: none; cursor: default; }
 .teil.gezogen { cursor: grabbing; }

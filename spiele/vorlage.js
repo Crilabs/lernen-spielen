@@ -9,11 +9,13 @@
 //
 // SO WIRD DARAUS EIN SPIEL
 //  1. vorlage.html und vorlage.js nach spiele/<id>.html und spiele/<id>.js kopieren; in der HTML-Datei das
-//     Modul umbenennen und an <ls-leiste> spiel="<id>", fach und titel setzen.
+//     Modul umbenennen (<script src="<id>.js">), den <title> auf den Spielnamen setzen und an <ls-leiste>
+//     spiel="<id>", fach und titel setzen.
 //  2. Eintrag in spiele/spiele.json (id, titel, thema, kategorie, symbol, datei, text) mit `arten` wie ARTEN
 //     unten (Aufgabenarten, Zahlenraum, Stufen; Schema in spiele/aufgabenarten.js › darstellbar). Erst mit dem
 //     Eintrag erscheint das Spiel auf der Startseite und schreibt den Lernstand. Die Vorlage selbst steht
-//     nicht in spiele.json und läuft deshalb immer als Vorschau (schreibt nie).
+//     nicht in spiele.json und läuft deshalb immer als Vorschau (schreibt nie); das steht dann einmal im
+//     Protokoll („<id>: nicht in spiele.json – Vorschau, schreibt nicht“).
 //  3. SPIELWELT und AUFGABE ersetzen. Jeder gesprochene Satz steht als feste Zeichenkette direkt im Aufruf
 //     blase.sage oder sprich (wie im `erzaehler` unten) oder als Daten (lernplan.json, einfuehrungen/*.json),
 //     nie in einer Variablen. Keine zur Laufzeit zusammengesetzten Sätze mit Zahlen: die findet
@@ -214,9 +216,7 @@ function stelleAufgabe(aufgabe, melde) {
     loeser.get(teil)?.();
     loeser.delete(teil);
     teil.classList.remove("markiert");
-    teil.classList.add("gesetzt");
-    teil.removeAttribute("tabindex");
-    teil.removeAttribute("role");
+    teil.classList.add("gesetzt"); // loesen hat tabindex und role schon zurückgegeben
     gelegt.push(wert);
   };
 
@@ -250,12 +250,11 @@ function stelleAufgabe(aufgabe, melde) {
   }
 
   function fertig() {
-    // Die übrigen Stäbe sind nicht mehr ziehbar: flach (6.4, Schatten heißt drückbar) und aus der Tab-Folge.
+    // Die übrigen Stäbe sind nicht mehr ziehbar: flach (6.4, Schatten heißt drückbar); loesen nimmt sie aus der
+    // Tab-Folge (gibt tabindex und role zurück).
     for (const [stab, loesen] of loeser) {
       loesen();
       stab.classList.add("gesetzt");
-      stab.removeAttribute("tabindex");
-      stab.removeAttribute("role");
     }
     loeser.clear();
     frei.hidden = true;
@@ -320,20 +319,29 @@ hilfe.addEventListener("hilfe", () => hilfeTippen?.());
  * @returns {Promise<{ key: string, versuche: number, hilfe: number, ms: number }>}
  */
 function spieleAufgabe(aufgabe) {
-  return new Promise((fertig) => {
+  return new Promise((fertig, fehler) => {
     const start = Date.now();
     let versuche = 0;
     let stufe = 0;
-    const a = stelleAufgabe(aufgabe, {
-      passtNicht() {
-        versuche++;
-        if (versuche === 2 && stufe === 0) hilfe.leuchte();
-      },
-      geloest(key) {
-        hilfeTippen = null;
-        fertig({ key, versuche, hilfe: stufe, ms: Date.now() - start });
-      },
-    });
+    /** @type {{ hilfe: (stufe: 1 | 2) => void }} */
+    let a;
+    try {
+      a = stelleAufgabe(aufgabe, {
+        passtNicht() {
+          versuche++;
+          if (versuche === 2 && stufe === 0) hilfe.leuchte();
+        },
+        geloest(key) {
+          hilfeTippen = null;
+          fertig({ key, versuche, hilfe: stufe, ms: Date.now() - start });
+        },
+      });
+    } catch (e) {
+      // Z. B. eine unbekannte Aufgabe: nicht im Versprechen verschlucken, start() fängt es (gehtNicht).
+      hilfeTippen = null;
+      fehler(e);
+      return;
+    }
     hilfeTippen = () => {
       stufe = Math.min(2, stufe + 1);
       a.hilfe(/** @type {1 | 2} */ (stufe));
@@ -470,17 +478,22 @@ async function spieleRunde(vorschau) {
 
 // --- Start ---------------------------------------------------------------------------------------
 async function start() {
-  await leiste.bereitet; // Ton-Einstellung geladen
+  await leiste.bereit(); // Ton-Einstellung geladen
   if (params.has("eltern")) return elternansicht();
   // Vorschau: jeder Vorschau-Parameter, ein nicht eingetragenes Spiel, oder Lernplan/Spiele nicht ladbar.
-  const vorschau = ["pause", "hinweis", "eltern", "einfuehrung"].some((p) => params.has(p))
-    || !(await ladeCtx().then(eingetragen, () => false));
+  const c = await ladeCtx().catch(() => null);
+  const nichtEingetragen = c !== null && !eingetragen(c);
+  if (nichtEingetragen) protokoll(`${SPIEL_ID}: nicht in spiele.json – Vorschau, schreibt nicht`);
+  const vorschau = ["pause", "hinweis", "eltern", "einfuehrung"].some((p) => params.has(p)) || !c || nichtEingetragen;
   if (params.has("pause") || params.has("hinweis")) {
-    await ladeCtx().catch(() => null);
     const andere = (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id !== SPIEL_ID)?.id ?? null;
     await zeigePause({ hinweis: params.has("hinweis") ? params.get("hinweis") || andere : null });
   }
   await spieleRunde(vorschau);
 }
 
-start();
+// Jeder Fehler (auch aus stelleAufgabe) landet hier: ins Protokoll, der Erzähler sagt es ruhig, Haus bleibt erreichbar.
+start().catch((e) => {
+  protokoll(`${SPIEL_ID}: ${/** @type {any} */ (e)?.message ?? e}`);
+  erzaehler.gehtNicht();
+});

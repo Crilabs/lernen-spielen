@@ -1,15 +1,17 @@
 // <ls-knopf symbol="haus.svg" name="Alle Spiele" groesse="bedien" gespiegelt>
-// <ls-knopf art="haupt" symbol="zurueck.svg" wort="Weiter" gespiegelt>
-// Grundknopf nach der Farbwelt. Zwei Arten:
-// - Nebenknopf (art="neben", Vorgabe): Papier, Tinte-Kontur, heller Schatten; rund mit Symbol allein.
-// - Hauptknopf (art="haupt"): Tinte gefüllt, Symbol und Wort in Papier, Pillenform (Weiter, Fertig).
-// Mit `wort` wird jeder Knopf zur Pille mit sichtbarem Wort. Größe: `groesse="bedien|haupt|klein"`
-// (rund 11/16/8 rem, Pille 11/14 rem hoch); die Tippfläche ist immer mindestens 11 rem.
-// Beim ersten Tippen je Sitzung spricht er seinen Namen (nur bei Ton an; `stumm`: nie).
+// <ls-knopf art="haupt" wort="Fertig">
+// Grundknopf nach der Farbwelt. Zwei Arten (`art` = Gestalt):
+// - Nebenknopf (art="neben", Vorgabe): Papier, Tinte-Kontur, Schatten in Tinte weich; rund mit Symbol allein.
+// - Hauptknopf (art="haupt"): Tinte gefüllt, Symbol und Wort in Papier, Pillenform (z. B. Fertig).
+// Mit `wort` wird jeder Knopf zur Pille mit sichtbarem Wort. Größe (`groesse`, unabhängig von `art`):
+// `groesse="bedien|gross|klein"` (rund 11/16/8 rem; Pille 11 rem hoch, mit gross 14 rem wie die Pausenknöpfe);
+// die Tippfläche ist immer mindestens 11 rem.
+// Beim ersten Tippen je Sitzung spricht er seinen Namen (nur bei Ton an; `stumm`: nie). Bricht anderer
+// Inhalt den Namen ab (z. B. die Probe der Hilfe), gilt er nicht als gesagt und kommt beim nächsten Tippen.
 
 import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
 import { sprich } from "../kern/stimme.js";
-import { schonGesagt, merkeGesagt } from "../kern/sitzung.js";
+import { schonGesagt, sageEinmal } from "../kern/sitzung.js";
 import { GRUND_CSS, MASSE, bild, definiere } from "./stil.js";
 
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
@@ -89,8 +91,8 @@ export class LsKnopf extends HTMLElement {
     this.knopf.setAttribute("aria-label", this.name);
     const g = this.getAttribute("groesse");
     const rem = pille
-      ? g === "haupt" ? MASSE.pilleHaupt : MASSE.pille
-      : g === "haupt" ? MASSE.haupt : g === "klein" ? MASSE.klein : MASSE.bedien;
+      ? g === "gross" ? MASSE.pilleGross : MASSE.pille
+      : g === "gross" ? MASSE.gross : g === "klein" ? MASSE.klein : MASSE.bedien;
     this.style.setProperty("--ls-knopf", `${rem}rem`);
   }
 
@@ -98,12 +100,14 @@ export class LsKnopf extends HTMLElement {
     const name = this.name;
     if (this.hasAttribute("stumm")) return; // der Besitzer spricht selbst (z. B. die Leiste beim Ton-Umschalten)
     if (!name || schonGesagt(name)) return;
-    await ladeEinstellungen();
+    try {
+      await ladeEinstellungen();
+    } catch {
+      // Einstellungen nicht ladbar: Ton gilt als an.
+    }
     const spiel = findeSpiel(this);
-    const tonAn = spiel ? einstellung(`ton.${spiel}`, true) : true;
-    if (!tonAn) return;
-    merkeGesagt(name);
-    sprich(name);
+    if (spiel && einstellung(`ton.${spiel}`, true) === false) return;
+    await sageEinmal(name, sprich);
   }
 }
 

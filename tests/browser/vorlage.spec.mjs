@@ -10,8 +10,9 @@
 // der nicht passt, gleitet zurück, Hilfe leuchtet nach dem zweiten Versuch, Hilfe Stufe 1 (Probe) und Stufe 2
 // (Lösung), Meldung mit Hilfe-Stufe, Folge zwischen den Aufgaben ohne Weiter (läuft von selbst, Tippen
 // überspringt), Pause am Rundenende, Weiter startet die nächste Runde, keine Konsolenfehler, die Vorschau schreibt
-// nichts (Speicher unverändert bis auf das Protokoll). Dazu der Schreibweg eines eingetragenen Spiels (spiele.json
-// wird im Browser um die Vorlage ergänzt): eine Aufgabe landet im Lernstand.
+// nichts (Speicher unverändert bis auf das Protokoll, das einmal „nicht in spiele.json“ vermerkt). Dazu der
+// Schreibweg eines eingetragenen Spiels (spiele.json wird im Browser um die Vorlage ergänzt): eine Aufgabe landet
+// im Lernstand. Name beim ersten Tippen: die Probe der Hilfe hat Vorrang. Fehlerweg: eine unbekannte Aufgabe.
 
 import { createRequire } from "node:module";
 import http from "node:http";
@@ -186,6 +187,9 @@ async function lauf(typ, name, groesse, basis) {
     await tippeHilfe(seite);
     const stufe1 = await seite.evaluate(() => ({ frei: document.querySelector(".rinne .frei").classList.contains("markiert"), teile: document.querySelectorAll("#tablett .markiert").length }));
     pruefe(L, "Hilfe Stufe 1: Probe an der freien Stelle, keine Lösung", stufe1.frei && stufe1.teile === 0 && /Zähl die Perlen/.test(await blasenText(seite)), JSON.stringify(stufe1));
+    await pause(200);
+    const gesagt1 = await seite.evaluate(() => JSON.parse(sessionStorage.getItem("ls-gesagt") ?? "[]"));
+    pruefe(L, "erstes Tippen auf Hilfe: die Probe hat Vorrang, „Hilfe“ gilt noch nicht als gesagt", !gesagt1.includes("Hilfe"), JSON.stringify(gesagt1));
     await pause(1100);
     await bild(seite, "hilfe-1", name, groesse);
     await tippeHilfe(seite);
@@ -236,7 +240,9 @@ async function lauf(typ, name, groesse, basis) {
     const nachher = await speicher(seite);
     pruefe(L, "Vorschau schreibt nichts (Speicher bis auf das Protokoll unverändert)", JSON.stringify(nachher) === JSON.stringify(vorher), `${JSON.stringify(vorher)} → ${JSON.stringify(nachher)}`);
     const protokoll = await seite.evaluate(() => JSON.parse(localStorage.getItem("protokoll") ?? "[]"));
-    pruefe(L, "Protokoll ohne Fehler (höchstens fehlende Audiodateien)", protokoll.every((z) => /Keine Audiodatei/.test(z)), protokoll.join(" | "));
+    const vorschauZeilen = protokoll.filter((z) => z.includes("vorlage: nicht in spiele.json – Vorschau, schreibt nicht"));
+    pruefe(L, "Protokoll: einmal „nicht in spiele.json – Vorschau“, sonst höchstens fehlende Audiodateien",
+      vorschauZeilen.length === 1 && protokoll.every((z) => /Keine Audiodatei/.test(z) || vorschauZeilen.includes(z)), protokoll.join(" | "));
 
     // --- Vorschau-Parameter -----------------------------------------------------------------------
     // spiele.json ist leer, bis das erste neue Spiel eingetragen ist: für den Hinweis ein Beispielspiel ergänzen.
@@ -288,8 +294,31 @@ async function lauf(typ, name, groesse, basis) {
     const lernstand = await s4.evaluate(() => JSON.parse(localStorage.getItem("lernstand-kind-1-lernplan") ?? "{}"));
     const geschrieben = lernstand.aufgaben?.[`zerl:${n}:${e4}+${n - e4}`];
     // Mit Hilfe gelöst: steht im Lernstand als 0 (zählt nicht als gekonnt, L12), Fach 0.
+    const protokoll4 = await s4.evaluate(() => localStorage.getItem("protokoll") ?? "");
+    pruefe(L, "eingetragenes Spiel: kein Vorschau-Eintrag im Protokoll", !protokoll4.includes("nicht in spiele.json"), protokoll4);
     pruefe(L, "eingetragenes Spiel schreibt den Lernstand; mit Hilfe gelöst zählt nicht", Array.isArray(geschrieben?.h) && geschrieben.h.at(-1) === 0 && geschrieben.f === 0 && lernstand.themen?.["zerlegen-7"]?.z === "dran", JSON.stringify(lernstand).slice(0, 300));
     await echt.close();
+
+    // --- Fehlerweg: unbekannte Aufgabe → ruhiger Satz, Protokoll, kein unbehandelter Fehler --------
+    // Lernplan nicht ladbar → feste Vorschau-Aufgaben; deren Schlüssel im Browser durch einen unbekannten ersetzt.
+    const kaputt = await browser.newContext({ viewport: groesse });
+    await kaputt.route("**/spiele/lernplan.json", (route) => route.abort());
+    await kaputt.route("**/spiele/vorlage.js", async (route) => {
+      const antwort = await route.fetch();
+      const text = (await antwort.text()).replace('aufgaben: ["zerl:7:3+4"', 'aufgaben: ["unbekannt:1"');
+      await route.fulfill({ response: antwort, body: text });
+    });
+    const s5 = await kaputt.newPage();
+    const fehler5 = [];
+    s5.on("pageerror", (e) => fehler5.push(e.message));
+    await s5.goto(`${basis}/spiele/vorlage.html`, { waitUntil: "load" });
+    await s5.waitForFunction(() => document.getElementById("blase").text === "Das Spiel geht gerade nicht.", null, { timeout: 4000 }).catch(() => null);
+    await pause(200);
+    const f5 = await s5.evaluate(() => ({ text: document.getElementById("blase").text, protokoll: JSON.parse(localStorage.getItem("protokoll") ?? "[]") }));
+    pruefe(L, "unbekannte Aufgabe: „Das Spiel geht gerade nicht.“, im Protokoll, kein unbehandelter Fehler",
+      f5.text === "Das Spiel geht gerade nicht." && f5.protokoll.some((z) => /unbekannte Aufgabe unbekannt:1/.test(z)) && !f5.protokoll.some((z) => z.startsWith("Promise:")) && fehler5.length === 0,
+      `${f5.text} | ${f5.protokoll.join(" | ")} | ${fehler5.join(" | ")}`);
+    await kaputt.close();
 
     // --- Wenig Bewegung: Zurückgleiten ohne Bewegung ---------------------------------------------
     const ruhig = await browser.newContext({ viewport: groesse, reducedMotion: "reduce" });

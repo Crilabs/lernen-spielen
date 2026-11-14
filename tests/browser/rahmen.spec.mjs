@@ -65,7 +65,7 @@ async function oeffne(kontext, basis, fehlerListe) {
   seite.on("pageerror", (e) => fehlerListe.push(`Seitenfehler: ${e.message}`));
   seite.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole: ${m.text()}`); });
   await seite.goto(URL_VORSCHAU(basis), { waitUntil: "load" });
-  await seite.evaluate(() => document.getElementById("leiste").bereitet);
+  await seite.evaluate(() => document.getElementById("leiste").bereit());
   await seite.evaluate(() => document.fonts.ready);
   return seite;
 }
@@ -193,6 +193,48 @@ async function lauf(typ, name, groesse, basis) {
     const gesetzt = await seite.evaluate(() => [...document.querySelectorAll(".luecke .teil")].map((t) => t.dataset.wert).sort().join(","));
     pruefe(L, "passende Teile liegen in den Lücken", gesetzt === "1,2", gesetzt);
 
+    // loesen gibt alles zurück, was ziehbar gesetzt hat; was das Element selbst hatte, bleibt.
+    const geloest = await seite.evaluate(async () => {
+      const { ziehbar } = await import("/spiele/rahmen/ziehen.js");
+      const bild = (el) => JSON.stringify([el.getAttributeNames().filter((a) => a !== "style").sort().map((a) => [a, el.getAttribute(a)]), el.style.cssText]);
+      const nackt = document.createElement("div");
+      const eigen = document.createElement("div");
+      eigen.setAttribute("role", "listitem");
+      eigen.setAttribute("tabindex", "-1");
+      eigen.setAttribute("aria-pressed", "mixed");
+      eigen.style.touchAction = "pan-x";
+      document.body.append(nackt, eigen);
+      const vorher = [bild(nackt), bild(eigen)];
+      const l1 = ziehbar(nackt, { ziele: [] });
+      const l2 = ziehbar(eigen, { ziele: [] });
+      const gesetzt = nackt.getAttribute("role") === "button" && nackt.getAttribute("tabindex") === "0" && nackt.style.touchAction === "none";
+      l1();
+      l2();
+      const nachher = [bild(nackt), bild(eigen)];
+      nackt.remove();
+      eigen.remove();
+      return { gesetzt, vorher, nachher };
+    });
+    pruefe(L, "loesen gibt tabindex, role, aria-pressed, touch-action, user-select zurück (eigene Werte bleiben)",
+      geloest.gesetzt && JSON.stringify(geloest.vorher) === JSON.stringify(geloest.nachher), JSON.stringify(geloest));
+
+    // Ein markiertes Teil (Sonnenring) sinkt beim Drücken ein wie jedes Teil: kürzerer Schatten.
+    const sinkt = await seite.evaluate(() => {
+      const t = document.createElement("div");
+      t.className = "teil markiert";
+      t.style.transition = "none"; // sonst meldet getComputedStyle den Anfang des Übergangs
+      document.body.append(t);
+      const schatten = () => getComputedStyle(t).boxShadow;
+      const oben = schatten();
+      t.classList.add("gedrueckt");
+      const unten = schatten();
+      const transform = getComputedStyle(t).transform;
+      t.remove();
+      return { oben, unten, transform };
+    });
+    pruefe(L, "markiertes Teil sinkt beim Drücken ein (Schatten kürzer, 0,3 rem tiefer)",
+      sinkt.oben !== sinkt.unten && sinkt.transform !== "none", JSON.stringify(sinkt));
+
     // --- Pause ---------------------------------------------------------------------------------
     await seite.evaluate(() => {
       window.zaehler = 0;
@@ -228,7 +270,7 @@ async function lauf(typ, name, groesse, basis) {
 
     if (SHOTS) {
       await seite.reload({ waitUntil: "load" });
-      await seite.evaluate(() => document.getElementById("leiste").bereitet);
+      await seite.evaluate(() => document.getElementById("leiste").bereit());
       await seite.evaluate(() => document.fonts.ready);
       await mkdir(SHOTS, { recursive: true });
       await seite.screenshot({ path: join(SHOTS, `vorschau-${name}-${groesse.width}x${groesse.height}.png`) });
@@ -242,7 +284,7 @@ async function lauf(typ, name, groesse, basis) {
     await pause(300);
     const aus = await seite2.evaluate(() => document.getElementById("leiste").ton);
     await seite2.reload({ waitUntil: "load" });
-    await seite2.evaluate(() => document.getElementById("leiste").bereitet);
+    await seite2.evaluate(() => document.getElementById("leiste").bereit());
     const nach = await seite2.evaluate(() => ({ ton: document.getElementById("leiste").ton, name: document.getElementById("leiste").tonKnopf.getAttribute("name") }));
     pruefe(L, "Ton aus → neu laden → bleibt aus", vorher === true && aus === false && nach.ton === false && nach.name === "Ton aus", `${vorher} ${aus} ${JSON.stringify(nach)}`);
     await seite2.close();
