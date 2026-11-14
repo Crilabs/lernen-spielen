@@ -4,8 +4,10 @@
 // - Nebenknopf (art="neben", Vorgabe): Papier, Tinte-Kontur, Schatten in Tinte weich; rund mit Symbol allein.
 // - Hauptknopf (art="haupt"): Tinte gefüllt, Symbol und Wort in Papier, Pillenform (z. B. Fertig).
 // Mit `wort` wird jeder Knopf zur Pille mit sichtbarem Wort. Größe (`groesse`, unabhängig von `art`):
-// `groesse="bedien|gross|klein"` (rund 11/16/8 rem; Pille 11 rem hoch, mit gross 14 rem wie die Pausenknöpfe);
-// die Tippfläche ist immer mindestens 11 rem. tabindex="0" am Knopf: WebKit (Safari, macOS-Vorgabe) erreicht
+// `groesse="bedien|gross|klein"` (rund 11/16/8 rem; Pille 11 rem hoch, mit gross 14 rem wie die Pausenknöpfe,
+// mit klein 8 rem, nur für Erwachsene, z. B. die Leiste im Elternbereich);
+// `achtung`: Knopf in Beere samt Schatten, nur im Elternbereich (Löschen, Zurücksetzen);
+// die Tippfläche ist mindestens 11 rem, bei der kleinen Pille (nur Erwachsene) 9 rem. tabindex="0" am Knopf: WebKit (Safari, macOS-Vorgabe) erreicht
 // Knöpfe ohne tabindex nicht mit Tab.
 // Beim ersten Tippen je Sitzung spricht er seinen Namen (nur bei Ton an; `stumm`: nie). Bricht anderer
 // Inhalt den Namen ab (z. B. die Probe der Hilfe), gilt er nicht als gesagt und kommt beim nächsten Tippen.
@@ -36,6 +38,14 @@ export function findeSpiel(el) {
 
 const KNOPF_CSS = `
 :host { line-height: 0; }
+/* Kleine Pille, nur im Elternbereich: Tippfläche 9 statt 11 rem hoch, damit eine lange Leiste ohne Scrollen passt. */
+.knopf.klein-pille { min-height: 9rem; }
+/* Achtung (nur Elternbereich: Löschen, Zurücksetzen): alles in Beere, auch der Schatten. */
+:host([achtung]) {
+  --ls-tinte: var(--ls-beere);
+  --ls-tinte-weich: var(--ls-beere-weich);
+  --ls-haupt-schatten: var(--ls-beere-tief);
+}
 `;
 
 export class LsKnopf extends HTMLElement {
@@ -91,8 +101,9 @@ export class LsKnopf extends HTMLElement {
     this.form.classList.toggle("gespiegelt", this.hasAttribute("gespiegelt"));
     this.knopf.setAttribute("aria-label", this.name);
     const g = this.getAttribute("groesse");
+    this.knopf.classList.toggle("klein-pille", pille && g === "klein");
     const rem = pille
-      ? g === "gross" ? MASSE.pilleGross : MASSE.pille
+      ? g === "gross" ? MASSE.pilleGross : g === "klein" ? MASSE.pilleKlein : MASSE.pille
       : g === "gross" ? MASSE.gross : g === "klein" ? MASSE.klein : MASSE.bedien;
     this.style.setProperty("--ls-knopf", `${rem}rem`);
   }

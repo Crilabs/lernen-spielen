@@ -153,11 +153,13 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   - **Zum Wiederholen:** die zuletzt gekonnten Themen (wenige, nach Datum).
   - Je Thema die Anleitung aufklappbar; Themen ohne Datei zeigen den Einzeiler aus dem Lernplan. Keine Zahlen, kein
     Lehrplanbezug, kein Fortschritt (das steht im Elternbereich); Sprache für beide lesbar.
-  - **Zum Ausdrucken (Christian): „Küchenzettel“** – ein Knopf „Drucken“ erzeugt eine Druckansicht (eine A4-Seite,
-    Druck-Stylesheet): die Themen von „Gerade dran“ mit je einer kurzen Form (Titel, „Ihr braucht“, die Schritte,
-    „Darauf kommt es an“), schlicht in Tinte auf Weiß, gut lesbar, zum Aufhängen in der Küche. Über den Druckdialog
-    lässt sie sich auch als PDF speichern. Nur wo das Gerät drucken kann (`faehigkeiten`, Annahme: Desktop und
-    Browser; auf dem Tablet über das Teilen-Menü, sobald die Mobil-Fassung kommt).
+  - **PDF je Thema (Christian, 2026-11-14; ersetzt den „Küchenzettel“):** Im aufgeklappten Thema steht ein Knopf „PDF“.
+    Er druckt ein A4-Blatt mit allen Formen des Themas, voll (Ihr braucht, Schritte, Darauf kommt es an,
+    Leichter/Schwerer), in der Reihenfolge Am Tisch, In Bewegung, Unterwegs. Stil wie die Seite (Andika, Tinte, Linien
+    und Schrittkreise im Tief-Ton des Fachs), ohne Flächen. Über den Druckdialog als PDF speichern; der Dateiname ist
+    „Mit echten Dingen – <Thema>“. Nur wo das Gerät drucken kann (`faehigkeiten`, Annahme: Desktop und Browser; auf
+    dem Tablet über das Teilen-Menü, sobald die Mobil-Fassung kommt). Design:
+    `docs/superpowers/specs/2026-11-14-echte-dinge-pdf-je-thema-design.md`.
 
 - **Am Rundenende eines Spiels** als ruhiges Angebot in der Pause, neben „Alle Spiele“ und „Weiter“ (kein Muss, keine
   Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**; führt zur selben Seite `echt.html` (vorher wird
@@ -187,10 +189,11 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   höchstens ein weiteres unter „Bald“. Für das Kind ändert das nichts (dort bleiben Themen ohne Spiel verborgen, bis
   die Startseite auch Themen ohne Spiel zeigt).
 - **Übersicht:** `spiele/mit-echten-dingen.html`, Zugang über „Mit echten Dingen“ in der Navigation des
-  Elternbereichs; Zurück führt dorthin zurück (die PIN wird dann erneut abgefragt). Küchenzettel: nur Themen von
-  „Gerade dran“ **mit Anleitung** (die Einzeiler des Lernplans sind Elternsprache), je die gemerkte Form in Kurzform,
-  höchstens sechs, zwei Spalten; die Seite misst vor dem Drucken und lässt Kästen weg, bis alles auf eine A4-Seite
-  passt. Ohne Anleitung kein Drucken. Drucken über `drucke()` in `spiele/kern/geraet.js` (Fähigkeit `drucken`: Browser
+  Elternbereichs; Zurück führt dorthin zurück (die PIN wird dann erneut abgefragt). PDF je Thema: der Knopf nur an
+  Themen **mit Anleitung** (die Einzeiler des Lernplans sind Elternsprache); das Blatt baut
+  `spiele/rahmen/echte-dinge-blatt.js` (ohne DOM, `tests/echte-dinge-blatt.test.mjs`), die Seite setzt es in `#blatt`,
+  misst und setzt es eine Schriftstufe kleiner, wenn es länger als eine Seite ist (passt es dann nicht, folgt eine
+  zweite Seite; keine Form wird geteilt). Drucken über `drucke()` in `spiele/kern/geraet.js` (Fähigkeit `drucken`: Browser
   und Desktop ja, Android/iOS nein).
 - **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Bild → Prüfung E1–E11 durch einen
   frischen Agenten → höchstens 3 Runden → Datei, Verzeichnis, Kosten in `spiele/mit-echten-dingen/kosten.json`).

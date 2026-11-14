@@ -17,6 +17,7 @@ R.pruefeBestand();
 
 const { bestand, zeichne, ablauf } = R;
 const { gelenkeFuer, ANSICHTEN } = await import("../spiele/runde/gelenke.js");
+const { zeichnePose } = await import("../spiele/runde/zeichne.js");
 const KINDER = ["ela", "kofi", "lena", "timo"];
 
 test("die Runde ist angemeldet", () => {
@@ -83,9 +84,30 @@ test("jede Bewegung läuft für jedes Kind durch, kein Schritt über 1200 ms", (
   for (const kind of bestand.kinder.values()) {
     for (const b of bestand.bewegungen.values()) {
       if (!kind.ansichten[b.ansicht]) continue;
+      if (b.nur && b.nur !== kind.bewegt) {
+        assert.throws(() => ablauf(kind.id, b.id), /nur für Kinder/, `${kind.id}/${b.id}`);
+        continue;
+      }
       const folge = ablauf(kind.id, b.id);
       assert.ok(folge.length > 1, `${kind.id}/${b.id}`);
       for (const s of folge) assert.ok(s.ms > 0 && s.ms <= 1200, `${kind.id}/${b.id}: ${s.ms} ms`);
     }
   }
+});
+
+test("jede Zwischenpose jeder Bewegung lässt sich zeichnen, mit Luftzeichen, ohne NaN", () => {
+  let n = 0;
+  for (const kind of bestand.kinder.values()) {
+    for (const b of bestand.bewegungen.values()) {
+      if (!kind.ansichten[b.ansicht] || (b.nur && b.nur !== kind.bewegt)) continue;
+      const folge = ablauf(kind.id, b.id);
+      for (let i = 0; i < folge.length; i++) {
+        const svg = zeichnePose(kind.id, folge[i].pose, { blick: i % 2 ? "links" : "rechts" });
+        assert.doesNotMatch(svg, /undefined|NaN|\sid=/, `${kind.id}/${b.id}/${i}`);
+        for (const l of Object.keys(folge[i].pose.luft)) assert.ok(svg.includes(`data-zeichen="${l}"`), `${kind.id}/${b.id}/${i}: ${l}`);
+        n += 1;
+      }
+    }
+  }
+  assert.ok(n > 300, `${n} Posen`);
 });

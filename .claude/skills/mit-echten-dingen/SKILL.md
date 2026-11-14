@@ -144,5 +144,5 @@ Die App liest die Datei über das Verzeichnis (`verzeichnis.json`, nur freigegeb
 die eigene Seite der Anleitung `spiele/echt.html?thema=<id>`; die Karte „Mit echten Dingen“ auf der Startseite
 (`spiele/start/karten.js`, mit dem Titel der Anleitung) und im Regal; der Knopf auf der Fach-Seite; das ruhige Angebot
 in der Pause am Rundenende eines Spiels (`spiele/rahmen/pause.js`); die Übersicht für Erwachsene
-(`spiele/mit-echten-dingen.html`, Küchenzettel zum Drucken). Alle führen zu `echt.html`. Das Bild der Karte (`bild`)
+(`spiele/mit-echten-dingen.html`, je Thema ein PDF zum Drucken). Alle führen zu `echt.html`. Das Bild der Karte (`bild`)
 ist in der App noch nicht gebaut. Analoges Spielen zählt nie für den Lernstand.

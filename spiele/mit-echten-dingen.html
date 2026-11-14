@@ -14,9 +14,9 @@
    Ruhige Arbeitsseite wie der Elternbereich: Nebel als Grund, Papier als Fläche, Tinte für Schrift, flach (Schatten nur
    an Knöpfen). Die Fachkachel vor jedem Thema ist dieselbe wie in der Kopfleiste. Die Situationen tragen ihr Symbol
    (Tisch, Treppe, Weg), damit man auf einen Blick sieht, wo ein Spiel passt.
-   Drucken („Küchenzettel“): nur wo das Gerät drucken kann (kern/geraet.js) und nur, wenn ein Thema von „Gerade dran“
-   eine Anleitung hat. Der Druck zeigt nur #zettel: eine A4-Seite (vorher gemessen), Tinte auf Weiß, je Thema eine
-   kurze Form. */
+   PDF je Thema (docs/superpowers/specs/2026-11-14-echte-dinge-pdf-je-thema-design.md): ein Knopf „PDF“ im aufgeklappten
+   Thema, nur wo das Gerät drucken kann (kern/geraet.js) und nur bei Themen mit Anleitung. Der Druck zeigt nur #blatt:
+   ein A4-Blatt mit allen Formen, voll, im Stil der Seite (Andika, Tinte, Fachfarbe), ohne Flächen. */
 html, body { height: auto; }
 body { min-height: 100dvh; overflow: auto; -webkit-user-select: none; user-select: none; }
 .auswahl { -webkit-user-select: text; user-select: text; }
@@ -62,6 +62,8 @@ details[open] .pfeil { transform: translateY(0.8rem) rotate(225deg) scale(0.6); 
 
 /* Aufgeklappt: die Formen nebeneinander, jede mit ihrem Symbol; ohne Anleitung der Einzeiler aus dem Lernplan. */
 .inhalt { padding: 0.8rem 3rem 3.6rem 11.6rem; }
+/* PDF-Knopf: oben rechts im aufgeklappten Thema (nicht im Kopf, der ganz zum Aufklappen da ist). */
+.pdf-zeile { display: flex; justify-content: flex-end; margin: -1.6rem 0 1.6rem; }
 .inhalt .einzeiler { max-width: 70ch; }
 .spiele { display: grid; grid-template-columns: repeat(auto-fit, minmax(56rem, 1fr)); gap: 4rem 6rem; }
 .spiel h3 { display: flex; align-items: center; gap: 1.6rem; font-size: 3rem; line-height: 1.25; margin-bottom: 1.6rem; }
@@ -82,34 +84,40 @@ details[open] .pfeil { transform: translateY(0.8rem) rotate(225deg) scale(0.6); 
 
 @media (prefers-reduced-motion: reduce) { .pfeil { transition: none; } }
 
-/* --- Küchenzettel: eine A4-Seite, Tinte auf Weiß ------------------------------------------------
+/* --- PDF je Thema: ein A4-Blatt, ohne Flächen --------------------------------------------------
    Auch am Bildschirm gesetzt (unsichtbar, außerhalb), in der Breite der bedruckbaren Fläche (210 − 2 × 14 mm), damit
-   die Seite vor dem Drucken messen kann, ob alles auf eine Seite passt (nur mm und pt, nichts hängt an rem). */
+   die Seite vor dem Drucken messen kann, ob alles auf eine Seite passt (nur mm und pt, nichts hängt an rem).
+   --fach (Tief-Ton des Fachs) setzt rahmen/echte-dinge-blatt.js an der Wurzel. */
 @page { size: A4 portrait; margin: 14mm 14mm 12mm; }
-#zettel { position: absolute; left: -10000px; top: 0; width: 182mm; visibility: hidden; pointer-events: none;
-  color: #000; background: #fff; font-family: "Andika", sans-serif; font-size: 9.5pt; line-height: 1.36; }
-#zettel header { display: flex; align-items: center; gap: 4mm; padding-bottom: 3mm; border-bottom: 0.4mm solid #000; margin-bottom: 5mm; }
-#zettel header img { width: 11mm; height: 11mm; }
-#zettel img { filter: grayscale(1) contrast(1.4); }
-#zettel h1 { font-size: 19pt; line-height: 1.1; }
-#zettel header p { font-size: 10pt; color: #333; }
-/* Zwei Spalten, die Kästen fließen, keiner wird geteilt. */
-#zettel .raster { column-count: 2; column-gap: 7mm; }
-#zettel article { break-inside: avoid; display: block; box-sizing: border-box; margin: 0 0 5mm;
-  border: 0.3mm solid #555; border-radius: 3mm; padding: 3.5mm 4.5mm; }
-#zettel .raster.eins { column-count: 1; }
-#zettel h2 { font-size: 12.5pt; line-height: 1.2; }
-#zettel h3 { display: flex; align-items: center; gap: 2mm; font-size: 10.5pt; font-weight: 400; margin: 1mm 0 2.5mm; }
-#zettel h3 img { width: 6mm; height: 6mm; }
-#zettel p { margin: 0 0 1.8mm; }
-#zettel ol { margin: 0 0 2mm; padding-left: 5mm; }
-#zettel li { margin: 0 0 0.8mm; }
-#zettel .kern { border-left: 0.8mm solid #000; padding-left: 2.5mm; margin: 0; }
-#zettel .kern b { display: block; }
+#blatt { position: absolute; left: -10000px; top: 0; width: 182mm; visibility: hidden; pointer-events: none;
+  color: #3B2A6B; background: none; font-family: "Andika", sans-serif; font-size: 9.5pt; line-height: 1.42;
+  -webkit-print-color-adjust: economy; print-color-adjust: economy; }
+#blatt.eng { font-size: 8.5pt; }
+#blatt header { display: flex; align-items: center; gap: 4.5mm; padding-bottom: 4mm; margin-bottom: 1mm; border-bottom: 0.5mm solid var(--fach); }
+#blatt .fachkachel { flex: none; width: 13mm; height: 13mm; box-sizing: border-box; border: 0.5mm solid #3B2A6B; border-radius: 2.8mm; background: none;
+  display: grid; place-items: center; }
+#blatt .fachkachel svg { width: 8.4mm; height: 8.4mm; }
+#blatt h1 { font-size: 20pt; line-height: 1.1; }
+#blatt header p { font-size: 11pt; color: #6B5C96; margin-top: 1mm; }
+#blatt article.form { break-inside: avoid; padding: 5mm 0 4.5mm; }
+#blatt article.form + article.form { border-top: 0.3mm solid #CFC4E3; }
+#blatt h2 { display: flex; align-items: center; gap: 2.6mm; font-size: 12.5pt; line-height: 1.2; margin-bottom: 3mm; }
+#blatt h2 img { flex: none; width: 8mm; height: 8mm; }
+#blatt .spalten { display: grid; grid-template-columns: 1.3fr 1fr; gap: 7mm; padding-left: 10.6mm; }
+#blatt p { margin: 0 0 2mm; text-wrap: pretty; }
+#blatt ol { list-style: none; padding: 0; margin: 0 0 1mm; counter-reset: schritt; }
+#blatt ol li { position: relative; counter-increment: schritt; padding-left: 7mm; margin-bottom: 1.6mm; }
+#blatt ol li::before { content: counter(schritt); position: absolute; left: 0; top: 0.2mm; width: 4.6mm; height: 4.6mm;
+  box-sizing: border-box; border: 0.3mm solid var(--fach); border-radius: 50%; display: grid; place-items: center;
+  font-size: 7.5pt; font-weight: 700; line-height: 1; color: var(--fach); }
+#blatt .kern { border-left: 0.8mm solid var(--fach); padding: 0.4mm 0 0.4mm 3mm; margin-bottom: 3.5mm; }
+#blatt .kern b { display: block; }
+#blatt .stufen { color: #6B5C96; }
+#blatt .stufen b { color: #3B2A6B; }
 @media print {
-  html, body { height: auto; min-height: 0; overflow: visible; background: #fff; }
-  body > :not(#zettel) { display: none !important; }
-  #zettel { position: static; left: auto; width: auto; visibility: visible; }
+  html, body { height: auto; min-height: 0; overflow: visible; background: none; }
+  body > :not(#blatt) { display: none !important; }
+  #blatt { position: static; left: auto; width: auto; visibility: visible; }
 }
 </style>
 </head>
@@ -121,19 +129,19 @@ details[open] .pfeil { transform: translateY(0.8rem) rotate(225deg) scale(0.6); 
       <h1>Mit echten Dingen</h1>
       <p>Kleine Spiele mit Dingen von zu Hause, für Kinder und Erwachsene zusammen. Sie passen zu dem, was gerade dran ist.</p>
     </div>
-    <ls-knopf id="drucken" symbol="drucken.svg" wort="Drucken" stumm hidden></ls-knopf>
   </header>
   <div id="inhalt" class="auswahl" aria-busy="true"></div>
 </main>
-<section id="zettel" aria-hidden="true"></section>
+<section id="blatt" aria-hidden="true"></section>
 
 <script type="module">
 import { sperreTouch, protokoll, esc } from "./lernspiel.js";
 import { themenMitEchtenDingen, ladeLernstand } from "./lernsteuerung.js";
 import { faehigkeiten, drucke } from "./kern/geraet.js";
-import { ladeVerzeichnis, ladeAnleitung, letzteForm, waehleForm } from "./rahmen/echte-dinge.js";
+import { ladeVerzeichnis, ladeAnleitung } from "./rahmen/echte-dinge.js";
 import { formHtml } from "./rahmen/anregung.js";
-import { blockHtml, kurzform, SITUATIONEN } from "./rahmen/markdown.js";
+import { SITUATIONEN } from "./rahmen/markdown.js";
+import { blattHtml, blattTitel } from "./rahmen/echte-dinge-blatt.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
 import "./rahmen/knopf.js";
 
@@ -165,7 +173,6 @@ try {
 const teile = themenMitEchtenDingen(ctx, stand);
 const alle = [...teile.dran, ...teile.bald, ...teile.wiederholen];
 const anleitungen = new Map(await Promise.all(alle.filter((t) => t.datei).map(async (t) => [t.id, await ladeAnleitung(t.fach, t.id)])));
-const letzte = await letzteForm();
 
 function fachkachel(fach) {
   const f = FACH[fach];
@@ -178,8 +185,11 @@ function themaHtml(t, offen) {
   const a = anleitungen.get(t.id);
   const formen = a?.formen ?? [];
   const zeichen = formen.map((f) => `<span class="situation"><img src="${SYMBOL(f.symbol)}" alt="">${esc(f.wort)}</span>`).join("");
+  const pdf = formen.length && kann.drucken
+    ? `<div class="pdf-zeile"><ls-knopf data-pdf="${esc(t.id)}" symbol="drucken.svg" wort="PDF" name="PDF: ${esc(t.name)}" groesse="klein" stumm></ls-knopf></div>`
+    : "";
   const inhalt = formen.length
-    ? `<div class="spiele">${formen.map((f) => `<article class="spiel"><h3><img src="${SYMBOL(f.symbol)}" alt=""><span>${esc(f.name)}<small>${esc(f.wort)}</small></span></h3>${formHtml(f)}</article>`).join("")}</div>`
+    ? `${pdf}<div class="spiele">${formen.map((f) => `<article class="spiel"><h3><img src="${SYMBOL(f.symbol)}" alt=""><span>${esc(f.name)}<small>${esc(f.wort)}</small></span></h3>${formHtml(f)}</article>`).join("")}</div>`
     : `<p class="einzeiler">${esc(t.eltern || "Zu diesem Thema gibt es noch kein Spiel mit echten Dingen.")}</p>`;
   return `<details class="thema"${offen ? " open" : ""}><summary>${fachkachel(t.fach)}
       <span class="name"><b>${esc(t.name)}</b><span>${esc(a?.titel || fachName(t.fach))}</span></span>
@@ -200,35 +210,38 @@ $("inhalt").innerHTML = teilHtml("Gerade dran", teile.dran, "Gerade ist kein The
   + teilHtml("Zum Wiederholen", teile.wiederholen);
 $("inhalt").removeAttribute("aria-busy");
 
-// --- Küchenzettel --------------------------------------------------------------------------------
-// Nur Themen von „Gerade dran“ mit einer Anleitung (die Einzeiler des Lernplans sind Elternsprache und fragen ab), je
-// eine kurze Form (die zuletzt gewählte), höchstens sechs. Danach wird gemessen: Passt es nicht auf eine A4-Seite,
-// fällt der letzte Kasten weg, bis es passt. Ohne einen einzigen Kasten gibt es kein Drucken.
-const ZETTEL_MAX = 6;
+// --- PDF je Thema ---------------------------------------------------------------------------------
+// Vor dem Druck: #blatt mit dem Thema füllen, Schrift und Bilder abwarten, messen. Ist es höher als eine Seite, eine
+// Schriftstufe kleiner; passt es dann noch nicht, geht es auf eine zweite Seite (keine Form wird geteilt). Der Titel
+// des Dokuments wird zum Dateinamen des PDFs und danach zurückgesetzt.
 const MM = 96 / 25.4;                       // CSS-Pixel je Millimeter
 const SEITE_HOEHE = (297 - 14 - 12 - 3) * MM; // bedruckbare Höhe (@page) mit 3 mm Luft
-function kasten(t) {
-  const f = waehleForm(anleitungen.get(t.id)?.formen ?? [], letzte);
-  if (!f) return "";
-  const html = blockHtml(kurzform(f), { ebene: 4 })
-    .replace(/<p><b>Darauf kommt es an:?<\/b>/, '<p class="kern"><b>Darauf kommt es an:</b>')
-    .replace(/<p>Ihr braucht:/, "<p><b>Ihr braucht:</b>");
-  return `<article><h2>${esc(t.name)}</h2><h3><img src="${SYMBOL(f.symbol)}" alt="">${esc(f.wort)}: ${esc(f.name)}</h3>${html}</article>`;
-}
-const zettel = $("zettel");
-zettel.innerHTML = `<header><img src="${SYMBOL("hand.svg")}" alt=""><div><h1>Mit echten Dingen</h1><p>Kleine Spiele zu dem, was gerade dran ist</p></div></header>
-  <div class="raster">${teile.dran.map(kasten).filter(Boolean).slice(0, ZETTEL_MAX).join("")}</div>`;
-const raster = zettel.querySelector(".raster");
-await document.fonts.ready;
-await Promise.all([...zettel.querySelectorAll("img")].map((i) => (i.complete ? null : new Promise((ok) => { i.onload = i.onerror = ok; }))));
-while (raster.children.length > 1 && zettel.getBoundingClientRect().height > SEITE_HOEHE) raster.lastElementChild.remove();
-raster.classList.toggle("eins", raster.children.length === 1);
-if (raster.children.length === 1 && zettel.getBoundingClientRect().height > SEITE_HOEHE) protokoll("mit-echten-dingen: Kasten größer als eine Seite");
+const blatt = $("blatt");
+const fachSvgs = new Map();
+const fachSvg = (fach) => {
+  if (!FACH_SYMBOLE.has(fach)) return Promise.resolve("");
+  if (!fachSvgs.has(fach)) fachSvgs.set(fach, fetch(SYMBOL(fach + ".svg")).then((r) => (r.ok ? r.text() : "")).catch(() => ""));
+  return fachSvgs.get(fach);
+};
+const titelVorher = document.title;
+window.addEventListener("afterprint", () => { document.title = titelVorher; });
 
-const druckKnopf = $("drucken");
-druckKnopf.hidden = !kann.drucken || raster.children.length === 0;
-druckKnopf.addEventListener("click", () => {
-  if (!drucke()) protokoll("mit-echten-dingen: Drucken ging nicht");
+async function druckeThema(t) {
+  const a = anleitungen.get(t.id);
+  if (!a?.formen?.length) return;
+  blatt.classList.remove("eng");
+  blatt.innerHTML = blattHtml({ name: t.name, titel: a.titel || "", fach: t.fach, formen: a.formen, fachSvg: await fachSvg(t.fach) });
+  await document.fonts.ready;
+  await Promise.all([...blatt.querySelectorAll("img")].map((i) => (i.complete ? null : new Promise((ok) => { i.onload = i.onerror = ok; }))));
+  if (blatt.getBoundingClientRect().height > SEITE_HOEHE) blatt.classList.add("eng");
+  document.title = blattTitel(t.name);
+  if (!drucke()) { document.title = titelVorher; protokoll("mit-echten-dingen: Drucken ging nicht"); }
+}
+$("inhalt").addEventListener("click", (e) => {
+  const k = /** @type {HTMLElement} */ (e.target).closest?.("[data-pdf]");
+  if (!k) return;
+  const t = alle.find((x) => x.id === k.dataset.pdf);
+  if (t) druckeThema(t).catch((err) => protokoll("mit-echten-dingen: " + (err?.message ?? err)));
 });
 document.body.dataset.bereit = "1"; // für die Browser-Prüfung
 </script>

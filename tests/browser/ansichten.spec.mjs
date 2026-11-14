@@ -17,8 +17,8 @@
 // tut nichts; themen.html ohne oder mit unbekanntem Fach führt zur Startseite; ein Themenname mit Ziffer wird als
 // Aufnahme gesprochen (Ziffern-Regel), nie von der Systemstimme.
 // Übersicht „Mit echten Dingen“ (mit-echten-dingen.html, ohne PIN): Gerade dran (auch ohne Spiel), Bald, Zum
-// Wiederholen, aufklappbar mit allen Formen, keine Zahlen, kein Kopf mit Quellen; Zugang aus dem Elternbereich; Drucken
-// über kern/geraet.js; der Küchenzettel (Chromium, page.pdf) ist genau eine A4-Seite ohne Bedienelemente.
+// Wiederholen, aufklappbar mit allen Formen, keine Zahlen, kein Kopf mit Quellen; Zugang aus dem Elternbereich; PDF je
+// Thema über kern/geraet.js; das Blatt (Chromium, page.pdf) zeigt alle Formen voll, ohne Bedienelemente, A4.
 //
 // WebKit: In diesem Playwright-Build (1.65, WebKit 27.2, macOS) landen echte Mausklicks mit falschen Koordinaten
 // an <html>. Die Prüfung tippt deshalb in beiden Browsern per element.click() (evaluate); das Halten des Zahnrads
@@ -71,14 +71,14 @@ const ECHT = {
   "reim-hoeren": eintrag("kann-ich", "2026-11-03"), "zerlegen-5": eintrag("kann-ich", "2026-11-05"), "zerlegen-6": eintrag("kann-ich", "2026-11-08"),
   "vorwaerts-zaehlen": eintrag("dran", "", "2026-11-12"), "zerlegen-7": eintrag("dran", "", "2026-11-13"), "silben-klatschen": eintrag("dran", "", "2026-11-11"),
 };
-// Sechs volle Anleitungen (längste Form: sechs Schritte, etwa 120 Wörter) für die Probe „eine Seite“.
-const SECHS = ["zerlegen-2", "zerlegen-3", "zerlegen-4", "zerlegen-5", "zerlegen-6", "zerlegen-8"];
-const SECHS_STAND = Object.fromEntries(SECHS.map((id, i) => [id, eintrag("dran", "", `2026-11-0${i + 1}`)]));
-const VOLLE_ANLEITUNG = `---\nthema: probe\nentwurf: true\n---\n# Probe\n\n## Am Tisch: Sehr lange Probe mit einem langen Namen\n\n`
+// Eine Anleitung mit drei langen Formen (je sechs Schritte, etwa 120 Wörter) für die Probe „Blatt mit drei Formen“.
+const DREI_STAND = { "zerlegen-2": eintrag("dran", "", "2026-11-13") };
+const langeForm = (wort, name) => `## ${wort}: ${name}\n\n`
   + "Ihr braucht: sieben Nudeln, zwei Teller, einen Becher, ein Tuch und einen Würfel aus dem Spieleschrank\n\n"
   + [1, 2, 3, 4, 5, 6].map((n) => `${n}. Verteilt die Nudeln auf die zwei Teller und sagt dabei laut, was ihr auf beiden Tellern seht.`).join("\n")
   + "\n\n**Darauf kommt es an:** Es bleiben immer sieben Nudeln. Wandert eine Nudel hinüber, hat ein Teller eine weniger und der andere eine mehr, so lange ihr spielt.\n\n"
-  + "**Leichter:** mit fünf. **Schwerer:** mit zehn.\n";
+  + "**Leichter:** mit fünf. **Schwerer:** mit zehn.\n\n";
+const DREI_FORMEN = `---\nthema: zerlegen-2\nfach: mathe\n---\n# Probe\n\n${langeForm("Unterwegs", "Steine")}${langeForm("Am Tisch", "Nudeln")}${langeForm("In Bewegung", "Hüpfen")}`;
 const FAELLE = {
   leer: { stand: null, spiele: false },
   gekonnt: { stand: GEKONNT, spiele: false },
@@ -400,17 +400,15 @@ async function lauf(typ, name, groesse, basis) {
       await kontext.close();
     }
 
-    // --- Mit echten Dingen: Übersicht, Zugang aus dem Elternbereich, Drucken, Küchenzettel ---------------
+    // --- Mit echten Dingen: Übersicht, Zugang aus dem Elternbereich, PDF je Thema ------------------------
     // ?entwurf: die Anleitungen sind noch Entwürfe; ohne ?entwurf sieht die App sie nicht (Fall „app“).
-    // „sechs“: sechs volle Anleitungen (nur im Browser per page.route) prüfen, dass der Zettel immer auf eine Seite passt.
-    for (const [fall, stand, such] of [["leer", null, "?entwurf"], ["echt", ECHT, "?entwurf"], ["app", ECHT, ""], ["sechs", SECHS_STAND, "?entwurf"]]) {
+    // „drei“: eine Anleitung mit drei langen Formen (nur im Browser per page.route): Reihenfolge, kleiner gesetzt, keine Form geteilt.
+    for (const [fall, stand, such] of [["leer", null, "?entwurf"], ["echt", ECHT, "?entwurf"], ["app", ECHT, ""], ["drei", DREI_STAND, "?entwurf"]]) {
       const F = `${L} echte-dinge ${fall}`;
       const kontext = await kontextFuer(browser, groesse, basis, { stand }, fehlerListe);
       await kontext.addInitScript(() => { window.__gedruckt = 0; window.print = () => { window.__gedruckt++; }; });
-      if (fall === "sechs") {
-        await kontext.route("**/mit-echten-dingen/verzeichnis-entwurf.json", (r) => r.fulfill({ json: { themen: Object.fromEntries(SECHS.map((id) =>
-          [id, { fach: "mathe", name: "", titel: "Probe", formen: [{ situation: "tisch", name: "Sehr lange Probe" }], entwurf: true }])) } }));
-        await kontext.route("**/mit-echten-dingen/mathe/*.md", (r) => r.fulfill({ contentType: "text/markdown", body: VOLLE_ANLEITUNG }));
+      if (fall === "drei") {
+        await kontext.route("**/mit-echten-dingen/mathe/zerlegen-2.md", (r) => r.fulfill({ contentType: "text/markdown", body: DREI_FORMEN }));
       }
       const seite = await kontext.newPage();
       await seite.goto(`${basis}/spiele/mit-echten-dingen.html${such}`, { waitUntil: "load" });
@@ -425,15 +423,16 @@ async function lauf(typ, name, groesse, basis) {
           offen: erstes?.open ?? false, formenOffen: erstes ? erstes.querySelectorAll(".spiel").length : 0,
           formenAlle: document.querySelectorAll("article.spiel").length,
           situationen: erstes ? [...erstes.querySelectorAll("summary .situation")].map((x) => x.textContent) : [],
-          drucken: !document.getElementById("drucken").hidden, kaesten: document.querySelectorAll("#zettel article").length,
+          pdf: [...document.querySelectorAll("[data-pdf]")].map((k) => k.dataset.pdf),
+          mitFormen: [...document.querySelectorAll("details.thema")].filter((d) => d.querySelector(".spiel")).length,
           text: document.body.innerText,
         };
       });
       if (fall === "leer") {
-        pruefe(F, "Übersicht ohne Lernstand: nichts dran, kein Drucken", JSON.stringify(ue.dran) === "[]" && /Gerade ist kein Thema dran/.test(ue.text) && !ue.drucken, JSON.stringify(ue.dran));
+        pruefe(F, "Übersicht ohne Lernstand: nichts dran, kein PDF-Knopf", JSON.stringify(ue.dran) === "[]" && /Gerade ist kein Thema dran/.test(ue.text) && ue.pdf.length === 0, JSON.stringify(ue.dran));
       } else if (fall === "app") {
-        pruefe(F, "ohne ?entwurf: Entwürfe erreichen die App nicht (keine Formen, kein Küchenzettel, kein Drucken)",
-          ue.dran?.includes("Die 7 zerlegen") && ue.formenAlle === 0 && ue.kaesten === 0 && !ue.drucken, JSON.stringify({ ...ue, text: undefined }));
+        pruefe(F, "ohne ?entwurf: Entwürfe erreichen die App nicht (keine Formen, kein PDF-Knopf)",
+          ue.dran?.includes("Die 7 zerlegen") && ue.formenAlle === 0 && ue.pdf.length === 0, JSON.stringify({ ...ue, text: undefined }));
       } else if (fall === "echt") {
         pruefe(F, "Übersicht: Gerade dran mit den Themen dran (auch ohne Spiel), zuerst aufgeklappt mit beiden Formen",
           ["Vorwärts zählen", "Die 7 zerlegen", "Silben klatschen"].every((n) => ue.dran?.includes(n)) && ue.offen && ue.formenOffen === 2
@@ -446,32 +445,47 @@ async function lauf(typ, name, groesse, basis) {
       }
       pruefe(F, "Übersicht: keine Zahl als Fortschritt, kein Lehrplan, kein Kopf mit Quellen",
         !/\d+\s*(von|\/)\s*\d+|%|Klasse \d|Lehrplan|quellen:|https?:/i.test(ue.text), ue.text.slice(0, 300));
-      if (fall === "echt" || fall === "sechs") {
-        pruefe(F, "Übersicht: Drucken da (Browser kann drucken, es gibt Anleitungen)", ue.drucken);
-        await seite.evaluate(() => document.getElementById("drucken").click());
-        pruefe(F, "Drucken ruft den Druckdialog über kern/geraet.js", (await seite.evaluate(() => window.__gedruckt)) === 1);
+      if (fall === "echt" || fall === "drei") {
+        pruefe(F, "PDF-Knopf an jedem Thema mit Anleitung, an keinem ohne", ue.pdf.length >= 1 && ue.pdf.length === ue.mitFormen, JSON.stringify(ue.pdf));
+        const thema = fall === "drei" ? "zerlegen-2" : ue.pdf[0];
+        const klick = await seite.evaluate(async (thema) => {
+          document.querySelector(`[data-pdf="${thema}"]`).click();
+          for (let i = 0; i < 40 && !window.__gedruckt; i++) await new Promise((r) => setTimeout(r, 50));
+          const blatt = document.getElementById("blatt");
+          const r = { gedruckt: window.__gedruckt, titel: document.title, eng: blatt.classList.contains("eng"),
+            formen: [...blatt.querySelectorAll("article.form h2")].map((h) => h.textContent.trim()) };
+          window.dispatchEvent(new Event("afterprint"));
+          return { ...r, danach: document.title };
+        }, thema);
+        pruefe(F, "PDF ruft den Druckdialog über kern/geraet.js, Titel ist der Dateiname, danach wieder wie vorher",
+          klick.gedruckt === 1 && /^Mit echten Dingen – \S/.test(klick.titel) && klick.danach === "Mit echten Dingen", JSON.stringify(klick));
+        if (fall === "drei") pruefe(F, "Blatt mit drei Formen: Am Tisch, In Bewegung, Unterwegs; zu lang → eine Stufe kleiner",
+          JSON.stringify(klick.formen) === JSON.stringify(["Am Tisch: Nudeln", "In Bewegung: Hüpfen", "Unterwegs: Steine"]) && klick.eng, JSON.stringify(klick));
       }
-      if (SHOTS && fall !== "sechs") {
+      if (SHOTS && fall !== "drei") {
         await mkdir(SHOTS, { recursive: true });
         await seite.screenshot({ path: join(SHOTS, `uebersicht-${fall}-${name}-${groesse.width}.png`), fullPage: true });
       }
-      if (name === "chromium" && (fall === "echt" || fall === "sechs")) {
+      if (name === "chromium" && (fall === "echt" || fall === "drei")) {
         await seite.emulateMedia({ media: "print" });
-        const druck = await seite.evaluate(() => ({
-          knoepfe: [...document.querySelectorAll("ls-knopf, button, summary")].filter((k) => k.getClientRects().length > 0).length,
-          zettel: getComputedStyle(document.getElementById("zettel")).visibility, artikel: document.querySelectorAll("#zettel article").length,
-          text: document.getElementById("zettel").innerText,
-        }));
+        const druck = await seite.evaluate(() => {
+          const blatt = document.getElementById("blatt");
+          return {
+            knoepfe: [...document.querySelectorAll("ls-knopf, button, summary")].filter((k) => k.getClientRects().length > 0).length,
+            sichtbar: getComputedStyle(blatt).visibility, formen: blatt.querySelectorAll("article.form").length,
+            flaechen: [...blatt.querySelectorAll("*")].filter((e) => !/^(rgba\(0, 0, 0, 0\)|transparent)$/.test(getComputedStyle(e).backgroundColor)).length,
+            text: blatt.innerText,
+          };
+        });
         await seite.emulateMedia({ media: null }); // zurück auf „keine Vorgabe“: page.pdf() nimmt dann print
         const pdf = await seite.pdf({ format: "A4", preferCSSPageSize: true, printBackground: true });
         const seiten = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
-        pruefe(F, `Küchenzettel: genau eine A4-Seite, keine Bedienelemente, nur Themen mit Anleitung (${druck.artikel} Kästen)`,
-          seiten === 1 && druck.knoepfe === 0 && druck.zettel === "visible" && druck.artikel >= 1 && druck.artikel <= (fall === "echt" ? 3 : 6)
-            && !/Sie |Ihr Kind/.test(druck.text), JSON.stringify({ seiten, ...druck, text: undefined }));
-        if (fall === "echt") pruefe(F, "Küchenzettel: kurze Form mit Ihr braucht, Schritten und Darauf kommt es an, ohne Leichter/Schwerer",
-          /Ihr braucht/.test(druck.text) && /Darauf kommt es an/.test(druck.text) && !/Leichter|Schwerer/.test(druck.text), druck.text.slice(0, 400));
+        pruefe(F, `Blatt: nur das Blatt, keine Bedienelemente, keine Flächen, alle Formen voll (${druck.formen} Formen, ${seiten} Seiten)`,
+          druck.knoepfe === 0 && druck.sichtbar === "visible" && druck.flaechen === 0 && druck.formen >= 1
+            && /Ihr braucht/.test(druck.text) && /Darauf kommt es an/.test(druck.text) && /Leichter/.test(druck.text) && /Schwerer/.test(druck.text)
+            && !/Sie |Ihr Kind/.test(druck.text) && seiten <= (fall === "drei" ? 2 : 1), JSON.stringify({ seiten, ...druck, text: undefined }));
         if (SHOTS && groesse.width === 1920) {
-          const pfad = join(SHOTS, `kuechenzettel-${fall}.pdf`);
+          const pfad = join(SHOTS, `blatt-${fall}.pdf`);
           await writeFile(pfad, pdf);
           try { execFileSync("sips", ["-s", "format", "png", "-Z", "1600", pfad, "--out", pfad.replace(/\.pdf$/, ".png")], { stdio: "ignore" }); } catch { /* nur macOS */ }
         }

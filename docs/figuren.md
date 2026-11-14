@@ -130,6 +130,42 @@ Person.
   kein Gefühl und keine Aufgabe nach §3, und die Kinder der Runde sind keine Kartenfiguren (Annahme).
 
 ---------------------------------------------------------------------------------------------------
+## 4a. Albern sein (Christian, 2026-11-14)
+
+Die Spiele haben keine vermenschlichten Tiere. Ob Kinder beim Spielen lachen, hängt deshalb an der Runde:
+Die Kinder können albern sein. Wann ein Spiel das zeigt, legt das Spiel fest (noch offen). Für die Folge einer
+Antwort, die nicht passt, gilt weiter N7/B5: nie reizvoller als nach einer passenden Antwort.
+
+- **Über sich selbst albern, nie über andere.** Niemand wird ausgelacht oder ist die Pointe für andere.
+- **Niemand fällt oder tut sich weh.** Wer stolpert, fängt sich und grinst (`fast-umfallen`).
+- **Timos Rollstuhl ist nie die Pointe.** Seine Tricks zeigen Können wie im Rollstuhl-Sport (WCMX, Basketball,
+  Tanz). Der Stuhl bleibt unter Kontrolle und kippt nie um. Der Erzähler sagt, was Timo tut („Timo macht einen
+  Wheelie.“), und erklärt den Rollstuhl nie.
+
+**Bestand** (`spiele/runde/albern.js`, `rolli.js`, Galerie `spiele/runde/galerie.html`):
+
+| für alle vier | nur im Rollstuhl (Timo) |
+|---|---|
+| niesen, riesen-hatschi, doppelblick, freudentanz, hampelmann, wackelpudding, grimasse, kichern, muskeln, roboter, fast-umfallen, umdrehen, purzelbaum, gaehnen, anschleichen, kuckuck, welle, welle-spaet, abklatschen | wheelie, wheelie-freihaendig, pirouette, vollbremsung, hereinflitzen, bunny-hop, rueckwaerts-laessig, trommeln, ehrenrunde, losflitzen (endet in `weg`), rolli-tanz |
+
+Gesichter dazu: `nies-anlauf`, `hatschi`, `zunge`, `backen`, `kichern`, `gaehnen`, `roboter`. Luftzeichen
+(`luftzeichen.js`): `staub`, `sterne`, `striche`, `noten`, `pusten`, `abklatsch`.
+
+**Werkzeuge für neue Bewegungen** (`bestand.js` Typ `Schritt`):
+- `streckung: [sx, sy]` staucht und streckt um den Fußpunkt (|sx| ≤ 1,6, 0,5 ≤ sy ≤ 1,6).
+- `kurve`: `weich` (Standard), `federn` (überschwingt etwa 10 %), `ruck` (sofort), `gleich` (linear).
+- `luft: {zeichen: anker}`: Luftzeichen nur für diesen Schritt; Anker `boden`, `kopf`, `mund`, `hinten`,
+  `vorn` oder `[x, y]`. Sie drehen und strecken nicht mit, bei wenig Bewegung fehlen sie.
+- `wende: true`: vor dem Schritt tauscht die Figur die Blickrichtung; der Versatz kehrt sich dabei um, die
+  folgenden Schritte rechnen in der neuen Richtung.
+- `nur: "rollstuhl"` an der Bewegung: gibt es nur für Kinder im Rollstuhl, ohne Beinwinkel.
+- **Drehen:** Jede Bewegung legt ihre Ansicht fest. Steht die Figur in der anderen, dreht `steuere()` sie
+  vorher (schmal werden, neu zeichnen, federnd öffnen, etwa 380 ms); `{ drehen: false }` springt.
+  `f.drehen(ansicht)` dreht ohne Bewegung, `f.blick` sagt die Blickrichtung.
+- **Zusammen:** `zusammen(figuren, bewegung | [je Figur], { abstand })` startet versetzt (Welle); zum Abklatschen
+  stehen zwei Kinder einander zugewandt mit 152 Einheiten Mittenabstand.
+
+---------------------------------------------------------------------------------------------------
 ## 5. Was die Kinder können, was es in echt nicht gibt (Christian)
 
 Die Kinder der Runde sind echte Kinder, aber in der Geschichte dürfen sie Dinge, die es in echt nicht gibt.

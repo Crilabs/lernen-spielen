@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { alsHtml, bloecke, trenneKopf, liesAnleitung, kurzform, inline, escape, SITUATIONEN } from "../spiele/rahmen/markdown.js";
+import { alsHtml, bloecke, trenneKopf, liesAnleitung, inline, escape, SITUATIONEN } from "../spiele/rahmen/markdown.js";
 
 test("Kopf wird abgetrennt: Werte, Listen, Wahrheitswerte; nie im HTML", () => {
   const { kopf, rumpf } = trenneKopf("---\nthema: zerlegen-7\nentwurf: true\nquellen:\n  - A, https://a.de\n  - B\n---\n# Titel\n");
@@ -51,6 +51,5 @@ test("liesAnleitung: Titel, Formen nach Situation, sortiert, Rest gehört zur Fo
   assert.deepEqual(a.formen.map((f) => [f.situation, f.wort, f.name]), [["tisch", "Am Tisch", "Gabeln"], ["unterwegs", "Unterwegs", "Steine"]]);
   const tisch = a.formen[0];
   assert.equal(tisch.bloecke.length, 6); // Ihr braucht, Liste, ## Notiz, mehr, ## am tisch: doppelt, Leichter
-  assert.deepEqual(kurzform(tisch).map((b) => b.typ), ["p", "ol", "h", "p", "h"]);
   assert.deepEqual(SITUATIONEN.map((s) => s.wort), ["Am Tisch", "In Bewegung", "Unterwegs"]);
 });

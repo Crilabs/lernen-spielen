@@ -263,12 +263,12 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 
 | Nr. | Regel | Stand |
 |---|---|---|
-| B1 | **Bewegung zeigt, was das Kind bewirkt.** Die richtige Antwort verwandelt, baut, trägt, lässt wachsen (N3). Diese Folge-Animationen sind ausdrücklich erwünscht; sie sind die Freude am Spiel. | [b] N3; Beobachtung am eigenen Kind (keine Studie) |
+| B1 | **Bewegung zeigt, was das Kind bewirkt.** Die richtige Antwort verwandelt, baut, trägt, lässt wachsen (N3). Diese Folge-Animationen sind ausdrücklich erwünscht; sie sind die Freude am Spiel. **Folge mit Freude (Christian, 2026-11-14):** Jede richtige Lösung hat eine sichtbare Folge, die sich aus der Aufgabe selbst erklärt (das Tier kann jetzt über die Brücke gehen, weil sie hält; der Deckel der Tonne schließt sich über dem Papier): eine Figur oder ein Ding reagiert. Sie gehört zum Spiel und ist keine Belohnung (N5, L8, K8): keine Punkte, keine Sterne. **Abwechslung und Passung:** Die Folge wechselt, damit sie nicht eintönig wird (gehen, traben, rutschen, hüpfen …); die Reaktion passt zur Handlung und zum Ding. Wie im echten Leben macht man nicht alles genau gleich: Form, Tempo und Weg dürfen variieren, kleine Zufallsauswahl unter passenden Varianten, nie ein seltener „Jackpot“ (B4). Spiele nutzen die Reaktionen der Runde (Branch `lustige-bewegungen`), sobald sie auf `main` sind, statt eigene zu bauen. | [b] N3; Beobachtung am eigenen Kind (keine Studie); (Christian) |
 | B2 | **Bewegung zeigt, wie die Sache funktioniert.** Bündeln, Wandern auf dem Zahlenstrahl, Strichfolge: in Schritten, mit Sprechtext, vom Kind anzuhalten. | [B] Höffler & Leutner 2007, Berney & Bétrancourt 2016, Takacs 2015 |
 | B3 | **Still, solange das Kind denkt.** Kein Wackeln, Blinzeln, Glitzern oder Pulsieren im oder neben dem Lernfeld, keine Dauerbewegung. Ein neues Element darf sich beim ersten Erscheinen einmal bewegen. | [B] Sundararajan & Adesope 2020; [b] Fisher 2014 |
 | B4 | **Freude aus der Sache, nicht aus dem Zufall.** Die Folge einer richtigen Antwort kommt verlässlich, ihre Form wechselt mit dem Inhalt; keine seltene „Jackpot“-Animation. Nicht jedes Mal gleich laut (3.1 Nr. 5). | [E] nach N4, N5 |
 | B5 | **Die Folge einer Antwort, die nicht passt, ist nie reizvoller** als die einer richtigen (N7). | [E] |
-| B6 | **Kurz und überspringbar.** Rückmelde-Bewegung etwa 1 s, hält die nächste Aufgabe nicht auf, lässt sich antippen und überspringen. | *Annahme* Dauer |
+| B6 | **Kurz und überspringbar.** Rückmeldung während der Handlung etwa 1 s; die Folge einer gelösten Aufgabe bis etwa 3 s. Sie hält die nächste Aufgabe nicht auf, lässt sich immer antippen und überspringen, steht still, solange das Kind denkt (B3), und mit reduzierter Bewegung läuft eine ruhige, kurze Fassung (B7). | *Annahme* Dauer; (Christian) |
 | B7 | **Wenig Bewegung einstellbar;** `prefers-reduced-motion` gilt in jedem Spiel. Keine Blitze, kein schnelles Flackern. | [B] WCAG 2.2.2, 2.3.3 |
 
 ---------------------------------------------------------------------------------------------------
@@ -351,6 +351,7 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 - [ ] **Lernmaterial schlicht,** Struktur sichtbar (Fünfergliederung), Perlen- und Stellenwertfarben aus 6.2.
 - [ ] **Farbe nie allein,** eine Bedeutung je Farbe im Spiel, Werte aus der Farbwelt (6.2), Kontrast geprüft, Farbsehschwäche simuliert.
 - [ ] **Bewegung** zeigt die Folge einer Kinderhandlung oder die Sache; still während des Denkens; Fehler-Folge nicht reizvoller; Reduced Motion.
+- [ ] **Folge mit Freude:** jede richtige Lösung hat eine Folge, die sich aus der Aufgabe erklärt, mit passenden wechselnden Varianten (kein Jackpot), bis etwa 3 s, überspringbar, ohne Punkte und Sterne.
 - [ ] **Beim Erlesen** kein Bild vorab.
 - [ ] **Buchstaben** ohne Einzelfarben; Tastaturen mit festen Plätzen, unbenutzte Tasten blass.
 - [ ] **Bedienzeichen** aus `spiele/symbole/`, fester Platz, Name, 2 × 2 cm.
