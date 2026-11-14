@@ -1,0 +1,87 @@
+[
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 32,
+  "ausgabe": 10159,
+  "einheit": "tokens",
+  "menge": 1257309,
+  "notiz": "Schreib-Agent zweierreihe",
+  "cache_lesen": 1156270,
+  "cache_schreiben": 90848,
+  "themen": 1,
+  "thema": [
+   "zweierreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 16,
+  "ausgabe": 6202,
+  "einheit": "tokens",
+  "menge": 476911,
+  "notiz": "Prüfer E zweierreihe R1",
+  "cache_lesen": 419527,
+  "cache_schreiben": 51166,
+  "themen": 1,
+  "thema": [
+   "zweierreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 10,
+  "ausgabe": 3289,
+  "einheit": "tokens",
+  "menge": 382582,
+  "notiz": "Schreib-Agent zweierreihe, Befunde R1",
+  "cache_lesen": 373883,
+  "cache_schreiben": 5400,
+  "themen": 1,
+  "thema": [
+   "zweierreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 12,
+  "ausgabe": 5138,
+  "einheit": "tokens",
+  "menge": 363214,
+  "notiz": "Prüfer E zweierreihe R2",
+  "cache_lesen": 306243,
+  "cache_schreiben": 51821,
+  "themen": 1,
+  "thema": [
+   "zweierreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 1220,
+  "einheit": "tokens",
+  "menge": 295265,
+  "notiz": "Schreib-Agent zweierreihe, §5.1",
+  "cache_lesen": 291632,
+  "cache_schreiben": 2405,
+  "themen": 1,
+  "thema": [
+   "zweierreihe"
+  ]
+ }
+]
