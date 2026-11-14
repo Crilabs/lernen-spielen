@@ -18,7 +18,7 @@ const SYMBOLE = new URL("../symbole/", import.meta.url).href;
 const HAUS_HREF = new URL("../index.html", import.meta.url).href;
 const HAUS_NAME = "Alle Spiele";
 /** Fächer mit eigenem Symbol in spiele/symbole/ (Sprechen hat noch keins). */
-const FACH_SYMBOLE = new Set(["mathe", "lesen", "schreiben", "grammatik", "geometrie"]);
+export const FACH_SYMBOLE = new Set(["mathe", "lesen", "schreiben", "grammatik", "geometrie"]);
 
 const FACH_CSS = Object.entries(FACH)
   .map(([fach, f]) => `:host([fach="${fach}"]) { --fach-fuellung: ${f.fuellung}; --fach-tief: ${f.tief}; --fach-toenung: ${f.toenung}; }`)

@@ -262,7 +262,7 @@ import { spieleEinfuehrung } from "./einfuehrung.js";
 import { sprich, stille } from "./kern/stimme.js";
 import { schonGesagt, merkeGesagt, vergissGesagt, sageEinmal } from "./kern/sitzung.js";
 import { FACH } from "./rahmen/stil.js";
-import { materialFuer } from "./rahmen/material.js";
+import { materialFuer, bausteinHtml } from "./rahmen/material.js";
 import "./rahmen/leiste.js";
 import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
@@ -407,9 +407,7 @@ function zeichen(s) {
     const wert = m.baustein === "karte" ? m.wert : materialFuer({ id: "", name: s.material?.name ?? "" }).wert;
     return `<span class="zeichen" aria-hidden="true">${esc(wert)}</span>`;
   }
-  if (m.baustein === "perlenstab") return `<ls-perlenstab wert="${esc(m.wert)}" aria-hidden="true"></ls-perlenstab>`;
-  if (m.baustein === "wortart") return `<ls-wortart art="${esc(m.wert)}" aria-hidden="true"></ls-wortart>`;
-  return `<span class="karte" aria-hidden="true">${esc(m.wert)}</span>`;
+  return bausteinHtml(m);
 }
 </script>
 </body>

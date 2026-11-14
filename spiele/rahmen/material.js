@@ -54,3 +54,32 @@ export function materialFuer(thema) {
   const buchstabe = name.match(/[\p{L}\p{N}]/u)?.[0];
   return { baustein: "karte", wert: buchstabe ? buchstabe.toLocaleUpperCase("de") : "?" };
 }
+
+const ESC = /** @type {Record<string, string>} */ ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" });
+
+/**
+ * HTML eines Bausteins, klein und flach zum Ansehen (Fach-Seite und Regal teilen es; Größe und Form setzt die
+ * Seite per CSS). Perlenstab und Wortart über die Rahmen-Bausteine, sonst `<span class="karte">` mit dem Wert.
+ * Alles aria-hidden: den Namen trägt der Knopf darum.
+ * @param {Baustein} b
+ * @returns {string}
+ */
+export function bausteinHtml(b) {
+  const wert = String(b.wert).replace(/[&<>"']/g, (z) => ESC[z]);
+  if (b.baustein === "perlenstab") return `<ls-perlenstab wert="${wert}" aria-hidden="true"></ls-perlenstab>`;
+  if (b.baustein === "wortart") return `<ls-wortart art="${wert}" aria-hidden="true"></ls-wortart>`;
+  return `<span class="karte" aria-hidden="true">${wert}</span>`;
+}
+
+/**
+ * Was seit dem letzten Besuch des Regals neu gekonnt ist (Merker `regal.gesehen`, Spec „Regal“).
+ * Die Seite speichert danach als gesehen genau die jetzt gekonnten Ids: ein zurückgesetztes Thema fällt so aus
+ * dem Merker heraus und ist, wenn es wieder gekonnt wird, noch einmal neu.
+ * @param {string[]} gekonnt Ids der gekonnten Themen (Reihenfolge bleibt)
+ * @param {unknown} gesehen gespeicherter Merker; kein Array (noch nie besucht, kaputt) zählt wie leer
+ * @returns {string[]}
+ */
+export function neuSeit(gekonnt, gesehen) {
+  const alt = new Set(Array.isArray(gesehen) ? gesehen.filter((id) => typeof id === "string") : []);
+  return gekonnt.filter((id) => !alt.has(id));
+}

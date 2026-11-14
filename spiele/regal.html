@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mein Regal</title>
+<link rel="stylesheet" href="rahmen/seite.css">
+<style>
+/* Regal: was ich kann (Spec docs/superpowers/specs/2026-11-14-ansichten-design.md, „Regal“).
+   Ein Holzregal im Werkraum, von vorn gesehen: ein Rahmen und Bretter aus Kante, dazwischen Fächer in Ahorn
+   (das Holz des Tabletts, 6.2), alles flach, ohne Schatten (6.4: nur ansehen). Ein Brett je Fach mit
+   gekonnten Themen, in der Reihenfolge von spiele.json; links die Fachkachel, daneben das Lernmaterial der
+   Themen in der Reihenfolge, in der sie gekonnt wurden (neueste rechts).
+   Kein Sockel, kein Glanz, kein Licht, keine Zählung, kein Platzhalter für Fehlendes (Anti-Ziel Trophäenwand;
+   N5, N8, B3/B4). Neu seit dem letzten Besuch: einmal ein Sonnenring für etwa 1 s, sonst nichts.
+   Antippen: der Name des Themas (einmal je Sitzung gesprochen) auf einem kleinen Schild, dazu „Mit echten
+   Dingen“, wenn der Lernplan eine Anregung hat. Diese Seite liest den Lernstand nur, sie schreibt ihn nie. */
+body {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Raum für das Regal; reichen die Bretter nicht in die Höhe, rollt er senkrecht (nichts wird versteckt). */
+.raum {
+  position: absolute;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding: 3.2rem 8rem 6rem;
+}
+.raum::-webkit-scrollbar { display: none; }
+
+/* Das Regal: Rahmen aus Kante mit Tinte-Kontur; jedes Fach ist ein Ahorn-Feld darin, die Streifen Kante
+   dazwischen sind die Bretter. Der Rahmen ist ringsum gleich breit wie beim Tablett. */
+.regal {
+  margin: 0 auto;
+  max-width: 172rem;
+  padding: 2.4rem 2.4rem 0;
+  background: var(--ls-kante);
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius);
+  list-style: none;
+}
+.brett {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: 17rem;
+  margin: 0 0 2.4rem;
+  background: var(--ls-ahorn);
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-klein);
+}
+
+/* Fachkachel am Anfang des Bretts: wie in der Kopfleiste (Fachfüllung, Symbol in Tinte), nur Anzeige. */
+.fach {
+  flex: none;
+  width: 9rem;
+  height: 9rem;
+  margin: 0 1.2rem 2.4rem 2.4rem;
+  padding: 1.5rem;
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius);
+  background: var(--fach-fuellung);
+}
+.fach i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--ls-tinte);
+  -webkit-mask: var(--bild) center / contain no-repeat;
+  mask: var(--bild) center / contain no-repeat;
+}
+
+/* Die Dinge auf dem Brett: eine Reihe, die waagrecht rollt, wenn sie länger ist als das Brett. */
+.dinge {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  touch-action: pan-x;
+}
+.dinge::-webkit-scrollbar { display: none; }
+.dinge.links { -webkit-mask-image: linear-gradient(to right, transparent, #000 10rem); mask-image: linear-gradient(to right, transparent, #000 10rem); }
+.dinge.rechts { -webkit-mask-image: linear-gradient(to left, transparent, #000 10rem); mask-image: linear-gradient(to left, transparent, #000 10rem); }
+.dinge.links.rechts {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10rem, #000 calc(100% - 10rem), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10rem, #000 calc(100% - 10rem), transparent);
+}
+.dinge ul {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.4rem;
+  width: max-content;
+  height: 100%;
+  margin: 0;
+  padding: 0 4rem 0 2.4rem;
+  list-style: none;
+}
+.dinge li { display: flex; padding-bottom: 1.2rem; }
+
+/* Ein Ding: Tippfläche ohne eigene Gestalt (kein Schatten, kein Rand), darin das Material flach. */
+.ding {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 11rem;
+  min-height: 11rem;
+  margin: 0;
+  padding: 1.2rem 1.4rem;
+  border: 0;
+  border-radius: var(--ls-radius);
+  background: none;
+  color: var(--ls-tinte);
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.ding > * { pointer-events: none; }
+.ding:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0; }
+.ding ls-perlenstab { height: 4rem; }
+.ding ls-wortart { height: 8.4rem; }
+/* Kärtchen: steht aufrecht, Papier mit Tinte-Kontur, innen ein feiner Rand in der Fachfarbe. */
+.ding .karte {
+  display: grid;
+  place-items: center;
+  width: 7.6rem;
+  height: 10rem;
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-klein);
+  background: var(--ls-papier);
+  box-shadow: inset 0 0 0 0.9rem var(--ls-papier), inset 0 0 0 1.3rem var(--fach-fuellung);
+  font-size: 4.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Neu seit dem letzten Besuch: einmal der Sonnenring (wie .markiert in seite.css), sanft an und wieder aus.
+   Ohne Bewegung (reduced motion) steht er 1 s still da und geht dann weg. */
+.ding.neu {
+  outline: 0.8rem solid var(--ls-sonne);
+  outline-offset: 0;
+  box-shadow: 0 0 0 1.1rem var(--ls-tinte);
+  animation: neu 1.2s ease-in-out both;
+}
+@keyframes neu {
+  0%, 100% { outline-color: transparent; box-shadow: 0 0 0 1.1rem transparent; }
+  20%, 80% { outline-color: var(--ls-sonne); box-shadow: 0 0 0 1.1rem var(--ls-tinte); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ding.neu { animation: none; }
+}
+
+/* Leeres Regal: ein leeres Fach, darin leise der Satz des Erzählers. */
+.brett.leer { align-items: center; justify-content: center; gap: 2.4rem; height: 24rem; }
+.brett.leer p {
+  margin: 0;
+  font-size: 4.4rem;
+  line-height: 1.3;
+  color: var(--ls-tinte-weich);
+}
+
+/* Das Schild: klein, Papier, flach; Spitze zum angetippten Ding. Nicht modal, Tippen daneben schließt es. */
+.schild {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: calc(100% - 4.8rem);
+  padding: 2rem 2rem 2.4rem 3.2rem;
+  background: var(--ls-papier);
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-gross);
+  animation: auf 0.14s ease-out;
+}
+.schild[hidden] { display: none; }
+@keyframes auf { from { opacity: 0; } }
+.schild h2 {
+  margin: 0;
+  min-width: 0;
+  font-size: 4.4rem;
+  line-height: 1.2;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.schild .spitze {
+  position: absolute;
+  left: calc(var(--spitze, 50%) - 1.8rem);
+  width: 3.6rem;
+  height: 3.6rem;
+  background: var(--ls-papier);
+  border: solid var(--ls-tinte);
+  border-width: 0 var(--ls-kontur) var(--ls-kontur) 0;
+  border-bottom-right-radius: 0.6rem;
+}
+.schild.oben .spitze { bottom: -2rem; transform: rotate(45deg); }
+.schild.unten .spitze { top: -2rem; transform: rotate(-135deg); }
+
+/* Ladefehler: ein kurzer Satz auf Papier, flach. */
+.fehler {
+  margin: 8rem auto 0;
+  width: max-content;
+  padding: 2.4rem 4rem;
+  background: var(--ls-papier);
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-gross);
+  font-size: 4rem;
+}
+
+@media (max-aspect-ratio: 4/3) {
+  .raum { padding-left: 4rem; padding-right: 4rem; }
+}
+</style>
+</head>
+<body>
+<ls-leiste id="leiste" spiel="regal" titel="Mein Regal"></ls-leiste>
+<main class="buehne">
+  <div class="spielflaeche" id="flaeche">
+    <div class="raum" id="raum"><ul class="regal" id="regal" aria-label="Mein Regal"></ul></div>
+    <div class="schild" id="schild" hidden role="status">
+      <span class="spitze" aria-hidden="true"></span>
+      <h2 id="name"></h2>
+      <ls-knopf id="hoeren" symbol="vorlesen.svg" name="Noch mal hören" groesse="klein" stumm></ls-knopf>
+      <ls-knopf id="echt" symbol="hand.svg" wort="Mit echten Dingen" hidden></ls-knopf>
+    </div>
+  </div>
+</main>
+<ls-anregung id="anregung"></ls-anregung>
+
+<script type="module">
+import { sperreTouch, protokoll, esc } from "./lernspiel.js";
+import { ladeLernstand, gekonnteThemen } from "./lernsteuerung.js";
+import { sprich } from "./kern/stimme.js";
+import { schonGesagt, merkeGesagt, vergissGesagt, sageEinmal } from "./kern/sitzung.js";
+import { ladeEinstellungen, einstellung, setzeEinstellung } from "./kern/einstellungen.js";
+import { FACH } from "./rahmen/stil.js";
+import { materialFuer, bausteinHtml, neuSeit } from "./rahmen/material.js";
+import { FACH_SYMBOLE } from "./rahmen/leiste.js";
+import "./rahmen/knopf.js";
+import "./rahmen/perlenstab.js";
+import "./rahmen/wortart.js";
+import "./rahmen/anregung.js";
+
+/** Merker im Profil (einstellungen): Ids, die beim letzten Besuch im Regal standen. */
+const GESEHEN = "regal.gesehen";
+/** So lange steht der Sonnenring an einem neuen Ding. */
+const NEU_MS = 1200;
+
+start();
+
+async function start() {
+  sperreTouch();
+  const leiste = document.getElementById("leiste");
+  let ctx, stand;
+  try {
+    const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map((d) => fetch(d).then((r) => r.json())));
+    ctx = { plan, spiele };
+    stand = await ladeLernstand(ctx, new Date().toLocaleDateString("sv"));
+  } catch (e) { protokoll("regal: " + e); zeigeFehler(); return; }
+  await Promise.all([leiste.bereit(), ladeEinstellungen()]);
+
+  const themaNach = new Map((ctx.plan.themen ?? []).map((t) => [t.id, t]));
+  const gekonnt = gekonnteThemen(ctx, stand).map((g) => {
+    const t = themaNach.get(g.id) ?? {};
+    return { ...g, sprich: String(t.sprich ?? ""), eltern: String(t.eltern ?? ""), baustein: materialFuer(g) };
+  });
+  // Bretter: nur Fächer, in denen etwas gekonnt ist (ein leeres Brett wäre eine Lücke), in der Reihenfolge der
+  // Kategorien; ein Fach, das dort fehlt, kommt danach (nichts Gekonntes verschwindet).
+  const faecher = [...(ctx.spiele.kategorien ?? []).map((k) => k.id), ...gekonnt.map((g) => g.strang)]
+    .filter((f, i, alle) => alle.indexOf(f) === i && gekonnt.some((g) => g.strang === f));
+  const name = (f) => (ctx.spiele.kategorien ?? []).find((k) => k.id === f)?.name ?? f;
+
+  // Neu seit dem letzten Besuch (vor dem Merken lesen); gemerkt werden genau die jetzt gekonnten Ids, so fällt ein
+  // zurückgesetztes Thema still heraus.
+  const ids = gekonnt.map((g) => g.id), alt = einstellung(GESEHEN, null);
+  const neu = new Set(neuSeit(ids, alt));
+  if (!Array.isArray(alt) || alt.length !== ids.length || alt.some((id, i) => id !== ids[i])) setzeEinstellung(GESEHEN, ids);
+
+  const regal = document.getElementById("regal");
+  if (!gekonnt.length) { leer(regal, leiste); return; }
+
+  const dinge = [];
+  regal.innerHTML = faecher.map((f) => {
+    const farbe = FACH[f] ?? { fuellung: "var(--ls-papier)" };
+    const bild = FACH_SYMBOLE.has(f) ? `<i style="--bild:url('symbole/${f}.svg')"></i>` : "";
+    const hier = gekonnt.filter((g) => g.strang === f);
+    const knoepfe = hier.map((g) => {
+      dinge.push(g);
+      return `<li><button class="ding" type="button" data-i="${dinge.length - 1}" aria-label="${esc(g.name)}">${bausteinHtml(g.baustein)}</button></li>`;
+    }).join("");
+    return `<li class="brett" style="--fach-fuellung:${farbe.fuellung}" aria-label="${esc(name(f))}">
+      <span class="fach" aria-hidden="true">${bild}</span>
+      <div class="dinge"><ul>${knoepfe}</ul></div></li>`;
+  }).join("");
+  const knopfVon = [...regal.querySelectorAll(".ding")];
+
+  // --- Schild beim Antippen ---------------------------------------------------------------------
+  const flaeche = document.getElementById("flaeche"), raum = document.getElementById("raum");
+  const schild = document.getElementById("schild"), nameFeld = document.getElementById("name");
+  const hoeren = document.getElementById("hoeren"), echt = document.getElementById("echt");
+  const anregung = document.getElementById("anregung");
+  let jetzt = -1;
+
+  function stelleSchild() {
+    if (jetzt < 0) return;
+    const k = knopfVon[jetzt], r = k.getBoundingClientRect(), f = flaeche.getBoundingClientRect();
+    const reihe = k.closest(".dinge").getBoundingClientRect();
+    const sichtbar = r.right > reihe.left + 8 && r.left < reihe.right - 8 && r.bottom > f.top && r.top < f.bottom;
+    schild.style.visibility = sichtbar ? "" : "hidden";
+    const s = schild.getBoundingClientRect(), rem = remPx(), mitte = r.left + r.width / 2 - f.left;
+    const links = Math.min(Math.max(mitte - s.width / 2, 2.4 * rem), f.width - s.width - 2.4 * rem);
+    const oben = r.top - f.top - s.height - 2.4 * rem >= 0; // passt das Schild über das Ding?
+    schild.classList.toggle("oben", oben);
+    schild.classList.toggle("unten", !oben);
+    schild.style.left = links + "px";
+    schild.style.top = (oben ? r.top - f.top - s.height - 2.4 * rem : r.bottom - f.top + 2.4 * rem) + "px";
+    schild.style.setProperty("--spitze", mitte - links + "px");
+  }
+
+  function zeige(i) {
+    jetzt = i;
+    const g = dinge[i];
+    nameFeld.textContent = g.name;
+    echt.hidden = !g.eltern;
+    schild.hidden = false;
+    stelleSchild();
+  }
+  function verberge() { jetzt = -1; schild.hidden = true; }
+
+  knopfVon.forEach((k, i) => k.addEventListener("click", () => {
+    zeige(i);
+    // Name einmal je Sitzung und je Thema (viele Themen teilen dasselbe sprich), wie auf der Fach-Seite.
+    const g = dinge[i];
+    if (leiste.ton && g.sprich) sageEinmal("thema:" + g.id, () => sprich(g.sprich));
+  }));
+  hoeren.addEventListener("click", () => { if (jetzt >= 0 && leiste.ton && dinge[jetzt].sprich) sprich(dinge[jetzt].sprich); });
+  echt.addEventListener("click", () => {
+    const g = dinge[jetzt];
+    if (g?.eltern) anregung.oeffne({ titel: g.name, text: g.eltern });
+  });
+  document.addEventListener("pointerdown", (e) => {
+    if (anregung.offen || schild.hidden) return;
+    const pfad = e.composedPath();
+    if (!pfad.includes(schild) && !knopfVon.some((k) => pfad.includes(k))) verberge();
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !anregung.offen) verberge(); });
+
+  // --- Rollen: neueste rechts sichtbar, Ränder laufen aus, das Schild folgt ---------------------
+  for (const reihe of regal.querySelectorAll(".dinge")) {
+    const raender = () => {
+      reihe.classList.toggle("links", reihe.scrollLeft > 1);
+      reihe.classList.toggle("rechts", reihe.scrollLeft + reihe.clientWidth < reihe.scrollWidth - 1);
+    };
+    reihe.scrollLeft = reihe.scrollWidth;
+    reihe.addEventListener("scroll", () => { raender(); stelleSchild(); }, { passive: true });
+    addEventListener("resize", raender);
+    raender();
+  }
+  raum.addEventListener("scroll", stelleSchild, { passive: true });
+  addEventListener("resize", stelleSchild);
+
+  // --- Neu seit dem letzten Besuch: einmal der Sonnenring, dann gilt alles als gesehen ------------
+  if (neu.size) {
+    requestAnimationFrame(() => {
+      const zuNeu = knopfVon.filter((_, i) => neu.has(dinge[i].id));
+      zuNeu.forEach((k) => k.classList.add("neu"));
+      setTimeout(() => zuNeu.forEach((k) => k.classList.remove("neu")), NEU_MS);
+    });
+  }
+}
+
+// Noch nichts gekonnt: ein leeres Fach mit dem Satz des Erzählers, beim Ankommen einmal je Sitzung gesprochen.
+function leer(regal, leiste) {
+  regal.innerHTML = `<li class="brett leer"><p>Hier stellst du hin, was du kannst.</p>
+    <ls-knopf id="leer-hoeren" symbol="vorlesen.svg" name="Noch mal hören" groesse="klein" stumm></ls-knopf></li>`;
+  const merker = "regal:leer";
+  const sag = () => sprich("Hier stellst du hin, was du kannst.");
+  regal.querySelector("#leer-hoeren").addEventListener("click", () => { if (leiste.ton) sag(); });
+  if (leiste.ton && !schonGesagt(merker)) {
+    merkeGesagt(merker);
+    sag().then((r) => { if (r === "abgebrochen") vergissGesagt(merker); });
+  }
+}
+
+// Lernplan oder Spiele fehlen: ein kurzer Text statt leerer Seite (nicht vorgelesen); Haus führt zurück.
+function zeigeFehler() {
+  const p = document.createElement("p");
+  p.className = "fehler";
+  p.textContent = "Das geht gerade nicht. Später noch einmal.";
+  document.getElementById("regal").replaceWith(p);
+}
+
+function remPx() {
+  return parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
+}
+</script>
+</body>
+</html>

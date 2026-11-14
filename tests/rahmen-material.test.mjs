@@ -52,3 +52,39 @@ test("alles andere → Karte mit Ziffer oder erstem Buchstaben", () => {
   assert.deepEqual(materialFuer(t("anlaut", { name: "„Sch“ hören" })), { baustein: "karte", wert: "S" });
   assert.deepEqual(materialFuer(t("leer", { name: "" })), { baustein: "karte", wert: "?" });
 });
+
+const { neuSeit, bausteinHtml } = await import("../spiele/rahmen/material.js");
+
+test("neuSeit: gibt die neu gekonnten zurück, in ihrer Reihenfolge", () => {
+  assert.deepEqual(neuSeit(["a", "b", "c"], ["a"]), ["b", "c"]);
+  assert.deepEqual(neuSeit(["c", "a", "b"], ["a"]), ["c", "b"]);
+});
+
+test("neuSeit: nichts Neues → leer; noch nie gesehen oder kaputter Merker → alles neu", () => {
+  assert.deepEqual(neuSeit(["a", "b"], ["b", "a"]), []);
+  assert.deepEqual(neuSeit([], ["a"]), []);
+  assert.deepEqual(neuSeit(["a"], undefined), ["a"]);
+  assert.deepEqual(neuSeit(["a"], { a: 1 }), ["a"]);
+  assert.deepEqual(neuSeit(["a", "b"], [1, null, "a"]), ["b"]);
+});
+
+test("neuSeit: ein zurückgesetztes Thema fällt aus dem Merker und ist danach wieder einmal neu", () => {
+  // Besuch 1: a und b gekonnt; die Seite merkt sich genau die gekonnten.
+  let gesehen = ["a", "b"];
+  // b wird zurückgesetzt: nichts Neues, und b verschwindet aus dem Merker.
+  let gekonnt = ["a"];
+  assert.deepEqual(neuSeit(gekonnt, gesehen), []);
+  gesehen = gekonnt;
+  assert.deepEqual(gesehen, ["a"]);
+  // b wird wieder gekonnt: einmal neu, beim nächsten Besuch nicht mehr.
+  gekonnt = ["a", "b"];
+  assert.deepEqual(neuSeit(gekonnt, gesehen), ["b"]);
+  gesehen = gekonnt;
+  assert.deepEqual(neuSeit(gekonnt, gesehen), []);
+});
+
+test("bausteinHtml: Perlenstab, Wortart, Karte (escaped)", () => {
+  assert.equal(bausteinHtml({ baustein: "perlenstab", wert: 7 }), '<ls-perlenstab wert="7" aria-hidden="true"></ls-perlenstab>');
+  assert.equal(bausteinHtml({ baustein: "wortart", wert: "verb" }), '<ls-wortart art="verb" aria-hidden="true"></ls-wortart>');
+  assert.equal(bausteinHtml({ baustein: "karte", wert: "<Ä>" }), '<span class="karte" aria-hidden="true">&lt;Ä&gt;</span>');
+});
