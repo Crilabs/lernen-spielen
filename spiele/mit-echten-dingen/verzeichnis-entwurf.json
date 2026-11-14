@@ -13,6 +13,19 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "geteilt-alle-reihen": {
+   "fach": "mathe",
+   "name": "Geteilt in allen Reihen",
+   "titel": "Karten für alle austeilen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Karten austeilen"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/geteilt-alle-reihen.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
