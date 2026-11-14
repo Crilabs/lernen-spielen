@@ -94,6 +94,10 @@ Pflichtteile:
 - **Lernzeichen bleiben schlicht (M1):** Gezählt und gerechnet wird am Lernzeichen (Perlenstab, Zehnerfeld,
   Wortkarte). Die Sachobjekte sind die **Wirkung** der Lösung (B1): Der geteilte Stab wird zu Papier und Wertstoff,
   die Dinge wandern in die Tonnen. Sachobjekte werden nicht als Zählmaterial benutzt.
+- **Das Gelernte bleibt als Lernzeichen sichtbar (Christian):** Nach der Wirkung steht das Ergebnis wieder als
+  Lernzeichen da, verbunden mit dem Zeichen (M7) – bei einer Zerlegung die zwei Perlenstäbe nebeneinander unter dem
+  ganzen Stab und die Gleichung („6 = 2 + 4“). Das bleibt stehen (z. B. in der wachsenden Liste), damit es sich
+  einprägt; die Sachobjekte sind nur der Weg dorthin.
 - **Bewegung nach §7:** Folge einer Kinderhandlung, etwa 1 s, überspringbar; still, solange das Kind denkt (B3); bei
   `prefers-reduced-motion` ohne Bewegung (Endzustand sofort).
 - **Ablage:** Objekte, die mehr als ein Spiel brauchen kann (Tonne, Baum, Korb), in `spiele/objekte/<name>.js` als
@@ -113,6 +117,7 @@ Ein Prüfer, der den Entwurf, den Katalog-Eintrag und die Grundsätze liest (nic
 | A4b | **Eine Welt, keine zweite Metapher:** Die Lernhandlung geschieht *in* der Sachwelt (sieben Dinge teilen sich auf zwei Tonnen auf). Kein zusätzliches Bild obendrauf, das mit der Sache nichts zu tun hat (Haus, Stockwerke, Licht beim Mülltrennen). Lernzeichen wie der Perlenstab dürfen daneben stehen. | K2, L8; Lehre aus dem Zerlegungshaus (Christian) |
 | A5 | **Eine Figur der Runde hat eine Aufgabe** in der Runde und ist im Bild. | F6, F7, `figuren.md` |
 | A6 | Rückmeldung: Mechanik zeigt passt/passt nicht; Erzähler beschreibt; keine Wörter aus 3.2; Fehler-Folge nicht reizvoller. | 3.1, 3.2, N7 |
+| A6b | **Das Gelernte bleibt sichtbar:** Nach der Wirkung steht das Ergebnis als Lernzeichen mit dem Zeichen da (z. B. Perlenstäbe 2 und 4 unter der 6 und „6 = 2 + 4“) und bleibt in der Runde stehen. | M7, L1; Christian |
 | A7 | Hilfe-Leiter mit Probe statt Bedeutungsregel; Lösung mit Begründung. | L12, §5 |
 | A8 | Fachbegriffe nach §5.1; keine Regeln mit Verfallsdatum. | §5 |
 | A9 | Geschichte nach §9 (Spannung aus Neugier, keine Bedrohung, Stufe festgelegt). | §9 |

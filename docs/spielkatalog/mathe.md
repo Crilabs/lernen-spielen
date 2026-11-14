@@ -479,13 +479,16 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 ### M14 Zwei Tonnen
 - Name fürs Kind: „Zwei Tonnen“ (Annahme) · Symbol: zwei Tonnen nebeneinander, darüber die Zahl
 - Handlung: n Dinge liegen nach dem Picknick auf der Decke (n = Thema). Das Kind teilt sie mit einem Trenner in zwei
-  Teile: ein Teil wird Papier, der andere Wertstoff, und beide wandern in ihre Tonne. Jede Zerlegung steht danach als
-  Zeile in einer schlichten Liste neben den Tonnen (geordnet von 0 + n bis n + 0) · Wirkung: Die Decke wird leer, die
+  Teile: ein Teil wird Papier, der andere Wertstoff, und beide wandern in ihre Tonne. Danach steht die Zerlegung
+  **wieder als Perlenstäbe** da – die beiden Teilstäbe nebeneinander unter dem ganzen Stab, dazu „6 = 2 + 4“ – und
+  bleibt als Zeile in der Liste neben den Tonnen stehen (geordnet von 0 + n bis n + 0; Christian: damit es sich
+  einprägt, M7) · Wirkung: Die Decke wird leer, die
   Tonnen füllen sich, die Liste wächst; ist sie vollständig, ist die Wiese sauber. **Keine zweite Metapher** (kein
   Haus, keine Stockwerke, kein Licht; Christian 2026-11-14, `docs/spielentwicklung.md` A4b).
 - Material und Stufen: Perlenstäbchen n (M3). material: Trenner schieben. vorstellung: ein Teil ist verdeckt (wie
   Schüttelbox), das Kind tippt den anderen. kopf: Zerlegungen tippen, Stäbchen kommt als Probe.
-- Lernzeichen: Perlenstäbchen (M3) als Probe neben den Tonnen; die Zerlegungsliste als schlichte Tabelle (Lernfeld, ohne Schmuck).
+- Lernzeichen: Perlenstäbchen (M3); die Zerlegungsliste als schlichte Tabelle im Lernfeld, jede Zeile mit den zwei
+  Teilstäben unter dem ganzen Stab und der Gleichung (ohne Schmuck).
 - Gesten: Ziehen (Trenner), Tippen.
 - Fehlerkontrolle: Auf der Decke bleibt etwas liegen oder es fehlt, wenn die zwei Teile nicht n ergeben; eine
   doppelte Zerlegung steht schon in der Liste.
