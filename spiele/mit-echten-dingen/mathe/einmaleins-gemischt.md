@@ -8,17 +8,17 @@ quellen:
   - Das kleine 1·1 richtig üben (Basisinfos: Ableiten aus Kernaufgaben statt Reihen aufsagen), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
   - Operationsverständnis Multiplikation (Lernen auf Distanz, Hinweise für Eltern: Malaufgaben in der Umwelt finden), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-multiplikation.pdf, abgerufen 2026-11-14
 ---
-# Malaufgaben an der Hauswand
+# Malaufgaben an Hauswand und Pflaster
 
 ## Unterwegs: Fenster rechnen
 
-Ihr braucht: einen Spaziergang an Häusern mit vielen Fenstern. Parkplätze oder Pflaster gehen auch.
+Ihr braucht: einen Spaziergang an großen Häusern, Pflaster oder Fliesen.
 
-1. Wie viele Fenster hat das Haus? Zählt die Reihen und die Fenster je Reihe.
-2. Sagt die Aufgabe so: „Sieben Reihen mit je acht Fenstern. Sieben Achter, 7 mal 8.“
-3. Wer das Ergebnis weiß, sagt es. Sonst sucht ihr eine Aufgabe, die hilft: „5 mal 8 ist gleich 40. Zwei Achter mehr: 40 plus 16 ist gleich 56.“
-4. Wer mag, zählt zur Kontrolle nach.
+1. Sucht ein großes Feld: Fenster eines Hauses oder Pflaster, mit Schritten abgesteckt, etwa 7 Zeilen mit je 8 Steinen.
+2. Sagt: „Sieben Zeilen mit je acht. Sieben Achter, 7 mal 8.“
+3. Einer findet das Feld, der andere sagt das Ergebnis. Sonst helfen Kernaufgaben: „5 mal 8 ist gleich 40. 2 mal 8 ist gleich 16. 40 plus 16 ist gleich 56.“
+4. Wer mag, zählt nach. Dann tauscht ihr: neues Feld, etwa 6 mal 7.
 
-**Darauf kommt es an:** 7 mal 8 heißt sieben Achter. Wer 5 mal 8 weiß, nimmt zwei Achter dazu. So setzt ihr eine Aufgabe aus einer Kernaufgabe zusammen.
+**Darauf kommt es an:** 7 mal 8 sind fünf Achter und zwei Achter. So setzt ihr schwere Aufgaben aus Kernaufgaben zusammen.
 
-**Leichter:** drei Reihen mit je vier Fenstern. **Schwerer:** Neun Achter sind zehn Achter weniger einer: 80 minus 8 ist gleich 72.
+**Leichter:** drei Zeilen mit je vier Fenstern. **Schwerer:** 8 mal 9 sind zehn Neuner weniger zwei Neuner: 90 minus 18 ist gleich 72.
