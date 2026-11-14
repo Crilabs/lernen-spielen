@@ -14,14 +14,16 @@
  *   | { art: "tippe-ziel", ziel: Z }
  *   | { art: "ziehe", teil: T }
  *   | { art: "loslassen", ziel: Z | null }
- *   | { art: "abbrechen" }} Ereignis
+ *   | { art: "abbrechen" }
+ *   | { art: "verloren" }} Ereignis
  */
 
 /**
+ * verloren: das Teil in der Hand ist nicht mehr da (aus dem DOM genommen); vergiss räumt nur auf.
  * hebe/senke: Teil angehoben mit Sonnenring bzw. wieder abgesetzt; greife: Ziehen beginnt;
  * ablegen: das Spiel entscheidet (beimAblegen); zurueck: Teil kehrt an seinen Platz zurück.
  * @template T, Z
- * @typedef {{ art: "hebe" | "senke" | "greife" | "zurueck", teil: T } | { art: "ablegen", teil: T, ziel: Z }} Folge
+ * @typedef {{ art: "hebe" | "senke" | "greife" | "zurueck" | "vergiss", teil: T } | { art: "ablegen", teil: T, ziel: Z }} Folge
  */
 
 /** Nichts in der Hand. */
@@ -36,6 +38,8 @@ export const RUHE = Object.freeze({ phase: /** @type {const} */ ("ruhe"), teil: 
 export function schritt(zustand, e) {
   /** @type {{ zustand: Zustand<T, Z>, folgen: Folge<T, Z>[] }} */
   const nichts = { zustand, folgen: [] };
+  // Ein Teil, das es nicht mehr gibt, kann weder zurück noch abgelegt werden: nur vergessen.
+  if (e.art === "verloren") return zustand.phase === "ruhe" ? nichts : { zustand: RUHE, folgen: [{ art: "vergiss", teil: zustand.teil }] };
   // Während des Ziehens zählt nur das Ende.
   if (zustand.phase === "ziehen") {
     if (e.art === "loslassen") {

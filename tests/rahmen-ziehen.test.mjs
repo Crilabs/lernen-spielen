@@ -100,3 +100,17 @@ test("abbrechen: angehoben → senken, ziehen → zurück, Ruhe → nichts", () 
 test("loslassen ohne Ziehen tut nichts", () => {
   assert.deepEqual(spiele({ art: "loslassen", ziel: "x" }), { zustand: RUHE, folgen: [] });
 });
+
+test("verloren: ein Teil, das nicht mehr da ist, wird vergessen, ohne Ablegen oder Zurück", () => {
+  for (const start of [{ art: "ziehe", teil: "a" }, { art: "tippe-teil", teil: "a" }]) {
+    const vorher = spiele(start).zustand;
+    assert.deepEqual(schritt(vorher, { art: "verloren" }), { zustand: RUHE, folgen: [{ art: "vergiss", teil: "a" }] });
+  }
+  assert.deepEqual(spiele({ art: "verloren" }), { zustand: RUHE, folgen: [] });
+});
+
+test("nach verloren lässt sich wieder ziehen und tippen", () => {
+  const { zustand, folgen } = spiele({ art: "ziehe", teil: "a" }, { art: "verloren" }, { art: "ziehe", teil: "b" });
+  assert.deepEqual(zustand, { phase: "ziehen", teil: "b" });
+  assert.deepEqual(folgen.at(-1), { art: "greife", teil: "b" });
+});

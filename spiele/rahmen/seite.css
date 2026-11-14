@@ -12,7 +12,8 @@
      <ls-leiste>, <ls-hilfe>, <ls-pause> legen sich selbst darüber.
 
    Flächen: .lernfeld (Matte), .tablett (Materialvorrat), beide flach und ohne Schatten (6.4: Schatten heißt
-   drückbar). Drückbar ist .teil (ziehbares Teil, spiele/rahmen/ziehen.js). .auswahl ist der Sonnenring.
+   drückbar). Drückbar ist .teil (ziehbares Teil, spiele/rahmen/ziehen.js). .markiert ist der Sonnenring
+   (nicht .auswahl: die heißt in lernspiel.js „Text darf markiert werden“).
 
    Die Variablen in :root sind dieselben wie TOKENS in stil.js (dort ist die Quelle);
    tests/rahmen-stil.test.mjs prüft, dass sie übereinstimmen. */
@@ -129,7 +130,7 @@ img, svg { -webkit-user-drag: none; }
    Ausgewählt: ein Ring in Sonne direkt an der Tinte-Kontur, außen eine feine Tinte-Linie. Nie eine
    Fläche, bewertet nichts. Liegt als outline außerhalb der Kontur und folgt dem Radius. */
 
-.auswahl,
+.markiert,
 .angehoben {
   outline: 0.8rem solid var(--ls-sonne);
   outline-offset: 0;
@@ -163,17 +164,18 @@ img, svg { -webkit-user-drag: none; }
   user-select: none;
   transition: transform 0.12s ease-out;
 }
-.teil:focus-visible { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0; }
+/* Tastaturfokus: eine Tinte-Linie mit Abstand, deutlich anders als der Sonnenring des angehobenen Teils. */
+.teil:focus-visible:not(.angehoben) { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.8rem; }
 .teil.gedrueckt {
   transform: translateY(0.3rem);
   box-shadow: var(--ls-schatten-unten);
 }
 .teil.angehoben {
   transform: translateY(-1rem);
-  /* Ring (outline) und Tinte-Linie wie bei .auswahl; darunter ein längerer Schatten: es liegt höher. */
+  /* Ring (outline) und Tinte-Linie wie bei .markiert; darunter ein längerer Schatten: es liegt höher. */
   box-shadow:
     0 0 0 1.1rem var(--ls-tinte),
-    0 2.6rem 0 0 var(--ls-tinte-weich);
+    0 1.8rem 0 0 var(--ls-tinte-weich);
   z-index: 20;
 }
 .gezogen { z-index: 40; }
@@ -190,6 +192,10 @@ img, svg { -webkit-user-drag: none; }
 }
 .ziel-frei.ziel-ueber {
   outline-color: var(--ls-tinte-weich);
+}
+.ziel-frei:focus-visible {
+  outline-style: solid;
+  outline-color: var(--ls-tinte);
 }
 
 /* --- Wenig Bewegung (B7) ----------------------------------------------------------------------- */

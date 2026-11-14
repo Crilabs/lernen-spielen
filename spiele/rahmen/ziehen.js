@@ -8,13 +8,16 @@
 // Bewegung ist es Ziehen, sonst ein Tippen.
 // Tippen: Teil antippen → es hebt sich an (Klasse `angehoben`, Sonnenring) → Ziel antippen. Ein zweites
 // Antippen des Teils legt es zurück, ein anderes Teil antippen wechselt die Auswahl.
-// Tastatur: Enter oder Leertaste auf dem Teil hebt es an, auf einem Ziel legt es ab; Escape setzt es ab.
+// Tastatur: Enter oder Leertaste auf dem Teil hebt es an, auf einem Ziel legt es ab; Escape (auf Teil oder
+// Ziel) setzt es ab. Ziele werden dafür während der Auswahl fokussierbar, mit role="button" und einem Namen
+// (Attribut `name` am Ziel, sonst „Ablage“). Nach dem Ablegen per Tastatur liegt der Fokus wieder am Teil.
 //
 // Solange ein Teil angehoben ist oder gezogen wird, tragen seine Ziele `ziel-frei` (ruhige Naht-Linie),
 // das Ziel unter dem Finger zusätzlich `ziel-ueber`. Beim Ziehen trägt das Teil `gezogen`, beim Drücken
 // `gedrueckt`. Das Aussehen steht in seite.css (`.teil`); hier werden nur Klassen und `translate` gesetzt.
 //
-// Ob es passt, entscheidet das Spiel in beimAblegen und ruft zurueck(teil) oder setze(teil, ziel).
+// Ob es passt, entscheidet das Spiel in beimAblegen und ruft zurueck(teil) oder setze(teil, ziel, { vor }).
+// Ein Teil, das während des Ziehens aus dem DOM genommen wird, gibt die Hand frei (sperrt nichts).
 // zurueck bewegt das Teil ruhig zurück (0,3 s, bei wenig Bewegung sofort), nie reizvoller als ein
 // Treffer (B5). Die Zustandslogik steht ohne DOM in ziehen-zustand.js.
 
@@ -35,8 +38,15 @@ let zustand = RUHE;
 const teile = new WeakMap();
 /** Ziele, an denen schon ein Hörer hängt. @type {WeakSet<Element>} */
 const bekannteZiele = new WeakSet();
-/** Ziele, die gerade markiert sind. @type {Set<Element>} */
-const markiert = new Set();
+/** Ziele, die gerade als frei gezeigt werden. @type {Set<Element>} */
+const freieZiele = new Set();
+/** Das Ablegen kam von der Tastatur: danach den Fokus ans Teil geben. */
+let perTastatur = false;
+
+// Wird das gezogene Teil aus dem DOM genommen, meldet der Browser den Verlust der Capture am Dokument.
+globalThis.document?.addEventListener("lostpointercapture", () => {
+  if (zustand.teil && !zustand.teil.isConnected) weiter({ art: "verloren" });
+});
 
 /**
  * Macht ein Element ziehbar (und antippbar).
@@ -59,6 +69,8 @@ export function ziehbar(element, optionen) {
 
   /** @param {PointerEvent} e */
   const unten = (e) => {
+    // Ist das Teil in der Hand verschwunden (aus dem DOM genommen), gibt es die Hand frei.
+    if (zustand.teil && !zustand.teil.isConnected) weiter({ art: "verloren" });
     if (griff || !e.isPrimary || e.button !== 0 || zustand.phase === "ziehen") return;
     griff = { id: e.pointerId, x: e.clientX, y: e.clientY, aktiv: false };
     try {
@@ -81,7 +93,7 @@ export function ziehbar(element, optionen) {
     }
     element.style.translate = `${dx}px ${dy}px`;
     const ueber = zielUnter(element, e.clientX, e.clientY);
-    for (const z of markiert) z.classList.toggle("ziel-ueber", z === ueber);
+    for (const z of freieZiele) z.classList.toggle("ziel-ueber", z === ueber);
   };
   /** @param {PointerEvent} e */
   const oben = (e) => {
@@ -110,11 +122,16 @@ export function ziehbar(element, optionen) {
       weiter({ art: "abbrechen" });
     }
   };
+  /** Capture verloren ohne pointerup (z. B. Element umgehängt): wie Abbrechen. @param {PointerEvent} e */
+  const ohneCapture = (e) => {
+    if (griff && e.pointerId === griff.id) abgebrochen(e);
+  };
 
   element.addEventListener("pointerdown", unten);
   element.addEventListener("pointermove", bewegt);
   element.addEventListener("pointerup", oben);
   element.addEventListener("pointercancel", abgebrochen);
+  element.addEventListener("lostpointercapture", ohneCapture);
   element.addEventListener("keydown", taste);
 
   return () => {
@@ -123,6 +140,7 @@ export function ziehbar(element, optionen) {
     element.removeEventListener("pointermove", bewegt);
     element.removeEventListener("pointerup", oben);
     element.removeEventListener("pointercancel", abgebrochen);
+    element.removeEventListener("lostpointercapture", ohneCapture);
     element.removeEventListener("keydown", taste);
     element.removeAttribute("aria-pressed");
     teile.delete(element);
@@ -145,20 +163,24 @@ export function zurueck(teil) {
 }
 
 /**
- * Setzt das Teil ins Ziel (als letztes Kind). Es gleitet von dort, wo es war, an seinen neuen Platz.
+ * Setzt das Teil ins Ziel: vor den Knoten `vor` (ein Kind des Ziels), sonst ans Ende. So bestimmt das Spiel
+ * die Reihenfolge. Das Teil gleitet von dort, wo es war, an seinen neuen Platz; hatte es den Fokus, behält es ihn.
  * @param {HTMLElement} teil
  * @param {Element} ziel
+ * @param {{ vor?: Node | null }} [optionen]
  * @returns {void}
  */
-export function setze(teil, ziel) {
-  const vor = teil.getBoundingClientRect();
+export function setze(teil, ziel, { vor = null } = {}) {
+  const alt = teil.getBoundingClientRect();
+  const fokus = document.activeElement === teil;
   loese(teil);
   teil.style.translate = "";
-  ziel.append(teil);
+  ziel.insertBefore(teil, vor);
+  if (fokus && document.activeElement !== teil) teil.focus({ preventScroll: true });
   if (wenigBewegung()) return;
   const nach = teil.getBoundingClientRect();
-  const dx = vor.left - nach.left;
-  const dy = vor.top - nach.top;
+  const dx = alt.left - nach.left;
+  const dy = alt.top - nach.top;
   if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
   gleite(teil, `${dx}px ${dy}px`);
 }
@@ -173,6 +195,8 @@ function weiter(e) {
 /** @param {{ zustand: import("./ziehen-zustand.js").Zustand<HTMLElement, Element>, folgen: Folge[] }} r */
 function fuehreAus(r) {
   zustand = r.zustand;
+  const tastatur = perTastatur;
+  perTastatur = false;
   for (const f of r.folgen) {
     const teil = f.teil;
     switch (f.art) {
@@ -180,28 +204,33 @@ function fuehreAus(r) {
         teil.style.transition = "";
         teil.classList.add("angehoben");
         teil.setAttribute("aria-pressed", "true");
-        markiere(teil);
+        zeigeZiele(teil);
         break;
       case "senke":
         teil.classList.remove("angehoben");
         teil.setAttribute("aria-pressed", "false");
-        markiere(null);
+        zeigeZiele(null);
         break;
       case "greife":
         teil.style.transition = "none";
         teil.classList.add("gezogen");
-        markiere(teil);
+        zeigeZiele(teil);
         break;
       case "ablegen": {
         teil.classList.remove("gezogen");
-        markiere(null);
+        zeigeZiele(null);
         const beimAblegen = teile.get(teil)?.beimAblegen;
         if (beimAblegen) beimAblegen(teil, f.ziel);
         else zurueck(teil);
+        if (tastatur && teil.isConnected) teil.focus({ preventScroll: true });
         break;
       }
       case "zurueck":
         zurueck(teil);
+        break;
+      case "vergiss":
+        teil.classList.remove("angehoben", "gezogen", "gedrueckt");
+        zeigeZiele(null);
         break;
     }
   }
@@ -214,7 +243,7 @@ function fuehreAus(r) {
 function loese(teil) {
   if (zustand.teil === teil) {
     zustand = RUHE;
-    markiere(null);
+    zeigeZiele(null);
   }
   teil.classList.remove("angehoben", "gezogen", "gedrueckt");
   if (teile.has(teil)) teil.setAttribute("aria-pressed", "false");
@@ -231,36 +260,57 @@ function gleite(teil, von) {
   teil.getBoundingClientRect();
   teil.style.transition = `translate ${DAUER}ms ease-out`;
   teil.style.translate = "0px 0px";
-  const fertig = () => {
+  /** @param {Event} [e] */
+  const fertig = (e) => {
+    if (e && /** @type {TransitionEvent} */ (e).propertyName !== "translate") return;
+    teil.removeEventListener("transitionend", fertig);
     teil.style.transition = "";
     if (/^0px( 0px)?$/.test(teil.style.translate)) teil.style.translate = "";
   };
-  teil.addEventListener("transitionend", fertig, { once: true });
+  teil.addEventListener("transitionend", fertig);
   setTimeout(fertig, DAUER + 50);
 }
 
+/** Was zeigeZiele an einem Ziel gesetzt hat und wieder entfernt. */
+const GELIEHEN = [
+  ["tabindex", "lsTabindex"],
+  ["role", "lsRole"],
+  ["aria-label", "lsLabel"],
+];
+
 /**
- * Markiert die Ziele eines Teils als frei (oder hebt die Markierung auf).
+ * Zeigt die Ziele eines Teils als frei (oder nimmt die Anzeige zurück). Ziele werden dabei fokussierbar,
+ * mit role="button" und einem Namen; was sie vorher schon hatten, bleibt unberührt.
  * @param {HTMLElement | null} teil
  */
-function markiere(teil) {
-  for (const z of markiert) {
+function zeigeZiele(teil) {
+  for (const z of freieZiele) {
     z.classList.remove("ziel-frei", "ziel-ueber");
-    if (z instanceof HTMLElement && z.dataset.lsTabindex === "") {
-      z.removeAttribute("tabindex");
-      delete z.dataset.lsTabindex;
+    if (!(z instanceof HTMLElement)) continue;
+    for (const [attr, merker] of GELIEHEN) {
+      if (z.dataset[merker] === "") {
+        z.removeAttribute(attr);
+        delete z.dataset[merker];
+      }
     }
   }
-  markiert.clear();
+  freieZiele.clear();
   if (!teil) return;
   for (const z of zieleVon(teil)) {
     beobachteZiel(z);
     z.classList.add("ziel-frei");
-    if (z instanceof HTMLElement && !istFokussierbar(z)) {
-      z.tabIndex = 0;
-      z.dataset.lsTabindex = "";
+    if (z instanceof HTMLElement) {
+      /** @param {string} attr @param {string} merker @param {string} wert */
+      const leihe = (attr, merker, wert) => {
+        if (z.hasAttribute(attr)) return;
+        z.setAttribute(attr, wert);
+        z.dataset[merker] = "";
+      };
+      if (!istFokussierbar(z)) leihe("tabindex", "lsTabindex", "0");
+      if (!(z instanceof HTMLButtonElement)) leihe("role", "lsRole", "button");
+      leihe("aria-label", "lsLabel", z.getAttribute("name") || "Ablage");
     }
-    markiert.add(z);
+    freieZiele.add(z);
   }
 }
 
@@ -271,7 +321,7 @@ function beobachteZiel(ziel) {
   if (bekannteZiele.has(ziel)) return;
   bekannteZiele.add(ziel);
   const antippen = () => {
-    if (zustand.phase !== "angehoben" || !markiert.has(ziel)) return;
+    if (zustand.phase !== "angehoben" || !freieZiele.has(ziel)) return;
     weiter({ art: "tippe-ziel", ziel });
   };
   ziel.addEventListener("click", (e) => {
@@ -281,10 +331,18 @@ function beobachteZiel(ziel) {
   });
   ziel.addEventListener("keydown", (e) => {
     const k = /** @type {KeyboardEvent} */ (e);
-    if (k.target !== ziel || (k.key !== "Enter" && k.key !== " ")) return;
-    if (ziel instanceof HTMLButtonElement) return; // der Knopf meldet selbst click
+    if (k.target !== ziel) return;
+    if (k.key === "Escape" && zustand.phase === "angehoben" && freieZiele.has(ziel)) {
+      const teil = zustand.teil;
+      weiter({ art: "abbrechen" });
+      if (teil.isConnected) teil.focus({ preventScroll: true });
+      return;
+    }
+    if (k.key !== "Enter" && k.key !== " ") return;
     k.preventDefault();
+    perTastatur = true;
     antippen();
+    perTastatur = false;
   });
 }
 
@@ -300,11 +358,11 @@ function teilVon(start, grenze) {
   return false;
 }
 
-/** @param {HTMLElement} teil @returns {Element[]} */
+/** Die Ziele eines Teils, soweit sie im Dokument sind. @param {HTMLElement} teil @returns {Element[]} */
 function zieleVon(teil) {
   const ziele = teile.get(teil)?.ziele;
   if (!ziele) return [];
-  return [...(typeof ziele === "function" ? ziele() : ziele)];
+  return [...(typeof ziele === "function" ? ziele() : ziele)].filter((z) => z.isConnected);
 }
 
 /**
