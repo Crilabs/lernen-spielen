@@ -168,7 +168,27 @@ schaut sie erneut an, Screenshots je Bewegungszustand), Regal-Bild für die Them
 (`material.js`), Eintrag in `spiele.json`, Browser-Prüfung des Spiels, Durchspielen erneut grün. Danach
 Abschluss-Review des Branches (wie bei Rahmen und Ansichten) und Merge nach `main`.
 
-## 6. Parken
+## 6. Kosten je Spiel (Christian)
+
+Für jedes Spiel wird festgehalten, was seine Entwicklung verbraucht hat, damit die Kosten im Blick bleiben und sich
+für alle Spiele des Katalogs vorhersagen lassen.
+
+- **Ablage:** `spiele/<fach>/<spiel>/kosten.json`, eine Liste von Einträgen
+  `{ datum, phase, posten, modell, eingabe, ausgabe, einheit, menge, notiz }`:
+  - **KI-Entwicklung** (Claude): je Agent (Entwurf, Prüfung A, Prototyp, Prüfer B, Ausbau, Review) Modell und
+    Token-Verbrauch, wie ihn die Agenten-Rückmeldung nennt (`phase`: entwurf, pruefung-a, prototyp, pruefung-b,
+    ausbau, review; `einheit`: tokens).
+  - **Bilder** (Azure OpenAI): je erzeugtem Bild der Verbrauch aus der API-Antwort (`usage`: Ein- und Ausgabe-Token,
+    bzw. Bildanzahl und Größe), eingetragen vom Bild-Werkzeug; dasselbe steht in `herkunft.json` des Bildes (A4).
+  - **Stimme** (Azure Speech): je Lauf von `npm run audio` die Zahl der neu erzeugten Zeichen für die Texte des
+    Spiels (`einheit`: zeichen).
+- **Preise:** `werkzeuge/kosten/preise.json` (Preis je Million Token je Modell, je Bild/Token für Bilder, je Million
+  Zeichen für die Stimme, mit Stand-Datum und Quelle). Preise ändern sich; der Bericht rechnet immer mit der Datei.
+- **Bericht:** `npm run kosten` zeigt je Spiel die Summe in Token, Zeichen, Bildern und Euro, den Durchschnitt je
+  fertigem Spiel und eine **Prognose für alle Spiele des Katalogs** (Anzahl aus `docs/spielkatalog.md`), getrennt nach
+  Posten, mit Spannweite (günstigstes bis teuerstes bisheriges Spiel). Geparkte Spiele zählen mit, gesondert ausgewiesen.
+
+## 7. Parken
 
 Bleibt Prüfung A oder B nach drei Runden rot, wird das Spiel geparkt: Branch bleibt, `docs/spiele/<fach>/<spiel>.md` bekommt
 einen Abschnitt „Geparkt“ mit den offenen Befunden, Christian bekommt eine kurze Meldung. Kein weiterer Versuch ohne
