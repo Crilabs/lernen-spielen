@@ -1,6 +1,6 @@
 # Mit echten Dingen – Spiele ohne Bildschirm
 
-Stand: 2026-11-14 · **Entwurf zur Freigabe** · Entscheidungen von Christian (2026-11-14)
+Stand: 2026-11-14 · **freigegeben (Christian, 2026-11-14)** · Entscheidungen von Christian (2026-11-14)
 Markierung: **(Christian)** entschieden · **(Annahme)** Vorschlag, korrigierbar.
 
 ## Warum

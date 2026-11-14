@@ -501,4 +501,4 @@ Nachrücker: [M38](spielkatalog/mathe.md) Gerecht verteilen, sobald Teilen dazuk
   `spiele/schrift/vorlagen/`, Prüfseite `npm run schrift:ansehen`).
 - **Mit echten Dingen (Christian, 2026-11-14):** Zu allen Themen dieser zehn Spiele entstehen auch die Anleitungen
   ohne Bildschirm nach `docs/mit-echten-dingen.md`, eine je Thema (zusammen 133 Themen). Sie hängen nicht an der
-  App und können vor den Spielen entstehen.
+  App, entstehen aber wie vorgesehen mit dem Bau des jeweiligen Spiels (Christian).
