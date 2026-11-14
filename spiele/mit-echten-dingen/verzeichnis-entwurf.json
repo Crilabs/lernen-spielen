@@ -1,5 +1,18 @@
 {
  "themen": {
+  "dreierreihe": {
+   "fach": "mathe",
+   "name": "Dreierreihe",
+   "titel": "Drei auf jedem Teller",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Brotzeit verteilen"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/dreierreihe.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
