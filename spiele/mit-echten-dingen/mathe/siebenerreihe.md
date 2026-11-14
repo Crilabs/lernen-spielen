@@ -1,7 +1,6 @@
 ---
 thema: siebenerreihe
 fach: mathe
-entwurf: true
 bild: { figur: wandkalender, zustand: haengt }
 quellen:
   - 1·1 richtig üben, Basisinfos (Kernaufgaben der Reihe mit 7: 1 · 7, 2 · 7, 5 · 7, 10 · 7; 6 · 7 ist 5 · 7 plus 1 · 7), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
