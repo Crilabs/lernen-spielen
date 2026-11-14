@@ -19,6 +19,14 @@ Name in der App und im Projekt: **„Mit echten Dingen“** (Annahme; der Knopf 
   (ruhig, konzentriert), *In Bewegung* (Treppe, hüpfen, Raum), *Unterwegs* (Spaziergang, Auto, Einkauf). Varianten
   nur, wo sie das Thema wirklich treffen; erzwungene Varianten streicht die Prüfung (E1). Gibt es für ein Thema schon
   eine Datei, entsteht keine zweite, auch wenn ein weiteres Spiel das Thema bedient.
+- **Eine Anleitung für eine Familie (Christian, 2026-11-14):** Wer die 4 mit Nudeln und Tellern zerlegt, braucht kein
+  zweites Spiel, das die 6 mit Erbsen und Tassen zerlegt. Ist die Handlung dieselbe und wechselt nur ein Wert (Zahl,
+  Buchstabe), trägt **eine** Datei alle diese Themen: im Kopf `themen:` als Liste statt `thema:`, Dateiname = Name der
+  Familie (z. B. `mathe/zerlegen.md`), der Wert steht im Text allgemein („so viele, wie die Zahl sagt, zum Beispiel
+  sieben“). Vor jedem neuen Thema wird deshalb erst eine passende Familie gesucht; passt eine, kommt das Thema in ihre
+  Liste, und die Prüfung E1 prüft, ob sie es wirklich trägt. **Gegenregel:** Themen mit eigener Schwierigkeit oder
+  eigenem Alltagszweck bleiben getrennt, auch bei gleichem Material (die Zweierreihe paart Socken, die Fünferreihe
+  zählt Kleingeld). Jedes Thema steht in höchstens einer Datei (`npm run echte-dinge` bricht sonst ab).
 - **Nach Situation, nicht nach Kind-Typ:** keine Einstellung „Bewegungstyp“ o. ä. im Profil (Lerntypen sind ein
   Mythos, `grundsaetze.md` §1). Gewählt wird auf der Seite im Moment (N1, N2); die Seite merkt sich die letzte Wahl
   als Voreinstellung.
