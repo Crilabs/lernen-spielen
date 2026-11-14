@@ -1,7 +1,6 @@
 ---
 thema: sechserreihe
 fach: mathe
-entwurf: true
 bild: { figur: eierkarton, zustand: karton }
 quellen:
   - Operationsverständnis Multiplikation, Lernen auf Distanz Klasse 2 (Malaufgaben an Verpackungen wie Eierkartons zu Hause finden, räumlich-simultane Vorstellung), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-multiplikation.pdf, abgerufen 2026-11-14
