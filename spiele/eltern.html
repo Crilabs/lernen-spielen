@@ -180,6 +180,7 @@ details > summary::-webkit-details-marker { display: none; }
   <nav class="el-nav" aria-label="Bereiche">
     <h1>Für Erwachsene</h1>
     <ls-knopf data-tab="lernstand" symbol="lernstand.svg" wort="Lernstand" stumm></ls-knopf>
+    <ls-knopf id="echte-dinge" symbol="hand.svg" wort="Mit echten Dingen" stumm></ls-knopf>
     <ls-knopf data-tab="geschichten" symbol="buch.svg" wort="Geschichten" stumm></ls-knopf>
     <ls-knopf data-tab="geraet" symbol="update.svg" wort="Gerät" stumm></ls-knopf>
     <ls-knopf data-tab="hinweise" symbol="hilfe.svg" wort="Hinweise" stumm></ls-knopf>
@@ -272,6 +273,8 @@ async function taste(z) {
 }
 const zuDenSpielen = async () => { await sofortSpeichern(); location.href = "index.html"; };
 $("pin-zurueck").addEventListener("click", zuDenSpielen);
+// Übersicht „Mit echten Dingen“ (ohne PIN, eigene Seite; docs/mit-echten-dingen.md): Zurück führt wieder hierher.
+$("echte-dinge").addEventListener("click", async () => { await sofortSpeichern(); location.href = "mit-echten-dingen.html"; });
 
 // ---------- Bereich ----------
 let tab = "lernstand";
