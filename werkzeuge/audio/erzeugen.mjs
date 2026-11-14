@@ -14,6 +14,7 @@ import { fileURLToPath } from "node:url";
 import { azure, holeSchluessel } from "./azure.mjs";
 import { ssml } from "./ssml.mjs";
 import { sammle } from "./texte.mjs";
+import { findeSpielordner, ordneZu, texteDesSpiels, trageEin } from "../kosten/kosten.mjs";
 
 /** @typedef {import("./texte.mjs").Eintrag} Eintrag */
 /** @typedef {{ datei: string, h?: string, gehoert?: boolean, hand?: boolean }} IndexEintrag */
@@ -38,7 +39,7 @@ const kurz = (s, n = 12) => createHash("sha1").update(s).digest("hex").slice(0, 
 export async function erzeuge({ eintraege, index, einstellungen, aussprache, synth, schreibe, loesche, aufraeumen = false, melde = () => {} }) {
   /** @type {Record<string, IndexEintrag>} */
   const texte = {};
-  const bericht = { neu: 0, gleich: 0, hand: 0, fehlt: /** @type {string[]} */ ([]), zahl: /** @type {string[]} */ ([]), verwaist: /** @type {string[]} */ ([]), zeichen: 0, fehler: "" };
+  const bericht = { neu: 0, gleich: 0, hand: 0, fehlt: /** @type {string[]} */ ([]), zahl: /** @type {string[]} */ ([]), verwaist: /** @type {string[]} */ ([]), zeichen: 0, erzeugt: /** @type {{ text: string, zeichen: number }[]} */ ([]), fehler: "" };
 
   for (const e of eintraege) {
     const alt = index.texte[e.schluessel];
@@ -78,6 +79,7 @@ export async function erzeuge({ eintraege, index, einstellungen, aussprache, syn
     texte[e.schluessel] = { datei, h, gehoert: false };
     bericht.neu += 1;
     bericht.zeichen += e.text.length;
+    bericht.erzeugt.push({ text: e.text, zeichen: e.text.length });
   }
 
   for (const [k, alt] of Object.entries(index.texte)) {
@@ -120,6 +122,23 @@ export function speichereAussprache(aussprache) {
 }
 
 /**
+ * Trägt die neu erzeugten Zeichen in kosten.json ein (docs/spielentwicklung.md §6): alle in den Ordner `spiel`,
+ * sonst je Spiel nach dessen texte.json. Texte ohne Spiel stehen nur im Rückgabewert.
+ * @param {{ text: string, zeichen: number }[]} erzeugt
+ * @returns {{ je: Record<string, number>, ohneSpiel: number }}
+ */
+export function trageZeichenEin(erzeugt, { spiel = "", spielordner = findeSpielordner(WURZEL), datum = new Date().toISOString().slice(0, 10) } = {}) {
+  if (!erzeugt.length) return { je: {}, ohneSpiel: 0 };
+  const alle = erzeugt.reduce((a, t) => a + t.zeichen, 0);
+  const { je, ohneSpiel } = spiel
+    ? { je: { [spiel]: alle }, ohneSpiel: 0 }
+    : ordneZu(erzeugt, Object.fromEntries(spielordner.map((o) => [o, texteDesSpiels(o)])));
+  for (const [ordner, menge] of Object.entries(je))
+    trageEin(ordner, { datum, phase: "stimme", posten: "stimme", einheit: "zeichen", menge, notiz: "npm run audio" });
+  return { je, ohneSpiel };
+}
+
+/**
  * Ein ganzer Lauf über das Projekt: sammeln, erzeugen (ohne Schlüssel oder mit pruefen: nur planen),
  * Index speichern. Von der Kommandozeile und von der Anhör-Seite genutzt.
  * @param {{ pruefen?: boolean, aufraeumen?: boolean, melde?: (z: string) => void }} [o]
@@ -156,7 +175,17 @@ export async function lauf({ pruefen = false, aufraeumen = false, melde = () => 
 async function main() {
   const args = new Set(process.argv.slice(2));
   const pruefen = args.has("--pruefen");
+  const iSpiel = process.argv.indexOf("--spiel");
+  const spiel = iSpiel >= 0 ? process.argv[iSpiel + 1] : "";
+  if (iSpiel >= 0 && !spiel) throw new Error("--spiel braucht einen Spielordner");
+  args.delete("--spiel");
+  args.delete(spiel);
   const { neu, bericht, eintraege, offen } = await lauf({ pruefen, aufraeumen: args.has("--aufraeumen"), melde: (z) => console.log(z) });
+  if (!pruefen) {
+    const { je, ohneSpiel } = trageZeichenEin(bericht.erzeugt, { spiel });
+    for (const [o, n] of Object.entries(je)) console.log(`Kosten: ${n} Zeichen in ${o}/kosten.json`);
+    if (ohneSpiel) console.log(`Kosten: ${ohneSpiel} Zeichen gehören zu keinem Spiel (kein texte.json passt; --spiel <ordner> nutzen)`);
+  }
 
   const ungehoert = Object.values(neu.texte).filter((t) => !t.gehoert).length;
   console.log(

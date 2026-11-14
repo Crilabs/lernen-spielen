@@ -236,6 +236,7 @@ für alle Spiele des Katalogs vorhersagen lassen.
     bzw. Bildanzahl und Größe), eingetragen vom Bild-Werkzeug; dasselbe steht in `herkunft.json` des Bildes (A4).
   - **Stimme** (Azure Speech): je Lauf von `npm run audio` die Zahl der neu erzeugten Zeichen für die Texte des
     Spiels (`einheit`: zeichen).
+- **Werkzeuge:** `werkzeuge/kosten/kosten.mjs` (`trageEin`, `summen`, `prognose`). Posten: `claude` (`einheit: tokens`, `menge` = Eingabe + Ausgabe), `bild` (`bilder`, `menge` 1, `usage` aus der Antwort), `stimme` (`zeichen`), `status` (`phase: geparkt`, `einheit: keine`, markiert ein geparktes Spiel). Bilder: `node werkzeuge/bilder/erzeugen.mjs --spiel <ordner> <ziel> "<Szene>"`; Stimme: `npm run audio` ordnet neue Zeichen über `texte.json` zu, oder `-- --spiel <ordner>`. Für „Mit echten Dingen“ nennt ein Eintrag zusätzlich `themen` (Zahl der Themen, die er abdeckt).
 - **Preise:** `werkzeuge/kosten/preise.json` (Preis je Million Token je Modell, je Bild/Token für Bilder, je Million
   Zeichen für die Stimme, mit Stand-Datum und Quelle). Preise ändern sich; der Bericht rechnet immer mit der Datei.
 - **Bericht:** `npm run kosten` zeigt je Spiel die Summe in Token, Zeichen, Bildern und Euro, den Durchschnitt je

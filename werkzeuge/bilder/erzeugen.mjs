@@ -1,26 +1,84 @@
 // Szenenbilder mit Azure OpenAI erzeugen (Stimmungsebene, docs/grundsaetze-bilder.md §11 A1–A6).
-// Aufruf: node werkzeuge/bilder/erzeugen.mjs <ziel.png> "<Szene>"   (Basis-Prompt: basis-szene.txt)
+// Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <spielordner>] <ziel.png> "<Szene>"   (Basis-Prompt: basis-szene.txt)
+// Mit --spiel steht der Verbrauch (usage der API-Antwort) in <spielordner>/kosten.json und in herkunft.json neben dem Bild
+// (docs/spielentwicklung.md §6). Ohne --spiel wird nur die Herkunft geschrieben.
 // Zugang aus .env (nie ins Repo): AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, AZURE_OPENAI_IMAGE_DEPLOYMENT,
-// AZURE_OPENAI_API_VERSION. Die Herkunft (A4) trägt der Aufrufer in herkunft.json neben dem Bild ein.
-import { readFileSync, writeFileSync } from "node:fs";
+// AZURE_OPENAI_API_VERSION. Weitere Angaben zur Herkunft (A4) trägt der Aufrufer in herkunft.json ein.
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { trageEin } from "../kosten/kosten.mjs";
 
 const hier = (p) => fileURLToPath(new URL(p, import.meta.url));
-const env = Object.fromEntries(
-  readFileSync(hier("../../.env"), "utf8").split("\n").map((z) => z.match(/^\s*([A-Z_]+)\s*=\s*(.*)\s*$/)).filter(Boolean)
-    .map(([, k, v]) => [k, v.replace(/^["']|["']$/g, "")]),
-);
-const [ziel, szene] = process.argv.slice(2);
-if (!ziel || !szene) throw new Error('Aufruf: node werkzeuge/bilder/erzeugen.mjs <ziel.png> "<Szene>"');
-const basis = readFileSync(hier("basis-szene.txt"), "utf8").trim();
-const prompt = `${basis}\n\nScene: ${szene}`;
-const url = `${env.AZURE_OPENAI_ENDPOINT.replace(/\/$/, "")}/openai/deployments/${env.AZURE_OPENAI_IMAGE_DEPLOYMENT}/images/generations?api-version=${env.AZURE_OPENAI_API_VERSION}`;
-const antwort = await fetch(url, {
-  method: "POST",
-  headers: { "Content-Type": "application/json", "api-key": env.AZURE_OPENAI_API_KEY },
-  body: JSON.stringify({ prompt, size: "1536x1024", quality: "high", n: 1 }),
-});
-const daten = await antwort.json();
-if (!antwort.ok) throw new Error(`Azure OpenAI ${antwort.status}: ${JSON.stringify(daten).slice(0, 500)}`);
-writeFileSync(ziel, Buffer.from(daten.data[0].b64_json, "base64"));
-console.log(JSON.stringify({ ziel, modell: env.AZURE_OPENAI_IMAGE_DEPLOYMENT, prompt }, null, 2));
+
+/** Zerlegt die Argumente: --spiel <ordner>, dann Ziel und Szene. */
+export function leseArgumente(argv) {
+  const rest = [];
+  let spiel = "";
+  for (let i = 0; i < argv.length; i++) {
+    if (argv[i] === "--spiel") {
+      spiel = argv[++i] ?? "";
+      if (!spiel) throw new Error("--spiel braucht einen Spielordner");
+    } else rest.push(argv[i]);
+  }
+  const [ziel, szene] = rest;
+  if (!ziel || !szene) throw new Error('Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <ordner>] <ziel.png> "<Szene>"');
+  return { ziel, szene, spiel };
+}
+
+/** Verbrauch aus der API-Antwort (usage: input_tokens, output_tokens, …) als Zahlen; fehlt er, ist es ein Fehler. */
+export function usageAusAntwort(daten) {
+  const u = daten?.usage;
+  if (!u || !Number.isInteger(u.input_tokens) || !Number.isInteger(u.output_tokens))
+    throw new Error("Die Antwort enthält keine usage mit input_tokens und output_tokens; Kosten lassen sich nicht eintragen");
+  return u;
+}
+
+/** Schreibt den Verbrauch in kosten.json des Spiels und herkunft.json neben dem Bild. */
+export function schreibeVerbrauch({ spiel, ziel, modell, prompt, usage, datum = new Date().toISOString().slice(0, 10) }) {
+  if (spiel)
+    trageEin(spiel, {
+      datum, phase: "bild", posten: "bild", modell, eingabe: usage.input_tokens, ausgabe: usage.output_tokens,
+      einheit: "bilder", menge: 1, notiz: basename(ziel), usage,
+    });
+  const datei = join(dirname(ziel), "herkunft.json");
+  const alt = existsSync(datei) ? JSON.parse(readFileSync(datei, "utf8")) : {};
+  alt[basename(ziel)] = { datum, modell, prompt, usage };
+  mkdirSync(dirname(ziel), { recursive: true });
+  writeFileSync(datei, JSON.stringify(alt, null, 1) + "\n");
+}
+
+async function main() {
+  const { ziel, szene, spiel } = leseArgumente(process.argv.slice(2));
+  const env = Object.fromEntries(
+    readFileSync(hier("../../.env"), "utf8").split("\n").map((z) => z.match(/^\s*([A-Z_]+)\s*=\s*(.*)\s*$/)).filter(Boolean)
+      .map(([, k, v]) => [k, v.replace(/^["']|["']$/g, "")]),
+  );
+  const basis = readFileSync(hier("basis-szene.txt"), "utf8").trim();
+  const prompt = `${basis}\n\nScene: ${szene}`;
+  const url = `${env.AZURE_OPENAI_ENDPOINT.replace(/\/$/, "")}/openai/deployments/${env.AZURE_OPENAI_IMAGE_DEPLOYMENT}/images/generations?api-version=${env.AZURE_OPENAI_API_VERSION}`;
+  const antwort = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "api-key": env.AZURE_OPENAI_API_KEY },
+    body: JSON.stringify({ prompt, size: "1536x1024", quality: "high", n: 1 }),
+  });
+  const daten = await antwort.json();
+  if (!antwort.ok) throw new Error(`Azure OpenAI ${antwort.status}: ${JSON.stringify(daten).slice(0, 500)}`);
+  writeFileSync(ziel, Buffer.from(daten.data[0].b64_json, "base64"));
+  const modell = env.AZURE_OPENAI_IMAGE_DEPLOYMENT;
+  // Das Bild ist bezahlt und gespeichert; fehlt usage, nur melden statt es zu verwerfen.
+  try {
+    schreibeVerbrauch({ spiel, ziel, modell, prompt, usage: usageAusAntwort(daten) });
+  } catch (e) {
+    console.error(`Bild gespeichert, aber Kosten nicht eingetragen: ${e.message}`);
+    process.exitCode = 1;
+  }
+  console.log(JSON.stringify({ ziel, modell, prompt, usage: daten.usage }, null, 2));
+}
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  main().catch((e) => {
+    console.error(String(e?.message ?? e));
+    process.exitCode = 1;
+  });
+}

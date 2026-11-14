@@ -1,0 +1,42 @@
+{
+  "hinweis": "Preise je Million (Mio) Token bzw. Zeichen. Der Bericht (npm run kosten) rechnet immer mit dieser Datei. Posten mit unsicher: true sind nicht sicher bestätigt und im Bericht so markiert.",
+  "stand": "2026-11-14",
+  "waehrung": "EUR",
+  "usdInEur": {
+    "wert": 0.86,
+    "unsicher": true,
+    "stand": "2026-11-14",
+    "quelle": "Annahme (grober Kurs), nicht abgefragt; Claude-Preise sind in USD und werden damit umgerechnet"
+  },
+  "claude": {
+    "claude-opus-5-5": {
+      "eingabeProMio": 4, "ausgabeProMio": 20, "waehrung": "USD", "stand": "2026-11-14",
+      "quelle": "Skill claude-api, Tabelle „Current Models“ (cached 2026-11-03); Cache-Lesen 0,20 USD/Mio wird nicht getrennt gerechnet"
+    },
+    "claude-sonnet-5-5": {
+      "eingabeProMio": 2, "ausgabeProMio": 10, "waehrung": "USD", "stand": "2026-11-14",
+      "quelle": "Skill claude-api, Tabelle „Current Models“ (cached 2026-11-03)"
+    },
+    "claude-haiku-5-5": {
+      "eingabeProMio": 0.1, "ausgabeProMio": 0.5, "waehrung": "USD", "stand": "2026-11-14",
+      "quelle": "Skill claude-api, Tabelle „Current Models“; gilt für Prompts bis 100K Token (darüber 0,50 / 2,50 USD)"
+    }
+  },
+  "bilder": {
+    "modell": "gpt-image-1",
+    "eingabeProMio": 4.5,
+    "ausgabeProMio": 35.9,
+    "waehrung": "EUR",
+    "stand": "2026-11-14",
+    "unsicher": true,
+    "quelle": "Azure Retail Prices API (prices.azure.com/api/retail/prices), Foundry Models, Azure OpenAI, gpt-image-1 Global, swedencentral, EUR: Text-Eingabe 0,0045 EUR/1K, Bild-Ausgabe 0,0359 EUR/1K Token. Unsicher, weil die Bereitstellung (AZURE_OPENAI_IMAGE_DEPLOYMENT) nicht geprüft wurde und die Azure-Preisseite selbst im Web keine Beträge zeigt; Drittseiten nennen 5 USD / 40 USD je Mio."
+  },
+  "stimme": {
+    "stimme": "de-DE-Florian:DragonHDLatestNeural",
+    "proMioZeichen": 19.7495,
+    "waehrung": "EUR",
+    "stand": "2026-11-14",
+    "unsicher": false,
+    "quelle": "Azure Retail Prices API, Azure Speech, „Neural HD Text to Speech Characters“, westeurope, EUR, gültig ab 2026-03-01 (Drittseiten nennen 22 bis 30 USD je Mio, ältere Stände)"
+  }
+}

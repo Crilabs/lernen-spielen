@@ -7,6 +7,7 @@
     "luecken": "node scripts/luecken.mjs",
     "tauri": "tauri",
     "audio": "node werkzeuge/audio/erzeugen.mjs",
+    "kosten": "node werkzeuge/kosten/bericht.mjs",
     "audio:vergleich": "node werkzeuge/audio/vergleich.mjs",
     "audio:anhoeren": "node werkzeuge/audio/anhoeren.mjs"
   },
