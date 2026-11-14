@@ -410,9 +410,12 @@ function zielUnter(teil, x, y) {
 
 // --- Hilfen ------------------------------------------------------------------------------------
 
-/** @param {HTMLElement} el */
+/**
+ * Mit Tab erreichbar? Nur mit tabindex: WebKit (Safari, macOS-Vorgabe) überspringt Knöpfe und Links ohne tabindex.
+ * @param {HTMLElement} el
+ */
 function istFokussierbar(el) {
-  return el.hasAttribute("tabindex") || el instanceof HTMLButtonElement || (el instanceof HTMLAnchorElement && el.hasAttribute("href"));
+  return el.hasAttribute("tabindex");
 }
 
 function remPx() {

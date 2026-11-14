@@ -110,7 +110,7 @@ export class LsLeiste extends HTMLElement {
     const wurzel = this.attachShadow({ mode: "open" });
     wurzel.innerHTML = `<style>${GRUND_CSS}${LEISTE_CSS}</style>
       <div class="band">
-        <a class="knopf haus" href="${HAUS_HREF}" aria-label="${HAUS_NAME}" draggable="false"><span class="form neben rund"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span></span></a>
+        <a class="knopf haus" href="${HAUS_HREF}" tabindex="0" aria-label="${HAUS_NAME}" draggable="false"><span class="form neben rund"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span></span></a>
         <span class="fach" hidden><i></i></span>
         <div class="titel"><p class="name" hidden></p><p class="thema" hidden></p></div>
         <ls-knopf class="ton tonknopf" stumm></ls-knopf>

@@ -103,11 +103,11 @@ export class LsTastatur extends HTMLElement {
 
   zeichne() {
     const zeilen = ausgeglichen(this.tastenListe)
-      .map((r) => `<div class="reihe">${r.map((z) => `<button class="taste" type="button" data-z="${esc(z)}">${esc(z)}</button>`).join("")}</div>`)
+      .map((r) => `<div class="reihe">${r.map((z) => `<button class="taste" type="button" tabindex="0" data-z="${esc(z)}">${esc(z)}</button>`).join("")}</div>`)
       .join("");
     const fn = [];
-    if (this.hasAttribute("leertaste")) fn.push(`<button class="taste leer" type="button" data-z=" " aria-label="Leertaste">${LEER_SVG}</button>`);
-    if (this.hasAttribute("loeschen")) fn.push(`<button class="taste weg" type="button" data-z="loeschen" aria-label="Löschen">${LOESCHEN_SVG}</button>`);
+    if (this.hasAttribute("leertaste")) fn.push(`<button class="taste leer" type="button" tabindex="0" data-z=" " aria-label="Leertaste">${LEER_SVG}</button>`);
+    if (this.hasAttribute("loeschen")) fn.push(`<button class="taste weg" type="button" tabindex="0" data-z="loeschen" aria-label="Löschen">${LOESCHEN_SVG}</button>`);
     this.wurzel.innerHTML = `<style>${GRUND_CSS}${TASTATUR_CSS}</style><div class="feld">${zeilen}${fn.length ? `<div class="reihe">${fn.join("")}</div>` : ""}</div>`;
   }
 

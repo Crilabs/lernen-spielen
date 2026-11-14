@@ -5,7 +5,8 @@
 // - Hauptknopf (art="haupt"): Tinte gefüllt, Symbol und Wort in Papier, Pillenform (z. B. Fertig).
 // Mit `wort` wird jeder Knopf zur Pille mit sichtbarem Wort. Größe (`groesse`, unabhängig von `art`):
 // `groesse="bedien|gross|klein"` (rund 11/16/8 rem; Pille 11 rem hoch, mit gross 14 rem wie die Pausenknöpfe);
-// die Tippfläche ist immer mindestens 11 rem.
+// die Tippfläche ist immer mindestens 11 rem. tabindex="0" am Knopf: WebKit (Safari, macOS-Vorgabe) erreicht
+// Knöpfe ohne tabindex nicht mit Tab.
 // Beim ersten Tippen je Sitzung spricht er seinen Namen (nur bei Ton an; `stumm`: nie). Bricht anderer
 // Inhalt den Namen ab (z. B. die Probe der Hilfe), gilt er nicht als gesagt und kommt beim nächsten Tippen.
 
@@ -44,7 +45,7 @@ export class LsKnopf extends HTMLElement {
     super();
     const wurzel = this.attachShadow({ mode: "open" });
     wurzel.innerHTML = `<style>${GRUND_CSS}${KNOPF_CSS}</style>
-      <button class="knopf" type="button"><span class="form neben rund"><span class="zeichen"><img alt="" draggable="false"></span><span class="wort" hidden></span></span></button>`;
+      <button class="knopf" type="button" tabindex="0"><span class="form neben rund"><span class="zeichen"><img alt="" draggable="false"></span><span class="wort" hidden></span></span></button>`;
     this.knopf = /** @type {HTMLButtonElement} */ (wurzel.querySelector("button"));
     this.form = /** @type {HTMLElement} */ (wurzel.querySelector(".form"));
     this.zeichen = /** @type {HTMLElement} */ (wurzel.querySelector(".zeichen"));

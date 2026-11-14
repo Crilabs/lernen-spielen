@@ -77,7 +77,7 @@ export class LsPause extends HTMLElement {
       </svg>
       <div class="inhalt"><div class="karte leer"><slot></slot></div></div>
       <div class="aktionen" tabindex="-1">
-        <a class="knopf alle" href="${HAUS_HREF}" aria-label="Alle Spiele" draggable="false"><span class="form neben pille"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span><span class="wort">Alle Spiele</span></span></a>
+        <a class="knopf alle" href="${HAUS_HREF}" tabindex="0" aria-label="Alle Spiele" draggable="false"><span class="form neben pille"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span><span class="wort">Alle Spiele</span></span></a>
         <ls-knopf class="weiter" symbol="zurueck.svg" name="Weiter" wort="Weiter" groesse="gross" gespiegelt></ls-knopf>
       </div>`;
     this.karte = /** @type {HTMLElement} */ (wurzel.querySelector(".karte"));
