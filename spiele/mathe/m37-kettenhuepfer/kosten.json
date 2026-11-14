@@ -154,5 +154,44 @@
   "notiz": "Bau-Agent Prototyp, Runde 1",
   "cache_lesen": 32905879,
   "cache_schreiben": 389985
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 66,
+  "ausgabe": 26054,
+  "einheit": "tokens",
+  "menge": 4050457,
+  "notiz": "Prüfer B Welt, Runde 1",
+  "cache_lesen": 3884883,
+  "cache_schreiben": 139454
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 70,
+  "ausgabe": 31084,
+  "einheit": "tokens",
+  "menge": 4763045,
+  "notiz": "Prüfer B Didaktik, Runde 1",
+  "cache_lesen": 4576374,
+  "cache_schreiben": 155517
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 68,
+  "ausgabe": 29238,
+  "einheit": "tokens",
+  "menge": 4158160,
+  "notiz": "Prüfer B Bedienung, Runde 1",
+  "cache_lesen": 3972846,
+  "cache_schreiben": 156008
  }
 ]
