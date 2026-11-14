@@ -48,9 +48,28 @@ export const strich = (d, w = 3) => `<path d="${d}" fill="none" stroke="${INK}" 
 const T = (teil, st) => ({ teil, svg: st.svg, kontur: st.kontur });
 
 /**
+ * Turnschuh von vorn (Dreiviertel: leicht nach rechts gedreht): Kappe zum Betrachter, Schnürung oben, Sohle als Rand.
+ * hinten: im Schatten. dy: Höhenversatz (Sohle unten bei 254.5 + dy).
+ * @param {Farben & {sohle?: string}} f @param {number} x @param {boolean} hinten @param {number} dy
+ */
+function schuhVorn(f, x, hinten, dy) {
+  const farbe = hinten ? S.dunkler(f.schuhe, 0.16) : f.schuhe;
+  const sohle = hinten ? S.dunkler(f.sohle ?? "#F4EEE4", 0.14) : (f.sohle ?? "#F4EEE4");
+  const Y = (/** @type {number} */ v) => z(v + dy);
+  return S.zusammen(
+    S.form(S.pfad(`M${z(x - 13)} ${Y(249)} C${z(x - 14)} ${Y(240)} ${z(x - 9)} ${Y(233)} ${z(x - 2)} ${Y(232)} L${z(x + 7)} ${Y(232)}`
+      + ` C${z(x + 14)} ${Y(233)} ${z(x + 18)} ${Y(240)} ${z(x + 17)} ${Y(249)} Z`), farbe, [x - 8, 236 + dy]),
+    { svg: `<path d="M${z(x - 10)} ${Y(248)} C${z(x - 9)} ${Y(242)} ${z(x + 12)} ${Y(242)} ${z(x + 14)} ${Y(248)} Z" fill="${S.heller(farbe, 0.3)}" stroke="none"/>`, kontur: "" },
+    S.naht(`M${z(x - 1)} ${Y(239)} l6 2.5 M${z(x + 5)} ${Y(239)} l-6 2.5 M${z(x - 1)} ${Y(243)} l6 2 M${z(x + 5)} ${Y(243)} l-6 2`, farbe, 1.7),
+    S.form(S.pfad(`M${z(x - 15)} ${Y(248)} L${z(x + 19)} ${Y(248)} C${z(x + 21)} ${Y(250)} ${z(x + 20)} ${Y(254)} ${z(x + 16)} ${Y(254.5)}`
+      + ` L${z(x - 12)} ${Y(254.5)} C${z(x - 16)} ${Y(254)} ${z(x - 17)} ${Y(250)} ${z(x - 15)} ${Y(248)} Z`), sohle, [x - 10, 248 + dy], { s: 0.9 }),
+  );
+}
+
+/**
  * Dreiviertelansicht eines gehenden Kindes, aus einem Guss: Tinte nur um die Silhouette (kinder/stil.js).
  * farben.hemd: sichtbares Hemd unter offener Jacke (sonst geschlossenes Oberteil).
- * @param {{breite: number, farben: Farben & {hemd?: string, ringel?: string, sohle?: string, muster?: string[], latz?: string, kurzarm?: boolean, wangen?: number},
+ * @param {{breite: number, farben: Farben & {hemd?: string, ringel?: string, sohle?: string, muster?: string[], latz?: string, kurzarm?: boolean, wangen?: number, kapuze?: boolean},
  *   kopf: KopfStuecke}} k breite 1 = Grundmaß. Oberteil: hemd = offene Jacke über Shirt, latz = Latzhose über Shirt, sonst Pulli.
  * @returns {import("../bestand.js").KindAnsicht}
  */
@@ -65,22 +84,7 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
     + ` C${z(X(-31))} 165 ${z(X(-28))} 140 ${z(X(-23))} 118 Z`;
   const huefte = `M${z(X(-27))} 172 L${z(X(27))} 172 C${z(X(29))} 180 ${z(X(29))} 188 ${z(X(26))} 195`
     + ` L${z(X(-26))} 195 C${z(X(-29))} 188 ${z(X(-29))} 180 ${z(X(-27))} 172 Z`;
-  /** Turnschuh von vorn (Dreiviertel: leicht nach rechts gedreht): Kappe zum Betrachter, Schnürung oben, Sohle als Rand.
-   * hinten: im Schatten. @param {number} x @param {boolean} hinten */
-  const schuh = (x, hinten) => {
-    const farbe = hinten ? S.dunkler(f.schuhe, 0.16) : f.schuhe;
-    const sohle = hinten ? S.dunkler(f.sohle ?? "#F4EEE4", 0.14) : (f.sohle ?? "#F4EEE4");
-    const y = hinten ? -1.5 : 0;
-    const Y = (/** @type {number} */ v) => z(v + y);
-    return S.zusammen(
-      S.form(S.pfad(`M${z(x - 13)} ${Y(249)} C${z(x - 14)} ${Y(240)} ${z(x - 9)} ${Y(233)} ${z(x - 2)} ${Y(232)} L${z(x + 7)} ${Y(232)}`
-        + ` C${z(x + 14)} ${Y(233)} ${z(x + 18)} ${Y(240)} ${z(x + 17)} ${Y(249)} Z`), farbe, P(x - 8, 236 + y)),
-      { svg: `<path d="M${z(x - 10)} ${Y(248)} C${z(x - 9)} ${Y(242)} ${z(x + 12)} ${Y(242)} ${z(x + 14)} ${Y(248)} Z" fill="${S.heller(farbe, 0.3)}" stroke="none"/>`, kontur: "" },
-      S.naht(`M${z(x - 1)} ${Y(239)} l6 2.5 M${z(x + 5)} ${Y(239)} l-6 2.5 M${z(x - 1)} ${Y(243)} l6 2 M${z(x + 5)} ${Y(243)} l-6 2`, farbe, 1.7),
-      S.form(S.pfad(`M${z(x - 15)} ${Y(248)} L${z(x + 19)} ${Y(248)} C${z(x + 21)} ${Y(250)} ${z(x + 20)} ${Y(254)} ${z(x + 16)} ${Y(254.5)}`
-        + ` L${z(x - 12)} ${Y(254.5)} C${z(x - 16)} ${Y(254)} ${z(x - 17)} ${Y(250)} ${z(x - 15)} ${Y(248)} Z`), sohle, P(x - 10, 248 + y), { s: 0.9 }),
-    );
-  };
+  const schuh = (/** @type {number} */ x, /** @type {boolean} */ hinten) => schuhVorn(f, x, hinten, hinten ? -1.5 : 0);
   /** Weites Hosenbein, ein Stück bis zum Saum: Schattenstreifen rechts in einer Flucht mit der Hüfte. @param {number} cx @param {1|-1} o */
   const hosenbein = (cx, o) => {
     const u = cx + o * 7;
@@ -166,6 +170,15 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
         + ` fill="none" stroke="${f.muster[1]}" stroke-width="2.6" stroke-linecap="butt"/>`
         + `<path d="M${z(a1 + 1)} 154 L${z(b1 - 1)} 154 L${z(b2 - 1)} 156 L${z(a2 + 1)} 156 Z" fill="${S.dunkler(f.oben, 0.3)}" stroke="none"/>`, kontur: "" });
     }
+    if (f.kapuze) {
+      teile.push(
+        { svg: `<path d="M${z(X(-5))} 117 L${z(X(-6))} 138 M${z(X(5))} 117 L${z(X(6))} 135" fill="none" stroke="#FFFCF7" stroke-width="2.4"/>`
+          + `<circle cx="${z(X(-6))}" cy="140" r="2.2" fill="#FFFCF7" stroke="${S.dunkler(f.oben, 0.4)}" stroke-width="1"/>`
+          + `<circle cx="${z(X(6))}" cy="137" r="2.2" fill="#FFFCF7" stroke="${S.dunkler(f.oben, 0.4)}" stroke-width="1"/>`, kontur: "" },
+        S.naht(`M${z(X(-15))} 160 L${z(X(15))} 160 L${z(X(19))} 177 L${z(X(-19))} 177 Z`, f.oben, 2.4),
+        S.falte(`M${z(X(-15))} 160 L${z(X(15))} 160 L${z(X(15.4))} 163 L${z(X(-15.4))} 163 Z`, f.oben, 0.3),
+      );
+    }
     const [ua, ub] = kanten(178);
     teile.push(
       S.naht(`M${z(ua + 2)} 180 C${z(X(-12))} 185 ${z(X(12))} 185 ${z(ub - 2)} 180`, f.oben, 2.4),
@@ -213,6 +226,7 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
       "bein-hinten": bein(-13, -1),
       "bein-vorn": bein(13, 1),
       rumpf: [
+        ...(f.kapuze ? [T("kapuze", S.form(S.pfad(`M${z(X(-21))} 121 C${z(X(-25))} 97 ${z(X(25))} 97 ${z(X(21))} 121 Z`), f.oben, P(X(-18), 104), { s: 0.86 }))] : []),
         T("hals", S.zusammen(S.form(S.pfad("M153 96 L167 96 L168 118 L152 118 Z"), f.haut, P(153, 96), { s: 0.7 }),
           S.falte("M152 96 L168 96 L168 108 Q160 113 152 106 Z", f.haut, 0.42))),
         // Hüfte endet unter dem Saumschatten; der Saumschatten liegt über Hüfte und Beinen (Beine liegen hinter dem Rumpf),
@@ -322,6 +336,182 @@ export function profil({ breite: b, farben: f, kopf }) {
       ruecken: { gelenk: "rumpf", punkt: [X(-16), 130] },
       fuesse: { gelenk: "koerper", punkt: [160, 250] },
       schoss: { gelenk: "rumpf", punkt: [X(12), 182] },
+    },
+  };
+}
+
+// ------------------------------------------------------------------------------------------------
+// Rollstuhl (Timo). Oberkörper, Kopf und Arme kommen aus demselben Schnitt, um die Sitzhöhe verschoben,
+// damit Kopfgröße, Gesicht und Zubehör-Plätze bei allen Kindern gleich bleiben.
+
+const REIFEN = "#3A3F4B";
+const FELGE = "#C7CDD6";
+const METALL = "#9AA6B4";
+const RAHMEN = "#3E6E8C";
+const POLSTER = "#34404F";
+/** Sitzhöhe: so weit liegt der Oberkörper tiefer als beim stehenden Kind. */
+export const SITZ_DY = 26;
+
+/** @param {string|undefined} svg @param {number} dy */
+const versetzt = (svg, dy) => (svg ? `<g transform="translate(0 ${dy})">${svg}</g>` : svg);
+/** @param {Teil} t @param {number} dy @returns {Teil} */
+function verschiebe(t, dy) {
+  /** @type {Teil} */
+  const neu = { teil: t.teil };
+  if (t.svg !== undefined) neu.svg = versetzt(t.svg, dy);
+  if (t.kontur !== undefined) neu.kontur = versetzt(t.kontur, dy);
+  if (t.formen) {
+    neu.formen = Object.fromEntries(Object.entries(t.formen).map(([k, v]) => [k, typeof v === "string"
+      ? versetzt(v, dy) ?? ""
+      : { svg: versetzt(v.svg, dy) ?? "", kontur: versetzt(v.kontur, dy) }]));
+  }
+  return neu;
+}
+
+/** Oberkörper einer Ansicht übernehmen und um dy nach unten verschieben. @param {import("../bestand.js").KindAnsicht} a @param {number} dy */
+function oberkoerper(a, dy) {
+  const gelenke = ["rumpf", "kopf", "arm-hinten-oben", "arm-hinten-unten", "arm-vorn-oben", "arm-vorn-unten"];
+  /** @type {Record<string, Teil[]>} */
+  const teile = {};
+  /** @type {Record<string, [number, number]>} */
+  const drehpunkte = {};
+  for (const g of gelenke) {
+    teile[g] = (a.teile[g] ?? []).map((t) => (t.teil === "gesicht" && !t.svg ? t : verschiebe(t, dy)));
+    const [x, y] = a.drehpunkte[g];
+    drehpunkte[g] = [x, y + dy];
+  }
+  /** @param {string} p */
+  const platz = (p) => ({ ...a.plaetze[p], punkt: /** @type {[number, number]} */ ([a.plaetze[p].punkt[0], a.plaetze[p].punkt[1] + dy]) });
+  return { teile, drehpunkte, gesicht: /** @type {[number, number]} */ ([a.gesicht[0], a.gesicht[1] + dy]), platz };
+}
+
+/**
+ * Rad in Dreiviertelansicht (Ellipse): Reifen, Felge mit Speichen, Greifreifen.
+ * @param {number} cx @param {number} cy @param {number} rx @param {number} ry @param {boolean} greifreifen
+ */
+function radSchraeg(cx, cy, rx, ry, greifreifen) {
+  const speichen = [0, 45, 90, 135].map((g) => {
+    const a = (g * Math.PI) / 180;
+    const dx = Math.cos(a) * rx * 0.62;
+    const dy = Math.sin(a) * ry * 0.72;
+    return `M${z(cx - dx)} ${z(cy - dy)} L${z(cx + dx)} ${z(cy + dy)}`;
+  }).join(" ");
+  return S.zusammen(
+    S.form(S.oval(cx, cy, rx, ry), REIFEN, [cx - rx * 0.5, cy - ry * 0.5], { s: 0.9 }),
+    { svg: `<ellipse cx="${z(cx)}" cy="${z(cy)}" rx="${z(rx * 0.74)}" ry="${z(ry * 0.82)}" fill="${S.dunkler(FELGE, 0.1)}" stroke="none"/>`
+      + `<path d="${speichen}" fill="none" stroke="${METALL}" stroke-width="1.8"/>`
+      + `<ellipse cx="${z(cx)}" cy="${z(cy)}" rx="${z(rx * 0.16)}" ry="${z(ry * 0.14)}" fill="${METALL}" stroke="${S.dunkler(METALL, 0.4)}" stroke-width="1.2"/>`
+      + `<path d="M${z(cx - rx * 0.55)} ${z(cy - ry * 0.55)} A${z(rx * 0.8)} ${z(ry * 0.86)} 0 0 1 ${z(cx + rx * 0.2)} ${z(cy - ry * 0.84)}" fill="none" stroke="${S.heller(REIFEN, 0.35)}" stroke-width="2.4" opacity="0.8"/>`, kontur: "" },
+    greifreifen
+      ? { svg: `<ellipse cx="${z(cx - rx * 0.18)}" cy="${z(cy)}" rx="${z(rx * 0.9)}" ry="${z(ry * 0.9)}" fill="none" stroke="${METALL}" stroke-width="2.6"/>`, kontur: "" }
+      : { svg: "", kontur: "" },
+  );
+}
+
+/**
+ * Dreiviertelansicht im Rollstuhl, selbst fahrend (figuren.md §2).
+ * @param {{breite: number, farben: Farben & Record<string, any>, kopf: KopfStuecke}} k
+ * @returns {import("../bestand.js").KindAnsicht}
+ */
+export function dreiviertelStuhl(k) {
+  const { breite: b, farben: f } = k;
+  const X = (/** @type {number} */ d) => 160 + d * b;
+  const P = (/** @type {number} */ x, /** @type {number} */ y) => /** @type {[number, number]} */ ([x, y]);
+  const basis = dreiviertel(k);
+  const ok = oberkoerper(basis, SITZ_DY);
+  const sitzY = 186 + SITZ_DY;
+
+  /** Ein sitzendes Bein aus einem Guss: Schienbein hinter dem Knie, Schuh auf der Fußstütze, vorn der verkürzte
+   * Oberschenkel mit runder Kniekappe. @param {number} l @param {number} r linke/rechte Kante (Breiteneinheiten) */
+  const bein = (l, r) => {
+    const xl = X(l);
+    const xr = X(r);
+    const xm = (xl + xr) / 2;
+    const knie = sitzY + 8;
+    return S.zusammen(
+      S.form(S.pfad(`M${z(xl + 3)} ${knie - 4} L${z(xr - 3)} ${knie - 4} C${z(xr - 2)} ${knie + 8} ${z(xr - 3)} 230 ${z(xr - 4)} 238`
+        + ` L${z(xl + 4)} 238 C${z(xl + 3)} 230 ${z(xl + 2)} ${knie + 8} ${z(xl + 3)} ${knie - 4} Z`), f.unten, P(xl + 6, knie), { s: 0.84 }),
+      schuhVorn(f, xm + 1, l < 0, -7),
+      S.form(S.pfad(`M${z(xl)} ${sitzY - 10} L${z(xr)} ${sitzY - 10} C${z(xr + 3)} ${sitzY - 2} ${z(xr + 3)} ${knie + 2} ${z(xr - 1)} ${knie + 8}`
+        + ` C${z(xm + 6)} ${knie + 14} ${z(xm - 6)} ${knie + 14} ${z(xl + 1)} ${knie + 8} C${z(xl - 3)} ${knie + 2} ${z(xl - 3)} ${sitzY - 2} ${z(xl)} ${sitzY - 10} Z`),
+      f.unten, P(xl + 4, sitzY - 6), { s: 0.88 }),
+      S.glanz(`M${z(xl + 5)} ${knie + 1} Q${z(xm)} ${knie - 3} ${z(xr - 5)} ${knie + 1}`, f.unten, 3.2),
+      S.falte(`M${z(xl + 2)} ${sitzY - 10} L${z(xr)} ${sitzY - 10} L${z(xr)} ${sitzY - 6} Q${z(xm)} ${sitzY - 3} ${z(xl + 2)} ${sitzY - 6} Z`, f.unten, 0.35),
+    );
+  };
+
+  const rollstuhl = S.zusammen(
+    // Rückenlehne hinter dem Oberkörper, Schiebegriffe
+    S.form(S.pfad(`M${z(X(-26))} ${sitzY - 62} Q${z(X(-26))} ${sitzY - 68} ${z(X(-20))} ${sitzY - 68} L${z(X(20))} ${sitzY - 68}`
+      + ` Q${z(X(26))} ${sitzY - 68} ${z(X(26))} ${sitzY - 62} L${z(X(28))} ${sitzY} L${z(X(-28))} ${sitzY} Z`), POLSTER, P(X(-22), sitzY - 64)),
+    S.glied(P(X(-27), sitzY - 66), 3, P(X(-29), sitzY - 76), 3.4, REIFEN),
+    S.glied(P(X(27), sitzY - 66), 3, P(X(29), sitzY - 76), 3.4, REIFEN),
+    // Sitzkissen
+    S.form(S.pfad(`M${z(X(-30))} ${sitzY - 8} Q${z(X(-30))} ${sitzY - 13} ${z(X(-24))} ${sitzY - 13} L${z(X(26))} ${sitzY - 13}`
+      + ` Q${z(X(32))} ${sitzY - 13} ${z(X(32))} ${sitzY - 8} L${z(X(32))} ${sitzY + 2} L${z(X(-30))} ${sitzY + 2} Z`), POLSTER, P(X(-26), sitzY - 11)),
+    // Rahmen zur Fußstütze, Fußstütze, Lenkräder
+    S.glied(P(X(-20), sitzY), 3, P(X(-18), 244), 3, METALL),
+    S.glied(P(X(24), sitzY), 3, P(X(26), 244), 3, METALL),
+    S.form(S.pfad(`M${z(X(-26))} 243 L${z(X(30))} 243 L${z(X(32))} 248 L${z(X(-28))} 248 Z`), RAHMEN, P(X(-24), 244), { s: 0.8 }),
+    S.form(S.oval(X(-22), 250, 4, 5.5), REIFEN, P(X(-23), 248), { s: 0.8 }),
+    S.form(S.oval(X(28), 250, 4, 5.5), REIFEN, P(X(27), 248), { s: 0.8 }),
+  );
+
+  return {
+    drehpunkte: {
+      koerper: [160, 254], ...ok.drehpunkte,
+      rollstuhl: [160, sitzY], "rad-hinten": [X(36), 214], "rad-vorn": [X(-34), 216], beine: [160, sitzY],
+    },
+    teile: {
+      koerper: [],
+      "rad-hinten": [T("rad", radSchraeg(X(36), 214, 14, 33, false))],
+      rollstuhl: [T("rollstuhl", rollstuhl)],
+      ...ok.teile,
+      beine: [T("beine", S.zusammen(bein(-25, -2), bein(2, 25)))],
+      "rad-vorn": [T("rad", radSchraeg(X(-34), 216, 17, 37, true))],
+    },
+    gesicht: ok.gesicht,
+    plaetze: {
+      kopf: ok.platz("kopf"), "hand-vorn": ok.platz("hand-vorn"), "hand-hinten": ok.platz("hand-hinten"), ruecken: ok.platz("ruecken"),
+      fuesse: { gelenk: "beine", punkt: [160, 248] },
+      schoss: { gelenk: "beine", punkt: [162, sitzY - 6] },
+    },
+  };
+}
+
+/**
+ * Profil im Rollstuhl (vorläufig schlicht, folgt mit dem Profil aller Kinder). Räder rund, damit sie beim Fahren rollen.
+ * @param {{breite: number, farben: Farben, kopf: Kopfteile}} k
+ * @returns {import("../bestand.js").KindAnsicht}
+ */
+export function profilStuhl(k) {
+  const f = k.farben;
+  const basis = profil(k);
+  const ok = oberkoerper(basis, SITZ_DY);
+  const sitzY = 184 + SITZ_DY;
+  /** @param {number} cx @param {number} cy @param {number} r */
+  const radRund = (cx, cy, r) => kreis(cx, cy, r, REIFEN) + kreis(cx, cy, r * 0.78, FELGE)
+    + `<path d="M${cx - r * 0.78} ${cy} L${cx + r * 0.78} ${cy} M${cx} ${cy - r * 0.78} L${cx} ${cy + r * 0.78}` 
+    + ` M${z(cx - r * 0.55)} ${z(cy - r * 0.55)} L${z(cx + r * 0.55)} ${z(cy + r * 0.55)} M${z(cx - r * 0.55)} ${z(cy + r * 0.55)} L${z(cx + r * 0.55)} ${z(cy - r * 0.55)}"`
+    + ` stroke="${METALL}" stroke-width="2" fill="none"/>` + kreis(cx, cy, 4, METALL);
+  return {
+    drehpunkte: { koerper: [160, 254], ...ok.drehpunkte, rollstuhl: [160, sitzY], "rad-hinten": [150, 218], "rad-vorn": [154, 218], beine: [160, sitzY] },
+    teile: {
+      koerper: [],
+      "rad-hinten": [{ teil: "rad", svg: radRund(150, 218, 34) }],
+      rollstuhl: [{ teil: "rollstuhl", svg: flaeche(`M132 ${sitzY - 70} L144 ${sitzY - 70} L146 ${sitzY} L134 ${sitzY} Z`, POLSTER)
+        + flaeche(`M134 ${sitzY - 8} L188 ${sitzY - 8} L188 ${sitzY + 2} L134 ${sitzY + 2} Z`, POLSTER)
+        + glied([186, sitzY + 2, 196, 244], 4, METALL) + flaeche("M188 243 L212 243 L212 248 L188 248 Z", RAHMEN) + kreis(196, 250, 5, REIFEN) }],
+      ...ok.teile,
+      beine: [{ teil: "beine", svg: glied([162, sitzY - 4, 192, sitzY - 2], 20, f.unten) + glied([192, sitzY - 2, 194, 236], 18, f.unten)
+        + ellipse(201, 242, 14, 7, f.schuhe) }],
+      "rad-vorn": [{ teil: "rad", svg: radRund(154, 218, 36) }],
+    },
+    gesicht: ok.gesicht,
+    plaetze: {
+      kopf: ok.platz("kopf"), "hand-vorn": ok.platz("hand-vorn"), "hand-hinten": ok.platz("hand-hinten"), ruecken: ok.platz("ruecken"),
+      fuesse: { gelenk: "beine", punkt: [200, 246] },
+      schoss: { gelenk: "beine", punkt: [176, sitzY - 14] },
     },
   };
 }

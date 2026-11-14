@@ -8,6 +8,7 @@ import "./bewegungen.js";
 import "./kinder/ela.js";
 import "./kinder/kofi.js";
 import "./kinder/lena.js";
+import "./kinder/timo.js";
 import { pruefeBestand } from "./bestand.js";
 
 export { meldeKind, meldeGesicht, meldeHaltung, meldeBewegung, meldeZubehoer, pruefeBestand, bestand } from "./bestand.js";
