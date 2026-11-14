@@ -30,6 +30,16 @@ test("kein Kind ist mehr Entwurf, jedes hat beide Ansichten", () => {
   }
 });
 
+test("Grundbestand aus figuren.md §4 ist da", () => {
+  const haltungen = ["stehen", "zeigen", "fragen", "tragen", "tragen-gehen", "staunen", "freuen-klein", "freuen-gross",
+    "nachdenken", "winken", "zaubern", "schweben", "klein", "gross"];
+  for (const h of haltungen) assert.ok(bestand.haltungen.has(h), `Haltung ${h} fehlt`);
+  for (const b of ["gehen", "winken", "huepfen", "zaubern", "schweben", "schrumpfen", "wachsen"]) {
+    assert.ok(bestand.bewegungen.has(b), `Bewegung ${b} fehlt`);
+  }
+  for (const h of bestand.haltungen.values()) assert.ok(h.wort, `Haltung ${h.id} ohne wort für aria-label`);
+});
+
 test("jedes Kind kennt jedes Gesicht in jeder Ansicht", () => {
   for (const g of bestand.gesichter.values()) {
     for (const a of ANSICHTEN) assert.equal(typeof g.ansichten[a], "string", `Gesicht ${g.id} fehlt in ${a}`);
