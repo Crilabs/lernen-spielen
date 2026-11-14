@@ -3,15 +3,11 @@
   "einmaleins-sicher": {
    "fach": "mathe",
    "name": "Einmaleins sicher",
-   "titel": "Wie viele Packungen, wie viele Stück?",
+   "titel": "Wie viele für alle?",
    "formen": [
     {
      "situation": "tisch",
-     "name": "Einkauf auspacken"
-    },
-    {
-     "situation": "unterwegs",
-     "name": "Packungen im Laden"
+     "name": "Essen auftun"
     }
    ],
    "entwurf": true,

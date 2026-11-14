@@ -2,36 +2,23 @@
 thema: einmaleins-sicher
 fach: mathe
 entwurf: true
-bild: { figur: flaschen-sechserpack, zustand: pack }
+bild: { figur: erdbeerschale, zustand: voll }
 quellen:
   - Fachlehrplan Mathematik 3/4 Grundschule, 1.2 (Zahlensätze des kleinen Einmaleins und ihre Umkehrungen automatisiert und flexibel anwenden), LehrplanPLUS Bayern, ISB, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/3/mathematik, abgerufen 2026-11-14
   - Sicher im 1·1 (Wissensnetz statt Einzelfakten; 36 geteilt durch 9 über die Umkehraufgabe 9 mal 4; automatisiert bis Mitte Klasse 3), Mahiko, DZLM, https://mahiko.dzlm.de/node/73, abgerufen 2026-11-14
-  - Operationsverständnis Multiplikation, Lernen auf Distanz Klasse 2 (Verpackungen als Malsituationen zu Hause), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-multiplikation.pdf, abgerufen 2026-11-14
+  - 1·1 richtig üben, Basisinfos (Automatisieren über Kernaufgaben; 6 mal 7 über 5 mal 7 und noch einmal 7), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
 ---
-# Wie viele Packungen, wie viele Stück?
+# Wie viele für alle?
 
-## Unterwegs: Packungen im Laden
+## Am Tisch: Essen auftun
 
-Ihr braucht: einen Einkaufszettel, Packungen im Laden.
+Ihr braucht: das Essen, Teller für alle.
 
-1. Sucht etwas vom Zettel, etwa Eier. Lest ab, wie viele Stück in einer Packung sind.
-2. Einer sagt, wie viele Packungen ihr nehmt. Der andere rechnet: „4 mal 6 ist gleich 24.“
-3. Umgekehrt: Einer nennt eine Stückzahl, die aufgeht. Der andere rechnet: „24 geteilt durch 6 ist gleich 4.“
-4. Legt so viele Packungen in den Korb.
+1. Zählt, wer mitisst, etwa 7. Einigt euch: jeder 4 Kartoffeln.
+2. Rechnet: „7 mal 4 ist gleich 28.“ Holt 28 aus dem Vorrat.
+3. Ist die Menge schon da, rechnet umgekehrt: 24 Erdbeeren, 6 Teller. „24 geteilt durch 6 ist gleich 4.“
+4. Legt auf und zählt nach. Was übrig bleibt, kommt in die Mitte.
 
-**Darauf kommt es an:** Mal und geteilt gehören zusammen. 4 Packungen mit je 6 Stück sind 24, denn 4 mal 6 ist gleich 24. Die Umkehraufgabe: 24 geteilt durch 6 ist gleich 4.
+**Darauf kommt es an:** Mal und geteilt gehören zusammen. Aus 7 mal 4 ist gleich 28 folgt: 28 geteilt durch 7 ist gleich 4, 28 geteilt durch 4 ist gleich 7.
 
-**Leichter:** Packungen mit 2, 5 oder 10 Stück. **Schwerer:** Sagt auch die zweite Umkehraufgabe: „24 geteilt durch 4 ist gleich 6.“
-
-## Am Tisch: Einkauf auspacken
-
-Ihr braucht: gleiche Packungen aus dem Einkauf oder dem Vorrat, einen Zettel und einen Stift.
-
-1. Stellt gleiche Packungen nebeneinander. Lest ab, wie viele Stück in einer sind.
-2. Rechnet, wie viele Stück es zusammen sind: „3 mal 4 ist gleich 12.“
-3. Räumt die Packungen ein. Rechnet nur mit den 12 Stück zurück, wie viele Packungen es waren: „12 geteilt durch 4 ist gleich 3.“ Zählt im Schrank nach.
-4. Schreibt auf den Zettel, wie viel im Vorrat ist.
-
-**Darauf kommt es an:** Zu jeder Malaufgabe gehört eine Umkehraufgabe. Wer weiß, dass 3 mal 4 gleich 12 ist, weiß auch: 12 geteilt durch 4 ist gleich 3.
-
-**Leichter:** zwei oder drei Packungen. **Schwerer:** Packungen mit 7, 8 oder 9 Stück, wenn ihr welche habt.
+**Leichter:** je 2, 5 oder 10 Stück; von 5 mal aus rechnen (6 mal 7 ist 5 mal 7 und noch 7). **Schwerer:** zwei Dinge für dasselbe Essen, etwa je 3 Pfannkuchen und je 8 Erdbeeren.
