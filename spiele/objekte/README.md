@@ -40,6 +40,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `tischkaertchen.js` – gefaltetes Tischkärtchen, das wie ein Dach steht, mit einer Wellenlinie als Name und einem Buntstift davor (ohne Buchstaben und Ziffer).
 - `glueckwunschkarte.js` – Karte mit gemalter Blume, halb aus dem offenen Briefumschlag gezogen (ohne Schrift und Ziffer).
 - `nudelpackung.js` – stehende Nudelpackung aus Pappe mit Sichtfenster und Röhrennudeln (ohne Schrift und Ziffer).
+- `ringelsocken.js` – ein Paar lange Ringelsocken von der Seite (grün mit hellen Ringeln, Ferse und Spitze koralle; ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
