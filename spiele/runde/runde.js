@@ -14,9 +14,9 @@ import "./kinder/lena.js";
 import "./kinder/timo.js";
 import { pruefeBestand } from "./bestand.js";
 
-export { meldeKind, meldeGesicht, meldeHaltung, meldeBewegung, meldeZubehoer, pruefeBestand, bestand } from "./bestand.js";
+export { meldeKind, meldeGesicht, meldeHaltung, meldeBewegung, meldeZubehoer, meldeLuftzeichen, pruefeBestand, bestand } from "./bestand.js";
 export { zeichne, labelFuer } from "./zeichne.js";
 export { pose, ablauf } from "./pose.js";
-export { steuere } from "./steuere.js";
+export { steuere, zusammen } from "./steuere.js";
 
 pruefeBestand();
