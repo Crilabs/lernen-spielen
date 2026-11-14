@@ -1,55 +1,96 @@
-// Regal als Seitenleiste rechts (Spec 2026-11-14-startseite-karten-design.md §3.2): „Was ich kann“ als aufklappbare
-// Liste, nicht grafisch, hierarchisch Fach → Thema → Detail. Jedes Thema mit seinem Namen und klein dem Material,
-// das das Kind aus dem Spiel kennt; im Detail die Spiele zum Nochmal-Spielen und „Mit echten Dingen“.
-// Ohne Zahl, ohne Datum (N5, N8). Daten vom Aufrufer (gekonnteThemen, spieleFuer aus lernsteuerung.js).
+// Regal-Daten und -Darstellung (Spec 2026-11-14-startseite-karten-design.md §3.2, Nachtrag Christian 2026-11-14):
+// „Was ich kann“, gegliedert wie der Lernplan: Fach → Bereich → Thema. Auf der Startseite nur „Zuletzt gelernt“
+// (bleibt kurz, egal wie viel das Kind kann), die eigene Regal-Seite zeigt Reiter (Fächer) und Bretter (Bereiche).
+// Jedes Thema mit Namen und klein dem Material, das das Kind aus dem Spiel kennt. Ohne Zahl, ohne Datum (N5, N8).
+// Daten vom Aufrufer (gekonnteThemen, spieleFuer aus lernsteuerung.js).
 import { FACH, FACH_SYMBOLE } from "../rahmen/stil.js";
 import { materialFuer, bausteinHtml } from "../rahmen/material.js";
 import { esc } from "./zeichnen.js";
 
+/** So viele Themen zeigt „Zuletzt gelernt“. */
+export const ZULETZT = 4;
+
 /**
  * @typedef {{id: string, name: string, strang: string, art: string|null, zahl: number|null, bereich: string, sprich?: string}} Gekonnt
  * @typedef {{id: string, titel: string, datei: string}} SpielLink
- * @typedef {{fach: string, name: string, themen: (Gekonnt & {spiele: SpielLink[], eltern: boolean})[]}} RegalFach
+ * @typedef {Gekonnt & {spiele: SpielLink[], eltern: boolean}} RegalThema
+ * @typedef {{fach: string, name: string, bereiche: {name: string, themen: RegalThema[]}[]}} RegalFach
  */
 
 /**
  * @param {Gekonnt[]} gekonnt gekonnteThemen(ctx, stand), älteste zuerst
- * @param {{plan: {themen?: {id: string, eltern?: string}[]}, spiele: {kategorien?: {id: string, name: string}[], spiele?: SpielLink[]}}} ctx
+ * @param {{plan: {themen?: {id: string, bereich?: string, eltern?: string}[]}, spiele: {kategorien?: {id: string, name: string}[], spiele?: SpielLink[]}}} ctx
  * @param {(ctx: any, themaId: string) => string[]} spieleFuer
  * @returns {RegalFach[]}
  */
 export function regalBaum(gekonnt, ctx, spieleFuer) {
   const spielNach = new Map((ctx.spiele?.spiele ?? []).map((s) => [s.id, s]));
-  const eltern = new Map((ctx.plan?.themen ?? []).map((t) => [t.id, typeof t.eltern === "string" && t.eltern.trim() !== ""]));
-  return (ctx.spiele?.kategorien ?? []).map((k) => ({
-    fach: k.id,
-    name: k.name,
-    themen: gekonnt.filter((g) => g.strang === k.id).map((g) => ({
-      ...g,
-      spiele: spieleFuer(ctx, g.id).map((id) => spielNach.get(id)).filter((s) => !!s)
-        .map((s) => ({ id: /** @type {SpielLink} */ (s).id, titel: /** @type {SpielLink} */ (s).titel, datei: /** @type {SpielLink} */ (s).datei })),
-      eltern: eltern.get(g.id) ?? false,
-    })),
-  })).filter((f) => f.themen.length > 0);
+  const planThemen = ctx.plan?.themen ?? [];
+  const planNach = new Map(planThemen.map((t) => [t.id, t]));
+  /** Bereich-Reihenfolge wie im Lernplan */
+  const bereichNr = new Map();
+  for (const t of planThemen) if (t.bereich && !bereichNr.has(t.bereich)) bereichNr.set(t.bereich, bereichNr.size);
+  const bereichVon = (/** @type {Gekonnt} */ g) => planNach.get(g.id)?.bereich || g.bereich || "Weiteres";
+  return (ctx.spiele?.kategorien ?? []).map((k) => {
+    /** @type {Map<string, RegalThema[]>} */
+    const gruppen = new Map();
+    for (const g of gekonnt.filter((x) => x.strang === k.id)) {
+      const b = bereichVon(g);
+      const liste = gruppen.get(b) ?? [];
+      liste.push({
+        ...g,
+        spiele: spieleFuer(ctx, g.id).flatMap((id) => {
+          const s = spielNach.get(id);
+          return s ? [{ id: s.id, titel: s.titel, datei: s.datei }] : [];
+        }),
+        eltern: typeof planNach.get(g.id)?.eltern === "string" && /** @type {string} */ (planNach.get(g.id)?.eltern).trim() !== "",
+      });
+      gruppen.set(b, liste);
+    }
+    const bereiche = [...gruppen.entries()]
+      .sort((a, b) => (bereichNr.get(a[0]) ?? 999) - (bereichNr.get(b[0]) ?? 999))
+      .map(([name, themen]) => ({ name, themen }));
+    return { fach: k.id, name: k.name, bereiche };
+  }).filter((f) => f.bereiche.length > 0);
+}
+
+/** @param {Gekonnt} t @param {string} [klasse] */
+const dingHtml = (t, klasse = "ding") => `<button class="${klasse}" type="button" data-thema="${esc(t.id)}">`
+  + `<span class="material">${bausteinHtml(materialFuer(t))}</span><span class="name">${esc(t.name)}</span></button>`;
+
+/**
+ * „Zuletzt gelernt“ für die Seitenleiste der Startseite.
+ * @param {Gekonnt[]} gekonnt älteste zuerst
+ * @returns {string}
+ */
+export function zuletztHtml(gekonnt) {
+  const liste = gekonnt.slice(-ZULETZT).reverse();
+  const inhalt = liste.length
+    ? `<ul>${liste.map((t) => `<li>${dingHtml(t)}</li>`).join("")}</ul>`
+    : `<p class="leer">Hier steht, was du kannst.</p>`;
+  return `<section class="zuletzt" aria-label="Zuletzt gelernt"><h2>Zuletzt gelernt</h2>${inhalt}`
+    + `<a class="regal-knopf" href="regal.html"><img src="symbole/regal.svg" alt=""><b>Mein Regal</b></a></section>`;
 }
 
 /**
- * @param {RegalFach[]} baum
- * @returns {string}
+ * Reiter der Regal-Seite: ein Fach je Reiter.
+ * @param {RegalFach[]} baum @param {string} aktiv
  */
-export function regalHtml(baum) {
-  const kopf = `<section class="regal-leiste" aria-label="Was ich kann"><h2>Was ich kann</h2>`;
-  if (!baum.length) return `${kopf}<p class="leer">Hier steht, was du kannst.</p></section>`;
-  return kopf + baum.map((f) => {
+export function reiterHtml(baum, aktiv) {
+  return `<div class="reiter" role="tablist" aria-label="Fächer">` + baum.map((f) => {
+    const farbe = FACH[/** @type {keyof typeof FACH} */ (f.fach)];
     const zeichen = FACH_SYMBOLE.has(f.fach) ? `<i style="--bild:url('symbole/${esc(f.fach)}.svg')"></i>` : "";
-    const themen = f.themen.map((t) => {
-      const spiele = t.spiele.map((s) => `<a class="nochmal" href="${esc(s.datei)}?thema=${encodeURIComponent(t.id)}">${esc(s.titel)}</a>`).join("");
-      const echt = t.eltern ? `<button class="echt" type="button" data-thema="${esc(t.id)}">Mit echten Dingen</button>` : "";
-      return `<li><details class="thema" data-thema="${esc(t.id)}"><summary><span class="material">${bausteinHtml(materialFuer(t))}</span>`
-        + `<span class="name">${esc(t.name)}</span></summary><div class="detail">${spiele}${echt}</div></details></li>`;
-    }).join("");
-    const fuellung = FACH[/** @type {keyof typeof FACH} */ (f.fach)]?.fuellung ?? "#F4F0FA";
-    return `<details class="fach" data-fach="${esc(f.fach)}" style="--fach-fuellung:${fuellung}"><summary><span class="knopf" aria-hidden="true">${zeichen}</span>`
-      + `<span class="name">${esc(f.name)}</span></summary><ul>${themen}</ul></details>`;
-  }).join("") + `</section>`;
+    return `<button class="reiter-knopf" type="button" role="tab" data-fach="${esc(f.fach)}" aria-selected="${f.fach === aktiv}"`
+      + ` style="--fach-fuellung:${farbe?.fuellung ?? "#FFFCF7"};--fach-tief:${farbe?.tief ?? "#3B2A6B"}">`
+      + `<span class="knopf" aria-hidden="true">${zeichen}</span><b>${esc(f.name)}</b></button>`;
+  }).join("") + `</div>`;
+}
+
+/**
+ * Bretter eines Fachs: je Bereich ein Brett mit den gekonnten Themen.
+ * @param {RegalFach} fach @param {Set<string>} neu Ids, die seit dem letzten Besuch dazugekommen sind
+ */
+export function bretterHtml(fach, neu) {
+  return fach.bereiche.map((b) => `<section class="brett" role="group" aria-label="${esc(b.name)}"><h3>${esc(b.name)}</h3>`
+    + `<div class="dinge">${b.themen.map((t) => dingHtml(t, neu.has(t.id) ? "ding neu" : "ding")).join("")}</div></section>`).join("");
 }

@@ -72,38 +72,36 @@ body { -webkit-user-select: none; user-select: none; }
 
 /* --- Seitenleiste rechts: Kind und Regal -------------------------------------------------------- */
 .seite { display: flex; flex-direction: column; min-height: 0; padding-bottom: 3rem; }
-.kind { flex: none; align-self: center; width: 30rem; height: 26rem; }
+.kind { flex: none; align-self: center; width: 44rem; height: 40rem; margin-bottom: -1.4rem; position: relative; z-index: 1; }
 .kind svg { width: 100%; height: 100%; overflow: visible; }
-.regal-leiste {
-  flex: 1; min-height: 0; overflow-y: auto; padding: 2.4rem 2.4rem 3rem;
+.zuletzt {
+  flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 2.4rem;
   background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
 }
-.regal-leiste h2 { margin: 0 0 1.6rem; font-size: 3.6rem; }
-.regal-leiste .leer { margin: 0; font-size: 2.8rem; color: var(--ls-tinte-weich); }
-.regal-leiste ul { list-style: none; margin: 0.4rem 0 0; padding: 0 0 0 2rem; }
-.regal-leiste summary { display: flex; align-items: center; gap: 1.2rem; min-height: 6rem; cursor: pointer; list-style: none; }
-.regal-leiste summary::-webkit-details-marker { display: none; }
-.regal-leiste summary:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.3rem; border-radius: 1rem; }
-.regal-leiste .fach + .fach { margin-top: 0.8rem; border-top: 0.2rem solid var(--ls-linie); padding-top: 0.8rem; }
-.regal-leiste .fach > summary .name { font-size: 3rem; font-weight: 700; }
-.regal-leiste .fach > summary .knopf { flex: none; display: grid; place-items: center; width: 5rem; height: 5rem;
-  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 50%; background: var(--fach-fuellung, var(--ls-nebel)); }
-.regal-leiste .fach > summary .knopf i { display: block; width: 3rem; height: 3rem; background: var(--ls-tinte);
-  -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
-.regal-leiste .thema > summary .name { font-size: 2.6rem; }
-.regal-leiste .material { flex: none; display: flex; align-items: center; justify-content: center; width: 6rem; }
-.regal-leiste .material ls-perlenstab { height: 1.8rem; }
-.regal-leiste .material ls-wortart { height: 3.4rem; }
-.regal-leiste .material .karte { display: grid; place-items: center; width: auto; min-width: 3.4rem; height: 4rem; padding: 0 0.8rem;
-  border-radius: 0.8rem; box-shadow: none; font-size: 2rem; font-weight: 700; }
-.regal-leiste .material .karte i { width: 2rem; height: 2rem; background: var(--ls-tinte); -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
-.regal-leiste .detail { display: flex; flex-wrap: wrap; gap: 1rem; padding: 0.6rem 0 1.4rem 7.2rem; }
-.regal-leiste .detail a, .regal-leiste .detail button {
-  padding: 1rem 1.8rem; border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 2rem; background: var(--ls-papier);
-  box-shadow: 0 0.4rem 0 var(--ls-tinte-weich); color: var(--ls-tinte); font: inherit; font-size: 2.4rem; text-decoration: none; cursor: pointer;
+.zuletzt h2 { margin: 0 0 1rem; font-size: 3.4rem; }
+.zuletzt .leer { margin: 0; font-size: 2.8rem; color: var(--ls-tinte-weich); }
+.zuletzt ul { flex: 1; min-height: 0; overflow: hidden; list-style: none; margin: 0; padding: 0; }
+.zuletzt .ding { display: flex; align-items: center; gap: 1.4rem; width: 100%; min-height: 6.4rem; padding: 0.4rem 0;
+  background: none; border: 0; color: var(--ls-tinte); font: inherit; text-align: left; cursor: pointer; }
+.zuletzt .ding > * { pointer-events: none; }
+.zuletzt .ding:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.3rem; border-radius: 1rem; }
+.zuletzt .material { flex: none; display: flex; align-items: center; justify-content: center; width: 7rem; }
+.zuletzt .material ls-perlenstab { height: 2rem; }
+.zuletzt .material ls-wortart { height: 3.8rem; }
+.zuletzt .material .karte { display: grid; place-items: center; width: auto; min-width: 3.6rem; height: 4.4rem; padding: 0 0.8rem;
+  border-radius: 0.8rem; box-shadow: none; font-size: 2.2rem; font-weight: 700; }
+.zuletzt .material .karte i { width: 2.2rem; height: 2.2rem; background: var(--ls-tinte); -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
+.zuletzt .name { font-size: 2.6rem; line-height: 1.15; }
+.regal-knopf {
+  flex: none; display: flex; align-items: center; justify-content: center; gap: 1.4rem; margin-top: 1.6rem; min-height: 11rem;
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-ahorn);
+  box-shadow: var(--ls-schatten); color: var(--ls-tinte); text-decoration: none;
 }
-.regal-leiste .detail button { background: var(--ls-ahorn); }
-.regal-leiste .detail a:active, .regal-leiste .detail button:active { transform: translateY(0.2rem); box-shadow: 0 0.2rem 0 var(--ls-tinte-weich); }
+.regal-knopf > * { pointer-events: none; }
+.regal-knopf img { width: 7rem; height: 7rem; }
+.regal-knopf b { font-size: 3.4rem; }
+.regal-knopf:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+.regal-knopf:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
 
 /* --- Zahnrad für Erwachsene (im Slot rechts der Kopfleiste) ------------------------------------ */
 .zahnrad { position: relative; display: flex; width: 11rem; height: 11rem; touch-action: none; }
@@ -135,7 +133,7 @@ body { -webkit-user-select: none; user-select: none; }
 
 <script type="module">
 import { sperreTouch, protokoll, linkKlick } from "./lernspiel.js";
-import { ladeLernstand, gekonnteThemen, uebersicht, spieleFuer } from "./lernsteuerung.js";
+import { ladeLernstand, gekonnteThemen, uebersicht } from "./lernsteuerung.js";
 import { sprich } from "./kern/stimme.js";
 import { sageEinmal } from "./kern/sitzung.js";
 import "./rahmen/leiste.js";
@@ -146,7 +144,7 @@ import "./rahmen/anregung.js";
 import { startKarten } from "./start/auswahl.js";
 import { paletteFuer, vignetteSvg } from "./start/welten.js";
 import { spielKarteHtml, echtKarteHtml, abschnittHtml } from "./start/karten.js";
-import { regalBaum, regalHtml } from "./start/regal-leiste.js";
+import { zuletztHtml } from "./start/regal-leiste.js";
 import { hintergrundSvg } from "./start/hintergrund.js";
 import { setzeKind } from "./start/runde-auf-start.js";
 
@@ -186,18 +184,19 @@ async function start() {
   raster.querySelectorAll("a.karte").forEach((a) => nenne(a, a.querySelector("b").textContent));
   raster.querySelectorAll("a.fach-kopf").forEach((a) => nenne(a, a.querySelector("b").textContent));
 
-  // Regal rechts
-  const regal = document.getElementById("regal");
-  regal.outerHTML = regalHtml(ctx ? regalBaum(gekonnteThemen(ctx, stand), ctx, spieleFuer) : []);
-  const leisteRegal = document.querySelector(".regal-leiste");
-  leisteRegal.querySelectorAll("details.thema").forEach((d) => d.addEventListener("toggle", () => {
-    const t = themaNach.get(d.dataset.thema);
-    if (d.open && t?.sprich && leiste.ton) sprich(t.sprich);
+  // Rechts: zuletzt gelernt (bleibt kurz), darunter der Knopf zum Regal
+  document.getElementById("regal").outerHTML = zuletztHtml(ctx ? gekonnteThemen(ctx, stand) : []);
+  document.querySelectorAll(".zuletzt .ding").forEach((b) => b.addEventListener("click", () => {
+    const t = themaNach.get(b.dataset.thema);
+    if (t?.sprich && leiste.ton) sprich(t.sprich);
   }));
-  leisteRegal.querySelectorAll("a.nochmal").forEach((a) => nenne(a, a.textContent));
+  document.querySelector(".regal-knopf").addEventListener("click", (e) => {
+    if (leiste.ton) sageEinmal("Mein Regal", () => sprich("Mein Regal"));
+    linkKlick(e);
+  });
 
-  // Mit echten Dingen (Karten und Regal): die Anleitung für den Erwachsenen
-  document.querySelectorAll("[data-thema].echt, .karte.echt").forEach((b) => b.addEventListener("click", () => {
+  // Mit echten Dingen: die Anleitung für den Erwachsenen
+  document.querySelectorAll(".karte.echt").forEach((b) => b.addEventListener("click", () => {
     const t = themaNach.get(b.dataset.thema);
     if (t?.eltern) anregung.oeffne({ titel: t.name, text: t.eltern });
   }));

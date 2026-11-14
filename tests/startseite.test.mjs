@@ -31,9 +31,8 @@ test("Startseite: Karten aus startKarten (uebersicht), Abschnitte je Fach, Vigne
   assert.match(html, /id="raster"/);
 });
 
-test("Startseite: Regal als Seitenleiste rechts aus gekonnteThemen und spieleFuer", () => {
-  assert.match(skript, /regalBaum\(gekonnteThemen\(ctx, stand\), ctx, spieleFuer\)/);
-  assert.match(skript, /regalHtml\(/);
+test("Startseite: rechts „Zuletzt gelernt“ aus gekonnteThemen mit Knopf zum Regal", () => {
+  assert.match(skript, /zuletztHtml\(ctx \? gekonnteThemen\(ctx, stand\) : \[\]\)/);
   assert.match(html, /<aside class="seite" id="seite">/);
   assert.ok(html.indexOf('id="raster"') < html.indexOf('id="seite"'), "Regal rechts vom Raster");
 });

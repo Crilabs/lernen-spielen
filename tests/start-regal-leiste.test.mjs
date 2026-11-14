@@ -1,42 +1,66 @@
-// Regal als Seitenleiste (spiele/start/regal-leiste.js): Fach → Thema → Detail, nicht grafisch (Spec Karten §3.2).
+// Regal-Daten und -Darstellung (spiele/start/regal-leiste.js): Fach → Bereich → Thema (Lernplan), „Zuletzt gelernt“
+// auf der Startseite, Reiter und Bretter der Regal-Seite. Ohne Zahl, ohne Datum.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-const { regalBaum, regalHtml } = await import("../spiele/start/regal-leiste.js");
+const { regalBaum, zuletztHtml, reiterHtml, bretterHtml } = await import("../spiele/start/regal-leiste.js");
 
 const KAT = [{ id: "mathe", name: "Mathe" }, { id: "grammatik", name: "Grammatik" }];
 const CTX = {
-  plan: { themen: [{ id: "z2", eltern: "Gabeln teilen" }, { id: "z3", eltern: "" }, { id: "nomen", eltern: "" }] },
+  plan: { themen: [
+    { id: "z2", bereich: "Zahlzerlegung", eltern: "Gabeln teilen" }, { id: "plus3", bereich: "Plus und Minus bis 10", eltern: "" },
+    { id: "z3", bereich: "Zahlzerlegung", eltern: "" }, { id: "nomen", bereich: "Wortarten", eltern: "" },
+  ] },
   spiele: { kategorien: KAT, spiele: [{ id: "a", titel: "Zwei Tonnen", datei: "a.html" }, { id: "b", titel: "Wörter", datei: "b.html" }] },
 };
+const g = (id, strang, name, extra = {}) => ({ id, name, strang, art: "zerlegung", zahl: Number(id.replace(/\D/g, "")) || null, seit: "", bereich: "", ...extra });
 const GEKONNT = [
-  { id: "z3", name: "Die 3 zerlegen", strang: "mathe", art: "zerlegung", zahl: 3, seit: "2026-11-02", bereich: "" },
-  { id: "nomen", name: "Nomen erkennen", strang: "grammatik", art: null, zahl: null, seit: "2026-11-03", bereich: "Wortarten" },
-  { id: "z2", name: "Die 2 zerlegen", strang: "mathe", art: "zerlegung", zahl: 2, seit: "2026-11-05", bereich: "" },
+  g("plus3", "mathe", "Plus bis 3", { art: null, zahl: null }),
+  g("z3", "mathe", "Die 3 zerlegen", { seit: "2026-11-02" }),
+  g("nomen", "grammatik", "Nomen erkennen", { art: null, zahl: null, bereich: "Wortarten" }),
+  g("z2", "mathe", "Die 2 zerlegen", { seit: "2026-11-05" }),
 ];
 const spieleFuer = (_ctx, id) => (id === "nomen" ? ["b"] : ["a"]);
 
-test("regalBaum: Fächer in Kategorien-Reihenfolge, Themen in der Reihenfolge des Gekonnt-Werdens, mit Spielen und Anleitung", () => {
+test("regalBaum: Fach → Bereich (Reihenfolge des Lernplans) → Themen (Reihenfolge des Gekonnt-Werdens)", () => {
   const baum = regalBaum(GEKONNT, CTX, spieleFuer);
   assert.deepEqual(baum.map((f) => f.fach), ["mathe", "grammatik"]);
-  assert.deepEqual(baum[0].themen.map((t) => t.id), ["z3", "z2"]);
-  assert.equal(baum[0].name, "Mathe");
-  assert.deepEqual(baum[0].themen[1].spiele, [{ id: "a", titel: "Zwei Tonnen", datei: "a.html" }]);
-  assert.equal(baum[0].themen[1].eltern, true);
-  assert.equal(baum[0].themen[0].eltern, false);
+  assert.deepEqual(baum[0].bereiche.map((b) => b.name), ["Zahlzerlegung", "Plus und Minus bis 10"]);
+  assert.deepEqual(baum[0].bereiche[0].themen.map((t) => t.id), ["z3", "z2"]);
+  assert.deepEqual(baum[0].bereiche[0].themen[1].spiele, [{ id: "a", titel: "Zwei Tonnen", datei: "a.html" }]);
+  assert.equal(baum[0].bereiche[0].themen[1].eltern, true);
 });
 
-test("regalHtml: aufklappbare Ebenen (details), Themenname mit Material, Detail mit Nochmal-Spielen und Mit echten Dingen", () => {
-  const h = regalHtml(regalBaum(GEKONNT, CTX, spieleFuer));
-  assert.match(h, /^<section class="regal-leiste" aria-label="Was ich kann"><h2>Was ich kann<\/h2>/);
-  assert.equal((h.match(/<details class="fach"/g) ?? []).length, 2);
-  assert.equal((h.match(/<details class="thema" data-thema="/g) ?? []).length, 3);
-  assert.match(h, /<summary><span class="material"><ls-perlenstab wert="2"[^>]*><\/ls-perlenstab><\/span><span class="name">Die 2 zerlegen<\/span><\/summary>/);
-  assert.match(h, /<a class="nochmal" href="a\.html\?thema=z2">Zwei Tonnen<\/a>/);
-  assert.match(h, /<button class="echt" type="button" data-thema="z2">Mit echten Dingen<\/button>/);
-  assert.doesNotMatch(h, /2026-|seit/);
+test("zuletztHtml: die letzten vier, neueste zuerst, Name und Material, Knopf Mein Regal; ohne Datum", () => {
+  const viele = [...Array(7)].map((_, i) => g(`z${i + 2}`, "mathe", `Die ${i + 2} zerlegen`));
+  const h = zuletztHtml(viele);
+  assert.match(h, /^<section class="zuletzt" aria-label="Zuletzt gelernt"><h2>Zuletzt gelernt<\/h2>/);
+  const namen = [...h.matchAll(/<span class="name">([^<]+)<\/span>/g)].map((m) => m[1]);
+  assert.deepEqual(namen, ["Die 8 zerlegen", "Die 7 zerlegen", "Die 6 zerlegen", "Die 5 zerlegen"]);
+  assert.match(h, /<button class="ding" type="button" data-thema="z8"><span class="material"><ls-perlenstab wert="8"/);
+  assert.match(h, /<a class="regal-knopf" href="regal\.html"><img src="symbole\/regal\.svg" alt=""><b>Mein Regal<\/b><\/a><\/section>$/);
+  assert.doesNotMatch(h, /2026-/);
 });
 
-test("regalHtml: leer → Satz des Erzählers", () => {
-  assert.match(regalHtml([]), /<p class="leer">Hier steht, was du kannst\.<\/p>/);
+test("zuletztHtml: leer → Satz und trotzdem der Knopf", () => {
+  const h = zuletztHtml([]);
+  assert.match(h, /<p class="leer">Hier steht, was du kannst\.<\/p>/);
+  assert.match(h, /class="regal-knopf"/);
+});
+
+test("reiterHtml: ein Reiter je Fach mit Gekonntem, der aktive trägt aria-selected", () => {
+  const h = reiterHtml(regalBaum(GEKONNT, CTX, spieleFuer), "grammatik");
+  assert.match(h, /^<div class="reiter" role="tablist" aria-label="Fächer">/);
+  assert.match(h, /<button class="reiter-knopf" type="button" role="tab" data-fach="mathe" aria-selected="false"[^>]*>/);
+  assert.match(h, /data-fach="grammatik" aria-selected="true"/);
+});
+
+test("bretterHtml: je Bereich ein Brett (Gruppe mit Bereichsname), Themen als Knöpfe mit Name, Neues markiert", () => {
+  const mathe = regalBaum(GEKONNT, CTX, spieleFuer)[0];
+  const h = bretterHtml(mathe, new Set(["z2"]));
+  assert.equal((h.match(/<section class="brett" role="group" aria-label="/g) ?? []).length, 2);
+  assert.match(h, /aria-label="Zahlzerlegung"><h3>Zahlzerlegung<\/h3>/);
+  assert.match(h, /<button class="ding neu" type="button" data-thema="z2"><span class="material">/);
+  assert.match(h, /<button class="ding" type="button" data-thema="z3">/);
+  assert.match(h, /<span class="name">Die 2 zerlegen<\/span>/);
 });
