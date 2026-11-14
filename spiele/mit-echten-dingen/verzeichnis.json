@@ -1,5 +1,18 @@
 {
  "themen": {
+  "einmaleins-sicher": {
+   "fach": "mathe",
+   "name": "Einmaleins sicher",
+   "titel": "Wie viele für alle?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kochen und auftun"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/einmaleins-sicher.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",

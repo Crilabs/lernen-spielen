@@ -1,7 +1,6 @@
 ---
 thema: einmaleins-sicher
 fach: mathe
-entwurf: true
 bild: { figur: erdbeerschale, zustand: voll }
 quellen:
   - Fachlehrplan Mathematik 3/4 Grundschule, 1.2 (Zahlensätze des kleinen Einmaleins und ihre Umkehrungen automatisiert und flexibel anwenden), LehrplanPLUS Bayern, ISB, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/3/mathematik, abgerufen 2026-11-14
