@@ -12,14 +12,15 @@ quellen:
 
 ## Am Tisch: Karten austeilen
 
-Ihr braucht: ein Kartenspiel mit 32 Karten, etwa Mau-Mau oder Quartett.
+Ihr braucht: ein Kartenspiel, etwa Mau-Mau oder Quartett.
 
-1. Ihr wollt zu viert alle 32 Karten austeilen. Fehlt jemand, spielt ein Kuscheltier mit.
-2. Vorher sucht ihr die Malaufgabe: Wie viele mal 4 ist gleich 32?
-3. Fangt bei 10 mal 4 an. Das ist 40, also 2 Vierer zu viel.
-4. Sagt: „8 mal 4 ist gleich 32. Also ist 32 geteilt durch 4 gleich 8.“
-5. Teilt reihum aus und zählt nach.
+1. Zählt, wie viele mitspielen. Auch Kuscheltiere dürfen mitspielen.
+2. Nehmt so viele Karten, dass es aufgeht: zu viert 32, zu dritt, fünft oder sechst 30.
+3. Sucht die Malaufgabe: Wie viele mal die Zahl der Spieler ist gleich der Zahl der Karten?
+4. Fangt bei 10 mal oder 5 mal an. Zu viel oder zu wenig? Geht von dort weiter.
+5. Sagt die Malaufgabe und ihre Umkehraufgabe, die Geteiltaufgabe.
+6. Teilt aus und zählt nach.
 
-**Darauf kommt es an:** Eine Geteiltaufgabe löst ihr mit der passenden Malaufgabe. Kennt ihr sie nicht, geht ihr von einer Kernaufgabe aus, etwa 10 mal 4. Das Austeilen zeigt, ob es stimmt.
+**Darauf kommt es an:** Eine Geteiltaufgabe löst ihr mit der passenden Malaufgabe. Kennt ihr sie nicht, geht ihr von 10 mal oder 5 mal aus. Das Austeilen zeigt, ob es stimmt.
 
-**Leichter:** Zu fünft mit 30 Karten. **Schwerer:** Zu sechst mit 42 Uno-Karten. Startet bei 5 mal 6 ist gleich 30.
+**Leichter:** Zu fünft mit 30 Karten. **Schwerer:** Zu siebt mit 28 Karten.
