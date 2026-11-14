@@ -149,7 +149,7 @@ Bedeutung. Die Schichten sind räumlich getrennt und an der Form zu unterscheide
 | Name | Wert | Bedeutung |
 |---|---|---|
 | Sonne | `#FFD95A` | ausgewählt, hier geht es weiter, Hilfe-Licht; als Ring oder Licht, nie als Fläche einer Antwort |
-| Hauptknopf | Tinte, Schatten `#24184A` | Weiter, Fertig; neutral, nicht grün |
+| Hauptknopf | Tinte, Schatten `#24184A` | z. B. Fertig; neutral, nicht grün. Weiter in der Pause ist wie Alle Spiele ein Papierknopf (N6) |
 | Nebenknopf | Papier mit Tinte-Kontur, Schatten Tinte weich `#6B5C96` | Haus, Ton, Vorlesen, Hilfe |
 | Beere | `#B3315A` | nur Elternbereich (Löschen, Achtung); beim Kind nie |
 

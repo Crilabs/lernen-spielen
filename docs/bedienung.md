@@ -84,20 +84,21 @@ von keinem Spiel neu erfunden.
 | Element | Größe | Bemerkung |
 |---|---|---|
 | Nebenknopf (Haus, Ton, Hilfe) | 11 rem rund | am Kiosk (1080 px, 21,5″) ≈ 2,9 cm, auf 10″-Tablet (800 px) ≈ 2,3 cm; Mindestmaß K4: 2 × 2 cm **(Annahme, am Tablet prüfen)** |
-| Hauptknopf (Weiter, Fertig) | Pille, 11 rem hoch, mindestens 24 rem breit | Symbol und Wort; Wort 4 rem fett |
-| Pausenknöpfe (Alle Spiele, Weiter) | Pille, 14 rem hoch, beide 50 rem breit | gleich groß (N6); Wort 5 rem fett |
+| Hauptknopf (z. B. Fertig, wenn das Kind selbst sagt, dass es fertig ist) | Pille, 11 rem hoch, mindestens 24 rem breit | Symbol und Wort; Wort 4 rem fett. Kein Weiter zwischen Aufgaben (7.1) |
+| Pausenknöpfe (Alle Spiele, Weiter) | Pille, 14 rem hoch (`groesse="gross"`), beide 50 rem breit | gleich groß und gleich gestaltet: Nebenknöpfe aus Papier, keiner ist Hauptknopf (N6); Wort 5 rem fett |
 | Noch mal hören (in der Blase) | 8 rem | Tippfläche auf 11 rem erweitert |
 | Fachsymbol | Kachel 9 rem, Radius 2,6 rem | nur Anzeige, flach |
 | Kopfleiste | 15,8 rem hoch | Spielname 5,2 rem fett, Thema 3,4 rem |
 | Kontur | 0,3 rem Tinte | Knöpfe, Kachel, Blase |
-| Schatten drückbarer Teile | 0,6 rem, beim Drücken 0,3 rem | |
-| Taste der Bildschirm-Tastatur | mindestens 9 × 8,6 rem | |
+| Schatten drückbarer Teile | 0,6 rem, beim Drücken 0,3 rem | Knöpfe und Teile (`.teil`); Ausnahme Tasten, s. nächste Zeile |
+| Taste der Bildschirm-Tastatur | mindestens 9 × 8,6 rem; Schatten 0,8 rem, sinkt beim Drücken 0,7 rem ein | Ausnahme (Annahme): beim schnellen Tippen soll jeder Anschlag deutlich zu sehen sein, daher tiefer als bei Knöpfen (`TASTE` in `tastatur.js`) |
 | Abstand zwischen Tippzielen | mindestens 2 rem | |
 | Schrift im Spiel | mindestens 3,2 rem, Andika | Kontur und Schrift `#3B2A6B` |
 
 Begründung Hauptknopf (Annahme): Die Pille ist so hoch wie ein Nebenknopf, damit sie in derselben Zeile
 stehen kann; Breite und Wort machen sie zum Hauptknopf, nicht die Höhe. Die alte runde Hauptaktion mit
-16 rem gibt es als `groesse="haupt"` weiter für runde Knöpfe.
+16 rem gibt es als `groesse="gross"` weiter für runde Knöpfe. `groesse` (bedien, gross, klein) ist nur die
+Größe, `art` (neben, haupt) nur die Gestalt; beides ist unabhängig.
 
 ### 4.1 Farben (Christian)
 
@@ -106,10 +107,11 @@ Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.
 
 - **Nebenknopf:** Papier, Tinte-Kontur, Schatten in Tinte weich; nur Symbol, der Name wird beim ersten Tippen
   gesprochen. Haus, Ton, Noch mal hören, Hilfe.
-- **Hauptknopf:** Tinte gefüllt, Symbol und Wort in Papier, Schatten im dunklen Tinte-Ton. Weiter, Fertig.
-  Neutral, nie grün.
-- **Schatten heißt drückbar:** Nur Knöpfe haben Schatten. Kopfleiste, Fachkachel, Sprechblase und die
-  Karte der Pause sind flach.
+- **Hauptknopf:** Tinte gefüllt, Symbol und Wort in Papier, Schatten im dunklen Tinte-Ton. Z. B. Fertig.
+  Neutral, nie grün. Zwischen zwei Aufgaben gibt es keinen Weiter-Knopf (7.1), und die Pausenknöpfe
+  Alle Spiele und Weiter sind beide gleiche Pillen aus Papier, kein Hauptknopf.
+- **Schatten heißt drückbar:** Nur Knöpfe, ziehbare Teile und Tasten haben Schatten. Kopfleiste,
+  Fachkachel, Sprechblase, Matte, Tablett und die Karte der Pause sind flach.
 - **Sonnenring:** Fokus, Auswahl und das Aufleuchten der Hilfe sind ein Ring in Sonne (mit feiner
   Tinte-Kante), nie eine Füllung.
 - **Pause:** Nacht mit Sternen in Sonne, Inhalt auf Papier, Knöpfe aus Papier.
@@ -136,6 +138,11 @@ Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.
   um den Knopf. Er bewertet nichts und füllt nie eine Fläche.
 - **Name beim ersten Tippen (Christian):** Ein Bedienzeichen spricht beim ersten Antippen je Sitzung
   seinen Namen (K3), sofern der Ton an ist. Danach bleibt es still. Sitzung heißt: seit dem Start der App.
+  **Inhalt geht vor (Christian, 2026-11-14):** Der Name gilt nur als gesagt, wenn ihn nichts abbricht. Löst
+  das Tippen selbst Sprache aus (Hilfe spricht die Probe, Weiter startet den Auftrag), bricht dieser Inhalt
+  den Namen ab; der Name kommt dann bei einem späteren Tippen. Ein Link (Alle Spiele) navigiert sofort; sein
+  Name gilt als gesagt, sobald er beginnt. Umgesetzt in `sageEinmal` (`spiele/kern/sitzung.js`), für alle
+  Bausteine gleich (Knopf, Haus und Ton der Leiste, Alle Spiele der Pause).
 - **Ton aus** beendet laufende Sprache sofort. Klänge des Spiels verstummen ebenfalls.
 - **Hilfe (Christian):** Der Hilfe-Knopf ist immer da. Nach dem zweiten Versuch, der noch nicht passt,
   leuchtet er **einmal** ruhig auf: ein Sonnenring mit weichem Licht um den Knopf (etwa 1 s, kein
@@ -198,24 +205,25 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 
 | Baustein | Aufgabe | Schnittstelle (Kurzform) |
 |---|---|---|
-| `<ls-knopf>` | Grundknopf: Neben- oder Hauptknopf, Symbol, Name, Einsinken, Mindestgröße, Name beim ersten Tippen | Attribute `art="neben\|haupt"` (Vorgabe neben), `symbol`, `name`, `wort` (sichtbares Wort, macht den Knopf zur Pille), `groesse="bedien\|haupt\|klein"`, `gespiegelt`, `stumm`, `spiel`; Ereignis `click` |
-| `<ls-leiste>` | Kopfleiste: Haus, Fachkachel, Spielname, Thema, Ton | Attribute `spiel`, `fach`, `titel`, `thema` (zur Laufzeit änderbar); Eigenschaft `ton` (boolean); Ereignisse `ton`, `bereit`; `istBereit`, `bereit()`, `bereitet` (Versprechen, sobald die Einstellungen geladen sind); setzt `--ls-leiste-hoehe` am Dokument |
-| `<ls-blase>` | Sprechblase des Erzählers mit Noch-mal-hören, ohne Zipfel | `sage(text, { sprechen = true, tempo })`; Eigenschaft `text` |
-| `<ls-hilfe>` | Hilfe-Knopf unten rechts | `leuchte()` (Sonnenring, einmal ~1 s); Ereignis `hilfe` |
-| `<ls-pause>` | Pause/Rundenende mit Alle Spiele und Weiter | Inhalt (Bild, Sachmoment) per Slot; `await zeige()` → `"weiter"` |
+| `<ls-knopf>` | Grundknopf: Neben- oder Hauptknopf, Symbol, Name, Einsinken, Mindestgröße, Name beim ersten Tippen | Attribute `art="neben\|haupt"` (Gestalt, Vorgabe neben), `symbol`, `name`, `wort` (sichtbares Wort, macht den Knopf zur Pille), `groesse="bedien\|gross\|klein"` (nur die Größe: rund 11/16/8 rem, Pille 11 rem, mit `gross` 14 rem), `gespiegelt`, `stumm`, `spiel`; Ereignis `click` |
+| `<ls-leiste>` | Kopfleiste: Haus, Fachkachel, Spielname, Thema, Ton | Attribute `spiel`, `fach`, `titel`, `thema` (zur Laufzeit änderbar); Eigenschaft `ton` (boolean); Ereignisse `ton` (`detail.an`), `bereit`; `await leiste.bereit()` (Versprechen, sobald die Einstellungen geladen sind, auch für späte Aufrufer); setzt `--ls-leiste-hoehe` am Dokument |
+| `<ls-blase>` | Sprechblase des Erzählers mit Noch-mal-hören, ohne Zipfel | Attribut `spiel` (sonst die Leiste der Seite); `sage(text, { sprechen = true, tempo })`; Eigenschaft `text` |
+| `<ls-hilfe>` | Hilfe-Knopf unten rechts | Attribut `spiel` (sonst die Leiste der Seite); `leuchte()` (Sonnenring, einmal ~1 s); Ereignis `hilfe` |
+| `<ls-pause>` | Pause/Rundenende mit Alle Spiele und Weiter | Attribute `spiel` (sonst die Leiste der Seite), `offen` (gesetzt, solange sie zu sehen ist; setzt `zeige()`); Inhalt (Bild, Sachmoment) per Slot; `await zeige()` → `"weiter"` |
 | `<ls-tastatur>` | Bildschirm-Tastatur | Attribute `tasten` (die benötigten Zeichen), `leertaste`, `loeschen`; Ereignis `taste` mit `detail.zeichen` |
 | `ziehbar()` (`ziehen.js`) | Ziehen mit Tipp-Alternative (§5): ziehen ab 1 rem Bewegung, sonst antippen → angehoben mit Sonnenring → Ziel antippen; Enter/Leertaste auf Teil und Ziel | `ziehbar(teil, { ziele, beimAblegen(teil, ziel) })` → `loesen()`; das Spiel ruft `setze(teil, ziel, { vor })` oder `zurueck(teil)` (0,3 s, bei wenig Bewegung sofort); die Reihenfolge im Ziel bestimmt das Spiel über `vor` (Knoten, vor den das Teil kommt; ohne `vor` ans Ende); Escape setzt ab, auch vom Ziel aus; Ziele heißen für Vorleser nach ihrem Attribut `name`, sonst „Ablage“; Klassen `angehoben`, `gezogen`, `gedrueckt`, an Zielen `ziel-frei`, `ziel-ueber`; Zustand ohne DOM in `ziehen-zustand.js` |
-| `<ls-perlenstab>` (`perlenstab.js`) | Lernzeichen Perlenstäbchen (grundsaetze-bilder §4 M1–M3, M7): Montessori-Farbe, jede Perle einzeln, Lücke und Marke nach der fünften, Länge proportional; flach (ziehbar nur mit `class="teil"`) | Attribute `wert` (1–10; ungültig oder fehlend: nichts gezeichnet, einmal ins Protokoll), `ausrichtung="waagrecht\|senkrecht"`, `ziffer` (Ziffer davor bzw. darüber), `verdeckt` (Tuch in Nebel mit Fünfermarke, Ziffer darauf); Dicke per CSS am Host: waagrecht `height`, senkrecht `width` (Vorgabe 7 rem), mit `verdeckt` und `ziffer` mindestens 6 rem; Name „Perlenstab 7“ als aria-label; Geometrie ohne DOM in `perlen-geometrie.js` |
+| `<ls-perlenstab>` (`perlenstab.js`) | Lernzeichen Perlenstäbchen (grundsaetze-bilder §4 M1–M3, M7): Montessori-Farbe, jede Perle einzeln, Lücke und Marke nach der fünften, Länge proportional; flach (ziehbar nur mit `class="teil"`) | Attribute `wert` (1–10; ungültig oder fehlend: nichts gezeichnet, einmal ins Protokoll), `ausrichtung="waagrecht\|senkrecht"`, `ziffer` (Ziffer davor bzw. darüber), `verdeckt` (Tuch in Nebel mit Fünfermarke, Ziffer darauf); Dicke per CSS am Host: waagrecht `height`, senkrecht `width` (Vorgabe 7 rem), mit `verdeckt` und `ziffer` mindestens 6 rem; als Teil (`class="teil"`) gibt `seite.css` das Grundmaß vor (`ls-perlenstab.teil`: 11 rem hoch, Polster 2 rem, darin der Stab); Name „Perlenstab 7“ als aria-label; Geometrie ohne DOM in `perlen-geometrie.js` |
 | `<ls-wortart>` (`wortart.js`) | Lernzeichen Wortart (§5 D1): Nomen, Artikel, Adjektiv als Dreiecke in drei Größen, Verb als Kreis, gemeinsame Grundlinie | Attribut `art="nomen\|artikel\|adjektiv\|verb"` (unbekannt oder fehlend: nichts gezeichnet, einmal ins Protokoll); Größe per `height` am Host (Vorgabe 8 rem, quadratisch); Name („Nomen“ …) als aria-label |
 
 - **Aussehen über CSS-Variablen:** `--ls-tinte`, `--ls-tinte-weich`, `--ls-papier`, `--ls-nebel`,
-  `--ls-linie`, `--ls-naht`, `--ls-haupt-schatten`, `--ls-sonne`, `--ls-nacht`, `--ls-kontur`,
-  `--ls-radius-gross|--ls-radius|--ls-radius-klein`, `--ls-knopf`, `--ls-neben-schatten`, `--ls-schatten`; Werte aus
-  `stil.js` (Farbwelt). Eine Welt ändert sie nicht: Form, Farbe, Größe und Platz der Bedienung sind fest.
+  `--ls-linie`, `--ls-naht`, `--ls-haupt-schatten`, `--ls-sonne`, `--ls-nacht`, `--ls-ahorn` und `--ls-kante`
+  (Holz des Tabletts), `--ls-kontur`, `--ls-radius-gross|--ls-radius|--ls-radius-klein`, `--ls-knopf`,
+  `--ls-neben-schatten`, `--ls-schatten` (drückbar, 0,6 rem) und `--ls-schatten-unten` (gedrückt, 0,3 rem),
+  `--ls-leiste-hoehe` (setzt `<ls-leiste>`); Werte aus `stil.js` (Farbwelt). Eine Welt ändert sie nicht: Form, Farbe, Größe und Platz der Bedienung sind fest.
 - **Seiten-Grundstil:** `spiele/rahmen/seite.css` (in die Spielseite einbinden): Raster, Andika, dieselben
   Variablen in `:root`, Ebenen `.welt` (hinter allem, ganzer Bildschirm), `.buehne` (sicheres Feld),
   `.spielflaeche` (ab `--ls-leiste-hoehe`), Flächen `.lernfeld` (Matte) und `.tablett` (flach, ohne Schatten),
-  `.teil` (ziehbares Teil mit Schatten), `.markiert` (Sonnenring; `.auswahl` bleibt die Klasse „Text darf markiert werden“ von `sperreTouch()`). `tests/rahmen-stil.test.mjs` prüft die
+  `.teil` (ziehbares Teil mit Schatten; `ls-perlenstab.teil` mit Grundmaß 11 rem), `.markiert` (Sonnenring; `.auswahl` bleibt die Klasse „Text darf markiert werden“ von `sperreTouch()`). `tests/rahmen-stil.test.mjs` prüft die
   Variablen gegen `TOKENS` in `stil.js`.
 - **Vorschau:** `spiele/rahmen/vorschau.html` zeigt alle Bausteine zum Ansehen und Ausprobieren.
 - **Regel (geplant):** Sobald das erste Spiel umgezogen ist, prüft ein Test, dass umgezogene Spiele Haus-
