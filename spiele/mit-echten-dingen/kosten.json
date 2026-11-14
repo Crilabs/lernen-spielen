@@ -389,5 +389,56 @@
   "thema": [
    "kernaufgaben-einmaleins"
   ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 36,
+  "ausgabe": 10221,
+  "einheit": "tokens",
+  "menge": 1287265,
+  "notiz": "Schreib-Agent viererreihe",
+  "cache_lesen": 1210028,
+  "cache_schreiben": 66980,
+  "themen": 1,
+  "thema": [
+   "viererreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 20,
+  "ausgabe": 7450,
+  "einheit": "tokens",
+  "menge": 605914,
+  "notiz": "Prüfer E viererreihe R1",
+  "cache_lesen": 547907,
+  "cache_schreiben": 50537,
+  "themen": 1,
+  "thema": [
+   "viererreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 1276,
+  "einheit": "tokens",
+  "menge": 268372,
+  "notiz": "§5.1",
+  "cache_lesen": 263752,
+  "cache_schreiben": 3336,
+  "themen": 1,
+  "thema": [
+   "viererreihe"
+  ]
  }
 ]
