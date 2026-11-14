@@ -25,6 +25,16 @@ export function dunkler(hex, anteil = 0.22) {
   return "#" + a.map((v, i) => Math.round(v + (b[i] - v) * anteil).toString(16).padStart(2, "0")).join("").toUpperCase();
 }
 
+/**
+ * Lichtton: Grundfarbe zu warmem Weiß hin gemischt.
+ * @param {string} hex @param {number} [anteil]
+ */
+export function heller(hex, anteil = 0.28) {
+  const a = rgb(hex);
+  const b = rgb("#FFF6E6");
+  return "#" + a.map((v, i) => Math.round(v + (b[i] - v) * anteil).toString(16).padStart(2, "0")).join("").toUpperCase();
+}
+
 /** Mehrere Stücke zu einem. @param {...Stueck} teile @returns {Stueck} */
 export const zusammen = (...teile) => ({ svg: teile.map((t) => t.svg).join(""), kontur: teile.map((t) => t.kontur).join("") });
 
@@ -32,15 +42,19 @@ export const zusammen = (...teile) => ({ svg: teile.map((t) => t.svg).join(""), 
  * Fläche mit Schattenstufe. trenn: feine Linie im Schattenton um die Fläche, wo sie vor Gleichfarbigem liegt.
  * @param {string} geo Element ohne Füllung, z. B. `path d="…"` @param {string} farbe
  * @param {[number, number]} licht Punkt oben links in der Fläche
- * @param {{s?: number, trenn?: boolean, kontur?: boolean}} [o] kontur: false = trägt nicht zur Silhouette bei
+ * @param {{s?: number, trenn?: boolean, kontur?: boolean, glanz?: boolean}} [o] kontur: false = trägt nicht zur Silhouette bei;
+ *   glanz: false = ohne Lichtstufe
  * @returns {Stueck}
  */
 export function form(geo, farbe, licht, o = {}) {
   const [lx, ly] = licht;
   const s = o.s ?? 0.88;
+  const g = s * 0.62;
   return {
-    svg: `<${geo} fill="${dunkler(farbe)}" stroke="none"/>`
+    svg: `<${geo} fill="${dunkler(farbe, 0.3)}" stroke="none"/>`
       + `<${geo} fill="${farbe}" stroke="none" transform="translate(${z(lx)} ${z(ly)}) scale(${s}) translate(${z(-lx)} ${z(-ly)})"/>`
+      + (o.glanz === false ? "" : `<${geo} fill="${heller(farbe)}" stroke="none" opacity="0.85"`
+        + ` transform="translate(${z(lx)} ${z(ly)}) scale(${z(g)}) translate(${z(-lx)} ${z(-ly)})"/>`)
       + (o.trenn ? `<${geo} fill="none" stroke="${dunkler(farbe, 0.5)}" stroke-width="2"/>` : ""),
     kontur: o.kontur === false ? "" : `<${geo}/>`,
   };
@@ -51,6 +65,15 @@ export const flach = (geo, farbe) => ({ svg: `<${geo} fill="${farbe}" stroke="no
 
 /** Feine Innenlinie im Schattenton einer Farbe (Naht, Falte, Schnürung). @param {string} d @param {string} farbe @param {number} [w] */
 export const naht = (d, farbe, w = 2.2) => ({ svg: `<path d="${d}" fill="none" stroke="${dunkler(farbe, 0.5)}" stroke-width="${w}"/>`, kontur: "" });
+
+/** Falte oder Schlagschatten als dunkle Form (keine Linie). @param {string} d @param {string} farbe @param {number} [anteil] */
+export const falte = (d, farbe, anteil = 0.32) => ({ svg: `<path d="${d}" fill="${dunkler(farbe, anteil)}" stroke="none"/>`, kontur: "" });
+
+/** Glanzstrich (Haar, Stoff). @param {string} d @param {string} farbe @param {number} [w] */
+export const glanz = (d, farbe, w = 2.6) => ({ svg: `<path d="${d}" fill="none" stroke="${heller(farbe, 0.45)}" stroke-width="${w}" opacity="0.8"/>`, kontur: "" });
+
+/** Weiche Röte (Wangen). @param {number} cx @param {number} cy @param {number} rx @param {number} ry */
+export const roete = (cx, cy, rx, ry) => ({ svg: `<ellipse cx="${z(cx)}" cy="${z(cy)}" rx="${z(rx)}" ry="${z(ry)}" fill="#E9806A" opacity="0.35" stroke="none"/>`, kontur: "" });
 
 /** Tintenlinie innen (Gesichtszüge, Brille). @param {string} d @param {number} [w] */
 export const tinte = (d, w = 3) => ({ svg: `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w}"/>`, kontur: "" });

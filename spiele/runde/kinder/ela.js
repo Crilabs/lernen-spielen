@@ -6,8 +6,8 @@ import { dreiviertel, profil, ellipse, flaeche, INK } from "./schnitt.js";
 import * as S from "./stil.js";
 
 const farben = {
-  haut: "#B97E57", haar: "#4A2E2A", oben: "#D9B85C", hemd: "#F7F2EA", unten: "#6F6A86",
-  schuhe: "#7C6FA8", sohle: "#FFFCF7",
+  haut: "#B97E57", haar: "#3F2724", oben: "#E3B341", hemd: "#F7F2EA", unten: "#5C7DB5",
+  schuhe: "#9B5FA8", sohle: "#FFFCF7",
 };
 const BAND = "#7FB3C9";
 
@@ -19,20 +19,30 @@ const zopf = (x, y) =>
 /** Zopf mit Schattenstufe, aus einem Guss. @param {number} x @param {number} y */
 const zopfS = (x, y) => S.zusammen(
   ...[0, 1, 2].map((i) => S.zusammen(
-    S.form(S.oval(x, y + i * 14, 9.5 - i, 9), farben.haar, [x - 4, y + i * 14 - 4], { s: 0.8 }),
-    S.naht(`M${x - 5} ${y + i * 14 - 2} Q${x} ${y + i * 14 + 3} ${x + 5} ${y + i * 14 - 3}`, farben.haar, 2),
+    S.form(S.oval(x, y + i * 14, 9.5 - i, 9), farben.haar, [x - 4, y + i * 14 - 4], { s: 0.8, glanz: false }),
+    S.glanz(`M${x - 5} ${y + i * 14 - 3} Q${x - 1} ${y + i * 14 - 6} ${x + 3} ${y + i * 14 - 5}`, farben.haar, 2.4),
   )),
   S.form(S.pfad(`M${x - 8} ${y + 38} l8 -6 l8 6 l-8 6 Z`), BAND, [x - 3, y + 36], { s: 0.8 }),
 );
 
+/** Haarsträhne als geschwungene, spitz zulaufende Form. @param {string} d */
+const straehne = (d) => S.form(S.pfad(d), farben.haar, [150, 30], { s: 0.92, glanz: false });
+
 const kopfDreiviertel = {
-  haareHinten: S.zusammen(S.form(S.oval(162, 66, 45, 42), farben.haar, [146, 44], { s: 0.9 }), zopfS(118, 100), zopfS(204, 96)),
+  haareHinten: S.zusammen(
+    S.form(S.oval(162, 66, 46, 43), farben.haar, [146, 44], { s: 0.9, glanz: false }),
+    zopfS(118, 100), zopfS(205, 96),
+  ),
   haareOben: S.zusammen(
     S.form(S.pfad(
-      "M120 84 C113 42 138 24 164 24 C193 24 211 42 206 78 C203 66 197 59 190 56 C186 63 178 65 171 58"
-      + " C165 65 154 65 149 56 C141 60 133 67 127 76 Z",
-    ), farben.haar, [140, 34], { s: 0.9 }),
-    S.naht("M166 27 Q161 38 166 50 M150 32 Q142 42 140 56 M184 32 Q192 42 194 54", farben.haar, 2.4),
+      "M119 86 C111 44 136 23 164 23 C194 23 213 42 207 80 C204 68 198 60 191 57 C187 64 179 66 172 59"
+      + " C166 66 154 66 149 57 C141 61 133 68 126 78 Z",
+    ), farben.haar, [140, 32], { s: 0.9, glanz: false }),
+    straehne("M150 58 C146 44 152 30 166 26 C158 34 156 46 160 60 Z"),
+    straehne("M176 60 C182 46 180 34 172 27 C188 32 194 46 190 58 Z"),
+    straehne("M131 74 C128 56 136 40 150 32 C142 44 138 58 140 70 Z"),
+    S.glanz("M136 52 C142 40 152 33 164 31 M176 34 C186 38 194 46 198 56 M152 50 C154 42 158 37 164 34", farben.haar, 3),
+    S.falte("M149 57 C154 64 166 66 172 59 C166 62 156 62 149 57 Z", farben.haar, 0.35),
   ),
   nachGesicht: S.tinte("M146 80 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 M173 80 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0"
     + " M168 79 Q170 77 173 79 M146 79 L126 76", 3.2),

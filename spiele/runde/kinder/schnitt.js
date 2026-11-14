@@ -54,72 +54,99 @@ const T = (teil, st) => ({ teil, svg: st.svg, kontur: st.kontur });
  */
 export function dreiviertel({ breite: b, farben: f, kopf }) {
   const X = (/** @type {number} */ d) => 160 + d * b;
-  const hueftY = 184;
-  const schulterY = 126;
+  const hueftY = 186;
+  const schulterY = 124;
   const P = (/** @type {number} */ x, /** @type {number} */ y) => /** @type {[number, number]} */ ([x, y]);
-  const rumpf = `M${z(X(-27))} 124 Q${z(X(-27))} 111 ${z(X(-14))} 111 L${z(X(14))} 111 Q${z(X(27))} 111 ${z(X(27))} 124`
-    + ` L${z(X(30))} 177 Q${z(X(30))} 187 ${z(X(21))} 187 L${z(X(-21))} 187 Q${z(X(-30))} 187 ${z(X(-30))} 177 Z`;
-  const huefte = `M${z(X(-26))} 172 L${z(X(26))} 172 L${z(X(26))} 192 Q${z(X(26))} 200 ${z(X(18))} 200`
-    + ` L${z(X(-18))} 200 Q${z(X(-26))} 200 ${z(X(-26))} 192 Z`;
-  /** Turnschuh mit Sohle, Spitze nach rechts. @param {number} x */
+  // Jacke: Schulterlinie gewölbt, weitet sich nach unten, Saum leicht gebogen.
+  const jacke = `M${z(X(-23))} 118 C${z(X(-14))} 109 ${z(X(14))} 109 ${z(X(23))} 118`
+    + ` C${z(X(28))} 140 ${z(X(31))} 165 ${z(X(34))} 184 C${z(X(20))} 192 ${z(X(-20))} 192 ${z(X(-34))} 184`
+    + ` C${z(X(-31))} 165 ${z(X(-28))} 140 ${z(X(-23))} 118 Z`;
+  const huefte = `M${z(X(-27))} 172 L${z(X(27))} 172 C${z(X(30))} 182 ${z(X(30))} 192 ${z(X(27))} 201`
+    + ` L${z(X(-27))} 201 C${z(X(-30))} 192 ${z(X(-30))} 182 ${z(X(-27))} 172 Z`;
+  /** Turnschuh mit Kappe und Sohle, Spitze nach rechts. @param {number} x */
   const schuh = (x) => S.zusammen(
-    S.form(S.pfad(`M${z(x - 12)} 247 Q${z(x - 12)} 233 ${z(x + 1)} 233 Q${z(x + 10)} 233 ${z(x + 14)} 239`
-      + ` Q${z(x + 23)} 241 ${z(x + 23)} 248 L${z(x - 12)} 248 Z`), f.schuhe, P(x - 6, 237)),
-    S.flach(S.pfad(`M${z(x - 13)} 247 L${z(x + 24)} 247 L${z(x + 24)} 250 Q${z(x + 24)} 255 ${z(x + 18)} 255`
-      + ` L${z(x - 8)} 255 Q${z(x - 13)} 255 ${z(x - 13)} 250 Z`), f.sohle ?? "#FFFCF7"),
-    S.naht(`M${z(x + 1)} 237 l5 2 M${z(x + 4)} 235 l5 2`, f.schuhe, 2.4),
+    S.form(S.pfad(`M${z(x - 13)} 247 C${z(x - 14)} 236 ${z(x - 6)} 231 ${z(x + 2)} 232 C${z(x + 9)} 232 ${z(x + 12)} 237 ${z(x + 15)} 239`
+      + ` C${z(x + 24)} 240 ${z(x + 26)} 244 ${z(x + 26)} 248 L${z(x - 13)} 248 Z`), f.schuhe, P(x - 7, 236)),
+    S.flach(S.pfad(`M${z(x - 14)} 246 L${z(x + 27)} 246 L${z(x + 27)} 250 Q${z(x + 27)} 255 ${z(x + 21)} 255`
+      + ` L${z(x - 9)} 255 Q${z(x - 14)} 255 ${z(x - 14)} 250 Z`), f.sohle ?? "#FFFCF7"),
+    S.naht(`M${z(x + 13)} 239 C${z(x + 12)} 243 ${z(x + 13)} 245 ${z(x + 15)} 246`, f.schuhe, 2.2),
+    S.naht(`M${z(x)} 236 l6 2.5 M${z(x + 3)} 234 l6 2.5`, f.schuhe, 2.4),
+    S.naht(`M${z(x - 14)} 251 L${z(x + 27)} 251`, f.sohle ?? "#FFFCF7", 1.6),
   );
-  /** @param {number} dx @returns {Teil[]} */
-  const bein = (dx) => [
-    T("bein", S.glied(P(X(dx), 190), 11.5, P(X(dx) + 1, 236), 10, f.unten)),
-    T("schuh", schuh(X(dx) + 1)),
+  /** Weites Hosenbein mit Falte und Umschlag; o = +1 rechts, -1 links (Grätsche). @param {number} cx @param {1|-1} o */
+  const hosenbein = (cx, o) => {
+    const u = cx + o * 5;
+    return S.zusammen(
+      S.form(S.pfad(`M${z(cx - 12)} 186 C${z(cx - 13)} 200 ${z(cx - 12 + o * 2)} 214 ${z(u - 12)} 232`
+        + ` L${z(u + 12)} 232 C${z(cx + 11 + o * 2)} 214 ${z(cx + 13)} 200 ${z(cx + 12)} 186 Z`), f.unten, P(cx - 8, 190), { s: 0.84 }),
+      S.falte(`M${z(cx - 7 + o)} 210 q6 5 13 -1 q-6 2 -13 4 Z M${z(cx + 2)} 220 q4 3 8 -1 q-4 2 -8 3 Z`, f.unten),
+      S.falte(`M${z(cx - 11)} 196 C${z(cx - 4)} 200 ${z(cx + 4)} 200 ${z(cx + 11)} 196 L${z(cx + 11)} 199 C${z(cx + 4)} 203 ${z(cx - 4)} 203 ${z(cx - 11)} 199 Z`, f.unten, 0.2),
+      S.form(S.pfad(`M${z(u - 13)} 229 L${z(u + 13)} 229 L${z(u + 13)} 238 L${z(u - 13)} 238 Z`), f.unten, P(u - 10, 230), { s: 0.8, trenn: true }),
+    );
+  };
+  /** @param {number} dx @param {1|-1} o @returns {Teil[]} */
+  const bein = (dx, o) => [
+    T("bein", hosenbein(X(dx), o)),
+    T("schuh", schuh(X(dx) + o * 5)),
   ];
-  /** @param {number} dx @param {number} hx @param {1|-1} daumen @param {boolean} trenn */
-  const arm = (dx, hx, daumen, trenn) => {
-    const w = P(X(hx) - Math.sign(dx), 165);
-    const haende = S.haende(w, f.haut, daumen);
+  /** Arm mit Ärmel, der zum Bündchen weiter wird. @param {number} dx @param {number} ex @param {1|-1} daumen @param {boolean} trenn */
+  const arm = (dx, ex, daumen, trenn) => {
+    const w = P(X(ex) - Math.sign(dx), 166);
     return {
-      oben: [T("oberarm", S.glied(P(X(dx), schulterY), 9, P(X(hx), 146), 8, f.oben, { trenn }))],
+      oben: [T("oberarm", S.zusammen(
+        S.glied(P(X(dx), schulterY), 9.5, P(X(ex), 146), 8.5, f.oben, { trenn }),
+        S.falte(`M${z(X(ex) - 7)} 140 q7 5 13 -1 q-6 3 -13 4 Z`, f.oben),
+      ))],
       unten: [
-        T("unterarm", S.zusammen(S.glied(P(X(hx), 146), 8, P(w[0], 162), 7.2, f.oben, { trenn }),
-          S.naht(`M${z(w[0] - 6)} 158 L${z(w[0] + 6)} 158`, f.oben))),
-        { teil: "hand", formen: haende },
+        T("unterarm", S.zusammen(
+          S.glied(P(X(ex), 146), 8.5, P(w[0], 160), 9.5, f.oben, { trenn }),
+          S.naht(`M${z(w[0] - 8)} 157 Q${z(w[0])} 160 ${z(w[0] + 8)} 157`, f.oben),
+        )),
+        { teil: "hand", formen: S.haende(w, f.haut, daumen) },
       ],
     };
   };
-  const vorn = arm(26, 30, -1, true);
-  const hinten = arm(-26, -30, 1, false);
+  const vorn = arm(24, 29, -1, true);
+  const hinten = arm(-24, -29, 1, false);
   const oberteil = f.hemd
     ? S.zusammen(
-      S.form(S.pfad(rumpf), f.oben, P(X(-22), 118), { s: 0.86 }),
-      S.flach(S.pfad(`M${z(X(-4))} 112 Q${z(X(6))} 120 ${z(X(16))} 112 L${z(X(19))} 187 L${z(X(-3))} 187 Z`), f.hemd),
-      S.naht(`M${z(X(-3))} 142 L${z(X(18))} 142 M${z(X(-3))} 160 L${z(X(19))} 160`, f.hemd, 3),
-      S.naht(`M${z(X(-4))} 112 L${z(X(-3))} 187 M${z(X(16))} 112 L${z(X(19))} 187`, f.oben, 2.6),
-      S.naht(`M${z(X(-4))} 113 L${z(X(-11))} 124 L${z(X(-2))} 128 M${z(X(16))} 113 L${z(X(22))} 123 L${z(X(15))} 127`, f.oben, 2.4),
-      S.naht(`M${z(X(-24))} 160 L${z(X(-12))} 160`, f.oben, 2.6),
+      S.form(S.pfad(jacke), f.oben, P(X(-22), 118), { s: 0.88 }),
+      S.flach(S.pfad(`M${z(X(-6))} 113 Q${z(X(5))} 122 ${z(X(15))} 113 L${z(X(20))} 189 Q${z(X(7))} 191 ${z(X(-4))} 189 Z`), f.hemd),
+      S.naht(`M${z(X(-5))} 141 L${z(X(17))} 141 M${z(X(-4))} 160 L${z(X(18))} 160 M${z(X(-4))} 178 L${z(X(19))} 178`, f.hemd, 3),
+      S.naht(`M${z(X(-6))} 113 C${z(X(-8))} 140 ${z(X(-6))} 165 ${z(X(-4))} 189 M${z(X(15))} 113 C${z(X(18))} 140 ${z(X(19))} 165 ${z(X(20))} 189`, f.oben, 2.6),
+      S.naht(`M${z(X(-6))} 114 L${z(X(-13))} 126 L${z(X(-5))} 131 M${z(X(15))} 114 L${z(X(22))} 125 L${z(X(16))} 130`, f.oben, 2.4),
+      S.naht(`M${z(X(-26))} 162 L${z(X(-13))} 162`, f.oben, 2.4),
+      S.falte(`M${z(X(-30))} 178 C${z(X(-24))} 172 ${z(X(-16))} 172 ${z(X(-10))} 176 C${z(X(-16))} 175 ${z(X(-22))} 176 ${z(X(-30))} 181 Z`, f.oben),
+      S.falte(`M${z(X(21))} 120 C${z(X(25))} 135 ${z(X(27))} 160 ${z(X(31))} 183 L${z(X(26))} 186 C${z(X(24))} 160 ${z(X(22))} 140 ${z(X(19))} 122 Z`, f.oben, 0.2),
+      S.falte(`M${z(X(-4))} 113 Q${z(X(5))} 122 ${z(X(15))} 113 Q${z(X(5))} 128 ${z(X(-4))} 116 Z`, f.hemd, 0.25),
     )
-    : S.zusammen(S.form(S.pfad(rumpf), f.oben, P(X(-22), 118), { s: 0.86 }), S.naht(`M${z(X(-10))} 113 Q160 121 ${z(X(10))} 113`, f.oben));
+    : S.zusammen(S.form(S.pfad(jacke), f.oben, P(X(-22), 118), { s: 0.88 }), S.naht(`M${z(X(-10))} 113 Q160 121 ${z(X(10))} 113`, f.oben));
   return {
     drehpunkte: {
       koerper: [160, 254], rumpf: [160, hueftY], kopf: [160, 110],
-      "arm-hinten-oben": [X(-26), schulterY], "arm-hinten-unten": [X(-30), 146],
-      "arm-vorn-oben": [X(26), schulterY], "arm-vorn-unten": [X(30), 146],
-      "bein-hinten": [X(-12), hueftY], "bein-vorn": [X(12), hueftY],
+      "arm-hinten-oben": [X(-24), schulterY], "arm-hinten-unten": [X(-29), 146],
+      "arm-vorn-oben": [X(24), schulterY], "arm-vorn-unten": [X(29), 146],
+      "bein-hinten": [X(-13), hueftY], "bein-vorn": [X(13), hueftY],
     },
     teile: {
       koerper: [],
-      "bein-hinten": bein(-12),
-      "bein-vorn": bein(12),
+      "bein-hinten": bein(-13, -1),
+      "bein-vorn": bein(13, 1),
       rumpf: [
-        T("hals", S.form(S.pfad("M152 96 L168 96 L168 118 L152 118 Z"), f.haut, P(152, 96), { s: 0.7 })),
+        T("hals", S.form(S.pfad("M153 96 L167 96 L168 118 L152 118 Z"), f.haut, P(153, 96), { s: 0.7 })),
         T("huefte", S.form(S.pfad(huefte), f.unten, P(X(-24), 174))),
         T("oberteil", oberteil),
       ],
       kopf: [
         ...(kopf.haareHinten ? [T("haare-hinten", kopf.haareHinten)] : []),
-        T("ohr", kopf.ohr ?? S.form(S.oval(123, 80, 7, 10), f.haut, P(120, 76), { s: 0.8 })),
-        T("kopf", S.form(S.oval(162, 72, 42, 41), f.haut, P(146, 56), { s: 0.9, trenn: true })),
-        T("nase", S.naht("M172 91 Q177 95 171 98", f.haut, 2.8)),
+        T("ohr", kopf.ohr ?? S.zusammen(S.form(S.oval(123, 82, 7.5, 10.5), f.haut, P(120, 77), { s: 0.8 }),
+          S.naht("M125 76 Q119 82 125 89", f.haut, 2.2))),
+        T("kopf", S.form(S.pfad("M162 30 C190 30 206 48 206 72 C206 93 196 108 178 113 C168 116 152 116 142 110"
+          + " C127 102 119 88 120 70 C122 46 138 30 162 30 Z"), f.haut, P(146, 54), { s: 0.9, trenn: true })),
+        T("stirnschatten", S.falte("M124 74 C134 62 146 58 152 62 C160 66 170 66 176 60 C184 58 196 62 204 76"
+          + " C200 70 192 66 184 66 C176 72 162 74 152 68 C142 66 132 70 124 80 Z", f.haut, 0.22)),
+        T("wangen", S.zusammen(S.roete(148, 95, 8, 5), S.roete(191, 94, 6, 4.5))),
+        T("nase", S.naht("M172 90 Q178 95 171 99", f.haut, 2.8)),
         { teil: "gesicht" },
         ...(kopf.haareOben ? [T("haare-oben", kopf.haareOben)] : []),
         ...(kopf.nachGesicht ? [T("hilfsmittel", kopf.nachGesicht)] : []),
@@ -130,8 +157,8 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
     gesicht: /** @type {[number, number]} */ (GESICHT.dreiviertel),
     plaetze: {
       kopf: { gelenk: "kopf", punkt: [162, 32] },
-      "hand-vorn": { gelenk: "arm-vorn-unten", punkt: [X(29), 174] },
-      "hand-hinten": { gelenk: "arm-hinten-unten", punkt: [X(-29), 174] },
+      "hand-vorn": { gelenk: "arm-vorn-unten", punkt: [X(28), 175] },
+      "hand-hinten": { gelenk: "arm-hinten-unten", punkt: [X(-28), 175] },
       ruecken: { gelenk: "rumpf", punkt: [160, 116] },
       fuesse: { gelenk: "koerper", punkt: [160, 250] },
       schoss: { gelenk: "rumpf", punkt: [160, 182] },

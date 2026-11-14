@@ -14,7 +14,7 @@ import { pose as posen } from "./pose.js";
 
 const INK = "#3B2A6B";
 /** Strichbreite der Kontur-Schicht: die Hälfte liegt außerhalb der Fläche und bildet die Silhouette. */
-const KONTUR = 8;
+const KONTUR = 6;
 /** @param {number} n */
 const z = (n) => String(Math.round(n * 100) / 100);
 
