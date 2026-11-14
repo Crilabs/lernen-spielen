@@ -143,11 +143,12 @@ export function trageZeichenEin(erzeugt, { spiel = "", spielordner = findeSpielo
  * Index speichern. Von der Kommandozeile und von der Anhör-Seite genutzt.
  * @param {{ pruefen?: boolean, aufraeumen?: boolean, melde?: (z: string) => void }} [o]
  */
-export async function lauf({ pruefen = false, aufraeumen = false, melde = () => {} } = {}) {
+export async function lauf({ pruefen = false, aufraeumen = false, spiel = "", melde = () => {} } = {}) {
   const einstellungen = JSON.parse(readFileSync(join(HIER, "einstellungen.json"), "utf8"));
   const aussprache = ladeAussprache();
   const index = ladeIndex();
   const { eintraege, offen } = sammle(WURZEL);
+  let kosten = { je: /** @type {Record<string, number>} */ ({}), ohneSpiel: 0 };
   const synth = pruefen
     ? undefined
     : azure({ schluessel: holeSchluessel(einstellungen), region: process.env.AZURE_SPEECH_REGION ?? einstellungen.region, format: einstellungen.format });
@@ -168,8 +169,12 @@ export async function lauf({ pruefen = false, aufraeumen = false, melde = () => 
     aufraeumen,
     melde,
   });
-  if (!pruefen) speichereIndex(neu);
-  return { neu, bericht, eintraege, offen };
+  if (!pruefen) {
+    speichereIndex(neu);
+    // Bezahlte Zeichen gehören in kosten.json, egal ob Kommandozeile oder Anhör-Seite (§6).
+    kosten = trageZeichenEin(bericht.erzeugt, { spiel });
+  }
+  return { neu, bericht, eintraege, offen, kosten };
 }
 
 async function main() {
@@ -180,9 +185,9 @@ async function main() {
   if (iSpiel >= 0 && !spiel) throw new Error("--spiel braucht einen Spielordner");
   args.delete("--spiel");
   args.delete(spiel);
-  const { neu, bericht, eintraege, offen } = await lauf({ pruefen, aufraeumen: args.has("--aufraeumen"), melde: (z) => console.log(z) });
+  const { neu, bericht, eintraege, offen, kosten } = await lauf({ pruefen, aufraeumen: args.has("--aufraeumen"), spiel, melde: (z) => console.log(z) });
   if (!pruefen) {
-    const { je, ohneSpiel } = trageZeichenEin(bericht.erzeugt, { spiel });
+    const { je, ohneSpiel } = kosten;
     for (const [o, n] of Object.entries(je)) console.log(`Kosten: ${n} Zeichen in ${o}/kosten.json`);
     if (ohneSpiel) console.log(`Kosten: ${ohneSpiel} Zeichen gehören zu keinem Spiel (kein texte.json passt; --spiel <ordner> nutzen)`);
   }

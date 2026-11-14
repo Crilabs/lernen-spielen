@@ -3,7 +3,7 @@
 // Reine Logik; Lesen und Schreiben nur in trageEin und lade*.
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const WURZEL = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -57,6 +57,9 @@ export function liesKosten(spielOrdner) {
 /** Hängt einen geprüften Eintrag an <spielOrdner>/kosten.json an. */
 export function trageEin(spielOrdner, eintrag) {
   const e = pruefeEintrag(eintrag);
+  // Die Datei der analogen Spiele braucht die Themenzahl, sonst lässt sich nichts je Thema hochrechnen.
+  if (basename(resolve(spielOrdner)) === "mit-echten-dingen" && !(e.themen >= 1))
+    throw new Error("Einträge in mit-echten-dingen/kosten.json brauchen themen (Zahl der Themen, ≥ 1)");
   const liste = liesKosten(spielOrdner);
   liste.push(e);
   mkdirSync(spielOrdner, { recursive: true });
@@ -156,8 +159,9 @@ export function katalogAnzahl(text) {
 
 /** Analoge Spiele („Mit echten Dingen“): Kosten je Thema aus dem Anteil bisher erledigter Themen; Prognose für alle Themen. */
 export function prognoseAnalog(eintraege, themenGesamt, preise) {
-  const s = summen(eintraege, preise);
-  const themen = eintraege.reduce((a, e) => a + (e.themen ?? 0), 0);
+  const mitThemen = eintraege.filter((e) => e.themen);   // nur Einträge mit Themenzahl gehen in den Durchschnitt
+  const s = summen(mitThemen, preise);
+  const themen = mitThemen.reduce((a, e) => a + e.themen, 0);
   const jeThema = themen ? s.eur / themen : null;
   return { summe: s, themen, themenGesamt, jeThema, prognose: jeThema === null ? null : jeThema * themenGesamt };
 }

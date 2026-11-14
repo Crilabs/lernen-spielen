@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { join } from "node:path";
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { katalogAnzahl, liesKosten, ordneZu, prognose, prognoseAnalog, pruefeEintrag, summen, trageEin } from "../werkzeuge/kosten/kosten.mjs";
 import { formatiere } from "../werkzeuge/kosten/bericht.mjs";
@@ -109,6 +109,15 @@ test("analoge Spiele: Kosten je Thema, Prognose über alle Themen", () => {
   assert.equal(a.jeThema, 1.5);
   assert.equal(a.prognose, 150);
   assert.equal(prognoseAnalog([claude("m-b", 1, 1)], 100, PREISE).prognose, null);
+  // Einträge ohne themen verfälschen den Durchschnitt nicht
+  assert.equal(prognoseAnalog([...e, claude("m-b", 90e6, 0)], 100, PREISE).jeThema, 1.5);
+  // die Datei der analogen Spiele verlangt themen
+  const d = temp();
+  const analog = join(d, "mit-echten-dingen");
+  assert.throws(() => trageEin(analog, claude("m-b", 1, 1, "recherche")), /brauchen themen/);
+  trageEin(analog, { ...claude("m-b", 1, 1, "recherche"), themen: 1 });
+  assert.equal(liesKosten(analog).length, 1);
+  rmSync(d, { recursive: true });
   assert.throws(() => pruefeEintrag({ ...claude("m-b", 1, 1), themen: -1 }), /themen/);
 });
 
@@ -141,6 +150,9 @@ test("Bild-Werkzeug: Argumente, usage und Eintrag in kosten.json und herkunft.js
   const spiel = join(d, "spiel");
   const bilder = join(spiel, "bilder");
   mkdirSync(bilder, { recursive: true });
+  schreibeVerbrauch({ spiel: "", ziel: join(bilder, "ohne.png"), modell: "m", prompt: "p", usage });
+  assert.equal(existsSync(join(bilder, "herkunft.json")), false);   // ohne --spiel wie zuvor: nichts schreiben
+  assert.equal(existsSync(join(spiel, "kosten.json")), false);
   schreibeVerbrauch({ spiel, ziel: join(bilder, "a.png"), modell: "gpt-image-1", prompt: "p", usage, datum: "2026-11-14" });
   const k = liesKosten(spiel);
   assert.equal(k.length, 1);
@@ -176,4 +188,13 @@ test("Preise: jede Zeile hat Stand und Quelle, Unsicheres ist markiert", () => {
   for (const [k, m] of Object.entries(p.claude)) assert.ok(m.stand && m.quelle && m.eingabeProMio > 0 && m.ausgabeProMio > 0, k);
   for (const k of ["bilder", "stimme"]) assert.ok(p[k].stand && p[k].quelle && typeof p[k].unsicher === "boolean", k);
   assert.equal(p.usdInEur.unsicher, true);
+});
+
+test("Audio: lauf() selbst trägt die Zeichen ein, damit auch die Anhör-Seite Kosten erfasst", () => {
+  const q = readFileSync(new URL("../werkzeuge/audio/erzeugen.mjs", import.meta.url), "utf8");
+  const lauf = q.slice(q.indexOf("export async function lauf"), q.indexOf("async function main"));
+  assert.match(lauf, /trageZeichenEin\(bericht\.erzeugt/);
+  assert.ok(!q.slice(q.indexOf("async function main")).includes("trageZeichenEin("), "main trägt nicht zusätzlich ein (sonst doppelt)");
+  const a = readFileSync(new URL("../werkzeuge/audio/anhoeren.mjs", import.meta.url), "utf8");
+  assert.match(a, /await lauf\(\)/);
 });

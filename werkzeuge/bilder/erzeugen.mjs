@@ -1,7 +1,8 @@
 // Szenenbilder mit Azure OpenAI erzeugen (Stimmungsebene, docs/grundsaetze-bilder.md §11 A1–A6).
 // Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <spielordner>] <ziel.png> "<Szene>"   (Basis-Prompt: basis-szene.txt)
 // Mit --spiel steht der Verbrauch (usage der API-Antwort) in <spielordner>/kosten.json und in herkunft.json neben dem Bild
-// (docs/spielentwicklung.md §6). Ohne --spiel wird nur die Herkunft geschrieben.
+// (docs/spielentwicklung.md §6); fehlt usage, endet der Lauf mit Exit 1. Ohne --spiel verhält sich das Werkzeug wie zuvor:
+// kein kosten.json, keine herkunft.json, usage steht nur in der Ausgabe (fehlt sie, nur eine Warnung).
 // Zugang aus .env (nie ins Repo): AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, AZURE_OPENAI_IMAGE_DEPLOYMENT,
 // AZURE_OPENAI_API_VERSION. Weitere Angaben zur Herkunft (A4) trägt der Aufrufer in herkunft.json ein.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -36,11 +37,11 @@ export function usageAusAntwort(daten) {
 
 /** Schreibt den Verbrauch in kosten.json des Spiels und herkunft.json neben dem Bild. */
 export function schreibeVerbrauch({ spiel, ziel, modell, prompt, usage, datum = new Date().toISOString().slice(0, 10) }) {
-  if (spiel)
-    trageEin(spiel, {
-      datum, phase: "bild", posten: "bild", modell, eingabe: usage.input_tokens, ausgabe: usage.output_tokens,
-      einheit: "bilder", menge: 1, notiz: basename(ziel), usage,
-    });
+  if (!spiel) return;   // wie zuvor: ohne --spiel schreibt das Werkzeug nur das Bild
+  trageEin(spiel, {
+    datum, phase: "bild", posten: "bild", modell, eingabe: usage.input_tokens, ausgabe: usage.output_tokens,
+    einheit: "bilder", menge: 1, notiz: basename(ziel), usage,
+  });
   const datei = join(dirname(ziel), "herkunft.json");
   const alt = existsSync(datei) ? JSON.parse(readFileSync(datei, "utf8")) : {};
   alt[basename(ziel)] = { datum, modell, prompt, usage };
@@ -71,7 +72,7 @@ async function main() {
     schreibeVerbrauch({ spiel, ziel, modell, prompt, usage: usageAusAntwort(daten) });
   } catch (e) {
     console.error(`Bild gespeichert, aber Kosten nicht eingetragen: ${e.message}`);
-    process.exitCode = 1;
+    if (spiel) process.exitCode = 1;
   }
   console.log(JSON.stringify({ ziel, modell, prompt, usage: daten.usage }, null, 2));
 }
