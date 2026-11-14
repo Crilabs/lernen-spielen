@@ -97,7 +97,7 @@ test("themen.html schreibt nie in den Lernstand", () => {
 test("themen.html: Fach aus der Adresse, sonst zurück zur Startseite", () => {
   assert.match(themen, /new URLSearchParams\(location\.search\)\.get\("fach"\)/);
   assert.match(themen, /if \(!Object\.hasOwn\(FACH, fach\)\) location\.replace\("index\.html"\)/);
-  assert.match(themen, /<ls-leiste id="leiste" spiel="themen"><\/ls-leiste>/); // Haus und Ton aus dem Rahmen
+  assert.match(themen, /<ls-leiste id="leiste" spiel="ansichten"><\/ls-leiste>/); // Haus und Ton aus dem Rahmen
   assert.doesNotMatch(themen, /symbole\/haus\.svg/, "kein eigener Haus-Knopf");
 });
 
@@ -105,7 +105,7 @@ test("themen.html: Weg aus gekonnt (auch ohne Spiel), dran, in Sicht aus der Ler
   assert.match(themen, /gekonnteThemen\(ctx, stand\)\.filter\(\(t\) => t\.strang === fach\)/);
   assert.match(themen, /uebersicht\(ctx, stand\)/); // in Sicht begrenzt K.IN_SICHT in sichtbar()
   assert.match(themen, /materialFuer\(/);
-  assert.match(themen, /<button class="station \$\{s\.zustand\}"[^>]*\n?\s*aria-label="\$\{esc\(s\.name\)\}"/);
+  assert.match(themen, /<button class="station \$\{s\.zustand\}"[^>]*\n?\s*aria-label="\$\{esc\(s\.name \+ ", " \+ ZUSTAND\[s\.zustand\]\)\}"/);
 });
 
 test("themen.html: Fläche mit Spielen (?thema, linkKlick), Geschichte, Mit echten Dingen", () => {

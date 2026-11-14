@@ -8,7 +8,7 @@ const skript = html.slice(html.indexOf('<script type="module">'));
 const { literaleAusCode } = await import("../werkzeuge/audio/texte.mjs");
 
 test("Regal: Kopfleiste „Mein Regal“ ohne Fach", () => {
-  assert.match(html, /<ls-leiste id="leiste" spiel="regal" titel="Mein Regal"><\/ls-leiste>/);
+  assert.match(html, /<ls-leiste id="leiste" spiel="ansichten" titel="Mein Regal"><\/ls-leiste>/);
   assert.doesNotMatch(html, /<ls-leiste[^>]*\bfach=/);
 });
 
@@ -42,7 +42,8 @@ test("Regal: keine Zählung, kein „von“, kein Klassenbezug beim Kind", () =>
 test("Regal: Bretter sind Gruppen mit Fachnamen, das Schild ist nicht live, nur der Name", () => {
   assert.match(skript, /class="brett" role="group"[^`]*aria-label="\$\{esc\(name\(f\)\)\}"/);
   assert.doesNotMatch(html, /role="status"/);
-  assert.match(html, /<h2 id="name" aria-live="polite" tabindex="-1"><\/h2>/);
+  assert.match(html, /<h2 id="name" tabindex="-1"><\/h2>/); // live nur beim Tippen, nicht bei Tastaturöffnung (kein Doppel)
+  assert.match(skript, /setAttribute\("aria-live", tastatur \? "off" : "polite"\)/);
 });
 
 test("Regal: die Reihen sperren das senkrechte Rollen nicht (kein touch-action: pan-x)", () => {

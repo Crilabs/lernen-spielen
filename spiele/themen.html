@@ -251,7 +251,7 @@ body {
 </style>
 </head>
 <body>
-<ls-leiste id="leiste" spiel="themen"></ls-leiste>
+<ls-leiste id="leiste" spiel="ansichten"></ls-leiste>
 <main class="buehne">
   <div class="spielflaeche">
     <div class="weg" id="weg"><ol class="reihe" id="reihe"></ol></div>
@@ -285,6 +285,7 @@ import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
 import "./rahmen/anregung.js";
 
+const ZUSTAND = { "kann-ich": "kann ich", dran: "dran", "in-sicht": "in Sicht" };
 const fach = new URLSearchParams(location.search).get("fach") ?? "";
 if (!Object.hasOwn(FACH, fach)) location.replace("index.html");
 else start();
@@ -325,9 +326,12 @@ async function start() {
       geschichte: stand?.themen?.[s.id]?.e && t.einfuehrung?.vorlage ? t.einfuehrung : null };
   });
 
+  // Ohne eine einzige Station gäbe es nur eine leere Wegzeile: zurück zur Startseite, wie bei unbekanntem Fach.
+  if (!stationen.length) { location.replace("index.html"); return; }
+
   const weg = document.getElementById("weg"), reihe = document.getElementById("reihe");
   reihe.innerHTML = stationen.map((s, i) => `<li><button class="station ${s.zustand}" type="button" data-i="${i}"
-    aria-label="${esc(s.name)}" aria-expanded="false" aria-controls="flaeche">${zeichen(s)}</button></li>`).join("");
+    aria-label="${esc(s.name + ", " + ZUSTAND[s.zustand])}"${s.zustand === "dran" ? ' aria-current="step"' : ""} aria-expanded="false" aria-controls="flaeche">${zeichen(s)}</button></li>`).join("");
   const knoepfe = [...reihe.querySelectorAll(".station")];
 
   const flaeche = document.getElementById("flaeche"), zeiger = flaeche.querySelector(".zeiger");

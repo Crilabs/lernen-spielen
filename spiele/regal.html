@@ -229,7 +229,7 @@ body {
 </style>
 </head>
 <body>
-<ls-leiste id="leiste" spiel="regal" titel="Mein Regal"></ls-leiste>
+<ls-leiste id="leiste" spiel="ansichten" titel="Mein Regal"></ls-leiste>
 <main class="buehne">
   <div class="spielflaeche" id="flaeche">
     <div class="raum" id="raum"><div class="regal" id="regal"></div></div>
@@ -237,7 +237,7 @@ body {
          „Mit echten Dingen“ direkt nach dem Ding, und das Schild rollt mit dem Regal. -->
     <div class="schild" id="schild" hidden>
       <span class="spitze" aria-hidden="true"></span>
-      <h2 id="name" aria-live="polite" tabindex="-1"></h2>
+      <h2 id="name" tabindex="-1"></h2>
       <ls-knopf id="hoeren" symbol="vorlesen.svg" name="Noch mal hören" groesse="klein" stumm></ls-knopf>
       <ls-knopf id="echt" symbol="hand.svg" wort="Mit echten Dingen" hidden></ls-knopf>
     </div>
@@ -284,9 +284,13 @@ async function start() {
   });
   // Bretter: nur Fächer, in denen etwas gekonnt ist (ein leeres Brett wäre eine Lücke), in der Reihenfolge der
   // Kategorien; ein Fach, das dort fehlt, kommt danach (nichts Gekonntes verschwindet).
-  const faecher = [...(ctx.spiele.kategorien ?? []).map((k) => k.id), ...gekonnt.map((g) => g.strang)]
-    .filter((f, i, alle) => alle.indexOf(f) === i && gekonnt.some((g) => g.strang === f));
-  const name = (f) => (ctx.spiele.kategorien ?? []).find((k) => k.id === f)?.name ?? f;
+  // Ein Thema ohne oder mit unbekanntem Strang steht auf dem Brett „Weiteres“ (nie „undefined“ oder eine rohe Id).
+  const WEITERES = "weiteres";
+  const kategorien = ctx.spiele.kategorien ?? [];
+  const bekannt = new Set(kategorien.map((k) => k.id));
+  for (const g of gekonnt) if (!bekannt.has(g.strang)) g.strang = WEITERES;
+  const faecher = [...kategorien.map((k) => k.id), WEITERES].filter((f) => gekonnt.some((g) => g.strang === f));
+  const name = (f) => kategorien.find((k) => k.id === f)?.name ?? "Weiteres";
 
   // Neu seit dem letzten Besuch (vor dem Merken lesen); gemerkt werden genau die jetzt gekonnten Ids, so fällt ein
   // zurückgesetztes Thema still heraus.
@@ -348,9 +352,12 @@ async function start() {
   function verberge() { jetzt = -1; schild.hidden = true; }
 
   knopfVon.forEach((k, i) => k.addEventListener("click", (e) => {
+    // Tippen/Klicken: der Name wird als Live-Bereich angesagt. Mit der Tastatur (detail 0) geht der Fokus auf den
+    // Namen, Tab führt dann gleich zu „Mit echten Dingen“; dort würde der Live-Bereich doppelt ansagen.
+    const tastatur = e.detail === 0;
+    nameFeld.setAttribute("aria-live", tastatur ? "off" : "polite");
     zeige(i);
-    // Mit der Tastatur geöffnet (detail 0): Fokus auf den Namen, Tab führt dann gleich zu „Mit echten Dingen“.
-    if (e.detail === 0) nameFeld.focus({ preventScroll: true });
+    if (tastatur) nameFeld.focus({ preventScroll: true });
     // Name einmal je Sitzung und je Thema (viele Themen teilen dasselbe sprich), wie auf der Fach-Seite.
     const g = dinge[i];
     if (leiste.ton && g.sprich) sageEinmal("thema:" + g.id, () => sprich(g.sprich));

@@ -192,7 +192,16 @@ async function lauf(typ, name, groesse, basis) {
       await start.close();
 
       // --- Fach-Seite ----------------------------------------------------------------------------
-      const fach = await oeffne(kontext, `${basis}/spiele/themen.html?fach=mathe`);
+      if (fall === "leer") {
+        // ohne eine einzige Station: keine leere Wegzeile, zurück zur Startseite
+        const seite = await kontext.newPage();
+        await seite.goto(`${basis}/spiele/themen.html?fach=mathe`);
+        await seite.waitForURL(/\/spiele\/index\.html$/, { timeout: 5000 }).catch(() => {});
+        pruefe(F, "Fach-Seite ohne Stationen → Startseite", seite.url().endsWith("/spiele/index.html"), seite.url());
+        await seite.close();
+      }
+      const fach = fall === "leer" ? null : await oeffne(kontext, `${basis}/spiele/themen.html?fach=mathe`);
+      if (fach) {
       const fs = await fach.evaluate(() => {
         const st = [...document.querySelectorAll("#reihe .station")];
         const art = (z) => st.filter((b) => b.classList.contains(z));
@@ -208,11 +217,10 @@ async function lauf(typ, name, groesse, basis) {
         };
       });
       pruefe(F, "Fach-Seite: bleibt auf themen.html, keine Fehlermeldung", fs.url.endsWith("/themen.html") && !fs.fehlerText, JSON.stringify(fs));
-      if (fall === "leer") pruefe(F, "Fach-Seite leer: kein Weg, keine Fläche", fs.gekonnt + fs.dran + fs.inSicht === 0 && !fs.flaeche, JSON.stringify(fs));
       if (fall === "gekonnt") pruefe(F, "Fach-Seite ohne Spiele: die vier gekonnten Mathe-Themen, nichts dran oder in Sicht", fs.gekonnt === 4 && fs.dran === 0 && fs.inSicht === 0, JSON.stringify(fs));
       if (fall === "spiele") {
-        pruefe(F, "Fach-Seite mit Spielen: gekonnt, dran, höchstens drei in Sicht (Karte mit Fachsymbol, Rand in Naht, ohne Ziffer)",
-          fs.gekonnt === 4 && fs.dran >= 1 && fs.inSicht >= 1 && fs.inSicht <= 3 && fs.inSichtKarten, JSON.stringify(fs));
+        pruefe(F, "Fach-Seite mit Spielen: gekonnt, dran, höchstens zwei in Sicht (Karte mit Fachsymbol, Rand in Naht, ohne Ziffer)",
+          fs.gekonnt === 4 && fs.dran >= 1 && fs.inSicht >= 1 && fs.inSicht <= 2 && fs.inSichtKarten, JSON.stringify(fs));
         pruefe(F, "Fach-Seite: das Thema dran ist aufgeschlagen, mit Spiel-Kachel auf der Füllung", fs.flaeche && fs.spiele >= 1 && fs.ico === "rgb(240, 107, 176)", JSON.stringify(fs));
         // Ziffern-Regel: „Die 5 zerlegen“ antippen spricht die Aufnahme seines sprich, die Systemstimme schweigt.
         const vorher = kontext.aufnahmen.length;
@@ -229,6 +237,7 @@ async function lauf(typ, name, groesse, basis) {
       }
       await bild(fach, s("fach", fall));
       await fach.close();
+      }
 
       // --- Regal ---------------------------------------------------------------------------------
       const regal = await oeffne(kontext, `${basis}/spiele/regal.html`);
@@ -273,6 +282,25 @@ async function lauf(typ, name, groesse, basis) {
       await seite.goto(`${basis}/spiele/themen.html${such}`);
       await seite.waitForURL(/\/spiele\/index\.html$/, { timeout: 5000 }).catch(() => {});
       pruefe(L, `themen.html${such || " ohne fach"} → Startseite`, seite.url().endsWith("/spiele/index.html"), seite.url());
+      await kontext.close();
+    }
+
+    // --- Ton aus auf der Startseite gilt auch im Regal und auf der Fach-Seite -------------------------
+    {
+      const kontext = await kontextFuer(browser, groesse, basis, { stand: GEKONNT }, fehlerListe);
+      const start = await oeffne(kontext, `${basis}/spiele/index.html`);
+      await start.evaluate(() => document.getElementById("leiste").tonKnopf.click());
+      await pause(300);
+      const aus = await start.evaluate(() => document.getElementById("leiste").ton);
+      await start.close();
+      const tonAn = {};
+      for (const [seite, url] of [["Regal", "regal.html"], ["Fach-Seite", "themen.html?fach=mathe"]]) {
+        const p = await oeffne(kontext, `${basis}/spiele/${url}`);
+        tonAn[seite] = await p.evaluate(() => document.getElementById("leiste").ton);
+        await p.close();
+      }
+      pruefe(L, "Ton aus auf der Startseite: Regal und Fach-Seite bleiben stumm (ein gemeinsamer Schalter)",
+        aus === false && tonAn["Regal"] === false && tonAn["Fach-Seite"] === false, JSON.stringify({ aus, ...tonAn }));
       await kontext.close();
     }
 

@@ -233,7 +233,7 @@ body {
 </style>
 </head>
 <body>
-<ls-leiste id="leiste" spiel="start" titel="Lernen Spielen" ohne-haus>
+<ls-leiste id="leiste" spiel="ansichten" titel="Lernen Spielen" ohne-haus>
   <span class="zahnrad" id="zahnrad" slot="rechts"><ls-knopf id="eltern" symbol="zahnrad.svg" name="Für Erwachsene: gedrückt halten" groesse="klein" stumm></ls-knopf><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.6" pathLength="100"/></svg></span>
 </ls-leiste>
 <main class="buehne">
@@ -286,7 +286,7 @@ async function start() {
   const dranListe = document.getElementById("dran");
   dranListe.innerHTML = dran.map((t) => {
     const f = farbe(t.strang);
-    return `<li><a class="kachel" href="${esc(t.spiel.datei)}?thema=${encodeURIComponent(t.id)}" aria-label="${esc(t.spiel.titel)}"
+    return `<li><a class="kachel" href="${esc(t.spiel.datei)}?thema=${encodeURIComponent(t.id)}" aria-label="${esc(t.spiel.titel + ", " + t.name)}"
       style="--fach-fuellung:${f.fuellung};--fach-tief:${f.tief};--fach-toenung:${f.toenung}">
       <span class="bild"><img src="${esc(t.spiel.symbol)}" alt=""></span>
       <span class="text"><b>${esc(t.spiel.titel)}</b><span class="thema">${esc(t.name)}</span></span></a></li>`;

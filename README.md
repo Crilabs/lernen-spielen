@@ -11,7 +11,7 @@ Die frühere Web-Fassung mit PHP ist entfernt.
 - `spiele/` – die Oberfläche der App, gebaut aus den Rahmen-Bausteinen:
   - `index.html` (Startseite): oben bis zu drei Spiele, deren Thema gerade dran ist, darunter die Fächer mit Spielen,
     unten „Mein Regal“; Zahnrad gedrückt halten (3 s) führt zum Elternbereich.
-  - `themen.html?fach=<id>` (Fach-Seite): der Weg eines Fachs (gekonnt, dran, höchstens drei in Sicht); ein Thema
+  - `themen.html?fach=<id>` (Fach-Seite): der Weg eines Fachs (gekonnt, dran, zwei in Sicht); ein Thema
     antippen zeigt seine Spiele, „Geschichte ansehen“ und „Mit echten Dingen“.
   - `regal.html` („Mein Regal“, was ich kann): je Fach ein Brett, jedes gekonnte Thema steht als sein Lernmaterial
     darauf (Regeln in `rahmen/material.js`), ohne Zahl und ohne Platzhalter.

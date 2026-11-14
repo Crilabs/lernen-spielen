@@ -66,6 +66,20 @@ function pruefe(lauf, name, ok, detail = "") {
   console.log(`${ok ? "ok    " : "FEHLER"} [${lauf}] ${name}${ok ? "" : detail ? ` – ${detail}` : ""}`);
 }
 
+// WebKit: Der aktuelle Playwright-Build (WebKit 27.2) leitet echte Mausklicks an <html> um. Tippen geht dort mit
+// ausgelösten Ereignissen (pointerdown, pointerup, click); echte Zeigerbewegungen (Ziehen, Einsinken, Bewegungsschwelle) prüft nur Chromium.
+let WEBKIT = false;
+const UEBERSPRUNGEN = "übersprungen in WebKit (Playwright-Build)";
+/** Tippen auf ein Element: in WebKit ausgelöste Zeiger- und Klickereignisse (Mitte bzw. position), sonst ein echter Klick. */
+const tipp = (ort, optionen) => (WEBKIT ? ort.evaluate((el, pos) => {
+  const r = el.getBoundingClientRect();
+  const o = { bubbles: true, composed: true, cancelable: true, pointerId: 9, isPrimary: true, pointerType: "touch", button: 0,
+    clientX: r.left + (pos ? pos.x : r.width / 2), clientY: r.top + (pos ? pos.y : r.height / 2) };
+  el.dispatchEvent(new PointerEvent("pointerdown", { ...o, buttons: 1 }));
+  el.dispatchEvent(new PointerEvent("pointerup", o));
+  el.click();
+}, optionen?.position) : ort.click(optionen));
+
 // --- Hilfen im Browser ---------------------------------------------------------------------------
 
 /** Werte der Stäbe auf dem Tablett, in der Reihenfolge dort. */
@@ -75,12 +89,16 @@ const rinneWerte = (seite) => seite.$$eval(".rinne .stab", (l) => l.map((s) => N
 const stab = (seite, wert) => seite.locator(`#tablett .stab[wert="${wert}"]`).first();
 
 async function tippeLege(seite, wert) {
-  await stab(seite, wert).click();
-  await seite.locator(".rinne").click({ position: { x: 20, y: 20 } });
+  await tipp(stab(seite, wert));
+  await tipp(seite.locator(".rinne"), { position: { x: 20, y: 20 } });
   await pause(450); // Gleiten 0,3 s
 }
 
 async function zieheLege(seite, wert) {
+  if (WEBKIT) { // echtes Ziehen nur in Chromium; hier legt ein Tippen den Stab, der Ablauf bleibt gleich
+    console.log(`${UEBERSPRUNGEN}: Ziehen von Stab ${wert} (echte Maus), stattdessen Tippen`);
+    return tippeLege(seite, wert);
+  }
   const q = await stab(seite, wert).boundingBox();
   const z = await seite.locator(".rinne").boundingBox();
   await seite.mouse.move(q.x + q.width / 2, q.y + q.height / 2);
@@ -102,6 +120,7 @@ async function neueAufgabe(seite, timeout = 4000) {
 /** Tippt auf eine freie Stelle des Spielfelds (unten Mitte). */
 async function tippeFeld(seite) {
   const f = await seite.locator(".spielflaeche").boundingBox();
+  if (WEBKIT) return tipp(seite.locator(".spielflaeche"), { position: { x: f.width / 2, y: f.height - 40 } });
   await seite.mouse.click(f.x + f.width / 2, f.y + f.height - 40);
 }
 const speicher = (seite) => seite.evaluate(() => Object.fromEntries(Object.keys(localStorage).filter((k) => k !== "protokoll").map((k) => [k, localStorage.getItem(k)])));
@@ -113,6 +132,7 @@ async function bild(seite, schritt, name, groesse) {
 }
 
 async function lauf(typ, name, groesse, basis) {
+  WEBKIT = name === "webkit";
   const L = `${name} ${groesse.width}x${groesse.height}`;
   const browser = await typ.launch();
   const fehlerListe = [];
@@ -164,12 +184,12 @@ async function lauf(typ, name, groesse, basis) {
 
     // --- Aufgabe 1: tippen, zwei Versuche, die nicht passen, Hilfe-Leiter, ziehen ----------------
     const erster = werte[0];
-    await stab(seite, erster).click();
+    await tipp(stab(seite, erster));
     const angehoben = await stab(seite, erster).evaluate((s) => s.classList.contains("angehoben"));
     const zieleFrei = await seite.locator(".rinne.ziel-frei").count();
     pruefe(L, "Tippen hebt den Stab an, die Rinne zeigt sich als Ziel", angehoben && zieleFrei === 1);
     await bild(seite, "angehoben", name, groesse);
-    await seite.locator(".rinne").click({ position: { x: 20, y: 20 } });
+    await tipp(seite.locator(".rinne"), { position: { x: 20, y: 20 } });
     await pause(450);
     pruefe(L, "Tippen auf die Rinne legt den Stab hinein", (await rinneWerte(seite)).join() === String(erster));
 
@@ -233,7 +253,7 @@ async function lauf(typ, name, groesse, basis) {
     await bild(seite, "pause", name, groesse);
     await seite.waitForTimeout(1500);
     pruefe(L, "Pause bleibt offen (kein Ablauf)", await seite.evaluate(() => document.getElementById("pause").hasAttribute("offen")));
-    await seite.locator("ls-pause ls-knopf.weiter").click();
+    await tipp(seite.locator("ls-pause ls-knopf.weiter"));
     await seite.waitForSelector("#tablett .stab");
     pruefe(L, "Weiter in der Pause startet die nächste Runde", !(await seite.evaluate(() => document.getElementById("pause").hasAttribute("offen"))) && (await rinneWerte(seite)).length === 0);
 

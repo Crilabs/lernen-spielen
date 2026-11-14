@@ -8,7 +8,7 @@ const skript = html.slice(html.indexOf('<script type="module">'));
 const { literaleAusCode, knopfNamen, sammle } = await import("../werkzeuge/audio/texte.mjs");
 
 test("Startseite: Kopfleiste „Lernen Spielen“ ohne Fach und ohne Haus, Zahnrad im Slot rechts", () => {
-  assert.match(html, /<ls-leiste id="leiste" spiel="start" titel="Lernen Spielen" ohne-haus>/);
+  assert.match(html, /<ls-leiste id="leiste" spiel="ansichten" titel="Lernen Spielen" ohne-haus>/);
   assert.doesNotMatch(html, /<ls-leiste[^>]*\bfach=/);
   assert.match(html, /<span class="zahnrad" id="zahnrad" slot="rechts"><ls-knopf id="eltern" symbol="zahnrad\.svg"[^>]*\bstumm>/);
   assert.deepEqual(knopfNamen(html), [], "der Name des Zahnrads wird nicht gesprochen");
