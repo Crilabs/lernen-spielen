@@ -34,6 +34,10 @@ Jede Prüfung vergibt je Kriterium **grün** oder **rot** mit Beleg (Datei:Zeile
 **Grün heißt:** alle Pflichtkriterien grün, kein kritischer Befund. Kriterien mit „(Soll)“ dürfen rot sein, wenn
 der Grund im Entwurf steht.
 
+Die Aufträge an Bau-Agenten und Prüfer liegen beim Skill (`.claude/skills/spiel-entwickeln/`). A1–A12 (§2) und die
+Aufträge B-Didaktik, B-Welt, B-Bedienung (§4) stehen dort wörtlich; `tests/skill-spiel-entwickeln.test.mjs` wird rot,
+wenn sie von diesem Dokument abweichen. Wer hier ein Kriterium ändert, zieht die Vorlage nach.
+
 ## Ablage (Christian)
 
 Jedes Spiel hat **einen eigenen Ordner, sortiert nach Fach** (Fach-Ids wie in `spiele.json`: `mathe`, `lesen`,
