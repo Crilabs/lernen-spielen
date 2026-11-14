@@ -102,5 +102,18 @@
   "notiz": "Bau-Agent Entwurf neu (Vorrat), Runde 1",
   "cache_lesen": 4586297,
   "cache_schreiben": 179166
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-a",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 29977,
+  "einheit": "tokens",
+  "menge": 1819583,
+  "notiz": "Prüfer A neu, Runde 1",
+  "cache_lesen": 1636724,
+  "cache_schreiben": 152852
  }
 ]
