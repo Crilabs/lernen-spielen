@@ -13,6 +13,19 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "nomen-gross-artikelprobe": {
+   "fach": "schreiben",
+   "name": "Nomen groß: die Artikelprobe",
+   "titel": "Groß oder klein? Die Artikelprobe",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Auftragszettel"
+    }
+   ],
+   "entwurf": true,
+   "datei": "schreiben/nomen-gross-artikelprobe.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
