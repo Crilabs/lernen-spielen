@@ -15,14 +15,15 @@ quellen:
 
 Ihr braucht: einen Korb mit trockener Wäsche
 
-1. Nehmt ein Teil aus dem Korb und legt es zusammen. Socken lasst ihr im Korb.
-2. Wer es auf den Stapel legt, sagt dazu: „Hier ist der Pulli.“ „Hier ist die Hose.“ „Hier ist das Handtuch.“
-3. Dann ist der andere dran.
-4. Weiß einer den Artikel nicht, sagt ihr den Satz zusammen.
+1. Legt ein Teil aus dem Korb zusammen. Socken bleiben im Korb.
+2. Reicht es weiter und sagt: „Hier ist der Pulli.“ „Hier ist die Hose.“ „Hier ist das Handtuch.“
+3. Wer es nimmt, legt es auf den Stapel und sagt den Satz noch einmal.
+4. Klingen eure Sätze verschieden oder fehlt ein Artikel, sagt ihn vor, wer ihn sicher weiß. Dann sprecht ihr den Satz zusammen.
+5. Dann tauscht ihr.
 
-**Darauf kommt es an:** Zu jedem Nomen gehört ein Artikel: der Pulli, die Hose, das Handtuch. Welcher es ist, sieht man der Sache nicht an. Darum sagt ihr ihn immer mit dem Nomen zusammen.
+**Darauf kommt es an:** Zu jedem Nomen gehört ein Artikel: der Pulli, die Hose, das Handtuch. Man sieht ihn der Sache nicht an. Darum sagt ihr ihn immer mit dem Nomen.
 
-**Leichter:** Einer sagt den Satz vor, der andere sagt ihn nach. **Schwerer:** Legt drei Stapel: einen für der, einen für die und einen für das.
+**Leichter:** nur Handtuch, Hose und Pulli. **Schwerer:** Legt drei Stapel: einen für der, einen für die, einen für das.
 
 ## Unterwegs: Wo ist die Rutsche?
 
@@ -30,7 +31,7 @@ Ihr braucht: einen Spielplatz oder einen Spaziergang
 
 1. Einer fragt nach etwas, das es dort nur einmal gibt: „Wo ist die Rutsche?“
 2. Die anderen zeigen hin und sagen: „Da ist die Rutsche.“
-3. Dann fragt der Nächste: „Wo ist der Sandkasten?“ „Wo ist das Tor?“
+3. Dann tauscht ihr und fragt weiter: „Wo ist der Sandkasten?“ „Wo ist das Tor?“
 4. Eins davon wählt ihr als Treffpunkt für heute.
 
 **Darauf kommt es an:** In „Wo ist …?“ und „Da ist …“ bleibt der Artikel, wie er ist: der Sandkasten, die Rutsche, das Tor. So hört ihr jedes Nomen mit seinem Artikel.
