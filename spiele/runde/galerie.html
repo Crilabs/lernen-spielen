@@ -92,7 +92,7 @@ function zeigeSteuer() {
     }, true);
   }
   reihe("Blick", [["rechts", "nach rechts"], ["links", "nach links"]], zustand.blick, (b) => { zustand.blick = b; alles(); });
-  reihe("Bewegung", [[false, "normal"], [true, "wenig Bewegung"]], zustand.wenig, (w) => { zustand.wenig = w; alles(); });
+  reihe("Tempo", [[false, "normal"], [true, "wenig Bewegung"]], zustand.wenig, (w) => { zustand.wenig = w; alles(); });
   reihe("Sehen", [["", "normal"], ["protan", "Protanopie"], ["deutan", "Deuteranopie"]], zustand.sicht, (s) => {
     zustand.sicht = s; buehne.className = s; zeigeSteuer();
   });
