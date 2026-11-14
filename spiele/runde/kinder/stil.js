@@ -117,8 +117,16 @@ export function glied(p1, r1, p2, r2, farbe, o = {}) {
   /** @param {[number, number]} p @param {number} k */
   const R = (p, k) => `${z(p[0] + rechts[0] * k)} ${z(p[1] + rechts[1] * k)}`;
   const geo = kapsel(p1, r1, p2, r2);
-  const schatten = `<path d="M${R(p1, r1 * 0.15)} L${R(p2, r2 * 0.15)} L${R(p2, r2)} L${R(p1, r1)} Z" fill="${dunkler(farbe, 0.26)}" stroke="none"/>`
-    + `<path d="M${R(p1, r1 * 0.62)} L${R(p2, r2 * 0.62)} L${R(p2, r2)} L${R(p1, r1)} Z" fill="${dunkler(farbe, 0.46)}" stroke="none"/>`;
+  // Schatten als nach rechts versetzte, schmalere Kapsel samt runder Enden. Versatz + Radius ≤ Radius des Glieds,
+  // also bleibt sie innen. An der Stoßstelle liegen die Schatten beider Glieder übereinander und laufen durch.
+  /** @param {number} versatz @param {number} anteil */
+  const innen = (versatz, anteil) => {
+    const q1 = /** @type {[number, number]} */ ([p1[0] + rechts[0] * r1 * versatz, p1[1] + rechts[1] * r1 * versatz]);
+    const q2 = /** @type {[number, number]} */ ([p2[0] + rechts[0] * r2 * versatz, p2[1] + rechts[1] * r2 * versatz]);
+    return kapsel(q1, r1 * (1 - versatz), q2, r2 * (1 - versatz)) + "";
+  };
+  const schatten = `<${innen(0.42, 0)} fill="${dunkler(farbe, 0.26)}" stroke="none"/>`
+    + `<${innen(0.72, 0)} fill="${dunkler(farbe, 0.46)}" stroke="none"/>`;
   const a = [p1[0] + u[0] * 2, p1[1] + u[1] * 2];
   const b = [p2[0] - u[0] * 2, p2[1] - u[1] * 2];
   const glanzlinie = `<path d="M${z(a[0] - rechts[0] * r1 * 0.6)} ${z(a[1] - rechts[1] * r1 * 0.6)} L${z(b[0] - rechts[0] * r2 * 0.6)} ${z(b[1] - rechts[1] * r2 * 0.6)}"`

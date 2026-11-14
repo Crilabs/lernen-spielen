@@ -69,7 +69,7 @@ const kopfDreiviertel = {
   ),
   nachGesicht: {
     svg: `<path d="M146 80 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 M173 80 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0`
-      + ` M168 79 Q170 77 173 79 M146 79 L126 76" fill="none" stroke="${BRILLE}" stroke-width="3.4"/>`
+      + ` M168 79 Q170 77 173 79 M146 79 L126 76 M193 79 L203 77" fill="none" stroke="${BRILLE}" stroke-width="3.4"/>`
       + `<path d="M149 74 a8 8 0 0 1 6 -3 M176 74 a7 7 0 0 1 5 -2.5" fill="none" stroke="#FFFFFF" stroke-width="1.8" opacity="0.7"/>`,
     kontur: "",
   },
