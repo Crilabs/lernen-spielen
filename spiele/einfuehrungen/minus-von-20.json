@@ -13,7 +13,7 @@
     "bild": [ { "perlen": ["10", "7"], "x": 42 }, { "zahl": "17", "x": 86 } ] },
   { "sprich": "Nimmt Timo noch mehr weg, geht ein ganzer Zehnerstab mit.",
     "zeig": "20 − 13 = 7   erst 10 weg, dann 3",
-    "bild": [ { "figur": "timo", "x": 16, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["7", "3"], "x": 55 }, { "zahl": "7", "x": 86 } ] },
+    "bild": [ { "figur": "timo", "x": 14, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["7", "3"], "x": 55 }, { "zahl": "7", "x": 86 } ] },
   { "sprich": "Jetzt bist du dran.",
     "zeig": "20 − 4 = ?",
     "bild": [ { "figur": "timo", "x": 14, "haltung": "fragen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "10"], "x": 61 } ] }

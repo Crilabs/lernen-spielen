@@ -263,7 +263,7 @@ for (const t of mitEinfuehrung) {
         if (b.figur !== undefined) {
           assert.ok(R.bestand.kinder.has(b.figur), `${wo}: ${b.figur} ist kein Kind der Runde`);
           if (b.haltung !== undefined) assert.ok(R.bestand.haltungen.has(b.haltung), `${wo}: Haltung ${b.haltung} fehlt in spiele/runde/`);
-          if (b.aktion !== undefined) assert.ok(R.bestand.bewegungen.has(b.aktion), `${wo}: Bewegung ${b.aktion} fehlt in spiele/runde/`);
+          for (const k of Object.keys(b)) assert.ok(["figur", "x", "haltung", "aufgabe"].includes(k), `${wo}: unbekanntes Feld ${k}`);
           if (b.haltung !== undefined) assert.doesNotThrow(() => R.zeichne(b.figur, { haltung: b.haltung }), `${wo}: ${b.figur} ${b.haltung}`);
           assert.ok(AUFGABEN.includes(b.aufgabe), `${wo}: ${b.figur} braucht genau eine Aufgabe (${AUFGABEN.join(", ")})`);
         }
@@ -286,6 +286,9 @@ test("Einführungen: die Runde ist gleich verteilt, keine anderen Figuren", () =
     const bild = v.szenen.flatMap((s) => s.bild ?? []).filter((b) => b.figur !== undefined);
     assert.ok(bild.length > 0, `${d}: kein Kind der Runde`);
     for (const b of bild) assert.ok(R.bestand.kinder.has(b.figur), `${d}: ${b.figur} ist kein Kind der Runde`);
+    // gleicher Platz je Kind: so bleibt es zwischen den Szenen stehen, statt neu aufzutauchen
+    for (const k of new Set(bild.map((b) => b.figur)))
+      assert.equal(new Set(bild.filter((b) => b.figur === k).map((b) => b.x)).size, 1, `${d}: ${k} wechselt den Platz`);
     for (const k of new Set(bild.map((b) => b.figur))) kommt.set(k, (kommt.get(k) ?? 0) + 1);
     const vor = new Set(bild.filter((b) => b.aufgabe === "vorzeigen").map((b) => b.figur));
     assert.equal(vor.size, 1, `${d}: genau ein Kind zeigt vor`);

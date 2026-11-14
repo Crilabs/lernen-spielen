@@ -8,10 +8,11 @@
 //   bild    Elemente, x = Mitte in Prozent der Breite:
 //     { "figur": "ela", "x": 16, "haltung": "zeigen", "aufgabe": "vorzeigen" }
 //         ein Kind der Runde (ela, kofi, lena, timo; spiele/runde/). haltung aus dem Bestand der Runde
-//         (stehen, zeigen, fragen, staunen, nachdenken, freuen-klein …), sonst stehen. Optional "aktion": eine
-//         Bewegung der Runde, einmal abgespielt (nicht bei wenig Bewegung), und "blick": "links".
+//         (stehen, zeigen, fragen, staunen, nachdenken, freuen-klein …), sonst stehen. Die Kinder blicken nach
+//         rechts zum Material; Bewegungen (Hüpfen usw.) gibt es in Einführungen bewusst nicht (ruhig, §9).
 //         aufgabe (figuren.md §3, §8: vorzeigen, fragen, wundern, freuen, zeigen) dient dem Auszählen.
-//         Steht dasselbe Kind in der nächsten Szene wieder da, bleibt es stehen und wechselt sanft die Haltung.
+//         Ein Kind behält in einer Einführung seinen Platz x: Dann bleibt es von Szene zu Szene stehen und
+//         wechselt nur sanft die Haltung.
 //     { "perlen": ["{n}", "{n-1}"], "x": 60 }   Stäbe in Montessori-Farben, nebeneinander
 //     { "zahl": "{n}", "x": 80 }                große Ziffer
 //
@@ -99,7 +100,7 @@ const CSS = `
 
 // vorher: Kinder der letzten Szene (figur → { el, steuer, x }). Steht ein Kind wieder an derselben Stelle,
 // bleibt seine Zeichnung und wechselt nur sanft die Haltung, statt neu aufzutauchen (ruhig, grundsaetze §9).
-function baueBild(buehne, bild, reduziert, R, vorher) {
+function baueBild(buehne, bild, R, vorher) {
   const jetzt = new Map();
   for (const b of bild) {
     if (!b || typeof b !== "object") continue;
@@ -108,20 +109,16 @@ function baueBild(buehne, bild, reduziert, R, vorher) {
     if (b.figur) {
       if (!R || !R.bestand.kinder.has(b.figur) || jetzt.has(b.figur)) continue;
       const haltung = R.bestand.haltungen.has(b.haltung) ? b.haltung : "stehen";
-      const aktion = !reduziert && R.bestand.bewegungen.has(b.aktion) ? b.aktion : "";
-      const blick = b.blick === "links" ? "links" : "rechts";
       const alt = vorher.get(b.figur);
       let f;
-      if (alt && alt.x === x && alt.blick === blick) {
+      if (alt && alt.x === x) {
         f = alt;
-        if (aktion) f.steuer.bewegung(aktion); else if (f.haltung !== haltung) f.steuer.haltung(haltung);
+        if (f.haltung !== haltung) f.steuer.haltung(haltung);
       } else {
         const el = document.createElement("div"); el.className = "el figur-h";
         el.style.left = x + "%";
-        el.innerHTML = R.zeichne(b.figur, { haltung, blick });
-        const svg = el.querySelector("svg");
-        f = { el, steuer: R.steuere(svg), x, blick };
-        if (aktion) f.steuer.bewegung(aktion);
+        el.innerHTML = R.zeichne(b.figur, { haltung });
+        f = { el, steuer: R.steuere(el.querySelector("svg")), x };
       }
       f.haltung = haltung;
       jetzt.set(b.figur, f);
@@ -133,9 +130,9 @@ function baueBild(buehne, bild, reduziert, R, vorher) {
     if (Array.isArray(b.perlen)) {
       el.classList.add("perlen");
       const werte = b.perlen.filter(n => Number.isInteger(n) && n > 0 && n <= 10);
-      // Perlengröße so, dass alle Stäbe der Szene auf die Matte passen (gleiche Größe für alle, Länge proportional)
+      // Perlengröße so, dass alle Stäbe der Szene neben einem Kind auf die Matte passen, mit Rand (gleiche Größe für alle, Länge proportional)
       const lang = werte.reduce((s, n) => s + n * 1.12 + (n > 5 ? 0.6 : 0), 0) + (werte.length - 1) * 2.4;
-      el.style.setProperty("--einf-stab", Math.min(9, (110 / Math.max(lang, 1)) * 1.4).toFixed(2) + "rem");
+      el.style.setProperty("--einf-stab", Math.min(8, (96 / Math.max(lang, 1)) * 1.4).toFixed(2) + "rem");
       for (const n of werte) {
         const st = document.createElement("ls-perlenstab");
         st.setAttribute("wert", String(n));
@@ -161,7 +158,6 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
   } catch (e) { return "abgebrochen"; }   // fehlende oder kaputte Vorlage: nichts als gesehen melden
   if (!szenen.length) return "abgebrochen";
 
-  const reduziert = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
   const mitTon = !!ton;   // ohne Web-Sprache bleibt sprich still, dann gilt die Lesezeit
 
   if (!document.getElementById("einf-css")) {
@@ -205,7 +201,7 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
       aktuell = i;
       if (i >= szenen.length) return ende("gesehen");
       const s = szenen[i], text = s.zeig || s.sprich;
-      try { buehne.replaceChildren(); kinder = baueBild(buehne, s.bild, reduziert, R, kinder); blase.textContent = text; }
+      try { buehne.replaceChildren(); kinder = baueBild(buehne, s.bild, R, kinder); blase.textContent = text; }
       catch (e) { return ende("abgebrochen"); }
       timer.forEach(clearTimeout); timer = [];
       const weiter = () => { if (aktuell === i) szene(i + 1); };   // alte Szenen melden sich nicht mehr

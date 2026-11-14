@@ -1,7 +1,7 @@
 { "szenen": [
   { "sprich": "Diese Brücke hat einen Zehnerstab und einen kleinen Stab.",
     "zeig": "16 = 10 + 6",
-    "bild": [ { "figur": "ela", "x": 16, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "6"], "x": 62 } ] },
+    "bild": [ { "figur": "ela", "x": 14, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "6"], "x": 61 } ] },
   { "sprich": "Ela legt genau so viele Perlen dazu, dass ein neuer Zehner voll wird.",
     "zeig": "6 + 4 = 10",
     "bild": [ { "figur": "ela", "x": 14, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "6", "4"], "x": 61 } ] },

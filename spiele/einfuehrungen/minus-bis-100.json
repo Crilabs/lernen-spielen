@@ -1,7 +1,7 @@
 { "szenen": [
   { "sprich": "Ganz unten im Tal wird der Bach zum Fluss. Kofi und Timo sehen Brücken aus vielen Zehnerstäben. Timo zeigt auf die längste.",
     "zeig": "10, 20, 30, 40 … 100",
-    "bild": [ { "figur": "kofi", "x": 13, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "figur": "timo", "x": 34, "haltung": "zeigen", "aufgabe": "zeigen" }, { "perlen": ["10"], "x": 72 } ] },
+    "bild": [ { "figur": "kofi", "x": 13, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "figur": "timo", "x": 34, "haltung": "zeigen", "aufgabe": "zeigen" }, { "perlen": ["10"], "x": 70 } ] },
   { "sprich": "Vorne an der Zahl stehen die Zehnerstäbe, hinten die Einer vom kleinen Stab.",
     "zeig": "24 = 10 + 10 + 4",
     "bild": [ { "perlen": ["10", "10", "4"], "x": 50 } ] },

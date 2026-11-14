@@ -7,7 +7,7 @@
     "bild": [ { "figur": "kofi", "x": 16, "haltung": "nachdenken", "aufgabe": "vorzeigen" }, { "perlen": ["{m}", "{fehlt}"], "x": 62 } ] },
   { "sprich": "Also teilt Kofi den kurzen Stab. Ein Teil füllt den Zehner auf, der Rest wartet.",
     "zeig": "{fehlt+3} = {fehlt} + 3",
-    "bild": [ { "figur": "kofi", "x": 15, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["{m}", "{fehlt}", "3"], "x": 62 } ] },
+    "bild": [ { "figur": "kofi", "x": 16, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["{m}", "{fehlt}", "3"], "x": 62 } ] },
   { "sprich": "Jetzt ist der Zehnerstab voll. Der Rest kommt dahinter.",
     "zeig": "10 + 3 = 13",
     "bild": [ { "perlen": ["10", "3"], "x": 42 }, { "zahl": "13", "x": 84 } ] },

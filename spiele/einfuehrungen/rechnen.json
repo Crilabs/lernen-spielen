@@ -10,10 +10,10 @@
     "bild": [ { "figur": "kofi", "x": 18, "haltung": "nachdenken", "aufgabe": "vorzeigen" }, { "perlen": ["{n-2}", "2"], "x": 62 } ] },
   { "sprich": "Jetzt nimmt Kofi einen Teil weg. Der andere Teil bleibt liegen.",
     "zeig": "{n} − 2 = {n-2}",
-    "bild": [ { "figur": "kofi", "x": 14, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["2"], "x": 36 }, { "perlen": ["{n-2}"], "x": 70 } ] },
+    "bild": [ { "figur": "kofi", "x": 18, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["2"], "x": 42 }, { "perlen": ["{n-2}"], "x": 72 } ] },
   { "sprich": "Oder er nimmt den anderen Teil weg.",
     "zeig": "{n} − {n-2} = 2",
-    "bild": [ { "figur": "kofi", "x": 14, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["{n-2}"], "x": 42 }, { "perlen": ["2"], "x": 78 } ] },
+    "bild": [ { "figur": "kofi", "x": 18, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["{n-2}"], "x": 48 }, { "perlen": ["2"], "x": 82 } ] },
   { "sprich": "Plus und Minus gehören zusammen. Sie sind eine Familie aus denselben Perlen.",
     "zeig": "2 + {n-2} = {n}   {n-2} + 2 = {n}   {n} − 2 = {n-2}   {n} − {n-2} = 2",
     "bild": [ { "figur": "kofi", "x": 18, "haltung": "freuen-klein", "aufgabe": "vorzeigen" }, { "perlen": ["2", "{n-2}"], "x": 62 } ] }

@@ -16,5 +16,5 @@
     "bild": [ { "perlen": ["8"], "x": 42 }, { "zahl": "8", "x": 82 } ] },
   { "sprich": "Erst bis zum Zehner wegnehmen, dann den Rest. Jetzt rechnest du so.",
     "zeig": "Erst bis 10, dann der Rest.",
-    "bild": [ { "figur": "ela", "x": 18, "haltung": "fragen", "aufgabe": "vorzeigen" }, { "perlen": ["10"], "x": 62 } ] }
+    "bild": [ { "figur": "ela", "x": 16, "haltung": "fragen", "aufgabe": "vorzeigen" }, { "perlen": ["10"], "x": 62 } ] }
 ] }

@@ -75,7 +75,9 @@ Auch erzählt gilt: kein „Du machst Kofi glücklich“, kein Lob, keine Wörte
 
 - **Kurze Sätze, ein Gedanke je Satz.** Punkt = Pause, Komma = kurze Pause, „…“ trennt Wortstücke.
 - **Fragen enden mit „?“**, dann hebt die Stimme am Ende.
-- **Zahlen** dürfen in Aufnahmen vorkommen **(Christian)**, als Ziffer oder Zahlwort. Beim Anhören auf
+- **Zahlen** dürfen in Aufnahmen vorkommen **(Christian)**, als Ziffer oder Zahlwort. Ausnahme Einführungen
+  (`spiele/einfuehrungen/`): Dort enthält `sprich` weder Ziffern noch Zahlwörter noch Platzhalter; Zahlen
+  stehen in `zeig` und im Bild (`fuelleVorlage` in `spiele/einfuehrung.js` prüft das). Beim Anhören auf
   Ordinalzahlen achten („fünfter“ statt „fünf“). Die Systemstimme spricht nie Zahlen. Ob ein Satz eine Lösung
   verrät, entscheidet das Spiel (Grundsätze).
 - **Keine Abkürzungen, Sonderzeichen, Gendersternchen** (Grundsätze §6). Schwierige Wörter mit Bild.
