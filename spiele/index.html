@@ -59,28 +59,33 @@ body {
 .kachel:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.8rem; }
 
 /* --- Dran: das Spiel zum Thema, das gerade dran ist ------------------------------------------- */
-/* Rahmen in der Füllung des Fachs (innen an der Kontur), oben das Spielsymbol auf der Tönung, darunter
-   der Spielname im Tief-Ton (wie in der Kopfleiste des Spiels) und leiser das Thema. */
+/* Rahmen in der Füllung des Fachs (innen an der Kontur). Oben links das Spielsymbol auf einem Feld in der Füllung
+   mit Tinte-Kontur (wie die Fachkachel und die Spiel-Kachel der Fach-Seite; Spielsymbole sind in Tinte gezeichnet),
+   darunter in voller Breite der Spielname im Tief-Ton (wie in der Kopfleiste des Spiels) und leiser das Thema. */
 .reihe.dran { flex-wrap: nowrap; }
 .reihe.dran > li { flex: 0 1 54rem; }
 .dran .kachel {
   flex-direction: column;
+  align-items: flex-start;
   width: 100%;
-  padding: 2.4rem;
-  gap: 2rem;
+  padding: 2.8rem 3.2rem 2.8rem;
+  gap: 1.8rem;
   border-radius: var(--ls-radius-gross);
   box-shadow: inset 0 0 0 1rem var(--fach-fuellung), var(--ls-schatten);
 }
 .dran .kachel:active { box-shadow: inset 0 0 0 1rem var(--fach-fuellung), var(--ls-schatten-unten); }
 .dran .bild {
+  flex: none;
   display: grid;
   place-items: center;
-  height: 12.4rem;
+  width: 12rem;
+  height: 12rem;
+  border: var(--ls-kontur) solid var(--ls-tinte);
   border-radius: var(--ls-radius);
-  background: var(--fach-toenung);
+  background: var(--fach-fuellung);
 }
-.dran .bild img { display: block; width: 9.6rem; height: 9.6rem; object-fit: contain; }
-.dran .text { display: flex; flex-direction: column; gap: 0.6rem; padding: 0 1.2rem 0.8rem; min-width: 0; }
+.dran .bild img { display: block; width: 8.4rem; height: 8.4rem; object-fit: contain; }
+.dran .text { display: flex; flex-direction: column; gap: 0.4rem; width: 100%; min-width: 0; }
 .dran b, .dran span.thema {
   overflow: hidden;
   white-space: nowrap;

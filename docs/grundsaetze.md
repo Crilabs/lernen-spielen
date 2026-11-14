@@ -405,6 +405,8 @@ in der Elternansicht** mit drei Stufen [E]. Das Alter liefert nur den Vorschlag:
   ab, bricht Geschichten ab, meidet ein Spiel, spricht abends darüber. Dann eine Stufe ruhiger.
   *Annahme:* Die App kann häufiges Überspringen still mitzählen und in der Elternansicht zeigen, ohne das
   Kind darauf anzusprechen.
+- **Umsetzung:** gestellt im Elternbereich (Einstellung `geschichten` am Profil, Standard „Sanft“); Spiele lesen
+  sie mit `geschichtenStufe()` (`docs/bedienung.md` §9, „Für Spiele“).
 - Eine Stufe stellt nur der Erwachsene um, nicht das Spiel von selbst. Das Kind kann aber jederzeit
   überspringen (9.2, Nr. 7).
 - **Natur-Härten nach Stufe** [E] (Feld `stufe_ab` der Welten im Lernplan):

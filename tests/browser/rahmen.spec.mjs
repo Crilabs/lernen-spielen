@@ -10,7 +10,8 @@
 //
 // Geprüft wird in Chromium und WebKit bei 1920 × 1080 und 1280 × 800: keine Seiten- oder Konsolenfehler,
 // feste Plätze, Größen nach docs/bedienung.md 4, Ton bleibt aus nach dem Neuladen, Pause, doppelter Import,
-// Tastatur, Ziehen (Tippen und Ziehen), wenig Bewegung, Kopfleisten-Höhe, Perlenstäbchen.
+// Tastatur, Ziehen (Tippen und Ziehen), wenig Bewegung, Kopfleisten-Höhe, Perlenstäbchen, Kopfleiste `ohne-haus`
+// und Slot `rechts`.
 
 import { createRequire } from "node:module";
 import http from "node:http";
@@ -160,6 +161,33 @@ async function lauf(typ, name, groesse, basis) {
     const luecke10 = schritt(p.w10.perlen, 4) - schritt(p.w10.perlen, 3);
     const erwartet = 2 * p.w5.breite + luecke10;
     pruefe(L, "Länge(10) = 2 × Länge(5) + Lücke (Boundingbox, 2 %)", Math.abs(p.w10.breite - erwartet) / p.w10.breite < 0.02, `${p.w10.breite.toFixed(1)} vs ${erwartet.toFixed(1)}`);
+
+    // --- ohne-haus und Slot rechts (Startseite: kein Haus, Zahnrad rechts neben Ton) -------------
+    // Ohne Maus, damit es auch in WebKit läuft, wo Mausklicks in diesem Playwright-Build an <html> landen.
+    const kopf = await seite.evaluate(async () => {
+      const leiste = document.getElementById("leiste");
+      const r = (el) => el.getBoundingClientRect();
+      const bild = () => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(ok)));
+      const rechts = document.createElement("span");
+      rechts.slot = "rechts";
+      rechts.style.cssText = "display:inline-block;width:10rem;height:10rem";
+      leiste.setAttribute("ohne-haus", "");
+      leiste.append(rechts);
+      await bild();
+      const haus = leiste.shadowRoot.querySelector("a.haus");
+      const ton = r(leiste.tonKnopf), slot = r(rechts), band = r(leiste.shadowRoot.querySelector(".band"));
+      const ohne = { hausWeg: haus.hidden && r(haus).width === 0, tonRechts: ton.right, slotLinks: slot.left, slotRechts: slot.right,
+        bandRechts: band.right, mitteSlot: slot.top + slot.height / 2, mitteTon: ton.top + ton.height / 2,
+        zugewiesen: leiste.shadowRoot.querySelector('slot[name="rechts"]').assignedElements().includes(rechts) };
+      leiste.removeAttribute("ohne-haus");
+      rechts.remove();
+      await bild();
+      return { ...ohne, hausWieder: !haus.hidden && r(haus).width > 0 };
+    });
+    pruefe(L, "ohne-haus: Haus verborgen, ohne das Attribut wieder da", kopf.hausWeg && kopf.hausWieder, JSON.stringify(kopf));
+    pruefe(L, "Slot rechts: zugewiesen, rechts neben Ton, im Band, auf der Mitte des Tons",
+      kopf.zugewiesen && kopf.slotLinks >= kopf.tonRechts - 1 && kopf.slotRechts <= kopf.bandRechts + 1 && Math.abs(kopf.mitteSlot - kopf.mitteTon) <= 2,
+      JSON.stringify(kopf));
 
     // --- Tastatur ------------------------------------------------------------------------------
     await seite.evaluate(() => (window.ereignisse.length = 0));
