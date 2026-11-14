@@ -49,7 +49,7 @@ const T = (teil, st) => ({ teil, svg: st.svg, kontur: st.kontur });
 /**
  * Dreiviertelansicht eines gehenden Kindes, aus einem Guss: Tinte nur um die Silhouette (kinder/stil.js).
  * farben.hemd: sichtbares Hemd unter offener Jacke (sonst geschlossenes Oberteil).
- * @param {{breite: number, farben: Farben & {hemd?: string, sohle?: string}, kopf: KopfStuecke}} k breite 1 = Grundmaß
+ * @param {{breite: number, farben: Farben & {hemd?: string, ringel?: string, sohle?: string}, kopf: KopfStuecke}} k breite 1 = Grundmaß
  * @returns {import("../bestand.js").KindAnsicht}
  */
 export function dreiviertel({ breite: b, farben: f, kopf }) {
@@ -71,6 +71,7 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
       + ` L${z(x - 9)} 255 Q${z(x - 14)} 255 ${z(x - 14)} 250 Z`), f.sohle ?? "#FFFCF7"),
     S.naht(`M${z(x + 13)} 239 C${z(x + 12)} 243 ${z(x + 13)} 245 ${z(x + 15)} 246`, f.schuhe, 2.2),
     S.naht(`M${z(x)} 236 l6 2.5 M${z(x + 3)} 234 l6 2.5`, f.schuhe, 2.4),
+    S.glanz(`M${z(x - 9)} 241 C${z(x - 8)} 237 ${z(x - 5)} 235 ${z(x - 2)} 234 M${z(x + 17)} 241 l4 1`, f.schuhe, 2.6),
     S.naht(`M${z(x - 14)} 251 L${z(x + 27)} 251`, f.sohle ?? "#FFFCF7", 1.6),
   );
   /** Weites Hosenbein, ein Stück bis zum Saum: Schattenstreifen rechts in einer Flucht mit der Hüfte. @param {number} cx @param {1|-1} o */
@@ -81,8 +82,10 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
     return {
       svg: `<path d="${bein}" fill="${f.unten}" stroke="none"/>`
         + `<path d="M${z(cx + 4)} 182 C${z(cx + 5)} 200 ${z(cx + 4 + o * 2)} 214 ${z(u + 4)} 238 L${z(u + 13)} 238`
-        + ` C${z(cx + 11 + o * 2)} 214 ${z(cx + 13)} 200 ${z(cx + 12)} 182 Z" fill="${S.dunkler(f.unten, 0.28)}" stroke="none"/>`
-        + `<path d="M${z(cx - 8)} 192 C${z(cx - 9)} 206 ${z(cx - 8 + o * 2)} 218 ${z(u - 9)} 228" fill="none" stroke="${S.heller(f.unten, 0.3)}" stroke-width="3" opacity="0.7"/>`
+        + ` C${z(cx + 11 + o * 2)} 214 ${z(cx + 13)} 200 ${z(cx + 12)} 182 Z" fill="${S.dunkler(f.unten, 0.26)}" stroke="none"/>`
+        + `<path d="M${z(cx + 9)} 182 C${z(cx + 10)} 200 ${z(cx + 9 + o * 2)} 214 ${z(u + 9)} 238 L${z(u + 13)} 238`
+        + ` C${z(cx + 11 + o * 2)} 214 ${z(cx + 13)} 200 ${z(cx + 12)} 182 Z" fill="${S.dunkler(f.unten, 0.46)}" stroke="none"/>`
+        + `<path d="M${z(cx - 8)} 192 C${z(cx - 9)} 206 ${z(cx - 8 + o * 2)} 218 ${z(u - 9)} 228" fill="none" stroke="${S.heller(f.unten, 0.48)}" stroke-width="4" opacity="0.85"/>`
         + S.falte(`M${z(cx - 8 + o)} 210 q6 5 13 -1 q-6 2 -13 4 Z M${z(cx + 1)} 221 q4 3 8 -1 q-4 2 -8 3 Z`, f.unten).svg
         + S.naht(`M${z(u - 13)} 230 Q${z(u)} 232 ${z(u + 13)} 230`, f.unten, 2).svg,
       kontur: `<path d="${bein}"/>`,
@@ -116,13 +119,19 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
     ? S.zusammen(
       S.form(S.pfad(jacke), f.oben, P(X(-22), 118), { s: 0.88 }),
       S.flach(S.pfad(`M${z(X(-6))} 113 Q${z(X(5))} 122 ${z(X(15))} 113 L${z(X(20))} 189 Q${z(X(7))} 191 ${z(X(-4))} 189 Z`), f.hemd),
-      S.naht(`M${z(X(-5))} 141 L${z(X(17))} 141 M${z(X(-4))} 160 L${z(X(18))} 160 M${z(X(-4))} 178 L${z(X(19))} 178`, f.hemd, 3),
+      f.ringel
+        ? { svg: `<path d="M${z(X(-5))} 141 L${z(X(17))} 141 M${z(X(-4))} 160 L${z(X(18))} 160 M${z(X(-4))} 178 L${z(X(19))} 178" fill="none" stroke="${f.ringel}" stroke-width="5"/>`, kontur: "" }
+        : S.naht(`M${z(X(-5))} 141 L${z(X(17))} 141 M${z(X(-4))} 160 L${z(X(18))} 160 M${z(X(-4))} 178 L${z(X(19))} 178`, f.hemd, 3),
       S.naht(`M${z(X(-6))} 113 C${z(X(-8))} 140 ${z(X(-6))} 165 ${z(X(-4))} 189 M${z(X(15))} 113 C${z(X(18))} 140 ${z(X(19))} 165 ${z(X(20))} 189`, f.oben, 2.6),
       S.naht(`M${z(X(-6))} 114 L${z(X(-13))} 126 L${z(X(-5))} 131 M${z(X(15))} 114 L${z(X(22))} 125 L${z(X(16))} 130`, f.oben, 2.4),
       S.naht(`M${z(X(-26))} 162 L${z(X(-13))} 162`, f.oben, 2.4),
+      S.glanz(`M${z(X(-22))} 124 C${z(X(-25))} 145 ${z(X(-27))} 165 ${z(X(-29))} 180`, f.oben, 4),
+      S.glanz(`M${z(X(-12))} 115 C${z(X(-8))} 113 ${z(X(-4))} 113 ${z(X(-2))} 114`, f.oben, 3),
       S.falte(`M${z(X(-30))} 178 C${z(X(-24))} 172 ${z(X(-16))} 172 ${z(X(-10))} 176 C${z(X(-16))} 175 ${z(X(-22))} 176 ${z(X(-30))} 181 Z`, f.oben),
       S.falte(`M${z(X(21))} 120 C${z(X(25))} 135 ${z(X(27))} 160 ${z(X(31))} 183 L${z(X(26))} 186 C${z(X(24))} 160 ${z(X(22))} 140 ${z(X(19))} 122 Z`, f.oben, 0.2),
-      S.falte(`M${z(X(-4))} 113 Q${z(X(5))} 122 ${z(X(15))} 113 Q${z(X(5))} 128 ${z(X(-4))} 116 Z`, f.hemd, 0.25),
+      S.falte(`M${z(X(-4))} 113 Q${z(X(5))} 122 ${z(X(15))} 113 Q${z(X(5))} 130 ${z(X(-4))} 116 Z`, f.hemd, 0.42),
+      S.falte(`M${z(X(-6))} 113 C${z(X(-8))} 140 ${z(X(-6))} 165 ${z(X(-4))} 189 L${z(X(1))} 189 C${z(X(-1))} 165 ${z(X(-3))} 140 ${z(X(-1))} 118 Z`, f.hemd, 0.3),
+      S.falte(`M${z(X(13))} 116 C${z(X(16))} 140 ${z(X(17))} 165 ${z(X(18))} 189 L${z(X(20))} 189 C${z(X(19))} 165 ${z(X(18))} 140 ${z(X(15))} 113 Z`, f.hemd, 0.22),
     )
     : S.zusammen(S.form(S.pfad(jacke), f.oben, P(X(-22), 118), { s: 0.88 }), S.naht(`M${z(X(-10))} 113 Q160 121 ${z(X(10))} 113`, f.oben));
   return {
@@ -137,10 +146,13 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
       "bein-hinten": bein(-13, -1),
       "bein-vorn": bein(13, 1),
       rumpf: [
-        T("hals", S.form(S.pfad("M153 96 L167 96 L168 118 L152 118 Z"), f.haut, P(153, 96), { s: 0.7 })),
+        T("hals", S.zusammen(S.form(S.pfad("M153 96 L167 96 L168 118 L152 118 Z"), f.haut, P(153, 96), { s: 0.7 }),
+          S.falte("M152 96 L168 96 L168 108 Q160 113 152 106 Z", f.haut, 0.42))),
         T("huefte", {
           svg: `<path d="${huefte}" fill="${f.unten}" stroke="none"/>`
-            + `<path d="M${z(X(17))} 172 L${z(X(27))} 172 C${z(X(30))} 182 ${z(X(30))} 192 ${z(X(27))} 201 L${z(X(17))} 201 Z" fill="${S.dunkler(f.unten, 0.28)}" stroke="none"/>`
+            + `<path d="M${z(X(17))} 172 L${z(X(27))} 172 C${z(X(30))} 182 ${z(X(30))} 192 ${z(X(27))} 201 L${z(X(17))} 201 Z" fill="${S.dunkler(f.unten, 0.26)}" stroke="none"/>`
+            + `<path d="M${z(X(22))} 172 L${z(X(27))} 172 C${z(X(30))} 182 ${z(X(30))} 192 ${z(X(27))} 201 L${z(X(22))} 201 Z" fill="${S.dunkler(f.unten, 0.46)}" stroke="none"/>`
+            + `<path d="M${z(X(-30))} 184 C${z(X(-20))} 192 ${z(X(20))} 192 ${z(X(30))} 184 L${z(X(30))} 191 C${z(X(20))} 199 ${z(X(-20))} 199 ${z(X(-30))} 191 Z" fill="${S.dunkler(f.unten, 0.5)}" stroke="none"/>`
             + S.naht(`M${z(X(1))} 178 L${z(X(2))} 201`, f.unten, 2).svg,
           kontur: `<path d="${huefte}"/>`,
         }),
@@ -153,9 +165,9 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
         T("kopf", S.form(S.pfad("M162 30 C190 30 206 48 206 72 C206 93 196 108 178 113 C168 116 152 116 142 110"
           + " C127 102 119 88 120 70 C122 46 138 30 162 30 Z"), f.haut, P(146, 54), { s: 0.9, trenn: true })),
         T("stirnschatten", S.falte("M124 74 C134 62 146 58 152 62 C160 66 170 66 176 60 C184 58 196 62 204 76"
-          + " C200 70 192 66 184 66 C176 72 162 74 152 68 C142 66 132 70 124 80 Z", f.haut, 0.22)),
+          + " C200 70 192 66 184 66 C176 72 162 74 152 68 C142 66 132 70 124 80 Z", f.haut, 0.34)),
         T("wangen", S.zusammen(S.roete(148, 95, 8, 5), S.roete(191, 94, 6, 4.5))),
-        T("nase", S.naht("M172 90 Q178 95 171 99", f.haut, 2.8)),
+        T("nase", S.zusammen(S.falte("M174 89 Q180 95 172 100 Q176 95 174 89 Z", f.haut, 0.4), S.naht("M172 90 Q178 95 171 99", f.haut, 2.6))),
         { teil: "gesicht" },
         ...(kopf.haareOben ? [T("haare-oben", kopf.haareOben)] : []),
         ...(kopf.nachGesicht ? [T("hilfsmittel", kopf.nachGesicht)] : []),

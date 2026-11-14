@@ -50,8 +50,10 @@ export function form(geo, farbe, licht, o = {}) {
   const [lx, ly] = licht;
   const s = o.s ?? 0.88;
   const g = s * 0.62;
+  const s1 = 1 - (1 - s) * 0.45;
   return {
-    svg: `<${geo} fill="${dunkler(farbe, 0.3)}" stroke="none"/>`
+    svg: `<${geo} fill="${dunkler(farbe, 0.46)}" stroke="none"/>`
+      + `<${geo} fill="${dunkler(farbe, 0.24)}" stroke="none" transform="translate(${z(lx)} ${z(ly)}) scale(${z(s1)}) translate(${z(-lx)} ${z(-ly)})"/>`
       + `<${geo} fill="${farbe}" stroke="none" transform="translate(${z(lx)} ${z(ly)}) scale(${s}) translate(${z(-lx)} ${z(-ly)})"/>`
       + (!o.glanz ? "" : `<${geo} fill="${heller(farbe)}" stroke="none" opacity="0.85"`
         + ` transform="translate(${z(lx)} ${z(ly)}) scale(${z(g)}) translate(${z(-lx)} ${z(-ly)})"/>`)
@@ -70,7 +72,7 @@ export const naht = (d, farbe, w = 2.2) => ({ svg: `<path d="${d}" fill="none" s
 export const falte = (d, farbe, anteil = 0.32) => ({ svg: `<path d="${d}" fill="${dunkler(farbe, anteil)}" stroke="none"/>`, kontur: "" });
 
 /** Glanzstrich (Haar, Stoff). @param {string} d @param {string} farbe @param {number} [w] */
-export const glanz = (d, farbe, w = 2.6) => ({ svg: `<path d="${d}" fill="none" stroke="${heller(farbe, 0.3)}" stroke-width="${w}" opacity="0.6"/>`, kontur: "" });
+export const glanz = (d, farbe, w = 2.6) => ({ svg: `<path d="${d}" fill="none" stroke="${heller(farbe, 0.42)}" stroke-width="${w}" opacity="0.8"/>`, kontur: "" });
 
 /** Weiche Röte (Wangen). @param {number} cx @param {number} cy @param {number} rx @param {number} ry */
 export const roete = (cx, cy, rx, ry) => ({ svg: `<ellipse cx="${z(cx)}" cy="${z(cy)}" rx="${z(rx)}" ry="${z(ry)}" fill="#E9806A" opacity="0.35" stroke="none"/>`, kontur: "" });
@@ -115,11 +117,12 @@ export function glied(p1, r1, p2, r2, farbe, o = {}) {
   /** @param {[number, number]} p @param {number} k */
   const R = (p, k) => `${z(p[0] + rechts[0] * k)} ${z(p[1] + rechts[1] * k)}`;
   const geo = kapsel(p1, r1, p2, r2);
-  const schatten = `<path d="M${R(p1, r1 * 0.3)} L${R(p2, r2 * 0.3)} L${R(p2, r2)} L${R(p1, r1)} Z" fill="${dunkler(farbe, 0.28)}" stroke="none"/>`;
+  const schatten = `<path d="M${R(p1, r1 * 0.15)} L${R(p2, r2 * 0.15)} L${R(p2, r2)} L${R(p1, r1)} Z" fill="${dunkler(farbe, 0.26)}" stroke="none"/>`
+    + `<path d="M${R(p1, r1 * 0.62)} L${R(p2, r2 * 0.62)} L${R(p2, r2)} L${R(p1, r1)} Z" fill="${dunkler(farbe, 0.46)}" stroke="none"/>`;
   const a = [p1[0] + u[0] * 2, p1[1] + u[1] * 2];
   const b = [p2[0] - u[0] * 2, p2[1] - u[1] * 2];
   const glanzlinie = `<path d="M${z(a[0] - rechts[0] * r1 * 0.6)} ${z(a[1] - rechts[1] * r1 * 0.6)} L${z(b[0] - rechts[0] * r2 * 0.6)} ${z(b[1] - rechts[1] * r2 * 0.6)}"`
-    + ` fill="none" stroke="${heller(farbe, 0.32)}" stroke-width="${z(Math.min(r1, r2) * 0.3)}" opacity="0.75"/>`;
+    + ` fill="none" stroke="${heller(farbe, 0.5)}" stroke-width="${z(Math.min(r1, r2) * 0.38)}" opacity="0.85"/>`;
   /** @param {[number, number]} p @param {number} k */
   const L = (p, k) => `${z(p[0] - rechts[0] * k)} ${z(p[1] - rechts[1] * k)}`;
   // Trennlinie nur an den Seitenkanten (und als Bogen am Ansatz), nie am Ende: dort schließt das nächste Teil an.

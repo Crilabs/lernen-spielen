@@ -6,10 +6,11 @@ import { dreiviertel, profil, ellipse, flaeche, INK } from "./schnitt.js";
 import * as S from "./stil.js";
 
 const farben = {
-  haut: "#B97E57", haar: "#3F2724", oben: "#E3B341", hemd: "#F7F2EA", unten: "#5C7DB5",
-  schuhe: "#9B5FA8", sohle: "#FFFCF7",
+  haut: "#B97E57", haar: "#3A2420", oben: "#FF9F8A", hemd: "#FFFCF7", ringel: "#8FD3EE", unten: "#4F8FB3",
+  schuhe: "#9ED8A8", sohle: "#FFFCF7",
 };
-const BAND = "#7FB3C9";
+const BAND = "#8FD3EE";
+const BRILLE = "#2E7D8C";
 
 /** Zopf aus drei Gliedern mit Band (alter Stil, Profil). @param {number} x @param {number} y */
 const zopf = (x, y) =>
@@ -25,8 +26,8 @@ const zopfS = (x, y) => S.zusammen(
   S.form(S.pfad(`M${x - 8} ${y + 38} l8 -6 l8 6 l-8 6 Z`), BAND, [x - 3, y + 36], { s: 0.8 }),
 );
 
-/** Haarsträhne als geschwungene, spitz zulaufende Form. @param {string} d */
-const straehne = (d) => S.form(S.pfad(d), farben.haar, [150, 30], { s: 0.92, glanz: false });
+/** Haarsträhne als geschwungene, spitz zulaufende Form, etwas heller als die Haarmasse. @param {string} d */
+const straehne = (d) => S.form(S.pfad(d), S.heller(farben.haar, 0.12), [150, 30], { s: 0.92 });
 
 const kopfDreiviertel = {
   haareHinten: S.zusammen(
@@ -41,11 +42,16 @@ const kopfDreiviertel = {
     straehne("M150 58 C146 44 152 30 166 26 C158 34 156 46 160 60 Z"),
     straehne("M176 60 C182 46 180 34 172 27 C188 32 194 46 190 58 Z"),
     straehne("M131 74 C128 56 136 40 150 32 C142 44 138 58 140 70 Z"),
-    S.glanz("M136 52 C142 40 152 33 164 31 M176 34 C186 38 194 46 198 56 M152 50 C154 42 158 37 164 34", farben.haar, 3),
+    S.glanz("M136 52 C142 40 152 33 164 31 M176 34 C186 38 194 46 198 56 M152 50 C154 42 158 37 164 34", farben.haar, 3.4),
+    S.glanz("M140 44 C146 37 154 33 160 32", farben.haar, 5),
     S.falte("M149 57 C154 64 166 66 172 59 C166 62 156 62 149 57 Z", farben.haar, 0.35),
   ),
-  nachGesicht: S.tinte("M146 80 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 M173 80 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0"
-    + " M168 79 Q170 77 173 79 M146 79 L126 76", 3.2),
+  nachGesicht: {
+    svg: `<path d="M146 80 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 M173 80 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0`
+      + ` M168 79 Q170 77 173 79 M146 79 L126 76" fill="none" stroke="${BRILLE}" stroke-width="3.4"/>`
+      + `<path d="M149 74 a8 8 0 0 1 6 -3 M176 74 a7 7 0 0 1 5 -2.5" fill="none" stroke="#FFFFFF" stroke-width="1.8" opacity="0.7"/>`,
+    kontur: "",
+  },
 };
 
 const kopfProfil = {
