@@ -18,7 +18,8 @@ export const BAUM = {
   rollstuhl: { vor: [], nach: [], nur: "rollstuhl" },
   "bein-hinten": { vor: [], nach: ["bein-hinten-unten"], nur: "geht" },
   "bein-hinten-unten": { vor: [], nach: [], nur: "geht" },
-  rumpf: { vor: ["arm-hinten-oben"], nach: ["kopf", "arm-vorn-oben"] },
+  rumpf: { vor: ["zopf", "arm-hinten-oben"], nach: ["kopf", "arm-vorn-oben"] },
+  zopf: { vor: [], nach: [] },
   "arm-hinten-oben": { vor: [], nach: ["arm-hinten-unten"] },
   "arm-hinten-unten": { vor: [], nach: [] },
   kopf: { vor: [], nach: [] },
@@ -31,6 +32,12 @@ export const BAUM = {
 };
 
 export const WURZEL = "koerper";
+/**
+ * Gelenke, die einem anderen folgen: gleicher Winkel und (ohne eigenen) gleicher Drehpunkt.
+ * zopf: lange Haare hinter dem Rücken (Lena). Sie liegen hinter Rumpf und Armen, drehen aber mit dem Kopf.
+ * @type {Record<string, string>}
+ */
+export const FOLGT = { zopf: "kopf" };
 /** Beingelenke mit Knie (Oberschenkel, Unterschenkel). Wer sie bewegt, braucht eine Rollstuhl-Fassung. */
 export const BEINE = ["bein-hinten", "bein-vorn", "bein-hinten-unten", "bein-vorn-unten"];
 export const PLAETZE = ["kopf", "hand-vorn", "hand-hinten", "ruecken", "fuesse", "schoss"];

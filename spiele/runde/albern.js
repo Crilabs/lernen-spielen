@@ -15,17 +15,6 @@ const BEINE_RUHE = { "bein-vorn": 0, "bein-vorn-unten": 0, "bein-hinten": 0, "be
 const STUHL_RUHE = { rumpf: 0, kopf: 0, "arm-vorn-oben": 34, "arm-vorn-unten": -76, "arm-hinten-oben": 34, "arm-hinten-unten": -76 };
 const ARME_HOCH = { "arm-vorn-oben": -150, "arm-vorn-unten": -18, "arm-hinten-oben": 150, "arm-hinten-unten": 18 };
 
-/**
- * Drehpunkt der Rolle beim Purzelbaum: koerper dreht um den Fußpunkt, der Versatz verlegt die Drehung
- * in die Körpermitte (C = Fußpunkt + (0, −54)): v = C − F − R(θ)(C − F).
- * @param {number} grad @param {number} vor zusätzlicher Weg nach vorn
- * @returns {[number, number]}
- */
-const rolle = (grad, vor) => {
-  const r = (grad * Math.PI) / 180;
-  const dy = -54;
-  return [Math.round((dy * Math.sin(r) + vor) * 100) / 100, Math.round((dy - dy * Math.cos(r)) * 100) / 100];
-};
 
 // Niesen: dreimal Anlauf, jedes Mal weiter zurück, dann Hatschi mit Ruck nach vorn.
 /** @param {number} g Größe (Riesen-Hatschi) @returns {Schritt[]} */
@@ -243,17 +232,46 @@ meldeBewegung({
   },
 });
 
-// Purzelbaum: in die Hocke, Rolle auf der Stelle um die Körpermitte, steht auf, Arme hoch.
-// Am Ende ein 1-ms-Schritt von 360° auf 0°, sonst dreht der Übergang in die Ende-Haltung rückwärts.
-const HOCKE = { "bein-vorn": -50, "bein-vorn-unten": 80, "bein-hinten": -40, "bein-hinten-unten": 76, "arm-vorn-oben": -60, "arm-vorn-unten": -40, "arm-hinten-oben": -50, "arm-hinten-unten": -40, kopf: 16 };
+// Purzelbaum: runter in die Hocke, zur Kugel einrollen (Kopf auf die Brust, Knie an den Bauch, Arme um die Beine),
+// über den Rücken nach vorn rollen, aufrollen, aufstehen mit „Ta-da“, in zwei Hüpfern zurück an den Platz.
+// Die Kugel rollt um einen festen Punkt im Körper; ROLLE nennt je 20° den Versatz [x, y], gemessen im Browser an
+// Ela, Kofi und Lena (tiefster Punkt der Umrisse auf dem Boden, für das Kind, das am meisten Platz braucht, plus 3
+// Einheiten, damit auch zwischen zwei Stützstellen nichts einsinkt). Weg nach vorn: 120.
+// Am Ende der Rolle ein 1-ms-Schritt von 360° auf 0°, sonst dreht der Übergang rückwärts.
+const HOCKE = {
+  "bein-vorn": -95, "bein-vorn-unten": 150, "bein-hinten": -88, "bein-hinten-unten": 146, rumpf: 40, kopf: 30,
+  "arm-vorn-oben": -80, "arm-vorn-unten": -30, "arm-hinten-oben": -70, "arm-hinten-unten": -30,
+};
+const KUGEL = {
+  ...HOCKE, "bein-vorn": -105, "bein-hinten": -100, rumpf: 78, kopf: 62,
+  "arm-vorn-oben": -105, "arm-vorn-unten": -70, "arm-hinten-oben": -95, "arm-hinten-unten": -70,
+};
+/** Hocke: Hüfte so weit unten, dass die Füße auf dem Boden bleiben. */
+const HOCKE_TIEF = 22;
+/** [Grad, x, y] */
+const ROLLE = [
+  [0, 0, -18], [20, -5, -51], [40, 1, -77], [60, 19, -127], [80, 45, -162], [100, 80, -177], [120, 118, -171],
+  [140, 156, -171], [160, 191, -174], [180, 218, -155], [200, 237, -118], [220, 244, -75], [240, 240, -56],
+  [260, 226, -29], [280, 205, -3], [300, 181, 17], [320, 156, 30], [340, 134, 16], [360, 120, -18],
+].map(([g, x, y]) => /** @type {[number, number, number]} */ ([g, x, y - 3]));
+const WEG = 120;
+const TADA = { ...BEINE_RUHE, rumpf: -4, kopf: -8, "arm-vorn-oben": -118, "arm-vorn-unten": -20, "arm-hinten-oben": -132, "arm-hinten-unten": -16 };
+const PROFIL_RUHE = { ...BEINE_RUHE, ...RUHE };
 meldeBewegung({
   id: "purzelbaum", ansicht: "profil", ende: "stehen",
   schritte: [
-    { ms: 260, winkel: { ...HOCKE, rumpf: 18 }, streckung: [1.06, 0.84], gesicht: "freuen-klein" },
-    ...[90, 180, 270, 360].map((g) => /** @type {Schritt} */ ({ ms: 150, kurve: "gleich", winkel: { koerper: g }, versatz: rolle(g, 0), streckung: [0.94, 0.84] })),
-    { ms: 1, winkel: { koerper: 0 }, versatz: [0, 0] },
-    { ms: 260, kurve: "federn", winkel: { ...BEINE_RUHE, ...RUHE, rumpf: 0, "arm-vorn-oben": -150, "arm-hinten-oben": -140 }, streckung: [1, 1], luft: { staub: "boden" }, gesicht: "freuen-gross" },
-    { ms: 500, winkel: { "arm-vorn-oben": -140 } },
+    { ms: 320, winkel: HOCKE, versatz: [0, HOCKE_TIEF], gesicht: "freuen-klein" },
+    { ms: 220, winkel: { ...KUGEL, koerper: 0 }, versatz: [ROLLE[0][1], ROLLE[0][2]], gesicht: "kichern" },
+    ...ROLLE.slice(1).map(([g, x, y]) => /** @type {Schritt} */ ({ ms: 50, kurve: "gleich", winkel: { koerper: g }, versatz: [x, y] })),
+    { ms: 1, winkel: { koerper: 0 } },
+    { ms: 240, kurve: "federn", winkel: HOCKE, versatz: [WEG, HOCKE_TIEF], luft: { staub: "boden" } },
+    { ms: 320, kurve: "federn", winkel: TADA, versatz: [WEG, 0], gesicht: "freuen-gross", luft: { sterne: "kopf" } },
+    { ms: 380, luft: { sterne: "kopf" } },
+    // zurück an den Platz: zwei kleine Hüpfer rückwärts
+    { ms: 140, winkel: { ...PROFIL_RUHE, "bein-vorn": -10, "bein-hinten": 8 }, versatz: [WEG * 0.75, -18], gesicht: "freuen-klein" },
+    { ms: 110, winkel: BEINE_RUHE, versatz: [WEG * 0.5, 0] },
+    { ms: 140, winkel: { "bein-vorn": -10, "bein-hinten": 8 }, versatz: [WEG * 0.25, -18] },
+    { ms: 110, winkel: BEINE_RUHE, versatz: [0, 0] },
   ],
   rollstuhl: {
     // Wheelie-Kreisel: auf den Hinterrädern hin und her.

@@ -209,3 +209,12 @@ test("Wende kehrt den Versatz um, die Figur bleibt an ihrem Platz", async () => 
   assert.match(svg.querySelector('[data-gelenk="koerper"]').getAttribute("transform"), /^translate\(-9\d/);
   assert.equal(f.blick, "links");
 });
+
+test("zopf folgt dem Kopf: gleicher Winkel, Drehpunkt des Kopfes", () => {
+  const p = { ...pose("test-geht", "nicken") };
+  const ans = bestand.kinder.get("test-geht").ansichten.dreiviertel;
+  const kopf = gelenkTransform(ans, "kopf", p);
+  assert.equal(gelenkTransform(ans, "zopf", p), kopf);
+  assert.match(kopf, /rotate\(10 /);
+  assert.match(zeichne("test-geht", { haltung: "nicken" }), /data-gelenk="zopf" transform="rotate\(10 /);
+});

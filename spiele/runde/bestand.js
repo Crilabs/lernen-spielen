@@ -2,7 +2,7 @@
 // Jedes Spiel meldet seine Erweiterungen mit den melde…-Funktionen an (in spiele/<spiel>/runde.js).
 // Beim Anmelden wird geprüft; Fehler nennen Name und Grund, damit ein kaputter Zusatz sofort auffällt.
 
-import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, gelenkeFuer } from "./gelenke.js";
+import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, FOLGT, gelenkeFuer } from "./gelenke.js";
 
 /**
  * @typedef {import("./gelenke.js").Ansicht} Ansicht
@@ -123,7 +123,7 @@ export function meldeKind(kind) {
       if (kind.entwurf) continue;
       return fehler(`${wo}: Ansicht fehlt`);
     }
-    for (const g of gelenke) if (!ans.drehpunkte[g]) fehler(`${wo}: Drehpunkt für ${g} fehlt`);
+    for (const g of gelenke) if (!ans.drehpunkte[g] && !FOLGT[g]) fehler(`${wo}: Drehpunkt für ${g} fehlt`);
     for (const [g, teile] of Object.entries(ans.teile)) {
       if (!gelenke.includes(g)) fehler(`${wo}: Teile an unbekanntem Gelenk „${g}“`);
       for (const t of teile) {

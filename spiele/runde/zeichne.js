@@ -2,7 +2,7 @@
 // Rein: gleiche Eingabe, gleicher Text. steuere.js setzt danach nur noch transform-Attribute.
 
 import { bestand } from "./bestand.js";
-import { BAUM, WURZEL, FUSSPUNKT } from "./gelenke.js";
+import { BAUM, WURZEL, FUSSPUNKT, FOLGT } from "./gelenke.js";
 import { pose as posen } from "./pose.js";
 
 /**
@@ -29,7 +29,8 @@ export function transformFuer(punkt, grad) {
  * @param {KindAnsicht} ans @param {string} gelenk @param {Pose} p
  */
 export function gelenkTransform(ans, gelenk, p) {
-  const dreh = transformFuer(ans.drehpunkte[gelenk], p.winkel[gelenk] ?? 0);
+  const vorbild = FOLGT[gelenk] ?? gelenk;
+  const dreh = transformFuer(drehpunktVon(ans, gelenk), p.winkel[vorbild] ?? 0);
   if (gelenk !== WURZEL) return dreh;
   const [fx, fy] = FUSSPUNKT;
   const [sx, sy] = p.streckung ?? [1, 1];
@@ -75,6 +76,11 @@ export function luftInnen(kindId, p, ebene) {
     const [x, y] = ankerpunkt(ans, p.ansicht, a);
     return `<g data-zeichen="${id}" transform="translate(${z(x)} ${z(y)})">${l.svg}</g>`;
   }).join("");
+}
+
+/** Drehpunkt eines Gelenks; folgende Gelenke (FOLGT) nehmen ohne eigenen den ihres Vorbilds. @param {KindAnsicht} ans @param {string} gelenk */
+export function drehpunktVon(ans, gelenk) {
+  return ans.drehpunkte[gelenk] ?? ans.drehpunkte[FOLGT[gelenk]];
 }
 
 /** @param {string} kindId */
@@ -169,7 +175,7 @@ export function zeichnePose(kindId, pose, aus = {}) {
 
   /** @param {string} gelenk @param {"flaeche"|"kontur"} modus @returns {string} */
   const gruppe = (gelenk, modus) => {
-    if (!ans.drehpunkte[gelenk]) return "";
+    if (!drehpunktVon(ans, gelenk)) return "";
     const knoten = BAUM[gelenk];
     const eigene = (ans.teile[gelenk] ?? []).filter((t) => !verdeckt.has(t.teil)).map((t) => {
       if (t.teil === "gesicht" && !t.svg) {
