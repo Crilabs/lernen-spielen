@@ -14,10 +14,10 @@ quellen:
 Ihr braucht: drei Blätter Papier, eine Seite leer
 
 1. Ihr braucht Merkzettel. Faltet jedes Blatt zweimal in der Mitte. Klappt eins auf und zählt die Felder, nicht die Linien: 4.
-2. Sagt: „Drei Vierer. 3 mal 4 ist gleich 12.“
-3. Faltet jedes Blatt noch einmal. Sagt: „Drei Achter. 3 mal 8 ist gleich 12 plus 12, also 24.“
-4. Reißt die Zettel an den Falzen ab und zählt nach.
+2. Drei Blätter, drei Vierer. Legt fest, wie viele Felder das sind.
+3. Gleich faltet ihr jedes Blatt noch einmal. Legt vorher fest, wie viele Zettel es werden.
+4. Faltet, reißt die Zettel an den Falzen ab und zählt nach.
 
 **Darauf kommt es an:** Jedes Falten verdoppelt die Felder: 2, 4, 8. Ein Achter ist das Doppelte von einem Vierer. Darum ist 3 mal 8 das Doppelte von 3 mal 4.
 
-**Leichter:** Zwei Blätter: Zwei Vierer sind 8, zwei Achter sind 16. **Schwerer:** Neun Blätter: 10 mal 8 ist gleich 80. Ein Blatt weniger: 80 minus 8 ist gleich 72.
+**Leichter:** Zwei Blätter. **Schwerer:** Zehn Blätter, dreimal gefaltet, nicht abreißen: zehn Achter. Nehmt ein Blatt weg: ein Achter weniger. Legt fest, wie viele Felder noch daliegen, und zählt nach.
