@@ -1,4 +1,4 @@
-// <ls-leiste spiel="perlenbruecke" fach="mathe" titel="Perlenbrücke" thema="Die 7 zerlegen">
+// <ls-leiste spiel="vorlage" fach="mathe" titel="Spielvorlage" thema="Die 7 zerlegen">
 // Kopfleiste (Rahmen-Schicht): ein Band in der Fach-Tönung oben über das sichere Feld (192 × 108 rem, mittig).
 // Links Haus (Alle Spiele, Nebenknopf), daneben das Fachsymbol als flache Kachel (nur Anzeige), dann der
 // Spielname in Fach-Tief und darunter leiser das Thema; rechts Ton an/aus (Nebenknopf).

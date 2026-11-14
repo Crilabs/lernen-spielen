@@ -6,7 +6,7 @@ const { aufgabenVon, klasseRechnen, poolRechnen, darstellbar } = await import(".
 
 const lade = (pfad) => JSON.parse(readFileSync(new URL(pfad, import.meta.url), "utf8"));
 const plan = lade("../spiele/lernplan.json");
-const katalog = lade("../spiele/spiele.json");
+const katalog = lade("./daten/spiele-beispiel.json");
 const themen = plan.themen;
 
 const hatSpiel = (katalog, thema) => {

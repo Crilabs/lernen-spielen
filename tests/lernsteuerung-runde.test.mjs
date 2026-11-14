@@ -16,7 +16,7 @@ const { sofortSpeichern } = await import("../spiele/lernspiel.js");
 const AA = await import("../spiele/aufgabenarten.js");
 
 const lies = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), "utf8"));
-const CTX = { plan: lies("../spiele/lernplan.json"), spiele: lies("../spiele/spiele.json") };
+const CTX = { plan: lies("../spiele/lernplan.json"), spiele: lies("./daten/spiele-beispiel.json") };
 const lcg = (seed) => { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32; };
 let datum;
 const uhr = () => ({ heute: datum, jetzt: 1_000_000 });
@@ -95,50 +95,6 @@ test("runde: halbe Probe abgebrochen → nicht gekonnt, nächster Start übt auf
   assert.equal(r2.naechste().stufe, "material");
 });
 
-// alter Zahlenzauber-Stand Stufe 3 mit einer Aufgabe aus minus-bis-30
-const altStufe3 = () => {
-  const { aufgabenVon } = AA;
-  const key = aufgabenVon({ art: "rechnen", thema: "minus-bis-30" })[0].key.replace(/^minus:/, "");
-  speicher.set("lernstand-kind-1-zahlenzauber", JSON.stringify({ stufe: 3, wiese: 40, fakten: { [key]: { f: 1, t: "2026-11-10", h: [1] } } }));
-};
-
-test("runde: übernommenes Thema (alter Zahlenzauber Stufe 3) startet ohne Einführung mit Probe von 5", async () => {
-  altStufe3();
-  const r = await start("zahlenzauber");
-  assert.equal(r.thema.id, "minus-bis-30");
-  assert.equal(r.modus, "thema");
-  assert.equal(r.einfuehrungFaellig, false);
-  assert.equal(r.thema.stufe, "kopf");
-  let ereignis = null;
-  for (let i = 0; i < 5; i++) {
-    const a = r.naechste();
-    assert.ok(a, "Angebot " + (i + 1));
-    assert.equal(a.ziel.thema, "minus-bis-30");
-    assert.equal(a.stufe, "kopf");
-    assert.deepEqual(a.auch, []);
-    ereignis = r.melde(a.ziel.key, { ok: true, hilfe: 0, ms: 1000 });
-    if (i < 4) assert.equal(ereignis, null);
-  }
-  assert.deepEqual(ereignis, { typ: "gekonnt", thema: "minus-bis-30" });
-  await r.ende();
-  assert.equal(stand().themen["minus-bis-30"].z, "kann-ich");
-  assert.equal(stand().themen["minus-bis-30"].p, undefined, "Probe erledigt: p gelöscht");
-});
-
-test("runde: übernommenes Thema, Probe mit Fehler → p gelöscht, Üben auf der untersten Stufe", async () => {
-  altStufe3();
-  const r = await start("zahlenzauber");
-  assert.equal(r.thema.id, "minus-bis-30");
-  const a = r.naechste();
-  r.melde(a.ziel.key, { ok: false, hilfe: 0, ms: 1000 });
-  await r.ende();
-  const t = stand().themen["minus-bis-30"];
-  assert.equal(t.z, "dran"); assert.equal(t.stufe, "kopf"); assert.equal(t.p, undefined);
-  const r2 = await start("zahlenzauber");
-  const b = r2.naechste();
-  assert.ok(b.auch.length > 0, "keine Probe mehr: Angebot mit weiteren Aufgaben");
-});
-
 test("runde: melde nach Mitternacht nutzt neues Datum", async () => {
   const r = await start("perlenbruecke");
   r.einfuehrungGesehen();
@@ -156,20 +112,6 @@ test("runde: nurAnsehen speichert nichts", async () => {
   r.melde(a.ziel.key, { ok: true, hilfe: 0, ms: 1000 });
   await r.ende();
   assert.equal(speicher.has("lernstand-kind-1-lernplan"), false);
-});
-
-test("runde: Migration läuft einmal, zweiter Start ändert nichts", async () => {
-  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ paare: { "2:1+1": { f: 4, t: "2026-11-01", h: [1, 1], g: 1 } } }));
-  const r = await start("perlenbruecke");
-  await r.ende();
-  const s1 = stand();
-  assert.equal(s1.migriert, 1);
-  assert.equal(s1.themen["zerlegen-2"].z, "kann-ich");
-  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ paare: {} }));
-  datum = "2026-11-20";
-  const r2 = await start("perlenbruecke");
-  await r2.ende();
-  assert.deepEqual(stand(), s1);
 });
 
 test("runde: ende speichert vor dem Auflösen", async () => {
@@ -247,19 +189,6 @@ test("Befund 1: frisch, erst Zahlenzauber, dann Perlenbrücke → nach zerlegen-
   assert.equal(r2.modus, "thema");
 });
 
-test("Befund 1: übernommenes Kind mit beiden Ständen → nach rechnen-7 bekommt der Zahlenzauber ein neues Thema", async () => {
-  speicher.set("lernstand-kind-1-zahlenzauber", JSON.stringify({ stufe: 2, fakten: { "3+4": { f: 2, t: "2026-11-01", h: [1] }, "7-4": { f: 1, t: "2026-11-01", h: [1] } } }));
-  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ version: 2, paare: { "5:2+3": { f: 4, t: "2026-11-01", h: [1], g: 1 }, "7:3+4": { f: 1, t: "x", h: [0] } } }));
-  const { r, ereignis } = await spieleRunde("zahlenzauber");
-  assert.equal(r.thema.id, "rechnen-7");
-  assert.deepEqual(ereignis, { typ: "gekonnt", thema: "rechnen-7" });
-  assert.equal(stand().themen["zerlegen-5"].z, "dran", "in der Perlenbrücke ist noch ein Thema dran");
-  const r2 = await start("zahlenzauber");
-  assert.equal(r2.modus, "thema");
-  assert.notEqual(r2.thema.id, "rechnen-7");
-  assert.equal(r2.thema.neu, true);
-});
-
 test("Befund 2: einmal() liefert den Wunsch nur beim ersten Aufruf", () => {
   const w = einmal("zerlegen-3");
   assert.equal(w(), "zerlegen-3");
@@ -277,16 +206,6 @@ test("Befund 2: ?thema= gilt nur für die erste Runde der Seite", async () => {
   const r2 = await start("perlenbruecke", { wunsch: wunsch() });
   assert.equal(r2.thema.id, "zerlegen-4"); assert.equal(r2.modus, "thema");
 });
-
-for (const datei of ["perlenbruecke", "zahlenzauber"]) {
-  test(`Befund 2: ${datei}.html verbraucht ?thema= einmal`, () => {
-    const html = readFileSync(new URL(`../spiele/${datei}.html`, import.meta.url), "utf8");
-    assert.match(html, /import \{[^}]*\beinmal\b[^}]*\} from "\.\/lernsteuerung\.js"/);
-    assert.match(html, /const wunsch = einmal\(params\.get\("thema"\)\)/);
-    assert.match(html, new RegExp(`runde\\("${datei}", \\{ wunsch: wunsch\\(\\)`));
-    assert.doesNotMatch(html, /wunsch: params\.get/);
-  });
-}
 
 // zerlegen-2 und -3 gekonnt: zerlegen-4 hat drei Probe-Aufgaben
 const vorZerlegen4 = () => setzeStand({ "zerlegen-2": gekonnt, "zerlegen-3": gekonnt });
@@ -337,53 +256,6 @@ test("Befund 3: nach einer Probe-Antwort abgebrochen → pb gesetzt, nächster S
   assert.equal(stand().themen["zerlegen-4"].pb, undefined);
   assert.equal(stand().themen["zerlegen-4"].stufe, "material");
 });
-
-test("Befund 3: übernommenes Thema (p = 1), Abbruch vor der ersten Antwort → wieder Probe", async () => {
-  altStufe3();
-  const r = await start("zahlenzauber");
-  assert.equal(r.thema.id, "minus-bis-30");
-  r.naechste(); await r.ende();
-  const r2 = await start("zahlenzauber");
-  assert.equal(r2.thema.id, "minus-bis-30");
-  assert.deepEqual(r2.naechste().auch, [], "Probe");
-});
-
-test("Befund 5: ladeLernstand übernimmt alte Stände, schreibt aber nichts", async () => {
-  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ paare: { "2:1+1": { f: 4, t: "2026-11-01", h: [1, 1], g: 1 } } }));
-  const s = await ladeLernstand(CTX, "2026-11-13");
-  assert.equal(s.migriert, 1);
-  assert.equal(s.themen["zerlegen-2"].z, "kann-ich");
-  await sofortSpeichern();
-  assert.equal(speicher.has("lernstand-kind-1-lernplan"), false);
-  // schon übernommen: alte Stände werden nicht noch einmal gelesen
-  setzeStand({ "zerlegen-3": gekonnt });
-  const t = await ladeLernstand(CTX, "2026-11-13");
-  assert.equal(t.themen["zerlegen-2"], undefined);
-  assert.equal(t.themen["zerlegen-3"].z, "kann-ich");
-  // runde() speichert die Übernahme weiter sofort
-  speicher.clear();
-  speicher.set("lernstand-kind-1-perlenbruecke", JSON.stringify({ paare: { "2:1+1": { f: 4, t: "2026-11-01", h: [1, 1], g: 1 } } }));
-  await (await start("perlenbruecke")).ende();
-  assert.equal(stand().migriert, 1);
-});
-
-for (const datei of ["themen", "eltern"]) {
-  test(`Befund 5: ${datei}.html lädt den Lernstand über ladeLernstand`, () => {
-    const html = readFileSync(new URL(`../spiele/${datei}.html`, import.meta.url), "utf8");
-    assert.match(html, /import \{[^}]*\bladeLernstand\b[^}]*\}\s*from "\.\/lernsteuerung\.js"/);
-    assert.match(html, /await ladeLernstand\(/);
-    assert.doesNotMatch(html, /migriereSpiele\(/);
-  });
-}
-
-for (const [datei, sag] of [["perlenbruecke", "sag"], ["zahlenzauber", "sag"]]) {
-  test(`Befund 7: ${datei}.html fängt Ladefehler beim Rundenstart ab (Protokoll, Text, kein Dialog)`, () => {
-    const html = readFileSync(new URL(`../spiele/${datei}.html`, import.meta.url), "utf8");
-    assert.match(html, /import \{[^}]*\bprotokoll\b[^}]*\} from "\.\/lernspiel\.js"/);
-    assert.match(html, new RegExp(`try\\{ r = await runde\\("${datei}"[^\\n]*\\}\\s*catch\\(e\\)\\{[^\\n]*protokoll\\([^\\n]*${sag}\\("[^"\\d]+"\\)[^\\n]*return; \\}`));
-    assert.doesNotMatch(html, /\balert\(|\bconfirm\(/);
-  });
-}
 
 test("Befund 7: themen.html zeigt bei Ladefehler einen kurzen Text und protokolliert", () => {
   const html = readFileSync(new URL("../spiele/themen.html", import.meta.url), "utf8");

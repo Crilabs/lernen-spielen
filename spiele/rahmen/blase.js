@@ -1,4 +1,4 @@
-// <ls-blase spiel="einmaleins">
+// <ls-blase spiel="vorlage">
 // Sprechblase des Erzählers: Papier mit Tinte-Kontur, großer Radius, ohne Zipfel (gehört keiner Figur).
 // Text links (Andika 3,6 rem, Tinte), kleiner Nebenknopf „Noch mal hören“ rechts. Flach: kein Schatten.
 // Das Spiel platziert den Host per CSS.

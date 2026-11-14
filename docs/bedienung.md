@@ -73,6 +73,8 @@ von keinem Spiel neu erfunden.
 - Die Sprechblase selbst darf das Spiel platzieren. Sie gehört dem **Erzähler** (zur Szene), nie dem Mund
   einer Figur: kein Zipfel, der auf eine Figur zeigt, keine Ich-Sätze darin (`docs/stimme.md`). Der
   Noch-mal-hören-Knopf sitzt immer rechts in der Blase, weil er zu genau diesem Text gehört.
+  Welche Figuren es gibt, was sie können und wie der Erzähler über sie spricht, steht in
+  [`docs/figuren.md`](figuren.md).
 - Die Startseite hat ihre eigene Ordnung (Fächer, Spiele, Zahnrad für Erwachsene). Diese Datei regelt
   die Spielseiten.
 

@@ -7,7 +7,7 @@ const { uebersicht, neuerStand, themaFuer, startThema } = await import("../spiel
 
 const HEUTE = "2026-11-13";
 const json = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), "utf8"));
-const ECHT = { plan: json("../spiele/lernplan.json"), spiele: json("../spiele/spiele.json") };
+const ECHT = { plan: json("../spiele/lernplan.json"), spiele: json("./daten/spiele-beispiel.json") };
 const ids = (u) => u.flatMap((s) => s.stationen.map((x) => x.id));
 const station = (u, id) => u.flatMap((s) => s.stationen).find((x) => x.id === id);
 

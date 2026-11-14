@@ -1,0 +1,87 @@
+{
+  "hinweis": "Fester Beispiel-Katalog für die Tests der Lernsteuerung (Stand der alten Spiele, 2026-11-14). Die IDs sind nur Testnamen.",
+  "kategorien": [
+    {
+      "id": "mathe",
+      "name": "Mathe",
+      "symbol": "symbole/mathe.svg",
+      "farbe": "#F06BB0",
+      "schatten": "#C2468A",
+      "tint": "#FFE3F1"
+    },
+    {
+      "id": "grammatik",
+      "name": "Grammatik",
+      "symbol": "symbole/grammatik.svg",
+      "farbe": "#3DB98F",
+      "schatten": "#2A8E6C",
+      "tint": "#D8F6EA"
+    },
+    {
+      "id": "schreiben",
+      "name": "Schreiben",
+      "symbol": "symbole/schreiben.svg",
+      "farbe": "#4C9BD1",
+      "schatten": "#2F78AD",
+      "tint": "#DDEFFF"
+    },
+    {
+      "id": "lesen",
+      "name": "Lesen",
+      "symbol": "symbole/lesen.svg",
+      "farbe": "#F2B630",
+      "schatten": "#C48A0C",
+      "tint": "#FFF3D1"
+    },
+    {
+      "id": "geometrie",
+      "name": "Geometrie",
+      "symbol": "symbole/geometrie.svg",
+      "farbe": "#8C6FE0",
+      "schatten": "#6548BC",
+      "tint": "#ECE6FF"
+    },
+    {
+      "id": "sprechen",
+      "name": "Sprechen und Zuhören",
+      "symbol": "symbole/stimme.svg",
+      "farbe": "#F08A4B",
+      "schatten": "#C2652A",
+      "tint": "#FFE9DB"
+    }
+  ],
+  "spiele": [
+    {
+      "id": "zahlenzauber",
+      "kategorie": "mathe",
+      "arten": [
+        {
+          "art": "rechnen",
+          "max": 100,
+          "gleiche": false,
+          "stufen": [
+            "kopf"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "perlenbruecke",
+      "kategorie": "mathe",
+      "arten": [
+        {
+          "art": "zerlegung",
+          "zahlen": [
+            2,
+            10
+          ],
+          "stufen": [
+            "material",
+            "vorstellung",
+            "kopf"
+          ]
+        }
+      ]
+    }
+  ]
+}

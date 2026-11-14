@@ -239,6 +239,13 @@ async function lauf(typ, name, groesse, basis) {
     pruefe(L, "Protokoll ohne Fehler (höchstens fehlende Audiodateien)", protokoll.every((z) => /Keine Audiodatei/.test(z)), protokoll.join(" | "));
 
     // --- Vorschau-Parameter -----------------------------------------------------------------------
+    // spiele.json ist leer, bis das erste neue Spiel eingetragen ist: für den Hinweis ein Beispielspiel ergänzen.
+    await kontext.route("**/spiele/spiele.json", async (route) => {
+      const antwort = await route.fetch();
+      const json = await antwort.json();
+      json.spiele.push({ id: "beispiel", titel: "Beispiel", thema: "Zerlegen", kategorie: "mathe", symbol: "symbole/mathe.svg", datei: "index.html" });
+      await route.fulfill({ response: antwort, json });
+    });
     const s2 = await kontext.newPage();
     s2.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (?pause): ${e.message}`));
     s2.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole (?pause): ${m.text()}`); });

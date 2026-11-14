@@ -47,17 +47,14 @@ test("Literale im Spielcode: nur feste Zeichenketten, Rest zählt als offen", ()
   assert.equal(offen, 4);
 });
 
-test("sammle findet Startseite, Lernplan, Einführungen, Diktat und feste Sätze", () => {
+test("sammle findet Lernplan, Einführungen und feste Sätze", () => {
   const { eintraege } = sammle(WURZEL);
   const k = new Set(eintraege.map((e) => e.schluessel));
   assert.ok(eintraege.length > 100);
   assert.equal(k.size, eintraege.length);
-  assert.ok(k.has("Der Hund bellt."));
-  assert.ok(k.has("Hör noch mal hin. Der Hund bellt."));
-  assert.ok(k.has("Das Pony frisst Gras. Die Katze schläft auf dem Sofa."));
   assert.ok(eintraege.some((e) => e.quellen.some((q) => q.startsWith("einfuehrungen/"))));
   assert.ok(eintraege.some((e) => e.quellen.includes("lernplan.json")));
-  assert.ok(eintraege.some((e) => e.quellen.includes("spiele.json")));
+  assert.ok(eintraege.some((e) => /\.(html|js)$/.test(e.quellen[0])));
 });
 
 test("erzeuge: neue Datei, unverändert, Zahl, von Hand, verwaist", async () => {

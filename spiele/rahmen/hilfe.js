@@ -1,4 +1,4 @@
-// <ls-hilfe spiel="einmaleins">
+// <ls-hilfe spiel="vorlage">
 // Hilfe-Knopf (Nebenknopf) unten rechts im sicheren Feld (192 × 108 rem, mittig). Tippen löst „hilfe“ aus.
 // leuchte(): ein Sonnenring mit weichem Licht um den Knopf, einmal ~1 s (nie eine Füllung, nie in Schleife);
 // bei reduced motion steht der Sonnenring ruhig 1 s.

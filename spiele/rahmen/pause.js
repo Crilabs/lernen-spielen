@@ -1,4 +1,4 @@
-// <ls-pause spiel="einmaleins"> … Pausenbild, Sachmoment … </ls-pause>
+// <ls-pause spiel="vorlage"> … Pausenbild, Sachmoment … </ls-pause>
 // Vollflächige Ebene über dem Spiel auf Nacht mit ruhigen Sternen in Sonne, verborgen bis zeige().
 // Der Inhalt kommt per <slot> auf eine Papierkarte (ohne Inhalt keine Karte).
 // Unten Mitte „Alle Spiele“ und „Weiter“: gleich groß, gleich gestaltet (Papier, Symbol und Wort), N6.

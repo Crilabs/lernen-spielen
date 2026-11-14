@@ -85,12 +85,6 @@ export function sammle(wurzel) {
   for (const p of dateien(join(spiele, "einfuehrungen"), [".json"]))
     for (const t of felder(json(p), "sprich")) neu(t, relative(spiele, p));
 
-  // Diktatsätze der Einhorn-Steine (so wie das Spiel sie spricht)
-  for (const s of json(join(spiele, "saetze", "saetze.json")).saetze) {
-    neu(s.text, "saetze.json");
-    neu("Hör noch mal hin. " + s.text, "saetze.json");
-  }
-
   // Feste Sätze im Spielcode
   for (const p of dateien(spiele, [".html", ".js"], ["kern", "audio"])) {
     const { texte, offen: n } = literaleAusCode(readFileSync(p, "utf8"));
