@@ -12,11 +12,13 @@ meldeHaltung({ id: "stehen", ansicht: "beide", wort: "steht", winkel: LOCKER });
 meldeHaltung({
   id: "zeigen", ansicht: "dreiviertel", wort: "zeigt",
   winkel: { ...LOCKER, "arm-vorn-oben": -80, "arm-vorn-unten": -10, kopf: 4 },
+  haende: { vorn: "zeigen" },
 });
 
 meldeHaltung({
   id: "fragen", ansicht: "dreiviertel", wort: "fragt", gesicht: "neugierig",
   winkel: { ...LOCKER, "arm-vorn-oben": -50, "arm-vorn-unten": -15, kopf: 9 },
+  haende: { vorn: "zeigen" },
 });
 
 meldeHaltung({
@@ -37,6 +39,7 @@ meldeHaltung({
 meldeHaltung({
   id: "freuen-klein", ansicht: "dreiviertel", wort: "freut sich", gesicht: "freuen-klein",
   winkel: { ...LOCKER, "arm-vorn-oben": -12, "arm-vorn-unten": -95, kopf: 5 },
+  haende: { vorn: "faust" },
 });
 
 meldeHaltung({

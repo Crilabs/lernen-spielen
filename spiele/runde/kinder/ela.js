@@ -3,21 +3,32 @@
 
 import { meldeKind } from "../bestand.js";
 import { dreiviertel, profil, ellipse, flaeche, INK } from "./schnitt.js";
+import * as S from "./stil.js";
 
-const farben = { haut: "#B97E57", haar: "#4A2E2A", oben: "#D9B85C", unten: "#6F6A86", schuhe: "#F4EFE6" };
+const farben = {
+  haut: "#B97E57", haar: "#4A2E2A", oben: "#D9B85C", hemd: "#F7F2EA", unten: "#6F6A86",
+  schuhe: "#7C6FA8", sohle: "#FFFCF7",
+};
 const BAND = "#7FB3C9";
 
-/** Zopf aus drei Gliedern mit Band. @param {number} x @param {number} y */
+/** Zopf aus drei Gliedern mit Band (alter Stil, Profil). @param {number} x @param {number} y */
 const zopf = (x, y) =>
   [0, 1, 2].map((i) => ellipse(x, y + i * 15, 9 - i, 9, farben.haar)).join("")
   + `<path d="M${x - 7} ${y + 40} l7 -5 l7 5 l-7 5 Z" fill="${BAND}" stroke-width="3"/>`;
 
+/** Zopf mit Schattenstufe. @param {number} x @param {number} y */
+const zopfS = (x, y) =>
+  [0, 1, 2].map((i) => S.form(S.oval(x, y + i * 14, 9.5 - i, 9), farben.haar, [x - 4, y + i * 14 - 4], 0.8, 3.5)
+    + S.linie(`M${x - 5} ${y + i * 14 - 2} Q${x} ${y + i * 14 + 3} ${x + 5} ${y + i * 14 - 3}`, 2)).join("")
+  + S.form(S.pfad(`M${x - 8} ${y + 38} l8 -6 l8 6 l-8 6 Z`), BAND, [x - 3, y + 36], 0.8, 3);
+
 const kopfDreiviertel = {
-  haareHinten: ellipse(162, 66, 45, 42, farben.haar) + zopf(119, 98) + zopf(203, 94),
-  haareOben: flaeche(
-    "M120 82 C114 42 138 25 164 25 C192 25 210 42 206 76 C200 60 190 50 176 49 C170 56 158 58 146 54 C134 58 124 68 120 82 Z",
-    farben.haar,
-  ) + `<path d="M166 27 Q162 38 166 50" fill="none" stroke="${INK}" stroke-width="3"/>`,
+  haareHinten: S.form(S.oval(162, 66, 45, 42), farben.haar, [146, 44], 0.9) + zopfS(118, 100) + zopfS(204, 96),
+  haareOben: S.form(S.pfad(
+    "M120 84 C113 42 138 24 164 24 C193 24 211 42 206 78 C203 66 197 59 190 56 C186 63 178 65 171 58"
+    + " C165 65 154 65 149 56 C141 60 133 67 127 76 Z",
+  ), farben.haar, [140, 34], 0.9)
+    + S.linie("M166 27 Q161 38 166 50 M150 32 Q142 42 140 56 M184 32 Q192 42 194 54", 2.5),
   nachGesicht: `<g fill="none" stroke="${INK}">`
     + `<circle cx="157" cy="80" r="11" stroke-width="3.5"/><circle cx="183" cy="80" r="10" stroke-width="3.5"/>`
     + `<path d="M168 79 Q170 77 173 79" stroke-width="3"/><path d="M146 79 L126 76" stroke-width="3"/></g>`,
