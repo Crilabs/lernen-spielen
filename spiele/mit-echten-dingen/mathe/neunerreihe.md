@@ -1,7 +1,6 @@
 ---
 thema: neunerreihe
 fach: mathe
-entwurf: true
 bild: { figur: eintrittskarte, zustand: zwei }
 quellen:
   - Fachlehrplan Mathematik Jahrgangsstufe 1/2 (Einmaleins über Kernaufgaben ableiten, z. B. 9 · 8 = 10 · 8 − 1 · 8), LehrplanPLUS Bayern, ISB, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/mathematik, abgerufen 2026-11-14

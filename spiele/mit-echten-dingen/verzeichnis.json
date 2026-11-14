@@ -13,6 +13,19 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "neunerreihe": {
+   "fach": "mathe",
+   "name": "Neunerreihe",
+   "titel": "Neun ist eins weniger als zehn",
+   "formen": [
+    {
+     "situation": "unterwegs",
+     "name": "Eintritt für alle"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/neunerreihe.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",
