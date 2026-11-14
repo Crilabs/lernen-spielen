@@ -31,6 +31,18 @@
     }
    ],
    "entwurf": false
+  },
+  "zweierreihe": {
+   "fach": "mathe",
+   "name": "Zweierreihe",
+   "titel": "Paare sind immer zwei",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Schuhe in den Schrank"
+    }
+   ],
+   "entwurf": false
   }
  }
 }

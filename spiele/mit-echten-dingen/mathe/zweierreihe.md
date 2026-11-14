@@ -1,7 +1,6 @@
 ---
 thema: zweierreihe
 fach: mathe
-entwurf: true
 bild: { figur: schuhpaar, zustand: liegt }
 quellen:
   - Rechenrabe Trax 2, Begleitband für Lehrerinnen und Lehrer (Die 2er-Reihe), öbv, https://www.oebv.at/flippingbook/9783209097378/81/, abgerufen 2026-11-14
@@ -11,7 +10,7 @@ quellen:
 
 ## Am Tisch: Schuhe in den Schrank
 
-Ihr braucht: sieben Paar Schuhe, die bei euch herumstehen (Socken gehen auch)
+Ihr braucht: sieben Paar Schuhe, die bei euch herumstehen
 
 1. Ihr räumt die Schuhe auf. Stellt sie als Paare nebeneinander.
 2. Der Schuhschrank hat für jeden Schuh einen Platz. Wie viele Plätze braucht ihr? Legt die linken Schuhe in eine Reihe, die rechten darunter. Sagt: „7 plus 7 ist gleich 14.“
