@@ -8,13 +8,24 @@ Die frühere Web-Fassung mit PHP ist entfernt.
 
 ## Aufbau
 
-- `spiele/` – die Oberfläche der App: `index.html` (Startseite), `eltern.html`/`eltern.js` (Elternbereich),
-  `lernspiel.js` (gemeinsame Hilfen der Spiele), die Spiele als HTML-Dateien,
-  `spiele.json` (Kategorien und Spiele). Die ersten sechs Spiele sind am 2026-11-14 entfernt worden (Neubau nach
-  `docs/grundsaetze.md`, Code in der Git-Historie); `spiele.json` ist bis zum ersten neuen Spiel leer.
-  Als Material liegen noch `bilder/` (Wimmelbilder samt Pausenbildern), `figuren/` und `saetze/` (Diktatsätze).
+- `spiele/` – die Oberfläche der App, gebaut aus den Rahmen-Bausteinen:
+  - `index.html` (Startseite): oben bis zu drei Spiele, deren Thema gerade dran ist, darunter die Fächer mit Spielen,
+    unten „Mein Regal“; Zahnrad gedrückt halten (3 s) führt zum Elternbereich.
+  - `themen.html?fach=<id>` (Fach-Seite): der Weg eines Fachs (gekonnt, dran, höchstens drei in Sicht); ein Thema
+    antippen zeigt seine Spiele, „Geschichte ansehen“ und „Mit echten Dingen“.
+  - `regal.html` („Mein Regal“, was ich kann): je Fach ein Brett, jedes gekonnte Thema steht als sein Lernmaterial
+    darauf (Regeln in `rahmen/material.js`), ohne Zahl und ohne Platzhalter.
+  - `eltern.html`/`eltern.js` (Elternbereich hinter PIN): nur, was das Kind nicht darf – Lernstand mit Eingriffen,
+    Stufe der Geschichten, Gerät, Hinweise, Sicherheit.
+  - `lernsteuerung.js` (Lernplan, Lernstand, Daten der Ansichten), `lernspiel.js` (gemeinsame Hilfen der Spiele), die
+    Spiele als HTML-Dateien, `spiele.json` (Kategorien und Spiele). Die ersten sechs Spiele sind am 2026-11-14
+    entfernt worden (Neubau nach `docs/grundsaetze.md`, Code in der Git-Historie).
+  - Als Material liegen noch `bilder/` (Wimmelbilder samt Pausenbildern), `figuren/` und `saetze/` (Diktatsätze).
+  - Browser-Prüfung der vier Ansichten (leer, gekonnt ohne Spiele, mit Testspielen; PIN; Zahnrad):
+    `tests/browser/ansichten.spec.mjs` (Aufruf im Kopfkommentar, nicht Teil von `npm test`).
 - `spiele/rahmen/` – die gemeinsamen Bausteine jedes Spiels (Web Components `ls-*`: Kopfleiste, Knöpfe, Sprechblase,
-  Hilfe, Pause, Tastatur, Ziehen, Lernzeichen) und der Seiten-Grundstil `seite.css`. Wie sie aussehen und sich
+  Hilfe, Pause, Tastatur, Ziehen, Lernzeichen, die Karte „Mit echten Dingen“ `ls-anregung`) und der Seiten-Grundstil
+  `seite.css`. Wie sie aussehen und sich
   bedienen lassen, steht in `docs/bedienung.md`. `spiele/rahmen/vorschau.html` zeigt alle Bausteine (Entwicklerseite);
   die Browser-Prüfung dazu: `tests/browser/rahmen.spec.mjs` (Aufruf im Kopfkommentar, nicht Teil von `npm test`).
 - `spiele/vorlage.html` + `spiele/vorlage.js` – Spielvorlage, von der jedes neue Spiel als Kopie startet.
@@ -25,8 +36,8 @@ Die frühere Web-Fassung mit PHP ist entfernt.
 - `spiele/audio/` – vorab erzeugte Sprachausgabe (`index.json` + MP3 je Stimme). Erzeugt mit `npm run audio`
   aus `werkzeuge/audio/` (Azure Speech, Ablauf in `werkzeuge/audio/README.md`). Fehlt eine Datei, spricht die
   Systemstimme. Regeln für gesprochene Texte: `docs/stimme.md`.
-- `spiele/fortschritt/` – je Spiel optional ein Modul `<id>.js`, das den Balken auf der Startseite berechnet
-  (nur für Spiele mit `"fortschritt": true` in `spiele.json`).
+- `spiele/fortschritt/` – früher die Fortschrittsbalken der Startseite; keine Ansicht nutzt sie mehr (nur noch
+  `tests/fortschritt-kern.test.mjs`).
 - `spiele/symbole/` – SVG-Symbole (Kategorien, Spiele, Elternbereich).
 - `spiele/schrift/` – lokal eingebundene Schrift (keine Webzugriffe nötig).
 - `src-tauri/` – Rust-Hülle: Kiosk-Fenster, Lernstand lesen/schreiben, Logdatei, Updater, Installer-Konfiguration.

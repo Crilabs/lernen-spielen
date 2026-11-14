@@ -2,6 +2,14 @@
 
 ## Unveröffentlicht
 
+- Neue Ansichten, übersichtlich und ohne Zahlen beim Kind:
+  - **Startseite:** oben bis zu drei Spiele, deren Thema gerade dran ist; darunter die Fächer, für die es Spiele gibt; unten „Mein Regal“. Ohne Spiele bleibt eine ruhige Seite mit dem Regal.
+  - **Fach-Seite:** der Weg eines Fachs mit dem, was schon gekonnt ist, was dran ist (Sonnenring) und höchstens drei Themen in Sicht. Ein Thema antippen zeigt seine Spiele und, falls es eine gibt, „Geschichte ansehen“.
+  - **Mein Regal:** Was das Kind kann, steht als Lernmaterial auf einem Holzregal, ein Brett je Fach (Perlenstäbchen, Wortart-Zeichen, Buchstabenkarten). Neues leuchtet beim nächsten Besuch einmal ruhig auf; ein zurückgesetztes Thema verschwindet still. Auch Gekonntes aus entfernten Spielen bleibt stehen.
+  - **Mit echten Dingen:** Bei Themen und im Regal öffnet ein Knopf eine Karte mit einer Anregung für den Alltag, für den Erwachsenen, der mit dem Kind schaut. Ohne PIN, weil es zum gemeinsamen Machen gehört.
+- Elternbereich nur noch für Erwachsenes: Lernstand (beschreibend, mit Bezug zur Klasse, Eingriffe mit „Wirklich?“), Geschichten, Gerät, Hinweise und Sicherheit. Die Stimmenwahl entfällt (eine Stimme für alle). Ton an/aus, Regal und Anregungen brauchen keine PIN. Der Zugang bleibt: Zahnrad auf der Startseite drei Sekunden halten.
+- Geschichten-Stufe: Im Elternbereich lässt sich wählen, wie aufregend Geschichten sein dürfen (Ruhig, Sanft – Standard –, Abenteuer), mit einem Beispielsatz je Stufe. Die Spiele richten sich danach, sobald sie Geschichten erzählen.
+
 - Die ersten sechs Spiele (Zahlenzauber, Perlenbrücke, Kettenhüpfer, Wimmelbild, Zauberin, Einhorn-Steine) sind entfernt. Sie werden nach den Grundsätzen neu gebaut, je Thema ein passendes Spiel. Bis dahin ist die Startseite leer. Alte Lernstände werden nicht übernommen.
 - Natürliche Stimme vorbereitet: Die Spiele spielen vorab erzeugte Aufnahmen (Azure Speech) ab, sobald es sie gibt, sonst spricht wie bisher die Systemstimme. Im Elternbereich heißt die Systemstimme jetzt „Ersatzstimme“, dazu ein Hinweis, dass die Stimme computererzeugt ist. Erzähler ist Florian (Azure), 10 % langsamer; Figuren sprechen nicht selbst (`docs/stimme.md`). Neue Anhör-Seite `npm run audio:anhoeren`.
 
