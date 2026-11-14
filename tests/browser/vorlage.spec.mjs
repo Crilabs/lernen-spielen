@@ -274,6 +274,27 @@ async function lauf(typ, name, groesse, basis) {
     pruefe(L, "Vorschau-Parameter schreiben nichts", JSON.stringify(await speicher(s2)) === JSON.stringify(vorher));
     await s2.close();
 
+    // --- ?eltern mit Beschreibung: Text aus dem eigenen Eintrag in spiele.json, maskiert, über dem Satz zum Elternbereich ---
+    const mitText = await browser.newContext({ viewport: groesse });
+    await mitText.route("**/spiele/spiele.json", async (route) => {
+      const antwort = await route.fetch();
+      const json = await antwort.json();
+      json.spiele.push({ id: "vorlage", titel: "Spielvorlage", thema: "Zerlegen", kategorie: "mathe", datei: "vorlage/index.html",
+        beschreibung: "Das Kind legt Stäbe <b>zusammen</b>. Es sieht, wie sich sieben aus zwei Teilen ergibt." });
+      await route.fulfill({ response: antwort, json });
+    });
+    const sBeschr = await mitText.newPage();
+    sBeschr.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (?eltern Beschreibung): ${e.message}`));
+    await sBeschr.goto(`${basis}/spiele/vorlage/index.html?eltern`, { waitUntil: "load" });
+    await sBeschr.waitForSelector("section.eltern .beschreibung");
+    const beschr = await sBeschr.evaluate(() => {
+      const b = document.querySelector("section.eltern .beschreibung");
+      const eigenes = document.querySelector("section.eltern .eigenes");
+      return { text: b.textContent, html: b.querySelector("b") !== null, davor: !!(b.compareDocumentPosition(eigenes) & Node.DOCUMENT_POSITION_FOLLOWING) };
+    });
+    pruefe(L, "?eltern: Beschreibung aus spiele.json über dem Satz, Text maskiert", /^Das Kind legt Stäbe <b>zusammen<\/b>\./.test(beschr.text) && !beschr.html && beschr.davor, JSON.stringify(beschr));
+    await mitText.close();
+
     // --- Schreibweg eines eingetragenen Spiels: spiele.json im Browser um die Vorlage ergänzt -------
     const echt = await browser.newContext({ viewport: groesse });
     await echt.route("**/spiele/spiele.json", async (route) => {

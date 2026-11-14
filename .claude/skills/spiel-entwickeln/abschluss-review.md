@@ -33,7 +33,7 @@ diesem Vermerk.)
 | Nr. | Kriterium |
 |---|---|
 | R1 | **Ablage** nach `docs/spielentwicklung.md` „Ablage“: Spielordner, Entwurf, Tests, gemeinsame Objekte in `spiele/objekte/`; `tests/ablage.test.mjs` grün. |
-| R2 | **Ausbau vollständig** nach §5: alle Stufen des Entwurfs, Spielobjekte als animierte SVG (keine Platzhalter mehr), Regal-Bild in `spiele.json` mit Objekt in `spiele/objekte/`, Szenenbild mit `herkunft.json`, Einführung, Regal-Material, vollständiger `spiele.json`-Eintrag. |
+| R2 | **Ausbau vollständig** nach §5: alle Stufen des Entwurfs, Spielobjekte als animierte SVG (keine Platzhalter mehr), Regal-Bild in `spiele.json` mit Objekt in `spiele/objekte/`, Szenenbild mit `herkunft.json`, Einführung, Regal-Material, vollständiger `spiele.json`-Eintrag mit `beschreibung` (vorhanden, stimmt mit dem Spiel überein, neutral, für Eltern lesbar; `tests/spiele-beschreibung.test.mjs`). |
 | R3 | **Gebaut wie entworfen:** Spiel und Entwurf stimmen überein (Runde, Rückmeldesätze, Hilfe-Leiter, Figur); Abweichungen sind im Entwurf begründet. |
 | R4 | **Regeln der Plattform:** kein Plattform-Zugriff außerhalb `spiele/kern/` (`tests/plattform-regel.test.mjs`); Test-Schnittstelle nur im Testbetrieb, für das Kind unsichtbar. |
 | R5 | **Texte:** alle Sätze als feste Zeichenketten oder Daten (`texte.json`), keine zusammengesetzten Sätze mit Zahlen, Wörter aus `docs/grundsaetze.md` §3.2 nicht verwendet; Aufnahmen erzeugt (oder Vermerk). |

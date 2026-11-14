@@ -82,13 +82,14 @@ in `docs/grundsaetze.md` (K1/K2 = §10 Kosmik-Schicht), F, M, B, T in `docs/grun
 
 **2. Das Spiel, Didaktik** (Zeilen D-A1 … D-A8 wie in `pruefung-b-didaktik.md`: A1–A8 einschließlich A4b und A6b,
 diesmal am gebauten Spiel, Abweichung vom Entwurf ist ein Befund; D-Meldung, D-Gekonnt, D-Fehlversuche, D-Stufen
-für jede Lernstufe, D-Sätze):
+für jede Lernstufe, D-Beschreibung (`beschreibung` in `spiele.json`: vorhanden, am Spiel sachlich richtig, neutral,
+für Eltern lesbar, 2–3 Sätze), D-Sätze):
 
 <!-- wörtlich aus docs/spielentwicklung.md §4 B-Didaktik; tests/skill-spiel-entwickeln.test.mjs prüft, dass es übereinstimmt -->
 **B-Didaktik** (Code + Entwurf): A1–A8 am gebauten Prototyp nachgeprüft; dazu: die Lernsteuerung bekommt jede
 Aufgabe mit `ok`, `hilfe`, `ms` gemeldet; mit Hilfe Gelöstes zählt nicht als gekonnt. Erklärt das Spiel in der
 Test-Schnittstelle `fehlversuche: false` (kein Zug kann danebengehen), prüft B-Didaktik, dass das stimmt; der Prüfstand
-überspringt dann die Hilfe-Leiter des ratenden Kindes (n/a im Bericht).
+überspringt dann die Hilfe-Leiter des ratenden Kindes (n/a im Bericht). Im Ausbau dazu D-Beschreibung (Christian, 2026-11-14): `beschreibung` im Eintrag in `spiele.json` ist vorhanden, stimmt sachlich mit dem gebauten Spiel überein, ist neutral (keine Wörter aus `grundsaetze.md` §3.2) und für Eltern lesbar (2–3 Sätze, keine Klassen- oder Lehrplanzahlen).
 <!-- ende wörtlich -->
 
 **3. Das Spiel, Welt** (Zeilen W-Figur, W-Sachwelt, W-Eine-Welt, W-Objekte, W-Wirkung, W-Bewegung, W-Freude, W-Regal, W-Karte,
@@ -158,7 +159,7 @@ Ergebnis: GRÜN | ROT
 |---|---|---|---|
 … eine Zeile je Kriterium, in dieser Reihenfolge:
 A1, A2, A3, A4, A4b, A5, A6, A6b, A7, A8, A9, A10, A11, A12, Pflichtteile,
-D-A1, D-A2, D-A3, D-A4, D-A4b, D-A5, D-A6, D-A6b, D-A7, D-A8, D-Meldung, D-Gekonnt, D-Fehlversuche, D-Stufen, D-Sätze,
+D-A1, D-A2, D-A3, D-A4, D-A4b, D-A5, D-A6, D-A6b, D-A7, D-A8, D-Meldung, D-Gekonnt, D-Fehlversuche, D-Stufen, D-Beschreibung, D-Sätze,
 W-Figur, W-Sachwelt, W-Eine-Welt, W-Objekte, W-Wirkung, W-Bewegung, W-Freude, W-Regal, W-Karte, W-Ruhe,
 U-10.1 … U-10.10, U-Plätze, U-Farbe, U-Größen, U-Still, U-Reduziert,
 S-Weg, S-Prüfstand, S-Code

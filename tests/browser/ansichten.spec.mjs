@@ -35,6 +35,7 @@ import { fileURLToPath } from "node:url";
 
 const require = createRequire(import.meta.url);
 const { chromium, webkit } = require("playwright");
+const { pinHash } = await import("../../spiele/eltern.js");
 
 const WURZEL = resolve(fileURLToPath(import.meta.url), "../../..");
 // Server mit Byte-Bereichen: tests/browser/server.mjs (WebKit braucht Range für Audio).
@@ -50,7 +51,8 @@ const SYMBOL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fi
   stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="30" width="72" height="40" rx="6" fill="#F7EFE3"/>
   <circle cx="34" cy="50" r="8" fill="#E5484D"/><circle cx="56" cy="50" r="8" fill="#3FA34D"/></svg>`;
 const SPIELE = [
-  { id: "test-perlen", titel: "Perlenbrücke", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-perlen.html", welt: "muell-trennen", arten: [{ art: "zerlegung", zahlen: [2, 10], stufen: ["kopf"] }] },
+  { id: "test-perlen", titel: "Perlenbrücke", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-perlen.html", welt: "muell-trennen", arten: [{ art: "zerlegung", zahlen: [2, 10], stufen: ["kopf"] }],
+    beschreibung: "Das Kind legt Perlen zu einer Brücke und sieht, aus welchen zwei Teilen die Zahl besteht. So übt es das Zerlegen mit etwas, das es greifen kann." },
   { id: "test-rechnen", titel: "Zahlenzauber mit Kettenhüpfern", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-rechnen.html", welt: "gibt-es-nicht", arten: [{ art: "rechnen", max: 100, gleiche: false, stufen: ["kopf"] }] },
   { id: "test-lesen", titel: "Silbenschiff", kategorie: "lesen", symbol: "symbole/test-spiel.svg", datei: "test-lesen.html" },
 ];
@@ -320,6 +322,29 @@ async function lauf(typ, name, groesse, basis) {
         titel: document.getElementById("pin-titel").textContent, inhalt: document.getElementById("inhalt").textContent.trim().length }));
       pruefe(L, "eltern.html direkt mit PIN: PIN abfragen, Bereich verborgen und leer", el.pin && !el.bereich && el.titel === "Für Erwachsene" && el.inhalt === 0, JSON.stringify(el));
       await bild(eltern, `eltern-pin-${name}-${groesse.width}`);
+      await kontext.close();
+    }
+
+    // --- Beschreibung für Erwachsene: im Elternbereich (hinter der PIN) sichtbar, nie auf der Startseite --------
+    {
+      const kontext = await kontextFuer(browser, groesse, basis, { stand: GEKONNT, spiele: true, pinHash: await pinHash("1234") }, fehlerListe);
+      const start = await oeffne(kontext, `${basis}/spiele/index.html`);
+      const startText = await start.evaluate(() => document.body.innerText + [...document.querySelectorAll("[aria-label],[title]")].map((e) => e.getAttribute("aria-label") + e.getAttribute("title")).join(" "));
+      pruefe(L, "Startseite: Beschreibung für Erwachsene steht nicht auf den Karten", !/Perlen zu einer Brücke/.test(startText));
+      await start.close();
+      const eltern = await oeffne(kontext, `${basis}/spiele/eltern.html`);
+      for (const z of "1234") await eltern.evaluate((z) => [...document.querySelectorAll("#ziffern ls-knopf")].find((k) => k.getAttribute("wort") === z).click(), z);
+      await eltern.waitForFunction(() => !document.getElementById("bereich").hidden);
+      await eltern.evaluate(() => document.querySelector('[data-tab="lernstand"]').click());
+      await eltern.waitForSelector("details.spiel-beschreibung", { state: "attached", timeout: 5000 }).catch(() => {});
+      const bs = await eltern.evaluate(() => [...document.querySelectorAll("details.spiel-beschreibung")].map((d) => ({
+        titel: d.querySelector("summary").textContent, text: d.querySelector("p").textContent, offen: d.open })));
+      pruefe(L, "Elternbereich: das Spiel mit Beschreibung ist unter seinem Fach aufklappbar, die anderen haben keine", bs.length === 1 && bs[0].titel === "Perlenbrücke"
+        && /^Das Kind legt Perlen zu einer Brücke/.test(bs[0].text) && !bs[0].offen, JSON.stringify(bs));
+      await eltern.evaluate(() => document.querySelector("details.spiel-beschreibung > summary").click());
+      const sichtbar = await eltern.evaluate(() => { const r = document.querySelector("details.spiel-beschreibung > p").getBoundingClientRect(); return r.width > 0 && r.height > 0; });
+      pruefe(L, "Elternbereich: Beschreibung nach dem Aufklappen sichtbar", sichtbar);
+      await bild(eltern, `eltern-beschreibung-${name}-${groesse.width}`);
       await kontext.close();
     }
 

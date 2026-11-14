@@ -26,7 +26,7 @@ und `npm test` laufen lassen.
 **B-Didaktik** (Code + Entwurf): A1–A8 am gebauten Prototyp nachgeprüft; dazu: die Lernsteuerung bekommt jede
 Aufgabe mit `ok`, `hilfe`, `ms` gemeldet; mit Hilfe Gelöstes zählt nicht als gekonnt. Erklärt das Spiel in der
 Test-Schnittstelle `fehlversuche: false` (kein Zug kann danebengehen), prüft B-Didaktik, dass das stimmt; der Prüfstand
-überspringt dann die Hilfe-Leiter des ratenden Kindes (n/a im Bericht).
+überspringt dann die Hilfe-Leiter des ratenden Kindes (n/a im Bericht). Im Ausbau dazu D-Beschreibung (Christian, 2026-11-14): `beschreibung` im Eintrag in `spiele.json` ist vorhanden, stimmt sachlich mit dem gebauten Spiel überein, ist neutral (keine Wörter aus `grundsaetze.md` §3.2) und für Eltern lesbar (2–3 Sätze, keine Klassen- oder Lehrplanzahlen).
 <!-- ende wörtlich -->
 
 **Kriterien:**
@@ -40,6 +40,10 @@ Test-Schnittstelle `fehlversuche: false` (kein Zug kann danebengehen), prüft B-
 - **D-Stufen** (nur im Ausbau, sonst „n/a“): jede Lernstufe aus {{STUFEN}} ist so gebaut, wie der Entwurf sie
   beschreibt (Material, Vorstellung, Kopf), und spielbar: Öffne `{{SEITE}}?pruefen&stufe=<id>` je Stufe und lies die
   Berichte der Durchspiel-Läufe je Stufe (Ordner über `{{BILDER}}`).
+- **D-Beschreibung** (nur im Ausbau, im Prototyp „n/a“): `beschreibung` im Eintrag in `spiele/spiele.json` ist vorhanden
+  (2–3 Sätze, höchstens 400 Zeichen), beschreibt, was das Kind im gebauten Spiel tut, was es lernt und wie die Welt dazu
+  passt (am Spiel geprüft, nicht nur am Entwurf), ist neutral (keine Wörter aus `docs/grundsaetze.md` §3.2, kein Lob,
+  kein Druck), nennt „das Kind“ und keine Klassen- oder Lehrplanzahlen und ist für Eltern lesbar.
 - **D-Sätze:** jeder gesprochene Satz steht als feste Zeichenkette oder als Daten (Kopf der Vorlage, Schritt 3),
   keine Wörter aus `docs/grundsaetze.md` §3.2, Fachbegriffe nach §5.1.
 
@@ -55,7 +59,7 @@ Ergebnis: GRÜN | ROT
 
 | Nr. | grün/rot | Beleg (Datei:Zeile, Bilddatei, Befehl mit Ausgabe) | Befund, falls rot |
 |---|---|---|---|
-… eine Zeile je Kriterium: D-A1, D-A2, D-A3, D-A4, D-A4b, D-A5, D-A6, D-A6b, D-A7, D-A8, D-Meldung, D-Gekonnt, D-Fehlversuche, D-Stufen, D-Sätze
+… eine Zeile je Kriterium: D-A1, D-A2, D-A3, D-A4, D-A4b, D-A5, D-A6, D-A6b, D-A7, D-A8, D-Meldung, D-Gekonnt, D-Fehlversuche, D-Stufen, D-Beschreibung, D-Sätze
 
 Kritische Befunde:
 - <Befund> – <Beleg> – <was es lösen würde>   (oder „keine“)

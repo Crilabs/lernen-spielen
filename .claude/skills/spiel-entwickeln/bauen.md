@@ -93,7 +93,7 @@ Erst `frontend-design:frontend-design` laden (Skill), dann bauen. Farbwelt (`doc
   `?stufe=<id>` im Testbetrieb erreichbar.
 - **Umfang des Ausbaus** wie im Abschnitt Ausbau unten: Spielobjekte als animierte SVG, Regal-Bild, Kartenbild mit
   Silhouettentest, Szenenbild nur über das Werkzeug, Texte als Daten (`npm run audio` startest du nicht),
-  vollständiger Eintrag in `spiele.json`.
+  vollständiger Eintrag in `spiele.json` einschließlich `beschreibung` (siehe Ausbau unten).
 - **Einführung in der Welt des Spiels:** Erzählt die Einführung eines Themas (`spiele/einfuehrungen/*.json`) eine
   andere Welt, schreib eine eigene Einführung in der Sachwelt des Spiels (gleiches Format, `{{SPIELORDNER}}/einfuehrung.json`)
   und trag sie in der SPIELWELT ein: `const EINFUEHRUNG = { vorlage: "<fach>/<spiel>/einfuehrung.json" }` (Pfad
@@ -161,6 +161,14 @@ Lernstufen, ruhig und sanft; abenteuer mitgeplant):
 - **Texte als Daten** in `{{SPIELORDNER}}/texte.json` und als feste Zeichenketten (Kopf der Vorlage, Schritt 3).
   `npm run audio` startest du **nicht**; das tut der Skill danach (Kosten). Nichts anhören, nichts als angehört
   markieren. Gib die Liste der neuen Texte wörtlich zurück.
+- **Beschreibung für Erwachsene:** Feld `beschreibung` im Eintrag in `spiele.json`, 2–3 Sätze (höchstens 400 Zeichen) in
+  einfachem Deutsch für Eltern, abgeleitet aus dem Entwurf (Runde in fünf Sätzen, Lernhandlung, Sachgrund) und am
+  gebauten Spiel nachgeprüft: was das Kind im Spiel tut, was es dabei lernt, wie die Welt dazu passt. Neutral (keine
+  Wörter aus `docs/grundsaetze.md` §3.2, kein Lob, kein Druck), „das Kind“ / „Ihr Kind“, keine Klassen- oder
+  Lehrplanzahlen. Beispiel: „Timo packt Vorräte in den Korb: Schuhpaare, Brötchentüten, Eierkartons. Das Kind rechnet
+  aus, wie viele Dinge es zusammen sind, und sieht die Malaufgabe als Perlenkette. So übt es das Einmaleins mit echten
+  Packungsgrößen.“ Sie erscheint nur in `?eltern` und im Elternbereich, nie für das Kind (nicht auf Karten, nicht im
+  Spiel); `tests/spiele-beschreibung.test.mjs` prüft Länge und Sätze.
 - Einführung (`spiele/einfuehrungen/`, Lernplan `einfuehrung`), vollständiger Eintrag in `spiele.json`. Erzählt die
   Einführung des Themas eine andere Welt: eigene Einführung in der Welt des Spiels über `EINFUEHRUNG` in der SPIELWELT, nicht abschalten (A4b, L5).
 - Checklisten `docs/bedienung.md` §10 und `docs/grundsaetze.md` §12 durchgehen; `npm test` und Durchspielen grün,

@@ -13,7 +13,7 @@
 //     Das Spiel liegt dann zwei Ebenen unter spiele/: in index.html und spiel.js jedes „../“ zu „../../“ machen
 //     (seite.css, Imports, ../lernplan.json, ../spiele.json, ../eltern.html, ../index.html). In index.html den
 //     <title> auf den Spielnamen setzen und an <ls-leiste> spiel="<id>", fach und titel setzen.
-//  2. Eintrag in spiele/spiele.json (id, titel, thema, kategorie, symbol, datei, text; `datei` und `symbol`
+//  2. Eintrag in spiele/spiele.json (id, titel, thema, kategorie, symbol, datei, text, beschreibung für Erwachsene: 2–3 Sätze, erscheint nur in ?eltern und im Elternbereich; `datei` und `symbol`
 //     relativ zu spiele/, z. B. "mathe/m14-zwei-tonnen/index.html" und ".../symbol.svg") mit `arten` wie ARTEN
 //     unten (Aufgabenarten, Zahlenraum, Stufen; Schema in spiele/aufgabenarten.js › darstellbar). Erst mit dem
 //     Eintrag erscheint das Spiel auf der Startseite und schreibt den Lernstand. Die Vorlage selbst steht
@@ -459,10 +459,13 @@ async function zeigePause({ hinweis = null, zeit = { schluss: false, satz: null 
 }
 
 // --- Elternansicht (?eltern): beschreibend, kein Vergleich -----------------------------------------
-function elternansicht() {
+async function elternansicht() {
   const e = document.createElement("section");
   e.className = "eltern auswahl";
-  e.innerHTML = `<h1>${esc(leiste.getAttribute("titel"))}</h1><div class="eigenes"></div>
+  // Die Beschreibung für Erwachsene steht im eigenen Eintrag in spiele.json (Feld `beschreibung`); nur hier, nie für das Kind.
+  const eintrag = (await ladeCtx().catch(() => null))?.spiele.spiele.find((/** @type {any} */ s) => s.id === SPIEL_ID);
+  const beschreibung = typeof eintrag?.beschreibung === "string" ? eintrag.beschreibung.trim() : "";
+  e.innerHTML = `<h1>${esc(leiste.getAttribute("titel"))}</h1>${beschreibung ? `<p class="beschreibung">${esc(beschreibung)}</p>` : ""}<div class="eigenes"></div>
     <p><a href="../eltern.html">Themen im Elternbereich</a> · <a href="${esc(location.pathname.split("/").pop())}">Zum Spiel</a></p>`;
   fuelleEltern(/** @type {HTMLElement} */ (e.querySelector(".eigenes"))); // Inhalt aus der SPIELWELT
   document.body.append(e);

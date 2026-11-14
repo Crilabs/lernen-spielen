@@ -157,6 +157,8 @@ Ausgenommen sind Entscheidungen von Christian im Eintrag (mit Datum): Sie sind g
 Der Entwurf ist eine **Pflichtliste**: die elf Teile knapp in Stichpunkten (höchstens etwa 80 Zeilen), gesprochene
 Sätze wörtlich. Am Ende steht **„Bausteine“**: welche Bedienteile, Lernzeichen und Spielobjekte das Spiel braucht,
 je mit „vorhanden“ oder „neu“ nach der Tabelle in „Zwei Wege“. Danach entscheidet die Steuerung den Weg.
+Die **Beschreibung für Erwachsene** (`beschreibung` in `spiele.json`) gehört nicht in den Entwurf: Der Bau-Agent leitet sie
+später aus den Teilen 2 (Runde in fünf Sätzen), 3 (Lernhandlung) und 4 (Sachgrund) ab (siehe §5 Ausbau).
 
 Pflichtteile:
 1. **Zweck in der Spielwelt:** Wozu tut das Kind das? Was bewirkt die richtige Antwort? (ein Satz)
@@ -297,7 +299,7 @@ Vier unabhängige Prüfer (frische Agenten, die nicht gebaut haben). Jeder liefe
 **B-Didaktik** (Code + Entwurf): A1–A8 am gebauten Prototyp nachgeprüft; dazu: die Lernsteuerung bekommt jede
 Aufgabe mit `ok`, `hilfe`, `ms` gemeldet; mit Hilfe Gelöstes zählt nicht als gekonnt. Erklärt das Spiel in der
 Test-Schnittstelle `fehlversuche: false` (kein Zug kann danebengehen), prüft B-Didaktik, dass das stimmt; der Prüfstand
-überspringt dann die Hilfe-Leiter des ratenden Kindes (n/a im Bericht).
+überspringt dann die Hilfe-Leiter des ratenden Kindes (n/a im Bericht). Im Ausbau dazu D-Beschreibung (Christian, 2026-11-14): `beschreibung` im Eintrag in `spiele.json` ist vorhanden, stimmt sachlich mit dem gebauten Spiel überein, ist neutral (keine Wörter aus `grundsaetze.md` §3.2) und für Eltern lesbar (2–3 Sätze, keine Klassen- oder Lehrplanzahlen).
 
 **B-Welt** (Screenshots + Entwurf): Figur sichtbar und tätig; Sachwelt im Bild erkennbar und passend zur Aufgabe;
 eine Welt, keine zweite Metapher (A4b); Spielobjekte im Stil der Runde und sachlich richtig, als Wirkung animiert,
@@ -331,7 +333,7 @@ Erst nach grünem Prüfstand: alle Stufen, **Spielobjekte als animierte SVG im S
 schaut sie erneut an, Screenshots je Bewegungszustand), Regal-Bild für die Themen, **je Stufe und Aufgabenart passende Folgen mit Varianten (W-Freude)**, Kartenbild (`karte`, Figur in
 `spiele/objekte/`), Szenenbild (Werkzeug `werkzeuge/bilder/`, Herkunft A4), Texte als Daten,
 `npm run audio` (Erzeugen; Anhören ist Sache von Christian, Liste der neuen Texte im Bericht), Einführung, Regal-Material
-(`material.js`), Eintrag in `spiele.json`, Browser-Prüfung des Spiels, Durchspielen erneut grün. Danach
+(`material.js`), Eintrag in `spiele.json` mit **`beschreibung`** (Christian, 2026-11-14: 2–3 Sätze für Eltern, abgeleitet aus Runde in fünf Sätzen, Lernhandlung und Sachgrund des Entwurfs: was das Kind tut, was es lernt, wie die Welt dazu passt; neutral, „das Kind“, keine Klassenzahlen; sie erscheint nur in `?eltern` und im Elternbereich, nie für das Kind), Browser-Prüfung des Spiels, Durchspielen erneut grün. Danach
 Abschluss-Review des Branches (wie bei Rahmen und Ansichten) und Merge nach `main`.
 
 ## 6. Kosten je Spiel (Christian)

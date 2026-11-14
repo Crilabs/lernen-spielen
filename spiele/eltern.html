@@ -99,6 +99,16 @@ ls-knopf.aus { opacity: 0.45; pointer-events: none; }
 .dran-zeile .oefter { margin-top: 0.4rem; }
 .flaeche > .spiele-links { max-width: none; border-top: var(--ls-kontur) solid var(--ls-linie); padding-top: 2rem; }
 
+.spiel-beschreibungen { display: flex; flex-direction: column; gap: 0.4rem; }
+.spiel-beschreibung > summary { min-height: 6rem; display: flex; align-items: center; gap: 1.2rem; font-weight: 700; }
+.spiel-beschreibung > summary::before {
+  content: ""; flex: none; width: 1.4rem; height: 1.4rem;
+  border-right: 0.35rem solid var(--ls-tinte); border-bottom: 0.35rem solid var(--ls-tinte);
+  transform: rotate(-45deg); margin: 0 0.6rem 0 0.2rem;
+}
+.spiel-beschreibung[open] > summary::before { transform: rotate(45deg); }
+.spiel-beschreibung > p { margin: 0 0 1.6rem 3.6rem; color: var(--ls-tinte-weich); max-width: 70ch; }
+
 /* Zum Aufklappen: eine zusammengeklappte Liste je Fach, jede Zeile klappt die Eingriffe auf. */
 details > summary { list-style: none; cursor: pointer; }
 details > summary::-webkit-details-marker { display: none; }
@@ -535,6 +545,18 @@ async function lernstand(spalte, offen) {
         const a = el("a", s.titel || s.id); a.href = (s.datei || s.id + ".html") + "?eltern"; p.appendChild(a);
       });
       block.appendChild(p);
+      // Beschreibung für Erwachsene (Feld `beschreibung` in spiele.json): ruhig, je Spiel zum Aufklappen.
+      const mitText = fachSpiele.filter((s) => typeof s.beschreibung === "string" && s.beschreibung.trim());
+      if (mitText.length) {
+        const liste = el("div", null, "spiel-beschreibungen");
+        for (const s of mitText) {
+          const d = el("details", null, "spiel-beschreibung");
+          d.appendChild(el("summary", s.titel || s.id));
+          d.appendChild(el("p", s.beschreibung.trim(), "klein"));
+          liste.appendChild(d);
+        }
+        block.appendChild(liste);
+      }
     }
     spalte.appendChild(block);
   }
