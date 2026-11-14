@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-const { materialFuer, WORTART, BUCHSTABEN_BEREICHE, graphemVon } = await import("../spiele/rahmen/material.js");
+const { materialFuer, WORTART, REIHE, BUCHSTABEN_BEREICHE, graphemVon } = await import("../spiele/rahmen/material.js");
 const t = (id, extra = {}) => ({ id, name: id, strang: "mathe", art: null, zahl: null, ...extra });
 
 test("Zerlegung mit Zahl 1 bis 10 → Perlenstab dieser Zahl", () => {
@@ -124,4 +124,20 @@ test("bausteinHtml: Perlenstab, Wortart, Karte (escaped)", () => {
   // Sprechen hat seit 2026-11-14 ein eigenes Symbol (zwei Sprechblasen)
   assert.match(bausteinHtml({ baustein: "karte", wert: "", fach: "sprechen" }), /^<span class="karte symbol" aria-hidden="true"><i style="--bild:url\('[^']*\/symbole\/sprechen\.svg'\)"><\/i><\/span>$/);
   assert.equal(bausteinHtml({ baustein: "karte", wert: "", fach: "unbekannt" }), '<span class="karte symbol" aria-hidden="true"></span>');
+});
+
+test("Einmaleins-Reihen (M37): Perlenkette von n als Kurzkette vor dem Regal-Bild des Spiels; Kern geht zum Regal-Bild", () => {
+  const regal = { objekt: "einkaufskorb", wert: null };
+  assert.deepEqual(materialFuer(t("siebenerreihe", { art: "mal", regal })), { baustein: "perlenkette", wert: 7 });
+  assert.deepEqual(materialFuer(t("zehnerreihe", { art: "mal", zahl: 10, regal })), { baustein: "perlenkette", wert: 10 });
+  assert.deepEqual(materialFuer(t("kernaufgaben-einmaleins", { art: "mal", zahl: 10, regal })), { baustein: "objekt", art: "einkaufskorb", wert: "" });
+  assert.match(bausteinHtml({ baustein: "perlenkette", wert: 7 }), /^<ls-perlenkette reihe="7" kurz="10"[^>]*aria-hidden="true"><\/ls-perlenkette>$/);
+});
+
+test("jede Id der Reihen-Liste gibt es im echten Lernplan, mit Art mal und derselben Reihe", () => {
+  const plan = JSON.parse(readFileSync(new URL("../spiele/lernplan.json", import.meta.url), "utf8"));
+  for (const [id, n] of Object.entries(REIHE)) {
+    const a = plan.themen.find((x) => x.id === id)?.aufgaben;
+    assert.deepEqual({ art: a?.art, reihe: a?.reihe }, { art: "mal", reihe: n }, id);
+  }
 });

@@ -15,6 +15,9 @@
 //         wechselt nur sanft die Haltung.
 //     { "perlen": ["{n}", "{n-1}"], "x": 60 }   Stäbe in Montessori-Farben, nebeneinander
 //     { "zahl": "{n}", "x": 80 }                große Ziffer
+//     { "objekt": "einkaufskorb", "zustand": "leer", "x": 80, "hoehe": 16 }
+//         ein Ding der Sachwelt aus spiele/objekte/ (<ls-objekt still>, lädt seine Art selbst nach), damit eine
+//         Einführung in der Welt des Spiels erzählen kann (A4b); hoehe in rem (Vorgabe 14), zustand leer = der erste.
 //
 // PLATZHALTER  {schluessel} aus den Werten des Lernplans (n, m, grenze, op …) und
 //   {schluessel+k} / {schluessel-k} (k ganze Zahl). JSON kennt keine Zahl mit Platzhalter, daher
@@ -95,6 +98,8 @@ const CSS = `
 .einf .perlen{display:flex;gap:3rem;align-items:center}
 .einf .perlen ls-perlenstab{height:var(--einf-stab,9rem)}
 .einf .zahl{font:700 18rem/1 "Andika",sans-serif}
+.einf .el.objekt{top:auto;bottom:4rem;transform:translateX(-50%)}
+.einf .el.objekt ls-objekt{display:block;height:var(--einf-objekt,14rem)}
 @media (prefers-reduced-motion:reduce){.einf *{animation:none!important;transition:none!important}}
 `;
 
@@ -140,6 +145,14 @@ function baueBild(buehne, bild, R, vorher) {
       }
     } else if (b.zahl !== undefined) {
       el.classList.add("zahl"); el.textContent = String(b.zahl);
+    } else if (typeof b.objekt === "string" && /^[a-z][a-z0-9-]*$/.test(b.objekt)) {
+      el.classList.add("objekt");
+      if (typeof b.hoehe === "number" && b.hoehe > 0 && b.hoehe <= 30) el.style.setProperty("--einf-objekt", b.hoehe + "rem");
+      const o = document.createElement("ls-objekt");
+      o.setAttribute("art", b.objekt);
+      if (typeof b.zustand === "string" && b.zustand) o.setAttribute("zustand", b.zustand);
+      o.setAttribute("still", "");
+      el.appendChild(o);
     } else continue;
     buehne.appendChild(el);
     } catch (e) { /* kaputtes Bildelement: weglassen */ }
@@ -166,6 +179,8 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
     const st = document.createElement("style"); st.id = "einf-css"; st.textContent = CSS; document.head.appendChild(st);
   }
   try { await import("./rahmen/perlenstab.js"); } catch (e) { /* ohne Baustein bleiben die Perlen weg */ }
+  if (szenen.some(s => s.bild.some(b => b && typeof b.objekt === "string")))
+    try { await import("./objekte/objekt.js"); } catch (e) { /* ohne Baustein bleiben die Dinge weg */ }
   let R = null;
   try { R = await import("./runde/runde.js"); } catch (e) { /* ohne Runde bleiben die Kinder weg */ }
   const wurzel = document.createElement("div"); wurzel.className = "einf";

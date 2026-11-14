@@ -11316,6 +11316,7 @@
         "zwillinge"
       ],
       "aufgaben": { "art": "mal", "reihe": 2 },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 2, "zwei": 4, "drei": 6, "packung": "schuhpaar", "zustand": "" } },
       "stufen": [
         "material",
         "vorstellung",
@@ -11346,6 +11347,7 @@
         "zehnerzahlen-bis-100"
       ],
       "aufgaben": { "art": "mal", "reihe": 10 },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 10, "zwei": 20, "drei": 30, "packung": "muenze", "zustand": "zehn-cent" } },
       "stufen": [
         "material",
         "vorstellung",
@@ -11376,6 +11378,7 @@
         "verdoppeln-halbieren-bis-100"
       ],
       "aufgaben": { "art": "mal", "reihe": 5 },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 5, "zwei": 10, "drei": 15, "packung": "broetchen", "zustand": "" } },
       "stufen": [
         "material",
         "vorstellung",
@@ -11409,6 +11412,7 @@
         "fuenferreihe"
       ],
       "aufgaben": { "art": "mal", "kern": true },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 6, "zwei": 12, "drei": 18, "packung": "eierkarton", "zustand": "" } },
       "stufen": [
         "material",
         "vorstellung",
@@ -11530,6 +11534,7 @@
         "zweierreihe"
       ],
       "aufgaben": { "art": "mal", "reihe": 4 },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 4, "zwei": 8, "drei": 12, "packung": "gedeck", "zustand": "" } },
       "stufen": [
         "material",
         "vorstellung",
@@ -11560,6 +11565,7 @@
         "nachbaraufgabe-mal"
       ],
       "aufgaben": { "art": "mal", "reihe": 8 },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 8, "zwei": 16, "drei": 24, "packung": "stiftebox", "zustand": "" } },
       "stufen": [
         "material",
         "vorstellung",
@@ -11590,6 +11596,7 @@
         "verdoppeln-beim-mal"
       ],
       "aufgaben": { "art": "mal", "reihe": 3 },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 3, "zwei": 6, "drei": 9, "packung": "ballroehre", "zustand": "" } },
       "stufen": [
         "material",
         "vorstellung",
@@ -11619,6 +11626,7 @@
         "dreierreihe"
       ],
       "aufgaben": { "art": "mal", "reihe": 6 },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 6, "zwei": 12, "drei": 18, "packung": "eierkarton", "zustand": "" } },
       "stufen": [
         "material",
         "vorstellung",
@@ -11648,6 +11656,7 @@
         "nachbaraufgabe-mal"
       ],
       "aufgaben": { "art": "mal", "reihe": 9 },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 9, "zwei": 18, "drei": 27, "packung": "muffinkarton", "zustand": "" } },
       "stufen": [
         "material",
         "vorstellung",
@@ -11678,6 +11687,7 @@
         "nachbaraufgabe-mal"
       ],
       "aufgaben": { "art": "mal", "reihe": 7 },
+      "einfuehrung": { "vorlage": "mathe/m37-kettenhuepfer/einfuehrung.json", "werte": { "n": 7, "zwei": 14, "drei": 21, "packung": "wochenschachtel", "zustand": "" } },
       "stufen": [
         "material",
         "vorstellung",
