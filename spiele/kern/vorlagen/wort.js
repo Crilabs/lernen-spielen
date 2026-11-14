@@ -85,7 +85,8 @@ export function setzeWort(text, w) {
   const luft = [];
   let x = 0;
   let rand = 0;
-  const woerter = text.split(" ").filter((t) => t.length > 0);
+  // NFC: ein zerlegtes ü (u + Trema, kommt aus macOS- und iPad-Eingaben) ist ein Zeichen; jeder Leerraum trennt.
+  const woerter = text.normalize("NFC").split(/\s+/).filter((t) => t.length > 0);
   for (const [nr, teil] of woerter.entries()) {
     if (nr > 0) x = rand + w.raster.wortabstand;
     const formen = [...teil].map((c) => w.form(c));

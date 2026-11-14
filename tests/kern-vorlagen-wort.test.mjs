@@ -76,6 +76,13 @@ test("nach Ausgang unten bleibt der Anstrich: in beginnt n an der Grundlinie", (
   assert.ok(enthaelt(zug, { x: 70, y: 200 }));
 });
 
+test("zerlegtes ü (NFD) und anderer Leerraum werden wie normaler Text behandelt", () => {
+  const nfc = V.wort("test", "nü in");
+  assert.deepEqual(V.wort("test", "nü in"), nfc);
+  assert.deepEqual(V.wort("test", "nü in"), nfc);
+  assert.deepEqual(V.wort("test", " nü\n in "), nfc);
+});
+
 test("fehlende Form im Wort wirft", () => {
   assert.throws(() => V.wort("test", "On"), /Fehlende Form: test\/O/);
 });
