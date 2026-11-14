@@ -25,12 +25,12 @@ const HINTEN = fein(/** @type {[number, number][]} */ ([
   [163, 25], [180, 26], [195, 32], [205, 44], [209, 60], [210, 80], [208, 98], [198, 102], [162, 94],
   [126, 102], [115, 98], [113, 80], [115, 60], [120, 44], [131, 32], [146, 26],
 ]));
-// Die langen Vorhänge hängen hinter Rumpf und Armen (Ebene „zoepfe“ im koerper), damit die Arme davor liegen.
-const VORHANG_L = fein(/** @type {[number, number][]} */ ([
-  [114, 86], [123, 88], [130, 96], [131, 114], [131, 132], [128, 146], [121, 150], [115, 140], [113, 120], [114, 100],
-]));
-const VORHANG_R = fein(/** @type {[number, number][]} */ ([
-  [192, 88], [208, 86], [210, 102], [209, 120], [210, 138], [204, 150], [196, 146], [193, 132], [193, 114], [191, 98],
+// Die langen Haare fallen über den ganzen Hinterkopf als eine Fläche bis zum Rücken – in der Ebene hinter Rumpf
+// und Armen (Kopfteil „zoepfe“ im koerper). Hals und Shirt liegen davor: neben dem Hals sieht man Haar, unter dem
+// Kinn nichts. Unten feine Wellen.
+const RUECKEN = fein(/** @type {[number, number][]} */ ([
+  [114, 84], [162, 82], [208, 84], [210, 102], [209, 120], [210, 138], [204, 150], [196, 146], [186, 150], [174, 146],
+  [162, 150], [150, 146], [138, 150], [128, 146], [121, 150], [115, 140], [113, 120], [114, 100],
 ]));
 // Schopf vorn: feine Locken am Haaransatz; links endet er über dem Ohr (Hörgerät bleibt frei).
 const VORN = /** @type {[number, number][]} */ ([
@@ -75,8 +75,9 @@ const kopfDreiviertel = {
     kontur: "",
   },
   zoepfe: S.zusammen(
-    S.flach(S.pfad(S.buckel(VORHANG_L, 0.42)), HAAR_HINTEN),
-    S.flach(S.pfad(S.buckel(VORHANG_R, 0.42)), HAAR_HINTEN),
+    S.flach(S.pfad(S.buckel(RUECKEN, 0.42)), HAAR_HINTEN),
+    // Schatten des Kopfes auf den Haaren im Nacken
+    S.falte("M122 92 C134 110 190 110 202 92 C196 124 128 124 122 92 Z", HAAR_HINTEN, 0.3),
     S.falte("M205 90 C209 104 209 124 209 138 L203 148 L198 144 C203 128 203 108 201 92 Z", HAAR_HINTEN, 0.34),
     keile([
       [[121, 150], [118, 120], 3, 3], [[128, 146], [126, 118], 2.8, -3], [[115, 140], [115, 114], 2.4, 3],
