@@ -19,6 +19,6 @@ Ihr braucht: 12 gleiche Dinge, etwa Kekse oder Nudeln, und ein paar Teller.
 3. Der andere teilt auf 4 Teller aus. Bleibt etwas in der Mitte?
 4. Es klingelt wieder, jetzt sind es 5. Tauscht: Wer ausgeteilt hat, begründet jetzt.
 
-**Darauf kommt es an:** 4 ist ein Teiler von 12, weil 3 mal 4 ist gleich 12. 5 ist kein Teiler von 12: 2 mal 5 ist gleich 10, 3 mal 5 ist gleich 15. Die 12 liegt dazwischen, deshalb bleiben 2 übrig.
+**Darauf kommt es an:** 4 ist ein Teiler von 12, weil 3 mal 4 ist gleich 12. 5 ist kein Teiler von 12: 2 mal 5 ist gleich 10, 3 mal 5 ist gleich 15. 12 liegt dazwischen, 2 bleiben übrig.
 
-**Leichter:** nur 2, 3 oder 4 Gäste. **Schwerer:** 24 Dinge, bis zu 8 Gäste; auch den Rest vorher sagen.
+**Leichter:** 10 Dinge, erst 2 Gäste, dann 3. **Schwerer:** 24 Dinge, bis zu 8 Gäste; auch den Rest vorher sagen.
