@@ -13,6 +13,23 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "namen-gross": {
+   "fach": "schreiben",
+   "name": "Namen groß",
+   "titel": "Namen schreiben: vorn groß, dann klein",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Tischkärtchen für alle"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zettel auf die Wäsche"
+    }
+   ],
+   "entwurf": true,
+   "datei": "schreiben/namen-gross.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
