@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 300" data-zeichen="l" data-satz="sas">
+  <!-- Anstrich, Oberschleife links herum, Grundstrich (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 0 200 C 15 200 34 90 36 45 C 38 15 32 2 25 4 C 16 7 15 40 18 110 L 20 180 C 20 195 28 200 40 200 L 60 200" fill="none"/>
+</svg>

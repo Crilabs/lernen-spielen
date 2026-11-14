@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 300" data-zeichen="v" data-satz="sas">
+  <!-- Ansatz, Grundstrich, Girlande, Knoten, waagerechter Ausgang (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 2 108 C 6 102 10 100 14 100 L 18 170 C 20 192 30 200 40 200 C 56 200 62 175 62 140 C 62 118 60 104 56 106 C 52 108 54 112 60 110 C 64 106 70 100 75 100" fill="none"/>
+</svg>

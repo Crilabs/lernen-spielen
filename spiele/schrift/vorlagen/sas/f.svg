@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 300" data-zeichen="f" data-satz="sas">
+  <!-- Oberschleife, gerader Stamm bis zur Unterlinie, zurück bis zur Grundlinie, kleiner Knoten (E-S4) (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 0 200 C 15 200 34 90 36 45 C 38 15 32 2 25 4 C 16 7 15 40 18 110 L 20 290 L 20 205 C 21 199 27 196 31 199 C 34 202 28 206 24 203 C 28 200 34 200 70 200" fill="none"/>
+</svg>

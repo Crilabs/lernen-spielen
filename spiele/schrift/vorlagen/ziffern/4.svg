@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 300" data-zeichen="4" data-satz="ziffern">
+  <!-- Offene 4: erst die Schräge von oben nach links unten und ohne Absetzen waagerecht nach rechts,
+       dann abgesetzt die Senkrechte von oben durch den Querstrich (QUELLEN.md §1, E-Z2) -->
+  <path data-strich="1" d="M 52 0 L 10 135 L 102 135" fill="none"/>
+  <path data-strich="2" d="M 78 30 L 78 200" fill="none"/>
+</svg>

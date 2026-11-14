@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 300" data-zeichen="5" data-satz="ziffern">
+  <!-- Kurzer Abstrich links, ohne Absetzen Bauch im Uhrzeigersinn; das Dach kommt zuletzt (QUELLEN.md §1) -->
+  <path data-strich="1" d="M 25 0 L 22 88 C 35 78 48 74 60 74 C 82 74 97 95 97 135 C 97 175 78 200 52 200 C 35 200 22 192 15 180" fill="none"/>
+  <path data-strich="2" d="M 25 0 L 92 0" fill="none"/>
+</svg>

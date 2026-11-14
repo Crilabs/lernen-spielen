@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 300" data-zeichen="m" data-satz="sas">
+  <!-- Ansatz an der Mittellinie, drei Grundstriche, zwei Arkaden mit Deckstrich (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 2 108 C 6 102 10 100 14 100 L 14 200 L 14 135 C 20 110 30 100 40 100 C 52 100 58 112 58 130 L 58 200 L 58 135 C 64 110 74 100 84 100 C 98 100 104 112 104 130 L 102 180 C 101 194 108 200 118 200 L 120 200" fill="none"/>
+</svg>
