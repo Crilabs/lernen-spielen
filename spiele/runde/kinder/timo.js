@@ -3,7 +3,7 @@
 // Stil wie Ela (figuren.md §4): Silhouette, Schatten in Stufen, Farben aus den Welt-Paletten.
 
 import { meldeKind } from "../bestand.js";
-import { dreiviertelStuhl, profilStuhl, flaeche } from "./schnitt.js";
+import { dreiviertelStuhl, profilStuhl } from "./schnitt.js";
 import * as S from "./stil.js";
 
 const farben = {
@@ -61,10 +61,23 @@ const kopfDreiviertel = {
   ),
 };
 
-// Profil vorerst schlicht (folgt mit dem Profil aller Kinder).
+// Profil: längere glatte Haare, Pony nach vorn bis über die Brauen, Wirbel am Scheitel, Nacken bis zum Kragen.
+// Profil: glatte, längere Haare – gerade geschnitten bis zum Kragen, der Pony hängt über die Stirn, Wirbel am Scheitel.
+const SCHOPF_P = /** @type {[number, number][]} */ ([
+  [146, 116], [140, 112], [134, 116], [128, 111], [122, 114], [118, 104], [115, 84], [116, 64], [122, 48], [133, 35],
+  [146, 28], [147, 16], [155, 24], [161, 14], [166, 24], [182, 26], [196, 34], [204, 46], [205, 60],
+  [204, 70], [199, 60], [197, 70], [191, 58], [188, 68], [181, 56], [172, 58],
+  [163, 62], [157, 70], [153, 80], [151, 94], [149, 108],
+]);
+const PONY_P = SCHOPF_P.slice(18, 26).map(([x, y]) => /** @type {[number, number]} */ ([x, y + 5]));
 const kopfProfil = {
-  haareOben: flaeche("M206 62 C198 52 186 47 174 49 C164 50 154 54 148 60 C144 70 144 84 142 96 C130 98 122 88 122 74"
-    + " C122 42 142 24 166 24 C190 24 208 40 206 62 Z", farben.haar),
+  ponyschatten: { svg: `<path d="${S.zacken([[PONY_P[0][0], 44], ...PONY_P, [PONY_P[PONY_P.length - 1][0], 44]], 0.08)}" fill="${S.dunkler(farben.haut, 0.3)}" stroke="none"/>`, kontur: "" },
+  haareOben: S.zusammen(
+    S.form(S.pfad(S.zacken(SCHOPF_P, 0.07)), farben.haar, [134, 32], { s: 0.92 }),
+    { svg: [[[199, 60], [194, 44]], [[191, 58], [186, 42]], [[181, 56], [176, 40]], [[140, 112], [138, 88]], [[128, 111], [126, 88]], [[134, 116], [132, 94]], [[155, 24], [156, 34]], [[122, 114], [119, 94]]]
+      .map(([a, b]) => `<path d="${kerbe(a, b)}" fill="${S.dunkler(farben.haar, 0.4)}" stroke="none"/>`).join(""), kontur: "" },
+    { svg: ["M138 40 Q150 30 166 28 Q152 34 144 44 Z", "M122 66 Q124 54 130 44 Q127 56 126 68 Z"].map((d) => `<path d="${d}" fill="${S.heller(farben.haar, 0.25)}" stroke="none"/>`).join(""), kontur: "" },
+  ),
 };
 
 meldeKind({

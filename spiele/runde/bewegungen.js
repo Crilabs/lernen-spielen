@@ -3,23 +3,30 @@
 
 import { meldeBewegung } from "./bestand.js";
 
-// Gehen im Profil: Beine und Arme gegenläufig, kleiner Wipp-Versatz.
-// Rollstuhl: Räder drehen um 90°, dann ein unsichtbarer Sprung zurück auf 0° (vier Speichen sehen gleich aus),
-// die Hände schieben an den Greifreifen.
-const SCHRITT = 250;
+// Gehen im Profil mit Knie: Aufsetzen mit fast gestrecktem Vorderbein, das hintere Knie beugt beim Abstoßen,
+// beim Durchschwingen hebt das Bein den Fuß mit gebeugtem Knie. Arme schwingen gegengleich, Ellbogen leicht gebeugt.
+// Rollstuhl (Timo): die Hände greifen oben hinten am Greifreifen, schieben nach vorn (Räder drehen 90°), lassen los
+// und greifen neu; die Räder springen unsichtbar auf 0° zurück (Speichen 45°-symmetrisch).
+// Armwinkel aus der Armlänge berechnet, damit die Hand auf dem Greifreifen liegt.
+const SCHRITT = 260;
+const ARM = (/** @type {number} */ vo, /** @type {number} */ hi) => ({
+  "arm-vorn-oben": vo, "arm-hinten-oben": hi, "arm-vorn-unten": -Math.abs(vo) * 0.6 - 8, "arm-hinten-unten": -Math.abs(hi) * 0.6 - 8,
+});
 meldeBewegung({
   id: "gehen", ansicht: "profil", mal: 2, ende: "stehen",
   schritte: [
-    { ms: SCHRITT, winkel: { "bein-vorn": -22, "bein-hinten": 22, "arm-vorn-oben": 18, "arm-hinten-oben": -18 }, versatz: [0, 0] },
-    { ms: SCHRITT, winkel: { "bein-vorn": 0, "bein-hinten": 0, "arm-vorn-oben": 0, "arm-hinten-oben": 0 }, versatz: [0, -4] },
-    { ms: SCHRITT, winkel: { "bein-vorn": 22, "bein-hinten": -22, "arm-vorn-oben": -18, "arm-hinten-oben": 18 }, versatz: [0, 0] },
-    { ms: SCHRITT, winkel: { "bein-vorn": 0, "bein-hinten": 0, "arm-vorn-oben": 0, "arm-hinten-oben": 0 }, versatz: [0, -4] },
+    // Kontakt: vorn aufsetzen, hinten abstoßen
+    { ms: SCHRITT, winkel: { "bein-vorn": -24, "bein-vorn-unten": 4, "bein-hinten": 20, "bein-hinten-unten": 22, ...ARM(22, -22) }, versatz: [0, 1] },
+    // Durchschwingen: hinteres Bein kommt mit gebeugtem Knie nach vorn
+    { ms: SCHRITT, winkel: { "bein-vorn": -2, "bein-vorn-unten": 2, "bein-hinten": -14, "bein-hinten-unten": 42, ...ARM(4, -4) }, versatz: [0, -4] },
+    // Kontakt mit dem anderen Bein
+    { ms: SCHRITT, winkel: { "bein-hinten": -24, "bein-hinten-unten": 4, "bein-vorn": 20, "bein-vorn-unten": 22, ...ARM(-22, 22) }, versatz: [0, 1] },
+    { ms: SCHRITT, winkel: { "bein-hinten": -2, "bein-hinten-unten": 2, "bein-vorn": -14, "bein-vorn-unten": 42, ...ARM(-4, 4) }, versatz: [0, -4] },
   ],
   rollstuhl: {
     schritte: [
-      { ms: SCHRITT * 2, winkel: { "rad-vorn": 90, "rad-hinten": 90, "arm-vorn-oben": -28, "arm-hinten-oben": -28, "arm-vorn-unten": -20, "arm-hinten-unten": -20 } },
-      { ms: 1, winkel: { "rad-vorn": 0, "rad-hinten": 0 } },
-      { ms: SCHRITT * 2, winkel: { "rad-vorn": 90, "rad-hinten": 90, "arm-vorn-oben": 8, "arm-hinten-oben": 8, "arm-vorn-unten": 0, "arm-hinten-unten": 0 } },
+      { ms: 160, winkel: { "arm-vorn-oben": 71, "arm-vorn-unten": -85, "arm-hinten-oben": 71, "arm-hinten-unten": -85 }, haende: { vorn: "faust", hinten: "faust" } },
+      { ms: 460, winkel: { "arm-vorn-oben": 6, "arm-vorn-unten": -42, "arm-hinten-oben": 6, "arm-hinten-unten": -42, "rad-vorn": 90, "rad-hinten": 90 } },
       { ms: 1, winkel: { "rad-vorn": 0, "rad-hinten": 0 } },
     ],
   },

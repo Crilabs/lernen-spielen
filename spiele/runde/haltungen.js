@@ -7,7 +7,11 @@ import { meldeHaltung } from "./bestand.js";
 
 const LOCKER = { "arm-vorn-oben": -6, "arm-hinten-oben": 6 };
 
-meldeHaltung({ id: "stehen", ansicht: "beide", wort: "steht", winkel: LOCKER });
+// Im Rollstuhl ruht die Hand vorn oben auf dem Greifreifen (Winkel aus der Armlänge berechnet).
+meldeHaltung({
+  id: "stehen", ansicht: "beide", wort: "steht", winkel: LOCKER,
+  rollstuhl: { winkel: { "arm-vorn-oben": 34, "arm-vorn-unten": -76, "arm-hinten-oben": 34, "arm-hinten-unten": -76 } },
+});
 
 meldeHaltung({
   id: "zeigen", ansicht: "dreiviertel", wort: "zeigt",

@@ -11,9 +11,11 @@ beforeEach(() => leereBestand());
 
 test("gelenkeFuer kennt Beine nur beim gehenden Kind", () => {
   assert.ok(gelenkeFuer("geht").includes("bein-vorn"));
+  assert.ok(gelenkeFuer("geht").includes("bein-vorn-unten"), "Knie: Unterschenkel als eigenes Gelenk");
+  assert.ok(!gelenkeFuer("rollstuhl").includes("bein-hinten-unten"));
   assert.ok(!gelenkeFuer("rollstuhl").includes("bein-vorn"));
   assert.ok(gelenkeFuer("rollstuhl").includes("rad-vorn"));
-  assert.deepEqual(BEINE, ["bein-hinten", "bein-vorn"]);
+  assert.deepEqual(BEINE, ["bein-hinten", "bein-vorn", "bein-hinten-unten", "bein-vorn-unten"]);
   assert.deepEqual(PLAETZE, ["kopf", "hand-vorn", "hand-hinten", "ruecken", "fuesse", "schoss"]);
 });
 
@@ -64,6 +66,10 @@ test("unbekanntes Gelenk wird abgelehnt", () => {
 
 test("unbekannte Ansicht wird abgelehnt", () => {
   assert.throws(() => meldeHaltung({ id: "y", ansicht: "frontal" }), /frontal/);
+});
+
+test("Kniebewegung ohne Rollstuhl-Fassung wird abgelehnt", () => {
+  assert.throws(() => meldeHaltung({ id: "hocke", ansicht: "profil", winkel: { "bein-vorn-unten": 40 } }), /hocke.*rollstuhl/i);
 });
 
 test("Beinbewegung ohne Rollstuhl-Fassung wird abgelehnt", () => {

@@ -42,10 +42,12 @@ function ansicht(bewegt) {
     schoss: { gelenk: "rumpf", punkt: [165, 200] },
   };
   if (bewegt === "geht") {
-    Object.assign(drehpunkte, { "bein-hinten": [155, 200], "bein-vorn": [165, 200] });
+    Object.assign(drehpunkte, { "bein-hinten": [155, 200], "bein-vorn": [165, 200], "bein-hinten-unten": [155, 227], "bein-vorn-unten": [165, 227] });
     Object.assign(teile, {
-      "bein-hinten": [{ teil: "bein", svg: linie("bein-hinten", 155, 200, 155, 254) }],
-      "bein-vorn": [{ teil: "bein", svg: linie("bein-vorn", 165, 200, 165, 254) }],
+      "bein-hinten": [{ teil: "bein", svg: linie("bein-hinten", 155, 200, 155, 227) }],
+      "bein-vorn": [{ teil: "bein", svg: linie("bein-vorn", 165, 200, 165, 227) }],
+      "bein-hinten-unten": [{ teil: "unterschenkel", svg: linie("bein-hinten-unten", 155, 227, 155, 254) }],
+      "bein-vorn-unten": [{ teil: "unterschenkel", svg: linie("bein-vorn-unten", 165, 227, 165, 254) }],
     });
   } else {
     Object.assign(drehpunkte, {

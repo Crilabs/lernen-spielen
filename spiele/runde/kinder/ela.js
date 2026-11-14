@@ -2,7 +2,7 @@
 // Farben aus den Welt-Paletten, freigegeben 2026-11-14 (figuren.md §4).
 
 import { meldeKind } from "../bestand.js";
-import { dreiviertel, profil, ellipse, flaeche, INK } from "./schnitt.js";
+import { dreiviertel, profil } from "./schnitt.js";
 import * as S from "./stil.js";
 
 const farben = {
@@ -76,14 +76,40 @@ const kopfDreiviertel = {
   },
 };
 
+/** Strähnenkeile und Lichtflächen. @param {Array<[[number, number], [number, number], number, number]>} liste @param {string} farbe */
+const keileP = (liste, farbe) => ({ svg: liste.map(([a, b, w, bg]) => `<path d="${S.keil(a, b, w, bg)}" fill="${farbe}" stroke="none"/>`).join(""), kontur: "" });
+/** @param {string[]} pfade @param {string} farbe */
+const lichtP = (pfade, farbe) => ({ svg: pfade.map((d) => `<path d="${d}" fill="${farbe}" stroke="none"/>`).join(""), kontur: "" });
+
+// Profil: kurzer Schopf über Kopf und Nacken, Pony vorn in Spitzen, Haaransatz hinter dem Ohr.
+// Profil: kurzer Pixie – kleine Büschel an Hinterkopf und Scheitel, kurzer Nacken, Pony nach vorn.
+const SCHOPF_P = /** @type {[number, number][]} */ ([
+  [136, 102], [128, 96], [120, 89], [120, 80], [117, 72], [120, 63], [118, 54], [124, 46], [127, 38], [135, 33],
+  [142, 27], [151, 26], [160, 22], [169, 24], [179, 23], [187, 27], [195, 31], [199, 37], [204, 43], [204, 50],
+  [204, 62], [199, 55], [196, 66], [190, 53], [185, 64], [177, 51],
+  [168, 56], [160, 60], [154, 68], [149, 73], [146, 86], [142, 97],
+]);
+const PONY_P = SCHOPF_P.slice(20, 26).map(([x, y]) => /** @type {[number, number]} */ ([x, y + 4]));
 const kopfProfil = {
-  haareHinten: ellipse(158, 66, 44, 42, farben.haar),
-  haareOben: flaeche(
-    "M206 62 C198 52 188 49 178 50 C168 56 156 58 146 62 C142 74 142 88 140 102 C128 106 120 94 122 78 C122 44 140 25 166 25 C192 25 208 40 206 62 Z",
-    farben.haar,
+  ponyschatten: { svg: `<path d="${S.zacken([[PONY_P[0][0], 44], ...PONY_P, [PONY_P[PONY_P.length - 1][0], 44]], 0.12)}" fill="${S.dunkler(farben.haut, 0.3)}" stroke="none"/>`, kontur: "" },
+  haareOben: S.zusammen(
+    S.form(S.pfad(S.zacken(SCHOPF_P, 0.14)), farben.haar, [136, 34], { s: 0.92 }),
+    keileP([[[199, 55], [194, 40], 3, -2], [[190, 53], [186, 38], 3, 2], [[177, 51], [174, 37], 3, -2], [[127, 95], [134, 80], 3, 2],
+      [[120, 80], [130, 74], 2.6, 1], [[120, 63], [131, 60], 2.6, -1], [[124, 46], [134, 50], 2.4, 1], [[151, 26], [154, 37], 2.4, -1], [[169, 24], [169, 35], 2.4, 1], [[187, 27], [184, 38], 2.4, -1]],
+      S.dunkler(farben.haar, 0.42)),
+    lichtP(["M140 40 Q150 31 164 28 Q152 34 145 43 Z", "M126 62 Q128 50 134 42 Q131 52 130 64 Z"], HAAR_VORN),
+    S.zusammen(...[0, 1, 2, 3, 4].map((i) => {
+      const a = (-90 + i * 72) * Math.PI / 180;
+      const x = 184 + Math.cos(a) * 5.2;
+      const y = 42 + Math.sin(a) * 5.2;
+      return S.form(S.oval(x, y, 4.6, 4.6), BAND, [x - 2, y - 2], { s: 0.8 });
+    }), S.form(S.oval(184, 42, 3.2, 3.2), SPANGE_MITTE, [183, 41], { s: 0.8 })),
   ),
-  nachGesicht: `<g fill="none" stroke="${INK}"><circle cx="188" cy="80" r="10" stroke-width="3.5"/>`
-    + `<path d="M178 79 L157 77" stroke-width="3"/></g>`,
+  nachGesicht: {
+    svg: `<path d="M178 80 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0 M178 79 L157 77" fill="none" stroke="${BRILLE}" stroke-width="3.4"/>`
+      + `<path d="M181 74 a7 7 0 0 1 5 -2.5" fill="none" stroke="#FFFFFF" stroke-width="1.8" opacity="0.7"/>`,
+    kontur: "",
+  },
 };
 
 meldeKind({

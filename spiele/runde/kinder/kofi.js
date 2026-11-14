@@ -2,7 +2,7 @@
 // Stil wie Ela (figuren.md §4): Silhouette, Schatten in Stufen, Farben aus den Welt-Paletten.
 
 import { meldeKind } from "../bestand.js";
-import { dreiviertel, profil, ellipse, flaeche, INK } from "./schnitt.js";
+import { dreiviertel, profil } from "./schnitt.js";
 import * as S from "./stil.js";
 
 const farben = {
@@ -42,10 +42,19 @@ const kopfDreiviertel = {
   ),
 };
 
-// Profil vorerst im alten Stil (folgt mit dem Profil aller Kinder).
+// Profil: kurze Locken als Kappe über Kopf und Nacken, Haaransatz vorn an der Stirn und hinter dem Ohr.
+const SCHOPF_P = /** @type {[number, number][]} */ ([
+  [132, 98], [121, 84], [118, 66], [123, 48], [135, 34], [150, 26], [167, 23], [183, 26], [196, 34], [204, 46],
+  [203, 57], [194, 51], [184, 49], [174, 50], [165, 53], [158, 59], [152, 67], [147, 75], [144, 87], [139, 96],
+]);
+const KRINGEL_P = /** @type {[number, number][]} */ ([[132, 46], [146, 36], [160, 31], [174, 31], [188, 36], [198, 46], [126, 62], [138, 56], [152, 46], [166, 42], [180, 42], [128, 80], [136, 72], [140, 88]]);
 const kopfProfil = {
-  haareOben: flaeche("M206 62 C198 50 186 46 174 47 C164 48 154 52 148 60 C144 70 144 84 142 96 C130 98 122 88 122 74"
-    + " C122 42 142 24 166 24 C190 24 208 38 206 62 Z", farben.haar),
+  ponyschatten: { svg: `<path d="${S.buckel(SCHOPF_P.slice(10, 15).map(([x, y]) => /** @type {[number, number]} */ ([x, y + 4])), 1).replace(/ A[^A]*Z$/, "")} L165 44 L203 44 Z" fill="${S.dunkler(farben.haut, 0.3)}" stroke="none"/>`, kontur: "" },
+  haareOben: S.zusammen(
+    S.flach(S.pfad(S.buckel(SCHOPF_P, 1)), farben.haar),
+    { svg: KRINGEL_P.map(([x, y]) => `<path d="M${x - 4} ${y} Q${x} ${y + 4.5} ${x + 4} ${y} Q${x} ${y + 2} ${x - 4} ${y} Z" fill="${S.dunkler(farben.haar, 0.45)}" stroke="none"/>`
+      + `<path d="M${x - 3} ${y - 3} Q${x} ${y - 5} ${x + 2} ${y - 3.5} Q${x} ${y - 3.5} ${x - 3} ${y - 3} Z" fill="${S.heller(farben.haar, 0.22)}" stroke="none"/>`).join(""), kontur: "" },
+  ),
 };
 
 meldeKind({
@@ -59,4 +68,3 @@ meldeKind({
     profil: profil({ breite: 0.9, farben, kopf: kopfProfil }),
   },
 });
-void ellipse; void INK;

@@ -3,7 +3,7 @@
 // Stil wie Ela (figuren.md §4): Silhouette, Schatten in Stufen, Farben aus den Welt-Paletten.
 
 import { meldeKind } from "../bestand.js";
-import { dreiviertel, profil, flaeche } from "./schnitt.js";
+import { dreiviertel, profil } from "./schnitt.js";
 import * as S from "./stil.js";
 
 const farben = {
@@ -102,11 +102,35 @@ const kopfDreiviertel = {
   ),
 };
 
-// Profil vorerst schlicht (folgt mit dem Profil aller Kinder).
+// Profil: gewellte Kappe, Hörgerät hinter dem Ohr, lange Haare fallen den Rücken hinunter (hinter Rumpf und Armen).
+// Profil: runde Locken oben (deutlich größer als die feinen Wellen vorn am Rand), lange Wellen den Rücken hinunter.
+const SCHOPF_P = /** @type {[number, number][]} */ ([
+  [128, 100], [119, 90], [116, 78], [117, 66], [120, 55], [126, 45], [135, 36], [146, 30], [158, 26], [170, 25], [182, 27], [193, 32], [201, 41], [205, 50],
+  [202, 57], [195, 52], [187, 50], [179, 51], [171, 53], [164, 57], [157, 62], [150, 68], [143, 74], [139, 86], [135, 97],
+]);
+const RUECKEN_P = fein(/** @type {[number, number][]} */ ([
+  [116, 84], [148, 84], [150, 100], [148, 118], [151, 136], [148, 152], [140, 160], [130, 156], [120, 160], [112, 150], [110, 132], [112, 114], [110, 98],
+]));
 const kopfProfil = {
-  haareHinten: flaeche("M164 22 C196 22 214 44 212 70 C212 96 206 118 190 126 C170 130 140 128 122 116 C110 100 112 70 118 50 C126 32 142 22 164 22 Z", farben.haar),
-  haareOben: flaeche("M206 62 C198 52 188 48 176 50 C164 52 152 56 146 62 C140 74 140 88 138 100 C126 100 120 90 120 76"
-    + " C120 44 140 24 166 24 C192 24 208 40 206 62 Z", farben.haar),
+  ohr: S.zusammen(
+    S.form(S.pfad("M146 72 C140 74 138 84 140 94 C141 99 145 100 148 97 L150 76 Z"), HOERGERAET, [143, 76], { s: 0.8 }),
+    S.form(S.oval(152, 82, 7, 9.5), farben.haut, [150, 78], { s: 0.8 }),
+    S.naht("M155 77 Q149 82 155 88", farben.haut, 2.2),
+    { svg: `<path d="M147 74 Q151 68 155 74 Q156 79 154 82" fill="none" stroke="${S.dunkler(HOERGERAET, 0.35)}" stroke-width="2.4"/>`, kontur: "" },
+  ),
+  ponyschatten: { svg: `<path d="${S.buckel(SCHOPF_P.slice(14, 21).map(([x, y]) => /** @type {[number, number]} */ ([x, y + 4])), 1).replace(/ A[^A]*Z$/, "")} L158 44 L202 44 Z" fill="${S.dunkler(farben.haut, 0.26)}" stroke="none"/>`
+    + `<circle cx="196" cy="92" r="1.3" fill="#C98060" opacity="0.85" stroke="none"/><circle cx="191" cy="96" r="1.3" fill="#C98060" opacity="0.85" stroke="none"/><circle cx="199" cy="97" r="1.3" fill="#C98060" opacity="0.85" stroke="none"/>`, kontur: "" },
+  zoepfe: S.zusammen(
+    S.flach(S.pfad(S.buckel(RUECKEN_P, 0.5)), HAAR_HINTEN),
+    keile([[[120, 160], [118, 128], 3, 3], [[140, 160], [141, 128], 3, -3], [[130, 156], [129, 124], 2.6, 2], [[112, 150], [114, 122], 2.4, -2]], S.dunkler(HAAR_HINTEN, 0.42)),
+    lichter(["M118 96 Q123 108 120 122 Q119 108 118 96 Z", "M138 104 Q142 116 140 128 Q139 116 138 104 Z"], S.heller(HAAR_HINTEN, 0.26)),
+  ),
+  haareOben: S.zusammen(
+    S.flach(S.pfad(S.buckel(SCHOPF_P, 1)), farben.haar),
+    S.falte("M120 70 C119 84 124 94 128 100 L136 98 C130 90 127 80 128 70 Z", farben.haar, 0.3),
+    keile([[[198, 52], [192, 38], 3, -2], [[178, 51], [175, 36], 3, 2], [[161, 58], [158, 42], 2.8, -2], [[128, 100], [131, 82], 2.6, 2]], S.dunkler(farben.haar, 0.38)),
+    lichter(["M138 40 Q148 31 162 28 Q150 34 143 43 Z", "M126 60 Q128 50 133 43 Q130 52 130 62 Z"], S.heller(farben.haar, 0.3)),
+  ),
 };
 
 meldeKind({

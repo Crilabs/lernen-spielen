@@ -247,3 +247,31 @@ export function haende(w, haut, daumen) {
     zeigen: zusammen(faust, finger(0, 12, 3.6)),
   };
 }
+
+/**
+ * Hände von der Seite (Profil): Handgelenk w, die Hand hängt in Richtung +y, vorn ist +x. Finger liegen
+ * zusammen, der Daumen zeigt nach vorn; feine Linie im dunklen Hautton wie bei den Händen von vorn.
+ * @param {[number, number]} w @param {string} haut
+ * @returns {{offen: Stueck, faust: Stueck, zeigen: Stueck}}
+ */
+export function haendeSeite(w, haut) {
+  const [x, y] = w;
+  const fein = dunkler(haut, 0.55);
+  /** @param {string} d */
+  const teil = (d) => ({ svg: `<path d="${d}" fill="${haut}" stroke="${fein}" stroke-width="1.8"/>`, kontur: `<path d="${d}"/>` });
+  const daumen = teil(`M${z(x + 4)} ${z(y + 4)} C${z(x + 9)} ${z(y + 4)} ${z(x + 12)} ${z(y + 9)} ${z(x + 11)} ${z(y + 13)}`
+    + ` C${z(x + 10)} ${z(y + 16)} ${z(x + 6)} ${z(y + 14)} ${z(x + 5)} ${z(y + 11)} Z`);
+  const offen = teil(`M${z(x - 6)} ${z(y + 1)} C${z(x - 7)} ${z(y + 10)} ${z(x - 6)} ${z(y + 19)} ${z(x - 1)} ${z(y + 23)}`
+    + ` C${z(x + 3)} ${z(y + 25)} ${z(x + 7)} ${z(y + 22)} ${z(x + 7)} ${z(y + 16)} L${z(x + 7)} ${z(y + 6)} C${z(x + 7)} ${z(y + 1)} ${z(x + 2)} ${z(y)} ${z(x - 6)} ${z(y + 1)} Z`);
+  const faust = teil(`M${z(x - 6)} ${z(y + 2)} C${z(x - 8)} ${z(y + 10)} ${z(x - 5)} ${z(y + 18)} ${z(x + 1)} ${z(y + 18)}`
+    + ` C${z(x + 7)} ${z(y + 18)} ${z(x + 9)} ${z(y + 12)} ${z(x + 8)} ${z(y + 6)} C${z(x + 7)} ${z(y + 1)} ${z(x + 1)} ${z(y)} ${z(x - 6)} ${z(y + 2)} Z`);
+  const fingerlinien = naht(`M${z(x - 1)} ${z(y + 13)} L${z(x - 1)} ${z(y + 21)} M${z(x + 3)} ${z(y + 13)} L${z(x + 3)} ${z(y + 21)}`, haut, 1.5);
+  const knoechel = naht(`M${z(x - 4)} ${z(y + 13)} Q${z(x)} ${z(y + 16)} ${z(x + 5)} ${z(y + 13)}`, haut, 1.6);
+  const schatten = falte(`M${z(x + 2)} ${z(y + 2)} C${z(x + 7)} ${z(y + 4)} ${z(x + 7)} ${z(y + 14)} ${z(x + 3)} ${z(y + 18)} C${z(x + 5)} ${z(y + 12)} ${z(x + 5)} ${z(y + 6)} ${z(x + 2)} ${z(y + 2)} Z`, haut, 0.22);
+  const zeigefinger = teil(`M${z(x + 1)} ${z(y + 14)} L${z(x + 6)} ${z(y + 14)} L${z(x + 5.5)} ${z(y + 29)} Q${z(x + 3.3)} ${z(y + 32)} ${z(x + 1.2)} ${z(y + 29)} Z`);
+  return {
+    offen: zusammen(offen, schatten, fingerlinien, daumen),
+    faust: zusammen(faust, schatten, knoechel, daumen),
+    zeigen: zusammen(faust, schatten, zeigefinger, daumen),
+  };
+}

@@ -34,29 +34,29 @@ const R = 13;
 const GESICHTER = {
   ruhig: {
     dreiviertel: braue(L, 0) + braue(R, 0) + auge(L, 0) + auge(R, 0) + mund("M-7 20 Q0 25 7 20"),
-    profil: braue(0, 0) + auge(0, 0) + mund("M-2 18 Q2 20 5 17"),
+    profil: braue(0, 0) + auge(0, 0) + mund("M6 18 Q10 20 13 17"),
   },
   neugierig: {
     dreiviertel: braue(L, -4, 4) + braue(R, 0, 2) + auge(L, 0) + auge(R, 0) + mund("M-6 21 Q1 24 7 20"),
-    profil: braue(0, -4, 4) + auge(0, 0) + mund("M-1 18 Q2 19 5 17"),
+    profil: braue(0, -4, 4) + auge(0, 0) + mund("M7 18 Q10 19 13 17"),
   },
   staunen: {
     dreiviertel: braue(L, -5, 5) + braue(R, -5, 5) + auge(L, 0, 7.4) + auge(R, 0, 7.4)
       + `<ellipse cx="0" cy="22" rx="4" ry="5" style="fill:${MUND};stroke:${LIPPE}" stroke-width="2.6"/>`,
     profil: braue(0, -5, 5) + auge(0, 0, 7.4)
-      + `<ellipse cx="3" cy="19" rx="3" ry="4.5" style="fill:${MUND};stroke:${LIPPE}" stroke-width="2.6"/>`,
+      + `<ellipse cx="11" cy="19" rx="3" ry="4.5" style="fill:${MUND};stroke:${LIPPE}" stroke-width="2.6"/>`,
   },
   "freuen-klein": {
     dreiviertel: braue(L, -2) + braue(R, -2) + auge(L, 0) + auge(R, 0) + mund("M-9 18 Q0 28 9 18"),
-    profil: braue(0, -2) + auge(0, 0) + mund("M-3 17 Q2 22 6 15"),
+    profil: braue(0, -2) + auge(0, 0) + mund("M5 17 Q10 22 14 15"),
   },
   "freuen-gross": {
     dreiviertel: braue(L, -4, 4) + braue(R, -4, 4) + lachauge(L) + lachauge(R) + mundOffen("M-11 16 Q0 34 11 16 Z"),
-    profil: braue(0, -4, 4) + lachauge(0) + mundOffen("M-3 14 Q2 27 7 13 Z"),
+    profil: braue(0, -4, 4) + lachauge(0) + mundOffen("M5 14 Q10 27 15 13 Z"),
   },
   nachdenken: {
     dreiviertel: braue(L, 0, 2) + braue(R, -4, 4) + auge(L + 1.5, -1.5) + auge(R + 1.5, -1.5) + mund("M-5 22 L5 20"),
-    profil: braue(0, -3, 4) + auge(1.5, -1.5) + mund("M-1 19 L5 18"),
+    profil: braue(0, -3, 4) + auge(1.5, -1.5) + mund("M7 19 L13 18"),
   },
 };
 
