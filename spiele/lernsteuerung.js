@@ -310,6 +310,50 @@ export function uebersicht(ctx, stand) {
   return out;
 }
 
+// ---------- Daten für Startseite und Regal ----------
+
+// Zahl eines Themas: aufgaben.zahl (zerlegung), aufgaben.bis (menge), sonst bei einer Aufgabenart die letzte Zahl im Namen
+// („Rechnen mit der 7“ → 7); null, wenn keine da ist.
+function zahlDes(t) {
+  const a = t.aufgaben;
+  if (Number.isFinite(a?.zahl)) return a.zahl;
+  if (Number.isFinite(a?.bis)) return a.bis;
+  if (!a?.art) return null;
+  const n = text(t.name).match(/\d+/g)?.at(-1);
+  return n === undefined ? null : Number(n);
+}
+
+// Alle gekonnten Themen (Zustand kann-ich, auch ohne Spiel), nach dem Datum des Gekonnt-Werdens (stand.themen[id].k,
+// von markiereGekonnt und verbucheErgebnis gesetzt), älteste zuerst; ohne Datum zuerst (ältester Bestand),
+// bei Gleichstand Planreihenfolge. bereich: Bereich des Themas im Lernplan ("" wenn keiner), für materialFuer.
+// [{ id, name, sprich, strang, art, zahl, seit, bereich }]
+export function gekonnteThemen(ctx, stand) {
+  const z = zustaende(ctx, stand);
+  return themenVon(ctx)
+    .filter((t) => z[t.id] === "kann-ich")
+    .map((t) => ({ id: t.id, name: text(t.name), sprich: text(t.sprich), strang: t.strang, art: t.aufgaben?.art ?? null,
+      zahl: zahlDes(t), seit: text(stand?.themen?.[t.id]?.k), bereich: text(t.bereich) }))
+    .sort((a, b) => (a.seit < b.seit ? -1 : a.seit > b.seit ? 1 : 0)); // Array.sort ist stabil
+}
+
+// Themen dran, die ein Spiel bedienen (ohne Spiel nie), zuletzt geübt zuerst (u, sonst seit), höchstens max.
+// spiel = zuletzt gespieltes Spiel, das das Thema bedient (zuletzt: { [themaId]: spielId }, vom Aufrufer; der Lernstand
+// merkt sich das Spiel nicht), sonst das erste.
+// [{ id, name, sprich, strang, spiel }]
+export function dranThemen(ctx, stand, { max = 3, zuletzt = {} } = {}) {
+  const z = zustaende(ctx, stand);
+  return themenVon(ctx)
+    .filter((t) => z[t.id] === "dran" && spieleFuer(ctx, t.id).length > 0)
+    .map((t) => {
+      const spiele = spieleFuer(ctx, t.id);
+      return { id: t.id, name: text(t.name), sprich: text(t.sprich), strang: t.strang,
+        spiel: spiele.includes(zuletzt?.[t.id]) ? zuletzt[t.id] : spiele[0], u: zuletztGeuebt(stand, t.id) };
+    })
+    .sort((a, b) => (a.u < b.u ? 1 : a.u > b.u ? -1 : 0))
+    .slice(0, Math.max(0, max))
+    .map(({ u, ...rest }) => rest);
+}
+
 // ---------- Welches Thema bekommt ein Spiel? ----------
 
 const zuletztGeuebt = (stand, id) => stand.themen[id]?.u || stand.themen[id]?.seit || "";
