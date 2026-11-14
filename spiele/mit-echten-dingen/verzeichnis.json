@@ -13,6 +13,23 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "geteilt-umkehrung-mal": {
+   "fach": "mathe",
+   "name": "Geteilt als Umkehrung von Mal",
+   "titel": "Geteilt und mal gehören zusammen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Erdbeeren teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Joghurt für die Woche"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/geteilt-umkehrung-mal.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",

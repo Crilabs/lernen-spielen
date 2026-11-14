@@ -1,7 +1,6 @@
 ---
 thema: geteilt-umkehrung-mal
 fach: mathe
-entwurf: true
 bild: { figur: erdbeerschale, zustand: voll }
 quellen:
   - Operationsverständnis Division, Lernen auf Distanz Klasse 2 (Divisionsaufgaben als Umkehraufgaben der Multiplikation verstehen und nutzen; Gruppensprache „zwei Fünfer“), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-division.pdf, abgerufen 2026-11-14
