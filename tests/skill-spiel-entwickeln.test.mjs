@@ -1,5 +1,7 @@
 // Skill „Spiel entwickeln“ (.claude/skills/spiel-entwickeln/): Die Prüfvorlagen zitieren die Kriterien aus
-// docs/spielentwicklung.md wörtlich (A1–A12 aus §2, B-Didaktik/B-Welt/B-Bedienung aus §4). Ändert sich das Dokument,
+// docs/spielentwicklung.md wörtlich (A1–A12 aus §2, B-Didaktik/B-Welt/B-Bedienung aus §4; die Prüfung des Schnellwegs
+// alle zusammen und dazu die Checkliste docs/bedienung.md §10). SKILL.md zitiert die Regel „Schnellweg oder voller
+// Weg“ aus „Zwei Wege“ wörtlich. Ändert sich das Dokument,
 // wird dieser Test rot, bis die Vorlage nachgezogen ist. Dazu: Pfade in den Skill-Dateien gibt es, Platzhalter sind
 // im Skill erklärt.
 import { test } from "node:test";
@@ -26,6 +28,16 @@ function woertlich(vorlage) {
   const m = vorlage.match(/<!-- wörtlich aus [^>]*-->\n([\s\S]*?)\n<!-- ende wörtlich -->/);
   assert.ok(m, "Markierung <!-- wörtlich … --> … <!-- ende wörtlich --> fehlt");
   return m[1];
+}
+
+/** Alle markierten Blöcke einer Vorlage, nach ihrer Quelle („docs/… §…“, bis zum Semikolon). */
+function alleWoertlich(vorlage) {
+  const bloecke = new Map();
+  for (const m of vorlage.matchAll(/<!-- wörtlich aus ([^;>]*?)\s*(?:;[^>]*)?-->\n([\s\S]*?)\n<!-- ende wörtlich -->/g)) {
+    assert.ok(!bloecke.has(m[1]), `Block „${m[1]}“ doppelt`);
+    bloecke.set(m[1], m[2]);
+  }
+  return bloecke;
 }
 
 const tabellenZeilen = (text) => text.split("\n").filter((z) => z.startsWith("|"));
@@ -58,6 +70,33 @@ for (const [name, datei] of Object.entries(B_VORLAGEN)) {
   });
 }
 
+test("Schnellweg: die eine Prüfung zitiert A1–A12, B-Didaktik, B-Welt, B-Bedienung und bedienung.md §10 wörtlich", () => {
+  const bloecke = alleWoertlich(readFileSync(join(SKILL, "pruefung-schnell.md"), "utf8"));
+  const b = abschnitt(DOK, "## 4. Prüfung B", "## 5.");
+  const soll = new Map([
+    ["docs/spielentwicklung.md §2", tabellenZeilen(abschnitt(DOK, "## 2. Prüfung A", "## 3.")).join("\n")],
+    ...Object.keys(B_VORLAGEN).map((name) => [
+      `docs/spielentwicklung.md §4 B-${name}`,
+      b.match(new RegExp(`^\\*\\*B-${name}\\*\\*[\\s\\S]*?(?=\\n\\n)`, "m"))[0],
+    ]),
+    ["docs/bedienung.md §10", abschnitt(lies("docs/bedienung.md"), "## 10. Checkliste", "\n## ").split("\n").filter((z) => /^(- \[ \]|\s{2,}\S)/.test(z)).join("\n")],
+  ]);
+  assert.deepEqual([...bloecke.keys()].sort(), [...soll.keys()].sort());
+  // Die Tabelle genau, die Absätze und die Checkliste ohne Rücksicht auf Zeilenumbrüche.
+  assert.equal(bloecke.get("docs/spielentwicklung.md §2"), soll.get("docs/spielentwicklung.md §2"));
+  for (const [quelle, text] of soll) assert.equal(glatt(bloecke.get(quelle)), glatt(text), `Block „${quelle}“ weicht ab`);
+});
+
+test("Schnellweg: SKILL.md nennt die Regel aus „Zwei Wege“ wörtlich", () => {
+  const regel = (text, wo) => {
+    const m = text.match(/<!-- regel schnellweg -->\n([\s\S]*?)\n\s*<!-- ende regel -->/);
+    assert.ok(m, `Regel fehlt in ${wo}`);
+    return glatt(m[1]);
+  };
+  const imDok = regel(abschnitt(DOK, "## Zwei Wege", "## Ablage"), "docs/spielentwicklung.md „Zwei Wege“");
+  assert.equal(regel(readFileSync(join(SKILL, "SKILL.md"), "utf8"), "SKILL.md"), imDok);
+});
+
 const skillDateien = () => readdirSync(SKILL).filter((d) => d.endsWith(".md"));
 
 test("Skill: Kopf mit Name und Beschreibung, alle genannten Vorlagen liegen daneben", () => {
@@ -66,7 +105,7 @@ test("Skill: Kopf mit Name und Beschreibung, alle genannten Vorlagen liegen dane
   assert.ok(kopf, "Frontmatter fehlt");
   assert.equal(kopf[1], "spiel-entwickeln");
   assert.ok(kopf[2].length <= 1024, "Beschreibung zu lang");
-  for (const v of ["bauen.md", "pruefung-a.md", "pruefung-b-didaktik.md", "pruefung-b-welt.md", "pruefung-b-bedienung.md", "abschluss-review.md"]) {
+  for (const v of ["bauen.md", "pruefung-a.md", "pruefung-b-didaktik.md", "pruefung-b-welt.md", "pruefung-b-bedienung.md", "pruefung-schnell.md", "abschluss-review.md"]) {
     assert.ok(s.includes(`\`${v}\``), `SKILL.md nennt ${v} nicht`);
     assert.ok(existsSync(join(SKILL, v)), `${v} fehlt`);
   }

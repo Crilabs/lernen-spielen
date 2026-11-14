@@ -1,11 +1,11 @@
 ---
 name: spiel-entwickeln
-description: Verwenden, wenn ein Spiel aus dem Spielkatalog entstehen soll – Aufruf „Spiel entwickeln <Katalog-Id> [--basis <branch>]“ (z. B. „Spiel entwickeln M15“). Führt genau ein Spiel vom Katalog-Eintrag über Entwurf, Prüfung A, Prototyp, Prüfstand B, Ausbau und Abschluss-Review bis zum Merge nach main oder parkt es; Prüfer sind immer frische Agenten.
+description: Verwenden, wenn ein Spiel aus dem Spielkatalog entstehen soll – Aufruf „Spiel entwickeln <Katalog-Id> [--basis <branch>]“ (z. B. „Spiel entwickeln M15“). Führt genau ein Spiel vom Katalog-Eintrag bis zum Merge nach main oder parkt es, auf dem Schnellweg (nur vorhandene Bausteine) oder dem vollen Weg (neue Mechanik, neues Lernzeichen oder Bedienteil); Prüfer und Bau-Agenten sind je Runde frisch.
 ---
 
 # Spiel entwickeln
 
-Verbindlich, ganz: `docs/spielentwicklung.md` (Ablauf §1–§7, Ablage, Spielobjekte, Kosten, Parken). Dazu
+Verbindlich, ganz: `docs/spielentwicklung.md` (Ablauf, Zwei Wege, §1–§7, Ablage, Spielobjekte, Kosten, Parken). Dazu
 `docs/grundsaetze.md`, `docs/grundsaetze-bilder.md`, `docs/figuren.md`, `docs/stimme.md`, `docs/bedienung.md`,
 `docs/mit-echten-dingen.md`, `docs/spielkatalog.md` und `docs/spielkatalog/*.md`. Steht hier etwas anderes als dort,
 gilt das Dokument; den Skill dann anpassen.
@@ -18,7 +18,8 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
 - **Prüfer sind immer frische Agenten**, die nicht gebaut haben, je Runde ein **neuer** Prüfer. Sie bekommen nur,
   was die Vorlage nennt (nie die Überlegungen der Bauenden). Jeder liefert grün/rot je Kriterium mit Beleg.
 - **Grün** = alle Pflichtkriterien grün und kein kritischer Befund; „(Soll)“ darf rot sein, wenn der Grund im Entwurf
-  steht. **Höchstens 3 Runden je Prüfung**, dann parken („Parken“ unten).
+  steht. **Höchstens 3 Runden je Prüfung** im vollen Weg, **höchstens 2 Runden** im Schnellweg, dann parken
+  („Parken“ unten).
 - **Christian wird während des Laufs nicht gefragt.** Anhalten und fragen nur bei: (1) etwas Zerstörerischem
   (Löschen fremder Arbeit, Force-Push, `reset --hard` auf fremden Branches, schmutziger `main`-Worktree),
   (2) Sicherheit (Schlüssel, Zugangsdaten, Plattform-Zugriff außerhalb `kern/`), (3) Wirkung nach außen über den
@@ -28,16 +29,24 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
 - **Freigabe nötig:** Braucht das Spiel ein neues Lernzeichen oder Bedienteil (`docs/spielkatalog.md` §8a) oder eine
   offene Frage aus `docs/grundsaetze-bilder.md` §15, entscheidet der Entwurf sie als **(Annahme)**; gebaut und geprüft
   wird normal, aber **nicht gemergt**: am Ende parken mit Grund „Freigabe nötig“ und der konkreten Frage.
-- **Kosten nach jedem Agenten** (bauen, prüfen, Review, Wiederholung, jede Fortsetzung mit SendMessage), siehe
+- **Kosten nach jedem Agenten** (bauen, prüfen, Review, Wiederholung, jede Fortsetzung eines Schreib-Agenten), siehe
   „Kosten“. Kein Agent ohne Eintrag.
 - **Nie pushen.** Merge nur in das lokale `main`, und nur ohne `--basis` (Probelauf mergt nie).
-- **Modelle:** Bau-Agenten des Spiels und Prüfer A, B und Abschluss-Review mit dem Standardmodell der Sitzung (kein
-  kleineres); Schreib-Agent und Prüfer E der Anleitungen dürfen ein mittleres Modell nehmen (`sonnet`), nie ein
-  kleines. Prüfer nie mit einem kleineren Modell als der Bau-Agent, dessen Arbeit sie prüfen.
-- **Ein Bau-Agent je Phase:** Entwurf, Prototyp und Ausbau bekommen je einen **neuen** Bau-Agenten (der Kontext des
-  vorigen ist groß und wird bei jedem Zug neu gelesen). Befunde innerhalb einer Prüfung gehen per SendMessage an den
-  Bau-Agenten dieser Phase. Grüne Hinweise der letzten Prüfung gehen als „Hinweise aus Prüfung …“ an den Auftrag der
-  nächsten Phase.
+- **Modelle** (Agent-Werkzeug, Feld `model`):
+
+  | Agent | Schnellweg | voller Weg |
+  |---|---|---|
+  | Bau-Agent Entwurf | `sonnet` | `sonnet` (derselbe Entwurf, er entscheidet den Weg) |
+  | Bau-Agent Spiel (jede Runde) | `sonnet` | Standardmodell der Sitzung |
+  | Prüfer (Schnellweg-Prüfung, A, B, Abschluss-Review) | `opus` | Standardmodell, nie kleiner als der Bau-Agent |
+  | Schreib-Agent und Prüfer E der Anleitungen | `sonnet` | `sonnet` |
+
+  Nie ein kleines Modell (`haiku`).
+- **Je Runde ein neuer Bau-Agent, nie fortsetzen.** Ein fortgesetzter Bau-Agent liest bei jedem Zug seinen ganzen
+  Kontext neu (im Probelauf M14 rund 380 000 Token je Zug, 8,9 Millionen Cache-Token für eine Runde Befunde). Jede
+  Runde, jede Phase und jedes „Befunde umsetzen“ bekommt einen **neuen** Bau-Agenten mit dem Gemeinsamen Teil, dem
+  Abschnitt seiner Phase und den Befunden; den Stand findet er im Branch und im Entwurf. Kein SendMessage an
+  Bau-Agenten des Spiels. Grüne Hinweise der letzten Prüfung gehen als „Hinweise aus Prüfung …“ mit.
 
 ## Wo was liegt
 
@@ -51,7 +60,7 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
 | Vorlage | `spiele/vorlage/` (Kopf von `spiele/vorlage/spiel.js`: Schritte 1–7, „../“ → „../../“, `?stufe` im Testbetrieb) |
 | Prüfstand | `tests/browser/durchspielen.mjs` (`--stufe`), `tests/browser/pruefkopie.mjs`, `tests/browser/objektbilder.mjs`; Playwright mit `NODE_PATH=/private/tmp/claude-501/pw/node_modules` |
 | Kosten | `werkzeuge/kosten/transkript.mjs` (bucht aus dem Agenten-Transkript), `werkzeuge/kosten/kosten.mjs`, Bericht `npm run kosten` |
-| Vorlagen der Aufträge | neben dieser Datei: `bauen.md`, `pruefung-a.md`, `pruefung-b-didaktik.md`, `pruefung-b-welt.md`, `pruefung-b-bedienung.md`, `abschluss-review.md`, `pruefung-e.md` (Anleitungen) |
+| Vorlagen der Aufträge | neben dieser Datei: `bauen.md`; Schnellweg `pruefung-schnell.md`; voller Weg `pruefung-a.md`, `pruefung-b-didaktik.md`, `pruefung-b-welt.md`, `pruefung-b-bedienung.md`, `abschluss-review.md`; Anleitungen `pruefung-e.md` |
 
 ## Aufträge an Agenten
 
@@ -74,12 +83,16 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
   schreibt ihn selbst dorthin (`{{BERICHT}}`); du vergleichst die Datei mit seiner Rückmeldung und schreibst sie nur
   neu, wenn sie fehlt oder abweicht. Namen: `runde-a-<n>.md`, `runde-b-<n>-didaktik.md` (`-welt`, `-bedienung`),
   `runde-b-<n>-spielbarkeit.md` (Ausgabe des Durchspielens), `runde-ba-<n>-….md` (Ausbau-Prüfung),
+  im Schnellweg `runde-s-<n>.md` (Prüfung) und `runde-s-<n>-spielbarkeit.md` (Durchspielen),
   `runde-review-<n>.md`, `runde-e-<thema>-<n>.md`.
 - Prüfer ändern nichts. Hat einer doch Dateien geändert (`git status`), die Änderung verwerfen
   (`git restore` nur dieser Dateien) und den Bericht nicht werten (zählt als ungültig).
-- **Wer baut, bucht welche Phase:** Bau-Agent in Prüfung A `entwurf`, in Prüfstand B `prototyp`, ab dem Ausbau
-  (auch Befunde aus Ausbau-Prüfung und Abschluss-Review) `ausbau`; Prüfer A `pruefung-a`, Prüfer B `pruefung-b`
-  (auch nach dem Ausbau), Abschluss-Reviewer `review`.
+- **Wer baut, bucht welche Phase:** Bau-Agent des Entwurfs (auch Befunde aus Prüfung A) `entwurf`, in Prüfstand B
+  `prototyp`, ab dem Ausbau (auch Befunde aus Ausbau-Prüfung und Abschluss-Review) `ausbau`; Prüfer A `pruefung-a`,
+  Prüfer B `pruefung-b` (auch nach dem Ausbau), Abschluss-Reviewer `review`. Schnellweg: Bau-Agent des Spiels
+  `ausbau`, Prüfer `review`.
+- **Lange Aufträge:** Statt des ganzen Texts darfst du die gefüllte Vorlage als Datei in die Arbeitsablage legen
+  (`auftrag-<prüfung>-<n>.md`) und dem Agenten nur „Lies `<Pfad>` und führe den Auftrag aus“ schicken.
 
 ## 0. Start
 
@@ -104,14 +117,59 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
    letzten Runde (der alte Kontext ist weg).
 6. **Mit echten Dingen** starten (Abschnitt unten), parallel zum Spiel.
 
-## 1. Entwurf → Prüfung A
+## 1. Entwurf und Entscheidung
 
-1. Bau-Agent mit `bauen.md`, Abschnitt **Entwurf**. Ergebnis: `docs/spiele/<fach>/<spiel>.md` mit allen elf
-   Pflichtteilen aus `docs/spielentwicklung.md` §1 (Teil 11 mit Figur des Spiels und `karte`-Eintrag), committet.
-2. Prüfer mit `pruefung-a.md` (frisch). Rot → Befunde an den Bau-Agenten (SendMessage, Abschnitt **Befunde
-   umsetzen**), dann wieder ein **neuer** Prüfer mit den vorigen Befunden. Höchstens 3 Runden.
+1. Bau-Agent (`sonnet`) mit `bauen.md`, Abschnitt **Entwurf**. Ergebnis: `docs/spiele/<fach>/<spiel>.md` als
+   Pflichtliste mit den elf Teilen aus `docs/spielentwicklung.md` §1 (Teil 11 mit Figur des Spiels und
+   `karte`-Eintrag) und dem Abschnitt „Bausteine“, committet.
+2. **Weg entscheiden** – du selbst, nach dem Abschnitt „Bausteine“ und „Freigabe nötig“ des Entwurfs und nach dieser
+   Regel (`docs/spielentwicklung.md` „Zwei Wege“, dort die Tabelle, was als vorhanden gilt):
 
-## 2. Prototyp → Prüfstand B
+   <!-- regel schnellweg -->
+   **Regel:** Schnellweg, wenn der Entwurf keinen Abschnitt „Freigabe nötig“ hat und das Spiel nur Vorhandenes braucht:
+   die Bausteine aus `spiele/rahmen/` unverändert, festgelegte Lernzeichen mit Baustein, Spielobjekte über
+   `spiele/objekte/objekt.js`, und weder `spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js` noch der RAHMEN von
+   `spiele/vorlage/spiel.js` ändert sich. Sonst voller Weg.
+   <!-- ende regel -->
+
+   Steht ein Baustein als „vorhanden“ im Entwurf, gibt es ihn aber nicht in `spiele/rahmen/` bzw. als festgelegtes
+   Lernzeichen (`docs/grundsaetze-bilder.md` §4/§5, nicht §5a): Er ist neu. Im Zweifel voller Weg. Schreib den Weg
+   mit Grund als eine Zeile „Weg: Schnellweg | voller Weg – <Grund>“ in den Kopf des Entwurfs, committe.
+3. Schnellweg → Abschnitt **S**. Voller Weg → Prüfung A: Prüfer mit `pruefung-a.md` (frisch). Rot → ein **neuer**
+   Bau-Agent (`bauen.md`, Abschnitt **Befunde umsetzen**, Phase Entwurf), dann wieder ein **neuer** Prüfer mit den
+   vorigen Befunden. Höchstens 3 Runden; danach weiter mit §2.
+
+## S. Schnellweg
+
+Ziel: 30–60 Minuten und 8–15 € je Spiel, Steuerung eingerechnet. Höchstens **2 Runden**; Runde `<n>` =
+Bau → Durchspielen → Prüfung, mit eigenem Ordner `A=<Hauptrepo>/.superpowers/spiele/<id klein>/s-<n>`.
+
+1. **Bau** – ein **neuer** Bau-Agent (`sonnet`) mit `bauen.md`: Gemeinsamer Teil + Abschnitt **Schnellweg**; ab
+   Runde 2 zusätzlich **Befunde umsetzen** mit den Befunden der Runde davor. Meldet er, dass er doch etwas Neues
+   braucht (neues Bauteil, Änderung in den Pfaden der Regel): Weg im Entwurf auf „voller Weg“ ändern und mit §2
+   weitermachen, der gebaute Stand ist der Prototyp.
+2. **Durchspielen** – du selbst, kein Urteil, nur Ausgabe:
+   ```bash
+   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs \
+     spiele/<fach>/<spiel>/index.html --bilder $A/bilder --bericht $A/bericht.json
+   # für jede Lernstufe <id> des Spiels:
+   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs \
+     spiele/<fach>/<spiel>/index.html --stufe <id> --bilder $A/<id>/bilder --bericht $A/<id>/bericht.json
+   npm test
+   ```
+   Ausgabe als `runde-s-<n>-spielbarkeit.md`. Grün = Exit 0 aller Befehle. **Rot → die Runde ist rot**, ohne den
+   Prüfer zu starten; die Ausgabe ist der Befund für die nächste Runde.
+3. **Prüfung** – ein **neuer** Prüfer (`opus`) mit `pruefung-schnell.md` (`{{BILDER}}` = `$A/bilder`,
+   `{{STUFEN}}`, `{{BERICHT}}` = `runde-s-<n>.md`). Er schreibt den Bericht selbst; du liest das Urteil wie in
+   „Aufträge an Agenten“.
+4. Rot und `<n>` = 1 → Runde 2 ab Schritt 1. Rot nach Runde 2 → parken. Grün → **Audio** wie in §3, dann
+   **Abschluss** nach §4 ohne Schritt 3 (die Schnellweg-Prüfung ist das Review): Mit echten Dingen, `git merge
+   <basis>`, Merge-Schritte 4 und 5. Ändert der Merge der Basis Dateien des Spiels oder `spiele.json` über einen
+   additiven Konflikt hinaus, zählt das als neue Runde (Schritt 2 und 3).
+5. In der Schlussmeldung Laufzeit (Start bis Merge) und Kosten des Spiels; liegt eines über dem Ziel, den teuersten
+   Agenten nennen.
+
+## 2. Prototyp → Prüfstand B (voller Weg)
 
 1. Bau-Agent (`bauen.md`, **Prototyp**). Er lädt `frontend-design:frontend-design` vor der UI-Arbeit.
 2. **B-Spielbarkeit** führst du selbst aus (kein Urteil, nur Ausgabe), Runde `<n>`:
@@ -125,10 +183,10 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
    Prüfer zu starten; das zählt als Runde von Prüfstand B.
 3. Bei grünem Durchspielen drei frische Prüfer **parallel**: `pruefung-b-didaktik.md`, `pruefung-b-welt.md`,
    `pruefung-b-bedienung.md` (beide mit `{{BILDER}}`).
-4. Grün = alle vier grün. Sonst alle Befunde gesammelt an den Bau-Agenten, danach wieder ab Schritt 2 (neue Prüfer),
-   höchstens 3 Runden.
+4. Grün = alle vier grün. Sonst alle Befunde gesammelt an einen **neuen** Bau-Agenten (Abschnitt **Befunde
+   umsetzen**, Phase Prototyp), danach wieder ab Schritt 2 (neue Prüfer), höchstens 3 Runden.
 
-## 3. Ausbau
+## 3. Ausbau (voller Weg)
 
 Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spielentwicklung.md` §5. Danach du:
 
@@ -148,14 +206,14 @@ Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spie
     `pruefung-b-welt.md` (macht die Bilder der Objektzustände selbst mit `tests/browser/objektbilder.mjs`, dazu den
     Silhouettentest der Karten des Fachs, W-Karte),
     `pruefung-b-bedienung.md`.
-  - Rot → Befunde an den Bau-Agenten; nach 3 Runden rot: parken.
+  - Rot → Befunde an einen neuen Bau-Agenten; nach 3 Runden rot: parken.
 
 ## 4. Abschluss-Review und Merge
 
 1. **Mit echten Dingen** muss gemergt oder geparkt sein (geparkte Anleitungen halten das Spiel nicht auf).
 2. `git merge <basis>` im Spiel-Branch (andere Spiele können `spiele.json` geändert haben; Konflikte additiv lösen).
    Das ist keine Runde; Befunde, die daraus folgen, zählen zur nächsten Runde des Abschluss-Reviews.
-3. Frischer Reviewer mit `abschluss-review.md` über `git diff <basis>...HEAD`. Rot → Befunde an den Bau-Agenten,
+3. Frischer Reviewer mit `abschluss-review.md` über `git diff <basis>...HEAD` (nur voller Weg). Rot → Befunde an einen neuen Bau-Agenten,
    neuer Reviewer, höchstens 3 Runden. Ändert eine Korrektur danach UI-Teile oder `spiel.js`, den passenden B-Prüfer
    (Bedienung bzw. Didaktik/Welt) noch einmal frisch laufen lassen, bevor das Review wiederholt wird.
 4. **Freigabe nötig** (Grundregeln) oder Probelauf: hier aufhören → parken bzw. Probelauf-Meldung.
@@ -219,7 +277,8 @@ node werkzeuge/kosten/transkript.mjs "$T" --ordner spiele/<fach>/<spiel> --phase
 
 ## Parken
 
-Bleibt eine Prüfung (A, B, Ausbau-Prüfung, Abschluss-Review) nach 3 Runden rot (`docs/spielentwicklung.md` §7),
+Bleibt eine Prüfung (A, B, Ausbau-Prüfung, Abschluss-Review) nach 3 Runden rot, im Schnellweg Prüfung oder
+Durchspielen nach 2 Runden (`docs/spielentwicklung.md` §7),
 belegt eine Prüfung, dass die Vorgabe aussichtslos ist, oder ist eine **Freigabe nötig**:
 
 1. In `docs/spiele/<fach>/<spiel>.md` Abschnitt **„Geparkt“**: Datum, Grund, welche Prüfung, offene Befunde je
@@ -236,13 +295,14 @@ belegt eine Prüfung, dass die Vorgabe aussichtslos ist, oder ist eine **Freigab
 
 Kurz, für Christian:
 
-- **Spiel:** Id, Name, **gemergt** (Commit auf `main`), **geparkt** (Grund, Prüfung, Runde) oder **Probelauf**.
+- **Spiel:** Id, Name, Weg (Schnellweg/voller Weg), **gemergt** (Commit auf `main`), **geparkt** (Grund, Prüfung, Runde) oder **Probelauf**.
   Bei geparkt: Branch, Worktree-Pfad und die Frage, die er entscheiden soll.
-- **Belege:** je Prüfung die Runden mit grün/rot (A, B-Didaktik, B-Welt, B-Spielbarkeit mit Zahl der grünen Läufe je
-  Stufe, B-Bedienung, Abschluss-Review); bei Parken die offenen Befunde.
+- **Belege:** je Prüfung die Runden mit grün/rot (Schnellweg: Durchspielen mit Zahl der grünen Läufe je Stufe und
+  die eine Prüfung; voller Weg: A, B-Didaktik, B-Welt, B-Spielbarkeit, B-Bedienung, Abschluss-Review); bei Parken
+  die offenen Befunde.
 - **Anhören:** die neuen Texte wörtlich (oder „Audio nicht erzeugt“), Aufruf `npm run audio:anhoeren`.
 - **Mit echten Dingen:** gemergt, geparkt, offen (über 5 Themen).
-- **Kosten:** Summe aus `npm run kosten` für das Spiel und für die Anleitungen, mit Steuerung.
+- **Kosten:** Summe aus `npm run kosten` für das Spiel und für die Anleitungen, mit Steuerung; Laufzeit.
 - **Stichprobe (Annahme):** Bei gemergten Spielen mit Wahrscheinlichkeit 1 zu 5
   (`node -e 'console.log(Math.random() < 0.2)'`) „Stichprobe – bitte ansehen“ mit dem Pfad der Seite; sonst nichts.
 
@@ -251,12 +311,17 @@ Kurz, für Christian:
 | Fehler | Richtig |
 |---|---|
 | Prüfer aus Runde 1 nach der Überarbeitung wieder fragen | neuer Agent je Runde, vorige Befunde mitgeben |
+| Bau-Agent mit SendMessage für die nächste Runde fortsetzen | neuer Bau-Agent mit Entwurf und Befunden |
+| Schnellweg, obwohl der Entwurf „Freigabe nötig“ hat oder ein Bauteil fehlt | voller Weg |
+| Schnellweg und dazu Prüfung A, drei B-Prüfer und Review | eine Prüfung nach `pruefung-schnell.md` |
+| Fremde Einführung abschalten, weil sie eine andere Welt erzählt | eigene Einführung in der Welt des Spiels |
+| Christians Entscheidung im Katalog-Eintrag wegen eines Befunds umbauen | gesetzt; Widerspruch unter „Freigabe nötig“ |
 | Bau-Agent „prüft selbst“ und meldet grün | grün gibt nur ein frischer Prüfer bzw. der Prüfstand |
 | Prüfer starten, obwohl das Durchspielen rot ist | erst zurück an den Bau-Agenten |
 | Unpassende Prüferantwort mehrmals neu anfordern | höchstens eine Wiederholung, dann rot |
 | Kosten schätzen oder nur Gesamt-Token buchen | `transkript.mjs` mit `--stand` nach jedem Agenten |
 | Christian nach Geschmack fragen | entscheiden, Annahme in den Entwurf schreiben |
 | Neues Lernzeichen gebaut und gemergt | parken mit „Freigabe nötig“ |
-| Nach Runde 3 „noch eine kleine Runde“ | parken |
+| Nach Runde 3 (Schnellweg: Runde 2) „noch eine kleine Runde“ | parken |
 | Nach dem letzten Test noch committen und dann mergen | gemergt wird genau der geprüfte Commit |
 | Audio erzeugt und als „angehört“ gemeldet | Anhören bleibt bei Christian |

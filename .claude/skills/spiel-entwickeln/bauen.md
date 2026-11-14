@@ -1,8 +1,9 @@
 # Auftrag an den Bau-Agenten
 
-Vorlage für den Skill `spiel-entwickeln`. Der Skill füllt `{{…}}` und schickt den **gemeinsamen Teil** plus genau
-einen Abschnitt. Derselbe Bau-Agent darf über die Runden fortgesetzt werden (SendMessage mit „Befunde umsetzen“);
-prüfen darf er nie.
+Vorlage für den Skill `spiel-entwickeln`. Der Skill füllt `{{…}}` und schickt den **gemeinsamen Teil** plus den
+Abschnitt der Phase (Entwurf, Schnellweg, Prototyp oder Ausbau), ab der zweiten Runde dazu „Befunde umsetzen“. Jede
+Runde bekommt einen **neuen** Bau-Agenten; ein Bau-Agent wird nie fortgesetzt (sein ganzer Kontext würde bei jedem
+Zug neu gelesen). Prüfen darf er nie.
 
 ---
 
@@ -29,18 +30,26 @@ Regeln:
   `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 - Du prüfst nicht, ob dein Ergebnis „grün“ ist; das tun andere. Tests und Prüfstand laufen lassen darfst und sollst du.
 
+- Was vor dir gebaut wurde, liegt im Branch und im Entwurf; lies es dort, statt es neu zu erfinden.
+
 Rückmeldung am Ende (kurz): was entstanden ist (Dateien), Commits, Annahmen, was du bewusst offen gelassen hast.
 
 ---
 
 ## Entwurf
 
-Schreibe `{{ENTWURF}}` (eine Seite) mit den elf Pflichtteilen aus `docs/spielentwicklung.md` §1 in dieser
-Reihenfolge und mit diesen Überschriften: Zweck in der Spielwelt · Die Runde in fünf Sätzen · Lernhandlung =
-Spielhandlung · Sachwelt und Sachgrund · Figur · Bildschirm-Skizze · Rückmeldung · Hilfe-Leiter · Stufen ·
-Aufgabenschlüssel und arten · Spielobjekte.
+Schreibe `{{ENTWURF}}` als **Pflichtliste** (höchstens etwa 80 Zeilen, Stichpunkte statt Prosa) mit den elf
+Pflichtteilen aus `docs/spielentwicklung.md` §1 in dieser Reihenfolge und mit diesen Überschriften: Zweck in der
+Spielwelt · Die Runde in fünf Sätzen · Lernhandlung = Spielhandlung · Sachwelt und Sachgrund · Figur ·
+Bildschirm-Skizze · Rückmeldung · Hilfe-Leiter · Stufen · Aufgabenschlüssel und arten · Spielobjekte · dazu am Ende
+**Bausteine**.
 
 - Kopf: Katalog-Id, Name, Fach, Spielordner, Stand (Datum), Abweichungen vom Katalog-Eintrag mit Grund.
+- **Bausteine:** je Bedienteil, Lernzeichen, Spielobjekt und Figur, das das Spiel braucht, eine Zeile mit
+  „vorhanden“ (Pfad: `spiele/rahmen/…`, `spiele/objekte/…`) oder „neu“, nach der Tabelle in
+  `docs/spielentwicklung.md` „Zwei Wege“. Dazu, ob die Lernhandlung ohne Änderung an `spiele/rahmen/`,
+  `spiele/kern/`, `spiele/lernsteuerung.js` und dem RAHMEN der Vorlage geht. Danach entscheidet der Skill den Weg; ein
+  Spiel aus lauter Vorhandenem ist schneller fertig, aber erfinde kein „vorhanden“: Was es nicht gibt, ist neu.
 - Alle gesprochenen Sätze **wörtlich** (Erzähler; Figuren sprechen nicht, `docs/stimme.md`), keine Wörter aus
   `docs/grundsaetze.md` §3.2, Fachbegriffe nach §5.1.
 - Figur: eine aus `docs/figuren.md` §2 mit genau einer Aufgabe (§3), Platz im Bild, Haltungen.
@@ -60,6 +69,37 @@ Aufgabenschlüssel und arten · Spielobjekte.
 - Prüfe selbst die Liste `docs/grundsaetze.md` §12, bevor du abgibst.
 
 Committen: `docs({{ORDNERNAME}}): Spielentwurf`.
+
+---
+
+## Schnellweg: das ganze Spiel in einem Zug
+
+Das Spiel braucht nur Vorhandenes (Weg im Kopf des Entwurfs). Du baust es **ganz**, mit allen Lernstufen, ohne
+Prototyp dazwischen; danach spielt der Skill jede Stufe automatisch durch, und ein Prüfer prüft alles auf einmal.
+
+Erst `frontend-design:frontend-design` laden (Skill), dann bauen. Farbwelt (`docs/grundsaetze-bilder.md` §6) und
+`docs/bedienung.md` sind verbindlich und gehen vor allgemeinen Gestaltungsvorschlägen.
+
+- **Grenzen des Schnellwegs:** nichts ändern in `spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js`,
+  `spiele/objekte/objekt.js` und im RAHMEN von `spiele/vorlage/spiel.js`; kein neues Lernzeichen, kein Bedienteil im
+  Spiel nachbauen. Geht es ohne nicht, **halte an** und melde, was fehlt und warum (dann wechselt der Skill in den
+  vollen Weg); bau es nicht trotzdem.
+- **Grundgerüst** wie im Abschnitt Prototyp unten (Kopie der Vorlage, „../“ → „../../“, Test-Schnittstelle,
+  `spiele.json`, `logik.js` mit Node-Tests, RAHMEN mit `?stufe` und `lernstufe` behalten).
+- **Alle Lernstufen** (material / vorstellung / kopf), soweit der Entwurf sie vorsieht, in einem Zug; jede über
+  `?stufe=<id>` im Testbetrieb erreichbar.
+- **Umfang des Ausbaus** wie im Abschnitt Ausbau unten: Spielobjekte als animierte SVG, Regal-Bild, Kartenbild mit
+  Silhouettentest, Szenenbild nur über das Werkzeug, Texte als Daten (`npm run audio` startest du nicht),
+  vollständiger Eintrag in `spiele.json`.
+- **Einführung in der Welt des Spiels:** Erzählt die Einführung eines Themas (`spiele/einfuehrungen/*.json`) eine
+  andere Welt, schreib eine eigene Einführung in der Sachwelt des Spiels (gleiches Format, im Spielordner) und spiel
+  sie mit `spieleEinfuehrung` aus `spiele/einfuehrung.js`; nicht abschalten (L5, A4b).
+- Checklisten `docs/bedienung.md` §10 und `docs/grundsaetze.md` §12 durchgehen; selbst laufen lassen, bis alles
+  durchläuft: `npm test` und `NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs
+  {{SEITE}}`, dazu `--stufe <id>` für jede Lernstufe.
+
+Committen in sinnvollen Schritten (`feat({{ORDNERNAME}}): …`). In der Rückmeldung außerdem die Liste der neuen Texte
+wörtlich.
 
 ---
 
@@ -108,7 +148,8 @@ Lernstufen, ruhig und sanft; abenteuer mitgeplant):
 - **Texte als Daten** in `{{SPIELORDNER}}/texte.json` und als feste Zeichenketten (Kopf der Vorlage, Schritt 3).
   `npm run audio` startest du **nicht**; das tut der Skill danach (Kosten). Nichts anhören, nichts als angehört
   markieren. Gib die Liste der neuen Texte wörtlich zurück.
-- Einführung (`spiele/einfuehrungen/`, Lernplan `einfuehrung`), vollständiger Eintrag in `spiele.json`.
+- Einführung (`spiele/einfuehrungen/`, Lernplan `einfuehrung`), vollständiger Eintrag in `spiele.json`. Erzählt die
+  Einführung des Themas eine andere Welt: eigene Einführung in der Welt des Spiels, nicht abschalten (A4b, L5).
 - Checklisten `docs/bedienung.md` §10 und `docs/grundsaetze.md` §12 durchgehen; `npm test` und Durchspielen grün,
   auch je Lernstufe (`durchspielen.mjs {{SEITE}} --stufe <id>`).
 
@@ -118,7 +159,9 @@ Committen in sinnvollen Schritten (`feat({{ORDNERNAME}}): …`).
 
 ## Befunde umsetzen
 
-Ein unabhängiger Prüfer hat Folgendes rot gegeben (Runde {{RUNDE}} von höchstens 3):
+Ein unabhängiger Prüfer (oder das Durchspielen) hat Folgendes rot gegeben (Runde {{RUNDE}}; höchstens 3 Runden, im
+Schnellweg 2). Du bist ein neuer Bau-Agent: Der Stand liegt im Branch, der Entwurf in `{{ENTWURF}}`; lies beides,
+bevor du änderst, und bau nicht neu, was schon steht.
 
 {{BEFUNDE}}
 

@@ -35,8 +35,81 @@ Jede Prüfung vergibt je Kriterium **grün** oder **rot** mit Beleg (Datei:Zeile
 der Grund im Entwurf steht.
 
 Die Aufträge an Bau-Agenten und Prüfer liegen beim Skill (`.claude/skills/spiel-entwickeln/`). A1–A12 (§2) und die
-Aufträge B-Didaktik, B-Welt, B-Bedienung (§4) stehen dort wörtlich; `tests/skill-spiel-entwickeln.test.mjs` wird rot,
-wenn sie von diesem Dokument abweichen. Wer hier ein Kriterium ändert, zieht die Vorlage nach.
+Aufträge B-Didaktik, B-Welt, B-Bedienung (§4) stehen dort wörtlich, in der Prüfung des Schnellwegs zusammen mit der
+Checkliste `bedienung.md` §10; `tests/skill-spiel-entwickeln.test.mjs` wird rot, wenn sie von diesem Dokument (bzw.
+`bedienung.md`) abweichen. Wer hier ein Kriterium ändert, zieht die Vorlage nach.
+
+Der Ablauf oben ist der **volle Weg**. Die meisten Spiele nehmen den kürzeren **Schnellweg** (nächster Abschnitt).
+
+## Zwei Wege (Christian, 2026-11-14)
+
+Der volle Weg ist für ein Spiel aus lauter vorhandenen Teilen zu schwer: Ein Probelauf an M14 brauchte über eine
+Stunde und 23 €, bis Prüfstand B Runde 1 erreicht war; ein von Hand gebautes Spiel war in 30 Minuten fertig und
+erfüllte sein Ziel. Deshalb gibt es zwei Wege. Welcher gilt, entscheidet die Steuerung **nach dem Entwurf** (§1).
+
+### Entscheidung
+
+<!-- regel schnellweg -->
+**Regel:** Schnellweg, wenn der Entwurf keinen Abschnitt „Freigabe nötig“ hat und das Spiel nur Vorhandenes braucht:
+die Bausteine aus `spiele/rahmen/` unverändert, festgelegte Lernzeichen mit Baustein, Spielobjekte über
+`spiele/objekte/objekt.js`, und weder `spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js` noch der RAHMEN von
+`spiele/vorlage/spiel.js` ändert sich. Sonst voller Weg.
+<!-- ende regel -->
+
+**Vorhanden** heißt im Einzelnen:
+
+| Was | vorhanden (Schnellweg) | neu (voller Weg) |
+|---|---|---|
+| Bedienteile | die Bausteine aus `bedienung.md` §9 (`<ls-knopf>`, `<ls-leiste>`, `<ls-blase>`, `<ls-hilfe>`, `<ls-pause>`, `<ls-tastatur>`, `ziehbar()` …), so benutzt, wie ihre Schnittstelle es vorsieht | ein neuer Baustein oder eine Änderung an einem vorhandenen; eine eigene Bedienung im Spiel, die einen Baustein nachbaut |
+| Lernzeichen | festgelegt in `grundsaetze-bilder.md` §4/§5 **und** als Baustein in `spiele/rahmen/` gebaut (heute `<ls-perlenstab>`, `<ls-wortart>`) | jede Vormerkung aus `grundsaetze-bilder.md` §5a (Zerlegungsliste, Silbenbogen …) und jedes festgelegte Zeichen ohne Baustein |
+| Mechanik | die Lernhandlung geht mit diesen Bausteinen, den Gesten aus `bedienung.md` §5 und dem RAHMEN der Vorlage (Hilfe-Leiter, Meldung, Stufen) | eine neue Geste oder Eingabe, ein Eingriff in `spiele/kern/`, `spiele/lernsteuerung.js` oder den RAHMEN |
+| Spielobjekte, Figur | Arten aus `spiele/objekte/` und neue Arten als eigene Datei über `meldeObjekt` **(Annahme:** eine neue Sachwelt-Art ist kein neues Bauteil) | eine Änderung an `spiele/objekte/objekt.js` |
+| offene Fragen | keine | eine offene Frage aus `grundsaetze-bilder.md` §15 oder ein Widerspruch zu einer Entscheidung von Christian im Katalog-Eintrag (beides steht dann unter „Freigabe nötig“) |
+
+Was neu ist, wird nach §8a des Katalogs ohnehin erst mit Christians Freigabe gültig: Der volle Weg baut und prüft es
+und parkt dann mit „Freigabe nötig“; nach der Freigabe läuft der volle Weg zu Ende. Merkt der Bau-Agent des
+Schnellwegs, dass er doch etwas Neues braucht, hält er an und meldet es; die Steuerung wechselt in den vollen Weg
+(der gebaute Stand dient als Prototyp, die Runden von Prüfstand B zählen ab 1).
+
+### Schnellweg (Regelfall)
+
+```
+Katalog-Eintrag → 1 Entwurf (kompakt) → Entscheidung: Schnellweg
+  → Bau in einem Zug (alle Lernstufen, frischer Bau-Agent) → Durchspielen (jede Stufe) ──rot──┐
+  → eine Prüfung (frischer Prüfer, alle Kriterien) ──rot──────────────────────────────────────┤
+          ↑──────────── frischer Bau-Agent mit Entwurf + Befunden, höchstens 2 Runden ────────┘
+  → Audio → Merge nach main          (nach 2 Runden rot: parken, §7)
+```
+
+| Schritt | Wer | Modell | Ergebnis |
+|---|---|---|---|
+| Entwurf | frischer Bau-Agent | `sonnet` (Annahme) | §1 als Pflichtliste: die elf Teile knapp in Stichpunkten, Sätze wörtlich, dazu „Bausteine“ (was das Spiel aus den Zeilen der Tabelle oben braucht); höchstens etwa 80 Zeilen |
+| Entscheidung | Steuerung | – | Schnellweg oder voller Weg nach der Regel, Grund in einer Zeile in den Entwurf |
+| Bau | frischer Bau-Agent | `sonnet` | das ganze Spiel in einem Zug: alle Lernstufen und der Umfang des Ausbaus (§5), ohne Audio; Einführung in der Welt des Spiels (A4b) |
+| Durchspielen | Steuerung | – | `tests/browser/durchspielen.mjs` ohne und mit `--stufe` für jede Lernstufe, `npm test`; rot → zurück an einen frischen Bau-Agenten, ohne Prüfer |
+| Prüfung | ein frischer Prüfer | `opus` | eine Prüfung mit allen Kriterien: A1–A12 (§2) am Entwurf und am Spiel, B-Didaktik, B-Welt mit W-Karte, B-Bedienung (§4), Checkliste `bedienung.md` §10, dazu: der Diff bleibt im Schnellweg (nichts in den Pfaden der Regel geändert) |
+| Audio, Merge | Steuerung | – | `npm run audio -- --spiel …`, Prüfberichte, Kosten, Merge wie im vollen Weg |
+
+- **Runden:** Eine Runde ist Bau (bzw. Befunde umsetzen), Durchspielen und Prüfung. Höchstens **2 Runden**; ist
+  danach etwas rot (auch das Durchspielen), wird geparkt (§7). Prüfung A, Prüfstand B und Abschluss-Review entfallen
+  als eigene Schritte, ihre Kriterien stehen in der einen Prüfung.
+- **Je Runde ein frischer Bau-Agent:** Er bekommt den Entwurf und die Befunde der letzten Runde, den Stand findet er
+  im Branch. Ein Bau-Agent wird nie über Runden fortgesetzt: Ein fortgesetzter Agent liest bei jedem Zug seinen ganzen
+  Kontext neu (im Probelauf etwa 380 000 Token je Zug, 8,9 Millionen Cache-Token für eine einzige Runde Befunde).
+- **Prüfer schreiben ihren Bericht selbst** in die Arbeitsablage des Laufs; die Steuerung tippt nichts ab.
+- **Entscheidungen von Christian im Katalog-Eintrag** (mit „Christian“ und Datum gekennzeichnet) sind gesetzt. Kein
+  Befund ist ein Grund, davon wegzubauen; ein Widerspruch zu einem Kriterium kommt unter „Freigabe nötig“ (und führt
+  damit in den vollen Weg).
+- **Eine Welt, auch in der Einführung (A4b):** Erzählt die Einführung eines Themas (`spiele/einfuehrungen/*.json`) eine
+  andere Welt, bringt das Spiel eine eigene Einführung in seiner Welt mit; die Einführung abzuschalten ist keine
+  Lösung (L5).
+- **Ziel:** 30–60 Minuten und 8–15 € je Spiel, Steuerung eingerechnet. Liegt ein Lauf darüber, nennt die
+  Schlussmeldung Zeit, Kosten und den teuersten Agenten.
+
+### Voller Weg
+
+Für eine neue Mechanik, ein neues Lernzeichen oder ein neues Bedienteil: Ablauf oben, §2–§5, unverändert, mit
+höchstens 3 Runden je Prüfung. Auch hier bekommt jede Runde einen frischen Bau-Agenten mit Entwurf und Befunden.
 
 ## Ablage (Christian)
 
@@ -75,6 +148,11 @@ docs/spiele/<fach>/<spiel>.md          der Spielentwurf
 
 Datei `docs/spiele/<fach>/<spiel>.md` (eine Seite), abgeleitet aus dem Katalog-Eintrag. **Der Katalog-Eintrag ist ein
 Vorschlag, keine Vorgabe:** Passt seine Welt, Figur oder Mechanik nicht, weicht der Entwurf ab und sagt warum.
+Ausgenommen sind Entscheidungen von Christian im Eintrag (mit Datum): Sie sind gesetzt.
+
+Der Entwurf ist eine **Pflichtliste**: die elf Teile knapp in Stichpunkten (höchstens etwa 80 Zeilen), gesprochene
+Sätze wörtlich. Am Ende steht **„Bausteine“**: welche Bedienteile, Lernzeichen und Spielobjekte das Spiel braucht,
+je mit „vorhanden“ oder „neu“ nach der Tabelle in „Zwei Wege“. Danach entscheidet die Steuerung den Weg.
 
 Pflichtteile:
 1. **Zweck in der Spielwelt:** Wozu tut das Kind das? Was bewirkt die richtige Antwort? (ein Satz)
@@ -276,6 +354,7 @@ für alle Spiele des Katalogs vorhersagen lassen.
 
 ## 7. Parken
 
-Bleibt Prüfung A oder B nach drei Runden rot, wird das Spiel geparkt: Branch bleibt, `docs/spiele/<fach>/<spiel>.md` bekommt
+Bleibt Prüfung A oder B nach drei Runden rot (im Schnellweg: die Prüfung oder das Durchspielen nach zwei Runden),
+wird das Spiel geparkt: Branch bleibt, `docs/spiele/<fach>/<spiel>.md` bekommt
 einen Abschnitt „Geparkt“ mit den offenen Befunden, Christian bekommt eine kurze Meldung. Kein weiterer Versuch ohne
 seine Entscheidung (z. B. Katalog-Eintrag ändern).
