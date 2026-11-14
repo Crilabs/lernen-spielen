@@ -13,6 +13,19 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "namen-gross": {
+   "fach": "schreiben",
+   "name": "Namen groß",
+   "titel": "Namen schreiben: vorn groß, dann klein",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Tischkärtchen für alle"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/namen-gross.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",

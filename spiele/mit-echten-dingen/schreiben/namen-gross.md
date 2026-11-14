@@ -1,7 +1,6 @@
 ---
 thema: namen-gross
 fach: schreiben
-entwurf: true
 bild: { figur: tischkaertchen, zustand: beschrieben }
 quellen:
   - Grundschrift – wie es dazu kam und warum sie schriftdidaktisch nötig ist (Horst Bartnitzky, in „Grundschrift. Kinder entwickeln ihre Handschrift“, Beiträge zur Reform der Grundschule 142, 2016, S. 12–38; Kinder schreiben zuerst in Großbuchstaben und nehmen Schrift für eigene Absichten in Gebrauch, „mit Namen kennzeichnen“), Grundschulverband, https://www.pedocs.de/volltexte/2019/17691/pdf/GSV_2016_Bartnitzky_Grundschrift_wie_es_dazu_kam_und_warum_sie_schriftdidaktisch_noetig_ist.pdf, abgerufen 2026-11-14
