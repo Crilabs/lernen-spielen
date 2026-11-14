@@ -89,5 +89,18 @@
   "notiz": "Steuerung M37 (Spiel und Anleitungen)",
   "cache_lesen": 21257291,
   "cache_schreiben": 264972
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "entwurf",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 74,
+  "ausgabe": 42348,
+  "einheit": "tokens",
+  "menge": 4807885,
+  "notiz": "Bau-Agent Entwurf neu (Vorrat), Runde 1",
+  "cache_lesen": 4586297,
+  "cache_schreiben": 179166
  }
 ]
