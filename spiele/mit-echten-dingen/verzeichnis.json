@@ -39,39 +39,158 @@
    "entwurf": false,
    "datei": "mathe/zehnerreihe.md"
   },
-  "zerlegen-2": {
+  "zerlegen-10": {
    "fach": "mathe",
-   "name": "Die 2 zerlegen",
-   "titel": "Die 2 in zwei Teile legen",
+   "name": "Die 10 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
    "formen": [
     {
      "situation": "tisch",
-     "name": "Zwei Nudeln, zwei Teller"
+     "name": "Essen für zwei teilen"
     },
     {
      "situation": "unterwegs",
-     "name": "Zwei Steine in zwei Händen"
+     "name": "Steine in zwei Händen"
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen-2.md"
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-2": {
+   "fach": "mathe",
+   "name": "Die 2 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
   },
   "zerlegen-3": {
    "fach": "mathe",
    "name": "Die 3 zerlegen",
-   "titel": "Die 3 in zwei Teile legen",
+   "titel": "Eine Zahl in zwei Teile legen",
    "formen": [
     {
      "situation": "tisch",
-     "name": "Drei Löffel, zwei Teller"
+     "name": "Essen für zwei teilen"
     },
     {
      "situation": "unterwegs",
-     "name": "Drei Zapfen in zwei Händen"
+     "name": "Steine in zwei Händen"
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen-3.md"
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-4": {
+   "fach": "mathe",
+   "name": "Die 4 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-5": {
+   "fach": "mathe",
+   "name": "Die 5 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-6": {
+   "fach": "mathe",
+   "name": "Die 6 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-7": {
+   "fach": "mathe",
+   "name": "Die 7 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-8": {
+   "fach": "mathe",
+   "name": "Die 8 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-9": {
+   "fach": "mathe",
+   "name": "Die 9 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
   },
   "zweierreihe": {
    "fach": "mathe",
