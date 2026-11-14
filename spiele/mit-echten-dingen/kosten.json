@@ -270,5 +270,124 @@
   "thema": [
    "fuenferreihe"
   ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 46,
+  "ausgabe": 13476,
+  "einheit": "tokens",
+  "menge": 1578815,
+  "notiz": "Schreib-Agent kernaufgaben-einmaleins",
+  "cache_lesen": 1495481,
+  "cache_schreiben": 69812,
+  "themen": 1,
+  "thema": [
+   "kernaufgaben-einmaleins"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 20,
+  "ausgabe": 10054,
+  "einheit": "tokens",
+  "menge": 709149,
+  "notiz": "Prüfer E kernaufgaben R1",
+  "cache_lesen": 628265,
+  "cache_schreiben": 70810,
+  "themen": 1,
+  "thema": [
+   "kernaufgaben-einmaleins"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 16,
+  "ausgabe": 7404,
+  "einheit": "tokens",
+  "menge": 693593,
+  "notiz": "Schreib-Agent kernaufgaben, Befunde R1",
+  "cache_lesen": 673969,
+  "cache_schreiben": 12204,
+  "themen": 1,
+  "thema": [
+   "kernaufgaben-einmaleins"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 12,
+  "ausgabe": 7118,
+  "einheit": "tokens",
+  "menge": 363944,
+  "notiz": "Prüfer E kernaufgaben R2",
+  "cache_lesen": 306154,
+  "cache_schreiben": 50660,
+  "themen": 1,
+  "thema": [
+   "kernaufgaben-einmaleins"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 12,
+  "ausgabe": 4631,
+  "einheit": "tokens",
+  "menge": 546457,
+  "notiz": "Befunde R2",
+  "cache_lesen": 532206,
+  "cache_schreiben": 9608,
+  "themen": 1,
+  "thema": [
+   "kernaufgaben-einmaleins"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 14,
+  "ausgabe": 6318,
+  "einheit": "tokens",
+  "menge": 419735,
+  "notiz": "Prüfer E kernaufgaben R3",
+  "cache_lesen": 362393,
+  "cache_schreiben": 51010,
+  "themen": 1,
+  "thema": [
+   "kernaufgaben-einmaleins"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 795,
+  "einheit": "tokens",
+  "menge": 340907,
+  "notiz": "Parken",
+  "cache_lesen": 337282,
+  "cache_schreiben": 2822,
+  "themen": 1,
+  "thema": [
+   "kernaufgaben-einmaleins"
+  ]
  }
 ]
