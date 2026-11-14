@@ -1,7 +1,6 @@
 ---
 thema: vorwaerts-zaehlen
 fach: mathe
-entwurf: true
 bild: { figur: versteckvorhang, zustand: haengt }
 quellen:
   - Arithmetische Basiskompetenzen im Anfangsunterricht fördern – Förderbaustein Zählfähigkeiten, DZLM, https://maco.dzlm.de/sites/maco/files/material-lul/dzlm_difprim_basiskompetenzen_foerdern_zaehlen_220629.pdf, abgerufen 2026-11-14

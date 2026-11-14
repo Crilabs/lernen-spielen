@@ -26,6 +26,19 @@
    "entwurf": false,
    "datei": "mathe/viererreihe.md"
   },
+  "vorwaerts-zaehlen": {
+   "fach": "mathe",
+   "name": "Vorwärts zählen",
+   "titel": "Von einer Zahl aus weiterzählen",
+   "formen": [
+    {
+     "situation": "bewegung",
+     "name": "Verstecken ab einer Startzahl"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/vorwaerts-zaehlen.md"
+  },
   "zehnerreihe": {
    "fach": "mathe",
    "name": "Zehnerreihe",
