@@ -15,11 +15,11 @@ quellen:
 
 Ihr braucht: Papier, einen Stift, Gabeln und Becher
 
-1. Einer schreibt einen Auftrag auf, alles klein: „hol die gabeln und zwei becher“.
-2. Der andere liest ihn und holt die Dinge an den Tisch.
-3. Dann prüft ihr jedes Wort nach dem ersten: Passt im Satz der, die oder das davor? „die gabeln“ passt, „die und“ nicht. Bei „becher“ denkt ihr den Artikel dazu: „die becher“.
-4. Wo ein Artikel passt, schreibt ihr den Anfang groß darüber. Dann tauscht ihr.
+1. Einer schreibt einen Auftrag auf, alles klein: „hol gabeln und becher und stell sie hin“.
+2. Der andere liest ihn und holt die Dinge.
+3. Dann setzt ihr vor jedes Wort nach dem ersten der, die oder das und lest den Satz: „hol die gabeln“ passt, „hol die und“ nicht.
+4. Wo ein Artikel passt, schreibt ihr den ersten Buchstaben groß darüber. Dann tauscht ihr.
 
-**Darauf kommt es an:** Passt im Satz ein Artikel davor, ist das Wort ein Nomen. Nomen schreibt man groß: die Gabeln. „Die holen“ passt nicht, holen bleibt klein. Am Satzanfang ist jedes Wort groß.
+**Darauf kommt es an:** Passt im Satz ein Artikel vor ein Wort, ist es ein Nomen. Nomen schreibt man groß: die Gabeln. „Die stell“ passt nicht, stell bleibt klein. Am Satzanfang ist jedes Wort groß.
 
 **Leichter:** Nur ein Ding: „hol den teller“. **Schwerer:** „bring das spiel, dann spielen wir“.
