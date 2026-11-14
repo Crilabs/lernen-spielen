@@ -20,6 +20,8 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `wuerfel.js` – ein Spielwürfel, schräg von oben, drei Seiten mit Augen (ohne Ziffer und Schrift).
 - `versteckvorhang.js` – ein Vorhang an der Stange mit angehobenem Saum, darunter zwei Schuhspitzen (Versteckspiel;
   keine Person zu sehen, ohne Ziffer und Schrift).
+- `loeffel-klammern.js` – ein Löffel, darunter zwei Wäscheklammern aus Holz, eine je Silbe von „Löf-fel“ (ohne Schrift und
+  Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.

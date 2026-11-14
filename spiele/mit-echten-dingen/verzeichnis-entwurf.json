@@ -20,14 +20,14 @@
    "formen": [
     {
      "situation": "tisch",
-     "name": "Eine Klammer für jede Silbe"
+     "name": "Wer holt den Löffel?"
     },
     {
      "situation": "bewegung",
-     "name": "Ein Schritt für jede Silbe"
+     "name": "Wer sucht beim Verstecken?"
     }
    ],
-   "entwurf": true,
+   "entwurf": false,
    "datei": "lesen/silben-klatschen.md"
   },
   "viererreihe": {

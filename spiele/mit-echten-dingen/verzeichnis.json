@@ -13,6 +13,23 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "silben-klatschen": {
+   "fach": "lesen",
+   "name": "Silben klatschen",
+   "titel": "Wörter in Silben klatschen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Wer holt den Löffel?"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Wer sucht beim Verstecken?"
+    }
+   ],
+   "entwurf": false,
+   "datei": "lesen/silben-klatschen.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",
