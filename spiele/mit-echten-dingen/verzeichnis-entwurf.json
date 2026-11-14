@@ -1,5 +1,22 @@
 {
  "themen": {
+  "der-die-das": {
+   "fach": "grammatik",
+   "name": "der, die, das",
+   "titel": "Der, die oder das?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Hier ist der Pulli"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Wo ist die Rutsche?"
+    }
+   ],
+   "entwurf": true,
+   "datei": "grammatik/der-die-das.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",

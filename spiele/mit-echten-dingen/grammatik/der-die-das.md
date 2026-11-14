@@ -1,0 +1,38 @@
+---
+thema: der-die-das
+fach: grammatik
+entwurf: true
+bild: { figur: waeschestapel, zustand: gefaltet }
+quellen:
+  - Montessori einfach klar! Handreichung Sprache, Band 3, Kap. 4.3.2 Bestimmter Artikel (Kapferer, Lehmann, Weinhäupl), Institut für Lebendiges Lernen, https://www.montessori-material.de/tpl/download/leseprobe-montessori-einfach-klar-band-3.pdf, abgerufen 2026-11-14
+  - Ist die Genuszuweisung eine gute und sinnvolle Möglichkeit für grammatische Lernprozesse aller Grundschulkinder? (Ida Wolfram, 2023), peDOCS/DIPF, https://www.pedocs.de/volltexte/2025/32475/pdf/Wolfram_2023_Ist_die_Genuszuweisung.pdf, abgerufen 2026-11-14
+  - StrateGe – Strategieorientierte Genusförderung im Schulalter, Universität Duisburg-Essen, https://www.uni-due.de/sonderpaedagogik/sprache/stratege.php, abgerufen 2026-11-14
+  - LehrplanPLUS Grundschule Deutsch 1/2, Lernbereich 4, ISB Bayern, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/deutsch, abgerufen 2026-11-14
+---
+# Der, die oder das?
+
+## Am Tisch: Hier ist der Pulli
+
+Ihr braucht: einen Korb mit trockener Wäsche
+
+1. Nehmt ein Teil aus dem Korb und legt es zusammen. Socken lasst ihr im Korb.
+2. Wer es auf den Stapel legt, sagt dazu: „Hier ist der Pulli.“ „Hier ist die Hose.“ „Hier ist das Handtuch.“
+3. Dann ist der andere dran.
+4. Weiß einer den Artikel nicht, sagt ihr den Satz zusammen.
+
+**Darauf kommt es an:** Zu jedem Nomen gehört ein Artikel: der Pulli, die Hose, das Handtuch. Welcher es ist, sieht man der Sache nicht an. Darum sagt ihr ihn immer mit dem Nomen zusammen.
+
+**Leichter:** Einer sagt den Satz vor, der andere sagt ihn nach. **Schwerer:** Legt drei Stapel: einen für der, einen für die und einen für das.
+
+## Unterwegs: Wo ist die Rutsche?
+
+Ihr braucht: einen Spielplatz oder einen Spaziergang
+
+1. Einer fragt nach etwas, das es dort nur einmal gibt: „Wo ist die Rutsche?“
+2. Die anderen zeigen hin und sagen: „Da ist die Rutsche.“
+3. Dann fragt der Nächste: „Wo ist der Sandkasten?“ „Wo ist das Tor?“
+4. Eins davon wählt ihr als Treffpunkt für heute.
+
+**Darauf kommt es an:** In „Wo ist …?“ und „Da ist …“ bleibt der Artikel, wie er ist: der Sandkasten, die Rutsche, das Tor. So hört ihr jedes Nomen mit seinem Artikel.
+
+**Leichter:** nur Dinge, die ihr gerade seht. **Schwerer:** Fragt nach Dingen, die ihr selten nennt, zum Beispiel der Zaun, die Hecke, das Gebüsch.
