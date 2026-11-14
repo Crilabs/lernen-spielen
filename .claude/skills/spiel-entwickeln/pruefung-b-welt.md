@@ -6,6 +6,8 @@ neuer; läuft parallel zu den anderen B-Prüfern. Der Skill füllt `{{…}}` und
 urteile trotzdem über alle Kriterien neu): …“.
 Der Skill gibt den Bilder-Ordner des Durchspielens (`--bilder`) mit; die Bilder der Spielobjekte macht der Prüfer
 selbst (`tests/browser/objektbilder.mjs`).
+Zum Stilvergleich: `spiele/runde/galerie.html` (die Runde) und `spiele/objekte/tonne.js`; Farben gegen
+`spiele/rahmen/stil.js` (TOKENS) und `spiele/start/welten.js` (PALETTEN) prüfen – eigene Hexwerte oder Lernzeichen-Farben in der Sachwelt sind rot (W-Objekte).
 
 ---
 

@@ -144,6 +144,13 @@ Lernstufen, ruhig und sanft; abenteuer mitgeplant):
   (`meldeObjekt`, Vorbild `tonne.js`); vor einer neuen Art auf `main` nachsehen (`git show main:spiele/objekte/`),
   ob es sie inzwischen gibt; gemeinsam Nutzbares nach `spiele/objekte/`, Spielspezifisches nach
   `{{SPIELORDNER}}/objekte/`; `tests/objekte.test.mjs` grün; in `spiele/rahmen/vorschau.html?objekte` sichtbar.
+- **Stil und Farben wie die bestehenden Figuren:** vor dem Zeichnen `spiele/runde/kinder/stil.js` und `schnitt.js`
+  lesen (Konturstärke, Lichtstufen, Schattenfarben) und deren Helfer nutzen; `spiele/objekte/tonne.js` als Vorbild;
+  `spiele/runde/galerie.html` ansehen. Farben nur aus der Farbwelt (`spiele/rahmen/stil.js` TOKENS,
+  `docs/farbwelt.html`) und den Welt-Paletten (`spiele/start/welten.js` PALETTEN, `docs/grundsaetze-bilder.md` §6.2);
+  keine eigenen Hexwerte, nie Farben der Lernzeichen (Perlen, Stellenwerte) für die Sachwelt. Vor dem Commit ein
+  Vergleichsbild machen (jede neue Figur neben einem Kind der Runde, gleiche Größe, `tests/browser/objektbilder.mjs`)
+  und selbst ansehen: gleiche Kontur, gleiche Lichtführung, keine Verläufe.
 - **Regal-Bild:** `regal: { objekt, wert }` in `spiele.json`, Objekt in `spiele/objekte/`; Regal-Material
   (`spiele/rahmen/material.js`); im Regal (`spiele/regal.html`) bei einem Thema ansehen, für das es gilt.
 - **Kartenbild:** `karte: { figur, zustand, welt }` in `spiele.json`, Figur in `spiele/objekte/` nach
