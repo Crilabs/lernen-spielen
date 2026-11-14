@@ -323,25 +323,37 @@ function zahlDes(t) {
   return n === undefined ? null : Number(n);
 }
 
-// Felder eines Themas für materialFuer (spiele/rahmen/material.js): { id, name, sprich, strang, art, zahl, bereich }
-const materialDes = (t) => ({ id: t.id, name: text(t.name), sprich: text(t.sprich), strang: t.strang, art: t.aufgaben?.art ?? null,
-  zahl: zahlDes(t), bereich: text(t.bereich) });
+// Regal-Bild eines Themas: { objekt, wert } des ersten Spiels in spiele.json, das das Thema bedient und ein Regal-Bild
+// nennt (`regal: { objekt: "<art>", wert: "zahl"|"buchstabe"|null }`); null, wenn keins.
+export function regalBildFuer(ctx, themaId) {
+  for (const s of spieleVon(ctx)) {
+    const r = s?.regal;
+    if (!istObjekt(r) || typeof r.objekt !== "string" || !r.objekt) continue;
+    if (!bedient(ctx, s.id, themaId)) continue;
+    return { objekt: r.objekt, wert: r.wert === "zahl" || r.wert === "buchstabe" ? r.wert : null };
+  }
+  return null;
+}
+
+// Felder eines Themas für materialFuer (spiele/rahmen/material.js): { id, name, sprich, strang, art, zahl, bereich, regal }
+const materialDes = (ctx, t) => ({ id: t.id, name: text(t.name), sprich: text(t.sprich), strang: t.strang, art: t.aufgaben?.art ?? null,
+  zahl: zahlDes(t), bereich: text(t.bereich), regal: regalBildFuer(ctx, t.id) });
 
 // Dasselbe für ein Thema nach Id, gleich in welchem Zustand (Fach-Weg: Material auch an der Station „dran“); null, wenn unbekannt
 export function themaMaterial(ctx, themaId) {
   const t = themaVon(ctx, themaId);
-  return t ? materialDes(t) : null;
+  return t ? materialDes(ctx, t) : null;
 }
 
 // Alle gekonnten Themen (Zustand kann-ich, auch ohne Spiel), nach dem Datum des Gekonnt-Werdens (stand.themen[id].k,
 // von markiereGekonnt und verbucheErgebnis gesetzt), älteste zuerst; ohne Datum zuerst (ältester Bestand),
 // bei Gleichstand Planreihenfolge. bereich: Bereich des Themas im Lernplan ("" wenn keiner), für materialFuer.
-// [{ id, name, sprich, strang, art, zahl, seit, bereich }]
+// [{ id, name, sprich, strang, art, zahl, seit, bereich, regal }]
 export function gekonnteThemen(ctx, stand) {
   const z = zustaende(ctx, stand);
   return themenVon(ctx)
     .filter((t) => z[t.id] === "kann-ich")
-    .map((t) => ({ ...materialDes(t), seit: text(stand?.themen?.[t.id]?.k) }))
+    .map((t) => ({ ...materialDes(ctx, t), seit: text(stand?.themen?.[t.id]?.k) }))
     .sort((a, b) => (a.seit < b.seit ? -1 : a.seit > b.seit ? 1 : 0)); // Array.sort ist stabil
 }
 
@@ -702,7 +714,8 @@ let ctxCache = null;
 
 async function ladeCtx() {
   if (!ctxCache) {
-    const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map((f) => fetch(f).then((r) => r.json())));
+    const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"]
+      .map((f) => fetch(new URL(f, import.meta.url)).then((r) => r.json()))); // neben dieser Datei, gleich wie tief das Spiel liegt
     ctxCache = { plan, spiele };
   }
   return ctxCache;

@@ -585,3 +585,9 @@ test("Befund 6: Wiederholungsrunde winziger Themen höchstens doppelt so lang wi
   s.themen["zerlegen-7"] = { z: "kann-ich", k: HEUTE, stufe: "kopf" };
   assert.equal(zaehle(neueSitzung(ECHT, s, "perlenbruecke", { thema: null, modus: "wiederholung" }, { jetzt: JETZT, max: 10, rnd: lcg(1) })), 8);
 });
+
+test("ladeCtx sucht lernplan.json und spiele.json neben lernsteuerung.js, nicht neben der Seite (Spiele liegen tiefer)", () => {
+  const quelle = readFileSync(new URL("../spiele/lernsteuerung.js", import.meta.url), "utf8");
+  const ladeCtx = quelle.slice(quelle.indexOf("async function ladeCtx()"), quelle.indexOf("return ctxCache;"));
+  assert.match(ladeCtx, /fetch\(new URL\(f, import\.meta\.url\)\)/);
+});

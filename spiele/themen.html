@@ -96,6 +96,7 @@ body {
 .station > * { pointer-events: none; }
 .station ls-perlenstab { height: 2.8rem; }
 .station ls-wortart { height: 6.4rem; }
+.station ls-objekt { height: 6.4rem; }
 .station .karte {
   box-sizing: border-box;
   display: grid;
@@ -129,6 +130,7 @@ body {
 }
 .station.dran ls-perlenstab { height: 3.8rem; }
 .station.dran ls-wortart { height: 9rem; }
+.station.dran ls-objekt { height: 9rem; }
 .station.dran .karte { min-width: 11rem; height: 11rem; font-size: 6rem; border-width: 0.5rem; }
 .station.dran .karte i { width: 6rem; height: 6rem; }
 /* in Sicht: zart, Umriss und Schatten in Naht, die Karte des Themas in Tinte weich. */
@@ -283,6 +285,7 @@ import "./rahmen/leiste.js";
 import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
+import "./objekte/objekt.js";
 import "./rahmen/anregung.js";
 
 const ZUSTAND = { "kann-ich": "kann ich", dran: "dran", "in-sicht": "in Sicht" };

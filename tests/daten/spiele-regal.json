@@ -1,0 +1,12 @@
+{
+  "kategorien": [{ "id": "mathe", "name": "Mathe" }, { "id": "lesen", "name": "Lesen" }],
+  "spiele": [
+    { "id": "ohne-bild", "kategorie": "mathe", "arten": [{ "art": "zerlegung", "zahlen": [8, 8], "stufen": ["kopf"] }] },
+    { "id": "zwei-tonnen", "kategorie": "mathe", "regal": { "objekt": "papiertonne", "wert": "zahl" },
+      "arten": [{ "art": "zerlegung", "zahlen": [2, 7], "stufen": ["kopf"] }] },
+    { "id": "spaeter", "kategorie": "mathe", "regal": { "objekt": "wertstofftonne", "wert": "zahl" },
+      "arten": [{ "art": "zerlegung", "zahlen": [5, 10], "stufen": ["kopf"] }] },
+    { "id": "kaputt", "kategorie": "mathe", "regal": { "objekt": "", "wert": "zahl" },
+      "arten": [{ "art": "zerlegung", "zahlen": [9, 9], "stufen": ["kopf"] }] }
+  ]
+}

@@ -2,6 +2,12 @@
 // Rein und DOM-frei: sagt nur, welcher Baustein das Ding zeigt; die Ansicht baut ihn.
 //
 // Regeln in dieser Reihenfolge:
+//   0. Nennt das Spiel, das das Thema bedient, ein Regal-Bild (spiele.json `regal: { objekt, wert }`, von der
+//      Lernsteuerung als thema.regal mitgegeben, regalBildFuer) → dieses Spielobjekt, flach und still
+//      (`<ls-objekt art="…" wert="…" still>`, spiele/objekte/). wert "zahl": die Zahl des Themas (wie beim
+//      Perlenstab, nur ganze Zahlen ≥ 0), "buchstabe": das Graphem aus dem Namen (Regel 3); null oder nichts
+//      zu finden: das Objekt ohne Wert. Das Objekt muss im gemeinsamen Bestand liegen (spiele/objekte/<art>.js),
+//      damit Regal, Fach-Seite und Startseite es nachladen können.
 //   1. Aufgabenart zerlegung / rechnen / zwillinge / menge mit ganzer Zahl 1 bis 10 → Perlenstab dieser Zahl
 //      (ls-perlenstab zeichnet nur 1 bis 10).
 //   2. Thema, dessen Lernziel die Wortart selbst ist → Wortart-Zeichen. Nur über die ausdrückliche Liste WORTART
@@ -14,8 +20,9 @@
 //   4. alles andere → Karte mit dem Fachsymbol (wert ""; fach = Strang). Ein Buchstabe oder eine Ziffer, die nicht
 //      der Inhalt ist (erster Buchstabe des Namens), stünde für nichts.
 
-/** @typedef {{ id: string, name?: string, strang?: string, bereich?: string, art?: string|null, zahl?: number|null }} Material */
-/** @typedef {{ baustein: "perlenstab", wert: number } | { baustein: "wortart", wert: "nomen"|"verb"|"adjektiv"|"artikel" } | { baustein: "karte", wert: string, fach?: string }} Baustein */
+/** @typedef {{ objekt: string, wert?: "zahl"|"buchstabe"|null }} RegalBild */
+/** @typedef {{ id: string, name?: string, strang?: string, bereich?: string, art?: string|null, zahl?: number|null, regal?: RegalBild|null }} Material */
+/** @typedef {{ baustein: "perlenstab", wert: number } | { baustein: "wortart", wert: "nomen"|"verb"|"adjektiv"|"artikel" } | { baustein: "karte", wert: string, fach?: string } | { baustein: "objekt", art: string, wert: string }} Baustein */
 
 import { FACH_SYMBOLE, bild } from "./stil.js";
 
@@ -53,6 +60,8 @@ export function wortartVon(thema) {
  * @returns {Baustein}
  */
 export function materialFuer(thema) {
+  const regal = regalBildVon(thema);
+  if (regal) return regal;
   const zahl = thema.zahl;
   if (thema.art && MIT_ZAHL.has(thema.art) && Number.isInteger(zahl) && /** @type {number} */ (zahl) >= 1 && /** @type {number} */ (zahl) <= 10) {
     return { baustein: "perlenstab", wert: /** @type {number} */ (zahl) };
@@ -64,6 +73,23 @@ export function materialFuer(thema) {
     if (graphem) return { baustein: "karte", wert: graphem };
   }
   return { baustein: "karte", wert: "", fach: thema.strang ?? "" };
+}
+
+/** Gültige Namen von Spielobjekten (wie meldeObjekt in spiele/objekte/objekt.js). */
+const OBJEKT_NAME = /^[a-z][a-z0-9-]*$/;
+
+/**
+ * Baustein für das Regal-Bild eines Themas oder null (Regel 0).
+ * @param {Material} thema
+ * @returns {Baustein | null}
+ */
+export function regalBildVon(thema) {
+  const r = thema.regal;
+  if (!r || typeof r.objekt !== "string" || !OBJEKT_NAME.test(r.objekt)) return null;
+  let wert = "";
+  if (r.wert === "zahl" && Number.isInteger(thema.zahl) && /** @type {number} */ (thema.zahl) >= 0) wert = String(thema.zahl);
+  if (r.wert === "buchstabe") wert = graphemVon(typeof thema.name === "string" ? thema.name : "");
+  return { baustein: "objekt", art: r.objekt, wert };
 }
 
 /**
@@ -86,7 +112,8 @@ const ESC = /** @type {Record<string, string>} */ ({ "&": "&amp;", "<": "&lt;", 
 
 /**
  * HTML eines Bausteins, klein und flach zum Ansehen (Fach-Seite und Regal teilen es; Größe und Form setzt die
- * Seite per CSS). Perlenstab und Wortart über die Rahmen-Bausteine, sonst `<span class="karte">`: mit dem Graphem
+ * Seite per CSS). Regal-Bild als `<ls-objekt … still>` (die Seite importiert spiele/objekte/objekt.js, die Art lädt
+ * es selbst nach), Perlenstab und Wortart über die Rahmen-Bausteine, sonst `<span class="karte">`: mit dem Graphem
  * oder, ohne Wert, mit dem Fachsymbol (`<i>` mit `--bild`, Maske in Tinte wie die Fachkachel; Sprechen ohne Symbol
  * bleibt eine schlichte Karte). Alles aria-hidden: den Namen trägt der Knopf darum.
  * @param {Baustein} b
@@ -94,6 +121,10 @@ const ESC = /** @type {Record<string, string>} */ ({ "&": "&amp;", "<": "&lt;", 
  */
 export function bausteinHtml(b) {
   const wert = String(b.wert).replace(/[&<>"']/g, (z) => ESC[z]);
+  if (b.baustein === "objekt") {
+    if (!OBJEKT_NAME.test(b.art)) return `<span class="karte symbol" aria-hidden="true"></span>`;
+    return `<ls-objekt art="${b.art}"${wert ? ` wert="${wert}"` : ""} still aria-hidden="true"></ls-objekt>`;
+  }
   if (b.baustein === "perlenstab") return `<ls-perlenstab wert="${wert}" aria-hidden="true"></ls-perlenstab>`;
   if (b.baustein === "wortart") return `<ls-wortart art="${wert}" aria-hidden="true"></ls-wortart>`;
   if (wert) return `<span class="karte" aria-hidden="true">${wert}</span>`;
