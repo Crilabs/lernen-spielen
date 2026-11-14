@@ -1,4 +1,17 @@
 {
   "hinweis": "Korrekturen je Text (Schlüssel wie in spiele/audio/index.json). sprich: andere Schreibweise für die Stimme. ssml: SSML-Stück, z. B. <phoneme alphabet=\"ipa\" ph=\"…\">…</phoneme>. datei: von Hand ersetzte Datei unter spiele/audio/, wird nie überschrieben.",
-  "texte": {}
+  "texte": {
+    "Ä von A: Mehrzahl": {
+      "sprich": "Äh von A: Mehrzahl"
+    },
+    "Ä von A: Steigern": {
+      "sprich": "Ähh von A: Steigern"
+    },
+    "Ä von A: Verbformen": {
+      "sprich": "Ä von A: Werbformen"
+    },
+    "Alle finden": {
+      "sprich": "Alle finden."
+    }
+  }
 }
