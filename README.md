@@ -20,7 +20,7 @@ Die frühere Web-Fassung mit PHP ist entfernt.
   - `lernsteuerung.js` (Lernplan, Lernstand, Daten der Ansichten), `lernspiel.js` (gemeinsame Hilfen der Spiele), die
     Spiele als HTML-Dateien, `spiele.json` (Kategorien und Spiele). Die ersten sechs Spiele sind am 2026-11-14
     entfernt worden (Neubau nach `docs/grundsaetze.md`, Code in der Git-Historie).
-  - Als Material liegen noch `bilder/` (Wimmelbilder samt Pausenbildern), `figuren/` und `saetze/` (Diktatsätze).
+  - Als Material liegt noch `saetze/` (Diktatsätze). Die Figuren zeichnet `runde/` (die Runde, `docs/figuren.md`).
   - Browser-Prüfung der vier Ansichten (leer, gekonnt ohne Spiele, mit Testspielen; PIN; Zahnrad):
     `tests/browser/ansichten.spec.mjs` (Aufruf im Kopfkommentar, nicht Teil von `npm test`).
 - `spiele/rahmen/` – die gemeinsamen Bausteine jedes Spiels (Web Components `ls-*`: Kopfleiste, Knöpfe, Sprechblase,
@@ -147,7 +147,9 @@ Dateien:
   Elternbereich bereit (`elternThemen`, `markiereGekonnt`, `setzeZurueck`, `gibFrei`).
 - `spiele/einfuehrung.js` und `spiele/einfuehrungen/*.json`: kurze Geschichten vor einem neuen Thema.
   Jeder Text hat `sprich` (wird gesprochen, **nie mit Ziffern oder Zahlwörtern**, die Computerstimme spricht Zahlen
-  oft falsch), `zeig` (Sprechblase, darf Ziffern enthalten) und `bild`.
+  oft falsch), `zeig` (Erzählblase, darf Ziffern enthalten) und `bild`. Es erzählt der Erzähler; im Bild stehen
+  Kinder der Runde (`{ "figur": "ela", "haltung": "zeigen", "aufgabe": "vorzeigen" }`, gezeichnet mit
+  `spiele/runde/`), Perlenstäbe und Zahlen.
 - `spiele/themen.html`: die Übersicht „Was ich kann“ (Weg mit Stationen, ruhig, ohne Zähler oder Prozente).
 - `scripts/luecken.mjs`: `npm run luecken` listet Lücken im Plan, z. B. Themen ohne Spiel, das sie bedient.
 
@@ -197,9 +199,3 @@ und Ziehen kommen aus `spiele/rahmen/`, kein Spiel baut sie selbst. Neue Spiele 
    (die App liefert für fehlende Dateien die Startseite aus, deshalb wird nicht geraten). Ein Test prüft,
    dass Kennzeichen und Moduldatei zusammenpassen. Ohne Modul zeigt die Startseite keinen Balken.
    Spiele mit `arten` bekommen keinen Fortschrittsbalken; ihren Stand zeigt „Was ich kann“.
-
-## Wimmelbilder (Material)
-
-Die Bilder in `spiele/bilder/` stammen aus dem entfernten Wimmelbild-Spiel und bleiben für neue Spiele liegen:
-je Bild `<name>.jpg`, `<name>.json` mit den Dingen (`formen` als `[x1,y1,x2,y2]` in Prozent des Bildes) und ein
-Pausenbild `<name>-pause.jpg`; die Reihenfolge steht in `spiele/bilder/index.json`.
