@@ -3,6 +3,7 @@
 // Lernsteuerung, Speicherung).
 //
 // ctx = { plan, spiele }: plan = lernplan.json, spiele = spiele.json (beide schon geladen).
+//   Optional echteDinge = spiele/mit-echten-dingen/verzeichnis.json (nur für die Hilfen „Mit echten Dingen“).
 // Zufall (rnd), Datum (heute, "JJJJ-MM-TT") und Uhrzeit (jetzt, ms) kommen immer als Parameter.
 //
 // Lernstand (Schlüssel "lernplan"):
@@ -616,6 +617,57 @@ export function luecken(ctx) {
     if (!t.einfuehrung) out.ohneEinfuehrung.push(t.id);
   }
   return out;
+}
+
+// ---------- Mit echten Dingen (docs/mit-echten-dingen.md) ----------
+// Analoges Spielen zählt nie für den Lernstand: Diese Hilfen lesen nur, nichts hier schreibt den Stand.
+
+const SITUATION_WORT = { tisch: "Am Tisch", bewegung: "In Bewegung", unterwegs: "Unterwegs" };
+const verzeichnisVon = (ctx) => (istObjekt(ctx?.echteDinge?.themen) ? ctx.echteDinge.themen : {});
+
+// Was es zu einem Thema „mit echten Dingen“ gibt; null, wenn das Thema unbekannt ist.
+// { id, name, sprich, fach, datei, titel, formen: [{ situation, wort, name }], eltern, entwurf }
+//   datei  = Pfad der Anleitung relativ zu spiele/mit-echten-dingen/ ("mathe/zerlegen-7.md"), null ohne Anleitung
+//   titel  = Überschrift der Anleitung ("" ohne); formen = die Formen der Anleitung in fester Reihenfolge
+//   eltern = Einzeiler aus dem Lernplan (gezeigt, wenn es keine Anleitung gibt)
+export function echteDingeFuer(ctx, themaId) {
+  const t = themaVon(ctx, themaId);
+  if (!t) return null;
+  const v = verzeichnisVon(ctx)[themaId];
+  const da = istObjekt(v) && v.fach === t.strang;
+  const formen = da && Array.isArray(v.formen)
+    ? v.formen.filter((f) => Object.hasOwn(SITUATION_WORT, f?.situation) && text(f.name))
+      .map((f) => ({ situation: f.situation, wort: SITUATION_WORT[f.situation], name: text(f.name) }))
+    : [];
+  return { id: t.id, name: text(t.name), sprich: text(t.sprich), fach: t.strang, datei: da ? `${t.strang}/${t.id}.md` : null,
+    titel: da ? text(v.titel) : "", formen, eltern: text(t.eltern), entwurf: da && v.entwurf === true };
+}
+
+// Übersicht „Mit echten Dingen“ (spiele/mit-echten-dingen.html): woran das Kind gerade ist.
+// { dran, bald, wiederholen }: je [{ ...echteDingeFuer, zustand, spiel }] (spiel = ein digitales Spiel übt das Thema)
+//   dran        Themen „dran“ (Planreihenfolge); dazu je Strang das erste Thema ohne Spiel, dessen Voraussetzungen alle
+//               gekonnt sind (Annahme: so werden Themen ohne Spiel sichtbar, ohne dass alle auf einmal kommen)
+//   bald        Themen „in Sicht“ (wie auf der Fach-Seite, höchstens K.IN_SICHT je Strang); dazu je Strang die nächsten
+//               K.IN_SICHT Themen ohne Spiel, deren Voraussetzungen gekonnt sind
+//   wiederholen die zuletzt gekonnten Themen, neueste zuerst, höchstens `wiederholen`
+export function themenMitEchtenDingen(ctx, stand, { wiederholen = 3 } = {}) {
+  const z = zustaende(ctx, stand);
+  const inSicht = new Set(Object.values(sichtbar(ctx, stand)).flat().filter((id) => z[id] === "in-sicht"));
+  const bekannt = new Set(themenVon(ctx).map((t) => t.id));
+  const bereit = (t) => (t.voraussetzungen ?? []).every((v) => !bekannt.has(v) || z[v] === "kann-ich");
+  const eintrag = (t) => ({ ...echteDingeFuer(ctx, t.id), zustand: z[t.id], spiel: spieleFuer(ctx, t.id).length > 0 });
+  const dran = [], bald = [], ohneSpiel = {};
+  for (const t of themenVon(ctx)) {
+    if (z[t.id] === "dran") { dran.push(eintrag(t)); continue; }
+    if (inSicht.has(t.id)) { bald.push(eintrag(t)); continue; }
+    if (z[t.id] === "kann-ich" || spieleFuer(ctx, t.id).length > 0 || !bereit(t)) continue;
+    const n = (ohneSpiel[t.strang] = (ohneSpiel[t.strang] ?? 0) + 1);
+    if (n === 1) dran.push({ ...eintrag(t), zustand: "dran" });
+    else if (n <= 1 + K.IN_SICHT) bald.push({ ...eintrag(t), zustand: "in-sicht" });
+  }
+  const gekonnt = gekonnteThemen(ctx, stand).reverse().slice(0, Math.max(0, wiederholen))
+    .map((g) => eintrag(themaVon(ctx, g.id)));
+  return { dran, bald, wiederholen: gekonnt };
 }
 
 // ---------- Elternbereich ----------

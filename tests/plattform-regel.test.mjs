@@ -14,6 +14,7 @@ const MUSTER = {
   __TAURI__: /__TAURI__/,
   "navigator.mediaDevices": /navigator\.mediaDevices/,
   "new Audio(": /new Audio\(/,
+  "window.print": /\bwindow\.print\b|(?<![\w.$])print\s*\(/,
 };
 
 // Heute erlaubte Zugriffe je Datei (Pfad relativ zu spiele/). Darf nur schrumpfen.

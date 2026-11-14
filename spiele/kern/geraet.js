@@ -1,10 +1,12 @@
-// Was das Gerät kann (Updates, App beenden, Kiosk) und die Aufrufe dafür.
+// Was das Gerät kann (Updates, App beenden, Kiosk, Drucken) und die Aufrufe dafür.
 // Alle Aufrufe werfen nie; Fehler gehen ins Protokoll.
 import { tauri, befehl, plattform } from "./dienste.js";
 import { protokoll } from "./protokoll.js";
 
 /**
- * @returns {Promise<{ update: boolean, beenden: boolean, kiosk: boolean }>}
+ * drucken: Desktop und Browser ja, Tablet und Telefon nein (dort später über das Teilen-Menü,
+ * docs/mit-echten-dingen.md „Küchenzettel“).
+ * @returns {Promise<{ update: boolean, beenden: boolean, kiosk: boolean, drucken: boolean }>}
  */
 export async function faehigkeiten() {
   let p = "browser";
@@ -14,10 +16,10 @@ export async function faehigkeiten() {
     protokoll("Plattform: " + (/** @type {any} */ (e)?.message ?? e));
     // Plattform unbekannt: Die Desktop-Plugins gibt es nur dort, wo sie registriert sind (Windows-Kiosk).
     const beenden = !!tauri()?.process;
-    return { update: !!tauri()?.updater, beenden, kiosk: beenden };
+    return { update: !!tauri()?.updater, beenden, kiosk: beenden, drucken: beenden };
   }
   const desktop = p === "windows" || p === "macos" || p === "linux";
-  return { update: desktop, beenden: desktop, kiosk: desktop };
+  return { update: desktop, beenden: desktop, kiosk: desktop, drucken: desktop || p === "browser" };
 }
 
 /** @returns {(() => Promise<any>) | undefined} */
@@ -68,5 +70,21 @@ export async function kioskPause(pause) {
     await befehl("kiosk_pause", { pause });
   } catch (e) {
     protokoll("Kiosk-Pause: " + (/** @type {any} */ (e)?.message ?? e));
+  }
+}
+
+/**
+ * Öffnet den Druckdialog des Systems (dort auch „Als PDF sichern“). Nur aufrufen, wenn `faehigkeiten().drucken`.
+ * @returns {boolean} true, wenn der Aufruf durchging
+ */
+export function drucke() {
+  try {
+    const w = /** @type {any} */ (globalThis).window;
+    if (typeof w?.print !== "function") return false;
+    w.print();
+    return true;
+  } catch (e) {
+    protokoll("Drucken: " + (/** @type {any} */ (e)?.message ?? e));
+    return false;
   }
 }
