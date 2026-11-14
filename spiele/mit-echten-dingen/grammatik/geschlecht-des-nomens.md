@@ -1,7 +1,6 @@
 ---
 thema: geschlecht-des-nomens
 fach: grammatik
-entwurf: true
 bild: { figur: einkaufstasche, zustand: voll }
 quellen:
   - LehrplanPLUS Grundschule Deutsch 3/4, Lernbereich 4.3 (Merkmale von Nomen, Artikeln, Pronomen, z. B. Geschlecht), ISB Bayern, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/3/deutsch, abgerufen 2026-11-14

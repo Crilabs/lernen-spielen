@@ -13,6 +13,23 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "geschlecht-des-nomens": {
+   "fach": "grammatik",
+   "name": "Männlich, weiblich, sächlich",
+   "titel": "Er, sie oder es?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Einkauf einräumen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Ein Ding, zwei Wörter"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/geschlecht-des-nomens.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",
