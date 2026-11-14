@@ -13,12 +13,17 @@ Name in der App und im Projekt: **„Mit echten Dingen“** (Annahme; der Knopf 
 
 ## Was entsteht
 
-- **Genau eine Anleitung je Thema (Christian).** Gibt es für ein Thema schon eine, entsteht keine zweite, auch wenn
-  ein weiteres Spiel das Thema bedient.
+- **Je Thema eine Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Christian):** *Am Tisch*
+  (ruhig, konzentriert), *In Bewegung* (Treppe, hüpfen, Raum), *Unterwegs* (Spaziergang, Auto, Einkauf). Varianten
+  nur, wo sie das Thema wirklich treffen; erzwungene Varianten streicht die Prüfung (E1). Gibt es für ein Thema schon
+  eine Datei, entsteht keine zweite, auch wenn ein weiteres Spiel das Thema bedient.
+- **Nach Situation, nicht nach Kind-Typ:** keine Einstellung „Bewegungstyp“ o. ä. im Profil (Lerntypen sind ein
+  Mythos, `grundsaetze.md` §1). Gewählt wird auf der Karte im Moment (N1, N2); die Karte merkt sich die letzte Wahl
+  als Voreinstellung.
 - Datei `spiele/mit-echten-dingen/<fach>/<thema-id>.md` (Markdown), eigene Worte, Quellen nur im Kopf der Datei.
 - **Anrede „ihr“ (Christian):** Kind und Erwachsene als Team, keiner prüft den anderen („Legt die Gabeln in eine
   Reihe.“).
-- **Eine Anleitung mit „Leichter“ und „Schwerer“ (Christian).**
+- **Jede Form mit „Leichter“ und „Schwerer“ (Christian).**
 
 ```markdown
 ---
@@ -26,7 +31,9 @@ thema: vorwaerts-zaehlen
 quellen:
   - <Titel, Herausgeber, URL, abgerufen am>
 ---
-# Gabeln zählen
+# Zählen, wie viele es sind
+
+## Am Tisch: Gabeln zählen
 
 Ihr braucht: eine Besteckschublade
 
@@ -38,8 +45,20 @@ Ihr braucht: eine Besteckschublade
 
 **Leichter:** nur bis fünf. **Schwerer:** erst schätzen, dann zählen.
 
-**Passt gut:** beim Tischdecken, beim Einkauf-Auspacken.
+## In Bewegung: Treppenstufen
+
+Ihr braucht: eine Treppe
+
+1. Geht die Treppe hinauf und zählt bei jeder Stufe eine Zahl.
+2. Oben sagt ihr, wie viele Stufen es waren.
+
+**Darauf kommt es an:** Jede Stufe bekommt genau eine Zahl. Die letzte Zahl sagt, wie viele Stufen es sind.
+
+**Leichter:** nur die ersten fünf Stufen. **Schwerer:** rückwärts hinunter zählen.
 ```
+
+Die Überschrift der Datei nennt das Thema in Alltagssprache; jede Form beginnt mit `## <Situation>: <Name>`. Die
+Karte zeigt die Formen als kleine Wahl (Reiter mit Symbol und Wort).
 
 ## Regeln für den Text
 
@@ -75,6 +94,7 @@ Spiels, die noch keine Anleitung haben.
 | E6 | Fachbegriffe nach §5.1 |
 | E7 | eigene Worte, Quellen angegeben |
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
+| E9 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
 
 Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 5. **Kosten** (Token für Recherche, Schreiben, Prüfung) in `spiele/mit-echten-dingen/kosten.json`, wie bei den
@@ -82,7 +102,22 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 
 ## Wo es zu sehen ist
 
-- **Karte „Mit echten Dingen“** (`<ls-anregung>`) auf der Fach-Seite und im Regal, formatiert (kleiner eigener
+- **Übersicht „Mit echten Dingen“ für Erwachsene und Kinder, ohne Spielen (Christian):** eine eigene Seite
+  `spiele/mit-echten-dingen.html`, ohne PIN, von der Startseite (kleiner Zugang für Erwachsene, neben dem Zahnrad oder
+  unten) und aus dem Elternbereich erreichbar. Sie zeigt, **woran das Kind gerade ist** und was man dazu machen kann:
+  - **Gerade dran:** die Themen im Zustand „dran“ (auch ohne Spiel), je mit Name und den Formen (Am Tisch / In
+    Bewegung / Unterwegs).
+  - **Bald:** die Themen „in Sicht“.
+  - **Zum Wiederholen:** die zuletzt gekonnten Themen (wenige, nach Datum).
+  - Je Thema die Anleitung aufklappbar; Themen ohne Datei zeigen den Einzeiler aus dem Lernplan. Keine Zahlen, kein
+    Lehrplanbezug, kein Fortschritt (das steht im Elternbereich); Sprache für beide lesbar.
+  - **Zum Ausdrucken (Christian): „Küchenzettel“** – ein Knopf „Drucken“ erzeugt eine Druckansicht (eine A4-Seite,
+    Druck-Stylesheet): die Themen von „Gerade dran“ mit je einer kurzen Form (Titel, „Ihr braucht“, die Schritte,
+    „Darauf kommt es an“), schlicht in Tinte auf Weiß, gut lesbar, zum Aufhängen in der Küche. Über den Druckdialog
+    lässt sie sich auch als PDF speichern. Nur wo das Gerät drucken kann (`faehigkeiten`, Annahme: Desktop und
+    Browser; auf dem Tablet über das Teilen-Menü, sobald die Mobil-Fassung kommt).
+
+- **Karte „Mit echten Dingen“** (`<ls-anregung>`) auf der Fach-Seite und im Regal, mit Wahl der Form, formatiert (kleiner eigener
   Markdown-Darsteller: Überschrift, Listen, fett; der Kopf mit den Quellen wird nicht angezeigt). Fehlt die Datei,
   bleibt der bisherige Einzeiler aus dem Lernplan **(Christian)**.
 - **Am Rundenende eines Spiels** als ruhiges Angebot in der Pause, neben „Alle Spiele“ und „Weiter“ (kein Muss, keine
