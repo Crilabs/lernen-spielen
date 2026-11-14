@@ -15,7 +15,7 @@ const HOERGERAET = "#2FB3AE";
 // Lange Locken hinter dem Kopf bis zur Schulter (im Uhrzeigersinn, Buckel nach außen).
 const HINTEN = /** @type {[number, number][]} */ ([
   [163, 22], [182, 24], [198, 32], [209, 45], [214, 62], [215, 80], [214, 98], [209, 114], [198, 122],
-  [184, 118], [140, 118], [126, 122], [115, 114], [110, 98], [109, 80], [111, 62], [117, 46], [129, 32], [145, 24],
+  [190, 112], [184, 98], [162, 92], [140, 98], [133, 112], [126, 122], [115, 114], [110, 98], [109, 80], [111, 62], [117, 46], [129, 32], [145, 24],
 ]);
 // Schopf vorn: über den Kopf, dann am Haaransatz als Lockenrand zurück; links endet er über dem Ohr.
 const VORN = /** @type {[number, number][]} */ ([
@@ -32,7 +32,7 @@ const kringel = (/** @type {[number, number][]} */ punkte, /** @type {string} */
     + `<path d="M${x - 3.5} ${y - 3.5} Q${x} ${y - 6} ${x + 2.5} ${y - 4} Q${x} ${y - 4} ${x - 3.5} ${y - 3.5} Z" fill="${S.heller(farbe, 0.3)}" stroke="none"/>`).join(""),
   kontur: "",
 });
-const HINTEN_KRINGEL = /** @type {[number, number][]} */ ([[115, 84], [115, 102], [124, 114], [209, 82], [209, 100], [200, 114], [205, 62], [118, 64]]);
+const HINTEN_KRINGEL = /** @type {[number, number][]} */ ([[115, 84], [115, 102], [123, 114], [209, 82], [209, 100], [201, 114], [205, 62], [118, 64]]);
 
 /** Ohr mit Hörgerät dahinter (Schlauch bis in den Gehörgang); am anderen Kopfrand das zweite Gerät. */
 const ohr = S.zusammen(
