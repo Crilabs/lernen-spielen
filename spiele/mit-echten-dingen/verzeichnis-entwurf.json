@@ -26,6 +26,23 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "sechserreihe": {
+   "fach": "mathe",
+   "name": "Sechserreihe",
+   "titel": "Sechs Eier in jedem Karton",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eierkartons für den Einkauf"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Am Eierregal"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/sechserreihe.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
