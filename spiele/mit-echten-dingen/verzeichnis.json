@@ -10,7 +10,8 @@
      "name": "Kleingeld für die Brötchen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/fuenferreihe.md"
   },
   "viererreihe": {
    "fach": "mathe",
@@ -22,7 +23,8 @@
      "name": "Tisch decken in zwei Gängen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/viererreihe.md"
   },
   "zehnerreihe": {
    "fach": "mathe",
@@ -34,7 +36,8 @@
      "name": "Das Geld für den Einkauf"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zehnerreihe.md"
   },
   "zerlegen-2": {
    "fach": "mathe",
@@ -50,7 +53,8 @@
      "name": "Zwei Steine in zwei Händen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zerlegen-2.md"
   },
   "zerlegen-3": {
    "fach": "mathe",
@@ -66,7 +70,8 @@
      "name": "Drei Zapfen in zwei Händen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zerlegen-3.md"
   },
   "zweierreihe": {
    "fach": "mathe",
@@ -78,7 +83,8 @@
      "name": "Schuhe in den Schrank"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zweierreihe.md"
   }
  }
 }

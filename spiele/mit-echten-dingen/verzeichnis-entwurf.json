@@ -1,5 +1,18 @@
 {
  "themen": {
+  "fuenferreihe": {
+   "fach": "mathe",
+   "name": "Fünferreihe",
+   "titel": "Fünfer und Zehner beim Bäcker",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kleingeld für die Brötchen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/fuenferreihe.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
@@ -14,19 +27,8 @@
      "name": "Ein Schritt für jede Silbe"
     }
    ],
-   "entwurf": true
-  },
-  "fuenferreihe": {
-   "fach": "mathe",
-   "name": "Fünferreihe",
-   "titel": "Fünfer und Zehner beim Bäcker",
-   "formen": [
-    {
-     "situation": "tisch",
-     "name": "Kleingeld für die Brötchen"
-    }
-   ],
-   "entwurf": false
+   "entwurf": true,
+   "datei": "lesen/silben-klatschen.md"
   },
   "viererreihe": {
    "fach": "mathe",
@@ -38,7 +40,8 @@
      "name": "Tisch decken in zwei Gängen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/viererreihe.md"
   },
   "vorwaerts-zaehlen": {
    "fach": "mathe",
@@ -54,7 +57,8 @@
      "name": "Treppe ab der Mitte"
     }
    ],
-   "entwurf": true
+   "entwurf": true,
+   "datei": "mathe/vorwaerts-zaehlen.md"
   },
   "zehnerreihe": {
    "fach": "mathe",
@@ -66,7 +70,8 @@
      "name": "Das Geld für den Einkauf"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zehnerreihe.md"
   },
   "zerlegen-2": {
    "fach": "mathe",
@@ -82,7 +87,8 @@
      "name": "Zwei Steine in zwei Händen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zerlegen-2.md"
   },
   "zerlegen-3": {
    "fach": "mathe",
@@ -98,7 +104,8 @@
      "name": "Drei Zapfen in zwei Händen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zerlegen-3.md"
   },
   "zerlegen-7": {
    "fach": "mathe",
@@ -114,7 +121,8 @@
      "name": "Sieben Steine in zwei Händen"
     }
    ],
-   "entwurf": true
+   "entwurf": true,
+   "datei": "mathe/zerlegen-7.md"
   },
   "zweierreihe": {
    "fach": "mathe",
@@ -126,7 +134,8 @@
      "name": "Schuhe in den Schrank"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zweierreihe.md"
   }
  }
 }
