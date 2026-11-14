@@ -8,8 +8,8 @@ const html = readFileSync(new URL("../spiele/regal.html", import.meta.url), "utf
 const skript = html.slice(html.indexOf('<script type="module">'));
 const { literaleAusCode } = await import("../werkzeuge/audio/texte.mjs");
 
-test("Regal: Kopfleiste „Mein Regal“ ohne Fach (mit Haus)", () => {
-  assert.match(html, /<ls-leiste id="leiste" spiel="ansichten" titel="Mein Regal"><\/ls-leiste>/);
+test("Regal: Kopfleiste „Was ich schon kann“ ohne Fach (mit Haus)", () => {
+  assert.match(html, /<ls-leiste id="leiste" spiel="ansichten" titel="Was ich schon kann"><\/ls-leiste>/);
   assert.doesNotMatch(html, /<ls-leiste[^>]*\b(fach=|ohne-haus)/);
 });
 
@@ -55,4 +55,10 @@ test("Regal: Spiele im Detail als dieselben Karten wie auf der Startseite (Vigne
   assert.match(skript, /spielKarteHtml\(/);
   assert.match(skript, /echtKarteHtml\(/);
   assert.match(skript, /vignetteSvg\(/);
+});
+
+test("Regal: immer etwas gewählt, passend zum Reiter – beim Öffnen der erste Reiter und sein erstes Thema, beim Wechsel das erste Thema des Fachs", () => {
+  assert.match(skript, /let aktiv = fachVon\(ziel\) \?\? baum\[0\]\.fach;/);
+  assert.match(skript, /zeigeFach\(k\.dataset\.fach\);\s*oeffne\(erstesVon\(k\.dataset\.fach\), false\);/);
+  assert.doesNotMatch(skript, /fachVon\(\[\.\.\.neu\]\[0\]\)/);
 });

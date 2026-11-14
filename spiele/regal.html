@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mein Regal</title>
+<title>Was ich schon kann</title>
 <link rel="stylesheet" href="rahmen/seite.css">
 <link rel="stylesheet" href="start/karten.css">
 <style>
@@ -114,7 +114,7 @@ body { -webkit-user-select: none; user-select: none; }
 </head>
 <body>
 <div class="hintergrund" id="hintergrund"></div>
-<ls-leiste id="leiste" spiel="ansichten" titel="Mein Regal"></ls-leiste>
+<ls-leiste id="leiste" spiel="ansichten" titel="Was ich schon kann"></ls-leiste>
 <main class="regal-seite">
   <div class="links">
     <div id="reiter"></div>
@@ -178,13 +178,14 @@ async function start() {
 
   if (!baum.length) { leer(leiste); return; }
 
-  // Zuerst das Fach mit Neuem, sonst das des zuletzt Gekonnten.
-  const zuletzt = gekonnt[gekonnt.length - 1];
+  // Immer etwas gewählt, passend zum Reiter (Christian): beim Öffnen der erste Reiter und darin das erste Thema
+  // (oben links, das neueste); mit ?thema das Fach dieses Themas und genau dieses Thema.
   const fachVon = (id) => baum.find((f) => f.bereiche.some((b) => b.themen.some((t) => t.id === id)))?.fach;
   // Mit ?thema (aus „Zuletzt gelernt“ auf der Startseite) öffnet das Regal an genau diesem Thema.
   const gewuenscht = new URLSearchParams(location.search).get("thema");
   const ziel = fachVon(gewuenscht) ? gewuenscht : null;
-  let aktiv = fachVon(ziel) ?? fachVon([...neu][0]) ?? fachVon(zuletzt?.id) ?? baum[0].fach;
+  let aktiv = fachVon(ziel) ?? baum[0].fach;
+  const erstesVon = (fach) => baum.find((f) => f.fach === fach).bereiche[0].themen[0].id;
 
   const reiter = document.getElementById("reiter"), bretter = document.getElementById("bretter");
   const detail = document.getElementById("detail"), nameFeld = document.getElementById("name");
@@ -203,6 +204,7 @@ async function start() {
       const f = baum.find((x) => x.fach === k.dataset.fach);
       if (leiste.ton && f) sageEinmal(f.name, sprich);
       zeigeFach(k.dataset.fach);
+      oeffne(erstesVon(k.dataset.fach), false);
     }));
     bretter.querySelectorAll(".ding").forEach((d) => d.addEventListener("click", () => { oeffne(d.dataset.thema, true); }));
     // Neues: einmal ein Sonnenring, dann still (B3)
@@ -240,9 +242,7 @@ async function start() {
   hoeren.addEventListener("click", () => { if (jetzt?.sprich && leiste.ton) sprich(jetzt.sprich); });
 
   zeigeFach(aktiv);
-  // Rechts steht gleich das Neueste dieses Fachs (ohne zu sprechen); es steht oben links.
-  const imFach = baum.find((f) => f.fach === aktiv).bereiche.flatMap((b) => b.themen);
-  const erstes = ziel ?? ([...neu].find((id) => imFach.some((t) => t.id === id))) ?? imFach[0].id;
+  const erstes = ziel ?? erstesVon(aktiv);
   oeffne(erstes, false);
   bretter.querySelector(`.ding[data-thema="${CSS.escape(erstes)}"]`)?.scrollIntoView({ block: "nearest" });
 }

@@ -39,14 +39,14 @@ test("regalBaum: ein Bereich mit frisch Gekonntem rückt nach oben", () => {
   assert.deepEqual(baum[0].bereiche[0].themen.map((t) => t.id), ["plus4", "plus3"]);
 });
 
-test("zuletztHtml: die letzten fünf, neueste zuerst, Name und Material, jedes führt ins Regal an sein Thema; Knopf Mein Regal; ohne Datum", () => {
+test("zuletztHtml: die letzten fünf, neueste zuerst, Name und Material, jedes führt ins Regal an sein Thema; Knopf Was ich schon kann; ohne Datum", () => {
   const viele = [...Array(7)].map((_, i) => g(`z${i + 2}`, "mathe", `Die ${i + 2} zerlegen`));
   const h = zuletztHtml(viele);
   assert.match(h, /^<section class="zuletzt" aria-label="Zuletzt gelernt"><h2>Zuletzt gelernt<\/h2>/);
   const namen = [...h.matchAll(/<span class="name">([^<]+)<\/span>/g)].map((m) => m[1]);
   assert.deepEqual(namen, ["Die 8 zerlegen", "Die 7 zerlegen", "Die 6 zerlegen", "Die 5 zerlegen", "Die 4 zerlegen"]);
   assert.match(h, /<a class="ding" href="regal\.html\?thema=z8" data-thema="z8"><span class="material"><ls-perlenstab wert="8"/);
-  assert.match(h, /<a class="regal-knopf" href="regal\.html"><img src="symbole\/regal\.svg" alt=""><b>Mein Regal<\/b><\/a><\/section>$/);
+  assert.match(h, /<a class="regal-knopf" href="regal\.html"><img src="symbole\/regal\.svg" alt=""><b>Was ich schon kann<\/b><\/a><\/section>$/);
   assert.doesNotMatch(h, /2026-/);
 });
 

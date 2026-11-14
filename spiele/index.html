@@ -9,7 +9,7 @@
 <style>
 /* Startseite „Karten“ (Spec docs/superpowers/specs/2026-11-14-startseite-karten-design.md).
    Links und in der Mitte die Karten, je Fach ein Abschnitt mit höchstens 5 Spielen und den Karten „Mit echten
-   Dingen“; rechts „Zuletzt gelernt“ (führt ins Regal an das Thema) und der Knopf „Mein Regal“.
+   Dingen“; rechts „Zuletzt gelernt“ (führt ins Regal an das Thema) und der Knopf „Was ich schon kann“ (das Regal).
    Dahinter eine dezente Landschaft in Grundtönen. Keine Zahl, keine Zählung, kein Klassenbezug (N5, N8).
    Diese Seite liest den Lernstand nur, sie schreibt ihn nie.
    Zahnrad für Erwachsene rechts in der Kopfleiste: gedrückt halten, dabei läuft leise ein Ring herum. */
@@ -156,7 +156,7 @@ async function start() {
     linkKlick(e);
   }));
   document.querySelector(".regal-knopf").addEventListener("click", (e) => {
-    if (leiste.ton) sageEinmal("Mein Regal", () => sprich("Mein Regal"));
+    if (leiste.ton) sageEinmal("Was ich schon kann", () => sprich("Was ich schon kann"));
     linkKlick(e);
   });
 

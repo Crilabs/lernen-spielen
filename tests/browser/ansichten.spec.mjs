@@ -256,16 +256,19 @@ async function lauf(typ, name, groesse, basis) {
       }));
       if (fall === "leer") pruefe(F, "Regal leer: der Satz des Erzählers, kein Ding", rg.leer === "Hier stellst du hin, was du kannst." && rg.dinge === 0, JSON.stringify(rg));
       else {
-        pruefe(F, "Regal: Reiter Mathe und Grammatik, Mathe gewählt (zuletzt gekonnt), Bretter je Bereich",
+        pruefe(F, "Regal: Reiter Mathe und Grammatik, der erste (Mathe) gewählt, Bretter je Bereich",
           JSON.stringify(rg.reiter) === JSON.stringify(["Mathe", "Grammatik"]) && rg.aktiv === "Mathe" && rg.bretter.length >= 1 && !rg.bretter.includes("Mathe"), JSON.stringify(rg));
         pruefe(F, "Regal: Detail rechts zeigt das Neueste des Fachs", typeof rg.detail === "string" && rg.detail.length > 0, JSON.stringify(rg));
         const gr = await regal.evaluate(async () => {
           [...document.querySelectorAll(".reiter-knopf")].find((k) => k.dataset.fach === "grammatik").click();
           await new Promise((r) => setTimeout(r, 100));
-          return document.querySelectorAll("#bretter .ding").length;
+          const gewaehlt = document.querySelector('#bretter .ding[aria-pressed="true"]');
+          return { dinge: document.querySelectorAll("#bretter .ding").length, passt: !!gewaehlt && gewaehlt === document.querySelector("#bretter .ding")
+            && document.getElementById("name").textContent === gewaehlt.querySelector(".name").textContent };
         });
-        const alle = rg.dinge + gr;
-        pruefe(F, "Regal: alle fünf gekonnten Dinge über die Reiter (auch ohne Spiele)", alle === 5, JSON.stringify({ mathe: rg.dinge, grammatik: gr }));
+        pruefe(F, "Regal: Reiterwechsel wählt das erste Thema des Fachs, Detail passt dazu", gr.passt, JSON.stringify(gr));
+        const alle = rg.dinge + gr.dinge;
+        pruefe(F, "Regal: alle fünf gekonnten Dinge über die Reiter (auch ohne Spiele)", alle === 5, JSON.stringify({ mathe: rg.dinge, grammatik: gr.dinge }));
       }
       await bild(regal, s("regal", fall));
       await regal.close();
