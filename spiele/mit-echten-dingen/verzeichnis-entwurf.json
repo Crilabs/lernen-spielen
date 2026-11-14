@@ -60,6 +60,23 @@
    "entwurf": false,
    "datei": "lesen/silben-klatschen.md"
   },
+  "teiler-vielfache": {
+   "fach": "mathe",
+   "name": "Teiler und Vielfache",
+   "titel": "Teiler und Vielfache auf dem Backblech",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Alle Bleche für 24 Kekse"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Klatschen und Stampfen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/teiler-vielfache.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",
