@@ -13,6 +13,19 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "siebenerreihe": {
+   "fach": "mathe",
+   "name": "Siebenerreihe",
+   "titel": "Wie viele Tage noch?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Wochen bis zum großen Tag"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/siebenerreihe.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
