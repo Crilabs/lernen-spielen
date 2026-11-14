@@ -13,6 +13,19 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "geteilt-durch-2-5-10": {
+   "fach": "mathe",
+   "name": "Geteilt durch 2, 5 und 10",
+   "titel": "Kleingeld in Stapel ordnen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Das Münzglas ordnen"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/geteilt-durch-2-5-10.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
