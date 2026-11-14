@@ -81,7 +81,7 @@ Auch erzählt gilt: kein „Du machst das Einhorn glücklich“, kein Lob, keine
 Eine Aufnahme gibt es nur für Texte, die `werkzeuge/audio/texte.mjs` findet:
 
 - Texte in Daten: `spiele.json`, `lernplan.json`, `einfuehrungen/*.json`, `saetze/saetze.json`;
-- feste Zeichenketten im Code: `sprich("…")`, `say("…")`, `sag("…")`.
+- feste Zeichenketten im Code: `sprich("…")`, `say("…")`, `sag("…")` und die Erzählerblase `blase.sage("…")`.
 
 **Sätze, die zur Laufzeit zusammengesetzt werden** (`` `${artikel} ${wort}. …` ``), findet das Sammeln nicht.
 Dort spricht die Systemstimme. Neue Spiele legen solche Vorlagen deshalb als Daten an, damit das Werkzeug alle

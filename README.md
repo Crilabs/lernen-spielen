@@ -143,8 +143,10 @@ und nie mehr geschrieben.
 ## Neues Spiel hinzufügen
 
 Zuerst die Checkliste in `docs/bedienung.md` (Abschnitt 10) durchgehen: Kopfleiste, Blase, Hilfe, Pause, Tastatur
-und Ziehen kommen aus `spiele/rahmen/`, kein Spiel baut sie selbst. Eine Spielvorlage, von der aus man ein neues Spiel
-startet, folgt; bis dahin `spiele/rahmen/vorschau.html` als Muster für die Anordnung nehmen.
+und Ziehen kommen aus `spiele/rahmen/`, kein Spiel baut sie selbst. Neue Spiele starten als Kopie der **Spielvorlage**
+`spiele/vorlage.html` + `spiele/vorlage.js` (spielbarer Platzhalter „Leg die 7“; die Schritte stehen oben in
+`vorlage.js`). Die Vorlage steht nicht in `spiele.json` und schreibt nie in den Lernstand. Browser-Prüfung:
+`NODE_PATH=… node tests/browser/vorlage.spec.mjs` (wie `rahmen.spec.mjs`).
 
 1. HTML-Datei in `spiele/` anlegen. Speichern, Einstellungen, Sprache und Gerätefunktionen laufen nur über
    `spiele/kern/` (`lade`/`speichere`, `einstellung`/`setzeEinstellung`, `sprich`/`stille`, `faehigkeiten`).

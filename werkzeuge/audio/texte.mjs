@@ -30,8 +30,9 @@ function dateien(dir, endungen, ohne = []) {
 }
 
 // Aufrufe der Sprechfunktionen in den Spielen. Nur ein reines Zeichenketten-Literal als erstes Argument
-// wird übernommen; alles andere zählt als „nicht erfasst“.
-const AUFRUF = /\b(?:sprich|kernSprich|say|sag)\(\s*/g;
+// wird übernommen; alles andere zählt als „nicht erfasst“. Dazu die Sprechblase des Erzählers
+// (`blase.sage("…")`, spiele/rahmen/blase.js): als einzige Methode, `obj.say(…)` bleibt fremd.
+const AUFRUF = /\b(?:sprich|kernSprich|say|sag)\(\s*|\.sage\(\s*/g;
 const LITERAL = /^(["'])((?:\\.|(?!\1)[^\\\n])*)\1\s*[,)]/;
 
 /**
@@ -45,7 +46,8 @@ export function literaleAusCode(quelltext) {
     const rest = quelltext.slice(m.index + m[0].length);
     if (rest.startsWith(")")) continue;   // Aufruf ohne Argument
     const vor = quelltext.slice(Math.max(0, m.index - 9), m.index);
-    if (/function\s*$/.test(vor) || /\.\s*$/.test(quelltext.slice(m.index - 1, m.index))) continue;
+    const methode = m[0].startsWith(".");
+    if (!methode && (/function\s*$/.test(vor) || /\.\s*$/.test(quelltext.slice(m.index - 1, m.index)))) continue;
     const l = rest.match(LITERAL);
     if (l) texte.push(l[2].replace(/\\(.)/g, "$1"));
     else offen += 1;

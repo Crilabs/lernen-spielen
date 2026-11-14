@@ -38,10 +38,13 @@ test("Literale im Spielcode: nur feste Zeichenketten, Rest zählt als offen", ()
     say(satz.text);
     kernSprich(text, { tempo: rate });
     obj.say("nicht unsere Funktion");
-    sprich();`;
+    sprich();
+    blase.sage("Leg zwei Stäbe in die Rinne.", { sprechen });
+    this.blase.sage(text);
+    async sage(text, { sprechen = true } = {}) {}`;
   const { texte, offen } = literaleAusCode(code);
-  assert.deepEqual(texte, ["Für heute ist Schluss. Bis morgen!", "Das kannst du jetzt."]);
-  assert.equal(offen, 3);
+  assert.deepEqual(texte, ["Für heute ist Schluss. Bis morgen!", "Das kannst du jetzt.", "Leg zwei Stäbe in die Rinne."]);
+  assert.equal(offen, 4);
 });
 
 test("sammle findet Startseite, Lernplan, Einführungen, Diktat und feste Sätze", () => {
