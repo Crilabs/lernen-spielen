@@ -125,7 +125,7 @@ export function zeichnePose(kindId, p, aus = {}) {
     : `<g data-blick="rechts">`;
   return `<svg class="runde" viewBox="0 0 320 280" data-kind="${k.id}" data-ansicht="${p.ansicht}"`
     + `${aus.haltung ? ` data-haltung="${aus.haltung}"` : ""} role="img" aria-label="${label}"`
-    + ` stroke="${INK}" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">`
+    + ` stroke="${INK}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">`
     + `${blick}${gruppe(WURZEL)}</g></svg>`;
 }
 

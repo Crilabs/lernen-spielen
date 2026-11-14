@@ -13,7 +13,7 @@
  * @type {Record<string, Knoten>}
  */
 export const BAUM = {
-  koerper: { vor: ["rad-hinten", "rollstuhl", "bein-hinten"], nach: ["rumpf", "beine", "bein-vorn", "rad-vorn"] },
+  koerper: { vor: ["rad-hinten", "rollstuhl", "bein-hinten", "bein-vorn"], nach: ["rumpf", "beine", "rad-vorn"] },
   "rad-hinten": { vor: [], nach: [], nur: "rollstuhl" },
   rollstuhl: { vor: [], nach: [], nur: "rollstuhl" },
   "bein-hinten": { vor: [], nach: [], nur: "geht" },

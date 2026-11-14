@@ -56,6 +56,12 @@ test("Zeichenreihenfolge: hinterer Arm, Rumpf, Kopf", () => {
   assert.ok(svg.indexOf('data-gelenk="kopf"') < svg.indexOf('data-gelenk="arm-vorn-oben"'));
 });
 
+test("Beine liegen hinter dem Rumpf, damit der Saum das Hüftgelenk verdeckt", () => {
+  const svg = zeichne("test-geht");
+  assert.ok(svg.indexOf('data-gelenk="bein-vorn"') < svg.indexOf('data-gelenk="rumpf"'));
+  assert.ok(svg.indexOf('data-gelenk="bein-hinten"') < svg.indexOf('data-gelenk="bein-vorn"'));
+});
+
 test("Winkel dreht um den Drehpunkt des Kindes", () => {
   const svg = zeichne("test-geht", { haltung: "nicken" });
   assert.match(svg, /data-gelenk="kopf" transform="rotate\(10 160 120\)"/);
