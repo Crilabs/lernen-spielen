@@ -31,17 +31,32 @@ const appMit = (p, extra = {}) => ({
 
 beforeEach(() => speicher.clear());
 
-test("faehigkeiten im Browser: alle false", async () => {
+test("faehigkeiten im Browser: nur drucken", async () => {
   const G = await geraet(null);
-  assert.deepEqual(await G.faehigkeiten(), { update: false, beenden: false, kiosk: false });
+  assert.deepEqual(await G.faehigkeiten(), { update: false, beenden: false, kiosk: false, drucken: true });
 });
 
-test("faehigkeiten auf Android: alle false", async () => {
-  assert.deepEqual(inFrischemProzess("android"), { update: false, beenden: false, kiosk: false });
+test("faehigkeiten auf Android und iOS: alle false", async () => {
+  assert.deepEqual(inFrischemProzess("android"), { update: false, beenden: false, kiosk: false, drucken: false });
+  assert.deepEqual(inFrischemProzess("ios"), { update: false, beenden: false, kiosk: false, drucken: false });
 });
 
-test("faehigkeiten auf Windows: alle true", async () => {
-  assert.deepEqual(inFrischemProzess("windows"), { update: true, beenden: true, kiosk: true });
+test("faehigkeiten auf Windows und macOS: alle true", async () => {
+  assert.deepEqual(inFrischemProzess("windows"), { update: true, beenden: true, kiosk: true, drucken: true });
+  assert.deepEqual(inFrischemProzess("macos"), { update: true, beenden: true, kiosk: true, drucken: true });
+});
+
+test("drucke ruft den Druckdialog, wirft nie und protokolliert", async () => {
+  const G = await geraet(null);
+  let gedruckt = 0;
+  globalThis.window.print = () => { gedruckt++; };
+  assert.equal(G.drucke(), true);
+  assert.equal(gedruckt, 1);
+  globalThis.window.print = () => { throw new Error("kein Drucker"); };
+  assert.equal(G.drucke(), false);
+  assert.match(speicher.get("protokoll"), /Drucken: kein Drucker/);
+  delete globalThis.window.print;
+  assert.equal(G.drucke(), false);
 });
 
 test("kioskPause wirft nie und protokolliert", async () => {
@@ -84,7 +99,7 @@ test("faehigkeiten protokolliert, wenn plattform scheitert", async () => {
     const G = await import(${JSON.stringify(new URL("../spiele/kern/geraet.js", import.meta.url).href)});
     console.log(JSON.stringify({ k: await G.faehigkeiten(), p: s.get("protokoll") }));`;
   const e = JSON.parse(execFileSync(process.execPath, ["--input-type=module", "-e", code], { encoding: "utf8" }));
-  assert.deepEqual(e.k, { update: false, beenden: false, kiosk: false });
+  assert.deepEqual(e.k, { update: false, beenden: false, kiosk: false, drucken: false });
   assert.match(e.p, /plattform kaputt/);
 });
 
@@ -95,5 +110,5 @@ test("faehigkeiten: schlägt plattform() fehl, entscheiden die Desktop-Plugins",
     const G = await import(${JSON.stringify(new URL("../spiele/kern/geraet.js", import.meta.url).href)});
     console.log(JSON.stringify(await G.faehigkeiten()));`;
   const out = JSON.parse(execFileSync(process.execPath, ["--input-type=module", "-e", code], { encoding: "utf8" }));
-  assert.deepEqual(out, { update: true, beenden: true, kiosk: true });
+  assert.deepEqual(out, { update: true, beenden: true, kiosk: true, drucken: true });
 });
