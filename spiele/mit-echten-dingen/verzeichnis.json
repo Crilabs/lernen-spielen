@@ -13,6 +13,19 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "teiler-begruenden": {
+   "fach": "mathe",
+   "name": "Teiler begründen",
+   "titel": "Gerecht teilen, bevor ihr austeilt",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Es klingelt"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/teiler-begruenden.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",

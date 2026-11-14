@@ -1,7 +1,6 @@
 ---
 thema: teiler-begruenden
 fach: mathe
-entwurf: true
 bild: { figur: keksteller, zustand: haufen }
 quellen:
   - Fachlehrplan Mathematik 3/4 Grundschule, 1.1 (Beziehungen zwischen Zahlen begründen, z. B. Teiler, Vielfache), LehrplanPLUS Bayern, ISB, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/3/mathematik, abgerufen 2026-11-14
