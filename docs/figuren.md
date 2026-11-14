@@ -111,8 +111,19 @@ Person.
   schweben und klein/groß werden (Zubehör, das jedes Kind tragen kann). Bei Timo jeweils im Rollstuhl,
   selbst fahrend.
 - **Herstellung:** SVG als Code nach diesem Blatt, Form für Form gesetzt und von Christian freigegeben – kein
-  Bildgenerator (A1). Ein Spiel erweitert die Figuren in `spiele/<spiel>/runde.js` (Haltungen, Bewegungen,
-  Gesichter, Zubehör); `tests/runde-gesamt.test.mjs` prüft jede Erweiterung an allen Kindern.
+  Bildgenerator (A1).
+- **Erweitern (Christian, 2026-11-14):** Die Runde wächst mit jedem Spiel. Braucht ein Spiel eine neue Haltung,
+  Bewegung, ein Gesicht oder Zubehör, gilt:
+  - **Wiederverwendbares kommt in den gemeinsamen Bestand** in `spiele/runde/` (`haltungen.js`, `bewegungen.js`,
+    `gesichter.js`, `zubehoer/<name>.js`, angemeldet in `runde.js`). Ab dann kann jedes Spiel es nutzen – z. B.
+    springen, klatschen, ein Rucksack. Im Zweifel gilt etwas als wiederverwendbar.
+  - **Nur wirklich Spielspezifisches** bleibt in `spiele/<spiel>/runde.js` (z. B. eine Geste, die nur dieses Spiel
+    braucht). Andere Spiele sehen es nur, wenn sie diese Datei selbst importieren.
+  - Neues entsteht im Stil aus §4 mit den Helfern aus `spiele/runde/kinder/stil.js`, für alle vier Kinder und beide
+    Ansichten. Bewegt es Beine oder Knie, braucht es eine Rollstuhl-Fassung für Timo, sonst lehnt der Kern es ab.
+  - Namen nur aus Kleinbuchstaben, Ziffern und Bindestrich; doppelte Namen lehnt der Kern ab.
+  - `tests/runde-gesamt.test.mjs` prüft den gemeinsamen Bestand und alle `spiele/*/runde.js` an allen Kindern;
+    die Galerie `spiele/runde/galerie.html` zeigt den gemeinsamen Bestand zum Ansehen.
 
 ---------------------------------------------------------------------------------------------------
 ## 5. Was die Kinder können, was es in echt nicht gibt (Christian)
