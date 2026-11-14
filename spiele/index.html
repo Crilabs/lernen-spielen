@@ -84,8 +84,10 @@ body { -webkit-user-select: none; user-select: none; }
 
 /* --- Zahnrad für Erwachsene (im Slot rechts der Kopfleiste) ------------------------------------ */
 .zahnrad { position: relative; display: flex; width: 11rem; height: 11rem; touch-action: none; }
-.zahnrad svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); pointer-events: none; opacity: 0; transition: opacity 0.2s; }
-.zahnrad circle { fill: none; stroke: var(--ls-tinte-weich); stroke-width: 1.7; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; }
+/* Der Ring sitzt um die sichtbare Form beim Halten: Knopf eingesunken (0.3rem) samt Kante unten (0.6 − 0.3rem),
+   deren Mitte liegt 0.45rem unter der Mitte des Kastens. */
+.zahnrad svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: translateY(0.45rem) rotate(-90deg); pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+.zahnrad circle { fill: none; stroke: var(--ls-tinte-weich); stroke-width: 2.8; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; }
 .zahnrad.haelt svg { opacity: 1; }
 .zahnrad.haelt circle { stroke-dashoffset: 0; transition: stroke-dashoffset var(--halten) linear; }
 
