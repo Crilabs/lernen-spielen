@@ -6,6 +6,8 @@
 // Koordinaten: viewBox 0 0 2880 1080, 1 Einheit = 0,1 rem. Die Seite legt das SVG in eine Box von 288 × 108 rem,
 // waagrecht mittig. Sichtbar ist bei 16:9 x 480–2400, bei 4:3 x 720–2160. Was bedienbar ist, liegt in 4:3 (ORTE).
 
+import { TINTE as T, zeichner, flaeche } from "./zeichnen.js";
+
 export const SZENE = Object.freeze({ breite: 2880, hoehe: 1080, horizont: 600 });
 
 /**
@@ -32,7 +34,7 @@ export const ORTE = Object.freeze({
   ],
 });
 
-const T = "#3B2A6B";
+
 const K = 6; // Konturbreite der Szene (Strich 4 der Figuren, auf die Szenengröße gerechnet)
 
 /** @typedef {{tageszeit: "morgen"|"tag"|"abend"|"nacht", jahreszeit: "fruehling"|"sommer"|"herbst"|"winter"}} Zeitbild */
@@ -53,26 +55,7 @@ const PALETTEN = {
   },
 };
 
-/**
- * Silhouette mit Kontur: erst alle Formen als Tinte-Kontur, dann alle Flächen darüber. So entsteht eine Linie nur
- * außen um die vereinigte Form, nie zwischen den Teilen (figuren.md §4: „aus einem Guss“).
- * @param {string[]} formen SVG-Elemente ohne fill/stroke, z. B. `<circle cx=".." cy=".." r=".."/>`
- * @param {string} fill
- * @param {string} [innen] Stufenschatten und Licht, auf die Fläche gelegt (ohne Kontur)
- */
-function guss(formen, fill, innen = "") {
-  const mit = (/** @type {string} */ f, /** @type {string} */ attr) => f.replace(/\/?>$/, ` ${attr}/>`);
-  const umriss = formen.map((f) => mit(f, `fill="none" stroke="${T}" stroke-width="${K * 2}" stroke-linejoin="round"`)).join("");
-  const flaechen = formen.map((f) => mit(f, `fill="${fill}" stroke="none"`)).join("");
-  if (!innen) return `<g>${umriss}${flaechen}</g>`;
-  // Schatten und Licht bleiben innerhalb der Silhouette.
-  const id = `guss${++zaehler}`;
-  return `<g>${umriss}${flaechen}<clipPath id="${id}">${formen.join("")}</clipPath><g clip-path="url(#${id})">${innen}</g></g>`;
-}
-let zaehler = 0;
-
-/** @param {string} d @param {string} fill */
-const flaeche = (d, fill) => `<path d="${d}" fill="${fill}" stroke="none"/>`;
+let { guss } = zeichner("szene", K);
 
 /** @param {Record<string, string>} p */
 function himmel(p) {
@@ -194,7 +177,7 @@ ${blume(500, 930, p.bluete1)}${blume(610, 965, p.bluete3)}${blume(2420, 920, p.b
  * @returns {string}
  */
 export function szeneSvg(zeit = {}) {
-  zaehler = 0;
+  ({ guss } = zeichner("szene", K));
   const schluessel = `${zeit.jahreszeit}-${zeit.tageszeit}`;
   const p = /** @type {Record<string, string>} */ (PALETTEN[/** @type {keyof typeof PALETTEN} */ (schluessel)] ?? PALETTEN["sommer-tag"]);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2880 1080" preserveAspectRatio="none" aria-hidden="true" focusable="false" stroke-linecap="round">`
