@@ -8,17 +8,18 @@ quellen:
   - Handreichung Baustein N4 B, Divisions-Aufgaben zu Situationen finden (Aufteilen als „Wie oft passt … in …“; Kontext Geld wegen der Nähe zum Alltag), Mathe sicher können, DZLM, https://maco.dzlm.de/sites/maco/files/material-lul/dzlm_difprim_multdiv_foerdern_division_handreichung_240412.pdf, abgerufen 2026-11-14
   - 1·1 richtig üben, Basisinfos (Kernaufgaben mit 1, 2, 5 und 10 auswendig; verstehen statt aufsagen), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
 ---
-# Kleingeld in Stapel ordnen
+# Kleingeld tauschen
 
-## Am Tisch: Das Münzglas ordnen
+## Am Tisch: Das Münzglas eintauschen
 
-Ihr braucht: 20 gleiche Münzen aus Münzglas oder Geldbeutel. Ersatz: Nudeln in Häufchen. Münzen nicht in Kleinkinderhände.
+Ihr braucht: Ein-Cent-Münzen aus dem Münzglas, einen Geldbeutel. Ersatz: Spielgeld aus einem Brettspiel. Münzen nicht in Kleinkinderhände.
 
-1. Ihr ordnet das Kleingeld zum Zählen in Stapel.
-2. Ihr wollt Stapel mit je 5. Sucht zuerst die Malaufgabe: „4 mal 5 ist gleich 20.“ Sagt: „20 geteilt durch 5 ist gleich 4.“
-3. Stapelt und zählt die Stapel.
-4. Dann mit je 10, dann mit je 2. Immer zuerst die Malaufgabe.
+1. Viele Ein-Cent-Münzen sind im Laden lästig. Ihr tauscht sie gegen größere.
+2. Zählt 40 Ein-Cent-Münzen ab.
+3. Schaut, welche Münzen im Geldbeutel sind: Zehn-Cent, Fünf-Cent oder Zwei-Cent?
+4. Wie viele davon bekommt ihr? Sucht zuerst die Malaufgabe, dann sagt die Geteiltaufgabe.
+5. Legt Stapel und tauscht jeden Stapel gegen eine große Münze.
 
-**Darauf kommt es an:** 20 geteilt durch 5 fragt: Wie oft passt die 5 in die 20? Das sagt die Malaufgabe: 4 mal 5 ist gleich 20. Also ist 20 geteilt durch 5 gleich 4.
+**Darauf kommt es an:** 40 geteilt durch 10 fragt: Wie oft passt die 10 in die 40? Das sagt die Malaufgabe: 4 mal 10 ist gleich 40. Also ist 40 geteilt durch 10 gleich 4: vier Zehn-Cent-Münzen.
 
-**Leichter:** 10 Münzen, Stapel mit je 2. **Schwerer:** 35 Münzen in Fünferstapeln. Oder teilt 16 Münzen gerecht unter euch beiden auf.
+**Leichter:** 16 Münzen gegen Zwei-Cent-Münzen. **Schwerer:** 70 Münzen gegen Zehner oder 35 gegen Fünfer. Oder teilt das Getauschte gerecht unter euch beiden auf.

@@ -16,11 +16,11 @@
   "geteilt-durch-2-5-10": {
    "fach": "mathe",
    "name": "Geteilt durch 2, 5 und 10",
-   "titel": "Kleingeld in Stapel ordnen",
+   "titel": "Kleingeld tauschen",
    "formen": [
     {
      "situation": "tisch",
-     "name": "Das Münzglas ordnen"
+     "name": "Das Münzglas eintauschen"
     }
    ],
    "entwurf": true,
