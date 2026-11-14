@@ -20,7 +20,7 @@ Ihr braucht: einen Würfel
 
 **Darauf kommt es an:** Nach jeder Zahl kommt immer dieselbe nächste Zahl. Deshalb kann man bei jeder Zahl anfangen und muss nicht bei eins beginnen.
 
-**Leichter:** Der Erwachsene sagt die Startzahl und die nächste Zahl, das Kind zählt dann weiter. **Schwerer:** bis zwanzig zählen oder mit zwei Würfeln starten.
+**Leichter:** Einer sagt die Startzahl und die nächste Zahl, der andere zählt dann weiter. **Schwerer:** bis zwanzig zählen oder mit zwei Würfeln starten.
 
 ## In Bewegung: Treppe ab der Mitte
 

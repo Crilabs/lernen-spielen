@@ -91,6 +91,14 @@ const ECHT = {
   "reim-hoeren": eintrag("kann-ich", "2026-11-03"), "zerlegen-5": eintrag("kann-ich", "2026-11-05"), "zerlegen-6": eintrag("kann-ich", "2026-11-08"),
   "vorwaerts-zaehlen": eintrag("dran", "", "2026-11-12"), "zerlegen-7": eintrag("dran", "", "2026-11-13"), "silben-klatschen": eintrag("dran", "", "2026-11-11"),
 };
+// Sechs volle Anleitungen (längste Form: sechs Schritte, etwa 120 Wörter) für die Probe „eine Seite“.
+const SECHS = ["zerlegen-2", "zerlegen-3", "zerlegen-4", "zerlegen-5", "zerlegen-6", "zerlegen-8"];
+const SECHS_STAND = Object.fromEntries(SECHS.map((id, i) => [id, eintrag("dran", "", `2026-11-0${i + 1}`)]));
+const VOLLE_ANLEITUNG = `---\nthema: probe\nentwurf: true\n---\n# Probe\n\n## Am Tisch: Sehr lange Probe mit einem langen Namen\n\n`
+  + "Ihr braucht: sieben Nudeln, zwei Teller, einen Becher, ein Tuch und einen Würfel aus dem Spieleschrank\n\n"
+  + [1, 2, 3, 4, 5, 6].map((n) => `${n}. Verteilt die Nudeln auf die zwei Teller und sagt dabei laut, was ihr auf beiden Tellern seht.`).join("\n")
+  + "\n\n**Darauf kommt es an:** Es bleiben immer sieben Nudeln. Wandert eine Nudel hinüber, hat ein Teller eine weniger und der andere eine mehr, so lange ihr spielt.\n\n"
+  + "**Leichter:** mit fünf. **Schwerer:** mit zehn.\n";
 const FAELLE = {
   leer: { stand: null, spiele: false },
   gekonnt: { stand: GEKONNT, spiele: false },
@@ -405,13 +413,20 @@ async function lauf(typ, name, groesse, basis) {
     }
 
     // --- Mit echten Dingen: Übersicht, Zugang aus dem Elternbereich, Drucken, Küchenzettel ---------------
-    for (const [fall, stand] of [["leer", null], ["echt", ECHT]]) {
+    // ?entwurf: die Anleitungen sind noch Entwürfe; ohne ?entwurf sieht die App sie nicht (Fall „app“).
+    // „sechs“: sechs volle Anleitungen (nur im Browser per page.route) prüfen, dass der Zettel immer auf eine Seite passt.
+    for (const [fall, stand, such] of [["leer", null, "?entwurf"], ["echt", ECHT, "?entwurf"], ["app", ECHT, ""], ["sechs", SECHS_STAND, "?entwurf"]]) {
       const F = `${L} echte-dinge ${fall}`;
       const kontext = await kontextFuer(browser, groesse, basis, { stand }, fehlerListe);
       await kontext.addInitScript(() => { window.__gedruckt = 0; window.print = () => { window.__gedruckt++; }; });
+      if (fall === "sechs") {
+        await kontext.route("**/mit-echten-dingen/verzeichnis-entwurf.json", (r) => r.fulfill({ json: { themen: Object.fromEntries(SECHS.map((id) =>
+          [id, { fach: "mathe", name: "", titel: "Probe", formen: [{ situation: "tisch", name: "Sehr lange Probe" }], entwurf: true }])) } }));
+        await kontext.route("**/mit-echten-dingen/mathe/*.md", (r) => r.fulfill({ contentType: "text/markdown", body: VOLLE_ANLEITUNG }));
+      }
       const seite = await kontext.newPage();
-      await seite.goto(`${basis}/spiele/mit-echten-dingen.html`, { waitUntil: "load" });
-      await seite.waitForFunction(() => document.body.dataset.bereit === "1", null, { timeout: 5000 });
+      await seite.goto(`${basis}/spiele/mit-echten-dingen.html${such}`, { waitUntil: "load" });
+      await seite.waitForFunction(() => document.body.dataset.bereit === "1", null, { timeout: 8000 });
       await seite.evaluate(() => document.fonts.ready);
       const ue = await seite.evaluate(() => {
         const teil = (titel) => [...document.querySelectorAll("section.abschnitt")].find((x) => x.querySelector("h2").textContent === titel);
@@ -420,42 +435,51 @@ async function lauf(typ, name, groesse, basis) {
         return {
           dran: namen(teil("Gerade dran")), bald: namen(teil("Bald")), wieder: namen(teil("Zum Wiederholen")),
           offen: erstes?.open ?? false, formenOffen: erstes ? erstes.querySelectorAll(".spiel").length : 0,
+          formenAlle: document.querySelectorAll("article.spiel").length,
           situationen: erstes ? [...erstes.querySelectorAll("summary .situation")].map((x) => x.textContent) : [],
-          drucken: !document.getElementById("drucken").hidden, text: document.body.innerText,
+          drucken: !document.getElementById("drucken").hidden, kaesten: document.querySelectorAll("#zettel article").length,
+          text: document.body.innerText,
         };
       });
       if (fall === "leer") {
-        pruefe(F, "Übersicht ohne Lernstand: Gerade dran zeigt je Fach das erste Thema (ohne Spiel), höchstens eins je Fach",
-          ue.dran?.length >= 1 && ue.dran.length <= 6 && ue.dran.includes("Mehr, weniger, gleich viele") && ue.wieder === null, JSON.stringify(ue.dran));
-      } else {
+        pruefe(F, "Übersicht ohne Lernstand: nichts dran, kein Drucken", JSON.stringify(ue.dran) === "[]" && /Gerade ist kein Thema dran/.test(ue.text) && !ue.drucken, JSON.stringify(ue.dran));
+      } else if (fall === "app") {
+        pruefe(F, "ohne ?entwurf: Entwürfe erreichen die App nicht (keine Formen, kein Küchenzettel, kein Drucken)",
+          ue.dran?.includes("Die 7 zerlegen") && ue.formenAlle === 0 && ue.kaesten === 0 && !ue.drucken, JSON.stringify({ ...ue, text: undefined }));
+      } else if (fall === "echt") {
         pruefe(F, "Übersicht: Gerade dran mit den Themen dran (auch ohne Spiel), zuerst aufgeklappt mit beiden Formen",
           ["Vorwärts zählen", "Die 7 zerlegen", "Silben klatschen"].every((n) => ue.dran?.includes(n)) && ue.offen && ue.formenOffen === 2
-            && JSON.stringify(ue.situationen) === JSON.stringify(["Am Tisch", "In Bewegung"]), JSON.stringify(ue));
+            && JSON.stringify(ue.situationen) === JSON.stringify(["Am Tisch", "In Bewegung"]), JSON.stringify({ ...ue, text: undefined }));
+        pruefe(F, "Übersicht: höchstens ein Thema ohne Spiel je begonnenem Fach unter Gerade dran",
+          ue.dran.length <= 3 + 2, JSON.stringify(ue.dran));
         pruefe(F, "Übersicht: Zum Wiederholen die drei zuletzt gekonnten, neueste zuerst",
           JSON.stringify(ue.wieder) === JSON.stringify(["Die 6 zerlegen", "Die 5 zerlegen", "Reimt sich das?"]), JSON.stringify(ue.wieder));
         pruefe(F, "Übersicht: Bald zeigt Themen in Sicht", (ue.bald?.length ?? 0) >= 1, JSON.stringify(ue.bald));
       }
       pruefe(F, "Übersicht: keine Zahl als Fortschritt, kein Lehrplan, kein Kopf mit Quellen",
         !/\d+\s*(von|\/)\s*\d+|%|Klasse \d|Lehrplan|quellen:|https?:/i.test(ue.text), ue.text.slice(0, 300));
-      pruefe(F, "Übersicht: Drucken da (Browser kann drucken)", ue.drucken);
-      await seite.evaluate(() => document.getElementById("drucken").click());
-      pruefe(F, "Drucken ruft den Druckdialog über kern/geraet.js", (await seite.evaluate(() => window.__gedruckt)) === 1);
-      if (SHOTS) {
+      if (fall === "echt" || fall === "sechs") {
+        pruefe(F, "Übersicht: Drucken da (Browser kann drucken, es gibt Anleitungen)", ue.drucken);
+        await seite.evaluate(() => document.getElementById("drucken").click());
+        pruefe(F, "Drucken ruft den Druckdialog über kern/geraet.js", (await seite.evaluate(() => window.__gedruckt)) === 1);
+      }
+      if (SHOTS && fall !== "sechs") {
         await mkdir(SHOTS, { recursive: true });
         await seite.screenshot({ path: join(SHOTS, `uebersicht-${fall}-${name}-${groesse.width}.png`), fullPage: true });
       }
-      if (name === "chromium") {
+      if (name === "chromium" && (fall === "echt" || fall === "sechs")) {
         await seite.emulateMedia({ media: "print" });
         const druck = await seite.evaluate(() => ({
           knoepfe: [...document.querySelectorAll("ls-knopf, button, summary")].filter((k) => k.getClientRects().length > 0).length,
-          zettel: getComputedStyle(document.getElementById("zettel")).display, artikel: document.querySelectorAll("#zettel article").length,
+          zettel: getComputedStyle(document.getElementById("zettel")).visibility, artikel: document.querySelectorAll("#zettel article").length,
           text: document.getElementById("zettel").innerText,
         }));
         await seite.emulateMedia({ media: null }); // zurück auf „keine Vorgabe“: page.pdf() nimmt dann print
         const pdf = await seite.pdf({ format: "A4", preferCSSPageSize: true, printBackground: true });
         const seiten = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
-        pruefe(F, "Küchenzettel: genau eine A4-Seite, keine Bedienelemente, je Thema dran ein Kasten (höchstens sechs)",
-          seiten === 1 && druck.knoepfe === 0 && druck.zettel === "block" && druck.artikel >= 1 && druck.artikel <= 6, JSON.stringify({ seiten, ...druck, text: undefined }));
+        pruefe(F, `Küchenzettel: genau eine A4-Seite, keine Bedienelemente, nur Themen mit Anleitung (${druck.artikel} Kästen)`,
+          seiten === 1 && druck.knoepfe === 0 && druck.zettel === "visible" && druck.artikel >= 1 && druck.artikel <= (fall === "echt" ? 3 : 6)
+            && !/Sie |Ihr Kind/.test(druck.text), JSON.stringify({ seiten, ...druck, text: undefined }));
         if (fall === "echt") pruefe(F, "Küchenzettel: kurze Form mit Ihr braucht, Schritten und Darauf kommt es an, ohne Leichter/Schwerer",
           /Ihr braucht/.test(druck.text) && /Darauf kommt es an/.test(druck.text) && !/Leichter|Schwerer/.test(druck.text), druck.text.slice(0, 400));
         if (SHOTS && groesse.width === 1920) {

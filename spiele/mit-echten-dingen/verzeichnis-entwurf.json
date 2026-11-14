@@ -1,0 +1,52 @@
+{
+ "themen": {
+  "silben-klatschen": {
+   "fach": "lesen",
+   "name": "Silben klatschen",
+   "titel": "Wörter in Silben klatschen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eine Klammer für jede Silbe"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Ein Schritt für jede Silbe"
+    }
+   ],
+   "entwurf": true
+  },
+  "vorwaerts-zaehlen": {
+   "fach": "mathe",
+   "name": "Vorwärts zählen",
+   "titel": "Von einer Zahl aus weiterzählen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Würfeln und weiterzählen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Treppe ab der Mitte"
+    }
+   ],
+   "entwurf": true
+  },
+  "zerlegen-7": {
+   "fach": "mathe",
+   "name": "Die 7 zerlegen",
+   "titel": "Die 7 in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Sieben Nudeln, zwei Teller"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Sieben Steine in zwei Händen"
+    }
+   ],
+   "entwurf": true
+  }
+ }
+}

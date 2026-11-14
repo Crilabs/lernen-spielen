@@ -3,7 +3,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { anleitungen, baueVerzeichnis, alsText, VERZEICHNIS } from "../werkzeuge/echte-dinge/verzeichnis.mjs";
+import { anleitungen, baueVerzeichnis, alsText, VERZEICHNIS, VERZEICHNIS_ENTWURF } from "../werkzeuge/echte-dinge/verzeichnis.mjs";
 import { liesAnleitung, formText } from "../spiele/rahmen/markdown.js";
 
 const plan = JSON.parse(readFileSync(new URL("../spiele/lernplan.json", import.meta.url), "utf8"));
@@ -18,9 +18,36 @@ const VERBOTEN = [
   /\bIhr Kind\b|\bSie\b|\bIhnen\b|\bIhre[mnrs]?\b/,
 ];
 
-test("es gibt Anleitungen, und das Verzeichnis passt zu den Dateien (sonst: npm run echte-dinge)", () => {
+test("es gibt Anleitungen, und beide Verzeichnisse passen zu den Dateien (sonst: npm run echte-dinge)", () => {
   assert.ok(liste.length >= 1);
   assert.equal(readFileSync(VERZEICHNIS, "utf8"), alsText(baueVerzeichnis(liste, plan)));
+  assert.equal(readFileSync(VERZEICHNIS_ENTWURF, "utf8"), alsText(baueVerzeichnis(liste, plan, { entwuerfe: true })));
+});
+
+const datei = (thema, kopf) => ({ fach: "mathe", thema, text: `---\nthema: ${thema}\n${kopf}---\n# T\n\n## Am Tisch: A\n\nText` });
+const PLAN = { themen: [
+  { id: "a", name: "Einmalig", strang: "mathe" }, { id: "b", name: "Doppelt", strang: "mathe" },
+  { id: "c", name: "Doppelt", strang: "lesen" }, { id: "d", name: "Auch einmalig", strang: "mathe" },
+] };
+
+test("Entwürfe und geparkte Anleitungen stehen nicht im Verzeichnis der App; das Entwurfs-Verzeichnis hat nur die Entwürfe dazu", () => {
+  const l = [datei("a", ""), datei("b", "entwurf: true\n"), datei("d", "entwurf: true\ngeparkt: true\n")];
+  assert.deepEqual(Object.keys(baueVerzeichnis(l, PLAN).themen), ["a"]);
+  assert.deepEqual(Object.keys(baueVerzeichnis(l, PLAN, { entwuerfe: true }).themen), ["a", "b"]);
+  assert.equal(baueVerzeichnis(l, PLAN, { entwuerfe: true }).themen.b.entwurf, true);
+});
+
+test("Name des Themas nur, wenn er im ganzen Lernplan eindeutig ist", () => {
+  const v = baueVerzeichnis([datei("a", ""), datei("b", "")], PLAN).themen;
+  assert.equal(v.a.name, "Einmalig");
+  assert.equal(v.b.name, ""); // „Doppelt“ heißt auch c
+  // im echten Lernplan gibt es doppelte Namen (z. B. „Stimmt das?“)
+  const zahl = new Map();
+  for (const t of plan.themen) zahl.set(t.name, (zahl.get(t.name) ?? 0) + 1);
+  assert.ok([...zahl.values()].some((n) => n > 1));
+  for (const [id, e] of Object.entries(JSON.parse(readFileSync(VERZEICHNIS_ENTWURF, "utf8")).themen)) {
+    if (e.name) assert.equal(zahl.get(e.name), 1, id);
+  }
 });
 
 for (const a of liste) {

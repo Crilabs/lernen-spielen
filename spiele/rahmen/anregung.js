@@ -88,8 +88,9 @@ h2 {
 }
 .text[hidden], .anleitung[hidden], .reiter[hidden] { display: none; }
 
-/* Wahl der Form: Reiter mit Symbol und Wort, Nebenknöpfe aus Papier; die gewählte Form trägt den Sonnenring
-   (Auswahl, bedienung.md §6), nie eine Füllung. */
+/* Wahl der Form: Reiter mit Symbol und Wort. Die gewählte Form ist in Tinte gefüllt (wie ein Hauptknopf, Symbol und
+   Wort in Papier), die anderen sind Nebenknöpfe aus Papier; der Sonnenring bleibt dem Fokus (sonst stünden beim
+   Öffnen zwei Ringe: Zurück und die Wahl). */
 .reiter {
   --ls-knopf: ${MASSE.pille}rem;
   display: flex;
@@ -98,7 +99,6 @@ h2 {
   margin: 3.2rem 0 0;
 }
 .reiter .form { min-width: 0; font-size: 3.4rem; padding: 0 3.6rem 0 2.6rem; }
-.reiter [aria-selected="true"] .form::after { opacity: 1; }
 
 .anleitung {
   margin: 3.6rem 0 0;
@@ -292,8 +292,8 @@ export class LsAnregung extends HTMLElement {
     this.#formen = anleitung?.formen ?? [];
     this.reiter.innerHTML = this.#formen.length > 1
       ? this.#formen.map((f) => `<button class="knopf" type="button" role="tab" tabindex="-1" data-situation="${escape(f.situation)}"
-          aria-selected="false" aria-label="${escape(f.wort)}"><span class="form neben pille"><span class="zeichen"><img alt=""
-          draggable="false" src="${SYMBOLE}${escape(f.symbol)}"></span><span class="wort">${escape(f.wort)}</span></span></button>`).join("")
+          aria-selected="false" aria-label="${escape(f.wort)}"><span class="form neben pille"><span class="zeichen"
+          style="--bild:url('${SYMBOLE}${escape(f.symbol)}')"><img alt="" draggable="false" src="${SYMBOLE}${escape(f.symbol)}"></span><span class="wort">${escape(f.wort)}</span></span></button>`).join("")
       : "";
     this.reiter.hidden = this.#formen.length < 2;
     this.anleitung.hidden = !this.#formen.length;
@@ -315,6 +315,8 @@ export class LsAnregung extends HTMLElement {
       const an = b.dataset.situation === f.situation;
       b.setAttribute("aria-selected", String(an));
       b.tabIndex = an ? 0 : -1;
+      b.querySelector(".form")?.classList.toggle("haupt", an);
+      b.querySelector(".form")?.classList.toggle("neben", !an);
       if (an && fokus) b.focus({ preventScroll: true });
     }
     this.anleitung.innerHTML = `<h3></h3>${formHtml(f)}`;

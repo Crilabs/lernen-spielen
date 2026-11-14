@@ -33,4 +33,4 @@ Ihr braucht: etwas Platz im Zimmer oder im Flur
 
 **Darauf kommt es an:** Jede Silbe ist ein Schritt. „Tür“ ist ein Schritt, „Fens-ter“ sind zwei, „Ka-len-der“ sind drei.
 
-**Leichter:** Der Erwachsene spricht vor, das Kind geht mit. **Schwerer:** die Namen der Familie in Silben gehen.
+**Leichter:** Einer spricht das Wort vor, der andere geht mit. **Schwerer:** die Namen der Familie in Silben gehen.

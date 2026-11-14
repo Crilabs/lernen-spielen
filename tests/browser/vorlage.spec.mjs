@@ -146,7 +146,7 @@ async function lauf(typ, name, groesse, basis) {
     const seite = await kontext.newPage();
     seite.on("pageerror", (e) => fehlerListe.push(`Seitenfehler: ${e.message}`));
     seite.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole: ${m.text()}`); });
-    await seite.goto(`${basis}/spiele/vorlage.html`, { waitUntil: "load" });
+    await seite.goto(`${basis}/spiele/vorlage.html?entwurf`, { waitUntil: "load" });
     await seite.evaluate(() => {
       window.ergebnisse = [];
       document.addEventListener("ls-ergebnis", (e) => window.ergebnisse.push(e.detail));

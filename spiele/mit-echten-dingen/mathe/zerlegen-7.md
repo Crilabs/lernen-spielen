@@ -27,10 +27,10 @@ Ihr braucht: sieben Nudeln, zwei Teller
 Ihr braucht: sieben kleine Steine, Kastanien oder Blätter vom Weg
 
 1. Sammelt unterwegs sieben Dinge.
-2. Einer verteilt sie hinter dem Rücken auf beide Hände.
-3. Er öffnet eine Hand. Ihr seht zum Beispiel zwei Steine.
-4. Wie viele sind in der anderen Hand? Sagt es, dann öffnet sie.
+2. Einer von euch verteilt sie hinter dem Rücken auf beide Hände.
+3. Eine Hand geht auf. Ihr seht zum Beispiel zwei Steine.
+4. Wie viele sind in der anderen Hand? Sagt es, dann geht auch sie auf.
 
 **Darauf kommt es an:** Beide Hände zusammen haben immer sieben. Wer eine Hand sieht, weiß, wie viele zur Sieben noch fehlen.
 
-**Leichter:** mit fünf Dingen. **Schwerer:** Das Kind verteilt, der Erwachsene sagt die andere Hand.
+**Leichter:** mit fünf Dingen. **Schwerer:** Sagt ohne Steine alle Arten auf, wie sieben auf zwei Hände passen.

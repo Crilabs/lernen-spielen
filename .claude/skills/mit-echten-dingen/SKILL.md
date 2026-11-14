@@ -57,8 +57,11 @@ Ihr braucht: <Dinge>
 Regeln: Anrede „ihr“, kurze Sätze, Alltagswörter, höchstens etwa 120 Wörter je Form, etwa 5 Minuten, jederzeit
 beendbar, nichts zu basteln oder zu kaufen, nichts Gefährliches. Kein Lob, keine Bewertung, kein Abfragen, kein Druck,
 kein „schnell“ (§3.2), keine Rollen nach Geschlecht, Familien in ihrer Vielfalt, Essen ohne Moral. Fachbegriffe nach
-§5.1 („ist gleich“, „Silbe“, „Nomen“ …). Situationen genau so schreiben: `## Am Tisch: …`, `## In Bewegung: …`,
-`## Unterwegs: …` (sonst erkennt die Karte die Form nicht). `entwurf: true` bleibt, bis Christian die Datei freigibt.
+§5.1 („ist gleich“, „Silbe“, „Nomen“ …). Team-Wörter statt Rollen („Einer sagt …, der andere …“, nicht „der
+Erwachsene … das Kind“). Situationen genau so schreiben: `## Am Tisch: …`, `## In Bewegung: …`, `## Unterwegs: …`
+(sonst erkennt die Karte die Form nicht). `entwurf: true` bleibt, bis die Prüfung (Schritt 4) grün ist: Entwürfe stehen
+nur in `verzeichnis-entwurf.json` und erreichen die App nicht (ansehen mit `?entwurf`, z. B.
+`spiele/rahmen/vorschau.html?echte-dinge&entwurf`).
 
 Danach: `npm run echte-dinge` (Verzeichnis) und `node --test tests/echte-dinge.test.mjs tests/rahmen-markdown.test.mjs`
 (prüft Kopf, Thema im Lernplan, Ihr braucht / Schritte / Darauf kommt es an / Leichter / Schwerer, Wortzahl, Wortliste
@@ -86,10 +89,14 @@ Grün heißt: alle neun grün, kein kritischer Befund. Rot → überarbeiten und
 **höchstens 3 Runden**. Bleibt es rot: Datei nicht anlegen (bzw. mit `entwurf: true` und `geparkt: true` im Kopf
 liegen lassen) und die Befunde an Christian melden.
 
+Hinweis: Die drei ersten Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`, `lesen/silben-klatschen`) sind noch
+`entwurf: true` und brauchen diese Prüfung.
+
 ## 5. Abschluss: Datei, Verzeichnis, Kosten
 
-1. Datei liegt unter `spiele/mit-echten-dingen/<fach>/<thema-id>.md`, `npm run echte-dinge` ist gelaufen,
-   `npm test` grün.
+1. Prüfung grün: `entwurf: true` aus dem Kopf löschen (erst dann steht die Anleitung in `verzeichnis.json` und
+   erreicht die App). Geparkt: `geparkt: true` in den Kopf (steht in keinem Verzeichnis). Datei liegt unter
+   `spiele/mit-echten-dingen/<fach>/<thema-id>.md`, `npm run echte-dinge` ist gelaufen, `npm test` grün.
 2. Kosten je Agent (Recherche, Schreiben, Prüfung – Modell und Token aus der Agenten-Rückmeldung) eintragen;
    die Datei der analogen Spiele verlangt `themen` (Zahl der Themen, die der Eintrag abdeckt):
 
