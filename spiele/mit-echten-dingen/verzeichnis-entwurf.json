@@ -30,6 +30,19 @@
    "entwurf": true,
    "datei": "lesen/silben-klatschen.md"
   },
+  "teiler-begruenden": {
+   "fach": "mathe",
+   "name": "Teiler begründen",
+   "titel": "Gerecht teilen, bevor ihr austeilt",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Es klingelt"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/teiler-begruenden.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",
