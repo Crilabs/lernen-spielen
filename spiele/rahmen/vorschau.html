@@ -8,7 +8,8 @@
 <style>
   /* Vorschau der Rahmen-Bausteine auf dem Seiten-Grundstil (seite.css).
      Adresse: vorschau.html?fach=mathe&titel=Perlenbrücke&thema=Die%207%20zerlegen  (&pause, &leuchte)
-     &ziehen zeigt statt Matte und Tastatur das Ziehen: Tablett mit drei Teilen, Matte mit zwei Lücken. */
+     &ziehen zeigt statt Matte und Tastatur das Ziehen: Tablett mit drei Teilen, Matte mit zwei Lücken.
+     &lernzeichen zeigt die Lernzeichen: Perlentreppe 1–10, verdeckt, senkrecht, als Teil; die vier Wortarten. */
   /* Welt-Schicht: der einzige Verlauf auf dem Bildschirm. */
   .welt { background: linear-gradient(#CFEFFF, #EAF7FF 60%); }
   .huegel { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 34rem; }
@@ -38,6 +39,24 @@
     display: flex; gap: 4rem;
   }
   .ziehen-tablett .platz { display: grid; place-items: center; width: 15rem; height: 14rem; }
+  /* Lernzeichen (&lernzeichen) */
+  .lernzeichen-demo[hidden] { display: none; }
+  .lz-treppe {
+    position: absolute; top: 20rem; left: 6rem;
+    display: grid; gap: 1.2rem; justify-items: start; padding: 3.6rem 5rem;
+  }
+  .lz-treppe ls-perlenstab { height: 5.6rem; }
+  .lz-rechts { position: absolute; top: 20rem; left: 72rem; right: 6rem; display: grid; gap: 3rem; }
+  .lz-mathe {
+    display: grid; grid-template-columns: auto auto auto; align-items: center; justify-content: start;
+    gap: 4rem 6rem; padding: 3.6rem 5rem;
+  }
+  .lz-mathe .verdeckt { height: 6rem; grid-area: 1 / 1; }
+  .lz-mathe ls-perlenstab[ausrichtung="senkrecht"] { width: 5rem; grid-row: 1 / span 2; }
+  .lz-mathe .teil { height: 11rem; padding: 1.8rem 2.4rem; justify-self: start; grid-area: 2 / 1; }
+  .lz-deutsch { display: flex; align-items: flex-end; justify-content: center; gap: 4rem; padding: 3.6rem 5rem; }
+  .lz-wort { display: grid; justify-items: center; gap: 1.4rem; font-size: 4.4rem; line-height: 1; }
+  .lz-wort ls-wortart { height: 7rem; }
   .pausen-inhalt { display: grid; gap: 2rem; justify-items: center; font-size: 4rem; text-align: center; max-width: 90rem; }
   .pausen-inhalt img { width: 22rem; height: 22rem; }
 </style>
@@ -68,6 +87,34 @@
       <span class="platz"><span class="teil" data-wert="3">3</span></span>
     </div>
   </div>
+  <div class="lernzeichen-demo" hidden>
+    <div class="lernfeld lz-treppe">
+      <ls-perlenstab wert="1" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="2" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="3" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="4" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="5" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="6" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="7" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="8" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="9" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="10" ziffer></ls-perlenstab>
+    </div>
+    <div class="lz-rechts">
+      <div class="lernfeld lz-mathe">
+        <ls-perlenstab class="verdeckt" wert="7" verdeckt ziffer></ls-perlenstab>
+        <ls-perlenstab wert="3" ausrichtung="senkrecht" ziffer></ls-perlenstab>
+        <ls-perlenstab wert="8" ausrichtung="senkrecht"></ls-perlenstab>
+        <ls-perlenstab class="teil" wert="4"></ls-perlenstab>
+      </div>
+      <div class="lernfeld lz-deutsch">
+        <span class="lz-wort"><ls-wortart art="artikel"></ls-wortart>Die</span>
+        <span class="lz-wort"><ls-wortart art="adjektiv"></ls-wortart>kleine</span>
+        <span class="lz-wort"><ls-wortart art="nomen"></ls-wortart>Katze</span>
+        <span class="lz-wort"><ls-wortart art="verb"></ls-wortart>schläft</span>
+      </div>
+    </div>
+  </div>
 </div>
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause">
@@ -82,6 +129,8 @@
   import "./hilfe.js";
   import "./pause.js";
   import "./tastatur.js";
+  import "./perlenstab.js";
+  import "./wortart.js";
   import { ziehbar, setze, zurueck } from "./ziehen.js";
   const q = new URLSearchParams(location.search);
   const leiste = document.getElementById("leiste");
@@ -107,6 +156,11 @@
         },
       });
     }
+  } else if (q.has("lernzeichen")) {
+    for (const el of document.querySelectorAll(".matte, ls-tastatur, ls-blase")) el.hidden = true;
+    document.querySelector(".lernzeichen-demo").hidden = false;
+    // Das Teil zeigt, dass ein Perlenstab mit class="teil" ziehbar ist (hier ohne Ziel: es hebt sich nur an).
+    ziehbar(document.querySelector("ls-perlenstab.teil"), { ziele: [] });
   } else {
     blase.sage("Welches Stäbchen passt an die Fünf, damit es sieben werden?", { sprechen: false });
   }

@@ -53,6 +53,30 @@ export const FACH = {
   sprechen: { name: "Aprikose", fuellung: "#F08A4B", tief: "#A44C16", toenung: "#FFEADD" },
 };
 
+/**
+ * Bedeutungsfarben des Lernfelds (Farbwelt 6.2), nur für die Lernzeichen. Nie allein (C1): die Perle trägt
+ * Länge, Lücke und Marke, die Wortart ihre Form und Größe.
+ */
+export const LERNFARBE = Object.freeze({
+  /** Perlenstäbchen nach Montessori (M3), 9 in Kobalt, damit die Tinte-Kontur sichtbar bleibt. */
+  perle: Object.freeze({
+    1: "#E5484D",
+    2: "#3FA34D",
+    3: "#F4A3C0",
+    4: "#F7D038",
+    5: "#6CB8F0",
+    6: "#9B5DE5",
+    7: "#FFFFFF",
+    8: "#9A6B4F",
+    9: "#2F5BC4",
+    10: "#D9A520",
+  }),
+  /** Draht der Perlenstäbchen. */
+  draht: FARBE.tinteWeich,
+  /** Wortartensymbole (D1). */
+  wortart: Object.freeze({ nomen: "#1E1A2E", artikel: "#7CC4F0", adjektiv: "#2F5BC4", verb: "#E5484D" }),
+});
+
 /** Höhe der Kopfleiste samt Aussparung; `<ls-leiste>` setzt sie als --ls-leiste-hoehe am Dokument. */
 export const LEISTE_HOEHE = `calc(${MASSE.leiste}rem + env(safe-area-inset-top, 0rem))`;
 
