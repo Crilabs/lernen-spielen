@@ -34,10 +34,11 @@ export const ORTE = Object.freeze({
     { kind: "lena", x: 160, b: 16, fuss: 104, skala: 1, haltung: "freuen-klein", blick: "links" },
     { kind: "timo", x: 186, b: 22, fuss: 101, skala: 0.98, haltung: "stehen", blick: "links" },
   ],
-  /** Tiere (spiele/runde/tiere): x/b die ganze Zeichnung, fuss die Standhöhe; boden: wirft einen Bodenschatten. */
+  /** Tiere (spiele/runde/tiere): x/b die ganze Zeichnung, fuss die Standhöhe; boden: wirft einen Bodenschatten.
+   *  Die Tiere liegen vor der Runde (die Maus sitzt vorn zwischen Ela und Kofi). */
   tiere: [
     { tier: "hase", x: 165, b: 13.1, fuss: 72, skala: 0.9, blick: "links", boden: true },
-    { tier: "maus", x: 205, b: 7.8, fuss: 78, skala: 0.8, blick: "links", boden: true },
+    { tier: "maus", x: 121.7, b: 12.6, fuss: 106.6, skala: 1.3, blick: "rechts", boden: true },
     { tier: "rotkehlchen", x: 174.6, b: 6.1, fuss: 45.6, skala: 1, blick: "links", boden: false },
   ],
 });
