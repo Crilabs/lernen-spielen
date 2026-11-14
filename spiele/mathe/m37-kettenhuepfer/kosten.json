@@ -193,5 +193,18 @@
   "notiz": "Prüfer B Bedienung, Runde 1",
   "cache_lesen": 3972846,
   "cache_schreiben": 156008
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "prototyp",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 140,
+  "ausgabe": 52472,
+  "einheit": "tokens",
+  "menge": 11189206,
+  "notiz": "Bau-Agent Befunde B R1",
+  "cache_lesen": 10948110,
+  "cache_schreiben": 188484
  }
 ]
