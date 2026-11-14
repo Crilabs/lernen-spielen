@@ -38,6 +38,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `keksteller.js` – flacher Teller von der Seite mit einem kleinen Haufen runder Kekse (3, 2, 1; ohne Schrift und Ziffer).
 - `auftragszettel.js` – ein Zettel vom Block mit drei Zeilen Bleistift-Gekritzel und dem Bleistift daneben (Wellen statt Buchstaben; ohne Schrift und Ziffer).
 - `tischkaertchen.js` – gefaltetes Tischkärtchen, das wie ein Dach steht, mit einer Wellenlinie als Name und einem Buntstift davor (ohne Buchstaben und Ziffer).
+- `glueckwunschkarte.js` – Karte mit gemalter Blume, halb aus dem offenen Briefumschlag gezogen (ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
