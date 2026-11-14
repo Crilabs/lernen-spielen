@@ -5,7 +5,16 @@
     "sas": { "verbunden": true, "ovalVerbindung": "durchgezogen" }
   },
   "formen": [
-    { "zeichen": "1", "satz": "ziffern", "datei": "ziffern/1.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null }
+    { "zeichen": "0", "satz": "ziffern", "datei": "ziffern/0.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "1", "satz": "ziffern", "datei": "ziffern/1.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "2", "satz": "ziffern", "datei": "ziffern/2.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "3", "satz": "ziffern", "datei": "ziffern/3.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "4", "satz": "ziffern", "datei": "ziffern/4.svg", "striche": 2, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "5", "satz": "ziffern", "datei": "ziffern/5.svg", "striche": 2, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "6", "satz": "ziffern", "datei": "ziffern/6.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": "9", "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "7", "satz": "ziffern", "datei": "ziffern/7.svg", "striche": 2, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "8", "satz": "ziffern", "datei": "ziffern/8.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "9", "satz": "ziffern", "datei": "ziffern/9.svg", "striche": 2, "band": ["mitte", "oben"], "spiegel": "6", "eingang": null, "ausgang": null, "freigegeben": null }
   ],
   "sonderverbindungen": []
 }

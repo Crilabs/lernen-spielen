@@ -50,6 +50,25 @@ test("formen(satz) listet alle Formen des Satzes", async () => {
   assert.deepEqual(V.formen("va"), []);
 });
 
+test("formen(satz) in der Reihenfolge von liste.json, unabhängig von der Ladezeit", async () => {
+  const echt = globalThis.fetch;
+  // Spätere Dateien kommen zuerst an
+  globalThis.fetch = async (url) => {
+    const m = String(url).match(/ziffern\/(\d)\.svg$/);
+    if (m) await new Promise((r) => setTimeout(r, 30 - Number(m[1]) * 3));
+    return echt(url);
+  };
+  try {
+    const V = await frisch();
+    await V.ladeVorlagen();
+    const liste = JSON.parse(await readFile(new URL("../spiele/schrift/vorlagen/liste.json", import.meta.url), "utf8"));
+    const erwartet = liste.formen.filter((f) => f.satz === "ziffern").map((f) => f.zeichen);
+    assert.deepEqual(V.formen("ziffern").map((f) => f.zeichen), erwartet);
+  } finally {
+    globalThis.fetch = echt;
+  }
+});
+
 test("zweimal laden ruft nur einmal ab", async () => {
   const V = await frisch();
   await V.ladeVorlagen();

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 300" data-zeichen="9" data-satz="ziffern">
+  <!-- Oval oben gegen den Uhrzeigersinn, schließt oben rechts; dann der Abstrich rechts bis zur Grundlinie
+       (Richtform mit 2 Strichen, QUELLEN.md §1, E-Z4) -->
+  <path data-strich="1" d="M 90 38 C 84 14 71 0 55 0 C 32 0 15 20 15 50 C 15 80 32 100 55 100 C 75 100 90 82 90 55 L 90 38" fill="none"/>
+  <path data-strich="2" d="M 92 15 L 88 200" fill="none"/>
+</svg>

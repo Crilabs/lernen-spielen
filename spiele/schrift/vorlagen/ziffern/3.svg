@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 300" data-zeichen="3" data-satz="ziffern">
+  <!-- Oben links beginnen, oberer Bogen im Uhrzeigersinn zur Mitte, unterer Bogen im Uhrzeigersinn, endet unten links -->
+  <path data-strich="1" d="M 18 30 C 25 10 40 0 55 0 C 78 0 92 18 92 45 C 92 75 72 95 48 95 C 76 95 97 118 97 148 C 97 180 77 200 52 200 C 35 200 22 190 15 172" fill="none"/>
+</svg>

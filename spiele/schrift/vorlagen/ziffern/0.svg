@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 300" data-zeichen="0" data-satz="ziffern">
+  <!-- Oben beginnen, gegen den Uhrzeigersinn ein geschlossenes Oval, endet am Start (QUELLEN.md §1) -->
+  <path data-strich="1" d="M 55 0 C 33 0 15 45 15 100 C 15 155 33 200 55 200 C 77 200 95 155 95 100 C 95 45 77 0 55 0" fill="none"/>
+</svg>

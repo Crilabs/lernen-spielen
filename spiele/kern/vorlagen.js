@@ -46,12 +46,12 @@ export function ladeVorlagen(basis = new URL("../schrift/vorlagen/", import.meta
     const [raster, liste] = await Promise.all(
       ["raster.json", "liste.json"].map(async (n) => JSON.parse(await hole(new URL(n, wurzel)))),
     );
-    /** @type {Map<string, Form>} */
-    const formen = new Map();
-    await Promise.all(
+    // Formen in der Reihenfolge der Liste, gleich in welcher Reihenfolge die Dateien ankommen.
+    /** @type {Form[]} */
+    const geladen = await Promise.all(
       liste.formen.map(async (/** @type {any} */ e) => {
         const roh = leseFormSvg(await hole(new URL(e.datei, wurzel)));
-        formen.set(`${e.satz}/${e.zeichen}`, {
+        return {
           zeichen: e.zeichen,
           satz: e.satz,
           breite: roh.breite,
@@ -62,9 +62,10 @@ export function ladeVorlagen(basis = new URL("../schrift/vorlagen/", import.meta
           striche: roh.striche.map((s) => tastePfadAb(s.d, ABTASTUNG)),
           luft: roh.striche.map((s) => s.luft),
           freigegeben: e.freigegeben,
-        });
+        };
       }),
     );
+    const formen = new Map(geladen.map((f) => [`${f.satz}/${f.zeichen}`, f]));
     const sonder = await Promise.all(
       liste.sonderverbindungen.map(async (/** @type {any} */ v) => {
         const roh = leseFormSvg(await hole(new URL(v.datei, wurzel)));

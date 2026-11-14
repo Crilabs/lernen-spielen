@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 300" data-zeichen="8" data-satz="ziffern">
+  <!-- Oben rechts beginnen, gegen den Uhrzeigersinn, S-Bogen nach rechts unten, unten im Uhrzeigersinn herum,
+       schräg zurück zum Start; ein Zug, nicht aus zwei Kreisen (QUELLEN.md §1, E-Z3) -->
+  <path data-strich="1" d="M 85 28 C 80 10 68 0 55 0 C 33 0 20 18 20 42 C 20 70 45 85 60 98 C 80 112 97 128 97 155 C 97 182 78 200 55 200 C 32 200 13 182 13 155 C 13 128 30 112 50 98 C 68 84 85 60 85 28" fill="none"/>
+</svg>
