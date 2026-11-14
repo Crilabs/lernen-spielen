@@ -91,7 +91,7 @@ Test-Schnittstelle `fehlversuche: false` (kein Zug kann danebengehen), prüft B-
 überspringt dann die Hilfe-Leiter des ratenden Kindes (n/a im Bericht).
 <!-- ende wörtlich -->
 
-**3. Das Spiel, Welt** (Zeilen W-Figur, W-Sachwelt, W-Eine-Welt, W-Objekte, W-Wirkung, W-Bewegung, W-Regal, W-Karte,
+**3. Das Spiel, Welt** (Zeilen W-Figur, W-Sachwelt, W-Eine-Welt, W-Objekte, W-Wirkung, W-Bewegung, W-Freude, W-Regal, W-Karte,
 W-Ruhe wie in `pruefung-b-welt.md`; das Spiel ist ausgebaut: keine Platzhalter mehr, W-Regal und W-Karte gelten).
 Zu W-Eine-Welt gehört die **Einführung**: Sie erzählt in der Welt des Spiels; spielt das Spiel eine Einführung aus
 `spiele/einfuehrungen/` mit einer anderen Welt oder hat es die Einführung abgeschaltet, ist das rot.
@@ -99,11 +99,11 @@ Zu W-Eine-Welt gehört die **Einführung**: Sie erzählt in der Welt des Spiels;
 <!-- wörtlich aus docs/spielentwicklung.md §4 B-Welt; tests/skill-spiel-entwickeln.test.mjs prüft, dass es übereinstimmt -->
 **B-Welt** (Screenshots + Entwurf): Figur sichtbar und tätig; Sachwelt im Bild erkennbar und passend zur Aufgabe;
 eine Welt, keine zweite Metapher (A4b); Spielobjekte im Stil der Runde und sachlich richtig, als Wirkung animiert,
-nicht als Zählmaterial (M1); nichts Bedrohliches; Fantasie nur im Rahmen (`figuren.md` §5). Im Prototyp dürfen die
-Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stimmen. Im Ausbau das Kartenbild nach
+nicht als Zählmaterial (M1); W-Bewegung: Bewegung nur als Folge einer Kinderhandlung, ~1 s während der Handlung, bis ~3 s für die Folge einer gelösten Aufgabe, überspringbar, still beim Denken, mit reduzierter Bewegung ruhig und kurz; W-Freude (Christian, 2026-11-14): jede richtige Lösung hat eine sichtbare Folge, die sich aus der Aufgabe selbst erklärt (Figur oder Ding reagiert), als Teil des Spiels und nicht als Belohnung (keine Punkte, keine Sterne), verlässlich (B4), nach einer falschen Antwort nie reizvoller (B5), mit passenden wechselnden Varianten (gehen, traben, rutschen, hüpfen …; kleine Zufallsauswahl, nie ein seltener „Jackpot“); nichts Bedrohliches; Fantasie nur im Rahmen (`figuren.md` §5). Im Prototyp dürfen die
+Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stimmen; der Prototyp zeigt mindestens eine solche Folge (W-Freude). Im Ausbau das Kartenbild nach
 `grundsaetze-bilder.md` §16 (W-Karte): eine Figur, groß, mittig bis Mitte rechts, kein Text und keine Lernzeichen, im
 Silhouettentest (alle Karten des Fachs als Raster in 64 px Graustufen) von den anderen Karten des Fachs zu
-unterscheiden, `(figur, welt, zustand)` im Fach eindeutig.
+unterscheiden, `(figur, welt, zustand)` im Fach eindeutig. Im Ausbau hat jede Stufe und jede Aufgabenart passende Folgen mit Varianten.
 <!-- ende wörtlich -->
 
 **4. Das Spiel, Bedienung** (Zeilen U-Plätze, U-Farbe, U-Größen, U-Still, U-Reduziert wie in
@@ -159,7 +159,7 @@ Ergebnis: GRÜN | ROT
 … eine Zeile je Kriterium, in dieser Reihenfolge:
 A1, A2, A3, A4, A4b, A5, A6, A6b, A7, A8, A9, A10, A11, A12, Pflichtteile,
 D-A1, D-A2, D-A3, D-A4, D-A4b, D-A5, D-A6, D-A6b, D-A7, D-A8, D-Meldung, D-Gekonnt, D-Fehlversuche, D-Stufen, D-Sätze,
-W-Figur, W-Sachwelt, W-Eine-Welt, W-Objekte, W-Wirkung, W-Bewegung, W-Regal, W-Karte, W-Ruhe,
+W-Figur, W-Sachwelt, W-Eine-Welt, W-Objekte, W-Wirkung, W-Bewegung, W-Freude, W-Regal, W-Karte, W-Ruhe,
 U-10.1 … U-10.10, U-Plätze, U-Farbe, U-Größen, U-Still, U-Reduziert,
 S-Weg, S-Prüfstand, S-Code
 

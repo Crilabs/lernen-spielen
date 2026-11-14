@@ -167,7 +167,10 @@ Pflichtteile:
 5. **Figur:** welches Kind der Runde was tut (vorzeigen, fragen, sich wundern, sich freuen; F6, F7), wo es im Bild
    steht, welche Haltungen aus der Runde gebraucht werden.
 6. **Bildschirm-Skizze** (ASCII) nach `bedienung.md` §3: Kopfleiste, Erzählblase, Lernfeld, Tablett, Hilfe.
-7. **Rückmeldung:** was die Mechanik bei passend / nicht passend zeigt; was der Erzähler sagt (Sätze wörtlich).
+7. **Rückmeldung:** was die Mechanik bei passend / nicht passend zeigt; was der Erzähler sagt (Sätze wörtlich). Dazu
+   die **Folgen je Aufgabe mit Varianten** (W-Freude, Christian, 2026-11-14): was nach einer richtigen Lösung sichtbar
+   geschieht und warum es sich aus der Aufgabe erklärt, mit den wechselnden Varianten (z. B. gehen, traben, rutschen,
+   hüpfen), ~1 s während der Handlung, bis ~3 s für die Folge; die Reaktionen der Runde nutzen, wo vorhanden.
 8. **Hilfe-Leiter:** Probe (Stufe 1) und Lösung mit Begründung (Stufe 2), wörtlich.
 9. **Stufen** material / vorstellung / kopf, soweit der Katalog sie vorsieht; der Prototyp baut eine davon.
 10. **Aufgabenschlüssel** und `arten` für `spiele.json`; welche Themen des Lernplans bedient werden.
@@ -193,7 +196,7 @@ Pflichtteile:
   Lernzeichen da, verbunden mit dem Zeichen (M7) – bei einer Zerlegung die zwei Perlenstäbe nebeneinander unter dem
   ganzen Stab und die Gleichung („6 = 2 + 4“). Das bleibt stehen (z. B. in der wachsenden Liste), damit es sich
   einprägt; die Sachobjekte sind nur der Weg dorthin.
-- **Bewegung nach §7:** Folge einer Kinderhandlung, etwa 1 s, überspringbar; still, solange das Kind denkt (B3); bei
+- **Bewegung nach §7:** Folge einer Kinderhandlung, etwa 1 s während der Handlung, bis etwa 3 s für die Folge einer gelösten Aufgabe (mit Varianten, W-Freude), überspringbar; still, solange das Kind denkt (B3); bei
   `prefers-reduced-motion` ohne Bewegung (Endzustand sofort).
 - **Ablage:** Objekte, die mehr als ein Spiel brauchen kann (Tonne, Baum, Korb), in `spiele/objekte/<art>.js`, damit
   der Bestand mit jedem Spiel wächst; Spielspezifisches im Spielordner unter `objekte/`. Regal-Bilder müssen im
@@ -213,7 +216,7 @@ Pflichtteile:
   den die Art zeigt, z. B. die Zahl auf dem Aufkleber der Tonne), `still` (nie bewegen). Standard `aria-hidden="true"`
   (Schmuck der Sachwelt; was zählt, sagt der Erzähler). Größe: `height` am Host (Vorgabe 20 rem); das Feld ist das
   Objekt in Ruhe, ein offener Deckel ragt darüber hinaus, ohne etwas zu verschieben.
-- **Bewegung:** Ein Wechsel von `zustand` spielt die Bewegung der Art einmal (0,4 bis 1,2 s, B1), danach steht alles
+- **Bewegung:** Ein Wechsel von `zustand` spielt die Bewegung der Art einmal (0,4 bis 3 s, B1, B6), danach steht alles
   still (B3). Bei `prefers-reduced-motion` oder `still` steht der neue Zustand sofort da (B7).
 - **Methoden:** `wechsle(zustand)` → Promise, wenn die Bewegung fertig ist; `fertig()`; `ueberspringe()` springt ans
   Ende (B6, z. B. beim Antippen); `anstossen(ding)` → kurze Antwort, ohne den Zustand zu ändern (das Ding fällt hinein,
@@ -298,11 +301,11 @@ Test-Schnittstelle `fehlversuche: false` (kein Zug kann danebengehen), prüft B-
 
 **B-Welt** (Screenshots + Entwurf): Figur sichtbar und tätig; Sachwelt im Bild erkennbar und passend zur Aufgabe;
 eine Welt, keine zweite Metapher (A4b); Spielobjekte im Stil der Runde und sachlich richtig, als Wirkung animiert,
-nicht als Zählmaterial (M1); nichts Bedrohliches; Fantasie nur im Rahmen (`figuren.md` §5). Im Prototyp dürfen die
-Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stimmen. Im Ausbau das Kartenbild nach
+nicht als Zählmaterial (M1); W-Bewegung: Bewegung nur als Folge einer Kinderhandlung, ~1 s während der Handlung, bis ~3 s für die Folge einer gelösten Aufgabe, überspringbar, still beim Denken, mit reduzierter Bewegung ruhig und kurz; W-Freude (Christian, 2026-11-14): jede richtige Lösung hat eine sichtbare Folge, die sich aus der Aufgabe selbst erklärt (Figur oder Ding reagiert), als Teil des Spiels und nicht als Belohnung (keine Punkte, keine Sterne), verlässlich (B4), nach einer falschen Antwort nie reizvoller (B5), mit passenden wechselnden Varianten (gehen, traben, rutschen, hüpfen …; kleine Zufallsauswahl, nie ein seltener „Jackpot“); nichts Bedrohliches; Fantasie nur im Rahmen (`figuren.md` §5). Im Prototyp dürfen die
+Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stimmen; der Prototyp zeigt mindestens eine solche Folge (W-Freude). Im Ausbau das Kartenbild nach
 `grundsaetze-bilder.md` §16 (W-Karte): eine Figur, groß, mittig bis Mitte rechts, kein Text und keine Lernzeichen, im
 Silhouettentest (alle Karten des Fachs als Raster in 64 px Graustufen) von den anderen Karten des Fachs zu
-unterscheiden, `(figur, welt, zustand)` im Fach eindeutig.
+unterscheiden, `(figur, welt, zustand)` im Fach eindeutig. Im Ausbau hat jede Stufe und jede Aufgabenart passende Folgen mit Varianten.
 
 **B-Spielbarkeit** (automatisches Durchspielen, `tests/browser/durchspielen.mjs`): Simulierte Kinder spielen je eine
 Runde in Chromium und WebKit, 1920×1080 und 1280×800 (Aufruf mit der Seite des Spiels, z. B.
@@ -325,7 +328,7 @@ als Ring, keine Farbe als einziges Signal), Größen nach §4, still beim Denken
 ## 5. Ausbau
 
 Erst nach grünem Prüfstand: alle Stufen, **Spielobjekte als animierte SVG im Stil der Runde** (Prüfer B-Welt
-schaut sie erneut an, Screenshots je Bewegungszustand), Regal-Bild für die Themen, Kartenbild (`karte`, Figur in
+schaut sie erneut an, Screenshots je Bewegungszustand), Regal-Bild für die Themen, **je Stufe und Aufgabenart passende Folgen mit Varianten (W-Freude)**, Kartenbild (`karte`, Figur in
 `spiele/objekte/`), Szenenbild (Werkzeug `werkzeuge/bilder/`, Herkunft A4), Texte als Daten,
 `npm run audio` (Erzeugen; Anhören ist Sache von Christian, Liste der neuen Texte im Bericht), Einführung, Regal-Material
 (`material.js`), Eintrag in `spiele.json`, Browser-Prüfung des Spiels, Durchspielen erneut grün. Danach

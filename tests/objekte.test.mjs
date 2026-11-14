@@ -34,7 +34,7 @@ test("Stil der Runde: Kontur-Schicht in Tinte unter den Flächen, keine Verläuf
   }
 });
 
-test("Tonnen: drei Zustände, jede Bewegung trifft vorhandene Teile, etwa 0,4 bis 1,2 s", () => {
+test("Tonnen: drei Zustände, jede Bewegung trifft vorhandene Teile, 0,4 bis 3 s", () => {
   for (const art of ["papiertonne", "wertstofftonne"]) {
     const def = objekte.get(art);
     assert.deepEqual(def.zustaende, ["zu", "offen", "voll"]);
@@ -45,7 +45,7 @@ test("Tonnen: drei Zustände, jede Bewegung trifft vorhandene Teile, etwa 0,4 bi
       assert.ok(schritte.length > 0, `${art} ${von}>${nach}`);
       for (const s of schritte) assert.ok(teile.has(s.teil), `${art} ${von}>${nach}: ${s.teil}`);
       const d = dauerVon(schritte);
-      assert.ok(d >= 400 && d <= 1250, `${art} ${von}>${nach}: ${d} ms`);
+      assert.ok(d >= 400 && d <= 3200, `${art} ${von}>${nach}: ${d} ms`);
     }
     assert.deepEqual(def.bewegung("voll", "zu"), []);
     for (const ding of ["papier", "dose", "unbekannt"]) {
