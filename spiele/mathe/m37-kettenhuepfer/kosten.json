@@ -50,5 +50,18 @@
   "notiz": "Prüfer A, Runde 2",
   "cache_lesen": 2023504,
   "cache_schreiben": 169020
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "entwurf",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 30,
+  "ausgabe": 21012,
+  "einheit": "tokens",
+  "menge": 1136622,
+  "notiz": "Bau-Agent Entwurf, Befunde A2",
+  "cache_lesen": 1031859,
+  "cache_schreiben": 83721
  }
 ]
