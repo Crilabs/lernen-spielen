@@ -202,6 +202,21 @@ export function buckel(punkte, rund = 1) {
 }
 
 /**
+ * Strähnenkeil: breit an der Kerbe a, spitz bei b, leicht gebogen – trennt Strähnen wie bei Ela (keine Linie).
+ * @param {[number, number]} a Ansatz an der Kerbe des Randes @param {[number, number]} b Spitze im Haar
+ * @param {number} [breite] halbe Breite am Ansatz @param {number} [bogen] seitliche Biegung (+/-)
+ */
+export function keil(a, b, breite = 3, bogen = 0) {
+  const dx = b[0] - a[0];
+  const dy = b[1] - a[1];
+  const l = Math.hypot(dx, dy) || 1;
+  const n = [-dy / l, dx / l];
+  const m = [(a[0] + b[0]) / 2 + n[0] * bogen, (a[1] + b[1]) / 2 + n[1] * bogen];
+  return `M${z(a[0] - n[0] * breite)} ${z(a[1] - n[1] * breite)} Q${z(m[0] - n[0] * breite * 0.35)} ${z(m[1] - n[1] * breite * 0.35)} ${z(b[0])} ${z(b[1])}`
+    + ` Q${z(m[0] + n[0] * breite * 0.35)} ${z(m[1] + n[1] * breite * 0.35)} ${z(a[0] + n[0] * breite)} ${z(a[1] + n[1] * breite)} Z`;
+}
+
+/**
  * Handformen an einem Handgelenk w; die Hand zeigt in Richtung +y (Arm hängt) und dreht mit dem Unterarm.
  * daumen = +1: Daumen rechts, -1: links.
  * @param {[number, number]} w @param {string} haut @param {1|-1} daumen

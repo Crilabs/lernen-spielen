@@ -22,28 +22,27 @@ const fein = (p) => p.flatMap((a, i) => {
 // hinter dem Hals (kein „Bart“). Im Uhrzeigersinn, feine Wellen am Rand.
 // Oben: Haarmasse hinter dem Kopf (Kopf-Ebene).
 const HINTEN = fein(/** @type {[number, number][]} */ ([
-  [163, 22], [181, 23], [197, 30], [208, 43], [213, 60], [214, 80], [212, 100], [200, 104], [162, 94],
-  [124, 104], [112, 100], [110, 80], [112, 60], [118, 43], [130, 30], [146, 23],
+  [163, 25], [180, 26], [195, 32], [205, 44], [209, 60], [210, 80], [208, 98], [198, 102], [162, 94],
+  [126, 102], [115, 98], [113, 80], [115, 60], [120, 44], [131, 32], [146, 26],
 ]));
 // Die langen Vorhänge hängen hinter Rumpf und Armen (Ebene „zoepfe“ im koerper), damit die Arme davor liegen.
 const VORHANG_L = fein(/** @type {[number, number][]} */ ([
-  [112, 84], [124, 86], [133, 96], [134, 114], [134, 132], [130, 148], [120, 152], [112, 140], [110, 120], [112, 100],
+  [114, 86], [123, 88], [130, 96], [131, 114], [131, 132], [128, 146], [121, 150], [115, 140], [113, 120], [114, 100],
 ]));
 const VORHANG_R = fein(/** @type {[number, number][]} */ ([
-  [190, 86], [212, 84], [214, 102], [212, 120], [214, 140], [204, 152], [194, 148], [190, 132], [190, 114], [188, 98],
+  [192, 88], [208, 86], [210, 102], [209, 120], [210, 138], [204, 150], [196, 146], [193, 132], [193, 114], [191, 98],
 ]));
 // Schopf vorn: feine Locken am Haaransatz; links endet er über dem Ohr (Hörgerät bleibt frei).
 const VORN = /** @type {[number, number][]} */ ([
-  [118, 70], [119, 54], [126, 40], [138, 30], [151, 25], [164, 23], [178, 25], [191, 31], [201, 41], [207, 54],
-  [209, 70], [211, 90],
+  [119, 70], [120, 55], [127, 42], [138, 33], [151, 28], [164, 26], [177, 28], [189, 33], [198, 42], [204, 54],
+  [206, 70], [207, 86],
   [206, 84], [204, 76], [201, 68], [198, 61], [193, 56], [187, 54], [181, 55], [175, 53], [169, 52], [163, 53],
   [157, 53], [151, 54], [145, 56], [139, 58], [134, 61], [129, 64],
 ]);
-/** Wellenlinien (S-Kurven) statt Kringel: Haare fallen in Wellen. @param {number} x @param {number} y @param {number} l @param {number} a Amplitude */
-const welle = (x, y, l, a) => `M${x} ${y} q${a} ${l / 4} 0 ${l / 2} q${-a} ${l / 4} 0 ${l / 2}`;
-/** Dunkle Wellenrillen zwischen den Strähnen (keine hellen Linien). @param {Array<[number, number, number, number]>} liste @param {string} farbe */
-const wellen = (liste, farbe) => ({
-  svg: `<path d="${liste.map(([x, y, l, a]) => welle(x, y, l, a)).join(" ")}" fill="none" stroke="${farbe}" stroke-width="2.4"/>`,
+/** Strähnenkeile wie bei Ela: breit an der Kerbe, spitz im Haar, der Welle nach gebogen.
+ * @param {Array<[[number, number], [number, number], number, number]>} liste [Ansatz, Spitze, Breite, Bogen] @param {string} farbe */
+const keile = (liste, farbe) => ({
+  svg: liste.map(([a, b, w, bg]) => `<path d="${S.keil(a, b, w, bg)}" fill="${farbe}" stroke="none"/>`).join(""),
   kontur: "",
 });
 /** Licht als schmale, geschwungene Flächen auf den Wellen. @param {string[]} pfade @param {string} farbe */
@@ -78,19 +77,27 @@ const kopfDreiviertel = {
   zoepfe: S.zusammen(
     S.flach(S.pfad(S.buckel(VORHANG_L, 0.42)), HAAR_HINTEN),
     S.flach(S.pfad(S.buckel(VORHANG_R, 0.42)), HAAR_HINTEN),
-    S.falte("M206 88 C212 104 212 124 212 140 L204 150 L198 146 C204 130 205 108 202 90 Z", HAAR_HINTEN, 0.34),
-    wellen([[118, 100, 44, 3], [203, 108, 38, -3], [126, 118, 26, 2.5]], S.dunkler(HAAR_HINTEN, 0.4)),
-    lichter(["M114 92 Q118 104 114 116 Q117 104 114 92 Z", "M206 116 Q209 126 206 136 Q208 126 206 116 Z"], S.heller(HAAR_HINTEN, 0.28)),
+    S.falte("M205 90 C209 104 209 124 209 138 L203 148 L198 144 C203 128 203 108 201 92 Z", HAAR_HINTEN, 0.34),
+    keile([
+      [[121, 150], [118, 120], 3, 3], [[128, 146], [126, 118], 2.8, -3], [[115, 140], [115, 114], 2.4, 3],
+      [[204, 150], [206, 120], 3, -3], [[196, 146], [198, 118], 2.8, 3], [[209, 128], [208, 102], 2.2, -2],
+    ], S.dunkler(HAAR_HINTEN, 0.42)),
+    lichter(["M114 96 Q119 106 116 118 Q116 106 114 96 Z", "M123 104 Q127 114 125 126 Q124 114 123 104 Z",
+      "M201 104 Q205 114 203 126 Q202 114 201 104 Z"], S.heller(HAAR_HINTEN, 0.26)),
   ),
   haareHinten: S.zusammen(
     S.flach(S.pfad(S.buckel(HINTEN, 0.42)), HAAR_HINTEN),
-    S.falte("M206 44 C212 62 213 82 211 100 L204 100 C205 82 204 62 198 46 Z", HAAR_HINTEN, 0.34),
+    S.falte("M204 46 C208 62 209 82 208 98 L202 98 C203 82 202 64 198 48 Z", HAAR_HINTEN, 0.34),
   ),
   haareOben: S.zusammen(
     S.flach(S.pfad(S.buckel(VORN, 1)), farben.haar),
-    S.falte("M188 29 C200 35 207 46 209 62 L211 88 L205 80 C204 70 202 62 197 56 C193 48 188 40 182 34 Z", farben.haar, 0.26),
-    wellen([[144, 31, 18, 2.5], [168, 27, 22, 2.5], [190, 36, 18, -2.5], [130, 44, 14, 2]], S.dunkler(farben.haar, 0.36)),
-    lichter(["M136 40 Q144 30 156 27 Q146 33 140 43 Z", "M160 30 Q168 26 177 27 Q169 29 163 34 Z"], S.heller(farben.haar, 0.3)),
+    S.falte("M188 31 C198 36 204 46 206 62 L207 84 L203 78 C202 70 200 62 196 56 C192 48 188 41 182 35 Z", farben.haar, 0.26),
+    keile([
+      [[139, 58], [141, 40], 3, 3], [[157, 53], [155, 34], 3, -3], [[175, 53], [172, 34], 3, 3], [[193, 56], [187, 39], 3, -3],
+      [[204, 76], [203, 56], 2.6, 3], [[129, 64], [128, 48], 2.6, -2],
+    ], S.dunkler(farben.haar, 0.38)),
+    lichter(["M137 42 Q144 33 156 30 Q146 36 141 45 Z", "M160 32 Q168 28 177 29 Q169 31 163 36 Z",
+      "M146 46 Q147 38 151 33 Q150 40 149 48 Z", "M180 44 Q182 37 187 33 Q184 40 183 46 Z"], S.heller(farben.haar, 0.3)),
   ),
 };
 
