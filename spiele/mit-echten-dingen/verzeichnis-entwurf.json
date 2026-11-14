@@ -1,5 +1,22 @@
 {
  "themen": {
+  "einmaleins-sicher": {
+   "fach": "mathe",
+   "name": "Einmaleins sicher",
+   "titel": "Wie viele Packungen, wie viele Stück?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Einkauf auspacken"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Packungen im Laden"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/einmaleins-sicher.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
