@@ -496,5 +496,9 @@ Nachrücker: [M38](spielkatalog/mathe.md) Gerecht verteilen, sobald Teilen dazuk
 
 - **(Annahme)** M37 vor M35: Das Kind übt in der Schule schon Reihen und weiß, was „mal“ heißt. Wackelt das, rückt
   M35 nach vorn.
-- **Vor S18, S20 und S19 zu klären:** Versuch 1 aus Abschnitt 7 (Freihand-Schreiben mit dem Finger) und die
-  Schriftvorlagen (welche verbundene Schrift, Strichdaten der Buchstaben und Ziffern); beides gibt es noch nicht.
+- **Vor S18, S20 und S19 zu klären:** Versuch 1 aus Abschnitt 7 (Freihand-Schreiben mit dem Finger). Die
+  Schriftvorlagen gibt es seit 2026-11-14 (Ziffern, Druckschrift b d p q, SAS-Kleinbuchstaben;
+  `spiele/schrift/vorlagen/`, Prüfseite `npm run schrift:ansehen`).
+- **Mit echten Dingen (Christian, 2026-11-14):** Zu allen Themen dieser zehn Spiele entstehen auch die Anleitungen
+  ohne Bildschirm nach `docs/mit-echten-dingen.md`, eine je Thema (zusammen 133 Themen). Sie hängen nicht an der
+  App und können vor den Spielen entstehen.
