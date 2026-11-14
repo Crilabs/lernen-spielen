@@ -1,7 +1,6 @@
 ---
 thema: fuenferreihe
 fach: mathe
-entwurf: true
 bild: { figur: broetchen, zustand: tuete }
 quellen:
   - Von Kernaufgaben zum Aufgabennetz: Das Einmaleins über Beziehungen erschließen (Fünfmal-Aufgaben durch Halbieren der Zehnmal-Aufgaben), Schulimpulse, https://www.schulimpulse.de/von-einer-aufgabe-zur-naechsten-ueber-kernaufgaben-und-beziehungen-das-einmaleins-erschliessen/, abgerufen 2026-11-14
@@ -19,4 +18,4 @@ Ihr braucht: Fünf- und Zehn-Cent-Münzen aus Geldbeutel oder Münzglas. Ersatz:
 
 **Darauf kommt es an:** 5 ist die Hälfte von 10. Darum ist jede Fünferaufgabe die Hälfte der Zehneraufgabe: 6 mal 5 ist die Hälfte von 6 mal 10, also 30.
 
-**Leichter:** Brötchen für 20 Cent, 4 Fünfer. **Schwerer:** Legt erst die Zehner für 80 Cent. Sagt dazu die Fünferaufgabe: „8 mal 5 ist gleich 40.“
+**Leichter:** Brötchen für 20 Cent, 4 Fünfer. **Schwerer:** Legt erst die Zehner für 80 Cent. Legt daneben 8 Fünfer und sagt: „8 mal 5 ist gleich 40.“

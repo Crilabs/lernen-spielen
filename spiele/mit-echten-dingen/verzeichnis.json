@@ -1,5 +1,17 @@
 {
  "themen": {
+  "fuenferreihe": {
+   "fach": "mathe",
+   "name": "Fünferreihe",
+   "titel": "Fünfer und Zehner beim Bäcker",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kleingeld für die Brötchen"
+    }
+   ],
+   "entwurf": false
+  },
   "zehnerreihe": {
    "fach": "mathe",
    "name": "Zehnerreihe",
