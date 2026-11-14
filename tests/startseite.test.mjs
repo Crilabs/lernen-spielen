@@ -41,9 +41,10 @@ test("Startseite: dezenter Hintergrund; kein Kind (Christian: zu wenig Platz neb
   assert.doesNotMatch(skript, /setzeKind\(/);
 });
 
-test("Startseite: Mit echten Dingen öffnet die Karte (ls-anregung)", () => {
-  assert.match(html, /<ls-anregung id="anregung"><\/ls-anregung>/);
-  assert.match(skript, /anregung\.oeffne\(/);
+test("Startseite: Mit echten Dingen führt zur eigenen Seite; der Titel der Anleitung steht auf der Karte, wenn es sie gibt", () => {
+  assert.doesNotMatch(html, /<ls-anregung/);
+  assert.match(skript, /anleitungPfad\(/);
+  assert.match(skript, /leseAnleitung\(/);
 });
 
 test("Startseite: Links sprechen ihren Namen einmal je Sitzung und speichern vor dem Wechsel", () => {

@@ -26,14 +26,15 @@ export function spielKarteHtml(k, fach, vignette) {
 }
 
 /**
- * Karte „Mit echten Dingen“: öffnet die Anleitung (die Seite bindet den Klick über data-thema).
+ * Karte „Mit echten Dingen“: führt zur Seite der Anleitung (echt.html). Den Titel der Anleitung setzt die Seite
+ * nachträglich, wenn es eine Datei gibt (sonst bleibt „Mit echten Dingen“).
  * @param {{thema: {id: string, name: string}}} k
  * @param {string} fach
  */
 export function echtKarteHtml(k, fach) {
-  return `<button class="karte echt" type="button" data-thema="${esc(k.thema.id)}" aria-label="${esc(`Mit echten Dingen: ${k.thema.name}`)}" style="${farben(fach)}">`
+  return `<a class="karte echt" href="echt.html?thema=${encodeURIComponent(k.thema.id)}" data-thema="${esc(k.thema.id)}" aria-label="${esc(`Mit echten Dingen: ${k.thema.name}`)}" style="${farben(fach)}">`
     + `<span class="bild"><img src="symbole/hand.svg" alt=""></span>`
-    + `<span class="unten"><span class="text"><b>Mit echten Dingen</b><span class="thema">${esc(k.thema.name)}</span></span></span></button>`;
+    + `<span class="unten"><span class="text"><b>Mit echten Dingen</b><span class="thema">${esc(k.thema.name)}</span></span></span></a>`;
 }
 
 /**

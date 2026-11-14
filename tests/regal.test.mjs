@@ -36,10 +36,10 @@ test("Regal: Erzählersatz für das leere Regal ist eine feste Zeichenkette (sam
   assert.ok(literaleAusCode(skript).texte.includes("Hier stellst du hin, was du kannst."));
 });
 
-test("Regal: keine Zählung, kein „von“, kein Klassenbezug; Mit echten Dingen öffnet die Anleitung", () => {
+test("Regal: keine Zählung, kein „von“, kein Klassenbezug; Mit echten Dingen ist eine eigene Seite", () => {
   assert.doesNotMatch(html, /\.length\}|\$\{[^}]*\.(length|size)\}/);
   assert.doesNotMatch(html, / von \$\{|Klasse|Prozent|%\}/);
-  assert.match(skript, /anregung\.oeffne\(\{ titel: t\.name, text: t\.eltern \}\)/);
+  assert.doesNotMatch(html, /<ls-anregung/); // Mit echten Dingen ist eine eigene Seite (Karte im Detail verlinkt)
 });
 
 test("Regal: die Bretter sperren das senkrechte Rollen nicht (kein touch-action: pan-x)", () => {

@@ -22,7 +22,7 @@ Name in der App und im Projekt: **„Mit echten Dingen“** (Annahme; der Knopf 
 
 ```markdown
 ---
-thema: vorwaerts-zaehlen
+thema: abzaehlen
 quellen:
   - <Titel, Herausgeber, URL, abgerufen am>
 ---
@@ -82,8 +82,18 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 
 ## Wo es zu sehen ist
 
-- **Karte „Mit echten Dingen“** (`<ls-anregung>`) auf der Fach-Seite und im Regal, formatiert (kleiner eigener
-  Markdown-Darsteller: Überschrift, Listen, fett; der Kopf mit den Quellen wird nicht angezeigt). Fehlt die Datei,
-  bleibt der bisherige Einzeiler aus dem Lernplan **(Christian)**.
+- **Eigene Seite `spiele/echt.html?thema=<id>` (Christian, 2026-11-14)**, Kopfleiste im Fach des Themas, das Thema als
+  Unterzeile. Aufbau: Titel, „Ihr braucht“ (auf dem Tablett, wie Material), nummerierte Schritte, „Darauf kommt es an“
+  (mit dem Sonnenring), „Leichter“/„Schwerer“ als **zwei Umschalter**, eine Stufe zur Zeit (Christian), „Passt gut“.
+  Der Kopf mit den Quellen wird nicht angezeigt. **Nur lesen, kein Vorlesen** (Christian). Fehlt die Datei, steht der
+  bisherige Einzeiler aus dem Lernplan da **(Christian)**.
+- Verlinkt von der **Startseite** (Karte „Mit echten Dingen“, mit dem Titel der Anleitung, wenn es eine gibt), dem
+  **Regal** (Karte im Detail eines Themas) und der **Fach-Seite** (Knopf „Mit echten Dingen“).
+- **Verzeichnis `spiele/mit-echten-dingen/index.json`** (`{ fach: themaId[] }`): nennt alle vorhandenen Anleitungen,
+  damit nur vorhandene Dateien angefragt werden (kein 404, offline). Wer eine Anleitung anlegt, trägt sie dort ein;
+  `tests/start-anleitung.test.mjs` prüft, dass Verzeichnis und Dateien übereinstimmen.
+- Leser und Darstellung: `spiele/start/anleitung.js` (getestet). Erste Datei als Beispiel:
+  `spiele/mit-echten-dingen/mathe/abzaehlen.md` („Gabeln zählen“ aus dem Beispiel oben; passt zu Abzählen, nicht zu
+  Vorwärts zählen), noch nicht durch Recherche und Prüfung gelaufen.
 - **Am Rundenende eines Spiels** als ruhiges Angebot in der Pause, neben „Alle Spiele“ und „Weiter“ (kein Muss, keine
-  Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**.
+  Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**; führt zur selben Seite.

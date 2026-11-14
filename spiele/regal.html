@@ -127,7 +127,6 @@ body { -webkit-user-select: none; user-select: none; }
     <div class="karten" id="spiele"></div>
   </aside>
 </main>
-<ls-anregung id="anregung"></ls-anregung>
 
 <script type="module">
 import { sperreTouch, protokoll, esc, linkKlick } from "./lernspiel.js";
@@ -140,7 +139,6 @@ import "./rahmen/leiste.js";
 import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
-import "./rahmen/anregung.js";
 import { regalBaum, reiterHtml, bretterHtml } from "./start/regal-leiste.js";
 import { spielKarteHtml, echtKarteHtml } from "./start/karten.js";
 import { paletteFuer, vignetteSvg } from "./start/welten.js";
@@ -191,7 +189,6 @@ async function start() {
   const detail = document.getElementById("detail"), nameFeld = document.getElementById("name");
   const spieleFeld = document.getElementById("spiele"), spieleTitel = document.getElementById("spiele-titel");
   const hoeren = document.getElementById("hoeren");
-  const anregung = document.getElementById("anregung");
   let jetzt = null;
 
   function zeigeFach(fach) {
@@ -227,14 +224,11 @@ async function start() {
       return spielKarteHtml({ spiel, thema: { id, name: t.name } }, fach, palette ? vignetteSvg(palette) : null);
     }).join("") + (jetzt.eltern ? echtKarteHtml({ thema: { id, name: t.name } }, fach) : "");
     spieleTitel.hidden = !t.spiele.length && !jetzt.eltern;
-    spieleFeld.querySelectorAll("a.karte").forEach((a) => a.addEventListener("click", (e) => {
+    spieleFeld.querySelectorAll("a.karte.spiel").forEach((a) => a.addEventListener("click", (e) => {
       if (leiste.ton) sageEinmal(a.querySelector("b").textContent, sprich);
       linkKlick(e);
     }));
-    spieleFeld.querySelector(".karte.echt")?.addEventListener("click", () => {
-      const t = jetzt;
-      if (t?.eltern) anregung.oeffne({ titel: t.name, text: t.eltern });
-    });
+    spieleFeld.querySelector(".karte.echt")?.addEventListener("click", (e) => linkKlick(e));
     detail.hidden = false;
     if (sprechen && jetzt.sprich && leiste.ton) sprich(jetzt.sprich);
   }

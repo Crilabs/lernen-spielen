@@ -98,7 +98,6 @@ body { -webkit-user-select: none; user-select: none; }
     <div id="regal"></div>
   </aside>
 </main>
-<ls-anregung id="anregung"></ls-anregung>
 
 <script type="module">
 import { sperreTouch, protokoll, linkKlick } from "./lernspiel.js";
@@ -109,19 +108,18 @@ import "./rahmen/leiste.js";
 import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
-import "./rahmen/anregung.js";
 import { startKarten } from "./start/auswahl.js";
 import { paletteFuer, vignetteSvg } from "./start/welten.js";
 import { spielKarteHtml, echtKarteHtml, abschnittHtml } from "./start/karten.js";
 import { zuletztHtml } from "./start/regal-leiste.js";
 import { hintergrundSvg } from "./start/hintergrund.js";
+import { anleitungPfad, leseAnleitung, hatAnleitung, VERZEICHNIS } from "./start/anleitung.js";
 
 /** So lange hält ein Erwachsener das Zahnrad (wie bisher). */
 const HALTEN_MS = 3000;
 
 sperreTouch();
 const leiste = document.getElementById("leiste");
-const anregung = document.getElementById("anregung");
 document.getElementById("hintergrund").innerHTML = hintergrundSvg();
 zahnrad();
 start();
@@ -148,7 +146,7 @@ async function start() {
       return spielKarteHtml(k, f.fach, palette ? vignetteSvg(palette) : null);
     }).join("") + f.echt.map((k) => echtKarteHtml(k, f.fach)).join(""))).join("")
     : `<p class="leer">Hier kommen bald Spiele.</p>`;
-  raster.querySelectorAll("a.karte").forEach((a) => nenne(a, a.querySelector("b").textContent));
+  raster.querySelectorAll("a.karte.spiel").forEach((a) => nenne(a, a.querySelector("b").textContent));
   raster.querySelectorAll("a.fach-kopf").forEach((a) => nenne(a, a.querySelector("b").textContent));
 
   // Rechts: zuletzt gelernt (bleibt kurz), darunter der Knopf zum Regal
@@ -163,11 +161,20 @@ async function start() {
     linkKlick(e);
   });
 
-  // Mit echten Dingen: die Anleitung für den Erwachsenen
-  document.querySelectorAll(".karte.echt").forEach((b) => b.addEventListener("click", () => {
-    const t = themaNach.get(b.dataset.thema);
-    if (t?.eltern) anregung.oeffne({ titel: t.name, text: t.eltern });
-  }));
+  // Mit echten Dingen: Karten führen zur eigenen Seite; gibt es eine Anleitung, steht ihr Titel auf der Karte.
+  const echtKarten = [...raster.querySelectorAll("a.karte.echt")];
+  echtKarten.forEach((a) => nenne(a, "Mit echten Dingen"));
+  const index = echtKarten.length ? await fetch(VERZEICHNIS).then((r) => r.json()).catch(() => null) : null;
+  echtKarten.forEach(async (a) => {
+    const t = themaNach.get(a.dataset.thema);
+    const pfad = t && hatAnleitung(index, t.strang, t.id) && anleitungPfad(t.strang, t.id);
+    if (!pfad) return;
+    try {
+      const r = await fetch(pfad);
+      const anleitung = r.ok ? leseAnleitung(await r.text()) : null;
+      if (anleitung) a.querySelector("b").textContent = anleitung.titel;
+    } catch { /* keine Datei: es bleibt „Mit echten Dingen“ */ }
+  });
 }
 
 // Name beim ersten Tippen je Sitzung; der Link wechselt sofort (vorher speichern über linkKlick).

@@ -22,9 +22,9 @@ test("Spielkarte: ohne Vignette eine Fläche in der Fachtönung mit dem Spielsym
   assert.match(h, /<b>A&lt;b<\/b>/);
 });
 
-test("Karte Mit echten Dingen: Knopf mit Thema-Id, eigener Gestalt, Name fürs Vorlesen", () => {
+test("Karte Mit echten Dingen: Link zur Seite der Anleitung, eigene Gestalt, Name fürs Vorlesen", () => {
   const h = echtKarteHtml({ thema: { id: "zaehlen", name: "Bis 10 zählen", eltern: "Gabeln zählen" } }, "mathe");
-  assert.match(h, /^<button class="karte echt" type="button" data-thema="zaehlen"/);
+  assert.match(h, /^<a class="karte echt" href="echt\.html\?thema=zaehlen" data-thema="zaehlen"/);
   assert.match(h, /aria-label="Mit echten Dingen: Bis 10 zählen"/);
   assert.match(h, /<b>Mit echten Dingen<\/b>/);
   assert.match(h, /<span class="thema">Bis 10 zählen<\/span>/);

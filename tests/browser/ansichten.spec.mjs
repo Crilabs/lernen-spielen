@@ -273,6 +273,29 @@ async function lauf(typ, name, groesse, basis) {
       await bild(regal, s("regal", fall));
       await regal.close();
 
+      // --- Mit echten Dingen: Anleitung aus der Datei, sonst der Einzeiler ---------------------------
+      if (fall === "leer") {
+        const echt = await oeffne(kontext, `${basis}/spiele/echt.html?thema=abzaehlen`);
+        const ea = await echt.evaluate(async () => {
+          const titel = document.querySelector(".anleitung h1")?.textContent ?? "";
+          const schritte = document.querySelectorAll(".schritte li").length;
+          const quellen = /quellen|hinweis/i.test(document.body.innerText);
+          const [l, sw] = ["leichter", "schwerer"].map((x) => document.querySelector(`.stufe[data-stufe="${x}"]`));
+          l.click(); sw.click();
+          await new Promise((r) => setTimeout(r, 50));
+          const sichtbar = [...document.querySelectorAll(".stufen-text")].filter((p) => !p.hidden).map((p) => p.dataset.stufe);
+          return { titel, schritte, quellen, sichtbar, fach: document.getElementById("leiste").getAttribute("fach") };
+        });
+        pruefe(F, "Mit echten Dingen: Anleitung mit Titel, drei Schritten, ohne Quellen, Fach Mathe; eine Stufe zur Zeit",
+          ea.titel === "Gabeln zählen" && ea.schritte === 3 && !ea.quellen && ea.fach === "mathe" && JSON.stringify(ea.sichtbar) === '["schwerer"]', JSON.stringify(ea));
+        await bild(echt, s("echt", "anleitung"));
+        await echt.close();
+        const ersatz = await oeffne(kontext, `${basis}/spiele/echt.html?thema=rechnen-3`);
+        const ez = await ersatz.evaluate(() => ({ einzeiler: !!document.querySelector(".einzeiler")?.textContent, schritte: document.querySelectorAll(".schritte li").length }));
+        pruefe(F, "Mit echten Dingen ohne Datei: der Einzeiler aus dem Lernplan", ez.einzeiler && ez.schritte === 0, JSON.stringify(ez));
+        await ersatz.close();
+      }
+
       // --- Elternbereich: direkter Aufruf zeigt die PIN ------------------------------------------
       const eltern = await oeffne(kontext, `${basis}/spiele/eltern.html`);
       const el = await eltern.evaluate(() => ({ pin: !document.getElementById("pin").hidden, bereich: !document.getElementById("bereich").hidden,
