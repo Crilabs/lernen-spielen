@@ -12,12 +12,12 @@ quellen:
 
 ## Am Tisch: Karten austeilen
 
-Ihr braucht: ein Kartenspiel, etwa Mau-Mau oder Quartett.
+Ihr braucht: ein Kartenspiel, etwa ein Quartett.
 
 1. Zählt, wie viele mitspielen. Auch Kuscheltiere dürfen mitspielen.
 2. Nehmt so viele Karten, dass es aufgeht: zu viert 32, zu dritt, fünft oder sechst 30.
-3. Sucht die Malaufgabe: Wie viele mal die Zahl der Spieler ist gleich der Zahl der Karten?
-4. Fangt bei 10 mal oder 5 mal an. Zu viel oder zu wenig? Geht von dort weiter.
+3. Wie viele Karten bekommt ihr jeweils? Sucht die passende Malaufgabe.
+4. Fangt bei 10 mal oder 5 mal eure Zahl an. Zu viel oder zu wenig? Geht von dort weiter.
 5. Sagt die Malaufgabe und ihre Umkehraufgabe, die Geteiltaufgabe.
 6. Teilt aus und zählt nach.
 
