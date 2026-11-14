@@ -1,7 +1,6 @@
 ---
 thema: nomen-gross-artikelprobe
 fach: schreiben
-entwurf: true
 bild: { figur: auftragszettel, zustand: liegt }
 quellen:
   - LehrplanPLUS Grundschule Deutsch, Fachlehrplan Jahrgangsstufe 1/2 (Strategien zum Erkennen von Nomen: Artikelprobe im Satzzusammenhang, Mehrzahl bilden), ISB Bayern, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/2/deutsch, abgerufen 2026-11-14
