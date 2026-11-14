@@ -50,6 +50,26 @@ Pflichtteile:
 8. **Hilfe-Leiter:** Probe (Stufe 1) und Lösung mit Begründung (Stufe 2), wörtlich.
 9. **Stufen** material / vorstellung / kopf, soweit der Katalog sie vorsieht; der Prototyp baut eine davon.
 10. **Aufgabenschlüssel** und `arten` für `spiele.json`; welche Themen des Lernplans bedient werden.
+11. **Spielobjekte (Christian):** welche Dinge der Sachwelt das Spiel als eigene, animierte SVG-Bilder braucht (z. B.
+    Mülltonnen, Papier, Dosen), welche Bewegungen sie haben (z. B. Deckel öffnet sich, Ding fliegt hinein, Tonne
+    wackelt satt) und welches davon als **Regal-Bild** für die Themen des Spiels dient.
+
+### Spielobjekte (Christian)
+
+- Jedes Spiel entwickelt seine Sachwelt-Dinge als **animierte SVG-Bilder im Stil der Runde** (`docs/figuren.md` §4:
+  Kontur nur um die Silhouette, Licht von oben links in Stufen, Schlagschatten, keine Verläufe; Welt-Paletten aus
+  `grundsaetze-bilder.md` 6.2). Von Hand als SVG, nie KI-generiert (A1). Sachlich richtig (eine Papiertonne sieht aus
+  wie eine Papiertonne, T2/K3).
+- Sie stehen **im Spiel** (Sachwelt, Stimmungs- bzw. Wortbild-Ebene) und **im Regal**: Das Spiel nennt für seine
+  Themen ein Regal-Bild (z. B. die Tonne mit der Zahl des Themas), das dort statt des allgemeinen Kärtchens steht.
+- **Lernzeichen bleiben schlicht (M1):** Gezählt und gerechnet wird am Lernzeichen (Perlenstab, Zehnerfeld,
+  Wortkarte). Die Sachobjekte sind die **Wirkung** der Lösung (B1): Der geteilte Stab wird zu Papier und Wertstoff,
+  die Dinge wandern in die Tonnen. Sachobjekte werden nicht als Zählmaterial benutzt.
+- **Bewegung nach §7:** Folge einer Kinderhandlung, etwa 1 s, überspringbar; still, solange das Kind denkt (B3); bei
+  `prefers-reduced-motion` ohne Bewegung (Endzustand sofort).
+- **Ablage:** Objekte, die mehr als ein Spiel brauchen kann (Tonne, Baum, Korb), in `spiele/objekte/<name>.js` als
+  Baustein mit gleicher Schnittstelle (z. B. `<ls-objekt art="papiertonne">` oder eine Zeichenfunktion), damit der
+  Bestand mit jedem Spiel wächst; Spielspezifisches im Spielordner.
 
 ## 2. Prüfung A: der Entwurf
 
@@ -85,7 +105,9 @@ Vier unabhängige Prüfer (frische Agenten, die nicht gebaut haben). Jeder liefe
 Aufgabe mit `ok`, `hilfe`, `ms` gemeldet; mit Hilfe Gelöstes zählt nicht als gekonnt.
 
 **B-Welt** (Screenshots + Entwurf): Figur sichtbar und tätig; Sachwelt im Bild erkennbar und passend zur Aufgabe;
-nichts Bedrohliches; Fantasie nur im Rahmen (`figuren.md` §5).
+eine Welt, keine zweite Metapher (A4b); Spielobjekte im Stil der Runde und sachlich richtig, als Wirkung animiert,
+nicht als Zählmaterial (M1); nichts Bedrohliches; Fantasie nur im Rahmen (`figuren.md` §5). Im Prototyp dürfen die
+Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stimmen.
 
 **B-Spielbarkeit** (automatisches Durchspielen, `tests/browser/durchspielen.mjs`): Simulierte Kinder spielen je eine
 Runde in Chromium und WebKit, 1920×1080 und 1280×800:
@@ -106,7 +128,8 @@ als Ring, keine Farbe als einziges Signal), Größen nach §4, still beim Denken
 
 ## 5. Ausbau
 
-Erst nach grünem Prüfstand: alle Stufen, Szenenbild (Werkzeug `werkzeuge/bilder/`, Herkunft A4), Texte als Daten,
+Erst nach grünem Prüfstand: alle Stufen, **Spielobjekte als animierte SVG im Stil der Runde** (Prüfer B-Welt
+schaut sie erneut an, Screenshots je Bewegungszustand), Regal-Bild für die Themen, Szenenbild (Werkzeug `werkzeuge/bilder/`, Herkunft A4), Texte als Daten,
 `npm run audio` (Erzeugen; Anhören ist Sache von Christian, Liste der neuen Texte im Bericht), Einführung, Regal-Material
 (`material.js`), Eintrag in `spiele.json`, Browser-Prüfung des Spiels, Durchspielen erneut grün. Danach
 Abschluss-Review des Branches (wie bei Rahmen und Ansichten) und Merge nach `main`.
