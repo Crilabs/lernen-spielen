@@ -77,7 +77,8 @@ Nach `docs/spielentwicklung.md` §3 und dem Kopf von `spiele/vorlage/spiel.js` (
 - Test-Schnittstelle `meldePruefSchnittstelle` mit `zuege`, `richtigerZug`, Hilfe Stufe 2 mit `.markiert`;
   `fehlversuche: false` nur, wenn wirklich kein Zug danebengehen kann.
 - Eintrag in `spiele/spiele.json` (`datei`, `symbol` relativ zu `spiele/`, `arten`, Themen); einfaches `symbol.svg`.
-- Reine Logik in `logik.js` mit Node-Tests unter `tests/spiele/<fach>/<spiel>.test.mjs`, falls es Logik gibt.
+- Reine Logik in `logik.js` mit Node-Tests unter `tests/spiele/<fach>/<spiel>.test.mjs`, falls es Logik gibt (`npm test` nimmt
+  sie mit; `package.json` nicht ändern).
 - Den RAHMEN der Vorlage behalten, auch `?stufe` (nur im Testbetrieb) und `lernstufe` im Zustand.
 - Selbst laufen lassen, bis es durchläuft: `npm test` und
   `NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs {{SEITE}}`.

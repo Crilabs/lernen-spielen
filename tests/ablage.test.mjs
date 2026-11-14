@@ -53,3 +53,9 @@ test("Ablage (Selbsttest mit Beispielen): richtig und falsch abgelegte Spiele", 
   assert.match(ablageFehler([gut], (p) => !p.endsWith(".html"))[0], /datei .* fehlt/);
   assert.match(ablageFehler([{ ...gut, symbol: "symbole/x.svg" }], da)[0], /nicht im Spielordner/);
 });
+
+test("Ablage: npm test nimmt die Node-Tests der Spiele mit (tests/spiele/<fach>/<spiel>.test.mjs)", () => {
+  // Ohne das liefen die Logik-Tests eines Spiels nie; der Bau-Agent soll package.json dafür nicht anfassen müssen.
+  const skript = JSON.parse(readFileSync(join(SPIELE, "..", "package.json"), "utf8")).scripts.test;
+  assert.match(skript, /"tests\/\*\*\/\*\.test\.mjs"/);
+});

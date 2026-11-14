@@ -37,6 +37,7 @@
 
 import { createRequire } from "node:module";
 import http from "node:http";
+import { starteServer } from "./server.mjs";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { dirname, extname, join, normalize, relative, resolve } from "node:path";
@@ -62,7 +63,8 @@ const ERWARTET_IM_PROTOKOLL = [/Keine Audiodatei/, /nicht in spiele\.json – Vo
  * im Bericht. Chromium startet mit --autoplay-policy=no-user-gesture-required: dort ist die Zeile immer rot. Danach
  * (nach einer Eingabe) ist sie überall rot: dann bliebe ein Satz stumm.
  */
-const OHNE_GESTE = /Vorlesen fehlgeschlagen: not-allowed/;
+// Dasselbe für Aufnahmen: WebKit lehnt play() ohne Geste mit NotAllowedError ab, dann spricht die Systemstimme.
+const OHNE_GESTE = /Vorlesen fehlgeschlagen: not-allowed|Audiodatei nicht abspielbar \(NotAllowedError/;
 // Ein vorhandener Lernstand, der in der Vorschau unberührt bleiben muss.
 const STAND = {
   "lernstand-kind-1-lernplan": JSON.stringify({ version: 1, themen: { "zerlegen-6": { z: "kann-ich", stufe: "kopf", k: "2026-11-01" } }, aufgaben: {}, verlauf: [], migriert: 1 }),
@@ -103,27 +105,7 @@ function leseAufruf(argv) {
 
 // --- Server ----------------------------------------------------------------------------------------
 
-const TYPEN = {
-  ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8",
-  ".json": "application/json", ".css": "text/css", ".svg": "image/svg+xml", ".mp3": "audio/mpeg",
-  ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp",
-};
-
-function starteServer() {
-  const server = http.createServer(async (req, res) => {
-    const pfad = decodeURIComponent(new URL(req.url, "http://x").pathname);
-    if (pfad === "/favicon.ico") return void res.writeHead(204).end();
-    const datei = join(WURZEL, normalize(pfad));
-    if (!datei.startsWith(WURZEL)) return void res.writeHead(403).end();
-    try {
-      const inhalt = await readFile(datei);
-      res.writeHead(200, { "content-type": TYPEN[extname(datei)] ?? "application/octet-stream" }).end(inhalt);
-    } catch {
-      res.writeHead(404).end("nicht gefunden");
-    }
-  });
-  return new Promise((ok) => server.listen(0, "127.0.0.1", () => ok(server)));
-}
+// Server mit Byte-Bereichen: tests/browser/server.mjs (WebKit braucht Range für Audio).
 
 // --- Zufall (mit Saat, damit ein roter Lauf sich wiederholen lässt) --------------------------------
 
@@ -706,7 +688,7 @@ async function laufeBrowser(name, aufruf, basis, rnd) {
 }
 
 const aufruf = leseAufruf(process.argv.slice(2));
-const server = await starteServer();
+const server = await starteServer(WURZEL);
 const basis = `http://127.0.0.1:${server.address().port}`;
 console.log(`Prüfstand: ${aufruf.pfad}${aufruf.stufe ? ` · Stufe ${aufruf.stufe}` : ""} · Kinder ${aufruf.kinder.join(", ")} · ${aufruf.browser.join(", ")} · Saat ${aufruf.saat}`);
 let laeufe = [];

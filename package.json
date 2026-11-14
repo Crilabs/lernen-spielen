@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "tsc -p tsconfig.json && node --test \"tests/*.test.mjs\"",
+    "test": "tsc -p tsconfig.json && node --test \"tests/**/*.test.mjs\"",
     "luecken": "node scripts/luecken.mjs",
     "tauri": "tauri",
     "audio": "node werkzeuge/audio/erzeugen.mjs",

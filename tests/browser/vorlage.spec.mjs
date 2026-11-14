@@ -16,6 +16,7 @@
 
 import { createRequire } from "node:module";
 import http from "node:http";
+import { starteServer } from "./server.mjs";
 import { readFile, mkdir } from "node:fs/promises";
 import { extname, join, normalize, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -24,28 +25,7 @@ const require = createRequire(import.meta.url);
 const { chromium, webkit } = require("playwright");
 
 const WURZEL = resolve(fileURLToPath(import.meta.url), "../../..");
-const TYPEN = {
-  ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8",
-  ".json": "application/json", ".css": "text/css", ".svg": "image/svg+xml", ".mp3": "audio/mpeg",
-  ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".png": "image/png", ".jpg": "image/jpeg",
-};
-
-/** Statischer Server für das Repo-Verzeichnis; Port 0 = freier Port. */
-function starteServer() {
-  const server = http.createServer(async (req, res) => {
-    const pfad = decodeURIComponent(new URL(req.url, "http://x").pathname);
-    if (pfad === "/favicon.ico") return void res.writeHead(204).end();
-    const datei = join(WURZEL, normalize(pfad));
-    if (!datei.startsWith(WURZEL)) return void res.writeHead(403).end();
-    try {
-      const inhalt = await readFile(datei);
-      res.writeHead(200, { "content-type": TYPEN[extname(datei)] ?? "application/octet-stream" }).end(inhalt);
-    } catch {
-      res.writeHead(404).end("nicht gefunden");
-    }
-  });
-  return new Promise((ok) => server.listen(0, "127.0.0.1", () => ok(server)));
-}
+// Server mit Byte-Bereichen: tests/browser/server.mjs (WebKit braucht Range für Audio).
 
 const AUFLOESUNGEN = [{ width: 1920, height: 1080 }, { width: 1280, height: 800 }];
 const SHOTS = process.env.SHOTS;
@@ -369,7 +349,7 @@ async function lauf(typ, name, groesse, basis) {
   }
 }
 
-const server = await starteServer();
+const server = await starteServer(WURZEL);
 const basis = `http://127.0.0.1:${server.address().port}`;
 console.log(`Server ${basis}`);
 try {
