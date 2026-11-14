@@ -2,6 +2,9 @@
 // Entwurf: docs/spiele/mathe/m37-kettenhuepfer.md. Eine Aufgabe a · n (Art `mal`, daten { a, b: n, c }) liegt auf der
 // Kette von n: a Stäbchen zu je n Perlen, das Pfeilchen am Ende von Stäbchen a trägt c.
 
+/** Aufgaben des Kindes je Runde: die Vorratsliste hat Platz für Timos Zeile und acht weitere. */
+export const AUFGABEN_JE_RUNDE = 8;
+
 /** Ding je Reihe (Abschnitt 4 des Entwurfs): das Objekt, das in den Korb fliegt (null = Platzhalter im Prototyp). */
 export const PACKUNG = Object.freeze({ 2: "schuhpaar", 3: null, 4: "gedeck", 5: "broetchen", 6: "eierkarton", 7: null, 8: null, 9: null, 10: "muenze" });
 
@@ -95,4 +98,20 @@ export function tippe(eingabe, taste) {
 export function pfeileWaehrend(geloest, a) {
   const g = new Set(geloest);
   return { pfeile: [...g].filter((k) => k !== a).sort((x, y) => x - y), leer: g.has(a) ? [a] : [] };
+}
+
+/**
+ * Die Aufgabe, die Timo zu Beginn der Runde vorzeigt (L5), auf der Kette der ersten Lieferung der Lernsteuerung:
+ * 1 · n (ein Stäbchen = eine Packung). Ist die erste Lieferung selbst 1 · n, zeigt er 10 · n (das Ende der Kette),
+ * damit das Kind nie direkt nachtippt, was Timo eben getippt hat (L1). Jede Lieferung der Lernsteuerung bekommt das
+ * Kind, keine wird verworfen (Prüfstand B, Runde 2: verworfene Lieferungen kürzten die Runde, hoben `sitzung.letzte`
+ * auf und sperrten 1 · n für die Wiedervorlage). Kommt Timos Aufgabe später in der Runde, ist sein Pfeilchen leer und
+ * seine Zeile verdeckt (Entwurf §2 Satz 6). @param {any} lieferung @returns {{ a: number, b: number, key: string } | null}
+ */
+export function vorzeigeAufgabe(lieferung) {
+  const m = /^mal:(\d+)\*(\d+)$/.exec(lieferung?.ziel?.key ?? "");
+  if (!m) return null;
+  const b = Number(m[2]);
+  const a = Number(m[1]) === 1 ? 10 : 1;
+  return { a, b, key: `mal:${a}*${b}` };
 }

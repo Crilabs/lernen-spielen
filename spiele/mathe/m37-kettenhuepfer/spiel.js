@@ -9,7 +9,9 @@
 //   SPIELWELT  Kennung, Aufgabenarten, Rundenlänge, Vorschau-Aufgaben, Sätze des Erzählers
 //   AUFGABE    Vorzeigen (Timo), eine Aufgabe darstellen, prüfen (die Kette urteilt), Hilfe-Stufen
 //   RAHMEN     aus der Vorlage; eine Zeile ergänzt: vor der ersten Aufgabe der Runde `await vorzeigen(aufgabe)`
-//              (L5, Timo legt vor; Annahme, Kandidat für die Vorlage), damit die Zeit der Aufgabe erst danach läuft.
+//              (L5, Timo legt vor; Annahme, Kandidat für die Vorlage), vor jeder weiteren `await wechsleKette(aufgabe)`
+//              (Wechselsatz, wenn n wechselt), damit die Zeit der Aufgabe erst danach läuft. Jede Lieferung der
+//              Lernsteuerung bekommt das Kind (keine wird verworfen).
 //
 // Vorschau-Parameter wie in der Vorlage (?pause, ?hinweis, ?eltern, ?einfuehrung, ?thema=, ?pruefen, ?stufe=).
 
@@ -24,7 +26,6 @@ import "../../rahmen/perlenkette.js";
 import "../../objekte/objekt.js";
 import "../../objekte/einkaufskorb.js";
 import { wirf } from "../../objekte/objekt.js";
-import { fuellstand } from "../../objekte/einkaufskorb.js";
 import { malAus } from "../../aufgabenarten.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
@@ -32,7 +33,7 @@ import { sprich } from "../../kern/stimme.js";
 import { runde, einmal } from "../../lernsteuerung.js";
 import { spieleEinfuehrung } from "../../einfuehrung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
-import { PACKUNG, vergleiche, hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend } from "./logik.js";
+import { AUFGABEN_JE_RUNDE, PACKUNG, vergleiche, hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend, vorzeigeAufgabe } from "./logik.js";
 
 sperreTouch();
 
@@ -49,6 +50,7 @@ const liste = $("liste");
 const tastatur = $("tastatur");
 const fertigKnopf = $("fertig");
 const korb = $("korb");
+const korbInhalt = $("korb-inhalt");
 const flug = $("flug");
 const timoPlatz = $("timo");
 const ding = $("ding");
@@ -77,11 +79,15 @@ const ARTEN = [{ art: "mal", reihen: [2, 10], stufen: ["material"] }];
 /** Eigene Einführung in der Welt: kommt mit dem Ausbau (die Einmaleins-Themen haben noch keine Einführung). */
 const EINFUEHRUNG = /** @type {{ vorlage: string, hintergrund?: string } | null} */ (null);
 
-/** So lange steht die Folge einer Lösung (Pfeilchen hüpft, Packungen fliegen, Zeile kommt); Tippen überspringt. */
-const FOLGE_MS = 1800;
+/** So lange steht die Folge einer Lösung (Pfeilchen hüpft, Packungen fliegen, die Packung kommt in den Korb, Zeile
+ * kommt); Tippen überspringt. Bis etwa 3 s (B6), damit auch bei zehn Stäbchen die Packung im Korb ankommt. */
+const FOLGE_MS = 2800;
 
-/** Aufgaben je Runde: die Vorratsliste hat Platz für Timos Zeile und acht weitere. */
-const AUFGABEN_JE_RUNDE = 8;
+/** So lange steht der Wechselsatz mindestens, bevor die Aufgabe der neuen Kette erscheint (auch ohne Ton). */
+const WECHSEL_MS = 2400;
+
+/** Breite der Kurzkette auf der Vorratsliste (rem, wie die Spalte in index.html): fünf Stäbe je Reihe. */
+const KURZ_BREITE = 16;
 
 /** Nur Vorschau: Aufgaben, falls die Lernsteuerung nichts liefert. */
 const VORSCHAU = { thema: "Zweierreihe", aufgaben: ["mal:3*2", "mal:7*2", "mal:5*2", "mal:9*2"] };
@@ -176,10 +182,6 @@ let passtSatz = 0;
 let laufend = [];
 /** Während ueberspringeAlles läuft, startet kein neuer Flug (sonst flöge eine Packung in die Denkzeit, B3). */
 let springt = false;
-/** Gelöste Aufgaben der Runde (Timos mitgezählt): so viele Packungen liegen im Korb. */
-let imKorb = 0;
-/** Die Aufgabe, die Timo in dieser Runde vorgezeigt hat; die Runde stellt sie dem Kind nicht (Entwurf §5). @type {string | null} */
-let vorgezeigt = null;
 /** Abbruch eines laufenden Fehler-Bilds (Ring, hohles Pfeilchen) beim nächsten Tippen. @type {(() => void) | null} */
 let fehlerBild = null;
 
@@ -196,17 +198,70 @@ function ueberspringeAlles() {
   }
 }
 
-/** Eine Packung mehr im Korb: der neue Füllstand bleibt stehen (auch bei wenig Bewegung, W-Freude). */
-function packungInDenKorb() {
-  imKorb++;
-  korb.setAttribute("zustand", fuellstand(imKorb));
+/**
+ * Plätze im Korb, in der Reihenfolge, in der sie sich füllen (Timos Packung und acht weitere): Mitte x in % der
+ * Korbbreite, Höhe y in rem über dem Rand; hinten höher und zuerst (die vorderen liegen davor).
+ */
+const KORB_PLATZ = [
+  { x: 50, y: 1.8 }, { x: 27, y: 1.4 }, { x: 73, y: 1.4 }, { x: 10, y: 0.8 }, { x: 90, y: 0.8 },
+  { x: 38, y: 0 }, { x: 62, y: 0 }, { x: 20, y: -0.6 }, { x: 80, y: -0.6 },
+];
+
+/**
+ * So kommt die Packung in den Korb (W-Freude: wechselnde Varianten, kleine Zufallsauswahl, jede gleich ruhig): sie
+ * plumpst hinein, rutscht von der Seite hinein oder hüpft noch einmal auf. Kein Jackpot, keine Belohnung (B4).
+ */
+const EINRAEUMEN = [
+  { name: "plumpst", dauer: 420, keyframes: [{ transform: "translateY(-7rem)" }, { transform: "translateY(0.5rem)", offset: 0.7 }, { transform: "translateY(0)" }] },
+  { name: "rutscht", dauer: 460, keyframes: [{ transform: "translate(-4rem, -6rem) rotate(-24deg)" }, { transform: "translate(0.4rem, 0.3rem) rotate(4deg)", offset: 0.75 }, { transform: "translate(0, 0) rotate(0)" }] },
+  { name: "huepft", dauer: 560, keyframes: [{ transform: "translateY(-7rem)" }, { transform: "translateY(0)", offset: 0.5 }, { transform: "translateY(-1.8rem)", offset: 0.75 }, { transform: "translateY(0)" }] },
+];
+
+/** Die Packung der Reihe b liegt jetzt im Korb (bleibt stehen bis Rundenende). @param {number} b @param {boolean} still ohne Bewegung */
+function legeInDenKorb(b, still) {
+  const i = korbInhalt.children.length;
+  if (i >= KORB_PLATZ.length) return; // der Korb ist voll: das Bild bleibt
+  const art = PACKUNG[/** @type {keyof typeof PACKUNG} */ (b)];
+  const teil = document.createElement(art ? "ls-objekt" : "div");
+  if (art) teil.setAttribute("art", art);
+  else teil.className = "paeckchen"; // Platzhalter, bis das Objekt der Reihe gezeichnet ist (Entwurf §11)
+  teil.style.left = `${KORB_PLATZ[i].x}%`;
+  teil.style.bottom = `${KORB_PLATZ[i].y - 2.4}rem`;
+  korbInhalt.append(teil);
+  if (still || springt || wenigBewegung() || typeof teil.animate !== "function") return;
+  const v = EINRAEUMEN[Math.floor(Math.random() * EINRAEUMEN.length)];
+  teil.dataset.einraeumen = v.name;
+  const anim = teil.animate(v.keyframes, { duration: v.dauer, easing: "ease-out" });
+  laufend.push(() => anim.finish());
 }
 
-/** Packung des Stäbchens k fliegt in den Korb (Wirkung, B1). @param {number} k */
+/**
+ * Folge einer gelösten Aufgabe a · b für den Korb: bei jedem Stäbchen fliegt eine Packung hinein (schritt), und wenn
+ * die letzte gelandet ist, liegt die Packung der Reihe im Korb. Vorher springt nichts (Prüfstand B, Runde 2); bei
+ * wenig Bewegung oder beim Überspringen liegt sie sofort drin, ohne Bewegung.
+ * @param {number} a @param {number} b @returns {(k: number) => void} schritt für huepfe()
+ */
+function folgeInDenKorb(a, b) {
+  let gelandet = false;
+  const landen = (/** @type {boolean} */ still) => {
+    if (gelandet) return;
+    gelandet = true;
+    legeInDenKorb(b, still);
+  };
+  laufend.push(() => landen(true));
+  return (k) => {
+    const flug = packungFliegt(k);
+    if (k !== a) return;
+    if (flug) flug.then(() => landen(false));
+    else landen(true);
+  };
+}
+
+/** Packung des Stäbchens k fliegt in den Korb (Wirkung, B1). @param {number} k @returns {Promise<any> | null} gelandet */
 function packungFliegt(k) {
-  if (n === null || springt || wenigBewegung()) return;
+  if (n === null || springt || wenigBewegung()) return null;
   const p = kette.stabPunkt(k);
-  if (!p) return;
+  if (!p) return null;
   const art = PACKUNG[/** @type {keyof typeof PACKUNG} */ (n)];
   /** @type {HTMLElement} */
   let teil;
@@ -221,9 +276,9 @@ function packungFliegt(k) {
   const r = teil.getBoundingClientRect();
   teil.style.left = `${p.x - r.width / 2}px`;
   teil.style.top = `${p.y - r.height / 2}px`;
-  const w = wirf(teil, korb, { dauer: 600 });
+  const w = wirf(teil, korb, { dauer: 550 });
   laufend.push(() => { w.ueberspringe(); teil.remove(); });
-  w.fertig.then(() => teil.remove());
+  return w.fertig.then(() => teil.remove());
 }
 
 /** Zeile „a · n = c“ mit Kurzkette auf der Vorratsliste; eine vorhandene Zeile derselben Aufgabe zeigt wieder ihr Ergebnis. */
@@ -234,7 +289,7 @@ function zeileDazu(/** @type {number} */ a, /** @type {number} */ b) {
     z = document.createElement("div");
     z.className = "zeile";
     z.dataset.aufgabe = key;
-    z.innerHTML = `<span class="text"></span><ls-perlenkette reihe="${b}" kurz="${a}" breite="12" perle="1.6"></ls-perlenkette>`;
+    z.innerHTML = `<span class="text"></span><ls-perlenkette reihe="${b}" kurz="${a}" breite="${KURZ_BREITE}" perle="1.3"></ls-perlenkette>`;
     liste.append(z);
   }
   /** @type {HTMLElement} */ (z.querySelector(".text")).textContent = `${a} · ${b} = ${a * b}`;
@@ -289,13 +344,15 @@ function eigeneReihe(/** @type {string | undefined} */ themaId, /** @type {numbe
 }
 
 /**
- * Rundenanfang und Vorzeigen (L5): Der Erzähler nennt die Packung der Reihe, Timo legt die Aufgabe 1 · n vor (prüft,
- * zögert, tippt n), das Pfeilchen hüpft auf das erste Stäbchen. Zählt nicht für die Lernsteuerung. Tippen überspringt.
+ * Rundenanfang und Vorzeigen (L5): Der Erzähler nennt die Packung der Reihe, Timo legt eine Aufgabe auf der Kette der
+ * ersten Aufgabe vor (meist 1 · n, logik.js vorzeigeAufgabe; prüft, zögert, tippt), das Pfeilchen hüpft hin. Zählt
+ * nicht für die Lernsteuerung; die erste Aufgabe des Kindes ist nie dieselbe. Tippen überspringt.
  * @param {any} aufgabe die erste Aufgabe der Runde @param {string | undefined} rundenThema Id des Themas der Runde
  */
 async function vorzeigen(aufgabe, rundenThema) {
-  const ziel = malAus(aufgabe?.ziel?.key);
-  if (!ziel) return;
+  const timosAufgabe = vorzeigeAufgabe(aufgabe);
+  if (!timosAufgabe) return;
+  const { a: ta, b: tb } = timosAufgabe;
   stand.phase = "folge";
   const feld = /** @type {HTMLElement} */ (document.querySelector(".spielflaeche"));
   let kurz = false;
@@ -318,37 +375,34 @@ async function vorzeigen(aufgabe, rundenThema) {
   try {
     // Neue Runde: leerer Korb, leere Liste, frische Kette.
     liste.replaceChildren();
-    imKorb = 0;
-    korb.setAttribute("zustand", "leer");
+    korbInhalt.replaceChildren();
     n = null;
-    kettenWechsel(ziel.b);
-    const b = /** @type {number} */ (n);
-    vorgezeigt = `mal:1*${b}`;
-    const t = await zeigeTimo();
+    kettenWechsel(tb);
+    const b = tb;
+    await zeigeTimo();
     const anfang = TEXTE?.anfang?.[b];
     // Der Fakt („In echt …“) nur in einer Runde der eigenen Reihe (K6); in Kern-Runden und bei einer Aufgabe aus einer
     // anderen Reihe die Setzung.
     if (anfang) blase.sage(eigeneReihe(rundenThema, b) ? anfang.reihe : anfang.setzung);
-    gleichung.innerHTML = `<span>1 · ${b} =</span><span class="feld"></span>`;
+    gleichung.innerHTML = `<span>${ta} · ${b} =</span><span class="feld"></span>`;
     const box = /** @type {HTMLElement} */ (gleichung.querySelector(".feld"));
     await ruhe(2600);
     haltung("nachdenken");
     await ruhe(900);
     haltung("zeigen");
-    for (const ziffer of String(b)) {
+    for (const ziffer of String(ta * b)) {
       await ruhe(350);
       box.textContent += ziffer;
     }
-    box.textContent = String(b);
+    box.textContent = String(ta * b);
     if (TEXTE?.timo?.[b]) blase.sage(TEXTE.timo[b], { sprechen: !kurz });
-    const h = kette.huepfe(1, { wert: b, schritt: packungFliegt, ms: 300 });
+    zeileDazu(ta, b);
+    const h = kette.huepfe(ta, { wert: ta * b, schritt: folgeInDenKorb(ta, b), ms: ta === 1 ? 300 : 130 });
     laufend.push(h.ueberspringe);
     await h.fertig;
-    geloest.add(1);
+    geloest.add(ta);
     kette.zeigerWeg();
-    kette.setAttribute("pfeile", "1");
-    packungInDenKorb();
-    zeileDazu(1, b);
+    kette.setAttribute("pfeile", String(ta));
     await ruhe(1200);
     // Timo dreht sich zurück, bevor die Aufgabe des Kindes kommt: Sie erscheint erst auf ein stilles Bild (B3).
     await haltung("stehen");
@@ -370,7 +424,7 @@ function stelleAufgabe(aufgabe, melde) {
   ueberspringeAlles();
   const { a, b, c } = ziel;
   const stufe = aufgabe.stufe ?? "material";
-  const gewechselt = kettenWechsel(b);
+  kettenWechsel(b); // gewechselt hat schon wechsleKette (RAHMEN), samt Wechselsatz; hier nur zur Sicherheit
 
   // Kette: die gelösten Pfeilchen mit Zahl, das eigene ohne (falls die Aufgabe noch einmal dran ist).
   const zeigePfeile = (/** @type {number[]} */ dazu = []) => {
@@ -387,10 +441,9 @@ function stelleAufgabe(aufgabe, melde) {
   const box = /** @type {HTMLElement} */ (gleichung.querySelector(".feld"));
   rechnung.replaceChildren();
 
+  // Der Auftrag steht in der Blase, sobald die Aufgabe dasteht, und bleibt, bis das Kind etwas tut (B3).
   const satz = TEXTE?.auftrag?.[b]?.[a];
-  const wechsel = gewechselt ? TEXTE?.wechsel?.[b] : null;
-  if (wechsel) blase.sage(wechsel).then(() => { if (!fertig && satz) blase.sage(satz, { sprechen: false }); });
-  else if (satz) blase.sage(satz, { sprechen: auftragLaut });
+  if (satz) blase.sage(satz, { sprechen: auftragLaut });
 
   let eingabe = "";
   let fertig = false;
@@ -444,8 +497,7 @@ function stelleAufgabe(aufgabe, melde) {
       const meine = geloest;
       meine.add(a);
       zeileDazu(a, b);
-      packungInDenKorb();
-      const h = kette.huepfe(a, { wert: c, schritt: packungFliegt, ms: Math.min(240, 1300 / a) });
+      const h = kette.huepfe(a, { wert: c, schritt: folgeInDenKorb(a, b), ms: Math.min(240, 1300 / a) });
       let gezeigt = false;
       const endbild = () => {
         if (gezeigt) return;
@@ -740,14 +792,32 @@ function vorschauRunde() {
 }
 
 /**
- * Kettenhüpfer: Die Aufgabe, die Timo eben vorgezeigt hat (1 · n), stellt die Runde dem Kind nicht; sonst tippte es
- * nach, was Timo getippt hat, und die Lernsteuerung buchte es als gekonnt (L1). Sie wird übersprungen, ohne Meldung
- * (zählt also weder als gekonnt noch als falsch). Liefert die Lernsteuerung sie sofort noch einmal (Probe: dieselbe
- * Aufgabe, bis sie gemeldet ist), wird sie gestellt. @param {any} aufgabe @param {{ naechste: () => any }} r
+ * Kettenhüpfer: Gehört die nächste Aufgabe zu einer anderen Kette (die Lernsteuerung mischt Reihen, Kern-Runden ziehen
+ * alle n), stellt der RAHMEN die Kette vor der Aufgabe um: Matte leer, das Ding der neuen Reihe auf dem Regal, der
+ * Erzähler sagt den Wechselsatz. Erst danach erscheint die Aufgabe, und ihr Auftrag kommt auf eine fertige Blase; ab
+ * dann ändert sich dort nichts mehr von selbst (B3, Prüfstand B, Runde 2). Die Zeit der Aufgabe läuft erst danach.
+ * Tippen kürzt ab. @param {any} aufgabe @returns {Promise<boolean>} gewechselt
  */
-function ohneVorgezeigt(aufgabe, r) {
-  if (!aufgabe || aufgabe.ziel?.key !== vorgezeigt) return aufgabe;
-  return aufStufe(r.naechste());
+async function wechsleKette(aufgabe) {
+  const ziel = malAus(aufgabe?.ziel?.key);
+  if (!ziel || n === null || ziel.b === n) return false;
+  stand.phase = "folge";
+  ueberspringeAlles();
+  kettenWechsel(ziel.b);
+  gleichung.replaceChildren();
+  rechnung.replaceChildren();
+  const satz = TEXTE?.wechsel?.[ziel.b];
+  if (!satz) return true;
+  const feld = /** @type {HTMLElement} */ (document.querySelector(".spielflaeche"));
+  await new Promise((ok) => {
+    const fertig = () => {
+      feld.removeEventListener("pointerdown", fertig);
+      ok(undefined);
+    };
+    feld.addEventListener("pointerdown", fertig);
+    Promise.all([blase.sage(satz), warte(WECHSEL_MS)]).then(fertig);
+  });
+  return true;
 }
 
 /** @param {boolean} vorschau */
@@ -791,15 +861,12 @@ async function spieleRunde(vorschau) {
 
   let erste = true;
   let gespielt = 0;
-  vorgezeigt = null;
   while (aufgabe) {
     raeumeAuf();
-    if (erste) {
-      await vorzeigen(aufgabe, rundenThema); // Kettenhüpfer: Timo legt vor (L5), bevor die Zeit der ersten Aufgabe läuft
-      aufgabe = ohneVorgezeigt(aufgabe, r);
-      if (!aufgabe) break;
-    }
-    erzaehler.auftrag(erste);
+    // Kettenhüpfer: Timo legt vor (L5), bevor die Zeit der ersten Aufgabe läuft; wechselt später die Kette, kommt der
+    // Wechselsatz, bevor die Aufgabe erscheint. Beides vor spieleAufgabe, damit es nicht zur Zeit der Aufgabe zählt.
+    const gewechselt = erste ? (await vorzeigen(aufgabe, rundenThema), false) : await wechsleKette(aufgabe);
+    erzaehler.auftrag(erste || gewechselt); // nach einem Wechsel wird der Auftrag wieder laut gesagt
     erste = false;
     const e = await spieleAufgabe(aufgabe);
     const ergebnis = { key: e.key, ok: e.versuche === 0, hilfe: e.hilfe, ms: e.ms };
@@ -809,7 +876,7 @@ async function spieleRunde(vorschau) {
     document.dispatchEvent(new CustomEvent("ls-ergebnis", { detail: ergebnis })); // für die Browser-Prüfung
     gespielt++;
     await warteFolge();
-    aufgabe = ohneVorgezeigt(aufStufe(r.naechste()), r);
+    aufgabe = aufStufe(r.naechste());
   }
 
   ueberspringeAlles();

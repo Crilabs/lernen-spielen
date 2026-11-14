@@ -17,11 +17,15 @@
 //   hohl      eine Zahl: hohles, gestricheltes Pfeilchen an ihrem Ort auf der Kette, eine Ebene tiefer
 //             (die getippte Zahl, die nicht passt; liegt sie hinter dem Ende, steht es hinter der Kette)
 //   verdeckt  Tuch über jedem Stäbchen (Stufe Vorstellung): Grenzen und Fünfermarke bleiben, Perlen nicht zählbar
-//   kurz      Kurzkette: nur so viele Stäbchen in einer Reihe, als schmale Stäbe in der Farbe von n (Länge
-//             proportional, ohne Einzelperlen: zum Wiedererkennen, nicht zum Zählen), ohne Pfeilchen (Vorratsliste)
-//   breite    verfügbare Breite in rem (Vorgabe 96, bei `kurz` 24); die Perlengröße folgt daraus, höchstens `perle`
+//   kurz      Kurzkette (Vorratsliste): so viele Stäbchen als schlichte Stäbe in der Farbe von n, ohne Einzelperlen
+//             und Pfeilchen (wiedererkennen, nicht zählen), in zwei Reihen zu fünf wie die Kette. Gemeinsamer Maßstab:
+//             Jeder Stab ist ein Fünftel von `breite` (abzüglich der Lücken), gleich für jedes n und jede Zahl; Zeilen
+//             mit derselben `breite` sind also vergleichbar (die Länge zählt die Stäbchen, 1 · 10 ist ein Stab, 10 · 10
+//             sind zehn). Die Lücke zwischen den Stäben ist fest (KURZ.luecke, mehrere Konturen breit), die Höhe immer
+//             zwei Reihen (Zeilen bleiben gleich hoch).
+//   breite    verfügbare Breite in rem (Vorgabe 96, bei `kurz` 14 = fünf Stäbe); die Perlengröße folgt daraus, höchstens `perle`
 //   hoehe     verfügbare Höhe in rem (ohne: beliebig); die Perlen werden so klein, dass die Kette hineinpasst
-//   perle     größter Perlendurchmesser in rem (Vorgabe 4,4; bei `kurz` 1,6 = Höhe der Stäbe)
+//   perle     größter Perlendurchmesser in rem (Vorgabe 4,4; bei `kurz` 1,6 = Höhe eines Stabs)
 // Methoden: stabPunkt(k) → Mitte von Stäbchen k im Fenster (px). huepfe(bis, { wert, schritt, ms }) → { fertig, ueberspringe }: das Zählpfeilchen hüpft vom Anfang der
 //   Kette Stäbchen für Stäbchen bis zum Ende von Stäbchen `bis` und bleibt dort (mit `wert` als Zahl, sonst leer);
 //   schritt(k) nach jeder Landung (z. B. eine Packung fliegt). Bei prefers-reduced-motion sofort am Ende.
@@ -36,6 +40,8 @@ import { perlenkette, wertAus, DRAHT, GLIED } from "./perlen-geometrie.js";
 /** Pfeilchen in rem: Abstand unter den Perlen, Spitze, Kärtchen, Schrift, zweite Ebene (hohl), Abstand der Reihen. */
 const PFEIL = { abstand: 0.5, spitze: 1.1, hoehe: 4.8, schrift: 3.4, breite: 5.6, ebene: 5.4, radius: 1.2 };
 const REIHEN_ABSTAND = 1.0;
+/** Kurzkette in rem: Lücke zwischen zwei Stäben (gut drei Konturen), Abstand der beiden Reihen, Kontur. */
+const KURZ = { luecke: 0.8, reihen: 0.5, kontur: 0.25, jeReihe: 5 };
 const ZONE = PFEIL.abstand + PFEIL.spitze + PFEIL.hoehe + PFEIL.ebene;
 const RAND = 3.4;
 
@@ -97,16 +103,17 @@ export class LsPerlenkette extends HTMLElement {
   /** Geometrie und Maße für die aktuellen Attribute, oder null. */
   geometrie() {
     const kurz = this.hasAttribute("kurz") ? wertAus(this.getAttribute("kurz")) : null;
-    const k = kurz ? perlenkette(this.getAttribute("reihe"), { staebchen: kurz, jeReihe: kurz }) : perlenkette(this.getAttribute("reihe"));
+    const k = kurz ? perlenkette(this.getAttribute("reihe"), { staebchen: kurz, jeReihe: KURZ.jeReihe }) : perlenkette(this.getAttribute("reihe"));
     if (!k) return null;
     const zahl = (/** @type {string} */ name, /** @type {number} */ vorgabe) => {
       const v = Number(this.getAttribute(name));
       return Number.isFinite(v) && v > 0 ? v : vorgabe;
     };
     if (kurz) {
-      const hoch = zahl("perle", 1.6);
-      const d = Math.min(hoch, zahl("breite", 24) / k.breite);
-      return { k, kurz, d, links: 0, rechts: 0, perlenHoehe: hoch, reihenAbstand: hoch };
+      // Ein Stab ist ein Fünftel der Breite (ohne Lücken), für jedes n gleich: gemeinsamer Maßstab der Liste.
+      const breite = zahl("breite", 14);
+      const stab = Math.max(0.5, (breite - (KURZ.jeReihe - 1) * KURZ.luecke) / KURZ.jeReihe);
+      return { k, kurz, d: 1, stab, breite, links: 0, rechts: 0, perlenHoehe: zahl("perle", 1.6), reihenAbstand: zahl("perle", 1.6) + KURZ.reihen };
     }
     const breite = zahl("breite", 96);
     // Platz für das Zählpfeilchen vor der Kette und ein hohles Pfeilchen hinter dem Ende (1,5 Glieder).
@@ -149,7 +156,10 @@ export class LsPerlenkette extends HTMLElement {
       if (ring.includes(s.nr)) inhalt += `<rect class="ring" ${um(0.7)} fill="none" stroke="${FARBE.tinteWeich}" stroke-width="0.5"/>`;
       const marke = s.marke === null ? "" : `<line x1="${z(X(s.marke))}" y1="${z(Y(s.reihe, 0.06))}" x2="${z(X(s.marke))}" y2="${z(Y(s.reihe, k.hoehe - 0.06))}" stroke="${FARBE.tinte}" stroke-width="0.45" stroke-linecap="round"/>`;
       if (kurz) {
-        inhalt += `<rect x="${z(X(s.x0))}" y="0.15" width="${z((s.x1 - s.x0) * d)}" height="${z(perlenHoehe - 0.3)}" rx="${z(Math.min(0.5, (s.x1 - s.x0) * d / 2))}" fill="${farbe}" stroke="${FARBE.tinte}" stroke-width="0.25"/>`;
+        const stab = /** @type {number} */ (g.stab);
+        const x = ((s.nr - 1) % KURZ.jeReihe) * (stab + KURZ.luecke) + KURZ.kontur / 2;
+        const y = s.reihe * reihenAbstand + KURZ.kontur / 2;
+        inhalt += `<rect x="${z(x)}" y="${z(y)}" width="${z(stab - KURZ.kontur)}" height="${z(perlenHoehe - KURZ.kontur)}" rx="${z(Math.min(0.4, (perlenHoehe - KURZ.kontur) / 2))}" fill="${farbe}" stroke="${FARBE.tinte}" stroke-width="${KURZ.kontur}"/>`;
       } else if (verdeckt) {
         const dk = 1.1;
         inhalt += `<rect x="${z(X(s.x0))}" y="${z(Y(s.reihe, mitte - dk / 2))}" width="${z((s.x1 - s.x0) * d)}" height="${z(dk * d)}" rx="${z((dk * d) / 2)}" fill="${FARBE.nebel}" stroke="${FARBE.tinte}" stroke-width="0.3"/>${marke}`;
@@ -181,8 +191,8 @@ export class LsPerlenkette extends HTMLElement {
       if (zeiger) inhalt += this.pfeilAm(zeiger.bis, zeiger.wert, { markiert: markiert.includes(zeiger.bis) });
     }
 
-    const breite = links + k.breite * d + rechts;
-    const hoehe = kurz ? perlenHoehe : k.reihen * reihenAbstand - REIHEN_ABSTAND;
+    const breite = kurz ? /** @type {number} */ (g.breite) : links + k.breite * d + rechts;
+    const hoehe = kurz ? 2 * reihenAbstand - KURZ.reihen : k.reihen * reihenAbstand - REIHEN_ABSTAND;
     svg.setAttribute("viewBox", `0 0 ${z(breite)} ${z(hoehe)}`);
     svg.setAttribute("width", `${z(breite)}rem`);
     svg.setAttribute("height", `${z(hoehe)}rem`);
