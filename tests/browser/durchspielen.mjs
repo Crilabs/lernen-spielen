@@ -11,7 +11,9 @@
 // Die Kinder und was gelten muss:
 //   sicher    löst jede Aufgabe beim ersten Versuch          Runde endet in der Pause, keine Hilfe, Meldung ok
 //   ratend    probiert zufällig, bis es passt (die ersten     jede Aufgabe lösbar, nach dem 2. Versuch leuchtet
-//             zwei Versuche je Aufgabe absichtlich daneben)    Hilfe (nach dem 1. nicht), nichts hängt
+//             zwei Versuche je Aufgabe absichtlich daneben)    Hilfe (nach dem 1. nicht), nichts hängt; erklärt das
+//                                                              Spiel fehlversuche: false, ist die Hilfe-Prüfung n/a
+//                                                              und es darf kein Fehlversuch vorkommen
 //   hilfe     tippt Hilfe zweimal, folgt der Lösung           Lösung (Sonnenring .markiert) ausführbar, Meldung hilfe 2
 //   wild      200 zufällige Tipps im sicheren Feld            keine Fehler, kein Einfrieren, danach ist die Runde
 //             (Links, die die Seite verlassen, ausgelassen;      noch zu Ende spielbar
@@ -20,7 +22,8 @@
 //   tastatur  nur Tab, Enter, Leertaste                       Runde lösbar, Weiter in der Pause erreichbar
 //   zurueck   verlässt mitten in der Runde über Haus,         Lernstand konsistent, Spiel startet sauber
 //             kommt zurück (neu geladen)
-// Für alle: keine Seiten- oder Konsolenfehler, nichts im Protokoll außer erwarteten Zeilen, Vorschau schreibt nichts,
+// Für alle: keine Seiten- oder Konsolenfehler, nichts im Protokoll außer erwarteten Zeilen, Vorschau schreibt nichts
+// (Ton-Einstellung ausgenommen),
 // jeder richtige Zug trifft unverdeckt (in seiner Mitte liegt wirklich das Teil).
 //
 // WebKit: Der Playwright-Build leitet echte Mausklicks an <html> um (tests/browser/vorlage.spec.mjs). Dort tippt der
@@ -48,12 +51,15 @@ const MAX_ZUEGE = 60;
 const MAX_WARTEN_MS = 10000;
 const MAX_EINFUEHRUNG_MS = 120000;
 const WILD_TIPPS = 200;
+/** Protokollzeilen, die keinen Fehler bedeuten: fehlende Aufnahmen (Prototyp ohne Audio) und der Vorschau-Vermerk. */
+const ERWARTET_IM_PROTOKOLL = [/Keine Audiodatei/, /nicht in spiele\.json – Vorschau, schreibt nicht/];
 /**
- * Protokollzeilen, die keinen Fehler bedeuten: fehlende Aufnahmen (Prototyp ohne Audio), der Vorschau-Vermerk, und
- * „not-allowed“ der Web-Sprache: ein Browser ohne Nutzergeste (frisch geladene Seite im Prüfstand) verweigert das
- * Vorlesen des ersten Satzes; das sagt nichts über das Spiel.
+ * „not-allowed“ der Web-Sprache: WebKit verweigert das Vorlesen ohne Nutzergeste (frisch geladene Seite, noch kein
+ * Tipp). Nur in WebKit und nur zwischen Laden und erster Eingabe geduldet, und jede geduldete Zeile steht als Hinweis
+ * im Bericht. Chromium startet mit --autoplay-policy=no-user-gesture-required: dort ist die Zeile immer rot. Danach
+ * (nach einer Eingabe) ist sie überall rot: dann bliebe ein Satz stumm.
  */
-const ERWARTET_IM_PROTOKOLL = [/Keine Audiodatei/, /nicht in spiele\.json – Vorschau, schreibt nicht/, /Vorlesen fehlgeschlagen: not-allowed/];
+const OHNE_GESTE = /Vorlesen fehlgeschlagen: not-allowed/;
 // Ein vorhandener Lernstand, der in der Vorschau unberührt bleiben muss.
 const STAND = {
   "lernstand-kind-1-lernplan": JSON.stringify({ version: 1, themen: { "zerlegen-6": { z: "kann-ich", stufe: "kopf", k: "2026-11-01" } }, aufgaben: {}, verlauf: [], migriert: 1 }),
@@ -149,6 +155,11 @@ class Lauf {
   pruefe(name, ok, grund = "") {
     this.pruefungen.push({ name, ok: !!ok, grund: ok ? "" : String(grund || "") });
   }
+  /** Prüfung, die für dieses Spiel nicht gilt: zählt nicht als rot, steht aber mit Grund im Bericht. */
+  nichtAnwendbar(name, grund) {
+    this.pruefungen.push({ name, ok: true, na: true, grund });
+    this.hinweis(`n/a: ${name} – ${grund}`);
+  }
   hinweis(text) {
     if (!this.hinweise.includes(text)) this.hinweise.push(text);
   }
@@ -169,6 +180,8 @@ class Spieler {
     this.bilderOrdner = bilder;
     this.rnd = rnd;
     this.fehler = [];
+    /** Je Laden der Seite: von (Laden) bis (erste Eingabe), als ISO-Zeit wie im Protokoll. */
+    this.ohneGeste = [];
     seite.on("pageerror", (e) => this.fehler.push(`Seitenfehler (${this.ortName()}): ${e.message}`));
     seite.on("console", (m) => { if (m.type() === "error") this.fehler.push(`Konsole (${this.ortName()}): ${m.text()}`); });
   }
@@ -184,7 +197,20 @@ class Spieler {
 
   // --- Laden ----------------------------------------------------------------------------------------
 
+  /** Vor jeder Eingabe des Kindes: schließt das Fenster ohne Nutzergeste. */
+  eingabe() {
+    const f = this.ohneGeste.at(-1);
+    if (f && !f.bis) f.bis = new Date().toISOString();
+  }
+
+  /** Steht die Protokollzeile (ISO-Zeit vorn) zwischen einem Laden und der ersten Eingabe danach? */
+  vorErsterEingabe(zeile) {
+    const zeit = zeile.slice(0, 24);
+    return this.ohneGeste.some((f) => zeit >= f.von && (!f.bis || zeit <= f.bis));
+  }
+
   async lade() {
+    this.ohneGeste.push({ von: new Date().toISOString(), bis: null });
     await this.seite.goto(this.url, { waitUntil: "load" });
     const da = await this.seite.waitForFunction(() => !!window.lsPruefen, null, { timeout: 8000 }).then(() => true, () => false);
     if (!da) throw new Haenger("keine Test-Schnittstelle: window.lsPruefen fehlt im Testbetrieb (spiele/rahmen/pruefen.js)");
@@ -260,6 +286,7 @@ class Spieler {
 
   /** Tippt auf ein Element wie ein Finger. */
   async tippe(sel) {
+    this.eingabe();
     const o = await this.erreichbar(sel);
     if (this.webkit) await this.ev((s) => window.lsPruefen.fuehreAus({ art: "tippen", von: s }), sel);
     else await this.seite.mouse.click(o.x, o.y);
@@ -273,6 +300,7 @@ class Spieler {
   }
 
   async fuehreOhneFrist(zug, weise) {
+    this.eingabe();
     if (zug.art !== "tippen" && zug.art !== "ziehen") {
       await this.ev((z) => window.lsPruefen.fuehreAus(z), zug);
     } else if (weise === "tastatur") {
@@ -299,6 +327,7 @@ class Spieler {
 
   /** Mit Tab bis zum Element, dann die Taste. */
   async perTastatur(sel, taste) {
+    this.eingabe();
     for (let i = 0; i < 80; i++) {
       if (await this.ev((s) => window.lsPruefen.fokussiert(s), sel)) {
         await this.seite.keyboard.press(taste === " " ? "Space" : taste);
@@ -345,11 +374,20 @@ class Spieler {
   // --- Ablage und Bilder ----------------------------------------------------------------------------
 
   /**
-   * Der Speicher ohne Protokoll und ohne Einstellungen: die Einstellungen (Ton) ändert das Kind selbst mit dem
-   * Ton-Knopf, das darf auch in der Vorschau bleiben; der Lernstand nicht.
+   * Der Speicher ohne Protokoll; in den Einstellungen ohne die Schlüssel ton.*: den Ton schaltet das Kind selbst mit
+   * dem Ton-Knopf, das darf auch in der Vorschau bleiben. Alles andere (Lernstand, übrige Einstellungen) nicht.
    */
   speicher() {
-    return this.ev(() => Object.fromEntries(Object.keys(localStorage).filter((k) => k !== "protokoll" && !k.endsWith("-einstellungen")).sort().map((k) => [k, localStorage.getItem(k)])));
+    return this.ev(() => Object.fromEntries(Object.keys(localStorage).filter((k) => k !== "protokoll").sort().map((k) => {
+      const v = localStorage.getItem(k);
+      if (!k.endsWith("-einstellungen")) return [k, v];
+      try {
+        const e = JSON.parse(v);
+        return [k, JSON.stringify(Object.fromEntries(Object.entries(e).filter(([n]) => !n.startsWith("ton."))))];
+      } catch {
+        return [k, v];
+      }
+    })));
   }
 
   protokoll() {
@@ -403,6 +441,7 @@ async function kindSicher(sp, lauf) {
 }
 
 async function kindRatend(sp, lauf) {
+  const fehlversucheMoeglich = await sp.ev(() => window.lsPruefen.fehlversuche !== false);
   const verlauf = [];
   let leuchtFehler = null;
   const runde = await sp.spieleBisPause({
@@ -446,7 +485,12 @@ async function kindRatend(sp, lauf) {
   const e = await sp.ergebnisse();
   const zweite = verlauf.filter((v) => v.versuch === 2).length;
   lauf.pruefe("jede Aufgabe ist lösbar (Runde endet in der Pause)", (await sp.zustand()).phase === "pause");
-  lauf.pruefe("nach dem 2. Versuch leuchtet die Hilfe einmal, nach dem 1. nicht", !leuchtFehler && zweite > 0, leuchtFehler ?? "kein zweiter Fehlversuch vorgekommen");
+  const name = "nach dem 2. Versuch leuchtet die Hilfe einmal, nach dem 1. nicht";
+  if (fehlversucheMoeglich) lauf.pruefe(name, !leuchtFehler && zweite > 0, leuchtFehler ?? "kein zweiter Fehlversuch vorgekommen");
+  else {
+    lauf.nichtAnwendbar(name, "das Spiel erklärt fehlversuche: false (B-Didaktik prüft die Angabe)");
+    lauf.pruefe("keine Fehlversuche, wie erklärt (fehlversuche: false)", verlauf.length === 0, `${verlauf.length} Fehlversuche gezählt: ${JSON.stringify(verlauf)}`);
+  }
   lauf.pruefe("Meldung: ok nur ohne Fehlversuch", e.length === runde.aufgaben.length && e.every((x, i) => x.ok === (runde.aufgaben[i].fehl === 0)),
     `${JSON.stringify(e)} bei Fehlversuchen ${runde.aufgaben.map((a) => a.fehl)}`);
 }
@@ -507,6 +551,7 @@ async function kindWild(sp, lauf) {
       return false;
     }, [x, y]);
     if (verlaesst) { ausgelassen++; continue; }
+    sp.eingabe();
     try {
       if (sp.webkit) await sp.ev(([px, py]) => window.lsPruefen.tippeBei(px, py), [x, y]);
       else await mitFrist(sp.seite.mouse.click(x, y), 5000, "eingefroren");
@@ -524,7 +569,7 @@ async function kindWild(sp, lauf) {
     }
     if (getippt % 50 === 0) {
       const lebt = await sp.ev(() => true).catch(() => false);
-      if (!lebt) { eingefroren = `nach ${getippt} Tipps antwortet die Seite 3 s nicht`; break; }
+      if (!lebt) { eingefroren = `nach ${getippt} Tipps antwortet die Seite 5 s nicht`; break; }
     }
   }
   if (sp.webkit) lauf.hinweis("WebKit: Tipps als ausgelöste Ereignisse am Punkt");
@@ -613,10 +658,12 @@ async function spieleLauf(browser, name, groesse, kind, aufruf, basis, rnd) {
     }
     if (vorher && vorschau) {
       const nachher = await sp.speicher().catch(() => null);
-      lauf.pruefe("Vorschau schreibt nichts (Speicher bis auf das Protokoll unverändert)", JSON.stringify(nachher) === JSON.stringify(vorher), `${JSON.stringify(vorher)} → ${JSON.stringify(nachher)}`);
+      lauf.pruefe("Vorschau schreibt nichts (Speicher außer Protokoll und ton.* unverändert)", JSON.stringify(nachher) === JSON.stringify(vorher), `${JSON.stringify(vorher)} → ${JSON.stringify(nachher)}`);
     }
     const protokoll = await sp.protokoll().catch(() => []);
-    const fremd = protokoll.filter((z) => !ERWARTET_IM_PROTOKOLL.some((m) => m.test(z)));
+    const geduldet = (z) => OHNE_GESTE.test(z) && sp.webkit && sp.vorErsterEingabe(z);
+    for (const z of protokoll.filter(geduldet)) lauf.hinweis(`geduldet (WebKit, vor der ersten Eingabe): ${z}`);
+    const fremd = protokoll.filter((z) => !ERWARTET_IM_PROTOKOLL.some((m) => m.test(z)) && !geduldet(z));
     lauf.pruefe("Protokoll ohne Fehler", fremd.length === 0, fremd.join(" | "));
     lauf.pruefe("keine Seiten- oder Konsolenfehler", sp.fehler.length === 0, sp.fehler.join(" | "));
   } catch (e) {
@@ -630,7 +677,8 @@ async function spieleLauf(browser, name, groesse, kind, aufruf, basis, rnd) {
 async function laufeBrowser(name, aufruf, basis, rnd) {
   const typ = { chromium, webkit }[name];
   if (!typ) throw new Error(`unbekannter Browser ${name}`);
-  const browser = await typ.launch();
+  // Chromium darf ohne Nutzergeste vorlesen (wie die App); so bleibt ein stummer erster Satz dort rot.
+  const browser = await typ.launch(name === "chromium" ? { args: ["--autoplay-policy=no-user-gesture-required"] } : {});
   const laeufe = [];
   try {
     for (const groesse of aufruf.groessen) {

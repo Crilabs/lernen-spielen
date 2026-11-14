@@ -1,6 +1,6 @@
 // Test-Schnittstelle für den Prüfstand (docs/spielentwicklung.md §4, tests/browser/durchspielen.mjs).
 //
-//   meldePruefSchnittstelle({ zuege, richtigerZug, zustand, orte, fuehreAus? })
+//   meldePruefSchnittstelle({ zuege, richtigerZug, zustand, orte, fuehreAus?, fehlversuche? })
 //
 // Nur im Testbetrieb (URL-Parameter `?pruefen` oder `window.__LS_PRUEFEN__ = true` vor dem Laden) steht danach
 // `window.lsPruefen` bereit; sonst passiert nichts, das Kind merkt nie etwas davon. Das Spiel liefert:
@@ -11,6 +11,8 @@
 //   richtigerZug() ein Zug, der die Aufgabe voranbringt (in der Pause: Weiter), oder null (Folge, Laden).
 //   zustand()      { phase, aufgabe, nr, versuche, hilfeStufe, vorschau }; phase ∈ PHASEN.
 //   orte           feste Bedienorte als Selektoren: { hilfe, haus, weiter }.
+//   fehlversuche   optional, Vorgabe true. false nur, wenn in diesem Spiel kein Zug danebengehen kann (jeder Zug
+//                  passt); dann prüft das ratende Kind die Hilfe-Leiter nicht (n/a) und B-Didaktik prüft die Angabe.
 //   fuehreAus(zug) optional: führt einen Zug im Browser aus (Vorgabe: ausgelöste Zeiger- und Klickereignisse am
 //                  Punkt, wie ein Finger; nötig in WebKit, siehe tests/browser/vorlage.spec.mjs). Ein Spiel mit
 //                  eigener Mechanik (andere `art`) bringt sein eigenes mit.
@@ -26,7 +28,7 @@ export const PHASEN = Object.freeze(["laden", "einfuehrung", "aufgabe", "folge",
  * @typedef {{ phase: string, aufgabe: string | null, nr: number, versuche: number, hilfeStufe: number, vorschau: boolean }} Zustand
  * @typedef {{ hilfe: string, haus: string, weiter: string }} Orte
  * @typedef {{ zuege: () => Zug[], richtigerZug: () => Zug | null, zustand: () => Zustand, orte?: Orte,
- *   fuehreAus?: (zug: Zug) => Promise<void> }} Spielseite
+ *   fuehreAus?: (zug: Zug) => Promise<void>, fehlversuche?: boolean }} Spielseite
  */
 
 /**
@@ -54,6 +56,7 @@ export function meldePruefSchnittstelle(spiel, umgebung = globalThis) {
     richtigerZug: spiel.richtigerZug,
     zustand: spiel.zustand,
     orte: spiel.orte ?? null,
+    fehlversuche: spiel.fehlversuche !== false,
     fuehreAus: spiel.fuehreAus ?? fuehreAus,
     ergebnisse,
     finde,

@@ -71,3 +71,10 @@ test("finde geht mit >>> in den Shadow-Baum", () => {
   assert.equal(finde("ls-pause >>> button", /** @type {any} */ (wurzel)), null);
   assert.equal(finde("ls-hilfe >>> a", /** @type {any} */ (wurzel)), null);
 });
+
+test("fehlversuche: Vorgabe true, false nur ausdrücklich", () => {
+  const a = meldePruefSchnittstelle(schnittstelle(), { __LS_PRUEFEN__: true });
+  assert.equal(a?.fehlversuche, true);
+  const b = meldePruefSchnittstelle({ ...schnittstelle(), fehlversuche: false }, { __LS_PRUEFEN__: true });
+  assert.equal(b?.fehlversuche, false);
+});

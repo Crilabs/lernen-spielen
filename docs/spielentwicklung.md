@@ -82,7 +82,9 @@ aus der Runde (`docs/figuren.md`, gezeichnete Runde, sobald verfügbar) und eine
 Vier unabhängige Prüfer (frische Agenten, die nicht gebaut haben). Jeder liefert grün/rot je Kriterium mit Beleg.
 
 **B-Didaktik** (Code + Entwurf): A1–A8 am gebauten Prototyp nachgeprüft; dazu: die Lernsteuerung bekommt jede
-Aufgabe mit `ok`, `hilfe`, `ms` gemeldet; mit Hilfe Gelöstes zählt nicht als gekonnt.
+Aufgabe mit `ok`, `hilfe`, `ms` gemeldet; mit Hilfe Gelöstes zählt nicht als gekonnt. Erklärt das Spiel in der
+Test-Schnittstelle `fehlversuche: false` (kein Zug kann danebengehen), prüft B-Didaktik, dass das stimmt; der Prüfstand
+überspringt dann die Hilfe-Leiter des ratenden Kindes (n/a im Bericht).
 
 **B-Welt** (Screenshots + Entwurf): Figur sichtbar und tätig; Sachwelt im Bild erkennbar und passend zur Aufgabe;
 nichts Bedrohliches; Fantasie nur im Rahmen (`figuren.md` §5).

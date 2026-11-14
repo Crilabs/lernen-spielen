@@ -29,6 +29,10 @@
 //     richtigerZug() zurück (Form in rahmen/pruefen.js); der RAHMEN meldet sie an. Dann muss das Durchspielen
 //     grün sein: node tests/browser/durchspielen.mjs spiele/<id>.html (docs/spielentwicklung.md 4).
 //     Die Schnittstelle gibt es nur im Testbetrieb (?pruefen); für das Kind ändert sie nichts.
+//     Hilfe Stufe 2 zeigt die Lösung mit dem Sonnenring: Klasse `markiert` an dem Teil, das das Kind als Nächstes
+//     legt (seite.css). Daran erkennt der Prüfstand die gezeigte Lösung; ohne sie ist das Kind „hilfe“ rot.
+//     Kann in einem Spiel kein Zug danebengehen (jeder Zug passt), beim Anmelden `fehlversuche: false` angeben;
+//     dann prüft der Prüfstand die Hilfe-Leiter nach Fehlversuchen nicht, und B-Didaktik prüft die Angabe.
 //
 // Vorschau-Parameter (schreiben nie in den Lernstand, runde(…, { nurAnsehen })):
 //   ?pause            Pause sofort zeigen (Sichtprüfung), Weiter startet die Runde
