@@ -128,5 +128,18 @@
   "notiz": "Bau-Agent Entwurf neu, Befunde A1",
   "cache_lesen": 852354,
   "cache_schreiben": 71206
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-a",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 27556,
+  "einheit": "tokens",
+  "menge": 1426189,
+  "notiz": "Prüfer A neu, Runde 2",
+  "cache_lesen": 1247676,
+  "cache_schreiben": 150933
  }
 ]
