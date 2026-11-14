@@ -124,7 +124,9 @@ function baueBild(buehne, bild, reduziert) {
   }
 }
 
-// hintergrund: CSS-Bild der Spielwelt, z. B. 'url("bilder/zerlegungshaus/wiese.jpg")' (sonst Nebel).
+// hintergrund: CSS-Bild der Spielwelt (sonst Nebel). Eine relative Adresse in url() gilt relativ zur Seite des Spiels,
+// nicht zu dieser Datei; darum aus dem Spiel heraus absolut bauen, z. B. in spiele/<fach>/<spiel>/spiel.js:
+// `url("${new URL("bilder/wiese.jpg", import.meta.url).href}")` oder bild(…) aus rahmen/stil.js.
 export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund = "" } = {}) {
   let szenen = [];
   try {
