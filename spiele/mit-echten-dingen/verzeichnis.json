@@ -13,6 +13,19 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "geteilt-durch-2-5-10": {
+   "fach": "mathe",
+   "name": "Geteilt durch 2, 5 und 10",
+   "titel": "Vom Ersparten einkaufen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Das Geld abzählen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/geteilt-durch-2-5-10.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",

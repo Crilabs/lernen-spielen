@@ -1,7 +1,6 @@
 ---
 thema: geteilt-durch-2-5-10
 fach: mathe
-entwurf: true
 bild: { figur: muenzglas, zustand: voll }
 quellen:
   - Operationsverständnis Division, Lernen auf Distanz Klasse 2 (Verteil- und Aufteilsituationen; Divisionsaufgaben als Umkehraufgaben der Multiplikation; Kernaufgaben automatisieren), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-division.pdf, abgerufen 2026-11-14
