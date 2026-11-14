@@ -3,7 +3,7 @@
 // wie der lange Stab auf der Matte (Ziehen oder Tippen, dann Ziel tippen). Was nicht passt, gleitet zurück.
 //
 // Aufbau dieser Datei:
-//   SPIELWELT (ersetzen)  Kennung, Aufgabenarten, Rundenlänge, Vorschau-Aufgaben, alle gesprochenen Sätze
+//   SPIELWELT (ersetzen)  Kennung, Aufgabenarten, Einführung, Rundenlänge, Vorschau-Aufgaben, alle gesprochenen Sätze
 //   AUFGABE   (ersetzen)  eine Aufgabe darstellen, prüfen (die Mechanik urteilt), Hilfe-Stufen zeigen
 //   RAHMEN    (behalten)  Hilfe-Leiter, Lernsteuerung, Einführung, Folge, Pause, Vorschau-Parameter
 //
@@ -23,11 +23,16 @@
 //     blase.sage oder sprich (wie im `erzaehler` unten) oder als Daten (lernplan.json, einfuehrungen/*.json),
 //     nie in einer Variablen. Keine zur Laufzeit zusammengesetzten Sätze mit Zahlen: die findet
 //     `npm run audio` nicht, und die Systemstimme spricht keine Zahlen. Zahlen zeigt das Spiel als Ziffer (Matte, Gleichung, Kopfleiste).
-//  4. `npm run audio`, dann `npm run audio:anhoeren` (docs/stimme.md 4).
+//  4. Aufnahmen: die Steuerung erzeugt die Aufnahmen (`npm run audio`, `npm run audio:anhoeren`, docs/stimme.md 4),
+//     nicht der Bau-Agent.
 //  5. Checklisten durchgehen: docs/bedienung.md 10 und docs/grundsaetze.md 12; im Browser in Chromium und
 //     WebKit bei 1920 × 1080 und 1280 × 800 ansehen (Muster: tests/browser/vorlage.spec.mjs).
 //  6. Lernplan: Das Spiel bekommt Themen über `arten`. Hat ein Thema eine Einführung (`einfuehrung` in
-//     lernplan.json), spielt der RAHMEN sie beim ersten Mal ab. Neue Aufgabenart: aufgabenarten.js erweitern.
+//     lernplan.json), spielt der RAHMEN sie beim ersten Mal ab. Erzählt sie eine andere Welt als das Spiel, legt das
+//     Spiel eine eigene Einführung (gleiches Format wie spiele/einfuehrungen/*.json) in seinen Ordner und nennt sie
+//     in EINFUEHRUNG (SPIELWELT); Pfade dort sind relativ zu spiele/, z. B. "mathe/m14-zwei-tonnen/einfuehrung.json".
+//     Eine neue Aufgabenart (spiele/aufgabenarten.js, `aufgaben` in lernplan.json, ZIEL_MS) ändert die Schlüssel des
+//     Lernstands und ist deshalb voller Weg (docs/spielentwicklung.md „Zwei Wege“, Regel und Tabelle „Vorhanden“).
 //  7. Pflicht: Test-Schnittstelle für den Prüfstand. stelleAufgabe gibt neben hilfe(stufe) auch zuege() und
 //     richtigerZug() zurück (Form in rahmen/pruefen.js); der RAHMEN meldet sie an. Dann muss das Durchspielen
 //     grün sein: node tests/browser/durchspielen.mjs spiele/<fach>/<katalog-nr>-<name>/index.html (docs/spielentwicklung.md 4).
@@ -85,6 +90,16 @@ const SPIEL_ID = leiste.getAttribute("spiel");
  * Speicher ein, als Vorschau). Mit dem Eintrag gelten die `arten` aus spiele.json; dieser Wert wird nicht mehr benutzt.
  */
 const ARTEN = [{ art: "zerlegung", zahlen: [7, 7], stufen: ["material"] }];
+
+/**
+ * Einführung beim ersten Mal (L5). null = die Einführung des Themas aus lernplan.json, wie sie ist.
+ * Sonst { vorlage: "<fach>/<spiel>/einfuehrung.json", hintergrund: "<fach>/<spiel>/szene.webp" }: eine eigene
+ * Einführung in der Sachwelt des Spiels, gleiches Format wie spiele/einfuehrungen/*.json; hintergrund darf fehlen.
+ * Beide Pfade sind relativ zu spiele/ (wie `vorlage` im Lernplan). Die Werte ({n} …) kommen weiter vom Thema, und
+ * gespielt wird sie nur, wenn das Thema eine Einführung hat und sie fällig ist.
+ * @type {{ vorlage: string, hintergrund?: string } | null}
+ */
+const EINFUEHRUNG = null;
 
 /** So lange steht die Folge einer Lösung, bevor die nächste Aufgabe kommt (B6, etwa 1–2 s; Tippen überspringt). */
 const FOLGE_MS = 1800;
@@ -509,7 +524,11 @@ async function spieleRunde(vorschau) {
   // Einführung beim ersten Mal und bei neuem Thema (L5); in der Vorschau nur mit ?einfuehrung.
   if (r.einfuehrung && (!vorschau || params.has("einfuehrung"))) {
     stand.phase = "einfuehrung";
-    const ergebnis = await spieleEinfuehrung(r.einfuehrung.vorlage, r.einfuehrung.werte, { ton: leiste.ton });
+    // Pfade der eigenen Einführung relativ zu spiele/ (dort liegt einfuehrung.js, „../“ wie die Imports oben).
+    const spiele = new URL("../einfuehrung.js", import.meta.url);
+    const vorlage = EINFUEHRUNG?.vorlage ?? r.einfuehrung.vorlage;
+    const hintergrund = EINFUEHRUNG?.hintergrund ? `url("${new URL(EINFUEHRUNG.hintergrund, spiele).href}")` : "";
+    const ergebnis = await spieleEinfuehrung(vorlage, r.einfuehrung.werte, { ton: leiste.ton, hintergrund });
     if (ergebnis !== "gesehen") {
       location.href = "../index.html";
       return;

@@ -173,7 +173,11 @@ test("sammle findet ein sprich(\"…\") in einem verschachtelten Spielordner (sp
     mkdirSync(join(spiele, "saetze"));
     writeFileSync(join(spiele, "saetze", "saetze.json"), JSON.stringify({ saetze: [] }));
     writeFileSync(join(spiel, "spiel.js"), 'import { sprich } from "../../kern/stimme.js";\nsprich("Ein Satz tief im Ordner.");\n');
+    writeFileSync(join(spiel, "einfuehrung.json"), JSON.stringify({ szenen: [{ sprich: "Am Hafen liegen Kisten.", zeig: "", bild: [] }] }));
     const { eintraege } = sammle(wurzel);
+    const einf = eintraege.find((x) => x.text === "Am Hafen liegen Kisten.");
+    assert.ok(einf, "Satz der eigenen Einführung im Spielordner gesammelt");
+    assert.deepEqual(einf.quellen, ["mathe/m99-test-spiel/einfuehrung.json"]);
     const e = eintraege.find((x) => x.text === "Ein Satz tief im Ordner.");
     assert.ok(e, "Satz aus mathe/m99-test-spiel/spiel.js gesammelt");
     assert.deepEqual(e.quellen, ["mathe/m99-test-spiel/spiel.js"]);

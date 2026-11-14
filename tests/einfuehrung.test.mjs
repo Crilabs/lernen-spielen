@@ -70,3 +70,45 @@ test("fuelleVorlage: alle Zahlwörter in sprich werden abgelehnt", () => {
   for (const w of wort) assert.throws(() => fuelleVorlage({ szenen: [{ sprich: `Da sind ${w} Perlen.`, zeig: "" }] }, {}), /sprich/, w);
   assert.doesNotThrow(() => fuelleVorlage({ szenen: [{ sprich: "Eimer, Achtung, einmal, Zehnerstab, Vierecke.", zeig: "" }] }, {}));
 });
+
+// Eigene Einführung eines Spiels (EINFUEHRUNG in der SPIELWELT von spiele/vorlage/spiel.js): Der Pfad ist relativ zu
+// spiele/, weil spieleEinfuehrung ihn an spiele/einfuehrung.js auflöst. Geprüft für die Vorlage und jedes Spiel.
+const { readFileSync, readdirSync, existsSync } = await import("node:fs");
+const { join, dirname } = await import("node:path");
+const { fileURLToPath, pathToFileURL } = await import("node:url");
+const SPIELE = join(dirname(fileURLToPath(import.meta.url)), "../spiele");
+
+function spielDateien() {
+  const dateien = [join(SPIELE, "vorlage/spiel.js")];
+  for (const fach of readdirSync(SPIELE, { withFileTypes: true }).filter((d) => d.isDirectory())) {
+    for (const spiel of readdirSync(join(SPIELE, fach.name), { withFileTypes: true }).filter((d) => d.isDirectory())) {
+      const p = join(SPIELE, fach.name, spiel.name, "spiel.js");
+      if (existsSync(p) && !dateien.includes(p)) dateien.push(p);
+    }
+  }
+  return dateien;
+}
+
+test("Einführung des Spiels: ein Pfad relativ zu spiele/ löst sich so auf wie in spieleEinfuehrung", () => {
+  const basis = pathToFileURL(join(SPIELE, "einfuehrung.js"));
+  assert.equal(fileURLToPath(new URL("mathe/m14-zwei-tonnen/einfuehrung.json", basis)), join(SPIELE, "mathe/m14-zwei-tonnen/einfuehrung.json"));
+  assert.equal(fileURLToPath(new URL("einfuehrungen/zerlegen.json", basis)), join(SPIELE, "einfuehrungen/zerlegen.json"));
+});
+
+test("Einführung des Spiels: Vorlage hat EINFUEHRUNG = null und reicht sie im RAHMEN an spieleEinfuehrung", () => {
+  const s = readFileSync(join(SPIELE, "vorlage/spiel.js"), "utf8");
+  assert.match(s, /^const EINFUEHRUNG = null;/m);
+  assert.match(s, /EINFUEHRUNG\?\.vorlage \?\? r\.einfuehrung\.vorlage/);
+});
+
+test("Einführung des Spiels: jede genannte eigene Einführung liegt unter spiele/ und hat Szenen", () => {
+  for (const datei of spielDateien()) {
+    const m = readFileSync(datei, "utf8").match(/^const EINFUEHRUNG = (\{[\s\S]*?\});/m);
+    if (!m) continue;
+    const e = Function(`return (${m[1]})`)();
+    for (const pfad of [e.vorlage, e.hintergrund].filter(Boolean))
+      assert.ok(existsSync(join(SPIELE, pfad)), `${datei}: ${pfad} fehlt (Pfad relativ zu spiele/)`);
+    const { szenen } = JSON.parse(readFileSync(join(SPIELE, e.vorlage), "utf8"));
+    assert.ok(Array.isArray(szenen) && szenen.length > 0, `${datei}: ${e.vorlage} ohne Szenen`);
+  }
+});

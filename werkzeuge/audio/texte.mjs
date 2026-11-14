@@ -3,7 +3,7 @@
 // nicht. Es zählt sie aber je Datei, damit sichtbar bleibt, was noch fehlt (siehe Spec: Vorlagen als Daten).
 
 import { readFileSync, readdirSync } from "node:fs";
-import { join, relative } from "node:path";
+import { join, relative, sep } from "node:path";
 import { audioSchluessel, normalisiere } from "../../spiele/kern/audio.js";
 
 /** @typedef {{ schluessel: string, text: string, variante: string, quellen: string[] }} Eintrag */
@@ -108,6 +108,9 @@ export function sammle(wurzel) {
   // Einführungen
   for (const p of dateien(join(spiele, "einfuehrungen"), [".json"]))
     for (const t of felder(json(p), "sprich")) neu(t, relative(spiele, p));
+  // Eigene Einführung eines Spiels im Spielordner (EINFUEHRUNG in spiele/vorlage/spiel.js)
+  for (const p of dateien(spiele, [".json"], ["einfuehrungen", "kern", "audio", "mit-echten-dingen"]))
+    if (p.endsWith(`${sep}einfuehrung.json`)) for (const t of felder(json(p), "sprich")) neu(t, relative(spiele, p));
 
   // Diktatsätze (Material für die Schreibspiele): der Satz selbst, ohne Variante, wie bisher aufgenommen.
   // Einleitungen wie „Hör noch mal hin. …“ gehören zum jeweiligen Spiel und kommen mit ihm.
