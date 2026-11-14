@@ -13,7 +13,7 @@
 
 ## 1. Zweck in der Spielwelt
 - Kofi zählt in der Hecke, wie viele Beine, Blättchen, Blütenblätter oder Punkte a Tiere bzw. Pflanzen zusammen haben, und führt Heft: Jede richtige Zahl setzt ein Pfeilchen auf die Kette und eine Zeile ins Heft.
-  Ohne das Ergebnis gibt es keine Zeile. **Für 9 und 10 trägt die Hecke noch keinen Sachgrund** (§4, „Freigabe nötig“, Frage 1).
+  Ohne das Ergebnis gibt es keine Zeile. **Für 9 und 10 trägt die Hecke noch keinen Sachgrund** (§4, „Offene Fragen“, Frage 1).
 
 ## 2. Die Runde in fünf Sätzen
 1. Auf der Matte liegt die Perlenkette von n (zehn Stäbchen zu je n Perlen), oben steht „6 · 7 = ▢“, am Zweig der Hecke ist noch nichts, rechts liegt das Heft.
@@ -136,7 +136,10 @@ Nach dem zweiten Versuch, der nicht passt, leuchtet Hilfe einmal; mit Hilfe Gel�
   Geometrie ohne DOM), Eintrag in `grundsaetze-bilder.md` §4 und `bedienung.md` §9, dazu die Regal-Regel. Heftzeile: Textzeile plus `kurz`-Kette, kein weiteres Zeichen (Annahme).
 - **Spielobjekte:** wie §11, Szene von Hand. **Rahmen:** `rahmen/` (Perlenkette, `material.js`), `aufgabenarten.js`, `lernplan.json` ändern sich; `kern/`, `lernsteuerung.js` und der RAHMEN der Vorlage bleiben, Einführung über `EINFUEHRUNG`.
 
-## Freigabe nötig
+## Offene Fragen an Christian (keine Freigabe nötig)
+
+Entscheidung der Steuerung (2026-11-14): Beide Punkte sind Abweichungen vom Katalog-Eintrag nach `bauen.md` („Der Eintrag ist ein Vorschlag … weiche ab und schreibe den Grund“), kein neues Lernzeichen oder Bedienteil (`spielkatalog.md` §8a) und keine offene Frage aus `grundsaetze-bilder.md` §15. Sie halten den Merge nicht auf; der Entwurf entscheidet sie als (Annahme).
+
 1. **Sachgrund für 9 und 10 (Neunerreihe, Zehnerreihe, also eines der zuerst gebauten Themen).** Die Hecke liefert keinen geprüften Fakt „gleich viele … je Ding“ (kein Tier mit 9 oder 10 Beinen, Blättchen, Blütenblättern; Zehnfußkrebse leben nicht in der Hecke).
    Optionen: (a) Zählbrett der Naturschützerin mit Zeilen zu n Strichen (jetzt eingebaut, Annahme; Zählweise statt Sachfakt, K2 nur schwach); (b) für 9 und 10 die Welt wechseln (Kalender: zehn Tage eines Beobachtungsheftes, Wochen zu sieben Tagen passen zur 7);
    (c) zehnerreihe und neunerreihe in einem anderen Spiel mit passender Welt üben. **Empfehlung (a) bis zur Entscheidung, danach (c) prüfen.**
