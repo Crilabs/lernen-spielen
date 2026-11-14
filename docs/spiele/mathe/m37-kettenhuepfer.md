@@ -16,6 +16,7 @@
 4. Passt sie: Das Pfeilchen hüpft Stäbchen für Stäbchen, bei jedem fliegt eine Packung in den Korb (a Packungen), es rastet am a-ten Stäbchen ein, die Zeile mit Kurzkette steht auf der Liste.
    Passt sie nicht: Das Pfeilchen hält am a-ten Stäbchen, die getippte Zahl liegt als hohles Pfeilchen an ihrem Ort, nichts fliegt, die Aufgabe bleibt.
 5. Nach etwa 8 Aufgaben ist die Liste voll, der Korb gefüllt; dann Pause.
+6. **Wiederholt sich eine Aufgabe in der Runde** (die Lernsteuerung holt sie nach einem Fehlversuch zurück; Reihen 3, 4, 6–9 haben nur sechs Aufgaben), steht nichts von ihrem Ergebnis da: Ihre alte Zeile ist **verdeckt** (nur die Kurzkette ohne Zahl), das alte Pfeilchen **leer** (kein Wert), bis das Kind getippt hat; dann erscheinen sie wieder. So gibt es nie etwas zum Ablesen (L1), und die Lernsteuerung bucht „richtig ohne Hilfe“ zu Recht. Gilt in allen Stufen, auch in `kopf` (Liste). Nach einem Fehlversuch trägt das Pfeilchen seine Zahl nicht; in `vorstellung` und `kopf` bleiben die Perlen verdeckt, nur Stäbchengrenzen und der Ring am a-ten Stäbchen sind zu sehen.
 
 ## 3. Lernhandlung = Spielhandlung
 - Ergebnis von a · n abrufen und tippen; die Kette prüft es (Wirkung erst danach). Ohne Aufgabe kein Ziel des Pfeilchens. Eine Schwierigkeit (A2): Abruf.
@@ -34,17 +35,18 @@
 | 7 | Wochenschachtel (-schachteln) | Fächer | Woche = sieben Tage: **Fakt**, de.wikipedia.org/wiki/Woche („Zeiteinheit von sieben Tagen“), 2026-11-14 | `wochenschachtel` neu |
 | 8 | Stiftebox (-boxen) | Stifte | Setzung | `stiftebox` neu |
 | 9 | Muffinkarton (-kartons) | Muffins | Setzung (drei Reihen zu drei im Bild) | `muffinkarton` neu |
-| 10 | Münze (Münzen) | Cent | Nennwert: **Fakt**, de.wikipedia.org/wiki/Euro-Münzen (Nennwerte 1, 2, 5, 10 … Cent), 2026-11-14 | `muenze` vorhanden |
+| 10 | Zehn-Cent-Münze (-Münzen) | Cent | Nennwert: **Fakt**, de.wikipedia.org/wiki/Euro-Münzen (Nennwerte 1, 2, 5, 10 … Cent; es gibt eine Zehn-Cent-Münze), 2026-11-14 | `muenze`, Variante `zehn-cent` mit Prägung „10“ (neu, wie echt) |
 
-- **K4:** Setzungen werden als das gesagt, was sie sind („In eine Ballröhre kommen drei Tennisbälle“ gilt in diesem Spiel), nie als Behauptung über Läden. Faktensatz der Welt (`fakten`) im Bau: Paar, Woche, Cent mit diesen Quellen.
-- **A4:** Jedes Beispiel nennt sein Ding: „6 · 7“ heißt sechs Wochenschachteln, nicht Eier. Reihe 6 (Eier) und 7 (Fächer) haben verschiedene Dinge; die Frage nennt die Teile.
-- **K6:** höchstens eine neue Packung je Runde; Kern-Runden ziehen höchstens zwei Ketten. Fakten stehen nur im Sachsatz am Rundenanfang (K1), nie während des Denkens.
-- Nicht verwendet: Zehnerpack, Dreierpack u. Ä. (Zahlwort im Namen verwechselt sich mit a).
+- **K4, K11:** Setzungen beginnen mit „Hier“ und sagen so, dass es die Regel des Spiels ist, nie eine Behauptung über Läden; **nur Paar, Woche und Zehn-Cent-Münze** sind Fakten, sie tragen das Echt-Zeichen („In echt …“, `grundsaetze-bilder.md` §4) und stehen in `fakten` der Welt mit diesen Quellen.
+- **A4:** Jedes Beispiel nennt sein Ding: „6 · 7“ heißt sechs Wochenschachteln, nicht Eier; die Frage nennt die Teile.
+- **Ding-Bindung (`lernsteuerung.js` bleibt):** Die Lernsteuerung mischt Aufgaben anderer Reihen ein und zieht in Kern-Runden alle sechs n. Das Spiel liest je Aufgabe `daten.b` = n und stellt auf **die Kette dieser Aufgabe** um (Matte, Ding, Korbpackung). Wechselt n gegenüber der Aufgabe davor, sagt der Erzähler den **Wechselsatz** (Abschnitt 7), die Matte leert sich, die Liste behält ihre Zeilen. Eine Obergrenze für Ketten je Runde gibt es nicht **(Annahme, „höchstens zwei Ketten“ entfällt)**; Kern-Runden zeigen Aufgabe für Aufgabe ihre Kette.
+- **K6 (ein neuer Fakt je Runde):** Ein Faktensatz kommt nur am Rundenanfang einer **Reihen-Runde der eigenen Reihe** (2, 7, 10), also höchstens einer je Runde, nie in Kern-Runden und nie im Wechselsatz; dort stehen nur Setzungs-Sätze ohne Fakt, die K6 nicht zählt. Fakten nie während des Denkens (K1).
+- Nicht verwendet: Zehnerpack, Dreierpack u. Ä. (Zahlwort im Namen verwechselt sich mit a); „Zehn-Cent-Münze“ nennt n, nicht a, und ist die einzige Ausnahme, weil der Name der echten Münze gilt.
 
 ## 5. Figur
-- **Timo** (`figuren.md` §2), nur **vorzeigen** (L5): die erste Aufgabe jeder Runde, mit Probe und Zögern (`nachdenken`, `zeigen`), danach `stehen`. Trägt die Packung auf dem Schoß. Kein Freuen, Fragen, Anstupsen.
+- **Timo** (`figuren.md` §2), nur **vorzeigen** (L5): die erste Aufgabe jeder Runde, mit Probe und Zögern (`nachdenken`, `zeigen`): Er hält die Hand über dem Kernpfeilchen, tippt dann die Zahl, danach `stehen`. Trägt die Packung auf dem Schoß. Kein Freuen, Fragen, Anstupsen.
   Platz links unten neben dem Korb, Dreiviertel zur Matte, nie im Lernfeld. Katalog gesetzt; (Annahme) Ausgleich der Vorzeige-Zählung nach `figuren.md` §8 über alle Spiele.
-- **Gäste (F3, beiläufig, nicht im Lernkern):** eine Bäckerin mit Kopftuch bringt auf „abenteuer“ die Kiste, ein Hausmeister im Hintergrund.
+- **Gäste (F3, beiläufig, nicht im Lernkern):** eine Bäckerin mit Kopftuch bringt auf „abenteuer“ die Kiste, eine Hausmeisterin im Hintergrund (Berufe gegen das Klischee, `grundsaetze.md` 6.1 Nr. 1).
 
 ## 6. Bildschirm-Skizze
 ```
@@ -65,13 +67,15 @@
 ## 7. Rückmeldung
 - **Passt:** Pfeilchen hüpft, Packungen fliegen in den Korb (etwa 1,8 s, Tippen überspringt), Pfeilchen mit Zahl rastet ein, Korb wackelt satt, Zeile mit Kurzkette. Im Wechsel (B4): „So viele Packungen liegen jetzt im Korb.“ · „Das Pfeilchen zeigt, wie viele es zusammen sind.“ · „Die Zeile steht jetzt auf der Vorratsliste.“
 - **Passt nicht:** Ring am a-ten Stäbchen, hohles Pfeilchen der getippten Zahl, nichts fliegt (N7), beide gleiten zurück. „Das Pfeilchen sitzt hier. Deine Zahl liegt weiter hinten.“ · „Das Pfeilchen sitzt hier. Deine Zahl liegt weiter vorn.“ · „Deine Zahl liegt hinter dem Ende der Kette.“
-- **Timo legt vor:** „Timo legt die erste Aufgabe. Ein Stäbchen sind die Teile von einer Packung. Dort steht das erste Pfeilchen.“
-- **Rundenanfang** (Erzähler, laut; „Der Vorratskorb wird gefüllt.“ plus je Reihe):
-  2 „Ein Schuhpaar hat zwei Schuhe. Ein Stäbchen sind die Schuhe von einem Schuhpaar.“ · 3 „In eine Ballröhre kommen drei Bälle. Ein Stäbchen sind die Bälle von einer Ballröhre.“ ·
-  4 „Ein Gedeck hat vier Dinge: Teller, Gabel, Löffel und Becher. Ein Stäbchen sind die Dinge von einem Gedeck.“ · 5 „In eine Brötchentüte kommen fünf Brötchen. Ein Stäbchen sind die Brötchen von einer Brötchentüte.“ ·
-  6 „In einen Eierkarton kommen sechs Eier. Ein Stäbchen sind die Eier von einem Eierkarton.“ · 7 „Eine Woche hat sieben Tage. Eine Wochenschachtel hat ein Fach für jeden Tag. Ein Stäbchen sind die Fächer von einer Wochenschachtel.“ ·
-  8 „In eine Stiftebox kommen acht Stifte. Ein Stäbchen sind die Stifte von einer Stiftebox.“ · 9 „In einen Muffinkarton kommen neun Muffins. Ein Stäbchen sind die Muffins von einem Muffinkarton.“ · 10 „Eine Münze ist zehn Cent wert. Ein Stäbchen sind die Cent von einer Münze.“
-- **Auftrag** (Muster aus Daten, a als Zahlwort; erste laut, dann still): „Sechs Wochenschachteln. Wie viele Fächer sind es zusammen?“ · „Ein Eierkarton. Wie viele Eier sind es?“ Alle Stufen gleich; „6 · 7 = ▢“ steht im Bild.
+- **Timo legt vor:** „Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Teile von einer Packung.“ (Er prüft erst am Kernpfeilchen, zögert kurz, tippt die richtige Zahl; sonst nichts.)
+- **Rundenanfang** (Erzähler, laut; „Der Vorratskorb wird gefüllt.“ plus je Reihe; Fakten mit Echt-Zeichen):
+  2 „In echt hat ein Schuhpaar zwei Schuhe. Ein Stäbchen sind die Schuhe von einem Schuhpaar.“ · 3 „Hier kommen in eine Ballröhre drei Bälle. Ein Stäbchen sind die Bälle von einer Ballröhre.“ ·
+  4 „Hier hat ein Gedeck vier Dinge: Teller, Gabel, Löffel und Becher. Ein Stäbchen sind die Dinge von einem Gedeck.“ · 5 „Hier kommen in eine Brötchentüte fünf Brötchen. Ein Stäbchen sind die Brötchen von einer Brötchentüte.“ ·
+  6 „Hier kommen in einen Eierkarton sechs Eier. Ein Stäbchen sind die Eier von einem Eierkarton.“ · 7 „In echt hat eine Woche sieben Tage. Hier hat eine Wochenschachtel ein Fach für jeden Tag. Ein Stäbchen sind die Fächer von einer Wochenschachtel.“ ·
+  8 „Hier kommen in eine Stiftebox acht Stifte. Ein Stäbchen sind die Stifte von einer Stiftebox.“ · 9 „Hier kommen in einen Muffinkarton neun Muffins. Ein Stäbchen sind die Muffins von einem Muffinkarton.“ · 10 „In echt ist eine Zehn-Cent-Münze zehn Cent wert. Ein Stäbchen sind die Cent von einer Zehn-Cent-Münze.“
+  In Kern-Runden und bei fremdem n statt „In echt“ die Setzung: 2 „Hier hat ein Schuhpaar zwei Schuhe.“ · 7 „Hier hat eine Wochenschachtel sieben Fächer.“ · 10 „Hier hat eine Zehn-Cent-Münze zehn Cent.“ (Rest wie oben).
+- **Wechselsatz** (n ändert sich, Muster aus Daten, nie ein Fakt): „Jetzt sind es Eierkartons. Ein Stäbchen sind die Eier von einem Eierkarton.“
+- **Auftrag** (Muster aus Daten, a als Zahlwort; Vorlage mit allen 9 Dingen × 10 Zahlwörtern in `inhalte/vorlagen.json`, Einzahl mit Artikel, Mehrzahl mit „zusammen“, `stimme.md` §3; erste laut, dann still): „Sechs Wochenschachteln. Wie viele Fächer sind es zusammen?“ · „Ein Eierkarton. Wie viele Eier sind es?“ Alle Stufen gleich; „6 · 7 = ▢“ steht im Bild.
 - **Rundenende:** „Die Vorratsliste ist voll. Im Korb liegen die Packungen.“ (Kern: „Die Vorratsliste ist voll. Der Vorrat ist eingeräumt.“)
 - **Sanft (Annahme, Standard):** Die letzte Zeile ist verwischt: Von ihr steht die Aufgabe „a · n = ▢“ mit Kurzkette, das Ergebnis fehlt. Das Kind tippt es neu, danach steht sie wieder da; nur eine Aufgabe mehr, still bei Fehlern.
   „Auf der Liste ist eine Zeile verwischt. Die Kette darunter zeigt, wohin sie gehört.“
@@ -87,26 +91,26 @@ Nach dem zweiten Versuch, der nicht passt, leuchtet Hilfe einmal; mit Hilfe Gel�
   - a ∈ {7, 8}, **zwei Stäbchen Abstand** (7 von 5, 8 von 10; keine Nachbaraufgabe): „Das Pfeilchen zeigt eine Kernaufgabe. Von dort sind es zwei Stäbchen. Wie viele Perlen liegen auf zwei Stäbchen?“
   - a = 5: „Das Pfeilchen zeigt die Kernaufgabe mit zehn Stäbchen. Fünf Stäbchen sind die Hälfte von zehn. Wie viel ist die Hälfte?“ · a = 2: „Das Pfeilchen zeigt das erste Stäbchen. Das zweite Stäbchen ist genauso. Wie viel ist das Doppelte?“
   - a = 10: „Die Tauschaufgabe steht im Bild. Wie viele Zehnerstäbe sind es?“ · a = 1: „Ein Stäbchen. Wie viele Perlen liegen darauf?“
-- **Stufe 2, Lösung mit Begründung** (Taste mit Sonnenring, Ringe zwischen Kernpfeilchen und Ziel, im Bild z. B. „35 + 7“):
-  - Nachbaraufgabe vor: „Von der Kernaufgabe geht es ein Stäbchen weiter. Zum Ergebnis kommen die Perlen von einem Stäbchen dazu. Tipp die Zahl am Pfeilchen.“ · zurück: „Von der Kernaufgabe geht es ein Stäbchen zurück. Vom Ergebnis gehen die Perlen von einem Stäbchen weg. Tipp die Zahl am Pfeilchen.“
-  - a = 7: „Von der Kernaufgabe geht es zwei Stäbchen weiter. Zum Ergebnis kommen die Perlen von zwei Stäbchen dazu. Tipp die Zahl am Pfeilchen.“ · a = 8: „Von der Kernaufgabe geht es zwei Stäbchen zurück. Vom Ergebnis gehen die Perlen von zwei Stäbchen weg. Tipp die Zahl am Pfeilchen.“
-  - a = 5: „Das Ergebnis der Kernaufgabe ist am zehnten Stäbchen. Die Hälfte davon gehört zum fünften Stäbchen. Tipp die Zahl am Pfeilchen.“ · a = 2: „Das zweite Stäbchen hat genauso viele Perlen wie das erste. Das Ergebnis ist das Doppelte. Tipp die Zahl am Pfeilchen.“
-  - a = 10: „Zehn Stäbchen sind so viele Perlen wie Zehnerstäbe in der Tauschaufgabe. Tipp die Zahl am Pfeilchen.“ · a = 1: „Ein Stäbchen. Die Perlen darauf sind das Ergebnis. Tipp die Zahl am Pfeilchen.“
+- **Stufe 2, Lösung mit Begründung** (Taste mit Sonnenring, Ringe zwischen Kernpfeilchen und Ziel, im Bild z. B. „35 + 7 = ▢“; das Kind rechnet selbst, das Ergebnis steht nicht am Pfeilchen, L12):
+  - Nachbaraufgabe vor: „Von der Kernaufgabe geht es ein Stäbchen weiter. Zum Ergebnis kommen die Perlen von einem Stäbchen dazu. Rechne es aus und tipp die Zahl.“ · zurück: „Von der Kernaufgabe geht es ein Stäbchen zurück. Vom Ergebnis gehen die Perlen von einem Stäbchen weg. Rechne es aus und tipp die Zahl.“
+  - a = 7: „Von der Kernaufgabe geht es zwei Stäbchen weiter. Zum Ergebnis kommen die Perlen von zwei Stäbchen dazu. Rechne es aus und tipp die Zahl.“ · a = 8: „Von der Kernaufgabe geht es zwei Stäbchen zurück. Vom Ergebnis gehen die Perlen von zwei Stäbchen weg. Rechne es aus und tipp die Zahl.“
+  - a = 5: „Das Ergebnis der Kernaufgabe ist am zehnten Stäbchen. Die Hälfte davon gehört zum fünften Stäbchen. Rechne es aus und tipp die Zahl.“ · a = 2: „Das zweite Stäbchen hat genauso viele Perlen wie das erste. Das Ergebnis ist das Doppelte. Rechne es aus und tipp die Zahl.“
+  - a = 10: „Zehn Stäbchen sind so viele Perlen wie Zehnerstäbe in der Tauschaufgabe. Rechne es aus und tipp die Zahl.“ · a = 1: „Ein Stäbchen. Die Perlen darauf sind das Ergebnis. Rechne es aus und tipp die Zahl.“
 
 ## 9. Stufen
 - **material:** Kette offen, jede Perle einzeln, Fünfermarke (M2). **vorstellung:** Perlen unter dem Tuch, nur Stäbchengrenzen sichtbar; nach der Eingabe hebt sich das Tuch. **kopf:** nur Aufgabe und Liste; die Kette erscheint nach der Eingabe.
-- **Das Gelernte bleibt (A6b):** Nach der Wirkung bleiben Kette und Pfeilchen bis zur nächsten Aufgabe (in kopf die Kurzkette der Zeile), die Zeile bis Rundenende. **Reihen:** feste Kette n, die Pfeilchen sammeln sich. **Kern:** auf der Matte die Kette der laufenden Aufgabe, jede gelöste als Zeile „a · n = c“ mit Kurzkette.
+- **Das Gelernte bleibt (A6b):** Nach der Wirkung bleiben Kette und Pfeilchen bis zur nächsten Aufgabe (in kopf die Kurzkette der Zeile), die Zeile bis Rundenende (außer bei Wiederholung der Aufgabe, Satz 6 der Runde). **Reihen:** feste Kette n, die Pfeilchen sammeln sich. **Kern:** auf der Matte die Kette der laufenden Aufgabe, jede gelöste als Zeile „a · n = c“ mit Kurzkette.
 - **Gebaut (voller Weg):** zweierreihe, zehnerreihe, fuenferreihe, kernaufgaben-einmaleins, dann dreier- bis neunerreihe, alle Stufen, ruhig und Sanft. **Ausbau:** Teilen (Art `geteilt`), Teiler, Abenteuer-Bogen, `einmaleins-gemischt`.
 
 ## 10. Aufgabenschlüssel und arten
 - **Art `mal`** (wiederverwendbar für M35/M36, nichts Spieleigenes): Schlüssel `mal:<a>*<n>`, daten `{ a, b: n, c }`, c = a·n. Pools ohne Überschneidung (Test): Reihen 2, 5, 10 mit a = 1–10; Reihen 3, 4, 6, 7, 8, 9 mit a ∈ {3, 4, 6, 7, 8, 9};
-  Kern a ∈ {1, 2, 5, 10}, n ∈ {3, 4, 6, 7, 8, 9}. Zusammen alle 90 Aufgaben a·n (a 1–10, n 2–10), auch 1·9, 2·9, 5·9, 10·9. **`ZIEL_MS.mal` = 8000** (Annahme); `schwierigkeit`: Kernfaktor 0, a ∈ {3, 4, 6, 9} 1, a ∈ {7, 8} 2; `darstellbar`: `reihen: [von, bis]` gegen `daten.b`.
+  Kern a ∈ {1, 2, 5, 10}, n ∈ {3, 4, 6, 7, 8, 9}. Zusammen alle 90 Aufgaben a·n (a 1–10, n 2–10), auch 1·9, 2·9, 5·9, 10·9. **`ZIEL_MS.mal` = 8000** (Annahme); `schwierigkeit`: Kernfaktor 0, a ∈ {3, 4, 6, 9} 1, a ∈ {7, 8} 2; `darstellbar`: `reihen: [von, bis]` gegen `daten.b`. Buchung wie jede Art: `ok` ohne `hilfe` zählt; Satz 6 der Runde sichert, dass bei Wiederholung nichts ablesbar ist.
 - **Fehlerbilder:** `einmaleins-nachbar` vergleicht mit a·(n ± 1) und (a ± 1)·n; `einmaleins-hochzaehlen` meint die Schrittzahl `daten.a` (Regel „zeit-steigung-zweiter-faktor“ in `lernplan.json`: Id und Beschreibung zusammen auf „Schrittzahl a“, im Bau per Suche bestätigen).
 - **`lernplan.json`:** `aufgaben` `{ art: "mal", reihe: n }` für die neun Reihen, `{ art: "mal", kern: true }` für `kernaufgaben-einmaleins`; `einfuehrung` zeigt auf `mathe/m37-kettenhuepfer/einfuehrung.json` (eigene Einführung in der Welt, A4b). Welt `vorrat-und-packungen` angelegt; `fakten` im Bau. **`spiele.json`:** `arten: [{ art: "mal", reihen: [2, 10], stufen: [material, vorstellung, kopf] }]`.
 - **Meldung:** je Aufgabe `ok`, `hilfe`, `ms`; Fehlversuche mit der getippten Zahl. Test-Schnittstelle: Ziffer, Löschen, Fertig; `fehlversuche: true`. Elternansicht: welche Reihen zuletzt, ohne Vergleich (3.3).
 
 ## 11. Spielobjekte
-- **Wirkung (je Reihe ein Ding, Abschnitt 4):** vorhanden `schuhpaar`, `gedeck`, `broetchen`, `eierkarton`, `muenze`; neu in `spiele/objekte/` (wiederverwendbar): `ballroehre`, `wochenschachtel` (sieben Fächer), `stiftebox` (acht Stifte), `muffinkarton` (3 × 3). Bewegung: fliegt in den Korb, ohne Ziffer und Schrift.
+- **Wirkung (je Reihe ein Ding, Abschnitt 4):** vorhanden `schuhpaar`, `gedeck`, `broetchen`, `eierkarton`, `muenze` (Variante `zehn-cent` mit „10“, einziges Objekt mit Ziffer, wie die echte Münze); neu in `spiele/objekte/` (wiederverwendbar): `ballroehre`, `wochenschachtel` (sieben Fächer), `stiftebox` (acht Stifte), `muffinkarton` (3 × 3). Bewegung: fliegt in den Korb, sonst ohne Ziffer und Schrift.
 - **Figur des Spiels: `einkaufskorb`** (neu, `spiele/objekte/einkaufskorb.js`), Zustände `leer`, `gefuellt`; Bewegung: Packung fällt hinein, Korb wackelt satt.
 - **Karte:** `karte: { figur: "einkaufskorb", zustand: "gefuellt", welt: "vorrat-und-packungen" }`; typischer Moment: Korb mit herausschauenden Packungen. **Silhouette (KB3):** breit und flach mit hohem Henkelbogen; die Tonne von M14 ist schmal, hoch, mit Deckel. In `spiele.json` hat Mathe sonst keine Karte mit diesem Bild; `(einkaufskorb, vorrat-und-packungen, gefuellt)` ist im Fach frei. Kein Kind, keine Perle, keine Ziffer. Spielsymbol `symbol.svg` = Henkel mit Korbrand.
 - **Regal:** `regal: { objekt: "einkaufskorb", wert: null }`; bei den Reihen-Themen (zweier- bis neunerreihe, Kern) steht vorn die Perlenkette n (neue Regel in `material.js`, Art `mal` mit `reihe`), der Korb erst bei den übrigen Themen des Spiels (Teilen, Teiler, gemischt).
