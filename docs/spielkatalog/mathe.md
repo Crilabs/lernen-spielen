@@ -1173,11 +1173,11 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Fachübergreifend: **Geometrie** (flaechen-auslegen, flaecheninhalt-kaestchen nutzen dasselbe Rechteck).
 
 ### M37 Kettenhüpfer
-- Name fürs Kind: „Kettenhüpfer“ · Symbol: Perlenkette mit Pfeilchen
-- Handlung: Das Kind tippt das Ergebnis einer Malaufgabe; danach hüpft eine Figur a Stäbchen weit über die Kette von
+- Name fürs Kind: „Kettenhüpfer“ · Symbol: Einkaufskorb (Christian, 2026-11-14: Kopfform der Figur des Spiels)
+- Handlung: Das Kind tippt das Ergebnis einer Malaufgabe; danach hüpft das Zählpfeilchen a Stäbchen weit über die Kette von
   n. Beim Teilen fragt das Spiel, wie viele Sprünge bis zu einem Pfeilchen nötig sind (35 auf der Fünferkette), und bei
   Teilern, auf welchen Ketten die 24 ein Pfeilchen hat · Wirkung: Das Pfeilchen wird gesetzt, die Kette wächst (wie im
-  Spec 2026-11-13).
+  Spec 2026-11-13), und je Stäbchen kommt eine Packung in den Vorratskorb (Christian, 2026-11-14).
 - Material und Stufen: kurze Montessori-Perlenketten mit 10 Stäbchen und Pfeilchen (Spec). material: hüpfen
   zählen. vorstellung: Kette verdeckt bis auf Pfeilchen. kopf: nur Aufgabe, Kette als Bedeutung danach.
 - Lernzeichen: Perlenstäbchen und Perlenketten (M3, Kettenhüpfer-Spec).
@@ -1190,18 +1190,17 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Das Spec begründet den Abruf mit Kernaufgaben zuerst; Teilen ist dieselbe Kette mit gesuchter
   Sprungzahl, Teiler und Vielfache sind die Pfeilchen verschiedener Ketten.
 - Bewusst nicht drin: nachbaraufgabe-mal → M36 (Ableiten am Feld; hier nur als Hilfe).
-- Heimatwelt: Tiere auf Wiese und Hecke (`wiese-und-hecke`)
-  - Sachgrund: Tiere in Wiese und Hecke haben gleich viele Beine je Art (Vogel 2, Hase 4, Käfer 6, Spinne 8): Einmaleinsreihen.
-  - Sache wächst mit: Kl. 2: Beine je Tier als Einmaleinsreihen. Kl. 3–4: Zählungen wie bei echten Naturschutz-Zählungen, Teiler und Vielfache in den Listen.
-  - Rahmen: Forschen · Spannung aus: Rätsel
-  - Ruhig: Hecken-Beobachtung: Vögel haben zwei Beine, Hasen vier, Käfer sechs, Spinnen acht. Jeder Hüpfer auf der Kette zählt ein Tier weiter; die Gruppe kommt ins Heft.
-  - Sanft: Im Heft steht „48 Beine“, aber nicht, von wem. Auf welchen Ketten hat die 48 ein Pfeilchen? Es waren Käfer.
-  - Abenteuer: Abendzählung über mehrere Runden mit der Naturschützerin: In der Dämmerung kommen andere Tiere. Es knackt im Gebüsch. Ein Reh schaut heraus und geht weiter. Am Ende steht die Jahresliste der Hecke.
+- Heimatwelt: Vorrat und Packungen (`vorrat-und-packungen`) **(Christian, 2026-11-14: statt „Tiere auf Wiese und Hecke“; die Welt trug nur die Reihen 2, 4, 6, 8)**
+  - Sachgrund: Dinge kommen in festen Gruppen, jede Reihe hat ihre Packung (Schuhpaar 2, Ballröhre 3, Gedeck 4, Brötchentüte 5, Eierkarton 6, Wochenschachtel 7, Stiftebox 8, Muffinkarton 9, Zehn-Cent-Münze 10). Eine Packung ist ein Stäbchen, viele gleiche Packungen sind die Perlenkette: Einmaleinsreihen.
+  - Sache wächst mit: Kl. 2: Packungen einräumen und zählen. Kl. 3–4: Lieferungen und Vorräte für Küche und Schulfest, Teiler und Vielfache auf den Packzetteln.
+  - Rahmen: Versorgen · Spannung aus: Rätsel
+  - Ruhig: Der Vorratskorb wird gefüllt: Jede Malaufgabe bringt so viele Packungen in den Korb, wie die erste Zahl sagt; jeder Hüpfer auf der Kette ist eine Packung, die Zeile kommt auf die Vorratsliste.
+  - Sanft: Auf der Vorratsliste ist eine Zeile verwischt. Die Kette darunter zeigt, wohin sie gehört. Kl. 3–4: Ein Karton hat keinen Aufkleber, nur „48“; auf welchen Ketten hat die 48 ein Pfeilchen?
+  - Abenteuer: Vorrat fürs Schulfest über mehrere Runden: Lieferung für Küche, Bäckerei, Schreibwaren. Es klopft am Lagertor, der Lieferwagen steht davor und fährt weiter. Am Ende steht das Regal der Schulküche voll.
 - Stimme: mittel (Ergebnisse bis 100).
-- Figuren: Timo zeigt vor; Ela wundert sich, wo 48 auf der Siebenerkette liegt. Die hüpfende Figur ist ein Kind der
-  Runde (nicht mehr das Einhorn).
+- Figuren: Timo zeigt vor (trägt Packungen auf dem Schoß). Die Figur des Spiels ist der Einkaufskorb (kein Kind der Runde, `grundsaetze-bilder.md` §16); die hüpfende Figur entfällt, es hüpft das Zählpfeilchen.
 - Regal-Material: Perlenkette n bzw. Perlenstab n (passt).
-- Mach mit (am Rundenende, als Angebot): Lena hüpft eine Kette aus Büroklammern entlang. „Frag jemanden, ob ihr eine Kette aus Klammern in Fünfern legt.“
+- Mach mit (am Rundenende, als Angebot): Lena legt eine Kette aus Büroklammern. „Frag jemanden, ob ihr eine Kette aus Klammern in Fünfern legt.“
 - Fachübergreifend: –
 
 ### M38 Gerecht verteilen

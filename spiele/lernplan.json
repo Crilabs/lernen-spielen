@@ -26774,6 +26774,18 @@
       "fakten": []
     },
     {
+      "id": "vorrat-und-packungen",
+      "name": "Vorrat und Packungen",
+      "ueberschrift": "werkzeug-bauen",
+      "klasse": 2,
+      "quellen": [
+        "Christian 2026-11-14"
+      ],
+      "anbindung": "M: Einmaleins in festen Gruppen (Paar, Tüte, Karton, Münze)",
+      "stufe_ab": "ruhig",
+      "fakten": []
+    },
+    {
       "id": "fell-federn-schuppen",
       "name": "Fell, Federn, Schuppen",
       "ueberschrift": "tiere-pflanzen",
