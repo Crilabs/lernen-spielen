@@ -1,5 +1,18 @@
 {
  "themen": {
+  "abstrakte-nomen-gross": {
+   "fach": "schreiben",
+   "name": "Gefühle und Gedanken groß",
+   "titel": "Wörter für Gefühle und Gedanken groß schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eine Karte voller Wünsche"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/abstrakte-nomen-gross.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",

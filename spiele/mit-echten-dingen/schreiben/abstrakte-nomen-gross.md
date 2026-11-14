@@ -1,7 +1,6 @@
 ---
 thema: abstrakte-nomen-gross
 fach: schreiben
-entwurf: true
 bild: { figur: glueckwunschkarte, zustand: im-umschlag }
 quellen:
   - Nomenproben erforschen (Artikelprobe, Zählprobe, Adjektivprobe; „Der Satz bestimmt, welche Wörter großgeschrieben werden“), Agnes Fulde für Jambus NRW, QUA-LiS NRW, https://www.qua-lis.nrw.de/system/files/media/document/file/jambus_m_09_nomenprobenerforschen.pdf, abgerufen 2026-11-14
