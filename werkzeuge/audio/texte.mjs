@@ -1,5 +1,5 @@
 // Sammelt alle Texte, die die Spiele vorlesen können und die schon als Daten oder als feste Zeichenkette
-// vorliegen. Sätze aus Vorlagen im Spielcode (Template-Strings, zusammengesetzte Texte) findet das Skript
+// vorliegen (dazu die Sätze aus `texte.json` jedes Spielordners, docs/spielentwicklung.md „Ablage“). Sätze aus Vorlagen im Spielcode (Template-Strings, zusammengesetzte Texte) findet das Skript
 // nicht. Es zählt sie aber je Datei, damit sichtbar bleibt, was noch fehlt (siehe Spec: Vorlagen als Daten).
 
 import { readFileSync, readdirSync } from "node:fs";
@@ -53,6 +53,21 @@ export function literaleAusCode(quelltext) {
     else offen += 1;
   }
   return { texte, offen };
+}
+
+/**
+ * Alle Sätze aus einer `texte.json` eines Spielordners: jede Zeichenkette, rekursiv in Objekten und Listen. Keine
+ * Schlüssel, keine Zahlen (auch keine Zeichenkette aus lauter Ziffern), nichts unter `hinweis` (Erklärung für
+ * Entwickler, wird nicht gesprochen).
+ * @param {unknown} daten @returns {string[]}
+ */
+export function saetzeAusTexten(daten, aus = []) {
+  if (typeof daten === "string") {
+    if (/\p{L}/u.test(daten)) aus.push(daten);
+  } else if (Array.isArray(daten)) daten.forEach((v) => saetzeAusTexten(v, aus));
+  else if (daten && typeof daten === "object")
+    for (const [k, v] of Object.entries(daten)) if (k !== "hinweis") saetzeAusTexten(v, aus);
+  return aus;
 }
 
 // Namen der Rahmen-Knöpfe: `<ls-knopf … name="…">` (sonst `wort="…"`) spricht seinen Namen beim ersten Tippen
@@ -111,6 +126,10 @@ export function sammle(wurzel) {
   // Eigene Einführung eines Spiels im Spielordner (EINFUEHRUNG in spiele/vorlage/spiel.js)
   for (const p of dateien(spiele, [".json"], ["einfuehrungen", "kern", "audio", "mit-echten-dingen"]))
     if (p.endsWith(`${sep}einfuehrung.json`)) for (const t of felder(json(p), "sprich")) neu(t, relative(spiele, p));
+
+  // Sätze aus Daten eines Spiels (spiele/<fach>/<spiel>/texte.json): ausgeschriebene Sätze je Aufgabe, Reihe …
+  for (const p of dateien(spiele, [".json"], ["einfuehrungen", "kern", "audio", "mit-echten-dingen"]))
+    if (p.endsWith(`${sep}texte.json`)) for (const t of saetzeAusTexten(json(p))) neu(t, relative(spiele, p));
 
   // Diktatsätze (Material für die Schreibspiele): der Satz selbst, ohne Variante, wie bisher aufgenommen.
   // Einleitungen wie „Hör noch mal hin. …“ gehören zum jeweiligen Spiel und kommen mit ihm.

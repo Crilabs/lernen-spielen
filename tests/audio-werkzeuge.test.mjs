@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import { audioSchluessel, normalisiere } from "../spiele/kern/audio.js";
 import { ssml } from "../werkzeuge/audio/ssml.mjs";
 import { azure } from "../werkzeuge/audio/azure.mjs";
-import { knopfNamen, literaleAusCode, sammle } from "../werkzeuge/audio/texte.mjs";
+import { knopfNamen, literaleAusCode, saetzeAusTexten, sammle } from "../werkzeuge/audio/texte.mjs";
 import { erzeuge } from "../werkzeuge/audio/erzeugen.mjs";
 
 const WURZEL = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -173,13 +173,35 @@ test("sammle findet ein sprich(\"…\") in einem verschachtelten Spielordner (sp
     mkdirSync(join(spiele, "saetze"));
     writeFileSync(join(spiele, "saetze", "saetze.json"), JSON.stringify({ saetze: [] }));
     writeFileSync(join(spiel, "spiel.js"), 'import { sprich } from "../../kern/stimme.js";\nsprich("Ein Satz tief im Ordner.");\n');
+    writeFileSync(join(spiel, "texte.json"), JSON.stringify({
+      hinweis: "Nur für Entwickler.",
+      anfang: { 2: { reihe: "Ein Satz aus Daten.", setzung: "Noch ein Satz." } },
+      auftrag: { 2: { 3: "Drei Schuhpaare. Wie viele Schuhe sind es zusammen?" } },
+      liste: ["Ein Satz in einer Liste.", "12", 7],
+    }));
     writeFileSync(join(spiel, "einfuehrung.json"), JSON.stringify({ szenen: [{ sprich: "Am Hafen liegen Kisten.", zeig: "", bild: [] }] }));
     const { eintraege } = sammle(wurzel);
     const einf = eintraege.find((x) => x.text === "Am Hafen liegen Kisten.");
     assert.ok(einf, "Satz der eigenen Einführung im Spielordner gesammelt");
     assert.deepEqual(einf.quellen, ["mathe/m99-test-spiel/einfuehrung.json"]);
+    const aus = eintraege.filter((x) => x.quellen.includes("mathe/m99-test-spiel/texte.json")).map((x) => x.text).sort();
+    assert.deepEqual(aus, ["Drei Schuhpaare. Wie viele Schuhe sind es zusammen?", "Ein Satz aus Daten.", "Ein Satz in einer Liste.", "Noch ein Satz."],
+      "texte.json: alle Sätze rekursiv, keine Schlüssel, keine Zahlen, kein hinweis");
     const e = eintraege.find((x) => x.text === "Ein Satz tief im Ordner.");
     assert.ok(e, "Satz aus mathe/m99-test-spiel/spiel.js gesammelt");
     assert.deepEqual(e.quellen, ["mathe/m99-test-spiel/spiel.js"]);
   } finally { rmSync(wurzel, { recursive: true, force: true }); }
+});
+
+test("saetzeAusTexten: Zeichenketten rekursiv, ohne Schlüssel, Zahlen und hinweis", () => {
+  const daten = { hinweis: "x", a: { 2: "Satz eins.", b: ["Satz zwei.", 3, "10", { c: "Satz drei." }] }, d: null, e: true };
+  assert.deepEqual(saetzeAusTexten(daten), ["Satz eins.", "Satz zwei.", "Satz drei."]);
+});
+
+test("sammle findet die Sätze aus texte.json von M37 (Rundenanfang und Auftrag)", () => {
+  const { eintraege } = sammle(WURZEL);
+  const q = "mathe/m37-kettenhuepfer/texte.json";
+  const aus = eintraege.filter((x) => x.quellen.includes(q));
+  assert.ok(aus.length >= 90, `mindestens die 90 Aufträge, gefunden ${aus.length}`);
+  assert.ok(aus.some((x) => x.text === "Sechs Wochenschachteln. Wie viele Fächer sind es zusammen?"));
 });
