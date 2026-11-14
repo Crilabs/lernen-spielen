@@ -11,7 +11,8 @@
 // Geprüft wird in Chromium und WebKit bei 1920 × 1080 und 1280 × 800: keine Seiten- oder Konsolenfehler,
 // feste Plätze, Größen nach docs/bedienung.md 4, Ton bleibt aus nach dem Neuladen, Pause, doppelter Import,
 // Tastatur, Ziehen (Tippen und Ziehen), wenig Bewegung, Kopfleisten-Höhe, Perlenstäbchen, Kopfleiste `ohne-haus`
-// und Slot `rechts`.
+// und Slot `rechts`; „Mit echten Dingen“ (vorschau.html?echte-dinge): Kachel so groß wie eine Spiel-Kachel, Karte mit
+// Wahl der Form (gemerkt), ohne Anleitung der Einzeiler, kein Kopf mit Quellen sichtbar, Angebot in der Pause.
 
 import { createRequire } from "node:module";
 import http from "node:http";
@@ -303,9 +304,129 @@ async function lauf(typ, name, groesse, basis) {
     const pz = await seite.evaluate(() => ({ n: window.zaehler, gleich: window.gleich, offen: document.getElementById("pause").hasAttribute("offen") }));
     pruefe(L, "zeige() löst genau einmal auf (zweiter Aufruf liefert dasselbe Versprechen)", pz.n === 1 && pz.gleich && !pz.offen, JSON.stringify(pz));
 
+    // --- Mit echten Dingen: Kachel, Karte mit Wahl der Form, Angebot in der Pause ---------------
+    {
+      const ed = await kontext.newPage();
+      ed.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (echte-dinge): ${e.message}`));
+      ed.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole (echte-dinge): ${m.text()}`); });
+      const laden = async () => {
+        await ed.goto(`${URL_VORSCHAU(basis)}?echte-dinge`, { waitUntil: "load" });
+        await ed.evaluate(async () => {
+          await document.getElementById("leiste").bereit();
+          await document.fonts.ready;
+          await Promise.all([...document.querySelectorAll("ls-echte-dinge-kachel")].map((k) => k.geladen));
+        });
+      };
+      await laden();
+      const k = await ed.evaluate(() => {
+        const r = (el) => { const b = el.getBoundingClientRect(); return { w: b.width, h: b.height }; };
+        const kachel = (id) => { const el = document.getElementById(id); const w = el.shadowRoot;
+          return { ...r(w.querySelector(".kachel")), name: w.querySelector("b").textContent, leise: w.querySelector(".leise").textContent,
+            hand: w.querySelector(".ico img").getAttribute("src").endsWith("hand.svg"), ico: r(w.querySelector(".ico")), hidden: el.hidden,
+            fuellung: getComputedStyle(w.querySelector(".ico")).backgroundColor }; };
+        return { spiel: r(document.getElementById("spielkachel")), k7: kachel("kachel-7"), silben: kachel("kachel-silben"), ohne: kachel("kachel-ohne"), leer: kachel("kachel-leer") };
+      });
+      pruefe(L, "Kachel „Mit echten Dingen“ so groß wie die Spiel-Kachel (Höhe gleich, ≥ 40 × 16 rem, Symbolfeld 12 rem, Hand)",
+        Math.abs(k.k7.h - k.spiel.h) <= tol && k.k7.w >= 40 * rem - tol && k.k7.h >= 16 * rem - tol && nah(k.k7.ico.w, 12) && k.k7.hand, JSON.stringify(k));
+      pruefe(L, "Kachel: Name der Form, darunter „Mit echten Dingen“; Füllung des Fachs; ohne Anleitung das Wort allein; ohne alles verborgen",
+        k.k7.name === "Sieben Nudeln, zwei Teller" && k.k7.leise === "Mit echten Dingen" && k.k7.fuellung === "rgb(240, 107, 176)"
+          && k.silben.name === "Eine Klammer für jede Silbe" && k.silben.fuellung === "rgb(242, 182, 48)"
+          && k.ohne.name === "Mit echten Dingen" && k.ohne.leise === "" && !k.ohne.hidden && k.leer.hidden, JSON.stringify(k));
+      if (SHOTS) { await mkdir(SHOTS, { recursive: true }); await ed.screenshot({ path: join(SHOTS, `kachel-${name}-${groesse.width}x${groesse.height}.png`) }); }
+
+      await tipp(ed.locator("#kachel-7"));
+      await ed.evaluate(() => document.getElementById("anregung").geladen);
+      await pause(250);
+      const karte = () => ed.evaluate(() => {
+        const a = document.getElementById("anregung"), w = a.shadowRoot;
+        const kb = w.querySelector(".karte").getBoundingClientRect();
+        return {
+          offen: a.offen, form: a.form,
+          reiter: [...w.querySelectorAll(".reiter [role=tab]")].map((b) => [b.dataset.situation, b.getAttribute("aria-selected"), b.textContent.trim()]),
+          h3: w.querySelector(".anleitung h3")?.textContent ?? "", text: w.querySelector(".anleitung").innerText,
+          einzeiler: !w.querySelector(".text").hidden, einzeilerText: w.querySelector(".text").textContent,
+          schritte: w.querySelectorAll(".anleitung ol li").length, kern: !!w.querySelector(".anleitung .kern"), stufen: !!w.querySelector(".anleitung .stufen"),
+          imBild: kb.top >= 0 && kb.bottom <= innerHeight && kb.left >= 0 && kb.right <= innerWidth,
+          rollt: w.querySelector(".karte").scrollHeight > w.querySelector(".karte").clientHeight + 1,
+          ringGewaehlt: w.querySelector('.reiter [aria-selected="true"] .form') ? getComputedStyle(w.querySelector('.reiter [aria-selected="true"] .form'), "::after").opacity : "",
+          inert: document.getElementById("echte-dinge").inert,
+        };
+      });
+      const k1 = await karte();
+      pruefe(L, "Karte: Formen als Wahl (Am Tisch, Unterwegs), erste gewählt mit Sonnenring, Schritte, Kern, Leichter/Schwerer",
+        k1.offen && JSON.stringify(k1.reiter) === JSON.stringify([["tisch", "true", "Am Tisch"], ["unterwegs", "false", "Unterwegs"]])
+          && k1.h3 === "Sieben Nudeln, zwei Teller" && k1.schritte === 4 && k1.kern && k1.stufen && !k1.einzeiler && k1.ringGewaehlt === "1" && k1.inert, JSON.stringify(k1));
+      pruefe(L, "Karte: kein Kopf mit Quellen, kein Markdown-Zeichen im Text", !/quellen|https?:|thema:|\*\*|^#/m.test(k1.text), k1.text);
+      pruefe(L, "Karte ganz im Bild, ohne Rollen", k1.imBild && !k1.rollt, JSON.stringify(k1));
+      if (SHOTS) await ed.screenshot({ path: join(SHOTS, `karte-${name}-${groesse.width}x${groesse.height}.png`) });
+      await tipp(ed.locator("#anregung button[data-situation=unterwegs]"));
+      await pause(150);
+      const k2 = await karte();
+      pruefe(L, "Karte: Unterwegs antippen zeigt diese Form", k2.form === "unterwegs" && k2.h3 === "Sieben Steine in zwei Händen" && k2.reiter[1][1] === "true", JSON.stringify(k2));
+      // Ausgelöste Klicks (WebKit) setzen keinen Fokus: die gewählte Form bekommt ihn wie nach einem echten Tippen.
+      await ed.evaluate(() => document.getElementById("anregung").shadowRoot.querySelector('[aria-selected="true"]').focus());
+      await ed.keyboard.press("ArrowLeft");
+      const k3 = await karte();
+      await ed.keyboard.press("ArrowRight");
+      pruefe(L, "Karte: Pfeiltasten wechseln die Form", k3.form === "tisch", JSON.stringify(k3.form));
+      await ed.keyboard.press("Escape");
+      await pause(100);
+      const zu = await ed.evaluate(() => ({ offen: document.getElementById("anregung").offen, inert: document.getElementById("echte-dinge").inert }));
+      pruefe(L, "Karte: Escape schließt, Seite wieder frei", !zu.offen && !zu.inert, JSON.stringify(zu));
+      await pause(700); // Einstellungen werden verzögert gespeichert
+      await laden();
+      const gemerkt = await ed.evaluate(() => document.getElementById("kachel-7").shadowRoot.querySelector("b").textContent);
+      pruefe(L, "letzte Wahl gemerkt: nach dem Neuladen zeigt die Kachel Unterwegs", gemerkt === "Sieben Steine in zwei Händen", gemerkt);
+      await tipp(ed.locator("#kachel-7"));
+      await ed.evaluate(() => document.getElementById("anregung").geladen);
+      const k4 = await karte();
+      pruefe(L, "Karte öffnet mit der gemerkten Form", k4.form === "unterwegs", k4.form);
+      await ed.keyboard.press("Escape");
+      await tipp(ed.locator("#kachel-ohne"));
+      await ed.evaluate(() => document.getElementById("anregung").geladen);
+      const k5 = await karte();
+      pruefe(L, "Karte ohne Anleitung: der Einzeiler, keine Wahl", k5.einzeiler && /Tischdecken/.test(k5.einzeilerText) && k5.reiter.length === 0 && k5.h3 === "", JSON.stringify(k5));
+      await ed.keyboard.press("Escape");
+
+      // Angebot in der Pause
+      await ed.goto(URL_VORSCHAU(basis), { waitUntil: "load" });
+      await ed.evaluate(() => document.getElementById("leiste").bereit());
+      await tipp(ed.locator("#pausenknopf"));
+      await ed.evaluate(() => document.getElementById("pause").angebotBereit);
+      const pa = await ed.evaluate(() => {
+        const w = document.getElementById("pause").shadowRoot, r = (el) => el.getBoundingClientRect();
+        const echt = w.querySelector("ls-knopf.echt"), alle = w.querySelector("a.alle .form"), form = echt.shadowRoot.querySelector(".form");
+        return { sichtbar: !echt.hidden, links: r(form).left, hoehe: r(form).height, breite: r(form).width, alleHoehe: r(alle).height,
+          mitte: Math.abs((r(form).top + r(form).bottom) / 2 - (r(alle).top + r(alle).bottom) / 2), abstand: r(alle).left - r(form).right };
+      });
+      pruefe(L, "Pause: Angebot „Mit echten Dingen“ als runder Nebenknopf unten links, abseits von Alle Spiele, auf ihrer Mitte",
+        pa.sichtbar && pa.links >= 2.4 * rem - tol && nah(pa.hoehe, 11) && nah(pa.breite, 11) && pa.alleHoehe > pa.hoehe && pa.mitte <= 1.5 && pa.abstand >= 2 * rem, JSON.stringify(pa));
+      if (SHOTS) await ed.screenshot({ path: join(SHOTS, `pause-angebot-${name}-${groesse.width}x${groesse.height}.png`) });
+      await tipp(ed.locator("ls-pause ls-knopf.echt"));
+      await ed.evaluate(() => document.getElementById("pause").anregung.geladen);
+      await pause(200);
+      const pk = await ed.evaluate(() => {
+        const p = document.getElementById("pause"), w = p.shadowRoot, a = p.anregung;
+        return { offen: a.offen, form: a.form, aktionenInert: w.querySelector(".aktionen").inert,
+          oben: document.elementFromPoint(innerWidth / 2, innerHeight / 2) === p };
+      });
+      pruefe(L, "Pause: Angebot öffnet die Karte zum Thema der Runde über der Pause, Knöpfe darunter inert",
+        pk.offen && pk.form !== "" && pk.aktionenInert && pk.oben, JSON.stringify(pk));
+      if (SHOTS) await ed.screenshot({ path: join(SHOTS, `pause-karte-${name}-${groesse.width}x${groesse.height}.png`) });
+      await ed.keyboard.press("Escape");
+      await pause(100);
+      const nachEsc = await ed.evaluate(() => ({ pause: document.getElementById("pause").hasAttribute("offen"), karte: document.getElementById("pause").anregung.offen,
+        inert: document.getElementById("pause").shadowRoot.querySelector(".aktionen").inert }));
+      pruefe(L, "Pause: Escape schließt nur die Karte, die Pause bleibt", nachEsc.pause && !nachEsc.karte && !nachEsc.inert, JSON.stringify(nachEsc));
+      await tipp(ed.locator("ls-pause ls-knopf.weiter"));
+      await pause(150);
+      pruefe(L, "Pause: Weiter geht danach wie immer", !(await ed.evaluate(() => document.getElementById("pause").hasAttribute("offen"))));
+      await ed.close();
+    }
+
     // --- Doppelter Import ----------------------------------------------------------------------
     const doppelt = await seite.evaluate(async () => {
-      const mods = ["stil", "knopf", "leiste", "blase", "hilfe", "pause", "tastatur", "perlenstab", "wortart"];
+      const mods = ["stil", "knopf", "leiste", "blase", "hilfe", "pause", "tastatur", "perlenstab", "wortart", "markdown", "echte-dinge", "anregung", "echte-dinge-kachel"];
       try {
         for (const mod of mods) await import(`/spiele/rahmen/${mod}.js?nochmal=${Date.now()}`);
         return "ok";

@@ -367,7 +367,7 @@ async function start() {
   hoeren.addEventListener("click", () => { if (jetzt >= 0 && leiste.ton && dinge[jetzt].sprich) sprich(dinge[jetzt].sprich); });
   echt.addEventListener("click", () => {
     const g = dinge[jetzt];
-    if (g?.eltern) anregung.oeffne({ titel: g.name, text: g.eltern });
+    if (g?.eltern) anregung.oeffne({ titel: g.name, text: g.eltern, thema: g.id, fach: g.strang });
   });
   document.addEventListener("pointerdown", (e) => {
     if (anregung.offen || schild.hidden) return;

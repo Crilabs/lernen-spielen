@@ -36,7 +36,7 @@ test("Regal: Erzählersatz für das leere Regal ist eine feste Zeichenkette (sam
 test("Regal: keine Zählung, kein „von“, kein Klassenbezug beim Kind", () => {
   assert.doesNotMatch(html, /\.length\}|\$\{[^}]*\.(length|size)\}/);
   assert.doesNotMatch(html, / von \$\{|Klasse|Prozent|%\}/);
-  assert.match(skript, /anregung\.oeffne\(\{ titel: g\.name, text: g\.eltern \}\)/);
+  assert.match(skript, /anregung\.oeffne\(\{ titel: g\.name, text: g\.eltern, thema: g\.id, fach: g\.strang \}\)/);
 });
 
 test("Regal: Bretter sind Gruppen mit Fachnamen, das Schild ist nicht live, nur der Name", () => {

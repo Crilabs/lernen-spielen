@@ -412,8 +412,12 @@ function warteFolge() {
 }
 
 // --- Pause am Rundenende (bedienung.md 7.1): Sachmoment, Alle Spiele und Weiter gleichwertig -------
-/** @param {{ hinweis?: string | null }} [optionen] hinweis = Spiel, in dem gerade etwas Neues dran ist */
-async function zeigePause({ hinweis = null } = {}) {
+// Dazu ruhig das Angebot „Mit echten Dingen“ zum Thema der Runde (docs/mit-echten-dingen.md, kein Muss, K8).
+/**
+ * @param {{ hinweis?: string | null, echteDinge?: { thema?: string, fach?: string, titel?: string, text?: string } | null }} [optionen]
+ *   hinweis = Spiel, in dem gerade etwas Neues dran ist; echteDinge = Thema der Runde
+ */
+async function zeigePause({ hinweis = null, echteDinge = null } = {}) {
   const karte = $("sachmoment");
   fuelleSachmoment(karte, leiste.ton);
   const spiel = hinweis ? (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id === hinweis) : null;
@@ -426,7 +430,7 @@ async function zeigePause({ hinweis = null } = {}) {
     karte.append(a);
   }
   stand.phase = "pause";
-  await pause.zeige(); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
+  await pause.zeige({ echteDinge }); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
   stand.phase = "laden";
 }
 
@@ -452,6 +456,7 @@ async function starteRunde(vorschau) {
   const plan = r.thema ? c.plan.themen.find((/** @type {any} */ t) => t.id === r.thema?.id) : null;
   return {
     thema: r.thema?.name ?? "",
+    echteDinge: plan ? { thema: plan.id, fach: plan.strang, titel: plan.name, text: plan.eltern ?? "" } : null,
     einfuehrung: r.einfuehrungFaellig ? plan?.einfuehrung ?? null : null,
     einfuehrungGesehen: () => r.einfuehrungGesehen(),
     naechste: () => r.naechste(),
@@ -465,6 +470,7 @@ function vorschauRunde() {
   const keys = [...VORSCHAU.aufgaben];
   return {
     thema: VORSCHAU.thema,
+    echteDinge: { titel: VORSCHAU.thema }, // die Karte findet die Anleitung über den Namen des Themas
     einfuehrung: null,
     einfuehrungGesehen() {},
     naechste() {
@@ -525,7 +531,7 @@ async function spieleRunde(vorschau) {
   }
 
   const { hinweisSpiel } = await r.ende();
-  await zeigePause({ hinweis: hinweisSpiel });
+  await zeigePause({ hinweis: hinweisSpiel, echteDinge: r.echteDinge });
   return spieleRunde(vorschau);
 }
 
@@ -541,7 +547,7 @@ async function start() {
   stand.vorschau = vorschau;
   if (params.has("pause") || params.has("hinweis")) {
     const andere = (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id !== SPIEL_ID)?.id ?? null;
-    await zeigePause({ hinweis: params.has("hinweis") ? params.get("hinweis") || andere : null });
+    await zeigePause({ hinweis: params.has("hinweis") ? params.get("hinweis") || andere : null, echteDinge: { titel: VORSCHAU.thema } });
   }
   await spieleRunde(vorschau);
 }
