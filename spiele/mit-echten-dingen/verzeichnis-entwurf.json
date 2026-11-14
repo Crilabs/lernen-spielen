@@ -28,18 +28,6 @@
    ],
    "entwurf": false
   },
-  "kernaufgaben-einmaleins": {
-   "fach": "mathe",
-   "name": "Kernaufgaben: mal 1, 2, 5, 10",
-   "titel": "Eier zum Backen planen",
-   "formen": [
-    {
-     "situation": "tisch",
-     "name": "Eierkarton und Zeilen"
-    }
-   ],
-   "entwurf": true
-  },
   "vorwaerts-zaehlen": {
    "fach": "mathe",
    "name": "Vorwärts zählen",
