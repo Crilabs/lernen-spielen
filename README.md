@@ -11,6 +11,10 @@ Die frühere Web-Fassung mit PHP ist entfernt.
 - `spiele/` – die Oberfläche der App: `index.html` (Startseite), `eltern.html`/`eltern.js` (Elternbereich),
   `lernspiel.js` (gemeinsame Hilfen der Spiele), die Spiele als HTML-Dateien,
   `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder samt Pausenbildern), `figuren/`, `saetze/`. Die übrigen Spiele zeichnen ihre Pausen selbst (SVG).
+- `spiele/rahmen/` – die gemeinsamen Bausteine jedes Spiels (Web Components `ls-*`: Kopfleiste, Knöpfe, Sprechblase,
+  Hilfe, Pause, Tastatur, Ziehen, Lernzeichen) und der Seiten-Grundstil `seite.css`. Wie sie aussehen und sich
+  bedienen lassen, steht in `docs/bedienung.md`. `spiele/rahmen/vorschau.html` zeigt alle Bausteine (Entwicklerseite);
+  die Browser-Prüfung dazu: `tests/browser/rahmen.spec.mjs` (Aufruf im Kopfkommentar, nicht Teil von `npm test`).
 - `spiele/kern/` – der Plattform-Kern: aller Zugriff auf Speicher (je Profil), Einstellungen (Ton je Spiel, Stimme
   je Gerät), Sprache und Gerätefähigkeiten (Update, Beenden, Kiosk). Siehe `dienste.js` (Schnittstellen),
   `speicher.js`, `einstellungen.js`, `stimme.js`, `geraet.js`, `protokoll.js`. Außerhalb von `kern/` darf kein Spiel
@@ -137,6 +141,10 @@ und nie mehr geschrieben.
 `npm test` prüft den Plan (eindeutige IDs, Voraussetzungen, jede Aufgabe in genau einem Thema, Einführungen).
 
 ## Neues Spiel hinzufügen
+
+Zuerst die Checkliste in `docs/bedienung.md` (Abschnitt 10) durchgehen: Kopfleiste, Blase, Hilfe, Pause, Tastatur
+und Ziehen kommen aus `spiele/rahmen/`, kein Spiel baut sie selbst. Eine Spielvorlage, von der aus man ein neues Spiel
+startet, folgt; bis dahin `spiele/rahmen/vorschau.html` als Muster für die Anordnung nehmen.
 
 1. HTML-Datei in `spiele/` anlegen. Speichern, Einstellungen, Sprache und Gerätefunktionen laufen nur über
    `spiele/kern/` (`lade`/`speichere`, `einstellung`/`setzeEinstellung`, `sprich`/`stille`, `faehigkeiten`).

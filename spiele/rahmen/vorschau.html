@@ -6,57 +6,40 @@
 <title>Rahmen-Bausteine</title>
 <link rel="stylesheet" href="seite.css">
 <style>
-  /* Vorschau der Rahmen-Bausteine auf dem Seiten-Grundstil (seite.css).
+  /* Entwicklerseite, nicht aus der App verlinkt: jeder Baustein einmal, in der Anordnung aus docs/bedienung.md 3.
      Adresse: vorschau.html?fach=mathe&titel=Perlenbrücke&thema=Die%207%20zerlegen  (&pause, &leuchte)
-     &ziehen zeigt statt Matte und Tastatur das Ziehen: Tablett mit drei Teilen, Matte mit zwei Lücken.
-     &lernzeichen zeigt die Lernzeichen: Perlentreppe 1–10, verdeckt, senkrecht, als Teil; die vier Wortarten. */
-  /* Welt-Schicht: der einzige Verlauf auf dem Bildschirm. */
+     Alle Maße in rem; Platz bleibt für 172 rem Breite (16:10), dort ist das sichere Feld schmaler als 192 rem. */
   .welt { background: linear-gradient(#CFEFFF, #EAF7FF 60%); }
   .huegel { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 34rem; }
-  ls-blase { position: absolute; top: 19rem; left: 50%; transform: translateX(-50%); width: min(110rem, calc(100% - 30rem)); }
-  .matte {
-    position: absolute; top: 36rem; left: 50%; transform: translateX(-50%);
-    width: min(120rem, calc(100% - 34rem)); height: 32rem; padding: 2rem;
-  }
-  .matte ls-knopf { position: absolute; right: 4rem; bottom: 4rem; }
-  .matte .aufgabe { position: relative; margin: 2.4rem 3rem; font-size: 4.4rem; font-weight: 700; line-height: 1; }
-  ls-tastatur { position: absolute; left: 50%; bottom: 2.4rem; transform: translateX(-50%); }
-  /* Ziehen (&ziehen): Matte mit zwei Lücken, darunter das Tablett mit dem Vorrat. */
-  .ziehen-demo[hidden] { display: none; }
-  .ziehen-matte {
-    position: absolute; top: 36rem; left: 50%; transform: translateX(-50%);
-    display: grid; gap: 3rem; padding: 3.6rem 7rem;
-    font-size: 6rem; font-weight: 700; line-height: 1;
-  }
-  .zeile { display: flex; align-items: center; gap: 2.4rem; }
-  .luecke {
-    display: grid; place-items: center; width: 15rem; height: 14rem;
-    background: var(--ls-nebel); border: var(--ls-kontur) solid var(--ls-linie); border-radius: var(--ls-radius);
-  }
+  .buehne > * { position: absolute; }
+
+  ls-blase { top: 19rem; left: 50%; transform: translateX(-50%); width: min(150rem, calc(100% - 30rem)); }
+
+  /* Links: das Lernfeld mit den Lernzeichen. */
+  .zeichen-feld { top: 35.4rem; left: 2.4rem; width: 90rem; display: grid; gap: 2.4rem; padding: 3.4rem 3.8rem; }
+  .staebe { display: grid; grid-template-columns: auto auto; justify-content: space-between; align-items: center; }
+  .reihe { display: grid; gap: 1.2rem; justify-items: start; }
+  .reihe ls-perlenstab { height: 4.2rem; }
+  .reihe .verdeckt { height: 6rem; }
+  .woerter { display: flex; align-items: flex-end; justify-content: space-between; }
+  .wort { display: grid; justify-items: center; gap: 1rem; font-size: 3.6rem; line-height: 1; }
+  .wort ls-wortart { height: 6rem; }
+
+  /* Rechts: Matte mit zwei Lücken, darunter das Tablett mit den Teilen. */
+  .matte { top: 35.4rem; left: 95rem; width: 75rem; display: flex; justify-content: space-around; align-items: center; padding: 2.6rem 2.4rem; font-size: 4.4rem; font-weight: 700; line-height: 1; }
+  .aufgabe { display: flex; align-items: center; gap: 1.6rem; white-space: nowrap; }
+  .luecke { display: grid; place-items: center; width: 12rem; height: 12rem; background: var(--ls-nebel); border: var(--ls-kontur) solid var(--ls-linie); border-radius: var(--ls-radius); }
   .luecke:has(.teil) { background: none; border-color: transparent; }
-  .ziehen-tablett {
-    position: absolute; top: 76rem; left: 50%; transform: translateX(-50%);
-    display: flex; gap: 4rem;
-  }
-  .ziehen-tablett .platz { display: grid; place-items: center; width: 15rem; height: 14rem; }
-  /* Lernzeichen (&lernzeichen) */
-  .lernzeichen-demo[hidden] { display: none; }
-  .lz-treppe {
-    position: absolute; top: 20rem; left: 6rem;
-    display: grid; gap: 1.2rem; justify-items: start; padding: 3.6rem 5rem;
-  }
-  .lz-treppe ls-perlenstab { height: 5.6rem; }
-  .lz-rechts { position: absolute; top: 20rem; left: 72rem; right: 6rem; display: grid; gap: 3rem; }
-  .lz-mathe {
-    display: grid; grid-template-columns: auto auto auto; align-items: center; justify-content: start;
-    gap: 4rem 6rem; padding: 3.6rem 5rem;
-  }
-  .lz-mathe .verdeckt { height: 6rem; grid-column: 1; justify-self: start; }
-  .lz-mathe ls-perlenstab[ausrichtung="senkrecht"] { width: 5rem; grid-row: 1 / span 3; }
-  .lz-mathe .teil { height: 11rem; padding: 1.8rem 2.4rem; justify-self: start; grid-area: 3 / 1; }
-  .lz-deutsch { display: flex; align-items: flex-end; justify-content: center; gap: 4rem; padding: 3.6rem 5rem; }
-  .lz-wort { display: grid; justify-items: center; gap: 1.4rem; font-size: 4.4rem; line-height: 1; }
-  .lz-wort ls-wortart { height: 7rem; }
+  .tablett-zeile { top: 56.4rem; left: 107rem; display: flex; gap: 4rem; padding: 2.4rem 5rem; }
+  .tablett-zeile .teil { margin: 0; }
+
+  /* Unten: Tastatur Mitte, Auslöser rechts daneben, Protokoll links. Hilfe sitzt selbst unten rechts. */
+  ls-tastatur { bottom: 2.4rem; left: 50%; transform: translateX(-50%); }
+  .ausloeser { right: 17.8rem; bottom: 2.4rem; display: grid; gap: 2rem; }
+  .protokoll { left: 2.4rem; bottom: 2.4rem; width: 44rem; height: 31rem; overflow: hidden; margin: 0; padding: 2rem 2.6rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-linie); border-radius: var(--ls-radius); font-size: 3.2rem; line-height: 1.3; list-style: none; }
+  .protokoll li { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .protokoll li:first-child { font-weight: 700; }
+
   .pausen-inhalt { display: grid; gap: 2rem; justify-items: center; font-size: 4rem; text-align: center; max-width: 90rem; }
   .pausen-inhalt img { width: 22rem; height: 22rem; }
 </style>
@@ -68,53 +51,45 @@
   <path d="M0 200 C480 150 900 210 1260 180 C1560 156 1770 170 1920 166 V340 H0Z" fill="#9ED8A8"/>
 </svg>
 </div>
-<ls-leiste id="leiste" spiel="vorschau"></ls-leiste>
+<ls-leiste id="leiste" spiel="vorschau" fach="mathe" titel="Perlenbrücke" thema="Die 7 zerlegen"></ls-leiste>
 <div class="buehne">
   <ls-blase id="blase"></ls-blase>
-  <div class="lernfeld matte">
-    <div class="aufgabe">7 sind 5 und …</div>
-    <ls-knopf art="haupt" symbol="zurueck.svg" wort="Weiter" gespiegelt></ls-knopf>
+
+  <div class="lernfeld zeichen-feld" id="zeichen">
+    <div class="staebe">
+      <div class="reihe">
+        <ls-perlenstab wert="5" ziffer></ls-perlenstab>
+        <ls-perlenstab wert="7" ziffer></ls-perlenstab>
+        <ls-perlenstab wert="10" ziffer></ls-perlenstab>
+      </div>
+      <div class="reihe">
+        <ls-perlenstab class="verdeckt" wert="7" verdeckt ziffer></ls-perlenstab>
+        <ls-perlenstab class="verdeckt" wert="7" verdeckt></ls-perlenstab>
+      </div>
+    </div>
+    <div class="woerter">
+      <span class="wort"><ls-wortart art="artikel"></ls-wortart>Die</span>
+      <span class="wort"><ls-wortart art="adjektiv"></ls-wortart>kleine</span>
+      <span class="wort"><ls-wortart art="nomen"></ls-wortart>Katze</span>
+      <span class="wort"><ls-wortart art="verb"></ls-wortart>schläft</span>
+    </div>
   </div>
+
+  <div class="lernfeld matte" id="matte">
+    <div class="aufgabe">3 + <span class="luecke" data-passt="2" name="Lücke bei 3 plus"></span> = 5</div>
+    <div class="aufgabe">4 + <span class="luecke" data-passt="1" name="Lücke bei 4 plus"></span> = 5</div>
+  </div>
+  <div class="tablett tablett-zeile" id="tablett">
+    <span class="teil" data-wert="1">1</span>
+    <span class="teil" data-wert="2">2</span>
+    <span class="teil" data-wert="3">3</span>
+  </div>
+
+  <ol class="protokoll" id="protokoll" aria-label="Ereignisse"></ol>
   <ls-tastatur id="tastatur" tasten="Die Katze schläft" leertaste loeschen></ls-tastatur>
-  <div class="ziehen-demo" hidden>
-    <div class="lernfeld ziehen-matte">
-      <div class="zeile">5 sind 3 und <span class="luecke" data-passt="2" name="Lücke bei 5 sind 3 und"></span></div>
-      <div class="zeile">5 sind 4 und <span class="luecke" data-passt="1" name="Lücke bei 5 sind 4 und"></span></div>
-    </div>
-    <div class="tablett ziehen-tablett">
-      <span class="platz"><span class="teil" data-wert="1">1</span></span>
-      <span class="platz"><span class="teil" data-wert="2">2</span></span>
-      <span class="platz"><span class="teil" data-wert="3">3</span></span>
-    </div>
-  </div>
-  <div class="lernzeichen-demo" hidden>
-    <div class="lernfeld lz-treppe">
-      <ls-perlenstab wert="1" ziffer></ls-perlenstab>
-      <ls-perlenstab wert="2" ziffer></ls-perlenstab>
-      <ls-perlenstab wert="3" ziffer></ls-perlenstab>
-      <ls-perlenstab wert="4" ziffer></ls-perlenstab>
-      <ls-perlenstab wert="5" ziffer></ls-perlenstab>
-      <ls-perlenstab wert="6" ziffer></ls-perlenstab>
-      <ls-perlenstab wert="7" ziffer></ls-perlenstab>
-      <ls-perlenstab wert="8" ziffer></ls-perlenstab>
-      <ls-perlenstab wert="9" ziffer></ls-perlenstab>
-      <ls-perlenstab wert="10" ziffer></ls-perlenstab>
-    </div>
-    <div class="lz-rechts">
-      <div class="lernfeld lz-mathe">
-        <ls-perlenstab class="verdeckt" wert="7" verdeckt ziffer style="grid-row: 1"></ls-perlenstab>
-        <ls-perlenstab class="verdeckt" wert="7" verdeckt style="grid-row: 2"></ls-perlenstab>
-        <ls-perlenstab wert="3" ausrichtung="senkrecht" ziffer></ls-perlenstab>
-        <ls-perlenstab wert="8" ausrichtung="senkrecht"></ls-perlenstab>
-        <ls-perlenstab class="teil" wert="4"></ls-perlenstab>
-      </div>
-      <div class="lernfeld lz-deutsch">
-        <span class="lz-wort"><ls-wortart art="artikel"></ls-wortart>Die</span>
-        <span class="lz-wort"><ls-wortart art="adjektiv"></ls-wortart>kleine</span>
-        <span class="lz-wort"><ls-wortart art="nomen"></ls-wortart>Katze</span>
-        <span class="lz-wort"><ls-wortart art="verb"></ls-wortart>schläft</span>
-      </div>
-    </div>
+  <div class="ausloeser">
+    <ls-knopf id="pausenknopf" art="haupt" wort="Pause"></ls-knopf>
+    <ls-knopf id="leuchtknopf" art="haupt" wort="Leuchte"></ls-knopf>
   </div>
 </div>
 <ls-hilfe id="hilfe"></ls-hilfe>
@@ -133,41 +108,61 @@
   import "./perlenstab.js";
   import "./wortart.js";
   import { ziehbar, setze, zurueck } from "./ziehen.js";
+
   const q = new URLSearchParams(location.search);
   const leiste = document.getElementById("leiste");
+  const hilfe = document.getElementById("hilfe");
+  const pause = document.getElementById("pause");
+  const liste = document.getElementById("protokoll");
+
+  // Ereignis-Protokoll: das neueste oben, sechs Zeilen; window.ereignisse hält alle (für die Browser-Prüfung).
+  window.ereignisse = [];
+  const merke = (text) => {
+    window.ereignisse.push(text);
+    const li = document.createElement("li");
+    li.textContent = text;
+    liste.prepend(li);
+    while (liste.children.length > 6) liste.lastChild.remove();
+  };
+
   for (const a of ["fach", "titel", "thema"]) if (q.get(a)) leiste.setAttribute(a, q.get(a));
-  const blase = document.getElementById("blase");
-  if (q.has("ziehen")) {
-    for (const el of document.querySelectorAll(".matte, ls-tastatur")) el.hidden = true;
-    document.querySelector(".ziehen-demo").hidden = false;
-    blase.sage("Welche Zahl passt in die Lücke?", { sprechen: false });
-    // Platzhalter-Spiel: passt die Zahl, bleibt sie in der Lücke, sonst kehrt sie aufs Tablett zurück.
-    window.abgelegt = [];
-    const freieLuecken = () => [...document.querySelectorAll(".luecke")].filter((l) => !l.querySelector(".teil"));
-    for (const teil of document.querySelectorAll(".ziehen-demo .teil")) {
-      const loesen = ziehbar(teil, {
-        ziele: freieLuecken,
-        beimAblegen(teil, luecke) {
-          window.abgelegt.push([teil.dataset.wert, luecke.dataset.passt]);
-          if (teil.dataset.wert === luecke.dataset.passt) {
-            setze(teil, luecke);
-            loesen();
-            teil.classList.add("gesetzt");
-          } else zurueck(teil);
-        },
-      });
-    }
-  } else if (q.has("lernzeichen")) {
-    for (const el of document.querySelectorAll(".matte, ls-tastatur, ls-blase")) el.hidden = true;
-    document.querySelector(".lernzeichen-demo").hidden = false;
-    // Das Teil zeigt, dass ein Perlenstab mit class="teil" ziehbar ist (hier ohne Ziel: es hebt sich nur an).
-    ziehbar(document.querySelector("ls-perlenstab.teil"), { ziele: [] });
-  } else {
-    blase.sage("Welches Stäbchen passt an die Fünf, damit es sieben werden?", { sprechen: false });
+  leiste.addEventListener("ton", (e) => merke(`ton ${e.detail.an ? "an" : "aus"}`));
+  leiste.addEventListener("bereit", () => merke("leiste bereit"));
+  hilfe.addEventListener("hilfe", () => merke("hilfe"));
+  document.getElementById("tastatur").addEventListener("taste", (e) => merke(`taste ${JSON.stringify(e.detail.zeichen)}`));
+
+  document.getElementById("blase").sage("Welches Stäbchen passt an die Fünf, damit es sieben werden?", { sprechen: false });
+
+  document.getElementById("leuchtknopf").addEventListener("click", () => {
+    hilfe.leuchte();
+    merke("leuchte");
+  });
+  const zeigePause = async () => {
+    merke("pause zeige");
+    merke(`pause ${await pause.zeige()}`);
+  };
+  document.getElementById("pausenknopf").addEventListener("click", zeigePause);
+
+  // Ziehen: passt die Zahl, bleibt sie in der Lücke, sonst kehrt sie aufs Tablett zurück.
+  window.abgelegt = [];
+  const freieLuecken = () => [...document.querySelectorAll(".luecke")].filter((l) => !l.querySelector(".teil"));
+  for (const teil of document.querySelectorAll("#tablett .teil")) {
+    const loesen = ziehbar(teil, {
+      ziele: freieLuecken,
+      beimAblegen(teil, luecke) {
+        window.abgelegt.push([teil.dataset.wert, luecke.dataset.passt]);
+        merke(`ablegen ${teil.dataset.wert} auf ${luecke.dataset.passt}`);
+        if (teil.dataset.wert === luecke.dataset.passt) {
+          setze(teil, luecke);
+          loesen();
+          teil.classList.add("gesetzt");
+        } else zurueck(teil);
+      },
+    });
   }
-  if (q.has("leuchte")) document.getElementById("hilfe").leuchte();
-  if (q.has("pause")) document.getElementById("pause").zeige();
-  if (q.has("leer")) document.querySelector(".pausen-inhalt").remove();
+
+  if (q.has("leuchte")) hilfe.leuchte();
+  if (q.has("pause")) zeigePause();
 </script>
 </body>
 </html>
