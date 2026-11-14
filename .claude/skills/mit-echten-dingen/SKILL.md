@@ -12,7 +12,13 @@ Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Am Tisch / I
 ## 0. Auswahl
 
 - Je Thema-Id aus `spiele/lernplan.json`: Fach = `strang`, Datei `spiele/mit-echten-dingen/<fach>/<thema-id>.md`.
-- **Gibt es die Datei schon, nichts tun** (auch wenn ein weiteres Spiel das Thema bedient). Nur Themen ohne Datei –
+- **Trägt eine Datei das Thema schon, nichts tun** (`thema:` oder in `themen:` einer Familie; auch wenn ein weiteres
+  Spiel das Thema bedient; `grep -rl "<thema-id>" spiele/mit-echten-dingen/*/`).
+- **Erst eine Familie suchen** (`docs/mit-echten-dingen.md` „Eine Anleitung für eine Familie“): Gibt es im Fach eine
+  Anleitung mit derselben Handlung, bei der nur ein Wert wechselt (Zahl, Buchstabe), kommt das Thema in ihre
+  `themen:`-Liste (aus `thema:` wird dabei `themen:`, die Datei bekommt den Namen der Familie, `git mv`), der Text
+  wird allgemein, und die Datei geht als Entwurf in die Prüfung (§4, E1 für jedes Thema der Liste). Keine neue Datei.
+  Themen mit eigener Schwierigkeit oder eigenem Alltagszweck bleiben getrennt. Nur Themen ohne Datei –
   Ausnahme: eine Datei mit `entwurf: true` ohne `geparkt` ist noch nicht fertig; sie geht ohne neues Schreiben gleich
   in die Prüfung (§4).
 - Mehrere Themen: je Thema ein eigener Durchlauf, jeder mit eigener Prüfung; im selben Arbeitsordner nacheinander,
@@ -44,7 +50,7 @@ Originalität; Begründung und verworfene Ansätze in den Bericht, **nicht** in 
 
 ```markdown
 ---
-thema: <thema-id>
+thema: <thema-id>          # oder für eine Familie: themen: mit einer Zeile „  - <thema-id>“ je Thema
 fach: <fach>
 entwurf: true
 bild: { figur: <art>, zustand: <zustand> }
@@ -96,7 +102,7 @@ Ein **neuer Agent, der nicht geschrieben hat**, bekommt nur: die Datei, den Lern
 
 | Nr. | Kriterium |
 |---|---|
-| E1 | trifft genau das Thema und isoliert seine Schwierigkeit |
+| E1 | trifft genau das Thema und isoliert seine Schwierigkeit; bei einer Familie: trägt jedes Thema der Liste |
 | E2 | „Darauf kommt es an“ benennt den Kern sachlich richtig |
 | E3 | nur Alltagsdinge, nichts zu kaufen, sicher |
 | E4 | Anrede „ihr“, kurze Sätze, für ein Kind der Klassenstufe lesbar |

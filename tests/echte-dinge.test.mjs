@@ -3,7 +3,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { anleitungen, baueVerzeichnis, alsText, VERZEICHNIS, VERZEICHNIS_ENTWURF } from "../werkzeuge/echte-dinge/verzeichnis.mjs";
+import { anleitungen, baueVerzeichnis, themenDerDatei, alsText, VERZEICHNIS, VERZEICHNIS_ENTWURF } from "../werkzeuge/echte-dinge/verzeichnis.mjs";
 import { liesAnleitung, formText } from "../spiele/rahmen/markdown.js";
 
 const plan = JSON.parse(readFileSync(new URL("../spiele/lernplan.json", import.meta.url), "utf8"));
@@ -37,6 +37,34 @@ test("Entwürfe und geparkte Anleitungen stehen nicht im Verzeichnis der App; da
   assert.equal(baueVerzeichnis(l, PLAN, { entwuerfe: true }).themen.b.entwurf, true);
 });
 
+const familie = (name, ids, kopf = "") => ({ fach: "mathe", thema: name, text: `---\nthemen:\n${ids.map((i) => `  - ${i}`).join("\n")}\n${kopf}---\n# T\n\n## Am Tisch: A\n\nText` });
+
+test("Familie: eine Datei mit `themen:` trägt jedes ihrer Themen, jedes mit dem Pfad der Datei", () => {
+  const v = baueVerzeichnis([datei("b", ""), familie("fam", ["a", "d"])], PLAN).themen;
+  assert.deepEqual(Object.keys(v).sort(), ["a", "b", "d"]);
+  assert.equal(v.a.datei, "mathe/fam.md");
+  assert.equal(v.d.datei, "mathe/fam.md");
+  assert.equal(v.b.datei, "mathe/b.md");
+  assert.equal(v.a.name, "Einmalig");
+});
+
+test("Familie: ein Entwurf steht nur im Entwurfs-Verzeichnis", () => {
+  const l = [familie("fam", ["a", "d"], "entwurf: true\n")];
+  assert.deepEqual(Object.keys(baueVerzeichnis(l, PLAN).themen), []);
+  assert.deepEqual(Object.keys(baueVerzeichnis(l, PLAN, { entwuerfe: true }).themen), ["a", "d"]);
+});
+
+test("ein Thema in zwei Dateien ist ein Fehler, der beide Dateien nennt", () => {
+  assert.throws(() => baueVerzeichnis([datei("a", ""), familie("fam", ["a", "d"])], PLAN, { entwuerfe: true }),
+    /a.*mathe\/a\.md.*mathe\/fam\.md/);
+});
+
+test("themenDerDatei: aus `themen` oder `thema`", () => {
+  assert.deepEqual(themenDerDatei({ themen: ["a", "d"] }), ["a", "d"]);
+  assert.deepEqual(themenDerDatei({ thema: "a" }), ["a"]);
+  assert.deepEqual(themenDerDatei({}), []);
+});
+
 test("Name des Themas nur, wenn er im ganzen Lernplan eindeutig ist", () => {
   const v = baueVerzeichnis([datei("a", ""), datei("b", "")], PLAN).themen;
   assert.equal(v.a.name, "Einmalig");
@@ -53,9 +81,11 @@ test("Name des Themas nur, wenn er im ganzen Lernplan eindeutig ist", () => {
 for (const a of liste) {
   test(`${a.fach}/${a.thema}.md: Kopf, Thema im Lernplan, Formen vollständig, Regeln für den Text`, () => {
     const l = liesAnleitung(a.text);
-    assert.equal(l.kopf.thema, a.thema, "thema im Kopf = Dateiname");
+    assert.ok(("thema" in l.kopf) !== ("themen" in l.kopf), "genau eines von thema / themen im Kopf");
+    if ("thema" in l.kopf) assert.equal(l.kopf.thema, a.thema, "thema im Kopf = Dateiname");
+    else assert.ok(Array.isArray(l.kopf.themen) && l.kopf.themen.length >= 2, "themen: eine Liste mit mindestens zwei Themen");
     assert.equal(l.kopf.fach, a.fach, "fach im Kopf = Ordner");
-    assert.equal(themen.get(a.thema)?.strang, a.fach, "Thema steht im Lernplan in diesem Fach");
+    for (const id of themenDerDatei(l.kopf)) assert.equal(themen.get(id)?.strang, a.fach, `${id} steht im Lernplan in diesem Fach`);
     assert.ok(Array.isArray(l.kopf.quellen) && l.kopf.quellen.length >= 1, "Quellen im Kopf");
     for (const q of /** @type {string[]} */ (l.kopf.quellen)) assert.match(q, /https?:\/\/\S+/, `Quelle mit Adresse: ${q}`);
     assert.ok(l.titel, "Überschrift # in Alltagssprache");

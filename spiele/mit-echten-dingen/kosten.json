@@ -440,5 +440,2034 @@
   "thema": [
    "viererreihe"
   ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 90,
+  "ausgabe": 27242,
+  "einheit": "tokens",
+  "menge": 4711740,
+  "notiz": "zerlegen, schreiben ",
+  "cache_lesen": 4546122,
+  "cache_schreiben": 138286,
+  "themen": 9,
+  "thema": [
+   "zerlegen-2",
+   "zerlegen-3",
+   "zerlegen-4",
+   "zerlegen-5",
+   "zerlegen-6",
+   "zerlegen-7",
+   "zerlegen-8",
+   "zerlegen-9",
+   "zerlegen-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 10131,
+  "einheit": "tokens",
+  "menge": 1191233,
+  "notiz": "vorwaerts-zaehlen, schreiben ",
+  "cache_lesen": 1109151,
+  "cache_schreiben": 71921,
+  "themen": 1,
+  "thema": [
+   "vorwaerts-zaehlen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 10500,
+  "einheit": "tokens",
+  "menge": 1211708,
+  "notiz": "silben-klatschen, schreiben ",
+  "cache_lesen": 1126081,
+  "cache_schreiben": 75097,
+  "themen": 1,
+  "thema": [
+   "silben-klatschen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 66,
+  "ausgabe": 21469,
+  "einheit": "tokens",
+  "menge": 3244143,
+  "notiz": "achterreihe, schreiben ",
+  "cache_lesen": 3118319,
+  "cache_schreiben": 104289,
+  "themen": 1,
+  "thema": [
+   "achterreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 50,
+  "ausgabe": 15676,
+  "einheit": "tokens",
+  "menge": 2392816,
+  "notiz": "dreierreihe, schreiben ",
+  "cache_lesen": 2278348,
+  "cache_schreiben": 98742,
+  "themen": 1,
+  "thema": [
+   "dreierreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 42,
+  "ausgabe": 13394,
+  "einheit": "tokens",
+  "menge": 1764126,
+  "notiz": "sechserreihe, schreiben ",
+  "cache_lesen": 1667610,
+  "cache_schreiben": 83080,
+  "themen": 1,
+  "thema": [
+   "sechserreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 58,
+  "ausgabe": 18407,
+  "einheit": "tokens",
+  "menge": 2827895,
+  "notiz": "neunerreihe, schreiben ",
+  "cache_lesen": 2703738,
+  "cache_schreiben": 105692,
+  "themen": 1,
+  "thema": [
+   "neunerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 56,
+  "ausgabe": 19335,
+  "einheit": "tokens",
+  "menge": 2925282,
+  "notiz": "siebenerreihe, schreiben ",
+  "cache_lesen": 2792159,
+  "cache_schreiben": 113732,
+  "themen": 1,
+  "thema": [
+   "siebenerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 52,
+  "ausgabe": 18015,
+  "einheit": "tokens",
+  "menge": 2497177,
+  "notiz": "einmaleins-gemischt, schreiben ",
+  "cache_lesen": 2377551,
+  "cache_schreiben": 101559,
+  "themen": 1,
+  "thema": [
+   "einmaleins-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 54,
+  "ausgabe": 18729,
+  "einheit": "tokens",
+  "menge": 2559162,
+  "notiz": "einmaleins-sicher, schreiben ",
+  "cache_lesen": 2439684,
+  "cache_schreiben": 100695,
+  "themen": 1,
+  "thema": [
+   "einmaleins-sicher"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 52,
+  "ausgabe": 17160,
+  "einheit": "tokens",
+  "menge": 2464789,
+  "notiz": "geteilt-umkehrung-mal, schreiben ",
+  "cache_lesen": 2346393,
+  "cache_schreiben": 101184,
+  "themen": 1,
+  "thema": [
+   "geteilt-umkehrung-mal"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 62,
+  "ausgabe": 20640,
+  "einheit": "tokens",
+  "menge": 3252394,
+  "notiz": "geteilt-durch-2-5-10, schreiben ",
+  "cache_lesen": 3120994,
+  "cache_schreiben": 110698,
+  "themen": 1,
+  "thema": [
+   "geteilt-durch-2-5-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 62,
+  "ausgabe": 21021,
+  "einheit": "tokens",
+  "menge": 3198911,
+  "notiz": "geteilt-alle-reihen, schreiben ",
+  "cache_lesen": 3064254,
+  "cache_schreiben": 113574,
+  "themen": 1,
+  "thema": [
+   "geteilt-alle-reihen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 58,
+  "ausgabe": 19220,
+  "einheit": "tokens",
+  "menge": 2678987,
+  "notiz": "teiler-vielfache, schreiben ",
+  "cache_lesen": 2562155,
+  "cache_schreiben": 97554,
+  "themen": 1,
+  "thema": [
+   "teiler-vielfache"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 14449,
+  "einheit": "tokens",
+  "menge": 2056815,
+  "notiz": "teiler-begruenden, schreiben ",
+  "cache_lesen": 1959751,
+  "cache_schreiben": 82567,
+  "themen": 1,
+  "thema": [
+   "teiler-begruenden"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 42,
+  "ausgabe": 15241,
+  "einheit": "tokens",
+  "menge": 1783200,
+  "notiz": "nomen-gross-artikelprobe, schreiben ",
+  "cache_lesen": 1683226,
+  "cache_schreiben": 84691,
+  "themen": 1,
+  "thema": [
+   "nomen-gross-artikelprobe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 80,
+  "ausgabe": 20512,
+  "einheit": "tokens",
+  "menge": 3987193,
+  "notiz": "namen-gross, schreiben ",
+  "cache_lesen": 3857308,
+  "cache_schreiben": 109293,
+  "themen": 1,
+  "thema": [
+   "namen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 64,
+  "ausgabe": 19647,
+  "einheit": "tokens",
+  "menge": 2878219,
+  "notiz": "abstrakte-nomen-gross, schreiben ",
+  "cache_lesen": 2763212,
+  "cache_schreiben": 95296,
+  "themen": 1,
+  "thema": [
+   "abstrakte-nomen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 46,
+  "ausgabe": 17265,
+  "einheit": "tokens",
+  "menge": 1927796,
+  "notiz": "nachsilben-ung-heit-keit-nis, schreiben ",
+  "cache_lesen": 1822336,
+  "cache_schreiben": 88149,
+  "themen": 1,
+  "thema": [
+   "nachsilben-ung-heit-keit-nis"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 54,
+  "ausgabe": 16392,
+  "einheit": "tokens",
+  "menge": 2539159,
+  "notiz": "adjektiv-in-nominalgruppe-klein, schreiben ",
+  "cache_lesen": 2423048,
+  "cache_schreiben": 99665,
+  "themen": 1,
+  "thema": [
+   "adjektiv-in-nominalgruppe-klein"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 58,
+  "ausgabe": 18923,
+  "einheit": "tokens",
+  "menge": 2894695,
+  "notiz": "verben-als-nomen, schreiben ",
+  "cache_lesen": 2766174,
+  "cache_schreiben": 109540,
+  "themen": 1,
+  "thema": [
+   "verben-als-nomen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 54,
+  "ausgabe": 16415,
+  "einheit": "tokens",
+  "menge": 2420992,
+  "notiz": "der-die-das, schreiben ",
+  "cache_lesen": 2308882,
+  "cache_schreiben": 95641,
+  "themen": 1,
+  "thema": [
+   "der-die-das"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 64,
+  "ausgabe": 21891,
+  "einheit": "tokens",
+  "menge": 3394788,
+  "notiz": "geschlecht-des-nomens, schreiben ",
+  "cache_lesen": 3255017,
+  "cache_schreiben": 117816,
+  "themen": 1,
+  "thema": [
+   "geschlecht-des-nomens"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 10401,
+  "einheit": "tokens",
+  "menge": 961984,
+  "notiz": "silben-klatschen, pruefen 1",
+  "cache_lesen": 862256,
+  "cache_schreiben": 89299,
+  "themen": 1,
+  "thema": [
+   "silben-klatschen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 11969,
+  "einheit": "tokens",
+  "menge": 1003897,
+  "notiz": "vorwaerts-zaehlen, pruefen 1",
+  "cache_lesen": 924030,
+  "cache_schreiben": 67868,
+  "themen": 1,
+  "thema": [
+   "vorwaerts-zaehlen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 32,
+  "ausgabe": 12731,
+  "einheit": "tokens",
+  "menge": 1158299,
+  "notiz": "sechserreihe, pruefen 1",
+  "cache_lesen": 1076123,
+  "cache_schreiben": 69413,
+  "themen": 1,
+  "thema": [
+   "sechserreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 11754,
+  "einheit": "tokens",
+  "menge": 1007077,
+  "notiz": "nomen-gross-artikelprobe, pruefen 1",
+  "cache_lesen": 920674,
+  "cache_schreiben": 74621,
+  "themen": 1,
+  "thema": [
+   "nomen-gross-artikelprobe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 26,
+  "ausgabe": 10916,
+  "einheit": "tokens",
+  "menge": 957377,
+  "notiz": "dreierreihe, pruefen 1",
+  "cache_lesen": 878564,
+  "cache_schreiben": 67871,
+  "themen": 1,
+  "thema": [
+   "dreierreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 32,
+  "ausgabe": 11243,
+  "einheit": "tokens",
+  "menge": 1032637,
+  "notiz": "geteilt-umkehrung-mal, pruefen 1",
+  "cache_lesen": 955114,
+  "cache_schreiben": 66248,
+  "themen": 1,
+  "thema": [
+   "geteilt-umkehrung-mal"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 10107,
+  "einheit": "tokens",
+  "menge": 885319,
+  "notiz": "teiler-vielfache, pruefen 1",
+  "cache_lesen": 813883,
+  "cache_schreiben": 61301,
+  "themen": 1,
+  "thema": [
+   "teiler-vielfache"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 13166,
+  "einheit": "tokens",
+  "menge": 1043312,
+  "notiz": "einmaleins-sicher, pruefen 1",
+  "cache_lesen": 951569,
+  "cache_schreiben": 78549,
+  "themen": 1,
+  "thema": [
+   "einmaleins-sicher"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 32,
+  "ausgabe": 11719,
+  "einheit": "tokens",
+  "menge": 1135439,
+  "notiz": "einmaleins-gemischt, pruefen 1",
+  "cache_lesen": 1051133,
+  "cache_schreiben": 72555,
+  "themen": 1,
+  "thema": [
+   "einmaleins-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 13769,
+  "einheit": "tokens",
+  "menge": 1067675,
+  "notiz": "neunerreihe, pruefen 1",
+  "cache_lesen": 979699,
+  "cache_schreiben": 74177,
+  "themen": 1,
+  "thema": [
+   "neunerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 38,
+  "ausgabe": 11447,
+  "einheit": "tokens",
+  "menge": 1340216,
+  "notiz": "siebenerreihe, pruefen 1",
+  "cache_lesen": 1257763,
+  "cache_schreiben": 70968,
+  "themen": 1,
+  "thema": [
+   "siebenerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 10509,
+  "einheit": "tokens",
+  "menge": 996878,
+  "notiz": "geteilt-alle-reihen, pruefen 1",
+  "cache_lesen": 917846,
+  "cache_schreiben": 68495,
+  "themen": 1,
+  "thema": [
+   "geteilt-alle-reihen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 38,
+  "ausgabe": 12724,
+  "einheit": "tokens",
+  "menge": 1345927,
+  "notiz": "geteilt-durch-2-5-10, pruefen 1",
+  "cache_lesen": 1261520,
+  "cache_schreiben": 71645,
+  "themen": 1,
+  "thema": [
+   "geteilt-durch-2-5-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 34,
+  "ausgabe": 14261,
+  "einheit": "tokens",
+  "menge": 1109738,
+  "notiz": "achterreihe, pruefen 1",
+  "cache_lesen": 1027617,
+  "cache_schreiben": 67826,
+  "themen": 1,
+  "thema": [
+   "achterreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 10922,
+  "einheit": "tokens",
+  "menge": 1121739,
+  "notiz": "teiler-begruenden, pruefen 1",
+  "cache_lesen": 1031610,
+  "cache_schreiben": 79177,
+  "themen": 1,
+  "thema": [
+   "teiler-begruenden"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 10599,
+  "einheit": "tokens",
+  "menge": 747922,
+  "notiz": "silben-klatschen, ueberarbeiten 1",
+  "cache_lesen": 649512,
+  "cache_schreiben": 87791,
+  "themen": 1,
+  "thema": [
+   "silben-klatschen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 32,
+  "ausgabe": 14597,
+  "einheit": "tokens",
+  "menge": 1155036,
+  "notiz": "zerlegen, pruefen 1",
+  "cache_lesen": 1062339,
+  "cache_schreiben": 78068,
+  "themen": 9,
+  "thema": [
+   "zerlegen-2",
+   "zerlegen-3",
+   "zerlegen-4",
+   "zerlegen-5",
+   "zerlegen-6",
+   "zerlegen-7",
+   "zerlegen-8",
+   "zerlegen-9",
+   "zerlegen-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 12,
+  "ausgabe": 4676,
+  "einheit": "tokens",
+  "menge": 359702,
+  "notiz": "nomen-gross-artikelprobe, ueberarbeiten 1",
+  "cache_lesen": 309473,
+  "cache_schreiben": 45541,
+  "themen": 1,
+  "thema": [
+   "nomen-gross-artikelprobe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 40,
+  "ausgabe": 12384,
+  "einheit": "tokens",
+  "menge": 1541582,
+  "notiz": "adjektiv-in-nominalgruppe-klein, pruefen 1",
+  "cache_lesen": 1447652,
+  "cache_schreiben": 81506,
+  "themen": 1,
+  "thema": [
+   "adjektiv-in-nominalgruppe-klein"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 32,
+  "ausgabe": 10960,
+  "einheit": "tokens",
+  "menge": 1035370,
+  "notiz": "abstrakte-nomen-gross, pruefen 1",
+  "cache_lesen": 959928,
+  "cache_schreiben": 64450,
+  "themen": 1,
+  "thema": [
+   "abstrakte-nomen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 902,
+  "einheit": "tokens",
+  "menge": 189251,
+  "notiz": "teiler-vielfache, abschluss ",
+  "cache_lesen": 159541,
+  "cache_schreiben": 28800,
+  "themen": 1,
+  "thema": [
+   "teiler-vielfache"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 5994,
+  "einheit": "tokens",
+  "menge": 566197,
+  "notiz": "dreierreihe, ueberarbeiten 1",
+  "cache_lesen": 511639,
+  "cache_schreiben": 48546,
+  "themen": 1,
+  "thema": [
+   "dreierreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 32,
+  "ausgabe": 12542,
+  "einheit": "tokens",
+  "menge": 1106628,
+  "notiz": "nachsilben-ung-heit-keit-nis, pruefen 1",
+  "cache_lesen": 1023697,
+  "cache_schreiben": 70357,
+  "themen": 1,
+  "thema": [
+   "nachsilben-ung-heit-keit-nis"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 6427,
+  "einheit": "tokens",
+  "menge": 687702,
+  "notiz": "sechserreihe, ueberarbeiten 1",
+  "cache_lesen": 625448,
+  "cache_schreiben": 55807,
+  "themen": 1,
+  "thema": [
+   "sechserreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 62,
+  "ausgabe": 25068,
+  "einheit": "tokens",
+  "menge": 3140814,
+  "notiz": "vorwaerts-zaehlen, ueberarbeiten 1",
+  "cache_lesen": 3005600,
+  "cache_schreiben": 110084,
+  "themen": 1,
+  "thema": [
+   "vorwaerts-zaehlen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 38,
+  "ausgabe": 16007,
+  "einheit": "tokens",
+  "menge": 1711949,
+  "notiz": "geteilt-umkehrung-mal, ueberarbeiten 1",
+  "cache_lesen": 1611189,
+  "cache_schreiben": 84715,
+  "themen": 1,
+  "thema": [
+   "geteilt-umkehrung-mal"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 36,
+  "ausgabe": 14871,
+  "einheit": "tokens",
+  "menge": 1316503,
+  "notiz": "der-die-das, pruefen 1",
+  "cache_lesen": 1226523,
+  "cache_schreiben": 75073,
+  "themen": 1,
+  "thema": [
+   "der-die-das"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 36,
+  "ausgabe": 11245,
+  "einheit": "tokens",
+  "menge": 1244746,
+  "notiz": "namen-gross, pruefen 1",
+  "cache_lesen": 1162420,
+  "cache_schreiben": 71045,
+  "themen": 1,
+  "thema": [
+   "namen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 34,
+  "ausgabe": 12552,
+  "einheit": "tokens",
+  "menge": 1200261,
+  "notiz": "verben-als-nomen, pruefen 1",
+  "cache_lesen": 1110200,
+  "cache_schreiben": 77475,
+  "themen": 1,
+  "thema": [
+   "verben-als-nomen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 10180,
+  "einheit": "tokens",
+  "menge": 636860,
+  "notiz": "nomen-gross-artikelprobe, pruefen 2",
+  "cache_lesen": 572979,
+  "cache_schreiben": 53681,
+  "themen": 1,
+  "thema": [
+   "nomen-gross-artikelprobe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 50,
+  "ausgabe": 19907,
+  "einheit": "tokens",
+  "menge": 2358615,
+  "notiz": "einmaleins-sicher, ueberarbeiten 1",
+  "cache_lesen": 2243132,
+  "cache_schreiben": 95526,
+  "themen": 1,
+  "thema": [
+   "einmaleins-sicher"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 8394,
+  "einheit": "tokens",
+  "menge": 718116,
+  "notiz": "dreierreihe, pruefen 2",
+  "cache_lesen": 654722,
+  "cache_schreiben": 54976,
+  "themen": 1,
+  "thema": [
+   "dreierreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 34,
+  "ausgabe": 12219,
+  "einheit": "tokens",
+  "menge": 1390009,
+  "notiz": "geschlecht-des-nomens, pruefen 1",
+  "cache_lesen": 1290044,
+  "cache_schreiben": 87712,
+  "themen": 1,
+  "thema": [
+   "geschlecht-des-nomens"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 6002,
+  "einheit": "tokens",
+  "menge": 526133,
+  "notiz": "geteilt-alle-reihen, ueberarbeiten 1",
+  "cache_lesen": 468657,
+  "cache_schreiben": 51458,
+  "themen": 1,
+  "thema": [
+   "geteilt-alle-reihen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 9736,
+  "einheit": "tokens",
+  "menge": 706625,
+  "notiz": "silben-klatschen, pruefen 2",
+  "cache_lesen": 619463,
+  "cache_schreiben": 77406,
+  "themen": 1,
+  "thema": [
+   "silben-klatschen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 11238,
+  "einheit": "tokens",
+  "menge": 816124,
+  "notiz": "einmaleins-gemischt, ueberarbeiten 1",
+  "cache_lesen": 741849,
+  "cache_schreiben": 63015,
+  "themen": 1,
+  "thema": [
+   "einmaleins-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 8639,
+  "einheit": "tokens",
+  "menge": 721222,
+  "notiz": "sechserreihe, pruefen 2",
+  "cache_lesen": 655426,
+  "cache_schreiben": 57135,
+  "themen": 1,
+  "thema": [
+   "sechserreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 3933,
+  "einheit": "tokens",
+  "menge": 393703,
+  "notiz": "teiler-begruenden, ueberarbeiten 1",
+  "cache_lesen": 350338,
+  "cache_schreiben": 39418,
+  "themen": 1,
+  "thema": [
+   "teiler-begruenden"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 5599,
+  "einheit": "tokens",
+  "menge": 798685,
+  "notiz": "siebenerreihe, ueberarbeiten 1",
+  "cache_lesen": 741059,
+  "cache_schreiben": 52003,
+  "themen": 1,
+  "thema": [
+   "siebenerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 42,
+  "ausgabe": 23993,
+  "einheit": "tokens",
+  "menge": 1980679,
+  "notiz": "neunerreihe, ueberarbeiten 1",
+  "cache_lesen": 1863652,
+  "cache_schreiben": 92992,
+  "themen": 1,
+  "thema": [
+   "neunerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 26,
+  "ausgabe": 12098,
+  "einheit": "tokens",
+  "menge": 971612,
+  "notiz": "geteilt-durch-2-5-10, ueberarbeiten 1",
+  "cache_lesen": 890353,
+  "cache_schreiben": 69135,
+  "themen": 1,
+  "thema": [
+   "geteilt-durch-2-5-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 7359,
+  "einheit": "tokens",
+  "menge": 710321,
+  "notiz": "achterreihe, ueberarbeiten 1",
+  "cache_lesen": 653871,
+  "cache_schreiben": 49069,
+  "themen": 1,
+  "thema": [
+   "achterreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 11140,
+  "einheit": "tokens",
+  "menge": 1137329,
+  "notiz": "zerlegen, ueberarbeiten 1",
+  "cache_lesen": 1052468,
+  "cache_schreiben": 73693,
+  "themen": 9,
+  "thema": [
+   "zerlegen-2",
+   "zerlegen-3",
+   "zerlegen-4",
+   "zerlegen-5",
+   "zerlegen-6",
+   "zerlegen-7",
+   "zerlegen-8",
+   "zerlegen-9",
+   "zerlegen-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1026,
+  "einheit": "tokens",
+  "menge": 190055,
+  "notiz": "adjektiv-in-nominalgruppe-klein, abschluss ",
+  "cache_lesen": 159973,
+  "cache_schreiben": 29048,
+  "themen": 1,
+  "thema": [
+   "adjektiv-in-nominalgruppe-klein"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1070,
+  "einheit": "tokens",
+  "menge": 190279,
+  "notiz": "abstrakte-nomen-gross, abschluss ",
+  "cache_lesen": 160104,
+  "cache_schreiben": 29097,
+  "themen": 1,
+  "thema": [
+   "abstrakte-nomen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 10740,
+  "einheit": "tokens",
+  "menge": 743119,
+  "notiz": "geteilt-alle-reihen, pruefen 2",
+  "cache_lesen": 656245,
+  "cache_schreiben": 76114,
+  "themen": 1,
+  "thema": [
+   "geteilt-alle-reihen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1137,
+  "einheit": "tokens",
+  "menge": 190354,
+  "notiz": "nachsilben-ung-heit-keit-nis, abschluss ",
+  "cache_lesen": 160026,
+  "cache_schreiben": 29183,
+  "themen": 1,
+  "thema": [
+   "nachsilben-ung-heit-keit-nis"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1043,
+  "einheit": "tokens",
+  "menge": 190486,
+  "notiz": "nomen-gross-artikelprobe, abschluss ",
+  "cache_lesen": 160231,
+  "cache_schreiben": 29204,
+  "themen": 1,
+  "thema": [
+   "nomen-gross-artikelprobe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 7642,
+  "einheit": "tokens",
+  "menge": 543978,
+  "notiz": "teiler-begruenden, pruefen 2",
+  "cache_lesen": 487160,
+  "cache_schreiben": 49156,
+  "themen": 1,
+  "thema": [
+   "teiler-begruenden"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 969,
+  "einheit": "tokens",
+  "menge": 190034,
+  "notiz": "dreierreihe, abschluss ",
+  "cache_lesen": 159989,
+  "cache_schreiben": 29068,
+  "themen": 1,
+  "thema": [
+   "dreierreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 10,
+  "ausgabe": 1243,
+  "einheit": "tokens",
+  "menge": 238029,
+  "notiz": "silben-klatschen, abschluss ",
+  "cache_lesen": 207960,
+  "cache_schreiben": 28816,
+  "themen": 1,
+  "thema": [
+   "silben-klatschen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 7913,
+  "einheit": "tokens",
+  "menge": 615134,
+  "notiz": "siebenerreihe, pruefen 2",
+  "cache_lesen": 556735,
+  "cache_schreiben": 50466,
+  "themen": 1,
+  "thema": [
+   "siebenerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 977,
+  "einheit": "tokens",
+  "menge": 190065,
+  "notiz": "sechserreihe, abschluss ",
+  "cache_lesen": 160011,
+  "cache_schreiben": 29069,
+  "themen": 1,
+  "thema": [
+   "sechserreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 10654,
+  "einheit": "tokens",
+  "menge": 2113584,
+  "notiz": "namen-gross, ueberarbeiten 1",
+  "cache_lesen": 2012360,
+  "cache_schreiben": 90522,
+  "themen": 1,
+  "thema": [
+   "namen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 5910,
+  "einheit": "tokens",
+  "menge": 558775,
+  "notiz": "verben-als-nomen, ueberarbeiten 1",
+  "cache_lesen": 505898,
+  "cache_schreiben": 46949,
+  "themen": 1,
+  "thema": [
+   "verben-als-nomen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 11051,
+  "einheit": "tokens",
+  "menge": 519333,
+  "notiz": "einmaleins-gemischt, pruefen 2",
+  "cache_lesen": 450135,
+  "cache_schreiben": 58131,
+  "themen": 1,
+  "thema": [
+   "einmaleins-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 9098,
+  "einheit": "tokens",
+  "menge": 759798,
+  "notiz": "geteilt-umkehrung-mal, pruefen 2",
+  "cache_lesen": 690893,
+  "cache_schreiben": 59783,
+  "themen": 1,
+  "thema": [
+   "geteilt-umkehrung-mal"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 10,
+  "ausgabe": 3021,
+  "einheit": "tokens",
+  "menge": 265358,
+  "notiz": "geschlecht-des-nomens, ueberarbeiten 1",
+  "cache_lesen": 226910,
+  "cache_schreiben": 35417,
+  "themen": 1,
+  "thema": [
+   "geschlecht-des-nomens"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 6867,
+  "einheit": "tokens",
+  "menge": 604025,
+  "notiz": "der-die-das, ueberarbeiten 1",
+  "cache_lesen": 543578,
+  "cache_schreiben": 53562,
+  "themen": 1,
+  "thema": [
+   "der-die-das"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 10392,
+  "einheit": "tokens",
+  "menge": 957225,
+  "notiz": "achterreihe, pruefen 2",
+  "cache_lesen": 879876,
+  "cache_schreiben": 66929,
+  "themen": 1,
+  "thema": [
+   "achterreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 26,
+  "ausgabe": 7678,
+  "einheit": "tokens",
+  "menge": 768124,
+  "notiz": "geschlecht-des-nomens, pruefen 2",
+  "cache_lesen": 707872,
+  "cache_schreiben": 52548,
+  "themen": 1,
+  "thema": [
+   "geschlecht-des-nomens"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1032,
+  "einheit": "tokens",
+  "menge": 189945,
+  "notiz": "teiler-begruenden, abschluss ",
+  "cache_lesen": 159835,
+  "cache_schreiben": 29070,
+  "themen": 1,
+  "thema": [
+   "teiler-begruenden"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 32,
+  "ausgabe": 13138,
+  "einheit": "tokens",
+  "menge": 1290151,
+  "notiz": "zerlegen, pruefen 2",
+  "cache_lesen": 1190131,
+  "cache_schreiben": 86850,
+  "themen": 9,
+  "thema": [
+   "zerlegen-2",
+   "zerlegen-3",
+   "zerlegen-4",
+   "zerlegen-5",
+   "zerlegen-6",
+   "zerlegen-7",
+   "zerlegen-8",
+   "zerlegen-9",
+   "zerlegen-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 13953,
+  "einheit": "tokens",
+  "menge": 1058587,
+  "notiz": "geteilt-durch-2-5-10, pruefen 2",
+  "cache_lesen": 975460,
+  "cache_schreiben": 69144,
+  "themen": 1,
+  "thema": [
+   "geteilt-durch-2-5-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 13183,
+  "einheit": "tokens",
+  "menge": 1028994,
+  "notiz": "vorwaerts-zaehlen, pruefen 2",
+  "cache_lesen": 947407,
+  "cache_schreiben": 68376,
+  "themen": 1,
+  "thema": [
+   "vorwaerts-zaehlen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 9078,
+  "einheit": "tokens",
+  "menge": 1094574,
+  "notiz": "verben-als-nomen, pruefen 2",
+  "cache_lesen": 1009728,
+  "cache_schreiben": 75738,
+  "themen": 1,
+  "thema": [
+   "verben-als-nomen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 2683,
+  "einheit": "tokens",
+  "menge": 207245,
+  "notiz": "geteilt-alle-reihen, ueberarbeiten 2",
+  "cache_lesen": 170783,
+  "cache_schreiben": 33771,
+  "themen": 1,
+  "thema": [
+   "geteilt-alle-reihen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 943,
+  "einheit": "tokens",
+  "menge": 189978,
+  "notiz": "siebenerreihe, abschluss ",
+  "cache_lesen": 159978,
+  "cache_schreiben": 29049,
+  "themen": 1,
+  "thema": [
+   "siebenerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 14079,
+  "einheit": "tokens",
+  "menge": 964730,
+  "notiz": "einmaleins-sicher, pruefen 2",
+  "cache_lesen": 887719,
+  "cache_schreiben": 62902,
+  "themen": 1,
+  "thema": [
+   "einmaleins-sicher"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 10099,
+  "einheit": "tokens",
+  "menge": 995243,
+  "notiz": "der-die-das, pruefen 2",
+  "cache_lesen": 919290,
+  "cache_schreiben": 65824,
+  "themen": 1,
+  "thema": [
+   "der-die-das"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 8512,
+  "einheit": "tokens",
+  "menge": 859604,
+  "notiz": "geteilt-alle-reihen, pruefen 3",
+  "cache_lesen": 774584,
+  "cache_schreiben": 76484,
+  "themen": 1,
+  "thema": [
+   "geteilt-alle-reihen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 18152,
+  "einheit": "tokens",
+  "menge": 1238498,
+  "notiz": "einmaleins-gemischt, ueberarbeiten 2",
+  "cache_lesen": 1138877,
+  "cache_schreiben": 81441,
+  "themen": 1,
+  "thema": [
+   "einmaleins-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1024,
+  "einheit": "tokens",
+  "menge": 189946,
+  "notiz": "geteilt-umkehrung-mal, abschluss ",
+  "cache_lesen": 159888,
+  "cache_schreiben": 29026,
+  "themen": 1,
+  "thema": [
+   "geteilt-umkehrung-mal"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1106,
+  "einheit": "tokens",
+  "menge": 189821,
+  "notiz": "geschlecht-des-nomens, abschluss ",
+  "cache_lesen": 159700,
+  "cache_schreiben": 29007,
+  "themen": 1,
+  "thema": [
+   "geschlecht-des-nomens"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1038,
+  "einheit": "tokens",
+  "menge": 189711,
+  "notiz": "achterreihe, abschluss ",
+  "cache_lesen": 159687,
+  "cache_schreiben": 28978,
+  "themen": 1,
+  "thema": [
+   "achterreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 917,
+  "einheit": "tokens",
+  "menge": 189641,
+  "notiz": "verben-als-nomen, abschluss ",
+  "cache_lesen": 159790,
+  "cache_schreiben": 28926,
+  "themen": 1,
+  "thema": [
+   "verben-als-nomen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 11031,
+  "einheit": "tokens",
+  "menge": 864357,
+  "notiz": "neunerreihe, pruefen 2",
+  "cache_lesen": 794700,
+  "cache_schreiben": 58598,
+  "themen": 1,
+  "thema": [
+   "neunerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 10,
+  "ausgabe": 1107,
+  "einheit": "tokens",
+  "menge": 237908,
+  "notiz": "der-die-das, abschluss ",
+  "cache_lesen": 207862,
+  "cache_schreiben": 28929,
+  "themen": 1,
+  "thema": [
+   "der-die-das"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1049,
+  "einheit": "tokens",
+  "menge": 189343,
+  "notiz": "zerlegen, abschluss ",
+  "cache_lesen": 159441,
+  "cache_schreiben": 28845,
+  "themen": 9,
+  "thema": [
+   "zerlegen-2",
+   "zerlegen-3",
+   "zerlegen-4",
+   "zerlegen-5",
+   "zerlegen-6",
+   "zerlegen-7",
+   "zerlegen-8",
+   "zerlegen-9",
+   "zerlegen-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1072,
+  "einheit": "tokens",
+  "menge": 190105,
+  "notiz": "geteilt-alle-reihen, abschluss ",
+  "cache_lesen": 159923,
+  "cache_schreiben": 29102,
+  "themen": 1,
+  "thema": [
+   "geteilt-alle-reihen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 18659,
+  "einheit": "tokens",
+  "menge": 920330,
+  "notiz": "geteilt-durch-2-5-10, ueberarbeiten 2",
+  "cache_lesen": 824207,
+  "cache_schreiben": 77442,
+  "themen": 1,
+  "thema": [
+   "geteilt-durch-2-5-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1134,
+  "einheit": "tokens",
+  "menge": 189671,
+  "notiz": "vorwaerts-zaehlen, abschluss ",
+  "cache_lesen": 159589,
+  "cache_schreiben": 28940,
+  "themen": 1,
+  "thema": [
+   "vorwaerts-zaehlen"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 12117,
+  "einheit": "tokens",
+  "menge": 800842,
+  "notiz": "namen-gross, pruefen 2",
+  "cache_lesen": 716537,
+  "cache_schreiben": 72166,
+  "themen": 1,
+  "thema": [
+   "namen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 6390,
+  "einheit": "tokens",
+  "menge": 650295,
+  "notiz": "einmaleins-sicher, ueberarbeiten 2",
+  "cache_lesen": 592370,
+  "cache_schreiben": 51515,
+  "themen": 1,
+  "thema": [
+   "einmaleins-sicher"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 8620,
+  "einheit": "tokens",
+  "menge": 439079,
+  "notiz": "einmaleins-sicher, pruefen 3",
+  "cache_lesen": 377415,
+  "cache_schreiben": 53028,
+  "themen": 1,
+  "thema": [
+   "einmaleins-sicher"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 959,
+  "einheit": "tokens",
+  "menge": 189844,
+  "notiz": "neunerreihe, abschluss ",
+  "cache_lesen": 159839,
+  "cache_schreiben": 29038,
+  "themen": 1,
+  "thema": [
+   "neunerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 10145,
+  "einheit": "tokens",
+  "menge": 660524,
+  "notiz": "einmaleins-gemischt, pruefen 3",
+  "cache_lesen": 593602,
+  "cache_schreiben": 56757,
+  "themen": 1,
+  "thema": [
+   "einmaleins-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1932,
+  "einheit": "tokens",
+  "menge": 207949,
+  "notiz": "namen-gross, ueberarbeiten 2",
+  "cache_lesen": 172212,
+  "cache_schreiben": 33797,
+  "themen": 1,
+  "thema": [
+   "namen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 6151,
+  "einheit": "tokens",
+  "menge": 646282,
+  "notiz": "namen-gross, pruefen 3",
+  "cache_lesen": 584787,
+  "cache_schreiben": 55322,
+  "themen": 1,
+  "thema": [
+   "namen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 999,
+  "einheit": "tokens",
+  "menge": 190003,
+  "notiz": "einmaleins-sicher, abschluss ",
+  "cache_lesen": 159912,
+  "cache_schreiben": 29084,
+  "themen": 1,
+  "thema": [
+   "einmaleins-sicher"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 11055,
+  "einheit": "tokens",
+  "menge": 972139,
+  "notiz": "geteilt-durch-2-5-10, pruefen 3",
+  "cache_lesen": 893236,
+  "cache_schreiben": 67820,
+  "themen": 1,
+  "thema": [
+   "geteilt-durch-2-5-10"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 818,
+  "einheit": "tokens",
+  "menge": 190076,
+  "notiz": "einmaleins-gemischt, abschluss ",
+  "cache_lesen": 160075,
+  "cache_schreiben": 29175,
+  "themen": 1,
+  "thema": [
+   "einmaleins-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1073,
+  "einheit": "tokens",
+  "menge": 190466,
+  "notiz": "namen-gross, abschluss ",
+  "cache_lesen": 160175,
+  "cache_schreiben": 29210,
+  "themen": 1,
+  "thema": [
+   "namen-gross"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 1028,
+  "einheit": "tokens",
+  "menge": 190526,
+  "notiz": "geteilt-durch-2-5-10, abschluss ",
+  "cache_lesen": 160269,
+  "cache_schreiben": 29221,
+  "themen": 1,
+  "thema": [
+   "geteilt-durch-2-5-10"
+  ]
  }
 ]
