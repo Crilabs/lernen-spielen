@@ -44,6 +44,24 @@ function kurve(vorher, nachher, abtastung) {
   return p;
 }
 
+/** Toleranz, ab der ein Punkt als „an der Mittellinie“ gilt. */
+const SCHEITEL = 8;
+
+/**
+ * Endet die Form davor oben (b, o, v, w, r, x), entfällt der Anstrich des nächsten Buchstabens mit Eingang unten
+ * oder oval: Sein erster Strich beginnt dort, wo er die Mittellinie erreicht (Formänderung je Folgebuchstabe).
+ * @param {Form} vorher
+ * @param {Form} f
+ * @param {Punkt[]} strich
+ * @param {Raster} raster
+ * @returns {Punkt[]}
+ */
+function ohneAnstrich(vorher, f, strich, raster) {
+  if (vorher.ausgang !== "oben" || (f.eingang !== "unten" && f.eingang !== "oval")) return strich;
+  const k = strich.findIndex((p) => p.y <= raster.mitte + SCHEITEL);
+  return k > 0 ? strich.slice(k) : strich;
+}
+
 /**
  * @param {Form | null} vorher
  * @param {Form} f
@@ -92,15 +110,16 @@ export function setzeWort(text, w) {
         const letzter = zuege[zuege.length - 1];
         const ende = letzter[letzter.length - 1];
         const sonder = w.sonder(/** @type {Form} */ (vorher).zeichen, f.zeichen);
+        const erster = ohneAnstrich(/** @type {Form} */ (vorher), f, zug[0], w.raster);
         /** @type {Punkt[]} */
         let verbindung;
         if (sonder) {
           verbindung = verschiebe(sonder, ende.x - sonder[0].x);
-          dx = verbindung[verbindung.length - 1].x - zug[0][0].x;
+          dx = verbindung[verbindung.length - 1].x - erster[0].x;
         } else {
-          verbindung = kurve(letzter, verschiebe(zug[0], dx), w.abtastung);
+          verbindung = kurve(letzter, verschiebe(erster, dx), w.abtastung);
         }
-        letzter.push(...verbindung.slice(1), ...verschiebe(zug[0], dx).slice(1));
+        letzter.push(...verbindung.slice(1), ...verschiebe(erster, dx).slice(1));
         for (const s of zug.slice(1)) zuege.push(verschiebe(s, dx));
       } else {
         for (const s of zug) zuege.push(verschiebe(s, dx));

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 300" data-zeichen="u" data-satz="sas">
+  <!-- Anstrich, Winkel, Girlande, Deckstrich (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 0 200 C 12 200 22 130 28 100 L 24 175 C 22 192 32 200 44 200 C 58 200 66 185 68 160 L 70 100 L 66 180 C 65 194 72 200 82 200 L 85 200" fill="none"/>
+</svg>

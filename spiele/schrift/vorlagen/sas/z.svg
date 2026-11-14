@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 300" data-zeichen="z" data-satz="sas">
+  <!-- Ansatz, waagerecht, schräg nach links unten, auf der Grundlinie nach rechts, ohne Unterschleife (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 4 106 C 8 101 14 100 20 100 L 58 100 L 12 200 L 70 200" fill="none"/>
+</svg>

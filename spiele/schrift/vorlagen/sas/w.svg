@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 300" data-zeichen="w" data-satz="sas">
+  <!-- zwei Girlanden mit Deckstrich in der Mitte, Knoten, waagerechter Ausgang (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 2 108 C 6 102 10 100 14 100 L 16 175 C 18 192 26 200 36 200 C 48 200 54 185 55 160 L 56 100 L 57 175 C 59 192 66 200 76 200 C 90 200 96 175 96 140 C 96 118 94 104 90 106 C 86 108 88 112 94 110 C 98 106 104 100 110 100" fill="none"/>
+</svg>

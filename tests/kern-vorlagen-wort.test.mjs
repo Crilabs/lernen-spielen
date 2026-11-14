@@ -61,6 +61,21 @@ test("Leerzeichen: neuer Zug und Wortabstand", () => {
   assert.ok(zweiterAnfang - ersterRand >= V.raster().wortabstand);
 });
 
+test("nach Ausgang oben entfällt der Anstrich: oi ohne Knick zur Grundlinie", () => {
+  const [zug] = V.wort("test", "oi").striche;
+  // o endet bei x=80 an der Mittellinie; das i beginnt bei x=110, sein Anstrich erreicht die Mittellinie bei x=130
+  const zwischen = zug.filter((p) => p.x > 80 && p.x < 128);
+  assert.ok(zwischen.length > 0);
+  for (const p of zwischen) assert.ok(p.y <= 112, `Punkt ${p.x.toFixed(1)},${p.y.toFixed(1)} sackt ab`);
+  // Abgetastet wird alle ABTASTUNG Einheiten; die Ecke selbst muss nicht genau getroffen sein.
+  assert.ok(zug.some((p) => Math.hypot(p.x - 130, p.y - 100) <= V.ABTASTUNG), "Anschluss am Scheitel des i");
+});
+
+test("nach Ausgang unten bleibt der Anstrich: in beginnt n an der Grundlinie", () => {
+  const [zug] = V.wort("test", "in").striche;
+  assert.ok(enthaelt(zug, { x: 70, y: 200 }));
+});
+
 test("fehlende Form im Wort wirft", () => {
   assert.throws(() => V.wort("test", "On"), /Fehlende Form: test\/O/);
 });

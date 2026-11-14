@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 300" data-zeichen="j" data-satz="sas">
+  <!-- Anstrich, Grundstrich in die Unterlänge, Unterschleife links herum; j-Punkt abgesetzt (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 0 200 C 12 200 22 130 28 100 L 28 260 C 28 290 16 298 8 290 C 0 280 10 230 30 205 C 36 201 44 200 55 200" fill="none"/>
+  <path data-strich="2" data-luft="ja" d="M 28 64 L 29 68" fill="none"/>
+</svg>

@@ -81,7 +81,8 @@ for (const f of liste.formen) {
     }
     assert.ok(ARTEN.includes(f.eingang), `${k}: Eingang ${f.eingang}`);
     assert.ok(ARTEN.includes(f.ausgang) && f.ausgang !== "oval", `${k}: Ausgang ${f.ausgang}`);
-    const hoehe = (art) => (art === "unten" ? raster.grund : raster.mitte);
+    // Eingang unten und oval beginnen mit eigenem Anstrich auf der Grundlinie; oben an der Mittellinie.
+    const hoehe = (art) => (art === "unten" || art === "oval" ? raster.grund : raster.mitte);
     const zug = roh.striche.map((s, i) => ({ s, p: punkte[i] })).filter((z) => !z.s.luft);
     assert.ok(zug.length > 0, `${k}: mindestens ein Strich ohne data-luft`);
     if (f.eingang !== "keiner") {
