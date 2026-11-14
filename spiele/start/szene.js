@@ -120,7 +120,7 @@ function baumUndHaus(p) {
   const ox = o.x * 10, oy = o.y * 10, ob = o.b * 10, oh = o.h * 10;
   const haus = guss([
     `<rect x="1740" y="455" width="440" height="40" rx="12"/>`,
-    `<rect x="1790" y="225" width="340" height="240" rx="10"/>`,
+    `<rect x="1790" y="244" width="340" height="221" rx="10"/>`,
     `<path d="M1755 245 L1960 128 L2165 245 Z"/>`,
   ], p.holz,
   flaeche("M1755 245 L1960 128 L2165 245 Z", p.dach)
