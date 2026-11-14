@@ -512,12 +512,55 @@ async function lauf(typ, name, groesse, basis) {
   }
 }
 
+// Pause mit Angebot „Mit echten Dingen“ auf Tablet-Formaten (4:3) und 16:10: alles im Bild, Alle Spiele und Weiter
+// gleich groß und mittig; ist es zu schmal, steht die kleine Pille allein darunter; nichts überdeckt die Karte.
+const PAUSE_FORMATE = [{ width: 1024, height: 768 }, { width: 1366, height: 1024 }, { width: 1280, height: 800 }];
+async function pausenFormate(typ, name, basis) {
+  WEBKIT = name === "webkit";
+  const browser = await typ.launch();
+  const fehlerListe = [];
+  try {
+    for (const groesse of PAUSE_FORMATE) {
+      const L = `${name} ${groesse.width}x${groesse.height}`;
+      const rem = groesse.height / 108, tol = 0.75;
+      const kontext = await browser.newContext({ viewport: groesse, deviceScaleFactor: 1 });
+      const seite = await kontext.newPage();
+      seite.on("pageerror", (e) => fehlerListe.push(`Seitenfehler: ${e.message}`));
+      seite.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole: ${m.text()}`); });
+      await seite.goto(`${URL_VORSCHAU(basis)}?entwurf`, { waitUntil: "load" });
+      await seite.evaluate(async () => { await document.getElementById("leiste").bereit(); await document.fonts.ready; });
+      await tipp(seite.locator("#pausenknopf"));
+      await seite.evaluate(() => document.getElementById("pause").angebotBereit);
+      await pause(250);
+      const m = await seite.evaluate(() => {
+        const w = document.getElementById("pause").shadowRoot, r = (el) => { const b = el.getBoundingClientRect(); return { l: b.left, r: b.right, o: b.top, u: b.bottom, w: b.width, h: b.height }; };
+        return { alle: r(w.querySelector("a.alle .form")), weiter: r(w.querySelector("ls-knopf.weiter").shadowRoot.querySelector(".form")),
+          echt: r(w.querySelector("ls-knopf.echt").shadowRoot.querySelector(".form")), karte: r(w.querySelector(".karte")), sichtbar: !w.querySelector("ls-knopf.echt").hidden, iw: innerWidth, ih: innerHeight };
+      });
+      const rand = 2.4 * rem - tol;
+      const imBild = [m.alle, m.weiter, m.echt].every((b) => b.l >= rand && b.r <= m.iw - rand && b.u <= m.ih - rand);
+      const eigeneReihe = m.echt.o > m.weiter.u;
+      const mittig = Math.abs((m.alle.l + m.weiter.r) / 2 - m.iw / 2) <= 2;
+      pruefe(L, `Pause mit Angebot: alles im Bild, Alle Spiele und Weiter gleich groß, Pille kleiner (${eigeneReihe ? "eigene Reihe darunter, Paar mittig" : "in der Reihe"}), Karte frei`,
+        m.sichtbar && imBild && Math.abs(m.alle.w - m.weiter.w) < 1 && Math.abs(m.alle.h - m.weiter.h) < 1 && m.echt.h < m.alle.h - rem
+          && (!eigeneReihe || mittig) && m.karte.u <= Math.min(m.alle.o, m.echt.o) - 2 * rem, JSON.stringify(m));
+      if (groesse.width / groesse.height < 1.5) pruefe(L, "4:3: die Pille steht in einer eigenen Reihe unter den beiden", eigeneReihe, JSON.stringify(m.echt));
+      if (SHOTS) { await mkdir(SHOTS, { recursive: true }); await seite.screenshot({ path: join(SHOTS, `pause-angebot-${name}-${groesse.width}x${groesse.height}.png`) }); }
+      await kontext.close();
+    }
+    pruefe(`${name} Pausen-Formate`, "keine Seiten- oder Konsolenfehler", fehlerListe.length === 0, fehlerListe.join(" | "));
+  } finally {
+    await browser.close();
+  }
+}
+
 const server = await starteServer();
 const basis = `http://127.0.0.1:${server.address().port}`;
 console.log(`Server ${basis}`);
 try {
   for (const [name, typ] of [["chromium", chromium], ["webkit", webkit]]) {
     for (const groesse of AUFLOESUNGEN) await lauf(typ, name, groesse, basis);
+    await pausenFormate(typ, name, basis);
   }
 } catch (e) {
   fehler++;
