@@ -15,7 +15,9 @@ Verbindlich, vor der Arbeit lesen: `docs/spielentwicklung.md` (ganz), `docs/grun
 `docs/grundsaetze-bilder.md`, `docs/figuren.md`, `docs/stimme.md`, `docs/bedienung.md`; der Katalog-Eintrag
 `{{KATALOG_DATEI}}` „### {{ID}} …“ und sein Eintrag in `docs/spielkatalog/welten.md` (Vorrang nach
 `docs/spielkatalog.md` §8a). Der Eintrag ist ein Vorschlag: Passt Welt, Figur oder Mechanik nicht, weiche ab und
-schreibe den Grund in den Entwurf.
+schreibe den Grund in den Entwurf. **Ausnahme:** Was der Eintrag als Entscheidung von Christian kennzeichnet
+(„Christian“, mit Datum), ist gesetzt; auch ein Prüfbefund ist kein Grund, davon wegzubauen. Widerspricht es einem
+Kriterium, benenne den Widerspruch offen und stelle ihn unter „Freigabe nötig“ als Frage.
 
 Regeln:
 - Niemanden fragen. Was offen ist, entscheidest du nach den Dokumenten und markierst es im Entwurf als **(Annahme)**.
@@ -111,6 +113,9 @@ Committen in sinnvollen Schritten (`feat({{ORDNERNAME}}): …`).
 Ein unabhängiger Prüfer hat Folgendes rot gegeben (Runde {{RUNDE}} von höchstens 3):
 
 {{BEFUNDE}}
+
+Seine Hinweise zu grünen Kriterien stehen dabei, wenn er welche gab; sie sind kein Muss, aber nimm sie mit, wo sie
+das Spiel klarer machen.
 
 Setze jeden Befund um oder begründe im Entwurf, warum er nicht zutrifft (mit Beleg aus den Dokumenten). Ändere
 den Entwurf mit, wenn sich das Spiel ändert. Melde je Befund: umgesetzt (Datei:Zeile, Commit) oder begründet

@@ -12,12 +12,14 @@ Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Am Tisch / I
 ## 0. Auswahl
 
 - Je Thema-Id aus `spiele/lernplan.json`: Fach = `strang`, Datei `spiele/mit-echten-dingen/<fach>/<thema-id>.md`.
-- **Gibt es die Datei schon, nichts tun** (auch wenn ein weiteres Spiel das Thema bedient). Nur Themen ohne Datei.
+- **Gibt es die Datei schon, nichts tun** (auch wenn ein weiteres Spiel das Thema bedient). Nur Themen ohne Datei –
+  Ausnahme: eine Datei mit `entwurf: true` ohne `geparkt` ist noch nicht fertig; sie geht ohne neues Schreiben gleich
+  in die Prüfung (§4).
 - Mehrere Themen: je Thema ein eigener Durchlauf (gern parallel), jeder mit eigener Prüfung.
 - Aus „Spiel entwickeln“ heraus (`.claude/skills/spiel-entwickeln/SKILL.md`, Abschnitt „Mit echten Dingen“): eigener
   Worktree `echte-dinge-<id>`; die steuernde Sitzung startet Schreib-Agent und frische Prüfer selbst und bucht die
-  Kosten (`werkzeuge/kosten/transkript.mjs`, mit `themen`). Der Schreib-Agent macht dann nur §1–§3 und §5.1, ohne
-  Unteragenten und ohne Kosten zu buchen.
+  Kosten (`werkzeuge/kosten/transkript.mjs`, mit `--thema <thema-id>`). Der Schreib-Agent macht dann nur §1–§3 und
+  §5.1, ohne Unteragenten und ohne Kosten zu buchen, und committet nie `kosten.json`.
 
 ## 1. Recherche (Web)
 
@@ -102,16 +104,18 @@ Hinweis: Die drei ersten Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`,
    erreicht die App). Geparkt: `geparkt: true` in den Kopf (steht in keinem Verzeichnis). Datei liegt unter
    `spiele/mit-echten-dingen/<fach>/<thema-id>.md`, `npm run echte-dinge` ist gelaufen, `npm test` grün.
 2. Kosten je Agent (Recherche, Schreiben, Prüfung – Modell und Token aus der Agenten-Rückmeldung) eintragen;
-   die Datei der analogen Spiele verlangt `themen` (Zahl der Themen, die der Eintrag abdeckt):
+   die Datei der analogen Spiele verlangt `thema` (Liste der Thema-Ids, die der Eintrag abdeckt) oder `themen` (Zahl):
 
 ```bash
 node -e '
 import("./werkzeuge/kosten/kosten.mjs").then(({ trageEin }) => trageEin("spiele/mit-echten-dingen", {
   datum: "2026-11-14", phase: "schreiben", posten: "claude", modell: "claude-opus-5-5",
-  eingabe: 41000, ausgabe: 3200, menge: 44200, einheit: "tokens", themen: 1, notiz: "zerlegen-7" }))'
+  eingabe: 41000, ausgabe: 3200, menge: 44200, einheit: "tokens", thema: ["zerlegen-7"], notiz: "zerlegen-7" }))'
 ```
 
-   Phasen: `recherche`, `schreiben`, `pruefung`. Je Prüfrunde ein Eintrag.
+   Phasen: `recherche`, `schreiben`, `pruefung`. Je Prüfrunde ein Eintrag. `thema` (Liste der Thema-Ids) lässt den
+   Bericht jedes Thema einmal zählen, auch über mehrere Einträge; aus einem Transkript bucht
+   `node werkzeuge/kosten/transkript.mjs <transkript> --ordner spiele/mit-echten-dingen --phase … --thema <id>`.
 3. Bericht (an den Aufrufer): Thema, gewählte Idee mit Begründung, verworfene Ideen, Prüfergebnis je Runde
    (E1–E9 mit Beleg), Kosten.
 

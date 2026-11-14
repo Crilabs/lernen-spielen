@@ -45,13 +45,19 @@ export function pruefeEintrag(e) {
   if (e.posten === "claude" && e.menge !== e.eingabe + e.ausgabe + (e.cache_lesen ?? 0) + (e.cache_schreiben ?? 0))
     throw new Error("menge muss bei claude eingabe + ausgabe + cache_lesen + cache_schreiben sein");
   if (e.themen !== undefined && !ganz(e.themen)) throw new Error("themen muss eine ganze Zahl ≥ 0 sein");
+  if (e.thema !== undefined) {
+    if (!Array.isArray(e.thema) || !e.thema.length || !e.thema.every((t) => typeof t === "string" && t))
+      throw new Error("thema muss eine Liste von Thema-Ids sein");
+    if (e.themen !== undefined && e.themen !== e.thema.length) throw new Error("themen muss die Zahl der Ids in thema sein");
+  }
   if (e.notiz !== undefined && typeof e.notiz !== "string") throw new Error("notiz muss Text sein");
   return {
     datum: e.datum, phase: e.phase, posten: e.posten, modell: e.modell ?? "", eingabe: e.eingabe ?? 0, ausgabe: e.ausgabe ?? 0,
     einheit: e.einheit, menge: e.menge, notiz: e.notiz ?? "",
     ...(e.cache_lesen !== undefined ? { cache_lesen: e.cache_lesen } : {}),
     ...(e.cache_schreiben !== undefined ? { cache_schreiben: e.cache_schreiben } : {}),
-    ...(e.themen !== undefined ? { themen: e.themen } : {}),
+    ...(e.themen !== undefined || e.thema !== undefined ? { themen: e.themen ?? e.thema.length } : {}),
+    ...(e.thema !== undefined ? { thema: e.thema } : {}),
     ...(e.usage !== undefined ? { usage: e.usage } : {}),
   };
 }
@@ -70,7 +76,7 @@ export function trageEin(spielOrdner, eintrag) {
   const e = pruefeEintrag(eintrag);
   // Die Datei der analogen Spiele braucht die Themenzahl, sonst lässt sich nichts je Thema hochrechnen.
   if (basename(resolve(spielOrdner)) === "mit-echten-dingen" && !(e.themen >= 1))
-    throw new Error("Einträge in mit-echten-dingen/kosten.json brauchen themen (Zahl der Themen, ≥ 1)");
+    throw new Error("Einträge in mit-echten-dingen/kosten.json brauchen themen (Zahl der Themen, ≥ 1) oder thema (Thema-Ids)");
   const liste = liesKosten(spielOrdner);
   liste.push(e);
   mkdirSync(spielOrdner, { recursive: true });
@@ -177,7 +183,10 @@ export function katalogAnzahl(text) {
 export function prognoseAnalog(eintraege, themenGesamt, preise) {
   const mitThemen = eintraege.filter((e) => e.themen);   // nur Einträge mit Themenzahl gehen in den Durchschnitt
   const s = summen(mitThemen, preise);
-  const themen = mitThemen.reduce((a, e) => a + e.themen, 0);
+  // Einträge mit Thema-Ids (thema) zählen jedes Thema einmal, auch wenn mehrere Agenten (Schreiben, Prüfrunden)
+  // dasselbe Thema buchen; Einträge ohne Ids zählen ihre Themenzahl.
+  const ids = new Set(mitThemen.flatMap((e) => e.thema ?? []));
+  const themen = ids.size + mitThemen.filter((e) => !e.thema).reduce((a, e) => a + e.themen, 0);
   const jeThema = themen ? s.eur / themen : null;
   return { summe: s, themen, themenGesamt, jeThema, prognose: jeThema === null ? null : jeThema * themenGesamt };
 }

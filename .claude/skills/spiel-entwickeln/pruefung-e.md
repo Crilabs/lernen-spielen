@@ -1,0 +1,52 @@
+# Prüfung E: eine Anleitung „Mit echten Dingen“
+
+Vorlage für den Skill `spiel-entwickeln` (Abschnitt „Mit echten Dingen“), nach `.claude/skills/mit-echten-dingen/SKILL.md`
+§4. Empfänger: ein **neuer Agent, der die Anleitung nicht geschrieben hat**, je Runde ein neuer. Der Skill füllt `{{…}}`
+und schickt alles unter der Linie. `{{VORIGE_BEFUNDE}}` ist in Runde 1 leer, ab Runde 2: „Befunde der vorigen Runde
+(prüfe je Befund, ob er behoben ist; urteile trotzdem über alle Kriterien neu): …“ und die Antwort bekommt die Zeile
+„Vorige Befunde“.
+
+---
+
+Du prüfst eine Anleitung „Mit echten Dingen“ (kurzes Spiel mit Alltagsdingen, das Kind und Erwachsene zusammen
+spielen) für das Thema `{{THEMA}}`. Du hast sie nicht geschrieben und sollst sie nicht verbessern, sondern beurteilen.
+Arbeitsordner `{{WORKTREE}}`: nur lesen, nichts ändern, nichts committen, keine Unteragenten.
+
+**Lies nur:** die Datei `spiele/mit-echten-dingen/{{FACH}}/{{THEMA}}.md`, den Eintrag mit `"id": "{{THEMA}}"` in
+`spiele/lernplan.json`, `docs/mit-echten-dingen.md` (ganz) und `docs/grundsaetze.md`. Nicht die Git-Historie, keine
+anderen Anleitungen, nicht `{{PRUEFUNGEN}}`. Öffne mindestens eine der Quellen im Kopf der Datei (Web) und vergleiche
+(E7).
+
+{{VORIGE_BEFUNDE}}
+
+| Nr. | Kriterium |
+|---|---|
+| E1 | trifft genau das Thema und isoliert seine Schwierigkeit |
+| E2 | „Darauf kommt es an“ benennt den Kern sachlich richtig |
+| E3 | nur Alltagsdinge, nichts zu kaufen, sicher |
+| E4 | Anrede „ihr“, kurze Sätze, für ein Kind der Klassenstufe lesbar |
+| E5 | neutral: kein Lob, kein Abfragen, kein Druck, keine Klischees |
+| E6 | Fachbegriffe nach §5.1 |
+| E7 | eigene Worte, Quellen angegeben (der Prüfer öffnet mindestens eine Quelle und vergleicht) |
+| E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
+| E9 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
+
+**Grün heißt:** alle neun grün, kein kritischer Befund. Im Zweifel rot.
+
+Schreib deine Antwort außerdem unverändert in die Datei `{{BERICHT}}` (außerhalb des Arbeitsordners; die einzige
+Datei, die du schreibst).
+
+**So sieht deine Antwort aus** (nichts davor, nichts danach):
+
+```
+Ergebnis: GRÜN | ROT
+
+| Nr. | grün/rot | Beleg (Zitat aus der Datei mit Zeile) | Befund, falls rot |
+|---|---|---|---|
+… eine Zeile je Kriterium E1 bis E9
+
+Kritische Befunde:
+- <Befund> – <Beleg> – <was es lösen würde>   (oder „keine“)
+
+Vorige Befunde: <je Befund behoben / nicht behoben mit Beleg>   (nur ab Runde 2)
+```

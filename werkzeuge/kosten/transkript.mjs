@@ -2,12 +2,14 @@
 // Bucht den Verbrauch eines Agenten aus seinem Transkript in kosten.json (docs/spielentwicklung.md §6).
 //
 //   node werkzeuge/kosten/transkript.mjs <transkript.jsonl> --ordner <spielordner> --phase <phase>
-//     [--notiz "<text>"] [--themen <n>] [--stand <stand.json>] [--datum JJJJ-MM-TT] [--zeigen]
+//     [--notiz "<text>"] [--thema <id>[,<id>…]] [--themen <n>] [--stand <stand.json>] [--datum JJJJ-MM-TT] [--zeigen]
 //
 // Transkripte (Claude Code): Unteragent ~/.claude/projects/<projekt>/<sitzung>/subagents/agent-<agentId>.jsonl,
 // die Sitzung selbst ~/.claude/projects/<projekt>/<sitzung>.jsonl.
 // --stand merkt sich je Transkript die schon gebuchten Nachrichten: Wird derselbe Agent fortgesetzt (SendMessage),
 // bucht der nächste Aufruf nur den Zuwachs, nichts doppelt. Ohne --stand wird das ganze Transkript gebucht.
+// --thema (Mit echten Dingen): die Thema-Ids des Eintrags; der Bericht zählt jedes Thema einmal, auch wenn Schreiben
+// und mehrere Prüfrunden es buchen (--themen allein würde je Eintrag zählen).
 // --zeigen gibt nur aus, bucht nicht und ändert den Stand nicht.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -16,7 +18,7 @@ import { trageEin, usageAusTranskript } from "./kosten.mjs";
 
 /** @param {string[]} argv */
 export function leseArgumente(argv) {
-  const a = { transkript: "", ordner: "", phase: "", notiz: "", themen: undefined, stand: "", datum: new Date().toISOString().slice(0, 10), zeigen: false };
+  const a = { transkript: "", ordner: "", phase: "", notiz: "", themen: undefined, thema: undefined, stand: "", datum: new Date().toISOString().slice(0, 10), zeigen: false };
   for (let i = 0; i < argv.length; i++) {
     const x = argv[i];
     const wert = () => {
@@ -28,6 +30,7 @@ export function leseArgumente(argv) {
     else if (x === "--phase") a.phase = wert();
     else if (x === "--notiz") a.notiz = wert();
     else if (x === "--themen") a.themen = Number(wert());
+    else if (x === "--thema") a.thema = [...(a.thema ?? []), ...wert().split(",").filter(Boolean)];
     else if (x === "--stand") a.stand = wert();
     else if (x === "--datum") a.datum = wert();
     else if (x === "--zeigen") a.zeigen = true;
@@ -35,7 +38,7 @@ export function leseArgumente(argv) {
     else throw new Error(`unbekannter Schalter ${x}`);
   }
   if (!a.transkript || (!a.zeigen && (!a.ordner || !a.phase)))
-    throw new Error("Aufruf: node werkzeuge/kosten/transkript.mjs <transkript.jsonl> --ordner <spielordner> --phase <phase> [--notiz …] [--themen n] [--stand <datei>] [--zeigen]");
+    throw new Error("Aufruf: node werkzeuge/kosten/transkript.mjs <transkript.jsonl> --ordner <spielordner> --phase <phase> [--notiz …] [--thema id] [--themen n] [--stand <datei>] [--zeigen]");
   return a;
 }
 
@@ -51,7 +54,7 @@ function main() {
     console.log("nichts zu buchen");
     return;
   }
-  trageEin(a.ordner, { ...rest, datum: a.datum, phase: a.phase, notiz: a.notiz, ...(a.themen !== undefined ? { themen: a.themen } : {}) });
+  trageEin(a.ordner, { ...rest, datum: a.datum, phase: a.phase, notiz: a.notiz, ...(a.themen !== undefined ? { themen: a.themen } : {}), ...(a.thema ? { thema: a.thema } : {}) });
   if (a.stand) {
     stand[pfad] = ids;
     mkdirSync(dirname(resolve(a.stand)), { recursive: true });

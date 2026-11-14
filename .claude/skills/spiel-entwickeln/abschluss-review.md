@@ -46,6 +46,9 @@ diesem Vermerk.)
 **Grün heißt:** R1–R10 grün, kein kritischer Befund. Ein kritischer Befund ist alles, was nach dem Merge einem Kind
 schadet oder den Lernstand falsch macht oder `main` rot macht.
 
+Schreib deine Antwort außerdem unverändert in die Datei `{{BERICHT}}` (Arbeitsablage außerhalb des Arbeitsordners;
+die einzige Datei, die du schreibst).
+
 **So sieht deine Antwort aus** (nichts davor, nichts danach):
 
 ```

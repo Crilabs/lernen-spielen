@@ -121,6 +121,21 @@ test("analoge Spiele: Kosten je Thema, Prognose über alle Themen", () => {
   assert.throws(() => pruefeEintrag({ ...claude("m-b", 1, 1), themen: -1 }), /themen/);
 });
 
+test("analoge Spiele: mit Thema-Ids zählt jedes Thema einmal, egal wie viele Agenten es buchen", () => {
+  const z = (phase, thema) => ({ ...claude("m-b", 1e6, 0, phase), thema });
+  const e = [z("schreiben", ["zerlegen-2"]), z("pruefung", ["zerlegen-2"]), z("pruefung", ["zerlegen-2"]),
+    z("schreiben", ["zerlegen-3"]), z("pruefung", ["zerlegen-3"]), z("schreiben", ["zerlegen-2"])]
+    .map((x) => pruefeEintrag(x));
+  assert.equal(e[0].themen, 1);
+  const a = prognoseAnalog(e, 100, PREISE);
+  assert.equal(a.themen, 2);
+  assert.equal(a.jeThema, 3);   // 6 Mio. Token zu 1 €/Mio. auf 2 Themen
+  // gemischt: alte Einträge ohne Ids zählen ihre Zahl dazu
+  assert.equal(prognoseAnalog([...e, { ...claude("m-b", 1, 0, "recherche"), themen: 3 }], 100, PREISE).themen, 5);
+  assert.throws(() => pruefeEintrag({ ...claude("m-b", 1, 1), thema: [] }), /thema/);
+  assert.throws(() => pruefeEintrag({ ...claude("m-b", 1, 1), thema: ["a"], themen: 2 }), /themen/);
+});
+
 test("Katalog: zählt die Spiel-Zeilen der Übersicht, nicht Tabellen anderswo", () => {
   const t = "| Fach | Spiele |\n|---|---:|\n| Mathe | 56 |\n| [M01](a.md) Paare | x |\n| [M02](a.md) Weg | x |\n| [M01](a.md) doppelt | x |\n| [L01](b.md) Post | x |";
   assert.equal(katalogAnzahl(t), 3);

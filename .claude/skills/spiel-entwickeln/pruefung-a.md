@@ -14,7 +14,9 @@ geschrieben und sollst ihn nicht verbessern, sondern beurteilen. Arbeitsordner `
 - den Entwurf `{{ENTWURF}}`,
 - den Katalog-Eintrag `{{KATALOG_DATEI}}` „### {{ID}} …“ und den Eintrag des Spiels in `docs/spielkatalog/welten.md`
   (Vorrang bei Widersprüchen: `docs/spielkatalog.md` §8a). Der Eintrag ist ein Vorschlag: Eine begründete
-  Abweichung ist kein Befund, eine unbegründete schon.
+  Abweichung ist kein Befund, eine unbegründete schon. **Ausnahme:** Was der Eintrag als Entscheidung von Christian
+  kennzeichnet („Christian“, mit Datum), ist gesetzt. Widerspricht es einem Kriterium, ist der Befund, dass der
+  Entwurf den Widerspruch offen benennt und unter „Freigabe nötig“ als Frage stellt – nicht, dass er davon wegbaut.
 - `docs/grundsaetze.md`, `docs/grundsaetze-bilder.md`, `docs/figuren.md`, `docs/stimme.md`, `docs/bedienung.md` §3,
   `docs/spielentwicklung.md` §1 (Pflichtteile, Spielobjekte).
 
@@ -48,6 +50,9 @@ in `docs/grundsaetze.md` (K1/K2 = §10 Kosmik-Schicht), F, M, B, T in `docs/grun
 
 **Grün heißt:** alle Pflichtkriterien grün, kein kritischer Befund. „(Soll)“ darf rot sein, wenn der Grund im
 Entwurf steht. Im Zweifel rot: ein Spiel, das falsch gedacht ist, kostet beim Bauen mehr als eine Runde mehr.
+
+Schreib deine Antwort außerdem unverändert in die Datei `{{BERICHT}}` (Arbeitsablage außerhalb des Arbeitsordners;
+die einzige Datei, die du schreibst).
 
 **So sieht deine Antwort aus** (nichts davor, nichts danach):
 

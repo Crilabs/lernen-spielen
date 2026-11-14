@@ -31,6 +31,13 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
 - **Kosten nach jedem Agenten** (bauen, prüfen, Review, Wiederholung, jede Fortsetzung mit SendMessage), siehe
   „Kosten“. Kein Agent ohne Eintrag.
 - **Nie pushen.** Merge nur in das lokale `main`, und nur ohne `--basis` (Probelauf mergt nie).
+- **Modelle:** Bau-Agenten des Spiels und Prüfer A, B und Abschluss-Review mit dem Standardmodell der Sitzung (kein
+  kleineres); Schreib-Agent und Prüfer E der Anleitungen dürfen ein mittleres Modell nehmen (`sonnet`), nie ein
+  kleines. Prüfer nie mit einem kleineren Modell als der Bau-Agent, dessen Arbeit sie prüfen.
+- **Ein Bau-Agent je Phase:** Entwurf, Prototyp und Ausbau bekommen je einen **neuen** Bau-Agenten (der Kontext des
+  vorigen ist groß und wird bei jedem Zug neu gelesen). Befunde innerhalb einer Prüfung gehen per SendMessage an den
+  Bau-Agenten dieser Phase. Grüne Hinweise der letzten Prüfung gehen als „Hinweise aus Prüfung …“ an den Auftrag der
+  nächsten Phase.
 
 ## Wo was liegt
 
@@ -44,7 +51,7 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
 | Vorlage | `spiele/vorlage/` (Kopf von `spiele/vorlage/spiel.js`: Schritte 1–7, „../“ → „../../“, `?stufe` im Testbetrieb) |
 | Prüfstand | `tests/browser/durchspielen.mjs` (`--stufe`), `tests/browser/pruefkopie.mjs`, `tests/browser/objektbilder.mjs`; Playwright mit `NODE_PATH=/private/tmp/claude-501/pw/node_modules` |
 | Kosten | `werkzeuge/kosten/transkript.mjs` (bucht aus dem Agenten-Transkript), `werkzeuge/kosten/kosten.mjs`, Bericht `npm run kosten` |
-| Vorlagen der Aufträge | neben dieser Datei: `bauen.md`, `pruefung-a.md`, `pruefung-b-didaktik.md`, `pruefung-b-welt.md`, `pruefung-b-bedienung.md`, `abschluss-review.md` |
+| Vorlagen der Aufträge | neben dieser Datei: `bauen.md`, `pruefung-a.md`, `pruefung-b-didaktik.md`, `pruefung-b-welt.md`, `pruefung-b-bedienung.md`, `abschluss-review.md`, `pruefung-e.md` (Anleitungen) |
 
 ## Aufträge an Agenten
 
@@ -54,12 +61,20 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
   `{{PRUEFUNGEN}}` (die Arbeitsablage des Laufs), `{{KATALOG_DATEI}}` (die Teil-Datei des Katalogs, z. B.
   `docs/spielkatalog/mathe.md`), `{{BILDER}}` (Ordner `b-<runde>/bilder` aus dem Durchspielen dieser Runde),
   `{{STADIUM}}` (Prototyp oder Ausbau), `{{STUFEN}}` (Lernstufen des Spiels), `{{RUNDE}}`, `{{BEFUNDE}}`,
-  `{{VORIGE_BEFUNDE}}` (Runde 1 leer; sonst wie im Kopf der Vorlage).
+  `{{VORIGE_BEFUNDE}}` (Runde 1 leer; sonst wie im Kopf der Vorlage), `{{BERICHT}}` (Datei des Prüfberichts in der
+  Arbeitsablage, z. B. `runde-a-2.md`), für `pruefung-e.md` außerdem `{{THEMA}}` und `{{FACH}}` (`{{WORKTREE}}` ist
+  dort der Worktree der Anleitungen).
+- **Befunde** für „Befunde umsetzen“: die roten Zeilen und kritischen Befunde wörtlich, dazu die Hinweise des Prüfers
+  zu grünen Zeilen (als solche gekennzeichnet).
 - **Urteil lesen:** Rot ist, was rot ist – steht „GRÜN“ über einer roten Pflichtzeile oder einem kritischen Befund,
   gilt rot. Fehlt die Tabelle oder der Beleg je Zeile, ist die Antwort ungültig: **höchstens eine** Wiederholung je
   Runde mit einem neuen Prüfer (auch sie wird gebucht); eine gültige Antwort wird nie durch eine neue ersetzt. Ist
   auch die Wiederholung ungültig, gilt die Runde als rot.
-- Jeden Prüfbericht wörtlich als `runde-<prüfung>-<n>.md` in die Arbeitsablage legen (nicht in den Worktree).
+- Jeden Prüfbericht wörtlich als `runde-<prüfung>-<n>.md` in die Arbeitsablage (nicht in den Worktree): Der Prüfer
+  schreibt ihn selbst dorthin (`{{BERICHT}}`); du vergleichst die Datei mit seiner Rückmeldung und schreibst sie nur
+  neu, wenn sie fehlt oder abweicht. Namen: `runde-a-<n>.md`, `runde-b-<n>-didaktik.md` (`-welt`, `-bedienung`),
+  `runde-b-<n>-spielbarkeit.md` (Ausgabe des Durchspielens), `runde-ba-<n>-….md` (Ausbau-Prüfung),
+  `runde-review-<n>.md`, `runde-e-<thema>-<n>.md`.
 - Prüfer ändern nichts. Hat einer doch Dateien geändert (`git status`), die Änderung verwerfen
   (`git restore` nur dieser Dateien) und den Bericht nicht werten (zählt als ungültig).
 - **Wer baut, bucht welche Phase:** Bau-Agent in Prüfung A `entwurf`, in Prüfstand B `prototyp`, ab dem Ausbau
@@ -157,16 +172,24 @@ Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spie
 
 - **Themen:** die Hauptthemen des Eintrags, die in `spiele/lernplan.json` stehen und für die
   `spiele/mit-echten-dingen/<fach>/<thema>.md` fehlt **oder** `entwurf: true` ohne `geparkt` im Kopf hat. Höchstens
-  **5** je Lauf, die zentralsten zuerst (Themen der Einstiegsklasse in der Reihenfolge des Eintrags); die übrigen
-  stehen als offen in der Schlussmeldung.
+  **5** je Lauf: zuerst vorhandene Entwürfe (`entwurf: true`, sie brauchen nur noch die Prüfung), dann die fehlenden
+  Themen der Einstiegsklasse in der Reihenfolge des Eintrags; die übrigen stehen als offen in der Schlussmeldung.
 - **Worktree:** `git -C <Hauptrepo> worktree add <Hauptrepo>/.worktrees/echte-dinge-<id klein> -b
   echte-dinge-<id klein> <basis>`. Der Bau-Agent des Spiels fasst `spiele/mit-echten-dingen/` nie an.
 - **Ablauf je Thema** nach `.claude/skills/mit-echten-dingen/SKILL.md`, gesteuert von dir: ein Schreib-Agent (Auftrag:
   „Lies `.claude/skills/mit-echten-dingen/SKILL.md`, führe §1–§3 für <Thema> aus, Arbeitsordner <Worktree>, keine
-  Unteragenten, keine Kosten buchen, committe nur `spiele/mit-echten-dingen/`.“), dann die Prüfung E1–E9 aus §4 mit
-  **frischen** Prüfern, die du startest, höchstens 3 Runden; §5 (Kopf, Verzeichnis) lässt du den Schreib-Agenten
-  machen. Kosten bucht du: `--ordner spiele/mit-echten-dingen --phase recherche|schreiben|pruefung --themen 1` im
-  Worktree der Anleitungen.
+  Unteragenten, keine Kosten buchen; committe nur deine Datei und die beiden Verzeichnisse
+  (`npm run echte-dinge` direkt vor dem Commit), nie die `kosten.json` der Anleitungen.“). Liegt die Datei schon
+  als Entwurf vor, entfällt dieser Schritt: gleich prüfen, der Schreib-Agent kommt erst mit Befunden dazu. Dann die
+  Prüfung E1–E9 mit **frischen** Prüfern nach `pruefung-e.md`, die du startest, höchstens 3 Runden; rote Befunde per
+  SendMessage an denselben Schreib-Agenten (überarbeiten, Tests, committen). §5.1 nach grüner Prüfung lässt du den
+  Schreib-Agenten machen (`entwurf: true` löschen, `npm run echte-dinge`, `npm test`, committen), bei Rot nach Runde
+  3 `geparkt: true`. Mehrere Themen dürfen parallel laufen (je ein Schreib-Agent im selben Worktree).
+- **Kosten** bucht du im Worktree der Anleitungen, je Agent mit der Thema-Id: `--ordner spiele/mit-echten-dingen
+  --phase schreiben|pruefung --thema <thema-id>` (der Schreib-Agent recherchiert und schreibt in einem Transkript:
+  `schreiben`; `recherche` nur, wenn ein eigener Agent recherchiert). Mit `--thema` zählt der Bericht jedes Thema
+  einmal, egal wie viele Runden es gebucht haben. `kosten.json` committest du (nach jedem grünen oder geparkten
+  Thema).
 - **Merge** (nicht im Probelauf), unabhängig vom Spiel, sobald alle Themen grün oder geparkt sind: im Branch
   `git merge <basis>`, `npm run echte-dinge`, `npm test`, committen, dann Fast-Forward nach `main` wie in §4.5.3.
   Klappt das nicht: den Branch vor §4 Schritt 2 in den Spiel-Branch mergen.
@@ -183,8 +206,12 @@ node werkzeuge/kosten/transkript.mjs "$T" --ordner spiele/<fach>/<spiel> --phase
 
 - Das Werkzeug zählt Eingabe, Ausgabe, Cache lesen und Cache schreiben genau. Mit `--stand` bucht es bei einer
   Fortsetzung desselben Agenten (SendMessage) nur den Zuwachs, nie doppelt; deshalb immer mit `--stand`.
-- **Steuerung:** deine eigenen Token einmal am Ende (vor dem Merge- bzw. Park-Commit) aus dem Sitzungs-Transkript
-  (`ls -t ~/.claude/projects/*/*.jsonl | head -1`, die laufende Sitzung) mit `--phase steuerung`.
+- **Steuerung:** deine eigenen Token einmal am Ende (vor dem Merge- bzw. Park-Commit) mit `--phase steuerung` aus
+  deinem Transkript: als Hauptsitzung `ls -t ~/.claude/projects/*/*.jsonl | head -1`; läufst du selbst als
+  Unteragent, ist es `…/subagents/agent-<deine Id>.jsonl` – die Id nennen dir Bau-Agenten, die dir per SendMessage
+  antworten, oder `grep -l "<ein Satz aus deinem Aufruf>" ~/.claude/projects/*/*/subagents/agent-*.jsonl`. Nicht
+  das neueste Transkript irgendeines Projekts nehmen. Wird später noch weitergesteuert (Wiederaufnahme), bucht
+  `--stand` nur den Zuwachs.
 - Bilder bucht `werkzeuge/bilder/erzeugen.mjs --spiel`, Stimme `npm run audio -- --spiel`. `kosten.json` committen.
 - Der Spielordner darf vor dem Prototyp noch leer sein (das Werkzeug legt ihn an).
 

@@ -60,6 +60,9 @@ Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stim
 
 **Grün heißt:** alle Kriterien grün, kein kritischer Befund. Im Zweifel rot.
 
+Schreib deine Antwort außerdem unverändert in die Datei `{{BERICHT}}` (Arbeitsablage außerhalb des Arbeitsordners;
+die einzige Datei, die du schreibst).
+
 **So sieht deine Antwort aus** (nichts davor, nichts danach):
 
 ```
