@@ -280,6 +280,7 @@ import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
 import { spielzeitLage } from "./rahmen/spielzeit.js";
+import { ladeVerzeichnis } from "./rahmen/echte-dinge.js";
 
 const ZUSTAND = { "kann-ich": "kann ich", dran: "dran", "in-sicht": "in Sicht" };
 const fach = new URLSearchParams(location.search).get("fach") ?? "";
@@ -308,6 +309,9 @@ async function start() {
 
   const spielNach = new Map((ctx.spiele.spiele ?? []).map((s) => [s.id, s]));
   const themaNach = new Map((ctx.plan.themen ?? []).map((t) => [t.id, t]));
+  // „Mit echten Dingen“: eine (freigegebene) Anleitung im Verzeichnis oder der Einzeiler aus dem Lernplan (eltern).
+  const { themen: anleitungen } = await ladeVerzeichnis();
+  const hatAnleitung = (/** @type {{ id: string }} */ s) => Object.hasOwn(anleitungen, s.id) && anleitungen[s.id].fach === fach;
 
   // Stationen in der Reihenfolge des Wegs: gekonnt (wie sie gekonnt wurden), dran, in Sicht (Planreihenfolge).
   // Gekonnte Themen kommen aus dem Stand, auch ohne Spiel; dran und in Sicht gibt es nur mit Spiel (uebersicht).
@@ -351,7 +355,7 @@ async function start() {
     jetzt = s;
     knoepfe.forEach((k, i) => k.setAttribute("aria-expanded", String(stationen[i] === s)));
     nameFeld.textContent = s.name;
-    echt.hidden = !s.eltern;
+    echt.hidden = !s.eltern && !hatAnleitung(s);
     spieleFeld.innerHTML = (spielFrei ? s.spiele : []).map((sp) => `<a class="spiel" href="${esc(sp.datei)}?thema=${encodeURIComponent(s.id)}"
         aria-label="${esc(sp.titel)}"><span class="ico"><img src="${esc(sp.symbol)}" alt=""></span><b>${esc(sp.titel)}</b></a>`).join("")
       + (s.geschichte ? `<ls-knopf class="geschichte" symbol="buch.svg" wort="Geschichte ansehen"></ls-knopf>` : "");
@@ -386,7 +390,7 @@ async function start() {
   hoeren.addEventListener("click", () => { if (jetzt?.sprich && leiste.ton) sprich(jetzt.sprich); });
   // Mit echten Dingen: eigene Seite mit der Anleitung (docs/mit-echten-dingen.md)
   echt.addEventListener("click", () => {
-    if (jetzt?.eltern) location.href = `echt.html?thema=${encodeURIComponent(jetzt.id)}`;
+    if (jetzt && (jetzt.eltern || hatAnleitung(jetzt))) location.href = `echt.html?thema=${encodeURIComponent(jetzt.id)}`;
   });
 
   // Beim Öffnen ist das erste Thema „dran“ (sonst das erste in Sicht) schon aufgeschlagen, ohne zu sprechen, und

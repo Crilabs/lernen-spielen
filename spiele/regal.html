@@ -144,6 +144,7 @@ import { spielKarteHtml, echtKarteHtml } from "./start/karten.js";
 import { paletteFuer, vignetteSvg } from "./start/welten.js";
 import { hintergrundSvg } from "./start/hintergrund.js";
 import { spielzeitLage } from "./rahmen/spielzeit.js";
+import { ladeVerzeichnis } from "./rahmen/echte-dinge.js";
 
 /** Merker im Profil (einstellungen): Ids, die beim letzten Besuch im Regal standen. */
 const GESEHEN = "regal.gesehen";
@@ -162,7 +163,12 @@ async function start() {
     ctx = { plan, spiele };
     stand = await ladeLernstand(ctx, new Date().toLocaleDateString("sv"));
   } catch (e) { protokoll("regal: " + e); zeigeFehler(); return; }
-  await Promise.all([leiste.bereit(), ladeEinstellungen()]);
+  const [, , verzeichnis] = await Promise.all([leiste.bereit(), ladeEinstellungen(), ladeVerzeichnis()]);
+  // „Mit echten Dingen“ gibt es, wenn das Thema eine (freigegebene) Anleitung oder einen Einzeiler im Lernplan hat.
+  const anleitungVon = (/** @type {string} */ id, /** @type {string} */ fach) => {
+    const e = Object.hasOwn(verzeichnis.themen, id) ? verzeichnis.themen[id] : null;
+    return e && e.fach === fach ? e : null;
+  };
   // Spielzeit der Eltern: gesperrt fehlen die Spielkarten im Detail; „Mit echten Dingen“ bleibt.
   const zeit = await spielzeitLage().catch((e) => { protokoll("Spielzeit: " + e); return null; });
   const spielFrei = !zeit || zeit.lage.frei;
@@ -222,12 +228,14 @@ async function start() {
     nameFeld.textContent = t.name;
     // Dieselben Karten wie auf der Startseite: Spielkarte mit Vignette, dazu Mit echten Dingen
     const fach = t.strang;
+    const anleitung = anleitungVon(id, fach);
+    const echtDa = !!jetzt.eltern || !!anleitung;
     spieleFeld.innerHTML = (spielFrei ? t.spiele : []).map((s) => {
       const spiel = spielNach.get(s.id) ?? s;
       const palette = paletteFuer(ctx, spiel.welt);
       return spielKarteHtml({ spiel, thema: { id, name: t.name } }, fach, palette ? vignetteSvg(palette) : null);
-    }).join("") + (jetzt.eltern ? echtKarteHtml({ thema: { id, name: t.name } }, fach) : "");
-    spieleTitel.hidden = !(spielFrei && t.spiele.length) && !jetzt.eltern;
+    }).join("") + (echtDa ? echtKarteHtml({ thema: { id, name: t.name } }, fach, anleitung?.titel) : "");
+    spieleTitel.hidden = !(spielFrei && t.spiele.length) && !echtDa;
     spieleFeld.querySelectorAll("a.karte.spiel").forEach((a) => a.addEventListener("click", (e) => {
       if (leiste.ton) sageEinmal(a.querySelector("b").textContent, sprich);
       linkKlick(e);

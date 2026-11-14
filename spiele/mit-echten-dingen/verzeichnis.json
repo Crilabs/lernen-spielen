@@ -1,3 +1,36 @@
 {
- "themen": {}
+ "themen": {
+  "zerlegen-2": {
+   "fach": "mathe",
+   "name": "Die 2 zerlegen",
+   "titel": "Die 2 in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zwei Nudeln, zwei Teller"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Zwei Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false
+  },
+  "zerlegen-3": {
+   "fach": "mathe",
+   "name": "Die 3 zerlegen",
+   "titel": "Die 3 in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Drei Löffel, zwei Teller"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Drei Zapfen in zwei Händen"
+    }
+   ],
+   "entwurf": false
+  }
+ }
 }

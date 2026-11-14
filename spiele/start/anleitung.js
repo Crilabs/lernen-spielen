@@ -1,94 +1,105 @@
-// Anleitungen „Mit echten Dingen“ (docs/mit-echten-dingen.md): eine Markdown-Datei je Thema unter
-// spiele/mit-echten-dingen/<fach>/<thema-id>.md, im festen Aufbau: Kopf (thema, quellen), # Titel, „Ihr braucht: …“,
-// nummerierte Schritte, **Darauf kommt es an:**, **Leichter:** / **Schwerer:**, **Passt gut:**.
-// Angezeigt wird alles außer dem Kopf (die Quellen gehören in die Datei, nicht auf den Bildschirm). Fehlt die Datei
-// oder passt sie nicht in den Aufbau, zeigt die Seite den Einzeiler aus dem Lernplan (eltern).
+// Darstellung der Anleitungen „Mit echten Dingen“ (docs/mit-echten-dingen.md) auf der Seite echt.html.
+// Gelesen wird mit dem gemeinsamen Leser (spiele/rahmen/markdown.js, liesAnleitung): eine Datei je Thema unter
+// spiele/mit-echten-dingen/<fach>/<thema-id>.md mit einer Form je Situation (`## Am Tisch: …`, `## In Bewegung: …`,
+// `## Unterwegs: …`). Welche Themen eine (freigegebene) Anleitung haben, sagt das Verzeichnis
+// (spiele/rahmen/echte-dinge.js, `npm run echte-dinge`). Hier wird jede Form in den festen Aufbau der Seite gebracht:
+// „Ihr braucht“ (auf dem Tablett), nummerierte Schritte, „Darauf kommt es an“ (Sonnenring), „Leichter“/„Schwerer“
+// als Umschalter (eine Stufe zur Zeit), „Passt gut“. Der Kopf mit den Quellen erscheint nie. Gibt es mehr als eine
+// Form, steht oben die Wahl der Situation. Ohne Datei der Einzeiler aus dem Lernplan (eltern).
 // Nur lesen, kein Vorlesen (Christian, 2026-11-14).
 import { esc } from "./zeichnen.js";
+import { inline, blockHtml } from "../rahmen/markdown.js";
+
+/** @typedef {import("../rahmen/markdown.js").Anleitung} Anleitung */
+/** @typedef {import("../rahmen/markdown.js").Form} Form */
+/** @typedef {import("../rahmen/markdown.js").Block} Block */
 
 /**
- * @typedef {{kopf: Record<string, string>, titel: string, braucht: string, schritte: string[], kern: string,
- *   leichter: string, schwerer: string, passt: string}} Anleitung
+ * @typedef {{ braucht: string, schritte: string[], kern: string, leichter: string, schwerer: string, passt: string,
+ *   weiteres: Block[] }} Teile
  */
 
-/** Verzeichnis der vorhandenen Anleitungen ({ fach: themaId[] }), damit nur vorhandene Dateien angefragt werden. */
-export const VERZEICHNIS = "mit-echten-dingen/index.json";
+const MARKEN = ["Darauf kommt es an", "Leichter", "Schwerer", "Passt gut"];
 
-/**
- * Gibt es zu diesem Thema eine Anleitung?
- * @param {Record<string, string[]>|null|undefined} index Inhalt von VERZEICHNIS
- * @param {string} fach @param {string} themaId
- */
-export function hatAnleitung(index, fach, themaId) {
-  return Array.isArray(index?.[fach]) && /** @type {string[]} */ (index?.[fach]).includes(themaId);
-}
-
-/** Pfad der Anleitung zu einem Thema; null bei unsicheren Ids. @param {string} fach @param {string} themaId */
-export function anleitungPfad(fach, themaId) {
-  const sicher = /^[a-z0-9-]+$/;
-  return sicher.test(fach) && sicher.test(themaId) ? `mit-echten-dingen/${fach}/${themaId}.md` : null;
-}
-
-/** Wert hinter einer fetten Marke, bis zur nächsten fetten Marke oder zum Zeilenende. @param {string} text @param {string} marke */
+/** Wert hinter einer fetten Marke, bis zur nächsten Marke oder zum Ende. @param {string} text @param {string} marke */
 function nachMarke(text, marke) {
-  const m = text.match(new RegExp(`\\*\\*${marke}:\\*\\*\\s*(.*?)(?=\\s*\\*\\*[^*]+:\\*\\*|$)`, "m"));
+  const m = text.match(new RegExp(`\\*\\*${marke}:\\*\\*\\s*(.*?)(?=\\s*\\*\\*(?:${MARKEN.join("|")}):\\*\\*|$)`));
   return m ? m[1].trim() : "";
 }
 
 /**
- * @param {string} md
- * @returns {Anleitung|null}
+ * Bringt die Blöcke einer Form in den Aufbau der Seite; was in keinen Teil passt, steht unter „weiteres“.
+ * @param {Form} form
+ * @returns {Teile}
  */
-export function leseAnleitung(md) {
-  let rest = String(md ?? "");
-  /** @type {Record<string, string>} */
-  const kopf = {};
-  const k = rest.match(/^---\n([\s\S]*?)\n---\n?/);
-  if (k) {
-    for (const zeile of k[1].split("\n")) {
-      const m = zeile.match(/^([a-z]+):\s*(.*)$/);
-      if (m) kopf[m[1]] = m[2].trim();
+export function formTeile(form) {
+  /** @type {Teile} */
+  const t = { braucht: "", schritte: [], kern: "", leichter: "", schwerer: "", passt: "", weiteres: [] };
+  for (const b of form.bloecke) {
+    if (b.typ === "p" && /^Ihr braucht:/.test(b.text) && !t.braucht) { t.braucht = b.text.replace(/^Ihr braucht:\s*/, ""); continue; }
+    if (b.typ === "ol" && !t.schritte.length) { t.schritte = b.punkte; continue; }
+    if (b.typ === "p" && MARKEN.some((m) => b.text.includes(`**${m}:**`))) {
+      t.kern ||= nachMarke(b.text, "Darauf kommt es an");
+      t.leichter ||= nachMarke(b.text, "Leichter");
+      t.schwerer ||= nachMarke(b.text, "Schwerer");
+      t.passt ||= nachMarke(b.text, "Passt gut");
+      continue;
     }
-    rest = rest.slice(k[0].length);
+    t.weiteres.push(b);
   }
-  const titel = rest.match(/^#\s+(.+)$/m)?.[1].trim() ?? "";
-  const schritte = [...rest.matchAll(/^\d+\.\s+(.+)$/gm)].map((m) => m[1].trim());
-  if (!titel || !schritte.length) return null;
-  return {
-    kopf,
-    titel,
-    braucht: rest.match(/^Ihr braucht:\s*(.+)$/m)?.[1].trim() ?? "",
-    schritte,
-    kern: nachMarke(rest, "Darauf kommt es an"),
-    leichter: nachMarke(rest, "Leichter"),
-    schwerer: nachMarke(rest, "Schwerer"),
-    passt: nachMarke(rest, "Passt gut"),
-  };
+  return t;
 }
 
 /**
- * Die Anleitung als Seiteninhalt.
- * @param {Anleitung} a
+ * Eine Form als Abschnitt der Seite.
+ * @param {Form} form
+ * @param {boolean} sichtbar
  * @returns {string}
  */
-export function anleitungHtml(a) {
+export function formHtml(form, sichtbar) {
+  const t = formTeile(form);
   const abschnitt = (/** @type {string} */ klasse, /** @type {string} */ ueber, /** @type {string} */ text) =>
-    text ? `<section class="${klasse}"><h2>${ueber}</h2><p>${esc(text)}</p></section>` : "";
-  const stufen = a.leichter || a.schwerer
+    text ? `<section class="${klasse}"><h2>${ueber}</h2><p>${inline(text)}</p></section>` : "";
+  const stufen = t.leichter || t.schwerer
     ? `<section class="stufen"><div class="umschalter">`
-      + (a.leichter ? `<button class="stufe" type="button" data-stufe="leichter" aria-pressed="false">Leichter</button>` : "")
-      + (a.schwerer ? `<button class="stufe" type="button" data-stufe="schwerer" aria-pressed="false">Schwerer</button>` : "")
+      + (t.leichter ? `<button class="stufe" type="button" data-stufe="leichter" aria-pressed="false">Leichter</button>` : "")
+      + (t.schwerer ? `<button class="stufe" type="button" data-stufe="schwerer" aria-pressed="false">Schwerer</button>` : "")
       + `</div>`
-      + (a.leichter ? `<p class="stufen-text" data-stufe="leichter" hidden>${esc(a.leichter)}</p>` : "")
-      + (a.schwerer ? `<p class="stufen-text" data-stufe="schwerer" hidden>${esc(a.schwerer)}</p>` : "")
+      + (t.leichter ? `<p class="stufen-text" data-stufe="leichter" hidden>${inline(t.leichter)}</p>` : "")
+      + (t.schwerer ? `<p class="stufen-text" data-stufe="schwerer" hidden>${inline(t.schwerer)}</p>` : "")
       + `</section>`
     : "";
-  return `<h1>${esc(a.titel)}</h1>`
-    + abschnitt("braucht", "Ihr braucht", a.braucht)
-    + `<ol class="schritte">${a.schritte.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>`
-    + abschnitt("kern", "Darauf kommt es an", a.kern)
+  return `<div class="form" data-situation="${esc(form.situation)}"${sichtbar ? "" : " hidden"}>`
+    + `<p class="form-name">${esc(form.name)}</p>`
+    + abschnitt("braucht", "Ihr braucht", t.braucht)
+    + (t.schritte.length ? `<ol class="schritte">${t.schritte.map((s) => `<li>${inline(s)}</li>`).join("")}</ol>` : "")
+    + (t.weiteres.length ? `<div class="weiteres">${blockHtml(t.weiteres, { ebene: 2 })}</div>` : "")
+    + abschnitt("kern", "Darauf kommt es an", t.kern)
     + stufen
-    + abschnitt("passt", "Passt gut", a.passt);
+    + abschnitt("passt", "Passt gut", t.passt)
+    + `</div>`;
+}
+
+/**
+ * Die Anleitung als Seiteninhalt: Titel, bei mehr als einer Form die Wahl der Situation, dann die Formen
+ * (sichtbar ist die gewählte, sonst die erste).
+ * @param {Anleitung} a
+ * @param {string} [situation] gewünschte Situation (letzte Wahl)
+ * @param {string} [symbole] Ordner der Symbole (mit / am Ende)
+ * @returns {string}
+ */
+export function anleitungHtml(a, situation = "", symbole = "symbole/") {
+  const gewaehlt = (a.formen.find((f) => f.situation === situation) ?? a.formen[0])?.situation ?? "";
+  const wahl = a.formen.length > 1
+    ? `<div class="formwahl" role="group" aria-label="Wo spielt ihr?">`
+      + a.formen.map((f) => `<button class="form-knopf" type="button" data-situation="${esc(f.situation)}" aria-pressed="${f.situation === gewaehlt}">`
+        + `<img src="${esc(symbole + f.symbol)}" alt=""><span>${esc(f.wort)}</span></button>`).join("")
+      + `</div>`
+    : "";
+  return `<h1>${esc(a.titel)}</h1>`
+    + (a.vorspann.length ? `<div class="vorspann">${blockHtml(a.vorspann, { ebene: 2 })}</div>` : "")
+    + wahl
+    + a.formen.map((f) => formHtml(f, f.situation === gewaehlt)).join("");
 }
 
 /**

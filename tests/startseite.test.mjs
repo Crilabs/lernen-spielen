@@ -43,8 +43,8 @@ test("Startseite: dezenter Hintergrund; kein Kind (Christian: zu wenig Platz neb
 
 test("Startseite: Mit echten Dingen führt zur eigenen Seite; der Titel der Anleitung steht auf der Karte, wenn es sie gibt", () => {
   assert.doesNotMatch(html, /<ls-anregung/);
-  assert.match(skript, /anleitungPfad\(/);
-  assert.match(skript, /leseAnleitung\(/);
+  assert.match(skript, /import \{ ladeVerzeichnis \} from "\.\/rahmen\/echte-dinge\.js";/);
+  assert.match(skript, /a\.querySelector\("b"\)\.textContent = e\.titel/);
 });
 
 test("Startseite: Links sprechen ihren Namen einmal je Sitzung und speichern vor dem Wechsel", () => {

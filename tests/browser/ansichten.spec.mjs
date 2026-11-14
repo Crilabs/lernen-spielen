@@ -293,19 +293,27 @@ async function lauf(typ, name, groesse, basis) {
 
       // --- Mit echten Dingen: Anleitung aus der Datei, sonst der Einzeiler ---------------------------
       if (fall === "leer") {
-        const echt = await oeffne(kontext, `${basis}/spiele/echt.html?thema=abzaehlen`);
+        const echt = await oeffne(kontext, `${basis}/spiele/echt.html?thema=zerlegen-2`);
         const ea = await echt.evaluate(async () => {
+          // auf das Laden warten (Verzeichnis und Datei kommen nacheinander)
+          for (let i = 0; i < 50 && !document.querySelector(".anleitung h1"); i++) await new Promise((r) => setTimeout(r, 50));
           const titel = document.querySelector(".anleitung h1")?.textContent ?? "";
-          const schritte = document.querySelectorAll(".schritte li").length;
-          const quellen = /quellen|hinweis/i.test(document.body.innerText);
-          const [l, sw] = ["leichter", "schwerer"].map((x) => document.querySelector(`.stufe[data-stufe="${x}"]`));
+          const quellen = /quellen|abgerufen|pikas/i.test(document.body.innerText);
+          const sichtbareForm = () => [...document.querySelectorAll(".form")].filter((f) => !f.hidden).map((f) => f.dataset.situation);
+          const vorher = sichtbareForm();
+          document.querySelector('.form-knopf[data-situation="unterwegs"]').click();
+          const nachher = sichtbareForm();
+          const form = document.querySelector('.form[data-situation="unterwegs"]');
+          const schritte = form.querySelectorAll(".schritte li").length;
+          const [l, sw] = ["leichter", "schwerer"].map((x) => form.querySelector(`.stufe[data-stufe="${x}"]`));
           l.click(); sw.click();
           await new Promise((r) => setTimeout(r, 50));
-          const sichtbar = [...document.querySelectorAll(".stufen-text")].filter((p) => !p.hidden).map((p) => p.dataset.stufe);
-          return { titel, schritte, quellen, sichtbar, fach: document.getElementById("leiste").getAttribute("fach") };
+          const sichtbar = [...form.querySelectorAll(".stufen-text")].filter((p) => !p.hidden).map((p) => p.dataset.stufe);
+          return { titel, schritte, quellen, vorher, nachher, sichtbar, fach: document.getElementById("leiste").getAttribute("fach") };
         });
-        pruefe(F, "Mit echten Dingen: Anleitung mit Titel, drei Schritten, ohne Quellen, Fach Mathe; eine Stufe zur Zeit",
-          ea.titel === "Gabeln zählen" && ea.schritte === 3 && !ea.quellen && ea.fach === "mathe" && JSON.stringify(ea.sichtbar) === '["schwerer"]', JSON.stringify(ea));
+        pruefe(F, "Mit echten Dingen: Anleitung mit Titel, Wahl der Situation (eine Form zur Zeit), vier Schritten, ohne Quellen, Fach Mathe; eine Stufe zur Zeit",
+          ea.titel === "Die 2 in zwei Teile legen" && JSON.stringify(ea.vorher) === '["tisch"]' && JSON.stringify(ea.nachher) === '["unterwegs"]'
+          && ea.schritte === 4 && !ea.quellen && ea.fach === "mathe" && JSON.stringify(ea.sichtbar) === '["schwerer"]', JSON.stringify(ea));
         await bild(echt, s("echt", "anleitung"));
         await echt.close();
         const ersatz = await oeffne(kontext, `${basis}/spiele/echt.html?thema=rechnen-3`);

@@ -12,15 +12,21 @@ test("Mit echten Dingen: Kopfleiste mit Titel, Fach des Themas, Thema als Unterz
   assert.match(skript, /leiste\.setAttribute\("thema", thema\.name\)/);
 });
 
-test("Mit echten Dingen: Anleitung aus der Datei, sonst der Einzeiler aus dem Lernplan", () => {
-  assert.match(skript, /anleitungPfad\(thema\.strang, thema\.id\)/);
-  assert.match(skript, /leseAnleitung\(/);
-  assert.match(skript, /anleitungHtml\(/);
+test("Mit echten Dingen: Anleitung über das Verzeichnis (nur freigegebene), sonst der Einzeiler aus dem Lernplan", () => {
+  assert.match(skript, /import \{ findeAnleitung, ladeAnleitung, letzteForm, merkeForm \} from "\.\/rahmen\/echte-dinge\.js";/);
+  assert.match(skript, /findeAnleitung\(\{ thema: thema\.id, fach: thema\.strang \}\)/);
+  assert.match(skript, /anleitungHtml\(anleitung, await letzteForm\(\)\)/);
   assert.match(skript, /einzeilerHtml\(thema\.name, thema\.eltern\)/);
+  assert.doesNotMatch(html, /index\.json/);
 });
 
-test("Mit echten Dingen: Leichter und Schwerer als Umschalter, eine Stufe zur Zeit", () => {
-  assert.match(skript, /\.stufe/);
+test("Mit echten Dingen: Wahl der Situation, eine Form zur Zeit, letzte Wahl gemerkt", () => {
+  assert.match(skript, /\.form-knopf/);
+  assert.match(skript, /merkeForm\(s\)/);
+});
+
+test("Mit echten Dingen: Leichter und Schwerer als Umschalter je Form, eine Stufe zur Zeit", () => {
+  assert.match(skript, /form\.querySelectorAll\("\.stufe"\)/);
   assert.match(skript, /aria-pressed/);
 });
 

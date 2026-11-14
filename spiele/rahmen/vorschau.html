@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="seite.css">
 <style>
   /* Entwicklerseite, nicht aus der App verlinkt: jeder Baustein einmal, in der Anordnung aus docs/bedienung.md 3.
-     Adresse: vorschau.html?fach=mathe&titel=Spielvorlage&thema=Die%207%20zerlegen  (&pause, &leuchte)
+     Adresse: vorschau.html?fach=mathe&titel=Spielvorlage&thema=Die%207%20zerlegen  (&pause, &leuchte;
+     ?echte-dinge die Kacheln „Mit echten Dingen“ neben einer Spiel-Kachel; &karte öffnet dort gleich die Karte;
+     &entwurf zeigt auch die Anleitungen, die noch Entwurf sind – ohne sieht man nur freigegebene)
      Alle Maße in rem; Platz bleibt für 172 rem Breite (16:10), dort ist das sichere Feld schmaler als 192 rem. */
   .welt { background: linear-gradient(#CFEFFF, #EAF7FF 60%); }
   .huegel { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 34rem; }
@@ -42,6 +44,16 @@
 
   .pausen-inhalt { display: grid; gap: 2rem; justify-items: center; font-size: 4rem; text-align: center; max-width: 90rem; }
   .pausen-inhalt img { width: 22rem; height: 22rem; }
+  /* Mit echten Dingen (?echte-dinge): eine Spiel-Kachel wie auf der Fach-Seite zum Vergleich der Größe, daneben die
+     Kacheln (mit Anleitung, ohne Anleitung mit Einzeiler) auf einer Fläche wie dort. */
+  .echte-dinge { position: absolute; top: calc(var(--ls-leiste-hoehe) + 4rem); left: 2.4rem; right: 2.4rem; display: grid; gap: 3.2rem; }
+  .echte-dinge[hidden] { display: none; }
+  .echte-dinge .flaeche { --fach-fuellung: #F06BB0; display: flex; flex-wrap: wrap; align-items: center; gap: 3.2rem; padding: 4rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-gross); }
+  .echte-dinge h2 { margin: 0; font-size: 5.2rem; line-height: 1.2; flex-basis: 100%; }
+  .echte-dinge .spiel { box-sizing: border-box; display: inline-flex; align-items: center; gap: 2.4rem; min-height: 16rem; min-width: 40rem; padding: 2rem 4rem 2rem 2rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); box-shadow: var(--ls-schatten); color: var(--ls-tinte); text-decoration: none; }
+  .echte-dinge .spiel .ico { flex: none; box-sizing: border-box; width: 12rem; height: 12rem; padding: 1.8rem; border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein); background: var(--fach-fuellung); }
+  .echte-dinge .spiel .ico img { display: block; width: 100%; height: 100%; }
+  .echte-dinge .spiel b { font-size: 4rem; line-height: 1.15; }
 </style>
 </head>
 <body>
@@ -92,6 +104,20 @@
     <ls-knopf id="leuchtknopf" art="haupt" wort="Leuchte"></ls-knopf>
   </div>
 </div>
+<section class="echte-dinge" id="echte-dinge" hidden>
+  <div class="flaeche">
+    <h2>Die 7 zerlegen</h2>
+    <a class="spiel" id="spielkachel" href="#"><span class="ico"><img src="../symbole/mathe.svg" alt=""></span><b>Zwei Tonnen</b></a>
+    <ls-echte-dinge-kachel id="kachel-7" thema="zerlegen-7" fach="mathe" titel="Die 7 zerlegen" text="Verteilen Sie 7 Murmeln auf zwei Hände und fragen Sie: „Wie viele sind in der anderen Hand?“"></ls-echte-dinge-kachel>
+  </div>
+  <div class="flaeche" style="--fach-fuellung:#F2B630">
+    <h2>Weitere Themen</h2>
+    <ls-echte-dinge-kachel id="kachel-silben" thema="silben-klatschen" fach="lesen" titel="Silben klatschen"></ls-echte-dinge-kachel>
+    <ls-echte-dinge-kachel id="kachel-ohne" thema="rechnen-3" fach="mathe" titel="Rechnen mit der 3" text="Fragen Sie beim Tischdecken: „Zwei Teller stehen schon, wie viele fehlen für drei?“"></ls-echte-dinge-kachel>
+    <ls-echte-dinge-kachel id="kachel-leer" thema="gibt-es-nicht" fach="mathe"></ls-echte-dinge-kachel>
+  </div>
+</section>
+<ls-anregung id="anregung"></ls-anregung>
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause">
   <div class="pausen-inhalt">
@@ -107,6 +133,8 @@
   import "./tastatur.js";
   import "./perlenstab.js";
   import "./wortart.js";
+  import "./anregung.js";
+  import "./echte-dinge-kachel.js";
   import { ziehbar, setze, zurueck } from "./ziehen.js";
 
   const q = new URLSearchParams(location.search);
@@ -139,7 +167,7 @@
   });
   const zeigePause = async () => {
     merke("pause zeige");
-    merke(`pause ${await pause.zeige()}`);
+    merke(`pause ${await pause.zeige({ echteDinge: { thema: "zerlegen-7", fach: "mathe", titel: "Die 7 zerlegen" } })}`);
   };
   document.getElementById("pausenknopf").addEventListener("click", zeigePause);
 
@@ -161,6 +189,14 @@
     });
   }
 
+  // Mit echten Dingen: ?echte-dinge zeigt die Kacheln statt der Bausteine (&karte öffnet die erste gleich).
+  if (q.has("echte-dinge")) {
+    document.querySelector(".buehne").hidden = true;
+    document.getElementById("echte-dinge").hidden = false;
+    leiste.setAttribute("thema", "Mit echten Dingen");
+    document.getElementById("spielkachel").addEventListener("click", (e) => e.preventDefault());
+    if (q.has("karte")) document.getElementById("kachel-7").geladen.then(() => document.getElementById("kachel-7").oeffneKarte());
+  }
   if (q.has("leuchte")) hilfe.leuchte();
   if (q.has("pause")) zeigePause();
 </script>

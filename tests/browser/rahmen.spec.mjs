@@ -418,25 +418,10 @@ async function lauf(typ, name, groesse, basis) {
         pa.sichtbar && pa.wort === "Mit echten Dingen" && nah(pa.hoehe, 11) && pa.alleHoehe > pa.hoehe && pa.mitte <= 1.5 && pa.abstand >= 2 * rem
           && pa.rechts <= groesse.width - 2.4 * rem + tol && pa.gleich, JSON.stringify(pa));
       if (SHOTS) await ed.screenshot({ path: join(SHOTS, `pause-angebot-${name}-${groesse.width}x${groesse.height}.png`) });
-      await tipp(ed.locator("ls-pause ls-knopf.echt"));
-      await ed.evaluate(() => document.getElementById("pause").anregung.geladen);
-      await pause(200);
-      const pk = await ed.evaluate(() => {
-        const p = document.getElementById("pause"), w = p.shadowRoot, a = p.anregung;
-        return { offen: a.offen, form: a.form, aktionenInert: w.querySelector(".aktionen").inert,
-          oben: document.elementFromPoint(innerWidth / 2, innerHeight / 2) === p };
-      });
-      pruefe(L, "Pause: Angebot öffnet die Karte zum Thema der Runde über der Pause, Knöpfe darunter inert",
-        pk.offen && pk.form !== "" && pk.aktionenInert && pk.oben, JSON.stringify(pk));
-      if (SHOTS) await ed.screenshot({ path: join(SHOTS, `pause-karte-${name}-${groesse.width}x${groesse.height}.png`) });
-      await ed.keyboard.press("Escape");
-      await pause(100);
-      const nachEsc = await ed.evaluate(() => ({ pause: document.getElementById("pause").hasAttribute("offen"), karte: document.getElementById("pause").anregung.offen,
-        inert: document.getElementById("pause").shadowRoot.querySelector(".aktionen").inert }));
-      pruefe(L, "Pause: Escape schließt nur die Karte, die Pause bleibt", nachEsc.pause && !nachEsc.karte && !nachEsc.inert, JSON.stringify(nachEsc));
-      await tipp(ed.locator("ls-pause ls-knopf.weiter"));
-      await pause(150);
-      pruefe(L, "Pause: Weiter geht danach wie immer", !(await ed.evaluate(() => document.getElementById("pause").hasAttribute("offen"))));
+      // Das Angebot führt zur Seite „Mit echten Dingen“ zum Thema der Runde (echt.html, Christian 2026-11-14); vorher
+      // speichert linkKlick wie bei „Alle Spiele“.
+      await Promise.all([ed.waitForURL(/\/spiele\/echt\.html\?thema=zerlegen-7$/, { timeout: 5000 }), tipp(ed.locator("ls-pause ls-knopf.echt"))]);
+      pruefe(L, "Pause: Angebot führt zur Seite Mit echten Dingen zum Thema der Runde", /\/spiele\/echt\.html\?thema=zerlegen-7$/.test(ed.url()), ed.url());
       await ed.close();
     }
 

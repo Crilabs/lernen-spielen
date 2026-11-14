@@ -385,9 +385,7 @@ async function zeigePause({ hinweis = null, zeit = { schluss: false, satz: null 
     a.innerHTML = `<img src="${esc(spiel.symbol)}" alt=""><span>${esc(spiel.titel)}</span>`;
     karte.append(a);
   }
-  stand.phase = "pause";
   await pause.zeige({ ...zeit, echteDinge }); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
-  stand.phase = "laden";
 }
 
 // --- Elternansicht (?eltern): beschreibend, kein Vergleich -----------------------------------------

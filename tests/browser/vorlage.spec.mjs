@@ -250,14 +250,11 @@ async function lauf(typ, name, groesse, basis) {
     });
     pruefe(L, "Pause nach der Folge der letzten Aufgabe, mit Sachmoment, Alle Spiele und Weiter gleich groß", !offenVorFolge && p.gleich && p.karte && p.stab, JSON.stringify(p));
     await seite.evaluate(() => document.getElementById("pause").angebotBereit);
-    await tipp(seite.locator("ls-pause ls-knopf.echt"));
-    await seite.evaluate(() => document.getElementById("pause").anregung.geladen);
-    const ed = await seite.evaluate(() => { const a = document.getElementById("pause").anregung;
-      return { offen: a.offen, thema: a.shadowRoot.querySelector(".thema").textContent, formen: a.shadowRoot.querySelectorAll(".reiter [role=tab]").length }; });
-    pruefe(L, "Pause: Angebot „Mit echten Dingen“ öffnet die Karte zum Thema der Runde (Die 7 zerlegen, mit Formen)",
-      ed.offen && ed.thema === "Die 7 zerlegen" && ed.formen === 2, JSON.stringify(ed));
-    await seite.keyboard.press("Escape");
-    await pause(100);
+    // Das Angebot führt zu echt.html (geprüft in rahmen.spec.mjs); hier nur, dass es zum Thema der Runde da ist.
+    const ed = await seite.evaluate(() => { const p = document.getElementById("pause"), k = p.shadowRoot.querySelector("ls-knopf.echt");
+      return { sichtbar: !k.hidden, titel: p.echteDinge?.titel ?? "" }; });
+    pruefe(L, "Pause: Angebot „Mit echten Dingen“ zum Thema der Runde (Die 7 zerlegen) sichtbar",
+      ed.sichtbar && ed.titel === "Die 7 zerlegen", JSON.stringify(ed));
     await pause(300);
     await bild(seite, "pause", name, groesse);
     await seite.waitForTimeout(1500);
