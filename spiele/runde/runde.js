@@ -5,6 +5,9 @@
 import "./gesichter.js";
 import "./haltungen.js";
 import "./bewegungen.js";
+import "./luftzeichen.js";
+import "./albern.js";
+import "./rolli.js";
 import "./zubehoer/zauberstab-umhang.js";
 import "./zubehoer/lupenmuetze.js";
 import "./zubehoer/schirm.js";

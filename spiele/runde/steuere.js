@@ -258,8 +258,10 @@ export function steuere(svg, opts = {}) {
         for (const s of folge) {
           if (nr !== lauf) return { abgebrochen: true };
           if (s.wende) {
+            // Gespiegelt wird um die Bildmitte: der Versatz kehrt sich um, damit die Figur an ihrem Platz bleibt.
+            // Schritte nach einer Wende rechnen in der neuen Blickrichtung.
             blick = andererBlick(blick);
-            anwenden(aktuell);
+            anwenden({ ...aktuell, versatz: [-aktuell.versatz[0], aktuell.versatz[1]] });
           }
           const e = await uebergang(s.pose, s.ms, nr, s.kurve);
           if (e.abgebrochen) return e;

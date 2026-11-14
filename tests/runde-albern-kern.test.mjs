@@ -197,3 +197,15 @@ test("zusammen startet versetzt, halt hält alle", async () => {
   await z2;
   assert.equal(fs[0].pose.winkel.kopf, 0);
 });
+
+test("Wende kehrt den Versatz um, die Figur bleibt an ihrem Platz", async () => {
+  meldeBewegung({
+    id: "runde-test", ansicht: "dreiviertel", ende: "stehen",
+    schritte: [{ ms: 100, versatz: [90, 0], streckung: [0.05, 1] }, { ms: 100, wende: true, versatz: [-90, 0], streckung: [1, 1] }],
+  });
+  const { u, svg, f } = figur();
+  f.bewegung("runde-test");
+  await u.spule(116);
+  assert.match(svg.querySelector('[data-gelenk="koerper"]').getAttribute("transform"), /^translate\(-9\d/);
+  assert.equal(f.blick, "links");
+});
