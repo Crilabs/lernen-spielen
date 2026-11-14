@@ -7,7 +7,7 @@
 // Das Skript startet einen eigenen statischen Server auf einem freien Port und beendet sich mit Code 1,
 // sobald eine Prüfung fehlschlägt.
 //
-// Geprüft wird in Chromium und WebKit bei 1920 × 1080 und 1280 × 800, je in drei Lernständen:
+// Geprüft wird in Chromium und WebKit bei 1920 × 1080, 1280 × 800 und 1440 × 1080 (4:3), je in drei Lernständen:
 //   leer      kein Lernstand, keine Spiele (Entwicklungsstand): ruhige Seiten, keine Fehler;
 //   gekonnt   gekonnte Themen, aber keine Spiele (aus entfernten Spielen): Regal und Regal-Kachel zeigen sie;
 //   spiele    dazu drei Testspiele (nur im Browser per page.route in spiele.json, nichts davon im Repo) und
@@ -55,7 +55,7 @@ function starteServer() {
   return new Promise((ok) => server.listen(0, "127.0.0.1", () => ok(server)));
 }
 
-const AUFLOESUNGEN = [{ width: 1920, height: 1080 }, { width: 1280, height: 800 }];
+const AUFLOESUNGEN = [{ width: 1920, height: 1080 }, { width: 1280, height: 800 }, { width: 1440, height: 1080 }];
 const SHOTS = process.env.SHOTS;
 const pause = (ms) => new Promise((ok) => setTimeout(ok, ms));
 const HALTEN_MS = 3000; // wie spiele/index.html
@@ -66,8 +66,8 @@ const SYMBOL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fi
   stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="30" width="72" height="40" rx="6" fill="#F7EFE3"/>
   <circle cx="34" cy="50" r="8" fill="#E5484D"/><circle cx="56" cy="50" r="8" fill="#3FA34D"/></svg>`;
 const SPIELE = [
-  { id: "test-perlen", titel: "Perlenbrücke", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-perlen.html", arten: [{ art: "zerlegung", zahlen: [2, 10], stufen: ["kopf"] }] },
-  { id: "test-rechnen", titel: "Zahlenzauber", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-rechnen.html", arten: [{ art: "rechnen", max: 100, gleiche: false, stufen: ["kopf"] }] },
+  { id: "test-perlen", titel: "Perlenbrücke", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-perlen.html", welt: "muell-trennen", arten: [{ art: "zerlegung", zahlen: [2, 10], stufen: ["kopf"] }] },
+  { id: "test-rechnen", titel: "Zahlenzauber mit Kettenhüpfern", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-rechnen.html", welt: "gibt-es-nicht", arten: [{ art: "rechnen", max: 100, gleiche: false, stufen: ["kopf"] }] },
   { id: "test-lesen", titel: "Silbenschiff", kategorie: "lesen", symbol: "symbole/test-spiel.svg", datei: "test-lesen.html" },
 ];
 const eintrag = (z, k, u) => z === "kann-ich"
@@ -159,34 +159,54 @@ async function lauf(typ, name, groesse, basis) {
       // --- Startseite ----------------------------------------------------------------------------
       const start = await oeffne(kontext, `${basis}/spiele/index.html`);
       const st = await start.evaluate(() => {
-        const sichtbar = (el) => !!el && !el.hidden && el.getBoundingClientRect().width > 0;
-        const dran = document.getElementById("dran"), faecher = document.getElementById("faecher");
-        const bildFeld = dran.querySelector(".bild");
+        const box = (el) => { const r = el.getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom }; };
+        const imBild = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.left >= 0 && r.top >= 0 && r.right <= innerWidth + 0.5 && r.bottom <= innerHeight + 0.5; };
+        const tore = [...document.querySelectorAll("#dran a.tor")];
+        const bretter = [...document.querySelectorAll("#faecher a.brett")];
         const leiste = document.getElementById("leiste");
-        const r = document.getElementById("regal").getBoundingClientRect();
+        const kinder = [...document.querySelectorAll("#runde .kind svg")];
+        // Körper der Figur: gemalte Fläche ohne den leeren Rand der viewBox
+        const koerper = kinder.map((svg) => { const g = svg.querySelector("[data-schicht='kontur']") ?? svg; return box(g); });
+        const ueber = (a, b) => a.l < b.r && b.l < a.r && a.t < b.b && b.t < a.b;
+        // Ohne tabindex folgt die Tab-Reihenfolge der Reihenfolge im DOM.
+        const fokus = document.querySelector(".bedienung [tabindex]") ? ["tabindex"] : [...document.querySelectorAll(".bedienung a")].map((a) => a.classList[0]);
         return {
-          dran: sichtbar(dran) ? dran.querySelectorAll("a.kachel").length : 0,
-          dranLinks: [...dran.querySelectorAll("a.kachel")].map((a) => a.getAttribute("href")),
-          faecher: sichtbar(faecher) ? [...faecher.querySelectorAll("a.kachel")].map((a) => a.getAttribute("href")) : [],
-          regal: sichtbar(document.getElementById("regal")) && r.bottom <= innerHeight && r.right <= innerWidth,
+          tore: tore.length,
+          toreLinks: tore.map((a) => a.getAttribute("href")),
+          toreWelt: tore.map((a) => a.dataset.welt ?? null),
+          toreImBild: tore.every(imBild),
+          namePasst: tore.every((a) => a.querySelector("b").scrollWidth <= a.querySelector(".text").clientWidth + 1),
+          faecher: bretter.map((a) => a.getAttribute("href")),
+          bretterImBild: bretter.every(imBild),
+          schriftFrei: [...tore.map((a) => a.querySelector(".text")), ...bretter].every((t) => koerper.every((k) => !ueber(box(t), k))),
+          regal: imBild(document.getElementById("regal")),
+          kinder: kinder.length,
+          kinderImBild: koerper.every((k) => k.l >= 0 && k.r <= innerWidth + 0.5 && k.b <= innerHeight + 0.5),
+          pfahl: getComputedStyle(document.getElementById("pfahl")).display !== "none",
+          fokus,
           dinge: document.getElementById("dinge").children.length,
           hausWeg: leiste.shadowRoot.querySelector("a.haus").hidden,
-          zahnrad: sichtbar(document.getElementById("zahnrad")),
-          bildFeld: bildFeld ? { hinten: getComputedStyle(bildFeld).backgroundColor, rand: getComputedStyle(bildFeld).borderTopWidth } : null,
+          zahnrad: imBild(document.getElementById("zahnrad")),
           text: document.body.innerText,
         };
       });
-      pruefe(F, "Startseite: Regal-Kachel ganz im Bild, Haus fehlt, Zahnrad da", st.regal && st.hausWeg && st.zahnrad, JSON.stringify(st));
+      pruefe(F, "Startseite: Baumhaus (Regal) ganz im Bild, Haus fehlt, Zahnrad da", st.regal && st.hausWeg && st.zahnrad, JSON.stringify(st));
+      pruefe(F, "Startseite: die Runde steht ganz im Bild (vier Kinder)", st.kinder === 4 && st.kinderImBild, JSON.stringify(st));
       pruefe(F, "Startseite: keine Zahl als Fortschritt („x von y“, Prozent)", !/\d+\s*(von|\/)\s*\d+|%/.test(st.text), st.text);
       if (fall === "leer") {
-        pruefe(F, "Startseite leer: keine Dran-Kachel, keine Fach-Kachel, leeres Regal-Holz", st.dran === 0 && st.faecher.length === 0 && st.dinge === 0, JSON.stringify(st));
+        pruefe(F, "Startseite leer: kein Tor, kein Brett, kein Pfahl, leeres Regal", st.tore === 0 && st.faecher.length === 0 && !st.pfahl && st.dinge === 0, JSON.stringify(st));
       } else if (fall === "gekonnt") {
-        pruefe(F, "Startseite ohne Spiele: keine Dran- und Fach-Kacheln, Regal zeigt drei Dinge", st.dran === 0 && st.faecher.length === 0 && st.dinge === 3, JSON.stringify(st));
+        pruefe(F, "Startseite ohne Spiele: kein Tor, kein Brett, Regal zeigt drei Dinge", st.tore === 0 && st.faecher.length === 0 && st.dinge === 3, JSON.stringify(st));
       } else {
-        pruefe(F, "Startseite mit Spielen: höchstens drei Dran-Kacheln mit ?thema=", st.dran >= 1 && st.dran <= 3 && st.dranLinks.every((h) => /\.html\?thema=/.test(h)), JSON.stringify(st.dranLinks));
-        pruefe(F, "Startseite mit Spielen: Fach-Kacheln nur für Fächer mit Spielen (Mathe, Lesen)",
-          JSON.stringify(st.faecher) === JSON.stringify(["themen.html?fach=mathe", "themen.html?fach=lesen"]), JSON.stringify(st.faecher));
-        pruefe(F, "Dran-Kachel: Spielsymbol auf einem Feld in der Fach-Füllung mit Kontur", st.bildFeld?.hinten === "rgb(240, 107, 176)" && parseFloat(st.bildFeld.rand) > 0, JSON.stringify(st.bildFeld));
+        pruefe(F, "Startseite mit Spielen: höchstens drei Tore mit ?thema=, ganz im Bild", st.tore >= 1 && st.tore <= 3 && st.toreImBild && st.toreLinks.every((h) => /\.html\?thema=/.test(h)), JSON.stringify(st.toreLinks));
+        pruefe(F, "Startseite mit Spielen: Bretter nur für Fächer mit Spielen (Mathe, Lesen), ganz im Bild, Pfahl da",
+          JSON.stringify(st.faecher) === JSON.stringify(["themen.html?fach=mathe", "themen.html?fach=lesen"]) && st.bretterImBild && st.pfahl, JSON.stringify(st.faecher));
+        pruefe(F, "Tore: Weltandeutung nur bei bekannter Welt (muell-trennen ja, gibt-es-nicht nein)",
+          st.toreWelt.includes("muell-trennen") && !st.toreWelt.includes("gibt-es-nicht"), JSON.stringify(st.toreWelt));
+        pruefe(F, "Tore: langer Spielname passt ins Schild", st.namePasst, JSON.stringify(st));
+        pruefe(F, "Schilder und Bretter überdecken keine Figur", st.schriftFrei, JSON.stringify(st));
+        const erst = st.fokus.lastIndexOf("tor"), brett = st.fokus.indexOf("brett"), bh = st.fokus.indexOf("baumhaus");
+        pruefe(F, "Tab-Reihenfolge: Tore, dann Bretter, dann Baumhaus", erst < brett && brett < bh, JSON.stringify(st.fokus));
       }
       await bild(start, s("start", fall));
       await start.close();
