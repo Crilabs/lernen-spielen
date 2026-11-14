@@ -211,7 +211,7 @@ Sachgrund und Geschichte auf drei Stufen je Spiel: [`welten.md`](spielkatalog/we
 | [M11](spielkatalog/mathe.md) Flug zur Zahl | Flug zur Zahl | Mathe | 1–4 | 9 | Die lange Zeitleiste des Lebens | Entdecken | Lücke |
 | [M12](spielkatalog/mathe.md) Hundertertafel | Hundertertafel | Mathe | 2 | 3 | Samen gehen auf Reisen | Versorgen | Lücke |
 | [M13](spielkatalog/mathe.md) Schätzen | Schätzen | Mathe | 2–4 | 8 | Erdteile und Ozeane | Forschen | Vorhersage |
-| [M14](spielkatalog/mathe.md) Zerlegungshaus | Zerlegungshaus | Mathe | 1 | 13 | Müll trennen | Versorgen | Lücke |
+| [M14](spielkatalog/mathe.md) Zwei Tonnen | Zwei Tonnen | Mathe | 1 | 13 | Müll trennen | Versorgen | Lücke |
 | [M15](spielkatalog/mathe.md) Mach voll | Mach voll | Mathe | 1–4 | 10 | Obst und Gemüse und wann es reif ist | Versorgen | Lücke |
 | [M16](spielkatalog/mathe.md) Aufgabenfamilie | Aufgabenfamilie | Mathe | 1–2 | 12 | Haustiere und was sie brauchen | Versorgen | Wissensvorsprung |
 | [M17](spielkatalog/mathe.md) Was passiert? | Was passiert? | Mathe | 1–3 | 9 | Tiere im Winter, Frühblüher, Herbstfrüchte | Forschen | Verwandlung |

@@ -38,7 +38,7 @@ Grundlage: `docs/grundsaetze.md` §9 und §10 (K1–K15), `docs/figuren.md`, Wel
 - Antwort darauf ist die Zeile „Sache wächst mit“ (65 Spiele; bei den übrigen 9 ist nur je ein Thema betroffen). Ein Tausch von Welten hätte das Problem nur verschoben.
 
 **Weiter schwach im Sachgrund** (die Welt ist vor allem Ort und Wortstoff)
-- S18 Selbst schreiben → schulweg, L02 Abzählen → tiere-der-erdteile, Z04 Hörbühne → fuer-andere-einstehen, Z02 Wäscheleine → haende-sonne, S14 Die Karte → gute-schlechte-geheimnisse (trägt nur die gute Hälfte der Regel; die andere steht in der Pause), M14 Zerlegungshaus → muell-trennen (die Sorten bestimmen die Zerlegung, das Kind wählt sie nicht).
+- S18 Selbst schreiben → schulweg, L02 Abzählen → tiere-der-erdteile, Z04 Hörbühne → fuer-andere-einstehen, Z02 Wäscheleine → haende-sonne, S14 Die Karte → gute-schlechte-geheimnisse (trägt nur die gute Hälfte der Regel; die andere steht in der Pause), M14 Zwei Tonnen → muell-trennen (die Sorten bestimmen die Zerlegung, das Kind wählt sie nicht).
 
 **Doppel im selben Fach** (bewusst stehen gelassen)
 - was-pflanzen-brauchen: R08 Fläche und R09 Umfang (zum Mischen gewollt). jahreskreis: M27 und M49. wiese-und-hecke: M35 und M37. karten: R11 und R13. tuerme-bauen: M28 und R12.
@@ -155,10 +155,10 @@ So ist jeder Eintrag zu lesen:
 - Sanft: Die Schachtel reicht vielleicht nicht mehr für Afrika. Erst schätzen: Reicht es? Dann zeigt es sich.
 - Abenteuer: Reise um die Erde über mehrere Runden, mit dem Schirm von oben gesehen: Pinguine auf dem Eis, Zebras in der Steppe, Fische im Schwarm. Geschätzt wird alles, gezählt nur ein Ausschnitt. Am Ende ist das Reisebuch voll.
 
-**M14 Zerlegungshaus** · Müll trennen (`muell-trennen`) · Kl. 1 / 1
+**M14 Zwei Tonnen** · Müll trennen (`muell-trennen`) · Kl. 1 / 1
 - Sachgrund: Müll kommt in verschiedene Tonnen; sieben Teile auf zwei Tonnen verteilen ist Zerlegen.
 - Rahmen: Versorgen · Spannung aus: Lücke
-- Ruhig: Nach dem Picknick kommen die Dinge von der Decke in zwei Tonnen. Jede Zerlegung leert die Decke und beleuchtet ein Stockwerk im Zerlegungshaus; am Ende ist die Wiese sauber.
+- Ruhig: Nach dem Picknick kommen die Dinge von der Decke in zwei Tonnen. Jede Zerlegung leert die Decke in die zwei Tonnen und steht danach in der Liste; am Ende ist die Wiese sauber.
 - Sanft: Ein Sack ist zugeknotet: Sieben Teile waren es, vier liegen in der Papiertonne. Wie viele sind im Sack? Aufgeknotet zeigt es sich.
 - Abenteuer: Über mehrere Runden baut die Runde aus dem Gesammelten (Dosen, Kartons, Korken) eine Figur fürs Schulfest; jede Zerlegung liefert zwei Sorten Teile. Im Bauch der fertigen Figur scheppert noch etwas: eine vergessene Fahrradklingel.
 
@@ -1134,7 +1134,7 @@ So ist jeder Eintrag zu lesen:
 | Wetter beobachten und messen (`wetter-messen`) | 2 | ruhig | M51 Ablesen |
 | Was man bei Gewitter tut (`gewitter`) | 1 | ruhig | M48 Wie lange? |
 | Holz, Metall, Glas, Wolle, Papier (`stoffe`) | 1 | ruhig | G10 Fundbüro |
-| Müll trennen (`muell-trennen`) | 1 | ruhig | M14 Zerlegungshaus |
+| Müll trennen (`muell-trennen`) | 1 | ruhig | M14 Zwei Tonnen |
 | Eis, Wasser, Dampf (`eis-wasser-dampf`) | 2 | ruhig | Z08 Weil-Brücke |
 | Der Weg des Wassers (`wasserkreislauf`) | 3 | ruhig | M29 Zahlenmaschine |
 | Tag und Nacht, Sonne und Erde (`tag-und-nacht`) | 1 | ruhig | M47 Die Uhr |

@@ -110,7 +110,7 @@ gilt diese Liste nur als Vormerkung.
   getrennt von den Perlenfarben (M3).
 - **Mathematik:** u. a. Balkenwaage, Zahlenmauer, Rechendreieck, Zeigeruhr, Lineal, Messbecher, Geld (vereinfacht,
   in Größe und Farbe wie echt, Annahme), Strichliste, Baumdiagramm, Tausenderwürfel, Stellenwertfarbe Tausender
-  (neben M5), Zerlegungshaus.
+  (neben M5), Zerlegungsliste (geordnete Tabelle der Zerlegungen).
 - **Deutsch:** Silbenbogen, Lautplättchen und Wagen, Pausen- und Stimmmarken, Fuge zwischen Wortbausteinen,
   **Kontrollkarte** (Fehlerkontrolle zum Selbst-Umdrehen bei Formen, die man nicht herleiten kann,
   `grundsaetze.md` 3.1).

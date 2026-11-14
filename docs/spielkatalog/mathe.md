@@ -476,32 +476,33 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 
 ### Teil B: Plus und Minus
 
-### M14 Zerlegungshaus
-- Name fürs Kind: „Zerlegungshaus“ · Symbol: Haus mit Dachzahl 7 und drei Stockwerken
-- Handlung: Das Kind teilt das Perlenstäbchen der Dachzahl mit einem Trenner in zwei Teile und trägt jede Zerlegung
-  in ein Stockwerk ein, geordnet von 0 + n bis n + 0 · Wirkung: Jedes Stockwerk bekommt Licht, wenn seine Zerlegung
-  eingezogen ist; das Haus ist fertig, wenn alle wohnen.
+### M14 Zwei Tonnen
+- Name fürs Kind: „Zwei Tonnen“ (Annahme) · Symbol: zwei Tonnen nebeneinander, darüber die Zahl
+- Handlung: n Dinge liegen nach dem Picknick auf der Decke (n = Thema). Das Kind teilt sie mit einem Trenner in zwei
+  Teile: ein Teil wird Papier, der andere Wertstoff, und beide wandern in ihre Tonne. Jede Zerlegung steht danach als
+  Zeile in einer schlichten Liste neben den Tonnen (geordnet von 0 + n bis n + 0) · Wirkung: Die Decke wird leer, die
+  Tonnen füllen sich, die Liste wächst; ist sie vollständig, ist die Wiese sauber. **Keine zweite Metapher** (kein
+  Haus, keine Stockwerke, kein Licht; Christian 2026-11-14, `docs/spielentwicklung.md` A4b).
 - Material und Stufen: Perlenstäbchen n (M3). material: Trenner schieben. vorstellung: ein Teil ist verdeckt (wie
   Schüttelbox), das Kind tippt den anderen. kopf: Zerlegungen tippen, Stäbchen kommt als Probe.
-- Lernzeichen: Perlenstäbchen (M3), Zerlegungshaus (neu als schlichte Tabelle in Hausform, Stimmungsebene nur am
-  Dach).
+- Lernzeichen: Perlenstäbchen (M3) als Probe neben den Tonnen; die Zerlegungsliste als schlichte Tabelle (Lernfeld, ohne Schmuck).
 - Gesten: Ziehen (Trenner), Tippen.
-- Fehlerkontrolle: Zwei Teile, die nicht n ergeben, passen nicht ins Stäbchen; eine doppelte Zerlegung findet ihr
-  Stockwerk schon bewohnt.
+- Fehlerkontrolle: Auf der Decke bleibt etwas liegen oder es fehlt, wenn die zwei Teile nicht n ergeben; eine
+  doppelte Zerlegung steht schon in der Liste.
 - Fehlerbilder: zaehlendes-rechnen (Übung: Zerlegungen sind das wichtigste Gegenmittel).
 - Hauptthemen: zerlegen-2, zerlegen-3, zerlegen-4, zerlegen-5, zerlegen-6, zerlegen-7, zerlegen-8, zerlegen-9, zerlegen-10, zerlegungen-ordnen, mehrere-loesungen, alle-loesungen-finden, geordnet-probieren (Kl. 1)
 - Weitere Zugänge: ergaenzen-bis-10 (M15), lueckenaufgaben-bis-10 (M10), geld-legen-bis-20 (M43)
 - Warum perfekt: Die ganze Zahlzerlegung bis 10 ist eine einzige Handlung mit einem Stäbchen. Die drei
-  Problemlöse-Themen der Kl. 1 (mehrere, alle, geordnet) sind am Zerlegungshaus genau beschrieben.
+  Problemlöse-Themen der Kl. 1 (mehrere, alle, geordnet) zeigen sich in der wachsenden, geordneten Liste.
 - Bewusst nicht drin: ergaenzen-bis-10 → M15 (Ergänzen zum vollen Zehner ist eine eigene Handlung).
 - Heimatwelt: Müll trennen (`muell-trennen`)
   - Sachgrund: Müll kommt in verschiedene Tonnen; sieben Teile auf zwei Tonnen verteilen ist Zerlegen.
   - Rahmen: Versorgen · Spannung aus: Lücke
-  - Ruhig: Nach dem Picknick kommen die Dinge von der Decke in zwei Tonnen. Jede Zerlegung leert die Decke und beleuchtet ein Stockwerk im Zerlegungshaus; am Ende ist die Wiese sauber.
+  - Ruhig: Nach dem Picknick kommen die Dinge von der Decke in zwei Tonnen. Jede Zerlegung leert die Decke in die zwei Tonnen und steht danach in der Liste; am Ende ist die Wiese sauber.
   - Sanft: Ein Sack ist zugeknotet: Sieben Teile waren es, vier liegen in der Papiertonne. Wie viele sind im Sack? Aufgeknotet zeigt es sich.
   - Abenteuer: Über mehrere Runden baut die Runde aus dem Gesammelten (Dosen, Kartons, Korken) eine Figur fürs Schulfest; jede Zerlegung liefert zwei Sorten Teile. Im Bauch der fertigen Figur scheppert noch etwas: eine vergessene Fahrradklingel.
 - Stimme: wenig (Zahlen bis 10).
-- Figuren: Timo zeigt vor (fängt bei 0 + 7 an); Ela wundert sich über ein Stockwerk, das schon bewohnt ist.
+- Figuren: Timo zeigt vor (fängt bei 0 + 7 an); Ela wundert sich über eine Zerlegung, die schon in der Liste steht.
 - Regal-Material: Perlenstab n (passt genau, `zerlegung`).
 - Mach mit (am Rundenende, als Angebot): Timo verteilt sieben Murmeln auf zwei Hände. „Verstecke Murmeln in zwei Händen und lass raten, wie viele in der anderen sind.“
 - Fachübergreifend: –
