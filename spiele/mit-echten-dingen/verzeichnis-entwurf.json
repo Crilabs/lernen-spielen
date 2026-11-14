@@ -13,6 +13,23 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "geteilt-umkehrung-mal": {
+   "fach": "mathe",
+   "name": "Geteilt als Umkehrung von Mal",
+   "titel": "Geteilt und mal gehören zusammen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Reicht das Geschirr?"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Joghurt für die Woche"
+    }
+   ],
+   "entwurf": true,
+   "datei": "mathe/geteilt-umkehrung-mal.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
