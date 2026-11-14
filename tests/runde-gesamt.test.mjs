@@ -48,7 +48,7 @@ test("Zubehör aus figuren.md §5: Zauberstab mit Umhang, Lupenmütze, Schirm", 
   assert.ok(bestand.bewegungen.get("zaubern").schritte.some((s) => s.zustaende?.["zauberstab-umhang"] === "leuchtet"));
   const svg = zeichne("ela", { haltung: "zaubern", zustaende: { "zauberstab-umhang": "leuchtet" } });
   assert.match(svg, /data-zubehoer="zauberstab-umhang"[^>]*data-zustand="leuchtet"/);
-  assert.ok(!zeichne("ela", { zubehoer: ["lupenmuetze"] }).includes("haare-oben") || true);
+  assert.equal(bestand.bewegungen.get("schweben").ende, "stehen", "schweben: sanft hoch und wieder herunter");
 });
 
 test("jedes Kind kennt jedes Gesicht in jeder Ansicht", () => {

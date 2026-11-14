@@ -128,3 +128,9 @@ test("Handformen: Standard offen, mische wechselt zur Hälfte", () => {
   assert.equal(mische(a, b, 0.4).haende.hinten, "offen");
   assert.equal(mische(a, b, 0.6).haende.hinten, "faust");
 });
+
+test("Rollstuhl-Fassung kann auch Handformen setzen", () => {
+  meldeHaltung({ id: "greifen", ansicht: "beide", rollstuhl: { haende: { vorn: "faust" } } });
+  assert.equal(pose("test-stuhl", "greifen").haende.vorn, "faust");
+  assert.equal(pose("test-geht", "greifen").haende.vorn, "offen");
+});

@@ -64,6 +64,7 @@ function pruefeFassung(wo, f) {
 /** @param {Map<string, {id: string}>} karte @param {string} art @param {{id: string}} def */
 function frei(karte, art, def) {
   if (!def || typeof def.id !== "string" || !def.id) fehler(`${art} ohne id`);
+  if (!/^[a-z0-9-]+$/.test(def.id)) fehler(`${art} „${def.id}“: Namen nur aus Kleinbuchstaben, Ziffern und Bindestrich`);
   if (karte.has(def.id)) fehler(`${art} „${def.id}“ ist schon vergeben`);
 }
 
@@ -194,6 +195,12 @@ export function pruefeBestand() {
   for (const h of bestand.haltungen.values()) verweise(`Haltung ${h.id}`, h);
   for (const b of bestand.bewegungen.values()) {
     if (!bestand.haltungen.has(b.ende)) fehler(`Bewegung ${b.id}: ende „${b.ende}“ ist keine Haltung`);
+    for (const id of [b.ende, ...[...b.schritte, ...(b.rollstuhl?.schritte ?? [])].map((s) => s.haltung).filter(Boolean)]) {
+      const h = bestand.haltungen.get(/** @type {string} */ (id));
+      if (h && h.ansicht !== "beide" && h.ansicht !== b.ansicht) {
+        fehler(`Bewegung ${b.id}: Haltung „${id}“ gibt es nicht in der Ansicht ${b.ansicht}`);
+      }
+    }
     verweise(`Bewegung ${b.id}`, b);
     [...b.schritte, ...(b.rollstuhl?.schritte ?? [])].forEach((s, i) => verweise(`Bewegung ${b.id}, Schritt ${i + 1}`, s));
   }

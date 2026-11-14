@@ -1,10 +1,10 @@
 // Gemeinsamer Schnitt der Runde: gleiche Kopfgröße, gleiche Augen- und Gelenkpunkte für alle Kinder.
 // Ein Kind ändert nur Breite, Farben, Haare und Hilfsmittel. So passen Gesichter und Zubehör an alle vier.
-// Zeichenvorgabe docs/figuren.md §4: Kontur Tinte, Strich 4, runde Enden, flache Farben, Kopf ≈ ⅓ der Höhe.
+// Zeichenvorgabe docs/figuren.md §4: aus einem Guss – Tinte nur um die Silhouette, Schatten in Stufen (kinder/stil.js),
+// Kopf ≈ ⅓ der Höhe.
 
 import * as S from "./stil.js";
 
-export const INK = "#3B2A6B";
 /** Ursprung der Gesichtsteile (Mitte zwischen den Augen) je Ansicht – für alle Kinder gleich. */
 export const GESICHT = { dreiviertel: [170, 80], profil: [188, 80] };
 
@@ -12,30 +12,8 @@ export const GESICHT = { dreiviertel: [170, 80], profil: [188, 80] };
 const z = (n) => String(Math.round(n * 100) / 100);
 
 /**
- * Glied mit Kontur: dicker Tintenstrich, darüber der Farbstrich. Runde Enden, damit Gelenke beim Drehen geschlossen bleiben.
- * @param {number[]} p Punktliste x1,y1,x2,y2,… @param {number} breite @param {string} farbe
- */
-export function glied(p, breite, farbe) {
-  let d = `M${z(p[0])} ${z(p[1])}`;
-  for (let i = 2; i < p.length; i += 2) d += `L${z(p[i])} ${z(p[i + 1])}`;
-  return `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${breite + 8}"/>`
-    + `<path d="${d}" fill="none" stroke="${farbe}" stroke-width="${breite}"/>`;
-}
-
-/** @param {number} x @param {number} y @param {number} r @param {string} farbe */
-export const kreis = (x, y, r, farbe) => `<circle cx="${z(x)}" cy="${z(y)}" r="${z(r)}" fill="${farbe}" stroke-width="4"/>`;
-/** @param {number} x @param {number} y @param {number} rx @param {number} ry @param {string} farbe */
-export const ellipse = (x, y, rx, ry, farbe) =>
-  `<ellipse cx="${z(x)}" cy="${z(y)}" rx="${z(rx)}" ry="${z(ry)}" fill="${farbe}" stroke-width="4"/>`;
-/** @param {string} d @param {string} farbe */
-export const flaeche = (d, farbe) => `<path d="${d}" fill="${farbe}" stroke-width="4"/>`;
-/** @param {string} d @param {number} [w] */
-export const strich = (d, w = 3) => `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w}"/>`;
-
-/**
  * @typedef {{haut: string, haar: string, oben: string, unten: string, schuhe: string}} Farben
  * @typedef {import("../bestand.js").Teil} Teil
- * @typedef {{haareHinten?: string, haareOben?: string, nachGesicht?: string, ohr?: string}} Kopfteile
  */
 
 /**

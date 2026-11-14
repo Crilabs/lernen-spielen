@@ -150,3 +150,14 @@ test("stil eines Kindes erlaubt nur CSS-Variablen mit einfachen Werten", () => {
   k2.stil = { "--lippe": 'x" onload="y' };
   assert.throws(() => meldeKind(k2), /lippe/);
 });
+
+test("Namen nur aus Kleinbuchstaben, Ziffern und Bindestrich", () => {
+  assert.throws(() => meldeHaltung({ id: 'x"y', ansicht: "beide" }), /x"y/);
+  assert.throws(() => meldeGesicht({ id: "Gross", ansichten: {} }), /Gross/);
+});
+
+test("pruefeBestand: Ende-Haltung muss in der Ansicht der Bewegung existieren", () => {
+  meldeHaltung({ id: "nur-vorn", ansicht: "dreiviertel" });
+  meldeBewegung({ id: "seitwaerts", ansicht: "profil", schritte: [{ ms: 100 }], ende: "nur-vorn" });
+  assert.throws(() => pruefeBestand(), /seitwaerts.*nur-vorn.*profil/);
+});

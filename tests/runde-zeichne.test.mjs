@@ -189,3 +189,7 @@ test("Zubehör, das greift, schließt die Hand zur Faust und liegt hinter der Ha
   assert.ok(svg.indexOf('data-test="stock-d"') < svg.indexOf('data-test="hand-faust"'), "Stock liegt hinter der Faust");
   assert.ok(F(zeichne("test-geht", { haltung: "deuten", zubehoer: ["test-stock"] })).includes('data-test="hand-zeigen"'), "eine gewählte Handform bleibt");
 });
+
+test("die Figur darf über ihren Rahmen hinausragen (schweben, gross)", () => {
+  assert.match(zeichne("test-geht"), /^<svg [^>]*overflow="visible"/);
+});

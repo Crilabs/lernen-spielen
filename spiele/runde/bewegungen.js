@@ -68,9 +68,11 @@ meldeBewegung({
   ],
 });
 
+// Schweben: sanft hoch, kurz oben, sanft wieder herunter (spec §5.6, nichts fällt). Bleiben soll die Figur oben
+// nur, wenn ein Spiel haltung("schweben") wählt.
 meldeBewegung({
-  id: "schweben", ansicht: "dreiviertel", ende: "schweben",
-  schritte: [{ ms: 1200, haltung: "schweben" }],
+  id: "schweben", ansicht: "dreiviertel", ende: "stehen",
+  schritte: [{ ms: 1100, haltung: "schweben" }, { ms: 600, versatz: [0, -66] }, { ms: 1100, versatz: [0, -4] }],
 });
 
 meldeBewegung({ id: "schrumpfen", ansicht: "dreiviertel", ende: "klein", schritte: [{ ms: 800, haltung: "klein" }] });

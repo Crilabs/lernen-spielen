@@ -54,7 +54,10 @@ function fuerKind(kindId, h) {
   if (kind(kindId).bewegt !== "rollstuhl") return h;
   const winkel = { ...(h.winkel ?? {}), ...(r.rollstuhl?.winkel ?? {}) };
   for (const b of BEINE) delete winkel[b];
-  return { ...h, winkel, versatz: r.rollstuhl?.versatz ?? h.versatz, groesse: r.rollstuhl?.groesse ?? h.groesse };
+  return {
+    ...h, winkel, versatz: r.rollstuhl?.versatz ?? h.versatz, groesse: r.rollstuhl?.groesse ?? h.groesse,
+    haende: { ...(h.haende ?? {}), ...(r.rollstuhl?.haende ?? {}) },
+  };
 }
 
 /**

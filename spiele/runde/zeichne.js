@@ -149,10 +149,10 @@ export function zeichnePose(kindId, pose, aus = {}) {
   const blick = aus.blick === "links"
     ? `<g data-blick="links" transform="translate(320 0) scale(-1 1)">`
     : `<g data-blick="rechts">`;
-  return `<svg class="runde" viewBox="0 0 320 280" data-kind="${k.id}" data-ansicht="${p.ansicht}"`
+  return `<svg class="runde" viewBox="0 0 320 280" overflow="visible" data-kind="${k.id}" data-ansicht="${p.ansicht}"`
     + `${aus.haltung ? ` data-haltung="${aus.haltung}"` : ""}`
     + `${k.stil ? ` style="${Object.entries(k.stil).map(([n, v]) => `${n}:${v}`).join(";")}"` : ""}`
-    + ` role="img" aria-label="${label}"`
+    + ` role="img" aria-label="${label.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;")}"`
     + ` stroke="${INK}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">`
     + `${blick}<g data-schicht="kontur" fill="${INK}" stroke="${INK}" stroke-width="${KONTUR}">${gruppe(WURZEL, "kontur")}</g>`
     + `<g data-schicht="flaeche">${gruppe(WURZEL, "flaeche")}</g></g></svg>`;
