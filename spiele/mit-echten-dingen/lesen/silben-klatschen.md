@@ -2,6 +2,7 @@
 thema: silben-klatschen
 fach: lesen
 entwurf: true
+bild: { figur: loeffel-klammern, zustand: liegt }
 quellen:
   - Silbe oder Morphem?, Die Grundschulzeitschrift, Friedrich Verlag, https://www.friedrich-verlag.de/friedrich-plus/grundschule/die-grundschulzeitschrift/silbe-oder-morphem-16179, abgerufen 2026-11-14
   - Fit für die Schule – Hörwahrnehmung, Gesundheitsamt Dortmund, https://www.Dortmund.de/dortmund/projekte/rathaus/verwaltung/gesundheitsamt/downloads/fit_fuer_die_schule_hoerwahrnehmung_06-2022.pdf, abgerufen 2026-11-14
