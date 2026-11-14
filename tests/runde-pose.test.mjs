@@ -118,3 +118,13 @@ test("mische: Zubehör bleibt während des Übergangs, am Ende nur das des Ziels
   assert.deepEqual(mische(a, b, 0.9).braucht.sort(), ["schirm", "stab"]);
   assert.deepEqual(mische(a, b, 1).braucht, ["schirm"]);
 });
+
+test("Handformen: Standard offen, mische wechselt zur Hälfte", () => {
+  meldeHaltung({ id: "faust", ansicht: "beide", haende: { hinten: "faust" } });
+  const a = pose("test-geht", "stehen");
+  const b = pose("test-geht", "faust");
+  assert.deepEqual(a.haende, { vorn: "offen", hinten: "offen" });
+  assert.deepEqual(b.haende, { vorn: "offen", hinten: "faust" });
+  assert.equal(mische(a, b, 0.4).haende.hinten, "offen");
+  assert.equal(mische(a, b, 0.6).haende.hinten, "faust");
+});

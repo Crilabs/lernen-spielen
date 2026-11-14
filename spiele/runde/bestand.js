@@ -7,14 +7,15 @@ import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, gelenkeFuer } fro
 /**
  * @typedef {import("./gelenke.js").Ansicht} Ansicht
  * @typedef {import("./gelenke.js").Bewegt} Bewegt
- * @typedef {{teil: string, svg?: string}} Teil
+ * @typedef {{teil: string, svg?: string, formen?: Record<string, string>}} Teil  formen: Handformen, „offen“ ist Pflicht
  * @typedef {{gelenk: string, punkt: [number, number], winkel?: number, mass?: number}} Platz
  * @typedef {{drehpunkte: Record<string, [number, number]>, teile: Record<string, Teil[]>,
  *            gesicht: [number, number], plaetze: Record<string, Platz>}} KindAnsicht
  * @typedef {{id: string, name: string, pronomen: "sie"|"er", bewegt: Bewegt, entwurf?: boolean,
  *            ansichten: Partial<Record<Ansicht, KindAnsicht>>}} Kind
  * @typedef {{id: string, ansichten: Partial<Record<Ansicht, string>>}} Gesicht
- * @typedef {{winkel?: Record<string, number>, versatz?: [number, number], groesse?: number}} Werte
+ * @typedef {{vorn?: string, hinten?: string}} Haende
+ * @typedef {{winkel?: Record<string, number>, versatz?: [number, number], groesse?: number, haende?: Haende}} Werte
  * @typedef {Werte & {id: string, ansicht: Ansicht|"beide", wort?: string, gesicht?: string, braucht?: string[],
  *            zustaende?: Record<string, string>, rollstuhl?: Werte}} Haltung
  * @typedef {Werte & {ms: number, haltung?: string, gesicht?: string, zustaende?: Record<string, string>}} Schritt
@@ -64,6 +65,7 @@ function pruefeAnsicht(wo, ansicht, beide = false) {
 /** @param {string} wo @param {Werte|undefined} w */
 function pruefeWerte(wo, w) {
   for (const g of Object.keys(w?.winkel ?? {})) if (!(g in BAUM)) fehler(`${wo}: unbekanntes Gelenk „${g}“`);
+  for (const h of Object.keys(w?.haende ?? {})) if (h !== "vorn" && h !== "hinten") fehler(`${wo}: unbekannte Hand „${h}“ (vorn oder hinten)`);
 }
 
 /** @param {Werte|undefined} w */
@@ -83,7 +85,11 @@ export function meldeKind(kind) {
     for (const g of gelenke) if (!ans.drehpunkte[g]) fehler(`${wo}: Drehpunkt für ${g} fehlt`);
     for (const [g, teile] of Object.entries(ans.teile)) {
       if (!gelenke.includes(g)) fehler(`${wo}: Teile an unbekanntem Gelenk „${g}“`);
-      for (const t of teile) pruefeSvg(`${wo}, Teil ${t.teil}`, t.svg);
+      for (const t of teile) {
+        pruefeSvg(`${wo}, Teil ${t.teil}`, t.svg);
+        if (t.formen && typeof t.formen.offen !== "string") fehler(`${wo}, Teil ${t.teil}: Handform „offen“ fehlt`);
+        for (const f of Object.values(t.formen ?? {})) pruefeSvg(`${wo}, Teil ${t.teil}`, f);
+      }
     }
     if (!(ans.teile.kopf ?? []).some((t) => t.teil === "gesicht" && !t.svg)) {
       fehler(`${wo}: im kopf fehlt der Platzhalter {teil:"gesicht"}`);
@@ -166,7 +172,7 @@ export function pruefeBestand() {
     for (const z of d.braucht ?? []) if (!bestand.zubehoer.has(z)) fehler(`${wo}: braucht unbekanntes Zubehör „${z}“`);
     for (const [z, zustand] of Object.entries(d.zustaende ?? {})) {
       if (!bestand.zubehoer.has(z)) fehler(`${wo}: unbekanntes Zubehör „${z}“`);
-      if (!zustaendeVon(bestand.zubehoer.get(z)).has(zustand)) fehler(`${wo}: ${z} kennt den Zustand „${zustand}“ nicht`);
+      if (zustand !== "" && !zustaendeVon(bestand.zubehoer.get(z)).has(zustand)) fehler(`${wo}: ${z} kennt den Zustand „${zustand}“ nicht`);
     }
   };
   for (const h of bestand.haltungen.values()) verweise(`Haltung ${h.id}`, h);

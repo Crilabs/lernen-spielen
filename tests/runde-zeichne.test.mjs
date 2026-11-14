@@ -18,6 +18,7 @@ beforeEach(() => {
   meldeHaltung({ id: "gehen-pose", ansicht: "profil", winkel: { "bein-vorn": 20 }, rollstuhl: {} });
   meldeHaltung({ id: "zaubern", ansicht: "dreiviertel", braucht: ["test-stab"] });
   meldeHaltung({ id: "hoch", ansicht: "beide", versatz: [0, -60], groesse: 0.5 });
+  meldeHaltung({ id: "deuten", ansicht: "dreiviertel", haende: { vorn: "zeigen" } });
   meldeZubehoer({ id: "test-hut", wort: "der Hut", verdeckt: ["haare-oben"], teile: [{ platz: "kopf", ebene: "vorne", svg: svgZ("hut") }] });
   meldeZubehoer({
     id: "test-stab", wort: "der Stab",
@@ -131,4 +132,10 @@ test("kein id=, kein undefined, kein NaN; rein", () => {
   assert.doesNotMatch(svg, /\sid=|undefined|NaN/);
   assert.equal(svg, zeichne("test-stuhl", opts));
   assert.match(svg, /^<svg class="runde" viewBox="0 0 320 280"/);
+});
+
+test("Handform: Standard offen, Haltung wählt zeigen", () => {
+  assert.ok(zeichne("test-geht").includes('data-test="hand-offen"'));
+  const svg = zeichne("test-geht", { haltung: "deuten" });
+  assert.ok(svg.includes('data-test="hand-zeigen"') && !svg.includes('data-test="hand-offen"'));
 });

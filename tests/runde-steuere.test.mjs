@@ -17,6 +17,7 @@ beforeEach(() => {
   meldeHaltung({ id: "stehen", ansicht: "beide" });
   meldeHaltung({ id: "nicken", ansicht: "dreiviertel", wort: "nickt", winkel: { kopf: 10 } });
   meldeHaltung({ id: "staunen", ansicht: "dreiviertel", gesicht: "staunen", winkel: { kopf: -6 } });
+  meldeHaltung({ id: "deuten", ansicht: "dreiviertel", haende: { vorn: "zeigen" } });
   meldeZubehoer({ id: "test-stab", wort: "der Stab", teile: [{ platz: "hand-vorn", ebene: "vorne", svg: zwei }] });
   meldeBewegung({
     id: "gehen-test", ansicht: "profil", mal: 4, ende: "stehen",
@@ -137,4 +138,11 @@ test("Bewegung legt gebrauchtes Zubehör an, zubehoer.an/aus schalten", async ()
   assert.ok(svg.querySelector('[data-zubehoer="test-stab"]'));
   f.zubehoer.aus("test-stab");
   assert.ok(!svg.querySelector('[data-zubehoer="test-stab"]'));
+});
+
+test("Handform wechselt beim Übergang", async () => {
+  const { u, svg, f } = figur();
+  f.haltung("deuten");
+  await u.spule(1100);
+  assert.match(svg.innerHTML, /data-test="hand-zeigen"/);
 });

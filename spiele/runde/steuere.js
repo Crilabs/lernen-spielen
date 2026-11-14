@@ -50,9 +50,11 @@ export function steuere(svg, opts = {}) {
 
   /** @type {Map<string, El>} */
   let gelenke = new Map();
-  let gezeichnet = { ansicht: "", gesicht: "", zubehoer: "" };
+  let gezeichnet = { ansicht: "", gesicht: "", zubehoer: "", haende: "" };
   /** @param {Pose} p */
   const zubehoerSchluessel = (p) => [...new Set([...p.braucht, ...extra])].sort().join(",");
+  /** @param {Pose} p */
+  const handSchluessel = (p) => `${p.haende.vorn}/${p.haende.hinten}`;
 
   /** @param {Pose} p */
   function neuzeichnen(p) {
@@ -63,12 +65,12 @@ export function steuere(svg, opts = {}) {
     svg.setAttribute("aria-label", labelFuer(kindId, haltung));
     gelenke = new Map(Object.keys(p.winkel).map((g) => [g, svg.querySelector(`[data-gelenk="${g}"]`)])
       .filter((e) => e[1]).map((e) => [/** @type {string} */ (e[0]), /** @type {El} */ (e[1])]));
-    gezeichnet = { ansicht: p.ansicht, gesicht: p.gesicht, zubehoer: zubehoerSchluessel(p) };
+    gezeichnet = { ansicht: p.ansicht, gesicht: p.gesicht, zubehoer: zubehoerSchluessel(p), haende: handSchluessel(p) };
   }
 
   /** @param {Pose} p */
   function anwenden(p) {
-    if (p.ansicht !== gezeichnet.ansicht || zubehoerSchluessel(p) !== gezeichnet.zubehoer) {
+    if (p.ansicht !== gezeichnet.ansicht || zubehoerSchluessel(p) !== gezeichnet.zubehoer || handSchluessel(p) !== gezeichnet.haende) {
       neuzeichnen(p);
     } else {
       const ans = /** @type {import("./bestand.js").KindAnsicht} */ (kind?.ansichten[p.ansicht]);

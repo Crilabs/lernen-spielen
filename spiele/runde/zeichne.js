@@ -112,6 +112,10 @@ export function zeichnePose(kindId, p, aus = {}) {
         const [gx, gy] = ans.gesicht;
         return `<g data-gesicht="${p.gesicht}" transform="translate(${z(gx)} ${z(gy)})">${gesichtInnen(p.ansicht, p.gesicht)}</g>`;
       }
+      if (t.formen) {
+        const form = gelenk.startsWith("arm-hinten") ? p.haende.hinten : p.haende.vorn;
+        return t.formen[form] ?? t.formen.offen;
+      }
       return t.svg ?? "";
     }).join("");
     return `<g data-gelenk="${gelenk}" transform="${gelenkTransform(ans, gelenk, p)}">`

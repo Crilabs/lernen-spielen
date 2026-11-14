@@ -25,7 +25,10 @@ function ansicht(bewegt) {
     "arm-hinten-oben": [{ teil: "oberarm", svg: linie("arm-hinten-oben", 150, 130, 150, 165) }],
     "arm-hinten-unten": [{ teil: "unterarm", svg: linie("arm-hinten-unten", 150, 165, 150, 195) }],
     "arm-vorn-oben": [{ teil: "oberarm", svg: linie("arm-vorn-oben", 170, 130, 170, 165) }],
-    "arm-vorn-unten": [{ teil: "unterarm", svg: linie("arm-vorn-unten", 170, 165, 170, 195) }],
+    "arm-vorn-unten": [
+      { teil: "unterarm", svg: linie("arm-vorn-unten", 170, 165, 170, 195) },
+      { teil: "hand", formen: { offen: `<path data-test="hand-offen"/>`, zeigen: `<path data-test="hand-zeigen"/>` } },
+    ],
   };
   const plaetze = {
     kopf: { gelenk: "kopf", punkt: [160, 56] },

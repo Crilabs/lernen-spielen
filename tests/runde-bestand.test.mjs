@@ -119,3 +119,19 @@ test("pruefeBestand findet unbekanntes Gesicht", () => {
 test("Erweiterung eines Spiels mit Fehler bricht beim Laden mit Namen ab", async () => {
   await assert.rejects(import("./daten/runde-erweiterung-kaputt.js"), /kaputt-kniebeuge/);
 });
+
+test("leerer Zustand heißt Grundfassung und ist immer erlaubt", () => {
+  meldeZubehoer({ id: "stab", wort: "der Stab", teile: [{ platz: "hand-vorn", ebene: "vorne", svg: { dreiviertel: "", profil: "" } }] });
+  meldeHaltung({ id: "h4", ansicht: "beide", zustaende: { stab: "" } });
+  pruefeBestand();
+});
+
+test("Teil mit Handformen braucht die Form offen", () => {
+  const k = kopie(TESTKIND_GEHT);
+  k.ansichten.dreiviertel.teile["arm-vorn-unten"].find((t) => t.teil === "hand").formen = { zeigen: "<path/>" };
+  assert.throws(() => meldeKind(k), /offen/);
+});
+
+test("unbekannte Hand wird abgelehnt", () => {
+  assert.throws(() => meldeHaltung({ id: "h5", ansicht: "beide", haende: { links: "faust" } }), /links/);
+});

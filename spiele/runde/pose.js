@@ -8,7 +8,7 @@ import { BEINE, gelenkeFuer } from "./gelenke.js";
  * @typedef {import("./bestand.js").Werte} Werte
  * @typedef {import("./bestand.js").Schritt} Schritt
  * @typedef {{ansicht: Ansicht, gesicht: string, winkel: Record<string, number>, versatz: [number, number],
- *            groesse: number, zustaende: Record<string, string>, braucht: string[]}} Pose
+ *            groesse: number, zustaende: Record<string, string>, braucht: string[], haende: {vorn: string, hinten: string}}} Pose
  */
 
 /** Dauer des Übergangs in die Ende-Haltung einer Bewegung. */
@@ -24,7 +24,7 @@ function kind(id) {
 /** @param {string} kindId @param {Ansicht} ansicht @returns {Pose} */
 function grundpose(kindId, ansicht) {
   const winkel = Object.fromEntries(gelenkeFuer(kind(kindId).bewegt).map((g) => [g, 0]));
-  return { ansicht, gesicht: "ruhig", winkel, versatz: [0, 0], groesse: 1, zustaende: {}, braucht: [] };
+  return { ansicht, gesicht: "ruhig", winkel, versatz: [0, 0], groesse: 1, zustaende: {}, braucht: [], haende: { vorn: "offen", hinten: "offen" } };
 }
 
 /**
@@ -44,6 +44,7 @@ function lege(p, w) {
     groesse: w.groesse ?? p.groesse,
     zustaende: { ...p.zustaende, ...(w.zustaende ?? {}) },
     braucht: [...new Set([...p.braucht, ...(w.braucht ?? [])])],
+    haende: { ...p.haende, ...(w.haende ?? {}) },
   };
 }
 
@@ -128,5 +129,6 @@ export function mische(a, b, t) {
     groesse: lerp(a.groesse, b.groesse, e),
     zustaende: spaet.zustaende,
     braucht: t >= 1 ? b.braucht : [...new Set([...a.braucht, ...b.braucht])],
+    haende: spaet.haende,
   };
 }
