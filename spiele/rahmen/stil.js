@@ -3,7 +3,7 @@
 
 /**
  * Maße in rem.
- * bedien/gross/klein: Knopfdurchmesser rund; pille/pilleGross: Höhe der Knöpfe mit Wort;
+ * bedien/gross/klein: Knopfdurchmesser rund; pille/pilleGross/pilleKlein: Höhe der Knöpfe mit Wort;
  * breite: Mindestbreite mit Wort; fach: Kachel des Fachsymbols; leiste: Höhe der Kopfleiste.
  */
 export const MASSE = {
@@ -12,6 +12,7 @@ export const MASSE = {
   klein: 8,
   pille: 11,
   pilleGross: 14,
+  pilleKlein: 8,
   breite: 24,
   fach: 9,
   rand: 2.4,
@@ -37,6 +38,9 @@ export const FARBE = {
   kante: "#B98E5E",
   /** Nur im Elternbereich (Löschen, Achtung), beim Kind nie (grundsaetze-bilder 6.2). */
   beere: "#B3315A",
+  /** Schatten der Beere-Knöpfe: Nebenknopf heller (wie Tinte weich zur Tinte), Hauptknopf dunkler. */
+  beereWeich: "#C9738D",
+  beereTief: "#7A1E3C",
 };
 
 /** Radien in rem: groß (Blase, Karten), normal (Kacheln), klein. */
@@ -103,6 +107,8 @@ export const TOKENS = Object.freeze({
   "--ls-ahorn": FARBE.ahorn,
   "--ls-kante": FARBE.kante,
   "--ls-beere": FARBE.beere,
+  "--ls-beere-weich": FARBE.beereWeich,
+  "--ls-beere-tief": FARBE.beereTief,
   "--ls-kontur": `${MASSE.kontur}rem`,
   "--ls-radius-gross": `${RADIUS.gross}rem`,
   "--ls-radius": `${RADIUS.normal}rem`,
