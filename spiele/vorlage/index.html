@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>Spielvorlage</title>
-<!-- Spielvorlage. Die Schritte zum eigenen Spiel stehen oben in vorlage.js. Diese Seite bleibt dünn:
+<!-- Spielvorlage. Die Schritte zum eigenen Spiel stehen oben in spiel.js. Diese Seite bleibt dünn:
      Markup, Grundstil (rahmen/seite.css), ein paar Zeilen Anordnung, ein Modul. -->
-<link rel="stylesheet" href="rahmen/seite.css">
+<link rel="stylesheet" href="../rahmen/seite.css">
 <style>
   /* ===== SPIELWELT (ersetzen): Welt und Anordnung des Lernfelds. Alles in rem (1rem = Bildhöhe/108). =====
      Rahmen-Teile (Kopfleiste, Hilfe, Pause) stehen selbst an ihren festen Plätzen; hier nur das Spielfeld. */
@@ -77,7 +77,7 @@
 <!-- Stimmungsebene: ganzer Bildschirm, hinter allem. -->
 <div class="welt" aria-hidden="true"></div>
 
-<!-- Kopfleiste: spiel = Kennung (wie in spiele.json), fach, titel. Das Thema setzt vorlage.js. -->
+<!-- Kopfleiste: spiel = Kennung (wie in spiele.json), fach, titel. Das Thema setzt spiel.js. -->
 <ls-leiste id="leiste" spiel="vorlage" fach="mathe" titel="Spielvorlage"></ls-leiste>
 
 <!-- Bedeutungsebene: das sichere Feld 192 × 108 rem; das Spielfeld beginnt unter der Kopfleiste. -->
@@ -94,6 +94,6 @@
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
 
-<script type="module" src="vorlage.js"></script>
+<script type="module" src="spiel.js"></script>
 </body>
 </html>

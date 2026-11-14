@@ -1,4 +1,4 @@
-// Browser-Prüfung der Spielvorlage (spiele/vorlage.html + vorlage.js): eine ganze Runde spielen.
+// Browser-Prüfung der Spielvorlage (spiele/vorlage/index.html + spiel.js): eine ganze Runde spielen.
 // Kein Teil von `npm test`: braucht Playwright und installierte Browser (Chromium, WebKit).
 //
 // Aufruf wie tests/browser/rahmen.spec.mjs:
@@ -146,7 +146,7 @@ async function lauf(typ, name, groesse, basis) {
     const seite = await kontext.newPage();
     seite.on("pageerror", (e) => fehlerListe.push(`Seitenfehler: ${e.message}`));
     seite.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole: ${m.text()}`); });
-    await seite.goto(`${basis}/spiele/vorlage.html`, { waitUntil: "load" });
+    await seite.goto(`${basis}/spiele/vorlage/index.html`, { waitUntil: "load" });
     await seite.evaluate(() => {
       window.ergebnisse = [];
       document.addEventListener("ls-ergebnis", (e) => window.ergebnisse.push(e.detail));
@@ -275,12 +275,12 @@ async function lauf(typ, name, groesse, basis) {
     const s2 = await kontext.newPage();
     s2.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (?pause): ${e.message}`));
     s2.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole (?pause): ${m.text()}`); });
-    await s2.goto(`${basis}/spiele/vorlage.html?hinweis`, { waitUntil: "load" });
+    await s2.goto(`${basis}/spiele/vorlage/index.html?hinweis`, { waitUntil: "load" });
     await s2.waitForFunction(() => document.getElementById("pause").hasAttribute("offen"), null, { timeout: 3000 });
     pruefe(L, "?hinweis: Pause sofort, mit Hinweis auf ein anderes Spiel", (await s2.locator("#sachmoment a.hinweis").count()) === 1);
-    await s2.goto(`${basis}/spiele/vorlage.html?eltern`, { waitUntil: "load" });
+    await s2.goto(`${basis}/spiele/vorlage/index.html?eltern`, { waitUntil: "load" });
     await s2.waitForSelector("section.eltern");
-    pruefe(L, "?eltern: Elternansicht", (await s2.locator("section.eltern a[href='eltern.html']").count()) === 1);
+    pruefe(L, "?eltern: Elternansicht", (await s2.locator("section.eltern a[href='../eltern.html']").count()) === 1);
     pruefe(L, "Vorschau-Parameter schreiben nichts", JSON.stringify(await speicher(s2)) === JSON.stringify(vorher));
     await s2.close();
 
@@ -289,7 +289,7 @@ async function lauf(typ, name, groesse, basis) {
     await echt.route("**/spiele/spiele.json", async (route) => {
       const antwort = await route.fetch();
       const json = await antwort.json();
-      json.spiele.push({ id: "vorlage", titel: "Spielvorlage", thema: "Zerlegen", kategorie: "mathe", datei: "vorlage.html", arten: [{ art: "zerlegung", zahlen: [7, 7], stufen: ["material"] }] });
+      json.spiele.push({ id: "vorlage", titel: "Spielvorlage", thema: "Zerlegen", kategorie: "mathe", datei: "vorlage/index.html", arten: [{ art: "zerlegung", zahlen: [7, 7], stufen: ["material"] }] });
       await route.fulfill({ response: antwort, json });
     });
     // Einführung schon gesehen, damit die Runde gleich beginnt (sonst käme zuerst die Szene).
@@ -301,7 +301,7 @@ async function lauf(typ, name, groesse, basis) {
     const s4 = await echt.newPage();
     s4.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (eingetragen): ${e.message}`));
     s4.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole (eingetragen): ${m.text()}`); });
-    await s4.goto(`${basis}/spiele/vorlage.html`, { waitUntil: "load" });
+    await s4.goto(`${basis}/spiele/vorlage/index.html`, { waitUntil: "load" });
     await s4.waitForSelector("#tablett .stab");
     await tippeHilfe(s4);
     await tippeHilfe(s4);
@@ -323,7 +323,7 @@ async function lauf(typ, name, groesse, basis) {
     // Lernplan nicht ladbar → feste Vorschau-Aufgaben; deren Schlüssel im Browser durch einen unbekannten ersetzt.
     const kaputt = await browser.newContext({ viewport: groesse });
     await kaputt.route("**/spiele/lernplan.json", (route) => route.abort());
-    await kaputt.route("**/spiele/vorlage.js", async (route) => {
+    await kaputt.route("**/spiele/vorlage/spiel.js", async (route) => {
       const antwort = await route.fetch();
       const text = (await antwort.text()).replace('aufgaben: ["zerl:7:3+4"', 'aufgaben: ["unbekannt:1"');
       await route.fulfill({ response: antwort, body: text });
@@ -331,7 +331,7 @@ async function lauf(typ, name, groesse, basis) {
     const s5 = await kaputt.newPage();
     const fehler5 = [];
     s5.on("pageerror", (e) => fehler5.push(e.message));
-    await s5.goto(`${basis}/spiele/vorlage.html`, { waitUntil: "load" });
+    await s5.goto(`${basis}/spiele/vorlage/index.html`, { waitUntil: "load" });
     await s5.waitForFunction(() => document.getElementById("blase").text === "Das Spiel geht gerade nicht.", null, { timeout: 4000 }).catch(() => null);
     await pause(200);
     const f5 = await s5.evaluate(() => ({ text: document.getElementById("blase").text, protokoll: JSON.parse(localStorage.getItem("protokoll") ?? "[]") }));
@@ -344,7 +344,7 @@ async function lauf(typ, name, groesse, basis) {
     const ruhig = await browser.newContext({ viewport: groesse, reducedMotion: "reduce" });
     const s3 = await ruhig.newPage();
     s3.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (ruhig): ${e.message}`));
-    await s3.goto(`${basis}/spiele/vorlage.html`, { waitUntil: "load" });
+    await s3.goto(`${basis}/spiele/vorlage/index.html`, { waitUntil: "load" });
     await s3.waitForSelector("#tablett .stab");
     const r1 = (await tablettWerte(s3))[0];
     await tippeLege(s3, r1);

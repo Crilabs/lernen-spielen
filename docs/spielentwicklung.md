@@ -59,7 +59,8 @@ docs/spiele/<fach>/<spiel>.md          der Spielentwurf
 - `spiele.json` nennt die Seite relativ zu `spiele/`: `"datei": "mathe/m14-zwei-tonnen/index.html"`,
   `"symbol": "mathe/m14-zwei-tonnen/symbol.svg"`.
 - Bausteine finden ihre Pfade selbst (`import.meta.url`); im Spiel verweisen Imports relativ (`../../rahmen/…`).
-- Ein neues Spiel entsteht durch Kopieren von `spiele/vorlage/` in `spiele/<fach>/<spiel>/`.
+- Ein neues Spiel entsteht durch Kopieren von `spiele/vorlage/` in `spiele/<fach>/<katalog-nr>-<name>/`;
+  `tests/ablage.test.mjs` prüft Ordner, `datei`, `symbol` und Fach.
 
 ## 1. Der Spielentwurf
 
@@ -146,7 +147,8 @@ nicht als Zählmaterial (M1); nichts Bedrohliches; Fantasie nur im Rahmen (`figu
 Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stimmen.
 
 **B-Spielbarkeit** (automatisches Durchspielen, `tests/browser/durchspielen.mjs`): Simulierte Kinder spielen je eine
-Runde in Chromium und WebKit, 1920×1080 und 1280×800:
+Runde in Chromium und WebKit, 1920×1080 und 1280×800 (Aufruf mit der Seite des Spiels, z. B.
+`node tests/browser/durchspielen.mjs spiele/mathe/m14-zwei-tonnen/index.html`; die Vorlage: `spiele/vorlage/index.html`):
 
 | Kind | Verhalten | muss gelten |
 |---|---|---|

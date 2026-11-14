@@ -1,7 +1,7 @@
 // Prüfstand B-Spielbarkeit (docs/spielentwicklung.md §4): simulierte Kinder spielen je eine Runde eines Spiels.
 // Kein Teil von `npm test`: braucht Playwright und installierte Browser (Chromium, WebKit).
 //
-//   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs spiele/<id>.html \
+//   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs spiele/<fach>/<katalog-nr>-<name>/index.html \
 //     [--kinder sicher,ratend,hilfe,wild,tastatur,zurueck] [--browser chromium,webkit] [--groessen 1920x1080,1280x800]
 //     [--bilder <ordner>] [--bericht <datei.json>] [--saat <zahl>]
 //

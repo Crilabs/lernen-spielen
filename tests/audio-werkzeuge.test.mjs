@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { join, dirname } from "node:path";
-import { readFileSync } from "node:fs";
+import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { audioSchluessel, normalisiere } from "../spiele/kern/audio.js";
 import { ssml } from "../werkzeuge/audio/ssml.mjs";
@@ -151,4 +152,21 @@ test("azure: Kopfzeilen, Wiederholung bei 429, Fehlertext", async () => {
   const kaputt = azure({ schluessel: "k", region: "r", format: "f", fetch: async () => ({ ok: false, status: 401, text: async () => "falscher Schlüssel" }) });
   await assert.rejects(kaputt("<speak/>"), /Azure 401: falscher Schlüssel/);
   assert.throws(() => azure({ format: "f" }), /AZURE_SPEECH_KEY/);
+});
+
+test("sammle findet ein sprich(\"…\") in einem verschachtelten Spielordner (spiele/<fach>/<nr>-<name>/)", () => {
+  const wurzel = mkdtempSync(join(tmpdir(), "ablage-"));
+  try {
+    const spiele = join(wurzel, "spiele");
+    const spiel = join(spiele, "mathe", "m99-test-spiel");
+    mkdirSync(spiel, { recursive: true });
+    mkdirSync(join(spiele, "einfuehrungen"));
+    writeFileSync(join(spiele, "spiele.json"), JSON.stringify({ kategorien: [], spiele: [] }));
+    writeFileSync(join(spiele, "lernplan.json"), JSON.stringify({ themen: [] }));
+    writeFileSync(join(spiel, "spiel.js"), 'import { sprich } from "../../kern/stimme.js";\nsprich("Ein Satz tief im Ordner.");\n');
+    const { eintraege } = sammle(wurzel);
+    const e = eintraege.find((x) => x.text === "Ein Satz tief im Ordner.");
+    assert.ok(e, "Satz aus mathe/m99-test-spiel/spiel.js gesammelt");
+    assert.deepEqual(e.quellen, ["mathe/m99-test-spiel/spiel.js"]);
+  } finally { rmSync(wurzel, { recursive: true, force: true }); }
 });

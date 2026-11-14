@@ -243,6 +243,8 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 ---------------------------------------------------------------------------------------------------
 ## 10. Checkliste für jedes neue Spiel
 
+- [ ] Spielordner `spiele/<fach>/<katalog-nr>-<name>/` als Kopie von `spiele/vorlage/` (`index.html`, `spiel.js`);
+      `datei` und `symbol` in `spiele.json` relativ zu `spiele/`; gemeinsame Objekte nach `spiele/objekte/`.
 - [ ] `<ls-leiste>` mit `spiel`, `fach`, `titel` und `thema`; keine eigenen Haus-/Ton-Knöpfe; das
       Spielfeld beginnt unter der Kopfleiste.
 - [ ] Gesprochene Texte über `<ls-blase>` oder `kern`-`sprich`, mit Noch-mal-hören.

@@ -128,7 +128,7 @@ function baueBild(buehne, bild, reduziert) {
 export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund = "" } = {}) {
   let szenen = [];
   try {
-    const r = await fetch(new URL(pfad, document.baseURI));
+    const r = await fetch(new URL(pfad, import.meta.url));
     if (!r.ok) return "abgebrochen";
     szenen = fuelleVorlage(await r.json(), werte);
   } catch (e) { return "abgebrochen"; }   // fehlende oder kaputte Vorlage: nichts als gesehen melden
@@ -153,8 +153,8 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
 
   // Eigener Haus-Knopf im Overlay (ein Knopf des Spiels läge in dessen Stapelkontext unter dem Overlay).
   const hausEl = document.createElement("a");
-  hausEl.className = "haus"; hausEl.href = new URL("index.html", document.baseURI).href; hausEl.setAttribute("aria-label", "Alle Spiele");
-  const hausBild = document.createElement("img"); hausBild.alt = ""; hausBild.src = new URL("symbole/haus.svg", document.baseURI).href;
+  hausEl.className = "haus"; hausEl.href = new URL("index.html", import.meta.url).href; hausEl.setAttribute("aria-label", "Alle Spiele");
+  const hausBild = document.createElement("img"); hausBild.alt = ""; hausBild.src = new URL("symbole/haus.svg", import.meta.url).href;
   hausEl.appendChild(hausBild); wurzel.appendChild(hausEl);
 
   return new Promise(resolve => {

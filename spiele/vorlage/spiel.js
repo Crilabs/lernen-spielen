@@ -8,10 +8,13 @@
 //   RAHMEN    (behalten)  Hilfe-Leiter, Lernsteuerung, Einführung, Folge, Pause, Vorschau-Parameter
 //
 // SO WIRD DARAUS EIN SPIEL
-//  1. vorlage.html und vorlage.js nach spiele/<id>.html und spiele/<id>.js kopieren; in der HTML-Datei das
-//     Modul umbenennen (<script src="<id>.js">), den <title> auf den Spielnamen setzen und an <ls-leiste>
-//     spiel="<id>", fach und titel setzen.
-//  2. Eintrag in spiele/spiele.json (id, titel, thema, kategorie, symbol, datei, text) mit `arten` wie ARTEN
+//  1. Den Ordner spiele/vorlage/ nach spiele/<fach>/<katalog-nr>-<name>/ kopieren (z. B. spiele/mathe/m14-zwei-tonnen/;
+//     <fach> wie die `kategorie` in spiele.json, Name klein mit Bindestrichen, docs/spielentwicklung.md „Ablage“).
+//     Das Spiel liegt dann zwei Ebenen unter spiele/: in index.html und spiel.js jedes „../“ zu „../../“ machen
+//     (seite.css, Imports, ../lernplan.json, ../spiele.json, ../eltern.html, ../index.html). In index.html den
+//     <title> auf den Spielnamen setzen und an <ls-leiste> spiel="<id>", fach und titel setzen.
+//  2. Eintrag in spiele/spiele.json (id, titel, thema, kategorie, symbol, datei, text; `datei` und `symbol`
+//     relativ zu spiele/, z. B. "mathe/m14-zwei-tonnen/index.html" und ".../symbol.svg") mit `arten` wie ARTEN
 //     unten (Aufgabenarten, Zahlenraum, Stufen; Schema in spiele/aufgabenarten.js › darstellbar). Erst mit dem
 //     Eintrag erscheint das Spiel auf der Startseite und schreibt den Lernstand. Die Vorlage selbst steht
 //     nicht in spiele.json und läuft deshalb immer als Vorschau (schreibt nie); das steht dann einmal im
@@ -27,7 +30,7 @@
 //     lernplan.json), spielt der RAHMEN sie beim ersten Mal ab. Neue Aufgabenart: aufgabenarten.js erweitern.
 //  7. Pflicht: Test-Schnittstelle für den Prüfstand. stelleAufgabe gibt neben hilfe(stufe) auch zuege() und
 //     richtigerZug() zurück (Form in rahmen/pruefen.js); der RAHMEN meldet sie an. Dann muss das Durchspielen
-//     grün sein: node tests/browser/durchspielen.mjs spiele/<id>.html (docs/spielentwicklung.md 4).
+//     grün sein: node tests/browser/durchspielen.mjs spiele/<fach>/<katalog-nr>-<name>/index.html (docs/spielentwicklung.md 4).
 //     Die Schnittstelle gibt es nur im Testbetrieb (?pruefen); für das Kind ändert sie nichts.
 //     Hilfe Stufe 2 zeigt die Lösung mit dem Sonnenring: Klasse `markiert` an dem Teil, das das Kind als Nächstes
 //     legt (seite.css). Daran erkennt der Prüfstand die gezeigte Lösung; ohne sie ist das Kind „hilfe“ rot.
@@ -42,19 +45,19 @@
 //   ?thema=<id>       Wunsch-Thema aus der Themen-Übersicht (gilt nur für die erste Runde, schreibt normal)
 //   ?pruefen          Testbetrieb: window.lsPruefen für den Prüfstand (ändert sonst nichts, schreibt normal)
 
-import "./rahmen/leiste.js";
-import "./rahmen/blase.js";
-import "./rahmen/hilfe.js";
-import "./rahmen/pause.js";
-import "./rahmen/knopf.js";
-import "./rahmen/perlenstab.js";
-import { ziehbar, setze, zurueck } from "./rahmen/ziehen.js";
-import { meldePruefSchnittstelle, selektor } from "./rahmen/pruefen.js";
-import { laenge, LUECKE } from "./rahmen/perlen-geometrie.js";
-import { sperreTouch, protokoll, esc } from "./lernspiel.js";
-import { sprich } from "./kern/stimme.js";
-import { runde, einmal } from "./lernsteuerung.js";
-import { spieleEinfuehrung } from "./einfuehrung.js";
+import "../rahmen/leiste.js";
+import "../rahmen/blase.js";
+import "../rahmen/hilfe.js";
+import "../rahmen/pause.js";
+import "../rahmen/knopf.js";
+import "../rahmen/perlenstab.js";
+import { ziehbar, setze, zurueck } from "../rahmen/ziehen.js";
+import { meldePruefSchnittstelle, selektor } from "../rahmen/pruefen.js";
+import { laenge, LUECKE } from "../rahmen/perlen-geometrie.js";
+import { sperreTouch, protokoll, esc } from "../lernspiel.js";
+import { sprich } from "../kern/stimme.js";
+import { runde, einmal } from "../lernsteuerung.js";
+import { spieleEinfuehrung } from "../einfuehrung.js";
 
 sperreTouch();
 
@@ -319,7 +322,7 @@ const wunsch = einmal(params.get("thema")); // ?thema= gilt nur für die erste R
 let ctx = null;
 async function ladeCtx() {
   if (ctx) return ctx;
-  const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map((f) => fetch(f).then((r) => r.json())));
+  const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map((f) => fetch(new URL(`../${f}`, import.meta.url)).then((r) => r.json())));
   ctx = { plan, spiele };
   return ctx;
 }
@@ -419,7 +422,7 @@ async function zeigePause({ hinweis = null } = {}) {
     a.className = "hinweis";
     a.href = spiel.datei;
     a.tabIndex = 0; // WebKit (Safari, macOS-Vorgabe) erreicht Links mit Tab nur mit tabindex
-    a.innerHTML = `<img src="${esc(spiel.symbol)}" alt=""><span>${esc(spiel.titel)}</span>`;
+    a.innerHTML = `<img src="${esc(new URL(spiel.symbol, new URL("../", import.meta.url)).href)}" alt=""><span>${esc(spiel.titel)}</span>`;
     karte.append(a);
   }
   stand.phase = "pause";
@@ -432,7 +435,7 @@ function elternansicht() {
   const e = document.createElement("section");
   e.className = "eltern auswahl";
   e.innerHTML = `<h1>${esc(leiste.getAttribute("titel"))}</h1><div class="eigenes"></div>
-    <p><a href="eltern.html">Themen im Elternbereich</a> · <a href="${esc(location.pathname.split("/").pop())}">Zum Spiel</a></p>`;
+    <p><a href="../eltern.html">Themen im Elternbereich</a> · <a href="${esc(location.pathname.split("/").pop())}">Zum Spiel</a></p>`;
   fuelleEltern(/** @type {HTMLElement} */ (e.querySelector(".eigenes"))); // Inhalt aus der SPIELWELT
   document.body.append(e);
 }
@@ -493,7 +496,7 @@ async function spieleRunde(vorschau) {
     stand.phase = "einfuehrung";
     const ergebnis = await spieleEinfuehrung(r.einfuehrung.vorlage, r.einfuehrung.werte, { ton: leiste.ton });
     if (ergebnis !== "gesehen") {
-      location.href = "index.html";
+      location.href = "../index.html";
       return;
     }
     r.einfuehrungGesehen();

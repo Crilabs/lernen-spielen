@@ -76,8 +76,8 @@ export function pausenKnoepfe(container, { beimTippen } = {}) {
   box.style.cssText = "position:absolute;left:0;right:0;bottom:6rem;display:flex;justify-content:center;gap:8rem;z-index:5";
   const rund = "width:16rem;height:16rem;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;"
     + "justify-content:center;padding:3.4rem;box-sizing:border-box;border:0;box-shadow:0 .8rem 0 rgba(0,0,0,.25);cursor:pointer";
-  box.innerHTML = `<a href="index.html" aria-label="Alle Spiele" style="${rund}"><img src="symbole/haus.svg" alt="" style="width:100%;height:100%"></a>`
-    + `<button type="button" aria-label="Weiter" style="${rund}"><img src="symbole/zurueck.svg" alt="" style="width:100%;height:100%;transform:scaleX(-1)"></button>`;
+  box.innerHTML = `<a href="${new URL("index.html", import.meta.url).href}" aria-label="Alle Spiele" style="${rund}"><img src="${new URL("symbole/haus.svg", import.meta.url).href}" alt="" style="width:100%;height:100%"></a>`
+    + `<button type="button" aria-label="Weiter" style="${rund}"><img src="${new URL("symbole/zurueck.svg", import.meta.url).href}" alt="" style="width:100%;height:100%;transform:scaleX(-1)"></button>`;
   container.appendChild(box);
   return new Promise((ok) => {
     box.querySelector("button").addEventListener("click", () => {

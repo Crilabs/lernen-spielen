@@ -28,7 +28,9 @@ Die frühere Web-Fassung mit PHP ist entfernt.
   `seite.css`. Wie sie aussehen und sich
   bedienen lassen, steht in `docs/bedienung.md`. `spiele/rahmen/vorschau.html` zeigt alle Bausteine (Entwicklerseite);
   die Browser-Prüfung dazu: `tests/browser/rahmen.spec.mjs` (Aufruf im Kopfkommentar, nicht Teil von `npm test`).
-- `spiele/vorlage.html` + `spiele/vorlage.js` – Spielvorlage, von der jedes neue Spiel als Kopie startet.
+- `spiele/vorlage/` (`index.html` + `spiel.js`) – Spielvorlage, von der jedes neue Spiel als Kopie startet.
+- `spiele/<fach>/<katalog-nr>-<name>/` – ein Ordner je Spiel, nach Fach (z. B. `spiele/mathe/m14-zwei-tonnen/`);
+  `spiele/objekte/` – animierte Objekte, die mehrere Spiele nutzen. `tests/ablage.test.mjs` prüft die Ablage.
 - `spiele/kern/` – der Plattform-Kern: aller Zugriff auf Speicher (je Profil), Einstellungen (Ton je Spiel, Stimme
   je Gerät), Sprache und Gerätefähigkeiten (Update, Beenden, Kiosk). Siehe `dienste.js` (Schnittstellen),
   `speicher.js`, `einstellungen.js`, `stimme.js`, `geraet.js`, `protokoll.js`. Außerhalb von `kern/` darf kein Spiel
@@ -161,17 +163,18 @@ Die Tests der Lernsteuerung nutzen einen festen Beispiel-Katalog (`tests/daten/s
 
 Zuerst die Checkliste in `docs/bedienung.md` (Abschnitt 10) durchgehen: Kopfleiste, Blase, Hilfe, Pause, Tastatur
 und Ziehen kommen aus `spiele/rahmen/`, kein Spiel baut sie selbst. Neue Spiele starten als Kopie der **Spielvorlage**
-`spiele/vorlage.html` + `spiele/vorlage.js` (spielbarer Platzhalter „Leg die 7“; die Schritte stehen oben in
-`vorlage.js`). Die Vorlage steht nicht in `spiele.json` und schreibt nie in den Lernstand. Browser-Prüfung:
+`spiele/vorlage/index.html` + `spiele/vorlage/spiel.js` (spielbarer Platzhalter „Leg die 7“; die Schritte stehen oben in
+`spiel.js`); der Ordner wird nach `spiele/<fach>/<katalog-nr>-<name>/` kopiert. Die Vorlage steht nicht in `spiele.json` und schreibt nie in den Lernstand. Browser-Prüfung:
 `NODE_PATH=… node tests/browser/vorlage.spec.mjs` (wie `rahmen.spec.mjs`).
 
-1. HTML-Datei in `spiele/` anlegen. Speichern, Einstellungen, Sprache und Gerätefunktionen laufen nur über
+1. Spielordner `spiele/<fach>/<katalog-nr>-<name>/` aus der Vorlage anlegen (`index.html`, `spiel.js`). Speichern, Einstellungen, Sprache und Gerätefunktionen laufen nur über
    `spiele/kern/` (`lade`/`speichere`, `einstellung`/`setzeEinstellung`, `sprich`/`stille`, `faehigkeiten`).
    **Regel:** Kein Plattform-Zugriff außerhalb von `spiele/kern/` – also kein `localStorage`, `sessionStorage`,
    `speechSynthesis`, `SpeechSynthesisUtterance`, `__TAURI__`, `navigator.mediaDevices` und kein `new Audio(`.
    `npm test` schlägt sonst fehl (`tests/plattform-regel.test.mjs`).
 2. Eintrag in `spiele/spiele.json` unter `spiele`: `id`, `titel`, `thema`, `kategorie` (eine `id` aus
-   `kategorien`), `symbol` (z. B. `symbole/<id>.svg`), `datei`, `text` (wird vorgelesen).
+   `kategorien`), `symbol` und `datei` relativ zu `spiele/` (z. B. `mathe/m14-zwei-tonnen/symbol.svg` und
+   `mathe/m14-zwei-tonnen/index.html`), `text` (wird vorgelesen).
 3. Symbol: SVG in `spiele/symbole/` im Stil der vorhandenen (viewBox `0 0 100 100`, Linien `#3B2A6B` 4 px,
    runde Enden, flächige Füllung in Pastell, siehe z. B. `symbole/hilfe.svg`).
 4. Spiel am Lernplan (für Lernspiele mit Aufgaben): im Eintrag `arten` angeben, z. B.
