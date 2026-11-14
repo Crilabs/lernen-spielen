@@ -15,15 +15,31 @@ test("Szene: vier Ebenen in der Reihenfolge himmel, ferne, mitte, vorne", () => 
   assert.equal(SZENE.hoehe, 1080);
 });
 
-test("Szene: kein Text, Kontur nur Tinte, Verläufe nur im Himmel", () => {
+test("Szene: kein Text; Kontur in Tinte und so fein wie bei den Figuren; Nähte fein im Flächenton; Verläufe nur im Himmel", () => {
   const svg = szeneSvg();
   assert.doesNotMatch(svg, /<text/);
-  const striche = [...svg.matchAll(/stroke="([^"]+)"/g)].map((m) => m[1]);
-  assert.ok(striche.length > 0);
-  assert.deepEqual([...new Set(striche)].filter((s) => s !== "#3B2A6B" && s !== "none"), []);
+  // Konturgruppen: Tinte, Breite höchstens 8 (sichtbar ≤ 4, Figuren ≈ 3,6 auf Szenengröße)
+  const konturen = [...svg.matchAll(/<g fill="#3B2A6B" stroke="#3B2A6B" stroke-width="([\d.]+)"/g)].map((m) => Number(m[1]));
+  assert.ok(konturen.length > 10, `Konturgruppen: ${konturen.length}`);
+  assert.ok(konturen.every((w) => w <= 8), JSON.stringify([...new Set(konturen)]));
+  // alle anderen Striche: nicht Tinte, höchstens 3 breit (Fugen, Maserung)
+  for (const m of svg.matchAll(/<(?:path|line|circle|ellipse|rect)\b[^>]*\bstroke="([^"]+)"[^>]*>/g)) {
+    if (m[1] === "none") continue;
+    assert.notEqual(m[1], "#3B2A6B", `Tinte innen: ${m[0].slice(0, 80)}`);
+    const w = Number(m[0].match(/stroke-width="([\d.]+)"/)?.[1] ?? 1);
+    assert.ok(w <= 3, m[0].slice(0, 80));
+  }
   const himmel = svg.slice(svg.indexOf('<g id="himmel"'), svg.indexOf('<g id="ferne"'));
-  const ausserhalb = svg.replace(himmel, "");
-  assert.doesNotMatch(ausserhalb, /Gradient/);
+  assert.doesNotMatch(svg.replace(himmel, ""), /Gradient/);
+});
+
+test("Szene: Schatten in Stufen wie bei den Figuren (viele Flächen je Form)", () => {
+  const svg = szeneSvg();
+  assert.ok((svg.match(/<(path|circle|ellipse|rect)\b/g) ?? []).length > 600);
+});
+
+test("Szene: Bodenschatten unter jedem Kind der Runde", () => {
+  assert.equal((szeneSvg().match(/class="bodenschatten"/g) ?? []).length, ORTE.runde.length);
 });
 
 test("Szene: unbekannte Zeit fällt auf Sommer/Tag zurück", () => {

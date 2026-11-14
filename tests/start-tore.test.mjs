@@ -42,10 +42,15 @@ test("Tor: Texte werden escaped", () => {
   assert.doesNotMatch(h, /<b>A<b/);
 });
 
-test("Weltandeutungen: kein Text, Kontur nur Tinte", () => {
-  for (const [welt, a] of Object.entries(ANDEUTUNGEN)) {
+test("Weltandeutungen und Bogen: kein Text, Tinte nur als Kontur, feine Nähte im Flächenton", () => {
+  for (const [welt, a] of [...Object.entries(ANDEUTUNGEN), ["tor", torHtml(dran())]]) {
     assert.doesNotMatch(a, /<text/, welt);
-    const fremd = [...a.matchAll(/stroke="([^"]+)"/g)].map((m) => m[1]).filter((s) => s !== "#3B2A6B" && s !== "none");
-    assert.deepEqual(fremd, [], welt);
+    for (const m of a.matchAll(/<(?:path|line|circle|ellipse|rect)\b[^>]*\bstroke="([^"]+)"[^>]*>/g)) {
+      if (m[1] === "none") continue;
+      assert.notEqual(m[1], "#3B2A6B", `${welt}: Tinte innen`);
+      assert.ok(Number(m[0].match(/stroke-width="([\d.]+)"/)?.[1] ?? 1) <= 3, `${welt}: ${m[0].slice(0, 60)}`);
+    }
+    const konturen = [...a.matchAll(/stroke="#3B2A6B" stroke-width="([\d.]+)"/g)].map((m) => Number(m[1]));
+    assert.ok(konturen.length > 0 && konturen.every((w) => w <= 7), `${welt}: ${konturen}`);
   }
 });
