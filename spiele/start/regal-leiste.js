@@ -71,8 +71,8 @@ export function zuletztHtml(gekonnt) {
     ? `<ul>${liste.map((t) => `<li><a class="ding" href="regal.html?thema=${encodeURIComponent(t.id)}" data-thema="${esc(t.id)}">`
       + `<span class="material">${bausteinHtml(materialFuer(t))}</span><span class="name">${esc(t.name)}</span></a></li>`).join("")}</ul>`
     : `<p class="leer">Hier steht, was du kannst.</p>`;
-  return `<section class="zuletzt" aria-label="Zuletzt gelernt"><h2>Zuletzt gelernt</h2>${inhalt}`
-    + `<a class="regal-knopf" href="regal.html"><img src="symbole/regal.svg" alt=""><b>Was ich schon kann</b></a></section>`;
+  return `<section class="zuletzt" aria-label="Zuletzt gelernt"><h2>Zuletzt gelernt</h2>${inhalt}</section>`
+    + `<a class="regal-knopf" href="regal.html"><img src="symbole/regal.svg" alt=""><b>Was ich schon kann</b></a>`;
 }
 
 /**

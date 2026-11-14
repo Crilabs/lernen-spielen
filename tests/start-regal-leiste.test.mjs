@@ -46,7 +46,8 @@ test("zuletztHtml: die letzten fünf, neueste zuerst, Name und Material, jedes f
   const namen = [...h.matchAll(/<span class="name">([^<]+)<\/span>/g)].map((m) => m[1]);
   assert.deepEqual(namen, ["Die 8 zerlegen", "Die 7 zerlegen", "Die 6 zerlegen", "Die 5 zerlegen", "Die 4 zerlegen"]);
   assert.match(h, /<a class="ding" href="regal\.html\?thema=z8" data-thema="z8"><span class="material"><ls-perlenstab wert="8"/);
-  assert.match(h, /<a class="regal-knopf" href="regal\.html"><img src="symbole\/regal\.svg" alt=""><b>Was ich schon kann<\/b><\/a><\/section>$/);
+  // der Knopf steht unterhalb des Rahmens „Zuletzt gelernt“
+  assert.match(h, /<\/section><a class="regal-knopf" href="regal\.html"><img src="symbole\/regal\.svg" alt=""><b>Was ich schon kann<\/b><\/a>$/);
   assert.doesNotMatch(h, /2026-/);
 });
 
