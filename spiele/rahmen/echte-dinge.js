@@ -1,6 +1,8 @@
 // Laden der Anleitungen „Mit echten Dingen“ (docs/mit-echten-dingen.md) für Karte, Kachel, Pause und Übersicht.
-// spiele/mit-echten-dingen/verzeichnis.json sagt, welche Themen eine Anleitung haben (`npm run echte-dinge`); erst
-// dann wird die Datei <fach>/<thema>.md geholt. So fragt keine Seite nach Dateien, die es nicht gibt.
+// spiele/mit-echten-dingen/verzeichnis.json sagt, welche Themen eine freigegebene Anleitung haben (`npm run echte-dinge`);
+// erst dann wird die Datei <fach>/<thema>.md geholt. So fragt keine Seite nach Dateien, die es nicht gibt, und kein
+// Entwurf erreicht das Kind. Nur mit `?entwurf` in der Adresse der Seite (Vorschau, Prüfungen) gilt
+// verzeichnis-entwurf.json mit den Entwürfen.
 // Die letzte Wahl der Form merkt sich die Einstellung `echte-dinge.form` (am Profil): eine Voreinstellung für das
 // nächste Mal, kein Typ des Kindes (Lerntypen gibt es nicht, grundsaetze.md §1).
 
@@ -25,7 +27,8 @@ const anleitungen = new Map();
  * @returns {Promise<{ themen: Record<string, Eintrag> }>}
  */
 export function ladeVerzeichnis() {
-  verzeichnis ??= fetch(new URL("verzeichnis.json", ORDNER))
+  const entwurf = new URLSearchParams(globalThis.location?.search ?? "").has("entwurf");
+  verzeichnis ??= fetch(new URL(entwurf ? "verzeichnis-entwurf.json" : "verzeichnis.json", ORDNER))
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
     .then((v) => (v && typeof v.themen === "object" && v.themen ? v : { themen: {} }))
     .catch((e) => {

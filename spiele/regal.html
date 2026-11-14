@@ -260,6 +260,7 @@ import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
 import "./objekte/objekt.js";
 import "./rahmen/anregung.js";
+import { ladeVerzeichnis } from "./rahmen/echte-dinge.js";
 
 /** Merker im Profil (einstellungen): Ids, die beim letzten Besuch im Regal standen. */
 const GESEHEN = "regal.gesehen";
@@ -277,7 +278,9 @@ async function start() {
     ctx = { plan, spiele };
     stand = await ladeLernstand(ctx, new Date().toLocaleDateString("sv"));
   } catch (e) { protokoll("regal: " + e); zeigeFehler(); return; }
-  await Promise.all([leiste.bereit(), ladeEinstellungen()]);
+  const [, , verzeichnis] = await Promise.all([leiste.bereit(), ladeEinstellungen(), ladeVerzeichnis()]);
+  // „Mit echten Dingen“ gibt es, wenn das Thema eine Anleitung oder einen Einzeiler im Lernplan hat.
+  const hatAnleitung = (g) => verzeichnis.themen[g.id]?.fach === g.strang;
 
   const themaNach = new Map((ctx.plan.themen ?? []).map((t) => [t.id, t]));
   const gekonnt = gekonnteThemen(ctx, stand).map((g) => {
@@ -346,7 +349,7 @@ async function start() {
     jetzt = i;
     const g = dinge[i];
     nameFeld.textContent = g.name;
-    echt.hidden = !g.eltern;
+    echt.hidden = !g.eltern && !hatAnleitung(g);
     knopfVon[i].closest(".brett").append(schild);
     schild.hidden = false;
     stelleSchild();
@@ -367,7 +370,7 @@ async function start() {
   hoeren.addEventListener("click", () => { if (jetzt >= 0 && leiste.ton && dinge[jetzt].sprich) sprich(dinge[jetzt].sprich); });
   echt.addEventListener("click", () => {
     const g = dinge[jetzt];
-    if (g?.eltern) anregung.oeffne({ titel: g.name, text: g.eltern, thema: g.id, fach: g.strang });
+    if (g && (g.eltern || hatAnleitung(g))) anregung.oeffne({ titel: g.name, text: g.eltern, thema: g.id, fach: g.strang });
   });
   document.addEventListener("pointerdown", (e) => {
     if (anregung.offen || schild.hidden) return;

@@ -134,22 +134,29 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 ## Umsetzung im Prüfstand (Stand 2026-11-14)
 
 - **Dateien:** `spiele/mit-echten-dingen/<fach>/<thema>.md`; `npm run echte-dinge` schreibt daraus
-  `spiele/mit-echten-dingen/verzeichnis.json` (welche Themen eine Anleitung haben, Titel, Formen). Die Seiten laden nur
-  das Verzeichnis und die Anleitung, die sie zeigen. `tests/echte-dinge.test.mjs` prüft, dass das Verzeichnis aktuell
+  `verzeichnis.json` (nur **freigegebene** Anleitungen: ohne `entwurf: true` und ohne `geparkt: true`; das liest die
+  App) und `verzeichnis-entwurf.json` (dazu die Entwürfe; nur mit `?entwurf` in der Adresse, für Vorschau und
+  Prüfungen). So erreicht kein ungeprüfter Text das Kind. Der Themenname steht im Verzeichnis nur, wenn er im ganzen
+  Lernplan eindeutig ist (die Karte erkennt ein Thema notfalls daran). Die Seiten laden nur das Verzeichnis und die
+  Anleitung, die sie zeigen. `tests/echte-dinge.test.mjs` prüft, dass das Verzeichnis aktuell
   ist, und die Form jeder Datei (Kopf, Thema im Lernplan, Ihr braucht, Schritte, Darauf kommt es an, Leichter/Schwerer,
   Wortzahl, Wortliste 3.2, Anrede „ihr“). Die ersten drei Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`,
-  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E9 noch nicht durchlaufen.
+  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E9 noch nicht durchlaufen und
+  bleiben Entwurf, bis der Skill sie grün prüft.
 - **Darstellung:** `spiele/rahmen/markdown.js` (klein, ohne DOM, alles escaped, Kopf wird abgetrennt),
   `spiele/rahmen/echte-dinge.js` (Laden, gemerkte Form `echte-dinge.form`), Karte `<ls-anregung>`, Kachel
   `<ls-echte-dinge-kachel>`, Angebot in `<ls-pause>` (`docs/bedienung.md` §9). Die Spielvorlage reicht das Thema der
   Runde an die Pause.
 - **Daten:** `echteDingeFuer(ctx, themaId)` und `themenMitEchtenDingen(ctx, stand)` in `spiele/lernsteuerung.js`
-  (`ctx.echteDinge` = Verzeichnis), nur lesend. **Annahme:** Themen ohne Spiel sind für die Übersicht „dran“, wenn
-  alle Voraussetzungen gekonnt sind – je Strang das erste solche Thema; die nächsten zwei sind „bald“. Für das Kind
-  ändert das nichts (dort bleiben Themen ohne Spiel verborgen, bis die Kacheln kommen).
+  (`ctx.echteDinge` = Verzeichnis), nur lesend. Themen ohne Spiel erscheinen in der Übersicht nur in Fächern, in denen
+  schon ein Thema dran oder gekonnt ist: je Fach das erste mit allen Voraussetzungen gekonnt unter „Gerade dran“,
+  höchstens ein weiteres unter „Bald“. Für das Kind ändert das nichts (dort bleiben Themen ohne Spiel verborgen, bis
+  die Kacheln kommen).
 - **Übersicht:** `spiele/mit-echten-dingen.html`, Zugang über „Mit echten Dingen“ in der Navigation des
-  Elternbereichs; Zurück führt dorthin zurück (die PIN wird dann erneut abgefragt). Küchenzettel: höchstens sechs
-  Themen von „Gerade dran“ (mit Anleitung zuerst, die gemerkte Form), zwei Spalten, eine A4-Seite. Drucken über
-  `drucke()` in `spiele/kern/geraet.js` (Fähigkeit `drucken`: Browser und Desktop ja, Android/iOS nein).
+  Elternbereichs; Zurück führt dorthin zurück (die PIN wird dann erneut abgefragt). Küchenzettel: nur Themen von
+  „Gerade dran“ **mit Anleitung** (die Einzeiler des Lernplans sind Elternsprache), je die gemerkte Form in Kurzform,
+  höchstens sechs, zwei Spalten; die Seite misst vor dem Drucken und lässt Kästen weg, bis alles auf eine A4-Seite
+  passt. Ohne Anleitung kein Drucken. Drucken über `drucke()` in `spiele/kern/geraet.js` (Fähigkeit `drucken`: Browser
+  und Desktop ja, Android/iOS nein).
 - **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Prüfung E1–E9 durch einen
   frischen Agenten → höchstens 3 Runden → Datei, Verzeichnis, Kosten in `spiele/mit-echten-dingen/kosten.json`).

@@ -121,5 +121,6 @@ test("bausteinHtml: Perlenstab, Wortart, Karte (escaped)", () => {
   assert.equal(bausteinHtml({ baustein: "wortart", wert: "verb" }), '<ls-wortart art="verb" aria-hidden="true"></ls-wortart>');
   assert.equal(bausteinHtml({ baustein: "karte", wert: "<Ä>" }), '<span class="karte" aria-hidden="true">&lt;Ä&gt;</span>');
   assert.match(bausteinHtml({ baustein: "karte", wert: "", fach: "mathe" }), /^<span class="karte symbol" aria-hidden="true"><i style="--bild:url\('[^']*\/symbole\/mathe\.svg'\)"><\/i><\/span>$/);
-  assert.equal(bausteinHtml({ baustein: "karte", wert: "", fach: "sprechen" }), '<span class="karte symbol" aria-hidden="true"></span>');
+  assert.match(bausteinHtml({ baustein: "karte", wert: "", fach: "sprechen" }), /symbole\/sprechen\.svg/); // Sprechen hat jetzt ein Symbol
+  assert.equal(bausteinHtml({ baustein: "karte", wert: "", fach: "weiteres" }), '<span class="karte symbol" aria-hidden="true"></span>');
 });

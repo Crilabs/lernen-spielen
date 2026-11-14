@@ -310,13 +310,23 @@ async function lauf(typ, name, groesse, basis) {
       ed.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (echte-dinge): ${e.message}`));
       ed.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole (echte-dinge): ${m.text()}`); });
       const laden = async () => {
-        await ed.goto(`${URL_VORSCHAU(basis)}?echte-dinge`, { waitUntil: "load" });
+        await ed.goto(`${URL_VORSCHAU(basis)}?echte-dinge&entwurf`, { waitUntil: "load" }); // Entwürfe nur mit ?entwurf
         await ed.evaluate(async () => {
           await document.getElementById("leiste").bereit();
           await document.fonts.ready;
           await Promise.all([...document.querySelectorAll("ls-echte-dinge-kachel")].map((k) => k.geladen));
         });
       };
+      // ohne ?entwurf: Entwürfe erreichen die App nicht
+      await ed.goto(`${URL_VORSCHAU(basis)}?echte-dinge`, { waitUntil: "load" });
+      const ohneEntwurf = await ed.evaluate(async () => {
+        const ks = [...document.querySelectorAll("ls-echte-dinge-kachel")];
+        await Promise.all(ks.map((x) => x.geladen));
+        const k7 = document.getElementById("kachel-7"), ks2 = document.getElementById("kachel-silben");
+        return { k7: k7.shadowRoot.querySelector("b").textContent, silbenWeg: ks2.hidden };
+      });
+      pruefe(L, "ohne ?entwurf: keine Form aus einem Entwurf (Kachel zeigt nur „Mit echten Dingen“, ohne Einzeiler verborgen)",
+        ohneEntwurf.k7 === "Mit echten Dingen" && ohneEntwurf.silbenWeg, JSON.stringify(ohneEntwurf));
       await laden();
       const k = await ed.evaluate(() => {
         const r = (el) => { const b = el.getBoundingClientRect(); return { w: b.width, h: b.height }; };
@@ -349,13 +359,16 @@ async function lauf(typ, name, groesse, basis) {
           imBild: kb.top >= 0 && kb.bottom <= innerHeight && kb.left >= 0 && kb.right <= innerWidth,
           rollt: w.querySelector(".karte").scrollHeight > w.querySelector(".karte").clientHeight + 1,
           ringGewaehlt: w.querySelector('.reiter [aria-selected="true"] .form') ? getComputedStyle(w.querySelector('.reiter [aria-selected="true"] .form'), "::after").opacity : "",
+          fuellung: w.querySelector('.reiter [aria-selected="true"] .form') ? getComputedStyle(w.querySelector('.reiter [aria-selected="true"] .form')).backgroundColor : "",
+          andere: w.querySelector('.reiter [aria-selected="false"] .form') ? getComputedStyle(w.querySelector('.reiter [aria-selected="false"] .form')).backgroundColor : "",
           inert: document.getElementById("echte-dinge").inert,
         };
       });
       const k1 = await karte();
-      pruefe(L, "Karte: Formen als Wahl (Am Tisch, Unterwegs), erste gewählt mit Sonnenring, Schritte, Kern, Leichter/Schwerer",
+      pruefe(L, "Karte: Formen als Wahl (Am Tisch, Unterwegs), erste gewählt in Tinte (Ring nur beim Fokus), Schritte, Kern, Leichter/Schwerer",
         k1.offen && JSON.stringify(k1.reiter) === JSON.stringify([["tisch", "true", "Am Tisch"], ["unterwegs", "false", "Unterwegs"]])
-          && k1.h3 === "Sieben Nudeln, zwei Teller" && k1.schritte === 4 && k1.kern && k1.stufen && !k1.einzeiler && k1.ringGewaehlt === "1" && k1.inert, JSON.stringify(k1));
+          && k1.h3 === "Sieben Nudeln, zwei Teller" && k1.schritte === 4 && k1.kern && k1.stufen && !k1.einzeiler && k1.ringGewaehlt === "0"
+          && k1.fuellung === "rgb(59, 42, 107)" && k1.andere === "rgb(255, 252, 247)" && k1.inert, JSON.stringify(k1));
       pruefe(L, "Karte: kein Kopf mit Quellen, kein Markdown-Zeichen im Text", !/quellen|https?:|thema:|\*\*|^#/m.test(k1.text), k1.text);
       pruefe(L, "Karte ganz im Bild, ohne Rollen", k1.imBild && !k1.rollt, JSON.stringify(k1));
       if (SHOTS) await ed.screenshot({ path: join(SHOTS, `karte-${name}-${groesse.width}x${groesse.height}.png`) });
@@ -389,18 +402,21 @@ async function lauf(typ, name, groesse, basis) {
       await ed.keyboard.press("Escape");
 
       // Angebot in der Pause
-      await ed.goto(URL_VORSCHAU(basis), { waitUntil: "load" });
+      await ed.goto(`${URL_VORSCHAU(basis)}?entwurf`, { waitUntil: "load" });
       await ed.evaluate(() => document.getElementById("leiste").bereit());
       await tipp(ed.locator("#pausenknopf"));
       await ed.evaluate(() => document.getElementById("pause").angebotBereit);
       const pa = await ed.evaluate(() => {
         const w = document.getElementById("pause").shadowRoot, r = (el) => el.getBoundingClientRect();
         const echt = w.querySelector("ls-knopf.echt"), alle = w.querySelector("a.alle .form"), form = echt.shadowRoot.querySelector(".form");
-        return { sichtbar: !echt.hidden, links: r(form).left, hoehe: r(form).height, breite: r(form).width, alleHoehe: r(alle).height,
-          mitte: Math.abs((r(form).top + r(form).bottom) / 2 - (r(alle).top + r(alle).bottom) / 2), abstand: r(alle).left - r(form).right };
+        const weiter = w.querySelector("ls-knopf.weiter").shadowRoot.querySelector(".form");
+        return { sichtbar: !echt.hidden, rechts: r(form).right, hoehe: r(form).height, wort: echt.getAttribute("wort"), alleHoehe: r(alle).height,
+          mitte: Math.abs((r(form).top + r(form).bottom) / 2 - (r(alle).top + r(alle).bottom) / 2), abstand: r(form).left - r(weiter).right,
+          gleich: Math.abs(r(alle).width - r(weiter).width) < 1 };
       });
-      pruefe(L, "Pause: Angebot „Mit echten Dingen“ als runder Nebenknopf unten links, abseits von Alle Spiele, auf ihrer Mitte",
-        pa.sichtbar && pa.links >= 2.4 * rem - tol && nah(pa.hoehe, 11) && nah(pa.breite, 11) && pa.alleHoehe > pa.hoehe && pa.mitte <= 1.5 && pa.abstand >= 2 * rem, JSON.stringify(pa));
+      pruefe(L, "Pause: Angebot „Mit echten Dingen“ als kleine Pille (11 rem) nach Weiter in derselben Reihe, im Bild; die beiden bleiben gleich",
+        pa.sichtbar && pa.wort === "Mit echten Dingen" && nah(pa.hoehe, 11) && pa.alleHoehe > pa.hoehe && pa.mitte <= 1.5 && pa.abstand >= 2 * rem
+          && pa.rechts <= groesse.width - 2.4 * rem + tol && pa.gleich, JSON.stringify(pa));
       if (SHOTS) await ed.screenshot({ path: join(SHOTS, `pause-angebot-${name}-${groesse.width}x${groesse.height}.png`) });
       await tipp(ed.locator("ls-pause ls-knopf.echt"));
       await ed.evaluate(() => document.getElementById("pause").anregung.geladen);

@@ -658,10 +658,11 @@ export function echteDingeFuer(ctx, themaId) {
 
 // Übersicht „Mit echten Dingen“ (spiele/mit-echten-dingen.html): woran das Kind gerade ist.
 // { dran, bald, wiederholen }: je [{ ...echteDingeFuer, zustand, spiel }] (spiel = ein digitales Spiel übt das Thema)
-//   dran        Themen „dran“ (Planreihenfolge); dazu je Strang das erste Thema ohne Spiel, dessen Voraussetzungen alle
-//               gekonnt sind (Annahme: so werden Themen ohne Spiel sichtbar, ohne dass alle auf einmal kommen)
-//   bald        Themen „in Sicht“ (wie auf der Fach-Seite, höchstens K.IN_SICHT je Strang); dazu je Strang die nächsten
-//               K.IN_SICHT Themen ohne Spiel, deren Voraussetzungen gekonnt sind
+//   dran        Themen „dran“ (Planreihenfolge); dazu je Strang, in dem schon ein Thema dran oder gekonnt ist, das
+//               erste Thema ohne Spiel, dessen Voraussetzungen alle gekonnt sind (so werden Themen ohne Spiel sichtbar,
+//               ohne dass alle Fächer auf einmal kommen)
+//   bald        Themen „in Sicht“ (wie auf der Fach-Seite, höchstens K.IN_SICHT je Strang); dazu in denselben Strängen
+//               höchstens ein weiteres Thema ohne Spiel
 //   wiederholen die zuletzt gekonnten Themen, neueste zuerst, höchstens `wiederholen`
 export function themenMitEchtenDingen(ctx, stand, { wiederholen = 3 } = {}) {
   const z = zustaende(ctx, stand);
@@ -669,14 +670,15 @@ export function themenMitEchtenDingen(ctx, stand, { wiederholen = 3 } = {}) {
   const bekannt = new Set(themenVon(ctx).map((t) => t.id));
   const bereit = (t) => (t.voraussetzungen ?? []).every((v) => !bekannt.has(v) || z[v] === "kann-ich");
   const eintrag = (t) => ({ ...echteDingeFuer(ctx, t.id), zustand: z[t.id], spiel: spieleFuer(ctx, t.id).length > 0 });
+  const begonnen = new Set(themenVon(ctx).filter((t) => z[t.id] === "dran" || z[t.id] === "kann-ich").map((t) => t.strang));
   const dran = [], bald = [], ohneSpiel = {};
   for (const t of themenVon(ctx)) {
     if (z[t.id] === "dran") { dran.push(eintrag(t)); continue; }
     if (inSicht.has(t.id)) { bald.push(eintrag(t)); continue; }
-    if (z[t.id] === "kann-ich" || spieleFuer(ctx, t.id).length > 0 || !bereit(t)) continue;
+    if (!begonnen.has(t.strang) || z[t.id] === "kann-ich" || spieleFuer(ctx, t.id).length > 0 || !bereit(t)) continue;
     const n = (ohneSpiel[t.strang] = (ohneSpiel[t.strang] ?? 0) + 1);
     if (n === 1) dran.push({ ...eintrag(t), zustand: "dran" });
-    else if (n <= 1 + K.IN_SICHT) bald.push({ ...eintrag(t), zustand: "in-sicht" });
+    else if (n === 2) bald.push({ ...eintrag(t), zustand: "in-sicht" });
   }
   const gekonnt = gekonnteThemen(ctx, stand).reverse().slice(0, Math.max(0, wiederholen))
     .map((g) => eintrag(themaVon(ctx, g.id)));

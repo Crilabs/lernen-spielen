@@ -2,8 +2,8 @@
 // Vollflächige Ebene über dem Spiel auf Nacht mit ruhigen Sternen in Sonne, verborgen bis zeige().
 // Der Inhalt kommt per <slot> auf eine Papierkarte (ohne Inhalt keine Karte).
 // Unten Mitte „Alle Spiele“ und „Weiter“: gleich groß, gleich gestaltet (Papier, Symbol und Wort), N6.
-// Optional unten links ein ruhiges Angebot „Mit echten Dingen“ (runder Nebenknopf mit der Hand, Name beim ersten Tippen,
-// kleiner als die beiden und abseits, kein Muss, keine Belohnung, K8): zeige({ echteDinge: { thema, fach, titel, text } }) öffnet damit die Karte zum Thema der
+// Optional in derselben Reihe nach den beiden ein ruhiges Angebot „Mit echten Dingen“ (kleine Papier-Pille in der Größe
+// eines Nebenknopfs mit Hand und Wort, kleiner als die beiden Pausenknöpfe; kein Muss, keine Belohnung, K8): zeige({ echteDinge: { thema, fach, titel, text } }) öffnet damit die Karte zum Thema der
 // Runde (<ls-anregung> liegt in der Pause). Ohne Anleitung und ohne Einzeiler gibt es den Knopf nicht.
 // Kein Timer, kein Ablauf.
 
@@ -70,12 +70,9 @@ const PAUSE_CSS = `
 }
 .aktionen:focus { outline: none; }
 a.alle { --ls-knopf: ${MASSE.pilleGross}rem; }
-/* Angebot: unten links am sicheren Feld, auf der Mitte der Pausenknöpfe. */
-ls-knopf.echt {
-  position: absolute;
-  left: calc(max(0rem, (100vw - 192rem) / 2) + ${MASSE.rand}rem + env(safe-area-inset-left, 0rem));
-  bottom: calc(${UNTEN + (MASSE.pilleGross - MASSE.bedien) / 2}rem + env(safe-area-inset-bottom, 0rem));
-}
+/* Angebot: kleine Pille nach Weiter, auf der Mitte der Pausenknöpfe. */
+.aktionen { align-items: center; }
+ls-knopf.echt { --ls-breite: 0rem; }
 .ebene { position: absolute; inset: 0; }
 `;
 
@@ -92,8 +89,8 @@ export class LsPause extends HTMLElement {
       <div class="aktionen" tabindex="-1">
         <a class="knopf alle" href="${HAUS_HREF}" tabindex="0" aria-label="Alle Spiele" draggable="false"><span class="form neben pille"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span><span class="wort">Alle Spiele</span></span></a>
         <ls-knopf class="weiter" symbol="zurueck.svg" name="Weiter" wort="Weiter" groesse="gross" gespiegelt></ls-knopf>
+        <ls-knopf class="echt" symbol="hand.svg" wort="${ANREGUNG_TITEL}" hidden></ls-knopf>
       </div>
-      <ls-knopf class="echt" symbol="hand.svg" name="${ANREGUNG_TITEL}" hidden></ls-knopf>
       <ls-anregung></ls-anregung>
       </div>`;
     this.karte = /** @type {HTMLElement} */ (wurzel.querySelector(".karte"));
