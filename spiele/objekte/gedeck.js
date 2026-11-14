@@ -30,8 +30,8 @@ export function gedeckStueck() {
   const teller = form(oval(50, 56, 22, 22), TELLER, [42, 46], { s: 0.9 });
   const rand = flach(oval(50, 56, 15, 15), heller(RAND, 0.4));
   const mitte = flach(oval(50, 56, 11, 11), TELLER);
-  const becher = form(pfad("M76 18 L92 18 L90 40 Q84 43 78 40 Z"), BECHER, [80, 24], { s: 0.9 });
-  const brand = flach(pfad("M76.5 18 L91.5 18 L91.2 22 L76.8 22 Z"), heller(BECHER, 0.4));
+  const becher = form(pfad("M76 12 L92 12 L90 34 Q84 37 78 34 Z"), BECHER, [80, 18], { s: 0.9 });
+  const brand = flach(pfad("M76.5 12 L91.5 12 L91.2 16 L76.8 16 Z"), heller(BECHER, 0.4));
   return zusammen(gabel(14, 30), teller, rand, mitte, loeffel(86, 46), becher, brand);
 }
 

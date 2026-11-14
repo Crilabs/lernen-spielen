@@ -12,6 +12,18 @@
    ],
    "entwurf": false
   },
+  "viererreihe": {
+   "fach": "mathe",
+   "name": "Viererreihe",
+   "titel": "Vier Dinge an jedem Platz",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Tisch decken in zwei Gängen"
+    }
+   ],
+   "entwurf": false
+  },
   "zehnerreihe": {
    "fach": "mathe",
    "name": "Zehnerreihe",

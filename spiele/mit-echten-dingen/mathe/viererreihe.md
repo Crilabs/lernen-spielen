@@ -1,7 +1,6 @@
 ---
 thema: viererreihe
 fach: mathe
-entwurf: true
 bild: { figur: gedeck, zustand: gedeckt }
 quellen:
   - 1·1 richtig üben, Basisinfos (Verdoppelungsaufgaben von 2 · 8 zu 4 · 8; Reihen verstehen statt aufsagen), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
