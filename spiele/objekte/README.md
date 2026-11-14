@@ -31,6 +31,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `hausfassade.js` – Vorderseite eines hohen Wohnhauses mit Giebeldach; Fenster in Reihen und Spalten, unten die Haustür (ohne Schrift und Ziffer).
 - `flaschen-sechserpack.js` – ein Sechserpack Wasserflaschen in Folie mit Tragschlaufe, drei vorne, drei hinten (ohne Etikett, Schrift und Ziffer).
 - `erdbeerschale.js` – helle Schüssel mit blauem Band, darin ein Berg Erdbeeren, leicht von oben (ohne Schrift und Ziffer).
+- `kartoffeltopf.js` – Kochtopf aus Emaille (Koralle) mit hellem Rand und zwei Griffen, oben ein Berg Kartoffeln (ohne Herd, Dampf, Schrift und Ziffer).
 - `muenzglas.js` – Schraubglas mit Deckel, unten voll goldfarbener Münzen (Kleingeld-Glas; ohne Schrift und Ziffer).
 - `spielkarten.js` – fünf Spielkarten als Fächer, nur Rückseiten (Koralle mit heller Raute; ohne Schrift, Ziffer und
   Kartenfarben).
