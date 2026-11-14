@@ -13,6 +13,23 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "nachsilben-ung-heit-keit-nis": {
+   "fach": "schreiben",
+   "name": "-ung, -heit, -keit, -nis: groß",
+   "titel": "Nachsilben machen Nomen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Packungen lesen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Schilder lesen"
+    }
+   ],
+   "entwurf": true,
+   "datei": "schreiben/nachsilben-ung-heit-keit-nis.md"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
