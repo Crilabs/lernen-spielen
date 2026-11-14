@@ -1,5 +1,5 @@
-// Ela – figuren.md §2: mittelbraune Haut, dunkle Haare in zwei Zöpfen, Brille. Läuft, klettert.
-// Kleidung Senfgelb gedämpft (vorläufig bis zur Freigabe der ersten Zeichnung, figuren.md §9).
+// Ela – figuren.md §2: mittelbraune Haut, kurze dunkle Haare mit Haarspange, Brille. Läuft, klettert.
+// Farben aus den Welt-Paletten, freigegeben 2026-11-14 (figuren.md §4).
 
 import { meldeKind } from "../bestand.js";
 import { dreiviertel, profil, ellipse, flaeche, INK } from "./schnitt.js";
@@ -11,32 +11,12 @@ const farben = {
 };
 const BAND = "#8FD3EE";
 const BRILLE = "#2E7D8C";
-
-/** Zopf aus drei Gliedern mit Band (alter Stil, Profil). @param {number} x @param {number} y */
-const zopf = (x, y) =>
-  [0, 1, 2].map((i) => ellipse(x, y + i * 15, 9 - i, 9, farben.haar)).join("")
-  + `<path d="M${x - 7} ${y + 40} l7 -5 l7 5 l-7 5 Z" fill="${BAND}" stroke-width="3"/>`;
-
-const HAAR_HINTEN = S.dunkler(farbe("haar"), 0.15);
-const HAAR_VORN = S.heller(farbe("haar"), 0.16);
-/** @param {string} k */
-function farbe(k) { return /** @type {Record<string, string>} */ (farben)[k]; }
-
-/** Zopf aus drei Gliedern, jedes mit Licht als Fläche. @param {number} x @param {number} y */
-const zopfS = (x, y) => S.zusammen(
-  ...[0, 1, 2].map((i) => {
-    const cy = y + i * 14;
-    return S.zusammen(
-      S.form(S.oval(x, cy, 9.5 - i, 9), farben.haar, [x - 4, cy - 4], { s: 0.8 }),
-      S.locke([x - 7, cy - 4], [x + 6, cy + 2], 5, -2, HAAR_VORN, { licht: true }),
-    );
-  }),
-  S.form(S.pfad(`M${x - 8} ${y + 38} l8 -6 l8 6 l-8 6 Z`), BAND, [x - 3, y + 36], { s: 0.8 }),
-);
+const HAAR_HINTEN = S.dunkler(farben.haar, 0.15);
+const HAAR_VORN = S.heller(farben.haar, 0.16);
 
 // Haarschopf aus einem Stück: Rand abwechselnd Kerbe und Spitze. Pony von links nach rechts, dann über den Wirbel zurück.
 const SCHOPF = /** @type {[number, number][]} */ ([
-  [117, 92], [127, 58], [136, 67], [146, 47], [155, 60], [163, 45], [174, 59], [182, 46], [194, 62], [199, 52], [208, 84],
+  [118, 88], [127, 58], [136, 67], [146, 47], [155, 60], [163, 45], [174, 59], [182, 46], [194, 62], [199, 52], [208, 84],
   [210, 64], [213, 47], [203, 39], [202, 27], [190, 30], [180, 19], [169, 28], [155, 21], [148, 31], [134, 28],
   [132, 40], [120, 45], [123, 56], [115, 67],
 ]);
@@ -66,14 +46,22 @@ const ponyschatten = {
   kontur: "",
 };
 
+/** Haarspange rechts im Pony (Wasserblau, wie früher das Zopfband). */
+const spange = S.zusammen(
+  S.form(S.pfad("M186 49 Q190 44 197 45 L205 50 Q207 54 203 56 L190 55 Q184 54 186 49 Z"), BAND, [189, 47], { s: 0.82 }),
+  { svg: `<path d="M190 50 L201 51" fill="none" stroke="${S.heller(BAND, 0.45)}" stroke-width="2"/>`, kontur: "" },
+);
+
 const kopfDreiviertel = {
   ponyschatten,
-  zoepfe: S.zusammen(zopfS(118, 100), zopfS(205, 96)),
-  haareHinten: S.form(S.oval(162, 66, 46, 43), HAAR_HINTEN, [146, 44], { s: 0.9 }),
+  // kurzer Nacken: hintere Haarmasse endet hinter dem Kopf
+  haareHinten: S.form(S.pfad("M118 78 C114 40 140 22 164 22 C190 22 214 40 210 78 C206 92 200 100 192 104 L134 104 C126 100 120 92 118 78 Z"),
+    HAAR_HINTEN, [140, 34], { s: 0.9 }),
   haareOben: S.zusammen(
     S.form(S.pfad(S.zacken(SCHOPF, 0.16)), farben.haar, [138, 32], { s: 0.9 }),
     { svg: KERBEN.map(([a, b]) => `<path d="${kerbe(a, b)}" fill="${S.dunkler(farben.haar, 0.45)}" stroke="none"/>`).join(""), kontur: "" },
     { svg: LICHT.map((d) => `<path d="${d}" fill="${HAAR_VORN}" stroke="none"/>`).join(""), kontur: "" },
+    spange,
   ),
   nachGesicht: {
     svg: `<path d="M146 80 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 M173 80 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0`
@@ -84,7 +72,7 @@ const kopfDreiviertel = {
 };
 
 const kopfProfil = {
-  haareHinten: ellipse(158, 66, 44, 42, farben.haar) + zopf(130, 100),
+  haareHinten: ellipse(158, 66, 44, 42, farben.haar),
   haareOben: flaeche(
     "M206 62 C198 52 188 49 178 50 C168 56 156 58 146 62 C142 74 142 88 140 102 C128 106 120 94 122 78 C122 44 140 25 166 25 C192 25 208 40 206 62 Z",
     farben.haar,

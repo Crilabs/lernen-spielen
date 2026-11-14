@@ -32,7 +32,7 @@ Rolle spielt (6.1 Nr. 6). Kein Name aus der eigenen Familie.
 | | **Ela** | **Kofi** | **Lena** | **Timo** |
 |---|---|---|---|---|
 | Name aus | Türkisch/Deutsch | Twi (Ghana) | Deutsch | Finnisch/Deutsch |
-| Aussehen | mittelbraune Haut, dunkle Haare in zwei Zöpfen, **Brille** | dunkelbraune Haut, kurze schwarze Locken, schmal | helle Haut, rote Locken, Sommersprossen, **zwei Hörgeräte** (sichtbar, türkis; eins ist in jeder Ansicht zu sehen) | helle bis olive Haut, glatte hellbraune Haare, rundlich |
+| Aussehen | mittelbraune Haut, kurze dunkle Haare mit Haarspange, **Brille** | dunkelbraune Haut, kurze schwarze Locken, schmal | helle Haut, rote Locken, Sommersprossen, **zwei Hörgeräte** (sichtbar, türkis; eins ist in jeder Ansicht zu sehen) | helle bis olive Haut, glatte, strubbelige hellbraune Haare bis zum Kinn (Seitenscheitel), rundlich |
 | Bewegt sich | läuft, klettert | rennt, springt | läuft, hüpft | **Rollstuhl** (fährt selbst, schnell und geschickt), trägt Dinge auf dem Schoß |
 | Mag (beiläufig, nie Thema) | bauen, Werkzeug, Schrauben sortieren | malen, Muster legen | Käfer und Steine sammeln | backen, Dinge abwiegen |
 | Familie (nur im Hintergrund, nie erklärt) | Mama und Mami | Papa und Opa | Mama und großer Bruder | Mama, ihr Partner und eine kleine Halbschwester |
@@ -41,6 +41,8 @@ Rolle spielt (6.1 Nr. 6). Kein Name aus der eigenen Familie.
 Prüfung gegen §6.1:
 - **Merkmale verteilt, nicht gehäuft:** Brille, Hörgerät und Rollstuhl liegen auf drei verschiedenen Kindern;
   das Kind mit der dunkelsten Haut trägt kein weiteres „Merkmal“. Kein Kind ist das „Vielfalts-Kind“.
+- **Frisuren gegen das Klischee (Christian, 2026-11-14):** Ela trägt kurze Haare, Timo lange; der Schnitt bleibt
+  geschlechtstypisch genug, dass man sie erkennt (Ela mit Haarspange, Timo strubbelig mit Seitenscheitel).
 - **Gegen das Klischee, beiläufig:** Ela baut und schraubt, Kofi malt, Timo backt und wiegt ab (Mathe im
   Alltag), Lena sammelt Käfer. Keines dieser Interessen wird zur Aufgabe gemacht oder kommentiert.
 - **Behinderung mit aktiver Rolle:** Timo im Rollstuhl löst, backt, fährt voraus; Lenas Hörgerät ist

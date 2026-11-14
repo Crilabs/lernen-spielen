@@ -1,4 +1,4 @@
-// Timo – figuren.md §2: helle bis olive Haut, glatte hellbraune Haare, rundlich. Rollstuhl, fährt selbst,
+// Timo – figuren.md §2: helle bis olive Haut, glatte hellbraune Haare bis zum Kinn, rundlich. Rollstuhl, fährt selbst,
 // schnell und geschickt, trägt Dinge auf dem Schoß. Mag backen und abwiegen.
 // Stil wie Ela (figuren.md §4): Silhouette, Schatten in Stufen, Farben aus den Welt-Paletten.
 
@@ -7,35 +7,50 @@ import { dreiviertelStuhl, profilStuhl, flaeche } from "./schnitt.js";
 import * as S from "./stil.js";
 
 const farben = {
-  haut: "#E8C39E", haar: "#8A5A3A", oben: "#E9A0B5", unten: "#7B6A8E", schuhe: "#CBB7A0", sohle: "#FFFCF7",
+  haut: "#E8C39E", haar: "#8A5A3A", oben: "#E2B47A", unten: "#7B6A8E", schuhe: "#4F8FB3", sohle: "#FFFCF7",
   kapuze: true, wangen: 0.35,
 };
 
-// Glatte Haare: ein Schopf, Pony in geraden Strähnen (flache Wölbung), über den Kopf zurück.
+// Glatte, strubbelige Haare bis zum Kinn, Seitenscheitel links, der Pony fällt kräftig nach rechts, seitlich über die Ohren.
+// Ein Schopf aus einem Stück, im Uhrzeigersinn: außen von links unten über den Kopf nach rechts unten,
+// dann innen am Gesicht entlang zurück (rechte Seitensträhne, Pony mit Spitzen nach rechts unten, linke Seitensträhne).
 const SCHOPF = /** @type {[number, number][]} */ ([
-  [118, 86], [124, 60], [132, 67], [139, 50], [147, 63], [154, 48], [163, 61], [171, 47], [180, 60], [188, 48],
-  [196, 61], [201, 53], [208, 82],
-  [212, 62], [210, 45], [200, 31], [186, 24], [170, 21], [153, 23], [137, 29], [125, 40], [117, 56],
+  [113, 117], [109, 98], [108, 80], [110, 60], [119, 41], [133, 27], [151, 20], [171, 18], [190, 22], [204, 32], [213, 49],
+  [217, 70], [217, 92], [215, 106], [213, 118],
+  [209, 106], [206, 113], [205, 96], [205, 82], [203, 66],
+  [199, 73], [194, 56], [186, 70], [181, 51], [172, 66], [167, 46], [157, 60], [151, 42], [141, 51],
+  [134, 46], [126, 62], [122, 82], [121, 98], [119, 110], [116, 104],
 ]);
-const KERBEN = [[[124, 60], [130, 44]], [[139, 50], [142, 38]], [[154, 48], [156, 36]], [[171, 47], [171, 35]], [[188, 48], [186, 36]], [[201, 53], [196, 42]]];
+/** Strähnen: dunkle Keile entlang der Fallrichtung. */
+const KERBEN = [
+  [[193, 54], [184, 40]], [[180, 50], [172, 36]], [[166, 46], [160, 34]], [[151, 43], [148, 33]],
+  [[206, 104], [204, 80]], [[121, 100], [118, 76]], [[203, 33], [196, 46]], [[134, 28], [140, 40]],
+];
 /** @param {number[]} a @param {number[]} b */
 const kerbe = (a, b) => {
   const dx = b[0] - a[0];
   const dy = b[1] - a[1];
   const l = Math.hypot(dx, dy);
-  const n = [(-dy / l) * 2.8, (dx / l) * 2.8];
+  const n = [(-dy / l) * 2.6, (dx / l) * 2.6];
   return `M${a[0] - n[0]} ${a[1] - n[1]} Q${(a[0] + b[0]) / 2} ${(a[1] + b[1]) / 2 + 1} ${b[0]} ${b[1]} Q${(a[0] + b[0]) / 2 + n[0] * 0.4} ${(a[1] + b[1]) / 2} ${a[0] + n[0]} ${a[1] + n[1]} Z`;
 };
-const LICHT = ["M136 44 Q142 34 152 29 Q144 37 140 47 Z", "M158 40 Q162 31 170 27 Q164 34 162 42 Z", "M176 40 Q181 32 189 30 Q183 36 180 43 Z"];
+/** Lichtflächen: Glanz auf dem Scheitelbogen und auf den Seitensträhnen. */
+const LICHT = [
+  "M140 36 Q152 26 168 24 Q154 30 146 40 Z", "M174 26 Q186 27 196 34 Q186 32 178 32 Z",
+  "M114 70 Q116 56 122 46 Q119 58 118 72 Z", "M210 62 Q213 74 213 88 Q210 76 207 66 Z",
+];
 
-const PONY = SCHOPF.slice(1, 12).map(([x, y]) => /** @type {[number, number]} */ ([x, y + 5]));
+const PONY = SCHOPF.slice(20, 30).map(([x, y]) => /** @type {[number, number]} */ ([x, y + 5]));
 const kopfDreiviertel = {
   ponyschatten: {
     svg: `<path d="${S.zacken([[PONY[0][0], 40], ...PONY, [PONY[PONY.length - 1][0], 40]], 0.08)}" fill="${S.dunkler(farben.haut, 0.3)}" stroke="none"/>`,
     kontur: "",
   },
+  // Haare hinter dem Kopf bis zum Kinn (sichtbar neben Wangen und Hals)
+  haareHinten: S.form(S.pfad("M110 72 C108 34 138 20 164 20 C192 20 218 34 216 72 L216 112 C206 118 196 116 190 110 L136 110 C130 116 118 118 110 112 Z"),
+    S.dunkler(farben.haar, 0.15), [134, 34], { s: 0.9 }),
   haareOben: S.zusammen(
-    S.form(S.pfad(S.zacken(SCHOPF, 0.08)), farben.haar, [138, 32], { s: 0.92 }),
+    S.form(S.pfad(S.zacken(SCHOPF, 0.07)), farben.haar, [132, 30], { s: 0.92 }),
     { svg: KERBEN.map(([a, b]) => `<path d="${kerbe(a, b)}" fill="${S.dunkler(farben.haar, 0.4)}" stroke="none"/>`).join(""), kontur: "" },
     { svg: LICHT.map((d) => `<path d="${d}" fill="${S.heller(farben.haar, 0.25)}" stroke="none"/>`).join(""), kontur: "" },
   ),
