@@ -89,16 +89,5 @@
   "notiz": "Steuerung M37 (Spiel und Anleitungen)",
   "cache_lesen": 21257291,
   "cache_schreiben": 264972
- },
- {
-  "datum": "2026-11-14",
-  "phase": "geparkt",
-  "posten": "status",
-  "modell": "",
-  "eingabe": 0,
-  "ausgabe": 0,
-  "einheit": "keine",
-  "menge": 0,
-  "notiz": "Prüfung A nach 3 Runden rot; Freigabe nötig (Sachgrund 9/10)"
  }
 ]
