@@ -369,9 +369,11 @@ function warteFolge() {
 // --- Pause am Rundenende (bedienung.md 7.1): Sachmoment, Alle Spiele und Weiter gleichwertig -------
 // Spielzeit der Eltern: Ist die Zeit um, endet das Spiel nach dieser Pause (kein Weiter); sind weniger als fünf
 // Minuten übrig, sagt der Erzähler einmal je Tag die Vorwarnung. Dann spricht der Satz statt des Sachmoments.
-/** @param {{ hinweis?: string | null, zeit?: { schluss: boolean, satz: string | null } }} [optionen]
- *   hinweis = Spiel, in dem gerade etwas Neues dran ist; zeit = amRundenende() (ohne: nichts zur Spielzeit) */
-async function zeigePause({ hinweis = null, zeit = { schluss: false, satz: null } } = {}) {
+// Dazu ruhig das Angebot „Mit echten Dingen“ zum Thema der Runde (docs/mit-echten-dingen.md, kein Muss, K8).
+/** @param {{ hinweis?: string | null, zeit?: { schluss: boolean, satz: string | null }, echteDinge?: { thema?: string, fach?: string, titel?: string, text?: string } | null }} [optionen]
+ *   hinweis = Spiel, in dem gerade etwas Neues dran ist; zeit = amRundenende() (ohne: nichts zur Spielzeit);
+ *   echteDinge = Thema der Runde */
+async function zeigePause({ hinweis = null, zeit = { schluss: false, satz: null }, echteDinge = null } = {}) {
   const karte = $("sachmoment");
   fuelleSachmoment(karte, leiste.ton && !zeit.satz);
   if (zeit.satz && leiste.ton) sage(zeit.satz);
@@ -383,7 +385,9 @@ async function zeigePause({ hinweis = null, zeit = { schluss: false, satz: null 
     a.innerHTML = `<img src="${esc(spiel.symbol)}" alt=""><span>${esc(spiel.titel)}</span>`;
     karte.append(a);
   }
-  await pause.zeige(zeit); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
+  stand.phase = "pause";
+  await pause.zeige({ ...zeit, echteDinge }); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
+  stand.phase = "laden";
 }
 
 // --- Elternansicht (?eltern): beschreibend, kein Vergleich -----------------------------------------
@@ -408,6 +412,7 @@ async function starteRunde(vorschau) {
   const plan = r.thema ? c.plan.themen.find((/** @type {any} */ t) => t.id === r.thema?.id) : null;
   return {
     thema: r.thema?.name ?? "",
+    echteDinge: plan ? { thema: plan.id, fach: plan.strang, titel: plan.name, text: plan.eltern ?? "" } : null,
     einfuehrung: r.einfuehrungFaellig ? plan?.einfuehrung ?? null : null,
     einfuehrungGesehen: () => r.einfuehrungGesehen(),
     naechste: () => r.naechste(),
@@ -421,6 +426,7 @@ function vorschauRunde() {
   const keys = [...VORSCHAU.aufgaben];
   return {
     thema: VORSCHAU.thema,
+    echteDinge: { titel: VORSCHAU.thema }, // die Karte findet die Anleitung über den Namen des Themas
     einfuehrung: null,
     einfuehrungGesehen() {},
     naechste() {
@@ -477,7 +483,7 @@ async function spieleRunde(vorschau) {
   }
 
   const { hinweisSpiel } = await r.ende();
-  await zeigePause({ hinweis: hinweisSpiel, zeit: vorschau ? undefined : await amRundenende() });
+  await zeigePause({ hinweis: hinweisSpiel, zeit: vorschau ? undefined : await amRundenende(), echteDinge: r.echteDinge });
   return spieleRunde(vorschau);
 }
 
@@ -495,7 +501,7 @@ async function start() {
   if (!(await starteSpielzeit({ zaehlen: !vorschau }))) return;
   if (params.has("pause") || params.has("hinweis")) {
     const andere = (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id !== SPIEL_ID)?.id ?? null;
-    await zeigePause({ hinweis: params.has("hinweis") ? params.get("hinweis") || andere : null });
+    await zeigePause({ hinweis: params.has("hinweis") ? params.get("hinweis") || andere : null, echteDinge: { titel: VORSCHAU.thema } });
   }
   await spieleRunde(vorschau);
 }

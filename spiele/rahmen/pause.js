@@ -2,6 +2,9 @@
 // Vollflächige Ebene über dem Spiel auf Nacht mit ruhigen Sternen in Sonne, verborgen bis zeige().
 // Der Inhalt kommt per <slot> auf eine Papierkarte (ohne Inhalt keine Karte).
 // Unten Mitte „Alle Spiele“ und „Weiter“: gleich groß, gleich gestaltet (Papier, Symbol und Wort), N6.
+// Optional unten links ein ruhiges Angebot „Mit echten Dingen“ (runder Nebenknopf mit der Hand, Name beim ersten Tippen,
+// kleiner als die beiden und abseits, kein Muss, keine Belohnung, K8): zeige({ echteDinge: { thema, fach, titel, text } }) öffnet damit die Karte zum Thema der
+// Runde (<ls-anregung> liegt in der Pause). Ohne Anleitung und ohne Einzeiler gibt es den Knopf nicht.
 // Kein Timer, kein Ablauf. Spielzeit (Spec 2026-11-14-spielzeit): zeige({ satz, schluss }) stellt einen ruhigen
 // Satz über die Knöpfe (Vorwarnung oder Schluss); bei schluss gibt es kein Weiter, nur „Alle Spiele“.
 
@@ -10,6 +13,8 @@ import { sprich } from "../kern/stimme.js";
 import { schonGesagt, sageEinmal } from "../kern/sitzung.js";
 import { GRUND_CSS, MASSE, definiere } from "./stil.js";
 import { findeSpiel } from "./knopf.js";
+import { ANREGUNG_TITEL } from "./anregung.js";
+import { findeAnleitung } from "./echte-dinge.js";
 
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
 const HAUS_HREF = new URL("../index.html", import.meta.url).href;
@@ -79,6 +84,13 @@ const PAUSE_CSS = `
 }
 .satz:empty { display: none; }
 a.alle { --ls-knopf: ${MASSE.pilleGross}rem; }
+/* Angebot: unten links am sicheren Feld, auf der Mitte der Pausenknöpfe. */
+ls-knopf.echt {
+  position: absolute;
+  left: calc(max(0rem, (100vw - 192rem) / 2) + ${MASSE.rand}rem + env(safe-area-inset-left, 0rem));
+  bottom: calc(${UNTEN + (MASSE.pilleGross - MASSE.bedien) / 2}rem + env(safe-area-inset-bottom, 0rem));
+}
+.ebene { position: absolute; inset: 0; }
 `;
 
 export class LsPause extends HTMLElement {
@@ -86,6 +98,7 @@ export class LsPause extends HTMLElement {
     super();
     const wurzel = this.attachShadow({ mode: "open" });
     wurzel.innerHTML = `<style>${GRUND_CSS}${PAUSE_CSS}</style>
+      <div class="ebene">
       <svg class="himmel" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <g class="sterne">${STERNE}</g><g class="punkte">${PUNKTE}</g>
       </svg>
@@ -94,6 +107,9 @@ export class LsPause extends HTMLElement {
       <div class="aktionen" tabindex="-1">
         <a class="knopf alle" href="${HAUS_HREF}" aria-label="Alle Spiele" draggable="false"><span class="form neben pille"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span><span class="wort">Alle Spiele</span></span></a>
         <ls-knopf class="weiter" symbol="zurueck.svg" name="Weiter" wort="Weiter" groesse="gross" gespiegelt></ls-knopf>
+      </div>
+      <ls-knopf class="echt" symbol="hand.svg" name="${ANREGUNG_TITEL}" hidden></ls-knopf>
+      <ls-anregung></ls-anregung>
       </div>`;
     this.karte = /** @type {HTMLElement} */ (wurzel.querySelector(".karte"));
     const slot = /** @type {HTMLSlotElement} */ (wurzel.querySelector("slot"));
@@ -110,8 +126,15 @@ export class LsPause extends HTMLElement {
     this._offen = null;
     /** @type {((w: "weiter") => void) | null} */
     this._loese = null;
+    this.echt = /** @type {HTMLElement} */ (wurzel.querySelector("ls-knopf.echt"));
+    this.anregung = /** @type {any} */ (wurzel.querySelector("ls-anregung"));
+    /** @type {{ thema?: string, fach?: string, titel?: string, text?: string } | null} */
+    this.echteDinge = null;
+    /** Versprechen: Ob es das Angebot gibt, steht fest (für die Browser-Prüfung). */
+    this.angebotBereit = Promise.resolve();
     this.alle.addEventListener("click", () => this.sagAlle());
     this.weiter.addEventListener("click", () => this.beendeWeiter());
+    this.echt.addEventListener("click", () => { if (this.echteDinge) this.anregung.oeffne(this.echteDinge); });
   }
 
   connectedCallback() {
@@ -134,23 +157,39 @@ export class LsPause extends HTMLElement {
    * Macht die Ebene sichtbar; löst beim Tippen auf Weiter genau einmal auf. Während sie offen ist,
    * liefert jeder weitere Aufruf dasselbe Versprechen. Mit schluss gibt es kein Weiter: das Versprechen
    * bleibt offen, der Weg führt über „Alle Spiele“ zur Startseite.
-   * @param {{ satz?: string | null, schluss?: boolean }} [optionen] satz zeigt die Pause (sprechen tut das Spiel)
+   * @param {{ satz?: string | null, schluss?: boolean, echteDinge?: { thema?: string, fach?: string, titel?: string, text?: string } | null }} [optionen]
+   *   satz zeigt die Pause (sprechen tut das Spiel); echteDinge: Thema der Runde für das Angebot „Mit echten Dingen“ (ohne: kein Angebot)
    * @returns {Promise<"weiter">}
    */
-  zeige({ satz = null, schluss = false } = {}) {
+  zeige({ satz = null, schluss = false, echteDinge = null } = {}) {
     if (this._offen) return this._offen;
+    this.echteDinge = echteDinge;
+    this.echt.hidden = true;
     this._offen = new Promise((ok) => { this._loese = ok; });
     this.satz.textContent = satz ?? "";
     this.weiter.hidden = schluss;
+    this.angebotBereit = this.pruefeAngebot(echteDinge);
     this.setAttribute("offen", "");
     // Fokus auf die Knopfgruppe, nicht auf Weiter: keiner der beiden Wege wird hervorgehoben (N6).
     this.aktionen.focus({ preventScroll: true });
     return this._offen;
   }
 
+  /**
+   * Zeigt den Knopf „Mit echten Dingen“, wenn es zum Thema eine Anleitung oder einen Einzeiler gibt.
+   * @param {{ thema?: string, fach?: string, titel?: string, text?: string } | null} e
+   * @returns {Promise<void>}
+   */
+  async pruefeAngebot(e) {
+    if (!e) return;
+    const da = !!e.text || !!(await findeAnleitung({ thema: e.thema, fach: e.fach, titel: e.titel }));
+    if (this.echteDinge === e && this._offen) this.echt.hidden = !da;
+  }
+
   beendeWeiter() {
     const loese = this._loese;
     if (!loese) return;
+    this.anregung.schliesse();
     this._loese = null;
     this._offen = null;
     this.removeAttribute("offen");
