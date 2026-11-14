@@ -83,5 +83,107 @@
   "thema": [
    "zweierreihe"
   ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 30,
+  "ausgabe": 9141,
+  "einheit": "tokens",
+  "menge": 958968,
+  "notiz": "Schreib-Agent zehnerreihe",
+  "cache_lesen": 891190,
+  "cache_schreiben": 58607,
+  "themen": 1,
+  "thema": [
+   "zehnerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 9886,
+  "einheit": "tokens",
+  "menge": 552912,
+  "notiz": "Prüfer E zehnerreihe R1",
+  "cache_lesen": 486557,
+  "cache_schreiben": 56451,
+  "themen": 1,
+  "thema": [
+   "zehnerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 4826,
+  "einheit": "tokens",
+  "menge": 692016,
+  "notiz": "Schreib-Agent zehnerreihe, Befunde R1",
+  "cache_lesen": 675731,
+  "cache_schreiben": 11441,
+  "themen": 1,
+  "thema": [
+   "zehnerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 4,
+  "ausgabe": 729,
+  "einheit": "tokens",
+  "menge": 90840,
+  "notiz": "Schreib-Agent zehnerreihe, Rest",
+  "cache_lesen": 89329,
+  "cache_schreiben": 778,
+  "themen": 1,
+  "thema": [
+   "zehnerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 8974,
+  "einheit": "tokens",
+  "menge": 583967,
+  "notiz": "Prüfer E zehnerreihe R2",
+  "cache_lesen": 518014,
+  "cache_schreiben": 56961,
+  "themen": 1,
+  "thema": [
+   "zehnerreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 10,
+  "ausgabe": 1043,
+  "einheit": "tokens",
+  "menge": 368626,
+  "notiz": "Schreib-Agent zehnerreihe, §5.1",
+  "cache_lesen": 365131,
+  "cache_schreiben": 2442,
+  "themen": 1,
+  "thema": [
+   "zehnerreihe"
+  ]
  }
 ]
