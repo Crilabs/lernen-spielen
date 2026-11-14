@@ -1,7 +1,6 @@
 ---
 thema: adjektiv-in-nominalgruppe-klein
 fach: schreiben
-entwurf: true
 bild: { figur: ringelsocken, zustand: paar }
 quellen:
   - LehrplanPLUS Grundschule Deutsch, Fachlehrplan Jahrgangsstufe 3/4, Lernbereich 4.4 (den Nominalkern erweitern, um die Großschreibung des Nomens zu erkennen), ISB Bayern, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/4/deutsch, abgerufen 2026-11-14

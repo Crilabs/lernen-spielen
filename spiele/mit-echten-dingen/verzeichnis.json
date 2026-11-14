@@ -1,5 +1,18 @@
 {
  "themen": {
+  "adjektiv-in-nominalgruppe-klein": {
+   "fach": "schreiben",
+   "name": "Adjektiv vor dem Nomen klein",
+   "titel": "Welche Socke? Das Adjektiv davor bleibt klein",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Socken-Auftrag"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/adjektiv-in-nominalgruppe-klein.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
