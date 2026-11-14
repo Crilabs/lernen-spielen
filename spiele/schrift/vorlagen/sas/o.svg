@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 300" data-zeichen="o" data-satz="sas">
+  <!-- Anstrich über das Oval, Oval gegen den Uhrzeigersinn, Knoten, waagerechter Ausgang (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 0 200 C 8 196 10 172 11 148 C 12 120 32 100 60 100 C 46 96 32 98 22 108 C 12 120 10 140 10 158 C 10 186 26 200 42 200 C 60 200 70 180 70 150 C 70 126 64 108 58 104 C 54 102 52 106 56 108 C 64 110 72 102 85 100" fill="none"/>
+</svg>

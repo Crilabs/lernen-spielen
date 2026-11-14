@@ -10,6 +10,7 @@
 - Elternbereich nur noch für Erwachsenes: Lernstand (beschreibend, mit Bezug zur Klasse, Eingriffe mit „Wirklich?“), Geschichten, Gerät, Hinweise und Sicherheit. Die Stimmenwahl entfällt (eine Stimme für alle). Ton an/aus, Regal und Anregungen brauchen keine PIN. Der Zugang bleibt: Zahnrad auf der Startseite drei Sekunden halten.
 - Geschichten-Stufe: Im Elternbereich lässt sich wählen, wie aufregend Geschichten sein dürfen (Ruhig, Sanft – Standard –, Abenteuer), mit einem Beispielsatz je Stufe. Die Spiele richten sich danach, sobald sie Geschichten erzählen.
 
+- Die Einführungen vor einem neuen Thema erzählen jetzt mit den Kindern der Runde (Ela, Kofi, Lena, Timo) statt mit dem Einhorn. Die alten Figuren und Wimmelbilder der entfernten Spiele sind gelöscht.
 - Die ersten sechs Spiele (Zahlenzauber, Perlenbrücke, Kettenhüpfer, Wimmelbild, Zauberin, Einhorn-Steine) sind entfernt. Sie werden nach den Grundsätzen neu gebaut, je Thema ein passendes Spiel. Bis dahin ist die Startseite leer. Alte Lernstände werden nicht übernommen.
 - Natürliche Stimme vorbereitet: Die Spiele spielen vorab erzeugte Aufnahmen (Azure Speech) ab, sobald es sie gibt, sonst spricht wie bisher die Systemstimme. Im Elternbereich heißt die Systemstimme jetzt „Ersatzstimme“, dazu ein Hinweis, dass die Stimme computererzeugt ist. Erzähler ist Florian (Azure), 10 % langsamer; Figuren sprechen nicht selbst (`docs/stimme.md`). Neue Anhör-Seite `npm run audio:anhoeren`.
 

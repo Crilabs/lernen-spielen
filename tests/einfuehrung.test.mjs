@@ -5,7 +5,7 @@ const { fuelleVorlage } = await import("../spiele/einfuehrung.js");
 
 const VORLAGE = { szenen: [
   { sprich: "Diese Brücke braucht so viele Perlen.", zeig: "{n} Perlen und {n-1} davor",
-    bild: [ { figur: "einhorn", x: 20, aktion: "hop" }, { perlen: ["{n}", "{n-1}"], x: "60" }, { zahl: "{n}", x: 80 } ] },
+    bild: [ { figur: "ela", x: 20, haltung: "zeigen", aufgabe: "vorzeigen" }, { perlen: ["{n}", "{n-1}"], x: "60" }, { zahl: "{n}", x: 80 } ] },
   { sprich: "Beide Stäbe zusammen.", zeig: "", bild: [] },
 ] };
 
@@ -14,7 +14,7 @@ test("fuelleVorlage: Platzhalter in zeig und bild, Zahlen werden echte Zahlen", 
   assert.equal(s[0].zeig, "7 Perlen und 6 davor");
   assert.deepEqual(s[0].bild[1], { perlen: [7, 6], x: 60 });
   assert.deepEqual(s[0].bild[2], { zahl: 7, x: 80 });
-  assert.deepEqual(s[0].bild[0], { figur: "einhorn", x: 20, aktion: "hop" });
+  assert.deepEqual(s[0].bild[0], { figur: "ela", x: 20, haltung: "zeigen", aufgabe: "vorzeigen" });
   assert.equal(s[1].zeig, "");
 });
 
@@ -38,8 +38,8 @@ test("fuelleVorlage: Arithmetik mit {n-1} und {n+2}", () => {
 });
 
 test("fuelleVorlage: sprich ohne zeig zeigt später sprich (Feld bleibt, zeig leer)", () => {
-  const s = fuelleVorlage({ szenen: [{ sprich: "Hallo Einhorn." }] }, {});
-  assert.equal(s[0].sprich, "Hallo Einhorn.");
+  const s = fuelleVorlage({ szenen: [{ sprich: "Hallo Ela." }] }, {});
+  assert.equal(s[0].sprich, "Hallo Ela.");
   assert.equal(s[0].zeig, "");
   assert.deepEqual(s[0].bild, []);
 });
@@ -50,7 +50,7 @@ test("fuelleVorlage: sprich mit Ziffer, Zahlwort oder Platzhalter ist ein Fehler
 });
 
 test("fuelleVorlage: Wörter, die nur wie Zahlwörter beginnen, sind erlaubt", () => {
-  assert.doesNotThrow(() => fuelleVorlage({ szenen: [{ sprich: "Einhorn, Nacht, einmal, Dreieck, Achtung.", zeig: "" }] }, {}));
+  assert.doesNotThrow(() => fuelleVorlage({ szenen: [{ sprich: "Eimer, Nacht, einmal, Dreieck, Achtung.", zeig: "" }] }, {}));
 });
 
 test("fuelleVorlage: unbekannter Platzhalter ist ein Fehler", () => {
@@ -68,5 +68,5 @@ test("fuelleVorlage: alle Zahlwörter in sprich werden abgelehnt", () => {
   const wort = ["null", "zwo", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn",
     "zwanzig", "dreißig", "dreissig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig", "hundert", "einhundert", "tausend", "eintausend"];
   for (const w of wort) assert.throws(() => fuelleVorlage({ szenen: [{ sprich: `Da sind ${w} Perlen.`, zeig: "" }] }, {}), /sprich/, w);
-  assert.doesNotThrow(() => fuelleVorlage({ szenen: [{ sprich: "Einhorn, Achtung, einmal, Zehnerstab, Vierecke.", zeig: "" }] }, {}));
+  assert.doesNotThrow(() => fuelleVorlage({ szenen: [{ sprich: "Eimer, Achtung, einmal, Zehnerstab, Vierecke.", zeig: "" }] }, {}));
 });

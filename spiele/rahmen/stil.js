@@ -55,7 +55,7 @@ export const FACH = {
   sprechen: { name: "Aprikose", fuellung: "#F08A4B", tief: "#A44C16", toenung: "#FFEADD" },
 };
 
-/** Fächer mit eigenem Symbol in spiele/symbole/<fach>.svg (weiße Linie, als Maske in Tinte oder auf der Fachfarbe). */
+/** Fächer mit eigenem Symbol in spiele/symbole/<fach>.svg (Sprechen: zwei Sprechblasen, 2026-11-14). */
 export const FACH_SYMBOLE = new Set(["mathe", "lesen", "schreiben", "grammatik", "geometrie", "sprechen"]);
 
 /**

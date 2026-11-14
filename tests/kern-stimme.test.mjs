@@ -77,7 +77,7 @@ test("sprich ohne Web-Sprache", async () => {
 
 test("sprich löst bei onend auf, mit Stimme, Sprache und Tempo", async () => {
   const S = await frisch();
-  const p = S.sprich("Hallo Einhorn", { tempo: 0.9 });
+  const p = S.sprich("Hallo Ela", { tempo: 0.9 });
   await warte();
   assert.equal(gesprochen.length, 1);
   const u = gesprochen[0];
@@ -92,7 +92,7 @@ test("sprich löst bei onend auf, mit Stimme, Sprache und Tempo", async () => {
 test("sprich löst nach Notbremse auf", async () => {
   mock.timers.enable({ apis: ["setTimeout"] });
   const S = await frisch();
-  const text = "Hallo Einhorn";
+  const text = "Hallo Ela";
   let fertig = null;
   S.sprich(text).then((e) => (fertig = e));
   await warte();
@@ -204,9 +204,9 @@ function ohneAudio() {
 
 test("sprich spielt die erzeugte Datei statt der Systemstimme", async (t) => {
   t.after(ohneAudio);
-  fakeAudio({ "Hallo Einhorn": { datei: "test/ab.mp3" } });
+  fakeAudio({ "Hallo Ela": { datei: "test/ab.mp3" } });
   const S = await frisch();
-  const p = S.sprich("  Hallo   Einhorn ");
+  const p = S.sprich("  Hallo   Ela ");
   await warte();
   assert.equal(dateien.length, 1);
   assert.match(dateien[0].src, /\/spiele\/audio\/test\/ab\.mp3$/);
@@ -271,6 +271,33 @@ test("blockierte Datei: Systemstimme springt ein", async (t) => {
   assert.equal(gesprochen.length, 1);
   gesprochen[0].onend();
   assert.equal(await p, "gesprochen");
+});
+
+// WebKit bricht eine Datei ab, wenn die Seite verlassen wird (Haus, „Alle Spiele“), und meldet NotSupportedError:
+// das ist kein Fehler der Datei, der Name darf abgeschnitten werden (rahmen/leiste.js). Kein Protokolleintrag.
+test("abgelehnte Datei beim Verlassen der Seite: kein Protokolleintrag, sonst schon", async (t) => {
+  const zeilen = new Map();
+  globalThis.localStorage = { getItem: (k) => zeilen.get(k) ?? null, setItem: (k, v) => zeilen.set(k, String(v)) };
+  t.after(() => { ohneAudio(); delete globalThis.localStorage; });
+  fakeAudio({ Hallo: { datei: "test/h.mp3" } });
+  FakeAudio.ablehnen = true;
+  const S = await frisch();
+  S.sprich("Hallo");
+  await warte();
+  await warte();
+  assert.match(zeilen.get("protokoll") ?? "", /Audiodatei nicht abspielbar/);
+  zeilen.clear();
+  globalThis.window.dispatchEvent(new Event("beforeunload"));
+  S.sprich("Hallo");
+  await warte();
+  await warte();
+  assert.equal(zeilen.get("protokoll") ?? null, null);
+  globalThis.window.dispatchEvent(new Event("pageshow")); // zurück aus dem Verlauf: wieder protokollieren
+  S.sprich("Hallo");
+  await warte();
+  await warte();
+  assert.match(zeilen.get("protokoll") ?? "", /Audiodatei nicht abspielbar/);
+  S.stille();
 });
 
 test("zweites sprich hält die laufende Datei an", async (t) => {

@@ -5,6 +5,7 @@
 // Ohne bekanntes Fach: Band in Nebel, keine Kachel, Name in Tinte. `thema` darf sich zur Laufzeit ändern.
 // `ohne-haus` (nur die Startseite): kein Haus, die Seite ist selbst das Zuhause. Slot `rechts`: rechts neben
 // Ton, z. B. das Zahnrad der Startseite.
+// `durchsichtig` (nur die Startseite): Band ohne Fläche über der Szene, der Name nur für Screenreader sichtbar.
 // Setzt --ls-leiste-hoehe am <html>: dort beginnt die freie Fläche des Spiels (top: var(--ls-leiste-hoehe)).
 // Bereit: `await leiste.bereit()` (Versprechen, auch für späte Aufrufer) oder Ereignis `bereit`, sobald die
 // Einstellungen geladen sind und `ton` stimmt.
@@ -88,6 +89,11 @@ ${FACH_CSS}
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+:host([durchsichtig]) .band { background: transparent; pointer-events: none; }
+:host([durchsichtig]) .band > *, :host([durchsichtig]) ::slotted(*) { pointer-events: auto; }
+:host([durchsichtig]) .titel {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 .name { font-size: 5.2rem; line-height: 1.2; font-weight: 700; color: var(--fach-tief); }
 .thema { font-size: 3.4rem; line-height: 1.3; font-weight: 400; color: var(--ls-tinte-weich); }

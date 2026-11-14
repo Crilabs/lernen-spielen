@@ -60,6 +60,7 @@ import { sperreTouch, protokoll, esc } from "../lernspiel.js";
 import { sprich } from "../kern/stimme.js";
 import { runde, einmal } from "../lernsteuerung.js";
 import { spieleEinfuehrung } from "../einfuehrung.js";
+import { starteSpielzeit, amRundenende, sage } from "../rahmen/spielzeit.js";
 
 sperreTouch();
 
@@ -418,14 +419,16 @@ function warteFolge() {
 }
 
 // --- Pause am Rundenende (bedienung.md 7.1): Sachmoment, Alle Spiele und Weiter gleichwertig -------
+// Spielzeit der Eltern: Ist die Zeit um, endet das Spiel nach dieser Pause (kein Weiter); sind weniger als fünf
+// Minuten übrig, sagt der Erzähler einmal je Tag die Vorwarnung. Dann spricht der Satz statt des Sachmoments.
 // Dazu ruhig das Angebot „Mit echten Dingen“ zum Thema der Runde (docs/mit-echten-dingen.md, kein Muss, K8).
-/**
- * @param {{ hinweis?: string | null, echteDinge?: { thema?: string, fach?: string, titel?: string, text?: string } | null }} [optionen]
- *   hinweis = Spiel, in dem gerade etwas Neues dran ist; echteDinge = Thema der Runde
- */
-async function zeigePause({ hinweis = null, echteDinge = null } = {}) {
+/** @param {{ hinweis?: string | null, zeit?: { schluss: boolean, satz: string | null }, echteDinge?: { thema?: string, fach?: string, titel?: string, text?: string } | null }} [optionen]
+ *   hinweis = Spiel, in dem gerade etwas Neues dran ist; zeit = amRundenende() (ohne: nichts zur Spielzeit);
+ *   echteDinge = Thema der Runde */
+async function zeigePause({ hinweis = null, zeit = { schluss: false, satz: null }, echteDinge = null } = {}) {
   const karte = $("sachmoment");
-  fuelleSachmoment(karte, leiste.ton);
+  fuelleSachmoment(karte, leiste.ton && !zeit.satz);
+  if (zeit.satz && leiste.ton) sage(zeit.satz);
   const spiel = hinweis ? (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id === hinweis) : null;
   if (spiel) {
     const a = document.createElement("a");
@@ -436,7 +439,7 @@ async function zeigePause({ hinweis = null, echteDinge = null } = {}) {
     karte.append(a);
   }
   stand.phase = "pause";
-  await pause.zeige({ echteDinge }); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
+  await pause.zeige({ ...zeit, echteDinge }); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
   stand.phase = "laden";
 }
 
@@ -537,7 +540,7 @@ async function spieleRunde(vorschau) {
   }
 
   const { hinweisSpiel } = await r.ende();
-  await zeigePause({ hinweis: hinweisSpiel, echteDinge: r.echteDinge });
+  await zeigePause({ hinweis: hinweisSpiel, zeit: vorschau ? undefined : await amRundenende(), echteDinge: r.echteDinge });
   return spieleRunde(vorschau);
 }
 
@@ -551,6 +554,9 @@ async function start() {
   if (nichtEingetragen) protokoll(`${SPIEL_ID}: nicht in spiele.json – Vorschau, schreibt nicht`);
   const vorschau = ["pause", "hinweis", "eltern", "einfuehrung"].some((p) => params.has(p)) || PRUEF_STUFE !== null || !c || nichtEingetragen;
   stand.vorschau = vorschau;
+  // Spielzeit der Eltern (Spec 2026-11-14-spielzeit): gesperrt → zurück zur Startseite; sonst zählt ab jetzt die
+  // Zeit (die Vorschau zählt nicht, sie schreibt nie).
+  if (!(await starteSpielzeit({ zaehlen: !vorschau }))) return;
   if (params.has("pause") || params.has("hinweis")) {
     const andere = (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id !== SPIEL_ID)?.id ?? null;
     await zeigePause({ hinweis: params.has("hinweis") ? params.get("hinweis") || andere : null, echteDinge: { titel: VORSCHAU.thema } });

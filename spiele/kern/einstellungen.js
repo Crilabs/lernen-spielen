@@ -1,5 +1,6 @@
 // Einstellungen: Ton je Spiel ("ton.<spielId>", am Profil), Stimme je Gerät ("stimme"),
-// Stufe der Geschichten ("geschichten", am Profil; grundsaetze.md 9.3, gestellt im Elternbereich).
+// Stufe der Geschichten ("geschichten", am Profil; grundsaetze.md 9.3, gestellt im Elternbereich),
+// Schriftpfad ("schrift", am Profil: "sas" oder "va", gestellt im Elternbereich).
 // Alte localStorage-Werte werden bewusst nicht übernommen.
 
 import { lade, speichere } from "./speicher.js";
@@ -69,4 +70,18 @@ export const GESCHICHTEN = /** @type {const} */ (["ruhig", "sanft", "abenteuer"]
 export function geschichtenStufe() {
   const wert = einstellung("geschichten", "sanft");
   return GESCHICHTEN.includes(wert) ? wert : "sanft";
+}
+
+/** Verbundene Schriften (Spec 2026-11-14-schriftvorlagen, 5.5); Bayern erlaubt VA oder SAS. */
+export const SCHRIFTEN = /** @type {const} */ (["sas", "va"]);
+
+/**
+ * Schriftpfad des Kindes; ohne oder mit unbekanntem Wert "sas" (Standard). Kein Rückfall von VA auf SAS
+ * beim Laden der Formen: Fehlt ein Satz, entscheidet das Spiel (kern/vorlagen.js `hatSatz`).
+ * Erst nach `ladeEinstellungen()` aussagekräftig.
+ * @returns {"sas" | "va"}
+ */
+export function schriftPfad() {
+  const wert = einstellung("schrift", "sas");
+  return SCHRIFTEN.includes(wert) ? wert : "sas";
 }

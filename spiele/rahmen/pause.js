@@ -3,9 +3,10 @@
 // Der Inhalt kommt per <slot> auf eine Papierkarte (ohne Inhalt keine Karte).
 // Unten Mitte „Alle Spiele“ und „Weiter“: gleich groß, gleich gestaltet (Papier, Symbol und Wort), N6.
 // Optional in derselben Reihe nach den beiden ein ruhiges Angebot „Mit echten Dingen“ (kleine Papier-Pille in der Größe
-// eines Nebenknopfs mit Hand und Wort, kleiner als die beiden Pausenknöpfe; kein Muss, keine Belohnung, K8): zeige({ echteDinge: { thema, fach, titel, text } }) öffnet damit die Karte zum Thema der
-// Runde (<ls-anregung> liegt in der Pause). Ohne Anleitung und ohne Einzeiler gibt es den Knopf nicht.
-// Kein Timer, kein Ablauf.
+// eines Nebenknopfs mit Hand und Wort, kleiner als die beiden Pausenknöpfe; kein Muss, keine Belohnung, K8): zeige({ echteDinge: { thema, fach, titel, text } }) führt damit zur Seite „Mit echten Dingen“
+// zum Thema der Runde (echt.html). Ohne Anleitung und ohne Einzeiler gibt es den Knopf nicht.
+// Kein Timer, kein Ablauf. Spielzeit (Spec 2026-11-14-spielzeit): zeige({ satz, schluss }) stellt einen ruhigen
+// Satz über die Knöpfe (Vorwarnung oder Schluss); bei schluss gibt es kein Weiter, nur „Alle Spiele“.
 
 import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
 import { sprich } from "../kern/stimme.js";
@@ -17,6 +18,7 @@ import { findeAnleitung } from "./echte-dinge.js";
 
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
 const HAUS_HREF = new URL("../index.html", import.meta.url).href;
+const ECHT_HREF = new URL("../echt.html", import.meta.url).href;
 /** Abstand der Knöpfe vom unteren Rand und ihre gemeinsame Breite, in rem. */
 const UNTEN = 6;
 /** Abstand unten, wenn das Angebot eine eigene Reihe hat (schmale Bildschirme), in rem. */
@@ -71,6 +73,19 @@ const PAUSE_CSS = `
   gap: 8rem;
 }
 .aktionen:focus { outline: none; }
+.satz {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(${UNTEN + MASSE.pilleGross + 2}rem + env(safe-area-inset-bottom, 0rem));
+  margin: 0;
+  padding: 0 ${MASSE.rand}rem;
+  text-align: center;
+  font-size: 3.2rem;
+  line-height: 1.3;
+  color: var(--ls-papier);
+}
+.satz:empty { display: none; }
 a.alle { --ls-knopf: ${MASSE.pilleGross}rem; }
 /* Angebot: kleine Pille nach Weiter, auf der Mitte der Pausenknöpfe. Ist der Bildschirm dafür zu schmal (4:3, Tablet;
    die Reihe braucht etwa 170 rem, 1 rem = Höhe/108), steht die Pille allein in einer ruhigen Reihe unter den beiden;
@@ -95,12 +110,12 @@ export class LsPause extends HTMLElement {
         <g class="sterne">${STERNE}</g><g class="punkte">${PUNKTE}</g>
       </svg>
       <div class="inhalt"><div class="karte leer"><slot></slot></div></div>
+      <p class="satz" role="status"></p>
       <div class="aktionen" tabindex="-1">
         <a class="knopf alle" href="${HAUS_HREF}" tabindex="0" aria-label="Alle Spiele" draggable="false"><span class="form neben pille"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span><span class="wort">Alle Spiele</span></span></a>
         <ls-knopf class="weiter" symbol="zurueck.svg" name="Weiter" wort="Weiter" groesse="gross" gespiegelt></ls-knopf>
         <ls-knopf class="echt" symbol="hand.svg" wort="${ANREGUNG_TITEL}" hidden></ls-knopf>
       </div>
-      <ls-anregung></ls-anregung>
       </div>`;
     this.karte = /** @type {HTMLElement} */ (wurzel.querySelector(".karte"));
     const slot = /** @type {HTMLSlotElement} */ (wurzel.querySelector("slot"));
@@ -112,19 +127,19 @@ export class LsPause extends HTMLElement {
     this.aktionen = /** @type {HTMLElement} */ (wurzel.querySelector(".aktionen"));
     this.alle = /** @type {HTMLAnchorElement} */ (wurzel.querySelector("a.alle"));
     this.weiter = /** @type {HTMLElement} */ (wurzel.querySelector("ls-knopf.weiter"));
+    this.satz = /** @type {HTMLElement} */ (wurzel.querySelector(".satz"));
     /** @type {Promise<"weiter"> | null} */
     this._offen = null;
     /** @type {((w: "weiter") => void) | null} */
     this._loese = null;
     this.echt = /** @type {HTMLElement} */ (wurzel.querySelector("ls-knopf.echt"));
-    this.anregung = /** @type {any} */ (wurzel.querySelector("ls-anregung"));
     /** @type {{ thema?: string, fach?: string, titel?: string, text?: string } | null} */
     this.echteDinge = null;
     /** Versprechen: Ob es das Angebot gibt, steht fest (für die Browser-Prüfung). */
     this.angebotBereit = Promise.resolve();
     this.alle.addEventListener("click", () => this.sagAlle());
     this.weiter.addEventListener("click", () => this.beendeWeiter());
-    this.echt.addEventListener("click", () => { if (this.echteDinge) this.anregung.oeffne(this.echteDinge); });
+    this.echt.addEventListener("click", () => this.oeffneEchteDinge());
   }
 
   connectedCallback() {
@@ -145,16 +160,19 @@ export class LsPause extends HTMLElement {
 
   /**
    * Macht die Ebene sichtbar; löst beim Tippen auf Weiter genau einmal auf. Während sie offen ist,
-   * liefert jeder weitere Aufruf dasselbe Versprechen.
-   * @param {{ echteDinge?: { thema?: string, fach?: string, titel?: string, text?: string } | null }} [optionen]
-   *   echteDinge: Thema der Runde für das Angebot „Mit echten Dingen“ (ohne: kein Angebot)
+   * liefert jeder weitere Aufruf dasselbe Versprechen. Mit schluss gibt es kein Weiter: das Versprechen
+   * bleibt offen, der Weg führt über „Alle Spiele“ zur Startseite.
+   * @param {{ satz?: string | null, schluss?: boolean, echteDinge?: { thema?: string, fach?: string, titel?: string, text?: string } | null }} [optionen]
+   *   satz zeigt die Pause (sprechen tut das Spiel); echteDinge: Thema der Runde für das Angebot „Mit echten Dingen“ (ohne: kein Angebot)
    * @returns {Promise<"weiter">}
    */
-  zeige({ echteDinge = null } = {}) {
+  zeige({ satz = null, schluss = false, echteDinge = null } = {}) {
     if (this._offen) return this._offen;
     this.echteDinge = echteDinge;
     this.echt.hidden = true;
     this._offen = new Promise((ok) => { this._loese = ok; });
+    this.satz.textContent = satz ?? "";
+    this.weiter.hidden = schluss;
     this.angebotBereit = this.pruefeAngebot(echteDinge);
     this.setAttribute("offen", "");
     // Fokus auf die Knopfgruppe, nicht auf Weiter: keiner der beiden Wege wird hervorgehoben (N6).
@@ -173,10 +191,26 @@ export class LsPause extends HTMLElement {
     if (this.echteDinge === e && this._offen) this.echt.hidden = !da;
   }
 
+  /**
+   * Führt zur Seite „Mit echten Dingen“ zum Thema der Runde (spiele/echt.html, Christian 2026-11-14). Als Link im
+   * Schatten-DOM, damit linkKlick (lernspiel.js) wie bei „Alle Spiele“ vorher speichert.
+   */
+  async oeffneEchteDinge() {
+    const e = this.echteDinge;
+    if (!e) return;
+    const fund = e.thema ? { thema: e.thema } : await findeAnleitung({ fach: e.fach, titel: e.titel });
+    if (!fund?.thema) return;
+    const a = document.createElement("a");
+    a.href = `${ECHT_HREF}?thema=${encodeURIComponent(fund.thema)}`;
+    a.hidden = true;
+    /** @type {ShadowRoot} */ (this.shadowRoot).append(a);
+    a.click();
+    a.remove();
+  }
+
   beendeWeiter() {
     const loese = this._loese;
     if (!loese) return;
-    this.anregung.schliesse();
     this._loese = null;
     this._offen = null;
     this.removeAttribute("offen");

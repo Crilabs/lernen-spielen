@@ -1,20 +1,20 @@
 { "szenen": [
-  { "sprich": "Im Tal fließt ein Bach. Das Einhorn baut dort Brücken aus Perlen.",
+  { "sprich": "Im Tal fließt ein Bach. Ela baut dort Brücken aus Perlen.",
     "zeig": "Die Brücke der {n}",
-    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "steh" }, { "perlen": ["{n}"], "x": 60 }, { "zahl": "{n}", "x": 88 } ] },
+    "bild": [ { "figur": "ela", "x": 18, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "perlen": ["{n}"], "x": 60 }, { "zahl": "{n}", "x": 88 } ] },
   { "sprich": "Diese Brücke braucht genau so viele Perlen. Sie sitzen alle auf einem Stab.",
     "zeig": "{n} Perlen",
-    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "schau" }, { "perlen": ["{n}"], "x": 62 } ] },
-  { "sprich": "Das Einhorn teilt den Stab. Jetzt liegt links ein Teil und rechts ein Teil.",
+    "bild": [ { "figur": "ela", "x": 18, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["{n}"], "x": 62 } ] },
+  { "sprich": "Ela teilt den Stab. Jetzt liegt links ein Teil und rechts ein Teil.",
     "zeig": "{n} = {h} + {r}",
-    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "hop" }, { "perlen": ["{h}", "{r}"], "x": 62 } ] },
+    "bild": [ { "figur": "ela", "x": 18, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["{h}", "{r}"], "x": 62 } ] },
   { "sprich": "Beide Teile zusammen sind so lang wie der ganze Stab. Keine Perle fehlt.",
     "zeig": "{h} + {r} = {n}",
     "bild": [ { "perlen": ["{h}", "{r}"], "x": 32 }, { "perlen": ["{n}"], "x": 76 } ] },
-  { "sprich": "Das Einhorn dreht die Teile um. Der Stab bleibt genau so lang.",
+  { "sprich": "Ela dreht die Teile um. Sie staunt: Der Stab bleibt genau so lang.",
     "zeig": "{r} + {h} = {n}",
-    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "steh" }, { "perlen": ["{r}", "{h}"], "x": 62 } ] },
+    "bild": [ { "figur": "ela", "x": 18, "haltung": "staunen", "aufgabe": "vorzeigen" }, { "perlen": ["{r}", "{h}"], "x": 62 } ] },
   { "sprich": "Jetzt teilst du den Stab. Wie viele Perlen hat jeder Teil?",
     "zeig": "{n} = ? + ?",
-    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "schau" }, { "perlen": ["{n}"], "x": 60 }, { "zahl": "{n}", "x": 88 } ] }
+    "bild": [ { "figur": "ela", "x": 18, "haltung": "fragen", "aufgabe": "vorzeigen" }, { "perlen": ["{n}"], "x": 60 }, { "zahl": "{n}", "x": 88 } ] }
 ] }

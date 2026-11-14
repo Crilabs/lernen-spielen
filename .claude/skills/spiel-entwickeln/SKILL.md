@@ -183,7 +183,7 @@ Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spie
   und die beiden Verzeichnisse (`npm run echte-dinge` direkt vor dem Commit), nie die `kosten.json` der
   Anleitungen.“). Liegt die Datei schon als Entwurf vor, entfällt dieser Schritt: gleich prüfen, der Schreib-Agent
   kommt erst mit Befunden dazu; fehlt dem Entwurf `bild` im Kopf, macht er vorher nur §3a. Dann die
-  Prüfung E1–E10 mit **frischen** Prüfern nach `pruefung-e.md`, die du startest, höchstens 3 Runden; rote Befunde per
+  Prüfung E1–E11 mit **frischen** Prüfern nach `pruefung-e.md`, die du startest, höchstens 3 Runden; rote Befunde per
   SendMessage an denselben Schreib-Agenten (überarbeiten, Tests, committen). §5.1 nach grüner Prüfung lässt du den
   Schreib-Agenten machen (`entwurf: true` löschen, `npm run echte-dinge`, `npm test`, committen), bei Rot nach Runde
   3 `geparkt: true`. Mehrere Themen dürfen parallel laufen (je ein Schreib-Agent im selben Worktree).

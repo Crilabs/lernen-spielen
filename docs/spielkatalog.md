@@ -473,6 +473,32 @@ braucht einen Regal-Baustein `form`; Fach in der Kopfleiste nach dem Thema der R
 ---------------------------------------------------------------------------------------------------
 ## 9. Reihenfolge des Baus
 
-Nicht Teil dieser Freigabe. Vorschlag für das Gespräch danach **(Annahme)**: zuerst die Spiele, deren Themen am
-Anfang von Kl. 1 stehen und die keinen Versuch aus Abschnitt 7 brauchen, je Fach eins, damit die Startseite früh
-alle Fächer zeigt.
+**Entschieden am 2026-11-14 (Christian):** Die ersten zehn Spiele richten sich nach dem, woran das erste Kind in
+Kl. 2 gerade arbeitet (Nomen, Artikel, Einmaleins, Schreibschrift, Buchstaben und Ziffern mit Strichfolge), nicht
+nach dem Anfang von Kl. 1. Das Kind soll die App schnell nutzen können. Die Fächer wechseln sich ab, damit früh
+jedes dieser Themen ein Spiel hat. M14 Zwei Tonnen ist schon in Arbeit und dient als Erprobung der
+Spielentwicklung.
+
+| # | Spiel | Bereich | Themen, auf die es zuerst ankommt |
+|---|---|---|---|
+| 1 | [M37](spielkatalog/mathe.md) Kettenhüpfer | Einmaleins | zweierreihe, zehnerreihe, fuenferreihe, kernaufgaben-einmaleins, dann alle Reihen |
+| 2 | [S06](spielkatalog/schreiben-grammatik.md) Groß oder klein | Nomen | nomen-gross-artikelprobe, namen-gross |
+| 3 | [S20](spielkatalog/schreiben-grammatik.md) Schreibschrift | Schreibschrift | die Kl.-2-Themen des Pfads der Schule |
+| 4 | [S18](spielkatalog/schreiben-grammatik.md) Selbst schreiben | Buchstaben und Ziffern | ziffern-schreiben-*, spiegelziffern, spiegelbuchstaben-b-d-p-q; Schwünge und Kleinbuchstaben danach |
+| 5 | [G09](spielkatalog/schreiben-grammatik.md) der, die, das | Artikel | der-die-das |
+| 6 | [M36](spielkatalog/mathe.md) Punktefeld | Einmaleins | malaufgabe-als-punktefeld, tauschaufgaben-mal, nachbaraufgabe-mal, verdoppeln-beim-mal |
+| 7 | [G01](spielkatalog/schreiben-grammatik.md) Dreieck und Kreis | Nomen | namenwoerter, nomen-proben |
+| 8 | [M35](spielkatalog/mathe.md) Tüten packen | Einmaleins | gleich-grosse-gruppen, malaufgabe-zum-bild, mal-eins-mal-null |
+| 9 | [G08](spielkatalog/schreiben-grammatik.md) Eins und viele | Nomen | mehrzahl-mit-* , mehrzahl-umlaut-ohne-endung |
+| 10 | [S19](spielkatalog/schreiben-grammatik.md) Zwei Schriften | Schreibschrift lesen | schreibschrift-vergleichen |
+
+Nachrücker: [M38](spielkatalog/mathe.md) Gerecht verteilen, sobald Teilen dazukommt.
+
+- **(Annahme)** M37 vor M35: Das Kind übt in der Schule schon Reihen und weiß, was „mal“ heißt. Wackelt das, rückt
+  M35 nach vorn.
+- **Vor S18, S20 und S19 zu klären:** Versuch 1 aus Abschnitt 7 (Freihand-Schreiben mit dem Finger). Die
+  Schriftvorlagen gibt es seit 2026-11-14 (Ziffern, Druckschrift b d p q, SAS-Kleinbuchstaben;
+  `spiele/schrift/vorlagen/`, Prüfseite `npm run schrift:ansehen`).
+- **Mit echten Dingen (Christian, 2026-11-14):** Zu allen Themen dieser zehn Spiele entstehen auch die Anleitungen
+  ohne Bildschirm nach `docs/mit-echten-dingen.md`, eine je Thema (zusammen 133 Themen). Sie hängen nicht an der
+  App, entstehen aber wie vorgesehen mit dem Bau des jeweiligen Spiels (Christian).

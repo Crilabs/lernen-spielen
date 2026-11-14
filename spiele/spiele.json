@@ -5,7 +5,7 @@
     { "id": "schreiben", "name": "Schreiben", "symbol": "symbole/schreiben.svg", "farbe": "#4C9BD1", "schatten": "#2F78AD", "tint": "#DDEFFF" },
     { "id": "lesen", "name": "Lesen", "symbol": "symbole/lesen.svg", "farbe": "#F2B630", "schatten": "#C48A0C", "tint": "#FFF3D1" },
     { "id": "geometrie", "name": "Geometrie", "symbol": "symbole/geometrie.svg", "farbe": "#8C6FE0", "schatten": "#6548BC", "tint": "#ECE6FF" },
-    { "id": "sprechen", "name": "Sprechen und Zuhören", "symbol": "symbole/stimme.svg", "farbe": "#F08A4B", "schatten": "#C2652A", "tint": "#FFE9DB" }
+    { "id": "sprechen", "name": "Sprechen und Zuhören", "symbol": "symbole/sprechen.svg", "farbe": "#F08A4B", "schatten": "#C2652A", "tint": "#FFE9DB" }
   ],
   "spiele": []
 }

@@ -134,6 +134,9 @@ async function lauf(typ, name, groesse, basis) {
     await seite.waitForSelector("#tablett .stab");
     await seite.evaluate(() => document.fonts.ready);
     const vorher = await speicher(seite);
+    // Bis hier gab es keine Eingabe: WebKit lehnt das Abspielen ohne Nutzergeste ab (Autoplay), die erste Aufgabe
+    // spricht dann die Systemstimme bzw. erst nach dem ersten Tippen. Nur in WebKit und nur bis hier geduldet.
+    const ohneGesteBis = new Date().toISOString();
 
     // --- Start -----------------------------------------------------------------------------------
     const n = await zielWert(seite);
@@ -230,14 +233,11 @@ async function lauf(typ, name, groesse, basis) {
     });
     pruefe(L, "Pause nach der Folge der letzten Aufgabe, mit Sachmoment, Alle Spiele und Weiter gleich groß", !offenVorFolge && p.gleich && p.karte && p.stab, JSON.stringify(p));
     await seite.evaluate(() => document.getElementById("pause").angebotBereit);
-    await tipp(seite.locator("ls-pause ls-knopf.echt"));
-    await seite.evaluate(() => document.getElementById("pause").anregung.geladen);
-    const ed = await seite.evaluate(() => { const a = document.getElementById("pause").anregung;
-      return { offen: a.offen, thema: a.shadowRoot.querySelector(".thema").textContent, formen: a.shadowRoot.querySelectorAll(".reiter [role=tab]").length }; });
-    pruefe(L, "Pause: Angebot „Mit echten Dingen“ öffnet die Karte zum Thema der Runde (Die 7 zerlegen, mit Formen)",
-      ed.offen && ed.thema === "Die 7 zerlegen" && ed.formen === 2, JSON.stringify(ed));
-    await seite.keyboard.press("Escape");
-    await pause(100);
+    // Das Angebot führt zu echt.html (geprüft in rahmen.spec.mjs); hier nur, dass es zum Thema der Runde da ist.
+    const ed = await seite.evaluate(() => { const p = document.getElementById("pause"), k = p.shadowRoot.querySelector("ls-knopf.echt");
+      return { sichtbar: !k.hidden, titel: p.echteDinge?.titel ?? "" }; });
+    pruefe(L, "Pause: Angebot „Mit echten Dingen“ zum Thema der Runde (Die 7 zerlegen) sichtbar",
+      ed.sichtbar && ed.titel === "Die 7 zerlegen", JSON.stringify(ed));
     await pause(300);
     await bild(seite, "pause", name, groesse);
     await seite.waitForTimeout(1500);
@@ -250,8 +250,9 @@ async function lauf(typ, name, groesse, basis) {
     pruefe(L, "Vorschau schreibt nichts (Speicher bis auf das Protokoll unverändert)", JSON.stringify(nachher) === JSON.stringify(vorher), `${JSON.stringify(vorher)} → ${JSON.stringify(nachher)}`);
     const protokoll = await seite.evaluate(() => JSON.parse(localStorage.getItem("protokoll") ?? "[]"));
     const vorschauZeilen = protokoll.filter((z) => z.includes("vorlage: nicht in spiele.json – Vorschau, schreibt nicht"));
-    pruefe(L, "Protokoll: einmal „nicht in spiele.json – Vorschau“, sonst höchstens fehlende Audiodateien",
-      vorschauZeilen.length === 1 && protokoll.every((z) => /Keine Audiodatei/.test(z) || vorschauZeilen.includes(z)), protokoll.join(" | "));
+    const ohneGeste = (z) => WEBKIT && /Audiodatei nicht abspielbar \(NotAllowedError|Vorlesen fehlgeschlagen: not-allowed/.test(z) && z.slice(0, 24) <= ohneGesteBis;
+    pruefe(L, "Protokoll: einmal „nicht in spiele.json – Vorschau“, sonst höchstens fehlende Audiodateien (WebKit: Autoplay vor der ersten Eingabe)",
+      vorschauZeilen.length === 1 && protokoll.every((z) => /Keine Audiodatei/.test(z) || vorschauZeilen.includes(z) || ohneGeste(z)), protokoll.join(" | "));
 
     // --- Vorschau-Parameter -----------------------------------------------------------------------
     // spiele.json ist leer, bis das erste neue Spiel eingetragen ist: für den Hinweis ein Beispielspiel ergänzen.

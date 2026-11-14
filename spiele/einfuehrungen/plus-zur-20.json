@@ -1,11 +1,11 @@
 { "szenen": [
   { "sprich": "Diese Brücke hat einen Zehnerstab und einen kleinen Stab.",
     "zeig": "16 = 10 + 6",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "steh" }, { "perlen": ["10", "6"], "x": 62 } ] },
-  { "sprich": "Das Einhorn legt genau so viele Perlen dazu, dass ein neuer Zehner voll wird.",
+    "bild": [ { "figur": "ela", "x": 14, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "6"], "x": 61 } ] },
+  { "sprich": "Ela legt genau so viele Perlen dazu, dass ein neuer Zehner voll wird.",
     "zeig": "6 + 4 = 10",
-    "bild": [ { "figur": "einhorn", "x": 12, "aktion": "hop" }, { "perlen": ["10", "6", "4"], "x": 61 } ] },
-  { "sprich": "Die kleinen Stäbe werden zu einem goldenen Zehnerstab. Jetzt liegen da nur noch Zehner.",
+    "bild": [ { "figur": "ela", "x": 14, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "6", "4"], "x": 61 } ] },
+  { "sprich": "Die kleinen Stäbe werden zu einem goldenen Zehnerstab. Jetzt liegen da lauter Zehner.",
     "zeig": "16 + 4 = 20",
     "bild": [ { "perlen": ["10", "10"], "x": 40 }, { "zahl": "20", "x": 88 } ] },
   { "sprich": "Vorne an der Zahl stehen die Zehner. Einer gibt es keine mehr.",
@@ -13,5 +13,5 @@
     "bild": [ { "perlen": ["10", "10"], "x": 40 }, { "zahl": "20", "x": 88 } ] },
   { "sprich": "Jetzt bist du dran. Wie viele Perlen fehlen bis zum vollen Zehner?",
     "zeig": "17 + 3 = ?",
-    "bild": [ { "figur": "einhorn", "x": 12, "aktion": "schau" }, { "perlen": ["10", "7", "3"], "x": 61 } ] }
+    "bild": [ { "figur": "ela", "x": 14, "haltung": "fragen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "7", "3"], "x": 61 } ] }
 ] }

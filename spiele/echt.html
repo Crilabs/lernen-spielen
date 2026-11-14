@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mit echten Dingen</title>
+<link rel="stylesheet" href="rahmen/seite.css">
+<style>
+/* Mit echten Dingen (docs/mit-echten-dingen.md): ein kurzes Spiel ohne Bildschirm zu einem Thema, für Kind und
+   Erwachsene zusammen („ihr“). Aufbau der Anleitung: Titel, Ihr braucht (auf dem Tablett, wie Material), nummerierte
+   Schritte, Darauf kommt es an (mit dem Sonnenring: Licht, keine Bewertung), Leichter/Schwerer als Umschalter (eine
+   Stufe zur Zeit), Passt gut; bei mehreren Formen oben die Wahl der Situation. Ohne Datei der Einzeiler aus dem Lernplan. Wird gelesen, nicht vorgelesen (Christian).
+   Kopfleiste im Fach des Themas, das Thema als Unterzeile. Dahinter dieselbe dezente Landschaft wie überall. */
+body { -webkit-user-select: none; user-select: none; }
+.hintergrund, .hintergrund svg { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+.echt-seite { position: absolute; inset: var(--ls-leiste-hoehe) 0 0 0; overflow-y: auto; scrollbar-width: none; padding: 1.6rem 4.4rem 8rem; }
+.echt-seite::-webkit-scrollbar { display: none; }
+.anleitung {
+  position: relative; max-width: 128rem; margin: 0 auto; padding: 4.4rem 5.6rem 5rem;
+  background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-gross);
+  -webkit-user-select: text; user-select: text;
+}
+/* Naht wie bei der Matte: hier wird gearbeitet */
+.anleitung::before { content: ""; position: absolute; inset: 1.3rem; border: 0.25rem dashed var(--ls-naht);
+  border-radius: calc(var(--ls-radius-gross) - 1.3rem); pointer-events: none; }
+.anleitung h1 { margin: 0 0 3.2rem; font-size: 6rem; line-height: 1.1; }
+.anleitung h2 { margin: 0 0 0.8rem; font-size: 2.8rem; line-height: 1.2; color: var(--ls-tinte-weich); font-weight: 700; }
+.anleitung p { margin: 0; font-size: 3.6rem; line-height: 1.35; }
+
+.braucht {
+  display: inline-block; margin-bottom: 3.6rem; padding: 2.4rem 3.2rem;
+  background: var(--ls-ahorn); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
+  box-shadow: inset 0 0 0 1rem var(--ls-kante), inset 0 0 0 calc(1rem + var(--ls-kontur)) var(--ls-tinte);
+}
+.braucht h2 { color: var(--ls-tinte); }
+
+.schritte { list-style: none; margin: 0 0 3.6rem; padding: 0; counter-reset: schritt; display: flex; flex-direction: column; gap: 2.4rem; }
+.schritte li { counter-increment: schritt; display: flex; gap: 2.4rem; align-items: flex-start; font-size: 3.8rem; line-height: 1.35; }
+.schritte li::before {
+  content: counter(schritt); flex: none; display: grid; place-items: center; width: 6rem; height: 6rem; margin-top: -0.4rem;
+  border-radius: 50%; background: var(--ls-tinte); color: var(--ls-papier); font-size: 3.4rem; font-weight: 700;
+}
+
+.kern { margin: 0 0 3.6rem; padding: 2.4rem 3.2rem; border-radius: var(--ls-radius);
+  outline: 0.8rem solid var(--ls-sonne); outline-offset: 0; box-shadow: 0 0 0 1.1rem var(--ls-tinte); }
+.kern h2 { color: var(--ls-tinte); }
+
+.stufen { margin: 0 0 3.6rem; }
+.umschalter { display: flex; gap: 2rem; }
+.stufe {
+  min-height: 9rem; padding: 0 3.6rem; border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 5rem;
+  background: var(--ls-papier); box-shadow: var(--ls-schatten); color: var(--ls-tinte); font: inherit; font-size: 3.2rem; font-weight: 700;
+  cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.stufe:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+.stufe:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
+.stufe[aria-pressed="true"] { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0; box-shadow: 0 0 0 1.1rem var(--ls-tinte); }
+.stufen-text { margin-top: 2rem !important; }
+
+/* Wahl der Situation (Am Tisch / In Bewegung / Unterwegs): nur bei mehr als einer Form; eine zur Zeit, die letzte Wahl
+   ist beim nächsten Mal voreingestellt (am Profil, kein Typ des Kindes, grundsaetze.md §1). */
+.formwahl { display: flex; flex-wrap: wrap; gap: 2rem; margin: 0 0 3.6rem; }
+.form-knopf {
+  display: inline-flex; align-items: center; gap: 1.6rem; min-height: 9rem; padding: 0 3.6rem 0 2.4rem;
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 5rem; background: var(--ls-papier); box-shadow: var(--ls-schatten);
+  color: var(--ls-tinte); font: inherit; font-size: 3.2rem; font-weight: 700;
+  cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.form-knopf img { width: 5.2rem; height: 5.2rem; display: block; }
+.form-knopf:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+.form-knopf:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
+.form-knopf[aria-pressed="true"] { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0; box-shadow: 0 0 0 1.1rem var(--ls-tinte); }
+.form-name { margin: 0 0 2.4rem !important; font-size: 4.4rem !important; font-weight: 700; }
+.weiteres { margin: 0 0 3.6rem; font-size: 3.6rem; line-height: 1.35; }
+.weiteres ul, .weiteres ol { margin: 0; padding-left: 4rem; }
+
+.passt p { color: var(--ls-tinte-weich); font-size: 3.2rem; }
+.einzeiler { max-width: 62ch; }
+.fehler { margin: 6rem auto 0; max-width: 128rem; font-size: 3.6rem; color: var(--ls-tinte-weich); }
+</style>
+</head>
+<body>
+<div class="hintergrund" id="hintergrund"></div>
+<ls-leiste id="leiste" spiel="ansichten" titel="Mit echten Dingen"></ls-leiste>
+<main class="echt-seite"><article class="anleitung" id="anleitung"></article></main>
+
+<script type="module">
+import { sperreTouch, protokoll } from "./lernspiel.js";
+import "./rahmen/leiste.js";
+import { findeAnleitung, ladeAnleitung, letzteForm, merkeForm } from "./rahmen/echte-dinge.js";
+import { anleitungHtml, einzeilerHtml } from "./start/anleitung.js";
+import { hintergrundSvg } from "./start/hintergrund.js";
+
+document.getElementById("hintergrund").innerHTML = hintergrundSvg();
+sperreTouch();
+start();
+
+async function start() {
+  const leiste = document.getElementById("leiste");
+  const feld = document.getElementById("anleitung");
+  const id = new URLSearchParams(location.search).get("thema") ?? "";
+  let thema = null;
+  try {
+    const plan = await fetch("lernplan.json").then((r) => r.json());
+    thema = (plan.themen ?? []).find((t) => t.id === id) ?? null;
+  } catch (e) { protokoll("echt: " + e); }
+  if (!thema) { zeigeFehler(); return; }
+  leiste.setAttribute("fach", thema.strang);
+  leiste.setAttribute("thema", thema.name);
+
+  // Die Anleitung, wenn das Verzeichnis sie nennt (nur freigegebene; mit ?entwurf auch Entwürfe); sonst der Einzeiler.
+  const fund = await findeAnleitung({ thema: thema.id, fach: thema.strang });
+  const anleitung = fund ? await ladeAnleitung(fund.fach, fund.thema) : null;
+  if (anleitung) feld.innerHTML = anleitungHtml(anleitung, await letzteForm());
+  else if (thema.eltern) feld.innerHTML = einzeilerHtml(thema.name, thema.eltern);
+  else { zeigeFehler(); return; }
+
+  // Wahl der Situation: eine Form zur Zeit; die Wahl gilt beim nächsten Mal als Voreinstellung.
+  const wahl = [...feld.querySelectorAll(".form-knopf")];
+  wahl.forEach((k) => k.addEventListener("click", () => {
+    const s = k.dataset.situation ?? "";
+    wahl.forEach((x) => x.setAttribute("aria-pressed", String(x === k)));
+    feld.querySelectorAll(".form").forEach((f) => { f.hidden = f.dataset.situation !== s; });
+    merkeForm(s);
+  }));
+
+  // Leichter und Schwerer je Form: eine Stufe zur Zeit; nochmal antippen schließt sie wieder.
+  feld.querySelectorAll(".form").forEach((form) => {
+    const knoepfe = [...form.querySelectorAll(".stufe")];
+    knoepfe.forEach((k) => k.addEventListener("click", () => {
+      const an = k.getAttribute("aria-pressed") !== "true";
+      knoepfe.forEach((x) => x.setAttribute("aria-pressed", String(an && x === k)));
+      form.querySelectorAll(".stufen-text").forEach((p) => { p.hidden = !(an && p.dataset.stufe === k.dataset.stufe); });
+    }));
+  });
+}
+
+// Unbekanntes Thema oder keine Anleitung: ein kurzer Text (nicht vorgelesen); Haus führt zurück.
+function zeigeFehler() {
+  const p = document.createElement("p");
+  p.className = "fehler";
+  p.textContent = "Das geht gerade nicht. Später noch einmal.";
+  document.getElementById("anleitung").replaceWith(p);
+}
+</script>
+</body>
+</html>

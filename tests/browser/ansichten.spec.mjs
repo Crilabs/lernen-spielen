@@ -7,7 +7,7 @@
 // Das Skript startet einen eigenen statischen Server auf einem freien Port und beendet sich mit Code 1,
 // sobald eine Prüfung fehlschlägt.
 //
-// Geprüft wird in Chromium und WebKit bei 1920 × 1080 und 1280 × 800, je in drei Lernständen:
+// Geprüft wird in Chromium und WebKit bei 1920 × 1080, 1280 × 800 und 1440 × 1080 (4:3), je in drei Lernständen:
 //   leer      kein Lernstand, keine Spiele (Entwicklungsstand): ruhige Seiten, keine Fehler;
 //   gekonnt   gekonnte Themen, aber keine Spiele (aus entfernten Spielen): Regal und Regal-Kachel zeigen sie;
 //   spiele    dazu drei Testspiele (nur im Browser per page.route in spiele.json, nichts davon im Repo) und
@@ -39,7 +39,7 @@ const { chromium, webkit } = require("playwright");
 const WURZEL = resolve(fileURLToPath(import.meta.url), "../../..");
 // Server mit Byte-Bereichen: tests/browser/server.mjs (WebKit braucht Range für Audio).
 
-const AUFLOESUNGEN = [{ width: 1920, height: 1080 }, { width: 1280, height: 800 }];
+const AUFLOESUNGEN = [{ width: 1920, height: 1080 }, { width: 1280, height: 800 }, { width: 1440, height: 1080 }];
 const SHOTS = process.env.SHOTS;
 const pause = (ms) => new Promise((ok) => setTimeout(ok, ms));
 const HALTEN_MS = 3000; // wie spiele/index.html
@@ -50,8 +50,8 @@ const SYMBOL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fi
   stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="30" width="72" height="40" rx="6" fill="#F7EFE3"/>
   <circle cx="34" cy="50" r="8" fill="#E5484D"/><circle cx="56" cy="50" r="8" fill="#3FA34D"/></svg>`;
 const SPIELE = [
-  { id: "test-perlen", titel: "Perlenbrücke", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-perlen.html", arten: [{ art: "zerlegung", zahlen: [2, 10], stufen: ["kopf"] }] },
-  { id: "test-rechnen", titel: "Zahlenzauber", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-rechnen.html", arten: [{ art: "rechnen", max: 100, gleiche: false, stufen: ["kopf"] }] },
+  { id: "test-perlen", titel: "Perlenbrücke", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-perlen.html", welt: "muell-trennen", arten: [{ art: "zerlegung", zahlen: [2, 10], stufen: ["kopf"] }] },
+  { id: "test-rechnen", titel: "Zahlenzauber mit Kettenhüpfern", kategorie: "mathe", symbol: "symbole/test-spiel.svg", datei: "test-rechnen.html", welt: "gibt-es-nicht", arten: [{ art: "rechnen", max: 100, gleiche: false, stufen: ["kopf"] }] },
   { id: "test-lesen", titel: "Silbenschiff", kategorie: "lesen", symbol: "symbole/test-spiel.svg", datei: "test-lesen.html" },
 ];
 const eintrag = (z, k, u) => z === "kann-ich"
@@ -157,34 +157,38 @@ async function lauf(typ, name, groesse, basis) {
       // --- Startseite ----------------------------------------------------------------------------
       const start = await oeffne(kontext, `${basis}/spiele/index.html`);
       const st = await start.evaluate(() => {
-        const sichtbar = (el) => !!el && !el.hidden && el.getBoundingClientRect().width > 0;
-        const dran = document.getElementById("dran"), faecher = document.getElementById("faecher");
-        const bildFeld = dran.querySelector(".bild");
+        const imBild = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.left >= 0 && r.top >= 0 && r.right <= innerWidth + 0.5 && r.bottom <= innerHeight + 0.5; };
         const leiste = document.getElementById("leiste");
-        const r = document.getElementById("regal").getBoundingClientRect();
+        const raster = document.getElementById("raster").getBoundingClientRect();
+        const seite = document.getElementById("seite").getBoundingClientRect();
+        const karten = [...document.querySelectorAll("#raster .karte.spiel")];
         return {
-          dran: sichtbar(dran) ? dran.querySelectorAll("a.kachel").length : 0,
-          dranLinks: [...dran.querySelectorAll("a.kachel")].map((a) => a.getAttribute("href")),
-          faecher: sichtbar(faecher) ? [...faecher.querySelectorAll("a.kachel")].map((a) => a.getAttribute("href")) : [],
-          regal: sichtbar(document.getElementById("regal")) && r.bottom <= innerHeight && r.right <= innerWidth,
-          dinge: document.getElementById("dinge").children.length,
+          abschnitte: [...document.querySelectorAll(".fach-abschnitt")].map((a) => a.getAttribute("aria-label")),
+          karten: karten.length,
+          links: karten.map((a) => a.getAttribute("href")),
+          jeFach: Math.max(0, ...[...document.querySelectorAll(".fach-abschnitt")].map((a) => a.querySelectorAll(".karte.spiel").length)),
+          echt: document.querySelectorAll("#raster .karte.echt").length,
+          namePasst: karten.every((a) => a.querySelector("b").scrollWidth <= a.querySelector(".text").clientWidth + 1),
+          zuletzt: document.querySelectorAll(".zuletzt .ding").length,
+          regalKnopf: document.querySelector(".regal-knopf")?.getAttribute("href") ?? null,
+          regalImBild: imBild(document.querySelector(".regal-knopf")),
+          rechts: seite.left >= raster.right - 1,
           hausWeg: leiste.shadowRoot.querySelector("a.haus").hidden,
-          zahnrad: sichtbar(document.getElementById("zahnrad")),
-          bildFeld: bildFeld ? { hinten: getComputedStyle(bildFeld).backgroundColor, rand: getComputedStyle(bildFeld).borderTopWidth } : null,
+          zahnrad: imBild(document.getElementById("zahnrad")),
           text: document.body.innerText,
         };
       });
-      pruefe(F, "Startseite: Regal-Kachel ganz im Bild, Haus fehlt, Zahnrad da", st.regal && st.hausWeg && st.zahnrad, JSON.stringify(st));
+      pruefe(F, "Startseite: Regal-Knopf ganz im Bild (→ regal.html), Seitenleiste rechts, Haus fehlt, Zahnrad da",
+        st.regalKnopf === "regal.html" && st.regalImBild && st.rechts && st.hausWeg && st.zahnrad, JSON.stringify(st));
       pruefe(F, "Startseite: keine Zahl als Fortschritt („x von y“, Prozent)", !/\d+\s*(von|\/)\s*\d+|%/.test(st.text), st.text);
       if (fall === "leer") {
-        pruefe(F, "Startseite leer: keine Dran-Kachel, keine Fach-Kachel, leeres Regal-Holz", st.dran === 0 && st.faecher.length === 0 && st.dinge === 0, JSON.stringify(st));
+        pruefe(F, "Startseite leer: keine Karte, Satz statt Raster, Zuletzt gelernt leer", st.karten === 0 && st.echt === 0 && st.zuletzt === 0 && /Hier kommen bald Spiele/.test(st.text), JSON.stringify(st));
       } else if (fall === "gekonnt") {
-        pruefe(F, "Startseite ohne Spiele: keine Dran- und Fach-Kacheln, Regal zeigt drei Dinge", st.dran === 0 && st.faecher.length === 0 && st.dinge === 3, JSON.stringify(st));
+        pruefe(F, "Startseite ohne Spiele: keine Karte, Zuletzt gelernt zeigt fünf Dinge", st.karten === 0 && st.zuletzt === 5, JSON.stringify(st));
       } else {
-        pruefe(F, "Startseite mit Spielen: höchstens drei Dran-Kacheln mit ?thema=", st.dran >= 1 && st.dran <= 3 && st.dranLinks.every((h) => /\.html\?thema=/.test(h)), JSON.stringify(st.dranLinks));
-        pruefe(F, "Startseite mit Spielen: Fach-Kacheln nur für Fächer mit Spielen (Mathe, Lesen)",
-          JSON.stringify(st.faecher) === JSON.stringify(["themen.html?fach=mathe", "themen.html?fach=lesen"]), JSON.stringify(st.faecher));
-        pruefe(F, "Dran-Kachel: Spielsymbol auf einem Feld in der Fach-Füllung mit Kontur", st.bildFeld?.hinten === "rgb(240, 107, 176)" && parseFloat(st.bildFeld.rand) > 0, JSON.stringify(st.bildFeld));
+        pruefe(F, "Startseite mit Spielen: Abschnitt Mathe, Karten mit ?thema=, höchstens 5 je Fach",
+          st.abschnitte[0] === "Mathe" && st.karten >= 1 && st.jeFach <= 5 && st.links.every((h) => /\.html\?thema=/.test(h)), JSON.stringify(st));
+        pruefe(F, "Startseite: Spielname passt auf die Karte", st.namePasst, JSON.stringify(st));
       }
       await bild(start, s("start", fall));
       await start.close();
@@ -240,17 +244,63 @@ async function lauf(typ, name, groesse, basis) {
       // --- Regal ---------------------------------------------------------------------------------
       const regal = await oeffne(kontext, `${basis}/spiele/regal.html`);
       const rg = await regal.evaluate(() => ({
-        leer: document.querySelector(".brett.leer p")?.textContent ?? "",
-        dinge: document.querySelectorAll("#regal .ding").length,
-        bretter: [...document.querySelectorAll("#regal .brett:not(.leer)")].map((b) => b.getAttribute("aria-label")),
+        leer: document.querySelector(".leer p")?.textContent ?? "",
+        reiter: [...document.querySelectorAll(".reiter-knopf")].map((k) => k.textContent.trim()),
+        aktiv: document.querySelector('.reiter-knopf[aria-selected="true"]')?.textContent.trim() ?? "",
+        dinge: document.querySelectorAll("#bretter .ding").length,
+        bretter: [...document.querySelectorAll("#bretter .brett")].map((b) => b.getAttribute("aria-label")),
+        detail: !document.getElementById("detail").hidden && document.getElementById("name").textContent,
         text: document.body.innerText,
       }));
       if (fall === "leer") pruefe(F, "Regal leer: der Satz des Erzählers, kein Ding", rg.leer === "Hier stellst du hin, was du kannst." && rg.dinge === 0, JSON.stringify(rg));
-      else pruefe(F, "Regal: alle fünf gekonnten Dinge (auch ohne Spiele), Bretter Mathe und Grammatik",
-        rg.dinge === 5 && JSON.stringify(rg.bretter) === JSON.stringify(["Mathe", "Grammatik"]), JSON.stringify(rg));
-      pruefe(F, "Regal: keine Zahl als Fortschritt", !/\d+\s*(von|\/)\s*\d+|%/.test(rg.text), rg.text);
+      else {
+        pruefe(F, "Regal: Reiter Mathe und Grammatik, der erste (Mathe) gewählt, Bretter je Bereich",
+          JSON.stringify(rg.reiter) === JSON.stringify(["Mathe", "Grammatik"]) && rg.aktiv === "Mathe" && rg.bretter.length >= 1 && !rg.bretter.includes("Mathe"), JSON.stringify(rg));
+        pruefe(F, "Regal: Detail rechts zeigt das Neueste des Fachs", typeof rg.detail === "string" && rg.detail.length > 0, JSON.stringify(rg));
+        const gr = await regal.evaluate(async () => {
+          [...document.querySelectorAll(".reiter-knopf")].find((k) => k.dataset.fach === "grammatik").click();
+          await new Promise((r) => setTimeout(r, 100));
+          const gewaehlt = document.querySelector('#bretter .ding[aria-pressed="true"]');
+          return { dinge: document.querySelectorAll("#bretter .ding").length, passt: !!gewaehlt && gewaehlt === document.querySelector("#bretter .ding")
+            && document.getElementById("name").textContent === gewaehlt.querySelector(".name").textContent };
+        });
+        pruefe(F, "Regal: Reiterwechsel wählt das erste Thema des Fachs, Detail passt dazu", gr.passt, JSON.stringify(gr));
+        const alle = rg.dinge + gr.dinge;
+        pruefe(F, "Regal: alle fünf gekonnten Dinge über die Reiter (auch ohne Spiele)", alle === 5, JSON.stringify({ mathe: rg.dinge, grammatik: gr.dinge }));
+      }
       await bild(regal, s("regal", fall));
       await regal.close();
+
+      // --- Mit echten Dingen: Anleitung aus der Datei, sonst der Einzeiler ---------------------------
+      if (fall === "leer") {
+        const echt = await oeffne(kontext, `${basis}/spiele/echt.html?thema=zerlegen-2`);
+        const ea = await echt.evaluate(async () => {
+          // auf das Laden warten (Verzeichnis und Datei kommen nacheinander)
+          for (let i = 0; i < 50 && !document.querySelector(".anleitung h1"); i++) await new Promise((r) => setTimeout(r, 50));
+          const titel = document.querySelector(".anleitung h1")?.textContent ?? "";
+          const quellen = /quellen|abgerufen|pikas/i.test(document.body.innerText);
+          const sichtbareForm = () => [...document.querySelectorAll(".form")].filter((f) => !f.hidden).map((f) => f.dataset.situation);
+          const vorher = sichtbareForm();
+          document.querySelector('.form-knopf[data-situation="unterwegs"]').click();
+          const nachher = sichtbareForm();
+          const form = document.querySelector('.form[data-situation="unterwegs"]');
+          const schritte = form.querySelectorAll(".schritte li").length;
+          const [l, sw] = ["leichter", "schwerer"].map((x) => form.querySelector(`.stufe[data-stufe="${x}"]`));
+          l.click(); sw.click();
+          await new Promise((r) => setTimeout(r, 50));
+          const sichtbar = [...form.querySelectorAll(".stufen-text")].filter((p) => !p.hidden).map((p) => p.dataset.stufe);
+          return { titel, schritte, quellen, vorher, nachher, sichtbar, fach: document.getElementById("leiste").getAttribute("fach") };
+        });
+        pruefe(F, "Mit echten Dingen: Anleitung mit Titel, Wahl der Situation (eine Form zur Zeit), vier Schritten, ohne Quellen, Fach Mathe; eine Stufe zur Zeit",
+          ea.titel === "Die 2 in zwei Teile legen" && JSON.stringify(ea.vorher) === '["tisch"]' && JSON.stringify(ea.nachher) === '["unterwegs"]'
+          && ea.schritte === 4 && !ea.quellen && ea.fach === "mathe" && JSON.stringify(ea.sichtbar) === '["schwerer"]', JSON.stringify(ea));
+        await bild(echt, s("echt", "anleitung"));
+        await echt.close();
+        const ersatz = await oeffne(kontext, `${basis}/spiele/echt.html?thema=rechnen-3`);
+        const ez = await ersatz.evaluate(() => ({ einzeiler: !!document.querySelector(".einzeiler")?.textContent, schritte: document.querySelectorAll(".schritte li").length }));
+        pruefe(F, "Mit echten Dingen ohne Datei: der Einzeiler aus dem Lernplan", ez.einzeiler && ez.schritte === 0, JSON.stringify(ez));
+        await ersatz.close();
+      }
 
       // --- Elternbereich: direkter Aufruf zeigt die PIN ------------------------------------------
       const eltern = await oeffne(kontext, `${basis}/spiele/eltern.html`);

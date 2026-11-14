@@ -43,8 +43,8 @@ Gefunden werden: Startseite (`spiele.json`), Themennamen (`lernplan.json`), Einf
 (`einfuehrungen/*.json`) und jeder
 Sprechaufruf im Spielcode mit fester Zeichenkette.
 
-Sätze, die ein Spiel zur Laufzeit zusammensetzt (`` `${artikel} ${wort}. …` ``, Wortstücke der
-Einhorn-Steine, Rechensätze), findet es nicht. `npm run audio` zählt diese Stellen je Datei. Sie werden
+Sätze, die ein Spiel zur Laufzeit zusammensetzt (`` `${artikel} ${wort}. …` ``, Wortstücke beim
+Schreiben, Rechensätze), findet es nicht. `npm run audio` zählt diese Stellen je Datei. Sie werden
 erfasst, sobald die Vorlagen als Daten vorliegen (Plattform-Spec: `inhalte/vorlagen.json`): Das Skript
 erzeugt dann alle Belegungen. Beim 1×1 sind das ein paar hundert Sätze, also ohne Weiteres machbar.
 

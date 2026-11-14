@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 300" data-zeichen="b" data-satz="druck">
+  <!-- Stamm zuerst von der Oberlinie bis zur Grundlinie; dann der Bauch rechts im Uhrzeigersinn,
+       setzt oben am Stamm an und endet unten am Stamm (QUELLEN.md §2) -->
+  <path data-strich="1" d="M 18 0 L 18 200" fill="none"/>
+  <path data-strich="2" d="M 18 120 C 28 106 40 100 52 100 C 72 100 82 122 82 150 C 82 178 72 200 52 200 C 40 200 28 194 18 180" fill="none"/>
+</svg>

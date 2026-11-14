@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 300" data-zeichen="x" data-satz="sas">
+  <!-- Grundstrich schräg, dann Aufstrich durch den Grundstrich mit waagerechtem Ausgang (E-S6) (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 10 100 L 50 200" fill="none"/>
+  <path data-strich="2" d="M 6 198 L 52 104 C 55 101 60 100 72 100" fill="none"/>
+</svg>

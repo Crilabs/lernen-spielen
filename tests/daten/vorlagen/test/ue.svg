@@ -1,0 +1,5 @@
+<svg viewBox="0 0 80 300" data-zeichen="ü" data-satz="test">
+  <path data-strich="1" d="M 0 200 L 10 100 L 10 190 Q 35 210 60 190 L 60 100 L 60 200 L 80 200"/>
+  <path data-strich="2" data-luft="ja" d="M 25 70 L 25 72"/>
+  <path data-strich="3" data-luft="ja" d="M 50 70 L 50 72"/>
+</svg>

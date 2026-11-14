@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 300" data-zeichen="i" data-satz="sas">
+  <!-- Anstrich, Winkel, Grundstrich, Bogen; i-Punkt abgesetzt (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 0 200 C 12 200 22 130 28 100 L 24 180 C 23 194 30 200 40 200 L 50 200" fill="none"/>
+  <path data-strich="2" data-luft="ja" d="M 27 64 L 28 68" fill="none"/>
+</svg>

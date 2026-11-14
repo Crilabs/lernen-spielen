@@ -79,6 +79,13 @@ test("sammle findet Lernplan, Einführungen und feste Sätze", () => {
   assert.ok(eintraege.some((e) => /\.(html|js)$/.test(e.quellen[0])));
 });
 
+test("sammle findet jeden Diktatsatz aus saetze.json", () => {
+  const texte = new Set(sammle(WURZEL).eintraege.filter((e) => e.quellen.includes("saetze/saetze.json")).map((e) => e.text));
+  const saetze = JSON.parse(readFileSync(join(WURZEL, "spiele/saetze/saetze.json"), "utf8")).saetze;
+  assert.ok(saetze.length > 0);
+  for (const s of saetze) assert.ok(texte.has(normalisiere(s.text)), s.text);
+});
+
 test("erzeuge: neue Datei, unverändert, Zahl, von Hand, verwaist", async () => {
   const geschrieben = [];
   const synth = async (s) => Buffer.from(s);
@@ -163,6 +170,8 @@ test("sammle findet ein sprich(\"…\") in einem verschachtelten Spielordner (sp
     mkdirSync(join(spiele, "einfuehrungen"));
     writeFileSync(join(spiele, "spiele.json"), JSON.stringify({ kategorien: [], spiele: [] }));
     writeFileSync(join(spiele, "lernplan.json"), JSON.stringify({ themen: [] }));
+    mkdirSync(join(spiele, "saetze"));
+    writeFileSync(join(spiele, "saetze", "saetze.json"), JSON.stringify({ saetze: [] }));
     writeFileSync(join(spiel, "spiel.js"), 'import { sprich } from "../../kern/stimme.js";\nsprich("Ein Satz tief im Ordner.");\n');
     const { eintraege } = sammle(wurzel);
     const e = eintraege.find((x) => x.text === "Ein Satz tief im Ordner.");

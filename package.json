@@ -10,6 +10,7 @@
     "kosten": "node werkzeuge/kosten/bericht.mjs",
     "audio:vergleich": "node werkzeuge/audio/vergleich.mjs",
     "audio:anhoeren": "node werkzeuge/audio/anhoeren.mjs",
+    "schrift:ansehen": "node werkzeuge/schrift/ansehen.mjs",
     "echte-dinge": "node werkzeuge/echte-dinge/verzeichnis.mjs"
   },
   "devDependencies": {

@@ -1,0 +1,20 @@
+{
+  "saetze": {
+    "test": { "verbunden": true, "ovalVerbindung": "luftsprung" },
+    "testd": { "verbunden": true, "ovalVerbindung": "durchgezogen" },
+    "testz": { "verbunden": false }
+  },
+  "formen": [
+    { "zeichen": "i", "satz": "test", "datei": "test/i.svg", "striche": 2, "band": ["mitte"], "spiegel": null, "eingang": "unten", "ausgang": "unten", "freigegeben": null },
+    { "zeichen": "n", "satz": "test", "datei": "test/n.svg", "striche": 1, "band": ["mitte"], "spiegel": null, "eingang": "unten", "ausgang": "unten", "freigegeben": null },
+    { "zeichen": "o", "satz": "test", "datei": "test/o.svg", "striche": 1, "band": ["mitte"], "spiegel": null, "eingang": "oval", "ausgang": "oben", "freigegeben": null },
+    { "zeichen": "ü", "satz": "test", "datei": "test/ue.svg", "striche": 3, "band": ["mitte"], "spiegel": null, "eingang": "unten", "ausgang": "unten", "freigegeben": null },
+    { "zeichen": "s", "satz": "test", "datei": "test/s.svg", "striche": 1, "band": ["mitte"], "spiegel": null, "eingang": "unten", "ausgang": "unten", "freigegeben": null },
+    { "zeichen": "n", "satz": "testd", "datei": "testd/n.svg", "striche": 1, "band": ["mitte"], "spiegel": null, "eingang": "unten", "ausgang": "unten", "freigegeben": null },
+    { "zeichen": "o", "satz": "testd", "datei": "testd/o.svg", "striche": 1, "band": ["mitte"], "spiegel": null, "eingang": "oval", "ausgang": "oben", "freigegeben": null },
+    { "zeichen": "1", "satz": "testz", "datei": "testz/1.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null }
+  ],
+  "sonderverbindungen": [
+    { "satz": "test", "von": "s", "nach": "*", "datei": "test/verbindung-s-x.svg" }
+  ]
+}

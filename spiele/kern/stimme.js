@@ -169,6 +169,13 @@ function ladeAudioIndex() {
 /** @type {HTMLAudioElement | null} */
 let audioLaeuft = null;
 
+// Wird die Seite verlassen (Haus, „Alle Spiele“), bricht WebKit eine laufende Datei mit NotSupportedError ab. Das
+// ist kein Fehler der Datei (der Name darf abgeschnitten werden, rahmen/leiste.js) und kommt nicht ins Protokoll.
+// beforeunload, weil WebKit schon davor ablehnt, wo pagehide noch nicht kam; pageshow: zurück aus dem Verlauf.
+let verlassen = false;
+/** @type {any} */ (globalThis).window?.addEventListener?.("beforeunload", () => { verlassen = true; });
+/** @type {any} */ (globalThis).window?.addEventListener?.("pageshow", () => { verlassen = false; });
+
 let nummer = 0;
 /** @type {((e: SprichErgebnis | "fehler") => void) | null} */
 let laufend = null;
@@ -215,7 +222,7 @@ function spieleDatei(url) {
     /** @param {unknown} grund */
     const kaputt = (grund) => {
       if (laufend !== fertig) return;
-      protokoll("Audiodatei nicht abspielbar (" + grund + "): " + url);
+      if (!verlassen) protokoll("Audiodatei nicht abspielbar (" + grund + "): " + url);
       fertig("fehler");
     };
     laufend = fertig;

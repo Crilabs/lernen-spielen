@@ -1,6 +1,8 @@
 # Mit echten Dingen – Spiele ohne Bildschirm
 
-Stand: 2026-11-14 · **Entwurf zur Freigabe** · Entscheidungen von Christian (2026-11-14)
+Stand: 2026-11-14 · **freigegeben (Christian, 2026-11-14)** · Entscheidungen von Christian (2026-11-14)
+Zusammengeführt am 2026-11-14 aus der Fassung des Prüfstands (Formen nach Situation, Entwürfe, Übersicht, Bild) und der
+Fassung auf `main` (eigene Seite `echt.html`, Recherche nach Wirksamkeit) **(Christian)**.
 Markierung: **(Christian)** entschieden · **(Annahme)** Vorschlag, korrigierbar.
 
 ## Warum
@@ -18,7 +20,7 @@ Name in der App und im Projekt: **„Mit echten Dingen“** (Annahme; der Knopf 
   nur, wo sie das Thema wirklich treffen; erzwungene Varianten streicht die Prüfung (E1). Gibt es für ein Thema schon
   eine Datei, entsteht keine zweite, auch wenn ein weiteres Spiel das Thema bedient.
 - **Nach Situation, nicht nach Kind-Typ:** keine Einstellung „Bewegungstyp“ o. ä. im Profil (Lerntypen sind ein
-  Mythos, `grundsaetze.md` §1). Gewählt wird auf der Karte im Moment (N1, N2); die Karte merkt sich die letzte Wahl
+  Mythos, `grundsaetze.md` §1). Gewählt wird auf der Seite im Moment (N1, N2); die Seite merkt sich die letzte Wahl
   als Voreinstellung.
 - Datei `spiele/mit-echten-dingen/<fach>/<thema-id>.md` (Markdown), eigene Worte, Quellen nur im Kopf der Datei.
 - **Anrede „ihr“ (Christian):** Kind und Erwachsene als Team, keiner prüft den anderen („Legt die Gabeln in eine
@@ -58,8 +60,10 @@ Ihr braucht: eine Treppe
 **Leichter:** nur die ersten fünf Stufen. **Schwerer:** rückwärts hinunter zählen.
 ```
 
-Die Überschrift der Datei nennt das Thema in Alltagssprache; jede Form beginnt mit `## <Situation>: <Name>`. Die
-Karte zeigt die Formen als kleine Wahl (Reiter mit Symbol und Wort).
+Die Überschrift der Datei nennt das Thema in Alltagssprache; jede Form beginnt mit `## <Situation>: <Name>`, genau so
+geschrieben (sonst erkennt der Leser die Form nicht; je Situation zählt nur die erste). Die Seite zeigt die Formen
+als kleine Wahl (Knopf mit Symbol und Wort). Weitere Ideen zum selben Thema kommen nicht in die Datei; eine Abstufung
+desselben Kerns gehört in „Leichter“ oder „Schwerer“.
 
 ## Bild der Karte (Christian)
 
@@ -92,7 +96,13 @@ Spiels, die noch keine Anleitung haben.
 
 1. **Recherche** (Web): Fachdidaktik, Montessori-Übungen, Elternmaterial von Schulen, Verlagen und Landesinstituten.
    Quellen in den Kopf der Datei; der Text ist immer eigen formuliert, nichts wird übernommen.
-2. **Ideen:** 3–5 Ansätze mit Alltagsdingen, einer wird gewählt (Begründung im Bericht, nicht in der Datei).
+   **Gesucht sind die besten Methoden für genau dieses Thema (Christian, 2026-11-14):** Welche Wege, das Thema mit
+   Alltagsdingen zu lernen, gelten in den Quellen als wirksam? Bevorzugt praxisnah im Sinne Montessoris: Das Kind
+   tut etwas, das im Alltag einen echten Zweck hat (Tisch decken, teilen, einkaufen, sortieren), und lernt dabei
+   nebenbei. Lernen ist kein Selbstzweck (`grundsaetze.md`, zweite Prüffrage). Keine Methode ist vorab gesetzt; was
+   am besten trägt, ergibt die Recherche je Thema.
+2. **Ideen:** 3–5 Ansätze mit Alltagsdingen, einer wird gewählt (Begründung im Bericht, nicht in der Datei). Gewählt
+   wird nach Wirksamkeit laut Recherche und Praxisnähe, nicht nach Originalität.
 3. **Schreiben** nach den Regeln oben.
 4. **Prüfung** durch einen frischen Agenten, grün/rot je Kriterium mit Beleg:
 
@@ -106,8 +116,15 @@ Spiels, die noch keine Anleitung haben.
 | E6 | Fachbegriffe nach §5.1 |
 | E7 | eigene Worte, Quellen angegeben |
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
-| E9 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
-| E10 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
+| E9 | Methode laut Recherche wirksam für dieses Thema (Quelle im Kopf); die Handlung ist praxisnah und hat einen Zweck über das Üben hinaus |
+| E10 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
+| E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
+
+Nummern seit der Zusammenführung (Christian, 2026-11-14): E9 wie auf `main` beschlossen, die Prüfung der Varianten
+(vorher E9 im Prüfstand) ist E10, das Bild (vorher E10) ist E11. E11 gilt erst, wenn die Spielobjekte
+(`spiele/objekte/`) auf `main` sind; bis dahin bleibt `bild` im Kopf leer und E11 entfällt (Annahme).
+
+Die Grundsätze (`grundsaetze.md`) gelten für jede Anleitung ganz, auch wo E1–E11 sie nicht einzeln nennen.
 
 Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 5. **Kosten** (Token für Recherche, Schreiben, Prüfung) in `spiele/mit-echten-dingen/kosten.json`, wie bei den
@@ -115,17 +132,21 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 
 ## Wo es zu sehen ist
 
-- **Gleichwertig im Weg des Kindes (Christian):** Das analoge Spiel eines Themas steht als **Kachel gleicher Größe**
-  neben den digitalen Spielen – auf der Fach-Seite in der Fläche des Themas und auf der Startseite in der Reihe
-  „dran“ (höchstens drei Kacheln, N2). Eigenes Symbol (Hand), Name der Form. Themen ohne digitales Spiel werden so
-  sichtbar und spielbar. Analoges Spielen zählt **nicht** für den Lernstand (Annahme): „gekonnt“ misst nur die App,
-  niemand trägt Ergebnisse ein.
-- **Umsetzung der Kacheln erst nach dem Merge der UI-Überarbeitung `startseite-treffpunkt` (Christian)**; bis dahin
-  liefert der Prüfstand Daten (Lernsteuerung) und Baustein, aber keine Änderung an Startseite und Fach-Seite.
+- **Eigene Seite `spiele/echt.html?thema=<id>` (Christian, 2026-11-14)**, Kopfleiste im Fach des Themas, das Thema als
+  Unterzeile. Aufbau: Titel, bei mehr als einer Form die **Wahl der Situation** (Am Tisch / In Bewegung / Unterwegs,
+  eine Form zur Zeit, die letzte Wahl als Voreinstellung), je Form ihr Name, „Ihr braucht“ (auf dem Tablett, wie
+  Material), nummerierte Schritte, „Darauf kommt es an“ (mit dem Sonnenring), „Leichter“/„Schwerer“ als **zwei
+  Umschalter**, eine Stufe zur Zeit (Christian), „Passt gut“. Der Kopf mit den Quellen wird nicht angezeigt. **Nur
+  lesen, kein Vorlesen** (Christian). Fehlt die Anleitung (oder ist sie noch Entwurf), steht der bisherige Einzeiler
+  aus dem Lernplan da **(Christian)**.
+- **Gleichwertig im Weg des Kindes (Christian):** Auf der **Startseite** steht „Mit echten Dingen“ als Karte gleicher
+  Größe neben den Spielkarten eines Fachs (Themen „dran“, mit dem Titel der Anleitung, wenn es eine gibt); dazu das
+  **Regal** (Karte im Detail eines Themas) und die **Fach-Seite** (Knopf „Mit echten Dingen“). Alle führen zu
+  `echt.html`. Analoges Spielen zählt **nicht** für den Lernstand (Annahme): „gekonnt“ misst nur die App, niemand
+  trägt Ergebnisse ein.
 
 - **Übersicht „Mit echten Dingen“ als Werkzeug für Erwachsene (Christian):** eine eigene Seite
-  `spiele/mit-echten-dingen.html`, ohne PIN, aus dem Elternbereich erreichbar (Zugang von der Startseite kommt mit den
-  Kacheln nach dem Merge der UI-Überarbeitung). Kinder dürfen mitlesen. Sie zeigt, **woran das Kind gerade ist** und was man dazu machen kann:
+  `spiele/mit-echten-dingen.html`, ohne PIN, aus dem Elternbereich erreichbar (ein Zugang von der Startseite ist noch offen). Kinder dürfen mitlesen. Sie zeigt, **woran das Kind gerade ist** und was man dazu machen kann:
   - **Gerade dran:** die Themen im Zustand „dran“ (auch ohne Spiel), je mit Name und den Formen (Am Tisch / In
     Bewegung / Unterwegs).
   - **Bald:** die Themen „in Sicht“.
@@ -138,13 +159,11 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
     lässt sie sich auch als PDF speichern. Nur wo das Gerät drucken kann (`faehigkeiten`, Annahme: Desktop und
     Browser; auf dem Tablet über das Teilen-Menü, sobald die Mobil-Fassung kommt).
 
-- **Karte „Mit echten Dingen“** (`<ls-anregung>`) auf der Fach-Seite und im Regal, mit Wahl der Form, formatiert (kleiner eigener
-  Markdown-Darsteller: Überschrift, Listen, fett; der Kopf mit den Quellen wird nicht angezeigt). Fehlt die Datei,
-  bleibt der bisherige Einzeiler aus dem Lernplan **(Christian)**.
 - **Am Rundenende eines Spiels** als ruhiges Angebot in der Pause, neben „Alle Spiele“ und „Weiter“ (kein Muss, keine
-  Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**.
+  Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**; führt zur selben Seite `echt.html` (vorher wird
+  gespeichert wie bei „Alle Spiele“).
 
-## Umsetzung im Prüfstand (Stand 2026-11-14)
+## Umsetzung (Stand 2026-11-14)
 
 - **Dateien:** `spiele/mit-echten-dingen/<fach>/<thema>.md`; `npm run echte-dinge` schreibt daraus
   `verzeichnis.json` (nur **freigegebene** Anleitungen: ohne `entwurf: true` und ohne `geparkt: true`; das liest die
@@ -154,22 +173,24 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   Anleitung, die sie zeigen. `tests/echte-dinge.test.mjs` prüft, dass das Verzeichnis aktuell
   ist, und die Form jeder Datei (Kopf, Thema im Lernplan, Ihr braucht, Schritte, Darauf kommt es an, Leichter/Schwerer,
   Wortzahl, Wortliste 3.2, Anrede „ihr“). Die ersten drei Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`,
-  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E10 noch nicht durchlaufen und
+  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E11 noch nicht durchlaufen und
   bleiben Entwurf, bis der Skill sie grün prüft.
-- **Darstellung:** `spiele/rahmen/markdown.js` (klein, ohne DOM, alles escaped, Kopf wird abgetrennt),
-  `spiele/rahmen/echte-dinge.js` (Laden, gemerkte Form `echte-dinge.form`), Karte `<ls-anregung>`, Kachel
-  `<ls-echte-dinge-kachel>`, Angebot in `<ls-pause>` (`docs/bedienung.md` §9). Die Spielvorlage reicht das Thema der
-  Runde an die Pause.
+- **Darstellung:** `spiele/rahmen/markdown.js` (Leser: klein, ohne DOM, alles escaped, Kopf wird abgetrennt),
+  `spiele/rahmen/echte-dinge.js` (Verzeichnis, Laden, gemerkte Form `echte-dinge.form`), die Seite `spiele/echt.html`
+  mit `spiele/start/anleitung.js` (bringt jede Form in den Aufbau der Seite), Angebot in `<ls-pause>`
+  (`docs/bedienung.md` §9; führt zu `echt.html`). Die Spielvorlage reicht das Thema der Runde an die Pause. Die Karte
+  `<ls-anregung>` ist der Baustein der Übersicht; die Kachel `<ls-echte-dinge-kachel>` steht nur in der Vorschau
+  (`spiele/rahmen/vorschau.html?echte-dinge`), die App nutzt die Karten der Startseite.
 - **Daten:** `echteDingeFuer(ctx, themaId)` und `themenMitEchtenDingen(ctx, stand)` in `spiele/lernsteuerung.js`
   (`ctx.echteDinge` = Verzeichnis), nur lesend. Themen ohne Spiel erscheinen in der Übersicht nur in Fächern, in denen
   schon ein Thema dran oder gekonnt ist: je Fach das erste mit allen Voraussetzungen gekonnt unter „Gerade dran“,
   höchstens ein weiteres unter „Bald“. Für das Kind ändert das nichts (dort bleiben Themen ohne Spiel verborgen, bis
-  die Kacheln kommen).
+  die Startseite auch Themen ohne Spiel zeigt).
 - **Übersicht:** `spiele/mit-echten-dingen.html`, Zugang über „Mit echten Dingen“ in der Navigation des
   Elternbereichs; Zurück führt dorthin zurück (die PIN wird dann erneut abgefragt). Küchenzettel: nur Themen von
   „Gerade dran“ **mit Anleitung** (die Einzeiler des Lernplans sind Elternsprache), je die gemerkte Form in Kurzform,
   höchstens sechs, zwei Spalten; die Seite misst vor dem Drucken und lässt Kästen weg, bis alles auf eine A4-Seite
   passt. Ohne Anleitung kein Drucken. Drucken über `drucke()` in `spiele/kern/geraet.js` (Fähigkeit `drucken`: Browser
   und Desktop ja, Android/iOS nein).
-- **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Bild → Prüfung E1–E10 durch einen
+- **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Bild → Prüfung E1–E11 durch einen
   frischen Agenten → höchstens 3 Runden → Datei, Verzeichnis, Kosten in `spiele/mit-echten-dingen/kosten.json`).

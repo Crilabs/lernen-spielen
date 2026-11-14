@@ -81,6 +81,11 @@
    "h": "b680e2478e",
    "gehoert": false
   },
+  "Alle Spiele": {
+   "datei": "florian/c24865ca4266.mp3",
+   "h": "d63ebade93",
+   "gehoert": false
+  },
   "Allgemein statt Beispiel": {
    "datei": "florian/c1a433b459a9.mp3",
    "h": "fb557d2597",
@@ -89,6 +94,11 @@
   "Also teilt das Einhorn den kurzen Stab. Ein Teil füllt den Zehner auf, der Rest wartet.": {
    "datei": "florian/616a87d581de.mp3",
    "h": "e583ed6ecd",
+   "gehoert": false
+  },
+  "Also teilt Kofi den kurzen Stab. Ein Teil füllt den Zehner auf, der Rest wartet.": {
+   "datei": "florian/03ee8869eadc.mp3",
+   "h": "a6847883ab",
    "gehoert": false
   },
   "Am Abend lese ich.": {
@@ -104,6 +114,11 @@
   "Am Bach liegt wieder der Perlenstab dieser Brücke.": {
    "datei": "florian/4deae3d1dac9.mp3",
    "h": "2087e03898",
+   "gehoert": false
+  },
+  "Am Bach liegt wieder der Perlenstab dieser Brücke. Kofi schaut ihn sich an.": {
+   "datei": "florian/c021e458a79c.mp3",
+   "h": "cadc7f97a5",
    "gehoert": false
   },
   "Am Morgen trinke ich Milch.": {
@@ -271,6 +286,16 @@
    "h": "156d045c38",
    "gehoert": false
   },
+  "Bei großen Zahlen geht es genauso. Ela legt die Einer zu den Einern.": {
+   "datei": "florian/188f1287d074.mp3",
+   "h": "50a20df8f1",
+   "gehoert": false
+  },
+  "Bei großen Zahlen geht es genauso. Kofi nimmt die Einer von den Einern.": {
+   "datei": "florian/eccc4470797f.mp3",
+   "h": "e54a2163b2",
+   "gehoert": false
+  },
   "Beide Teile zusammen sind so lang wie der ganze Stab. Keine Perle fehlt.": {
    "datei": "florian/8e1fee80dc8a.mp3",
    "h": "6cc26ebbb4",
@@ -396,6 +421,11 @@
    "h": "d313ec0568",
    "gehoert": false
   },
+  "Dahinter legt sie einen kleinen Stab.": {
+   "datei": "florian/b5e873caa0b5.mp3",
+   "h": "40b04975b3",
+   "gehoert": false
+  },
   "Dann nimmt es den Rest vom Zehnerstab.": {
    "datei": "florian/8162b6e109d1.mp3",
    "h": "03701a4b1b",
@@ -404,6 +434,16 @@
   "Dann nimmt es den Rest von einem Zehnerstab.": {
    "datei": "florian/a4d4115bb9f9.mp3",
    "h": "80f38e5ea2",
+   "gehoert": false
+  },
+  "Dann nimmt sie den Rest vom Zehnerstab.": {
+   "datei": "florian/b35f14855dc7.mp3",
+   "h": "bcbb15cbda",
+   "gehoert": false
+  },
+  "Dann nimmt sie den Rest von einem Zehnerstab.": {
+   "datei": "florian/6861f6465f2b.mp3",
+   "h": "e05ffce0de",
    "gehoert": false
   },
   "Daran knüpf ich an": {
@@ -614,6 +654,11 @@
   "Das Spiel geht gerade nicht.": {
    "datei": "florian/13f719f660b1.mp3",
    "h": "42f08fd67a",
+   "gehoert": false
+  },
+  "Das Spielen geht heute später los.": {
+   "datei": "florian/1e3bc2213e6b.mp3",
+   "h": "c125264987",
    "gehoert": false
   },
   "Das Subjekt": {
@@ -1076,6 +1121,11 @@
    "h": "1917f6ac53",
    "gehoert": false
   },
+  "Der Zehnerstab bleibt, wie er ist. Die kleinen Stäbe kommen zusammen.": {
+   "datei": "florian/ed00e0978c90.mp3",
+   "h": "713173c96d",
+   "gehoert": false
+  },
   "Der Zehnerstab bleibt, wie er ist. Nur die kleinen Stäbe kommen zusammen.": {
    "datei": "florian/5ac37efdc58c.mp3",
    "h": "e81ab08311",
@@ -1099,6 +1149,11 @@
   "Die Brücke soll einen ganzen Zehnerstab bekommen. Dem langen Stab fehlen nur wenige Perlen.": {
    "datei": "florian/6f084a2fd57c.mp3",
    "h": "19de4964c8",
+   "gehoert": false
+  },
+  "Die Brücke soll einen ganzen Zehnerstab bekommen. Dem langen Stab fehlen wenige Perlen.": {
+   "datei": "florian/5cd241f7ce5a.mp3",
+   "h": "f932f16f62",
    "gehoert": false
   },
   "Die Buchstaben wie bei Zebra und Hexe": {
@@ -1144,6 +1199,11 @@
   "Die kleine Aufgabe hilft": {
    "datei": "florian/26f463348190.mp3",
    "h": "a57a9342d6",
+   "gehoert": false
+  },
+  "Die kleinen Stäbe werden zu einem goldenen Zehnerstab. Jetzt liegen da lauter Zehner.": {
+   "datei": "florian/6510d6566ec3.mp3",
+   "h": "da38cd6b34",
    "gehoert": false
   },
   "Die kleinen Stäbe werden zu einem goldenen Zehnerstab. Jetzt liegen da nur noch Zehner.": {
@@ -1244,6 +1304,26 @@
   "Diese zwei passen nicht zusammen.": {
    "datei": "florian/ac6098cb989e.mp3",
    "h": "1b312778de",
+   "gehoert": false
+  },
+  "Diese zwei Stäbe sind zusammen so lang wie der lange Stab. Leg sie in die Rinne.": {
+   "datei": "florian/88c31975448e.mp3",
+   "h": "f00837e953",
+   "gehoert": false
+  },
+  "Dieser Stab ist so lang wie die freie Stelle. Leg ihn hinein.": {
+   "datei": "florian/d85bbe04b92e.mp3",
+   "h": "d334d6afb0",
+   "gehoert": false
+  },
+  "Dieser Stab ist zu kurz. Dann bliebe noch etwas frei.": {
+   "datei": "florian/c6042a20cf8b.mp3",
+   "h": "efcae9a8eb",
+   "gehoert": false
+  },
+  "Dieser Stab ist zu lang. Er passt nicht in die freie Stelle.": {
+   "datei": "florian/af2cd795d5e6.mp3",
+   "h": "092c0d49ea",
    "gehoert": false
   },
   "Digitaluhr und Nachmittag": {
@@ -1394,6 +1474,26 @@
   "Einzahl oder Mehrzahl?": {
    "datei": "florian/b59d0edfb9ac.mp3",
    "h": "99fed866f5",
+   "gehoert": false
+  },
+  "Ela dreht die Teile um. Sie staunt: Der Stab bleibt genau so lang.": {
+   "datei": "florian/074f2f8c80f4.mp3",
+   "h": "607d1e34d4",
+   "gehoert": false
+  },
+  "Ela legt genau so viele Perlen dazu, dass ein neuer Zehner voll wird.": {
+   "datei": "florian/f8e08aafd715.mp3",
+   "h": "28ab811a7d",
+   "gehoert": false
+  },
+  "Ela teilt den Stab. Jetzt liegt links ein Teil und rechts ein Teil.": {
+   "datei": "florian/7ef7b1b23e14.mp3",
+   "h": "ad8e754dfb",
+   "gehoert": false
+  },
+  "Ela will mehr Perlen wegnehmen, als der kleine Stab hat.": {
+   "datei": "florian/f943ceeafe97.mp3",
+   "h": "201f4087d1",
    "gehoert": false
   },
   "Elfchen-Gedicht": {
@@ -1556,6 +1656,11 @@
    "h": "c3a9e11ed9",
    "gehoert": false
   },
+  "Fertig": {
+   "datei": "florian/708ad54eca23.mp3",
+   "h": "2029acf332",
+   "gehoert": false
+  },
   "Fertig zum Aufhängen": {
    "datei": "florian/5052cc0f5094.mp3",
    "h": "56a4a88351",
@@ -1651,6 +1756,16 @@
    "h": "dff8eeec94",
    "gehoert": false
   },
+  "Für heute ist das Spielen fertig.": {
+   "datei": "florian/bc05443665d9.mp3",
+   "h": "1a6275d9b6",
+   "gehoert": false
+  },
+  "Für heute ist das Spielen fertig. Morgen geht es weiter.": {
+   "datei": "florian/d1fce3edbf98.mp3",
+   "h": "65530f60aa",
+   "gehoert": false
+  },
   "Für wen schreibe ich": {
    "datei": "florian/74adb24082b2.mp3",
    "h": "551af43a7a",
@@ -1669,6 +1784,16 @@
   "Ganz unten im Tal wird der Bach zum Fluss. Dort liegen Brücken aus vielen Zehnerstäben.": {
    "datei": "florian/d7f78ff39a7a.mp3",
    "h": "8818679d76",
+   "gehoert": false
+  },
+  "Ganz unten im Tal wird der Bach zum Fluss. Ela und Lena brauchen dort viele Zehnerstäbe. Lena staunt, wie breit der Fluss ist.": {
+   "datei": "florian/ac29fa0dfa23.mp3",
+   "h": "34a984ecf2",
+   "gehoert": false
+  },
+  "Ganz unten im Tal wird der Bach zum Fluss. Kofi und Timo sehen Brücken aus vielen Zehnerstäben. Timo zeigt auf die längste.": {
+   "datei": "florian/4282697a45db.mp3",
+   "h": "b7d7041d29",
    "gehoert": false
   },
   "Gedicht lebendig vorlesen": {
@@ -1741,6 +1866,11 @@
    "h": "3b8240dd84",
    "gehoert": false
   },
+  "Geometrie": {
+   "datei": "florian/0f3a847b2804.mp3",
+   "h": "6dff8f105a",
+   "gehoert": false
+  },
   "Gerade Großbuchstaben": {
    "datei": "florian/e8e00a0714d8.mp3",
    "h": "1876684249",
@@ -1764,6 +1894,11 @@
   "Gerecht verteilen": {
    "datei": "florian/502b02f66f04.mp3",
    "h": "c4be58cf78",
+   "gehoert": false
+  },
+  "Geschichte ansehen": {
+   "datei": "florian/8bd60b838100.mp3",
+   "h": "6770b729a7",
    "gehoert": false
   },
   "Geschichte zur Malaufgabe": {
@@ -1821,9 +1956,19 @@
    "h": "3fdddcd8ee",
    "gehoert": false
   },
+  "Gleich ist für heute Schluss.": {
+   "datei": "florian/ba173efec3ec.mp3",
+   "h": "184e7a82fc",
+   "gehoert": false
+  },
   "Gramm und Kilogramm": {
    "datei": "florian/7bb5f7bf92a3.mp3",
    "h": "28a4d787eb",
+   "gehoert": false
+  },
+  "Grammatik": {
+   "datei": "florian/20916403cd3e.mp3",
+   "h": "a4a3254b97",
    "gehoert": false
   },
   "Groß oder klein?": {
@@ -1994,6 +2139,16 @@
   "Hier fehlt was": {
    "datei": "florian/1853f4596377.mp3",
    "h": "34d06b0300",
+   "gehoert": false
+  },
+  "Hier stellst du hin, was du kannst.": {
+   "datei": "florian/8bfad76f2d4b.mp3",
+   "h": "8640900345",
+   "gehoert": false
+  },
+  "Hilfe": {
+   "datei": "florian/b74af50bb9c6.mp3",
+   "h": "0d713b77f3",
    "gehoert": false
   },
   "Hilfreicher Tipp": {
@@ -2626,6 +2781,11 @@
    "h": "b711a9a097",
    "gehoert": false
   },
+  "Im Tal fließt ein Bach. Ela baut dort Brücken aus Perlen.": {
+   "datei": "florian/2b728a4bb462.mp3",
+   "h": "729cc392dd",
+   "gehoert": false
+  },
   "Im Winter fällt viel Schnee.": {
    "datei": "florian/9a4f49922268.mp3",
    "h": "eb9830f3d0",
@@ -2711,9 +2871,19 @@
    "h": "08991bfc8f",
    "gehoert": false
   },
+  "Jetzt baut er die Brücke neu. Diesmal nimmt er den kleinen Stab weg. Übrig bleibt der Zehner.": {
+   "datei": "florian/46f7f39bc03a.mp3",
+   "h": "8fb058ebe7",
+   "gehoert": false
+  },
   "Jetzt baut es die Brücke neu. Diesmal nimmt es den kleinen Stab weg. Übrig bleibt der Zehner.": {
    "datei": "florian/b38d40c6a897.mp3",
    "h": "d5b0dd09f2",
+   "gehoert": false
+  },
+  "Jetzt baut Lena längere Brücken. Zuerst legt sie den goldenen Zehnerstab.": {
+   "datei": "florian/9a51139cded5.mp3",
+   "h": "b3b7506619",
    "gehoert": false
   },
   "Jetzt bist du dran.": {
@@ -2739,6 +2909,11 @@
   "Jetzt nimmt das Einhorn einen Teil weg. Der andere Teil bleibt liegen.": {
    "datei": "florian/3f8facd61cb6.mp3",
    "h": "3347b5cafd",
+   "gehoert": false
+  },
+  "Jetzt nimmt Kofi einen Teil weg. Der andere Teil bleibt liegen.": {
+   "datei": "florian/fb906cdef431.mp3",
+   "h": "ea29f335a5",
    "gehoert": false
   },
   "Jetzt rechnest du. Schau zuerst auf den kleinen Stab.": {
@@ -2769,6 +2944,11 @@
   "Jetzt teilst du den Stab. Wie viele Perlen hat jeder Teil?": {
    "datei": "florian/a9a01176f725.mp3",
    "h": "2eb29f2850",
+   "gehoert": false
+  },
+  "Jetzt will sie mehr Perlen wegnehmen, als der kleine Stab hat.": {
+   "datei": "florian/e5d1324f1b74.mp3",
+   "h": "31809db94f",
    "gehoert": false
   },
   "Jury-Ohr": {
@@ -2861,6 +3041,26 @@
    "h": "54b8277f25",
    "gehoert": false
   },
+  "Kofi hat einen langen und einen kurzen Stab. Daraus baut er eine Brücke.": {
+   "datei": "florian/d8a9ec31d454.mp3",
+   "h": "3f781d7a94",
+   "gehoert": false
+  },
+  "Kofi legt die beiden Teile zusammen. Zusammen sind sie so lang wie die ganze Brücke.": {
+   "datei": "florian/9cb23adee5b6.mp3",
+   "h": "6c37fb7df9",
+   "gehoert": false
+  },
+  "Kofi nimmt den ganzen Zehnerstab weg. Übrig bleibt der kleine Stab.": {
+   "datei": "florian/421620ce750a.mp3",
+   "h": "ffa007e79b",
+   "gehoert": false
+  },
+  "Kofi springt über den kleinen Bach.": {
+   "datei": "florian/d0067abd1974.mp3",
+   "h": "4e94bf57a7",
+   "gehoert": false
+  },
   "Kombinatorik mit Reihenfolge": {
    "datei": "florian/461bcb6dda6b.mp3",
    "h": "c83a5e495d",
@@ -2886,9 +3086,24 @@
    "h": "155d8bfa33",
    "gehoert": false
   },
+  "Kommen Einer dazu, legt Ela sie zum kleinen Stab. Die Zehnerstäbe bleiben.": {
+   "datei": "florian/76c74a567229.mp3",
+   "h": "a0a046c5a5",
+   "gehoert": false
+  },
+  "Kommen Perlen dazu, bleiben die Zehnerstäbe liegen. Die Einer kommen zusammen.": {
+   "datei": "florian/9dafa2b2320f.mp3",
+   "h": "dcb03d990c",
+   "gehoert": false
+  },
   "Kommen Perlen dazu, bleiben die Zehnerstäbe liegen. Nur die Einer kommen zusammen.": {
    "datei": "florian/95873796b61e.mp3",
    "h": "e7efa08168",
+   "gehoert": false
+  },
+  "Kommt ein Zehnerstab dazu, ändern sich die Zehner. Die Einer bleiben gleich.": {
+   "datei": "florian/943d8d560808.mp3",
+   "h": "817c3ee368",
    "gehoert": false
   },
   "Kommt ein Zehnerstab dazu, ändern sich nur die Zehner. Die Einer bleiben.": {
@@ -3031,14 +3246,39 @@
    "h": "bcb9ce524b",
    "gehoert": false
   },
+  "Leg zwei Stäbe in die Rinne. Zusammen sollen sie so lang sein wie der lange Stab.": {
+   "datei": "florian/e6d06d3bb637.mp3",
+   "h": "87f474c6f4",
+   "gehoert": false
+  },
   "Legen und Zusammensetzen": {
    "datei": "florian/bba164731f20.mp3",
    "h": "b4ce99846b",
    "gehoert": false
   },
+  "Lena findet einen bunten Käfer.": {
+   "datei": "florian/536f781cab6a.mp3",
+   "h": "999fe91c40",
+   "gehoert": false
+  },
   "Lena hat ein Pferd.": {
    "datei": "florian/824a8851f6c9.mp3",
    "h": "50ca750ec9",
+   "gehoert": false
+  },
+  "Lena nimmt ein paar Perlen vom kleinen Stab weg. Die Zehnerstäbe bleiben liegen.": {
+   "datei": "florian/1a7d64f2a9e1.mp3",
+   "h": "381d7a733c",
+   "gehoert": false
+  },
+  "Lena nimmt ein paar Perlen weg. Sie nimmt sie vom kleinen Stab.": {
+   "datei": "florian/a0fb6f7e571d.mp3",
+   "h": "1bbaf4370f",
+   "gehoert": false
+  },
+  "Lesen": {
+   "datei": "florian/f2ab41ad9d2b.mp3",
+   "h": "27a336d058",
    "gehoert": false
   },
   "Liebe Oma": {
@@ -3161,9 +3401,19 @@
    "h": "07d12af323",
    "gehoert": false
   },
+  "Manchmal passen die Perlen nicht mehr auf den kleinen Stab. Dann füllt Timo zuerst einen Zehner auf.": {
+   "datei": "florian/d1a649f3f7b2.mp3",
+   "h": "fa02f3012e",
+   "gehoert": false
+  },
   "Manchmal soll auch der Zehnerstab weg. Dann nimmt das Einhorn ihn mit und dazu Perlen vom kleinen Stab.": {
    "datei": "florian/bb67a8fd7ab1.mp3",
    "h": "2fe607b523",
+   "gehoert": false
+  },
+  "Manchmal soll auch der Zehnerstab weg. Dann nimmt Lena ihn mit und dazu Perlen vom kleinen Stab.": {
+   "datei": "florian/a9dcc0df3e77.mp3",
+   "h": "4f14cdc1e2",
    "gehoert": false
   },
   "Männlich, weiblich, sächlich": {
@@ -3179,6 +3429,11 @@
   "Maßstab im Plan": {
    "datei": "florian/14a0eaf76461.mp3",
    "h": "6b18ecb368",
+   "gehoert": false
+  },
+  "Mathe": {
+   "datei": "florian/190b7ad4caa0.mp3",
+   "h": "8b654a3038",
    "gehoert": false
   },
   "Mathekonferenz": {
@@ -3274,6 +3529,11 @@
   "Mein Name": {
    "datei": "florian/7ac8c4aa30fb.mp3",
    "h": "0a395d15d2",
+   "gehoert": false
+  },
+  "Mein Regal": {
+   "datei": "florian/ec1aaafe8ba4.mp3",
+   "h": "06b21b3cac",
    "gehoert": false
   },
   "Mein Schreibziel": {
@@ -3456,6 +3716,11 @@
    "h": "bcd606ca7f",
    "gehoert": false
   },
+  "Mit echten Dingen": {
+   "datei": "florian/ef2eff59cc6e.mp3",
+   "h": "8f2fb95381",
+   "gehoert": false
+  },
   "Mit jedem kleinen Stab geht es genauso. Der Zehner bleibt vorne.": {
    "datei": "florian/387cedcd5a29.mp3",
    "h": "2955afc45c",
@@ -3509,6 +3774,11 @@
   "Nach dem Alphabet ordnen, wenn der Anfang gleich ist": {
    "datei": "florian/f7538d47c341.mp3",
    "h": "f812137c34",
+   "gehoert": false
+  },
+  "Nach der fünften Perle hat ein Stab eine Marke. So sieht man die Fünf, ohne zu zählen.": {
+   "datei": "florian/6f6619f6fc5c.mp3",
+   "h": "17546e1a3b",
    "gehoert": false
   },
   "Nach der Schule esse ich Nudeln.": {
@@ -3621,6 +3891,11 @@
    "h": "4fa4355130",
    "gehoert": false
   },
+  "Nimm einen Stab und leg ihn in die Rinne. Dann schau, wie viel noch frei ist.": {
+   "datei": "florian/56145f0f05bc.mp3",
+   "h": "b520186e74",
+   "gehoert": false
+  },
   "Nimmt das Einhorn Einer weg, nimmt es sie vom kleinen Stab. Die Zehnerstäbe bleiben.": {
    "datei": "florian/9fc1e65e914a.mp3",
    "h": "d89195797e",
@@ -3631,9 +3906,24 @@
    "h": "7ddadb6c50",
    "gehoert": false
   },
+  "Nimmt er einen Zehnerstab weg, ändern sich die Zehner. Die Einer bleiben gleich.": {
+   "datei": "florian/2fc96d019808.mp3",
+   "h": "dacc9c0275",
+   "gehoert": false
+  },
   "Nimmt es einen Zehnerstab weg, ändern sich nur die Zehner. Die Einer bleiben.": {
    "datei": "florian/2fe6f1b72cc4.mp3",
    "h": "ee5b939186",
+   "gehoert": false
+  },
+  "Nimmt Kofi Einer weg, nimmt er sie vom kleinen Stab. Die Zehnerstäbe bleiben.": {
+   "datei": "florian/b6df37515d09.mp3",
+   "h": "283ff9e4bc",
+   "gehoert": false
+  },
+  "Nimmt Timo noch mehr weg, geht ein ganzer Zehnerstab mit.": {
+   "datei": "florian/3ff5a242278c.mp3",
+   "h": "9cac4e27aa",
    "gehoert": false
   },
   "Noch mal, bitte!": {
@@ -3714,6 +4004,11 @@
   "Oberlängen-Schleifen": {
    "datei": "florian/d9d435c11d45.mp3",
    "h": "b852babe39",
+   "gehoert": false
+  },
+  "Oder er nimmt den anderen Teil weg.": {
+   "datei": "florian/88556b11a33b.mp3",
+   "h": "c58ad5018a",
    "gehoert": false
   },
   "Oder es nimmt den anderen Teil weg.": {
@@ -4366,6 +4661,11 @@
    "h": "c6138e5756",
    "gehoert": false
   },
+  "Schreiben": {
+   "datei": "florian/f4f5c5f415f3.mp3",
+   "h": "0c0dcd38b5",
+   "gehoert": false
+  },
   "Schreiben mit der Anlauttabelle": {
    "datei": "florian/e30b81d6747d.mp3",
    "h": "4126f754b4",
@@ -4581,6 +4881,11 @@
    "h": "aa79121ab3",
    "gehoert": false
   },
+  "Sprechen und Zuhören": {
+   "datei": "florian/f7fc5cfe7c66.mp3",
+   "h": "999ba2f737",
+   "gehoert": false
+  },
   "Stab mit Bauch": {
    "datei": "florian/d87737ecb6c5.mp3",
    "h": "dea00a9820",
@@ -4789,6 +5094,21 @@
   "Tierbeschreibung": {
    "datei": "florian/f269f7b2a903.mp3",
    "h": "2e289a1ee8",
+   "gehoert": false
+  },
+  "Timo legt noch ein paar Perlen dazu.": {
+   "datei": "florian/97790e107af6.mp3",
+   "h": "ff66ab1cc3",
+   "gehoert": false
+  },
+  "Timo nimmt ein paar Perlen weg. Er nimmt sie von einem Zehnerstab.": {
+   "datei": "florian/ab595b6f472a.mp3",
+   "h": "9a74f0fff6",
+   "gehoert": false
+  },
+  "Timo wiegt das Mehl ab.": {
+   "datei": "florian/a7dcab9f739a.mp3",
+   "h": "58333965ea",
    "gehoert": false
   },
   "Tom rennt weg.": {
@@ -5246,6 +5566,11 @@
    "h": "1ae71ed632",
    "gehoert": false
   },
+  "Weiter": {
+   "datei": "florian/aeff967b37f0.mp3",
+   "h": "b94419e7d6",
+   "gehoert": false
+  },
   "Weiter unten ist der Bach breiter. Diese Brücke hat Zehnerstäbe und einen kleinen Stab.": {
    "datei": "florian/3b4e51398160.mp3",
    "h": "fae31f15d5",
@@ -5254,6 +5579,11 @@
   "Weiter unten ist der Bach breiter. Dort legt das Einhorn Zehnerstäbe und einen kleinen Stab.": {
    "datei": "florian/fb62c7d74e58.mp3",
    "h": "9f50179bf3",
+   "gehoert": false
+  },
+  "Weiter unten ist der Bach breiter. Dort legt Timo Zehnerstäbe und einen kleinen Stab.": {
+   "datei": "florian/9e4559417b58.mp3",
+   "h": "b9c4c81717",
    "gehoert": false
   },
   "Welche Darstellung hilft?": {
@@ -5294,6 +5624,11 @@
   "Welches passt nicht": {
    "datei": "florian/989e63840ead.mp3",
    "h": "7c0a6753d2",
+   "gehoert": false
+  },
+  "Welches Stäbchen passt an die Fünf, damit es sieben werden?": {
+   "datei": "florian/e137eaccf411.mp3",
+   "h": "e5def62e2b",
    "gehoert": false
   },
   "Welches Wort passt nicht?": {
@@ -5671,6 +6006,11 @@
    "h": "1530541334",
    "gehoert": false
   },
+  "Zähl die Perlen über der freien Stelle. So viele Perlen fehlen noch.": {
+   "datei": "florian/60b2de614be9.mp3",
+   "h": "250fe4587f",
+   "gehoert": false
+  },
   "Zahlen anders zeigen": {
    "datei": "florian/fe4303d20e54.mp3",
    "h": "b69233aeca",
@@ -5941,9 +6281,24 @@
    "h": "41ad61fb7e",
    "gehoert": false
   },
+  "Zuerst nimmt sie den ganzen kleinen Stab weg. Jetzt bleibt genau der Zehner.": {
+   "datei": "florian/0a5e7810b896.mp3",
+   "h": "bceff001fb",
+   "gehoert": false
+  },
+  "Zuerst nimmt sie den ganzen kleinen Stab weg. Jetzt liegen da lauter Zehnerstäbe.": {
+   "datei": "florian/9662a31837ad.mp3",
+   "h": "648c4acb0f",
+   "gehoert": false
+  },
   "Zukunft": {
    "datei": "florian/41ddbc098b70.mp3",
    "h": "1793b274e1",
+   "gehoert": false
+  },
+  "Zurück": {
+   "datei": "florian/4080624342b2.mp3",
+   "h": "59090c3343",
    "gehoert": false
   },
   "Zusammengesetzte Nomen": {
@@ -5959,6 +6314,11 @@
   "Zwanzigerfeld": {
    "datei": "florian/577afda6fbb9.mp3",
    "h": "550ccb4db7",
+   "gehoert": false
+  },
+  "Zwei Stäbe, zusammen so lang wie der lange Stab.": {
+   "datei": "florian/67bfb4b747cc.mp3",
+   "h": "1d7c7931f5",
    "gehoert": false
   },
   "Zwei Zahlen sind die Teile, eine ist das Ganze. Welche zwei Teile sind zusammen so viel wie das Ganze?": {

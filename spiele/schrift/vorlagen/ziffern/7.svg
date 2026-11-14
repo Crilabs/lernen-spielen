@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 300" data-zeichen="7" data-satz="ziffern">
+  <!-- Oben waagerecht nach rechts, ohne Absetzen schräg nach links unten; dann der Querstrich (QUELLEN.md §1) -->
+  <path data-strich="1" d="M 12 0 L 95 0 L 40 200" fill="none"/>
+  <path data-strich="2" d="M 38 100 L 88 100" fill="none"/>
+</svg>

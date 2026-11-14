@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schriftvorlagen prüfen</title>
+<link rel="stylesheet" href="/spiele/schrift/schrift.css">
+<style>
+:root{
+  /* Farbwelt (docs/farbwelt.html) */
+  --tinte:#3B2A6B;--tinte-weich:#6B5C96;--papier:#FFFCF7;--nebel:#F4F0FA;--linie:#E4DEF0;--sonne:#FFD95A;
+  --ahorn:#EAD5B5;--naht:#CFC4E3;
+  /* Bänder der Lineatur: Oberlänge, Mittelband, Unterlänge */
+  --band-oben:#EEE9F8;--band-mitte:#FFF3C9;--band-unten:#F5EADA;
+  --ok:#2F7A5B;--offen:#B7AECB;--warn:#A4521F;
+  --schrift:"Andika","Trebuchet MS",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papier);color:var(--tinte);font:17px/1.5 var(--schrift)}
+header{padding:20px 24px 12px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline}
+h1{font-size:24px;margin:0;font-weight:700}
+#stand{color:var(--tinte-weich);font-size:15px}
+.saetze{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+button{font:inherit;color:inherit;cursor:pointer}
+.saetze button{font-size:15px;padding:6px 14px;border-radius:999px;border:1.5px solid var(--naht);background:transparent}
+.saetze button:disabled{opacity:.4;cursor:default}
+.saetze button[aria-pressed=true]{background:var(--tinte);border-color:var(--tinte);color:var(--papier)}
+:focus-visible{outline:3px solid var(--sonne);outline-offset:2px}
+main{padding:0 24px 64px;max-width:1180px}
+
+/* Arbeitsfläche */
+.buehne{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:24px;align-items:start;margin:8px 0 28px}
+.blatt{background:#fff;border:1.5px solid var(--linie);border-radius:18px;padding:14px}
+.blatt svg{display:block;width:100%;height:auto;max-height:52vh}
+.seite h2{font-size:56px;line-height:1;margin:0 0 4px;font-weight:400}
+.seite .info{color:var(--tinte-weich);font-size:15px;margin:0 0 14px}
+.seite .reihe{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.seite .reihe button{padding:9px 16px;border-radius:12px;border:1.5px solid var(--naht);background:#fff;font-size:16px}
+.seite button.haupt{background:var(--tinte);border-color:var(--tinte);color:var(--papier)}
+.seite button.passt[aria-pressed=true]{background:var(--ok);border-color:var(--ok);color:#fff}
+.seite textarea{width:100%;min-height:76px;font:inherit;font-size:15px;padding:8px 10px;border-radius:12px;border:1.5px solid var(--naht);background:#fff;color:var(--tinte);resize:vertical}
+.anm{font-size:14px;color:var(--warn);margin:8px 0 0;padding-left:18px}
+.wortzeile{display:flex;gap:8px;align-items:center;margin:0 0 10px}
+.wortzeile input{flex:1;font:inherit;font-size:18px;padding:8px 12px;border-radius:12px;border:1.5px solid var(--naht);background:#fff;color:var(--tinte)}
+.fehler{color:var(--warn);font-size:15px;min-height:1.5em;margin:6px 2px 0}
+
+/* Alle Formen */
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px}
+.kachel{background:#fff;border:1.5px solid var(--linie);border-radius:12px;padding:6px 6px 4px;text-align:center;position:relative}
+.kachel[aria-current=true]{border-color:var(--tinte);box-shadow:0 0 0 2px var(--tinte) inset}
+.kachel svg{display:block;width:100%;height:auto}
+.kachel span{font-size:15px}
+.kachel i{position:absolute;top:7px;right:7px;width:10px;height:10px;border-radius:50%;background:var(--offen)}
+.kachel i.frei{background:var(--ok)}
+.kachel i.notiz{background:var(--warn)}
+.legende{font-size:14px;color:var(--tinte-weich);margin:0 0 10px}
+.legende b{display:inline-block;width:10px;height:10px;border-radius:50%;margin:0 4px 0 12px;vertical-align:0}
+.leer{color:var(--tinte-weich);padding:24px 0}
+#meldung{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--tinte);color:var(--papier);padding:10px 16px;border-radius:12px;font-size:15px;opacity:0;transition:opacity .2s;pointer-events:none}
+#meldung.an{opacity:1}
+@media (max-width:760px){.buehne{grid-template-columns:1fr}header{padding:16px}main{padding:0 16px 48px}}
+@media (prefers-reduced-motion:reduce){#meldung{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Schriftvorlagen prüfen</h1>
+  <span id="stand">Lädt …</span>
+  <nav class="saetze" id="saetze" aria-label="Satz"></nav>
+</header>
+<main>
+  <section class="buehne">
+    <div>
+      <div class="wortzeile">
+        <input id="wort" type="text" autocomplete="off" spellcheck="false" placeholder="Testwort, z. B. oma" aria-label="Testwort">
+      </div>
+      <div class="blatt"><svg id="gross" role="img" aria-label="Gewählte Form auf der Lineatur"></svg></div>
+      <p class="fehler" id="fehler" role="status"></p>
+    </div>
+    <aside class="seite" id="seite"></aside>
+  </section>
+  <p class="legende">Punkte an den Kacheln:<b style="background:var(--ok)"></b>freigegeben<b style="background:var(--offen)"></b>offen<b style="background:var(--warn)"></b>Anmerkung offen</p>
+  <section class="raster" id="raster" aria-label="Alle Formen des Satzes"></section>
+</main>
+<div id="meldung" role="status"></div>
+<script type="module">
+import { ladeVorlagen, formen, raster, wort, hatSatz } from "/spiele/kern/vorlagen.js";
+
+const NS = "http://www.w3.org/2000/svg";
+const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (id) => document.getElementById(id);
+let stand = null;
+let satz = "ziffern";
+let gewaehlt = null;
+
+const el = (name, attrs = {}, eltern) => {
+  const e = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (eltern) eltern.append(e);
+  return e;
+};
+
+function meldung(text) {
+  const m = $("meldung");
+  m.textContent = text;
+  m.classList.add("an");
+  clearTimeout(meldung.t);
+  meldung.t = setTimeout(() => m.classList.remove("an"), 2200);
+}
+
+/** Zeichnet Striche auf die Lineatur. mitHilfen: Startpunkte und Richtungspfeile. */
+function zeichne(svg, { breite, striche }, { mitHilfen = true, dicke = 9 } = {}) {
+  const r = raster();
+  const rand = 24;
+  svg.replaceChildren();
+  svg.setAttribute("viewBox", `${-rand} -14 ${breite + 2 * rand} ${r.hoehe + 28}`);
+  const b = (y0, y1, farbe) => el("rect", { x: -rand, y: y0, width: breite + 2 * rand, height: y1 - y0, fill: farbe }, svg);
+  b(r.oberlaenge, r.mitte, "var(--band-oben)");
+  b(r.mitte, r.grund, "var(--band-mitte)");
+  b(r.grund, r.unterlaenge, "var(--band-unten)");
+  for (const y of [r.mitte, r.grund]) el("line", { x1: -rand, x2: breite + rand, y1: y, y2: y, stroke: "var(--naht)", "stroke-width": 1.5 }, svg);
+  const linien = striche.map((s) =>
+    el("polyline", {
+      points: s.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" "),
+      fill: "none", stroke: "var(--tinte)", "stroke-width": dicke, "stroke-linecap": "round", "stroke-linejoin": "round",
+    }, svg),
+  );
+  if (mitHilfen)
+    striche.forEach((s, i) => {
+      const k = Math.min(5, s.length - 1);
+      if (k > 0) {
+        const a = s[k - 1], c = s[k];
+        const w = (Math.atan2(c.y - a.y, c.x - a.x) * 180) / Math.PI;
+        el("path", { d: "M -9 -8 L 5 0 L -9 8", fill: "none", stroke: "var(--tinte-weich)", "stroke-width": 3.5,
+          "stroke-linecap": "round", "stroke-linejoin": "round", transform: `translate(${c.x} ${c.y}) rotate(${w}) translate(14 -20)` }, svg);
+      }
+      el("circle", { cx: s[0].x, cy: s[0].y, r: 13, fill: "var(--sonne)", stroke: "var(--tinte)", "stroke-width": 2 }, svg);
+      const t = el("text", { x: s[0].x, y: s[0].y + 6, "text-anchor": "middle", "font-size": 17, "font-family": "Andika, sans-serif", fill: "var(--tinte)" }, svg);
+      t.textContent = String(i + 1);
+    });
+  return linien;
+}
+
+/** Schreibt Strich für Strich vor (Spec 5.2: Reihenfolge = Strichfolge, Pfadanfang = Startpunkt). */
+async function vorschreiben(svg, daten) {
+  const linien = zeichne(svg, daten, { mitHilfen: false });
+  if (ruhig) return;
+  for (const l of linien) l.style.visibility = "hidden";
+  for (const l of linien) {
+    const laenge = l.getTotalLength();
+    l.style.visibility = "visible";
+    l.style.strokeDasharray = `${laenge}`;
+    await l.animate([{ strokeDashoffset: laenge }, { strokeDashoffset: 0 }], { duration: Math.max(250, laenge * 3.2), easing: "ease-in-out", fill: "forwards" }).finished;
+    await new Promise((r) => setTimeout(r, 180));
+  }
+}
+
+const eintrag = (f) => stand.liste.formen.find((e) => e.satz === f.satz && e.zeichen === f.zeichen);
+const offeneNotizen = (f) => stand.anmerkungen.eintraege.filter((a) => a.satz === f.satz && a.zeichen === f.zeichen && !a.erledigt);
+
+async function ladeStand() {
+  stand = await (await fetch("/api/stand")).json();
+}
+
+function zeigeSaetze() {
+  const nav = $("saetze");
+  nav.replaceChildren();
+  for (const name of Object.keys(stand.liste.saetze)) {
+    const k = document.createElement("button");
+    k.textContent = name === "sas" ? "SAS" : name === "va" ? "VA" : name[0].toUpperCase() + name.slice(1);
+    k.setAttribute("aria-pressed", String(name === satz));
+    k.disabled = !hatSatz(name);
+    k.onclick = () => { satz = name; gewaehlt = formen(satz)[0] ?? null; $("wort").value = ""; alles(); };
+    nav.append(k);
+  }
+}
+
+function zeigeStand() {
+  const alle = stand.liste.formen.filter((e) => e.satz === satz);
+  const frei = alle.filter((e) => e.freigegeben).length;
+  $("stand").textContent = `${frei} von ${alle.length} Formen freigegeben`;
+}
+
+function zeigeRaster() {
+  const box = $("raster");
+  box.replaceChildren();
+  const liste = formen(satz);
+  if (!liste.length) {
+    box.innerHTML = `<p class="leer">In diesem Satz gibt es noch keine Formen.</p>`;
+    return;
+  }
+  for (const f of liste) {
+    const k = document.createElement("button");
+    k.className = "kachel";
+    k.setAttribute("aria-current", String(f === gewaehlt));
+    k.setAttribute("aria-label", `Form ${f.zeichen}`);
+    const svg = el("svg", { "aria-hidden": "true" });
+    zeichne(svg, f, { mitHilfen: false, dicke: 12 });
+    const punkt = document.createElement("i");
+    if (offeneNotizen(f).length) punkt.className = "notiz";
+    else if (eintrag(f)?.freigegeben) punkt.className = "frei";
+    const name = document.createElement("span");
+    name.textContent = f.zeichen;
+    k.append(punkt, svg, name);
+    k.onclick = () => { gewaehlt = f; $("wort").value = ""; alles(); };
+    box.append(k);
+  }
+}
+
+function zeigeGross() {
+  const text = $("wort").value.trim();
+  $("fehler").textContent = "";
+  if (text) {
+    try {
+      zeichne($("gross"), wort(satz, text));
+    } catch (e) {
+      $("gross").replaceChildren();
+      $("fehler").textContent = e.message.startsWith("Fehlende Form")
+        ? `${e.message.replace("Fehlende Form: ", "Diese Form fehlt noch: ")}. Das Wort lässt sich erst zeigen, wenn sie gezeichnet ist.`
+        : e.message;
+    }
+    zeigeSeite(null, text);
+    return;
+  }
+  if (gewaehlt) zeichne($("gross"), gewaehlt);
+  else $("gross").replaceChildren();
+  zeigeSeite(gewaehlt);
+}
+
+function zeigeSeite(f, text) {
+  const s = $("seite");
+  s.replaceChildren();
+  const h = document.createElement("h2");
+  const info = document.createElement("p");
+  info.className = "info";
+  const reihe = document.createElement("div");
+  reihe.className = "reihe";
+  const vor = document.createElement("button");
+  vor.className = "haupt";
+  vor.textContent = "Vorschreiben";
+  reihe.append(vor);
+  s.append(h, info, reihe);
+  if (!f) {
+    h.textContent = text || "–";
+    info.textContent = text ? "Testwort aus den Formen des Satzes" : "Wähle unten eine Form.";
+    vor.disabled = !text;
+    vor.onclick = () => { try { vorschreiben($("gross"), wort(satz, text)); } catch {} };
+    return;
+  }
+  const e = eintrag(f);
+  h.textContent = f.zeichen;
+  const striche = f.striche.length;
+  info.textContent = `${striche} ${striche === 1 ? "Strich" : "Striche"} · ${e.freigegeben ? `freigegeben am ${e.freigegeben}` : "noch nicht freigegeben"}`;
+  vor.onclick = () => vorschreiben($("gross"), f);
+  const passt = document.createElement("button");
+  passt.className = "passt";
+  passt.textContent = "Passt";
+  passt.setAttribute("aria-pressed", String(!!e.freigegeben));
+  passt.onclick = async () => {
+    const neu = !e.freigegeben;
+    await sende("/api/freigabe", { satz: f.satz, zeichen: f.zeichen, passt: neu });
+    meldung(neu ? `${f.zeichen} freigegeben` : `Freigabe von ${f.zeichen} zurückgenommen`);
+  };
+  reihe.append(passt);
+  const notiz = document.createElement("textarea");
+  notiz.placeholder = "Was stimmt nicht? Zum Beispiel: Startpunkt weiter oben";
+  notiz.setAttribute("aria-label", `Anmerkung zu ${f.zeichen}`);
+  const falsch = document.createElement("button");
+  falsch.textContent = "Stimmt nicht";
+  falsch.onclick = async () => {
+    if (!notiz.value.trim()) { notiz.focus(); meldung("Schreib kurz dazu, was nicht stimmt."); return; }
+    await sende("/api/anmerkung", { satz: f.satz, zeichen: f.zeichen, text: notiz.value });
+    meldung(`Anmerkung zu ${f.zeichen} gespeichert`);
+  };
+  const zeile = document.createElement("div");
+  zeile.className = "reihe";
+  zeile.append(falsch);
+  s.append(notiz, zeile);
+  const offen = offeneNotizen(f);
+  if (offen.length) {
+    const ul = document.createElement("ul");
+    ul.className = "anm";
+    for (const a of offen) {
+      const li = document.createElement("li");
+      li.textContent = `${a.datum}: ${a.text}`;
+      ul.append(li);
+    }
+    s.append(ul);
+  }
+}
+
+async function sende(pfad, daten) {
+  const r = await fetch(pfad, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(daten) });
+  const a = await r.json();
+  if (!r.ok) { meldung(a.fehler ?? "Speichern ging nicht"); return; }
+  await ladeStand();
+  alles();
+}
+
+function alles() {
+  zeigeSaetze();
+  zeigeStand();
+  zeigeRaster();
+  zeigeGross();
+}
+
+await Promise.all([ladeVorlagen(), ladeStand()]);
+gewaehlt = formen(satz)[0] ?? null;
+$("wort").addEventListener("input", zeigeGross);
+alles();
+</script>
+</body>
+</html>

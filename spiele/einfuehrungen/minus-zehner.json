@@ -1,17 +1,17 @@
 { "szenen": [
   { "sprich": "Diese Brücke hat einen Zehnerstab und einen kleinen Stab.",
     "zeig": "17 = 10 + 7",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "steh" }, { "perlen": ["10", "7"], "x": 62 } ] },
-  { "sprich": "Das Einhorn nimmt den ganzen Zehnerstab weg. Übrig bleibt der kleine Stab.",
+    "bild": [ { "figur": "kofi", "x": 16, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "7"], "x": 62 } ] },
+  { "sprich": "Kofi nimmt den ganzen Zehnerstab weg. Übrig bleibt der kleine Stab.",
     "zeig": "17 − 10 = 7",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["7"], "x": 55 }, { "zahl": "7", "x": 85 } ] },
-  { "sprich": "Jetzt baut es die Brücke neu. Diesmal nimmt es den kleinen Stab weg. Übrig bleibt der Zehner.",
+    "bild": [ { "figur": "kofi", "x": 16, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["7"], "x": 55 }, { "zahl": "7", "x": 85 } ] },
+  { "sprich": "Jetzt baut er die Brücke neu. Diesmal nimmt er den kleinen Stab weg. Übrig bleibt der Zehner.",
     "zeig": "17 − 7 = 10",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["10"], "x": 55 }, { "zahl": "10", "x": 88 } ] },
+    "bild": [ { "figur": "kofi", "x": 16, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["10"], "x": 55 }, { "zahl": "10", "x": 88 } ] },
   { "sprich": "Ein ganzer Stab geht weg, der andere bleibt. Du musst nichts abzählen.",
     "zeig": "17 − 10 = 7    17 − 7 = 10",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "steh" }, { "perlen": ["10", "7"], "x": 62 } ] },
+    "bild": [ { "figur": "kofi", "x": 16, "haltung": "nachdenken", "aufgabe": "vorzeigen" }, { "perlen": ["10", "7"], "x": 62 } ] },
   { "sprich": "Jetzt bist du dran. Welcher Stab bleibt übrig?",
     "zeig": "14 − 4 = ?",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "schau" }, { "perlen": ["10", "4"], "x": 62 } ] }
+    "bild": [ { "figur": "kofi", "x": 16, "haltung": "fragen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "4"], "x": 62 } ] }
 ] }

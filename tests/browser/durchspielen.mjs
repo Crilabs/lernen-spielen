@@ -530,11 +530,15 @@ async function kindWild(sp, lauf) {
   for (let versuch = 0; getippt < WILD_TIPPS && versuch < WILD_TIPPS * 5; versuch++) {
     const x = feld.x + sp.rnd() * feld.b;
     const y = feld.y + sp.rnd() * feld.h;
-    // Links, die die Seite verlassen (Haus, Alle Spiele), lässt das wilde Kind aus: dafür gibt es das Kind „zurueck“.
+    // Links, die die Seite verlassen (Haus, Alle Spiele, in der Pause „Mit echten Dingen“: ein Knopf, der zu
+    // echt.html führt), lässt das wilde Kind aus: dafür gibt es das Kind „zurueck“.
     const verlaesst = await sp.ev(([px, py]) => {
       let el = document.elementFromPoint(px, py);
       while (el?.shadowRoot) { const i = el.shadowRoot.elementFromPoint(px, py); if (!i || i === el) break; el = i; }
-      for (let k = el; k; k = k.parentNode ?? k.host ?? null) if (k.localName === "a" && k.hasAttribute?.("href")) return true;
+      for (let k = el; k; k = k.parentNode ?? k.host ?? null) {
+        if (k.localName === "a" && k.hasAttribute?.("href")) return true;
+        if (k.localName === "ls-knopf" && k.classList?.contains("echt")) return true;
+      }
       return false;
     }, [x, y]);
     if (verlaesst) { ausgelassen++; continue; }

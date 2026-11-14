@@ -1,20 +1,20 @@
 { "szenen": [
-  { "sprich": "Ganz unten im Tal wird der Bach zum Fluss. Dort braucht das Einhorn viele Zehnerstäbe.",
+  { "sprich": "Ganz unten im Tal wird der Bach zum Fluss. Ela und Lena brauchen dort viele Zehnerstäbe. Lena staunt, wie breit der Fluss ist.",
     "zeig": "10, 20, 30, 40 … 100",
-    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "steh" }, { "perlen": ["10"], "x": 62 } ] },
+    "bild": [ { "figur": "ela", "x": 13, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "figur": "lena", "x": 33, "haltung": "staunen", "aufgabe": "wundern" }, { "perlen": ["10"], "x": 70 } ] },
   { "sprich": "Schau auf die Zahl. Vorne steht, wie viele Zehnerstäbe es sind. Hinten stehen die Einer.",
     "zeig": "21 = 10 + 10 + 1",
     "bild": [ { "perlen": ["10", "10", "1"], "x": 50 } ] },
-  { "sprich": "Kommen Einer dazu, legt das Einhorn sie zum kleinen Stab. Die Zehnerstäbe bleiben.",
+  { "sprich": "Kommen Einer dazu, legt Ela sie zum kleinen Stab. Die Zehnerstäbe bleiben.",
     "zeig": "21 + 3 = 24",
-    "bild": [ { "perlen": ["10", "10", "1", "3"], "x": 50 } ] },
-  { "sprich": "Kommt ein Zehnerstab dazu, ändern sich nur die Zehner. Die Einer bleiben.",
+    "bild": [ { "figur": "ela", "x": 13, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "10", "1", "3"], "x": 61 } ] },
+  { "sprich": "Kommt ein Zehnerstab dazu, ändern sich die Zehner. Die Einer bleiben gleich.",
     "zeig": "14 + 10 = 24",
     "bild": [ { "perlen": ["10", "4"], "x": 34 }, { "perlen": ["10"], "x": 79 } ] },
-  { "sprich": "Bei großen Zahlen geht es genauso. Das Einhorn legt die Einer zu den Einern.",
+  { "sprich": "Bei großen Zahlen geht es genauso. Ela legt die Einer zu den Einern.",
     "zeig": "43 + 5 = 48   3 + 5 = 8",
     "bild": [ { "zahl": "43", "x": 20 }, { "perlen": ["3", "5"], "x": 52 }, { "zahl": "48", "x": 84 } ] },
   { "sprich": "Jetzt rechnest du. Zehner zu den Zehnern, Einer zu den Einern.",
     "zeig": "Zehner zu den Zehnern, Einer zu den Einern.",
-    "bild": [ { "figur": "einhorn", "x": 12, "aktion": "schau" }, { "perlen": ["10", "10"], "x": 61 } ] }
+    "bild": [ { "figur": "ela", "x": 13, "haltung": "fragen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "10"], "x": 61 } ] }
 ] }

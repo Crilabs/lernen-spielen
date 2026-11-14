@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 300" data-zeichen="t" data-satz="sas">
+  <!-- Anstrich bis unter die Oberlinie, Winkel, Grundstrich, Knoten links, Querstrich als Ausgang (E-S1, bitte prüfen) (QUELLEN.md §3) -->
+  <path data-strich="1" d="M 0 200 C 12 200 22 110 28 45 L 25 182 C 24 194 16 198 12 190 C 9 182 14 160 26 156 C 44 150 60 124 70 104" fill="none"/>
+</svg>
