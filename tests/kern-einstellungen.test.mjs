@@ -61,3 +61,16 @@ test("ladeEinstellungen ist idempotent: zweiter Aufruf überschreibt nichts", as
   assert.equal(E.einstellung("ton.x", true), false);
   await S.sofortSpeichern();
 });
+
+test("geschichten: Standard sanft, am Profil, unbekannte Werte zählen als sanft", async () => {
+  const { S, E } = await frisch();
+  await E.ladeEinstellungen();
+  assert.equal(E.geschichtenStufe(), "sanft");
+  E.setzeEinstellung("geschichten", "ruhig");
+  assert.equal(E.geschichtenStufe(), "ruhig");
+  await S.sofortSpeichern();
+  assert.equal(JSON.parse(speicher.get("lernstand-kind-1-einstellungen")).geschichten, "ruhig");
+  E.setzeEinstellung("geschichten", "gruselig");
+  assert.equal(E.geschichtenStufe(), "sanft");
+  assert.deepEqual([...E.GESCHICHTEN], ["ruhig", "sanft", "abenteuer"]);
+});

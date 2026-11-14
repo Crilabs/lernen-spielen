@@ -2,111 +2,173 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Für Erwachsene</title>
-<link rel="stylesheet" href="schrift/schrift.css">
+<link rel="stylesheet" href="rahmen/seite.css">
 <style>
-:root{
-  --himmel:#CDEFFF; --tinte:#3B2A6B; --tinte-weich:#6B5C96; --papier:#FFFFFF; --rand:#E3E8F0; --schatten:#D5DCE8; --fehler:#B3315A;
-  font-size:calc(100vh / 108);
+/* Elternbereich hinter der PIN: nur, was das Kind nicht darf (Spec docs/superpowers/specs/2026-11-14-ansichten-design.md,
+   „Für Erwachsene“). Eine ruhige Arbeitsseite für Erwachsene, kein Kinderstil: Nebel als Grund, Papier als Fläche,
+   Tinte für Schrift, Linie zum Trennen; alles flach (6.4: Schatten heißt drückbar, das tragen nur die Knöpfe).
+   Beere nur für Löschen und Achtung. Die Fachkachel der Kopfleiste steht vor jedem Fach im Lernstand, damit die
+   Erwachsenen dieselben Fächer wiedererkennen, die das Kind sieht. Texte sind Elternsprache und werden nicht
+   vorgelesen (alle Knöpfe stumm, kein sprich). Zeilen höchstens 70 Zeichen. */
+body { -webkit-user-select: none; user-select: none; }
+.auswahl { -webkit-user-select: text; user-select: text; }
+[hidden] { display: none !important; }
+h1, h2, h3, h4, p, ul, ol, dl { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; text-underline-offset: 0.35em; text-decoration-thickness: 0.12em; }
+:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.4rem; border-radius: var(--ls-radius-klein); }
+
+/* --- PIN ---------------------------------------------------------------------------------------- */
+#pin { position: fixed; inset: 0; }
+#pin .zurueck { position: absolute; top: 3rem; left: 3.5rem; }
+.pin-box {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 3rem;
 }
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden}
-body{font-family:"Andika",sans-serif;color:var(--tinte);background:#F4F7FB;user-select:none}
-h1,h2,h3{font-family:"Andika",sans-serif;font-weight:700;line-height:1}
-button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
-a{color:inherit;text-decoration:none}
-button:focus-visible,a:focus-visible{outline:.4rem solid var(--tinte);outline-offset:.4rem;border-radius:1rem}
-img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
-.auswahl{user-select:text;-webkit-user-select:text}
-[hidden]{display:none!important}
+.pin-box h1 { font-size: 4.8rem; line-height: 1.1; }
+#pin-text { font-size: 2.6rem; color: var(--ls-tinte-weich); margin-top: -1.6rem; min-height: 3.4rem; }
+#pin-text.fehler { color: var(--ls-beere); }
+.punkte { display: flex; gap: 2rem; }
+.punkte i { width: 2.8rem; height: 2.8rem; border-radius: 50%; border: var(--ls-kontur) solid var(--ls-tinte); }
+.punkte i.voll { background: var(--ls-tinte); }
+.ziffern { display: grid; grid-template-columns: repeat(3, auto); gap: 2rem 2.4rem; }
+.hilfe { font-size: 2rem; color: var(--ls-tinte-weich); max-width: 70ch; text-align: center; line-height: 1.45; }
 
-/* PIN */
-#pin{position:fixed;inset:0}
-.pin-box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3rem}
-.pin-box h2{font-size:4.2rem}
-#pin-text{font-size:2.4rem;color:var(--tinte-weich);margin-top:-1.6rem;min-height:3rem}
-#pin-text.fehler{color:var(--fehler);font-weight:400}
-.punkte{display:flex;gap:2rem}
-.punkte i{width:2.6rem;height:2.6rem;border-radius:50%;border:.35rem solid var(--tinte)}
-.punkte i.voll{background:var(--tinte)}
-.ziffern{display:grid;grid-template-columns:repeat(3,10rem);gap:2rem}
-.ziffern button{height:10rem;border-radius:3rem;background:#fff;font:400 4.4rem/1 "Andika",sans-serif;box-shadow:0 .6rem 0 var(--schatten)}
-.ziffern button:active{transform:translateY(.4rem);box-shadow:0 .2rem 0 var(--schatten)}
-.ziffern button.leise{background:none;box-shadow:none;font:400 2.4rem/1 "Andika";color:var(--tinte-weich)}
-.zurueck{position:absolute;top:3rem;left:3.5rem;height:7rem;padding:0 2.6rem 0 2rem;border-radius:99rem;background:#fff;
-  display:flex;align-items:center;gap:1rem;font:400 2.4rem/1 "Andika";box-shadow:0 .5rem 0 var(--schatten)}
-.hilfe{font-size:1.8rem;color:var(--tinte-weich);max-width:80rem;text-align:center;line-height:1.4}
-.sym{width:4rem;height:4rem;flex:none}
+/* --- Bereich: Navigation links, Inhalt rechts ---------------------------------------------------- */
+#bereich { position: fixed; inset: 0; display: grid; grid-template-columns: 53rem 1fr; }
+.el-nav {
+  --ls-breite: 44rem;
+  background: var(--ls-papier);
+  border-right: var(--ls-kontur) solid var(--ls-linie);
+  padding: 3.6rem 0 3.6rem 4rem;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1.8rem;
+  overflow-y: auto;
+}
+.el-nav h1 { font-size: 3.6rem; line-height: 1.1; margin: 0.6rem 0 2.4rem 0.4rem; }
+.el-nav .unten { margin-top: auto; }
 
-/* Bereich */
-#bereich{position:fixed;inset:0;display:grid;grid-template-columns:40rem 1fr}
-.el-nav{background:#fff;padding:3rem 2.4rem;display:flex;flex-direction:column;gap:.8rem;border-right:.2rem solid var(--rand)}
-.el-nav h1{font-size:3.2rem;margin:1rem 1.4rem 3rem}
-.el-nav button{display:flex;align-items:center;gap:1.4rem;text-align:left;font-size:2.4rem;font-weight:400;padding:1.8rem 1.6rem;border-radius:1.8rem;min-height:7rem}
-.el-nav button.an{background:var(--himmel)}
-.el-nav .unten{margin-top:auto;display:flex;flex-direction:column;gap:.8rem}
-.el-inhalt{padding:5rem 6rem;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-content:start}
-.el-inhalt>h2{grid-column:1/-1;font-size:4rem}
-.karte{background:#fff;border-radius:2.4rem;padding:3rem;box-shadow:0 .4rem 0 var(--rand)}
-.karte.neu{box-shadow:0 .4rem 0 #BFE3F7;border:.3rem solid var(--himmel)}
-.karte h3{font-size:2.8rem;margin-bottom:1.6rem}
-.karte p{font-size:2.2rem;line-height:1.45;color:var(--tinte-weich)}
-.karte .gross{font:700 5rem/1 "Andika",sans-serif;color:var(--tinte);margin:.4rem 0 1.4rem}
-.knopf{display:inline-flex;align-items:center;gap:1rem;margin-top:2.4rem;height:7rem;padding:0 3rem;border-radius:99rem;background:var(--tinte);color:#fff;font:400 2.4rem/1 "Andika"}
-.knopf.hell{background:var(--himmel);color:var(--tinte)}
-.knopf[disabled]{opacity:.5;cursor:default}
-.breit{grid-column:1/-1}
-.balken{height:1.6rem;border-radius:99rem;background:var(--himmel);margin-top:2.4rem;overflow:hidden}
-.balken i{display:block;height:100%;width:0;background:var(--tinte);transition:width .2s}
-.zeilen{list-style:none;display:flex;flex-direction:column;gap:1.8rem}
-.karte .zeilen+p{margin-top:2rem}
-.zeilen li{display:grid;grid-template-columns:4rem 1fr 22rem;align-items:center;gap:1.4rem;font-size:2.2rem;font-weight:400}
-.zeilen .weg{height:1.4rem;border-radius:99rem;background:var(--himmel);margin-top:.6rem}
-.zeilen .weg i{display:block;height:100%;border-radius:99rem;background:var(--tinte)}
-.zeilen small{font-weight:400;color:var(--tinte-weich);text-align:right;font-size:2rem}
-.zeilen a{text-decoration:underline;text-underline-offset:.4rem}
-.liste{list-style:none;display:flex;flex-direction:column;gap:1rem;font-size:2rem;line-height:1.35;color:var(--tinte-weich)}
-.liste li{word-break:break-word}
-.stimmwahl li{display:flex;align-items:center;justify-content:space-between;gap:2rem}
-.stimmwahl li.an{color:var(--tinte);font-weight:700}
-.stimmwahl .knopf{margin-top:0;height:5.6rem;flex:none}
-.stimmwahl+p{margin-top:2rem}
-.protokoll{max-height:62rem;overflow:auto}
-.notiz{white-space:pre-wrap}
-/* Lernstand: Themen */
-.karte .dran{margin-top:1.6rem}
-.karte .dran b{font-size:2.4rem}
-.karte .dran p{margin-top:.4rem}
-.themen{list-style:none;display:flex;flex-direction:column;gap:1rem}
-.thema details{border-radius:1.6rem;background:#F8FAFD}
-.thema summary{list-style:none;cursor:pointer;padding:1.4rem 2rem;min-height:7rem;display:flex;flex-direction:column;justify-content:center;gap:.6rem}
-.thema summary::-webkit-details-marker{display:none}
-.thema .kopf{display:flex;align-items:center;gap:1.6rem}
-.thema .name{flex:1;font-size:2.3rem}
-.thema.z-verborgen .name{color:var(--tinte-weich)}
-.chips{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:flex-end}
-.chip{font-size:1.8rem;padding:.6rem 1.4rem;border-radius:99rem;background:#fff;border:.2rem solid var(--rand);white-space:nowrap}
-.z-kann-ich .chip.z{background:#D8F6EA;border-color:#9BDEC4}
-.z-dran .chip.z{background:var(--himmel);border-color:#9FD8F3;font-weight:700}
-.z-verborgen .chip.z{color:var(--tinte-weich)}
-.chip.luecke{background:#FFF3D1;border-color:#F2D38A}
-.thema .wackelig{font-size:2rem;color:var(--fehler);display:flex;flex-wrap:wrap;column-gap:3rem;row-gap:.4rem}
-.thema .wackelig span{white-space:nowrap}
-.thema .innen{padding:0 2rem 2rem}
-.thema .innen p{font-size:2rem}
-.thema .innen p.leise{margin-top:1rem;font-style:italic}
-.knoepfe{display:flex;flex-wrap:wrap;gap:1.4rem}
-.knoepfe .knopf{margin-top:1.6rem}
-.knopf.sicher{background:var(--fehler);color:#fff}
+.el-inhalt { overflow-y: auto; padding: 5.6rem 7rem 10rem; font-size: 2.6rem; line-height: 1.5; }
+.spalte { max-width: 128rem; display: flex; flex-direction: column; gap: 4rem; }
+.el-inhalt h2 { font-size: 5.2rem; line-height: 1.1; }
+.el-inhalt h3 { font-size: 3.4rem; line-height: 1.2; }
+.el-inhalt h4 { font-size: 2.6rem; line-height: 1.3; }
+.text { max-width: 70ch; }
+.vorspann { max-width: 70ch; color: var(--ls-tinte-weich); margin-top: -2.4rem; }
+.leise { color: var(--ls-tinte-weich); }
+.klein { font-size: 2.1rem; line-height: 1.4; }
+.status { min-height: 1.5em; }
+
+/* Fläche: Papier mit feiner Linie, flach. */
+.flaeche {
+  background: var(--ls-papier);
+  border: var(--ls-kontur) solid var(--ls-linie);
+  border-radius: var(--ls-radius);
+  padding: 3.6rem 4rem;
+  display: flex; flex-direction: column; gap: 2rem;
+}
+.flaeche > p, .flaeche > ul, .flaeche > ol { max-width: 70ch; }
+.knoepfe { display: flex; flex-wrap: wrap; gap: 2rem 2.4rem; margin-top: 0.8rem; }
+.spalten { display: flex; flex-direction: column; gap: 1.6rem; }
+
+/* Eingriff, der etwas wegnimmt: Kontur und Wort in Beere; beim „Wirklich?“ gefüllt. */
+ls-knopf.beere { --ls-tinte: var(--ls-beere); }
+ls-knopf.aus { opacity: 0.45; pointer-events: none; }
+
+/* --- Lernstand ------------------------------------------------------------------------------------ */
+.fach-kopf { display: flex; align-items: center; gap: 2.4rem; }
+.fach-kopf .zuletzt { margin-left: auto; text-align: right; }
+.fachkachel {
+  flex: none; width: 9rem; height: 9rem; padding: 1.5rem;
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
+  background: var(--fach-fuellung, var(--ls-papier));
+}
+.fachkachel i {
+  display: block; width: 100%; height: 100%; background: var(--ls-tinte);
+  -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat;
+}
+.fachkachel.ohne i { display: none; }
+.fach-kopf h3 { color: var(--fach-tief, var(--ls-tinte)); }
+.stand { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.stand h4 { margin-bottom: 1.2rem; }
+.stand ul { display: flex; flex-direction: column; gap: 1.4rem; }
+.stand li { display: flex; flex-direction: column; }
+.dran-zeile { border-left: 0.6rem solid var(--fach-fuellung, var(--ls-linie)); padding-left: 2rem; }
+.dran-zeile .name { font-weight: 700; }
+.dran-zeile .oefter { margin-top: 0.4rem; }
+.flaeche > .spiele-links { max-width: none; border-top: var(--ls-kontur) solid var(--ls-linie); padding-top: 2rem; }
+
+/* Zum Aufklappen: eine zusammengeklappte Liste je Fach, jede Zeile klappt die Eingriffe auf. */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+.aufklapp > summary {
+  display: flex; align-items: center; gap: 1.6rem; min-height: 8rem;
+  font-weight: 700; border-top: var(--ls-kontur) solid var(--ls-linie); padding-top: 1.6rem;
+}
+.aufklapp > summary::before, .thema > summary::before {
+  content: ""; flex: none; width: 1.4rem; height: 1.4rem;
+  border-right: 0.35rem solid var(--ls-tinte); border-bottom: 0.35rem solid var(--ls-tinte);
+  transform: rotate(-45deg); margin: 0 0.6rem 0 0.2rem;
+}
+.aufklapp[open] > summary::before, .thema[open] > summary::before { transform: rotate(45deg); }
+.aufklapp > summary .anzahl { font-weight: 400; color: var(--ls-tinte-weich); }
+.klasse-titel { margin: 2.4rem 0 0.8rem; color: var(--ls-tinte-weich); font-weight: 700; font-size: 2.2rem; }
+.themen { display: flex; flex-direction: column; gap: 0.8rem; }
+.thema { border-radius: var(--ls-radius-klein); background: var(--ls-nebel); }
+.thema > summary { display: flex; align-items: center; gap: 1.6rem; min-height: 8rem; padding: 1.2rem 2.4rem; }
+.thema .name { flex: 1; }
+.thema .wort {
+  flex: none; font-size: 2.1rem; padding: 0.4rem 1.6rem; border-radius: 99rem;
+  border: var(--ls-kontur) solid var(--ls-linie); background: var(--ls-papier); white-space: nowrap;
+}
+.thema.z-kann-ich .wort { border-color: var(--ls-tinte); }
+.thema.z-dran .wort { border-color: var(--ls-tinte); background: var(--fach-toenung, var(--ls-papier)); }
+.thema.z-verborgen .name, .thema.z-verborgen .wort { color: var(--ls-tinte-weich); }
+.thema .innen { padding: 0 2.4rem 2.4rem 5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+
+/* --- Geschichten ---------------------------------------------------------------------------------- */
+/* Drei Stufen untereinander, von ruhig nach aufregend; rechts Wählen oder „Eingestellt“. Die gewählte Stufe trägt
+   den Sonnenring (Sonne = ausgewählt, Farbwelt 6.2). */
+.stufen { display: flex; flex-direction: column; gap: 3rem; }
+.stufe { display: grid; grid-template-columns: minmax(0, 1fr) 26rem; align-items: center; gap: 2rem 4rem; }
+.stufe .beispiel { font-style: italic; }
+.stufe .wahl { justify-self: end; }
+.stufe .gewaehlt { font-weight: 700; min-height: 11rem; display: flex; align-items: center; }
+.stufe.markiert { border-color: var(--ls-tinte); }
+
+/* --- Gerät ---------------------------------------------------------------------------------------- */
+.version { font-size: 4.4rem; font-weight: 700; line-height: 1.1; }
+.notiz { white-space: pre-wrap; }
+.laden { height: 1.6rem; border-radius: 99rem; background: var(--ls-linie); overflow: hidden; max-width: 70ch; }
+.laden i { display: block; height: 100%; width: 0; background: var(--ls-tinte); }
+
+/* --- Hinweise ------------------------------------------------------------------------------------- */
+.botschaften { list-style: decimal; padding-left: 1.4em; display: flex; flex-direction: column; gap: 0.4rem; }
+.punkte-liste { list-style: disc; padding-left: 1.2em; display: flex; flex-direction: column; gap: 0.6rem; }
+.nummern { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem 3rem; max-width: 70ch; }
+.nummern dt { font-weight: 700; white-space: nowrap; }
+.nummern dd { margin: 0; }
+.luecken-fach .bereich { max-width: 70ch; margin-bottom: 0.8rem; }
+
+/* --- Sicherheit ----------------------------------------------------------------------------------- */
+.flaeche > .protokoll { max-width: none; }
+.protokoll { max-height: 60rem; overflow-y: auto; font-size: 2.1rem; display: flex; flex-direction: column; gap: 0.8rem; }
+.protokoll li { word-break: break-word; border-bottom: 0.2rem solid var(--ls-linie); padding-bottom: 0.8rem; }
+
+/* Schmal (hochkant): Spalten untereinander. */
+@media (max-aspect-ratio: 4/3) {
+  .stand, .stufe { grid-template-columns: 1fr; }
+  .stufe .wahl { justify-self: start; }
+}
 </style>
 </head>
 <body>
 
 <section id="pin" aria-label="PIN" hidden>
-  <a class="zurueck" href="index.html"><span class="sym"><img src="symbole/haus.svg" alt=""></span>Zurück</a>
+  <ls-knopf class="zurueck" id="pin-zurueck" symbol="haus.svg" wort="Zurück" stumm></ls-knopf>
   <div class="pin-box">
-    <h2 id="pin-titel">Für Erwachsene</h2>
+    <h1 id="pin-titel">Für Erwachsene</h1>
     <p id="pin-text" role="status">Bitte die PIN eingeben</p>
     <div class="punkte" id="punkte" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="ziffern" id="ziffern"></div>
@@ -115,34 +177,48 @@ img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 </section>
 
 <section id="bereich" aria-label="Elternbereich" hidden>
-  <nav class="el-nav">
+  <nav class="el-nav" aria-label="Bereiche">
     <h1>Für Erwachsene</h1>
-    <button data-tab="updates" id="tab-updates" hidden><span class="sym"><img src="symbole/update.svg" alt=""></span>Updates</button>
-    <button data-tab="lernstand"><span class="sym"><img src="symbole/lernstand.svg" alt=""></span>Lernstand</button>
-    <button data-tab="stimme"><span class="sym"><img src="symbole/stimme.svg" alt=""></span>Stimme und Ton</button>
-    <button data-tab="protokoll"><span class="sym"><img src="symbole/protokoll.svg" alt=""></span>Protokoll</button>
-    <button data-tab="pin"><span class="sym"><img src="symbole/schloss.svg" alt=""></span>PIN ändern</button>
-    <div class="unten">
-      <button id="zurueck-spiele"><span class="sym"><img src="symbole/haus.svg" alt=""></span>Zurück zu den Spielen</button>
-      <button id="beenden" hidden><span class="sym"><img src="symbole/beenden.svg" alt=""></span>App beenden</button>
-    </div>
+    <ls-knopf data-tab="lernstand" symbol="lernstand.svg" wort="Lernstand" stumm></ls-knopf>
+    <ls-knopf data-tab="geschichten" symbol="buch.svg" wort="Geschichten" stumm></ls-knopf>
+    <ls-knopf data-tab="geraet" symbol="update.svg" wort="Gerät" stumm></ls-knopf>
+    <ls-knopf data-tab="hinweise" symbol="hilfe.svg" wort="Hinweise" stumm></ls-knopf>
+    <ls-knopf data-tab="sicherheit" symbol="schloss.svg" wort="Sicherheit" stumm></ls-knopf>
+    <ls-knopf class="unten" id="zurueck-spiele" symbol="haus.svg" wort="Zu den Spielen" stumm></ls-knopf>
   </nav>
-  <div class="el-inhalt auswahl" id="inhalt"></div>
+  <main class="el-inhalt auswahl" id="inhalt"></main>
 </section>
 
 <script type="module">
 import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen } from "./lernspiel.js";
 import { pinHash, pinPruefen, pruefeUpdate } from "./eltern.js";
 import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/geraet.js";
-import { sprich, stimmen, setzeStimme, stimmWahl } from "./kern/stimme.js";
-import { wertVon } from "./fortschritt/laden.js";
-import { elternThemen, markiereGekonnt, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand }
+import { ladeEinstellungen, setzeEinstellung, geschichtenStufe } from "./kern/einstellungen.js";
+import { elternThemen, markiereGekonnt, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, gekonnteThemen, luecken }
   from "./lernsteuerung.js";
+import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
+import "./rahmen/knopf.js";
 
 sperreTouch();
 const kann = await faehigkeiten();
-const $ = id => document.getElementById(id);
-const el = (tag, text, klasse) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (klasse) e.className = klasse; return e; };
+const $ = (id) => document.getElementById(id);
+const el = (tag, text, klasse) => {
+  const e = document.createElement(tag);
+  if (text != null) e.textContent = text;
+  if (klasse) e.className = klasse;
+  return e;
+};
+// Knopf aus dem Rahmen; im Elternbereich immer stumm (Elternsprache wird nicht vorgelesen).
+const knopf = (wort, { symbol, art, klasse } = {}) => {
+  const k = document.createElement("ls-knopf");
+  k.setAttribute("wort", wort);
+  k.setAttribute("stumm", "");
+  if (symbol) k.setAttribute("symbol", symbol);
+  if (art) k.setAttribute("art", art);
+  if (klasse) k.className = klasse;
+  return k;
+};
+const reihe = (...kinder) => { const r = el("div", null, "knoepfe"); r.append(...kinder); return r; };
 
 // ---------- PIN ----------
 let daten = await lade("eltern", {});
@@ -150,12 +226,17 @@ const LAENGE = 4;
 let eingabe = "", modus, erste = "";   // modus: pruefen | neu | bestaetigen
 
 const ziffern = $("ziffern");
-for (const z of ["1","2","3","4","5","6","7","8","9","Neu","0","Löschen"]) {
-  const b = el("button", z, /\d/.test(z) ? "" : "leise");
-  b.type = "button";
+for (const z of ["1", "2", "3", "4", "5", "6", "7", "8", "9", "Neu", "0", "Löschen"]) {
+  const b = knopf(z);
   b.addEventListener("click", () => taste(z));
   ziffern.appendChild(b);
 }
+// Mit Tastatur: Ziffern und Rücktaste
+document.addEventListener("keydown", (e) => {
+  if ($("pin").hidden || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (/^\d$/.test(e.key)) { e.preventDefault(); taste(e.key); }
+  else if (e.key === "Backspace") { e.preventDefault(); taste("Löschen"); }
+});
 function zeichnePunkte() {
   [...$("punkte").children].forEach((p, i) => p.classList.toggle("voll", i < eingabe.length));
 }
@@ -167,7 +248,7 @@ function pinAnsicht(m) {
   $("bereich").hidden = true; $("pin").hidden = false;
   $("pin-hilfe").hidden = m !== "pruefen" || !kann.kiosk;
   $("pin-titel").textContent = m === "pruefen" ? "Für Erwachsene" : "Neue PIN festlegen";
-  meldung(m === "pruefen" ? "Bitte die PIN eingeben" : "Wähle eine PIN mit vier Ziffern");
+  meldung(m === "pruefen" ? "Bitte die PIN eingeben" : "Eine PIN mit vier Ziffern wählen");
 }
 async function taste(z) {
   if (z === "Neu") eingabe = "";
@@ -180,7 +261,7 @@ async function taste(z) {
     if (await pinPruefen(pin, daten.pinHash)) { zeigeBereich(); }
     else { eingabe = ""; zeichnePunkte(); meldung("Das war nicht richtig. Bitte nochmal.", true); }
   } else if (modus === "neu") {
-    erste = pin; eingabe = ""; modus = "bestaetigen"; zeichnePunkte(); meldung("Gib die PIN zur Sicherheit noch einmal ein");
+    erste = pin; eingabe = ""; modus = "bestaetigen"; zeichnePunkte(); meldung("Die PIN zur Sicherheit noch einmal eingeben");
   } else if (pin === erste) {
     daten.pinHash = await pinHash(pin);
     speichere("eltern", daten); await sofortSpeichern();
@@ -189,24 +270,17 @@ async function taste(z) {
     eingabe = ""; erste = ""; modus = "neu"; zeichnePunkte(); meldung("Die beiden PINs waren verschieden. Bitte von vorn.", true);
   }
 }
+const zuDenSpielen = async () => { await sofortSpeichern(); location.href = "index.html"; };
+$("pin-zurueck").addEventListener("click", zuDenSpielen);
 
 // ---------- Bereich ----------
 let tab = "lernstand";
 function zeigeBereich(hinweis) {
   $("pin").hidden = true; $("bereich").hidden = false;
-  waehle(kann.update ? "updates" : "lernstand", hinweis);
+  waehle(hinweis === "pin-ok" ? "sicherheit" : "lernstand", hinweis);
 }
-$("tab-updates").hidden = !kann.update;
-$("beenden").hidden = !kann.beenden;
-document.querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => {
-  if (b.dataset.tab === "pin") pinAnsicht("neu"); else waehle(b.dataset.tab);
-}));
-$("zurueck-spiele").addEventListener("click", async () => { await sofortSpeichern(); location.href = "index.html"; });
-$("beenden").addEventListener("click", async () => {
-  await sofortSpeichern();
-  await kioskPause(true);
-  if (!(await beende())) { await kioskPause(false); location.href = "index.html"; }
-});
+document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => waehle(b.dataset.tab)));
+$("zurueck-spiele").addEventListener("click", zuDenSpielen);
 
 // Nach 5 Minuten ohne Eingabe zurück zu den Spielen (Elternbereich nicht offen liegen lassen).
 const RUHE_MS = 5 * 60 * 1000;
@@ -216,63 +290,380 @@ function ruheNeu() {
   clearTimeout(ruheTimer);
   ruheTimer = setTimeout(async () => {
     if (installiertGerade) { ruheNeu(); return; }
-    await sofortSpeichern(); location.href = "index.html";
+    await zuDenSpielen();
   }, RUHE_MS);
 }
 for (const typ of ["pointerdown", "keydown"]) document.addEventListener(typ, ruheNeu, true);
 ruheNeu();
 
+const ANSICHTEN = { lernstand, geschichten, geraet, hinweise, sicherheit };
 function waehle(name, hinweis) {
   tab = name;
-  document.querySelectorAll("[data-tab]").forEach(b => b.classList.toggle("an", b.dataset.tab === name));
-  const inh = $("inhalt"); inh.replaceChildren();
-  if (hinweis === "pin-ok" && name !== "updates") {
-    const ok = el("p", "Die neue PIN ist gespeichert."); ok.setAttribute("role", "status"); inh.appendChild(ok);
-  }
-  ({ updates, lernstand, stimme, protokollAnsicht })[name === "protokoll" ? "protokollAnsicht" : name](inh, hinweis);
+  document.querySelectorAll("[data-tab]").forEach((b) => {
+    if (b.dataset.tab === name) { b.setAttribute("art", "haupt"); b.setAttribute("aria-current", "page"); }
+    else { b.removeAttribute("art"); b.removeAttribute("aria-current"); }
+  });
+  const inh = $("inhalt");
+  inh.replaceChildren();
+  inh.scrollTop = 0;
+  const spalte = el("div", null, "spalte");
+  inh.appendChild(spalte);
+  ANSICHTEN[name](spalte, hinweis);
 }
 
-// -- Updates --
-function updates(inh, hinweis) {
-  inh.appendChild(el("h2", "Updates"));
-  const karte = el("div", null, "karte");
-  karte.appendChild(el("h3", "Installiert"));
-  const ver = el("div", "Version …", "gross"); karte.appendChild(ver);
-  appVersion().then(v => { if (tab === "updates") ver.textContent = v ? "Version " + v : "Version unbekannt"; })
-    .catch(() => { ver.textContent = "Version unbekannt"; });
-  const status = el("p", hinweis === "pin-ok" ? "Die neue PIN ist gespeichert." : "Hier kannst du nach einer neuen Version suchen.");
+// ---------- Hilfen ----------
+const MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+const heuteTag = () => new Date().toLocaleDateString("sv");
+// "2026-11-13" → "13. November" (heute und gestern als Wort, anderes Jahr mit Jahreszahl); leer bleibt leer
+function datum(tag) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(tag || "");
+  if (!m) return "";
+  const heute = heuteTag();
+  const gestern = new Date(Date.now() - 864e5).toLocaleDateString("sv");
+  if (tag === heute) return "heute";
+  if (tag === gestern) return "gestern";
+  const jahr = m[1] !== heute.slice(0, 4) ? " " + m[1] : "";
+  return `${Number(m[3])}. ${MONATE[Number(m[2]) - 1]}${jahr}`;
+}
+const amDatum = (tag) => { const d = datum(tag); return d === "heute" || d === "gestern" ? d : "am " + d; };
+const seitDatum = (tag) => "seit " + datum(tag);
+
+let lernCtx = null;
+async function ladeCtx() {
+  if (!lernCtx) {
+    const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map((f) => fetch(f).then((r) => r.json())));
+    lernCtx = { plan, spiele };
+  }
+  return lernCtx;
+}
+const fachName = (ctx, strang) => (ctx.spiele.kategorien || []).find((k) => k.id === strang)?.name || strang;
+// Fächer in der Reihenfolge von spiele.json, dann weitere aus dem Lernplan
+const faecher = (ctx) => {
+  const folge = (ctx.spiele.kategorien || []).map((k) => k.id);
+  for (const t of ctx.plan.themen || []) if (!folge.includes(t.strang)) folge.push(t.strang);
+  return folge;
+};
+// Neutraler Bezug zum Lehrplan, nur hier (grundsaetze 3.3)
+const planBezug = (t) => (t?.klasse ? `im Lehrplan Klasse ${t.klasse}` : "");
+
+function fachFarben(strang, ziel) {
+  const f = FACH[strang];
+  if (!f) return;
+  ziel.style.setProperty("--fach-fuellung", f.fuellung);
+  ziel.style.setProperty("--fach-tief", f.tief);
+  ziel.style.setProperty("--fach-toenung", f.toenung);
+}
+function fachKachel(strang) {
+  const k = el("span", null, "fachkachel");
+  k.setAttribute("aria-hidden", "true");
+  const i = el("i");
+  if (FACH_SYMBOLE.has(strang)) i.style.setProperty("--bild", bild(`symbole/${strang}.svg`));
+  else k.classList.add("ohne");
+  k.appendChild(i);
+  return k;
+}
+
+// Knopf mit Bestätigung auf der Seite: erster Tipp fragt „Wirklich?“, zweiter führt aus (kein confirm-Dialog im Kiosk).
+// wegnehmen (Zurücksetzen): in Beere.
+function eingriffKnopf(text, tun, { wegnehmen = false } = {}) {
+  const b = knopf(text, { klasse: wegnehmen ? "beere" : "" });
+  let timer = null;
+  b.addEventListener("click", () => {
+    if (b.classList.contains("aus")) return;
+    if (!timer) {
+      b.setAttribute("wort", "Wirklich? Nochmal tippen");
+      b.setAttribute("art", "haupt");
+      timer = setTimeout(() => { timer = null; b.setAttribute("wort", text); b.removeAttribute("art"); }, 4000);
+      return;
+    }
+    clearTimeout(timer); timer = null;
+    b.classList.add("aus");
+    tun();
+  });
+  return b;
+}
+
+// ---------- Lernstand ----------
+// Je Fach beschreibend, von Stärken aus (grundsaetze 3.3): was das Kind kann, was gerade dran ist, wann zuletzt
+// geübt. Der Lehrplan steht nur als leiser Bezug. Darunter, zugeklappt, die Themen einzeln mit den Eingriffen.
+// Keine Alltagsanregungen hier: die stehen ohne PIN an der Fach-Seite und im Regal („Mit echten Dingen“).
+const ZUSTAND = { "verborgen": "kommt später", "in-sicht": "kann als Nächstes kommen", "dran": "gerade dran", "kann-ich": "kann" };
+const STUFE = { material: "übt mit Material", vorstellung: "übt in der Vorstellung", kopf: "übt im Kopf" };
+const PROBE = "fängt an: eine kurze Probe zeigt, womit es beginnt";
+const offeneFaecher = new Set();
+let lernLauf = 0;
+
+async function lernstand(spalte, offen) {
+  const lauf = ++lernLauf;
+  spalte.append(el("h2", "Lernstand"),
+    el("p", "Was das Kind kann und woran es gerade ist, je Fach. Gemessen wird an der Sache, verglichen wird mit niemandem.", "vorspann"));
+  let ctx, stand;
+  try { ctx = await ladeCtx(); stand = await ladeLernstand(ctx, heuteTag()); }
+  catch (e) {
+    protokoll("Lernstand: " + e);
+    spalte.appendChild(el("p", "Der Lernplan konnte nicht geladen werden. Bitte den Bereich neu öffnen.", "flaeche"));
+    return;
+  }
+  if (tab !== "lernstand" || lauf !== lernLauf) return; // inzwischen anderer Bereich oder neu gezeichnet
+  const heute = heuteTag();
+  const planNach = new Map((ctx.plan.themen || []).map((t) => [t.id, t]));
+  const liste = elternThemen(ctx, stand, heute);
+  const gekonnt = gekonnteThemen(ctx, stand);
+  const spiele = ctx.spiele.spiele || [];
+
+  const eingriff = async (tun, id, strang) => {
+    tun();
+    speichere("lernplan", stand); await sofortSpeichern();
+    if (tab !== "lernstand") return;
+    const inh = $("inhalt"), oben = inh.scrollTop;
+    offeneFaecher.add(strang);
+    spalte.replaceChildren();
+    await lernstand(spalte, id);
+    inh.scrollTop = oben;
+  };
+
+  let gezeigt = 0;
+  for (const strang of faecher(ctx)) {
+    const themen = liste.find((s) => s.strang === strang)?.themen || [];
+    // Einzeln änderbar: Themen mit Spiel, dazu alles mit einem Stand (sonst ließe es sich nicht zurücksetzen)
+    const aenderbar = themen.filter((t) => t.luecke !== "ohne-spiel" || t.zustand === "dran" || t.zustand === "kann-ich" || t.frei);
+    const fachSpiele = spiele.filter((s) => s.kategorie === strang);
+    if (!aenderbar.length && !fachSpiele.length) continue;
+    gezeigt++;
+
+    const block = el("section", null, "flaeche fach");
+    block.setAttribute("aria-label", fachName(ctx, strang));
+    fachFarben(strang, block);
+
+    // Kopf: Fachkachel, Name, zuletzt geübt
+    const kopf = el("div", null, "fach-kopf");
+    kopf.append(fachKachel(strang), el("h3", fachName(ctx, strang)));
+    let zuletzt = null;
+    for (const t of themen) {
+      const e = stand.themen[t.id];
+      const u = e?.u || e?.seit || "";
+      if (u && (!zuletzt || u > zuletzt.u)) zuletzt = { u, name: t.name };
+    }
+    if (zuletzt) kopf.appendChild(el("p", `Zuletzt geübt ${amDatum(zuletzt.u)}: ${zuletzt.name}`, "zuletzt leise klein"));
+    block.appendChild(kopf);
+
+    // Kann | Gerade dran
+    const raster = el("div", null, "stand");
+    const kannSp = el("div");
+    kannSp.appendChild(el("h4", "Kann"));
+    const kannListe = gekonnt.filter((g) => g.strang === strang).reverse(); // neueste zuerst
+    if (kannListe.length) {
+      const ul = el("ul");
+      for (const g of kannListe) {
+        const li = el("li");
+        li.appendChild(el("span", g.name));
+        const neben = [g.seit ? seitDatum(g.seit) : "", planBezug(planNach.get(g.id))].filter(Boolean).join(", ");
+        if (neben) li.appendChild(el("span", neben, "leise klein"));
+        ul.appendChild(li);
+      }
+      kannSp.appendChild(ul);
+    } else kannSp.appendChild(el("p", "Hier steht, was das Kind sicher kann, sobald es so weit ist.", "leise"));
+    const dranSp = el("div");
+    dranSp.appendChild(el("h4", "Gerade dran"));
+    const dran = themen.filter((t) => t.zustand === "dran");
+    if (dran.length) {
+      const ul = el("ul");
+      for (const t of dran) {
+        const e = stand.themen[t.id];
+        const li = el("li", null, "dran-zeile");
+        li.append(el("span", t.name, "name"), el("span", STUFE[t.stufe] || PROBE));
+        const seit = e?.seit ? (t.geradeDran ? "neu " : "dran ") + seitDatum(e.seit) : "";
+        const neben = [seit, planBezug(planNach.get(t.id))].filter(Boolean).join(", ");
+        if (neben) li.appendChild(el("span", neben, "leise klein"));
+        if (t.wackelig.length) li.appendChild(el("span", "Kommt gerade öfter dran: " + t.wackelig.map(aufgabeLesbar).join(", "), "oefter klein"));
+        ul.appendChild(li);
+      }
+      dranSp.appendChild(ul);
+    } else dranSp.appendChild(el("p", "Im Moment ist kein Thema dran.", "leise"));
+    raster.append(kannSp, dranSp);
+    block.appendChild(raster);
+
+    // Themen einzeln, mit Eingriffen
+    if (aenderbar.length) {
+      const det = el("details", null, "aufklapp");
+      det.open = offeneFaecher.has(strang);
+      det.addEventListener("toggle", () => { if (det.open) offeneFaecher.add(strang); else offeneFaecher.delete(strang); });
+      const sum = el("summary");
+      sum.append(el("span", "Themen einzeln ansehen und ändern"), el("span", `(${aenderbar.length})`, "anzahl"));
+      det.appendChild(sum);
+      let klasse, ul = null;
+      for (const t of aenderbar) {
+        const p = planNach.get(t.id);
+        if (!ul || p?.klasse !== klasse) {
+          klasse = p?.klasse;
+          det.appendChild(el("p", klasse ? `Klasse ${klasse}` : "Ohne Klasse", "klasse-titel"));
+          ul = el("ul", null, "themen"); det.appendChild(ul);
+        }
+        ul.appendChild(themaZeile(t, p, stand, ctx, heute, offen, (tun) => eingriff(tun, t.id, strang)));
+      }
+      block.appendChild(det);
+    }
+
+    if (fachSpiele.length) {
+      const p = el("p", null, "spiele-links klein");
+      p.appendChild(document.createTextNode("Was die Spiele selbst zeigen: "));
+      fachSpiele.forEach((s, i) => {
+        if (i) p.appendChild(document.createTextNode(", "));
+        const a = el("a", s.titel || s.id); a.href = (s.datei || s.id + ".html") + "?eltern"; p.appendChild(a);
+      });
+      block.appendChild(p);
+    }
+    spalte.appendChild(block);
+  }
+  if (!gezeigt) {
+    spalte.appendChild(el("p", "Sobald es Spiele gibt und das Kind spielt, steht hier je Fach, was es kann und woran es gerade ist.", "flaeche"));
+  }
+}
+
+function themaZeile(t, p, stand, ctx, heute, offen, eingriff) {
+  const li = el("li");
+  const det = el("details", null, "thema z-" + t.zustand);
+  det.open = t.id === offen;
+  const sum = el("summary");
+  sum.append(el("span", t.name, "name"), el("span", ZUSTAND[t.zustand] || t.zustand, "wort"));
+  det.appendChild(sum);
+  const innen = el("div", null, "innen");
+  const bezug = [planBezug(p), p?.bereich].filter(Boolean).join(", ");
+  if (bezug) innen.appendChild(el("p", bezug, "leise klein"));
+  if (t.zustand === "dran") innen.appendChild(el("p", "Im Moment: " + (STUFE[t.stufe] || PROBE) + "."));
+  if (t.wackelig.length) innen.appendChild(el("p", "Kommt gerade öfter dran: " + t.wackelig.map(aufgabeLesbar).join(", ")));
+  if (t.frei && t.zustand !== "kann-ich") innen.appendChild(el("p", "Von Ihnen freigegeben.", "leise"));
+  if (t.luecke === "teilweise") innen.appendChild(el("p", "Die Spiele zeigen bisher nur einen Teil dieses Themas.", "leise"));
+  const mitSpiel = t.luecke !== "ohne-spiel";
+  if (!mitSpiel) innen.appendChild(el("p", "Für dieses Thema gibt es noch kein Spiel. Das Kind sieht es nicht.", "leise"));
+  const knoepfe = reihe();
+  if (mitSpiel && t.zustand !== "kann-ich")
+    knoepfe.appendChild(eingriffKnopf("Als gekonnt markieren", () => eingriff(() => markiereGekonnt(stand, t.id, heute, ctx))));
+  if (mitSpiel && t.zustand === "verborgen")
+    knoepfe.appendChild(eingriffKnopf("Freigeben", () => eingriff(() => gibFrei(stand, t.id))));
+  if (t.zustand === "dran" || t.zustand === "kann-ich" || t.frei)
+    knoepfe.appendChild(eingriffKnopf("Zurücksetzen", () => eingriff(() => setzeZurueck(ctx, stand, t.id)), { wegnehmen: true }));
+  if (knoepfe.children.length) innen.appendChild(knoepfe);
+  det.appendChild(innen);
+  li.appendChild(det);
+  return li;
+}
+
+// ---------- Geschichten ----------
+// Stufe je Profil (grundsaetze 9.3), Einstellung "geschichten", Standard sanft. Je Stufe ein Satz Vorschau.
+const STUFEN = [
+  { id: "ruhig", name: "Ruhig", fuer: "Für empfindsame Kinder, in jedem Alter.",
+    was: "Suchen, Helfen, Sortieren, Wetter. Keine Komplikation, kein Dunkel.",
+    beispiel: "Zum Beispiel: Zwei Kinder legen im Garten die Äpfel nach Größe in Kisten, und am Ende ist alles verstaut." },
+  { id: "sanft", name: "Sanft", fuer: "Vorschlag für 6 bis 8 Jahre. Der Standard.",
+    was: "Dazu eine kleine Komplikation, die sofort gelöst ist. Ab 8 auch ein kleiner Rückschlag ohne Schuld.",
+    beispiel: "Zum Beispiel: Der Schlüssel zum Gartenhaus ist weg, das Kind sieht ihn gleich im Gras, und alle gehen hinein." },
+  { id: "abenteuer", name: "Abenteuer", fuer: "Nur auf Wunsch, etwa 8 bis 10 Jahre.",
+    was: "Dazu milder Grusel mit komischer Auflösung und längere Bögen. Jede Runde endet in Ruhe.",
+    beispiel: "Zum Beispiel: Im Nebel am Teich raschelt es, es ist eine Eule, und auf dem Heimweg lachen alle darüber." },
+];
+
+async function geschichten(spalte) {
+  spalte.append(el("h2", "Geschichten"),
+    el("p", "Wie aufregend die Geschichten in den Spielen sein dürfen. Was ein Kind verträgt, hängt mehr vom Kind ab als vom Alter. Die Stufe stellen nur Sie um; überspringen kann das Kind jede Geschichte jederzeit.", "vorspann"));
+  try { await ladeEinstellungen(); } catch (e) { protokoll("Einstellungen: " + e); }
+  if (tab !== "geschichten") return;
+  const status = el("p", "", "status leise");
   status.setAttribute("role", "status");
-  karte.appendChild(status);
-  const suche = el("button", "Nach Updates suchen", "knopf hell"); suche.type = "button";
-  karte.appendChild(suche);
-  inh.appendChild(karte);
-  const neu = el("div", null, "karte neu"); neu.hidden = true; inh.appendChild(neu);
+  const raster = el("div", null, "stufen");
+  const zeichne = () => {
+    const jetzt = geschichtenStufe();
+    raster.replaceChildren(...STUFEN.map((s) => {
+      const an = s.id === jetzt;
+      const karte = el("section", null, "flaeche stufe" + (an ? " markiert" : ""));
+      karte.setAttribute("aria-label", s.name);
+      const oben = el("div", null, "spalten");
+      oben.append(el("h3", s.name), el("p", s.fuer, "leise klein"), el("p", s.was, "text"), el("p", s.beispiel, "beispiel leise text"));
+      karte.appendChild(oben);
+      if (an) karte.appendChild(el("p", "Eingestellt", "wahl gewaehlt"));
+      else {
+        const k = knopf("Wählen", { klasse: "wahl" });
+        k.addEventListener("click", async () => {
+          setzeEinstellung("geschichten", s.id);
+          await sofortSpeichern();
+          status.textContent = `Eingestellt: ${s.name}.`;
+          zeichne();
+        });
+        k.setAttribute("name", s.name + " wählen");
+        karte.appendChild(k);
+      }
+      return karte;
+    }));
+  };
+  zeichne();
+  spalte.append(raster, status);
+
+  const warn = el("section", null, "flaeche");
+  warn.append(el("h3", "Wann eine Stufe ruhiger?"),
+    el("p", "Wenn das Kind Geschichten oft überspringt, den Ton abschaltet, ein Spiel meidet oder abends noch darüber spricht: dann eine Stufe ruhiger stellen und in Ruhe darüber reden."));
+  spalte.appendChild(warn);
+}
+
+// ---------- Gerät ----------
+// Nur, was faehigkeiten erlaubt: Updates und Beenden gibt es in der installierten App.
+function geraet(spalte) {
+  spalte.appendChild(el("h2", "Gerät"));
+  const ver = el("section", null, "flaeche");
+  const v = el("p", "Version …", "version");
+  ver.append(el("h3", "Installiert"), v);
+  appVersion().then((x) => { v.textContent = x ? "Version " + x : "Version unbekannt"; })
+    .catch(() => { v.textContent = "Version unbekannt"; });
+  if (!kann.update && !kann.beenden) ver.appendChild(el("p", "Updates und Beenden gibt es nur in der installierten App.", "leise"));
+  spalte.appendChild(ver);
+  if (kann.update) updates(spalte);
+  if (kann.beenden) {
+    const b = el("section", null, "flaeche");
+    const k = knopf("App beenden", { symbol: "beenden.svg" });
+    k.addEventListener("click", async () => {
+      await sofortSpeichern();
+      await kioskPause(true);
+      if (!(await beende())) { await kioskPause(false); location.href = "index.html"; }
+    });
+    b.append(el("h3", "App beenden"), el("p", "Schließt die App auf diesem Gerät. Der Lernstand wird vorher gespeichert."), reihe(k));
+    spalte.appendChild(b);
+  }
+}
+
+function updates(spalte) {
+  const karte = el("section", null, "flaeche");
+  const status = el("p", "Hier lässt sich nach einer neuen Version suchen.", "status");
+  status.setAttribute("role", "status");
+  const suche = knopf("Nach Updates suchen", { symbol: "update.svg" });
+  const neu = el("div", null, "spalten"); neu.hidden = true;
+  karte.append(el("h3", "Updates"), status, reihe(suche), neu);
+  spalte.appendChild(karte);
 
   suche.addEventListener("click", async () => {
-    suche.disabled = true; neu.hidden = true; neu.replaceChildren();
-    status.textContent = "Ich suche …";
+    if (suche.classList.contains("aus")) return;
+    suche.classList.add("aus"); neu.hidden = true; neu.replaceChildren();
+    status.textContent = "Suche läuft …";
     const r = await pruefeUpdate();
-    suche.disabled = false;
-    if (tab !== "updates") return;
+    suche.classList.remove("aus");
+    if (tab !== "geraet") return;
     if (r.status === "aktuell") status.textContent = "Alles aktuell.";
-    else if (r.status === "offline") { status.textContent = "Kein Internet – bitte später nochmal."; protokoll("Update-Suche: offline oder Fehler"); }
+    else if (r.status === "offline") { status.textContent = "Kein Internet. Bitte später nochmal suchen."; protokoll("Update-Suche: offline oder Fehler"); }
     else if (r.status === "kein-app") status.textContent = "Updates gibt es nur in der installierten App.";
     else {
       status.textContent = "Version " + r.version + " ist verfügbar.";
       neu.hidden = false;
-      neu.appendChild(el("h3", "Neu verfügbar"));
-      neu.appendChild(el("div", "Version " + r.version, "gross"));
-      if (r.notiz) neu.appendChild(el("p", r.notiz, "notiz"));
-      const los = el("button", "Installieren und neu starten", "knopf"); los.type = "button";
-      const balken = el("div", null, "balken"); balken.hidden = true;
+      neu.appendChild(el("h4", "Neu in Version " + r.version));
+      if (r.notiz) neu.appendChild(el("p", r.notiz, "notiz text"));
+      const los = knopf("Installieren und neu starten", { art: "haupt" });
+      const balken = el("div", null, "laden"); balken.hidden = true;
       const fuell = el("i"); balken.appendChild(fuell);
-      neu.append(los, balken);
+      neu.append(reihe(los), balken);
       los.addEventListener("click", () => installieren(r.update, los, balken, fuell, status));
     }
   });
 }
 async function installieren(update, los, balken, fuell, status) {
-  los.disabled = true; balken.hidden = false; status.textContent = "Ich lade das Update …";
+  if (los.classList.contains("aus")) return;
+  los.classList.add("aus"); balken.hidden = false; status.textContent = "Das Update wird geladen …";
   installiertGerade = true;
   try {
     await sofortSpeichern();
@@ -280,7 +671,7 @@ async function installieren(update, los, balken, fuell, status) {
     let gesamt = 0, geladen = 0;
     let timer;
     const zeit = new Promise((_, nein) => { timer = setTimeout(() => nein(new Error("Zeitlimit beim Laden")), 10 * 60 * 1000 + 5000); });
-    await Promise.race([update.downloadAndInstall(ev => {
+    await Promise.race([update.downloadAndInstall((ev) => {
       if (ev.event === "Started") gesamt = ev.data?.contentLength ?? 0;
       else if (ev.event === "Progress") { geladen += ev.data?.chunkLength ?? 0; if (gesamt) fuell.style.width = Math.min(100, geladen / gesamt * 100) + "%"; }
       else if (ev.event === "Finished") fuell.style.width = "100%";
@@ -292,185 +683,120 @@ async function installieren(update, los, balken, fuell, status) {
     installiertGerade = false;
     await kioskPause(false);
     status.textContent = "Das Update hat nicht geklappt. Bitte später nochmal versuchen.";
-    los.disabled = false; balken.hidden = true;
+    los.classList.remove("aus"); balken.hidden = true;
   }
 }
 
-// -- Lernstand: Themen je Strang, Lücken, Eingriffe; darunter Spiele ohne Lernplan mit ihrem Balken --
-const ZUSTAND = { "verborgen": "verborgen", "in-sicht": "in Sicht", "dran": "dran", "kann-ich": "kann ich" };
-const STUFE = { material: "Stufe Material", vorstellung: "Stufe Vorstellung", kopf: "Stufe Kopf" };
-const LUECKE = { "ohne-spiel": "noch kein Spiel", "teilweise": "nur teilweise" };
-let lernCtx = null, lernLauf = 0;
-const heuteTag = () => new Date().toLocaleDateString("sv");
+// ---------- Hinweise ----------
+async function hinweise(spalte) {
+  spalte.appendChild(el("h2", "Hinweise"));
 
-async function ladeElternStand() {
-  if (!lernCtx) {
-    const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map(f => fetch(f).then(r => r.json())));
-    lernCtx = { plan, spiele };
-  }
-  // Alte Spielstände übernehmen wie in der Themen-Übersicht (gespeichert erst mit einem Eingriff oder Spiel)
-  return await ladeLernstand(lernCtx, heuteTag());
-}
-
-// Knopf mit Bestätigung auf der Seite: erster Tipp fragt „Wirklich?“, zweiter führt aus (kein confirm-Dialog im Kiosk)
-function eingriffKnopf(text, tun) {
-  const b = el("button", text, "knopf hell"); b.type = "button";
-  let timer = null;
-  b.addEventListener("click", () => {
-    if (!timer) {
-      b.textContent = "Wirklich? Nochmal tippen"; b.classList.add("sicher");
-      timer = setTimeout(() => { timer = null; b.textContent = text; b.classList.remove("sicher"); }, 4000);
-      return;
-    }
-    clearTimeout(timer); timer = null; b.disabled = true;
-    tun();
-  });
-  return b;
-}
-
-async function lernstand(inh, offen) {
-  const lauf = ++lernLauf;
-  inh.appendChild(el("h2", "Lernstand"));
-  let stand;
-  try { stand = await ladeElternStand(); }
-  catch (e) { protokoll("Lernstand: " + e); inh.appendChild(el("p", "Der Lernplan konnte nicht geladen werden.", "karte breit")); return; }
-  if (tab !== "lernstand" || lauf !== lernLauf) return; // inzwischen anderer Reiter oder neu gezeichnet
-  const ctx = lernCtx, heute = heuteTag();
-  const liste = elternThemen(ctx, stand, heute);
-  const kats = Object.fromEntries((ctx.spiele.kategorien || []).map(k => [k.id, k]));
-
-  const eingriff = async (tun, id) => {
-    tun();
-    speichere("lernplan", stand); await sofortSpeichern();
-    if (tab !== "lernstand") return;
-    const oben = inh.scrollTop;
-    inh.replaceChildren();
-    await lernstand(inh, id);
-    inh.scrollTop = oben;
-  };
-
-  // Gerade dran
-  const dran = liste.flatMap(s => s.themen).filter(t => t.geradeDran);
-  const k1 = el("div", null, "karte breit neu");
-  k1.appendChild(el("h3", "Gerade dran"));
-  if (!dran.length) k1.appendChild(el("p", "Im Moment ist kein Thema neu dran."));
-  for (const t of dran) {
-    const d = el("div", null, "dran");
-    d.append(el("b", t.name), el("p", t.hinweis || "Zu diesem Thema gibt es noch keinen Hinweis."));
-    k1.appendChild(d);
-  }
-  inh.appendChild(k1);
-
-  // Themen je Strang
-  for (const { strang, themen } of liste) {
-    const karte = el("div", null, "karte breit");
-    karte.appendChild(el("h3", kats[strang]?.name || strang));
-    const ul = el("ul", null, "themen");
-    for (const t of themen) {
-      const li = el("li", null, "thema z-" + t.zustand);
-      const det = el("details"); det.dataset.id = t.id; det.open = t.id === offen;
-      const sum = el("summary");
-      const kopf = el("div", null, "kopf");
-      kopf.appendChild(el("span", t.name, "name"));
-      const chips = el("span", null, "chips");
-      chips.appendChild(el("span", ZUSTAND[t.zustand] || t.zustand, "chip z"));
-      if (t.zustand === "dran") chips.appendChild(el("span", STUFE[t.stufe] || "Probe steht an", "chip"));
-      if (t.frei && t.zustand !== "kann-ich") chips.appendChild(el("span", "freigegeben", "chip"));
-      if (t.luecke) chips.appendChild(el("span", LUECKE[t.luecke], "chip luecke"));
-      kopf.appendChild(chips);
-      sum.appendChild(kopf);
-      if (t.wackelig.length) {
-        const w = el("p", "Wackelt noch:", "wackelig");
-        for (const key of t.wackelig) w.appendChild(el("span", aufgabeLesbar(key)));
-        sum.appendChild(w);
-      }
-      det.appendChild(sum);
-      const innen = el("div", null, "innen");
-      innen.appendChild(el("p", t.hinweis || "Zu diesem Thema gibt es noch keinen Hinweis."));
-      const knoepfe = el("div", null, "knoepfe");
-      const mitSpiel = t.luecke !== "ohne-spiel";
-      if (mitSpiel && t.zustand !== "kann-ich")
-        knoepfe.appendChild(eingriffKnopf("als gekonnt markieren", () => eingriff(() => markiereGekonnt(stand, t.id, heute, ctx), t.id)));
-      if (t.zustand === "dran" || t.zustand === "kann-ich" || t.frei)
-        knoepfe.appendChild(eingriffKnopf("zurücksetzen", () => eingriff(() => setzeZurueck(ctx, stand, t.id), t.id)));
-      if (mitSpiel && t.zustand === "verborgen")
-        knoepfe.appendChild(eingriffKnopf("freigeben", () => eingriff(() => gibFrei(stand, t.id), t.id)));
-      if (!mitSpiel) innen.appendChild(el("p", "Für dieses Thema gibt es noch kein Spiel. Das Kind sieht es nicht.", "leise"));
-      if (knoepfe.children.length) innen.appendChild(knoepfe);
-      det.appendChild(innen);
-      li.appendChild(det); ul.appendChild(li);
-    }
-    karte.appendChild(ul);
-    inh.appendChild(karte);
-  }
-
-  // Spiele: ohne Lernplan (ohne arten) mit ihrem bisherigen Balken, sonst nur der Link zur Elternansicht
-  const karte = el("div", null, "karte breit");
-  karte.appendChild(el("h3", "Spiele"));
-  const ul = el("ul", null, "zeilen"); karte.appendChild(ul);
-  inh.appendChild(karte);
-  for (const s of ctx.spiele.spiele || []) {
-    const li = el("li");
-    const ico = el("span", null, "sym"); const img = document.createElement("img"); img.src = s.symbol; img.alt = ""; ico.appendChild(img);
-    const mitte = el("div");
-    const link = el("a", s.titel); link.href = s.datei + "?eltern";
-    mitte.appendChild(link);
-    li.append(ico, mitte); ul.appendChild(li);
-    if (Array.isArray(s.arten)) { li.appendChild(el("small", "über die Themen")); continue; }
-    const weg = el("div", null, "weg"); const fuell = el("i"); fuell.style.width = "0"; weg.appendChild(fuell);
-    const klein = el("small", "…"); li.appendChild(klein);
-    wertVon(s).then(w => {
-      if (w === undefined) klein.textContent = "noch keine Auswertung";
-      else { klein.textContent = Math.round(w * 100) + " %"; fuell.style.width = w * 100 + "%"; mitte.appendChild(weg); }
-    });
-  }
-  karte.appendChild(el("p", "Tippe auf ein Spiel für die Elternansicht dieses Spiels."));
-}
-
-// -- Stimme und Ton --
-const PROBE = "Das Pony frisst Gras. Die Katze schläft auf dem Sofa.";
-let stimmZeichne = null;   // die gerade sichtbare Liste; ein einziger Zuhörer für alle Besuche des Tabs
-window.addEventListener("stimmen", () => { if (tab === "stimme") stimmZeichne?.(); });
-function stimme(inh) {
-  inh.appendChild(el("h2", "Stimme und Ton"));
-  const erzeugt = el("div", null, "karte breit");
-  erzeugt.append(el("h3", "Stimme der Spiele"),
+  // Stimme: Pflichthinweis (Azure-Vorgabe für Angebote für Kinder; docs/stimme.md §5). Bleibt, solange eine erzeugte Stimme spricht.
+  const stimme = el("section", null, "flaeche");
+  stimme.append(el("h3", "Die Stimme der Spiele"),
     el("p", "Die Spiele lesen mit einer computererzeugten Stimme vor (Microsoft Azure). Die Sätze wurden vorab erzeugt und liegen auf diesem Gerät; beim Spielen geht nichts ins Internet."));
-  inh.appendChild(erzeugt);
-  const karte = el("div", null, "karte breit");
-  karte.appendChild(el("h3", "Ersatzstimme auf diesem Gerät"));
-  const ul = el("ul", null, "liste stimmwahl");
-  karte.append(ul, el("p", "Spricht nur Sätze, für die es noch keine erzeugte Aufnahme gibt. Gilt für alle Spiele auf diesem Gerät. Weitere Stimmen: in Windows unter Einstellungen › Zeit und Sprache › Sprachausgabe eine deutsche Stimme hinzufügen, dann die App neu starten."));
-  inh.appendChild(karte);
-  const zeile = (titel, aktiv, schluessel) => {
-    const li = el("li", null, aktiv ? "an" : "");
-    const name = el("span", (aktiv ? "✓ " : "") + titel);
-    const b = el("button", aktiv ? "Probe" : "Wählen", "knopf hell"); b.type = "button";
-    b.addEventListener("click", () => { setzeStimme(schluessel); sprich(PROBE, { datei: false }); zeichne(); });
-    li.append(name, b);
-    return li;
-  };
-  const zeichne = () => {
-    const vs = stimmen();
-    const auto = stimmWahl() === "";
-    const system = !auto && !vs.some(v => v.gewaehlt);
-    ul.replaceChildren(zeile("Automatisch (beste Stimme)", auto, ""),
-      zeile("Standardstimme des Geräts", system, "system"),
-      ...vs.map(v => zeile(v.name, !auto && v.gewaehlt, v.schluessel)));
-  };
-  stimmZeichne = zeichne;
-  zeichne();
+  spalte.appendChild(stimme);
+
+  // Sicher und stark (grundsaetze 3.3); „Missbrauch“ steht nur hier, nie im Kindertext.
+  const schutz = el("section", null, "flaeche");
+  schutz.append(el("h3", "Sicher und stark"),
+    el("p", "Was das Kind über seinen Körper, seine Gefühle und Hilfe lernt, folgt diesen sieben Botschaften:"));
+  const bot = el("ol", null, "botschaften");
+  for (const b of ["Mein Körper gehört mir.", "Ich vertraue meinem Gefühl.", "Es gibt gute, schlechte und komische Berührungen.",
+    "Ich darf Nein sagen.", "Es gibt gute und schlechte Geheimnisse. Schlechte darf ich immer weitererzählen.",
+    "Ich hole mir Hilfe, so lange, bis mir jemand hilft.", "Ich bin nicht schuld."]) bot.appendChild(el("li", b));
+  schutz.appendChild(bot);
+  schutz.appendChild(el("p", "Ein Kind zu schützen ist Aufgabe der Erwachsenen. Kein Kind muss sich selbst wehren können. Die App ersetzt kein Präventionsprogramm in Kita, Schule oder Beratungsstelle."));
+  schutz.appendChild(el("h4", "Im Alltag"));
+  const alltag = el("ul", null, "punkte-liste");
+  for (const a of ["Kitzeln und Toben sofort beenden, wenn das Kind Stopp sagt.",
+    "Keine Küsse oder Umarmungen verlangen, auch nicht für Verwandte. Winken reicht.",
+    "Körperteile richtig benennen, auch Penis, Vulva und Po. Wer die Wörter kennt, kann erzählen und wird verstanden.",
+    "Überraschungen wie ein Geschenk von Geheimnissen unterscheiden, bei denen das Kind ein Nein-Gefühl hat."]) alltag.appendChild(el("li", a));
+  schutz.appendChild(alltag);
+  schutz.appendChild(el("h4", "Wenn ein Kind etwas erzählt"));
+  schutz.appendChild(el("p", "Ruhig zuhören, dem Kind glauben und sagen, dass es richtig war, davon zu erzählen. Nicht ausfragen und nichts versprechen, was sich nicht halten lässt. Dann Hilfe holen, zum Beispiel hier:"));
+  const nr = el("dl", null, "nummern");
+  for (const [n, w] of [["116 111", "Nummer gegen Kummer, für Kinder und Jugendliche, kostenlos und anonym"],
+    ["0800 111 0 550", "Elterntelefon der Nummer gegen Kummer, kostenlos und anonym"],
+    ["0800 22 55 530", "Hilfe-Telefon Sexueller Missbrauch, kostenlos und anonym"]]) nr.append(el("dt", n), el("dd", w));
+  schutz.appendChild(nr);
+  schutz.appendChild(el("p", "Die Sprechzeiten stehen auf den Seiten der Stellen.", "leise klein"));
+  spalte.appendChild(schutz);
+
+  // Lücken: Themen des Lernplans, für die es noch kein Spiel gibt
+  const lk = el("section", null, "flaeche");
+  lk.append(el("h3", "Themen ohne Spiel"),
+    el("p", "Der Lernplan folgt dem Lehrplan der Grundschule. Für viele Themen gibt es noch kein Spiel; das Kind sieht sie nicht."));
+  spalte.appendChild(lk);
+  let ctx;
+  try { ctx = await ladeCtx(); } catch (e) { protokoll("Lücken: " + e); lk.appendChild(el("p", "Der Lernplan konnte nicht geladen werden.", "leise")); return; }
+  if (tab !== "hinweise") return;
+  const l = luecken(ctx);
+  const ohne = new Set(l.ohneSpiel);
+  const planNach = new Map((ctx.plan.themen || []).map((t) => [t.id, t]));
+  for (const strang of faecher(ctx)) {
+    const alle = (ctx.plan.themen || []).filter((t) => t.strang === strang);
+    if (!alle.length) continue;
+    const fehlt = alle.filter((t) => ohne.has(t.id));
+    const det = el("details", null, "aufklapp luecken-fach");
+    const sum = el("summary");
+    sum.append(el("span", fachName(ctx, strang)),
+      el("span", fehlt.length ? `${fehlt.length} von ${alle.length} Themen noch ohne Spiel` : "alle Themen mit Spiel", "anzahl"));
+    det.appendChild(sum);
+    const nachKlasse = new Map();
+    for (const t of fehlt) {
+      const k = t.klasse ?? 0;
+      if (!nachKlasse.has(k)) nachKlasse.set(k, new Map());
+      const b = nachKlasse.get(k);
+      const name = t.bereich || "Ohne Bereich";
+      if (!b.has(name)) b.set(name, []);
+      b.get(name).push(t.name);
+    }
+    for (const [k, bereiche] of [...nachKlasse].sort((a, b) => a[0] - b[0])) {
+      det.appendChild(el("p", k ? `Klasse ${k}` : "Ohne Klasse", "klasse-titel"));
+      for (const [bereich, namen] of bereiche) {
+        const p = el("p", null, "bereich klein");
+        p.append(el("b", bereich + ": "), document.createTextNode(namen.join(", ")));
+        det.appendChild(p);
+      }
+    }
+    const teil = l.teilweise.filter((x) => planNach.get(x.thema)?.strang === strang);
+    if (teil.length) {
+      det.appendChild(el("p", "Nur zum Teil im Spiel", "klasse-titel"));
+      det.appendChild(el("p", teil.map((x) => planNach.get(x.thema)?.name || x.thema).join(", "), "bereich klein"));
+    }
+    lk.appendChild(det);
+  }
 }
 
-// -- Protokoll --
-function protokollAnsicht(inh) {
-  inh.appendChild(el("h2", "Protokoll"));
-  const karte = el("div", null, "karte breit protokoll");
+// ---------- Sicherheit ----------
+// "2026-11-14T07:40:11.000Z Text" → Zeit in Ortszeit fett davor, dann der Text
+function protokollZeile(z) {
+  const li = el("li");
+  const m = /^(\d{4}-\d{2}-\d{2}T[\d:.]+Z) (.*)$/s.exec(z);
+  const d = m ? new Date(m[1]) : null;
+  if (!d || isNaN(d.getTime())) { li.textContent = z; return li; }
+  const zeit = `${datum(d.toLocaleDateString("sv"))}, ${d.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} Uhr`;
+  li.append(el("b", zeit + ": "), document.createTextNode(m[2]));
+  return li;
+}
+function sicherheit(spalte, hinweis) {
+  spalte.appendChild(el("h2", "Sicherheit"));
+  const pin = el("section", null, "flaeche");
+  const status = el("p", hinweis === "pin-ok" ? "Die neue PIN ist gespeichert." : "Die PIN schützt diesen Bereich. Sie gilt für das ganze Gerät.", "status");
+  status.setAttribute("role", "status");
+  const k = knopf("PIN ändern", { symbol: "schloss.svg" });
+  k.addEventListener("click", () => pinAnsicht("neu"));
+  pin.append(el("h3", "PIN"), status, reihe(k));
+  spalte.appendChild(pin);
+
+  const prot = el("section", null, "flaeche");
   const zeilen = protokollLesen();
-  const ul = el("ul", null, "liste");
-  ul.replaceChildren(...(zeilen.length ? zeilen.slice().reverse().map(z => el("li", z)) : [el("li", "Keine Einträge. Alles in Ordnung.")]));
-  karte.append(el("h3", "Letzte Meldungen"), ul);
-  inh.appendChild(karte);
+  const ul = el("ul", null, "protokoll");
+  ul.replaceChildren(...(zeilen.length ? zeilen.slice().reverse().map(protokollZeile) : [el("li", "Keine Einträge. Alles in Ordnung.")]));
+  prot.append(el("h3", "Protokoll"), el("p", "Technische Meldungen der App, neueste zuerst. Hilfreich, wenn etwas nicht klappt.", "leise"), ul);
+  spalte.appendChild(prot);
 }
 
 pinAnsicht(daten.pinHash ? "pruefen" : "neu");

@@ -35,6 +35,8 @@ export const FARBE = {
   nacht: "#1F1B45",
   ahorn: "#EAD5B5",
   kante: "#B98E5E",
+  /** Nur im Elternbereich (Löschen, Achtung), beim Kind nie (grundsaetze-bilder 6.2). */
+  beere: "#B3315A",
 };
 
 /** Radien in rem: groß (Blase, Karten), normal (Kacheln), klein. */
@@ -100,6 +102,7 @@ export const TOKENS = Object.freeze({
   "--ls-nacht": FARBE.nacht,
   "--ls-ahorn": FARBE.ahorn,
   "--ls-kante": FARBE.kante,
+  "--ls-beere": FARBE.beere,
   "--ls-kontur": `${MASSE.kontur}rem`,
   "--ls-radius-gross": `${RADIUS.gross}rem`,
   "--ls-radius": `${RADIUS.normal}rem`,

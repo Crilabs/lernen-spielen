@@ -113,7 +113,7 @@ Im Elternbereich (Protokoll) steht „Keine Audiodatei: …“, wenn ein Spiel e
   Erzähler-Regel oben.
 - **Stimme wechseln:** neue Stimme und neuer `ordner` in `einstellungen.json`, `npm run audio` erzeugt alles
   neu, alles muss neu angehört werden, danach `npm run audio -- --aufraeumen`.
-- **Hinweis an die Eltern** (Azure-Vorgabe für Angebote für Kinder): im Elternbereich unter „Stimme und Ton“.
+- **Hinweis an die Eltern** (Azure-Vorgabe für Angebote für Kinder): im Elternbereich unter „Hinweise“.
   Er bleibt, solange eine erzeugte Stimme spricht.
 - Azure-Ressource `lernen-spielen-stimme` (Gruppe `lernen-spielen`, westeurope, S0). Warum Azure und nicht
   ElevenLabs: `werkzeuge/audio/README.md`.
