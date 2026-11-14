@@ -13,7 +13,9 @@ dann wird ausgebaut **(Christian)**.
 
 Christian sieht ein Spiel nur, wenn es nach drei Runden rot bleibt (geparkt), und als gelegentliche Stichprobe
 fertiger Spiele **(Christian)**. Gestartet wird je Spiel mit dem Skill „Spiel entwickeln <Katalog-Id>“, ein Spiel je
-Lauf, mehrere parallel in eigenen Worktrees **(Christian)**.
+Lauf, mehrere parallel in eigenen Worktrees **(Christian)**. Parallel dazu startet er den Skill „Mit echten Dingen“
+(`.claude/skills/mit-echten-dingen/SKILL.md`) für alle Themen des Spiels, die noch keine Anleitung haben
+(`docs/mit-echten-dingen.md`).
 
 ## Ablauf
 

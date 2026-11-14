@@ -130,3 +130,26 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   bleibt der bisherige Einzeiler aus dem Lernplan **(Christian)**.
 - **Am Rundenende eines Spiels** als ruhiges Angebot in der Pause, neben „Alle Spiele“ und „Weiter“ (kein Muss, keine
   Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**.
+
+## Umsetzung im Prüfstand (Stand 2026-11-14)
+
+- **Dateien:** `spiele/mit-echten-dingen/<fach>/<thema>.md`; `npm run echte-dinge` schreibt daraus
+  `spiele/mit-echten-dingen/verzeichnis.json` (welche Themen eine Anleitung haben, Titel, Formen). Die Seiten laden nur
+  das Verzeichnis und die Anleitung, die sie zeigen. `tests/echte-dinge.test.mjs` prüft, dass das Verzeichnis aktuell
+  ist, und die Form jeder Datei (Kopf, Thema im Lernplan, Ihr braucht, Schritte, Darauf kommt es an, Leichter/Schwerer,
+  Wortzahl, Wortliste 3.2, Anrede „ihr“). Die ersten drei Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`,
+  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E9 noch nicht durchlaufen.
+- **Darstellung:** `spiele/rahmen/markdown.js` (klein, ohne DOM, alles escaped, Kopf wird abgetrennt),
+  `spiele/rahmen/echte-dinge.js` (Laden, gemerkte Form `echte-dinge.form`), Karte `<ls-anregung>`, Kachel
+  `<ls-echte-dinge-kachel>`, Angebot in `<ls-pause>` (`docs/bedienung.md` §9). Die Spielvorlage reicht das Thema der
+  Runde an die Pause.
+- **Daten:** `echteDingeFuer(ctx, themaId)` und `themenMitEchtenDingen(ctx, stand)` in `spiele/lernsteuerung.js`
+  (`ctx.echteDinge` = Verzeichnis), nur lesend. **Annahme:** Themen ohne Spiel sind für die Übersicht „dran“, wenn
+  alle Voraussetzungen gekonnt sind – je Strang das erste solche Thema; die nächsten zwei sind „bald“. Für das Kind
+  ändert das nichts (dort bleiben Themen ohne Spiel verborgen, bis die Kacheln kommen).
+- **Übersicht:** `spiele/mit-echten-dingen.html`, Zugang über „Mit echten Dingen“ in der Navigation des
+  Elternbereichs; Zurück führt dorthin zurück (die PIN wird dann erneut abgefragt). Küchenzettel: höchstens sechs
+  Themen von „Gerade dran“ (mit Anleitung zuerst, die gemerkte Form), zwei Spalten, eine A4-Seite. Drucken über
+  `drucke()` in `spiele/kern/geraet.js` (Fähigkeit `drucken`: Browser und Desktop ja, Android/iOS nein).
+- **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Prüfung E1–E9 durch einen
+  frischen Agenten → höchstens 3 Runden → Datei, Verzeichnis, Kosten in `spiele/mit-echten-dingen/kosten.json`).
