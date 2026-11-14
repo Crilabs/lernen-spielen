@@ -4,6 +4,7 @@
 
 import { tastePfadAb } from "./vorlagen/pfad.js";
 import { leseFormSvg } from "./vorlagen/svg.js";
+import { setzeWort } from "./vorlagen/wort.js";
 
 /** @typedef {import("./vorlagen/pfad.js").Punkt} Punkt */
 /**
@@ -131,4 +132,23 @@ export function formen(satz) {
 export function sonderverbindung(satz, von, nach) {
   const passend = geladenerStand().sonder.filter((v) => v.satz === satz && v.von === von);
   return (passend.find((v) => v.nach === nach) ?? passend.find((v) => v.nach === "*"))?.punkte ?? null;
+}
+
+/**
+ * Setzt ein Wort (oder mehrere, durch Leerzeichen getrennt) aus den Formen eines Satzes zusammen.
+ * Wirft `Fehlende Form: <satz>/<zeichen>`, wenn ein Zeichen fehlt.
+ * @param {string} satz
+ * @param {string} text
+ * @returns {import("./vorlagen/wort.js").Wort}
+ */
+export function wort(satz, text) {
+  const angaben = satzAngaben(satz);
+  if (!angaben) throw new Error(`Unbekannter Satz: ${satz}`);
+  return setzeWort(text, {
+    raster: raster(),
+    satz: angaben,
+    form: (zeichen) => form(satz, zeichen),
+    sonder: (von, nach) => sonderverbindung(satz, von, nach),
+    abtastung: ABTASTUNG,
+  });
 }
