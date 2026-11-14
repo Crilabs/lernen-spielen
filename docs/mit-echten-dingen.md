@@ -61,7 +61,13 @@ Spiels, die noch keine Anleitung haben.
 
 1. **Recherche** (Web): Fachdidaktik, Montessori-Übungen, Elternmaterial von Schulen, Verlagen und Landesinstituten.
    Quellen in den Kopf der Datei; der Text ist immer eigen formuliert, nichts wird übernommen.
-2. **Ideen:** 3–5 Ansätze mit Alltagsdingen, einer wird gewählt (Begründung im Bericht, nicht in der Datei).
+   **Gesucht sind die besten Methoden für genau dieses Thema (Christian, 2026-11-14):** Welche Wege, das Thema mit
+   Alltagsdingen zu lernen, gelten in den Quellen als wirksam? Bevorzugt praxisnah im Sinne Montessoris: Das Kind
+   tut etwas, das im Alltag einen echten Zweck hat (Tisch decken, teilen, einkaufen, sortieren), und lernt dabei
+   nebenbei. Lernen ist kein Selbstzweck (`grundsaetze.md`, zweite Prüffrage). Keine Methode ist vorab gesetzt; was
+   am besten trägt, ergibt die Recherche je Thema.
+2. **Ideen:** 3–5 Ansätze mit Alltagsdingen, einer wird gewählt (Begründung im Bericht, nicht in der Datei). Gewählt
+   wird nach Wirksamkeit laut Recherche und Praxisnähe, nicht nach Originalität.
 3. **Schreiben** nach den Regeln oben.
 4. **Prüfung** durch einen frischen Agenten, grün/rot je Kriterium mit Beleg:
 
@@ -75,6 +81,9 @@ Spiels, die noch keine Anleitung haben.
 | E6 | Fachbegriffe nach §5.1 |
 | E7 | eigene Worte, Quellen angegeben |
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
+| E9 | Methode laut Recherche wirksam für dieses Thema (Quelle im Kopf); die Handlung ist praxisnah und hat einen Zweck über das Üben hinaus |
+
+Die Grundsätze (`grundsaetze.md`) gelten für jede Anleitung ganz, auch wo E1–E9 sie nicht einzeln nennen.
 
 Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 5. **Kosten** (Token für Recherche, Schreiben, Prüfung) in `spiele/mit-echten-dingen/kosten.json`, wie bei den
