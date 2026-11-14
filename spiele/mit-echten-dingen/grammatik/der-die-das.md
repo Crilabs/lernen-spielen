@@ -1,7 +1,6 @@
 ---
 thema: der-die-das
 fach: grammatik
-entwurf: true
 bild: { figur: waeschestapel, zustand: gefaltet }
 quellen:
   - Montessori einfach klar! Handreichung Sprache, Band 3, Kap. 4.3.2 Bestimmter Artikel (Kapferer, Lehmann, Weinhäupl), Institut für Lebendiges Lernen, https://www.montessori-material.de/tpl/download/leseprobe-montessori-einfach-klar-band-3.pdf, abgerufen 2026-11-14
