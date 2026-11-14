@@ -2,6 +2,7 @@
 thema: vorwaerts-zaehlen
 fach: mathe
 entwurf: true
+bild: { figur: wuerfel, zustand: liegt }
 quellen:
   - Zählen (Handout Rechnenlernen), ISB Bayern, https://isb.bayern.de/fileadmin/user_upload/Foerderschulen/Geistige_Entwicklung/Rechnenlernen/Handouts/1_Zaehlen_Handout.pdf, abgerufen 2026-11-14
   - Basiskompetenzen fördern (Basistext), DZLM, https://maco.dzlm.de/sites/maco/files/material-lul/dzlm_difprim_basiskompetenzen_foerdern_basistext_220629.pdf, abgerufen 2026-11-14
