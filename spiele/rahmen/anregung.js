@@ -1,19 +1,17 @@
-// <ls-anregung></ls-anregung>   →   await anregung.oeffne({ titel, text, sprich })
+// <ls-anregung></ls-anregung>   →   await anregung.oeffne({ titel, text })
 // Karte „Mit echten Dingen“ (Spec 2026-11-14-ansichten): eine Anregung aus dem Alltag für den Erwachsenen, der mit
 // dem Kind schaut (`eltern` im Lernplan). Ohne PIN, kein Kindertext, keine Aufgabe. Fach-Seite und Regal nutzen sie.
+// Der Text ist Elternsprache („Lassen Sie Ihr Kind …“) und wird nicht vorgelesen (kein Noch-mal-hören).
 //
 // Liegt über der ganzen Seite, auch über der Kopfleiste: ein ruhiger Schleier in Nebel, darauf eine flache Karte aus
 // Papier mit Tinte-Kontur (keine Nacht: das ist keine Pause). Oben links Zurück (schließt), daneben die Überschrift
-// „Mit echten Dingen“ und leiser der Name des Themas, rechts Noch mal hören (liest den Text vor). Darunter der Text
-// groß und gut lesbar. Schließen: Zurück, Escape oder Tippen auf den Schleier. Der Text wird nicht von selbst
-// vorgelesen; Schließen beendet laufendes Vorlesen.
-// Spiel-Kennung für den Ton wie bei ls-blase (Attribut `spiel`, Host-Kette, sonst ls-leiste); ohne Kennung ist der
-// Ton an. Keine Attribute im Konstruktor.
+// „Mit echten Dingen“ und leiser der Name des Themas. Darunter der Text groß und gut lesbar.
+// Schließen: Zurück, Escape oder Tippen auf den Schleier. Schließen beendet laufende Sprache (z. B. den Namen des
+// Zurück-Knopfs). Solange die Karte offen ist, ist der Rest der Seite `inert`; danach kehrt der Fokus zurück.
+// Keine Attribute im Konstruktor.
 
-import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
-import { sprich, stille } from "../kern/stimme.js";
+import { stille } from "../kern/stimme.js";
 import { GRUND_CSS, MASSE, definiere } from "./stil.js";
-import { findeSpiel } from "./knopf.js";
 import "./knopf.js";
 
 /** Überschrift der Karte, zugleich der Name des Knopfs, der sie öffnet. */
@@ -80,11 +78,24 @@ h2 {
 @keyframes auf { from { opacity: 0; } }
 `;
 
+/**
+ * Das wirklich fokussierte Element, auch in Shadow DOM (document.activeElement zeigt nur auf den Host).
+ * @returns {HTMLElement | null}
+ */
+function fokussiert() {
+  /** @type {Element | null} */
+  let el = document.activeElement;
+  while (el?.shadowRoot?.activeElement) el = el.shadowRoot.activeElement;
+  return el instanceof HTMLElement && el !== document.body ? el : null;
+}
+
 export class LsAnregung extends HTMLElement {
   /** @type {(() => void) | null} */
   #zu = null;
-  /** @type {Element | null} */
+  /** @type {HTMLElement | null} */
   #vorher = null;
+  /** Elemente, die diese Karte inert gemacht hat (nur die gibt sie wieder frei). @type {HTMLElement[]} */
+  #still = [];
 
   constructor() {
     super();
@@ -95,18 +106,14 @@ export class LsAnregung extends HTMLElement {
         <div class="kopf">
           <ls-knopf class="zurueck" symbol="zurueck.svg" name="Zurück"></ls-knopf>
           <div class="ueber"><h2 id="titel">${ANREGUNG_TITEL}</h2><p class="thema"></p></div>
-          <ls-knopf class="hoeren" symbol="vorlesen.svg" name="Noch mal hören" stumm></ls-knopf>
         </div>
         <p class="text"></p>
       </section>`;
     this.themaFeld = /** @type {HTMLElement} */ (wurzel.querySelector(".thema"));
     this.textFeld = /** @type {HTMLElement} */ (wurzel.querySelector(".text"));
     this.zurueck = /** @type {HTMLElement} */ (wurzel.querySelector(".zurueck"));
-    this.hoeren = /** @type {HTMLElement} */ (wurzel.querySelector(".hoeren"));
-    this._sprich = "";
     this.zurueck.addEventListener("click", () => this.schliesse());
     /** @type {HTMLElement} */ (wurzel.querySelector(".schleier")).addEventListener("click", () => this.schliesse());
-    this.hoeren.addEventListener("click", () => this.liesVor());
     this.taste = this.taste.bind(this);
   }
 
@@ -118,35 +125,56 @@ export class LsAnregung extends HTMLElement {
   /**
    * Zeigt die Karte. Löst auf, sobald sie wieder geschlossen ist (Zurück, Escape, Schleier oder schliesse()).
    * Ein zweites oeffne() ersetzt den Inhalt; das frühere Versprechen löst dann auf.
-   * @param {{ titel?: string, text: string, sprich?: string }} anregung titel: Name des Themas (leise unter der
-   *   Überschrift); text: die Anregung; sprich: was vorgelesen wird (Vorgabe: text)
+   * @param {{ titel?: string, text: string }} anregung titel: Name des Themas (leise unter der Überschrift);
+   *   text: die Anregung (Elternsprache, wird nicht vorgelesen)
    * @returns {Promise<void>}
    */
-  oeffne({ titel = "", text, sprich: vorlesen }) {
+  oeffne({ titel = "", text }) {
     this.#zu?.();
     this.themaFeld.textContent = titel;
     this.textFeld.textContent = text;
-    this._sprich = vorlesen || text;
-    if (!this.offen) this.#vorher = document.activeElement;
+    if (!this.offen) {
+      this.#vorher = fokussiert();
+      this.stilleSeite(true);
+    }
     this.setAttribute("offen", "");
     document.addEventListener("keydown", this.taste);
     // Fokus in die Karte (auf Zurück), damit Tastatur und Vorleser dort weitermachen.
-    requestAnimationFrame(() => /** @type {any} */ (this.zurueck.shadowRoot)?.querySelector("button")?.focus({ preventScroll: true }));
+    requestAnimationFrame(() => this.zurueck.shadowRoot?.querySelector("button")?.focus({ preventScroll: true }));
     return new Promise((ok) => { this.#zu = ok; });
   }
 
-  /** Schließt die Karte (still, wenn sie schon zu ist) und beendet laufendes Vorlesen. */
+  /** Schließt die Karte (still, wenn sie schon zu ist) und beendet laufende Sprache. */
   schliesse() {
     if (!this.offen) return;
     this.removeAttribute("offen");
     document.removeEventListener("keydown", this.taste);
     stille();
-    const vorher = /** @type {HTMLElement | null} */ (this.#vorher);
+    this.stilleSeite(false);
+    const vorher = this.#vorher;
     this.#vorher = null;
-    if (vorher?.isConnected) vorher.focus?.({ preventScroll: true });
+    if (vorher?.isConnected) vorher.focus({ preventScroll: true });
     const zu = this.#zu;
     this.#zu = null;
     zu?.();
+  }
+
+  /**
+   * Hintergrund inert (an) bzw. wieder frei (aus): alle Geschwister der Karte, auch die Kopfleiste.
+   * @param {boolean} an
+   */
+  stilleSeite(an) {
+    if (!an) {
+      for (const el of this.#still) el.inert = false;
+      this.#still = [];
+      return;
+    }
+    const eltern = this.parentElement ?? document.body;
+    for (const el of /** @type {HTMLElement[]} */ ([...eltern.children])) {
+      if (el === this || el.inert || el.tagName === "SCRIPT") continue;
+      el.inert = true;
+      this.#still.push(el);
+    }
   }
 
   /** @param {KeyboardEvent} e */
@@ -157,22 +185,9 @@ export class LsAnregung extends HTMLElement {
     }
   }
 
-  async liesVor() {
-    if (!this._sprich) return "still";
-    let tonAn = true;
-    try {
-      await ladeEinstellungen();
-      const spiel = findeSpiel(this);
-      tonAn = spiel ? einstellung(`ton.${spiel}`, true) !== false : true;
-    } catch {
-      tonAn = true;
-    }
-    if (!tonAn) return "still";
-    return sprich(this._sprich);
-  }
-
   disconnectedCallback() {
     document.removeEventListener("keydown", this.taste);
+    this.stilleSeite(false);
   }
 }
 

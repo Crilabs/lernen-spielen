@@ -9,7 +9,7 @@
 /* Fach-Seite: der Weg eines Fachs (Spec docs/superpowers/specs/2026-11-14-ansichten-design.md, „Fach-Seite“).
    Adresse: themen.html?fach=<id>; ohne oder mit unbekanntem Fach zurück zur Startseite.
    Der Weg läuft waagrecht von links nach rechts: gekonnte Themen (ihr Material klein und flach), das Thema „dran“
-   (groß, Sonnenring), höchstens drei „in Sicht“ (zart, Umriss in Naht). Alles andere bleibt verborgen
+   (groß, Sonnenring), wenige „in Sicht“ (Anzahl aus der Lernsteuerung) (zart, Umriss in Naht). Alles andere bleibt verborgen
    (Lernplan-Design „Sichtbarkeit“). Keine Zahlen als Fortschritt, keine Zählung, kein Klassenbezug (N5, N8).
    Antippen einer Station öffnet die Fläche darunter: Name (vorlesbar), Spiele, Geschichte, Mit echten Dingen.
    Diese Seite liest den Lernstand nur, sie schreibt ihn nie. */
@@ -269,8 +269,6 @@ import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
 import "./rahmen/anregung.js";
 
-const IN_SICHT = 3; // höchstens so viele Themen „in Sicht“ je Fach (Lernplan-Design)
-
 const fach = new URLSearchParams(location.search).get("fach") ?? "";
 if (!Object.hasOwn(FACH, fach)) location.replace("index.html");
 else start();
@@ -301,7 +299,8 @@ async function start() {
   const stationen = [
     ...gekonnteThemen(ctx, stand).filter((t) => t.strang === fach).map((t) => ({ id: t.id, zustand: "kann-ich", material: t })),
     ...offen.filter((s) => s.zustand === "dran").map((s) => ({ id: s.id, zustand: "dran", material: themaMaterial(ctx, s.id) })),
-    ...offen.filter((s) => s.zustand === "in-sicht").slice(0, IN_SICHT)
+    // wie viele in Sicht sind, begrenzt die Lernsteuerung (K.IN_SICHT in sichtbar())
+    ...offen.filter((s) => s.zustand === "in-sicht")
       .map((s) => ({ id: s.id, zustand: "in-sicht", material: themaMaterial(ctx, s.id) })),
   ].map((s) => {
     const t = themaNach.get(s.id) ?? {};

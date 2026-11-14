@@ -58,6 +58,8 @@ export function literaleAusCode(quelltext) {
 // Namen der Rahmen-Knöpfe: `<ls-knopf … name="…">` (sonst `wort="…"`) spricht seinen Namen beim ersten Tippen
 // (spiele/rahmen/knopf.js), außer mit `stumm`. Nur feste Werte; `${…}` zählt nicht.
 const KNOPF = /<ls-knopf\b[^>]*>/g;
+/** Entwicklerseiten (nicht aus der App erreichbar): ihre Knopfnamen brauchen keine Aufnahme. */
+const NUR_ENTWICKLUNG = new Set(["rahmen/vorschau.html"]);
 
 /**
  * @param {string} quelltext
@@ -101,10 +103,9 @@ export function sammle(wurzel) {
     if (s.titel) neu(s.titel, "spiele.json");
   }
 
-  // Lernplan: Namen der Themen zum Vorlesen und die Anregungen „Mit echten Dingen“ (eltern, ls-anregung)
-  const plan = json(join(spiele, "lernplan.json"));
-  for (const t of felder(plan, "sprich")) neu(t, "lernplan.json");
-  for (const t of plan.themen ?? []) if (typeof t.eltern === "string") neu(t.eltern, "lernplan.json");
+  // Lernplan: Namen der Themen zum Vorlesen. Die Anregungen `eltern` (ls-anregung) sind Elternsprache und werden
+  // nicht vorgelesen, also auch nicht gesammelt.
+  for (const t of felder(json(join(spiele, "lernplan.json")), "sprich")) neu(t, "lernplan.json");
 
   // Einführungen
   for (const p of dateien(join(spiele, "einfuehrungen"), [".json"]))
@@ -115,7 +116,7 @@ export function sammle(wurzel) {
     const { texte, offen: n } = literaleAusCode(readFileSync(p, "utf8"));
     const q = relative(spiele, p);
     texte.forEach((t) => neu(t, q));
-    knopfNamen(readFileSync(p, "utf8")).forEach((t) => neu(t, q));
+    if (!NUR_ENTWICKLUNG.has(q)) knopfNamen(readFileSync(p, "utf8")).forEach((t) => neu(t, q));
     if (n) offen[q] = n;
   }
 

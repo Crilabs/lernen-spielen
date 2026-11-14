@@ -57,13 +57,15 @@ test("Knopfnamen: name vor wort, stumm und Vorlagen zählen nicht", () => {
   assert.deepEqual(knopfNamen(code), ["Zurück", "Mit echten Dingen"]);
 });
 
-test("sammle: Anregungen (eltern) und Knopfnamen der Fach-Seite", () => {
+test("sammle: Knopfnamen der Fach-Seite ja, Anregungen (eltern) und Entwicklerseite nein", () => {
   const { eintraege } = sammle(WURZEL);
   const texte = new Set(eintraege.map((e) => e.text));
   const plan = JSON.parse(readFileSync(join(WURZEL, "spiele/lernplan.json"), "utf8"));
-  const eltern = plan.themen.find((t) => t.eltern).eltern;
-  assert.ok(texte.has(normalisiere(eltern)));
+  const eltern = plan.themen.filter((t) => t.eltern).map((t) => normalisiere(t.eltern));
+  assert.ok(eltern.length > 0);
+  assert.ok(eltern.every((t) => !texte.has(t)), "eltern ist Elternsprache und wird nicht vorgelesen");
   for (const name of ["Mit echten Dingen", "Geschichte ansehen", "Zurück"]) assert.ok(texte.has(name), name);
+  assert.ok(!eintraege.some((e) => e.quellen.includes("rahmen/vorschau.html") && ["Pause", "Leuchte"].includes(e.text)));
 });
 
 test("sammle findet Lernplan, Einführungen und feste Sätze", () => {

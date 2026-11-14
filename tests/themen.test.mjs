@@ -102,10 +102,9 @@ test("themen.html: Fach aus der Adresse, sonst zurück zur Startseite", () => {
   assert.doesNotMatch(themen, /symbole\/haus\.svg/, "kein eigener Haus-Knopf");
 });
 
-test("themen.html: Weg aus gekonnt (auch ohne Spiel), dran, höchstens drei in Sicht", () => {
+test("themen.html: Weg aus gekonnt (auch ohne Spiel), dran, in Sicht aus der Lernsteuerung", () => {
   assert.match(themen, /gekonnteThemen\(ctx, stand\)\.filter\(\(t\) => t\.strang === fach\)/);
-  assert.match(themen, /const IN_SICHT = 3;/);
-  assert.match(themen, /\.slice\(0, IN_SICHT\)/);
+  assert.match(themen, /uebersicht\(ctx, stand\)/); // in Sicht begrenzt K.IN_SICHT in sichtbar()
   assert.match(themen, /materialFuer\(/);
   assert.match(themen, /<button class="station \$\{s\.zustand\}"[^>]*\n?\s*aria-label="\$\{esc\(s\.name\)\}"/);
 });
@@ -127,7 +126,9 @@ test("themen.html: keine Zählung, keine Prozente, kein Klassenbezug", () => {
 
 test("ls-anregung: Schnittstelle oeffne/schliesse, keine Attribute im Konstruktor, Escape und Schleier", () => {
   const a = readFileSync(new URL("../spiele/rahmen/anregung.js", import.meta.url), "utf8");
-  assert.match(a, /oeffne\(\{ titel = "", text, sprich: vorlesen \}\)/);
+  assert.match(a, /oeffne\(\{ titel = "", text \}\)/);
+  assert.doesNotMatch(a, /vorlesen\.svg|liesVor|from "\.\.\/kern\/stimme\.js";[\s\S]*\bsprich\(/, "Elternsprache: kein Vorlesen");
+  assert.match(a, /inert/);
   assert.match(a, /schliesse\(\) \{/);
   assert.match(a, /e\.key === "Escape"/);
   assert.match(a, /querySelector\("\.schleier"\)\)\.addEventListener\("click"/);
