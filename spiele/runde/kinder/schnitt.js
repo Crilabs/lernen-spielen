@@ -62,8 +62,8 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
   const jacke = `M${z(X(-23))} 118 C${z(X(-14))} 109 ${z(X(14))} 109 ${z(X(23))} 118`
     + ` C${z(X(28))} 140 ${z(X(31))} 165 ${z(X(34))} 184 C${z(X(20))} 192 ${z(X(-20))} 192 ${z(X(-34))} 184`
     + ` C${z(X(-31))} 165 ${z(X(-28))} 140 ${z(X(-23))} 118 Z`;
-  const huefte = `M${z(X(-27))} 172 L${z(X(27))} 172 C${z(X(30))} 182 ${z(X(30))} 192 ${z(X(27))} 201`
-    + ` L${z(X(-27))} 201 C${z(X(-30))} 192 ${z(X(-30))} 182 ${z(X(-27))} 172 Z`;
+  const huefte = `M${z(X(-27))} 172 L${z(X(27))} 172 C${z(X(29))} 180 ${z(X(29))} 188 ${z(X(26))} 195`
+    + ` L${z(X(-26))} 195 C${z(X(-29))} 188 ${z(X(-29))} 180 ${z(X(-27))} 172 Z`;
   /** Turnschuh von vorn (Dreiviertel: leicht nach rechts gedreht): Kappe zum Betrachter, Schnürung oben, Sohle als Rand.
    * hinten: im Schatten. @param {number} x @param {boolean} hinten */
   const schuh = (x, hinten) => {
@@ -155,13 +155,16 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
       rumpf: [
         T("hals", S.zusammen(S.form(S.pfad("M153 96 L167 96 L168 118 L152 118 Z"), f.haut, P(153, 96), { s: 0.7 }),
           S.falte("M152 96 L168 96 L168 108 Q160 113 152 106 Z", f.haut, 0.42))),
+        // Hüfte endet unter dem Saumschatten; der Saumschatten liegt über Hüfte und Beinen (Beine liegen hinter dem Rumpf),
+        // so gibt es am Schritt keine Kante und die Hosenbeine kommen mit ihrer eigenen Schattierung darunter hervor.
         T("huefte", {
-          svg: `<path d="${huefte}" fill="${f.unten}" stroke="none"/>`
-            + `<path d="M${z(X(17))} 172 L${z(X(27))} 172 C${z(X(30))} 182 ${z(X(30))} 192 ${z(X(27))} 201 L${z(X(17))} 201 Z" fill="${S.dunkler(f.unten, 0.26)}" stroke="none"/>`
-            + `<path d="M${z(X(22))} 172 L${z(X(27))} 172 C${z(X(30))} 182 ${z(X(30))} 192 ${z(X(27))} 201 L${z(X(22))} 201 Z" fill="${S.dunkler(f.unten, 0.46)}" stroke="none"/>`
-            + `<path d="M${z(X(-30))} 184 C${z(X(-20))} 192 ${z(X(20))} 192 ${z(X(30))} 184 L${z(X(30))} 191 C${z(X(20))} 199 ${z(X(-20))} 199 ${z(X(-30))} 191 Z" fill="${S.dunkler(f.unten, 0.5)}" stroke="none"/>`
-            + S.naht(`M${z(X(1))} 178 L${z(X(2))} 201`, f.unten, 2).svg,
+          svg: `<path d="${huefte}" fill="${f.unten}" stroke="none"/>` + S.naht(`M${z(X(1))} 186 L${z(X(1.5))} 194`, f.unten, 2).svg,
           kontur: `<path d="${huefte}"/>`,
+        }),
+        T("saumschatten", {
+          svg: `<path d="M${z(X(-30))} 182 C${z(X(-20))} 190 ${z(X(20))} 190 ${z(X(30))} 182 L${z(X(30))} 191`
+            + ` C${z(X(20))} 200 ${z(X(-20))} 200 ${z(X(-30))} 191 Z" fill="${S.dunkler(f.unten, 0.5)}" stroke="none"/>`,
+          kontur: "",
         }),
         T("oberteil", oberteil),
       ],
