@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="rahmen/seite.css">
 <style>
 /* Startseite „Der Treffpunkt“ (Spec docs/superpowers/specs/2026-11-14-startseite-treffpunkt-design.md).
-   Eine Szene statt eines Menüs: Wiese mit Baumhaus, die Runde steht vorne. Bis zu drei Dran-Spiele sind Tore auf der
-   Anhöhe, die Fächer Bretter am Wegweiser, das Regal steht im Baumhaus. Keine Zahl, keine Zählung, kein
+   Eine Szene statt eines Menüs: Wiese mit Baumhaus, die Runde und ein paar Tiere stehen vorne. Bis zu drei Dran-Spiele
+   sind Tore auf der Anhöhe, die Fächer runde Knöpfe am linken Rand, das Regal steht im Baumhaus. Keine Zahl, keine Zählung, kein
    Klassenbezug (N5, N8). Diese Seite liest den Lernstand nur, sie schreibt ihn nie.
    Aufbau: .box ist 288 × 108 rem groß und waagrecht mittig; SVG (viewBox 0 0 2880 1080) und bedienbare Teile nutzen
    dieselben Koordinaten (1 rem = 10 Einheiten). Bei 16:9 sieht man x 48–240 rem, bei 4:3 x 72–216 rem; alles
@@ -22,7 +22,6 @@ body {
 
 .treffpunkt { position: fixed; inset: 0; overflow: hidden; }
 .box { position: absolute; top: 0; left: calc(50% - 144rem); width: 288rem; height: 108rem; }
-.box:not(.mit-faechern) #pfahl { display: none; }
 .szene, .szene svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
 /* --- Die Runde: vor der Anhöhe; nur die gemalten Flächen nehmen Tippen an ------------------------ */
@@ -46,98 +45,83 @@ body {
 /* Tore: Weidenbogen mit Blick in die Welt, darunter ein Schild mit Spielsymbol und Name. Drückbar ist das Schild
    (fester Schatten im Fach-Tief, sinkt ein). */
 .tore { position: absolute; inset: 0; }
-.tor { position: absolute; width: 30rem; display: flex; flex-direction: column; align-items: center; }
-.tor .bogen { display: block; width: 30rem; height: 35rem; }
-.tor .schild {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 11rem;
-  height: 11rem;
-  margin-top: -9rem;
-  border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: 50%;
-  background: var(--fach-fuellung);
-  box-shadow: 0 0.6rem 0 var(--fach-tief);
-}
-.tor .schild img { display: block; width: 7.2rem; height: 7.2rem; object-fit: contain; }
+.tor { position: absolute; width: 28rem; height: 44.3rem; }
+.tor .bogen { display: block; width: 28rem; height: 44.3rem; }
+/* Namensbrett quer über beide Pfosten (Pfosten außen bei 2,6 und 25,4 rem), oben darauf das Spielsymbol. */
 .tor .text {
+  position: absolute;
+  left: 50%;
+  top: 28rem;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   width: max-content;
-  max-width: 34rem;
-  margin-top: -2.4rem;
-  padding: 3rem 2.4rem 1.2rem;
+  min-width: 25rem;
+  max-width: 30rem;
+  padding: 4.6rem 2rem 1.2rem;
   border: var(--ls-kontur) solid var(--ls-tinte);
   border-radius: var(--ls-radius-klein);
   background: var(--ls-papier);
   box-shadow: 0 0.6rem 0 var(--fach-tief);
   text-align: center;
 }
-.tor b { font-size: 4.2rem; line-height: 1.1; color: var(--fach-tief); hyphens: manual; }
-.tor .thema { font-size: 2.8rem; line-height: 1.2; color: var(--ls-tinte-weich); }
-.tor:active .schild, .tor:active .text { transform: translateY(0.3rem); box-shadow: 0 0.3rem 0 var(--fach-tief); }
+.tor .schild {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 22.4rem;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 10.4rem;
+  height: 10.4rem;
+  border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: 50%;
+  background: var(--fach-fuellung);
+  box-shadow: 0 0.6rem 0 var(--fach-tief);
+}
+.tor .schild img { display: block; width: 6.8rem; height: 6.8rem; object-fit: contain; }
+.tor b { font-size: 3.8rem; line-height: 1.1; color: var(--fach-tief); hyphens: manual; }
+.tor .thema { font-size: 2.6rem; line-height: 1.2; color: var(--ls-tinte-weich); }
+.tor:active .schild, .tor:active .text { transform: translate(-50%, 0.3rem); box-shadow: 0 0.3rem 0 var(--fach-tief); }
 .tor:focus-visible .text { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
 
-/* Wegweiser: Pfeilbretter am Pfahl (Pfahl im SVG). Bis drei Fächer ein Brett je Zeile mit Namen daneben;
-   ab vier zwei Spalten, Symbol über dem Namen. */
-.wegweiser { position: absolute; display: flex; flex-direction: column; gap: 1.4rem; }
-.wegweiser.zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-.brett {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-  min-height: 11rem;
-  padding: 1.2rem 4.4rem 1.2rem 1.6rem;
+/* Fach-Knöpfe: Navigation am linken Rand. Runder Knopf in der Fachfüllung mit Tinte-Kontur und festem Schatten im
+   Fach-Tief (drückbar), Fachsymbol in Tinte; der Name klein darunter auf Papier, damit er auf der Wiese lesbar ist.
+   Bis drei Fächer eine Spalte, ab vier zwei. */
+.faecher { position: absolute; display: grid; grid-template-columns: 1fr; justify-items: center; gap: 1.6rem; }
+.faecher.zwei { grid-template-columns: 1fr 1fr; column-gap: 1rem; }
+.fach { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; width: 13rem; }
+.fach .knopf {
+  display: grid;
+  place-items: center;
+  width: 11rem;
+  height: 11rem;
   border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: var(--ls-radius-klein);
-  background: var(--ls-ahorn);
-  box-shadow: 0 0.6rem 0 var(--ls-kante);
-  clip-path: none;
+  border-radius: 50%;
+  background: var(--fach-fuellung);
+  box-shadow: 0 0.6rem 0 var(--fach-tief);
 }
-/* Pfeilspitze als gedrehtes Quadrat an der Seite, in die das Brett zeigt. */
-.brett::after {
-  content: "";
-  position: absolute;
-  top: 50%;
+.fach .knopf i {
+  display: block;
   width: 6.4rem;
   height: 6.4rem;
-  border: var(--ls-kontur) solid var(--ls-tinte);
-  border-left-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 0 1rem 0 0;
-  background: linear-gradient(45deg, transparent 50%, var(--ls-ahorn) 50%);
-  pointer-events: none;
-}
-.brett.rechts::after { right: -3.4rem; transform: translateY(-50%) rotate(45deg); }
-.brett.links { padding: 1.2rem 1.6rem 1.2rem 4.4rem; }
-.brett.links::after { left: -3.4rem; transform: translateY(-50%) rotate(-135deg); }
-.brett .zeichen {
-  flex: none;
-  width: 7.6rem;
-  height: 7.6rem;
-  padding: 1.3rem;
-  border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: var(--ls-radius-klein);
-  background: var(--fach-fuellung);
-}
-.brett .zeichen i {
-  display: block;
-  width: 100%;
-  height: 100%;
   background: var(--ls-tinte);
   -webkit-mask: var(--bild) center / contain no-repeat;
   mask: var(--bild) center / contain no-repeat;
 }
-.brett b { font-size: 3.6rem; line-height: 1.1; hyphens: manual; }
-.zwei .brett { flex-direction: column; gap: 0.6rem; padding: 1.2rem; text-align: center; }
-.zwei .brett::after { display: none; }
-.zwei .brett b { font-size: 2.6rem; }
-.brett:active { transform: translateY(0.3rem); box-shadow: 0 0.3rem 0 var(--ls-kante); }
-.brett:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
+.fach b {
+  padding: 0.2rem 1rem;
+  border-radius: 1rem;
+  background: var(--ls-papier);
+  font-size: 2.4rem;
+  line-height: 1.1;
+  text-align: center;
+  hyphens: manual;
+}
+.fach:active .knopf { transform: translateY(0.3rem); box-shadow: 0 0.3rem 0 var(--fach-tief); }
+.fach:focus-visible .knopf { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
 
 /* Baumhaus: die Öffnung ist der Link zum Regal; darin ein Regalbrett mit den drei zuletzt gekonnten Dingen. */
 .baumhaus {
@@ -238,10 +222,11 @@ body {
 <main class="treffpunkt">
   <div class="box" id="box">
     <div class="szene" id="szene"></div>
+    <div class="runde" id="tiere"></div>
     <div class="runde" id="runde"></div>
     <nav class="bedienung" aria-label="Lernen Spielen">
       <div class="tore" id="dran"></div>
-      <div class="wegweiser" id="faecher"></div>
+      <div class="faecher" id="faecher"></div>
       <a class="baumhaus" id="regal" href="regal.html" aria-label="Mein Regal"><span class="brett-holz" id="dinge"></span></a>
     </nav>
   </div>
@@ -260,8 +245,8 @@ import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
 import { szeneSvg, ORTE } from "./start/szene.js";
 import { torHtml } from "./start/tore.js";
-import { wegweiserHtml } from "./start/wegweiser.js";
-import { setzeRunde } from "./start/runde-auf-start.js";
+import { faecherHtml } from "./start/faecher.js";
+import { setzeRunde, setzeTiere } from "./start/runde-auf-start.js";
 
 /** So lange hält ein Erwachsener das Zahnrad (wie bisher). */
 const HALTEN_MS = 3000;
@@ -271,6 +256,7 @@ const leiste = document.getElementById("leiste");
 zahnrad();
 document.getElementById("szene").innerHTML = szeneSvg({ jahreszeit: "sommer", tageszeit: "tag" });
 setzeRunde(document.getElementById("runde"), { ton: () => leiste.ton });
+setzeTiere(document.getElementById("tiere"), { ton: () => leiste.ton });
 Object.assign(document.getElementById("regal").style,
   { left: `${ORTE.regal.x}rem`, top: `${ORTE.regal.y}rem`, width: `${ORTE.regal.b}rem`, height: `${ORTE.regal.h}rem` });
 start();
@@ -302,16 +288,13 @@ async function start() {
     nenne(a, dran[i].spiel.titel);
   });
 
-  // Wegweiser: nur Fächer mit mindestens einem Spiel, in der Reihenfolge der Kategorien.
+  // Fach-Knöpfe am linken Rand: nur Fächer mit mindestens einem Spiel, in der Reihenfolge der Kategorien.
   const faecher = (ctx?.spiele.kategorien ?? []).filter((k) => Object.hasOwn(FACH, k.id) && spiele.some((s) => s.kategorie === k.id));
-  const weg = document.getElementById("faecher");
-  weg.innerHTML = wegweiserHtml(faecher);
-  weg.classList.toggle("zwei", faecher.length > 3);
-  document.getElementById("box").classList.toggle("mit-faechern", faecher.length > 0);
-  weg.style.left = `${ORTE.wegweiser.x}rem`;
-  weg.style.top = `${ORTE.wegweiser.y}rem`;
-  weg.style.width = `${ORTE.wegweiser.b}rem`;
-  weg.querySelectorAll("a").forEach((a, i) => nenne(a, faecher[i].name));
+  const nav = document.getElementById("faecher");
+  nav.innerHTML = faecherHtml(faecher);
+  nav.classList.toggle("zwei", faecher.length > 3);
+  Object.assign(nav.style, { left: `${ORTE.faecher.x}rem`, top: `${ORTE.faecher.y}rem`, width: `${ORTE.faecher.b}rem` });
+  nav.querySelectorAll("a").forEach((a, i) => nenne(a, faecher[i].name));
 
   // Regal: die drei zuletzt gekonnten Dinge, das neueste rechts (wie im Regal). Ohne Gekonntes: leeres Holz.
   const zuletzt = ctx ? gekonnteThemen(ctx, stand).slice(-3) : [];

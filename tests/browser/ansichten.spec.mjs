@@ -162,7 +162,7 @@ async function lauf(typ, name, groesse, basis) {
         const box = (el) => { const r = el.getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom }; };
         const imBild = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.left >= 0 && r.top >= 0 && r.right <= innerWidth + 0.5 && r.bottom <= innerHeight + 0.5; };
         const tore = [...document.querySelectorAll("#dran a.tor")];
-        const bretter = [...document.querySelectorAll("#faecher a.brett")];
+        const bretter = [...document.querySelectorAll("#faecher a.fach")];
         const leiste = document.getElementById("leiste");
         const kinder = [...document.querySelectorAll("#runde .kind svg")];
         // Körper der Figur: gemalte Fläche ohne den leeren Rand der viewBox
@@ -182,7 +182,7 @@ async function lauf(typ, name, groesse, basis) {
           regal: imBild(document.getElementById("regal")),
           kinder: kinder.length,
           kinderImBild: koerper.every((k) => k.l >= 0 && k.r <= innerWidth + 0.5 && k.b <= innerHeight + 0.5),
-          pfahl: getComputedStyle(document.getElementById("pfahl")).display !== "none",
+          tiere: [...document.querySelectorAll("#tiere > .tier")].filter(imBild).length,
           fokus,
           dinge: document.getElementById("dinge").children.length,
           hausWeg: leiste.shadowRoot.querySelector("a.haus").hidden,
@@ -192,21 +192,22 @@ async function lauf(typ, name, groesse, basis) {
       });
       pruefe(F, "Startseite: Baumhaus (Regal) ganz im Bild, Haus fehlt, Zahnrad da", st.regal && st.hausWeg && st.zahnrad, JSON.stringify(st));
       pruefe(F, "Startseite: die Runde steht ganz im Bild (vier Kinder)", st.kinder === 4 && st.kinderImBild, JSON.stringify(st));
+      pruefe(F, "Startseite: Feldhase, Hausmaus und Rotkehlchen ganz im Bild", st.tiere === 3, JSON.stringify(st.tiere));
       pruefe(F, "Startseite: keine Zahl als Fortschritt („x von y“, Prozent)", !/\d+\s*(von|\/)\s*\d+|%/.test(st.text), st.text);
       if (fall === "leer") {
-        pruefe(F, "Startseite leer: kein Tor, kein Brett, kein Pfahl, leeres Regal", st.tore === 0 && st.faecher.length === 0 && !st.pfahl && st.dinge === 0, JSON.stringify(st));
+        pruefe(F, "Startseite leer: kein Tor, kein Fach-Knopf, leeres Regal", st.tore === 0 && st.faecher.length === 0 && st.dinge === 0, JSON.stringify(st));
       } else if (fall === "gekonnt") {
-        pruefe(F, "Startseite ohne Spiele: kein Tor, kein Brett, Regal zeigt drei Dinge", st.tore === 0 && st.faecher.length === 0 && st.dinge === 3, JSON.stringify(st));
+        pruefe(F, "Startseite ohne Spiele: kein Tor, kein Fach-Knopf, Regal zeigt drei Dinge", st.tore === 0 && st.faecher.length === 0 && st.dinge === 3, JSON.stringify(st));
       } else {
         pruefe(F, "Startseite mit Spielen: höchstens drei Tore mit ?thema=, ganz im Bild", st.tore >= 1 && st.tore <= 3 && st.toreImBild && st.toreLinks.every((h) => /\.html\?thema=/.test(h)), JSON.stringify(st.toreLinks));
-        pruefe(F, "Startseite mit Spielen: Bretter nur für Fächer mit Spielen (Mathe, Lesen), ganz im Bild, Pfahl da",
-          JSON.stringify(st.faecher) === JSON.stringify(["themen.html?fach=mathe", "themen.html?fach=lesen"]) && st.bretterImBild && st.pfahl, JSON.stringify(st.faecher));
+        pruefe(F, "Startseite mit Spielen: Fach-Knöpfe nur für Fächer mit Spielen (Mathe, Lesen), ganz im Bild",
+          JSON.stringify(st.faecher) === JSON.stringify(["themen.html?fach=mathe", "themen.html?fach=lesen"]) && st.bretterImBild, JSON.stringify(st.faecher));
         pruefe(F, "Tore: Weltandeutung nur bei bekannter Welt (muell-trennen ja, gibt-es-nicht nein)",
           st.toreWelt.includes("muell-trennen") && !st.toreWelt.includes("gibt-es-nicht"), JSON.stringify(st.toreWelt));
         pruefe(F, "Tore: langer Spielname passt ins Schild", st.namePasst, JSON.stringify(st));
-        pruefe(F, "Schilder und Bretter überdecken keine Figur", st.schriftFrei, JSON.stringify(st));
-        const erst = st.fokus.lastIndexOf("tor"), brett = st.fokus.indexOf("brett"), bh = st.fokus.indexOf("baumhaus");
-        pruefe(F, "Tab-Reihenfolge: Tore, dann Bretter, dann Baumhaus", erst < brett && brett < bh, JSON.stringify(st.fokus));
+        pruefe(F, "Namensbretter und Fach-Knöpfe überdecken keine Figur", st.schriftFrei, JSON.stringify(st));
+        const erst = st.fokus.lastIndexOf("tor"), fach = st.fokus.indexOf("fach"), bh = st.fokus.indexOf("baumhaus");
+        pruefe(F, "Tab-Reihenfolge: Tore, dann Fach-Knöpfe, dann Baumhaus", erst < fach && fach < bh, JSON.stringify(st.fokus));
       }
       await bild(start, s("start", fall));
       await start.close();

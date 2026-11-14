@@ -1,8 +1,8 @@
 // Weltandeutung „Tiere auf Wiese und Hecke“ (M35, M37): Hecke mit Blüten, ein Zitronenfalter.
-// Koordinaten im Bogen 0 0 240 280. Stil der Runde: Büschel mit Sichelschatten, Kontur nur außen.
-import { zeichner, form, naht, dunkler } from "../zeichnen.js";
+// Koordinaten im Bogen 0 0 240 380 (Boden bei y ≈ 230, im Tor um 36 angehoben). Stil der Runde: Büschel mit Sichelschatten, Kontur nur außen.
+import { zeichner, form, naht, dunkler, TOR_KONTUR } from "../zeichnen.js";
 
-const zz = zeichner("welt-hecke", 2.4);
+const zz = zeichner("welt-hecke", TOR_KONTUR);
 const GRUEN = "#5FAE5E";
 
 /** @type {[number, number, number][]} */
@@ -14,12 +14,12 @@ const hecke = zz.guss(
 );
 
 // Zitronenfalter (Gonepteryx rhamni): gelbe, spitz zulaufende Flügel mit kleinem orangen Punkt.
-const falter = zz.guss(
+const falter = `<g transform="translate(0 30)">${zz.guss(
   form(`path d="M150 96 C136 74 116 72 112 86 C110 100 130 108 150 100Z"`, "#F4E04D", [124, 82]),
   form(`path d="M150 96 C164 74 184 72 188 86 C190 100 170 108 150 100Z"`, "#F4E04D", [164, 82]),
   naht("M148 96 C136 88 124 86 116 88M152 96 C164 88 176 86 184 88", "#F4E04D", 1.2),
   form(`rect x="147" y="86" width="6" height="22" rx="3"`, "#7A6A3A", [148, 88]),
   form(`circle cx="128" cy="90" r="3"`, "#E8893A", [127, 89], { kontur: false }), form(`circle cx="172" cy="90" r="3"`, "#E8893A", [171, 89], { kontur: false }),
-);
+)}</g>`;
 
 export default `<ellipse cx="124" cy="236" rx="96" ry="7" fill="${dunkler("#A5D78E", 0.26)}"/>` + hecke + falter;

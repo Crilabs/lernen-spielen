@@ -8,6 +8,10 @@ import { dunkler, heller, z } from "../runde/kinder/stil.js";
 
 export { dunkler, heller, z };
 export const TINTE = "#3B2A6B";
+/** Kontur der Szene, sichtbar wie bei den Figuren auf Szenengröße (3 × 340/280). Eine Stärke für alles. */
+export const KONTUR = 3.6;
+/** Kontur im Bogen eines Tors (0 0 240 380 auf 28 rem: 1 Einheit = 1,17 Szeneneinheiten), sichtbar ebenfalls 3,6. */
+export const TOR_KONTUR = KONTUR * 240 / 280;
 
 /** @typedef {{svg: string, kontur: string}} Stueck */
 

@@ -1,25 +1,26 @@
 // Tore der Startseite: ein Dran-Spiel als Weidentor auf der Anhöhe (Spec §5.2).
-// Im Bogen der Himmel in Fachtönung, davor die gezeichnete Weltandeutung (falls es sie gibt), unten am Tor das
-// Spielsymbol auf einem Schild in Fachfüllung, darunter Spielname und leiser das Thema.
+// Im Bogen der Himmel in Fachtönung, davor die gezeichnete Weltandeutung (falls es sie gibt). Quer über die Pfosten
+// ist ein Namensbrett befestigt (Spielname, leiser das Thema), oben darauf das Spielsymbol; darunter laufen die
+// Pfosten weiter bis in den Boden.
 import { FACH } from "../rahmen/stil.js";
 import { ANDEUTUNGEN } from "./welten/index.js";
-import { zeichner, form, flach, naht, dunkler, heller, esc } from "./zeichnen.js";
+import { zeichner, form, flach, naht, dunkler, heller, esc, TOR_KONTUR } from "./zeichnen.js";
 
 /**
  * @typedef {{titel: string, symbol: string, datei: string, welt?: string}} Spiel
  * @typedef {{id: string, name: string, strang: string, spiel: Spiel}} DranTor
  */
 
-const zz = zeichner("tor", 2.9);
+const zz = zeichner("tor", TOR_KONTUR);
 
-/** Öffnung des Bogens (innen), Koordinaten 0 0 240 280. */
-const OEFFNUNG = "M40 280 L40 124 A80 80 0 0 1 200 124 L200 280Z";
+/** Öffnung des Bogens (innen), Koordinaten 0 0 240 380; die Pfosten stehen bei y 370 im Boden. */
+const OEFFNUNG = "M40 380 L40 124 A80 80 0 0 1 200 124 L200 380Z";
 const WEIDE = "#B98E5E";
 const BLATT = "#7DBF6E";
 
 /** Der Weidenbogen: Pfosten und Bogen als ein Band mit Stufen und Flechtfugen, dazu Blätter mit Ader. */
 const BOGEN = (() => {
-  const band = "M22 262 L22 124 A98 98 0 0 1 218 124 L218 262 L194 262 L194 124 A74 74 0 0 0 46 124 L46 262Z";
+  const band = "M22 370 L22 124 A98 98 0 0 1 218 124 L218 370 L194 370 L194 124 A74 74 0 0 0 46 124 L46 370Z";
   const geo = `path d="${band}"`;
   let fugen = "";
   for (let w = 186; w >= -6; w -= 12) {
@@ -27,11 +28,11 @@ const BOGEN = (() => {
     const [x1, y1, x2, y2] = [120 + 76 * Math.cos(a), 124 - 76 * Math.sin(a), 120 + 96 * Math.cos(a + 0.09), 124 - 96 * Math.sin(a + 0.09)];
     fugen += `M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}`;
   }
-  for (let y = 136; y < 262; y += 14) fugen += `M24 ${y} L44 ${y + 8}M196 ${y} L216 ${y + 8}`;
+  for (let y = 136; y < 366; y += 14) fugen += `M24 ${y} L44 ${y + 8}M196 ${y} L216 ${y + 8}`;
   const stufen = zz.innen([geo],
-    `<path d="M206 262 L206 124 A86 86 0 0 0 120 38 L120 26 A98 98 0 0 1 218 124 L218 262Z" fill="${dunkler(WEIDE, 0.22)}"/>`
-    + `<path d="M213 262 L213 124 A93 93 0 0 0 120 31 L120 26 A98 98 0 0 1 218 124 L218 262Z" fill="${dunkler(WEIDE, 0.38)}"/>`
-    + `<path d="M24 262 L24 124 A96 96 0 0 1 120 28 L120 34 A90 90 0 0 0 30 124 L30 262Z" fill="${heller(WEIDE, 0.28)}"/>`
+    `<path d="M206 370 L206 124 A86 86 0 0 0 120 38 L120 26 A98 98 0 0 1 218 124 L218 330Z" fill="${dunkler(WEIDE, 0.22)}"/>`
+    + `<path d="M213 370 L213 124 A93 93 0 0 0 120 31 L120 26 A98 98 0 0 1 218 124 L218 330Z" fill="${dunkler(WEIDE, 0.38)}"/>`
+    + `<path d="M24 370 L24 124 A96 96 0 0 1 120 28 L120 34 A90 90 0 0 0 30 124 L30 370Z" fill="${heller(WEIDE, 0.28)}"/>`
     + naht(fugen, WEIDE, 1.4).svg);
   /** @param {number} x @param {number} y @param {number} w */
   const blatt = (x, y, w) => {
@@ -41,9 +42,12 @@ const BOGEN = (() => {
       naht(`M${(x - dx).toFixed(1)} ${(y - dy).toFixed(1)} L${(x + dx).toFixed(1)} ${(y + dy).toFixed(1)}`, BLATT, 1.2),
     ];
   };
-  return zz.guss(flach(geo, WEIDE), stufen,
+  // Füße: Bodenschatten und ein paar Halme vor den Pfosten, damit das Tor im Boden steht.
+  const halme = (/** @type {number} */ x) => [-8, 0, 8].map((dx, i) => flach(`path d="M${x + dx - 4} 374 Q${x + dx - 2} ${362 - i * 2} ${x + dx + (i - 1) * 6} ${352 - (i % 2) * 6} Q${x + dx + 2} 362 ${x + dx + 4} 374Z"`, i === 1 ? "#8CC777" : "#74B962"));
+  const fuesse = `<ellipse cx="34" cy="373" rx="26" ry="5" fill="${dunkler("#A3D68B", 0.26)}"/><ellipse cx="206" cy="373" rx="26" ry="5" fill="${dunkler("#A3D68B", 0.26)}"/>`;
+  return fuesse + zz.guss(flach(geo, WEIDE), stufen,
     ...[[30, 150, -60], [40, 100, -35], [66, 56, -20], [100, 32, -5], [146, 34, 10], [180, 54, 25], [206, 92, 45], [214, 140, 70], [26, 206, -80], [214, 196, 80]]
-      .flatMap(([x, y, w]) => blatt(x, y, w)));
+      .flatMap(([x, y, w]) => blatt(x, y, w)), ...halme(26), ...halme(214));
 })();
 
 /**
@@ -57,12 +61,12 @@ export function torHtml(t) {
   const andeutung = welt ? ANDEUTUNGEN[welt] : "";
   return `<a class="tor" href="${esc(t.spiel.datei)}?thema=${encodeURIComponent(t.id)}" aria-label="${esc(t.spiel.titel + ", " + t.name)}"`
     + `${welt ? ` data-welt="${esc(welt)}"` : ""} style="--fach-fuellung:${f.fuellung};--fach-tief:${f.tief};--fach-toenung:${f.toenung}">`
-    + `<svg class="bogen" viewBox="0 0 240 280" aria-hidden="true" focusable="false" stroke-linecap="round">`
+    + `<svg class="bogen" viewBox="0 0 240 380" aria-hidden="true" focusable="false" stroke-linecap="round">`
     + `<clipPath id="tor-${esc(t.id)}"><path d="${OEFFNUNG}"/></clipPath>`
-    + `<g clip-path="url(#tor-${esc(t.id)})"><rect width="240" height="280" style="fill:var(--fach-toenung)"/>`
-    + `<path d="M0 222 C70 210 170 210 240 220 L240 280 L0 280Z" fill="${heller("#A5D78E", 0.3)}"/>`
-    + `<path d="M0 226 C70 214 170 214 240 224 L240 280 L0 280Z" fill="#A5D78E"/>`
-    + `<path d="M0 250 C70 240 170 240 240 248 L240 280 L0 280Z" fill="${dunkler("#A5D78E", 0.1)}"/>${andeutung}</g>${BOGEN}</svg>`
+    + `<g clip-path="url(#tor-${esc(t.id)})"><rect width="240" height="380" style="fill:var(--fach-toenung)"/>`
+    + `<path d="M0 186 C70 174 170 174 240 184 L240 380 L0 380Z" fill="${heller("#A5D78E", 0.3)}"/>`
+    + `<path d="M0 190 C70 178 170 178 240 188 L240 380 L0 380Z" fill="#A5D78E"/>`
+    + `<path d="M0 214 C70 204 170 204 240 212 L240 380 L0 380Z" fill="${dunkler("#A5D78E", 0.1)}"/><g transform="translate(0 -36)">${andeutung}</g></g>${BOGEN}</svg>`
     + `<span class="schild"><img src="${esc(t.spiel.symbol)}" alt=""></span>`
     + `<span class="text"><b>${esc(t.spiel.titel)}</b><span class="thema">${esc(t.name)}</span></span></a>`;
 }

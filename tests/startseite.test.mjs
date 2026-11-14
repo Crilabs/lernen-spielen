@@ -20,12 +20,12 @@ test("Startseite: Zahnrad gedrückt halten führt zu eltern.html, loslassen bric
   assert.match(skript, /\["pointerup", "pointercancel", "lostpointercapture"\]\.forEach/);
 });
 
-test("Startseite: Tore aus dranThemen (höchstens drei), Wegweiser nur für Fächer mit Spielen, Regal aus gekonnteThemen", () => {
+test("Startseite: Tore aus dranThemen (höchstens drei), Fach-Knöpfe nur für Fächer mit Spielen, Regal aus gekonnteThemen", () => {
   assert.match(skript, /dranThemen\(ctx, stand\)/);
   assert.match(skript, /\.slice\(0, ORTE\.tore\.length\)/);
   assert.match(skript, /torHtml\(/);
   assert.match(skript, /spiele\.some\(\(s\) => s\.kategorie === k\.id\)/);
-  assert.match(skript, /wegweiserHtml\(faecher\)/);
+  assert.match(skript, /faecherHtml\(faecher\)/);
   assert.match(skript, /gekonnteThemen\(ctx, stand\)\.slice\(-3\)/);
   assert.match(skript, /bausteinHtml\(materialFuer\(g\)\)/);
   assert.match(html, /<a class="baumhaus" id="regal" href="regal\.html" aria-label="Mein Regal">/);
@@ -39,9 +39,10 @@ test("Startseite: Szene im Hintergrund, die Runde steht darin", () => {
   assert.match(skript, /setzeRunde\(/);
 });
 
-test("Startseite: ohne Fächer kein leerer Pfahl", () => {
-  assert.match(skript, /classList\.toggle\("mit-faechern", faecher\.length > 0\)/);
-  assert.match(html, /\.box:not\(\.mit-faechern\) #pfahl \{ display: none; \}/);
+test("Startseite: Tiere stehen in der Szene (Feldhase, Hausmaus, Rotkehlchen), Namen sammelbar", () => {
+  assert.match(skript, /setzeTiere\(/);
+  const quelle = readFileSync(new URL("../spiele/start/runde-auf-start.js", import.meta.url), "utf8");
+  for (const name of ["Feldhase", "Hausmaus", "Rotkehlchen"]) assert.ok(literaleAusCode(quelle).texte.includes(name), name);
 });
 
 test("Startseite: jede Kachel ist ein Link, spricht ihren Namen einmal je Sitzung und speichert vor dem Wechsel", () => {

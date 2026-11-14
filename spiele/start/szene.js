@@ -1,14 +1,14 @@
 // Szene der Startseite: Wiese mit Baumhaus (Spec docs/superpowers/specs/2026-11-14-startseite-treffpunkt-design.md §5).
 // Ein SVG in vier Ebenen (himmel, ferne, mitte, vorne), Stimmungsebene: kein Text, keine Lernzeichen.
 // Gezeichnet wie die Runde (figuren.md §4, Helfer in zeichnen.js): Kontur nur um die Silhouette und so fein wie bei
-// den Figuren (vorn sichtbar 3,6 Einheiten, in der Ferne feiner), Licht von oben links in Stufen (Kernschatten,
+// den Figuren (sichtbar 3,6 Einheiten, überall gleich), Licht von oben links in Stufen (Kernschatten,
 // weicher Schatten, Grundton, Licht), Fugen und Maserung fein im dunklen Ton der Fläche, Schlagschatten an
 // Stoßstellen. Verlauf nur im Himmel.
 //
 // Koordinaten: viewBox 0 0 2880 1080, 1 Einheit = 0,1 rem. Die Seite legt das SVG in eine Box von 288 × 108 rem,
 // waagrecht mittig. Sichtbar ist bei 16:9 x 480–2400, bei 4:3 x 720–2160. Was bedienbar ist, liegt in 4:3 (ORTE).
 
-import { TINTE as T, zeichner, form, flach, ton, naht, zusammen, dunkler, heller, z } from "./zeichnen.js";
+import { TINTE as T, KONTUR, zeichner, form, flach, ton, naht, zusammen, dunkler, heller, z } from "./zeichnen.js";
 
 export const SZENE = Object.freeze({ breite: 2880, hoehe: 1080, horizont: 600 });
 
@@ -19,13 +19,13 @@ export const SZENE = Object.freeze({ breite: 2880, hoehe: 1080, horizont: 600 })
 export const ORTE = Object.freeze({
   /** Öffnung des Baumhauses, darin das Regal. */
   regal: { x: 182, y: 27, b: 28, h: 18 },
-  /** Pfahl des Wegweisers; die Bretter hängen rechts und links daran. */
-  wegweiser: { x: 76, y: 66, b: 28 },
-  /** Bis zu drei Tore auf der Anhöhe (Mitte des Bogens bei x + b/2, Fuß bei y + h). */
+  /** Fach-Knöpfe: Spalte am linken Rand (ab vier Fächern zwei Spalten). */
+  faecher: { x: 75, y: 62, b: 26 },
+  /** Bis zu drei Tore auf der Anhöhe (Fuß der Pfosten bei y + h); Luft zum Baumhaus (Dachüberstand bei 175,5). */
   tore: [
-    { x: 80, y: 12, b: 30, h: 34 },
-    { x: 115, y: 10, b: 30, h: 34 },
-    { x: 150, y: 12, b: 30, h: 34 },
+    { x: 78, y: 10, b: 28, h: 44 },
+    { x: 110, y: 8, b: 28, h: 44 },
+    { x: 142, y: 10, b: 28, h: 44 },
   ],
   /** Die Runde: x/b umfassen den Körper, fuss ist die Höhe der Füße, skala die Größe. */
   runde: [
@@ -34,12 +34,15 @@ export const ORTE = Object.freeze({
     { kind: "lena", x: 160, b: 16, fuss: 104, skala: 1, haltung: "freuen-klein", blick: "links" },
     { kind: "timo", x: 186, b: 22, fuss: 101, skala: 0.98, haltung: "stehen", blick: "links" },
   ],
+  /** Tiere (spiele/runde/tiere): x/b die ganze Zeichnung, fuss die Standhöhe; boden: wirft einen Bodenschatten. */
+  tiere: [
+    { tier: "hase", x: 165, b: 13.1, fuss: 72, skala: 0.9, blick: "links", boden: true },
+    { tier: "maus", x: 205, b: 7.8, fuss: 78, skala: 0.8, blick: "links", boden: true },
+    { tier: "rotkehlchen", x: 174.6, b: 6.1, fuss: 45.6, skala: 1, blick: "links", boden: false },
+  ],
 });
 
-/** Sichtbare Konturbreite: vorn wie die Figuren auf Szenengröße (3 × 340/280), hinten feiner. */
-const K_VORN = 3.6;
-const K_MITTE = 3.2;
-const K_FERN = 2.4;
+const K = KONTUR;
 
 /** @typedef {{tageszeit: "morgen"|"tag"|"abend"|"nacht", jahreszeit: "fruehling"|"sommer"|"herbst"|"winter"}} Zeitbild */
 /** @typedef {import("./zeichnen.js").Stueck} Stueck */
@@ -82,7 +85,7 @@ function gelaende(zz, kamm, farbe, abstaende = [12, 90, 190], extra = "") {
 }
 
 /**
- * Grasstriche (feine Kerben im dunklen Ton) in einem Streifen.
+ * Kleine Halmgruppen als Flächen im Schattenton (keine Linien, damit es nur eine Strichstärke gibt).
  * @param {number} saat @param {number} anzahl @param {[number, number]} xb @param {(x: number) => number} yVon
  * @param {number} streu @param {string} farbe
  */
@@ -92,10 +95,12 @@ function grasstriche(saat, anzahl, xb, yVon, streu, farbe) {
   for (let i = 0; i < anzahl; i++) {
     const x = xb[0] + r() * (xb[1] - xb[0]);
     const y = yVon(x) + 20 + r() * streu;
-    const h = 8 + r() * 10;
-    d += `M${z(x - 5)} ${z(y)} Q${z(x - 4)} ${z(y - h * 0.6)} ${z(x - 8)} ${z(y - h)}M${z(x + 3)} ${z(y)} Q${z(x + 4)} ${z(y - h * 0.7)} ${z(x + 8)} ${z(y - h * 1.1)}`;
+    const h = 10 + r() * 10;
+    d += `M${z(x - 9)} ${z(y)} Q${z(x - 7)} ${z(y - h * 0.5)} ${z(x - 11)} ${z(y - h)} Q${z(x - 3)} ${z(y - h * 0.5)} ${z(x - 1)} ${z(y)}Z`
+      + `M${z(x - 2)} ${z(y)} Q${z(x + 1)} ${z(y - h * 0.7)} ${z(x + 2)} ${z(y - h * 1.3)} Q${z(x + 5)} ${z(y - h * 0.6)} ${z(x + 5)} ${z(y)}Z`
+      + `M${z(x + 4)} ${z(y)} Q${z(x + 8)} ${z(y - h * 0.4)} ${z(x + 12)} ${z(y - h * 0.9)} Q${z(x + 10)} ${z(y - h * 0.3)} ${z(x + 11)} ${z(y)}Z`;
   }
-  return naht(d, farbe, 1.8, 0.24).svg;
+  return `<path d="${d}" fill="${dunkler(farbe, 0.16)}"/>`;
 }
 
 /**
@@ -145,7 +150,7 @@ function bueschel(kreise, farbe, o = {}) {
 
 /** @param {Record<string, string>} p */
 function himmel(p) {
-  const zz = zeichner("himmel", K_FERN);
+  const zz = zeichner("himmel", K);
   const wolke = (/** @type {number} */ x, /** @type {number} */ y, /** @type {number} */ s) => {
     const k = (/** @type {number} */ dx, /** @type {number} */ dy, /** @type {number} */ r) => /** @type {[number, number, number]} */ ([x + dx * s, y + dy * s, r * s]);
     const unten = `rect x="${z(x - 34 * s)}" y="${z(y + 2 * s)}" width="${z(232 * s)}" height="${z(44 * s)}" rx="${z(22 * s)}"`;
@@ -154,20 +159,20 @@ function himmel(p) {
       form(unten, p.wolke, [x, y], { s: 0.9, tiefe: 0.38 }),
     )}</g>`;
   };
-  const sonne = zz.guss(form(`circle cx="1180" cy="190" r="76"`, p.sonne, [1150, 160], { glanz: true, tiefe: 0.6 }));
+  // Die Sonne ist die Lichtquelle: kein Schatten, ein leuchtender Kern statt einer Wölbung.
+  const sonne = zz.guss(flach(`circle cx="640" cy="150" r="76"`, p.sonne), ton("M640 92 A58 58 0 1 1 639.9 92Z", heller(p.sonne, 0.45)));
   return `<g id="himmel">
 <defs><linearGradient id="himmelVerlauf" x1="0" y1="0" x2="0" y2="1">
 <stop offset="0" stop-color="${p.himmelOben}"/><stop offset="1" stop-color="${p.himmelUnten}"/></linearGradient></defs>
 <rect width="2880" height="760" fill="url(#himmelVerlauf)"/>
-<circle cx="1180" cy="190" r="150" fill="${heller(p.himmelUnten, 0.5)}" opacity="0.55"/>
-<circle cx="1180" cy="190" r="114" fill="${heller(p.sonne, 0.62)}"/>
-${sonne}${wolke(560, 210, 1)}${wolke(1460, 120, 0.8)}${wolke(2420, 260, 0.9)}${wolke(260, 380, 0.6)}
+<circle cx="640" cy="150" r="118" fill="#FFFBE8" opacity="0.5"/>
+${sonne}${wolke(470, 300, 0.8)}${wolke(1460, 120, 0.8)}${wolke(2420, 260, 0.9)}
 </g>`;
 }
 
 /** @param {Record<string, string>} p */
 function ferne(p) {
-  const zz = zeichner("ferne", K_FERN);
+  const zz = zeichner("ferne", K);
   const kamm = "M0 560 C260 470 520 500 760 520 C1000 540 1240 450 1560 450 C1860 450 2060 520 2320 500 C2560 480 2720 450 2880 470";
   const baum = (/** @type {number} */ x, /** @type {number} */ y, /** @type {number} */ r) => zz.guss(
     brett(x - r * 0.12, y + r * 0.3, r * 0.24, r * 0.9, dunkler(p.stamm, 0.05)),
@@ -180,7 +185,7 @@ ${baum(330, 500, 46)}${baum(420, 522, 34)}${baum(1640, 432, 40)}${baum(1730, 452
 
 /** @param {Record<string, string>} p */
 function baumUndHaus(p) {
-  const zz = zeichner("baum", K_MITTE);
+  const zz = zeichner("baum", K);
   const r = folge(7);
 
   // Krone: viele Büschel, hinten (oben) zuerst, vorn (unten) zuletzt.
@@ -196,10 +201,7 @@ function baumUndHaus(p) {
     kreise.push([cx, cy, rr * 0.55]);
   }
   kreise.sort((a, b) => a[1] - b[1]);
-  const kroneGeo = kreise.map(([x, y, rr]) => `circle cx="${z(x)}" cy="${z(y)}" r="${z(rr)}"`);
-  // Schlagschatten des Hauses auf der Krone (Licht von oben links: nach rechts unten versetzt).
-  const hausSchatten = zz.innen(kroneGeo, `<path d="M1789 267 L1994 150 L2199 267 L2164 267 L2164 520 L1824 520Z" fill="${dunkler(p.krone, 0.3)}"/>`);
-  const krone = zz.guss(...bueschel(kreise, p.krone, { glanzAb: 210 }), hausSchatten);
+  const krone = zz.guss(...bueschel(kreise, p.krone, { glanzAb: 210 }));
 
   // Stamm mit Wurzelfuß, Rinde als feine Linien, Schlagschatten der Plattform oben.
   const stammD = "M1905 470 L1900 700 C1890 740 1860 760 1830 770 L2070 770 C2040 760 2010 740 2002 700 L1998 470Z";
@@ -271,30 +273,22 @@ function baumUndHaus(p) {
       + naht(`M${ox + 70} ${oy + 60} L${ox + 70} ${oy + oh}M${ox + 140} ${oy + 60} L${ox + 140} ${oy + oh}M${ox + 210} ${oy + 60} L${ox + 210} ${oy + oh}`, p.innen, 1.6, 0.18).svg),
   );
   // Kante der Öffnung zur Wand: eine Konturlinie (wie die Silhouette, denn hier endet die Wand).
-  const kante = `<g fill="none" stroke="${T}" stroke-width="${K_MITTE}"><${rueck}/></g>`;
+  const kante = `<g fill="none" stroke="${T}" stroke-width="${K}"><${rueck}/></g>`;
   return `${krone}${rampe}${stamm}${leiter}${haus}${kante}`;
 }
 
 /** @param {Record<string, string>} p */
 function mitte(p) {
-  const zz = zeichner("mitte", K_MITTE);
+  const zz = zeichner("mitte", K);
   const kamm = "M0 640 C300 590 640 520 980 505 C1240 494 1500 500 1700 540 C1950 590 2300 610 2880 620";
   const kammY = (/** @type {number} */ x) => x < 980 ? 640 - (x / 980) * 135 : x < 1700 ? 505 + Math.max(0, (x - 1240) / 460) ** 2 * 35 : 540 + (x - 1700) * 0.07;
   const anhoehe = gelaende(zz, kamm, p.huegel, [12, 100, 200], grasstriche(3, 34, [0, 2880], kammY, 160, p.huegel));
-  // Pfahl des Wegweisers; die Bretter setzt die Seite als Links daran.
-  const w = ORTE.wegweiser;
-  const px = (w.x + w.b / 2) * 10;
-  const kopf = w.y * 10 - 30;
-  const pfahl = zz.guss(
-    brett(px - 22, kopf, 44, 1000 - kopf, p.stamm, { rx: 14, maserung: 3 }),
-    form(`circle cx="${px}" cy="${kopf}" r="28"`, p.stamm, [px - 12, kopf - 14]),
-  );
-  return `<g id="mitte">${anhoehe}${baumUndHaus(p)}<g id="pfahl">${pfahl}</g></g>`;
+  return `<g id="mitte">${anhoehe}${baumUndHaus(p)}</g>`;
 }
 
 /** @param {Record<string, string>} p */
 function vorne(p) {
-  const zz = zeichner("vorne", K_VORN);
+  const zz = zeichner("vorne", K);
   const kamm = "M0 800 C500 740 1100 730 1600 750 C2100 770 2500 760 2880 740";
   const flaecheGeo = `path d="${kamm} L2880 1100 L0 1100Z"`;
   const weg = zz.innen([flaecheGeo],
@@ -307,10 +301,12 @@ function vorne(p) {
   const wiese = gelaende(zz, kamm, p.vorne, [12, 130, 250], grasstriche(11, 40, [0, 2880], (x) => 760 + Math.abs(x - 1500) * 0.02, 300, p.vorne));
 
   // Bodenschatten der Runde (flach, im Ton der Wiese; die Kinder stehen, statt zu schweben).
-  const schatten = ORTE.runde.map((k) => {
-    const cx = (k.x + k.b / 2) * 10, cy = k.fuss * 10 - 3, rx = (k.kind === "timo" ? 110 : 80) * k.skala;
-    return `<ellipse class="bodenschatten" cx="${z(cx)}" cy="${z(cy)}" rx="${z(rx)}" ry="${z(rx * 0.17)}" fill="${dunkler(p.vorne, 0.26)}"/>`;
-  }).join("");
+  const flecken = [
+    ...ORTE.runde.map((k) => ({ cx: (k.x + k.b / 2) * 10, cy: k.fuss * 10 - 3, rx: (k.kind === "timo" ? 110 : 80) * k.skala })),
+    ...ORTE.tiere.filter((t) => t.boden).map((t) => ({ cx: (t.x + t.b / 2) * 10, cy: t.fuss * 10 - 2, rx: t.b * 3.6 })),
+  ];
+  const schatten = flecken.map(({ cx, cy, rx }) =>
+    `<ellipse class="bodenschatten" cx="${z(cx)}" cy="${z(cy)}" rx="${z(rx)}" ry="${z(rx * 0.17)}" fill="${dunkler(p.vorne, 0.26)}"/>`).join("");
 
   /** Grasbüschel: Halme hinten dunkler, vorn im Grundton, ein Halm im Licht. */
   const gras = (/** @type {number} */ x, /** @type {number} */ y, /** @type {number} */ s) => {
@@ -333,7 +329,7 @@ function vorne(p) {
   );
   return `<g id="vorne">${wiese}${weg}${schatten}
 ${gras(560, 1000, 1)}${gras(640, 1030, 0.8)}${gras(2380, 1010, 1)}${gras(2470, 1040, 0.75)}${gras(700, 870, 0.6)}${gras(2280, 860, 0.6)}
-${blume(500, 930, p.bluete1)}${blume(610, 965, p.bluete3)}${blume(2420, 920, p.bluete1)}${blume(2540, 960, p.bluete3)}${blume(2330, 990, p.bluete1)}
+${blume(500, 930, p.bluete1)}${blume(752, 985, p.bluete3)}${blume(2420, 920, p.bluete1)}${blume(2540, 960, p.bluete3)}${blume(2330, 990, p.bluete1)}
 </g>`;
 }
 

@@ -1,8 +1,8 @@
-// Weltandeutung „Müll trennen“ (M14 Zwei Tonnen): zwei Tonnen auf der Wiese. Koordinaten im Bogen 0 0 240 280.
+// Weltandeutung „Müll trennen“ (M14 Zwei Tonnen): zwei Tonnen auf der Wiese. Koordinaten im Bogen 0 0 240 380 (Boden bei y ≈ 230, im Tor um 36 angehoben).
 // Stil der Runde: Kontur nur außen, Schatten in Stufen, Fugen im dunklen Ton.
-import { zeichner, form, flach, ton, naht, dunkler, heller } from "../zeichnen.js";
+import { zeichner, form, flach, ton, naht, dunkler, heller, TOR_KONTUR } from "../zeichnen.js";
 
-const zz = zeichner("welt-muell", 2.4);
+const zz = zeichner("welt-muell", TOR_KONTUR);
 
 /** @param {number} x @param {string} farbe */
 const tonne = (x, farbe) => zz.guss(
