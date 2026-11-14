@@ -1,6 +1,7 @@
 // Laden der Anleitungen „Mit echten Dingen“ (docs/mit-echten-dingen.md) für Karte, Kachel, Pause und Übersicht.
 // spiele/mit-echten-dingen/verzeichnis.json sagt, welche Themen eine freigegebene Anleitung haben (`npm run echte-dinge`);
-// erst dann wird die Datei <fach>/<thema>.md geholt. So fragt keine Seite nach Dateien, die es nicht gibt, und kein
+// erst dann wird die Datei geholt: `datei` aus dem Verzeichnis (eine Familie von Themen teilt sich eine Datei), sonst
+// <fach>/<thema>.md. So fragt keine Seite nach Dateien, die es nicht gibt, und kein
 // Entwurf erreicht das Kind. Nur mit `?entwurf` in der Adresse der Seite (Vorschau, Prüfungen) gilt
 // verzeichnis-entwurf.json mit den Entwürfen.
 // Die letzte Wahl der Form merkt sich die Einstellung `echte-dinge.form` (am Profil): eine Voreinstellung für das
@@ -12,7 +13,7 @@ import { liesAnleitung } from "./markdown.js";
 
 /** @typedef {import("./markdown.js").Anleitung} Anleitung */
 /** @typedef {import("./markdown.js").Form} Form */
-/** @typedef {{ fach: string, name: string, titel: string, formen: { situation: string, name: string }[], entwurf: boolean }} Eintrag */
+/** @typedef {{ fach: string, name: string, titel: string, formen: { situation: string, name: string }[], entwurf: boolean, datei?: string }} Eintrag */
 
 const ORDNER = new URL("../mit-echten-dingen/", import.meta.url);
 export const FORM_EINSTELLUNG = "echte-dinge.form";
@@ -56,13 +57,16 @@ export async function findeAnleitung({ thema = "", fach = "", titel = "" }) {
 }
 
 /**
- * Lädt und liest eine Anleitung (gemerkt); null, wenn sie fehlt oder keine Form hat.
+ * Lädt und liest eine Anleitung (gemerkt je Datei, eine Familie teilt sich das Ergebnis); null, wenn sie fehlt oder
+ * keine Form hat. Die Datei sagt das Verzeichnis (`datei`, wenn das Fach passt), sonst <fach>/<thema>.md.
  * @param {string} fach
  * @param {string} thema
  * @returns {Promise<Anleitung | null>}
  */
-export function ladeAnleitung(fach, thema) {
-  const pfad = `${fach}/${thema}.md`;
+export async function ladeAnleitung(fach, thema) {
+  const { themen } = await ladeVerzeichnis();
+  const e = Object.hasOwn(themen, thema) ? themen[thema] : null;
+  const pfad = e?.datei && e.fach === fach ? e.datei : `${fach}/${thema}.md`;
   if (!/^[a-z0-9-]+\/[a-z0-9-]+\.md$/.test(pfad)) return Promise.resolve(null);
   if (!anleitungen.has(pfad)) {
     anleitungen.set(pfad, fetch(new URL(pfad, ORDNER))

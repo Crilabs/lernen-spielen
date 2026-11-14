@@ -215,9 +215,21 @@ function kasten(t) {
     .replace(/<p>Ihr braucht:/, "<p><b>Ihr braucht:</b>");
   return `<article><h2>${esc(t.name)}</h2><h3><img src="${SYMBOL(f.symbol)}" alt="">${esc(f.wort)}: ${esc(f.name)}</h3>${html}</article>`;
 }
+// Eine Familie (mehrere Themen, eine Datei) steht nur einmal auf dem Zettel: ladeAnleitung merkt je Datei, gleiche
+// Datei heißt dasselbe Objekt.
+function einmalJeAnleitung(liste) {
+  const gesehen = new Set();
+  return liste.filter((t) => {
+    const a = anleitungen.get(t.id);
+    if (!a) return true;
+    if (gesehen.has(a)) return false;
+    gesehen.add(a);
+    return true;
+  });
+}
 const zettel = $("zettel");
 zettel.innerHTML = `<header><img src="${SYMBOL("hand.svg")}" alt=""><div><h1>Mit echten Dingen</h1><p>Kleine Spiele zu dem, was gerade dran ist</p></div></header>
-  <div class="raster">${teile.dran.map(kasten).filter(Boolean).slice(0, ZETTEL_MAX).join("")}</div>`;
+  <div class="raster">${einmalJeAnleitung(teile.dran).map(kasten).filter(Boolean).slice(0, ZETTEL_MAX).join("")}</div>`;
 const raster = zettel.querySelector(".raster");
 await document.fonts.ready;
 await Promise.all([...zettel.querySelectorAll("img")].map((i) => (i.complete ? null : new Promise((ok) => { i.onload = i.onerror = ok; }))));
