@@ -50,7 +50,8 @@ const T = (teil, st) => ({ teil, svg: st.svg, kontur: st.kontur });
 /**
  * Dreiviertelansicht eines gehenden Kindes, aus einem Guss: Tinte nur um die Silhouette (kinder/stil.js).
  * farben.hemd: sichtbares Hemd unter offener Jacke (sonst geschlossenes Oberteil).
- * @param {{breite: number, farben: Farben & {hemd?: string, ringel?: string, sohle?: string}, kopf: KopfStuecke}} k breite 1 = Grundmaß
+ * @param {{breite: number, farben: Farben & {hemd?: string, ringel?: string, sohle?: string, muster?: string[], latz?: string, kurzarm?: boolean, wangen?: number},
+ *   kopf: KopfStuecke}} k breite 1 = Grundmaß. Oberteil: hemd = offene Jacke über Shirt, latz = Latzhose über Shirt, sonst Pulli.
  * @returns {import("../bestand.js").KindAnsicht}
  */
 export function dreiviertel({ breite: b, farben: f, kopf }) {
@@ -106,9 +107,13 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
   const arm = (dx, ex, daumen, trenn) => {
     const w = P(X(ex) - Math.sign(dx), 166);
     return {
-      oben: [T("oberarm", S.glied(P(X(dx), schulterY), 9.5, P(X(ex), 146), 8.8, f.oben, { trenn, ansatz: true }))],
+      oben: [T("oberarm", f.kurzarm
+        ? S.zusammen(S.glied(P(X(ex), 134), 7.4, P(X(ex), 146), 7.4, f.haut), S.glied(P(X(dx), schulterY), 10, P(X(ex) - Math.sign(dx), 136), 9.6, f.oben, { trenn, ansatz: true }))
+        : S.glied(P(X(dx), schulterY), 9.5, P(X(ex), 146), 8.8, f.oben, { trenn, ansatz: true }))],
       unten: [
-        T("unterarm", S.glied(P(X(ex), 146), 8.8, P(w[0], 160), 9.4, f.oben, { trenn })),
+        T("unterarm", f.kurzarm
+          ? S.glied(P(X(ex), 146), 7.4, P(w[0], 160), 6.8, f.haut, { trenn })
+          : S.glied(P(X(ex), 146), 8.8, P(w[0], 160), 9.4, f.oben, { trenn })),
         { teil: "hand", formen: S.haende(w, f.haut, daumen) },
       ],
     };
@@ -140,7 +145,62 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
       S.falte(`M${z(X(-6))} 113 C${z(X(-8))} 140 ${z(X(-6))} 165 ${z(X(-4))} 189 L${z(X(1))} 189 C${z(X(-1))} 165 ${z(X(-3))} 140 ${z(X(-1))} 118 Z`, f.hemd, 0.3),
       S.falte(`M${z(X(13))} 116 C${z(X(16))} 140 ${z(X(17))} 165 ${z(X(18))} 189 L${z(X(20))} 189 C${z(X(19))} 165 ${z(X(18))} 140 ${z(X(15))} 113 Z`, f.hemd, 0.22),
     )
-    : S.zusammen(S.form(S.pfad(jacke), f.oben, P(X(-22), 118), { s: 0.88 }), S.naht(`M${z(X(-10))} 113 Q160 121 ${z(X(10))} 113`, f.oben));
+    : f.latz ? latzhose() : pulli();
+  /** Seitenkanten des Oberteils auf Höhe y (für Bänder und Muster, die nicht über den Rand ragen). @param {number} y */
+  function kanten(y) {
+    const t = Math.max(0, Math.min(1, (y - 118) / 66));
+    return [X(-23 - 11 * t * t * 0.4 - 6.6 * t), X(23 + 11 * t * t * 0.4 + 6.6 * t)];
+  }
+  /** Geschlossener Pulli mit Rundkragen, Bündchen und wahlweise einem Musterband (f.muster: [Grund, Zeichen]). */
+  function pulli() {
+    const teile = [
+      S.form(S.pfad(jacke), f.oben, P(X(-22), 118), { s: 0.88 }),
+      S.falte(`M${z(X(-10))} 112 Q160 124 ${z(X(10))} 112 Q160 117 ${z(X(-10))} 112 Z`, f.oben, 0.4),
+      S.naht(`M${z(X(-11))} 112 Q160 123 ${z(X(11))} 112`, f.oben, 2.4),
+    ];
+    if (f.muster) {
+      const [a1, b1] = kanten(140);
+      const [a2, b2] = kanten(154);
+      teile.push({ svg: `<path d="M${z(a1 + 1)} 140 L${z(b1 - 1)} 140 L${z(b2 - 1)} 154 L${z(a2 + 1)} 154 Z" fill="${f.muster[0]}" stroke="none"/>`
+        + `<path d="M${z(a1 + 3)} 147 ${Array.from({ length: 9 }, (_, i) => `L${z(a1 + 3 + (i + 0.5) * (b1 - a1 - 6) / 9)} ${i % 2 ? 150.5 : 143.5}`).join(" ")} L${z(b1 - 3)} 147"`
+        + ` fill="none" stroke="${f.muster[1]}" stroke-width="2.6" stroke-linecap="butt"/>`
+        + `<path d="M${z(a1 + 1)} 154 L${z(b1 - 1)} 154 L${z(b2 - 1)} 156 L${z(a2 + 1)} 156 Z" fill="${S.dunkler(f.oben, 0.3)}" stroke="none"/>`, kontur: "" });
+    }
+    const [ua, ub] = kanten(178);
+    teile.push(
+      S.naht(`M${z(ua + 2)} 180 C${z(X(-12))} 185 ${z(X(12))} 185 ${z(ub - 2)} 180`, f.oben, 2.4),
+      S.naht(`M${z(X(-18))} 182 l1 6 M${z(X(-8))} 184 l0.5 6 M${z(X(2))} 185 l0 6 M${z(X(12))} 184 l-0.5 6 M${z(X(22))} 182 l-1 6`, f.oben, 1.8),
+      S.glanz(`M${z(X(-22))} 124 C${z(X(-25))} 145 ${z(X(-27))} 165 ${z(X(-29))} 178`, f.oben, 4),
+      S.falte(`M${z(X(21))} 120 C${z(X(25))} 135 ${z(X(27))} 160 ${z(X(31))} 183 L${z(X(26))} 186 C${z(X(24))} 160 ${z(X(22))} 140 ${z(X(19))} 122 Z`, f.oben, 0.2),
+      S.falte(`M${z(X(-30))} 172 C${z(X(-22))} 166 ${z(X(-12))} 167 ${z(X(-6))} 171 C${z(X(-14))} 170 ${z(X(-22))} 171 ${z(X(-30))} 175 Z`, f.oben),
+    );
+    return S.zusammen(...teile);
+  }
+  /** Latzhose über einem Shirt (f.oben = Shirt, f.latz = Latzhose; f.unten sollte gleich f.latz sein). */
+  function latzhose() {
+    const latz = /** @type {string} */ (f.latz);
+    const brust = `M${z(X(-15))} 142 L${z(X(15))} 142 L${z(X(18))} 176 L${z(X(-18))} 176 Z`;
+    const [ua, ub] = kanten(176);
+    const bauch = `M${z(ua)} 172 L${z(ub)} 172 L${z(X(31))} 184 C${z(X(20))} 192 ${z(X(-20))} 192 ${z(X(-31))} 184 Z`;
+    return S.zusammen(
+      S.form(S.pfad(jacke), f.oben, P(X(-22), 118), { s: 0.88 }),
+      S.falte(`M${z(X(-10))} 112 Q160 124 ${z(X(10))} 112 Q160 117 ${z(X(-10))} 112 Z`, f.oben, 0.4),
+      S.naht(`M${z(X(-11))} 112 Q160 123 ${z(X(11))} 112`, f.oben, 2.4),
+      S.glanz(`M${z(X(-22))} 124 C${z(X(-25))} 140 ${z(X(-26))} 155 ${z(X(-27))} 168`, f.oben, 4),
+      S.falte(`M${z(X(21))} 120 C${z(X(25))} 135 ${z(X(27))} 160 ${z(X(29))} 172 L${z(X(25))} 172 C${z(X(24))} 160 ${z(X(22))} 140 ${z(X(19))} 122 Z`, f.oben, 0.2),
+      // Träger von der Brust über die Schultern
+      S.form(S.pfad(`M${z(X(-15))} 143 L${z(X(-9))} 143 L${z(X(-15))} 112 L${z(X(-21))} 114 Z`), latz, P(X(-19), 116), { s: 0.8, kontur: false }),
+      S.form(S.pfad(`M${z(X(9))} 143 L${z(X(15))} 143 L${z(X(22))} 114 L${z(X(16))} 112 Z`), latz, P(X(14), 116), { s: 0.8, kontur: false }),
+      S.form(S.pfad(brust), latz, P(X(-13), 145), { s: 0.86, kontur: false }),
+      S.form(S.pfad(bauch), latz, P(X(-26), 174), { s: 0.9, kontur: false }),
+      S.falte(`M${z(X(-15))} 142 L${z(X(15))} 142 L${z(X(15.3))} 146 L${z(X(-15.3))} 146 Z`, f.oben, 0.42),
+      // Brusttasche, Knöpfe, Naht
+      S.naht(`M${z(X(-8))} 150 L${z(X(8))} 150 L${z(X(8.5))} 164 Q160 167 ${z(X(-8.5))} 164 Z`, latz, 2.2),
+      { svg: [X(-12), X(12)].map((x) => `<circle cx="${z(x)}" cy="146" r="2.6" fill="#E9D9A8" stroke="${S.dunkler(latz, 0.5)}" stroke-width="1.4"/>`).join(""), kontur: "" },
+      S.naht(`M${z(X(-18))} 176 L${z(X(18))} 176`, latz, 2),
+      S.falte(`M${z(X(14))} 144 L${z(X(15))} 144 L${z(X(18))} 176 L${z(X(14))} 176 Z`, latz, 0.3),
+    );
+  }
   return {
     drehpunkte: {
       koerper: [160, 254], rumpf: [160, hueftY], kopf: [160, 110],
@@ -176,7 +236,7 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
           + " C127 102 119 88 120 70 C122 46 138 30 162 30 Z"), f.haut, P(146, 54), { s: 0.9, trenn: true })),
         // Schlagschatten des Ponys auf der Stirn (vom Kind geliefert, folgt den Lockenspitzen).
         ...(kopf.ponyschatten ? [T("haarschatten", kopf.ponyschatten)] : []),
-        T("wangen", S.zusammen(S.roete(148, 95, 8, 5), S.roete(191, 94, 6, 4.5))),
+        T("wangen", S.zusammen(S.roete(148, 95, 8, 5, f.wangen), S.roete(191, 94, 6, 4.5, f.wangen))),
         T("nase", S.zusammen(S.falte("M174 86 Q179 90 173 94 Q176 90 174 86 Z", f.haut, 0.4), S.naht("M173 87 Q177 90.5 172 93.5", f.haut, 2.4))),
         { teil: "gesicht" },
         // Brille und Hörgeräte unter den Haaren: Locken dürfen über die Bügel fallen.

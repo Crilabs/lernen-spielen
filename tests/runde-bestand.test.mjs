@@ -135,3 +135,12 @@ test("Teil mit Handformen braucht die Form offen", () => {
 test("unbekannte Hand wird abgelehnt", () => {
   assert.throws(() => meldeHaltung({ id: "h5", ansicht: "beide", haende: { links: "faust" } }), /links/);
 });
+
+test("stil eines Kindes erlaubt nur CSS-Variablen mit einfachen Werten", () => {
+  const k = kopie(TESTKIND_GEHT);
+  k.stil = { color: "red" };
+  assert.throws(() => meldeKind(k), /--/);
+  const k2 = kopie(TESTKIND_GEHT);
+  k2.stil = { "--lippe": 'x" onload="y' };
+  assert.throws(() => meldeKind(k2), /lippe/);
+});

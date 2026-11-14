@@ -172,3 +172,12 @@ test("Zubehör mit Kontur: Kontur-Gruppe in der Kontur-Schicht", () => {
   assert.match(K(svg), /data-zubehoer-kontur="test-kappe"[^>]*><path data-test="kappe-kontur"\/>/);
   assert.ok(F(svg).includes('data-test="kappe"'));
 });
+
+test("Kind kann Farbwerte als CSS-Variablen mitgeben (Gesichtsfarben je Kind)", () => {
+  const k = kopie(TESTKIND_GEHT);
+  k.id = "test-farbig";
+  k.stil = { "--lippe": "#3A1A14" };
+  meldeKind(k);
+  assert.match(zeichne("test-farbig"), /^<svg [^>]*style="--lippe:#3A1A14"/);
+  assert.doesNotMatch(zeichne("test-geht"), /^<svg [^>]*style=/);
+});

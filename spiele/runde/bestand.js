@@ -12,7 +12,7 @@ import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, gelenkeFuer } fro
  * @typedef {{gelenk: string, punkt: [number, number], winkel?: number, mass?: number}} Platz
  * @typedef {{drehpunkte: Record<string, [number, number]>, teile: Record<string, Teil[]>,
  *            gesicht: [number, number], plaetze: Record<string, Platz>}} KindAnsicht
- * @typedef {{id: string, name: string, pronomen: "sie"|"er", bewegt: Bewegt, entwurf?: boolean,
+ * @typedef {{id: string, name: string, pronomen: "sie"|"er", bewegt: Bewegt, entwurf?: boolean, stil?: Record<string, string>,
  *            ansichten: Partial<Record<Ansicht, KindAnsicht>>}} Kind
  * @typedef {{id: string, ansichten: Partial<Record<Ansicht, string>>}} Gesicht
  * @typedef {{vorn?: string, hinten?: string}} Haende
@@ -84,6 +84,10 @@ const bewegtBeine = (w) => Object.keys(w?.winkel ?? {}).some((g) => BEINE.includ
 /** @param {Kind} kind */
 export function meldeKind(kind) {
   frei(bestand.kinder, "Kind", kind);
+  for (const [k, v] of Object.entries(kind.stil ?? {})) {
+    if (!/^--[a-z-]+$/.test(k)) fehler(`Kind ${kind.id}: stil erlaubt nur CSS-Variablen (--name), nicht „${k}“`);
+    if (!/^[#\w.(), %-]+$/.test(v)) fehler(`Kind ${kind.id}: Wert für ${k} enthält unerlaubte Zeichen`);
+  }
   const gelenke = gelenkeFuer(kind.bewegt);
   for (const a of ANSICHTEN) {
     const ans = kind.ansichten[a];

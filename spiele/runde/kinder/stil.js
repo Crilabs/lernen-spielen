@@ -74,8 +74,8 @@ export const falte = (d, farbe, anteil = 0.32) => ({ svg: `<path d="${d}" fill="
 /** Glanzstrich (Haar, Stoff). @param {string} d @param {string} farbe @param {number} [w] */
 export const glanz = (d, farbe, w = 2.6) => ({ svg: `<path d="${d}" fill="none" stroke="${heller(farbe, 0.42)}" stroke-width="${w}" opacity="0.8"/>`, kontur: "" });
 
-/** Weiche Röte (Wangen). @param {number} cx @param {number} cy @param {number} rx @param {number} ry */
-export const roete = (cx, cy, rx, ry) => ({ svg: `<ellipse cx="${z(cx)}" cy="${z(cy)}" rx="${z(rx)}" ry="${z(ry)}" fill="#E9806A" opacity="0.35" stroke="none"/>`, kontur: "" });
+/** Weiche Röte (Wangen). @param {number} cx @param {number} cy @param {number} rx @param {number} ry @param {number} [deckkraft] */
+export const roete = (cx, cy, rx, ry, deckkraft = 0.35) => ({ svg: `<ellipse cx="${z(cx)}" cy="${z(cy)}" rx="${z(rx)}" ry="${z(ry)}" fill="#E9806A" opacity="${deckkraft}" stroke="none"/>`, kontur: "" });
 
 /** Tintenlinie innen (Gesichtszüge, Brille). @param {string} d @param {number} [w] */
 export const tinte = (d, w = 3) => ({ svg: `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w}"/>`, kontur: "" });
@@ -181,6 +181,22 @@ export function zacken(punkte, bogen = 0.18) {
     const dx = bx - ax;
     const dy = by - ay;
     d += ` Q${z((ax + bx) / 2 - dy * bogen)} ${z((ay + by) / 2 + dx * bogen)} ${z(bx)} ${z(by)}`;
+  }
+  return d + " Z";
+}
+
+/**
+ * Pfad mit Buckeln zwischen den Punkten (Locken als ein Schopf). Im Uhrzeigersinn um die Form angeben,
+ * dann wölben sich die Buckel nach außen.
+ * @param {[number, number][]} punkte @param {number} [rund] 1 = Halbkreis, kleiner = flacher
+ */
+export function buckel(punkte, rund = 1) {
+  let d = `M${z(punkte[0][0])} ${z(punkte[0][1])}`;
+  for (let i = 1; i <= punkte.length; i++) {
+    const [ax, ay] = punkte[i - 1];
+    const [bx, by] = punkte[i % punkte.length];
+    const r = (Math.hypot(bx - ax, by - ay) / 2) / Math.max(0.3, rund);
+    d += ` A${z(r)} ${z(r)} 0 0 1 ${z(bx)} ${z(by)}`;
   }
   return d + " Z";
 }
