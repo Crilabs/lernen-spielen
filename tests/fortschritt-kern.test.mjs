@@ -24,8 +24,9 @@ test("kategorieWert ignoriert Spiele mit arten (Lernsteuerung statt Balken)", ()
 });
 
 test("sichtbareKategorien blendet leere aus", () => {
-  const daten = JSON.parse(readFileSync(new URL("../spiele/spiele.json", import.meta.url), "utf8"));
-  assert.deepEqual(sichtbareKategorien(daten).map((e) => e.kategorie.id), ["mathe", "grammatik", "schreiben"]);
+  const daten = { kategorien: [{ id: "mathe" }, { id: "lesen" }, { id: "schreiben" }], spiele: [{ id: "a", kategorie: "schreiben" }, { id: "b", kategorie: "mathe" }] };
+  assert.deepEqual(sichtbareKategorien(daten).map((e) => e.kategorie.id), ["mathe", "schreiben"]);
+  assert.deepEqual(sichtbareKategorien({ kategorien: [{ id: "mathe" }], spiele: [] }), []);
 });
 
 test("fortschritt-Kennzeichen passt zu den Modulen", async () => {

@@ -6,11 +6,11 @@
 // Zufall (rnd), Datum (heute, "JJJJ-MM-TT") und Uhrzeit (jetzt, ms) kommen immer als Parameter.
 //
 // Lernstand (Schlüssel "lernplan"):
-//   { version: 1, themen: { [id]: Thema }, aufgaben: { [key]: Aufgabe }, verlauf: [], migriert?: 1, … }
-//   Thema   { z: "dran"|"kann-ich", stufe, e, seit, k, u, frei: 0|1, v: [], p?: 1, pb?: 1 }
+//   { version: 1, themen: { [id]: Thema }, aufgaben: { [key]: Aufgabe }, verlauf: [], … }
+//   Thema   { z: "dran"|"kann-ich", stufe, e, seit, k, u, frei: 0|1, v: [], pb?: 1 }
 //           e = Einführung gesehen am, seit = dran seit, k = gekonnt am, u = zuletzt geübt am,
 //           frei = von den Eltern freigegeben (Thema selbst in Sicht, gilt nicht als erfüllte Voraussetzung), v = letzte Ergebnisse (1/0) auf der aktuellen Stufe,
-//           p = übernommenes Thema, Probe steht noch aus; pb = Probe begonnen (mindestens eine Antwort verbucht).
+//           pb = Probe begonnen (mindestens eine Antwort verbucht).
 //           Ohne Eintrag (oder ohne z) wird der Zustand berechnet.
 //   Aufgabe { f, t, h: [], ms: [], g?: 1, kk?: 1 }
 //           f = Fach, t = Tag der letzten Einstufung, h = letzte Ergebnisse, ms = letzte Antwortzeiten,
@@ -517,13 +517,13 @@ export function verbucheErgebnis(ctx, stand, sitzung, key, { ok, hilfe = 0, ms, 
         // Bestätigung über die Wiederholung
         sitzung.probe = null;
         inFachEins(ctx, stand, thema.id, heute);
-        delete t.p; delete t.pb;
+        delete t.pb;
         ereignis = wirdGekonnt(stand, thema.id, heute);
       }
     } else {
       // Probe endet beim ersten Fehler, der ersten Hilfe oder einer mühsamen Antwort
       sitzung.probe = null;
-      delete t.p; delete t.pb;
+      delete t.pb;
       const unten = stufenFuer(ctx, sitzung.spiel, sitzung.thema)[0] ?? "kopf";
       t.stufe = unten; t.v = [];
       if (unten !== sitzung.stufe) ereignis = { typ: "stufe", stufe: unten };
@@ -616,7 +616,7 @@ export function elternThemen(ctx, stand, heute) {
 export function markiereGekonnt(stand, themaId, heute, ctx = null) {
   const t = stand.themen[themaId] || (stand.themen[themaId] = {});
   Object.assign(t, { z: "kann-ich", k: heute, stufe: "kopf", v: [] });
-  delete t.p; delete t.pb;
+  delete t.pb;
   if (ctx) inFachEins(ctx, stand, themaId, heute);
   return stand;
 }
@@ -642,70 +642,6 @@ export function gibFrei(stand, themaId) {
   return stand;
 }
 
-// ---------- Übernahme alter Spielstände (einmalig) ----------
-
-// Zahlenzauber-Stufe einer Rechenaufgabe (STUFEN in zahlenzauber.html)
-function zauberStufe(a) {
-  const { op, raum } = a.daten;
-  if (raum === 30) return 3;
-  if (raum === 100) return 4;
-  if (op === "minus") return 2;
-  return raum === 10 ? 0 : 1;
-}
-
-export function migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute = "" } = {}) {
-  if (stand.migriert) return stand;
-  const teil = { perlenbruecke: new Set(), zahlenzauber: new Set() };
-  const uebernimm = (spiel, key, alt) => {
-    if (!istObjekt(alt)) return;
-    if (!stand.aufgaben[key]) {
-      const e = { f: fach(alt.f), t: text(alt.t), h: (Array.isArray(alt.h) ? alt.h : []).filter((x) => x === 0 || x === 1).slice(-H_LAENGE), ms: [] };
-      if (alt.g) e.g = 1;
-      stand.aufgaben[key] = e;
-    }
-    teil[spiel].add(key);
-  };
-  if (istObjekt(perlenbruecke?.paare))
-    for (const [k, alt] of Object.entries(perlenbruecke.paare)) if (/^\d+:\d+\+\d+$/.test(k)) uebernimm("perlenbruecke", `zerl:${k}`, alt);
-  if (istObjekt(zahlenzauber?.fakten))
-    for (const [k, alt] of Object.entries(zahlenzauber.fakten)) {
-      if (/^\d+\+\d+$/.test(k)) uebernimm("zahlenzauber", `plus:${k}`, alt);
-      else if (/^\d+-\d+$/.test(k)) uebernimm("zahlenzauber", `minus:${k}`, alt);
-    }
-
-  const themen = themenVon(ctx);
-  // gekonnt; Aufgaben ohne Eintrag oder in Fach 0 kommen in Fach 1 (wie nach der Probe), damit die
-  // Wiederholung nicht überläuft (große Themen: nur übernommene Aufgaben)
-  const kannIch = (id) => {
-    stand.themen[id] = { ...(stand.themen[id] || {}), z: "kann-ich", k: heute, e: heute };
-    inFachEins(ctx, stand, id, heute);
-  };
-  const gelernt = (key) => { const e = stand.aufgaben[key]; return !!e && (e.g === 1 || e.f >= K.GELERNT); };
-  const mitTeilstand = (spiel, id) => aufgabenDes(themaVon(ctx, id)).some((a) => teil[spiel].has(a.key));
-
-  // Themen, deren Aufgaben alle gelernt sind
-  for (const t of themen) {
-    if (!mitTeilstand("perlenbruecke", t.id) && !mitTeilstand("zahlenzauber", t.id)) continue;
-    const d = darstellbareAufgaben(ctx, t.id);
-    if (d.length && d.every((a) => gelernt(a.key))) kannIch(t.id);
-  }
-  // Zahlenzauber-Stufe s: Themen, deren Aufgaben alle in Stufen unter s liegen
-  const s = Number.isFinite(zahlenzauber?.stufe) ? Math.trunc(zahlenzauber.stufe) : 0;
-  if (s > 0)
-    for (const t of themen) {
-      const a = aufgabenDes(t);
-      if (bedient(ctx, "zahlenzauber", t.id) && a.length && a.every((x) => x.art === "rechnen" && zauberStufe(x) < s)) kannIch(t.id);
-    }
-  // je Spiel das erste nicht gekonnte Thema mit Teilstand → dran, Einführung gilt als gesehen.
-  // Noch ohne Stufe und mit p = 1 („Probe offen“): der erste Start beginnt mit der Probe.
-  for (const spiel of ["perlenbruecke", "zahlenzauber"]) {
-    const t = themen.find((x) => bedient(ctx, spiel, x.id) && stand.themen[x.id]?.z !== "kann-ich" && mitTeilstand(spiel, x.id));
-    if (t) stand.themen[t.id] = { ...(stand.themen[t.id] || {}), z: "dran", e: heute, seit: heute, k: "", stufe: "", p: 1, v: [] };
-  }
-  stand.migriert = 1;
-  return stand;
-}
-
 // ---------- Runde (Async-Schicht für die Spiele) ----------
 
 const STAND_KEY = "lernplan";
@@ -721,20 +657,14 @@ async function ladeCtx() {
 
 const echteUhr = () => ({ heute: new Date().toLocaleDateString("sv"), jetzt: Date.now() });
 
-// Lernstand laden und reparieren; beim ersten Mal alte Spielstände übernehmen (nur im Speicher).
-// { stand, uebernommen }: uebernommen = die Übernahme ist eben gelaufen (noch nicht gespeichert).
-async function ladeMitUebernahme(ctx, heute) {
-  const stand = migriereStand(await lade(STAND_KEY, neuerStand()));
-  if (stand.migriert) return { stand, uebernommen: false };
-  const [perlenbruecke, zahlenzauber] = await Promise.all([lade("perlenbruecke", {}), lade("zahlenzauber", {})]);
-  try { migriereSpiele(ctx, stand, { perlenbruecke, zahlenzauber, heute }); }
-  catch (e) { protokoll("Lernstand übernehmen: " + (e?.message ?? e)); }
-  return { stand, uebernommen: !!stand.migriert };
+// Lernstand laden und reparieren
+async function ladeStand() {
+  return migriereStand(await lade(STAND_KEY, neuerStand()));
 }
 
-// Lernstand für Seiten, die nur lesen (Themen-Übersicht, Elternbereich): übernommen, aber nie geschrieben
+// Lernstand für Seiten, die nur lesen (Themen-Übersicht, Elternbereich): wird hier nie geschrieben
 export async function ladeLernstand(ctx, heute) {
-  return (await ladeMitUebernahme(ctx, heute)).stand;
+  return ladeStand();
 }
 
 // Wert, den nur der erste Aufruf bekommt (danach null): ?thema= gilt nur für die erste Runde einer Seite
@@ -745,18 +675,17 @@ export function einmal(wert) {
 // Eine Runde in einem Spiel. nurAnsehen (Vorschau): nichts wird gespeichert.
 export async function runde(spielId, { wunsch = null, max = null, ctx = null, uhr = echteUhr, rnd = Math.random, nurAnsehen = false } = {}) {
   ctx = ctx ?? (await ladeCtx());
-  const { stand, uebernommen } = await ladeMitUebernahme(ctx, uhr().heute);
+  const stand = await ladeStand();
   const sichere = () => { if (!nurAnsehen) speichere(STAND_KEY, stand); };
-  if (uebernommen) sichere();
 
   const { thema: themaId, modus } = themaFuer(ctx, stand, spielId, { wunsch });
   const plan = themaId ? themaVon(ctx, themaId) : null;
   const eintragVorher = themaId ? stand.themen[themaId] : null;
   // Probe begonnen (pb: mindestens eine Antwort verbucht), aber vor dem Ende abgebrochen: auf der untersten
-  // Stufe üben. Ohne pb (Abbruch vor der ersten Antwort, oder p = 1: übernommen) kommt die Probe noch einmal.
+  // Stufe üben. Ohne pb (Abbruch vor der ersten Antwort) kommt die Probe noch einmal.
   if (eintragVorher?.z === "dran" && !eintragVorher.stufe && eintragVorher.pb) {
     eintragVorher.stufe = stufenFuer(ctx, spielId, themaId)[0] ?? "kopf";
-    delete eintragVorher.pb; delete eintragVorher.p;
+    delete eintragVorher.pb;
   }
 
   const neu = !!plan && !["dran", "kann-ich"].includes(eintragVorher?.z);

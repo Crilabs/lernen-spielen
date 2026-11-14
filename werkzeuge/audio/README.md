@@ -40,7 +40,7 @@ zum Text ab. Gibt es keine, spricht die Systemstimme (weiterhin ohne Zahlen). Er
 ## Was das Sammeln findet und was nicht
 
 Gefunden werden: Startseite (`spiele.json`), Themennamen (`lernplan.json`), Einführungen
-(`einfuehrungen/*.json`), Diktatsätze (`saetze/saetze.json`, auch „Hör noch mal hin. …“) und jeder
+(`einfuehrungen/*.json`) und jeder
 Sprechaufruf im Spielcode mit fester Zeichenkette.
 
 Sätze, die ein Spiel zur Laufzeit zusammensetzt (`` `${artikel} ${wort}. …` ``, Wortstücke der

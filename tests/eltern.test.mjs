@@ -131,7 +131,7 @@ test("aufgabeLesbar", () => {
 
 test("markiereGekonnt: kann ich, k = heute, ungesehene Aufgaben in Fach 1, Probe erledigt", () => {
   const s = neuerStand();
-  s.themen.z7 = { z: "dran", seit: "2026-11-01", stufe: "material", e: "2026-11-01", k: "", frei: 0, v: [1, 0], p: 1 };
+  s.themen.z7 = { z: "dran", seit: "2026-11-01", stufe: "material", e: "2026-11-01", k: "", frei: 0, v: [1, 0], pb: 1 };
   s.aufgaben["zerl:7:1+6"] = { f: 0, t: "2026-11-02", h: [0], ms: [] };
   s.aufgaben["zerl:7:2+5"] = { f: 3, t: "2026-11-02", h: [1], ms: [] };
   markiereGekonnt(s, "z7", HEUTE, CTX);
@@ -139,7 +139,7 @@ test("markiereGekonnt: kann ich, k = heute, ungesehene Aufgaben in Fach 1, Probe
   assert.equal(t.z, "kann-ich");
   assert.equal(t.k, HEUTE);
   assert.equal(t.stufe, "kopf");
-  assert.equal("p" in t, false);
+  assert.equal("pb" in t, false);
   assert.equal(t.e, "2026-11-01");
   assert.equal(zustaende(CTX, s).z7, "kann-ich");
   for (const k of ZERL7) assert.ok(s.aufgaben[k].f >= 1, k);

@@ -2,6 +2,7 @@
 
 ## Unveröffentlicht
 
+- Die ersten sechs Spiele (Zahlenzauber, Perlenbrücke, Kettenhüpfer, Wimmelbild, Zauberin, Einhorn-Steine) sind entfernt. Sie werden nach den Grundsätzen neu gebaut, je Thema ein passendes Spiel. Bis dahin ist die Startseite leer. Alte Lernstände werden nicht übernommen.
 - Natürliche Stimme vorbereitet: Die Spiele spielen vorab erzeugte Aufnahmen (Azure Speech) ab, sobald es sie gibt, sonst spricht wie bisher die Systemstimme. Im Elternbereich heißt die Systemstimme jetzt „Ersatzstimme“, dazu ein Hinweis, dass die Stimme computererzeugt ist. Erzähler ist Florian (Azure), 10 % langsamer; Figuren sprechen nicht selbst (`docs/stimme.md`). Neue Anhör-Seite `npm run audio:anhoeren`.
 
 - Aufgeräumt: Reste der früheren Web-Fassung (PHP, FTP-Upload) sind entfernt.

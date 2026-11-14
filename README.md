@@ -10,7 +10,9 @@ Die frühere Web-Fassung mit PHP ist entfernt.
 
 - `spiele/` – die Oberfläche der App: `index.html` (Startseite), `eltern.html`/`eltern.js` (Elternbereich),
   `lernspiel.js` (gemeinsame Hilfen der Spiele), die Spiele als HTML-Dateien,
-  `spiele.json` (Kategorien und Spiele), `bilder/` (Wimmelbilder samt Pausenbildern), `figuren/`, `saetze/`. Die übrigen Spiele zeichnen ihre Pausen selbst (SVG).
+  `spiele.json` (Kategorien und Spiele). Die ersten sechs Spiele sind am 2026-11-14 entfernt worden (Neubau nach
+  `docs/grundsaetze.md`, Code in der Git-Historie); `spiele.json` ist bis zum ersten neuen Spiel leer.
+  Als Material liegen noch `bilder/` (Wimmelbilder samt Pausenbildern), `figuren/` und `saetze/` (Diktatsätze).
 - `spiele/kern/` – der Plattform-Kern: aller Zugriff auf Speicher (je Profil), Einstellungen (Ton je Spiel, Stimme
   je Gerät), Sprache und Gerätefähigkeiten (Update, Beenden, Kiosk). Siehe `dienste.js` (Schnittstellen),
   `speicher.js`, `einstellungen.js`, `stimme.js`, `geraet.js`, `protokoll.js`. Außerhalb von `kern/` darf kein Spiel
@@ -130,9 +132,8 @@ Dateien:
 - `scripts/luecken.mjs`: `npm run luecken` listet Lücken im Plan, z. B. Themen ohne Spiel, das sie bedient.
 
 Lernstand: Schlüssel `lernplan` (gespeichert über `kern/speicher.js`, in der App im Ordner `lernstand\kind-1\`).
-Die Spiele speichern ihre eigenen, nicht lernbezogenen Daten unter eigenem Schlüssel (`perlenbruecke-spiel`,
-`zahlenzauber-spiel`). Die alten Stände `perlenbruecke` und `zahlenzauber` werden einmal zur Übernahme gelesen
-und nie mehr geschrieben.
+Die Spiele speichern ihre eigenen, nicht lernbezogenen Daten unter eigenem Schlüssel `<id>-spiel`.
+Die Tests der Lernsteuerung nutzen einen festen Beispiel-Katalog (`tests/daten/spiele-beispiel.json`).
 
 `npm test` prüft den Plan (eindeutige IDs, Voraussetzungen, jede Aufgabe in genau einem Thema, Einführungen).
 
@@ -149,7 +150,7 @@ und nie mehr geschrieben.
    runde Enden, flächige Füllung in Pastell, siehe z. B. `symbole/hilfe.svg`).
 4. Spiel am Lernplan (für Lernspiele mit Aufgaben): im Eintrag `arten` angeben, z. B.
    `"arten": [{ "art": "zerlegung", "zahlen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }]`
-   (Perlenbrücke) oder `{ "art": "rechnen", "max": 100, "gleiche": false, "stufen": ["kopf"] }` (Zahlenzauber).
+   oder `{ "art": "rechnen", "max": 100, "gleiche": false, "stufen": ["kopf"] }`.
    Im Spiel `runde()` aus `lernsteuerung.js` verwenden:
    ```js
    const r = await runde(id, { wunsch, max, nurAnsehen });
@@ -169,19 +170,10 @@ und nie mehr geschrieben.
    Zusätzlich im Eintrag in `spiele.json` `"fortschritt": true` setzen – nur dann wird das Modul geladen
    (die App liefert für fehlende Dateien die Startseite aus, deshalb wird nicht geraten). Ein Test prüft,
    dass Kennzeichen und Moduldatei zusammenpassen. Ohne Modul zeigt die Startseite keinen Balken.
-   Spiele mit `arten` bekommen keinen Fortschrittsbalken; ihren Stand zeigt „Was ich kann“. Die Module bleiben
-   nur, bis Kettenhüpfer, Wimmelbild, Zauberer und Einhorn-Steine umgestellt sind.
-   Beispiel: `spiele/fortschritt/wimmelbild.js`.
+   Spiele mit `arten` bekommen keinen Fortschrittsbalken; ihren Stand zeigt „Was ich kann“.
 
-## Wimmelbilder
+## Wimmelbilder (Material)
 
-Neue Bilder im Querformat, empfohlen 4:3, z. B. 1600×1200. Pro Bild:
-
-- `spiele/bilder/<name>.jpg`
-- `spiele/bilder/<name>.json` mit den Dingen; `formen` als `[x1,y1,x2,y2]` in Prozent des Bildes
-- Eintrag (Name ohne Endung) in `spiele/bilder/index.json`
-- Pausenbild `spiele/bilder/<name>-pause.jpg` (passend zur Szene), eingetragen als `"pause": "<name>-pause.jpg"` in der JSON;
-  es erscheint nach dem letzten Wort der Runde 10 Sekunden lang (`PAUSE_MS` in `wimmelbild.html`), danach folgt die nächste Szene.
-
-Kontrolle: `wimmelbild.html?pruefen` zeigt alle Bereiche (Tippen zeigt die Koordinate), ein einzelnes Bild mit
-`?pruefen&bild=<name>`.
+Die Bilder in `spiele/bilder/` stammen aus dem entfernten Wimmelbild-Spiel und bleiben für neue Spiele liegen:
+je Bild `<name>.jpg`, `<name>.json` mit den Dingen (`formen` als `[x1,y1,x2,y2]` in Prozent des Bildes) und ein
+Pausenbild `<name>-pause.jpg`; die Reihenfolge steht in `spiele/bilder/index.json`.

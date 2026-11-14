@@ -6,7 +6,7 @@ const L = await import("../spiele/lernsteuerung.js");
 const { aufgabenVon, schwierigkeit } = await import("../spiele/aufgabenarten.js");
 const {
   K, neuerStand, migriereStand, bedient, spieleFuer, zustaende, sichtbar, themaFuer, startThema,
-  probeAufgaben, neueSitzung, naechstesAngebot, verbucheErgebnis, luecken, migriereSpiele, faellig, tage,
+  probeAufgaben, neueSitzung, naechstesAngebot, verbucheErgebnis, luecken, faellig, tage,
 } = L;
 
 // Reproduzierbarer Zufall
@@ -43,7 +43,7 @@ const CTX_PUNKTE = {
 };
 const ECHT = {
   plan: JSON.parse(readFileSync(new URL("../spiele/lernplan.json", import.meta.url))),
-  spiele: JSON.parse(readFileSync(new URL("../spiele/spiele.json", import.meta.url))),
+  spiele: JSON.parse(readFileSync(new URL("./daten/spiele-beispiel.json", import.meta.url))),
 };
 
 const ZERL7 = ["zerl:7:1+6", "zerl:7:2+5", "zerl:7:3+4", "zerl:7:4+3", "zerl:7:5+2", "zerl:7:6+1"];
@@ -441,67 +441,6 @@ test("luecken (echter Plan): mengen-5 und zwillinge ohne Spiel; rechnen-* haben 
   assert.deepEqual(f.ohneSpiel, []);
 });
 
-// ---------- Migration alter Spielstände ----------
-test("migriereSpiele: Perlenbrücke-Paare und Zahlenzauber-Fakten mit Stufe 2", () => {
-  const perlenbruecke = {
-    version: 2, frei: [3, 4, 5, 6, 7], reise: 40,
-    paare: {
-      "7:2+5": { f: 2, t: "2026-11-01", h: [1, 1], c: 3 },
-      "3:1+2": { f: 4, t: "2026-11-01", h: [1], c: 5, g: 1 },
-      "3:2+1": { f: 4, t: "2026-11-01", h: [1], c: 5 },
-      "4:1+3": { f: 1, t: "2026-11-01", h: [0], c: 2 },
-    },
-  };
-  const zahlenzauber = {
-    stufe: 2,
-    fakten: {
-      "3+4": { f: 1, t: "2026-11-02", h: [1] },
-      "7-4": { f: 0, t: "2026-11-02", h: [0] },
-      "1+2": { f: 4, t: "2026-11-01", h: [1], g: 1 },
-      "3-2": { f: 4, t: "2026-11-01", h: [1] },
-      "3-1": { f: 2, t: "2026-11-01", h: [1], g: 1 },
-    },
-  };
-  const s = migriereSpiele(ECHT, neuerStand(), { perlenbruecke, zahlenzauber, heute: HEUTE });
-  assert.equal(s.migriert, 1);
-  assert.deepEqual(s.aufgaben["zerl:7:2+5"], { f: 2, t: "2026-11-01", h: [1, 1], ms: [] });
-  assert.equal(s.aufgaben["zerl:3:1+2"].g, 1);
-  assert.deepEqual(s.aufgaben["plus:3+4"], { f: 1, t: "2026-11-02", h: [1], ms: [] });
-  assert.equal(s.aufgaben["minus:7-4"].f, 0);
-  const z = (id) => s.themen[id]?.z;
-  // Perlenbrücke: zerlegen-3 vollständig gelernt, zerlegen-4 erstes mit Teilstand
-  assert.equal(z("zerlegen-3"), "kann-ich"); assert.equal(s.themen["zerlegen-3"].k, HEUTE); assert.equal(s.themen["zerlegen-3"].e, HEUTE);
-  assert.equal(z("zerlegen-4"), "dran"); assert.equal(s.themen["zerlegen-4"].e, HEUTE);
-  // übernommenes Thema: Probe offen (p: 1), noch ohne Stufe
-  assert.equal(s.themen["zerlegen-4"].stufe, ""); assert.equal(s.themen["zerlegen-4"].p, 1);
-  assert.equal(z("zerlegen-7"), undefined);
-  assert.equal(z("zerlegen-2"), undefined);
-  // Zahlenzauber-Stufe 2: alles aus Stufe 0 und 1 ist gekonnt
-  for (const id of ["zehn-plus", "plus-ohne-20", "plus-zur-20", "ueber-10-mit-9", "ueber-10-mit-8", "ueber-10-mit-7"]) {
-    assert.equal(z(id), "kann-ich", id); assert.equal(s.themen[id].k, HEUTE);
-  }
-  // gekonnt durch Migration: Aufgaben ohne Eintrag oder in Fach 0 → Fach 1, höhere bleiben
-  for (const x of aufgabenVon({ art: "rechnen", thema: "zehn-plus" })) {
-    assert.equal(s.aufgaben[x.key].f, 1, x.key); assert.equal(s.aufgaben[x.key].t, HEUTE);
-  }
-  assert.equal(s.aufgaben["zerl:3:1+2"].f, 4); assert.equal(s.aufgaben["zerl:3:1+2"].t, "2026-11-01");
-  assert.equal(s.aufgaben["minus:3-1"].f, 2);
-  assert.equal(s.aufgaben["zerl:4:1+3"].f, 1); assert.equal(s.aufgaben["zerl:4:1+3"].t, "2026-11-01"); // dran: unverändert
-  assert.equal(s.aufgaben["minus:7-4"].t, "2026-11-02");
-  assert.equal(s.aufgaben["zerl:4:2+2"], undefined);
-  // rechnen-3 nach g/f gelernt, rechnen-7 erstes mit Teilstand
-  assert.equal(z("rechnen-3"), "kann-ich");
-  assert.equal(z("rechnen-7"), "dran"); assert.equal(s.themen["rechnen-7"].stufe, ""); assert.equal(s.themen["rechnen-7"].p, 1);
-  for (const id of ["rechnen-4", "rechnen-5", "rechnen-10", "minus-zehner", "minus-ohne-20", "plus-bis-30"]) assert.equal(z(id), undefined, id);
-  // nur einmal
-  const vorher = JSON.stringify(s);
-  migriereSpiele(ECHT, s, { perlenbruecke: { version: 2, paare: { "5:1+4": { f: 4, g: 1 } } }, zahlenzauber: { stufe: 4, fakten: {} }, heute: HEUTE });
-  assert.equal(JSON.stringify(s), vorher);
-  // ohne alte Stände: nichts außer dem Kennzeichen
-  const leer = migriereSpiele(ECHT, neuerStand(), { heute: HEUTE });
-  assert.deepEqual(leer.themen, {}); assert.equal(leer.migriert, 1);
-});
-
 // ---------- Befunde aus dem Gesamtreview ----------
 
 const plusBis = (id) => aufgabenVon(ECHT.plan.themen.find((t) => t.id === id).aufgaben);
@@ -583,7 +522,7 @@ test("Befund 4b: bestandene Probe in großem Thema legt nur die beantworteten Au
   // kleines Thema: weiter alle Aufgaben in Fach 1 (siehe Probe-Test oben)
 });
 
-test("Befund 4b: markiereGekonnt und Übernahme legen in großen Themen keine neuen Einträge an", () => {
+test("Befund 4b: markiereGekonnt legt in großen Themen keine neuen Einträge an", () => {
   const s = neuerStand();
   s.aufgaben["plus:23+45"] = { f: 0, t: "2026-11-01", h: [0], ms: [] };
   L.markiereGekonnt(s, "plus-bis-100", HEUTE, ECHT);
@@ -593,17 +532,6 @@ test("Befund 4b: markiereGekonnt und Übernahme legen in großen Themen keine ne
   // kleines Thema: wie bisher alle Aufgaben in Fach 1
   L.markiereGekonnt(s, "zerlegen-7", HEUTE, ECHT);
   for (const k of ZERL7) assert.equal(s.aufgaben[k].f, 1, k);
-  // Übernahme: Zahlenzauber-Stufe 5 macht plus-bis-100 und minus-bis-100 gekonnt, ohne tausende Einträge
-  const m = migriereSpiele(ECHT, neuerStand(), { zahlenzauber: { stufe: 5, fakten: { "23+45": { f: 2, t: "2026-11-01", h: [1] } } }, heute: HEUTE });
-  assert.equal(m.themen["plus-bis-100"].z, "kann-ich");
-  assert.equal(m.themen["minus-bis-100"].z, "kann-ich");
-  const gross = ["plus-bis-30", "minus-bis-30", "plus-bis-100", "minus-bis-100", "minus-ohne-20"]
-    .flatMap((id) => plusBis(id).map((a) => a.key)).filter((k) => k in m.aufgaben);
-  assert.deepEqual(gross, ["plus:23+45"]);
-  assert.equal(m.aufgaben["plus:23+45"].f, 2);
-  assert.ok(Object.keys(m.aufgaben).length < 200, "Stand bleibt klein: " + Object.keys(m.aufgaben).length);
-  // kleines Thema bei der Übernahme: alle Aufgaben in Fach 1
-  for (const a of plusBis("zehn-plus")) assert.equal(m.aufgaben[a.key].f, 1, a.key);
 });
 
 test("Befund 4c: Wiederholung großer gekonnter Themen nur aus Aufgaben mit Eintrag", () => {
