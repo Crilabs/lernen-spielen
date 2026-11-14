@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 
 const { aufgabenVon, klasseRechnen, poolRechnen, darstellbar } = await import("../spiele/aufgabenarten.js");
 
@@ -239,7 +239,8 @@ test("Plan: geplantes Thema (aufgaben null) besteht alle Prüfungen, unbekannte 
 
 const { fuelleVorlage } = await import("../spiele/einfuehrung.js");
 const mitEinfuehrung = themen.filter((t) => t.einfuehrung?.vorlage);
-const figurDa = (id) => existsSync(new URL(`../spiele/figuren/${id}.js`, import.meta.url));
+const R = await import("../spiele/runde/runde.js");
+const AUFGABEN = ["vorzeigen", "fragen", "wundern", "freuen", "zeigen"]; // figuren.md §3, §8
 const ZEICHEN_JE_SEKUNDE = 14;
 
 test("Einführungen: jede Vorlage eines Themas existiert", () => {
@@ -259,7 +260,13 @@ for (const t of mitEinfuehrung) {
       assert.ok(s.sprich.trim(), `${wo}: sprich leer`);
       assert.doesNotMatch(s.zeig, /[{}]/, `${wo}: Platzhalter in zeig`);
       for (const b of s.bild) {
-        if (b.figur !== undefined) assert.ok(figurDa(b.figur), `${wo}: Figur ${b.figur} fehlt in spiele/figuren/`);
+        if (b.figur !== undefined) {
+          assert.ok(R.bestand.kinder.has(b.figur), `${wo}: ${b.figur} ist kein Kind der Runde`);
+          if (b.haltung !== undefined) assert.ok(R.bestand.haltungen.has(b.haltung), `${wo}: Haltung ${b.haltung} fehlt in spiele/runde/`);
+          if (b.aktion !== undefined) assert.ok(R.bestand.bewegungen.has(b.aktion), `${wo}: Bewegung ${b.aktion} fehlt in spiele/runde/`);
+          if (b.haltung !== undefined) assert.doesNotThrow(() => R.zeichne(b.figur, { haltung: b.haltung }), `${wo}: ${b.figur} ${b.haltung}`);
+          assert.ok(AUFGABEN.includes(b.aufgabe), `${wo}: ${b.figur} braucht genau eine Aufgabe (${AUFGABEN.join(", ")})`);
+        }
         else if (b.perlen !== undefined) for (const p of b.perlen) assert.ok(Number.isInteger(p) && p >= 1 && p <= 10, `${wo}: Perlenstab ${p}`);
         else if (b.zahl !== undefined) assert.ok(typeof b.zahl === "number" || !/[{}]/.test(b.zahl), `${wo}: Zahl ${b.zahl}`);
         else assert.fail(`${wo}: unbekanntes Bildelement ${JSON.stringify(b)}`);
@@ -268,6 +275,29 @@ for (const t of mitEinfuehrung) {
     }
   });
 }
+
+// Auszählen (figuren.md §8): über alle Einführungen kommt jedes Kind der Runde etwa gleich oft vor und zeigt
+// etwa gleich oft vor; Mädchen (Ela, Lena) und Jungen (Kofi, Timo) gleich oft, Timo wie alle.
+test("Einführungen: die Runde ist gleich verteilt, keine anderen Figuren", () => {
+  const vorlagen = readdirSync(new URL("../spiele/einfuehrungen/", import.meta.url)).filter((d) => d.endsWith(".json"));
+  const kommt = new Map(), zeigtVor = new Map();
+  for (const d of vorlagen) {
+    const v = lade(`../spiele/einfuehrungen/${d}`);
+    const bild = v.szenen.flatMap((s) => s.bild ?? []).filter((b) => b.figur !== undefined);
+    assert.ok(bild.length > 0, `${d}: kein Kind der Runde`);
+    for (const b of bild) assert.ok(R.bestand.kinder.has(b.figur), `${d}: ${b.figur} ist kein Kind der Runde`);
+    for (const k of new Set(bild.map((b) => b.figur))) kommt.set(k, (kommt.get(k) ?? 0) + 1);
+    const vor = new Set(bild.filter((b) => b.aufgabe === "vorzeigen").map((b) => b.figur));
+    assert.equal(vor.size, 1, `${d}: genau ein Kind zeigt vor`);
+    for (const k of vor) zeigtVor.set(k, (zeigtVor.get(k) ?? 0) + 1);
+  }
+  const kinder = [...R.bestand.kinder.keys()];
+  const spanne = (m) => Math.max(...kinder.map((k) => m.get(k) ?? 0)) - Math.min(...kinder.map((k) => m.get(k) ?? 0));
+  assert.ok(spanne(kommt) <= 1, `vorkommen: ${JSON.stringify(Object.fromEntries(kommt))}`);
+  assert.ok(spanne(zeigtVor) <= 1, `vorzeigen: ${JSON.stringify(Object.fromEntries(zeigtVor))}`);
+  const summe = (ids) => ids.reduce((n, k) => n + (zeigtVor.get(k) ?? 0), 0);
+  assert.ok(Math.abs(summe(["ela", "lena"]) - summe(["kofi", "timo"])) <= 1, "Mädchen und Jungen zeigen gleich oft vor");
+});
 
 test("Einführung über die 10: Werte m und fehlt ergeben zusammen den Zehner", () => {
   const ueber = mitEinfuehrung.filter((t) => t.einfuehrung.vorlage === "einfuehrungen/ueber-10.json");

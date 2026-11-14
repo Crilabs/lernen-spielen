@@ -1,20 +1,20 @@
 { "szenen": [
   { "sprich": "Diese Brücke hat einen Zehnerstab und einen kleinen Stab.",
     "zeig": "13 = 10 + 3",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "steh" }, { "perlen": ["10", "3"], "x": 62 } ] },
-  { "sprich": "Das Einhorn soll mehr Perlen wegnehmen, als der kleine Stab hat.",
+    "bild": [ { "figur": "ela", "x": 16, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "3"], "x": 62 } ] },
+  { "sprich": "Ela will mehr Perlen wegnehmen, als der kleine Stab hat.",
     "zeig": "13 − 5",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "schau" }, { "perlen": ["10", "3"], "x": 62 } ] },
-  { "sprich": "Zuerst nimmt es den ganzen kleinen Stab weg. Jetzt bleibt genau der Zehner.",
+    "bild": [ { "figur": "ela", "x": 16, "haltung": "nachdenken", "aufgabe": "vorzeigen" }, { "perlen": ["10", "3"], "x": 62 } ] },
+  { "sprich": "Zuerst nimmt sie den ganzen kleinen Stab weg. Jetzt bleibt genau der Zehner.",
     "zeig": "13 − 3 = 10",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["10"], "x": 55 }, { "zahl": "10", "x": 88 } ] },
-  { "sprich": "Dann nimmt es den Rest vom Zehnerstab.",
+    "bild": [ { "figur": "ela", "x": 16, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["10"], "x": 55 }, { "zahl": "10", "x": 88 } ] },
+  { "sprich": "Dann nimmt sie den Rest vom Zehnerstab.",
     "zeig": "10 − 2 = 8",
-    "bild": [ { "figur": "einhorn", "x": 16, "aktion": "hop" }, { "perlen": ["8", "2"], "x": 62 } ] },
+    "bild": [ { "figur": "ela", "x": 16, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["8", "2"], "x": 62 } ] },
   { "sprich": "So lang ist die Brücke jetzt.",
     "zeig": "13 − 5 = 13 − 3 − 2 = 8",
     "bild": [ { "perlen": ["8"], "x": 42 }, { "zahl": "8", "x": 82 } ] },
   { "sprich": "Erst bis zum Zehner wegnehmen, dann den Rest. Jetzt rechnest du so.",
     "zeig": "Erst bis 10, dann der Rest.",
-    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "schau" }, { "perlen": ["10"], "x": 62 } ] }
+    "bild": [ { "figur": "ela", "x": 18, "haltung": "fragen", "aufgabe": "vorzeigen" }, { "perlen": ["10"], "x": 62 } ] }
 ] }

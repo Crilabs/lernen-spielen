@@ -109,8 +109,7 @@ test("themen.html: Weg aus gekonnt (auch ohne Spiel), dran, in Sicht aus der Ler
 });
 
 test("themen.html: Fläche mit Spielen (?thema, linkKlick), Geschichte, Mit echten Dingen", () => {
-  assert.match(themen, /<script src="figuren\/figuren\.js"><\/script>/);
-  assert.match(themen, /<script src="figuren\/einhorn\.js"><\/script>/);
+  assert.doesNotMatch(themen, /figuren\//, "Geschichten zeichnen die Runde selbst (einfuehrung.js)");
   assert.match(themen, /spieleEinfuehrung\(/);
   assert.match(themen, /\?thema=\$\{encodeURIComponent\(s\.id\)\}/);
   assert.match(themen, /linkKlick\(e\)/);

@@ -1,20 +1,20 @@
 { "szenen": [
-  { "sprich": "Ganz unten im Tal wird der Bach zum Fluss. Dort liegen Brücken aus vielen Zehnerstäben.",
+  { "sprich": "Ganz unten im Tal wird der Bach zum Fluss. Kofi und Timo sehen Brücken aus vielen Zehnerstäben. Timo zeigt auf die längste.",
     "zeig": "10, 20, 30, 40 … 100",
-    "bild": [ { "figur": "einhorn", "x": 18, "aktion": "steh" }, { "perlen": ["10"], "x": 62 } ] },
+    "bild": [ { "figur": "kofi", "x": 13, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "figur": "timo", "x": 34, "haltung": "zeigen", "aufgabe": "zeigen" }, { "perlen": ["10"], "x": 72 } ] },
   { "sprich": "Vorne an der Zahl stehen die Zehnerstäbe, hinten die Einer vom kleinen Stab.",
     "zeig": "24 = 10 + 10 + 4",
     "bild": [ { "perlen": ["10", "10", "4"], "x": 50 } ] },
-  { "sprich": "Nimmt das Einhorn Einer weg, nimmt es sie vom kleinen Stab. Die Zehnerstäbe bleiben.",
+  { "sprich": "Nimmt Kofi Einer weg, nimmt er sie vom kleinen Stab. Die Zehnerstäbe bleiben.",
     "zeig": "24 − 3 = 21",
-    "bild": [ { "perlen": ["10", "10", "1"], "x": 50 } ] },
-  { "sprich": "Nimmt es einen Zehnerstab weg, ändern sich nur die Zehner. Die Einer bleiben.",
+    "bild": [ { "figur": "kofi", "x": 13, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "10", "1"], "x": 61 } ] },
+  { "sprich": "Nimmt er einen Zehnerstab weg, ändern sich die Zehner. Die Einer bleiben gleich.",
     "zeig": "24 − 10 = 14",
-    "bild": [ { "figur": "einhorn", "x": 14, "aktion": "hop" }, { "perlen": ["10", "4"], "x": 60 } ] },
-  { "sprich": "Bei großen Zahlen geht es genauso. Das Einhorn nimmt die Einer von den Einern.",
+    "bild": [ { "figur": "kofi", "x": 13, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "4"], "x": 60 } ] },
+  { "sprich": "Bei großen Zahlen geht es genauso. Kofi nimmt die Einer von den Einern.",
     "zeig": "48 − 5 = 43   8 − 5 = 3",
     "bild": [ { "zahl": "48", "x": 20 }, { "perlen": ["3", "5"], "x": 52 }, { "zahl": "43", "x": 84 } ] },
   { "sprich": "Jetzt rechnest du. Schau zuerst auf die Einer.",
     "zeig": "Einer von den Einern, Zehner von den Zehnern.",
-    "bild": [ { "figur": "einhorn", "x": 12, "aktion": "schau" }, { "perlen": ["10", "10"], "x": 61 } ] }
+    "bild": [ { "figur": "kofi", "x": 13, "haltung": "fragen", "aufgabe": "vorzeigen" }, { "perlen": ["10", "10"], "x": 61 } ] }
 ] }

@@ -2,10 +2,16 @@
 //
 // VORLAGE  spiele/einfuehrungen/<name>.json (Pfad relativ zu spiele/):
 //   { "szenen": [ { "sprich": "…", "zeig": "…", "bild": [ … ] } ] }
-//   sprich  wird vorgelesen: nie Ziffern, Zahlwörter oder Platzhalter (die Stimme spricht keine Zahlen).
-//   zeig    steht in der Sprechblase, darf Ziffern und Platzhalter enthalten; leer → sprich steht in der Blase.
+//   sprich  wird vorgelesen: nie Ziffern, Zahlwörter oder Platzhalter (die Systemstimme spricht keine Zahlen).
+//           Es spricht der Erzähler in der dritten Person (docs/stimme.md), die Kinder sprechen nie.
+//   zeig    steht in der Erzählblase, darf Ziffern und Platzhalter enthalten; leer → sprich steht in der Blase.
 //   bild    Elemente, x = Mitte in Prozent der Breite:
-//     { "figur": "einhorn", "x": 20, "aktion": "steh" | "hop" | "schau" }
+//     { "figur": "ela", "x": 16, "haltung": "zeigen", "aufgabe": "vorzeigen" }
+//         ein Kind der Runde (ela, kofi, lena, timo; spiele/runde/). haltung aus dem Bestand der Runde
+//         (stehen, zeigen, fragen, staunen, nachdenken, freuen-klein …), sonst stehen. Optional "aktion": eine
+//         Bewegung der Runde, einmal abgespielt (nicht bei wenig Bewegung), und "blick": "links".
+//         aufgabe (figuren.md §3, §8: vorzeigen, fragen, wundern, freuen, zeigen) dient dem Auszählen.
+//         Steht dasselbe Kind in der nächsten Szene wieder da, bleibt es stehen und wechselt sanft die Haltung.
 //     { "perlen": ["{n}", "{n-1}"], "x": 60 }   Stäbe in Montessori-Farben, nebeneinander
 //     { "zahl": "{n}", "x": 80 }                große Ziffer
 //
@@ -14,8 +20,7 @@
 //   stehen Zahlen im Bild als Zeichenkette ("{n}", "60"); fuelleVorlage macht daraus echte Zahlen,
 //   sobald die ganze Zeichenkette eine Zahl ergibt. In zeig bleibt alles Text.
 //
-// Die Seite des Spiels lädt figuren/figuren.js und die benötigten figuren/<id>.js; fehlt Figuren
-// oder eine Figur, wird sie still weggelassen.
+// Die Kinder lädt spieleEinfuehrung selbst (runde/runde.js); fehlt die Runde oder ein Kind, bleibt es still weg.
 // Der reine Teil (fuelleVorlage) läuft auch in Node; nichts greift beim Import auf das DOM zu.
 
 import { sprich, stille } from "./kern/stimme.js";
@@ -83,29 +88,49 @@ const CSS = `
   padding:2.4rem;box-shadow:0 .6rem 0 var(--ls-tinte-weich,#8C7FB0);text-decoration:none;z-index:2}
 .einf .haus img{width:100%;height:100%;display:block}
 .einf .haus:active{transform:translateY(.3rem);box-shadow:0 .3rem 0 var(--ls-tinte-weich,#8C7FB0)}
-.einf .el{position:absolute;top:50%;transform:translate(-50%,-50%)}
-.einf .el.figur-h{width:32rem;top:auto;bottom:4rem;transform:translateX(-50%)}
+.einf .el{position:absolute;top:56%;transform:translate(-50%,-50%)}
+.einf .el.figur-h{width:40rem;top:auto;bottom:3rem;transform:translateX(-50%)}
+.einf .el.figur-h svg{display:block;width:100%;height:auto;overflow:visible}
 .einf .perlen{display:flex;gap:3rem;align-items:center}
 .einf .perlen ls-perlenstab{height:var(--einf-stab,9rem)}
 .einf .zahl{font:700 18rem/1 "Andika",sans-serif}
 @media (prefers-reduced-motion:reduce){.einf *{animation:none!important;transition:none!important}}
 `;
 
-function baueBild(buehne, bild, reduziert) {
-  const F = window.Figuren;
+// vorher: Kinder der letzten Szene (figur → { el, steuer, x }). Steht ein Kind wieder an derselben Stelle,
+// bleibt seine Zeichnung und wechselt nur sanft die Haltung, statt neu aufzutauchen (ruhig, grundsaetze §9).
+function baueBild(buehne, bild, reduziert, R, vorher) {
+  const jetzt = new Map();
   for (const b of bild) {
     if (!b || typeof b !== "object") continue;
     try {
-    const el = document.createElement("div"); el.className = "el";
-    el.style.left = (typeof b.x === "number" ? b.x : 50) + "%";
+    const x = typeof b.x === "number" ? b.x : 50;
     if (b.figur) {
-      if (!F || !F.figuren || !F.figuren[b.figur]) continue;
-      el.classList.add("figur-h");
-      el.innerHTML = F.svgFigur(b.figur);
-      const svg = el.querySelector("svg");
-      if (svg && b.aktion === "hop" && !reduziert) F.hop(svg, { hoehe: 60 });
-      if (svg && b.aktion === "schau") { const h = svg.querySelector(".head"); if (h) h.style.transform = "rotate(-6deg)"; }
-    } else if (Array.isArray(b.perlen)) {
+      if (!R || !R.bestand.kinder.has(b.figur) || jetzt.has(b.figur)) continue;
+      const haltung = R.bestand.haltungen.has(b.haltung) ? b.haltung : "stehen";
+      const aktion = !reduziert && R.bestand.bewegungen.has(b.aktion) ? b.aktion : "";
+      const blick = b.blick === "links" ? "links" : "rechts";
+      const alt = vorher.get(b.figur);
+      let f;
+      if (alt && alt.x === x && alt.blick === blick) {
+        f = alt;
+        if (aktion) f.steuer.bewegung(aktion); else if (f.haltung !== haltung) f.steuer.haltung(haltung);
+      } else {
+        const el = document.createElement("div"); el.className = "el figur-h";
+        el.style.left = x + "%";
+        el.innerHTML = R.zeichne(b.figur, { haltung, blick });
+        const svg = el.querySelector("svg");
+        f = { el, steuer: R.steuere(svg), x, blick };
+        if (aktion) f.steuer.bewegung(aktion);
+      }
+      f.haltung = haltung;
+      jetzt.set(b.figur, f);
+      buehne.appendChild(f.el);
+      continue;
+    }
+    const el = document.createElement("div"); el.className = "el";
+    el.style.left = x + "%";
+    if (Array.isArray(b.perlen)) {
       el.classList.add("perlen");
       const werte = b.perlen.filter(n => Number.isInteger(n) && n > 0 && n <= 10);
       // Perlengröße so, dass alle Stäbe der Szene auf die Matte passen (gleiche Größe für alle, Länge proportional)
@@ -122,6 +147,8 @@ function baueBild(buehne, bild, reduziert) {
     buehne.appendChild(el);
     } catch (e) { /* kaputtes Bildelement: weglassen */ }
   }
+  for (const [id, f] of vorher) if (!jetzt.has(id)) f.steuer.halt();
+  return jetzt;
 }
 
 // hintergrund: CSS-Bild der Spielwelt, z. B. 'url("bilder/zerlegungshaus/wiese.jpg")' (sonst Nebel).
@@ -141,6 +168,8 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
     const st = document.createElement("style"); st.id = "einf-css"; st.textContent = CSS; document.head.appendChild(st);
   }
   try { await import("./rahmen/perlenstab.js"); } catch (e) { /* ohne Baustein bleiben die Perlen weg */ }
+  let R = null;
+  try { R = await import("./runde/runde.js"); } catch (e) { /* ohne Runde bleiben die Kinder weg */ }
   const wurzel = document.createElement("div"); wurzel.className = "einf";
   if (hintergrund) wurzel.style.setProperty("--einf-hintergrund", hintergrund);
   wurzel.setAttribute("role", "dialog");
@@ -158,10 +187,11 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
   hausEl.appendChild(hausBild); wurzel.appendChild(hausEl);
 
   return new Promise(resolve => {
-    let timer = [], fertig = false, aktuell = -1;
+    let timer = [], fertig = false, aktuell = -1, kinder = new Map();
     const ende = ergebnis => {
       if (fertig) return; fertig = true;
       timer.forEach(clearTimeout);
+      kinder.forEach(f => f.steuer.halt());
       if (mitTon) stille();
       wurzel.remove();
       resolve(ergebnis);
@@ -175,7 +205,7 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
       aktuell = i;
       if (i >= szenen.length) return ende("gesehen");
       const s = szenen[i], text = s.zeig || s.sprich;
-      try { buehne.replaceChildren(); baueBild(buehne, s.bild, reduziert); blase.textContent = text; }
+      try { buehne.replaceChildren(); kinder = baueBild(buehne, s.bild, reduziert, R, kinder); blase.textContent = text; }
       catch (e) { return ende("abgebrochen"); }
       timer.forEach(clearTimeout); timer = [];
       const weiter = () => { if (aktuell === i) szene(i + 1); };   // alte Szenen melden sich nicht mehr
