@@ -48,7 +48,7 @@ export function steuere(svg, opts = {}) {
     .map((el) => /** @type {string} */ (el.getAttribute("data-zubehoer")))
     .filter((id) => !aktuell.braucht.includes(id)));
 
-  /** @type {Map<string, El>} */
+  /** @type {Map<string, El[]>} Gelenk → Gruppen in Kontur- und Flächen-Schicht */
   let gelenke = new Map();
   let gezeichnet = { ansicht: "", gesicht: "", zubehoer: "", haende: "" };
   /** @param {Pose} p */
@@ -63,8 +63,7 @@ export function steuere(svg, opts = {}) {
     svg.setAttribute("data-ansicht", p.ansicht);
     svg.setAttribute("data-haltung", haltung);
     svg.setAttribute("aria-label", labelFuer(kindId, haltung));
-    gelenke = new Map(Object.keys(p.winkel).map((g) => [g, svg.querySelector(`[data-gelenk="${g}"]`)])
-      .filter((e) => e[1]).map((e) => [/** @type {string} */ (e[0]), /** @type {El} */ (e[1])]));
+    gelenke = new Map(Object.keys(p.winkel).map((g) => [g, Array.from(svg.querySelectorAll(`[data-gelenk="${g}"]`))]));
     gezeichnet = { ansicht: p.ansicht, gesicht: p.gesicht, zubehoer: zubehoerSchluessel(p), haende: handSchluessel(p) };
   }
 
@@ -74,7 +73,10 @@ export function steuere(svg, opts = {}) {
       neuzeichnen(p);
     } else {
       const ans = /** @type {import("./bestand.js").KindAnsicht} */ (kind?.ansichten[p.ansicht]);
-      for (const [g, el] of gelenke) el.setAttribute("transform", gelenkTransform(ans, g, p));
+      for (const [g, els] of gelenke) {
+        const tr = gelenkTransform(ans, g, p);
+        for (const el of els) el.setAttribute("transform", tr);
+      }
       if (p.gesicht !== gezeichnet.gesicht) {
         const el = svg.querySelector("[data-gesicht]");
         if (el) {
@@ -83,12 +85,15 @@ export function steuere(svg, opts = {}) {
         }
         gezeichnet.gesicht = p.gesicht;
       }
-      for (const el of Array.from(svg.querySelectorAll("[data-zubehoer]"))) {
-        const id = /** @type {string} */ (el.getAttribute("data-zubehoer"));
-        const soll = p.zustaende[id] ?? "";
-        if ((el.getAttribute("data-zustand") ?? "") !== soll) {
-          el.innerHTML = zubehoerInnen(id, Number(el.getAttribute("data-teil")), p.ansicht, soll);
-          el.setAttribute("data-zustand", soll);
+      for (const modus of /** @type {const} */ (["flaeche", "kontur"])) {
+        const attr = modus === "kontur" ? "data-zubehoer-kontur" : "data-zubehoer";
+        for (const el of Array.from(svg.querySelectorAll(`[${attr}]`))) {
+          const id = /** @type {string} */ (el.getAttribute(attr));
+          const soll = p.zustaende[id] ?? "";
+          if ((el.getAttribute("data-zustand") ?? "") !== soll) {
+            el.innerHTML = zubehoerInnen(id, Number(el.getAttribute("data-teil")), p.ansicht, soll, modus);
+            el.setAttribute("data-zustand", soll);
+          }
         }
       }
     }

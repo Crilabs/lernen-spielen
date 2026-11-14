@@ -13,6 +13,8 @@ import { pose as posen } from "./pose.js";
  */
 
 const INK = "#3B2A6B";
+/** Strichbreite der Kontur-Schicht: die Hälfte liegt außerhalb der Fläche und bildet die Silhouette. */
+const KONTUR = 8;
 /** @param {number} n */
 const z = (n) => String(Math.round(n * 100) / 100);
 
@@ -46,6 +48,15 @@ function ansichtVon(kindId, ansicht) {
   return ans;
 }
 
+/**
+ * Fläche oder Kontur einer Fassung.
+ * @param {import("./bestand.js").Fassung|undefined} f @param {"flaeche"|"kontur"} modus
+ */
+export function fassung(f, modus) {
+  if (typeof f === "string") return modus === "flaeche" ? f : "";
+  return (modus === "flaeche" ? f?.svg : f?.kontur) ?? "";
+}
+
 /** Inhalt der Gesichtsgruppe. @param {Ansicht} ansicht @param {string} gesichtId */
 export function gesichtInnen(ansicht, gesichtId) {
   const g = bestand.gesichter.get(gesichtId);
@@ -55,13 +66,14 @@ export function gesichtInnen(ansicht, gesichtId) {
 }
 
 /**
- * Inhalt eines Zubehörteils (Zustandsfassung, sonst Grundfassung).
+ * Inhalt eines Zubehörteils (Zustandsfassung, sonst Grundfassung), als Fläche oder Kontur.
  * @param {string} zubehoerId @param {number} index @param {Ansicht} ansicht @param {string} [zustand]
+ * @param {"flaeche"|"kontur"} [modus]
  */
-export function zubehoerInnen(zubehoerId, index, ansicht, zustand) {
+export function zubehoerInnen(zubehoerId, index, ansicht, zustand, modus = "flaeche") {
   const t = bestand.zubehoer.get(zubehoerId)?.teile[index];
   if (!t) throw new Error(`Runde: unbekanntes Zubehör „${zubehoerId}“`);
-  return (zustand && t.zustaende?.[zustand]?.[ansicht]) ?? t.svg[ansicht] ?? "";
+  return fassung((zustand && t.zustaende?.[zustand]?.[ansicht]) || t.svg[ansicht], modus);
 }
 
 /**
@@ -90,8 +102,8 @@ export function zeichnePose(kindId, p, aus = {}) {
   }).filter((zb) => !zb.nurAnsicht || zb.nurAnsicht === p.ansicht);
   const verdeckt = new Set(aktiv.flatMap((zb) => zb.verdeckt ?? []));
 
-  /** @param {string} gelenk @param {"vorne"|"hinten"} ebene */
-  const zubehoerAn = (gelenk, ebene) => aktiv.flatMap((zb) => zb.teile.map((t, i) => {
+  /** @param {string} gelenk @param {"vorne"|"hinten"} ebene @param {"flaeche"|"kontur"} modus */
+  const zubehoerAn = (gelenk, ebene, modus) => aktiv.flatMap((zb) => zb.teile.map((t, i) => {
     const platz = ans.plaetze[t.platz];
     if (platz.gelenk !== gelenk || t.ebene !== ebene) return "";
     const je = zb.je?.[kindId] ?? {};
@@ -99,28 +111,30 @@ export function zeichnePose(kindId, p, aus = {}) {
     const mass = (platz.mass ?? 1) * (je.mass ?? 1);
     const zustand = zustaende[zb.id];
     const tr = `translate(${z(platz.punkt[0] + dx)} ${z(platz.punkt[1] + dy)}) rotate(${z(platz.winkel ?? 0)}) scale(${z(mass)})`;
-    return `<g data-zubehoer="${zb.id}" data-teil="${i}"${zustand ? ` data-zustand="${zustand}"` : ""} transform="${tr}">`
-      + `${zubehoerInnen(zb.id, i, p.ansicht, zustand)}</g>`;
+    const attr = modus === "kontur" ? "data-zubehoer-kontur" : "data-zubehoer";
+    return `<g ${attr}="${zb.id}" data-teil="${i}"${zustand ? ` data-zustand="${zustand}"` : ""} transform="${tr}">`
+      + `${zubehoerInnen(zb.id, i, p.ansicht, zustand, modus)}</g>`;
   })).join("");
 
-  /** @param {string} gelenk @returns {string} */
-  const gruppe = (gelenk) => {
+  /** @param {string} gelenk @param {"flaeche"|"kontur"} modus @returns {string} */
+  const gruppe = (gelenk, modus) => {
     if (!ans.drehpunkte[gelenk]) return "";
     const knoten = BAUM[gelenk];
     const eigene = (ans.teile[gelenk] ?? []).filter((t) => !verdeckt.has(t.teil)).map((t) => {
       if (t.teil === "gesicht" && !t.svg) {
+        if (modus === "kontur") return "";
         const [gx, gy] = ans.gesicht;
         return `<g data-gesicht="${p.gesicht}" transform="translate(${z(gx)} ${z(gy)})">${gesichtInnen(p.ansicht, p.gesicht)}</g>`;
       }
       if (t.formen) {
         const form = gelenk.startsWith("arm-hinten") ? p.haende.hinten : p.haende.vorn;
-        return t.formen[form] ?? t.formen.offen;
+        return fassung(t.formen[form] ?? t.formen.offen, modus);
       }
-      return t.svg ?? "";
+      return (modus === "flaeche" ? t.svg : t.kontur) ?? "";
     }).join("");
     return `<g data-gelenk="${gelenk}" transform="${gelenkTransform(ans, gelenk, p)}">`
-      + zubehoerAn(gelenk, "hinten") + knoten.vor.map(gruppe).join("") + eigene
-      + zubehoerAn(gelenk, "vorne") + knoten.nach.map(gruppe).join("") + `</g>`;
+      + zubehoerAn(gelenk, "hinten", modus) + knoten.vor.map((g) => gruppe(g, modus)).join("") + eigene
+      + zubehoerAn(gelenk, "vorne", modus) + knoten.nach.map((g) => gruppe(g, modus)).join("") + `</g>`;
   };
 
   const label = labelFuer(kindId, aus.haltung);
@@ -130,7 +144,8 @@ export function zeichnePose(kindId, p, aus = {}) {
   return `<svg class="runde" viewBox="0 0 320 280" data-kind="${k.id}" data-ansicht="${p.ansicht}"`
     + `${aus.haltung ? ` data-haltung="${aus.haltung}"` : ""} role="img" aria-label="${label}"`
     + ` stroke="${INK}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">`
-    + `${blick}${gruppe(WURZEL)}</g></svg>`;
+    + `${blick}<g data-schicht="kontur" fill="${INK}" stroke="${INK}" stroke-width="${KONTUR}">${gruppe(WURZEL, "kontur")}</g>`
+    + `<g data-schicht="flaeche">${gruppe(WURZEL, "flaeche")}</g></g></svg>`;
 }
 
 /**

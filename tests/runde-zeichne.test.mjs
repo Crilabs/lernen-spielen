@@ -26,10 +26,20 @@ beforeEach(() => {
   });
   meldeZubehoer({ id: "test-decke", wort: "die Decke", teile: [{ platz: "schoss", ebene: "vorne", svg: svgZ("decke") }] });
   meldeZubehoer({ id: "test-umhang", wort: "der Umhang", teile: [{ platz: "ruecken", ebene: "hinten", svg: svgZ("umhang") }] });
+  meldeZubehoer({
+    id: "test-kappe", wort: "die Kappe",
+    teile: [{ platz: "kopf", ebene: "vorne", svg: { dreiviertel: { svg: `<path data-test="kappe"/>`, kontur: `<path data-test="kappe-kontur"/>` }, profil: "" } }],
+  });
 });
 
-/** Text der Gruppe eines Gelenks (vom öffnenden Tag bis zu seinem schließenden). */
-function gruppe(svg, gelenk) {
+/** Nur die Flächen-Schicht (die Kontur-Schicht liegt davor im Text). */
+const F = (svg) => svg.slice(svg.indexOf('data-schicht="flaeche"'));
+/** Nur die Kontur-Schicht. */
+const K = (svg) => svg.slice(svg.indexOf('data-schicht="kontur"'), svg.indexOf('data-schicht="flaeche"'));
+
+/** Text der Gruppe eines Gelenks in der Flächen-Schicht (vom öffnenden Tag bis zu seinem schließenden). */
+function gruppe(svgGanz, gelenk) {
+  const svg = F(svgGanz);
   const start = svg.indexOf(`data-gelenk="${gelenk}"`);
   assert.ok(start >= 0, `Gelenk ${gelenk} fehlt`);
   let tiefe = 0;
@@ -45,20 +55,22 @@ function gruppe(svg, gelenk) {
 test("alle Gelenkgruppen da, je einmal", () => {
   for (const [id, bewegt] of [["test-geht", "geht"], ["test-stuhl", "rollstuhl"]]) {
     const svg = zeichne(id);
-    const gefunden = [...svg.matchAll(/data-gelenk="([^"]+)"/g)].map((m) => m[1]);
+    const gefunden = [...F(svg).matchAll(/data-gelenk="([^"]+)"/g)].map((m) => m[1]);
     assert.deepEqual(gefunden.sort(), gelenkeFuer(bewegt).sort());
+    const kontur = [...K(svg).matchAll(/data-gelenk="([^"]+)"/g)].map((m) => m[1]);
+    assert.deepEqual(kontur.sort(), gelenkeFuer(bewegt).sort());
   }
 });
 
 test("Zeichenreihenfolge: hinterer Arm, Rumpf, Kopf", () => {
-  const svg = zeichne("test-geht");
+  const svg = F(zeichne("test-geht"));
   assert.ok(svg.indexOf('data-gelenk="arm-hinten-oben"') < svg.indexOf('data-test="rumpf"'));
   assert.ok(svg.indexOf('data-test="rumpf"') < svg.indexOf('data-gelenk="kopf"'));
   assert.ok(svg.indexOf('data-gelenk="kopf"') < svg.indexOf('data-gelenk="arm-vorn-oben"'));
 });
 
 test("Beine liegen hinter dem Rumpf, damit der Saum das Hüftgelenk verdeckt", () => {
-  const svg = zeichne("test-geht");
+  const svg = F(zeichne("test-geht"));
   assert.ok(svg.indexOf('data-gelenk="bein-vorn"') < svg.indexOf('data-gelenk="rumpf"'));
   assert.ok(svg.indexOf('data-gelenk="bein-hinten"') < svg.indexOf('data-gelenk="bein-vorn"'));
 });
@@ -75,7 +87,7 @@ test("Versatz und Größe an der Wurzel, Größe um den Fußpunkt", () => {
 });
 
 test("Gesicht sitzt im Platzhalter, zwischen Kopf und Haaren", () => {
-  const svg = zeichne("test-geht", { gesicht: "staunen" });
+  const svg = F(zeichne("test-geht", { gesicht: "staunen" }));
   const i = svg.indexOf('data-test="staunen-d"');
   assert.ok(svg.indexOf('data-test="kopf"') < i && i < svg.indexOf('data-test="haare-oben"'));
   assert.match(svg, /data-gesicht="staunen" transform="translate\(160 92\)"/);
@@ -95,7 +107,7 @@ test("Zubehör sitzt im Gelenk seines Platzes, auch am Stuhlkind", () => {
 });
 
 test("Zubehör hinten liegt vor den eigenen Teilen des Gelenks", () => {
-  const svg = zeichne("test-geht", { zubehoer: ["test-umhang"] });
+  const svg = F(zeichne("test-geht", { zubehoer: ["test-umhang"] }));
   assert.ok(svg.indexOf('data-test="umhang-d"') < svg.indexOf('data-test="rumpf"'));
   assert.ok(svg.indexOf('data-test="umhang-d"') < svg.indexOf('data-gelenk="arm-hinten-oben"'));
 });
@@ -138,4 +150,25 @@ test("Handform: Standard offen, Haltung wählt zeigen", () => {
   assert.ok(zeichne("test-geht").includes('data-test="hand-offen"'));
   const svg = zeichne("test-geht", { haltung: "deuten" });
   assert.ok(svg.includes('data-test="hand-zeigen"') && !svg.includes('data-test="hand-offen"'));
+});
+
+test("Kontur-Schicht liegt unter der Fläche und trägt nur die Konturen", () => {
+  const svg = zeichne("test-geht");
+  assert.ok(svg.indexOf('data-schicht="kontur"') < svg.indexOf('data-schicht="flaeche"'));
+  assert.ok(K(svg).includes('data-test="rumpf-kontur"') && !F(svg).includes('data-test="rumpf-kontur"'));
+  assert.ok(F(svg).includes('data-test="rumpf"') && !K(svg).includes('data-test="rumpf"'));
+  assert.ok(!K(svg).includes("data-gesicht"), "Gesicht nur in der Fläche");
+  assert.match(svg, /data-schicht="kontur" fill="#3B2A6B" stroke="#3B2A6B"/);
+});
+
+test("Handform mit Kontur: Kontur in der Kontur-Schicht", () => {
+  const svg = zeichne("test-geht");
+  assert.ok(K(svg).includes('data-test="hand-offen-kontur"'));
+  assert.ok(F(svg).includes('data-test="hand-offen"') && !F(svg).includes("hand-offen-kontur"));
+});
+
+test("Zubehör mit Kontur: Kontur-Gruppe in der Kontur-Schicht", () => {
+  const svg = zeichne("test-geht", { zubehoer: ["test-kappe"] });
+  assert.match(K(svg), /data-zubehoer-kontur="test-kappe"[^>]*><path data-test="kappe-kontur"\/>/);
+  assert.ok(F(svg).includes('data-test="kappe"'));
 });

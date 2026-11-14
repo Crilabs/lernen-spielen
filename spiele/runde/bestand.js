@@ -7,7 +7,8 @@ import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, gelenkeFuer } fro
 /**
  * @typedef {import("./gelenke.js").Ansicht} Ansicht
  * @typedef {import("./gelenke.js").Bewegt} Bewegt
- * @typedef {{teil: string, svg?: string, formen?: Record<string, string>}} Teil  formen: Handformen, „offen“ ist Pflicht
+ * @typedef {string|{svg: string, kontur?: string}} Fassung  Fläche, wahlweise mit Kontur (Silhouette)
+ * @typedef {{teil: string, svg?: string, kontur?: string, formen?: Record<string, Fassung>}} Teil  formen: Handformen, „offen“ ist Pflicht
  * @typedef {{gelenk: string, punkt: [number, number], winkel?: number, mass?: number}} Platz
  * @typedef {{drehpunkte: Record<string, [number, number]>, teile: Record<string, Teil[]>,
  *            gesicht: [number, number], plaetze: Record<string, Platz>}} KindAnsicht
@@ -21,7 +22,7 @@ import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, gelenkeFuer } fro
  * @typedef {Werte & {ms: number, haltung?: string, gesicht?: string, zustaende?: Record<string, string>}} Schritt
  * @typedef {{id: string, ansicht: Ansicht, schritte: Schritt[], mal?: number, ende: string, braucht?: string[],
  *            rollstuhl?: {schritte: Schritt[]}}} Bewegung
- * @typedef {Partial<Record<Ansicht, string>>} ZubehoerSvg
+ * @typedef {Partial<Record<Ansicht, Fassung>>} ZubehoerSvg
  * @typedef {{platz: string, ebene: "vorne"|"hinten", svg: ZubehoerSvg, zustaende?: Record<string, ZubehoerSvg>}} ZubehoerTeil
  * @typedef {{id: string, wort: string, nurAnsicht?: Ansicht, teile: ZubehoerTeil[], verdeckt?: string[],
  *            je?: Record<string, {versatz?: [number, number], mass?: number}>}} Zubehoer
@@ -48,6 +49,15 @@ const fehler = (text) => {
 /** @param {string} wo @param {string|undefined} svg */
 function pruefeSvg(wo, svg) {
   if (svg && /\sid\s*=/.test(svg)) fehler(`${wo}: kein id= in SVG-Teilen (mehrere Figuren auf einer Seite)`);
+}
+
+/** @param {unknown} f */
+const istFassung = (f) => typeof f === "string" || (typeof f === "object" && f !== null && typeof (/** @type {any} */ (f).svg) === "string");
+/** @param {string} wo @param {Fassung|undefined} f */
+function pruefeFassung(wo, f) {
+  if (typeof f === "string") return pruefeSvg(wo, f);
+  pruefeSvg(wo, f?.svg);
+  pruefeSvg(wo, f?.kontur);
 }
 
 /** @param {Map<string, {id: string}>} karte @param {string} art @param {{id: string}} def */
@@ -87,8 +97,9 @@ export function meldeKind(kind) {
       if (!gelenke.includes(g)) fehler(`${wo}: Teile an unbekanntem Gelenk „${g}“`);
       for (const t of teile) {
         pruefeSvg(`${wo}, Teil ${t.teil}`, t.svg);
-        if (t.formen && typeof t.formen.offen !== "string") fehler(`${wo}, Teil ${t.teil}: Handform „offen“ fehlt`);
-        for (const f of Object.values(t.formen ?? {})) pruefeSvg(`${wo}, Teil ${t.teil}`, f);
+        pruefeSvg(`${wo}, Teil ${t.teil}`, t.kontur);
+        if (t.formen && !istFassung(t.formen.offen)) fehler(`${wo}, Teil ${t.teil}: Handform „offen“ fehlt`);
+        for (const f of Object.values(t.formen ?? {})) pruefeFassung(`${wo}, Teil ${t.teil}`, f);
       }
     }
     if (!(ans.teile.kopf ?? []).some((t) => t.teil === "gesicht" && !t.svg)) {
@@ -151,8 +162,8 @@ export function meldeZubehoer(z) {
     if (t.ebene !== "vorne" && t.ebene !== "hinten") fehler(`${wo}: ebene muss vorne oder hinten sein`);
     const fassungen = [t.svg, ...Object.values(t.zustaende ?? {})];
     for (const f of fassungen) {
-      for (const a of noetig) if (typeof f?.[a] !== "string") fehler(`${wo}: SVG für Ansicht ${a} fehlt`);
-      for (const svg of Object.values(f ?? {})) pruefeSvg(wo, svg);
+      for (const a of noetig) if (!istFassung(f?.[a])) fehler(`${wo}: SVG für Ansicht ${a} fehlt`);
+      for (const fa of Object.values(f ?? {})) pruefeFassung(wo, fa);
     }
   }
   bestand.zubehoer.set(z.id, z);

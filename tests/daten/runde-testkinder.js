@@ -16,7 +16,7 @@ function ansicht(bewegt) {
   };
   const teile = {
     koerper: [{ teil: "schatten", svg: linie("schatten", 130, 254, 190, 254) }],
-    rumpf: [{ teil: "rumpf", svg: linie("rumpf", 160, 130, 160, 200) }],
+    rumpf: [{ teil: "rumpf", svg: linie("rumpf", 160, 130, 160, 200), kontur: `<path data-test="rumpf-kontur"/>` }],
     kopf: [
       { teil: "kopf", svg: `<circle data-test="kopf" cx="160" cy="90" r="34"/>` },
       { teil: "gesicht" },
@@ -27,7 +27,10 @@ function ansicht(bewegt) {
     "arm-vorn-oben": [{ teil: "oberarm", svg: linie("arm-vorn-oben", 170, 130, 170, 165) }],
     "arm-vorn-unten": [
       { teil: "unterarm", svg: linie("arm-vorn-unten", 170, 165, 170, 195) },
-      { teil: "hand", formen: { offen: `<path data-test="hand-offen"/>`, zeigen: `<path data-test="hand-zeigen"/>` } },
+      { teil: "hand", formen: {
+        offen: { svg: `<path data-test="hand-offen"/>`, kontur: `<path data-test="hand-offen-kontur"/>` },
+        zeigen: `<path data-test="hand-zeigen"/>`,
+      } },
     ],
   };
   const plaetze = {

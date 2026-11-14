@@ -146,3 +146,12 @@ test("Handform wechselt beim Übergang", async () => {
   await u.spule(1100);
   assert.match(svg.innerHTML, /data-test="hand-zeigen"/);
 });
+
+test("beide Schichten drehen mit", async () => {
+  const { u, svg, f } = figur();
+  f.haltung("nicken");
+  await u.spule(1100);
+  const gruppen = svg.querySelectorAll('[data-gelenk="kopf"]');
+  assert.equal(gruppen.length, 2);
+  for (const g of gruppen) assert.equal(winkelAus(g.getAttribute("transform")), 10);
+});
