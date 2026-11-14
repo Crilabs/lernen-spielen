@@ -35,13 +35,13 @@ der Grund im Entwurf steht.
 ## Ablage (Christian)
 
 Jedes Spiel hat **einen eigenen Ordner, sortiert nach Fach** (Fach-Ids wie in `spiele.json`: `mathe`, `lesen`,
-`schreiben`, `grammatik`, `geometrie`, `sprechen`). Der Ordnername ist der Name des Spiels in Kleinbuchstaben mit
-Bindestrichen (Annahme), z. B. M14 „Zwei Tonnen“:
+`schreiben`, `grammatik`, `geometrie`, `sprechen`). Der Ordnername ist **Katalog-Nummer und Name** in Kleinbuchstaben
+mit Bindestrichen (Christian), z. B. M14 „Zwei Tonnen“ → `m14-zwei-tonnen`:
 
 ```
 spiele/
   mathe/
-    zwei-tonnen/
+    m14-zwei-tonnen/
       index.html        dünne Seite (Bausteine, seite.css, spiel.js)
       spiel.js          Spielwelt, Aufgabe, Rahmen (aus der Vorlage)
       logik.js          reine Spiellogik, in Node getestet (falls nötig)
@@ -56,8 +56,8 @@ tests/spiele/<fach>/<spiel>.test.mjs   Node-Tests der Spiellogik
 docs/spiele/<fach>/<spiel>.md          der Spielentwurf
 ```
 
-- `spiele.json` nennt die Seite relativ zu `spiele/`: `"datei": "mathe/zwei-tonnen/index.html"`,
-  `"symbol": "mathe/zwei-tonnen/symbol.svg"`.
+- `spiele.json` nennt die Seite relativ zu `spiele/`: `"datei": "mathe/m14-zwei-tonnen/index.html"`,
+  `"symbol": "mathe/m14-zwei-tonnen/symbol.svg"`.
 - Bausteine finden ihre Pfade selbst (`import.meta.url`); im Spiel verweisen Imports relativ (`../../rahmen/…`).
 - Ein neues Spiel entsteht durch Kopieren von `spiele/vorlage/` in `spiele/<fach>/<spiel>/`.
 
