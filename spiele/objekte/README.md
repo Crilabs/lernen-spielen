@@ -10,6 +10,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
   hinein, Tonne wackelt satt).
 - `papiertonne.js` – blaue Papiertonne (Aufkleber: Blatt). `wertstofftonne.js` – Gelbe Tonne / Wertstofftonne
   (Aufkleber: Dose und Karton). Farben der Welt-Schicht, heller und weicher als die Perlen (6.2).
+- `schuhpaar.js` – ein Paar Turnschuhe (blau und koralle).
 - `papier.js` – zerknülltes Heftpapier. `dose.js` – leere Konservendose (keine Getränkedose: die hat Pfand).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art

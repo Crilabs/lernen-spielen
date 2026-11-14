@@ -27,10 +27,10 @@ function schuh(x, y, farbe) {
 
 /** Das Paar als Stück im Feld 0…100. @returns {import("../runde/kinder/stil.js").Stueck} */
 export function schuhpaarStueck() {
-  return zusammen(schuh(28, 30, SCHUH_A), schuh(20, 46, SCHUH_B));
+  return zusammen(schuh(28, 22, SCHUH_A), schuh(20, 38, SCHUH_B));
 }
 
 meldeObjekt("schuhpaar", {
   zustaende: ["liegt"],
-  zeichne: () => bild({ breite: 100, hoehe: 100, teile: [{ stueck: schuhpaarStueck() }], ursprung: [50, 80] }),
+  zeichne: () => bild({ breite: 100, hoehe: 100, teile: [{ stueck: schuhpaarStueck() }], ursprung: [50, 74] }),
 });
