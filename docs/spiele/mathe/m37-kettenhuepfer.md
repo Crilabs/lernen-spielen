@@ -1,5 +1,7 @@
 # M37 Kettenhüpfer – Spielentwurf
 
+Weg: voller Weg – neue Aufgabenart `mal` (aufgabenarten.js, ZIEL_MS, `aufgaben` in lernplan.json), neues Lernzeichen Perlenkette (freigegeben durch Christian 2026-11-14 mit dem Katalog-Eintrag), Änderungen in `spiele/rahmen/`.
+
 - **Katalog-Id:** M37 · „Kettenhüpfer“ · Mathe · `spiele/mathe/m37-kettenhuepfer/` · Heimatwelt `wiese-und-hecke` (Forschen, Rätsel) ·
   **Stand:** 2026-11-14 · **(Annahme)** = korrigierbar. **Weg:** voller Weg (neue Art `mal`, neues Lernzeichen, Änderungen an `rahmen/`).
 - **Abweichungen vom Katalog-Eintrag:**

@@ -1,0 +1,15 @@
+[
+ {
+  "datum": "2026-11-14",
+  "phase": "entwurf",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 54,
+  "ausgabe": 74748,
+  "einheit": "tokens",
+  "menge": 4521641,
+  "notiz": "Bau-Agent Entwurf, Runde 1",
+  "cache_lesen": 4168195,
+  "cache_schreiben": 278644
+ }
+]
