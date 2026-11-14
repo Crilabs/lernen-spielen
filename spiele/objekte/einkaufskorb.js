@@ -1,15 +1,36 @@
-// <ls-objekt art="einkaufskorb" zustand="leer|gefuellt">: ein geflochtener Einkaufskorb von vorn, breit und flach,
-// mit hohem Henkelbogen (Silhouette, figuren.md §4). Feld 0…200 × 30…150. gefuellt: oben schauen Packungen heraus
-// (eine Tüte, ein Karton, eine Schachtel), ohne Schrift und Ziffer. Figur und Wirkung des Spiels M37: Bei jedem
-// Stäbchen fällt eine Packung hinein (Anstoß, wirf()), der Korb wackelt satt.
+// <ls-objekt art="einkaufskorb" zustand="leer|1|2|…|8|gefuellt">: ein geflochtener Einkaufskorb von vorn, breit und
+// flach, mit hohem Henkelbogen (Silhouette, figuren.md §4). Feld 0…200 × 20…146. Der Füllstand ist die Zahl der
+// Packungen, die oben herausschauen (1 … 8; gefuellt = alle acht, für Karte und Regal): Tüten, Kartons und Schachteln
+// ohne Schrift und Ziffer. Figur und Wirkung des Spiels M37: Jede gelöste Aufgabe legt eine Packung dazu (der neue
+// Füllstand bleibt stehen, auch bei wenig Bewegung); bei jedem Stäbchen fällt etwas hinein (Anstoß, wirf()), der Korb
+// wackelt satt.
+//
+// Farben nur aus der Welt-Palette „Werkstatt“ (spiele/start/welten.js) und den Tokens (spiele/rahmen/stil.js), keine
+// Farben der Lernzeichen (grundsaetze-bilder §6.2).
 
 import { form, flach, naht, pfad, zusammen, heller, dunkler } from "../runde/kinder/stil.js";
+import { FARBE } from "../rahmen/stil.js";
+import { PALETTEN } from "../start/welten.js";
 import { meldeObjekt, bild } from "./objekt.js";
 
-export const WEIDE = "#D8B07A";
-const TUETE = "#E9D2A8";
-const KARTON = "#BDB3A3";
-const SCHACHTEL = "#9FC7DB";
+/** @typedef {import("../runde/kinder/stil.js").Stueck} Stueck */
+
+const [, KARTON, , SCHACHTEL] = PALETTEN.werkstatt;
+export const WEIDE = FARBE.kante;
+const TUETE = FARBE.ahorn;
+
+/** Füllstände: leer, eine bis acht Packungen, gefuellt (= acht). */
+export const PLAETZE = 8;
+const ZUSTAENDE = ["leer", ...Array.from({ length: PLAETZE }, (_, i) => String(i + 1)), "gefuellt"];
+
+/** Zustand für eine Zahl von Packungen (0 = leer, ab acht voll). @param {number} anzahl */
+export function fuellstand(anzahl) {
+  const k = Math.max(0, Math.min(PLAETZE, Math.floor(anzahl)));
+  return k === 0 ? "leer" : String(k);
+}
+
+/** Wie viele Packungen ein Zustand zeigt. @param {string} zustand */
+const anzahlVon = (zustand) => (zustand === "gefuellt" ? PLAETZE : Number(zustand) || 0);
 
 /** Der Henkel: ein hoher Bogen, hinter dem Korb. */
 function henkel() {
@@ -24,37 +45,65 @@ function korb() {
   return zusammen(leib, rand, flechten);
 }
 
-/** Packungen, die oben herausschauen (nur im Zustand gefuellt). */
+/** Eine Tüte mit umgeschlagenem Rand, Mitte x, Oberkante y. @param {number} x @param {number} y @param {boolean} vorn */
+const tuete = (x, y, vorn) => zusammen(
+  form(pfad(`M${x - 15} 76 L${x - 11} ${y} L${x + 11} ${y} L${x + 15} 76 Z`), TUETE, [x - 8, y + 4], { s: 0.9, trenn: vorn }),
+  flach(pfad(`M${x - 11} ${y} L${x + 11} ${y} L${x + 10} ${y + 7} L${x - 10} ${y + 7} Z`), dunkler(TUETE, 0.12)),
+);
+/** Ein Karton mit Deckelkante. @param {number} x @param {number} y @param {boolean} vorn */
+const karton = (x, y, vorn) => zusammen(
+  form(pfad(`M${x - 18} 76 L${x - 17} ${y} L${x + 17} ${y} L${x + 18} 76 Z`), KARTON, [x - 12, y + 4], { s: 0.9, trenn: vorn }),
+  naht(`M${x - 16} ${y + 6} L${x + 16} ${y + 6}`, KARTON, 2),
+);
+/** Eine schmale, leicht schräge Schachtel. @param {number} x @param {number} y @param {boolean} vorn */
+const schachtel = (x, y, vorn) => form(pfad(`M${x - 11} 76 L${x - 9} ${y + 2} L${x + 12} ${y} L${x + 11} 76 Z`), SCHACHTEL, [x - 6, y + 4], { s: 0.9, trenn: vorn });
+
+/**
+ * Die acht Plätze in der Reihenfolge, in der sie sich füllen (abwechselnd hinten und vorn, von der Mitte nach außen),
+ * je mit Form, Mitte und Oberkante. Hinten höher, vorn tiefer.
+ */
+const PLATZ = [
+  { ding: karton, x: 100, y: 46, vorn: false },
+  { ding: tuete, x: 62, y: 42, vorn: false },
+  { ding: schachtel, x: 138, y: 40, vorn: false },
+  { ding: tuete, x: 120, y: 56, vorn: true },
+  { ding: schachtel, x: 80, y: 54, vorn: true },
+  { ding: karton, x: 162, y: 52, vorn: false },
+  { ding: karton, x: 36, y: 56, vorn: false },
+  { ding: tuete, x: 148, y: 60, vorn: true },
+];
+
+/** Zustände, in denen Platz i (0 …) zu sehen ist. @param {number} i */
+const sichtbarIn = (i) => ZUSTAENDE.filter((z) => anzahlVon(z) > i).join(" ");
+
+/** Teile der Packungen, hinten vor vorn gezeichnet. */
 function packungen() {
-  return zusammen(
-    form(pfad("M40 74 L46 44 L76 44 L80 74 Z"), TUETE, [48, 48], { s: 0.9 }),
-    flach(pfad("M46 44 L76 44 L74 52 L48 52 Z"), dunkler(TUETE, 0.12)),
-    form(pfad("M86 74 L88 50 L130 50 L128 74 Z"), KARTON, [92, 54], { s: 0.9 }),
-    form(pfad("M134 74 L138 38 L162 40 L160 74 Z"), SCHACHTEL, [140, 42], { s: 0.9 }),
-  );
+  const reihenfolge = PLATZ.map((p, i) => ({ ...p, i })).sort((a, b) => Number(a.vorn) - Number(b.vorn));
+  return reihenfolge.map((p) => ({ stueck: p.ding(p.x, p.y, p.vorn), teil: `packung-${p.i + 1}`, in: sichtbarIn(p.i) }));
 }
 
+const wackeln = [{ transform: "rotate(0deg)" }, { transform: "rotate(-1.6deg)" }, { transform: "rotate(1.2deg)" }, { transform: "rotate(0deg)" }];
+
 meldeObjekt("einkaufskorb", {
-  zustaende: ["leer", "gefuellt"],
+  zustaende: ZUSTAENDE,
   zeichne: () => bild({
     breite: 200,
     hoehe: 130,
     oben: 20,
     ursprung: [100, 146],
-    teile: [
-      { stueck: henkel() },
-      { stueck: packungen(), teil: "inhalt", in: "gefuellt" },
-      { stueck: korb() },
-    ],
+    teile: [{ stueck: henkel() }, ...packungen(), { stueck: korb() }],
   }),
-  bewegung: (von, nach) => (von === "leer" && nach === "gefuellt"
-    ? [
-      { teil: "inhalt", keyframes: [{ opacity: 0, transform: "translateY(18px)" }, { opacity: 1, transform: "translateY(0)" }], dauer: 450 },
-      { teil: "ganz", keyframes: [{ transform: "rotate(0deg)" }, { transform: "rotate(-2deg)" }, { transform: "rotate(1.5deg)" }, { transform: "rotate(0deg)" }], dauer: 500, beginn: 400 },
-    ]
-    : []),
-  anstoss: () => [
-    { teil: "ganz", keyframes: [{ transform: "rotate(0deg)" }, { transform: "rotate(-1.6deg)" }, { transform: "rotate(1.2deg)" }, { transform: "rotate(0deg)" }], dauer: 420 },
-  ],
+  // Mehr Packungen: die neuen sinken von oben hinein, dann wackelt der Korb satt. Weniger (neue Runde): ohne Bewegung.
+  bewegung: (von, nach) => {
+    const a = anzahlVon(von);
+    const b = anzahlVon(nach);
+    if (b <= a) return [];
+    const neu = [];
+    for (let i = a; i < b; i++) {
+      neu.push({ teil: `packung-${i + 1}`, keyframes: [{ opacity: 0, transform: "translateY(-16px)" }, { opacity: 1, transform: "translateY(0)" }], dauer: 380, beginn: (i - a) * 120 });
+    }
+    return [...neu, { teil: "ganz", keyframes: wackeln, dauer: 420, beginn: 300 + (b - a - 1) * 120 }];
+  },
+  anstoss: () => [{ teil: "ganz", keyframes: wackeln, dauer: 420 }],
   einwurf: [100, 74, 60],
 });

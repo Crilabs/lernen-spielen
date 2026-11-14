@@ -24,6 +24,7 @@ import "../../rahmen/perlenkette.js";
 import "../../objekte/objekt.js";
 import "../../objekte/einkaufskorb.js";
 import { wirf } from "../../objekte/objekt.js";
+import { fuellstand } from "../../objekte/einkaufskorb.js";
 import { malAus } from "../../aufgabenarten.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
@@ -50,6 +51,8 @@ const fertigKnopf = $("fertig");
 const korb = $("korb");
 const flug = $("flug");
 const timoPlatz = $("timo");
+const ding = $("ding");
+const dingPlatz = $("ding-platz");
 
 // Die Kette nimmt den Platz der Matte unter der Aufgabe ein (Breite und Höhe in rem an <ls-perlenkette>).
 const remPx = () => parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
@@ -120,6 +123,10 @@ const erzaehler = {
     tausch: () => blase.sage("Zehn Stäbchen sind so viele Perlen wie die Zehnerstäbe in der Tauschaufgabe zusammen. Rechne es aus und tipp die Zahl."),
     eins: () => blase.sage("Ein Stäbchen. Die Perlen darauf sind das Ergebnis. Rechne es aus und tipp die Zahl."),
   },
+  // Rundenende: hell und aufgelöst; „voll“ nur, wenn die Runde ihre Aufgaben hatte (sonst nur der Korb).
+  rundenende: (/** @type {boolean} */ voll, /** @type {boolean} */ kern) => (kern
+    ? (voll ? blase.sage("Die Vorratsliste ist voll. Der Vorrat ist eingeräumt.") : blase.sage("Der Vorrat ist eingeräumt."))
+    : (voll ? blase.sage("Die Vorratsliste ist voll. Im Korb liegen die Packungen.") : blase.sage("Im Korb liegen die Packungen."))),
   gehtNicht: () => blase.sage("Das Spiel geht gerade nicht."),
 };
 
@@ -167,37 +174,56 @@ let auftragLaut = true;
 let passtSatz = 0;
 /** Laufende Folge (Hüpfen, Flüge); stelleAufgabe und Tippen springen ans Ende. @type {(() => void)[]} */
 let laufend = [];
+/** Während ueberspringeAlles läuft, startet kein neuer Flug (sonst flöge eine Packung in die Denkzeit, B3). */
+let springt = false;
+/** Gelöste Aufgaben der Runde (Timos mitgezählt): so viele Packungen liegen im Korb. */
+let imKorb = 0;
+/** Die Aufgabe, die Timo in dieser Runde vorgezeigt hat; die Runde stellt sie dem Kind nicht (Entwurf §5). @type {string | null} */
+let vorgezeigt = null;
 /** Abbruch eines laufenden Fehler-Bilds (Ring, hohles Pfeilchen) beim nächsten Tippen. @type {(() => void) | null} */
 let fehlerBild = null;
 
 function ueberspringeAlles() {
-  const l = laufend;
-  laufend = [];
-  for (const f of l) f();
+  springt = true;
+  try {
+    while (laufend.length) {
+      const l = laufend;
+      laufend = [];
+      for (const f of l) f();
+    }
+  } finally {
+    springt = false;
+  }
+}
+
+/** Eine Packung mehr im Korb: der neue Füllstand bleibt stehen (auch bei wenig Bewegung, W-Freude). */
+function packungInDenKorb() {
+  imKorb++;
+  korb.setAttribute("zustand", fuellstand(imKorb));
 }
 
 /** Packung des Stäbchens k fliegt in den Korb (Wirkung, B1). @param {number} k */
 function packungFliegt(k) {
-  if (n === null || wenigBewegung()) return;
+  if (n === null || springt || wenigBewegung()) return;
   const p = kette.stabPunkt(k);
   if (!p) return;
   const art = PACKUNG[/** @type {keyof typeof PACKUNG} */ (n)];
   /** @type {HTMLElement} */
-  let ding;
+  let teil;
   if (art) {
-    ding = document.createElement("ls-objekt");
-    ding.setAttribute("art", art);
+    teil = document.createElement("ls-objekt");
+    teil.setAttribute("art", art);
   } else {
-    ding = document.createElement("div");
-    ding.className = "paeckchen"; // Platzhalter, bis das Objekt der Reihe gezeichnet ist (Entwurf §11)
+    teil = document.createElement("div");
+    teil.className = "paeckchen"; // Platzhalter, bis das Objekt der Reihe gezeichnet ist (Entwurf §11)
   }
-  flug.append(ding);
-  const r = ding.getBoundingClientRect();
-  ding.style.left = `${p.x - r.width / 2}px`;
-  ding.style.top = `${p.y - r.height / 2}px`;
-  const w = wirf(ding, korb, { dauer: 600 });
-  laufend.push(() => w.ueberspringe());
-  w.fertig.then(() => ding.remove());
+  flug.append(teil);
+  const r = teil.getBoundingClientRect();
+  teil.style.left = `${p.x - r.width / 2}px`;
+  teil.style.top = `${p.y - r.height / 2}px`;
+  const w = wirf(teil, korb, { dauer: 600 });
+  laufend.push(() => { w.ueberspringe(); teil.remove(); });
+  w.fertig.then(() => teil.remove());
 }
 
 /** Zeile „a · n = c“ mit Kurzkette auf der Vorratsliste; eine vorhandene Zeile derselben Aufgabe zeigt wieder ihr Ergebnis. */
@@ -220,11 +246,20 @@ function verdeckeZeile(/** @type {number} */ a, /** @type {number} */ b) {
   if (z) z.textContent = `${a} · ${b} = ▢`;
 }
 
+/** Das Ding der Reihe steht in Ruhe auf dem Regalbrett (Sachbild, kein Zählmaterial; W-Sachwelt). @param {number} reihe */
+function zeigeDing(reihe) {
+  const art = PACKUNG[/** @type {keyof typeof PACKUNG} */ (reihe)];
+  if (art) ding.setAttribute("art", art);
+  ding.hidden = !art;
+  dingPlatz.classList.toggle("platzhalter", !art);
+}
+
 /** Stellt die Kette auf n um (leert die Matte bei einem Wechsel). @param {number} neu @returns {boolean} gewechselt */
 function kettenWechsel(neu) {
   if (n === neu) return false;
   const vorher = n;
   n = neu;
+  zeigeDing(neu);
   geloest = new Set();
   kette.zeigerWeg();
   for (const a of ["pfeile", "leer", "markiert", "hell", "ring", "hohl"]) kette.removeAttribute(a);
@@ -232,7 +267,7 @@ function kettenWechsel(neu) {
   return vorher !== null;
 }
 
-/** Timo, Platzhalter aus der Runde (spiele/runde/). @type {{ haltung: (h: string) => any } | null} */
+/** Timo, Platzhalter aus der Runde (spiele/runde/). @type {{ haltung: (h: string, o?: { ms?: number }) => Promise<any>, halt: () => void } | null} */
 let timo = null;
 async function zeigeTimo() {
   if (timo || !timoPlatz) return timo;
@@ -246,37 +281,60 @@ async function zeigeTimo() {
   return timo;
 }
 
+/** Ist das Thema der Runde die Reihe von n (zweierreihe für n = 2 …)? Kern-Runden und fremde Reihen: nein. */
+function eigeneReihe(/** @type {string | undefined} */ themaId, /** @type {number} */ b) {
+  const t = themaId ? ctx?.plan?.themen?.find((/** @type {any} */ x) => x.id === themaId) : null;
+  const aufgaben = [t?.aufgaben ?? []].flat(); // ein Eintrag oder eine Liste
+  return aufgaben.some((/** @type {any} */ x) => x?.art === "mal" && x.reihe === b);
+}
+
 /**
  * Rundenanfang und Vorzeigen (L5): Der Erzähler nennt die Packung der Reihe, Timo legt die Aufgabe 1 · n vor (prüft,
  * zögert, tippt n), das Pfeilchen hüpft auf das erste Stäbchen. Zählt nicht für die Lernsteuerung. Tippen überspringt.
- * @param {any} aufgabe die erste Aufgabe der Runde
+ * @param {any} aufgabe die erste Aufgabe der Runde @param {string | undefined} rundenThema Id des Themas der Runde
  */
-async function vorzeigen(aufgabe) {
+async function vorzeigen(aufgabe, rundenThema) {
   const ziel = malAus(aufgabe?.ziel?.key);
   if (!ziel) return;
   stand.phase = "folge";
   const feld = /** @type {HTMLElement} */ (document.querySelector(".spielflaeche"));
   let kurz = false;
-  const abkuerzen = () => { kurz = true; ueberspringeAlles(); };
+  /** @type {() => void} */
+  let wecke = () => {};
+  const abkuerzen = () => {
+    kurz = true;
+    wecke();
+    ueberspringeAlles();
+    timo?.halt();
+  };
   feld.addEventListener("pointerdown", abkuerzen);
-  const ruhe = (/** @type {number} */ ms) => (kurz || wenigBewegung() ? Promise.resolve() : warte(ms));
+  // Standzeiten zwischen den Haltungen, auch bei wenig Bewegung (dann springen die Haltungen ohne Überblendung, aber
+  // Nachdenken, Zeigen und Tippen bleiben zu sehen). Tippen weckt sofort.
+  const ruhe = (/** @type {number} */ ms) => (kurz ? Promise.resolve() : new Promise((ok) => {
+    const uhr = setTimeout(ok, ms);
+    wecke = () => { clearTimeout(uhr); ok(undefined); };
+  }));
+  const haltung = (/** @type {string} */ h) => timo?.haltung(h, kurz ? { ms: 0 } : {});
   try {
     // Neue Runde: leerer Korb, leere Liste, frische Kette.
     liste.replaceChildren();
+    imKorb = 0;
     korb.setAttribute("zustand", "leer");
     n = null;
     kettenWechsel(ziel.b);
     const b = /** @type {number} */ (n);
+    vorgezeigt = `mal:1*${b}`;
     const t = await zeigeTimo();
     const anfang = TEXTE?.anfang?.[b];
-    const kern = aufgabe?.ziel?.thema === "kernaufgaben-einmaleins";
-    if (anfang) blase.sage(kern ? anfang.setzung : anfang.reihe);
+    // Der Fakt („In echt …“) nur in einer Runde der eigenen Reihe (K6); in Kern-Runden und bei einer Aufgabe aus einer
+    // anderen Reihe die Setzung.
+    if (anfang) blase.sage(eigeneReihe(rundenThema, b) ? anfang.reihe : anfang.setzung);
     gleichung.innerHTML = `<span>1 · ${b} =</span><span class="feld"></span>`;
     const box = /** @type {HTMLElement} */ (gleichung.querySelector(".feld"));
     await ruhe(2600);
-    t?.haltung("nachdenken");
+    haltung("nachdenken");
     await ruhe(900);
-    t?.haltung("zeigen");
+    haltung("zeigen");
     for (const ziffer of String(b)) {
       await ruhe(350);
       box.textContent += ziffer;
@@ -289,13 +347,16 @@ async function vorzeigen(aufgabe) {
     geloest.add(1);
     kette.zeigerWeg();
     kette.setAttribute("pfeile", "1");
-    korb.setAttribute("zustand", "gefuellt");
+    packungInDenKorb();
     zeileDazu(1, b);
     await ruhe(1200);
-    t?.haltung("stehen");
+    // Timo dreht sich zurück, bevor die Aufgabe des Kindes kommt: Sie erscheint erst auf ein stilles Bild (B3).
+    await haltung("stehen");
+    await ruhe(300);
   } finally {
     feld.removeEventListener("pointerdown", abkuerzen);
     ueberspringeAlles();
+    if (kurz) await timo?.haltung("stehen", { ms: 0 }); // abgekürzt: sofort still
   }
 }
 
@@ -376,17 +437,28 @@ function stelleAufgabe(aufgabe, melde) {
       rechnung.replaceChildren();
       // Gemeldet wird sofort (die Zeit der Aufgabe endet mit Fertig); die Folge läuft in der Zeit der Folge (FOLGE_MS).
       melde.geloest(aufgabe.ziel.key);
+      // Was die Lösung dauerhaft ändert, steht sofort fest: das Stäbchen ist gelöst, die Zeile steht auf der Liste,
+      // eine Packung mehr liegt im Korb. Nur das Bild der Kette folgt dem Hüpfen. Wird die Folge übersprungen (Tippen,
+      // nächste Aufgabe), setzt endbild es synchron; ein später Rückruf ändert nichts mehr (sonst überschriebe er die
+      // Kette der nächsten Aufgabe und machte ihr Ergebnis ablesbar, Entwurf §2 Satz 6).
+      const meine = geloest;
+      meine.add(a);
+      zeileDazu(a, b);
+      packungInDenKorb();
       const h = kette.huepfe(a, { wert: c, schritt: packungFliegt, ms: Math.min(240, 1300 / a) });
-      laufend.push(h.ueberspringe);
-      erzaehler.passt[passtSatz++ % erzaehler.passt.length]();
-      korb.setAttribute("zustand", "gefuellt");
-      h.fertig.then(() => {
-        geloest.add(a);
+      let gezeigt = false;
+      const endbild = () => {
+        if (gezeigt) return;
+        gezeigt = true;
+        h.ueberspringe();
+        if (meine !== geloest) return; // die Kette ist schon gewechselt
         kette.zeigerWeg();
         kette.setAttribute("leer", "");
-        kette.setAttribute("pfeile", [...geloest].sort((x, y) => x - y).join(" "));
-        zeileDazu(a, b);
-      });
+        kette.setAttribute("pfeile", [...meine].sort((x, y) => x - y).join(" "));
+      };
+      laufend.push(endbild);
+      h.fertig.then(endbild);
+      erzaehler.passt[passtSatz++ % erzaehler.passt.length]();
       return;
     }
     // Passt nicht: das Pfeilchen hält am a-ten Stäbchen (ohne Zahl), Ring dort, die getippte Zahl hohl an ihrem Ort.
@@ -667,6 +739,17 @@ function vorschauRunde() {
   };
 }
 
+/**
+ * Kettenhüpfer: Die Aufgabe, die Timo eben vorgezeigt hat (1 · n), stellt die Runde dem Kind nicht; sonst tippte es
+ * nach, was Timo getippt hat, und die Lernsteuerung buchte es als gekonnt (L1). Sie wird übersprungen, ohne Meldung
+ * (zählt also weder als gekonnt noch als falsch). Liefert die Lernsteuerung sie sofort noch einmal (Probe: dieselbe
+ * Aufgabe, bis sie gemeldet ist), wird sie gestellt. @param {any} aufgabe @param {{ naechste: () => any }} r
+ */
+function ohneVorgezeigt(aufgabe, r) {
+  if (!aufgabe || aufgabe.ziel?.key !== vorgezeigt) return aufgabe;
+  return aufStufe(r.naechste());
+}
+
 /** @param {boolean} vorschau */
 async function spieleRunde(vorschau) {
   /** @type {any} */
@@ -703,11 +786,19 @@ async function spieleRunde(vorschau) {
     aufgabe = aufStufe(r.naechste());
   }
   leiste.setAttribute("thema", r.thema);
+  const rundenThema = r.echteDinge?.thema; // Id des Themas der Runde (nicht der einzelnen Aufgabe)
+  const kernRunde = rundenThema === "kernaufgaben-einmaleins";
 
   let erste = true;
+  let gespielt = 0;
+  vorgezeigt = null;
   while (aufgabe) {
     raeumeAuf();
-    if (erste) await vorzeigen(aufgabe); // Kettenhüpfer: Timo legt vor (L5), bevor die Zeit der ersten Aufgabe läuft
+    if (erste) {
+      await vorzeigen(aufgabe, rundenThema); // Kettenhüpfer: Timo legt vor (L5), bevor die Zeit der ersten Aufgabe läuft
+      aufgabe = ohneVorgezeigt(aufgabe, r);
+      if (!aufgabe) break;
+    }
     erzaehler.auftrag(erste);
     erste = false;
     const e = await spieleAufgabe(aufgabe);
@@ -716,10 +807,13 @@ async function spieleRunde(vorschau) {
     // nächste Angebot kommt mit der neuen aufgabe.stufe, stelleAufgabe richtet sich danach.
     r.melde(e.key, ergebnis);
     document.dispatchEvent(new CustomEvent("ls-ergebnis", { detail: ergebnis })); // für die Browser-Prüfung
+    gespielt++;
     await warteFolge();
-    aufgabe = aufStufe(r.naechste());
+    aufgabe = ohneVorgezeigt(aufStufe(r.naechste()), r);
   }
 
+  ueberspringeAlles();
+  await Promise.all([erzaehler.rundenende(gespielt >= AUFGABEN_JE_RUNDE, kernRunde), warte(1500)]);
   const { hinweisSpiel } = await r.ende();
   await zeigePause({ hinweis: hinweisSpiel, zeit: vorschau ? undefined : await amRundenende(), echteDinge: r.echteDinge });
   return spieleRunde(vorschau);

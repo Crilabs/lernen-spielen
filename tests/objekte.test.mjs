@@ -91,15 +91,28 @@ test("kein Plattform-Zugriff und kein Zugriff auf Attribute im Konstruktor", () 
   assert.doesNotMatch(konstruktor, /setAttribute|getAttribute/);
 });
 
-test("Einkaufskorb (M37): leer und gefuellt, Packungen nur gefuellt, Bewegungen treffen vorhandene Teile, Einwurf", () => {
+test("Einkaufskorb (M37): Füllstand leer, 1 … 8, gefuellt; jede Packung bleibt ab ihrem Stand, Bewegungen treffen vorhandene Teile", async () => {
   const def = objekte.get("einkaufskorb");
-  assert.deepEqual(def.zustaende, ["leer", "gefuellt"]);
+  const { fuellstand, PLAETZE } = await import("../spiele/objekte/einkaufskorb.js");
+  assert.deepEqual(def.zustaende, ["leer", "1", "2", "3", "4", "5", "6", "7", "8", "gefuellt"]);
+  assert.equal(PLAETZE, 8);
+  assert.deepEqual([0, 1, 5, 8, 12].map(fuellstand), ["leer", "1", "5", "8", "8"]);
   const svg = def.zeichne("leer", { wert: "" });
   const teile = teileIn(svg);
-  for (const t of ["ganz", "inhalt"]) assert.ok(teile.has(t), t);
-  assert.match(svg, /data-in="gefuellt"/);
+  assert.ok(teile.has("ganz"));
+  // Packung i ist ab Stand i sichtbar und in gefuellt, nie in leer.
+  for (let i = 1; i <= PLAETZE; i++) {
+    const m = svg.match(new RegExp(`data-teil="packung-${i}" data-in="([^"]*)"`));
+    assert.ok(m, `packung-${i}`);
+    const in_ = m[1].split(" ");
+    assert.ok(in_.includes(String(i)) && in_.includes("gefuellt") && !in_.includes("leer") && !in_.includes(String(i - 1)), `packung-${i}: ${m[1]}`);
+  }
   assert.doesNotMatch(svg, /<text/);
-  for (const s of [...def.bewegung("leer", "gefuellt"), ...def.anstoss("schuhpaar")]) assert.ok(teile.has(s.teil), s.teil);
-  assert.ok(dauerVon(def.bewegung("leer", "gefuellt")) <= 1200);
+  for (const s of [...def.bewegung("leer", "3"), ...def.bewegung("2", "3"), ...def.anstoss("schuhpaar")]) assert.ok(teile.has(s.teil), s.teil);
+  assert.deepEqual(def.bewegung("5", "leer"), []);
+  assert.ok(dauerVon(def.bewegung("2", "3")) <= 1200);
   assert.equal(def.einwurf.length, 3);
+  // Farben nur aus Tokens und Welt-Palette (keine eigenen Hex-Werte in der Datei).
+  const quelle = (await import("node:fs")).readFileSync(new URL("../spiele/objekte/einkaufskorb.js", import.meta.url), "utf8");
+  assert.doesNotMatch(quelle, /#[0-9A-Fa-f]{6}/);
 });
