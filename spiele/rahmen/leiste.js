@@ -3,6 +3,8 @@
 // Links Haus (Alle Spiele, Nebenknopf), daneben das Fachsymbol als flache Kachel (nur Anzeige), dann der
 // Spielname in Fach-Tief und darunter leiser das Thema; rechts Ton an/aus (Nebenknopf).
 // Ohne bekanntes Fach: Band in Nebel, keine Kachel, Name in Tinte. `thema` darf sich zur Laufzeit ändern.
+// `ohne-haus` (nur die Startseite): kein Haus, die Seite ist selbst das Zuhause. Slot `rechts`: rechts neben
+// Ton, z. B. das Zahnrad der Startseite.
 // Setzt --ls-leiste-hoehe am <html>: dort beginnt die freie Fläche des Spiels (top: var(--ls-leiste-hoehe)).
 // Bereit: `await leiste.bereit()` (Versprechen, auch für späte Aufrufer) oder Ereignis `bereit`, sobald die
 // Einstellungen geladen sind und `ton` stimmt.
@@ -91,6 +93,8 @@ ${FACH_CSS}
 .thema { font-size: 3.4rem; line-height: 1.3; font-weight: 400; color: var(--ls-tinte-weich); }
 .name[hidden], .thema[hidden] { display: none; }
 .ton { margin-left: auto; flex: none; }
+.haus[hidden] { display: none; }
+::slotted([slot="rechts"]) { flex: none; }
 `;
 
 export class LsLeiste extends HTMLElement {
@@ -99,7 +103,7 @@ export class LsLeiste extends HTMLElement {
   /** @type {Promise<void>} */
   #bereitet = new Promise((ok) => { this.#ok = ok; });
 
-  static observedAttributes = ["spiel", "fach", "titel", "thema"];
+  static observedAttributes = ["spiel", "fach", "titel", "thema", "ohne-haus"];
 
   constructor() {
     super();
@@ -110,6 +114,7 @@ export class LsLeiste extends HTMLElement {
         <span class="fach" hidden><i></i></span>
         <div class="titel"><p class="name" hidden></p><p class="thema" hidden></p></div>
         <ls-knopf class="ton tonknopf" stumm></ls-knopf>
+        <slot name="rechts"></slot>
       </div>`;
     this.haus = /** @type {HTMLAnchorElement} */ (wurzel.querySelector("a.haus"));
     this.fachKachel = /** @type {HTMLElement} */ (wurzel.querySelector(".fach"));
@@ -204,6 +209,7 @@ export class LsLeiste extends HTMLElement {
       this.fachZeichen.style.removeProperty("--bild");
       this.fachKachel.hidden = true;
     }
+    this.haus.hidden = this.hasAttribute("ohne-haus");
     const titel = this.getAttribute("titel") ?? "";
     const thema = this.getAttribute("thema") ?? "";
     this.nameFeld.textContent = titel;

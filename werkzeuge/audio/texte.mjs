@@ -96,12 +96,10 @@ export function sammle(wurzel) {
     alle.set(schluessel, e);
   };
 
-  // Startseite: Kachel zum Anhören (Formel wie in spiele/index.html)
-  // und Name der Spiel-Kachel auf der Fach-Seite (themen.html, beim ersten Tippen)
-  for (const s of json(join(spiele, "spiele.json")).spiele) {
-    neu(`${s.titel}. ${s.thema}. ${s.text}`, "spiele.json");
-    if (s.titel) neu(s.titel, "spiele.json");
-  }
+  // Namen der Kacheln beim ersten Tippen: Spiel-Kacheln (Startseite „dran“, Fach-Seite) und Fach-Kacheln der Startseite
+  const katalog = json(join(spiele, "spiele.json"));
+  for (const s of katalog.spiele) if (s.titel) neu(s.titel, "spiele.json");
+  for (const k of katalog.kategorien ?? []) if (k.name) neu(k.name, "spiele.json");
 
   // Lernplan: Namen der Themen zum Vorlesen. Die Anregungen `eltern` (ls-anregung) sind Elternsprache und werden
   // nicht vorgelesen, also auch nicht gesammelt.

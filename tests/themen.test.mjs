@@ -1,4 +1,4 @@
-// Themen-Übersicht für das Kind: uebersicht() (rein) und Vorgaben an themen.html / index.html
+// Themen-Übersicht für das Kind: uebersicht() (rein) und Vorgaben an themen.html
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -88,7 +88,6 @@ test("uebersicht: sprich jeder Station ohne Ziffern", () => {
 // ---------- Seiten ----------
 
 const themen = readFileSync(new URL("../spiele/themen.html", import.meta.url), "utf8");
-const index = readFileSync(new URL("../spiele/index.html", import.meta.url), "utf8");
 
 test("themen.html schreibt nie in den Lernstand", () => {
   assert.doesNotMatch(themen, /speichere|sofortSpeichern|einfuehrungGesehen|startThema|runde\(/);
@@ -134,13 +133,6 @@ test("ls-anregung: Schnittstelle oeffne/schliesse, keine Attribute im Konstrukto
   assert.match(a, /querySelector\("\.schleier"\)\)\.addEventListener\("click"/);
   const konstruktor = a.slice(a.indexOf("constructor()"), a.indexOf("get offen()"));
   assert.doesNotMatch(konstruktor, /setAttribute|toggleAttribute|getAttribute/);
-});
-
-test("Startseite: Knopf „Was ich kann“ führt zu themen.html", () => {
-  assert.match(index, /<a id="themen" href="themen\.html"[^>]*aria-label="Was ich kann"/);
-  assert.match(index, /symbole\/themen\.svg/);
-  assert.match(index, /sag\("Was ich kann"/);
-  assert.match(index, /w === undefined \|\| s\.arten \? ""/, "Spiele mit arten ohne Balken");
 });
 
 test("Symbol themen.svg im Hausstil", () => {
