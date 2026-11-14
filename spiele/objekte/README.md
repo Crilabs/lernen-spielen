@@ -28,6 +28,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `eintrittskarte.js` – zwei Eintrittskarten aus Papier, schräg übereinander (Hellblau und Koralle; Kerben, Abriss mit gestrichelter Linie, ohne Schrift und Ziffer).
 - `wandkalender.js` – Wandkalender aus Papier am Nagel: oben ein Bild, unten 5 Wochen-Zeilen mit je 7 Kästchen, ein Tag
   umkringelt (ohne Schrift und Ziffer).
+- `hausfassade.js` – Vorderseite eines hohen Wohnhauses mit Giebeldach; Fenster in Reihen und Spalten, unten die Haustür (ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
