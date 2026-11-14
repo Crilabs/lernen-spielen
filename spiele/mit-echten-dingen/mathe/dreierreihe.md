@@ -15,10 +15,10 @@ quellen:
 Ihr braucht: sechs kleine Teller, Kekse oder Apfelstücke. Keine Nüsse für kleine Geschwister.
 
 1. Stellt fünf Teller hin, auf jeden drei Stück. Sagt: „5 mal 3 ist gleich 15.“
-2. Stellt einen sechsten Teller mit drei Stück dazu. Zählt nicht von vorn. Sagt: „Ein Dreier mehr: 15 plus 3. 6 mal 3 ist gleich 18.“
-3. Nehmt zwei Teller weg. Vier sind einer weniger als fünf. Sagt: „15 minus 3. 4 mal 3 ist gleich 12.“
-4. Esst die Brotzeit zusammen.
+2. Noch jemand kommt: ein sechster Teller mit drei Stück. Zählt nicht von vorn. Sagt: „15 plus 3. 6 mal 3 ist gleich 18.“
+3. Zwei essen später. Stellt den sechsten Teller zur Seite: „Wieder 5 mal 3, also 15.“ Dann noch einen: „15 minus 3. 4 mal 3 ist gleich 12.“
+4. Esst zusammen.
 
-**Darauf kommt es an:** 5 mal 3 ist eine Kernaufgabe. Ein Teller mehr ist ein Dreier mehr. So folgt die Nachbaraufgabe: 6 mal 3 ist gleich 15 plus 3.
+**Darauf kommt es an:** 5 mal 3 ist eine Kernaufgabe. Jeder Teller ist ein Dreier. So folgt die Nachbaraufgabe: 6 mal 3 ist gleich 15 plus 3.
 
 **Leichter:** Zwei Teller, dann einer dazu. **Schwerer:** Denkt euch zehn Teller, dann einen weg: 9 mal 3.
