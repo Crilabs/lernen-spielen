@@ -40,7 +40,8 @@ export const strich = (d, w = 3) => `<path d="${d}" fill="none" stroke="${INK}" 
 
 /**
  * @typedef {import("./stil.js").Stueck} Stueck
- * @typedef {{haareHinten?: Stueck, haareOben?: Stueck, nachGesicht?: Stueck, ohr?: Stueck, zoepfe?: Stueck}} KopfStuecke  zoepfe: hängen hinter dem Körper
+ * @typedef {{haareHinten?: Stueck, haareOben?: Stueck, nachGesicht?: Stueck, ohr?: Stueck, zoepfe?: Stueck, ponyschatten?: Stueck}} KopfStuecke
+ *   zoepfe: hängen hinter dem Körper; ponyschatten: Schlagschatten der Haare auf der Stirn
  */
 
 /** Teil aus einem Stück (Fläche + Kontur). @param {string} teil @param {Stueck} st @returns {Teil} */
@@ -119,7 +120,14 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
       S.form(S.pfad(jacke), f.oben, P(X(-22), 118), { s: 0.88 }),
       S.flach(S.pfad(`M${z(X(-6))} 113 Q${z(X(5))} 122 ${z(X(15))} 113 L${z(X(20))} 189 Q${z(X(7))} 191 ${z(X(-4))} 189 Z`), f.hemd),
       f.ringel
-        ? { svg: `<path d="M${z(X(-5))} 141 L${z(X(17))} 141 M${z(X(-4))} 160 L${z(X(18))} 160 M${z(X(-4))} 178 L${z(X(19))} 178" fill="none" stroke="${f.ringel}" stroke-width="5"/>`, kontur: "" }
+        ? {
+          // Ringel genau zwischen den Jackenkanten (links X(-6)→X(-4), rechts X(15)→X(20) von y 112 bis 189), gerade Enden
+          svg: `<path d="${[141, 160, 178].map((y) => {
+            const t = (y - 112) / 77;
+            return `M${z(X(-6 + 2 * t) + 1.5)} ${y} L${z(X(15 + 5 * t) - 1.5)} ${y}`;
+          }).join(" ")}" fill="none" stroke="${f.ringel}" stroke-width="5" stroke-linecap="butt"/>`,
+          kontur: "",
+        }
         : S.naht(`M${z(X(-5))} 141 L${z(X(17))} 141 M${z(X(-4))} 160 L${z(X(18))} 160 M${z(X(-4))} 178 L${z(X(19))} 178`, f.hemd, 3),
       S.naht(`M${z(X(-6))} 113 C${z(X(-8))} 140 ${z(X(-6))} 165 ${z(X(-4))} 189 M${z(X(15))} 113 C${z(X(18))} 140 ${z(X(19))} 165 ${z(X(20))} 189`, f.oben, 2.6),
       S.naht(`M${z(X(-6))} 114 L${z(X(-13))} 126 L${z(X(-5))} 131 M${z(X(15))} 114 L${z(X(22))} 125 L${z(X(16))} 130`, f.oben, 2.4),
@@ -163,13 +171,14 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
           S.naht("M125 76 Q119 82 125 89", f.haut, 2.2))),
         T("kopf", S.form(S.pfad("M162 30 C190 30 206 48 206 72 C206 93 196 108 178 113 C168 116 152 116 142 110"
           + " C127 102 119 88 120 70 C122 46 138 30 162 30 Z"), f.haut, P(146, 54), { s: 0.9, trenn: true })),
-        T("stirnschatten", S.falte("M124 70 C132 58 142 52 150 56 C158 60 168 60 176 54 C186 52 198 58 205 72"
-          + " C200 66 192 62 184 61 C176 66 162 67 152 63 C142 61 132 64 124 76 Z", f.haut, 0.3)),
+        // Schlagschatten des Ponys auf der Stirn (vom Kind geliefert, folgt den Lockenspitzen).
+        ...(kopf.ponyschatten ? [T("haarschatten", kopf.ponyschatten)] : []),
         T("wangen", S.zusammen(S.roete(148, 95, 8, 5), S.roete(191, 94, 6, 4.5))),
         T("nase", S.zusammen(S.falte("M174 86 Q179 90 173 94 Q176 90 174 86 Z", f.haut, 0.4), S.naht("M173 87 Q177 90.5 172 93.5", f.haut, 2.4))),
         { teil: "gesicht" },
-        ...(kopf.haareOben ? [T("haare-oben", kopf.haareOben)] : []),
+        // Brille und Hörgeräte unter den Haaren: Locken dürfen über die Bügel fallen.
         ...(kopf.nachGesicht ? [T("hilfsmittel", kopf.nachGesicht)] : []),
+        ...(kopf.haareOben ? [T("haare-oben", kopf.haareOben)] : []),
       ],
       "arm-hinten-oben": hinten.oben, "arm-hinten-unten": hinten.unten,
       "arm-vorn-oben": vorn.oben, "arm-vorn-unten": vorn.unten,

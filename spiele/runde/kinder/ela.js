@@ -59,7 +59,15 @@ const LICHT = [
   "M172 41 Q175 34 181 30 Q177 37 176 44 Z", "M136 38 Q142 31 151 28 Q144 34 140 41 Z", "M161 30 Q167 25 175 24 Q168 28 164 33 Z",
 ];
 
+/** Schatten des Ponys: die Pony-Kerben und -Spitzen, 5 nach unten versetzt, oben geschlossen – nur über der Stirn. */
+const PONY = SCHOPF.slice(1, 10).map(([x, y]) => /** @type {[number, number]} */ ([x, y + 5]));
+const ponyschatten = {
+  svg: `<path d="${S.zacken([[PONY[0][0], 40], ...PONY, [PONY[PONY.length - 1][0], 40]], 0.16)}" fill="${S.dunkler(farben.haut, 0.3)}" stroke="none"/>`,
+  kontur: "",
+};
+
 const kopfDreiviertel = {
+  ponyschatten,
   zoepfe: S.zusammen(zopfS(118, 100), zopfS(205, 96)),
   haareHinten: S.form(S.oval(162, 66, 46, 43), HAAR_HINTEN, [146, 44], { s: 0.9 }),
   haareOben: S.zusammen(
