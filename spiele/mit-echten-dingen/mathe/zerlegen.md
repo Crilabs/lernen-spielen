@@ -19,28 +19,29 @@ quellen:
 ---
 # Eine Zahl in zwei Teile legen
 
-## Am Tisch: Nudeln auf zwei Tellern
+## Am Tisch: Essen für zwei teilen
 
-Ihr braucht: bis zu zehn Nudeln, zwei Teller
+Ihr braucht: zwei Teller, Weintrauben oder gekochte Nudeln
 
-1. Wählt eine Zahl von 2 bis 10. Legt so viele Nudeln auf einen Teller, wie die Zahl sagt, zum Beispiel sieben.
-2. Sagt, was ihr seht: „7 ist gleich 7 plus 0.“
-3. Schiebt eine Nudel auf den anderen Teller: „7 ist gleich 6 plus 1.“
-4. Schiebt so eine nach der anderen hinüber und sagt es jedes Mal.
+1. Wählt eine Zahl von 2 bis 10. Legt so viele Stücke auf einen Teller, wie sie sagt, zum Beispiel sieben.
+2. Sagt: „7 ist gleich 7 plus 0.“
+3. Schiebt ein Stück hinüber: „7 ist gleich 6 plus 1.“
+4. Schiebt so weiter, bis der erste Teller leer ist, und sagt es jedes Mal.
+5. Wählt zusammen eine Art zu teilen. Jeder nimmt einen Teller und isst.
 
-**Darauf kommt es an:** Es bleiben immer gleich viele Nudeln. Wandert eine hinüber, hat ein Teller eine weniger und der andere eine mehr. So findet ihr alle Arten, die Zahl zu zerlegen, auch mit leerem Teller.
+**Darauf kommt es an:** Es bleiben immer gleich viele Stücke. Wandert eins hinüber, hat ein Teller eins weniger, der andere eins mehr. So findet ihr alle Arten, auch mit leerem Teller.
 
-**Leichter:** eine kleinere Zahl, zum Beispiel drei. **Schwerer:** eine größere Zahl. Oder einer deckt einen Teller mit der Hand zu: Wie viele Nudeln liegen darunter?
+**Leichter:** Legt die Stücke in Reihen und zählt nach jedem Schieben nach. **Schwerer:** Einer deckt einen Teller zu: Wie viele liegen darunter?
 
 ## Unterwegs: Steine in zwei Händen
 
-Ihr braucht: kleine Steine, Kastanien oder Zapfen vom Weg
+Ihr braucht: kleine Steine oder Eicheln vom Weg
 
-1. Sucht euch eine Zahl aus und sammelt so viele Dinge, wie sie sagt, zum Beispiel sieben.
+1. Sucht euch eine Zahl von 2 bis 10 aus und sammelt so viele Dinge, wie sie sagt, zum Beispiel sieben.
 2. Einer von euch verteilt sie hinter dem Rücken auf beide Hände.
 3. Eine Hand geht auf. Ihr seht zum Beispiel zwei Steine.
 4. Wie viele sind in der anderen Hand? Sagt es, dann geht auch sie auf. Danach verteilt der andere.
 
 **Darauf kommt es an:** Beide Hände zusammen haben immer so viele, wie die Zahl sagt. Wer eine Hand sieht, weiß, wie viele zur Zahl noch fehlen.
 
-**Leichter:** eine kleinere Zahl, zum Beispiel drei. **Schwerer:** eine größere Zahl. Oder sagt ohne Steine alle Arten auf, wie die Zahl auf zwei Hände passt.
+**Leichter:** Zählt die Steine in der offenen Hand und zählt dann mit den Fingern weiter bis zur Zahl. **Schwerer:** Sagt ohne Steine alle Arten auf, wie die Zahl auf zwei Hände passt.
