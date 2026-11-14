@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Die Runde – Galerie</title>
+<link rel="stylesheet" href="../schrift/schrift.css">
+<style>
+:root {
+  --tinte: #3B2A6B; --tinte-weich: #6B5C96; --papier: #FFFCF7; --nebel: #F4F0FA; --linie: #E4DEF0;
+  --naht: #CFC4E3; --sonne: #FFD95A; --schatten: #24184A;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Andika, sans-serif; color: var(--tinte); background: var(--nebel); }
+header { position: sticky; top: 0; z-index: 2; background: var(--papier); border-bottom: 2px solid var(--linie); padding: 14px 20px 12px; }
+h1 { font-size: 22px; margin: 0 0 10px; }
+.reihen { display: grid; gap: 8px; }
+.reihe { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.reihe > span { min-width: 92px; color: var(--tinte-weich); font-size: 15px; }
+button {
+  font: 700 15px Andika, sans-serif; color: var(--tinte); background: var(--papier);
+  border: 2px solid var(--tinte); border-radius: 999px; padding: 5px 13px; cursor: pointer;
+  box-shadow: 0 3px 0 var(--linie);
+}
+button[aria-pressed="true"] { background: var(--tinte); color: var(--papier); box-shadow: 0 3px 0 var(--schatten); }
+button:focus-visible { outline: 4px solid var(--sonne); outline-offset: 2px; }
+main { padding: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+figure { margin: 0; background: linear-gradient(transparent 91.5%, var(--linie) 91.5%, var(--linie) 92.5%, transparent 92.5%), var(--papier); border: 2px dashed var(--naht); border-radius: 22px; padding: 10px 10px 6px; }
+figure svg { display: block; width: 100%; height: auto; overflow: visible; cursor: pointer; }
+figcaption { text-align: center; font-weight: 700; padding: 4px 0 2px; }
+main.protan figure svg { filter: url(#protan); }
+main.deutan figure svg { filter: url(#deutan); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Die Runde</h1>
+  <div class="reihen" id="steuer"></div>
+</header>
+<main id="buehne"></main>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <filter id="protan"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
+  <filter id="deutan"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
+</svg>
+<script type="module">
+import { bestand, zeichne, steuere } from "./runde.js";
+
+const zustand = { ansicht: "dreiviertel", haltung: "stehen", gesicht: "", zubehoer: [], blick: "rechts", wenig: false, sicht: "" };
+const figuren = new Map();
+const steuer = document.getElementById("steuer");
+const buehne = document.getElementById("buehne");
+
+function reihe(titel, werte, aktiv, waehle, mehrfach = false) {
+  const r = document.createElement("div");
+  r.className = "reihe";
+  r.innerHTML = `<span>${titel}</span>`;
+  for (const [wert, text] of werte) {
+    const b = document.createElement("button");
+    b.textContent = text;
+    b.setAttribute("aria-pressed", String(mehrfach ? aktiv.includes(wert) : aktiv === wert));
+    b.onclick = () => waehle(wert);
+    r.append(b);
+  }
+  steuer.append(r);
+}
+
+function passendeHaltungen() {
+  return [...bestand.haltungen.values()].filter((h) => h.ansicht === "beide" || h.ansicht === zustand.ansicht);
+}
+
+function zeigeSteuer() {
+  steuer.replaceChildren();
+  reihe("Ansicht", [["dreiviertel", "Dreiviertel"], ["profil", "Profil"]], zustand.ansicht, (a) => {
+    zustand.ansicht = a;
+    if (!passendeHaltungen().some((h) => h.id === zustand.haltung)) zustand.haltung = "stehen";
+    alles();
+  });
+  reihe("Haltung", passendeHaltungen().map((h) => [h.id, h.id]), zustand.haltung, (id) => {
+    zustand.haltung = id;
+    zeigeSteuer();
+    for (const f of figuren.values()) f.haltung(id);
+  });
+  const bew = [...bestand.bewegungen.values()].filter((b) => b.ansicht === zustand.ansicht);
+  if (bew.length) reihe("Bewegung", bew.map((b) => [b.id, b.id]), "", (id) => { for (const f of figuren.values()) f.bewegung(id); });
+  reihe("Gesicht", [["", "aus der Haltung"], ...[...bestand.gesichter.keys()].map((g) => [g, g])], zustand.gesicht, (g) => {
+    zustand.gesicht = g; alles();
+  });
+  if (bestand.zubehoer.size) {
+    reihe("Zubehör", [...bestand.zubehoer.values()].map((z) => [z.id, z.wort]), zustand.zubehoer, (id) => {
+      zustand.zubehoer = zustand.zubehoer.includes(id) ? zustand.zubehoer.filter((x) => x !== id) : [...zustand.zubehoer, id];
+      alles();
+    }, true);
+  }
+  reihe("Blick", [["rechts", "nach rechts"], ["links", "nach links"]], zustand.blick, (b) => { zustand.blick = b; alles(); });
+  reihe("Tempo", [[false, "normal"], [true, "wenig Bewegung"]], zustand.wenig, (w) => { zustand.wenig = w; alles(); });
+  reihe("Sehen", [["", "normal"], ["protan", "Protanopie"], ["deutan", "Deuteranopie"]], zustand.sicht, (s) => {
+    zustand.sicht = s; buehne.className = s; zeigeSteuer();
+  });
+}
+
+function zeigeFiguren() {
+  buehne.replaceChildren();
+  figuren.clear();
+  for (const kind of bestand.kinder.values()) {
+    if (!kind.ansichten[zustand.ansicht]) continue;
+    const fig = document.createElement("figure");
+    fig.innerHTML = zeichne(kind.id, {
+      ansicht: zustand.ansicht, haltung: zustand.haltung, gesicht: zustand.gesicht || undefined,
+      zubehoer: zustand.zubehoer, blick: zustand.blick,
+    }) + `<figcaption>${kind.name}</figcaption>`;
+    const svg = fig.querySelector("svg");
+    const f = steuere(svg, { wenigBewegung: zustand.wenig });
+    svg.addEventListener("click", () => f.halt());
+    figuren.set(kind.id, f);
+    buehne.append(fig);
+  }
+}
+
+function alles() { zeigeSteuer(); zeigeFiguren(); }
+alles();
+</script>
+</body>
+</html>

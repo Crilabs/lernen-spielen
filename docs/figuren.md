@@ -32,7 +32,7 @@ Rolle spielt (6.1 Nr. 6). Kein Name aus der eigenen Familie.
 | | **Ela** | **Kofi** | **Lena** | **Timo** |
 |---|---|---|---|---|
 | Name aus | Türkisch/Deutsch | Twi (Ghana) | Deutsch | Finnisch/Deutsch |
-| Aussehen | mittelbraune Haut, dunkle Haare in zwei Zöpfen, **Brille** | dunkelbraune Haut, kurze schwarze Locken, schmal | helle Haut, rote Locken, Sommersprossen, **Hörgerät** (sichtbar, türkis) | helle bis olive Haut, glatte hellbraune Haare, rundlich |
+| Aussehen | mittelbraune Haut, kurze dunkle Haare mit Haarspange, **Brille** | dunkelbraune Haut, kurze schwarze Locken, schmal | helle Haut, lange rote Wellenlocken, Sommersprossen, **zwei Hörgeräte** (sichtbar, türkis; eins ist in jeder Ansicht zu sehen) | helle bis olive Haut, glatte, strubbelige hellbraune Haare, länger (Seitenscheitel mit Wirbel, seitlich bis zur Ohrmitte), rundlich |
 | Bewegt sich | läuft, klettert | rennt, springt | läuft, hüpft | **Rollstuhl** (fährt selbst, schnell und geschickt), trägt Dinge auf dem Schoß |
 | Mag (beiläufig, nie Thema) | bauen, Werkzeug, Schrauben sortieren | malen, Muster legen | Käfer und Steine sammeln | backen, Dinge abwiegen |
 | Familie (nur im Hintergrund, nie erklärt) | Mama und Mami | Papa und Opa | Mama und großer Bruder | Mama, ihr Partner und eine kleine Halbschwester |
@@ -41,6 +41,8 @@ Rolle spielt (6.1 Nr. 6). Kein Name aus der eigenen Familie.
 Prüfung gegen §6.1:
 - **Merkmale verteilt, nicht gehäuft:** Brille, Hörgerät und Rollstuhl liegen auf drei verschiedenen Kindern;
   das Kind mit der dunkelsten Haut trägt kein weiteres „Merkmal“. Kein Kind ist das „Vielfalts-Kind“.
+- **Frisuren gegen das Klischee (Christian, 2026-11-14):** Ela trägt kurze Haare, Timo lange; der Schnitt bleibt
+  geschlechtstypisch genug, dass man sie erkennt (Ela mit Haarspange, Timo strubbelig mit Seitenscheitel).
 - **Gegen das Klischee, beiläufig:** Ela baut und schraubt, Kofi malt, Timo backt und wiegt ab (Mathe im
   Alltag), Lena sammelt Käfer. Keines dieser Interessen wird zur Aufgabe gemacht oder kommentiert.
 - **Behinderung mit aktiver Rolle:** Timo im Rollstuhl löst, backt, fährt voraus; Lenas Hörgerät ist
@@ -78,23 +80,39 @@ Person.
 ---------------------------------------------------------------------------------------------------
 ## 4. Wie die Figuren aussehen (Zeichenvorgabe)
 
-- **Stil (F4):** klar stilisiert, großer Kopf (etwa ein Drittel der Körperhöhe), Kontur Tinte `#3B2A6B`,
-  Strich 4 in der viewBox 0 0 320 280, runde Enden, flache Farben, kein Glanz, keine Schattierung. Nichts
-  Halbrealistisches.
-- **Gesicht:** Augen als ovale Punkte mit Lichtpunkt, Brauen tragen das Gefühl, Mund als Linie. Für Gefühle
-  Dreiviertel- oder Frontalansicht, für Bewegung Profil (F5).
-- **Kleidung:** schlicht, je Kind eine feste Grundfarbe aus gedämpften Tönen. Keine der satten
-  Bedeutungsfarben aus `grundsaetze-bilder.md` 6.2 (kein Perlenrot, kein Verbrot, kein Kobalt), keine
-  Jungen- oder Mädchenfarben (C5). **(Annahme:)** Ela Senfgelb gedämpft, Kofi Altrosa, Lena Salbeigrün,
-  Timo Rauchblau – festzulegen mit der ersten Zeichnung.
-- **Hautfarben:** vier deutlich verschiedene, natürliche Töne, mit gleicher Sorgfalt gezeichnet
+- **Stil (F4, freigegeben 2026-11-14 an Ela, Christian):** klar gezeichnet, nichts Halbrealistisches, großer Kopf
+  (etwa ein Drittel der Körperhöhe), viewBox 0 0 320 280. Die Figur wirkt **aus einem Guss**:
+  - **Kontur nur um die Silhouette** (Tinte `#3B2A6B`, außen 3 Einheiten). Innen keine Rahmen; feine Linien im
+    dunklen Ton der Fläche nur, wo Gleichfarbiges sich überdeckt (vorderer Arm vor der Jacke, Kinn vor dem Hals),
+    sowie für Nähte, Falten, Schnürung.
+  - **Licht von oben links, in Stufen statt Verläufen:** Grundton, weicher Schatten, Kernschatten am Rand, Licht als
+    Fläche oder Streifen. Schatten laufen über Stoßstellen hinweg (Glieder: Schatten als innere, versetzte Kapsel).
+  - **Schlagschatten** decken Stoßstellen: Saum auf Hose, Kinn auf Hals, Kragen und Jackenkante auf Shirt, Pony auf
+    Stirn.
+  - **Kleidung als ein Stück**, mit Falten als Schattenformen; **Haare als ein Schopf** mit gezacktem Rand, Locken
+    durch dunkle Kerben getrennt, Licht als Fläche (keine aufgemalten Lichtlinien).
+  - **Hände** mit Fingern (Formen offen, Faust, zeigen), feine Linie im dunklen Hautton. **Schuhe** in der
+    Dreiviertelansicht von vorn.
+  Umsetzung: `spiele/runde/kinder/stil.js` (Helfer) und `kinder/schnitt.js` (gemeinsamer Schnitt).
+- **Gesicht:** Augen als ovale Punkte mit Lichtpunkt, Brauen tragen das Gefühl, Mund als Linie. Gesichtszüge in
+  warmen Tönen statt Tinte (Augen `#2B1B18`, Brauen `#3E2621`, Mund `#8A3F3A`). Der Pony lässt die Brauen frei. Für
+  Gefühle Dreiviertel- oder Frontalansicht, für Bewegung Profil (F5).
+- **Kleidung:** frische Farben aus den **Welt-Paletten** (`grundsaetze-bilder.md` 6.2, Schicht 3), denn die Figuren
+  gehören zur Welt, nicht zum Lernfeld. Keine Bedeutungs- und keine Fachfarbe als Kleidung, keine Jungen- oder
+  Mädchenfarben (C5). **Ela (Christian, 2026-11-14):** Jacke Koralle `#FF9F8A`, Shirt Papier mit Ringeln Wasserblau
+  `#8FD3EE`, Hose Petrol-Jeans `#4F8FB3`, Turnschuhe Wiesengrün `#9ED8A8`, Brille Petrol `#2E7D8C`.
+  Kofi, Lena, Timo: je eigene Farben aus den Welt-Paletten, mit der jeweiligen Zeichnung festzulegen.
+- **Hautfarben:** vier deutlich verschiedene, natürliche Töne, mit gleicher Sorgfalt gezeichnet. Ela: Haut `#B97E57`,
+  Haar `#3A2420`
   (Hautfarbe nie als einzige Unterscheidung, C1: jedes Kind ist auch an Haaren, Form und Hilfsmittel
   erkennbar).
 - **Haltungen, die es von jedem Kind geben muss:** stehen (vorn, Dreiviertel), gehen (Profil), zeigen,
   tragen, staunen, freuen (zwei Stärken), nachdenken (Hand am Kinn), winken, und für die Fähigkeiten aus §5 zaubern,
   schweben und klein/groß werden (Zubehör, das jedes Kind tragen kann). Bei Timo jeweils im Rollstuhl,
   selbst fahrend.
-- **Herstellung:** SVG von Hand nach diesem Blatt (A1: Figuren nie KI-generiert).
+- **Herstellung:** SVG als Code nach diesem Blatt, Form für Form gesetzt und von Christian freigegeben – kein
+  Bildgenerator (A1). Ein Spiel erweitert die Figuren in `spiele/<spiel>/runde.js` (Haltungen, Bewegungen,
+  Gesichter, Zubehör); `tests/runde-gesamt.test.mjs` prüft jede Erweiterung an allen Kindern.
 
 ---------------------------------------------------------------------------------------------------
 ## 5. Was die Kinder können, was es in echt nicht gibt (Christian)
@@ -170,7 +188,7 @@ Figuren nutzen): Jede Szene trägt in ihren Daten, welche Kinder vorkommen und w
 ---------------------------------------------------------------------------------------------------
 ## 9. Offen
 
-- **Erste Zeichnung:** Kleidungsfarben und Hauttöne werden mit dem ersten gezeichneten Kind festgelegt und
-  hier eingetragen.
+- **Weitere Kinder:** Kleidungsfarben und Hauttöne von Kofi, Lena und Timo werden mit ihrer Zeichnung festgelegt
+  und in §4 eingetragen (Ela: festgelegt 2026-11-14).
 - **Wahl „Wer kommt mit?“:** ob das Kind ein Kind der Runde als Begleitung wählen darf (N2), entscheidet das
   erste Spiel mit Figuren.
