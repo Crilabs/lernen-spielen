@@ -34,3 +34,7 @@ test("Szene: bedienbare Orte liegen im sicheren 4:3-Bereich (x 72–216 rem)", (
   const xs = [ORTE.regal, ORTE.wegweiser, ...ORTE.tore, ...ORTE.runde].flatMap((o) => [o.x, o.x + (o.b ?? 0)]);
   assert.ok(xs.every((x) => x >= 72 && x <= 216), JSON.stringify(xs));
 });
+
+test("Szene: der Pfahl des Wegweisers ist eine eigene Gruppe (die Seite blendet ihn ohne Fächer aus)", () => {
+  assert.match(szeneSvg(), /<g id="pfahl">/);
+});

@@ -18,18 +18,18 @@ export const ORTE = Object.freeze({
   /** Öffnung des Baumhauses, darin das Regal. */
   regal: { x: 182, y: 27, b: 28, h: 18 },
   /** Pfahl des Wegweisers; die Bretter hängen rechts und links daran. */
-  wegweiser: { x: 73, y: 54, b: 31 },
+  wegweiser: { x: 76, y: 66, b: 28 },
   /** Bis zu drei Tore auf der Anhöhe (Mitte des Bogens bei x + b/2, Fuß bei y + h). */
   tore: [
-    { x: 79, y: 17, b: 30, h: 34 },
-    { x: 114, y: 15, b: 30, h: 34 },
-    { x: 149, y: 17, b: 30, h: 34 },
+    { x: 80, y: 12, b: 30, h: 34 },
+    { x: 115, y: 10, b: 30, h: 34 },
+    { x: 150, y: 12, b: 30, h: 34 },
   ],
   /** Die Runde: x/b umfassen den Körper, fuss ist die Höhe der Füße, skala die Größe. */
   runde: [
     { kind: "ela", x: 107, b: 16, fuss: 103, skala: 1, haltung: "stehen", blick: "rechts" },
     { kind: "kofi", x: 133, b: 16, fuss: 100, skala: 0.96, haltung: "nachdenken", blick: "rechts" },
-    { kind: "lena", x: 160, b: 16, fuss: 104, skala: 1, haltung: "zeigen", blick: "links" },
+    { kind: "lena", x: 160, b: 16, fuss: 104, skala: 1, haltung: "freuen-klein", blick: "links" },
     { kind: "timo", x: 186, b: 22, fuss: 101, skala: 0.98, haltung: "stehen", blick: "links" },
   ],
 });
@@ -130,14 +130,7 @@ function baumUndHaus(p) {
   + flaeche("M1740 480 L2180 480 L2180 495 L1740 495Z", p.holzSchatten)
   + `<rect x="${ox}" y="${oy}" width="${ob}" height="${oh}" rx="22" fill="${p.innen}" stroke="${T}" stroke-width="${K}"/>`
   + `<path d="M${ox + 3} ${oy + 40} L${ox + ob - 3} ${oy + 40} L${ox + ob - 3} ${oy + 22} Q${ox + ob - 3} ${oy + 3} ${ox + ob - 22} ${oy + 3} L${ox + 22} ${oy + 3} Q${ox + 3} ${oy + 3} ${ox + 3} ${oy + 22}Z" fill="${p.innenSchatten}"/>`);
-  // Ast nach links mit Schaukel (Stimmung: ein Ort zum Spielen).
-  const ast = guss([`<path d="M1910 560 C1820 548 1700 520 1560 512 L1556 540 C1700 550 1810 578 1906 590Z"/>`], p.stamm,
-    flaeche("M1556 528 C1700 538 1810 566 1906 578 L1906 590 C1810 578 1700 550 1556 540Z", p.stammSchatten));
-  const schaukel = guss([
-    `<rect x="1606" y="530" width="10" height="196" rx="5"/>`, `<rect x="1716" y="540" width="10" height="186" rx="5"/>`,
-    `<rect x="1586" y="716" width="160" height="22" rx="11"/>`,
-  ], p.holz, flaeche("M1586 729 L1746 729 L1746 738 L1586 738Z", p.holzSchatten));
-  return `${krone}${rampe}${stamm}${ast}${schaukel}${leiter}${haus}`;
+  return `${krone}${rampe}${stamm}${leiter}${haus}`;
 }
 
 /** @param {Record<string, string>} p */
@@ -150,7 +143,7 @@ function mitte(p) {
   const px = (w.x + w.b / 2) * 10;
   const pfahl = guss([`<rect x="${px - 22}" y="${w.y * 10 - 30}" width="44" height="${1000 - w.y * 10}" rx="14"/>`, `<circle cx="${px}" cy="${w.y * 10 - 30}" r="30"/>`], p.stamm,
     flaeche(`M${px + 4} ${w.y * 10 - 30} L${px + 22} ${w.y * 10 - 30} L${px + 22} 990 L${px + 4} 990Z`, p.stammSchatten));
-  return `<g id="mitte">${anhoehe}${baumUndHaus(p)}${pfahl}</g>`;
+  return `<g id="mitte">${anhoehe}${baumUndHaus(p)}<g id="pfahl">${pfahl}</g></g>`;
 }
 
 /** @param {Record<string, string>} p */
