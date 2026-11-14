@@ -298,6 +298,8 @@ if (globalThis.customElements && !customElements.get("ls-objekt")) customElement
  * Lässt ein Ding (ein ls-objekt, z. B. papier oder dose) im Bogen in ein Ziel fliegen (ein ls-objekt mit
  * Einwurfpunkt, z. B. eine Tonne). Ist das Ziel zu, geht sein Deckel dabei auf (oeffne: false verhindert das).
  * Am Ziel verschwindet das fliegende Ding (hidden) und das Ziel lässt es hineinfallen (anstossen). Etwa 1 s.
+ * ueberspringe(): sofort am Ende (Ding drin, Tonne offen, kein Hineinfallen); abbrechen() vor der Ankunft: Ding
+ * bleibt am Start, ein dabei geöffneter Deckel ist sofort wieder im alten Zustand; fertig → "abgebrochen".
  * Bei wenig Bewegung sofort am Ende. Bewegt wird über die Eigenschaften translate, rotate und scale; ein
  * transform aus dem CSS der Seite bleibt also unberührt.
  * @param {HTMLElement} ding @param {LsObjekt} ziel @param {{ dauer?: number, oeffne?: boolean }} [o]
@@ -311,15 +313,25 @@ export function wirf(ding, ziel, o = {}) {
   let vorbei = false;
   /** @type {Animation | null} */
   let flug = null;
-  const ankommen = () => {
+  /** @param {boolean} [sofort] übersprungen: kein Hineinfallen, die Tonne steht sofort im Endzustand */
+  const ankommen = (sofort = false) => {
     if (vorbei) return;
     vorbei = true;
     ding.hidden = true;
-    const art = ding.getAttribute("art") ?? "";
-    const antwort = wenigBewegung() ? Promise.resolve() : ziel.anstossen?.(art) ?? Promise.resolve();
+    if (sofort || wenigBewegung()) {
+      ziel.ueberspringe?.();
+      fertigMit("angekommen");
+      return;
+    }
+    const antwort = ziel.anstossen?.(ding.getAttribute("art") ?? "") ?? Promise.resolve();
     antwort.then(() => fertigMit("angekommen"));
   };
-  if (o.oeffne !== false && ziel.zustand === "zu" && objekte.get(ziel.art)?.zustaende.includes("offen")) ziel.zustand = "offen";
+  const vorher = ziel.getAttribute("zustand");
+  let geoeffnet = false;
+  if (o.oeffne !== false && ziel.zustand === "zu" && objekte.get(ziel.art)?.zustaende.includes("offen")) {
+    ziel.zustand = "offen";
+    geoeffnet = true;
+  }
   const punkt = ziel.einwurfPunkt?.();
   if (!punkt || wenigBewegung() || typeof ding.animate !== "function") {
     ankommen();
@@ -342,14 +354,22 @@ export function wirf(ding, ziel, o = {}) {
     });
   }
   flug = ding.animate(bahn, { duration: dauer, easing: "cubic-bezier(.35,.1,.55,1)" });
-  flug.finished.then(ankommen, () => {});
+  flug.finished.then(() => ankommen(), () => {});
   return {
     fertig,
-    ueberspringe() { if (flug && !vorbei) flug.finish(); else ziel.ueberspringe?.(); },
+    /** Springt ans Ende: Ding ist drin, die Tonne steht offen (auch das Hineinfallen entfällt). */
+    ueberspringe() {
+      if (!vorbei) { flug?.cancel(); ankommen(true); } else ziel.ueberspringe?.();
+    },
+    /** Bricht vor der Ankunft ab: das Ding bleibt, wo es war, ein geöffneter Deckel ist sofort wieder zu. */
     abbrechen() {
       if (vorbei) return;
       vorbei = true;
       flug?.cancel();
+      if (geoeffnet) {
+        if (vorher === null) ziel.removeAttribute("zustand"); else ziel.setAttribute("zustand", vorher);
+        ziel.ueberspringe?.();
+      }
       fertigMit("abgebrochen");
     },
   };

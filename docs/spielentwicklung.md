@@ -61,6 +61,9 @@ docs/spiele/<fach>/<spiel>.md          der Spielentwurf
 - Bausteine finden ihre Pfade selbst (`import.meta.url`); im Spiel verweisen Imports relativ (`../../rahmen/…`).
 - Ein neues Spiel entsteht durch Kopieren von `spiele/vorlage/` in `spiele/<fach>/<katalog-nr>-<name>/`;
   `tests/ablage.test.mjs` prüft Ordner, `datei`, `symbol` und Fach.
+- `tests/browser/pruefkopie.mjs` spielt die Vorlage in dieser Tiefe durch: Kopie nach `spiele/mathe/m99-pruefkopie/`,
+  jedes „../“ wird „../../“, Prüfstand darüber, Kopie wieder gelöscht. So fällt auf, wenn ein Baustein oder Dienst
+  seine Dateien relativ zur Seite statt zu sich selbst sucht.
 
 ## 1. Der Spielentwurf
 
@@ -112,8 +115,8 @@ Pflichtteile:
 <ls-objekt art="papiertonne" wert="7" still></ls-objekt>        <!-- Regal: Zahl auf dem Aufkleber, ohne Bewegung -->
 ```
 
-- **Attribute:** `art` (angemeldete Art), `zustand` (einer der Zustände der Art, sonst der erste), `wert` (Zahl oder
-  Buchstabe, den die Art zeigt, z. B. auf dem Aufkleber der Tonne), `still` (nie bewegen). Standard `aria-hidden="true"`
+- **Attribute:** `art` (angemeldete Art), `zustand` (einer der Zustände der Art, sonst der erste), `wert` (kurzer Text,
+  den die Art zeigt, z. B. die Zahl auf dem Aufkleber der Tonne), `still` (nie bewegen). Standard `aria-hidden="true"`
   (Schmuck der Sachwelt; was zählt, sagt der Erzähler). Größe: `height` am Host (Vorgabe 20 rem); das Feld ist das
   Objekt in Ruhe, ein offener Deckel ragt darüber hinaus, ohne etwas zu verschieben.
 - **Bewegung:** Ein Wechsel von `zustand` spielt die Bewegung der Art einmal (0,4 bis 1,2 s, B1), danach steht alles
@@ -123,8 +126,9 @@ Pflichtteile:
   die Tonne wackelt satt); `einwurfPunkt()` → Punkt im Fenster, an dem ein Ding hineinfällt.
 - **Werfen:** `wirf(ding, ziel, { dauer, oeffne })` lässt ein `ls-objekt` (z. B. `papier`, `dose`) im Bogen in ein Ziel
   fliegen: Ist das Ziel zu, geht der Deckel dabei auf; am Ziel verschwindet das Ding (`hidden`) und fällt im Ziel
-  hinein. Rückgabe `{ fertig, ueberspringe, abbrechen }`; `fertig` endet mit `"angekommen"` oder `"abgebrochen"`
-  (abbrechen lässt das Ding, wo es war). Bewegt wird über die CSS-Eigenschaften `translate`/`rotate`/`scale`, ein
+  hinein. Rückgabe `{ fertig, ueberspringe, abbrechen }`; `fertig` endet mit `"angekommen"` oder `"abgebrochen"`.
+  `ueberspringe` springt ganz ans Ende (Ding drin, Tonne offen, ohne Hineinfallen); `abbrechen` vor der Ankunft lässt
+  das Ding am Start und setzt einen dabei geöffneten Deckel sofort in den alten Zustand zurück. Bewegt wird über die CSS-Eigenschaften `translate`/`rotate`/`scale`, ein
   `transform` der Seite bleibt unberührt.
 - **Neue Art:** eine Datei, die beim Import `meldeObjekt(art, { zustaende, zeichne(zustand, { wert }), bewegung(von,
   nach), anstoss(ding), einwurf })` aufruft. `zeichne` baut das SVG mit `bild({ breite, hoehe, oben, teile, ursprung })`
@@ -132,7 +136,8 @@ Pflichtteile:
   (`spiele/runde/kinder/stil.js`: `form`, `falte`, `naht`, `flach` …), so entsteht die Kontur-Schicht unter allen
   Flächen wie bei den Kindern. Ein Bild trägt alle Zustände: Teile mit `in: "zu voll"` sind nur in diesen Zuständen
   sichtbar. `bewegung` gibt Schritte `{ teil, keyframes, dauer, beginn, easing }` (Web Animations) zurück; ein Teil,
-  das ein- oder ausgeblendet wird, nennt `opacity` in jedem Keyframe. Vorbild: `tonne.js` (Schnitt und Bewegungen
+  das ein- oder ausgeblendet wird, nennt `opacity` in jedem Keyframe. Farben der Welt-Schicht, heller und weicher als
+  die Lernzeichen (6.2), damit kein Objekt mit einer Perle oder einem Wortart-Zeichen verwechselt wird. Vorbild: `tonne.js` (Schnitt und Bewegungen
   der Mülltonnen), `papiertonne.js`, `wertstofftonne.js`, `papier.js`, `dose.js`. `tests/objekte.test.mjs` prüft
   Anmeldung, Stil-Grundlagen und dass jede Bewegung vorhandene Teile trifft.
 - **Ansehen:** `spiele/rahmen/vorschau.html?objekte` zeigt jede Art in jedem Zustand neben Ela, Werfen zum Ausprobieren
@@ -141,12 +146,14 @@ Pflichtteile:
 #### Regal-Bild
 
 Ein Spiel nennt in `spiele.json` sein Regal-Bild: `"regal": { "objekt": "papiertonne", "wert": "zahl" }` (`wert`:
-`"zahl"` = die Zahl des Themas, `"buchstabe"` = das Graphem aus dem Themennamen, `null` = ohne). Für jedes Thema nimmt
-die Lernsteuerung das erste Spiel in `spiele.json`, das das Thema bedient und ein Regal-Bild nennt (`regalBildFuer`);
-`materialFuer` zieht dieses Bild allen anderen Regeln vor (auch dem Perlenstab), `bausteinHtml` baut daraus
+`"zahl"` = die Zahl des Themas, `null` = ohne). Für jedes Thema nimmt die Lernsteuerung das erste Spiel in
+`spiele.json`, das das Thema bedient und ein Regal-Bild nennt (`regalBildFuer`). **Reihenfolge (Christian):** erst die
+Lernzeichen (Perlenstab, Wortart-Zeichen, Karte mit dem Graphem), dann das Regal-Bild des Spiels, dann die Karte mit
+dem Fachsymbol (`materialFuer`, `spiele/rahmen/material.js`). `bausteinHtml` baut das Bild als
 `<ls-objekt art="…" wert="…" still aria-hidden="true">` – flach und still im Regal, auf der Fach-Seite und der
-Startseite. Ohne Regal-Bild bleibt alles wie in `spiele/rahmen/material.js` beschrieben. **(Annahme)** Vorrang vor dem
-Perlenstab, weil das Beispiel (die Tonne mit der Zahl einer Zerlegung) sonst nie erschiene.
+Startseite. Buchstaben stehen nie auf einem Regal-Bild: Wo der Buchstabe der Inhalt ist, nimmt schon die Graphem-Karte
+den Platz ein, sonst stünde er für nichts. Jedes `regal.objekt` muss als `spiele/objekte/<art>.js` vorliegen
+(`tests/rahmen-regal-bild.test.mjs` prüft `spiele.json`).
 
 ## 2. Prüfung A: der Entwurf
 

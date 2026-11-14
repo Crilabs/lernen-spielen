@@ -324,13 +324,14 @@ function zahlDes(t) {
 }
 
 // Regal-Bild eines Themas: { objekt, wert } des ersten Spiels in spiele.json, das das Thema bedient und ein Regal-Bild
-// nennt (`regal: { objekt: "<art>", wert: "zahl"|"buchstabe"|null }`); null, wenn keins.
+// nennt (`regal: { objekt: "<art>", wert: "zahl"|null }`); null, wenn keins. Ob es gezeigt wird, entscheidet
+// materialFuer (Lernzeichen gehen vor).
 export function regalBildFuer(ctx, themaId) {
   for (const s of spieleVon(ctx)) {
     const r = s?.regal;
     if (!istObjekt(r) || typeof r.objekt !== "string" || !r.objekt) continue;
     if (!bedient(ctx, s.id, themaId)) continue;
-    return { objekt: r.objekt, wert: r.wert === "zahl" || r.wert === "buchstabe" ? r.wert : null };
+    return { objekt: r.objekt, wert: r.wert === "zahl" ? "zahl" : null };
   }
   return null;
 }

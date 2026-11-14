@@ -2,13 +2,15 @@
 // Metall, Kunststoff und Verbund, z. B. Konservendosen und Getränkekartons; mancherorts „Wertstofftonne“). In
 // Deutschland ist sie gelb (ganz gelb oder mit gelbem Deckel); hier ganz gelb, mit Dose und Karton auf dem Aufkleber.
 // Schnitt und Bewegungen: tonne.js.
+// Farbe der Welt-Schicht (grundsaetze-bilder 6.2): heller und weicher als die Lernzeichen, damit die Tonne nicht
+// mit den Perlen verwechselt wird (gelb: Perle 4 #F7D038; blau: Perlen 5 #6CB8F0 und 9 #2F5BC4).
 
 import { form, pfad, zusammen } from "../runde/kinder/stil.js";
 import { meldeTonne } from "./tonne.js";
 import { verschiebe } from "./objekt.js";
 import { doseStueck } from "./dose.js";
 
-export const GELB = "#F6C945";
+export const GELB = "#F3D98A";
 const KARTON = "#8FD3EE";
 const WEICH = "#6B5C96";
 

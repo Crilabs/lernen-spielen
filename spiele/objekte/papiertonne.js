@@ -1,12 +1,14 @@
 // <ls-objekt art="papiertonne" zustand="zu|offen|voll" wert="…">: die blaue Papiertonne (Altpapier: Papier, Pappe,
 // Kartons). In Deutschland ist die Papiertonne blau (ganz blau oder mit blauem Deckel); hier ganz blau, damit
 // Kinder sie an der Farbe und am Aufkleber mit dem Blatt erkennen. Schnitt und Bewegungen: tonne.js.
+// Farbe der Welt-Schicht (grundsaetze-bilder 6.2): heller und weicher als die Lernzeichen, damit die Tonne nicht
+// mit den Perlen verwechselt wird (gelb: Perle 4 #F7D038; blau: Perlen 5 #6CB8F0 und 9 #2F5BC4).
 
 import { form, naht, pfad, zusammen } from "../runde/kinder/stil.js";
 import { meldeTonne } from "./tonne.js";
 import { PAPIER } from "./papier.js";
 
-export const BLAU = "#4A84C8";
+export const BLAU = "#7FA9D6";
 const PAPPE = "#D2A56E";
 const WEICH = "#6B5C96";
 

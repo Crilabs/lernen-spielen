@@ -43,7 +43,7 @@
   .pausen-inhalt { display: grid; gap: 2rem; justify-items: center; font-size: 4rem; text-align: center; max-width: 90rem; }
   .pausen-inhalt img { width: 22rem; height: 22rem; }
   /* Spielobjekte (spiele/objekte/): nur mit ?objekte, dann statt der Bausteine. Eine Wiese, Ela zum Vergleich der
-     Größe und des Stils, jede Tonne in jedem Zustand, Werfen zum Ausprobieren, unten rechts das Regal-Bild (still). */
+     Größe und des Stils, jede Tonne in jedem Zustand, Werfen zum Ausprobieren, Perlenstäbe 4, 5, 9 zum Farbvergleich, unten rechts das Regal-Bild (still). */
   .objekte { position: absolute; inset: 17rem 2.4rem 2.4rem; display: grid; grid-template-rows: auto 1fr; row-gap: 2rem; }
   .objekte[hidden] { display: none; }
   .objekte .reihe-zustaende { display: flex; align-items: flex-end; justify-content: space-between; }
@@ -55,6 +55,8 @@
   .objekte .dinge ls-objekt { height: 9rem; }
   .objekte .dinge ls-objekt[hidden] { display: inline-block; visibility: hidden; }
   .objekte .knoepfe { display: grid; gap: 1.6rem; align-self: center; }
+  .objekte .perlen { display: grid; gap: 1.2rem; padding: 2rem 2.4rem; align-self: center; }
+  .objekte .perlen ls-perlenstab { height: 4.2rem; }
   .objekte .regal { display: flex; align-items: flex-end; gap: 2rem; padding: 1.6rem 2.4rem; }
   .objekte .regal ls-objekt { height: 10rem; }
 </style>
@@ -126,6 +128,11 @@
       <ls-objekt id="ding-papier" art="papier"></ls-objekt>
       <ls-objekt id="ding-dose" art="dose"></ls-objekt>
     </div>
+    <div class="lernfeld perlen" aria-label="Perlenstäbe neben den Tonnen">
+      <ls-perlenstab wert="4" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="5" ziffer></ls-perlenstab>
+      <ls-perlenstab wert="9" ziffer></ls-perlenstab>
+    </div>
     <div class="gruppe">
       <ls-objekt id="ziel-papier" art="papiertonne" zustand="zu"></ls-objekt>
       <ls-objekt id="ziel-dose" art="wertstofftonne" zustand="zu"></ls-objekt>
@@ -136,9 +143,9 @@
       <ls-knopf id="leeren" wort="Neu"></ls-knopf>
     </div>
     <div class="lernfeld regal" aria-label="Regal-Bild">
-      <ls-objekt art="papiertonne" wert="7" still></ls-objekt>
-      <ls-objekt art="wertstofftonne" wert="10" still></ls-objekt>
-      <ls-objekt art="papiertonne" wert="Mm" still></ls-objekt>
+      <ls-objekt art="papiertonne" wert="12" still></ls-objekt>
+      <ls-objekt art="wertstofftonne" wert="20" still></ls-objekt>
+      <ls-objekt art="papiertonne" still></ls-objekt>
     </div>
   </div>
 </section>

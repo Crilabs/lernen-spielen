@@ -1,13 +1,7 @@
 // Lernmaterial eines gekonnten Themas fürs Regal (Spec 2026-11-14-ansichten, Abschnitt „Regal“).
 // Rein und DOM-frei: sagt nur, welcher Baustein das Ding zeigt; die Ansicht baut ihn.
 //
-// Regeln in dieser Reihenfolge:
-//   0. Nennt das Spiel, das das Thema bedient, ein Regal-Bild (spiele.json `regal: { objekt, wert }`, von der
-//      Lernsteuerung als thema.regal mitgegeben, regalBildFuer) → dieses Spielobjekt, flach und still
-//      (`<ls-objekt art="…" wert="…" still>`, spiele/objekte/). wert "zahl": die Zahl des Themas (wie beim
-//      Perlenstab, nur ganze Zahlen ≥ 0), "buchstabe": das Graphem aus dem Namen (Regel 3); null oder nichts
-//      zu finden: das Objekt ohne Wert. Das Objekt muss im gemeinsamen Bestand liegen (spiele/objekte/<art>.js),
-//      damit Regal, Fach-Seite und Startseite es nachladen können.
+// Regeln in dieser Reihenfolge (Christian, 2026-11-14: erst die Lernzeichen, dann das Bild des Spiels, dann die Karte):
 //   1. Aufgabenart zerlegung / rechnen / zwillinge / menge mit ganzer Zahl 1 bis 10 → Perlenstab dieser Zahl
 //      (ls-perlenstab zeichnet nur 1 bis 10).
 //   2. Thema, dessen Lernziel die Wortart selbst ist → Wortart-Zeichen. Nur über die ausdrückliche Liste WORTART
@@ -17,10 +11,17 @@
 //   3. Thema, dessen Inhalt ein Buchstabe oder eine Buchstabengruppe ist (Bereich in BUCHSTABEN_BEREICHE) → Karte
 //      mit diesem Graphem, wie es im Namen steht („M und m“ → „Mm“, „sch“, „ch wie in ich“ → „ch“, „b, d und p
 //      unterscheiden“ → „b d p“). Nur dort ist der Buchstabe der Inhalt.
-//   4. alles andere → Karte mit dem Fachsymbol (wert ""; fach = Strang). Ein Buchstabe oder eine Ziffer, die nicht
+//   4. Nennt das Spiel, das das Thema bedient, ein Regal-Bild (spiele.json `regal: { objekt, wert }`, von der
+//      Lernsteuerung als thema.regal mitgegeben, regalBildFuer) → dieses Spielobjekt, flach und still
+//      (`<ls-objekt art="…" wert="…" still>`, spiele/objekte/). wert "zahl": die Zahl des Themas (ganze Zahl ≥ 0;
+//      eine Zahl 1 bis 10 einer Zahl-Aufgabenart hat schon Regel 1 genommen), null: ohne Wert. Buchstaben gibt es
+//      hier bewusst nicht: wo der Buchstabe der Inhalt ist, steht die Karte aus Regel 3; sonst stünde er für nichts.
+//      Das Objekt muss im gemeinsamen Bestand liegen (spiele/objekte/<art>.js, ein Test prüft spiele.json), damit
+//      Regal, Fach-Seite und Startseite es nachladen können.
+//   5. alles andere → Karte mit dem Fachsymbol (wert ""; fach = Strang). Ein Buchstabe oder eine Ziffer, die nicht
 //      der Inhalt ist (erster Buchstabe des Namens), stünde für nichts.
 
-/** @typedef {{ objekt: string, wert?: "zahl"|"buchstabe"|null }} RegalBild */
+/** @typedef {{ objekt: string, wert?: "zahl"|null }} RegalBild */
 /** @typedef {{ id: string, name?: string, strang?: string, bereich?: string, art?: string|null, zahl?: number|null, regal?: RegalBild|null }} Material */
 /** @typedef {{ baustein: "perlenstab", wert: number } | { baustein: "wortart", wert: "nomen"|"verb"|"adjektiv"|"artikel" } | { baustein: "karte", wert: string, fach?: string } | { baustein: "objekt", art: string, wert: string }} Baustein */
 
@@ -60,8 +61,6 @@ export function wortartVon(thema) {
  * @returns {Baustein}
  */
 export function materialFuer(thema) {
-  const regal = regalBildVon(thema);
-  if (regal) return regal;
   const zahl = thema.zahl;
   if (thema.art && MIT_ZAHL.has(thema.art) && Number.isInteger(zahl) && /** @type {number} */ (zahl) >= 1 && /** @type {number} */ (zahl) <= 10) {
     return { baustein: "perlenstab", wert: /** @type {number} */ (zahl) };
@@ -72,6 +71,8 @@ export function materialFuer(thema) {
     const graphem = graphemVon(typeof thema.name === "string" ? thema.name : "");
     if (graphem) return { baustein: "karte", wert: graphem };
   }
+  const regal = regalBildVon(thema);
+  if (regal) return regal;
   return { baustein: "karte", wert: "", fach: thema.strang ?? "" };
 }
 
@@ -79,7 +80,7 @@ export function materialFuer(thema) {
 const OBJEKT_NAME = /^[a-z][a-z0-9-]*$/;
 
 /**
- * Baustein für das Regal-Bild eines Themas oder null (Regel 0).
+ * Baustein für das Regal-Bild eines Themas oder null (Regel 4).
  * @param {Material} thema
  * @returns {Baustein | null}
  */
@@ -88,7 +89,6 @@ export function regalBildVon(thema) {
   if (!r || typeof r.objekt !== "string" || !OBJEKT_NAME.test(r.objekt)) return null;
   let wert = "";
   if (r.wert === "zahl" && Number.isInteger(thema.zahl) && /** @type {number} */ (thema.zahl) >= 0) wert = String(thema.zahl);
-  if (r.wert === "buchstabe") wert = graphemVon(typeof thema.name === "string" ? thema.name : "");
   return { baustein: "objekt", art: r.objekt, wert };
 }
 

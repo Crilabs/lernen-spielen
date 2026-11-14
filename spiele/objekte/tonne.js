@@ -70,10 +70,10 @@ function oeffnung(farbe) {
  * @returns {Stueck}
  */
 function korpus(farbe, wert, zeichen) {
-  // Ziffern und Buchstaben möglichst groß (Regal), ohne über den Aufkleber (64 breit) zu laufen; geschätzte
+  // Ziffern und Buchstaben möglichst groß (Regal), mit Rand auf dem Aufkleber (72 breit, Text höchstens 54); geschätzte
   // Breite in em: M und W breit, Leerzeichen schmal, sonst 0,62.
   const breite = [...wert].reduce((s, c) => s + (/[MWmw]/.test(c) ? 0.9 : c === " " ? 0.3 : 0.62), 0);
-  const groesse = Math.min(60, Math.round(64 / Math.max(0.62, breite)));
+  const groesse = Math.min(56, Math.round(54 / Math.max(0.62, breite)));
   const text = wert
     ? `<text x="100" y="${z(154 + groesse * 0.35)}" font-size="${groesse}"`
       + ` text-anchor="middle" fill="${INK}" stroke="none">${esc(wert)}</text>`
@@ -84,7 +84,7 @@ function korpus(farbe, wert, zeichen) {
     falte(`M38.6 103 L161.4 103 L161 108 Q100 111 39 108 Z`, farbe, 0.3),
     naht(`M58 116 L64 214 M142 116 L136 214`, farbe, 2.4),
     ohneKontur(form(pfad(`M76 118 L124 118 Q136 118 136 130 L136 178 Q136 190 124 190 L76 190 Q64 190 64 178 L64 130 Q64 118 76 118 Z`),
-      AUFKLEBER, [72, 122], { s: 0.95 })),
+      AUFKLEBER, [72, 122], { s: 0.95, trenn: true })),
     { svg: text, kontur: "" },
   );
 }
