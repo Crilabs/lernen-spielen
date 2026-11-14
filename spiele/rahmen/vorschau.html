@@ -46,7 +46,7 @@
   .pausen-inhalt img { width: 22rem; height: 22rem; }
   /* Spielobjekte (spiele/objekte/): nur mit ?objekte, dann statt der Bausteine. Eine Wiese, Ela zum Vergleich der
      Größe und des Stils, jede Tonne in jedem Zustand, Werfen zum Ausprobieren, Perlenstäbe 4, 5, 9 zum Farbvergleich, unten rechts das Regal-Bild (still). */
-  .objekte { position: absolute; inset: 17rem 2.4rem 2.4rem; display: grid; grid-template-rows: auto 1fr; row-gap: 2rem; }
+  .objekte { position: absolute; inset: 17rem 2.4rem 2.4rem; display: grid; grid-template-rows: auto 1fr auto; row-gap: 2rem; }
   .objekte[hidden] { display: none; }
   .objekte .reihe-zustaende { display: flex; align-items: flex-end; justify-content: space-between; }
   .objekte .gruppe { display: flex; align-items: flex-end; gap: 0.6rem; }
@@ -61,6 +61,10 @@
   .objekte .perlen ls-perlenstab { height: 4.2rem; }
   .objekte .regal { display: flex; align-items: flex-end; gap: 2rem; padding: 1.6rem 2.4rem; }
   .objekte .regal ls-objekt { height: 10rem; }
+  /* Weitere Arten aus dem Bestand (M37: Korb und Packungen der Reihen), klein in einer Zeile. */
+  .objekte .bestand { display: flex; align-items: flex-end; gap: 3rem; padding: 0 4rem; }
+  .objekte .bestand ls-objekt { height: 10rem; }
+  .objekte .bestand ls-objekt[art="einkaufskorb"] { height: 14rem; }
   /* Mit echten Dingen (?echte-dinge): eine Spiel-Kachel wie auf der Fach-Seite zum Vergleich der Größe, daneben die
      Kacheln (mit Anleitung, ohne Anleitung mit Einzeiler) auf einer Fläche wie dort. */
   .echte-dinge { position: absolute; top: calc(var(--ls-leiste-hoehe) + 4rem); left: 2.4rem; right: 2.4rem; display: grid; gap: 3.2rem; }
@@ -159,6 +163,15 @@
       <ls-objekt art="wertstofftonne" wert="20" still></ls-objekt>
       <ls-objekt art="papiertonne" still></ls-objekt>
     </div>
+  </div>
+  <div class="bestand" aria-label="Weitere Arten">
+    <ls-objekt art="einkaufskorb" zustand="leer"></ls-objekt>
+    <ls-objekt art="einkaufskorb" zustand="gefuellt"></ls-objekt>
+    <ls-objekt art="ballroehre"></ls-objekt>
+    <ls-objekt art="wochenschachtel"></ls-objekt>
+    <ls-objekt art="stiftebox"></ls-objekt>
+    <ls-objekt art="muffinkarton"></ls-objekt>
+    <ls-objekt art="muenze" zustand="zehn-cent"></ls-objekt>
   </div>
 </section>
 <section class="echte-dinge" id="echte-dinge" hidden>

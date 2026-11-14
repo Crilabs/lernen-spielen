@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 
 const { objekte, meldeObjekt, bild, dauerVon, KONTUR } = await import("../spiele/objekte/objekt.js");
-const ARTEN = ["papier", "dose", "papiertonne", "wertstofftonne", "schuhpaar", "muenze", "broetchen", "eierkarton", "gedeck", "einkaufskorb"];
+const ARTEN = ["papier", "dose", "papiertonne", "wertstofftonne", "schuhpaar", "muenze", "broetchen", "eierkarton", "gedeck", "einkaufskorb", "ballroehre", "wochenschachtel", "stiftebox", "muffinkarton"];
 for (const art of ARTEN) await import(`../spiele/objekte/${art}.js`);
 
 const teileIn = (svg) => new Set([...svg.matchAll(/data-teil="([^"]+)"/g)].map((m) => m[1]));
@@ -115,4 +115,47 @@ test("Einkaufskorb (M37): Füllstand leer, 1 … 8, gefuellt; jede Packung bleib
   // Farben nur aus Tokens und Welt-Palette (keine eigenen Hex-Werte in der Datei).
   const quelle = (await import("node:fs")).readFileSync(new URL("../spiele/objekte/einkaufskorb.js", import.meta.url), "utf8");
   assert.doesNotMatch(quelle, /#[0-9A-Fa-f]{6}/);
+});
+
+test("Packungen der Reihen 3, 7, 8, 9 (M37): ein Zustand, ohne Schrift und Ziffer, Farben nur aus Tokens und Welt-Paletten", async () => {
+  const { readFileSync } = await import("node:fs");
+  const anzahl = { ballroehre: 3, wochenschachtel: 7, stiftebox: 8, muffinkarton: 9 };
+  for (const art of Object.keys(anzahl)) {
+    const def = objekte.get(art);
+    assert.equal(def.zustaende.length, 1, art);
+    const svg = def.zeichne(def.zustaende[0], { wert: "7" });
+    assert.doesNotMatch(svg, /<text/, `${art}: keine Schrift, auch nicht mit wert`);
+    const quelle = readFileSync(new URL(`../spiele/objekte/${art}.js`, import.meta.url), "utf8");
+    assert.doesNotMatch(quelle, /#[0-9A-Fa-f]{6}/, `${art}: keine eigenen Hex-Werte`);
+    assert.match(quelle, /from "\.\.\/start\/welten\.js"/, `${art}: Farben aus den Welt-Paletten`);
+  }
+  // Die Zahl der Teile ist im Bild abzählbar wie in echt (Sachbild, kein Zählmaterial): je Ball, Fach, Stift, Muffin ein Teil.
+  const { FAECHER } = await import("../spiele/objekte/wochenschachtel.js");
+  const { ANZAHL } = await import("../spiele/objekte/stiftebox.js");
+  const { REIHEN } = await import("../spiele/objekte/muffinkarton.js");
+  assert.deepEqual([FAECHER, ANZAHL, REIHEN * REIHEN], [7, 8, 9]);
+});
+
+test("Keine Farbe der Lernzeichen in den Packungen von M37 und im Einkaufskorb (Sachwelt, grundsaetze-bilder 6.2)", async () => {
+  const { LERNFARBE } = await import("../spiele/rahmen/stil.js");
+  const lern = new Set([...Object.values(LERNFARBE.perle), ...Object.values(LERNFARBE.wortart)].map((f) => f.toUpperCase()));
+  for (const art of ["ballroehre", "wochenschachtel", "stiftebox", "muffinkarton", "einkaufskorb"]) {
+    const def = objekte.get(art);
+    for (const z of def.zustaende) {
+      const farben = [...def.zeichne(z, { wert: "" }).matchAll(/fill="(#[0-9A-Fa-f]{6})"/g)].map((m) => m[1].toUpperCase());
+      for (const f of farben) assert.ok(!lern.has(f), `${art} ${z}: ${f} ist eine Farbe der Lernzeichen`);
+    }
+  }
+});
+
+test("Münze: Variante zehn-cent mit Prägung 10, stapel bleibt der erste Zustand ohne Ziffer", () => {
+  const def = objekte.get("muenze");
+  assert.deepEqual(def.zustaende, ["stapel", "zehn-cent"]);
+  const svg = def.zeichne("stapel", { wert: "" });
+  // Ein Bild trägt beide Zustände: die Teile sind über data-in getrennt, die 10 steht nur in zehn-cent.
+  assert.match(svg, /data-in="stapel"/);
+  const zehn = svg.slice(svg.lastIndexOf('data-in="zehn-cent"'));
+  assert.match(zehn, /<text[^>]*>10<\/text>/);
+  const stapel = svg.slice(svg.indexOf('data-schicht="flaeche"'), svg.lastIndexOf('data-in="zehn-cent"'));
+  assert.doesNotMatch(stapel, /<text/);
 });
