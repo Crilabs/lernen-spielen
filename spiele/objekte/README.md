@@ -35,6 +35,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `spielkarten.js` – fünf Spielkarten als Fächer, nur Rückseiten (Koralle mit heller Raute; ohne Schrift, Ziffer und
   Kartenfarben).
 - `keksblech.js` – flaches Backblech, leicht von oben, mit runden Keksen in gleich langen Reihen (4 mit je 6; ohne Schrift und Ziffer).
+- `keksteller.js` – flacher Teller von der Seite mit einem kleinen Haufen runder Kekse (3, 2, 1; ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
