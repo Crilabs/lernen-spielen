@@ -46,10 +46,15 @@ const ponyschatten = {
   kontur: "",
 };
 
-/** Haarspange rechts im Pony (Wasserblau, wie früher das Zopfband). */
+/** Blüten-Spange rechts im Pony: fünf wasserblaue Blätter, Mitte Koralle (wie die Jacke). */
+const SPANGE_MITTE = "#FF9F8A";
 const spange = S.zusammen(
-  S.form(S.pfad("M186 49 Q190 44 197 45 L205 50 Q207 54 203 56 L190 55 Q184 54 186 49 Z"), BAND, [189, 47], { s: 0.82 }),
-  { svg: `<path d="M190 50 L201 51" fill="none" stroke="${S.heller(BAND, 0.45)}" stroke-width="2"/>`, kontur: "" },
+  S.form(S.oval(195.0, 44.8, 4.6, 4.6), BAND, [193.0, 42.8], { s: 0.8 }),
+  S.form(S.oval(199.95, 48.39, 4.6, 4.6), BAND, [197.95, 46.39], { s: 0.8 }),
+  S.form(S.oval(198.06, 54.21, 4.6, 4.6), BAND, [196.06, 52.21], { s: 0.8 }),
+  S.form(S.oval(191.94, 54.21, 4.6, 4.6), BAND, [189.94, 52.21], { s: 0.8 }),
+  S.form(S.oval(190.05, 48.39, 4.6, 4.6), BAND, [188.05, 46.39], { s: 0.8 }),
+  S.form(S.oval(195, 50, 3.2, 3.2), SPANGE_MITTE, [194, 49], { s: 0.8 }),
 );
 
 const kopfDreiviertel = {

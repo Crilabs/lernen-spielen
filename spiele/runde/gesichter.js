@@ -20,7 +20,7 @@ const auge = (x, y, ry = 6) =>
 const lachauge = (x) => `<path d="M${z(x - 5)} 1 Q${z(x)} -6 ${z(x + 5)} 1" fill="none" style="stroke:${AUGE}" stroke-width="3.2"/>`;
 /** Braue: dy hebt (negativ) oder senkt, bogen wölbt. @param {number} x @param {number} dy @param {number} [bogen] */
 const braue = (x, dy, bogen = 3) =>
-  `<path d="M${z(x - 6)} ${z(-14 + dy)} Q${z(x)} ${z(-14 + dy - bogen)} ${z(x + 6)} ${z(-14 + dy)}" fill="none" style="stroke:${BRAUE}" stroke-width="3.4"/>`;
+  `<path d="M${z(x - 6)} ${z(-14 + dy)} Q${z(x)} ${z(-14 + dy - bogen)} ${z(x + 6)} ${z(-14 + dy)}" fill="none" style="stroke:${BRAUE};stroke-width:var(--braue-dicke, 3.4)"/>`;
 /** @param {string} d */
 const mund = (d) => `<path d="${d}" fill="none" style="stroke:${LIPPE}" stroke-width="3"/>`;
 /** @param {string} d */

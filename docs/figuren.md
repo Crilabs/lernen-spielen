@@ -32,7 +32,7 @@ Rolle spielt (6.1 Nr. 6). Kein Name aus der eigenen Familie.
 | | **Ela** | **Kofi** | **Lena** | **Timo** |
 |---|---|---|---|---|
 | Name aus | Türkisch/Deutsch | Twi (Ghana) | Deutsch | Finnisch/Deutsch |
-| Aussehen | mittelbraune Haut, kurze dunkle Haare mit Haarspange, **Brille** | dunkelbraune Haut, kurze schwarze Locken, schmal | helle Haut, rote Locken, Sommersprossen, **zwei Hörgeräte** (sichtbar, türkis; eins ist in jeder Ansicht zu sehen) | helle bis olive Haut, glatte, strubbelige hellbraune Haare bis zum Kinn (Seitenscheitel), rundlich |
+| Aussehen | mittelbraune Haut, kurze dunkle Haare mit Haarspange, **Brille** | dunkelbraune Haut, kurze schwarze Locken, schmal | helle Haut, rote Locken, Sommersprossen, **zwei Hörgeräte** (sichtbar, türkis; eins ist in jeder Ansicht zu sehen) | helle bis olive Haut, glatte, strubbelige hellbraune Haare, länger (Seitenscheitel mit Wirbel, seitlich bis zur Ohrmitte), rundlich |
 | Bewegt sich | läuft, klettert | rennt, springt | läuft, hüpft | **Rollstuhl** (fährt selbst, schnell und geschickt), trägt Dinge auf dem Schoß |
 | Mag (beiläufig, nie Thema) | bauen, Werkzeug, Schrauben sortieren | malen, Muster legen | Käfer und Steine sammeln | backen, Dinge abwiegen |
 | Familie (nur im Hintergrund, nie erklärt) | Mama und Mami | Papa und Opa | Mama und großer Bruder | Mama, ihr Partner und eine kleine Halbschwester |

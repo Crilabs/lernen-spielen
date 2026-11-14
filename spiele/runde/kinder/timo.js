@@ -1,4 +1,4 @@
-// Timo – figuren.md §2: helle bis olive Haut, glatte hellbraune Haare bis zum Kinn, rundlich. Rollstuhl, fährt selbst,
+// Timo – figuren.md §2: helle bis olive Haut, glatte hellbraune Haare, länger mit Wirbel, rundlich. Rollstuhl, fährt selbst,
 // schnell und geschickt, trägt Dinge auf dem Schoß. Mag backen und abwiegen.
 // Stil wie Ela (figuren.md §4): Silhouette, Schatten in Stufen, Farben aus den Welt-Paletten.
 
@@ -11,20 +11,25 @@ const farben = {
   kapuze: true, wangen: 0.35,
 };
 
-// Glatte, strubbelige Haare bis zum Kinn, Seitenscheitel links, der Pony fällt kräftig nach rechts, seitlich über die Ohren.
+// Glatte, strubbelige Haare, Seitenscheitel links mit Wirbel, der Pony fällt kräftig nach rechts, seitlich bis zur Ohrmitte.
 // Ein Schopf aus einem Stück, im Uhrzeigersinn: außen von links unten über den Kopf nach rechts unten,
 // dann innen am Gesicht entlang zurück (rechte Seitensträhne, Pony mit Spitzen nach rechts unten, linke Seitensträhne).
-const SCHOPF = /** @type {[number, number][]} */ ([
-  [113, 117], [109, 98], [108, 80], [110, 60], [119, 41], [133, 27], [151, 20], [171, 18], [190, 22], [204, 32], [213, 49],
-  [217, 70], [217, 92], [215, 106], [213, 118],
-  [209, 106], [206, 113], [205, 96], [205, 82], [203, 66],
-  [199, 73], [194, 56], [186, 70], [181, 51], [172, 66], [167, 46], [157, 60], [151, 42], [141, 51],
-  [134, 46], [126, 62], [122, 82], [121, 98], [119, 110], [116, 104],
+const AUSSEN = /** @type {[number, number][]} */ ([
+  [116, 94], [110, 80], [110, 60], [119, 41], [133, 27], [147, 21],
+  // Wirbel am Scheitel
+  [146, 10], [154, 17], [159, 8], [163, 18],
+  [175, 18], [191, 22], [204, 32], [213, 49], [216, 69], [214, 88], [211, 97],
 ]);
+const RECHTS = /** @type {[number, number][]} */ ([[207, 88], [204, 94], [205, 80], [203, 66]]);
+const PONY_RAND = /** @type {[number, number][]} */ ([
+  [199, 73], [194, 56], [186, 70], [181, 51], [172, 66], [167, 46], [157, 60], [151, 42], [141, 51],
+]);
+const LINKS = /** @type {[number, number][]} */ ([[134, 46], [126, 62], [122, 74], [120, 82], [118, 88]]);
+const SCHOPF = [...AUSSEN, ...RECHTS, ...PONY_RAND, ...LINKS];
 /** Strähnen: dunkle Keile entlang der Fallrichtung. */
 const KERBEN = [
-  [[193, 54], [184, 40]], [[180, 50], [172, 36]], [[166, 46], [160, 34]], [[151, 43], [148, 33]],
-  [[206, 104], [204, 80]], [[121, 100], [118, 76]], [[203, 33], [196, 46]], [[134, 28], [140, 40]],
+  [[194, 56], [185, 41]], [[181, 51], [173, 37]], [[167, 46], [161, 34]], [[151, 42], [148, 32]],
+  [[207, 88], [206, 72]], [[118, 88], [116, 70]], [[204, 32], [197, 45]], [[154, 17], [156, 27]],
 ];
 /** @param {number[]} a @param {number[]} b */
 const kerbe = (a, b) => {
@@ -37,17 +42,17 @@ const kerbe = (a, b) => {
 /** Lichtflächen: Glanz auf dem Scheitelbogen und auf den Seitensträhnen. */
 const LICHT = [
   "M140 36 Q152 26 168 24 Q154 30 146 40 Z", "M174 26 Q186 27 196 34 Q186 32 178 32 Z",
-  "M114 70 Q116 56 122 46 Q119 58 118 72 Z", "M210 62 Q213 74 213 88 Q210 76 207 66 Z",
+  "M114 70 Q116 56 122 46 Q119 58 118 72 Z", "M210 60 Q213 70 213 82 Q210 72 207 64 Z",
 ];
 
-const PONY = SCHOPF.slice(20, 30).map(([x, y]) => /** @type {[number, number]} */ ([x, y + 5]));
+const PONY = [RECHTS[RECHTS.length - 1], ...PONY_RAND, LINKS[0]].map(([x, y]) => /** @type {[number, number]} */ ([x, y + 5]));
 const kopfDreiviertel = {
   ponyschatten: {
     svg: `<path d="${S.zacken([[PONY[0][0], 40], ...PONY, [PONY[PONY.length - 1][0], 40]], 0.08)}" fill="${S.dunkler(farben.haut, 0.3)}" stroke="none"/>`,
     kontur: "",
   },
-  // Haare hinter dem Kopf bis zum Kinn (sichtbar neben Wangen und Hals)
-  haareHinten: S.form(S.pfad("M110 72 C108 34 138 20 164 20 C192 20 218 34 216 72 L216 112 C206 118 196 116 190 110 L136 110 C130 116 118 118 110 112 Z"),
+  // Haare hinter dem Kopf, schmal und kurz: seitlich schaut kaum etwas hervor
+  haareHinten: S.form(S.pfad("M116 72 C114 36 140 21 164 21 C190 21 213 36 210 72 L208 88 C202 94 196 96 190 96 L136 96 C130 96 122 94 118 88 Z"),
     S.dunkler(farben.haar, 0.15), [134, 34], { s: 0.9 }),
   haareOben: S.zusammen(
     S.form(S.pfad(S.zacken(SCHOPF, 0.07)), farben.haar, [132, 30], { s: 0.92 }),
@@ -67,7 +72,7 @@ meldeKind({
   name: "Timo",
   pronomen: "er",
   bewegt: "rollstuhl",
-  stil: { "--braue": "#5A3A26" },
+  stil: { "--braue": "#4A2E1E", "--braue-dicke": "4.4" },
   ansichten: {
     dreiviertel: dreiviertelStuhl({ breite: 1.15, farben, kopf: kopfDreiviertel }),
     profil: profilStuhl({ breite: 1.15, farben, kopf: kopfProfil }),
