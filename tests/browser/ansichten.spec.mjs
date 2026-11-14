@@ -16,6 +16,9 @@
 // gespeicherte PIN), nie den Bereich; das Zahnrad führt nur durch Halten (3 s) zu eltern.html, kurzes Tippen
 // tut nichts; themen.html ohne oder mit unbekanntem Fach führt zur Startseite; ein Themenname mit Ziffer wird als
 // Aufnahme gesprochen (Ziffern-Regel), nie von der Systemstimme.
+// Übersicht „Mit echten Dingen“ (mit-echten-dingen.html, ohne PIN): Gerade dran (auch ohne Spiel), Bald, Zum
+// Wiederholen, aufklappbar mit allen Formen, keine Zahlen, kein Kopf mit Quellen; Zugang aus dem Elternbereich; Drucken
+// über kern/geraet.js; der Küchenzettel (Chromium, page.pdf) ist genau eine A4-Seite ohne Bedienelemente.
 //
 // WebKit: In diesem Playwright-Build (1.65, WebKit 27.2, macOS) landen echte Mausklicks mit falschen Koordinaten
 // an <html>. Die Prüfung tippt deshalb in beiden Browsern per element.click() (evaluate); das Halten des Zahnrads
@@ -24,7 +27,8 @@
 
 import { createRequire } from "node:module";
 import http from "node:http";
-import { readFile, mkdir } from "node:fs/promises";
+import { readFile, mkdir, writeFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 import { extname, join, normalize, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -81,6 +85,12 @@ const GEKONNT = {
 const DRAN = { "zerlegen-5": eintrag("dran", "", "2026-11-13"), "rechnen-3": eintrag("dran", "", "2026-11-12"), "rechnen-4": eintrag("dran", "", "2026-11-11") };
 // von den Eltern freigegeben: in Sicht (Perlenstab-Themen zeigen dort die Karte mit dem Fachsymbol)
 const FREI = { "zerlegen-8": { z: "", k: "", stufe: "", v: [], e: "", seit: "", u: "", frei: 1 }, "rechnen-9": { z: "", k: "", stufe: "", v: [], e: "", seit: "", u: "", frei: 1 } };
+// Übersicht „Mit echten Dingen“: drei Themen mit Anleitung dran (auch ohne Spiel), gekonnte zum Wiederholen.
+const ECHT = {
+  "mehr-weniger-gleich-viele": eintrag("kann-ich", "2026-11-01"), "mengen-5": eintrag("kann-ich", "2026-11-02"),
+  "reim-hoeren": eintrag("kann-ich", "2026-11-03"), "zerlegen-5": eintrag("kann-ich", "2026-11-05"), "zerlegen-6": eintrag("kann-ich", "2026-11-08"),
+  "vorwaerts-zaehlen": eintrag("dran", "", "2026-11-12"), "zerlegen-7": eintrag("dran", "", "2026-11-13"), "silben-klatschen": eintrag("dran", "", "2026-11-11"),
+};
 const FAELLE = {
   leer: { stand: null, spiele: false },
   gekonnt: { stand: GEKONNT, spiele: false },
@@ -391,6 +401,78 @@ async function lauf(typ, name, groesse, basis) {
       await seite.waitForURL(/\/spiele\/eltern\.html$/, { timeout: HALTEN_MS + 2000 }).catch(() => {});
       await seite.keyboard.up("Enter").catch(() => {});
       pruefe(L, "Zahnrad mit Eingabetaste: kurz nichts, 3 s halten → eltern.html", tasteKurz && seite.url().endsWith("/spiele/eltern.html"), seite.url());
+      await kontext.close();
+    }
+
+    // --- Mit echten Dingen: Übersicht, Zugang aus dem Elternbereich, Drucken, Küchenzettel ---------------
+    for (const [fall, stand] of [["leer", null], ["echt", ECHT]]) {
+      const F = `${L} echte-dinge ${fall}`;
+      const kontext = await kontextFuer(browser, groesse, basis, { stand }, fehlerListe);
+      await kontext.addInitScript(() => { window.__gedruckt = 0; window.print = () => { window.__gedruckt++; }; });
+      const seite = await kontext.newPage();
+      await seite.goto(`${basis}/spiele/mit-echten-dingen.html`, { waitUntil: "load" });
+      await seite.waitForFunction(() => document.body.dataset.bereit === "1", null, { timeout: 5000 });
+      await seite.evaluate(() => document.fonts.ready);
+      const ue = await seite.evaluate(() => {
+        const teil = (titel) => [...document.querySelectorAll("section.abschnitt")].find((x) => x.querySelector("h2").textContent === titel);
+        const namen = (t) => (t ? [...t.querySelectorAll("details.thema summary .name b")].map((b) => b.textContent) : null);
+        const erstes = document.querySelector("details.thema");
+        return {
+          dran: namen(teil("Gerade dran")), bald: namen(teil("Bald")), wieder: namen(teil("Zum Wiederholen")),
+          offen: erstes?.open ?? false, formenOffen: erstes ? erstes.querySelectorAll(".spiel").length : 0,
+          situationen: erstes ? [...erstes.querySelectorAll("summary .situation")].map((x) => x.textContent) : [],
+          drucken: !document.getElementById("drucken").hidden, text: document.body.innerText,
+        };
+      });
+      if (fall === "leer") {
+        pruefe(F, "Übersicht ohne Lernstand: Gerade dran zeigt je Fach das erste Thema (ohne Spiel), höchstens eins je Fach",
+          ue.dran?.length >= 1 && ue.dran.length <= 6 && ue.dran.includes("Mehr, weniger, gleich viele") && ue.wieder === null, JSON.stringify(ue.dran));
+      } else {
+        pruefe(F, "Übersicht: Gerade dran mit den Themen dran (auch ohne Spiel), zuerst aufgeklappt mit beiden Formen",
+          ["Vorwärts zählen", "Die 7 zerlegen", "Silben klatschen"].every((n) => ue.dran?.includes(n)) && ue.offen && ue.formenOffen === 2
+            && JSON.stringify(ue.situationen) === JSON.stringify(["Am Tisch", "In Bewegung"]), JSON.stringify(ue));
+        pruefe(F, "Übersicht: Zum Wiederholen die drei zuletzt gekonnten, neueste zuerst",
+          JSON.stringify(ue.wieder) === JSON.stringify(["Die 6 zerlegen", "Die 5 zerlegen", "Reimt sich das?"]), JSON.stringify(ue.wieder));
+        pruefe(F, "Übersicht: Bald zeigt Themen in Sicht", (ue.bald?.length ?? 0) >= 1, JSON.stringify(ue.bald));
+      }
+      pruefe(F, "Übersicht: keine Zahl als Fortschritt, kein Lehrplan, kein Kopf mit Quellen",
+        !/\d+\s*(von|\/)\s*\d+|%|Klasse \d|Lehrplan|quellen:|https?:/i.test(ue.text), ue.text.slice(0, 300));
+      pruefe(F, "Übersicht: Drucken da (Browser kann drucken)", ue.drucken);
+      await seite.evaluate(() => document.getElementById("drucken").click());
+      pruefe(F, "Drucken ruft den Druckdialog über kern/geraet.js", (await seite.evaluate(() => window.__gedruckt)) === 1);
+      if (SHOTS) {
+        await mkdir(SHOTS, { recursive: true });
+        await seite.screenshot({ path: join(SHOTS, `uebersicht-${fall}-${name}-${groesse.width}.png`), fullPage: true });
+      }
+      if (name === "chromium") {
+        await seite.emulateMedia({ media: "print" });
+        const druck = await seite.evaluate(() => ({
+          knoepfe: [...document.querySelectorAll("ls-knopf, button, summary")].filter((k) => k.getClientRects().length > 0).length,
+          zettel: getComputedStyle(document.getElementById("zettel")).display, artikel: document.querySelectorAll("#zettel article").length,
+          text: document.getElementById("zettel").innerText,
+        }));
+        await seite.emulateMedia({ media: null }); // zurück auf „keine Vorgabe“: page.pdf() nimmt dann print
+        const pdf = await seite.pdf({ format: "A4", preferCSSPageSize: true, printBackground: true });
+        const seiten = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
+        pruefe(F, "Küchenzettel: genau eine A4-Seite, keine Bedienelemente, je Thema dran ein Kasten (höchstens sechs)",
+          seiten === 1 && druck.knoepfe === 0 && druck.zettel === "block" && druck.artikel >= 1 && druck.artikel <= 6, JSON.stringify({ seiten, ...druck, text: undefined }));
+        if (fall === "echt") pruefe(F, "Küchenzettel: kurze Form mit Ihr braucht, Schritten und Darauf kommt es an, ohne Leichter/Schwerer",
+          /Ihr braucht/.test(druck.text) && /Darauf kommt es an/.test(druck.text) && !/Leichter|Schwerer/.test(druck.text), druck.text.slice(0, 400));
+        if (SHOTS && groesse.width === 1920) {
+          const pfad = join(SHOTS, `kuechenzettel-${fall}.pdf`);
+          await writeFile(pfad, pdf);
+          try { execFileSync("sips", ["-s", "format", "png", "-Z", "1600", pfad, "--out", pfad.replace(/\.pdf$/, ".png")], { stdio: "ignore" }); } catch { /* nur macOS */ }
+        }
+      }
+      await seite.close();
+      // Zugang aus dem Elternbereich (der Knopf liegt in der Navigation hinter der PIN)
+      if (fall === "echt") {
+        const eltern = await oeffne(kontext, `${basis}/spiele/eltern.html`);
+        await eltern.evaluate(() => document.getElementById("echte-dinge").click());
+        await eltern.waitForURL(/mit-echten-dingen\.html$/, { timeout: 5000 }).catch(() => {});
+        pruefe(F, "Elternbereich: „Mit echten Dingen“ führt zur Übersicht", eltern.url().endsWith("/spiele/mit-echten-dingen.html"), eltern.url());
+        await eltern.close();
+      }
       await kontext.close();
     }
 

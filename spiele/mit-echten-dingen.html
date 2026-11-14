@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mit echten Dingen</title>
+<link rel="stylesheet" href="rahmen/seite.css">
+<style>
+/* Übersicht „Mit echten Dingen“ (docs/mit-echten-dingen.md „Wo es zu sehen ist“): ein Werkzeug für Erwachsene, ohne
+   PIN, aus dem Elternbereich erreichbar; Kinder dürfen mitlesen. Zeigt, woran das Kind gerade ist und was man dazu
+   mit Dingen aus dem Alltag machen kann: Gerade dran, Bald, Zum Wiederholen; je Thema aufklappbar mit allen Formen.
+   Keine Zahlen, kein Lehrplanbezug, kein Fortschritt (das steht im Elternbereich). Diese Seite liest den Lernstand
+   nur; analoges Spielen zählt nie für den Lernstand.
+   Ruhige Arbeitsseite wie der Elternbereich: Nebel als Grund, Papier als Fläche, Tinte für Schrift, flach (Schatten nur
+   an Knöpfen). Die Fachkachel vor jedem Thema ist dieselbe wie in der Kopfleiste. Die Situationen tragen ihr Symbol
+   (Tisch, Treppe, Weg), damit man auf einen Blick sieht, wo ein Spiel passt.
+   Drucken („Küchenzettel“): nur wo das Gerät drucken kann (kern/geraet.js). Der Druck zeigt nur #zettel: eine A4-Seite,
+   Tinte auf Weiß, die Themen von „Gerade dran“ mit je einer kurzen Form. */
+html, body { height: auto; }
+body { min-height: 100dvh; overflow: auto; -webkit-user-select: none; user-select: none; }
+.auswahl { -webkit-user-select: text; user-select: text; }
+[hidden] { display: none !important; }
+h1, h2, h3, h4, p, ul, ol { margin: 0; }
+:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.4rem; border-radius: var(--ls-radius-klein); }
+
+.seite { max-width: 156rem; margin: 0 auto; padding: 3.6rem 6rem 10rem; font-size: 2.6rem; line-height: 1.5; }
+.kopf { display: flex; align-items: center; gap: 3.2rem; }
+.kopf .ueber { flex: 1 1 auto; min-width: 0; }
+.kopf h1 { font-size: 5.2rem; line-height: 1.1; }
+.kopf p { color: var(--ls-tinte-weich); margin-top: 0.6rem; max-width: 70ch; }
+
+section.abschnitt { margin-top: 6rem; }
+section.abschnitt > h2 { font-size: 3.8rem; line-height: 1.2; margin: 0 0 2.4rem; }
+.leer { color: var(--ls-tinte-weich); }
+.liste { display: flex; flex-direction: column; gap: 2rem; }
+
+/* Ein Thema: Papier mit feiner Linie, flach; der Kopf (summary) ist die Tippfläche zum Aufklappen. */
+details.thema { background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-linie); border-radius: var(--ls-radius); }
+details.thema[open] { border-color: var(--ls-naht); }
+summary {
+  display: flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 3rem 1.6rem 1.6rem;
+  cursor: pointer; list-style: none; border-radius: var(--ls-radius); -webkit-tap-highlight-color: transparent;
+}
+summary::-webkit-details-marker { display: none; }
+.fachkachel {
+  flex: none; width: 7.6rem; height: 7.6rem; border-radius: var(--ls-radius-klein);
+  border: var(--ls-kontur) solid var(--ls-tinte); background: var(--fach-fuellung, var(--ls-nebel));
+  display: grid; place-items: center;
+}
+.fachkachel i { display: block; width: 4.6rem; height: 4.6rem; background: var(--ls-tinte); -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
+.name { flex: 1 1 auto; min-width: 0; }
+.name b { display: block; font-size: 3.2rem; line-height: 1.25; }
+.name span { display: block; color: var(--ls-tinte-weich); font-size: 2.4rem; line-height: 1.35; }
+.formen { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 1.2rem 2rem; }
+/* Situation als flaches Zeichen (nur Anzeige, kein Knopf): Symbol und Wort. */
+.situation { display: inline-flex; align-items: center; gap: 1rem; font-size: 2.4rem; white-space: nowrap; color: var(--ls-tinte); }
+.situation img { width: 5rem; height: 5rem; }
+.pfeil { flex: none; width: 4rem; height: 4rem; border-right: 0.5rem solid var(--ls-tinte-weich); border-bottom: 0.5rem solid var(--ls-tinte-weich);
+  transform: translateY(-0.8rem) rotate(45deg) scale(0.6); transition: transform 0.15s ease-out; }
+details[open] .pfeil { transform: translateY(0.8rem) rotate(225deg) scale(0.6); }
+
+/* Aufgeklappt: die Formen nebeneinander, jede mit ihrem Symbol; ohne Anleitung der Einzeiler aus dem Lernplan. */
+.inhalt { padding: 0.8rem 3rem 3.6rem 11.6rem; }
+.inhalt .einzeiler { max-width: 70ch; }
+.spiele { display: grid; grid-template-columns: repeat(auto-fit, minmax(56rem, 1fr)); gap: 4rem 6rem; }
+.spiel h3 { display: flex; align-items: center; gap: 1.6rem; font-size: 3rem; line-height: 1.25; margin-bottom: 1.6rem; }
+.spiel h3 img { flex: none; width: 6rem; height: 6rem; }
+.spiel h3 small { display: block; font-size: 2.2rem; font-weight: 400; color: var(--ls-tinte-weich); }
+.spiel p { margin: 0 0 1.4rem; max-width: 62ch; text-wrap: pretty; }
+.spiel ol { padding: 0; list-style: none; counter-reset: schritt; margin: 0 0 1.6rem; }
+.spiel ol li { position: relative; counter-increment: schritt; padding-left: 5.4rem; margin-bottom: 1rem; min-height: 4rem; }
+.spiel ol li::before {
+  content: counter(schritt); position: absolute; left: 0; top: 0.1rem; width: 3.8rem; height: 3.8rem; box-sizing: border-box;
+  display: grid; place-items: center; border: 0.25rem solid var(--ls-tinte-weich); border-radius: 50%;
+  font-size: 2.1rem; font-weight: 700; line-height: 1; color: var(--ls-tinte-weich);
+}
+.spiel .kern { padding: 2rem 2.4rem; border-radius: var(--ls-radius-klein); background: var(--ls-nebel); }
+.spiel .kern b { display: block; }
+.spiel .stufen { color: var(--ls-tinte-weich); }
+.spiel .stufen b { color: var(--ls-tinte); }
+
+#zettel { display: none; }
+
+@media (prefers-reduced-motion: reduce) { .pfeil { transition: none; } }
+
+/* --- Küchenzettel: eine A4-Seite, Tinte auf Weiß ------------------------------------------------- */
+@page { size: A4 portrait; margin: 14mm 14mm 12mm; }
+@media print {
+  html { font-size: 10pt; }
+  html, body { height: auto; min-height: 0; overflow: visible; background: #fff; }
+  body > :not(#zettel) { display: none !important; }
+  #zettel { display: block; color: #000; font-family: "Andika", sans-serif; font-size: 9.5pt; line-height: 1.36; }
+  #zettel header { display: flex; align-items: center; gap: 4mm; padding-bottom: 3mm; border-bottom: 0.4mm solid #000; margin-bottom: 5mm; }
+  #zettel header img { width: 11mm; height: 11mm; }
+  #zettel img { filter: grayscale(1) contrast(1.4); }
+  #zettel h1 { font-size: 19pt; line-height: 1.1; }
+  #zettel header p { font-size: 10pt; color: #333; }
+  /* Zwei Spalten, die Kästen fließen (kurze Einzeiler füllen die Lücken), keiner wird geteilt. */
+  #zettel .raster { column-count: 2; column-gap: 7mm; }
+  #zettel article { break-inside: avoid; display: inline-block; width: 100%; box-sizing: border-box; margin: 0 0 5mm;
+    border: 0.3mm solid #555; border-radius: 3mm; padding: 3.5mm 4.5mm; }
+  #zettel .raster.eins { column-count: 1; }
+  #zettel h2 { font-size: 12.5pt; line-height: 1.2; }
+  #zettel h3 { display: flex; align-items: center; gap: 2mm; font-size: 10.5pt; font-weight: 400; margin: 1mm 0 2.5mm; }
+  #zettel h3 img { width: 6mm; height: 6mm; }
+  #zettel p { margin: 0 0 1.8mm; }
+  #zettel ol { margin: 0 0 2mm; padding-left: 5mm; }
+  #zettel li { margin: 0 0 0.8mm; }
+  #zettel .kern { border-left: 0.8mm solid #000; padding-left: 2.5mm; margin: 0; }
+  #zettel .kern b { display: block; }
+  #zettel .ohne { color: #222; }
+}
+</style>
+</head>
+<body>
+<main class="seite">
+  <header class="kopf">
+    <ls-knopf id="zurueck" symbol="zurueck.svg" name="Zurück" stumm></ls-knopf>
+    <div class="ueber">
+      <h1>Mit echten Dingen</h1>
+      <p>Kleine Spiele mit Dingen von zu Hause, für Kinder und Erwachsene zusammen. Sie passen zu dem, was gerade dran ist.</p>
+    </div>
+    <ls-knopf id="drucken" symbol="drucken.svg" wort="Drucken" stumm hidden></ls-knopf>
+  </header>
+  <div id="inhalt" class="auswahl" aria-busy="true"></div>
+</main>
+<section id="zettel" aria-hidden="true"></section>
+
+<script type="module">
+import { sperreTouch, protokoll, esc } from "./lernspiel.js";
+import { themenMitEchtenDingen, ladeLernstand } from "./lernsteuerung.js";
+import { faehigkeiten, drucke } from "./kern/geraet.js";
+import { ladeVerzeichnis, ladeAnleitung, letzteForm, waehleForm } from "./rahmen/echte-dinge.js";
+import { formHtml } from "./rahmen/anregung.js";
+import { blockHtml, kurzform, SITUATIONEN } from "./rahmen/markdown.js";
+import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
+import "./rahmen/knopf.js";
+
+sperreTouch();
+const $ = (id) => document.getElementById(id);
+const SYMBOL = (datei) => `symbole/${datei}`;
+const symbolDer = (situation) => SITUATIONEN.find((s) => s.id === situation)?.symbol ?? "hand.svg";
+
+// Zurück dorthin, woher man kam (Elternbereich); direkt aufgerufen zur Startseite.
+$("zurueck").addEventListener("click", () => {
+  if (history.length > 1 && document.referrer && new URL(document.referrer).origin === location.origin) history.back();
+  else location.href = "index.html";
+});
+
+const kann = await faehigkeiten();
+
+let ctx, stand;
+try {
+  const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map((d) => fetch(d).then((r) => r.json())));
+  ctx = { plan, spiele, echteDinge: await ladeVerzeichnis() };
+  stand = await ladeLernstand(ctx, new Date().toLocaleDateString("sv"));
+} catch (e) {
+  protokoll("mit-echten-dingen: " + (e?.message ?? e));
+  $("inhalt").innerHTML = `<p class="leer" style="margin-top:6rem">Die Übersicht lässt sich gerade nicht laden.</p>`;
+  $("inhalt").removeAttribute("aria-busy");
+  throw e;
+}
+
+const teile = themenMitEchtenDingen(ctx, stand);
+const alle = [...teile.dran, ...teile.bald, ...teile.wiederholen];
+const anleitungen = new Map(await Promise.all(alle.filter((t) => t.datei).map(async (t) => [t.id, await ladeAnleitung(t.fach, t.id)])));
+const letzte = await letzteForm();
+
+function fachkachel(fach) {
+  const f = FACH[fach];
+  const sym = FACH_SYMBOLE.has(fach) ? `<i style="--bild:${bild(SYMBOL(fach + ".svg"))}"></i>` : "";
+  return `<span class="fachkachel" style="--fach-fuellung:${f?.fuellung ?? "var(--ls-nebel)"}" aria-hidden="true">${sym}</span>`;
+}
+const fachName = (fach) => (ctx.spiele.kategorien ?? []).find((k) => k.id === fach)?.name ?? "";
+
+function themaHtml(t, offen) {
+  const a = anleitungen.get(t.id);
+  const formen = a?.formen ?? [];
+  const zeichen = formen.map((f) => `<span class="situation"><img src="${SYMBOL(f.symbol)}" alt="">${esc(f.wort)}</span>`).join("");
+  const inhalt = formen.length
+    ? `<div class="spiele">${formen.map((f) => `<article class="spiel"><h3><img src="${SYMBOL(f.symbol)}" alt=""><span>${esc(f.name)}<small>${esc(f.wort)}</small></span></h3>${formHtml(f)}</article>`).join("")}</div>`
+    : `<p class="einzeiler">${esc(t.eltern || "Zu diesem Thema gibt es noch kein Spiel mit echten Dingen.")}</p>`;
+  return `<details class="thema"${offen ? " open" : ""}><summary>${fachkachel(t.fach)}
+      <span class="name"><b>${esc(t.name)}</b><span>${esc(a?.titel || fachName(t.fach))}</span></span>
+      <span class="formen">${zeichen}</span><span class="pfeil" aria-hidden="true"></span></summary>
+    <div class="inhalt">${inhalt}</div></details>`;
+}
+
+function teilHtml(titel, liste, leer, { erstesOffen = false } = {}) {
+  if (!liste.length && !leer) return "";
+  const rumpf = liste.length
+    ? `<div class="liste">${liste.map((t, i) => themaHtml(t, erstesOffen && i === 0)).join("")}</div>`
+    : `<p class="leer">${esc(leer)}</p>`;
+  return `<section class="abschnitt"><h2>${esc(titel)}</h2>${rumpf}</section>`;
+}
+
+$("inhalt").innerHTML = teilHtml("Gerade dran", teile.dran, "Gerade ist kein Thema dran.", { erstesOffen: true })
+  + teilHtml("Bald", teile.bald)
+  + teilHtml("Zum Wiederholen", teile.wiederholen);
+$("inhalt").removeAttribute("aria-busy");
+
+// --- Küchenzettel --------------------------------------------------------------------------------
+// Höchstens sechs Themen (zwei Spalten: eine A4-Seite), je eine kurze Form (die zuletzt gewählte); Themen mit Anleitung
+// zuerst, dann die Einzeiler aus dem Lernplan.
+const ZETTEL_MAX = 6;
+function zettelHtml() {
+  const hat = (t) => (anleitungen.get(t.id)?.formen.length ? 0 : 1);
+  const liste = [...teile.dran].sort((a, b) => hat(a) - hat(b)).slice(0, ZETTEL_MAX); // sort ist stabil
+  const artikel = liste.map((t) => {
+    const f = waehleForm(anleitungen.get(t.id)?.formen ?? [], letzte);
+    if (!f) return `<article><h2>${esc(t.name)}</h2><p class="ohne">${esc(t.eltern || "Zu diesem Thema gibt es noch kein Spiel mit echten Dingen.")}</p></article>`;
+    const html = blockHtml(kurzform(f), { ebene: 4 })
+      .replace(/<p><b>Darauf kommt es an:?<\/b>/, '<p class="kern"><b>Darauf kommt es an:</b>')
+      .replace(/<p>Ihr braucht:/, "<p><b>Ihr braucht:</b>");
+    return `<article><h2>${esc(t.name)}</h2><h3><img src="${SYMBOL(f.symbol)}" alt="">${esc(f.wort)}: ${esc(f.name)}</h3>${html}</article>`;
+  });
+  return `<header><img src="${SYMBOL("hand.svg")}" alt=""><div><h1>Mit echten Dingen</h1><p>Kleine Spiele zu dem, was gerade dran ist</p></div></header>
+    <div class="raster${artikel.length === 1 ? " eins" : ""}">${artikel.join("") || `<p>Gerade ist kein Thema dran.</p>`}</div>`;
+}
+$("zettel").innerHTML = zettelHtml();
+
+const druckKnopf = $("drucken");
+druckKnopf.hidden = !kann.drucken || !teile.dran.length;
+druckKnopf.addEventListener("click", () => {
+  if (!drucke()) protokoll("mit-echten-dingen: Drucken ging nicht");
+});
+document.body.dataset.bereit = "1"; // für die Browser-Prüfung
+</script>
+</body>
+</html>
