@@ -10,28 +10,28 @@ quellen:
 ---
 # Wörter in Silben klatschen
 
-## Am Tisch: Eine Klammer für jede Silbe
+## Am Tisch: Wer holt den Löffel?
 
-Ihr braucht: Wäscheklammern, Dinge vom Tisch (Löffel, Becher, Teller)
+Ihr braucht: Wäscheklammern, den Tisch vor dem Essen
 
-1. Nehmt ein Ding und sagt seinen Namen langsam: „Löf-fel“.
-2. Klatscht bei jeder Silbe einmal in die Hände.
-3. Legt für jeden Klatscher eine Wäscheklammer neben das Ding.
-4. Nehmt das nächste Ding.
+1. Schaut, was noch fehlt, zum Beispiel ein Löffel.
+2. Sprecht den Namen langsam und klatscht bei jeder Silbe: „Löf-fel“.
+3. Legt für jede Silbe eine Klammer vor die nächste Person am Tisch, reihum. Fangt bei dem an, der das Ding genannt hat.
+4. Wer die letzte Klammer bekommt, holt das Ding. Die Klammern kommen zurück in die Mitte.
 
-**Darauf kommt es an:** Jede Silbe ist ein Klatscher. Wer das Wort langsam spricht, hört die Silben deutlich.
+**Darauf kommt es an:** Jede Silbe ist eine Klammer. „Löf-fel“ hat zwei Silben, „Be-cher“ auch, „Glas“ hat eine. Wer langsam spricht, hört die Silben deutlich.
 
-**Leichter:** nur Wörter mit einer oder zwei Silben. **Schwerer:** lange Wörter wie „Mar-me-la-de“, danach die Dinge nach der Zahl der Klammern ordnen.
+**Leichter:** nur Dinge mit einer oder zwei Silben. **Schwerer:** lange Wörter wie „Ser-vi-et-te“ oder „Mar-me-la-de“, und vorher sagen, wer die letzte Klammer bekommt.
 
-## In Bewegung: Ein Schritt für jede Silbe
+## In Bewegung: Wer sucht beim Verstecken?
 
-Ihr braucht: etwas Platz im Zimmer oder im Flur
+Ihr braucht: Platz zum Verstecken
 
-1. Einer nennt ein Ding im Raum, zum Beispiel „Fens-ter“.
-2. Sprecht das Wort zusammen und macht bei jeder Silbe einen großen Schritt.
-3. Schwingt dabei die Arme mit, wie beim Gehen.
-4. Wie viele Schritte waren es? Dann ist der andere dran.
+1. Stellt euch im Kreis auf.
+2. Sprecht den Vers langsam zusammen: „E-ne, me-ne, muh, und su-chen tust du.“
+3. Einer tippt bei jeder Silbe reihum auf eine Schulter, auch auf die eigene.
+4. Auf wen die letzte Silbe fällt, der sucht. Die anderen verstecken sich.
 
-**Darauf kommt es an:** Jede Silbe ist ein Schritt. „Tür“ ist ein Schritt, „Fens-ter“ sind zwei, „Ka-len-der“ sind drei.
+**Darauf kommt es an:** Jede Silbe ist ein Tipp. „Su-chen“ sind zwei Tipps, „muh“ ist einer. Wer „su-chen“ nur einmal tippt, landet bei einer anderen Person.
 
-**Leichter:** Einer spricht das Wort vor, der andere geht mit. **Schwerer:** die Namen der Familie in Silben gehen.
+**Leichter:** statt des Verses ein kurzes Wort, zum Beispiel „Ba-na-ne“. **Schwerer:** mit einem langen Namen abzählen, zum Beispiel „Ma-xi-mi-li-an“ oder „A-le-xan-dra“.
