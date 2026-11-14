@@ -10,15 +10,15 @@ quellen:
 ---
 # Wie viele für alle?
 
-## Am Tisch: Essen auftun
+## Am Tisch: Kochen und auftun
 
-Ihr braucht: das Essen, Teller für alle.
+Ihr braucht: den Vorrat, Teller für alle.
 
-1. Zählt, wer mitisst, etwa 7. Einigt euch: jeder 4 Kartoffeln.
-2. Rechnet: „7 mal 4 ist gleich 28.“ Holt 28 aus dem Vorrat.
-3. Ist die Menge schon da, rechnet umgekehrt: 24 Erdbeeren, 6 Teller. „24 geteilt durch 6 ist gleich 4.“
-4. Legt auf und zählt nach. Was übrig bleibt, kommt in die Mitte.
+1. Vor dem Kochen: Zählt, wer mitisst, etwa 7. Einigt euch: jeder 4 Kartoffeln.
+2. Rechnet: „7 mal 4 ist gleich 28.“ Reicht der Vorrat? Zählt 28 ab.
+3. Zum Nachtisch sind 24 Erdbeeren da, 6 Teller. Umgekehrt: „24 geteilt durch 6 ist gleich 4.“
+4. Legt auf, zählt nach. Der Rest kommt in die Mitte.
 
 **Darauf kommt es an:** Mal und geteilt gehören zusammen. Aus 7 mal 4 ist gleich 28 folgt: 28 geteilt durch 7 ist gleich 4, 28 geteilt durch 4 ist gleich 7.
 
-**Leichter:** je 2, 5 oder 10 Stück; von 5 mal aus rechnen (6 mal 7 ist 5 mal 7 und noch 7). **Schwerer:** zwei Dinge für dasselbe Essen, etwa je 3 Pfannkuchen und je 8 Erdbeeren.
+**Leichter:** je 2, 5 oder 10 Stück; von 5 mal aus (6 mal 7 ist gleich 5 mal 7 und noch 7). **Schwerer:** zwei Dinge zum selben Essen, etwa je 3 Pfannkuchen und je 8 Erdbeeren.
