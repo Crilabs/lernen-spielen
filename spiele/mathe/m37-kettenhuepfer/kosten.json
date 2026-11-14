@@ -206,5 +206,44 @@
   "notiz": "Bau-Agent Befunde B R1",
   "cache_lesen": 10948110,
   "cache_schreiben": 188484
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 60,
+  "ausgabe": 24628,
+  "einheit": "tokens",
+  "menge": 3562892,
+  "notiz": "Prüfer B-Welt, Runde 2",
+  "cache_lesen": 3401483,
+  "cache_schreiben": 136721
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 60,
+  "ausgabe": 30885,
+  "einheit": "tokens",
+  "menge": 3839999,
+  "notiz": "Prüfer B-Didaktik, Runde 2",
+  "cache_lesen": 3655977,
+  "cache_schreiben": 153077
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 104,
+  "ausgabe": 50279,
+  "einheit": "tokens",
+  "menge": 7957751,
+  "notiz": "Prüfer B-Bedienung, Runde 2",
+  "cache_lesen": 7717616,
+  "cache_schreiben": 189752
  }
 ]
