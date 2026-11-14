@@ -12,12 +12,12 @@ quellen:
 
 ## Am Tisch: Wochen bis zum großen Tag
 
-Ihr braucht: einen Wandkalender mit einer Woche je Zeile
+Ihr braucht: einen Wand- oder Familienkalender mit einer Woche je Zeile
 
-1. Sucht einen Tag, auf den ihr wartet, etwa einen Geburtstag.
-2. Legt einen Finger auf heute. Eine Zeile tiefer ist derselbe Wochentag, eine Woche später.
-3. Zählt so die ganzen Wochen bis zu eurem Tag, etwa 7. Am Monatsende blättert ihr um.
-4. Sagt: „5 Wochen sind 35 Tage, 2 Wochen 14. 7 mal 7 ist gleich 35 plus 14, also 49.“
+1. Sucht einen Tag in den nächsten zwei Monaten, auf den ihr wartet, etwa einen Geburtstag.
+2. Legt einen Finger auf heute. Eine Zeile tiefer ist eine Woche später.
+3. Zählt so die ganzen Wochen bis zu eurem Tag. Am Monatsende blättert ihr um.
+4. Rechnet aus, wie viele Tage eure Wochen sind. Setzt sie aus 5 Wochen, 2 Wochen und 1 Woche zusammen.
 5. Übrige Tage zählt ihr dazu.
 
 **Darauf kommt es an:** Eine Woche hat sieben Tage. 5 mal 7 ist gleich 35, 2 mal 7 ist gleich 14. Daraus setzt ihr die anderen zusammen, etwa 6 mal 7: 35 plus 7.

@@ -20,7 +20,7 @@ const eck = (/** @type {number} */ x, /** @type {number} */ y, /** @type {number
 /** Die Monatsübersicht: 5 Wochen-Zeilen mit je 7 Tagen, ein Tag umkringelt. */
 function monat() {
   const teile = [];
-  const x0 = 11.5, y0 = 56, b = 7.2, h = 6.6, luft = 1.2;
+  const x0 = 10.6, y0 = 54, b = 6.8, h = 6.4, luft = 1.2;
   for (let zeile = 0; zeile < 5; zeile++) {
     for (let tag = 0; tag < 7; tag++) {
       const farbe = tag >= 5 ? heller(KRINGEL, 0.72) : dunkler(BLATT, 0.08);
