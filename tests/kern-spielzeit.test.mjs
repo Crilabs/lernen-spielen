@@ -15,17 +15,18 @@ const min = (m) => m * 60;
 
 test("Standard: alles aus, alle Tage erlaubt", () => {
   assert.deepEqual(regeln(undefined), STANDARD);
-  assert.deepEqual(STANDARD, { tage: [1, 2, 3, 4, 5, 6, 7], proTag: null, proWoche: null, ausgeblendet: false });
+  assert.deepEqual(STANDARD, { tage: [1, 2, 3, 4, 5, 6, 7], proTag: null, proWoche: null, von: null, bis: null, ausgeblendet: false });
   const l = lage(regeln(undefined), aktuell({}, SA), SA);
   assert.equal(l.frei, true);
   assert.equal(l.rest, Infinity);
 });
 
 test("regeln: unbrauchbare Werte fallen auf den Standard zurück", () => {
-  assert.deepEqual(regeln({ tage: [0, 3, 3, 9, "x", 1], proTag: -5, proWoche: "viel", ausgeblendet: "ja" }),
-    { tage: [1, 3], proTag: null, proWoche: null, ausgeblendet: false });
-  assert.deepEqual(regeln({ tage: [], proTag: 30, proWoche: 120, ausgeblendet: true }),
-    { tage: [], proTag: 30, proWoche: 120, ausgeblendet: true });
+  assert.deepEqual(regeln({ tage: [0, 3, 3, 9, "x", 1], proTag: -5, proWoche: "viel", von: 2000, bis: "x", ausgeblendet: "ja" }),
+    { tage: [1, 3], proTag: null, proWoche: null, von: null, bis: null, ausgeblendet: false });
+  assert.deepEqual(regeln({ tage: [], proTag: 30, proWoche: 120, von: 0, bis: 1140, ausgeblendet: true }),
+    { tage: [], proTag: 30, proWoche: 120, von: 0, bis: 1140, ausgeblendet: true });
+  assert.deepEqual(regeln({ von: 900, bis: 900 }).bis, null, "Ende nicht nach dem Beginn: ohne Ende");
 });
 
 test("Tag, Wochentag und ISO-Woche nach Ortszeit", () => {
@@ -135,4 +136,43 @@ test("warnen: unter fünf Minuten Rest einmal je Tag, nie ohne Grenze", () => {
   assert.equal(warnen(lage(r, s, SA), s, SA), false, "Zeit um: dann Schluss statt Warnung");
   const ohne = zaehle(aktuell({}, SA), min(500), SA);
   assert.equal(warnen(lage(STANDARD, ohne, SA), ohne, SA), false);
+});
+
+// --- Uhrzeit: frühester Beginn, spätestes Ende (Minuten seit Mitternacht) ---------------------------
+const um = (h, m = 0) => new Date(2026, 10, 14, h, m);
+
+test("Uhrzeit: vor dem Beginn grund frueh, nach dem Ende grund spaet", () => {
+  const r = regeln({ von: 14 * 60, bis: 19 * 60 });
+  const s = aktuell({}, SA);
+  assert.equal(lage(r, s, um(13, 59)).grund, "frueh");
+  assert.equal(lage(r, s, um(14)).frei, true);
+  assert.equal(lage(r, s, um(18, 59)).frei, true);
+  assert.equal(lage(r, s, um(19)).grund, "spaet");
+  assert.equal(lage(r, s, um(23)).grund, "spaet");
+});
+
+test("Uhrzeit: der Rest reicht höchstens bis zum Ende, auch ohne Minutengrenze", () => {
+  const r = regeln({ bis: 19 * 60 });
+  assert.equal(lage(r, aktuell({}, SA), um(18, 50)).rest, min(10));
+  const mitTag = regeln({ bis: 19 * 60, proTag: 60 });
+  assert.equal(lage(mitTag, aktuell({}, SA), um(18, 50)).rest, min(10));
+  assert.equal(lage(mitTag, aktuell({}, SA), um(10)).rest, min(60));
+});
+
+test("Uhrzeit: Zugabe gibt Minuten, verschiebt aber kein Ende", () => {
+  const r = regeln({ bis: 19 * 60 });
+  const s = gibZugabe(aktuell({}, SA), 15, SA);
+  assert.equal(lage(r, s, um(19, 5)).grund, "spaet");
+});
+
+test("Uhrzeit: Vorwarnung kurz vor dem Ende", () => {
+  const r = regeln({ bis: 19 * 60 });
+  const s = aktuell({}, SA);
+  assert.equal(warnen(lage(r, s, um(18, 56)), s, um(18, 56)), true);
+  assert.equal(warnen(lage(r, s, um(18, 50)), s, um(18, 50)), false);
+});
+
+test("Uhrzeit: andere Gründe gehen vor (Tag gesperrt, ausgeblendet)", () => {
+  assert.equal(lage(regeln({ von: 14 * 60, tage: [1] }), aktuell({}, SA), um(10)).grund, "tag");
+  assert.equal(lage(regeln({ von: 14 * 60, ausgeblendet: true }), aktuell({}, SA), um(10)).grund, "aus");
 });

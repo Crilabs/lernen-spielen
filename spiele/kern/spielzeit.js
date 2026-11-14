@@ -1,18 +1,21 @@
 // Spielzeit: die Grenzen der Eltern für digitale Spiele (Spec 2026-11-14-spielzeit). Ohne DOM und ohne Speicher;
 // die Uhrzeit kommt immer von außen, damit Mitternacht und Wochenwechsel testbar sind.
 // Regeln (Einstellung "spielzeit", am Profil): erlaubte Wochentage, höchstens Minuten am Tag und in der Woche,
-// digitale Spiele ganz ausgeblendet. Im Standard ist alles aus: die App selbst setzt keine Zeit fest (L10).
+// frühester Beginn und spätestes Ende (Minuten seit Mitternacht), digitale Spiele ganz ausgeblendet. Im Standard ist alles aus: die App selbst setzt keine Zeit fest (L10).
 // Stand ("spielzeit-stand", am Profil): gespielte Sekunden und Zugabe je Tag, nur die laufende ISO-Woche (Mo–So).
 // Startseite, Regal, Fach-Seite, „Mit echten Dingen“ und Elternbereich zählen nie und sind nie gesperrt.
 
-/** @typedef {{ tage: number[], proTag: number | null, proWoche: number | null, ausgeblendet: boolean }} Regeln */
+/** @typedef {{ tage: number[], proTag: number | null, proWoche: number | null, von: number | null, bis: number | null,
+ *   ausgeblendet: boolean }} Regeln  von/bis: Minuten seit Mitternacht (Ortszeit), null = ohne */
 /** @typedef {{ sekunden: number, zugabe: number }} Tag */
 /** @typedef {{ woche: string, tage: Record<string, Tag>, gewarnt?: string }} Stand */
-/** @typedef {{ frei: boolean, grund: "tag" | "tag-voll" | "woche-voll" | "aus" | null, rest: number,
+/** @typedef {{ frei: boolean, grund: "tag" | "tag-voll" | "woche-voll" | "frueh" | "spaet" | "aus" | null, rest: number,
  *   heute: number, woche: number, zugabe: number }} Lage  rest, heute, woche in Sekunden; zugabe in Minuten */
 
 /** @type {Readonly<Regeln>} */
-export const STANDARD = Object.freeze({ tage: [1, 2, 3, 4, 5, 6, 7], proTag: null, proWoche: null, ausgeblendet: false });
+export const STANDARD = Object.freeze({
+  tage: [1, 2, 3, 4, 5, 6, 7], proTag: null, proWoche: null, von: null, bis: null, ausgeblendet: false,
+});
 
 /** Minuten, die „Heute mehr“ dazugibt. */
 export const ZUGABE_MINUTEN = 15;
@@ -21,6 +24,8 @@ export const WARNEN_UNTER = 5 * 60;
 
 /** @param {unknown} v @returns {number | null} */
 const minuten = (v) => (typeof v === "number" && Number.isFinite(v) && v > 0 ? Math.round(v) : null);
+/** Uhrzeit als Minuten seit Mitternacht (0 … 1439), sonst null. @param {unknown} v @returns {number | null} */
+const uhrzeit = (v) => (Number.isInteger(v) && /** @type {number} */ (v) >= 0 && /** @type {number} */ (v) < 1440 ? /** @type {number} */ (v) : null);
 
 /**
  * Bereinigt die gespeicherte Einstellung; Unbrauchbares fällt auf den Standard zurück.
@@ -32,7 +37,10 @@ export function regeln(roh) {
   const tage = Array.isArray(r.tage)
     ? [...new Set(r.tage.filter((/** @type {any} */ t) => Number.isInteger(t) && t >= 1 && t <= 7))].sort()
     : [...STANDARD.tage];
-  return { tage, proTag: minuten(r.proTag), proWoche: minuten(r.proWoche), ausgeblendet: r.ausgeblendet === true };
+  const von = uhrzeit(r.von);
+  let bis = uhrzeit(r.bis);
+  if (von !== null && bis !== null && bis <= von) bis = null; // Ende nicht nach dem Beginn: ohne Ende
+  return { tage, proTag: minuten(r.proTag), proWoche: minuten(r.proWoche), von, bis, ausgeblendet: r.ausgeblendet === true };
 }
 
 /** "2026-11-14" in Ortszeit. @param {Date} jetzt */
@@ -110,7 +118,8 @@ export const gibZugabe = (stand, minutenDazu, jetzt) =>
 /**
  * Darf das Kind jetzt ein digitales Spiel spielen, und wie viel ist übrig?
  * Heute erlaubt = min(Tagesgrenze, Rest der Woche ohne heute) + Zugabe; an einem gesperrten Tag ist die
- * Tagesgrenze 0. Ausgeblendet schlägt alles, auch die Zugabe.
+ * Tagesgrenze 0. Ausgeblendet schlägt alles, auch die Zugabe. Außerhalb von Beginn und Ende ist nie frei (die
+ * Zugabe gibt Minuten, verschiebt aber keine Uhrzeit); der Rest reicht höchstens bis zum Ende.
  * @param {Regeln} r
  * @param {Stand} stand
  * @param {Date} jetzt
@@ -128,13 +137,17 @@ export function lage(r, stand, jetzt) {
   const tagGrenze = tagErlaubt ? (r.proTag === null ? Infinity : r.proTag * 60) : 0;
   const wochenRest = r.proWoche === null ? Infinity : Math.max(0, r.proWoche * 60 - (woche - heute));
   const erlaubt = Math.min(tagGrenze, wochenRest) + t.zugabe * 60;
-  const rest = Math.max(0, erlaubt - heute);
+  const jetztSek = jetzt.getHours() * 3600 + jetzt.getMinutes() * 60 + jetzt.getSeconds();
+  const bisEnde = r.bis === null ? Infinity : r.bis * 60 - jetztSek;
+  const rest = Math.max(0, Math.min(erlaubt - heute, bisEnde));
+  if (!tagErlaubt && t.zugabe === 0) return { frei: false, grund: "tag", rest: 0, ...basis };
+  if (r.von !== null && jetztSek < r.von * 60) return { frei: false, grund: "frueh", rest: 0, ...basis };
+  if (bisEnde <= 0) return { frei: false, grund: "spaet", rest: 0, ...basis };
   if (rest > 0) return { frei: true, grund: null, rest, ...basis };
 
   /** @type {Lage["grund"]} */
   let grund = "tag-voll";
-  if (!tagErlaubt && t.zugabe === 0) grund = "tag";
-  else if (wochenRest < tagGrenze) grund = "woche-voll";
+  if (wochenRest < tagGrenze) grund = "woche-voll";
   return { frei: false, grund, rest: 0, ...basis };
 }
 

@@ -19,6 +19,7 @@ export const SAETZE = {
   bald: "Gleich ist für heute Schluss.",
   schlussMorgen: "Für heute ist das Spielen fertig. Morgen geht es weiter.",
   schluss: "Für heute ist das Spielen fertig.",
+  spaeter: "Das Spielen geht heute später los.",
 };
 
 /** @type {import("../kern/spielzeit.js").Stand | null} Stand, solange der Takt läuft */
@@ -42,6 +43,7 @@ export async function spielzeitLage(jetzt = new Date()) {
  */
 export function schlussSatz(z) {
   if (z.lage.frei || z.lage.grund === "aus") return null;
+  if (z.lage.grund === "frueh") return SAETZE.spaeter;
   return z.morgen ? SAETZE.schlussMorgen : SAETZE.schluss;
 }
 
@@ -55,6 +57,7 @@ export function sage(satz) {
     return sageEinmal(satz, () => sprich("Für heute ist das Spielen fertig. Morgen geht es weiter."));
   }
   if (satz === SAETZE.schluss) return sageEinmal(satz, () => sprich("Für heute ist das Spielen fertig."));
+  if (satz === SAETZE.spaeter) return sageEinmal(satz, () => sprich("Das Spielen geht heute später los."));
   return Promise.resolve(null);
 }
 

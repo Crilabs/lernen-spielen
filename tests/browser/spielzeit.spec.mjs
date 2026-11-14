@@ -121,6 +121,20 @@ try {
       await kontext.close();
     }
 
+    // Uhrzeit: vor dem Beginn „später los“, nach dem Ende Schluss (von 23:59 bzw. bis 0:01 trifft zu jeder Laufzeit).
+    for (const [regel, erwartet, name] of [
+      [{ von: 1439 }, "Das Spielen geht heute später los.", "vor dem Beginn"],
+      [{ bis: 1 }, "Für heute ist das Spielen fertig. Morgen geht es weiter.", "nach dem Ende"],
+    ]) {
+      const { kontext, seite, konsole } = await neueSeite(browser, groesse, { "lernstand-kind-1-einstellungen": einst(regel) });
+      await seite.goto(BASIS + "index.html");
+      await seite.waitForFunction(() => !document.getElementById("schluss").hidden, null, { timeout: 5000 }).catch(() => {});
+      const text = await seite.locator("#schluss").textContent();
+      pruefe(L, `Uhrzeit ${name}: Satz auf der Startseite`, text === erwartet, text);
+      pruefe(L, `Uhrzeit ${name}: ohne Konsolenfehler`, konsole.length === 0, konsole.join(" | "));
+      await kontext.close();
+    }
+
     // 3. Pause: Satz und Schluss ohne Weiter; amRundenende warnt einmal je Tag.
     {
       const vor = await neueSeite(browser, groesse);
@@ -200,6 +214,12 @@ try {
       await klick('ls-knopf[name="Samstag: erlaubt"]');
       await klick('ls-knopf[name="In der Woche: mehr"]');
       await seite.waitForTimeout(100);
+      await klick('ls-knopf[name="Frühestens ab: später"]');
+      await seite.waitForTimeout(100);
+      await klick('ls-knopf[name="Frühestens ab: später"]');
+      await seite.waitForTimeout(100);
+      await klick('ls-knopf[name="Spätestens bis: früher"]');
+      await seite.waitForTimeout(100);
       await klick('ls-knopf[wort="Ausblenden"]');
       await seite.waitForTimeout(100);
       await klick('ls-knopf[wort="Wieder zeigen"]');
@@ -209,10 +229,11 @@ try {
       const e = (await lies(seite, "lernstand-kind-1-einstellungen"))?.spielzeit;
       pruefe(L, "Eltern: Tag 15 min, Woche 30 min, Samstag aus, nicht ausgeblendet",
         e?.proTag === 15 && e?.proWoche === 30 && !e.tage.includes(6) && e.tage.length === 6 && e.ausgeblendet === false, JSON.stringify(e));
+      pruefe(L, "Eltern: Uhrzeit ab 6:30 bis 22:00 Uhr", e?.von === 390 && e?.bis === 1320, JSON.stringify(e));
       const st = await lies(seite, "lernstand-kind-1-spielzeit-stand");
       pruefe(L, "Eltern: Zugabe 15 Minuten für heute", st?.tage?.[heute]?.zugabe === 15, JSON.stringify(st));
       const text = await seite.locator("#inhalt").innerText();
-      pruefe(L, "Eltern: Stand zeigt Grenze und Zugabe", /Heute: 0 Minuten von 15 Minuten\./.test(text) && /Heute dazugegeben: 15 Minuten\./.test(text), text.slice(0, 400));
+      pruefe(L, "Eltern: Stand zeigt Grenze und Zugabe", /Heute: 0 Minuten von 15 Minuten\./.test(text) && /Heute dazugegeben: 15 Minuten\./.test(text) && /Uhrzeit: 6:30 Uhr bis 22:00 Uhr\./.test(text), text.slice(0, 400));
       const breit = await seite.evaluate(() => { const i = document.getElementById("inhalt"); return i.scrollWidth <= i.clientWidth + 1; });
       pruefe(L, "Eltern: nichts ragt waagrecht hinaus", breit);
       pruefe(L, "Eltern ohne Konsolenfehler", konsole.length === 0, konsole.join(" | "));

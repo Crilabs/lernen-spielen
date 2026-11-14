@@ -621,11 +621,16 @@ async function geschichten(spalte) {
 const WOCHENTAGE = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
 const TAG_WERTE = [null, ...Array.from({ length: 23 }, (_, i) => 10 + 5 * i)];      // aus, 10 … 120
 const WOCHE_WERTE = [null, ...Array.from({ length: 55 }, (_, i) => 30 + 15 * i)];   // aus, 30 … 840
+const UHR_WERTE = Array.from({ length: 33 }, (_, i) => 360 + 30 * i);                 // 6:00 … 22:00 Uhr
+// 870 → "14:30 Uhr"
+const uhr = (min) => `${Math.floor(min / 60)}:${String(min % 60).padStart(2, "0")} Uhr`;
 const LAGE_TEXT = {
   frei: "Ihr Kind kann gerade digitale Spiele spielen.",
   tag: "Heute ist kein Spieltag.",
   "tag-voll": "Die Spielzeit für heute ist um.",
   "woche-voll": "Die Spielzeit für diese Woche ist um.",
+  frueh: "Digitale Spiele gehen heute erst später los.",
+  spaet: "Die Spielzeit für heute ist vorbei.",
   aus: "Digitale Spiele sind ausgeblendet.",
 };
 // 75 → "1 Stunde 15 Minuten"; 1 → "1 Minute"
@@ -663,20 +668,24 @@ async function spielzeit(spalte) {
   // Grenzen
   const grenzenFlaeche = el("section", null, "flaeche");
   grenzenFlaeche.setAttribute("aria-label", "Höchstens");
+  // Uhrzeit
+  const uhrFlaeche = el("section", null, "flaeche");
+  uhrFlaeche.setAttribute("aria-label", "Uhrzeit");
   // Ausblenden
   const ausFlaeche = el("section", null, "flaeche");
   ausFlaeche.setAttribute("aria-label", "Digitale Spiele ausblenden");
 
-  const grenze = (titel, wert, werte, feld) => {
+  // Eine Zeile Wert mit zwei Knöpfen; null in werte heißt „aus“. zeige formatiert den Wert.
+  const grenze = (titel, wert, werte, feld, { zeige = dauer, worte = ["Weniger", "Mehr"] } = {}) => {
     const zeile = el("div", null, "grenze");
     const links = el("div", null, "spalten");
-    links.append(el("h4", titel), el("p", wert === null ? "Aus" : dauer(wert), "wert"));
+    links.append(el("h4", titel), el("p", wert === null ? "Aus" : zeige(wert), "wert"));
     const i = Math.max(0, werte.indexOf(wert));
-    const weniger = knopf("Weniger", { klasse: i === 0 ? "aus" : "" });
-    const mehr = knopf("Mehr", { klasse: i === werte.length - 1 ? "aus" : "" });
-    weniger.setAttribute("name", titel + ": weniger");
-    mehr.setAttribute("name", titel + ": mehr");
-    const neu = (w) => setze({ [feld]: w }, `${titel}: ${w === null ? "aus" : dauer(w)}.`);
+    const weniger = knopf(worte[0], { klasse: i === 0 ? "aus" : "" });
+    const mehr = knopf(worte[1], { klasse: i === werte.length - 1 ? "aus" : "" });
+    weniger.setAttribute("name", `${titel}: ${worte[0].toLowerCase()}`);
+    mehr.setAttribute("name", `${titel}: ${worte[1].toLowerCase()}`);
+    const neu = (w) => setze({ [feld]: w }, `${titel}: ${w === null ? "aus" : zeige(w)}.`);
     weniger.addEventListener("click", () => { if (i > 0) neu(werte[i - 1]); });
     mehr.addEventListener("click", () => { if (i < werte.length - 1) neu(werte[i + 1]); });
     zeile.append(links, reihe(weniger, mehr));
@@ -693,6 +702,10 @@ async function spielzeit(spalte) {
       el("p", l.frei ? LAGE_TEXT.frei : LAGE_TEXT[l.grund], "lage"),
       el("p", regel.proTag === null ? `Heute gespielt: ${dauer(heute)}.` : `Heute: ${dauer(heute)} von ${dauer(regel.proTag)}.`),
       el("p", regel.proWoche === null ? `Diese Woche gespielt: ${dauer(woche)}.` : `Diese Woche: ${dauer(woche)} von ${dauer(regel.proWoche)}.`));
+    if (regel.von !== null || regel.bis !== null) {
+      zeilen.append(el("p", regel.von !== null && regel.bis !== null ? `Uhrzeit: ${uhr(regel.von)} bis ${uhr(regel.bis)}.`
+        : regel.von !== null ? `Uhrzeit: ab ${uhr(regel.von)}.` : `Uhrzeit: bis ${uhr(regel.bis)}.`));
+    }
     if (l.zugabe) zeilen.append(el("p", `Heute dazugegeben: ${dauer(l.zugabe)}.`, "leise"));
     const mehr = knopf(`Heute ${ZUGABE_MINUTEN} Minuten mehr`, { klasse: regel.ausgeblendet ? "aus" : "" });
     mehr.addEventListener("click", async () => {
@@ -726,6 +739,14 @@ async function spielzeit(spalte) {
       grenze("In der Woche", regel.proWoche, WOCHE_WERTE, "proWoche"),
       el("p", "Gezählt wird nur, solange ein digitales Spiel offen ist und Ihr Kind darin etwas tut. Sind weniger als fünf Minuten übrig, sagt der Erzähler am Ende einer Runde einmal: „Gleich ist für heute Schluss.“", "leise klein"));
 
+    // Beginn immer vor dem Ende: die Liste des einen endet vor dem Wert des anderen. „Aus“ liegt beim Beginn vor
+    // 6:00 Uhr, beim Ende nach 22:00 Uhr (Später aus „aus“ heißt 6:00, Früher aus „aus“ heißt 22:00).
+    const uhrArt = { zeige: uhr, worte: ["Früher", "Später"] };
+    uhrFlaeche.replaceChildren(el("h3", "Uhrzeit"),
+      grenze("Frühestens ab", regel.von, [null, ...UHR_WERTE.filter((w) => regel.bis === null || w < regel.bis)], "von", uhrArt),
+      grenze("Spätestens bis", regel.bis, [...UHR_WERTE.filter((w) => regel.von === null || w > regel.von), null], "bis", uhrArt),
+      el("p", "Vor dem Beginn und nach dem Ende gibt es keine digitalen Spiele. Läuft gerade eine Runde, spielt Ihr Kind sie zu Ende. „Heute mehr“ gibt Minuten dazu, verschiebt aber keine Uhrzeit.", "leise klein"));
+
     const schalter = knopf(regel.ausgeblendet ? "Wieder zeigen" : "Ausblenden", { art: regel.ausgeblendet ? "haupt" : undefined });
     schalter.setAttribute("aria-pressed", String(regel.ausgeblendet));
     schalter.addEventListener("click", () => setze({ ausgeblendet: !regel.ausgeblendet },
@@ -737,7 +758,7 @@ async function spielzeit(spalte) {
       reihe(schalter));
   }
   zeichne();
-  spalte.append(standFlaeche, tageFlaeche, grenzenFlaeche, ausFlaeche, status);
+  spalte.append(standFlaeche, tageFlaeche, grenzenFlaeche, uhrFlaeche, ausFlaeche, status);
 }
 
 // ---------- Gerät ----------
