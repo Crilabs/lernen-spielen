@@ -44,7 +44,7 @@
     {
       "id": "sprechen",
       "name": "Sprechen und Zuhören",
-      "symbol": "symbole/stimme.svg",
+      "symbol": "symbole/sprechen.svg",
       "farbe": "#F08A4B",
       "schatten": "#C2652A",
       "tint": "#FFE9DB"

@@ -266,7 +266,6 @@ body {
     </section>
   </div>
 </main>
-<ls-anregung id="anregung"></ls-anregung>
 
 <script type="module">
 import { sperreTouch, protokoll, esc, linkKlick } from "./lernspiel.js";
@@ -280,7 +279,6 @@ import "./rahmen/leiste.js";
 import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
 import "./rahmen/wortart.js";
-import "./rahmen/anregung.js";
 import { spielzeitLage } from "./rahmen/spielzeit.js";
 
 const ZUSTAND = { "kann-ich": "kann ich", dran: "dran", "in-sicht": "in Sicht" };
@@ -338,7 +336,6 @@ async function start() {
   const flaeche = document.getElementById("flaeche"), zeiger = flaeche.querySelector(".zeiger");
   const nameFeld = document.getElementById("name"), spieleFeld = document.getElementById("spiele");
   const hoeren = document.getElementById("hoeren"), echt = document.getElementById("echt");
-  const anregung = document.getElementById("anregung");
   let jetzt = null; // offene Station
 
   function zeigeZeiger() {
@@ -387,8 +384,9 @@ async function start() {
     sagThema(s);
   }));
   hoeren.addEventListener("click", () => { if (jetzt?.sprich && leiste.ton) sprich(jetzt.sprich); });
+  // Mit echten Dingen: eigene Seite mit der Anleitung (docs/mit-echten-dingen.md)
   echt.addEventListener("click", () => {
-    if (jetzt?.eltern) anregung.oeffne({ titel: jetzt.name, text: jetzt.eltern });
+    if (jetzt?.eltern) location.href = `echt.html?thema=${encodeURIComponent(jetzt.id)}`;
   });
 
   // Beim Öffnen ist das erste Thema „dran“ (sonst das erste in Sicht) schon aufgeschlagen, ohne zu sprechen, und
