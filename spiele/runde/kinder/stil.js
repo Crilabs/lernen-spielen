@@ -43,7 +43,7 @@ export const zusammen = (...teile) => ({ svg: teile.map((t) => t.svg).join(""), 
  * @param {string} geo Element ohne Füllung, z. B. `path d="…"` @param {string} farbe
  * @param {[number, number]} licht Punkt oben links in der Fläche
  * @param {{s?: number, trenn?: boolean, kontur?: boolean, glanz?: boolean}} [o] kontur: false = trägt nicht zur Silhouette bei;
- *   glanz: false = ohne Lichtstufe
+ *   glanz: true = zusätzliche Lichtstufe (nur für einzelne, große Flächen)
  * @returns {Stueck}
  */
 export function form(geo, farbe, licht, o = {}) {
@@ -53,7 +53,7 @@ export function form(geo, farbe, licht, o = {}) {
   return {
     svg: `<${geo} fill="${dunkler(farbe, 0.3)}" stroke="none"/>`
       + `<${geo} fill="${farbe}" stroke="none" transform="translate(${z(lx)} ${z(ly)}) scale(${s}) translate(${z(-lx)} ${z(-ly)})"/>`
-      + (o.glanz === false ? "" : `<${geo} fill="${heller(farbe)}" stroke="none" opacity="0.85"`
+      + (!o.glanz ? "" : `<${geo} fill="${heller(farbe)}" stroke="none" opacity="0.85"`
         + ` transform="translate(${z(lx)} ${z(ly)}) scale(${z(g)}) translate(${z(-lx)} ${z(-ly)})"/>`)
       + (o.trenn ? `<${geo} fill="none" stroke="${dunkler(farbe, 0.5)}" stroke-width="2"/>` : ""),
     kontur: o.kontur === false ? "" : `<${geo}/>`,
@@ -70,7 +70,7 @@ export const naht = (d, farbe, w = 2.2) => ({ svg: `<path d="${d}" fill="none" s
 export const falte = (d, farbe, anteil = 0.32) => ({ svg: `<path d="${d}" fill="${dunkler(farbe, anteil)}" stroke="none"/>`, kontur: "" });
 
 /** Glanzstrich (Haar, Stoff). @param {string} d @param {string} farbe @param {number} [w] */
-export const glanz = (d, farbe, w = 2.6) => ({ svg: `<path d="${d}" fill="none" stroke="${heller(farbe, 0.45)}" stroke-width="${w}" opacity="0.8"/>`, kontur: "" });
+export const glanz = (d, farbe, w = 2.6) => ({ svg: `<path d="${d}" fill="none" stroke="${heller(farbe, 0.3)}" stroke-width="${w}" opacity="0.6"/>`, kontur: "" });
 
 /** Weiche Röte (Wangen). @param {number} cx @param {number} cy @param {number} rx @param {number} ry */
 export const roete = (cx, cy, rx, ry) => ({ svg: `<ellipse cx="${z(cx)}" cy="${z(cy)}" rx="${z(rx)}" ry="${z(ry)}" fill="#E9806A" opacity="0.35" stroke="none"/>`, kontur: "" });
@@ -99,16 +99,35 @@ export function kapsel(p1, r1, p2, r2) {
 }
 
 /**
- * Glied mit Schattenstufe; das Licht liegt auf der linken Seite des Ansatzes.
+ * Glied mit durchgehendem Licht: Schatten als Streifen entlang der rechten Seite, Glanzstrich links,
+ * beides nur auf dem geraden Stück. Die runden Enden bleiben im Grundton – dort stoßen die Nachbarteile an,
+ * so entsteht an Ellbogen und Knie keine Naht. Gleiche Radien an der Stoßstelle wählen.
  * @param {[number, number]} p1 @param {number} r1 @param {[number, number]} p2 @param {number} r2 @param {string} farbe
- * @param {{trenn?: boolean}} [o]
+ * @param {{trenn?: boolean, ansatz?: boolean}} [o] ansatz: Trennbogen auch am Anfang (Schulter vor dem Rumpf)
+ * @returns {Stueck}
  */
 export function glied(p1, r1, p2, r2, farbe, o = {}) {
   const dx = p2[0] - p1[0];
   const dy = p2[1] - p1[1];
   const l = Math.hypot(dx, dy) || 1;
-  const licht = /** @type {[number, number]} */ ([p1[0] - (dy / l) * r1 * 0.5, p1[1] + (dx / l) * r1 * 0.5]);
-  return form(kapsel(p1, r1, p2, r2), farbe, licht, { s: 0.8, trenn: o.trenn });
+  const u = [dx / l, dy / l];
+  const rechts = [dy / l, -dx / l];
+  /** @param {[number, number]} p @param {number} k */
+  const R = (p, k) => `${z(p[0] + rechts[0] * k)} ${z(p[1] + rechts[1] * k)}`;
+  const geo = kapsel(p1, r1, p2, r2);
+  const schatten = `<path d="M${R(p1, r1 * 0.3)} L${R(p2, r2 * 0.3)} L${R(p2, r2)} L${R(p1, r1)} Z" fill="${dunkler(farbe, 0.28)}" stroke="none"/>`;
+  const a = [p1[0] + u[0] * 2, p1[1] + u[1] * 2];
+  const b = [p2[0] - u[0] * 2, p2[1] - u[1] * 2];
+  const glanzlinie = `<path d="M${z(a[0] - rechts[0] * r1 * 0.6)} ${z(a[1] - rechts[1] * r1 * 0.6)} L${z(b[0] - rechts[0] * r2 * 0.6)} ${z(b[1] - rechts[1] * r2 * 0.6)}"`
+    + ` fill="none" stroke="${heller(farbe, 0.32)}" stroke-width="${z(Math.min(r1, r2) * 0.3)}" opacity="0.75"/>`;
+  /** @param {[number, number]} p @param {number} k */
+  const L = (p, k) => `${z(p[0] - rechts[0] * k)} ${z(p[1] - rechts[1] * k)}`;
+  // Trennlinie nur an den Seitenkanten (und als Bogen am Ansatz), nie am Ende: dort schließt das nächste Teil an.
+  const trenn = o.trenn
+    ? `<path d="M${L(p1, r1)} L${L(p2, r2)} M${R(p1, r1)} L${R(p2, r2)}${o.ansatz ? ` M${R(p1, r1)} A${z(r1)} ${z(r1)} 0 0 0 ${L(p1, r1)}` : ""}"`
+      + ` fill="none" stroke="${dunkler(farbe, 0.5)}" stroke-width="2"/>`
+    : "";
+  return { svg: `<${geo} fill="${farbe}" stroke="none"/>` + schatten + glanzlinie + trenn, kontur: `<${geo}/>` };
 }
 
 /**
@@ -125,16 +144,17 @@ export function haende(w, haut, daumen) {
     const a = (grad * Math.PI) / 180;
     const p1 = /** @type {[number, number]} */ ([mx + Math.sin(a) * 4, my + Math.cos(a) * 4]);
     const p2 = /** @type {[number, number]} */ ([mx + Math.sin(a) * (6 + laenge), my + Math.cos(a) * (6 + laenge)]);
-    return form(kapsel(p1, r, p2, r * 0.9), haut, p1, { s: 0.8 });
+    return flach(kapsel(p1, r, p2, r * 0.9), haut);
   };
-  const d = form(kapsel([mx + daumen * 5, my - 3], 4, [mx + daumen * 12, my + 3], 3.4), haut, [mx + daumen * 5, my - 3], { s: 0.8 });
-  const teller = form(oval(mx, my, 9, 9), haut, [mx - 3, my - 4], { s: 0.84 });
-  const faust = zusammen(
-    form(oval(mx, my + 1, 9.5, 9), haut, [mx - 3, my - 3], { s: 0.84 }),
-    naht(`M${z(mx - 5)} ${z(my + 4)} Q${z(mx)} ${z(my + 7)} ${z(mx + 5)} ${z(my + 4)}`, haut),
-  );
+  const d = flach(kapsel([mx + daumen * 5, my - 3], 4, [mx + daumen * 12, my + 3], 3.4), haut);
+  const teller = flach(oval(mx, my, 9, 9), haut);
+  const schatten = falte(`M${z(mx + 2)} ${z(my - 8)} C${z(mx + 9)} ${z(my - 5)} ${z(mx + 10)} ${z(my + 5)} ${z(mx + 4)} ${z(my + 9)}`
+    + ` C${z(mx + 7)} ${z(my + 3)} ${z(mx + 7)} ${z(my - 3)} ${z(mx + 2)} ${z(my - 8)} Z`, haut, 0.25);
+  const fingerschatten = naht(`M${z(mx - 3)} ${z(my + 8)} l0 4 M${z(mx + 2)} ${z(my + 8)} l0 4`, haut, 1.6);
+  const faust = zusammen(flach(oval(mx, my + 1, 9.5, 9), haut), schatten,
+    naht(`M${z(mx - 5)} ${z(my + 4)} Q${z(mx)} ${z(my + 7)} ${z(mx + 5)} ${z(my + 4)}`, haut));
   return {
-    offen: zusammen(...[-38, -13, 12, 36].map((g, i) => finger(g, i === 0 || i === 3 ? 5 : 7)), teller, d),
+    offen: zusammen(...[-38, -13, 12, 36].map((g, i) => finger(g, i === 0 || i === 3 ? 5 : 7)), teller, d, schatten, fingerschatten),
     faust: zusammen(faust, d),
     zeigen: zusammen(faust, finger(0, 12, 3.6)),
   };
