@@ -121,8 +121,8 @@ Spiels, die noch keine Anleitung haben.
 | E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
 
 Nummern seit der Zusammenführung (Christian, 2026-11-14): E9 wie auf `main` beschlossen, die Prüfung der Varianten
-(vorher E9 im Prüfstand) ist E10, das Bild (vorher E10) ist E11. E11 gilt erst, wenn die Spielobjekte
-(`spiele/objekte/`) auf `main` sind; bis dahin bleibt `bild` im Kopf leer und E11 entfällt (Annahme).
+(vorher E9 im Prüfstand) ist E10, das Bild (vorher E10) ist E11. Die Spielobjekte (`spiele/objekte/`) sind auf
+`main`, E11 gilt also; das Bild der Karte ist in der App noch nicht gebaut (E11 prüft das Objekt und `bild` im Kopf).
 
 Die Grundsätze (`grundsaetze.md`) gelten für jede Anleitung ganz, auch wo E1–E11 sie nicht einzeln nennen.
 

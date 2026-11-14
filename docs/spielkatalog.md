@@ -494,6 +494,20 @@ Spielentwicklung.
 
 Nachrücker: [M38](spielkatalog/mathe.md) Gerecht verteilen, sobald Teilen dazukommt.
 
+**Schnellweg heute (Stand 2026-11-14, Annahme):** Keines der zehn Spiele kann heute den Schnellweg nehmen
+(`docs/spielentwicklung.md` „Zwei Wege“). Keines ihrer Themen hat `aufgaben` in `spiele/lernplan.json`; die
+Aufgabenarten in `spiele/aufgabenarten.js` sind nur `zerlegung`, `rechnen` (plus, minus), `menge` und `zwillinge`.
+Jedes braucht also eine neue Aufgabenart (voller Weg), dazu:
+
+- M37, M36, M35 (Einmaleins): eine Art für Malaufgaben; ob Punktefeld (M36) und gleich große Gruppen (M35) mit dem
+  `<ls-perlenstab>` auskommen oder ein neues Lernzeichen brauchen, klärt der Entwurf.
+- S06, G09, G01, G08 (Nomen, Artikel, Mehrzahl): eine Art für Wörter; das Lernzeichen `<ls-wortart>` ist vorhanden.
+- S20, S18, S19 (Schrift): eine Art für Buchstaben und Ziffern, S20 und S18 dazu das Freihand-Schreiben als neue
+  Geste (Versuch 1 aus Abschnitt 7).
+
+Ist die Aufgabenart eines Bereichs einmal gebaut und auf `main`, können weitere Spiele desselben Bereichs den
+Schnellweg nehmen.
+
 - **(Annahme)** M37 vor M35: Das Kind übt in der Schule schon Reihen und weiß, was „mal“ heißt. Wackelt das, rückt
   M35 nach vorn.
 - **Vor S18, S20 und S19 zu klären:** Versuch 1 aus Abschnitt 7 (Freihand-Schreiben mit dem Finger). Die

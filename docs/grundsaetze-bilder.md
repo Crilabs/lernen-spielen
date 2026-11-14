@@ -398,7 +398,7 @@ zeigen alle dieselbe Hand). Markierung wie in [`figuren.md`](figuren.md): **(Chr
 | KB7 | **Kinder der Runde sind keine Kartenfiguren.** Sie verbinden alle Spiele (§10 Nr. 4) und unterscheiden keins. | (Annahme) |
 | KB8 | **Spielsymbol = Kopfform der Figur:** Das Spielsymbol ist die Kopf- bzw. Kurzform der Figur und steht in der Kopfleiste und im Regal-Detail, nicht auf der Karte. | (Christian) |
 | KB9 | **Karten „Mit echten Dingen“** behalten ihr eigenes Aussehen (Papier mit Naht, keine Welt). Bild: das echte Alltagsding im Stil der Runde (z. B. sieben Nudeln auf zwei Tellern, ein Würfel, eine Treppe), klein in der Ecke des Bildes eine Hand als Zeichen „echt“; kein Knopf. Die Dinge liegen in `spiele/objekte/` und sind wiederverwendbar ([`mit-echten-dingen.md`](mit-echten-dingen.md) „Bild der Karte“). | (Christian) |
-| KB10 | **Daten statt Einzelbilder:** `spiele.json` `karte: { figur, zustand, welt }`; Kopf der Anleitung `bild: { figur, zustand }`. Die Kartenfigur ist zugleich das Regal-Bild des Spiels (`regal.objekt`); das Spielsymbol wird aus der Figur abgeleitet. | (Annahme) |
+| KB10 | **Daten statt Einzelbilder:** `spiele.json` `karte: { figur, zustand, welt }`; Kopf der Anleitung `bild: { figur, zustand }`. Die Kartenfigur ist zugleich das Regal-Bild des Spiels (`regal.objekt`); das Spielsymbol ist die Kopfform dieser Figur, von Hand als eigene Datei `symbol.svg` im Spielordner gezeichnet (KB8). | (Annahme) |
 
 Herkunft der Figuren und Prüfung: [`spielentwicklung.md`](spielentwicklung.md) „Spielobjekte“ und B-Welt (W-Karte).
-Die Platzierung auf der Startseite folgt nach dem Merge von `startseite-karten` (Christian).
+Die Umsetzung auf der Startseite steht noch aus (Christian).

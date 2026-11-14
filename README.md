@@ -177,8 +177,10 @@ und Ziehen kommen aus `spiele/rahmen/`, kein Spiel baut sie selbst. Neue Spiele 
 2. Eintrag in `spiele/spiele.json` unter `spiele`: `id`, `titel`, `thema`, `kategorie` (eine `id` aus
    `kategorien`), `symbol` und `datei` relativ zu `spiele/` (z. B. `mathe/m14-zwei-tonnen/symbol.svg` und
    `mathe/m14-zwei-tonnen/index.html`), `text` (wird vorgelesen).
-3. Symbol: SVG in `spiele/symbole/` im Stil der vorhandenen (viewBox `0 0 100 100`, Linien `#3B2A6B` 4 px,
-   runde Enden, flächige Füllung in Pastell, siehe z. B. `symbole/hilfe.svg`).
+3. Symbol: `symbol.svg` im Spielordner, von Hand gezeichnet als Kopfform der Figur des Spiels (`karte.figur`,
+   `docs/grundsaetze-bilder.md` §16 KB8, KB10), im Stil der vorhandenen Symbole (viewBox `0 0 100 100`, Linien `#3B2A6B`
+   4 px, runde Enden, flächige Füllung in Pastell, siehe z. B. `symbole/hilfe.svg`); steht in Kopfleiste und
+   Regal-Detail, nicht auf der Karte.
 4. Spiel am Lernplan (für Lernspiele mit Aufgaben): im Eintrag `arten` angeben, z. B.
    `"arten": [{ "art": "zerlegung", "zahlen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }]`
    oder `{ "art": "rechnen", "max": 100, "gleiche": false, "stufen": ["kopf"] }`.

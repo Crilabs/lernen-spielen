@@ -127,9 +127,11 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
 
    <!-- regel schnellweg -->
    **Regel:** Schnellweg, wenn der Entwurf keinen Abschnitt „Freigabe nötig“ hat und das Spiel nur Vorhandenes braucht:
-   die Bausteine aus `spiele/rahmen/` unverändert, festgelegte Lernzeichen mit Baustein, Spielobjekte über
-   `spiele/objekte/objekt.js`, und weder `spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js` noch der RAHMEN von
-   `spiele/vorlage/spiel.js` ändert sich. Sonst voller Weg.
+   die Bausteine aus `spiele/rahmen/` unverändert, festgelegte Lernzeichen mit Baustein, Aufgabenarten, die es für seine
+   Themen schon gibt (`aufgaben` in `spiele/lernplan.json`), Spielobjekte über `spiele/objekte/objekt.js`, und weder
+   `spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js`, `spiele/objekte/objekt.js`, `spiele/aufgabenarten.js`
+   (mit `ZIEL_MS`), die `aufgaben` in `spiele/lernplan.json` noch der RAHMEN von `spiele/vorlage/spiel.js` ändert sich.
+   Sonst voller Weg.
    <!-- ende regel -->
 
    Steht ein Baustein als „vorhanden“ im Entwurf, gibt es ihn aber nicht in `spiele/rahmen/` bzw. als festgelegtes
@@ -162,10 +164,11 @@ Bau → Durchspielen → Prüfung, mit eigenem Ordner `A=<Hauptrepo>/.superpower
 3. **Prüfung** – ein **neuer** Prüfer (`opus`) mit `pruefung-schnell.md` (`{{BILDER}}` = `$A/bilder`,
    `{{STUFEN}}`, `{{BERICHT}}` = `runde-s-<n>.md`). Er schreibt den Bericht selbst; du liest das Urteil wie in
    „Aufträge an Agenten“.
-4. Rot und `<n>` = 1 → Runde 2 ab Schritt 1. Rot nach Runde 2 → parken. Grün → **Audio** wie in §3, dann
-   **Abschluss** nach §4 ohne Schritt 3 (die Schnellweg-Prüfung ist das Review): Mit echten Dingen, `git merge
-   <basis>`, Merge-Schritte 4 und 5. Ändert der Merge der Basis Dateien des Spiels oder `spiele.json` über einen
-   additiven Konflikt hinaus, zählt das als neue Runde (Schritt 2 und 3).
+4. Rot und `<n>` = 1 → Runde 2 ab Schritt 1. Rot nach Runde 2 → parken. **Schnellweg-Prüfung grün** (Durchspielen
+   und Prüfung der Runde grün) → **Audio** wie in §3, dann **Abschluss** nach §4 ohne Schritt 3 (die
+   Schnellweg-Prüfung ist das Review): Mit echten Dingen, `git merge <basis>`, Merge-Schritte 4 und 5. Ändert der
+   Merge der Basis Dateien des Spiels oder `spiele.json` über einen additiven Konflikt hinaus, zählt das als neue
+   Runde (Schritt 2 und 3): nach Runde 1 als Runde 2; ist das schon Runde 2, gibt es keine dritte → parken.
 5. In der Schlussmeldung Laufzeit (Start bis Merge) und Kosten des Spiels; liegt eines über dem Ziel, den teuersten
    Agenten nennen.
 
@@ -244,9 +247,12 @@ Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spie
   Prüfung E1–E11 mit **frischen** Prüfern nach `pruefung-e.md`, die du startest, höchstens 3 Runden; rote Befunde per
   SendMessage an denselben Schreib-Agenten (überarbeiten, Tests, committen). §5.1 nach grüner Prüfung lässt du den
   Schreib-Agenten machen (`entwurf: true` löschen, `npm run echte-dinge`, `npm test`, committen), bei Rot nach Runde
-  3 `geparkt: true`. Mehrere Themen dürfen parallel laufen (je ein Schreib-Agent im selben Worktree).
-- **Kosten** bucht du im Worktree der Anleitungen, je Agent mit der Thema-Id: `--ordner spiele/mit-echten-dingen
-  --phase schreiben|pruefung --thema <thema-id>` (der Schreib-Agent recherchiert und schreibt in einem Transkript:
+  3 `geparkt: true`. Die Schreib-Agenten laufen **nacheinander**, nie parallel: Sie teilen den Worktree, und
+  `npm run echte-dinge` schreibt dieselben Verzeichnisse (ein Thema nach dem anderen, das nächste erst nach dem
+  Commit des vorigen).
+- **Kosten** bucht du im Worktree der Anleitungen mit `werkzeuge/kosten/transkript.mjs` wie in „Kosten“, je Agent mit
+  der Thema-Id und immer mit `--stand`: `--ordner spiele/mit-echten-dingen --phase schreiben|pruefung --thema
+  <thema-id> --stand <Hauptrepo>/.superpowers/spiele/<id klein>/kosten-stand-echte-dinge.json` (der Schreib-Agent recherchiert und schreibt in einem Transkript:
   `schreiben`; `recherche` nur, wenn ein eigener Agent recherchiert). Mit `--thema` zählt der Bericht jedes Thema
   einmal, egal wie viele Runden es gebucht haben. `kosten.json` committest du (nach jedem grünen oder geparkten
   Thema).
@@ -259,7 +265,7 @@ Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spie
 Nach **jedem** Agenten aus seinem Transkript buchen; die Agent-Id steht in der Rückmeldung des Agenten-Werkzeugs:
 
 ```bash
-T=$(ls ~/.claude/projects/*/*/subagents/agent-<agentId>.jsonl)
+T=$(ls ~/.claude/projects/-Users-christian-Code-einhorn-lernspiele*/*/subagents/agent-<agentId>.jsonl)
 node werkzeuge/kosten/transkript.mjs "$T" --ordner spiele/<fach>/<spiel> --phase pruefung-a \
   --notiz "Prüfer A, Runde 2" --stand <Hauptrepo>/.superpowers/spiele/<id klein>/kosten-stand.json
 ```
@@ -267,10 +273,13 @@ node werkzeuge/kosten/transkript.mjs "$T" --ordner spiele/<fach>/<spiel> --phase
 - Das Werkzeug zählt Eingabe, Ausgabe, Cache lesen und Cache schreiben genau. Mit `--stand` bucht es bei einer
   Fortsetzung desselben Agenten (SendMessage) nur den Zuwachs, nie doppelt; deshalb immer mit `--stand`.
 - **Steuerung:** deine eigenen Token einmal am Ende (vor dem Merge- bzw. Park-Commit) mit `--phase steuerung` aus
-  deinem Transkript: als Hauptsitzung `ls -t ~/.claude/projects/*/*.jsonl | head -1`; läufst du selbst als
-  Unteragent, ist es `…/subagents/agent-<deine Id>.jsonl` – die Id nennen dir Bau-Agenten, die dir per SendMessage
-  antworten, oder `grep -l "<ein Satz aus deinem Aufruf>" ~/.claude/projects/*/*/subagents/agent-*.jsonl`. Nicht
-  das neueste Transkript irgendeines Projekts nehmen. Wird später noch weitergesteuert (Wiederaufnahme), bucht
+  deinem Transkript, gesucht nur im Projektordner dieses Repos (`~/.claude/projects/-Users-christian-Code-einhorn-lernspiele*/`,
+  auch Worktrees): als Hauptsitzung die neueste Sitzung dort,
+  `ls -t ~/.claude/projects/-Users-christian-Code-einhorn-lernspiele*/*.jsonl | head -1` (eine Datei je Sitzung,
+  keine Unteragenten); läufst du selbst als Unteragent, ist es `…/<sitzung>/subagents/agent-<deine Id>.jsonl` – die
+  Id nennen dir Bau-Agenten, die dir per SendMessage antworten, oder `grep -l "<ein Satz aus deinem Aufruf>"
+  ~/.claude/projects/-Users-christian-Code-einhorn-lernspiele*/*/subagents/agent-*.jsonl`. Nie das neueste
+  Transkript irgendeines Projekts nehmen. Wird später noch weitergesteuert (Wiederaufnahme), bucht
   `--stand` nur den Zuwachs.
 - Bilder bucht `werkzeuge/bilder/erzeugen.mjs --spiel`, Stimme `npm run audio -- --spiel`. `kosten.json` committen.
 - Der Spielordner darf vor dem Prototyp noch leer sein (das Werkzeug legt ihn an).

@@ -36,8 +36,14 @@ gilt (bei Themen mit eigenem Lernzeichen steht das Lernzeichen vorn, das ist ric
 
 Im Ausbau außerdem der **Silhouettentest**: die Kartenbilder aller Spiele des Fachs mit `karte` in
 `spiele/spiele.json` (Welt-Vignette, davor `<ls-objekt art="<figur>" zustand="<zustand>" still>`) in ein Raster legen,
-auf 64 px Höhe verkleinert und in Graustufen (Playwright, CSS `filter: grayscale(1)`), Bild in den Scratchpad. Gibt es
-noch keine Karten-Darstellung, die Figuren still vor einer flachen Fläche in der Welt-Palette.
+auf 64 px Höhe verkleinert und in Graustufen (Playwright, CSS `filter: grayscale(1)`), Bild in den Scratchpad.
+
+**W-Karte beurteilst du am zusammengesetzten Kartenbild,** nicht an der heutigen Startseite: die Figur
+(`<ls-objekt art="<figur>" zustand="<zustand>" still>` nach `karte` in `spiele/spiele.json`) groß vor der flachen
+Welt-Vignette (Fläche in den Tönen der Welt-Palette, `docs/grundsaetze-bilder.md` §6.2), von dir selbst zusammengesetzt
+und gerendert (Playwright, Bild in den Scratchpad), einmal in Kartengröße und einmal im Raster des Silhouettentests.
+Die Karten der Startseite zeigen das Kartenbild noch nicht (Umsetzung auf der Startseite steht noch aus); wie die
+Startseite heute aussieht, ist kein Befund für W-Karte.
 
 **Auftrag** (wörtlich):
 

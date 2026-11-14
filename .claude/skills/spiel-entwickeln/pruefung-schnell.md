@@ -47,6 +47,13 @@ Dazu der **Silhouettentest** der Karten: die Kartenbilder aller Spiele des Fachs
 (CSS `filter: grayscale(1)`), Bild in den Scratchpad. Und das Regal (`spiele/regal.html`) bei einem Thema, für das das
 Regal-Bild gilt.
 
+**W-Karte beurteilst du am zusammengesetzten Kartenbild,** nicht an der heutigen Startseite: die Figur
+(`<ls-objekt art="<figur>" zustand="<zustand>" still>` nach `karte` in `spiele/spiele.json`) groß vor der flachen
+Welt-Vignette (Fläche in den Tönen der Welt-Palette, `docs/grundsaetze-bilder.md` §6.2), von dir selbst zusammengesetzt
+und gerendert (Playwright, Bild in den Scratchpad), einmal in Kartengröße und einmal im Raster des Silhouettentests.
+Die Karten der Startseite zeigen das Kartenbild noch nicht (Umsetzung auf der Startseite steht noch aus); wie die
+Startseite heute aussieht, ist kein Befund für W-Karte.
+
 **Kriterien.** Die Kürzel der Spalte „Quelle“ sind Tabellenzeilen der Grundsätze: L, N, K und §-Angaben ohne Datei
 in `docs/grundsaetze.md` (K1/K2 = §10 Kosmik-Schicht), F, M, B, T in `docs/grundsaetze-bilder.md`, dazu
 `docs/figuren.md`, `docs/stimme.md`, `docs/bedienung.md`.
@@ -124,13 +131,17 @@ als Ring, keine Farbe als einziges Signal), Größen nach §4, still beim Denken
 
 **5. Der Weg und der Diff:**
 - **S-Weg:** Der Diff bleibt im Schnellweg (Regel in `docs/spielentwicklung.md` „Zwei Wege“): nichts geändert in
-  `spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js`, `spiele/objekte/objekt.js` und im RAHMEN von
-  `spiele/vorlage/spiel.js`; kein neues Lernzeichen, kein nachgebautes Bedienteil im Spiel; kein Abschnitt
+  `spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js`, `spiele/objekte/objekt.js`, `spiele/aufgabenarten.js`,
+  `spiele/lernplan.json` (`aufgaben`) und im RAHMEN von `spiele/vorlage/spiel.js`; keine neue Aufgabenart; kein neues Lernzeichen, kein nachgebautes Bedienteil im Spiel; kein Abschnitt
   „Freigabe nötig“ im Entwurf. Sonst rot (kritisch: das Spiel gehört in den vollen Weg).
 - **S-Prüfstand:** Die Berichte des Durchspielens (ohne und mit `--stufe` je Lernstufe) sind grün, `npm test` grün
   (selbst laufen lassen, Ausgabe als Beleg).
-- **S-Code:** Der Diff enthält nichts außerhalb des Spiels, das nicht dazugehört (fremde Spiele, `package.json`,
-  `spiele/mit-echten-dingen/`); keine Test-Schnittstelle außerhalb des Testbetriebs; Texte stehen in `texte.json`.
+- **S-Code:** Der Diff (`git diff {{BASIS}}...HEAD --stat`) berührt nur diese Pfade: den Spielordner
+  `spiele/<fach>/<spiel>/`, den Eintrag des Spiels in `spiele/spiele.json` (nur dieser Eintrag), neue Arten als
+  eigene Datei `spiele/objekte/<neue art>.js` (keine vorhandene Datei in `spiele/objekte/` geändert) und den Entwurf
+  `docs/spiele/<fach>/<spiel>.md`. Jeder andere Pfad ist rot, auch `spiele/aufgabenarten.js`, `spiele/lernplan.json`,
+  `spiele/einfuehrungen/`, `spiele/mit-echten-dingen/`, `package.json` und fremde Spiele. Dazu: keine
+  Test-Schnittstelle außerhalb des Testbetriebs; Texte stehen in `texte.json`.
 
 **Grün heißt:** alle Pflichtkriterien grün, kein kritischer Befund; „(Soll)“ darf rot sein, wenn der Grund im Entwurf
 steht. Im Zweifel rot. Gibt es keine zweite Runde mehr, ist rot das Parken – urteile trotzdem nur nach den Kriterien.

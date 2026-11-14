@@ -51,9 +51,11 @@ erfüllte sein Ziel. Deshalb gibt es zwei Wege. Welcher gilt, entscheidet die St
 
 <!-- regel schnellweg -->
 **Regel:** Schnellweg, wenn der Entwurf keinen Abschnitt „Freigabe nötig“ hat und das Spiel nur Vorhandenes braucht:
-die Bausteine aus `spiele/rahmen/` unverändert, festgelegte Lernzeichen mit Baustein, Spielobjekte über
-`spiele/objekte/objekt.js`, und weder `spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js` noch der RAHMEN von
-`spiele/vorlage/spiel.js` ändert sich. Sonst voller Weg.
+die Bausteine aus `spiele/rahmen/` unverändert, festgelegte Lernzeichen mit Baustein, Aufgabenarten, die es für seine
+Themen schon gibt (`aufgaben` in `spiele/lernplan.json`), Spielobjekte über `spiele/objekte/objekt.js`, und weder
+`spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js`, `spiele/objekte/objekt.js`, `spiele/aufgabenarten.js`
+(mit `ZIEL_MS`), die `aufgaben` in `spiele/lernplan.json` noch der RAHMEN von `spiele/vorlage/spiel.js` ändert sich.
+Sonst voller Weg.
 <!-- ende regel -->
 
 **Vorhanden** heißt im Einzelnen:
@@ -62,6 +64,7 @@ die Bausteine aus `spiele/rahmen/` unverändert, festgelegte Lernzeichen mit Bau
 |---|---|---|
 | Bedienteile | die Bausteine aus `bedienung.md` §9 (`<ls-knopf>`, `<ls-leiste>`, `<ls-blase>`, `<ls-hilfe>`, `<ls-pause>`, `<ls-tastatur>`, `ziehbar()` …), so benutzt, wie ihre Schnittstelle es vorsieht | ein neuer Baustein oder eine Änderung an einem vorhandenen; eine eigene Bedienung im Spiel, die einen Baustein nachbaut |
 | Lernzeichen | festgelegt in `grundsaetze-bilder.md` §4/§5 **und** als Baustein in `spiele/rahmen/` gebaut (heute `<ls-perlenstab>`, `<ls-wortart>`) | jede Vormerkung aus `grundsaetze-bilder.md` §5a (Zerlegungsliste, Silbenbogen …) und jedes festgelegte Zeichen ohne Baustein |
+| Aufgabenart | jedes Thema des Spiels hat `aufgaben` in `spiele/lernplan.json` mit einer Art aus `spiele/aufgabenarten.js` (heute `zerlegung`, `rechnen`, `menge`, `zwillinge`), im Spiel über `arten` in `spiele.json` gewählt (Schema `darstellbar`) | eine neue Aufgabenart, eine Änderung an `spiele/aufgabenarten.js` (auch `ZIEL_MS`) oder an den `aufgaben` in `lernplan.json`: Sie ändert die Schlüssel, an denen der Lernstand hängt |
 | Mechanik | die Lernhandlung geht mit diesen Bausteinen, den Gesten aus `bedienung.md` §5 und dem RAHMEN der Vorlage (Hilfe-Leiter, Meldung, Stufen) | eine neue Geste oder Eingabe, ein Eingriff in `spiele/kern/`, `spiele/lernsteuerung.js` oder den RAHMEN |
 | Spielobjekte, Figur | Arten aus `spiele/objekte/` und neue Arten als eigene Datei über `meldeObjekt` **(Annahme:** eine neue Sachwelt-Art ist kein neues Bauteil) | eine Änderung an `spiele/objekte/objekt.js` |
 | offene Fragen | keine | eine offene Frage aus `grundsaetze-bilder.md` §15 oder ein Widerspruch zu einer Entscheidung von Christian im Katalog-Eintrag (beides steht dann unter „Freigabe nötig“) |
@@ -101,8 +104,9 @@ Katalog-Eintrag → 1 Entwurf (kompakt) → Entscheidung: Schnellweg
   Befund ist ein Grund, davon wegzubauen; ein Widerspruch zu einem Kriterium kommt unter „Freigabe nötig“ (und führt
   damit in den vollen Weg).
 - **Eine Welt, auch in der Einführung (A4b):** Erzählt die Einführung eines Themas (`spiele/einfuehrungen/*.json`) eine
-  andere Welt, bringt das Spiel eine eigene Einführung in seiner Welt mit; die Einführung abzuschalten ist keine
-  Lösung (L5).
+  andere Welt, bringt das Spiel eine eigene Einführung in seiner Welt mit (`einfuehrung.json` im Spielordner,
+  eingetragen als `EINFUEHRUNG` in der SPIELWELT der Vorlage, Pfad relativ zu `spiele/`; das ist kein Eingriff in den
+  RAHMEN); die Einführung abzuschalten ist keine Lösung (L5).
 - **Ziel:** 30–60 Minuten und 8–15 € je Spiel, Steuerung eingerechnet. Liegt ein Lauf darüber, nennt die
   Schlussmeldung Zeit, Kosten und den teuersten Agenten.
 
@@ -253,7 +257,8 @@ Regeln: `grundsaetze-bilder.md` §16. Ein Spiel nennt in `spiele.json` sein Kart
 flache Vignette und davor `<ls-objekt art="<figur>" zustand="<zustand>" still>`, ohne `wert` (keine Ziffern, Buchstaben,
 Perlen im Bild). `(figur, welt, zustand)` ist je Fach eindeutig; ein Test prüft das an `spiele.json` (kommt mit der
 Umsetzung). Die Karte hat keinen runden Knopf (Christian); das Spielsymbol in Kopfleiste und Regal-Detail ist die Kopfform der
-Figur (abgeleitet, kein eigenes Bild). Die Platzierung auf der Startseite folgt nach dem Merge von `startseite-karten` (Christian).
+Figur, von Hand gezeichnet als `symbol.svg` im Spielordner (KB8, KB10). Die Umsetzung auf der Startseite steht noch aus (Christian); bis dahin beurteilt W-Karte das zusammengesetzte
+Kartenbild (Figur vor der Vignette), nicht die heutige Startseite.
 
 ## 2. Prüfung A: der Entwurf
 

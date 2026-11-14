@@ -35,7 +35,7 @@ spiele/objekte/<figur>.js`) und mit den Bildern der anderen Anleitungen des Fach
 | E10 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
 | E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
 
-**Grün heißt:** alle zehn grün, kein kritischer Befund. Im Zweifel rot.
+**Grün heißt:** alle elf grün, kein kritischer Befund. Im Zweifel rot.
 
 Schreib deine Antwort außerdem unverändert in die Datei `{{BERICHT}}` (außerhalb des Arbeitsordners; die einzige
 Datei, die du schreibst).

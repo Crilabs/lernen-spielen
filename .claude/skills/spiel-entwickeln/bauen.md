@@ -81,8 +81,10 @@ Erst `frontend-design:frontend-design` laden (Skill), dann bauen. Farbwelt (`doc
 `docs/bedienung.md` sind verbindlich und gehen vor allgemeinen Gestaltungsvorschlägen.
 
 - **Grenzen des Schnellwegs:** nichts ändern in `spiele/rahmen/`, `spiele/kern/`, `spiele/lernsteuerung.js`,
-  `spiele/objekte/objekt.js` und im RAHMEN von `spiele/vorlage/spiel.js`; kein neues Lernzeichen, kein Bedienteil im
-  Spiel nachbauen. Geht es ohne nicht, **halte an** und melde, was fehlt und warum (dann wechselt der Skill in den
+  `spiele/objekte/objekt.js`, `spiele/aufgabenarten.js` (auch `ZIEL_MS`), den `aufgaben` in `spiele/lernplan.json` und
+  im RAHMEN von `spiele/vorlage/spiel.js`; keine neue Aufgabenart, kein neues Lernzeichen, kein Bedienteil im Spiel
+  nachbauen. Erlaubt sind nur der Spielordner, der Eintrag in `spiele/spiele.json`, neue Arten als eigene Datei
+  `spiele/objekte/<neue art>.js` (vorher auf `main` nachsehen, ob es die Art inzwischen gibt) und der Entwurf. Geht es ohne nicht, **halte an** und melde, was fehlt und warum (dann wechselt der Skill in den
   vollen Weg); bau es nicht trotzdem.
 - **Grundgerüst** wie im Abschnitt Prototyp unten (Kopie der Vorlage, „../“ → „../../“, Test-Schnittstelle,
   `spiele.json`, `logik.js` mit Node-Tests, RAHMEN mit `?stufe` und `lernstufe` behalten).
@@ -92,8 +94,10 @@ Erst `frontend-design:frontend-design` laden (Skill), dann bauen. Farbwelt (`doc
   Silhouettentest, Szenenbild nur über das Werkzeug, Texte als Daten (`npm run audio` startest du nicht),
   vollständiger Eintrag in `spiele.json`.
 - **Einführung in der Welt des Spiels:** Erzählt die Einführung eines Themas (`spiele/einfuehrungen/*.json`) eine
-  andere Welt, schreib eine eigene Einführung in der Sachwelt des Spiels (gleiches Format, im Spielordner) und spiel
-  sie mit `spieleEinfuehrung` aus `spiele/einfuehrung.js`; nicht abschalten (L5, A4b).
+  andere Welt, schreib eine eigene Einführung in der Sachwelt des Spiels (gleiches Format, `{{SPIELORDNER}}/einfuehrung.json`)
+  und trag sie in der SPIELWELT ein: `const EINFUEHRUNG = { vorlage: "<fach>/<spiel>/einfuehrung.json" }` (Pfad
+  relativ zu `spiele/`, Kopf von `spiele/vorlage/spiel.js`); der RAHMEN spielt sie dann statt der des Themas. Nicht
+  abschalten (L5, A4b).
 - Checklisten `docs/bedienung.md` §10 und `docs/grundsaetze.md` §12 durchgehen; selbst laufen lassen, bis alles
   durchläuft: `npm test` und `NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs
   {{SEITE}}`, dazu `--stufe <id>` für jede Lernstufe.
@@ -116,7 +120,7 @@ Nach `docs/spielentwicklung.md` §3 und dem Kopf von `spiele/vorlage/spiel.js` (
   Platzhalter sein, ihre Rolle (Wirkung, nicht Zählmaterial) muss stimmen.
 - Test-Schnittstelle `meldePruefSchnittstelle` mit `zuege`, `richtigerZug`, Hilfe Stufe 2 mit `.markiert`;
   `fehlversuche: false` nur, wenn wirklich kein Zug danebengehen kann.
-- Eintrag in `spiele/spiele.json` (`datei`, `symbol` relativ zu `spiele/`, `arten`, Themen); einfaches `symbol.svg`.
+- Eintrag in `spiele/spiele.json` (`datei`, `symbol` relativ zu `spiele/`, `arten`, Themen); `symbol.svg` (im Prototyp einfach, im Ausbau die von Hand gezeichnete Kopfform der Figur).
 - Reine Logik in `logik.js` mit Node-Tests unter `tests/spiele/<fach>/<spiel>.test.mjs`, falls es Logik gibt (`npm test` nimmt
   sie mit; `package.json` nicht ändern).
 - Den RAHMEN der Vorlage behalten, auch `?stufe` (nur im Testbetrieb) und `lernstufe` im Zustand.
@@ -136,7 +140,8 @@ Lernstufen, ruhig und sanft; abenteuer mitgeplant):
 - Alle Stufen (material / vorstellung / kopf), soweit der Eintrag sie vorsieht.
 - **Spielobjekte** als animierte SVG im Stil der Runde (`docs/figuren.md` §4, Welt-Paletten
   `docs/grundsaetze-bilder.md` §6.2), von Hand, nie KI-generiert; Schnittstelle `spiele/objekte/objekt.js`
-  (`meldeObjekt`, Vorbild `tonne.js`); gemeinsam Nutzbares nach `spiele/objekte/`, Spielspezifisches nach
+  (`meldeObjekt`, Vorbild `tonne.js`); vor einer neuen Art auf `main` nachsehen (`git show main:spiele/objekte/`),
+  ob es sie inzwischen gibt; gemeinsam Nutzbares nach `spiele/objekte/`, Spielspezifisches nach
   `{{SPIELORDNER}}/objekte/`; `tests/objekte.test.mjs` grün; in `spiele/rahmen/vorschau.html?objekte` sichtbar.
 - **Regal-Bild:** `regal: { objekt, wert }` in `spiele.json`, Objekt in `spiele/objekte/`; Regal-Material
   (`spiele/rahmen/material.js`); im Regal (`spiele/regal.html`) bei einem Thema ansehen, für das es gilt.
@@ -149,7 +154,7 @@ Lernstufen, ruhig und sanft; abenteuer mitgeplant):
   `npm run audio` startest du **nicht**; das tut der Skill danach (Kosten). Nichts anhören, nichts als angehört
   markieren. Gib die Liste der neuen Texte wörtlich zurück.
 - Einführung (`spiele/einfuehrungen/`, Lernplan `einfuehrung`), vollständiger Eintrag in `spiele.json`. Erzählt die
-  Einführung des Themas eine andere Welt: eigene Einführung in der Welt des Spiels, nicht abschalten (A4b, L5).
+  Einführung des Themas eine andere Welt: eigene Einführung in der Welt des Spiels über `EINFUEHRUNG` in der SPIELWELT, nicht abschalten (A4b, L5).
 - Checklisten `docs/bedienung.md` §10 und `docs/grundsaetze.md` §12 durchgehen; `npm test` und Durchspielen grün,
   auch je Lernstufe (`durchspielen.mjs {{SEITE}} --stufe <id>`).
 

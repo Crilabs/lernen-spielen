@@ -1,6 +1,6 @@
 ---
 name: mit-echten-dingen
-description: Schreibt für Themen des Lernplans ohne vorhandene Anleitung ein kurzes Spiel „Mit echten Dingen“ (spiele/mit-echten-dingen/<fach>/<thema>.md) – Recherche, Ideen, Schreiben, Bild, Prüfung E1–E11 durch einen frischen Agenten, höchstens drei Runden, dann Datei, Verzeichnis und Kosten. Aufruf „Mit echten Dingen <thema-id> [<thema-id> …]“; der Skill „Spiel entwickeln“ startet ihn parallel für die Themen seines Spiels.
+description: Schreibt für Themen des Lernplans ohne vorhandene Anleitung ein kurzes Spiel „Mit echten Dingen“ (spiele/mit-echten-dingen/<fach>/<thema>.md) – Recherche, Ideen, Schreiben, Bild, Prüfung E1–E11 durch einen frischen Agenten, höchstens drei Runden, dann Datei, Verzeichnis und Kosten. Aufruf „Mit echten Dingen <thema-id> [<thema-id> …]“; der Skill „Spiel entwickeln“ startet ihn parallel zum Spiel, für dessen Themen nacheinander.
 ---
 
 # Mit echten Dingen
@@ -15,7 +15,8 @@ Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Am Tisch / I
 - **Gibt es die Datei schon, nichts tun** (auch wenn ein weiteres Spiel das Thema bedient). Nur Themen ohne Datei –
   Ausnahme: eine Datei mit `entwurf: true` ohne `geparkt` ist noch nicht fertig; sie geht ohne neues Schreiben gleich
   in die Prüfung (§4).
-- Mehrere Themen: je Thema ein eigener Durchlauf (gern parallel), jeder mit eigener Prüfung.
+- Mehrere Themen: je Thema ein eigener Durchlauf, jeder mit eigener Prüfung; im selben Arbeitsordner nacheinander,
+  nie parallel (`npm run echte-dinge` schreibt dieselben Verzeichnisse).
 - Aus „Spiel entwickeln“ heraus (`.claude/skills/spiel-entwickeln/SKILL.md`, Abschnitt „Mit echten Dingen“): eigener
   Worktree `echte-dinge-<id>`; die steuernde Sitzung startet Schreib-Agent und frische Prüfer selbst und bucht die
   Kosten (`werkzeuge/kosten/transkript.mjs`, mit `--thema <thema-id>`). Der Schreib-Agent macht dann nur §1–§3a und
@@ -81,7 +82,8 @@ Danach: `npm run echte-dinge` (Verzeichnis) und `node --test tests/echte-dinge.t
 
 Nach `docs/mit-echten-dingen.md` „Bild der Karte“ und `docs/grundsaetze-bilder.md` §16: das Alltagsding der
 Grundform wählen (z. B. sieben Nudeln auf zwei Tellern, ein Würfel, eine Treppe). Zuerst in `spiele/objekte/`
-nachsehen; fehlt es, als `spiele/objekte/<art>.js` zeichnen (Schnittstelle und Stil: `docs/spielentwicklung.md`
+nachsehen, auch auf `main` (`git show main:spiele/objekte/`, ein anderes Spiel kann die Art inzwischen gebracht haben);
+fehlt es, als `spiele/objekte/<art>.js` zeichnen (Schnittstelle und Stil: `docs/spielentwicklung.md`
 „Spielobjekte“, `docs/figuren.md` §4; von Hand, nie KI; `tests/objekte.test.mjs` grün). Ein Ding, groß, kein Text,
 keine Ziffern, keine Lernzeichen; an der Silhouette von den Bildern der anderen Anleitungen des Fachs zu unterscheiden.
 Im Kopf `bild: { figur: <art>, zustand: <zustand> }`. Die Hand als Zeichen „echt“ setzt die Karte selbst.
@@ -104,9 +106,9 @@ Ein **neuer Agent, der nicht geschrieben hat**, bekommt nur: die Datei, den Lern
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
 | E9 | Methode laut Recherche wirksam für dieses Thema (Quelle im Kopf); die Handlung ist praxisnah und hat einen Zweck über das Üben hinaus |
 | E10 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
-| E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“); entfällt, solange `spiele/objekte/` fehlt |
+| E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
 
-Grün heißt: alle elf grün (E11 nur, wo sie gilt), kein kritischer Befund. Rot → überarbeiten und mit einem **wieder neuen** Prüfer prüfen,
+Grün heißt: alle elf grün, kein kritischer Befund. Rot → überarbeiten und mit einem **wieder neuen** Prüfer prüfen,
 **höchstens 3 Runden**. Bleibt es rot: Datei nicht anlegen (bzw. mit `entwurf: true` und `geparkt: true` im Kopf
 liegen lassen) und die Befunde an Christian melden.
 
@@ -118,24 +120,29 @@ Hinweis: Die drei ersten Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`,
 1. Prüfung grün: `entwurf: true` aus dem Kopf löschen (erst dann steht die Anleitung in `verzeichnis.json` und
    erreicht die App). Geparkt: `geparkt: true` in den Kopf (steht in keinem Verzeichnis). Datei liegt unter
    `spiele/mit-echten-dingen/<fach>/<thema-id>.md`, `npm run echte-dinge` ist gelaufen, `npm test` grün.
-2. Kosten je Agent (Recherche, Schreiben, Prüfung – Modell und Token aus der Agenten-Rückmeldung) eintragen;
-   die Datei der analogen Spiele verlangt `thema` (Liste der Thema-Ids, die der Eintrag abdeckt) oder `themen` (Zahl):
+2. Kosten je Agent (Recherche, Schreiben, Prüfung) aus seinem Transkript buchen, immer mit `--stand` (bei einer
+   Fortsetzung desselben Agenten per SendMessage bucht es nur den Zuwachs, nie doppelt) und mit `--thema`:
 
 ```bash
-node -e '
-import("./werkzeuge/kosten/kosten.mjs").then(({ trageEin }) => trageEin("spiele/mit-echten-dingen", {
-  datum: "2026-11-14", phase: "schreiben", posten: "claude", modell: "claude-opus-5-5",
-  eingabe: 41000, ausgabe: 3200, menge: 44200, einheit: "tokens", thema: ["zerlegen-7"], notiz: "zerlegen-7" }))'
+T=$(ls ~/.claude/projects/-Users-christian-Code-einhorn-lernspiele*/*/subagents/agent-<agentId>.jsonl)
+node werkzeuge/kosten/transkript.mjs "$T" --ordner spiele/mit-echten-dingen --phase schreiben \
+  --thema zerlegen-7 --notiz "zerlegen-7, Schreiben" --stand <Arbeitsablage>/kosten-stand.json
 ```
 
-   Phasen: `recherche`, `schreiben`, `pruefung`. Je Prüfrunde ein Eintrag. `thema` (Liste der Thema-Ids) lässt den
-   Bericht jedes Thema einmal zählen, auch über mehrere Einträge; aus einem Transkript bucht
-   `node werkzeuge/kosten/transkript.mjs <transkript> --ordner spiele/mit-echten-dingen --phase … --thema <id>`.
+   Phasen: `recherche`, `schreiben`, `pruefung`; je Prüfrunde ein Aufruf. `--thema` (Thema-Ids, mit Komma getrennt)
+   lässt den Bericht jedes Thema einmal zählen, auch über mehrere Einträge. Die Datei der analogen Spiele verlangt
+   `thema` oder `themen`. Nur wenn kein Transkript da ist, von Hand mit `trageEin` aus
+   `werkzeuge/kosten/kosten.mjs`, z. B. `{ datum: "2026-11-14", phase: "schreiben", posten: "claude", modell:
+   "claude-sonnet-5-5", eingabe: 41000, ausgabe: 3200, menge: 44200, einheit: "tokens", thema: ["zerlegen-7"],
+   notiz: "zerlegen-7" }` (Modell und Token aus der Agenten-Rückmeldung).
 3. Bericht (an den Aufrufer): Thema, gewählte Idee mit Begründung, verworfene Ideen, Prüfergebnis je Runde
    (E1–E11 mit Beleg), Kosten.
 
 ## Was die App damit macht
 
-Die Karte (`<ls-anregung>`), die Kachel (`<ls-echte-dinge-kachel>`), das Angebot in der Pause und die Übersicht
-(`spiele/mit-echten-dingen.html`, Küchenzettel zum Drucken) lesen die Datei über das Verzeichnis. Analoges Spielen
-zählt nie für den Lernstand.
+Die App liest die Datei über das Verzeichnis (`verzeichnis.json`, nur freigegebene Anleitungen) an diesen Stellen:
+die eigene Seite der Anleitung `spiele/echt.html?thema=<id>`; die Karte „Mit echten Dingen“ auf der Startseite
+(`spiele/start/karten.js`, mit dem Titel der Anleitung) und im Regal; der Knopf auf der Fach-Seite; das ruhige Angebot
+in der Pause am Rundenende eines Spiels (`spiele/rahmen/pause.js`); die Übersicht für Erwachsene
+(`spiele/mit-echten-dingen.html`, Küchenzettel zum Drucken). Alle führen zu `echt.html`. Das Bild der Karte (`bild`)
+ist in der App noch nicht gebaut. Analoges Spielen zählt nie für den Lernstand.
