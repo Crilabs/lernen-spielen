@@ -201,6 +201,8 @@ function baumUndHaus(p) {
     }
     kreise.push([cx, cy, rr * 0.55]);
   }
+  // Hinter dem Haus geschlossen: Büschel an beiden Seiten bis zur Plattform (sonst schaut der Himmel durch).
+  kreise.push([1730, 330, 90], [1700, 420, 72], [1760, 440, 60], [2190, 320, 90], [2220, 410, 78], [2170, 450, 60], [2270, 470, 62]);
   kreise.sort((a, b) => a[1] - b[1]);
   const krone = zz.guss(...bueschel(kreise, p.krone, { glanzAb: 210 }));
 

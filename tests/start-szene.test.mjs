@@ -64,3 +64,8 @@ test("Szene: Bodenschatten auch unter den Tieren am Boden", () => {
   const amBoden = ORTE.tiere.filter((t) => t.boden).length;
   assert.equal((szeneSvg().match(/class="bodenschatten"/g) ?? []).length, ORTE.runde.length + amBoden);
 });
+
+test("Szene: die Krone ist hinter dem Haus geschlossen (Büschel links und rechts bis zur Plattform)", () => {
+  const svg = szeneSvg();
+  for (const [x, y] of [[1700, 420], [2220, 410]]) assert.match(svg, new RegExp(`<circle cx="${x}" cy="${y}"`), `${x}/${y}`);
+});
