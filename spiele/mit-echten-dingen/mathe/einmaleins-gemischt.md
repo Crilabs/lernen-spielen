@@ -1,7 +1,6 @@
 ---
 thema: einmaleins-gemischt
 fach: mathe
-entwurf: true
 bild: { figur: hausfassade, zustand: fenster }
 quellen:
   - Sicher im 1•1, Übung 3: Schwierigere Malaufgaben mit der Kernaufgaben-Strategie lösen (erste Zahl zerlegen, „3 Siebener“, Zeilen und Punkte je Zeile), Mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/2_schuljahr/SicherimEinmaleins/pdf/2sj_sicherimeinmaleins_uebungen_3._220504docx.pdf, abgerufen 2026-11-14

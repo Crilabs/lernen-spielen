@@ -1,5 +1,18 @@
 {
  "themen": {
+  "einmaleins-gemischt": {
+   "fach": "mathe",
+   "name": "Einmaleins gemischt",
+   "titel": "Wie viele Fenster hat das Haus?",
+   "formen": [
+    {
+     "situation": "unterwegs",
+     "name": "Fenster rechnen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/einmaleins-gemischt.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
