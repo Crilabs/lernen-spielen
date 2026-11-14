@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { meldeKind, meldeHaltung, meldeGesicht, meldeBewegung, meldeLuftzeichen, leereBestand, pruefeBestand } from "../spiele/runde/bestand.js";
 import { pose, ablauf, mische, kurvenwert } from "../spiele/runde/pose.js";
 import { zeichne, zeichnePose, gelenkTransform } from "../spiele/runde/zeichne.js";
-import { steuere, zusammen, DREH } from "../spiele/runde/steuere.js";
+import { steuere, zusammen, DREH, TEMPO } from "../spiele/runde/steuere.js";
 import { bestand } from "../spiele/runde/bestand.js";
 import { TESTKIND_GEHT, TESTKIND_STUHL, kopie } from "./daten/runde-testkinder.js";
 import { fakeSvg, uhr } from "./daten/runde-fake-svg.js";
@@ -120,7 +120,7 @@ test("nur im Rollstuhl: Beine verboten, andere Kinder bekommen einen klaren Fehl
 test("Profil-Bewegung an einer Dreiviertel-Figur: erst drehen (schmal), dann Bewegung", async () => {
   const { u, svg, f } = figur();
   const fertig = f.bewegung("seite");
-  await u.spule(DREH.zu - 30);
+  await u.spule(DREH.zu * TEMPO - 30);
   assert.equal(svg.getAttribute("data-ansicht"), "dreiviertel");
   assert.ok(skala(svg)[0] < 0.6, "staucht sich");
   await u.spule(60);
@@ -217,4 +217,16 @@ test("zopf folgt dem Kopf: gleicher Winkel, Drehpunkt des Kopfes", () => {
   assert.equal(gelenkTransform(ans, "zopf", p), kopf);
   assert.match(kopf, /rotate\(10 /);
   assert.match(zeichne("test-geht", { haltung: "nicken" }), /data-gelenk="zopf" transform="rotate\(10 /);
+});
+
+test("viele kurze Schritte verlieren keine Zeit (durchgehende Zeitachse)", async () => {
+  meldeBewegung({
+    id: "zehn", ansicht: "dreiviertel", ende: "stehen",
+    schritte: Array.from({ length: 10 }, (_, i) => ({ ms: 40, kurve: "gleich", winkel: { kopf: (i + 1) * 4 } })),
+  });
+  const { u, f } = figur("test-geht", { tempo: 1 });
+  f.bewegung("zehn");
+  await u.spule(240);
+  // nach 240 ms: sechs Schritte zu 40 ms durch, Kopf bei 24° (mit verlorenem Bild je Schritt wären es deutlich weniger)
+  assert.ok(Math.abs(f.pose.winkel.kopf - 24) <= 2, `Kopf ${f.pose.winkel.kopf}`);
 });

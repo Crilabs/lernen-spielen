@@ -15,13 +15,16 @@ import { zeichnePose, gelenkTransform, gesichtInnen, zubehoerInnen, labelFuer, l
  * @typedef {{abgebrochen: boolean}} Ergebnis
  * @typedef {{getAttribute(n: string): string|null, setAttribute(n: string, v: string): void, innerHTML: string}} El
  * @typedef {El & {querySelector(s: string): El|null, querySelectorAll(s: string): ArrayLike<El>}} SvgEl
- * @typedef {{wenigBewegung?: boolean, jetzt?: () => number, naechsterFrame?: (cb: () => void) => void}} Optionen
+ * @typedef {{wenigBewegung?: boolean, tempo?: number, jetzt?: () => number, naechsterFrame?: (cb: () => void) => void}} Optionen
+ *   tempo: Faktor auf die Dauer von Bewegungen und Drehungen (kleiner = schneller), Standard TEMPO
  * @typedef {ReturnType<typeof steuere>} Steuerung
  */
 
 export const STANDARD_MS = 1000;
-/** Drehung zwischen den Ansichten: Stauchen in der alten, Öffnen in der neuen Ansicht (Legetrick). */
+/** Drehung zwischen den Ansichten: Stauchen in der alten, Öffnen in der neuen Ansicht (Legetrick). Dauer vor TEMPO. */
 export const DREH = { zu: 150, auf: 230, schmal: 0.35 };
+/** Abspieltempo der Bewegungen und Drehungen: 0,8 = 20 % schneller als in den Daten notiert (Christian, 2026-11-14). */
+export const TEMPO = 0.8;
 
 const systemWenigBewegung = () =>
   typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -38,6 +41,7 @@ const uhrVon = (opts) => ({
  */
 export function steuere(svg, opts = {}) {
   const wenig = opts.wenigBewegung ?? systemWenigBewegung();
+  const tempo = opts.tempo ?? TEMPO;
   const { jetzt, frame } = uhrVon(opts);
 
   const kindId = /** @type {string} */ (svg.getAttribute("data-kind"));
@@ -148,10 +152,13 @@ export function steuere(svg, opts = {}) {
 
   /**
    * Ein Übergang zu einer Pose. Ein Ansichtswechsel ohne Drehung springt (neu zeichnen).
-   * @param {Pose} ziel @param {number} ms @param {number} nr @param {Kurve} [kurve]
+   * `ab`: Startzeit auf einer durchgehenden Zeitachse. Folgeschritte beginnen genau dort, wo der vorige rechnerisch
+   * endet, und werden sofort im selben Bild angewendet; sonst verliert jede Schrittgrenze ein Bild (Ruckeln bei
+   * vielen kurzen Schritten).
+   * @param {Pose} ziel @param {number} ms @param {number} nr @param {Kurve} [kurve] @param {number} [ab]
    * @returns {Promise<Ergebnis>}
    */
-  function uebergang(ziel, ms, nr, kurve = "weich") {
+  function uebergang(ziel, ms, nr, kurve = "weich", ab) {
     return new Promise((fertig) => {
       if (nr !== lauf) return fertig({ abgebrochen: true });
       if (wenig || ms <= 0 || ziel.ansicht !== aktuell.ansicht) {
@@ -159,7 +166,7 @@ export function steuere(svg, opts = {}) {
         return fertig({ abgebrochen: false });
       }
       const start = aktuell;
-      const t0 = jetzt();
+      const t0 = ab ?? jetzt();
       const schritt = () => {
         if (nr !== lauf) return fertig({ abgebrochen: true });
         const t = Math.min(1, (jetzt() - t0) / ms);
@@ -167,7 +174,8 @@ export function steuere(svg, opts = {}) {
         if (t >= 1) fertig({ abgebrochen: false });
         else frame(schritt);
       };
-      frame(schritt);
+      if (ab === undefined) frame(schritt);
+      else schritt();
     });
   }
 
@@ -191,10 +199,11 @@ export function steuere(svg, opts = {}) {
     if (wenig) return uebergang(ziel, 0, nr);
     const k = aktuell.winkel.kopf ?? 0;
     const zu = { ...aktuell, streckung: /** @type {[number, number]} */ ([DREH.schmal, 0.97]), winkel: { ...aktuell.winkel, kopf: k + 6 }, luft: {} };
-    const e = await uebergang(zu, DREH.zu, nr);
+    const t0 = jetzt();
+    const e = await uebergang(zu, DREH.zu * tempo, nr, "weich", t0);
     if (e.abgebrochen) return e;
     anwenden({ ...ziel, streckung: [DREH.schmal, 0.97], luft: {} });
-    return uebergang(ziel, DREH.auf, nr, "federn");
+    return uebergang(ziel, DREH.auf * tempo, nr, "federn", t0 + DREH.zu * tempo);
   }
 
   /** Beginnt einen neuen Auftrag und bricht den alten ab. */
@@ -255,6 +264,7 @@ export function steuere(svg, opts = {}) {
           const e = await dreh(basis, nr);
           if (e.abgebrochen) return e;
         }
+        let uhr = jetzt();
         for (const s of folge) {
           if (nr !== lauf) return { abgebrochen: true };
           if (s.wende) {
@@ -263,8 +273,10 @@ export function steuere(svg, opts = {}) {
             blick = andererBlick(blick);
             anwenden({ ...aktuell, versatz: [-aktuell.versatz[0], aktuell.versatz[1]] });
           }
-          const e = await uebergang(s.pose, s.ms, nr, s.kurve);
+          const ms = s.ms * tempo;
+          const e = await uebergang(s.pose, ms, nr, s.kurve, uhr);
           if (e.abgebrochen) return e;
+          uhr += ms;
         }
         beschrifte();
         return { abgebrochen: false };
