@@ -56,13 +56,20 @@ Auch erzählt gilt: kein „Du machst das Einhorn glücklich“, kein Lob, keine
   darin erlaubt (heutige Diktatsätze wie „Ich habe Durst.“). Neue Diktatsätze möglichst in dritter Person
   oder neutral **(Annahme)**.
 - **Wörter, Wortstücke und Laute** („Pony … frisst?“, „Schmet … terling?“) spricht der Erzähler als Sache.
+- **Weitere Stimmen nur für Hörthemen (Christian, 2026-11-14):** Themen, die mehrere Stimmen zum Inhalt haben
+  (sprecher-unterscheiden, viele-stimmen-verstehen, gefuehl-in-der-stimme), bekommen kurze Aufnahmen weiterer
+  Stimmen. Sie gehören zu Gästen in einer Hörszene, sind vorab erzeugt und klar als Hörstück gerahmt. Sonst bleibt
+  es beim Erzähler; die Kinder der Runde sprechen weiterhin nicht.
+- **Die Stimme des Kindes (Christian, 2026-11-14):** In einigen Spielen (Z09, Z10, L18 im Spielkatalog) darf das
+  Kind sich selbst aufnehmen und anhören. Die Aufnahme bleibt auf dem Gerät, wird nicht erkannt oder bewertet und
+  ist nie Bedingung. Aufnahme nur über `spiele/kern/`.
 
 ### Was heute noch anders ist (anzupassen)
 
 - `docs/grundsaetze.md` (§2 Punkt 4, §3.2, K14, K15, §11) und `docs/bedienung.md` (Sprechblase) sind an diese
   Regel angepasst (2026-11-14). Ob später eine Erzählerin dazukommt (z. B. je Welt), ist offen.
-- Sprechblasen in Kettenhüpfer, Perlenbrücke, Zahlenzauber und den Einführungen prüfen: Zeigt der Zipfel
-  der Blase auf eine Figur oder steht darin ein Ich-Satz, wird sie zur Erzählblase.
+- Sprechblasen in den Einführungen (`spiele/einfuehrungen/`) prüfen: Zeigt der Zipfel der Blase auf eine Figur
+  oder steht darin ein Ich-Satz, wird sie zur Erzählblase. (Die alten Spiele sind entfernt.)
 
 ## 2. Texte für die Stimme schreiben
 

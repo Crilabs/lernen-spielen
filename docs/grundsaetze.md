@@ -1,6 +1,7 @@
 # Grundsätze für Lernen Spielen
 
-Stand: 2026-11-13 · **freigegeben** (Christian, 2026-11-13)
+Stand: 2026-11-14 · **freigegeben** (Christian, 2026-11-13; angepasst nach dem Spielkatalog `docs/spielkatalog.md`,
+freigegeben 2026-11-14)
 Begründungen und Quellen: [`docs/reports/Grundsätze für Lernspiele.md`](reports/Grundsätze%20für%20Lernspiele.md),
 Rohnotizen in `docs/research_notes/Grundsätze für Lernspiele/` (für Abschnitt 9:
 `geschichten_angst_gewalt.md`, noch nicht in den Bericht eingearbeitet). Für Abschnitt 10 (Kosmik-Schicht):
@@ -12,6 +13,10 @@ widersprechen, gilt dieses Konzept.
 
 Kennzeichnung: **[B]** gut belegt · **[b]** belegt mit Einschränkungen · **[P]** Praxiswissen bzw.
 Tradition, nicht empirisch geprüft · **[E]** eigene Entscheidung des Projekts · *Annahme:* noch zu prüfen.
+
+Dazu gehören: [`grundsaetze-bilder.md`](grundsaetze-bilder.md) (Bilder, Figuren, Farben), [`figuren.md`](figuren.md)
+(die Runde), [`stimme.md`](stimme.md) (Erzähler), [`bedienung.md`](bedienung.md) (Bedienung und Bausteine) und
+[`spielkatalog.md`](spielkatalog.md) (welche Spiele es gibt, Heimatwelten, Regeln für alle Spiele).
 
 ---------------------------------------------------------------------------------------------------
 ## 0. Leitsatz und Prüffrage
@@ -39,12 +44,12 @@ Spielwelt?** Wäre das Spiel ohne den Lerninhalt noch spielbar, ist der Inhalt a
 | L5 | **Erst zeigen, dann üben.** Neue Spieltypen machen es einmal vor (ein Lösungsbeispiel), dann lässt das Spiel Lücken, dann arbeitet das Kind allein. Kein „Erst mal selbst herausfinden“ als Methode für neue Inhalte; kurzes Ausprobieren der *Bedienung* ist erlaubt. | [b] in Kl. 2–5 kehrt sich „productive failure“ um |
 | L6 | **Erst einzeln, dann gemischt** – und nur Verwechslungspartner mischen (Plus/Minus, d/t im Auslaut, Nomen/Adjektiv). | [b] |
 | L7 | **Vom Ding über das Bild zum Zeichen.** In Mathe neutrales Material (Perlen, Plättchen) statt bunter Gegenstände; dieselbe Struktur in drei Stufen. Zahlenstrahl linear, nicht kreisförmig. | [b] |
-| L8 | **Kein Dekor ohne Bedeutung.** Was sich bewegt, hat mit dem Lerninhalt zu tun. Gerade in kurzen Einheiten schadet Zierrat am meisten. | [B] |
+| L8 | **Kein Dekor ohne Bedeutung.** Was sich bewegt, hat mit dem Lerninhalt zu tun; es zeigt den Inhalt oder die Folge einer Kinderhandlung. Gerade in kurzen Einheiten schadet Zierrat am meisten. | [B] |
 | L9 | **Schwierigkeit: meistens erfolgreich.** Zielkorridor etwa 75–90 % richtig im ersten Versuch. Das ist eine Konvention, kein Naturgesetz (die „85-%-Regel“ stammt aus Maschinenmodellen). | [P] |
 | L10 | **Kurze Einheiten, oft.** Eine Runde 3–5 Minuten mit natürlichem Ende. Keine Minuten-pro-Lebensjahr-Regel. | [b] |
 | L11 | **Vorlesen ist Zugang, nicht Bonus.** Alles Geschriebene kann vorgelesen werden. Im Lesespiel ist Wort plus Stimme das Lernziel selbst. | [B] |
 | L12 | **Hilfe-Leiter:** 1. Fehler nur Signal, 2. eine Denkhilfe (die Probe, nicht die Lösung), 3. Lösung mit Begründung, die das Kind selbst ausführt. Mit Hilfe Gelöstes zählt nicht als gekonnt. In den Lerndaten prüfen, ob Kinder durchklicken. | [b] begründet über Tutorsysteme; Wood & Middleton 1978 nicht mehr als Beleg |
-| L13 | **Gekonnt heißt auch woanders gekonnt.** Gelegentlich fremde Formate (mündlich, auf Papier, im Alltag) nutzen; sonst misst die App nur, dass das Kind die App beherrscht. Gehört in die Elternansicht als Anregung. | [b] |
+| L13 | **Gekonnt heißt auch woanders gekonnt.** Gelegentlich fremde Formate (mündlich, auf Papier, im Alltag) nutzen; sonst misst die App nur, dass das Kind die App beherrscht. Im Spiel als **Mach-mit-Moment**: Ein Kind der Runde tut es mit echtem Material vor, der Erzähler lädt das Kind ein (allein oder „Frag jemanden, ob ihr zusammen …“); am Rundenende oder in der Pause, nie Bedingung, kein Nachfragen, kein Beleg. „Gekonnt“ entsteht nur aus dem, was die App selbst sieht (Spielkatalog 4.3). | [b] |
 
 **Mythen, die nicht in Spiele gehören:** Lerntypen („visuelles Kind“), ungeleitetes Entdecken als
 Methode, „digital natives“ lernen anders, Abstände müssen immer wachsen.
@@ -75,7 +80,10 @@ Bewertend ist aber nicht „passt / passt nicht“, sondern alles, was das Kind 
 Deshalb:
 
 1. **Die Mechanik zeigt, ob es passt** (Montessori: Fehlerkontrolle im Material). Das Kärtchen springt
-   zurück, die Waage kippt, die Kette rollt bis zur echten Stelle der falschen Zahl.
+   zurück, die Waage kippt, die Kette rollt bis zur echten Stelle der falschen Zahl. **Wo die Sache nicht urteilen
+   kann** (Formen, die man nicht herleiten kann: der/die/das, Mehrzahl, starke Verben), zeigt eine
+   **Kontrollkarte**, ob es stimmt: Das Kind dreht sie selbst um und vergleicht. Die App urteilt nicht
+   (Christian, 2026-11-14; Spielkatalog 4.4).
 2. **Die Stimme benennt die Sache und das Warum:** „Ein Hund. Den schreibt man groß.“ / „Sieben. Sieben
    Perlen.“ / „Das ist die 34. Die 43 liegt weiter hinten.“
 3. **Keine Zusätze, die urteilen:** kein „super“, „leider“, „schon wieder“, „endlich“.
@@ -85,10 +93,10 @@ Deshalb:
    sie in der dritten Person (`docs/stimme.md`). Die Regel aus der Gewaltfreien Kommunikation bleibt:
    **Jede Figur ist für ihre Gefühle selbst verantwortlich**, der Erzähler benennt sie mit ihrem *eigenen*
    Bedürfnis, nicht mit dem Kind als Ursache.
-   - Ja: „Das Einhorn freut sich. Es wollte schon lange über den Bach.“ · „Puh. Das Einhorn war gespannt,
-     ob die Brücke hält.“ · „Das Einhorn staunt. Das Kärtchen passt nicht. Es will wissen, warum.“
-   - Nein: „Du machst das Einhorn glücklich.“ · „Das hast du toll gemacht!“ (Urteil über das Kind) ·
-     „Das Einhorn ist traurig, weil du …“ (Schuld, Steuerung) · „Das Einhorn ist enttäuscht.“
+   - Ja: „Kofi freut sich. Er wollte schon lange über den Bach.“ · „Puh. Lena war gespannt,
+     ob die Brücke hält.“ · „Ela staunt. Das Kärtchen passt nicht. Sie will wissen, warum.“
+   - Nein: „Du machst Timo glücklich.“ · „Das hast du toll gemacht!“ (Urteil über das Kind) ·
+     „Lena ist traurig, weil du …“ (Schuld, Steuerung) · „Kofi ist enttäuscht.“
    - Nein: Ich-Sätze einer Figur („Ich freu mich so!“), auch nicht als Zitat des Erzählers.
 5. **Gefühle bewerten nicht und steuern nicht.** Die Freude einer Figur gilt der Sache in der Spielwelt
    und ist kein verstecktes Lob; sie ist bei einer richtigen Antwort nicht jedes Mal gleich laut, damit
@@ -162,13 +170,15 @@ sie ohne das Geschlecht des Kindes auskommen – das ergibt sich fast von selbst
 | **Isolation der Schwierigkeit** | Ein Spiel, eine Schwierigkeit. Alles andere ist leicht (kurze Wörter, Vorlesen), damit z. B. ein Grammatikspiel kein Lesetest wird. |
 | **Fehlerkontrolle im Material** | Siehe 3.1. Das Kind soll den Fehler selbst bemerken und korrigieren. |
 | **Nicht korrigieren, wieder anbieten** | Nach einer Hilfe zur Lösung kommt das Thema an einem anderen Tag wieder (Wiedervorlage), statt dass man im Moment insistiert. |
-| **Vom Konkreten zum Abstrakten** | Montessori-Material als digitale Vorlage, wo es symbolisch ist (Perlen, Markenspiel, Wortartensymbole, bewegliches Alphabet). Was vom Tasten lebt (Sandpapierbuchstaben, Tausenderwürfel), nicht als Ersatz verkaufen, sondern als Anregung für echtes Material in die Elternansicht. |
+| **Vom Konkreten zum Abstrakten** | Montessori-Material als digitale Vorlage, wo es symbolisch ist (Perlen, Markenspiel, Wortartensymbole, bewegliches Alphabet). Was vom Tasten lebt (Sandpapierbuchstaben, Tausenderwürfel), nicht als Ersatz verkaufen, sondern als Mach-mit-Moment: Ein Kind der Runde tut es mit echtem Material vor, das Kind wird eingeladen (L13). |
 | **Beobachtung durch den Erwachsenen** | Die App beobachtet still (gewählt, wiederholt, wo geirrt) und zeigt es außerhalb der Spielzeit dem Erwachsenen, der dann eine echte Darbietung planen kann. |
 | **Zweite Entwicklungsstufe (6–12): Warum-Fragen, große Zusammenhänge** | Spiele dürfen Ursprünge und Zusammenhänge erzählen (warum es Zehner gibt, woher ein Wort kommt), nicht nur üben. |
 
-**Fantasie und Einhorn** [b]: Ab sechs Jahren empfahl Montessori selbst märchenhafte Erzählformen. Die
-Regel lautet deshalb: **Fantasie im Rahmen, Wirklichkeit im Lernkern.** Das Einhorn trägt die Geschichte,
-aber Buchstaben bleiben Buchstaben (keine Buchstaben in Tierform), Mengen bleiben neutrale Perlen, und
+**Fantasie im Rahmen** [b]: Ab sechs Jahren empfahl Montessori selbst märchenhafte Erzählformen. Die
+Regel lautet deshalb: **Fantasie im Rahmen, Wirklichkeit im Lernkern.** Die Geschichte tragen die Kinder der
+Runde (`docs/figuren.md`); sie können in der Szene Dinge, die es in echt nicht gibt (schrumpfen, schweben,
+zaubern, mit Regeln, `figuren.md` §5). Ein Einhorn oder andere Fantasie-Hauptfiguren gibt es nicht mehr
+(Christian, 2026-11-13). Buchstaben bleiben Buchstaben (keine Buchstaben in Tierform), Mengen bleiben neutrale Perlen, und
 Sachwissen über die echte Welt stimmt. **Auch Sachfakten sind Lernkern** (Abschnitt 10, K3): Die Maus, über
 die das Kind etwas erfährt, ist eine echte Maus.
 
@@ -186,7 +196,7 @@ echtes Material und Tätigkeiten im Alltag und mit Spielen, die man zu zweit spi
 ## 5. Fachbegriffe
 
 **Regel [b]:** Von der ersten Begegnung an der richtige Fachbegriff, wie ihn der LehrplanPLUS Bayern nennt.
-Keine Ersatznamen, auch nicht übergangsweise. Kindgerecht wird ein Begriff über **Symbol und Farbe**
+Keine Ersatznamen, auch nicht übergangsweise. Kindgerecht wird ein Begriff über **Symbol (Form und Größe), Farbe zusätzlich**
 (Montessori-Wortartensymbole), über **Proben** und **Beispiele**, nicht über einen anderen Namen.
 Bedeutungsregeln („Nomen kann man anfassen“, „Verben sagen, was man tut“, „Adjektive sagen, wie etwas
 ist“) kommen weder als Definition noch als Kistenname noch im Hilfetext vor. Sie gelten nur am Anfang und
@@ -215,8 +225,7 @@ Weitere Regeln:
 - **Keine „Regeln mit Verfallsdatum“:** „Plus macht immer mehr“, „die größere Zahl steht vorn“,
   „Minus heißt wegnehmen“ (auch Unterschied!) [P].
 - **Symbole nach Montessori:** Nomen schwarzes Dreieck, Artikel kleines hellblaues Dreieck, Verb roter
-  Kreis, Adjektiv dunkelblaues Dreieck *(Annahme: genaue Farben vor dem Bau an einem Montessori-Album
-  prüfen)*; überall gleich, damit das Symbol den Begriff trägt.
+  Kreis, Adjektiv dunkelblaues Dreieck (nach AMI bestätigt, `grundsaetze-bilder.md` §5); überall gleich, damit das Symbol den Begriff trägt.
 
 ---------------------------------------------------------------------------------------------------
 ## 6. Vielfalt und Stereotype – bewusst dagegen arbeiten
@@ -365,7 +374,7 @@ Familien und Hautfarben abzubilden ist Abbildung der Wirklichkeit und keine Part
 3. **Keine Gewalt als Lösung,** auch nicht gegen „Böse“. Wer störend oder bedrohlich wirkt, stellt sich
    als harmlos, hungrig, einsam oder missverstanden heraus und wird zum Freund. Niemand wird bestraft.
 4. **Lernen und Bedrohung nie gleichzeitig.** Eine falsche Antwort bringt niemals eine Figur in Gefahr
-   („Wenn du falsch rechnest, fällt das Einhorn ins Wasser“ ist verboten). Kein Zeitdruck, keine
+   („Wenn du falsch rechnest, fällt Kofi ins Wasser“ ist verboten). Kein Zeitdruck, keine
    Verfolgung während einer Aufgabe. Das verbindet N5/N6/N7 mit 9.1.
 5. **Sieben Sicherheitssignale:** (1) Ein freundlicher Helfer ist sichtbar oder in Rufweite. (2) Das Kind
    löst (siehe 2). (3) Humor bricht Anspannung. (4) Das Problem löst sich in derselben Szene. (5) Helle
@@ -436,14 +445,14 @@ abgeleitet; ein kleiner Vorher-Nachher-Test mit drei Fakten wäre die erste echt
 | K2 | **Der Sachgrund steckt in der Rechnung.** In Mathe liefern Sachfakten Zahlen und Beziehungen der Aufgabe (Körner auf Mäusenester verteilen, Beine zählen). Ein Themenbild neben einer kahlen Aufgabe zählt nicht. | [b] Walkington; Habgood & Ainsworth |
 | K3 | **Der Sachfakt ist ein Lernkern.** Foto oder naturgetreue Zeichnung, generische Sprache („Mäuse …“). Eine vermenschlichte Figur erzählt keine Sachfakten als Ich-Erlebnis. Keine Mythen („Mäuse lieben Käse“). | [b] Ganea 2014; Strouse 2018 |
 | K4 | **Jeder Fakt geprüft.** Pro Welt ein fester Faktensatz (etwa 5–10) mit Quelle, gefüllt erst, wenn ein Spiel die Welt nutzt. Kein Fakt aus dem Gedächtnis. | [E] |
-| K5 | **Ein Thema, viele Spiele.** Welten kehren über Spiele und Tage wieder und vertiefen sich; ein späteres Spiel nutzt einen früheren Fakt als Aufgabengrund. Das ist die Wiedervorlage der Schicht (L3). | [b] MORE; Fisch |
+| K5 | **Ein Thema, viele Spiele.** Welten kehren über Tage wieder und vertiefen sich: in den Runden ihres Heimatspiels, in weiteren Zugängen und in der Pause; ein späteres Spiel darf einen früheren Fakt als Aufgabengrund nutzen. Das ist die Wiedervorlage der Schicht (L3). Der Sachstoff einer Runde richtet sich nach der Klasse des Themas der Runde („Sache wächst mit“, Spielkatalog 4.1). | [b] MORE; Fisch |
 | K6 | **Höchstens ein neuer Fakt pro Runde.** Wiederholte Fakten zählen nicht als neu. | [P] |
 | K7 | **Sachwissen ist nie Bedingung.** Keine Sachabfrage zum Weiterkommen, kein „gekonnt“ für Sachfakten. Die Elternansicht zeigt nur besuchte Welten (3.3). | [P] Isolation der Schwierigkeit |
 | K8 | **Der Pausenmoment ist keine Belohnung.** Er kommt nicht nur nach richtigen Antworten, ist immer erreichbar und lässt sich ohne Verlust überspringen (N4, N5). | [E] |
-| K9 | **Das Kind wählt die Welt.** Welten sind kleine Wahlen (N2); der Klassenhinweis ist Orientierung, keine Sperre. Themen werden nie nach Geschlecht zugeschnitten. | [B/b] Personalisierung; N1; 6 |
+| K9 | **Jedes Spiel hat eine feste Heimatwelt** (Christian, 2026-11-14). Das Kind wählt keine Welt: Es konzentriert sich auf die Spielhandlung und lernt alle Welten über die Spiele kennen. Eine Welt ist Heimat von höchstens zwei Spielen; die Zuordnung steht in `docs/spielkatalog/welten.md`. Themen werden nie nach Geschlecht zugeschnitten. | [B/b] Personalisierung; N1; 6 |
 | K10 | **In Deutsch näher am Kern.** Sachwörter dürfen Übungswörter sein, Sachsätze Lesetexte, solange die Zielschwierigkeit isoliert bleibt. | [b] MORE |
 | K11 | **Echt-Zeichen.** Was wirklich so ist, trägt ein festes Symbol oder eine feste Rahmung, getrennt vom Fantasierahmen (HSU 1/2: „Geschichte und Geschichten“). | *Annahme:* in Apps ungeprüft |
-| K12 | **Soziale Szenen zwischen Kindern.** Einhorn und Tiere begleiten; das Verhalten zeigen Kinder an Alltagsorten. Gewünschtes Verhalten wird konkret gezeigt und benannt, der Konflikt bleibt kurz, die Lösung ausführlich. Benannt wird das Verhalten („Lena darf mitspielen“), nie die Gruppe (6). | [B] Mares & Woodard; [b] Larsen 2018 |
+| K12 | **Soziale Szenen zwischen Kindern.** Die Kinder der Runde begleiten, Tiere erscheinen nur naturgetreu; das Verhalten zeigen Kinder an Alltagsorten. Gewünschtes Verhalten wird konkret gezeigt und benannt, der Konflikt bleibt kurz, die Lösung ausführlich. Benannt wird das Verhalten („Lena darf mitspielen“), nie die Gruppe (6). | [B] Mares & Woodard; [b] Larsen 2018 |
 | K13 | **Gefühlsfragen haben keine falsche Antwort.** Kein Mechanik-Signal bei „Was sagt dein Bauch?“, Antworten werden nicht kommentiert. Sachregeln bleiben eindeutig („Schlechte Geheimnisse darf man immer weitererzählen“). | [P] AJS |
 | K14 | **Schutz stärkt, warnt nicht.** Der Erzähler spricht Rechte zu („Du darfst …“), Verantwortung liegt bei Erwachsenen. Keine Täter, keine Fremdenfigur (statt „Geh nicht mit Fremden mit“: „Lena sagt Bescheid, wo sie ist.“), keine Fragen, ob dem Kind etwas passiert ist, nichts davon wird gespeichert. Körperteile heißen richtig (auch Penis, Vulva, Po, Brust), zuerst im neutralen Körperspiel, mit Elternvorschau. Die App verspricht keine Präventionswirkung. | [B] Cochrane 2015 (keine Angstzunahme); [P] Kinderschutz Schweiz, AJS |
 | K15 | **Rechte benennen, nicht Selbstwert.** „Lena darf Nein sagen“ / „Du darfst Nein sagen“ ja, „Du bist liebenswert“ nein (3.2). Keine Ich-Form, weil Figuren nicht selbst sprechen (`docs/stimme.md`). | [E] nach 0 und 3.1 |
@@ -458,7 +467,7 @@ nicht; sie würde die Kategorie zum Thema machen (6).
 ## 11. Barrierefreiheit (Kurzfassung)
 
 - Alles Geschriebene vorlesbar; schwierige Wörter mit Bild.
-- **Information nie nur über Farbe** (Farbsehschwäche betrifft etwa jeden zwölften Jungen [P]); immer
+- **Information nie nur über Farbe** (Farbsehschwäche betrifft etwa jeden zwölften Jungen [B]); immer
   zusätzlich Form, Symbol oder Position. Die Wortartensymbole haben deshalb Form *und* Farbe.
 - Druckschrift in den Richtformen der Grundschule (die App nutzt Andika); große Touch-Ziele.
 - Eine Erzählstimme für alle Spiele (Florian, `docs/stimme.md`). Ob später eine Erzählerin dazukommt

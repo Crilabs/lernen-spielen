@@ -183,7 +183,9 @@ Figuren nutzen): Jede Szene trägt in ihren Daten, welche Kinder vorkommen und w
 
 - jedes Kind der Runde kommt etwa gleich oft vor, in Mathe wie in Deutsch;
 - „vorzeigen“ ist gleich verteilt, Mädchen und Jungen gleich oft;
-- Timo löst und zeigt vor wie alle, nicht seltener.
+- Timo löst und zeigt vor wie alle, nicht seltener;
+- die Fähigkeiten aus §5 (schrumpfen, schweben, zaubern …) sind über die Kinder verteilt: Jedes Kind nutzt sie
+  etwa gleich oft, keines hat „seine“ Fähigkeit (Spielkatalog 4.7).
 
 ---------------------------------------------------------------------------------------------------
 ## 9. Offen

@@ -128,6 +128,11 @@ Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.
   nur beim Zahnrad auf der Startseite (Zugang für Erwachsene).
 - Zoomen, Markieren, Kontextmenü und Ziehen von Bildern sind gesperrt (`sperreTouch()` aus
   `lernspiel.js`).
+- **Vorgemerkt (Spielkatalog §8, noch nicht freigegeben):** Freihand-Strich mit Aufzeichnung (S18, S20),
+  Drehgriff am angehobenen Teil und Drehpfeile an Körpern (Geometrie), Zurück im Lernfeld (R10, R12),
+  Zwei-Personen-Ablauf am selben Gerät (M34, M56), Aufnahmeknopf (Z09, Z10, L18), Kopfhörer für links/rechts (Z01).
+  Jede Eingabe wird im Plan des ersten Spiels entworfen, das sie braucht, mit diesem Plan freigegeben und dann
+  hier als Geste oder Baustein eingetragen. Bis dahin bleibt es bei Tippen und Ziehen.
 
 ---------------------------------------------------------------------------------------------------
 ## 6. Wie Bedienelemente reagieren

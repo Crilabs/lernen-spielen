@@ -136,6 +136,10 @@ Dateien:
   (Aufgaben, mit denen sich „nicht betroffen“ bestätigen lässt), `kind_hinweis` (wird vorgelesen: ohne Ziffern und
   Zahlwörter) und `eltern` (beschreibend; `stufe2` nur bei anhaltenden Mustern). Grundlage:
   `docs/reports/Häufige Fehler Grundschule.md`. Die Lernsteuerung wertet Fehlerbilder noch nicht aus.
+  Neben `themen` stehen `ueberschriften` und `welten` (Sachwelten, `docs/grundsaetze.md` §10). Jede Welt hat
+  `fakten`: den geprüften Faktensatz (K4), gefüllt erst, wenn ein Spiel die Welt nutzt; jeder Fakt hat `text`,
+  `quelle` und `klasse` (ab welcher Klasse er passt, „Sache wächst mit“, `docs/spielkatalog.md` 4.1).
+  Welches Spiel in welcher Welt spielt: `docs/spielkatalog/welten.md`.
 - `spiele/aufgabenarten.js`: Aufgaben-Erzeuger. Aufgabenarten: `zerlegung`, `rechnen`, `menge`, `zwillinge`.
 - `spiele/lernsteuerung.js`: Steuerung (reine Logik ohne DOM, in Node testbar) und `runde()` für die Spiele.
   Sie wählt das Thema, macht bei neuen Themen eine Probe (bekannte Themen werden übersprungen), übt auf den Stufen,

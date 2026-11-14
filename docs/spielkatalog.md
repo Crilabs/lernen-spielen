@@ -398,6 +398,13 @@ M35 und M37 (Wiese und Hecke), R11 und R13 (Karten).
 ---------------------------------------------------------------------------------------------------
 ## 8. Folgen für andere Dokumente (Aufgaben nach der Freigabe)
 
+**Stand 2026-11-14: umgesetzt** in `grundsaetze.md` (K5, K9, L13, §3.1 Kontrollkarte, §4, dazu die ausstehenden
+Einhorn-Anpassungen aus `grundsaetze-bilder.md` §14), `stimme.md`, `bedienung.md` und `grundsaetze-bilder.md`
+(als Vormerkung, Festlegung mit dem Plan des ersten Spiels, 8a), `figuren.md` §8, `lernplan.json` (Merkhilfen in
+Tierform entfernt, sprechende Tiere in Beispielen ersetzt), README (Feld `fakten[].klasse`).
+**Noch offen:** Die 13 Themen ohne Lehrplan-Nummer gehen erst mit den Plänen von M15, M16 und M24 in Pakete auf,
+weil Aufgaben-Erzeuger (`aufgabenarten.js`) und Tests an ihnen hängen.
+
 **`docs/grundsaetze.md`**
 - K9 „Das Kind wählt die Welt“ → „Jedes Spiel hat eine feste Heimatwelt; das Kind lernt alle Welten über die
   Spiele kennen.“ K5 („Welten kehren über Spiele wieder“) entsprechend: über Zugänge und die Pause, nicht durch Wahl.

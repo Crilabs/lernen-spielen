@@ -4537,7 +4537,7 @@
         "Mimi",
         "Welcher Buchstabe summt „mmm“?"
       ],
-      "zweck": "Auf Packungen und Schildern das M wiederfinden, etwa um im Laden die Milch zu entdecken; in einer fliegenden Möwe steckt seine Form.",
+      "zweck": "Auf Packungen und Schildern das M wiederfinden, etwa um im Laden die Milch zu entdecken.",
       "eltern": "Suchen Sie gemeinsam das M auf Packungen und Schildern und sprechen Sie dabei den Laut „mmm“, nicht den Namen „em“."
     },
     {
@@ -4697,7 +4697,7 @@
         "Lola, Lili",
         "la, li, lo"
       ],
-      "zweck": "Am Gehege lesen, dass hier das Lama wohnt; eine Stehlampe von der Seite zeigt die Form des L.",
+      "zweck": "Am Gehege lesen, dass hier das Lama wohnt.",
       "eltern": "Lesen Sie gemeinsam Silben wie „la, li, lo“ und singen Sie sie zu einer bekannten Melodie. Achten Sie darauf, dass Ihr Kind das kleine l nicht mit dem großen I verwechselt."
     },
     {
@@ -4727,7 +4727,7 @@
         "Silo, Lisa",
         "so, sa, si"
       ],
-      "zweck": "Auf einer Packung lesen, ob Salami drin ist; die Form des S steckt im Seepferdchen.",
+      "zweck": "Auf einer Packung lesen, ob Salami drin ist.",
       "eltern": "Summen Sie das S am Wortanfang wie eine Biene: „Sssalami“. Ihr Kind fährt das S dabei mit dem Finger nach."
     },
     {
@@ -4880,7 +4880,7 @@
         "Ufo",
         "fa, fi, fo"
       ],
-      "zweck": "Lesen, ob auf dem Zettel „Sofa“ oder „Ufo“ steht; in einer Fahne an ihrem Mast steckt die Form des F.",
+      "zweck": "Lesen, ob auf dem Zettel „Sofa“ oder „Ufo“ steht.",
       "eltern": "Lassen Sie Ihr Kind beim „fff“ die Luft an der Hand spüren. Suchen Sie das F auf Schildern, etwa bei Fahrrad oder Feuerwehr."
     },
     {
@@ -4944,7 +4944,7 @@
         "Tal, Tor",
         "Ast"
       ],
-      "zweck": "Auf dem Beetschild lesen, wo die Tomaten wachsen, bevor man gießt; ein Stehtisch mit nur einem Bein zeigt die Form des T.",
+      "zweck": "Auf dem Beetschild lesen, wo die Tomaten wachsen, bevor man gießt.",
       "eltern": "Achten Sie darauf, dass Ihr Kind „ta“ in einem Zug liest und nicht „te-a“. Den Laut kann man nicht dehnen, er knallt kurz."
     },
     {
@@ -9627,7 +9627,7 @@
       "ziel": "In einer gehörten oder gezeigten Szene erkennen, wer jemanden unterbricht und wer ausreden lässt.",
       "beispiele": [
         "Zwei Szenen am Frühstückstisch: In welcher fällt jemand ins Wort?",
-        "Der Hase erzählt, der Fuchs ruft dazwischen: Wer hat nicht gewartet?"
+        "Lena erzählt, Timo ruft dazwischen: Wer hat nicht gewartet?"
       ],
       "zweck": "Beim Erzählen in der Familie hören, wie die Geschichte des Bruders ausgeht, statt sie zu verpassen.",
       "eltern": "Wenn das Kind Sie unterbricht, legen Sie kurz die Hand auf seine und sprechen Sie Ihren Satz ruhig zu Ende; danach ist es dran."
@@ -9813,7 +9813,7 @@
       "rid": "SZ1-22",
       "ziel": "In einer kurzen Szene erkennen, wie sich eine Figur fühlt, und das passende Gesicht oder die passende Haltung wählen.",
       "beispiele": [
-        "Der Bär verliert seinen Ballon → traurig",
+        "Kofi verliert seinen Ballon → traurig",
         "Die Maus bekommt ein Geschenk → froh",
         "Der Hund hört Donner → ängstlich"
       ],
@@ -17412,7 +17412,7 @@
         "„Der Riese hilft allen und lacht oft.“ Wie ist er?",
         "Ist die Hexe in der Geschichte mutig oder ängstlich?"
       ],
-      "zweck": "Aus einer Geschichte herauslesen, ob man einer Figur trauen kann, etwa ob der Fuchs freundlich oder listig ist.",
+      "zweck": "Aus einer Geschichte herauslesen, ob man einer Figur trauen kann, etwa ob der Gast freundlich oder listig ist.",
       "eltern": "Fragen Sie nach dem Vorlesen: „Wie ist die Figur? Woran merkst du das im Text?“ Lassen Sie Ihr Kind die Stelle zeigen."
     },
     {
@@ -18104,7 +18104,7 @@
       "rid": "SZ2-05",
       "ziel": "In einem Hördialog zwei Sprecher auseinanderhalten und einen Satz der richtigen Figur zuordnen.",
       "beispiele": [
-        "Fuchs und Hase sprechen: Wer hat gesagt „Ich habe Hunger“?",
+        "Die Bäckerin und der Busfahrer sprechen: Wer hat gesagt „Ich habe Hunger“?",
         "Mama und Kind am Telefon: Wer wollte Nudeln?"
       ],
       "zweck": "Bei einem Hörspiel verstehen, wer gerade spricht, und der Geschichte folgen.",
