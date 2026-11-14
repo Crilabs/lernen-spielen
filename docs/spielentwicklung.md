@@ -52,7 +52,7 @@ spiele/
       spiel.js          Spielwelt, Aufgabe, Rahmen (aus der Vorlage)
       logik.js          reine Spiellogik, in Node getestet (falls nötig)
       texte.json        alle gesprochenen und geschriebenen Sätze (für die Audio-Pipeline)
-      symbol.svg        Spielsymbol (Startseite, Fach-Seite)
+      symbol.svg        Spielsymbol = Kopf der Figur (Kopfleiste, Regal-Detail)
       objekte/          spielspezifische animierte SVG-Objekte
       bilder/           Szenenbild(er) mit herkunft.json (A4)
   objekte/              Objekte, die mehrere Spiele nutzen (Tonne, Baum, Korb …)
