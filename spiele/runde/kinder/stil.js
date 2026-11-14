@@ -134,6 +134,34 @@ export function glied(p1, r1, p2, r2, farbe, o = {}) {
 }
 
 /**
+ * Haarlocke: geschwungene, spitz zulaufende Strähne von der Wurzel b zur Spitze t.
+ * Schattiert wie jede Fläche; licht: kleine helle Form auf der Locke (nur vorn), keine Linie.
+ * @param {[number, number]} b Wurzel @param {[number, number]} t Spitze @param {number} breite
+ * @param {number} bogen seitliche Wölbung (+ rechts, - links) @param {string} farbe
+ * @param {{licht?: boolean}} [o]
+ * @returns {Stueck}
+ */
+export function locke(b, t, breite, bogen, farbe, o = {}) {
+  const dx = t[0] - b[0];
+  const dy = t[1] - b[1];
+  const l = Math.hypot(dx, dy) || 1;
+  const n = [-dy / l, dx / l];
+  const m = [b[0] + dx * 0.5 + n[0] * bogen, b[1] + dy * 0.5 + n[1] * bogen];
+  const h = breite / 2;
+  /** @param {number[]} p @param {number} k */
+  const N = (p, k) => `${z(p[0] + n[0] * k)} ${z(p[1] + n[1] * k)}`;
+  const d = `M${N(b, h)} Q${N(m, h * 0.75)} ${z(t[0])} ${z(t[1])} Q${N(m, -h * 0.75)} ${N(b, -h)} Z`;
+  const teil = form(pfad(d), farbe, /** @type {[number, number]} */ ([b[0] + n[0] * h * 0.6, b[1] + n[1] * h * 0.6]), { s: 0.84 });
+  if (!o.licht) return teil;
+  const a1 = [b[0] + dx * 0.18 + n[0] * h * 0.35, b[1] + dy * 0.18 + n[1] * h * 0.35];
+  const a2 = [b[0] + dx * 0.55 + n[0] * (bogen * 0.6 + h * 0.15), b[1] + dy * 0.55 + n[1] * (bogen * 0.6 + h * 0.15)];
+  const mm = [(a1[0] + a2[0]) / 2 + n[0] * h * 0.22, (a1[1] + a2[1]) / 2 + n[1] * h * 0.22];
+  const licht = `<path d="M${z(a1[0])} ${z(a1[1])} Q${z(mm[0])} ${z(mm[1])} ${z(a2[0])} ${z(a2[1])}`
+    + ` Q${z((a1[0] + a2[0]) / 2)} ${z((a1[1] + a2[1]) / 2)} ${z(a1[0])} ${z(a1[1])} Z" fill="${heller(farbe, 0.3)}" stroke="none"/>`;
+  return { svg: teil.svg + licht, kontur: teil.kontur };
+}
+
+/**
  * Handformen an einem Handgelenk w; die Hand zeigt in Richtung +y (Arm hängt) und dreht mit dem Unterarm.
  * daumen = +1: Daumen rechts, -1: links.
  * @param {[number, number]} w @param {string} haut @param {1|-1} daumen
