@@ -2,14 +2,15 @@
 // Rein: gleiche Eingabe, gleicher Text. steuere.js setzt danach nur noch transform-Attribute.
 
 import { bestand } from "./bestand.js";
-import { BAUM, WURZEL, FUSSPUNKT } from "./gelenke.js";
+import { BAUM, WURZEL, FUSSPUNKT, FOLGT } from "./gelenke.js";
 import { pose as posen } from "./pose.js";
 
 /**
  * @typedef {import("./gelenke.js").Ansicht} Ansicht
  * @typedef {import("./bestand.js").KindAnsicht} KindAnsicht
  * @typedef {import("./pose.js").Pose} Pose
- * @typedef {{zubehoer?: string[], zustaende?: Record<string, string>, blick?: "rechts"|"links", haltung?: string}} Ausstattung
+ * @typedef {{zubehoer?: string[], zustaende?: Record<string, string>, blick?: "rechts"|"links", haltung?: string, ohneLuft?: boolean}} Ausstattung
+ *   ohneLuft: Luftzeichen weglassen (wenig Bewegung)
  */
 
 const INK = "#3B2A6B";
@@ -28,10 +29,58 @@ export function transformFuer(punkt, grad) {
  * @param {KindAnsicht} ans @param {string} gelenk @param {Pose} p
  */
 export function gelenkTransform(ans, gelenk, p) {
-  const dreh = transformFuer(ans.drehpunkte[gelenk], p.winkel[gelenk] ?? 0);
+  const vorbild = FOLGT[gelenk] ?? gelenk;
+  const dreh = transformFuer(drehpunktVon(ans, gelenk), p.winkel[vorbild] ?? 0);
   if (gelenk !== WURZEL) return dreh;
   const [fx, fy] = FUSSPUNKT;
-  return `translate(${z(p.versatz[0])} ${z(p.versatz[1])}) translate(${fx} ${fy}) scale(${z(p.groesse)}) translate(${-fx} ${-fy}) ${dreh}`;
+  const [sx, sy] = p.streckung ?? [1, 1];
+  const skala = sx === 1 && sy === 1 ? z(p.groesse) : `${z(p.groesse * sx)} ${z(p.groesse * sy)}`;
+  return `translate(${z(p.versatz[0])} ${z(p.versatz[1])}) translate(${fx} ${fy}) scale(${skala}) translate(${-fx} ${-fy}) ${dreh}`;
+}
+
+/**
+ * Punkt eines Ankers für Luftzeichen, aus der Ruhelage des Kindes (Luftzeichen drehen und strecken nicht mit).
+ * @param {KindAnsicht} ans @param {Ansicht} ansicht @param {import("./bestand.js").Anker|[number, number]} anker
+ * @returns {[number, number]}
+ */
+export function ankerpunkt(ans, ansicht, anker) {
+  if (Array.isArray(anker)) return anker;
+  const [kx, ky] = ans.drehpunkte.kopf;
+  const [gx, gy] = ans.gesicht;
+  const [rx, ry] = ans.drehpunkte.rumpf;
+  if (anker === "kopf") return [kx, ky - 104];
+  if (anker === "mund") return ansicht === "profil" ? [gx + 40, gy + 30] : [gx + 40, gy + 36];
+  if (anker === "hinten") return [rx - 74, ry - 30];
+  if (anker === "vorn") return [rx + 78, ry - 40];
+  return [FUSSPUNKT[0], FUSSPUNKT[1]];
+}
+
+/** transform der Luftzeichen-Schicht: folgt Versatz und Größe, nicht Drehung und Streckung. @param {Pose} p */
+export function luftTransform(p) {
+  const [fx, fy] = FUSSPUNKT;
+  return `translate(${z(p.versatz[0])} ${z(p.versatz[1])}) translate(${fx} ${fy}) scale(${z(p.groesse)}) translate(${-fx} ${-fy})`;
+}
+
+/** Schlüssel der Luftzeichen einer Pose (zum Vergleichen). @param {Pose} p */
+export const luftSchluessel = (p) => Object.entries(p.luft ?? {}).map(([id, a]) => `${id}@${a}`).sort().join(",");
+
+/**
+ * Inhalt einer Luftzeichen-Gruppe.
+ * @param {string} kindId @param {Pose} p @param {"hinten"|"vorn"} ebene
+ */
+export function luftInnen(kindId, p, ebene) {
+  const ans = ansichtVon(kindId, p.ansicht);
+  return Object.entries(p.luft ?? {}).filter(([, a]) => (a === "hinten") === (ebene === "hinten")).map(([id, a]) => {
+    const l = bestand.luftzeichen.get(id);
+    if (!l) throw new Error(`Runde: unbekanntes Luftzeichen „${id}“`);
+    const [x, y] = ankerpunkt(ans, p.ansicht, a);
+    return `<g data-zeichen="${id}" transform="translate(${z(x)} ${z(y)})">${l.svg}</g>`;
+  }).join("");
+}
+
+/** Drehpunkt eines Gelenks; folgende Gelenke (FOLGT) nehmen ohne eigenen den ihres Vorbilds. @param {KindAnsicht} ans @param {string} gelenk */
+export function drehpunktVon(ans, gelenk) {
+  return ans.drehpunkte[gelenk] ?? ans.drehpunkte[FOLGT[gelenk]];
 }
 
 /** @param {string} kindId */
@@ -126,7 +175,7 @@ export function zeichnePose(kindId, pose, aus = {}) {
 
   /** @param {string} gelenk @param {"flaeche"|"kontur"} modus @returns {string} */
   const gruppe = (gelenk, modus) => {
-    if (!ans.drehpunkte[gelenk]) return "";
+    if (!drehpunktVon(ans, gelenk)) return "";
     const knoten = BAUM[gelenk];
     const eigene = (ans.teile[gelenk] ?? []).filter((t) => !verdeckt.has(t.teil)).map((t) => {
       if (t.teil === "gesicht" && !t.svg) {
@@ -145,6 +194,9 @@ export function zeichnePose(kindId, pose, aus = {}) {
       + zubehoerAn(gelenk, "vorne", modus) + knoten.nach.map((g) => gruppe(g, modus)).join("") + `</g>`;
   };
 
+  const luftP = aus.ohneLuft ? { ...p, luft: {} } : p;
+  /** @param {"hinten"|"vorn"} ebene */
+  const luft = (ebene) => `<g data-luft="${ebene}" transform="${luftTransform(p)}">${luftInnen(kindId, luftP, ebene)}</g>`;
   const label = labelFuer(kindId, aus.haltung);
   const blick = aus.blick === "links"
     ? `<g data-blick="links" transform="translate(320 0) scale(-1 1)">`
@@ -154,8 +206,8 @@ export function zeichnePose(kindId, pose, aus = {}) {
     + `${k.stil ? ` style="${Object.entries(k.stil).map(([n, v]) => `${n}:${v}`).join(";")}"` : ""}`
     + ` role="img" aria-label="${label.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;")}"`
     + ` stroke="${INK}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">`
-    + `${blick}<g data-schicht="kontur" fill="${INK}" stroke="${INK}" stroke-width="${KONTUR}">${gruppe(WURZEL, "kontur")}</g>`
-    + `<g data-schicht="flaeche">${gruppe(WURZEL, "flaeche")}</g></g></svg>`;
+    + `${blick}${luft("hinten")}<g data-schicht="kontur" fill="${INK}" stroke="${INK}" stroke-width="${KONTUR}">${gruppe(WURZEL, "kontur")}</g>`
+    + `<g data-schicht="flaeche">${gruppe(WURZEL, "flaeche")}</g>${luft("vorn")}</g></svg>`;
 }
 
 /**

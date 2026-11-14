@@ -95,13 +95,13 @@ test("Gesicht wechselt zur Hälfte des Übergangs", async () => {
   assert.match(g.innerHTML, /data-test="staunen"/);
 });
 
-test("Ansichtswechsel mitten in einer Bewegung zeichnet neu", async () => {
+test("Ansichtswechsel ohne Drehung zeichnet sofort neu", async () => {
   const { u, svg, f } = figur();
-  const geht = f.bewegung("gehen-test");
+  const geht = f.bewegung("gehen-test", { drehen: false });
   await u.spule(32);
   assert.equal(svg.getAttribute("data-ansicht"), "profil");
   assert.ok(svg.querySelector('[data-gelenk="bein-vorn"]'));
-  const staunt = f.haltung("staunen");
+  const staunt = f.haltung("staunen", { drehen: false });
   assert.deepEqual(await geht, { abgebrochen: true });
   assert.equal(svg.getAttribute("data-ansicht"), "dreiviertel");
   await u.spule(1100);

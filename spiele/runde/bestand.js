@@ -2,7 +2,7 @@
 // Jedes Spiel meldet seine Erweiterungen mit den melde…-Funktionen an (in spiele/<spiel>/runde.js).
 // Beim Anmelden wird geprüft; Fehler nennen Name und Grund, damit ein kaputter Zusatz sofort auffällt.
 
-import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, gelenkeFuer } from "./gelenke.js";
+import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, FOLGT, gelenkeFuer } from "./gelenke.js";
 
 /**
  * @typedef {import("./gelenke.js").Ansicht} Ansicht
@@ -16,12 +16,19 @@ import { BAUM, BEINE, PLAETZE, ANSICHTEN, VERBOTENE_GESICHTER, gelenkeFuer } fro
  *            ansichten: Partial<Record<Ansicht, KindAnsicht>>}} Kind
  * @typedef {{id: string, ansichten: Partial<Record<Ansicht, string>>}} Gesicht
  * @typedef {{vorn?: string, hinten?: string}} Haende
- * @typedef {{winkel?: Record<string, number>, versatz?: [number, number], groesse?: number, haende?: Haende}} Werte
+ * @typedef {{winkel?: Record<string, number>, versatz?: [number, number], groesse?: number, streckung?: [number, number], haende?: Haende}} Werte
+ *   streckung: [sx, sy] um den Fußpunkt, zum Stauchen, Strecken und für die Drehung
+ * @typedef {"weich"|"federn"|"ruck"|"gleich"} Kurve
+ * @typedef {"boden"|"kopf"|"mund"|"hinten"|"vorn"} Anker
  * @typedef {Werte & {id: string, ansicht: Ansicht|"beide", wort?: string, gesicht?: string, braucht?: string[],
  *            zustaende?: Record<string, string>, rollstuhl?: Werte}} Haltung
- * @typedef {Werte & {ms: number, haltung?: string, gesicht?: string, zustaende?: Record<string, string>}} Schritt
+ * @typedef {Werte & {ms: number, haltung?: string, gesicht?: string, zustaende?: Record<string, string>, kurve?: Kurve,
+ *            luft?: Record<string, Anker|[number, number]>, wende?: boolean}} Schritt
+ *   kurve: Verlauf des Übergangs; luft: Luftzeichen für diesen Schritt (luftzeichen.js); wende: vorher Blick tauschen
  * @typedef {{id: string, ansicht: Ansicht, schritte: Schritt[], mal?: number, ende: string, braucht?: string[],
- *            rollstuhl?: {schritte: Schritt[]}}} Bewegung
+ *            rollstuhl?: {schritte: Schritt[]}, nur?: Bewegt}} Bewegung
+ *   nur: die Bewegung gibt es nur für Kinder, die so unterwegs sind (Timos Rollstuhl-Tricks)
+ * @typedef {{id: string, wort: string, svg: string}} Luftzeichen  SVG um (0, 0) gezeichnet
  * @typedef {Partial<Record<Ansicht, Fassung>>} ZubehoerSvg
  * @typedef {{platz: string, ebene: "vorne"|"hinten", svg: ZubehoerSvg, zustaende?: Record<string, ZubehoerSvg>, greift?: boolean}} ZubehoerTeil
  *   greift: an einem Hand-Platz schließt sich die Hand zur Faust (wenn die Haltung keine andere Form wählt)
@@ -35,6 +42,7 @@ export const bestand = {
   /** @type {Map<string, Haltung>} */ haltungen: new Map(),
   /** @type {Map<string, Bewegung>} */ bewegungen: new Map(),
   /** @type {Map<string, Zubehoer>} */ zubehoer: new Map(),
+  /** @type {Map<string, Luftzeichen>} */ luftzeichen: new Map(),
 };
 
 /** Nur für Tests: alles vergessen. */
@@ -78,6 +86,23 @@ function pruefeAnsicht(wo, ansicht, beide = false) {
 function pruefeWerte(wo, w) {
   for (const g of Object.keys(w?.winkel ?? {})) if (!(g in BAUM)) fehler(`${wo}: unbekanntes Gelenk „${g}“`);
   for (const h of Object.keys(w?.haende ?? {})) if (h !== "vorn" && h !== "hinten") fehler(`${wo}: unbekannte Hand „${h}“ (vorn oder hinten)`);
+  if (w?.streckung) {
+    const [sx, sy] = w.streckung;
+    if (!(Math.abs(sx) <= 1.6 && sy >= 0.5 && sy <= 1.6)) fehler(`${wo}: streckung [${sx}, ${sy}] außerhalb |sx| ≤ 1,6 und 0,5 ≤ sy ≤ 1,6`);
+  }
+}
+
+const KURVEN = ["weich", "federn", "ruck", "gleich"];
+export const ANKER = ["boden", "kopf", "mund", "hinten", "vorn"];
+
+/** @param {string} wo @param {Schritt} s */
+function pruefeSchritt(wo, s) {
+  pruefeWerte(wo, s);
+  if (!(s.ms > 0)) fehler(`${wo}: ms muss größer als 0 sein`);
+  if (s.kurve && !KURVEN.includes(s.kurve)) fehler(`${wo}: unbekannte kurve „${s.kurve}“ (${KURVEN.join(", ")})`);
+  for (const a of Object.values(s.luft ?? {})) {
+    if (!(Array.isArray(a) ? a.length === 2 && a.every(Number.isFinite) : ANKER.includes(a))) fehler(`${wo}: unbekannter Anker „${a}“`);
+  }
 }
 
 /** @param {Werte|undefined} w */
@@ -98,7 +123,7 @@ export function meldeKind(kind) {
       if (kind.entwurf) continue;
       return fehler(`${wo}: Ansicht fehlt`);
     }
-    for (const g of gelenke) if (!ans.drehpunkte[g]) fehler(`${wo}: Drehpunkt für ${g} fehlt`);
+    for (const g of gelenke) if (!ans.drehpunkte[g] && !FOLGT[g]) fehler(`${wo}: Drehpunkt für ${g} fehlt`);
     for (const [g, teile] of Object.entries(ans.teile)) {
       if (!gelenke.includes(g)) fehler(`${wo}: Teile an unbekanntem Gelenk „${g}“`);
       for (const t of teile) {
@@ -149,9 +174,13 @@ export function meldeBewegung(b) {
   const wo = `Bewegung ${b.id}`;
   pruefeAnsicht(wo, b.ansicht);
   if (!Array.isArray(b.schritte) || !b.schritte.length) fehler(`${wo}: keine Schritte`);
-  b.schritte.forEach((s, i) => pruefeWerte(`${wo}, Schritt ${i + 1}`, s));
-  (b.rollstuhl?.schritte ?? []).forEach((s, i) => pruefeWerte(`${wo} (rollstuhl), Schritt ${i + 1}`, s));
-  if (b.schritte.some(bewegtBeine) && !b.rollstuhl?.schritte) {
+  b.schritte.forEach((s, i) => pruefeSchritt(`${wo}, Schritt ${i + 1}`, s));
+  (b.rollstuhl?.schritte ?? []).forEach((s, i) => pruefeSchritt(`${wo} (rollstuhl), Schritt ${i + 1}`, s));
+  if (b.nur !== undefined && b.nur !== "rollstuhl" && b.nur !== "geht") fehler(`${wo}: nur muss „rollstuhl“ oder „geht“ sein`);
+  if (b.nur === "rollstuhl") {
+    if (b.rollstuhl) fehler(`${wo}: nur rollstuhl braucht keine eigene rollstuhl-Fassung`);
+    if (b.schritte.some(bewegtBeine)) fehler(`${wo}: nur im Rollstuhl, darf keine Beine bewegen`);
+  } else if (b.schritte.some(bewegtBeine) && !b.rollstuhl?.schritte) {
     fehler(`${wo}: bewegt die Beine, braucht rollstuhl.schritte`);
   }
   bestand.bewegungen.set(b.id, b);
@@ -175,6 +204,14 @@ export function meldeZubehoer(z) {
   bestand.zubehoer.set(z.id, z);
 }
 
+/** @param {Luftzeichen} l */
+export function meldeLuftzeichen(l) {
+  frei(bestand.luftzeichen, "Luftzeichen", l);
+  if (typeof l.svg !== "string" || !l.svg) fehler(`Luftzeichen ${l.id}: svg fehlt`);
+  pruefeSvg(`Luftzeichen ${l.id}`, l.svg);
+  bestand.luftzeichen.set(l.id, l);
+}
+
 /** @param {Zubehoer|undefined} z */
 const zustaendeVon = (z) => new Set((z?.teile ?? []).flatMap((t) => Object.keys(t.zustaende ?? {})));
 
@@ -182,8 +219,9 @@ const zustaendeVon = (z) => new Set((z?.teile ?? []).flatMap((t) => Object.keys(
  * Prüft Querverweise, wenn alles geladen ist (Reihenfolge der Dateien egal).
  */
 export function pruefeBestand() {
-  /** @param {string} wo @param {{gesicht?: string, zustaende?: Record<string, string>, braucht?: string[], haltung?: string}} d */
+  /** @param {string} wo @param {{gesicht?: string, zustaende?: Record<string, string>, braucht?: string[], haltung?: string, luft?: Record<string, unknown>}} d */
   const verweise = (wo, d) => {
+    for (const l of Object.keys(d.luft ?? {})) if (!bestand.luftzeichen.has(l)) fehler(`${wo}: unbekanntes Luftzeichen „${l}“`);
     if (d.gesicht && !bestand.gesichter.has(d.gesicht)) fehler(`${wo}: unbekanntes Gesicht „${d.gesicht}“`);
     if (d.haltung && !bestand.haltungen.has(d.haltung)) fehler(`${wo}: unbekannte Haltung „${d.haltung}“`);
     for (const z of d.braucht ?? []) if (!bestand.zubehoer.has(z)) fehler(`${wo}: braucht unbekanntes Zubehör „${z}“`);

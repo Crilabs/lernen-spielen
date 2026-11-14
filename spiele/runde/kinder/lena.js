@@ -26,7 +26,7 @@ const HINTEN = fein(/** @type {[number, number][]} */ ([
   [126, 102], [115, 98], [113, 80], [115, 60], [120, 44], [131, 32], [146, 26],
 ]));
 // Die langen Haare fallen über den ganzen Hinterkopf als eine Fläche bis zum Rücken – in der Ebene hinter Rumpf
-// und Armen (Kopfteil „zoepfe“ im koerper). Hals und Shirt liegen davor: neben dem Hals sieht man Haar, unter dem
+// und Armen (Kopfteil „zoepfe“ am Gelenk zopf, das dem Kopf folgt). Hals und Shirt liegen davor: neben dem Hals sieht man Haar, unter dem
 // Kinn nichts. Unten feine Wellen.
 const RUECKEN = fein(/** @type {[number, number][]} */ ([
   [114, 84], [162, 82], [208, 84], [210, 102], [209, 120], [210, 138], [204, 150], [196, 146], [186, 150], [174, 146],

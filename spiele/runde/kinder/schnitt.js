@@ -217,7 +217,9 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
       "bein-hinten-unten": [X(-13) - 1.8, KNIE], "bein-vorn-unten": [X(13) + 1.8, KNIE],
     },
     teile: {
-      koerper: kopf.zoepfe ? [T("zoepfe", kopf.zoepfe)] : [],
+      koerper: [],
+      // Lange Haare hinter dem Rücken: eigenes Gelenk, das dem Kopf folgt (gelenke.js FOLGT).
+      zopf: kopf.zoepfe ? [T("zoepfe", kopf.zoepfe)] : [],
       "bein-hinten": bein(-13, -1).oben, "bein-hinten-unten": bein(-13, -1).unten,
       "bein-vorn": bein(13, 1).oben, "bein-vorn-unten": bein(13, 1).unten,
       rumpf: [
@@ -426,7 +428,9 @@ export function profil({ breite: b, farben: f, kopf }) {
       "bein-hinten-unten": [160, KNIE], "bein-vorn-unten": [160, KNIE],
     },
     teile: {
-      koerper: kopf.zoepfe ? [T("zoepfe", kopf.zoepfe)] : [],
+      koerper: [],
+      // Lange Haare hinter dem Rücken: eigenes Gelenk, das dem Kopf folgt (gelenke.js FOLGT).
+      zopf: kopf.zoepfe ? [T("zoepfe", kopf.zoepfe)] : [],
       "bein-hinten": beinHinten.oben, "bein-hinten-unten": beinHinten.unten,
       "bein-vorn": beinVorn.oben, "bein-vorn-unten": beinVorn.unten,
       rumpf: [
