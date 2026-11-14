@@ -141,5 +141,18 @@
   "notiz": "Prüfer A neu, Runde 2",
   "cache_lesen": 1247676,
   "cache_schreiben": 150933
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "prototyp",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 228,
+  "ausgabe": 110849,
+  "einheit": "tokens",
+  "menge": 33406941,
+  "notiz": "Bau-Agent Prototyp, Runde 1",
+  "cache_lesen": 32905879,
+  "cache_schreiben": 389985
  }
 ]
