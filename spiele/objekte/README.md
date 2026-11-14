@@ -32,6 +32,8 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `flaschen-sechserpack.js` – ein Sechserpack Wasserflaschen in Folie mit Tragschlaufe, drei vorne, drei hinten (ohne Etikett, Schrift und Ziffer).
 - `erdbeerschale.js` – helle Schüssel mit blauem Band, darin ein Berg Erdbeeren, leicht von oben (ohne Schrift und Ziffer).
 - `muenzglas.js` – Schraubglas mit Deckel, unten voll goldfarbener Münzen (Kleingeld-Glas; ohne Schrift und Ziffer).
+- `spielkarten.js` – fünf Spielkarten als Fächer, nur Rückseiten (Koralle mit heller Raute; ohne Schrift, Ziffer und
+  Kartenfarben).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
