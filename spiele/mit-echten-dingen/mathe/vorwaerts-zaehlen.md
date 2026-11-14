@@ -1,36 +1,24 @@
 ---
 thema: vorwaerts-zaehlen
 fach: mathe
-entwurf: true
+bild: { figur: versteckvorhang, zustand: haengt }
 quellen:
-  - Zählen (Handout Rechnenlernen), ISB Bayern, https://isb.bayern.de/fileadmin/user_upload/Foerderschulen/Geistige_Entwicklung/Rechnenlernen/Handouts/1_Zaehlen_Handout.pdf, abgerufen 2026-11-14
+  - Arithmetische Basiskompetenzen im Anfangsunterricht fördern – Förderbaustein Zählfähigkeiten, DZLM, https://maco.dzlm.de/sites/maco/files/material-lul/dzlm_difprim_basiskompetenzen_foerdern_zaehlen_220629.pdf, abgerufen 2026-11-14
   - Basiskompetenzen fördern (Basistext), DZLM, https://maco.dzlm.de/sites/maco/files/material-lul/dzlm_difprim_basiskompetenzen_foerdern_basistext_220629.pdf, abgerufen 2026-11-14
-  - Zahlen, Zählen, Rechnen – mit allen Sinnen, Stiftung Kinder forschen, https://www.stiftung-kinder-forschen.de/fileadmin/Redaktion/6b_Experimente_NEU/PDF/Zahlen_Zaehlen_Rechnen_Mit_allen_Sinnen.pdf, abgerufen 2026-11-14
+  - Zählen (Handout Rechnenlernen), ISB Bayern, https://isb.bayern.de/fileadmin/user_upload/Foerderschulen/Geistige_Entwicklung/Rechnenlernen/Handouts/1_Zaehlen_Handout.pdf, abgerufen 2026-11-14
+  - Versteckspiele: Das klassische Versteckspiel, mobilesport.ch (BASPO), https://assets01.sdd1.ch/assets/lbwp-cdn/mobilesport/files/1684137775/mobilesport-spielen--versteckspiele-das-klassische-versteckspiel.pdf, abgerufen 2026-11-14
 ---
 # Von einer Zahl aus weiterzählen
 
-## Am Tisch: Würfeln und weiterzählen
+## In Bewegung: Verstecken ab einer Startzahl
 
-Ihr braucht: einen Würfel
+Ihr braucht: Verstecke, aus denen man allein herauskommt
 
-1. Würfelt. Die Augen auf dem Würfel sind eure Startzahl.
-2. Sagt die Startzahl laut.
-3. Zählt abwechselnd weiter: Jeder sagt immer die nächste Zahl.
-4. Bei zehn ist die Reihe fertig. Dann würfelt ihr neu.
+1. Einer versteckt sich und sagt eine Startzahl, zum Beispiel sechs.
+2. Der andere hält die Augen zu und zählt laut von der Startzahl aus weiter bis zwanzig.
+3. Wer sich versteckt, kann „Halt!“ rufen. Merkt euch die Zahl; bei „Weiter!“ geht es mit der nächsten weiter.
+4. Bei zwanzig wird gesucht. Dann tauscht ihr und nehmt eine neue Startzahl.
 
-**Darauf kommt es an:** Nach jeder Zahl kommt immer dieselbe nächste Zahl. Deshalb kann man bei jeder Zahl anfangen und muss nicht bei eins beginnen.
+**Darauf kommt es an:** Nach jeder Zahl kommt immer dieselbe nächste Zahl. So kann man bei jeder Zahl anfangen und nach einer Pause dort weiterzählen, wo man aufgehört hat. Eine kleine Startzahl lässt mehr Zeit zum Verstecken.
 
-**Leichter:** Einer sagt die Startzahl und die nächste Zahl, der andere zählt dann weiter. **Schwerer:** bis zwanzig zählen oder mit zwei Würfeln starten.
-
-## In Bewegung: Treppe ab der Mitte
-
-Ihr braucht: eine Treppe
-
-1. Stellt euch auf eine Stufe in der Mitte.
-2. Einer sagt eine Zahl, zum Beispiel vier.
-3. Geht jetzt hinauf. Bei jeder Stufe sagt ihr die nächste Zahl.
-4. Oben angekommen sagt ihr, bei welcher Zahl ihr seid.
-
-**Darauf kommt es an:** Jede Stufe bekommt genau die nächste Zahl. Ihr fangt nicht bei eins an, sondern bei der Zahl, die ihr gesagt habt.
-
-**Leichter:** mit der Zahl eins oder zwei anfangen. **Schwerer:** mit einer Zahl über zehn anfangen, zum Beispiel dreizehn.
+**Leichter:** bis zehn, Startzahl drei oder vier. **Schwerer:** eine Startzahl über zehn, zum Beispiel zwölf, und zweimal „Halt!“.
