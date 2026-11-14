@@ -19,11 +19,11 @@
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
-   "titel": "Fünfer zählen, Hände zählen",
+   "titel": "Fünfer und Zehner beim Bäcker",
    "formen": [
     {
-     "situation": "unterwegs",
-     "name": "Autos zählen"
+     "situation": "tisch",
+     "name": "Kleingeld für die Brötchen"
     }
    ],
    "entwurf": true

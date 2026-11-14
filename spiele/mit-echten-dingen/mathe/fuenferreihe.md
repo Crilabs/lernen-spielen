@@ -2,21 +2,21 @@
 thema: fuenferreihe
 fach: mathe
 entwurf: true
-bild: { figur: stifte, zustand: buendel }
+bild: { figur: broetchen, zustand: tuete }
 quellen:
-  - Hände (Übersicht über gebräuchliche Materialien, „natürliche“ 5er-Bündelung durch 5 Finger an jeder Hand), Mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/basics/materialeinsetzen/pdf/basics_materialeinsetzen_haende.pdf, abgerufen 2026-11-14
+  - Von Kernaufgaben zum Aufgabennetz: Das Einmaleins über Beziehungen erschließen (Fünfmal-Aufgaben durch Halbieren der Zehnmal-Aufgaben), Schulimpulse, https://www.schulimpulse.de/von-einer-aufgabe-zur-naechsten-ueber-kernaufgaben-und-beziehungen-das-einmaleins-erschliessen/, abgerufen 2026-11-14
 ---
-# Fünfer zählen, Hände zählen
+# Fünfer und Zehner beim Bäcker
 
-## Unterwegs: Autos zählen
+## Am Tisch: Kleingeld für die Brötchen
 
-Ihr braucht: Zettel und Stift. Ersatz: ein Umschlag.
+Ihr braucht: Fünf- und Zehn-Cent-Münzen aus Geldbeutel oder Münzglas. Ersatz: kleine und große Wäscheklammern. Münzen nicht in Kleinkinderhände.
 
-1. Ihr wollt wissen, wie viele rote Autos an der Straße stehen. Macht für jedes einen Strich.
-2. Der fünfte Strich geht quer durch die vier davor: ein Bündel, so viel wie eine Hand.
-3. Zählt am Ende die Bündel und zeigt dazu eure Hände: „5, 10, 15 …“ Übrige Striche zählt ihr einzeln.
-4. Sagt: „4 Bündel sind 4 mal 5, das ist gleich 20.“
+1. Ihr kauft bald Brötchen für 30 Cent und wollt das Kleingeld loswerden. Legt 6 Fünf-Cent-Münzen und zählt: „5, 10, 15 …“
+2. Sagt: „6 mal 5 ist gleich 30.“
+3. Legt neben jede Fünf-Cent-Münze eine Zehn-Cent-Münze. Sagt: „6 mal 10 ist gleich 60.“
+4. Steckt die Fünfer für den Einkauf ein.
 
-**Darauf kommt es an:** Ein Bündel ist ein Fünfer, wie eine Hand. Zwei Bündel sind ein Zehner. 6 Bündel sind 3 Zehner, also 30. Darum ist 6 mal 5 die Hälfte von 6 mal 10.
+**Darauf kommt es an:** 5 ist die Hälfte von 10. Darum ist jede Fünferaufgabe die Hälfte der Zehneraufgabe: 6 mal 5 ist die Hälfte von 6 mal 10, also 30.
 
-**Leichter:** Zählt, bis zwei Bündel da sind. **Schwerer:** Zählt bis 8 Bündel und sagt die Aufgabe dazu: „8 mal 5 ist gleich 40.“
+**Leichter:** Brötchen für 20 Cent, 4 Fünfer. **Schwerer:** Legt erst die Zehner für 80 Cent. Sagt dazu die Fünferaufgabe: „8 mal 5 ist gleich 40.“
