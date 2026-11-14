@@ -185,5 +185,90 @@
   "thema": [
    "zehnerreihe"
   ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 54,
+  "ausgabe": 13668,
+  "einheit": "tokens",
+  "menge": 2242699,
+  "notiz": "Schreib-Agent fuenferreihe",
+  "cache_lesen": 2146179,
+  "cache_schreiben": 82798,
+  "themen": 1,
+  "thema": [
+   "fuenferreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 8175,
+  "einheit": "tokens",
+  "menge": 544373,
+  "notiz": "Prüfer E fuenferreihe R1",
+  "cache_lesen": 484788,
+  "cache_schreiben": 51392,
+  "themen": 1,
+  "thema": [
+   "fuenferreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 32,
+  "ausgabe": 9575,
+  "einheit": "tokens",
+  "menge": 1618169,
+  "notiz": "Schreib-Agent fuenferreihe, Befunde R1",
+  "cache_lesen": 1588160,
+  "cache_schreiben": 20402,
+  "themen": 1,
+  "thema": [
+   "fuenferreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 8991,
+  "einheit": "tokens",
+  "menge": 629437,
+  "notiz": "Prüfer E fuenferreihe R2",
+  "cache_lesen": 558465,
+  "cache_schreiben": 61963,
+  "themen": 1,
+  "thema": [
+   "fuenferreihe"
+  ]
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 6,
+  "ausgabe": 758,
+  "einheit": "tokens",
+  "menge": 248659,
+  "notiz": "Schreib-Agent fuenferreihe, §5.1",
+  "cache_lesen": 246161,
+  "cache_schreiben": 1734,
+  "themen": 1,
+  "thema": [
+   "fuenferreihe"
+  ]
  }
 ]
