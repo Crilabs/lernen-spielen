@@ -3,7 +3,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { WURZEL, findeSpielordner, katalogAnzahl, liesKosten, prognose, prognoseAnalog, summen } from "./kosten.mjs";
+import { WURZEL, findeSpielordner, katalogAnzahl, liesGeparkte, liesKosten, prognose, prognoseAnalog, summen } from "./kosten.mjs";
 
 const zahl = (n, d = 0) => n.toLocaleString("de-DE", { minimumFractionDigits: d, maximumFractionDigits: d });
 const eur = (n) => `${zahl(n, 2)} €`;
@@ -20,7 +20,9 @@ export function formatiere({ spiele, katalog, preise, analog, themenGesamt }) {
     const s = x.s;
     z.push(
       `${x.name}${x.geparkt ? "  [geparkt]" : ""}: ${eur(s.eur)}`,
-      `    Claude  ${zahl(s.claude.tokens)} Token (ein ${zahl(s.claude.eingabe)} / aus ${zahl(s.claude.ausgabe)})  ${eur(s.claude.eur)}`,
+      `    Claude  ${zahl(s.claude.tokens)} Token (ein ${zahl(s.claude.eingabe)} / aus ${zahl(s.claude.ausgabe)}` +
+        (s.claude.cache_lesen || s.claude.cache_schreiben ? ` / Cache lesen ${zahl(s.claude.cache_lesen)} / Cache schreiben ${zahl(s.claude.cache_schreiben)}` : "") +
+        `)  ${eur(s.claude.eur)}`,
       `    Bilder  ${zahl(s.bilder.anzahl)} Stück  ${eur(s.bilder.eur)}`,
       `    Stimme  ${zahl(s.stimme.zeichen)} Zeichen  ${eur(s.stimme.eur)}`,
     );
@@ -75,6 +77,9 @@ function main() {
   const spiele = findeSpielordner()
     .filter((o) => existsSync(join(o, "kosten.json")))
     .map((o) => ({ name: `${basename(join(o, ".."))}/${basename(o)}`, eintraege: liesKosten(o) }));
+  // Geparkte Spiele: ihr Spielordner liegt nur im Branch, die Kosten stehen auf main unter werkzeuge/kosten/geparkt/.
+  const imOrdner = new Set(spiele.map((sp) => sp.name.split("/")[1]));
+  spiele.push(...liesGeparkte().filter((g) => !imOrdner.has(g.name.split("/")[1])));
   const analogOrdner = join(WURZEL, "spiele", "mit-echten-dingen");
   const themenGesamt = JSON.parse(readFileSync(join(WURZEL, "spiele/lernplan.json"), "utf8")).themen.length;
   console.log(formatiere({ spiele, katalog, preise, analog: liesKosten(analogOrdner), themenGesamt }));

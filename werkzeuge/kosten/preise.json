@@ -10,16 +10,16 @@
   },
   "claude": {
     "claude-opus-5-5": {
-      "eingabeProMio": 4, "ausgabeProMio": 20, "waehrung": "USD", "stand": "2026-11-14",
-      "quelle": "Skill claude-api, Tabelle „Current Models“ (cached 2026-11-03); Cache-Lesen 0,20 USD/Mio wird nicht getrennt gerechnet"
+      "eingabeProMio": 4, "ausgabeProMio": 20, "cacheLesenProMio": 0.2, "cacheSchreibenProMio": 5, "waehrung": "USD", "stand": "2026-11-14",
+      "quelle": "Skill claude-api, Tabelle „Current Models“ (cached 2026-11-03) und Abschnitt Claude Opus 5.5 (cache reads 0,20 USD); Cache-Schreiben = 1,25 × Eingabe (5-Minuten-Cache, Skill claude-api › Prompt Caching), 1-Stunden-Cache (2 × Eingabe) nicht getrennt"
     },
     "claude-sonnet-5-5": {
-      "eingabeProMio": 2, "ausgabeProMio": 10, "waehrung": "USD", "stand": "2026-11-14",
-      "quelle": "Skill claude-api, Tabelle „Current Models“ (cached 2026-11-03)"
+      "eingabeProMio": 2, "ausgabeProMio": 10, "cacheLesenProMio": 0.1, "cacheSchreibenProMio": 2.5, "waehrung": "USD", "stand": "2026-11-14",
+      "quelle": "Skill claude-api, Tabelle „Current Models“ (cached 2026-11-03) und Abschnitt Claude Sonnet 5.5 (cache reads 0,10 USD); Cache-Schreiben = 1,25 × Eingabe (5-Minuten-Cache)"
     },
     "claude-haiku-5-5": {
-      "eingabeProMio": 0.1, "ausgabeProMio": 0.5, "waehrung": "USD", "stand": "2026-11-14",
-      "quelle": "Skill claude-api, Tabelle „Current Models“; gilt für Prompts bis 100K Token (darüber 0,50 / 2,50 USD)"
+      "eingabeProMio": 0.1, "ausgabeProMio": 0.5, "cacheLesenProMio": 0.01, "cacheSchreibenProMio": 0.125, "waehrung": "USD", "stand": "2026-11-14", "unsicher": true,
+      "quelle": "Skill claude-api, Tabelle „Current Models“; gilt für Prompts bis 100K Token (darüber 0,50 / 2,50 USD). Cache-Preise nicht genannt, abgeleitet: Lesen 0,1 × Eingabe, Schreiben 1,25 × Eingabe (Skill claude-api › Prompt Caching)"
     }
   },
   "bilder": {

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { join } from "node:path";
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { katalogAnzahl, liesKosten, ordneZu, prognose, prognoseAnalog, pruefeEintrag, summen, trageEin } from "../werkzeuge/kosten/kosten.mjs";
+import { katalogAnzahl, liesGeparkte, liesKosten, ordneZu, prognose, prognoseAnalog, pruefeEintrag, summen, trageEin, usageAusTranskript } from "../werkzeuge/kosten/kosten.mjs";
 import { formatiere } from "../werkzeuge/kosten/bericht.mjs";
 import { leseArgumente, schreibeVerbrauch, usageAusAntwort } from "../werkzeuge/bilder/erzeugen.mjs";
 import { trageZeichenEin } from "../werkzeuge/audio/erzeugen.mjs";
@@ -197,4 +197,62 @@ test("Audio: lauf() selbst trägt die Zeichen ein, damit auch die Anhör-Seite K
   assert.ok(!q.slice(q.indexOf("async function main")).includes("trageZeichenEin("), "main trägt nicht zusätzlich ein (sonst doppelt)");
   const a = readFileSync(new URL("../werkzeuge/audio/anhoeren.mjs", import.meta.url), "utf8");
   assert.match(a, /await lauf\(\)/);
+});
+
+// --- Verbrauch aus dem Transkript, Cache, Steuerung, Geparktes auf main (Skill „Spiel entwickeln“) -------------------
+
+const TRANSKRIPT = new URL("./daten/transkript-agent.jsonl", import.meta.url);
+
+test("Transkript: zählt jede Antwort einmal, Cache getrennt, abgebrochene Zeile übergangen", () => {
+  const u = usageAusTranskript(readFileSync(TRANSKRIPT, "utf8"));
+  assert.deepEqual(
+    { modell: u.modell, eingabe: u.eingabe, ausgabe: u.ausgabe, cache_lesen: u.cache_lesen, cache_schreiben: u.cache_schreiben, nachrichten: u.nachrichten },
+    { modell: "claude-opus-5-5", eingabe: 10, ausgabe: 210, cache_lesen: 2200, cache_schreiben: 1500, nachrichten: 3 },
+  );
+  assert.equal(u.menge, 10 + 210 + 2200 + 1500);
+  assert.deepEqual(u.ids.sort(), ["msg_1", "msg_2", "msg_3"]);
+});
+
+test("Transkript: Fortsetzung bucht nur den Zuwachs (ohne = schon gebuchte Ids)", () => {
+  const u = usageAusTranskript(readFileSync(TRANSKRIPT, "utf8"), { ohne: ["msg_1", "msg_2"] });
+  assert.equal(u.nachrichten, 1);
+  assert.deepEqual([u.eingabe, u.ausgabe, u.cache_lesen, u.cache_schreiben], [5, 90, 1200, 300]);
+  assert.equal(usageAusTranskript(readFileSync(TRANSKRIPT, "utf8"), { ohne: u.ids }).nachrichten, 0);
+});
+
+test("Transkript-Werkzeug: bucht mit Stand, zweiter Aufruf bucht nichts doppelt", async () => {
+  const { spawnSync } = await import("node:child_process");
+  const ordner = temp();
+  const stand = join(ordner, "stand.json");
+  const lauf = () => spawnSync(process.execPath, [new URL("../werkzeuge/kosten/transkript.mjs", import.meta.url).pathname, TRANSKRIPT.pathname,
+    "--ordner", ordner, "--phase", "pruefung-a", "--notiz", "Runde 1", "--stand", stand, "--datum", "2026-11-14"], { encoding: "utf8" });
+  assert.equal(lauf().status, 0);
+  assert.equal(lauf().status, 0);
+  const l = liesKosten(ordner);
+  assert.equal(l.length, 1);
+  assert.equal(l[0].cache_lesen, 2200);
+  assert.equal(l[0].menge, 3920);
+  rmSync(ordner, { recursive: true });
+});
+
+test("Cache: eigene Preise, ohne Cache-Preis gilt der Eingabepreis; menge prüft die Cache-Token mit", () => {
+  const P = { ...PREISE, claude: { ...PREISE.claude, "m-c": { eingabeProMio: 4, ausgabeProMio: 20, cacheLesenProMio: 0.4, cacheSchreibenProMio: 5, waehrung: "EUR" } } };
+  const e = (modell) => ({ ...claude(modell, 0, 0), cache_lesen: 1e6, cache_schreiben: 1e6, menge: 2e6 });
+  assert.equal(summen([e("m-c")], P).claude.eur, 5.4);
+  assert.equal(summen([e("m-b")], P).claude.eur, 2);   // m-b ohne Cache-Preise: 2 × 1 EUR
+  assert.equal(summen([e("m-c")], P).claude.tokens, 2e6);
+  assert.throws(() => pruefeEintrag({ ...e("m-c"), menge: 0 }), /cache_lesen/);
+  assert.throws(() => pruefeEintrag({ ...stimme(5), cache_lesen: 1 }), /nur bei claude/);
+  assert.equal(pruefeEintrag({ ...claude("m-a", 1, 1), phase: "steuerung" }).phase, "steuerung");
+});
+
+test("Geparkt auf main: werkzeuge/kosten/geparkt/<ordner>.json zählt als geparkt", () => {
+  const w = temp();
+  mkdirSync(join(w, "werkzeuge/kosten/geparkt"), { recursive: true });
+  writeFileSync(join(w, "werkzeuge/kosten/geparkt/m15-mach-voll.json"), JSON.stringify([claude("m-b", 1e6, 0), geparkt]));
+  const g = liesGeparkte(w);
+  assert.deepEqual(g.map((x) => [x.name, x.geparkt, x.eintraege.length]), [["geparkt/m15-mach-voll", true, 2]]);
+  assert.match(formatiere({ spiele: g, katalog: 10, preise: PREISE, analog: [], themenGesamt: 1 }), /geparkt\/m15-mach-voll  \[geparkt\]: 1,00 €/);
+  assert.deepEqual(liesGeparkte(temp()), []);
+  rmSync(w, { recursive: true });
 });

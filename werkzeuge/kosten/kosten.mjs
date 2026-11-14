@@ -1,5 +1,7 @@
 // Kosten je Spiel (docs/spielentwicklung.md §6): Einträge anhängen, summieren, für den Katalog hochrechnen.
-// Ablage: spiele/<fach>/<spiel>/kosten.json = Liste von { datum, phase, posten, modell, eingabe, ausgabe, einheit, menge, notiz }.
+// Ablage: spiele/<fach>/<spiel>/kosten.json = Liste von { datum, phase, posten, modell, eingabe, ausgabe, einheit, menge, notiz },
+// bei claude optional cache_lesen und cache_schreiben (Token aus dem Cache gelesen bzw. in ihn geschrieben; menge zählt sie mit).
+// Geparkte Spiele: Kopie der Liste in werkzeuge/kosten/geparkt/<ordner>.json (auf main, der Spielordner liegt nur im Branch).
 // Reine Logik; Lesen und Schreiben nur in trageEin und lade*.
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
@@ -9,7 +11,8 @@ import { fileURLToPath } from "node:url";
 export const WURZEL = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const KOSTEN_DATEI = "kosten.json";
 
-export const CLAUDE_PHASEN = ["entwurf", "pruefung-a", "prototyp", "pruefung-b", "ausbau", "review", "recherche", "schreiben", "pruefung"];
+export const CLAUDE_PHASEN = ["entwurf", "pruefung-a", "prototyp", "pruefung-b", "ausbau", "review", "steuerung", "recherche", "schreiben", "pruefung"];
+export const GEPARKT_ORDNER = "werkzeuge/kosten/geparkt";
 const POSTEN = {
   claude: { einheit: "tokens", phasen: CLAUDE_PHASEN },
   bild: { einheit: "bilder", phasen: ["bild"] },
@@ -34,20 +37,28 @@ export function pruefeEintrag(e) {
   }
   if (!ganz(e.menge)) throw new Error("menge muss eine ganze Zahl ≥ 0 sein");
   if (e.posten === "bild" && e.menge < 1) throw new Error("menge (Bilder) muss mindestens 1 sein");
-  if (e.posten === "claude" && e.menge !== e.eingabe + e.ausgabe) throw new Error("menge muss bei claude eingabe + ausgabe sein");
+  for (const f of ["cache_lesen", "cache_schreiben"]) {
+    if (e[f] === undefined) continue;
+    if (e.posten !== "claude") throw new Error(`${f} gibt es nur bei claude`);
+    if (!ganz(e[f])) throw new Error(`${f} muss eine ganze Zahl ≥ 0 sein`);
+  }
+  if (e.posten === "claude" && e.menge !== e.eingabe + e.ausgabe + (e.cache_lesen ?? 0) + (e.cache_schreiben ?? 0))
+    throw new Error("menge muss bei claude eingabe + ausgabe + cache_lesen + cache_schreiben sein");
   if (e.themen !== undefined && !ganz(e.themen)) throw new Error("themen muss eine ganze Zahl ≥ 0 sein");
   if (e.notiz !== undefined && typeof e.notiz !== "string") throw new Error("notiz muss Text sein");
   return {
     datum: e.datum, phase: e.phase, posten: e.posten, modell: e.modell ?? "", eingabe: e.eingabe ?? 0, ausgabe: e.ausgabe ?? 0,
     einheit: e.einheit, menge: e.menge, notiz: e.notiz ?? "",
+    ...(e.cache_lesen !== undefined ? { cache_lesen: e.cache_lesen } : {}),
+    ...(e.cache_schreiben !== undefined ? { cache_schreiben: e.cache_schreiben } : {}),
     ...(e.themen !== undefined ? { themen: e.themen } : {}),
     ...(e.usage !== undefined ? { usage: e.usage } : {}),
   };
 }
 
 /** Liest die Liste eines Ordners (leer, wenn es sie noch nicht gibt). */
-export function liesKosten(spielOrdner) {
-  const p = join(spielOrdner, KOSTEN_DATEI);
+export function liesKosten(spielOrdner, datei = KOSTEN_DATEI) {
+  const p = join(spielOrdner, datei);
   if (!existsSync(p)) return [];
   const l = JSON.parse(readFileSync(p, "utf8"));
   if (!Array.isArray(l)) throw new Error(`${p} muss eine Liste sein`);
@@ -72,11 +83,12 @@ function claudePreis(preise, modell) {
   const m = preise.claude?.[modell] ?? Object.entries(preise.claude ?? {}).find(([k]) => modell.startsWith(k))?.[1];
   if (!m) return null;
   const f = m.waehrung === "USD" ? preise.usdInEur.wert : 1;
-  return { ein: m.eingabeProMio * f, aus: m.ausgabeProMio * f };
+  // Fehlt ein Cache-Preis, gilt der Eingabepreis (eher zu hoch als zu niedrig).
+  return { ein: m.eingabeProMio * f, aus: m.ausgabeProMio * f, lesen: (m.cacheLesenProMio ?? m.eingabeProMio) * f, schreiben: (m.cacheSchreibenProMio ?? m.eingabeProMio) * f };
 }
 
 const leer = () => ({
-  claude: { eingabe: 0, ausgabe: 0, tokens: 0, eur: 0, ohnePreis: /** @type {string[]} */ ([]) },
+  claude: { eingabe: 0, ausgabe: 0, cache_lesen: 0, cache_schreiben: 0, tokens: 0, eur: 0, ohnePreis: /** @type {string[]} */ ([]) },
   bilder: { anzahl: 0, eingabe: 0, ausgabe: 0, eur: 0 },
   stimme: { zeichen: 0, eur: 0 },
   eur: 0,
@@ -89,9 +101,13 @@ export function summen(eintraege, preise) {
     if (e.posten === "claude") {
       s.claude.eingabe += e.eingabe;
       s.claude.ausgabe += e.ausgabe;
-      s.claude.tokens += e.eingabe + e.ausgabe;
+      const lesen = e.cache_lesen ?? 0;
+      const schreiben = e.cache_schreiben ?? 0;
+      s.claude.cache_lesen += lesen;
+      s.claude.cache_schreiben += schreiben;
+      s.claude.tokens += e.eingabe + e.ausgabe + lesen + schreiben;
       const p = claudePreis(preise, e.modell);
-      if (p) s.claude.eur += (e.eingabe * p.ein + e.ausgabe * p.aus) / 1e6;
+      if (p) s.claude.eur += (e.eingabe * p.ein + e.ausgabe * p.aus + lesen * p.lesen + schreiben * p.schreiben) / 1e6;
       else if (!s.claude.ohnePreis.includes(e.modell)) s.claude.ohnePreis.push(e.modell);
     } else if (e.posten === "bild") {
       s.bilder.anzahl += e.menge;
@@ -212,4 +228,50 @@ export function texteDesSpiels(spielOrdner) {
   };
   geh(JSON.parse(readFileSync(p, "utf8")));
   return aus;
+}
+
+/**
+ * Verbrauch eines Agenten aus seinem Transkript (Claude Code: JSONL, je Zeile ein Ereignis). Gezählt wird message.usage
+ * jeder Antwort des Modells; dieselbe Nachricht (message.id) steht oft mehrfach da und zählt einmal (die letzte Zeile).
+ * `ohne`: Nachrichten-Ids, die schon gebucht sind (Fortsetzung desselben Agenten, z. B. SendMessage) – so zählt nur der
+ * Zuwachs. Rückgabe passt zu trageEin (posten claude) plus `ids` (alle gezählten und übergangenen) für die nächste Buchung.
+ * @param {string} text Inhalt der JSONL-Datei
+ * @param {{ ohne?: string[] }} [o]
+ */
+export function usageAusTranskript(text, { ohne = [] } = {}) {
+  const schon = new Set(ohne);
+  /** @type {Map<string, { modell: string, u: any }>} */
+  const je = new Map();
+  for (const zeile of text.split("\n")) {
+    if (!zeile.trim()) continue;
+    let d;
+    try { d = JSON.parse(zeile); } catch { continue; }   // abgebrochene letzte Zeile eines laufenden Transkripts
+    const m = d?.message;
+    if (d?.type !== "assistant" || !m?.usage || !m.id) continue;
+    je.set(m.id, { modell: m.model ?? "", u: m.usage });
+  }
+  const summe = { eingabe: 0, ausgabe: 0, cache_lesen: 0, cache_schreiben: 0 };
+  const modelle = new Map();
+  for (const [id, { modell, u }] of je) {
+    if (schon.has(id)) continue;
+    summe.eingabe += u.input_tokens ?? 0;
+    summe.ausgabe += u.output_tokens ?? 0;
+    summe.cache_lesen += u.cache_read_input_tokens ?? 0;
+    summe.cache_schreiben += u.cache_creation_input_tokens ?? 0;
+    if (modell) modelle.set(modell, (modelle.get(modell) ?? 0) + 1);
+  }
+  const modell = [...modelle].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "";
+  return {
+    modell, ...summe, menge: summe.eingabe + summe.ausgabe + summe.cache_lesen + summe.cache_schreiben,
+    einheit: "tokens", posten: "claude", nachrichten: [...je.keys()].filter((id) => !schon.has(id)).length, ids: [...new Set([...schon, ...je.keys()])],
+  };
+}
+
+/** Geparkte Spiele auf main: werkzeuge/kosten/geparkt/<ordner>.json, je Datei die Liste aus kosten.json. */
+export function liesGeparkte(wurzel = WURZEL) {
+  const ordner = join(wurzel, GEPARKT_ORDNER);
+  if (!existsSync(ordner)) return [];
+  return readdirSync(ordner)
+    .filter((d) => d.endsWith(".json"))
+    .map((d) => ({ name: `geparkt/${d.replace(/\.json$/, "")}`, eintraege: liesKosten(ordner, d), geparkt: true }));
 }

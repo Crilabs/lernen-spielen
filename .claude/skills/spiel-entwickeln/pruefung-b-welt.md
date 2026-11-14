@@ -4,8 +4,8 @@ Vorlage für den Skill `spiel-entwickeln`. Empfänger: ein **neuer Agent, der am
 neuer; läuft parallel zu den anderen B-Prüfern. Der Skill füllt `{{…}}` und schickt alles unter der Linie.
 `{{VORIGE_BEFUNDE}}` ist in Runde 1 leer, ab Runde 2: „Befunde der vorigen Runde (prüfe je Befund, ob er behoben ist;
 urteile trotzdem über alle Kriterien neu): …“.
-Der Skill gibt den Bilder-Ordner des Durchspielens (`--bilder`) mit; nach dem Ausbau zusätzlich Bilder je
-Bewegungszustand der Spielobjekte aus `spiele/rahmen/vorschau.html?objekte`.
+Der Skill gibt den Bilder-Ordner des Durchspielens (`--bilder`) mit; die Bilder der Spielobjekte macht der Prüfer
+selbst (`tests/browser/objektbilder.mjs`).
 
 ---
 
@@ -21,6 +21,18 @@ Größen); den Entwurf; `docs/figuren.md` (ganz, besonders §3–§5), `docs/gru
 `docs/grundsaetze.md` §9, `docs/spielentwicklung.md` „Spielobjekte“. Du darfst die Seite selbst öffnen und weitere
 Bilder machen (Playwright mit `NODE_PATH=/private/tmp/claude-501/pw/node_modules`; WebKit-Klicks über
 `lsPruefen.fuehreAus`), auch mit `reducedMotion: "reduce"`.
+
+**Bilder der Spielobjekte machst du selbst** (jede Art in jedem Zustand, jede Bewegung in der Mitte und am Ende, mit
+reduzierter Bewegung, das Regal-Bild still mit Wert; `liste.json` nennt Dateien und Dauer der Bewegungen):
+
+```bash
+NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/objektbilder.mjs <Scratchpad>/objekte \
+  {{SPIELORDNER}}/objekte/*.js <weitere spiele/objekte/<art>.js, die das Spiel nutzt>
+```
+
+Im Ausbau außerdem das Regal ansehen: `spiele/regal.html` (lokaler Server wie in `tests/browser/durchspielen.mjs`,
+z. B. `python3 -m http.server` im Arbeitsordner) bei einem Thema, für das das Regal-Bild aus `spiele/spiele.json`
+gilt (bei Themen mit eigenem Lernzeichen steht das Lernzeichen vorn, das ist richtig).
 
 **Auftrag** (wörtlich):
 
@@ -41,6 +53,8 @@ Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stim
   Lernzeichen mit dem Zeichen da (A6b).
 - **W-Bewegung:** nur als Folge einer Kinderhandlung, etwa 1 s, überspringbar, still beim Denken; mit reduzierter
   Bewegung der Endzustand sofort (im Ausbau: Bilder je Bewegungszustand).
+- **W-Regal** (nur im Ausbau, sonst „n/a“): das Regal-Bild erscheint im Regal flach und still, mit dem richtigen
+  Wert, und ist sachlich richtig.
 - **W-Ruhe:** nichts Bedrohliches; Fantasie nur im Rahmen (`docs/figuren.md` §5); Geschichte nach
   `docs/grundsaetze.md` §9.
 
@@ -53,7 +67,7 @@ Ergebnis: GRÜN | ROT
 
 | Nr. | grün/rot | Beleg (Datei:Zeile, Bilddatei, Befehl mit Ausgabe) | Befund, falls rot |
 |---|---|---|---|
-… eine Zeile je Kriterium: W-Figur, W-Sachwelt, W-Eine-Welt, W-Objekte, W-Wirkung, W-Bewegung, W-Ruhe
+… eine Zeile je Kriterium: W-Figur, W-Sachwelt, W-Eine-Welt, W-Objekte, W-Wirkung, W-Bewegung, W-Regal, W-Ruhe
 
 Kritische Befunde:
 - <Befund> – <Beleg> – <was es lösen würde>   (oder „keine“)

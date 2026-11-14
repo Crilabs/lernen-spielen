@@ -20,7 +20,8 @@ schreibe den Grund in den Entwurf.
 Regeln:
 - Niemanden fragen. Was offen ist, entscheidest du nach den Dokumenten und markierst es im Entwurf als **(Annahme)**.
   Nur bei Zerstörerischem, Sicherheit oder Wirkung nach außen anhalten und melden.
-- Keine Unteragenten starten. Nicht pushen, nicht nach `main` mergen.
+- Keine Unteragenten starten. Nicht pushen, nicht nach `main` mergen. `spiele/mit-echten-dingen/` nie anfassen (das
+  läuft in einem eigenen Branch).
 - Kein Plattform-Zugriff außerhalb `spiele/kern/`; die Test-Schnittstelle nur im Testbetrieb (`spiele/rahmen/pruefen.js`).
 - Commits auf Deutsch, Form `feat(<spiel>): …` / `fix(<spiel>): …` / `docs(<spiel>): …`, Leerzeile, dann
   `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
@@ -43,7 +44,13 @@ Aufgabenschlüssel und arten · Spielobjekte.
 - Figur: eine aus `docs/figuren.md` §2 mit genau einer Aufgabe (§3), Platz im Bild, Haltungen.
 - Bildschirm-Skizze als ASCII nach `docs/bedienung.md` §3.
 - Spielobjekte: Dinge, Zustände, Bewegungen, welches das Regal-Bild ist (Abschnitt „Spielobjekte“ in
-  `docs/spielentwicklung.md`); was es schon in `spiele/objekte/` gibt, wiederverwenden.
+  `docs/spielentwicklung.md`); was es schon in `spiele/objekte/` gibt, wiederverwenden. Im Regal steht für ein Thema
+  zuerst sein Lernzeichen (Perlenstab bei Zahlen und Zerlegen, Wortart-Zeichen, Graphem-Karte), erst danach das
+  Regal-Bild des Spiels (Abschnitt „Regal-Bild“): Bei solchen Themen bleibt der Perlenstab vorn, das Regal-Bild gilt
+  für die übrigen; schreib dazu, für welche Themen es sichtbar wird.
+- Braucht das Spiel ein neues Lernzeichen oder Bedienteil (`docs/spielkatalog.md` §8a) oder eine offene Frage aus
+  `docs/grundsaetze-bilder.md` §15: entwerfen, als **(Annahme)** markieren und unter der Überschrift
+  „Freigabe nötig“ als konkrete Frage an Christian notieren. Das Spiel wird dann gebaut und geprüft, aber nicht gemergt.
 - Prüfe selbst die Liste `docs/grundsaetze.md` §12, bevor du abgibst.
 
 Committen: `docs({{ORDNERNAME}}): Spielentwurf`.
@@ -65,6 +72,7 @@ Nach `docs/spielentwicklung.md` §3 und dem Kopf von `spiele/vorlage/spiel.js` (
   `fehlversuche: false` nur, wenn wirklich kein Zug danebengehen kann.
 - Eintrag in `spiele/spiele.json` (`datei`, `symbol` relativ zu `spiele/`, `arten`, Themen); einfaches `symbol.svg`.
 - Reine Logik in `logik.js` mit Node-Tests unter `tests/spiele/<fach>/<spiel>.test.mjs`, falls es Logik gibt.
+- Den RAHMEN der Vorlage behalten, auch `?stufe` (nur im Testbetrieb) und `lernstufe` im Zustand.
 - Selbst laufen lassen, bis es durchläuft: `npm test` und
   `NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs {{SEITE}}`.
 
@@ -84,14 +92,15 @@ Lernstufen, ruhig und sanft; abenteuer mitgeplant):
   (`meldeObjekt`, Vorbild `tonne.js`); gemeinsam Nutzbares nach `spiele/objekte/`, Spielspezifisches nach
   `{{SPIELORDNER}}/objekte/`; `tests/objekte.test.mjs` grün; in `spiele/rahmen/vorschau.html?objekte` sichtbar.
 - **Regal-Bild:** `regal: { objekt, wert }` in `spiele.json`, Objekt in `spiele/objekte/`; Regal-Material
-  (`spiele/rahmen/material.js`).
+  (`spiele/rahmen/material.js`); im Regal (`spiele/regal.html`) bei einem Thema ansehen, für das es gilt.
 - **Szenenbild** nur mit `node werkzeuge/bilder/erzeugen.mjs --spiel {{SPIELORDNER}} <ziel> "<Szene>"`, Herkunft in
   `bilder/herkunft.json` (`docs/grundsaetze-bilder.md` §11).
 - **Texte als Daten** in `{{SPIELORDNER}}/texte.json` und als feste Zeichenketten (Kopf der Vorlage, Schritt 3).
   `npm run audio` startest du **nicht**; das tut der Skill danach (Kosten). Nichts anhören, nichts als angehört
   markieren. Gib die Liste der neuen Texte wörtlich zurück.
 - Einführung (`spiele/einfuehrungen/`, Lernplan `einfuehrung`), vollständiger Eintrag in `spiele.json`.
-- Checklisten `docs/bedienung.md` §10 und `docs/grundsaetze.md` §12 durchgehen; `npm test` und Durchspielen grün.
+- Checklisten `docs/bedienung.md` §10 und `docs/grundsaetze.md` §12 durchgehen; `npm test` und Durchspielen grün,
+  auch je Lernstufe (`durchspielen.mjs {{SEITE}} --stufe <id>`).
 
 Committen in sinnvollen Schritten (`feat({{ORDNERNAME}}): …`).
 

@@ -1,6 +1,6 @@
 ---
 name: spiel-entwickeln
-description: Verwenden, wenn ein Spiel aus dem Spielkatalog entstehen soll – Aufruf „Spiel entwickeln <Katalog-Id>“ (z. B. „Spiel entwickeln M15“). Führt genau ein Spiel vom Katalog-Eintrag über Entwurf, Prüfung A, Prototyp, Prüfstand B, Ausbau und Abschluss-Review bis zum Merge nach main oder parkt es; Prüfer sind immer frische Agenten.
+description: Verwenden, wenn ein Spiel aus dem Spielkatalog entstehen soll – Aufruf „Spiel entwickeln <Katalog-Id> [--basis <branch>]“ (z. B. „Spiel entwickeln M15“). Führt genau ein Spiel vom Katalog-Eintrag über Entwurf, Prüfung A, Prototyp, Prüfstand B, Ausbau und Abschluss-Review bis zum Merge nach main oder parkt es; Prüfer sind immer frische Agenten.
 ---
 
 # Spiel entwickeln
@@ -25,9 +25,12 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
   Merge in das lokale `main` hinaus (Push, Veröffentlichen, Mails, Bestellungen), (4) aussichtslose Vorgabe (der
   Katalog-Eintrag lässt sich nach den Grundsätzen nicht als Spiel bauen – dann parken statt fragen, wenn eine
   Prüfung das belegt). Alles andere entscheidest du nach den Dokumenten und schreibst Annahmen in den Entwurf.
-- **Kosten nach jedem Agenten** (bauen, prüfen, Review, auch jede Fortsetzung mit SendMessage) sofort eintragen,
-  siehe „Kosten“. Kein Agent ohne Eintrag.
-- **Nie pushen.** Merge nur in das lokale `main`.
+- **Freigabe nötig:** Braucht das Spiel ein neues Lernzeichen oder Bedienteil (`docs/spielkatalog.md` §8a) oder eine
+  offene Frage aus `docs/grundsaetze-bilder.md` §15, entscheidet der Entwurf sie als **(Annahme)**; gebaut und geprüft
+  wird normal, aber **nicht gemergt**: am Ende parken mit Grund „Freigabe nötig“ und der konkreten Frage.
+- **Kosten nach jedem Agenten** (bauen, prüfen, Review, Wiederholung, jede Fortsetzung mit SendMessage), siehe
+  „Kosten“. Kein Agent ohne Eintrag.
+- **Nie pushen.** Merge nur in das lokale `main`, und nur ohne `--basis` (Probelauf mergt nie).
 
 ## Wo was liegt
 
@@ -36,45 +39,55 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
 | Katalog-Eintrag | `docs/spielkatalog/<teil>.md` „### <Id> <Name>“; Welt: `docs/spielkatalog/welten.md`; Vorrang: `docs/spielkatalog.md` §8a |
 | Fach aus der Id | M → `mathe`, R → `geometrie`, L → `lesen`, Z → `sprechen`, S → `schreiben`, G → `grammatik` (Spalte „Fach“ in `docs/spielkatalog.md` §5) |
 | Spielordner | `spiele/<fach>/<id klein>-<name>/` (Name aus der Überschrift, klein, ä→ae, ö→oe, ü→ue, ß→ss, Bindestriche), z. B. M15 „Mach voll“ → m15-mach-voll |
-| Entwurf | `docs/spiele/<fach>/<id klein>-<name>.md` |
-| Vorlage | `spiele/vorlage/` (Kopf von `spiele/vorlage/spiel.js`: Schritte 1–7, „../“ → „../../“) |
-| Prüfstand | `tests/browser/durchspielen.mjs`, `tests/browser/pruefkopie.mjs`, Playwright mit `NODE_PATH=/private/tmp/claude-501/pw/node_modules` |
-| Objekte | `spiele/objekte/objekt.js`, Vorschau `spiele/rahmen/vorschau.html?objekte` |
-| Kosten | `werkzeuge/kosten/kosten.mjs` (`trageEin`), Bericht `npm run kosten` |
+| Entwurf, Prüfberichte | `docs/spiele/<fach>/<spiel>.md`; Berichte erst beim Merge/Parken nach `docs/spiele/<fach>/<spiel>.pruefungen.md` |
+| Arbeitsablage des Laufs | `<Hauptrepo>/.superpowers/spiele/<id klein>/` (nicht im Repo): `runde-<prüfung>-<n>.md` je Prüfbericht, `kosten-stand.json`, `b-<runde>/` (Bilder, Bericht) |
+| Vorlage | `spiele/vorlage/` (Kopf von `spiele/vorlage/spiel.js`: Schritte 1–7, „../“ → „../../“, `?stufe` im Testbetrieb) |
+| Prüfstand | `tests/browser/durchspielen.mjs` (`--stufe`), `tests/browser/pruefkopie.mjs`, `tests/browser/objektbilder.mjs`; Playwright mit `NODE_PATH=/private/tmp/claude-501/pw/node_modules` |
+| Kosten | `werkzeuge/kosten/transkript.mjs` (bucht aus dem Agenten-Transkript), `werkzeuge/kosten/kosten.mjs`, Bericht `npm run kosten` |
 | Vorlagen der Aufträge | neben dieser Datei: `bauen.md`, `pruefung-a.md`, `pruefung-b-didaktik.md`, `pruefung-b-welt.md`, `pruefung-b-bedienung.md`, `abschluss-review.md` |
 
 ## Aufträge an Agenten
 
 - Text **unter der Linie** (`---`) der Vorlage schicken, Platzhalter gefüllt; bei `bauen.md` den gemeinsamen Teil plus
-  einen Abschnitt. Platzhalter: `{{ID}}`, `{{NAME}}`, `{{WORKTREE}}`, `{{BRANCH}}`, `{{SPIELORDNER}}`,
-  `{{ORDNERNAME}}`, `{{SEITE}}` (`spiele/<fach>/<spiel>/index.html`), `{{ENTWURF}}`, `{{PRUEFUNGEN}}`
-  (`docs/spiele/<fach>/<spiel>.pruefungen.md`), `{{KATALOG_DATEI}}`, `{{BILDER}}`, `{{STADIUM}}` (Prototyp/Ausbau),
-  `{{RUNDE}}`, `{{BEFUNDE}}`, `{{VORIGE_BEFUNDE}}` (Runde 1 leer; sonst wie im Kopf der Vorlage).
+  einen Abschnitt. Platzhalter: `{{ID}}`, `{{NAME}}`, `{{WORKTREE}}`, `{{BRANCH}}`, `{{BASIS}}` (`main` oder
+  `--basis`), `{{SPIELORDNER}}`, `{{ORDNERNAME}}`, `{{SEITE}}` (`spiele/<fach>/<spiel>/index.html`), `{{ENTWURF}}`,
+  `{{PRUEFUNGEN}}` (die Arbeitsablage des Laufs), `{{KATALOG_DATEI}}` (die Teil-Datei des Katalogs, z. B.
+  `docs/spielkatalog/mathe.md`), `{{BILDER}}` (Ordner `b-<runde>/bilder` aus dem Durchspielen dieser Runde),
+  `{{STADIUM}}` (Prototyp oder Ausbau), `{{STUFEN}}` (Lernstufen des Spiels), `{{RUNDE}}`, `{{BEFUNDE}}`,
+  `{{VORIGE_BEFUNDE}}` (Runde 1 leer; sonst wie im Kopf der Vorlage).
 - **Urteil lesen:** Rot ist, was rot ist – steht „GRÜN“ über einer roten Pflichtzeile oder einem kritischen Befund,
-  gilt rot. Fehlt die Tabelle oder der Beleg je Zeile, zählt die Antwort nicht: neuer Prüfer, keine neue Runde.
+  gilt rot. Fehlt die Tabelle oder der Beleg je Zeile, ist die Antwort ungültig: **höchstens eine** Wiederholung je
+  Runde mit einem neuen Prüfer (auch sie wird gebucht); eine gültige Antwort wird nie durch eine neue ersetzt. Ist
+  auch die Wiederholung ungültig, gilt die Runde als rot.
+- Jeden Prüfbericht wörtlich als `runde-<prüfung>-<n>.md` in die Arbeitsablage legen (nicht in den Worktree).
 - Prüfer ändern nichts. Hat einer doch Dateien geändert (`git status`), die Änderung verwerfen
-  (`git restore` nur dieser Dateien) und den Bericht nicht werten.
+  (`git restore` nur dieser Dateien) und den Bericht nicht werten (zählt als ungültig).
+- **Wer baut, bucht welche Phase:** Bau-Agent in Prüfung A `entwurf`, in Prüfstand B `prototyp`, ab dem Ausbau
+  (auch Befunde aus Ausbau-Prüfung und Abschluss-Review) `ausbau`; Prüfer A `pruefung-a`, Prüfer B `pruefung-b`
+  (auch nach dem Ausbau), Abschluss-Reviewer `review`.
 
 ## 0. Start
 
-1. Katalog-Eintrag finden (Id, Teil-Datei, Fach, Ordnername). Gibt es die Id nicht oder liegt
-   `docs/spiele/<fach>/<spiel>.md` schon mit „Geparkt“ vor (auf `main` oder im Branch `spiel-<id klein>`): nichts
-   bauen, Christian melden (kein neuer Versuch ohne seine Entscheidung, §7).
-2. Worktree vom lokalen `main` (Hauptrepo = Verzeichnis über `git rev-parse --git-common-dir`):
+1. Aufruf lesen: Id und `--basis <branch>` (Vorgabe `main`). Mit `--basis` ist es ein **Probelauf**: alles wie unten,
+   aber nichts wird nach `main` gemergt oder geschrieben (Spiel, Anleitungen, geparkte Kosten bleiben in den Branches).
+2. Katalog-Eintrag finden (Id, Teil-Datei, Fach, Ordnername). Gibt es die Id nicht oder liegt
+   `docs/spiele/<fach>/<spiel>.md` mit „Geparkt“ schon auf der Basis oder im Branch `spiel-<id klein>`, oder liegt
+   `werkzeuge/kosten/geparkt/<spiel>.json` auf der Basis: nichts bauen, Christian melden (§7).
+3. `Hauptrepo` = `git rev-parse --path-format=absolute --git-common-dir` ohne das letzte `/.git`. Die Basis muss
+   den Prüfstand haben: `git -C <Hauptrepo> cat-file -e <basis>:<pfad>` für `tests/browser/durchspielen.mjs`,
+   `werkzeuge/kosten/kosten.mjs`, `werkzeuge/kosten/transkript.mjs`, `.claude/skills/spiel-entwickeln/SKILL.md`.
+   Fehlt einer: anhalten und melden (Grund 4).
+4. Worktree:
    ```bash
-   git -C <Hauptrepo> worktree add <Hauptrepo>/.worktrees/spiel-<id klein> -b spiel-<id klein> main
-   cd <Hauptrepo>/.worktrees/spiel-<id klein> && npm ci && ln -s <Hauptrepo>/.env .env
-   npm test
+   git -C <Hauptrepo> worktree add <Hauptrepo>/.worktrees/spiel-<id klein> -b spiel-<id klein> <basis>
+   cd <Hauptrepo>/.worktrees/spiel-<id klein> && npm ci && ln -s <Hauptrepo>/.env .env && npm test
+   mkdir -p <Hauptrepo>/.superpowers/spiele/<id klein>
    ```
-   Gibt es den Branch schon (abgebrochener Lauf), dort weitermachen statt neu anlegen. `npm test` muss vor dem
-   ersten Schritt grün sein; ist er auf `main` rot, ist das nicht dein Spiel: melden und anhalten (Grund 4).
-3. **Mit echten Dingen parallel:** Hauptthemen des Eintrags, die in `spiele/lernplan.json` stehen und noch keine
-   Datei `spiele/mit-echten-dingen/<fach>/<thema>.md` haben, an einen Agenten im Hintergrund geben: „Lies
-   `.claude/skills/mit-echten-dingen/SKILL.md` und führe ihn aus für <Themen>. Arbeitsordner <Worktree>. Ändere nur
-   `spiele/mit-echten-dingen/`, committe nur diese Pfade, trage die Kosten dort ein, starte keine weiteren Agenten
-   außer den Prüfern, die der Skill verlangt. Committe mit `git commit -- <pfade>`; meldet Git `index.lock`, kurz
-   warten und wiederholen (im selben Worktree baut ein anderer Agent).“ Sein Ergebnis gehört vor das
-   Abschluss-Review.
+   `npm test` muss grün sein; ist er auf der Basis rot: melden und anhalten (Grund 4).
+5. **Wiederaufnahme** (Branch oder Arbeitsablage gibt es schon): dort weitermachen, nicht neu anlegen. Die Runden
+   zählen aus den `runde-*.md` der Arbeitsablage; ein **neuer** Bau-Agent bekommt den Entwurf und die Befunde der
+   letzten Runde (der alte Kontext ist weg).
+6. **Mit echten Dingen** starten (Abschnitt unten), parallel zum Spiel.
 
 ## 1. Entwurf → Prüfung A
 
@@ -82,94 +95,125 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
    Pflichtteilen aus `docs/spielentwicklung.md` §1, committet.
 2. Prüfer mit `pruefung-a.md` (frisch). Rot → Befunde an den Bau-Agenten (SendMessage, Abschnitt **Befunde
    umsetzen**), dann wieder ein **neuer** Prüfer mit den vorigen Befunden. Höchstens 3 Runden.
-3. Den Prüfbericht jeder Runde knapp in `docs/spiele/<fach>/<spiel>.pruefungen.md` festhalten (Prüfung, Runde,
-   grün/rot je Kriterium, offene Befunde) und committen. Prüfer lesen diese Datei nicht; sie bekommen nur die
-   Befunde der letzten Runde.
 
 ## 2. Prototyp → Prüfstand B
 
-1. Bau-Agent (`bauen.md`, **Prototyp**): Kopie der Vorlage, eine Stufe, eine Runde, Systemstimme, Figur als
-   Platzhalter, schlichte Welt-Fläche, Test-Schnittstelle, Eintrag in `spiele/spiele.json`. Lädt
-   `frontend-design:frontend-design` vor der UI-Arbeit.
-2. **B-Spielbarkeit** führst du selbst aus (kein Urteil, nur Ausgabe):
+1. Bau-Agent (`bauen.md`, **Prototyp**). Er lädt `frontend-design:frontend-design` vor der UI-Arbeit.
+2. **B-Spielbarkeit** führst du selbst aus (kein Urteil, nur Ausgabe), Runde `<n>`:
    ```bash
+   A=<Hauptrepo>/.superpowers/spiele/<id klein>/b-<n>
    NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs \
-     spiele/<fach>/<spiel>/index.html --bilder <Scratchpad>/b-<n>/bilder --bericht <Scratchpad>/b-<n>/bericht.json
+     spiele/<fach>/<spiel>/index.html --bilder $A/bilder --bericht $A/bericht.json
    npm test
    ```
-   (Bilder und Bericht ins Scratchpad der Sitzung, nicht ins Repo.) Grün = Exit 0 beider Befehle, kein Rot im Bericht.
-3. Drei frische Prüfer **parallel**: `pruefung-b-didaktik.md`, `pruefung-b-welt.md` (mit dem Bilder-Ordner),
-   `pruefung-b-bedienung.md` (mit dem Bilder-Ordner).
-4. Grün = alle vier grün. Sonst alle Befunde gesammelt an den Bau-Agenten, danach **alle vier** neu (neue Prüfer),
-   höchstens 3 Runden. Prüfberichte wie oben in `<spiel>.pruefungen.md`.
+   Grün = Exit 0 beider Befehle. **Rot → zuerst zurück an den Bau-Agenten** (Ausgabe als Befund), ohne die drei
+   Prüfer zu starten; das zählt als Runde von Prüfstand B.
+3. Bei grünem Durchspielen drei frische Prüfer **parallel**: `pruefung-b-didaktik.md`, `pruefung-b-welt.md`,
+   `pruefung-b-bedienung.md` (beide mit `{{BILDER}}`).
+4. Grün = alle vier grün. Sonst alle Befunde gesammelt an den Bau-Agenten, danach wieder ab Schritt 2 (neue Prüfer),
+   höchstens 3 Runden.
 
 ## 3. Ausbau
 
-Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spielentwicklung.md` §5: alle Stufen des
-Eintrags (Umfang nach `docs/spielkatalog.md` §8a), Spielobjekte als animierte SVG im Stil der Runde, Regal-Bild,
-Szenenbild, Texte als Daten, Einführung, Regal-Material, `spiele.json` vollständig.
+Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spielentwicklung.md` §5. Danach du:
 
-- **Bilder:** nur `node werkzeuge/bilder/erzeugen.mjs --spiel <spielordner> <ziel> "<Szene>"` (trägt die Kosten ein).
-- **Audio** erzeugst du selbst, nachdem der Bau-Agent die Texte committet hat: nur `npm run audio`; vorher die
-  Einträge in `<spielordner>/kosten.json` zählen, danach prüfen, dass ein Eintrag `posten: stimme` dazukam (oder die
-  Ausgabe 0 neue Zeichen meldet), dann `spiele/audio/` und `kosten.json` committen. Fehlt der Schlüssel: Texte trotzdem
-  fertig, „Audio nicht erzeugt“ in die Schlussmeldung. **Anhören ist Christians Sache:** die neuen Texte wörtlich
-  sammeln (aus `texte.json`) für die Schlussmeldung; `npm run audio:anhoeren` nicht selbst abnehmen.
-- Danach: B-Spielbarkeit erneut (alle Kinder, beide Browser, beide Größen) und `tests/browser/pruefkopie.mjs` nur, wenn
-  der Ausbau Bausteine in `spiele/rahmen/` oder `spiele/objekte/` geändert hat; **B-Welt erneut** mit Bildern je
-  Bewegungszustand der Objekte (`?objekte`-Vorschau) und `pruefung-b-bedienung.md` erneut. Rot → Befunde, höchstens
-  3 Runden, dann parken.
+- **Audio:** nur `npm run audio -- --spiel <spielordner>` (bucht die Zeichen); danach prüfen, dass in
+  `<spielordner>/kosten.json` ein Eintrag `posten: stimme` dazukam (oder die Ausgabe 0 neue Zeichen meldet), dann
+  `spiele/audio/` und `kosten.json` committen. Fehlt der Schlüssel: „Audio nicht erzeugt“ in die Schlussmeldung.
+  **Anhören ist Christians Sache:** die neuen Texte wörtlich sammeln (aus `texte.json`); nichts als angehört melden.
+- **Ausbau-Prüfung** (eine Prüfung, höchstens 3 Runden, Runde `<n>` mit eigenem `b-a<n>/`):
+  - Durchspielen wie oben, dazu **jede Lernstufe einzeln**: `… durchspielen.mjs <seite> --stufe <id> --bilder
+    $A/<id>/bilder --bericht $A/<id>/bericht.json` für jede Stufe des Spiels; dazu `npm test`. Rot → zuerst an den
+    Bau-Agenten.
+  - Hat der Ausbau `spiele/rahmen/`, `spiele/objekte/` oder `spiele/lernsteuerung.js` geändert: `pruefkopie.mjs` in
+    einem eigenen Worktree, damit die Kopie keinem Bau-Agenten in den Weg kommt:
+    `git worktree add --detach <Scratchpad>/pruefkopie HEAD`, dort `NODE_PATH=… node tests/browser/pruefkopie.mjs`,
+    danach `git worktree remove <Scratchpad>/pruefkopie`.
+  - Drei frische Prüfer parallel: `pruefung-b-didaktik.md` (`{{STADIUM}}` Ausbau, `{{STUFEN}}`),
+    `pruefung-b-welt.md` (macht die Bilder der Objektzustände selbst mit `tests/browser/objektbilder.mjs`),
+    `pruefung-b-bedienung.md`.
+  - Rot → Befunde an den Bau-Agenten; nach 3 Runden rot: parken.
 
 ## 4. Abschluss-Review und Merge
 
-1. Ergebnis von „Mit echten Dingen“ abwarten (geparkte Anleitungen halten das Spiel nicht auf, stehen aber in der
-   Meldung).
-2. `git merge main` im Spiel-Branch (andere Spiele können `spiele.json` geändert haben; Konflikte additiv lösen),
-   dann `npm test` und B-Spielbarkeit erneut grün.
-3. Frischer Reviewer mit `abschluss-review.md` über `git diff main...HEAD`. Rot → Befunde an den Bau-Agenten,
-   neuer Reviewer, höchstens 3 Runden.
-4. **Merge nur, wenn** Abschluss-Review grün, `npm test` grün, Durchspielen grün, letzte B-Prüfer grün:
-   - Ist `main` in einem Worktree ausgecheckt (`git worktree list`): dort `git status --short` muss leer sein, dann
-     `git -C <main-worktree> merge --ff-only spiel-<id>` (geht kein Fast-Forward: erst Schritt 2 wiederholen).
-     Ist er nicht sauber: anhalten (Grund 1).
-   - Sonst: `git -C <Hauptrepo> fetch . spiel-<id>:main` (nur Fast-Forward).
-   - Danach Worktree entfernen und Branch mit `git branch -d` löschen. Nie pushen.
+1. **Mit echten Dingen** muss gemergt oder geparkt sein (geparkte Anleitungen halten das Spiel nicht auf).
+2. `git merge <basis>` im Spiel-Branch (andere Spiele können `spiele.json` geändert haben; Konflikte additiv lösen).
+   Das ist keine Runde; Befunde, die daraus folgen, zählen zur nächsten Runde des Abschluss-Reviews.
+3. Frischer Reviewer mit `abschluss-review.md` über `git diff <basis>...HEAD`. Rot → Befunde an den Bau-Agenten,
+   neuer Reviewer, höchstens 3 Runden. Ändert eine Korrektur danach UI-Teile oder `spiel.js`, den passenden B-Prüfer
+   (Bedienung bzw. Didaktik/Welt) noch einmal frisch laufen lassen, bevor das Review wiederholt wird.
+4. **Freigabe nötig** (Grundregeln) oder Probelauf: hier aufhören → parken bzw. Probelauf-Meldung.
+5. Merge, nur wenn Abschluss-Review grün und die letzten B-Prüfer grün:
+   1. Prüfberichte aus der Arbeitsablage nach `docs/spiele/<fach>/<spiel>.pruefungen.md` (je Prüfung und Runde,
+      wörtlich), Steuerung buchen („Kosten“), `npm run kosten`, committen.
+   2. **Auf genau diesem Commit** `npm test` und Durchspielen (alle Kinder, beide Browser, beide Größen) grün.
+   3. Ist `main` in einem Worktree ausgecheckt (`git worktree list`): dort muss `git status --short` leer sein, dann
+      `git -C <main-worktree> merge --ff-only spiel-<id klein>`; sonst `git -C <Hauptrepo> fetch . spiel-<id klein>:main`.
+      Geht kein Fast-Forward: zurück zu Schritt 2. Ist der `main`-Worktree nicht sauber: anhalten (Grund 1).
+   4. `git -C <Hauptrepo> rev-parse main` muss gleich dem geprüften Commit sein. Danach Worktree entfernen,
+      `git branch -d spiel-<id klein>`. Nie pushen.
+
+## Mit echten Dingen (eigener Branch)
+
+- **Themen:** die Hauptthemen des Eintrags, die in `spiele/lernplan.json` stehen und für die
+  `spiele/mit-echten-dingen/<fach>/<thema>.md` fehlt **oder** `entwurf: true` ohne `geparkt` im Kopf hat. Höchstens
+  **5** je Lauf, die zentralsten zuerst (Themen der Einstiegsklasse in der Reihenfolge des Eintrags); die übrigen
+  stehen als offen in der Schlussmeldung.
+- **Worktree:** `git -C <Hauptrepo> worktree add <Hauptrepo>/.worktrees/echte-dinge-<id klein> -b
+  echte-dinge-<id klein> <basis>`. Der Bau-Agent des Spiels fasst `spiele/mit-echten-dingen/` nie an.
+- **Ablauf je Thema** nach `.claude/skills/mit-echten-dingen/SKILL.md`, gesteuert von dir: ein Schreib-Agent (Auftrag:
+  „Lies `.claude/skills/mit-echten-dingen/SKILL.md`, führe §1–§3 für <Thema> aus, Arbeitsordner <Worktree>, keine
+  Unteragenten, keine Kosten buchen, committe nur `spiele/mit-echten-dingen/`.“), dann die Prüfung E1–E9 aus §4 mit
+  **frischen** Prüfern, die du startest, höchstens 3 Runden; §5 (Kopf, Verzeichnis) lässt du den Schreib-Agenten
+  machen. Kosten bucht du: `--ordner spiele/mit-echten-dingen --phase recherche|schreiben|pruefung --themen 1` im
+  Worktree der Anleitungen.
+- **Merge** (nicht im Probelauf), unabhängig vom Spiel, sobald alle Themen grün oder geparkt sind: im Branch
+  `git merge <basis>`, `npm run echte-dinge`, `npm test`, committen, dann Fast-Forward nach `main` wie in §4.5.3.
+  Klappt das nicht: den Branch vor §4 Schritt 2 in den Spiel-Branch mergen.
 
 ## Kosten
 
-Nach **jedem** Agenten, aus seiner Rückmeldung (Modell, Token). Meldet sie nur eine Gesamtzahl: `eingabe` = Gesamt,
-`ausgabe` = 0, `notiz` „nur Gesamt gemeldet“.
+Nach **jedem** Agenten aus seinem Transkript buchen; die Agent-Id steht in der Rückmeldung des Agenten-Werkzeugs:
 
 ```bash
-node -e '
-import("./werkzeuge/kosten/kosten.mjs").then(({ trageEin }) => trageEin("spiele/mathe/m15-mach-voll", {
-  datum: "2026-11-14", phase: "pruefung-a", posten: "claude", modell: "claude-opus-5-5",
-  eingabe: 52000, ausgabe: 4100, menge: 56100, einheit: "tokens", notiz: "Runde 2, Prüfer A" }))'
+T=$(ls ~/.claude/projects/*/*/subagents/agent-<agentId>.jsonl)
+node werkzeuge/kosten/transkript.mjs "$T" --ordner spiele/<fach>/<spiel> --phase pruefung-a \
+  --notiz "Prüfer A, Runde 2" --stand <Hauptrepo>/.superpowers/spiele/<id klein>/kosten-stand.json
 ```
 
-Phasen: `entwurf`, `pruefung-a`, `prototyp`, `pruefung-b`, `ausbau`, `review`. Der Spielordner darf vor dem Prototyp
-noch leer sein (`trageEin` legt ihn an). Bilder und Stimme tragen die Werkzeuge selbst ein. `kosten.json` committen.
+- Das Werkzeug zählt Eingabe, Ausgabe, Cache lesen und Cache schreiben genau. Mit `--stand` bucht es bei einer
+  Fortsetzung desselben Agenten (SendMessage) nur den Zuwachs, nie doppelt; deshalb immer mit `--stand`.
+- **Steuerung:** deine eigenen Token einmal am Ende (vor dem Merge- bzw. Park-Commit) aus dem Sitzungs-Transkript
+  (`ls -t ~/.claude/projects/*/*.jsonl | head -1`, die laufende Sitzung) mit `--phase steuerung`.
+- Bilder bucht `werkzeuge/bilder/erzeugen.mjs --spiel`, Stimme `npm run audio -- --spiel`. `kosten.json` committen.
+- Der Spielordner darf vor dem Prototyp noch leer sein (das Werkzeug legt ihn an).
 
 ## Parken
 
-Bleibt eine Prüfung (A, B, Ausbau-Prüfung oder Abschluss-Review) nach 3 Runden rot (`docs/spielentwicklung.md` §7)
-oder belegt eine Prüfung, dass die Vorgabe aussichtslos ist:
+Bleibt eine Prüfung (A, B, Ausbau-Prüfung, Abschluss-Review) nach 3 Runden rot (`docs/spielentwicklung.md` §7),
+belegt eine Prüfung, dass die Vorgabe aussichtslos ist, oder ist eine **Freigabe nötig**:
 
-1. In `docs/spiele/<fach>/<spiel>.md` Abschnitt **„Geparkt“**: Datum, welche Prüfung, offene Befunde je Kriterium
-   mit Beleg, was eine Entscheidung von Christian lösen könnte (z. B. Katalog-Eintrag ändern).
-2. Kosten-Eintrag `{ posten: "status", phase: "geparkt", einheit: "keine", menge: 0, … }` im Spielordner.
-3. Committen; Branch und Worktree bleiben. Kein Merge, kein weiterer Versuch.
+1. In `docs/spiele/<fach>/<spiel>.md` Abschnitt **„Geparkt“**: Datum, Grund, welche Prüfung, offene Befunde je
+   Kriterium mit Beleg, die Frage, die Christian entscheiden müsste (z. B. Katalog-Eintrag ändern, Lernzeichen freigeben).
+2. Prüfberichte nach `docs/spiele/<fach>/<spiel>.pruefungen.md`; Steuerung buchen; Kosten-Eintrag
+   `{ posten: "status", phase: "geparkt", einheit: "keine", menge: 0, … }` per `trageEin` im Spielordner; committen.
+   Branch und Worktree bleiben.
+3. Nicht im Probelauf: `<spielordner>/kosten.json` als `werkzeuge/kosten/geparkt/<spiel>.json` auf `main`
+   committen (`chore(kosten): <spiel> geparkt`) – im `main`-Worktree, wenn er sauber ist (sonst anhalten, Grund 1),
+   oder, wenn `main` nirgends ausgecheckt ist, in einem kurzen Worktree `git worktree add <Scratchpad>/main main`,
+   der danach wieder entfernt wird. So zählt `npm run kosten` auf `main` das geparkte Spiel mit.
 
 ## Schlussmeldung (deine letzte Nachricht)
 
 Kurz, für Christian:
 
-- **Spiel:** Id, Name, Ordner, Branch; **gemergt** (Commit auf `main`) oder **geparkt** (Prüfung, Runde).
-- **Belege:** je Prüfung die Runden mit grün/rot (A, B-Didaktik, B-Welt, B-Spielbarkeit mit Zahl der grünen Läufe,
-  B-Bedienung, Abschluss-Review); bei Parken die offenen Befunde.
-- **Anhören:** Liste der neuen Texte wörtlich (oder „Audio nicht erzeugt“), Aufruf `npm run audio:anhoeren`.
-- **Mit echten Dingen:** welche Anleitungen entstanden, welche geparkt.
-- **Kosten:** Summe aus `npm run kosten` für dieses Spiel.
+- **Spiel:** Id, Name, **gemergt** (Commit auf `main`), **geparkt** (Grund, Prüfung, Runde) oder **Probelauf**.
+  Bei geparkt: Branch, Worktree-Pfad und die Frage, die er entscheiden soll.
+- **Belege:** je Prüfung die Runden mit grün/rot (A, B-Didaktik, B-Welt, B-Spielbarkeit mit Zahl der grünen Läufe je
+  Stufe, B-Bedienung, Abschluss-Review); bei Parken die offenen Befunde.
+- **Anhören:** die neuen Texte wörtlich (oder „Audio nicht erzeugt“), Aufruf `npm run audio:anhoeren`.
+- **Mit echten Dingen:** gemergt, geparkt, offen (über 5 Themen).
+- **Kosten:** Summe aus `npm run kosten` für das Spiel und für die Anleitungen, mit Steuerung.
 - **Stichprobe (Annahme):** Bei gemergten Spielen mit Wahrscheinlichkeit 1 zu 5
   (`node -e 'console.log(Math.random() < 0.2)'`) „Stichprobe – bitte ansehen“ mit dem Pfad der Seite; sonst nichts.
 
@@ -179,7 +223,11 @@ Kurz, für Christian:
 |---|---|
 | Prüfer aus Runde 1 nach der Überarbeitung wieder fragen | neuer Agent je Runde, vorige Befunde mitgeben |
 | Bau-Agent „prüft selbst“ und meldet grün | grün gibt nur ein frischer Prüfer bzw. der Prüfstand |
-| Kosten am Ende schätzen | nach jedem Agenten aus seiner Rückmeldung |
+| Prüfer starten, obwohl das Durchspielen rot ist | erst zurück an den Bau-Agenten |
+| Unpassende Prüferantwort mehrmals neu anfordern | höchstens eine Wiederholung, dann rot |
+| Kosten schätzen oder nur Gesamt-Token buchen | `transkript.mjs` mit `--stand` nach jedem Agenten |
 | Christian nach Geschmack fragen | entscheiden, Annahme in den Entwurf schreiben |
+| Neues Lernzeichen gebaut und gemergt | parken mit „Freigabe nötig“ |
 | Nach Runde 3 „noch eine kleine Runde“ | parken |
+| Nach dem letzten Test noch committen und dann mergen | gemergt wird genau der geprüfte Commit |
 | Audio erzeugt und als „angehört“ gemeldet | Anhören bleibt bei Christian |

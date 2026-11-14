@@ -31,19 +31,29 @@ function woertlich(vorlage) {
 const tabellenZeilen = (text) => text.split("\n").filter((z) => z.startsWith("|"));
 const glatt = (text) => text.replace(/\s+/g, " ").trim();
 
-test("Prüfung A: Kriterien A1–A12 stehen wörtlich wie in docs/spielentwicklung.md §2", () => {
+test("Prüfung A: Kriterien A1–A12 stehen wörtlich wie in docs/spielentwicklung.md §2 (der ganze markierte Block)", () => {
   const imDok = tabellenZeilen(abschnitt(DOK, "## 2. Prüfung A", "## 3."));
-  const inVorlage = tabellenZeilen(woertlich(readFileSync(join(SKILL, "pruefung-a.md"), "utf8")));
-  assert.deepEqual(inVorlage, imDok);
+  // Der markierte Block ist genau die Tabelle: nichts davor, dazwischen oder danach.
+  assert.equal(woertlich(readFileSync(join(SKILL, "pruefung-a.md"), "utf8")), imDok.join("\n"));
   const nummern = imDok.slice(2).map((z) => z.split("|")[1].trim().split(" ")[0]);
   assert.deepEqual(nummern, ["A1", "A2", "A3", "A4", "A4b", "A5", "A6", "A6b", "A7", "A8", "A9", "A10", "A11", "A12"]);
 });
 
-for (const [name, datei] of [["Didaktik", "pruefung-b-didaktik.md"], ["Welt", "pruefung-b-welt.md"], ["Bedienung", "pruefung-b-bedienung.md"]]) {
+const B_VORLAGEN = { Didaktik: "pruefung-b-didaktik.md", Welt: "pruefung-b-welt.md", Bedienung: "pruefung-b-bedienung.md" };
+
+test("Prüfstand B: jeder Prüfer aus §4 hat eine Vorlage (B-Spielbarkeit ist das Durchspielen), keiner fehlt, keiner zu viel", () => {
+  const b = abschnitt(DOK, "## 4. Prüfung B", "## 5.");
+  const imDok = [...b.matchAll(/^\*\*B-([A-Za-zÄÖÜäöüß]+)\*\*/gm)].map((m) => m[1]).sort();
+  assert.deepEqual(imDok, [...Object.keys(B_VORLAGEN), "Spielbarkeit"].sort());
+  assert.match(b, /tests\/browser\/durchspielen\.mjs/);
+});
+
+for (const [name, datei] of Object.entries(B_VORLAGEN)) {
   test(`Prüfstand B-${name}: Auftrag steht wörtlich wie in docs/spielentwicklung.md §4`, () => {
     const b = abschnitt(DOK, "## 4. Prüfung B", "## 5.");
     const m = b.match(new RegExp(`^\\*\\*B-${name}\\*\\*[\\s\\S]*?(?=\\n\\n)`, "m"));
     assert.ok(m, `B-${name} fehlt in §4`);
+    // ganzer markierter Block = genau der Absatz aus §4 (Zeilenumbrüche dürfen abweichen)
     assert.equal(glatt(woertlich(readFileSync(join(SKILL, datei), "utf8"))), glatt(m[0]));
   });
 }

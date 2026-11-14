@@ -25,7 +25,7 @@ export const PHASEN = Object.freeze(["laden", "einfuehrung", "aufgabe", "folge",
 
 /**
  * @typedef {{ art: "tippen", von: string } | { art: "ziehen", von: string, nach: string } | { art: string, von?: string, nach?: string }} Zug
- * @typedef {{ phase: string, aufgabe: string | null, nr: number, versuche: number, hilfeStufe: number, vorschau: boolean }} Zustand
+ * @typedef {{ phase: string, aufgabe: string | null, nr: number, versuche: number, hilfeStufe: number, vorschau: boolean, lernstufe?: string | null }} Zustand
  * @typedef {{ hilfe: string, haus: string, weiter: string }} Orte
  * @typedef {{ zuege: () => Zug[], richtigerZug: () => Zug | null, zustand: () => Zustand, orte?: Orte,
  *   fuehreAus?: (zug: Zug) => Promise<void>, fehlversuche?: boolean }} Spielseite

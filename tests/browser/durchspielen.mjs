@@ -3,7 +3,10 @@
 //
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs spiele/<fach>/<katalog-nr>-<name>/index.html \
 //     [--kinder sicher,ratend,hilfe,wild,tastatur,zurueck] [--browser chromium,webkit] [--groessen 1920x1080,1280x800]
-//     [--bilder <ordner>] [--bericht <datei.json>] [--saat <zahl>]
+//     [--bilder <ordner>] [--bericht <datei.json>] [--saat <zahl>] [--stufe material|vorstellung|kopf]
+//
+// --stufe: jede Aufgabe auf dieser Lernstufe (Seite mit ?stufe=<id>, gilt nur im Testbetrieb, schreibt nicht); geprüft
+// wird, dass die Aufgaben wirklich auf der Stufe kommen (Zustand lernstufe). Ohne --stufe entscheidet die Lernsteuerung.
 //
 // Das Spiel braucht die Test-Schnittstelle (spiele/rahmen/pruefen.js); der Prüfstand schaltet den Testbetrieb mit
 // window.__LS_PRUEFEN__ ein und kennt sonst nichts vom Spiel: alle Züge kommen aus window.lsPruefen.
@@ -70,7 +73,7 @@ const UEBERSPRUNGEN = "übersprungen in WebKit (Playwright-Build leitet echte Ma
 // --- Aufruf ----------------------------------------------------------------------------------------
 
 function leseAufruf(argv) {
-  const a = { seite: null, kinder: ALLE_KINDER, browser: ["chromium", "webkit"], groessen: ["1920x1080", "1280x800"], bilder: null, bericht: null, saat: Date.now() % 100000 };
+  const a = { seite: null, kinder: ALLE_KINDER, browser: ["chromium", "webkit"], groessen: ["1920x1080", "1280x800"], bilder: null, bericht: null, saat: Date.now() % 100000, stufe: null };
   for (let i = 0; i < argv.length; i++) {
     const x = argv[i];
     const wert = () => argv[++i];
@@ -80,6 +83,7 @@ function leseAufruf(argv) {
     else if (x === "--bilder") a.bilder = resolve(wert());
     else if (x === "--bericht") a.bericht = resolve(wert());
     else if (x === "--saat") a.saat = Number(wert());
+    else if (x === "--stufe") a.stufe = wert();
     else if (!x.startsWith("--") && !a.seite) a.seite = x;
     else throw new Error(`unbekannter Schalter ${x}`);
   }
@@ -89,6 +93,7 @@ function leseAufruf(argv) {
   a.pfad = relative(WURZEL, datei).split("\\").join("/");
   if (a.pfad.startsWith("..")) throw new Error("Die Seite muss im Repo liegen");
   for (const k of a.kinder) if (!ALLE_KINDER.includes(k)) throw new Error(`unbekanntes Kind ${k} (${ALLE_KINDER.join(", ")})`);
+  if (a.stufe !== null && !["material", "vorstellung", "kopf"].includes(a.stufe)) throw new Error(`unbekannte Stufe ${a.stufe} (material, vorstellung, kopf)`);
   a.groessen = a.groessen.map((g) => {
     const [width, height] = g.split("x").map(Number);
     return { width, height };
@@ -641,12 +646,16 @@ async function spieleLauf(browser, name, groesse, kind, aufruf, basis, rnd) {
       for (const [k, v] of Object.entries(stand)) localStorage.setItem(k, v);
     }, STAND);
     const seite = await kontext.newPage();
-    const sp = new Spieler({ seite, lauf, webkit: name === "webkit", url: `${basis}/${aufruf.pfad}`, bilder: aufruf.bilder, rnd });
+    const sp = new Spieler({ seite, lauf, webkit: name === "webkit", url: `${basis}/${aufruf.pfad}${aufruf.stufe ? `?stufe=${aufruf.stufe}` : ""}`, bilder: aufruf.bilder, rnd });
     let vorher = null;
     let vorschau = true;
     try {
       await sp.lade();
       lauf.pruefe("Test-Schnittstelle da, Spiel erwartet einen Zug", true);
+      if (aufruf.stufe) {
+        const z = await sp.zustand();
+        lauf.pruefe(`Aufgabe auf der Stufe ${aufruf.stufe} (--stufe), Vorschau`, z.lernstufe === aufruf.stufe && z.vorschau === true, JSON.stringify(z));
+      }
       vorher = await sp.speicher();
       vorschau = (await sp.zustand()).vorschau;
       await KINDER[kind](sp, lauf, vorher);
@@ -699,7 +708,7 @@ async function laufeBrowser(name, aufruf, basis, rnd) {
 const aufruf = leseAufruf(process.argv.slice(2));
 const server = await starteServer();
 const basis = `http://127.0.0.1:${server.address().port}`;
-console.log(`Prüfstand: ${aufruf.pfad} · Kinder ${aufruf.kinder.join(", ")} · ${aufruf.browser.join(", ")} · Saat ${aufruf.saat}`);
+console.log(`Prüfstand: ${aufruf.pfad}${aufruf.stufe ? ` · Stufe ${aufruf.stufe}` : ""} · Kinder ${aufruf.kinder.join(", ")} · ${aufruf.browser.join(", ")} · Saat ${aufruf.saat}`);
 let laeufe = [];
 let fehler = null;
 try {
@@ -718,6 +727,7 @@ const rot = pruefungen.filter((p) => !p.ok).length;
 const gruen = !fehler && rot === 0 && laeufe.length > 0;
 const bericht = {
   seite: aufruf.pfad,
+  stufe: aufruf.stufe,
   zeit: new Date().toISOString(),
   saat: aufruf.saat,
   gruen,

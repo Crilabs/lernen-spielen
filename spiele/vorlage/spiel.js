@@ -44,6 +44,8 @@
 //   ?einfuehrung      Einführung des Themas auch in der Vorschau abspielen
 //   ?thema=<id>       Wunsch-Thema aus der Themen-Übersicht (gilt nur für die erste Runde, schreibt normal)
 //   ?pruefen          Testbetrieb: window.lsPruefen für den Prüfstand (ändert sonst nichts, schreibt normal)
+//   ?stufe=<id>       nur mit ?pruefen: jede Aufgabe auf dieser Lernstufe (material, vorstellung, kopf), schreibt nicht;
+//                     der Prüfstand spielt so jede Stufe einzeln (durchspielen.mjs --stufe)
 
 import "../rahmen/leiste.js";
 import "../rahmen/blase.js";
@@ -52,7 +54,7 @@ import "../rahmen/pause.js";
 import "../rahmen/knopf.js";
 import "../rahmen/perlenstab.js";
 import { ziehbar, setze, zurueck } from "../rahmen/ziehen.js";
-import { meldePruefSchnittstelle, selektor } from "../rahmen/pruefen.js";
+import { meldePruefSchnittstelle, selektor, testbetrieb } from "../rahmen/pruefen.js";
 import { laenge, LUECKE } from "../rahmen/perlen-geometrie.js";
 import { sperreTouch, protokoll, esc } from "../lernspiel.js";
 import { sprich } from "../kern/stimme.js";
@@ -317,6 +319,10 @@ function raeumeAuf() {
 
 const params = new URLSearchParams(location.search);
 const wunsch = einmal(params.get("thema")); // ?thema= gilt nur für die erste Runde der Seite
+// ?stufe=<id> nur im Testbetrieb: jede Aufgabe auf dieser Lernstufe; die Runde ist dann eine Vorschau (schreibt nicht).
+const PRUEF_STUFE = testbetrieb() ? params.get("stufe") || null : null;
+/** @param {any} a */
+const aufStufe = (a) => (a && PRUEF_STUFE ? { ...a, stufe: PRUEF_STUFE } : a);
 
 /** @type {{ plan: any, spiele: any } | null} */
 let ctx = null;
@@ -332,7 +338,7 @@ const eingetragen = (/** @type {{ spiele: any }} */ c) => c.spiele.spiele.some((
 // --- Prüfstand (rahmen/pruefen.js, nur im Testbetrieb ?pruefen) ------------------------------------
 // Der RAHMEN merkt sich, was gerade dran ist; das ändert für das Kind nichts. Die Züge einer Aufgabe kommen aus
 // der AUFGABE (zuege, richtigerZug), in der Pause ist Weiter der einzige Zug des Spiels.
-const stand = { phase: "laden", aufgabe: /** @type {string | null} */ (null), nr: 0, versuche: 0, hilfeStufe: 0, vorschau: true };
+const stand = { phase: "laden", aufgabe: /** @type {string | null} */ (null), nr: 0, versuche: 0, hilfeStufe: 0, vorschau: true, lernstufe: /** @type {string | null} */ (null) };
 /** @type {{ zuege: () => any[], richtigerZug: () => any } | null} */
 let offeneAufgabe = null;
 const ORTE = { hilfe: "#hilfe >>> ls-knopf", haus: "#leiste >>> a.haus", weiter: "#pause >>> ls-knopf.weiter" };
@@ -363,7 +369,7 @@ function spieleAufgabe(aufgabe) {
     const start = Date.now();
     let versuche = 0;
     let stufe = 0;
-    Object.assign(stand, { phase: "aufgabe", aufgabe: aufgabe?.ziel?.key ?? null, nr: stand.nr + 1, versuche, hilfeStufe: stufe });
+    Object.assign(stand, { phase: "aufgabe", aufgabe: aufgabe?.ziel?.key ?? null, nr: stand.nr + 1, versuche, hilfeStufe: stufe, lernstufe: aufgabe?.stufe ?? null });
     /** @type {ReturnType<typeof stelleAufgabe>} */
     let a;
     try {
@@ -508,10 +514,10 @@ async function spieleRunde(vorschau) {
     r.einfuehrungGesehen();
   }
 
-  let aufgabe = r.naechste();
+  let aufgabe = aufStufe(r.naechste());
   if (!aufgabe && vorschau) {
     r = vorschauRunde();
-    aufgabe = r.naechste();
+    aufgabe = aufStufe(r.naechste());
   }
   leiste.setAttribute("thema", r.thema);
 
@@ -527,7 +533,7 @@ async function spieleRunde(vorschau) {
     r.melde(e.key, ergebnis);
     document.dispatchEvent(new CustomEvent("ls-ergebnis", { detail: ergebnis })); // für die Browser-Prüfung
     await warteFolge();
-    aufgabe = r.naechste();
+    aufgabe = aufStufe(r.naechste());
   }
 
   const { hinweisSpiel } = await r.ende();
@@ -543,7 +549,7 @@ async function start() {
   const c = await ladeCtx().catch(() => null);
   const nichtEingetragen = c !== null && !eingetragen(c);
   if (nichtEingetragen) protokoll(`${SPIEL_ID}: nicht in spiele.json – Vorschau, schreibt nicht`);
-  const vorschau = ["pause", "hinweis", "eltern", "einfuehrung"].some((p) => params.has(p)) || !c || nichtEingetragen;
+  const vorschau = ["pause", "hinweis", "eltern", "einfuehrung"].some((p) => params.has(p)) || PRUEF_STUFE !== null || !c || nichtEingetragen;
   stand.vorschau = vorschau;
   if (params.has("pause") || params.has("hinweis")) {
     const andere = (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id !== SPIEL_ID)?.id ?? null;

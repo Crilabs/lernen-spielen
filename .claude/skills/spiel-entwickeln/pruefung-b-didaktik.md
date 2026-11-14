@@ -37,6 +37,9 @@ Test-Schnittstelle `fehlversuche: false` (kein Zug kann danebengehen), prüft B-
 - **D-Gekonnt:** mit Hilfe Gelöstes zählt nicht als gekonnt (`ok` nur ohne Fehlversuch und Hilfe; Beleg).
 - **D-Fehlversuche:** meldet das Spiel `fehlversuche: false`, kann wirklich kein Zug danebengehen (Beleg: alle
   `zuege()` führen weiter). Sonst „n/a“.
+- **D-Stufen** (nur im Ausbau, sonst „n/a“): jede Lernstufe aus {{STUFEN}} ist so gebaut, wie der Entwurf sie
+  beschreibt (Material, Vorstellung, Kopf), und spielbar: Öffne `{{SEITE}}?pruefen&stufe=<id>` je Stufe und lies die
+  Berichte der Durchspiel-Läufe je Stufe (Ordner über `{{BILDER}}`).
 - **D-Sätze:** jeder gesprochene Satz steht als feste Zeichenkette oder als Daten (Kopf der Vorlage, Schritt 3),
   keine Wörter aus `docs/grundsaetze.md` §3.2, Fachbegriffe nach §5.1.
 
@@ -49,7 +52,7 @@ Ergebnis: GRÜN | ROT
 
 | Nr. | grün/rot | Beleg (Datei:Zeile, Bilddatei, Befehl mit Ausgabe) | Befund, falls rot |
 |---|---|---|---|
-… eine Zeile je Kriterium: D-A1, D-A2, D-A3, D-A4, D-A4b, D-A5, D-A6, D-A6b, D-A7, D-A8, D-Meldung, D-Gekonnt, D-Fehlversuche, D-Sätze
+… eine Zeile je Kriterium: D-A1, D-A2, D-A3, D-A4, D-A4b, D-A5, D-A6, D-A6b, D-A7, D-A8, D-Meldung, D-Gekonnt, D-Fehlversuche, D-Stufen, D-Sätze
 
 Kritische Befunde:
 - <Befund> – <Beleg> – <was es lösen würde>   (oder „keine“)

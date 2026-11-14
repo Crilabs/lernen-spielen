@@ -14,6 +14,10 @@ Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Am Tisch / I
 - Je Thema-Id aus `spiele/lernplan.json`: Fach = `strang`, Datei `spiele/mit-echten-dingen/<fach>/<thema-id>.md`.
 - **Gibt es die Datei schon, nichts tun** (auch wenn ein weiteres Spiel das Thema bedient). Nur Themen ohne Datei.
 - Mehrere Themen: je Thema ein eigener Durchlauf (gern parallel), jeder mit eigener Prüfung.
+- Aus „Spiel entwickeln“ heraus (`.claude/skills/spiel-entwickeln/SKILL.md`, Abschnitt „Mit echten Dingen“): eigener
+  Worktree `echte-dinge-<id>`; die steuernde Sitzung startet Schreib-Agent und frische Prüfer selbst und bucht die
+  Kosten (`werkzeuge/kosten/transkript.mjs`, mit `themen`). Der Schreib-Agent macht dann nur §1–§3 und §5.1, ohne
+  Unteragenten und ohne Kosten zu buchen.
 
 ## 1. Recherche (Web)
 
