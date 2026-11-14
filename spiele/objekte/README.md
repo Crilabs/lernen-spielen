@@ -16,6 +16,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `broetchen.js` – Papiertüte vom Bäcker mit zwei Brötchen (ohne Schrift und Ziffer).
 - `eierkarton.js` – offener Eierkarton aus Pappe mit sechs Mulden und je einem Ei (ohne Schrift und Ziffer).
 - `gedeck.js` – ein gedeckter Platz von oben: Teller, Gabel, Löffel und Becher (vier Dinge; ohne Schrift und Ziffer).
+- `glueckwunschkarte.js` – Karte mit gemalter Blume, halb aus dem offenen Briefumschlag gezogen (ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
