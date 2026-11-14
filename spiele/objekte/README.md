@@ -17,6 +17,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `eierkarton.js` – offener Eierkarton aus Pappe mit sechs Mulden und je einem Ei (ohne Schrift und Ziffer).
 - `gedeck.js` – ein gedeckter Platz von oben: Teller, Gabel, Löffel und Becher (vier Dinge; ohne Schrift und Ziffer).
 - `erhobene-haende.js` – zwei erhobene Hände einer Person, an der rechten der Daumen eingeklappt (zehn Finger, einer weg; ohne Schrift und Ziffer).
+- `eintrittskarte.js` – zwei Eintrittskarten aus Papier, schräg übereinander (Hellblau und Koralle; Kerben, Abriss mit gestrichelter Linie, ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.

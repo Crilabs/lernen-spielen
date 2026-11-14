@@ -19,12 +19,8 @@
    "titel": "Neun ist eins weniger als zehn",
    "formen": [
     {
-     "situation": "tisch",
-     "name": "Hände der Runde"
-    },
-    {
      "situation": "unterwegs",
-     "name": "Bezahlen mit Zehnern"
+     "name": "Eintritt für alle"
     }
    ],
    "entwurf": true,
