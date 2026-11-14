@@ -10,15 +10,15 @@ quellen:
 ---
 # Zehner zählen, Geld zählen
 
-## Am Tisch: Reicht das Geld fürs Eis?
+## Am Tisch: Das Geld für den Einkauf
 
-Ihr braucht: zehn Zehn-Cent-Münzen
+Ihr braucht: Zehn-Cent-Münzen aus Geldbeutel oder Münzglas. Ersatz: Wäscheklammern. Münzen nicht in Kleinkinderhände.
 
-1. Ihr teilt euch ein Eis für 70 Cent. Legt Münzen in eine Reihe, bis es reicht. Sagt bei jeder Münze: „10, 20, 30 …“
-2. Wie viele Münzen liegen da? Sagt zusammen: „7 mal 10 ist gleich 70.“
-3. Eine Kugel mehr, das Eis kostet 90 Cent. Legt die Münzen neu hin.
-4. Nehmt 6 Münzen. Wie viel Geld ist das?
+1. Ihr kauft bald ein, etwa ein Brötchen für 70 Cent. Legt das Geld bereit, nur aus Zehn-Cent-Münzen. Sagt bei jeder Münze: „10, 20, 30 …“
+2. Sagt zusammen: „7 mal 10 ist gleich 70.“
+3. Legt 9 Münzen und sagt: „9 mal 10 ist gleich 90.“ Dann 4 Münzen: „4 mal 10 ist gleich 40.“
+4. Steckt das Geld für den Einkauf ein.
 
 **Darauf kommt es an:** Eine Münze ist 10 Cent, ein Zehner. 6 Münzen sind 6 Zehner, und 6 Zehner sind 60. Darum ist 6 mal 10 gleich 60.
 
-**Leichter:** Nehmt nur bis 5 Münzen. **Schwerer:** Legt 80 Cent und dazu noch zwei Münzen. Wie viel ist das?
+**Leichter:** Wählt Preise wie 30 oder 50 Cent. **Schwerer:** Einer legt Münzen, der andere sagt die Aufgabe dazu.
