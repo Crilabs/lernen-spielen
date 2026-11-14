@@ -115,5 +115,18 @@
   "notiz": "Prüfer A neu, Runde 1",
   "cache_lesen": 1636724,
   "cache_schreiben": 152852
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "entwurf",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 24,
+  "ausgabe": 16859,
+  "einheit": "tokens",
+  "menge": 940443,
+  "notiz": "Bau-Agent Entwurf neu, Befunde A1",
+  "cache_lesen": 852354,
+  "cache_schreiben": 71206
  }
 ]
