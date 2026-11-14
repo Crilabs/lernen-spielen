@@ -1,7 +1,6 @@
 ---
 thema: verben-als-nomen
 fach: schreiben
-entwurf: true
 bild: { figur: kramkiste, zustand: beschriftet }
 quellen:
   - Rechtschreibung für Eltern, Arbeitsblatt 6 Groß- und Kleinschreibung 3./4. Klasse (zum = zu dem als Hinweis auf die Großschreibung), Klett Lerntraining, https://static.klett-lerntraining.de/grundschule/docs/926092_AB_06_Gross_Kleinschreibung_3_4.pdf, abgerufen 2026-11-14
