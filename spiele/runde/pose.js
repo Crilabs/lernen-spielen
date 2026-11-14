@@ -107,7 +107,10 @@ export function ablauf(kindId, bewegungId) {
   const extra = { braucht: b.braucht ?? [] };
   /** @type {Schrittpose[]} */
   const folge = [];
-  let vorher = lege(grundpose(kindId, b.ansicht), extra);
+  // Schritte bauen auf dem Stehen auf (bei Timo liegen die Hände dann auf dem Greifreifen), nicht auf der Nullpose.
+  const steht = bestand.haltungen.get("stehen");
+  const anfang = steht && (steht.ansicht === "beide" || steht.ansicht === b.ansicht) ? pose(kindId, "stehen", b.ansicht) : grundpose(kindId, b.ansicht);
+  let vorher = lege(anfang, extra);
   for (let m = 0; m < (b.mal ?? 1); m++) {
     for (const s of schritte) {
       const basis = s.haltung ? lege(pose(kindId, s.haltung, b.ansicht), extra) : vorher;

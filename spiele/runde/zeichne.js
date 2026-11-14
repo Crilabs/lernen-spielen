@@ -48,7 +48,7 @@ export function ankerpunkt(ans, ansicht, anker) {
   const [gx, gy] = ans.gesicht;
   const [rx, ry] = ans.drehpunkte.rumpf;
   if (anker === "kopf") return [kx, ky - 104];
-  if (anker === "mund") return ansicht === "profil" ? [gx + 30, gy + 20] : [gx + 18, gy + 26];
+  if (anker === "mund") return ansicht === "profil" ? [gx + 40, gy + 30] : [gx + 40, gy + 36];
   if (anker === "hinten") return [rx - 74, ry - 30];
   if (anker === "vorn") return [rx + 78, ry - 40];
   return [FUSSPUNKT[0], FUSSPUNKT[1]];

@@ -96,7 +96,7 @@ trick({
     { ms: 200, winkel: { ...GESCHOBEN, koerper: -10, ...rad(45) } },
     { ms: 240, versatz: [0, -48], winkel: { koerper: -4, rumpf: 8, kopf: 4 }, gesicht: "freuen-gross", luft: { striche: "boden" } },
     { ms: 160, kurve: "gleich", versatz: [0, 0], winkel: { koerper: 0 } },
-    { ms: 110, kurve: "ruck", streckung: [1.14, 0.86], luft: { staub: "boden" }, winkel: { rumpf: 14 } },
+    { ms: 110, kurve: "ruck", streckung: [1.12, 0.88], luft: { staub: "boden" }, winkel: { rumpf: 8 } },
     { ms: 160, streckung: [0.95, 1.05], winkel: { rumpf: 4, ...rad(0) } },
     { ms: 220, kurve: "federn", streckung: [1, 1], winkel: RUHE },
   ],

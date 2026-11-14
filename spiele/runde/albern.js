@@ -98,12 +98,12 @@ const ZU = { ...BEINE_RUHE, ...RUHE };
 const hampel = (landung) => [
   { ms: 200, winkel: AUF, versatz: [0, -22], gesicht: "freuen-klein" }, { ms: 200, winkel: ZU, versatz: [0, 0] },
   { ms: 200, winkel: AUF, versatz: [0, -22] }, { ms: 200, winkel: ZU, versatz: [0, 0] },
-  { ms: 300, winkel: AUF, versatz: [0, -78], kurve: "federn", gesicht: "staunen", luft: { striche: "boden" } },
+  { ms: 300, winkel: AUF, versatz: [0, -78], kurve: "federn", gesicht: "staunen" },
   ...landung,
 ];
 const wackelLandung = /** @type {Schritt[]} */ ([
   { ms: 180, winkel: ZU, versatz: [0, 0], kurve: "gleich", streckung: [0.92, 1.08] },
-  { ms: 110, kurve: "ruck", streckung: [1.24, 0.78], luft: { staub: "boden" }, gesicht: "freuen-gross" },
+  { ms: 110, kurve: "ruck", streckung: [1.2, 0.82], luft: { staub: "boden" }, gesicht: "freuen-gross" },
   { ms: 150, streckung: [0.9, 1.1] }, { ms: 140, streckung: [1.06, 0.95] }, { ms: 160, streckung: [1, 1], kurve: "federn" },
 ]);
 meldeBewegung({
@@ -176,9 +176,9 @@ meldeBewegung({
   id: "muskeln", ansicht: "dreiviertel", ende: "stehen",
   schritte: [
     { ms: 320, gesicht: "freuen-klein", haende: { vorn: "faust", hinten: "faust" }, streckung: [1.04, 1.05],
-      winkel: { "arm-vorn-oben": -88, "arm-vorn-unten": -96, "arm-hinten-oben": 28, "arm-hinten-unten": -104, kopf: -8, rumpf: -2 } },
-    { ms: 140, kurve: "ruck", luft: { sterne: "kopf" }, gesicht: "freuen-gross", winkel: { "arm-vorn-unten": -124 }, streckung: [1.06, 1.07] },
-    { ms: 520, luft: { sterne: "kopf" }, winkel: { "arm-vorn-unten": -116 } },
+      winkel: { "arm-vorn-oben": -58, "arm-vorn-unten": -100, "arm-hinten-oben": 28, "arm-hinten-unten": -104, kopf: -8, rumpf: -2 } },
+    { ms: 140, kurve: "ruck", luft: { sterne: "kopf" }, gesicht: "freuen-gross", winkel: { "arm-vorn-oben": -62, "arm-vorn-unten": -122 }, streckung: [1.06, 1.07] },
+    { ms: 520, luft: { sterne: "kopf" }, winkel: { "arm-vorn-unten": -114 } },
   ],
 });
 
@@ -188,11 +188,11 @@ const zack = (w) => ({ ms: 260, kurve: "ruck", winkel: w });
 meldeBewegung({
   id: "roboter", ansicht: "dreiviertel", ende: "freuen-klein",
   schritte: [
-    { ...zack({ "arm-vorn-oben": -90, "arm-vorn-unten": -90, "arm-hinten-oben": 0, "arm-hinten-unten": 0 }), gesicht: "roboter" },
+    { ...zack({ "arm-vorn-oben": -45, "arm-vorn-unten": -90, "arm-hinten-oben": 6, "arm-hinten-unten": 0 }), gesicht: "roboter" },
     zack({ kopf: 10 }),
-    zack({ "arm-vorn-oben": 0, "arm-vorn-unten": 0, "arm-hinten-oben": 90, "arm-hinten-unten": 90, kopf: 0 }),
+    zack({ "arm-vorn-oben": -6, "arm-vorn-unten": 0, "arm-hinten-oben": 45, "arm-hinten-unten": 90, kopf: 0 }),
     zack({ rumpf: -8, kopf: -10 }),
-    zack({ "arm-vorn-oben": -90, "arm-vorn-unten": -90, rumpf: 0, kopf: 0 }),
+    zack({ "arm-vorn-oben": -45, "arm-vorn-unten": -90, rumpf: 0, kopf: 0 }),
     { ms: 400, gesicht: "freuen-gross", winkel: RUHE },
   ],
 });
@@ -330,7 +330,7 @@ meldeBewegung({
     { ms: 520, winkel: { kopf: 7 } },
     { ms: 90, kurve: "ruck", gesicht: "staunen", winkel: { kopf: -8 }, streckung: [0.97, 1.06] },
     { ms: 220, streckung: [1, 1] },
-    { ms: 150, winkel: ARME_HOCH, versatz: [0, -24], gesicht: "freuen-gross", luft: { striche: "boden" } },
+    { ms: 150, winkel: ARME_HOCH, versatz: [0, -24], gesicht: "freuen-gross" },
     { ms: 220, winkel: RUHE, versatz: [0, 0] },
   ],
   rollstuhl: {
@@ -349,8 +349,8 @@ meldeBewegung({
   id: "abklatschen", ansicht: "dreiviertel", ende: "freuen-klein",
   schritte: [
     { ms: 260, winkel: { "arm-vorn-oben": -168, "arm-vorn-unten": -50, rumpf: -4, kopf: -3 }, gesicht: "freuen-klein" },
-    { ms: 130, kurve: "ruck", winkel: { "arm-vorn-oben": -112, "arm-vorn-unten": -8, rumpf: 5, kopf: 2 }, luft: { abklatsch: [236, 104] }, gesicht: "freuen-gross" },
-    { ms: 300, luft: { abklatsch: [236, 104] }, winkel: { rumpf: 2 } },
+    { ms: 130, kurve: "ruck", winkel: { "arm-vorn-oben": -112, "arm-vorn-unten": -8, rumpf: 5, kopf: 2 }, luft: { abklatsch: [236, 84] }, gesicht: "freuen-gross" },
+    { ms: 300, luft: { abklatsch: [236, 84] }, winkel: { rumpf: 2 } },
     { ms: 300, winkel: { rumpf: 0 } },
   ],
 });
