@@ -28,23 +28,23 @@ body { -webkit-user-select: none; user-select: none; }
 .links { display: flex; flex-direction: column; min-height: 0; }
 
 /* Reiter: die Fächer */
-.reiter { flex: none; display: flex; flex-wrap: wrap; gap: 2.4rem; padding: 2.4rem 0 2.8rem 1.2rem; }
+/* Reiter kompakt: das Fachsymbol rund, darunter klein der Name; alle sechs Fächer passen in eine Reihe (auch 4:3). */
+.reiter { flex: none; display: flex; gap: 1.6rem; padding: 2.4rem 0 2.4rem 1.2rem; }
 .reiter-knopf {
-  display: flex; align-items: center; gap: 1.2rem; min-height: 11rem; padding: 1.2rem 2.4rem 1.2rem 1.2rem;
-  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 6rem; background: var(--ls-papier);
-  box-shadow: var(--ls-schatten); color: var(--ls-tinte); font: inherit; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 0.8rem; width: 14rem; padding: 0;
+  background: none; border: 0; color: var(--ls-tinte); font: inherit; cursor: pointer;
   touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 .reiter-knopf > * { pointer-events: none; }
-.reiter-knopf .knopf { display: grid; place-items: center; width: 8rem; height: 8rem; border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: 50%; background: var(--fach-fuellung); }
-.reiter-knopf .knopf i { display: block; width: 4.8rem; height: 4.8rem; background: var(--ls-tinte);
+.reiter-knopf .knopf { display: grid; place-items: center; width: 10rem; height: 10rem; border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: 50%; background: var(--fach-fuellung); box-shadow: 0 0.6rem 0 var(--fach-tief); }
+.reiter-knopf .knopf i { display: block; width: 5.6rem; height: 5.6rem; background: var(--ls-tinte);
   -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
-.reiter-knopf b { font-size: 3.4rem; }
-.reiter-knopf:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
-.reiter-knopf:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
-/* Gewählt: der Sonnenring (bewertet nichts) */
-.reiter-knopf[aria-selected="true"] { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0; box-shadow: 0 0 0 1.1rem var(--ls-tinte); }
+.reiter-knopf b { font-size: 2.4rem; line-height: 1.1; text-align: center; hyphens: manual; }
+.reiter-knopf:active .knopf { transform: translateY(0.3rem); box-shadow: 0 0.3rem 0 var(--fach-tief); }
+.reiter-knopf:focus-visible .knopf { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
+/* Gewählt: der Sonnenring um das Symbol (bewertet nichts) */
+.reiter-knopf[aria-selected="true"] .knopf { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0; box-shadow: 0 0 0 1.1rem var(--ls-tinte); }
 
 /* Bretter: je Bereich eins */
 .bretter { flex: 1; min-height: 0; overflow-y: auto; padding: 0 1rem 6rem 0; scrollbar-width: none; }
@@ -107,7 +107,8 @@ body { -webkit-user-select: none; user-select: none; }
 
 @media (max-aspect-ratio: 4/3) {
   .regal-seite { grid-template-columns: 1fr 34rem; padding-left: 3rem; gap: 2.4rem; }
-  .reiter-knopf b { font-size: 3rem; }
+  .reiter { gap: 0.8rem; }
+  .reiter-knopf { width: 12.6rem; }
 }
 </style>
 </head>
