@@ -1,0 +1,11 @@
+{
+  "saetze": {
+    "ziffern": { "verbunden": false },
+    "druck": { "verbunden": false },
+    "sas": { "verbunden": true, "ovalVerbindung": "durchgezogen" }
+  },
+  "formen": [
+    { "zeichen": "1", "satz": "ziffern", "datei": "ziffern/1.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null }
+  ],
+  "sonderverbindungen": []
+}
