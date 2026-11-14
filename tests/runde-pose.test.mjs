@@ -93,9 +93,11 @@ test("ablauf nimmt beim Stuhlkind die Rollstuhl-Schritte", () => {
   assert.equal(ablauf("test-geht", "lauf").length, 2);
 });
 
-test("braucht der Bewegung steht in jeder Pose des Ablaufs", () => {
-  meldeBewegung({ id: "zaub", ansicht: "dreiviertel", ende: "stehen", braucht: ["stab"], schritte: [{ ms: 100 }] });
-  assert.ok(ablauf("test-geht", "zaub").every((s) => s.pose.braucht.includes("stab")));
+test("braucht der Bewegung gilt für die Schritte, nicht für die Ende-Haltung", () => {
+  meldeBewegung({ id: "zaub", ansicht: "dreiviertel", ende: "stehen", braucht: ["stab"], schritte: [{ ms: 100 }, { ms: 100 }] });
+  const a = ablauf("test-geht", "zaub");
+  assert.ok(a.slice(0, -1).every((s) => s.pose.braucht.includes("stab")));
+  assert.deepEqual(a[a.length - 1].pose.braucht, []);
 });
 
 test("mische: Ränder, Mitte, Gesicht ab der Hälfte", () => {
@@ -107,4 +109,12 @@ test("mische: Ränder, Mitte, Gesicht ab der Hälfte", () => {
   assert.equal(mische(a, b, 0.49).gesicht, "ruhig");
   assert.equal(mische(a, b, 0.5).gesicht, "staunen");
   assert.ok(mische(a, b, 0.25).winkel["arm-vorn-oben"] > -70 * 0.25, "sanfter Anlauf");
+});
+
+test("mische: Zubehör bleibt während des Übergangs, am Ende nur das des Ziels", () => {
+  const a = { ...pose("test-geht", "stehen"), braucht: ["stab"] };
+  const b = { ...pose("test-geht", "zeigen"), braucht: ["schirm"] };
+  assert.deepEqual(mische(a, b, 0.1).braucht.sort(), ["schirm", "stab"]);
+  assert.deepEqual(mische(a, b, 0.9).braucht.sort(), ["schirm", "stab"]);
+  assert.deepEqual(mische(a, b, 1).braucht, ["schirm"]);
 });

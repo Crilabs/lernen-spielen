@@ -65,6 +65,16 @@ export function zubehoerInnen(zubehoerId, index, ansicht, zustand) {
 }
 
 /**
+ * Vorlesbarer Name der Figur: „Ela staunt“, ohne Wort zur Haltung nur „Ela“.
+ * @param {string} kindId @param {string} [haltungId]
+ */
+export function labelFuer(kindId, haltungId) {
+  const h = haltungId ? bestand.haltungen.get(haltungId) : undefined;
+  const name = kind(kindId).name;
+  return h?.wort ? `${name} ${h.wort}` : name;
+}
+
+/**
  * Zeichnet eine aufgelöste Pose.
  * @param {string} kindId @param {Pose} p @param {Ausstattung} [aus]
  */
@@ -109,8 +119,7 @@ export function zeichnePose(kindId, p, aus = {}) {
       + zubehoerAn(gelenk, "vorne") + knoten.nach.map(gruppe).join("") + `</g>`;
   };
 
-  const h = aus.haltung ? bestand.haltungen.get(aus.haltung) : undefined;
-  const label = h?.wort ? `${k.name} ${h.wort}` : k.name;
+  const label = labelFuer(kindId, aus.haltung);
   const blick = aus.blick === "links"
     ? `<g data-blick="links" transform="translate(320 0) scale(-1 1)">`
     : `<g data-blick="rechts">`;

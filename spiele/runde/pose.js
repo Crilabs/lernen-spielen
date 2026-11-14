@@ -76,6 +76,7 @@ export function pose(kindId, haltungId, ansicht) {
 
 /**
  * Eine Bewegung als Folge von Zielposen mit Dauer. Endet mit der Ende-Haltung (ENDE_MS).
+ * Das Zubehör, das die Bewegung braucht, gilt nur für ihre Schritte; die Ende-Haltung trägt nur ihr eigenes.
  * @param {string} kindId
  * @param {string} bewegungId
  * @returns {{pose: Pose, ms: number}[]}
@@ -96,7 +97,7 @@ export function ablauf(kindId, bewegungId) {
       folge.push({ pose: vorher, ms: s.ms });
     }
   }
-  folge.push({ pose: lege(pose(kindId, b.ende, b.ansicht), extra), ms: ENDE_MS });
+  folge.push({ pose: pose(kindId, b.ende, b.ansicht), ms: ENDE_MS });
   return folge;
 }
 
@@ -106,7 +107,8 @@ const sanft = (t) => t * t * (3 - 2 * t);
 const lerp = (a, b, e) => a + (b - a) * e;
 
 /**
- * Zwischenpose. Winkel, Versatz und Größe weich überblendet; Gesicht, Zustände und Zubehör wechseln bei der Hälfte.
+ * Zwischenpose. Winkel, Versatz und Größe weich überblendet; Gesicht und Zustände wechseln bei der Hälfte;
+ * Zubehör von Start und Ziel bleibt bis zum Ende des Übergangs.
  * @param {Pose} a @param {Pose} b @param {number} t 0..1
  * @returns {Pose}
  */
@@ -125,6 +127,6 @@ export function mische(a, b, t) {
     versatz: [lerp(a.versatz[0], b.versatz[0], e), lerp(a.versatz[1], b.versatz[1], e)],
     groesse: lerp(a.groesse, b.groesse, e),
     zustaende: spaet.zustaende,
-    braucht: spaet.braucht,
+    braucht: t >= 1 ? b.braucht : [...new Set([...a.braucht, ...b.braucht])],
   };
 }
