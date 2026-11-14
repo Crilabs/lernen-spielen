@@ -14,7 +14,11 @@
     { "zeichen": "6", "satz": "ziffern", "datei": "ziffern/6.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": "9", "eingang": null, "ausgang": null, "freigegeben": null },
     { "zeichen": "7", "satz": "ziffern", "datei": "ziffern/7.svg", "striche": 2, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
     { "zeichen": "8", "satz": "ziffern", "datei": "ziffern/8.svg", "striche": 1, "band": ["mitte", "oben"], "spiegel": null, "eingang": null, "ausgang": null, "freigegeben": null },
-    { "zeichen": "9", "satz": "ziffern", "datei": "ziffern/9.svg", "striche": 2, "band": ["mitte", "oben"], "spiegel": "6", "eingang": null, "ausgang": null, "freigegeben": null }
+    { "zeichen": "9", "satz": "ziffern", "datei": "ziffern/9.svg", "striche": 2, "band": ["mitte", "oben"], "spiegel": "6", "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "b", "satz": "druck", "datei": "druck/b.svg", "striche": 2, "band": ["mitte", "oben"], "spiegel": "d", "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "d", "satz": "druck", "datei": "druck/d.svg", "striche": 2, "band": ["mitte", "oben"], "spiegel": "b", "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "p", "satz": "druck", "datei": "druck/p.svg", "striche": 2, "band": ["mitte", "unten"], "spiegel": "q", "eingang": null, "ausgang": null, "freigegeben": null },
+    { "zeichen": "q", "satz": "druck", "datei": "druck/q.svg", "striche": 2, "band": ["mitte", "unten"], "spiegel": "p", "eingang": null, "ausgang": null, "freigegeben": null }
   ],
   "sonderverbindungen": []
 }
