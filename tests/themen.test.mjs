@@ -95,23 +95,44 @@ test("themen.html schreibt nie in den Lernstand", () => {
   assert.match(themen, /await ladeLernstand\(ctx, /); // lädt, übernimmt alte Stände nur im Speicher
 });
 
-test("themen.html: Figuren für die Geschichte, Haus-Knopf, Spiel mit ?thema", () => {
+test("themen.html: Fach aus der Adresse, sonst zurück zur Startseite", () => {
+  assert.match(themen, /new URLSearchParams\(location\.search\)\.get\("fach"\)/);
+  assert.match(themen, /if \(!Object\.hasOwn\(FACH, fach\)\) location\.replace\("index\.html"\)/);
+  assert.match(themen, /<ls-leiste id="leiste" spiel="themen"><\/ls-leiste>/); // Haus und Ton aus dem Rahmen
+  assert.doesNotMatch(themen, /symbole\/haus\.svg/, "kein eigener Haus-Knopf");
+});
+
+test("themen.html: Weg aus gekonnt (auch ohne Spiel), dran, höchstens drei in Sicht", () => {
+  assert.match(themen, /gekonnteThemen\(ctx, stand\)\.filter\(\(t\) => t\.strang === fach\)/);
+  assert.match(themen, /const IN_SICHT = 3;/);
+  assert.match(themen, /\.slice\(0, IN_SICHT\)/);
+  assert.match(themen, /materialFuer\(/);
+  assert.match(themen, /<button class="station \$\{s\.zustand\}"[^>]*\n?\s*aria-label="\$\{esc\(s\.name\)\}"/);
+});
+
+test("themen.html: Fläche mit Spielen (?thema, linkKlick), Geschichte, Mit echten Dingen", () => {
   assert.match(themen, /<script src="figuren\/figuren\.js"><\/script>/);
   assert.match(themen, /<script src="figuren\/einhorn\.js"><\/script>/);
-  assert.match(themen, /spieleEinfuehrung/);
-  assert.match(themen, /href="index\.html"[^>]*aria-label="Alle Spiele"/);
-  assert.match(themen, /\?thema=/);
+  assert.match(themen, /spieleEinfuehrung\(/);
+  assert.match(themen, /\?thema=\$\{encodeURIComponent\(s\.id\)\}/);
+  assert.match(themen, /linkKlick\(e\)/);
+  assert.match(themen, /<ls-anregung id="anregung"><\/ls-anregung>/);
+  assert.match(themen, /anregung\.oeffne\(\{ titel: jetzt\.name, text: jetzt\.eltern \}\)/);
 });
 
-test("themen.html: Spielzeichen an jeder Station, Weg zeigt die erste dran-Station", () => {
-  assert.match(themen, /class="zeichen"/);
-  assert.match(themen, /spielNach\[s\.spiele\[0\]\]\?\.symbol/);
-  assert.match(themen, /\.station\.dran"\);\s*if \(dran\) dran\.scrollIntoView\(\{ inline: "center", block: "nearest" \}\)/);
-  assert.match(themen, /classList\.toggle\("links", weg\.scrollLeft > 0\)/);
+test("themen.html: keine Zählung, keine Prozente, kein Klassenbezug", () => {
+  assert.doesNotMatch(themen, / von \$\{|%\$\{|\$\{[^}]*\}\s*%|Stern|Pokal|klasse/);
+  assert.doesNotMatch(themen, /noch kein Spiel/i);
 });
 
-test("themen.html: keine Zählung, keine Prozente", () => {
-  assert.doesNotMatch(themen, / von \$\{|%\$\{|\$\{[^}]*\}\s*%|Stern|Pokal/);
+test("ls-anregung: Schnittstelle oeffne/schliesse, keine Attribute im Konstruktor, Escape und Schleier", () => {
+  const a = readFileSync(new URL("../spiele/rahmen/anregung.js", import.meta.url), "utf8");
+  assert.match(a, /oeffne\(\{ titel = "", text, sprich: vorlesen \}\)/);
+  assert.match(a, /schliesse\(\) \{/);
+  assert.match(a, /e\.key === "Escape"/);
+  assert.match(a, /querySelector\("\.schleier"\)\)\.addEventListener\("click"/);
+  const konstruktor = a.slice(a.indexOf("constructor()"), a.indexOf("get offen()"));
+  assert.doesNotMatch(konstruktor, /setAttribute|toggleAttribute|getAttribute/);
 });
 
 test("Startseite: Knopf „Was ich kann“ führt zu themen.html", () => {

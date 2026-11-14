@@ -55,6 +55,25 @@ export function literaleAusCode(quelltext) {
   return { texte, offen };
 }
 
+// Namen der Rahmen-Knöpfe: `<ls-knopf … name="…">` (sonst `wort="…"`) spricht seinen Namen beim ersten Tippen
+// (spiele/rahmen/knopf.js), außer mit `stumm`. Nur feste Werte; `${…}` zählt nicht.
+const KNOPF = /<ls-knopf\b[^>]*>/g;
+
+/**
+ * @param {string} quelltext
+ * @returns {string[]}
+ */
+export function knopfNamen(quelltext) {
+  const namen = [];
+  for (const [tag] of quelltext.matchAll(KNOPF)) {
+    if (/\sstumm[\s>=]/.test(tag)) continue;
+    const wert = (attr) => tag.match(new RegExp(`\\s${attr}="([^"]*)"`))?.[1];
+    const name = wert("name") ?? wert("wort");
+    if (name && !name.includes("${")) namen.push(name);
+  }
+  return namen;
+}
+
 /**
  * Sammelt die Texte des Projekts.
  * @param {string} wurzel Projektordner
@@ -76,10 +95,16 @@ export function sammle(wurzel) {
   };
 
   // Startseite: Kachel zum Anhören (Formel wie in spiele/index.html)
-  for (const s of json(join(spiele, "spiele.json")).spiele) neu(`${s.titel}. ${s.thema}. ${s.text}`, "spiele.json");
+  // und Name der Spiel-Kachel auf der Fach-Seite (themen.html, beim ersten Tippen)
+  for (const s of json(join(spiele, "spiele.json")).spiele) {
+    neu(`${s.titel}. ${s.thema}. ${s.text}`, "spiele.json");
+    if (s.titel) neu(s.titel, "spiele.json");
+  }
 
-  // Lernplan: Namen der Themen zum Vorlesen
-  for (const t of felder(json(join(spiele, "lernplan.json")), "sprich")) neu(t, "lernplan.json");
+  // Lernplan: Namen der Themen zum Vorlesen und die Anregungen „Mit echten Dingen“ (eltern, ls-anregung)
+  const plan = json(join(spiele, "lernplan.json"));
+  for (const t of felder(plan, "sprich")) neu(t, "lernplan.json");
+  for (const t of plan.themen ?? []) if (typeof t.eltern === "string") neu(t.eltern, "lernplan.json");
 
   // Einführungen
   for (const p of dateien(join(spiele, "einfuehrungen"), [".json"]))
@@ -90,6 +115,7 @@ export function sammle(wurzel) {
     const { texte, offen: n } = literaleAusCode(readFileSync(p, "utf8"));
     const q = relative(spiele, p);
     texte.forEach((t) => neu(t, q));
+    knopfNamen(readFileSync(p, "utf8")).forEach((t) => neu(t, q));
     if (n) offen[q] = n;
   }
 

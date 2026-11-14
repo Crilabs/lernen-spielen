@@ -1,11 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { join, dirname } from "node:path";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { audioSchluessel, normalisiere } from "../spiele/kern/audio.js";
 import { ssml } from "../werkzeuge/audio/ssml.mjs";
 import { azure } from "../werkzeuge/audio/azure.mjs";
-import { literaleAusCode, sammle } from "../werkzeuge/audio/texte.mjs";
+import { knopfNamen, literaleAusCode, sammle } from "../werkzeuge/audio/texte.mjs";
 import { erzeuge } from "../werkzeuge/audio/erzeugen.mjs";
 
 const WURZEL = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -45,6 +46,24 @@ test("Literale im Spielcode: nur feste Zeichenketten, Rest zählt als offen", ()
   const { texte, offen } = literaleAusCode(code);
   assert.deepEqual(texte, ["Für heute ist Schluss. Bis morgen!", "Das kannst du jetzt.", "Leg zwei Stäbe in die Rinne."]);
   assert.equal(offen, 4);
+});
+
+test("Knopfnamen: name vor wort, stumm und Vorlagen zählen nicht", () => {
+  const code = `<ls-knopf symbol="zurueck.svg" name="Zurück"></ls-knopf>
+    <ls-knopf id="echt" symbol="hand.svg" wort="Mit echten Dingen" hidden></ls-knopf>
+    <ls-knopf symbol="vorlesen.svg" name="Noch mal hören" stumm></ls-knopf>
+    <ls-knopf class="ton tonknopf" stumm></ls-knopf>
+    <ls-knopf wort="\${titel}"></ls-knopf>`;
+  assert.deepEqual(knopfNamen(code), ["Zurück", "Mit echten Dingen"]);
+});
+
+test("sammle: Anregungen (eltern) und Knopfnamen der Fach-Seite", () => {
+  const { eintraege } = sammle(WURZEL);
+  const texte = new Set(eintraege.map((e) => e.text));
+  const plan = JSON.parse(readFileSync(join(WURZEL, "spiele/lernplan.json"), "utf8"));
+  const eltern = plan.themen.find((t) => t.eltern).eltern;
+  assert.ok(texte.has(normalisiere(eltern)));
+  for (const name of ["Mit echten Dingen", "Geschichte ansehen", "Zurück"]) assert.ok(texte.has(name), name);
 });
 
 test("sammle findet Lernplan, Einführungen und feste Sätze", () => {

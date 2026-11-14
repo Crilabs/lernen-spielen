@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-const { gekonnteThemen, dranThemen, markiereGekonnt, startThema, neuerStand } = await import("../spiele/lernsteuerung.js");
+const { gekonnteThemen, dranThemen, markiereGekonnt, startThema, neuerStand, themaMaterial } = await import("../spiele/lernsteuerung.js");
 
 const thema = (id, voraussetzungen, aufgaben, extra = {}) => ({
   id, name: `Name ${id}`, sprich: `Sprich ${id}`, strang: "mathe", voraussetzungen, aufgaben,
@@ -104,4 +104,9 @@ test("gekonnteThemen: Aufgabenart ohne Zahl und ohne Ziffer im Namen → zahl nu
   const stand = neuerStand();
   markiereGekonnt(stand, "zw", "2026-11-12");
   assert.equal(gekonnteThemen(ctx, stand)[0].zahl, null);
+});
+
+test("themaMaterial: Felder für materialFuer in jedem Zustand, unbekannt → null", () => {
+  assert.deepEqual(themaMaterial(CTX, "z7"), { id: "z7", name: "Name z7", sprich: "Sprich z7", strang: "mathe", art: "zerlegung", zahl: 7, bereich: "" });
+  assert.equal(themaMaterial(CTX, "gibt-es-nicht"), null);
 });

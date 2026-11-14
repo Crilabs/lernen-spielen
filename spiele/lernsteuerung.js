@@ -323,6 +323,16 @@ function zahlDes(t) {
   return n === undefined ? null : Number(n);
 }
 
+// Felder eines Themas für materialFuer (spiele/rahmen/material.js): { id, name, sprich, strang, art, zahl, bereich }
+const materialDes = (t) => ({ id: t.id, name: text(t.name), sprich: text(t.sprich), strang: t.strang, art: t.aufgaben?.art ?? null,
+  zahl: zahlDes(t), bereich: text(t.bereich) });
+
+// Dasselbe für ein Thema nach Id, gleich in welchem Zustand (Fach-Weg: Material auch an der Station „dran“); null, wenn unbekannt
+export function themaMaterial(ctx, themaId) {
+  const t = themaVon(ctx, themaId);
+  return t ? materialDes(t) : null;
+}
+
 // Alle gekonnten Themen (Zustand kann-ich, auch ohne Spiel), nach dem Datum des Gekonnt-Werdens (stand.themen[id].k,
 // von markiereGekonnt und verbucheErgebnis gesetzt), älteste zuerst; ohne Datum zuerst (ältester Bestand),
 // bei Gleichstand Planreihenfolge. bereich: Bereich des Themas im Lernplan ("" wenn keiner), für materialFuer.
@@ -331,8 +341,7 @@ export function gekonnteThemen(ctx, stand) {
   const z = zustaende(ctx, stand);
   return themenVon(ctx)
     .filter((t) => z[t.id] === "kann-ich")
-    .map((t) => ({ id: t.id, name: text(t.name), sprich: text(t.sprich), strang: t.strang, art: t.aufgaben?.art ?? null,
-      zahl: zahlDes(t), seit: text(stand?.themen?.[t.id]?.k), bereich: text(t.bereich) }))
+    .map((t) => ({ ...materialDes(t), seit: text(stand?.themen?.[t.id]?.k) }))
     .sort((a, b) => (a.seit < b.seit ? -1 : a.seit > b.seit ? 1 : 0)); // Array.sort ist stabil
 }
 
