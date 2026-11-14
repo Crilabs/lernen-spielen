@@ -8,8 +8,10 @@
 //
 // Geprüft wird in Chromium und WebKit bei 1920 × 1080 und 1280 × 800: Legen per Tippen und per Ziehen, ein Stab,
 // der nicht passt, gleitet zurück, Hilfe leuchtet nach dem zweiten Versuch, Hilfe Stufe 1 (Probe) und Stufe 2
-// (Lösung), Meldung mit Hilfe-Stufe, Weiter, Pause am Rundenende, Weiter startet die nächste Runde, keine
-// Konsolenfehler, die Vorschau schreibt nichts (Speicher unverändert bis auf das Protokoll).
+// (Lösung), Meldung mit Hilfe-Stufe, Folge zwischen den Aufgaben ohne Weiter (läuft von selbst, Tippen
+// überspringt), Pause am Rundenende, Weiter startet die nächste Runde, keine Konsolenfehler, die Vorschau schreibt
+// nichts (Speicher unverändert bis auf das Protokoll). Dazu der Schreibweg eines eingetragenen Spiels (spiele.json
+// wird im Browser um die Vorlage ergänzt): eine Aufgabe landet im Lernstand.
 
 import { createRequire } from "node:module";
 import http from "node:http";
@@ -90,7 +92,17 @@ async function zieheLege(seite, wert) {
 const hilfeLeuchtet = (seite) => seite.evaluate(() => document.getElementById("hilfe").shadowRoot.querySelector(".platz").classList.contains("leuchtet"));
 const blasenText = (seite) => seite.evaluate(() => document.getElementById("blase").text);
 const tippeHilfe = (seite) => seite.evaluate(() => document.getElementById("hilfe").knopf.shadowRoot.querySelector("button").click());
-const tippeWeiter = (seite) => seite.locator("#weiter").click();
+/** Wartet, bis eine neue Aufgabe liegt (leere Gleichung, volles Tablett); liefert die Wartezeit in ms. */
+async function neueAufgabe(seite, timeout = 4000) {
+  const t0 = Date.now();
+  await seite.waitForFunction(() => document.querySelector(".gleichung")?.textContent === "" && document.querySelectorAll("#tablett .stab").length >= 6, null, { timeout });
+  return Date.now() - t0;
+}
+/** Tippt auf eine freie Stelle des Spielfelds (unten Mitte). */
+async function tippeFeld(seite) {
+  const f = await seite.locator(".spielflaeche").boundingBox();
+  await seite.mouse.click(f.x + f.width / 2, f.y + f.height - 40);
+}
 const speicher = (seite) => seite.evaluate(() => Object.fromEntries(Object.keys(localStorage).filter((k) => k !== "protokoll").map((k) => [k, localStorage.getItem(k)])));
 
 async function bild(seite, schritt, name, groesse) {
@@ -184,28 +196,27 @@ async function lauf(typ, name, groesse, basis) {
     const e1 = await seite.evaluate(() => window.ergebnisse.at(-1));
     pruefe(L, "Ziehen legt den passenden Stab; Meldung mit Hilfe 2, nicht ok", e1?.key === `zerl:${n}:${erster}+${partner}` && e1.ok === false && e1.hilfe === 2, JSON.stringify(e1));
     const gl = await seite.$eval(".gleichung", (g) => g.textContent);
-    pruefe(L, "Gleichung erscheint nach dem Legen, Weiter ist da", gl === `${n} = ${erster} + ${partner}` && (await seite.locator("#weiter").isVisible()), gl);
-    pruefe(L, "nichts geht von selbst weiter", (await seite.locator("#weiter").isVisible()) && (await rinneWerte(seite)).length === 2);
-    await tippeWeiter(seite);
+    pruefe(L, "Folge: Gleichung und Erzählersatz nach dem Legen, kein Weiter-Knopf", gl === `${n} = ${erster} + ${partner}` && /zusammen so lang/.test(await blasenText(seite)) && (await seite.locator("#weiter").count()) === 0, gl);
+    const warte1 = await neueAufgabe(seite);
+    pruefe(L, "nächste Aufgabe kommt nach der Folge von selbst (etwa 1–2 s)", warte1 >= 800 && warte1 <= 2500, `${warte1 + 450} ms nach dem Legen`);
 
-    // --- Aufgabe 2: beide Stäbe ziehen, ohne Hilfe ------------------------------------------------
-    await seite.waitForSelector("#tablett .stab");
+    // --- Aufgabe 2: beide Stäbe ziehen, ohne Hilfe; Tippen überspringt die Folge -------------------
     const w2 = (await tablettWerte(seite))[0];
     await zieheLege(seite, w2);
     await zieheLege(seite, n - w2);
     const e2 = await seite.evaluate(() => window.ergebnisse.at(-1));
     pruefe(L, "Aufgabe 2 per Ziehen: ok ohne Hilfe", e2?.ok === true && e2.hilfe === 0 && e2.key === `zerl:${n}:${w2}+${n - w2}`, JSON.stringify(e2));
-    await tippeWeiter(seite);
+    await tippeFeld(seite);
+    const warte2 = await neueAufgabe(seite);
+    pruefe(L, "Tippen überspringt die Folge", warte2 < 600, `${warte2} ms`);
 
     // --- Aufgabe 3: beide Stäbe tippen; dann Rundenende ------------------------------------------
-    await seite.waitForSelector("#tablett .stab");
     const w3 = (await tablettWerte(seite))[0];
     await tippeLege(seite, w3);
     await tippeLege(seite, n - w3);
     const e3 = await seite.evaluate(() => window.ergebnisse.at(-1));
     pruefe(L, "Aufgabe 3 per Tippen: ok ohne Hilfe", e3?.ok === true && e3.hilfe === 0, JSON.stringify(e3));
-    const offenVorWeiter = await seite.evaluate(() => document.getElementById("pause").hasAttribute("offen"));
-    await tippeWeiter(seite);
+    const offenVorFolge = await seite.evaluate(() => document.getElementById("pause").hasAttribute("offen"));
     await seite.waitForFunction(() => document.getElementById("pause").hasAttribute("offen"), null, { timeout: 3000 });
     const p = await seite.evaluate(() => {
       const w = document.getElementById("pause").shadowRoot;
@@ -213,7 +224,7 @@ async function lauf(typ, name, groesse, basis) {
       const b = w.querySelector("ls-knopf.weiter").getBoundingClientRect();
       return { gleich: Math.abs(a.width - b.width) < 2 && Math.abs(a.height - b.height) < 2, karte: !w.querySelector(".karte").classList.contains("leer"), stab: !!document.querySelector("#sachmoment ls-perlenstab") };
     });
-    pruefe(L, "Pause erst nach Weiter, mit Sachmoment, Alle Spiele und Weiter gleich groß", !offenVorWeiter && p.gleich && p.karte && p.stab, JSON.stringify(p));
+    pruefe(L, "Pause nach der Folge der letzten Aufgabe, mit Sachmoment, Alle Spiele und Weiter gleich groß", !offenVorFolge && p.gleich && p.karte && p.stab, JSON.stringify(p));
     await pause(300);
     await bild(seite, "pause", name, groesse);
     await seite.waitForTimeout(1500);
@@ -239,6 +250,39 @@ async function lauf(typ, name, groesse, basis) {
     pruefe(L, "?eltern: Elternansicht", (await s2.locator("section.eltern a[href='eltern.html']").count()) === 1);
     pruefe(L, "Vorschau-Parameter schreiben nichts", JSON.stringify(await speicher(s2)) === JSON.stringify(vorher));
     await s2.close();
+
+    // --- Schreibweg eines eingetragenen Spiels: spiele.json im Browser um die Vorlage ergänzt -------
+    const echt = await browser.newContext({ viewport: groesse });
+    await echt.route("**/spiele/spiele.json", async (route) => {
+      const antwort = await route.fetch();
+      const json = await antwort.json();
+      json.spiele.push({ id: "vorlage", titel: "Spielvorlage", thema: "Zerlegen", kategorie: "mathe", datei: "vorlage.html", arten: [{ art: "zerlegung", zahlen: [7, 7], stufen: ["material"] }] });
+      await route.fulfill({ response: antwort, json });
+    });
+    // Einführung schon gesehen, damit die Runde gleich beginnt (sonst käme zuerst die Szene).
+    await echt.addInitScript(() => {
+      if (sessionStorage.getItem("vorlage-test")) return;
+      sessionStorage.setItem("vorlage-test", "1");
+      localStorage.setItem("lernstand-kind-1-lernplan", JSON.stringify({ version: 1, themen: { "zerlegen-7": { e: "2026-11-01" } }, aufgaben: {}, verlauf: [], migriert: 1 }));
+    });
+    const s4 = await echt.newPage();
+    s4.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (eingetragen): ${e.message}`));
+    s4.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole (eingetragen): ${m.text()}`); });
+    await s4.goto(`${basis}/spiele/vorlage.html`, { waitUntil: "load" });
+    await s4.waitForSelector("#tablett .stab");
+    await tippeHilfe(s4);
+    await tippeHilfe(s4);
+    const paar = await s4.$$eval("#tablett .markiert", (l) => l.map((x) => Number(x.getAttribute("wert"))));
+    pruefe(L, "Hilfe Stufe 2 vor dem ersten Stab: das Paar mit Begründung", paar.length === 2 && paar[0] + paar[1] === n && /zusammen so lang/.test(await blasenText(s4)), paar.join());
+    const e4 = (await tablettWerte(s4))[0];
+    await tippeLege(s4, e4);
+    await tippeLege(s4, n - e4);
+    await pause(700); // speichere() wartet kurz, bevor es schreibt
+    const lernstand = await s4.evaluate(() => JSON.parse(localStorage.getItem("lernstand-kind-1-lernplan") ?? "{}"));
+    const geschrieben = lernstand.aufgaben?.[`zerl:${n}:${e4}+${n - e4}`];
+    // Mit Hilfe gelöst: steht im Lernstand als 0 (zählt nicht als gekonnt, L12), Fach 0.
+    pruefe(L, "eingetragenes Spiel schreibt den Lernstand; mit Hilfe gelöst zählt nicht", Array.isArray(geschrieben?.h) && geschrieben.h.at(-1) === 0 && geschrieben.f === 0 && lernstand.themen?.["zerlegen-7"]?.z === "dran", JSON.stringify(lernstand).slice(0, 300));
+    await echt.close();
 
     // --- Wenig Bewegung: Zurückgleiten ohne Bewegung ---------------------------------------------
     const ruhig = await browser.newContext({ viewport: groesse, reducedMotion: "reduce" });

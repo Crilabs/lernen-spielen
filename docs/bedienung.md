@@ -153,6 +153,9 @@ Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.
    mit „Wie geht es aus?“ (9.2 Nr. 7). Neue Spieltypen zeigen einmal vor (L5).
 2. **Aufgaben** (3–5 Minuten, L10). Während das Kind denkt, bewegt sich nichts, und es erscheint nichts
    Neues (B3, 3.1 Nr. 6).
+   **Zwischen zwei Aufgaben (Christian, 2026-11-14):** kein Weiter-Knopf. Nach der Lösung kommt die Folge
+   (Bewegung und Erzählersatz, etwa 1–2 s, B6); ein Tippen überspringt sie. Danach kommt die nächste Aufgabe
+   von selbst. Weiter (mit Alle Spiele daneben) gibt es nur am Rundenende.
 3. **Rundenende (Christian):** eine ruhige Pause auf Nacht mit stillen Sternen in Sonne; Bild oder
    Sachmoment (K1, K8) liegen auf einer Papierkarte. Darunter **Alle Spiele** und **Weiter**: gleich
    groß, gleich gestaltet (Papier, Tinte-Kontur, Symbol und Wort), keiner hervorgehoben, auch nicht durch

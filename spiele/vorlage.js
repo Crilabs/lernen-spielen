@@ -5,7 +5,7 @@
 // Aufbau dieser Datei:
 //   SPIELWELT (ersetzen)  Kennung, Aufgabenarten, Rundenlänge, Vorschau-Aufgaben, alle gesprochenen Sätze
 //   AUFGABE   (ersetzen)  eine Aufgabe darstellen, prüfen (die Mechanik urteilt), Hilfe-Stufen zeigen
-//   RAHMEN    (behalten)  Hilfe-Leiter, Lernsteuerung, Einführung, Weiter, Pause, Vorschau-Parameter
+//   RAHMEN    (behalten)  Hilfe-Leiter, Lernsteuerung, Einführung, Folge, Pause, Vorschau-Parameter
 //
 // SO WIRD DARAUS EIN SPIEL
 //  1. vorlage.html und vorlage.js nach spiele/<id>.html und spiele/<id>.js kopieren; in der HTML-Datei das
@@ -51,7 +51,6 @@ const leiste = $("leiste");
 const blase = $("blase");
 const hilfe = $("hilfe");
 const pause = $("pause");
-const weiter = $("weiter");
 const matte = $("matte");
 const tablett = $("tablett");
 
@@ -62,8 +61,15 @@ const tablett = $("tablett");
 /** Kennung des Spiels: steht einmal in der HTML-Datei an <ls-leiste spiel>. */
 const SPIEL_ID = leiste.getAttribute("spiel");
 
-/** Aufgabenarten, die das Spiel darstellt. Für ein echtes Spiel genau so in spiele.json eintragen. */
+/**
+ * Aufgabenarten, die das Spiel darstellt. Für ein echtes Spiel genau so in spiele.json eintragen.
+ * Gilt nur, solange das Spiel noch nicht in spiele.json steht (dann trägt der RAHMEN es mit diesen Arten nur im
+ * Speicher ein, als Vorschau). Mit dem Eintrag gelten die `arten` aus spiele.json; dieser Wert wird nicht mehr benutzt.
+ */
 const ARTEN = [{ art: "zerlegung", zahlen: [7, 7], stufen: ["material"] }];
+
+/** So lange steht die Folge einer Lösung, bevor die nächste Aufgabe kommt (B6, etwa 1–2 s; Tippen überspringt). */
+const FOLGE_MS = 1800;
 
 /** Aufgaben je Runde (Platzhalter; echte Spiele eher 8 bis 10, die Lernsteuerung begrenzt zusätzlich auf 4 Minuten). */
 const AUFGABEN_JE_RUNDE = 3;
@@ -83,10 +89,20 @@ const erzaehler = {
   probeAnfang: () => blase.sage("Nimm einen Stab und leg ihn in die Rinne. Dann schau, wie viel noch frei ist."),
   probe: () => blase.sage("Zähl die Perlen über der freien Stelle. So viele Perlen fehlen noch."),
   // Stufe 2: die Lösung mit Begründung; das Kind legt selbst.
-  loesungAnfang: () => blase.sage("Fang mit diesem Stab an. Leg ihn in die Rinne."),
+  loesungAnfang: () => blase.sage("Diese zwei Stäbe sind zusammen so lang wie der lange Stab. Leg sie in die Rinne."),
   loesung: () => blase.sage("Dieser Stab ist so lang wie die freie Stelle. Leg ihn hinein."),
   gehtNicht: () => blase.sage("Das Spiel geht gerade nicht."),
 };
+
+/**
+ * Elternansicht (?eltern): was das Spiel selbst mitzählt, beschreibend, von Stärken aus, kein Vergleich (3.3).
+ * Platzhalter (ersetzen): die Vorlage zählt nichts.
+ * @param {HTMLElement} feld
+ */
+function fuelleEltern(feld) {
+  feld.innerHTML = `<p>Was dran ist und was Ihr Kind schon kann, steht bei den Themen im Elternbereich.</p>
+    <p>Hier stünde, was das Spiel selbst mitzählt. Die Vorlage zählt nichts.</p>`;
+}
 
 /**
  * Sachmoment der Pause (K1, K8): ruhig, keine Belohnung, kommt nach jeder Runde.
@@ -115,8 +131,10 @@ function fuelleSachmoment(karte, ton) {
 //   melde.passtNicht()   ein Versuch, der nicht passt (die Mechanik hat es schon gezeigt, der Erzähler beschrieben)
 //   melde.geloest(key)   gelöst; key = Schlüssel der Aufgabe, die das Kind tatsächlich gelegt hat
 // Zurück kommt { hilfe(stufe) }: der RAHMEN ruft sie beim Tippen auf Hilfe mit Stufe 1 (Probe), dann 2 (Lösung).
-// aufgabe = Angebot der Lernsteuerung { ziel: { key }, auch: [{ key }], stufe }. Die Vorlage kann nur die
-// Stufe „material“; ein echtes Spiel verdeckt auf „vorstellung“ die Perlen und zeigt auf „kopf“ nur Ziffern.
+// aufgabe = Angebot der Lernsteuerung { ziel: { key }, auch: [{ key }], stufe }. stelleAufgabe liest
+// aufgabe.stufe bei jeder Aufgabe neu: die Stufe wechselt innerhalb einer Runde (Aufstieg, Abstieg), und
+// Aufgaben der Probe kommen mit "kopf". Die Vorlage kann nur „material“ (ARTEN); ein echtes Spiel verdeckt auf
+// „vorstellung“ die Perlen (ls-perlenstab verdeckt) und zeigt auf „kopf“ nur Ziffern.
 
 /** "zerl:7:3+4" → { n: 7, a: 3, b: 4 }, sonst null. @param {string} key */
 function zerlegungAus(key) {
@@ -172,13 +190,19 @@ function stelleAufgabe(aufgabe, melde) {
   const stabMit = (/** @type {number} */ wert) =>
     /** @type {HTMLElement | undefined} */ ([...tablett.querySelectorAll(".stab")].find((s) => Number(s.getAttribute("wert")) === wert));
   const ohneMarkierung = () => matte.parentElement?.querySelectorAll(".markiert").forEach((e) => e.classList.remove("markiert"));
-  /** Lösung zeigen: der passende Stab bekommt den Sonnenring; legen muss das Kind selbst. */
+  /** Lösung mit Begründung (L12): die passenden Stäbe bekommen den Sonnenring; legen muss das Kind selbst. */
   const zeigeLoesung = () => {
     ohneMarkierung();
-    const passend = stabMit(gelegt.length ? rest() : ziel.a);
-    passend?.classList.add("markiert");
-    if (gelegt.length) erzaehler.loesung();
-    else erzaehler.loesungAnfang();
+    if (gelegt.length) {
+      stabMit(rest())?.classList.add("markiert");
+      return erzaehler.loesung();
+    }
+    // Noch nichts gelegt: das ganze Paar der Aufgabe (bei 4 + 4 zwei verschiedene Stäbe).
+    const erster = stabMit(ziel.a);
+    erster?.classList.add("markiert");
+    const zweiter = [...tablett.querySelectorAll(".stab")].find((s) => s !== erster && Number(s.getAttribute("wert")) === ziel.b);
+    zweiter?.classList.add("markiert");
+    erzaehler.loesungAnfang();
   };
 
   /** @param {HTMLElement} teil */
@@ -317,14 +341,20 @@ function spieleAufgabe(aufgabe) {
   });
 }
 
-// --- Weiter nach einer Aufgabe: nichts geht von selbst weiter --------------------------------------
-function warteAufWeiter() {
-  weiter.hidden = false;
-  return new Promise((ok) =>
-    weiter.addEventListener("click", () => {
-      weiter.hidden = true;
+// --- Folge nach einer Lösung (bedienung.md 7.1, B6) ----------------------------------------------
+// Zwischen zwei Aufgaben kein Weiter-Knopf: die Folge steht FOLGE_MS (Erzählersatz, Gleichung), ein Tippen
+// auf das Spielfeld überspringt sie, dann kommt die nächste Aufgabe. Weiter gibt es nur am Rundenende (Pause).
+function warteFolge() {
+  const feld = /** @type {HTMLElement} */ (document.querySelector(".spielflaeche"));
+  return new Promise((ok) => {
+    const fertig = () => {
+      clearTimeout(uhr);
+      feld.removeEventListener("pointerdown", fertig);
       ok(undefined);
-    }, { once: true }));
+    };
+    const uhr = setTimeout(fertig, FOLGE_MS);
+    feld.addEventListener("pointerdown", fertig);
+  });
 }
 
 // --- Pause am Rundenende (bedienung.md 7.1): Sachmoment, Alle Spiele und Weiter gleichwertig -------
@@ -347,10 +377,9 @@ async function zeigePause({ hinweis = null } = {}) {
 function elternansicht() {
   const e = document.createElement("section");
   e.className = "eltern auswahl";
-  e.innerHTML = `<h1>${esc(leiste.getAttribute("titel"))}</h1>
-    <p>Was dran ist und was Ihr Kind schon kann, steht bei den Themen im Elternbereich.</p>
-    <p>Hier stünde, was das Spiel selbst mitzählt. Die Vorlage zählt nichts.</p>
+  e.innerHTML = `<h1>${esc(leiste.getAttribute("titel"))}</h1><div class="eigenes"></div>
     <p><a href="eltern.html">Themen im Elternbereich</a> · <a href="${esc(location.pathname.split("/").pop())}">Zum Spiel</a></p>`;
+  fuelleEltern(/** @type {HTMLElement} */ (e.querySelector(".eigenes"))); // Inhalt aus der SPIELWELT
   document.body.append(e);
 }
 
@@ -359,8 +388,8 @@ function elternansicht() {
 /** @param {boolean} vorschau */
 async function starteRunde(vorschau) {
   const c = await ladeCtx();
-  // Nicht in spiele.json: nur im Speicher eintragen, damit die Lernsteuerung Aufgaben liefert.
-  // Geschrieben wird dann nichts (vorschau ist gesetzt).
+  // Nur solange das Spiel nicht in spiele.json steht: im Speicher mit ARTEN eintragen, damit die Lernsteuerung
+  // Aufgaben liefert; geschrieben wird dann nichts (vorschau ist gesetzt). Mit dem Eintrag gilt spiele.json.
   const mitSpiel = eingetragen(c) ? c : { plan: c.plan, spiele: { ...c.spiele, spiele: [...c.spiele.spiele, { id: SPIEL_ID, arten: ARTEN }] } };
   const r = await runde(SPIEL_ID, { wunsch: wunsch(), max: AUFGABEN_JE_RUNDE, ctx: mitSpiel, nurAnsehen: vorschau });
   const plan = r.thema ? c.plan.themen.find((/** @type {any} */ t) => t.id === r.thema?.id) : null;
@@ -426,9 +455,11 @@ async function spieleRunde(vorschau) {
     erste = false;
     const e = await spieleAufgabe(aufgabe);
     const ergebnis = { key: e.key, ok: e.versuche === 0, hilfe: e.hilfe, ms: e.ms };
-    r.melde(e.key, ergebnis); // Ereignisse „stufe“ und „gekonnt“: die Lernsteuerung beendet die Runde selbst
+    // Ereignis „gekonnt“: die Lernsteuerung beendet die Runde (naechste() liefert null). Ereignis „stufe“: das
+    // nächste Angebot kommt mit der neuen aufgabe.stufe, stelleAufgabe richtet sich danach.
+    r.melde(e.key, ergebnis);
     document.dispatchEvent(new CustomEvent("ls-ergebnis", { detail: ergebnis })); // für die Browser-Prüfung
-    await warteAufWeiter();
+    await warteFolge();
     aufgabe = r.naechste();
   }
 

@@ -14,7 +14,7 @@
   /* Welt: Werkstatt (Farbwelt 6.2), ein Tisch, auf dem Matte und Tablett liegen. Verläufe nur hier. */
   .welt { background: linear-gradient(#EFE7DD 0 58%, #D9C7B3 58% 100%); }
 
-  /* Spielfeld unter der Kopfleiste: oben die Blase, in der Mitte die Arbeit, unten Platz für Weiter. */
+  /* Spielfeld unter der Kopfleiste: oben die Blase, in der Mitte die Arbeit, unten frei (Hilfe, Rand). */
   .spielflaeche {
     display: grid;
     grid-template-rows: auto 1fr 11rem;
@@ -56,8 +56,6 @@
   .rinne .stab.teil { height: var(--stab); min-width: 0; min-height: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
   .rinne .stab.teil + .stab.teil { margin-left: var(--fuge, 0rem); }
 
-  /* Weiter nach einer gelegten Aufgabe: unten Mitte. */
-  .weiter { align-self: end; }
 
   /* Pause: Sachmoment auf der Papierkarte. */
   .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
@@ -91,7 +89,6 @@
       <section class="lernfeld matte" id="matte" aria-label="Matte"></section>
       <section class="tablett" id="tablett" aria-label="Tablett"></section>
     </div>
-    <ls-knopf id="weiter" class="weiter" art="haupt" symbol="zurueck.svg" name="Weiter" wort="Weiter" gespiegelt hidden></ls-knopf>
   </main>
 </div>
 

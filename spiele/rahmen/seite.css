@@ -170,6 +170,13 @@ img, svg { -webkit-user-drag: none; }
   transform: translateY(0.3rem);
   box-shadow: var(--ls-schatten-unten);
 }
+/* Markiert (Sonnenring, z. B. Hilfe Stufe 2), aber noch drückbar: Ring und Tinte-Kante wie .markiert, darunter
+   der Schatten, um die Kante verlängert (sonst überdeckt der Schatten von .teil die Tinte-Kante). */
+.teil.markiert {
+  box-shadow:
+    0 0 0 1.1rem var(--ls-tinte),
+    0 1.7rem 0 0 var(--ls-neben-schatten);
+}
 .teil.angehoben {
   transform: translateY(-1rem);
   /* Ring (outline) und Tinte-Linie wie bei .markiert; darunter ein längerer Schatten: es liegt höher. */
