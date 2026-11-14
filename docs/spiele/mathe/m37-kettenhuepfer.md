@@ -125,3 +125,17 @@ Nach dem zweiten Versuch, der nicht passt, leuchtet Hilfe einmal; mit Hilfe Gel�
 ## Selbstprüfung `grundsaetze.md` §12
 Zweck, eine Schwierigkeit, Abruf vor dem Sehen, Mechanik zeigt den Ort, Fehler-Folge stiller, Hilfe über Kernaufgaben (nie Hochzählen, Begriffe stimmen), Wiedervorlage über die Lernsteuerung, erst zeigen (Kofi), keine Punkte oder Timer, Geschichte ruhig mit Elternvorschau
 und jeder Rundenschluss hell, Sachthema am Sachgrund (K1, K4); offen: 9 und 10.
+
+## Geparkt
+
+- **Datum:** 2026-11-14 · **Grund:** Prüfung A nach drei Runden rot (`docs/spielentwicklung.md` §7), dazu „Freigabe nötig“ (oben). Gebaut ist nichts außer diesem Entwurf: kein Prototyp, keine Aufgabenart `mal` (die soll mit dem Spiel entstehen, wenn der Entwurf steht). Prüfberichte: `m37-kettenhuepfer.pruefungen.md`.
+- **Offene Befunde, Prüfung A Runde 3:**
+  - **A2 (rot):** Drei Ketten (2, 6, 7) hängen am selben Tier, dessen Name ein Zahlwort trägt: „Sechs Siebenpunkt-Marienkäfer. Wie viele Beine sind es zusammen?“ meint 6 · 6, hörbar sind „sechs“ und „sieben“ (§4 Isolation). Beleg: Entwurf §2, §4 (n = 2, 6, 7).
+  - **A4 (rot):** Hauptbeispiel widerspricht dem Sachgrund (Beine, aber „6 · 7 = 42“); n = 9 aus `kernaufgaben-einmaleins` genommen, dann kommen 1·9, 2·9, 5·9, 10·9 in keinem Pool vor (§8a); Empfehlung (c) läuft gegen Christians Bau-Reihenfolge (zehnerreihe ist erstes Thema, `spielkatalog.md` §9); Knoblauchsrauke/Klee „am Zweig“ sachlich schief.
+  - **A11 (rot):** Sätze nicht wörtlich bzw. falsch („Das Pfeilchen sitzt am letzten Stäbchen“), Sachsätze für n = 3, 4, 5, 7 mit „…“, Vorzeigen/Rundenende/Stufe 2 nur als Verweis.
+  - Grün in Runde 3: A1, A3, A4b, A5–A10, A12, Pflichtteile.
+- **Kern des Problems:** Der Sachgrund des Katalogs („gleich viele Beine je Art: 2, 4, 6, 8“) trägt in der Hecke die Reihen 10, 5, 3, 7, 9 nicht; drei Runden haben keinen sauberen Ersatz gefunden.
+- **Fragen an Christian:**
+  1. Sachgrund für zehnerreihe/fuenferreihe (erste Themen): (a) Sachgrund im Katalog erweitern auf „Zählen in der Hecke“ mit Zählweise statt Tierfakt (Zehnerblöcke, Strichliste – dann neues Lernzeichen §5a freigeben), (b) andere Welt für M37 mit Dingen in festen Gruppen für alle Reihen (z. B. Vorrat/Packungen), (c) die Welt behalten und zehner-/fünferreihe vorerst in einem anderen Spiel (ändert die Reihenfolge in §9). Empfehlung der Steuerung: (b) oder (a) – die Wiese-und-Hecke-Welt trägt nur 2, 4, 6, 8.
+  2. Gilt der Sachgrund über Beine hinaus (Blättchen, Kronblätter, Punkte) und der Marienkäfer als Figur des Spiels statt eines hüpfenden Kindes?
+  3. Darf Kofi (vorzeigen) statt Timo/Ela die Figur der Runde sein?
