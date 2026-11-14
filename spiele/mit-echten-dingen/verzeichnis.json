@@ -1,5 +1,41 @@
 {
  "themen": {
+  "fuenferreihe": {
+   "fach": "mathe",
+   "name": "Fünferreihe",
+   "titel": "Fünfer und Zehner beim Bäcker",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kleingeld für die Brötchen"
+    }
+   ],
+   "entwurf": false
+  },
+  "viererreihe": {
+   "fach": "mathe",
+   "name": "Viererreihe",
+   "titel": "Vier Dinge an jedem Platz",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Tisch decken in zwei Gängen"
+    }
+   ],
+   "entwurf": false
+  },
+  "zehnerreihe": {
+   "fach": "mathe",
+   "name": "Zehnerreihe",
+   "titel": "Zehner zählen, Geld zählen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Das Geld für den Einkauf"
+    }
+   ],
+   "entwurf": false
+  },
   "zerlegen-2": {
    "fach": "mathe",
    "name": "Die 2 zerlegen",
@@ -28,6 +64,18 @@
     {
      "situation": "unterwegs",
      "name": "Drei Zapfen in zwei Händen"
+    }
+   ],
+   "entwurf": false
+  },
+  "zweierreihe": {
+   "fach": "mathe",
+   "name": "Zweierreihe",
+   "titel": "Paare sind immer zwei",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Schuhe in den Schrank"
     }
    ],
    "entwurf": false
