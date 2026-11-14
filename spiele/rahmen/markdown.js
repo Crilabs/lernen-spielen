@@ -168,16 +168,6 @@ export function liesAnleitung(text) {
 }
 
 /**
- * Kurzform einer Form für den Küchenzettel: „Ihr braucht“, die Schritte und „Darauf kommt es an“; ohne
- * „Leichter“/„Schwerer“.
- * @param {Form} form
- * @returns {Block[]}
- */
-export function kurzform(form) {
-  return form.bloecke.filter((b) => !(b.typ === "p" && /^\*\*(Leichter|Schwerer)\b/.test(b.text)));
-}
-
-/**
  * Text einer Form ohne Auszeichnung (zum Zählen der Wörter).
  * @param {Form} form
  * @returns {string}

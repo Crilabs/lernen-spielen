@@ -5,7 +5,7 @@ import { protokoll } from "./protokoll.js";
 
 /**
  * drucken: Desktop und Browser ja, Tablet und Telefon nein (dort später über das Teilen-Menü,
- * docs/mit-echten-dingen.md „Küchenzettel“).
+ * docs/mit-echten-dingen.md „PDF je Thema“).
  * @returns {Promise<{ update: boolean, beenden: boolean, kiosk: boolean, drucken: boolean }>}
  */
 export async function faehigkeiten() {
