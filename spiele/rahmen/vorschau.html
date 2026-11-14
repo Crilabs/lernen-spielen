@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="seite.css">
 <style>
   /* Entwicklerseite, nicht aus der App verlinkt: jeder Baustein einmal, in der Anordnung aus docs/bedienung.md 3.
-     Adresse: vorschau.html?fach=mathe&titel=Spielvorlage&thema=Die%207%20zerlegen  (&pause, &leuchte)
+     Adresse: vorschau.html?fach=mathe&titel=Spielvorlage&thema=Die%207%20zerlegen  (&pause, &leuchte; ?objekte zeigt die Spielobjekte)
      Alle Maße in rem; Platz bleibt für 172 rem Breite (16:10), dort ist das sichere Feld schmaler als 192 rem. */
   .welt { background: linear-gradient(#CFEFFF, #EAF7FF 60%); }
   .huegel { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 34rem; }
@@ -42,6 +42,21 @@
 
   .pausen-inhalt { display: grid; gap: 2rem; justify-items: center; font-size: 4rem; text-align: center; max-width: 90rem; }
   .pausen-inhalt img { width: 22rem; height: 22rem; }
+  /* Spielobjekte (spiele/objekte/): nur mit ?objekte, dann statt der Bausteine. Eine Wiese, Ela zum Vergleich der
+     Größe und des Stils, jede Tonne in jedem Zustand, Werfen zum Ausprobieren, unten rechts das Regal-Bild (still). */
+  .objekte { position: absolute; inset: 17rem 2.4rem 2.4rem; display: grid; grid-template-rows: auto 1fr; row-gap: 2rem; }
+  .objekte[hidden] { display: none; }
+  .objekte .reihe-zustaende { display: flex; align-items: flex-end; justify-content: space-between; }
+  .objekte .gruppe { display: flex; align-items: flex-end; gap: 0.6rem; }
+  .objekte ls-objekt { height: 22rem; }
+  .objekte .kind svg { display: block; height: 30rem; width: auto; overflow: visible; }
+  .objekte .spiel { display: flex; align-items: flex-end; justify-content: space-between; padding: 0 4rem 2rem; }
+  .objekte .dinge { display: flex; align-items: flex-end; gap: 3rem; }
+  .objekte .dinge ls-objekt { height: 9rem; }
+  .objekte .dinge ls-objekt[hidden] { display: inline-block; visibility: hidden; }
+  .objekte .knoepfe { display: grid; gap: 1.6rem; align-self: center; }
+  .objekte .regal { display: flex; align-items: flex-end; gap: 2rem; padding: 1.6rem 2.4rem; }
+  .objekte .regal ls-objekt { height: 10rem; }
 </style>
 </head>
 <body>
@@ -92,6 +107,41 @@
     <ls-knopf id="leuchtknopf" art="haupt" wort="Leuchte"></ls-knopf>
   </div>
 </div>
+<section class="objekte" id="objekte" hidden>
+  <div class="reihe-zustaende">
+    <div class="kind" id="kind"></div>
+    <div class="gruppe">
+      <ls-objekt art="papiertonne" zustand="zu"></ls-objekt>
+      <ls-objekt art="papiertonne" zustand="offen"></ls-objekt>
+      <ls-objekt art="papiertonne" zustand="voll"></ls-objekt>
+    </div>
+    <div class="gruppe">
+      <ls-objekt art="wertstofftonne" zustand="zu"></ls-objekt>
+      <ls-objekt art="wertstofftonne" zustand="offen"></ls-objekt>
+      <ls-objekt art="wertstofftonne" zustand="voll"></ls-objekt>
+    </div>
+  </div>
+  <div class="spiel">
+    <div class="dinge" id="dinge">
+      <ls-objekt id="ding-papier" art="papier"></ls-objekt>
+      <ls-objekt id="ding-dose" art="dose"></ls-objekt>
+    </div>
+    <div class="gruppe">
+      <ls-objekt id="ziel-papier" art="papiertonne" zustand="zu"></ls-objekt>
+      <ls-objekt id="ziel-dose" art="wertstofftonne" zustand="zu"></ls-objekt>
+    </div>
+    <div class="knoepfe">
+      <ls-knopf id="werfen" art="haupt" wort="Werfen"></ls-knopf>
+      <ls-knopf id="fuellen" wort="Füllen"></ls-knopf>
+      <ls-knopf id="leeren" wort="Neu"></ls-knopf>
+    </div>
+    <div class="lernfeld regal" aria-label="Regal-Bild">
+      <ls-objekt art="papiertonne" wert="7" still></ls-objekt>
+      <ls-objekt art="wertstofftonne" wert="10" still></ls-objekt>
+      <ls-objekt art="papiertonne" wert="Mm" still></ls-objekt>
+    </div>
+  </div>
+</section>
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause">
   <div class="pausen-inhalt">
@@ -108,6 +158,10 @@
   import "./perlenstab.js";
   import "./wortart.js";
   import { ziehbar, setze, zurueck } from "./ziehen.js";
+  import "../objekte/papiertonne.js";
+  import "../objekte/wertstofftonne.js";
+  import { wirf } from "../objekte/objekt.js";
+  import { zeichne } from "../runde/runde.js";
 
   const q = new URLSearchParams(location.search);
   const leiste = document.getElementById("leiste");
@@ -163,6 +217,27 @@
 
   if (q.has("leuchte")) hilfe.leuchte();
   if (q.has("pause")) zeigePause();
+  // Spielobjekte: ?objekte zeigt sie statt der Bausteine.
+  if (q.has("objekte")) {
+    document.querySelector(".buehne").hidden = true;
+    document.getElementById("objekte").hidden = false;
+    document.getElementById("kind").innerHTML = zeichne("ela", { ansicht: "dreiviertel", haltung: "stehen" });
+    const [papier, dose] = ["ding-papier", "ding-dose"].map((id) => document.getElementById(id));
+    const [zielP, zielD] = ["ziel-papier", "ziel-dose"].map((id) => document.getElementById(id));
+    document.getElementById("werfen").addEventListener("click", async () => {
+      const ding = !papier.hidden ? papier : !dose.hidden ? dose : null;
+      if (!ding) return;
+      merke(`wirf ${ding.getAttribute("art")}`);
+      merke(`wirf ${await wirf(ding, ding === papier ? zielP : zielD).fertig}`);
+    });
+    document.getElementById("fuellen").addEventListener("click", () => {
+      for (const t of [zielP, zielD]) t.zustand = t.zustand === "voll" ? "offen" : "voll";
+    });
+    document.getElementById("leeren").addEventListener("click", () => {
+      papier.hidden = dose.hidden = false;
+      for (const t of [zielP, zielD]) t.zustand = "zu";
+    });
+  }
 </script>
 </body>
 </html>
