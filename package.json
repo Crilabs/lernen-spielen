@@ -9,7 +9,8 @@
     "audio": "node werkzeuge/audio/erzeugen.mjs",
     "kosten": "node werkzeuge/kosten/bericht.mjs",
     "audio:vergleich": "node werkzeuge/audio/vergleich.mjs",
-    "audio:anhoeren": "node werkzeuge/audio/anhoeren.mjs"
+    "audio:anhoeren": "node werkzeuge/audio/anhoeren.mjs",
+    "echte-dinge": "node werkzeuge/echte-dinge/verzeichnis.mjs"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",
