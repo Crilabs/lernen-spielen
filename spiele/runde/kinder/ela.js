@@ -2,7 +2,7 @@
 // Kleidung Senfgelb gedämpft (vorläufig bis zur Freigabe der ersten Zeichnung, figuren.md §9).
 
 import { meldeKind } from "../bestand.js";
-import { dreiviertel, ellipse, flaeche, INK } from "./schnitt.js";
+import { dreiviertel, profil, ellipse, flaeche, INK } from "./schnitt.js";
 
 const farben = { haut: "#B97E57", haar: "#4A2E2A", oben: "#D9B85C", unten: "#6F6A86", schuhe: "#F4EFE6" };
 const BAND = "#7FB3C9";
@@ -23,13 +23,23 @@ const kopfDreiviertel = {
     + `<path d="M168 79 Q170 77 173 79" stroke-width="3"/><path d="M146 79 L126 76" stroke-width="3"/></g>`,
 };
 
+const kopfProfil = {
+  haareHinten: ellipse(158, 66, 44, 42, farben.haar) + zopf(130, 100),
+  haareOben: flaeche(
+    "M206 62 C198 52 188 49 178 50 C168 56 156 58 146 62 C142 74 142 88 140 102 C128 106 120 94 122 78 C122 44 140 25 166 25 C192 25 208 40 206 62 Z",
+    farben.haar,
+  ),
+  nachGesicht: `<g fill="none" stroke="${INK}"><circle cx="188" cy="80" r="10" stroke-width="3.5"/>`
+    + `<path d="M178 79 L157 77" stroke-width="3"/></g>`,
+};
+
 meldeKind({
   id: "ela",
   name: "Ela",
   pronomen: "sie",
   bewegt: "geht",
-  entwurf: true,
   ansichten: {
     dreiviertel: dreiviertel({ breite: 1, farben, kopf: kopfDreiviertel }),
+    profil: profil({ breite: 1, farben, kopf: kopfProfil }),
   },
 });

@@ -23,6 +23,13 @@ test("die Runde ist angemeldet", () => {
   for (const id of KINDER) assert.ok(bestand.kinder.has(id), `${id} fehlt`);
 });
 
+test("kein Kind ist mehr Entwurf, jedes hat beide Ansichten", () => {
+  for (const kind of bestand.kinder.values()) {
+    assert.ok(!kind.entwurf, `${kind.id} ist noch Entwurf`);
+    for (const a of ANSICHTEN) assert.ok(kind.ansichten[a], `${kind.id}: Ansicht ${a} fehlt`);
+  }
+});
+
 test("jedes Kind kennt jedes Gesicht in jeder Ansicht", () => {
   for (const g of bestand.gesichter.values()) {
     for (const a of ANSICHTEN) assert.equal(typeof g.ansichten[a], "string", `Gesicht ${g.id} fehlt in ${a}`);

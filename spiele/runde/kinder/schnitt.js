@@ -104,3 +104,71 @@ export function dreiviertel({ breite: b, farben: f, kopf }) {
     },
   };
 }
+
+/**
+ * Profil eines gehenden Kindes, Blick nach rechts.
+ * @param {{breite: number, farben: Farben, kopf: Kopfteile}} k
+ * @returns {import("../bestand.js").KindAnsicht}
+ */
+export function profil({ breite: b, farben: f, kopf }) {
+  const X = (/** @type {number} */ d) => 160 + d * b;
+  const hueftY = 184;
+  const schulterY = 126;
+  const rumpf = `M${z(X(-16))} 124 Q${z(X(-16))} 112 ${z(X(-4))} 112 L${z(X(6))} 112 Q${z(X(18))} 112 ${z(X(18))} 124`
+    + ` L${z(X(20))} 176 Q${z(X(20))} 186 ${z(X(11))} 186 L${z(X(-10))} 186 Q${z(X(-19))} 186 ${z(X(-19))} 176 Z`;
+  const huefte = `M${z(X(-17))} 172 L${z(X(18))} 172 L${z(X(18))} 190 Q${z(X(18))} 198 ${z(X(10))} 198`
+    + ` L${z(X(-9))} 198 Q${z(X(-17))} 198 ${z(X(-17))} 190 Z`;
+  /** @param {number} dx @returns {Teil[]} */
+  const bein = (dx) => [
+    { teil: "bein", svg: glied([160 + dx, 192, 160 + dx, 238], 20, f.unten) },
+    { teil: "schuh", svg: ellipse(168 + dx, 246.5, 15, 7.5, f.schuhe) },
+  ];
+  /** @param {number} dx */
+  const arm = (dx) => ({
+    oben: [{ teil: "oberarm", svg: glied([160 + dx, schulterY, 161 + dx, 146], 15, f.oben) }],
+    unten: [
+      { teil: "unterarm", svg: glied([161 + dx, 146, 163 + dx, 164], 14, f.oben) },
+      { teil: "hand", svg: kreis(164 + dx, 172, 8.5, f.haut) },
+    ],
+  });
+  const vorn = arm(0);
+  const hinten = arm(-3);
+  return {
+    drehpunkte: {
+      koerper: [160, 254], rumpf: [160, hueftY], kopf: [162, 110],
+      "arm-hinten-oben": [157, schulterY], "arm-hinten-unten": [158, 146],
+      "arm-vorn-oben": [160, schulterY], "arm-vorn-unten": [161, 146],
+      "bein-hinten": [157, hueftY], "bein-vorn": [161, hueftY],
+    },
+    teile: {
+      koerper: [],
+      "bein-hinten": bein(-3),
+      "bein-vorn": bein(1),
+      rumpf: [
+        { teil: "hals", svg: flaeche("M156 100 L170 100 L170 118 L156 118 Z", f.haut) },
+        { teil: "huefte", svg: flaeche(huefte, f.unten) },
+        { teil: "pulli", svg: flaeche(rumpf, f.oben) },
+      ],
+      kopf: [
+        ...(kopf.haareHinten ? [{ teil: "haare-hinten", svg: kopf.haareHinten }] : []),
+        { teil: "kopf", svg: ellipse(164, 72, 40, 41, f.haut) },
+        { teil: "nase", svg: flaeche("M200 80 Q212 89 201 95", f.haut) },
+        { teil: "ohr", svg: kopf.ohr ?? ellipse(153, 82, 6.5, 9, f.haut) + strich("M155 77 Q150 82 155 87", 2.5) },
+        { teil: "gesicht" },
+        ...(kopf.haareOben ? [{ teil: "haare-oben", svg: kopf.haareOben }] : []),
+        ...(kopf.nachGesicht ? [{ teil: "hilfsmittel", svg: kopf.nachGesicht }] : []),
+      ],
+      "arm-hinten-oben": hinten.oben, "arm-hinten-unten": hinten.unten,
+      "arm-vorn-oben": vorn.oben, "arm-vorn-unten": vorn.unten,
+    },
+    gesicht: /** @type {[number, number]} */ (GESICHT.profil),
+    plaetze: {
+      kopf: { gelenk: "kopf", punkt: [164, 32] },
+      "hand-vorn": { gelenk: "arm-vorn-unten", punkt: [164, 172] },
+      "hand-hinten": { gelenk: "arm-hinten-unten", punkt: [161, 172] },
+      ruecken: { gelenk: "rumpf", punkt: [X(-16), 130] },
+      fuesse: { gelenk: "koerper", punkt: [160, 250] },
+      schoss: { gelenk: "rumpf", punkt: [X(12), 182] },
+    },
+  };
+}
