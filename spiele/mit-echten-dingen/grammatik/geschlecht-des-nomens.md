@@ -14,10 +14,11 @@ quellen:
 
 Ihr braucht: den Einkauf in der Tasche
 
-1. Einer nimmt ein Ding heraus und fragt: „Wohin kommt der Käse?“
-2. Der andere räumt ihn ein und sagt: „Er kommt nach oben.“
-3. Zu der passt er, zu die sie, zu das es. Sagt das Geschlecht dazu: „Käse ist männlich.“
-4. Nehmt die Einzahl (das Ei): In der Mehrzahl heißt es immer die. Dann tauscht ihr.
+1. Nehmt ein Ding heraus und fragt: „Wohin kommt der Käse?“
+2. Wer einräumt, sagt: „Er kommt nach oben.“
+3. Zu der passt er, zu die sie, zu das es. Sagt dazu: „Das Wort Käse ist männlich.“
+4. Sind es viele, sagt das Wort für eins: das Ei, nicht die Eier.
+5. Dann tauscht ihr.
 
 **Darauf kommt es an:** Jedes Nomen hat ein Geschlecht: männlich (der), weiblich (die) oder sächlich (das). Das Geschlecht gehört zum Wort, nicht zur Sache. Er, sie und es richten sich danach: die Milch – sie, das Brot – es.
 
@@ -29,7 +30,7 @@ Ihr braucht: einen Weg zum Einkaufen
 
 1. Sucht Dinge, für die es zwei Wörter gibt: der Laden und das Geschäft, die Semmel und das Brötchen, die Tüte und der Beutel.
 2. Sagt zu jedem Wort er, sie oder es: „Der Laden? Er ist offen.“ „Das Geschäft? Es ist offen.“
-3. Sagt dazu das Geschlecht: „Laden ist männlich, Geschäft ist sächlich.“
+3. Sagt dazu: „Das Wort Laden ist männlich, das Wort Geschäft ist sächlich.“
 
 **Darauf kommt es an:** Für dasselbe Ding gibt es Wörter mit verschiedenem Geschlecht. Das Geschlecht gehört zum Wort, und er, sie oder es richtet sich nach dem Wort.
 
