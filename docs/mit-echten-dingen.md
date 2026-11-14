@@ -1,6 +1,6 @@
 # Mit echten Dingen – Spiele ohne Bildschirm
 
-Stand: 2026-11-14 · **freigegeben (Christian, 2026-11-14)** · Entscheidungen von Christian (2026-11-14)
+Stand: 2026-11-14 · **Entwurf zur Freigabe** · Entscheidungen von Christian (2026-11-14)
 Markierung: **(Christian)** entschieden · **(Annahme)** Vorschlag, korrigierbar.
 
 ## Warum
@@ -13,20 +13,27 @@ Name in der App und im Projekt: **„Mit echten Dingen“** (Annahme; der Knopf 
 
 ## Was entsteht
 
-- **Genau eine Anleitung je Thema (Christian).** Gibt es für ein Thema schon eine, entsteht keine zweite, auch wenn
-  ein weiteres Spiel das Thema bedient.
+- **Je Thema eine Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Christian):** *Am Tisch*
+  (ruhig, konzentriert), *In Bewegung* (Treppe, hüpfen, Raum), *Unterwegs* (Spaziergang, Auto, Einkauf). Varianten
+  nur, wo sie das Thema wirklich treffen; erzwungene Varianten streicht die Prüfung (E1). Gibt es für ein Thema schon
+  eine Datei, entsteht keine zweite, auch wenn ein weiteres Spiel das Thema bedient.
+- **Nach Situation, nicht nach Kind-Typ:** keine Einstellung „Bewegungstyp“ o. ä. im Profil (Lerntypen sind ein
+  Mythos, `grundsaetze.md` §1). Gewählt wird auf der Karte im Moment (N1, N2); die Karte merkt sich die letzte Wahl
+  als Voreinstellung.
 - Datei `spiele/mit-echten-dingen/<fach>/<thema-id>.md` (Markdown), eigene Worte, Quellen nur im Kopf der Datei.
 - **Anrede „ihr“ (Christian):** Kind und Erwachsene als Team, keiner prüft den anderen („Legt die Gabeln in eine
   Reihe.“).
-- **Eine Anleitung mit „Leichter“ und „Schwerer“ (Christian).**
+- **Jede Form mit „Leichter“ und „Schwerer“ (Christian).**
 
 ```markdown
 ---
-thema: abzaehlen
+thema: vorwaerts-zaehlen
 quellen:
   - <Titel, Herausgeber, URL, abgerufen am>
 ---
-# Gabeln zählen
+# Zählen, wie viele es sind
+
+## Am Tisch: Gabeln zählen
 
 Ihr braucht: eine Besteckschublade
 
@@ -38,8 +45,20 @@ Ihr braucht: eine Besteckschublade
 
 **Leichter:** nur bis fünf. **Schwerer:** erst schätzen, dann zählen.
 
-**Passt gut:** beim Tischdecken, beim Einkauf-Auspacken.
+## In Bewegung: Treppenstufen
+
+Ihr braucht: eine Treppe
+
+1. Geht die Treppe hinauf und zählt bei jeder Stufe eine Zahl.
+2. Oben sagt ihr, wie viele Stufen es waren.
+
+**Darauf kommt es an:** Jede Stufe bekommt genau eine Zahl. Die letzte Zahl sagt, wie viele Stufen es sind.
+
+**Leichter:** nur die ersten fünf Stufen. **Schwerer:** rückwärts hinunter zählen.
 ```
+
+Die Überschrift der Datei nennt das Thema in Alltagssprache; jede Form beginnt mit `## <Situation>: <Name>`. Die
+Karte zeigt die Formen als kleine Wahl (Reiter mit Symbol und Wort).
 
 ## Regeln für den Text
 
@@ -61,13 +80,7 @@ Spiels, die noch keine Anleitung haben.
 
 1. **Recherche** (Web): Fachdidaktik, Montessori-Übungen, Elternmaterial von Schulen, Verlagen und Landesinstituten.
    Quellen in den Kopf der Datei; der Text ist immer eigen formuliert, nichts wird übernommen.
-   **Gesucht sind die besten Methoden für genau dieses Thema (Christian, 2026-11-14):** Welche Wege, das Thema mit
-   Alltagsdingen zu lernen, gelten in den Quellen als wirksam? Bevorzugt praxisnah im Sinne Montessoris: Das Kind
-   tut etwas, das im Alltag einen echten Zweck hat (Tisch decken, teilen, einkaufen, sortieren), und lernt dabei
-   nebenbei. Lernen ist kein Selbstzweck (`grundsaetze.md`, zweite Prüffrage). Keine Methode ist vorab gesetzt; was
-   am besten trägt, ergibt die Recherche je Thema.
-2. **Ideen:** 3–5 Ansätze mit Alltagsdingen, einer wird gewählt (Begründung im Bericht, nicht in der Datei). Gewählt
-   wird nach Wirksamkeit laut Recherche und Praxisnähe, nicht nach Originalität.
+2. **Ideen:** 3–5 Ansätze mit Alltagsdingen, einer wird gewählt (Begründung im Bericht, nicht in der Datei).
 3. **Schreiben** nach den Regeln oben.
 4. **Prüfung** durch einen frischen Agenten, grün/rot je Kriterium mit Beleg:
 
@@ -81,9 +94,7 @@ Spiels, die noch keine Anleitung haben.
 | E6 | Fachbegriffe nach §5.1 |
 | E7 | eigene Worte, Quellen angegeben |
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
-| E9 | Methode laut Recherche wirksam für dieses Thema (Quelle im Kopf); die Handlung ist praxisnah und hat einen Zweck über das Üben hinaus |
-
-Die Grundsätze (`grundsaetze.md`) gelten für jede Anleitung ganz, auch wo E1–E9 sie nicht einzeln nennen.
+| E9 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
 
 Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 5. **Kosten** (Token für Recherche, Schreiben, Prüfung) in `spiele/mit-echten-dingen/kosten.json`, wie bei den
@@ -91,18 +102,23 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 
 ## Wo es zu sehen ist
 
-- **Eigene Seite `spiele/echt.html?thema=<id>` (Christian, 2026-11-14)**, Kopfleiste im Fach des Themas, das Thema als
-  Unterzeile. Aufbau: Titel, „Ihr braucht“ (auf dem Tablett, wie Material), nummerierte Schritte, „Darauf kommt es an“
-  (mit dem Sonnenring), „Leichter“/„Schwerer“ als **zwei Umschalter**, eine Stufe zur Zeit (Christian), „Passt gut“.
-  Der Kopf mit den Quellen wird nicht angezeigt. **Nur lesen, kein Vorlesen** (Christian). Fehlt die Datei, steht der
-  bisherige Einzeiler aus dem Lernplan da **(Christian)**.
-- Verlinkt von der **Startseite** (Karte „Mit echten Dingen“, mit dem Titel der Anleitung, wenn es eine gibt), dem
-  **Regal** (Karte im Detail eines Themas) und der **Fach-Seite** (Knopf „Mit echten Dingen“).
-- **Verzeichnis `spiele/mit-echten-dingen/index.json`** (`{ fach: themaId[] }`): nennt alle vorhandenen Anleitungen,
-  damit nur vorhandene Dateien angefragt werden (kein 404, offline). Wer eine Anleitung anlegt, trägt sie dort ein;
-  `tests/start-anleitung.test.mjs` prüft, dass Verzeichnis und Dateien übereinstimmen.
-- Leser und Darstellung: `spiele/start/anleitung.js` (getestet). Erste Datei als Beispiel:
-  `spiele/mit-echten-dingen/mathe/abzaehlen.md` („Gabeln zählen“ aus dem Beispiel oben; passt zu Abzählen, nicht zu
-  Vorwärts zählen), noch nicht durch Recherche und Prüfung gelaufen.
+- **Übersicht „Mit echten Dingen“ für Erwachsene und Kinder, ohne Spielen (Christian):** eine eigene Seite
+  `spiele/mit-echten-dingen.html`, ohne PIN, von der Startseite (kleiner Zugang für Erwachsene, neben dem Zahnrad oder
+  unten) und aus dem Elternbereich erreichbar. Sie zeigt, **woran das Kind gerade ist** und was man dazu machen kann:
+  - **Gerade dran:** die Themen im Zustand „dran“ (auch ohne Spiel), je mit Name und den Formen (Am Tisch / In
+    Bewegung / Unterwegs).
+  - **Bald:** die Themen „in Sicht“.
+  - **Zum Wiederholen:** die zuletzt gekonnten Themen (wenige, nach Datum).
+  - Je Thema die Anleitung aufklappbar; Themen ohne Datei zeigen den Einzeiler aus dem Lernplan. Keine Zahlen, kein
+    Lehrplanbezug, kein Fortschritt (das steht im Elternbereich); Sprache für beide lesbar.
+  - **Zum Ausdrucken (Christian): „Küchenzettel“** – ein Knopf „Drucken“ erzeugt eine Druckansicht (eine A4-Seite,
+    Druck-Stylesheet): die Themen von „Gerade dran“ mit je einer kurzen Form (Titel, „Ihr braucht“, die Schritte,
+    „Darauf kommt es an“), schlicht in Tinte auf Weiß, gut lesbar, zum Aufhängen in der Küche. Über den Druckdialog
+    lässt sie sich auch als PDF speichern. Nur wo das Gerät drucken kann (`faehigkeiten`, Annahme: Desktop und
+    Browser; auf dem Tablet über das Teilen-Menü, sobald die Mobil-Fassung kommt).
+
+- **Karte „Mit echten Dingen“** (`<ls-anregung>`) auf der Fach-Seite und im Regal, mit Wahl der Form, formatiert (kleiner eigener
+  Markdown-Darsteller: Überschrift, Listen, fett; der Kopf mit den Quellen wird nicht angezeigt). Fehlt die Datei,
+  bleibt der bisherige Einzeiler aus dem Lernplan **(Christian)**.
 - **Am Rundenende eines Spiels** als ruhiges Angebot in der Pause, neben „Alle Spiele“ und „Weiter“ (kein Muss, keine
-  Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**; führt zur selben Seite.
+  Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**.
