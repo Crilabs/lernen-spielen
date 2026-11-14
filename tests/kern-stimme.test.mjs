@@ -77,7 +77,7 @@ test("sprich ohne Web-Sprache", async () => {
 
 test("sprich löst bei onend auf, mit Stimme, Sprache und Tempo", async () => {
   const S = await frisch();
-  const p = S.sprich("Hallo Einhorn", { tempo: 0.9 });
+  const p = S.sprich("Hallo Ela", { tempo: 0.9 });
   await warte();
   assert.equal(gesprochen.length, 1);
   const u = gesprochen[0];
@@ -92,7 +92,7 @@ test("sprich löst bei onend auf, mit Stimme, Sprache und Tempo", async () => {
 test("sprich löst nach Notbremse auf", async () => {
   mock.timers.enable({ apis: ["setTimeout"] });
   const S = await frisch();
-  const text = "Hallo Einhorn";
+  const text = "Hallo Ela";
   let fertig = null;
   S.sprich(text).then((e) => (fertig = e));
   await warte();
@@ -204,9 +204,9 @@ function ohneAudio() {
 
 test("sprich spielt die erzeugte Datei statt der Systemstimme", async (t) => {
   t.after(ohneAudio);
-  fakeAudio({ "Hallo Einhorn": { datei: "test/ab.mp3" } });
+  fakeAudio({ "Hallo Ela": { datei: "test/ab.mp3" } });
   const S = await frisch();
-  const p = S.sprich("  Hallo   Einhorn ");
+  const p = S.sprich("  Hallo   Ela ");
   await warte();
   assert.equal(dateien.length, 1);
   assert.match(dateien[0].src, /\/spiele\/audio\/test\/ab\.mp3$/);

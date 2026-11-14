@@ -24,14 +24,14 @@ Markierung: **(Christian)** = von Christian entschieden, **(Annahme)** = Vorschl
 
 ### Die Figuren
 
-- **handeln** und zeigen ihre Gefühle mit Körper, Gesicht und Bewegung. Geräusche sind erlaubt (Wiehern,
-  Seufzen, Lachen als Klang), aber **keine Wörter**;
-- haben **keine Ich-Sätze**, auch nicht als Zitat des Erzählers („Das Einhorn sagt: Ich …“);
+- **handeln** und zeigen ihre Gefühle mit Körper, Gesicht und Bewegung. Geräusche sind erlaubt (Seufzen,
+  Staunen, Lachen als Klang), aber **keine Wörter**;
+- haben **keine Ich-Sätze**, auch nicht als Zitat des Erzählers („Ela sagt: Ich …“);
 - haben **keine Sprechblasen mit Text, der vorgelesen wird**. Vorgelesener Text steht als Erzähltext im
   Bild (Erzählfeld, Tafel, Schriftband), nicht im Mund einer Figur. Denkblasen mit Bild ohne Text sind
   erlaubt **(Annahme)**.
 
-Warum: Eine Männerstimme aus dem Mund des Einhorns oder eines Kindes passt nicht und wirkt fremd. Ein Erzähler
+Warum: Eine Männerstimme aus dem Mund eines Kindes passt nicht und wirkt fremd. Ein Erzähler
 ist eine eigene, glaubwürdige Rolle wie beim Vorlesen eines Bilderbuchs. Er passt zu allen Figuren gleichzeitig.
 
 ### Die Regeln zu Gefühlen bleiben, nur erzählt
@@ -42,13 +42,13 @@ Erzähler benennt sie in der dritten Person:
 
 | Statt (Figur spricht) | So (Erzähler) |
 |---|---|
-| „Ich freu mich so! Ich wollte schon lange über den Bach.“ | „Das Einhorn freut sich. Es wollte schon lange über den Bach.“ |
-| „Puh, ich war gespannt, ob die Brücke hält.“ | „Puh. Das Einhorn war gespannt, ob die Brücke hält.“ |
-| „Oh, das überrascht mich – das Kärtchen passt nicht.“ | „Das Einhorn staunt. Das Kärtchen passt nicht. Es will wissen, warum.“ |
-| „Hilfst du mir?“ | „Das Einhorn möchte über den Bach. Hilfst du ihm?“ |
+| „Ich freu mich so! Ich wollte schon lange über den Bach.“ | „Ela freut sich. Sie wollte schon lange über den Bach.“ |
+| „Puh, ich war gespannt, ob die Brücke hält.“ | „Puh. Timo war gespannt, ob die Brücke hält.“ |
+| „Oh, das überrascht mich – das Kärtchen passt nicht.“ | „Lena staunt. Das Kärtchen passt nicht. Sie will wissen, warum.“ |
+| „Hilfst du mir?“ | „Kofi möchte über den Bach. Hilfst du ihm?“ |
 | „Ich darf Nein sagen.“ (K15) | „Lena sagt Nein. Das darf sie.“ oder an das Kind: „Du darfst Nein sagen.“ |
 
-Auch erzählt gilt: kein „Du machst das Einhorn glücklich“, kein Lob, keine Wörter aus Grundsätze §3.2.
+Auch erzählt gilt: kein „Du machst Kofi glücklich“, kein Lob, keine Wörter aus Grundsätze §3.2.
 
 ### Ausnahmen
 
@@ -68,8 +68,8 @@ Auch erzählt gilt: kein „Du machst das Einhorn glücklich“, kein Lob, keine
 
 - `docs/grundsaetze.md` (§2 Punkt 4, §3.2, K14, K15, §11) und `docs/bedienung.md` (Sprechblase) sind an diese
   Regel angepasst (2026-11-14). Ob später eine Erzählerin dazukommt (z. B. je Welt), ist offen.
-- Sprechblasen in den Einführungen (`spiele/einfuehrungen/`) prüfen: Zeigt der Zipfel der Blase auf eine Figur
-  oder steht darin ein Ich-Satz, wird sie zur Erzählblase. (Die alten Spiele sind entfernt.)
+- Die Einführungen (`spiele/einfuehrungen/`) erzählen mit den Kindern der Runde in einer Erzählblase ohne Zipfel
+  und ohne Ich-Sätze (2026-11-14). (Die alten Spiele sind entfernt.)
 
 ## 2. Texte für die Stimme schreiben
 
