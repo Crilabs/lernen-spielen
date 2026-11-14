@@ -12,6 +12,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
   (Aufkleber: Dose und Karton). Farben der Welt-Schicht, heller und weicher als die Perlen (6.2).
 - `schuhpaar.js` – ein Paar Turnschuhe (blau und koralle).
 - `papier.js` – zerknülltes Heftpapier. `dose.js` – leere Konservendose (keine Getränkedose: die hat Pfand).
+- `muenze.js` – kleiner Stapel goldfarbener Münzen mit einer Münze daneben (ohne Ziffer und Wappen).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
