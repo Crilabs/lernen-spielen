@@ -30,6 +30,23 @@
    "entwurf": true,
    "datei": "lesen/silben-klatschen.md"
   },
+  "verben-als-nomen": {
+   "fach": "schreiben",
+   "name": "Verben als Nomen",
+   "titel": "Wenn ein Verb ein Nomen wird",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Die Kramkiste beschriften"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Geräusche sammeln"
+    }
+   ],
+   "entwurf": true,
+   "datei": "schreiben/verben-als-nomen.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",
