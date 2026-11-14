@@ -50,6 +50,10 @@ Aufgabenschlüssel und arten · Spielobjekte.
   zuerst sein Lernzeichen (Perlenstab bei Zahlen und Zerlegen, Wortart-Zeichen, Graphem-Karte), erst danach das
   Regal-Bild des Spiels (Abschnitt „Regal-Bild“): Bei solchen Themen bleibt der Perlenstab vorn, das Regal-Bild gilt
   für die übrigen; schreib dazu, für welche Themen es sichtbar wird.
+- **Figur des Spiels** (`docs/grundsaetze-bilder.md` §16): zuerst in `spiele/objekte/` nachsehen, sonst eine eigene
+  entwerfen; kein Kind der Runde. Eintrag `karte: { figur, zustand, welt }` mit dem typischen Moment; begründe, wie
+  sich die Silhouette von den anderen Karten des Fachs (`spiele/spiele.json`) unterscheidet und dass
+  `(figur, welt, zustand)` im Fach noch frei ist. Die Figur ist zugleich das Regal-Bild, ihre Kopfform das Spielsymbol (Kopfleiste, Regal-Detail).
 - Braucht das Spiel ein neues Lernzeichen oder Bedienteil (`docs/spielkatalog.md` §8a) oder eine offene Frage aus
   `docs/grundsaetze-bilder.md` §15: entwerfen, als **(Annahme)** markieren und unter der Überschrift
   „Freigabe nötig“ als konkrete Frage an Christian notieren. Das Spiel wird dann gebaut und geprüft, aber nicht gemergt.
@@ -95,6 +99,9 @@ Lernstufen, ruhig und sanft; abenteuer mitgeplant):
   `{{SPIELORDNER}}/objekte/`; `tests/objekte.test.mjs` grün; in `spiele/rahmen/vorschau.html?objekte` sichtbar.
 - **Regal-Bild:** `regal: { objekt, wert }` in `spiele.json`, Objekt in `spiele/objekte/`; Regal-Material
   (`spiele/rahmen/material.js`); im Regal (`spiele/regal.html`) bei einem Thema ansehen, für das es gilt.
+- **Kartenbild:** `karte: { figur, zustand, welt }` in `spiele.json`, Figur in `spiele/objekte/` nach
+  `docs/grundsaetze-bilder.md` §16 (eine Figur, groß, mittig bis Mitte rechts, kein Knopf, kein Text, keine Lernzeichen); `symbol.svg` als
+  Kopfform der Figur. Selbst den Silhouettentest ansehen (alle Karten des Fachs, 64 px, Graustufen).
 - **Szenenbild** nur mit `node werkzeuge/bilder/erzeugen.mjs --spiel {{SPIELORDNER}} <ziel> "<Szene>"`, Herkunft in
   `bilder/herkunft.json` (`docs/grundsaetze-bilder.md` §11).
 - **Texte als Daten** in `{{SPIELORDNER}}/texte.json` und als feste Zeichenketten (Kopf der Vorlage, Schritt 3).

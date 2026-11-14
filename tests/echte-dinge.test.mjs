@@ -1,5 +1,5 @@
 // Anleitungen „Mit echten Dingen“ (docs/mit-echten-dingen.md): Verzeichnis aktuell, Form jeder Datei, die Regeln
-// für den Text, soweit sie sich ohne Lesen prüfen lassen (Rest: Prüfung E1–E9 durch einen frischen Agenten).
+// für den Text, soweit sie sich ohne Lesen prüfen lassen (Rest: Prüfung E1–E10 durch einen frischen Agenten).
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";

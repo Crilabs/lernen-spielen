@@ -15,7 +15,9 @@ Arbeitsordner `{{WORKTREE}}`: nur lesen, nichts ändern, nichts committen, keine
 **Lies nur:** die Datei `spiele/mit-echten-dingen/{{FACH}}/{{THEMA}}.md`, den Eintrag mit `"id": "{{THEMA}}"` in
 `spiele/lernplan.json`, `docs/mit-echten-dingen.md` (ganz) und `docs/grundsaetze.md`. Nicht die Git-Historie, keine
 anderen Anleitungen, nicht `{{PRUEFUNGEN}}`. Öffne mindestens eine der Quellen im Kopf der Datei (Web) und vergleiche
-(E7).
+(E7). Für E10: das Objekt aus `bild` im Kopf (`spiele/objekte/<figur>.js`) im genannten Zustand ansehen
+(`NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/objektbilder.mjs <Scratchpad>/objekte
+spiele/objekte/<figur>.js`) und mit den Bildern der anderen Anleitungen des Fachs vergleichen (je `bild` im Kopf).
 
 {{VORIGE_BEFUNDE}}
 
@@ -30,8 +32,9 @@ anderen Anleitungen, nicht `{{PRUEFUNGEN}}`. Öffne mindestens eine der Quellen 
 | E7 | eigene Worte, Quellen angegeben (der Prüfer öffnet mindestens eine Quelle und vergleicht) |
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
 | E9 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
+| E10 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
 
-**Grün heißt:** alle neun grün, kein kritischer Befund. Im Zweifel rot.
+**Grün heißt:** alle zehn grün, kein kritischer Befund. Im Zweifel rot.
 
 Schreib deine Antwort außerdem unverändert in die Datei `{{BERICHT}}` (außerhalb des Arbeitsordners; die einzige
 Datei, die du schreibst).
@@ -43,7 +46,7 @@ Ergebnis: GRÜN | ROT
 
 | Nr. | grün/rot | Beleg (Zitat aus der Datei mit Zeile) | Befund, falls rot |
 |---|---|---|---|
-… eine Zeile je Kriterium E1 bis E9
+… eine Zeile je Kriterium E1 bis E10
 
 Kritische Befunde:
 - <Befund> – <Beleg> – <was es lösen würde>   (oder „keine“)

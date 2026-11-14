@@ -124,6 +124,10 @@ Person.
   - Namen nur aus Kleinbuchstaben, Ziffern und Bindestrich; doppelte Namen lehnt der Kern ab.
   - `tests/runde-gesamt.test.mjs` prüft den gemeinsamen Bestand und alle `spiele/*/runde.js` an allen Kindern;
     die Galerie `spiele/runde/galerie.html` zeigt den gemeinsamen Bestand zum Ansehen.
+- **Figuren der Spiele (Christian, 2026-11-14):** Die Figur eines Spiels (Kartenbild, Regal-Bild, Spielsymbol;
+  `grundsaetze-bilder.md` §16) und die Dinge „Mit echten Dingen“ sind **Objekte** in `spiele/objekte/`, keine
+  Mitglieder der Runde. Sie folgen dem Stil aus §4 (Kontur um die Silhouette, Licht in Stufen, Schlagschatten), haben
+  kein Gefühl und keine Aufgabe nach §3, und die Kinder der Runde sind keine Kartenfiguren (Annahme).
 
 ---------------------------------------------------------------------------------------------------
 ## 5. Was die Kinder können, was es in echt nicht gibt (Christian)

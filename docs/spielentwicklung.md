@@ -91,7 +91,10 @@ Pflichtteile:
 10. **Aufgabenschlüssel** und `arten` für `spiele.json`; welche Themen des Lernplans bedient werden.
 11. **Spielobjekte (Christian):** welche Dinge der Sachwelt das Spiel als eigene, animierte SVG-Bilder braucht (z. B.
     Mülltonnen, Papier, Dosen), welche Bewegungen sie haben (z. B. Deckel öffnet sich, Ding fliegt hinein, Tonne
-    wackelt satt) und welches davon als **Regal-Bild** für die Themen des Spiels dient.
+    wackelt satt) und welches davon als **Regal-Bild** für die Themen des Spiels dient. Dazu die **Figur des Spiels**
+    (neu oder aus `spiele/objekte/`) mit dem Eintrag `karte: { figur, zustand, welt }` für das Kartenbild
+    (`grundsaetze-bilder.md` §16): welcher Zustand den typischen Moment zeigt und wie sich die Karte von den anderen
+    Karten des Fachs unterscheidet.
 
 ### Spielobjekte (Christian)
 
@@ -113,6 +116,9 @@ Pflichtteile:
 - **Ablage:** Objekte, die mehr als ein Spiel brauchen kann (Tonne, Baum, Korb), in `spiele/objekte/<art>.js`, damit
   der Bestand mit jedem Spiel wächst; Spielspezifisches im Spielordner unter `objekte/`. Regal-Bilder müssen im
   gemeinsamen Bestand liegen (Regal, Fach-Seite und Startseite laden sie dort nach).
+- **Figur des Spiels (Christian):** Jedes Spiel entwickelt mindestens eine eigene Figur oder nimmt eine vorhandene
+  (zuerst in `spiele/objekte/` nachsehen). Sie ist das Kartenbild (§16 in `grundsaetze-bilder.md`), das Regal-Bild und
+  in Kopfform das Spielsymbol. Figuren sind Objekte, keine Kinder der Runde (`figuren.md` §4).
 
 #### Schnittstelle (`spiele/objekte/objekt.js`)
 
@@ -157,9 +163,19 @@ Ein Spiel nennt in `spiele.json` sein Regal-Bild: `"regal": { "objekt": "papiert
 Lernzeichen (Perlenstab, Wortart-Zeichen, Karte mit dem Graphem), dann das Regal-Bild des Spiels, dann die Karte mit
 dem Fachsymbol (`materialFuer`, `spiele/rahmen/material.js`). `bausteinHtml` baut das Bild als
 `<ls-objekt art="…" wert="…" still aria-hidden="true">` – flach und still im Regal, auf der Fach-Seite und der
-Startseite. Buchstaben stehen nie auf einem Regal-Bild: Wo der Buchstabe der Inhalt ist, nimmt schon die Graphem-Karte
+Startseite. Die Figur des Spiels ist zugleich sein Regal-Bild (`regal.objekt` = `karte.figur`, Annahme).
+Buchstaben stehen nie auf einem Regal-Bild: Wo der Buchstabe der Inhalt ist, nimmt schon die Graphem-Karte
 den Platz ein, sonst stünde er für nichts. Jedes `regal.objekt` muss als `spiele/objekte/<art>.js` vorliegen
 (`tests/rahmen-regal-bild.test.mjs` prüft `spiele.json`).
+
+#### Kartenbild
+
+Regeln: `grundsaetze-bilder.md` §16. Ein Spiel nennt in `spiele.json` sein Kartenbild:
+`"karte": { "figur": "papiertonne", "zustand": "offen", "welt": "<welt>" }` (Annahme). Die Karte zeigt die Welt als
+flache Vignette und davor `<ls-objekt art="<figur>" zustand="<zustand>" still>`, ohne `wert` (keine Ziffern, Buchstaben,
+Perlen im Bild). `(figur, welt, zustand)` ist je Fach eindeutig; ein Test prüft das an `spiele.json` (kommt mit der
+Umsetzung). Die Karte hat keinen runden Knopf (Christian); das Spielsymbol in Kopfleiste und Regal-Detail ist die Kopfform der
+Figur (abgeleitet, kein eigenes Bild). Die Platzierung auf der Startseite folgt nach dem Merge von `startseite-karten` (Christian).
 
 ## 2. Prüfung A: der Entwurf
 
@@ -200,7 +216,10 @@ Test-Schnittstelle `fehlversuche: false` (kein Zug kann danebengehen), prüft B-
 **B-Welt** (Screenshots + Entwurf): Figur sichtbar und tätig; Sachwelt im Bild erkennbar und passend zur Aufgabe;
 eine Welt, keine zweite Metapher (A4b); Spielobjekte im Stil der Runde und sachlich richtig, als Wirkung animiert,
 nicht als Zählmaterial (M1); nichts Bedrohliches; Fantasie nur im Rahmen (`figuren.md` §5). Im Prototyp dürfen die
-Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stimmen.
+Spielobjekte noch einfache Platzhalter sein, aber ihre Rolle (Wirkung) muss stimmen. Im Ausbau das Kartenbild nach
+`grundsaetze-bilder.md` §16 (W-Karte): eine Figur, groß, mittig bis Mitte rechts, kein Text und keine Lernzeichen, im
+Silhouettentest (alle Karten des Fachs als Raster in 64 px Graustufen) von den anderen Karten des Fachs zu
+unterscheiden, `(figur, welt, zustand)` im Fach eindeutig.
 
 **B-Spielbarkeit** (automatisches Durchspielen, `tests/browser/durchspielen.mjs`): Simulierte Kinder spielen je eine
 Runde in Chromium und WebKit, 1920×1080 und 1280×800 (Aufruf mit der Seite des Spiels, z. B.
@@ -223,7 +242,8 @@ als Ring, keine Farbe als einziges Signal), Größen nach §4, still beim Denken
 ## 5. Ausbau
 
 Erst nach grünem Prüfstand: alle Stufen, **Spielobjekte als animierte SVG im Stil der Runde** (Prüfer B-Welt
-schaut sie erneut an, Screenshots je Bewegungszustand), Regal-Bild für die Themen, Szenenbild (Werkzeug `werkzeuge/bilder/`, Herkunft A4), Texte als Daten,
+schaut sie erneut an, Screenshots je Bewegungszustand), Regal-Bild für die Themen, Kartenbild (`karte`, Figur in
+`spiele/objekte/`), Szenenbild (Werkzeug `werkzeuge/bilder/`, Herkunft A4), Texte als Daten,
 `npm run audio` (Erzeugen; Anhören ist Sache von Christian, Liste der neuen Texte im Bericht), Einführung, Regal-Material
 (`material.js`), Eintrag in `spiele.json`, Browser-Prüfung des Spiels, Durchspielen erneut grün. Danach
 Abschluss-Review des Branches (wie bei Rahmen und Ansichten) und Merge nach `main`.

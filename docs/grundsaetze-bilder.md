@@ -355,6 +355,7 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 - [ ] **Bedienzeichen** aus `spiele/symbole/`, fester Platz, Name, 2 × 2 cm.
 - [ ] **KI-Bild:** nur Stimmungsebene, Basis-Prompt, geprüft (Anatomie, 6.3), Herkunftseintrag, kein Text im Bild.
 - [ ] **Vielfalt** nach `grundsaetze.md` 6 geprüft und im Bestand ausgezählt.
+- [ ] **Kartenbild** nach §16: eine Figur im Stil der Runde vor der Welt-Vignette, Silhouettentest im Fach bestanden, kein Text, keine Lernzeichen.
 
 ---------------------------------------------------------------------------------------------------
 ## 14. Ausstehende Anpassungen in `grundsaetze.md`
@@ -377,3 +378,27 @@ auf dieses Dokument aufnehmen.
 - **Prüfung in der App:** dieselbe Aufgabe mit und ohne Folge-Animation über einige Tage, gemessen an
   „gekonnt an verschiedenen Tagen“ und freiwillig gewählten Runden (neben dem Drei-Fakten-Test der
   Kosmik-Schicht).
+
+---------------------------------------------------------------------------------------------------
+## 16. Kartenbild
+
+Freigegeben (Christian, 2026-11-14). Eine Spielkarte (Startseite, Fach-Seite) muss **ohne Lesen** erkennbar sein.
+Die Welt-Vignette allein leistet das nicht (Spiele derselben Welt sehen gleich aus, die Karten „Mit echten Dingen“
+zeigen alle dieselbe Hand). Markierung wie in [`figuren.md`](figuren.md): **(Christian)** entschieden ·
+**(Annahme)** Vorschlag.
+
+| Nr. | Regel | Stand |
+|---|---|---|
+| KB1 | **Zwei Schichten.** Hinten die Sachwelt als flache Welt-Vignette (die fünf Töne der Welt-Palette, 6.2, ohne Kontur); vorn die **Figur des Spiels** als sauberes SVG im Stil der Runde (Tinte-Kontur nur um die Silhouette, Licht in Stufen, [`figuren.md`](figuren.md) §4), eingesetzt als `<ls-objekt still>`. | (Christian) |
+| KB2 | **Eine Figur, groß:** mindestens 60 % der Bildhöhe, mittig bis Mitte rechts mit normalem Rand. Die Karte zeigt nur das Kartenbild, Titel und Thema; **kein runder Knopf** (Christian, 2026-11-14: „zu viele Infos“). | (Christian) |
+| KB3 | **An der Silhouette erkennbar:** klein und in Graustufen unterscheidet sich die Karte von allen anderen Karten ihres Fachs. Probe (Silhouettentest): alle Karten eines Fachs als Raster in 64 px Graustufen nebeneinander. | (Christian) |
+| KB4 | **Der typische Moment** des Spiels (kennzeichnender Zustand der Figur), als Standbild (B3). | (Christian) |
+| KB5 | **Keine Lernzeichen, kein Text im Bild:** keine Ziffern, Buchstaben, Perlen (C2, M1). Ein Regal-Bild mit `wert` steht auf der Karte ohne Wert. | (Christian) |
+| KB6 | **Eindeutig je Fach.** Eine Figur darf mehreren Spielen dienen, aber `(figur, welt, zustand)` kommt je Fach nur einmal vor. Gleiche Figur in gleicher Welt → Unterschied über Zustand oder Zubehör. Ein Test verhindert gleiche Bilder in einem Fach. | (Christian) |
+| KB7 | **Kinder der Runde sind keine Kartenfiguren.** Sie verbinden alle Spiele (§10 Nr. 4) und unterscheiden keins. | (Annahme) |
+| KB8 | **Spielsymbol = Kopfform der Figur:** Das Spielsymbol ist die Kopf- bzw. Kurzform der Figur und steht in der Kopfleiste und im Regal-Detail, nicht auf der Karte. | (Christian) |
+| KB9 | **Karten „Mit echten Dingen“** behalten ihr eigenes Aussehen (Papier mit Naht, keine Welt). Bild: das echte Alltagsding im Stil der Runde (z. B. sieben Nudeln auf zwei Tellern, ein Würfel, eine Treppe), klein in der Ecke des Bildes eine Hand als Zeichen „echt“; kein Knopf. Die Dinge liegen in `spiele/objekte/` und sind wiederverwendbar ([`mit-echten-dingen.md`](mit-echten-dingen.md) „Bild der Karte“). | (Christian) |
+| KB10 | **Daten statt Einzelbilder:** `spiele.json` `karte: { figur, zustand, welt }`; Kopf der Anleitung `bild: { figur, zustand }`. Die Kartenfigur ist zugleich das Regal-Bild des Spiels (`regal.objekt`); das Spielsymbol wird aus der Figur abgeleitet. | (Annahme) |
+
+Herkunft der Figuren und Prüfung: [`spielentwicklung.md`](spielentwicklung.md) „Spielobjekte“ und B-Welt (W-Karte).
+Die Platzierung auf der Startseite folgt nach dem Merge von `startseite-karten` (Christian).

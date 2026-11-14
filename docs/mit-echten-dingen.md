@@ -28,6 +28,7 @@ Name in der App und im Projekt: **„Mit echten Dingen“** (Annahme; der Knopf 
 ```markdown
 ---
 thema: vorwaerts-zaehlen
+bild: { figur: treppe, zustand: hinauf }
 quellen:
   - <Titel, Herausgeber, URL, abgerufen am>
 ---
@@ -59,6 +60,17 @@ Ihr braucht: eine Treppe
 
 Die Überschrift der Datei nennt das Thema in Alltagssprache; jede Form beginnt mit `## <Situation>: <Name>`. Die
 Karte zeigt die Formen als kleine Wahl (Reiter mit Symbol und Wort).
+
+## Bild der Karte (Christian)
+
+- Die Karte „Mit echten Dingen“ behält ihr eigenes Aussehen: Papier mit Naht, keine Welt-Vignette. Ihr Bild ist **das
+  echte Alltagsding der Anleitung** im Stil der Runde (`figuren.md` §4), z. B. sieben Nudeln auf zwei Tellern, ein
+  Würfel, eine Treppe; klein in der Ecke des Bildes eine Hand als Zeichen „echt“; kein runder Knopf (Christian). Regeln wie für jedes Kartenbild
+  (`grundsaetze-bilder.md` §16): ein Ding, groß, an der Silhouette von den anderen Karten des Fachs zu unterscheiden,
+  kein Text, keine Ziffern, keine Lernzeichen.
+- Im Kopf der Datei: `bild: { figur: <art>, zustand: <zustand> }` (Annahme). Das Ding liegt als
+  `spiele/objekte/<art>.js` und ist wiederverwendbar (Nudeln, Teller, Würfel, Treppe …); zuerst im Bestand nachsehen.
+  Gibt es für eine Anleitung mehrere Formen, zeigt das Bild die Grundform.
 
 ## Regeln für den Text
 
@@ -95,6 +107,7 @@ Spiels, die noch keine Anleitung haben.
 | E7 | eigene Worte, Quellen angegeben |
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
 | E9 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
+| E10 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
 
 Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 5. **Kosten** (Token für Recherche, Schreiben, Prüfung) in `spiele/mit-echten-dingen/kosten.json`, wie bei den
@@ -141,7 +154,7 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   Anleitung, die sie zeigen. `tests/echte-dinge.test.mjs` prüft, dass das Verzeichnis aktuell
   ist, und die Form jeder Datei (Kopf, Thema im Lernplan, Ihr braucht, Schritte, Darauf kommt es an, Leichter/Schwerer,
   Wortzahl, Wortliste 3.2, Anrede „ihr“). Die ersten drei Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`,
-  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E9 noch nicht durchlaufen und
+  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E10 noch nicht durchlaufen und
   bleiben Entwurf, bis der Skill sie grün prüft.
 - **Darstellung:** `spiele/rahmen/markdown.js` (klein, ohne DOM, alles escaped, Kopf wird abgetrennt),
   `spiele/rahmen/echte-dinge.js` (Laden, gemerkte Form `echte-dinge.form`), Karte `<ls-anregung>`, Kachel
@@ -158,5 +171,5 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   höchstens sechs, zwei Spalten; die Seite misst vor dem Drucken und lässt Kästen weg, bis alles auf eine A4-Seite
   passt. Ohne Anleitung kein Drucken. Drucken über `drucke()` in `spiele/kern/geraet.js` (Fähigkeit `drucken`: Browser
   und Desktop ja, Android/iOS nein).
-- **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Prüfung E1–E9 durch einen
+- **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Bild → Prüfung E1–E10 durch einen
   frischen Agenten → höchstens 3 Runden → Datei, Verzeichnis, Kosten in `spiele/mit-echten-dingen/kosten.json`).

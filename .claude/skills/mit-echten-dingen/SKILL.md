@@ -1,6 +1,6 @@
 ---
 name: mit-echten-dingen
-description: Schreibt für Themen des Lernplans ohne vorhandene Anleitung ein kurzes Spiel „Mit echten Dingen“ (spiele/mit-echten-dingen/<fach>/<thema>.md) – Recherche, Ideen, Schreiben, Prüfung E1–E9 durch einen frischen Agenten, höchstens drei Runden, dann Datei, Verzeichnis und Kosten. Aufruf „Mit echten Dingen <thema-id> [<thema-id> …]“; der Skill „Spiel entwickeln“ startet ihn parallel für die Themen seines Spiels.
+description: Schreibt für Themen des Lernplans ohne vorhandene Anleitung ein kurzes Spiel „Mit echten Dingen“ (spiele/mit-echten-dingen/<fach>/<thema>.md) – Recherche, Ideen, Schreiben, Bild, Prüfung E1–E10 durch einen frischen Agenten, höchstens drei Runden, dann Datei, Verzeichnis und Kosten. Aufruf „Mit echten Dingen <thema-id> [<thema-id> …]“; der Skill „Spiel entwickeln“ startet ihn parallel für die Themen seines Spiels.
 ---
 
 # Mit echten Dingen
@@ -18,7 +18,7 @@ Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Am Tisch / I
 - Mehrere Themen: je Thema ein eigener Durchlauf (gern parallel), jeder mit eigener Prüfung.
 - Aus „Spiel entwickeln“ heraus (`.claude/skills/spiel-entwickeln/SKILL.md`, Abschnitt „Mit echten Dingen“): eigener
   Worktree `echte-dinge-<id>`; die steuernde Sitzung startet Schreib-Agent und frische Prüfer selbst und bucht die
-  Kosten (`werkzeuge/kosten/transkript.mjs`, mit `--thema <thema-id>`). Der Schreib-Agent macht dann nur §1–§3 und
+  Kosten (`werkzeuge/kosten/transkript.mjs`, mit `--thema <thema-id>`). Der Schreib-Agent macht dann nur §1–§3a und
   §5.1, ohne Unteragenten und ohne Kosten zu buchen, und committet nie `kosten.json`.
 
 ## 1. Recherche (Web)
@@ -43,6 +43,7 @@ Datei. Varianten nur, wo eine Situation das Thema wirklich trifft (lieber eine g
 thema: <thema-id>
 fach: <fach>
 entwurf: true
+bild: { figur: <art>, zustand: <zustand> }
 quellen:
   - <Titel>, <Herausgeber>, <URL>, abgerufen <JJJJ-MM-TT>
 ---
@@ -73,10 +74,19 @@ Danach: `npm run echte-dinge` (Verzeichnis) und `node --test tests/echte-dinge.t
 (prüft Kopf, Thema im Lernplan, Ihr braucht / Schritte / Darauf kommt es an / Leichter / Schwerer, Wortzahl, Wortliste
 §3.2, Anrede). Grün ist Pflicht vor der Prüfung.
 
-## 4. Prüfung E1–E9 (frischer Agent)
+## 3a. Bild der Karte
+
+Nach `docs/mit-echten-dingen.md` „Bild der Karte“ und `docs/grundsaetze-bilder.md` §16: das Alltagsding der
+Grundform wählen (z. B. sieben Nudeln auf zwei Tellern, ein Würfel, eine Treppe). Zuerst in `spiele/objekte/`
+nachsehen; fehlt es, als `spiele/objekte/<art>.js` zeichnen (Schnittstelle und Stil: `docs/spielentwicklung.md`
+„Spielobjekte“, `docs/figuren.md` §4; von Hand, nie KI; `tests/objekte.test.mjs` grün). Ein Ding, groß, kein Text,
+keine Ziffern, keine Lernzeichen; an der Silhouette von den Bildern der anderen Anleitungen des Fachs zu unterscheiden.
+Im Kopf `bild: { figur: <art>, zustand: <zustand> }`. Die Hand als Zeichen „echt“ setzt die Karte selbst.
+
+## 4. Prüfung E1–E10 (frischer Agent)
 
 Ein **neuer Agent, der nicht geschrieben hat**, bekommt nur: die Datei, den Lernplan-Eintrag des Themas,
-`docs/mit-echten-dingen.md` und `docs/grundsaetze.md` (nicht die Ideen, nicht diesen Bericht). Auftrag: je Kriterium
+`docs/mit-echten-dingen.md`, `docs/grundsaetze.md` und das Objekt aus `bild` (nicht die Ideen, nicht diesen Bericht). Auftrag: je Kriterium
 **grün** oder **rot** mit Beleg (Zitat aus der Datei, Zeile), dazu kritische Befunde.
 
 | Nr. | Kriterium |
@@ -90,8 +100,9 @@ Ein **neuer Agent, der nicht geschrieben hat**, bekommt nur: die Datei, den Lern
 | E7 | eigene Worte, Quellen angegeben (der Prüfer öffnet mindestens eine Quelle und vergleicht) |
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
 | E9 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
+| E10 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
 
-Grün heißt: alle neun grün, kein kritischer Befund. Rot → überarbeiten und mit einem **wieder neuen** Prüfer prüfen,
+Grün heißt: alle zehn grün, kein kritischer Befund. Rot → überarbeiten und mit einem **wieder neuen** Prüfer prüfen,
 **höchstens 3 Runden**. Bleibt es rot: Datei nicht anlegen (bzw. mit `entwurf: true` und `geparkt: true` im Kopf
 liegen lassen) und die Befunde an Christian melden.
 
@@ -117,7 +128,7 @@ import("./werkzeuge/kosten/kosten.mjs").then(({ trageEin }) => trageEin("spiele/
    Bericht jedes Thema einmal zählen, auch über mehrere Einträge; aus einem Transkript bucht
    `node werkzeuge/kosten/transkript.mjs <transkript> --ordner spiele/mit-echten-dingen --phase … --thema <id>`.
 3. Bericht (an den Aufrufer): Thema, gewählte Idee mit Begründung, verworfene Ideen, Prüfergebnis je Runde
-   (E1–E9 mit Beleg), Kosten.
+   (E1–E10 mit Beleg), Kosten.
 
 ## Was die App damit macht
 

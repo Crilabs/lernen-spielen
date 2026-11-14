@@ -107,7 +107,7 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
 ## 1. Entwurf → Prüfung A
 
 1. Bau-Agent mit `bauen.md`, Abschnitt **Entwurf**. Ergebnis: `docs/spiele/<fach>/<spiel>.md` mit allen elf
-   Pflichtteilen aus `docs/spielentwicklung.md` §1, committet.
+   Pflichtteilen aus `docs/spielentwicklung.md` §1 (Teil 11 mit Figur des Spiels und `karte`-Eintrag), committet.
 2. Prüfer mit `pruefung-a.md` (frisch). Rot → Befunde an den Bau-Agenten (SendMessage, Abschnitt **Befunde
    umsetzen**), dann wieder ein **neuer** Prüfer mit den vorigen Befunden. Höchstens 3 Runden.
 
@@ -145,7 +145,8 @@ Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spie
     `git worktree add --detach <Scratchpad>/pruefkopie HEAD`, dort `NODE_PATH=… node tests/browser/pruefkopie.mjs`,
     danach `git worktree remove <Scratchpad>/pruefkopie`.
   - Drei frische Prüfer parallel: `pruefung-b-didaktik.md` (`{{STADIUM}}` Ausbau, `{{STUFEN}}`),
-    `pruefung-b-welt.md` (macht die Bilder der Objektzustände selbst mit `tests/browser/objektbilder.mjs`),
+    `pruefung-b-welt.md` (macht die Bilder der Objektzustände selbst mit `tests/browser/objektbilder.mjs`, dazu den
+    Silhouettentest der Karten des Fachs, W-Karte),
     `pruefung-b-bedienung.md`.
   - Rot → Befunde an den Bau-Agenten; nach 3 Runden rot: parken.
 
@@ -177,11 +178,12 @@ Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spie
 - **Worktree:** `git -C <Hauptrepo> worktree add <Hauptrepo>/.worktrees/echte-dinge-<id klein> -b
   echte-dinge-<id klein> <basis>`. Der Bau-Agent des Spiels fasst `spiele/mit-echten-dingen/` nie an.
 - **Ablauf je Thema** nach `.claude/skills/mit-echten-dingen/SKILL.md`, gesteuert von dir: ein Schreib-Agent (Auftrag:
-  „Lies `.claude/skills/mit-echten-dingen/SKILL.md`, führe §1–§3 für <Thema> aus, Arbeitsordner <Worktree>, keine
-  Unteragenten, keine Kosten buchen; committe nur deine Datei und die beiden Verzeichnisse
-  (`npm run echte-dinge` direkt vor dem Commit), nie die `kosten.json` der Anleitungen.“). Liegt die Datei schon
-  als Entwurf vor, entfällt dieser Schritt: gleich prüfen, der Schreib-Agent kommt erst mit Befunden dazu. Dann die
-  Prüfung E1–E9 mit **frischen** Prüfern nach `pruefung-e.md`, die du startest, höchstens 3 Runden; rote Befunde per
+  „Lies `.claude/skills/mit-echten-dingen/SKILL.md`, führe §1–§3a für <Thema> aus, Arbeitsordner <Worktree>, keine
+  Unteragenten, keine Kosten buchen; committe nur deine Datei, ein neues Objekt in `spiele/objekte/` (Bild der Karte)
+  und die beiden Verzeichnisse (`npm run echte-dinge` direkt vor dem Commit), nie die `kosten.json` der
+  Anleitungen.“). Liegt die Datei schon als Entwurf vor, entfällt dieser Schritt: gleich prüfen, der Schreib-Agent
+  kommt erst mit Befunden dazu; fehlt dem Entwurf `bild` im Kopf, macht er vorher nur §3a. Dann die
+  Prüfung E1–E10 mit **frischen** Prüfern nach `pruefung-e.md`, die du startest, höchstens 3 Runden; rote Befunde per
   SendMessage an denselben Schreib-Agenten (überarbeiten, Tests, committen). §5.1 nach grüner Prüfung lässt du den
   Schreib-Agenten machen (`entwurf: true` löschen, `npm run echte-dinge`, `npm test`, committen), bei Rot nach Runde
   3 `geparkt: true`. Mehrere Themen dürfen parallel laufen (je ein Schreib-Agent im selben Worktree).
