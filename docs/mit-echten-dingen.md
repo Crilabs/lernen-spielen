@@ -102,9 +102,17 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 
 ## Wo es zu sehen ist
 
-- **Übersicht „Mit echten Dingen“ für Erwachsene und Kinder, ohne Spielen (Christian):** eine eigene Seite
-  `spiele/mit-echten-dingen.html`, ohne PIN, von der Startseite (kleiner Zugang für Erwachsene, neben dem Zahnrad oder
-  unten) und aus dem Elternbereich erreichbar. Sie zeigt, **woran das Kind gerade ist** und was man dazu machen kann:
+- **Gleichwertig im Weg des Kindes (Christian):** Das analoge Spiel eines Themas steht als **Kachel gleicher Größe**
+  neben den digitalen Spielen – auf der Fach-Seite in der Fläche des Themas und auf der Startseite in der Reihe
+  „dran“ (höchstens drei Kacheln, N2). Eigenes Symbol (Hand), Name der Form. Themen ohne digitales Spiel werden so
+  sichtbar und spielbar. Analoges Spielen zählt **nicht** für den Lernstand (Annahme): „gekonnt“ misst nur die App,
+  niemand trägt Ergebnisse ein.
+- **Umsetzung der Kacheln erst nach dem Merge der UI-Überarbeitung `startseite-treffpunkt` (Christian)**; bis dahin
+  liefert der Prüfstand Daten (Lernsteuerung) und Baustein, aber keine Änderung an Startseite und Fach-Seite.
+
+- **Übersicht „Mit echten Dingen“ als Werkzeug für Erwachsene (Christian):** eine eigene Seite
+  `spiele/mit-echten-dingen.html`, ohne PIN, aus dem Elternbereich erreichbar (Zugang von der Startseite kommt mit den
+  Kacheln nach dem Merge der UI-Überarbeitung). Kinder dürfen mitlesen. Sie zeigt, **woran das Kind gerade ist** und was man dazu machen kann:
   - **Gerade dran:** die Themen im Zustand „dran“ (auch ohne Spiel), je mit Name und den Formen (Am Tisch / In
     Bewegung / Unterwegs).
   - **Bald:** die Themen „in Sicht“.
