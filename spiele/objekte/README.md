@@ -22,6 +22,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
   keine Person zu sehen, ohne Ziffer und Schrift).
 - `loeffel-klammern.js` – ein Löffel, darunter zwei Wäscheklammern aus Holz, eine je Silbe von „Löf-fel“ (ohne Schrift und
   Ziffer).
+- `faltzettel.js` – aufgeklapptes, dreimal gefaltetes Blatt (2 mal 4 Felder), ein Feld schon als Merkzettel abgerissen und daneben (ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
