@@ -1,7 +1,6 @@
 ---
 thema: achterreihe
 fach: mathe
-entwurf: true
 bild: { figur: faltzettel, zustand: abgerissen }
 quellen:
   - 1·1 richtig üben, Basisinfos (Verdoppelungsaufgaben von 2 · 8 zu 4 · 8; 4 · 8 = 16 + 16; 9 · 8 = 80 − 8; Reihen erschließen statt früh aufsagen), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
