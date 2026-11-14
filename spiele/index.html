@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lernen Spielen</title>
 <link rel="stylesheet" href="rahmen/seite.css">
+<link rel="stylesheet" href="start/karten.css">
 <style>
 /* Startseite „Karten“ (Spec docs/superpowers/specs/2026-11-14-startseite-karten-design.md).
    Links und in der Mitte die Karten, je Fach ein Abschnitt mit höchstens 5 Spielen und den Karten „Mit echten
-   Dingen“; rechts das Regal „Was ich kann“ als aufklappbare Liste (Fach → Thema → Detail), darüber ein Kind der Runde.
+   Dingen“; rechts „Zuletzt gelernt“ (führt ins Regal an das Thema) und der Knopf „Mein Regal“.
    Dahinter eine dezente Landschaft in Grundtönen. Keine Zahl, keine Zählung, kein Klassenbezug (N5, N8).
    Diese Seite liest den Lernstand nur, sie schreibt ihn nie.
    Zahnrad für Erwachsene rechts in der Kopfleiste: gedrückt halten, dabei läuft leise ein Ring herum. */
@@ -30,7 +31,7 @@ body { -webkit-user-select: none; user-select: none; }
 .raster .leer { margin: 8rem 0 0; font-size: 4rem; color: var(--ls-tinte-weich); }
 .fach-abschnitt + .fach-abschnitt { margin-top: 4.4rem; }
 .fach-kopf { display: inline-flex; align-items: center; gap: 1.6rem; margin-bottom: 2rem; color: var(--ls-tinte); text-decoration: none; }
-.fach-kopf .knopf, .karte .knopf {
+.fach-kopf .knopf {
   flex: none; display: grid; place-items: center; width: 7rem; height: 7rem;
   border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 50%; background: var(--fach-fuellung);
 }
@@ -40,48 +41,16 @@ body { -webkit-user-select: none; user-select: none; }
 .fach-kopf b { font-size: 4.4rem; line-height: 1.1; }
 .fach-kopf:active .knopf { transform: translateY(0.3rem); box-shadow: 0 0.2rem 0 var(--fach-tief); }
 
-.karten { display: flex; flex-wrap: wrap; gap: 2.8rem; }
-.karte {
-  display: flex; flex-direction: column; width: 26rem; padding: 0; overflow: hidden;
-  color: var(--ls-tinte); text-align: left; text-decoration: none; font: inherit;
-  background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
-  box-shadow: var(--ls-schatten); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
-}
-.karte > * { pointer-events: none; }
-.karte:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
-.karte:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
-.karte .bild { display: block; height: 13.9rem; border-bottom: var(--ls-kontur) solid var(--ls-tinte); background: var(--fach-toenung); }
-.karte .bild svg { display: block; width: 100%; height: 100%; }
-.karte .bild.ohne { display: grid; place-items: center; }
-.karte .bild img { width: 7rem; height: 7rem; }
-.karte { position: relative; }
-.karte .unten { display: flex; padding: 4.4rem 1.8rem 2rem; min-height: 12rem; }
-/* Fachsymbol als Plakette auf dem Rand zwischen Bild und Text */
-.karte .knopf { position: absolute; left: 1.6rem; top: 10.4rem; }
-.karte .knopf img { width: 4.4rem; height: 4.4rem; }
-.karte.echt .unten { padding-top: 2rem; }
-.karte .text { display: flex; flex-direction: column; min-width: 0; }
-.karte b { font-size: 3.2rem; line-height: 1.1; hyphens: manual; }
-.karte .thema { font-size: 2.4rem; line-height: 1.2; color: var(--ls-tinte-weich); }
-/* Mit echten Dingen: Papier mit Naht wie die Matte, Hand-Zeichen auf Ahorn statt Welt. */
-.karte.echt { position: relative; }
-.karte.echt::after { content: ""; position: absolute; inset: 1rem; border: 0.25rem dashed var(--ls-naht);
-  border-radius: calc(var(--ls-radius) - 1rem); pointer-events: none; }
-.karte.echt .bild { display: grid; place-items: center; background: var(--ls-ahorn); }
-.karte.echt .bild img { width: 8rem; height: 8rem; }
-
 /* --- Seitenleiste rechts: Kind und Regal -------------------------------------------------------- */
 .seite { display: flex; flex-direction: column; min-height: 0; padding-bottom: 3rem; }
-.kind { flex: none; align-self: center; width: 44rem; height: 40rem; margin-bottom: -1.4rem; position: relative; z-index: 1; }
-.kind svg { width: 100%; height: 100%; overflow: visible; }
 .zuletzt {
-  flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 2.4rem;
+  flex: 1; min-height: 0; margin-top: 1rem; display: flex; flex-direction: column; padding: 2.4rem;
   background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
 }
 .zuletzt h2 { margin: 0 0 1rem; font-size: 3.4rem; }
 .zuletzt .leer { margin: 0; font-size: 2.8rem; color: var(--ls-tinte-weich); }
 .zuletzt ul { flex: 1; min-height: 0; overflow: hidden; list-style: none; margin: 0; padding: 0; }
-.zuletzt .ding { display: flex; align-items: center; gap: 1.4rem; width: 100%; min-height: 6.4rem; padding: 0.4rem 0;
+.zuletzt .ding { text-decoration: none; display: flex; align-items: center; gap: 1.4rem; width: 100%; min-height: 6.4rem; padding: 0.4rem 0;
   background: none; border: 0; color: var(--ls-tinte); font: inherit; text-align: left; cursor: pointer; }
 .zuletzt .ding > * { pointer-events: none; }
 .zuletzt .ding:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.3rem; border-radius: 1rem; }
@@ -112,8 +81,6 @@ body { -webkit-user-select: none; user-select: none; }
 
 @media (max-aspect-ratio: 4/3) {
   .start { grid-template-columns: 1fr 36rem; padding-left: 3rem; gap: 2.4rem; }
-  .karten { gap: 2.2rem; }
-  .karte { width: 24rem; }
 }
 </style>
 </head>
@@ -125,7 +92,6 @@ body { -webkit-user-select: none; user-select: none; }
 <main class="start">
   <div class="raster" id="raster" aria-label="Spiele"></div>
   <aside class="seite" id="seite">
-    <div class="kind" id="kind"></div>
     <div id="regal"></div>
   </aside>
 </main>
@@ -146,7 +112,6 @@ import { paletteFuer, vignetteSvg } from "./start/welten.js";
 import { spielKarteHtml, echtKarteHtml, abschnittHtml } from "./start/karten.js";
 import { zuletztHtml } from "./start/regal-leiste.js";
 import { hintergrundSvg } from "./start/hintergrund.js";
-import { setzeKind } from "./start/runde-auf-start.js";
 
 /** So lange hält ein Erwachsener das Zahnrad (wie bisher). */
 const HALTEN_MS = 3000;
@@ -156,7 +121,6 @@ const leiste = document.getElementById("leiste");
 const anregung = document.getElementById("anregung");
 document.getElementById("hintergrund").innerHTML = hintergrundSvg();
 zahnrad();
-setzeKind(document.getElementById("kind"), { ton: () => leiste.ton });
 start();
 
 async function start() {
@@ -186,9 +150,10 @@ async function start() {
 
   // Rechts: zuletzt gelernt (bleibt kurz), darunter der Knopf zum Regal
   document.getElementById("regal").outerHTML = zuletztHtml(ctx ? gekonnteThemen(ctx, stand) : []);
-  document.querySelectorAll(".zuletzt .ding").forEach((b) => b.addEventListener("click", () => {
-    const t = themaNach.get(b.dataset.thema);
-    if (t?.sprich && leiste.ton) sprich(t.sprich);
+  document.querySelectorAll(".zuletzt .ding").forEach((a) => a.addEventListener("click", (e) => {
+    const t = themaNach.get(a.dataset.thema);
+    if (t?.sprich && leiste.ton) sageEinmal(t.sprich, sprich);
+    linkKlick(e);
   }));
   document.querySelector(".regal-knopf").addEventListener("click", (e) => {
     if (leiste.ton) sageEinmal("Mein Regal", () => sprich("Mein Regal"));

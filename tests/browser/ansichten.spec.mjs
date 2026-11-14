@@ -159,55 +159,38 @@ async function lauf(typ, name, groesse, basis) {
       // --- Startseite ----------------------------------------------------------------------------
       const start = await oeffne(kontext, `${basis}/spiele/index.html`);
       const st = await start.evaluate(() => {
-        const box = (el) => { const r = el.getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom }; };
         const imBild = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.left >= 0 && r.top >= 0 && r.right <= innerWidth + 0.5 && r.bottom <= innerHeight + 0.5; };
-        const tore = [...document.querySelectorAll("#dran a.tor")];
-        const bretter = [...document.querySelectorAll("#faecher a.fach")];
         const leiste = document.getElementById("leiste");
-        const kinder = [...document.querySelectorAll("#runde .kind svg")];
-        // Körper der Figur: gemalte Fläche ohne den leeren Rand der viewBox
-        const koerper = kinder.map((svg) => { const g = svg.querySelector("[data-schicht='kontur']") ?? svg; return box(g); });
-        const ueber = (a, b) => a.l < b.r && b.l < a.r && a.t < b.b && b.t < a.b;
-        // Ohne tabindex folgt die Tab-Reihenfolge der Reihenfolge im DOM.
-        const fokus = document.querySelector(".bedienung [tabindex]") ? ["tabindex"] : [...document.querySelectorAll(".bedienung a")].map((a) => a.classList[0]);
+        const raster = document.getElementById("raster").getBoundingClientRect();
+        const seite = document.getElementById("seite").getBoundingClientRect();
+        const karten = [...document.querySelectorAll("#raster .karte.spiel")];
         return {
-          tore: tore.length,
-          toreLinks: tore.map((a) => a.getAttribute("href")),
-          toreWelt: tore.map((a) => a.dataset.welt ?? null),
-          toreImBild: tore.every(imBild),
-          namePasst: tore.every((a) => a.querySelector("b").scrollWidth <= a.querySelector(".text").clientWidth + 1),
-          faecher: bretter.map((a) => a.getAttribute("href")),
-          bretterImBild: bretter.every(imBild),
-          schriftFrei: [...tore.map((a) => a.querySelector(".text")), ...bretter].every((t) => koerper.every((k) => !ueber(box(t), k))),
-          regal: imBild(document.getElementById("regal")),
-          kinder: kinder.length,
-          kinderImBild: koerper.every((k) => k.l >= 0 && k.r <= innerWidth + 0.5 && k.b <= innerHeight + 0.5),
-          tiere: [...document.querySelectorAll("#tiere > .tier")].filter(imBild).length,
-          fokus,
-          dinge: document.getElementById("dinge").children.length,
+          abschnitte: [...document.querySelectorAll(".fach-abschnitt")].map((a) => a.getAttribute("aria-label")),
+          karten: karten.length,
+          links: karten.map((a) => a.getAttribute("href")),
+          jeFach: Math.max(0, ...[...document.querySelectorAll(".fach-abschnitt")].map((a) => a.querySelectorAll(".karte.spiel").length)),
+          echt: document.querySelectorAll("#raster .karte.echt").length,
+          namePasst: karten.every((a) => a.querySelector("b").scrollWidth <= a.querySelector(".text").clientWidth + 1),
+          zuletzt: document.querySelectorAll(".zuletzt .ding").length,
+          regalKnopf: document.querySelector(".regal-knopf")?.getAttribute("href") ?? null,
+          regalImBild: imBild(document.querySelector(".regal-knopf")),
+          rechts: seite.left >= raster.right - 1,
           hausWeg: leiste.shadowRoot.querySelector("a.haus").hidden,
           zahnrad: imBild(document.getElementById("zahnrad")),
           text: document.body.innerText,
         };
       });
-      pruefe(F, "Startseite: Baumhaus (Regal) ganz im Bild, Haus fehlt, Zahnrad da", st.regal && st.hausWeg && st.zahnrad, JSON.stringify(st));
-      pruefe(F, "Startseite: die Runde steht ganz im Bild (vier Kinder)", st.kinder === 4 && st.kinderImBild, JSON.stringify(st));
-      pruefe(F, "Startseite: Feldhase, Hausmaus und Rotkehlchen ganz im Bild", st.tiere === 3, JSON.stringify(st.tiere));
+      pruefe(F, "Startseite: Regal-Knopf ganz im Bild (→ regal.html), Seitenleiste rechts, Haus fehlt, Zahnrad da",
+        st.regalKnopf === "regal.html" && st.regalImBild && st.rechts && st.hausWeg && st.zahnrad, JSON.stringify(st));
       pruefe(F, "Startseite: keine Zahl als Fortschritt („x von y“, Prozent)", !/\d+\s*(von|\/)\s*\d+|%/.test(st.text), st.text);
       if (fall === "leer") {
-        pruefe(F, "Startseite leer: kein Tor, kein Fach-Knopf, leeres Regal", st.tore === 0 && st.faecher.length === 0 && st.dinge === 0, JSON.stringify(st));
+        pruefe(F, "Startseite leer: keine Karte, Satz statt Raster, Zuletzt gelernt leer", st.karten === 0 && st.echt === 0 && st.zuletzt === 0 && /Hier kommen bald Spiele/.test(st.text), JSON.stringify(st));
       } else if (fall === "gekonnt") {
-        pruefe(F, "Startseite ohne Spiele: kein Tor, kein Fach-Knopf, Regal zeigt drei Dinge", st.tore === 0 && st.faecher.length === 0 && st.dinge === 3, JSON.stringify(st));
+        pruefe(F, "Startseite ohne Spiele: keine Karte, Zuletzt gelernt zeigt fünf Dinge", st.karten === 0 && st.zuletzt === 5, JSON.stringify(st));
       } else {
-        pruefe(F, "Startseite mit Spielen: höchstens drei Tore mit ?thema=, ganz im Bild", st.tore >= 1 && st.tore <= 3 && st.toreImBild && st.toreLinks.every((h) => /\.html\?thema=/.test(h)), JSON.stringify(st.toreLinks));
-        pruefe(F, "Startseite mit Spielen: Fach-Knöpfe nur für Fächer mit Spielen (Mathe, Lesen), ganz im Bild",
-          JSON.stringify(st.faecher) === JSON.stringify(["themen.html?fach=mathe", "themen.html?fach=lesen"]) && st.bretterImBild, JSON.stringify(st.faecher));
-        pruefe(F, "Tore: Weltandeutung nur bei bekannter Welt (muell-trennen ja, gibt-es-nicht nein)",
-          st.toreWelt.includes("muell-trennen") && !st.toreWelt.includes("gibt-es-nicht"), JSON.stringify(st.toreWelt));
-        pruefe(F, "Tore: langer Spielname passt ins Schild", st.namePasst, JSON.stringify(st));
-        pruefe(F, "Namensbretter und Fach-Knöpfe überdecken keine Figur", st.schriftFrei, JSON.stringify(st));
-        const erst = st.fokus.lastIndexOf("tor"), fach = st.fokus.indexOf("fach"), bh = st.fokus.indexOf("baumhaus");
-        pruefe(F, "Tab-Reihenfolge: Tore, dann Fach-Knöpfe, dann Baumhaus", erst < fach && fach < bh, JSON.stringify(st.fokus));
+        pruefe(F, "Startseite mit Spielen: Abschnitt Mathe, Karten mit ?thema=, höchstens 5 je Fach",
+          st.abschnitte[0] === "Mathe" && st.karten >= 1 && st.jeFach <= 5 && st.links.every((h) => /\.html\?thema=/.test(h)), JSON.stringify(st));
+        pruefe(F, "Startseite: Spielname passt auf die Karte", st.namePasst, JSON.stringify(st));
       }
       await bild(start, s("start", fall));
       await start.close();
@@ -263,15 +246,27 @@ async function lauf(typ, name, groesse, basis) {
       // --- Regal ---------------------------------------------------------------------------------
       const regal = await oeffne(kontext, `${basis}/spiele/regal.html`);
       const rg = await regal.evaluate(() => ({
-        leer: document.querySelector(".brett.leer p")?.textContent ?? "",
-        dinge: document.querySelectorAll("#regal .ding").length,
-        bretter: [...document.querySelectorAll("#regal .brett:not(.leer)")].map((b) => b.getAttribute("aria-label")),
+        leer: document.querySelector(".leer p")?.textContent ?? "",
+        reiter: [...document.querySelectorAll(".reiter-knopf")].map((k) => k.textContent.trim()),
+        aktiv: document.querySelector('.reiter-knopf[aria-selected="true"]')?.textContent.trim() ?? "",
+        dinge: document.querySelectorAll("#bretter .ding").length,
+        bretter: [...document.querySelectorAll("#bretter .brett")].map((b) => b.getAttribute("aria-label")),
+        detail: !document.getElementById("detail").hidden && document.getElementById("name").textContent,
         text: document.body.innerText,
       }));
       if (fall === "leer") pruefe(F, "Regal leer: der Satz des Erzählers, kein Ding", rg.leer === "Hier stellst du hin, was du kannst." && rg.dinge === 0, JSON.stringify(rg));
-      else pruefe(F, "Regal: alle fünf gekonnten Dinge (auch ohne Spiele), Bretter Mathe und Grammatik",
-        rg.dinge === 5 && JSON.stringify(rg.bretter) === JSON.stringify(["Mathe", "Grammatik"]), JSON.stringify(rg));
-      pruefe(F, "Regal: keine Zahl als Fortschritt", !/\d+\s*(von|\/)\s*\d+|%/.test(rg.text), rg.text);
+      else {
+        pruefe(F, "Regal: Reiter Mathe und Grammatik, Mathe gewählt (zuletzt gekonnt), Bretter je Bereich",
+          JSON.stringify(rg.reiter) === JSON.stringify(["Mathe", "Grammatik"]) && rg.aktiv === "Mathe" && rg.bretter.length >= 1 && !rg.bretter.includes("Mathe"), JSON.stringify(rg));
+        pruefe(F, "Regal: Detail rechts zeigt das Neueste des Fachs", typeof rg.detail === "string" && rg.detail.length > 0, JSON.stringify(rg));
+        const gr = await regal.evaluate(async () => {
+          [...document.querySelectorAll(".reiter-knopf")].find((k) => k.dataset.fach === "grammatik").click();
+          await new Promise((r) => setTimeout(r, 100));
+          return document.querySelectorAll("#bretter .ding").length;
+        });
+        const alle = rg.dinge + gr;
+        pruefe(F, "Regal: alle fünf gekonnten Dinge über die Reiter (auch ohne Spiele)", alle === 5, JSON.stringify({ mathe: rg.dinge, grammatik: gr }));
+      }
       await bild(regal, s("regal", fall));
       await regal.close();
 

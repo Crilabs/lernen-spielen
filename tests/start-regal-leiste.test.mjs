@@ -22,22 +22,30 @@ const GEKONNT = [
 ];
 const spieleFuer = (_ctx, id) => (id === "nomen" ? ["b"] : ["a"]);
 
-test("regalBaum: Fach → Bereich (Reihenfolge des Lernplans) → Themen (Reihenfolge des Gekonnt-Werdens)", () => {
+test("regalBaum: Fach → Bereich → Thema, das Neueste oben (Bereich mit dem jüngsten Thema zuerst, darin neueste zuerst)", () => {
   const baum = regalBaum(GEKONNT, CTX, spieleFuer);
   assert.deepEqual(baum.map((f) => f.fach), ["mathe", "grammatik"]);
+  // gekonnt in der Reihenfolge plus3, z3, nomen, z2 → Zahlzerlegung (z2 jüngstes) vor Plus und Minus bis 10
   assert.deepEqual(baum[0].bereiche.map((b) => b.name), ["Zahlzerlegung", "Plus und Minus bis 10"]);
-  assert.deepEqual(baum[0].bereiche[0].themen.map((t) => t.id), ["z3", "z2"]);
-  assert.deepEqual(baum[0].bereiche[0].themen[1].spiele, [{ id: "a", titel: "Zwei Tonnen", datei: "a.html" }]);
-  assert.equal(baum[0].bereiche[0].themen[1].eltern, true);
+  assert.deepEqual(baum[0].bereiche[0].themen.map((t) => t.id), ["z2", "z3"]);
+  assert.deepEqual(baum[0].bereiche[0].themen[0].spiele, [{ id: "a", titel: "Zwei Tonnen", datei: "a.html" }]);
+  assert.equal(baum[0].bereiche[0].themen[0].eltern, true);
 });
 
-test("zuletztHtml: die letzten vier, neueste zuerst, Name und Material, Knopf Mein Regal; ohne Datum", () => {
+test("regalBaum: ein Bereich mit frisch Gekonntem rückt nach oben", () => {
+  const baum = regalBaum([...GEKONNT, g("plus4", "mathe", "Plus bis 4", { art: null, zahl: null })],
+    { ...CTX, plan: { themen: [...CTX.plan.themen, { id: "plus4", bereich: "Plus und Minus bis 10" }] } }, spieleFuer);
+  assert.deepEqual(baum[0].bereiche.map((b) => b.name), ["Plus und Minus bis 10", "Zahlzerlegung"]);
+  assert.deepEqual(baum[0].bereiche[0].themen.map((t) => t.id), ["plus4", "plus3"]);
+});
+
+test("zuletztHtml: die letzten fünf, neueste zuerst, Name und Material, jedes führt ins Regal an sein Thema; Knopf Mein Regal; ohne Datum", () => {
   const viele = [...Array(7)].map((_, i) => g(`z${i + 2}`, "mathe", `Die ${i + 2} zerlegen`));
   const h = zuletztHtml(viele);
   assert.match(h, /^<section class="zuletzt" aria-label="Zuletzt gelernt"><h2>Zuletzt gelernt<\/h2>/);
   const namen = [...h.matchAll(/<span class="name">([^<]+)<\/span>/g)].map((m) => m[1]);
-  assert.deepEqual(namen, ["Die 8 zerlegen", "Die 7 zerlegen", "Die 6 zerlegen", "Die 5 zerlegen"]);
-  assert.match(h, /<button class="ding" type="button" data-thema="z8"><span class="material"><ls-perlenstab wert="8"/);
+  assert.deepEqual(namen, ["Die 8 zerlegen", "Die 7 zerlegen", "Die 6 zerlegen", "Die 5 zerlegen", "Die 4 zerlegen"]);
+  assert.match(h, /<a class="ding" href="regal\.html\?thema=z8" data-thema="z8"><span class="material"><ls-perlenstab wert="8"/);
   assert.match(h, /<a class="regal-knopf" href="regal\.html"><img src="symbole\/regal\.svg" alt=""><b>Mein Regal<\/b><\/a><\/section>$/);
   assert.doesNotMatch(h, /2026-/);
 });

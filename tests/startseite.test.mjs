@@ -6,7 +6,6 @@ import { readFileSync } from "node:fs";
 
 const html = readFileSync(new URL("../spiele/index.html", import.meta.url), "utf8");
 const skript = html.slice(html.indexOf('<script type="module">'));
-const kindQuelle = readFileSync(new URL("../spiele/start/runde-auf-start.js", import.meta.url), "utf8");
 const { literaleAusCode, knopfNamen, sammle } = await import("../werkzeuge/audio/texte.mjs");
 
 test("Startseite: Kopfleiste „Lernen Spielen“ ohne Fach, ohne Haus, durchsichtig, Zahnrad im Slot rechts", () => {
@@ -37,10 +36,9 @@ test("Startseite: rechts „Zuletzt gelernt“ aus gekonnteThemen mit Knopf zum 
   assert.ok(html.indexOf('id="raster"') < html.indexOf('id="seite"'), "Regal rechts vom Raster");
 });
 
-test("Startseite: dezenter Hintergrund, ein Kind der Runde mit sammelbaren Namen", () => {
+test("Startseite: dezenter Hintergrund; kein Kind (Christian: zu wenig Platz neben Zuletzt gelernt)", () => {
   assert.match(skript, /hintergrundSvg\(\)/);
-  assert.match(skript, /setzeKind\(/);
-  for (const name of ["Ela", "Kofi", "Lena", "Timo"]) assert.ok(literaleAusCode(kindQuelle).texte.includes(name), name);
+  assert.doesNotMatch(skript, /setzeKind\(/);
 });
 
 test("Startseite: Mit echten Dingen öffnet die Karte (ls-anregung)", () => {
