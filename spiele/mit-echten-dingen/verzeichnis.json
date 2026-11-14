@@ -1,5 +1,17 @@
 {
  "themen": {
+  "zehnerreihe": {
+   "fach": "mathe",
+   "name": "Zehnerreihe",
+   "titel": "Zehner zählen, Geld zählen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Das Geld für den Einkauf"
+    }
+   ],
+   "entwurf": false
+  },
   "zerlegen-2": {
    "fach": "mathe",
    "name": "Die 2 zerlegen",

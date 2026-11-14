@@ -1,7 +1,6 @@
 ---
 thema: zehnerreihe
 fach: mathe
-entwurf: true
 bild: { figur: muenze, zustand: stapel }
 quellen:
   - Zehnereinmaleins (Materialpaket, Basiskompetenzen sichern), PIKAS mi, DZLM, https://pikas-mi.dzlm.de/pikasmifiles/uploads/Inhalte/BasiskompetenzenSichern/Zehnereinmaleins/materialpaket_final.pdf, abgerufen 2026-11-14
@@ -14,7 +13,7 @@ quellen:
 
 Ihr braucht: Zehn-Cent-Münzen aus Geldbeutel oder Münzglas. Ersatz: Wäscheklammern. Münzen nicht in Kleinkinderhände.
 
-1. Ihr kauft bald ein, etwa ein Brötchen für 70 Cent. Legt das Geld bereit, nur aus Zehn-Cent-Münzen. Sagt bei jeder Münze: „10, 20, 30 …“
+1. Ihr kauft bald ein, etwa ein Brötchen für 70 Cent. Legt das Geld bereit, aus lauter Zehn-Cent-Münzen. Sagt bei jeder Münze: „10, 20, 30 …“
 2. Sagt zusammen: „7 mal 10 ist gleich 70.“
 3. Legt 9 Münzen und sagt: „9 mal 10 ist gleich 90.“ Dann 4 Münzen: „4 mal 10 ist gleich 40.“
 4. Steckt das Geld für den Einkauf ein.
