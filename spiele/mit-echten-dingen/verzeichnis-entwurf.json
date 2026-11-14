@@ -16,6 +16,18 @@
    ],
    "entwurf": true
   },
+  "fuenferreihe": {
+   "fach": "mathe",
+   "name": "Fünferreihe",
+   "titel": "Fünfer zählen, Hände zählen",
+   "formen": [
+    {
+     "situation": "unterwegs",
+     "name": "Autos zählen"
+    }
+   ],
+   "entwurf": true
+  },
   "vorwaerts-zaehlen": {
    "fach": "mathe",
    "name": "Vorwärts zählen",

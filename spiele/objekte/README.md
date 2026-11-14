@@ -13,6 +13,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `schuhpaar.js` – ein Paar Turnschuhe (blau und koralle).
 - `papier.js` – zerknülltes Heftpapier. `dose.js` – leere Konservendose (keine Getränkedose: die hat Pfand).
 - `muenze.js` – kleiner Stapel goldfarbener Münzen mit einer Münze daneben (ohne Ziffer und Wappen).
+- `stifte.js` – fünf Buntstifte, mit einem Gummiband zu einem Bündel gefasst (ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
