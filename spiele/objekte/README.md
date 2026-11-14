@@ -43,6 +43,7 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `ringelsocken.js` – ein Paar lange Ringelsocken von der Seite (grün mit hellen Ringeln, Ferse und Spitze koralle; ohne Schrift und Ziffer).
 - `kramkiste.js` – offene Holzkiste mit drei Buntstiften und einem Pinsel, vorn ein leerer Zettel als Beschriftung (ohne Schrift und Ziffer).
 - `waeschestapel.js` – Stapel gefalteter Wäsche: unten ein Handtuch, darauf eine Hose, oben ein Pulli (ohne Schrift und Ziffer).
+- `einkaufstasche.js` – volle Stofftasche nach dem Einkauf mit hohem Henkelbogen, oben Milchtüte und Lauch (ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
