@@ -25,6 +25,10 @@
 //     WebKit bei 1920 × 1080 und 1280 × 800 ansehen (Muster: tests/browser/vorlage.spec.mjs).
 //  6. Lernplan: Das Spiel bekommt Themen über `arten`. Hat ein Thema eine Einführung (`einfuehrung` in
 //     lernplan.json), spielt der RAHMEN sie beim ersten Mal ab. Neue Aufgabenart: aufgabenarten.js erweitern.
+//  7. Pflicht: Test-Schnittstelle für den Prüfstand. stelleAufgabe gibt neben hilfe(stufe) auch zuege() und
+//     richtigerZug() zurück (Form in rahmen/pruefen.js); der RAHMEN meldet sie an. Dann muss das Durchspielen
+//     grün sein: node tests/browser/durchspielen.mjs spiele/<id>.html (docs/spielentwicklung.md 4).
+//     Die Schnittstelle gibt es nur im Testbetrieb (?pruefen); für das Kind ändert sie nichts.
 //
 // Vorschau-Parameter (schreiben nie in den Lernstand, runde(…, { nurAnsehen })):
 //   ?pause            Pause sofort zeigen (Sichtprüfung), Weiter startet die Runde
@@ -32,6 +36,7 @@
 //   ?eltern           Elternansicht des Spiels
 //   ?einfuehrung      Einführung des Themas auch in der Vorschau abspielen
 //   ?thema=<id>       Wunsch-Thema aus der Themen-Übersicht (gilt nur für die erste Runde, schreibt normal)
+//   ?pruefen          Testbetrieb: window.lsPruefen für den Prüfstand (ändert sonst nichts, schreibt normal)
 
 import "./rahmen/leiste.js";
 import "./rahmen/blase.js";
@@ -40,6 +45,7 @@ import "./rahmen/pause.js";
 import "./rahmen/knopf.js";
 import "./rahmen/perlenstab.js";
 import { ziehbar, setze, zurueck } from "./rahmen/ziehen.js";
+import { meldePruefSchnittstelle, selektor } from "./rahmen/pruefen.js";
 import { laenge, LUECKE } from "./rahmen/perlen-geometrie.js";
 import { sperreTouch, protokoll, esc } from "./lernspiel.js";
 import { sprich } from "./kern/stimme.js";
@@ -132,7 +138,9 @@ function fuelleSachmoment(karte, ton) {
 // stelleAufgabe(aufgabe, melde) zeigt eine Aufgabe und meldet dem RAHMEN nur zwei Dinge:
 //   melde.passtNicht()   ein Versuch, der nicht passt (die Mechanik hat es schon gezeigt, der Erzähler beschrieben)
 //   melde.geloest(key)   gelöst; key = Schlüssel der Aufgabe, die das Kind tatsächlich gelegt hat
-// Zurück kommt { hilfe(stufe) }: der RAHMEN ruft sie beim Tippen auf Hilfe mit Stufe 1 (Probe), dann 2 (Lösung).
+// Zurück kommt { hilfe(stufe), zuege(), richtigerZug() }: der RAHMEN ruft hilfe beim Tippen auf Hilfe mit Stufe 1
+// (Probe), dann 2 (Lösung). zuege und richtigerZug fragt nur der Prüfstand (rahmen/pruefen.js): alle jetzt
+// möglichen Züge und einer, der passt; Selektoren mit selektor(element).
 // aufgabe = Angebot der Lernsteuerung { ziel: { key }, auch: [{ key }], stufe }. stelleAufgabe liest
 // aufgabe.stufe bei jeder Aufgabe neu: die Stufe wechselt innerhalb einer Runde (Aufstieg, Abstieg), und
 // Aufgaben der Probe kommen mit "kopf". Die Vorlage kann nur „material“ (ARTEN); ein echtes Spiel verdeckt auf
@@ -265,6 +273,16 @@ function stelleAufgabe(aufgabe, melde) {
   }
 
   return {
+    // Prüfstand: jeder Stab, der noch auf dem Tablett liegt, kann in die Rinne (die Mechanik urteilt).
+    zuege() {
+      if (rest() === 0) return [];
+      return [...loeser.keys()].map((s) => ({ art: "ziehen", von: selektor(s), nach: selektor(rinne) }));
+    },
+    richtigerZug() {
+      if (rest() === 0) return null;
+      const s = stabMit(gelegt.length ? rest() : ziel.a);
+      return s ? { art: "ziehen", von: selektor(s), nach: selektor(rinne) } : null;
+    },
     /** @param {1 | 2} stufe */
     hilfe(stufe) {
       if (rest() === 0) return;
@@ -304,6 +322,21 @@ async function ladeCtx() {
 /** Steht das Spiel in spiele.json? Sonst (die Vorlage, ein Spiel vor dem Eintrag) läuft es als Vorschau. */
 const eingetragen = (/** @type {{ spiele: any }} */ c) => c.spiele.spiele.some((/** @type {any} */ s) => s.id === SPIEL_ID);
 
+// --- Prüfstand (rahmen/pruefen.js, nur im Testbetrieb ?pruefen) ------------------------------------
+// Der RAHMEN merkt sich, was gerade dran ist; das ändert für das Kind nichts. Die Züge einer Aufgabe kommen aus
+// der AUFGABE (zuege, richtigerZug), in der Pause ist Weiter der einzige Zug des Spiels.
+const stand = { phase: "laden", aufgabe: /** @type {string | null} */ (null), nr: 0, versuche: 0, hilfeStufe: 0, vorschau: true };
+/** @type {{ zuege: () => any[], richtigerZug: () => any } | null} */
+let offeneAufgabe = null;
+const ORTE = { hilfe: "#hilfe >>> ls-knopf", haus: "#leiste >>> a.haus", weiter: "#pause >>> ls-knopf.weiter" };
+const WEITER = { art: "tippen", von: ORTE.weiter };
+meldePruefSchnittstelle({
+  zustand: () => ({ ...stand }),
+  zuege: () => (stand.phase === "aufgabe" ? offeneAufgabe?.zuege() ?? [] : stand.phase === "pause" ? [WEITER] : []),
+  richtigerZug: () => (stand.phase === "aufgabe" ? offeneAufgabe?.richtigerZug() ?? null : stand.phase === "pause" ? WEITER : null),
+  orte: ORTE,
+});
+
 // --- Hilfe-Leiter (grundsaetze.md L12, bedienung.md 6) ---------------------------------------------
 // Versuch 1, der nicht passt: nur die Mechanik. Versuch 2: Hilfe leuchtet einmal auf. Tippen auf Hilfe:
 // Stufe 1 Probe, Stufe 2 Lösung. Gemeldet wird hilfe = höchste gezeigte Stufe (0, 1, 2); mit Hilfe Gelöstes
@@ -323,16 +356,20 @@ function spieleAufgabe(aufgabe) {
     const start = Date.now();
     let versuche = 0;
     let stufe = 0;
-    /** @type {{ hilfe: (stufe: 1 | 2) => void }} */
+    Object.assign(stand, { phase: "aufgabe", aufgabe: aufgabe?.ziel?.key ?? null, nr: stand.nr + 1, versuche, hilfeStufe: stufe });
+    /** @type {ReturnType<typeof stelleAufgabe>} */
     let a;
     try {
       a = stelleAufgabe(aufgabe, {
         passtNicht() {
           versuche++;
+          stand.versuche = versuche;
           if (versuche === 2 && stufe === 0) hilfe.leuchte();
         },
         geloest(key) {
           hilfeTippen = null;
+          offeneAufgabe = null;
+          stand.phase = "folge";
           fertig({ key, versuche, hilfe: stufe, ms: Date.now() - start });
         },
       });
@@ -342,8 +379,10 @@ function spieleAufgabe(aufgabe) {
       fehler(e);
       return;
     }
+    offeneAufgabe = a;
     hilfeTippen = () => {
       stufe = Math.min(2, stufe + 1);
+      stand.hilfeStufe = stufe;
       a.hilfe(/** @type {1 | 2} */ (stufe));
     };
   });
@@ -375,10 +414,13 @@ async function zeigePause({ hinweis = null } = {}) {
     const a = document.createElement("a");
     a.className = "hinweis";
     a.href = spiel.datei;
+    a.tabIndex = 0; // WebKit (Safari, macOS-Vorgabe) erreicht Links mit Tab nur mit tabindex
     a.innerHTML = `<img src="${esc(spiel.symbol)}" alt=""><span>${esc(spiel.titel)}</span>`;
     karte.append(a);
   }
+  stand.phase = "pause";
   await pause.zeige(); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
+  stand.phase = "laden";
 }
 
 // --- Elternansicht (?eltern): beschreibend, kein Vergleich -----------------------------------------
@@ -435,12 +477,16 @@ async function spieleRunde(vorschau) {
     r = await starteRunde(vorschau);
   } catch (e) {
     protokoll(`${SPIEL_ID}: Runde starten: ${/** @type {any} */ (e)?.message ?? e}`);
-    if (!vorschau) return erzaehler.gehtNicht(); // Haus bleibt erreichbar, kein Dialog
+    if (!vorschau) {
+      stand.phase = "fehler";
+      return erzaehler.gehtNicht(); // Haus bleibt erreichbar, kein Dialog
+    }
     r = vorschauRunde();
   }
 
   // Einführung beim ersten Mal und bei neuem Thema (L5); in der Vorschau nur mit ?einfuehrung.
   if (r.einfuehrung && (!vorschau || params.has("einfuehrung"))) {
+    stand.phase = "einfuehrung";
     const ergebnis = await spieleEinfuehrung(r.einfuehrung.vorlage, r.einfuehrung.werte, { ton: leiste.ton });
     if (ergebnis !== "gesehen") {
       location.href = "index.html";
@@ -485,6 +531,7 @@ async function start() {
   const nichtEingetragen = c !== null && !eingetragen(c);
   if (nichtEingetragen) protokoll(`${SPIEL_ID}: nicht in spiele.json – Vorschau, schreibt nicht`);
   const vorschau = ["pause", "hinweis", "eltern", "einfuehrung"].some((p) => params.has(p)) || !c || nichtEingetragen;
+  stand.vorschau = vorschau;
   if (params.has("pause") || params.has("hinweis")) {
     const andere = (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id !== SPIEL_ID)?.id ?? null;
     await zeigePause({ hinweis: params.has("hinweis") ? params.get("hinweis") || andere : null });
@@ -495,5 +542,6 @@ async function start() {
 // Jeder Fehler (auch aus stelleAufgabe) landet hier: ins Protokoll, der Erzähler sagt es ruhig, Haus bleibt erreichbar.
 start().catch((e) => {
   protokoll(`${SPIEL_ID}: ${/** @type {any} */ (e)?.message ?? e}`);
+  stand.phase = "fehler";
   erzaehler.gehtNicht();
 });
