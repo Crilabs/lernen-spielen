@@ -49,12 +49,8 @@
    "titel": "Von einer Zahl aus weiterzählen",
    "formen": [
     {
-     "situation": "tisch",
-     "name": "Würfeln und weiterzählen"
-    },
-    {
      "situation": "bewegung",
-     "name": "Treppe ab der Mitte"
+     "name": "Verstecken ab einer Startzahl"
     }
    ],
    "entwurf": true,
