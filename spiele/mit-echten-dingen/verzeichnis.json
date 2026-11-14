@@ -13,6 +13,19 @@
    "entwurf": false,
    "datei": "mathe/fuenferreihe.md"
   },
+  "geteilt-alle-reihen": {
+   "fach": "mathe",
+   "name": "Geteilt in allen Reihen",
+   "titel": "Karten für alle austeilen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Karten austeilen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/geteilt-alle-reihen.md"
+  },
   "viererreihe": {
    "fach": "mathe",
    "name": "Viererreihe",
