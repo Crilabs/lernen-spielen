@@ -32,9 +32,38 @@ Jede Prüfung vergibt je Kriterium **grün** oder **rot** mit Beleg (Datei:Zeile
 **Grün heißt:** alle Pflichtkriterien grün, kein kritischer Befund. Kriterien mit „(Soll)“ dürfen rot sein, wenn
 der Grund im Entwurf steht.
 
+## Ablage (Christian)
+
+Jedes Spiel hat **einen eigenen Ordner, sortiert nach Fach** (Fach-Ids wie in `spiele.json`: `mathe`, `lesen`,
+`schreiben`, `grammatik`, `geometrie`, `sprechen`). Der Ordnername ist der Name des Spiels in Kleinbuchstaben mit
+Bindestrichen (Annahme), z. B. M14 „Zwei Tonnen“:
+
+```
+spiele/
+  mathe/
+    zwei-tonnen/
+      index.html        dünne Seite (Bausteine, seite.css, spiel.js)
+      spiel.js          Spielwelt, Aufgabe, Rahmen (aus der Vorlage)
+      logik.js          reine Spiellogik, in Node getestet (falls nötig)
+      texte.json        alle gesprochenen und geschriebenen Sätze (für die Audio-Pipeline)
+      symbol.svg        Spielsymbol (Startseite, Fach-Seite)
+      objekte/          spielspezifische animierte SVG-Objekte
+      bilder/           Szenenbild(er) mit herkunft.json (A4)
+  objekte/              Objekte, die mehrere Spiele nutzen (Tonne, Baum, Korb …)
+  vorlage/              die Spielvorlage als Ordner – zum Kopieren
+  rahmen/  kern/  …     gemeinsame Bausteine und Dienste
+tests/spiele/<fach>/<spiel>.test.mjs   Node-Tests der Spiellogik
+docs/spiele/<fach>/<spiel>.md          der Spielentwurf
+```
+
+- `spiele.json` nennt die Seite relativ zu `spiele/`: `"datei": "mathe/zwei-tonnen/index.html"`,
+  `"symbol": "mathe/zwei-tonnen/symbol.svg"`.
+- Bausteine finden ihre Pfade selbst (`import.meta.url`); im Spiel verweisen Imports relativ (`../../rahmen/…`).
+- Ein neues Spiel entsteht durch Kopieren von `spiele/vorlage/` in `spiele/<fach>/<spiel>/`.
+
 ## 1. Der Spielentwurf
 
-Datei `docs/spiele/<id>.md` (eine Seite), abgeleitet aus dem Katalog-Eintrag. **Der Katalog-Eintrag ist ein
+Datei `docs/spiele/<fach>/<spiel>.md` (eine Seite), abgeleitet aus dem Katalog-Eintrag. **Der Katalog-Eintrag ist ein
 Vorschlag, keine Vorgabe:** Passt seine Welt, Figur oder Mechanik nicht, weicht der Entwurf ab und sagt warum.
 
 Pflichtteile:
@@ -93,7 +122,7 @@ Ein Prüfer, der den Entwurf, den Katalog-Eintrag und die Grundsätze liest (nic
 
 ## 3. Der Prototyp
 
-Eine Kopie der Spielvorlage (`spiele/vorlage.*`) mit genau einer Stufe und einer Runde, ohne erzeugtes Bild und
+Eine Kopie der Spielvorlage (`spiele/vorlage/` nach `spiele/<fach>/<spiel>/`) mit genau einer Stufe und einer Runde, ohne erzeugtes Bild und
 ohne Aufnahmen (die Systemstimme genügt), aber mit den Bausteinen aus `spiele/rahmen/`, der Figur als Platzhalter
 aus der Runde (`docs/figuren.md`, gezeichnete Runde, sobald verfügbar) und einer schlichten Welt-Fläche.
 
@@ -136,6 +165,6 @@ Abschluss-Review des Branches (wie bei Rahmen und Ansichten) und Merge nach `mai
 
 ## 6. Parken
 
-Bleibt Prüfung A oder B nach drei Runden rot, wird das Spiel geparkt: Branch bleibt, `docs/spiele/<id>.md` bekommt
+Bleibt Prüfung A oder B nach drei Runden rot, wird das Spiel geparkt: Branch bleibt, `docs/spiele/<fach>/<spiel>.md` bekommt
 einen Abschnitt „Geparkt“ mit den offenen Befunden, Christian bekommt eine kurze Meldung. Kein weiterer Versuch ohne
 seine Entscheidung (z. B. Katalog-Eintrag ändern).
