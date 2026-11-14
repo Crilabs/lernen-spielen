@@ -140,3 +140,30 @@ test("Runden mit der echten Lernsteuerung: AUFGABEN_JE_RUNDE Aufgaben, keine zwe
     }
   }
 });
+
+test("Packung je Reihe: jedes Objekt liegt in spiele/objekte/ und hat den genannten Zustand", async () => {
+  const { existsSync } = await import("node:fs");
+  const { objekte } = await import("../../../spiele/objekte/objekt.js");
+  for (let n = 2; n <= 10; n++) {
+    const p = L.PACKUNG[n];
+    assert.ok(p && existsSync(new URL(`../../../spiele/objekte/${p.art}.js`, import.meta.url)), `Reihe ${n}: ${p?.art}`);
+    await import(`../../../spiele/objekte/${p.art}.js`);
+    if (p.zustand) assert.ok(objekte.get(p.art).zustaende.includes(p.zustand), `Reihe ${n}: Zustand ${p.zustand}`);
+  }
+  assert.deepEqual(L.PACKUNG[10], { art: "muenze", zustand: "zehn-cent" });
+});
+
+test("Korb: erst füllen sich die Plätze, dann ersetzt jede neue Packung die älteste", () => {
+  assert.deepEqual(L.korbPlatz(0), { platz: 0, neu: true });
+  assert.deepEqual(L.korbPlatz(L.KORB_PLAETZE - 1), { platz: L.KORB_PLAETZE - 1, neu: true });
+  assert.deepEqual(L.korbPlatz(L.KORB_PLAETZE), { platz: 0, neu: false });
+  assert.deepEqual(L.korbPlatz(L.KORB_PLAETZE + 3), { platz: 3, neu: false });
+});
+
+test("Sanft: die verwischte Zeile ist die letzte des Kindes (nicht Timos), ab zwei Zeilen; Ruhig: keine", () => {
+  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"], "sanft"), "7*2");
+  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"], "abenteuer"), "7*2");
+  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"], "ruhig"), null);
+  assert.equal(L.verwischteZeile(["1*2", "3*2"], "sanft"), null, "nur eine Zeile des Kindes");
+  assert.equal(L.verwischteZeile([], "sanft"), null);
+});

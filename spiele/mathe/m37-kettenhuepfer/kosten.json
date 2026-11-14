@@ -310,5 +310,53 @@
   "notiz": "Bau-Agent Befunde B R2 (Rest)",
   "cache_lesen": 19281,
   "cache_schreiben": 254670
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 280,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "vorratskammer.png",
+  "usage": {
+   "input_tokens": 280,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 280
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1652
+  }
+ },
+ {
+  "datum": "2026-11-14",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 333,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "vorratskammer-2.png",
+  "usage": {
+   "input_tokens": 333,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 333
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1705
+  }
  }
 ]

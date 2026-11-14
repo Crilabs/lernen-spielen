@@ -5,8 +5,44 @@
 /** Aufgaben des Kindes je Runde: die Vorratsliste hat Platz für Timos Zeile und acht weitere. */
 export const AUFGABEN_JE_RUNDE = 8;
 
-/** Ding je Reihe (Abschnitt 4 des Entwurfs): das Objekt, das in den Korb fliegt (null = Platzhalter im Prototyp). */
-export const PACKUNG = Object.freeze({ 2: "schuhpaar", 3: null, 4: "gedeck", 5: "broetchen", 6: "eierkarton", 7: null, 8: null, 9: null, 10: "muenze" });
+/**
+ * Ding je Reihe (Abschnitt 4 des Entwurfs): das Objekt (spiele/objekte/<art>.js) und sein Zustand ("" = der erste),
+ * das auf dem Regal steht und in den Korb fliegt.
+ * @type {Readonly<Record<number, { art: string, zustand: string }>>}
+ */
+export const PACKUNG = Object.freeze({
+  2: { art: "schuhpaar", zustand: "" },
+  3: { art: "ballroehre", zustand: "" },
+  4: { art: "gedeck", zustand: "" },
+  5: { art: "broetchen", zustand: "" },
+  6: { art: "eierkarton", zustand: "" },
+  7: { art: "wochenschachtel", zustand: "" },
+  8: { art: "stiftebox", zustand: "" },
+  9: { art: "muffinkarton", zustand: "" },
+  10: { art: "muenze", zustand: "zehn-cent" },
+});
+
+/** Plätze im Korb (Packungen, die gleichzeitig zu sehen sind); danach ersetzt jede neue die älteste. */
+export const KORB_PLAETZE = 14;
+
+/**
+ * Platz im Korb für die k-te Packung der Runde (0 …): erst füllen sich die Plätze, dann ersetzt jede neue die älteste
+ * (der Korb ist voll, die neuen liegen oben). @param {number} k @returns {{ platz: number, neu: boolean }}
+ */
+export function korbPlatz(k) {
+  return { platz: k % KORB_PLAETZE, neu: k < KORB_PLAETZE };
+}
+
+/**
+ * Die Zeile, die in Sanft verwischt ist (Entwurf §7): die letzte Zeile des Kindes auf der Liste (nicht Timos), aber
+ * erst, wenn das Kind mindestens zwei Zeilen geschrieben hat. Ruhig: keine. @param {string[]} zeilen Schlüssel "a*n"
+ * in der Reihenfolge der Liste, Timos zuerst @param {string} geschichte ruhig | sanft | abenteuer @returns {string | null}
+ */
+export function verwischteZeile(zeilen, geschichte) {
+  if (geschichte === "ruhig") return null;
+  const vomKind = zeilen.slice(1);
+  return vomKind.length >= 2 ? vomKind[vomKind.length - 1] : null;
+}
 
 /**
  * Wo liegt die getippte Zahl gegenüber dem Ergebnis? Die Mechanik zeigt es, der Erzähler beschreibt den Ort.

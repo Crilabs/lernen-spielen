@@ -3,7 +3,8 @@
 // mit Fertig; dann hüpft das Zählpfeilchen auf der Perlenkette von n Stäbchen für Stäbchen, bei jedem Stäbchen fliegt
 // eine Packung in den Korb, und am a-ten Stäbchen rastet das Pfeilchen mit der Zahl ein. Passt die Zahl nicht, hält
 // das Pfeilchen am a-ten Stäbchen (ohne Zahl, mit Ring) und die getippte Zahl liegt als hohles Pfeilchen an ihrem Ort.
-// Prototyp: eine Stufe (material), eine Runde, Systemstimme, Timo als Platzhalter aus der Runde.
+// Ausbau: drei Lernstufen (material, vorstellung, kopf), jede gelandete Packung bleibt im Korb, Timo reagiert auf jede
+// Lösung (wechselnde Reaktionen der Runde), Sanft mit verwischter Zeile, eigene Einführung in der Welt.
 //
 // Aufbau wie die Spielvorlage (spiele/vorlage/spiel.js, dort die Schritte zum eigenen Spiel):
 //   SPIELWELT  Kennung, Aufgabenarten, Rundenlänge, Vorschau-Aufgaben, Sätze des Erzählers
@@ -31,9 +32,10 @@ import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pru
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
 import { runde, einmal } from "../../lernsteuerung.js";
+import { geschichtenStufe } from "../../kern/einstellungen.js";
 import { spieleEinfuehrung } from "../../einfuehrung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
-import { AUFGABEN_JE_RUNDE, PACKUNG, vergleiche, hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend, vorzeigeAufgabe } from "./logik.js";
+import { AUFGABEN_JE_RUNDE, PACKUNG, KORB_PLAETZE, korbPlatz, verwischteZeile, vergleiche, hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend, vorzeigeAufgabe } from "./logik.js";
 
 sperreTouch();
 
@@ -73,21 +75,23 @@ new ResizeObserver(() => {
 /** Kennung des Spiels: steht einmal in der HTML-Datei an <ls-leiste spiel>. */
 const SPIEL_ID = leiste.getAttribute("spiel");
 
-/** Aufgabenarten (gilt nur, solange das Spiel nicht in spiele.json steht; dort steht dasselbe). Prototyp: eine Stufe. */
-const ARTEN = [{ art: "mal", reihen: [2, 10], stufen: ["material"] }];
+/** Aufgabenarten (gilt nur, solange das Spiel nicht in spiele.json steht; dort steht dasselbe). */
+const ARTEN = [{ art: "mal", reihen: [2, 10], stufen: ["material", "vorstellung", "kopf"] }];
 
-/** Eigene Einführung in der Welt: kommt mit dem Ausbau (die Einmaleins-Themen haben noch keine Einführung). */
-const EINFUEHRUNG = /** @type {{ vorlage: string, hintergrund?: string } | null} */ (null);
+/** Eigene Einführung in der Welt Vorrat und Packungen (A4b): Timo, Packung, Stäbchen, Kette, Korb; Werte je Thema aus lernplan.json. */
+const EINFUEHRUNG = { vorlage: "mathe/m37-kettenhuepfer/einfuehrung.json", hintergrund: "mathe/m37-kettenhuepfer/bilder/vorratskammer.webp" };
 
-/** So lange steht die Folge einer Lösung (Pfeilchen hüpft, Packungen fliegen, die Packung kommt in den Korb, Zeile
- * kommt); Tippen überspringt. Bis etwa 3 s (B6), damit auch bei zehn Stäbchen die Packung im Korb ankommt. */
+/** So lange steht die Folge einer Lösung (Pfeilchen hüpft, Packungen fliegen in den Korb und bleiben dort, Timo
+ * reagiert, Zeile kommt); Tippen überspringt. Bis etwa 3 s (B6), damit auch bei zehn Stäbchen alles angekommen ist. */
 const FOLGE_MS = 2800;
 
 /** So lange steht der Wechselsatz mindestens, bevor die Aufgabe der neuen Kette erscheint (auch ohne Ton). */
 const WECHSEL_MS = 2400;
 
-/** Breite der Kurzkette auf der Vorratsliste (rem, wie die Spalte in index.html): fünf Stäbe je Reihe. */
-const KURZ_BREITE = 16;
+/** Breite der Kurzkette auf der Vorratsliste (rem, wie die Spalte in index.html): fünf Stäbe je Reihe, je 3,4 rem. */
+const KURZ_BREITE = 20;
+/** Höhe eines Stabs der Kurzkette (rem): zwei Reihen passen in eine Zeile der Liste (4,6 rem). */
+const KURZ_STAB = 1.6;
 
 /** Nur Vorschau: Aufgaben, falls die Lernsteuerung nichts liefert. */
 const VORSCHAU = { thema: "Zweierreihe", aufgaben: ["mal:3*2", "mal:7*2", "mal:5*2", "mal:9*2"] };
@@ -199,79 +203,127 @@ function ueberspringeAlles() {
 }
 
 /**
- * Plätze im Korb, in der Reihenfolge, in der sie sich füllen (Timos Packung und acht weitere): Mitte x in % der
- * Korbbreite, Höhe y in rem über dem Rand; hinten höher und zuerst (die vorderen liegen davor).
+ * Plätze im Korb (KORB_PLAETZE), in der Reihenfolge, in der sie sich füllen: Mitte x in % der Korbbreite, Höhe y in
+ * rem über dem Rand; hinten höher und zuerst (die vorderen liegen davor). Der untere Teil jeder Packung steckt hinter
+ * dem Korbrand (.korb-inhalt schneidet am Rand ab).
  */
 const KORB_PLATZ = [
-  { x: 50, y: 1.8 }, { x: 27, y: 1.4 }, { x: 73, y: 1.4 }, { x: 10, y: 0.8 }, { x: 90, y: 0.8 },
-  { x: 38, y: 0 }, { x: 62, y: 0 }, { x: 20, y: -0.6 }, { x: 80, y: -0.6 },
+  { x: 30, y: 3.0 }, { x: 52, y: 3.3 }, { x: 74, y: 3.0 },
+  { x: 16, y: 2.1 }, { x: 40, y: 2.3 }, { x: 63, y: 2.3 }, { x: 86, y: 2.1 },
+  { x: 26, y: 1.2 }, { x: 50, y: 1.4 }, { x: 74, y: 1.2 },
+  { x: 12, y: 0.3 }, { x: 37, y: 0.5 }, { x: 62, y: 0.5 }, { x: 88, y: 0.3 },
 ];
 
 /**
- * So kommt die Packung in den Korb (W-Freude: wechselnde Varianten, kleine Zufallsauswahl, jede gleich ruhig): sie
- * plumpst hinein, rutscht von der Seite hinein oder hüpft noch einmal auf. Kein Jackpot, keine Belohnung (B4).
+ * So kommt eine Packung in den Korb (W-Freude: wechselnde Varianten, je Lösung eine, kleine Zufallsauswahl, jede
+ * gleich ruhig): sie plumpst hinein, rutscht von der Seite hinein, hüpft noch einmal auf oder gleitet flach hinein.
+ * Kein Jackpot, keine Belohnung (B4).
  */
 const EINRAEUMEN = [
-  { name: "plumpst", dauer: 420, keyframes: [{ transform: "translateY(-7rem)" }, { transform: "translateY(0.5rem)", offset: 0.7 }, { transform: "translateY(0)" }] },
-  { name: "rutscht", dauer: 460, keyframes: [{ transform: "translate(-4rem, -6rem) rotate(-24deg)" }, { transform: "translate(0.4rem, 0.3rem) rotate(4deg)", offset: 0.75 }, { transform: "translate(0, 0) rotate(0)" }] },
-  { name: "huepft", dauer: 560, keyframes: [{ transform: "translateY(-7rem)" }, { transform: "translateY(0)", offset: 0.5 }, { transform: "translateY(-1.8rem)", offset: 0.75 }, { transform: "translateY(0)" }] },
+  { name: "plumpst", dauer: 360, keyframes: [{ transform: "translateY(-5rem)" }, { transform: "translateY(0.4rem)", offset: 0.7 }, { transform: "translateY(0)" }] },
+  { name: "rutscht", dauer: 420, keyframes: [{ transform: "translate(-3rem, -4.5rem) rotate(-24deg)" }, { transform: "translate(0.3rem, 0.2rem) rotate(4deg)", offset: 0.75 }, { transform: "translate(0, 0) rotate(0)" }] },
+  { name: "huepft", dauer: 480, keyframes: [{ transform: "translateY(-5rem)" }, { transform: "translateY(0)", offset: 0.5 }, { transform: "translateY(-1.4rem)", offset: 0.75 }, { transform: "translateY(0)" }] },
+  { name: "gleitet", dauer: 420, keyframes: [{ transform: "translate(3.5rem, -2rem) rotate(10deg)" }, { transform: "translate(-0.3rem, 0) rotate(-2deg)", offset: 0.8 }, { transform: "translate(0, 0) rotate(0)" }] },
 ];
 
-/** Die Packung der Reihe b liegt jetzt im Korb (bleibt stehen bis Rundenende). @param {number} b @param {boolean} still ohne Bewegung */
-function legeInDenKorb(b, still) {
-  const i = korbInhalt.children.length;
-  if (i >= KORB_PLATZ.length) return; // der Korb ist voll: das Bild bleibt
-  const art = PACKUNG[/** @type {keyof typeof PACKUNG} */ (b)];
-  const teil = document.createElement(art ? "ls-objekt" : "div");
-  if (art) teil.setAttribute("art", art);
-  else teil.className = "paeckchen"; // Platzhalter, bis das Objekt der Reihe gezeichnet ist (Entwurf §11)
-  teil.style.left = `${KORB_PLATZ[i].x}%`;
-  teil.style.bottom = `${KORB_PLATZ[i].y - 2.4}rem`;
-  korbInhalt.append(teil);
+/** Wie viele Packungen in dieser Runde schon in den Korb gekommen sind (für den nächsten Platz, korbPlatz()). */
+let imKorb = 0;
+
+/** Ein Objekt-Element für die Packung der Reihe b. @param {number} b @param {HTMLElement} [el] vorhandenes */
+function packungsBild(b, el = document.createElement("ls-objekt")) {
+  const p = PACKUNG[b];
+  el.setAttribute("art", p?.art ?? "schuhpaar");
+  if (p?.zustand) el.setAttribute("zustand", p.zustand);
+  else el.removeAttribute("zustand");
+  return el;
+}
+
+/**
+ * Eine Packung der Reihe b liegt jetzt im Korb und bleibt bis Rundenende. Sind alle Plätze belegt, ersetzt sie die
+ * älteste (die neue liegt an deren Platz). @param {number} b @param {boolean} still ohne Bewegung
+ * @param {typeof EINRAEUMEN[number]} variante
+ */
+function legeInDenKorb(b, still, variante) {
+  const { platz, neu } = korbPlatz(imKorb++);
+  const teil = neu ? packungsBild(b) : packungsBild(b, /** @type {HTMLElement} */ (korbInhalt.children[platz]));
+  if (neu) {
+    teil.style.left = `${KORB_PLATZ[platz].x}%`;
+    teil.style.bottom = `${KORB_PLATZ[platz].y - 2.6}rem`;
+    korbInhalt.append(teil);
+  }
+  teil.dataset.reihe = String(b);
+  korbInhalt.dataset.anzahl = String(imKorb);
   if (still || springt || wenigBewegung() || typeof teil.animate !== "function") return;
-  const v = EINRAEUMEN[Math.floor(Math.random() * EINRAEUMEN.length)];
-  teil.dataset.einraeumen = v.name;
-  const anim = teil.animate(v.keyframes, { duration: v.dauer, easing: "ease-out" });
+  teil.dataset.einraeumen = variante.name;
+  const anim = teil.animate(variante.keyframes, { duration: variante.dauer, easing: "ease-out" });
   laufend.push(() => anim.finish());
 }
 
 /**
- * Folge einer gelösten Aufgabe a · b für den Korb: bei jedem Stäbchen fliegt eine Packung hinein (schritt), und wenn
- * die letzte gelandet ist, liegt die Packung der Reihe im Korb. Vorher springt nichts (Prüfstand B, Runde 2); bei
- * wenig Bewegung oder beim Überspringen liegt sie sofort drin, ohne Bewegung.
- * @param {number} a @param {number} b @returns {(k: number) => void} schritt für huepfe()
+ * Timo reagiert auf eine gelöste Aufgabe (W-Freude, Reaktionen der Runde, wechselnd): er nickt, dreht eine kleine
+ * Runde mit dem Rollstuhl oder freut sich leise. Etwa 0,8 bis 1,2 s, danach steht er wieder (B3); Tippen springt ans
+ * Ende. Bei wenig Bewegung nur das Gesicht, kurz und ohne Bewegung.
  */
-function folgeInDenKorb(a, b) {
-  let gelandet = false;
-  const landen = (/** @type {boolean} */ still) => {
-    if (gelandet) return;
-    gelandet = true;
-    legeInDenKorb(b, still);
+const REAKTION = [
+  { bewegung: "nicken" },
+  { bewegung: "pirouette" },
+  { haltung: "freuen-klein", ms: 900 },
+];
+let reaktionNr = Math.floor(Math.random() * REAKTION.length);
+function timoReagiert() {
+  if (!timo || springt) return;
+  const t = timo;
+  const zurueck = () => { t.halt(); t.haltung("stehen", { ms: 0 }); };
+  if (wenigBewegung()) {
+    t.haltung("freuen-klein", { ms: 0 });
+    const uhr = setTimeout(() => t.haltung("stehen", { ms: 0 }), 700);
+    laufend.push(() => { clearTimeout(uhr); zurueck(); });
+    return;
+  }
+  // Nie zweimal hintereinander dieselbe Reaktion, sonst zufällig (kleine Auswahl, alle gleich ruhig).
+  reaktionNr = (reaktionNr + 1 + Math.floor(Math.random() * (REAKTION.length - 1))) % REAKTION.length;
+  const r = REAKTION[reaktionNr];
+  timoPlatz.dataset.reaktion = r.bewegung ?? r.haltung;
+  if (r.bewegung) t.bewegung(r.bewegung);
+  else {
+    t.haltung(/** @type {string} */ (r.haltung), { ms: 260 });
+    const uhr = setTimeout(() => t.haltung("stehen", { ms: 320 }), r.ms);
+    laufend.push(() => clearTimeout(uhr));
+  }
+  laufend.push(zurueck);
+}
+
+/**
+ * Folge einer gelösten Aufgabe a · b für den Korb: bei jedem Stäbchen fliegt eine Packung hinein (schritt) und bleibt
+ * dort liegen, a Packungen je Lösung (Prüfstand B, Runde 3: vorher blieb nur eine liegen). Alle in derselben Variante
+ * (EINRAEUMEN, je Lösung zufällig). Ist die letzte gelandet, wackelt der Korb satt und Timo reagiert. Bei wenig
+ * Bewegung oder beim Überspringen liegen alle sofort drin, ohne Bewegung.
+ * @param {number} a @param {number} b @param {{ timo?: boolean }} [o] timo: false = ohne Reaktion (Timo legt selbst vor)
+ * @returns {(k: number) => void} schritt für huepfe()
+ */
+function folgeInDenKorb(a, b, o = {}) {
+  let gelegt = 0;
+  const variante = EINRAEUMEN[Math.floor(Math.random() * EINRAEUMEN.length)];
+  const lege = (/** @type {boolean} */ still) => {
+    if (gelegt >= a) return;
+    gelegt++;
+    legeInDenKorb(b, still, variante);
+    if (gelegt === a && o.timo !== false) timoReagiert();
   };
-  laufend.push(() => landen(true));
+  laufend.push(() => { while (gelegt < a) lege(true); });
   return (k) => {
-    const flug = packungFliegt(k);
-    if (k !== a) return;
-    if (flug) flug.then(() => landen(false));
-    else landen(true);
+    const flug = packungFliegt(k, b);
+    if (flug) flug.then(() => lege(false));
+    else lege(true);
   };
 }
 
-/** Packung des Stäbchens k fliegt in den Korb (Wirkung, B1). @param {number} k @returns {Promise<any> | null} gelandet */
-function packungFliegt(k) {
-  if (n === null || springt || wenigBewegung()) return null;
+/** Packung des Stäbchens k fliegt in den Korb (Wirkung, B1). @param {number} k @param {number} b @returns {Promise<any> | null} gelandet */
+function packungFliegt(k, b) {
+  if (springt || wenigBewegung()) return null;
   const p = kette.stabPunkt(k);
   if (!p) return null;
-  const art = PACKUNG[/** @type {keyof typeof PACKUNG} */ (n)];
-  /** @type {HTMLElement} */
-  let teil;
-  if (art) {
-    teil = document.createElement("ls-objekt");
-    teil.setAttribute("art", art);
-  } else {
-    teil = document.createElement("div");
-    teil.className = "paeckchen"; // Platzhalter, bis das Objekt der Reihe gezeichnet ist (Entwurf §11)
-  }
+  const teil = packungsBild(b);
   flug.append(teil);
   const r = teil.getBoundingClientRect();
   teil.style.left = `${p.x - r.width / 2}px`;
@@ -289,10 +341,11 @@ function zeileDazu(/** @type {number} */ a, /** @type {number} */ b) {
     z = document.createElement("div");
     z.className = "zeile";
     z.dataset.aufgabe = key;
-    z.innerHTML = `<span class="text"></span><ls-perlenkette reihe="${b}" kurz="${a}" breite="${KURZ_BREITE}" perle="1.3"></ls-perlenkette>`;
+    z.innerHTML = `<span class="text"></span><ls-perlenkette reihe="${b}" kurz="${a}" breite="${KURZ_BREITE}" perle="${KURZ_STAB}"></ls-perlenkette>`;
     liste.append(z);
   }
   /** @type {HTMLElement} */ (z.querySelector(".text")).textContent = `${a} · ${b} = ${a * b}`;
+  z.classList.remove("verwischt");
 }
 
 /** Zeile derselben Aufgabe verdecken, solange sie noch einmal dran ist (nichts zum Ablesen, Entwurf §2 Satz 6). */
@@ -303,10 +356,8 @@ function verdeckeZeile(/** @type {number} */ a, /** @type {number} */ b) {
 
 /** Das Ding der Reihe steht in Ruhe auf dem Regalbrett (Sachbild, kein Zählmaterial; W-Sachwelt). @param {number} reihe */
 function zeigeDing(reihe) {
-  const art = PACKUNG[/** @type {keyof typeof PACKUNG} */ (reihe)];
-  if (art) ding.setAttribute("art", art);
-  ding.hidden = !art;
-  dingPlatz.classList.toggle("platzhalter", !art);
+  packungsBild(reihe, ding);
+  dingPlatz.dataset.reihe = String(reihe);
 }
 
 /** Stellt die Kette auf n um (leert die Matte bei einem Wechsel). @param {number} neu @returns {boolean} gewechselt */
@@ -376,6 +427,8 @@ async function vorzeigen(aufgabe, rundenThema) {
     // Neue Runde: leerer Korb, leere Liste, frische Kette.
     liste.replaceChildren();
     korbInhalt.replaceChildren();
+    imKorb = 0;
+    korbInhalt.dataset.anzahl = "0";
     n = null;
     kettenWechsel(tb);
     const b = tb;
@@ -397,7 +450,7 @@ async function vorzeigen(aufgabe, rundenThema) {
     box.textContent = String(ta * b);
     if (TEXTE?.timo?.[b]) blase.sage(TEXTE.timo[b], { sprechen: !kurz });
     zeileDazu(ta, b);
-    const h = kette.huepfe(ta, { wert: ta * b, schritt: folgeInDenKorb(ta, b), ms: ta === 1 ? 300 : 130 });
+    const h = kette.huepfe(ta, { wert: ta * b, schritt: folgeInDenKorb(ta, b, { timo: false }), ms: ta === 1 ? 300 : 130 });
     laufend.push(h.ueberspringe);
     await h.fertig;
     geloest.add(ta);
@@ -807,17 +860,51 @@ async function wechsleKette(aufgabe) {
   gleichung.replaceChildren();
   rechnung.replaceChildren();
   const satz = TEXTE?.wechsel?.[ziel.b];
-  if (!satz) return true;
+  if (satz) await steheSatz(blase.sage(satz));
+  return true;
+}
+
+/**
+ * Ein Satz steht, bevor die nächste Aufgabe erscheint: bis er gesprochen ist, mindestens WECHSEL_MS (auch ohne Ton);
+ * Tippen kürzt ab. @param {Promise<any>} gesagt das Versprechen von blase.sage
+ */
+function steheSatz(gesagt) {
   const feld = /** @type {HTMLElement} */ (document.querySelector(".spielflaeche"));
-  await new Promise((ok) => {
+  return new Promise((ok) => {
     const fertig = () => {
       feld.removeEventListener("pointerdown", fertig);
       ok(undefined);
     };
     feld.addEventListener("pointerdown", fertig);
-    Promise.all([blase.sage(satz), warte(WECHSEL_MS)]).then(fertig);
+    Promise.all([gesagt, warte(WECHSEL_MS)]).then(fertig);
   });
-  return true;
+}
+
+/**
+ * Sanft (Standard) und Abenteuer (Entwurf §7): Vor dem Rundenende ist eine Zeile der Vorratsliste verwischt (die
+ * letzte des Kindes, logik.js verwischteZeile): „a · n = ▢“, die Kurzkette bleibt. Der Erzähler sagt es, dann tippt das
+ * Kind das Ergebnis neu, eine Aufgabe mehr, wie jede andere gemeldet (die Lernsteuerung bucht eine zweite richtige
+ * Antwort am selben Tag nicht doppelt, faellig()). Die Kette wechselt vorher, wenn die Zeile zu einer anderen gehört;
+ * ihr Pfeilchen ist leer, die Zeile verdeckt, bis getippt ist (§2 Satz 6). Ruhig: keine.
+ * @param {string} zeile "a*n" @param {any} r Runde @param {string | null} stufe Lernstufe der letzten Aufgabe
+ */
+async function spieleVerwischt(zeile, r, stufe) {
+  const aufgabe = { ziel: { key: `mal:${zeile}` }, stufe: stufe ?? "material" };
+  raeumeAuf();
+  await wechsleKette(aufgabe);
+  stand.phase = "folge";
+  const [a, b] = zeile.split("*").map(Number);
+  liste.querySelector(`[data-aufgabe="${zeile}"]`)?.classList.add("verwischt");
+  verdeckeZeile(a, b);
+  gleichung.replaceChildren();
+  rechnung.replaceChildren();
+  await steheSatz(blase.sage("Auf der Liste ist eine Zeile verwischt. Die Kette daneben zeigt, wohin sie gehört."));
+  erzaehler.auftrag(true);
+  const e = await spieleAufgabe(aufgabe);
+  const ergebnis = { key: e.key, ok: e.versuche === 0, hilfe: e.hilfe, ms: e.ms };
+  r.melde(e.key, ergebnis);
+  document.dispatchEvent(new CustomEvent("ls-ergebnis", { detail: ergebnis }));
+  await warteFolge();
 }
 
 /** @param {boolean} vorschau */
@@ -861,6 +948,8 @@ async function spieleRunde(vorschau) {
 
   let erste = true;
   let gespielt = 0;
+  /** @type {string | null} */
+  let letzteStufe = null;
   while (aufgabe) {
     raeumeAuf();
     // Kettenhüpfer: Timo legt vor (L5), bevor die Zeit der ersten Aufgabe läuft; wechselt später die Kette, kommt der
@@ -868,6 +957,7 @@ async function spieleRunde(vorschau) {
     const gewechselt = erste ? (await vorzeigen(aufgabe, rundenThema), false) : await wechsleKette(aufgabe);
     erzaehler.auftrag(erste || gewechselt); // nach einem Wechsel wird der Auftrag wieder laut gesagt
     erste = false;
+    letzteStufe = aufgabe.stufe ?? null;
     const e = await spieleAufgabe(aufgabe);
     const ergebnis = { key: e.key, ok: e.versuche === 0, hilfe: e.hilfe, ms: e.ms };
     // Ereignis „gekonnt“: die Lernsteuerung beendet die Runde (naechste() liefert null). Ereignis „stufe“: das
@@ -879,6 +969,9 @@ async function spieleRunde(vorschau) {
     aufgabe = aufStufe(r.naechste());
   }
 
+  ueberspringeAlles();
+  const verwischt = verwischteZeile([...liste.children].map((z) => /** @type {HTMLElement} */ (z).dataset.aufgabe ?? ""), geschichtenStufe());
+  if (verwischt) await spieleVerwischt(verwischt, r, letzteStufe);
   ueberspringeAlles();
   await Promise.all([erzaehler.rundenende(gespielt >= AUFGABEN_JE_RUNDE, kernRunde), warte(1500)]);
   const { hinweisSpiel } = await r.ende();
