@@ -51,9 +51,9 @@
     display: grid; grid-template-columns: auto auto auto; align-items: center; justify-content: start;
     gap: 4rem 6rem; padding: 3.6rem 5rem;
   }
-  .lz-mathe .verdeckt { height: 6rem; grid-area: 1 / 1; }
-  .lz-mathe ls-perlenstab[ausrichtung="senkrecht"] { width: 5rem; grid-row: 1 / span 2; }
-  .lz-mathe .teil { height: 11rem; padding: 1.8rem 2.4rem; justify-self: start; grid-area: 2 / 1; }
+  .lz-mathe .verdeckt { height: 6rem; grid-column: 1; justify-self: start; }
+  .lz-mathe ls-perlenstab[ausrichtung="senkrecht"] { width: 5rem; grid-row: 1 / span 3; }
+  .lz-mathe .teil { height: 11rem; padding: 1.8rem 2.4rem; justify-self: start; grid-area: 3 / 1; }
   .lz-deutsch { display: flex; align-items: flex-end; justify-content: center; gap: 4rem; padding: 3.6rem 5rem; }
   .lz-wort { display: grid; justify-items: center; gap: 1.4rem; font-size: 4.4rem; line-height: 1; }
   .lz-wort ls-wortart { height: 7rem; }
@@ -102,7 +102,8 @@
     </div>
     <div class="lz-rechts">
       <div class="lernfeld lz-mathe">
-        <ls-perlenstab class="verdeckt" wert="7" verdeckt ziffer></ls-perlenstab>
+        <ls-perlenstab class="verdeckt" wert="7" verdeckt ziffer style="grid-row: 1"></ls-perlenstab>
+        <ls-perlenstab class="verdeckt" wert="7" verdeckt style="grid-row: 2"></ls-perlenstab>
         <ls-perlenstab wert="3" ausrichtung="senkrecht" ziffer></ls-perlenstab>
         <ls-perlenstab wert="8" ausrichtung="senkrecht"></ls-perlenstab>
         <ls-perlenstab class="teil" wert="4"></ls-perlenstab>

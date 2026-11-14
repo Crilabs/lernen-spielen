@@ -5,10 +5,12 @@
 //
 // Alle vier stehen im selben quadratischen Feld auf einer gemeinsamen Grundlinie und mittig, damit sie über
 // Wörtern gleich sitzen und die Größen sich vergleichen lassen. Größe bestimmt das Spiel per CSS am Host
-// über `height` (Vorgabe 8 rem, die Breite ist gleich der Höhe). Unbekannte Art: es wird nichts gezeichnet.
+// über `height` (Vorgabe 8 rem, die Breite ist gleich der Höhe). Unbekannte oder fehlende Art: es wird nichts
+// gezeichnet und einmal je Element ins Protokoll geschrieben (kern/protokoll.js).
 // Flach heißt zum Ansehen (6.4); ziehbar wird ein Symbol über die Klasse `teil` aus seite.css. Keine
 // Bewegung, kein Ton; der Name („Nomen“ …) steht als aria-label am Bild.
 
+import { protokoll } from "../kern/protokoll.js";
 import { TOKENS, LERNFARBE, definiere } from "./stil.js";
 
 /** Formen im Feld 0…100, Grundlinie bei 96. */
@@ -39,6 +41,8 @@ export class LsWortart extends HTMLElement {
     const wurzel = this.attachShadow({ mode: "open" });
     wurzel.innerHTML = `<style>${CSS}</style><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"></svg>`;
     this.svg = /** @type {SVGSVGElement} */ (wurzel.querySelector("svg"));
+    /** Schon ins Protokoll geschrieben (einmal je Element). */
+    this.gemeldet = false;
     this.zeichne();
   }
 
@@ -46,10 +50,22 @@ export class LsWortart extends HTMLElement {
     this.zeichne();
   }
 
+  connectedCallback() {
+    if (!this.hasAttribute("art")) this.melde("keine Art");
+  }
+
+  /** @param {string} grund */
+  melde(grund) {
+    if (this.gemeldet) return;
+    this.gemeldet = true;
+    protokoll(`ls-wortart: ${grund}`);
+  }
+
   zeichne() {
     const art = this.getAttribute("art") ?? "";
     const svg = this.svg;
     if (!Object.hasOwn(FORM, art)) {
+      if (this.hasAttribute("art")) this.melde(`unbekannte Art ${art}`);
       svg.setAttribute("class", "leer");
       svg.setAttribute("aria-hidden", "true");
       svg.removeAttribute("role");

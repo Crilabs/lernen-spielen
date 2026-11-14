@@ -8,9 +8,13 @@
 // - `ziffer`: die Ziffer (Andika fett, Tinte) steht vor dem Stäbchen, waagrecht links, senkrecht darüber
 //   (M7). Das Feld ist für alle Werte gleich breit, damit Stäbchen untereinander bündig an der ersten Perle
 //   beginnen.
-// - `verdeckt` (Stufe Vorstellung): ein ruhiger Deckel aus Papier mit Tinte-Kontur liegt über den Perlen,
-//   so lang wie das Stäbchen. Mit `ziffer` steht die Ziffer dann auf dem Deckel.
-// - Ungültiger Wert (nicht 1 bis 10): es wird nichts gezeichnet.
+// - `verdeckt` (Stufe Vorstellung): ein Tuch liegt über den Perlen – ein Deckel in Nebel (leicht getöntes
+//   Papier, nicht weiß wie ein Eingabefeld, nicht gestrichelt wie ein freies Ziel) mit Tinte-Kontur, so lang
+//   wie das Stäbchen. Ab 6 liegt die Fünfermarke quer über dem Tuch (die Gliederung bleibt, die Perlen sind
+//   nicht zu zählen). Mit `ziffer` steht die Ziffer auf dem Tuch, ab 6 mittig über den ersten fünf.
+//   Mit `ziffer` mindestens 6 rem dick, sonst wird die Ziffer kleiner als 3,2 rem.
+// - Ungültiger Wert (nicht 1 bis 10) oder fehlender Wert: es wird nichts gezeichnet und einmal je Element
+//   ins Protokoll geschrieben (kern/protokoll.js).
 //
 // Größe bestimmt das Spiel per CSS am Host: waagrecht über `height`, senkrecht über `width` (die Dicke);
 // die andere Seite ergibt sich aus dem Wert. Vorgabe 7 rem. Senkrecht steht die erste Perle oben.
@@ -18,8 +22,9 @@
 // (`<ls-perlenstab class="teil">`, dazu ziehbar() aus ziehen.js); dann liegt es auf einer Papierkarte mit
 // Schatten. Keine Bewegung (B3). Kein Ton: der Name „Perlenstab 7“ steht nur als aria-label am Bild.
 
+import { protokoll } from "../kern/protokoll.js";
 import { TOKENS, LERNFARBE, definiere } from "./stil.js";
-import { perlenstab, wertAus, DRAHT } from "./perlen-geometrie.js";
+import { perlenstab, wertAus, DRAHT, LUECKE } from "./perlen-geometrie.js";
 
 /** Feld für die Ziffer entlang des Stäbchens (in Perlen-Durchmessern) und Schriftgröße darin. */
 const ZIFFER = {
@@ -60,6 +65,8 @@ export class LsPerlenstab extends HTMLElement {
     wurzel.innerHTML = `<style>${CSS}</style><style class="mass"></style><svg xmlns="http://www.w3.org/2000/svg"></svg>`;
     this.svg = /** @type {SVGSVGElement} */ (wurzel.querySelector("svg"));
     this.mass = /** @type {HTMLStyleElement} */ (wurzel.querySelector("style.mass"));
+    /** Schon ins Protokoll geschrieben (einmal je Element). */
+    this.gemeldet = false;
     this.zeichne();
   }
 
@@ -72,10 +79,23 @@ export class LsPerlenstab extends HTMLElement {
     this.zeichne();
   }
 
+  connectedCallback() {
+    if (!this.hasAttribute("wert")) this.melde("kein Wert");
+  }
+
+  /** @param {string} grund */
+  melde(grund) {
+    if (this.gemeldet) return;
+    this.gemeldet = true;
+    protokoll(`ls-perlenstab: ${grund}`);
+  }
+
   zeichne() {
     const stab = perlenstab(this.getAttribute("wert"));
     const svg = this.svg;
     if (!stab) {
+      const roh = this.getAttribute("wert");
+      if (roh !== null) this.melde(`ungültiger Wert ${roh}`);
       svg.setAttribute("class", "leer");
       svg.setAttribute("aria-hidden", "true");
       svg.removeAttribute("role");
@@ -104,22 +124,27 @@ export class LsPerlenstab extends HTMLElement {
       return `<text x="${z(x)}" y="${z(y)}" font-size="${z(groesse)}" text-anchor="middle">${text}</text>`;
     };
 
+    /** Fünfermarke quer zum Stäbchen. @param {number} a */
+    const marke = (a) => {
+      const [q0, q1] = [0.06, hoehe - 0.06];
+      return senkrecht
+        ? `<line class="marke" x1="${z(q0)}" y1="${z(a)}" x2="${z(q1)}" y2="${z(a)}"/>`
+        : `<line class="marke" x1="${z(a)}" y1="${z(q0)}" x2="${z(a)}" y2="${z(q1)}"/>`;
+    };
+
     let inhalt = "";
     if (feld) inhalt += schrift(-feld / 2 - 0.12, art.schrift, String(stab.wert));
     if (verdeckt) {
       const d = 1 + 2 * DECKEL_RAND;
-      inhalt += `<rect class="kontur deckel" ${r(0, laenge, mitte - d / 2, d)} rx="${z(d / 2)}" fill="${TOKENS["--ls-papier"]}"/>`;
-      if (ziffer) inhalt += schrift(laenge / 2, ZIFFER.deckel, String(stab.wert));
+      inhalt += `<rect class="kontur deckel" ${r(0, laenge, mitte - d / 2, d)} rx="${z(d / 2)}" fill="${TOKENS["--ls-nebel"]}"/>`;
+      if (stab.marke !== null) inhalt += marke(stab.marke);
+      // Ab 6 steht die Ziffer über den ersten fünf, damit die Marke sie nicht kreuzt.
+      if (ziffer) inhalt += schrift(stab.marke !== null ? (stab.marke - LUECKE / 2) / 2 : laenge / 2, ZIFFER.deckel, String(stab.wert));
     } else {
       inhalt += `<rect class="draht" ${r(0, laenge, mitte - DRAHT / 2, DRAHT)} rx="${z(DRAHT / 2)}" fill="${LERNFARBE.draht}"/>`;
       const farbe = LERNFARBE.perle[/** @type {keyof typeof LERNFARBE.perle} */ (stab.wert)];
       for (const a of stab.perlen) inhalt += `<circle class="kontur perle" ${c(a, mitte)} r="0.5" fill="${farbe}"/>`;
-      if (stab.marke !== null) {
-        const [a, q0, q1] = [stab.marke, 0.06, hoehe - 0.06];
-        inhalt += senkrecht
-          ? `<line class="marke" x1="${z(q0)}" y1="${z(a)}" x2="${z(q1)}" y2="${z(a)}"/>`
-          : `<line class="marke" x1="${z(a)}" y1="${z(q0)}" x2="${z(a)}" y2="${z(q1)}"/>`;
-      }
+      if (stab.marke !== null) inhalt += marke(stab.marke);
     }
 
     const [x0, y0, w, h] = senkrecht ? [0, -feld, hoehe, laenge + feld] : [-feld, 0, laenge + feld, hoehe];
