@@ -33,8 +33,8 @@ Die Grenzen §5 (G1–G14) bleiben immer.
 
 Ein Spiel hat genau einen Kern, und alles andere muss sich vor ihm rechtfertigen:
 
-- **Ein Held:** eine Figur oder Sache, die etwas *tut* – hüpft, rollt, baut, fliegt, wächst. Ein Kind der Runde
-  oder die Figur des Spiels. Ein Pfeil oder eine Zeile ist kein Held.
+- **Ein Held: immer ein Kind der Runde**, das etwas *tut* – hüpft, rollt, baut, wirft, staunt –, dazu die Figuren
+  und Dinge, die das Spiel braucht (Christian, 2026-11-15). Ein Pfeil, ein Korb oder eine Zeile allein ist kein Held.
 - **Eine Handlung des Kindes**, und sie ist die Lernhandlung (tippen, ziehen, legen). Nicht zwei.
 - **Eine Wirkung**, die man sieht und hört: Sie beginnt sofort (unter 0,3 s nach dem Tippen), dauert etwa 2,5 s,
   höchstens 3 s (wie `grundsaetze-bilder.md` B6), und endet in einem Bild, das bleibt. Der nächste Tipp überspringt sie.
@@ -82,8 +82,9 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 ### §4 Schön und flüssig
 
 - **Stil der Runde** (`docs/figuren.md`, Silhouette, Stufen-Schatten) und **Farbwelt** (`docs/grundsaetze-bilder.md`
-  §6.2: Perlen in Montessori-Farben, Stellenwerte türkis/orange/schiefer, Welt-Schicht heller und weicher). Die Welt
-  ist eine **Bühne**: ein ruhiger Hintergrund mit ein, zwei Dingen der Welt, nie ein Wimmelbild.
+  §6.2: Perlen in Montessori-Farben, Stellenwerte türkis/orange/schiefer). **Das Spielbild ist die Szene und darf den
+  ganzen Bildschirm nehmen** (Christian, 2026-11-15; wie die alten Spiele, z. B. die Kette auf dem Teppich im Raum):
+  keine Karte vor einem Hintergrund als Regel, ruhig, nie ein Wimmelbild.
 - **Bewegung mit Gewicht:** Sprünge im Bogen mit Bodenkontakt (Landung leicht gestaucht, dann zurück), Einrasten mit
   kurzem Überschwingen, Dinge fallen mit Beschleunigung und setzen auf. Nur `transform` und `opacity` animieren (Web
   Animations API oder CSS), 60 Bilder je Sekunde, kein Ruckeln, keine Layout-Sprünge.
@@ -118,9 +119,8 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 Diese Mittel sind gut, wenn sie dem Spielkern dienen, und weg, wenn sie ihn verdecken. Eine Prüfung fragt nie, ob
 sie da sind, nur, ob sie stören.
 
-- **Sachgrund in der Aufgabe** (K2): nur, wenn er die Aufgabe *leichter verständlich* macht. Sonst ist die Welt
-  Bühne und Kulisse (K1: „als Welt und Rahmen der Szene“). Die Heimatwelt bleibt **(Christian, 2026-11-14)**.
-- **Fakten mit Echt-Zeichen** (K6, K11): höchstens in der Pause, nie im Takt der Aufgaben.
+- **Keine Sachwelt im Spiel** (Christian, 2026-11-15): Sachthemen und ihre Fakten leben in Geschichten und
+  Sachspielen (`docs/geschichten.md`); Heimatwelt, Sachgrund und Geschichten-Stufen eines Katalog-Eintrags gelten nicht.
 - **Figur der Runde legt vor** (L5): die Einführung macht es einmal vor; nicht jede Runde.
 - **Stimmungen sanft und abenteuer** (§9.3, Spielkatalog 4.2): Der erste Bau ist auf jeder Stufe gleich ruhig
   spielbar; eine Komplikation oder ein Bogen kommt erst in einem späteren Ausbau **(Annahme)**.
