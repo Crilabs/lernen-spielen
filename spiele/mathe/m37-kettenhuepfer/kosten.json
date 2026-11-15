@@ -475,5 +475,70 @@
   "notiz": "Ausbau-Prüfung Didaktik, Runde 2",
   "cache_lesen": 4877068,
   "cache_schreiben": 169779
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "review",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 124,
+  "ausgabe": 21940,
+  "einheit": "tokens",
+  "menge": 9054131,
+  "notiz": "Abschluss-Review, Runde 1",
+  "cache_lesen": 8061606,
+  "cache_schreiben": 970461
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 110,
+  "ausgabe": 22622,
+  "einheit": "tokens",
+  "menge": 13263670,
+  "notiz": "Steuerung M37 (vorige Steuerung, Wiederaufnahme)",
+  "cache_lesen": 11648496,
+  "cache_schreiben": 1592442
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 522,
+  "ausgabe": 86809,
+  "einheit": "tokens",
+  "menge": 59964745,
+  "notiz": "Steuerung M37 (neue Steuerung ab B R1)",
+  "cache_lesen": 59556477,
+  "cache_schreiben": 320937
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "review",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 2,
+  "ausgabe": 4291,
+  "einheit": "tokens",
+  "menge": 227852,
+  "notiz": "Abschluss-Review, Runde 1 (Rest)",
+  "cache_lesen": 219223,
+  "cache_schreiben": 4336
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 4,
+  "ausgabe": 1533,
+  "einheit": "tokens",
+  "menge": 692768,
+  "notiz": "Steuerung M37 (neue Steuerung, Rest)",
+  "cache_lesen": 680977,
+  "cache_schreiben": 10254
  }
 ]
