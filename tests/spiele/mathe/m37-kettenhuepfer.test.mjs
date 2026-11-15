@@ -149,6 +149,7 @@ test("bildWechsel: jeder Wechsel von Reihe oder Stufe ist eine Szene mit höchst
 // --- Kreidekette auf der Straße (kreide-geometrie.js, gezeichnet in kreide.js) ------------------------------------
 const G = await import("../../../spiele/mathe/m37-kettenhuepfer/kreide-geometrie.js");
 
+const REM = 1; // alle Maße der Geometrie sind rem
 test("Kreidekette: zehn Stäbchen zu je n Perlen, Fünfermarke nach der fünften, zwei Reihen zu fünf", () => {
   for (let n = 1; n <= 10; n++) {
     const k = G.kreideKette(n, { breite: 120 });
@@ -157,40 +158,78 @@ test("Kreidekette: zehn Stäbchen zu je n Perlen, Fünfermarke nach der fünften
     for (const st of k.staebchen) {
       assert.equal(st.perlen.length, n, `${n}: Stäbchen ${st.nr}`);
       assert.equal(st.reihe, st.nr <= 5 ? 0 : 1);
+      // Das Stäbchen liegt quer zum Weg: alle Perlen untereinander, von vorn (unten) nach hinten (oben) gezählt.
+      for (let i = 1; i < n; i++) {
+        assert.ok(Math.abs(st.perlen[i].x - st.perlen[0].x) < 4, `${n}: Perlen in einer Linie (Fluchtlinien laufen leicht zusammen)`);
+        assert.ok(st.perlen[i - 1].y - st.perlen[i].y > st.perlen[i].ry * 1.6, `${n}: Perlen einzeln`);
+      }
       if (n > 5) {
         assert.ok(st.marke, `${n}: Marke`);
-        assert.ok(st.marke.x > st.perlen[4].x && st.marke.x < st.perlen[5].x, `${n}: Marke zwischen 5. und 6. Perle`);
+        assert.ok(st.marke.y < st.perlen[4].y && st.marke.y > st.perlen[5].y, `${n}: Marke zwischen 5. und 6. Perle`);
       } else assert.equal(st.marke, null);
-      // Perlen von links nach rechts, einzeln (kein Überlappen).
-      for (let i = 1; i < n; i++) assert.ok(st.perlen[i].x - st.perlen[i - 1].x > st.perlen[i].rx * 1.6, `${n}: Perlen einzeln`);
     }
-    // Beide Reihen von links nach rechts; die hintere liegt weiter oben und ist kleiner (Tiefe).
+    // Beide Reihen von links nach rechts; die hintere liegt weiter oben, ist aber kaum kleiner (flache Perspektive).
     assert.ok(k.staebchen[4].mitte.x > k.staebchen[0].mitte.x && k.staebchen[9].mitte.x > k.staebchen[5].mitte.x);
     assert.ok(k.staebchen[5].mitte.y < k.staebchen[0].mitte.y);
-    assert.ok(k.staebchen[5].mitte.s < 1 && Math.abs(k.staebchen[0].mitte.s - 1) < 1e-9);
-    assert.equal(k.stand(6).s, k.staebchen[5].mitte.s, "Lena wird hinten kleiner");
+    assert.ok(k.staebchen[5].mitte.s < k.staebchen[0].mitte.s && k.staebchen[5].mitte.s >= 0.85 && Math.abs(k.staebchen[0].mitte.s - 1) < 0.06);
+    assert.equal(k.stand(6).s, k.staebchen[5].feld[0].s, "Lena wird hinten kaum kleiner");
+    assert.ok(k.stand(6).s >= 0.8, "Lena hinten nicht kleiner als 0,8");
   }
   assert.equal(G.kreideKette(0, { breite: 120 }), null);
   assert.equal(G.kreideKette(11, { breite: 120 }), null);
 });
 
-test("Kreidekette: das Kästchen von Stäbchen k zeigt auf die Grenze zum nächsten Feld, die Zahl k · n liegt dort", () => {
+test("Kreidekette: große Reihen haben große Perlen (vorn mindestens 2 rem, hinten mindestens 1,6 rem breit)", () => {
+  for (const breite of [100, 120, 130]) {
+    for (let n = 6; n <= 10; n++) {
+      const k = G.kreideKette(n, { breite });
+      const vorn = k.staebchen[0].perlen[0];
+      const hinten = k.staebchen[9].perlen[0];
+      assert.ok(2 * vorn.rx * REM >= 2, `${n} bei ${breite}: vorn ${2 * vorn.rx}`);
+      assert.ok(2 * hinten.rx * REM >= 1.6, `${n} bei ${breite}: hinten ${2 * hinten.rx}`);
+      assert.ok(2 * hinten.ry >= 1.2, `${n}: auch hinten sichtbar hoch (${2 * hinten.ry})`);
+      assert.ok(hinten.rx >= 0.85 * vorn.rx, `${n}: hinten nicht kleiner als 0,85 der vorderen`);
+    }
+  }
+});
+
+test("Kreidekette: Lena steht am hinteren Rand des Feldes, nicht darauf", () => {
+  const k = G.kreideKette(8, { breite: 120 });
+  for (let nr = 1; nr <= 10; nr++) {
+    const st = k.staebchen[nr - 1];
+    const p = k.stand(nr);
+    const hinten = Math.min(st.feld[0].y, st.feld[1].y);
+    assert.ok(Math.abs(p.y - hinten) < 1e-9, `${nr}: Füße auf dem hinteren Feldrand`);
+    assert.ok(p.y < st.perlen[st.perlen.length - 1].y, `${nr}: hinter der letzten Perle`);
+    assert.ok(Math.abs(p.x - st.mitte.x) < 4, `${nr}: mittig (Fluchtlinien laufen leicht zusammen)`);
+  }
+  // Der Startplatz liegt auf derselben Linie wie das erste Feld (der Hüpfer ist waagerecht).
+  assert.ok(Math.abs(k.stand(0).y - k.stand(1).y) < 1e-9 && k.stand(0).x < k.staebchen[0].feld[0].x);
+});
+
+test("Kreidekette: das Kästchen von Stäbchen k steht rechts am Ende des Stäbchens, die Zahl k · n liegt dort", () => {
   const k = G.kreideKette(7, { breite: 120 });
   for (let nr = 1; nr <= 10; nr++) {
     const p = k.pfeil(nr);
     const st = k.staebchen[nr - 1];
-    assert.ok(Math.abs(p.x - (st.feld[1].x + st.feld[2].x) / 2) < 0.5, `${nr}: Kästchen an der Feldgrenze`);
-    assert.ok(p.x > st.ende.x, `${nr}: hinter dem Ende des Stäbchens`);
-    assert.ok(p.y > st.mitte.y, `${nr}: vor der Reihe (näher am Kind)`);
-    assert.deepEqual([k.ort(nr * 7).x, k.ort(nr * 7).reihe], [p.x, st.reihe]);
+    assert.equal(p.spitze.y, k.ort(nr * 7).y, `${nr}: Spitze an der Stelle der Zahl`);
+    assert.ok(p.spitze.x > st.mitte.x && p.x > p.spitze.x, `${nr}: rechts vom Stäbchen`);
+    assert.ok(p.spitze.y < st.perlen[6].y, `${nr}: hinter der letzten Perle (am Ende des Stäbchens)`);
+    assert.equal(k.ort(nr * 7).nr, nr);
+    assert.equal(p.s, 1, `${nr}: Kästchen hinten so groß wie vorn`);
   }
-  // 48 auf der Siebenerkette: auf Stäbchen 7 zwischen der 6. und 7. Perle, das hohle Kästchen steht darüber.
+  // 48 auf der Siebenerkette: auf Stäbchen 7 zwischen der 6. und 7. Perle, das hohle Kästchen steht links davon.
   const o = k.ort(48);
   const st7 = k.staebchen[6];
-  assert.ok(o.x > st7.perlen[5].x && o.x < st7.perlen[6].x);
-  assert.ok(k.hohl(48).y < st7.mitte.y);
-  // Hinter dem Ende der Kette (größer als 10 · n).
-  assert.ok(k.ort(75).ueber && k.ort(75).x > k.staebchen[9].ende.x);
+  assert.equal(o.nr, 7);
+  assert.ok(o.y < st7.perlen[5].y && o.y > st7.perlen[6].y);
+  const h = k.hohl(48);
+  assert.ok(h.seite === -1 && h.x < st7.mitte.x && h.y === o.y);
+  // Pfeilchen und hohles Kästchen desselben Stäbchens liegen auf verschiedenen Seiten (kein Überdecken).
+  assert.ok(k.pfeil(7).x > st7.mitte.x && h.x < st7.mitte.x);
+  // Hinter dem Ende der Kette (größer als 10 · n): rechts außen am letzten Feld.
+  const u = k.ort(75);
+  assert.ok(u.ueber && u.x > k.staebchen[9].feld[1].x && k.hohl(75).x > u.x);
 });
 
 test("Kreidekette: Kreide in der Montessori-Farbe der Reihe (LERNFARBE.perle)", () => {

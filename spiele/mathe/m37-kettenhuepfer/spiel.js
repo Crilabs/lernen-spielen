@@ -544,7 +544,7 @@ function setzeEingabe(text) {
 /**
  * Die getippte Zahl fliegt aus dem Kästchen der Aufgabe an ihren Platz an der Kette (Mitte des Kreide-Kästchens
  * `ziel`) und wird dabei so klein, wie die Tiefe der Straße dort sagt.
- * @param {string} text @param {{ x: number, y: number, rem: number, s: number } | null} ziel
+ * @param {string} text @param {{ x: number, y: number, rem: number, s: number, schrift?: number } | null} ziel
  * @param {{ hohl?: boolean }} [o] @returns {{ fertig: Promise<void>, ueberspringe: () => void }}
  */
 function fliege(text, ziel, { hohl = false } = {}) {
@@ -560,7 +560,7 @@ function fliege(text, ziel, { hohl = false } = {}) {
   figurenLage.append(el);
   const b = el.offsetWidth;
   const h = el.offsetHeight;
-  const f1 = (5.4 * ziel.s * r) / schrift; // Schrift des Kreide-Kästchens
+  const f1 = ((ziel.schrift ?? 5.4 * ziel.s) * r) / schrift; // Schrift des Kreide-Kästchens
   const x0 = start.left + start.width / 2 - b / 2;
   const y0 = start.top + start.height / 2 - h / 2;
   const x1 = ziel.x - b / 2;
@@ -648,20 +648,20 @@ function wirkungRichtig(a, b, { satz = false, freude = true } = {}) {
   return ablauf;
 }
 
+/** Bis zu welchem Stäbchen die Kette in Kopf steht, wenn w gezeigt wird (a gehüpft, w liegt auf Stäbchen ⌈w / n⌉). @param {number} a @param {number} w */
+const bisZu = (a, w) => Math.max(a, Math.min(10, Math.ceil(w / n)));
+
 /**
  * Daneben: Lena hüpft trotzdem a Stäbchen, unter ihr hängt ein „?“; das Pfeilchen der getippten Zahl fliegt hohl an
  * den Ort, wo sie wirklich liegt, und wackelt; Lena staunt hin. Nie reizvoller als richtig (N7).
- * @param {number} a @param {number} w getippt @param {boolean} kopfZu Kopf ohne Hilfe: Kette unter dem Tuch zeigen
+ * @param {number} a @param {number} w getippt @param {boolean} kopfZu Kopf ohne Hilfe: die Kette malt sich bis zur Zahl weiter
  */
 function wirkungDaneben(a, w, kopfZu) {
   let gesetzt = false;
   const setze = () => {
     if (gesetzt) return;
     gesetzt = true;
-    if (kopfZu) {
-      kette.removeAttribute("bis");
-      kette.setAttribute("verdeckt", "");
-    }
+    if (kopfZu) kette.setAttribute("bis", String(bisZu(a, w)));
     kette.setAttribute("frage", String(a));
     kette.setAttribute("hohl", String(w));
     lena.haltung("staunen", { ms: 220 });
@@ -670,10 +670,8 @@ function wirkungDaneben(a, w, kopfZu) {
   return (async () => {
     await hinHuepfen(a).gelandet;
     if (gesetzt) return;
-    if (kopfZu) {
-      kette.removeAttribute("bis");
-      kette.setAttribute("verdeckt", "");
-    }
+    // Kopf: dasselbe Bild wie beim Hüpfen (Felder mit Perlen); die Kette malt sich bis zum Feld der getippten Zahl weiter.
+    if (kopfZu) kette.setAttribute("bis", String(bisZu(a, w)));
     kette.setAttribute("frage", String(a));
     const f = fliege(String(w), kette.hohlPunkt(w), { hohl: true });
     laufend.push(f.ueberspringe);
@@ -960,12 +958,13 @@ function kindTippt(folge) {
   });
 }
 
-/** Spielt die Einführung auf der Kette von b. @param {number} b */
-async function einfuehrung(b) {
+/** Spielt die Einführung auf der Kette von b, in der Stufe der ersten Aufgabe (in Kopf wächst die Kette erst beim Hüpfen). @param {number} b @param {string} [stufe] */
+async function einfuehrung(b, stufe = "material") {
   einfuehrungLaeuft = true;
   try {
     // Die Kette der Einführung kommt sichtbar (Lena malt sie hin oder wischt, was nicht passt; ohne Satz).
-    await bereiteBild(b, "material", { satz: false });
+    await bereiteBild(b, stufe, { satz: false });
+    kopfStufe = stufe === "kopf";
     stand.phase = "einfuehrung";
     lena.haltung("stehen", { ms: 0 });
     // Schritt 1: Lena macht es vor.
@@ -985,6 +984,7 @@ async function einfuehrung(b) {
     await warte(500);
     // Schritt 2: das Kind tippt.
     await lenaZumStart();
+    if (kopfStufe) await rolleEin();
     geloest = new Set();
     kette.removeAttribute("pfeile");
     zeigeAufgabe(3, b);
@@ -1178,7 +1178,7 @@ let einfuehrungGespielt = false;
 $("anleitung")?.addEventListener("click", async () => {
   if (stand.phase !== "aufgabe" || einfuehrungLaeuft || n === null) return;
   const merke = { n, geloest: new Set(geloest), aufgabe: offeneAufgabe };
-  await einfuehrung(n);
+  await einfuehrung(n, stand.lernstufe === "kopf" ? "kopf" : "material");
   geloest = merke.geloest;
   await merke.aufgabe?.zeigeWieder();
   stand.phase = "aufgabe";
@@ -1215,7 +1215,7 @@ async function spieleRunde(vorschau) {
   const erste = malAus(aufgabe?.ziel?.key);
   if (!einfuehrungGespielt && erste && (!vorschau || params.has("einfuehrung"))) {
     einfuehrungGespielt = true;
-    await einfuehrung(einfuehrungsKette(erste.a, erste.b));
+    await einfuehrung(einfuehrungsKette(erste.a, erste.b), aufgabe?.stufe === "kopf" ? "kopf" : "material");
     r.einfuehrungGesehen();
   }
   $("anleitung")?.removeAttribute("hidden");

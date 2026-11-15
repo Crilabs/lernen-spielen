@@ -5,7 +5,8 @@
 //
 // Bedeutung wie das Lernzeichen Perlenkette (spiele/rahmen/perlenkette.js, das unverändert bleibt): zehn Stäbchen zu
 // je n Perlen in der Montessori-Farbe von n (Kreide in der Farbe der Perlen), jede Perle einzeln, Fünfermarke nach
-// der fünften, zwei Reihen zu fünf. Unter dem Ende eines Stäbchens steht sein Kreide-Kästchen mit der Zahl k · n.
+// der fünften, zwei Reihen zu fünf. Jedes Stäbchen liegt quer zum Weg in seinem Feld; neben seinem Ende steht sein
+// Kreide-Kästchen mit der Zahl k · n.
 //
 // Attribute (Listen: Nummern der Stäbchen 1–10, durch Leerzeichen getrennt):
 //   reihe     n (1–10)
@@ -273,11 +274,6 @@ export class M37Kreidekette extends HTMLElement {
     // Startkreis: hier steht Lena vor dem ersten Hüpfer.
     const st = g.start;
     s += `<path d="${rauheEllipse(st.x, st.y, 4.2 * st.s, 4.2 * st.s * 0.5 * st.s, rndVon(0), 0.05)}" fill="none" stroke="${KREIDE}" stroke-width="${z(0.45 * st.s)}" opacity="0.9"/>`;
-    for (const gl of g.glieder) {
-      const nr = g.staebchen.findIndex((x) => x.ende === gl.von) + 1;
-      if (!da.has(nr) || !da.has(nr + 1)) continue;
-      s += `<path data-glied="${nr}" d="${strich(gl.von.x, gl.von.y, gl.bis.x, gl.bis.y, rndVon(nr + 40), 0.2)}" stroke="${KREIDE}" stroke-width="${z(0.26 * gl.von.s)}" stroke-dasharray="${z(0.5 * gl.von.s)} ${z(0.55 * gl.von.s)}" stroke-linecap="round" fill="none" opacity="0.75"/>`;
-    }
     for (const stab of g.staebchen) {
       if (!da.has(stab.nr)) continue;
       const rnd = rndVon(stab.nr);
@@ -286,16 +282,15 @@ export class M37Kreidekette extends HTMLElement {
       const perlen = mitPerlen.has(stab.nr);
       const perlenNeu = bewegt && perlen && (neu || !perlenVorher.has(stab.nr));
       const sm = stab.mitte.s;
-      const h = g.halb(stab.reihe);
+      const ka = stab.kasten;
       s += `<g class="stab${neu ? " neu" : ""}" data-stab="${stab.nr}">`;
       s += `<path class="teil" d="${feldStriche(stab.feld, rnd)}" stroke="${KREIDE}" stroke-width="${z(0.42 * sm)}" stroke-linecap="round" fill="none" opacity="0.88"/>`;
       if (hell.includes(stab.nr)) s += `<path d="${viereck(stab.feld)}" fill="${SONNE}" fill-opacity="0.3" stroke="${SONNE}" stroke-width="${z(0.8 * sm)}" stroke-linejoin="round"/>`;
-      // Leeres Kästchen des Stäbchens: so lang wie die Perlen, Grenzen an beiden Enden, die Fünfermarke (Vorstellung).
-      const b = stab.ende.x - stab.anfang.x + h * 2.1;
-      const hoch = Math.max(h * 2.6, 3.2 * sm * sm);
-      const kasten = `<path class="teil kasten" d="${rauherKasten(stab.mitte.x, stab.mitte.y, b, hoch, rnd)}" fill="${farbe}" fill-opacity="0.3" stroke="${farbe}" stroke-width="${z(0.75 * sm)}" stroke-linejoin="round"/>`;
-      const grenzen = [stab.anfang, stab.ende].map((e, i) => `<path class="teil" d="${strich(e.x + (i ? h : -h) * 1.05, e.y - hoch * 0.62, e.x + (i ? h : -h) * 1.05, e.y + hoch * 0.62, rnd, 0.06 * sm)}" stroke="${KREIDE}" stroke-width="${z(0.6 * sm)}" stroke-linecap="round" fill="none"/>`).join("");
-      const marke = stab.marke ? `<path class="teil" d="${strich(stab.marke.x, stab.marke.y - Math.max(h * 1.9, hoch * 0.62), stab.marke.x, stab.marke.y + Math.max(h * 1.9, hoch * 0.62), rnd, 0.1 * sm)}" stroke="${KREIDE}" stroke-width="${z(0.5 * sm)}" stroke-linecap="round" fill="none"/>` : "";
+      // Leeres Kästchen des Stäbchens: so lang wie die Perlen (quer zum Weg), Grenzen an beiden Enden, die Fünfermarke (Vorstellung).
+      const kasten = `<path class="teil kasten" d="${rauherKasten(ka.x, ka.y, ka.b, ka.h, rnd)}" fill="${farbe}" fill-opacity="0.3" stroke="${farbe}" stroke-width="${z(0.75 * sm)}" stroke-linejoin="round"/>`;
+      const quer = (/** @type {{ x: number, y: number }} */ p, /** @type {number} */ halb, /** @type {number} */ w, /** @type {number} */ wackel) => `<path class="teil" d="${strich(p.x - halb, p.y, p.x + halb, p.y, rnd, wackel)}" stroke="${KREIDE}" stroke-width="${z(w)}" stroke-linecap="round" fill="none"/>`;
+      const grenzen = [stab.anfang, stab.ende].map((e, i) => quer({ x: e.x, y: ka.y + (i ? -1 : 1) * ka.h / 2 }, ka.b * 0.62, 0.6 * sm, 0.06 * sm)).join("");
+      const marke = stab.marke ? quer(stab.marke, ka.b * 0.62, 0.5 * sm, 0.1 * sm) : "";
       if (!perlen) {
         s += kasten + grenzen + marke;
       } else {
@@ -306,7 +301,7 @@ export class M37Kreidekette extends HTMLElement {
           s += `<g class="perle"${ver}><path d="${rauheEllipse(p.x, p.y, p.rx * 0.92, p.ry * 0.92, rnd)}" fill="${farbe}" opacity="0.94"/>`;
           s += `<path d="${rauheEllipse(p.x, p.y, p.rx * 0.95, p.ry * 0.95, rnd, 0.05)}" fill="none" stroke="${KREIDE}" stroke-width="${z(Math.min(0.32, p.rx * 0.13))}" opacity="0.85"/></g>`;
         });
-        s += `${marke}</g>`;
+        s += `${marke ? quer(stab.marke ?? stab.mitte, g.d * 0.95 * sm, 0.5 * sm, 0.1 * sm) : ""}</g>`;
       }
       s += `</g>`;
     }
@@ -319,7 +314,7 @@ export class M37Kreidekette extends HTMLElement {
       if (!da.has(nr)) continue;
       const text = mitZahl.includes(nr) ? String(nr * g.n) : mitFrage.includes(nr) ? "?" : ohneZahl.includes(nr) ? "" : null;
       if (text === null) continue;
-      s += this.kaestchen(g.pfeil(nr), text, { nr, markiert: markiert.includes(nr), frage: text === "?", rnd: rndVon(nr + 20) });
+      s += this.kaestchen(g.pfeil(nr, text), text, { nr, markiert: markiert.includes(nr), frage: text === "?", rnd: rndVon(nr + 20) });
     }
     const hohl = this.getAttribute("hohl");
     if (hohl !== null && /^\d{1,3}$/.test(hohl.trim())) s += `<g class="hohl">${this.kaestchen(g.hohl(Number(hohl)), String(Number(hohl)), { hohl: true, rnd: rndVon(99) })}</g>`;
@@ -327,26 +322,25 @@ export class M37Kreidekette extends HTMLElement {
   }
 
   /**
-   * Ein Kreide-Kästchen mit Text und einem Pfeilstrich zur Kette.
-   * @param {{ x: number, y: number, s: number, spitze: { x: number, y: number } }} k @param {string} text
+   * Ein Kreide-Kästchen mit Text und einem waagerechten Pfeilstrich zur Stelle an der Kette. Immer gleich groß
+   * (nicht kleiner mit der Tiefe): hinten ist es so gut lesbar wie vorn.
+   * @param {{ x: number, y: number, s: number, seite: number, breite: number, spitze: { x: number, y: number } }} k @param {string} text
    * @param {{ nr?: number, markiert?: boolean, frage?: boolean, hohl?: boolean, rnd: () => number }} o
    */
   kaestchen(k, text, { nr, markiert = false, frage = false, hohl = false, rnd }) {
-    const g = /** @type {NonNullable<typeof this.geo>} */ (this.geo);
     const s = k.s;
-    const b = g.kaestchenBreite(text) * s;
+    const b = k.breite * s;
     const h = KAESTCHEN.hoehe * s;
-    const oben = k.spitze.y < k.y;
-    const kante = k.y + (oben ? -h / 2 : h / 2);
-    const strichArt = hohl ? ` stroke-dasharray="${z(0.9 * s)} ${z(0.7 * s)}"` : "";
+    const kante = k.x - k.seite * (b / 2);
+    const strichArt = hohl ? ` stroke-dasharray="${z(0.9 * s)} ${z(0.6 * s)}"` : "";
     let t = `<g class="${hohl ? "" : "pfeil"}"${nr ? ` data-stab="${nr}"` : ""}>`;
     if (markiert) t += `<path d="${rauherKasten(k.x, k.y, b + 2.2 * s, h + 2.2 * s, rnd)}" fill="none" stroke="${SONNE}" stroke-width="${z(0.9 * s)}"/>`;
     // Pfeilstrich mit Spitze von der Kästchenkante zur Kette.
     const sp = k.spitze;
-    const r = oben ? 1 : -1;
-    t += `<path d="M${z(k.x)} ${z(kante)} L${z(sp.x)} ${z(sp.y + r * 0.2 * s)} M${z(sp.x - 0.9 * s)} ${z(sp.y + r * 1.1 * s)} L${z(sp.x)} ${z(sp.y)} L${z(sp.x + 0.9 * s)} ${z(sp.y + r * 1.1 * s)}" stroke="${KREIDE}" stroke-width="${z(0.38 * s)}" stroke-linecap="round" stroke-linejoin="round" fill="none"${strichArt}/>`;
-    t += `<path class="rahmen" pathLength="1" d="${rauherKasten(k.x, k.y, b, h, rnd)}" fill="${hohl ? "none" : "#5f5b56"}" fill-opacity="0.25" stroke="${KREIDE}" stroke-width="${z(0.4 * s)}"${strichArt} stroke-linejoin="round"/>`;
-    if (text) t += `<text class="zahl" x="${z(k.x)}" y="${z(k.y + KAESTCHEN.schrift * s * 0.36)}" font-size="${z(KAESTCHEN.schrift * s)}" text-anchor="middle" fill="${KREIDE}" opacity="${frage || hohl ? 0.8 : 1}">${text}</text>`;
+    const r = k.seite;
+    t += `<path d="M${z(kante)} ${z(k.y)} L${z(sp.x + r * 0.2 * s)} ${z(sp.y)} M${z(sp.x + r * 1.1 * s)} ${z(sp.y - 0.9 * s)} L${z(sp.x)} ${z(sp.y)} L${z(sp.x + r * 1.1 * s)} ${z(sp.y + 0.9 * s)}" stroke="${KREIDE}" stroke-width="${z((hohl ? 0.5 : 0.4) * s)}" stroke-linecap="round" stroke-linejoin="round" fill="none"${strichArt}/>`;
+    t += `<path class="rahmen" pathLength="1" d="${rauherKasten(k.x, k.y, b, h, rnd)}" fill="#5f5b56" fill-opacity="${hohl ? 0.32 : 0.25}" stroke="${KREIDE}" stroke-width="${z((hohl ? 0.6 : 0.4) * s)}"${strichArt} stroke-linejoin="round"/>`;
+    if (text) t += `<text class="zahl" x="${z(k.x)}" y="${z(k.y + KAESTCHEN.schrift * s * 0.36)}" font-size="${z(KAESTCHEN.schrift * s)}" text-anchor="middle" fill="${KREIDE}">${text}</text>`;
     return `${t}</g>`;
   }
 
@@ -355,7 +349,7 @@ export class M37Kreidekette extends HTMLElement {
   px(p) {
     const r = this.getBoundingClientRect();
     const rem = this.rem();
-    return { x: r.left + p.x * rem, y: r.top + p.y * rem, s: p.s, rem };
+    return { x: r.left + p.x * rem, y: r.top + p.y * rem, s: p.s, rem, schrift: KAESTCHEN.schrift * p.s };
   }
   /** @param {number} k 0 … 10 */
   standPunkt(k) {
@@ -365,12 +359,11 @@ export class M37Kreidekette extends HTMLElement {
   pfeilPunkt(k) {
     return this.geo && k >= 1 && k <= 10 ? this.px(this.geo.pfeil(k)) : null;
   }
-  /** Anfang und Ende der Perlen von Stäbchen k (px), für Schwamm und Kreide. @param {number} k 1 … 10 */
+  /** Von links nach rechts quer über das Feld von Stäbchen k (px), für Schwamm und Kreide. @param {number} k 1 … 10 */
   stabOrt(k) {
     const st = this.geo?.staebchen[k - 1];
     if (!st) return null;
-    const h = this.geo.halb(st.reihe);
-    return { anfang: this.px({ ...st.anfang, x: st.anfang.x - h }), ende: this.px({ ...st.ende, x: st.ende.x + h }), s: st.mitte.s };
+    return { anfang: this.px(st.quer.von), ende: this.px(st.quer.bis), s: st.mitte.s };
   }
   /** @param {number} zahl */
   hohlPunkt(zahl) {
