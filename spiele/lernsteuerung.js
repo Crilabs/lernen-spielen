@@ -664,35 +664,6 @@ export function echteDingeFuer(ctx, themaId) {
     titel: da ? text(v.titel) : "", formen, eltern: text(t.eltern), entwurf: da && v.entwurf === true };
 }
 
-// Übersicht „Mit echten Dingen“ (spiele/mit-echten-dingen.html): woran das Kind gerade ist.
-// { dran, bald, wiederholen }: je [{ ...echteDingeFuer, zustand, spiel }] (spiel = ein digitales Spiel übt das Thema)
-//   dran        Themen „dran“ (Planreihenfolge); dazu je Strang, in dem schon ein Thema dran oder gekonnt ist, das
-//               erste Thema ohne Spiel, dessen Voraussetzungen alle gekonnt sind (so werden Themen ohne Spiel sichtbar,
-//               ohne dass alle Fächer auf einmal kommen)
-//   bald        Themen „in Sicht“ (wie auf der Fach-Seite, höchstens K.IN_SICHT je Strang); dazu in denselben Strängen
-//               höchstens ein weiteres Thema ohne Spiel
-//   wiederholen die zuletzt erspielten Themen (ohne von Eltern Abgehaktes), neueste zuerst, höchstens `wiederholen`
-export function themenMitEchtenDingen(ctx, stand, { wiederholen = 3 } = {}) {
-  const z = zustaende(ctx, stand);
-  const inSicht = new Set(Object.values(sichtbar(ctx, stand)).flat().filter((id) => z[id] === "in-sicht"));
-  const bekannt = new Set(themenVon(ctx).map((t) => t.id));
-  const bereit = (t) => (t.voraussetzungen ?? []).every((v) => !bekannt.has(v) || z[v] === "kann-ich");
-  const eintrag = (t) => ({ ...echteDingeFuer(ctx, t.id), zustand: z[t.id], spiel: spieleFuer(ctx, t.id).length > 0 });
-  const begonnen = new Set(themenVon(ctx).filter((t) => z[t.id] === "dran" || z[t.id] === "kann-ich").map((t) => t.strang));
-  const dran = [], bald = [], ohneSpiel = {};
-  for (const t of themenVon(ctx)) {
-    if (z[t.id] === "dran") { dran.push(eintrag(t)); continue; }
-    if (inSicht.has(t.id)) { bald.push(eintrag(t)); continue; }
-    if (!begonnen.has(t.strang) || z[t.id] === "kann-ich" || spieleFuer(ctx, t.id).length > 0 || !bereit(t)) continue;
-    const n = (ohneSpiel[t.strang] = (ohneSpiel[t.strang] ?? 0) + 1);
-    if (n === 1) dran.push({ ...eintrag(t), zustand: "dran" });
-    else if (n === 2) bald.push({ ...eintrag(t), zustand: "in-sicht" });
-  }
-  const gekonnt = gekonnteThemen(ctx, stand).filter((g) => !g.vonEltern).reverse().slice(0, Math.max(0, wiederholen))
-    .map((g) => eintrag(themaVon(ctx, g.id)));
-  return { dran, bald, wiederholen: gekonnt };
-}
-
 // ---------- Elternbereich ----------
 
 const GERADE_DRAN_TAGE = 7;
@@ -764,6 +735,23 @@ export function mitVoraussetzungen(ctx, stand, ids) {
     offen.push(...(nachId.get(id).voraussetzungen ?? []));
   }
   return themenVon(ctx).filter((t) => dabei.has(t.id)).map((t) => t.id);
+}
+
+// „Als Nächstes“ im Lernplan der Eltern: je Thema dran höchstens `max` Themen, die darauf folgen – zuerst die, die es als
+// Voraussetzung haben (Planreihenfolge, auch fachfremd), dann die nächsten im Lernplan desselben Fachs; nie gekonnte
+// oder schon dran. Liefert die Ids als Set.
+export function alsNaechstes(ctx, stand, max = 3) {
+  const z = zustaende(ctx, stand);
+  const themen = themenVon(ctx);
+  const frei = (t) => z[t.id] !== "kann-ich" && z[t.id] !== "dran";
+  const out = new Set();
+  themen.forEach((d, i) => {
+    if (z[d.id] !== "dran") return;
+    const folgen = themen.filter((t) => frei(t) && (t.voraussetzungen ?? []).includes(d.id));
+    for (const t of themen.slice(i + 1)) if (t.strang === d.strang && frei(t) && !folgen.includes(t)) folgen.push(t);
+    for (const t of folgen.slice(0, max)) out.add(t.id);
+  });
+  return out;
 }
 
 // Eltern haken ab (Lernplan im Elternbereich): die Themen samt offenen Voraussetzungen werden kann-ich mit

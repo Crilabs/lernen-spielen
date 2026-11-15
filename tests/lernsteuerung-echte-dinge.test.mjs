@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-const { echteDingeFuer, themenMitEchtenDingen, markiereGekonnt, startThema, neuerStand, zustaende } = await import("../spiele/lernsteuerung.js");
+const { echteDingeFuer } = await import("../spiele/lernsteuerung.js");
 
 const thema = (id, voraussetzungen, aufgaben, extra = {}) => ({
   id, name: `Name ${id}`, sprich: `Sprich ${id}`, strang: "mathe", voraussetzungen, aufgaben,
@@ -46,55 +46,9 @@ test("echteDingeFuer: mit Anleitung (nur gültige Formen), ohne Anleitung, falsc
   assert.equal(echteDingeFuer({ plan: PLAN, spiele: SPIELE }, "z7").datei, null); // ohne Verzeichnis
 });
 
-test("themenMitEchtenDingen leer: nur Themen in Sicht (mit Spiel), keine Themen ohne Spiel in unberührten Fächern", () => {
-  const r = themenMitEchtenDingen(CTX, neuerStand());
-  assert.deepEqual(r.dran, []);
-  assert.deepEqual(r.bald.map((t) => [t.id, t.zustand, t.spiel]), [["z5", "in-sicht", true]]);
-  assert.deepEqual(r.wiederholen, []);
-});
-
-test("themenMitEchtenDingen: in einem begonnenen Fach das erste Thema ohne Spiel dran, höchstens eins mehr bald", () => {
-  const stand = neuerStand();
-  startThema(stand, "a2", "2026-11-10"); // lesen begonnen (gespeichert dran, auch ohne Spiel)
-  const r = themenMitEchtenDingen(CTX, stand);
-  assert.deepEqual(r.dran.map((t) => [t.id, t.zustand]), [["a1", "dran"], ["a2", "dran"]]);
-  assert.deepEqual(r.bald.map((t) => t.id), ["z5", "a3"]); // mathe unberührt: kein Thema ohne Spiel; lesen: a3, nicht a4
-});
-
-test("themenMitEchtenDingen: dran mit Spiel, gekonnte zum Wiederholen (neueste zuerst, höchstens drei), schreibt nichts", () => {
-  const stand = neuerStand();
-  markiereGekonnt(stand, "zaehlen", "2026-11-01");
-  markiereGekonnt(stand, "z5", "2026-11-03");
-  markiereGekonnt(stand, "a1", "2026-11-05");
-  markiereGekonnt(stand, "a2", "2026-11-04");
-  markiereGekonnt(stand, "z6", "2026-11-02");
-  startThema(stand, "z7", "2026-11-10");
-  const vorher = JSON.stringify(stand);
-  const r = themenMitEchtenDingen(CTX, stand);
-  assert.equal(JSON.stringify(stand), vorher);
-  assert.deepEqual(r.dran.map((t) => t.id), ["weiter", "z7", "a3"]);
-  assert.equal(r.dran[1].datei, "mathe/z7.md"); // z7 hat die Anleitung
-  assert.deepEqual(r.bald.map((t) => t.id), ["a4"]); // z8 braucht z7 gekonnt; a4 ist das eine weitere ohne Spiel
-  assert.deepEqual(r.wiederholen.map((t) => [t.id, t.zustand]), [["a1", "kann-ich"], ["a2", "kann-ich"], ["z5", "kann-ich"]]);
-  assert.equal(themenMitEchtenDingen(CTX, stand, { wiederholen: 1 }).wiederholen.length, 1);
-});
-
-test("themenMitEchtenDingen ändert die Zustände des Kindes nicht (Themen ohne Spiel bleiben dort verborgen)", () => {
-  const stand = neuerStand();
-  themenMitEchtenDingen(CTX, stand);
-  assert.equal(zustaende(CTX, stand).zaehlen, "verborgen");
-});
-
 test("mit dem echten Lernplan und dem Entwurfs-Verzeichnis: die Beispiele haben Formen", () => {
   const plan = JSON.parse(readFileSync(new URL("../spiele/lernplan.json", import.meta.url), "utf8"));
   const echteDinge = JSON.parse(readFileSync(new URL("../spiele/mit-echten-dingen/verzeichnis-entwurf.json", import.meta.url), "utf8"));
   const ctx = { plan, spiele: { spiele: [] }, echteDinge };
   for (const id of Object.keys(echteDinge.themen)) assert.ok(echteDingeFuer(ctx, id).formen.length >= 1, id);
-  const r = themenMitEchtenDingen(ctx, neuerStand());
-  assert.deepEqual(r.dran, []); // ohne Lernstand ist kein Fach begonnen
-  const stand = neuerStand();
-  markiereGekonnt(stand, "mehr-weniger-gleich-viele", "2026-11-01");
-  const m = themenMitEchtenDingen(ctx, stand);
-  assert.deepEqual(m.dran.map((t) => t.fach), ["mathe"]);
-  assert.ok(m.bald.length <= 1);
 });

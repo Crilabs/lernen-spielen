@@ -1,6 +1,6 @@
 // Druckblatt „Mit echten Dingen“ je Thema (docs/superpowers/specs/2026-11-14-echte-dinge-pdf-je-thema-design.md):
 // ein A4-Blatt mit allen Formen des Themas, voll (Ihr braucht, Schritte, Darauf kommt es an, Leichter/Schwerer).
-// Nur HTML, kein DOM: mit-echten-dingen.html setzt es in #blatt und druckt. Das Blatt hat keine Flächen; die
+// Nur HTML, kein DOM: echte-dinge-druck.js setzt es in #ls-blatt und druckt. Das Blatt hat keine Flächen; die
 // Fachfarbe (Tief-Ton) steht als --fach an der Wurzel und färbt Linien, Schrittkreise und die Randlinie des Kerns.
 // Das Fachsymbol kommt als SVG-Text (fachSvg) und wird in der Fachfarbe gezeichnet: Am Bildschirm malt die
 // Fachkachel es über eine Maske mit Hintergrundfarbe, und Hintergründe lässt der Druckdialog meist weg.

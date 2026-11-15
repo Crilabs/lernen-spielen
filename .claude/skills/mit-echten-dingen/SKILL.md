@@ -149,6 +149,6 @@ node werkzeuge/kosten/transkript.mjs "$T" --ordner spiele/mit-echten-dingen --ph
 Die App liest die Datei über das Verzeichnis (`verzeichnis.json`, nur freigegebene Anleitungen) an diesen Stellen:
 die eigene Seite der Anleitung `spiele/echt.html?thema=<id>`; die Karte „Mit echten Dingen“ auf der Startseite
 (`spiele/start/karten.js`, mit dem Titel der Anleitung) und im Regal; der Knopf auf der Fach-Seite; das ruhige Angebot
-in der Pause am Rundenende eines Spiels (`spiele/rahmen/pause.js`); die Übersicht für Erwachsene
-(`spiele/mit-echten-dingen.html`, je Thema ein PDF zum Drucken). Alle führen zu `echt.html`. Das Bild der Karte (`bild`)
-ist in der App noch nicht gebaut. Analoges Spielen zählt nie für den Lernstand.
+in der Pause am Rundenende eines Spiels (`spiele/rahmen/pause.js`). Sie führen zu `echt.html`. Für Erwachsene steht
+die Anleitung im Lernplan des Elternbereichs als Karte im aufgeklappten Thema (mit PDF je Thema); dort zeigt die Karte
+auch das Bild der Karte (`bild`), das Kinderseiten noch nicht zeigen. Analoges Spielen zählt nie für den Lernstand.

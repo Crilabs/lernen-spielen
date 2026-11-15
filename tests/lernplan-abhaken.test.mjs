@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 
 const L = await import("../spiele/lernsteuerung.js");
 const { mitVoraussetzungen, hakeAb, gekonnteThemen, elternThemen, zustaende, themaFuer, neueSitzung, migriereStand,
-  themenMitEchtenDingen, neuerStand } = L;
+  neuerStand } = L;
 
 const HEUTE = "2026-11-14";
 const thema = (id, strang, voraussetzungen, aufgaben, extra = {}) => ({
@@ -87,11 +87,18 @@ test("Reparatur: q bleibt nur bei kann-ich mit q eltern", () => {
   assert.equal("q" in s.themen.c, false);
 });
 
-test("Zum Wiederholen (Mit echten Dingen) ohne Eltern-kann", () => {
-  const ctx = { ...CTX, echteDinge: { themen: {} } };
+test("alsNaechstes: je Thema dran drei folgende – erst die, die darauf aufbauen, dann die nächsten im Fach; ohne gekonnte und dran", () => {
+  const { alsNaechstes } = L;
+  const plan = { themen: [
+    thema("a", "mathe", [], null), thema("b", "mathe", ["a"], null), thema("x", "mathe", [], null),
+    thema("c", "mathe", ["a"], null), thema("d", "mathe", [], null), thema("e", "mathe", [], null), thema("l", "lesen", ["a"], null),
+  ] };
+  const ctx = { plan, spiele: { spiele: [] } };
   const s = neuerStand();
-  s.themen.z5 = erspielt("2026-11-10");
-  hakeAb(ctx, s, ["ei"], HEUTE);
-  const ids = themenMitEchtenDingen(ctx, s).wiederholen.map((t) => t.id);
-  assert.equal(ids.includes("ei"), false);
+  s.themen.a = { z: "dran", seit: HEUTE, u: HEUTE };
+  s.themen.c = erspielt("2026-11-01");
+  assert.deepEqual([...alsNaechstes(ctx, s)], ["b", "l", "x"]);
+  assert.deepEqual([...alsNaechstes(ctx, neuerStand())], []);
+  s.themen.d = { z: "dran", seit: HEUTE, u: HEUTE };
+  assert.deepEqual([...alsNaechstes(ctx, s)].sort(), ["b", "e", "l", "x"]);
 });
