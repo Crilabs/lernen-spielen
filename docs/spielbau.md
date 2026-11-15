@@ -27,7 +27,7 @@ machen mehr Spaß; beides kommt aus derselben Änderung.
 **Vorrang:** §1 Spielkern und §8 Zeigen statt erklären gehen jeder anderen Regel vor – den Grundsätzen, den
 Checklisten in `grundsaetze-bilder.md` §13 und `bedienung.md` §10, den Kriterien A1–A12, W-… und Kartenbild in
 `spielentwicklung.md` und jedem Katalog-Eintrag. Widerspricht eine ältere Pflicht dem Spielkern, gilt der Spielkern.
-Die Grenzen §5 (G1–G13) bleiben immer.
+Die Grenzen §5 (G1–G14) bleiben immer.
 
 ### §1 Der Spielkern (vor allen anderen Regeln)
 
@@ -87,14 +87,12 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 - **Bewegung mit Gewicht:** Sprünge im Bogen mit Bodenkontakt (Landung leicht gestaucht, dann zurück), Einrasten mit
   kurzem Überschwingen, Dinge fallen mit Beschleunigung und setzen auf. Nur `transform` und `opacity` animieren (Web
   Animations API oder CSS), 60 Bilder je Sekunde, kein Ruckeln, keine Layout-Sprünge.
-- **Ton:** kurze, freundliche Klänge aus Web Audio (Hüpfer mit steigender Tonhöhe, Plopp beim Einrasten, weiches
-  „Boing“ daneben), nie laut, nie Schock. Ton aus über die Leiste gilt auch für sie.
+- **Ton:** kurze, freundliche Klänge aus Web Audio (steigende Hüpfer, Plopp, weiches „Boing“), nie laut; Ton aus gilt.
 - **Freude mit Abwechslung:** Die Wirkung einer richtigen Antwort hat zwei bis drei Varianten und ist nicht jedes
   Mal gleich groß (N5). Ab und zu ein kleiner Witz der Figur (sie wackelt, schaut, staunt) – nie bei jeder Aufgabe.
 - **Daneben ist ruhig, aber nicht tot:** Die Sache zeigt, wo die getippte Zahl wirklich liegt; die Figur schaut
   neugierig hin. Nie reizvoller als richtig (N7).
-- **Wenig Bewegung** (`prefers-reduced-motion`): gleiche Schritte, ohne Flug – das Spiel bleibt verständlich.
-- Vor der UI-Arbeit den Skill `frontend-design:frontend-design` laden.
+- **Wenig Bewegung** (`prefers-reduced-motion`): gleiche Schritte, ohne Flug.
 
 ### §5 Grenzen – gelten immer, werden geprüft
 
@@ -113,6 +111,7 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 | G11 | **Was als echt gilt, stimmt:** Sachfakten nur aus den geprüften Fakten der Welt; sonst ist es erkennbar Spiel („Hier …“) oder kommt nicht vor. Mengen in Mathe bleiben neutrales Material (Perlen). | K3, K4, L7 |
 | G12 | **Bedienung:** feste Plätze und Bausteine (Leiste, Blase, Hilfe, Pause, Tastatur), große Tippziele, jedes Ziehen auch per Tippen, alles vorlesbar, Information nie nur über Farbe, still beim Denken. | `bedienung.md` §3, §4, §10; §11 |
 | G13 | **Technik:** Vorlage mit RAHMEN, Lernsteuerung meldet jede Aufgabe, Test-Schnittstelle (`spiele/rahmen/pruefen.js`), Plattform nur über `spiele/kern/`, `npm test` grün. | `spielentwicklung.md` Ablage |
+| G14 | **Wer es kann, ist schnell fertig:** Probe zu Beginn; das Spiel lässt die Runde von der Lernsteuerung steuern, endet beim Ereignis „gekonnt“ und hält kein Kind in einem gekonnten Thema fest. Der Prüfstand prüft es (Kind „sicher“: höchstens 5 Aufgaben, Thema gekonnt, Pause). | L3, N1, `lernsteuerung.js` |
 
 ### §6 Werkzeuge – Angebot, kein Muss
 
@@ -211,7 +210,7 @@ beantwortet zuerst fünf Fragen, dann die Grenzen:
 4. **Ist es schön?** Stil, Farbe, Bewegung mit Gewicht, nichts ruckelt, nichts ist leer oder überladen.
 5. **Kommt es ohne Transfer aus?** Alles ist zu sehen, nichts muss übertragen werden; die Einführung wartet auf das Kind (§8).
 
-Dazu die **Streichliste**: was weg kann (mit Grund). Rot ist ein Spiel, wenn eine Grenze G1–G13 verletzt ist, eine
+Dazu die **Streichliste**: was weg kann (mit Grund). Rot ist ein Spiel, wenn eine Grenze G1–G14 verletzt ist, eine
 der fünf Fragen mit Nein beantwortet wird oder die Streichliste etwas nennt, das den Spielkern verdeckt.
 
 ### Kosten

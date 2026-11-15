@@ -417,7 +417,7 @@ function sicherStrategie(sp, { streng = true, merke } = {}) {
   };
 }
 
-async function kindSicher(sp, lauf) {
+async function kindSicher(sp, lauf, standVorher) {
   await sp.bild("start");
   const vorher = await sp.leuchten();
   const runde = await sp.spieleBisPause({
@@ -433,6 +433,17 @@ async function kindSicher(sp, lauf) {
   lauf.pruefe("keine Hilfe nötig (Hilfe leuchtet nie, Stufe 0)", !hilfeGesehen && e.every((x) => x.hilfe === 0), `leuchtete: ${hilfeGesehen}, ${JSON.stringify(e)}`);
   lauf.pruefe("Lernsteuerung bekommt jede Aufgabe mit ok gemeldet", e.length === runde.aufgaben.length && e.length > 0 && e.every((x) => x.ok === true && typeof x.ms === "number" && x.key),
     `${e.length} Meldungen für ${runde.aufgaben.length} Aufgaben: ${JSON.stringify(e)}`);
+  // G14 (docs/spielbau.md): Wer es kann, ist schnell fertig. Ein neues Thema beginnt mit der Probe; wer sie sicher
+  // löst, hat das Thema nach höchstens PROBE Aufgaben gekonnt, und die Runde endet in der Pause.
+  const name = "G14: wer es kann, ist schnell fertig (Probe: höchstens 5 Aufgaben, Thema gekonnt, Pause)";
+  if (z.vorschau) { lauf.nichtAnwendbar(name, "Vorschau (--stufe): die Lernsteuerung steuert hier nicht"); return; }
+  const plan = (st) => { try { return JSON.parse(st?.["lernstand-kind-1-lernplan"] ?? "{}").themen ?? {}; } catch { return {}; } };
+  const alt = plan(standVorher), neu = plan(await sp.speicher());
+  const neuGekonnt = Object.entries(neu).filter(([id, t]) => t.z === "kann-ich" && alt[id]?.z !== "kann-ich").map(([id]) => id);
+  const ohneProbe = Object.entries(neu).filter(([id, t]) => !alt[id] && t.stufe && t.stufe !== "kopf" && t.z !== "kann-ich");
+  if (!neuGekonnt.length && ohneProbe.length) { lauf.nichtAnwendbar(name, `Thema ${ohneProbe.map(([id]) => id)} ohne Stufe kopf: keine Probe`); return; }
+  lauf.pruefe(name, neuGekonnt.length > 0 && runde.aufgaben.length <= 5 && z.phase === "pause",
+    `gekonnt: ${neuGekonnt.join(", ") || "keins"}, ${runde.aufgaben.length} Aufgaben, Phase ${z.phase}`);
 }
 
 async function kindRatend(sp, lauf, _vorher, { wegtippen = false } = {}) {

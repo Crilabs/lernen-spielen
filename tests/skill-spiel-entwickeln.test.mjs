@@ -77,17 +77,17 @@ test("Probe: setzeProbe ändert nur den Eintrag selbst und lässt sich zurückne
   assert.equal(readFileSync(join(tmp, "spiele/spiele.json"), "utf8"), roh);
 });
 
-test("Regeln: Spielkern, Textbudget, Grenzen G1–G13, Werkzeuge und Streichen stehen im Block", () => {
+test("Regeln: Spielkern, Textbudget, Grenzen G1–G14, Werkzeuge und Streichen stehen im Block", () => {
   const r = regeln();
   for (const t of ["§1 Der Spielkern", "§2 Herausforderung", "§3 Textbudget", "§4 Schön und flüssig", "§5 Grenzen", "§6 Werkzeuge", "§7 Streichen", "§8 Zeigen statt erklären"])
     assert.ok(r.includes(t), t);
   const nummern = [...r.matchAll(/^\| (G\d+) \|/gm)].map((m) => m[1]);
-  assert.deepEqual(nummern, Array.from({ length: 13 }, (_, i) => `G${i + 1}`));
+  assert.deepEqual(nummern, Array.from({ length: 14 }, (_, i) => `G${i + 1}`));
 });
 
-test("Spielprüfung: Vorlage nennt die fünf Fragen und G1–G13, der Workflow rechnet genau diese Fragen", () => {
+test("Spielprüfung: Vorlage nennt die fünf Fragen und G1–G14, der Workflow rechnet genau diese Fragen", () => {
   const p = readFileSync(join(SKILL, "pruefen.md"), "utf8");
-  assert.match(p, /G1–G13/);
+  assert.match(p, /G1–G14/);
   for (const f of ["Zehnmal", "Kern", "Schwierigkeit", "Schön", "Ohne Transfer"]) assert.ok(p.includes(`**${f}:**`), f);
   assert.match(WORKFLOW, /\['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'ohneTransfer'\]/);
 });

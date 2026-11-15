@@ -39,7 +39,7 @@ Workflow-Werkzeug mit `name: "spiel-bauen"` und `args: { lauf: <lauf.json als Ob
 
 Er macht: **Idee** (frischer Agent, nur Bauheft → `docs/spiele/<fach>/<spiel>.md`) → je Runde **Bau** (frischer
 Agent) → **Prüfstand** (`werkzeuge/spielbau/pruefstand.mjs`: npm test, Durchspielen je Stufe, Textprüfung,
-Filmstreifen mit Takt; rot → einmal Reparatur) → **Spielprüfung** (frischer Prüfer: fünf Fragen, Grenzen G1–G13,
+Filmstreifen mit Takt; rot → einmal Reparatur) → **Spielprüfung** (frischer Prüfer: fünf Fragen, Grenzen G1–G14,
 Streichliste; Urteil fest gerechnet). Höchstens zwei Runden. Ergebnis `status`: `gruen`, `freigabe` (gebaut, aber
 neues Lernzeichen oder Widerspruch zu einer Entscheidung von Christian), `geparkt` oder `abgebrochen`.
 

@@ -22,7 +22,7 @@ Du siehst das Spiel mit den Augen eines Kindes von etwa sieben Jahren. Vergleich
    „X ist Y“ aus, zeigt sie eine neue Sache und wartet sie auf das Kind (Weiter-Knopf, `takt.json`
    `einfuehrungSchritte`)? „ja“ heißt: kein Transfer nötig.
 
-## Grenzen G1–G13
+## Grenzen G1–G14
 
 Je Grenze ok/nicht ok mit Beleg. Was der Prüfstand schon zeigt (Texte, Durchspielen), übernimmst du, statt es neu zu
 suchen.
