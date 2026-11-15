@@ -1,0 +1,27 @@
+{
+ "id": "haustiere",
+ "titel": "Ein Tag mit Mia, der Katze",
+ "art": "sachgeschichte",
+ "welt": "haustiere",
+ "familie": null,
+ "klasse": 1,
+ "quellen": [
+  { "fakt": "Ein hoch aufgerichteter Schwanz ist bei Katzen eine Begrüßung.", "quelle": "https://www.planet-wissen.de/natur/haustiere/katzen/pwiediesprachederkatzen100.html, abgerufen 2026-11-15" },
+  { "fakt": "Katzen sind auf Fleisch als Nahrung spezialisiert.", "quelle": "https://www.planet-wissen.de/natur/haustiere/katzen/was-katzen-fressen-sollten-100.html, abgerufen 2026-11-15" },
+  { "fakt": "Katzen brauchen stets frisches Trinkwasser; Milch vertragen sie oft nicht, sie ist kein Wasserersatz.", "quelle": "https://www.tierschutzbund.de/fileadmin/Seiten/Kampagne_Katzenschutz/Downloads/2404_Broschuere_Haltung_von_Katzen.pdf (Deutscher Tierschutzbund, Die Haltung von Katzen, S. 21), abgerufen 2026-11-15" },
+  { "fakt": "Katzen wetzen gern ihre Krallen; dafür brauchen sie einen Kratzbaum oder Kratzbretter.", "quelle": "https://www.tierschutzbund.de/fileadmin/Seiten/Kampagne_Katzenschutz/Downloads/2404_Broschuere_Haltung_von_Katzen.pdf (S. 13–15), abgerufen 2026-11-15" },
+  { "fakt": "Katzen schlafen etwa 14 bis 16 Stunden am Tag und liegen gern in der Sonne.", "quelle": "https://www.vier-pfoten.de/kampagnen-themen/themen/haustiere/katzen/10-fakten-ueber-katzen, abgerufen 2026-11-15; Wärme und Sonne: Tierschutzbund-Broschüre S. 13" },
+  { "fakt": "Mit einer Katze geht man jährlich in die tierärztliche Praxis (Impfungen, Gesundheitscheck).", "quelle": "https://www.tierschutzbund.de/fileadmin/Seiten/Kampagne_Katzenschutz/Downloads/2404_Broschuere_Haltung_von_Katzen.pdf (Impfungen), abgerufen 2026-11-15" },
+  { "fakt": "Schnurren zeigt meist Wohlfühlen (Katzen schnurren aber auch in unangenehmen Lagen, etwa bei Schmerzen).", "quelle": "https://www.planet-wissen.de/natur/haustiere/katzen/pwiediesprachederkatzen100.html, abgerufen 2026-11-15" }
+ ],
+ "seiten": [
+  { "text": "Am Morgen läuft Mia zu Malik. Ihr Schwanz steht hoch. So begrüßen Katzen.", "bild": "bilder/01.webp" },
+  { "text": "Malik füllt den Napf mit Katzenfutter. Katzen fressen vor allem Fleisch.", "bild": "bilder/02.webp" },
+  { "text": "Mia hat Durst. Was glaubst du: Was trinkt Mia?", "bild": "bilder/03.webp", "frage": true },
+  { "text": "Mia trinkt frisches Wasser. Milch vertragen viele Katzen nicht.", "bild": "bilder/04.webp" },
+  { "text": "Mia wetzt ihre Krallen am Kratzbaum. Katzen brauchen einen Platz zum Kratzen.", "bild": "bilder/05.webp" },
+  { "text": "Mittags liegt Mia in der Sonne. Katzen schlafen viele Stunden am Tag. Malik lässt sie in Ruhe.", "bild": "bilder/06.webp" },
+  { "text": "Am Nachmittag besucht Mia die Tierärztin. Sie hört Mias Herz ab. Katzen kommen einmal im Jahr zur Kontrolle.", "bild": "bilder/07.webp" },
+  { "text": "Am Abend liegt Mia bei Malik. Sie schnurrt leise. Katzen schnurren oft, wenn sie sich wohlfühlen.", "bild": "bilder/08.webp" }
+ ]
+}

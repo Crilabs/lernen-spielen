@@ -1,0 +1,218 @@
+[
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 246,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "02.png (Versuch 1, verworfen)",
+  "usage": {
+   "input_tokens": 246,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 246
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1618
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 234,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "03.png",
+  "usage": {
+   "input_tokens": 234,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 234
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1606
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 244,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "04.png",
+  "usage": {
+   "input_tokens": 244,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 244
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1616
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 239,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "05.png",
+  "usage": {
+   "input_tokens": 239,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 239
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1611
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 224,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "06.png",
+  "usage": {
+   "input_tokens": 224,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 224
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1596
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 272,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "07.png",
+  "usage": {
+   "input_tokens": 272,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 272
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1644
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 270,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "01.png",
+  "usage": {
+   "input_tokens": 270,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 270
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1642
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 276,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "08.png",
+  "usage": {
+   "input_tokens": 276,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 276
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1648
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 277,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "02.png (Versuch 2)",
+  "usage": {
+   "input_tokens": 277,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 277
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1649
+  }
+ }
+]
