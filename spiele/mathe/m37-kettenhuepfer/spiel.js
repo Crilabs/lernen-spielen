@@ -1,7 +1,7 @@
 // M37 Kettenhüpfer (Idee: docs/spiele/mathe/m37-kettenhuepfer.md, Neubau 2026-11-15). Das Kind tippt das Ergebnis
-// einer Malaufgabe a · n und bestätigt mit Fertig; dann hüpft Lena a Stäbchen weit über die Perlenkette von n, jeder
-// Hüpfer ein Ton höher, und das Kärtchen mit der getippten Zahl fliegt von der Tafel als Pfeilchen an ihr Stäbchen
-// und rastet ein. Passt die Zahl nicht, hüpft Lena trotzdem a Stäbchen; unter ihr hängt ein „?“, und das Pfeilchen
+// einer Malaufgabe a · n und bestätigt mit Fertig; dann hüpft Lena a Stäbchen weit über die Perlenkette von n, die
+// mit Kreide auf die Straße gemalt ist (kreide.js), jeder Hüpfer ein Ton höher, und die getippte Zahl fliegt aus dem
+// Kästchen der Aufgabe an ihr Stäbchen und wird dort in ein Kreide-Kästchen geschrieben. Passt die Zahl nicht, hüpft Lena trotzdem a Stäbchen; unter ihr hängt ein „?“, und das Pfeilchen
 // der getippten Zahl fliegt hohl an den Ort, wo die Zahl wirklich liegt. Die Kette ist das Einmaleins.
 //
 // Aufbau wie die Spielvorlage (spiele/vorlage/spiel.js, dort die Schritte zum eigenen Spiel):
@@ -20,7 +20,8 @@ import "../../rahmen/hilfe.js";
 import "../../rahmen/pause.js";
 import "../../rahmen/knopf.js";
 import "../../rahmen/tastatur.js";
-import "../../rahmen/perlenkette.js";
+import "../../rahmen/perlenkette.js"; // nur für die Pause (Papierkarte)
+import "./kreide.js";
 import * as Runde from "../../runde/runde.js";
 import { malAus } from "../../aufgabenarten.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
@@ -38,7 +39,8 @@ const blase = $("blase");
 const hilfe = $("hilfe");
 const pause = $("pause");
 const kette = $("kette");
-const kettePlatz = $("kette-platz");
+const brett = $("brett");
+const schatten = $("schatten");
 const rechnung = $("rechnung");
 const karte = $("eingabe");
 const tastatur = $("tastatur");
@@ -69,6 +71,9 @@ const VORSCHAU = { thema: "Siebenerreihe", aufgaben: ["mal:6*7", "mal:3*7", "mal
 
 /** Sätze aus Daten (je Reihe, Aufgabe und getippter Zahl ausgeschrieben, texte.json). */
 const TEXTE = await fetch(new URL("texte.json", import.meta.url)).then((r) => r.json()).catch(() => null);
+
+/** Der zuletzt begonnene Satz nach einer Lösung; vor dem nächsten Satz des Spiels wartet es darauf (kein Satz wird abgeschnitten). @type {Promise<any>} */
+let letzterSatz = Promise.resolve();
 
 /** Der Erzähler (docs/stimme.md): beschreibt, was zu sehen ist, nie ein Urteil (grundsaetze.md 3.2). */
 const erzaehler = {
@@ -176,16 +181,14 @@ function ueberspringeAlles() {
   }
 }
 
-// --- Kette: füllt den Teppich (Breite und Höhe in rem an <ls-perlenkette>) -----------------------------
-new ResizeObserver(() => {
-  const r = kettePlatz.getBoundingClientRect();
-  for (const [attr, px] of [["breite", r.width], ["hoehe", r.height]]) {
-    const neu = px / remPx();
-    if (Math.abs(neu - Number(kette.getAttribute(attr) ?? 0)) > 0.3) kette.setAttribute(attr, neu.toFixed(1));
-  }
+// --- Kette: die Straße reicht bis ans Ziffernbrett (Breite in rem an <m37-kreidekette>) ---------------------
+function passeStrasseAn() {
+  const neu = brett.getBoundingClientRect().left / remPx() - 1.6;
+  if (neu > 0 && Math.abs(neu - Number(kette.getAttribute("breite") ?? 0)) > 0.3) kette.setAttribute("breite", neu.toFixed(1));
   requestAnimationFrame(() => stelleLena(lenaBei));
-}).observe(kettePlatz);
-addEventListener("resize", () => requestAnimationFrame(() => stelleLena(lenaBei)));
+}
+new ResizeObserver(passeStrasseAn).observe(brett);
+addEventListener("resize", passeStrasseAn);
 
 /** Stellt die Kette auf n um (leert sie bei einem Wechsel). @param {number} neu @returns {boolean} gewechselt */
 function kettenWechsel(neu) {
@@ -213,8 +216,13 @@ const FUSS = 254 / 280;
 lenaKoerper.innerHTML = Runde.zeichne("lena", { haltung: "stehen", blick: "rechts" });
 const lena = Runde.steuere(lenaKoerper.querySelector("svg"));
 
-/** @param {{ x: number, y: number }} p Fußpunkt (px) @param {number} [hoch] px über dem Punkt */
-const lenaTransform = (p, hoch = 0) => `translate(${(p.x - lenaEl.offsetWidth / 2).toFixed(1)}px, ${(p.y - lenaEl.offsetHeight * FUSS - hoch).toFixed(1)}px)`;
+/**
+ * Lena steht mit den Füßen auf p (px) und ist so groß, wie die Tiefe der Straße dort sagt (p.s; vorn 1).
+ * @param {{ x: number, y: number, s: number }} p @param {number} [hoch] px über dem Punkt
+ */
+const lenaTransform = (p, hoch = 0) => `translate(${(p.x - lenaEl.offsetWidth / 2).toFixed(1)}px, ${(p.y - lenaEl.offsetHeight * FUSS - hoch).toFixed(1)}px) scale(${p.s.toFixed(3)})`;
+/** Schatten am Boden unter Lena (kleiner und blasser, je höher sie ist). @param {{ x: number, y: number, s: number }} p @param {number} [luft] 0 … 1 */
+const schattenTransform = (p, luft = 0) => `translate(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px) scale(${(p.s * (1 - 0.35 * luft)).toFixed(3)}, ${(p.s * p.s * (1 - 0.35 * luft)).toFixed(3)})`;
 
 /** Lena steht auf Stäbchen k (0: Startplatz), ohne Bewegung. @param {number} k */
 function stelleLena(k) {
@@ -222,7 +230,10 @@ function stelleLena(k) {
   if (!p) return;
   lenaBei = k;
   lenaEl.getAnimations().forEach((a) => a.cancel());
+  schatten.getAnimations().forEach((a) => a.cancel());
   lenaEl.style.transform = lenaTransform(p);
+  schatten.style.transform = schattenTransform(p);
+  schatten.style.opacity = "1";
 }
 
 /**
@@ -264,13 +275,20 @@ function lenaHuepft(bis, { zeiten = [], vorher = () => {}, beiLandung = () => {}
       const ms = zurueck ? 420 : zeiten[k - 1] ?? 240;
       // Bogen: auf derselben Reihe 2,5 rem plus ein wenig je Weite; in die andere Reihe und zurück an den Start ein
       // flacher großer Bogen (nie bis in die Blase).
-      const hoch = reihenwechsel || zurueck ? 3 * rem : Math.min(4 * rem, 2.5 * rem + Math.abs(p1.x - p0.x) * 0.06);
-      const mitte = { x: (p0.x + p1.x) / 2, y: Math.min(p0.y, p1.y) };
+      const sm = (p0.s + p1.s) / 2;
+      const hoch = (reihenwechsel || zurueck ? 7 : Math.min(7, 4.5 + Math.abs(p1.x - p0.x) / rem * 0.12)) * rem * sm;
+      const mitte = { x: (p0.x + p1.x) / 2, y: reihenwechsel || zurueck ? Math.min(p0.y, p1.y) : (p0.y + p1.y) / 2, s: sm };
+      const boden = { x: (p0.x + p1.x) / 2, y: (p0.y + p1.y) / 2, s: sm };
       jetzt = [
         lenaEl.animate([
           { transform: lenaTransform(p0), easing: "ease-out" },
           { transform: lenaTransform(mitte, hoch), offset: 0.5, easing: "ease-in" },
           { transform: lenaTransform(p1) },
+        ], { duration: ms, fill: "forwards" }),
+        schatten.animate([
+          { transform: schattenTransform(p0), opacity: 1 },
+          { transform: schattenTransform(boden, 1), opacity: 0.55, offset: 0.5 },
+          { transform: schattenTransform(p1), opacity: 1 },
         ], { duration: ms, fill: "forwards" }),
         lenaKoerper.animate([
           { transform: "scale(1.07, 0.9)" },
@@ -282,8 +300,10 @@ function lenaHuepft(bis, { zeiten = [], vorher = () => {}, beiLandung = () => {}
       await jetzt[0].finished.catch(() => undefined);
       if (aus) return;
       lenaEl.style.transform = lenaTransform(p1);
+      schatten.style.transform = schattenTransform(p1);
       jetzt.forEach((a) => a.cancel());
       lenaBei = k;
+      if (!zurueck) kette.staub(p1.x, p1.y, p1.s);
       beiLandung(k);
     }
     if (aus) return;
@@ -318,7 +338,8 @@ function setzeEingabe(text) {
 }
 
 /**
- * Das Kärtchen der Tafel fliegt als Pfeilchen an die Kette (Spitze `ziel`; unten: das Pfeilchen zeigt nach unten).
+ * Die getippte Zahl fliegt aus dem Kästchen der Aufgabe an ihren Platz an der Kette (Mitte des Kreide-Kästchens
+ * `ziel`) und wird dabei so klein, wie die Tiefe der Straße dort sagt.
  * @param {string} text @param {{ x: number, y: number, rem: number, s: number } | null} ziel
  * @param {{ hohl?: boolean }} [o] @returns {{ fertig: Promise<void>, ueberspringe: () => void }}
  */
@@ -327,26 +348,24 @@ function fliege(text, ziel, { hohl = false } = {}) {
   setzeEingabe("");
   if (!ziel || wenigBewegung()) return { fertig: Promise.resolve(), ueberspringe: () => {} };
   const r = ziel.rem;
-  const s = ziel.s;
-  const hoehe = 4.8 * s * r;
-  const breite = Math.max(5.6 * s, text.length * 3.4 * s * 0.62 + 2 * s) * r;
-  const spitze = 1.1 * s * r;
   const el = document.createElement("div");
   el.className = `flug${hohl ? " hohl" : ""}`;
   el.textContent = text;
-  Object.assign(el.style, { width: `${breite}px`, height: `${hoehe}px`, fontSize: `${3.4 * s * r}px` });
+  const schrift = 6 * r; // wie im Kästchen der Aufgabe
+  el.style.fontSize = `${schrift}px`;
   figurenLage.append(el);
-  const x1 = ziel.x - breite / 2;
-  const y1 = hohl ? ziel.y - spitze - hoehe : ziel.y + spitze;
-  const f0 = start.height / hoehe;
-  const x0 = start.left + start.width / 2 - breite / 2;
-  const y0 = start.top + start.height / 2 - hoehe / 2;
-  const hoch = 3 * r;
+  const b = el.offsetWidth;
+  const h = el.offsetHeight;
+  const f1 = (5.4 * ziel.s * r) / schrift; // Schrift des Kreide-Kästchens
+  const x0 = start.left + start.width / 2 - b / 2;
+  const y0 = start.top + start.height / 2 - h / 2;
+  const x1 = ziel.x - b / 2;
+  const y1 = ziel.y - h / 2;
   const a = el.animate([
-    { transform: `translate(${x0}px, ${y0}px) scale(${f0})`, easing: "ease-out" },
-    { transform: `translate(${(x0 + x1) / 2}px, ${Math.min(y0, y1) - hoch}px) scale(${(f0 + 1) / 2}) rotate(-8deg)`, offset: 0.45, easing: "ease-in" },
-    { transform: `translate(${x1}px, ${y1}px) scale(1)` },
-  ], { duration: 360, fill: "forwards" });
+    { transform: `translate(${x0}px, ${y0}px) scale(1)`, easing: "ease-out" },
+    { transform: `translate(${(x0 + x1) / 2}px, ${Math.min(y0, y1) - 4 * r}px) scale(${(1 + f1) / 2}) rotate(-8deg)`, offset: 0.45, easing: "ease-in" },
+    { transform: `translate(${x1}px, ${y1}px) scale(${f1})` },
+  ], { duration: 380, fill: "forwards" });
   const weg = () => el.remove();
   return { fertig: a.finished.then(weg, weg), ueberspringe: () => { a.cancel(); weg(); } };
 }
@@ -403,7 +422,7 @@ function wirkungRichtig(a, b, { satz = false, freude = true } = {}) {
     setze();
     kette.einrasten(a);
     klang.plopp();
-    if (satz) erzaehler.gleichung(a, b);
+    if (satz) letzterSatz = erzaehler.gleichung(a, b).catch(() => undefined);
     if (!freude) return;
     const w = witz(a, ++seitWitz);
     const bewegung = w ?? naechsteFreude(vorigeFreude);
@@ -967,7 +986,10 @@ async function spieleRunde(vorschau) {
   while (aufgabe) {
     raeumeAuf();
     const z = malAus(aufgabe.ziel.key);
-    if (z && (neueRunde || z.b !== n)) await neueKette(z.b);
+    if (z && (neueRunde || z.b !== n)) {
+      await letzterSatz;
+      await neueKette(z.b);
+    }
     neueRunde = false;
     const e = await spieleAufgabe(aufgabe);
     const ergebnis = { key: e.key, ok: e.versuche === 0, hilfe: e.hilfe, ms: e.ms };
@@ -978,6 +1000,7 @@ async function spieleRunde(vorschau) {
   }
 
   raeumeAuf();
+  await letzterSatz;
   const { hinweisSpiel } = await r.ende();
   await zeigePause({ hinweis: hinweisSpiel, zeit: vorschau ? undefined : await amRundenende(), echteDinge: r.echteDinge });
   return spieleRunde(vorschau);

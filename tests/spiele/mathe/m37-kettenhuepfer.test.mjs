@@ -106,3 +106,55 @@ test("texte.json: je Reihe der Anfang, je Aufgabe die Gleichung, je Zahl bis 100
   const alleTexte = JSON.stringify(TEXTE);
   for (const w of ["super", "toll", "falsch", "leider", "Fehler", "richtig"]) assert.ok(!new RegExp(`\\b${w}\\b`, "i").test(alleTexte), w);
 });
+
+// --- Kreidekette auf der Straße (kreide-geometrie.js, gezeichnet in kreide.js) ------------------------------------
+const G = await import("../../../spiele/mathe/m37-kettenhuepfer/kreide-geometrie.js");
+
+test("Kreidekette: zehn Stäbchen zu je n Perlen, Fünfermarke nach der fünften, zwei Reihen zu fünf", () => {
+  for (let n = 1; n <= 10; n++) {
+    const k = G.kreideKette(n, { breite: 120 });
+    assert.ok(k, `${n}`);
+    assert.equal(k.staebchen.length, 10);
+    for (const st of k.staebchen) {
+      assert.equal(st.perlen.length, n, `${n}: Stäbchen ${st.nr}`);
+      assert.equal(st.reihe, st.nr <= 5 ? 0 : 1);
+      if (n > 5) {
+        assert.ok(st.marke, `${n}: Marke`);
+        assert.ok(st.marke.x > st.perlen[4].x && st.marke.x < st.perlen[5].x, `${n}: Marke zwischen 5. und 6. Perle`);
+      } else assert.equal(st.marke, null);
+      // Perlen von links nach rechts, einzeln (kein Überlappen).
+      for (let i = 1; i < n; i++) assert.ok(st.perlen[i].x - st.perlen[i - 1].x > st.perlen[i].rx * 1.6, `${n}: Perlen einzeln`);
+    }
+    // Beide Reihen von links nach rechts; die hintere liegt weiter oben und ist kleiner (Tiefe).
+    assert.ok(k.staebchen[4].mitte.x > k.staebchen[0].mitte.x && k.staebchen[9].mitte.x > k.staebchen[5].mitte.x);
+    assert.ok(k.staebchen[5].mitte.y < k.staebchen[0].mitte.y);
+    assert.ok(k.staebchen[5].mitte.s < 1 && Math.abs(k.staebchen[0].mitte.s - 1) < 1e-9);
+    assert.equal(k.stand(6).s, k.staebchen[5].mitte.s, "Lena wird hinten kleiner");
+  }
+  assert.equal(G.kreideKette(0, { breite: 120 }), null);
+  assert.equal(G.kreideKette(11, { breite: 120 }), null);
+});
+
+test("Kreidekette: das Kästchen von Stäbchen k zeigt auf die Grenze zum nächsten Feld, die Zahl k · n liegt dort", () => {
+  const k = G.kreideKette(7, { breite: 120 });
+  for (let nr = 1; nr <= 10; nr++) {
+    const p = k.pfeil(nr);
+    const st = k.staebchen[nr - 1];
+    assert.ok(Math.abs(p.x - (st.feld[1].x + st.feld[2].x) / 2) < 0.5, `${nr}: Kästchen an der Feldgrenze`);
+    assert.ok(p.x > st.ende.x, `${nr}: hinter dem Ende des Stäbchens`);
+    assert.ok(p.y > st.mitte.y, `${nr}: vor der Reihe (näher am Kind)`);
+    assert.deepEqual([k.ort(nr * 7).x, k.ort(nr * 7).reihe], [p.x, st.reihe]);
+  }
+  // 48 auf der Siebenerkette: auf Stäbchen 7 zwischen der 6. und 7. Perle, das hohle Kästchen steht darüber.
+  const o = k.ort(48);
+  const st7 = k.staebchen[6];
+  assert.ok(o.x > st7.perlen[5].x && o.x < st7.perlen[6].x);
+  assert.ok(k.hohl(48).y < st7.mitte.y);
+  // Hinter dem Ende der Kette (größer als 10 · n).
+  assert.ok(k.ort(75).ueber && k.ort(75).x > k.staebchen[9].ende.x);
+});
+
+test("Kreidekette: Kreide in der Montessori-Farbe der Reihe (LERNFARBE.perle)", () => {
+  const quelle = readFileSync(new URL("../../../spiele/mathe/m37-kettenhuepfer/kreide.js", import.meta.url), "utf8");
+  assert.match(quelle, /LERNFARBE\.perle\[/);
+});

@@ -4,97 +4,69 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>Kettenhüpfer</title>
-<!-- M37 Kettenhüpfer (Idee docs/spiele/mathe/m37-kettenhuepfer.md). Das Spielbild ist der ganze Raum: Wand mit Fenster,
-     Holzboden, darauf der Arbeitsteppich mit der großen Perlenkette, über die Lena hüpft; rechts die Tafel mit der
-     Aufgabe und das Ziffernbrett aus Holz. Leiste, Blase, Hilfe und Pause an ihren festen Plätzen. -->
+<!-- M37 Kettenhüpfer (Idee docs/spiele/mathe/m37-kettenhuepfer.md). Das Spielbild ist die Straße über den ganzen
+     Bildschirm: Die Perlenkette ist mit Kreide leicht perspektivisch auf den Asphalt gemalt, Lena hüpft sie ab
+     (Christian, 2026-11-15). Rechts mit Kreide die Aufgabe, darunter das Ziffernbrett aus Holz. Leiste, Blase, Hilfe
+     und Pause an ihren festen Plätzen. -->
 <link rel="stylesheet" href="../../rahmen/seite.css">
 <style>
-  /* ===== SPIELWELT: Lernraum der Runde. Alles in rem (1rem = Bildhöhe/108). ===== */
+  /* ===== SPIELWELT: Straße mit Kreide. Alles in rem (1rem = Bildhöhe/108). ===== */
   :root {
-    --wand: #EFE7DD;          /* Werkstatt, Himmel */
-    --wand-schatten: #E4D8C8;
-    --boden: #D9B994;         /* Holzboden */
-    --boden-fuge: #C49F75;
-    --filz: #F4E7D0;          /* Arbeitsteppich */
-    --filz-naht: #D6BC97;
-    --lena-hoehe: 18rem;      /* Feld der Figur (320 × 280); die Figur selbst ist etwa 15 rem hoch */
+    --kreide: #FBF8F1;
+    --lena-hoehe: 43rem;      /* Feld der Figur vorn (320 × 280); die Figur selbst ist etwa 36 rem hoch, ein Drittel des Bilds */
   }
-  /* Raum über den ganzen Bildschirm: Wand, Sockelleiste, Holzboden mit Dielen. */
-  .welt {
-    background:
-      linear-gradient(var(--wand) 0 61%, var(--ls-kante) 61% 61.6%, #E9D3B4 61.6% 62.6%, transparent 62.6%),
-      repeating-linear-gradient(90deg, var(--boden) 0 21rem, var(--boden-fuge) 21rem 21.3rem),
-      var(--boden);
-  }
+  .welt { background: #9C988F; }
 
   .spielflaeche {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 44rem;
+    grid-template-columns: minmax(0, 1fr) 46rem;
     grid-template-rows: 12rem minmax(0, 1fr);
     column-gap: 2.4rem;
-    row-gap: 2rem;
+    row-gap: 1.6rem;
     padding: 1.6rem 2.4rem 2.4rem;
   }
-  ls-blase { grid-column: 1; grid-row: 1; align-self: start; width: min(84rem, 100%); position: relative; z-index: 2; }
+  ls-blase { grid-column: 1; grid-row: 1; align-self: start; width: min(80rem, 100%); position: relative; z-index: 2; }
 
-  /* Fenster an der Wand rechts neben der Blase (nur Stimmung, still). */
-  .fenster { grid-column: 1; grid-row: 1; justify-self: end; align-self: start; width: 30rem; height: 13rem; margin-right: 4rem; }
-  .fenster svg { width: 100%; height: 100%; display: block; }
-
-  /* Tafel mit der Aufgabe; das Kästchen ist das Kärtchen des Pfeilchens, das nach Fertig zur Kette fliegt. */
-  .tafel {
+  /* Die Aufgabe mit Kreide auf den Asphalt geschrieben; das Kästchen nimmt die getippte Zahl auf. */
+  .gleichung {
     grid-column: 2; grid-row: 1;
     display: flex; align-items: center; justify-content: center; gap: 1.6rem;
-    background: var(--ls-tinte);
-    border: 1rem solid var(--ls-ahorn);
-    outline: var(--ls-kontur) solid var(--ls-tinte);
-    border-radius: var(--ls-radius);
-    color: var(--ls-papier);
-    font-size: 5.8rem; font-weight: 700; line-height: 1; white-space: nowrap;
+    color: var(--kreide);
+    font-size: 6.2rem; font-weight: 700; line-height: 1; white-space: nowrap;
+    -webkit-mask-image: var(--kreide-korn); mask-image: var(--kreide-korn);
+    -webkit-mask-size: 16rem; mask-size: 16rem;
+    transform: rotate(-1.5deg);
   }
-  .tafel .rechnung:empty::before { content: "\00a0"; }
+  .gleichung .rechnung:empty::before { content: "\00a0"; }
   .karte {
     display: inline-flex; align-items: center; justify-content: center;
-    min-width: 11rem; height: 8.2rem; padding: 0 1.4rem;
-    background: var(--ls-papier); color: var(--ls-tinte);
-    border-radius: 1.6rem; border: var(--ls-kontur) solid var(--ls-papier);
-    font-size: 5.6rem;
+    min-width: 11rem; height: 8.6rem; padding: 0 1.4rem;
+    border: 0.55rem solid var(--kreide);
+    border-radius: 2rem 1.4rem 2.2rem 1.2rem;
+    background: rgba(70, 64, 58, 0.22);
+    font-size: 6rem;
   }
   .karte.leer { color: transparent; }
 
-  /* Arbeitsteppich: Filz mit gestrichelter Naht; darauf die Kette, über die Lena hüpft. */
-  .teppich {
-    grid-column: 1; grid-row: 2;
-    position: relative;
-    min-height: 0;
-    padding: 1.4rem 2rem;
-    background: var(--filz);
-    border: var(--ls-kontur) solid var(--ls-tinte);
-    border-radius: var(--ls-radius-gross);
-    box-shadow: 0 1rem 0 rgba(59, 42, 107, 0.12);
-  }
-  .teppich::before {
-    content: ""; position: absolute; inset: 1.2rem; pointer-events: none;
-    border: 0.3rem dashed var(--filz-naht); border-radius: calc(var(--ls-radius-gross) - 1.2rem);
-  }
-  .kette-platz { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-
-  /* Lena: liegt über allem Bild, nimmt keine Tipps; spiel.js setzt sie mit transform auf ihr Stäbchen. */
+  /* Lena und ihr Schatten: über allem Bild, nehmen keine Tipps; spiel.js setzt sie mit transform auf ihr Stäbchen. */
   .figuren { position: fixed; inset: 0; z-index: 5; pointer-events: none; overflow: hidden; }
-  .lena { position: absolute; left: 0; top: 0; height: var(--lena-hoehe); width: calc(var(--lena-hoehe) * 320 / 280); will-change: transform; }
+  .lena { position: absolute; left: 0; top: 0; height: var(--lena-hoehe); width: calc(var(--lena-hoehe) * 320 / 280); transform-origin: 50% 90.7%; will-change: transform; }
   .lena > .koerper { width: 100%; height: 100%; transform-origin: 50% 90.7%; }
   .lena svg { width: 100%; height: 100%; display: block; overflow: visible; }
-  /* Pfeilchen im Flug von der Tafel zur Kette. */
+  .schatten {
+    position: absolute; left: 0; top: 0; width: 13rem; height: 3rem; margin: -1.5rem 0 0 -6.5rem;
+    border-radius: 50%; background: rgba(43, 38, 34, 0.32); filter: blur(0.25rem); will-change: transform, opacity;
+  }
+  /* Die getippte Zahl im Flug von der Aufgabe zur Kette: Kreide. */
   .flug {
     position: absolute; left: 0; top: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--ls-papier); color: var(--ls-tinte);
-    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 1.2rem;
-    font-weight: 700; line-height: 1; will-change: transform;
+    color: var(--kreide); font-weight: 700; line-height: 1; white-space: nowrap;
+    -webkit-mask-image: var(--kreide-korn); mask-image: var(--kreide-korn); -webkit-mask-size: 16rem; mask-size: 16rem;
+    will-change: transform;
   }
-  .flug.hohl { background: var(--ls-nebel); border-style: dashed; }
+  .flug.hohl { opacity: 0.8; }
 
-  /* Ziffernbrett aus Holz (flach wie ein Tablett): Ziffernblock, darunter Fertig. Unten bleibt Platz für die Hilfe. */
+  /* Ziffernbrett aus Holz, liegt rechts auf der Straße: Ziffernblock, darunter Fertig. Unten bleibt Platz für die Hilfe. */
   .brett {
     grid-column: 2; grid-row: 2;
     align-self: start;
@@ -104,12 +76,10 @@
   }
   #fertig { align-self: center; }
 
-  /* Schmale Bildschirme (4:3): kein Fenster, Blase über die ganze linke Spalte. */
+  /* Schmale Bildschirme (4:3): etwas kleinere Aufgabe. */
   @media (max-aspect-ratio: 3/2) {
-    .fenster { display: none; }
-    ls-blase { width: 100%; }
-    .spielflaeche { grid-template-columns: minmax(0, 1fr) 40rem; }
-    .tafel { font-size: 5rem; }
+    .spielflaeche { grid-template-columns: minmax(0, 1fr) 42rem; }
+    .gleichung { font-size: 5.2rem; }
     .karte { font-size: 5rem; min-width: 9rem; }
   }
 
@@ -132,7 +102,7 @@
 </style>
 </head>
 <body>
-<div class="welt" aria-hidden="true"></div>
+<div class="welt" aria-hidden="true"><m37-kreidekette id="kette" reihe="2"></m37-kreidekette></div>
 
 <ls-leiste id="leiste" spiel="kettenhuepfer" fach="mathe" titel="Kettenhüpfer" thema="">
   <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
@@ -140,29 +110,16 @@
 </ls-leiste>
 
 <div class="buehne">
-  <main class="spielflaeche">
-    <div class="fenster" aria-hidden="true">
-      <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid meet">
-        <rect x="6" y="6" width="288" height="118" rx="10" fill="#CFE6F5" stroke="#3B2A6B" stroke-width="4"/>
-        <path d="M6 96 C70 78 150 86 294 74 L294 114 Q294 124 284 124 L16 124 Q6 124 6 114 Z" fill="#BFE3C9"/>
-        <path d="M200 6 C210 34 236 44 276 46" fill="none" stroke="#8C6A4A" stroke-width="5" stroke-linecap="round"/>
-        <g fill="#9ED8A8" stroke="#5E9C77" stroke-width="2.5"><ellipse cx="228" cy="30" rx="12" ry="6" transform="rotate(-25 228 30)"/><ellipse cx="252" cy="44" rx="11" ry="5.5" transform="rotate(15 252 44)"/><ellipse cx="212" cy="18" rx="10" ry="5" transform="rotate(-50 212 18)"/></g>
-        <path d="M150 6 V124 M6 65 H294" stroke="#3B2A6B" stroke-width="4"/>
-        <rect x="0" y="118" width="300" height="12" rx="4" fill="#EAD5B5" stroke="#3B2A6B" stroke-width="4"/>
-      </svg>
-    </div>
+  <main class="spielflaeche" aria-label="Perlenkette auf der Straße">
     <ls-blase id="blase"></ls-blase>
-    <div class="tafel" id="tafel" aria-live="polite"><span class="rechnung" id="rechnung"></span><span class="karte leer" id="eingabe">0</span></div>
-    <section class="teppich" id="teppich" aria-label="Perlenkette">
-      <div class="kette-platz" id="kette-platz"><ls-perlenkette id="kette" reihe="2" luft="19" perle="7"></ls-perlenkette></div>
-    </section>
-    <div class="brett tablett">
+    <div class="gleichung" id="tafel" aria-live="polite"><span class="rechnung" id="rechnung"></span><span class="karte leer" id="eingabe">0</span></div>
+    <div class="brett tablett" id="brett">
       <ls-tastatur id="tastatur" tasten="1234567890" je-reihe="3" loeschen></ls-tastatur>
       <ls-knopf id="fertig" art="haupt" symbol="fertig.svg" wort="Fertig"></ls-knopf>
     </div>
   </main>
 </div>
-<div class="figuren" aria-hidden="true"><div class="lena" id="lena"><div class="koerper" id="lena-koerper"></div></div></div>
+<div class="figuren" aria-hidden="true"><div class="schatten" id="schatten"></div><div class="lena" id="lena"><div class="koerper" id="lena-koerper"></div></div></div>
 
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
