@@ -1,8 +1,12 @@
 // <ls-geschichte src="geschichten/zehnerpaare/geschichte.json">
 // Spielt eine Geschichte ab (docs/geschichten.md §4): je Seite links ein quadratisches Bild, so groß wie möglich (Foto
 // aus `bild`, 1024 × 1024, oder gezeichnete Szene aus `szene`, rahmen/szene.js), rechts daneben der Text in Andika.
-// Das Kind blättert selbst: Weiter und Zurück per Tipp, Wischen und Pfeiltaste; nichts läuft von allein (spielbau.md
-// §8). Fortschritt als Punkte ohne Zahl.
+// Weiter und Zurück per Tipp, Wischen und Pfeiltaste. Fortschritt als Punkte ohne Zahl.
+// - Startwahl (Christian 2026-11-15): Bei Ton an zeigt die erste Seite „Vorlesen“ und „Selbst lesen“; vorher wird nichts
+//   gelesen. Wer ohne Wahl blättert, liest selbst. Bei Ton aus gibt es keine Wahl (Selbst lesen).
+// - Vorlesemodus: nach dem Satz und PAUSE_MS Ruhe blättert die Geschichte von selbst um (Ausnahme zu spielbau.md §8,
+//   nur für Geschichten); ohne Stimme nach der geschätzten Lesezeit. Ein Tipp auf Bild, Text oder den Vorlese-Knopf
+//   hält an, ein zweiter liest weiter. Die Frage-Seite und die letzte Seite blättern nie von selbst.
 // Nach der letzten Seite „Fertig“ (Hauptknopf) → Ereignis `fertig` (bubbles, composed).
 //
 // - Vorlesen: Bei Ton an (Einstellung `ton.<spiel>` wie ls-blase, Spiel-Kennung der Leiste) liest der Erzähler jede
@@ -28,6 +32,11 @@ import "./knopf.js";
 
 /** Ruhe vor Weiter auf der Seite mit Frage (geschichten.md §2, Christian 2026-11-15). */
 export const RUHE_MS = 2000;
+/** Ruhe nach dem Satz, bevor der Vorlesemodus umblättert (Christian 2026-11-15). */
+export const PAUSE_MS = 1500;
+/** Ohne Stimme: geschätzte Lesezeit je Zeichen, mindestens LESEZEIT_MIN_MS. */
+const LESEZEIT_MS = 60;
+const LESEZEIT_MIN_MS = 3000;
 /** Wischweg in Pixeln, ab dem geblättert wird. */
 const WISCH_PX = 60;
 const DAUER_MS = 460;
@@ -99,6 +108,8 @@ ${SZENE_CSS}
   background: transparent; transition: width .3s ease, background-color .3s ease; }
 .punkte i.gelesen { background: var(--ls-tinte-weich); }
 .punkte i.jetzt { width: 5rem; background: var(--ls-tinte); border-color: var(--ls-tinte); }
+.startwahl { display: flex; flex-wrap: wrap; gap: 2.4rem; align-items: center; }
+.startwahl[hidden] { display: none; }
 .fehler { font-size: 4rem; color: var(--ls-tinte-weich); }
 
 /* Schmaleres Querformat (iPad quer): etwas kleineres Bild, etwas kleinerer Text. */
@@ -140,6 +151,10 @@ export class LsGeschichte extends HTMLElement {
         <div class="rahmen" part="bild"><div class="figuren"></div><span class="erzeugt" hidden>Bild erzeugt</span></div>
         <div class="lese">
           <div class="textfeld"><p class="text" aria-live="polite"></p></div>
+          <div class="startwahl" hidden>
+            <ls-knopf class="waehle-vorlesen" art="haupt" symbol="vorlesen.svg" wort="Vorlesen" stumm></ls-knopf>
+            <ls-knopf class="waehle-selbst" symbol="buch.svg" wort="Selbst lesen" stumm></ls-knopf>
+          </div>
           <div class="punkte" aria-hidden="true"></div>
           <div class="knoepfe">
             <ls-knopf class="zurueck" symbol="zurueck.svg" name="Zurück" stumm></ls-knopf>
@@ -162,6 +177,13 @@ export class LsGeschichte extends HTMLElement {
     this.weiterEl = /** @type {HTMLButtonElement} */ (q(".weiter"));
     this.fertigEl = q(".fertig");
     this.punkteEl = q(".punkte");
+    this.startwahlEl = q(".startwahl");
+    /** @type {"vorlesen" | "selbst" | null} null = noch nicht gewählt */
+    this.modus = null;
+    /** Vorlesemodus angehalten (Tipp des Kindes). */
+    this.angehalten = false;
+    /** @type {ReturnType<typeof setTimeout> | undefined} */
+    this.autoTimer = undefined;
     /** @type {Geschichte | null} */
     this.daten = null;
     /** Adresse der geladenen Datei (Bilder liegen relativ dazu). */
@@ -186,7 +208,10 @@ export class LsGeschichte extends HTMLElement {
 
     this.weiterEl.addEventListener("click", () => this.weiter());
     this.zurueckEl.addEventListener("click", () => this.zurueck());
-    this.vorlesenEl.addEventListener("click", () => this.lies());
+    this.vorlesenEl.addEventListener("click", () => (this.modus === "vorlesen" ? this.halte() : this.lies()));
+    q(".waehle-vorlesen").addEventListener("click", () => this.waehle("vorlesen"));
+    q(".waehle-selbst").addEventListener("click", () => this.waehle("selbst"));
+    this.textEl.addEventListener("click", () => this.halte());
     this.fertigEl.addEventListener("click", () => this.beende());
     this.beiTaste = (/** @type {KeyboardEvent} */ e) => {
       if (e.altKey || e.ctrlKey || e.metaKey) return;
@@ -201,6 +226,7 @@ export class LsGeschichte extends HTMLElement {
       if (!start || start.id !== e.pointerId) return;
       const dx = e.clientX - start.x, dy = e.clientY - start.y;
       start = null;
+      if (Math.abs(dx) < WISCH_PX && Math.abs(dy) < WISCH_PX) return void this.halte();
       if (Math.abs(dx) < WISCH_PX || Math.abs(dx) < Math.abs(dy) * 1.2) return;
       if (dx < 0) this.weiter(); else this.zurueck();
     });
@@ -218,6 +244,11 @@ export class LsGeschichte extends HTMLElement {
         get seite() { return el.seite; },
         get seiten() { return el.seiten; },
         get weiterBereit() { return el.weiterBereit; },
+        get modus() { return el.modus; },
+        get angehalten() { return el.angehalten; },
+        get frageSeite() { return el.daten ? el.daten.seiten.findIndex((s) => s.frage === true) : -1; },
+        waehle: (/** @type {"vorlesen" | "selbst"} */ m) => el.waehle(m),
+        halte: () => el.halte(),
         weiter: () => el.weiter(),
         zurueck: () => el.zurueck(),
         fertig: () => el.beende(),
@@ -229,6 +260,7 @@ export class LsGeschichte extends HTMLElement {
   disconnectedCallback() {
     window.removeEventListener("keydown", this.beiTaste);
     clearTimeout(this.ruheTimer);
+    clearTimeout(this.autoTimer);
     stille();
     this.kinder.forEach((f) => f.steuer.halt());
   }
@@ -249,6 +281,8 @@ export class LsGeschichte extends HTMLElement {
       await this.ladeBausteine(g);
       this.daten = g;
       this.punkteEl.replaceChildren(...g.seiten.map(() => document.createElement("i")));
+      this.modus = (await this.tonAn()) ? null : "selbst";
+      this.startwahlEl.hidden = this.modus !== null;
       this.zeige(0, 0);
       this._geladen(g);
     } catch (e) {
@@ -296,6 +330,7 @@ export class LsGeschichte extends HTMLElement {
     this._seite = i;
     this.nummer += 1;
     clearTimeout(this.ruheTimer);
+    clearTimeout(this.autoTimer);
 
     // Neue Bildseite
     const neu = document.createElement("div");
@@ -351,7 +386,8 @@ export class LsGeschichte extends HTMLElement {
     });
     this.weiterBereit = !s.frage;
     this.weiterEl.classList.toggle("wartet", !!s.frage);
-    if (!s.frage) this.lies();
+    if (this.modus === null) { /* Startwahl: noch nichts lesen */ }
+    else if (!s.frage) this.liesUndBlaettere();
     else {
       const meine = this.nummer;
       const frei = () => {
@@ -379,8 +415,54 @@ export class LsGeschichte extends HTMLElement {
     return sprich(text);
   }
 
+  /**
+   * Startwahl: Vorlesen (blättert von selbst) oder Selbst lesen.
+   * @param {"vorlesen" | "selbst"} modus
+   */
+  waehle(modus) {
+    if (!this.daten || this.modus !== null) return;
+    this.modus = modus === "vorlesen" ? "vorlesen" : "selbst";
+    this.startwahlEl.hidden = true;
+    this.angehalten = false;
+    this.liesUndBlaettere();
+  }
+
+  /** Hält den Vorlesemodus an bzw. liest weiter (Tipp des Kindes). */
+  halte() {
+    if (this.modus !== "vorlesen") return;
+    this.angehalten = !this.angehalten;
+    this.vorlesenEl.classList.toggle("angehalten", this.angehalten);
+    clearTimeout(this.autoTimer);
+    if (this.angehalten) stille();
+    else this.liesUndBlaettere();
+  }
+
+  /** Liest die Seite und blättert im Vorlesemodus danach von selbst um. */
+  liesUndBlaettere() {
+    const meine = this.nummer;
+    this.lies().then((e) => this.blaettereSelbst(e, meine), () => this.blaettereSelbst("still", meine));
+  }
+
+  /**
+   * @param {string} ergebnis von sprich: "gesprochen", "still" oder "abgebrochen"
+   * @param {number} meine Nummer der Seite, für die gelesen wurde
+   */
+  blaettereSelbst(ergebnis, meine) {
+    const g = this.daten;
+    if (!g || this.modus !== "vorlesen" || this.angehalten || meine !== this.nummer) return;
+    const s = g.seiten[this._seite];
+    if (!s || s.frage || this._seite >= g.seiten.length - 1 || ergebnis === "abgebrochen") return;
+    const warte = ergebnis === "still" ? Math.max(LESEZEIT_MIN_MS, s.text.length * LESEZEIT_MS) : PAUSE_MS;
+    clearTimeout(this.autoTimer);
+    this.autoTimer = setTimeout(() => {
+      if (meine !== this.nummer || this.angehalten || this.modus !== "vorlesen") return;
+      this.weiter();
+    }, warte);
+  }
+
   weiter() {
     if (!this.daten || !this.weiterBereit) return;
+    if (this.modus === null) { this.modus = "selbst"; this.startwahlEl.hidden = true; }
     if (this._seite >= this.daten.seiten.length - 1) return;
     this.zeige(this._seite + 1, 1);
   }

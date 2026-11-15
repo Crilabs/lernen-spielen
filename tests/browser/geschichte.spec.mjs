@@ -32,7 +32,9 @@ for (const typ of [chromium, webkit]) {
   const g = () => page.evaluate(() => ({ seite: window.lsGeschichte.seite, bereit: window.lsGeschichte.weiterBereit }));
   const name = typ.name();
 
-  pruefe((await page.evaluate(() => window.lsGeschichte.seiten)) === 9, `${name}: neun Seiten`);
+  const anzahl = await page.evaluate(() => window.lsGeschichte.seiten);
+  const frageSeite = await page.evaluate(() => window.lsGeschichte.frageSeite);
+  pruefe(anzahl >= 6 && frageSeite > 1 && frageSeite < anzahl - 1, `${name}: ${anzahl} Seiten, Frage auf Seite ${frageSeite + 1}`);
   await page.evaluate(() => window.lsGeschichte.zurueck());
   pruefe((await g()).seite === 0, `${name}: Zurück auf Seite 1 bleibt`);
   await page.keyboard.press("ArrowRight");
@@ -50,16 +52,16 @@ for (const typ of [chromium, webkit]) {
   pruefe((await g()).seite === 1, `${name}: Wischen nach links blättert weiter`);
   await page.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".weiter").click());
   pruefe((await g()).seite === 2, `${name}: Tipp auf Weiter blättert`);
-  await page.evaluate(() => { window.lsGeschichte.weiter(); window.lsGeschichte.weiter(); });
+  await page.evaluate((f) => { while (window.lsGeschichte.seite < f) window.lsGeschichte.weiter(); }, frageSeite);
   const frage = await g();
-  pruefe(frage.seite === 4 && !frage.bereit, `${name}: Frage-Seite – Weiter wartet`);
+  pruefe(frage.seite === frageSeite && !frage.bereit, `${name}: Frage-Seite – Weiter wartet`);
   await page.keyboard.press("ArrowRight");
-  pruefe((await g()).seite === 4, `${name}: Frage-Seite – Pfeiltaste wartet auch`);
+  pruefe((await g()).seite === frageSeite, `${name}: Frage-Seite – Pfeiltaste wartet auch`);
   const t0 = Date.now();
   await page.waitForFunction(() => window.lsGeschichte.weiterBereit, null, { timeout: 30000 });
   pruefe(Date.now() - t0 >= 1500, `${name}: Weiter erst nach der Ruhe (${Date.now() - t0} ms)`);
-  for (let i = 0; i < 4; i++) await page.evaluate(() => window.lsGeschichte.weiter());
-  pruefe((await g()).seite === 8, `${name}: letzte Seite`);
+  await page.evaluate(() => { while (window.lsGeschichte.seite < window.lsGeschichte.seiten - 1) window.lsGeschichte.weiter(); });
+  pruefe((await g()).seite === anzahl - 1, `${name}: letzte Seite`);
   await Promise.all([page.waitForURL(/themen\.html/), page.evaluate(() => window.lsGeschichte.fertig())]);
   pruefe(true, `${name}: Fertig führt zu weiter`);
   // weiter=themen.html kann selbst weiterleiten: erst Ruhe abwarten, dann den Lernstand lesen
@@ -76,6 +78,49 @@ for (const typ of [chromium, webkit]) {
   await page.waitForTimeout(500);
   const text = await page.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".text").textContent);
   pruefe(/geht gerade nicht/.test(text), `${name}: unbekannte Geschichte zeigt einen ruhigen Text`);
+  // Startwahl und Vorlesemodus (ohne Systemstimme: sprich liefert „still“, umgeblättert wird nach der Lesezeit)
+  const vp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await vp.addInitScript(() => { try { delete window.speechSynthesis; Object.defineProperty(window, "speechSynthesis", { value: undefined }); } catch {} });
+  await vp.goto(`${basis}/spiele/geschichte.html?id=haustiere&pruefen`);
+  await vp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
+  const v = (f, a) => vp.evaluate(f, a);
+  pruefe(await v(() => window.lsGeschichte.modus) === null, `${name}: Startwahl vor dem Lesen`);
+  pruefe(await vp.locator("ls-geschichte").evaluate((el) => !el.shadowRoot.querySelector(".startwahl").hidden), `${name}: Startwahl sichtbar`);
+  await v(() => window.lsGeschichte.waehle("vorlesen"));
+  pruefe(await vp.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".startwahl").hidden), `${name}: Startwahl verschwindet`);
+  const tv = Date.now();
+  await vp.waitForFunction(() => window.lsGeschichte.seite === 1, null, { timeout: 20000 });
+  pruefe(Date.now() - tv >= 1500, `${name}: Vorlesen blättert von selbst (${Date.now() - tv} ms)`);
+  await v(() => window.lsGeschichte.halte());
+  pruefe(await v(() => window.lsGeschichte.angehalten), `${name}: angehalten`);
+  await vp.waitForTimeout(9000);
+  pruefe(await v(() => window.lsGeschichte.seite) === 1, `${name}: angehalten bleibt die Seite`);
+  await v(() => window.lsGeschichte.halte());
+  pruefe(!(await v(() => window.lsGeschichte.angehalten)), `${name}: zweiter Tipp liest weiter`);
+  // Frageseite wartet im Vorlesemodus
+  const fs = await v(() => window.lsGeschichte.frageSeite);
+  await v((f) => { while (window.lsGeschichte.seite < f) window.lsGeschichte.weiter(); }, fs);
+  if (await v(() => window.lsGeschichte.angehalten)) await v(() => window.lsGeschichte.halte());
+  pruefe(!(await v(() => window.lsGeschichte.angehalten)), `${name}: Frage-Seite im laufenden Vorlesemodus`);
+  await vp.waitForTimeout(12000);
+  { const ist = await v(() => [window.lsGeschichte.seite, window.lsGeschichte.angehalten]); pruefe(ist[0] === fs, `${name}: Frage-Seite blättert nicht von selbst (fs ${fs}, ist ${ist})`); }
+  // nach der Frage: anhalten, schnell zweimal blättern – genau +2, kein alter Timer blättert weiter
+  await v(() => window.lsGeschichte.halte());
+  await vp.waitForFunction(() => window.lsGeschichte.weiterBereit);
+  await v(() => { window.lsGeschichte.weiter(); window.lsGeschichte.weiter(); });
+  pruefe(await v(() => window.lsGeschichte.seite) === fs + 2, `${name}: zweimal blättern = zwei Seiten`);
+  await vp.waitForTimeout(7000);
+  pruefe(await v(() => window.lsGeschichte.seite) === fs + 2, `${name}: angehalten – kein alter Timer blättert`);
+  await vp.close();
+
+  // Ton aus: keine Startwahl, Selbst lesen
+  const tp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await tp.addInitScript(() => localStorage.setItem("lernstand-kind-1-einstellungen", JSON.stringify({ "ton.geschichte": false })));
+  await tp.goto(`${basis}/spiele/geschichte.html?id=haustiere&pruefen`);
+  await tp.waitForFunction(() => window.lsGeschichte?.modus === "selbst", null, { timeout: 5000 }).catch(() => {});
+  pruefe(await tp.evaluate(() => window.lsGeschichte.modus) === "selbst", `${name}: Ton aus – gleich Selbst lesen`);
+  pruefe(await tp.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".startwahl").hidden), `${name}: Ton aus – keine Startwahl`);
+  await tp.close();
   await browser.close();
 }
 server.close();
