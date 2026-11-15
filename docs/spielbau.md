@@ -83,8 +83,8 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 
 - **Stil der Runde** (`docs/figuren.md`, Silhouette, Stufen-Schatten) und **Farbwelt** (`docs/grundsaetze-bilder.md`
   §6.2: Perlen in Montessori-Farben, Stellenwerte türkis/orange/schiefer). **Das Spielbild ist die Szene und darf den
-  ganzen Bildschirm nehmen** (Christian, 2026-11-15; wie die alten Spiele, z. B. die Kette auf dem Teppich im Raum):
-  keine Karte vor einem Hintergrund als Regel, ruhig, nie ein Wimmelbild.
+  ganzen Bildschirm nehmen** (Christian, 2026-11-15): Das Spielfeld gehört zur Welt, z. B. mit Kreide leicht
+  perspektivisch auf die Straße gemalt, und die Figur hüpft es ab; keine Karte vor einem Hintergrund, nie ein Wimmelbild.
 - **Bewegung mit Gewicht:** Sprünge im Bogen mit Bodenkontakt (Landung leicht gestaucht, dann zurück), Einrasten mit
   kurzem Überschwingen, Dinge fallen mit Beschleunigung und setzen auf. Nur `transform` und `opacity` animieren (Web
   Animations API oder CSS), 60 Bilder je Sekunde, kein Ruckeln, keine Layout-Sprünge.
