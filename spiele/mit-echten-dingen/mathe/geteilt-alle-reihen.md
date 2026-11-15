@@ -23,3 +23,18 @@ Ihr braucht: ein Kartenspiel, etwa ein Quartett.
 **Darauf kommt es an:** Eine Geteiltaufgabe löst ihr mit der passenden Malaufgabe. Kennt ihr sie nicht, geht ihr von 10 mal oder 5 mal aus. Das Austeilen zeigt, ob es stimmt.
 
 **Leichter:** Zu fünft mit 30 Karten. **Schwerer:** Zu siebt mit 28 Karten.
+
+## In Bewegung: Päckchen im Haus suchen
+
+**Zum Verinnerlichen:** Spielt zuerst „Karten austeilen“. Dieses Spiel hilft, Geteiltaufgaben über die passende Malaufgabe zu behalten.
+
+Ihr braucht: Löffel, Stifte, Socken aus dem Haus
+
+1. Einer sagt eine Geteiltaufgabe an: „24 geteilt durch 6.“
+2. Sucht die Malaufgabe, vielleicht von 5 mal 6 aus: „4 mal 6 ist gleich 24.“
+3. Holt vier Päckchen mit je 6 gleichen Dingen, zum Beispiel 6 Löffel, 6 Stifte.
+4. Zählt alles nach: 24. Sagt: „24 geteilt durch 6 ist gleich 4.“
+
+**Darauf kommt es an:** Die Geteiltaufgabe löst ihr mit der passenden Malaufgabe. Die Päckchen zeigen, dass sie stimmt.
+
+**Leichter:** 15 geteilt durch 5. **Schwerer:** 56 geteilt durch 8; sagt die Malaufgabe, bevor ihr sucht.

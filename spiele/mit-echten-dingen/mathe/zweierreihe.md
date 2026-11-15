@@ -20,3 +20,18 @@ Ihr braucht: sieben Paar Schuhe, die bei euch herumstehen
 **Darauf kommt es an:** In jedem Paar sind zwei Schuhe. Sieben Paare sind 7 mal 2, das ist gleich 7 plus 7. Zwei Reihen mit je 7 sind 2 mal 7, auch 14.
 
 **Leichter:** Nehmt drei Paare. **Schwerer:** 14 Schuhe: wie viele Paare?
+
+## In Bewegung: Paarsprünge
+
+**Zum Verinnerlichen:** Spielt zuerst „Schuhe in den Schrank“. Dieses Spiel hilft, die Zweierreihe zu behalten.
+
+Ihr braucht: sieben Paar Socken, einen Flur oder Hof mit festem Boden
+
+1. Einer hüpft mit beiden Füßen zugleich ein kleines Stück nach vorn.
+2. Der andere legt dort ein Paar Socken hin und sagt: „2.“
+3. Bei jedem weiteren Hüpfer liegt ein Paar mehr da: „4, 6, 8 …“
+4. Nach sieben Hüpfern liegen sieben Paar da. Zählt die Socken in Zweierschritten nach: 14. Dann wechselt ihr.
+
+**Darauf kommt es an:** Jedes Paar sind 2 Socken, jeder Hüpfer legt ein Paar dazu. Sieben Paare sind 7 mal 2.
+
+**Leichter:** nur drei Hüpfer. **Schwerer:** Sammelt die Paare wieder ein und sagt bei jedem Paar rückwärts: „14, 12, 10 …“

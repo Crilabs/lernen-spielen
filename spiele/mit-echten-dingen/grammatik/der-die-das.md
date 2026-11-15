@@ -24,6 +24,21 @@ Ihr braucht: einen Korb mit trockener Wäsche
 
 **Leichter:** nur Handtuch, Hose und Pulli. **Schwerer:** Legt drei Stapel: einen für der, einen für die, einen für das.
 
+## In Bewegung: Der Zeichen-Rundgang
+
+**Zum Verinnerlichen:** Spielt zuerst „Hier ist der Pulli“. Dieses Spiel hilft, jedes Nomen mit seinem Artikel zu behalten.
+
+Ihr braucht: ein Zimmer mit vielen Dingen
+
+1. Verabredet drei Zeichen: bei der ein Schritt nach links, bei die einer nach rechts, bei das einer nach vorn.
+2. Einer tippt ein Ding an und sagt es mit Artikel: „der Stuhl“. Beide machen den Schritt.
+3. Wer den Artikel sicher weiß, sagt ihn vor. Wisst ihr beide nicht, fragt jemanden oder schaut nach.
+4. Dann tippt der andere ein Ding an.
+
+**Darauf kommt es an:** Zu jedem Nomen gehört sein Artikel: der Stuhl, die Lampe, das Sofa.
+
+**Leichter:** nur Dinge, die ihr gut kennt. **Schwerer:** zwei Dinge hintereinander.
+
 ## Unterwegs: Wo ist die Rutsche?
 
 Ihr braucht: einen Spielplatz oder einen Spaziergang

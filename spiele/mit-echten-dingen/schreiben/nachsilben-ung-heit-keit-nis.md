@@ -23,6 +23,21 @@ Ihr braucht: Packungen aus dem Vorratsschrank (Nudeln, Reis, Müsli), Papier, St
 
 **Leichter:** Sucht Wörter mit -ung. **Schwerer:** Macht selbst Nomen: sauber, die Sauberkeit; krank, die Krankheit; erleben, das Erlebnis.
 
+## In Bewegung: Wortteile klatschen
+
+**Zum Verinnerlichen:** Spielt zuerst „Packungen lesen“. Dieses Spiel hilft, die Nachsilben -ung, -heit, -keit und -nis zu behalten.
+
+Ihr braucht: Platz
+
+1. Wählt ein Wort: Sauberkeit, Freiheit, Krankheit, Gesundheit.
+2. Teilt es in den Wortteil davor und die Nachsilbe: sauber, keit.
+3. Klatscht einmal für den Wortteil davor und hüpft einmal für die Nachsilbe.
+4. Sagt dann das ganze Wort mit Artikel: „die Sauberkeit“.
+
+**Darauf kommt es an:** Die Nachsilbe -ung, -heit, -keit oder -nis macht ein Nomen. Darum beginnt es groß: die Sauberkeit, die Krankheit.
+
+**Leichter:** nur Wörter mit -heit. **Schwerer:** Macht selbst ein Nomen aus „frei“ oder „krank“ und klatscht es.
+
 ## Unterwegs: Schilder lesen
 
 Ihr braucht: einen Spaziergang oder den Weg zum Einkaufen

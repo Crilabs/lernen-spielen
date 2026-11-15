@@ -8,6 +8,10 @@
     {
      "situation": "tisch",
      "name": "Eine Karte voller Wünsche"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Gefühle in die Luft schreiben"
     }
    ],
    "entwurf": false,
@@ -21,6 +25,10 @@
     {
      "situation": "tisch",
      "name": "Merkzettel falten"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Achter klatschen und stampfen"
     }
    ],
    "entwurf": false,
@@ -34,6 +42,10 @@
     {
      "situation": "tisch",
      "name": "Socken-Auftrag"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Auf das Ding zugehen"
     }
    ],
    "entwurf": false,
@@ -47,6 +59,10 @@
     {
      "situation": "tisch",
      "name": "Hier ist der Pulli"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Der Zeichen-Rundgang"
     },
     {
      "situation": "unterwegs",
@@ -64,6 +80,10 @@
     {
      "situation": "tisch",
      "name": "Brotzeit verteilen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Dreiertakt gehen"
     }
    ],
    "entwurf": false,
@@ -74,6 +94,10 @@
    "name": "Einmaleins gemischt",
    "titel": "Wie viele Fenster hat das Haus?",
    "formen": [
+    {
+     "situation": "bewegung",
+     "name": "Kissen-Weg"
+    },
     {
      "situation": "unterwegs",
      "name": "Fenster rechnen"
@@ -90,6 +114,10 @@
     {
      "situation": "tisch",
      "name": "Kochen und auftun"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Hüpfen hin und zurück"
     }
    ],
    "entwurf": false,
@@ -103,6 +131,10 @@
     {
      "situation": "tisch",
      "name": "Kleingeld für die Brötchen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Hand an Hand"
     }
    ],
    "entwurf": false,
@@ -116,6 +148,10 @@
     {
      "situation": "tisch",
      "name": "Einkauf einräumen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Drei Ecken für er, sie, es"
     },
     {
      "situation": "unterwegs",
@@ -133,6 +169,10 @@
     {
      "situation": "tisch",
      "name": "Karten austeilen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Päckchen im Haus suchen"
     }
    ],
    "entwurf": false,
@@ -146,6 +186,10 @@
     {
      "situation": "tisch",
      "name": "Das Geld abzählen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Hüpfen in Fünfern"
     }
    ],
    "entwurf": false,
@@ -159,6 +203,10 @@
     {
      "situation": "tisch",
      "name": "Erdbeeren teilen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Drei auf einmal tragen"
     },
     {
      "situation": "unterwegs",
@@ -178,6 +226,10 @@
      "name": "Packungen lesen"
     },
     {
+     "situation": "bewegung",
+     "name": "Wortteile klatschen"
+    },
+    {
      "situation": "unterwegs",
      "name": "Schilder lesen"
     }
@@ -193,6 +245,10 @@
     {
      "situation": "tisch",
      "name": "Tischkärtchen für alle"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Namen mit dem Körper schreiben"
     }
    ],
    "entwurf": false,
@@ -203,6 +259,10 @@
    "name": "Neunerreihe",
    "titel": "Neun ist eins weniger als zehn",
    "formen": [
+    {
+     "situation": "bewegung",
+     "name": "Zehn vor, einen zurück"
+    },
     {
      "situation": "unterwegs",
      "name": "Eintritt für alle"
@@ -219,6 +279,10 @@
     {
      "situation": "tisch",
      "name": "Der Auftragszettel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Kissen-Probe"
     }
    ],
    "entwurf": false,
@@ -232,6 +296,10 @@
     {
      "situation": "tisch",
      "name": "Eierkartons für den Einkauf"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Eierkarton am Boden"
     },
     {
      "situation": "unterwegs",
@@ -249,6 +317,10 @@
     {
      "situation": "tisch",
      "name": "Wochen bis zum großen Tag"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Wochenkreis"
     }
    ],
    "entwurf": false,
@@ -279,6 +351,10 @@
     {
      "situation": "tisch",
      "name": "Es klingelt"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Päckchen bis zum Schuh"
     }
    ],
    "entwurf": false,
@@ -311,6 +387,10 @@
      "name": "Die Kramkiste beschriften"
     },
     {
+     "situation": "bewegung",
+     "name": "Der Artikel-Stampfer"
+    },
+    {
      "situation": "unterwegs",
      "name": "Geräusche sammeln"
     }
@@ -326,6 +406,10 @@
     {
      "situation": "tisch",
      "name": "Tisch decken in zwei Gängen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Beinpaare doppelt"
     }
    ],
    "entwurf": false,
@@ -352,6 +436,10 @@
     {
      "situation": "tisch",
      "name": "Das Geld für den Einkauf"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zehnerbündel holen"
     }
    ],
    "entwurf": false,
@@ -365,6 +453,10 @@
     {
      "situation": "tisch",
      "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Socken in zwei Zimmer"
     },
     {
      "situation": "unterwegs",
@@ -384,6 +476,10 @@
      "name": "Essen für zwei teilen"
     },
     {
+     "situation": "bewegung",
+     "name": "Socken in zwei Zimmer"
+    },
+    {
      "situation": "unterwegs",
      "name": "Steine in zwei Händen"
     }
@@ -399,6 +495,10 @@
     {
      "situation": "tisch",
      "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Socken in zwei Zimmer"
     },
     {
      "situation": "unterwegs",
@@ -418,6 +518,10 @@
      "name": "Essen für zwei teilen"
     },
     {
+     "situation": "bewegung",
+     "name": "Socken in zwei Zimmer"
+    },
+    {
      "situation": "unterwegs",
      "name": "Steine in zwei Händen"
     }
@@ -433,6 +537,10 @@
     {
      "situation": "tisch",
      "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Socken in zwei Zimmer"
     },
     {
      "situation": "unterwegs",
@@ -452,6 +560,10 @@
      "name": "Essen für zwei teilen"
     },
     {
+     "situation": "bewegung",
+     "name": "Socken in zwei Zimmer"
+    },
+    {
      "situation": "unterwegs",
      "name": "Steine in zwei Händen"
     }
@@ -467,6 +579,10 @@
     {
      "situation": "tisch",
      "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Socken in zwei Zimmer"
     },
     {
      "situation": "unterwegs",
@@ -486,6 +602,10 @@
      "name": "Essen für zwei teilen"
     },
     {
+     "situation": "bewegung",
+     "name": "Socken in zwei Zimmer"
+    },
+    {
      "situation": "unterwegs",
      "name": "Steine in zwei Händen"
     }
@@ -503,6 +623,10 @@
      "name": "Essen für zwei teilen"
     },
     {
+     "situation": "bewegung",
+     "name": "Socken in zwei Zimmer"
+    },
+    {
      "situation": "unterwegs",
      "name": "Steine in zwei Händen"
     }
@@ -518,6 +642,10 @@
     {
      "situation": "tisch",
      "name": "Schuhe in den Schrank"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Paarsprünge"
     }
    ],
    "entwurf": false,

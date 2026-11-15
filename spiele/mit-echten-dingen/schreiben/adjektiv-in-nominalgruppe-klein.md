@@ -22,3 +22,18 @@ Ihr braucht: frisch gewaschene Socken, Papier, Stift
 **Darauf kommt es an:** Groß wird das Nomen am Ende. Adjektive davor bleiben klein, auch direkt nach dem Artikel: die gestreifte Socke, eine blaue Socke.
 
 **Leichter:** Schreibt erst „die Socke“, dann setzt ein Adjektiv dazwischen: „die blaue Socke“. **Schwerer:** Passen mehrere Socken, braucht ihr zwei Adjektive: „die kleine graue Socke“.
+
+## In Bewegung: Auf das Ding zugehen
+
+**Zum Verinnerlichen:** Spielt zuerst „Socken-Auftrag“. Dieses Spiel hilft, zu behalten, dass das Adjektiv vor dem Nomen klein bleibt.
+
+Ihr braucht: Zettel, einen Stift, ein Ding im Zimmer
+
+1. Wählt ein Ding, das ihr beide seht, und beschreibt es langsam Wort für Wort: „die … blaue … Tasse.“
+2. Einer macht bei jedem Wort einen Schritt darauf zu und tippt es beim letzten Wort an.
+3. Schreibt die Wörter auf einen Zettel: Das letzte beginnt groß, die davor klein. Legt ihn zum Ding.
+4. Dann tauscht ihr.
+
+**Darauf kommt es an:** Das Nomen steht am Ende und beginnt groß. Das Adjektiv davor bleibt klein, auch nach dem Artikel.
+
+**Leichter:** nur sagen und gehen, ohne Zettel. **Schwerer:** zwei Adjektive: „die … kleine … blaue … Tasse.“

@@ -22,3 +22,18 @@ Ihr braucht: einen Wand- oder Familienkalender mit einer Woche je Zeile
 **Darauf kommt es an:** Eine Woche hat sieben Tage. 5 mal 7 ist gleich 35, 2 mal 7 ist gleich 14. Daraus setzt ihr die anderen zusammen, etwa 6 mal 7: 35 plus 7.
 
 **Leichter:** ein Tag in 2 oder 5 Wochen. **Schwerer:** Wie viele Wochen sind 56 Tage?
+
+## In Bewegung: Wochenkreis
+
+**Zum Verinnerlichen:** Spielt zuerst „Wochen bis zum großen Tag“. Dieses Spiel hilft, die Siebenerreihe zu behalten.
+
+Ihr braucht: sieben Kissen, ein Zimmer oder einen Hof
+
+1. Legt die Kissen im Kreis auf den Boden: eine Woche.
+2. Geht um den Kreis, bei jedem Kissen ein Schritt und ein Wochentag: Montag bis Sonntag.
+3. Beim Sonntag klatscht ihr: „7 Tage.“ Nach der nächsten Runde: „14 Tage.“
+4. Geht weiter bis 5 Runden: „35 Tage.“
+
+**Darauf kommt es an:** Jede Runde ist eine Woche mit sieben Tagen. 5 mal 7 ist gleich 35. Zwei Runden mehr sind 2 mal 7.
+
+**Leichter:** nur zwei Runden. **Schwerer:** Geht noch zwei Runden und sagt, wie viele Tage es sind: 35 plus 14.

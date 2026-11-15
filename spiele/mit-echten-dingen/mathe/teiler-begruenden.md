@@ -21,3 +21,16 @@ Ihr braucht: 12 gleiche Dinge, etwa Kekse oder Nudeln, und ein paar Teller.
 **Darauf kommt es an:** 4 ist ein Teiler von 12, weil 3 mal 4 ist gleich 12. 5 ist kein Teiler von 12: 2 mal 5 ist gleich 10, 3 mal 5 ist gleich 15. 12 liegt dazwischen, 2 bleiben übrig.
 
 **Leichter:** 10 Dinge, erst 2 Gäste, dann 3. **Schwerer:** 24 Dinge, bis zu 8 Gäste; auch den Rest vorher sagen.
+
+## In Bewegung: Päckchen bis zum Schuh
+
+Ihr braucht: einen Flur, einen Schuh
+
+1. Einer ist der Geher. Er setzt vom Start Fuß vor Fuß, 12 Füße weit, und legt dort den Schuh hin.
+2. Der andere sagt vorher, ob Päckchen von 4 Füßen genau aufgehen: „3 mal 4 ist gleich 12.“
+3. Der Geher geht vom Start in Päckchen und klatscht nach jedem. Ginge das nächste über den Schuh, bleibt er stehen.
+4. Probiert 5 Füße. Dann tauscht ihr, der neue Geher misst neu ab.
+
+**Darauf kommt es an:** 4 ist ein Teiler von 12, weil 3 mal 4 ist gleich 12. 5 ist keiner: Der Schuh liegt zwischen 10 und 15.
+
+**Leichter:** 10 Füße, Päckchen von 2 und 3. **Schwerer:** 24 Füße, Päckchen bis 8.

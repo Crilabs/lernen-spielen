@@ -21,3 +21,16 @@ Ihr braucht: Zehn-Cent-Münzen aus Geldbeutel oder Münzglas. Ersatz: Wäschekla
 **Darauf kommt es an:** Eine Münze ist 10 Cent, ein Zehner. 6 Münzen sind 6 Zehner, und 6 Zehner sind 60. Darum ist 6 mal 10 gleich 60.
 
 **Leichter:** Wählt Preise wie 30 oder 50 Cent. **Schwerer:** Einer legt Münzen, der andere sagt die Aufgabe dazu.
+
+## In Bewegung: Zehnerbündel holen
+
+Ihr braucht: eine Schale, kleine Dinge aus der Wohnung wie Stifte, Klammern oder Socken, mehrere Zimmer
+
+1. Einer holt aus einem Zimmer zehn gleiche Dinge und zählt sie in die Schale: „1 bis 10.“ Sagt: „10.“
+2. Der andere holt aus einem anderen Zimmer wieder zehn Dinge und legt sie dazu. Sagt: „20.“
+3. Holt abwechselnd weiter, jedes Mal zehn: „30, 40, 50 …“
+4. Hört bei 60 auf und sagt: „6 mal 10 ist gleich 60.“
+
+**Darauf kommt es an:** Jeder Gang bringt einen Zehner. 6 Gänge sind 6 Zehner, das ist gleich 60.
+
+**Leichter:** nur bis 30. **Schwerer:** Legt die Dinge in Zehnerhäufchen und sagt vor dem Zählen, wie viele es sind.

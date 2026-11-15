@@ -33,3 +33,16 @@ Ihr braucht: einen Einkauf, bei dem ihr etwas im Pack kauft, zum Beispiel Joghur
 **Darauf kommt es an:** 12 geteilt durch 4 ist die Umkehraufgabe von 3 mal 4 ist gleich 12. Wer die Malaufgabe kennt, weiß, wie viele Packs es sind.
 
 **Leichter:** Eier im Zehnerkarton, ihr braucht 20 Eier. **Schwerer:** Joghurt im Sechserpack, ihr braucht 18 Becher.
+
+## In Bewegung: Drei auf einmal tragen
+
+Ihr braucht: 12 Socken, einen Korb, zwei Zimmer
+
+1. Einer sagt eine Geteiltaufgabe an: „12 geteilt durch 3.“
+2. Sucht die Umkehraufgabe: Wie viele mal 3 ist gleich 12? Sagt: „4 mal 3 ist gleich 12.“
+3. Legt die Socken in ein Zimmer, den Korb ins andere. Tragt vier Gänge mit je 3 Socken zum Korb. Einer zählt die Gänge mit den Fingern.
+4. Sagt: „12 geteilt durch 3 ist gleich 4.“
+
+**Darauf kommt es an:** Die Umkehraufgabe sagt, wie viele Gänge es sind. 4 mal 3 ist gleich 12, also ist 12 geteilt durch 3 gleich 4. Das Tragen zeigt, dass es stimmt.
+
+**Leichter:** 10 geteilt durch 2, fünf Gänge mit je 2. **Schwerer:** 18 geteilt durch 3, sechs Gänge.

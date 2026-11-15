@@ -21,3 +21,18 @@ Ihr braucht: sechs kleine Teller, Kekse oder Apfelstücke. Keine Nüsse für kle
 **Darauf kommt es an:** 5 mal 3 ist eine Kernaufgabe. Jeder Teller ist ein Dreier. So folgt die Nachbaraufgabe: 6 mal 3 ist gleich 15 plus 3.
 
 **Leichter:** Zwei Teller, dann einer dazu. **Schwerer:** Denkt euch zehn Teller, dann einen weg: 9 mal 3.
+
+## In Bewegung: Dreiertakt gehen
+
+**Zum Verinnerlichen:** Spielt zuerst „Brotzeit verteilen“. Dieses Spiel hilft, die Dreierreihe zu behalten.
+
+Ihr braucht: Platz im Zimmer oder Flur
+
+1. Geht drei Schritte und sagt dabei „eins, zwei, drei“. Bleibt kurz stehen. Das ist ein Dreier.
+2. Sagt: „3.“ Geht wieder drei Schritte und sagt danach: „6.“
+3. Jeder Dreiertakt bringt drei dazu: „9, 12, 15.“
+4. Bleibt bei 15 stehen. Sagt: „5 mal 3 ist gleich 15.“ Geht noch einen Takt und sagt: „15 plus 3 ist gleich 18.“
+
+**Darauf kommt es an:** Jeder Dreiertakt ist ein Dreier. Einen Dreier mehr heißt: 3 dazu, wie beim sechsten Teller.
+
+**Leichter:** nur bis 9. **Schwerer:** Bleibt bei 15 stehen und sagt vorher, wie viel nach zwei weiteren Takten dasteht.

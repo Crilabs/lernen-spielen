@@ -38,3 +38,16 @@ Ihr braucht: das Eierregal im Laden. Die Kartons bleiben zu.
 **Darauf kommt es an:** In einem Sechserkarton sind zwei Dreier. Das Doppelte der Dreieraufgabe ist die Sechseraufgabe.
 
 **Leichter:** 2 Kartons. **Schwerer:** 7 Kartons. Geht von 5 Kartons aus und legt 2 Sechser dazu.
+
+## In Bewegung: Eierkarton am Boden
+
+Ihr braucht: zwölf Socken, ein Zimmer mit Platz
+
+1. Legt sechs Socken als Eierkarton auf den Boden: zwei Reihen mit je drei.
+2. Geht neben der vorderen Reihe entlang und tippt bei jeder Socke daneben auf den Boden: „1, 2, 3.“ Dann neben der hinteren: „4, 5, 6.“
+3. Legt dahinter einen zweiten Karton. Geht neben jeder Reihe entlang, am Reihenende sagt ihr die Zahl: „9, 12.“
+4. Zählt die Socken nach: 12, zwei Sechser.
+
+**Darauf kommt es an:** Ein Karton sind zwei Reihen zu drei, also 6. Jeder Karton bringt sechs dazu.
+
+**Leichter:** nur ein Karton. **Schwerer:** Legt einen dritten Karton dazu (sechs Socken mehr) und zählt bis 18.

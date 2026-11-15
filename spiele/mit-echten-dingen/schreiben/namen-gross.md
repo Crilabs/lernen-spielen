@@ -22,3 +22,18 @@ Ihr braucht: kleine Zettel, einen Stift
 **Darauf kommt es an:** Ein Name fängt mit einem großen Buchstaben an. Danach geht es klein weiter: Emil, Zeynep, Bello. Bei Anna-Lena fangen beide Teile groß an.
 
 **Leichter:** Eine Person schreibt einen Namen vor, die andere schreibt ihn daneben. **Schwerer:** Namen mit S, K, O, V oder W. Da sehen groß und klein fast gleich aus. Macht den großen deutlich größer.
+
+## In Bewegung: Namen mit dem Körper schreiben
+
+**Zum Verinnerlichen:** Spielt zuerst „Tischkärtchen für alle“. Dieses Spiel hilft, Namen vorn groß und dann klein zu behalten.
+
+Ihr braucht: Platz zum Gehen
+
+1. Wählt einen Namen, zum Beispiel Emil.
+2. Geht für jeden Buchstaben einen Schritt und sagt ihn laut.
+3. Beim ersten Buchstaben streckt ihr die Arme hoch: groß. Bei den anderen lasst ihr sie hängen: klein.
+4. Macht es mit dem nächsten Namen. Bei Anna-Lena streckt ihr euch zweimal: bei A und bei L.
+
+**Darauf kommt es an:** Ein Name beginnt mit einem großen Buchstaben, danach geht es klein weiter. Bei zwei Teilen mit Bindestrich beginnt jeder Teil groß.
+
+**Leichter:** nur kurze Namen wie Emil oder Eva. **Schwerer:** Namen von Tieren und Kuscheltieren, und lange Namen wie Alexander.

@@ -20,3 +20,15 @@ Ihr braucht: Teller, Becher, Gabeln und Löffel für alle, die mitessen (bis zu 
 **Darauf kommt es an:** Vier Dinge an einem Platz sind zweimal zwei. Darum ist die Viererreihe das Doppelte der Zweierreihe: 5 mal 4 ist gleich 10 plus 10.
 
 **Leichter:** Deckt drei Plätze. **Schwerer:** Gäste kommen, deckt acht Plätze.
+
+## In Bewegung: Beinpaare doppelt
+
+Ihr braucht: fünf Dinge mit vier Beinen in der Wohnung, zum Beispiel Stühle, Hocker oder Tische
+
+1. Einer geht an den Dingen entlang und tippt bei jedem auf ein Beinpaar, das sind zwei Beine. Dabei zählt er in Zweierschritten: „2, 4, 6, 8, 10.“
+2. Der andere geht denselben Weg noch einmal und tippt auf die anderen zwei Beine jedes Dings. Er zählt auch: „2, 4, 6, 8, 10.“
+3. Sagt zusammen: „10 plus 10 ist gleich 20. 5 mal 4 ist gleich 20.“
+
+**Darauf kommt es an:** Ein Ding mit vier Beinen hat zwei Beinpaare. Wer dasselbe zweimal tut, verdoppelt: Die Viererreihe ist das Doppelte der Zweierreihe.
+
+**Leichter:** nur drei Dinge. **Schwerer:** sechs Dinge: erst 12, dann noch einmal 12.

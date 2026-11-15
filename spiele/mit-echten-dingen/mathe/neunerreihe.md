@@ -21,3 +21,16 @@ Ihr braucht: eine Preistafel an einer Kasse, etwa im Schwimmbad oder im Zoo.
 **Darauf kommt es an:** Neun ist eins weniger als zehn. Darum nehmt ihr für jede Person einen Euro weg, nicht einen für alle.
 
 **Leichter:** Zu zweit: 20 minus 2. Jede Person zeigt zehn Finger und klappt einen ein. **Schwerer:** Kostet ein Kind 4 Euro: Was zahlt eine Mannschaft mit neun Kindern? 40 minus 4.
+
+## In Bewegung: Zehn vor, einen zurück
+
+Ihr braucht: einen Hof oder langen Flur, vier Socken
+
+1. Einer geht zehn kleine Schritte vor und zählt jeden. Dann einen zurück: „9.“ Dort liegt die erste Socke.
+2. Von der Socke aus zehn Schritte vor, bis 19, und einen zurück: „18.“ Dort liegt die zweite Socke.
+3. Noch einmal: bis 28, einen zurück: „27.“ Dort liegt die dritte Socke.
+4. Sagt, wie viele Neuner ihr gegangen seid: drei. Dann wechselt ihr.
+
+**Darauf kommt es an:** Jeder Neuner ist ein Zehner und ein Schritt zurück: 9, 18, 27. 3 mal 9 ist gleich 30 minus 3.
+
+**Leichter:** nur zwei Runden. **Schwerer:** eine vierte Runde bis 36 mit der vierten Socke.

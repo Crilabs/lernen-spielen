@@ -21,3 +21,18 @@ Ihr braucht: den Vorrat, Teller für alle.
 **Darauf kommt es an:** Mal und geteilt gehören zusammen. Aus 7 mal 4 ist gleich 28 folgt: 28 geteilt durch 7 ist gleich 4, 28 geteilt durch 4 ist gleich 7.
 
 **Leichter:** je 2, 5 oder 10 Stück; von 5 mal aus (6 mal 7 ist gleich 5 mal 7 und noch 7). **Schwerer:** zwei Dinge zum selben Essen, etwa je 3 Pfannkuchen und je 8 Erdbeeren.
+
+## In Bewegung: Hüpfen hin und zurück
+
+**Zum Verinnerlichen:** Spielt zuerst „Kochen und auftun“. Dieses Spiel hilft, Mal- und Geteiltaufgaben zusammen zu behalten.
+
+Ihr braucht: einen Flur mit Platz
+
+1. Einer sagt eine Malaufgabe an, zum Beispiel 4 mal 6.
+2. Hüpft vier Sprünge. Jeder ist ein Sechser: „6, 12, 18, 24“. Sagt: „4 mal 6 ist gleich 24.“
+3. Dreht euch um und hüpft zurück. Jeder Sprung nimmt einen Sechser weg. Einer zählt die Sprünge mit den Fingern.
+4. Der andere sagt: „24 geteilt durch 6 ist gleich 4.“ Dann tauscht ihr.
+
+**Darauf kommt es an:** Mal und geteilt gehören zusammen. Hin zählt ihr Gruppen zusammen, zurück nehmt ihr sie weg. Beide Wege haben gleich viele Sprünge.
+
+**Leichter:** Fünfer- oder Zehnersprünge. **Schwerer:** Siebener- oder Neunersprünge.
