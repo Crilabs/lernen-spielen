@@ -19,7 +19,8 @@ die Prüfberichte `runde-*.md` in `{{PRUEFUNGEN}}` (die Bilder dort darfst du an
 {{VORIGE_BEFUNDE}}
 
 **Lies und sieh an:** die Bilder in `{{BILDER}}` (alle Phasen: Einführung, Aufgabe, Hilfe, Folge, Pause, beide
-Größen); den Entwurf; `docs/figuren.md` (ganz, besonders §3–§5), `docs/grundsaetze-bilder.md` §1, §6, §7, §8, §13, §16,
+Größen); den Entwurf; den Eintrag der Heimatwelt in `spiele/lernplan.json` (`welten[]`: `beschreibung`, `eltern` – zeigt
+der Bildschirm die Welt so, wie die Beschreibung sie den Eltern ankündigt?); `docs/figuren.md` (ganz, besonders §3–§5), `docs/grundsaetze-bilder.md` §1, §6, §7, §8, §13, §16,
 `docs/grundsaetze.md` §9, `docs/spielentwicklung.md` „Spielobjekte“. Du darfst die Seite selbst öffnen und weitere
 Bilder machen (Playwright mit `NODE_PATH=/private/tmp/claude-501/pw/node_modules`; WebKit-Klicks über
 `lsPruefen.fuehreAus`), auch mit `reducedMotion: "reduce"`.

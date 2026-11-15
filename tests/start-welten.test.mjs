@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-const { PALETTEN, paletteFuer, vignetteSvg } = await import("../spiele/start/welten.js");
+const { PALETTEN, paletteFuer, vignetteSvg, themenkreisSvg, paletteDesThemenkreises } = await import("../spiele/start/welten.js");
 const plan = JSON.parse(readFileSync(new URL("../spiele/lernplan.json", import.meta.url), "utf8"));
 const doku = readFileSync(new URL("../docs/grundsaetze-bilder.md", import.meta.url), "utf8");
 
@@ -30,5 +30,17 @@ test("vignetteSvg: flach, nur Farben der Palette (und Papier), keine Kontur, kei
     assert.doesNotMatch(svg, /<text|stroke="#3B2A6B"/);
     const farben = new Set([...svg.matchAll(/(?:fill|stroke)="(#[0-9A-Fa-f]{6})"/g)].map((m) => m[1].toUpperCase()));
     for (const f of farben) assert.ok([...PALETTEN[id], "#FFFCF7"].includes(f), `${id}: ${f}`);
+  }
+});
+
+test("themenkreisSvg: jeder Themenkreis ein eigenes Bild, flach, nur Farben seiner Palette und Papier", () => {
+  const bilder = plan.ueberschriften.map((u) => themenkreisSvg(u.id));
+  assert.equal(new Set(bilder).size, plan.ueberschriften.length, "jedes Bild anders");
+  for (const u of plan.ueberschriften) {
+    const svg = themenkreisSvg(u.id);
+    assert.match(svg, /^<svg [^>]*viewBox="0 0 300 160"/);
+    assert.doesNotMatch(svg, /<text/);
+    const erlaubt = new Set([...PALETTEN[paletteDesThemenkreises(u.id)], "#FFFCF7"]);
+    for (const [farbe] of svg.matchAll(/#[0-9A-Fa-f]{6}/g)) assert.ok(erlaubt.has(farbe), `${u.id}: ${farbe}`);
   }
 });

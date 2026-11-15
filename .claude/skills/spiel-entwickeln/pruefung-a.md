@@ -13,6 +13,8 @@ geschrieben und sollst ihn nicht verbessern, sondern beurteilen. Arbeitsordner `
 **Lies ganz:**
 - den Entwurf `{{ENTWURF}}`,
 - den Katalog-Eintrag `{{KATALOG_DATEI}}` „### {{ID}} …“ und den Eintrag des Spiels in `docs/spielkatalog/welten.md`
+  und den Eintrag der Heimatwelt in `spiele/lernplan.json` (`welten[]`, besonders `beschreibung`: das Spiel bleibt in
+  ihrem Rahmen, sonst muss der Bau sie angepasst haben – sonst Befund zu A4)
   (Vorrang bei Widersprüchen: `docs/spielkatalog.md` §8a). Der Eintrag ist ein Vorschlag: Eine begründete
   Abweichung ist kein Befund, eine unbegründete schon. **Ausnahme:** Was der Eintrag als Entscheidung von Christian
   kennzeichnet („Christian“, mit Datum), ist gesetzt. Widerspricht es einem Kriterium, ist der Befund, dass der
