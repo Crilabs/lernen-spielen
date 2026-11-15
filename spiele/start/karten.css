@@ -13,8 +13,8 @@
 .karten .karte .bild { position: relative; display: block; height: 13.9rem; overflow: hidden; border-bottom: var(--ls-kontur) solid var(--ls-tinte); background: var(--fach-toenung); }
 .karten .karte .bild svg { display: block; width: 100%; height: 100%; }
 .karten .karte .bild.ohne { display: grid; place-items: center; }
-/* Figur des Spiels groß vor der Welt, mittig bis Mitte rechts (§16 KB2), kein Knopf. */
-.karten .karte .bild .figur { position: absolute; left: 55%; bottom: 0.4rem; height: 80%; width: auto; transform: translateX(-50%); }
+/* Figur des Spiels groß und mittig vor der Welt (§16, Christian), kein Knopf. */
+.karten .karte .bild .figur { position: absolute; left: 50%; top: 50%; height: 78%; width: auto; transform: translate(-50%, -50%); }
 .karten .karte .bild ls-objekt.figur { display: block; aspect-ratio: 1; }
 .karten .karte { position: relative; }
 .karten .karte .unten { display: flex; padding: 2rem 1.6rem 2rem; min-height: 12rem; }
