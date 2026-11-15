@@ -23,7 +23,7 @@ body { -webkit-user-select: none; user-select: none; }
 
 <script type="module">
 import { sperreTouch, protokoll } from "./lernspiel.js";
-import { merkeGeschichteGelesen } from "./lernsteuerung.js";
+import { merkeGeschichteGelesen, ladeBuchStand, merkeBuchStand } from "./lernsteuerung.js";
 import "./rahmen/leiste.js";
 import "./rahmen/geschichte.js";
 import { hintergrundSvg } from "./start/hintergrund.js";
@@ -59,8 +59,20 @@ geschichte.geladen.then((g) => {
     leiste.style.setProperty("--fach-toenung", "transparent");
   }
 });
+// Sachbuch: Lesestand laden und merken (nicht in der Vorschau der Eltern); alle Kapitel fertig → gelesen.
+geschichte.geladen.then(async (g) => {
+  if (!g || !Array.isArray(g.kapitel) || suche.has("eltern")) return;
+  try { geschichte.setzeStand(await ladeBuchStand(id)); } catch (e) { protokoll("Buchstand: " + e); }
+});
+geschichte.addEventListener("stand", (e) => {
+  if (suche.has("eltern")) return;
+  const { kapitel, seite, fertig, kapitelZahl } = e.detail;
+  merkeBuchStand(id, { kapitel, seite, fertig }, kapitelZahl).catch((f) => protokoll("Buchstand: " + f));
+});
 geschichte.addEventListener("fertig", async () => {
-  if (gefunden && !suche.has("eltern")) {
+  // Sachbuch: „gelesen“ erst, wenn alle Kapitel fertig sind (merkeBuchStand), nicht schon beim Fertig im letzten Kapitel
+  const buch = geschichte.kapitelZahl > 0;
+  if (gefunden && !buch && !suche.has("eltern")) {
     try { await merkeGeschichteGelesen(id); } catch (e) { protokoll("Geschichte gelesen: " + e); }
   }
   location.href = weiter;

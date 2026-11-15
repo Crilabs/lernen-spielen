@@ -92,7 +92,7 @@ test("bibliothek.json: jede fertige Geschichte steht in der Bibliothek; Lerngesc
   const raumVon = new Map(plan.raeume.flatMap((r) => r.regale.flatMap((rg) => rg.buecher.map((b) => [b.id, r.id]))));
   for (const g of index) {
     assert.ok(raumVon.has(g.id), `Geschichte ${g.id} fehlt in spiele/bibliothek.json`);
-    if (g.art !== "sachgeschichte") assert.equal(raumVon.get(g.id), "zahlen-buchstaben", `Lerngeschichte ${g.id}`);
+    if (!["sachgeschichte", "sachbuch"].includes(g.art)) assert.equal(raumVon.get(g.id), "zahlen-buchstaben", `Lerngeschichte ${g.id}`);
     assert.ok(existsSync(new URL(`../spiele/geschichten/${g.id}/geschichte.json`, import.meta.url)), g.id);
   }
 });

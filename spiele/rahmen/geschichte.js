@@ -96,6 +96,44 @@ ${SZENE_CSS}
   scrollbar-color: var(--kulisse-tief, var(--ls-tinte-weich)) transparent; }
 .text { margin: 0; font-size: 4.2rem; line-height: 1.45; max-width: 28ch; text-wrap: pretty; hyphens: manual; }
 .text.titel { font-size: 6rem; line-height: 1.15; font-weight: 700; }
+.text p { margin: 0; }
+.text p + p { margin-top: .7em; }
+
+/* Sachbuch (geschichten.md §2a, §4): mehr Text je Seite – etwas kleineres Bild, Text oben beginnend. */
+:host(.buch-modus) .blatt { --bild: min(calc(100cqh - 2 * var(--rand)), calc(46cqw - var(--rand))); }
+:host(.buch-modus) .textfeld { justify-content: flex-start; }
+/* Im Buch nimmt die Textkarte die ganze Höhe (mehr Text je Seite), das Bild steht oben. */
+:host(.buch-modus) .blatt { grid-template-rows: calc(100cqh - 2 * var(--rand)); align-items: start; }
+:host(.buch-modus) .lese { height: calc(100cqh - 2 * var(--rand)); position: relative; padding-top: 4rem; }
+.zum-inhalt { position: absolute; top: 1.6rem; right: 1.6rem; z-index: 1; }
+:host(.buch-modus) .lese .textfeld { padding-right: 7rem; }
+:host(.buch-modus) .text { font-size: 3.8rem; line-height: 1.5; max-width: 34ch; }
+
+/* Inhaltsverzeichnis: Titel, Wahl Vorlesen/Selbst lesen, Weiterlesen; darunter die Kapitel als Karten mit Foto. */
+.inhalt { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; padding: 3.6rem 4.6rem 5rem;
+  scrollbar-width: thin; scrollbar-color: var(--kulisse-tief, var(--ls-tinte-weich)) transparent; }
+.inhalt .kopf { display: flex; flex-wrap: wrap; align-items: center; gap: 2.4rem 3.2rem; margin-bottom: 3.6rem;
+  padding: 3rem 3.6rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-gross); box-shadow: 0 1.2rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
+.buchtitel { margin: 0 auto 0 0; font-size: 6rem; line-height: 1.1; font-weight: 700; color: var(--ls-tinte); min-width: 0; }
+.wahl { display: flex; flex-wrap: wrap; gap: 1.6rem; }
+.karten { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 34rem), 1fr)); gap: 3.6rem 3.2rem; }
+.kapitelkarte { position: relative; display: grid; grid-template-rows: auto auto auto; text-align: left; padding: 0;
+  font: inherit; color: var(--ls-tinte); background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-gross); overflow: hidden; cursor: pointer; touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent; box-shadow: 0 1rem 0 var(--kulisse-tief, var(--ls-tinte-weich));
+  transition: transform .15s ease, box-shadow .15s ease; }
+.kapitelkarte:active { transform: translateY(.5rem); box-shadow: 0 .5rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
+.kapitelkarte:focus-visible { outline: .8rem solid var(--ls-sonne); outline-offset: .4rem; }
+.karte-bild { display: block; aspect-ratio: 4 / 3; background: var(--kulisse-grund, var(--ls-nebel));
+  border-bottom: var(--ls-kontur) solid var(--ls-tinte); }
+.karte-bild img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.karte-nr { padding: 2rem 2.4rem 0; font-size: 2.6rem; color: var(--ls-tinte-weich); }
+.karte-titel { padding: .4rem 2.4rem 2.4rem; font-size: 3.6rem; line-height: 1.2; font-weight: 700; }
+.haken { position: absolute; top: 1.6rem; right: 1.6rem; width: 6rem; height: 6rem; border-radius: 50%; display: none;
+  place-items: center; font-size: 3.6rem; font-weight: 700; color: var(--ls-tinte); background: var(--ls-sonne);
+  border: var(--ls-kontur) solid var(--ls-tinte); }
+.kapitelkarte.gelesen .haken { display: grid; }
 .knoepfe { display: flex; align-items: center; gap: 1.6rem; min-height: 16.6rem; }
 .knoepfe .rechts { margin-left: auto; display: grid; place-items: center; }
 .rechts > * { grid-area: 1 / 1; }
@@ -107,7 +145,8 @@ ${SZENE_CSS}
 .weiter:active { transform: translateY(.3rem); box-shadow: 0 .3rem 0 var(--ls-tinte); }
 .weiter:focus-visible { outline: .8rem solid var(--ls-sonne); outline-offset: .5rem; box-shadow: 0 .6rem 0 var(--ls-tinte), 0 0 0 1.1rem var(--ls-tinte); }
 .weiter.wartet { opacity: 0; transform: scale(.6); pointer-events: none; }
-.weiter[hidden], .fertig[hidden], .zurueck[hidden] { display: none; }
+.weiter[hidden], .fertig[hidden], .zurueck[hidden], .naechstes[hidden], .zum-inhalt[hidden], .weiterlesen[hidden],
+.blatt[hidden], .inhalt[hidden], .wahl[hidden] { display: none; }
 .zurueck.unsichtbar { visibility: hidden; }
 
 /* Fortschritt: Punkte ohne Zahl; die aufgeschlagene Seite ist ein längerer Strich. */
@@ -140,9 +179,16 @@ ${SZENE_CSS}
   .textfeld { justify-content: flex-start; }
   .text { font-size: 3.6rem; line-height: 1.4; max-width: none; }
   .lese { padding: 3.2rem 3.6rem 2.4rem; row-gap: 1.6rem; }
+  :host(.buch-modus) .blatt { --bild: min(calc(100cqw - 2 * var(--rand) - 2rem), calc(34cqh - var(--rand)));
+    grid-template-rows: var(--bild) minmax(0, 1fr); align-items: stretch; }
+  :host(.buch-modus) .lese { height: auto; padding-top: 3.2rem; }
+  :host(.buch-modus) .text { font-size: 3.6rem; max-width: none; }
 }
 /* Schmal (Telefon hoch): weniger Rand in der Karte, damit Startknöpfe und Fertig hineinpassen. */
 @container buch (max-width: 560px) {
+  .inhalt { padding: 2.4rem 2rem 4rem; }
+  .inhalt .kopf { padding: 2.4rem; }
+  .buchtitel { font-size: 4.6rem; }
   .blatt { --rand: 2.4rem; }
   .lese { padding: 2.4rem 2rem 2rem; }
   .knoepfe { gap: 1rem; flex-wrap: wrap; row-gap: 1.6rem; }
@@ -154,7 +200,9 @@ const PFEIL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M12 
 
 /**
  * @typedef {{ text: string, sprich?: string, bild?: string, szene?: any[], frage?: boolean }} Seite
- * @typedef {{ id: string, titel: string, art: string, klasse: number, kulisse?: string, seiten: Seite[] }} Geschichte
+ * @typedef {{ titel: string, seiten: Seite[] }} Kapitel
+ * @typedef {{ id: string, titel: string, art: string, klasse: number, kulisse?: string, seiten?: Seite[], kapitel?: Kapitel[] }} Geschichte
+ * @typedef {{ kapitel: number, seite: number, fertig: number[] }} BuchStand
  */
 
 const weniger = () => {
@@ -168,10 +216,21 @@ export class LsGeschichte extends HTMLElement {
     super();
     const w = this.attachShadow({ mode: "open" });
     w.innerHTML = `<style>${GRUND_CSS}${CSS}</style>
-      <div class="buch"><div class="blatt">
+      <div class="buch"><div class="inhalt" hidden>
+        <div class="kopf">
+          <h2 class="buchtitel"></h2>
+          <div class="wahl" role="group" aria-label="Wie lesen?">
+            <ls-knopf class="wahl-vorlesen" symbol="vorlesen.svg" wort="Vorlesen" groesse="klein" stumm></ls-knopf>
+            <ls-knopf class="wahl-selbst" symbol="buch.svg" wort="Selbst lesen" groesse="klein" stumm></ls-knopf>
+          </div>
+          <ls-knopf class="weiterlesen" art="haupt" symbol="buch.svg" wort="Weiterlesen" stumm hidden></ls-knopf>
+        </div>
+        <div class="karten"></div>
+      </div><div class="blatt">
         <div class="rahmen" part="bild"><div class="figuren"></div><span class="erzeugt" hidden>Bild erzeugt</span></div>
         <div class="lese">
-          <div class="textfeld"><p class="text" aria-live="polite"></p></div>
+          <ls-knopf class="zum-inhalt" symbol="inhalt.svg" name="Inhalt" groesse="klein" stumm hidden></ls-knopf>
+          <div class="textfeld"><div class="text" aria-live="polite"></div></div>
           <div class="startwahl" hidden>
             <ls-knopf class="waehle-vorlesen" art="haupt" symbol="vorlesen.svg" wort="Vorlesen" stumm></ls-knopf>
             <ls-knopf class="waehle-selbst" symbol="buch.svg" wort="Selbst lesen" stumm></ls-knopf>
@@ -183,6 +242,7 @@ export class LsGeschichte extends HTMLElement {
             <div class="rechts">
               <button type="button" class="weiter" aria-label="Weiter">${PFEIL}</button>
               <ls-knopf class="fertig" art="haupt" symbol="fertig.svg" wort="Fertig" stumm hidden></ls-knopf>
+              <ls-knopf class="naechstes" art="haupt" symbol="buch.svg" wort="Weiter" stumm hidden></ls-knopf>
             </div>
           </div>
         </div>
@@ -199,6 +259,20 @@ export class LsGeschichte extends HTMLElement {
     this.fertigEl = q(".fertig");
     this.punkteEl = q(".punkte");
     this.startwahlEl = q(".startwahl");
+    this.inhaltEl = q(".inhalt");
+    this.blattEl = q(".blatt");
+    this.kartenEl = q(".karten");
+    this.weiterlesenEl = q(".weiterlesen");
+    this.naechstesEl = q(".naechstes");
+    this.zumInhaltEl = q(".zum-inhalt");
+    this.wahlEl = q(".wahl");
+    /** Sachbuch: aufgeschlagenes Kapitel (-1 = Inhaltsverzeichnis); ohne Kapitel immer -1. */
+    this.kapitel = -1;
+    /** @type {Seite[]} die Seiten, die gerade gelesen werden (Geschichte oder Kapitel) */
+    this.liste = [];
+    /** @type {BuchStand} Lesestand des Sachbuchs (setzeStand von der Seite, Ereignis „stand“ zurück) */
+    this.stand = { kapitel: 0, seite: 0, fertig: [] };
+    this.hatStand = false;
     /** @type {{ id: string, name: string, grund: string, tief: string, svg: string } | null} */
     this.kulisse = null;
     /** @type {"vorlesen" | "selbst" | null} null = noch nicht gewählt */
@@ -238,10 +312,22 @@ export class LsGeschichte extends HTMLElement {
     q(".waehle-selbst").addEventListener("click", () => this.waehle("selbst"));
     this.textEl.addEventListener("click", () => this.halte());
     this.fertigEl.addEventListener("click", () => this.beende());
+    this.naechstesEl.addEventListener("click", () => this.oeffne(this.kapitel + 1));
+    this.zumInhaltEl.addEventListener("click", () => this.zeigeInhalt());
+    this.weiterlesenEl.addEventListener("click", () => this.oeffne(this.stand.kapitel, this.stand.seite));
+    q(".wahl-vorlesen").addEventListener("click", () => this.setzeModus("vorlesen"));
+    q(".wahl-selbst").addEventListener("click", () => this.setzeModus("selbst"));
     /** @type {Element | null} */
     this.leiste = null;
     this.beiTon = (/** @type {Event} */ e) => {
-      if (/** @type {CustomEvent} */ (e).detail?.an !== false || this.modus === "selbst") return;
+      const an = /** @type {CustomEvent} */ (e).detail?.an !== false;
+      if (this.istBuch) {
+        // Sachbuch: Ton aus → Selbst lesen, die Wahl verschwindet; Ton an → die Wahl ist wieder da
+        this.wahlEl.hidden = !an;
+        if (!an) { clearTimeout(this.autoTimer); this.setzeModus("selbst"); }
+        return;
+      }
+      if (an || this.modus === "selbst") return;
       clearTimeout(this.autoTimer);
       this.setzeAngehalten(false);
       if (this.modus === null) { this.modus = "selbst"; this.zeigeWahl(false); this.zeigeText(); }
@@ -268,7 +354,9 @@ export class LsGeschichte extends HTMLElement {
   }
 
   get seite() { return this._seite; }
-  get seiten() { return this.daten?.seiten.length ?? 0; }
+  get seiten() { return this.liste.length; }
+  get kapitelZahl() { return Array.isArray(this.daten?.kapitel) ? this.daten.kapitel.length : 0; }
+  get istBuch() { return this.kapitelZahl > 0; }
 
   connectedCallback() {
     window.addEventListener("keydown", this.beiTaste);
@@ -284,7 +372,12 @@ export class LsGeschichte extends HTMLElement {
         get modus() { return el.modus; },
         get angehalten() { return el.angehalten; },
         get gelesen() { return el.gelesen; },
-        get frageSeite() { return el.daten ? el.daten.seiten.findIndex((s) => s.frage === true) : -1; },
+        get frageSeite() { return el.liste.findIndex((s) => s.frage === true); },
+        get kapitel() { return el.kapitel; },
+        get kapitelZahl() { return el.kapitelZahl; },
+        get stand() { return el.stand; },
+        oeffne: (/** @type {number} */ k, /** @type {number} */ s = 0) => el.oeffne(k, s),
+        inhalt: () => el.zeigeInhalt(),
         waehle: (/** @type {"vorlesen" | "selbst"} */ m) => el.waehle(m),
         halte: () => el.halte(),
         weiter: () => el.weiter(),
@@ -315,14 +408,24 @@ export class LsGeschichte extends HTMLElement {
       const r = await fetch(url);
       if (!r.ok) throw new Error(`${r.status}`);
       const g = /** @type {Geschichte} */ (await r.json());
-      if (!g || !Array.isArray(g.seiten) || !g.seiten.length) throw new Error("keine Seiten");
+      const buch = Array.isArray(g?.kapitel) && g.kapitel.length && g.kapitel.every((k) => Array.isArray(k?.seiten) && k.seiten.length);
+      if (!g || (!buch && (!Array.isArray(g.seiten) || !g.seiten.length))) throw new Error("keine Seiten");
       this.basis = url;
       await Promise.all([this.ladeBausteine(g), this.ladeKulisse(g)]);
       this.daten = g;
-      this.punkteEl.replaceChildren(...g.seiten.map(() => document.createElement("i")));
-      this.modus = (await this.tonAn()) ? null : "selbst";
-      this.zeigeWahl(this.modus === null);
-      this.zeige(0, 0);
+      if (buch) {
+        // Sachbuch: Inhaltsverzeichnis; bei Ton an ist „Vorlesen“ vorgewählt (Vorlesebuch, Christian 2026-11-15)
+        this.modus = (await this.tonAn()) ? "vorlesen" : "selbst";
+        this.wahlEl.hidden = this.modus === "selbst";
+        this.classList.add("buch-modus");
+        this.zeigeInhalt();
+      } else {
+        this.liste = /** @type {Seite[]} */ (g.seiten);
+        this.punkteEl.replaceChildren(...this.liste.map(() => document.createElement("i")));
+        this.modus = (await this.tonAn()) ? null : "selbst";
+        this.zeigeWahl(this.modus === null);
+        this.zeige(0, 0);
+      }
       this._geladen(g);
     } catch (e) {
       protokoll(`ls-geschichte: ${src} nicht geladen (${e})`);
@@ -337,7 +440,8 @@ export class LsGeschichte extends HTMLElement {
 
   /** Lädt, was die Szenen brauchen: Perlen, Dinge, die Runde. Fehlt etwas, bleibt es still weg. @param {Geschichte} g */
   async ladeBausteine(g) {
-    const szenen = g.seiten.flatMap((s) => (Array.isArray(s.szene) ? s.szene : []));
+    const alle = Array.isArray(g.kapitel) ? g.kapitel.flatMap((k) => k.seiten ?? []) : (g.seiten ?? []);
+    const szenen = alle.flatMap((s) => (Array.isArray(s.szene) ? s.szene : []));
     if (!szenen.length) return;
     try { await import("./perlenstab.js"); } catch { /* ohne Baustein bleiben die Perlen weg */ }
     if (szenen.some((b) => b && typeof b.objekt === "string"))
@@ -386,8 +490,8 @@ export class LsGeschichte extends HTMLElement {
    */
   zeige(i, richtung) {
     const g = this.daten;
-    if (!g || i < 0 || i >= g.seiten.length) return;
-    const s = g.seiten[i];
+    if (!g || i < 0 || i >= this.liste.length) return;
+    const s = this.liste[i];
     this._seite = i;
     this.nummer += 1;
     clearTimeout(this.ruheTimer);
@@ -433,17 +537,22 @@ export class LsGeschichte extends HTMLElement {
     }
 
     // Text (vor der Startwahl auf Seite 1: der Titel)
-    const titelSeite = this.modus === null && i === 0;
-    this.textEl.textContent = titelSeite ? g.titel : s.text;
+    const titelSeite = this.modus === null && i === 0 && !this.istBuch;
+    this.setzeText(titelSeite ? g.titel : s.text);
     this.textEl.classList.toggle("titel", titelSeite);
     /** @type {HTMLElement} */ (this.textEl.parentElement).scrollTop = 0;
     if (alt) this.blende(this.textEl, 0, 1);
 
     // Knöpfe und Punkte
-    const letzte = i === g.seiten.length - 1;
+    const letzte = i === this.liste.length - 1;
+    const letztesKapitel = !this.istBuch || this.kapitel === this.kapitelZahl - 1;
     this.zurueckEl.classList.toggle("unsichtbar", i === 0);
     this.weiterEl.hidden = letzte;
-    this.fertigEl.hidden = !letzte;
+    this.fertigEl.hidden = !(letzte && letztesKapitel);
+    this.naechstesEl.hidden = !(letzte && !letztesKapitel);
+    if (!this.naechstesEl.hidden) this.naechstesEl.setAttribute("wort", `Kapitel ${this.kapitel + 2}`);
+    this.zumInhaltEl.hidden = !this.istBuch;
+    if (this.istBuch) this.merkeStand(i, letzte);
     [...this.punkteEl.children].forEach((p, k) => {
       p.classList.toggle("jetzt", k === i);
       p.classList.toggle("gelesen", k < i);
@@ -472,7 +581,7 @@ export class LsGeschichte extends HTMLElement {
    * @returns {Promise<string>}
    */
   async lies() {
-    const s = this.daten?.seiten[this._seite];
+    const s = this.liste[this._seite];
     if (!s) return "still";
     const meine = this.nummer;
     if (!(await this.tonAn()) || meine !== this.nummer) return "still";
@@ -487,12 +596,108 @@ export class LsGeschichte extends HTMLElement {
    * @param {"vorlesen" | "selbst"} modus
    */
   waehle(modus) {
+    if (this.istBuch) return void this.setzeModus(modus);
     if (!this.daten || this.modus !== null) return;
     this.modus = modus === "vorlesen" ? "vorlesen" : "selbst";
     this.zeigeWahl(false);
     this.setzeAngehalten(false);
     this.zeigeText();
     this.liesUndBlaettere();
+  }
+
+  /**
+   * Text der Seite: Absätze (Leerzeile im Text) als eigene <p>.
+   * @param {string} text
+   */
+  setzeText(text) {
+    const absaetze = String(text ?? "").split(/\n\s*\n/).map((t) => t.trim()).filter(Boolean);
+    this.textEl.replaceChildren(...absaetze.map((t) => { const p = document.createElement("p"); p.textContent = t; return p; }));
+  }
+
+  /** Sachbuch: Vorlesen oder Selbst lesen (im Inhaltsverzeichnis umschaltbar). @param {"vorlesen" | "selbst"} modus */
+  setzeModus(modus) {
+    this.modus = modus === "vorlesen" ? "vorlesen" : "selbst";
+    this.setzeAngehalten(false);
+    for (const [k, m] of [[".wahl-vorlesen", "vorlesen"], [".wahl-selbst", "selbst"]]) {
+      const b = /** @type {HTMLElement} */ (this.wahlEl.querySelector(k));
+      b.setAttribute("aria-pressed", String(this.modus === m));
+      if (this.modus === m) b.setAttribute("art", "haupt"); else b.removeAttribute("art");
+    }
+  }
+
+  /**
+   * Lesestand von außen (geschichte.html, aus dem Lernstand). @param {BuchStand | null} st
+   */
+  setzeStand(st) {
+    if (!st) return;
+    const k = Math.min(Math.max(0, st.kapitel | 0), Math.max(0, this.kapitelZahl - 1));
+    const n = this.daten?.kapitel?.[k]?.seiten.length ?? 1;
+    // Kommt der Stand erst, wenn schon ein Kapitel offen ist: das offene Kapitel bleibt, fertige Kapitel werden vereinigt.
+    const fertig = [...new Set([...this.stand.fertig, ...(st.fertig ?? [])])].sort((a, b) => a - b);
+    this.stand = this.kapitel >= 0 ? { ...this.stand, fertig }
+      : { kapitel: k, seite: Math.min(Math.max(0, st.seite | 0), n - 1), fertig };
+    this.hatStand = true;
+    if (this.kapitel < 0) this.zeigeInhalt();
+  }
+
+  /** Merkt den Stand und meldet ihn (Ereignis „stand“). @param {number} seite @param {boolean} letzte */
+  merkeStand(seite, letzte) {
+    const fertig = new Set(this.stand.fertig);
+    if (letzte) fertig.add(this.kapitel);
+    this.stand = { kapitel: this.kapitel, seite, fertig: [...fertig].sort((a, b) => a - b) };
+    this.hatStand = true;
+    this.dispatchEvent(new CustomEvent("stand", { bubbles: true, composed: true, detail: { ...this.stand, kapitelZahl: this.kapitelZahl } }));
+  }
+
+  /** Sachbuch: Inhaltsverzeichnis mit Kapitelkarten. */
+  zeigeInhalt() {
+    const g = this.daten;
+    if (!g?.kapitel) return;
+    clearTimeout(this.autoTimer);
+    clearTimeout(this.ruheTimer);
+    stille();
+    this.nummer += 1;
+    this.kapitel = -1;
+    this.liste = [];
+    this._seite = -1;
+    this.setzeModus(this.modus ?? "selbst");
+    /** @type {HTMLElement} */ (this.inhaltEl.querySelector(".buchtitel")).textContent = g.titel;
+    const weiter = this.hatStand && this.stand.fertig.length < this.kapitelZahl && (this.stand.kapitel > 0 || this.stand.seite > 0);
+    this.weiterlesenEl.hidden = !weiter;
+    if (weiter) this.weiterlesenEl.setAttribute("wort", `Weiterlesen: Kapitel ${this.stand.kapitel + 1}`);
+    this.kartenEl.replaceChildren(...g.kapitel.map((k, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "kapitelkarte";
+      b.classList.toggle("gelesen", this.stand.fertig.includes(i));
+      const bild = k.seiten[0]?.bild;
+      b.innerHTML = `<span class="karte-bild">${bild ? `<img alt="" src="${new URL(bild, this.basis).href}">` : ""}</span>
+        <span class="karte-nr">Kapitel ${i + 1}</span><span class="karte-titel"></span><span class="haken" aria-hidden="true">✓</span>`;
+      /** @type {HTMLElement} */ (b.querySelector(".karte-titel")).textContent = k.titel;
+      b.setAttribute("aria-label", `Kapitel ${i + 1}: ${k.titel}${this.stand.fertig.includes(i) ? ", gelesen" : ""}`);
+      b.addEventListener("click", () => this.oeffne(i));
+      return b;
+    }));
+    this.inhaltEl.hidden = false;
+    this.blattEl.hidden = true;
+    this.erzeugtEl.hidden = true;
+  }
+
+  /**
+   * Sachbuch: schlägt ein Kapitel auf.
+   * @param {number} k Kapitel (ab 0)
+   * @param {number} [seite]
+   */
+  oeffne(k, seite = 0) {
+    const g = this.daten;
+    if (!g?.kapitel || k < 0 || k >= g.kapitel.length) return;
+    this.kapitel = k;
+    this.liste = g.kapitel[k].seiten;
+    this.punkteEl.replaceChildren(...this.liste.map(() => document.createElement("i")));
+    this.inhaltEl.hidden = true;
+    this.blattEl.hidden = false;
+    this.setzeAngehalten(false);
+    this.zeige(Math.min(Math.max(0, seite), this.liste.length - 1), 0);
   }
 
   /** Startwahl zeigen oder verbergen (mit ihr: keine Punkte, kein Weiter). @param {boolean} an */
@@ -503,9 +708,9 @@ export class LsGeschichte extends HTMLElement {
 
   /** Nach der Startwahl: statt des Titels der Text der Seite. */
   zeigeText() {
-    const s = this.daten?.seiten[this._seite];
+    const s = this.liste[this._seite];
     if (!s) return;
-    this.textEl.textContent = s.text;
+    this.setzeText(s.text);
     this.textEl.classList.remove("titel");
     this.blende(this.textEl, 0, 1);
   }
@@ -544,10 +749,10 @@ export class LsGeschichte extends HTMLElement {
   blaettereSelbst(ergebnis, meine) {
     const g = this.daten;
     if (!g || this.modus !== "vorlesen" || this.angehalten || meine !== this.nummer) return;
-    const s = g.seiten[this._seite];
+    const s = this.liste[this._seite];
     // Abgebrochen, ohne dass das Kind geblättert hat (z. B. Systemstimme unterbrochen): sichtbar anhalten statt hängen.
     if (ergebnis === "abgebrochen") return void this.setzeAngehalten(true);
-    if (!s || s.frage || this._seite >= g.seiten.length - 1) return;
+    if (!s || s.frage || this._seite >= this.liste.length - 1) return;   // nie über das Kapitelende hinaus
     const warte = ergebnis === "still" ? Math.max(LESEZEIT_MIN_MS, s.text.length * LESEZEIT_MS) : PAUSE_MS;
     clearTimeout(this.autoTimer);
     this.autoTimer = setTimeout(() => {
@@ -557,19 +762,20 @@ export class LsGeschichte extends HTMLElement {
   }
 
   weiter() {
-    if (!this.daten || !this.weiterBereit) return;
+    if (!this.daten || !this.weiterBereit || (this.istBuch && this.kapitel < 0)) return;
     if (this.modus === null) { this.modus = "selbst"; this.zeigeWahl(false); this.zeigeText(); }
-    if (this._seite >= this.daten.seiten.length - 1) return;
+    if (this._seite >= this.liste.length - 1) return;
     this.zeige(this._seite + 1, 1);
   }
 
   zurueck() {
-    if (!this.daten || this._seite <= 0) return;
+    if (!this.daten || this._seite <= 0 || (this.istBuch && this.kapitel < 0)) return;
     this.zeige(this._seite - 1, -1);
   }
 
   beende() {
-    if (!this.daten || this._seite !== this.daten.seiten.length - 1) return;
+    if (!this.daten || this._seite !== this.liste.length - 1) return;
+    if (this.istBuch && this.kapitel !== this.kapitelZahl - 1) return;
     stille();
     this.dispatchEvent(new CustomEvent("fertig", { bubbles: true, composed: true, detail: { id: this.daten.id } }));
   }

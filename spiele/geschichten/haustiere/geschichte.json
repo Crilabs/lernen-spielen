@@ -1,114 +1,306 @@
 {
  "id": "haustiere",
- "titel": "Mia zieht ein",
- "art": "sachgeschichte",
+ "titel": "Mia, die kleine Wildkatze",
+ "art": "sachbuch",
  "welt": "haustiere",
  "familie": null,
  "kulisse": "im-haus",
  "klasse": 1,
  "quellen": [
   {
-   "fakt": "Eine neue Katze lässt man zuerst in Ruhe; die offene Transportbox bleibt als Rückzugsort stehen, die Katze entscheidet selbst, wann sie herauskommt. Nicht bedrängen.",
-   "quelle": "https://tierschutzbund.de/fileadmin/Seiten/Kampagne_Katzenschutz/Downloads/Broschuere_Katze_aus_zweiter_Hand.pdf (Deutscher Tierschutzbund), abgerufen 2026-11-15"
+   "fakt": "Hauskatzen stammen von der Falbkatze (Afrikanische Wildkatze) ab und sind mit Löwe und Tiger verwandt.",
+   "quelle": "Klexikon, „Hauskatze“: https://klexikon.zum.de/wiki/Hauskatze; Planet Wissen, „Wie kam die Katze zum Menschen?“: https://www.planet-wissen.de/natur/haustiere/katzen/index.html – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Verstecken in den ersten Tagen ist normal; die Eingewöhnung dauert meist einige Wochen.",
-   "quelle": "https://www.hansemerkur.de/haustiere/katze-eingewoehnen; https://www.zooplus.de/magazin/katze/katzenhaltung/katzen-eingewoehnen, abgerufen 2026-11-15"
+   "fakt": "Wildkatzen kamen zu den Kornvorräten der ersten Bauern, um Mäuse zu fangen; auf Zypern wurden vor etwa 9.500 Jahren ein Mensch und eine Katze zusammen begraben; im alten Ägypten wurden Katzen verehrt.",
+   "quelle": "Planet Wissen, „Wie kam die Katze zum Menschen?“: https://www.planet-wissen.de/natur/haustiere/katzen/index.html; Spektrum, „Bis in den Tod“ (Vigne et al. 2004, Science 304:259): https://www.spektrum.de/news/bis-in-den-tod/714571 ; National Geographic: https://www.nationalgeographic.com/animals/article/oldest-known-pet-cat-9500-year-old-burial-found-on-cyprus – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Katzen hören sehr gut; über 30 Muskeln je Ohr, die Ohren drehen sich unabhängig voneinander.",
-   "quelle": "https://www.zooplus.de/magazin/katze/katzengesundheit-pflege/katzengehoer, abgerufen 2026-11-15"
+   "fakt": "Katzen sind Raubtiere mit langen Eckzähnen; sie jagen meist allein, schleichen sich an, lauern und springen dann; am liebsten fangen sie Mäuse.",
+   "quelle": "Klexikon, „Hauskatze“: https://klexikon.zum.de/wiki/Hauskatze; NABU, „Gefährden Hauskatzen die Artenvielfalt?“: https://www.nabu.de/tiere-und-pflanzen/voegel/gefaehrdungen/katzen/ – abgerufen 2026-11-15"
   },
   {
-   "fakt": "In der Dämmerung sehen Katzen viel besser als Menschen (weite Pupillen, viele Stäbchen); das Tapetum lucidum wirft Licht zurück und lässt die Augen leuchten.",
-   "quelle": "https://www.planet-wissen.de/natur/haustiere/katzen/pwiedaskatzenauge100.html, abgerufen 2026-11-15"
+   "fakt": "Katzen sind vor allem in der Dämmerung aktiv und schlafen oder dösen mehr als den halben Tag.",
+   "quelle": "Tractive Blog, „Wie lange schlafen Katzen?“: https://tractive.com/blog/de/gut-zu-wissen/katzen-aktivsten-warum-schlafen-katzen-viel; Planet Wissen, „Das Katzenauge“: https://www.planet-wissen.de/natur/haustiere/katzen/pwiedaskatzenauge100.html – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Schnurrhaare sind Tastorgane und helfen, sich auf engem Raum zurechtzufinden (nicht: den Körper ausmessen).",
-   "quelle": "https://www.zooplus.de/magazin/katze/katzengesundheit-pflege/schnurrhaare-katze, abgerufen 2026-11-15"
+   "fakt": "Freigängerkatzen jagen auch Vögel; im Frühling hilft es jungen Vögeln, wenn Katzen morgens und abends drinnen bleiben.",
+   "quelle": "NABU, „Gefährden Hauskatzen die Artenvielfalt?“: https://www.nabu.de/tiere-und-pflanzen/voegel/gefaehrdungen/katzen/ – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Katzen haben Duftdrüsen an Wangen, Kinn und Stirn; beim Reiben (Köpfchengeben) hinterlassen sie ihren Duft.",
-   "quelle": "https://www.blick.ch/life/natur/die-sprache-der-katzen-so-deutet-man-miauen-koerpersprache-id17950549.html, abgerufen 2026-11-15"
+   "fakt": "Katzen gehen auf den Zehen, auf weichen Ballen, mit eingezogenen Krallen; die Hinterpfoten treten in die Spuren der Vorderpfoten.",
+   "quelle": "Klett, Schulbuchseiten Biologie „Katze“: https://www.klett.de/inhalt/media_fast_path/32/3-12-049111_S036_039.42329.pdf; wissen.de, „Fünf Superkräfte von Katzen“: https://www.wissen.de/fuenf-superkraefte-von-katzen – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Ein senkrecht aufgerichteter Schwanz ist bei Katzen eine freundliche Begrüßung.",
-   "quelle": "Cafazzo & Natoli 2009, Behavioural Processes (PMID 18930121); https://www.planet-wissen.de/natur/haustiere/katzen/pwiediesprachederkatzen100.html, abgerufen 2026-11-15"
+   "fakt": "Katzenkrallen sind gebogen; kopfüber greifen sie beim Abstieg schlecht, darum sitzen Katzen manchmal im Baum fest; geübte Katzen klettern rückwärts hinunter.",
+   "quelle": "Cats Protection, „Why do cats get stuck up trees?“: https://www.cats.org.uk/cats-blog/why-do-cats-get-stuck-up-trees – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Blinzelt ein Mensch langsam, blinzeln Katzen öfter langsam zurück (freundliches Signal).",
-   "quelle": "Humphrey et al. 2020, Scientific Reports; https://www.sciencedaily.com/releases/2020/10/201007123031.htm, abgerufen 2026-11-15"
+   "fakt": "Beim Kratzen pflegen Katzen ihre Krallen und hinterlassen Duft aus Drüsen zwischen den Pfotenballen; sie brauchen einen Kratzbaum.",
+   "quelle": "Cats Protection, „Scratching“ (Krallenpflege, Duftdrüsen zwischen den Ballen): https://www.cats.org.uk/help-and-advice/cat-behaviour/scratching – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Ein Versteck (Box) hilft neuen Katzen, sich schneller vom Stress zu erholen.",
-   "quelle": "Vinke et al. 2014, Applied Animal Behaviour Science 160; https://research-portal.uu.nl/en/publications/will-a-hiding-box-provide-stress-reduction-for-shelter-cats/, abgerufen 2026-11-15"
+   "fakt": "Der Schwanz hilft beim Balancieren; im Fallen drehen sich Katzen, bis die Pfoten unten sind (Stellreflex); trotzdem verletzen sie sich bei Stürzen aus Fenstern und Balkonen schwer, gekippte Fenster sind gefährlich.",
+   "quelle": "wissen.de, „Fünf Superkräfte von Katzen“: https://www.wissen.de/fuenf-superkraefte-von-katzen; Vetmeduni Wien, Infografik „Fenstersturz bei Katzen“: https://www.vetmeduni.ac.at/fileadmin/v/oeuk/Presse/2023/Infografik_Fenstersturz_bei_Katzen.pdf – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Die Katzenzunge ist rau: Papillen tragen Speichel ins Fell; Katzen putzen sich täglich lange.",
-   "quelle": "Noel & Hu 2018, PNAS; https://pmc.ncbi.nlm.nih.gov/articles/PMC6298077, abgerufen 2026-11-15"
+   "fakt": "Die Katzenzunge trägt hohle Papillen, die Speichel ins Fell bringen; Katzen putzen sich täglich lange.",
+   "quelle": "Noel & Hu (2018): Cats use hollow papillae to wick saliva into fur. PNAS 115(49):12377–12382. https://doi.org/10.1073/pnas.1809544115 – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Oft schnurrt eine Katze, wenn sie sich wohlfühlt (aber auch bei Stress oder Schmerz).",
-   "quelle": "https://www.zooplus.de/magazin/katze/katzengesundheit-pflege/schnurren-wie-warum, abgerufen 2026-11-15"
+   "fakt": "Katzen trinken, indem die Zungenspitze die Wasseroberfläche kurz berührt und eine Wassersäule hochzieht, die sie dann schnappen.",
+   "quelle": "Reis, Jung, Aristoff & Stocker (2010): How cats lap: water uptake by Felis catus. Science 330:1231–1234. https://doi.org/10.1126/science.1195421 ; Princeton Engineering: https://engineering.princeton.edu/news/2010/11/11/perfect-balance-cats-drinking-offers-insights-biomechanics – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Katzen sehen in der Dämmerung viel besser als Menschen (große Pupillen, reflektierende Schicht hinter der Netzhaut, leuchtende Augen), in völliger Dunkelheit aber nicht; Farben sehen sie schwächer.",
+   "quelle": "Planet Wissen, „Das Katzenauge“: https://www.planet-wissen.de/natur/haustiere/katzen/pwiedaskatzenauge100.html; zooplus Magazin, „Katzensinne“ (Quelle: „Physiologie der Haustiere“): https://zooplus.de/magazin/katze/katzengesundheit-pflege/katzensinne – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Jedes Katzenohr hat über 30 Muskeln und lässt sich einzeln drehen; Katzen hören sehr hohe Töne, die Menschen nicht hören.",
+   "quelle": "zooplus Magazin, „Katzensinne“ (Quelle: „Physiologie der Haustiere“): https://zooplus.de/magazin/katze/katzengesundheit-pflege/katzensinne; wissen.de, „Fünf Superkräfte von Katzen“: https://www.wissen.de/fuenf-superkraefte-von-katzen – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Schnurrhaare sind Tasthaare mit vielen Nerven; sie spüren feine Berührungen und Luftzüge; man darf sie nicht abschneiden.",
+   "quelle": "zooplus Magazin (tierärztlich verifiziert), „Schnurrhaare bei Katzen“: https://www.zooplus.de/magazin/katze/katzengesundheit-pflege/schnurrhaare-katze – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Katzen riechen sehr gut und untersuchen Gerüche manchmal mit leicht geöffnetem Maul (Flehmen); süß schmecken sie nicht.",
+   "quelle": "zooplus Magazin, „Katzensinne“ (Quelle: „Physiologie der Haustiere“): https://zooplus.de/magazin/katze/katzengesundheit-pflege/katzensinne – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Katzen tragen ihre Jungen etwa neun Wochen; Kätzchen kommen blind und taub zur Welt und finden die Mutter mit Geruch und Tastsinn; die Augen öffnen sich nach etwa ein bis zwei Wochen.",
+   "quelle": "Klexikon, „Hauskatze“: https://klexikon.zum.de/wiki/Hauskatze; Royal Canin, „Wann öffnen Kätzchen zum ersten Mal die Augen?“: https://www.royalcanin.com/de/cats/kitten/when-do-kittens-first-open-their-eyes – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Kätzchen treteln beim Saugen; erwachsene Katzen treteln oft, wenn sie sich wohlfühlen.",
+   "quelle": "Planet Wissen, „Die Sprache der Katzen“: https://www.planet-wissen.de/natur/haustiere/katzen/pwiediesprachederkatzen100.html – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Katzenmütter tragen ihre Jungen am Nackenfell; bei erwachsenen Katzen sollen Menschen den Nackengriff nicht anwenden.",
+   "quelle": "Heidelberg24, „Scruffing bei Katzen“: https://www.heidelberg24.de/ratgeber/scruffing-bei-katzen-warum-der-nackengriff-eine-schlechte-idee-ist-zr-93684710.html; International Cat Care, „Pledge to go scruff free“: https://icatcare.org/our-campaigns/pledge-to-go-scruff-free ; AAFP/ISFM (2022): Cat Friendly Veterinary Interaction Guidelines, JFMS, https://doi.org/10.1177/1098612X221128760 – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Eine Katze mit Jungen lässt man in Ruhe und fasst die Jungen nicht an.",
+   "quelle": "BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“: https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Spielen ist für Kätzchen Jagdübung; Kätzchen sollen etwa drei Monate bei Mutter und Geschwistern bleiben; Kontakt mit freundlichen Menschen in den ersten Wochen macht sie zutraulich.",
+   "quelle": "Klexikon, „Hauskatze“: https://klexikon.zum.de/wiki/Hauskatze; Royal Canin, „Kätzchen: Spiele & Sozialisierung“: https://www.royalcanin.com/de/cats/kitten/kitten-socialisation-and-play; Humane Society of Southern Arizona, „Developmental stages of Kitten Behavior“: https://hssaz.org/wp-content/uploads/2024/02/Developmental-stages-of-Kitten-Behavior.pdf – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Ein senkrecht hochgestellter Schwanz ist eine freundliche Begrüßung; beim Köpfchengeben reiben Katzen Duft aus Wangendrüsen ab.",
+   "quelle": "Cafazzo & Natoli (2009): The social function of tail up in the domestic cat. Behavioural Processes 80(1):60–66. https://pubmed.ncbi.nlm.nih.gov/18930121/; Planet Wissen, „Die Sprache der Katzen“: https://www.planet-wissen.de/natur/haustiere/katzen/pwiediesprachederkatzen100.html; Heidelberg24, „Katze stößt Halter mit dem Kopf – warum?“: https://www.heidelberg24.de/ratgeber/katze-stoesst-halter-mit-dem-kopf-gerne-auch-nachts-warum-zr-93765133.html – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Langsames Blinzeln ist ein freundliches Signal; Katzen blinzeln oft zurück.",
+   "quelle": "Humphrey et al. (2020): The role of cat eye narrowing movements in cat–human communication. Sci Rep 10:16503. https://doi.org/10.1038/s41598-020-73426-0 – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Katzen erkennen die Stimme ihres Menschen und ihren Namen.",
+   "quelle": "Saito & Shinozuka (2013): Vocal recognition of owners by domestic cats. Animal Cognition 16:685–690. https://doi.org/10.1007/s10071-013-0620-4; Saito, Shinozuka, Ito & Hasegawa (2019): Domestic cats discriminate their names from other words. Sci Rep 9:5394. https://doi.org/10.1038/s41598-019-40616-4 – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Schnurren zeigt meist Wohlbefinden, kommt aber auch bei Schmerz oder Angst vor; Miauen richten erwachsene Katzen vor allem an Menschen.",
+   "quelle": "Planet Wissen, „Die Sprache der Katzen“: https://www.planet-wissen.de/natur/haustiere/katzen/pwiediesprachederkatzen100.html – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Frühe Zeichen, mit dem Streicheln aufzuhören: zuckende Schwanzspitze, zur Seite gedrehte Ohren, zuckende Rückenhaut, schnelle Kopfdrehung zur Hand; kurz und am Kopf streicheln.",
+   "quelle": "San Francisco SPCA, „Overstimulation (Cats)“ (Schwanz zuckt, Rückenhaut zuckt, Ohren, schnelle Kopfdrehung zur Hand; kurz streicheln, am Kopf bleiben): https://www.sfspca.org/resource/overstimulation/ – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Angelegte Ohren, peitschender Schwanz, gesträubtes Fell und Fauchen heißen „Lass mich in Ruhe“; Bauch zeigen ist Vertrauen, aber keine Einladung zum Kraulen.",
+   "quelle": "Planet Wissen, „Die Sprache der Katzen“: https://www.planet-wissen.de/natur/haustiere/katzen/pwiediesprachederkatzen100.html; Cats Protection, „How to pet a cat“ (Hand ruhig hinhalten, Katze kommen lassen, Wangen/Kinn/Kopf, Bauch keine Einladung, nicht in die Ecke drängen): https://www.cats.org.uk/cats-blog/how-to-pet-a-cat – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Eine Katze begrüßt man langsam von vorn mit ruhig hingehaltener Hand und lässt sie kommen; man streichelt Kopf, Wangen und Kinn, hält sie nicht fest, stört sie nicht beim Fressen und Schlafen.",
+   "quelle": "Cats Protection, „How to pet a cat“ (Hand ruhig hinhalten, Katze kommen lassen, Wangen/Kinn/Kopf, Bauch keine Einladung, nicht in die Ecke drängen): https://www.cats.org.uk/cats-blog/how-to-pet-a-cat; BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“: https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf; San Francisco SPCA, „Overstimulation (Cats)“ (Schwanz zuckt, Rückenhaut zuckt, Ohren, schnelle Kopfdrehung zur Hand; kurz streicheln, am Kopf bleiben): https://www.sfspca.org/resource/overstimulation/ – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Mit Katzen spielt man mit einer Angel, nie mit Händen oder Füßen; Schnüre und Wolle räumt man weg, verschluckt sind sie gefährlich.",
+   "quelle": "Cats Protection, „Cats and play“ (nie mit Fingern/Zehen spielen; Angel mit Feder; nicht allein mit Spielzeug, das verschluckt werden kann): https://cats.org.uk/help-and-advice/cats-and-play; VCA Animal Hospitals, „Linear Foreign Body in Cats“: https://vcahospitals.com/know-your-pet/linear-foreign-body-in-cats – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Fremde Katzen nicht anfassen, anlocken oder füttern; nach dem Streicheln Hände waschen; jeden Biss und Kratzer einem Erwachsenen zeigen.",
+   "quelle": "BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“: https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf; Utopia, Interview mit Tierärztin der Welttierschutzgesellschaft, „Freilaufende Katze streicheln oder füttern?“: https://utopia.de/ratgeber/freilaufende-katze-streicheln-oder-fuettern-expertin-raet-zu-etwas-anderem_720739/; Apotheken Umschau, „Tierbisse bei Kindern“ (auch oberflächliche Bisse ärztlich versorgen): https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/tierbisse-bei-kindern-893211.html – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Katzen brauchen Fleischnahrung, frisches Wasser, ein sauberes Klo, Kratzbaum, Versteck, Spiel und regelmäßige tierärztliche Untersuchung mit Impfung.",
+   "quelle": "Planet Wissen, „Was Katzen fressen sollten“: https://www.planet-wissen.de/natur/haustiere/katzen/was-katzen-fressen-sollten-100.html; Deutscher Tierschutzbund, Kinderfaltblatt „Meine Katze“: https://www.bremer-tierschutzverein.de/fileadmin/user_upload/DOWNLOAD/Kinder_Jugend_ich_moechte_ein_Haustier/Meine_Katze.pdf; aktion tier, Katzenverordnung 2025: https://www.aktiontier.org/fileadmin/user_upload/aktiontier/Downloadbereich/NEU_Kampagnen/2025_Tierschutz_Katzenverordnung.pdf – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Viele erwachsene Katzen vertragen Milch nicht; Schokolade und Zwiebeln sind giftig, ebenso manche Zimmerpflanzen wie Lilien; viele Katzen knabbern gern Gras.",
+   "quelle": "Planet Wissen, „Was Katzen fressen sollten“: https://www.planet-wissen.de/natur/haustiere/katzen/was-katzen-fressen-sollten-100.html; Deutscher Tierschutzbund, Kinderfaltblatt „Meine Katze“: https://www.bremer-tierschutzverein.de/fileadmin/user_upload/DOWNLOAD/Kinder_Jugend_ich_moechte_ein_Haustier/Meine_Katze.pdf; AniCura Tierkliniken, „Vergiftungen bei Katzen“: https://anicura.de/contentassets/35b92aeab86446449672c1db6d015c8a/haar_vergiftungen-bei-katzen.pdf; Vetmeduni Wien, „Tipps fürs Tier – Erste Hilfe Katze“: https://www.vetmeduni.ac.at/fileadmin/v/oeuk/Presse/2023/TippsFuersTier_ErsteHilfe_Katze_2023.pdf – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Eine Katze braucht im neuen Zuhause oft Tage bis Wochen, bis sie sich sicher fühlt; ein Versteck hilft.",
+   "quelle": "Deutscher Tierschutzbund, „Katze aus zweiter Hand“: https://tierschutzbund.de/fileadmin/Seiten/Kampagne_Katzenschutz/Downloads/Broschuere_Katze_aus_zweiter_Hand.pdf; Vinke, Godijn & van der Leij (2014): Will a hiding box provide stress reduction for shelter cats? Appl Anim Behav Sci 160:86–93. https://doi.org/10.1016/j.applanim.2014.09.002 – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Katzen leben viele Jahre, oft mehr als zehn.",
+   "quelle": "Teng, Brodbelt, Church & O'Neill (2024): Life tables of annual life expectancy and risk factors for mortality in cats in the UK. JFMS. https://doi.org/10.1177/1098612X241234556 – abgerufen 2026-11-15"
   }
  ],
- "seiten": [
+ "kapitel": [
   {
-   "text": "Heute zieht Mia bei Malik ein. Mia ist eine rote Katze. Ihre Box steht in einer ruhigen Ecke. Die Tür ist offen.",
-   "bild": "bilder/01.webp"
+   "titel": "Eine kleine Wildkatze wohnt bei uns",
+   "seiten": [
+    {
+     "text": "Hier liegt Mia. Sie ist eine rote Hauskatze und wohnt bei Malik. Gerade hat sie lange geschlafen und gähnt jetzt ganz weit.\n\nSchau dir ihre Zähne an! Vorn sitzen vier lange Eckzähne mit scharfen Spitzen. Auch ein Löwe hat solche Zähne, nur viel größer. Löwe und Tiger sind nämlich mit Mia verwandt. In Mia steckt eine kleine Wildkatze. Ihre Urahnen leben in warmen, trockenen Ländern, zwischen Steinen und Gras. Man nennt sie Falbkatzen.",
+     "bild": "bilder/01-01.webp"
+    },
+    {
+     "text": "Wie kam die Wildkatze zu den Menschen? Das war vor sehr, sehr langer Zeit. Damals bauten die Menschen Korn an und sammelten es in Vorratshäusern.\n\nDas Korn lockte Mäuse an. Und die Mäuse lockten die Wildkatzen an. Die Menschen merkten: Wo Katzen jagen, bleibt das Korn heil. So wurden Menschen und Katzen Freunde. Auf der Insel Zypern hat man ein uraltes Grab gefunden. Dort fand man einen Menschen und eine Katze, Seite an Seite begraben. Das war vor ungefähr 9.500 Jahren. Im alten Ägypten wurden Katzen später sehr verehrt.",
+     "bild": "bilder/01-02.webp"
+    },
+    {
+     "text": "Eine Katze jagt allein. Schau einmal zu, wenn Mia im Garten etwas entdeckt. Erst schleicht sie ganz flach über den Boden. Dann bleibt sie stehen und wird mucksmäuschenstill. Das nennt man lauern. Nur die Schwanzspitze zuckt ein wenig.\n\nIhr Hinterteil wackelt hin und her, die Hinterbeine machen sich bereit. Und dann, hopp, springt sie los. Am liebsten jagt eine Katze Mäuse. Mia bekommt jeden Tag ihr Futter. Trotzdem steckt das Jagen in ihr, wie bei ihren wilden Vorfahren.",
+     "bild": "bilder/01-03.webp"
+    },
+    {
+     "text": "Wann ist Mia am muntersten? Früh am Morgen, wenn es gerade hell wird. Und am Abend, wenn es dämmert. Dann flitzt sie durch die Wohnung und will spielen. Das ist die beste Jagdzeit ihrer wilden Verwandten.\n\nDazwischen macht Mia etwas, das sie richtig gut kann: schlafen. Sie schläft und döst zusammen mehr als den halben Tag. Am liebsten an einem warmen, sonnigen Platz, zusammengerollt wie ein Fellknäuel. Wenn sie so schläft, lässt Malik sie in Ruhe.",
+     "bild": "bilder/01-04.webp"
+    },
+    {
+     "text": "Im Frühling ist draußen viel los. In den Hecken sitzen junge Vögel, die gerade das Fliegen lernen. Sie flattern noch unsicher von Ast zu Ast und hüpfen über den Boden.\n\nKatzen jagen auch Vögel. Das ist ihre Natur, so wie bei allen Katzen. Mia schaut den Vögeln deshalb besonders aufmerksam zu. Damit die kleinen Vögel es leichter haben, bleibt Mia im Frühling morgens und abends drinnen. Dann sitzt sie am Fenster, und ihre Ohren zucken bei jedem Piepsen.",
+     "bild": "bilder/01-05.webp"
+    }
+   ]
   },
   {
-   "text": "Mia streckt die Nase heraus. Alles riecht fremd. Schwupp, flitzt sie unter das Sofa.",
-   "bild": "bilder/02.webp"
+   "titel": "Leise Pfoten, scharfe Krallen",
+   "seiten": [
+    {
+     "text": "Hast du schon einmal gehört, wie eine Katze kommt? Wahrscheinlich nicht. Katzen laufen auf ihren Zehen, auf weichen Ballen. Damit schleichen sie fast ohne ein Geräusch. Ihre Krallen verstecken sie dabei in den Pfoten, wie in kleinen Taschen.\n\nUnd noch etwas ist erstaunlich. Beim Gehen setzt eine Katze die Hinterpfoten genau in die Abdrücke der Vorderpfoten. Im frischen Schnee siehst du darum eine ordentliche Spur. Die Abdrücke liegen hintereinander, fast wie Perlen an einer Schnur.",
+     "bild": "bilder/02-01.webp"
+    },
+    {
+     "text": "Malik entdeckt Mia oben im Apfelbaum. Wie ist sie da hinaufgekommen? Mit ihren Krallen! Sie sind gebogen wie kleine Haken. Damit hält sie sich an der Rinde fest und klettert flink nach oben.\n\nAber hinunter ist es schwieriger. Kopfüber halten die Haken nicht gut. Manche Katze sitzt deshalb oben im Baum und traut sich nicht mehr herunter. Mia zögert kurz. Dann macht sie es geschickt. Sie klettert rückwärts hinunter, das Hinterteil zuerst.",
+     "bild": "bilder/02-02.webp"
+    },
+    {
+     "text": "Ritsch, ratsch! Mia streckt sich lang am Kratzbaum und zieht die Krallen kräftig nach unten. Beim Kratzen pflegt sie ihre Krallen. Alte Hüllen lösen sich, darunter sitzen neue, scharfe Krallen.\n\nGleichzeitig hinterlässt sie eine Nachricht. Zwischen ihren Pfotenballen hat sie Duftdrüsen. Für uns riecht der Kratzbaum nach nichts. Für eine Katze steht dort: Hier wohnt Mia. Darum braucht jede Katze einen Kratzbaum. Sonst sucht sie sich etwas anderes zum Kratzen, zum Beispiel das Sofa.",
+     "bild": "bilder/02-03.webp"
+    },
+    {
+     "text": "Mia balanciert oben auf der schmalen Lehne eines Stuhls. Ihr Schwanz schwingt hin und her. Er hilft ihr, das Gleichgewicht zu halten, wie eine Balancierstange.\n\nKatzen sind wahre Kletterkünstler. Doch manchmal rutscht auch eine Katze ab. Dann passiert in der Luft etwas, das Forscher lange untersucht haben. Es geht so schnell, dass man es mit bloßem Auge kaum sieht. Was glaubst du: Was macht Mia in der Luft?",
+     "bild": "bilder/02-04.webp",
+     "frage": true
+    },
+    {
+     "text": "Sie dreht sich! Im Fallen dreht die Katze blitzschnell zuerst den Kopf und dann den Körper. Sie dreht sich so lange, bis die Pfoten nach unten zeigen. So landet Mia sicher auf dem Teppich.\n\nTrotzdem landen Katzen nicht immer heil. Aus einem hohen Fenster oder vom Balkon verletzen sie sich schwer. Und in einem gekippten Fenster kann eine Katze stecken bleiben. Darum sind bei Malik die Fenster zu oder gesichert. Und am Balkon hängt ein Netz.",
+     "bild": "bilder/02-05.webp"
+    },
+    {
+     "text": "Mias Zunge kann zwei Kunststücke. Sie fühlt sich rau an, ein bisschen wie Schmirgelpapier. Darauf sitzen viele winzige Häkchen, und jedes ist innen hohl. Beim Putzen nehmen die Häkchen Spucke auf und bringen sie tief ins Fell. So kämmt und wäscht sich Mia jeden Tag lange.\n\nUnd beim Trinken? Da tippt Mia mit der Zungenspitze nur kurz aufs Wasser. Dann zieht sie die Zunge blitzschnell hoch. Ein kleines Wassertürmchen saust mit nach oben, und zack, schnappt sie es. Ihr Kinn bleibt dabei trocken.",
+     "bild": "bilder/02-06.webp"
+    }
+   ]
   },
   {
-   "text": "Malik möchte sie so gern streicheln. Doch er setzt sich still hin und wartet. Mia soll selbst entscheiden, wann sie kommt.",
-   "bild": "bilder/03.webp"
+   "titel": "Supersinne",
+   "seiten": [
+    {
+     "text": "Wenn es abends dämmrig wird, sieht Malik nicht mehr viel. Mia dagegen läuft sicher durchs Zimmer. Ihre Pupillen, die schwarzen Kreise im Auge, werden ganz groß und rund. So kommt mehr Licht ins Auge.\n\nHinten im Auge hat sie außerdem eine Schicht wie einen kleinen Spiegel. Die wirft das wenige Licht noch einmal zurück. Darum leuchten Katzenaugen, wenn eine Lampe hineinscheint. Ganz im Dunkeln sieht aber auch eine Katze nichts. Und Farben sieht sie blasser als wir.",
+     "bild": "bilder/03-01.webp"
+    },
+    {
+     "text": "Mias Ohren sind wie zwei kleine Antennen. In jedem Ohr stecken mehr als dreißig Muskeln. Damit kann Mia jedes Ohr einzeln drehen, eins nach vorn und eins zur Seite. So hört sie genau, woher ein Geräusch kommt.\n\nLeise raschelt etwas hinter dem Sofa. Schon zeigen beide Ohren dorthin. Katzen hören auch sehr hohe Töne, die wir Menschen gar nicht hören können. Probier es einmal aus. Raschle leise mit Papier und schau, was die Ohren einer Katze machen.",
+     "bild": "bilder/03-02.webp"
+    },
+    {
+     "text": "Die langen Haare an Mias Schnauze heißen Schnurrhaare. Sie sind keine gewöhnlichen Haare, sondern Tasthaare. Jedes steckt tief in der Haut, und dort sitzen viele feine Nerven.\n\nDie Schnurrhaare spüren schon den leisesten Luftzug und die kleinste Berührung. Schlüpft Mia hinter den Schrank, merkt sie damit, wo die Wand ist. Das geht sogar im Dämmerlicht. Auch über den Augen und an den Vorderbeinen hat sie solche Tasthaare. Darum gilt: Schnurrhaare nie abschneiden und nie daran ziehen.",
+     "bild": "bilder/03-03.webp"
+    },
+    {
+     "text": "Mias Nase ist viel feiner als unsere. Bevor sie etwas frisst, schnuppert sie ganz genau daran. Manchmal macht sie dabei ein lustiges Gesicht. Sie öffnet das Maul ein bisschen, zieht die Oberlippe hoch und hält ganz still.\n\nSo schmeckt sie einen Geruch. Ein besonders spannender Duft wird damit noch genauer untersucht. Und noch etwas ist anders als bei uns: Katzen können nicht schmecken, was süß ist. Ein Keks oder ein Bonbon lockt sie darum gar nicht.",
+     "bild": "bilder/03-04.webp"
+    }
+   ]
   },
   {
-   "text": "Unter dem Sofa lauscht Mia. Ihre Ohren drehen sich hierhin und dorthin. Sie hört sogar den Löffel in der Küche.",
-   "bild": "bilder/04.webp"
+   "titel": "Katzenkinder",
+   "seiten": [
+    {
+     "text": "So klein war Mia auch einmal. Katzenkinder wachsen ungefähr neun Wochen im Bauch ihrer Mutter. Dann sucht sich die Katzenmutter einen ruhigen, warmen und versteckten Platz. Dort kommen meistens mehrere Kätzchen nacheinander zur Welt.\n\nSie sind winzig und können noch nicht laufen. Ihre Augen sind fest geschlossen, ihre Ohren auch. Sie sehen nichts und hören nichts. Und doch wollen sie sofort zu ihrer Mutter und an die Milch. Was glaubst du: Wie finden sie den Weg?",
+     "bild": "bilder/04-01.webp",
+     "frage": true
+    },
+    {
+     "text": "Mit der Nase und mit dem Tastsinn! Die Kätzchen kriechen der Wärme und dem Geruch ihrer Mutter nach. Jedes findet so seinen Platz an ihrem Bauch und trinkt Milch.\n\nBeim Trinken drücken sie mit den Vorderpfoten abwechselnd gegen den Bauch der Mutter. Das nennt man treteln. Manche großen Katzen treteln später noch, wenn sie sich auf einer weichen Decke wohlfühlen. Nach ungefähr ein bis zwei Wochen gehen die Augen der Kätzchen auf.",
+     "bild": "bilder/04-02.webp"
+    },
+    {
+     "text": "Muss die Mutter ihre Kinder an einen neuen Platz bringen, trägt sie jedes einzeln. Sie packt ein Kätzchen vorsichtig mit dem Maul am Nackenfell. Das Kleine hält dann ganz still und lässt die Beine baumeln.\n\nSo kommen alle sicher ans Ziel, eins nach dem anderen. Aber das darf nur die Katzenmutter, und nur bei ganz kleinen Kätzchen. Menschen tragen eine Katze nie am Nacken. Großen Katzen tut das nicht gut und macht ihnen Stress.",
+     "bild": "bilder/04-03.webp"
+    },
+    {
+     "text": "Eine Katzenmutter passt gut auf ihre Kinder auf. Kommt ihr jemand zu nahe, wird sie unruhig. Sie kann dann fauchen oder kratzen, um ihre Jungen zu schützen.\n\nDarum lässt man eine Katze mit ihren Jungen in Ruhe. Die Kleinen fasst man nicht an, solange die Mutter dabei ist. Aus einiger Entfernung kann man leise zuschauen. Das lohnt sich, denn bald passiert jeden Tag etwas Neues. Die Kätzchen krabbeln, wackeln auf dünnen Beinchen und plumpsen um.",
+     "bild": "bilder/04-04.webp"
+    },
+    {
+     "text": "Nach ein paar Wochen fangen die Kätzchen an zu spielen. Sie jagen den Schwanz der Mutter, springen sich gegenseitig an und rollen übereinander. Dabei üben sie, was eine Katze können muss.\n\nSie lernen lauern, anspringen und zupacken. Ungefähr drei Monate sollen Kätzchen bei Mutter und Geschwistern bleiben. Dort lernen sie, sich wie Katzen zu benehmen. Lernen sie in dieser Zeit freundliche Menschen kennen, werden sie später zutraulich. Mia hat das gelernt. Heute tretelt sie auf Maliks Schoß, wenn sie sich wohlfühlt.",
+     "bild": "bilder/04-05.webp"
+    }
+   ]
   },
   {
-   "text": "Am Abend brennt nur noch eine kleine Lampe. Mia läuft sicher durchs Zimmer. Im Halbdunkel sieht sie viel mehr als Malik.",
-   "bild": "bilder/05.webp"
+   "titel": "Was die Katze sagt",
+   "seiten": [
+    {
+     "text": "Katzen sprechen nicht mit Wörtern, sondern mit ihrem ganzen Körper. Manchmal kommt Mia mit senkrecht hochgestrecktem Schwanz auf Malik zu. Das heißt: Hallo, schön, dich zu sehen!\n\nOft streicht sie ihm dann um die Beine und stupst ihren Kopf gegen seine Hand. Das nennt man Köpfchengeben. Dabei reibt sie Duft aus ihren Wangen an ihn. Für Mias Nase heißt das: Malik gehört zu uns. Er riecht jetzt ein bisschen nach Familie.",
+     "bild": "bilder/05-01.webp"
+    },
+    {
+     "text": "Schau eine Katze einmal ruhig an und schließe dann ganz langsam die Augen. Öffne sie wieder langsam. Oft blinzelt die Katze genauso langsam zurück. Forscher haben herausgefunden: Dieses langsame Blinzeln ist ein freundliches Zeichen, eine Art Katzenlächeln.\n\nUnd Mia kennt ihren Namen. Ruft Malik sie, dreht sie oft die Ohren oder den Kopf zu ihm. Seine Stimme erkennt sie sogar unter fremden Stimmen heraus. Dass sie dann nicht immer kommt, heißt nicht, dass sie nicht zuhört.",
+     "bild": "bilder/05-02.webp"
+    },
+    {
+     "text": "Mia liegt neben Malik auf dem Sofa. In ihrem Hals brummt es tief und gleichmäßig. Sie schnurrt. Meistens heißt das: Ich fühle mich wohl.\n\nAber Vorsicht beim Raten. Manchmal schnurren auch kranke oder ängstliche Katzen, vielleicht um sich zu beruhigen. Und das Miauen? Erwachsene Katzen miauen untereinander nur selten. Ihr Miau ist vor allem für uns Menschen gedacht. Mia miaut zum Beispiel vor ihrem leeren Napf. Malik versteht sie dann ganz gut.",
+     "bild": "bilder/05-03.webp"
+    },
+    {
+     "text": "Malik streichelt Mia sanft am Kopf, und Mia genießt es. Doch nach einer Weile verändert sich etwas, ganz leise. Wer genau hinschaut, kann es sehen.\n\nIhre Schwanzspitze fängt an zu zucken. Ein Ohr dreht sich zur Seite. Die Haut auf ihrem Rücken zittert kurz. Mia liegt noch da und macht keinen Laut. Aber ihr Körper sagt schon etwas. Was glaubst du: Was möchte Mia Malik jetzt sagen?",
+     "bild": "bilder/05-04.webp",
+     "frage": true
+    },
+    {
+     "text": "Sie sagt: Jetzt ist es genug! Das sind die frühen Stopp-Zeichen. Viele Kinder übersehen sie, und dann kratzt die Katze plötzlich.\n\nMalik hat aufgepasst. Er hört sofort auf und nimmt seine Hand ruhig weg. Mia bleibt entspannt liegen. Vielleicht kommt sie später wieder und möchte mehr. Dreht eine Katze beim Streicheln schnell den Kopf zur Hand, heißt das auch: Stopp! Früher hat Malik die Zeichen übersehen und einen kleinen Kratzer bekommen. Den hat er gleich seiner Mutter gezeigt. Seitdem streichelt er kürzer, und nur am Kopf.",
+     "bild": "bilder/05-05.webp"
+    },
+    {
+     "text": "Manchmal sagt eine Katze es noch deutlicher. Sie legt die Ohren flach nach hinten. Der Schwanz peitscht hin und her, das Fell sträubt sich, und sie faucht. Das heißt: Lass mich in Ruhe! Dann geht man ruhig weg.\n\nUnd wenn sich Mia auf den Rücken rollt und den Bauch zeigt? Dann zeigt sie, dass sie Malik vertraut. Aber Achtung: Das ist keine Einladung zum Bauchkraulen. Viele Katzen mögen das gar nicht und packen dann mit den Pfoten zu.",
+     "bild": "bilder/05-06.webp"
+    }
+   ]
   },
   {
-   "text": "Leise geht Mia auf Entdeckungsreise. Hinter dem Schrank ist ein schmaler Spalt. Ihre Schnurrhaare berühren die Wände. So findet sie ihren Weg.",
-   "bild": "bilder/06.webp"
-  },
-  {
-   "text": "Mia reibt ihre Wange am Tischbein. Malik riecht nichts. Doch Mias Nase riecht später: Hier war Mia.",
-   "bild": "bilder/07.webp"
-  },
-  {
-   "text": "Nach ein paar Tagen kommt Mia morgens zu Malik. Ihr Schwanz steht gerade nach oben. So sagt Mia zum ersten Mal Hallo.",
-   "bild": "bilder/08.webp"
-  },
-  {
-   "text": "Malik blinzelt Mia ganz langsam zu. Mia schaut ihn an. Dann blinzelt sie langsam zurück.",
-   "bild": "bilder/09.webp"
-  },
-  {
-   "text": "Eines Nachmittags ist Mia verschwunden. Malik schaut unter das Sofa. Leer. Sein Herz klopft.",
-   "bild": "bilder/10.webp"
-  },
-  {
-   "text": "Im Flur steht der Karton vom Einkauf. Was glaubst du: Wo ist Mia?",
-   "bild": "bilder/11.webp",
-   "frage": true
-  },
-  {
-   "text": "Da schauen zwei rote Ohren aus dem Karton! Mia kuschelt sich tief hinein. Hier ist es eng und gemütlich. Malik lässt ihr den Karton.",
-   "bild": "bilder/12.webp"
-  },
-  {
-   "text": "Später putzt sich Mia lange. Malik schaut ihr zu. Ihre Zunge ist rau wie eine kleine Bürste. Damit kämmt sie ihr Fell.",
-   "bild": "bilder/13.webp"
-  },
-  {
-   "text": "Viele Tage später springt Mia zu Malik aufs Sofa. Sie rollt sich neben ihm ein und schnurrt. Ganz vorsichtig streichelt Malik sie. Mia ist angekommen.",
-   "bild": "bilder/14.webp"
+   "titel": "So werden wir Freunde",
+   "seiten": [
+    {
+     "text": "Wie freundest du dich mit einer Katze an? Ganz langsam. Komm von vorn, damit sie dich sieht. Dann halte eine Hand ruhig hin, ein Stück entfernt, und warte.\n\nDie Katze entscheidet. Kommt sie, schnuppert sie an deinen Fingern und reibt vielleicht ihren Kopf daran. Dann darfst du sie sanft an Kopf, Wangen und Kinn streicheln. Kommt sie nicht, lässt du sie in Ruhe. Eine Katze hält man nicht fest. Sie darf immer weggehen, und man drängt sie nie in eine Ecke. Am Schwanz zieht man nie. Augen, Ohren und Maul fasst man nicht an. Und beim Fressen und Schlafen stört man sie nicht.",
+     "bild": "bilder/06-01.webp"
+    },
+    {
+     "text": "Katzen spielen gern, und für sie ist Spielen Jagen üben. Am besten spielt man mit einem Ball oder einer Katzenangel. Das ist ein Stab mit einer Schnur und einer Feder daran. Zieh die Feder über den Boden wie eine flitzende Maus. Lass sie hinter einem Kissen verschwinden. Dann lauert Mia und springt.\n\nAber spiel nie mit Händen oder Füßen. Sonst lernt die Katze, auf Hände zu jagen, und das tut weh. Nach dem Spielen räumt man Angel, Wolle und Schnüre weg. Verschluckt sind sie gefährlich.",
+     "bild": "bilder/06-02.webp"
+    },
+    {
+     "text": "Draußen sitzt eine fremde Katze auf der Gartenmauer. Sie sieht freundlich aus. Trotzdem fasst man fremde Katzen nicht an, lockt sie nicht und füttert sie nicht. Man weiß nicht, wie es ihr geht, und sie gehört vielleicht anderen Leuten.\n\nNach dem Streicheln einer Katze, auch der eigenen, wäscht man sich die Hände. Und wenn doch einmal etwas passiert: Jeden Kratzer und jeden Biss zeigt man einem Erwachsenen. Auch wenn er ganz klein ist.",
+     "bild": "bilder/06-03.webp"
+    },
+    {
+     "text": "Morgens füllt Malik zuerst Mias Napf mit frischem Wasser. Dann gibt es Katzenfutter, denn Katzen sind Fleischfresser. Danach macht er das Katzenklo sauber. Das gehört jeden Tag dazu.\n\nMia hat auch einen Kratzbaum zum Kratzen und Klettern. Sie hat ein Versteck und einen weichen Schlafplatz. Am schönsten findet sie es, wenn jemand mit ihr spielt. Regelmäßig, meistens einmal im Jahr, fährt die Familie mit Mia in die Tierarztpraxis. Dort wird sie untersucht und geimpft, damit sie gesund bleibt.",
+     "bild": "bilder/06-04.webp"
+    },
+    {
+     "text": "Eine Schale Milch? Davon bekommen viele große Katzen Durchfall. Wasser ist das richtige Getränk. Vom Menschenteller bekommt Mia nichts, denn manches ist für Katzen giftig. Schokolade zum Beispiel oder Zwiebeln.\n\nAuch manche Zimmerpflanzen sind giftig, etwa Lilien. Das prüfen die Eltern. Gras dagegen knabbern viele Katzen gern. Darum hat Mia ein Töpfchen Katzengras. Manchmal würgt sie danach Haare heraus. Und die Fenster sind bei Malik nie gekippt, wenn Mia allein im Zimmer ist.",
+     "bild": "bilder/06-05.webp"
+    },
+    {
+     "text": "Als Mia zu Malik kam, versteckte sie sich zuerst in einer Kiste. Malik setzte sich still auf den Boden und wartete. Er wartete viele Tage. Eines Abends streckte Mia zum ersten Mal den Kopf heraus. Dann kam sie langsam zu ihm.\n\nHeute gehört Mia zur Familie. Eine Katze lebt viele Jahre, oft mehr als zehn. So lange sorgt die Familie jeden Tag für sie. Auch an Regentagen und in den Ferien. Dafür bekommt Malik etwas Schönes zurück. Eine Freundin mit leisen Pfoten liegt abends schnurrend neben ihm.",
+     "bild": "bilder/06-06.webp"
+    }
+   ]
   }
  ]
 }

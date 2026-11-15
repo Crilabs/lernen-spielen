@@ -90,12 +90,20 @@ for (const typ of [chromium, webkit]) {
       `${L} zweite Tür öffnet Zahlen und Buchstaben`, page.url());
 
     // Buch öffnen, bis Fertig, zurück im selben Raum mit Lesezeichen
+    // Ton der Geschichte aus: die Frage-Seiten warten dann nur die Ruhe ab, nicht das Vorlesen langer Kapitelseiten
+    await page.addInitScript(() => { try { const k = "lernstand-kind-1-einstellungen"; const e = JSON.parse(localStorage.getItem(k) || "{}");
+      e["ton.geschichte"] = false; localStorage.setItem(k, JSON.stringify(e)); } catch {} });
     await page.goto(`${basis}/spiele/bibliothek.html?raum=tiere`);
     await page.waitForSelector('.regal[data-regal="haustiere"] .buch');
     await Promise.all([page.waitForURL(/geschichte\.html\?id=haustiere/), page.click('.regal[data-regal="haustiere"] .buch')]);
     await page.goto(page.url() + "&pruefen");
-    await page.waitForFunction(() => window.lsGeschichte?.seiten > 0);
-    await bisZumEnde(page);
+    await page.waitForFunction(() => window.lsGeschichte?.seiten > 0 || window.lsGeschichte?.kapitelZahl > 0);
+    // Sachbuch (haustiere): gelesen erst, wenn alle Kapitel zu Ende gelesen sind – jedes Kapitel bis zur letzten Seite
+    const kapitelZahl = await page.evaluate(() => window.lsGeschichte.kapitelZahl);
+    for (let k = 0; k < Math.max(1, kapitelZahl); k++) {
+      if (kapitelZahl) await page.evaluate((i) => window.lsGeschichte.oeffne(i), k);
+      await bisZumEnde(page);
+    }
     await Promise.all([page.waitForURL(/bibliothek\.html\?raum=tiere/), page.evaluate(() => window.lsGeschichte.fertig())]);
     await page.waitForSelector('.regal[data-regal="haustiere"] .buch');
     const band = await page.evaluate(() => ({ band: !!document.querySelector('.regal[data-regal="haustiere"] .buch .band'),

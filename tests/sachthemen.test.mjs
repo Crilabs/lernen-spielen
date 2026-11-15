@@ -116,3 +116,28 @@ test("spiele.json: sachwelt nennt eine Welt des Lernplans", () => {
   const ids = new Set(lernplan.welten.map((w) => w.id));
   for (const s of lies("../spiele/spiele.json").spiele) if ("sachwelt" in s) assert.ok(ids.has(s.sachwelt), `${s.id}: sachwelt ${s.sachwelt}`);
 });
+
+// Lesestand eines Sachbuchs (docs/geschichten.md §4, Christian 2026-11-15: Kapitel einzeln, die App merkt sich den Stand)
+test("Buchstand: ohne Stand null; merken und laden; Unsinn wird bereinigt", async () => {
+  assert.equal(await L.ladeBuchStand("katzen"), null);
+  await L.merkeBuchStand("katzen", { kapitel: 2, seite: 3, fertig: [0, 1] }, 6);
+  assert.deepEqual(await L.ladeBuchStand("katzen"), { kapitel: 2, seite: 3, fertig: [0, 1] });
+  const roh = JSON.parse(speicher.get(SCHLUESSEL));
+  roh.buecher.katzen = { kapitel: "x", seite: -4, fertig: [1, 1, "a", 9.5] };
+  speicher.set(SCHLUESSEL, JSON.stringify(roh));
+  assert.deepEqual(await L.ladeBuchStand("katzen"), { kapitel: 0, seite: 0, fertig: [1] });
+});
+
+test("Buchstand: alle Kapitel fertig → das Buch gilt als gelesen (einmal, erstes Datum)", async () => {
+  await L.merkeBuchStand("katzen", { kapitel: 4, seite: 2, fertig: [0, 1, 2, 3] }, 5, "2026-11-10");
+  assert.equal(JSON.parse(speicher.get(SCHLUESSEL)).sachthemen?.geschichten?.katzen, undefined);
+  await L.merkeBuchStand("katzen", { kapitel: 4, seite: 4, fertig: [0, 1, 2, 3, 4] }, 5, "2026-11-12");
+  await L.merkeBuchStand("katzen", { kapitel: 0, seite: 0, fertig: [0, 1, 2, 3, 4] }, 5, "2026-11-14");
+  assert.deepEqual(JSON.parse(speicher.get(SCHLUESSEL)).sachthemen.geschichten.katzen, { am: "2026-11-12" });
+});
+
+test("Buchstand: fertige Kapitel gehen nie verloren (ein früher, leerer Stand überschreibt sie nicht)", async () => {
+  await L.merkeBuchStand("katzen", { kapitel: 3, seite: 1, fertig: [0, 1, 2] }, 6);
+  await L.merkeBuchStand("katzen", { kapitel: 0, seite: 0, fertig: [] }, 6);
+  assert.deepEqual(await L.ladeBuchStand("katzen"), { kapitel: 0, seite: 0, fertig: [0, 1, 2] });
+});

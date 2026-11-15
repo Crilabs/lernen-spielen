@@ -99,6 +99,9 @@ export function knopfNamen(quelltext) {
  * @param {string} wurzel Projektordner
  * @returns {{ eintraege: Eintrag[], offen: Record<string, number> }}
  */
+/** Seiten einer Geschichte; ein Sachbuch (art sachbuch) hat sie in kapitel[].seiten. */
+const seitenDer = (g) => (Array.isArray(g?.kapitel) ? g.kapitel.flatMap((k) => k?.seiten ?? []) : (g?.seiten ?? []));
+
 export function sammle(wurzel) {
   const spiele = join(wurzel, "spiele");
   /** @type {Map<string, Eintrag>} */
@@ -137,7 +140,7 @@ export function sammle(wurzel) {
   // Geschichten (docs/geschichten.md): je Seite der gesprochene Text (sprich, sonst text), wie ls-geschichte ihn vorliest.
   for (const p of existsSync(join(spiele, "geschichten")) ? dateien(join(spiele, "geschichten"), [".json"]) : [])
     if (p.endsWith(`${sep}geschichte.json`))
-      for (const s of json(p).seiten ?? []) {
+      for (const s of seitenDer(json(p))) {
         const t = typeof s?.sprich === "string" && s.sprich ? s.sprich : s?.text;
         if (typeof t === "string") neu(t, rel(spiele, p));
       }

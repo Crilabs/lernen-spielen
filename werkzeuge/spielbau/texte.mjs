@@ -31,6 +31,8 @@ const KEINE_SAETZE = new Set(["hinweis", "quelle", "id", "art", "objekt", "zusta
 export const satzGrenze = (klasse) => (klasse <= 2 ? 8 : 12);
 /** Geschichten werden vorgelesen (Vorlesebuch-Maß, Christian 2026-11-15, docs/geschichten.md §2). */
 export const satzGrenzeGeschichte = (klasse) => (klasse <= 2 ? 10 : 14);
+/** Sachbücher sind Vorlesebücher in normaler Kinderbuch-Sprache (Christian 2026-11-15, docs/geschichten.md §2). */
+export const satzGrenzeBuch = (klasse) => (klasse <= 2 ? 15 : 18);
 /** Budget aller festen Texte in Zeichen (§3). */
 export const BUDGET = 2500;
 
@@ -61,9 +63,10 @@ const woerter = (satz) => satz.replace(/[·=+−\-:]/g, " ").split(/\s+/).filter
 /**
  * Prüft die Texte.
  * @param {string[]} texte
- * @param {{ klasse?: number, grenze?: number }} [opt] grenze überschreibt satzGrenze(klasse) (z. B. Geschichten)
+ * @param {{ klasse?: number, grenze?: number, budget?: number }} [opt] grenze überschreibt satzGrenze(klasse) (z. B.
+ *   Geschichten); budget überschreibt BUDGET (Bücher haben kein Textbudget: Infinity)
  */
-export function pruefeTexte(texte, { klasse = 2, grenze = satzGrenze(klasse) } = {}) {
+export function pruefeTexte(texte, { klasse = 2, grenze = satzGrenze(klasse), budget = BUDGET } = {}) {
   const rot = [], hinweise = [];
   const einzeln = [...new Set(texte)];
   const gesehen = new Set();
@@ -80,8 +83,8 @@ export function pruefeTexte(texte, { klasse = 2, grenze = satzGrenze(klasse) } =
     }
   }
   const zeichen = einzeln.reduce((n, t) => n + t.length, 0);
-  if (zeichen > BUDGET * 2) rot.push(`§3 feste Texte zusammen ${zeichen} Zeichen (Budget etwa ${BUDGET})`);
-  else if (zeichen > BUDGET) hinweise.push(`§3 feste Texte zusammen ${zeichen} Zeichen (Budget etwa ${BUDGET}; Varianten aus Daten zählen hier mit)`);
+  if (zeichen > budget * 2) rot.push(`§3 feste Texte zusammen ${zeichen} Zeichen (Budget etwa ${budget})`);
+  else if (zeichen > budget) hinweise.push(`§3 feste Texte zusammen ${zeichen} Zeichen (Budget etwa ${BUDGET}; Varianten aus Daten zählen hier mit)`);
   return { rot, hinweise, saetze: einzeln.length, zeichen };
 }
 
