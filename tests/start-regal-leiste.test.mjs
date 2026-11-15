@@ -73,9 +73,12 @@ test("zuletztHtml: leer → Satz und trotzdem der Knopf", () => {
 
 test("reiterHtml: ein Reiter je Fach mit Gekonntem, der aktive trägt aria-selected", () => {
   const h = reiterHtml(regalBaum(GEKONNT, CTX, spieleFuer), "grammatik");
-  assert.match(h, /^<div class="reiter" role="tablist" aria-label="Fächer">/);
+  assert.match(h, /^<div class="reiter" role="tablist" aria-label="Fächer" aria-orientation="vertical">/);
   assert.match(h, /<button class="reiter-knopf" type="button" role="tab" data-fach="mathe" aria-selected="false"[^>]*>/);
   assert.match(h, /data-fach="grammatik" aria-selected="true"/);
+  // Designsprache: Fachpunkt in der Füllung und Name, kein Symbolkreis mehr
+  assert.match(h, /data-fach="mathe"[^>]*><span class="punkt" aria-hidden="true"><\/span><b>Mathe<\/b><\/button>/);
+  assert.doesNotMatch(h, /class="knopf"/);
 });
 
 test("bretterHtml: je Bereich ein Brett (Gruppe mit Bereichsname), Themen als Knöpfe mit Name, Neues markiert", () => {

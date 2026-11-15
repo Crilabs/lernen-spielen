@@ -4,7 +4,7 @@
 // das Neueste oben: Bereiche nach ihrem jüngsten Thema, darin neueste zuerst.
 // Jedes Thema mit Namen und klein dem Material, das das Kind aus dem Spiel kennt. Ohne Zahl, ohne Datum (N5, N8).
 // Daten vom Aufrufer (gekonnteThemen, spieleFuer aus lernsteuerung.js).
-import { FACH, FACH_SYMBOLE } from "../rahmen/stil.js";
+import { FACH } from "../rahmen/stil.js";
 import { materialFuer, bausteinHtml } from "../rahmen/material.js";
 import { esc } from "./zeichnen.js";
 
@@ -79,16 +79,16 @@ export function zuletztHtml(gekonnt) {
 }
 
 /**
- * Reiter der Regal-Seite: ein Fach je Reiter.
+ * Fächer der Regal-Seite (Designsprache): eine Liste links, je Fach ein Punkt in der Füllung und der Name; das gewählte
+ * Fach liegt auf seiner Tönung mit Sonnenring (CSS). Rollen wie Reiter (tablist/tab, aria-selected).
  * @param {RegalFach[]} baum @param {string} aktiv
  */
 export function reiterHtml(baum, aktiv) {
-  return `<div class="reiter" role="tablist" aria-label="Fächer">` + baum.map((f) => {
+  return `<div class="reiter" role="tablist" aria-label="Fächer" aria-orientation="vertical">` + baum.map((f) => {
     const farbe = FACH[/** @type {keyof typeof FACH} */ (f.fach)];
-    const zeichen = FACH_SYMBOLE.has(f.fach) ? `<i style="--bild:url('symbole/${esc(f.fach)}.svg')"></i>` : "";
     return `<button class="reiter-knopf" type="button" role="tab" data-fach="${esc(f.fach)}" aria-selected="${f.fach === aktiv}"`
-      + ` style="--fach-fuellung:${farbe?.fuellung ?? "#FFFCF7"};--fach-tief:${farbe?.tief ?? "#3B2A6B"}">`
-      + `<span class="knopf" aria-hidden="true">${zeichen}</span><b>${esc(f.name)}</b></button>`;
+      + ` style="--fach-fuellung:${farbe?.fuellung ?? "#FFFCF7"};--fach-tief:${farbe?.tief ?? "#3B2A6B"};--fach-toenung:${farbe?.toenung ?? "#F4F0FA"}">`
+      + `<span class="punkt" aria-hidden="true"></span><b>${esc(f.name)}</b></button>`;
   }).join("") + `</div>`;
 }
 
