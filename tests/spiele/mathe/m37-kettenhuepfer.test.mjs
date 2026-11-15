@@ -67,12 +67,12 @@ test("einfuehrungsKette: die Kette der ersten Aufgabe, eine andere, wenn sie sel
   assert.equal(L.einfuehrungsKette(3, 10), 9);
 });
 
-test("Hüpfer: je 0,24 s, zusammen höchstens etwa 1,6 s, der Sprung in die zweite Reihe länger; Töne steigen", () => {
-  assert.deepEqual(L.hueperZeiten(3), [240, 240, 240]);
+test("Hüpfer: je 0,22 s, zusammen höchstens etwa 1,2 s, der Sprung in die zweite Reihe länger; Töne steigen", () => {
+  assert.deepEqual(L.hueperZeiten(3), [220, 220, 220]);
   for (let a = 1; a <= 10; a++) {
     const z = L.hueperZeiten(a);
     assert.equal(z.length, a);
-    assert.ok(z.reduce((s, x) => s + x, 0) <= 1700, `${a}: ${z}`);
+    assert.ok(z.reduce((s, x) => s + x, 0) <= 1250, `${a}: ${z}`);
     if (a >= 6) assert.ok(z[5] > z[4], `${a}: Reihenwechsel`);
   }
   for (let k = 2; k <= 10; k++) assert.ok(L.hueperTon(k) > L.hueperTon(k - 1), `Ton ${k}`);

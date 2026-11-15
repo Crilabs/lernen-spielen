@@ -28,7 +28,7 @@ import { LERNFARBE } from "../../rahmen/stil.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
-import { runde, einmal } from "../../lernsteuerung.js";
+import { runde, einmal, K } from "../../lernsteuerung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
 import { hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend, einfuehrungsKette, hueperZeiten, hueperTon, naechsteFreude, witz, waehleAufgabe, bildWechsel } from "./logik.js";
 
@@ -63,11 +63,16 @@ const SPIEL_ID = leiste.getAttribute("spiel");
 const ARTEN = [{ art: "mal", reihen: [2, 10], stufen: ["material", "vorstellung", "kopf"] }];
 
 /** Die Folge einer Lösung steht nach der Wirkung noch so lange, dann kommt die nächste Aufgabe (Tippen überspringt). */
-const NACH_WIRKUNG_MS = 300;
-/** Längstens so lange wartet die Folge auf das Ende der Wirkung (B6, etwa 3 s). */
-const FOLGE_MAX_MS = 3200;
+const NACH_WIRKUNG_MS = 150;
+/** Längstens so lange wartet die Folge auf das Ende der Wirkung (Regeln §1: etwa 2,5 s, höchstens 3 s). */
+const FOLGE_MAX_MS = 2600;
 /** Der Satz zu einem Wechsel (Reihe oder Stufe) steht mindestens so lange, auch ohne Ton. */
 const WECHSEL_SATZ_MS = 1400;
+/**
+ * Eine neue Aufgabe beginnt nur, solange von der Rundenlänge der Lernsteuerung (K.RUNDE_MS, 4 Minuten) noch so viel
+ * übrig ist: auch ein Kind, das lange rät, ist mit seiner letzten Aufgabe vor dem Ende der 4 Minuten fertig.
+ */
+const LETZTE_AUFGABE_MS = 30000;
 /** Ein Stäbchen wischen oder malen (Lena hüpft drauf, Schwamm oder Kreide gehen darüber): zehn zusammen etwa 1,5 s. */
 const STAB_MS = 150;
 
@@ -187,6 +192,25 @@ function ueberspringeAlles() {
     laufend = [];
     for (const f of l) f();
   }
+}
+
+/** Tasten, die eine Folge oder Szene abkürzen (wie ein Tipp). */
+const KUERZT = new Set(["Enter", " ", "Escape"]);
+/**
+ * Ruft fn beim nächsten Tipp irgendwo auf der Seite (auch auf Kette, Lena oder Leiste) oder bei Enter, Leertaste,
+ * Escape (Regeln §1: der nächste Tipp überspringt Folge und Szene). @param {() => void} fn @returns {() => void} abmelden
+ */
+function beimTippen(fn) {
+  const hoer = (/** @type {Event} */ e) => {
+    if (e instanceof KeyboardEvent && !KUERZT.has(e.key)) return;
+    fn();
+  };
+  document.addEventListener("pointerdown", hoer, true);
+  document.addEventListener("keydown", hoer, true);
+  return () => {
+    document.removeEventListener("pointerdown", hoer, true);
+    document.removeEventListener("keydown", hoer, true);
+  };
 }
 
 // --- Kette: die Straße reicht bis ans Ziffernbrett (Breite in rem an <m37-kreidekette>) ---------------------
@@ -325,7 +349,7 @@ async function rolleEin() {
   kette.removeAttribute("verdeckt");
   for (let k = Math.max(...da) - 1; k >= 0; k--) {
     kette.setAttribute("bis", String(k));
-    if (!abgekuerzt && !wenigBewegung()) await warte(28);
+    if (!abgekuerzt && !wenigBewegung()) await warte(18);
   }
 }
 
@@ -405,7 +429,8 @@ function stelleLena(k) {
  * Rückwärts (bis < von): ein großer Bogen. beiLandung(k) nach jeder Landung (Ton, Leuchten, Kette rollt aus).
  * folge: eigene Folge von Stäbchen (Wischen und Malen), ms: Dauer je Hüpfer statt zeiten.
  * @param {number} bis @param {{ zeiten?: number[], folge?: number[], ms?: number, vorher?: (k: number) => void, beiLandung?: (k: number) => void }} [o]
- * @returns {{ fertig: Promise<void>, ueberspringe: () => void }}
+ * @returns {{ fertig: Promise<void>, gelandet: Promise<void>, ueberspringe: () => void }} gelandet: nach der letzten
+ *   Landung, vor dem Nachfedern (dort darf die nächste Bewegung schon beginnen)
  */
 function lenaHuepft(bis, { zeiten = [], folge, ms: jeMs, vorher = () => {}, beiLandung = () => {} } = {}) {
   const von = lenaBei;
@@ -414,7 +439,11 @@ function lenaHuepft(bis, { zeiten = [], folge, ms: jeMs, vorher = () => {}, beiL
   let i = 0;
   /** @type {Animation[]} */
   let jetzt = [];
+  /** @type {() => void} */
+  let lande = () => {};
+  const gelandet = new Promise((ok) => { lande = () => ok(undefined); });
   const ende = () => {
+    lande();
     if (aus) return;
     aus = true;
     jetzt.forEach((a) => a.cancel());
@@ -437,7 +466,7 @@ function lenaHuepft(bis, { zeiten = [], folge, ms: jeMs, vorher = () => {}, beiL
       vorher(k);
       const zurueck = !folge && k < lenaBei;
       const reihenwechsel = Math.abs(p1.y - p0.y) > 1;
-      const ms = jeMs ? (reihenwechsel ? jeMs * 1.8 : jeMs) : zurueck ? 420 : zeiten[k - 1] ?? 240;
+      const ms = jeMs ? (reihenwechsel ? jeMs * 1.8 : jeMs) : zurueck ? 360 : zeiten[k - 1] ?? 220;
       // Bogen: auf derselben Reihe 2,5 rem plus ein wenig je Weite; in die andere Reihe und zurück an den Start ein
       // flacher großer Bogen (nie bis in die Blase).
       const sm = (p0.s + p1.s) / 2;
@@ -472,6 +501,7 @@ function lenaHuepft(bis, { zeiten = [], folge, ms: jeMs, vorher = () => {}, beiL
       if (!zurueck) kette.staub(p1.x, p1.y, p1.s);
       beiLandung(k);
     }
+    lande();
     if (aus) return;
     // Nach der letzten Landung federt sie zurück.
     const zurueck = lenaKoerper.animate([{ transform: "scale(1.09, 0.88)" }, { transform: "scale(0.98, 1.03)", offset: 0.6 }, { transform: "scale(1, 1)" }], { duration: 160 });
@@ -479,16 +509,23 @@ function lenaHuepft(bis, { zeiten = [], folge, ms: jeMs, vorher = () => {}, beiL
     await zurueck.finished.catch(() => undefined);
     aus = true;
   })();
-  return { fertig, ueberspringe: ende };
+  return { fertig: fertig.finally(lande), gelandet, ueberspringe: ende };
 }
 
-/** Lena hüpft zurück an den Start (ein Bogen, 0,4 s) und steht still. */
+/** Der Heimweg zum Start läuft noch (die neue Aufgabe steht schon da): springt ans Ende. @type {(() => void) | null} */
+let heimweg = null;
+
+/** Lena hüpft zurück an den Start (ein Bogen, 0,36 s) und steht still. */
 function lenaZumStart() {
   lena.haltung("stehen", { ms: 200 });
   if (lenaBei === 0) return Promise.resolve();
   const h = lenaHuepft(0);
   laufend.push(h.ueberspringe);
-  return h.fertig.then(() => lena.haltung("stehen", { ms: 160 }));
+  heimweg = h.ueberspringe;
+  return h.fertig.then(() => {
+    if (heimweg === h.ueberspringe) heimweg = null;
+    lena.haltung("stehen", { ms: 160 });
+  });
 }
 
 // --- Tafel und Pfeilchen im Flug -------------------------------------------------------------------
@@ -532,7 +569,7 @@ function fliege(text, ziel, { hohl = false } = {}) {
     { transform: `translate(${x0}px, ${y0}px) scale(1)`, easing: "ease-out" },
     { transform: `translate(${(x0 + x1) / 2}px, ${Math.min(y0, y1) - 4 * r}px) scale(${(1 + f1) / 2}) rotate(-8deg)`, offset: 0.45, easing: "ease-in" },
     { transform: `translate(${x1}px, ${y1}px) scale(${f1})` },
-  ], { duration: 380, fill: "forwards" });
+  ], { duration: 320, fill: "forwards" });
   const weg = () => el.remove();
   return { fertig: a.finished.then(weg, weg), ueberspringe: () => { a.cancel(); weg(); } };
 }
@@ -543,10 +580,12 @@ let kopfStufe = false;
 
 /**
  * Lena hüpft a Stäbchen (wenn sie nicht schon dort steht), Ton und Leuchten je Hüpfer; in Kopf rollt die Kette dabei aus.
- * @param {number} a @returns {Promise<void>}
+ * @param {number} a @returns {{ fertig: Promise<void>, gelandet: Promise<void> }}
  */
 function hinHuepfen(a) {
-  if (lenaBei === a) return Promise.resolve();
+  heimweg?.(); // tippt das Kind schnell, ist Lena noch auf dem Heimweg: sie steht sofort am Start
+  heimweg = null;
+  if (lenaBei === a) return { fertig: Promise.resolve(), gelandet: Promise.resolve() };
   if (lenaBei !== 0) stelleLena(0);
   const h = lenaHuepft(a, {
     zeiten: hueperZeiten(a),
@@ -557,11 +596,12 @@ function hinHuepfen(a) {
     },
   });
   laufend.push(h.ueberspringe);
-  return h.fertig;
+  return h;
 }
 
 /**
- * Richtig: Lena hüpft hin, das Pfeilchen fliegt an ihr Stäbchen und rastet ein, Lena freut sich (oder ein Witz).
+ * Richtig: Lena hüpft hin; mit der letzten Landung fliegt das Pfeilchen an ihr Stäbchen und rastet ein, und Lena freut
+ * sich zugleich (oder ein Witz) – die Folge bleibt so unter etwa 2,5 s (Regeln §1).
  * Endbild: Lena auf Stäbchen a, darunter das Pfeilchen mit c. Überspringbar (laufend).
  * @param {number} a @param {number} b @param {{ satz?: boolean, freude?: boolean }} [o]
  */
@@ -579,18 +619,7 @@ function wirkungRichtig(a, b, { satz = false, freude = true } = {}) {
     kette.setAttribute("pfeile", [...meine].sort((x, y) => x - y).join(" "));
   };
   laufend.push(setze);
-  const ablauf = (async () => {
-    await hinHuepfen(a);
-    if (gesetzt) return;
-    const f = fliege(String(c), kette.pfeilPunkt(a));
-    laufend.push(f.ueberspringe);
-    await f.fertig;
-    if (gesetzt) return;
-    setze();
-    kette.einrasten(a);
-    klang.plopp();
-    if (satz) letzterSatz = erzaehler.gleichung(a, b).catch(() => undefined);
-    if (!freude) return;
+  const freueDich = () => {
     const w = witz(a, ++seitWitz);
     const bewegung = w ?? naechsteFreude(vorigeFreude);
     if (w) seitWitz = 0;
@@ -598,7 +627,23 @@ function wirkungRichtig(a, b, { satz = false, freude = true } = {}) {
     lenaEl.dataset.freude = bewegung;
     const fertig = lena.bewegung(bewegung);
     laufend.push(() => lena.halt());
-    await fertig;
+    return fertig;
+  };
+  const ablauf = (async () => {
+    const h = hinHuepfen(a);
+    await h.gelandet;
+    if (gesetzt) return;
+    const f = fliege(String(c), kette.pfeilPunkt(a));
+    laufend.push(f.ueberspringe);
+    const gefreut = freude ? freueDich() : Promise.resolve();
+    await f.fertig;
+    if (!gesetzt) {
+      setze();
+      kette.einrasten(a);
+      klang.plopp();
+      if (satz) letzterSatz = erzaehler.gleichung(a, b).catch(() => undefined);
+    }
+    await Promise.all([gefreut, h.fertig]);
   })();
   return ablauf;
 }
@@ -623,7 +668,7 @@ function wirkungDaneben(a, w, kopfZu) {
   };
   laufend.push(setze);
   return (async () => {
-    await hinHuepfen(a);
+    await hinHuepfen(a).gelandet;
     if (gesetzt) return;
     if (kopfZu) {
       kette.removeAttribute("bis");
@@ -810,8 +855,9 @@ function raeumeAuf() {
 /**
  * Vor einer Aufgabe: Wechseln Reihe oder Stufe, geschieht es sichtbar in einer kurzen Szene (Christian 2026-11-15,
  * Regeln §8): Lena wischt mit dem Schwamm weg und malt mit Kreide hin, Feld für Feld, dazu höchstens ein Satz. Erst
- * danach erscheint die Aufgabe (die Zeit läuft erst dann). Tippen kürzt die Szene ab. Danach bleibt die Stufe, bis
- * die Lernsteuerung eine andere verlangt.
+ * danach erscheint die Aufgabe (die Zeit läuft erst dann). Ein Tipp irgendwo (oder Enter) kürzt die Szene ab, auch das
+ * Warten auf den Satz davor. Danach bleibt die Stufe, bis die Lernsteuerung eine andere verlangt. Ohne Wechsel (oder
+ * nur mit Einrollen in Stufe kopf) hüpft Lena erst mit der neuen Aufgabe heim, nicht davor (der Takt bleibt kurz).
  * @param {number} b Reihe der nächsten Aufgabe @param {string} stufe ihre Stufe @param {{ satz?: boolean }} [o]
  */
 async function bereiteBild(b, stufe, { satz = true } = {}) {
@@ -822,17 +868,20 @@ async function bereiteBild(b, stufe, { satz = true } = {}) {
   tafel.classList.add("still"); // während der Szene keine Aufgabe (die nächste kommt danach)
   kopfStufe = false;
   const plan = bildWechsel({ n, stufe: bildStufe }, { n: b, stufe });
-  const feld = /** @type {HTMLElement} */ (document.querySelector(".spielflaeche"));
   abgekuerzt = false;
-  const kuerze = () => {
+  /** @type {() => void} */
+  let getippt = () => {};
+  const tipp = new Promise((ok) => { getippt = () => ok(undefined); });
+  const abmelden = beimTippen(() => {
     abgekuerzt = true;
     ueberspringeAlles();
-  };
-  feld.addEventListener("pointerdown", kuerze);
+    getippt();
+  });
+  const nurHeim = plan.schritte.every((x) => x === "einrollen");
   try {
     let gesagt = Promise.resolve();
     if (satz && plan.satz) {
-      await letzterSatz;
+      await Promise.race([letzterSatz, tipp]);
       gesagt = (plan.satz === "jetzt" ? erzaehler.jetzt(b) : erzaehler.wechsel(plan.satz)).catch(() => undefined);
     }
     const szene = (async () => {
@@ -846,15 +895,16 @@ async function bereiteBild(b, stufe, { satz = true } = {}) {
       kettenWechsel(b);
       setzeStufe(stufe);
       bildStufe = stufe;
+      if (nurHeim) return; // Lena hüpft mit der Aufgabe heim (stelleAufgabe)
       await lenaZumStart();
       spiegel = false;
       stelleLena(0);
     })();
-    // Der Satz steht, bis er gesprochen ist (mindestens WECHSEL_SATZ_MS, wenn es einen gibt); Tippen kürzt ab.
-    const satzZeit = satz && plan.satz ? Promise.race([Promise.all([gesagt, warte(WECHSEL_SATZ_MS)]), new Promise((ok) => feld.addEventListener("pointerdown", ok, { once: true }))]) : Promise.resolve();
+    // Der Satz steht, bis er gesprochen ist (mindestens WECHSEL_SATZ_MS, wenn es einen gibt); ein Tipp kürzt ab.
+    const satzZeit = satz && plan.satz ? Promise.race([Promise.all([gesagt, warte(WECHSEL_SATZ_MS)]), tipp]) : Promise.resolve();
     await Promise.all([szene, satzZeit]);
   } finally {
-    feld.removeEventListener("pointerdown", kuerze);
+    abmelden();
     abgekuerzt = false;
   }
 }
@@ -1034,20 +1084,19 @@ function spieleAufgabe(aufgabe) {
 
 // --- Folge nach einer Lösung (bedienung.md 7.1, B6) ----------------------------------------------
 // Kein Weiter-Knopf: die Folge wartet, bis die Wirkung fertig ist (höchstens FOLGE_MAX_MS), dann NACH_WIRKUNG_MS;
-// ein Tippen auf das Spielfeld überspringt beides, dann kommt die nächste Aufgabe.
+// ein Tipp irgendwo (oder Enter) überspringt beides, dann kommt die nächste Aufgabe.
 function warteFolge() {
-  const feld = /** @type {HTMLElement} */ (document.querySelector(".spielflaeche"));
   return new Promise((ok) => {
     let vorbei = false;
     const fertig = () => {
       if (vorbei) return;
       vorbei = true;
       clearTimeout(uhr);
-      feld.removeEventListener("pointerdown", fertig);
+      abmelden();
       ok(undefined);
     };
     const uhr = setTimeout(fertig, FOLGE_MAX_MS + NACH_WIRKUNG_MS);
-    feld.addEventListener("pointerdown", fertig);
+    const abmelden = beimTippen(fertig);
     wirkungFertig.catch(() => undefined).then(() => warte(NACH_WIRKUNG_MS)).then(fertig);
   });
 }
@@ -1152,7 +1201,9 @@ async function spieleRunde(vorschau) {
 
   /** Aufgaben, die in dieser Runde nicht passten oder Hilfe brauchten (kommen als Wiedervorlage; nie getauscht). */
   const wieder = new Set();
-  const naechste = () => waehleAufgabe(aufStufe(r.naechste()), n, wieder);
+  const beginn = Date.now();
+  const zeitDa = () => Date.now() - beginn < K.RUNDE_MS - LETZTE_AUFGABE_MS;
+  const naechste = () => (zeitDa() ? waehleAufgabe(aufStufe(r.naechste()), n, wieder) : null);
   let aufgabe = naechste();
   if (!aufgabe && vorschau) {
     r = vorschauRunde();

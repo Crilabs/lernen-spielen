@@ -88,13 +88,14 @@ export function einfuehrungsKette(a, n) {
 }
 
 /**
- * Dauer der Hüpfer (ms) über a Stäbchen: je Hüpfer 0,24 s, bei vielen Stäbchen schneller (alle zusammen höchstens
- * etwa 1,6 s); der Hüpfer von Stäbchen 5 auf 6 in die zweite Reihe ist ein großer Bogen (0,4 s, bei vielen kürzer).
+ * Dauer der Hüpfer (ms) über a Stäbchen: je Hüpfer 0,22 s, bei vielen Stäbchen schneller (alle zusammen höchstens
+ * etwa 1,2 s, damit die ganze Folge unter 3 s bleibt); der Hüpfer von Stäbchen 5 auf 6 in die zweite Reihe ist ein
+ * größerer Bogen (1,6-mal so lang, höchstens 0,34 s).
  * @param {number} a @returns {number[]} Dauer des Hüpfers auf Stäbchen 1 … a
  */
 export function hueperZeiten(a) {
-  const je = Math.round(Math.min(240, 1400 / Math.max(1, a)));
-  const gross = Math.round(Math.min(400, je * 1.7));
+  const je = Math.round(Math.min(220, 1050 / Math.max(1, a)));
+  const gross = Math.round(Math.min(340, je * 1.6));
   return Array.from({ length: a }, (_, i) => (i === 5 ? gross : je));
 }
 
