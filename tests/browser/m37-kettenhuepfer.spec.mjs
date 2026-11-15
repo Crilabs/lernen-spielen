@@ -19,6 +19,10 @@
 //    5,4 s nach Beginn der Aufgabe). Mindestens ein Wechsel kommt vor.
 // 4. W-Freude, 1280 × 800, mit und ohne reduzierte Bewegung: jede Lösung bringt a Packungen in den Korb, Timo reagiert
 //    wechselnd, die Packungen kommen in wechselnden Varianten, Timo steht still, sobald die nächste Aufgabe dasteht.
+// 5. Ausbau-Prüfung R1, 1280 × 800: In kopf liegt die Kette nach einem Fehlversuch unter dem Tuch (keine Perle) und ist
+//    nach dem nächsten Tippen wieder zu; das hüpfende Pfeilchen trägt unterwegs keine Zahl, erst eingerastet das
+//    Ergebnis; die Tauschaufgabe der Hilfe zu 10 · n steht in einer eigenen Zeile unter der Gleichung (Gleichung in einer
+//    Zeile, Kette gleich groß, nichts über ihren Pfeilchen).
 // 3. Zehnerreihe, 1280 × 800: Die Kurzketten der Vorratsliste haben einen gemeinsamen Maßstab (jeder Stab gleich lang,
 //    so viele Stäbe wie a, Lücke mehrere Konturen breit, Stab deutlich über 8 px), „10 · 10 = 100“ steht in einer Zeile.
 
@@ -277,6 +281,92 @@ try {
       pruefe(`Keine Seitenfehler (W-Freude, ${wie})`, seitenFehler.length === 0, seitenFehler.join("; "));
       await kontext.close();
     }
+  }
+
+  // --- 5. Ausbau-Prüfung R1: kopf nach Fehlversuch verdeckt, Pfeilchen unterwegs leer, Tauschaufgabe unter der Gleichung
+  {
+    const seite = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    const seitenFehler = [];
+    seite.on("pageerror", (/** @type {Error} */ e) => seitenFehler.push(e.message));
+    await seite.goto(`${basis}&thema=zweierreihe&stufe=kopf`);
+    const sp = spieler(seite);
+    await sp.warteAufgabe(1);
+    const kette = () => seite.evaluate(() => {
+      const k = document.getElementById("kette");
+      return { verdeckt: k.hasAttribute("verdeckt"), zu: document.getElementById("kette-platz").classList.contains("zu"), perlen: k.shadowRoot.querySelectorAll("circle").length };
+    });
+    pruefe("kopf: die Kette ist zu, solange das Kind denkt", (await kette()).zu);
+    await sp.tippeZahl(9); // in der Zweierreihe nie das Ergebnis
+    await seite.waitForTimeout(300);
+    const fehl = await kette();
+    pruefe("kopf, Fehlversuch: Kette unter dem Tuch (Grenzen, Ring, hohles Pfeilchen), keine Perle zu sehen", fehl.verdeckt && !fehl.zu && fehl.perlen === 0, JSON.stringify(fehl));
+    await sp.taste("1");
+    const weg = await kette();
+    pruefe("kopf: nach dem nächsten Tippen ist die Kette wieder zu", weg.zu && !weg.verdeckt, JSON.stringify(weg));
+    await sp.taste("loeschen");
+    // Unterwegs trägt das hüpfende Pfeilchen keine Zahl; erst eingerastet steht das Ergebnis da (Ausbau-Prüfung R1, W-Wirkung).
+    const b = await sp.bild();
+    const beobachtung = seite.evaluate((a) => new Promise((ok) => {
+      const k = /** @type {any} */ (document.getElementById("kette"));
+      const texte = new Set();
+      let gesehen = 0;
+      const t0 = performance.now();
+      const schau = () => {
+        const lauf = k.shadowRoot.querySelector("g.lauf > g");
+        if (lauf) gesehen++;
+        for (const t of k.shadowRoot.querySelectorAll("g.lauf text")) texte.add(t.textContent);
+        if (performance.now() - t0 < 1600) requestAnimationFrame(schau);
+        else ok({ texte: [...texte], gesehen, eingerastet: k.shadowRoot.querySelector(`g.pfeil[data-stab="${a}"] text`)?.textContent ?? null });
+      };
+      requestAnimationFrame(schau);
+    }), b.a);
+    await sp.tippeZahl(b.a * b.b);
+    const hop = /** @type {any} */ (await beobachtung);
+    pruefe(`Pfeilchen hüpft leer (${b.a} · ${b.b}), eingerastet mit ${b.a * b.b}`, hop.gesehen > 0 && hop.texte.length === 0 && hop.eingerastet === String(b.a * b.b), JSON.stringify(hop));
+    await seite.close();
+    pruefe("Keine Seitenfehler (5a)", seitenFehler.length === 0, seitenFehler.join("; "));
+  }
+  {
+    // Tauschaufgabe (Hilfe zu 10 · n): eine eigene Zeile unter der Gleichung, die Gleichung bricht nicht um, die Kette
+    // behält ihre Größe und nichts liegt über ihren Pfeilchen. Kern-Runden haben a ∈ {1, 2, 5, 10}.
+    const seite = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    const seitenFehler = [];
+    seite.on("pageerror", (/** @type {Error} */ e) => seitenFehler.push(e.message));
+    await seite.goto(`${basis}&thema=kernaufgaben-einmaleins&stufe=material`);
+    const sp = spieler(seite);
+    let gefunden = false;
+    for (let nr = 1; nr <= 24 && !gefunden; nr++) {
+      await sp.warteAufgabe(nr);
+      if ((await sp.zustand()).phase === "pause") { await sp.weiter(); nr--; continue; }
+      const b = await sp.bild();
+      if (b.a === 10) {
+        gefunden = true;
+        const vorher = await seite.evaluate(() => document.getElementById("kette").getBoundingClientRect().width);
+        for (const stufe of [1, 2]) {
+          await seite.locator("#hilfe").locator("ls-knopf").click();
+          await seite.waitForTimeout(300);
+          const m = await seite.evaluate(() => {
+            const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+            const r = (/** @type {Element} */ el) => el.getBoundingClientRect();
+            const t = document.getElementById("tausch");
+            const g = r(document.getElementById("gleichung"));
+            const k = document.getElementById("kette");
+            const tr = r(t);
+            const pfeile = [...k.shadowRoot.querySelectorAll("g.pfeil, circle")].map(r);
+            const ueber = pfeile.some((p) => p.bottom > tr.top + 1 && p.top < tr.bottom - 1 && p.right > tr.left && p.left < tr.right);
+            return { sichtbar: !t.hidden, staebe: t.querySelectorAll("ls-perlenstab").length, wort: t.querySelector(".wort")?.textContent, gleichungHoch: g.height / rem, unter: tr.top >= g.bottom, inMatte: tr.bottom <= r(document.getElementById("matte")).bottom, ueber, breite: r(k).width };
+          });
+          pruefe(`Tauschaufgabe 10 · ${b.b}, Stufe ${stufe}: Zeile mit ${b.b} Zehnerstäben unter der Gleichung („${m.wort}“)`, m.sichtbar && m.staebe === b.b && m.unter && m.inMatte, JSON.stringify(m));
+          pruefe(`Tauschaufgabe, Stufe ${stufe}: Gleichung in einer Zeile, Kette gleich groß, nichts über ihren Pfeilchen und Perlen`, m.gleichungHoch < 10 && Math.abs(m.breite - vorher) < 2 && !m.ueber, JSON.stringify(m));
+        }
+      }
+      await sp.tippeZahl(b.a * b.b);
+      await seite.waitForTimeout(120);
+      await sp.wegtippen();
+    }
+    pruefe("Tauschaufgabe: eine Aufgabe 10 · n kam vor", gefunden);
+    await seite.close();
+    pruefe("Keine Seitenfehler (5b)", seitenFehler.length === 0, seitenFehler.join("; "));
   }
 } finally {
   await browser.close();

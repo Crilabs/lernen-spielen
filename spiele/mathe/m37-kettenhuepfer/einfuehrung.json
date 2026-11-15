@@ -1,6 +1,6 @@
 { "hinweis": "Eigene Einführung von M37 Kettenhüpfer in der Welt Vorrat und Packungen (A4b), für alle Einmaleins-Themen des Spiels. Werte aus lernplan.json je Thema: n (Reihe), zwei, drei (2·n, 3·n), packung (Objekt der Reihe in spiele/objekte/), zustand (Zustand des Objekts, leer = der erste). sprich ohne Ziffern und Zahlwörter (die Zahlen stehen in zeig). Timo zeigt vor wie im Spiel.",
   "szenen": [
-  { "sprich": "Timo füllt den Vorratskorb. Hier kommen die Dinge in Packungen, und in jeder Packung sind gleich viele.",
+  { "sprich": "Der Vorratskorb wird gefüllt. Hier kommen die Dinge in Packungen, und in jeder Packung sind gleich viele.",
     "zeig": "",
     "bild": [ { "figur": "timo", "x": 16, "haltung": "stehen", "aufgabe": "vorzeigen" }, { "objekt": "{packung}", "zustand": "{zustand}", "x": 50, "hoehe": 16 }, { "objekt": "einkaufskorb", "zustand": "leer", "x": 80, "hoehe": 16 } ] },
   { "sprich": "Eine Packung ist ein Stäbchen aus Perlen. Jede Perle ist ein Teil von der Packung.",

@@ -28,6 +28,7 @@ import "../../objekte/objekt.js";
 import "../../objekte/einkaufskorb.js";
 import { wirf } from "../../objekte/objekt.js";
 import { malAus } from "../../aufgabenarten.js";
+import { laenge as stabLaenge, HOEHE as STAB_HOEHE } from "../../rahmen/perlen-geometrie.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
@@ -48,6 +49,7 @@ const kette = $("kette");
 const kettePlatz = $("kette-platz");
 const gleichung = $("gleichung");
 const rechnung = $("rechnung");
+const tausch = $("tausch");
 const liste = $("liste");
 const tastatur = $("tastatur");
 const fertigKnopf = $("fertig");
@@ -92,6 +94,12 @@ const WECHSEL_MS = 2400;
 const KURZ_BREITE = 20;
 /** Höhe eines Stabs der Kurzkette (rem): zwei Reihen passen in eine Zeile der Liste (4,6 rem). */
 const KURZ_STAB = 1.6;
+/** Abstand der Zehnerstäbe der Tauschaufgabe nebeneinander (rem, wie .tausch .staebe in index.html). */
+const TAUSCH_LUECKE = 1.2;
+/** Freies Band unten in der Kette (rem): Platz des hohlen Pfeilchens (PFEIL.ebene in perlenkette.js, 5,4) abzüglich Rand. */
+const TAUSCH_FREI = 4.8;
+/** Abstand der Tauschaufgabe vom unteren Rand der Matte (rem, wie .tausch in index.html: innerhalb der Randlinie). */
+const TAUSCH_UNTEN = 2.4;
 
 /** Nur Vorschau: Aufgaben, falls die Lernsteuerung nichts liefert. */
 const VORSCHAU = { thema: "Zweierreihe", aufgaben: ["mal:3*2", "mal:7*2", "mal:5*2", "mal:9*2"] };
@@ -354,6 +362,63 @@ function verdeckeZeile(/** @type {number} */ a, /** @type {number} */ b) {
   if (z) z.textContent = `${a} · ${b} = ▢`;
 }
 
+/** Rechnung neben der Gleichung und Tauschaufgabe unter ihr leeren (neue Aufgabe, Lösung, Wechsel). */
+function leereRechnung() {
+  rechnung.replaceChildren();
+  tausch.replaceChildren();
+  tausch.hidden = true;
+  tausch.classList.remove("oben");
+}
+
+/**
+ * Hilfe zu 10 · n (Entwurf §8): die Tauschaufgabe „n · 10“ mit n Zehnerstäben in einer eigenen Zeile unter der
+ * Gleichung, unten auf der Matte unter der Kette (Ausbau-Prüfung R1: neben der Gleichung brach sie um und die Kette
+ * schrumpfte). Die Zeile liegt im unteren Band der Kette (Platz des hohlen Pfeilchens), die Kette behält ihre Größe.
+ * Die Stäbe liegen in Reihen zu höchstens fünf und werden so groß, wie Breite und freies Band es erlauben; das Wort
+ * steht daneben oder darüber. Stufe 2 schreibt „n · 10 = ▢“ (das Kind rechnet selbst).
+ * @param {number} b n @param {boolean} frage Stufe 2
+ */
+function zeigeTausch(b, frage) {
+  leereRechnung();
+  const wort = document.createElement("span");
+  wort.className = "wort";
+  wort.textContent = frage ? `${b} · 10 = ▢` : `${b} · 10`;
+  const staebe = document.createElement("div");
+  staebe.className = "staebe";
+  for (let i = 0; i < b; i++) {
+    const s = document.createElement("ls-perlenstab");
+    s.setAttribute("wert", "10");
+    staebe.append(s);
+  }
+  tausch.append(wort, staebe);
+  tausch.hidden = false;
+  // Größe der Stäbe: Breite der Matte und Höhe des freien Bands unter der Kette (das Band des hohlen Pfeilchens in der
+  // Kette, TAUSCH_FREI, und was unter ihr bis zum Rand der Matte frei ist). Ein Zehnerstab ist stabLaenge(10) /
+  // STAB_HOEHE mal so lang wie hoch. Gewählt wird die Anordnung mit den größten Stäben: das Wort daneben oder darüber,
+  // bis zu fünf Stäbe je Reihe.
+  const rem = remPx();
+  const breit = tausch.getBoundingClientRect().width / rem;
+  const matte = /** @type {HTMLElement} */ (tausch.parentElement).getBoundingClientRect();
+  const band = Math.max(5, (matte.bottom - kette.getBoundingClientRect().bottom) / rem - TAUSCH_UNTEN + TAUSCH_FREI);
+  const wortB = wort.getBoundingClientRect().width / rem;
+  const wortH = 4 + 0.8;
+  const proHoehe = stabLaenge(10) / STAB_HOEHE;
+  let best = { h: 0, spalten: Math.min(b, 5), oben: false };
+  for (let spalten = Math.min(b, 5); spalten >= 1; spalten--) {
+    const reihen = Math.ceil(b / spalten);
+    for (const oben of [false, true]) {
+      const breiteH = ((oben ? breit : breit - wortB - 2.4) - (spalten - 1) * TAUSCH_LUECKE) / (spalten * proHoehe);
+      const hoeheH = ((oben ? band - wortH : band) - (reihen - 1) * 0.6) / reihen;
+      const h = Math.min(breiteH, hoeheH, 2.6);
+      if (h > best.h + 0.05) best = { h, spalten, oben };
+    }
+  }
+  tausch.classList.toggle("oben", best.oben);
+  staebe.style.gridTemplateColumns = `repeat(${best.spalten}, auto)`;
+  const h = Math.max(0.8, best.h);
+  for (const s of /** @type {HTMLElement[]} */ ([...staebe.children])) s.style.height = `${h.toFixed(2)}rem`;
+}
+
 /** Das Ding der Reihe steht in Ruhe auf dem Regalbrett (Sachbild, kein Zählmaterial; W-Sachwelt). @param {number} reihe */
 function zeigeDing(reihe) {
   packungsBild(reihe, ding);
@@ -437,6 +502,7 @@ async function vorzeigen(aufgabe, rundenThema) {
     // Der Fakt („In echt …“) nur in einer Runde der eigenen Reihe (K6); in Kern-Runden und bei einer Aufgabe aus einer
     // anderen Reihe die Setzung.
     if (anfang) blase.sage(eigeneReihe(rundenThema, b) ? anfang.reihe : anfang.setzung);
+    leereRechnung();
     gleichung.innerHTML = `<span>${ta} · ${b} =</span><span class="feld"></span>`;
     const box = /** @type {HTMLElement} */ (gleichung.querySelector(".feld"));
     await ruhe(2600);
@@ -492,7 +558,7 @@ function stelleAufgabe(aufgabe, melde) {
 
   gleichung.innerHTML = `<span>${a} · ${b} =</span><span class="feld" id="eingabe"></span>`;
   const box = /** @type {HTMLElement} */ (gleichung.querySelector(".feld"));
-  rechnung.replaceChildren();
+  leereRechnung();
 
   // Der Auftrag steht in der Blase, sobald die Aufgabe dasteht, und bleibt, bis das Kind etwas tut (B3).
   const satz = TEXTE?.auftrag?.[b]?.[a];
@@ -501,6 +567,10 @@ function stelleAufgabe(aufgabe, melde) {
   let eingabe = "";
   let fertig = false;
   let loesungGezeigt = false;
+  /** Die Hilfe hat die Kette aufgedeckt (Stufe vorstellung und kopf): dann bleibt sie offen. */
+  let hilfeOffen = false;
+  /** Zahlen, die bei dieser Aufgabe schon getippt wurden und nicht passten (nur für die Züge des Prüfstands). */
+  const versucht = new Set();
 
   /** Hilfe Stufe 2: Sonnenring an der Taste, die als Nächstes kommt (bzw. an Fertig). */
   const markiereNaechste = () => {
@@ -540,7 +610,7 @@ function stelleAufgabe(aufgabe, melde) {
       kette.removeAttribute("verdeckt");
       kette.removeAttribute("hell");
       kette.removeAttribute("markiert");
-      rechnung.replaceChildren();
+      leereRechnung();
       // Gemeldet wird sofort (die Zeit der Aufgabe endet mit Fertig); die Folge läuft in der Zeit der Folge (FOLGE_MS).
       melde.geloest(aufgabe.ziel.key);
       // Was die Lösung dauerhaft ändert, steht sofort fest: das Stäbchen ist gelöst, die Zeile steht auf der Liste,
@@ -569,8 +639,13 @@ function stelleAufgabe(aufgabe, melde) {
     // Passt nicht: das Pfeilchen hält am a-ten Stäbchen (ohne Zahl), Ring dort, die getippte Zahl hohl an ihrem Ort.
     // Nichts fliegt (N7). Das nächste Tippen räumt das Bild weg.
     melde.passtNicht();
+    versucht.add(zahl);
     eingabe = "";
     box.textContent = "";
+    // In kopf liegt die Kette nur für das Fehlerbild da, und zwar unter dem Tuch wie in vorstellung (Entwurf §2 Satz 6):
+    // Stäbchengrenzen, Ring und hohles Pfeilchen sind zu sehen, die Perlen nicht (sonst könnte das Kind zählen).
+    const kopfZu = stufe === "kopf" && !hilfeOffen;
+    if (kopfZu) kette.setAttribute("verdeckt", "");
     kettePlatz.classList.remove("zu");
     const h = kette.huepfe(a, { wert: null, ms: Math.min(200, 1000 / a) });
     kette.setAttribute("ring", String(a));
@@ -583,7 +658,10 @@ function stelleAufgabe(aufgabe, melde) {
       kette.zeigerWeg();
       kette.removeAttribute("ring");
       kette.removeAttribute("hohl");
-      if (stufe === "kopf") kettePlatz.classList.add("zu");
+      if (kopfZu) {
+        kettePlatz.classList.add("zu");
+        kette.removeAttribute("verdeckt");
+      }
     };
     if (loesungGezeigt) markiereNaechste();
   };
@@ -618,7 +696,10 @@ function stelleAufgabe(aufgabe, melde) {
     // Stäbchen, logik.js kandidaten); das Kind selbst kann jede Zahl tippen.
     zuege() {
       if (fertig) return [];
-      return tastenZu(eingabe, kandidaten(a, b)).map(zug).filter(Boolean);
+      // Eine Zahl, die die Kette eben als „passt nicht“ gezeigt hat, tippt das ratende Kind nicht noch einmal (das
+      // Ergebnis selbst ist nie darunter); so kommt es nach höchstens zwei Fehlversuchen an, statt zufällig lange zu
+      // irren (Ausbau-Prüfung R1: je Versuch 1/4 Treffer, 60 Züge reichten in etwa jedem zweiten Prüfstand nicht).
+      return tastenZu(eingabe, kandidaten(a, b).filter((x) => !versucht.has(x))).map(zug).filter(Boolean);
     },
     richtigerZug() {
       return fertig ? null : zug(naechsteTaste(eingabe, c));
@@ -628,6 +709,7 @@ function stelleAufgabe(aufgabe, melde) {
       if (fertig) return;
       raeumeFehlerBild();
       const h = hilfeVon(a, b);
+      hilfeOffen = true;
       kettePlatz.classList.remove("zu");
       kette.removeAttribute("verdeckt");
       if (hilfeStufe === 1) {
@@ -637,9 +719,7 @@ function stelleAufgabe(aufgabe, melde) {
           kette.setAttribute("markiert", String(h.kern));
         }
         if (h.art === "eins") kette.setAttribute("hell", "1");
-        if (h.art === "tausch") {
-          rechnung.innerHTML = `<span class="tausch"><span>${b} · 10</span>${`<ls-perlenstab wert="10"></ls-perlenstab>`.repeat(b)}</span>`;
-        }
+        if (h.art === "tausch") zeigeTausch(b, false);
         return erzaehler.probe[h.art]();
       }
       // Lösung mit Begründung: die Stäbchen zwischen Kernaufgabe und Ziel im Sonnenring, die Rechnung im Bild,
@@ -650,7 +730,11 @@ function stelleAufgabe(aufgabe, melde) {
         kette.setAttribute("markiert", String(h.kern));
       }
       kette.setAttribute("hell", h.hell.join(" "));
-      rechnung.textContent = h.rechnung;
+      if (h.art === "tausch") zeigeTausch(b, true); // „n · 10 = ▢“ unter der Gleichung, die Stäbe bleiben
+      else {
+        tausch.hidden = true;
+        rechnung.textContent = h.rechnung;
+      }
       markiereNaechste();
       if (h.art === "nachbar") return h.schritt > 0 ? erzaehler.loesung.vor() : erzaehler.loesung.zurueck();
       if (h.art === "zwei") return h.schritt > 0 ? erzaehler.loesung.zweiVor() : erzaehler.loesung.zweiZurueck();
@@ -858,7 +942,7 @@ async function wechsleKette(aufgabe) {
   ueberspringeAlles();
   kettenWechsel(ziel.b);
   gleichung.replaceChildren();
-  rechnung.replaceChildren();
+  leereRechnung();
   const satz = TEXTE?.wechsel?.[ziel.b];
   if (satz) await steheSatz(blase.sage(satz));
   return true;
@@ -898,7 +982,7 @@ async function spieleVerwischt(zeile, stufe) {
   liste.querySelector(`[data-aufgabe="${zeile}"]`)?.classList.add("verwischt");
   verdeckeZeile(a, b);
   gleichung.replaceChildren();
-  rechnung.replaceChildren();
+  leereRechnung();
   await steheSatz(blase.sage("Auf der Liste ist eine Zeile verwischt. Die Kette daneben zeigt, wohin sie gehört."));
   erzaehler.auftrag(true);
   const e = await spieleAufgabe(aufgabe);

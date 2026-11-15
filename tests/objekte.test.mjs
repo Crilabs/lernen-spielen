@@ -139,13 +139,27 @@ test("Packungen der Reihen 3, 7, 8, 9 (M37): ein Zustand, ohne Schrift und Ziffe
 test("Keine Farbe der Lernzeichen in den Packungen von M37 und im Einkaufskorb (Sachwelt, grundsaetze-bilder 6.2)", async () => {
   const { LERNFARBE } = await import("../spiele/rahmen/stil.js");
   const lern = new Set([...Object.values(LERNFARBE.perle), ...Object.values(LERNFARBE.wortart)].map((f) => f.toUpperCase()));
-  for (const art of ["ballroehre", "wochenschachtel", "stiftebox", "muffinkarton", "einkaufskorb"]) {
+  for (const art of ["schuhpaar", "ballroehre", "wochenschachtel", "stiftebox", "muffinkarton", "einkaufskorb"]) {
     const def = objekte.get(art);
     for (const z of def.zustaende) {
       const farben = [...def.zeichne(z, { wert: "" }).matchAll(/fill="(#[0-9A-Fa-f]{6})"/g)].map((m) => m[1].toUpperCase());
       for (const f of farben) assert.ok(!lern.has(f), `${art} ${z}: ${f} ist eine Farbe der Lernzeichen`);
     }
   }
+});
+
+test("Schuhpaar (M37, Fakt „Paar“): beide Schuhe in einer Farbe, Farben nur aus Tokens und Welt-Paletten", async () => {
+  const { readFileSync } = await import("node:fs");
+  const quelle = readFileSync(new URL("../spiele/objekte/schuhpaar.js", import.meta.url), "utf8");
+  assert.doesNotMatch(quelle, /#[0-9A-Fa-f]{6}/, "schuhpaar: keine eigenen Hex-Werte");
+  const { SCHUH } = await import("../spiele/objekte/schuhpaar.js");
+  const { PALETTEN } = await import("../spiele/start/welten.js");
+  assert.equal(SCHUH, PALETTEN.werkstatt[3]);
+  // Grundfarbe der Schäfte: genau eine (beide Schuhe gleich), kein zweiter Schuhton.
+  const svg = objekte.get("schuhpaar").zeichne("liegt", { wert: "" });
+  const grund = [...svg.matchAll(/fill="(#[0-9A-Fa-f]{6})"[^>]*transform="[^"]*scale\(0\.88\)/g)].map((m) => m[1].toUpperCase());
+  assert.equal(grund.length, 2, "zwei Schäfte");
+  assert.equal(new Set(grund).size, 1, "beide Schuhe in derselben Farbe");
 });
 
 test("Münze: Variante zehn-cent mit Prägung 10, stapel bleibt der erste Zustand ohne Ziffer", () => {

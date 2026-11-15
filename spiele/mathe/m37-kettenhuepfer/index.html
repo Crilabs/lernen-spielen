@@ -71,24 +71,35 @@
     .korb-inhalt { top: -8rem; height: calc(8rem + 14.4rem * 0.39); }
     .korb-inhalt > * { width: 4.6rem; height: 4.6rem; margin-left: -2.3rem; }
     .regal { width: 27.2rem; }
-    /* Fertig rückt unter die Ziffern neben Löschen, sonst stieße es an die Hilfe unten rechts. */
+    /* Fertig rückt unter die Ziffern neben Löschen, sonst stieße es an die Hilfe unten rechts. Es steht 2 rem tiefer als
+       Löschen (unten bis 106,8 von 108 rem, Schatten 0,6 rem): so bleiben 2 rem Abstand zu den Ziffern darüber
+       (bedienung.md §4; vorher berührte die Pille mit Symbol die Tasten 9 und 0). */
     .eingabe { position: relative; }
-    .eingabe #fertig { position: absolute; right: 0; bottom: 0.8rem; }
+    .eingabe #fertig { position: absolute; right: 0; bottom: -1.2rem; }
   }
 
   /* Matte: oben die Aufgabe, darunter die Kette. */
   .matte { display: flex; flex-direction: column; align-items: center; gap: 1.6rem; padding: 2.6rem 3rem; min-height: 0; }
-  .aufgabe { display: flex; align-items: center; gap: 4rem; min-height: 8.4rem; }
-  .gleichung { display: flex; align-items: center; gap: 1.6rem; font-size: 6rem; font-weight: 700; line-height: 1; }
+  .aufgabe { display: flex; align-items: center; gap: 4rem; min-height: 8.4rem; flex: none; }
+  /* Die Gleichung bricht nie um (Ausbau-Prüfung R1). */
+  .gleichung { display: flex; align-items: center; gap: 1.6rem; font-size: 6rem; font-weight: 700; line-height: 1; white-space: nowrap; }
   .feld {
     display: inline-flex; align-items: center; justify-content: center;
     min-width: 13rem; height: 8.4rem; padding: 0 1.6rem;
     background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
   }
-  .rechnung { font-size: 4.4rem; font-weight: 700; color: var(--ls-tinte); }
+  .rechnung { font-size: 4.4rem; font-weight: 700; color: var(--ls-tinte); white-space: nowrap; }
   .rechnung:empty { display: none; }
-  .tausch { display: flex; align-items: center; gap: 1.2rem; }
-  .tausch ls-perlenstab { height: 3.2rem; }
+  /* Hilfe zu 10 · n: die Tauschaufgabe in einer eigenen Zeile unter der Gleichung, unten auf der Matte unter der Kette
+     (Ausbau-Prüfung R1). Sie liegt außerhalb des Flusses im unteren Band der Kette, das nur das hohle Pfeilchen eines
+     Fehlversuchs braucht (die Hilfe räumt es weg), so bleibt die Kette so groß wie vorher. Zehnerstäbe in Reihen zu
+     höchstens fünf; Größe, Spalten und ob das Wort daneben oder darüber steht, setzt spiel.js (zeigeTausch). */
+  .matte { position: relative; }
+  .tausch { position: absolute; left: 3rem; right: 3rem; bottom: 2.4rem; display: flex; align-items: center; justify-content: center; gap: 2.4rem; pointer-events: none; }
+  .tausch[hidden] { display: none; }
+  .tausch.oben { flex-direction: column; gap: 0.8rem; }
+  .tausch .wort { font-size: 4rem; font-weight: 700; line-height: 1; white-space: nowrap; }
+  .tausch .staebe { display: grid; gap: 0.6rem 1.2rem; justify-items: start; }
   .kette-platz { flex: 1 1 0; align-self: stretch; display: flex; align-items: center; justify-content: center; min-height: 0; }
   .kette-platz.zu ls-perlenkette { visibility: hidden; }
 
@@ -144,13 +155,14 @@
           <div class="gleichung" id="gleichung" aria-live="polite"></div>
           <div class="rechnung" id="rechnung"></div>
         </div>
+        <div class="tausch" id="tausch" hidden></div>
         <div class="kette-platz" id="kette-platz"><ls-perlenkette id="kette" reihe="2" breite="100" perle="4"></ls-perlenkette></div>
       </section>
       <section class="lernfeld liste" id="liste" aria-label="Vorratsliste"></section>
     </div>
     <div class="eingabe">
       <ls-tastatur id="tastatur" tasten="1234567890" loeschen></ls-tastatur>
-      <ls-knopf id="fertig" art="haupt" wort="Fertig"></ls-knopf>
+      <ls-knopf id="fertig" art="haupt" symbol="fertig.svg" wort="Fertig"></ls-knopf>
     </div>
   </main>
 </div>

@@ -11,7 +11,7 @@
     { "id": "kettenhuepfer", "titel": "Kettenhüpfer", "thema": "Einmaleins", "kategorie": "mathe",
       "symbol": "mathe/m37-kettenhuepfer/symbol.svg", "datei": "mathe/m37-kettenhuepfer/index.html",
       "text": "Ergebnis tippen, das Pfeilchen hüpft auf der Perlenkette, die Packungen kommen in den Korb.",
-      "beschreibung": "Timo packt Vorräte in den Korb: Schuhpaare, Eierkartons, Muffinkartons und andere Packungen, in denen immer gleich viele Teile stecken. Das Kind rechnet aus, wie viele Teile mehrere Packungen zusammen haben, und tippt das Ergebnis; dann hüpft ein Pfeilchen auf der Perlenkette Stäbchen für Stäbchen dorthin. So übt es die Einmaleinsreihen von 2 bis 10 mit Packungen aus dem Alltag.",
+      "beschreibung": "Mit jeder Malaufgabe, die das Kind löst, kommen Packungen in den Vorratskorb: Schuhpaare, Eierkartons, Muffinkartons und andere Packungen, in denen immer gleich viele Teile stecken. Das Kind rechnet aus, wie viele Teile mehrere Packungen zusammen haben, und tippt das Ergebnis; dann hüpft ein Pfeilchen auf der Perlenkette Stäbchen für Stäbchen dorthin. Timo zeigt zu Beginn eine Aufgabe vor; so übt das Kind die Einmaleinsreihen von 2 bis 10 mit Packungen aus dem Alltag.",
       "arten": [{ "art": "mal", "reihen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": { "objekt": "einkaufskorb", "wert": null },
       "karte": { "figur": "einkaufskorb", "zustand": "gefuellt", "welt": "vorrat-und-packungen" } }

@@ -27,7 +27,9 @@
 //   hoehe     verfügbare Höhe in rem (ohne: beliebig); die Perlen werden so klein, dass die Kette hineinpasst
 //   perle     größter Perlendurchmesser in rem (Vorgabe 4,4; bei `kurz` 1,6 = Höhe eines Stabs)
 // Methoden: stabPunkt(k) → Mitte von Stäbchen k im Fenster (px). huepfe(bis, { wert, schritt, ms }) → { fertig, ueberspringe }: das Zählpfeilchen hüpft vom Anfang der
-//   Kette Stäbchen für Stäbchen bis zum Ende von Stäbchen `bis` und bleibt dort (mit `wert` als Zahl, sonst leer);
+//   Kette Stäbchen für Stäbchen bis zum Ende von Stäbchen `bis` und bleibt dort; beim Hüpfen ist sein Kärtchen leer,
+//   erst beim Einrasten am Stäbchen `bis` trägt es `wert` (sonst bleibt es leer: ein Pfeilchen zeigt nur die Perlen bis
+//   zu seinem eigenen Ort, nie das Endergebnis unterwegs);
 //   schritt(k) nach jeder Landung (z. B. eine Packung fliegt). Bei prefers-reduced-motion sofort am Ende.
 //   zeigerWeg(): das Zählpfeilchen verschwinden lassen. Eigenschaft `zeiger` ({ bis, wert } | null).
 // Flach (6.4: nichts daran ist drückbar), still (B3): bewegt sich nur in huepfe(), der Folge einer Eingabe.
@@ -249,7 +251,9 @@ export class LsPerlenkette extends HTMLElement {
       const o = g.k.ort(k * g.k.n);
       return { x: this.mass.links + o.x * this.mass.d, y: this.spitzeY(o.reihe) };
     };
-    lauf.innerHTML = `<g>${pfeil(wert === null ? "" : String(wert))}</g>`;
+    // Unterwegs leer: Das Pfeilchen zeigt, wie viele Perlen es bis zu seinem Ort sind; die Zahl kommt erst beim
+    // Einrasten am Ziel (ende), sonst stünde das Endergebnis schon unter dem ersten Stäbchen.
+    lauf.innerHTML = `<g>${pfeil("")}</g>`;
     const teil = /** @type {SVGGElement} */ (lauf.firstElementChild);
     const start = punkt(0);
     teil.setAttribute("transform", `translate(${z(start.x)} ${z(start.y)})`);
