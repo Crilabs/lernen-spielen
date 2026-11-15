@@ -17,7 +17,7 @@ und in höchstens etwa 2,5 s fertig ist, Klänge aus Web Audio, nichts ruckelt.
 - Spielordner `{{SPIELORDNER}}` aus `spiele/vorlage/` (Schritte im Kopf von `spiel.js`). Gibt es ihn schon (Neubau),
   ersetze, was der Idee widerspricht; behalte, was ihr dient (Lernsteuerung, Test-Schnittstelle, Aufgabenart).
 - Eintrag in `spiele/spiele.json` nach der Idee; Aufgaben über die Lernsteuerung, jede Aufgabe gemeldet. Die
-  `beschreibung` sagt, wie das Spiel aussieht und was gemalt und was echt ist (das Spielbild der Karte entsteht daraus).
+  `beschreibung` sagt in zwei, drei Sätzen, wie das Spiel aussieht und was passiert (das Spielbild der Karte entsteht daraus).
 - **Test-Schnittstelle** (`spiele/rahmen/pruefen.js`): `zuege()`, `richtigerZug()`, `zustand()` mit den Phasen
   laden, einfuehrung, aufgabe, folge, pause, fehler – der Prüfstand und der Filmstreifen spielen nur darüber.
 - Feste Sätze in `texte.json` (oder `einfuehrung.json`), wörtlich aus der Idee; nichts dazuerfinden.
