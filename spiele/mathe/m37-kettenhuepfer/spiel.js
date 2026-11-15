@@ -1177,7 +1177,8 @@ async function spieleRunde(vorschau) {
     raeumeAuf();
     const z = malAus(aufgabe.ziel.key);
     if (z) {
-      if (z.b !== n) leiste.setAttribute("thema", themaName(aufgabe.ziel.thema) ?? r.thema);
+      // Die Leiste nennt das Thema der Aufgabe (eine Wiederholung einer anderen Reihe kommt mit ihrer Kette).
+      leiste.setAttribute("thema", themaName(aufgabe.ziel.thema) ?? r.thema);
       await bereiteBild(z.b, aufgabe.stufe ?? "material");
     }
     const e = await spieleAufgabe(aufgabe);
