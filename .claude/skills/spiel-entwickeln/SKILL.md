@@ -58,7 +58,7 @@ cd <Hauptrepo> && node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.
 
 - `--transkripte` darf der ganze Projektordner sein: gebucht werden nur Agenten mit der Marke dieses Laufs, jeder
   nur einmal (Stand in der Ablage). Läufst du selbst als Unteragent, ist `--steuerung` dein eigenes Transkript.
-- `status: gruen` → `--audio --merge`. Das Spiel kommt als **Probe** nach `main` (`"probe": true` in
+- `status: gruen` → `--audio --spielbild --merge` (Spielbild der Karte aus Screenshots, Christian 2026-11-15). Das Spiel kommt als **Probe** nach `main` (`"probe": true` in
   `spiele/spiele.json`); fertig ist es erst, wenn Christian oder Noelia es zwei Minuten gespielt hat
   (`node werkzeuge/spielbau/freigeben.mjs <Id>`). Ein Merge geht nur als Fast-Forward und nur ohne Probelauf; meldet das Skript
   „kein Fast-Forward“: im Worktree `git merge main` (Konflikte in `spiele.json` additiv lösen), committen, dann den

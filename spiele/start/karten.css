@@ -16,6 +16,7 @@
 /* Figur des Spiels groß und mittig vor der Welt (§16, Christian), kein Knopf. */
 .karten .karte .bild .figur { position: absolute; left: 50%; bottom: 0.8rem; height: 60%; width: auto; transform: translateX(-50%); }
 .karten .karte .bild ls-objekt.figur { display: block; aspect-ratio: 1; }
+.karten .karte .bild img.spielbild { display: block; width: 100%; height: 100%; object-fit: cover; }
 .karten .karte { position: relative; }
 .karten .karte .unten { display: flex; padding: 2rem 1.6rem 2rem; min-height: 12rem; }
 .karten .karte .text { display: flex; flex-direction: column; min-width: 0; }

@@ -9,7 +9,7 @@
   ],
   "spiele": [
     { "id": "kettenhuepfer", "titel": "Kettenhüpfer", "thema": "Einmaleins", "kategorie": "mathe",
-      "symbol": "mathe/m37-kettenhuepfer/symbol.svg", "datei": "mathe/m37-kettenhuepfer/index.html",
+      "symbol": "mathe/m37-kettenhuepfer/symbol.svg", "bild": "mathe/m37-kettenhuepfer/spielbild.webp", "datei": "mathe/m37-kettenhuepfer/index.html",
       "text": "Ergebnis tippen, Lena hüpft über die Perlenkette.",
       "beschreibung": "Das Kind tippt das Ergebnis einer Malaufgabe der Reihen 2 bis 10. Lena hüpft so viele Stäbchen weit über eine Montessori-Perlenkette, wie die erste Zahl sagt, und das Pfeilchen mit der Zahl rastet an ihrem Stäbchen ein. Passt die Zahl nicht, zeigt die Kette, wo sie wirklich liegt.",
       "arten": [{ "art": "mal", "reihen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }],

@@ -16,7 +16,7 @@ const fachZeichen = (fach) => FACH_SYMBOLE.has(fach) ? `<i style="--bild:url('sy
  * Spielkarte: die ganze Karte ist der Link ins Spiel (mit ?thema). Kartenbild nach grundsaetze-bilder.md §16:
  * hinten die Welt-Vignette, vorn groß die Figur des Spiels (`karte.figur` als <ls-objekt still>); kein Knopf, kein
  * Text im Bild (Christian). Ohne Figur: das Spielsymbol groß auf der Fachtönung bzw. vor der Vignette.
- * @param {{spiel: {titel: string, datei: string, symbol: string, karte?: {figur?: string, zustand?: string}}, thema: {id: string, name: string}}} k
+ * @param {{spiel: {titel: string, datei: string, symbol: string, bild?: string, karte?: {figur?: string, zustand?: string}}, thema: {id: string, name: string}}} k
  * @param {string} fach
  * @param {string|null} vignette SVG der Welt oder null (dann Fachtönung)
  */
@@ -25,7 +25,10 @@ export function spielKarteHtml(k, fach, vignette) {
   const vorn = figur
     ? `<ls-objekt class="figur" art="${esc(figur)}"${k.spiel.karte?.zustand ? ` zustand="${esc(k.spiel.karte.zustand)}"` : ""} still aria-hidden="true"></ls-objekt>`
     : `<img class="figur" src="${esc(k.spiel.symbol)}" alt="">`;
-  const bild = `<span class="bild${vignette ? "" : " ohne"}">${vignette ?? ""}${vorn}</span>`;
+  // Spielbild (Christian, 2026-11-15): aus Screenshots erzeugt (werkzeuge/bilder/spielbild.mjs), füllt das Bildfeld.
+  const bild = k.spiel.bild
+    ? `<span class="bild"><img class="spielbild" src="${esc(k.spiel.bild)}" alt=""></span>`
+    : `<span class="bild${vignette ? "" : " ohne"}">${vignette ?? ""}${vorn}</span>`;
   return `<a class="karte spiel" href="${esc(k.spiel.datei)}?thema=${encodeURIComponent(k.thema.id)}" aria-label="${esc(`${k.spiel.titel}, ${k.thema.name}`)}" style="${farben(fach)}">`
     + `${bild}<span class="unten"><span class="text"><b>${esc(k.spiel.titel)}</b><span class="thema">${esc(k.thema.name)}</span></span></span></a>`;
 }

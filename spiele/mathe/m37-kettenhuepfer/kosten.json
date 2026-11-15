@@ -716,5 +716,53 @@
   "notiz": "Spielbau bau",
   "cache_lesen": 15020862,
   "cache_schreiben": 794225
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4622,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4622,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 302
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 5994
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4661,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4661,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 341
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6033
+  }
  }
 ]

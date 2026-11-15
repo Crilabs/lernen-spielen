@@ -3,7 +3,10 @@
 // und – nur wenn gewünscht, grün und kein Probelauf – per Fast-Forward nach main mergen. Ohne Sprachmodell.
 //
 //   node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.json [--transkripte <ordner>]… [--steuerung <sitzung.jsonl>]
-//     [--audio] [--merge] [--parken "<Grund>"]
+//     [--audio] [--spielbild] [--merge] [--parken "<Grund>"]
+//
+// --spielbild: erzeugt das Spielbild der Karte aus Screenshots des Spiels (werkzeuge/bilder/spielbild.mjs, Christian
+//   2026-11-15) und trägt es als „bild“ in spiele/spiele.json ein.
 //
 // --transkripte: Ordner mit agent-*.jsonl (Workflow- oder Unteragenten, auch ganze Projektordner); gebucht wird jedes
 //   Transkript, dessen erster Auftrag die Marke „[spielbau:<phase> <Id> <Branch>]“ dieses Laufs trägt (Phasen idee,
@@ -82,6 +85,25 @@ function main() {
     }
   }
 
+  let spielbild = "nicht verlangt";
+  if (argv.includes("--spielbild")) {
+    try {
+      execFileSync("node", ["werkzeuge/bilder/spielbild.mjs", "--spiel", L.spielordner], { cwd, encoding: "utf8", env: { ...process.env, NODE_PATH: "/private/tmp/claude-501/pw/node_modules" } });
+      const pfad = join(cwd, "spiele/spiele.json");
+      const roh = readFileSync(pfad, "utf8");
+      const bild = `"bild": "${L.fach}/${L.ordner}/spielbild.webp"`;
+      if (!roh.includes(bild)) {
+        const datei = `"datei": "${L.fach}/${L.ordner}/index.html"`;
+        if (!roh.includes(datei)) throw new Error(`kein Eintrag ${datei} in spiele.json`);
+        writeFileSync(pfad, roh.replace(datei, `${bild}, ${datei}`));
+        JSON.parse(readFileSync(pfad, "utf8"));
+      }
+      spielbild = "erzeugt";
+    } catch (e) {
+      spielbild = `nicht erzeugt: ${String(e.stderr ?? e.message).trim().split("\n").slice(-1)[0]}`;
+    }
+  }
+
   const parken = alle("--parken")[0];
   if (parken) {
     const k = join(cwd, L.spielordner, "kosten.json");
@@ -91,9 +113,9 @@ function main() {
   }
 
   // committen, was der Abschluss erzeugt hat
-  git(["add", "-A", L.spielordner, "spiele/audio"], cwd);
-  if (git(["status", "--porcelain", "--", L.spielordner, "spiele/audio"], cwd))
-    git(["commit", "-m", `chore(${L.ordner}): Spielbau-Abschluss (Kosten${argv.includes("--audio") ? ", Audio" : ""}${parken ? ", geparkt" : ""})\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`], cwd);
+  git(["add", "-A", L.spielordner, "spiele/audio", "spiele/spiele.json"], cwd);
+  if (git(["status", "--porcelain", "--", L.spielordner, "spiele/audio", "spiele/spiele.json"], cwd))
+    git(["commit", "-m", `chore(${L.ordner}): Spielbau-Abschluss (Kosten${argv.includes("--audio") ? ", Audio" : ""}${argv.includes("--spielbild") ? ", Spielbild" : ""}${parken ? ", geparkt" : ""})\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`], cwd);
 
   const kosten = summiere(join(cwd, L.spielordner, "kosten.json"), L.kostenVorher ?? 0);
   let merge = "nicht verlangt";
@@ -121,7 +143,7 @@ function main() {
   }
 
   const minuten = Math.round((Date.now() - Date.parse(L.start)) / 60000);
-  const ergebnis = { id: L.id, branch: L.branch, gebucht, audio, kosten, merge, minuten, geparkt: parken ?? null };
+  const ergebnis = { id: L.id, branch: L.branch, gebucht, audio, spielbild, kosten, merge, minuten, geparkt: parken ?? null };
   writeFileSync(join(L.ablage, "ergebnis.json"), JSON.stringify(ergebnis, null, 1));
   console.log(JSON.stringify(ergebnis));
 }
