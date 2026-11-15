@@ -64,13 +64,21 @@ async function main() {
   const basis = readFileSync(hier(`basis-${a.basis ?? "szene"}.txt`), "utf8").trim();
   const prompt = `${basis}\n\nScene: ${szene}`;
   const url = `${env.AZURE_OPENAI_ENDPOINT.replace(/\/$/, "")}/openai/deployments/${env.AZURE_OPENAI_IMAGE_DEPLOYMENT}/images/generations?api-version=${env.AZURE_OPENAI_API_VERSION}`;
-  const antwort = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "api-key": env.AZURE_OPENAI_API_KEY },
-    // Fotos der Geschichten quadratisch (docs/geschichten.md: Bild links, Text rechts; Christian 2026-11-15)
-    body: JSON.stringify({ prompt, size: a.basis === "foto" ? "1024x1024" : a.basis === "raum" ? "1024x1536" : "1536x1024", quality: "high", n: 1 }),
-  });
-  const daten = await antwort.json();
+  // Bei Ratenlimit (429) wartet das Werkzeug selbst und versucht es erneut (mehrere Bücher entstehen parallel).
+  let antwort, daten;
+  for (let versuch = 1; ; versuch++) {
+    antwort = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "api-key": env.AZURE_OPENAI_API_KEY },
+      // Fotos der Geschichten quadratisch (docs/geschichten.md: Bild links, Text rechts; Christian 2026-11-15)
+      body: JSON.stringify({ prompt, size: a.basis === "foto" ? "1024x1024" : a.basis === "raum" ? "1024x1536" : "1536x1024", quality: "high", n: 1 }),
+    });
+    daten = await antwort.json();
+    if (antwort.status !== 429 || versuch >= 8) break;
+    const warte = Math.min(90, Number(antwort.headers.get("retry-after")) || 10 * versuch) + Math.random() * 5;
+    console.error(`Ratenlimit, warte ${Math.round(warte)} s (Versuch ${versuch})`);
+    await new Promise((ok) => setTimeout(ok, warte * 1000));
+  }
   if (!antwort.ok) throw new Error(`Azure OpenAI ${antwort.status}: ${JSON.stringify(daten).slice(0, 500)}`);
   writeFileSync(ziel, Buffer.from(daten.data[0].b64_json, "base64"));
   const modell = env.AZURE_OPENAI_IMAGE_DEPLOYMENT;
