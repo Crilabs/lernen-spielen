@@ -1,5 +1,5 @@
 // Anleitungen „Mit echten Dingen“ (docs/mit-echten-dingen.md): Verzeichnis aktuell, Form jeder Datei, die Regeln
-// für den Text, soweit sie sich ohne Lesen prüfen lassen (Rest: Prüfung E1–E11 durch einen frischen Agenten).
+// für den Text, soweit sie sich ohne Lesen prüfen lassen (Rest: Prüfung E1–E12 durch einen frischen Agenten).
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -91,6 +91,20 @@ for (const a of liste) {
     assert.ok(l.titel, "Überschrift # in Alltagssprache");
     assert.ok(l.formen.length >= 1 && l.formen.length <= 3, "eine Grundform, höchstens zwei Varianten");
     assert.equal(l.vorspann.length, 0, "nichts zwischen Überschrift und erster Form");
+    // Immer auch in Bewegung (Christian, 2026-11-15): jede freigegebene oder zu prüfende Anleitung hat eine Form
+    // „In Bewegung“; zeigt sie das Prinzip nicht selbst, steht vorn „Zum Verinnerlichen“ mit dem Namen der Form,
+    // die zuerst kommt (erst verstehen, dann verinnerlichen).
+    if (!l.kopf.geparkt) assert.ok(l.formen.some((f) => f.situation === "bewegung"), "eine Form „In Bewegung“");
+    for (const f of l.formen) {
+      const absatz = f.bloecke.filter((b) => b.typ === "p").map((b) => /** @type {any} */ (b).text);
+      const marke = absatz.findIndex((t) => /^\*\*Zum Verinnerlichen:\*\*/.test(t));
+      if (marke < 0) continue;
+      assert.equal(f.situation, "bewegung", `${f.name}: „Zum Verinnerlichen“ nur bei „In Bewegung“`);
+      assert.equal(marke, 0, `${f.name}: „Zum Verinnerlichen“ steht vorn`);
+      const andere = l.formen.filter((g) => g !== f);
+      assert.ok(andere.length >= 1, `${f.name}: zum Verinnerlichen braucht es eine Form zum Verstehen`);
+      assert.ok(andere.some((g) => absatz[0].includes(`„${g.name}“`)), `${f.name}: nennt die Form zum Verstehen in „…“`);
+    }
     for (const f of l.formen) {
       const p = f.bloecke.filter((b) => b.typ === "p").map((b) => /** @type {any} */ (b).text);
       assert.ok(p.some((t) => /^Ihr braucht: \S/.test(t)), `${f.name}: „Ihr braucht:“`);

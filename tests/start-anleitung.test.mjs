@@ -56,3 +56,13 @@ test("anleitungHtml: ohne Wunsch die erste Form; eine Form ohne Wahl", () => {
 test("einzeilerHtml: Name und Einzeiler, escaped", () => {
   assert.equal(einzeilerHtml("A<b", "x & y"), '<h1>A&lt;b</h1><p class="einzeiler">x &amp; y</p>');
 });
+
+test("Form zum Verinnerlichen: „Zum Verinnerlichen“ steht als „Erst verstehen, dann verinnerlichen“ vor „Ihr braucht“", () => {
+  const a = liesAnleitung("# T\n\n## Am Tisch: Teller\n\nIhr braucht: Teller\n\n1. a\n2. b\n\n**Darauf kommt es an:** K\n\n## In Bewegung: Hüpfen\n\n**Zum Verinnerlichen:** Spielt erst „Teller“.\n\nIhr braucht: Platz\n\n1. a\n2. b\n\n**Darauf kommt es an:** K");
+  const t = formTeile(a.formen[1]);
+  assert.equal(t.verinnerlichen, "Spielt erst „Teller“.");
+  assert.deepEqual(t.weiteres, []);
+  const h = anleitungHtml(a, "bewegung");
+  assert.match(h, /<p class="form-name">Hüpfen<\/p><section class="verinnerlichen"><h2>Erst verstehen, dann verinnerlichen<\/h2><p>Spielt erst „Teller“\.<\/p><\/section><section class="braucht">/);
+  assert.equal(formTeile(a.formen[0]).verinnerlichen, "");
+});

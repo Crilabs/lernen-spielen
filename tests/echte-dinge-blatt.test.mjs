@@ -42,3 +42,9 @@ test("Blatt: Namen werden escaped", () => {
 test("Titel des Dokuments beim Drucken (Dateiname des PDFs)", () => {
   assert.equal(blattTitel("Die 2 zerlegen"), "Mit echten Dingen – Die 2 zerlegen");
 });
+
+test("Blatt: „Zum Verinnerlichen“ steht als „Erst verstehen, dann verinnerlichen“ vorn in der Form", () => {
+  const a = liesAnleitung("# T\n\n## In Bewegung: Hüpfen\n\n**Zum Verinnerlichen:** Spielt erst „Teller“.\n\nIhr braucht: Platz\n\n1. a\n2. b\n\n**Darauf kommt es an:** K\n\n**Leichter:** l **Schwerer:** s");
+  const h = blattHtml({ name: "N", titel: "", fach: "mathe", formen: a.formen });
+  assert.match(h, /<div class="links"><p class="verinnerlichen"><b>Erst verstehen, dann verinnerlichen:<\/b> Spielt erst „Teller“\.<\/p>/);
+});

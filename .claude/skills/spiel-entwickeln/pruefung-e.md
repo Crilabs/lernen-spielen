@@ -35,8 +35,12 @@ spiele/objekte/<figur>.js`) und mit den Bildern der anderen Anleitungen des Fach
 | E9 | Methode laut Recherche wirksam für dieses Thema (Quelle im Kopf); die Handlung ist praxisnah und hat einen Zweck über das Üben hinaus |
 | E10 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
 | E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
+| E12 | In Bewegung: da; jede Bewegung trägt den Inhalt; zeigt sie das Prinzip nicht selbst, steht vorn „Zum Verinnerlichen“ mit der Form zum Verstehen; sicher, ohne Wettlauf |
 
-**Grün heißt:** alle elf grün, kein kritischer Befund. Im Zweifel rot.
+E9 bei einer Form zum Verinnerlichen: Spaß an der Bewegung und Behalten genügen; den Alltagszweck trägt die Form zum
+Verstehen.
+
+**Grün heißt:** alle zwölf grün, kein kritischer Befund. Im Zweifel rot.
 
 Schreib deine Antwort außerdem unverändert in die Datei `{{BERICHT}}` (außerhalb des Arbeitsordners; die einzige
 Datei, die du schreibst).
@@ -48,7 +52,7 @@ Ergebnis: GRÜN | ROT
 
 | Nr. | grün/rot | Beleg (Zitat aus der Datei mit Zeile) | Befund, falls rot |
 |---|---|---|---|
-… eine Zeile je Kriterium E1 bis E11
+… eine Zeile je Kriterium E1 bis E12
 
 Kritische Befunde:
 - <Befund> – <Beleg> – <was es lösen würde>   (oder „keine“)

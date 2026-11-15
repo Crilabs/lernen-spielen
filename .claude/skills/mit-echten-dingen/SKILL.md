@@ -1,6 +1,6 @@
 ---
 name: mit-echten-dingen
-description: Schreibt für Themen des Lernplans ohne vorhandene Anleitung ein kurzes Spiel „Mit echten Dingen“ (spiele/mit-echten-dingen/<fach>/<thema>.md) – Recherche, Ideen, Schreiben, Bild, Prüfung E1–E11 durch einen frischen Agenten, höchstens drei Runden, dann Datei, Verzeichnis und Kosten. Aufruf „Mit echten Dingen <thema-id> [<thema-id> …]“; der Skill „Spiel entwickeln“ startet ihn parallel zum Spiel, für dessen Themen nacheinander.
+description: Schreibt für Themen des Lernplans ohne vorhandene Anleitung ein kurzes Spiel „Mit echten Dingen“ (spiele/mit-echten-dingen/<fach>/<thema>.md) – Recherche, Ideen, Schreiben, Bild, Prüfung E1–E12 durch einen frischen Agenten, höchstens drei Runden, dann Datei, Verzeichnis und Kosten. Aufruf „Mit echten Dingen <thema-id> [<thema-id> …]“; der Skill „Spiel entwickeln“ startet ihn parallel zum Spiel, für dessen Themen nacheinander.
 ---
 
 # Mit echten Dingen
@@ -44,7 +44,14 @@ Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Am Tisch / I
 
 3–5 Ansätze mit Dingen, die in jedem Haushalt da sind (Besteck, Wäscheklammern, Socken, Nudeln, Knöpfe ab 6, Papier,
 Stift, Würfel, Treppe, Spaziergang). Einen wählen, nach Wirksamkeit laut Recherche und Praxisnähe, nicht nach
-Originalität; Begründung und verworfene Ansätze in den Bericht, **nicht** in die Datei. Varianten nur, wo eine Situation das Thema wirklich trifft (lieber eine gute Form als drei erzwungene).
+Originalität; Begründung und verworfene Ansätze in den Bericht, **nicht** in die Datei. Varianten Am Tisch / Unterwegs
+nur, wo eine Situation das Thema wirklich trifft (lieber eine gute Form als drei erzwungene).
+
+**In Bewegung immer:** 2–3 Bewegungsideen (hüpfen, klatschen, stampfen, Buchstaben ablaufen, Dinge im Haus suchen,
+Treppe, Kissen als Felder). Zuerst fragen: Zeigt eine Bewegung das Prinzip selbst (dann zum Verstehen, ohne Marke,
+gern als Grundform)? Sonst eine wählen, die das Verstandene festigt, mit `**Zum Verinnerlichen:** Spielt zuerst
+„<Name der Form zum Verstehen>“. …` als erstem Absatz der Form. Jede Bewegung trägt den Inhalt; kein Wettlauf, keine
+Zeit, nichts Gefährliches.
 
 ## 3. Schreiben
 
@@ -71,6 +78,9 @@ Ihr braucht: <Dinge>
 **Leichter:** <…> **Schwerer:** <…>
 ```
 
+Die Form `## In Bewegung: …` fehlt nie; zum Verinnerlichen beginnt sie vor „Ihr braucht“ mit
+`**Zum Verinnerlichen:** Spielt zuerst „<Name>“. Dieses Spiel hilft, <Kern> zu behalten.`
+
 Regeln: Anrede „ihr“, kurze Sätze, Alltagswörter, höchstens etwa 120 Wörter je Form, etwa 5 Minuten, jederzeit
 beendbar, nichts zu basteln oder zu kaufen, nichts Gefährliches. Kein Lob, keine Bewertung, kein Abfragen, kein Druck,
 kein „schnell“ (§3.2), keine Rollen nach Geschlecht, Familien in ihrer Vielfalt, Essen ohne Moral. Fachbegriffe nach
@@ -94,7 +104,7 @@ fehlt es, als `spiele/objekte/<art>.js` zeichnen (Schnittstelle und Stil: `docs/
 keine Ziffern, keine Lernzeichen; an der Silhouette von den Bildern der anderen Anleitungen des Fachs zu unterscheiden.
 Im Kopf `bild: { figur: <art>, zustand: <zustand> }`. Die Hand als Zeichen „echt“ setzt die Karte selbst.
 
-## 4. Prüfung E1–E11 (frischer Agent)
+## 4. Prüfung E1–E12 (frischer Agent)
 
 Ein **neuer Agent, der nicht geschrieben hat**, bekommt nur: die Datei, den Lernplan-Eintrag des Themas,
 `docs/mit-echten-dingen.md`, `docs/grundsaetze.md` und das Objekt aus `bild` (nicht die Ideen, nicht diesen Bericht). Auftrag: je Kriterium
@@ -113,8 +123,15 @@ Ein **neuer Agent, der nicht geschrieben hat**, bekommt nur: die Datei, den Lern
 | E9 | Methode laut Recherche wirksam für dieses Thema (Quelle im Kopf); die Handlung ist praxisnah und hat einen Zweck über das Üben hinaus |
 | E10 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
 | E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
+| E12 | In Bewegung: da; jede Bewegung trägt den Inhalt; zeigt sie das Prinzip nicht selbst, steht vorn „Zum Verinnerlichen“ mit der Form zum Verstehen; sicher, ohne Wettlauf |
 
-Grün heißt: alle elf grün, kein kritischer Befund. Rot → überarbeiten und mit einem **wieder neuen** Prüfer prüfen,
+E9 für eine Form zum Verinnerlichen: Spaß an der Bewegung und Behalten genügen als Zweck; den Alltagszweck trägt die
+Form zum Verstehen.
+
+**Nachrüsten** (Anleitung ohne In Bewegung, z. B. nach einer Regeländerung): nur §2 (Bewegung) und §3 für die neue Form,
+Kopf, Bild und übrige Formen bleiben; geprüft wird die ganze Datei, mit Schwerpunkt E1, E4, E5, E8, E10, E12.
+
+Grün heißt: alle zwölf grün, kein kritischer Befund. Rot → überarbeiten und mit einem **wieder neuen** Prüfer prüfen,
 **höchstens 3 Runden**. Bleibt es rot: Datei nicht anlegen (bzw. mit `entwurf: true` und `geparkt: true` im Kopf
 liegen lassen) und die Befunde an Christian melden.
 
@@ -142,7 +159,7 @@ node werkzeuge/kosten/transkript.mjs "$T" --ordner spiele/mit-echten-dingen --ph
    "claude-sonnet-5-5", eingabe: 41000, ausgabe: 3200, menge: 44200, einheit: "tokens", thema: ["zerlegen-7"],
    notiz: "zerlegen-7" }` (Modell und Token aus der Agenten-Rückmeldung).
 3. Bericht (an den Aufrufer): Thema, gewählte Idee mit Begründung, verworfene Ideen, Prüfergebnis je Runde
-   (E1–E11 mit Beleg), Kosten.
+   (E1–E12 mit Beleg), Kosten.
 
 ## Was die App damit macht
 
