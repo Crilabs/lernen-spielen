@@ -29,14 +29,14 @@ Die PIN bleibt in jedem Fall erhalten. Die Lernstände der entfernten Spiele üb
 
 - Zu vielen Themen gibt es Spiele für den Alltag mit Dingen, die im Haus sind (zum Beispiel Schuhe in Paaren, Tisch decken, Eierkartons, Silben klatschen): eine eigene Seite mit Schritten, „Darauf kommt es an“ und den Umschaltern Leichter und Schwerer. 27 Anleitungen sind fertig (Einmaleins und Teilen, Zerlegen, Weiterzählen, Silben, Großschreibung, der/die/das); für andere Themen steht ein Satz als Anregung.
 - Erreichbar über die Karten auf der Startseite, die Fach-Seite und die Pause im Spiel. Ohne PIN, weil es zum gemeinsamen Machen gehört; es zählt nicht zum Lernstand und nicht zur Spielzeit.
-- Im Elternbereich unter „Mit echten Dingen“: woran das Kind gerade ist und was dazu passt, je Thema als Blatt zum Drucken (auch „Als PDF sichern“).
+- Im Elternbereich steht die Anleitung beim Thema im Lernplan, mit dem Knopf „PDF“: ein Blatt mit allen Formen zum Drucken (auch „Als PDF sichern“). Die eigene Übersichtsseite entfällt.
 
 **Für Erwachsene (Elternbereich)**
 
-- **Lernplan:** alle Themen eines Fachs als Baum, farbig nach Stand, mit Filter. Ein Thema lässt sich abhaken (seine Voraussetzungen werden mit abgehakt), zurücksetzen oder freigeben; Eingriffe fragen erst „Wirklich?“. Je Fach eine kurze Beschreibung jedes Spiels zum Aufklappen.
+- **Lernplan:** alle Themen eines Fachs als Baum, farbig nach Stand, mit den Filtern Alle, Gerade dran, Als Nächstes, Gekonnt und Offen; „Alles ausklappen“ je Fach. Ein Thema lässt sich abhaken (seine Voraussetzungen werden mit abgehakt), zurücksetzen oder freigeben; Eingriffe fragen erst „Wirklich?“. Ein aufgeklapptes Thema zeigt, was davor noch offen ist, und seine Spiele als Karten: digitale mit Kurzbeschreibung, „Mit echten Dingen“ mit Bild, das die Anleitung öffnet. Je Fach eine Beschreibung jedes Spiels zum Aufklappen.
 - **Spielzeit:** Tage, Minuten je Tag und je Woche und ein Zeitfenster (frühester Beginn, spätestes Ende); digitale Spiele lassen sich ganz ausblenden, eine Zugabe von 15 Minuten geht für heute. Ist die Zeit um, spielt das Kind die laufende Runde zu Ende; danach zeigt die Startseite keine Spielkarten mehr. Startseite, Regal und „Mit echten Dingen“ sind nie gesperrt. Im Standard ist alles aus.
 - **Geschichten:** wie aufregend Geschichten sein dürfen (Ruhig, Sanft – Standard –, Abenteuer), mit einem Beispielsatz je Stufe.
-- **Gerät:** installierte Version und „Nach Updates suchen“. Update, „App beenden“ und Kiosk gibt es nur dort, wo das Gerät sie kann (Windows-Kiosk).
+- **Updates:** installierte Version und „Nach Updates suchen“. Update, „App beenden“ und Kiosk gibt es nur dort, wo das Gerät sie kann (Windows-Kiosk).
 - **Hinweise** (Stimme, Sicherheit, Themen ohne Spiel) und **Sicherheit** (PIN ändern, Protokoll).
 - <!-- Elternbereich: Christians letzte Änderungen ergänzen -->
 

@@ -76,7 +76,8 @@ Gleich nach dem Neustart, bevor das Kind spielt (Schritte wie in `CHANGELOG.md`,
 
 ## 7. Elternbereich
 
-- [ ] **Lernplan:** Fächer als Baum, Farbe nach Stand, Filter umschalten; unter Mathe die Beschreibung des Kettenhüpfers aufklappen.
+- [ ] **Lernplan:** Fächer als Baum, Farbe nach Stand, Filter umschalten (Gerade dran, Als Nächstes, Gekonnt, Offen), „Alles ausklappen“; ein Thema aufklappen; unter Mathe die Beschreibung des Kettenhüpfers aufklappen.
+  *Du siehst:* im aufgeklappten Thema „Davor noch offen“ (mit Sprung), die Spiele als Karten mit Bild und Kurzbeschreibung.
   *Du siehst:* ruhiger Text für Erwachsene, keine Prozente; Abhaken, Zurücksetzen, Freigeben fragen erst „Wirklich?“.
 - [ ] **Spielzeit:** einen Tag sperren bzw. „Höchstens“ auf wenige Minuten, Zeitfenster so, dass das Ende in 5 Minuten ist.
   *Du siehst:* die Änderung steht sofort unter „Heute“.
@@ -86,7 +87,7 @@ Gleich nach dem Neustart, bevor das Kind spielt (Schritte wie in `CHANGELOG.md`,
   *Du siehst:* keine Spielkarten. Zugabe (15 Minuten) im Elternbereich geben: die Karten sind wieder da. Danach Spielzeit wieder auf den Wunsch der Familie einstellen (Standard: alles aus).
 - [ ] **Geschichten:** Ruhig wählen, dann wieder Sanft.
   *Du siehst:* „Eingestellt: …“; die Einführung des Kettenhüpfers erzählt bei Ruhig ohne Aufregung.
-- [ ] **Gerät:** Version.
+- [ ] **Updates:** Version.
   *Du siehst:* „1.0.0“; „Nach Updates suchen“ meldet, dass die App aktuell ist.
 - [ ] **Hinweise** und **Sicherheit** öffnen; PIN ändern und wieder zurück ändern; Protokoll ansehen.
   *Du siehst:* der Hinweis zur Stimme nennt Microsoft Azure und dass beim Spielen nichts ins Internet geht; im Protokoll keine roten Fehler aus dieser Sitzung.
@@ -98,7 +99,7 @@ Gleich nach dem Neustart, bevor das Kind spielt (Schritte wie in `CHANGELOG.md`,
 
 - [ ] Nach der ersten Kettenhüpfer-Runde: Startseite → Karte „Mit echten Dingen“.
   *Du siehst:* die Anleitung zum Thema, das dran ist, mit Bild, Schritten, „Darauf kommt es an“, Leichter/Schwerer; ohne PIN; zählt nicht zur Spielzeit.
-- [ ] Elternbereich → „Mit echten Dingen“: ein Thema aufklappen und drucken („PDF“).
+- [ ] Elternbereich → Lernplan → Mathe: das Thema, das dran ist, aufklappen, die Karte „Mit echten Dingen“ antippen, dann „PDF“.
   *Du siehst:* der Windows-Druckdialog mit **einem** A4-Blatt (alle Formen, ohne graue Flächen); „Microsoft Print to PDF“ oder ein Drucker funktioniert. Danach ist die App wieder im Vollbild.
 
 ## 9. Ton und Stimme
