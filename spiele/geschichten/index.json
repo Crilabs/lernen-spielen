@@ -3,14 +3,14 @@
   "geschichten": [
     {
       "id": "haustiere",
-      "titel": "Mia zieht ein",
-      "art": "sachgeschichte",
+      "titel": "Mia, die kleine Wildkatze",
+      "art": "sachbuch",
       "welt": "haustiere",
       "familie": null
     },
     {
       "id": "zehnerpaare",
-      "titel": "Zehn Meisen, zwei Zweige",
+      "titel": "Zehn Gäste, zwei Häuser",
       "art": "struktur",
       "welt": null,
       "familie": "zehnerpaare"

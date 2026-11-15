@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { pruefeTexte, inSaetze, satzGrenzeGeschichte, satzGrenzeBuch } from "../werkzeuge/spielbau/texte.mjs";
+import { pruefeTexte, inSaetze, satzGrenze, satzGrenzeGeschichte, satzGrenzeBuch } from "../werkzeuge/spielbau/texte.mjs";
 
 const { pruefeSzene, paarLage, hausSvg, artDes, ELEMENTE } = await import("../spiele/rahmen/szene.js");
 const { laenge } = await import("../spiele/rahmen/perlen-geometrie.js");
@@ -72,8 +72,10 @@ function pruefeGeschichte(g, ordner) {
   // Eine Fassung je Geschichte, keine Stufen (Christian 2026-11-15)
   if ("fassung" in g || "fassungVon" in g) f.push("fassung/fassungVon gibt es nicht mehr (eine Fassung je Geschichte)");
   const seiten = Array.isArray(g.seiten) ? g.seiten : [];
-  // Vorlesebuch-Maß (Christian 2026-11-15)
-  if (seiten.length < 10 || seiten.length > 14) f.push(`${seiten.length} Seiten (10–14)`);
+  // Maß: Sachgeschichte als Vorlesebuch (10–14, 2–4 Sätze); gezeichnete Lerngeschichte kurz vor dem Spiel (6–10, 1–3)
+  const lern = g.art !== "sachgeschichte";
+  const [minS, maxS, minSatz, maxSatz] = lern ? [6, 10, 1, 3] : [10, 14, 2, 4];
+  if (seiten.length < minS || seiten.length > maxS) f.push(`${seiten.length} Seiten (${minS}–${maxS})`);
   const fragen = seiten.filter((s) => s?.frage === true).length;
   if (fragen > 1) f.push(`${fragen} Fragen (höchstens eine)`);
   if (seiten.at(-1)?.frage) f.push("Frage auf der letzten Seite (Auflösung fehlt)");
@@ -81,7 +83,7 @@ function pruefeGeschichte(g, ordner) {
     const wo = `Seite ${i + 1}`;
     if (typeof s?.text !== "string" || !s.text.trim()) return void f.push(`${wo}: text fehlt`);
     const n = inSaetze(s.text).length;
-    if (n < 2 || n > 4) f.push(`${wo}: ${n} Sätze (2–4)`);
+    if (n < minSatz || n > maxSatz) f.push(`${wo}: ${n} Sätze (${minSatz}–${maxSatz})`);
     if ("sprich" in s && typeof s.sprich !== "string") f.push(`${wo}: sprich ist kein Text`);
     const hatBild = typeof s.bild === "string", hatSzene = Array.isArray(s.szene);
     if (hatBild === hatSzene) f.push(`${wo}: genau eins von bild oder szene`);
@@ -101,7 +103,7 @@ function pruefeGeschichte(g, ordner) {
     }
   });
   const texte = seiten.flatMap((s) => [s?.text, s?.sprich]).filter((t) => typeof t === "string");
-  const r = pruefeTexte(texte, { klasse: g.klasse, grenze: satzGrenzeGeschichte(g.klasse) });
+  const r = pruefeTexte(texte, { klasse: g.klasse, grenze: lern ? satzGrenze(g.klasse) : satzGrenzeGeschichte(g.klasse) });
   f.push(...r.rot, ...r.hinweise.filter((h) => h.startsWith("§3 Satz")));
   return f;
 }
@@ -133,11 +135,12 @@ test("pruefeGeschichte findet Verstöße", () => {
   assert.match(f({ art: "roman" }), /art/);
   assert.match(f({ familie: "gibt-es-nicht" }), /familie/);
   const neun = Array(9).fill(seite);
-  assert.match(f({ seiten: neun }), /9 Seiten/);
-  assert.match(f({ seiten: Array(15).fill(seite) }), /15 Seiten/);
+  // Lerngeschichte (gezeichnet, kurz vor dem Spiel): 6–10 Seiten, 1–3 Sätze
+  assert.match(f({ seiten: Array(5).fill(seite) }), /5 Seiten \(6–10\)/);
+  assert.match(f({ seiten: Array(11).fill(seite) }), /11 Seiten \(6–10\)/);
   assert.match(f({ seiten: [...Array(8).fill(seite), { ...seite, frage: true }, { ...seite, frage: true }] }), /2 Fragen/);
   assert.match(f({ seiten: [...neun, { ...seite, frage: true }] }), /letzten Seite/);
-  assert.match(f({ seiten: [...neun, { text: "Ela legt.", szene: [] }] }), /1 Sätze/);
+  assert.match(f({ seiten: [...neun, { text: "Ela legt. Kofi legt. Lena legt. Timo legt.", szene: [] }] }), /4 Sätze \(1–3\)/);
   assert.match(f({ seiten: [...neun, { text: "Ela legt. Kofi legt. Lena legt. Timo legt. Mia schaut.", szene: [] }] }), /5 Sätze/);
   assert.match(f({ seiten: [...neun, { text: "Ela und Kofi legen heute am Abend sehr viele bunte Perlen. Gut.", szene: [] }] }), /Wörtern/);
   assert.match(f({ seiten: [...neun, { text: "Ela legt. Kofi legt.", bild: "fehlt.webp" }] }), /fehlt/);
@@ -194,28 +197,33 @@ test("szene: Haus mit und ohne Vorhang", () => {
 
 // --- Lerngeschichte Zehnerpaare -----------------------------------------------------------------------------
 
-test("Zehnerpaare: jedes gezählte Foto zeigt zehn Tiere, die Paare der Reihe nach, die Frage wird aufgelöst, am Ende alle fünf Paare", () => {
+test("Zehnerpaare: jedes Bild zeigt genau zehn Perlen, die Frage wird aufgelöst, am Ende alle fünf Paare", () => {
   const g = geschichten.find((x) => x.ordner === "zehnerpaare")?.g;
   assert.ok(g, "spiele/geschichten/zehnerpaare/geschichte.json fehlt");
   assert.equal(g.art, "struktur");
   assert.equal(g.familie, "zehnerpaare");
-  assert.ok(g.klasse <= 2 && satzGrenzeGeschichte(g.klasse) === 10);
-  assert.ok(Array.isArray(g.quellen) && g.quellen.length, "das Tierwissen braucht quellen");
+  assert.ok(g.klasse <= 2 && satzGrenze(g.klasse) === 8);
   const gesehen = [];
   g.seiten.forEach((s, i) => {
-    if (s.zaehlung) {
-      assert.equal(s.zaehlung[0] + s.zaehlung[1], 10, `Seite ${i + 1}: ${s.zaehlung} sind nicht zehn`);
-      if (s.verdeckt === undefined) gesehen.push(s.zaehlung.join("+"));
+    for (const b of s.szene ?? []) {
+      if (b.haeuser) {
+        const summe = b.haeuser[0] + b.haeuser[1];
+        assert.ok(summe === 10 || summe === 0, `Seite ${i + 1}: ${b.haeuser} sind nicht zehn`);
+        if (summe === 10 && b.zu === undefined) gesehen.push(b.haeuser.join("+"));
+      }
+      if (b.paare) for (const [a, c] of b.paare) assert.equal(a + c, 10, `Seite ${i + 1}: ${a}+${c}`);
+      if (b.perlen) assert.equal(b.perlen.reduce((x, y) => x + y, 0), 10, `Seite ${i + 1}: Perlen`);
     }
-    for (const b of s.szene ?? []) if (b.paare) for (const [a, c] of b.paare) assert.equal(a + c, 10, `Seite ${i + 1}: ${a}+${c}`);
   });
   assert.deepEqual([...new Set(gesehen)], ["1+9", "2+8", "3+7", "4+6", "5+5"], "die Paare der Reihe nach");
   const f = g.seiten.findIndex((s) => s.frage);
-  assert.ok(f > 0 && [0, 1].includes(g.seiten[f].verdeckt), "auf der Frage-Seite ist eine Seite verdeckt");
-  assert.deepEqual(g.seiten[f + 1].zaehlung, g.seiten[f].zaehlung, "die nächste Seite zeigt dasselbe Paar");
-  assert.equal(g.seiten[f + 1].verdeckt, undefined, "aufgelöst: nichts mehr verdeckt");
-  const letzte = g.seiten.at(-1);
-  assert.deepEqual(letzte.szene?.find((b) => b.paare)?.paare, [[1, 9], [2, 8], [3, 7], [4, 6], [5, 5]], "Schluss gezeichnet: alle fünf Paare");
+  const frage = g.seiten[f].szene.find((b) => b.haeuser);
+  const aufloesung = g.seiten[f + 1].szene.find((b) => b.haeuser);
+  assert.equal(typeof frage.zu, "number", "auf der Frage-Seite ist ein Vorhang zu");
+  assert.deepEqual(aufloesung.haeuser, frage.haeuser, "die nächste Seite zeigt dieselben Häuser offen");
+  assert.equal(aufloesung.zu, undefined);
+  const paare = g.seiten.flatMap((s) => s.szene ?? []).find((b) => b.paare)?.paare;
+  assert.deepEqual(paare, [[1, 9], [2, 8], [3, 7], [4, 6], [5, 5]]);
   // Erzähler in der dritten Person, kein „X ist Y“ zwischen Zahlen (spielbau.md §8)
   for (const s of g.seiten) {
     assert.doesNotMatch(s.text, /\b(ich|wir|mein)\b/i, s.text);
@@ -250,7 +258,7 @@ test("Kulissen: jede Geschichte wählt eine bekannte Kulisse", () => {
 test("pruefeGeschichte findet Verstöße (Sachbuch)", () => {
   const satz = "Eine Katze sieht in der Dämmerung viel mehr als wir Menschen.";   // 11 Wörter
   const text = Array(7).fill(satz).join(" ");                                 // 77 Wörter
-  const seite = { text, bild: "../haustiere/bilder/01.webp" };
+  const seite = { text, bild: "../haustiere/bilder/03-02.webp" };
   const kapitel = (n = 4) => ({ titel: "Augen", seiten: Array(n).fill(seite) });
   const gut = { id: "probe", titel: "Probe", art: "sachbuch", welt: "haustiere", familie: null, klasse: 1, kulisse: "im-haus",
     quellen: [{ fakt: "Katzen sehen in der Dämmerung gut.", quelle: "https://example.org, abgerufen 2026-11-15" }],

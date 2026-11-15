@@ -1,57 +1,67 @@
-# Prüfung – Mia zieht ein
+# Prüfung – Mia, die kleine Wildkatze (Sachbuch)
 
-Geprüft am 2026-11-15. Ersetzt „Ein Tag mit Mia, der Katze“: Christian fand sie wie ein Lernbuch („Katzen fressen vor
-allem Fleisch“), ohne Gefühl und spannende Details. Neu erzählt nach `docs/geschichten.md` §2 (Schreibverfahren).
+Stand 2026-11-15. Ersetzt „Mia zieht ein“: Christian fand sie zu kurz („wie ein Kinderbuch für 3-Jährige“) und mit zu
+wenig Wissenswertem über Katzen. Neu nach `docs/geschichten.md` §2a: erst Lerninhalte, dann Form, dann Text.
 
-## 1. Recherche
+## 1. Inhalte und Form
 
-Die ersten Tage einer Katze im neuen Zuhause; alle Tatsachen mit Quelle in `quellen`. Verworfen bzw. abgeschwächt:
-„Schnurrhaare messen, ob der Körper durchpasst“ (nicht belegt, eher Mythos → „berühren die Wände, so findet sie den
-Weg“); „Katzen lieben Kartons“ (umgangssprachlich → „in einer engen Kiste fühlt sie sich wohl“, Vinke 2014);
-„Katze erkundet nachts“ (nicht wörtlich belegt → Dämmerung, Katzen sind dämmerungsaktiv).
+- Lerninhalte in `inhalte.md` (Lehrplan Bayern HSU 1/2: „gehen mit Haustieren verantwortungsvoll um, auch zu ihrem
+  eigenen Schutz“; Kindersachbücher und Kinderseiten als Maßstab; 44 Quellen; Mythen verworfen).
+- **Prüfer A** (frisch) zu `inhalte.md`: frühe Stopp-Zeichen beim Streicheln ergänzt (Kinder werden beim Streicheln
+  gekratzt, nicht bei einer fauchenden Katze), fremde Katzen, Kratzer zeigen, nie mit Händen spielen, Fäden wegräumen,
+  weichere Formulierungen (Milch, Gras, Impfen), sechs Kapitel. Alles eingearbeitet.
+- **Form: Sachbuch**, weil die Inhalte keine natürliche Handlung haben; Mia (Maliks Katze) ist das durchgehende Beispiel,
+  an dem jede Tatsache sichtbar wird. 6 Kapitel, 32 Seiten, 2.472 Wörter, drei Fragen (Kap. 2, 4, 5).
 
-## 2. Urteil des frischen Prüfers (Zusammenfassung)
+## 2. Prüfer B (frisch, gegen `inhalte.md`)
 
-- **Geschichte, kein Sachtext**: Bogen Ankunft → Verstecken → vorsichtig erkunden → erstes Hallo → Verschwinden →
-  Finden → Nähe; Malik mit Wunsch (streicheln), eingelöst auf der letzten Seite.
-- **Umgesetzte Befunde**: Zeitablauf war 1,5 Tage, die Eingewöhnung dauert Wochen → „Nach ein paar Tagen“, „Viele Tage
-  später“. Lernbuch-Sätze ersetzt (S. 7 Duft, S. 8 „X ist Y“, S. 12, S. 13 mit Malik). Malik zeigt Gefühl (S. 10 „Sein
-  Herz klopft“). S. 5 ohne „leuchtende Augen im Dunkeln“ (Angst-Auslöser „glühende Augen“).
-- **Wissen, das am meisten trägt**: Schwanz hoch (S. 8) und langsames Blinzeln (S. 9) – kann das Kind an echten Katzen
-  ausprobieren; Karton (S. 10–12) durch die Vorhersage.
-- **Spannung**: „Mia ist verschwunden“ passt zur Stufe Sanft (kleine Komplikation zu Hause, sofort gelöst); auf dem
-  Foto von S. 10 sieht man schon die Schwanzspitze im Karton (Wissensvorsprung).
-- **Fassungen**: `ruhig` nötig (S. 5 Halbdunkel und S. 10 Verschwinden widersprechen „keine Komplikation, kein
-  Dunkel“) → `haustiere-ruhig`. `abenteuer` nicht nötig (Stufe für 8–10 Jahre, Stoff für Kl. 1; Nutzen ohne Bildkosten
-  nicht gegeben).
+Kein [muss]. Umgesetzt: Zähne/Verwandtschaft genauer (auch Hunde haben Eckzähne), Herkunft „warme, trockene Länder“
+statt „Afrika“, Schnurren im Hals statt Bauch, „lauern“ an die richtige Stelle, offenere Frage („Was macht Mia in der
+Luft?“ statt „Rücken oder Pfoten“, die den Mythos halb bestätigte), fehlende Umgangsregeln (Schwanz, Augen/Ohren/Maul,
+Ecke), Listen als Szenen (Morgen mit Mia, Einzug, Kratzer-Erlebnis), Mia im Kapitel Katzenkinder, Kinn bleibt trocken,
+Ball, Haare würgen. Gestrichen, weil ohne Quelle: „springen das letzte Stück“, „passen in eine Hand“, „kann schon ein
+Kätzchen“. Stärkste Stellen laut Prüfer: Schneespur „wie Perlen an einer Schnur“, Wassertürmchen, Rascheln mit Papier,
+„riecht nach Familie“, Stopp-Zeichen als Szene.
 
 ## 3. Bilder
 
-Jedes Bild mit dem Read-Werkzeug angesehen. Maßstab: zeigt die Kernaussage des Abschnitts, Körperbau stimmt, Mia
-überall dieselbe Katze (rot-weiß getigert, weiße Brust, weißes Maul, vier weiße Pfoten, bernsteinfarbene Augen – steht
-wörtlich in jedem Prompt), Malik nur mit Händen, Armen, Beinen (dunkle Haut), ruhig, hell, keine Schrift.
-1024 × 1024 `--basis foto`, WebP `cwebp -q 82`; Prompts in `bilder/herkunft.json`.
+Je Seite die Kernaussage; jedes Bild mit dem Read-Werkzeug angesehen. Mias Steckbrief wörtlich in jedem Prompt
+(rot-weiß getigert, weiße Brust, weißes Maul, vier weiße Pfoten, bernsteinfarbene Augen); Malik nur Hände, Arme, Beine
+(dunkle Haut). 1024 × 1024 `--basis foto`, WebP q 82; Prompts in `bilder/herkunft.json`.
 
-| Bild | Kernaussage | was stimmt | Herkunft |
+| Seite | Kernaussage | Herkunft | geprüft |
 |---|---|---|---|
-| 01 | offene Box in ruhiger Ecke, Mia bleibt drin | Transportbox, Tür offen, Mia sitzt hinten auf der Decke, wach | neu, 1 Versuch |
-| 02 | Mia unter dem Sofa, nur Kopf und Pfoten | geduckt unter dem Sofa, große Augen, hell | neu, 1 |
-| 03 | Malik wartet still auf Abstand | Kind sitzt, Hände gefaltet, Mia schaut unter dem Sofa hervor | neu, 1 |
-| 04 | Ohren in verschiedene Richtungen | ein Ohr nach vorn, eins seitlich gedreht | neu, 1 |
-| 05 | Mia läuft sicher im Lampenlicht | Abend, eine Lampe, Mia läuft ruhig auf die Kamera zu; Text an das Bild angepasst (kein „Augen leuchten“) | neu, 1 |
-| 06 | Schnurrhaare berühren die Wände im Spalt | Mia zwischen Schrank und Wand, Schnurrhaare an der Wand | neu, 1 |
-| 07 | Wange am Tischbein | Wange am Holzbein, Augen zu, Schwanz hoch | neu, 1 |
-| 08 | Schwanz hoch, Mia kommt zu Malik | Schwanz senkrecht, läuft auf Kinderfüße zu | **übernommen** (früher 01, Kernaussage gleich) |
-| 09 | langsames Blinzeln | halb geschlossene Augen, Blick zur Kamera | neu, 1 |
-| 10 | Malik sucht, unter dem Sofa leer | Hand hebt die Sofadecke, leer; hinten Karton mit Schwanzspitze | neu, 1 |
-| 11 | Karton im Flur (Frage) | offener Karton von der Seite, keine Katze zu sehen | neu, 1 |
-| 12 | Mia im Karton, entspannt | Kopf und Ohren über dem Rand | neu, 1 |
-| 13 | Putzen mit rauer Zunge | Zunge sichtbar an der Pfote, Augen halb zu | neu, 1 |
-| 14 | Mia bei Malik, er streichelt sie | liegt entspannt auf dem Sofa, seine Hand auf ihrem Rücken | **übernommen** (früher 08) |
+| 1-1 | gähnt, Eckzähne sichtbar | neu | Maul weit offen, vier Eckzähne, lustig, nicht bedrohlich |
+| 1-2 | Falbkatze am Kornspeicher | neu | sandgraue Wildkatze, Tonkrüge, Korn, keine Maus |
+| 1-3 | lauert flach im Gras | neu | geduckt, Blick nach vorn, nichts Gejagtes im Bild |
+| 1-4 | schläft eingerollt in der Sonne | übernommen (Ein Tag mit Mia 06) | ✓ |
+| 1-5 | drinnen am Fenster, draußen junger Vogel | neu | Fenster zu, Jungvogel im blühenden Busch |
+| 2-1 | Pfotenspur hintereinander im Schnee | neu | gerade Reihe, Mia läuft weg |
+| 2-2 | klettert rückwärts den Baum hinunter | neu | Kopf oben, Schwanz unten, Krallen in der Rinde, Kinderhand am Stamm |
+| 2-3 | Kratzbaum | übernommen (Ein Tag mit Mia 05) | ✓ |
+| 2-4 | balanciert auf der Stuhllehne, Schwanz seitlich (Frage) | neu | verrät die Antwort nicht |
+| 2-5 | landet auf den Pfoten | neu, 2 Versuche | erster Versuch stand nur; jetzt Vorderpfoten auf dem Teppich, Hinterbeine in der Luft |
+| 2-6 | Zunge beim Trinken | übernommen (Ein Tag mit Mia 04) | ✓ |
+| 3-1 | große runde Pupillen im Lampenlicht | neu | warm, freundlich, nicht dunkel |
+| 3-2 | Ohren in zwei Richtungen | übernommen (Mia zieht ein 04) | ✓ |
+| 3-3 | Schnurrhaare berühren die Wände | übernommen (Mia zieht ein 06) | ✓ |
+| 3-4 | Flehmen: Maul leicht offen | neu | schnuppert am Gras, Maul offen |
+| 4-1 | Neugeborene, Augen zu, an der Mutter (Frage) | neu | winzige Kätzchen, verrät „Nase“ nicht |
+| 4-2 | trinken und treteln | neu | Pfoten am Bauch |
+| 4-3 | Mutter trägt Junges am Nacken | neu | Kätzchen hängt ruhig |
+| 4-4 | Mutter mit Jungen, Kind schaut mit Abstand | neu | Kind sitzt, Hände im Schoß |
+| 4-5 | Kätzchen balgen sich | neu | ✓ |
+| 5-1 | Schwanz hoch zur Begrüßung | übernommen (Mia zieht ein 08) | ✓ |
+| 5-2 | langsames Blinzeln | übernommen (Mia zieht ein 09) | ✓ |
+| 5-3 | schnurrt neben Malik | übernommen (Mia zieht ein 14) | ✓ |
+| 5-4 | Streicheln, Schwanz gehoben (Frage) | neu | Stopp-Zeichen nur angedeutet – schwächstes Bild, Text trägt |
+| 5-5 | Hand geht ruhig weg, Mia entspannt | neu | ✓ |
+| 5-6 | zeigt den Bauch, niemand fasst an | neu | ✓ (bewusst keine fauchende Katze im Bild) |
+| 6-1 | Hand ruhig hingehalten, Mia schnuppert | neu | ✓ |
+| 6-2 | spielt mit der Katzenangel | neu | Feder an der Schnur, Kinderhand am Stab |
+| 6-3 | fremde Katze auf der Mauer, Kind bleibt stehen | neu | schwarz-weiße Katze, Kinderbeine mit Abstand |
+| 6-4 | Mias Ecke: Napf, Wasser, Klo, Kratzbaum, Bett | neu | keine Marken, keine Schrift |
+| 6-5 | knabbert Katzengras | neu | keine Milch im Bild |
+| 6-6 | schaut aus der Kiste (Einzug) | übernommen (Mia zieht ein 12) | ✓ |
 
-Die übrigen sechs alten Bilder (Futter, Wasser, Kratzbaum, Sonne, Tierärztin, Frage-Durst) passen zu keinem Abschnitt
-mehr und sind ersetzt (Git-Geschichte). Kosten in `kosten.json`.
-
-## Nachtrag 2026-11-15
-
-Die Fassung `haustiere-ruhig` ist entfernt: Christian hat entschieden, dass es je Geschichte nur eine Fassung gibt und keine Stufen (`grundsaetze.md` 9.3). Kleine Schwierigkeiten halten Grundschulkinder aus.
+24 Bilder erzeugt (23 Seiten + 1 Neuversuch), 9 übernommen; Kosten in `kosten.json`.
