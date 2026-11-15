@@ -832,6 +832,40 @@ export async function merkeGeschichteGelesen(id, heute = echteUhr().heute) {
   return true;
 }
 
+// ---------- Lesestand eines Sachbuchs (docs/geschichten.md §4) ----------
+// stand.buecher[id] = { kapitel, seite, fertig: Kapitel-Indizes, die einmal bis zur letzten Seite gelesen sind }
+
+/** @param {any} e @returns {{ kapitel: number, seite: number, fertig: number[] }} */
+function bereinigeBuchStand(e) {
+  const zahl = (x) => (Number.isInteger(x) && x >= 0 ? x : 0);
+  const fertig = [...new Set((Array.isArray(e?.fertig) ? e.fertig : []).filter((x) => Number.isInteger(x) && x >= 0))].sort((a, b) => a - b);
+  return { kapitel: zahl(e?.kapitel), seite: zahl(e?.seite), fertig };
+}
+
+/** Wo das Kind im Buch war (oder null). @param {string} id */
+export async function ladeBuchStand(id) {
+  const stand = await ladeStand();
+  const e = istObjekt(stand.buecher) ? stand.buecher[id] : null;
+  return istObjekt(e) ? bereinigeBuchStand(e) : null;
+}
+
+/**
+ * Merkt den Lesestand; sind alle Kapitel fertig, gilt das Buch als gelesen (merkeSachthema, erstes Datum bleibt).
+ * @param {string} id
+ * @param {{ kapitel: number, seite: number, fertig: number[] }} wo
+ * @param {number} kapitelZahl
+ */
+export async function merkeBuchStand(id, wo, kapitelZahl, heute = echteUhr().heute) {
+  if (!id) return;
+  const stand = await ladeStand();
+  if (!istObjekt(stand.buecher)) stand.buecher = {};
+  const b = bereinigeBuchStand(wo);
+  stand.buecher[id] = b;
+  if (kapitelZahl > 0 && b.fertig.filter((k) => k < kapitelZahl).length >= kapitelZahl) merkeSachthema(stand, "geschichten", id, heute);
+  speichere(STAND_KEY, stand);
+  await sofortSpeichern();
+}
+
 // ---------- Runde (Async-Schicht für die Spiele) ----------
 
 const STAND_KEY = "lernplan";
