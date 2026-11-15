@@ -15,6 +15,7 @@
 // im Lernstand. Name beim ersten Tippen: die Probe der Hilfe hat Vorrang. Fehlerweg: eine unbekannte Aufgabe.
 
 import { createRequire } from "node:module";
+import { durchEinfuehrung } from "./einfuehrung-durch.mjs";
 import http from "node:http";
 import { starteServer } from "./server.mjs";
 import { readFile, mkdir } from "node:fs/promises";
@@ -90,7 +91,13 @@ async function zieheLege(seite, wert) {
 
 const hilfeLeuchtet = (seite) => seite.evaluate(() => document.getElementById("hilfe").shadowRoot.querySelector(".platz").classList.contains("leuchtet"));
 const blasenText = (seite) => seite.evaluate(() => document.getElementById("blase").text);
-const tippeHilfe = (seite) => seite.evaluate(() => document.getElementById("hilfe").knopf.shadowRoot.querySelector("button").click());
+// Mit pointerdown wie ein echter Tipp: Nur so weiß die Stimme, dass das Kind den laufenden Satz abbricht
+// (spiele/kern/stimme.js, sonst „Satz abgeschnitten“ im Protokoll).
+const tippeHilfe = (seite) => seite.evaluate(() => {
+  const knopf = document.getElementById("hilfe").knopf.shadowRoot.querySelector("button");
+  knopf.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, composed: true }));
+  knopf.click();
+});
 /** Wartet, bis eine neue Aufgabe liegt (leere Gleichung, volles Tablett); liefert die Wartezeit in ms. */
 async function neueAufgabe(seite, timeout = 4000) {
   const t0 = Date.now();
@@ -313,7 +320,7 @@ async function lauf(typ, name, groesse, basis) {
     s4.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (eingetragen): ${e.message}`));
     s4.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole (eingetragen): ${m.text()}`); });
     await s4.goto(`${basis}/spiele/vorlage/index.html`, { waitUntil: "load" });
-    await s4.waitForSelector("#tablett .stab");
+    await durchEinfuehrung(s4, "#tablett .stab");
     await tippeHilfe(s4);
     await tippeHilfe(s4);
     const paar = await s4.$$eval("#tablett .markiert", (l) => l.map((x) => Number(x.getAttribute("wert"))));
@@ -356,7 +363,7 @@ async function lauf(typ, name, groesse, basis) {
     const s3 = await ruhig.newPage();
     s3.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (ruhig): ${e.message}`));
     await s3.goto(`${basis}/spiele/vorlage/index.html`, { waitUntil: "load" });
-    await s3.waitForSelector("#tablett .stab");
+    await durchEinfuehrung(s3, "#tablett .stab");
     const r1 = (await tablettWerte(s3))[0];
     await tippeLege(s3, r1);
     const falsch = (await tablettWerte(s3)).find((w) => w !== n - r1);

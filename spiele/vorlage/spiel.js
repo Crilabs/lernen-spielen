@@ -103,6 +103,8 @@ const EINFUEHRUNG = null;
 
 /** So lange steht die Folge einer Lösung, bevor die nächste Aufgabe kommt (B6, etwa 1–2 s; Tippen überspringt). */
 const FOLGE_MS = 1800;
+/** Der Satz der letzten Folge (erzaehler.gelegt); die Pause wartet auf ihn, damit sie ihn nicht abschneidet (spielbau.md §8). */
+let folgeSatz = Promise.resolve();
 
 /** Aufgaben je Runde (Platzhalter; echte Spiele eher 8 bis 10, die Lernsteuerung begrenzt zusätzlich auf 4 Minuten). */
 const AUFGABEN_JE_RUNDE = 3;
@@ -293,7 +295,7 @@ function stelleAufgabe(aufgabe, melde) {
     frei.hidden = true;
     // Nach dem Legen auch das Zeichen (M7): die Gleichung als Ziffern, nicht gesprochen.
     gleichung.textContent = `${n} = ${gelegt[0]} + ${gelegt[1]}`;
-    erzaehler.gelegt();
+    folgeSatz = erzaehler.gelegt();
     melde.geloest(`zerl:${n}:${gelegt[0]}+${gelegt[1]}`);
   }
 
@@ -585,6 +587,8 @@ async function spieleRunde(vorschau) {
   }
 
   const { hinweisSpiel } = await r.ende();
+  // Die Pause spricht erst, wenn der Satz der letzten Folge zu Ende ist (kein Satz abgeschnitten, spielbau.md §8).
+  await folgeSatz;
   await zeigePause({ hinweis: hinweisSpiel, zeit: vorschau ? undefined : await amRundenende(), echteDinge: r.echteDinge });
   return spieleRunde(vorschau);
 }

@@ -11,6 +11,7 @@
 // stellen Weniger/Mehr, Tage, Ausblenden und „Heute 15 Minuten mehr“ die gespeicherten Werte; keine Konsolenfehler.
 
 import { createRequire } from "node:module";
+import { durchEinfuehrung } from "./einfuehrung-durch.mjs";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -101,7 +102,7 @@ try {
       const text = await seite.locator("#schluss").textContent();
       pruefe(L, "Startseite gesperrt: Satz mit „Morgen geht es weiter“", text === "Für heute ist das Spielen fertig. Morgen geht es weiter.", text);
       const gesperrt = await spielKarten(seite);
-      pruefe(L, "Startseite gesperrt: Regal bleibt sichtbar, keine Spielkarten", await seite.locator(".regal-knopf").isVisible() && gesperrt === 0, `Spielkarten: ${gesperrt}`);
+      pruefe(L, "Startseite gesperrt: Regal bleibt sichtbar, keine Spielkarten", await seite.locator(".regal-knopf:not(.bibliothek-knopf)").isVisible() && gesperrt === 0, `Spielkarten: ${gesperrt}`);
       const box = await seite.locator("#schluss").boundingBox();
       pruefe(L, "Satz liegt ganz im Bild", box && box.x >= 0 && box.x + box.width <= groesse.width && box.y >= 0, JSON.stringify(box));
       if (SHOTS) await seite.screenshot({ path: `${SHOTS}/spielzeit-start-${L}.png` });
@@ -121,7 +122,7 @@ try {
       await startFertig(seite);
       await seite.waitForTimeout(400);
       const karten = await spielKarten(seite);
-      pruefe(L, "ausgeblendet: kein Satz, Regal da, keine Spielkarten", await seite.locator("#schluss").isHidden() && await seite.locator(".regal-knopf").isVisible() && karten === 0, `Spielkarten: ${karten}`);
+      pruefe(L, "ausgeblendet: kein Satz, Regal da, keine Spielkarten", await seite.locator("#schluss").isHidden() && await seite.locator(".regal-knopf:not(.bibliothek-knopf)").isVisible() && karten === 0, `Spielkarten: ${karten}`);
       await kontext.close();
     }
 
@@ -149,7 +150,7 @@ try {
         "lernstand-kind-1-einstellungen": einst({ proTag: 30 }), "lernstand-kind-1-spielzeit-stand": stand,
       });
       await seite.goto(BASIS + "vorlage/index.html");
-      await seite.waitForSelector("#tablett .stab");
+      await durchEinfuehrung(seite, "#tablett .stab");
       const zwei = await seite.evaluate(async () => {
         const { amRundenende } = await import("../rahmen/spielzeit.js");
         return [await amRundenende(), await amRundenende()];
@@ -172,7 +173,7 @@ try {
       const { kontext, seite } = await neueSeite(browser, groesse, { "lernstand-kind-1-einstellungen": einst({}) });
       await seite.clock.install();
       await seite.goto(BASIS + "vorlage/index.html");
-      await seite.waitForSelector("#tablett .stab");
+      await durchEinfuehrung(seite, "#tablett .stab", { uhr: true });
       await seite.mouse.click(groesse.width / 2, groesse.height - 40);
       await seite.clock.runFor(60_000);
       pruefe(L, "Vorschau zählt keine Spielzeit", (await lies(seite, "lernstand-kind-1-spielzeit-stand")) === null);
@@ -184,15 +185,18 @@ try {
       await mitVorlage(kontext);
       await seite.clock.install();
       await seite.goto(BASIS + "vorlage/index.html");
-      await seite.waitForSelector("#tablett .stab");
+      // Das Spiel beginnt mit der Einführung (docs/spielbau.md §8); ihr Durchtippen zählt mit und wird abgezogen.
+      const vorEinf = await seite.evaluate(() => Date.now());
+      await durchEinfuehrung(seite, "#tablett .stab", { uhr: true });
+      const einfSek = Math.round(((await seite.evaluate(() => Date.now())) - vorEinf) / 1000);
       await seite.mouse.click(groesse.width / 2, groesse.height - 40);
       await seite.clock.runFor(60_000);
       await seite.mouse.click(groesse.width / 2, groesse.height - 40);
       await seite.clock.runFor(5 * 60_000); // nach der letzten Eingabe zählen höchstens zwei Minuten
       await seite.clock.runFor(1_000);
       const s = await lies(seite, "lernstand-kind-1-spielzeit-stand");
-      const sek = s?.tage?.[heute]?.sekunden ?? 0;
-      pruefe(L, "Takt: etwa 1 + 2 Minuten gezählt, nicht die ganzen 6", sek >= 165 && sek <= 200, String(sek));
+      const sek = (s?.tage?.[heute]?.sekunden ?? 0) - einfSek;
+      pruefe(L, "Takt: etwa 1 + 2 Minuten gezählt (ohne Einführung), nicht die ganzen 6", sek >= 165 && sek <= 200, `${sek} (Einführung ${einfSek} s abgezogen)`);
       await kontext.close();
     }
 
