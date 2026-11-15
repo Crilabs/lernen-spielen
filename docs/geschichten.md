@@ -45,7 +45,7 @@ sicher **(Annahme)**.
 
 ```
 spiele/geschichten/<id>/geschichte.json   die Geschichte
-spiele/geschichten/<id>/bilder/*.webp     Fotos der Sachgeschichte (1536 × 1024, WebP), herkunft.json daneben
+spiele/geschichten/<id>/bilder/*.webp     Fotos der Sachgeschichte (quadratisch 1024 × 1024, WebP; Christian 2026-11-15), herkunft.json daneben
 spiele/geschichten/<id>/kosten.json       Kosten (werkzeuge/kosten/)
 ```
 
@@ -90,7 +90,7 @@ spiele/geschichten/<id>/kosten.json       Kosten (werkzeuge/kosten/)
 - Baustein `<ls-geschichte src="geschichten/<id>/geschichte.json">` in `spiele/rahmen/geschichte.js`, Seite
   `spiele/geschichte.html?id=<id>` (optional `&weiter=<Pfad>`: dorthin nach der letzten Seite, z. B. ins Spiel; nur
   ein Pfad innerhalb von `spiele/`, sonst die Startseite).
-- Bild groß, Text darunter in Andika, Vorlesen (Florian, vorab aufgenommen, `npm run audio`), Weiter und Zurück per
+- **Bild links, Text rechts** (Christian, 2026-11-15): das Bild quadratisch und so groß wie möglich, der Text daneben in Andika, Vorlesen (Florian, vorab aufgenommen, `npm run audio`), Weiter und Zurück per
   Tipp, Wischen und Pfeiltaste, Haus; Fortschritt als Punkte ohne Zahl; nach der letzten Seite „Fertig“ (Ereignis
   `fertig`).
 - Bei Ton an liest der Erzähler jede Seite beim Aufschlagen vor (`sprich`, sonst `text`; der Audio-Sammler nimmt die

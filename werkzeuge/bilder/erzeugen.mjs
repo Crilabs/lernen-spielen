@@ -67,7 +67,8 @@ async function main() {
   const antwort = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json", "api-key": env.AZURE_OPENAI_API_KEY },
-    body: JSON.stringify({ prompt, size: "1536x1024", quality: "high", n: 1 }),
+    // Fotos der Geschichten quadratisch (docs/geschichten.md: Bild links, Text rechts; Christian 2026-11-15)
+    body: JSON.stringify({ prompt, size: a.basis === "foto" ? "1024x1024" : "1536x1024", quality: "high", n: 1 }),
   });
   const daten = await antwort.json();
   if (!antwort.ok) throw new Error(`Azure OpenAI ${antwort.status}: ${JSON.stringify(daten).slice(0, 500)}`);
