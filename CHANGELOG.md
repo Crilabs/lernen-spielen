@@ -2,44 +2,55 @@
 
 ## Unveröffentlicht
 
-- Neue Ansichten, übersichtlich und ohne Zahlen beim Kind:
-  - **Startseite:** oben bis zu drei Spiele, deren Thema gerade dran ist; darunter die Fächer, für die es Spiele gibt; unten „Mein Regal“. Ohne Spiele bleibt eine ruhige Seite mit dem Regal.
-  - **Fach-Seite:** der Weg eines Fachs mit dem, was schon gekonnt ist, was dran ist (Sonnenring) und zwei Themen in Sicht. Ein Thema antippen zeigt seine Spiele und, falls es eine gibt, „Geschichte ansehen“.
-  - **Mein Regal:** Was das Kind kann, steht als Lernmaterial auf einem Holzregal, ein Brett je Fach (Perlenstäbchen, Wortart-Zeichen, Buchstabenkarten). Neues leuchtet beim nächsten Besuch einmal ruhig auf; ein zurückgesetztes Thema verschwindet still. Auch Gekonntes aus entfernten Spielen bleibt stehen.
-  - **Mit echten Dingen:** Bei Themen und im Regal öffnet ein Knopf eine Karte mit einer Anregung für den Alltag, für den Erwachsenen, der mit dem Kind schaut. Ohne PIN, weil es zum gemeinsamen Machen gehört.
-- Elternbereich nur noch für Erwachsenes: Lernstand (beschreibend, mit Bezug zur Klasse, Eingriffe mit „Wirklich?“), Geschichten, Gerät, Hinweise und Sicherheit. Die Stimmenwahl entfällt (eine Stimme für alle). Ton an/aus, Regal und Anregungen brauchen keine PIN. Der Zugang bleibt: Zahnrad auf der Startseite drei Sekunden halten.
-- Geschichten-Stufe: Im Elternbereich lässt sich wählen, wie aufregend Geschichten sein dürfen (Ruhig, Sanft – Standard –, Abenteuer), mit einem Beispielsatz je Stufe. Die Spiele richten sich danach, sobald sie Geschichten erzählen.
+## v1.0.0
 
-- Die Einführungen vor einem neuen Thema erzählen jetzt mit den Kindern der Runde (Ela, Kofi, Lena, Timo) statt mit dem Einhorn. Die alten Figuren und Wimmelbilder der entfernten Spiele sind gelöscht.
-- Die ersten sechs Spiele (Zahlenzauber, Perlenbrücke, Kettenhüpfer, Wimmelbild, Zauberin, Einhorn-Steine) sind entfernt. Sie werden nach den Grundsätzen neu gebaut, je Thema ein passendes Spiel. Bis dahin ist die Startseite leer. Alte Lernstände werden nicht übernommen.
-- Natürliche Stimme vorbereitet: Die Spiele spielen vorab erzeugte Aufnahmen (Azure Speech) ab, sobald es sie gibt, sonst spricht wie bisher die Systemstimme. Im Elternbereich heißt die Systemstimme jetzt „Ersatzstimme“, dazu ein Hinweis, dass die Stimme computererzeugt ist. Erzähler ist Florian (Azure), 10 % langsamer; Figuren sprechen nicht selbst (`docs/stimme.md`). Neue Anhör-Seite `npm run audio:anhoeren`.
+Die App heißt jetzt **Lernen Spielen**. Sie ist von Grund auf neu gebaut: ein Lernplan für die ganze Grundschule, neue Seiten, eine natürliche Stimme und das erste neue Spiel. Die alten Spiele mit dem Einhorn sind entfernt.
 
+**Einmaliger Handgriff beim Aktualisieren des Kiosks** – direkt nach dem Update, bevor das Kind spielt (die App startet nach dem Update einmal selbst neu). Die Daten des Kindes liegen jetzt im Unterordner `lernstand\kind-1\`; `eltern.json` (PIN) und `geraet.json` bleiben im Ordner darüber.
+
+1. Die App beenden: im Elternbereich auf „App beenden“ tippen. Nur wenn das nicht geht: Tastatur anschließen, Strg+Alt+Entf → Task-Manager (siehe „PIN vergessen“ im README).
+2. Im Explorer in die Adresszeile `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` eingeben.
+3. Dort einen Ordner `kind-1` anlegen (gibt es ihn schon, weil die neue Version schon einmal lief: einfach weiter).
+4. Alle Dateien **außer** `eltern.json`, `eltern.json.bak`, `geraet.json` und `geraet.json.bak` in `kind-1` verschieben (auch die übrigen `.bak`-Dateien). Fragt Windows, ob vorhandene Dateien ersetzt werden sollen: ja, ersetzen (die Dateien in `kind-1` stammen dann vom ersten Start mit leerem Stand).
+5. App wieder starten.
+
+Die PIN bleibt in jedem Fall erhalten. Die Lernstände der entfernten Spiele übernimmt die neue Version nicht: Das Kind beginnt mit leerem Lernstand.
+
+**Für das Kind**
+
+- **Startseite:** Karten je Fach mit den Spielen, deren Thema gerade dran oder bald dran ist (höchstens fünf je Fach), dazu Karten „Mit echten Dingen“. Rechts steht „Zuletzt gelernt“ mit dem Knopf „Was ich schon kann“. Keine Zahlen, Punkte oder Balken. Der Zugang für Erwachsene bleibt: Zahnrad drei Sekunden halten.
+- **Fach-Seite:** Ein Tipp auf den Fachnamen zeigt den Weg des Fachs: Gekonntes, was gerade dran ist (Sonnenring) und die nächsten Themen. Ein Thema zeigt seine Spiele, seine Geschichte und „Mit echten Dingen“.
+- **Was ich schon kann:** eigene Regal-Seite mit einem Reiter je Fach. Was das Kind kann, steht als Lernmaterial auf dem Regal (Perlenstäbchen, Perlenketten, Wortart-Zeichen, Buchstabenkarten), das Neueste oben. Gekonntes bleibt stehen, auch wenn ein Spiel wegfällt.
+- **Einführungen:** Vor einem neuen Thema erzählt eine kurze Geschichte mit den Kindern der Runde (Ela, Kofi, Lena, Timo), worum es geht. Überspringen geht jederzeit.
+- **Neues Spiel Kettenhüpfer** (Mathe, Einmaleins der Reihen 2 bis 10, Welt „Vorrat und Packungen“): Das Kind tippt das Ergebnis, ein Pfeilchen hüpft auf der Perlenkette Stäbchen für Stäbchen, und für jedes Stäbchen kommt eine Packung in den Vorratskorb (Schuhpaare, Eierkartons, Muffinkartons …). Drei Stufen: erst mit sichtbarer Kette, dann mit verdeckter Kette (Vorstellung), zuletzt im Kopf. Hilfe in Stufen: erst eine Kernaufgabe als Pfeilchen, dann der Rechenweg. Am Rundenende eine Pause mit „Weiter“, „Alle Spiele“ und dem Angebot „Mit echten Dingen“; wer die Reihe kann, findet eine Perlenkette im Regal.
+- Die App sucht das passende Thema selbst aus. Eine kurze Probe überspringt, was das Kind schon kann; Fehler und Hilfen führen ruhig zurück zum Üben, Gekonntes kommt nach einigen Tagen noch einmal vor.
+
+**Mit echten Dingen**
+
+- Zu vielen Themen gibt es Spiele für den Alltag mit Dingen, die im Haus sind (zum Beispiel Schuhe in Paaren, Tisch decken, Eierkartons, Silben klatschen): eine eigene Seite mit Schritten, „Darauf kommt es an“ und den Umschaltern Leichter und Schwerer. 27 Anleitungen sind fertig (Einmaleins und Teilen, Zerlegen, Weiterzählen, Silben, Großschreibung, der/die/das); für andere Themen steht ein Satz als Anregung.
+- Erreichbar über die Karten auf der Startseite, die Fach-Seite und die Pause im Spiel. Ohne PIN, weil es zum gemeinsamen Machen gehört; es zählt nicht zum Lernstand und nicht zur Spielzeit.
+- Im Elternbereich unter „Mit echten Dingen“: woran das Kind gerade ist und was dazu passt, je Thema als Blatt zum Drucken (auch „Als PDF sichern“).
+
+**Für Erwachsene (Elternbereich)**
+
+- **Lernplan:** alle Themen eines Fachs als Baum, farbig nach Stand, mit Filter. Ein Thema lässt sich abhaken (seine Voraussetzungen werden mit abgehakt), zurücksetzen oder freigeben; Eingriffe fragen erst „Wirklich?“. Je Fach eine kurze Beschreibung jedes Spiels zum Aufklappen.
+- **Spielzeit:** Tage, Minuten je Tag und je Woche und ein Zeitfenster (frühester Beginn, spätestes Ende); digitale Spiele lassen sich ganz ausblenden, eine Zugabe von 15 Minuten geht für heute. Ist die Zeit um, spielt das Kind die laufende Runde zu Ende; danach zeigt die Startseite keine Spielkarten mehr. Startseite, Regal und „Mit echten Dingen“ sind nie gesperrt. Im Standard ist alles aus.
+- **Geschichten:** wie aufregend Geschichten sein dürfen (Ruhig, Sanft – Standard –, Abenteuer), mit einem Beispielsatz je Stufe.
+- **Gerät:** installierte Version und „Nach Updates suchen“. Update, „App beenden“ und Kiosk gibt es nur dort, wo das Gerät sie kann (Windows-Kiosk).
+- **Hinweise** (Stimme, Sicherheit, Themen ohne Spiel) und **Sicherheit** (PIN ändern, Protokoll).
+- <!-- Elternbereich: Christians letzte Änderungen ergänzen -->
+
+**Stimme und Ton**
+
+- Natürliche Stimme: Die Spiele spielen vorab erzeugte Aufnahmen ab (Microsoft Azure, Erzähler Florian, etwas langsamer); die Figuren sprechen nicht selbst. Beim Spielen geht nichts ins Internet. Gibt es für einen Satz keine Aufnahme, spricht die Ersatzstimme von Windows; sie spricht nie Zahlen, die stehen dann groß im Bild.
+- Eine Stimme für alle Spiele, die Stimmenwahl entfällt. Der Ton-Knopf oben wird je Spiel gemerkt; Startseite, Fach-Seite und Regal teilen sich einen (früher gespeicherte Ton- und Stimmeneinstellungen werden nicht übernommen).
+
+**Hinter den Kulissen**
+
+- Lernplan für die ganze Grundschule: rund 950 kleine Themen in Mathe, Geometrie, Lesen, Schreiben (Druck- und Schreibschrift), Grammatik sowie Sprechen und Zuhören; Klasse 1 und 2 ausführlich, Klasse 3 und 4 grob. Dazu 42 typische Fehlerbilder. Themen ohne Spiel bleiben für das Kind unsichtbar.
+- Entfernt: Zahlenzauber, Perlenbrücke, der alte Kettenhüpfer, Wimmelbild, Zauberin und Einhorn-Steine samt Einhorn-Figuren und -Bildern. Sie werden nach den Grundsätzen neu gebaut, je Thema ein passendes Spiel; der Kettenhüpfer ist das erste davon.
+- Lernstand je Profil im Ordner `kind-1` (siehe Handgriff oben); aller Plattform-Zugriff liegt in `spiele/kern/`.
 - Aufgeräumt: Reste der früheren Web-Fassung (PHP, FTP-Upload) sind entfernt.
-- Lernstand je Profil: Die Daten des Kindes liegen jetzt im Unterordner `lernstand\kind-1\`; `eltern.json` (PIN) bleibt im Ordner darüber. **Einmaliger Handgriff beim Aktualisieren des Kiosks**, direkt nach dem Update, bevor das Kind spielt (die App startet nach dem Update einmal selbst neu):
-  1. Die App beenden: im Elternbereich auf „App beenden“ tippen. Nur wenn das nicht geht: Tastatur anschließen, Strg+Alt+Entf → Task-Manager (siehe „PIN vergessen“ im README).
-  2. Im Explorer in die Adresszeile `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` eingeben.
-  3. Dort einen Ordner `kind-1` anlegen (gibt es ihn schon, weil die neue Version schon einmal lief: einfach weiter).
-  4. Alle Dateien **außer** `eltern.json`, `eltern.json.bak`, `geraet.json` und `geraet.json.bak` in `kind-1` verschieben (auch die übrigen `.bak`-Dateien). Fragt Windows, ob vorhandene Dateien ersetzt werden sollen: ja, ersetzen (die neuen Dateien in `kind-1` stammen dann vom ersten Start mit leerem Stand).
-  5. App wieder starten.
-
-  Ohne den Handgriff beginnt das Kind mit leerem Lernstand, die PIN bleibt.
-- Eine Stimme für alle Spiele: Die Stimmenwahl gilt jetzt für alle Spiele gemeinsam und wird je Gerät gemerkt. Zahlen werden weiterhin nie gesprochen. Der Ton-Knopf wird je Spiel gemerkt (früher gespeicherte Ton- und Stimmeneinstellungen werden nicht übernommen: Ton an, Stimme automatisch).
-- Elternbereich je Gerät: Update, Beenden und Kiosk erscheinen nur dort, wo das Gerät sie kann (Windows-Kiosk), nicht mehr im Browser oder auf anderen Geräten.
-- Intern: aller Plattform-Zugriff (Speicher, Einstellungen, Sprache, Gerätefunktionen) liegt in `spiele/kern/`; ein Test sorgt dafür, dass Spiele ihn nicht mehr umgehen.
-- Die App heißt jetzt **Lernen Spielen**. Startseite und „Was ich kann“ kommen ohne Einhorn aus; die Spiele selbst sind noch unverändert und werden einzeln umgebaut.
-- Lernplan für die ganze Grundschule: rund 950 kleine Themen in Mathe, Geometrie, Lesen, Schreiben (mit Druck- und Schreibschrift), Grammatik und dem neuen Bereich Sprechen und Zuhören. Klasse 1 und 2 sind ausführlich beschrieben, mit Ziel, Beispielen, einem Alltagszweck und einem Hinweis für Eltern; Klasse 3 und 4 sind grob angelegt. Themen ohne Spiel bleiben für das Kind unsichtbar, an den vorhandenen Spielen ändert sich nichts.
-- Lernplan: 42 typische Fehlerbilder (z. B. Zahlendreher, Rechnen durch Zählen, Spiegelschrift, vergessene Wortgrenzen) mit Erkennungsmerkmal, passenden Übungsthemen und ruhigen Hinweisen für Kind und Eltern. Noch ohne Auswertung in den Spielen.
-- Lernplan: Die Mathe-Spiele folgen jetzt einem gemeinsamen Plan aus vielen kleinen Themen (zum Beispiel „Die 7 zerlegen“ oder „Plus ohne Zehnerübergang bis 20“). Die App sucht das passende Thema selbst aus; das Kind muss nichts wählen.
-- Eine kurze Probe zu Beginn eines neuen Themas überspringt, was das Kind schon kann. Fehler und Hilfen führen ruhig zurück zum Üben; bekannte Aufgaben kommen nach einigen Tagen noch einmal vor.
-- Vor einem neuen Thema erzählt eine kurze Einführung mit dem Einhorn, worum es geht.
-- Neue Seite „Was ich kann“: ein ruhiger Weg mit Stationen zeigt, welche Themen schon gekonnt sind und welches als Nächstes kommt, ohne Punkte, Zähler oder Prozente.
-- Elternbereich: zeigt die Themen mit Hinweis, was man zu Hause tun kann. Themen lassen sich als gekonnt markieren, zurücksetzen oder freigeben.
-- Perlenbrücke: drei Stufen, erst mit den Perlen zum Anfassen, dann nur im Kopf mit Vorstellung, zuletzt ganz im Kopf.
-- Die Computerstimme spricht keine Zahlen mehr; Zahlen stehen groß im Bild oder in der Sprechblase.
-- Spiele mit dem Lernplan (Perlenbrücke, Zahlenzauber) haben auf der Startseite keinen Fortschrittsbalken mehr.
-- Mathe-Spiele lesen keine Zahlen mehr vor: Die Computerstimme sprach Zahlen oft falsch („eins mal fünf“, „fünfter“). Kettenhüpfer und Perlenbrücke zeigen ihre Sätze jetzt in einer Sprechblase mit Ziffern (z. B. „5 · 7 = 35. Und noch ein Stäbchen?“), der Zahlenzauber zeigt nur noch Text. Die Klänge bleiben.
-- Kettenhüpfer: Bei einer falschen Zahl steht kurz und klar „6 Stäbchen sind nicht 48.“
-- Einhorn-Steine: Das Spiel bleibt nicht mehr hängen, wenn die Eingabe ganz anders ist als der Satz. Die Zeile schüttelt sich, das Einhorn schaut ratlos, dann wird die Zeile geleert und der Satz noch einmal diktiert. Bisher blieb der Text stehen, der nächste Versuch hängte sich daran, und ohne Ton passierte scheinbar nichts mehr.
 
 ## v0.1.8
 

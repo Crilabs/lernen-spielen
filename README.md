@@ -85,7 +85,7 @@ Die Daten des Kindes liegen im Unterordner `lernstand\kind-1\` (das Profil): je 
 (plus `.bak` als Sicherung), zum Beispiel `lernplan.json` und `einstellungen.json` (Ton je Spiel).
 Bei Updates bleibt der Ordner unberührt.
 
-Einmalig beim Wechsel auf die Version mit `kind-1` (Schritte siehe `CHANGELOG.md`, Abschnitt „Unveröffentlicht“):
+Einmalig beim Wechsel auf die Version mit `kind-1` (Schritte siehe `CHANGELOG.md`, Abschnitt „v1.0.0“):
 direkt nach dem Update, bevor das Kind spielt: App beenden (Elternbereich „App beenden“; sonst wie unter
 „PIN vergessen“), im Ordner `lernstand\` einen Ordner `kind-1` anlegen, alle Dateien außer `eltern.json`,
 `eltern.json.bak`, `geraet.json` und `geraet.json.bak` hineinschieben (auch die übrigen `.bak`-Dateien; bei der
