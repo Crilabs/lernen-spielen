@@ -201,6 +201,29 @@ details > summary::-webkit-details-marker { display: none; }
 .lp-karte .kurz { margin-top: 0.4rem; }
 .thema .innen { padding: 0 2.4rem 2.4rem 5rem; display: flex; flex-direction: column; gap: 0.8rem; }
 
+/* --- Sachwelten ----------------------------------------------------------------------------------- */
+/* Themenkreis: aufklappbar, im Kopf eine kleine Vignette in der Palette seiner Welten (start/welten.js). Welten als
+   Zeilen wie Themen; gesehen mit Haken in Tinte, gerade dran in Sonne, als Nächstes mit gestricheltem Ring, offen ruhig.
+   Keine Knöpfe: nur Übersicht (grundsaetze K7). */
+.sw-kopf { display: flex; align-items: center; gap: 2.4rem; }
+.sw-kopf .klapp { margin-left: auto; }
+.sw-gruppe > summary { gap: 2.4rem; }
+.sw-vignette {
+  flex: none; width: 15rem; height: 8rem; overflow: hidden;
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
+}
+.sw-vignette svg { display: block; width: 100%; height: 100%; }
+.thema.sw-welt.z-gesehen { background: color-mix(in srgb, var(--ls-tinte) 9%, var(--ls-papier)); }
+.thema.sw-welt.z-gesehen .punkt { border-color: var(--ls-tinte); background: var(--ls-tinte); }
+.thema.sw-welt.z-gesehen .punkt::after {
+  content: ""; position: absolute; left: 0.85rem; top: 0.35rem; width: 0.7rem; height: 1.4rem;
+  border-right: 0.35rem solid var(--ls-papier); border-bottom: 0.35rem solid var(--ls-papier); transform: rotate(45deg);
+}
+.thema.sw-welt.z-naechstes .punkt { border-style: dashed; border-color: var(--ls-tinte); }
+.thema.sw-welt.z-gesehen .wort, .thema.sw-welt.z-naechstes .wort { border-color: var(--ls-tinte); }
+.thema.sw-welt.z-offen .name, .thema.sw-welt.z-offen .wort { color: var(--ls-tinte-weich); }
+.thema.sw-welt .innen > p { max-width: 70ch; }
+
 /* --- Geschichten ---------------------------------------------------------------------------------- */
 /* Drei Stufen untereinander, von ruhig nach aufregend; rechts Wählen oder „Eingestellt“. Die gewählte Stufe trägt
    den Sonnenring (Sonne = ausgewählt, Farbwelt 6.2). */
@@ -262,6 +285,7 @@ details > summary::-webkit-details-marker { display: none; }
   <nav class="el-nav" aria-label="Bereiche">
     <h1>Für Erwachsene</h1>
     <ls-knopf data-tab="lernstand" symbol="lernstand.svg" wort="Lernplan" groesse="klein" stumm></ls-knopf>
+    <ls-knopf data-tab="sachwelten" symbol="themen.svg" wort="Sachwelten" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="geschichten" symbol="buch.svg" wort="Geschichten" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="spielzeit" symbol="uhr.svg" wort="Spielzeit" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="geraet" symbol="update.svg" wort="Updates" groesse="klein" stumm></ls-knopf>
@@ -281,11 +305,11 @@ import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/g
 import { ladeEinstellungen, setzeEinstellung, geschichtenStufe, einstellung } from "./kern/einstellungen.js";
 import { regeln, aktuell, lage as spielLage, gibZugabe, ZUGABE_MINUTEN } from "./kern/spielzeit.js";
 import { STAND as SPIELZEIT_STAND } from "./rahmen/spielzeit.js";
-import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer, spieleFuer, alsNaechstes }
+import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer, spieleFuer, alsNaechstes, elternWelten }
   from "./lernsteuerung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
 import { ladeVerzeichnis, ladeAnleitung } from "./rahmen/echte-dinge.js";
-import { paletteFuer, vignetteSvg } from "./start/welten.js";
+import { paletteFuer, paletteDerUeberschrift, vignetteSvg } from "./start/welten.js";
 import "./rahmen/anregung.js";
 import "./objekte/objekt.js";
 import "./rahmen/knopf.js";
@@ -396,7 +420,7 @@ function ruheNeu() {
 for (const typ of ["pointerdown", "keydown"]) document.addEventListener(typ, ruheNeu, true);
 ruheNeu();
 
-const ANSICHTEN = { lernstand, geschichten, spielzeit, geraet, hinweise, sicherheit };
+const ANSICHTEN = { lernstand, sachwelten, geschichten, spielzeit, geraet, hinweise, sicherheit };
 function waehle(name, hinweis) {
   tab = name;
   document.querySelectorAll("[data-tab]").forEach((b) => {
@@ -490,7 +514,7 @@ function eingriffKnopf(text, tun, { wegnehmen = false, frage = null } = {}) {
 const ZUSTAND = { "verborgen": "kommt später", "in-sicht": "kann als Nächstes kommen", "dran": "gerade dran", "kann-ich": "kann" };
 const STUFE = { material: "übt mit Material", vorstellung: "übt in der Vorstellung", kopf: "übt im Kopf" };
 const PROBE = "fängt an: eine kurze Probe zeigt, womit es beginnt";
-const FILTER = [["alle", "Alle"], ["dran", "Gerade dran"], ["naechstes", "Als Nächstes"], ["gekonnt", "Gekonnt"], ["offen", "Offen"]];
+const FILTER = [["alle", "Alle"], ["gekonnt", "Gekonnt"], ["dran", "Gerade dran"], ["naechstes", "Als Nächstes"], ["offen", "Offen"]];
 const LEER = { dran: "Gerade ist kein Thema dran.", naechstes: "Gerade ist kein Thema dran, darum kommt hier noch nichts als Nächstes.",
   gekonnt: "Hier steht, was das Kind kann, sobald es so weit ist.", offen: "Alle Themen sind gekonnt." };
 let lpFilter = "alle";
@@ -796,6 +820,141 @@ async function spielKarten(ziel, t, ctx, strang) {
     ziel.appendChild(b);
   }
   ziel.hidden = !ziel.childElementCount;
+}
+
+// ---------- Sachwelten ----------
+// Alle Sachwelten nach Themenkreisen (Überschriften im Lernplan), darin nach dem Lehrplan geordnet, ohne Klassen.
+// Nur Übersicht: kein Abhaken, kein Eingriff, kein „gekonnt“ (grundsaetze K7, 3.3). Gesehen = das Kind hat darin
+// gespielt (runde().melde); gerade dran und als Nächstes folgen den Lernthemen der Welt (elternWelten).
+// Spec docs/superpowers/specs/2026-11-15-sachwelten-uebersicht-design.md.
+const SW_ZUSTAND = { gesehen: "gesehen", dran: "gerade dran", naechstes: "als Nächstes", offen: "kommt später" };
+const SW_FILTER = [["alle", "Alle"], ["gesehen", "Gesehen"], ["dran", "Gerade dran"], ["naechstes", "Als Nächstes"], ["offen", "Offen"]];
+const SW_LEER = { gesehen: "Hier steht, welche Welten das Kind gesehen hat, sobald es darin spielt.",
+  dran: "Gerade gehört keine Welt zu einem Thema, das dran ist.", naechstes: "Gerade kommt keine neue Welt als Nächstes.",
+  offen: "Das Kind kennt schon alle Welten." };
+let swFilter = "alle";
+const swOffen = new Set();
+let swLauf = 0;
+
+function swKopfWorte(welten) {
+  const gesehen = welten.filter((w) => w.zustand === "gesehen").length;
+  return [gesehen === welten.length ? "alle gesehen" : gesehen ? "teils gesehen" : "",
+    welten.some((w) => w.zustand === "dran") ? "gerade dran" : "",
+    welten.some((w) => w.zustand === "naechstes") ? "bald" : ""].filter(Boolean).join(", ") || "noch nichts";
+}
+
+async function sachwelten(spalte) {
+  const lauf = ++swLauf;
+  spalte.append(el("h2", "Sachwelten"),
+    el("p", "Die Sachwelten stecken in den Spielen: Beim Rechnen, Lesen und Schreiben begegnet das Kind Tieren, Wetter, Zeit oder Berufen. Hier steht, worum es in jeder Welt geht und welche das Kind schon gesehen hat.", "vorspann"));
+  let ctx, stand;
+  try { ctx = await ladeCtx(); stand = await ladeLernstand(ctx, heuteTag()); }
+  catch (e) {
+    protokoll("Sachwelten: " + e);
+    spalte.appendChild(el("p", "Die Sachwelten konnten nicht geladen werden. Bitte den Bereich neu öffnen.", "flaeche"));
+    return;
+  }
+  if (tab !== "sachwelten" || lauf !== swLauf) return;
+  const gruppen = elternWelten(ctx, stand, alsNaechstes(ctx, stand));
+
+  const neuZeichnen = async () => {
+    if (tab !== "sachwelten") return;
+    const inh = $("inhalt"), oben = inh.scrollTop;
+    spalte.replaceChildren();
+    await sachwelten(spalte);
+    inh.scrollTop = oben;
+  };
+  const filter = el("div", null, "lp-filter");
+  filter.setAttribute("role", "group");
+  filter.setAttribute("aria-label", "Zeigen");
+  for (const [id, wort] of SW_FILTER) {
+    const k = el("button", wort, id === swFilter ? "an" : "");
+    k.type = "button";
+    k.setAttribute("aria-pressed", String(id === swFilter));
+    k.addEventListener("click", () => { if (swFilter !== id) { swFilter = id; neuZeichnen(); } });
+    filter.appendChild(k);
+  }
+  spalte.appendChild(filter);
+
+  const zeigt = (w) => swFilter === "alle" || w.zustand === swFilter;
+  const sichtbar = gruppen.filter((g) => g.welten.some(zeigt));
+  if (!sichtbar.length) {
+    spalte.appendChild(el("p", SW_LEER[swFilter] || "Es gibt noch keine Sachwelten.", "flaeche leise"));
+    return;
+  }
+  const block = el("section", null, "flaeche");
+  block.setAttribute("aria-label", "Sachwelten");
+  const kopf = el("div", null, "sw-kopf");
+  kopf.appendChild(el("h3", "Nach Themenkreisen"));
+  const klapp = knopf("Alles ausklappen");
+  klapp.setAttribute("groesse", "klein");
+  klapp.classList.add("klapp");
+  kopf.appendChild(klapp);
+  block.appendChild(kopf);
+  const alleDetails = () => [...block.querySelectorAll(":scope > details.sw-gruppe")];
+  const klappWort = () => klapp.setAttribute("wort", alleDetails().every((d) => d.open) ? "Alles einklappen" : "Alles ausklappen");
+  klapp.addEventListener("click", () => {
+    const offen = alleDetails().every((d) => d.open);
+    for (const d of alleDetails()) d.open = !offen;
+    klappWort();
+  });
+
+  for (const g of sichtbar) {
+    const det = el("details", null, "lp-bereich sw-gruppe");
+    det.dataset.id = g.id;
+    det.open = swFilter !== "alle" || swOffen.has(g.id);
+    const sum = el("summary");
+    const vignette = el("span", null, "sw-vignette");
+    vignette.innerHTML = vignetteSvg(paletteDerUeberschrift(g.id));
+    sum.append(vignette, el("span", g.name, "name"), el("span", swKopfWorte(g.welten), "zustand leise"));
+    det.appendChild(sum);
+    const innen = el("div", null, "lp-bereich-innen");
+    det.appendChild(innen);
+    const fuelle = () => {
+      if (innen.childElementCount) return;
+      const ul = el("ul", null, "themen");
+      for (const w of g.welten.filter(zeigt)) ul.appendChild(weltZeile(w));
+      innen.appendChild(ul);
+    };
+    det.addEventListener("toggle", () => {
+      if (det.open) { swOffen.add(g.id); fuelle(); } else swOffen.delete(g.id);
+      klappWort();
+    });
+    if (det.open) fuelle();
+    block.appendChild(det);
+  }
+  klappWort();
+  spalte.appendChild(block);
+}
+
+function weltZeile(w) {
+  const li = el("li");
+  const det = el("details", null, "thema sw-welt z-" + w.zustand);
+  det.dataset.id = w.id;
+  const sum = el("summary");
+  const punkt = el("span", null, "punkt");
+  punkt.setAttribute("aria-hidden", "true");
+  sum.append(punkt, el("span", w.name, "name"), el("span", SW_ZUSTAND[w.zustand] || w.zustand, "wort"));
+  det.appendChild(sum);
+  const innen = el("div", null, "innen");
+  if (w.beschreibung) innen.appendChild(el("p", w.beschreibung));
+  if (w.eltern) innen.appendChild(el("p", w.eltern, "leise"));
+  if (w.spiele.length) {
+    const p = el("p", null, "spiele-links");
+    p.appendChild(document.createTextNode(w.spiele.length === 1 ? "Kommt vor im Spiel " : "Kommt vor in den Spielen "));
+    w.spiele.forEach((s, i) => {
+      if (i) p.appendChild(document.createTextNode(", "));
+      const a = el("a", s.titel);
+      const eintrag = (lernCtx?.spiele?.spiele || []).find((x) => x.id === s.id);
+      a.href = (eintrag?.datei || s.id + ".html") + "?eltern";
+      p.appendChild(a);
+    });
+    innen.appendChild(p);
+  } else innen.appendChild(el("p", "Noch kein fertiges Spiel in dieser Welt.", "leise"));
+  if (w.seit) innen.appendChild(el("p", `Zuerst gesehen ${amDatum(w.seit)}.`, "leise"));
+  det.appendChild(innen);
+  li.appendChild(det);
+  return li;
 }
 
 // ---------- Geschichten ----------
