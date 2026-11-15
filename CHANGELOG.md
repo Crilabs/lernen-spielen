@@ -31,7 +31,6 @@ Nach dem Update beginnt das Kind mit leerem Lernstand (die alten Spiele sind weg
 - **Updates:** installierte Version und „Nach Updates suchen“. Update, „App beenden“ und Kiosk gibt es nur dort, wo das Gerät sie kann (Windows-Kiosk).
 - **Hinweise** (Stimme, Sicherheit, Themen ohne Spiel) und **Sicherheit** (PIN ändern, Protokoll).
 - **Sachwelten:** ein eigener Reiter zeigt die Welten, in denen die Spiele spielen (zum Beispiel Vorrat und Packungen), mit einer kurzen Beschreibung je Welt und einem eigenen Bild je Themenkreis (Uhrturm, Weg mit Wegweiser, Hand und Herz, Wippe, Schirm im Regen). So siehst du, in welchen Welten das Kind schon war.
-- <!-- Elternbereich: Christians letzte Änderungen ergänzen -->
 
 **Stimme und Ton**
 
