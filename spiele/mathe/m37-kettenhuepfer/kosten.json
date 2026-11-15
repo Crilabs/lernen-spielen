@@ -410,5 +410,31 @@
   "notiz": "Ausbau-Prüfung Didaktik, Runde 1",
   "cache_lesen": 5887814,
   "cache_schreiben": 200664
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 2,
+  "ausgabe": 4642,
+  "einheit": "tokens",
+  "menge": 229721,
+  "notiz": "Ausbau-Prüfung Didaktik, Runde 1 (Rest)",
+  "cache_lesen": 219945,
+  "cache_schreiben": 5132
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "ausbau",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 214,
+  "ausgabe": 77985,
+  "einheit": "tokens",
+  "menge": 24261226,
+  "notiz": "Bau-Agent Ausbau-Befunde R1",
+  "cache_lesen": 23888759,
+  "cache_schreiben": 294268
  }
 ]
