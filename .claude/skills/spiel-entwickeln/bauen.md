@@ -15,7 +15,8 @@ Du baust das Lernspiel **{{ID}} „{{NAME}}“** für Kinder der Klassen 1–4. 
 Verbindlich, vor der Arbeit lesen: `docs/spielentwicklung.md` (ganz), `docs/grundsaetze.md`,
 `docs/grundsaetze-bilder.md`, `docs/figuren.md`, `docs/stimme.md`, `docs/bedienung.md`; der Katalog-Eintrag
 `{{KATALOG_DATEI}}` „### {{ID}} …“ und sein Eintrag in `docs/spielkatalog/welten.md` (Vorrang nach
-`docs/spielkatalog.md` §8a). Der Eintrag ist ein Vorschlag: Passt Welt, Figur oder Mechanik nicht, weiche ab und
+`docs/spielkatalog.md` §8a); dazu der Eintrag der Heimatwelt in `spiele/lernplan.json` (`welten[]`: `beschreibung` =
+worum es in der Welt geht, so lesen es die Eltern im Reiter „Sachwelten“; `eltern`; `fakten`). Der Eintrag ist ein Vorschlag: Passt Welt, Figur oder Mechanik nicht, weiche ab und
 schreibe den Grund in den Entwurf. **Ausnahme:** Was der Eintrag als Entscheidung von Christian kennzeichnet
 („Christian“, mit Datum), ist gesetzt; auch ein Prüfbefund ist kein Grund, davon wegzubauen. Widerspricht es einem
 Kriterium, benenne den Widerspruch offen und stelle ihn unter „Freigabe nötig“ als Frage.
@@ -161,6 +162,11 @@ Lernstufen, ruhig und sanft; abenteuer mitgeplant):
 - **Texte als Daten** in `{{SPIELORDNER}}/texte.json` und als feste Zeichenketten (Kopf der Vorlage, Schritt 3).
   `npm run audio` startest du **nicht**; das tut der Skill danach (Kosten). Nichts anhören, nichts als angehört
   markieren. Gib die Liste der neuen Texte wörtlich zurück.
+- **Sachwelt bleibt im Rahmen ihrer Beschreibung:** Was das Spiel aus der Heimatwelt zeigt, passt zu `beschreibung` der
+  Welt in `spiele/lernplan.json`. Zeigt das gebaute Spiel die Welt anders oder enger (andere Dinge, anderer Sachgrund),
+  passe `beschreibung` im selben Branch an: ein bis zwei Sätze für Eltern, worum es geht, ohne Sachfakten, ohne Wörter
+  aus `docs/grundsaetze.md` §3.2, keine Klassen; Quelle ist `scripts/welten-beschreibungen.json`, danach
+  `node scripts/welten-lernthemen.mjs` ausführen. Nenne die Änderung im Entwurf.
 - **Beschreibung für Erwachsene:** Feld `beschreibung` im Eintrag in `spiele.json`, 2–3 Sätze (höchstens 400 Zeichen) in
   einfachem Deutsch für Eltern, abgeleitet aus dem Entwurf (Runde in fünf Sätzen, Lernhandlung, Sachgrund) und am
   gebauten Spiel nachgeprüft: was das Kind im Spiel tut, was es dabei lernt, wie die Welt dazu passt. Neutral (keine

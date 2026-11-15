@@ -52,7 +52,7 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
 
 | Was | Wo |
 |---|---|
-| Katalog-Eintrag | `docs/spielkatalog/<teil>.md` „### <Id> <Name>“; Welt: `docs/spielkatalog/welten.md`; Vorrang: `docs/spielkatalog.md` §8a |
+| Katalog-Eintrag | `docs/spielkatalog/<teil>.md` „### <Id> <Name>“; Welt: `docs/spielkatalog/welten.md` und der Eintrag der Heimatwelt in `spiele/lernplan.json` (`welten[]`: `beschreibung`, `eltern`, `fakten`); Vorrang: `docs/spielkatalog.md` §8a |
 | Fach aus der Id | M → `mathe`, R → `geometrie`, L → `lesen`, Z → `sprechen`, S → `schreiben`, G → `grammatik` (Spalte „Fach“ in `docs/spielkatalog.md` §5) |
 | Spielordner | `spiele/<fach>/<id klein>-<name>/` (Name aus der Überschrift, klein, ä→ae, ö→oe, ü→ue, ß→ss, Bindestriche), z. B. M15 „Mach voll“ → m15-mach-voll |
 | Entwurf, Prüfberichte | `docs/spiele/<fach>/<spiel>.md`; Berichte erst beim Merge/Parken nach `docs/spiele/<fach>/<spiel>.pruefungen.md` |

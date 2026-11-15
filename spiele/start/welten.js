@@ -24,6 +24,15 @@ const NACH_WELT = {
 };
 
 /**
+ * Palette eines Themenkreises (Überschrift im Lernplan), z. B. für den Kopf im Elternbereich „Sachwelten“.
+ * @param {string} ueberschriftId
+ * @returns {string}
+ */
+export function paletteDerUeberschrift(ueberschriftId) {
+  return NACH_UEBERSCHRIFT[/** @type {keyof typeof NACH_UEBERSCHRIFT} */ (ueberschriftId)] ?? "wiese";
+}
+
+/**
  * @param {{plan: {welten?: {id: string, ueberschrift?: string}[]}}} ctx
  * @param {string|undefined} weltId
  * @returns {string|null}
