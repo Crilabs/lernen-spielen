@@ -540,5 +540,16 @@
   "notiz": "Steuerung M37 (neue Steuerung, Rest)",
   "cache_lesen": 680977,
   "cache_schreiben": 10254
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 8013,
+  "notiz": "npm run audio"
  }
 ]

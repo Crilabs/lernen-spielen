@@ -41,6 +41,51 @@
    "h": "5e9f58eb7a",
    "gehoert": true
   },
+  "Acht Ballröhren. Wie viele Bälle sind es zusammen?": {
+   "datei": "florian/077f432157f1.mp3",
+   "h": "4d8fbb5eb1",
+   "gehoert": false
+  },
+  "Acht Brötchentüten. Wie viele Brötchen sind es zusammen?": {
+   "datei": "florian/83a7b2d8c27f.mp3",
+   "h": "abdf29ae7d",
+   "gehoert": false
+  },
+  "Acht Eierkartons. Wie viele Eier sind es zusammen?": {
+   "datei": "florian/ef8ebad85cbf.mp3",
+   "h": "c6434e447a",
+   "gehoert": false
+  },
+  "Acht Gedecke. Wie viele Dinge sind es zusammen?": {
+   "datei": "florian/f99f9a7a5f0a.mp3",
+   "h": "715f3874ee",
+   "gehoert": false
+  },
+  "Acht Muffinkartons. Wie viele Muffins sind es zusammen?": {
+   "datei": "florian/c26f95a159e0.mp3",
+   "h": "1a73b3c2f3",
+   "gehoert": false
+  },
+  "Acht Schuhpaare. Wie viele Schuhe sind es zusammen?": {
+   "datei": "florian/206e3bf6550e.mp3",
+   "h": "cf2421f516",
+   "gehoert": false
+  },
+  "Acht Stifteboxen. Wie viele Stifte sind es zusammen?": {
+   "datei": "florian/92d65ec65a57.mp3",
+   "h": "692b3d6a9e",
+   "gehoert": false
+  },
+  "Acht Wochenschachteln. Wie viele Fächer sind es zusammen?": {
+   "datei": "florian/dac3c127808a.mp3",
+   "h": "8e63f21533",
+   "gehoert": false
+  },
+  "Acht Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?": {
+   "datei": "florian/6f8b2e04f360.mp3",
+   "h": "bcf73ab518",
+   "gehoert": false
+  },
   "Achterreihe": {
    "datei": "florian/c74e73f4033c.mp3",
    "h": "2ac65c2297",
@@ -86,14 +131,14 @@
    "h": "d63ebade93",
    "gehoert": false
   },
+  "Alles liegt jetzt im Korb.": {
+   "datei": "florian/8a699ea6066c.mp3",
+   "h": "f22817a2f5",
+   "gehoert": false
+  },
   "Allgemein statt Beispiel": {
    "datei": "florian/c1a433b459a9.mp3",
    "h": "fb557d2597",
-   "gehoert": false
-  },
-  "Also teilt das Einhorn den kurzen Stab. Ein Teil füllt den Zehner auf, der Rest wartet.": {
-   "datei": "florian/616a87d581de.mp3",
-   "h": "e583ed6ecd",
    "gehoert": false
   },
   "Also teilt Kofi den kurzen Stab. Ein Teil füllt den Zehner auf, der Rest wartet.": {
@@ -111,14 +156,14 @@
    "h": "14ec8479f8",
    "gehoert": false
   },
-  "Am Bach liegt wieder der Perlenstab dieser Brücke.": {
-   "datei": "florian/4deae3d1dac9.mp3",
-   "h": "2087e03898",
-   "gehoert": false
-  },
   "Am Bach liegt wieder der Perlenstab dieser Brücke. Kofi schaut ihn sich an.": {
    "datei": "florian/c021e458a79c.mp3",
    "h": "cadc7f97a5",
+   "gehoert": false
+  },
+  "Am Ende von jedem Stäbchen hängt ein Pfeilchen. Es zeigt, wie viele Perlen es bis dahin sind.": {
+   "datei": "florian/9fd354a4122b.mp3",
+   "h": "75e9448554",
    "gehoert": false
   },
   "Am Morgen trinke ich Milch.": {
@@ -206,6 +251,11 @@
    "h": "fc0af18bfe",
    "gehoert": false
   },
+  "Auf der Liste ist eine Zeile verwischt. Die Kette daneben zeigt, wohin sie gehört.": {
+   "datei": "florian/0f5879d25c3a.mp3",
+   "h": "f65fd93c7c",
+   "gehoert": false
+  },
   "Auf die Minute genau": {
    "datei": "florian/d9eb481c1b1d.mp3",
    "h": "ebe1014d59",
@@ -274,16 +324,6 @@
   "Becher und Haken": {
    "datei": "florian/efd759c4e637.mp3",
    "h": "9f799fd68c",
-   "gehoert": false
-  },
-  "Bei großen Zahlen geht es genauso. Das Einhorn legt die Einer zu den Einern.": {
-   "datei": "florian/8855a55ef0c9.mp3",
-   "h": "3c7f1cb86c",
-   "gehoert": false
-  },
-  "Bei großen Zahlen geht es genauso. Das Einhorn nimmt die Einer von den Einern.": {
-   "datei": "florian/746775ec04d3.mp3",
-   "h": "156d045c38",
    "gehoert": false
   },
   "Bei großen Zahlen geht es genauso. Ela legt die Einer zu den Einern.": {
@@ -416,24 +456,9 @@
    "h": "93db929f6a",
    "gehoert": false
   },
-  "Dahinter kommt ein kleiner Stab.": {
-   "datei": "florian/7603d0fb8713.mp3",
-   "h": "d313ec0568",
-   "gehoert": false
-  },
   "Dahinter legt sie einen kleinen Stab.": {
    "datei": "florian/b5e873caa0b5.mp3",
    "h": "40b04975b3",
-   "gehoert": false
-  },
-  "Dann nimmt es den Rest vom Zehnerstab.": {
-   "datei": "florian/8162b6e109d1.mp3",
-   "h": "03701a4b1b",
-   "gehoert": false
-  },
-  "Dann nimmt es den Rest von einem Zehnerstab.": {
-   "datei": "florian/a4d4115bb9f9.mp3",
-   "h": "80f38e5ea2",
    "gehoert": false
   },
   "Dann nimmt sie den Rest vom Zehnerstab.": {
@@ -486,81 +511,6 @@
    "h": "2fbd10a05d",
    "gehoert": false
   },
-  "Das Einhorn dreht die Teile um. Der Stab bleibt genau so lang.": {
-   "datei": "florian/6f9f587fbec1.mp3",
-   "h": "0c17757e12",
-   "gehoert": false
-  },
-  "Das Einhorn hat ein buntes Horn.": {
-   "datei": "florian/eea9015bdf7c.mp3",
-   "h": "9742194f9f",
-   "gehoert": false
-  },
-  "Das Einhorn hat einen langen und einen kurzen Stab. Daraus baut es eine Brücke.": {
-   "datei": "florian/29a16a900312.mp3",
-   "h": "9ec271ca70",
-   "gehoert": false
-  },
-  "Das Einhorn ist satt und schläft ein bisschen.": {
-   "datei": "florian/d084aeed4e66.mp3",
-   "h": "42d9991fbd",
-   "gehoert": false
-  },
-  "Das Einhorn legt die beiden Teile zusammen. Zusammen sind sie so lang wie die ganze Brücke.": {
-   "datei": "florian/ad7e22f93591.mp3",
-   "h": "8886876be1",
-   "gehoert": false
-  },
-  "Das Einhorn legt genau so viele Perlen dazu, dass ein neuer Zehner voll wird.": {
-   "datei": "florian/28963bd9f93d.mp3",
-   "h": "60231f3c2d",
-   "gehoert": false
-  },
-  "Das Einhorn legt noch ein paar Perlen dazu.": {
-   "datei": "florian/1bfebd99c028.mp3",
-   "h": "7746e0ce45",
-   "gehoert": false
-  },
-  "Das Einhorn nimmt den ganzen Zehnerstab weg. Übrig bleibt der kleine Stab.": {
-   "datei": "florian/388105fe30cf.mp3",
-   "h": "bb2966a2fd",
-   "gehoert": false
-  },
-  "Das Einhorn nimmt ein paar Perlen vom kleinen Stab weg. Die Zehnerstäbe bleiben liegen.": {
-   "datei": "florian/b401a311dce9.mp3",
-   "h": "d95b720e12",
-   "gehoert": false
-  },
-  "Das Einhorn ruht sich aus.": {
-   "datei": "florian/ed4664e6a080.mp3",
-   "h": "01d1e32f6e",
-   "gehoert": false
-  },
-  "Das Einhorn soll ein paar Perlen wegnehmen. Es nimmt sie vom kleinen Stab.": {
-   "datei": "florian/eb5505f702e0.mp3",
-   "h": "e524d25631",
-   "gehoert": false
-  },
-  "Das Einhorn soll ein paar Perlen wegnehmen. Es nimmt sie von einem Zehnerstab.": {
-   "datei": "florian/4702945ef5a1.mp3",
-   "h": "318c7e4879",
-   "gehoert": false
-  },
-  "Das Einhorn soll mehr Perlen wegnehmen, als der kleine Stab hat.": {
-   "datei": "florian/44ccb5f4ded3.mp3",
-   "h": "646f682cc6",
-   "gehoert": false
-  },
-  "Das Einhorn springt über den Zaun.": {
-   "datei": "florian/d296ba43f0c3.mp3",
-   "h": "9ace831100",
-   "gehoert": false
-  },
-  "Das Einhorn teilt den Stab. Jetzt liegt links ein Teil und rechts ein Teil.": {
-   "datei": "florian/000194b92a37.mp3",
-   "h": "8b490ace00",
-   "gehoert": false
-  },
   "Das Eis ist kalt.": {
    "datei": "florian/fdda8067015a.mp3",
    "h": "eea96cc758",
@@ -581,6 +531,11 @@
    "h": "1423bff07b",
    "gehoert": false
   },
+  "Das Ergebnis der Kernaufgabe ist am zehnten Stäbchen. Die Hälfte davon gehört zum fünften Stäbchen. Rechne es aus und tipp die Zahl.": {
+   "datei": "florian/485deca6bc96.mp3",
+   "h": "df44a07e65",
+   "gehoert": false
+  },
   "Das Gleichheitszeichen heißt gleich viel": {
    "datei": "florian/dba6d0885856.mp3",
    "h": "9ccab78fe1",
@@ -596,24 +551,9 @@
    "h": "a5f84a584c",
    "gehoert": false
   },
-  "Das kannst du jetzt zerlegen.": {
-   "datei": "florian/e9f44f4cf882.mp3",
-   "h": "0fbdb80b2e",
-   "gehoert": false
-  },
-  "Das kannst du jetzt.": {
-   "datei": "florian/ad3afa068eee.mp3",
-   "h": "89f5e9c0d0",
-   "gehoert": false
-  },
   "Das Kind lacht und tanzt.": {
    "datei": "florian/90e65015554e.mp3",
    "h": "7f65838ed2",
-   "gehoert": false
-  },
-  "Das kleine Einhorn ist müde.": {
-   "datei": "florian/0c0b64cb20c3.mp3",
-   "h": "53847579db",
    "gehoert": false
   },
   "Das leise Ende wie bei Tante": {
@@ -626,6 +566,41 @@
    "h": "f581690d4c",
    "gehoert": false
   },
+  "Das Pfeilchen sitzt hier. Deine Zahl liegt weiter hinten.": {
+   "datei": "florian/ebc1051a8033.mp3",
+   "h": "aa89f7b606",
+   "gehoert": false
+  },
+  "Das Pfeilchen sitzt hier. Deine Zahl liegt weiter vorn.": {
+   "datei": "florian/1e4682c9e393.mp3",
+   "h": "9cb1e09fb6",
+   "gehoert": false
+  },
+  "Das Pfeilchen zeigt das erste Stäbchen. Das zweite Stäbchen ist genauso. Wie viel ist das Doppelte?": {
+   "datei": "florian/8e0a9f14ae2e.mp3",
+   "h": "78b74c74b4",
+   "gehoert": false
+  },
+  "Das Pfeilchen zeigt die Kernaufgabe mit zehn Stäbchen. Fünf Stäbchen sind die Hälfte von zehn. Wie viel ist die Hälfte?": {
+   "datei": "florian/5dc231d39fd2.mp3",
+   "h": "007366e761",
+   "gehoert": false
+  },
+  "Das Pfeilchen zeigt eine Kernaufgabe. Deine Aufgabe ist ihre Nachbaraufgabe. Wie viele Stäbchen liegen dazwischen?": {
+   "datei": "florian/6fccb63e5976.mp3",
+   "h": "3880888628",
+   "gehoert": false
+  },
+  "Das Pfeilchen zeigt eine Kernaufgabe. Von dort sind es zwei Stäbchen. Wie viele Perlen liegen auf zwei Stäbchen?": {
+   "datei": "florian/a76b62afa0a2.mp3",
+   "h": "4bcd3174bc",
+   "gehoert": false
+  },
+  "Das Pfeilchen zeigt, wie viele es zusammen sind.": {
+   "datei": "florian/8c6414424dc9.mp3",
+   "h": "e34484f030",
+   "gehoert": false
+  },
   "Das Pferd frisst einen Apfel.": {
    "datei": "florian/f99a8405635b.mp3",
    "h": "c1c4c536ba",
@@ -634,11 +609,6 @@
   "Das Pony frisst Gras.": {
    "datei": "florian/187e92f74567.mp3",
    "h": "7c6cc77e9a",
-   "gehoert": false
-  },
-  "Das Pony frisst Gras. Die Katze schläft auf dem Sofa.": {
-   "datei": "florian/31cc71c5bad3.mp3",
-   "h": "8dddab8189",
    "gehoert": false
   },
   "Das Pony läuft.": {
@@ -676,9 +646,19 @@
    "h": "c0d113ac79",
    "gehoert": false
   },
+  "Das zweite Stäbchen hat genauso viele Perlen wie das erste. Das Ergebnis ist das Doppelte. Rechne es aus und tipp die Zahl.": {
+   "datei": "florian/daefce33ae1e.mp3",
+   "h": "330935e159",
+   "gehoert": false
+  },
   "Daten sammeln und darstellen": {
    "datei": "florian/6037f15a4796.mp3",
    "h": "3008f175a3",
+   "gehoert": false
+  },
+  "Deine Zahl liegt hinter dem Ende der Kette.": {
+   "datei": "florian/ead428ba1a65.mp3",
+   "h": "dbf1011915",
    "gehoert": false
   },
   "Den Anfang wie bei Qualle schreiben": {
@@ -799,11 +779,6 @@
   "Der Hauch zwischen den Silben": {
    "datei": "florian/cf1dcf6bde5b.mp3",
    "h": "fd0cd8a0ce",
-   "gehoert": false
-  },
-  "der Hund – die Katze – das Einhorn": {
-   "datei": "florian/1f16e24f140b.mp3",
-   "h": "de8f596570",
    "gehoert": false
   },
   "Der Hund bellt im Garten.": {
@@ -1101,6 +1076,76 @@
    "h": "518792a191",
    "gehoert": false
   },
+  "Der Vorrat ist eingeräumt.": {
+   "datei": "florian/67b792ce218c.mp3",
+   "h": "81f6ff20ca",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier hat ein Gedeck vier Dinge: Teller, Gabel, Löffel und Becher. Ein Stäbchen sind die Dinge von einem Gedeck.": {
+   "datei": "florian/5a0556edea15.mp3",
+   "h": "4164d5f102",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier hat ein Schuhpaar zwei Schuhe. Ein Stäbchen sind die Schuhe von einem Schuhpaar.": {
+   "datei": "florian/14aa5937a88a.mp3",
+   "h": "b1e8ebc753",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier hat eine Wochenschachtel sieben Fächer. Ein Stäbchen sind die Fächer von einer Wochenschachtel.": {
+   "datei": "florian/0496b885193e.mp3",
+   "h": "9a27aeb5b5",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier hat eine Zehn-Cent-Münze zehn Cent. Ein Stäbchen sind die Cent von einer Zehn-Cent-Münze.": {
+   "datei": "florian/68aa8e252061.mp3",
+   "h": "1da9eccce9",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier kommen die Dinge in Packungen, und in jeder Packung sind gleich viele.": {
+   "datei": "florian/49d621f9d61a.mp3",
+   "h": "2232f25636",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier kommen in eine Ballröhre drei Bälle. Ein Stäbchen sind die Bälle von einer Ballröhre.": {
+   "datei": "florian/f0ad6d3313b7.mp3",
+   "h": "f81738b6cf",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier kommen in eine Brötchentüte fünf Brötchen. Ein Stäbchen sind die Brötchen von einer Brötchentüte.": {
+   "datei": "florian/de3f39d152db.mp3",
+   "h": "c685c684de",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier kommen in eine Stiftebox acht Stifte. Ein Stäbchen sind die Stifte von einer Stiftebox.": {
+   "datei": "florian/c3bba5da5161.mp3",
+   "h": "ded9b5d36e",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier kommen in einen Eierkarton sechs Eier. Ein Stäbchen sind die Eier von einem Eierkarton.": {
+   "datei": "florian/aefb548bde72.mp3",
+   "h": "7ddd0fee40",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. Hier kommen in einen Muffinkarton neun Muffins. Ein Stäbchen sind die Muffins von einem Muffinkarton.": {
+   "datei": "florian/a9c5dec64252.mp3",
+   "h": "b1f6a60e07",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. In echt hat ein Schuhpaar zwei Schuhe. Ein Stäbchen sind die Schuhe von einem Schuhpaar.": {
+   "datei": "florian/f2b041f8ac7a.mp3",
+   "h": "8c35ca7dc1",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. In echt hat eine Woche sieben Tage. Hier hat eine Wochenschachtel ein Fach für jeden Tag. Ein Stäbchen sind die Fächer von einer Wochenschachtel.": {
+   "datei": "florian/3a6075c5a57b.mp3",
+   "h": "99aa24cca6",
+   "gehoert": false
+  },
+  "Der Vorratskorb wird gefüllt. In echt ist eine Zehn-Cent-Münze zehn Cent wert. Ein Stäbchen sind die Cent von einer Zehn-Cent-Münze.": {
+   "datei": "florian/7aa391e19adb.mp3",
+   "h": "ddb889984f",
+   "gehoert": false
+  },
   "Der Wind weht.": {
    "datei": "florian/0da2a378fb41.mp3",
    "h": "01f2a7a4ef",
@@ -1126,11 +1171,6 @@
    "h": "713173c96d",
    "gehoert": false
   },
-  "Der Zehnerstab bleibt, wie er ist. Nur die kleinen Stäbe kommen zusammen.": {
-   "datei": "florian/5ac37efdc58c.mp3",
-   "h": "e81ab08311",
-   "gehoert": false
-  },
   "der, die, das": {
    "datei": "florian/6823272b065b.mp3",
    "h": "ef2054c003",
@@ -1144,11 +1184,6 @@
   "Die beste Überschrift": {
    "datei": "florian/66a6b68221c4.mp3",
    "h": "8566e4db01",
-   "gehoert": false
-  },
-  "Die Brücke soll einen ganzen Zehnerstab bekommen. Dem langen Stab fehlen nur wenige Perlen.": {
-   "datei": "florian/6f084a2fd57c.mp3",
-   "h": "19de4964c8",
    "gehoert": false
   },
   "Die Brücke soll einen ganzen Zehnerstab bekommen. Dem langen Stab fehlen wenige Perlen.": {
@@ -1204,11 +1239,6 @@
   "Die kleinen Stäbe werden zu einem goldenen Zehnerstab. Jetzt liegen da lauter Zehner.": {
    "datei": "florian/6510d6566ec3.mp3",
    "h": "da38cd6b34",
-   "gehoert": false
-  },
-  "Die kleinen Stäbe werden zu einem goldenen Zehnerstab. Jetzt liegen da nur noch Zehner.": {
-   "datei": "florian/29ed6554df6c.mp3",
-   "h": "b274661c15",
    "gehoert": false
   },
   "Die Kuh muht.": {
@@ -1271,6 +1301,11 @@
    "h": "d9cbbd3192",
    "gehoert": false
   },
+  "Die Tauschaufgabe steht im Bild. Wie viele Zehnerstäbe sind es?": {
+   "datei": "florian/aad3c3ecfd9a.mp3",
+   "h": "552888dd8b",
+   "gehoert": false
+  },
   "Die Tür ist zu.": {
    "datei": "florian/e61f4fe8c079.mp3",
    "h": "8ebb53b091",
@@ -1281,9 +1316,24 @@
    "h": "611ad44d46",
    "gehoert": false
   },
+  "Die Vorratsliste ist voll. Der Vorrat ist eingeräumt.": {
+   "datei": "florian/f7360ba743f4.mp3",
+   "h": "a730a74e96",
+   "gehoert": false
+  },
+  "Die Vorratsliste ist voll. Im Korb liegen die Packungen.": {
+   "datei": "florian/3c2813784233.mp3",
+   "h": "42efbc5a5b",
+   "gehoert": false
+  },
   "Die Vorsilben wie bei verstecken und vorsingen": {
    "datei": "florian/291b8a8c5f2b.mp3",
    "h": "99c87cb673",
+   "gehoert": false
+  },
+  "Die Zeile steht jetzt auf der Vorratsliste.": {
+   "datei": "florian/11e5bb650323.mp3",
+   "h": "abfbd93fd8",
    "gehoert": false
   },
   "Diese Brücke braucht genau so viele Perlen. Sie sitzen alle auf einem Stab.": {
@@ -1299,11 +1349,6 @@
   "Diese Brücke ist ganz aus goldenen Zehnerstäben gebaut.": {
    "datei": "florian/ad3f99c3704f.mp3",
    "h": "6cb8721bab",
-   "gehoert": false
-  },
-  "Diese zwei passen nicht zusammen.": {
-   "datei": "florian/ac6098cb989e.mp3",
-   "h": "1b312778de",
    "gehoert": false
   },
   "Diese zwei Stäbe sind zusammen so lang wie der lange Stab. Leg sie in die Rinne.": {
@@ -1376,6 +1421,51 @@
    "h": "7ca157489b",
    "gehoert": false
   },
+  "Drei Ballröhren. Wie viele Bälle sind es zusammen?": {
+   "datei": "florian/853be0f3910e.mp3",
+   "h": "fb62be9766",
+   "gehoert": false
+  },
+  "Drei Brötchentüten. Wie viele Brötchen sind es zusammen?": {
+   "datei": "florian/1baccbd4d474.mp3",
+   "h": "b704bbd0f8",
+   "gehoert": false
+  },
+  "Drei Eierkartons. Wie viele Eier sind es zusammen?": {
+   "datei": "florian/d0be32f9c1f9.mp3",
+   "h": "6aa3b1c7f6",
+   "gehoert": false
+  },
+  "Drei Gedecke. Wie viele Dinge sind es zusammen?": {
+   "datei": "florian/be096405886a.mp3",
+   "h": "24ac275c98",
+   "gehoert": false
+  },
+  "Drei Muffinkartons. Wie viele Muffins sind es zusammen?": {
+   "datei": "florian/2e72e8022ca1.mp3",
+   "h": "4dc3041eff",
+   "gehoert": false
+  },
+  "Drei Schuhpaare. Wie viele Schuhe sind es zusammen?": {
+   "datei": "florian/21a0600b1e8e.mp3",
+   "h": "c58eef3469",
+   "gehoert": false
+  },
+  "Drei Stifteboxen. Wie viele Stifte sind es zusammen?": {
+   "datei": "florian/613cd5895558.mp3",
+   "h": "2378873219",
+   "gehoert": false
+  },
+  "Drei Wochenschachteln. Wie viele Fächer sind es zusammen?": {
+   "datei": "florian/310a93dd30c4.mp3",
+   "h": "983c7fbed1",
+   "gehoert": false
+  },
+  "Drei Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?": {
+   "datei": "florian/abbea57b3ae3.mp3",
+   "h": "49cd1581be",
+   "gehoert": false
+  },
   "Dreierauftrag": {
    "datei": "florian/3c847292726d.mp3",
    "h": "c00487da20",
@@ -1426,14 +1516,44 @@
    "h": "b349f5cac9",
    "gehoert": false
   },
+  "Ein Eierkarton. Wie viele Eier sind es?": {
+   "datei": "florian/3593754d9d0b.mp3",
+   "h": "f608705e25",
+   "gehoert": false
+  },
   "Ein ganzer Stab geht weg, der andere bleibt. Du musst nichts abzählen.": {
    "datei": "florian/45664566b315.mp3",
    "h": "fb4dec3782",
    "gehoert": false
   },
+  "Ein Gedeck. Wie viele Dinge sind es?": {
+   "datei": "florian/1f3a71e62f0f.mp3",
+   "h": "fa4b20257f",
+   "gehoert": false
+  },
   "Ein Hase hüpft.": {
    "datei": "florian/f90437e59eb0.mp3",
    "h": "f34e7b3c1a",
+   "gehoert": false
+  },
+  "Ein Muffinkarton. Wie viele Muffins sind es?": {
+   "datei": "florian/aeb422f9bc53.mp3",
+   "h": "1b9b1e0370",
+   "gehoert": false
+  },
+  "Ein Schuhpaar. Wie viele Schuhe sind es?": {
+   "datei": "florian/d859b1b715dc.mp3",
+   "h": "b0f315f34c",
+   "gehoert": false
+  },
+  "Ein Stäbchen. Die Perlen darauf sind das Ergebnis. Rechne es aus und tipp die Zahl.": {
+   "datei": "florian/a3ac49af2d41.mp3",
+   "h": "1c33348340",
+   "gehoert": false
+  },
+  "Ein Stäbchen. Wie viele Perlen liegen darauf?": {
+   "datei": "florian/fbbcc47caa26.mp3",
+   "h": "ab46f9a7a5",
    "gehoert": false
   },
   "Ein Vogel singt im Baum.": {
@@ -1446,6 +1566,36 @@
    "h": "e2ffdaba97",
    "gehoert": false
   },
+  "Eine Ballröhre. Wie viele Bälle sind es?": {
+   "datei": "florian/ae83b12cdbb0.mp3",
+   "h": "9acdcd4bac",
+   "gehoert": false
+  },
+  "Eine Brötchentüte. Wie viele Brötchen sind es?": {
+   "datei": "florian/f3cb36c18b50.mp3",
+   "h": "337eb9edc3",
+   "gehoert": false
+  },
+  "Eine Packung ist ein Stäbchen aus Perlen. Jede Perle ist ein Teil von der Packung.": {
+   "datei": "florian/e975401efce1.mp3",
+   "h": "a5222c1a65",
+   "gehoert": false
+  },
+  "Eine Stiftebox. Wie viele Stifte sind es?": {
+   "datei": "florian/f59a0b061c5d.mp3",
+   "h": "53cda8831e",
+   "gehoert": false
+  },
+  "Eine Wochenschachtel. Wie viele Fächer sind es?": {
+   "datei": "florian/c3b54f3876e8.mp3",
+   "h": "0b2c106c0e",
+   "gehoert": false
+  },
+  "Eine Zehn-Cent-Münze. Wie viele Cent sind es?": {
+   "datei": "florian/b857840e2403.mp3",
+   "h": "3a90f1693b",
+   "gehoert": false
+  },
   "Einfach oder doppelt": {
    "datei": "florian/bc654151b8a8.mp3",
    "h": "43466430e0",
@@ -1454,11 +1604,6 @@
   "Einfache Würfelbauten": {
    "datei": "florian/a1a12b0e35ad.mp3",
    "h": "a0022fb18b",
-   "gehoert": false
-  },
-  "Einhorn-Steine. Leerzeichen. Hör zu und schreib den Satz mit Abständen.": {
-   "datei": "florian/b04f51ff90b2.mp3",
-   "h": "659ad4c068",
    "gehoert": false
   },
   "Einmaleins gemischt": {
@@ -1474,6 +1619,11 @@
   "Einzahl oder Mehrzahl?": {
    "datei": "florian/b59d0edfb9ac.mp3",
    "h": "99fed866f5",
+   "gehoert": false
+  },
+  "Ela": {
+   "datei": "florian/757c2bdb171a.mp3",
+   "h": "b41ff4bbc0",
    "gehoert": false
   },
   "Ela dreht die Teile um. Sie staunt: Der Stab bleibt genau so lang.": {
@@ -1646,11 +1796,6 @@
    "h": "ffa5fd0fa2",
    "gehoert": false
   },
-  "Fang beim Ganzen an, bei der größten Zahl. Welcher Teil gehört dazu?": {
-   "datei": "florian/190d775a3df2.mp3",
-   "h": "34f10a4674",
-   "gehoert": false
-  },
   "Fast-Verdoppeln": {
    "datei": "florian/4aab8edc49a3.mp3",
    "h": "c3a9e11ed9",
@@ -1751,6 +1896,51 @@
    "h": "187bdcbb15",
    "gehoert": false
   },
+  "Fünf Ballröhren. Wie viele Bälle sind es zusammen?": {
+   "datei": "florian/3511ca155334.mp3",
+   "h": "7617896910",
+   "gehoert": false
+  },
+  "Fünf Brötchentüten. Wie viele Brötchen sind es zusammen?": {
+   "datei": "florian/c7b8fa64d2c4.mp3",
+   "h": "68c45f9db5",
+   "gehoert": false
+  },
+  "Fünf Eierkartons. Wie viele Eier sind es zusammen?": {
+   "datei": "florian/285c16d1b1e7.mp3",
+   "h": "6977d2a568",
+   "gehoert": false
+  },
+  "Fünf Gedecke. Wie viele Dinge sind es zusammen?": {
+   "datei": "florian/1623138e9ae2.mp3",
+   "h": "0a4bde4912",
+   "gehoert": false
+  },
+  "Fünf Muffinkartons. Wie viele Muffins sind es zusammen?": {
+   "datei": "florian/adbadd99f277.mp3",
+   "h": "64796aef96",
+   "gehoert": false
+  },
+  "Fünf Schuhpaare. Wie viele Schuhe sind es zusammen?": {
+   "datei": "florian/90d88a86d1e1.mp3",
+   "h": "354750b7ad",
+   "gehoert": false
+  },
+  "Fünf Stifteboxen. Wie viele Stifte sind es zusammen?": {
+   "datei": "florian/22d4c79d552b.mp3",
+   "h": "83b80946cf",
+   "gehoert": false
+  },
+  "Fünf Wochenschachteln. Wie viele Fächer sind es zusammen?": {
+   "datei": "florian/1bc31eb46e74.mp3",
+   "h": "4dc8764b32",
+   "gehoert": false
+  },
+  "Fünf Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?": {
+   "datei": "florian/7d1995adfcea.mp3",
+   "h": "8b4e9765ec",
+   "gehoert": false
+  },
   "Fünferreihe": {
    "datei": "florian/14b6e683a9c2.mp3",
    "h": "dff8eeec94",
@@ -1774,16 +1964,6 @@
   "Ganz rund": {
    "datei": "florian/80d88da78aea.mp3",
    "h": "0227aa03c0",
-   "gehoert": false
-  },
-  "Ganz unten im Tal wird der Bach zum Fluss. Dort braucht das Einhorn viele Zehnerstäbe.": {
-   "datei": "florian/1759cc77dab3.mp3",
-   "h": "33964a698c",
-   "gehoert": false
-  },
-  "Ganz unten im Tal wird der Bach zum Fluss. Dort liegen Brücken aus vielen Zehnerstäben.": {
-   "datei": "florian/d7f78ff39a7a.mp3",
-   "h": "8818679d76",
    "gehoert": false
   },
   "Ganz unten im Tal wird der Bach zum Fluss. Ela und Lena brauchen dort viele Zehnerstäbe. Lena staunt, wie breit der Fluss ist.": {
@@ -2181,441 +2361,6 @@
    "h": "b52d8b8d4d",
    "gehoert": false
   },
-  "Hör noch mal hin. Am Abend lese ich.": {
-   "datei": "florian/138bd30cd4fc.mp3",
-   "h": "e8e7fa881c",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Am Morgen trinke ich Milch.": {
-   "datei": "florian/46b0dc82d7b3.mp3",
-   "h": "7ddbd378d6",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Auto ist rot.": {
-   "datei": "florian/e9d5b2b5eb0d.mp3",
-   "h": "d302470310",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Baby weint.": {
-   "datei": "florian/6c045b1e8dd5.mp3",
-   "h": "670a76ec27",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Boot fährt.": {
-   "datei": "florian/d2edf98c9c31.mp3",
-   "h": "8f782d5c76",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Buch ist neu.": {
-   "datei": "florian/9fd99bccc36c.mp3",
-   "h": "1e2de98e44",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Einhorn hat ein buntes Horn.": {
-   "datei": "florian/27550a3ba8ec.mp3",
-   "h": "9b5cea70b6",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Einhorn springt über den Zaun.": {
-   "datei": "florian/daf95f3764e1.mp3",
-   "h": "2daa9f1794",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Eis ist kalt.": {
-   "datei": "florian/523191fce713.mp3",
-   "h": "51d47f46b7",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Kind lacht und tanzt.": {
-   "datei": "florian/18985c1cb827.mp3",
-   "h": "9dd87b63fe",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das kleine Einhorn ist müde.": {
-   "datei": "florian/6e8c9577471b.mp3",
-   "h": "99e7c9efe5",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Pferd frisst einen Apfel.": {
-   "datei": "florian/7a526adebcca.mp3",
-   "h": "826396b6b4",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Pony frisst Gras.": {
-   "datei": "florian/26ae34d96571.mp3",
-   "h": "948d1fa695",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Das Pony läuft.": {
-   "datei": "florian/3f05b7048770.mp3",
-   "h": "1f24399e3b",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Ball liegt auf dem Dach.": {
-   "datei": "florian/279c313eacf9.mp3",
-   "h": "a6c4dd0382",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Ball rollt.": {
-   "datei": "florian/9bde81d10b15.mp3",
-   "h": "51cc892229",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Bus hupt.": {
-   "datei": "florian/27b4b53a94a2.mp3",
-   "h": "6355b57008",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Bus kommt zu spät.": {
-   "datei": "florian/1f6f4d3a3a5e.mp3",
-   "h": "ad38fbb2da",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Frosch springt in den Teich.": {
-   "datei": "florian/32480e27f553.mp3",
-   "h": "59f6678e75",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Hund bellt im Garten.": {
-   "datei": "florian/80a67e011b3b.mp3",
-   "h": "bdac067b81",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Hund bellt laut am Zaun.": {
-   "datei": "florian/d82c6fc0997b.mp3",
-   "h": "6d7feddebc",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Hund bellt.": {
-   "datei": "florian/c6a2fa305379.mp3",
-   "h": "fbfcf83b02",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Hund liegt am Bach.": {
-   "datei": "florian/780853317158.mp3",
-   "h": "97d4cc8645",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Igel isst.": {
-   "datei": "florian/ff676a181139.mp3",
-   "h": "61c47d18da",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Igel ist ganz klein.": {
-   "datei": "florian/51c94c25ac91.mp3",
-   "h": "bd66b08de6",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Igel sucht im Laub.": {
-   "datei": "florian/5ba284c63612.mp3",
-   "h": "f9b8cc5afa",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Mond ist rund.": {
-   "datei": "florian/cdb1c27e616e.mp3",
-   "h": "61c8030ce4",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Opa liest.": {
-   "datei": "florian/1d04a9fc5d4e.mp3",
-   "h": "c5eb6446ba",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Der Wind weht.": {
-   "datei": "florian/1a102d8c1ad3.mp3",
-   "h": "61dbedf5c0",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Ente ist im Teich.": {
-   "datei": "florian/122b23d02446.mp3",
-   "h": "5094899059",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Ente quakt.": {
-   "datei": "florian/582fb75e730d.mp3",
-   "h": "0dd46cf2f9",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Ente schwimmt auf dem See.": {
-   "datei": "florian/b2325a3f541f.mp3",
-   "h": "211dac70f7",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Katze miaut.": {
-   "datei": "florian/fb38b40e621e.mp3",
-   "h": "4e05e58e49",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Katze schläft auf dem Sofa.": {
-   "datei": "florian/3f4e12b1f3a1.mp3",
-   "h": "b135c3cb93",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Katze sitzt im Gras.": {
-   "datei": "florian/75b31a66e83d.mp3",
-   "h": "313a12c05a",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Kuh muht.": {
-   "datei": "florian/72a3a4fc7d43.mp3",
-   "h": "41d6080eda",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Kuh steht im Stall.": {
-   "datei": "florian/e132525a84ba.mp3",
-   "h": "c527038756",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Maus piept.": {
-   "datei": "florian/59794cd3e616.mp3",
-   "h": "e7096e16e8",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Maus sitzt im Haus.": {
-   "datei": "florian/6ceb80257cdb.mp3",
-   "h": "f660dc841e",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Sonne lacht.": {
-   "datei": "florian/fb8cd13b454d.mp3",
-   "h": "b6af50fa4a",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Tür ist zu.": {
-   "datei": "florian/770e2542cbab.mp3",
-   "h": "1e1c4f5766",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Die Uhr tickt.": {
-   "datei": "florian/bcd678e3f4cd.mp3",
-   "h": "fc03b3ef02",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Du bist dran.": {
-   "datei": "florian/92a8feb9be51.mp3",
-   "h": "4a87d9e36c",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ein Hase hüpft.": {
-   "datei": "florian/5c8a9cbb085b.mp3",
-   "h": "eb033a87b2",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ein Vogel singt im Baum.": {
-   "datei": "florian/b77562b2b7e9.mp3",
-   "h": "722492d523",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Er hat ein Bild gemalt.": {
-   "datei": "florian/fcda935d33aa.mp3",
-   "h": "ea36fbcd7e",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Es ist kalt.": {
-   "datei": "florian/edbf33a95614.mp3",
-   "h": "a27e8d744a",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Heute ist es warm.": {
-   "datei": "florian/adadfef1fecb.mp3",
-   "h": "fc42b4ebf6",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich bin am See.": {
-   "datei": "florian/1bc46afa953b.mp3",
-   "h": "4da30b48c5",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich bin müde.": {
-   "datei": "florian/c27865ce8c65.mp3",
-   "h": "3c47494644",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich esse Brot und Käse.": {
-   "datei": "florian/c040e46cb080.mp3",
-   "h": "c588d55456",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich esse Brot.": {
-   "datei": "florian/2518518350e5.mp3",
-   "h": "bbbf42be08",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich esse einen Apfel.": {
-   "datei": "florian/7829330293a5.mp3",
-   "h": "fd0001acad",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich gehe zu Oma.": {
-   "datei": "florian/0526525374bd.mp3",
-   "h": "3cd0efc83c",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich gehe zur Schule.": {
-   "datei": "florian/bdbe22503dfa.mp3",
-   "h": "a43822b665",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich habe Durst.": {
-   "datei": "florian/b5b6f978e9ef.mp3",
-   "h": "4d4011a548",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich habe einen Hund.": {
-   "datei": "florian/6bc825d6a7ae.mp3",
-   "h": "e470460349",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich lese gern Bücher.": {
-   "datei": "florian/d612645a9e86.mp3",
-   "h": "61d591e1ab",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich mag Eis.": {
-   "datei": "florian/b652838b3067.mp3",
-   "h": "b64c01432b",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich male ein Bild für Oma.": {
-   "datei": "florian/dcf330b2a023.mp3",
-   "h": "eab1f226ec",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich putze mir die Zähne.": {
-   "datei": "florian/4fbb105b9070.mp3",
-   "h": "ebb51a4ca9",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Ich ziehe meine Jacke an.": {
-   "datei": "florian/b688de5a22b4.mp3",
-   "h": "79b7cd70b6",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Im Winter fällt viel Schnee.": {
-   "datei": "florian/b7f7a7df17d7.mp3",
-   "h": "13001e9eec",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Lena hat ein Pferd.": {
-   "datei": "florian/e3e3c513050b.mp3",
-   "h": "f9eb756ae5",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Lina singt laut.": {
-   "datei": "florian/1926d82afb4f.mp3",
-   "h": "9c25a9814b",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Mama holt mich ab.": {
-   "datei": "florian/cac789c6db35.mp3",
-   "h": "b6c65f2345",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Mama lacht laut.": {
-   "datei": "florian/ae2b0c99d638.mp3",
-   "h": "f22439ad52",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Mama liest mir ein Buch vor.": {
-   "datei": "florian/b430fc046c1f.mp3",
-   "h": "a18bdd4184",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Mein Bett ist warm.": {
-   "datei": "florian/4e05f5e0da64.mp3",
-   "h": "39552816b1",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Morgen fahren wir ans Meer.": {
-   "datei": "florian/322849284bb6.mp3",
-   "h": "2f4ab8b07c",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Nach der Schule esse ich Nudeln.": {
-   "datei": "florian/ba0be99b05e3.mp3",
-   "h": "c21beccc12",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Oma backt Kekse.": {
-   "datei": "florian/011a2f5d3838.mp3",
-   "h": "e14091902c",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Papa bringt mich ins Bett.": {
-   "datei": "florian/de15a793f2c1.mp3",
-   "h": "4b416b0abc",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Papa fährt mit dem Rad.": {
-   "datei": "florian/2e61daf9141a.mp3",
-   "h": "53ee87b81f",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Papa kocht Reis.": {
-   "datei": "florian/a138277dd4a7.mp3",
-   "h": "6f22c5fb66",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Sie hat rote Schuhe.": {
-   "datei": "florian/f56c45e6a69e.mp3",
-   "h": "606bcd6d62",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Tom rennt weg.": {
-   "datei": "florian/6b8fa22f09dc.mp3",
-   "h": "3467bb42b2",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Unser Hase frisst gern Möhren.": {
-   "datei": "florian/11a2594ade51.mp3",
-   "h": "7f36c99fae",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Wir backen heute einen Kuchen.": {
-   "datei": "florian/66851f49a818.mp3",
-   "h": "6f55225d24",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Wir essen heute Suppe.": {
-   "datei": "florian/26771fd7428c.mp3",
-   "h": "71b3218be6",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Wir fahren mit dem Bus.": {
-   "datei": "florian/fc505e4ef461.mp3",
-   "h": "ffd5792360",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Wir gehen in den Wald.": {
-   "datei": "florian/f929c4eb8cac.mp3",
-   "h": "ca93e6623d",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Wir gehen raus.": {
-   "datei": "florian/2cecb5f46a5d.mp3",
-   "h": "b2d36d9979",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Wir malen bunt.": {
-   "datei": "florian/b122be9bcb8b.mp3",
-   "h": "d06c684b66",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Wir malen mit Mama.": {
-   "datei": "florian/e0672eda3066.mp3",
-   "h": "fa68a8a560",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Wir sind da.": {
-   "datei": "florian/198bf0320e49.mp3",
-   "h": "9686470a2a",
-   "gehoert": false
-  },
-  "Hör noch mal hin. Wir spielen heute im Garten.": {
-   "datei": "florian/ed1ca2ac87a7.mp3",
-   "h": "dde87d9169",
-   "gehoert": false
-  },
   "Hörspiel-Werkstatt": {
    "datei": "florian/ff7dd2f65077.mp3",
    "h": "7921fc2c2a",
@@ -2776,9 +2521,9 @@
    "h": "07f99f1f5a",
    "gehoert": false
   },
-  "Im Tal fließt ein Bach. Das Einhorn baut dort Brücken aus Perlen.": {
-   "datei": "florian/69b83327b742.mp3",
-   "h": "b711a9a097",
+  "Im Korb liegen die Packungen.": {
+   "datei": "florian/d1e9dd3c3c66.mp3",
+   "h": "f95985f9ab",
    "gehoert": false
   },
   "Im Tal fließt ein Bach. Ela baut dort Brücken aus Perlen.": {
@@ -2804,11 +2549,6 @@
   "Immer, manchmal, nie": {
    "datei": "florian/ac018b3fceba.mp3",
    "h": "9360d13af5",
-   "gehoert": false
-  },
-  "In der Mitte steht jetzt Minus.": {
-   "datei": "florian/ed41e9c1d990.mp3",
-   "h": "4bf1f9865a",
    "gehoert": false
   },
   "In eigenen Worten wiedergeben": {
@@ -2866,19 +2606,9 @@
    "h": "6191911b36",
    "gehoert": false
   },
-  "Jetzt baut das Einhorn längere Brücken. Zuerst legt es den goldenen Zehnerstab.": {
-   "datei": "florian/ad704dec765a.mp3",
-   "h": "08991bfc8f",
-   "gehoert": false
-  },
   "Jetzt baut er die Brücke neu. Diesmal nimmt er den kleinen Stab weg. Übrig bleibt der Zehner.": {
    "datei": "florian/46f7f39bc03a.mp3",
    "h": "8fb058ebe7",
-   "gehoert": false
-  },
-  "Jetzt baut es die Brücke neu. Diesmal nimmt es den kleinen Stab weg. Übrig bleibt der Zehner.": {
-   "datei": "florian/b38d40c6a897.mp3",
-   "h": "d5b0dd09f2",
    "gehoert": false
   },
   "Jetzt baut Lena längere Brücken. Zuerst legt sie den goldenen Zehnerstab.": {
@@ -2906,11 +2636,6 @@
    "h": "a17dffc8e9",
    "gehoert": false
   },
-  "Jetzt nimmt das Einhorn einen Teil weg. Der andere Teil bleibt liegen.": {
-   "datei": "florian/3f8facd61cb6.mp3",
-   "h": "3347b5cafd",
-   "gehoert": false
-  },
   "Jetzt nimmt Kofi einen Teil weg. Der andere Teil bleibt liegen.": {
    "datei": "florian/fb906cdef431.mp3",
    "h": "ea29f335a5",
@@ -2936,14 +2661,59 @@
    "h": "31b8729c07",
    "gehoert": false
   },
-  "Jetzt soll es mehr Perlen wegnehmen, als der kleine Stab hat.": {
-   "datei": "florian/a4c0ac3f4053.mp3",
-   "h": "024dbf0d3e",
+  "Jetzt sind es Ballröhren. Ein Stäbchen sind die Bälle von einer Ballröhre.": {
+   "datei": "florian/fd9a884d203e.mp3",
+   "h": "e48a395e33",
+   "gehoert": false
+  },
+  "Jetzt sind es Brötchentüten. Ein Stäbchen sind die Brötchen von einer Brötchentüte.": {
+   "datei": "florian/62253eb08ac6.mp3",
+   "h": "726ecf63ce",
+   "gehoert": false
+  },
+  "Jetzt sind es Eierkartons. Ein Stäbchen sind die Eier von einem Eierkarton.": {
+   "datei": "florian/269967291058.mp3",
+   "h": "973dceaa49",
+   "gehoert": false
+  },
+  "Jetzt sind es Gedecke. Ein Stäbchen sind die Dinge von einem Gedeck.": {
+   "datei": "florian/6c310739ab1f.mp3",
+   "h": "df572aeceb",
+   "gehoert": false
+  },
+  "Jetzt sind es Muffinkartons. Ein Stäbchen sind die Muffins von einem Muffinkarton.": {
+   "datei": "florian/085c1a105408.mp3",
+   "h": "d4a06e25ec",
+   "gehoert": false
+  },
+  "Jetzt sind es Schuhpaare. Ein Stäbchen sind die Schuhe von einem Schuhpaar.": {
+   "datei": "florian/59b48efdf876.mp3",
+   "h": "0da2ef0463",
+   "gehoert": false
+  },
+  "Jetzt sind es Stifteboxen. Ein Stäbchen sind die Stifte von einer Stiftebox.": {
+   "datei": "florian/f26114546a1f.mp3",
+   "h": "67b6140c7b",
+   "gehoert": false
+  },
+  "Jetzt sind es Wochenschachteln. Ein Stäbchen sind die Fächer von einer Wochenschachtel.": {
+   "datei": "florian/efdcbc41ef5d.mp3",
+   "h": "90bfca81e7",
+   "gehoert": false
+  },
+  "Jetzt sind es Zehn-Cent-Münzen. Ein Stäbchen sind die Cent von einer Zehn-Cent-Münze.": {
+   "datei": "florian/d9a67bba9a84.mp3",
+   "h": "d27ffbdd40",
    "gehoert": false
   },
   "Jetzt teilst du den Stab. Wie viele Perlen hat jeder Teil?": {
    "datei": "florian/a9a01176f725.mp3",
    "h": "2eb29f2850",
+   "gehoert": false
+  },
+  "Jetzt tippst du, wie viele es zusammen sind. Dann hüpft das Pfeilchen, und die Packungen kommen in den Korb.": {
+   "datei": "florian/64222d4fefe0.mp3",
+   "h": "d90bd6b3a3",
    "gehoert": false
   },
   "Jetzt will sie mehr Perlen wegnehmen, als der kleine Stab hat.": {
@@ -2971,9 +2741,9 @@
    "h": "890788e154",
    "gehoert": false
   },
-  "Kettenhüpfer. Einmaleins. Wie weit hüpft das Einhorn? Tipp die Zahl ein.": {
-   "datei": "florian/66419bac82a2.mp3",
-   "h": "b7ef6b6a45",
+  "Kettenhüpfer": {
+   "datei": "florian/b914f8e94776.mp3",
+   "h": "056ca22881",
    "gehoert": false
   },
   "Kilometer und Millimeter": {
@@ -3041,6 +2811,11 @@
    "h": "54b8277f25",
    "gehoert": false
   },
+  "Kofi": {
+   "datei": "florian/53a846ed832e.mp3",
+   "h": "fb82c185b8",
+   "gehoert": false
+  },
   "Kofi hat einen langen und einen kurzen Stab. Daraus baut er eine Brücke.": {
    "datei": "florian/d8a9ec31d454.mp3",
    "h": "3f781d7a94",
@@ -3081,11 +2856,6 @@
    "h": "1f2be0d42d",
    "gehoert": false
   },
-  "Kommen Einer dazu, legt das Einhorn sie zum kleinen Stab. Die Zehnerstäbe bleiben.": {
-   "datei": "florian/db3c6d30ef6e.mp3",
-   "h": "155d8bfa33",
-   "gehoert": false
-  },
   "Kommen Einer dazu, legt Ela sie zum kleinen Stab. Die Zehnerstäbe bleiben.": {
    "datei": "florian/76c74a567229.mp3",
    "h": "a0a046c5a5",
@@ -3096,19 +2866,9 @@
    "h": "dcb03d990c",
    "gehoert": false
   },
-  "Kommen Perlen dazu, bleiben die Zehnerstäbe liegen. Nur die Einer kommen zusammen.": {
-   "datei": "florian/95873796b61e.mp3",
-   "h": "e7efa08168",
-   "gehoert": false
-  },
   "Kommt ein Zehnerstab dazu, ändern sich die Zehner. Die Einer bleiben gleich.": {
    "datei": "florian/943d8d560808.mp3",
    "h": "817c3ee368",
-   "gehoert": false
-  },
-  "Kommt ein Zehnerstab dazu, ändern sich nur die Zehner. Die Einer bleiben.": {
-   "datei": "florian/0ec93b86df5d.mp3",
-   "h": "8106a94305",
    "gehoert": false
   },
   "Körper benennen": {
@@ -3241,11 +3001,6 @@
    "h": "2ff2fe7a51",
    "gehoert": false
   },
-  "Leg die Perlen zusammen. Welche Zahl ist es?": {
-   "datei": "florian/a5cf463df0fa.mp3",
-   "h": "bcb9ce524b",
-   "gehoert": false
-  },
   "Leg zwei Stäbe in die Rinne. Zusammen sollen sie so lang sein wie der lange Stab.": {
    "datei": "florian/e6d06d3bb637.mp3",
    "h": "87f474c6f4",
@@ -3254,6 +3009,11 @@
   "Legen und Zusammensetzen": {
    "datei": "florian/bba164731f20.mp3",
    "h": "b4ce99846b",
+   "gehoert": false
+  },
+  "Lena": {
+   "datei": "florian/3dca01b08ef1.mp3",
+   "h": "b0cdda9816",
    "gehoert": false
   },
   "Lena findet einen bunten Käfer.": {
@@ -3396,19 +3156,9 @@
    "h": "10a40cce42",
    "gehoert": false
   },
-  "Manchmal passen die Perlen nicht mehr auf den kleinen Stab. Dann füllt das Einhorn zuerst einen Zehner auf.": {
-   "datei": "florian/e4b1754c1c89.mp3",
-   "h": "07d12af323",
-   "gehoert": false
-  },
   "Manchmal passen die Perlen nicht mehr auf den kleinen Stab. Dann füllt Timo zuerst einen Zehner auf.": {
    "datei": "florian/d1a649f3f7b2.mp3",
    "h": "fa02f3012e",
-   "gehoert": false
-  },
-  "Manchmal soll auch der Zehnerstab weg. Dann nimmt das Einhorn ihn mit und dazu Perlen vom kleinen Stab.": {
-   "datei": "florian/bb67a8fd7ab1.mp3",
-   "h": "2fe607b523",
    "gehoert": false
   },
   "Manchmal soll auch der Zehnerstab weg. Dann nimmt Lena ihn mit und dazu Perlen vom kleinen Stab.": {
@@ -3454,6 +3204,11 @@
   "Mehr kombinieren": {
    "datei": "florian/3283dd7dbf86.mp3",
    "h": "f1882e90e5",
+   "gehoert": false
+  },
+  "Mehr Packungen sind mehr Stäbchen. Sie hängen hintereinander wie eine Kette.": {
+   "datei": "florian/3b03a2171801.mp3",
+   "h": "db15badf1b",
    "gehoert": false
   },
   "Mehr, weniger, gleich viele": {
@@ -3529,11 +3284,6 @@
   "Mein Name": {
    "datei": "florian/7ac8c4aa30fb.mp3",
    "h": "0a395d15d2",
-   "gehoert": false
-  },
-  "Mein Regal": {
-   "datei": "florian/ec1aaafe8ba4.mp3",
-   "h": "06b21b3cac",
    "gehoert": false
   },
   "Mein Schreibziel": {
@@ -3861,6 +3611,51 @@
    "h": "dbd7dd5d5d",
    "gehoert": false
   },
+  "Neun Ballröhren. Wie viele Bälle sind es zusammen?": {
+   "datei": "florian/98895673c2a3.mp3",
+   "h": "600527a5cb",
+   "gehoert": false
+  },
+  "Neun Brötchentüten. Wie viele Brötchen sind es zusammen?": {
+   "datei": "florian/cfa8ef9f5e60.mp3",
+   "h": "db6d0e46a2",
+   "gehoert": false
+  },
+  "Neun Eierkartons. Wie viele Eier sind es zusammen?": {
+   "datei": "florian/510c45e4c517.mp3",
+   "h": "a7e6dc520c",
+   "gehoert": false
+  },
+  "Neun Gedecke. Wie viele Dinge sind es zusammen?": {
+   "datei": "florian/7e3d85d3e80f.mp3",
+   "h": "e0984874cd",
+   "gehoert": false
+  },
+  "Neun Muffinkartons. Wie viele Muffins sind es zusammen?": {
+   "datei": "florian/8da254e1f734.mp3",
+   "h": "1092e95ae9",
+   "gehoert": false
+  },
+  "Neun Schuhpaare. Wie viele Schuhe sind es zusammen?": {
+   "datei": "florian/86ebded7d90e.mp3",
+   "h": "daa7cd08c5",
+   "gehoert": false
+  },
+  "Neun Stifteboxen. Wie viele Stifte sind es zusammen?": {
+   "datei": "florian/a0325ec79296.mp3",
+   "h": "e0354b7e50",
+   "gehoert": false
+  },
+  "Neun Wochenschachteln. Wie viele Fächer sind es zusammen?": {
+   "datei": "florian/ba3da9836181.mp3",
+   "h": "ccde0c08fb",
+   "gehoert": false
+  },
+  "Neun Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?": {
+   "datei": "florian/ba9812b40eb8.mp3",
+   "h": "573e890fd7",
+   "gehoert": false
+  },
   "Neunerreihe": {
    "datei": "florian/c0f14b0a07d0.mp3",
    "h": "8ee6edb69f",
@@ -3886,34 +3681,14 @@
    "h": "ba7a136432",
    "gehoert": false
   },
-  "Nimm die Perlen weg. Wie viele bleiben?": {
-   "datei": "florian/3965f8467008.mp3",
-   "h": "4fa4355130",
-   "gehoert": false
-  },
   "Nimm einen Stab und leg ihn in die Rinne. Dann schau, wie viel noch frei ist.": {
    "datei": "florian/56145f0f05bc.mp3",
    "h": "b520186e74",
    "gehoert": false
   },
-  "Nimmt das Einhorn Einer weg, nimmt es sie vom kleinen Stab. Die Zehnerstäbe bleiben.": {
-   "datei": "florian/9fc1e65e914a.mp3",
-   "h": "d89195797e",
-   "gehoert": false
-  },
-  "Nimmt das Einhorn noch mehr weg, geht ein ganzer Zehnerstab mit.": {
-   "datei": "florian/62afcf147071.mp3",
-   "h": "7ddadb6c50",
-   "gehoert": false
-  },
   "Nimmt er einen Zehnerstab weg, ändern sich die Zehner. Die Einer bleiben gleich.": {
    "datei": "florian/2fc96d019808.mp3",
    "h": "dacc9c0275",
-   "gehoert": false
-  },
-  "Nimmt es einen Zehnerstab weg, ändern sich nur die Zehner. Die Einer bleiben.": {
-   "datei": "florian/2fe6f1b72cc4.mp3",
-   "h": "ee5b939186",
    "gehoert": false
   },
   "Nimmt Kofi Einer weg, nimmt er sie vom kleinen Stab. Die Zehnerstäbe bleiben.": {
@@ -4009,11 +3784,6 @@
   "Oder er nimmt den anderen Teil weg.": {
    "datei": "florian/88556b11a33b.mp3",
    "h": "c58ad5018a",
-   "gehoert": false
-  },
-  "Oder es nimmt den anderen Teil weg.": {
-   "datei": "florian/520b7babd3cc.mp3",
-   "h": "c356040e2d",
    "gehoert": false
   },
   "Offene und geschlossene Silbe": {
@@ -4129,11 +3899,6 @@
   "Perfekt mit „sein“": {
    "datei": "florian/d913dcafc36c.mp3",
    "h": "33ee520f24",
-   "gehoert": false
-  },
-  "Perlenbrücke. Zahlen zerlegen. Nimm links und rechts ein Perlenstäbchen und bau die Brücke.": {
-   "datei": "florian/fbf877b40072.mp3",
-   "h": "682bcc90b7",
    "gehoert": false
   },
   "Pfeile und Farben": {
@@ -4741,6 +4506,51 @@
    "h": "2c2fd6cfa6",
    "gehoert": false
   },
+  "Sechs Ballröhren. Wie viele Bälle sind es zusammen?": {
+   "datei": "florian/fd77b45c4584.mp3",
+   "h": "960ab02f78",
+   "gehoert": false
+  },
+  "Sechs Brötchentüten. Wie viele Brötchen sind es zusammen?": {
+   "datei": "florian/7f3d2bebd77c.mp3",
+   "h": "1b96b2bf35",
+   "gehoert": false
+  },
+  "Sechs Eierkartons. Wie viele Eier sind es zusammen?": {
+   "datei": "florian/6684b4be9327.mp3",
+   "h": "4306a79333",
+   "gehoert": false
+  },
+  "Sechs Gedecke. Wie viele Dinge sind es zusammen?": {
+   "datei": "florian/d7fcf786049a.mp3",
+   "h": "411e940dd3",
+   "gehoert": false
+  },
+  "Sechs Muffinkartons. Wie viele Muffins sind es zusammen?": {
+   "datei": "florian/93f08c6768c4.mp3",
+   "h": "8c149bab48",
+   "gehoert": false
+  },
+  "Sechs Schuhpaare. Wie viele Schuhe sind es zusammen?": {
+   "datei": "florian/5601534be1ac.mp3",
+   "h": "e130371f60",
+   "gehoert": false
+  },
+  "Sechs Stifteboxen. Wie viele Stifte sind es zusammen?": {
+   "datei": "florian/4e94aa5188fd.mp3",
+   "h": "955d2adb92",
+   "gehoert": false
+  },
+  "Sechs Wochenschachteln. Wie viele Fächer sind es zusammen?": {
+   "datei": "florian/88dcd2798154.mp3",
+   "h": "dc008c8875",
+   "gehoert": false
+  },
+  "Sechs Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?": {
+   "datei": "florian/36bed75be857.mp3",
+   "h": "f920caf557",
+   "gehoert": false
+  },
   "Sechserreihe": {
    "datei": "florian/743519db3aa6.mp3",
    "h": "6a9dd88ea4",
@@ -4764,6 +4574,51 @@
   "Sieb oder Siep? Verlängern hilft": {
    "datei": "florian/7eb465046671.mp3",
    "h": "3732f14f42",
+   "gehoert": false
+  },
+  "Sieben Ballröhren. Wie viele Bälle sind es zusammen?": {
+   "datei": "florian/ec2aba80b0ef.mp3",
+   "h": "51b0ebf08c",
+   "gehoert": false
+  },
+  "Sieben Brötchentüten. Wie viele Brötchen sind es zusammen?": {
+   "datei": "florian/b369d560547d.mp3",
+   "h": "b17396de24",
+   "gehoert": false
+  },
+  "Sieben Eierkartons. Wie viele Eier sind es zusammen?": {
+   "datei": "florian/77deb5cc593f.mp3",
+   "h": "fcff188923",
+   "gehoert": false
+  },
+  "Sieben Gedecke. Wie viele Dinge sind es zusammen?": {
+   "datei": "florian/c509458427b9.mp3",
+   "h": "6602abce8f",
+   "gehoert": false
+  },
+  "Sieben Muffinkartons. Wie viele Muffins sind es zusammen?": {
+   "datei": "florian/a78038aa5099.mp3",
+   "h": "c72cff25a0",
+   "gehoert": false
+  },
+  "Sieben Schuhpaare. Wie viele Schuhe sind es zusammen?": {
+   "datei": "florian/56b3e9dc40ff.mp3",
+   "h": "8629014e6d",
+   "gehoert": false
+  },
+  "Sieben Stifteboxen. Wie viele Stifte sind es zusammen?": {
+   "datei": "florian/09e7a99ebf89.mp3",
+   "h": "2cf03fb272",
+   "gehoert": false
+  },
+  "Sieben Wochenschachteln. Wie viele Fächer sind es zusammen?": {
+   "datei": "florian/e97940767b8d.mp3",
+   "h": "afe2f3b958",
+   "gehoert": false
+  },
+  "Sieben Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?": {
+   "datei": "florian/b40992169b40.mp3",
+   "h": "5c0b82b20a",
    "gehoert": false
   },
   "Siebenerreihe": {
@@ -5096,6 +4951,11 @@
    "h": "2e289a1ee8",
    "gehoert": false
   },
+  "Timo": {
+   "datei": "florian/196e2a187fa6.mp3",
+   "h": "d887606f7b",
+   "gehoert": false
+  },
   "Timo legt noch ein paar Perlen dazu.": {
    "datei": "florian/97790e107af6.mp3",
    "h": "ff66ab1cc3",
@@ -5104,6 +4964,51 @@
   "Timo nimmt ein paar Perlen weg. Er nimmt sie von einem Zehnerstab.": {
    "datei": "florian/ab595b6f472a.mp3",
    "h": "9a74f0fff6",
+   "gehoert": false
+  },
+  "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Bälle von einer Ballröhre.": {
+   "datei": "florian/a9d32889beea.mp3",
+   "h": "3039d2c3a9",
+   "gehoert": false
+  },
+  "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Brötchen von einer Brötchentüte.": {
+   "datei": "florian/7b3f0e49b0f8.mp3",
+   "h": "228558330a",
+   "gehoert": false
+  },
+  "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Cent von einer Zehn-Cent-Münze.": {
+   "datei": "florian/ab1aead81122.mp3",
+   "h": "20ee5d29d1",
+   "gehoert": false
+  },
+  "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Dinge von einem Gedeck.": {
+   "datei": "florian/1d36712cf7c7.mp3",
+   "h": "7a07542bd1",
+   "gehoert": false
+  },
+  "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Eier von einem Eierkarton.": {
+   "datei": "florian/a0f15916446d.mp3",
+   "h": "4f2cc8a31e",
+   "gehoert": false
+  },
+  "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Fächer von einer Wochenschachtel.": {
+   "datei": "florian/3842da422938.mp3",
+   "h": "fef7806e65",
+   "gehoert": false
+  },
+  "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Muffins von einem Muffinkarton.": {
+   "datei": "florian/d67f59bf196c.mp3",
+   "h": "edeb9990bb",
+   "gehoert": false
+  },
+  "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Schuhe von einem Schuhpaar.": {
+   "datei": "florian/aa537a1acf33.mp3",
+   "h": "7d88e5e61d",
+   "gehoert": false
+  },
+  "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Stifte von einer Stiftebox.": {
+   "datei": "florian/a8d958648374.mp3",
+   "h": "84e650b680",
    "gehoert": false
   },
   "Timo wiegt das Mehl ab.": {
@@ -5366,6 +5271,51 @@
    "h": "818eb1dae8",
    "gehoert": false
   },
+  "Vier Ballröhren. Wie viele Bälle sind es zusammen?": {
+   "datei": "florian/8cda1499d2ad.mp3",
+   "h": "234a641d9e",
+   "gehoert": false
+  },
+  "Vier Brötchentüten. Wie viele Brötchen sind es zusammen?": {
+   "datei": "florian/0762d1d21c37.mp3",
+   "h": "71ce3291b6",
+   "gehoert": false
+  },
+  "Vier Eierkartons. Wie viele Eier sind es zusammen?": {
+   "datei": "florian/1bc555e1e233.mp3",
+   "h": "d90f1bd776",
+   "gehoert": false
+  },
+  "Vier Gedecke. Wie viele Dinge sind es zusammen?": {
+   "datei": "florian/bc39335a64cb.mp3",
+   "h": "c2703282b8",
+   "gehoert": false
+  },
+  "Vier Muffinkartons. Wie viele Muffins sind es zusammen?": {
+   "datei": "florian/ffd3a7b2c432.mp3",
+   "h": "1718c2d6db",
+   "gehoert": false
+  },
+  "Vier Schuhpaare. Wie viele Schuhe sind es zusammen?": {
+   "datei": "florian/2befa4bf3ef5.mp3",
+   "h": "5d8b41d666",
+   "gehoert": false
+  },
+  "Vier Stifteboxen. Wie viele Stifte sind es zusammen?": {
+   "datei": "florian/133415011f45.mp3",
+   "h": "949e333af2",
+   "gehoert": false
+  },
+  "Vier Wochenschachteln. Wie viele Fächer sind es zusammen?": {
+   "datei": "florian/d12eaf1707c3.mp3",
+   "h": "cdbf6d4779",
+   "gehoert": false
+  },
+  "Vier Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?": {
+   "datei": "florian/cef8d64d0c20.mp3",
+   "h": "b70362f434",
+   "gehoert": false
+  },
   "Viererreihe": {
    "datei": "florian/63b67077639f.mp3",
    "h": "3613c35640",
@@ -5394,6 +5344,26 @@
   "Vom Bild zur Rechnung": {
    "datei": "florian/0e367ff2b4cf.mp3",
    "h": "e5378c9fd3",
+   "gehoert": false
+  },
+  "Von der Kernaufgabe geht es ein Stäbchen weiter. Zum Ergebnis kommen die Perlen von einem Stäbchen dazu. Rechne es aus und tipp die Zahl.": {
+   "datei": "florian/5f6e10af7f8d.mp3",
+   "h": "648cc5358f",
+   "gehoert": false
+  },
+  "Von der Kernaufgabe geht es ein Stäbchen zurück. Vom Ergebnis gehen die Perlen von einem Stäbchen weg. Rechne es aus und tipp die Zahl.": {
+   "datei": "florian/acb1027f1715.mp3",
+   "h": "08194bd2c2",
+   "gehoert": false
+  },
+  "Von der Kernaufgabe geht es zwei Stäbchen weiter. Zum Ergebnis kommen die Perlen von zwei Stäbchen dazu. Rechne es aus und tipp die Zahl.": {
+   "datei": "florian/c7c036e431d7.mp3",
+   "h": "c186240a43",
+   "gehoert": false
+  },
+  "Von der Kernaufgabe geht es zwei Stäbchen zurück. Vom Ergebnis gehen die Perlen von zwei Stäbchen weg. Rechne es aus und tipp die Zahl.": {
+   "datei": "florian/87254a4b5ca2.mp3",
+   "h": "b1f291fe55",
    "gehoert": false
   },
   "Von der Rechnung zum Bild": {
@@ -5516,9 +5486,9 @@
    "h": "d7e5da93f8",
    "gehoert": false
   },
-  "Was ich kann": {
-   "datei": "florian/c1a988531c9b.mp3",
-   "h": "68e2ae8948",
+  "Was ich schon kann": {
+   "datei": "florian/c38b6420ba0d.mp3",
+   "h": "84333044bf",
    "gehoert": false
   },
   "Was ist erzählenswert?": {
@@ -5574,11 +5544,6 @@
   "Weiter unten ist der Bach breiter. Diese Brücke hat Zehnerstäbe und einen kleinen Stab.": {
    "datei": "florian/3b4e51398160.mp3",
    "h": "fae31f15d5",
-   "gehoert": false
-  },
-  "Weiter unten ist der Bach breiter. Dort legt das Einhorn Zehnerstäbe und einen kleinen Stab.": {
-   "datei": "florian/fb62c7d74e58.mp3",
-   "h": "9f50179bf3",
    "gehoert": false
   },
   "Weiter unten ist der Bach breiter. Dort legt Timo Zehnerstäbe und einen kleinen Stab.": {
@@ -5759,11 +5724,6 @@
   "Wie Zäune von Zaun kommt": {
    "datei": "florian/2ab6397c5e13.mp3",
    "h": "01bcc0440f",
-   "gehoert": false
-  },
-  "Wimmelbild. Nomen. Zieh die Wörter auf die Dinge im Bild.": {
-   "datei": "florian/5b07b3f077df.mp3",
-   "h": "d99d64debb",
    "gehoert": false
   },
   "Wir backen heute einen Kuchen.": {
@@ -6121,24 +6081,64 @@
    "h": "bd465c448c",
    "gehoert": false
   },
-  "Zahlenzauber. Plus und Minus. Welche zwei Zahlen sind zusammen so viel wie die dritte?": {
-   "datei": "florian/5c0132a7cbe0.mp3",
-   "h": "6cfdd135a6",
-   "gehoert": false
-  },
   "Zahlwörter und Ziffern": {
    "datei": "florian/4fdfbc5c3bcf.mp3",
    "h": "7855446c7b",
    "gehoert": false
   },
-  "Zauberin. Großschreibung. Zaubere die Buchstaben groß oder klein.": {
-   "datei": "florian/693772588419.mp3",
-   "h": "9caa92928b",
-   "gehoert": false
-  },
   "Zaunpfahlfalle": {
    "datei": "florian/e8d9d8369da3.mp3",
    "h": "1711340b68",
+   "gehoert": false
+  },
+  "Zehn Ballröhren. Wie viele Bälle sind es zusammen?": {
+   "datei": "florian/d0e469146ae6.mp3",
+   "h": "9b91d1f370",
+   "gehoert": false
+  },
+  "Zehn Brötchentüten. Wie viele Brötchen sind es zusammen?": {
+   "datei": "florian/59187cd97ad8.mp3",
+   "h": "9a96a2bc72",
+   "gehoert": false
+  },
+  "Zehn Eierkartons. Wie viele Eier sind es zusammen?": {
+   "datei": "florian/927e8830de93.mp3",
+   "h": "088b371e1b",
+   "gehoert": false
+  },
+  "Zehn Gedecke. Wie viele Dinge sind es zusammen?": {
+   "datei": "florian/2e46bec43696.mp3",
+   "h": "8be5aa58ee",
+   "gehoert": false
+  },
+  "Zehn Muffinkartons. Wie viele Muffins sind es zusammen?": {
+   "datei": "florian/2b289f37525c.mp3",
+   "h": "6f3a8b2f11",
+   "gehoert": false
+  },
+  "Zehn Schuhpaare. Wie viele Schuhe sind es zusammen?": {
+   "datei": "florian/bc2729e94f5f.mp3",
+   "h": "4688fe7ca8",
+   "gehoert": false
+  },
+  "Zehn Stäbchen sind so viele Perlen wie die Zehnerstäbe in der Tauschaufgabe zusammen. Rechne es aus und tipp die Zahl.": {
+   "datei": "florian/2d5818419bc3.mp3",
+   "h": "27aedf3443",
+   "gehoert": false
+  },
+  "Zehn Stifteboxen. Wie viele Stifte sind es zusammen?": {
+   "datei": "florian/b1d9f899f550.mp3",
+   "h": "54436b5234",
+   "gehoert": false
+  },
+  "Zehn Wochenschachteln. Wie viele Fächer sind es zusammen?": {
+   "datei": "florian/b4813ff79ef2.mp3",
+   "h": "2e9c9a03b7",
+   "gehoert": false
+  },
+  "Zehn Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?": {
+   "datei": "florian/03cff7f712d7.mp3",
+   "h": "e411ccc684",
    "gehoert": false
   },
   "Zehner bündeln": {
@@ -6271,16 +6271,6 @@
    "h": "4362010747",
    "gehoert": false
   },
-  "Zuerst nimmt es den ganzen kleinen Stab weg. Jetzt bleibt genau der Zehner.": {
-   "datei": "florian/5df6974c0380.mp3",
-   "h": "7a8aaa0d69",
-   "gehoert": false
-  },
-  "Zuerst nimmt es den ganzen kleinen Stab weg. Jetzt liegen da nur noch Zehnerstäbe.": {
-   "datei": "florian/0aa316e49887.mp3",
-   "h": "41ad61fb7e",
-   "gehoert": false
-  },
   "Zuerst nimmt sie den ganzen kleinen Stab weg. Jetzt bleibt genau der Zehner.": {
    "datei": "florian/0a5e7810b896.mp3",
    "h": "bceff001fb",
@@ -6316,14 +6306,54 @@
    "h": "550ccb4db7",
    "gehoert": false
   },
+  "Zwei Ballröhren. Wie viele Bälle sind es zusammen?": {
+   "datei": "florian/24639685d8b9.mp3",
+   "h": "2885d15354",
+   "gehoert": false
+  },
+  "Zwei Brötchentüten. Wie viele Brötchen sind es zusammen?": {
+   "datei": "florian/6697ffcb91b7.mp3",
+   "h": "969043bb6d",
+   "gehoert": false
+  },
+  "Zwei Eierkartons. Wie viele Eier sind es zusammen?": {
+   "datei": "florian/19c2879bd7cb.mp3",
+   "h": "b3b8a1c030",
+   "gehoert": false
+  },
+  "Zwei Gedecke. Wie viele Dinge sind es zusammen?": {
+   "datei": "florian/8d6092f54ab9.mp3",
+   "h": "6f298b49d8",
+   "gehoert": false
+  },
+  "Zwei Muffinkartons. Wie viele Muffins sind es zusammen?": {
+   "datei": "florian/2f3632249bce.mp3",
+   "h": "3fed023591",
+   "gehoert": false
+  },
+  "Zwei Schuhpaare. Wie viele Schuhe sind es zusammen?": {
+   "datei": "florian/ff6445f7d3bf.mp3",
+   "h": "e9444cf644",
+   "gehoert": false
+  },
   "Zwei Stäbe, zusammen so lang wie der lange Stab.": {
    "datei": "florian/67bfb4b747cc.mp3",
    "h": "1d7c7931f5",
    "gehoert": false
   },
-  "Zwei Zahlen sind die Teile, eine ist das Ganze. Welche zwei Teile sind zusammen so viel wie das Ganze?": {
-   "datei": "florian/cad6f286df64.mp3",
-   "h": "3c97be646d",
+  "Zwei Stifteboxen. Wie viele Stifte sind es zusammen?": {
+   "datei": "florian/394cbbafa5e6.mp3",
+   "h": "775e50f991",
+   "gehoert": false
+  },
+  "Zwei Wochenschachteln. Wie viele Fächer sind es zusammen?": {
+   "datei": "florian/cd649a793f7c.mp3",
+   "h": "eb957c9d50",
+   "gehoert": false
+  },
+  "Zwei Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?": {
+   "datei": "florian/adb72a236fd1.mp3",
+   "h": "4b8b9f0e20",
    "gehoert": false
   },
   "Zweierreihe": {
