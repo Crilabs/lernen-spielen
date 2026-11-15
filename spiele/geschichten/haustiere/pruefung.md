@@ -1,28 +1,53 @@
-# Bildprüfung – Ein Tag mit Mia, der Katze
+# Prüfung – Mia zieht ein
 
-Geprüft am 2026-11-15, jedes Bild mit dem Read-Werkzeug angesehen. Maßstab: passt zu Satz und Fakt, Körperbau stimmt
-(Beine, Ohren, Augen, Schnurrhaare), keine erfundenen Details, keine Schrift, ruhig, hell, schön; Menschen nur beiläufig,
-keine Gesichter. Mia ist in allen Bildern dieselbe Katze, so ähnlich es geht: rot-weiß getigerte Hauskatze (junge
-Erwachsene) mit weißer Brust, weißem Maul, vier weißen Pfoten und bernsteinfarbenen Augen – diese Merkmale stehen
-seit der Neuerzeugung wörtlich in jedem Prompt. Malik zeigt sich nur mit Füßen, Hand oder Arm (dunkle Haut).
+Geprüft am 2026-11-15. Ersetzt „Ein Tag mit Mia, der Katze“: Christian fand sie wie ein Lernbuch („Katzen fressen vor
+allem Fleisch“), ohne Gefühl und spannende Details. Neu erzählt nach `docs/geschichten.md` §2 (Schreibverfahren).
 
-**Quadratisch neu erzeugt** (Christian 2026-11-15: „Bild links, Text rechts. Bilder quadratisch generieren.“): alle
-acht Bilder 1024 × 1024 mit `--basis foto`, Motiv mittig; WebP mit `cwebp -q 82`. Die Prompts stehen in
-`bilder/herkunft.json`, die früheren Querformat-Bilder (1536 × 1024) und ihre Prompts in der Git-Geschichte.
+## 1. Recherche
 
-| Bild | Satz | geprüft | was stimmt | Versuche |
-|---|---|---|---|---|
-| 01 | Am Morgen läuft Mia zu Malik. Ihr Schwanz steht hoch. | ja | Katze läuft mittig auf die nackten Füße des Kindes zu (Pyjamahose am unteren Rand), Schwanz senkrecht mit gebogener Spitze (Begrüßung), zwei Ohren nach vorn, vier Beine, Morgenlicht im Wohnzimmer; keine Schrift. | 1 |
-| 02 | Malik füllt den Napf mit Katzenfutter. | ja | Kinderhand im geblümten Ärmel löffelt Nassfutter (Fleischstücke) in einen schlichten weißen Napf ohne Muster, Katze sitzt ruhig dahinter und schaut, Schwanz um die Pfoten; keine Verpackung, keine Schrift. | 1 |
-| 03 | Mia hat Durst. Was glaubst du: Was trinkt Mia? | ja | Katze sitzt mittig in heller Küche, schaut nach oben, leckt sich die Nase, leerer Napf daneben; keine Flüssigkeit zu sehen, verrät die Antwort nicht. | 1 |
-| 04 | Mia trinkt frisches Wasser. Milch vertragen viele Katzen nicht. | ja | Katze trinkt klares Wasser aus einer flachen Schale, Zunge im Wasser, Ringe auf der Oberfläche; keine Milch, kein Futter im Bild. | 1 |
-| 05 | Mia wetzt ihre Krallen am Kratzbaum. | ja | Katze steht auf den Hinterbeinen, beide Vorderpfoten am Sisalstamm eines stabilen Kratzbaums mit Liegebrett und Höhle; ganze Katze zu sehen, Körper lang gestreckt (typische Kratzhaltung), Krallen nur angedeutet. | 1 |
-| 06 | Mittags liegt Mia in der Sonne. Katzen schlafen viele Stunden am Tag. | ja | Katze schläft eingerollt auf einer Decke auf der Fensterbank im Sonnenlicht, Augen zu, Schwanz um den Körper; sehr ruhig. | 1 |
-| 07 | Am Nachmittag besucht Mia die Tierärztin. Sie hört Mias Herz ab. | ja | Tierärztin im hellblauen Kittel (Gesicht nicht im Bild) hält das Stethoskop an die Brust der ruhig sitzenden Katze, Kinderhand auf ihrem Rücken, Transportbox im Hintergrund; keine Spritzen, keine Schrift (nur Pfotenmuster auf einem Kissen). | 1 |
-| 08 | Am Abend liegt Mia bei Malik. Sie schnurrt leise. | ja | Katze liegt entspannt mit halb geschlossenen Augen auf dem Sofa, Kinderhand im Strickärmel liegt auf ihrem Rücken, warmes Lampenlicht, trotzdem hell; keine Schrift. | 1 |
+Die ersten Tage einer Katze im neuen Zuhause; alle Tatsachen mit Quelle in `quellen`. Verworfen bzw. abgeschwächt:
+„Schnurrhaare messen, ob der Körper durchpasst“ (nicht belegt, eher Mythos → „berühren die Wände, so findet sie den
+Weg“); „Katzen lieben Kartons“ (umgangssprachlich → „in einer engen Kiste fühlt sie sich wohl“, Vinke 2014);
+„Katze erkundet nachts“ (nicht wörtlich belegt → Dämmerung, Katzen sind dämmerungsaktiv).
 
-Berechnet für die quadratischen Bilder: 8 Bilder, keins verworfen, 0,51 € laut `kosten.json` (Einträge mit „quadratisch“).
-Zusammen mit der ersten Fassung im Querformat (9 Bilder, 0,45 €): 17 Bilder, 0,97 €.
+## 2. Urteil des frischen Prüfers (Zusammenfassung)
 
-Hinweis für den Baustein: Erzeugte Bilder tragen den Hinweis „Bild erzeugt“ (`docs/geschichten.md` §2) – das zeigt die
-Seite, nicht das Bild.
+- **Geschichte, kein Sachtext**: Bogen Ankunft → Verstecken → vorsichtig erkunden → erstes Hallo → Verschwinden →
+  Finden → Nähe; Malik mit Wunsch (streicheln), eingelöst auf der letzten Seite.
+- **Umgesetzte Befunde**: Zeitablauf war 1,5 Tage, die Eingewöhnung dauert Wochen → „Nach ein paar Tagen“, „Viele Tage
+  später“. Lernbuch-Sätze ersetzt (S. 7 Duft, S. 8 „X ist Y“, S. 12, S. 13 mit Malik). Malik zeigt Gefühl (S. 10 „Sein
+  Herz klopft“). S. 5 ohne „leuchtende Augen im Dunkeln“ (Angst-Auslöser „glühende Augen“).
+- **Wissen, das am meisten trägt**: Schwanz hoch (S. 8) und langsames Blinzeln (S. 9) – kann das Kind an echten Katzen
+  ausprobieren; Karton (S. 10–12) durch die Vorhersage.
+- **Spannung**: „Mia ist verschwunden“ passt zur Stufe Sanft (kleine Komplikation zu Hause, sofort gelöst); auf dem
+  Foto von S. 10 sieht man schon die Schwanzspitze im Karton (Wissensvorsprung).
+- **Fassungen**: `ruhig` nötig (S. 5 Halbdunkel und S. 10 Verschwinden widersprechen „keine Komplikation, kein
+  Dunkel“) → `haustiere-ruhig`. `abenteuer` nicht nötig (Stufe für 8–10 Jahre, Stoff für Kl. 1; Nutzen ohne Bildkosten
+  nicht gegeben).
+
+## 3. Bilder
+
+Jedes Bild mit dem Read-Werkzeug angesehen. Maßstab: zeigt die Kernaussage des Abschnitts, Körperbau stimmt, Mia
+überall dieselbe Katze (rot-weiß getigert, weiße Brust, weißes Maul, vier weiße Pfoten, bernsteinfarbene Augen – steht
+wörtlich in jedem Prompt), Malik nur mit Händen, Armen, Beinen (dunkle Haut), ruhig, hell, keine Schrift.
+1024 × 1024 `--basis foto`, WebP `cwebp -q 82`; Prompts in `bilder/herkunft.json`.
+
+| Bild | Kernaussage | was stimmt | Herkunft |
+|---|---|---|---|
+| 01 | offene Box in ruhiger Ecke, Mia bleibt drin | Transportbox, Tür offen, Mia sitzt hinten auf der Decke, wach | neu, 1 Versuch |
+| 02 | Mia unter dem Sofa, nur Kopf und Pfoten | geduckt unter dem Sofa, große Augen, hell | neu, 1 |
+| 03 | Malik wartet still auf Abstand | Kind sitzt, Hände gefaltet, Mia schaut unter dem Sofa hervor | neu, 1 |
+| 04 | Ohren in verschiedene Richtungen | ein Ohr nach vorn, eins seitlich gedreht | neu, 1 |
+| 05 | Mia läuft sicher im Lampenlicht | Abend, eine Lampe, Mia läuft ruhig auf die Kamera zu; Text an das Bild angepasst (kein „Augen leuchten“) | neu, 1 |
+| 06 | Schnurrhaare berühren die Wände im Spalt | Mia zwischen Schrank und Wand, Schnurrhaare an der Wand | neu, 1 |
+| 07 | Wange am Tischbein | Wange am Holzbein, Augen zu, Schwanz hoch | neu, 1 |
+| 08 | Schwanz hoch, Mia kommt zu Malik | Schwanz senkrecht, läuft auf Kinderfüße zu | **übernommen** (früher 01, Kernaussage gleich) |
+| 09 | langsames Blinzeln | halb geschlossene Augen, Blick zur Kamera | neu, 1 |
+| 10 | Malik sucht, unter dem Sofa leer | Hand hebt die Sofadecke, leer; hinten Karton mit Schwanzspitze | neu, 1 |
+| 11 | Karton im Flur (Frage) | offener Karton von der Seite, keine Katze zu sehen | neu, 1 |
+| 12 | Mia im Karton, entspannt | Kopf und Ohren über dem Rand | neu, 1 |
+| 13 | Putzen mit rauer Zunge | Zunge sichtbar an der Pfote, Augen halb zu | neu, 1 |
+| 14 | Mia bei Malik, er streichelt sie | liegt entspannt auf dem Sofa, seine Hand auf ihrem Rücken | **übernommen** (früher 08) |
+
+Die übrigen sechs alten Bilder (Futter, Wasser, Kratzbaum, Sonne, Tierärztin, Frage-Durst) passen zu keinem Abschnitt
+mehr und sind ersetzt (Git-Geschichte). Kosten in `kosten.json`.

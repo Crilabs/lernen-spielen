@@ -1,0 +1,38 @@
+{
+ "10.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition, subject centred. A bright hallway in daylight. A child's hands set down an open brown cardboard shopping box on the wooden floor. Of the child (Malik, dark brown skin) only hands, arms, knees or feet are visible, never the face. Mia: a young adult orange tabby domestic cat with a white chest, white muzzle and four white paws, amber eyes (one cat, four legs, two ears, normal whiskers). approaches the box curiously, ears forward, tail up.",
+  "usage": {
+   "input_tokens": 271,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 271
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2027
+  }
+ },
+ "11.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition, subject centred. A bright hallway in daylight. Mia: a young adult orange tabby domestic cat with a white chest, white muzzle and four white paws, amber eyes (one cat, four legs, two ears, normal whiskers). sniffs curiously at the edge of an open brown cardboard box on the wooden floor, front paws on the floor, nose touching the rim, ears forward.",
+  "usage": {
+   "input_tokens": 249,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 249
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2005
+  }
+ }
+}

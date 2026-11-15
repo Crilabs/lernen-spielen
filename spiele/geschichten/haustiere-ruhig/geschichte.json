@@ -1,0 +1,112 @@
+{
+ "id": "haustiere-ruhig",
+ "titel": "Mia zieht ein",
+ "art": "sachgeschichte",
+ "welt": "haustiere",
+ "familie": null,
+ "kulisse": "im-haus",
+ "klasse": 1,
+ "quellen": [
+  {
+   "fakt": "Eine neue Katze lässt man zuerst in Ruhe; die offene Transportbox bleibt als Rückzugsort stehen, die Katze entscheidet selbst, wann sie herauskommt. Nicht bedrängen.",
+   "quelle": "https://tierschutzbund.de/fileadmin/Seiten/Kampagne_Katzenschutz/Downloads/Broschuere_Katze_aus_zweiter_Hand.pdf (Deutscher Tierschutzbund), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Verstecken in den ersten Tagen ist normal; die Eingewöhnung dauert meist einige Wochen.",
+   "quelle": "https://www.hansemerkur.de/haustiere/katze-eingewoehnen; https://www.zooplus.de/magazin/katze/katzenhaltung/katzen-eingewoehnen, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Katzen hören sehr gut; über 30 Muskeln je Ohr, die Ohren drehen sich unabhängig voneinander.",
+   "quelle": "https://www.zooplus.de/magazin/katze/katzengesundheit-pflege/katzengehoer, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "In der Dämmerung sehen Katzen viel besser als Menschen (weite Pupillen, viele Stäbchen); das Tapetum lucidum wirft Licht zurück und lässt die Augen leuchten.",
+   "quelle": "https://www.planet-wissen.de/natur/haustiere/katzen/pwiedaskatzenauge100.html, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Schnurrhaare sind Tastorgane und helfen, sich auf engem Raum zurechtzufinden (nicht: den Körper ausmessen).",
+   "quelle": "https://www.zooplus.de/magazin/katze/katzengesundheit-pflege/schnurrhaare-katze, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Katzen haben Duftdrüsen an Wangen, Kinn und Stirn; beim Reiben (Köpfchengeben) hinterlassen sie ihren Duft.",
+   "quelle": "https://www.blick.ch/life/natur/die-sprache-der-katzen-so-deutet-man-miauen-koerpersprache-id17950549.html, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Ein senkrecht aufgerichteter Schwanz ist bei Katzen eine freundliche Begrüßung.",
+   "quelle": "Cafazzo & Natoli 2009, Behavioural Processes (PMID 18930121); https://www.planet-wissen.de/natur/haustiere/katzen/pwiediesprachederkatzen100.html, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Blinzelt ein Mensch langsam, blinzeln Katzen öfter langsam zurück (freundliches Signal).",
+   "quelle": "Humphrey et al. 2020, Scientific Reports; https://www.sciencedaily.com/releases/2020/10/201007123031.htm, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Ein Versteck (Box) hilft neuen Katzen, sich schneller vom Stress zu erholen.",
+   "quelle": "Vinke et al. 2014, Applied Animal Behaviour Science 160; https://research-portal.uu.nl/en/publications/will-a-hiding-box-provide-stress-reduction-for-shelter-cats/, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Die Katzenzunge ist rau: Papillen tragen Speichel ins Fell; Katzen putzen sich täglich lange.",
+   "quelle": "Noel & Hu 2018, PNAS; https://pmc.ncbi.nlm.nih.gov/articles/PMC6298077, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Oft schnurrt eine Katze, wenn sie sich wohlfühlt (aber auch bei Stress oder Schmerz).",
+   "quelle": "https://www.zooplus.de/magazin/katze/katzengesundheit-pflege/schnurren-wie-warum, abgerufen 2026-11-15"
+  }
+ ],
+ "seiten": [
+  {
+   "text": "Heute zieht Mia bei Malik ein. Mia ist eine rote Katze. Ihre Box steht in einer ruhigen Ecke. Die Tür ist offen.",
+   "bild": "../haustiere/bilder/01.webp"
+  },
+  {
+   "text": "Mia streckt die Nase heraus. Alles riecht fremd. Schwupp, flitzt sie unter das Sofa.",
+   "bild": "../haustiere/bilder/02.webp"
+  },
+  {
+   "text": "Malik möchte sie so gern streicheln. Doch er setzt sich still hin und wartet. Mia soll selbst entscheiden, wann sie kommt.",
+   "bild": "../haustiere/bilder/03.webp"
+  },
+  {
+   "text": "Unter dem Sofa lauscht Mia. Ihre Ohren drehen sich hierhin und dorthin. Sie hört sogar den Löffel in der Küche.",
+   "bild": "../haustiere/bilder/04.webp"
+  },
+  {
+   "text": "Leise geht Mia auf Entdeckungsreise. Hinter dem Schrank ist ein schmaler Spalt. Ihre Schnurrhaare berühren die Wände. So findet sie ihren Weg.",
+   "bild": "../haustiere/bilder/06.webp"
+  },
+  {
+   "text": "Mia reibt ihre Wange am Tischbein. Malik riecht nichts. Doch Mias Nase riecht später: Hier war Mia.",
+   "bild": "../haustiere/bilder/07.webp"
+  },
+  {
+   "text": "Nach ein paar Tagen kommt Mia morgens zu Malik. Ihr Schwanz steht gerade nach oben. So sagt Mia zum ersten Mal Hallo.",
+   "bild": "../haustiere/bilder/08.webp"
+  },
+  {
+   "text": "Malik blinzelt Mia ganz langsam zu. Mia schaut ihn an. Dann blinzelt sie langsam zurück.",
+   "bild": "../haustiere/bilder/09.webp"
+  },
+  {
+   "text": "Eines Nachmittags stellt Malik den Einkaufskarton in den Flur. Mia kommt neugierig näher.",
+   "bild": "bilder/10.webp"
+  },
+  {
+   "text": "Mia schnuppert am Karton. Was glaubst du: Was macht Mia jetzt?",
+   "bild": "bilder/11.webp",
+   "frage": true
+  },
+  {
+   "text": "Schwupp, Mia springt hinein! Nur zwei rote Ohren schauen heraus. Hier ist es eng und gemütlich. Malik lässt ihr den Karton.",
+   "bild": "../haustiere/bilder/12.webp"
+  },
+  {
+   "text": "Später putzt sich Mia lange. Malik schaut ihr zu. Ihre Zunge ist rau wie eine kleine Bürste. Damit kämmt sie ihr Fell.",
+   "bild": "../haustiere/bilder/13.webp"
+  },
+  {
+   "text": "Viele Tage später springt Mia zu Malik aufs Sofa. Sie rollt sich neben ihm ein und schnurrt. Ganz vorsichtig streichelt Malik sie. Mia ist angekommen.",
+   "bild": "../haustiere/bilder/14.webp"
+  }
+ ],
+ "fassung": "ruhig",
+ "fassungVon": "haustiere"
+}

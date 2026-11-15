@@ -1,7 +1,26 @@
 {
-  "hinweis": "Alle Geschichten (docs/geschichten.md §3) für Seiten, die keine Ordner auflisten können (Elternbereich „Sachthemen“). tests/geschichten.test.mjs prüft, dass die Liste zu den Ordnern passt.",
+  "hinweis": "Alle Geschichten (docs/geschichten.md §3) für Seiten, die keine Ordner auflisten können (Elternbereich „Sachthemen“). tests/geschichten.test.mjs prüft, dass die Liste zu den Ordnern passt. Fassungen (geschichten.md §2: ruhig/abenteuer, gewählt nach der Eltern-Einstellung „geschichten“) stehen getrennt unter fassungen und erscheinen nicht als eigene Geschichte.",
   "geschichten": [
-    { "id": "haustiere", "titel": "Ein Tag mit Mia, der Katze", "art": "sachgeschichte", "welt": "haustiere", "familie": null },
-    { "id": "zehnerpaare", "titel": "Zehn Gäste, zwei Häuser", "art": "struktur", "welt": null, "familie": "zehnerpaare" }
+    {
+      "id": "haustiere",
+      "titel": "Mia zieht ein",
+      "art": "sachgeschichte",
+      "welt": "haustiere",
+      "familie": null
+    },
+    {
+      "id": "zehnerpaare",
+      "titel": "Zehn Meisen, zwei Zweige",
+      "art": "struktur",
+      "welt": null,
+      "familie": "zehnerpaare"
+    }
+  ],
+  "fassungen": [
+    {
+      "id": "haustiere-ruhig",
+      "fassung": "ruhig",
+      "fassungVon": "haustiere"
+    }
   ]
 }

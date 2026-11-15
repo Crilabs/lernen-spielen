@@ -27,6 +27,7 @@ import { merkeGeschichteGelesen } from "./lernsteuerung.js";
 import "./rahmen/leiste.js";
 import "./rahmen/geschichte.js";
 import { hintergrundSvg } from "./start/hintergrund.js";
+import { ladeEinstellungen, geschichtenStufe } from "./kern/einstellungen.js";
 
 document.getElementById("hintergrund").innerHTML = hintergrundSvg();
 sperreTouch();
@@ -39,7 +40,21 @@ const weiter = /^[a-z0-9][\w\-./]*(\?[\w\-=&.%]*)?$/i.test(roh) && !roh.includes
 
 const leiste = document.getElementById("leiste");
 const geschichte = document.getElementById("geschichte");
-if (/^[a-z0-9-]+$/.test(id)) geschichte.setAttribute("src", `geschichten/${id}/geschichte.json`);
+// Fassung nach der Stufe der Geschichten (Eltern-Einstellung, grundsaetze.md 9.3): „ruhig“/„abenteuer“, wenn es sie
+// gibt (geschichten/index.json, fassungen); gemerkt wird immer die Hauptgeschichte.
+async function fassungVon(id) {
+  try {
+    await ladeEinstellungen();
+    const stufe = geschichtenStufe();
+    if (stufe === "sanft") return id;
+    const index = await (await fetch("geschichten/index.json")).json();
+    return (index.fassungen ?? []).find((f) => f.fassungVon === id && f.fassung === stufe)?.id ?? id;
+  } catch (e) {
+    protokoll("Fassung: " + e);
+    return id;
+  }
+}
+if (/^[a-z0-9-]+$/.test(id)) geschichte.setAttribute("src", `geschichten/${await fassungVon(id)}/geschichte.json`);
 else geschichte.setAttribute("src", "geschichten/-/geschichte.json");   // zeigt „geht gerade nicht“
 
 let gefunden = false;

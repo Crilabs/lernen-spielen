@@ -1,0 +1,182 @@
+{
+ "04.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. Close-up of ONE single long-tailed tit sitting alone on a bare twig at winter dusk, its feathers fluffed up so it looks like a round ball of fluff, tail hanging down. Soft bright dusk light, pale sky. The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 289,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 289
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2045
+  }
+ },
+ "03.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. Two separate bare horizontal hawthorn branches side by side at the same height in a winter hedge: one branch on the LEFT half of the picture and one branch on the RIGHT half, with a clear gap of empty background between them so the two groups are clearly separate. The camera looks straight at both branches from the front, every bird fully visible, none hidden behind another, birds sitting in a single row side by side, touching each other. Soft bright winter dusk light, pale sky, gentle background blur of the hedge. On the LEFT branch sits exactly ONE long-tailed tit, alone. On the RIGHT branch sit exactly NINE long-tailed tits pressed tightly together in one row. Total exactly ten birds. Count carefully: left 1, right 9. The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 396,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 396
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2152
+  }
+ },
+ "01.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. Close-up portrait of ONE single long-tailed tit perched on a thin bare twig in a winter hedge, side view showing the round fluffy body and the very long tail clearly. Seen from a window: a faint window frame edge softly out of focus at the picture border. Bright soft winter daylight. The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 302,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 302
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2058
+  }
+ },
+ "05.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. Two separate bare horizontal hawthorn branches side by side at the same height in a winter hedge: one branch on the LEFT half of the picture and one branch on the RIGHT half, with a clear gap of empty background between them so the two groups are clearly separate. The camera looks straight at both branches from the front, every bird fully visible, none hidden behind another, birds sitting in a single row side by side, touching each other. Soft bright winter dusk light, pale sky, gentle background blur of the hedge. On the LEFT branch sit exactly TWO long-tailed tits side by side. On the RIGHT branch sit exactly EIGHT long-tailed tits pressed together in one row. Total exactly ten birds. Count carefully: left 2, right 8. The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 396,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 396
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2152
+  }
+ },
+ "02.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. A small flock of long-tailed tits foraging in a frosty garden hedge at late afternoon, several birds hanging on thin twigs pecking at buds, soft warm low winter sun, frost on twigs. Calm and bright. The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 291,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 291
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2047
+  }
+ },
+ "06.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. Two separate bare horizontal hawthorn branches side by side at the same height in a winter hedge: one branch on the LEFT half of the picture and one branch on the RIGHT half, with a clear gap of empty background between them so the two groups are clearly separate. The camera looks straight at both branches from the front, every bird fully visible, none hidden behind another, birds sitting in a single row side by side, touching each other. Soft bright winter dusk light, pale sky, gentle background blur of the hedge. The LEFT branch is short and holds exactly THREE long-tailed tits. The RIGHT branch is long and holds exactly SEVEN long-tailed tits in one row, so the right row is clearly longer: seven tails hanging down on the right. Total exactly ten birds. Count carefully before finishing: left 3, right 7 (1, 2, 3, 4, 5, 6, 7). The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 433,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 433
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2189
+  }
+ },
+ "07.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. Two bare horizontal hawthorn branches in a winter hedge at soft bright dusk. On the LEFT branch sit exactly FOUR long-tailed tits side by side in one row, fully visible. The RIGHT half of the picture is completely covered by a thick snow-laden evergreen branch in the foreground, so nothing behind it can be seen: no birds, no tails, no beaks visible on the right. Only four birds visible in the whole picture. The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 331,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 331
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2087
+  }
+ },
+ "08.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. Two separate bare horizontal hawthorn branches side by side at the same height in a winter hedge: one branch on the LEFT half of the picture and one branch on the RIGHT half, with a clear gap of empty background between them so the two groups are clearly separate. The camera looks straight at both branches from the front, every bird fully visible, none hidden behind another, birds sitting in a single row side by side, touching each other. Soft bright winter dusk light, pale sky, gentle background blur of the hedge. A little powdery snow drifts in the air. The LEFT branch holds exactly FOUR long-tailed tits. The RIGHT branch holds exactly SIX long-tailed tits in one row, so the right row is clearly longer than the left: six tails hanging down on the right. Total exactly ten birds. Count carefully before finishing: left 4, right 6 (1, 2, 3, 4, 5, 6). The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 437,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 437
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2193
+  }
+ },
+ "09.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. Two separate bare horizontal hawthorn branches side by side at the same height in a winter hedge: one branch on the LEFT half of the picture and one branch on the RIGHT half, with a clear gap of empty background between them so the two groups are clearly separate. The camera looks straight at both branches from the front, every bird fully visible, none hidden behind another, birds sitting in a single row side by side, touching each other. Soft bright winter dusk light, pale sky, gentle background blur of the hedge. On the LEFT branch sit exactly FIVE long-tailed tits side by side. On the RIGHT branch sit exactly FIVE long-tailed tits side by side. Both groups equally full. Total exactly ten birds. Count carefully: left 5, right 5. The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 398,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 398
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2154
+  }
+ },
+ "10.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Scene: Square composition. Two separate bare horizontal hawthorn branches side by side at the same height in a winter hedge: one branch on the LEFT half of the picture and one branch on the RIGHT half, with a clear gap of empty background between them so the two groups are clearly separate. The camera looks straight at both branches from the front, every bird fully visible, none hidden behind another, birds sitting in a single row side by side, touching each other. Soft bright winter dusk light, pale sky, gentle background blur of the hedge. Light snow is falling, a thin layer of fresh snow on the branches. On the LEFT branch sit exactly FIVE long-tailed tits huddled very tightly together, fluffed up. On the RIGHT branch sit exactly FIVE long-tailed tits huddled very tightly together, fluffed up. Total exactly ten birds. Peaceful, bright, soft. The birds are long-tailed tits (Aegithalos caudatus): tiny round fluffy birds, white head with a broad black stripe above each eye, pinkish shoulders, black-and-white back, tiny stubby beak, and a very long thin black tail with white edges, longer than the body. Each bird has exactly two legs and two eyes.",
+  "usage": {
+   "input_tokens": 418,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 418
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2174
+  }
+ }
+}
