@@ -4,7 +4,7 @@
 // das Neueste oben: Bereiche nach ihrem jüngsten Thema, darin neueste zuerst.
 // Jedes Thema mit Namen und klein dem Material, das das Kind aus dem Spiel kennt. Ohne Zahl, ohne Datum (N5, N8).
 // Daten vom Aufrufer (gekonnteThemen, spieleFuer aus lernsteuerung.js).
-import { FACH, FACH_SYMBOLE } from "../rahmen/stil.js";
+import { FACH } from "../rahmen/stil.js";
 import { materialFuer, bausteinHtml } from "../rahmen/material.js";
 import { esc } from "./zeichnen.js";
 
@@ -62,8 +62,8 @@ const dingHtml = (t, klasse = "ding") => `<button class="${klasse}" type="button
   + `<span class="material">${bausteinHtml(materialFuer(t))}</span><span class="name">${esc(t.name)}</span></button>`;
 
 /**
- * „Zuletzt gelernt“ für die Seitenleiste der Startseite; jedes Thema führt ins Regal an genau dieses Thema. Darunter die
- * Knöpfe „Was ich schon kann“ (Regal) und „Bibliothek“ (Geschichten, Spec 2026-11-15-bibliothek).
+ * „Zuletzt gelernt“ für die untere Reihe der Startseite; jedes Thema führt ins Regal an genau dieses Thema. Danach der
+ * Knopf „Was ich schon kann“ (Regal). Die Bibliothek erreicht das Kind über den Reiter „Wissen“ (Designsprache 2026-11-15).
  * Von Eltern Abgehaktes (vonEltern) steht hier nie: das Kind hat es nicht gerade gelernt.
  * @param {Gekonnt[]} gekonnt älteste zuerst
  * @returns {string}
@@ -75,21 +75,20 @@ export function zuletztHtml(gekonnt) {
       + `<span class="material">${bausteinHtml(materialFuer(t))}</span><span class="name">${esc(t.name)}</span></a></li>`).join("")}</ul>`
     : `<p class="leer">Hier steht, was du kannst.</p>`;
   return `<section class="zuletzt" aria-label="Zuletzt gelernt"><h2>Zuletzt gelernt</h2>${inhalt}</section>`
-    + `<a class="regal-knopf" href="regal.html"><img src="symbole/regal.svg" alt=""><b>Was ich schon kann</b></a>`
-    + `<a class="regal-knopf bibliothek-knopf" href="bibliothek.html"><img src="symbole/buch.svg" alt=""><b>Bibliothek</b></a>`;
+    + `<a class="regal-knopf" href="regal.html"><img src="symbole/regal.svg" alt=""><b>Was ich schon kann</b></a>`;
 }
 
 /**
- * Reiter der Regal-Seite: ein Fach je Reiter.
+ * Fächer der Regal-Seite (Designsprache): eine Liste links, je Fach ein Punkt in der Füllung und der Name; das gewählte
+ * Fach liegt auf seiner Tönung mit Sonnenring (CSS). Rollen wie Reiter (tablist/tab, aria-selected).
  * @param {RegalFach[]} baum @param {string} aktiv
  */
 export function reiterHtml(baum, aktiv) {
-  return `<div class="reiter" role="tablist" aria-label="Fächer">` + baum.map((f) => {
+  return `<div class="reiter" role="tablist" aria-label="Fächer" aria-orientation="vertical">` + baum.map((f) => {
     const farbe = FACH[/** @type {keyof typeof FACH} */ (f.fach)];
-    const zeichen = FACH_SYMBOLE.has(f.fach) ? `<i style="--bild:url('symbole/${esc(f.fach)}.svg')"></i>` : "";
     return `<button class="reiter-knopf" type="button" role="tab" data-fach="${esc(f.fach)}" aria-selected="${f.fach === aktiv}"`
-      + ` style="--fach-fuellung:${farbe?.fuellung ?? "#FFFCF7"};--fach-tief:${farbe?.tief ?? "#3B2A6B"}">`
-      + `<span class="knopf" aria-hidden="true">${zeichen}</span><b>${esc(f.name)}</b></button>`;
+      + ` style="--fach-fuellung:${farbe?.fuellung ?? "#FFFCF7"};--fach-tief:${farbe?.tief ?? "#3B2A6B"};--fach-toenung:${farbe?.toenung ?? "#F4F0FA"}">`
+      + `<span class="punkt" aria-hidden="true"></span><b>${esc(f.name)}</b></button>`;
   }).join("") + `</div>`;
 }
 

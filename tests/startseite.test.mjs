@@ -9,9 +9,9 @@ const html = readFileSync(new URL("../spiele/index.html", import.meta.url), "utf
 const skript = html.slice(html.indexOf('<script type="module">'));
 const { literaleAusCode, knopfNamen, sammle } = await import("../werkzeuge/audio/texte.mjs");
 
-test("Startseite: Kopfleiste „Lernen Spielen“ ohne Fach, ohne Haus, durchsichtig, Zahnrad im Slot rechts", () => {
-  assert.match(html, /<ls-leiste id="leiste" spiel="ansichten" titel="Lernen Spielen" ohne-haus durchsichtig>/);
-  assert.doesNotMatch(html, /<ls-leiste[^>]*\bfach=/);
+test("Startseite: Kopf mit Reiter „Können“ (Designsprache), Zahnrad im Slot rechts", () => {
+  assert.match(html, /<ls-kopf id="leiste" reiter="koennen" spiel="ansichten">/);
+  assert.doesNotMatch(html, /<ls-leiste/);
   assert.match(html, /<span class="zahnrad" id="zahnrad" slot="rechts"><ls-knopf id="eltern" symbol="zahnrad\.svg"[^>]*\bstumm>/);
   assert.deepEqual(knopfNamen(html), [], "der Name des Zahnrads wird nicht gesprochen");
 });
@@ -31,14 +31,15 @@ test("Startseite: Karten aus startKarten (uebersicht), Abschnitte je Fach, Vigne
   assert.match(html, /id="raster"/);
 });
 
-test("Startseite: rechts „Zuletzt gelernt“ aus gekonnteThemen mit Knopf zum Regal", () => {
+test("Startseite: unten „Zuletzt gelernt“ aus gekonnteThemen mit Knopf zum Regal", () => {
   assert.match(skript, /zuletztHtml\(ctx \? gekonnteThemen\(ctx, stand\) : \[\]\)/);
-  assert.match(html, /<aside class="seite" id="seite">/);
-  assert.ok(html.indexOf('id="raster"') < html.indexOf('id="seite"'), "Regal rechts vom Raster");
+  assert.match(html, /<footer class="unten" id="seite">/);
+  assert.ok(html.indexOf('id="raster"') < html.indexOf('id="seite"'), "Regal unter dem Raster");
 });
 
-test("Startseite: dezenter Hintergrund; kein Kind (Christian: zu wenig Platz neben Zuletzt gelernt)", () => {
-  assert.match(skript, /hintergrundSvg\(\)/);
+test("Startseite: Grundmuster Hügel (Designsprache); kein Kind", () => {
+  assert.match(html, /<ls-muster art="huegel"><\/ls-muster>/);
+  assert.match(skript, /import "\.\/rahmen\/muster\.js";/);
   assert.doesNotMatch(skript, /setzeKind\(/);
 });
 

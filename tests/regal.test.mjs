@@ -8,9 +8,12 @@ const html = readFileSync(new URL("../spiele/regal.html", import.meta.url), "utf
 const skript = html.slice(html.indexOf('<script type="module">'));
 const { literaleAusCode } = await import("../werkzeuge/audio/texte.mjs");
 
-test("Regal: Kopfleiste „Was ich schon kann“ ohne Fach (mit Haus)", () => {
-  assert.match(html, /<ls-leiste id="leiste" spiel="ansichten" titel="Was ich schon kann"><\/ls-leiste>/);
-  assert.doesNotMatch(html, /<ls-leiste[^>]*\b(fach=|ohne-haus)/);
+test("Regal: Kopf mit Reiter „Können“, Zurück zur Startseite und Titel „Was ich schon kann“ (Designsprache)", () => {
+  assert.match(html, /<ls-kopf id="leiste" reiter="koennen" spiel="ansichten"><\/ls-kopf>/);
+  assert.match(html, /<ls-knopf id="zurueck" symbol="zurueck\.svg" name="Alle Spiele" groesse="seite"><\/ls-knopf>/);
+  assert.match(html, /<h1 class="titel">Was ich schon kann<\/h1>/);
+  assert.match(skript, /getElementById\("zurueck"\)\.addEventListener\("click", \(\) => \{ location\.href = "index\.html"; \}\)/);
+  assert.match(html, /<ls-muster art="ringe"><\/ls-muster>/);
 });
 
 test("Regal: Reiter und Bretter aus regalBaum(gekonnteThemen, spieleFuer)", () => {

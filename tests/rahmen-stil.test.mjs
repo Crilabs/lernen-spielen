@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { GRUND_CSS, LEISTE_HOEHE, TOKENS } from "../spiele/rahmen/stil.js";
 
 const SEITE = readFileSync(new URL("../spiele/rahmen/seite.css", import.meta.url), "utf8");
@@ -53,4 +53,21 @@ test("seite.css: Flächen der Farbwelt sind flach, nur .teil hat einen Schatten"
     if (schatten) for (const teil of schatten[1].split(/,(?![^(]*\))/)) assert.match(teil.trim(), /^inset /, `${klasse}: ${teil.trim()}`);
   }
   assert.match(SEITE, /\.teil \{[^}]*box-shadow: var\(--ls-schatten\)/);
+});
+
+test("Inter lokal für die Oberfläche: @font-face, Datei, Lizenz", () => {
+  const schrift = readFileSync(new URL("../spiele/schrift/schrift.css", import.meta.url), "utf8");
+  assert.match(schrift, /@font-face\{font-family:'Inter';[^}]*font-weight:100 900;[^}]*src:url\(inter-variabel\.woff2\) format\('woff2'\)/);
+  assert.ok(existsSync(new URL("../spiele/schrift/inter-variabel.woff2", import.meta.url)));
+  assert.ok(existsSync(new URL("../spiele/schrift/OFL-inter.txt", import.meta.url)));
+});
+
+test("Tokens der Designsprache: Oberflächenschrift, Radien, Maße der Übersichtsseiten", () => {
+  assert.equal(TOKENS["--ls-schrift-oberflaeche"], '"Inter", "Andika", sans-serif');
+  assert.equal(TOKENS["--ls-schrift-merkmale"], '"cv11", "cv05", "cv08"');
+  assert.equal(TOKENS["--ls-radius-plakat"], "4.2rem");
+  assert.equal(TOKENS["--ls-radius-teil"], "3rem");
+  assert.equal(TOKENS["--ls-seite-rand"], "9.6rem");
+  assert.equal(TOKENS["--ls-seite-knopf"], "8.4rem");
+  assert.match(SEITE, /\.oberflaeche \{[^}]*font-family: var\(--ls-schrift-oberflaeche\);[^}]*font-feature-settings: var\(--ls-schrift-merkmale\);/);
 });

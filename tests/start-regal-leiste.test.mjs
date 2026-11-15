@@ -39,7 +39,7 @@ test("regalBaum: ein Bereich mit frisch Gekonntem rückt nach oben", () => {
   assert.deepEqual(baum[0].bereiche[0].themen.map((t) => t.id), ["plus4", "plus3"]);
 });
 
-test("zuletztHtml: die letzten fünf, neueste zuerst, Name und Material, jedes führt ins Regal an sein Thema; Knöpfe Was ich schon kann und Bibliothek; ohne Datum", () => {
+test("zuletztHtml: die letzten fünf, neueste zuerst, Name und Material, jedes führt ins Regal an sein Thema; Knopf Was ich schon kann (Bibliothek über den Reiter Wissen); ohne Datum", () => {
   const viele = [...Array(7)].map((_, i) => g(`z${i + 2}`, "mathe", `Die ${i + 2} zerlegen`));
   const h = zuletztHtml(viele);
   assert.match(h, /^<section class="zuletzt" aria-label="Zuletzt gelernt"><h2>Zuletzt gelernt<\/h2>/);
@@ -47,8 +47,8 @@ test("zuletztHtml: die letzten fünf, neueste zuerst, Name und Material, jedes f
   assert.deepEqual(namen, ["Die 8 zerlegen", "Die 7 zerlegen", "Die 6 zerlegen", "Die 5 zerlegen", "Die 4 zerlegen"]);
   assert.match(h, /<a class="ding" href="regal\.html\?thema=z8" data-thema="z8"><span class="material"><ls-perlenstab wert="8"/);
   // der Knopf steht unterhalb des Rahmens „Zuletzt gelernt“
-  assert.match(h, /<\/section><a class="regal-knopf" href="regal\.html"><img src="symbole\/regal\.svg" alt=""><b>Was ich schon kann<\/b><\/a>/);
-  assert.match(h, /<a class="regal-knopf bibliothek-knopf" href="bibliothek\.html"><img src="symbole\/buch\.svg" alt=""><b>Bibliothek<\/b><\/a>$/);
+  assert.match(h, /<\/section><a class="regal-knopf" href="regal\.html"><img src="symbole\/regal\.svg" alt=""><b>Was ich schon kann<\/b><\/a>$/);
+  assert.doesNotMatch(h, /bibliothek/);
   assert.doesNotMatch(h, /2026-/);
 });
 
@@ -73,9 +73,12 @@ test("zuletztHtml: leer → Satz und trotzdem der Knopf", () => {
 
 test("reiterHtml: ein Reiter je Fach mit Gekonntem, der aktive trägt aria-selected", () => {
   const h = reiterHtml(regalBaum(GEKONNT, CTX, spieleFuer), "grammatik");
-  assert.match(h, /^<div class="reiter" role="tablist" aria-label="Fächer">/);
+  assert.match(h, /^<div class="reiter" role="tablist" aria-label="Fächer" aria-orientation="vertical">/);
   assert.match(h, /<button class="reiter-knopf" type="button" role="tab" data-fach="mathe" aria-selected="false"[^>]*>/);
   assert.match(h, /data-fach="grammatik" aria-selected="true"/);
+  // Designsprache: Fachpunkt in der Füllung und Name, kein Symbolkreis mehr
+  assert.match(h, /data-fach="mathe"[^>]*><span class="punkt" aria-hidden="true"><\/span><b>Mathe<\/b><\/button>/);
+  assert.doesNotMatch(h, /class="knopf"/);
 });
 
 test("bretterHtml: je Bereich ein Brett (Gruppe mit Bereichsname), Themen als Knöpfe mit Name, Neues markiert", () => {

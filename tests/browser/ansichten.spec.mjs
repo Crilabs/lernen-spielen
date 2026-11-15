@@ -158,7 +158,7 @@ async function lauf(typ, name, groesse, basis) {
       const st = await start.evaluate(() => {
         const imBild = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.left >= 0 && r.top >= 0 && r.right <= innerWidth + 0.5 && r.bottom <= innerHeight + 0.5; };
         const leiste = document.getElementById("leiste");
-        const raster = document.getElementById("raster").getBoundingClientRect();
+        const raster = document.querySelector(".raster").getBoundingClientRect(); // der scrollbare Rahmen, nicht sein Inhalt
         const seite = document.getElementById("seite").getBoundingClientRect();
         const karten = [...document.querySelectorAll("#raster .karte.spiel")];
         return {
@@ -171,14 +171,21 @@ async function lauf(typ, name, groesse, basis) {
           zuletzt: document.querySelectorAll(".zuletzt .ding").length,
           regalKnopf: document.querySelector(".regal-knopf")?.getAttribute("href") ?? null,
           regalImBild: imBild(document.querySelector(".regal-knopf")),
-          rechts: seite.left >= raster.right - 1,
-          hausWeg: leiste.shadowRoot.querySelector("a.haus").hidden,
+          unten: seite.top >= raster.bottom - 1,
+          reiter: [...leiste.shadowRoot.querySelectorAll("a.reiter")].map((a) => ({ wort: a.textContent, ziel: new URL(a.href).pathname.split("/").pop(), aktiv: a.getAttribute("aria-current") === "page", r: a.getBoundingClientRect().toJSON() })),
+          ton: leiste.shadowRoot.querySelector("ls-knopf.ton").getBoundingClientRect().toJSON(),
+          plakateImBild: karten.every((a) => { const r = a.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth + 0.5; }),
           zahnrad: imBild(document.getElementById("zahnrad")),
           text: document.body.innerText,
         };
       });
-      pruefe(F, "Startseite: Regal-Knopf ganz im Bild (→ regal.html), Seitenleiste rechts, Haus fehlt, Zahnrad da",
-        st.regalKnopf === "regal.html" && st.regalImBild && st.rechts && st.hausWeg && st.zahnrad, JSON.stringify(st));
+      pruefe(F, "Startseite: Regal-Knopf ganz im Bild (→ regal.html), Zuletzt gelernt unten, Zahnrad da",
+        st.regalKnopf === "regal.html" && st.regalImBild && st.unten && st.zahnrad, JSON.stringify(st));
+      pruefe(F, "Startseite: Reiter Können (aktiv, → index.html) und Wissen (→ bibliothek.html), links vom Ton, ohne Überlappung",
+        st.reiter.length === 2 && st.reiter[0].wort === "Können" && st.reiter[0].ziel === "index.html" && st.reiter[0].aktiv
+          && st.reiter[1].wort === "Wissen" && st.reiter[1].ziel === "bibliothek.html" && !st.reiter[1].aktiv
+          && st.reiter.every((r) => r.r.right < st.ton.left), JSON.stringify({ reiter: st.reiter, ton: st.ton }));
+      pruefe(F, "Startseite: Plakate ganz in der Breite des Bildes", st.plakateImBild, JSON.stringify(st.links));
       pruefe(F, "Startseite: keine Zahl als Fortschritt („x von y“, Prozent)", !/\d+\s*(von|\/)\s*\d+|%/.test(st.text), st.text);
       if (fall === "leer") {
         pruefe(F, "Startseite leer: keine Karte, Satz statt Raster, Zuletzt gelernt leer", st.karten === 0 && st.echt === 0 && st.zuletzt === 0 && /Hier kommen bald Spiele/.test(st.text), JSON.stringify(st));
