@@ -75,7 +75,7 @@ können bestehende Installationen keine Updates mehr annehmen. Die GitHub-Secret
 `TAURI_SIGNING_PRIVATE_KEY` und `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`. Der öffentliche Schlüssel steht in
 `src-tauri/tauri.conf.json`.
 
-Abnahme einer Version am Windows-Rechner: `kiosk/pruefliste-v0.1.0.md`.
+Abnahme einer Version am Windows-Rechner: `kiosk/pruefliste-v0.1.0.md` (Erstinstallation), `kiosk/pruefliste-v1.0.0.md` (Update auf 1.0.0).
 
 ## Lernstand-Ordner
 
