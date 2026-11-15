@@ -166,18 +166,17 @@ Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.
 
 ### 7.1 Eine Runde
 
-1. **Einführung** (beim ersten Mal und wenn ein neues Thema beginnt): kurze Szene, immer überspringbar,
-   mit „Wie geht es aus?“ (9.2 Nr. 7). Neue Spieltypen zeigen einmal vor (L5).
+1. **Einführung** bei jedem Start, im echten Spielbild; weiter erst nach dem Tipp des Kindes (`spielbau.md` §8).
 2. **Aufgaben** (3–5 Minuten, L10). Während das Kind denkt, bewegt sich nichts, und es erscheint nichts
    Neues (B3, 3.1 Nr. 6).
    **Zwischen zwei Aufgaben (Christian, 2026-11-14):** kein Weiter-Knopf. Nach der Lösung kommt die Folge
    (Bewegung und Erzählersatz, etwa 1–2 s, B6); ein Tippen überspringt sie. Danach kommt die nächste Aufgabe
    von selbst. Weiter (mit Alle Spiele daneben) gibt es nur am Rundenende.
-3. **Rundenende (Christian):** eine ruhige Pause auf Nacht mit stillen Sternen in Sonne; Bild oder
-   Sachmoment (K1, K8) liegen auf einer Papierkarte. Darunter **Alle Spiele** und **Weiter**: gleich
+3. **Rundenende (Christian):** eine ruhige Pause auf Nacht mit stillen Sternen in Sonne; ein Bild liegt
+   auf einer Papierkarte (K8). Darunter **Alle Spiele** und **Weiter**: gleich
    groß, gleich gestaltet (Papier, Tinte-Kontur, Symbol und Wort), keiner hervorgehoben, auch nicht durch
    den Fokus. Aufhören ist gleichwertig (N6). Nichts läuft ab, nichts geht von selbst weiter, kein
-   Füllbalken (`grundsaetze.md` 13).
+   Füllbalken (`grundsaetze.md` 12).
 
 ### 7.2 Verlassen
 
@@ -224,7 +223,7 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 | `ziehbar()` (`ziehen.js`) | Ziehen mit Tipp-Alternative (§5): ziehen ab 1 rem Bewegung, sonst antippen → angehoben mit Sonnenring → Ziel antippen; Enter/Leertaste auf Teil und Ziel | `ziehbar(teil, { ziele, beimAblegen(teil, ziel) })` → `loesen()`; das Spiel ruft `setze(teil, ziel, { vor })` oder `zurueck(teil)` (0,3 s, bei wenig Bewegung sofort); die Reihenfolge im Ziel bestimmt das Spiel über `vor` (Knoten, vor den das Teil kommt; ohne `vor` ans Ende); Escape setzt ab, auch vom Ziel aus; Ziele heißen für Vorleser nach ihrem Attribut `name`, sonst „Ablage“; Klassen `angehoben`, `gezogen`, `gedrueckt`, an Zielen `ziel-frei`, `ziel-ueber`; Zustand ohne DOM in `ziehen-zustand.js` |
 | `<ls-perlenstab>` (`perlenstab.js`) | Lernzeichen Perlenstäbchen (grundsaetze-bilder §4 M1–M3, M7): Montessori-Farbe, jede Perle einzeln, Lücke und Marke nach der fünften, Länge proportional; flach (ziehbar nur mit `class="teil"`) | Attribute `wert` (1–10; ungültig oder fehlend: nichts gezeichnet, einmal ins Protokoll), `ausrichtung="waagrecht\|senkrecht"`, `ziffer` (Ziffer davor bzw. darüber), `verdeckt` (Tuch in Nebel mit Fünfermarke, Ziffer darauf); Dicke per CSS am Host: waagrecht `height`, senkrecht `width` (Vorgabe 7 rem), mit `verdeckt` und `ziffer` mindestens 6 rem; als Teil (`class="teil"`) gibt `seite.css` das Grundmaß vor (`ls-perlenstab.teil`: 11 rem hoch, Polster 2 rem, darin der Stab); Name „Perlenstab 7“ als aria-label; Geometrie ohne DOM in `perlen-geometrie.js` |
 | `<ls-perlenkette>` (`perlenkette.js`) | Lernzeichen Perlenkette fürs Einmaleins (§4 M1–M3, M7; Christian 2026-11-14, M37): zehn Stäbchen zu je n Perlen in zwei Reihen zu fünf, je Stäbchen wie `<ls-perlenstab>`, dazwischen ein Glied; unter dem Ende jedes Stäbchens sein Pfeilchen mit k · n; flach | Attribute `reihe`, `pfeile`, `leer`, `markiert` (Sonnenring am Pfeilchen), `hell` (Sonnenring um Stäbchen), `ring`, `frage` (Pfeilchen mit „?“), `hohl` (getippte Zahl an ihrem Ort: hohles Pfeilchen über der Reihe, zeigt von oben auf seine Perle, wackelt einmal), `verdeckt`, `luft` (Freiraum über jeder Reihe für eine Figur, die auf der Kette steht; dann ein Startplatz vor dem ersten Stäbchen), `bis` (nur Stäbchen 1 … bis sichtbar, neue rollen aus; Stufe Kopf), `kurz` (Kurzkette, Vorratsliste: so viele gleich lange Stäbe in zwei Reihen zu fünf, ein Stab = ein Fünftel von `breite` für jedes n, also gemeinsamer Maßstab aller Zeilen mit derselben `breite`; Lücke mehrere Konturen breit), `breite`, `hoehe`, `perle` (Pfeilchen wachsen mit großen Perlen mit); `huepfe(bis, { wert, schritt })` (Zählpfeilchen, Folge einer Eingabe), `zeigerWeg()`, `stabPunkt(k)`, `standPunkt(k)` (wo eine Figur auf Stäbchen k steht, 0 = Startplatz), `pfeilPunkt(k)`, `hohlPunkt(zahl)`, `leuchte(k)`, `einrasten(k)`; Geometrie ohne DOM `perlenkette()` in `perlen-geometrie.js` |
-| `<ls-geschichte>` (`geschichte.js`) | Abspieler für Geschichten (`docs/geschichten.md` §4): Bild groß (Foto oder Szene aus `szene.js`), Text in Andika darunter, Zurück (Nebenknopf), Vorlesen (Nebenknopf), Weiter (Sonne, rund 16 rem wie in der Einführung), auf der letzten Seite Fertig (Hauptknopf); Punkte ohne Zahl | Attribut `src`; Eigenschaften `seite`, `seiten`, Versprechen `geladen`; Ereignis `fertig` |
+| `<ls-geschichte>` (`geschichte.js`) | Abspieler für Geschichten (`docs/geschichten.md` §4): links das Bild quadratisch (Foto oder Szene aus `szene.js`), rechts der Text in Andika, Zurück (Nebenknopf), Vorlesen (Nebenknopf), Weiter (Sonne, rund 16 rem wie in der Einführung), auf der letzten Seite Fertig (Hauptknopf); Punkte ohne Zahl | Attribut `src`; Eigenschaften `seite`, `seiten`, Versprechen `geladen`; Ereignis `fertig` |
 | `<ls-wortart>` (`wortart.js`) | Lernzeichen Wortart (§5 D1): Nomen, Artikel, Adjektiv als Dreiecke in drei Größen, Verb als Kreis, gemeinsame Grundlinie | Attribut `art="nomen\|artikel\|adjektiv\|verb"` (unbekannt oder fehlend: nichts gezeichnet, einmal ins Protokoll); Größe per `height` am Host (Vorgabe 8 rem, quadratisch); Name („Nomen“ …) als aria-label |
 
 - **Aussehen über CSS-Variablen:** `--ls-tinte`, `--ls-tinte-weich`, `--ls-papier`, `--ls-nebel`,

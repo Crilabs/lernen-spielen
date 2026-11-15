@@ -64,13 +64,6 @@ Auch erzählt gilt: kein „Du machst Kofi glücklich“, kein Lob, keine Wörte
   Kind sich selbst aufnehmen und anhören. Die Aufnahme bleibt auf dem Gerät, wird nicht erkannt oder bewertet und
   ist nie Bedingung. Aufnahme nur über `spiele/kern/`.
 
-### Was heute noch anders ist (anzupassen)
-
-- `docs/grundsaetze.md` (§2 Punkt 4, §3.2, K14, K15, §11) und `docs/bedienung.md` (Sprechblase) sind an diese
-  Regel angepasst (2026-11-14). Ob später eine Erzählerin dazukommt (z. B. je Welt), ist offen.
-- Die Einführungen (`spiele/einfuehrungen/`) erzählen mit den Kindern der Runde in einer Erzählblase ohne Zipfel
-  und ohne Ich-Sätze (2026-11-14). (Die alten Spiele sind entfernt.)
-
 ## 2. Texte für die Stimme schreiben
 
 - **Kurze Sätze, ein Gedanke je Satz.** Punkt = Pause, Komma = kurze Pause, „…“ trennt Wortstücke.

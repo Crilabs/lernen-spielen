@@ -1,4 +1,4 @@
-// Bilder der Spielobjekte für den Prüfer B-Welt (docs/spielentwicklung.md §5): jede Art in jedem Zustand, jede
+// Bilder der Spielobjekte für die Prüfung der Objekte (docs/spielentwicklung.md „Spielobjekte“): jede Art in jedem Zustand, jede
 // Bewegung zwischen zwei Zuständen in der Mitte und am Ende, dieselbe Bewegung mit reduzierter Bewegung (muss sofort
 // am Ende stehen) und das Regal-Bild (still, mit Wert). Kein Teil von `npm test`: braucht Playwright und Chromium.
 //

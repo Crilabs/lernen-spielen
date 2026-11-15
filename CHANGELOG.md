@@ -2,6 +2,13 @@
 
 ## Unveröffentlicht
 
+- **Bibliothek:** Ein Knopf auf der Startseite führt in die Bibliothek mit Räumen, Regalen und Büchern. Dort stehen Sachbücher mit Fotos, darunter fünf Tierbücher (Hund, Biene, Wal, Elefant, Dinosaurier), und kurze Geschichten. Vorlesen oder selbst lesen.
+- **Sachbuch „Mia, die kleine Wildkatze“:** sechs Kapitel mit Inhaltsverzeichnis; die App merkt sich, wo das Kind zuletzt gelesen hat.
+- **Kettenhüpfer neu:** Lena hüpft über eine mit Kreide auf die Straße gemalte Perlenkette. Jedes Spiel beginnt jetzt mit seiner Einführung; weiter geht es erst, wenn das Kind tippt.
+- **Geschichten ohne Stufen:** Es gibt eine Geschichte für alle Kinder. Die Einstellung Ruhig, Sanft, Abenteuer im Elternbereich entfällt; dafür zeigt der Reiter „Sachthemen“ die Themen mit ihren Büchern und Spielen.
+- **Mit echten Dingen:** 24 Anleitungen haben eine neue Form „In Bewegung“.
+- Gekonnte Themen kommen zur Wiederholung gebündelt am Ende einer Runde.
+
 ## v1.0.0
 
 Die App heißt jetzt **Lernen Spielen**. Sie ist von Grund auf neu gebaut: ein Lernplan für die ganze Grundschule, neue Seiten, eine natürliche Stimme und das erste neue Spiel. Die alten Spiele mit dem Einhorn sind entfernt.

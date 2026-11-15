@@ -393,7 +393,7 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
   bleibt als Zeile in der Liste neben den Tonnen stehen (geordnet von 0 + n bis n + 0; Christian: damit es sich
   einprägt, M7) · Wirkung: Die Decke wird leer, die
   Tonnen füllen sich, die Liste wächst; ist sie vollständig, ist die Wiese sauber. **Keine zweite Metapher** (kein
-  Haus, keine Stockwerke, kein Licht; Christian 2026-11-14, `docs/spielentwicklung.md` A4b).
+  Haus, keine Stockwerke, kein Licht; Christian 2026-11-14).
 - Material und Stufen: Perlenstäbchen n (M3). material: Trenner schieben. vorstellung: ein Teil ist verdeckt (wie
   Schüttelbox), das Kind tippt den anderen. kopf: Zerlegungen tippen, Stäbchen kommt als Probe.
 - Lernzeichen: Perlenstäbchen (M3); die Zerlegungsliste als schlichte Tabelle im Lernfeld, jede Zeile mit den zwei

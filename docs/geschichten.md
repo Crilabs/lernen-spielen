@@ -53,7 +53,7 @@ sicher **(Annahme)**.
 ## 2. Regeln (Lern- und Sachgeschichten)
 
 - **Umfang:** gezeichnete **Lerngeschichten** (`sinn`, `form`, `struktur`) sind kurz vor dem Spiel: 6–10 Seiten, je
-  1–3 Sätze, Satzlänge wie `spielbau.md` §3 (`satzGrenze`). **Sachgeschichten** (Vorlesebuch, Christian 2026-11-15): 10–14 Abschnitte, je 2–4 Sätze; Satzlänge bis Kl. 2 höchstens 10
+  1–3 Sätze, Satzlänge wie `spielbau.md` §3 (`satzGrenze`). **Sachgeschichten** (Vorlesebuch, Christian 2026-11-15; nur mit natürlicher Handlung, sonst Sachbuch §2a): 10–14 Abschnitte, je 2–4 Sätze; Satzlänge bis Kl. 2 höchstens 10
   Wörter, Kl. 3–4 höchstens 14 (`satzGrenzeGeschichte` in `werkzeuge/spielbau/texte.mjs`). Langer Text darf scrollen.
 - **Schreibverfahren:** (1) Wirklichkeit recherchieren, jede Tatsache mit Quelle. (2) Realistische Fassung schreiben:
   Hauptfigur mit Wunsch oder Problem, Gefühle zeigen (nicht bewerten), Wissen ist der Grund, warum etwas passiert;
@@ -170,4 +170,4 @@ Ein **Sachbuch** hat statt `seiten` die Liste `kapitel` (`[{ "titel": "…", "se
   `frageSeite`, `waehle(m)`, `halte()`, `weiter()`, `zurueck()`, `fertig()`; Sachbuch: `kapitel` (-1 = Inhalt),
   `kapitelZahl`, `stand`, `oeffne(k, seite)`, `inhalt()`; Prüfung `tests/browser/sachbuch.spec.mjs`); `tests/geschichten.test.mjs` prüft das Format, `tests/browser/geschichte.spec.mjs` das Blättern.
 - Vor dem Spiel: Die Lerngeschichte eines Themas kommt beim ersten Start des Themas und bleibt über „Anleitung“ wieder
-  aufrufbar; Sachgeschichten stehen im Bücherregal der Startseite (Christian; Umbau nach der Probe).
+  aufrufbar; Sachbücher und Sachgeschichten stehen in der Bibliothek (`spiele/bibliothek.html`).

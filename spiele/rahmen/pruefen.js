@@ -1,4 +1,4 @@
-// Test-Schnittstelle für den Prüfstand (docs/spielentwicklung.md §4, tests/browser/durchspielen.mjs).
+// Test-Schnittstelle für den Prüfstand (docs/spielbau.md „Ablauf“, Prüfstand; tests/browser/durchspielen.mjs).
 //
 //   meldePruefSchnittstelle({ zuege, richtigerZug, zustand, orte, fuehreAus?, fehlversuche? })
 //

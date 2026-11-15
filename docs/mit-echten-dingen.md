@@ -180,9 +180,7 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
     Gerät drucken kann; Kinder sehen ihn nie). Er druckt ein A4-Blatt mit allen Formen des Themas, voll (Ihr braucht,
     Schritte, Darauf kommt es an, Leichter/Schwerer), in der Reihenfolge Am Tisch, In Bewegung, Unterwegs. Stil wie
     die Seite (Andika, Tinte, Linien und Schrittkreise im Tief-Ton des Fachs), ohne Flächen. Über den Druckdialog als
-    PDF speichern; der Dateiname ist „Mit echten Dingen – <Thema>“. Design:
-    `docs/superpowers/specs/2026-11-14-echte-dinge-pdf-je-thema-design.md`,
-    `docs/superpowers/specs/2026-11-14-lernstand-lernplan-abhaken-design.md`.
+    PDF speichern; der Dateiname ist „Mit echten Dingen – <Thema>“.
 
 - **Am Rundenende eines Spiels** als ruhiges Angebot in der Pause, neben „Alle Spiele“ und „Weiter“ (kein Muss, keine
   Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**; führt zur selben Seite `echt.html` (vorher wird
@@ -197,9 +195,8 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   Lernplan eindeutig ist (die Karte erkennt ein Thema notfalls daran). Die Seiten laden nur das Verzeichnis und die
   Anleitung, die sie zeigen. `tests/echte-dinge.test.mjs` prüft, dass das Verzeichnis aktuell
   ist, und die Form jeder Datei (Kopf, Thema im Lernplan, Ihr braucht, Schritte, Darauf kommt es an, Leichter/Schwerer,
-  Wortzahl, Wortliste 3.2, Anrede „ihr“). Die ersten drei Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`,
-  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E12 noch nicht durchlaufen und
-  bleiben Entwurf, bis der Skill sie grün prüft.
+  Wortzahl, Wortliste 3.2, Anrede „ihr“). Entwurf ist heute nur `mathe/kernaufgaben-einmaleins`
+  (`entwurf: true`, `geparkt: true`).
 - **Darstellung:** `spiele/rahmen/markdown.js` (Leser: klein, ohne DOM, alles escaped, Kopf wird abgetrennt),
   `spiele/rahmen/echte-dinge.js` (Verzeichnis, Laden, gemerkte Form `echte-dinge.form`), die Seite `spiele/echt.html`
   mit `spiele/start/anleitung.js` (bringt jede Form in den Aufbau der Seite), Angebot in `<ls-pause>`

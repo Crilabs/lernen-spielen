@@ -11,15 +11,14 @@ Rohnotizen in `docs/research_notes/Grundsätze für Lernspiele/` (für Abschnitt
 [`docs/reports/Kosmik Sachthemen für Lernspiele.md`](reports/Kosmik%20Sachthemen%20f%C3%BCr%20Lernspiele.md).
 
 Dieses Konzept ist die verbindliche Vorgabe für jedes neue Spiel, jeden Sprechertext, jedes Bild und
-jede Zeile in der Elternansicht. `ideen.txt` bleibt die Ideensammlung für einzelne Spiele; wo sich beide
-widersprechen, gilt dieses Konzept.
+jede Zeile in der Elternansicht.
 
 Kennzeichnung: **[B]** gut belegt · **[b]** belegt mit Einschränkungen · **[P]** Praxiswissen bzw.
 Tradition, nicht empirisch geprüft · **[E]** eigene Entscheidung des Projekts · *Annahme:* noch zu prüfen.
 
 Dazu gehören: [`grundsaetze-bilder.md`](grundsaetze-bilder.md) (Bilder, Figuren, Farben), [`figuren.md`](figuren.md)
 (die Runde), [`stimme.md`](stimme.md) (Erzähler), [`bedienung.md`](bedienung.md) (Bedienung und Bausteine) und
-[`spielkatalog.md`](spielkatalog.md) (welche Spiele es gibt, Heimatwelten, Regeln für alle Spiele).
+[`spielkatalog.md`](spielkatalog.md) (welche Spiele es gibt, Regeln für alle Spiele).
 
 ---------------------------------------------------------------------------------------------------
 ## 0. Leitsatz und Prüffrage
@@ -427,9 +426,9 @@ Moment, der Spannung und Wissen trägt; eine aufregendere Fassung hielt kein Pr�
 ## 10. Kosmik-Schicht – Sachthemen quer zu den Spielen
 
 Kosmik (Montessori), Sachunterricht, Lebenswelt, Miteinander und Schutz sind **kein eigenes Lernfach**,
-sondern eine Schicht über den Mathe- und Deutschspielen: Im Mathespiel erfährt das Kind nebenbei etwas
-über Mäuse. Die Themen stehen als `ueberschriften` und `welten` in `spiele/lernplan.json` (acht
-Überschriften: Tiere und Pflanzen · Erde, Himmel, Wasser und Luft · Zeit, früher und heute · Räume und Wege ·
+sondern leben in Sachgeschichten, Sachbüchern und Sachspielen, nicht in den Lernspielen (`spielbau.md` §6
+„Keine Sachwelt im Spiel“, 2026-11-15). Die Themen stehen als `ueberschriften` und `welten` in
+`spiele/lernplan.json` (acht Überschriften: Tiere und Pflanzen · Erde, Himmel, Wasser und Luft · Zeit, früher und heute · Räume und Wege ·
 Werkzeug, Arbeit und Bauen · Mein Körper und wie es mir geht · Wie wir miteinander umgehen · Sicher und
 stark). „Kosmik“ ist nur ein Arbeitstitel und kommt beim Kind nicht vor.
 
@@ -440,15 +439,11 @@ abgeleitet; ein kleiner Vorher-Nachher-Test mit drei Fakten wäre die erste echt
 
 | Nr. | Regel | Stand |
 |---|---|---|
-| K1 | **Drei Plätze, kein vierter.** Ein Sachthema steht als Sachgrund der Aufgabe (bleibt sichtbar), als Welt und Rahmen der Szene oder in der Pause am Rundenende. Während des schweren Schritts wird nichts eingeblendet. | [b] Seductive Details, Fisch |
-| K2 | **Der Sachgrund steckt in der Rechnung.** In Mathe liefern Sachfakten Zahlen und Beziehungen der Aufgabe (Körner auf Mäusenester verteilen, Beine zählen). Ein Themenbild neben einer kahlen Aufgabe zählt nicht. | [b] Walkington; Habgood & Ainsworth |
 | K3 | **Der Sachfakt ist ein Lernkern.** Foto oder naturgetreue Zeichnung, generische Sprache („Mäuse …“). Eine vermenschlichte Figur erzählt keine Sachfakten als Ich-Erlebnis. Keine Mythen („Mäuse lieben Käse“). | [b] Ganea 2014; Strouse 2018 |
-| K4 | **Jeder Fakt geprüft.** Pro Welt ein fester Faktensatz (etwa 5–10) mit Quelle, gefüllt erst, wenn ein Spiel die Welt nutzt. Kein Fakt aus dem Gedächtnis. | [E] |
-| K5 | **Ein Thema, viele Spiele.** Welten kehren über Tage wieder und vertiefen sich: in den Runden ihres Heimatspiels, in weiteren Zugängen und in der Pause; ein späteres Spiel darf einen früheren Fakt als Aufgabengrund nutzen. Das ist die Wiedervorlage der Schicht (L3). Der Sachstoff einer Runde richtet sich nach der Klasse des Themas der Runde („Sache wächst mit“, Spielkatalog 4.1). | [b] MORE; Fisch |
+| K4 | **Jeder Fakt geprüft.** Pro Welt ein fester Faktensatz (etwa 5–10) mit Quelle, gefüllt erst, wenn ein Buch die Welt nutzt. Kein Fakt aus dem Gedächtnis. | [E] |
 | K6 | **Höchstens ein neuer Fakt pro Runde.** Wiederholte Fakten zählen nicht als neu. | [P] |
 | K7 | **Sachwissen ist nie Bedingung.** Keine Sachabfrage zum Weiterkommen, kein „gekonnt“ für Sachfakten. Die Elternansicht zeigt nur besuchte Welten (3.3). | [P] Isolation der Schwierigkeit |
 | K8 | **Der Pausenmoment ist keine Belohnung.** Er kommt nicht nur nach richtigen Antworten, ist immer erreichbar und lässt sich ohne Verlust überspringen (N4, N5). | [E] |
-| K9 | **Jedes Spiel hat eine feste Heimatwelt** (Christian, 2026-11-14). Das Kind wählt keine Welt: Es konzentriert sich auf die Spielhandlung und lernt alle Welten über die Spiele kennen. Eine Welt ist Heimat von höchstens zwei Spielen; die Zuordnung steht in `docs/spielkatalog/welten.md`. Themen werden nie nach Geschlecht zugeschnitten. | [B/b] Personalisierung; N1; 6 |
 | K10 | **In Deutsch näher am Kern.** Sachwörter dürfen Übungswörter sein, Sachsätze Lesetexte, solange die Zielschwierigkeit isoliert bleibt. | [b] MORE |
 | K11 | **Echt-Zeichen.** Was wirklich so ist, trägt ein festes Symbol oder eine feste Rahmung, getrennt vom Fantasierahmen (HSU 1/2: „Geschichte und Geschichten“). | *Annahme:* in Apps ungeprüft |
 | K12 | **Soziale Szenen zwischen Kindern.** Die Kinder der Runde begleiten, Tiere erscheinen nur naturgetreu; das Verhalten zeigen Kinder an Alltagsorten. Gewünschtes Verhalten wird konkret gezeigt und benannt, der Konflikt bleibt kurz, die Lösung ausführlich. Benannt wird das Verhalten („Lena darf mitspielen“), nie die Gruppe (6). | [B] Mares & Woodard; [b] Larsen 2018 |
@@ -490,29 +485,10 @@ nicht; sie würde die Kategorie zum Thema machen (6).
 - [ ] **Sprache** nach 7; **Neutralität** nach 8.
 - [ ] **Geschichte** nach 9: Spannungsquelle ohne Gewalt, Sicherheitssignale, Grenze nach 9.3, Elternvorschau-Satz.
 - [ ] **Elternansicht:** beschreibend, von Stärken aus, kein Vergleich, keine Defizitwörter.
-- [ ] **Sachthema** an einem der drei Plätze (K1), Fakt aus dem geprüften Faktensatz der Welt (K4), Natur-Härten nach 9.3.
+- [ ] **Sachthema:** keine Sachwelt im Spiel (`spielbau.md` §6); Fakten in Geschichten geprüft (K4), Natur-Härten nach 9.3.
 - [ ] **Soziale Szene / Schutz:** gewünschtes Verhalten gezeigt, Konflikt kurz (K12); Rechte statt Warnung (K14).
-
----------------------------------------------------------------------------------------------------
-## 13. Was sich gegenüber `ideen.txt` ändert
-
-| In `ideen.txt` | Neu |
-|---|---|
-| Hilfe-Leiter mit Wood & Middleton 1978 begründet | Replikation 2025 gescheitert; Begründung über Tutorsysteme (L12). Die Regel bleibt. |
-| „Dong 2025“ als Beleg, dass Mischen bei Kindern schwächer wirkt | Einzelexperiment; Meta-Analyse Brunmair & Richter 2019. Mischen nur zwischen Verwechslungspartnern (L6). |
-| Kein Personenlob mit Mueller & Dweck 1998 begründet | Nicht repliziert; Begründung über Kluger & DeNisi, Deci et al., Cimpian/Zentall (3.1). Auch Prozesslob nicht als Formel. |
-| „Vier Säulen“ (Hirsh-Pasek) als Forschungsbefund | Gestaltungsrahmen, kein Beleg. |
-| Wörter-Werkstatt mit „Ding-Kiste, Tu-Kiste, Wie-Kiste“ | Kisten heißen Nomen, Verb, Adjektiv mit Symbol (5). |
-| Wimmelbild lehrt den Einstieg „Nomen = Ding“ | Auch im Einstieg die Artikelprobe als Hilfe, keine Bedeutungsregel (5). |
-| Falsch: „komische Reaktion“ | Eindeutig, aber nie lustiger als die richtige (N7). |
-| – | Neu: Vorhersagen (L2), erst zeigen (L5), Zielkorridor (L9), Transfer (L13), Wahl 3–5 Optionen (N2), Montessori-Fantasie-Regel (4), Vielfalt/Stereotype (6), Sprache (7), Neutralität (8), Geschichten und Angst (9), Kosmik-Schicht (10). |
 
 **Ohne Ausnahme (entschieden 2026-11-13):** Auch Pausenbilder und das Tagesende folgen dem Konzept.
 Pausen haben einen sichtbaren Weiter-Knopf und laufen nicht mit Füllbalken ab; das Spiel beendet sich
 nicht selbst („Für heute ist Schluss“), sondern bietet nach einer Runde ruhig an, aufzuhören oder
 weiterzuspielen (N1, N6, 9.2 Nr. 7).
-
-**Folgearbeit nach Freigabe:** Begriffe in `spiele/` und `spiele/lernplan.json` umstellen
-(Namenwort/Tunwort/Wiewort/Selbstlaut/Mitlaut/Begleiter → Nomen/Verb/Adjektiv/Vokal/Konsonant/Artikel),
-Sprechertexte der fertigen Spiele gegen die Wortliste 3.2 prüfen, Wimmelbilder und Satzlisten nach 6.2
-auszählen, Forschungsteil in `ideen.txt` auf dieses Konzept verweisen lassen.

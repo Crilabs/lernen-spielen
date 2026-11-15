@@ -42,8 +42,8 @@ der Stimmungsebene kostet nichts und hält die Spiele unterscheidbar [P].
 | **Lernzeichen** | der Lernkern | flach, eine Farbe je Bedeutung, keine Gesichter, kein Glanz, keine Gegenstände als Zählobjekte | SVG von Hand |
 | **Erzählfiguren** | Geschichte, Gefühle, Vorbild | klar stilisiert (Abschnitt 2) | SVG von Hand nach Figurenblatt |
 | **Wortbilder** | Bild zu einem Wort (Hör-, Anlaut-, Zuordnungsaufgaben, verwandeln) | stilisiert wie die Figuren, aber sachlich richtig (Abschnitt 3) | SVG von Hand |
-| **Sachbilder** | echte Welt in der Kosmik-Schicht | Foto oder naturgetreue Zeichnung, mit Echt-Zeichen | lizenziertes Foto oder geprüfte Zeichnung, nie fotorealistische KI |
-| **Szenenbilder** | Welt, Wimmelbild, Pausenbild | frei je Welt, gemeinsame Grundregeln (Abschnitt 8) | darf generiert werden (Abschnitt 10) |
+| **Sachbilder** | echte Welt in der Kosmik-Schicht | Foto oder naturgetreue Zeichnung, mit Echt-Zeichen | fotorealistisches KI-Foto (`geschichten.md`) oder geprüfte Zeichnung, jedes geprüft (A3) |
+| **Szenenbilder** | Welt, Pausenbild | frei je Welt, gemeinsame Grundregeln (Abschnitt 8) | darf generiert werden (Abschnitt 10) |
 | **Bedienzeichen** | Knöpfe, Navigation | gegenständlich, überall gleich (Abschnitt 7) | SVG von Hand (`spiele/symbole/`) |
 
 **Gemeinsame Grundregeln für alles Gezeichnete** [E]: Kontur `#3B2A6B`, Strich 4 (bei Figuren in der
@@ -283,7 +283,7 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 | W2 | **Sicherheitssignale im Bild** nach `grundsaetze.md` 9.2 Nr. 5: hell, ein freundlicher Mensch sichtbar oder in Rufweite, kein bedrohliches Dunkel. | [b] 9 |
 | W3 | **Szenen prüfen und auszählen** nach `grundsaetze.md` 6.2 und 6.3: wer handelt, wer schaut zu, Berufe, Familien, Körper. | [B] 6 |
 | W4 | **Tiere in Szenen sind sachlich richtig** (Art, Anatomie, Lebensraum, T1–T4). | [b] K3 |
-| W5 | **Pausenbilder** gehören zur Stimmungsebene, haben einen sichtbaren Weiter-Knopf und laufen nicht ab (`grundsaetze.md` 13). | [E] |
+| W5 | **Pausenbilder** gehören zur Stimmungsebene, haben einen sichtbaren Weiter-Knopf und laufen nicht ab (`grundsaetze.md` 12). | [E] |
 
 ---------------------------------------------------------------------------------------------------
 ## 9. Bedienzeichen
@@ -314,7 +314,7 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 
 | Nr. | Regel | Stand |
 |---|---|---|
-| A1 | **Nur für die Stimmungsebene.** Szenen-, Wimmel- und Pausenbilder dürfen generiert werden. Figuren, Wortbilder, Lernzeichen und Bedienzeichen entstehen von Hand als SVG. Sachbilder sind lizenzierte Fotos oder geprüfte naturgetreue Zeichnungen, nie fotorealistische KI-Bilder. | [E]; [b] erfundene Anatomie häufig |
+| A1 | **Wofür KI-Bilder.** Szenen- und Pausenbilder, das Spielbild der Karte (§16) und die fotorealistischen Fotos der Sachbücher (`geschichten.md`) dürfen generiert werden; ein Wimmelbild gibt es nicht (`spielbau.md`). Figuren, Wortbilder, Lernzeichen und Bedienzeichen entstehen von Hand als SVG. | [E]; [b] erfundene Anatomie häufig |
 | A2 | **Fester Basis-Prompt und Stilreferenz** je Bildart, im Repo abgelegt, damit die Welten zusammenpassen. | [P] |
 | A3 | **Prüfen vor Verwendung:** Anatomie und Art der Tiere gegen ein Referenzfoto, Menschen nach 6.3, Bestand nach 6.2 auszählen. Generatoren verstärken Stereotype auch ohne Personenangabe im Prompt und trotz Gegenanweisung. | [B] Bianchi 2023 |
 | A4 | **Herkunftseintrag je Bild:** Quelle, KI ja/nein, Modell, Prompt, geprüft gegen, von wem, Datum. | [E] |
@@ -358,19 +358,9 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 - [ ] **Beim Erlesen** kein Bild vorab.
 - [ ] **Buchstaben** ohne Einzelfarben; Tastaturen mit festen Plätzen, unbenutzte Tasten blass.
 - [ ] **Bedienzeichen** aus `spiele/symbole/`, fester Platz, Name, 2 × 2 cm.
-- [ ] **KI-Bild:** nur Stimmungsebene, Basis-Prompt, geprüft (Anatomie, 6.3), Herkunftseintrag, kein Text im Bild.
+- [ ] **KI-Bild:** nur nach A1, Basis-Prompt, geprüft (Anatomie, 6.3), Herkunftseintrag, kein Text im Bild.
 - [ ] **Vielfalt** nach `grundsaetze.md` 6 geprüft und im Bestand ausgezählt.
-- [ ] **Kartenbild** nach §16: eine Figur im Stil der Runde vor der Welt-Vignette, Silhouettentest im Fach bestanden, kein Text, keine Lernzeichen.
-
----------------------------------------------------------------------------------------------------
-## 14. Ausstehende Anpassungen in `grundsaetze.md`
-
-**Erledigt (2026-11-14).** Ursprünglich vorgemerkt: Abschnitt 4 „Fantasie
-und Einhorn“ ohne Einhorn neu fassen; K12 „Einhorn und Tiere begleiten“ → „Die Kinder der Runde
-begleiten“; in Abschnitt 5 die *Annahme* zu den Symbolfarben streichen (AMI bestätigt) und „über Symbol
-und Farbe“ → „über Symbol (Form und Größe), Farbe zusätzlich“; L8 um „Was sich bewegt, zeigt den Inhalt
-oder die Folge einer Kinderhandlung“ ergänzen; in Abschnitt 11 Farbsehschwäche [P] → [B]; einen Verweis
-auf dieses Dokument aufnehmen.
+- [ ] **Spielbild** nach §16: aus Screenshots des Spiels, ein Kind der Runde als Held, kein Text.
 
 ---------------------------------------------------------------------------------------------------
 ## 15. Offen
@@ -387,23 +377,12 @@ auf dieses Dokument aufnehmen.
 ---------------------------------------------------------------------------------------------------
 ## 16. Kartenbild
 
-Freigegeben (Christian, 2026-11-14). Eine Spielkarte (Startseite, Fach-Seite) muss **ohne Lesen** erkennbar sein.
-Die Welt-Vignette allein leistet das nicht (Spiele derselben Welt sehen gleich aus, die Karten „Mit echten Dingen“
-zeigen alle dieselbe Hand). Markierung wie in [`figuren.md`](figuren.md): **(Christian)** entschieden ·
-**(Annahme)** Vorschlag.
+Eine Spielkarte (Startseite, Fach-Seite) muss **ohne Lesen** erkennbar sein. Seit 2026-11-15 zeigt sie das
+**Spielbild** (`bild` in `spiele.json`): `werkzeuge/bilder/spielbild.mjs` macht es aus 2–3 Screenshots des echten
+Spiels, der Held ist ein Kind der Runde (`spielbau.md`). Kein Text, keine Bedienung im Bild; die Karte zeigt nur
+Spielbild, Titel und Thema, keinen runden Knopf.
 
 | Nr. | Regel | Stand |
 |---|---|---|
-| KB1 | **Zwei Schichten.** Hinten die Sachwelt als flache Welt-Vignette (die fünf Töne der Welt-Palette, 6.2, ohne Kontur); vorn die **Figur des Spiels** als sauberes SVG im Stil der Runde (Tinte-Kontur nur um die Silhouette, Licht in Stufen, [`figuren.md`](figuren.md) §4), eingesetzt als `<ls-objekt still>`. | (Christian) |
-| KB2 | **Eine Figur, groß:** mindestens 60 % der Bildhöhe, mittig bis Mitte rechts mit normalem Rand. Die Karte zeigt nur das Kartenbild, Titel und Thema; **kein runder Knopf** (Christian, 2026-11-14: „zu viele Infos“). | (Christian) |
-| KB3 | **An der Silhouette erkennbar:** klein und in Graustufen unterscheidet sich die Karte von allen anderen Karten ihres Fachs. Probe (Silhouettentest): alle Karten eines Fachs als Raster in 64 px Graustufen nebeneinander. | (Christian) |
-| KB4 | **Der typische Moment** des Spiels (kennzeichnender Zustand der Figur), als Standbild (B3). | (Christian) |
-| KB5 | **Keine Lernzeichen, kein Text im Bild:** keine Ziffern, Buchstaben, Perlen (C2, M1). Ein Regal-Bild mit `wert` steht auf der Karte ohne Wert. | (Christian) |
-| KB6 | **Eindeutig je Fach.** Eine Figur darf mehreren Spielen dienen, aber `(figur, welt, zustand)` kommt je Fach nur einmal vor. Gleiche Figur in gleicher Welt → Unterschied über Zustand oder Zubehör. Ein Test verhindert gleiche Bilder in einem Fach. | (Christian) |
-| KB7 | **Kinder der Runde sind keine Kartenfiguren.** Sie verbinden alle Spiele (§10 Nr. 4) und unterscheiden keins. | (Annahme) |
 | KB8 | **Spielsymbol = Kopfform der Figur:** Das Spielsymbol ist die Kopf- bzw. Kurzform der Figur und steht in der Kopfleiste und im Regal-Detail, nicht auf der Karte. | (Christian) |
 | KB9 | **Karten „Mit echten Dingen“** behalten ihr eigenes Aussehen (Papier mit Naht, keine Welt). Bild: das echte Alltagsding im Stil der Runde (z. B. sieben Nudeln auf zwei Tellern, ein Würfel, eine Treppe), klein in der Ecke des Bildes eine Hand als Zeichen „echt“; kein Knopf. Die Dinge liegen in `spiele/objekte/` und sind wiederverwendbar ([`mit-echten-dingen.md`](mit-echten-dingen.md) „Bild der Karte“). | (Christian) |
-| KB10 | **Daten statt Einzelbilder:** `spiele.json` `karte: { figur, zustand, welt }`; Kopf der Anleitung `bild: { figur, zustand }`. Die Kartenfigur ist zugleich das Regal-Bild des Spiels (`regal.objekt`); das Spielsymbol ist die Kopfform dieser Figur, von Hand als eigene Datei `symbol.svg` im Spielordner gezeichnet (KB8). | (Annahme) |
-
-Herkunft der Figuren und Prüfung: [`spielentwicklung.md`](spielentwicklung.md) „Spielobjekte“ und B-Welt (W-Karte).
-Die Umsetzung auf der Startseite steht noch aus (Christian).

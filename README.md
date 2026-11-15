@@ -9,14 +9,18 @@ Die frühere Web-Fassung mit PHP ist entfernt.
 ## Aufbau
 
 - `spiele/` – die Oberfläche der App, gebaut aus den Rahmen-Bausteinen:
-  - `index.html` (Startseite): oben bis zu drei Spiele, deren Thema gerade dran ist, darunter die Fächer mit Spielen,
-    unten „Mein Regal“; Zahnrad gedrückt halten (3 s) führt zum Elternbereich.
+  - `index.html` (Startseite): je Fach ein Abschnitt mit Spielkarten und Karten „Mit echten Dingen“; rechts
+    „Zuletzt gelernt“, „Was ich schon kann“ und „Bibliothek“. Zahnrad gedrückt halten (3 s) führt zum Elternbereich.
   - `themen.html?fach=<id>` (Fach-Seite): der Weg eines Fachs (gekonnt, dran, zwei in Sicht); ein Thema
     antippen zeigt seine Spiele, „Geschichte ansehen“ und „Mit echten Dingen“.
-  - `regal.html` („Mein Regal“, was ich kann): je Fach ein Brett, jedes gekonnte Thema steht als sein Lernmaterial
+  - `regal.html` („Was ich schon kann“, das Regal): je Fach ein Brett, jedes gekonnte Thema steht als sein Lernmaterial
     darauf (Regeln in `rahmen/material.js`), ohne Zahl und ohne Platzhalter.
-  - `eltern.html`/`eltern.js` (Elternbereich hinter PIN): nur, was das Kind nicht darf – Lernstand mit Eingriffen,
-    Stufe der Geschichten, Gerät, Hinweise, Sicherheit.
+  - `bibliothek.html`, `bibliothek.json`, `geschichte.html`, `geschichten/` (Bibliothek): Sachbücher und
+    Geschichten mit Fotos, Regeln in `docs/geschichten.md`.
+  - `echt.html`, `mit-echten-dingen/` („Mit echten Dingen“): kurze Spiele ohne Bildschirm je Thema,
+    Regeln in `docs/mit-echten-dingen.md`.
+  - `eltern.html`/`eltern.js` (Elternbereich hinter PIN): nur, was das Kind nicht darf – Reiter Lernplan, Sachthemen,
+    Spielzeit, Updates, Hinweise, Sicherheit.
   - `lernsteuerung.js` (Lernplan, Lernstand, Daten der Ansichten), `lernspiel.js` (gemeinsame Hilfen der Spiele), die
     Spiele als HTML-Dateien, `spiele.json` (Kategorien und Spiele). Die ersten sechs Spiele sind am 2026-11-14
     entfernt worden (Neubau nach `docs/grundsaetze.md`, Code in der Git-Historie).
@@ -29,7 +33,7 @@ Die frühere Web-Fassung mit PHP ist entfernt.
   bedienen lassen, steht in `docs/bedienung.md`. `spiele/rahmen/vorschau.html` zeigt alle Bausteine (Entwicklerseite);
   die Browser-Prüfung dazu: `tests/browser/rahmen.spec.mjs` (Aufruf im Kopfkommentar, nicht Teil von `npm test`).
 - `spiele/vorlage/` (`index.html` + `spiel.js`) – Spielvorlage, von der jedes neue Spiel als Kopie startet.
-- `spiele/<fach>/<katalog-nr>-<name>/` – ein Ordner je Spiel, nach Fach (z. B. `spiele/mathe/m14-zwei-tonnen/`);
+- `spiele/<fach>/<katalog-nr>-<name>/` – ein Ordner je Spiel, nach Fach (z. B. `spiele/mathe/m37-kettenhuepfer/`);
   `spiele/objekte/` – animierte Objekte, die mehrere Spiele nutzen. `tests/ablage.test.mjs` prüft die Ablage.
 - `spiele/kern/` – der Plattform-Kern: aller Zugriff auf Speicher (je Profil), Einstellungen (Ton je Spiel, Stimme
   je Gerät), Sprache und Gerätefähigkeiten (Update, Beenden, Kiosk). Siehe `dienste.js` (Schnittstellen),
@@ -38,8 +42,6 @@ Die frühere Web-Fassung mit PHP ist entfernt.
 - `spiele/audio/` – vorab erzeugte Sprachausgabe (`index.json` + MP3 je Stimme). Erzeugt mit `npm run audio`
   aus `werkzeuge/audio/` (Azure Speech, Ablauf in `werkzeuge/audio/README.md`). Fehlt eine Datei, spricht die
   Systemstimme. Regeln für gesprochene Texte: `docs/stimme.md`.
-- `spiele/fortschritt/` – früher die Fortschrittsbalken der Startseite; keine Ansicht nutzt sie mehr (nur noch
-  `tests/fortschritt-kern.test.mjs`).
 - `spiele/symbole/` – SVG-Symbole (Kategorien, Spiele, Elternbereich).
 - `spiele/schrift/` – lokal eingebundene Schrift (keine Webzugriffe nötig).
 - `src-tauri/` – Rust-Hülle: Kiosk-Fenster, Lernstand lesen/schreiben, Logdatei, Updater, Installer-Konfiguration.
@@ -75,7 +77,7 @@ können bestehende Installationen keine Updates mehr annehmen. Die GitHub-Secret
 `TAURI_SIGNING_PRIVATE_KEY` und `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`. Der öffentliche Schlüssel steht in
 `src-tauri/tauri.conf.json`.
 
-Abnahme einer Version am Windows-Rechner: `kiosk/pruefliste-v0.1.0.md` (Erstinstallation), `kiosk/pruefliste-v1.0.0.md` (Update auf 1.0.0).
+Abnahme einer Version am Windows-Rechner: `kiosk/pruefliste-v1.0.0.md`.
 
 ## Lernstand-Ordner
 
@@ -134,11 +136,8 @@ Dateien:
   (Aufgaben, mit denen sich „nicht betroffen“ bestätigen lässt), `kind_hinweis` (wird vorgelesen: ohne Ziffern und
   Zahlwörter) und `eltern` (beschreibend; `stufe2` nur bei anhaltenden Mustern). Grundlage:
   `docs/reports/Häufige Fehler Grundschule.md`. Die Lernsteuerung wertet Fehlerbilder noch nicht aus.
-  Neben `themen` stehen `ueberschriften` und `welten` (Sachwelten, `docs/grundsaetze.md` §10). Jede Welt hat
-  `fakten`: den geprüften Faktensatz (K4), gefüllt erst, wenn ein Spiel die Welt nutzt; jeder Fakt hat `text`,
-  `quelle` und `klasse` (ab welcher Klasse er passt, „Sache wächst mit“, `docs/spielkatalog.md` 4.1).
-  Welches Spiel in welcher Welt spielt: `docs/spielkatalog/welten.md`.
-- `spiele/aufgabenarten.js`: Aufgaben-Erzeuger. Aufgabenarten: `zerlegung`, `rechnen`, `menge`, `zwillinge`.
+  Neben `themen` stehen `ueberschriften` und `welten`: die Sachthemen der Bibliothek und des Elternbereichs.
+- `spiele/aufgabenarten.js`: Aufgaben-Erzeuger. Aufgabenarten: `zerlegung`, `rechnen`, `menge`, `zwillinge`, `mal`.
 - `spiele/lernsteuerung.js`: Steuerung (reine Logik ohne DOM, in Node testbar) und `runde()` für die Spiele.
   Sie wählt das Thema, macht bei neuen Themen eine Probe (bekannte Themen werden übersprungen), übt auf den Stufen,
   legt Aufgaben mit Wiedervorlage (Abstände 0, 1, 3, 7, 21 Tage) wieder vor und stellt Hilfen für den
@@ -148,7 +147,7 @@ Dateien:
   oft falsch), `zeig` (Erzählblase, darf Ziffern enthalten) und `bild`. Es erzählt der Erzähler; im Bild stehen
   Kinder der Runde (`{ "figur": "ela", "haltung": "zeigen", "aufgabe": "vorzeigen" }`, gezeichnet mit
   `spiele/runde/`), Perlenstäbe und Zahlen.
-- `spiele/themen.html`: die Übersicht „Was ich kann“ (Weg mit Stationen, ruhig, ohne Zähler oder Prozente).
+- `spiele/themen.html`: die Fach-Seite (Weg mit Stationen, ruhig, ohne Zähler oder Prozente).
 - `scripts/luecken.mjs`: `npm run luecken` listet Lücken im Plan, z. B. Themen ohne Spiel, das sie bedient.
 
 Lernstand: Schlüssel `lernplan` (gespeichert über `kern/speicher.js`, in der App im Ordner `lernstand\kind-1\`).
@@ -159,44 +158,6 @@ Die Tests der Lernsteuerung nutzen einen festen Beispiel-Katalog (`tests/daten/s
 
 ## Neues Spiel hinzufügen
 
-Zuerst die Checkliste in `docs/bedienung.md` (Abschnitt 10) durchgehen: Kopfleiste, Blase, Hilfe, Pause, Tastatur
-und Ziehen kommen aus `spiele/rahmen/`, kein Spiel baut sie selbst. Neue Spiele starten als Kopie der **Spielvorlage**
-`spiele/vorlage/index.html` + `spiele/vorlage/spiel.js` (spielbarer Platzhalter „Leg die 7“; die Schritte stehen oben in
-`spiel.js`); der Ordner wird nach `spiele/<fach>/<katalog-nr>-<name>/` kopiert. Die Vorlage steht nicht in `spiele.json` und schreibt nie in den Lernstand. Browser-Prüfung:
-`NODE_PATH=… node tests/browser/vorlage.spec.mjs` (wie `rahmen.spec.mjs`).
-
-1. Spielordner `spiele/<fach>/<katalog-nr>-<name>/` aus der Vorlage anlegen (`index.html`, `spiel.js`). Speichern, Einstellungen, Sprache und Gerätefunktionen laufen nur über
-   `spiele/kern/` (`lade`/`speichere`, `einstellung`/`setzeEinstellung`, `sprich`/`stille`, `faehigkeiten`).
-   **Regel:** Kein Plattform-Zugriff außerhalb von `spiele/kern/` – also kein `localStorage`, `sessionStorage`,
-   `speechSynthesis`, `SpeechSynthesisUtterance`, `__TAURI__`, `navigator.mediaDevices` und kein `new Audio(`.
-   `npm test` schlägt sonst fehl (`tests/plattform-regel.test.mjs`).
-2. Eintrag in `spiele/spiele.json` unter `spiele`: `id`, `titel`, `thema`, `kategorie` (eine `id` aus
-   `kategorien`), `symbol` und `datei` relativ zu `spiele/` (z. B. `mathe/m14-zwei-tonnen/symbol.svg` und
-   `mathe/m14-zwei-tonnen/index.html`), `text` (wird vorgelesen), `beschreibung` (2–3 Sätze für Eltern: was das Kind tut, was es lernt, wie die Welt dazu passt; nur in `?eltern` des Spiels und im Elternbereich zu sehen, nie für das Kind; `tests/spiele-beschreibung.test.mjs`).
-3. Symbol: `symbol.svg` im Spielordner, von Hand gezeichnet als Kopfform der Figur des Spiels (`karte.figur`,
-   `docs/grundsaetze-bilder.md` §16 KB8, KB10), im Stil der vorhandenen Symbole (viewBox `0 0 100 100`, Linien `#3B2A6B`
-   4 px, runde Enden, flächige Füllung in Pastell, siehe z. B. `symbole/hilfe.svg`); steht in Kopfleiste und
-   Regal-Detail, nicht auf der Karte.
-4. Spiel am Lernplan (für Lernspiele mit Aufgaben): im Eintrag `arten` angeben, z. B.
-   `"arten": [{ "art": "zerlegung", "zahlen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }]`
-   oder `{ "art": "rechnen", "max": 100, "gleiche": false, "stufen": ["kopf"] }`.
-   Im Spiel `runde()` aus `lernsteuerung.js` verwenden:
-   ```js
-   const r = await runde(id, { wunsch, max, nurAnsehen });
-   if (r.einfuehrungFaellig) { /* Einführung abspielen */ r.einfuehrungGesehen(); }  // vor dem ersten naechste()
-   const angebot = r.naechste();                       // je Angebot
-   r.melde(angebot.key, { ok, hilfe: 0 /* 0|1|2 */, ms });
-   const { hinweisSpiel } = await r.ende();
-   ```
-   Einführungen spielt `einfuehrung.js` (`spieleEinfuehrung`); Vorlagen liegen in `spiele/einfuehrungen/`
-   (Felder `sprich`, `zeig`, `bild`, siehe oben). Eigene Spieldaten, die nichts mit dem Lernen zu tun haben,
-   unter einem eigenen Schlüssel `<id>-spiel` speichern, nicht im Schlüssel `lernplan`.
-   **Vorschau-Parameter** (`?zahl`, `?fehler`, `?eltern` u. ä.) müssen `nurAnsehen: true` übergeben und schreiben
-   nie in den Lernstand.
-5. Fortschrittsbalken (Übergangslösung, nur für Spiele ohne `arten`): `spiele/fortschritt/<id>.js` mit
-   `export async function fortschritt(save, holeJson)`, Rückgabe `{ wert: 0..1, text: "…" }`.
-   `save` ist der gespeicherte Lernstand des Spiels, `holeJson(pfad)` lädt eine JSON-Datei aus `spiele/`.
-   Zusätzlich im Eintrag in `spiele.json` `"fortschritt": true` setzen – nur dann wird das Modul geladen
-   (die App liefert für fehlende Dateien die Startseite aus, deshalb wird nicht geraten). Ein Test prüft,
-   dass Kennzeichen und Moduldatei zusammenpassen. Ohne Modul zeigt die Startseite keinen Balken.
-   Spiele mit `arten` bekommen keinen Fortschrittsbalken; ihren Stand zeigt „Was ich kann“.
+Ein neues Spiel entsteht mit dem Skill „Spiel entwickeln“ nach `docs/spielbau.md` (Werkzeuge in
+`werkzeuge/spielbau/`). Es startet als Kopie der Spielvorlage `spiele/vorlage/`; Bausteine und Bedienung stehen in
+`docs/bedienung.md`.

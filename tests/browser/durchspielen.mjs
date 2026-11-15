@@ -1,4 +1,4 @@
-// Prüfstand B-Spielbarkeit (docs/spielentwicklung.md §4): simulierte Kinder spielen je eine Runde eines Spiels.
+// Prüfstand (docs/spielbau.md „Ablauf“): simulierte Kinder spielen je eine Runde eines Spiels.
 // Kein Teil von `npm test`: braucht Playwright und installierte Browser (Chromium, WebKit).
 //
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs spiele/<fach>/<katalog-nr>-<name>/index.html \

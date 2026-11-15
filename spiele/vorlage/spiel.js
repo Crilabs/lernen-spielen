@@ -30,12 +30,12 @@
 //  6. Lernplan: Das Spiel bekommt Themen über `arten`. Hat ein Thema eine Einführung (`einfuehrung` in
 //     lernplan.json), spielt der RAHMEN sie beim ersten Mal ab. Erzählt sie eine andere Welt als das Spiel, legt das
 //     Spiel eine eigene Einführung (gleiches Format wie spiele/einfuehrungen/*.json) in seinen Ordner und nennt sie
-//     in EINFUEHRUNG (SPIELWELT); Pfade dort sind relativ zu spiele/, z. B. "mathe/m14-zwei-tonnen/einfuehrung.json".
+//     in EINFUEHRUNG (SPIELWELT); Pfade dort sind relativ zu spiele/, z. B. "mathe/m37-kettenhuepfer/einfuehrung.json".
 //     Eine neue Aufgabenart (spiele/aufgabenarten.js, `aufgaben` in lernplan.json, ZIEL_MS) ändert die Schlüssel des
-//     Lernstands und ist deshalb voller Weg (docs/spielentwicklung.md „Zwei Wege“, Regel und Tabelle „Vorhanden“).
+//     Lernstands; deshalb zuerst die vorhandenen Arten nutzen.
 //  7. Pflicht: Test-Schnittstelle für den Prüfstand. stelleAufgabe gibt neben hilfe(stufe) auch zuege() und
 //     richtigerZug() zurück (Form in rahmen/pruefen.js); der RAHMEN meldet sie an. Dann muss das Durchspielen
-//     grün sein: node tests/browser/durchspielen.mjs spiele/<fach>/<katalog-nr>-<name>/index.html (docs/spielentwicklung.md 4).
+//     grün sein: node tests/browser/durchspielen.mjs spiele/<fach>/<katalog-nr>-<name>/index.html (docs/spielbau.md „Ablauf“).
 //     Die Schnittstelle gibt es nur im Testbetrieb (?pruefen); für das Kind ändert sie nichts.
 //     Hilfe Stufe 2 zeigt die Lösung mit dem Sonnenring: Klasse `markiert` an dem Teil, das das Kind als Nächstes
 //     legt (seite.css). Daran erkennt der Prüfstand die gezeigte Lösung; ohne sie ist das Kind „hilfe“ rot.

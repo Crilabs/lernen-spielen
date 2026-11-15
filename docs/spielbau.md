@@ -112,7 +112,7 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 | G8 | **Vielfalt beiläufig:** Berufe, Familien, Aussehen gegen das Klischee, nie zum Thema gemacht; nie nach Gruppen zählen. | §6.1 |
 | G9 | **Sicherheit:** Lernen und Bedrohung nie gleichzeitig, keine Gewalt, keine Schockeffekte, jede Runde endet hell und in Ruhe. | §9.2 |
 | G10 | **Figuren sprechen nicht.** Es spricht der Erzähler in der dritten Person; Gefühle der Figuren gelten der Sache, nie dem Kind als Ursache. | §3.1 Nr. 4–5, `stimme.md` |
-| G11 | **Was als echt gilt, stimmt:** Sachfakten nur aus den geprüften Fakten der Welt; sonst ist es erkennbar Spiel („Hier …“) oder kommt nicht vor. Mengen in Mathe bleiben neutrales Material (Perlen). | K3, K4, L7 |
+| G11 | **Was als echt gilt, stimmt:** Sachfakten gehören in Geschichten (§6); im Spiel ist es erkennbar Spiel („Hier …“) oder kommt nicht vor. Mengen in Mathe bleiben neutrales Material (Perlen). | K3, K4, L7 |
 | G12 | **Bedienung:** feste Plätze und Bausteine (Leiste, Blase, Hilfe, Pause, Tastatur), große Tippziele, jedes Ziehen auch per Tippen, alles vorlesbar, Information nie nur über Farbe, still beim Denken. | `bedienung.md` §3, §4, §10; §11 |
 | G13 | **Technik:** Vorlage mit RAHMEN, Lernsteuerung meldet jede Aufgabe, Test-Schnittstelle (`spiele/rahmen/pruefen.js`), Plattform nur über `spiele/kern/`, `npm test` grün. | `spielentwicklung.md` Ablage |
 | G14 | **Wer es kann, ist schnell fertig:** Probe zu Beginn; das Spiel lässt die Runde von der Lernsteuerung steuern, endet beim Ereignis „gekonnt“ und hält kein Kind in einem gekonnten Thema fest. Der Prüfstand prüft es (Kind „sicher“: höchstens 5 Aufgaben, Thema gekonnt, Pause). | L3, N1, `lernsteuerung.js` |

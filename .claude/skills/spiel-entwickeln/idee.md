@@ -3,7 +3,7 @@
 Du erfindest das Spiel **{{ID}} „{{NAME}}“** für Kinder von Vorschule bis Kl. 4. Du baust nichts.
 
 **Lies nur das Bauheft** `{{BAUHEFT}}`. Es enthält die Regeln (Spielkern, Grenzen, Werkzeuge, Streichen), den
-Katalog-Eintrag, die Welt, die Themen und was es schon gibt. Andere Dokumente liest du nur, wenn dir eine bestimmte
+Katalog-Eintrag, die Themen und was es schon gibt. Andere Dokumente liest du nur, wenn dir eine bestimmte
 Einzelheit fehlt, und dann nur den Abschnitt. Das Vorbild aus den Regeln §1 darfst du dir ansehen:
 `git show 4633d0a:spiele/einmaleins.html`.
 
@@ -17,7 +17,8 @@ Arbeitsordner: `{{WORKTREE}}` (Branch `{{BRANCH}}`). Niemanden fragen, keine Unt
    Sekunden), Takt (Sekunden von Aufgabe zu Aufgabe für ein sicheres Kind). Ein Satz: „Ein Kind sieht … und weiß
    sofort, dass es … soll.“
 2. **Woher die Schwierigkeit kommt** – eine Zeile, aus dem Stoff oder aus einer Entscheidung des Kindes (§2).
-3. **Bühne** – die Heimatwelt als ruhiger Hintergrund mit ein, zwei Dingen; wo der Held steht. Kein Wimmelbild.
+3. **Bühne** – das Spielfeld als Teil der Szene, ruhig, mit ein, zwei Dingen, keine Sachwelt (§6); wo der Held steht.
+   Kein Wimmelbild.
 4. **Eine Aufgabe, Sekunde für Sekunde** – richtig, daneben (die Sache zeigt, was die getippte Antwort wirklich
    ist), Hilfe Stufe 1 und 2.
 5. **Stufen** – was sich zwischen material, vorstellung und kopf ändert (nur das Nötige).
@@ -25,7 +26,7 @@ Arbeitsordner: `{{WORKTREE}}` (Branch `{{BRANCH}}`). Niemanden fragen, keine Unt
    höchstens drei). Sätze, die aus Daten entstehen, als Muster („{a} · {n} = {c}.“).
 7. **Freude** – zwei bis drei Varianten der Wirkung, die Klänge, ein kleiner Witz des Helden ab und zu.
 8. **Daten** – Eintrag in `spiele/spiele.json` (id, titel, thema, kategorie, symbol, datei, text, beschreibung,
-   arten mit stufen, regal, karte); Aufgabenart aus `spiele/aufgabenarten.js` oder neu (dann: was sie braucht).
+   arten mit stufen, regal; das Spielbild `bild` macht der Abschluss); Aufgabenart aus `spiele/aufgabenarten.js` oder neu (dann: was sie braucht).
 9. **Bausteine** – je Teil „vorhanden: <Pfad>“ oder „neu“. Neues **Lernzeichen** (Bedeutung für alle Spiele)? Dann
    eine Zeile „Freigabe nötig: <Frage an Christian>“.
 10. **Gestrichen** – was du aus Katalog-Eintrag, Welt oder einem vorhandenen Spiel bewusst weglässt, je eine Zeile
