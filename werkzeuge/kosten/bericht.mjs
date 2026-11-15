@@ -33,11 +33,11 @@ export function formatiere({ spiele, katalog, preise, analog, themenGesamt, buec
   if (p.geparkt.anzahl) z.push(`  davon geparkt (gesondert): ${eur(p.geparkt.eur)}, ${zahl(p.geparkt.tokens)} Token`);
   z.push("");
   if (!p.durchschnitt) {
-    z.push("Durchschnitt und Prognose: noch kein fertiges Spiel.");
+    z.push("Durchschnitt und Prognose: noch kein Spiel nach dem neuen Spielbau (docs/spielbau.md).");
   } else {
     const d = p.durchschnitt;
     z.push(
-      "Durchschnitt je fertigem Spiel",
+      `Durchschnitt je Spiel, nur neuer Spielbau (${p.basisSpiele} ${p.basisSpiele === 1 ? "Spiel" : "Spiele"}; alte Phasen zählen nur bei „ausgegeben“)`,
       `  gesamt  ${eur(d.eur)}   (günstigstes ${eur(p.spanne.min)}, teuerstes ${eur(p.spanne.max)})`,
       `  Claude  ${eur(d.claude)}  (${zahl(d.tokens)} Token)`,
       `  Bilder  ${eur(d.bilder)}  (${zahl(d.bildAnzahl, 1)} Bilder)`,
