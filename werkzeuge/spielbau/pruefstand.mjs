@@ -25,7 +25,9 @@ const PW = "/private/tmp/claude-501/pw/node_modules";
  * 0,5 s Spielraum), Reaktion unter 0,3 s. */
 export const GRENZEN = { folgeRot: 3500, folgeHinweis: 3000, reaktionHinweis: 300 };
 
-function lauf(befehl, args, { cwd, frist = 900000, env = {} } = {}) {
+// Frist je Prozess: 30 min. Eine Runde läuft bis zur Zeitgrenze der Lernsteuerung (K.RUNDE_MS, 4 min), sieben Kinder
+// nacheinander brauchen so bis etwa 15 min.
+function lauf(befehl, args, { cwd, frist = 1800000, env = {} } = {}) {
   return new Promise((fertig) => {
     const p = spawn(befehl, args, { cwd, env: { ...process.env, NODE_PATH: PW, ...env } });
     let aus = "";
