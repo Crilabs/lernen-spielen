@@ -37,12 +37,6 @@ export function linkKlick(e) {
   return sofortSpeichern().then(() => { hier.href = ziel.href; });
 }
 
-// --- Lernfortschritt ---------------------------------------------------
-
-export function merkeGelernt(eintrag, gelernt) {
-  if (eintrag.f >= gelernt) eintrag.g = 1;
-}
-
 // --- Touch-Sperren -----------------------------------------------------
 
 let touchGesperrt = false;
@@ -62,30 +56,6 @@ export function sperreTouch() {
   });
   doc.addEventListener("wheel", (e) => { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
   if (doc.documentElement?.style) doc.documentElement.style.touchAction = "manipulation";
-}
-
-// --- Pausen-Knöpfe -----------------------------------------------------
-// Jede Pause endet nur, wenn das Kind es will: Haus (alle Spiele) oder Weiter.
-// Kein Ablaufbalken, kein automatisches Weiter (docs/grundsaetze.md N1, N6, N8, 9.2 Nr. 7).
-// Gibt ein Promise zurück, das beim Tippen auf „Weiter“ erfüllt wird; die Knöpfe entfernen sich dann selbst.
-
-export function pausenKnoepfe(container, { beimTippen } = {}) {
-  const doc = globalThis.document;
-  const box = doc.createElement("div");
-  box.className = "pausen-knoepfe";
-  box.style.cssText = "position:absolute;left:0;right:0;bottom:6rem;display:flex;justify-content:center;gap:8rem;z-index:5";
-  const rund = "width:16rem;height:16rem;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;"
-    + "justify-content:center;padding:3.4rem;box-sizing:border-box;border:0;box-shadow:0 .8rem 0 rgba(0,0,0,.25);cursor:pointer";
-  box.innerHTML = `<a href="${new URL("index.html", import.meta.url).href}" aria-label="Alle Spiele" style="${rund}"><img src="${new URL("symbole/haus.svg", import.meta.url).href}" alt="" style="width:100%;height:100%"></a>`
-    + `<button type="button" aria-label="Weiter" style="${rund}"><img src="${new URL("symbole/zurueck.svg", import.meta.url).href}" alt="" style="width:100%;height:100%;transform:scaleX(-1)"></button>`;
-  container.appendChild(box);
-  return new Promise((ok) => {
-    box.querySelector("button").addEventListener("click", () => {
-      beimTippen?.();
-      box.remove();
-      ok();
-    }, { once: true });
-  });
 }
 
 // --- Automatische Registrierung beim Import ----------------------------

@@ -74,18 +74,6 @@ test("sofortSpeichern schreibt ausstehende Daten", async () => {
   assert.equal(aufrufe.length, 1);
 });
 
-test("merkeGelernt setzt g und nimmt es nie zurück", () => {
-  const e = { f: 4 };
-  L.merkeGelernt(e, 4);
-  assert.equal(e.g, 1);
-  e.f = 0;
-  L.merkeGelernt(e, 4);
-  assert.equal(e.g, 1);
-  const k = { f: 3 };
-  L.merkeGelernt(k, 4);
-  assert.equal("g" in k, false);
-});
-
 test("protokoll behält die letzten 30", () => {
   for (let i = 1; i <= 35; i++) L.protokoll("eintrag " + i);
   const p = L.protokollLesen();

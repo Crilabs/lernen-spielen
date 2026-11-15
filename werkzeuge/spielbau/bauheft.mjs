@@ -4,9 +4,8 @@
 //
 //   node werkzeuge/spielbau/bauheft.mjs <Katalog-Id> [--aus <datei.md>]
 //
-// Inhalt: die Regeln (docs/spielbau.md, Block „regeln“), der Katalog-Eintrag, der Eintrag in welten.md, die
-// Heimatwelt aus lernplan.json (Beschreibung, Fakten mit Quelle), die Themen des Spiels (Ziel, Beispiele, Stufen,
-// Aufgabenart), was es schon gibt (Bausteine, Objekte, Aufgabenarten, Runde) und ein vorhandenes Spiel derselben Id.
+// Inhalt: die Regeln (docs/spielbau.md, Block „regeln“), der Katalog-Eintrag, die Themen des Spiels (Ziel, Beispiele,
+// Stufen, Aufgabenart), was es schon gibt (Bausteine, Objekte, Aufgabenarten, Runde) und ein vorhandenes Spiel derselben Id.
 import { readFileSync, readdirSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -29,7 +28,7 @@ export function ordnername(id, name) {
 /** Text von „### <Id> …“ bis zur nächsten Überschrift gleicher oder höherer Ebene. */
 export function katalogEintrag(id, wurzel = WURZEL) {
   const ordner = join(wurzel, "docs/spielkatalog");
-  for (const datei of readdirSync(ordner).filter((d) => d.endsWith(".md") && d !== "welten.md").sort()) {
+  for (const datei of readdirSync(ordner).filter((d) => d.endsWith(".md")).sort()) {
     const text = readFileSync(join(ordner, datei), "utf8");
     const m = text.match(new RegExp(`^### ${id} (.+)$`, "m"));
     if (!m) continue;
@@ -40,26 +39,11 @@ export function katalogEintrag(id, wurzel = WURZEL) {
   return null;
 }
 
-/** Absatz „**<Id> Name** · Welt …“ in welten.md bis zum nächsten Spiel oder zur nächsten Überschrift. */
-export function weltenEintrag(id, wurzel = WURZEL) {
-  const text = lies("docs/spielkatalog/welten.md", wurzel);
-  const m = text.match(new RegExp(`^\\*\\*${id} [^\\n]*$`, "m"));
-  if (!m) return null;
-  const ab = text.slice(m.index);
-  const ende = ab.slice(2).search(/^(\*\*[A-Z]\d\d |#{1,3} )/m);
-  return (ende < 0 ? ab : ab.slice(0, ende + 2)).trim();
-}
-
 /** Die Ids aus der Zeile „Hauptthemen: a, b, c (Kl. …)“. */
 export function hauptthemen(eintrag) {
   const z = eintrag.match(/^- Hauptthemen: (.+)$/m);
   if (!z) return [];
   return z[1].replace(/\([^)]*\)/g, "").split(",").map((s) => s.trim()).filter((s) => /^[a-z0-9-]+$/.test(s));
-}
-
-/** Id der Heimatwelt aus „Heimatwelt: Name (`id`)“. */
-export function heimatwelt(eintrag) {
-  return eintrag.match(/^- Heimatwelt: [^`\n]*`([a-z0-9-]+)`/m)?.[1] ?? null;
 }
 
 /** Der Block zwischen <!-- regeln --> und <!-- ende regeln --> aus docs/spielbau.md. */
@@ -101,8 +85,6 @@ export async function bauheft(id, wurzel = WURZEL) {
   const themen = ids.map((t) => plan.themen.find((x) => x.id === t)).filter(Boolean);
   const fehlend = ids.filter((t) => !plan.themen.some((x) => x.id === t));
   const einstieg = themen.length ? Math.min(...themen.map((t) => t.klasse)) : null;
-  const weltId = heimatwelt(eintrag.text);
-  const welt = plan.welten.find((w) => w.id === weltId);
   const spiele = JSON.parse(lies("spiele/spiele.json", wurzel));
   const liste = Array.isArray(spiele) ? spiele : spiele.spiele ?? [];
   const vorhanden = liste.find((s) => s.datei?.startsWith(`${fach}/${ordner}/`));
@@ -133,8 +115,8 @@ export async function bauheft(id, wurzel = WURZEL) {
     "## Katalog-Eintrag (Stoff und Idee, kein Bauplan)",
     "",
     "Der Eintrag sagt, **was** gelernt wird (Themen, Fehlerkontrolle, Lernzeichen). Wie das Spiel sich anfühlt, " +
-      "entscheidet der Spielkern (Regeln §1). Was mit „Christian“ und Datum markiert ist, ist gesetzt – außer Heimatwelt, " +
-      "Sachgrund und Ruhig/Sanft/Abenteuer: Sachwelten gehören nicht mehr ins Spiel (Regeln §6). Packungen, Listen und " +
+      "entscheidet der Spielkern (Regeln §1). Was mit „Christian“ und Datum markiert ist, ist gesetzt; Sachwelten gehören " +
+      "nicht ins Spiel (Regeln §6). Packungen, Listen und " +
       "Zusätze aus dem Eintrag sind Vorschläge, die du weglassen darfst.",
     "",
     eintrag.text,

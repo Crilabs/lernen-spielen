@@ -365,14 +365,6 @@ export function stimmen() {
 }
 
 /**
- * Die gespeicherte Wahl: "" (automatisch), "system" oder ein Schlüssel aus stimmen().
- * @returns {string}
- */
-export function stimmWahl() {
-  return wahl();
-}
-
-/**
  * Speichert die Wahl am Gerät: Schlüssel aus stimmen(), "system" oder "" (automatisch).
  * @param {string} schluessel
  * @returns {void}

@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { bauheft, hauptthemen, heimatwelt, katalogEintrag, ordnername, regeln } from "../werkzeuge/spielbau/bauheft.mjs";
+import { bauheft, hauptthemen, katalogEintrag, ordnername, regeln } from "../werkzeuge/spielbau/bauheft.mjs";
 import { pruefeTexte, saetzeAusCode, saetzeAusJson } from "../werkzeuge/spielbau/texte.mjs";
 import { GRENZEN, roteLaeufe, taktBefunde } from "../werkzeuge/spielbau/pruefstand.mjs";
 import { phaseAusTranskript } from "../werkzeuge/spielbau/abschliessen.mjs";
@@ -24,12 +24,11 @@ test("Bauheft: Ordnername wie in der Ablage (Umlaute, Bindestriche)", () => {
   assert.equal(ordnername("M15", "Mach voll"), "m15-mach-voll");
 });
 
-test("Bauheft: Katalog-Eintrag, Hauptthemen und Heimatwelt aus dem Katalog", () => {
+test("Bauheft: Katalog-Eintrag und Hauptthemen aus dem Katalog", () => {
   const e = katalogEintrag("M37");
   assert.equal(e.name, "Kettenhüpfer");
   assert.equal(e.datei, "docs/spielkatalog/mathe.md");
   assert.ok(hauptthemen(e.text).includes("zweierreihe"));
-  assert.equal(heimatwelt(e.text), "vorrat-und-packungen");
   assert.equal(katalogEintrag("X99"), null);
 });
 
@@ -42,7 +41,7 @@ test("Bauheft: enthält die Regeln, den Eintrag, die Themen und was es gibt – 
 });
 
 test("Bauheft: jede Katalog-Id ergibt ein Heft", async () => {
-  const ids = readdirSync(join(WURZEL, "docs/spielkatalog")).filter((d) => d !== "welten.md")
+  const ids = readdirSync(join(WURZEL, "docs/spielkatalog")).filter((d) => d.endsWith(".md"))
     .flatMap((d) => [...lies(`docs/spielkatalog/${d}`).matchAll(/^### ([A-Z]\d\d) /gm)].map((m) => m[1]));
   assert.ok(ids.length > 100);
   for (const id of ids) {

@@ -1,9 +1,6 @@
-> Teil des Spielkatalogs (`docs/spielkatalog.md`). **Die Entscheidungen im Hauptdokument gehen vor**: Sie beantworten die
-> offenen Fragen am Ende dieser Datei (u. a. alle Spiele bleiben getrennt, Kontrollkarte, Stimmen, Sachwelt je Spiel).
-> Heimatwelt und Geschichte je Spiel (Zeilen „Heimatwelt“ bis „Abenteuer“) sind am 2026-11-14 aus
-> [`welten.md`](welten.md) übernommen und gelten. Jedes Spiel hat alle drei Stufen; Stellen in den Überblicken, die noch
-> „ruhig fest“ nennen, sind überholt. Beispiele für Szenen in den Zeilen Handlung, Figuren und Mach mit, die nicht zur
-> Heimatwelt passen, sind ebenfalls überholt (Hauptdokument 8a).
+> Teil des Spielkatalogs (`docs/spielkatalog.md`). **Die Entscheidungen im Hauptdokument gehen vor**, für den Bau
+> `docs/spielbau.md`. Ein Eintrag sagt, was gelernt wird; Szenen in Handlung, Figuren und Mach mit sind Vorschläge.
+> Spiele haben keine Sachwelt und keine Stufen der Geschichte (Christian, 2026-11-15).
 
 # Spielkatalog Lesen sowie Sprechen und Zuhören
 
@@ -55,8 +52,6 @@ Markierung: **(Annahme)** = Vorschlag, beim Lesen korrigierbar.
    Sprechen (Z02, Z03, L14, L15); dafür müsste die Kopfleiste das Fach je Runde nach dem Thema setzen
    **(Annahme)**. Für das Regal reicht die Karte mit Buchstabe nur bei den Buchstabenthemen; für die übrigen
    schlage ich je Spiel ein Regal-Material vor.
-8. *Stufen passen das Spiel an:* Bei `anpassbar` steht kurz, was sich je Stufe ändert. Die Lernhandlung bleibt
-   auf jeder Stufe gleich.
 9. *Mach mit statt Elternansicht:* Keine Anregungen für die Elternansicht mehr. Jedes Spiel hat eine Zeile
    `Mach mit:` (eine Figur tut es vor, der Erzähler lädt ein). Dadurch hat sich Z11 geändert: Es ist kein
    Gesprächsspiel mit einem Erwachsenen mehr, sondern ein Bildschirmteil (Fragen wählen, Buchkarte, Gesicht)
@@ -101,13 +96,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   wer die Karte bekommt, freut sich an der Sache. Keine Fähigkeit nötig.
 - Mach mit: Lena klatscht einen Abzählreim und lässt das letzte Wort offen. „Sag jemandem einen Vers und lass das letzte Wort weg. Findet er den Reim?“
 - Regal-Material: Karte mit zwei Reimwörtern untereinander (Hose / Dose) statt erstem Buchstaben.
-- Heimatwelt: Alle Gefühle sind richtig (`alle-gefuehle`)
-  - Sachgrund: Alle Gefühle sind richtig; Lieder und Reime haben für jedes Gefühl eine Strophe.
-  - Sache wächst mit: Kl. 1–2: Gefühle benennen (froh, wütend, müde). Kl. 4: gemischte Gefühle und wie Gedichte sie ausdrücken; Paarreim und Kreuzreim.
-  - Rahmen: Fest · Spannung aus: Lücke
-  - Ruhig: Ein Gefühle-Lied: Jede Strophe braucht ihr Reimwort. Mit dem passenden klingt der Vers; ist das Lied fertig, wird es gesungen. Geprüft wird nur der Reim, nie das Gefühl.
-  - Sanft: Zwei Wörter reimen sich fast. Vorgelesen hört man, welches wirklich klingt.
-  - Abenteuer: Über mehrere Runden schreibt die Runde ein Lied für das Schulfest, jede Runde eine Strophe. Bei der Probe singt jemand eine Strophe, die keiner geschrieben hat: Der Musiklehrer hat eine dazugedichtet.
 - Fachübergreifend: Schreiben, falls es dort „Reimwörter schreiben“ gibt.
 
 ### L02 Abzählen
@@ -135,12 +123,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   freut sich mal leise, mal mit Hüpfer (B4).
 - Mach mit: Kofi schwingt beim Tischdecken die Namen der Runde. „Schwing deinen Namen mit dem Arm. Wie viele Bögen hat er?“
 - Regal-Material: Karte mit drei Silbenbögen.
-- Heimatwelt: Tiere auf allen Erdteilen (`tiere-der-erdteile`)
-  - Sachgrund: Tiere aller Erdteile haben lange Namen (Ka-ma-le-on); Silben klatschen macht sie merkbar.
-  - Rahmen: Reise · Spannung aus: Lücke · Fähigkeit: schweben
-  - Ruhig: Der Tierpark nach Erdteilen: Ka-me-le, Pin-gu-i-ne. Jeder geschwungene Name bringt das Tier an sein Gehege; der Abzählvers bestimmt, welches als Nächstes kommt.
-  - Sanft: Ein Namensschild ist in zwei Teile gebrochen. Welche Silbe fehlt bei „Kän-gu-…“?
-  - Abenteuer: Weltreise über mehrere Runden, mit dem Schirm von Erdteil zu Erdteil: Überall wohnt ein Tier mit langem Namen. In Australien hüpft etwas durchs hohe Gras, man sieht nur die Ohren: ein Kän-gu-ru.
 - Fachübergreifend: **Schreiben** (Silben schwingen beim Schreiben). Dieselbe Handlung, der Auftraggeber
   sollte die beiden zusammenführen.
 
@@ -170,12 +152,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   die anderen schauen gespannt aufs Versteck.
 - Mach mit: Timo spricht einem Gast ein Wort in Stücken vor. „Sag jemandem ein Wort in Stücken. Errät er es?“
 - Regal-Material: Karte mit einem Wort in drei Plättchen-Stücken.
-- Heimatwelt: Tarnen und Verstecken (`tarnen-verstecken`)
-  - Sachgrund: Tiere tarnen sich; ihr Name wird in Stücken gesagt, das Kind setzt ihn zusammen und findet sie.
-  - Rahmen: Spur · Spannung aus: Rätsel
-  - Ruhig: Die Runde spricht in Geheimsprache: „Ta-sche“. Das Kind zieht die Stücke zusammen und tippt auf das Versteck; das Ding kommt heraus.
-  - Sanft: Im Garten wird ein getarntes Tier in Stücken genannt („F-r-o-sch“). Wo sitzt es? Angetippt, wird es sichtbar.
-  - Abenteuer: Waldgang über mehrere Runden mit dem Förster: Er flüstert die Tiernamen in Stücken, damit kein Tier erschrickt. Am Ende zeigt er auf einen Zweig, der sich bewegt. Es ist kein Zweig, es ist eine Raupe.
 
 ### L04 Laut-Körbe
 - Name fürs Kind: „Einpacken“ · Symbol: ein Korb mit Henkel
@@ -199,12 +175,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   zeigt vor, ein anderes wundert sich über ein Ding, das nicht passt, und hört noch einmal.
 - Mach mit: Ela legt zu Hause Dinge mit dem Anfang ihres Namens in einen Korb. „Such drei Dinge, die so anfangen wie dein Name.“
 - Regal-Material: Karte mit Korb und dem Laut als Buchstaben erst ab L06; bis dahin das Wortbild.
-- Heimatwelt: Obst und Gemüse und wann es reif ist (`obst-gemuese-reif`)
-  - Sachgrund: Obst und Gemüse sind zu bestimmten Zeiten reif; für den Markt wird gepackt, was jetzt reif ist.
-  - Rahmen: Versorgen · Spannung aus: Durcheinander
-  - Ruhig: Körbe für den Markt: In Mamas Korb kommt, was wie „Mama“ anfängt (Möhre, Mais). Sind die Körbe voll, fährt der Stand los.
-  - Sanft: Ein Ding scheint in zwei Körbe zu passen. Nur der erste Laut zählt: Apfel fängt mit A an.
-  - Abenteuer: Ein Erntejahr über mehrere Runden: Frühling (Radieschen, Rhabarber), Sommer, Herbst, Winter. Jede Runde eine Jahreszeit mit dem, was dann reif ist. Im Winterkorb liegt etwas Krummes, Erdiges: eine Pastinake.
 
 ### L05 Wortzug
 - Name fürs Kind: „Wortzug“ · Symbol: eine Lok mit drei Wagen
@@ -235,12 +205,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   Das Plättchen bleibt ein Plättchen (Regel aus figuren.md §5).
 - Mach mit: Lena legt für jeden Laut ihres Namens einen Knopf hin. „Leg für jeden Laut in deinem Namen einen Stein hin.“
 - Regal-Material: Karte mit drei Wagen.
-- Heimatwelt: Zu Fuß, mit Rad, Bus und Bahn (`unterwegs`)
-  - Sachgrund: Bahnen haben Wagen mit Plätzen; jeder Laut braucht seinen Platz.
-  - Rahmen: Reise · Spannung aus: Verwandlung · Fähigkeit: verzaubern
-  - Ruhig: Ein Zug im Dorf: Jeder Laut steigt in seinen Wagen. Stimmen die Wagen, fährt der Zug los und spricht das Wort Wagen für Wagen.
-  - Sanft: Ein Laut wird getauscht: Aus der Hose wird eine Dose. In welchem Wagen ist umgestiegen worden?
-  - Abenteuer: Zugreise über mehrere Runden: Brücke, Tunnel, Meer. An jedem Bahnhof steigt ein Laut um, und aus dem Wort wird ein neues (Hand, Wand, Sand). Am Meer hält der Zug am Strand, im Sand.
 - Fachübergreifend: **Schreiben** (Laute zählen vor dem Schreiben; Lautkästchen mit Buchstaben).
 
 ### L06 Buchstabenhaus
@@ -276,12 +240,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
 - Mach mit: Kofi findet beim Einkaufen ein M auf einer Packung. „Frag jemanden, ob ihr zusammen einkaufen geht. Wo findest du dein Buchstabenhaus-Zeichen?“
 - Regal-Material: Karte mit dem Buchstaben oder der Gruppe des Themas (M m, sch, St), **nicht** dem ersten
   Buchstaben des Themennamens. `materialFuer` bräuchte dafür ein Feld je Thema.
-- Heimatwelt: Wie man mit Händen oder Ohren mehr wahrnimmt (`sinne-anders`)
-  - Sachgrund: Buchstaben kann man auch ertasten (Sandpapierbuchstaben, Blindenschrift); manche Menschen lesen mit den Händen.
-  - Rahmen: Entdecken · Spannung aus: Lücke
-  - Ruhig: Das Buchstabenhaus: Jeder neue Buchstabe wird gehört und gesehen (ertasten als Mach mit). Sein Fenster leuchtet, und mit ihm wird ein neues Schild im Haus lesbar.
-  - Sanft: Zwei Fenster sehen sich ähnlich (b und d). Der Laut verrät, welches gemeint ist.
-  - Abenteuer: Geheimschrift über mehrere Runden: Eine Nachbarin der Runde liest mit den Fingern (Punktschrift). Sie schickt in jeder Runde ein Wort; mit den Buchstaben, die das Kind schon kennt, wird es lesbar. Am Ende ist es eine Einladung zum Kuchen.
 - Fachübergreifend: **Schreiben** (Anlauttabelle, Laut zu Buchstabe beim Schreiben, Groß- und Kleinbuchstaben).
 
 ### L07 Lesefenster
@@ -314,12 +272,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   Timo) und eignen sich als erste Lesewörter. Eines zeigt die Post einmal vor.
 - Mach mit: Timo liest die Namen an den Briefkästen im Haus. „Lies die Namen an den Briefkästen, wenn du nach Hause kommst.“
 - Regal-Material: Karte mit einem Anhänger, darauf ein Wort in Silbenbögen.
-- Heimatwelt: Feste im Kalender (`feste-im-kalender`)
-  - Sachgrund: Zu Festen gibt es Geschenke mit Kärtchen; Namen lesen bringt das Geschenk zum Richtigen.
-  - Rahmen: Fest · Spannung aus: Rätsel
-  - Ruhig: Geschenke für ein Fest: Auf jedem Anhänger steht ein Name. Selbst gelesen, kommt das Päckchen zum Richtigen. (Feste wechseln und stehen gleichwertig nebeneinander.)
-  - Sanft: Zwei Namen sehen fast gleich aus (Mila, Mira). Silbe für Silbe gelesen, ist es klar.
-  - Abenteuer: Wichteln über mehrere Runden: Statt eines Namens trägt jedes Päckchen einen Hinweis („für das Kind mit dem roten Rad“). Das letzte ist für das spielende Kind: ein Lesezeichen.
 
 ### L08 Kaufladen
 - Name fürs Kind: „Fast gleich“ · Symbol: eine Dose mit Etikett
@@ -347,12 +299,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   Buchstabe für Buchstabe und klebt um. Gäste kaufen ein.
 - Mach mit: Ela klebt Zettel an Dosen in der Küche. „Frag jemanden, ob ihr zusammen Zettel an Dinge in der Küche klebt.“
 - Regal-Material: Karte mit zwei Wörtern untereinander, die sich in einem Buchstaben unterscheiden.
-- Heimatwelt: Unbekannte Pflanzen nicht essen (`unbekannte-pflanzen`)
-  - Sachgrund: Manche Pflanzen sehen sich sehr ähnlich. Was man nicht sicher kennt, isst man nicht, man fragt. Genau hinsehen unterscheidet Pflanzen wie Wörter (Minze, Münze).
-  - Rahmen: Versorgen · Spannung aus: Rätsel
-  - Ruhig: Im Kräutergarten bekommt jeder Topf sein Schild. Die Wörter sehen fast gleich aus (Minze, Münze); genau gelesen, kommt das Schild an den richtigen Topf.
-  - Sanft: Zwei Töpfe sehen gleich aus, nur einer hat ein Schild. Die Gärtnerin wird gefragt; sie riecht am Blatt und weiß es.
-  - Abenteuer: Kräuterwanderung über mehrere Runden mit der Gärtnerin: Am Wegrand stehen Pflanzen, die sich ähneln. Gepflückt wird nur, was sie bestätigt. Am Ende gibt es Kräuterquark; ein Blatt, das nur gut riecht, bleibt im Strauß. (Nie als Gefahr erzählt.)
 - Fachübergreifend: Schreiben (genau abschreiben, Fehler durch Vergleich finden).
 
 ### L09 Blitzwörter
@@ -380,12 +326,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   klar ist, wohin es geht.
 - Mach mit: Kofi liest im Vorbeigehen ein kleines Wort auf einem Schild. „Unterwegs stehen kleine Wörter auf Schildern. Welches findest du?“
 - Regal-Material: Karte mit dem Blitzwort (und, ist).
-- Heimatwelt: Wie fühlt sich das an? (`gefuehle`)
-  - Sachgrund: Gefühlswörter (froh, müde, wütend) liest man schnell an der Gefühlstafel der Klasse; keine falsche Antwort beim Gefühl.
-  - Rahmen: Miteinander · Spannung aus: Wissensvorsprung
-  - Ruhig: Die Gefühlstafel am Morgen: Jedes gelesene Wort (froh, müde) kommt an die Tafel, und jedes Kind der Runde hängt sein Zeichen dazu. Das Wort blitzt nur auf, wenn das Kind tippt.
-  - Sanft: Ein Kärtchen liegt umgedreht. Kurz aufgeblitzt: Welches Wort war es?
-  - Abenteuer: Pantomime über mehrere Runden: Das Wort blitzt auf, ein Kind der Runde spielt es ohne Worte, die anderen raten. Das spielende Kind weiß es schon.
 - Fachübergreifend: Schreiben (Lernwörter, kleine Wörter).
 
 ### L10 Wortbausteine
@@ -410,12 +350,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
 - Figuren: Ela baut gern (beiläufig, figuren.md §2), sie zeigt hier aber nicht fest vor; wer vorzeigt, wechselt.
 - Mach mit: Lena teilt ein langes Wort auf einer Packung in Bausteine. „Such ein langes Wort auf einer Packung. Welche Bausteine stecken darin?“
 - Regal-Material: Karte mit drei Bausteinen und Fugen.
-- Heimatwelt: Berufe in Hof, Werkstatt, Laden und Pflege (`berufe`)
-  - Sachgrund: Berufe haben zusammengesetzte Namen und Werkzeuge (Bäcker-ei, Tier-ärztin); Bausteine lesen.
-  - Rahmen: Reise · Spannung aus: Rätsel
-  - Ruhig: Die Straße der Werkstätten: Jedes lange Schild (Tier-ärzt-in, Bäck-er-ei) wird an den Fugen getrennt. Gelesen, öffnet die Werkstatt.
-  - Sanft: Ein Schild hat einen Baustein verloren: „…macherin“. Was macht sie? In der Werkstatt ticken Uhren.
-  - Abenteuer: Berufe-Rallye über mehrere Runden: Die Runde sucht für das Schulfest Menschen, die etwas vorführen. Auf den Türschildern stehen lange Wörter. Hinter der letzten Tür arbeitet eine Glasbläserin.
 - Fachübergreifend: **Grammatik und Schreiben** (Wortfamilie, Wortstamm, Vorsilben). Dort vermutlich ein
   eigenes Spiel mit derselben Handlung; zusammenführen.
 
@@ -441,13 +375,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
 - Figuren: Ein Kind der Runde zeigt auf das Sachbild (F8); ein anderes wundert sich über den Satz.
 - Mach mit: Timo denkt sich einen Quatschsatz aus, Ela lacht. „Sag jemandem einen Satz, der in echt nicht stimmen kann. Merkt er es?“
 - Regal-Material: Karte mit Zeitungsblatt.
-- Heimatwelt: Echt oder ausgedacht? (`echt-oder-ausgedacht`)
-  - Sachgrund: Echt oder ausgedacht: Sachsätze prüfen (Kühe legen keine Eier).
-  - Sache wächst mit: Kl. 1–2: echt oder Quatsch im Alltag (Kühe legen keine Eier). Kl. 4: Woran prüft man, ob etwas stimmt (nachschlagen, zwei Quellen)?
-  - Rahmen: Forschen · Spannung aus: Rätsel
-  - Ruhig: Die Zeitung der Runde wird geprüft: „Kühe legen Eier.“ Das Wort, das nicht stimmen kann, wird ersetzt; dann wird gedruckt.
-  - Sanft: Ein Satz klingt wie Quatsch und stimmt doch: „Ein Fisch kann fliegen.“ Das Sachbild zeigt den Flugfisch.
-  - Abenteuer: Echt oder ausgedacht? Über mehrere Runden bekommt die Redaktion Leserbriefe mit unglaublichen Sätzen. Im Sachbuch nachgeschaut: Manche sind wahr (Kraken haben drei Herzen). Am Ende erscheint die Seite „Stimmt wirklich“.
 
 ### L12 Nachlesen
 - Name fürs Kind: „Nachlesen“ · Symbol: ein Blatt mit Zeilen und einem Finger daran
@@ -475,13 +402,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   das Nachlesen mit dem Finger vor.
 - Mach mit: Ela sucht auf einer Einladung, wann das Fest ist. „Wenn eine Einladung oder ein Zettel kommt: Such, was du wissen willst.“
 - Regal-Material: Karte mit drei Zeilen und einem markierten Wort.
-- Heimatwelt: Kinderrechte (`kinderrechte`)
-  - Sachgrund: Kinderrechte stehen in einem Sachtext (Recht auf Spiel, auf Schule, auf Schutz); man liest gezielt nach.
-  - Sache wächst mit: Kl. 1–2: kurze Texte aus dem Alltag der Runde („Kinder dürfen spielen“). Kl. 3–4: die Kinderrechte als Sachtext, wer in der Gemeinde entscheidet.
-  - Rahmen: Fest · Spannung aus: Lücke
-  - Ruhig: Ein Plakat zu den Kinderrechten: Zu jeder Frage findet das Kind die Stelle im Text. Sie kommt aufs Plakat.
-  - Sanft: Zwei Kinder der Runde sind sich nicht einig, was im Text steht. Nachgelesen zeigt es die Stelle.
-  - Abenteuer: Kinderparlament über mehrere Runden: Die Klasse wünscht sich einen Zebrastreifen am Spielplatz. Für jeden Schritt wird nachgelesen: Wer entscheidet, wie schreibt man hin? Am Ende kommt eine Antwort der Bürgermeisterin.
 - Fachübergreifend: **Grammatik** (wer-ist-mit-er-gemeint, Pronomen); **Mathe** (Angaben in Sachaufgaben finden).
 
 ### L13 Nachschlagen
@@ -506,13 +426,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
 - Figuren: Timo packt seine Tasche (beiläufig), ein anderes Kind zeigt mit dem Finger Zeile und Spalte vor.
 - Mach mit: Kofi schaut auf seinen Stundenplan. „Schau auf deinen Stundenplan: Wann hast du Sport?“
 - Regal-Material: Karte mit kleiner Tabelle.
-- Heimatwelt: Wegklicken und Bescheid sagen (`sicher-im-netz`)
-  - Sachgrund: Im Netz sucht man auf Kinderseiten, klickt weg, was komisch ist, und sagt Bescheid; Tabellen und Verzeichnisse nutzen.
-  - Sache wächst mit: Kl. 2: Tabelle und Inhaltsverzeichnis im Buch. Kl. 3–4: Kinderseiten im Netz, Verweise, was man wegklickt und wem man Bescheid sagt.
-  - Rahmen: Spur · Spannung aus: Rätsel
-  - Ruhig: Für ein Referat schlägt die Runde nach: im Buch und auf einer Kinderseite. Über Verzeichnis und Tabelle springt das Kind zur Angabe; sie kommt ins Heft.
-  - Sanft: Ein Fenster geht auf, das nicht zur Seite gehört. Kofi klickt es weg und sagt der Lehrerin Bescheid; dann geht die Suche weiter.
-  - Abenteuer: Über mehrere Runden baut die Klasse ein eigenes Lexikon über Tiere der Nacht: Stichwörter, Verweise, Verzeichnis. Zum Schluss sucht ein Gast darin und findet in drei Schritten, was er braucht.
 - Fachübergreifend: **Mathe** (Tabellen, Strichliste, Diagramme lesen). Falls Mathe ein Tabellen-Spiel hat,
   wäre lesen-tabelle dort zweiter Zugang.
 
@@ -539,13 +452,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
 - Figuren: Ein Kind der Runde sucht etwas im Schaukasten und freut sich, wenn es den Text findet.
 - Mach mit: Lena schreibt einen Titel über ihr Bild. „Gib einem Bild, das du gemalt hast, einen Titel.“
 - Regal-Material: Karte mit Buchrücken.
-- Heimatwelt: Medien im Alltag (`medien-alltag`)
-  - Sachgrund: Medien im Alltag (Hörspiel, Video, Zeitung) bekommen Titel, damit man sie findet.
-  - Sache wächst mit: Kl. 2: Buch, Hörspiel, Film in der Medienkiste. Kl. 3–4: Wozu dienen Überschriften und Titel in Zeitung, Radio und Netz, und was versprechen sie?
-  - Rahmen: Fest · Spannung aus: Wissensvorsprung
-  - Ruhig: Die Medienkiste der Klasse: Hörspiel, Film, Sachbuch. Jeder passende Titel beschriftet eine Hülle; damit findet man es wieder.
-  - Sanft: Eine Hülle ist leer, eine CD hat keine Hülle. Der Anfang der Geschichte verrät, welcher Titel passt.
-  - Abenteuer: Schulradio über mehrere Runden: Die Runde macht eine Sendung und braucht für jeden Beitrag einen Titel, der neugierig macht und nicht zu viel verrät. Nach der Sendung fragen Kinder nach einem Beitrag, mit seinem Titel.
 
 ### L15 Spurenleser
 - Name fürs Kind: „Spuren“ · Symbol: Fußspuren im Schnee
@@ -573,12 +479,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   von nahem zu sehen, nur wenn die Szene es braucht.
 - Mach mit: Timo entdeckt Spuren im Sand. „Schau draußen, ob du Spuren findest. Wer könnte das gewesen sein?“
 - Regal-Material: Karte mit Fußspur.
-- Heimatwelt: Wie Tiere atmen und Junge bekommen (`atmen-und-junge`)
-  - Sachgrund: Wie Tiere atmen und Junge bekommen, zeigt sich an Spuren (Laich, Nest mit Schalen, Bau).
-  - Rahmen: Spur · Spannung aus: Rätsel
-  - Ruhig: Am Teich und im Wald am Tag: ein Nest mit Schalen, Laich im Wasser, ein Bau. Zwei Hinweise zusammen zeigen, wer hier Junge hat.
-  - Sanft: Etwas hat die Kräuter am Beet abgefressen. Spur und Köttel zusammen sagen: ein Hase.
-  - Abenteuer: Forscherwoche über mehrere Runden: Wer wohnt im Garten der Schule? Wildkamera, Spurentunnel, angenagte Zapfen. Jede Runde ein Rätsel. Das letzte Bild der Kamera zeigt einen Marder auf dem Schuppendach.
 
 ### L16 Wörterlupe
 - Name fürs Kind: „Lupe“ · Symbol: eine Lupe über einem Wort
@@ -602,12 +502,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
 - Figuren: Ein Kind der Runde stockt beim Lesen, tippt das Wort an (zeigt vor, dass Nachfragen dazugehört).
 - Mach mit: Ela fragt beim Vorlesen nach einem Wort (zeigt darauf, der Erzähler sagt die Frage). „Wenn du ein Wort nicht kennst, frag jemanden, was es heißt.“
 - Regal-Material: Karte mit Lupe.
-- Heimatwelt: Pilze und winzige Lebewesen (`pilze-kleinstlebewesen`)
-  - Sachgrund: Pilze und Kleinstlebewesen haben Sachwörter (Sporen, Myzel); unbekannte Wörter aus dem Satz klären.
-  - Rahmen: Entdecken · Spannung aus: Rätsel · Fähigkeit: schrumpfen
-  - Ruhig: Ein Sachbuch über Pilze. Ein unbekanntes Wort wird aus dem Satz heraus geklärt und kommt ins Wörterheft; dann geht der Text weiter.
-  - Sanft: Ein Wort bedeutet hier etwas anderes als sonst: der „Hut“ des Pilzes. Der Satz zeigt es.
-  - Abenteuer: Die Runde schrumpft und steigt über mehrere Runden unter die Erde: Dort liegt das Geflecht des Pilzes wie ein Netz zwischen den Wurzeln. Jedes geklärte Wort (Sporen, Geflecht) macht ein Stück sichtbar. Wieder oben, stehen die Pilze im Kreis.
 - Fachübergreifend: Grammatik/Wortschatz, falls es dort Wortfelder gibt.
 
 ### L17 Bücherei
@@ -634,12 +528,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   (Timo backt gern, beiläufig).
 - Mach mit: Kofi stellt seine Bücher ins Regal. „Schau in dein Bücherregal: Wo steht ein Sachbuch, wo eine Geschichte?“
 - Regal-Material: Karte mit drei Buchrücken.
-- Heimatwelt: Gemeinde, Bayern, Deutschland, Europa (`gemeinde-bis-europa`)
-  - Sachgrund: Sagen aus der Gegend erzählen von Orten der Gemeinde; Sage, Märchen, Sachtext unterscheiden.
-  - Rahmen: Spur · Spannung aus: Rätsel
-  - Ruhig: Die Bücherei der Gemeinde: Der Anfang eines Textes verrät seine Sorte (Rezept, Gedicht, Sage). Im richtigen Fach wird er benutzt: gekocht, vorgelesen, gebaut.
-  - Sanft: Ein Text beginnt wie ein Märchen und ist ein Sachtext über Wölfe. Woran merkt man es?
-  - Abenteuer: Sagen der Gegend über mehrere Runden: Zu einem Felsen, einem Brunnen und einer Brücke im Ort gibt es eine Sage und einen Sachtext. Die Runde besucht den Ort und liest beides. Was davon wirklich so war, weiß die Ortschronistin.
 
 ### L18 Vorlese-Partitur
 - Name fürs Kind: „Vorlesen“ · Symbol: ein aufgeschlagenes Buch mit Schallbogen
@@ -672,13 +560,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   zeigt die erste Partitur vor und setzt dabei eine Pause falsch, hört es und schiebt sie.
 - Mach mit: Timo liest seiner kleinen Halbschwester ein Buch vor. „Frag jemanden, ob du ihm heute einen kurzen Text vorlesen darfst.“
 - Regal-Material: Karte mit einem Satz und einer Pausenmarke.
-- Heimatwelt: Bewegen, Spielen, Ausruhen, Schlafen (`bewegen-schlafen`)
-  - Sachgrund: Abends vorlesen gehört zum Ausruhen und Schlafen; betonen und Pausen machen es schön.
-  - Sache wächst mit: Kl. 1–2: Vorlesen am Abend, ausruhen. Kl. 3–4: Lesenacht und Vorlesen für Jüngere; was Schlaf dem Körper gibt.
-  - Rahmen: Fest · Spannung aus: Verwandlung
-  - Ruhig: Abends vorlesen: Das Kind setzt Pausen und Betonung und liest selbst. Der Erzähler liest genau nach diesen Marken; daraus wird ein Gute-Nacht-Hörbuch für ein jüngeres Kind.
-  - Sanft: Ein Satz geht über das Zeilenende. Wo ist die Pause wirklich? Falsch gesetzt, klingt er komisch, richtig gesetzt klar.
-  - Abenteuer: Lesenacht in der Schule über mehrere Runden: Schlafsäcke, Taschenlampen, die Lehrerin ist da. Jede Runde ein Kapitel einer Fortsetzungsgeschichte, vom Kind vorbereitet. Das letzte endet ruhig, und alle schlafen ein.
 - Fachübergreifend: **Grammatik** (Satzarten, Satzschlusszeichen) und **Schreiben** (Punkt am Satzende).
 
 ### Z01 Lauschposten
@@ -704,12 +585,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   (vorzeigen), ein anderes freut sich leise, wenn der Vogel kommt. Lenas Hörgerät wird nicht zum Thema.
 - Mach mit: Kofi sitzt still am offenen Fenster. „Setz dich einen Moment ganz still hin. Was hörst du?“
 - Regal-Material: Karte mit Ohr.
-- Heimatwelt: Sehen, hören, riechen, schmecken, tasten (`sinne`)
-  - Sachgrund: Ohren hören Richtung und Lautstärke; Geräusche erkennen ist Lernkern der Sinne.
-  - Rahmen: Forschen · Spannung aus: Rätsel
-  - Ruhig: Auf dem Hof am Tag, mit geschlossenen Augen: Was ist das, und woher kommt es? Angetippt, zeigt sich die Quelle (Sachbild).
-  - Sanft: Ein Geräusch hört auf. Was fehlt jetzt? Der Brunnen ist abgestellt.
-  - Abenteuer: Nachtwanderung über mehrere Runden, mit Laterne und Lenas großem Bruder: ein Rascheln (ein Igel), ein Ruf (ein Käuzchen), ein Plätschern. Alle Geräusche sind leise, keines kommt plötzlich. Jede Runde endet am hellen Haus.
 
 ### Z02 Wäscheleine
 - Name fürs Kind: „Wäscheleine“ · Symbol: eine Leine mit drei Klammern
@@ -733,12 +608,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
 - Figuren: Ein Kind der Runde zeigt vor und hängt erst eine Karte falsch, sieht die Szene stocken und hängt um.
 - Mach mit: Ela hört beim Kuchenbacken zu, was zuerst kommt. „Hör beim Kochen oder Backen zu: Was kommt zuerst, was danach?“
 - Regal-Material: Karte mit drei Klammern.
-- Heimatwelt: Hände waschen, Sonnenschutz (`haende-sonne`)
-  - Sachgrund: Händewaschen geht nur in einer Reihenfolge (nass, Seife, reiben, abspülen, abtrocknen); Sonnenschutz ebenso.
-  - Rahmen: Versorgen · Spannung aus: Durcheinander
-  - Ruhig: Bildkarten für das Waschbecken: nass machen, Seife, reiben, abspülen, abtrocknen. In der gehörten Reihenfolge aufgehängt, spielt die Szene sie ab.
-  - Sanft: Eine Karte ist heruntergefallen. Kommt die Sonnencreme vor oder nach dem Anziehen? Die Hörgeschichte sagt es.
-  - Abenteuer: Badetag am See über mehrere Runden, Erwachsene sind dabei: eincremen, Hut, Schatten, trinken, nach dem Baden abtrocknen. Jede Runde ein Ablauf als Hörgeschichte. Am Ende hängt die Leine am Strandkorb.
 - Fachübergreifend: **Schreiben** (bildergeschichte-ordnen-3 ist Voraussetzung eines Themas hier; vermutlich
   dieselbe Handlung).
 
@@ -766,12 +635,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   den ersten Auftrag vor und fragt (ohne Worte) mit Blick auf den Zettel nach.
 - Mach mit: Timo deckt den Tisch nach drei Aufträgen. „Frag jemanden, ob er dir drei Aufträge gibt, und mach sie der Reihe nach.“
 - Regal-Material: Karte mit Tablett.
-- Heimatwelt: Sicher über die Straße, Helm beim Rad (`sicher-ueber-die-strasse`)
-  - Sachgrund: Über die Straße: anhalten, links, rechts, links schauen, Helm beim Rad; Aufträge nacheinander ausführen.
-  - Rahmen: Reise · Spannung aus: Hilfe
-  - Ruhig: Verkehrsgarten auf dem Schulhof: „Halt an. Schau nach links, dann nach rechts.“ Jeder ausgeführte Auftrag bringt ein Kind über den gemalten Zebrastreifen.
-  - Sanft: Drei Aufträge hintereinander, der mittlere war leise. Was kam nach „Helm auf“? Das Kind darf noch einmal hören.
-  - Abenteuer: Radtag im Verkehrsgarten über mehrere Runden, mit der Polizistin: Jede Runde ein längerer Parcours aus Aufträgen. Am Ende fährt die ganze Runde gemeinsam die große Schleife um den Hof.
 - Fachübergreifend: **Geometrie** (Lagewörter; auftrag-mit-lagewort setzt neben-zwischen-ueber-unter-auf voraus).
 
 ### Z04 Hörbühne
@@ -803,13 +666,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   nie Belohnung.
 - Mach mit: Lena spielt eine gehörte Geschichte mit Spielsachen nach. „Spiel eine Geschichte, die du gehört hast, mit deinen Spielsachen nach.“
 - Regal-Material: Karte mit Vorhang.
-- Heimatwelt: Niemand wird ausgelacht (`fuer-andere-einstehen`)
-  - Sachgrund: Niemand wird ausgelacht: kurze Hörgeschichten zeigen, wie ein Kind für ein anderes einsteht.
-  - Sache wächst mit: Kl. 1–2: kurze Alltagsgeschichten, jemand stellt sich dazu. Kl. 3–4: längere Hörgeschichten mit mehreren Stimmen; Gerüchte und Vorurteile in einer Gruppe und wie jemand widerspricht.
-  - Rahmen: Fest · Spannung aus: Rätsel · Fähigkeit: ins Bild steigen
-  - Ruhig: Hörgeschichten aus dem Alltag. Danach baut das Kind die Bühne: wer, wo, was. Die Bühne spielt die Geschichte so nach, wie sie gebaut ist; das Kind sitzt in der ersten Reihe.
-  - Sanft: In der Geschichte lacht jemand über Kofis Zeichnung. Ela stellt sich daneben und sagt, was ihr daran gefällt. Welche Einzelheit hat das Kind gehört?
-  - Abenteuer: Hörspiel in Fortsetzungen über mehrere Runden: Wer nimmt die Pausenbrote? Verdächtigt wird der Neue, zu Unrecht, und Lena sagt das laut. Am Ende war es der Schulhund. (Niemand wird bestraft, der Konflikt bleibt kurz.)
 
 ### Z05 Noch mal, bitte
 - Name fürs Kind: „Noch mal, bitte“ · Symbol: eine Hand hinter dem Ohr
@@ -834,12 +690,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   Schaffnerin) erklärt.
 - Mach mit: Kofi legt die Hand ans Ohr, und der Gast wiederholt. „Wenn du etwas nicht verstehst, darfst du fragen: Noch mal, bitte.“
 - Regal-Material: Karte mit Hand am Ohr.
-- Heimatwelt: Höflich miteinander reden (`hoeflich-reden`)
-  - Sachgrund: Höflich nachfragen („Wie bitte? Noch mal, bitte.“) gehört zum höflichen Reden; laute Orte geben den Anlass.
-  - Rahmen: Reise · Spannung aus: Lücke
-  - Ruhig: Am Bahnhof erklärt die Schaffnerin den Weg zum Gleis. Ein Wort geht im Lärm unter: losgehen oder nachfragen? Nach der Bitte sagt sie es noch einmal.
-  - Sanft: Die Durchsage nennt ein Wort, das die Runde nicht kennt („Wagenreihung“). Die passende Frage klärt es.
-  - Abenteuer: Klassenfahrt über mehrere Runden: Bahnhof, Fähre, Jugendherberge. Überall wird etwas erklärt, und immer fehlt ein Stück. Am Ende findet die Runde den Speisesaal, weil sie dreimal gefragt hat.
 
 ### Z06 Gesprächszug
 - Name fürs Kind: „Was sagst du?“ · Symbol: zwei Gesichter einander zugewandt
@@ -870,13 +720,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   hat, wechselt; Timo im Rollstuhl ist nie der, dem geholfen werden muss, weil er im Rollstuhl sitzt.
 - Mach mit: Ela grüßt die Nachbarin im Treppenhaus. „Grüß heute jemanden, dem du begegnest, und schau, was passiert.“
 - Regal-Material: Karte mit zwei Gesichtern.
-- Heimatwelt: Streiten und sich versöhnen (`streit-versoehnen`)
-  - Sachgrund: Streiten und sich versöhnen: Ich-Botschaft, Entschuldigung, Trösten; der Konflikt kurz, die Lösung ausführlich.
-  - Sache wächst mit: Kl. 1–2: trösten, sich entschuldigen, abwechseln. Kl. 3–4: Kompromisse finden, Streit schlichten, sagen, was man braucht.
-  - Rahmen: Miteinander · Spannung aus: Hilfe
-  - Ruhig: Szenen in der Runde: Lena hat Geburtstag, Kofi zeigt sein Knie. Das Kind sieht, wie es dem anderen geht, und wählt, was es jetzt sagt; das Gespräch geht weiter.
-  - Sanft: Kofi und Lena wollen dieselbe Schaukel. Kurz wird es laut. Dann sagt einer, was er möchte, und sie wechseln sich ab.
-  - Abenteuer: Das Baumhaus über mehrere Runden: vier Kinder, vier Ideen. Jede Runde eine Meinungsverschiedenheit (Leiter oder Seil? Wer malt?) und ein Gespräch, das sie löst. Am Ende steht es, mit Leiter und Seil.
 - Fachübergreifend: **Sachthemen** „Wie wir miteinander umgehen“ (dieselben Szenen).
 
 ### Z07 Stuhlkreis
@@ -904,13 +747,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   aufhört.
 - Mach mit: Timo hebt beim Abendessen die Hand und wartet. „Probiert beim Essen aus: Eine redet, die anderen hören zu.“
 - Regal-Material: Karte mit Stühlen.
-- Heimatwelt: Warten und verlieren können (`warten-verlieren`)
-  - Sachgrund: Warten, bis man dran ist, und verlieren können gehören zum Stuhlkreis und zum Spiel.
-  - Sache wächst mit: Kl. 1–2: warten, bis man dran ist. Kl. 4: Klassenrat mit Rollen, abstimmen und ein Ergebnis mittragen, das man nicht wollte.
-  - Rahmen: Miteinander · Spannung aus: Durcheinander
-  - Ruhig: Im Stuhlkreis wandert der Redestein. Das Kind tippt auf den Moment, in dem eine Regel fehlt; dann läuft das Gespräch noch einmal, und alle verstehen sich.
-  - Sanft: Zwei reden gleichzeitig los. Wer hat den Stein? Er entscheidet.
-  - Abenteuer: Über mehrere Runden plant die Klasse im Klassenrat ihr Sommerfest: jede Runde ein Punkt, das Kind verteilt die Rollen. Bei der Abstimmung bekommt Timos Vorschlag keine Mehrheit. Er hilft trotzdem beim Aufbauen, und sein Vorschlag kommt auf die Liste fürs nächste Mal.
 - Fachübergreifend: Sachthemen (regeln, mehrheit).
 
 ### Z08 Weil-Brücke
@@ -937,13 +773,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   ein anderes zeigt auf das Sachbild des Versuchs.
 - Mach mit: Lena und ihr großer Bruder stellen ein Glas über eine Kerze. „Frag jemanden, ob ihr den Versuch zusammen macht. Sag vorher: Ich glaube, dass …“ (Kerze nur mit Erwachsenen)
 - Regal-Material: Karte mit Glas und Kerze.
-- Heimatwelt: Eis, Wasser, Dampf (`eis-wasser-dampf`)
-  - Sachgrund: Eis schmilzt, Wasser verdampft: Vermutungen äußern und begründen.
-  - Sache wächst mit: Kl. 2: Eis schmilzt, Wasser gefriert. Kl. 4: verdampfen und verdunsten, Wärme und Kälte als Ursache; Vermutung, Versuch, Ergebnis.
-  - Rahmen: Forschen · Spannung aus: Vorhersage
-  - Ruhig: Eiswürfel auf der Fensterbank: „Ich glaube, dass er schmilzt, weil die Sonne scheint.“ Dann läuft der Versuch, und alle sehen es.
-  - Sanft: Zwei Vermutungen stehen gegeneinander: Schmilzt der Würfel im Wollhandschuh schneller oder langsamer? Jede braucht ihren Grund; der Versuch zeigt es.
-  - Abenteuer: Forscherkiste über mehrere Runden: Wohin verschwindet die Pfütze? Warum beschlägt das Fenster? Jede Runde ein Rätsel, eine Vermutung mit Grund, ein Versuch. Beim letzten steigt Dampf aus dem Kessel und wird am kalten Löffel wieder Wasser (ein Erwachsener kocht).
 - Fachübergreifend: Sachthemen (Versuche); Mathe, falls dort „erst schätzen, dann sehen“ ein Spiel trägt.
 
 ### Z09 Tonstudio
@@ -979,13 +808,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   Maske auf und nimmt sie wieder ab (Rolle und Ich getrennt), ohne bösen Wolf.
 - Mach mit: Kofi nimmt eine Sprachnachricht für Opa auf. „Frag jemanden, ob ihr zusammen eine Sprachnachricht aufnehmt.“
 - Regal-Material: Karte mit Mikrofon.
-- Heimatwelt: Gefühle im Gesicht und im Körper (`gefuehle-erkennen`)
-  - Sachgrund: Gefühle hört man in der Stimme und sieht man im Gesicht; Aufnahmen machen, keine falsche Antwort beim Gefühl.
-  - Sache wächst mit: Kl. 1–2: froh, traurig, wütend in Stimme und Gesicht. Kl. 3–4: feine Unterschiede (aufgeregt, verlegen, erleichtert), wie eine Stimme im Hörspiel eine Figur zeigt.
-  - Rahmen: Fest · Spannung aus: Verwandlung
-  - Ruhig: Im Tonstudio: ein Reim, ein Satz, eine Ansage. Das Kind nimmt sich auf, hört sich an und prüft mit der Kontrollkarte: laut genug, deutlich?
-  - Sanft: Derselbe Satz, einmal froh, einmal müde. Wie klingt er? Beim Gefühl gibt es kein Falsch.
-  - Abenteuer: Ein Hörspiel über mehrere Runden: Die Runde vertont eine Geschichte mit Stimmen und Geräuschen (Kokosnuss für Hufe, Folie für Regen). Bei der Premiere im Klassenzimmer raten die anderen, womit der Donner gemacht wurde: mit einem Backblech.
 
 ### Z10 Erzählkino
 - Name fürs Kind: „Kino“ · Symbol: eine Filmrolle
@@ -1012,13 +834,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
   die Bilder (Erzähler-Regel). Ein anderes ist Publikum.
 - Mach mit: Ela erzählt zu Hause mit drei Bildern von ihrem Tag (der Erzähler sagt, was sie zeigt). „Erzähl jemandem von deinem Tag: zuerst, danach, zum Schluss.“
 - Regal-Material: Karte mit Filmstreifen.
-- Heimatwelt: Mein Tag: morgens, mittags, abends (`mein-tag`)
-  - Sachgrund: Mein Tag: morgens, mittags, abends; vom eigenen Tag in Reihenfolge erzählen.
-  - Sache wächst mit: Kl. 1–2: der eigene Tag. Kl. 3–4: der Tag von anderen (Bäckerin, Igel, Kind auf einer Hallig), Zeitangaben und Höhepunkt beim Erzählen.
-  - Rahmen: Fest · Spannung aus: Lücke
-  - Ruhig: Ein Film über einen Tag: morgens, mittags, abends. Das Kind legt die Bilder, setzt „zuerst“ und „danach“ davor und erzählt dazu.
-  - Sanft: Zwischen Frühstück und Schule fehlt ein Bild. Was ist dazwischen passiert? Das Kind erzählt es.
-  - Abenteuer: Ein Tag anderswo über mehrere Runden: der Tag der Bäckerin (er beginnt nachts), der Tag eines Igels, der Tag auf einer Hallig. Das Kind erzählt jeden als Film. Am Ende laufen alle beim Kinoabend der Klasse.
 - Fachübergreifend: **Schreiben** (Texte planen, Reihenfolgewörter beim Schreiben).
 
 ### Z11 Reporterheft
@@ -1047,13 +862,6 @@ eine Kontrollkarte mit Fragen (laut genug, deutlich, Pausen), kein Urteil.
 - Mach mit: Timo fragt seine Mama wie ein Reporter. „Frag jemanden wie ein Reporter: Was machst du morgens als Erstes?“
 - Regal-Material: Karte mit Heft. Für lernen-einschaetzen eher **kein** Regal-Material („gekonnt“ passt
   zu Selbsteinschätzung nicht; Annahme: Thema zählt nicht als gekonnt).
-- Heimatwelt: Wie Kinder anderswo leben (`kinder-anderswo`)
-  - Sachgrund: Kinder anderswo leben verschieden (Schulweg mit Boot, Bus oder zu Fuß); Reporter fragen nach, ohne exotisch.
-  - Sache wächst mit: Kl. 1–2: Schulweg und Pausenspiel anderswo. Kl. 3–4: Alltag, Wohnen und Schule in anderen Ländern, immer gleichwertig und nie als Besonderheit erzählt.
-  - Rahmen: Forschen · Spannung aus: Wissensvorsprung
-  - Ruhig: Videoanruf mit einer Partnerklasse: Das Kind wählt Reporterfragen; jede Antwort füllt eine Seite im Heft.
-  - Sanft: Eine Antwort wirft eine neue Frage auf („Wir fahren mit dem Boot zur Schule.“). Welche Frage passt jetzt?
-  - Abenteuer: Über mehrere Runden macht die Runde eine Zeitung mit der Partnerklasse: Schulweg, Pausenspiel, Lieblingsessen. Ein Paket ist unterwegs. Darin liegt ein Spiel, das beide Klassen noch nicht kannten.
 - Hinweis: Das Gesicht nach einer Runde (lernen-einschaetzen) gehört eher in den Rahmen (Rundenende) als in ein
   eigenes Spiel.
 

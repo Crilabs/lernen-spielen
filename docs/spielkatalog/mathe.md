@@ -1,9 +1,6 @@
-> Teil des Spielkatalogs (`docs/spielkatalog.md`). **Die Entscheidungen im Hauptdokument gehen vor**: Sie beantworten die
-> offenen Fragen am Ende dieser Datei (u. a. alle Spiele bleiben getrennt, Kontrollkarte, Stimmen, Sachwelt je Spiel).
-> Heimatwelt und Geschichte je Spiel (Zeilen „Heimatwelt“ bis „Abenteuer“) sind am 2026-11-14 aus
-> [`welten.md`](welten.md) übernommen und gelten. Jedes Spiel hat alle drei Stufen; Stellen in den Überblicken, die noch
-> „ruhig fest“ nennen, sind überholt. Beispiele für Szenen in den Zeilen Handlung, Figuren und Mach mit, die nicht zur
-> Heimatwelt passen, sind ebenfalls überholt (Hauptdokument 8a).
+> Teil des Spielkatalogs (`docs/spielkatalog.md`). **Die Entscheidungen im Hauptdokument gehen vor**, für den Bau
+> `docs/spielbau.md`. Ein Eintrag sagt, was gelernt wird; Szenen in Handlung, Figuren und Mach mit sind Vorschläge.
+> Spiele haben keine Sachwelt und keine Stufen der Geschichte (Christian, 2026-11-15).
 
 # Spielkatalog Mathe (Kl. 1–4)
 
@@ -44,9 +41,6 @@ Stand: 2026-11-14 · Entwurf von Claude für den Auftraggeber · Eingabe: `theme
     und entbuendeln-ueber-null M26, gleichheitszeichen-ergibt M10, uhr-zeiger-vertauscht M47, lineal-ab-eins M44).
     Deshalb habe ich schriftlich plus und minus in einem Markenspiel gelassen: Alle drei Fehler entstehen an derselben
     Tauschstelle.
-  - Stufen als Anpassung (Punkt 12): Jedes Spiel ist auf jeder Stufe spielbar; bei `anpassbar` steht je Stufe nur,
-    was sich an Bogen und Szene ändert. Spiele mit kurz sichtbarem Bild (M04) oder mit Abwiegen und Zufall (M45, M54) haben keine
-    Spannung im Lernkern.
   - Figuren: „vorzeigen“ ist gleich verteilt, jedes Kind zeigt in 14 Spielen vor (gezählt). Fähigkeiten (schweben, schrumpfen, riesig,
     zaubern, Zeitreise) nur in sechs Spielen, immer nur auf die Szene, nie auf Perlen oder Zahlen.
   - Mach mit (Punkt 13): je Spiel ein Angebot am Rundenende, nie Bedingung, „gekonnt“ zählt nur, was die App sieht.
@@ -67,8 +61,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - **Stufen** material → vorstellung → kopf heißen hier immer: *material* = das Kind bewegt das Lernzeichen selbst;
   *vorstellung* = das Lernzeichen ist zu sehen, aber verdeckt oder nur kurz sichtbar, das Kind legt erst fest (L2);
   *kopf* = nur Zeichen (Ziffern, Aufgabe), das Material erscheint erst danach als Kontrolle (M7).
-- **Stimmung:** `anpassbar` heißt nach Punkt 12 des Nachtrags: Die Lernhandlung ist auf allen Stufen gleich, es
-  ändern sich nur Bogen und Szene. „Ruhig“ ist immer die Szene ohne Komplikation.
 - **Figuren:** Die Rolle „vorzeigen“ ist gleich verteilt (Ela, Kofi, Lena, Timo je 14-mal).
   „Sich wundern“ übernimmt jeweils das nächste Kind. Die Interessen aus `figuren.md` §2 (bauen, malen, sammeln,
   backen) werden bewusst nie zur Aufgabe des Kindes gemacht, das sie hat.
@@ -95,12 +87,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
   Zahl, und genau das verlangt M1-01. Dieselbe Handlung begründet in AR1-03 die Antwort.
 - Bewusst nicht drin: abzaehlen → M03 (dort wird gezählt, hier gerade nicht), zeichen-groesser-kleiner-gleich →
   M10 (das Zeichen gehört zur Waage).
-- Heimatwelt: Sehen, hören, riechen, schmecken, tasten (`sinne`)
-  - Sachgrund: Montessori-Hördosen und Tastsäckchen gibt es paarweise; wer Paare bildet, merkt, ob eine Dose übrig bleibt (ungerade).
-  - Rahmen: Forschen · Spannung aus: Rätsel
-  - Ruhig: Was klingt gleich? Ela schüttelt die Hördosen der Sinneskiste. Jedes gefundene Paar geht auf und zeigt, was darin klingt (Reis, Sand, Glöckchen). Am Ende sieht man, ob eine Dose allein bleibt.
-  - Sanft: Eine Dose bleibt ohne Partner. Ihr Gegenstück ist unter das Regal gerollt; Lena sieht es schon.
-  - Abenteuer: Klangpfad im Garten über mehrere Runden: Mit der Hand am Seil geht die Runde von Station zu Station, an jeder liegen Paare zum Hören und Tasten. Die Kiste am Ende geht erst mit dem letzten Paar auf. Darin liegt eine Spieluhr.
 - Stimme: wenig Varianten (feste Sätze „Das sind gleich viele.“, „Eine bleibt übrig.“).
 - Figuren: Ela zeigt einmal vor, wie sie Paare zieht; Kofi wundert sich über das übrige Plättchen.
 - Regal-Material: Karte mit zwei Plättchen als Paar und einem einzelnen (besser als Ziffernkarte).
@@ -124,12 +110,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
   sind genau „ein Stein weiter / zurück“.
 - Bewusst nicht drin: zahlenstrahl-bis-10 → M11 (dort zählt der Abstand, hier nur die Reihenfolge),
   in-schritten-zaehlen-bis-100 → M27.
-- Heimatwelt: Wenn die Wut kommt (`wenn-die-wut-kommt`)
-  - Sachgrund: Bis zehn zählen und dabei gehen oder atmen ist eine Pause, die hilft, wenn die Wut kommt; vorwärts und rückwärts zählen ist hier die Handlung selbst.
-  - Rahmen: Bauen · Spannung aus: Lücke
-  - Ruhig: Die Runde legt im Garten einen Ruheweg aus Trittsteinen: ein Weg für alle, die wütend oder aufgeregt sind. Jede Zahl legt einen Stein; reicht der Weg bis zur Bank, geht ihn ein Kind langsam ab. Wie die Wut kommt, zeigt nur die Einführung einmal kurz.
-  - Sanft: Kofis Turm ist umgefallen, er stapft los. Mit jedem gezählten Stein werden seine Schritte ruhiger. An der Bank atmet er aus und baut neu.
-  - Abenteuer: Der Weg wächst über mehrere Runden durch den Garten bis zum Baumhaus, rückwärts gezählt geht es wieder hinunter. Ein Stein wackelt: Darunter wohnt eine Kröte (Sachbild), der Stein bekommt einen anderen Platz.
 - Stimme: wenig (Zahlwörter bis 20, „Was kommt nach …?“).
 - Figuren: Kofi zeigt vor; Lena wundert sich, wenn eine Zahl woanders auftaucht. Fähigkeit: keine.
 - Regal-Material: Karte mit Ziffer.
@@ -154,12 +134,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Eins-zu-eins-Zählen und „die letzte Zahl ist die Anzahl“ werden gleichzeitig sichtbar; die Null
   ist ein echtes leeres Fach, nicht eine fehlende Aufgabe.
 - Bewusst nicht drin: mengen-5 → M04 (Blitzblick soll das Zählen gerade vermeiden).
-- Heimatwelt: Wie die Zahlen entstanden sind (`geschichte-der-zahlen`)
-  - Sachgrund: Hirten zählten früher Schafe mit Steinchen oder Kerben und prüften abends, ob alle wieder da sind; das leere Gehege zeigt die Null.
-  - Rahmen: Zeitreise · Spannung aus: Rätsel · Fähigkeit: in die Zeit reisen
-  - Ruhig: Mit der Zeituhr bei einer Hirtin vor langer Zeit: Für jedes Schaf legt sie ein Steinchen in den Beutel. Abends zählt das Kind nach: Sind alle wieder da? Das leere Gehege bekommt kein Steinchen (die Null).
-  - Sanft: Ein Steinchen bleibt übrig, ein Schaf fehlt. Es steht hinter dem Stall und kaut; Timo sieht es schon.
-  - Abenteuer: Über mehrere Runden zieht die Runde mit der Herde auf die Sommerweide. Jeden Abend wird gezählt. Einmal ist ein Schaf zu viel: In der Nacht ist ein Lamm geboren.
 - Stimme: wenig.
 - Figuren: Lena zeigt vor (tippt jedes Ding, zögert einmal und zählt neu); Timo wundert sich über das leere Fach.
 - Regal-Material: Perlenstab der Zahl; für die Null eine Karte „0“ mit leerem Fach.
@@ -184,12 +158,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Strukturierte Anzahlen erkennt man nur, wenn Zählen keine Zeit hat. Das kurze Zeigen ist die
   Handlung, die genau das erzwingt, ohne Druck: Das Bild kann man jederzeit noch einmal ansehen (mit Hilfe).
 - Bewusst nicht drin: abzaehlen → M03 (Gegenteil), ziffern-lesen-bis-10 → M06 (Hören statt Sehen).
-- Heimatwelt: Mein Körper von Kopf bis Fuß (`koerperteile`)
-  - Sachgrund: Eine Hand hat fünf Finger, zwei Hände zehn, mit Zehen zwanzig: Zehnerfeld und Zwanzigerfeld sind Hände und Füße.
-  - Rahmen: Miteinander · Spannung aus: Wissensvorsprung
-  - Ruhig: Fingerblitz im Sandkasten: Kofi zeigt kurz Finger, das Kind legt die Zahl. Jede Zahl wird ein Handabdruck im Sand; zehn Abdrücke ergeben eine Reihe. (Das Bild blitzt nur auf, wenn das Kind tippt, nie als Wettlauf.)
-  - Sanft: Jemand ist über die Reihe gelaufen, ein Abdruck ist verwischt. Welche Zahl fehlt? Sie wird neu gedrückt.
-  - Abenteuer: Geheimzeichen über mehrere Runden: Die Runde denkt sich eine Fingersprache aus und schickt sich Zahlen über den Hof zu. Die letzte Zahlenfolge öffnet das Zahlenschloss am Schuppen, darin liegen die Strandsachen.
 - Stimme: wenig.
 - Figuren: Timo zeigt vor („Timo sieht die volle Reihe. Und noch zwei.“); Ela wundert sich.
 - Regal-Material: Perlenstab der Zahl (passt).
@@ -214,12 +182,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Beide Themen fragen dasselbe: Wofür steht diese Zahl? Die Szene macht den Unterschied
   handgreiflich, statt ihn zu erklären.
 - Bewusst nicht drin: –
-- Heimatwelt: Sonne, Sterne, Planeten (`am-himmel`)
-  - Sachgrund: Die Planeten haben eine feste Reihenfolge ab der Sonne; „der dritte Planet“ ist ein Platz, keine Anzahl.
-  - Rahmen: Entdecken · Spannung aus: Lücke · Fähigkeit: schweben
-  - Ruhig: Ein Planetenmodell im Schulflur: Jeder Planet bekommt sein Nummernschild, gezählt ab der Sonne. Mit dem achten Schild ist die Reihe fertig.
-  - Sanft: Ein Schild ist heruntergefallen. An welchen Platz gehört es? Das Kind zählt ab der Sonne.
-  - Abenteuer: Mit dem Ballon schwebt die Runde über mehrere Runden von Planet zu Planet (Fantasiereise, die Sachbilder sind echt). An jedem Platz ein Blick durchs Fernrohr. Die letzte Station ist der dritte Planet: Landung auf dem Schulhof.
 - Stimme: mittel (Ordnungszahlen „der dritte“ bis „der zehnte“ in drei Fällen; beim Anhören prüfen, stimme.md §2).
 - Figuren: Ela zeigt vor; Kofi wundert sich über die Hausnummer, die keine Anzahl ist.
 - Regal-Material: Karte mit Ziffer und Punkt („3.“).
@@ -247,13 +209,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Die Schwierigkeit ist genau der Weg vom gehörten Zahlwort zur Ziffernfolge (Inversion, Null,
   Dreiergruppen). Hören und Tippen isolieren sie.
 - Bewusst nicht drin: zahl-darstellungen-bis-100 → M08 (Material legen ist die andere Richtung).
-- Heimatwelt: Feuer und Kerzen: Erwachsene holen (`feuer-notruf`)
-  - Sachgrund: Die Notrufnummer 112 ist ein Name, keine Anzahl; Ziffern lesen und schreiben ist der Lernkern.
-  - Sache wächst mit: Kl. 1–2: Nummern an Fahrzeugen und Fächern, die 112. Kl. 3–4: große Zahlen der Feuerwehr (Liter im Tank, Meter Schlauch, Einsätze im Jahr).
-  - Rahmen: Werkstatt · Spannung aus: Durcheinander
-  - Ruhig: Tag der offenen Tür in der Feuerwache: Fahrzeuge, Spinde und Schläuche bekommen ihre Nummern. Jede geschriebene Zahl bringt ein Ding an seinen Platz, zuletzt kommt die 112 ans Telefon.
-  - Sanft: Die Feuerwehrfrau sucht den Schlauch aus Fach 47, aber zwei Schilder sind vertauscht (47 und 74). Das Kind hängt sie richtig.
-  - Abenteuer: Übungstag über mehrere Runden: Die Leitstelle funkt Nummern durch, die Runde stellt das richtige Fahrzeug bereit. Zum Schluss fährt die Drehleiter hoch. Oben sitzt eine Katze und spaziert von selbst herunter. (Kein Brand, kein Notfall.)
 - Stimme: **viel** (alle Zahlwörter bis 1000 als Aufnahmen; bis zur Million nicht alle aufnehmbar, deshalb eine
   feste Auswahl von etwa 300 großen Zahlen je Thema als Daten anlegen, `inhalte/vorlagen.json`).
 - Figuren: Kofi zeigt vor (hört „dreiundvierzig“, tippt erst die Vier); Lena wundert sich über einen Brief, der
@@ -280,12 +235,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Bündeln ist eine Tätigkeit, keine Schreibweise. Das Spiel lässt sie selbst ausführen, über drei
   Stufen hinweg gleich.
 - Bewusst nicht drin: zahl-darstellungen-bis-100 → M08, entbuendeln-zehner → M26 (Entbündeln gehört zum Rechnen).
-- Heimatwelt: Die ersten Menschen: Werkzeug, Feuer, Ackerbau (`erste-menschen`)
-  - Sachgrund: Die ersten Menschen ritzten Kerben in Knochen; Kerben in Zehnergruppen bündeln macht große Mengen lesbar.
-  - Rahmen: Zeitreise · Spannung aus: Durcheinander · Fähigkeit: in die Zeit reisen
-  - Ruhig: Zeitreise in ein Dorf der Steinzeit: Die Ernte wird gezählt. Je zehn Kerben werden ein Bündel auf dem Zählstab; am Abend weiß das Dorf, wie viel es hat.
-  - Sanft: Zwei Familien haben dieselben Körbe gezählt und kommen auf Verschiedenes. Erst gebündelt sieht man, wo sich jemand verzählt hat.
-  - Abenteuer: Tauschmarkt über mehrere Runden: Ein Nachbardorf kommt mit Fellen und Feuersteinen. Nur wer gebündelt hat, kann vergleichen und tauschen. Am Ende sitzen alle am Feuer (Erwachsene hüten es).
 - Stimme: wenig.
 - Figuren: Lena zeigt vor; Timo wundert sich über ein Bündel, das nicht zugeht.
 - Regal-Material: Zehnerstab, Hunderterplatte bzw. Tausenderwürfel (neu nötig; Perlenstab 10 gold passt für Kl. 2).
@@ -312,13 +261,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Alle Themen sind dieselbe Übersetzung zwischen Menge, Stellen und Ziffern. Die Größen in Kl. 3–4
   sind dieselbe Tafel mit anderen Spaltenköpfen; das hält den Zusammenhang „Komma trennt Einheiten“ sichtbar.
 - Bewusst nicht drin: vergleichen-bis-100 → M09, hundertertafel → M12.
-- Heimatwelt: Wünsche, Kaufen, Taschengeld (`wuensche-taschengeld`)
-  - Sachgrund: Geld ist ein Stellenwertsystem: 1-Euro-Münze, 10-Euro-Schein, 100-Euro-Schein.
-  - Sache wächst mit: Kl. 1–2: Taschengeld und Preise bis 100 Euro. Kl. 3–4: Klassenkasse und große Anschaffungen der Gemeinde (ein Spielgerät, ein Bus) bis zur Million; Kommaschreibweise bei Euro und Cent.
-  - Rahmen: Werkstatt · Spannung aus: Vorhersage
-  - Ruhig: Timo spart auf einen Wunsch. Jeder gelegte Betrag wandert in die Spardose; am Rundenende steht auf dem Zettel, wie viel schon da ist.
-  - Sanft: Die Kasse am Flohmarkt hat keine Zehner mehr. Das Kind tauscht um, dann geht der Betrag auf.
-  - Abenteuer: Die Klasse sammelt über mehrere Runden für ein Baumhaus: Flohmarkt, Kuchenstand, Pfandflaschen. Vor jeder Runde wird geschätzt, ob es jetzt reicht. Am Ende wird das Holz bestellt.
 - Stimme: viel (alle Zahlen bis 1000; Größen-Sätze).
 - Figuren: Timo zeigt vor; Ela wundert sich über die Karte, die beim Schieben die Null verdeckt.
 - Regal-Material: Karte mit Ziffer; für Stellenwert besser eine Mini-Stellentafel mit Stab und Perlen (neu).
@@ -341,12 +283,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
   Handlung und belohnt nicht das Ansehen aller Ziffern (L2: erst festlegen).
 - Bewusst nicht drin: zeichen-groesser-kleiner-gleich → M10 (kleine Zahlen, Gleichheit), groessen-ordnen-gemischt →
   M08.
-- Heimatwelt: Gebirge und das Innere der Erde (`gebirge-vulkane`)
-  - Sachgrund: Berghöhen vergleichen (Zugspitze, Watzmann, Wendelstein) braucht das Vergleichen großer Zahlen von vorn.
-  - Rahmen: Reise · Spannung aus: Vorhersage · Fähigkeit: schweben
-  - Ruhig: Die Runde baut ein Relief der Alpen. Welcher Gipfel ist höher? Stelle für Stelle aufgedeckt, kommt der höhere nach hinten; am Ende steht die Bergkette. (Auf „ruhig“ nur Berge und Höhen.)
-  - Sanft: Zwei Höhenschilder sind von den Modellen gefallen. Welches gehört zu welchem Berg? Der Vergleich zeigt es. Ab „sanft“ in der Pause: was unter den Bergen liegt.
-  - Abenteuer: Mit dem Schirm schwebt die Runde über mehrere Runden von Gipfel zu Gipfel, immer zum höheren. Oben ertönt ein Pfiff: ein Murmeltier (Sachbild). In der Pause: wenn ein Vulkan ausbricht, als ruhiger Sachmoment.
 - Stimme: mittel.
 - Figuren: Kofi zeigt vor (deckt auf, tippt früh); Lena wundert sich, dass sie nicht alles aufdecken musste.
 - Regal-Material: Karte mit „>“ zwischen zwei Ziffern (neu).
@@ -370,13 +306,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Das Gleichheitszeichen heißt „ist gleich viel wie“; die Waage ist genau das. Größer, kleiner und
   Lücke links oder rechts sind dieselbe Frage an dasselbe Material.
 - Bewusst nicht drin: gramm-kilogramm → M45 (Waage zum Messen, nicht zum Vergleichen von Termen).
-- Heimatwelt: Wippe, Hebel, Balkenwaage (`hebel-waage`)
-  - Sachgrund: Die Balkenwaage ist eine Gleichung: Gleichgewicht heißt gleich viel; Lernkern laut Welt.
-  - Sache wächst mit: Kl. 1–2: Wippe und Balkenwaage, Gleichgewicht heißt gleich viel. Kl. 3–4: Hebel: Wer weiter außen sitzt, drückt stärker; Waagen im Handel früher und heute.
-  - Rahmen: Werkstatt · Spannung aus: Vorhersage
-  - Ruhig: Im Hofladen wird auf der Balkenwaage abgewogen. Steht die Waage im Gleichgewicht, ist die Tüte fertig; am Ende ist die Bestellung gepackt.
-  - Sanft: Die Wippe auf dem Spielplatz steht schief. Wer muss wohin, damit sie gerade steht? (Sie bewegt sich erst, wenn es passt; niemand fällt.)
-  - Abenteuer: Über mehrere Runden baut und belädt die Runde ein Floß für den Teich: Nur wenn beide Seiten gleich schwer sind, liegt es gerade. Zum Schluss zieht es am Seil den Picknickkorb ans andere Ufer.
 - Stimme: mittel.
 - Figuren: Lena zeigt vor; Timo wundert sich, warum die Waage bei 4 + 3 und 7 still steht.
 - Regal-Material: kleine Waage im Gleichgewicht (neu, besser als Karte).
@@ -401,13 +330,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Lage, Nachbarzehner und Runden sind alle Abstandsfragen auf derselben Linie. Kl. 3–4 sind nur
   größere Ausschnitte, das Spiel bleibt gleich.
 - Bewusst nicht drin: zaehlen-grosse-schritte → M27 (Sprünge statt Orte), hundertertafel → M12.
-- Heimatwelt: Die lange Zeitleiste des Lebens (`zeitleiste-des-lebens`)
-  - Sachgrund: Die lange Zeitleiste des Lebens ist ein Zahlenstrahl: große Zahlen werden Längen, Orte auf der Linie werden Zeiten.
-  - Sache wächst mit: Kl. 1–2: wenige große Bilder auf der Schnur (Fische, Blumen, Menschen ganz am Ende). Kl. 3–4: Millionen Jahre als Längen, Erdzeitalter mit Namen.
-  - Rahmen: Entdecken · Spannung aus: Lücke · Fähigkeit: schweben
-  - Ruhig: Die lange Schnur des Lebens liegt über der Wiese. Der Ballon schwebt zu jeder genannten Stelle und hängt dort ein Bild auf (erste Fische, erste Blumen, ganz am Ende die Menschen).
-  - Sanft: Der Wind hat drei Bilder von der Schnur geweht. An welche Stelle gehören sie zurück?
-  - Abenteuer: Zeitflug über mehrere Runden: Wo der Ballon landet, schaut die Runde kurz in die Zeit hinein (Urmeer, Farnwald, Mammutsteppe als Sachbilder). Die letzte Landung ist heute, auf der Wiese. In der Pause: warum es keine Dinosaurier mehr gibt.
 - Stimme: viel (Zahlen bis 1000, große Zahlen als feste Auswahl).
 - Figuren: Ela zeigt vor; Kofi wundert sich über die Landung. Fähigkeit: schweben (der Weg zur Stelle, wirkt nur
   auf die Szene, nie auf den Strahl).
@@ -431,12 +353,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Dass sich bei +10 nur die Zehnerziffer ändert, ist auf der Tafel eine Bewegung senkrecht nach
   unten. Kein anderes Material zeigt das so direkt.
 - Bewusst nicht drin: plus-zweistellig-ohne-uebergang → M24.
-- Heimatwelt: Samen gehen auf Reisen (`samen-reisen`)
-  - Sachgrund: Ein Samenbeet in zehn Reihen zu zehn: +10 ist eine Reihe weiter, Samen verschiedener Pflanzen reisen verschieden (Flieger, Kletten).
-  - Rahmen: Versorgen · Spannung aus: Lücke · Fähigkeit: schrumpfen
-  - Ruhig: Ein Beet mit hundert Plätzen. Jede richtige Zahl setzt einen Samen; ist eine Reihe voll, keimt sie.
-  - Sanft: Der Wind hat Flugsamen ins Beet geweht. Auf welchem Platz ist der Löwenzahn gelandet? Das Kind benennt ihn, Lena steckt ein Schild.
-  - Abenteuer: Die Runde schrumpft mit der Lupenmütze und reist über mehrere Runden mit den Samen: am Schirmchen durch die Luft, als Klette im Fell eines Hundes, im Bach. Jede Landung ist ein Platz auf der Tafel. Am Ende blüht das Beet.
 - Stimme: mittel.
 - Figuren: Kofi zeigt vor; Lena wundert sich, dass unter der 34 die 44 liegt.
 - Regal-Material: Karte mit Mini-Hunderterfeld (neu).
@@ -461,13 +377,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Schätzen heißt: einen Teil kennen und hochrechnen. Kl. 2 macht das mit einem Zehnerhäufchen,
   Kl. 4 mit einer Bus-Reihe; die Handlung ist dieselbe.
 - Bewusst nicht drin: ueberschlag-plus-minus → M42 (Schätzen von Rechenergebnissen), laengen-schaetzen → M44.
-- Heimatwelt: Erdteile und Ozeane (`erdteile-ozeane`)
-  - Sachgrund: Erdteile und Ozeane sind riesig verschieden groß; Schätzen mit Teilfragen ist die einzige Möglichkeit, solche Mengen zu fassen.
-  - Sache wächst mit: Kl. 2: Mengen bis 100 (Plättchen auf dem Globus, Tiere im Bild). Kl. 3–4: sehr große Zahlen (Einwohner, Kilometer, Vogelschwärme) mit Teilfragen.
-  - Rahmen: Forschen · Spannung aus: Vorhersage · Fähigkeit: schweben
-  - Ruhig: Die Runde belegt einen Globus mit Plättchen: Wie viele braucht das Meer, wie viele das Land? Erst schätzen, dann eine Reihe zählen, hochrechnen und legen.
-  - Sanft: Die Schachtel reicht vielleicht nicht mehr für Afrika. Erst schätzen: Reicht es? Dann zeigt es sich.
-  - Abenteuer: Reise um die Erde über mehrere Runden, mit dem Schirm von oben gesehen: Pinguine auf dem Eis, Zebras in der Steppe, Fische im Schwarm. Geschätzt wird alles, gezählt nur ein Ausschnitt. Am Ende ist das Reisebuch voll.
 - Stimme: mittel.
 - Figuren: Lena zeigt vor (zählt eine Reihe, rechnet hoch); Timo wundert sich, wie nah die Schätzung war.
 - Regal-Material: Karte mit „≈“ und einer Zahl (neu).
@@ -498,12 +407,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Die ganze Zahlzerlegung bis 10 ist eine einzige Handlung mit einem Stäbchen. Die drei
   Problemlöse-Themen der Kl. 1 (mehrere, alle, geordnet) zeigen sich in der wachsenden, geordneten Liste.
 - Bewusst nicht drin: ergaenzen-bis-10 → M15 (Ergänzen zum vollen Zehner ist eine eigene Handlung).
-- Heimatwelt: Müll trennen (`muell-trennen`)
-  - Sachgrund: Müll kommt in verschiedene Tonnen; sieben Teile auf zwei Tonnen verteilen ist Zerlegen.
-  - Rahmen: Versorgen · Spannung aus: Lücke
-  - Ruhig: Nach dem Picknick kommen die Dinge von der Decke in zwei Tonnen. Jede Zerlegung leert die Decke in die zwei Tonnen und steht danach in der Liste; am Ende ist die Wiese sauber.
-  - Sanft: Ein Sack ist zugeknotet: Sieben Teile waren es, vier liegen in der Papiertonne. Wie viele sind im Sack? Aufgeknotet zeigt es sich.
-  - Abenteuer: Über mehrere Runden baut die Runde aus dem Gesammelten (Dosen, Kartons, Korken) eine Figur fürs Schulfest; jede Zerlegung liefert zwei Sorten Teile. Im Bauch der fertigen Figur scheppert noch etwas: eine vergessene Fahrradklingel.
 - Stimme: wenig (Zahlen bis 10).
 - Figuren: Timo zeigt vor (fängt bei 0 + 7 an); Ela wundert sich über eine Zerlegung, die schon in der Liste steht.
 - Regal-Material: Perlenstab n (passt genau, `zerlegung`).
@@ -526,12 +429,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Zehnerfreunde, Ergänzen zum Zehner, zu 100, zu 1000 und zu einer Stufenzahl sind dieselbe Frage
   („Was fehlt bis voll?“) an immer größere Einheiten.
 - Bewusst nicht drin: rueckgeld → M43 (Ergänzen mit Geld, dort als Kaufmannsmethode), zerlegen-10 → M14.
-- Heimatwelt: Obst und Gemüse und wann es reif ist (`obst-gemuese-reif`)
-  - Sachgrund: Äpfel werden im Herbst reif und in Kisten zu 10 und 100 gepackt; Ergänzen heißt Kiste voll machen.
-  - Rahmen: Versorgen · Spannung aus: Lücke
-  - Ruhig: Apfelernte auf der Streuobstwiese. Jede Ergänzung füllt eine Kiste; volle Kisten kommen auf den Wagen.
-  - Sanft: Eine Kiste ist auf dem Weg aufgegangen. Wie viele Äpfel fehlen, bis sie wieder voll ist? Sie liegen im Gras daneben.
-  - Abenteuer: Mostfest über mehrere Runden: von der Wiese zur Presse zum Fass. Jede Füllung der Presse braucht genau hundert. In der letzten Runde fließt der Saft. Im Fass gluckert es: nur eine Luftblase.
 - Stimme: wenig.
 - Figuren: Ela zeigt vor; Kofi wundert sich über die Perle, die draußen bleibt.
 - Regal-Material: Perlenstab 10 mit Trennmarke (neu: zweifarbiger Stab, n und 10 − n).
@@ -554,12 +451,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Die acht Themen „Rechnen mit der n“ verlangen genau das: Plus-, Minus- und Ergänzungsaufgaben aus
   einer Zerlegung ableiten. Umkehraufgabe und Probe sind dieselbe Beziehung.
 - Bewusst nicht drin: zerlegen-n → M14.
-- Heimatwelt: Haustiere und was sie brauchen (`haustiere`)
-  - Sachgrund: Meerschweinchen leben in Gruppen und brauchen ein Häuschen; wer im Häuschen und wer draußen ist, gibt die Aufgabenfamilie.
-  - Rahmen: Versorgen · Spannung aus: Wissensvorsprung
-  - Ruhig: Das Meerschweinchen-Gehege: Einige sitzen im Häuschen, einige draußen. Das Kind baut die vier Aufgaben der Familie; dann hebt Lena das Häuschen an und man sieht, dass es stimmt. Danach gibt es Heu.
-  - Sanft: Eines fehlt in der Zählung. Aus der Aufgabe weiß das Kind schon, wie viele im Häuschen sein müssen: Es sitzt im Heutunnel.
-  - Abenteuer: Über mehrere Runden baut die Runde ein Außengehege mit Röhren und Verstecken. In jeder Runde sitzen die Tiere woanders, und die Aufgabenfamilie verrät, wie viele wo sind. Aus einem Karton quiekt es: Eines hat sich ein Nest aus Heu gebaut.
 - Stimme: mittel (Aufgaben bis 20 als Sätze).
 - Figuren: Kofi zeigt vor; Lena wundert sich über die Aufgabe, die nicht ins Haus passt.
 - Regal-Material: Perlenstab n (passt).
@@ -584,12 +475,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Plus, Minus, Mal und Geteilt verstehen heißt Situation und Rechnung ineinander übersetzen. Das
   Nachspielen der gebauten Rechnung ist die Fehlerkontrolle in der Sache.
 - Bewusst nicht drin: kapitaensaufgabe-erkennen → M40 (Fragen und Angaben), sachaufgabe-skizze → M41.
-- Heimatwelt: Tiere im Winter, Frühblüher, Herbstfrüchte (`jahreszeiten-natur`)
-  - Sachgrund: Im Winter kommen Vögel ans Futterhaus und fliegen wieder weg; Dazu und Weg sind Plus und Minus.
-  - Rahmen: Forschen · Spannung aus: Verwandlung
-  - Ruhig: Am Futterhaus im Winter: Vögel kommen und fliegen weg. Das Kind baut die Rechnung zur Szene; sie läuft noch einmal ab und kommt ins Beobachtungsheft.
-  - Sanft: Auf einmal fliegen alle auf. Wie viele waren es eben? Ein Eichhörnchen holt sich eine Nuss, dann kommen sie wieder.
-  - Abenteuer: Ein Jahr am selben Baum, über mehrere Runden: Zugvögel kommen zurück, Blüten gehen auf, Äpfel fallen, Blätter fallen. Im Herbst raschelt es im Laubhaufen: Ein Igel sucht sein Winterquartier.
 - Stimme: **viel** (jede Geschichte ein eigener Satz; als feste Geschichtenbank anlegen).
 - Figuren: Lena zeigt vor; Timo wundert sich, als die Szene mit der falschen Rechnung rückwärts läuft. Gäste: der
   Busfahrer, die Bäuerin.
@@ -613,12 +498,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Der Unterschied ist ein Vergleich, nicht ein Wegnehmen; der Überstand zeigt ihn direkt. Hochzählen
   statt Abziehen ist dieselbe Handlung, und „beide wachsen gleich“ ist sichtbar.
 - Bewusst nicht drin: minus-verstehen → M17 (Wegnehmen als Handlung).
-- Heimatwelt: Vom Baby bis heute (`lebenskette`)
-  - Sachgrund: Altersunterschiede bleiben gleich, auch wenn alle älter werden; die Lebenskette zeigt Jahre als Länge.
-  - Rahmen: Zeitreise · Spannung aus: Rätsel · Fähigkeit: in die Zeit reisen
-  - Ruhig: Die Runde legt Lebensketten, eine Perle je Jahr: für sich, die Schwester, den Opa. Der Unterschied zwischen zwei Ketten wird ein Band zwischen zwei Fotos.
-  - Sanft: Ein Foto im Album hat keine Jahreszahl. Wie alt war Opa, als Mama geboren wurde? Der Unterschied verrät, wohin es gehört.
-  - Abenteuer: Mit der Zeituhr besucht die Runde über mehrere Runden Kofis Opa als Kind, als Lehrling, als Papa. Der Altersunterschied zu seiner Schwester bleibt immer gleich. Am Ende sitzen beide heute auf der Bank.
 - Stimme: mittel.
 - Figuren: Timo zeigt vor; Ela wundert sich, dass der Abstand gleich bleibt.
 - Regal-Material: zwei kurze Stäbe mit Überstand (neu).
@@ -643,12 +522,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Verdoppeln ist Spiegeln; Halbieren ist die Spiegelachse finden. In Kl. 2–3 werden Zehner und
   Einer getrennt gespiegelt, wie das Thema es verlangt.
 - Bewusst nicht drin: verdoppeln-beim-mal → M36 (Verdoppeln einer Malaufgabe am Punktefeld).
-- Heimatwelt: Insel und See, Halbinsel und Bucht (`land-und-wasser`)
-  - Sachgrund: Im stillen Wasser spiegelt sich das Ufer: Alles ist doppelt da. Insel und See sind Gegenstücke (Land im Wasser, Wasser im Land); die Bucht nimmt auf, was die Halbinsel gibt.
-  - Rahmen: Entdecken · Spannung aus: Verwandlung
-  - Ruhig: Am stillen See: Was am Ufer steht, steht noch einmal im Wasser. Das Kind sagt, wie viele es mit Spiegelbild sind; dann wird das Wasser glatt und zeigt es.
-  - Sanft: Ein Windstoß kräuselt den See, das Spiegelbild ist weg. Wie viele waren es zusammen? Der Wind legt sich.
-  - Abenteuer: Mit dem Ruderboot (flaches Wasser, Schwimmwesten, Lenas Mama rudert) über mehrere Runden von Insel zu Insel: Jede hat eine Bucht, die genau die Hälfte fasst. Auf der letzten blinkt etwas im Sand: ein Taschenspiegel, mit dem jemand Leuchtturm gespielt hat.
 - Stimme: wenig.
 - Figuren: Ela zeigt vor; Kofi wundert sich, wo der Spiegel für die Hälfte stehen muss. Keine Zauberei: Der
   Spiegel ist echt (Fähigkeiten wirken nie auf Lernzeichen).
@@ -675,12 +548,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Das ist der Zugang „abrufen“ für alle Aufgaben bis 20, mit Paketen wie im Kettenhüpfer
   (+0/+1, +2/+3, +5, Tausch, gemischt). Das Ableiten über die 10 hat sein eigenes Spiel (M21).
 - Bewusst nicht drin: erst-zur-10 → M21 (Ableiten), verdoppeln-bis-10 → M19.
-- Heimatwelt: Mein Schulweg (`schulweg`)
-  - Sachgrund: Der Schulweg besteht aus Wegstücken (bis zur Ampel, bis zum Tor); Streifen aneinanderlegen ist Plus.
-  - Rahmen: Reise · Spannung aus: Durcheinander
-  - Ruhig: Die Runde legt den Schulweg als Streifen nach: von der Tür zur Ampel, von der Ampel zum Tor. Jedes Ergebnis legt ein Wegstück; am Schultor klingelt es.
-  - Sanft: Eine Baustelle sperrt ein Wegstück. Welche zwei Streifen ergeben den Weg außen herum?
-  - Abenteuer: Wege-Forscher über mehrere Runden: Jedes Kind der Runde kommt anders zur Schule (zu Fuß, mit dem Rad, mit dem Bus, Timo über die Rampe). Alle Wege werden in Streifen gelegt. Am Ende hängt der Plan im Flur und zeigt, wo sich die Wege treffen.
 - Stimme: wenig (Ergebnisse als Zahl).
 - Figuren: Kofi zeigt vor; Lena wundert sich über einen Streifen, der zu weit reicht.
 - Regal-Material: Perlenstab der Zahl (passt).
@@ -704,12 +571,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Der Zehnerübergang ist eine Umlegehandlung im Feld. Alle gleichwertigen Wege (außer der
   Hilfsaufgabe mit der 10, M22) sind Umlegungen desselben Felds, und rechenweg-nachlegen fragt genau danach.
 - Bewusst nicht drin: ueber-10-mit-9 → M22 (über 10 + x − 1), fast-verdoppeln → M19.
-- Heimatwelt: Zähne und wie man sie pflegt (`zaehne`)
-  - Sachgrund: Ein Milchgebiss hat zwanzig Zähne, zehn oben und zehn unten: das Zwanzigerfeld ist das Gebiss.
-  - Rahmen: Entdecken · Spannung aus: Verwandlung · Fähigkeit: schrumpfen
-  - Ruhig: Beim Zahnarzt am großen Gebissmodell: oben zehn, unten zehn. Erst wird die obere Reihe voll geputzt, dann geht es unten weiter.
-  - Sanft: Lena hat einen Wackelzahn. Wie viele Zähne sind es, wenn er draußen ist? Und wenn der neue da ist?
-  - Abenteuer: Zahnforscher über mehrere Runden: Die Runde schrumpft und geht durch das Gebissmodell wie durch eine Halle mit weißen Felsen. Hinter dem letzten Backenzahn drückt schon ein neuer von unten.
 - Stimme: mittel.
 - Figuren: Lena zeigt vor; Timo wundert sich, wohin das letzte Plättchen soll.
 - Regal-Material: Karte mit Zwanzigerfeld (neu) oder Perlenstab 10 + n.
@@ -733,12 +594,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Hilfsaufgabe und gegensinniges Verändern sind dieselbe Idee „runde Zahl durch Leihen“. Die Richtung
   des Ausgleichs (bei Plus und Minus verschieden) ist das, was Kinder verwechseln; hier ist sie eine Bewegung.
 - Bewusst nicht drin: differenz-bleibt-gleich → M18 (Minus gleichsinnig, beide Türme).
-- Heimatwelt: Um Hilfe bitten, helfen, Danke sagen (`hilfe-und-danke`)
-  - Sachgrund: Wer sich etwas leiht, bittet, dankt und gibt es zurück; die geliehene Perle wird zurückgegeben.
-  - Rahmen: Miteinander · Spannung aus: Hilfe
-  - Ruhig: Timo fädelt eine Kette, eine Perle fehlt zur vollen Zehn. Ela leiht ihm eine; er rechnet, gibt sie zurück und lächelt.
-  - Sanft: Die geliehene Perle ist vom Tisch gerollt. Ohne Zurückgeben stimmt das Ergebnis nicht. Sie liegt unterm Stuhl.
-  - Abenteuer: Die Leihkiste der Straße, über mehrere Runden: Die Runde richtet einen Schrank ein, aus dem sich Nachbarn Dinge leihen (Leiter, Waffeleisen, Luftpumpe). Jede Rechnung ist ein Ausleihen und Zurückbringen. Am Ende klebt ein Dankeszettel ohne Namen an der Tür; er ist von der Hausmeisterin.
 - Stimme: mittel.
 - Figuren: Timo zeigt vor (leiht, gibt zurück, zögert bei der Richtung); Ela wundert sich, warum bei Minus plus 1.
 - Regal-Material: Karte mit Neunerstab und Leihperle (neu).
@@ -762,13 +617,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Alle Themen „wie 3 + 4“, „Zehner-Einmaleins“ und „mal 10, 100, 1000“ sind dieselbe Einsicht: Die
   Einheit ändert sich, die Rechnung nicht. Das Tauschen der Stücke ist diese Einsicht als Handlung.
 - Bewusst nicht drin: plus-zehner-bis-100 → M12.
-- Heimatwelt: Burg, Kloster, Schloss (`burg-kloster-schloss`)
-  - Sachgrund: Burgen wurden mit Modellen und Plänen geplant; das Modell aus Klötzen (3 + 4) entspricht dem echten Bau (30 + 40 Steine).
-  - Sache wächst mit: Kl. 1–2: Modell und echter Bau, Tor, Turm, Mauer. Kl. 3–4: wie viele Menschen und Jahre ein Burgbau brauchte, Maße und Mengen in Tausendern.
-  - Rahmen: Bauen · Spannung aus: Verwandlung · Fähigkeit: schrumpfen
-  - Ruhig: Im Burgmuseum steht ein Modell aus Klötzen. Die kleine Aufgabe baut das Modell, die große das echte Mauerstück daneben.
-  - Sanft: Am Modell fehlt ein Turm. Erst wird er klein gebaut, dann zeigt die große Rechnung, wie viele Steine der echte braucht.
-  - Abenteuer: Die Runde schrumpft und geht über mehrere Runden durch das Modell: Tor, Hof, Brunnen, Turm. Aus dem Keller kommt ein Klappern: Der Museumswärter sortiert Schlüssel. Am Ende sind alle wieder groß und stehen vor der echten Burg.
 - Stimme: mittel.
 - Figuren: Ela zeigt vor; Kofi wundert sich, dass 30 + 40 wie 3 + 4 geht.
 - Regal-Material: Karte mit Einer und Zehnerstab (neu).
@@ -793,12 +641,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Schrittweise rechnen ist der Hauptweg bis 100 und halbschriftlich bis 1000; der Rechenstrich ist
   seine Darstellung. Alle Aufgabentypen bis 100 (mit und ohne Übergang) laufen hier als Pakete.
 - Bewusst nicht drin: stellenweise-rechnen → M26 (Stellen getrennt, Markenspiel), hilfsaufgabe-plus-minus → M22.
-- Heimatwelt: Wald und Teich (`wald-und-teich`)
-  - Sachgrund: Erdkröten und Frösche wandern im Frühjahr in vielen Etappen vom Wald zu dem Teich, in dem sie geschlüpft sind; Menschen helfen ihnen an Straßen mit Zäunen und Eimern. Etappen mit Rast sind der Rechenstrich.
-  - Rahmen: Reise · Spannung aus: Hilfe
-  - Ruhig: Am Teich springt ein Frosch von Blatt zu Blatt ans andere Ufer. Jede Etappe auf dem Rechenstrich ist ein Sprung.
-  - Sanft: Ein Sprung ist zu weit. Der Frosch braucht einen Halt am Zehnerblatt; mit zwei Sprüngen kommt er an.
-  - Abenteuer: Krötenwanderung über mehrere Runden, am Abend mit Warnweste, Lampe und der Naturschützerin: Die Runde trägt Kröten im Eimer vom Zaun über die Straße zum Teich. Jede Etappe ist ein Stück Weg. Am Ende plumpst es im Wasser.
 - Stimme: mittel.
 - Figuren: Kofi zeigt vor; Lena wundert sich über einen Bogen, der zu weit reicht.
 - Regal-Material: Karte mit Rechenstrich (neu).
@@ -823,13 +665,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Rechenweg wählen ist eine eigene Kompetenz, die das Kind erst festlegt (L2) und dann am Ergebnis
   sieht. „Im Kopf oder schriftlich“ und „Taschenrechner“ sind dieselbe Wahl auf einer anderen Stufe.
 - Bewusst nicht drin: rechenwege-zuordnen → M34 (Wege von anderen erklären).
-- Heimatwelt: Zu Fuß, mit Rad, Bus und Bahn (`unterwegs`)
-  - Sachgrund: Unterwegs gibt es mehrere Wege (zu Fuß, Rad, Bus, Fähre); den passenden wählen ist wie den Rechenweg wählen.
-  - Sache wächst mit: Kl. 2: Wege im Ort. Kl. 3: Fahrpläne, Umsteigen, Wege mit Fähre und Bahn durchs Land.
-  - Rahmen: Reise · Spannung aus: Durcheinander
-  - Ruhig: Ausflug zum See: zu Fuß, mit dem Rad oder mit dem Bus? Das Kind wählt einen Rechenweg und geht ihn; danach liegen alle Wege nebeneinander auf der Karte.
-  - Sanft: Die Brücke ist gesperrt. Es gibt einen anderen Weg. Welcher hat weniger Schritte?
-  - Abenteuer: Über mehrere Runden quer durchs Land zu Timos Tante: Bahn, Fähre, Seilbahn. An jeder Station wählt das Kind neu. Die Fähre legt im Nebel ab, das Horn tutet, drüben scheint die Sonne.
 - Stimme: mittel.
 - Figuren: Lena zeigt vor; Timo wundert sich, dass der kurze Weg nicht der erste war. Die Runde wählt manchmal
   selbst verschiedene Wege nebeneinander (zeigt: viele Wege sind gleichwertig).
@@ -856,12 +691,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Schriftlich rechnen ist stellenweise rechnen mit Tauschen. Das Markenspiel ist dafür gebaut, und
   die drei häufigsten Fehlerbilder der Kl. 3 entstehen genau an den Tauschstellen.
 - Bewusst nicht drin: schriftlich-mal-* → M39 (andere Tauschlogik).
-- Heimatwelt: Wie Kleidung hergestellt wird (`kleidung`)
-  - Sachgrund: In der Kleiderfabrik liegen Knöpfe einzeln, auf Karten zu 10 und in Schachteln zu 100; schriftliches Rechnen ist Lagerarbeit.
-  - Rahmen: Werkstatt · Spannung aus: Lücke
-  - Ruhig: Im Lager der Schneiderei: Knöpfe einzeln, auf Karten zu zehn, in Schachteln zu hundert. Jede Rechnung packt einen Auftrag.
-  - Sanft: Für einen Auftrag reichen die einzelnen Knöpfe nicht. Eine Karte muss aufgemacht werden.
-  - Abenteuer: Kostüme fürs Stadttheater über mehrere Runden: Vom Stoffballen bis zur Premiere rechnet die Runde Knöpfe, Borten und Meter. Am Premierenabend fehlt ein Kostüm. Die Schauspielerin hat es schon an.
 - Stimme: wenig.
 - Figuren: Ela zeigt vor (tauscht, vergisst einmal die kleine Ziffer, findet es an der vollen Spalte); Kofi wundert
   sich über die leere Null-Spalte.
@@ -886,13 +715,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Zählen in Schritten und Zahlenfolgen sind beide „gleiche Sprünge“. Die Sprungweite als Länge
   macht die Regel sichtbar.
 - Bewusst nicht drin: zweierreihe usw. → M37 (Einmaleins auf der Perlenkette).
-- Heimatwelt: Woche, Monat, Jahr (`jahreskreis`)
-  - Sachgrund: Eine Woche hat sieben Tage; jeder Montag liegt sieben weiter (1, 8, 15, 22): Siebenersprünge im Kalender.
-  - Sache wächst mit: Kl. 1: Wochentage und Siebenersprünge im Monat. Kl. 3: Sprünge über das Jahr, Schaltjahr, wie oft etwas im Jahr vorkommt.
-  - Rahmen: Versorgen · Spannung aus: Lücke
-  - Ruhig: Der Gießdienst kommt jeden Montag. Das Kind setzt die Sprünge im Kalender fort; jeder Sprung markiert den nächsten Montag.
-  - Sanft: Ein Kalenderblatt ist herausgefallen. Welcher Montag fehlt? Die Folge verrät es.
-  - Abenteuer: Die Runde plant über mehrere Runden ein ganzes Gartenjahr: alle sieben Tage gießen, alle vierzehn mähen, alle dreißig umgraben. Fallen zwei Sprünge auf denselben Tag, läutet die Gartenglocke. Am Ende des Jahres ist Erntefest.
 - Stimme: wenig.
 - Figuren: Timo zeigt vor; Ela wundert sich über einen zu langen Sprung.
 - Regal-Material: Karte mit drei Bögen (neu).
@@ -915,12 +737,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Operative Päckchen leben vom Vergleich benachbarter Aufgaben. Pfeile und wachsende Treppe machen
   den Vergleich zur Handlung.
 - Bewusst nicht drin: vermutung-testen → M33 (Begründen über das Päckchen hinaus).
-- Heimatwelt: Türme, die fest stehen (`tuerme-bauen`)
-  - Sachgrund: Treppen wachsen regelmäßig: jede Stufe ein Würfel mehr; Päckchen mit Muster sind solche Treppen.
-  - Rahmen: Bauen · Spannung aus: Durcheinander
-  - Ruhig: Eine Treppe am Turm: Jede Zeile des Päckchens setzt eine Stufe, immer ein Würfel mehr.
-  - Sanft: Die Treppe hat einen Knick. Welche Aufgabe stört das Muster? Herausgenommen, findet sie ihren Platz.
-  - Abenteuer: Ein Aussichtsturm über mehrere Runden: Mit jedem Päckchen wächst die Treppe ein Stockwerk. Ganz oben fehlen drei Würfel. Kofi hat sie schon als Geländer verbaut. Von dort sieht man bis zum Fluss.
 - Stimme: mittel.
 - Figuren: Kofi zeigt vor; Lena wundert sich über die Stufe, die nicht passt.
 - Regal-Material: Karte mit Treppe (neu).
@@ -944,13 +760,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Rechenketten und Rückwärtsrechnen sind dieselbe Kette in zwei Richtungen; Sachaufgaben „rückwärts“
   sind Ketten mit Geschichte.
 - Bewusst nicht drin: zahlenmauer-* → M30.
-- Heimatwelt: Der Weg des Wassers (`wasserkreislauf`)
-  - Sachgrund: Ein Bach wird auf seinem Weg zum Meer größer: Jeder Zufluss bringt Wasser dazu, jede Ableitung nimmt etwas weg. Die Stationen hintereinander sind die Maschinenkette; rückwärts geht es zur Quelle.
-  - Sache wächst mit: Kl. 1–2: Bach, Zufluss, See. Kl. 3–4: der ganze Weg des Wassers (verdunsten, Wolke, Regen, Quelle, Fluss, Meer).
-  - Rahmen: Forschen · Spannung aus: Rätsel
-  - Ruhig: Die Runde baut am Sandtisch einen Bachlauf mit Zuflüssen. Jede Station verändert die Wassermenge; kommt unten die richtige Menge im See an, läuft das Wasser.
-  - Sanft: Unten kommt weniger an als gedacht. Welche Station ist anders eingestellt? Rückwärts gerechnet findet man sie.
-  - Abenteuer: Von der Mündung zur Quelle, über mehrere Runden bachaufwärts: An jedem Zufluss rechnet die Runde rückwärts. Ganz oben gluckst es unter einem Stein. Dort kommt das Wasser aus dem Berg.
 - Stimme: mittel.
 - Figuren: Lena zeigt vor; Timo wundert sich, warum rückwärts aus plus minus wird. Gäste: die Müllerin.
 - Regal-Material: Karte mit Pfeil und Kasten (neu).
@@ -975,13 +784,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Alle Mauerthemen von Kl. 1 bis 4 (rechnen, rückwärts, Ziel, Mittelstein, Unbekannte, eigene
   Mauer) sind dieselbe Mauer. Der Mittelstein zählt doppelt: sichtbar, weil er zwei Steine stützt.
 - Bewusst nicht drin: rechendreieck-* → M31 (andere Struktur).
-- Heimatwelt: Burg, Kloster, Schloss (`burg-kloster-schloss`)
-  - Sachgrund: Burgmauern stehen fest, weil Steine versetzt aufeinander lasten; die Zahlenmauer ist eine solche Mauer.
-  - Sache wächst mit: Kl. 1–2: Mauer, Turm, Tor. Kl. 3–4: wie Burgen geplant und über Jahrzehnte gebaut wurden, Mauerstärken und Höhen als große Zahlen.
-  - Rahmen: Bauen · Spannung aus: Rätsel
-  - Ruhig: Die Burgmauer wird ausgebessert. Jeder Stein trägt die zwei darunter; passt er, lässt er sich verfugen.
-  - Sanft: Für die Lücke oben gibt es nur einen bestimmten Deckstein. Welche Grundsteine braucht es darunter?
-  - Abenteuer: Über mehrere Runden vom Tor bis zum Turm: Hinter einer Mauer klingt es hohl. Stein für Stein kommt eine Nische frei. Darin steht ein Krug mit Murmeln, die Kinder vor langer Zeit versteckt haben.
 - Stimme: wenig.
 - Figuren: Timo zeigt vor; Ela wundert sich, dass sich oben zwei ändert, wenn sie den Mittelstein um eins erhöht.
 - Regal-Material: Karte mit drei Steinen als kleine Mauer (neu).
@@ -1004,13 +806,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Rechendreiecke sind die Struktur, in der jedes Feld zu zwei Summen gehört. Rückwärts und
   „unmöglich“ folgen genau aus dieser Struktur.
 - Bewusst nicht drin: zahlenmauer-* → M30.
-- Heimatwelt: Brücken, die tragen (`bruecken`)
-  - Sachgrund: Dreiecke machen Brücken fest (Fachwerk); im Rechendreieck tragen die Ecken zusammen die Seite.
-  - Sache wächst mit: Kl. 1: Ein Viereck aus Stäben wackelt, ein Dreieck nicht. Kl. 3: Last, Stützen und Brückenarten.
-  - Rahmen: Bauen · Spannung aus: Vorhersage
-  - Ruhig: Eine Fachwerkbrücke über den Bach: Jedes gelöste Dreieck wird ein Feld der Brücke. Ist sie fertig, rollt der Bollerwagen hinüber.
-  - Sanft: Die Brücke liegt noch am Boden und hängt in der Mitte durch. Ein Dreieck fehlt; eingesetzt, steht sie gerade.
-  - Abenteuer: Brückenbau über mehrere Runden: erst ein Steg, dann eine Brücke für den Bollerwagen, zuletzt eine für das Lastenrad. Vor jeder Probe wird vorhergesagt: Hält sie? Getestet wird mit Sandsäcken, nie mit Kindern.
 - Stimme: wenig.
 - Figuren: Ela zeigt vor; Kofi wundert sich über ein Dreieck, das nicht aufgeht.
 - Regal-Material: Karte mit Dreieck (neu).
@@ -1031,12 +826,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Weitere Zugänge: –
 - Warum perfekt: Beide Themen sind am Zauberquadrat definiert; eine andere Handlung gibt es dafür nicht.
 - Bewusst nicht drin: –
-- Heimatwelt: Jahr, Jahrzehnt, Jahrhundert (`jahrhunderte`)
-  - Sachgrund: Zauberquadrate sind alt: Albrecht Dürer stach 1514 eines, die Jahreszahl steht darin; Jahrhunderte zählen.
-  - Rahmen: Zeitreise · Spannung aus: Rätsel · Fähigkeit: in die Zeit reisen
-  - Ruhig: Zeitreise in eine Werkstatt im Jahr 1514: Auf einem Bild von Albrecht Dürer steht ein Zahlenquadrat. Jedes ergänzte Feld macht das Bild schärfer; unten in der Mitte steht die Jahreszahl.
-  - Sanft: Ein Fleck auf dem Blatt verdeckt zwei Zahlen. Die Summen der Reihen verraten sie.
-  - Abenteuer: Über mehrere Runden durch die Jahrhunderte: ein Quadrat aus China, eines aus Indien, eines von Dürer. Jedes öffnet eine Schublade im Zeitschrank. In der letzten liegt ein leeres Quadrat für das eigene.
 - Stimme: wenig.
 - Figuren: Kofi zeigt vor; Lena wundert sich über eine Spalte mit anderer Summe.
 - Regal-Material: Karte mit 3 × 3 Gitter (neu).
@@ -1062,13 +851,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Prüfen, Belegen, Gegenbeispiel, Fehler finden: immer derselbe Zettel und dieselbe Probe am
   Material. So wird Begründen eine Handlung und kein Aufsatz.
 - Bewusst nicht drin: mittelstein-begruenden → M30 (Begründung an der Mauer selbst).
-- Heimatwelt: Was Magnete anziehen (`magnete`)
-  - Sachgrund: Magnete ziehen Eisen an, aber nicht jedes Metall (Alu, Kupfer): Vermutungen prüfen und Gegenbeispiele finden.
-  - Sache wächst mit: Kl. 1–2: Was hält der Magnet, was nicht? Kl. 3–4: Pole, Anziehen und Abstoßen, der Kompass.
-  - Rahmen: Forschen · Spannung aus: Rätsel
-  - Ruhig: Lenas Forscherheft: „Alle Metalle hängen am Magneten.“ Jede Behauptung wird mit Material geprüft und kommt in das Fach immer, manchmal oder nie.
-  - Sanft: Im Briefkasten liegt ein Zettel mit einer seltsamen Behauptung, ohne Namen. Stimmt sie? Geprüft, zeigt sich auch, wer sie geschrieben hat: Timo, zum Testen.
-  - Abenteuer: Rätsel auf dem Dachboden über mehrere Runden: eine Kiste voller Zettel, jeder behauptet etwas. Was stimmt, führt zur nächsten Kiste. Die letzte geht nicht auf: Ein Magnet hält den Deckel von innen.
 - Stimme: **viel** (jede Behauptung ein eigener Satz; als Satzbank).
 - Figuren: Lena zeigt vor; Timo wundert sich über eine Behauptung, die „manchmal“ stimmt. Fehlerhafte Rechnungen
   stammen von einem Kind der Runde, das zögert und dann selbst nachprüft (Bewältigungsmodell, F6), nie als
@@ -1095,13 +877,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Mathe-Sprache verstehen heißt: Worte bewirken eine Rechnung. Wenn eine Figur die Worte ausführt,
   zeigt die Sache, ob die Erklärung trägt.
 - Bewusst nicht drin: rechenweg-waehlen-bis-100 → M25.
-- Heimatwelt: Wie Erfindungen sich verändern (`erfindungen`)
-  - Sachgrund: Erfindungen werden nach Anleitungen gebaut und verbessert (Rad, Laufrad, Fahrrad); Fachwörter und Reihenfolge der Anleitung sind der Lernkern.
-  - Sache wächst mit: Kl. 1–2: Rad, Laufrad, Fahrrad. Kl. 3–4: wie eine Erfindung die nächste möglich macht (Rad, Zahnrad, Uhr, Motor).
-  - Rahmen: Werkstatt · Spannung aus: Durcheinander · Fähigkeit: in die Zeit reisen
-  - Ruhig: Im Erfinderzimmer wird ein Laufrad nach Anleitung gebaut. Jeder richtig geordnete Schritt baut ein Teil an; am Ende rollt es.
-  - Sanft: Die Anleitung ist zerrissen, zwei Schritte sind vertauscht. Ela baut genau, was dasteht: Das Rad sitzt am Lenker. Neu geordnet, passt es.
-  - Abenteuer: Mit der Zeituhr über mehrere Runden: Rad, Laufrad, Hochrad, Fahrrad. Jede Erfindung braucht ihre Anleitung in der richtigen Reihenfolge. Am Ende fährt die Runde auf dem Hof (Helm auf).
 - Stimme: **viel** (Karten- und Lückensätze, Fachwörter).
 - Figuren: Kofi zeigt vor; das ausführende Kind wechselt reihum. Es wundert sich, wenn die Erklärung etwas anderes
   ergibt.
@@ -1128,13 +903,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Gleich große Gruppen bilden ist die Grundhandlung des Malnehmens und des Aufteilens. Der Rest und
   seine Deutung in der Sache entstehen genau hier.
 - Bewusst nicht drin: gerecht-verteilen → M38 (Verteilen ist die andere Handlung: reihum austeilen).
-- Heimatwelt: Tiere auf Wiese und Hecke (`wiese-und-hecke`)
-  - Sachgrund: Käfer haben sechs Beine, Spinnen acht: gleich große Gruppen beim Zählen in der Hecke.
-  - Sache wächst mit: Kl. 2: Beine zählen in Gruppen. Kl. 3: Wer lebt wovon in der Hecke, Bestände über das Jahr.
-  - Rahmen: Forschen · Spannung aus: Lücke · Fähigkeit: schrumpfen
-  - Ruhig: Hecken-Zählung: Käfer haben sechs Beine, Spinnen acht. Die Bildkärtchen kommen in Tütchen zu gleich vielen Beinen, jedes Tütchen ins Zählheft.
-  - Sanft: Ein Kärtchen bleibt übrig: ein Tier mit vierzehn Beinen. Die Assel braucht eine eigene Tüte.
-  - Abenteuer: Die Runde schrumpft und wandert über mehrere Runden durch die Hecke: an der Ameisenstraße entlang, unter einem Spinnennetz hindurch, an einem Schneckenhaus vorbei. Gezählt wird in Gruppen. Am Ende werden alle wieder groß und hängen das Zählblatt auf.
 - Stimme: mittel.
 - Figuren: Ela zeigt vor; Kofi wundert sich über den Rest.
 - Regal-Material: Karte mit drei Gruppen (neu) oder Perlenstab k.
@@ -1159,13 +927,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Alle Ableitungen beim Malnehmen sind Veränderungen eines Rechtecks. Halbschriftlich mal ist
   derselbe Schnitt mit größeren Zahlen; das bündelt Kl. 2 bis 4.
 - Bewusst nicht drin: einmaleins-gemischt → M37 (Abruf).
-- Heimatwelt: Das Klassenzimmer von oben (`von-oben`)
-  - Sachgrund: Von oben sieht man die Tische im Klassenzimmer in Reihen und Spalten: das Punktefeld.
-  - Sache wächst mit: Kl. 2: Reihen und Spalten im Klassenzimmer. Kl. 3–4: Draufsichten von Schule, Parkplatz und Feld, Felder mit Hunderten von Plätzen.
-  - Rahmen: Entdecken · Spannung aus: Verwandlung · Fähigkeit: riesig werden
-  - Ruhig: Das Klassenzimmer von oben: Tische in Reihen. Jede Malaufgabe stellt eine Tischgruppe; ist der Raum fertig, kommen die anderen Kinder herein.
-  - Sanft: Vier Kinder kommen dazu. Eine Reihe mehr oder eine Spalte mehr? Die Nachbaraufgabe zeigt es.
-  - Abenteuer: Mit den Riesenstiefeln schaut die Runde über mehrere Runden von oben auf Schule, Parkplatz, Obstwiese und Stadion: überall Reihen. Am Ende liegt da ein Feld, das von oben ein Bild ergibt. Bäuerin Aylin hat ein Muster gesät.
 - Stimme: wenig.
 - Figuren: Lena zeigt vor; Timo wundert sich, dass das gedrehte Feld gleich viele hat.
 - Regal-Material: Karte mit Punktefeld (neu).
@@ -1190,13 +951,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Das Spec begründet den Abruf mit Kernaufgaben zuerst; Teilen ist dieselbe Kette mit gesuchter
   Sprungzahl, Teiler und Vielfache sind die Pfeilchen verschiedener Ketten.
 - Bewusst nicht drin: nachbaraufgabe-mal → M36 (Ableiten am Feld; hier nur als Hilfe).
-- Heimatwelt: Vorrat und Packungen (`vorrat-und-packungen`) **(Christian, 2026-11-14: statt „Tiere auf Wiese und Hecke“; die Welt trug nur die Reihen 2, 4, 6, 8)**
-  - Sachgrund: Dinge kommen in festen Gruppen, jede Reihe hat ihre Packung (Schuhpaar 2, Ballröhre 3, Gedeck 4, Brötchentüte 5, Eierkarton 6, Wochenschachtel 7, Stiftebox 8, Muffinkarton 9, Zehn-Cent-Münze 10). Eine Packung ist ein Stäbchen, viele gleiche Packungen sind die Perlenkette: Einmaleinsreihen.
-  - Sache wächst mit: Kl. 2: Packungen einräumen und zählen. Kl. 3–4: Lieferungen und Vorräte für Küche und Schulfest, Teiler und Vielfache auf den Packzetteln.
-  - Rahmen: Versorgen · Spannung aus: Rätsel
-  - Ruhig: Der Vorratskorb wird gefüllt: Jede Malaufgabe bringt so viele Packungen in den Korb, wie die erste Zahl sagt; jeder Hüpfer auf der Kette ist eine Packung, die Zeile kommt auf die Vorratsliste.
-  - Sanft: Auf der Vorratsliste ist eine Zeile verwischt. Die Kette darunter zeigt, wohin sie gehört. Kl. 3–4: Ein Karton hat keinen Aufkleber, nur „48“; auf welchen Ketten hat die 48 ein Pfeilchen?
-  - Abenteuer: Vorrat fürs Schulfest über mehrere Runden: Lieferung für Küche, Bäckerei, Schreibwaren. Es klopft am Lagertor, der Lieferwagen steht davor und fährt weiter. Am Ende steht das Regal der Schulküche voll.
 - Stimme: mittel (Ergebnisse bis 100).
 - Figuren: Timo zeigt vor (trägt Packungen auf dem Schoß). Die Figur des Spiels ist der Einkaufskorb (kein Kind der Runde, `grundsaetze-bilder.md` §16); die hüpfende Figur entfällt, es hüpft das Zählpfeilchen.
 - Regal-Material: Perlenkette n bzw. Perlenstab n (passt).
@@ -1221,13 +975,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Verteilen ist eine Handlung, und schriftliches Teilen ist dieselbe Handlung stellenweise. So
   bündelt ein Spiel Kl. 2 bis 4 statt drei Spiele.
 - Bewusst nicht drin: aufteilen-in-gruppen → M35, geteilt-alle-reihen → M37 (Abruf).
-- Heimatwelt: Gerecht teilen und abwechseln (`gerecht-teilen`)
-  - Sachgrund: Gerecht teilen ist Lernkern der Welt: gleich viel für jeden, der Rest wird abgewechselt.
-  - Sache wächst mit: Kl. 2: reihum verteilen am Tisch. Kl. 3–4: große Mengen für Klasse und Schule; was „gerecht“ heißt, wenn es nicht aufgeht (Rest teilen, abwechseln, losen).
-  - Rahmen: Miteinander · Spannung aus: Hilfe
-  - Ruhig: Picknick: Kekse und Trauben reihum auf alle Teller. Hat jeder gleich viel, wird gegessen; der Rest bleibt in der Mitte.
-  - Sanft: Zwei Gäste kommen später dazu. Neu verteilt: Wie viel bekommt jetzt jeder, was bleibt?
-  - Abenteuer: Das Schulfest über mehrere Runden: erst Kekse für die Runde, dann Brezen für die Klasse, dann Lose für die ganze Schule. Was nicht aufgeht, wird getauscht. Am Ende bleibt eine Breze übrig; sie wird in vier Teile geschnitten.
 - Stimme: wenig.
 - Figuren: Kofi zeigt vor; Lena wundert sich über den Rest. Die Kinder der Runde sitzen manchmal selbst an den
   Tellern (keiner bekommt mehr).
@@ -1251,12 +998,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Schriftlich mal ist stellenweises Vervielfachen mit Tauschen; dasselbe Markenspiel wie M26, aber
   mit eigener Logik (Übertrag aus Produkten), deshalb ein eigenes Spiel.
 - Bewusst nicht drin: halbschriftlich-mal → M36.
-- Heimatwelt: Wie Kleidung hergestellt wird (`kleidung`)
-  - Sachgrund: Kleidung wird in großen Mengen hergestellt (Knöpfe je Hemd, Hemden je Karton); schriftlich malnehmen.
-  - Rahmen: Werkstatt · Spannung aus: Hilfe
-  - Ruhig: Eine Großbestellung in der Schneiderei: Hemden für einen Chor, jedes mit sieben Knöpfen. Jede Rechnung packt einen Karton.
-  - Sanft: Der Chor hat Verstärkung bekommen: zwölf Hemden mehr. Wie viele Knöpfe sind es jetzt?
-  - Abenteuer: Vom Schaf zum Pullover über mehrere Runden: Schur, Spinnerei, Strickerei, Laden. An jeder Station wird im Großen gerechnet. Am Ende trägt die Runde Mützen aus der Wolle, die sie begleitet hat.
 - Stimme: wenig.
 - Figuren: Ela zeigt vor; Kofi wundert sich über die leere Zeile bei der Null.
 - Regal-Material: Karte mit Marken und Malzeichen (neu).
@@ -1283,12 +1024,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Alle Themen fragen: Welche Angaben braucht diese Frage? Das Sortieren der Kärtchen ist genau diese
   Entscheidung.
 - Bewusst nicht drin: sachaufgabe-skizze → M41.
-- Heimatwelt: Wer an meinem Brot mitgearbeitet hat (`wer-macht-mein-brot`)
-  - Sachgrund: Vom Korn zum Brot arbeiten viele mit (Bäuerin, Müller, Bäckerin); jede Station stellt Rechenfragen.
-  - Rahmen: Werkstatt · Spannung aus: Lücke
-  - Ruhig: Ein Morgen in der Bäckerei: Die Bäckerin braucht Antworten (wie viele Brezen, wie viel Mehl). Das Kind findet die Frage und nimmt nur die Zahlen, die es braucht; dann wird gebacken.
-  - Sanft: Eine Angabe fehlt: Niemand weiß, wie viele Kinder zum Fest kommen. Das Kind tippt „geht nicht“, und Kofi fragt nach.
-  - Abenteuer: Dem Brot hinterher, über mehrere Runden rückwärts: Bäckerei, Mühle, Feld. An jeder Station gibt es eine Frage mit zu vielen Zahlen. In der Mühle rumpelt es: Das Mühlrad läuft an, und die Müllerin macht Licht.
 - Stimme: **viel** (jede Situation eigene Sätze).
 - Figuren: Lena zeigt vor; Timo wundert sich über die Frage nach dem Alter. Gäste: die Bäckerin Aylin, der Hirte.
 - Regal-Material: Karte mit Fragezeichen (neu).
@@ -1312,12 +1047,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Eine Skizze ist ein Modell der Situation; wenn sie die Geschichte nachspielt, prüft die Sache das
   Modell. Zaunpfahl, Zwei-Schritt-Aufgaben und die Wahl des Werkzeugs gehören dazu.
 - Bewusst nicht drin: tabelle-beim-probieren → M55.
-- Heimatwelt: Ackerbau, Hausbau, Handwerk (`ackerbau-hausbau`)
-  - Sachgrund: Ein Acker oder Haus wird mit Maßen geplant; die Skizze verhindert Fehler wie die Zaunpfahl-Falle.
-  - Rahmen: Bauen · Spannung aus: Vorhersage · Fähigkeit: in die Zeit reisen
-  - Ruhig: Ein Zaun für den Gemüseacker. Die Skizze zeigt, wie viele Pfähle es braucht; dann wird gebaut, und man sieht, ob sie reichen.
-  - Sanft: Am Ende fehlt ein Pfahl. Die Skizze wird verbessert (ein Pfahl mehr als Felder), der Zaun geht zu.
-  - Abenteuer: Mit der Zeituhr hilft die Runde über mehrere Runden beim Hausbau wie früher: Balken, Gefache, Dach. Jede Skizze wird gebaut. Beim Richtfest hängt ein Kranz am Giebel.
 - Stimme: viel.
 - Figuren: Timo zeigt vor; Ela wundert sich über das offene Zaunende.
 - Regal-Material: Karte mit Skizze (neu).
@@ -1341,12 +1070,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Der Überschlag ist ein Vorhersagen (L2) mit gerundeten Zahlen; der Bereich auf dem Strahl macht
   ihn prüfbar.
 - Bewusst nicht drin: runden-zehner-hunderter → M11.
-- Heimatwelt: Werbung und was sie will (`werbung`)
-  - Sachgrund: Werbung zeigt Preise so, dass sie klein wirken; überschlagen zeigt, ob das Geld reicht (sachlich, ohne Haltung).
-  - Rahmen: Werkstatt · Spannung aus: Vorhersage
-  - Ruhig: Einkauf fürs Klassenfest mit festem Geld: Prospekt lesen, überschlagen, dann rechnen. Liegt das Ergebnis im Bereich, kommt die Ware in den Korb.
-  - Sanft: Im Prospekt steht „nur 1,99“. Sechs Stück: Reicht das Geld? Der Überschlag zeigt: knapp.
-  - Abenteuer: Ein eigener Marktstand über mehrere Runden: Die Klasse verkauft selbst und schreibt Preisschilder. Wie wirken 2 Euro und 1,99 Euro? Am Ende wird die Kasse erst überschlagen, dann gezählt. Es reicht für den Ausflug. (Sachlich, ohne Haltung zum Kaufen.)
 - Stimme: mittel.
 - Figuren: Kofi zeigt vor; Lena wundert sich über ein Ergebnis außerhalb.
 - Regal-Material: Karte mit „≈“ (neu).
@@ -1371,12 +1094,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Geld legen, wechseln und Rückgeld (Kaufmannsmethode) sind alle „Betrag mit Münzen legen“. Das ist
   die echte Handlung an einer Kasse.
 - Bewusst nicht drin: menge-und-preis → M52.
-- Heimatwelt: Was in Lebensmitteln steckt (`was-im-essen-steckt`)
-  - Sachgrund: Lebensmittel haben Preise und Etiketten mit Inhaltsstoffen; einkaufen heißt Geld legen.
-  - Rahmen: Werkstatt · Spannung aus: Hilfe
-  - Ruhig: Frühstückseinkauf am Kiosk. Jeder gelegte Betrag bringt die Ware in den Korb; das Etikett zeigt, was darin steckt.
-  - Sanft: Eine Kundin zahlt mit einem großen Schein. Das Kind gibt Rückgeld, indem es vom Preis aus hochlegt.
-  - Abenteuer: Wochenmarkt über mehrere Runden: Für ein Rezept braucht die Runde Zutaten von fünf Ständen und hat nur einen Schein. An einem Stand gibt es etwas Unbekanntes zum Probieren. Es ist Kohlrabi.
 - Stimme: mittel.
 - Figuren: Lena zeigt vor; Timo wundert sich über die übrige Münze. Gäste: Verkäuferin, Kunde.
 - Regal-Material: Münze (neu).
@@ -1400,13 +1117,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Länge vergleichen, messen und schätzen ist eine Handlung mit dem Lineal; Kl. 3 erweitert nur die
   Einheiten.
 - Bewusst nicht drin: kommaschreibweise-groessen → M08.
-- Heimatwelt: Wachsen und sich verändern (`wachsen`)
-  - Sachgrund: Kinder wachsen; man misst die Körpergröße in Zentimetern an der Messlatte.
-  - Sache wächst mit: Kl. 1–2: sich an der Messlatte messen, wer ist gewachsen. Kl. 3: wie Körper wachsen (Knochen, Zähne), Wachstum in Tabellen.
-  - Rahmen: Forschen · Spannung aus: Vorhersage
-  - Ruhig: Die Messlatte am Türrahmen: Jedes Kind wird gemessen und mit dem Strich vom letzten Jahr verglichen.
-  - Sanft: Ein Strich ist verwischt, und Timo wird im Sitzen gemessen. Wie misst man so, dass es stimmt? Bei der Null anlegen.
-  - Abenteuer: Was wächst wie schnell? Über mehrere Runden misst die Runde Bohnenranke, Fingernagel, Welpe und Sonnenblume und sagt vorher, wer vorn liegt. Am Ende ist die Sonnenblume größer als alle Kinder.
 - Stimme: wenig.
 - Figuren: Ela zeigt vor; Kofi wundert sich über das Lineal, das bei der 1 anfängt.
 - Regal-Material: kleines Lineal (neu).
@@ -1429,12 +1139,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Gewicht versteht man durch Abwiegen mit Bezugsgewichten; Schätzen vorher macht es zu einem
   Vorhersagen.
 - Bewusst nicht drin: waage-raetsel → M10.
-- Heimatwelt: Steine, Sand und Boden (`steine-boden`)
-  - Sachgrund: Steine, Sand und Erde sind verschieden schwer; Gramm und Kilogramm sind ihre Maße.
-  - Rahmen: Forschen · Spannung aus: Vorhersage
-  - Ruhig: Lenas Steinsammlung wird gewogen: erst schätzen, dann ausgleichen. Jeder gewogene Stein kommt mit Schild in sein Fach.
-  - Sanft: Zwei Steine sind gleich groß, aber einer ist viel leichter. Die Waage zeigt es: Bimsstein ist voller Löcher.
-  - Abenteuer: Im Steinbruch über mehrere Runden, mit Helm und Führung: vom Kiesel bis zum Block, der so viel wiegt wie ein Auto. In einem aufgeschlagenen Stein glitzert es: Kristalle (Sachbild).
 - Stimme: wenig.
 - Figuren: Lena zeigt vor; Timo wundert sich, dass das große Kissen leichter ist als der kleine Stein. (Timo mag
   Abwiegen, zeigt hier aber bewusst nicht vor.)
@@ -1456,12 +1160,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Weitere Zugänge: –
 - Warum perfekt: Liter und Bruchteile versteht man beim Umfüllen; ½ l = 500 ml ist eine Beobachtung.
 - Bewusst nicht drin: uhr-viertel → M47 (Viertel an der Uhr).
-- Heimatwelt: Wasser sparen und sauber halten (`wasser-sauber`)
-  - Sachgrund: Wasser wird in Litern gemessen; wer weiß, wie viel ein Eimer und eine Gießkanne fasst, kann sparen.
-  - Rahmen: Versorgen · Spannung aus: Vorhersage
-  - Ruhig: Regenwasser aus der Tonne in die Gießkannen: Jedes Beet braucht seine Menge. Stimmt sie, wird gegossen.
-  - Sanft: Die Tonne ist fast leer. Reicht es für alle Beete? Erst schätzen, dann umfüllen.
-  - Abenteuer: Wassermeister über mehrere Runden: Die Runde misst, wie viel Wasser ein Tag braucht (Hände waschen, Blumen, Trinken), und baut eine Regenrinne zur Tonne. Nach dem Regen wird gemessen, wie viel zusammengekommen ist. (Sachlich, ohne Haltung.)
 - Stimme: wenig.
 - Figuren: Kofi zeigt vor; Lena wundert sich über das übergelaufene Glas (gelassen, ohne Ärger).
 - Regal-Material: Messbecher (neu).
@@ -1485,12 +1183,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Weitere Zugänge: bruchteile-bei-groessen (M46), stunde-und-minute (M48), zeitspannen (M48)
 - Warum perfekt: Uhrzeiten von voll bis minutengenau sind dieselbe Uhr mit feinerer Ablesung.
 - Bewusst nicht drin: zeitspannen → M48.
-- Heimatwelt: Tag und Nacht, Sonne und Erde (`tag-und-nacht`)
-  - Sachgrund: Die Sonne steht morgens tief und mittags hoch; die Uhr teilt Tag und Nacht in Stunden.
-  - Rahmen: Forschen · Spannung aus: Rätsel · Fähigkeit: schweben
-  - Ruhig: Ein Tag mit der Sonne: Jede gestellte Uhrzeit lässt die Sonne an ihren Platz wandern, vom Morgen bis zum Abend.
-  - Sanft: Die Uhr im Flur ist stehen geblieben. Der Schatten am Stab im Hof zeigt, wie spät es ist; das Kind stellt sie.
-  - Abenteuer: Eine Sonnenuhr über mehrere Runden: Die Runde baut sie im Hof und markiert jede volle Stunde. Dann schwebt sie mit dem Ballon so hoch, dass man sieht, wo auf der Erde gerade Nacht ist (Sachbild).
 - Stimme: mittel (Uhrzeiten in zwei Sprechweisen).
 - Figuren: Timo zeigt vor; Ela wundert sich, warum der kleine Zeiger nicht genau auf der 3 steht.
 - Regal-Material: kleine Uhr (neu).
@@ -1512,13 +1204,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Weitere Zugänge: zeitspannen-ueber-tage (M49), fahrplaene (M51)
 - Warum perfekt: Dauer ist ein Abstand auf einer Linie; dieselbe Handlung wie der Rechenstrich, mit 60 statt 100.
 - Bewusst nicht drin: zeitspannen-ueber-tage → M49 (Tage im Kalender), fahrplaene → M51.
-- Heimatwelt: Was man bei Gewitter tut (`gewitter`)
-  - Sachgrund: Nach dem letzten Donner wartet man eine halbe Stunde, bevor man wieder hinausgeht. Wer die Sekunden zwischen Blitz und Donner zählt, merkt, ob das Gewitter näher kommt oder wegzieht. Zeitspannen messen ist hier die Handlung.
-  - Sache wächst mit: Kl. 2: warten und Zeitspannen in Minuten. Kl. 3: Sekunden zählen, warum man den Donner später hört als man den Blitz sieht.
-  - Rahmen: Forschen · Spannung aus: Vorhersage
-  - Ruhig: Es regnet, die Runde ist drinnen und backt. Wie lange noch, bis der Kuchen fertig ist? Jede Zeitspanne rückt den Zeiger; am Ende wird gegessen.
-  - Sanft: In der Ferne grummelt es. Die Runde wartet drinnen die halbe Stunde nach dem letzten Donner ab; das Kind rechnet, wann es wieder hinausgeht.
-  - Abenteuer: Gewitterforscher am Fenster über mehrere Runden, mit Timos Mama: Sekunden zählen zwischen Blitz und Donner. Werden es mehr, zieht das Gewitter weg. Am Ende steht ein Regenbogen über dem Hof. (Donner leise und angekündigt, kein Schreck.)
 - Stimme: mittel.
 - Figuren: Ela zeigt vor; Kofi wundert sich über 60 statt 100.
 - Regal-Material: Karte mit Zeitbogen (neu).
@@ -1540,13 +1225,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Weitere Zugänge: –
 - Warum perfekt: Wochentage, Datum und Tage zählen sind dieselben Kalenderhandlungen.
 - Bewusst nicht drin: zeitspannen-stunden-minuten → M48.
-- Heimatwelt: Woche, Monat, Jahr (`jahreskreis`)
-  - Sachgrund: Woche, Monat und Jahr bilden den Jahreskreis; der Kalender zeigt, wie viele Tage bis wann.
-  - Sache wächst mit: Kl. 1–2: Tage, Wochen, Geburtstage im Monat. Kl. 4: Jahresplanung, Schaltjahr, Tage zwischen zwei Daten.
-  - Rahmen: Fest · Spannung aus: Rätsel
-  - Ruhig: Der Klassenkalender: Geburtstage, Ausflug, Ferien. Jeder gefundene Tag bekommt sein Bild; ist der Monat voll, wird umgeblättert.
-  - Sanft: Ein Zettel ist vom Kalender gefallen: „in drei Tagen ist Wandertag“. An welchen Tag gehört er?
-  - Abenteuer: Geheimer Freund über mehrere Runden: Jedes Kind der Klasse bereitet für ein anderes eine kleine Überraschung vor, im Kalender stehen nur Hinweise („zwei Wochen nach dem Ausflug“). Am letzten Tag wird aufgelöst.
 - Stimme: mittel (Wochentage, Monate, Daten).
 - Figuren: Timo zeigt vor; Lena wundert sich über eine Ernte vor der Aussaat.
 - Regal-Material: Kalenderblatt (neu).
@@ -1568,13 +1246,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Weitere Zugänge: tabellen-schaubilder-lesen (M51)
 - Warum perfekt: Daten erheben und darstellen ist eine Handlungskette von Zählen zu Darstellung; das Kind baut sie.
 - Bewusst nicht drin: diagramme-kritisch-lesen → M51.
-- Heimatwelt: Mehrheit entscheidet: Klassensprecherin oder Klassensprecher (`mehrheit`)
-  - Sachgrund: Bei einer Wahl zählt man Stimmen mit Strichliste und zeigt sie im Bilddiagramm; die Mehrheit entscheidet.
-  - Sache wächst mit: Kl. 1–2: Abstimmen in der Runde (Lieblingsobst, welches Spiel). Kl. 3: Wahl der Klassensprecherin oder des Klassensprechers, Mehrheit und Stichwahl.
-  - Rahmen: Miteinander · Spannung aus: Vorhersage
-  - Ruhig: Wohin geht der Ausflug? Die Klasse stimmt ab, das Kind führt die Strichliste und baut die Säulen. Die höchste entscheidet.
-  - Sanft: Zwei Säulen sind gleich hoch. Was nun? Es gibt eine Stichwahl, das Kind zählt neu.
-  - Abenteuer: Reporter für die Schülerzeitung über mehrere Runden: Lieblingsessen, Schulwege, Haustiere. Jede Umfrage wird ein Schaubild. Bei einer stimmt die Summe nicht: Jemand hat zweimal die Hand gehoben, es wird neu gezählt.
 - Stimme: viel (Texte zum Übertragen).
 - Figuren: Lena zeigt vor; Timo wundert sich über eine zu hohe Säule. Gezählt wird nie nach Gruppen von Menschen
   (6.1 Nr. 10), nur nach neutralen Merkmalen.
@@ -1597,13 +1268,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Weitere Zugänge: tabelle-aus-text (M50), saeulendiagramm-tabelle (M50), wertetabelle (M52), passende-darstellung-waehlen (M41)
 - Warum perfekt: Ablesen ist die umgekehrte Handlung zu M50, ein eigenes Spiel nach der Regel „eine Handlung“.
 - Bewusst nicht drin: strichliste → M50.
-- Heimatwelt: Wetter beobachten und messen (`wetter-messen`)
-  - Sachgrund: Wetter misst man und schreibt es in Tabellen; Ablesen zeigt, wann es regnete oder warm war.
-  - Sache wächst mit: Kl. 2: Thermometer und Regenmesser ablesen. Kl. 3–4: Wetterkarten, Diagramme über Wochen, Schaubilder, die täuschen können.
-  - Rahmen: Forschen · Spannung aus: Vorhersage
-  - Ruhig: Die Wetterstation der Schule: Thermometer, Regenmesser, Windfahne. Jeder abgelesene Wert kommt ins Schaubild der Woche.
-  - Sanft: Der Regenmesser ist umgekippt. Aus der Tabelle der Nachbarschule lässt sich ablesen, wie viel es geregnet hat.
-  - Abenteuer: Wetterfrösche über mehrere Runden: Die Runde liest jeden Tag ab und macht aus ihren Werten die Vorhersage fürs Sportfest. Am Morgen des Festes zeigt sich, ob sie stimmt.
 - Stimme: viel.
 - Figuren: Timo zeigt vor; Ela wundert sich über die abgeschnittene Achse.
 - Regal-Material: Karte mit Tabelle (neu).
@@ -1624,13 +1288,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Weitere Zugänge: –
 - Warum perfekt: Proportionale und umgekehrt proportionale Zuordnungen sind Tabellenhandlungen.
 - Bewusst nicht drin: tabellen-preislisten → M51 (Ablesen statt Ausfüllen).
-- Heimatwelt: Haustiere und was sie brauchen (`haustiere`)
-  - Sachgrund: Haustiere brauchen jeden Tag Futter; Futtermengen über die Woche sind eine Wertetabelle (Lernkern laut Welt).
-  - Sache wächst mit: Die Welt gehört zu Kl. 1, das Spiel zu Kl. 3–4. Hier geht es deshalb um Verantwortung in Zahlen: Futterplan, Kosten im Monat, Tierheim und Pflegestelle.
-  - Rahmen: Versorgen · Spannung aus: Vorhersage
-  - Ruhig: Ferienpflege für ein Kaninchen: Wie viel Heu für einen Tag, für zwei, für die Woche? Jede Zeile der Tabelle füllt die Futterdose.
-  - Sanft: Ein zweites Kaninchen kommt dazu. Reicht der Heusack jetzt länger oder kürzer? Erst vorhersagen, dann die Tabelle.
-  - Abenteuer: Praktikum im Tierheim über mehrere Runden: Hunde, Katzen, Schildkröten, jedes Tier mit seinem Plan. Je mehr Helfer, desto schneller ist ausgeführt. Am Ende zieht ein Hund zu einer Familie, sein Futterplan geht mit.
 - Stimme: mittel.
 - Figuren: Ela zeigt vor; Kofi wundert sich, dass mehr Kinder weniger bekommen.
 - Regal-Material: Karte mit Tabelle (neu).
@@ -1653,13 +1310,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Alle Kombinatorik-Themen sind „alle Möglichkeiten finden, keine doppelt“, Kl. 1 bis 4 mit
   wachsender Ordnung.
 - Bewusst nicht drin: geordnet-probieren → M14 (Zerlegungen).
-- Heimatwelt: Was alle Menschen brauchen (`was-menschen-brauchen`)
-  - Sachgrund: Alle Menschen brauchen Essen, Wohnen und Kleidung; aus wenigen Teilen entstehen viele Möglichkeiten.
-  - Sache wächst mit: Kl. 1–2: Kleidung und Frühstück kombinieren. Kl. 3–4: Was brauchen Menschen überall (Essen, Wohnen, Kleidung, Geborgenheit), Pläne für viele.
-  - Rahmen: Versorgen · Spannung aus: Rätsel
-  - Ruhig: Packen für die Übernachtung: zwei Hosen, drei Pullis. Jede neue Kombination wird ein Bild im Plan; sind alle gefunden, geht der Koffer zu.
-  - Sanft: Kofi ist sicher, dass es noch eine gibt. Der Baum zeigt: Alle Äste sind besetzt.
-  - Abenteuer: Hüttenwoche über mehrere Runden: Wer schläft wo, wer kocht mit wem, was gibt es zum Frühstück? Jeden Tag soll es anders sein. Am letzten Abend steht ein Topf vor der Tür, den niemand gekocht hat: Die Wirtin hat Kaiserschmarrn gebracht.
 - Stimme: mittel.
 - Figuren: Kofi zeigt vor; Lena wundert sich über eine doppelte Kombination. Die Kinder der Runde ziehen sich
   selbst an (keine Jungen- oder Mädchenfarben, C5).
@@ -1684,13 +1334,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Weitere Zugänge: –
 - Warum perfekt: Zufall versteht man nur durch Vorhersagen und viele Versuche; das Säckchen ist das Standardmaterial.
 - Bewusst nicht drin: –
-- Heimatwelt: Was Luft kann (`was-luft-kann`)
-  - Sachgrund: Was Luft kann (Ballon, Fallschirm, Wind), wird erst vorhergesagt und dann ausprobiert; sicher, möglich, unmöglich.
-  - Sache wächst mit: Kl. 2: Was fliegt, was fällt? Kl. 3–4: Luft bremst und trägt (Fallschirm, Flügel), faire und unfaire Versuche.
-  - Rahmen: Forschen · Spannung aus: Vorhersage · Fähigkeit: schweben
-  - Ruhig: Flugtest im Hof: Papierflieger, Fallschirm, Feder. Erst vorhersagen (sicher, möglich, unmöglich), dann viele Male werfen; die Treffer wachsen als Säulen. (Ohne Gewinn und ohne Wettbewerb.)
-  - Sanft: Ein Windstoß trägt einen Flieger aufs Vordach. Was ist jetzt wahrscheinlicher? Der Hausmeister holt ihn mit dem Besen.
-  - Abenteuer: Flugtag über mehrere Runden: Die Runde baut Flieger um (Büroklammer vorn, Flügel breiter) und sagt vorher, was sich ändert. Zum Schluss schwebt sie am Schirm über den Hof und sieht von oben, wo die meisten gelandet sind.
 - Stimme: wenig.
 - Figuren: Timo zeigt vor; Ela wundert sich über drei blaue Kugeln hintereinander.
 - Regal-Material: Säckchen (neu).
@@ -1714,13 +1357,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Hinweise systematisch abarbeiten ist die gemeinsame Handlung; die Tabelle verhindert, dass etwas
   fehlt.
 - Bewusst nicht drin: magisches-quadrat-ergaenzen → M32.
-- Heimatwelt: Wie die Zahlen entstanden sind (`geschichte-der-zahlen`)
-  - Sachgrund: Zahlen hatten früher andere Zeichen (römische Zahlen, Kerben); Geheimschriften mit alten Zahlen entschlüsseln.
-  - Sache wächst mit: Kl. 2: Kerben, Strichlisten, römische Zahlen bis XII. Kl. 4: Zahlzeichen anderer Kulturen, Stellenwert und die Erfindung der Null.
-  - Rahmen: Spur · Spannung aus: Rätsel
-  - Ruhig: Im Heimatmuseum steht eine Kiste mit Zahlenschloss, beschriftet mit alten Zahlzeichen. Jeder Hinweis schließt Zahlen aus; bleibt eine übrig, dreht sich ein Rad.
-  - Sanft: Die Hinweiszettel sind durcheinander, einer widerspricht den anderen. Er gehört zu einer anderen Kiste.
-  - Abenteuer: Schatzsuche im Museum über mehrere Runden, mit Laterne und Museumsleiterin: römische Zahlen am Torbogen, Kerben im Balken, ein Abakus. In der letzten Kiste liegen ein Rechenstein und ein Zettel der Kinder, die das Rätsel vor fünfzig Jahren gebaut haben.
 - Stimme: viel (Hinweise).
 - Figuren: Ela zeigt vor; Timo wundert sich über eine Zahl, die einen Hinweis bricht.
 - Regal-Material: Karte mit Schloss (neu).
@@ -1744,12 +1380,6 @@ Gemeinsam für alle Spiele (wird unten nicht wiederholt):
 - Warum perfekt: Eine Gewinnstrategie findet man nur im Spiel gegeneinander und durch Rückwärtsdenken; es ist der
   „Zeig’s mir“-Moment aus N10.
 - Bewusst nicht drin: zahlenkette-rueckwaerts → M29.
-- Heimatwelt: Wozu Regeln? Gemeinsam abstimmen (`regeln`)
-  - Sachgrund: Spiele brauchen Regeln, die man zusammen festlegt; wer die Regel durchschaut, findet die Strategie.
-  - Rahmen: Miteinander · Spannung aus: Rätsel
-  - Ruhig: Die Runde erfindet ein Zählspiel. Das Kind spielt gegen einen Erwachsenen oder ein Kind der Runde und findet rückwärts die Zahlen, die sicher ans Ziel führen; sie leuchten als Spur. (Kein Rang, kein Sieger-Bild.)
-  - Sanft: Lena schlägt eine neue Regel vor: bis 21. Stimmen die sicheren Zahlen noch? Alle stimmen ab, dann wird geprüft.
-  - Abenteuer: Spielemacher über mehrere Runden: Die Runde ändert Ziel und Schrittweite und baut daraus ein eigenes Brettspiel für das Schulfest. Wer die Regel durchschaut hat, erklärt sie den anderen. Am Fest spielen es die Eltern.
 - Stimme: wenig.
 - Figuren: Timo zeigt vor (spielt gegen den Erzähler-Tisch, nicht gegen ein anderes Kind); Lena wundert sich, dass die
   16 sicher zur 20 führt.

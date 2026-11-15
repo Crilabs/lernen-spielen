@@ -34,12 +34,12 @@ export function malAus(key) {
   return m ? { a: Number(m[1]), b: Number(m[2]), c: Number(m[1]) * Number(m[2]) } : null;
 }
 
-const UEBERGANG_AB = 20; // darüber kein Übertrag der Einer (wie im Zahlenzauber)
+const UEBERGANG_AB = 20; // darüber kein Übertrag der Einer
 const MAX = 100;
 
 const raumVon = (c) => (c <= 10 ? 10 : c <= 20 ? 20 : c <= 30 ? 30 : 100);
 
-// Pool wie plusPool()/minusPool() im Zahlenzauber bei max = 100
+// Alle Plus- und Minusaufgaben bis 100 (für die Prüfung, dass jede Aufgabe ein Thema hat)
 export function poolRechnen() {
   const plus = [];
   for (let a = 1; a < MAX; a++) {
@@ -70,7 +70,7 @@ const rechenAufgabe = (key) => {
   return { key, art: "rechnen", daten: { ...t, raum: raumVon(t.c) } };
 };
 
-// Thema-ID für einen Zahlenzauber-Schlüssel
+// Thema-ID für einen Rechen-Schlüssel (plus:/minus:)
 export function klasseRechnen(key) {
   const { op, a, b, c } = zerlegeKey(key);
   const plus = op === "plus";
