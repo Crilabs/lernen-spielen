@@ -226,16 +226,6 @@ details > summary::-webkit-details-marker { display: none; }
 .thema.sw-welt .buecher { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
 .thema.sw-welt .innen > p { max-width: 70ch; }
 
-/* --- Geschichten ---------------------------------------------------------------------------------- */
-/* Drei Stufen untereinander, von ruhig nach aufregend; rechts Wählen oder „Eingestellt“. Die gewählte Stufe trägt
-   den Sonnenring (Sonne = ausgewählt, Farbwelt 6.2). */
-.stufen { display: flex; flex-direction: column; gap: 3rem; }
-.stufe { display: grid; grid-template-columns: minmax(0, 1fr) 26rem; align-items: center; gap: 2rem 4rem; }
-.stufe .beispiel { font-style: italic; }
-.stufe .wahl { justify-self: end; }
-.stufe .gewaehlt { font-weight: 700; min-height: 11rem; display: flex; align-items: center; }
-.stufe.markiert { border-color: var(--ls-tinte); }
-
 /* --- Spielzeit ----------------------------------------------------------------------------------- */
 /* Tage als Reihe gleich breiter Knöpfe (erlaubt = Hauptknopf gefüllt), Grenzen als Zeile Wert mit Weniger/Mehr. */
 .tage { --ls-breite: 15rem; display: flex; flex-wrap: wrap; gap: 1.6rem 2rem; }
@@ -265,8 +255,7 @@ details > summary::-webkit-details-marker { display: none; }
 
 /* Schmal (hochkant): Spalten untereinander. */
 @media (max-aspect-ratio: 4/3) {
-  .stand, .stufe, .grenze { grid-template-columns: 1fr; }
-  .stufe .wahl { justify-self: start; }
+  .stand, .grenze { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -288,7 +277,6 @@ details > summary::-webkit-details-marker { display: none; }
     <h1>Für Erwachsene</h1>
     <ls-knopf data-tab="lernstand" symbol="lernstand.svg" wort="Lernplan" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="sachthemen" symbol="themen.svg" wort="Sachthemen" groesse="klein" stumm></ls-knopf>
-    <ls-knopf data-tab="geschichten" symbol="buch.svg" wort="Geschichten" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="spielzeit" symbol="uhr.svg" wort="Spielzeit" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="geraet" symbol="update.svg" wort="Updates" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="hinweise" symbol="hilfe.svg" wort="Hinweise" groesse="klein" stumm></ls-knopf>
@@ -304,7 +292,7 @@ details > summary::-webkit-details-marker { display: none; }
 import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen, esc } from "./lernspiel.js";
 import { pinHash, pinPruefen, pruefeUpdate } from "./eltern.js";
 import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/geraet.js";
-import { ladeEinstellungen, setzeEinstellung, geschichtenStufe, einstellung } from "./kern/einstellungen.js";
+import { ladeEinstellungen, setzeEinstellung, einstellung } from "./kern/einstellungen.js";
 import { regeln, aktuell, lage as spielLage, gibZugabe, ZUGABE_MINUTEN } from "./kern/spielzeit.js";
 import { STAND as SPIELZEIT_STAND } from "./rahmen/spielzeit.js";
 import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer, spieleFuer, alsNaechstes }
@@ -423,7 +411,7 @@ function ruheNeu() {
 for (const typ of ["pointerdown", "keydown"]) document.addEventListener(typ, ruheNeu, true);
 ruheNeu();
 
-const ANSICHTEN = { lernstand, sachthemen, geschichten, spielzeit, geraet, hinweise, sicherheit };
+const ANSICHTEN = { lernstand, sachthemen, spielzeit, geraet, hinweise, sicherheit };
 function waehle(name, hinweis) {
   tab = name;
   document.querySelectorAll("[data-tab]").forEach((b) => {
@@ -974,61 +962,6 @@ function regalZeile(rg, weltNach) {
   det.appendChild(innen);
   li.appendChild(det);
   return li;
-}
-
-// ---------- Geschichten ----------
-// Stufe je Profil (grundsaetze 9.3), Einstellung "geschichten", Standard sanft. Je Stufe ein Satz Vorschau.
-const STUFEN = [
-  { id: "ruhig", name: "Ruhig", fuer: "Für empfindsame Kinder, in jedem Alter.",
-    was: "Suchen, Helfen, Sortieren, Wetter. Keine Komplikation, kein Dunkel.",
-    beispiel: "Zum Beispiel: Zwei Kinder legen im Garten die Äpfel nach Größe in Kisten, und am Ende ist alles verstaut." },
-  { id: "sanft", name: "Sanft", fuer: "Vorschlag für 6 bis 8 Jahre. Der Standard.",
-    was: "Dazu eine kleine Komplikation, die sofort gelöst ist. Ab 8 auch ein kleiner Rückschlag ohne Schuld.",
-    beispiel: "Zum Beispiel: Der Schlüssel zum Gartenhaus ist weg, das Kind sieht ihn gleich im Gras, und alle gehen hinein." },
-  { id: "abenteuer", name: "Abenteuer", fuer: "Nur auf Wunsch, etwa 8 bis 10 Jahre.",
-    was: "Dazu milder Grusel mit komischer Auflösung und längere Bögen. Jede Runde endet in Ruhe.",
-    beispiel: "Zum Beispiel: Im Nebel am Teich raschelt es, es ist eine Eule, und auf dem Heimweg lachen alle darüber." },
-];
-
-async function geschichten(spalte) {
-  spalte.append(el("h2", "Geschichten"),
-    el("p", "Wie aufregend die Geschichten in den Spielen sein dürfen. Was ein Kind verträgt, hängt mehr vom Kind ab als vom Alter. Die Stufe stellen nur Sie um; überspringen kann das Kind jede Geschichte jederzeit.", "vorspann"));
-  try { await ladeEinstellungen(); } catch (e) { protokoll("Einstellungen: " + e); }
-  if (tab !== "geschichten") return;
-  const status = el("p", "", "status leise");
-  status.setAttribute("role", "status");
-  const raster = el("div", null, "stufen");
-  const zeichne = () => {
-    const jetzt = geschichtenStufe();
-    raster.replaceChildren(...STUFEN.map((s) => {
-      const an = s.id === jetzt;
-      const karte = el("section", null, "flaeche stufe" + (an ? " markiert" : ""));
-      karte.setAttribute("aria-label", s.name);
-      const oben = el("div", null, "spalten");
-      oben.append(el("h3", s.name), el("p", s.fuer, "leise klein"), el("p", s.was, "text"), el("p", s.beispiel, "beispiel leise text"));
-      karte.appendChild(oben);
-      if (an) karte.appendChild(el("p", "Eingestellt", "wahl gewaehlt"));
-      else {
-        const k = knopf("Wählen", { klasse: "wahl" });
-        k.addEventListener("click", async () => {
-          setzeEinstellung("geschichten", s.id);
-          await sofortSpeichern();
-          status.textContent = `Eingestellt: ${s.name}.`;
-          zeichne();
-        });
-        k.setAttribute("name", s.name + " wählen");
-        karte.appendChild(k);
-      }
-      return karte;
-    }));
-  };
-  zeichne();
-  spalte.append(raster, status);
-
-  const warn = el("section", null, "flaeche");
-  warn.append(el("h3", "Wann eine Stufe ruhiger?"),
-    el("p", "Wenn das Kind Geschichten oft überspringt, den Ton abschaltet, ein Spiel meidet oder abends noch darüber spricht: dann eine Stufe ruhiger stellen und in Ruhe darüber reden."));
-  spalte.appendChild(warn);
 }
 
 // ---------- Spielzeit ----------

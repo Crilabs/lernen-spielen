@@ -168,3 +168,7 @@ kleiner, unter Wasser hell, keine Menschen, Boote, Orcas, keine Schrift. Steckbr
 | 12 | (Frage) beide auf weiter Reise, offenes Meer bis zum Horizont – **kein Krill, kein Eis** (verrät nichts) | Oberfläche |
 | 13 | Mutter mit weit offenem Maul in einer dichten Krillwolke, Ole etwas abseits | kaltes Meer, unter Wasser hell |
 | 14 | Ole an der Oberfläche neben der Mutter, deutliche Atemwolke über kaltem Meer, Eisschollen | Antarktis, Oberfläche, Tag |
+
+## Nachtrag 2026-11-15
+
+Die Fassung `wal-ruhig` ist entfernt: Christian hat entschieden, dass es je Geschichte nur eine Fassung gibt und keine Stufen (`grundsaetze.md` 9.3). Kleine Schwierigkeiten halten Grundschulkinder aus.

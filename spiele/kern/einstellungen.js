@@ -1,5 +1,4 @@
 // Einstellungen: Ton je Spiel ("ton.<spielId>", am Profil), Stimme je Gerät ("stimme"),
-// Stufe der Geschichten ("geschichten", am Profil; grundsaetze.md 9.3, gestellt im Elternbereich),
 // Schriftpfad ("schrift", am Profil: "sas" oder "va", gestellt im Elternbereich).
 // Alte localStorage-Werte werden bewusst nicht übernommen.
 
@@ -57,19 +56,6 @@ export function setzeEinstellung(name, wert) {
     profil[name] = wert;
     speichere("einstellungen", profil);
   }
-}
-
-/** Stufen der Geschichten (grundsaetze.md 9.3), von ruhig nach aufregend. */
-export const GESCHICHTEN = /** @type {const} */ (["ruhig", "sanft", "abenteuer"]);
-
-/**
- * Stufe der Geschichten für das Profil; ohne oder mit unbekanntem Wert "sanft" (Standard).
- * Erst nach `ladeEinstellungen()` aussagekräftig.
- * @returns {"ruhig" | "sanft" | "abenteuer"}
- */
-export function geschichtenStufe() {
-  const wert = einstellung("geschichten", "sanft");
-  return GESCHICHTEN.includes(wert) ? wert : "sanft";
 }
 
 /** Verbundene Schriften (Spec 2026-11-14-schriftvorlagen, 5.5); Bayern erlaubt VA oder SAS. */

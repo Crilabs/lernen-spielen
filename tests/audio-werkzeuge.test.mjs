@@ -210,6 +210,6 @@ test("sammle: Seiten der Geschichten (sprich, sonst text)", () => {
   const { eintraege } = sammle(WURZEL);
   const aus = eintraege.filter((e) => e.quellen.includes("geschichten/zehnerpaare/geschichte.json"));
   assert.ok(aus.some((e) => e.text.startsWith("Es ist Winter. Ela und Kofi schauen aus dem Fenster.")), "erste Seite der Zehnerpaare");
-  const ruhig = eintraege.filter((e) => e.quellen.includes("geschichten/haustiere-ruhig/geschichte.json"));
-  assert.ok(ruhig.some((e) => e.text.startsWith("Mia schnuppert am Karton.")), "auch Fassungen werden aufgenommen");
+  const wal = eintraege.filter((e) => e.quellen.includes("geschichten/wal/geschichte.json"));
+  assert.ok(wal.some((e) => e.text.startsWith("Im warmen Meer vor Australien")), "auch die Bücher der Bibliothek werden aufgenommen");
 });

@@ -160,10 +160,8 @@ test("Korb: erst füllen sich die Plätze, dann ersetzt jede neue Packung die ä
   assert.deepEqual(L.korbPlatz(L.KORB_PLAETZE + 3), { platz: 3, neu: false });
 });
 
-test("Sanft: die verwischte Zeile ist die letzte des Kindes (nicht Timos), ab zwei Zeilen; Ruhig: keine", () => {
-  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"], "sanft"), "7*2");
-  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"], "abenteuer"), "7*2");
-  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"], "ruhig"), null);
-  assert.equal(L.verwischteZeile(["1*2", "3*2"], "sanft"), null, "nur eine Zeile des Kindes");
-  assert.equal(L.verwischteZeile([], "sanft"), null);
+test("Die verwischte Zeile ist die letzte des Kindes (nicht Timos), ab zwei Zeilen – für alle Kinder", () => {
+  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"]), "7*2");
+  assert.equal(L.verwischteZeile(["1*2", "3*2"]), null, "nur eine Zeile des Kindes");
+  assert.equal(L.verwischteZeile([]), null);
 });

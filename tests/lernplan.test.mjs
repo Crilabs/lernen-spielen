@@ -137,7 +137,6 @@ regeln.fehlerbilder = ({ themen, fehlerbilder = [] }) => {
 // Kosmik-Schicht (docs/grundsaetze.md Abschnitt 10): Sachthemen quer zu den Spielen, kein Lernstand
 const WELT = {
   art: ["sache", "miteinander", "schutz"],
-  stufe: ["ruhig", "sanft", "abenteuer"],
   // Wortliste 3.2 und Prävention: nie im Kindertext
   gesperrt: /(?<![\p{L}])(super|toll|klasse|prima|spitze|perfekt|klug|schlau|brav|fleißig|falsch|leider|schade|fehler|missbrauch\p{L}*)(?![\p{L}])/iu,
   // K15: Ich-Form nur für Rechte und Handlungen, nie für Selbstwert
@@ -154,7 +153,7 @@ regeln.welten = ({ themen, ueberschriften = [], welten = [] }) => {
     wids.add(w.id);
     assert.ok(arten.has(w.ueberschrift), `${wo}: Überschrift ${w.ueberschrift} fehlt`);
     assert.ok([1, 2, 3, 4].includes(w.klasse), `${wo}: klasse ${w.klasse}`);
-    assert.ok(WELT.stufe.includes(w.stufe_ab), `${wo}: stufe_ab ${w.stufe_ab}`);
+    assert.ok(!("stufe_ab" in w), `${wo}: stufe_ab gibt es nicht mehr (keine Stufen, Christian 2026-11-15)`);
     assert.ok(w.name && w.quellen?.length > 0, `${wo}: name oder quellen fehlt`);
     assert.doesNotMatch(w.name, WELT.gesperrt, `${wo}: gesperrtes Wort im name`);
     assert.doesNotMatch(w.name, WELT.selbstwert, `${wo}: Selbstwert-Satz im name (K15)`);
@@ -360,7 +359,7 @@ test("Plan: Welten der Kosmik-Schicht sind vollständig und gültig", () => {
 test("Plan: Welten-Regel erkennt falsche Verweise, gesperrte Wörter und fehlende Elterntexte", () => {
   const themen = [{ id: "t" }];
   const ueberschriften = [{ id: "u", name: "U", art: "sache" }, { id: "s", name: "S", art: "schutz" }];
-  const w = { id: "w", name: "Maus", ueberschrift: "u", klasse: 1, quellen: ["HSU12"], stufe_ab: "ruhig", fakten: [] };
+  const w = { id: "w", name: "Maus", ueberschrift: "u", klasse: 1, quellen: ["HSU12"], fakten: [] };
   const pruefe = (x) => regeln.welten({ themen, ueberschriften, welten: [x] });
   pruefe(w);
   assert.throws(() => pruefe({ ...w, ueberschrift: "x" }), /Überschrift x fehlt/);

@@ -154,3 +154,7 @@ Rüssel, Stirn und Ohrrändern; keine Menschen, keine Schrift, hell und ruhig. S
 | 13 | Nila hält Gras im Rüssel | Grasbüschel in der Rüsselspitze, Mutter frisst daneben, letztes Licht | 1 |
 
 14 Versuche für 13 Bilder; Kosten in `kosten.json`.
+
+## Nachtrag 2026-11-15
+
+Die Fassung `elefant-ruhig` ist entfernt: Christian hat entschieden, dass es je Geschichte nur eine Fassung gibt und keine Stufen (`grundsaetze.md` 9.3). Kleine Schwierigkeiten halten Grundschulkinder aus.

@@ -19,7 +19,6 @@ const KINDER = new Set(readdirSync(join(SPIELE, "runde", "kinder")).filter((d) =
 const HALTUNGEN = new Set([...readFileSync(join(SPIELE, "runde", "haltungen.js"), "utf8").matchAll(/id: "([a-z-]+)"/g)].map((m) => m[1]));
 const ARTEN = new Set(["sachgeschichte", "sinn", "form", "struktur"]);
 
-const alleIds = new Set(readdirSync(ORDNER, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name));
 const geschichten = readdirSync(ORDNER, { withFileTypes: true })
   .filter((e) => e.isDirectory() && existsSync(join(ORDNER, e.name, "geschichte.json")))
   .map((e) => ({ ordner: e.name, g: JSON.parse(readFileSync(join(ORDNER, e.name, "geschichte.json"), "utf8")) }));
@@ -35,11 +34,8 @@ function pruefeGeschichte(g, ordner) {
     if (!WELTEN.has(g.welt)) f.push(`welt „${g.welt}“ fehlt in beurteilung.json`);
     if (!Array.isArray(g.quellen) || !g.quellen.length || !g.quellen.every((q) => q?.fakt && q?.quelle)) f.push("Sachgeschichte ohne quellen (fakt, quelle)");
   } else if (!FAMILIEN.has(g.familie)) f.push(`familie „${g.familie}“ fehlt in beurteilung.json`);
-  // Fassungen (geschichten.md §2): ruhig/abenteuer zur Hauptfassung (Stufe „sanft“, grundsaetze.md 9.3)
-  if ("fassung" in g || "fassungVon" in g) {
-    if (!["ruhig", "abenteuer"].includes(g.fassung)) f.push(`fassung „${g.fassung}“ (ruhig oder abenteuer)`);
-    if (!alleIds.has(g.fassungVon) || g.fassungVon === g.id) f.push(`fassungVon „${g.fassungVon}“ gibt es nicht`);
-  }
+  // Eine Fassung je Geschichte, keine Stufen (Christian 2026-11-15)
+  if ("fassung" in g || "fassungVon" in g) f.push("fassung/fassungVon gibt es nicht mehr (eine Fassung je Geschichte)");
   const seiten = Array.isArray(g.seiten) ? g.seiten : [];
   // Vorlesebuch-Maß (Christian 2026-11-15)
   if (seiten.length < 10 || seiten.length > 14) f.push(`${seiten.length} Seiten (10–14)`);
@@ -79,12 +75,11 @@ test("es gibt Geschichten", () => {
   assert.ok(geschichten.length >= 1);
 });
 
-test("index.json listet genau die Geschichten der Ordner mit Titel, Art, Welt und Familie; Fassungen getrennt", () => {
+test("index.json listet genau die Geschichten der Ordner mit Titel, Art, Welt und Familie", () => {
   const index = JSON.parse(readFileSync(join(ORDNER, "index.json"), "utf8"));
   const liste = index.geschichten;
-  const fassungen = geschichten.filter(({ g }) => g.fassung).map(({ g }) => ({ id: g.id, fassung: g.fassung, fassungVon: g.fassungVon }));
-  assert.deepEqual([...(index.fassungen ?? [])].sort((a, b) => a.id.localeCompare(b.id)), fassungen.sort((a, b) => a.id.localeCompare(b.id)), "Fassungen in index.json (fassungen)");
-  const erwartet = geschichten.filter(({ g }) => !g.fassung).map(({ g }) => ({ id: g.id, titel: g.titel, art: g.art, welt: g.welt ?? null, familie: g.familie ?? null }))
+  assert.equal("fassungen" in index, false, "keine Fassungen mehr");
+  const erwartet = geschichten.map(({ g }) => ({ id: g.id, titel: g.titel, art: g.art, welt: g.welt ?? null, familie: g.familie ?? null }))
     .sort((a, b) => a.id.localeCompare(b.id));
   assert.deepEqual([...liste].sort((a, b) => a.id.localeCompare(b.id)), erwartet, "spiele/geschichten/index.json nachtragen");
 });
@@ -116,9 +111,7 @@ test("pruefeGeschichte findet Verstöße", () => {
   assert.match(f({ seiten: [...neun, { text: "Super, Ela. Kofi legt.", szene: [] }] }), /G1/);
   assert.match(f({ seiten: [...neun, { ...seite, zaehlung: [3, 7] }] }), /zaehlung/);
   assert.match(f({ seiten: [...neun, { ...seite, verdeckt: 1 }] }), /verdeckt/);
-  assert.match(f({ fassung: "wild", fassungVon: "haustiere" }), /fassung „wild“/);
-  assert.match(f({ fassung: "ruhig", fassungVon: "gibt-es-nicht" }), /fassungVon/);
-  assert.deepEqual(pruefeGeschichte({ ...gut, fassung: "ruhig", fassungVon: "haustiere" }, "probe"), []);
+  assert.match(f({ fassung: "ruhig", fassungVon: "haustiere" }), /eine Fassung je Geschichte/);
   assert.match(f({ art: "sachgeschichte", welt: "haustiere" }), /quellen/);
 });
 

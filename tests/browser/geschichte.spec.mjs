@@ -182,22 +182,6 @@ for (const typ of [chromium, webkit]) {
   pruefe(await tp.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".startwahl").hidden), `${name}: Ton aus – keine Startwahl`);
   await tp.close();
 
-  // Stufe „ruhig“ (Eltern-Einstellung geschichten, grundsaetze.md 9.3): die ruhige Fassung, gemerkt als Hauptgeschichte
-  const rp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
-  await rp.addInitScript(() => localStorage.setItem("lernstand-kind-1-einstellungen", JSON.stringify({ geschichten: "ruhig" })));
-  await rp.goto(`${basis}/spiele/geschichte.html?id=haustiere&weiter=themen.html&pruefen`);
-  await rp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
-  pruefe(/haustiere-ruhig\/geschichte\.json$/.test(await rp.locator("ls-geschichte").getAttribute("src")), `${name}: Stufe ruhig – ruhige Fassung`);
-  await rp.evaluate(() => { const g = window.lsGeschichte; g.waehle("selbst"); });
-  const fs2 = await rp.evaluate(() => window.lsGeschichte.frageSeite);
-  await rp.evaluate((f) => { const g = window.lsGeschichte; while (g.seite < f) g.weiter(); }, fs2);
-  await rp.waitForFunction(() => window.lsGeschichte.weiterBereit, null, { timeout: 30000 });
-  await rp.evaluate(() => { const g = window.lsGeschichte; while (g.seite < g.seiten - 1) g.weiter(); });
-  await Promise.all([rp.waitForURL(/themen\.html/), rp.evaluate(() => window.lsGeschichte.fertig())]);
-  await rp.waitForLoadState("networkidle"); await rp.waitForTimeout(300);
-  const gem = await rp.evaluate(() => Object.keys(JSON.parse(localStorage.getItem("lernstand-kind-1-lernplan") || "{}").sachthemen?.geschichten ?? {}));
-  pruefe(gem.includes("haustiere") && !gem.includes("haustiere-ruhig"), `${name}: ruhige Fassung merkt die Hauptgeschichte (${gem})`);
-  await rp.close();
   await browser.close();
 }
 server.close();

@@ -33,12 +33,12 @@ sicher **(Annahme)**.
   Hauptfigur mit Wunsch oder Problem, Gefühle zeigen (nicht bewerten), Wissen ist der Grund, warum etwas passiert;
   keine Lehrsätze („Katzen …“, „Man …“), kein „X ist Y“. (3) Ein frischer Prüfer bewertet: Bleibt das Wissen hängen?
   Spannend genug? Zu belastend (`docs/research_notes/…/geschichten_angst_gewalt.md`)? Urteil in `pruefung.md`.
-  (4) Nur wenn er es begründet: **Fassungen** `ruhig` und/oder `abenteuer` (§3).
+  (4) **Eine Fassung je Geschichte** (Christian, 2026-11-15): keine ruhigere oder aufregendere Fassung; was zu
+  belastend ist, wird in der einen Fassung geändert.
 - **Spannung von der Realität her** (Christian): nicht überdramatisiert – „die Welt ist ja oft schon grausam genug“.
-  Die Hauptfassung ist für die Stufe „Sanft“ (`grundsaetze.md` 9.3).
-- **Bilder je Abschnitt beurteilen, nicht pauschal neu erzeugen** (Christian): Eine Fassung übernimmt das Bild der
-  Hauptfassung, wenn es ihre Kernaussage zeigt; neu nur, wo sich Aussage oder Stimmung ändert. Ebenso bei
-  Überarbeitungen.
+  Kleine Schwierigkeiten halten Grundschulkinder aus; die Grenze steht in `grundsaetze.md` 9.3 (keine Stufen).
+- **Bilder je Abschnitt beurteilen, nicht pauschal neu erzeugen** (Christian): Bei Überarbeitungen bleibt ein Bild,
+  wenn es die Kernaussage des Abschnitts weiter zeigt; neu nur, wo sich Aussage oder Stimmung ändert.
 - **Kein Transfer** (`spielbau.md` §8): Das Bild zeigt, was der Satz sagt. Bei Struktur zeigt das Bild die Struktur selbst,
   angeordnet wie das Montessori-Material; bei Form wird das Bild schrittweise zum schlichten Zeichen, die letzte Seite zeigt
   das Zeichen allein (neben dem Perlenstab).
@@ -103,10 +103,6 @@ spiele/geschichten/<id>/kosten.json       Kosten (werkzeuge/kosten/)
   Neue Kulissen: ruhig, flach im Stil der Runde, Formen nur am Rand.
 - `zaehlung: [links, rechts]` (an einem Foto): die geprüfte Anzahl links und rechts (Zehnerpaare); `verdeckt: 0|1`:
   diese Seite ist verdeckt (Frage zum Vorhersagen).
-- `fassung` (`ruhig` | `abenteuer`) und `fassungVon` (id der Hauptfassung): eigene Geschichte mit eigener `id`
-  (`haustiere-ruhig`), Bilder dürfen auf die Hauptfassung zeigen (`../haustiere/bilder/12.webp`). In `index.json` stehen
-  Fassungen unter `fassungen`, nicht unter `geschichten`. `geschichte.html?id=<haupt>` wählt sie nach der
-  Eltern-Einstellung „geschichten“; gemerkt wird die Hauptgeschichte.
 - `frage: true` markiert die eine Seite mit Frage zum Vorhersagen.
 - `familie` (Lerngeschichte) bzw. `welt` (Sachgeschichte) verbinden sie mit `beurteilung.json`.
 

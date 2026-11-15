@@ -1,5 +1,5 @@
 {
-  "hinweis": "Alle Geschichten (docs/geschichten.md §3) für Seiten, die keine Ordner auflisten können (Elternbereich „Sachthemen“). tests/geschichten.test.mjs prüft, dass die Liste zu den Ordnern passt. Fassungen (geschichten.md §2: ruhig/abenteuer, gewählt nach der Eltern-Einstellung „geschichten“) stehen getrennt unter fassungen und erscheinen nicht als eigene Geschichte.",
+  "hinweis": "Alle Geschichten (docs/geschichten.md §3) für Seiten, die keine Ordner auflisten können (Bibliothek, Elternbereich „Sachthemen“). tests/geschichten.test.mjs prüft, dass die Liste zu den Ordnern passt. Je Geschichte gibt es genau eine Fassung (Christian 2026-11-15).",
   "geschichten": [
     {
       "id": "haustiere",
@@ -49,28 +49,6 @@
       "art": "sachgeschichte",
       "welt": "dinosaurier",
       "familie": null
-    }
-  ],
-  "fassungen": [
-    {
-      "id": "haustiere-ruhig",
-      "fassung": "ruhig",
-      "fassungVon": "haustiere"
-    },
-    {
-      "id": "biene-ruhig",
-      "fassung": "ruhig",
-      "fassungVon": "biene"
-    },
-    {
-      "id": "wal-ruhig",
-      "fassung": "ruhig",
-      "fassungVon": "wal"
-    },
-    {
-      "id": "elefant-ruhig",
-      "fassung": "ruhig",
-      "fassungVon": "elefant"
     }
   ]
 }

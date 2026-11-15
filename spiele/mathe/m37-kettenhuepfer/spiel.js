@@ -33,7 +33,6 @@ import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pru
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
 import { runde, einmal } from "../../lernsteuerung.js";
-import { geschichtenStufe } from "../../kern/einstellungen.js";
 import { spieleEinfuehrung } from "../../einfuehrung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
 import { AUFGABEN_JE_RUNDE, PACKUNG, KORB_PLAETZE, korbPlatz, verwischteZeile, vergleiche, hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend, vorzeigeAufgabe } from "./logik.js";
@@ -1054,7 +1053,7 @@ async function spieleRunde(vorschau) {
   }
 
   ueberspringeAlles();
-  const verwischt = verwischteZeile([...liste.children].map((z) => /** @type {HTMLElement} */ (z).dataset.aufgabe ?? ""), geschichtenStufe());
+  const verwischt = verwischteZeile([...liste.children].map((z) => /** @type {HTMLElement} */ (z).dataset.aufgabe ?? ""));
   if (verwischt) await spieleVerwischt(verwischt, letzteStufe);
   ueberspringeAlles();
   await Promise.all([erzaehler.rundenende(gespielt >= AUFGABEN_JE_RUNDE, kernRunde), warte(1500)]);

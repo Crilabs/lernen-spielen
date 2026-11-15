@@ -51,3 +51,7 @@ wörtlich in jedem Prompt), Malik nur mit Händen, Armen, Beinen (dunkle Haut), 
 
 Die übrigen sechs alten Bilder (Futter, Wasser, Kratzbaum, Sonne, Tierärztin, Frage-Durst) passen zu keinem Abschnitt
 mehr und sind ersetzt (Git-Geschichte). Kosten in `kosten.json`.
+
+## Nachtrag 2026-11-15
+
+Die Fassung `haustiere-ruhig` ist entfernt: Christian hat entschieden, dass es je Geschichte nur eine Fassung gibt und keine Stufen (`grundsaetze.md` 9.3). Kleine Schwierigkeiten halten Grundschulkinder aus.

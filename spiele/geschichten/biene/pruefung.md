@@ -167,3 +167,7 @@ Steckbrief und Orte stehen wörtlich in jedem Prompt; 1024 × 1024 `--basis foto
 
 17 Versuche für 14 Bilder (Fassung `ruhig`: 1 weiteres Bild, `../biene-ruhig/bilder/09.webp`, 1 Versuch). Kosten laut
 `node werkzeuge/kosten/bericht.mjs`: biene 1,10 €, biene-ruhig 0,06 € (`kosten.json`).
+
+## Nachtrag 2026-11-15
+
+Die Fassung `biene-ruhig` ist entfernt: Christian hat entschieden, dass es je Geschichte nur eine Fassung gibt und keine Stufen (`grundsaetze.md` 9.3). Kleine Schwierigkeiten halten Grundschulkinder aus.

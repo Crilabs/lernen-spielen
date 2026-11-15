@@ -239,11 +239,6 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
   Variablen gegen `TOKENS` in `stil.js`.
 - **Vorschau:** `spiele/rahmen/vorschau.html` zeigt alle Bausteine zum Ansehen und Ausprobieren (`?objekte` die
   Spielobjekte, `?echte-dinge` die Kacheln „Mit echten Dingen“ neben einer Spiel-Kachel, `&karte` mit offener Karte).
-- **Für Spiele: Stufe der Geschichten (grundsaetze.md 9.3).** Ein Spiel liest die Stufe, die der Erwachsene im
-  Elternbereich stellt, mit `geschichtenStufe()` aus `spiele/kern/einstellungen.js` (nach `ladeEinstellungen()`,
-  z. B. nach `await leiste.bereit()`): `"ruhig"`, `"sanft"` oder `"abenteuer"`, ohne oder mit unbekanntem Wert
-  `"sanft"`. `GESCHICHTEN` ist die Liste der Stufen von ruhig nach aufregend (zum Vergleichen, z. B. für
-  `stufe_ab` einer Welt). Das Spiel liest nur; setzen darf es die Stufe nie (9.3: nur der Erwachsene stellt um).
 - **Regel (geplant):** Sobald das erste Spiel umgezogen ist, prüft ein Test, dass umgezogene Spiele Haus-
   und Ton-Knopf nicht selbst bauen.
 

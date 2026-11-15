@@ -8,7 +8,7 @@ description: Schreibt ein Buch für die Bibliothek – eine Sachgeschichte mit F
 Verbindlich: `docs/geschichten.md` (ganz, besonders §1 „echte Geschichte, kein Lernbuch“, §2 Regeln und
 Schreibverfahren, §3 Ablage), `docs/grundsaetze.md` §3, §6, §9.3, `docs/grundsaetze-bilder.md` (Fotos, Vielfalt),
 `docs/research_notes/*/geschichten_angst_gewalt.md`. Vorbild: `spiele/geschichten/haustiere/` („Mia zieht ein“ samt
-`pruefung.md` und Fassung `haustiere-ruhig`). Plan der Bücher: `spiele/bibliothek.json` (Raum › Regal › Buch, Arbeitstitel).
+`pruefung.md`). Plan der Bücher: `spiele/bibliothek.json` (Raum › Regal › Buch, Arbeitstitel).
 
 ## 0. Auswahl
 
@@ -35,7 +35,7 @@ Schreibverfahren, §3 Ablage), `docs/grundsaetze.md` §3, §6, §9.3, `docs/grun
   Problem; ein Bogen (Anfang – Komplikation aus der Wirklichkeit – Lösung – ruhiges Ende). Das Wissen ist der Grund,
   warum etwas passiert; keine Lehrsätze, kein „X ist Y“, keine Vermenschlichung (Tiere denken und sprechen nicht wie
   Menschen; Gefühle nur, wo sie belegt beobachtbar sind: Angst, Neugier, Ruhe).
-- Spannung von der Realität her, nicht überdramatisiert; Hauptfassung für die Stufe „Sanft“. Kein Tod, keine
+- Spannung von der Realität her, nicht überdramatisiert; eine Fassung für alle Kinder (`grundsaetze.md` 9.3, keine Stufen). Kein Tod, keine
   Verletzung im Bild; Fressen und Gefressenwerden höchstens angedeutet, nie gezeigt.
 - Höchstens eine Frage zum Vorhersagen (`frage: true`), aufgelöst auf der nächsten Seite.
 - Felder: `id`, `titel` (erzählend, kurz, kein „Der Hund“), `art: "sachgeschichte"`, `welt` (eine Welt des Regals),
@@ -48,7 +48,7 @@ Schreibverfahren, §3 Ablage), `docs/grundsaetze.md` §3, §6, §9.3, `docs/grun
 Ein **anderer** Agent als der Schreiber (frisch, ohne den Schreibverlauf) liest `docs/geschichten.md` §1–2, die
 Recherche und die Geschichte und urteilt: Geschichte oder Sachtext? Bleibt das Wissen hängen (welche 2–3 Dinge)?
 Spannend genug, zu belastend (Angst-Notiz)? Stimmt jede Tatsache, steht sie in `quellen`? Satzlängen? Zeitablauf
-realistisch? Braucht es eine Fassung `ruhig` oder `abenteuer` (nur begründet)? Der Schreiber setzt die Befunde um;
+realistisch? Was zu belastend ist, wird in der einen Fassung geändert – es gibt keine Fassungen. Der Schreiber setzt die Befunde um;
 höchstens drei Runden, sonst parken und berichten. Urteil zusammengefasst in `pruefung.md` §2.
 
 ## 4. Bilder je Abschnitt
@@ -64,7 +64,6 @@ höchstens drei Runden, sonst parken und berichten. Urteil zusammengefasst in `p
   Flügel, Fühler zählen)? Dieselbe Figur? Keine Schrift, keine erfundenen Details, nichts Unheimliches? Sonst
   höchstens zwei neue Versuche mit geschärftem Prompt – oder den **Text an das Bild anpassen**, wenn das Bild die
   Wahrheit besser zeigt. Ergebnis je Bild als Tabelle in `pruefung.md` §3 (Kernaussage, was stimmt, Versuche).
-- Fassungen: Bilder je Abschnitt beurteilen, übernehmen wo die Aussage gleich ist (`../<id>/bilder/NN.webp`).
 
 ## 5. Abschluss im Buch-Ordner
 
@@ -74,7 +73,7 @@ Index-Test schlägt fehl, bis §6 gelaufen ist – das ist erwartet).
 
 ## 6. Eintragen (einmal, nach allen Büchern)
 
-- `spiele/geschichten/index.json`: je Buch `{ id, titel, art, welt, familie }`; Fassungen unter `fassungen`.
+- `spiele/geschichten/index.json`: je Buch `{ id, titel, art, welt, familie }`.
 - `spiele/bibliothek.json`: der Arbeitstitel des Buchs darf bleiben (die Bibliothek zeigt den Titel der Geschichte).
 - Ton: `npm run audio` (Azure, Florian HD) für die neuen Seiten; ohne Schlüssel berichten.
 - `node --test tests/*.test.mjs`, `node tests/browser/bibliothek.spec.mjs` (NODE_PATH wie dort), Bildschirmfoto

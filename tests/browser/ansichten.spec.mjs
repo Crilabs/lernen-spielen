@@ -441,10 +441,10 @@ async function lauf(typ, name, groesse, basis) {
         sw.titel === "Sachthemen" && sw.nav === "Sachthemen" && JSON.stringify(sw.raeume) === JSON.stringify(["tiere", "zahlen-buchstaben"])
           && sw.vignetten === 2 && sw.offen === 0 && JSON.stringify(sw.filter) === JSON.stringify(["Alle", "Gelesen", "Noch offen"])
           && sw.knoepfe.every((k) => /^Alles (aus|ein)klappen$/.test(k)) && !sw.klasse, JSON.stringify(sw));
-      pruefe(F, "Sachthemen: Raum Tiere mit zehn Regalen; Haustiere gelesen mit Beschreibung der Welt, Vorschau-Link, Datum und den geplanten Büchern",
-        sw.regale.length === 10 && sw.kopf === "teils gelesen" && sw.haustiere.gesehen && sw.haustiere.wort === "gelesen"
+      pruefe(F, "Sachthemen: Raum Tiere mit zehn Regalen; Haustiere teils gelesen mit Beschreibung der Welt, Vorschau-Link, Datum, ungelesenem und geplantem Buch",
+        sw.regale.length === 10 && sw.kopf === "teils gelesen" && !sw.haustiere.gesehen && sw.haustiere.wort === "teils gelesen"
           && sw.haustiere.link === "geschichte.html?id=haustiere&eltern&weiter=eltern.html" && /gelesen am 10\. November/.test(sw.haustiere.text)
-          && /Der Hund\s*kommt noch/.test(sw.haustiere.text) && sw.haustiere.buecher === 6, JSON.stringify(sw));
+          && /noch nicht gelesen/.test(sw.haustiere.text) && /Das Kaninchen\s*kommt noch/.test(sw.haustiere.text) && sw.haustiere.buecher === 6, JSON.stringify(sw));
       pruefe(F, "Sachthemen: Bauernhof ohne fertiges Buch – „kommt noch“, kein Link",
         sw.bauernhof.kommt && sw.bauernhof.wort === "kommt noch" && sw.bauernhof.links === 0 && /Die Kuh/.test(sw.bauernhof.text), JSON.stringify(sw));
       pruefe(F, "Sachthemen: Filter „Gelesen“ zeigt nur Haustiere; neu geöffneter Reiter ist ganz zugeklappt",
