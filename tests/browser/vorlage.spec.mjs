@@ -232,7 +232,8 @@ async function lauf(typ, name, groesse, basis) {
     const e3 = await seite.evaluate(() => window.ergebnisse.at(-1));
     pruefe(L, "Aufgabe 3 per Tippen: ok ohne Hilfe", e3?.ok === true && e3.hilfe === 0, JSON.stringify(e3));
     const offenVorFolge = await seite.evaluate(() => document.getElementById("pause").hasAttribute("offen"));
-    await seite.waitForFunction(() => document.getElementById("pause").hasAttribute("offen"), null, { timeout: 3000 });
+    // Die Pause kommt nach der Folge und erst, wenn ihr Satz zu Ende ist (spielbau.md §8, kein Satz abgeschnitten).
+    await seite.waitForFunction(() => document.getElementById("pause").hasAttribute("offen"), null, { timeout: 10000 });
     const p = await seite.evaluate(() => {
       const w = document.getElementById("pause").shadowRoot;
       const a = w.querySelector("a.alle").getBoundingClientRect();

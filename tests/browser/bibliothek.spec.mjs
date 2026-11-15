@@ -10,6 +10,7 @@
 // zurück und das Buch trägt nun ein Lesezeichen; keine Seitenfehler.
 
 import { createRequire } from "node:module";
+import { starteStumm } from "./stumm.mjs";
 import { mkdir } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -37,7 +38,7 @@ const pruefe = (ok, was, info = "") => { console.log(`${ok ? "ok  " : "FEHLER"} 
 for (const typ of [chromium, webkit]) {
   for (const [w, h] of [[1280, 800], [1920, 1080], [1440, 1080]]) {
     const L = `[${typ.name()} ${w}x${h}]`;
-    const browser = await typ.launch();
+    const browser = await starteStumm(typ);
     const page = await browser.newPage({ viewport: { width: w, height: h } });
     const seitenfehler = [];
     page.on("pageerror", (e) => seitenfehler.push(e.message));
