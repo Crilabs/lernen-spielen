@@ -30,7 +30,8 @@ cd <Hauptrepo> && node werkzeuge/spielbau/vorbereiten.mjs <Id> [--basis <branch>
 (`general-purpose`, `run_in_background`) starten: „Führe den Skill `mit-echten-dingen` für die Hauptthemen von <Id>
 aus, die noch keine Anleitung haben (höchstens fünf, Einstiegsklasse zuerst), in einem eigenen Worktree
 `echte-dinge-<id>`; er bucht seine Kosten selbst und mergt selbst.“ Er läuft unabhängig vom Spiel und zählt nicht zu
-dessen Budget. Bei einem Probelauf nicht starten.
+dessen Budget. Bei einem Probelauf nicht starten. **Nicht bei einem Lauf aus der Verwaltung** (`VERWALTUNG_AUFTRAG` gesetzt): Dann legt die Verwaltung den
+Auftrag „Mit echten Dingen“ selbst hinter das Spiel (Christian, 2026-11-16).
 
 ## 2. Workflow „spiel-bauen“
 
@@ -52,7 +53,7 @@ Platzhalter wie in `.claude/workflows/spiel-bauen.js`).
 ```bash
 cd <Hauptrepo> && node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.json \
   --transkripte ~/.claude/projects/-Users-christian-Code-einhorn-lernspiele/ \
-  --steuerung "$(ls -t ~/.claude/projects/-Users-christian-Code-einhorn-lernspiele/*.jsonl | head -1)" \
+  --steuerung "${VERWALTUNG_TRANSKRIPT:-$(ls -t ~/.claude/projects/-Users-christian-Code-einhorn-lernspiele/*.jsonl | head -1)}" \
   --audio [--merge] [--parken "<Grund>"]
 ```
 
@@ -78,3 +79,11 @@ cd <Hauptrepo> && node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.
 - **Belege:** je Runde Prüfstand und Spielprüfung grün/rot; Hinweise des Prüfers, die offen bleiben.
 - **Kosten und Zeit:** aus `ergebnis.json` (Euro je Phase, Minuten). Liegt es über 10 € oder 2 Stunden, den teuersten
   Schritt nennen.
+
+## Lauf aus der Verwaltung
+
+Ist `VERWALTUNG_AUFTRAG` gesetzt (Start über `npm run verwaltung`, `werkzeuge/verwaltung/`), schreib als Letztes
+`werkzeuge/verwaltung/ergebnisse/$VERWALTUNG_AUFTRAG.json` im Hauptrepo: `{ "status": "gruen"|"freigabe"|"geparkt"|"abgebrochen",
+"zusammenfassung": "<ein Satz: Spiel, Ergebnis, Kosten>", "frage": "<nur bei freigabe/geparkt>", "probelauf": true|false }`.
+Fehlt die Datei, gilt der Auftrag als fehlgeschlagen. `--steuerung` nimmt dann `$VERWALTUNG_TRANSKRIPT` (oben schon so
+gesetzt), damit eine Chat-Sitzung nebenher nicht gebucht wird. Ein `git push` scheitert im Lauf absichtlich.

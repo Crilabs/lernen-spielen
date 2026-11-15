@@ -169,3 +169,11 @@ die eigene Seite der Anleitung `spiele/echt.html?thema=<id>`; die Karte „Mit e
 in der Pause am Rundenende eines Spiels (`spiele/rahmen/pause.js`). Sie führen zu `echt.html`. Für Erwachsene steht
 die Anleitung im Lernplan des Elternbereichs als Karte im aufgeklappten Thema (mit PDF je Thema); dort zeigt die Karte
 auch das Bild der Karte (`bild`), das Kinderseiten noch nicht zeigen. Analoges Spielen zählt nie für den Lernstand.
+
+## Lauf aus der Verwaltung
+
+Ist `VERWALTUNG_AUFTRAG` gesetzt (Start über `npm run verwaltung`, `werkzeuge/verwaltung/`), schreib als Letztes
+`werkzeuge/verwaltung/ergebnisse/$VERWALTUNG_AUFTRAG.json` im Hauptrepo: `{ "status": "erledigt"|"geparkt"|"abgebrochen",
+"zusammenfassung": "<ein Satz: Themen, Ergebnis, Kosten>", "frage": "<nur bei geparkt>" }` (`erledigt` = alles grün und
+eingetragen, `geparkt` = etwas wartet auf Christian). Fehlt die Datei, gilt der Auftrag als fehlgeschlagen. Ein
+`git push` scheitert im Lauf absichtlich.

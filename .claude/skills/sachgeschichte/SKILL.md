@@ -87,3 +87,11 @@ Index-Test schlägt fehl, bis §6 gelaufen ist – das ist erwartet).
 - Kosten: `node werkzeuge/kosten/bericht.mjs`; Claude-Kosten der Agenten mit `werkzeuge/kosten/transkript.mjs`
   buchen, soweit möglich.
 - Commit je Bündel: „feat(bibliothek): <Bücher>“ mit kurzer Liste (Titel, Abschnitte, Bilder, Kosten).
+
+## Lauf aus der Verwaltung
+
+Ist `VERWALTUNG_AUFTRAG` gesetzt (Start über `npm run verwaltung`, `werkzeuge/verwaltung/`), schreib als Letztes
+`werkzeuge/verwaltung/ergebnisse/$VERWALTUNG_AUFTRAG.json` im Hauptrepo: `{ "status": "erledigt"|"geparkt"|"abgebrochen",
+"zusammenfassung": "<ein Satz: Bücher, Ergebnis, Kosten>", "frage": "<nur bei geparkt>" }` (`erledigt` = alles grün und
+eingetragen, `geparkt` = etwas wartet auf Christian). Fehlt die Datei, gilt der Auftrag als fehlgeschlagen. Ein
+`git push` scheitert im Lauf absichtlich.
