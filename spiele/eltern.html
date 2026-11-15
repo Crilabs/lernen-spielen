@@ -79,8 +79,14 @@ ls-knopf.aus { opacity: 0.45; pointer-events: none; }
 /* --- Lernplan ------------------------------------------------------------------------------------- */
 .fach-kopf { display: flex; align-items: center; gap: 2.4rem; }
 .fach-kopf .zuletzt { margin-left: auto; text-align: right; }
-.fach-kopf .klapp { flex: none; margin-left: auto; }
-.fach-kopf .zuletzt + .klapp { margin-left: 0; }
+.lp-fach > summary.fach-kopf { min-height: 9rem; }
+.lp-fach > summary.fach-kopf::before {
+  content: ""; flex: none; width: 1.6rem; height: 1.6rem; margin: 0 0.4rem 0 0.4rem;
+  border-right: 0.4rem solid var(--ls-tinte); border-bottom: 0.4rem solid var(--ls-tinte); transform: rotate(-45deg);
+}
+.lp-fach[open] > summary.fach-kopf::before { transform: rotate(45deg); }
+.lp-fach-innen { display: flex; flex-direction: column; margin-top: 2.4rem; }
+.lp-fach-leiste { display: flex; justify-content: flex-end; margin-bottom: 1.2rem; }
 .fachkachel {
   flex: none; width: 9rem; height: 9rem; padding: 1.5rem;
   border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
@@ -92,7 +98,7 @@ ls-knopf.aus { opacity: 0.45; pointer-events: none; }
 }
 .fachkachel.ohne i { display: none; }
 .fach-kopf h3 { color: var(--fach-tief, var(--ls-tinte)); }
-.flaeche > .spiele-links { max-width: none; border-top: var(--ls-kontur) solid var(--ls-linie); padding-top: 2rem; }
+.flaeche > .spiele-links, .lp-fach-innen > .spiele-links { max-width: none; border-top: var(--ls-kontur) solid var(--ls-linie); padding-top: 2rem; }
 /* Filter: eine schlanke Reihe; der gewählte in Tinte gefüllt (wie ein Hauptknopf), die anderen Papier. */
 .lp-filter { display: flex; flex-wrap: wrap; gap: 1.2rem 1.6rem; margin-top: -1.6rem; }
 .lp-filter button {
@@ -489,6 +495,7 @@ const LEER = { dran: "Gerade ist kein Thema dran.", naechstes: "Gerade ist kein 
   gekonnt: "Hier steht, was das Kind kann, sobald es so weit ist.", offen: "Alle Themen sind gekonnt." };
 let lpFilter = "alle";
 const offeneBereiche = new Set();
+const offeneFaecher = new Set(); // anfangs alles zu: man sieht nur die Fächer
 let lernLauf = 0;
 
 // Rückfrage beim Abhaken: nennt, wie viele Themen davor mitkommen, und aus welchen anderen Fächern.
@@ -562,6 +569,7 @@ async function lernstand(spalte, offen) {
     const p = planNach.get(id);
     if (!p) return;
     lpFilter = "alle";
+    offeneFaecher.add(p.strang);
     offeneBereiche.add(p.strang + "|" + (p.bereich || "Weiteres"));
     await neuZeichnen(id);
     const ziel = spalte.querySelector(`.thema[data-id="${CSS.escape(id)}"]`);
@@ -586,7 +594,11 @@ async function lernstand(spalte, offen) {
     const block = el("section", null, "flaeche fach");
     block.setAttribute("aria-label", fachName(ctx, strang));
     fachFarben(strang, block);
-    const kopf = el("div", null, "fach-kopf");
+    // Das Fach klappt auf und zu (anfangs zu); mit Filter oder Sprung ist es offen
+    const fachDet = el("details", null, "lp-fach");
+    fachDet.open = lpFilter !== "alle" || offeneFaecher.has(strang) || themen.some((t) => t.id === offen);
+    fachDet.addEventListener("toggle", () => { if (fachDet.open) offeneFaecher.add(strang); else offeneFaecher.delete(strang); });
+    const kopf = el("summary", null, "fach-kopf");
     kopf.append(fachKachel(strang), el("h3", fachName(ctx, strang)));
     let zuletzt = null;
     for (const t of themen) {
@@ -595,13 +607,18 @@ async function lernstand(spalte, offen) {
       if (u && (!zuletzt || u > zuletzt.u)) zuletzt = { u, name: t.name };
     }
     if (zuletzt) kopf.appendChild(el("p", `Zuletzt geübt ${amDatum(zuletzt.u)}: ${zuletzt.name}`, "zuletzt leise klein"));
+    fachDet.appendChild(kopf);
+    const fachInnen = el("div", null, "lp-fach-innen");
+    fachDet.appendChild(fachInnen);
+    block.appendChild(fachDet);
     // Alle Bereiche des Fachs auf- oder zuklappen; das Wort folgt dem Zustand
     const klapp = knopf("Alles ausklappen");
     klapp.setAttribute("groesse", "klein");
     klapp.classList.add("klapp");
-    kopf.appendChild(klapp);
-    block.appendChild(kopf);
-    const bereichsDetails = () => [...block.querySelectorAll(":scope > details.lp-bereich")];
+    const klappZeile = el("div", null, "lp-fach-leiste");
+    klappZeile.appendChild(klapp);
+    fachInnen.appendChild(klappZeile);
+    const bereichsDetails = () => [...fachInnen.querySelectorAll(":scope > details.lp-bereich")];
     const klappWort = () => klapp.setAttribute("wort", bereichsDetails().every((d) => d.open) ? "Alles einklappen" : "Alles ausklappen");
     klapp.addEventListener("click", () => {
       const alleOffen = bereichsDetails().every((d) => d.open);
@@ -648,7 +665,7 @@ async function lernstand(spalte, offen) {
         klappWort();
       });
       if (det.open) fuelle();
-      block.appendChild(det);
+      fachInnen.appendChild(det);
     }
     klappWort();
 
@@ -660,7 +677,7 @@ async function lernstand(spalte, offen) {
         if (i) p.appendChild(document.createTextNode(", "));
         const a = el("a", x.titel || x.id); a.href = (x.datei || x.id + ".html") + "?eltern"; p.appendChild(a);
       });
-      block.appendChild(p);
+      fachInnen.appendChild(p);
       // Beschreibung für Erwachsene (Feld `beschreibung` in spiele.json): ruhig, je Spiel zum Aufklappen.
       const mitText = fachSpiele.filter((s) => typeof s.beschreibung === "string" && s.beschreibung.trim());
       if (mitText.length) {
@@ -671,7 +688,7 @@ async function lernstand(spalte, offen) {
           d.appendChild(el("p", s.beschreibung.trim(), "klein"));
           liste.appendChild(d);
         }
-        block.appendChild(liste);
+        fachInnen.appendChild(liste);
       }
     }
     spalte.appendChild(block);

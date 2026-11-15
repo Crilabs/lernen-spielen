@@ -358,6 +358,7 @@ async function lauf(typ, name, groesse, basis) {
         const r = { titel: inhalt.querySelector("h2")?.textContent, nav: document.querySelector('[data-tab="lernstand"]').getAttribute("wort"),
           filter: [...inhalt.querySelectorAll(".lp-filter button")].map((k) => k.textContent),
           bereiche: inhalt.querySelectorAll(".lp-bereich").length, offen: inhalt.querySelectorAll(".lp-bereich[open]").length,
+          faecher: inhalt.querySelectorAll("details.lp-fach").length, faecherOffen: inhalt.querySelectorAll("details.lp-fach[open]").length,
           klasse: /Klasse \d|Lehrplan/.test(inhalt.innerText) };
         const d = [...inhalt.querySelectorAll(".lp-bereich")].find((x) => x.querySelector(".name").textContent === "Zahlzerlegung");
         d.open = true;
@@ -373,9 +374,9 @@ async function lauf(typ, name, groesse, basis) {
         r.nochOffen = !!document.querySelector(".lp-bereich[open]");
         return r;
       });
-      pruefe(F, "Reiter „Lernplan“: Baum Bereich → Thema ohne Klassen, alles zugeklappt, Filter Alle/Gerade dran/Als Nächstes/Gekonnt/Offen",
+      pruefe(F, "Reiter „Lernplan“: Baum Fach → Bereich → Thema ohne Klassen, anfangs nur die Fächer (alles zu), Filter Alle/Gerade dran/Als Nächstes/Gekonnt/Offen",
         lp.titel === "Lernplan" && lp.nav === "Lernplan" && JSON.stringify(lp.filter) === JSON.stringify(["Alle", "Gerade dran", "Als Nächstes", "Gekonnt", "Offen"])
-          && lp.bereiche > 100 && lp.offen === 0 && !lp.klasse, JSON.stringify(lp));
+          && lp.bereiche > 100 && lp.offen === 0 && lp.faecher === 6 && lp.faecherOffen === 0 && !lp.klasse, JSON.stringify(lp));
       pruefe(F, "Abhaken: Rückfrage nennt die Themen davor; Thema samt offenen Voraussetzungen von Eltern gekonnt (Erspieltes bleibt erspielt), nichts in der Wiederholung, Bereich bleibt offen",
         /^Wirklich\? Mit \d+ Themen davor/.test(lp.frage) && lp.eltern.includes("zerlegen-8") && lp.eltern.includes("zerlegen-7")
           && !lp.eltern.includes("zerlegen-4") && lp.aufgaben === 0 && lp.nochOffen, JSON.stringify(lp));
@@ -496,7 +497,7 @@ async function lauf(typ, name, groesse, basis) {
         for (let i = 0; i < 60 && !t.querySelector(".lp-karte"); i++) await new Promise((ok) => setTimeout(ok, 50));
         const karte = t.querySelector(".lp-karte.analog");
         return { leiste: !!document.getElementById("echte-dinge"), karten: t.querySelectorAll(".lp-karte").length,
-          text: karte?.innerText ?? "", bild: !!karte?.querySelector("ls-objekt"),
+          text: karte?.textContent ?? "", bild: !!karte?.querySelector("ls-objekt"),
           zuVorKlick: [...document.querySelectorAll(".lp-karte")].filter((x) => !x.closest(".thema[open]")).length };
       }, thema);
       pruefe(F, "Leiste ohne „Mit echten Dingen“; Spiele erst im aufgeklappten Thema, analoge Karte mit Bild, Titel und Situationen",
@@ -515,10 +516,10 @@ async function lauf(typ, name, groesse, basis) {
           await new Promise((ok) => setTimeout(ok, 600));
           const ziel = document.querySelector('.thema[data-id="zerlegen-3"]');
           const r = ziel?.getBoundingClientRect();
-          const fach = ziel.closest("section.fach"), klapp = fach.querySelector(".fach-kopf .klapp");
+          const fach = ziel.closest("section.fach"), klapp = fach.querySelector(".lp-fach-leiste .klapp");
           const vorher = klapp.getAttribute("wort");
           klapp.click();
-          const alle = [...fach.querySelectorAll(":scope > details.lp-bereich")];
+          const alle = [...fach.querySelectorAll(".lp-fach-innen > details.lp-bereich")];
           const auf = { wort: klapp.getAttribute("wort"), alleOffen: alle.every((d) => d.open) };
           klapp.click();
           const zu = { wort: klapp.getAttribute("wort"), alleZu: alle.every((d) => !d.open) };
