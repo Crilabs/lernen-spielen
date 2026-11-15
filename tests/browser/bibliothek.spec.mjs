@@ -43,16 +43,17 @@ for (const typ of [chromium, webkit]) {
     const seitenfehler = [];
     page.on("pageerror", (e) => seitenfehler.push(e.message));
 
-    // Startseite: Knopf Bibliothek
+    // Startseite: Reiter „Wissen“ im Kopf führt in die Bibliothek (Designsprache; kein Knopf „Bibliothek“ mehr)
     await page.goto(`${basis}/spiele/index.html`);
-    await page.waitForSelector(".bibliothek-knopf");
-    const knopf = await page.evaluate(() => {
-      const k = document.querySelector(".bibliothek-knopf").getBoundingClientRect(), r = document.querySelector(".regal-knopf").getBoundingClientRect();
-      return { unten: k.bottom <= innerHeight, rechts: k.right <= innerWidth, unter: k.top >= r.bottom, href: document.querySelector(".bibliothek-knopf").getAttribute("href"),
-        wort: document.querySelector(".bibliothek-knopf b").textContent };
+    await page.waitForSelector("ls-kopf");
+    const reiter = await page.evaluate(() => {
+      const a = document.querySelector("ls-kopf").shadowRoot.querySelector('a.reiter[data-reiter="wissen"]');
+      const r = a.getBoundingClientRect();
+      return { imBild: r.left >= 0 && r.top >= 0 && r.right <= innerWidth && r.bottom <= innerHeight, ziel: new URL(a.href).pathname.split("/").pop(),
+        wort: a.textContent, knopfWeg: !document.querySelector(".bibliothek-knopf") };
     });
-    pruefe(knopf.unten && knopf.rechts && knopf.unter && knopf.href === "bibliothek.html" && knopf.wort === "Bibliothek",
-      `${L} Startseite: Knopf „Bibliothek“ ganz im Bild unter „Was ich schon kann“`, JSON.stringify(knopf));
+    pruefe(reiter.imBild && reiter.ziel === "bibliothek.html" && reiter.wort === "Wissen" && reiter.knopfWeg,
+      `${L} Startseite: Reiter „Wissen“ im Bild führt zur Bibliothek, kein Knopf „Bibliothek“`, JSON.stringify(reiter));
 
     // Halle: die Räume als Türbögen mit Raumbild, mittig
     await page.goto(`${basis}/spiele/bibliothek.html`);

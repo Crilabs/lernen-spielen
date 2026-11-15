@@ -39,7 +39,8 @@ const CSS = `
 .kopf {
   box-sizing: border-box;
   height: 100%;
-  padding: calc(2.6rem + env(safe-area-inset-top, 0rem)) calc(${SEITE.rand}rem + env(safe-area-inset-right, 0rem)) 0
+  /* Rechts: die Tippfläche (11 rem) ragt 1,3 rem über den sichtbaren Knopf (8,4 rem); der sichtbare Rand bleibt 9,6 rem. */
+  padding: calc(2.6rem + env(safe-area-inset-top, 0rem)) calc(${SEITE.rand - (SEITE.tipp - SEITE.knopf) / 2}rem + env(safe-area-inset-right, 0rem)) 0
     calc(${SEITE.rand}rem + env(safe-area-inset-left, 0rem));
   display: flex;
   align-items: flex-start;
@@ -82,7 +83,7 @@ nav { display: flex; gap: 5.4rem; margin-right: auto; }
 .reiter[aria-current="page"]::after { opacity: 1; }
 .reiter:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.2rem; border-radius: 1.2rem; }
 .reiter:active span, .reiter:active img { transform: translateY(0.2rem); }
-.rechts { display: flex; align-items: flex-start; gap: 2.4rem; }
+.rechts { display: flex; align-items: flex-start; gap: 0; }
 `;
 
 export class LsKopf extends HTMLElement {

@@ -62,8 +62,8 @@ const dingHtml = (t, klasse = "ding") => `<button class="${klasse}" type="button
   + `<span class="material">${bausteinHtml(materialFuer(t))}</span><span class="name">${esc(t.name)}</span></button>`;
 
 /**
- * „Zuletzt gelernt“ für die Seitenleiste der Startseite; jedes Thema führt ins Regal an genau dieses Thema. Darunter die
- * Knöpfe „Was ich schon kann“ (Regal) und „Bibliothek“ (Geschichten, Spec 2026-11-15-bibliothek).
+ * „Zuletzt gelernt“ für die untere Reihe der Startseite; jedes Thema führt ins Regal an genau dieses Thema. Danach der
+ * Knopf „Was ich schon kann“ (Regal). Die Bibliothek erreicht das Kind über den Reiter „Wissen“ (Designsprache 2026-11-15).
  * Von Eltern Abgehaktes (vonEltern) steht hier nie: das Kind hat es nicht gerade gelernt.
  * @param {Gekonnt[]} gekonnt älteste zuerst
  * @returns {string}
@@ -75,8 +75,7 @@ export function zuletztHtml(gekonnt) {
       + `<span class="material">${bausteinHtml(materialFuer(t))}</span><span class="name">${esc(t.name)}</span></a></li>`).join("")}</ul>`
     : `<p class="leer">Hier steht, was du kannst.</p>`;
   return `<section class="zuletzt" aria-label="Zuletzt gelernt"><h2>Zuletzt gelernt</h2>${inhalt}</section>`
-    + `<a class="regal-knopf" href="regal.html"><img src="symbole/regal.svg" alt=""><b>Was ich schon kann</b></a>`
-    + `<a class="regal-knopf bibliothek-knopf" href="bibliothek.html"><img src="symbole/buch.svg" alt=""><b>Bibliothek</b></a>`;
+    + `<a class="regal-knopf" href="regal.html"><img src="symbole/regal.svg" alt=""><b>Was ich schon kann</b></a>`;
 }
 
 /**
