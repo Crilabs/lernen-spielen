@@ -1,8 +1,9 @@
 // <ls-leiste spiel="vorlage" fach="mathe" titel="Spielvorlage" thema="Die 7 zerlegen">
-// Kopfleiste (Rahmen-Schicht): ein Band in der Fach-Tönung oben über das sichere Feld (192 × 108 rem, mittig).
-// Links Haus (Alle Spiele, Nebenknopf), daneben das Fachsymbol als flache Kachel (nur Anzeige), dann der
-// Spielname in Fach-Tief und darunter leiser das Thema; rechts Ton an/aus (Nebenknopf).
-// Ohne bekanntes Fach: Band in Nebel, keine Kachel, Name in Tinte. `thema` darf sich zur Laufzeit ändern.
+// Kopfleiste (Rahmen-Schicht) oben über das sichere Feld (192 × 108 rem, mittig), nach der Designsprache
+// (Spec 2026-11-15-designsprache §5.6): ruhiger Grund in Nebel statt eines Bands in der Fach-Tönung – die Fachfarbe
+// erscheint nur klein in der flachen Fachkachel (ohne Kontur, nur Anzeige). Links Haus (Alle Spiele, Nebenknopf), daneben
+// die Kachel, dann der Spielname (Inter, Tinte) und darunter leiser das Thema (Andika); rechts Ton an/aus (Nebenknopf).
+// Ohne bekanntes Fach: keine Kachel. `thema` darf sich zur Laufzeit ändern.
 // `ohne-haus` (nur die Startseite): kein Haus, die Seite ist selbst das Zuhause. Slot `rechts`: rechts neben
 // Ton, z. B. das Zahnrad der Startseite.
 // `nur-ton` (Geschichte, Designsprache): nur der Ton-Knopf oben rechts (sichtbar 8,4 rem), kein Band, kein Haus, kein
@@ -55,7 +56,7 @@ ${FACH_CSS}
   display: flex;
   align-items: center;
   gap: ${MASSE.rand}rem;
-  background: var(--fach-toenung);
+  background: var(--ls-nebel);
   pointer-events: auto;
 }
 .fach {
@@ -63,8 +64,7 @@ ${FACH_CSS}
   box-sizing: border-box;
   width: ${MASSE.fach}rem;
   height: ${MASSE.fach}rem;
-  padding: 1.5rem;
-  border: var(--ls-kontur) solid var(--ls-tinte);
+  padding: 1.8rem;
   border-radius: var(--ls-radius);
   background: var(--fach-fuellung);
   display: block;
@@ -97,7 +97,8 @@ ${FACH_CSS}
 :host([durchsichtig]) .titel {
   position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
-.name { font-size: 5.2rem; line-height: 1.2; font-weight: 700; color: var(--fach-tief); }
+.name { font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
+  font-size: 5.2rem; line-height: 1.15; font-weight: 750; letter-spacing: -0.025em; color: var(--ls-tinte); }
 .thema { font-size: 3.4rem; line-height: 1.3; font-weight: 400; color: var(--ls-tinte-weich); }
 .name[hidden], .thema[hidden] { display: none; }
 .ton { margin-left: auto; flex: none; }

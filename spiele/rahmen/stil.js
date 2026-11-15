@@ -239,7 +239,9 @@ ${TOKEN_CSS}
 .haupt .zeichen img { visibility: hidden; }
 .zeichen[hidden], .wort[hidden] { display: none; }
 .gespiegelt .zeichen { transform: scaleX(-1); }
-.wort { display: block; line-height: 1; padding-bottom: 0.08em; }
+/* Wörter auf Knöpfen sind Oberfläche: Inter mit festen Zeichenvarianten (Designsprache); Lernstoff bleibt Andika. */
+.wort { display: block; line-height: 1; padding-bottom: 0.04em; font-family: var(--ls-schrift-oberflaeche);
+  font-feature-settings: var(--ls-schrift-merkmale); letter-spacing: -0.01em; }
 
 /* Sonnenring: Fokus (in ls-hilfe auch das Aufleuchten). Immer ein Ring, nie eine Fläche; er liegt direkt
    an der Tinte-Kontur an, damit kein Hintergrund durchscheint. */
