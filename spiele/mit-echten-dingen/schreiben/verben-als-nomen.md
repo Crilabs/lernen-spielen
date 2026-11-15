@@ -23,6 +23,21 @@ Ihr braucht: eine Kiste mit Kram, kleine Zettel, einen Stift
 
 **Leichter:** Nur zwei Haufen. Einer sagt den Zettel, der andere schreibt ihn. **Schwerer:** Auch beim (bei dem): „Die Schürze hilft beim Kochen.“ Aber: „Es gibt viel zu tun.“ Zu dem passt nicht, tun bleibt klein.
 
+## In Bewegung: Der Artikel-Stampfer
+
+**Zum Verinnerlichen:** Spielt zuerst „Die Kramkiste beschriften“. Dieses Spiel hilft, zu behalten, dass ein Verb mit Artikel groß geschrieben wird.
+
+Ihr braucht: Platz
+
+1. Einer sagt: „Wir malen gern.“ Hier steht kein Artikel.
+2. Sagt: „Stifte zum Malen.“ Zum heißt zu dem. Stampft bei „Malen“ einmal.
+3. Sagt noch: „Das Malen macht Spaß.“ und „Wir malen ein Bild.“ Stampft nur, wenn ein Artikel vor dem Wort steht oder darin steckt.
+4. Wählt ein neues Wort, zum Beispiel singen.
+
+**Darauf kommt es an:** Steht ein Artikel davor oder steckt er drin wie in zum, ist das Verb ein Nomen und beginnt groß: das Malen, zum Malen.
+
+**Leichter:** nur „das Malen“. **Schwerer:** auch „beim“.
+
 ## Unterwegs: Geräusche sammeln
 
 Ihr braucht: einen Spaziergang, Papier, einen Stift

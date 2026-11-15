@@ -3,7 +3,7 @@
 // spiele/mit-echten-dingen/<fach>/<thema-id>.md mit einer Form je Situation (`## Am Tisch: …`, `## In Bewegung: …`,
 // `## Unterwegs: …`). Welche Themen eine (freigegebene) Anleitung haben, sagt das Verzeichnis
 // (spiele/rahmen/echte-dinge.js, `npm run echte-dinge`). Hier wird jede Form in den festen Aufbau der Seite gebracht:
-// „Ihr braucht“ (auf dem Tablett), nummerierte Schritte, „Darauf kommt es an“ (Sonnenring), „Leichter“/„Schwerer“
+// „Erst verstehen, dann verinnerlichen“ (nur bei einer Form zum Festigen), „Ihr braucht“ (auf dem Tablett), nummerierte Schritte, „Darauf kommt es an“ (Sonnenring), „Leichter“/„Schwerer“
 // als Umschalter (eine Stufe zur Zeit), „Passt gut“. Der Kopf mit den Quellen erscheint nie. Gibt es mehr als eine
 // Form, steht oben die Wahl der Situation. Ohne Datei der Einzeiler aus dem Lernplan (eltern).
 // Nur lesen, kein Vorlesen (Christian, 2026-11-14).
@@ -16,10 +16,12 @@ import { inline, blockHtml } from "../rahmen/markdown.js";
 
 /**
  * @typedef {{ braucht: string, schritte: string[], kern: string, leichter: string, schwerer: string, passt: string,
- *   weiteres: Block[] }} Teile
+ *   verinnerlichen: string, weiteres: Block[] }} Teile
  */
 
-const MARKEN = ["Darauf kommt es an", "Leichter", "Schwerer", "Passt gut"];
+// „Zum Verinnerlichen“ steht vor einer Form „In Bewegung“, die das Prinzip nicht selbst zeigt, sondern das Verstandene
+// festigt (docs/mit-echten-dingen.md „Immer auch in Bewegung“): erst verstehen, dann verinnerlichen.
+const MARKEN = ["Zum Verinnerlichen", "Darauf kommt es an", "Leichter", "Schwerer", "Passt gut"];
 
 /** Wert hinter einer fetten Marke, bis zur nächsten Marke oder zum Ende. @param {string} text @param {string} marke */
 function nachMarke(text, marke) {
@@ -34,11 +36,12 @@ function nachMarke(text, marke) {
  */
 export function formTeile(form) {
   /** @type {Teile} */
-  const t = { braucht: "", schritte: [], kern: "", leichter: "", schwerer: "", passt: "", weiteres: [] };
+  const t = { braucht: "", schritte: [], kern: "", leichter: "", schwerer: "", passt: "", verinnerlichen: "", weiteres: [] };
   for (const b of form.bloecke) {
     if (b.typ === "p" && /^Ihr braucht:/.test(b.text) && !t.braucht) { t.braucht = b.text.replace(/^Ihr braucht:\s*/, ""); continue; }
     if (b.typ === "ol" && !t.schritte.length) { t.schritte = b.punkte; continue; }
     if (b.typ === "p" && MARKEN.some((m) => b.text.includes(`**${m}:**`))) {
+      t.verinnerlichen ||= nachMarke(b.text, "Zum Verinnerlichen");
       t.kern ||= nachMarke(b.text, "Darauf kommt es an");
       t.leichter ||= nachMarke(b.text, "Leichter");
       t.schwerer ||= nachMarke(b.text, "Schwerer");
@@ -71,6 +74,7 @@ export function formHtml(form, sichtbar) {
     : "";
   return `<div class="form" data-situation="${esc(form.situation)}"${sichtbar ? "" : " hidden"}>`
     + `<p class="form-name">${esc(form.name)}</p>`
+    + abschnitt("verinnerlichen", "Erst verstehen, dann verinnerlichen", t.verinnerlichen)
     + abschnitt("braucht", "Ihr braucht", t.braucht)
     + (t.schritte.length ? `<ol class="schritte">${t.schritte.map((s) => `<li>${inline(s)}</li>`).join("")}</ol>` : "")
     + (t.weiteres.length ? `<div class="weiteres">${blockHtml(t.weiteres, { ebene: 2 })}</div>` : "")

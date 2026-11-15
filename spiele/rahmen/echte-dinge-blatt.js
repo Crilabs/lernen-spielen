@@ -30,7 +30,8 @@ function formHtml(f) {
     .map((t) => `<p class="kern">${inline(t).replace(/^<b>Darauf kommt es an:?<\/b>\s*/, "<b>Darauf kommt es an:</b> ")}</p>`);
   const stufen = absaetze.filter((t) => STUFE.test(t))
     .map((t) => `<p class="stufen">${inline(t).replace(/ <b>Schwerer:/, "<br><b>Schwerer:")}</p>`);
-  const linksHtml = blockHtml(links, { ebene: 3 }).replace(/<p>Ihr braucht:/, "<p><b>Ihr braucht:</b>");
+  const linksHtml = blockHtml(links, { ebene: 3 }).replace(/<p>Ihr braucht:/, "<p><b>Ihr braucht:</b>")
+    .replace(/<p><b>Zum Verinnerlichen:<\/b>\s*/, '<p class="verinnerlichen"><b>Erst verstehen, dann verinnerlichen:</b> ');
   return `<article class="form"><h2><img src="symbole/${escape(f.symbol)}" alt=""><span>${escape(f.wort)}: ${escape(f.name)}</span></h2>`
     + `<div class="spalten"><div class="links">${linksHtml}</div><div class="rechts">${kern.join("")}${stufen.join("")}</div></div></article>`;
 }

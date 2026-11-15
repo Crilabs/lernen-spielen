@@ -21,3 +21,17 @@ Ihr braucht: Erspartes aus Münzglas oder Spardose, einen Geldbeutel. Ersatz: Sp
 **Darauf kommt es an:** 70 geteilt durch 10 fragt: Wie oft passt die 10 in die 70? Das sagt die Malaufgabe: 7 mal 10 ist gleich 70. Also ist 70 geteilt durch 10 gleich 7: sieben Scheine.
 
 **Leichter:** Nur Zehn-Euro-Scheine, bis 50 Euro. **Schwerer:** 40 Euro in Fünf- und in Zehn-Euro-Scheinen. Oder teilt 20 Euro gerecht unter euch beiden.
+
+## In Bewegung: Hüpfen in Fünfern
+
+Ihr braucht: einen Flur oder ein Zimmer mit Platz
+
+1. Wählt eine Schrittgröße (2, 5 oder 10) und ein Ziel aus dieser Reihe, zum Beispiel 35 bei Fünfern.
+2. Hüpft los. Jeder Hüpfer ist ein Fünfer. Sagt dabei: „5, 10, 15 …“
+3. Einer zählt die Hüpfer mit den Fingern.
+4. Beim Ziel sagt ihr: „35 geteilt durch 5 ist gleich 7. Sieben Hüpfer.“
+5. Sagt auch die Malaufgabe: „7 mal 5 ist gleich 35.“
+
+**Darauf kommt es an:** 35 geteilt durch 5 fragt: Wie oft passt die 5 in die 35? Jeder Hüpfer ist ein Fünfer. Die Zahl der Hüpfer ist das Ergebnis.
+
+**Leichter:** nur Zehnerhüpfer bis 50. **Schwerer:** Ihr nennt das Ziel und sagt vorher, wie viele Hüpfer es werden.

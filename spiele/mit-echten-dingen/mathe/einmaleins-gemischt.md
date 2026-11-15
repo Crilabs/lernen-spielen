@@ -21,3 +21,16 @@ Ihr braucht: einen Spaziergang an großen Häusern, etwa Wohnblock oder Schule.
 **Darauf kommt es an:** 7 mal 8 sind fünf Achter und zwei Achter. So setzt ihr schwere Aufgaben aus Kernaufgaben zusammen.
 
 **Leichter:** drei Stockwerke mit je vier Fenstern. **Schwerer:** acht Stockwerke mit je neun Fenstern: zehn Neuner weniger zwei Neuner, 90 minus 18 ist gleich 72.
+
+## In Bewegung: Kissen-Weg
+
+Ihr braucht: Kissen oder Schuhe, einen Flur
+
+1. Wählt 6 mal 7, 7 mal 8 oder 8 mal 9. Legt so viele Kissen in eine Reihe, wie die erste Zahl sagt. Jedes ist die zweite Zahl, bei 7 mal 8 ein Achter.
+2. Geht zum fünften Kissen: „5 mal 8 ist gleich 40.“
+3. Geht Kissen für Kissen weiter und sagt bei jedem „plus 8“: 48, 56.
+4. Sagt: „7 mal 8 ist gleich 56.“ Dann die nächste Aufgabe.
+
+**Darauf kommt es an:** Eine schwere Aufgabe setzt ihr aus der Kernaufgabe 5 mal und weiteren Gruppen zusammen. 7 mal 8 sind fünf Achter und zwei Achter.
+
+**Leichter:** nur 6 mal 7: 35, dann 42. **Schwerer:** 9 mal 8 mit zehn Kissen: 80, ein Kissen zurück, 80 minus 8 ist gleich 72.

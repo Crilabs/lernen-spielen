@@ -23,6 +23,19 @@ Ihr braucht: den Einkauf in der Tasche
 
 **Leichter:** Nur drei Dinge, je eins mit der, die, das. **Schwerer:** Macht ein Ding mit -chen klein: die Dose – das Döschen. Welches Geschlecht hat das neue Wort?
 
+## In Bewegung: Drei Ecken für er, sie, es
+
+Ihr braucht: drei Zettel mit „er“, „sie“, „es“, eine Tüte
+
+1. Legt die Zettel in drei Ecken des Zimmers.
+2. Holt leichte Dinge: „der Löffel“ kommt in die Ecke „er“, „die Socke“ zu „sie“, „das Kissen“ zu „es“.
+3. Nehmt die Tüte und legt sie in die Ecke „sie“: „die Tüte“.
+4. Sagt dann „der Beutel“ und tragt die Tüte in die Ecke „er“.
+
+**Darauf kommt es an:** Das Geschlecht gehört zum Wort. Dasselbe Ding hat zwei Wörter, und jedes hat sein eigenes Geschlecht.
+
+**Leichter:** nur eine Ecke zur Zeit. **Schwerer:** Sucht ein Ding mit drei Wörtern: die Tasche, der Beutel, das Netz.
+
 ## Unterwegs: Ein Ding, zwei Wörter
 
 Ihr braucht: einen Weg zum Einkaufen

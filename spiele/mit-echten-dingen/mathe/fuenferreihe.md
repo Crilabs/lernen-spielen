@@ -19,3 +19,16 @@ Ihr braucht: Fünf- und Zehn-Cent-Münzen aus Geldbeutel oder Münzglas. Ersatz:
 **Darauf kommt es an:** 5 ist die Hälfte von 10. Darum ist jede Fünferaufgabe die Hälfte der Zehneraufgabe: 6 mal 5 ist die Hälfte von 6 mal 10, also 30.
 
 **Leichter:** Brötchen für 20 Cent, 4 Fünfer. **Schwerer:** Legt erst die Zehner für 80 Cent. Legt daneben 8 Fünfer und sagt: „8 mal 5 ist gleich 40.“
+
+## In Bewegung: Hand an Hand
+
+Ihr braucht: eure Hände, Platz zum Gegenüberstehen
+
+1. Stellt euch gegenüber. Eine Hand hat 5 Finger.
+2. Klatscht eure rechten Hände ab. Sagt: „Zwei Hände, 10 Finger.“
+3. Klatscht dann die linken Hände ab. Jedes Abklatschen sind zwei Hände mehr. Sagt: „4 Hände.“
+4. Zählt die Finger in Fünferschritten: „5, 10, 15, 20.“
+
+**Darauf kommt es an:** Jede Hand ist ein Fünfer. Zwei Hände sind 10, ein Zehner. Darum ist 5 die Hälfte von 10. Vier Hände sind 4 mal 5.
+
+**Leichter:** Zeigt nur beide Hände von einem: 5, 10. **Schwerer:** Eine dritte Person kommt dazu: Wie viele Finger sind es bei sechs Händen?

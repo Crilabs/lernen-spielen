@@ -22,3 +22,18 @@ Ihr braucht: Papier oder eine alte Karte, einen Stift
 **Darauf kommt es an:** Auch Wörter für Gefühle und Gedanken sind Nomen: Freude, Mut, Idee. Das zeigt die Probe: Ein Artikel passt davor, ein Adjektiv dazwischen: die große Freude. Darum beginnen sie groß, auch ohne Artikel auf der Karte.
 
 **Leichter:** Dieselbe Probe mit einem Löffel: „der große Löffel“, „der große Mut“. **Schwerer:** Prüft jedes Wort in „Ich bin froh und wünsche dir Spaß.“ Vor „froh“ passt kein Artikel, vor „Spaß“ schon.
+
+## In Bewegung: Gefühle in die Luft schreiben
+
+**Zum Verinnerlichen:** Spielt zuerst „Eine Karte voller Wünsche“. Dieses Spiel hilft, Wörter wie Freude und Mut als Nomen zu behalten.
+
+Ihr braucht: Platz
+
+1. Wählt ein Wort: Freude, Mut, Ärger, Idee.
+2. Einer zeigt es mit dem Körper, so wie es passt.
+3. Der andere sagt: „die große Freude“. Ein Artikel passt davor.
+4. Schreibt das Wort mit dem ganzen Arm in die Luft, den ersten Buchstaben ganz groß. Dann tauscht ihr.
+
+**Darauf kommt es an:** Auch Wörter wie Freude, Mut und Idee sind Nomen, denn ein Artikel passt davor. Darum beginnen sie groß.
+
+**Leichter:** nur Freude und Mut. **Schwerer:** Sagt auch einen Satz: „Ich habe Mut.“

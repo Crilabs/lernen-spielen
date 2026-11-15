@@ -44,3 +44,16 @@ Ihr braucht: kleine Steine oder Eicheln vom Weg
 **Darauf kommt es an:** Beide Hände zusammen haben immer so viele, wie die Zahl sagt. Wer eine Hand sieht, weiß, wie viele zur Zahl noch fehlen.
 
 **Leichter:** Zählt die Steine in der offenen Hand und zählt dann mit den Fingern weiter bis zur Zahl. **Schwerer:** Sagt ohne Steine alle Arten auf, wie die Zahl auf zwei Hände passt.
+
+## In Bewegung: Socken in zwei Zimmer
+
+Ihr braucht: Socken, zwei Zimmer oder zwei Kissen
+
+1. Wählt eine Zahl von 2 bis 10. Holt so viele Socken, wie sie sagt, zum Beispiel sieben. Legt sie ins erste Zimmer.
+2. Tragt eine Socke ins zweite Zimmer. Sagt: „7 ist gleich 6 plus 1.“
+3. Tragt Socke für Socke hinüber und sagt es jedes Mal.
+4. Sind alle drüben, tragt ihr einige zurück. Sagt, wie viele in jedem Zimmer liegen: „7 ist gleich 3 plus 4.“
+
+**Darauf kommt es an:** Es sind immer gleich viele Socken. Geht eine hinüber, hat ein Zimmer eine weniger, das andere eine mehr.
+
+**Leichter:** Legt die Socken in Reihen und zählt nach. **Schwerer:** Sagt vor jedem Tragen, wie viele danach im ersten Zimmer liegen.

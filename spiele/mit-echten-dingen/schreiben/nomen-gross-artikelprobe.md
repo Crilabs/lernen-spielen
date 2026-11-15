@@ -22,3 +22,18 @@ Ihr braucht: Papier, einen Stift, Gabeln und Becher
 **Darauf kommt es an:** Passt im Satz ein Artikel vor ein Wort, ist es ein Nomen. Nomen schreibt man groß: die Gabeln. „Die stell“ passt nicht, stell bleibt klein. Am Satzanfang ist jedes Wort groß.
 
 **Leichter:** Nur ein Ding: „hol den teller“. **Schwerer:** „bring das spiel, dann spielen wir“.
+
+## In Bewegung: Kissen-Probe
+
+**Zum Verinnerlichen:** Spielt zuerst „Der Auftragszettel“. Dieses Spiel hilft, mit der Artikelprobe Nomen zu erkennen.
+
+Ihr braucht: zwei Kissen
+
+1. Legt die Kissen auf den Boden. Das eine heißt „Artikel passt“, das andere „passt nicht“.
+2. Einer sagt: „Hol Gabeln und Becher.“
+3. Setzt vor jedes Wort nach dem ersten der, die oder das und hüpft auf das Kissen: „die Gabeln“ passt, „die und“ nicht.
+4. Schreibt die Wörter mit Artikel groß auf.
+
+**Darauf kommt es an:** Passt im Satz ein Artikel vor ein Wort, ist es ein Nomen und beginnt groß.
+
+**Leichter:** nur „Hol den Teller.“ **Schwerer:** „Bring das Spiel, dann spielen wir.“

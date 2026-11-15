@@ -42,6 +42,7 @@ const STIL = `
   font-size: 7.5pt; font-weight: 700; line-height: 1; color: var(--fach); }
 #ls-blatt .kern { border-left: 0.8mm solid var(--fach); padding: 0.4mm 0 0.4mm 3mm; margin-bottom: 3.5mm; }
 #ls-blatt .kern b { display: block; }
+#ls-blatt .verinnerlichen { font-style: italic; }
 #ls-blatt .stufen { display: block; gap: 0; color: #6B5C96; } /* die Seite kann eigene .stufen haben (Elternbereich) */
 #ls-blatt .stufen b { color: #3B2A6B; }
 @media print {

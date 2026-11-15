@@ -1,6 +1,6 @@
 # Mit echten Dingen – Spiele ohne Bildschirm
 
-Stand: 2026-11-14 · **freigegeben (Christian, 2026-11-14)** · Entscheidungen von Christian (2026-11-14)
+Stand: 2026-11-15 (Immer auch in Bewegung) · **freigegeben (Christian, 2026-11-14)** · Entscheidungen von Christian (2026-11-14)
 Zusammengeführt am 2026-11-14 aus der Fassung des Prüfstands (Formen nach Situation, Entwürfe, Übersicht, Bild) und der
 Fassung auf `main` (eigene Seite `echt.html`, Recherche nach Wirksamkeit) **(Christian)**.
 Markierung: **(Christian)** entschieden · **(Annahme)** Vorschlag, korrigierbar.
@@ -16,8 +16,9 @@ Name in der App und im Projekt: **„Mit echten Dingen“** (Annahme; der Knopf 
 ## Was entsteht
 
 - **Je Thema eine Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Christian):** *Am Tisch*
-  (ruhig, konzentriert), *In Bewegung* (Treppe, hüpfen, Raum), *Unterwegs* (Spaziergang, Auto, Einkauf). Varianten
-  nur, wo sie das Thema wirklich treffen; erzwungene Varianten streicht die Prüfung (E1). Gibt es für ein Thema schon
+  (ruhig, konzentriert), *In Bewegung* (Treppe, hüpfen, Raum), *Unterwegs* (Spaziergang, Auto, Einkauf). *In Bewegung*
+  gibt es immer (nächster Punkt); *Am Tisch* und *Unterwegs* nur, wo sie das Thema wirklich treffen; erzwungene
+  Varianten streicht die Prüfung (E10). Gibt es für ein Thema schon
   eine Datei, entsteht keine zweite, auch wenn ein weiteres Spiel das Thema bedient.
 - **Eine Anleitung für eine Familie (Christian, 2026-11-14):** Wer die 4 mit Nudeln und Tellern zerlegt, braucht kein
   zweites Spiel, das die 6 mit Erbsen und Tassen zerlegt. Ist die Handlung dieselbe und wechselt nur ein Wert (Zahl,
@@ -27,6 +28,20 @@ Name in der App und im Projekt: **„Mit echten Dingen“** (Annahme; der Knopf 
   Liste, und die Prüfung E1 prüft, ob sie es wirklich trägt. **Gegenregel:** Themen mit eigener Schwierigkeit oder
   eigenem Alltagszweck bleiben getrennt, auch bei gleichem Material (die Zweierreihe paart Socken, die Fünferreihe
   zählt Kleingeld). Jedes Thema steht in höchstens einer Datei (`npm run echte-dinge` bricht sonst ab).
+- **Immer auch in Bewegung (Christian, 2026-11-15):** Jede Anleitung hat eine Form *In Bewegung* (hüpfen, klatschen,
+  stampfen, Buchstaben ablaufen, Dinge im Haus suchen …). Bewegung macht Spaß, und was man mit dem Körper getan hat,
+  merkt man sich besser. Es gibt sie in zwei Arten:
+  - **Zum Verstehen:** Ergibt sich die Bewegung aus der Sache (Treppenstufen zählen, Silben abzählen beim Verstecken),
+    zeigt sie das Prinzip selbst; sie kann dann auch die Grundform sein.
+  - **Zum Verinnerlichen:** Ergibt sie sich nicht aus der Sache, festigt sie, was eine andere Form erklärt hat. Das wird
+    gesagt: Die Form beginnt mit `**Zum Verinnerlichen:**` und nennt die Form zum Verstehen in „…“, z. B.
+    `**Zum Verinnerlichen:** Spielt zuerst „Kleingeld für die Brötchen“. Dieses Spiel hilft, die Fünferreihe zu
+    behalten.` Die Seite zeigt das als „Erst verstehen, dann verinnerlichen“ vor „Ihr braucht“, das Druckblatt auch.
+    Auch hier gilt „Darauf kommt es an“ (der Kern, den die Bewegung festigt), Leichter/Schwerer, Neutralität, kein
+    „schnell“, kein Abfragen: kein Wettlauf, keine Zeit, wer danebenhüpft, hüpft einfach weiter.
+  Die Bewegung ist an das Thema gebunden (jeder Hüpfer, jedes Klatschen, jeder Fund trägt den Inhalt), nicht Bewegung
+  plus eine Frage. Ohne Gerät, mit Platz in Wohnung, Flur, Treppe oder Hof; nichts Gefährliches (keine Treppe
+  hinunterspringen, nicht rennen auf glattem Boden). Geparkte Anleitungen brauchen sie erst, wenn sie weitergehen.
 - **Nach Situation, nicht nach Kind-Typ:** keine Einstellung „Bewegungstyp“ o. ä. im Profil (Lerntypen sind ein
   Mythos, `grundsaetze.md` §1). Gewählt wird auf der Seite im Moment (N1, N2); die Seite merkt sich die letzte Wahl
   als Voreinstellung.
@@ -127,12 +142,16 @@ Spiels, die noch keine Anleitung haben.
 | E9 | Methode laut Recherche wirksam für dieses Thema (Quelle im Kopf); die Handlung ist praxisnah und hat einen Zweck über das Üben hinaus |
 | E10 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
 | E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
+| E12 | In Bewegung: da; jede Bewegung trägt den Inhalt; zeigt sie das Prinzip nicht selbst, steht vorn „Zum Verinnerlichen“ mit der Form zum Verstehen; sicher, ohne Wettlauf |
+
+E9 für eine Form zum Verinnerlichen: Ihr Zweck ist Spaß an der Bewegung und Behalten; sie braucht keinen Alltagszweck,
+die Form zum Verstehen hat ihn (Christian, 2026-11-15). E12 seit 2026-11-15 (Christian).
 
 Nummern seit der Zusammenführung (Christian, 2026-11-14): E9 wie auf `main` beschlossen, die Prüfung der Varianten
 (vorher E9 im Prüfstand) ist E10, das Bild (vorher E10) ist E11. Die Spielobjekte (`spiele/objekte/`) sind auf
 `main`, E11 gilt also; das Bild der Karte ist in der App noch nicht gebaut (E11 prüft das Objekt und `bild` im Kopf).
 
-Die Grundsätze (`grundsaetze.md`) gelten für jede Anleitung ganz, auch wo E1–E11 sie nicht einzeln nennen.
+Die Grundsätze (`grundsaetze.md`) gelten für jede Anleitung ganz, auch wo E1–E12 sie nicht einzeln nennen.
 
 Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 5. **Kosten** (Token für Recherche, Schreiben, Prüfung) in `spiele/mit-echten-dingen/kosten.json`, wie bei den
@@ -179,7 +198,7 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   Anleitung, die sie zeigen. `tests/echte-dinge.test.mjs` prüft, dass das Verzeichnis aktuell
   ist, und die Form jeder Datei (Kopf, Thema im Lernplan, Ihr braucht, Schritte, Darauf kommt es an, Leichter/Schwerer,
   Wortzahl, Wortliste 3.2, Anrede „ihr“). Die ersten drei Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`,
-  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E11 noch nicht durchlaufen und
+  `lesen/silben-klatschen`) sind **Entwürfe** (`entwurf: true`): sie haben die Prüfung E1–E12 noch nicht durchlaufen und
   bleiben Entwurf, bis der Skill sie grün prüft.
 - **Darstellung:** `spiele/rahmen/markdown.js` (Leser: klein, ohne DOM, alles escaped, Kopf wird abgetrennt),
   `spiele/rahmen/echte-dinge.js` (Verzeichnis, Laden, gemerkte Form `echte-dinge.form`), die Seite `spiele/echt.html`
@@ -194,5 +213,5 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   Seite (`#ls-blatt`), misst und setzt es eine Schriftstufe kleiner, wenn es länger als eine Seite ist (passt es dann
   nicht, folgt eine zweite Seite; keine Form wird geteilt), und druckt über `drucke()` in `spiele/kern/geraet.js`
   (Fähigkeit `drucken`: Browser und Desktop ja, Android/iOS nein).
-- **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Bild → Prüfung E1–E11 durch einen
+- **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Bild → Prüfung E1–E12 durch einen
   frischen Agenten → höchstens 3 Runden → Datei, Verzeichnis, Kosten in `spiele/mit-echten-dingen/kosten.json`).
