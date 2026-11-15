@@ -162,7 +162,7 @@ async function start() {
   const faecher = ctx ? startKarten(uebersicht(ctx, stand), ctx, stand, heute) : [];
   raster.innerHTML = faecher.length ? faecher.map((f) => abschnittHtml(kategorien.get(f.fach) ?? { id: f.fach, name: f.fach },
     (spielFrei ? f.spiele : []).map((k) => {
-      const palette = paletteFuer(ctx, k.spiel.welt);
+      const palette = paletteFuer(ctx, k.spiel.karte?.welt ?? k.spiel.welt);
       return spielKarteHtml(k, f.fach, palette ? vignetteSvg(palette) : null);
     }).join("") + f.echt.map((k) => echtKarteHtml(k, f.fach)).join(""))).join("")
     : (satz ? "" : `<p class="leer">Hier kommen bald Spiele.</p>`);

@@ -236,7 +236,7 @@ async function start() {
     const echtDa = !!jetzt.eltern || !!anleitung;
     spieleFeld.innerHTML = (spielFrei ? t.spiele : []).map((s) => {
       const spiel = spielNach.get(s.id) ?? s;
-      const palette = paletteFuer(ctx, spiel.welt);
+      const palette = paletteFuer(ctx, spiel.karte?.welt ?? spiel.welt);
       return spielKarteHtml({ spiel, thema: { id, name: t.name } }, fach, palette ? vignetteSvg(palette) : null);
     }).join("") + (echtDa ? echtKarteHtml({ thema: { id, name: t.name } }, fach, anleitung?.titel) : "");
     spieleTitel.hidden = !(spielFrei && t.spiele.length) && !echtDa;
