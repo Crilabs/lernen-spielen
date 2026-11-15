@@ -67,6 +67,13 @@ test("es gibt Geschichten", () => {
   assert.ok(geschichten.length >= 1);
 });
 
+test("index.json listet genau die Geschichten der Ordner mit Titel, Art, Welt und Familie", () => {
+  const liste = JSON.parse(readFileSync(join(ORDNER, "index.json"), "utf8")).geschichten;
+  const erwartet = geschichten.map(({ g }) => ({ id: g.id, titel: g.titel, art: g.art, welt: g.welt ?? null, familie: g.familie ?? null }))
+    .sort((a, b) => a.id.localeCompare(b.id));
+  assert.deepEqual([...liste].sort((a, b) => a.id.localeCompare(b.id)), erwartet, "spiele/geschichten/index.json nachtragen");
+});
+
 for (const { ordner, g } of geschichten) {
   test(`Geschichte ${ordner}: Format und Regeln (geschichten.md §2, §3)`, () => {
     assert.deepEqual(pruefeGeschichte(g, ordner), []);

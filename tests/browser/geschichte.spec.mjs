@@ -5,7 +5,8 @@
 //
 // Geprüft mit der Lerngeschichte „Zehnerpaare“ über die Test-Schnittstelle window.lsGeschichte (?pruefen):
 // Bild quadratisch links, Text rechts; Pfeiltaste, Wischen und Tipp blättern; auf der Frage-Seite ist Weiter zuerst nicht da und erscheint nach der Ruhe;
-// Zurück auf Seite 1 tut nichts; „Fertig“ führt zu weiter; keine Seitenfehler. Unbekannte id zeigt einen ruhigen Text.
+// Zurück auf Seite 1 tut nichts; „Fertig“ führt zu weiter und merkt die Geschichte als gelesen (Elternbereich „Sachthemen“),
+// in der Vorschau der Eltern (&eltern) nicht; keine Seitenfehler. Unbekannte id zeigt einen ruhigen Text.
 
 import { createRequire } from "node:module";
 import { resolve } from "node:path";
@@ -61,6 +62,14 @@ for (const typ of [chromium, webkit]) {
   pruefe((await g()).seite === 8, `${name}: letzte Seite`);
   await Promise.all([page.waitForURL(/themen\.html/), page.evaluate(() => window.lsGeschichte.fertig())]);
   pruefe(true, `${name}: Fertig führt zu weiter`);
+  // weiter=themen.html kann selbst weiterleiten: erst Ruhe abwarten, dann den Lernstand lesen
+  const gelesen = async () => { await page.waitForLoadState("networkidle"); await page.waitForTimeout(300);
+    return page.evaluate(() => JSON.parse(localStorage.getItem("lernstand-kind-1-lernplan") || "{}").sachthemen?.geschichten ?? {}); };
+  pruefe(Object.keys(await gelesen()).join() === "zehnerpaare", `${name}: Fertig merkt die Geschichte als gelesen`);
+  await page.goto(`${basis}/spiele/geschichte.html?id=haustiere&eltern&weiter=themen.html&pruefen`);
+  await page.waitForFunction(() => window.lsGeschichte?.seiten > 0);
+  await Promise.all([page.waitForURL(/themen\.html/), page.evaluate(() => window.lsGeschichte.fertig())]);
+  pruefe(!("haustiere" in (await gelesen())), `${name}: Vorschau der Eltern merkt nichts`);
   pruefe(!seitenfehler.length, `${name}: keine Seitenfehler ${seitenfehler.join(" | ")}`);
 
   await page.goto(`${basis}/spiele/geschichte.html?id=gibt-es-nicht`);

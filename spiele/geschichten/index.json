@@ -1,0 +1,7 @@
+{
+  "hinweis": "Alle Geschichten (docs/geschichten.md §3) für Seiten, die keine Ordner auflisten können (Elternbereich „Sachthemen“). tests/geschichten.test.mjs prüft, dass die Liste zu den Ordnern passt.",
+  "geschichten": [
+    { "id": "haustiere", "titel": "Ein Tag mit Mia, der Katze", "art": "sachgeschichte", "welt": "haustiere", "familie": null },
+    { "id": "zehnerpaare", "titel": "Zehn Gäste, zwei Häuser", "art": "struktur", "welt": null, "familie": "zehnerpaare" }
+  ]
+}
