@@ -429,6 +429,11 @@ async function lauf(typ, name, groesse, basis) {
         for (let i = 0; i < 40 && !document.querySelector(".lp-filter button.an")?.textContent.includes("Gesehen"); i++) await warte();
         await warte();
         r.gesehen = [...document.querySelectorAll(".sw-gruppe[open] .sw-welt .name")].map((n) => n.textContent);
+        r.nachFilter = [...document.querySelectorAll(".sw-gruppe")].map((d) => d.dataset.id + (d.open ? ":auf" : ""));
+        document.querySelector('[data-tab="lernstand"]').click(); await warte();
+        document.querySelector('[data-tab="sachwelten"]').click();
+        for (let i = 0; i < 40 && !document.querySelector(".sw-gruppe"); i++) await warte();
+        r.wieder = document.querySelectorAll(".sw-gruppe[open]").length;
         return r;
       });
       pruefe(F, "Reiter „Sachwelten“: acht Themenkreise mit Vignette, zugeklappt, Filter Alle/Gesehen/Gerade dran/Als Nächstes/Offen, nur „Alles ausklappen“ als Knopf, keine Klassen",
@@ -439,6 +444,8 @@ async function lauf(typ, name, groesse, basis) {
         sw.wiese.gesehen && sw.wiese.wort === "gesehen" && sw.wiese.sichtbar && /Wiese und in der Hecke/.test(sw.wiese.text)
           && /Zuerst gesehen am 10\. November/.test(sw.wiese.text) && sw.kopf === "teils gesehen" && sw.erste === "Tiere auf Wiese und Hecke"
           && JSON.stringify(sw.gesehen) === JSON.stringify(["Tiere auf Wiese und Hecke"]), JSON.stringify(sw));
+      pruefe(F, "Sachwelten: Filter klappt nichts von selbst auf (nur der selbst geöffnete Kreis bleibt offen); neu geöffneter Reiter ist ganz zugeklappt",
+        JSON.stringify(sw.nachFilter) === JSON.stringify(["tiere-pflanzen:auf"]) && sw.wieder === 0, JSON.stringify(sw));
       await bild(eltern, `eltern-sachwelten-${name}-${groesse.width}`);
       await eltern.close();
       await kontext.close();
