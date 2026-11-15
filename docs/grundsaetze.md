@@ -1,5 +1,8 @@
 # Grundsätze für Lernen Spielen
 
+> **Für den Bau von Spielen** gilt seit 2026-11-15 [`spielbau.md`](spielbau.md): Dessen Spielkern (§1) und „Zeigen statt
+> erklären“ (§8) gehen den Regeln hier vor; die Grenzen G1–G14 dort fassen das Verbindliche zusammen (Christian).
+
 Stand: 2026-11-14 · **freigegeben** (Christian, 2026-11-13; angepasst nach dem Spielkatalog `docs/spielkatalog.md`,
 freigegeben 2026-11-14)
 Begründungen und Quellen: [`docs/reports/Grundsätze für Lernspiele.md`](reports/Grundsätze%20für%20Lernspiele.md),

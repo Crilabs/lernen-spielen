@@ -179,6 +179,17 @@ let verlassen = false;
 let nummer = 0;
 /** @type {((e: SprichErgebnis | "fehler") => void) | null} */
 let laufend = null;
+/** Text, der gerade gesprochen wird (für die Meldung „Satz abgeschnitten“). */
+let laufenderText = "";
+/** Zeitpunkt der letzten Eingabe des Kindes (Tippen, Taste). */
+let letzteEingabe = 0;
+/** So lange nach einer Eingabe darf ein neuer Satz den laufenden abbrechen: das Kind hat ihn weggetippt. */
+const EINGABE_FENSTER_MS = 800;
+if (typeof document !== "undefined" && document.addEventListener) {
+  const merke = () => { letzteEingabe = Date.now(); };
+  document.addEventListener("pointerdown", merke, true);
+  document.addEventListener("keydown", merke, true);
+}
 
 /** Bricht laufende Sprache ab. */
 function brichAb() {
@@ -256,7 +267,12 @@ function spieleDatei(url) {
  * @returns {Promise<SprichErgebnis>}
  */
 export async function sprich(text, { tempo = 0.85, hoehe = 1, variante = "", datei: mitDatei = true } = {}) {
+  // docs/spielbau.md §8: Ein Satz wird nie vom Spiel abgeschnitten, nur ein Tipp des Kindes darf ihn abbrechen.
+  // Der Prüfstand sieht diese Zeile im Protokoll und meldet sie rot.
+  if (laufend && laufenderText && !verlassen && text !== laufenderText && Date.now() - letzteEingabe > EINGABE_FENSTER_MS)
+    protokoll(`Satz abgeschnitten: „${laufenderText}“ durch „${text}“`);
   brichAb();   // auch ein stiller Aufruf beendet, was gerade gesprochen wird
+  laufenderText = text || "";
   if (!text) return "still";
   const meine = nummer;
   const index = mitDatei ? await ladeAudioIndex() : new Map();

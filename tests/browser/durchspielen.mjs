@@ -23,6 +23,9 @@
 //             alle 15 Tipps ein richtiger Zug, damit die
 //             Tipps auch Folge und Pause treffen)
 //   tastatur  nur Tab, Enter, Leertaste                       Runde lösbar, Weiter in der Pause erreichbar
+//   wegtippen wie ratend, tippt aber während jeder Folge       wie ratend: jede Aufgabe genau einmal gemeldet, ok nur
+//             dreimal mitten ins Bild (überspringt sie)         ohne Fehlversuch – nichts wird durch Wegtippen
+//                                                              fälschlich als gekonnt gebucht
 //   zurueck   verlässt mitten in der Runde über Haus,         Lernstand konsistent, Spiel startet sauber
 //             kommt zurück (neu geladen)
 // Für alle: keine Seiten- oder Konsolenfehler, nichts im Protokoll außer erwarteten Zeilen, Vorschau schreibt nichts
@@ -47,7 +50,7 @@ const require = createRequire(import.meta.url);
 const { chromium, webkit } = require("playwright");
 
 const WURZEL = resolve(fileURLToPath(import.meta.url), "../../..");
-const ALLE_KINDER = ["sicher", "ratend", "hilfe", "wild", "tastatur", "zurueck"];
+const ALLE_KINDER = ["sicher", "ratend", "hilfe", "wild", "tastatur", "zurueck", "wegtippen"];
 const PHASEN = ["laden", "einfuehrung", "aufgabe", "folge", "pause", "fehler"];
 /** Züge je Aufgabe, bevor sie als nicht lösbar gilt. */
 const MAX_ZUEGE = 60;
@@ -252,6 +255,12 @@ class Spieler {
       if (z.phase !== phase) { phase = z.phase; t0 = Date.now(); }
       const grenze = z.phase === "einfuehrung" ? MAX_EINFUEHRUNG_MS : MAX_WARTEN_MS;
       if (Date.now() - t0 > grenze) throw new Haenger(`hängt: ${Math.round(grenze / 1000)} s in Phase „${z.phase}“ ohne Zug`);
+      // Die Einführung wartet auf das Kind (spiele/einfuehrung.js, docs/spielbau.md §8): Weiter tippen, sobald er da ist.
+      // Spielt sie im echten Spielbild, tippt das Kind dort selbst (Taste im Sonnenring): richtigerZug() der Phase.
+      if (z.phase === "einfuehrung" && !(await this.ev(() => { const k = document.querySelector(".einf-weiter.da"); k?.click(); return !!k; }))) {
+        const zug = await this.richtigerZug();
+        if (zug) await this.fuehre(zug, this.lauf.kind === "tastatur" ? "tastatur" : "tippen");
+      }
       await warte(150);
       z = await this.zustand();
     }
@@ -412,7 +421,7 @@ function sicherStrategie(sp, { streng = true, merke } = {}) {
   };
 }
 
-async function kindSicher(sp, lauf) {
+async function kindSicher(sp, lauf, standVorher) {
   await sp.bild("start");
   const vorher = await sp.leuchten();
   const runde = await sp.spieleBisPause({
@@ -428,9 +437,20 @@ async function kindSicher(sp, lauf) {
   lauf.pruefe("keine Hilfe nötig (Hilfe leuchtet nie, Stufe 0)", !hilfeGesehen && e.every((x) => x.hilfe === 0), `leuchtete: ${hilfeGesehen}, ${JSON.stringify(e)}`);
   lauf.pruefe("Lernsteuerung bekommt jede Aufgabe mit ok gemeldet", e.length === runde.aufgaben.length && e.length > 0 && e.every((x) => x.ok === true && typeof x.ms === "number" && x.key),
     `${e.length} Meldungen für ${runde.aufgaben.length} Aufgaben: ${JSON.stringify(e)}`);
+  // G14 (docs/spielbau.md): Wer es kann, ist schnell fertig. Ein neues Thema beginnt mit der Probe; wer sie sicher
+  // löst, hat das Thema nach höchstens PROBE Aufgaben gekonnt, und die Runde endet in der Pause.
+  const name = "G14: wer es kann, ist schnell fertig (Probe: höchstens 5 Aufgaben, Thema gekonnt, Pause)";
+  if (z.vorschau) { lauf.nichtAnwendbar(name, "Vorschau (--stufe): die Lernsteuerung steuert hier nicht"); return; }
+  const plan = (st) => { try { return JSON.parse(st?.["lernstand-kind-1-lernplan"] ?? "{}").themen ?? {}; } catch { return {}; } };
+  const alt = plan(standVorher), neu = plan(await sp.speicher());
+  const neuGekonnt = Object.entries(neu).filter(([id, t]) => t.z === "kann-ich" && alt[id]?.z !== "kann-ich").map(([id]) => id);
+  const ohneProbe = Object.entries(neu).filter(([id, t]) => !alt[id] && t.stufe && t.stufe !== "kopf" && t.z !== "kann-ich");
+  if (!neuGekonnt.length && ohneProbe.length) { lauf.nichtAnwendbar(name, `Thema ${ohneProbe.map(([id]) => id)} ohne Stufe kopf: keine Probe`); return; }
+  lauf.pruefe(name, neuGekonnt.length > 0 && runde.aufgaben.length <= 5 && z.phase === "pause",
+    `gekonnt: ${neuGekonnt.join(", ") || "keins"}, ${runde.aufgaben.length} Aufgaben, Phase ${z.phase}`);
 }
 
-async function kindRatend(sp, lauf) {
+async function kindRatend(sp, lauf, _vorher, { wegtippen = false } = {}) {
   const fehlversucheMoeglich = await sp.ev(() => window.lsPruefen.fehlversuche !== false);
   const verlauf = [];
   let leuchtFehler = null;
@@ -455,7 +475,16 @@ async function kindRatend(sp, lauf) {
       const zug = auswahl[Math.floor(sp.rnd() * auswahl.length)];
       const leuchtenVorher = await sp.leuchten();
       await sp.fuehre(zug, sp.rnd() < 0.5 ? "tippen" : "ziehen");
-      const nach = await sp.zustand();
+      let nach = await sp.zustand();
+      // wegtippen: tippt während der Folge ungeduldig mitten ins Bild (docs/spielbau.md §1: der nächste Tipp
+      // überspringt die Folge). Danach darf nichts doppelt oder falsch gemeldet sein.
+      if (wegtippen && nach.phase === "folge") {
+        for (let i = 0; i < 3; i++) {
+          await sp.ev(() => window.lsPruefen.tippeBei(innerWidth / 2, innerHeight / 2));
+          await warte(60);
+        }
+        nach = await sp.zustand();
+      }
       const leuchtete = (await sp.leuchten()) > leuchtenVorher;
       const gleich = nach.phase === "aufgabe" && nach.nr === z.nr;
       if (gleich && nach.versuche > z.versuche) {
@@ -620,7 +649,8 @@ async function kindZurueck(sp, lauf, vorher) {
   lauf.pruefe("Runde nach der Rückkehr bis zur Pause spielbar", (await sp.zustand()).phase === "pause");
 }
 
-const KINDER = { sicher: kindSicher, ratend: kindRatend, hilfe: kindHilfe, wild: kindWild, tastatur: kindTastatur, zurueck: kindZurueck };
+const kindWegtippen = (sp, lauf, vorher) => kindRatend(sp, lauf, vorher, { wegtippen: true });
+const KINDER = { sicher: kindSicher, ratend: kindRatend, hilfe: kindHilfe, wild: kindWild, tastatur: kindTastatur, zurueck: kindZurueck, wegtippen: kindWegtippen };
 
 // --- Ablauf -------------------------------------------------------------------------------------------
 

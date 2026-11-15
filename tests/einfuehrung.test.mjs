@@ -98,7 +98,10 @@ test("Einführung des Spiels: ein Pfad relativ zu spiele/ löst sich so auf wie 
 test("Einführung des Spiels: Vorlage hat EINFUEHRUNG = null und reicht sie im RAHMEN an spieleEinfuehrung", () => {
   const s = readFileSync(join(SPIELE, "vorlage/spiel.js"), "utf8");
   assert.match(s, /^const EINFUEHRUNG = null;/m);
-  assert.match(s, /EINFUEHRUNG\?\.vorlage \?\? r\.einfuehrung\.vorlage/);
+  assert.match(s, /EINFUEHRUNG\?\.vorlage \?\? einf\.vorlage/);
+  // docs/spielbau.md §8: bei jedem Start, Knopf „Anleitung“ ruft sie wieder auf
+  assert.match(s, /einfuehrung: plan\?\.einfuehrung \?\? null,/);
+  assert.match(readFileSync(join(SPIELE, "vorlage/index.html"), "utf8"), /<ls-knopf slot="rechts" id="anleitung"/);
 });
 
 test("Einführung des Spiels: jede genannte eigene Einführung liegt unter spiele/ und hat Szenen", () => {

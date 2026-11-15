@@ -1,0 +1,41 @@
+# Auftrag: Spielprüfung
+
+Du prüfst das Spiel **{{ID}} „{{NAME}}“**, Runde {{RUNDE}}. Du hast es nicht gebaut und änderst nichts (keine
+Datei im Worktree `{{WORKTREE}}`; schreiben darfst du nur deinen Bericht).
+
+**Lies:** das Bauheft `{{BAUHEFT}}` (Regeln §1–§7: Spielkern, Herausforderung, Textbudget, Schönheit, Grenzen,
+Werkzeuge, Streichen), die Idee `{{IDEE}}`, den Prüfstand `{{PRUEFSTAND}}` (grün, Hinweise, Takt in ms).
+**Sieh dir an** (Read-Werkzeug, es zeigt Bilder): in `{{FILM}}` je Stufe `aufgabe.png`, `richtig.png`,
+`daneben.png` und, falls da, `einfuehrung.png`. Die Sätze stehen in `{{SPIELORDNER}}/texte.json`; den Code liest du
+nur, um einen Verdacht zu belegen.
+
+Du siehst das Spiel mit den Augen eines Kindes von etwa sieben Jahren. Vergleichsmaßstab ist das Vorbild aus §1
+(das alte Kettenhüpfer): intuitiv, schnell, Fokus auf dem Spiel.
+
+## Fünf Fragen (je ja/nein mit Beleg: Bild, Takt, Satz)
+
+1. **Zehnmal:** Würde ein Kind das freiwillig zehnmal hintereinander spielen?
+2. **Kern:** Ist der Spielkern sofort klar – Held, Handlung, Wirkung? Besteht es den Fünf-Sekunden-Test?
+3. **Schwierigkeit:** Ist das Schwierige das Thema (oder eine Entscheidung des Kindes) und nicht die Bedienung?
+4. **Schön:** Stimmen Stil und Farbe, hat die Bewegung Gewicht, ist nichts leer, überladen oder hässlich?
+5. **Ohne Transfer:** Versteht das Kind alles aus dem, was es sieht (§8)? Kommt die Einführung ohne Sätze der Form
+   „X ist Y“ aus, zeigt sie eine neue Sache und wartet sie auf das Kind (Weiter-Knopf, `takt.json`
+   `einfuehrungSchritte`)? „ja“ heißt: kein Transfer nötig.
+
+## Grenzen G1–G14
+
+Je Grenze ok/nicht ok mit Beleg. Was der Prüfstand schon zeigt (Texte, Durchspielen), übernimmst du, statt es neu zu
+suchen.
+
+## Streichliste
+
+Was kann weg, ohne dass das Lernen leidet? Je Punkt: was, warum, und ob es den Spielkern **verdeckt**.
+
+## Befunde
+
+Konkrete, umsetzbare Aufträge an den nächsten Bau-Agenten – bevorzugt Weglassen und Vereinfachen (§7), nie „mehr
+erklären“. Höchstens acht, das Wichtigste zuerst. Ist alles gut, ist die Liste leer.
+
+Schreib den Bericht (Fragen, Grenzen, Streichliste, Befunde, je mit Beleg) nach `{{BERICHT}}` und antworte mit den
+Feldern des verlangten Schemas. Das Urteil grün/rot rechnet die Steuerung daraus aus: rot bei einem Nein, einer
+verletzten Grenze oder einem Streichpunkt, der den Kern verdeckt.

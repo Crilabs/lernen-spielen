@@ -1,5 +1,8 @@
 # Bedienung und Bausteine
 
+> **Für den Bau von Spielen** gilt seit 2026-11-15 [`spielbau.md`](spielbau.md): Dessen Spielkern (§1) und „Zeigen statt
+> erklären“ (§8) gehen den Regeln hier vor; die Grenzen G1–G14 dort fassen das Verbindliche zusammen (Christian).
+
 Stand: 2026-11-14 · **Entwurf zur Freigabe** · Auswahlfragen von Christian beantwortet (2026-11-14)
 Ergänzt [`grundsaetze.md`](grundsaetze.md) und [`grundsaetze-bilder.md`](grundsaetze-bilder.md) (Abschnitt 9
 „Bedienzeichen“, Abschnitt 7 „Bewegung“). Die Grundsätze sagen, *was* gelten muss; diese Datei legt fest,

@@ -366,6 +366,25 @@ meldePruefSchnittstelle({
   orte: ORTE,
 });
 
+// --- Einführung (docs/spielbau.md §8) -----------------------------------------------------------------
+/**
+ * Spielt die Einführung über dem Spiel; false, wenn das Kind über Haus gegangen ist.
+ * @param {{ vorlage: string, werte?: any }} einf
+ */
+async function zeigeEinfuehrung(einf) {
+  stand.phase = "einfuehrung";
+  // Pfade der eigenen Einführung relativ zu spiele/ (dort liegt einfuehrung.js, „../“ wie die Imports oben).
+  const spiele = new URL("../einfuehrung.js", import.meta.url);
+  const vorlage = EINFUEHRUNG?.vorlage ?? einf.vorlage;
+  const hintergrund = EINFUEHRUNG?.hintergrund ? `url("${new URL(EINFUEHRUNG.hintergrund, spiele).href}")` : "";
+  const ergebnis = await spieleEinfuehrung(vorlage, einf.werte, { ton: leiste.ton, hintergrund });
+  if (ergebnis !== "gesehen") {
+    location.href = "../index.html";
+    return false;
+  }
+  return true;
+}
+
 // --- Hilfe-Leiter (grundsaetze.md L12, bedienung.md 6) ---------------------------------------------
 // Versuch 1, der nicht passt: nur die Mechanik. Versuch 2: Hilfe leuchtet einmal auf. Tippen auf Hilfe:
 // Stufe 1 Probe, Stufe 2 Lösung. Gemeldet wird hilfe = höchste gezeigte Stufe (0, 1, 2); mit Hilfe Gelöstes
@@ -484,7 +503,8 @@ async function starteRunde(vorschau) {
   return {
     thema: r.thema?.name ?? "",
     echteDinge: plan ? { thema: plan.id, fach: plan.strang, titel: plan.name, text: plan.eltern ?? "" } : null,
-    einfuehrung: r.einfuehrungFaellig ? plan?.einfuehrung ?? null : null,
+    // Jedes Spiel beginnt mit der Einführung, nicht nur beim ersten Mal (docs/spielbau.md §8, Christian 2026-11-15).
+    einfuehrung: plan?.einfuehrung ?? null,
     einfuehrungGesehen: () => r.einfuehrungGesehen(),
     naechste: () => r.naechste(),
     melde: (/** @type {string} */ key, /** @type {any} */ e) => r.melde(key, e),
@@ -524,19 +544,22 @@ async function spieleRunde(vorschau) {
     r = vorschauRunde();
   }
 
-  // Einführung beim ersten Mal und bei neuem Thema (L5); in der Vorschau nur mit ?einfuehrung.
+  // Das Spiel beginnt mit der Einführung (docs/spielbau.md §8): bei jedem Start, im Tempo des Kindes, vor dem
+  // Hintergrund des Spiels; der Knopf „Anleitung“ in der Leiste ruft sie jederzeit wieder auf. In der Vorschau nur mit
+  // ?einfuehrung.
   if (r.einfuehrung && (!vorschau || params.has("einfuehrung"))) {
-    stand.phase = "einfuehrung";
-    // Pfade der eigenen Einführung relativ zu spiele/ (dort liegt einfuehrung.js, „../“ wie die Imports oben).
-    const spiele = new URL("../einfuehrung.js", import.meta.url);
-    const vorlage = EINFUEHRUNG?.vorlage ?? r.einfuehrung.vorlage;
-    const hintergrund = EINFUEHRUNG?.hintergrund ? `url("${new URL(EINFUEHRUNG.hintergrund, spiele).href}")` : "";
-    const ergebnis = await spieleEinfuehrung(vorlage, r.einfuehrung.werte, { ton: leiste.ton, hintergrund });
-    if (ergebnis !== "gesehen") {
-      location.href = "../index.html";
-      return;
-    }
+    if (!(await zeigeEinfuehrung(r.einfuehrung))) return;
     r.einfuehrungGesehen();
+  }
+  if (r.einfuehrung) {
+    const knopf = $("anleitung");
+    knopf?.removeAttribute("hidden");
+    const einf = r.einfuehrung;
+    knopf?.addEventListener("click", async () => {
+      if (stand.phase !== "aufgabe" && stand.phase !== "pause") return;
+      const vorher = stand.phase;
+      if (await zeigeEinfuehrung(einf)) stand.phase = vorher;
+    });
   }
 
   let aufgabe = aufStufe(r.naechste());

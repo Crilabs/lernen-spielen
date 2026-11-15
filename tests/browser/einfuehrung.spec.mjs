@@ -23,6 +23,8 @@ const WURZEL = resolve(fileURLToPath(import.meta.url), "../../..");
 const SEITE = "/spiele/__einfuehrung-pruefen.html";   // gibt es nur in diesem Server
 const HTML = `<!doctype html><meta charset="utf-8"><body><script type="module">
   import { spieleEinfuehrung } from "./einfuehrung.js";
+  // Die Einführung wartet auf das Kind (docs/spielbau.md §8): hier tippt ein Kind Weiter, sobald er erscheint.
+  setInterval(() => document.querySelector(".einf-weiter.da")?.click(), 200);
   const t0 = performance.now();
   window.__szenen = [];   // Zeitpunkt jedes Szenenwechsels (Text der Blase ändert sich)
   new MutationObserver(() => {
@@ -37,11 +39,13 @@ const EIGEN_JSON = "/spiele/mathe/m0-probe/einfuehrung.json";   // gibt es nur i
 const EIGEN_SEITE = "/spiele/mathe/m0-probe/index.html";
 const EIGEN_HTML = `<!doctype html><meta charset="utf-8"><body><script type="module">
   import { spieleEinfuehrung } from "../../einfuehrung.js";
+  // Die Einführung wartet auf das Kind (docs/spielbau.md §8): hier tippt ein Kind Weiter, sobald er erscheint.
+  setInterval(() => document.querySelector(".einf-weiter.da")?.click(), 200);
   window.__ergebnis = spieleEinfuehrung("mathe/m0-probe/einfuehrung.json", { n: 7 }, { ton: false });
 </script>`;
 const EIGEN = JSON.stringify({ szenen: [{ sprich: "Am Hafen liegen Kisten.", zeig: "{n} Kisten", bild: [{ zahl: "{n}", x: 60 }] }] });
 const FRIST_MS = 75000;   // ganze Einführung
-const SZENE_MS = 20000;   // eine Szene: Lesezeit bzw. Stimme; 30 s hieße, sie hat auf die Notbremse gewartet
+const SZENE_MS = 22000;   // eine Szene: Lesezeit bzw. Stimme und 2 s Ruhe; 30 s hieße, sie hat auf die Notbremse gewartet
 
 
 let fehler = 0;

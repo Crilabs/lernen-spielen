@@ -1,5 +1,8 @@
 # Grundsätze für Bilder, Figuren, Symbole und Farben
 
+> **Für den Bau von Spielen** gilt seit 2026-11-15 [`spielbau.md`](spielbau.md): Dessen Spielkern (§1) und „Zeigen statt
+> erklären“ (§8) gehen den Regeln hier vor; die Grenzen G1–G14 dort fassen das Verbindliche zusammen (Christian).
+
 Stand: 2026-11-14 · **freigegeben** (Christian, 2026-11-14)
 Ergänzt [`grundsaetze.md`](grundsaetze.md) und gilt wie dieses für jedes neue Spiel, jedes Bild und jedes Symbol.
 Begründungen und Quellen: [`docs/reports/Bilder und Symbole für Lernspiele.md`](reports/Bilder%20und%20Symbole%20f%C3%BCr%20Lernspiele.md),
@@ -268,7 +271,7 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 | B3 | **Still, solange das Kind denkt.** Kein Wackeln, Blinzeln, Glitzern oder Pulsieren im oder neben dem Lernfeld, keine Dauerbewegung. Ein neues Element darf sich beim ersten Erscheinen einmal bewegen. | [B] Sundararajan & Adesope 2020; [b] Fisher 2014 |
 | B4 | **Freude aus der Sache, nicht aus dem Zufall.** Die Folge einer richtigen Antwort kommt verlässlich, ihre Form wechselt mit dem Inhalt; keine seltene „Jackpot“-Animation. Nicht jedes Mal gleich laut (3.1 Nr. 5). | [E] nach N4, N5 |
 | B5 | **Die Folge einer Antwort, die nicht passt, ist nie reizvoller** als die einer richtigen (N7). | [E] |
-| B6 | **Kurz und überspringbar.** Rückmeldung während der Handlung etwa 1 s; die Folge einer gelösten Aufgabe bis etwa 3 s. Sie hält die nächste Aufgabe nicht auf, lässt sich immer antippen und überspringen, steht still, solange das Kind denkt (B3), und mit reduzierter Bewegung läuft eine ruhige, kurze Fassung (B7). | *Annahme* Dauer; (Christian) |
+| B6 | **Kurz und überspringbar.** Rückmeldung während der Handlung etwa 1 s; die Folge einer gelösten Aufgabe etwa 2,5 s, höchstens 3 s (`spielbau.md` §1). Sie hält die nächste Aufgabe nicht auf, lässt sich immer antippen und überspringen, steht still, solange das Kind denkt (B3), und mit reduzierter Bewegung läuft eine ruhige, kurze Fassung (B7). | *Annahme* Dauer; (Christian) |
 | B7 | **Wenig Bewegung einstellbar;** `prefers-reduced-motion` gilt in jedem Spiel. Keine Blitze, kein schnelles Flackern. | [B] WCAG 2.2.2, 2.3.3 |
 
 ---------------------------------------------------------------------------------------------------
@@ -351,7 +354,7 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 - [ ] **Lernmaterial schlicht,** Struktur sichtbar (Fünfergliederung), Perlen- und Stellenwertfarben aus 6.2.
 - [ ] **Farbe nie allein,** eine Bedeutung je Farbe im Spiel, Werte aus der Farbwelt (6.2), Kontrast geprüft, Farbsehschwäche simuliert.
 - [ ] **Bewegung** zeigt die Folge einer Kinderhandlung oder die Sache; still während des Denkens; Fehler-Folge nicht reizvoller; Reduced Motion.
-- [ ] **Folge mit Freude:** jede richtige Lösung hat eine Folge, die sich aus der Aufgabe erklärt, mit passenden wechselnden Varianten (kein Jackpot), bis etwa 3 s, überspringbar, ohne Punkte und Sterne.
+- [ ] **Folge mit Freude:** jede richtige Lösung hat eine Folge, die sich aus der Aufgabe erklärt, mit passenden wechselnden Varianten (kein Jackpot), etwa 2,5 s, höchstens 3 s, überspringbar, ohne Punkte und Sterne.
 - [ ] **Beim Erlesen** kein Bild vorab.
 - [ ] **Buchstaben** ohne Einzelfarben; Tastaturen mit festen Plätzen, unbenutzte Tasten blass.
 - [ ] **Bedienzeichen** aus `spiele/symbole/`, fester Platz, Name, 2 × 2 cm.
