@@ -212,4 +212,6 @@ test("sammle: Seiten der Geschichten (sprich, sonst text)", () => {
   assert.ok(aus.some((e) => e.text.startsWith("Ela und Kofi wohnen nebeneinander.")), "erste Seite der Zehnerpaare");
   const wal = eintraege.filter((e) => e.quellen.includes("geschichten/wal/geschichte.json"));
   assert.ok(wal.some((e) => e.text.startsWith("Im warmen Meer vor Australien")), "auch die Bücher der Bibliothek werden aufgenommen");
+  const katze = eintraege.filter((e) => e.quellen.includes("geschichten/haustiere/geschichte.json"));
+  assert.ok(katze.some((e) => e.text.startsWith("Hier liegt Mia.")) && katze.length >= 25, `Sachbuch: Seiten aller Kapitel (${katze.length})`);
 });
