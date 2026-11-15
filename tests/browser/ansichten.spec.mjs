@@ -8,7 +8,7 @@
 // sobald eine Prüfung fehlschlägt.
 //
 // Geprüft wird in Chromium und WebKit bei 1920 × 1080, 1280 × 800 und 1440 × 1080 (4:3), je in drei Lernständen:
-//   leer      kein Lernstand, keine Spiele (Entwicklungsstand): ruhige Seiten, keine Fehler;
+//   leer      kein Lernstand, keine Spiele (spiele.json per page.route leer): ruhige Seiten, keine Fehler;
 //   gekonnt   gekonnte Themen, aber keine Spiele (aus entfernten Spielen): Regal und Regal-Kachel zeigen sie;
 //   spiele    dazu drei Testspiele (nur im Browser per page.route in spiele.json, nichts davon im Repo) und
 //             Themen „dran“: Dran-Kacheln, Fach-Kacheln, Weg mit dran und in Sicht.
@@ -107,15 +107,15 @@ async function kontextFuer(browser, groesse, basis, { stand = null, spiele = fal
     window.__system = [];
     if (window.speechSynthesis) window.speechSynthesis.speak = (u) => { window.__system.push(u.text); };
   }, { stand, pinHash });
-  if (spiele) {
-    await kontext.route("**/spiele/spiele.json", async (r) => {
-      const res = await r.fetch();
-      const j = await res.json();
-      j.spiele = SPIELE;
-      await r.fulfill({ response: res, json: j });
-    });
-    await kontext.route("**/spiele/symbole/test-spiel.svg", (r) => r.fulfill({ contentType: "image/svg+xml", body: SYMBOL }));
-  }
+  // Die Spiele kommen immer aus dem Test, nie aus dem Repo: ohne `spiele` eine leere Liste (Fälle „keine Spiele“
+  // bleiben gültig, auch wenn spiele.json echte Spiele hat), mit `spiele` die drei Testspiele.
+  await kontext.route("**/spiele/spiele.json", async (r) => {
+    const res = await r.fetch();
+    const j = await res.json();
+    j.spiele = spiele ? SPIELE : [];
+    await r.fulfill({ response: res, json: j });
+  });
+  if (spiele) await kontext.route("**/spiele/symbole/test-spiel.svg", (r) => r.fulfill({ contentType: "image/svg+xml", body: SYMBOL }));
   kontext.aufnahmen = [];
   kontext.on("request", (q) => { if (/\/spiele\/audio\/.+\.mp3$/.test(q.url())) kontext.aufnahmen.push(q.url()); });
   kontext.on("page", (seite) => {
