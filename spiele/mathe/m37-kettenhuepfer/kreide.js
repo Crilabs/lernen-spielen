@@ -17,10 +17,16 @@
 //   hell      Sonnenring um diese Stäbchen (Hilfe: die Stäbchen zwischen Kernaufgabe und Ziel)
 //   hohl      eine Zahl: gestricheltes Kästchen über ihrem Ort, die Spitze zeigt auf ihre Perle; es wackelt einmal
 //   bis       nur Stäbchen 1 … bis sind gemalt (Stufe Kopf); ein neues Stäbchen wird Perle für Perle hingemalt
-//   verdeckt  die Kreide ist verwischt (Stufe Vorstellung): Grenzen und Fünfermarke bleiben, Perlen nicht zählbar
+//   verdeckt  die Perlen sind weggewischt (Stufe Vorstellung): saubere leere Kreidekästchen mit Stäbchengrenzen
+//             und Fünfermarke bleiben (Christian, 2026-11-15: weggewischt, nicht verschmiert)
+//   perlen    nur diese Stäbchen tragen Perlen (die übrigen sind leere Kästchen wie bei verdeckt); neu
+//             hinzugekommene werden hingemalt. Ohne Attribut: alle (außer bei verdeckt)
+//   weg       diese Stäbchen sind ganz weggewischt (Feld, Perlen und Kästchen); kommen sie wieder, werden sie hingemalt
 // Methoden (Bildpunkte in px im Fenster): standPunkt(k) → { x, y, s } (Lena steht auf Stäbchen k, 0: Startkreis;
 //   s: Maßstab der Tiefe), pfeilPunkt(k) / hohlPunkt(zahl) → Mitte des Kästchens { x, y, s, rem }, leuchte(k),
-//   einrasten(k) (das Kästchen wird hingeschrieben), staub(x, y, s) (Kreidestaub bei einer Landung, px).
+//   einrasten(k) (das Kästchen wird hingeschrieben), staub(x, y, s) (Kreidestaub bei einer Landung, px),
+//   wische(k, { ganz }) → Promise (die Perlen von Stäbchen k, mit ganz auch Feld und Kästchen, verschwinden unter
+//   dem Schwamm; danach setzt der Aufrufer verdeckt/perlen/weg, damit das Bild so bleibt).
 // Flach und still (B3): bewegt sich nur als Folge einer Eingabe.
 
 import { LERNFARBE } from "../../rahmen/stil.js";
@@ -150,7 +156,7 @@ const CSS = `
 :host { position: fixed; inset: 0; display: block; pointer-events: none; }
 svg { width: 100%; height: 100%; display: block; }
 text { font-family: "Andika", sans-serif; font-weight: 700; }
-.neu .perle, .neu .teil { transform-box: fill-box; transform-origin: 50% 50%; animation: malen 0.2s ease-out both; }
+.neu .perle, .neu .teil, .perlen.neu .perle { transform-box: fill-box; transform-origin: 50% 50%; animation: malen 0.2s ease-out both; }
 @keyframes malen { from { opacity: 0; transform: scale(0.3); } }
 .hohl > g { transform-box: fill-box; transform-origin: 50% 100%; animation: wackel 0.5s ease-in-out 1; }
 @keyframes wackel { 25% { transform: rotate(-8deg); } 70% { transform: rotate(6deg); } }
@@ -158,7 +164,7 @@ text { font-family: "Andika", sans-serif; font-weight: 700; }
 `;
 
 export class M37Kreidekette extends HTMLElement {
-  static observedAttributes = ["reihe", "breite", "pfeile", "leer", "frage", "markiert", "hell", "hohl", "verdeckt", "bis"];
+  static observedAttributes = ["reihe", "breite", "pfeile", "leer", "frage", "markiert", "hell", "hohl", "verdeckt", "bis", "perlen", "weg"];
 
   constructor() {
     super();
@@ -182,6 +188,12 @@ export class M37Kreidekette extends HTMLElement {
     this.bildBreite = 0;
     /** @type {number | null} */
     this.bisVorher = null;
+    /** Stäbchen mit Perlen und gezeichnete Stäbchen beim letzten Zeichnen (was neu dazukommt, wird hingemalt). @type {Set<number> | null} */
+    this.perlenVorher = null;
+    /** @type {Set<number> | null} */
+    this.daVorher = null;
+    /** Reihe beim letzten Zeichnen (eine neue Reihe malt nichts nach). @type {number | null} */
+    this.nVorher = null;
     new ResizeObserver(() => this.zeichne(true)).observe(this);
   }
 
@@ -245,41 +257,56 @@ export class M37Kreidekette extends HTMLElement {
     this.bisVorher = bis;
     const verdeckt = this.hasAttribute("verdeckt");
     const hell = liste(this.getAttribute("hell"));
-    const rnd = zufall(g.n * 97 + 3);
+    const weg = new Set(liste(this.getAttribute("weg")));
+    const mitPerlen = new Set(verdeckt ? [] : this.hasAttribute("perlen") ? liste(this.getAttribute("perlen")) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    const da = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((nr) => nr <= bis && !weg.has(nr)));
+    // Neu Hingemaltes nur auf derselben Reihe (eine neue Reihe erscheint so, wie sie gemalt wird: über bis/weg).
+    const gleicheReihe = this.nVorher === g.n;
+    const perlenVorher = gleicheReihe && this.perlenVorher ? this.perlenVorher : mitPerlen;
+    const daVorher = gleicheReihe && this.daVorher ? this.daVorher : da;
+    this.perlenVorher = mitPerlen;
+    this.daVorher = da;
+    this.nVorher = g.n;
+    // Jedes Stäbchen zeichnet mit eigenem Zufall: ein weggewischtes Stäbchen ändert die anderen nicht.
+    const rndVon = (/** @type {number} */ nr) => zufall(g.n * 97 + nr * 31 + 3);
     let s = "";
     // Startkreis: hier steht Lena vor dem ersten Hüpfer.
     const st = g.start;
-    s += `<path d="${rauheEllipse(st.x, st.y, 4.2 * st.s, 4.2 * st.s * 0.5 * st.s, rnd, 0.05)}" fill="none" stroke="${KREIDE}" stroke-width="${z(0.45 * st.s)}" opacity="0.9"/>`;
+    s += `<path d="${rauheEllipse(st.x, st.y, 4.2 * st.s, 4.2 * st.s * 0.5 * st.s, rndVon(0), 0.05)}" fill="none" stroke="${KREIDE}" stroke-width="${z(0.45 * st.s)}" opacity="0.9"/>`;
     for (const gl of g.glieder) {
       const nr = g.staebchen.findIndex((x) => x.ende === gl.von) + 1;
-      if (nr + 1 > bis) continue;
-      s += `<path d="${strich(gl.von.x, gl.von.y, gl.bis.x, gl.bis.y, rnd, 0.2)}" stroke="${KREIDE}" stroke-width="${z(0.26 * gl.von.s)}" stroke-dasharray="${z(0.5 * gl.von.s)} ${z(0.55 * gl.von.s)}" stroke-linecap="round" fill="none" opacity="0.75"/>`;
+      if (!da.has(nr) || !da.has(nr + 1)) continue;
+      s += `<path data-glied="${nr}" d="${strich(gl.von.x, gl.von.y, gl.bis.x, gl.bis.y, rndVon(nr + 40), 0.2)}" stroke="${KREIDE}" stroke-width="${z(0.26 * gl.von.s)}" stroke-dasharray="${z(0.5 * gl.von.s)} ${z(0.55 * gl.von.s)}" stroke-linecap="round" fill="none" opacity="0.75"/>`;
     }
     for (const stab of g.staebchen) {
-      if (stab.nr > bis) continue;
-      const neu = stab.nr > vorher && !wenigBewegung();
+      if (!da.has(stab.nr)) continue;
+      const rnd = rndVon(stab.nr);
+      const bewegt = !wenigBewegung();
+      const neu = bewegt && (stab.nr > vorher || !daVorher.has(stab.nr));
+      const perlen = mitPerlen.has(stab.nr);
+      const perlenNeu = bewegt && perlen && (neu || !perlenVorher.has(stab.nr));
       const sm = stab.mitte.s;
       const h = g.halb(stab.reihe);
       s += `<g class="stab${neu ? " neu" : ""}" data-stab="${stab.nr}">`;
       s += `<path class="teil" d="${feldStriche(stab.feld, rnd)}" stroke="${KREIDE}" stroke-width="${z(0.42 * sm)}" stroke-linecap="round" fill="none" opacity="0.88"/>`;
       if (hell.includes(stab.nr)) s += `<path d="${viereck(stab.feld)}" fill="${SONNE}" fill-opacity="0.3" stroke="${SONNE}" stroke-width="${z(0.8 * sm)}" stroke-linejoin="round"/>`;
-      const marke = stab.marke ? `<path class="teil" d="${strich(stab.marke.x, stab.marke.y - h * 1.9, stab.marke.x, stab.marke.y + h * 1.9, rnd, 0.1 * sm)}" stroke="${KREIDE}" stroke-width="${z(0.5 * sm)}" stroke-linecap="round" fill="none"/>` : "";
-      if (verdeckt) {
-        // Verwischt: ein breiter Schmier in der Farbe der Reihe, die Enden und die Marke bleiben.
-        const b = stab.ende.x - stab.anfang.x + h;
-        const dick = Math.max(h * 2.4, 2.8 * sm * sm);
-        s += `<path d="${rauherKasten(stab.mitte.x, stab.mitte.y, b, dick, rnd)}" fill="${farbe}" opacity="0.8" filter="url(#wisch)"/>`;
-        s += `<path d="${rauherKasten(stab.mitte.x, stab.mitte.y - dick * 0.12, b * 0.92, dick * 0.4, rnd)}" fill="${KREIDE}" opacity="0.28" filter="url(#wisch)"/>`;
-        for (const e of [stab.anfang, stab.ende]) s += `<path d="${strich(e.x, e.y - dick * 0.75, e.x, e.y + dick * 0.75, rnd, 0.1 * sm)}" stroke="${KREIDE}" stroke-width="${z(0.45 * sm)}" stroke-linecap="round" fill="none"/>`;
-        if (stab.marke) s += `<path d="${strich(stab.marke.x, stab.marke.y - dick * 0.75, stab.marke.x, stab.marke.y + dick * 0.75, rnd, 0.1 * sm)}" stroke="${KREIDE}" stroke-width="${z(0.5 * sm)}" stroke-linecap="round" fill="none"/>`;
+      // Leeres Kästchen des Stäbchens: so lang wie die Perlen, Grenzen an beiden Enden, die Fünfermarke (Vorstellung).
+      const b = stab.ende.x - stab.anfang.x + h * 2.1;
+      const hoch = Math.max(h * 2.6, 3.2 * sm * sm);
+      const kasten = `<path class="teil kasten" d="${rauherKasten(stab.mitte.x, stab.mitte.y, b, hoch, rnd)}" fill="${farbe}" fill-opacity="0.3" stroke="${farbe}" stroke-width="${z(0.75 * sm)}" stroke-linejoin="round"/>`;
+      const grenzen = [stab.anfang, stab.ende].map((e, i) => `<path class="teil" d="${strich(e.x + (i ? h : -h) * 1.05, e.y - hoch * 0.62, e.x + (i ? h : -h) * 1.05, e.y + hoch * 0.62, rnd, 0.06 * sm)}" stroke="${KREIDE}" stroke-width="${z(0.6 * sm)}" stroke-linecap="round" fill="none"/>`).join("");
+      const marke = stab.marke ? `<path class="teil" d="${strich(stab.marke.x, stab.marke.y - Math.max(h * 1.9, hoch * 0.62), stab.marke.x, stab.marke.y + Math.max(h * 1.9, hoch * 0.62), rnd, 0.1 * sm)}" stroke="${KREIDE}" stroke-width="${z(0.5 * sm)}" stroke-linecap="round" fill="none"/>` : "";
+      if (!perlen) {
+        s += kasten + grenzen + marke;
       } else {
+        s += `<g class="perlen${perlenNeu ? " neu" : ""}">`;
         s += `<path class="teil" d="${strich(stab.anfang.x, stab.anfang.y, stab.ende.x, stab.ende.y, rnd, 0.15 * sm)}" stroke="${KREIDE}" stroke-width="${z(0.2 * sm)}" fill="none" opacity="0.7"/>`;
         stab.perlen.forEach((p, i) => {
-          const ver = neu ? ` style="animation-delay:${i * 22}ms"` : "";
+          const ver = perlenNeu ? ` style="animation-delay:${i * 18}ms"` : "";
           s += `<g class="perle"${ver}><path d="${rauheEllipse(p.x, p.y, p.rx * 0.92, p.ry * 0.92, rnd)}" fill="${farbe}" opacity="0.94"/>`;
           s += `<path d="${rauheEllipse(p.x, p.y, p.rx * 0.95, p.ry * 0.95, rnd, 0.05)}" fill="none" stroke="${KREIDE}" stroke-width="${z(Math.min(0.32, p.rx * 0.13))}" opacity="0.85"/></g>`;
         });
-        s += marke;
+        s += `${marke}</g>`;
       }
       s += `</g>`;
     }
@@ -289,13 +316,13 @@ export class M37Kreidekette extends HTMLElement {
     const ohneZahl = liste(this.getAttribute("leer"));
     const mitFrage = liste(this.getAttribute("frage"));
     for (let nr = 1; nr <= 10; nr++) {
-      if (nr > bis) continue;
+      if (!da.has(nr)) continue;
       const text = mitZahl.includes(nr) ? String(nr * g.n) : mitFrage.includes(nr) ? "?" : ohneZahl.includes(nr) ? "" : null;
       if (text === null) continue;
-      s += this.kaestchen(g.pfeil(nr), text, { nr, markiert: markiert.includes(nr), frage: text === "?", rnd });
+      s += this.kaestchen(g.pfeil(nr), text, { nr, markiert: markiert.includes(nr), frage: text === "?", rnd: rndVon(nr + 20) });
     }
     const hohl = this.getAttribute("hohl");
-    if (hohl !== null && /^\d{1,3}$/.test(hohl.trim())) s += `<g class="hohl">${this.kaestchen(g.hohl(Number(hohl)), String(Number(hohl)), { hohl: true, rnd })}</g>`;
+    if (hohl !== null && /^\d{1,3}$/.test(hohl.trim())) s += `<g class="hohl">${this.kaestchen(g.hohl(Number(hohl)), String(Number(hohl)), { hohl: true, rnd: rndVon(99) })}</g>`;
     this.ketteG.innerHTML = s;
   }
 
@@ -338,9 +365,38 @@ export class M37Kreidekette extends HTMLElement {
   pfeilPunkt(k) {
     return this.geo && k >= 1 && k <= 10 ? this.px(this.geo.pfeil(k)) : null;
   }
+  /** Anfang und Ende der Perlen von Stäbchen k (px), für Schwamm und Kreide. @param {number} k 1 … 10 */
+  stabOrt(k) {
+    const st = this.geo?.staebchen[k - 1];
+    if (!st) return null;
+    const h = this.geo.halb(st.reihe);
+    return { anfang: this.px({ ...st.anfang, x: st.anfang.x - h }), ende: this.px({ ...st.ende, x: st.ende.x + h }), s: st.mitte.s };
+  }
   /** @param {number} zahl */
   hohlPunkt(zahl) {
     return this.geo ? this.px(this.geo.hohl(zahl)) : null;
+  }
+
+  /**
+   * Der Schwamm wischt über Stäbchen k: die Perlen (mit ganz auch Feld, Glied und Kästchen) verblassen von links nach
+   * rechts, Kreidestaub. Danach setzt der Aufrufer verdeckt/perlen/weg, damit das Bild so bleibt.
+   * @param {number} k @param {{ ganz?: boolean, ms?: number }} [o] @returns {Promise<void>}
+   */
+  wische(k, { ganz = false, ms = 150 } = {}) {
+    const g = this.geo;
+    const stab = this.ketteG.querySelector(`g.stab[data-stab="${k}"]`);
+    if (!g || !stab || wenigBewegung()) return Promise.resolve();
+    /** @type {Element[]} */
+    const ziele = ganz
+      ? [stab, ...this.ketteG.querySelectorAll(`g.pfeil[data-stab="${k}"], [data-glied="${k - 1}"]`)]
+      : [...stab.querySelectorAll(".perlen")];
+    const st = g.staebchen[k - 1];
+    if (st) this.staubRem(st.mitte.x, st.mitte.y, st.mitte.s, 4);
+    const laeufe = ziele.map((el) => el.animate([
+      { opacity: 1, clipPath: "inset(-50% -5% -50% -5%)" },
+      { opacity: 0.2, clipPath: "inset(-50% -5% -50% 95%)" },
+    ], { duration: ms, easing: "ease-in", fill: "forwards" }).finished.catch(() => undefined));
+    return Promise.all(laeufe).then(() => undefined);
   }
 
   /** Stäbchen k leuchtet kurz in Sonne auf (Folge eines Hüpfers). @param {number} k */

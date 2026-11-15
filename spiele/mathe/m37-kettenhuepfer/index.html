@@ -25,7 +25,8 @@
     row-gap: 1.6rem;
     padding: 1.6rem 2.4rem 2.4rem;
   }
-  ls-blase { grid-column: 1; grid-row: 1; align-self: start; width: min(80rem, 100%); position: relative; z-index: 2; }
+  /* Keine sichtbare Blase (Christian, 2026-11-15): die Sätze werden gesprochen, der runde Knopf spielt den letzten noch einmal. */
+  ls-blase { grid-column: 1; grid-row: 1; align-self: start; justify-self: start; position: relative; z-index: 6; }
 
   /* Die Aufgabe mit Kreide auf den Asphalt geschrieben; das Kästchen nimmt die getippte Zahl auf. */
   .gleichung {
@@ -37,6 +38,7 @@
     -webkit-mask-size: 16rem; mask-size: 16rem;
     transform: rotate(-1.5deg);
   }
+  .gleichung.still { visibility: hidden; }
   .gleichung .rechnung:empty::before { content: "\00a0"; }
   .karte {
     display: inline-flex; align-items: center; justify-content: center;
@@ -57,6 +59,10 @@
     position: absolute; left: 0; top: 0; width: 13rem; height: 3rem; margin: -1.5rem 0 0 -6.5rem;
     border-radius: 50%; background: rgba(43, 38, 34, 0.32); filter: blur(0.25rem); will-change: transform, opacity;
   }
+  /* Schwamm und Kreide, mit denen Lena die Kette wegwischt und hinmalt (spiel.js setzt sie mit transform aufs Stäbchen). */
+  .werkzeug { position: absolute; left: 0; top: 0; width: 12rem; height: 8rem; margin: -6rem 0 0 -6rem; will-change: transform; filter: drop-shadow(0 0.5rem 0.3rem rgba(43, 38, 34, 0.3)); }
+  .werkzeug[hidden] { display: none; }
+  .werkzeug svg { width: 100%; height: 100%; display: block; overflow: visible; }
   /* Die getippte Zahl im Flug von der Aufgabe zur Kette: Kreide. */
   .flug {
     position: absolute; left: 0; top: 0;
@@ -111,7 +117,7 @@
 
 <div class="buehne">
   <main class="spielflaeche" aria-label="Perlenkette auf der Straße">
-    <ls-blase id="blase"></ls-blase>
+    <ls-blase id="blase" ohne-text></ls-blase>
     <div class="gleichung" id="tafel" aria-live="polite"><span class="rechnung" id="rechnung"></span><span class="karte leer" id="eingabe">0</span></div>
     <div class="brett tablett" id="brett">
       <ls-tastatur id="tastatur" tasten="1234567890" je-reihe="3" loeschen></ls-tastatur>
@@ -119,7 +125,7 @@
     </div>
   </main>
 </div>
-<div class="figuren" aria-hidden="true"><div class="schatten" id="schatten"></div><div class="lena" id="lena"><div class="koerper" id="lena-koerper"></div></div></div>
+<div class="figuren" aria-hidden="true"><div class="schatten" id="schatten"></div><div class="werkzeug" id="werkzeug" hidden></div><div class="lena" id="lena"><div class="koerper" id="lena-koerper"></div></div></div>
 
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>

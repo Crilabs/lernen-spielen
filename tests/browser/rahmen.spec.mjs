@@ -198,6 +198,32 @@ async function lauf(typ, name, groesse, basis) {
     });
     pruefe(L, "--ls-leiste-hoehe entspricht der Höhe des Bands", Math.abs(hoeheAufgeloest - m.band.h) <= tol, `${hoeheAufgeloest} vs ${m.band.h}`);
 
+    // --- <ls-blase ohne-text>: keine sichtbare Blase, nur der Knopf, erst wenn es einen Satz gibt ---------------
+    const ohne = await seite.evaluate(async () => {
+      const b = document.createElement("ls-blase");
+      b.setAttribute("ohne-text", "");
+      b.style.cssText = "position:fixed;left:0;top:0";
+      document.body.append(b);
+      const knopf = b.shadowRoot.querySelector("ls-knopf");
+      const vorher = getComputedStyle(knopf).visibility;
+      await b.sage("Ein Satz.", { sprechen: false });
+      const rahmen = getComputedStyle(b.shadowRoot.querySelector(".blase"));
+      const text = b.shadowRoot.querySelector(".text").getBoundingClientRect();
+      const form = knopf.shadowRoot.querySelector(".form").getBoundingClientRect();
+      const aus = { vorher, nachher: getComputedStyle(knopf).visibility, rand: rahmen.borderTopWidth, grund: rahmen.backgroundColor, textW: text.width, knopfW: form.width, merkt: b.text };
+      // zeigen: kurz als Blase, verschwindet von selbst nach der Lesezeit
+      const ohneZeigen = b.hasAttribute("zeigt");
+      await b.sage("Fünf mal sieben.", { sprechen: false, zeigen: true });
+      const zeigt = b.hasAttribute("zeigt") && b.shadowRoot.querySelector(".zeige").textContent === "Fünf mal sieben.";
+      await new Promise((ok) => setTimeout(ok, 1500 + 400 * 3 + 400));
+      Object.assign(aus, { ohneZeigen, zeigt, weg: !b.hasAttribute("zeigt") });
+      b.remove();
+      return aus;
+    });
+    pruefe(L, "ls-blase ohne-text: Knopf erst mit Satz, keine Blase, Text unsichtbar, Knopf 11 rem; zeigen blendet kurz ein und von selbst aus",
+      ohne.vorher === "hidden" && ohne.nachher === "visible" && ohne.rand === "0px" && /rgba\(0, 0, 0, 0\)|transparent/.test(ohne.grund) && ohne.textW <= 1 && nah(ohne.knopfW, 11) && ohne.merkt === "Ein Satz." && !ohne.ohneZeigen && ohne.zeigt && ohne.weg,
+      JSON.stringify(ohne));
+
     // --- Perlenstäbe ---------------------------------------------------------------------------
     const p = await seite.evaluate(() => {
       const bau = (wert) => {

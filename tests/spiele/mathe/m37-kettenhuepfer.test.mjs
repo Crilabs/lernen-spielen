@@ -98,13 +98,52 @@ test("Freude: nie zweimal dieselbe hintereinander, der Freudentanz seltener; Wit
 });
 
 test("texte.json: je Reihe der Anfang, je Aufgabe die Gleichung, je Zahl bis 100 ihr Ort; keine Wörter aus 3.2", () => {
-  for (const n of REIHEN) assert.equal(TEXTE.anfang[n], `Lena hüpft auf der Kette von ${n}.`);
+  // Kein Satz am Rundenanfang (die Leiste nennt das Thema); beim Reihenwechsel nur, was sich ändert.
+  assert.equal(TEXTE.anfang, undefined);
+  const NAME = { 2: "Zweier", 3: "Dreier", 4: "Vierer", 5: "Fünfer", 6: "Sechser", 7: "Siebener", 8: "Achter", 9: "Neuner", 10: "Zehner" };
+  for (const n of REIHEN) assert.equal(TEXTE.jetzt[n], `Jetzt die ${NAME[n]}kette.`);
+  assert.deepEqual(Object.keys(TEXTE.wechsel).sort(), ["kette-hin", "kette-weg", "perlen-hin", "perlen-weg"]);
+  for (const t of Object.values(TEXTE.wechsel)) assert.ok(t.split(" ").length <= 8, t);
   for (const { daten: { a, b, c } } of alle) assert.equal(TEXTE.gleichung[`${a}*${b}`], `${a} mal ${b} ist ${c}.`);
   // Auch jede Probe (Kernaufgabe) hat ihren Satz.
   for (const n of REIHEN) for (const k of [1, 2, 5, 10]) assert.ok(TEXTE.gleichung[`${k}*${n}`], `${k} · ${n}`);
   for (let w = 1; w <= 100; w++) assert.equal(TEXTE.daneben[w], `Die ${w} liegt dort drüben.`);
   const alleTexte = JSON.stringify(TEXTE);
   for (const w of ["super", "toll", "falsch", "leider", "Fehler", "richtig"]) assert.ok(!new RegExp(`\\b${w}\\b`, "i").test(alleTexte), w);
+});
+
+test("waehleAufgabe: bleibt auf der gemalten Kette, wenn das Angebot es erlaubt; Wiedervorlagen nie getauscht", () => {
+  const a = (/** @type {string} */ key) => ({ key, thema: "t" });
+  const angebot = { ziel: a("mal:5*7"), auch: [a("mal:2*3"), a("mal:10*3")], stufe: "material" };
+  // Kette von 3 gemalt: die Aufgabe auf der Dreierkette kommt zuerst, das Ziel bleibt im Angebot.
+  const w = L.waehleAufgabe(angebot, 3);
+  assert.equal(w?.ziel.key, "mal:2*3");
+  assert.deepEqual(w?.auch.map((x) => x.key), ["mal:5*7", "mal:10*3"]);
+  assert.equal(w?.stufe, "material");
+  // Gleiche Kette, keine Kette, keine passende in auch, Wiedervorlage: unverändert.
+  assert.equal(L.waehleAufgabe(angebot, 7), angebot);
+  assert.equal(L.waehleAufgabe(angebot, null), angebot);
+  assert.equal(L.waehleAufgabe(angebot, 4), angebot);
+  assert.equal(L.waehleAufgabe(angebot, 3, new Set(["mal:5*7"])), angebot);
+  assert.equal(L.waehleAufgabe(null, 3), null);
+});
+
+test("bildWechsel: jeder Wechsel von Reihe oder Stufe ist eine Szene mit höchstens einem Satz", () => {
+  // Erste Kette: Lena malt sie hin, ohne Satz; auf kopf gibt es nichts zu malen.
+  assert.deepEqual(L.bildWechsel({ n: null, stufe: null }, { n: 2, stufe: "material" }), { schritte: ["kette-hin"], satz: null });
+  assert.deepEqual(L.bildWechsel({ n: null, stufe: null }, { n: 2, stufe: "kopf" }), { schritte: [], satz: null });
+  // Nichts gewechselt: nichts (auf kopf geht die beim Hüpfen entstandene Kette zurück).
+  assert.deepEqual(L.bildWechsel({ n: 2, stufe: "material" }, { n: 2, stufe: "material" }), { schritte: [], satz: null });
+  assert.deepEqual(L.bildWechsel({ n: 2, stufe: "kopf" }, { n: 2, stufe: "kopf" }), { schritte: ["einrollen"], satz: null });
+  // Stufen.
+  assert.deepEqual(L.bildWechsel({ n: 2, stufe: "material" }, { n: 2, stufe: "vorstellung" }), { schritte: ["perlen-weg"], satz: "perlen-weg" });
+  assert.deepEqual(L.bildWechsel({ n: 2, stufe: "vorstellung" }, { n: 2, stufe: "material" }), { schritte: ["perlen-hin"], satz: "perlen-hin" });
+  assert.deepEqual(L.bildWechsel({ n: 2, stufe: "vorstellung" }, { n: 2, stufe: "kopf" }), { schritte: ["kette-weg"], satz: "kette-weg" });
+  assert.deepEqual(L.bildWechsel({ n: 2, stufe: "kopf" }, { n: 2, stufe: "material" }), { schritte: ["einrollen", "kette-hin"], satz: "kette-hin" });
+  // Reihe: alte Kette weg, neue hin, ein Satz.
+  assert.deepEqual(L.bildWechsel({ n: 2, stufe: "material" }, { n: 3, stufe: "material" }), { schritte: ["kette-weg", "kette-hin"], satz: "jetzt" });
+  assert.deepEqual(L.bildWechsel({ n: 2, stufe: "kopf" }, { n: 3, stufe: "vorstellung" }), { schritte: ["einrollen", "kette-hin"], satz: "jetzt" });
+  assert.deepEqual(L.bildWechsel({ n: 2, stufe: "vorstellung" }, { n: 3, stufe: "kopf" }), { schritte: ["kette-weg"], satz: "jetzt" });
 });
 
 // --- Kreidekette auf der Straße (kreide-geometrie.js, gezeichnet in kreide.js) ------------------------------------

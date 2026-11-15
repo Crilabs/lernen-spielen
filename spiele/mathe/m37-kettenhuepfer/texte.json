@@ -1,15 +1,21 @@
 {
- "hinweis": "Sätze von M37 Kettenhüpfer, die aus Daten kommen (wörtlich nach der Idee docs/spiele/mathe/m37-kettenhuepfer.md §6, je Zahl ausgeschrieben, keine zur Laufzeit zusammengesetzten Sätze). anfang: Rundenanfang und Kettenwechsel je Reihe n. gleichung: „a mal n ist c.“ (die Idee schreibt „a · n = c.“; mit Wörtern, damit die Stimme den Satz findet und vorlesen kann) je Aufgabe (Schlüssel a*n) – nach einem Fehlversuch oder mit Hilfe gelöst, als Probe der Kernaufgabe (Hilfe Stufe 1) und als Lösung (Hilfe Stufe 2). daneben: die getippte Zahl w (1 bis 100) und ihr Ort. Feste Sätze stehen im Aufruf blase.sage in spiel.js.",
- "anfang": {
-  "2": "Lena hüpft auf der Kette von 2.",
-  "3": "Lena hüpft auf der Kette von 3.",
-  "4": "Lena hüpft auf der Kette von 4.",
-  "5": "Lena hüpft auf der Kette von 5.",
-  "6": "Lena hüpft auf der Kette von 6.",
-  "7": "Lena hüpft auf der Kette von 7.",
-  "8": "Lena hüpft auf der Kette von 8.",
-  "9": "Lena hüpft auf der Kette von 9.",
-  "10": "Lena hüpft auf der Kette von 10."
+ "hinweis": "Sätze von M37 Kettenhüpfer, die aus Daten kommen (je Zahl ausgeschrieben, keine zur Laufzeit zusammengesetzten Sätze). jetzt: der eine Satz, wenn eine Aufgabe einer anderen Reihe n kommt und Lena die neue Kette hinmalt (Christian, 2026-11-15; am Rundenanfang kein Satz, die Leiste nennt das Thema). wechsel: der eine Satz, wenn die Lernstufe wechselt und Lena Perlen oder Kette wegwischt bzw. hinmalt. gleichung: „a mal n ist c.“ je Aufgabe (Schlüssel a*n) – nach einem Fehlversuch oder mit Hilfe gelöst, als Probe der Kernaufgabe (Hilfe Stufe 1) und als Lösung (Hilfe Stufe 2). daneben: die getippte Zahl w (1 bis 100) und ihr Ort. Feste Sätze stehen im Aufruf blase.sage in spiel.js.",
+ "jetzt": {
+  "2": "Jetzt die Zweierkette.",
+  "3": "Jetzt die Dreierkette.",
+  "4": "Jetzt die Viererkette.",
+  "5": "Jetzt die Fünferkette.",
+  "6": "Jetzt die Sechserkette.",
+  "7": "Jetzt die Siebenerkette.",
+  "8": "Jetzt die Achterkette.",
+  "9": "Jetzt die Neunerkette.",
+  "10": "Jetzt die Zehnerkette."
+ },
+ "wechsel": {
+  "perlen-weg": "Lena wischt die Perlen weg.",
+  "perlen-hin": "Lena malt die Perlen wieder hin.",
+  "kette-weg": "Lena wischt die Kette weg.",
+  "kette-hin": "Lena malt die Kette wieder hin."
  },
  "gleichung": {
   "1*2": "1 mal 2 ist 2.",

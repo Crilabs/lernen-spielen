@@ -133,3 +133,56 @@ export function witz(a, seitWitz) {
   if (a === 1) return "doppelblick";
   return null;
 }
+
+/** Reihe n einer Aufgabe „mal:a*n“ (null, wenn der Schlüssel keine Malaufgabe ist). @param {string | undefined} key */
+const reiheVon = (key) => {
+  const m = /^mal:(\d+)\*(\d+)$/.exec(key ?? "");
+  return m ? Number(m[2]) : null;
+};
+
+/**
+ * Aufgabe aus dem Angebot der Lernsteuerung { ziel, auch, stufe } (spiele/lernsteuerung.js, naechstesAngebot): Das
+ * Spiel darf statt des Ziels eine Aufgabe aus `auch` nehmen (dasselbe Thema, ein Angebot). Liegt das Ziel auf einer
+ * anderen Kette als der, die gerade gemalt ist, und hat `auch` eine Aufgabe auf dieser Kette, bleibt die Kette (gleiche
+ * Reihe nacheinander, kein Wechsel ohne Grund; Christian 2026-11-15). Nie getauscht wird ein Ziel, das in dieser Runde
+ * schon einmal nicht passte oder mit Hilfe gelöst wurde (es kommt als Wiedervorlage und muss drankommen).
+ * @template {{ ziel: { key: string }, auch?: { key: string }[] }} A
+ * @param {A | null} angebot @param {number | null} n Reihe der gemalten Kette @param {Set<string>} [wieder]
+ * @returns {A | null}
+ */
+export function waehleAufgabe(angebot, n, wieder = new Set()) {
+  if (!angebot || n === null) return angebot;
+  const r = reiheVon(angebot.ziel?.key);
+  if (r === null || r === n || wieder.has(angebot.ziel.key)) return angebot;
+  const auch = angebot.auch ?? [];
+  const gleich = auch.find((a) => reiheVon(a.key) === n);
+  if (!gleich) return angebot;
+  return { ...angebot, ziel: gleich, auch: [angebot.ziel, ...auch.filter((a) => a !== gleich)] };
+}
+
+/**
+ * Was zwischen zwei Aufgaben im Bild geschieht, wenn Reihe oder Stufe wechseln (Christian 2026-11-15, Regeln §8:
+ * nichts ändert sich, was man nicht sieht). Schritte nacheinander:
+ *   "kette-weg"  Lena wischt die ganze Kette mit dem Schwamm weg (Feld für Feld)
+ *   "einrollen"  die beim Hüpfen entstandene Kette (Stufe kopf) geht zurück, ohne Schwamm (wie gebaut)
+ *   "kette-hin"  Lena malt die Kette mit Kreide hin (in der Stufe: mit Perlen oder als leere Kästchen)
+ *   "perlen-weg" Lena wischt nur die Perlen weg (material → vorstellung), Kästchen bleiben
+ *   "perlen-hin" Lena malt die Perlen wieder in die Kästchen (vorstellung → material)
+ * satz: Schlüssel in texte.json – "jetzt" (texte.jetzt[n]) beim Reihenwechsel, sonst texte.wechsel[satz]; null ohne Satz.
+ * @param {{ n: number | null, stufe: string | null }} von @param {{ n: number, stufe: string }} nach
+ * @returns {{ schritte: string[], satz: string | null }}
+ */
+export function bildWechsel(von, nach) {
+  const kopf = (/** @type {string | null} */ s) => s === "kopf";
+  if (von.n !== nach.n) {
+    const schritte = [];
+    if (von.n !== null) schritte.push(kopf(von.stufe) ? "einrollen" : "kette-weg");
+    if (!kopf(nach.stufe)) schritte.push("kette-hin");
+    return { schritte, satz: von.n === null ? null : "jetzt" };
+  }
+  if (von.stufe === nach.stufe) return { schritte: kopf(nach.stufe) ? ["einrollen"] : [], satz: null };
+  if (kopf(nach.stufe)) return { schritte: kopf(von.stufe) ? [] : ["kette-weg"], satz: "kette-weg" };
+  if (kopf(von.stufe)) return { schritte: ["einrollen", "kette-hin"], satz: "kette-hin" };
+  if (nach.stufe === "vorstellung") return { schritte: ["perlen-weg"], satz: "perlen-weg" };
+  return { schritte: ["perlen-hin"], satz: "perlen-hin" };
+}

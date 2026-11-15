@@ -24,12 +24,13 @@ import "../../rahmen/perlenkette.js"; // nur für die Pause (Papierkarte)
 import "./kreide.js";
 import * as Runde from "../../runde/runde.js";
 import { malAus } from "../../aufgabenarten.js";
+import { LERNFARBE } from "../../rahmen/stil.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
 import { runde, einmal } from "../../lernsteuerung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
-import { hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend, einfuehrungsKette, hueperZeiten, hueperTon, naechsteFreude, witz } from "./logik.js";
+import { hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend, einfuehrungsKette, hueperZeiten, hueperTon, naechsteFreude, witz, waehleAufgabe, bildWechsel } from "./logik.js";
 
 sperreTouch();
 
@@ -42,11 +43,13 @@ const kette = $("kette");
 const brett = $("brett");
 const schatten = $("schatten");
 const rechnung = $("rechnung");
+const tafel = $("tafel");
 const karte = $("eingabe");
 const tastatur = $("tastatur");
 const fertigKnopf = $("fertig");
 const lenaEl = $("lena");
 const lenaKoerper = $("lena-koerper");
+const werkzeug = $("werkzeug");
 const figurenLage = /** @type {HTMLElement} */ (document.querySelector(".figuren"));
 
 // =====================================================================================================
@@ -63,8 +66,10 @@ const ARTEN = [{ art: "mal", reihen: [2, 10], stufen: ["material", "vorstellung"
 const NACH_WIRKUNG_MS = 300;
 /** Längstens so lange wartet die Folge auf das Ende der Wirkung (B6, etwa 3 s). */
 const FOLGE_MAX_MS = 3200;
-/** Der Satz zu einer neuen Kette steht mindestens so lange, auch ohne Ton. */
-const KETTE_SATZ_MS = 1400;
+/** Der Satz zu einem Wechsel (Reihe oder Stufe) steht mindestens so lange, auch ohne Ton. */
+const WECHSEL_SATZ_MS = 1400;
+/** Ein Stäbchen wischen oder malen (Lena hüpft drauf, Schwamm oder Kreide gehen darüber): zehn zusammen etwa 1,5 s. */
+const STAB_MS = 150;
 
 /** Nur Vorschau: Aufgaben, falls die Lernsteuerung nichts liefert. */
 const VORSCHAU = { thema: "Siebenerreihe", aufgaben: ["mal:6*7", "mal:3*7", "mal:8*7", "mal:4*7"] };
@@ -77,13 +82,16 @@ let letzterSatz = Promise.resolve();
 
 /** Der Erzähler (docs/stimme.md): beschreibt, was zu sehen ist, nie ein Urteil (grundsaetze.md 3.2). */
 const erzaehler = {
-  /** Rundenanfang und Kettenwechsel. @param {number} b */
-  kette: (b) => blase.sage(TEXTE?.anfang?.[b] ?? ""),
-  /** „a · n = c.“ (nach Fehlversuch oder Hilfe, Probe der Kernaufgabe, Lösung). @param {number} a @param {number} b */
-  gleichung: (a, b) => blase.sage(TEXTE?.gleichung?.[`${a}*${b}`] ?? ""),
+  /** Eine Aufgabe einer anderen Reihe kommt: „Jetzt die Dreierkette.“ @param {number} b */
+  jetzt: (b) => (TEXTE?.jetzt?.[b] ? blase.sage(TEXTE.jetzt[b]) : Promise.resolve("still")),
+  /** Wechsel der Stufe (perlen-weg, perlen-hin, kette-weg, kette-hin). @param {string} art */
+  wechsel: (art) => (TEXTE?.wechsel?.[art] ? blase.sage(TEXTE.wechsel[art]) : Promise.resolve("still")),
+  /** „a · n = c.“ (nach Fehlversuch oder Hilfe, Probe der Kernaufgabe, Lösung); in der Hilfe kurz auch zu lesen.
+   * @param {number} a @param {number} b @param {boolean} [zeigen] */
+  gleichung: (a, b, zeigen = false) => blase.sage(TEXTE?.gleichung?.[`${a}*${b}`] ?? "", { zeigen }),
   /** Ort der getippten Zahl, die nicht passt (bis 100; darüber zeigt es nur das Bild). @param {number} w */
   daneben: (w) => (TEXTE?.daneben?.[w] ? blase.sage(TEXTE.daneben[w]) : Promise.resolve("still")),
-  einStaebchen: () => blase.sage("Lena hüpft nur ein Stäbchen."),
+  einStaebchen: () => blase.sage("Lena hüpft nur ein Stäbchen.", { zeigen: true }),
   einfuehrungVor: () => blase.sage("Lena hüpft zwei Stäbchen weit."),
   einfuehrungDu: () => blase.sage("Jetzt tippst du."),
   gehtNicht: () => blase.sage("Das Spiel geht gerade nicht."),
@@ -200,14 +208,165 @@ function kettenWechsel(neu) {
   return true;
 }
 
-/** Die Kette rollt aus (Stäbchen für Stäbchen, etwa 0,4 s; bei wenig Bewegung sofort). */
-async function kettRolltAus() {
-  if (wenigBewegung()) return kette.removeAttribute("bis");
-  for (let k = 0; k <= 10; k++) {
-    kette.setAttribute("bis", String(k));
-    await warte(35);
+/** Was die Kette zwischen zwei Aufgaben zeigt: die Stufe, in der sie gemalt ist (null: noch keine Kette). @type {string | null} */
+let bildStufe = null;
+const ALLE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+/** Stäbchen, die gerade zu sehen sind (Stufe kopf: nur die beim Hüpfen entstandenen). */
+function sichtbareStaebchen() {
+  const bis = kette.getAttribute("bis");
+  const weg = new Set((kette.getAttribute("weg") ?? "").split(/\s+/).filter(Boolean).map(Number));
+  const max = bis === null ? 10 : Number(bis);
+  return ALLE.filter((k) => k <= max && !weg.has(k));
+}
+/** Die Kette ohne Zwischenstand einer Szene in der Stufe (verdeckt, bis, perlen, weg). @param {string} stufe */
+function setzeStufe(stufe) {
+  kette.removeAttribute("perlen");
+  kette.removeAttribute("weg");
+  kette.toggleAttribute("verdeckt", stufe === "vorstellung");
+  if (stufe === "kopf") kette.setAttribute("bis", "0");
+  else kette.removeAttribute("bis");
+}
+
+// --- Schwamm und Kreide ------------------------------------------------------------------------------
+/** Gelber Küchenschwamm mit grüner Scheuerseite, unten weiß von Kreide (von schräg oben). */
+const SCHWAMM = `<svg viewBox="0 0 120 80"><path d="M14 30 Q14 18 26 18 L96 14 Q108 14 108 26 L108 50 Q108 62 96 62 L26 66 Q14 66 14 54 Z" fill="#F2C94C" stroke="#3B2A6B" stroke-width="3"/>
+  <path d="M14 30 Q14 18 26 18 L96 14 Q108 14 108 26 L108 32 L14 36 Z" fill="#4E9A54" stroke="#3B2A6B" stroke-width="3" stroke-linejoin="round"/>
+  <g fill="#D9A92E"><circle cx="34" cy="48" r="3"/><circle cx="52" cy="54" r="2.4"/><circle cx="70" cy="46" r="3.2"/><circle cx="88" cy="52" r="2.6"/><circle cx="44" cy="58" r="1.8"/><circle cx="80" cy="58" r="2"/></g>
+  <path d="M18 58 Q50 70 104 56" stroke="#FBF8F1" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.85"/></svg>`;
+/** Dickes Stück Straßenkreide in der Farbe der Reihe, die Spitze unten weiß bestäubt. @param {string} farbe */
+const KREIDE_STUECK = (farbe) => `<svg viewBox="0 0 120 80"><g transform="rotate(-32 60 40)"><rect x="22" y="26" width="76" height="28" rx="12" fill="${farbe}" stroke="#3B2A6B" stroke-width="3"/>
+  <rect x="30" y="30" width="56" height="6" rx="3" fill="#fff" opacity="0.35"/><path d="M22 34 Q14 40 22 46" stroke="#FBF8F1" stroke-width="5" fill="none" stroke-linecap="round"/></g></svg>`;
+
+/** Zeigt Schwamm oder Kreide (Farbe der Reihe n). @param {"schwamm" | "kreide"} art */
+function nimmWerkzeug(art) {
+  werkzeug.innerHTML = art === "schwamm" ? SCHWAMM : KREIDE_STUECK(farbeVon(n));
+  werkzeug.hidden = false;
+}
+function legeWerkzeugWeg() {
+  werkzeug.getAnimations().forEach((a) => a.cancel());
+  werkzeug.hidden = true;
+}
+/** Montessori-Farbe der Reihe (wie die Perlen der Kreidekette). @param {number | null} r */
+function farbeVon(r) {
+  return LERNFARBE.perle[/** @type {keyof typeof LERNFARBE.perle} */ (r ?? 1)] ?? "#fff";
+}
+/**
+ * Schwamm oder Kreide gehen einmal über Stäbchen k (vorwärts von links, rückwärts von rechts), vorn vor Lenas Füßen.
+ * @param {number} k @param {boolean} rueckwaerts @param {number} ms
+ */
+function strichUeber(k, rueckwaerts, ms) {
+  const o = kette.stabOrt(k);
+  if (!o || wenigBewegung()) return Promise.resolve();
+  const vorn = 2.2 * o.s * remPx();
+  const [a, e] = rueckwaerts ? [o.ende, o.anfang] : [o.anfang, o.ende];
+  const t = (/** @type {{ x: number, y: number }} */ p, /** @type {number} */ w) => `translate(${p.x.toFixed(1)}px, ${(p.y + vorn).toFixed(1)}px) scale(${o.s.toFixed(3)}) rotate(${w}deg)`;
+  const mitte = { x: (a.x + e.x) / 2, y: (a.y + e.y) / 2 - 0.6 * remPx() };
+  return werkzeug.animate([
+    { transform: t(a, -6) },
+    { transform: t(mitte, 5), offset: 0.5 },
+    { transform: t(e, -4) },
+  ], { duration: ms, easing: "ease-in-out", fill: "forwards" }).finished.catch(() => undefined);
+}
+
+/** Die Szene eines Wechsels wurde durch Tippen abgekürzt: der Rest geschieht sofort. */
+let abgekuerzt = false;
+
+/**
+ * Lena hüpft die Stäbchen der Folge ab; auf jedem geht das Werkzeug darüber und tut seine Arbeit (je Stäbchen etwa
+ * STAB_MS, zehn zusammen etwa 1,5 s). Rückwärts schaut sie nach links. Abgekürzt: der Rest sofort.
+ * @param {number[]} folge @param {"schwamm" | "kreide"} art @param {(k: number, sofort: boolean) => Promise<void> | void} aufStab
+ */
+async function geheAb(folge, art, aufStab) {
+  const rueckwaerts = folge.length > 1 && folge[1] < folge[0];
+  if (abgekuerzt || wenigBewegung()) {
+    for (const k of folge) await aufStab(k, true);
+    return;
   }
+  spiegel = rueckwaerts;
+  nimmWerkzeug(art);
+  lena.haltung("zeigen", { ms: 140 });
+  try {
+    for (const k of folge) {
+      if (abgekuerzt) {
+        await aufStab(k, true);
+        continue;
+      }
+      const h = lenaHuepft(k, { folge: [k], ms: STAB_MS });
+      laufend.push(h.ueberspringe);
+      await Promise.all([h.fertig, strichUeber(k, rueckwaerts, STAB_MS), aufStab(k, false)]);
+    }
+  } finally {
+    legeWerkzeugWeg();
+  }
+}
+
+/** Stäbchenliste als Attributwert. @param {Iterable<number>} l */
+const alsListe = (l) => [...l].sort((x, y) => x - y).join(" ");
+
+/** Lena wischt die ganze Kette weg (vorwärts, Schwamm). */
+async function wischeKette() {
+  const da = sichtbareStaebchen();
+  if (!da.length) return;
+  await lenaZumStart();
+  const weg = new Set(ALLE.filter((k) => !da.includes(k)));
+  kette.setAttribute("weg", alsListe(weg));
   kette.removeAttribute("bis");
+  await geheAb(da, "schwamm", async (k, sofort) => {
+    if (!sofort) await kette.wische(k, { ganz: true, ms: STAB_MS });
+    weg.add(k);
+    kette.setAttribute("weg", alsListe(weg));
+  });
+}
+
+/** Die beim Hüpfen entstandene Kette (Stufe kopf) geht schnell zurück, Stäbchen für Stäbchen (ohne Schwamm, wie gebaut). */
+async function rolleEin() {
+  const da = sichtbareStaebchen();
+  if (!da.length) return kette.setAttribute("bis", "0");
+  kette.removeAttribute("verdeckt");
+  for (let k = Math.max(...da) - 1; k >= 0; k--) {
+    kette.setAttribute("bis", String(k));
+    if (!abgekuerzt && !wenigBewegung()) await warte(28);
+  }
+}
+
+/**
+ * Lena malt die Kette von b in der Stufe hin (mit Perlen oder als leere Kästchen); steht sie hinten (nach dem
+ * Wegwischen), malt sie rückwärts zurück zum Start. @param {number} b @param {string} stufe
+ */
+async function maleKette(b, stufe) {
+  const weg = new Set(ALLE);
+  kette.setAttribute("weg", alsListe(weg));
+  kettenWechsel(b);
+  kette.removeAttribute("bis");
+  kette.toggleAttribute("verdeckt", stufe === "vorstellung");
+  const rueckwaerts = lenaBei >= 6;
+  await geheAb(rueckwaerts ? [...ALLE].reverse() : ALLE, "kreide", (k) => {
+    weg.delete(k);
+    kette.setAttribute("weg", alsListe(weg));
+  });
+}
+
+/** Lena wischt die Perlen weg (material → vorstellung): die Kästchen bleiben sauber stehen. */
+async function wischePerlen() {
+  await lenaZumStart();
+  const mit = new Set(ALLE);
+  await geheAb(ALLE, "schwamm", async (k, sofort) => {
+    if (!sofort) await kette.wische(k, { ms: STAB_MS });
+    mit.delete(k);
+    kette.setAttribute("perlen", alsListe(mit));
+  });
+}
+
+/** Lena malt die Perlen wieder in die Kästchen (vorstellung → material). */
+async function malePerlen() {
+  await lenaZumStart();
+  const mit = new Set();
+  kette.setAttribute("perlen", "");
+  kette.removeAttribute("verdeckt");
+  await geheAb(ALLE, "kreide", (k) => {
+    mit.add(k);
+    kette.setAttribute("perlen", alsListe(mit));
+  });
 }
 
 // --- Lena ------------------------------------------------------------------------------------------
@@ -220,7 +379,11 @@ const lena = Runde.steuere(lenaKoerper.querySelector("svg"));
  * Lena steht mit den Füßen auf p (px) und ist so groß, wie die Tiefe der Straße dort sagt (p.s; vorn 1).
  * @param {{ x: number, y: number, s: number }} p @param {number} [hoch] px über dem Punkt
  */
-const lenaTransform = (p, hoch = 0) => `translate(${(p.x - lenaEl.offsetWidth / 2).toFixed(1)}px, ${(p.y - lenaEl.offsetHeight * FUSS - hoch).toFixed(1)}px) scale(${p.s.toFixed(3)})`;
+const lenaTransform = (p, hoch = 0) => `translate(${(p.x - lenaEl.offsetWidth / 2).toFixed(1)}px, ${(p.y - lenaEl.offsetHeight * FUSS - hoch).toFixed(1)}px) scale(${(spiegel ? -p.s : p.s).toFixed(3)}, ${p.s.toFixed(3)})`;
+/** Lena schaut nach links (sie malt die neue Kette rückwärts, von Stäbchen 10 zurück zum Start). */
+let spiegel = false;
+/** Wo Lena zuletzt stand (px): der nächste Hüpfer beginnt dort, auch wenn die Kette inzwischen eine andere ist. @type {{ x: number, y: number, s: number } | null} */
+let lenaP = null;
 /** Schatten am Boden unter Lena (kleiner und blasser, je höher sie ist). @param {{ x: number, y: number, s: number }} p @param {number} [luft] 0 … 1 */
 const schattenTransform = (p, luft = 0) => `translate(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px) scale(${(p.s * (1 - 0.35 * luft)).toFixed(3)}, ${(p.s * p.s * (1 - 0.35 * luft)).toFixed(3)})`;
 
@@ -229,6 +392,7 @@ function stelleLena(k) {
   const p = kette.standPunkt(k);
   if (!p) return;
   lenaBei = k;
+  lenaP = p;
   lenaEl.getAnimations().forEach((a) => a.cancel());
   schatten.getAnimations().forEach((a) => a.cancel());
   lenaEl.style.transform = lenaTransform(p);
@@ -239,12 +403,13 @@ function stelleLena(k) {
 /**
  * Lena hüpft von Stäbchen `von` Stäbchen für Stäbchen bis `bis` (Bogen, beim Abspringen geduckt, Landung gestaucht).
  * Rückwärts (bis < von): ein großer Bogen. beiLandung(k) nach jeder Landung (Ton, Leuchten, Kette rollt aus).
- * @param {number} bis @param {{ zeiten?: number[], vorher?: (k: number) => void, beiLandung?: (k: number) => void }} [o]
+ * folge: eigene Folge von Stäbchen (Wischen und Malen), ms: Dauer je Hüpfer statt zeiten.
+ * @param {number} bis @param {{ zeiten?: number[], folge?: number[], ms?: number, vorher?: (k: number) => void, beiLandung?: (k: number) => void }} [o]
  * @returns {{ fertig: Promise<void>, ueberspringe: () => void }}
  */
-function lenaHuepft(bis, { zeiten = [], vorher = () => {}, beiLandung = () => {} } = {}) {
+function lenaHuepft(bis, { zeiten = [], folge, ms: jeMs, vorher = () => {}, beiLandung = () => {} } = {}) {
   const von = lenaBei;
-  const schritte = bis >= von ? Array.from({ length: bis - von }, (_, i) => von + i + 1) : [bis];
+  const schritte = folge ?? (bis >= von ? Array.from({ length: bis - von }, (_, i) => von + i + 1) : [bis]);
   let aus = false;
   let i = 0;
   /** @type {Animation[]} */
@@ -266,17 +431,17 @@ function lenaHuepft(bis, { zeiten = [], vorher = () => {}, beiLandung = () => {}
     lena.haltung("freuen-klein", { ms: 120 });
     for (; i < schritte.length && !aus; i++) {
       const k = schritte[i];
-      const p0 = kette.standPunkt(lenaBei);
+      const p0 = lenaP ?? kette.standPunkt(lenaBei);
       const p1 = kette.standPunkt(k);
       if (!p0 || !p1) break;
       vorher(k);
-      const zurueck = k < lenaBei;
+      const zurueck = !folge && k < lenaBei;
       const reihenwechsel = Math.abs(p1.y - p0.y) > 1;
-      const ms = zurueck ? 420 : zeiten[k - 1] ?? 240;
+      const ms = jeMs ? (reihenwechsel ? jeMs * 1.8 : jeMs) : zurueck ? 420 : zeiten[k - 1] ?? 240;
       // Bogen: auf derselben Reihe 2,5 rem plus ein wenig je Weite; in die andere Reihe und zurück an den Start ein
       // flacher großer Bogen (nie bis in die Blase).
       const sm = (p0.s + p1.s) / 2;
-      const hoch = (reihenwechsel || zurueck ? 7 : Math.min(7, 4.5 + Math.abs(p1.x - p0.x) / rem * 0.12)) * rem * sm;
+      const hoch = (reihenwechsel || zurueck ? 7 : jeMs ? 2.6 : Math.min(7, 4.5 + Math.abs(p1.x - p0.x) / rem * 0.12)) * rem * sm;
       const mitte = { x: (p0.x + p1.x) / 2, y: reihenwechsel || zurueck ? Math.min(p0.y, p1.y) : (p0.y + p1.y) / 2, s: sm };
       const boden = { x: (p0.x + p1.x) / 2, y: (p0.y + p1.y) / 2, s: sm };
       jetzt = [
@@ -303,6 +468,7 @@ function lenaHuepft(bis, { zeiten = [], vorher = () => {}, beiLandung = () => {}
       schatten.style.transform = schattenTransform(p1);
       jetzt.forEach((a) => a.cancel());
       lenaBei = k;
+      lenaP = p1;
       if (!zurueck) kette.staub(p1.x, p1.y, p1.s);
       beiLandung(k);
     }
@@ -328,6 +494,7 @@ function lenaZumStart() {
 // --- Tafel und Pfeilchen im Flug -------------------------------------------------------------------
 /** Die Aufgabe auf der Tafel, das Kärtchen leer. @param {number} a @param {number} b */
 function zeigeAufgabe(a, b) {
+  tafel.classList.remove("still");
   rechnung.textContent = `${a} · ${b} =`;
   setzeEingabe("");
 }
@@ -483,7 +650,7 @@ function stelleAufgabe(aufgabe, melde) {
   ueberspringeAlles();
   const { a, b, c } = ziel;
   const stufe = aufgabe.stufe ?? "material";
-  kettenWechsel(b); // gewechselt (mit Satz) hat schon neueKette im RAHMEN; hier nur zur Sicherheit
+  kettenWechsel(b); // gewechselt (sichtbar) hat schon bereiteBild im RAHMEN; hier nur zur Sicherheit
 
   let eingabe = "";
   let fertig = false;
@@ -498,7 +665,7 @@ function stelleAufgabe(aufgabe, melde) {
   const zeige = () => {
     kopfStufe = stufe === "kopf";
     kette.setAttribute("pfeile", pfeileWaehrend(geloest, a).join(" "));
-    for (const x of ["leer", "frage", "hohl", "markiert", "hell", "ring"]) kette.removeAttribute(x);
+    for (const x of ["leer", "frage", "hohl", "markiert", "hell", "ring", "perlen", "weg"]) kette.removeAttribute(x);
     kette.toggleAttribute("verdeckt", stufe === "vorstellung");
     if (kopfStufe) kette.setAttribute("bis", "0");
     else kette.removeAttribute("bis");
@@ -590,9 +757,9 @@ function stelleAufgabe(aufgabe, melde) {
     richtigerZug() {
       return fertig ? null : zug(naechsteTaste(eingabe, c));
     },
-    /** Nach der Einführung über „Anleitung“: die Aufgabe steht wieder da, Lena am Start, das Kärtchen leer. */
-    zeigeWieder() {
-      kettenWechsel(b);
+    /** Nach der Einführung über „Anleitung“: die Kette kommt sichtbar in ihre Stufe zurück, die Aufgabe steht wieder da. */
+    async zeigeWieder() {
+      await bereiteBild(b, stufe);
       zeige();
       stelleLena(0);
       lena.haltung("stehen", { ms: 0 });
@@ -612,11 +779,11 @@ function stelleAufgabe(aufgabe, melde) {
         kette.setAttribute("markiert", String(h.kern));
       }
       kette.setAttribute("hell", h.hell.join(" "));
-      if (hilfeStufe === 1) return h.kern === null ? erzaehler.einStaebchen() : erzaehler.gleichung(h.kern, b);
+      if (hilfeStufe === 1) return h.kern === null ? erzaehler.einStaebchen() : erzaehler.gleichung(h.kern, b, true);
       // Lösung: die nächste Taste im Sonnenring; das Kind tippt selbst (L12).
       loesungGezeigt = true;
       markiereNaechste();
-      return erzaehler.gleichung(a, b);
+      return erzaehler.gleichung(a, b, true);
     },
   };
 }
@@ -641,35 +808,55 @@ function raeumeAuf() {
 }
 
 /**
- * Vor der ersten Aufgabe einer Runde und bei einer neuen Kette: Lena springt an den Start, die Kette rollt aus, der
- * Erzähler nennt sie. Erst danach erscheint die Aufgabe (die Zeit läuft erst dann). Tippen kürzt ab.
- * @param {number} b
+ * Vor einer Aufgabe: Wechseln Reihe oder Stufe, geschieht es sichtbar in einer kurzen Szene (Christian 2026-11-15,
+ * Regeln §8): Lena wischt mit dem Schwamm weg und malt mit Kreide hin, Feld für Feld, dazu höchstens ein Satz. Erst
+ * danach erscheint die Aufgabe (die Zeit läuft erst dann). Tippen kürzt die Szene ab. Danach bleibt die Stufe, bis
+ * die Lernsteuerung eine andere verlangt.
+ * @param {number} b Reihe der nächsten Aufgabe @param {string} stufe ihre Stufe @param {{ satz?: boolean }} [o]
  */
-async function neueKette(b) {
+async function bereiteBild(b, stufe, { satz = true } = {}) {
   stand.phase = "folge";
   ueberspringeAlles();
-  await lenaZumStart();
-  n = null;
-  kettenWechsel(b);
-  kopfStufe = false;
-  kette.removeAttribute("verdeckt");
   rechnung.textContent = "";
   setzeEingabe("");
-  await kettRolltAus();
-  await steheSatz(erzaehler.kette(b));
-}
-
-/** Ein Satz steht, bis er gesprochen ist, mindestens KETTE_SATZ_MS; Tippen kürzt ab. @param {Promise<any>} gesagt */
-function steheSatz(gesagt) {
+  tafel.classList.add("still"); // während der Szene keine Aufgabe (die nächste kommt danach)
+  kopfStufe = false;
+  const plan = bildWechsel({ n, stufe: bildStufe }, { n: b, stufe });
   const feld = /** @type {HTMLElement} */ (document.querySelector(".spielflaeche"));
-  return new Promise((ok) => {
-    const fertig = () => {
-      feld.removeEventListener("pointerdown", fertig);
-      ok(undefined);
-    };
-    feld.addEventListener("pointerdown", fertig);
-    Promise.all([gesagt, warte(KETTE_SATZ_MS)]).then(fertig);
-  });
+  abgekuerzt = false;
+  const kuerze = () => {
+    abgekuerzt = true;
+    ueberspringeAlles();
+  };
+  feld.addEventListener("pointerdown", kuerze);
+  try {
+    let gesagt = Promise.resolve();
+    if (satz && plan.satz) {
+      await letzterSatz;
+      gesagt = (plan.satz === "jetzt" ? erzaehler.jetzt(b) : erzaehler.wechsel(plan.satz)).catch(() => undefined);
+    }
+    const szene = (async () => {
+      for (const schritt of plan.schritte) {
+        if (schritt === "kette-weg") await wischeKette();
+        else if (schritt === "einrollen") await rolleEin();
+        else if (schritt === "perlen-weg") await wischePerlen();
+        else if (schritt === "perlen-hin") await malePerlen();
+        else if (schritt === "kette-hin") await maleKette(b, stufe);
+      }
+      kettenWechsel(b);
+      setzeStufe(stufe);
+      bildStufe = stufe;
+      await lenaZumStart();
+      spiegel = false;
+      stelleLena(0);
+    })();
+    // Der Satz steht, bis er gesprochen ist (mindestens WECHSEL_SATZ_MS, wenn es einen gibt); Tippen kürzt ab.
+    const satzZeit = satz && plan.satz ? Promise.race([Promise.all([gesagt, warte(WECHSEL_SATZ_MS)]), new Promise((ok) => feld.addEventListener("pointerdown", ok, { once: true }))]) : Promise.resolve();
+    await Promise.all([szene, satzZeit]);
+  } finally {
+    feld.removeEventListener("pointerdown", kuerze);
+    abgekuerzt = false;
+  }
 }
 
 // =====================================================================================================
@@ -725,17 +912,12 @@ function kindTippt(folge) {
 
 /** Spielt die Einführung auf der Kette von b. @param {number} b */
 async function einfuehrung(b) {
-  stand.phase = "einfuehrung";
   einfuehrungLaeuft = true;
   try {
-    ueberspringeAlles();
-    stelleLena(0);
+    // Die Kette der Einführung kommt sichtbar (Lena malt sie hin oder wischt, was nicht passt; ohne Satz).
+    await bereiteBild(b, "material", { satz: false });
+    stand.phase = "einfuehrung";
     lena.haltung("stehen", { ms: 0 });
-    n = null;
-    kettenWechsel(b);
-    kopfStufe = false;
-    kette.removeAttribute("verdeckt");
-    kette.removeAttribute("bis");
     // Schritt 1: Lena macht es vor.
     zeigeAufgabe(2, b);
     await warte(900);
@@ -792,7 +974,7 @@ const eingetragen = (/** @type {{ spiele: any }} */ c) => c.spiele.spiele.some((
 // --- Prüfstand (rahmen/pruefen.js, nur im Testbetrieb ?pruefen) ------------------------------------
 // In der Einführung ist der richtige Zug die Taste im Sonnenring (das Kind tippt selbst), sonst wie in der Vorlage.
 const stand = { phase: "laden", aufgabe: /** @type {string | null} */ (null), nr: 0, versuche: 0, hilfeStufe: 0, vorschau: true, lernstufe: /** @type {string | null} */ (null) };
-/** @type {{ zuege: () => any[], richtigerZug: () => any, zeigeWieder: () => void } | null} */
+/** @type {{ zuege: () => any[], richtigerZug: () => any, zeigeWieder: () => Promise<void> } | null} */
 let offeneAufgabe = null;
 const ORTE = { hilfe: "#hilfe >>> ls-knopf", haus: "#leiste >>> a.haus", weiter: "#pause >>> ls-knopf.weiter" };
 const WEITER = { art: "tippen", von: ORTE.weiter };
@@ -937,6 +1119,9 @@ function vorschauRunde() {
   };
 }
 
+/** Name eines Themas des Lernplans (für die Leiste, wenn eine Aufgabe einer anderen Reihe kommt). @param {string | undefined} id */
+const themaName = (id) => (id ? ctx?.plan?.themen?.find((/** @type {any} */ t) => t.id === id)?.name ?? null : null);
+
 /** Die Einführung lief schon (sie kommt bei jedem Start einmal, danach über „Anleitung“). */
 let einfuehrungGespielt = false;
 
@@ -945,9 +1130,8 @@ $("anleitung")?.addEventListener("click", async () => {
   if (stand.phase !== "aufgabe" || einfuehrungLaeuft || n === null) return;
   const merke = { n, geloest: new Set(geloest), aufgabe: offeneAufgabe };
   await einfuehrung(n);
-  n = merke.n;
   geloest = merke.geloest;
-  merke.aufgabe?.zeigeWieder();
+  await merke.aufgabe?.zeigeWieder();
   stand.phase = "aufgabe";
 });
 
@@ -966,10 +1150,13 @@ async function spieleRunde(vorschau) {
     r = vorschauRunde();
   }
 
-  let aufgabe = aufStufe(r.naechste());
+  /** Aufgaben, die in dieser Runde nicht passten oder Hilfe brauchten (kommen als Wiedervorlage; nie getauscht). */
+  const wieder = new Set();
+  const naechste = () => waehleAufgabe(aufStufe(r.naechste()), n, wieder);
+  let aufgabe = naechste();
   if (!aufgabe && vorschau) {
     r = vorschauRunde();
-    aufgabe = aufStufe(r.naechste());
+    aufgabe = naechste();
   }
   leiste.setAttribute("thema", r.thema);
 
@@ -982,21 +1169,24 @@ async function spieleRunde(vorschau) {
   }
   $("anleitung")?.removeAttribute("hidden");
 
-  let neueRunde = true;
+  // Rundenanfang: die Pfeilchen der vorigen Runde gehen mit (die Pause lag darüber); kein Satz – die Leiste nennt
+  // das Thema (Christian, 2026-11-15).
+  geloest = new Set();
+  kette.removeAttribute("pfeile");
   while (aufgabe) {
     raeumeAuf();
     const z = malAus(aufgabe.ziel.key);
-    if (z && (neueRunde || z.b !== n)) {
-      await letzterSatz;
-      await neueKette(z.b);
+    if (z) {
+      if (z.b !== n) leiste.setAttribute("thema", themaName(aufgabe.ziel.thema) ?? r.thema);
+      await bereiteBild(z.b, aufgabe.stufe ?? "material");
     }
-    neueRunde = false;
     const e = await spieleAufgabe(aufgabe);
     const ergebnis = { key: e.key, ok: e.versuche === 0, hilfe: e.hilfe, ms: e.ms };
+    if (!ergebnis.ok || ergebnis.hilfe) wieder.add(e.key);
     r.melde(e.key, ergebnis);
     document.dispatchEvent(new CustomEvent("ls-ergebnis", { detail: ergebnis })); // für die Browser-Prüfung
     await warteFolge();
-    aufgabe = aufStufe(r.naechste());
+    aufgabe = naechste();
   }
 
   raeumeAuf();
