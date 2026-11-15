@@ -7,7 +7,7 @@
 //   sprich  wird vorgelesen: nie Ziffern, Zahlwörter oder Platzhalter (die Systemstimme spricht keine Zahlen).
 //           Es spricht der Erzähler in der dritten Person (docs/stimme.md), die Kinder sprechen nie.
 //   zeig    steht in der Erzählblase, darf Ziffern und Platzhalter enthalten; leer → sprich steht in der Blase.
-//   bild    Elemente, x = Mitte in Prozent der Breite:
+//   bild    Elemente (gebaut von rahmen/szene.js, dort auch haeuser und paare), x = Mitte in Prozent der Breite:
 //     { "figur": "ela", "x": 16, "haltung": "zeigen", "aufgabe": "vorzeigen" }
 //         ein Kind der Runde (ela, kofi, lena, timo; spiele/runde/). haltung aus dem Bestand der Runde
 //         (stehen, zeigen, fragen, staunen, nachdenken, freuen-klein …), sonst stehen. Die Kinder blicken nach
@@ -30,6 +30,7 @@
 // Der reine Teil (fuelleVorlage) läuft auch in Node; nichts greift beim Import auf das DOM zu.
 
 import { sprich, stille } from "./kern/stimme.js";
+import { baueBild, SZENE_CSS } from "./rahmen/szene.js";
 
 const PLATZHALTER = /\{\s*([A-Za-z_]\w*)\s*(?:([+-])\s*(\d+)\s*)?\}/g;
 const GANZ_PLATZHALTER = /^\s*\{[^{}]*\}\s*$/;
@@ -120,63 +121,7 @@ const CSS = `
 @media (prefers-reduced-motion:reduce){.einf *{animation:none!important;transition:none!important}}
 `;
 
-// vorher: Kinder der letzten Szene (figur → { el, steuer, x }). Steht ein Kind wieder an derselben Stelle,
-// bleibt seine Zeichnung und wechselt nur sanft die Haltung, statt neu aufzutauchen (ruhig, grundsaetze §9).
-function baueBild(buehne, bild, R, vorher) {
-  const jetzt = new Map();
-  for (const b of bild) {
-    if (!b || typeof b !== "object") continue;
-    try {
-    const x = typeof b.x === "number" ? b.x : 50;
-    if (b.figur) {
-      if (!R || !R.bestand.kinder.has(b.figur) || jetzt.has(b.figur)) continue;
-      const haltung = R.bestand.haltungen.has(b.haltung) ? b.haltung : "stehen";
-      const alt = vorher.get(b.figur);
-      let f;
-      if (alt && alt.x === x) {
-        f = alt;
-        if (f.haltung !== haltung) f.steuer.haltung(haltung);
-      } else {
-        const el = document.createElement("div"); el.className = "el figur-h";
-        el.style.left = x + "%";
-        el.innerHTML = R.zeichne(b.figur, { haltung });
-        f = { el, steuer: R.steuere(el.querySelector("svg")), x };
-      }
-      f.haltung = haltung;
-      jetzt.set(b.figur, f);
-      buehne.appendChild(f.el);
-      continue;
-    }
-    const el = document.createElement("div"); el.className = "el";
-    el.style.left = x + "%";
-    if (Array.isArray(b.perlen)) {
-      el.classList.add("perlen");
-      const werte = b.perlen.filter(n => Number.isInteger(n) && n > 0 && n <= 10);
-      // Perlengröße so, dass alle Stäbe der Szene neben einem Kind auf die Matte passen, mit Rand (gleiche Größe für alle, Länge proportional)
-      const lang = werte.reduce((s, n) => s + n * 1.12 + (n > 5 ? 0.6 : 0), 0) + (werte.length - 1) * 2.4;
-      el.style.setProperty("--einf-stab", Math.min(8, (96 / Math.max(lang, 1)) * 1.4).toFixed(2) + "rem");
-      for (const n of werte) {
-        const st = document.createElement("ls-perlenstab");
-        st.setAttribute("wert", String(n));
-        el.appendChild(st);
-      }
-    } else if (b.zahl !== undefined) {
-      el.classList.add("zahl"); el.textContent = String(b.zahl);
-    } else if (typeof b.objekt === "string" && /^[a-z][a-z0-9-]*$/.test(b.objekt)) {
-      el.classList.add("objekt");
-      if (typeof b.hoehe === "number" && b.hoehe > 0 && b.hoehe <= 30) el.style.setProperty("--einf-objekt", b.hoehe + "rem");
-      const o = document.createElement("ls-objekt");
-      o.setAttribute("art", b.objekt);
-      if (typeof b.zustand === "string" && b.zustand) o.setAttribute("zustand", b.zustand);
-      o.setAttribute("still", "");
-      el.appendChild(o);
-    } else continue;
-    buehne.appendChild(el);
-    } catch (e) { /* kaputtes Bildelement: weglassen */ }
-  }
-  for (const [id, f] of vorher) if (!jetzt.has(id)) f.steuer.halt();
-  return jetzt;
-}
+// Die Bildelemente baut rahmen/szene.js (gemeinsam mit den Geschichten, docs/geschichten.md §3).
 
 // hintergrund: CSS-Bild der Spielwelt (sonst Nebel). Eine relative Adresse in url() gilt relativ zur Seite des Spiels,
 // nicht zu dieser Datei; darum aus dem Spiel heraus absolut bauen, z. B. in spiele/<fach>/<spiel>/spiel.js:
@@ -197,7 +142,7 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund: 
   const mitTon = !!ton;   // ohne Web-Sprache bleibt sprich still, dann gilt die Lesezeit
 
   if (!document.getElementById("einf-css")) {
-    const st = document.createElement("style"); st.id = "einf-css"; st.textContent = CSS; document.head.appendChild(st);
+    const st = document.createElement("style"); st.id = "einf-css"; st.textContent = CSS + SZENE_CSS; document.head.appendChild(st);
   }
   try { await import("./rahmen/perlenstab.js"); } catch (e) { /* ohne Baustein bleiben die Perlen weg */ }
   if (szenen.some(s => s.bild.some(b => b && typeof b.objekt === "string")))

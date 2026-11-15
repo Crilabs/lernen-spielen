@@ -205,3 +205,9 @@ test("sammle findet die Sätze aus texte.json von M37 (Rundenanfang und Auftrag)
   assert.ok(aus.length >= 90, `mindestens die 90 Aufträge, gefunden ${aus.length}`);
   assert.ok(aus.some((x) => x.text === "Sechs Wochenschachteln. Wie viele Fächer sind es zusammen?"));
 });
+
+test("sammle: Seiten der Geschichten (sprich, sonst text)", () => {
+  const { eintraege } = sammle(WURZEL);
+  const aus = eintraege.filter((e) => e.quellen.includes("geschichten/zehnerpaare/geschichte.json"));
+  assert.ok(aus.some((e) => e.text.startsWith("Ela und Kofi wohnen nebeneinander.")), "erste Seite der Zehnerpaare");
+});

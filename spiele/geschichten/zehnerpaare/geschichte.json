@@ -1,0 +1,33 @@
+{
+ "id": "zehnerpaare",
+ "titel": "Zehn Gäste, zwei Häuser",
+ "art": "struktur",
+ "welt": null,
+ "familie": "zehnerpaare",
+ "fach": "mathe",
+ "klasse": 1,
+ "seiten": [
+  { "text": "Ela und Kofi wohnen nebeneinander. Heute kommen zehn Perlen zu Besuch.",
+    "szene": [ { "figur": "ela", "x": 9, "haltung": "winken", "aufgabe": "freuen" }, { "haeuser": [0, 0], "x": 50 },
+      { "perlen": [10], "x": 50, "y": 93, "hoehe": 4.4 }, { "figur": "kofi", "x": 91, "blick": "links", "haltung": "stehen" } ] },
+  { "text": "Eine Perle schläft bei Ela. Neun Perlen schlafen bei Kofi. Bei Kofi wird es eng.",
+    "szene": [ { "figur": "ela", "x": 9, "haltung": "stehen" }, { "haeuser": [1, 9], "x": 50 }, { "figur": "kofi", "x": 91, "blick": "links", "haltung": "staunen", "aufgabe": "wundern" } ] },
+  { "text": "Am nächsten Abend kommen alle zehn wieder. Zwei schlafen bei Ela, acht bei Kofi.",
+    "szene": [ { "figur": "ela", "x": 9, "haltung": "zeigen", "aufgabe": "zeigen" }, { "haeuser": [2, 8], "x": 50 }, { "figur": "kofi", "x": 91, "blick": "links", "haltung": "stehen" } ] },
+  { "text": "Dann drei bei Ela, sieben bei Kofi. Kofi hat wieder mehr Platz.",
+    "szene": [ { "figur": "ela", "x": 9, "haltung": "stehen" }, { "haeuser": [3, 7], "x": 50 }, { "figur": "kofi", "x": 91, "blick": "links", "haltung": "freuen-klein", "aufgabe": "freuen" } ] },
+  { "text": "Jetzt schlafen vier bei Ela. Bei Kofi ist der Vorhang zu. Wie viele Perlen schlafen bei Kofi?",
+    "frage": true,
+    "szene": [ { "figur": "ela", "x": 9, "haltung": "nachdenken", "aufgabe": "fragen" }, { "haeuser": [4, 6], "zu": 1, "x": 50 }, { "figur": "kofi", "x": 91, "blick": "links", "haltung": "stehen" } ] },
+  { "text": "Kofi zieht den Vorhang auf. Sechs Perlen schlafen bei Kofi.",
+    "szene": [ { "figur": "ela", "x": 9, "haltung": "stehen" }, { "haeuser": [4, 6], "x": 50 }, { "figur": "kofi", "x": 91, "blick": "links", "haltung": "zeigen", "aufgabe": "vorzeigen" } ] },
+  { "text": "Fünf bei Ela, fünf bei Kofi. Beide Häuser sind gleich voll.",
+    "szene": [ { "figur": "ela", "x": 9, "haltung": "freuen-klein", "aufgabe": "freuen" }, { "haeuser": [5, 5], "x": 50 }, { "figur": "kofi", "x": 91, "blick": "links", "haltung": "freuen-klein", "aufgabe": "freuen" } ] },
+  { "text": "Ela und Kofi legen alle Nächte untereinander. Jede Reihe ist gleich lang.",
+    "szene": [ { "figur": "ela", "x": 9, "haltung": "zeigen", "aufgabe": "vorzeigen" }, { "paare": [[1, 9], [2, 8], [3, 7], [4, 6], [5, 5]], "x": 50, "y": 45 },
+      { "figur": "kofi", "x": 91, "blick": "links", "haltung": "staunen", "aufgabe": "wundern" } ] },
+  { "text": "Am Morgen ziehen die zehn Perlen weiter. Ela und Kofi winken.",
+    "szene": [ { "figur": "ela", "x": 9, "haltung": "winken" }, { "haeuser": [0, 0], "x": 50 },
+      { "perlen": [10], "x": 50, "y": 93, "hoehe": 4.4 }, { "figur": "kofi", "x": 91, "blick": "links", "haltung": "winken" } ] }
+ ]
+}

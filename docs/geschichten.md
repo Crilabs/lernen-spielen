@@ -68,17 +68,38 @@ spiele/geschichten/<id>/kosten.json       Kosten (werkzeuge/kosten/)
 
 - `text` steht unter dem Bild und wird vorgelesen; `sprich` (optional) ersetzt den gesprochenen Text, wenn er vom
   geschriebenen abweichen muss.
-- `bild` (Foto, Pfad relativ zum Ordner der Geschichte) **oder** `szene` (gezeichnet): Bildelemente wie in
-  `spiele/einfuehrung.js` (`figur`, `perlen`, `zahl`, `objekt`), erweiterbar um Elemente, die eine Geschichte braucht
-  (dann dort dokumentiert und getestet).
+- `bild` (Foto, Pfad relativ zum Ordner der Geschichte) **oder** `szene` (gezeichnet): Bildelemente aus
+  `spiele/rahmen/szene.js`, dieselben wie in den Einführungen (`spiele/einfuehrung.js` baut sein Bild damit). `x` ist
+  die Mitte in Prozent der Breite, `y` (optional) die Mitte in Prozent der Höhe.
+
+  | Element | zeigt |
+  |---|---|
+  | `{ "figur": "ela", "x": 9, "haltung": "zeigen", "aufgabe": "vorzeigen" }` | ein Kind der Runde; bleibt es von Seite zu Seite an derselben Stelle, steht es still und wechselt nur die Haltung; `blick: "links"` (optional) für ein Kind rechts vom Material |
+  | `{ "perlen": [3, 7], "hoehe": 4.4 }` | Perlenstäbe nebeneinander; `hoehe` (optional) ist die Dicke der Stäbe (in der Geschichte Sechzigstel der Bildhöhe, in der Einführung rem) |
+  | `{ "zahl": 7 }`, `{ "objekt": "einkaufskorb", "zustand": "leer", "hoehe": 16 }` | große Ziffer; ein Ding aus `spiele/objekte/` |
+  | `{ "haeuser": [3, 7], "zu": 1 }` | **neu (Zehnerpaare):** zwei Häuser auf dem Boden; im Fenster jedes Hauses liegt ein Perlenstab mit so vielen Perlen (0 = leer), beide links bündig, damit man die Längen vergleicht; `zu` (0 links, 1 rechts, optional): dort ist der Vorhang zu (Frage zum Vorhersagen) |
+  | `{ "paare": [[1, 9], [2, 8], [3, 7], [4, 6], [5, 5]] }` | **neu (Zehnerpaare):** Paare von Perlenstäben untereinander wie das Montessori-Material: der erste Stab links bündig, der zweite rechts bündig, alle Reihen gleich lang; man sieht das Muster |
+
+  Neue Elemente kommen nach `szene.js` und werden in `tests/geschichten.test.mjs` geprüft.
+- `fach` (optional, z. B. `mathe`): Fach für die Kopfleiste (Tönung und Kachel); ohne Fach ist sie Nebel.
 - `frage: true` markiert die eine Seite mit Frage zum Vorhersagen.
 - `familie` (Lerngeschichte) bzw. `welt` (Sachgeschichte) verbinden sie mit `beurteilung.json`.
 
 ## 4. Abspielen
 
 - Baustein `<ls-geschichte src="geschichten/<id>/geschichte.json">` in `spiele/rahmen/geschichte.js`, Seite
-  `spiele/geschichte.html?id=<id>` (optional `&weiter=<Pfad>`: dorthin nach der letzten Seite, z. B. ins Spiel).
+  `spiele/geschichte.html?id=<id>` (optional `&weiter=<Pfad>`: dorthin nach der letzten Seite, z. B. ins Spiel; nur
+  ein Pfad innerhalb von `spiele/`, sonst die Startseite).
 - Bild groß, Text darunter in Andika, Vorlesen (Florian, vorab aufgenommen, `npm run audio`), Weiter und Zurück per
-  Tipp, Wischen und Pfeiltaste, Haus; Fortschritt als Punkte ohne Zahl; nach der letzten Seite „Fertig“.
+  Tipp, Wischen und Pfeiltaste, Haus; Fortschritt als Punkte ohne Zahl; nach der letzten Seite „Fertig“ (Ereignis
+  `fertig`).
+- Bei Ton an liest der Erzähler jede Seite beim Aufschlagen vor (`sprich`, sonst `text`; der Audio-Sammler nimmt die
+  Seiten auf), der Knopf Vorlesen noch einmal. Nur ein Tipp des Kindes (Blättern) bricht einen Satz ab.
+- Auf der Seite mit `frage` erscheint Weiter erst nach dem Vorlesen und 2 s Ruhe; bis dahin blättern auch Wischen und
+  Pfeiltaste nicht weiter.
+- Seitenwechsel ruhig (Überblenden mit kleinem Schub, nur `transform`/`opacity`; bei wenig Bewegung nur Überblenden).
+  Die Kinder der Runde stehen in einer eigenen Ebene und bleiben beim Blättern stehen.
+- Prüfen: `?pruefen` gibt `window.lsGeschichte` (`seite`, `seiten`, `weiterBereit`, `weiter()`, `zurueck()`,
+  `fertig()`); `tests/geschichten.test.mjs` prüft das Format, `tests/browser/geschichte.spec.mjs` das Blättern.
 - Vor dem Spiel: Die Lerngeschichte eines Themas kommt beim ersten Start des Themas und bleibt über „Anleitung“ wieder
   aufrufbar; Sachgeschichten stehen im Bücherregal der Startseite (Christian; Umbau nach der Probe).

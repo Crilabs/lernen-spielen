@@ -2,7 +2,7 @@
 // vorliegen (dazu die Sätze aus `texte.json` jedes Spielordners, docs/spielentwicklung.md „Ablage“). Sätze aus Vorlagen im Spielcode (Template-Strings, zusammengesetzte Texte) findet das Skript
 // nicht. Es zählt sie aber je Datei, damit sichtbar bleibt, was noch fehlt (siehe Spec: Vorlagen als Daten).
 
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { audioSchluessel, normalisiere } from "../../spiele/kern/audio.js";
 
@@ -133,6 +133,14 @@ export function sammle(wurzel) {
   // Sätze aus Daten eines Spiels (spiele/<fach>/<spiel>/texte.json): ausgeschriebene Sätze je Aufgabe, Reihe …
   for (const p of dateien(spiele, [".json"], ["einfuehrungen", "kern", "audio", "mit-echten-dingen"]))
     if (p.endsWith(`${sep}texte.json`)) for (const t of saetzeAusTexten(json(p))) neu(t, rel(spiele, p));
+
+  // Geschichten (docs/geschichten.md): je Seite der gesprochene Text (sprich, sonst text), wie ls-geschichte ihn vorliest.
+  for (const p of existsSync(join(spiele, "geschichten")) ? dateien(join(spiele, "geschichten"), [".json"]) : [])
+    if (p.endsWith(`${sep}geschichte.json`))
+      for (const s of json(p).seiten ?? []) {
+        const t = typeof s?.sprich === "string" && s.sprich ? s.sprich : s?.text;
+        if (typeof t === "string") neu(t, rel(spiele, p));
+      }
 
   // Diktatsätze (Material für die Schreibspiele): der Satz selbst, ohne Variante, wie bisher aufgenommen.
   // Einleitungen wie „Hör noch mal hin. …“ gehören zum jeweiligen Spiel und kommen mit ihm.
