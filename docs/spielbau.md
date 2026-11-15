@@ -74,6 +74,9 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 - **Passt es nicht:** ein Satz, der beschreibt, was ist („6 Stäbchen sind nicht 48.“).
 - **Hilfe:** Zahlen und Zeichen im Bild, dazu höchstens ein Satz mit höchstens zehn Wörtern, in den Wörtern des Kindes
   („5 · 7 = 35. Und noch ein Stäbchen?“). Fachbegriffe nur, wenn sie das Thema selbst sind.
+- **Keine Sprechblase im Spiel** (Christian, 2026-11-15): Sätze werden nur gesprochen, ein Knopf „Nochmal hören“
+  spielt den letzten Satz wieder (`<ls-blase ohne-text>`); ist ein Satz zum Lesen wichtig, erscheint die Blase kurz
+  und verschwindet von selbst. Kein Satz wiederholt, was Leiste oder Bild schon zeigen.
 - **Rundenanfang:** höchstens ein Satz. **Einführung:** höchstens drei Schritte mit je einem Satz, im Tempo des Kindes (§8).
 - **Satzlänge:** bis Kl. 2 höchstens 8 Wörter, Kl. 3–4 höchstens 12.
 - **Alle festen Texte eines Spiels zusammen** (ohne die aus Daten erzeugten Varianten je Zahl): höchstens etwa
@@ -147,6 +150,9 @@ alle Spiele gilt deshalb:
 - **Kein Satz der Form „X ist Y“, „X bedeutet Y“, „Jedes X bringt Y“.** Sätze beschreiben, was zu sehen ist oder was
   passiert, nie eine Beziehung, die man sich denken muss.
 - **Eine neue Sache je Einführung.** Alles andere ist schon bekannt oder kommt später von selbst.
+- **Kein Wechsel ohne Bild:** Wechselt die Lernsteuerung mitten in der Runde Stufe oder Inhalt (andere Reihe,
+  Perlen weg), zeigt das Spiel den Wechsel in einer kurzen Szene (z. B. Lena wischt die Perlen weg, malt die neue
+  Kette hin), nie ein plötzlich anderes Bild (Christian, 2026-11-15).
 - **Das Spiel beginnt mit der Einführung, und sie spielt im echten Spielbild:** derselbe Held, dieselbe Kette,
   dieselbe Tastatur. Ein Kind der Runde macht einen Zug ganz vor (tippen, Wirkung), dann leuchtet beim Kind die Taste
   im Sonnenring und es tippt selbst. Bei jedem Start; der Knopf „Anleitung“ ruft sie jederzeit wieder auf. Je Schritt
