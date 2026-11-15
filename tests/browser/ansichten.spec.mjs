@@ -158,7 +158,7 @@ async function lauf(typ, name, groesse, basis) {
       const st = await start.evaluate(() => {
         const imBild = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.left >= 0 && r.top >= 0 && r.right <= innerWidth + 0.5 && r.bottom <= innerHeight + 0.5; };
         const leiste = document.getElementById("leiste");
-        const raster = document.getElementById("raster").getBoundingClientRect();
+        const raster = document.querySelector(".raster").getBoundingClientRect(); // der scrollbare Rahmen, nicht sein Inhalt
         const seite = document.getElementById("seite").getBoundingClientRect();
         const karten = [...document.querySelectorAll("#raster .karte.spiel")];
         return {

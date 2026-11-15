@@ -6,25 +6,30 @@
 <title>Geschichte</title>
 <link rel="stylesheet" href="rahmen/seite.css">
 <style>
-/* Eine Geschichte (docs/geschichten.md §4): geschichte.html?id=<id>[&weiter=<pfad>][&eltern]. Kopfleiste mit Haus und Titel,
-   darunter <ls-geschichte>; nach „Fertig“ gilt sie als gelesen (Elternbereich „Sachthemen“, nicht mit eltern = Vorschau)
-   und es geht zu weiter (relativer Pfad in spiele/) oder zur Startseite.
-   Dahinter die Kulisse der Geschichte (rahmen/kulissen/), ohne Kulisse dieselbe dezente Landschaft wie überall. */
+/* Eine Geschichte (docs/geschichten.md §4): geschichte.html?id=<id>[&weiter=<pfad>][&eltern]. Geteilt nach der
+   Designsprache (Spec 2026-11-15-designsprache §5.5): <ls-geschichte> über die ganze Höhe, oben links auf dem Bild
+   Zurück (zu weiter, ohne „gelesen“), oben rechts der Ton (ls-leiste nur-ton); Titel und Vorlesen zeigt der Abspieler.
+   Nach „Fertig“ gilt sie als gelesen (Elternbereich „Sachthemen“, nicht mit eltern = Vorschau) und es geht zu weiter
+   (relativer Pfad in spiele/) oder zur Startseite. Dahinter die Kulisse der Geschichte (rahmen/kulissen/): sichtbar im
+   Inhaltsverzeichnis des Sachbuchs; auf den Seiten steht sie in der Bildhälfte hinter Szenen ohne Foto. */
 body { -webkit-user-select: none; user-select: none; }
 .hintergrund, .hintergrund svg { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
 .hintergrund .kulisse { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; display: block; }
 .geschichte-seite { position: fixed; top: var(--ls-leiste-hoehe); bottom: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem); }
+.zurueck { position: fixed; z-index: 60; top: calc(2.9rem + env(safe-area-inset-top, 0rem)); left: calc(max(0rem, (100vw - 192rem) / 2) + 2.9rem); }
 </style>
 </head>
 <body>
 <div class="hintergrund" id="hintergrund"></div>
-<ls-leiste id="leiste" spiel="geschichte" titel="Geschichte"></ls-leiste>
+<ls-leiste id="leiste" spiel="geschichte" titel="Geschichte" nur-ton></ls-leiste>
 <main class="geschichte-seite"><ls-geschichte id="geschichte"></ls-geschichte></main>
+<ls-knopf class="zurueck" id="zurueck" symbol="zurueck.svg" name="Zurück" groesse="seite"></ls-knopf>
 
 <script type="module">
 import { sperreTouch, protokoll } from "./lernspiel.js";
 import { merkeGeschichteGelesen, ladeBuchStand, merkeBuchStand } from "./lernsteuerung.js";
 import "./rahmen/leiste.js";
+import "./rahmen/knopf.js";
 import "./rahmen/geschichte.js";
 import { hintergrundSvg } from "./start/hintergrund.js";
 
@@ -38,6 +43,8 @@ const roh = suche.get("weiter") ?? "";
 const weiter = /^[a-z0-9][\w\-./]*(\?[\w\-=&.%]*)?$/i.test(roh) && !roh.includes("..") && !roh.includes("//") ? roh : "index.html";
 
 const leiste = document.getElementById("leiste");
+// Zurück: dorthin, woher das Kind kam (Bibliothek oder Elternbereich), ohne die Geschichte als gelesen zu merken.
+document.getElementById("zurueck").addEventListener("click", () => { location.href = weiter; });
 const geschichte = document.getElementById("geschichte");
 if (/^[a-z0-9-]+$/.test(id)) geschichte.setAttribute("src", `geschichten/${id}/geschichte.json`);
 else geschichte.setAttribute("src", "geschichten/-/geschichte.json");   // zeigt „geht gerade nicht“
@@ -56,7 +63,6 @@ geschichte.geladen.then((g) => {
     bild.src = k.svg; bild.alt = ""; bild.className = "kulisse";
     document.getElementById("hintergrund").replaceChildren(bild);
     document.body.style.background = k.grund;
-    leiste.style.setProperty("--fach-toenung", "transparent");
   }
 });
 // Sachbuch: Lesestand laden und merken (nicht in der Vorschau der Eltern); alle Kapitel fertig → gelesen.

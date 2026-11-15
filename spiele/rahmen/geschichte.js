@@ -1,6 +1,8 @@
 // <ls-geschichte src="geschichten/zehnerpaare/geschichte.json">
-// Spielt eine Geschichte ab (docs/geschichten.md §4): je Seite links ein quadratisches Bild, so groß wie möglich (Foto
-// aus `bild`, 1024 × 1024, oder gezeichnete Szene aus `szene`, rahmen/szene.js), rechts daneben der Text in Andika.
+// Spielt eine Geschichte ab (docs/geschichten.md §4), geteilt nach der Designsprache (Spec 2026-11-15-designsprache §5.5):
+// links das Bild randlos über die halbe Breite (Foto aus `bild`, 1024 × 1024, oder gezeichnete Szene aus `szene` auf
+// einer quadratischen Bühne vor der Kulisse, rahmen/szene.js), rechts auf Papier der Titel (Inter) und der Text in
+// Andika (Kurzgeschichte ein Satz je Zeile, Sachbuch in Absätzen). Oben rechts Vorlesen, unten Zurück, Punkte und Weiter.
 // Weiter und Zurück per Tipp, Wischen und Pfeiltaste. Fortschritt als Punkte ohne Zahl.
 // - Startwahl (Christian 2026-11-15): Bei Ton an zeigt die erste Seite „Vorlesen“ und „Selbst lesen“; vorher wird nichts
 //   gelesen. Wer ohne Wahl blättert, liest selbst. Bei Ton aus gibt es keine Wahl (Selbst lesen).
@@ -51,19 +53,19 @@ const CSS = `
   -webkit-user-select: none; user-select: none; }
 * { box-sizing: border-box; }
 .buch { position: absolute; inset: 0; container: buch / size; }
-.blatt { --rand: 3.6rem; --luft: 6rem;
-  --bild: min(calc(100cqh - 2 * var(--rand)), calc(54cqw - var(--rand)));
-  position: absolute; inset: 0; padding: var(--rand) calc(var(--rand) + 1rem);
-  display: grid; grid-template-columns: var(--bild) minmax(0, 1fr); grid-template-rows: var(--bild);
-  column-gap: var(--luft); align-content: center; justify-content: center; }
+.ui { font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale); letter-spacing: -0.01em; }
 
-/* Das Bild: eine flache Papierkarte mit Tinte-Kontur (Matte, kein Schatten: nicht drückbar). */
-.rahmen { position: relative; width: var(--bild); height: var(--bild); border-radius: var(--ls-radius-gross);
-  border: var(--ls-kontur) solid var(--ls-tinte); background: var(--ls-papier); overflow: hidden; touch-action: pan-y;
-  box-shadow: 0 1.2rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
+/* Geteilt: links das Bild randlos, rechts die Bühne für den Text (kein Falz, keine Doppelseite). */
+.blatt { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+.rahmen { position: relative; overflow: hidden; container-type: size; touch-action: pan-y;
+  background: var(--kulisse-grund, var(--ls-nebel)) var(--kulisse-bild, none) center bottom / cover no-repeat; }
 .seite { position: absolute; inset: 0; container-type: size; will-change: transform, opacity; }
+.seite.foto { background: var(--ls-papier); }
 .seite.foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .figuren { position: absolute; inset: 0; container-type: size; pointer-events: none; }
+/* Gezeichnete Szene: eine quadratische Bühne mitten in der Bildhälfte, davor dieselbe Ebene für die Kinder. */
+.seite.szene, .figuren { inset: auto; width: min(100cqw, 100cqh); height: min(100cqw, 100cqh);
+  left: calc(50% - min(100cqw, 100cqh) / 2); top: calc(50% - min(100cqw, 100cqh) / 2); }
 
 /* Gezeichnete Szene auf der quadratischen Bühne: hinten die Häuser am Rand der Wiese, vorn die Kinder. Die Kinder
    reichen nie bis an die Fenster der Häuser, damit jede Perle zu sehen bleibt. */
@@ -81,46 +83,46 @@ const CSS = `
 ${SZENE_CSS}
 .el.haeuser { top: auto; bottom: 42cqh; transform: translateX(-50%); --haus-breite: 27.5; gap: calc(var(--szene-u) * 2); }
 .el.paare { --paar-stab: 4.4; }
-.erzeugt { position: absolute; right: 1.6rem; bottom: 1.4rem; padding: .3rem 1.2rem; border-radius: 2rem; font-size: 2.2rem;
-  color: var(--ls-tinte-weich); background: color-mix(in srgb, var(--ls-papier) 82%, transparent); pointer-events: none; }
+.erzeugt { position: absolute; left: 4.2rem; bottom: 4.2rem; padding: .8rem 1.8rem; border-radius: 1.6rem; font-size: 2.2rem;
+  color: var(--ls-tinte-weich); background: var(--ls-papier); pointer-events: none; }
 .erzeugt[hidden] { display: none; }
 
-/* Rechts: eine ruhige Papierfläche auf der Kulisse – oben der Text, unten Punkte und Knöpfe. */
-.lese { min-width: 0; height: var(--bild); display: grid; grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) auto auto; row-gap: 2.4rem;
-  padding: 4.4rem 4.4rem 3.6rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: var(--ls-radius-gross); box-shadow: 0 1.2rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
+/* Rechts: Papier über die ganze Höhe – oben Vorlesen (neben dem Ton der Seite), dann Titel und Text, unten die Knöpfe. */
+.lese { position: relative; min-width: 0; height: 100%; display: grid; grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto auto; row-gap: 3rem;
+  padding: 16rem var(--ls-seite-rand) 4.2rem 10.4rem; background: var(--ls-papier); }
+/* Vorlesen oben rechts, links neben dem Ton-Knopf der Seite (ls-leiste nur-ton): gleiche Höhe, 2,4 rem Luft. */
+.vorlesen { position: absolute; top: 1.3rem; right: calc(var(--ls-seite-rand) + var(--ls-seite-knopf) + 2.4rem); }
+.zum-inhalt { position: absolute; top: 1.3rem; left: 9.1rem; z-index: 1; }
 /* Langer Text darf scrollen (Christian 2026-11-15: „Text kann scrollbar sein“). */
-.textfeld { display: flex; flex-direction: column; justify-content: safe center; gap: 3.2rem; min-height: 0;
+.textfeld { display: flex; flex-direction: column; justify-content: safe center; min-height: 0;
   overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; scrollbar-width: thin;
-  scrollbar-color: var(--kulisse-tief, var(--ls-tinte-weich)) transparent; }
-.text { margin: 0; font-size: 4.2rem; line-height: 1.45; max-width: 28ch; text-wrap: pretty; hyphens: manual; }
-.text.titel { font-size: 6rem; line-height: 1.15; font-weight: 700; }
+  scrollbar-color: var(--ls-naht) transparent; }
+.seitentitel { margin: 0 0 4.4rem; font-size: 7.2rem; font-weight: 750; line-height: 1.05; letter-spacing: -0.035em; color: var(--ls-tinte); }
+.seitentitel[hidden] { display: none; }
+.text { margin: 0; font-size: 4.5rem; line-height: 1.4; max-width: 30ch; text-wrap: pretty; hyphens: manual; }
 .text p { margin: 0; }
-.text p + p { margin-top: .7em; }
+.text p + p { margin-top: .75em; }
+.text.titel { font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
+  font-size: 8.4rem; line-height: 1.04; font-weight: 750; letter-spacing: -0.035em; }
 
-/* Sachbuch (geschichten.md §2a, §4): mehr Text je Seite – etwas kleineres Bild, Text oben beginnend. */
-:host(.buch-modus) .blatt { --bild: min(calc(100cqh - 2 * var(--rand)), calc(46cqw - var(--rand))); }
+/* Sachbuch (geschichten.md §2a, §4): mehr Text je Seite – Absätze, etwas kleiner, Text oben beginnend. */
 :host(.buch-modus) .textfeld { justify-content: flex-start; }
-/* Im Buch nimmt die Textkarte die ganze Höhe (mehr Text je Seite), das Bild steht oben. */
-:host(.buch-modus) .blatt { grid-template-rows: calc(100cqh - 2 * var(--rand)); align-items: start; }
-:host(.buch-modus) .lese { height: calc(100cqh - 2 * var(--rand)); position: relative; padding-top: 4rem; }
-.zum-inhalt { position: absolute; top: 1.6rem; right: 1.6rem; z-index: 1; }
-:host(.buch-modus) .lese .textfeld { padding-right: 7rem; }
-:host(.buch-modus) .text { font-size: 3.8rem; line-height: 1.5; max-width: 34ch; }
+:host(.buch-modus) .seitentitel { font-size: 5.4rem; margin-bottom: 3.2rem; }
+:host(.buch-modus) .text { font-size: 3.8rem; line-height: 1.5; max-width: 36ch; }
 
 /* Inhaltsverzeichnis: Titel, Wahl Vorlesen/Selbst lesen, Weiterlesen; darunter die Kapitel als Karten mit Foto. */
-.inhalt { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; padding: 3.6rem 4.6rem 5rem;
+.inhalt { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; padding: 14rem var(--ls-seite-rand) 6rem;
   scrollbar-width: thin; scrollbar-color: var(--kulisse-tief, var(--ls-tinte-weich)) transparent; }
 .inhalt .kopf { display: flex; flex-wrap: wrap; align-items: center; gap: 2.4rem 3.2rem; margin-bottom: 3.6rem;
-  padding: 3rem 3.6rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: var(--ls-radius-gross); box-shadow: 0 1.2rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
-.buchtitel { margin: 0 auto 0 0; font-size: 6rem; line-height: 1.1; font-weight: 700; color: var(--ls-tinte); min-width: 0; }
+  padding: 3.6rem 4.4rem; background: var(--ls-papier); border-radius: var(--ls-radius-plakat); }
+.buchtitel { margin: 0 auto 0 0; font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
+  font-size: 7.2rem; line-height: 1.05; font-weight: 750; letter-spacing: -0.035em; color: var(--ls-tinte); min-width: 0; }
 .wahl { display: flex; flex-wrap: wrap; gap: 1.6rem; }
 .karten { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 34rem), 1fr)); gap: 3.6rem 3.2rem; }
 .kapitelkarte { position: relative; display: grid; grid-template-rows: auto auto auto; text-align: left; padding: 0;
   font: inherit; color: var(--ls-tinte); background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: var(--ls-radius-gross); overflow: hidden; cursor: pointer; touch-action: manipulation;
+  border-radius: var(--ls-radius-teil); overflow: hidden; cursor: pointer; touch-action: manipulation;
   -webkit-tap-highlight-color: transparent; box-shadow: 0 1rem 0 var(--kulisse-tief, var(--ls-tinte-weich));
   transition: transform .15s ease, box-shadow .15s ease; }
 .kapitelkarte:active { transform: translateY(.5rem); box-shadow: 0 .5rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
@@ -129,74 +131,59 @@ ${SZENE_CSS}
   border-bottom: var(--ls-kontur) solid var(--ls-tinte); }
 .karte-bild img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .karte-nr { padding: 2rem 2.4rem 0; font-size: 2.6rem; color: var(--ls-tinte-weich); }
-.karte-titel { padding: .4rem 2.4rem 2.4rem; font-size: 3.6rem; line-height: 1.2; font-weight: 700; }
+.karte-titel { padding: .4rem 2.4rem 2.4rem; font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
+  font-size: 3.4rem; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
 .haken { position: absolute; top: 1.6rem; right: 1.6rem; width: 6rem; height: 6rem; border-radius: 50%; display: none;
   place-items: center; font-size: 3.6rem; font-weight: 700; color: var(--ls-tinte); background: var(--ls-sonne);
   border: var(--ls-kontur) solid var(--ls-tinte); }
 .kapitelkarte.gelesen .haken { display: grid; }
-.knoepfe { display: flex; align-items: center; gap: 1.6rem; min-height: 16.6rem; }
-.knoepfe .rechts { margin-left: auto; display: grid; place-items: center; }
+.knoepfe { display: flex; align-items: center; gap: 2rem; min-height: 11rem; }
+.knoepfe .rechts { display: grid; justify-items: end; align-items: center; min-width: 11rem; }
 .rechts > * { grid-area: 1 / 1; }
-.weiter { width: 16rem; height: 16rem; border-radius: 50%; cursor: pointer; padding: 0; color: var(--ls-tinte);
-  background: var(--ls-sonne); border: var(--ls-kontur) solid var(--ls-tinte); box-shadow: 0 .6rem 0 var(--ls-tinte);
-  display: flex; align-items: center; justify-content: center; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
-  transition: opacity .35s ease, transform .45s cubic-bezier(.3, 1.5, .5, 1); }
-.weiter svg { width: 8rem; height: 8rem; display: block; }
-.weiter:active { transform: translateY(.3rem); box-shadow: 0 .3rem 0 var(--ls-tinte); }
-.weiter:focus-visible { outline: .8rem solid var(--ls-sonne); outline-offset: .5rem; box-shadow: 0 .6rem 0 var(--ls-tinte), 0 0 0 1.1rem var(--ls-tinte); }
-.weiter.wartet { opacity: 0; transform: scale(.6); pointer-events: none; }
+.weiter { transition: opacity .35s ease; }
+.weiter.wartet { opacity: 0; pointer-events: none; }
 .weiter[hidden], .fertig[hidden], .zurueck[hidden], .naechstes[hidden], .zum-inhalt[hidden], .weiterlesen[hidden],
 .blatt[hidden], .inhalt[hidden], .wahl[hidden] { display: none; }
 .zurueck.unsichtbar { visibility: hidden; }
 
-/* Fortschritt: Punkte ohne Zahl; die aufgeschlagene Seite ist ein längerer Strich. */
-.punkte { display: flex; gap: 1.4rem; align-items: center; height: 2.4rem; }
-.punkte i { display: block; width: 2rem; height: 2rem; border-radius: 1rem; border: var(--ls-kontur) solid var(--ls-tinte-weich);
-  background: transparent; transition: width .3s ease, background-color .3s ease; }
-.punkte i { border-color: var(--kulisse-tief, var(--ls-tinte-weich)); }
-.punkte i.gelesen { background: var(--kulisse-tief, var(--ls-tinte-weich)); }
-.punkte i.jetzt { width: 5rem; background: var(--ls-tinte); border-color: var(--ls-tinte); }
+/* Fortschritt: Punkte ohne Zahl in der Mitte; die aufgeschlagene Seite ist ein Sonnenpunkt mit Tinte-Kern. */
+/* Viele Seiten auf schmalem Platz: die Punkte und ihre Abstände werden kleiner, nie breiter als die Reihe. */
+.punkte { flex: 1; display: flex; gap: clamp(0.4rem, 1.4cqw, 1.6rem); align-items: center; justify-content: safe center; min-width: 0; height: 4rem;
+  padding: 0 1.2rem; overflow: hidden; }
+.punkte i { display: block; flex: 0 1 1.6rem; min-width: 0.7rem; aspect-ratio: 1; border-radius: 50%; background: var(--ls-naht);
+  transition: transform .3s ease, background-color .3s ease, box-shadow .3s ease; }
+.punkte i.jetzt { flex: none; width: 1.6rem; background: var(--ls-tinte); box-shadow: 0 0 0 0.7rem var(--ls-sonne); margin: 0 0.8rem; }
 .vorlesen.angehalten { opacity: .55; }
 .startwahl { display: flex; flex-direction: column; align-items: flex-start; gap: 2.4rem; }
 .startwahl[hidden] { display: none; }
 /* Vor der Startwahl: keine Punkte, kein Weiter – die zwei Wege sind die einzigen Knöpfe auf der Fläche. */
-.lese.waehlt .punkte, .lese.waehlt .knoepfe { display: none; }
+.lese.waehlt .punkte, .lese.waehlt .knoepfe, .lese.waehlt .vorlesen { display: none; }
 .fehler { font-size: 4rem; color: var(--ls-tinte-weich); }
 
-/* Schmaleres Querformat (iPad quer): etwas kleineres Bild, etwas kleinerer Text. */
+/* Schmaleres Querformat (iPad quer): etwas kleinerer Text. */
 @container buch (aspect-ratio < 17 / 10) {
-  .blatt { --bild: min(calc(100cqh - 2 * var(--rand)), calc(50cqw - var(--rand))); --luft: 4.8rem; }
-  .text { font-size: 3.8rem; }
-  .text.titel { font-size: 5.2rem; }
-  .lese { padding: 3.6rem 3.6rem 3rem; }
+  .lese { padding-left: 7.2rem; }
+  .text { font-size: 4.2rem; }
+  .text.titel { font-size: 7.2rem; }
 }
 /* Hochformat und fast quadratisch: Bild oben, Text und Knöpfe darunter. */
 @container buch (aspect-ratio < 4 / 3) {
-  .blatt { --bild: min(calc(100cqw - 2 * var(--rand) - 2rem), calc(38cqh - var(--rand)));
-    grid-template-columns: minmax(0, 1fr); grid-template-rows: var(--bild) minmax(0, 1fr); row-gap: 3rem;
-    align-content: stretch; justify-items: center; }
-  .lese { width: 100%; height: auto; min-height: 0; row-gap: 2rem; }
-  .textfeld { justify-content: flex-start; }
-  .text { font-size: 3.6rem; line-height: 1.4; max-width: none; }
-  .lese { padding: 3.2rem 3.6rem 2.4rem; row-gap: 1.6rem; }
-  :host(.buch-modus) .blatt { --bild: min(calc(100cqw - 2 * var(--rand) - 2rem), calc(34cqh - var(--rand)));
-    grid-template-rows: var(--bild) minmax(0, 1fr); align-items: stretch; }
-  :host(.buch-modus) .lese { height: auto; padding-top: 3.2rem; }
+  .blatt { grid-template-columns: minmax(0, 1fr); grid-template-rows: 42% minmax(0, 1fr); }
+  .lese { padding: 13rem 4.8rem 3.2rem; }
+  .text { font-size: 3.8rem; max-width: none; }
   :host(.buch-modus) .text { font-size: 3.6rem; max-width: none; }
 }
-/* Schmal (Telefon hoch): weniger Rand in der Karte, damit Startknöpfe und Fertig hineinpassen. */
+/* Schmal (Telefon hoch): weniger Rand, damit Startknöpfe und Fertig hineinpassen. */
 @container buch (max-width: 560px) {
-  .inhalt { padding: 2.4rem 2rem 4rem; }
+  .inhalt { padding: 12rem 2rem 4rem; }
   .inhalt .kopf { padding: 2.4rem; }
   .buchtitel { font-size: 4.6rem; }
-  .blatt { --rand: 2.4rem; }
-  .lese { padding: 2.4rem 2rem 2rem; }
+  .lese { padding: 12rem 2.4rem 2rem; }
   .knoepfe { gap: 1rem; flex-wrap: wrap; row-gap: 1.6rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 `;
 
-const PFEIL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 /**
  * @typedef {{ text: string, sprich?: string, bild?: string, szene?: any[], frage?: boolean }} Seite
@@ -204,6 +191,16 @@ const PFEIL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M12 
  * @typedef {{ id: string, titel: string, art: string, klasse: number, kulisse?: string, seiten?: Seite[], kapitel?: Kapitel[] }} Geschichte
  * @typedef {{ kapitel: number, seite: number, fertig: number[] }} BuchStand
  */
+
+/**
+ * Teilt einen Absatz in Sätze: nach . ! ? … (auch mit schließendem Anführungszeichen), wenn danach ein Großbuchstabe
+ * oder ein öffnendes Anführungszeichen folgt. „z. B. die …“ bleibt zusammen (danach klein).
+ * @param {string} absatz
+ * @returns {string[]}
+ */
+export function saetze(absatz) {
+  return absatz.split(/(?<=[.!?…][“”"»«)]?)\s+(?=[„"»«(A-ZÄÖÜ])/u).map((t) => t.trim()).filter(Boolean);
+}
 
 const weniger = () => {
   try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { return false; }
@@ -229,20 +226,20 @@ export class LsGeschichte extends HTMLElement {
       </div><div class="blatt">
         <div class="rahmen" part="bild"><div class="figuren"></div><span class="erzeugt" hidden>Bild erzeugt</span></div>
         <div class="lese">
-          <ls-knopf class="zum-inhalt" symbol="inhalt.svg" name="Inhalt" groesse="klein" stumm hidden></ls-knopf>
-          <div class="textfeld"><div class="text" aria-live="polite"></div></div>
+          <ls-knopf class="zum-inhalt" symbol="inhalt.svg" name="Inhalt" groesse="seite" stumm hidden></ls-knopf>
+          <ls-knopf class="vorlesen" symbol="vorlesen.svg" wort="Vorlesen" name="Vorlesen" groesse="seite" stumm></ls-knopf>
+          <div class="textfeld"><h2 class="seitentitel ui" hidden></h2><div class="text" aria-live="polite"></div></div>
           <div class="startwahl" hidden>
             <ls-knopf class="waehle-vorlesen" art="haupt" symbol="vorlesen.svg" wort="Vorlesen" stumm></ls-knopf>
             <ls-knopf class="waehle-selbst" symbol="buch.svg" wort="Selbst lesen" stumm></ls-knopf>
           </div>
-          <div class="punkte" aria-hidden="true"></div>
           <div class="knoepfe">
-            <ls-knopf class="zurueck" symbol="zurueck.svg" name="Zurück" stumm></ls-knopf>
-            <ls-knopf class="vorlesen" symbol="vorlesen.svg" name="Vorlesen" stumm></ls-knopf>
+            <ls-knopf class="zurueck" symbol="zurueck.svg" name="Zurück" groesse="seite" stumm></ls-knopf>
+            <div class="punkte" aria-hidden="true"></div>
             <div class="rechts">
-              <button type="button" class="weiter" aria-label="Weiter">${PFEIL}</button>
-              <ls-knopf class="fertig" art="haupt" symbol="fertig.svg" wort="Fertig" stumm hidden></ls-knopf>
-              <ls-knopf class="naechstes" art="haupt" symbol="buch.svg" wort="Weiter" stumm hidden></ls-knopf>
+              <ls-knopf class="weiter" art="haupt" symbol="weiter.svg" wort="Weiter" hinten groesse="seite" stumm></ls-knopf>
+              <ls-knopf class="fertig" art="haupt" symbol="fertig.svg" wort="Fertig" groesse="seite" stumm hidden></ls-knopf>
+              <ls-knopf class="naechstes" art="haupt" symbol="buch.svg" wort="Weiter" groesse="seite" stumm hidden></ls-knopf>
             </div>
           </div>
         </div>
@@ -255,7 +252,8 @@ export class LsGeschichte extends HTMLElement {
     this.textEl = q(".text");
     this.zurueckEl = q(".zurueck");
     this.vorlesenEl = q(".vorlesen");
-    this.weiterEl = /** @type {HTMLButtonElement} */ (q(".weiter"));
+    this.weiterEl = q(".weiter");
+    this.seitentitelEl = q(".seitentitel");
     this.fertigEl = q(".fertig");
     this.punkteEl = q(".punkte");
     this.startwahlEl = q(".startwahl");
@@ -463,10 +461,13 @@ export class LsGeschichte extends HTMLElement {
       const r = await fetch(liste);
       const k = (await r.json()).kulissen.find((/** @type {any} */ x) => x.id === g.kulisse);
       if (!k) throw new Error(`unbekannt: ${g.kulisse}`);
-      this.kulisse = { ...k, svg: new URL(`./kulissen/${k.id}.svg`, import.meta.url).href };
+      const svg = new URL(`./kulissen/${k.id}.svg`, import.meta.url).href;
+      this.kulisse = { ...k, svg };
       this.dataset.kulisse = k.id;
       this.style.setProperty("--kulisse-grund", k.grund);
       this.style.setProperty("--kulisse-tief", k.tief);
+      // Hinter Szenen ohne Foto steht die Kulisse in der Bildhälfte (Designsprache §5.5).
+      this.style.setProperty("--kulisse-bild", `url("${svg}")`);
     } catch (e) {
       protokoll(`ls-geschichte: Kulisse ${g.kulisse} nicht geladen (${e})`);
     }
@@ -540,6 +541,7 @@ export class LsGeschichte extends HTMLElement {
     const titelSeite = this.modus === null && i === 0 && !this.istBuch;
     this.setzeText(titelSeite ? g.titel : s.text);
     this.textEl.classList.toggle("titel", titelSeite);
+    this.zeigeSeitentitel(!titelSeite);
     /** @type {HTMLElement} */ (this.textEl.parentElement).scrollTop = 0;
     if (alt) this.blende(this.textEl, 0, 1);
 
@@ -611,7 +613,19 @@ export class LsGeschichte extends HTMLElement {
    */
   setzeText(text) {
     const absaetze = String(text ?? "").split(/\n\s*\n/).map((t) => t.trim()).filter(Boolean);
-    this.textEl.replaceChildren(...absaetze.map((t) => { const p = document.createElement("p"); p.textContent = t; return p; }));
+    // Kurzgeschichte: ein Satz je Zeile (Designsprache); Sachbuch: Absätze, wie geschrieben.
+    const zeilen = this.istBuch ? absaetze : absaetze.flatMap(saetze);
+    this.textEl.replaceChildren(...zeilen.map((t) => { const p = document.createElement("p"); p.textContent = t; return p; }));
+  }
+
+  /**
+   * Titel über dem Text: bei der Kurzgeschichte ihr Titel, im Sachbuch der Titel des Kapitels.
+   * @param {boolean} an
+   */
+  zeigeSeitentitel(an) {
+    const titel = this.istBuch ? this.daten?.kapitel?.[this.kapitel]?.titel : this.daten?.titel;
+    this.seitentitelEl.textContent = titel ?? "";
+    this.seitentitelEl.hidden = !an || !titel;
   }
 
   /** Sachbuch: Vorlesen oder Selbst lesen (im Inhaltsverzeichnis umschaltbar). @param {"vorlesen" | "selbst"} modus */
@@ -712,6 +726,7 @@ export class LsGeschichte extends HTMLElement {
     if (!s) return;
     this.setzeText(s.text);
     this.textEl.classList.remove("titel");
+    this.zeigeSeitentitel(true);
     this.blende(this.textEl, 0, 1);
   }
 
@@ -732,6 +747,7 @@ export class LsGeschichte extends HTMLElement {
     this.angehalten = an;
     this.vorlesenEl.classList.toggle("angehalten", an);
     this.vorlesenEl.setAttribute("name", an ? "Weiterlesen" : "Vorlesen");
+    this.vorlesenEl.setAttribute("wort", an ? "Weiterlesen" : "Vorlesen");
     if (this.modus === "vorlesen") this.vorlesenEl.setAttribute("aria-pressed", String(an));
     else this.vorlesenEl.removeAttribute("aria-pressed");
   }

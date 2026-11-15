@@ -5,6 +5,8 @@
 // Ohne bekanntes Fach: Band in Nebel, keine Kachel, Name in Tinte. `thema` darf sich zur Laufzeit ändern.
 // `ohne-haus` (nur die Startseite): kein Haus, die Seite ist selbst das Zuhause. Slot `rechts`: rechts neben
 // Ton, z. B. das Zahnrad der Startseite.
+// `nur-ton` (Geschichte, Designsprache): nur der Ton-Knopf oben rechts (sichtbar 8,4 rem), kein Band, kein Haus, kein
+// Titel; --ls-leiste-hoehe ist dann 0 (die Seite nutzt die ganze Höhe).
 // `durchsichtig` (nur die Startseite): Band ohne Fläche über der Szene, der Name nur für Screenreader sichtbar.
 // Setzt --ls-leiste-hoehe am <html>: dort beginnt die freie Fläche des Spiels (top: var(--ls-leiste-hoehe)).
 // Bereit: `await leiste.bereit()` (Versprechen, auch für späte Aufrufer) oder Ereignis `bereit`, sobald die
@@ -14,7 +16,7 @@ import { ladeEinstellungen, einstellung, setzeEinstellung } from "../kern/einste
 import { sprich, stille } from "../kern/stimme.js";
 import { sageEinmal } from "../kern/sitzung.js";
 import { protokoll } from "../kern/protokoll.js";
-import { FACH, FACH_SYMBOLE, GRUND_CSS, LEISTE_HOEHE, MASSE, bild, definiere } from "./stil.js";
+import { FACH, FACH_SYMBOLE, GRUND_CSS, LEISTE_HOEHE, MASSE, SEITE, bild, definiere } from "./stil.js";
 import "./knopf.js";
 
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
@@ -99,6 +101,10 @@ ${FACH_CSS}
 .thema { font-size: 3.4rem; line-height: 1.3; font-weight: 400; color: var(--ls-tinte-weich); }
 .name[hidden], .thema[hidden] { display: none; }
 .ton { margin-left: auto; flex: none; }
+:host([nur-ton]) .band { height: auto; background: transparent; pointer-events: none;
+  padding: calc(2.6rem + env(safe-area-inset-top, 0rem)) calc(${SEITE.rand - (SEITE.tipp - SEITE.knopf) / 2}rem + env(safe-area-inset-right, 0rem)) 0 0; }
+:host([nur-ton]) .band > .haus, :host([nur-ton]) .band > .fach, :host([nur-ton]) .band > .titel { display: none; }
+:host([nur-ton]) .ton { pointer-events: auto; }
 .haus[hidden] { display: none; }
 ::slotted([slot="rechts"]) { flex: none; }
 `;
@@ -109,7 +115,7 @@ export class LsLeiste extends HTMLElement {
   /** @type {Promise<void>} */
   #bereitet = new Promise((ok) => { this.#ok = ok; });
 
-  static observedAttributes = ["spiel", "fach", "titel", "thema", "ohne-haus"];
+  static observedAttributes = ["spiel", "fach", "titel", "thema", "ohne-haus", "nur-ton"];
 
   constructor() {
     super();
@@ -136,7 +142,7 @@ export class LsLeiste extends HTMLElement {
 
   connectedCallback() {
     // Freie Fläche für das Spiel beginnt unter der Kopfleiste (MASSE.leiste plus Aussparung oben).
-    document.documentElement.style.setProperty("--ls-leiste-hoehe", LEISTE_HOEHE);
+    document.documentElement.style.setProperty("--ls-leiste-hoehe", this.hasAttribute("nur-ton") ? "0rem" : LEISTE_HOEHE);
     this.zeichne();
     if (!this._start) {
       this._start = true;
@@ -223,6 +229,8 @@ export class LsLeiste extends HTMLElement {
     this.themaFeld.textContent = thema;
     this.themaFeld.hidden = !thema;
     if (spiel) this.tonKnopf.setAttribute("spiel", spiel);
+    if (this.hasAttribute("nur-ton")) this.tonKnopf.setAttribute("groesse", "seite");
+    else this.tonKnopf.removeAttribute("groesse");
     this.tonKnopf.setAttribute("symbol", this._ton ? "ton-an.svg" : "ton-aus.svg");
     this.tonKnopf.setAttribute("name", this._ton ? "Ton an" : "Ton aus");
   }
