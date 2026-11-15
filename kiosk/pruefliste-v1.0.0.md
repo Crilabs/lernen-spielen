@@ -76,7 +76,7 @@ Gleich nach dem Neustart, bevor das Kind spielt (Schritte wie in `CHANGELOG.md`,
 
 ## 7. Elternbereich
 
-- [ ] **Lernplan:** Fächer als Baum, Farbe nach Stand, Filter umschalten (Gerade dran, Als Nächstes, Gekonnt, Offen), „Alles ausklappen“; ein Thema aufklappen; unter Mathe die Beschreibung des Kettenhüpfers aufklappen.
+- [ ] **Lernplan:** anfangs nur die Fächer; Mathe aufklappen: Themen als Baum, Farbe nach Stand, Filter umschalten (Gerade dran, Als Nächstes, Gekonnt, Offen), „Alles ausklappen“; ein Thema aufklappen; unter Mathe die Beschreibung des Kettenhüpfers aufklappen.
   *Du siehst:* im aufgeklappten Thema „Davor noch offen“ (mit Sprung), die Spiele als Karten mit Bild und Kurzbeschreibung.
   *Du siehst:* ruhiger Text für Erwachsene, keine Prozente; Abhaken, Zurücksetzen, Freigeben fragen erst „Wirklich?“.
 - [ ] **Spielzeit:** einen Tag sperren bzw. „Höchstens“ auf wenige Minuten, Zeitfenster so, dass das Ende in 5 Minuten ist.
