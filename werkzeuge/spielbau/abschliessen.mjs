@@ -15,6 +15,7 @@ import { closeSync, existsSync, openSync, readFileSync, readSync, readdirSync, s
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { summiere } from "./summe.mjs";
+import { setzeProbe } from "./freigeben.mjs";
 
 const git = (args, cwd) => execFileSync("git", args, { cwd, encoding: "utf8" }).trim();
 const node = (args, cwd) => execFileSync("node", args, { cwd, encoding: "utf8" });
@@ -101,15 +102,20 @@ function main() {
     else {
       const liste = git(["worktree", "list", "--porcelain"], L.hauptrepo).split("\n\n");
       const mainWt = liste.find((b) => b.includes("branch refs/heads/main"))?.match(/^worktree (.+)$/m)?.[1];
-      const kopf = git(["rev-parse", "HEAD"], cwd);
       let ff = true;
-      try { git(["merge-base", "--is-ancestor", "main", kopf], cwd); } catch { ff = false; }
+      try { git(["merge-base", "--is-ancestor", "main", "HEAD"], cwd); } catch { ff = false; }
       if (!ff) merge = "kein Fast-Forward: main hat sich bewegt – erst `git merge main` im Spiel-Branch, Prüfstand wiederholen";
       else if (mainWt && git(["status", "--porcelain"], mainWt)) merge = `main-Worktree ${mainWt} ist nicht sauber – nicht gemergt`;
       else {
+        // Erst Probe, dann fertig (docs/spielbau.md): als Probe markiert nach main; fertig erst nach freigeben.mjs.
+        setzeProbe(cwd, L.id, true);
+        if (git(["status", "--porcelain", "spiele/spiele.json"], cwd)) {
+          git(["commit", "-am", `chore(${L.ordner}): als Probe markiert (erst fertig, wenn Christian oder Noelia es gespielt hat)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`], cwd);
+        }
         if (mainWt) git(["merge", "--ff-only", L.branch], mainWt);
         else git(["fetch", ".", `${L.branch}:main`], L.hauptrepo);
-        merge = git(["rev-parse", "main"], L.hauptrepo) === kopf ? `gemergt: main = ${kopf.slice(0, 7)}` : "Merge fehlgeschlagen";
+        const kopf = git(["rev-parse", "HEAD"], cwd);
+        merge = git(["rev-parse", "main"], L.hauptrepo) === kopf ? `gemergt als Probe: main = ${kopf.slice(0, 7)}` : "Merge fehlgeschlagen";
       }
     }
   }

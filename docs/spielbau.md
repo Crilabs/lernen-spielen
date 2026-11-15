@@ -24,6 +24,11 @@ sich trug, und ein Viertel der Kosten war die Steuerung durch ein Sprachmodell.
 machen mehr Spaß; beides kommt aus derselben Änderung.
 
 <!-- regeln -->
+**Vorrang:** §1 Spielkern und §8 Zeigen statt erklären gehen jeder anderen Regel vor – den Grundsätzen, den
+Checklisten in `grundsaetze-bilder.md` §13 und `bedienung.md` §10, den Kriterien A1–A12, W-… und Kartenbild in
+`spielentwicklung.md` und jedem Katalog-Eintrag. Widerspricht eine ältere Pflicht dem Spielkern, gilt der Spielkern.
+Die Grenzen §5 (G1–G13) bleiben immer.
+
 ### §1 Der Spielkern (vor allen anderen Regeln)
 
 Ein Spiel hat genau einen Kern, und alles andere muss sich vor ihm rechtfertigen:
@@ -31,8 +36,8 @@ Ein Spiel hat genau einen Kern, und alles andere muss sich vor ihm rechtfertigen
 - **Ein Held:** eine Figur oder Sache, die etwas *tut* – hüpft, rollt, baut, fliegt, wächst. Ein Kind der Runde
   oder die Figur des Spiels. Ein Pfeil oder eine Zeile ist kein Held.
 - **Eine Handlung des Kindes**, und sie ist die Lernhandlung (tippen, ziehen, legen). Nicht zwei.
-- **Eine Wirkung**, die man sieht und hört: Sie beginnt sofort (unter 0,3 s nach dem Tippen), dauert höchstens
-  etwa 2,5 s und endet in einem Bild, das bleibt. Der nächste Tipp überspringt sie.
+- **Eine Wirkung**, die man sieht und hört: Sie beginnt sofort (unter 0,3 s nach dem Tippen), dauert etwa 2,5 s,
+  höchstens 3 s (wie `grundsaetze-bilder.md` B6), und endet in einem Bild, das bleibt. Der nächste Tipp überspringt sie.
 - **Ein Takt:** Für ein sicheres Kind vergehen von der Aufgabe bis zur nächsten Aufgabe unter 10 s.
 - **Fünf-Sekunden-Test:** Wer das Spiel einmal vorgemacht bekommen hat (Einführung), weiß ohne Satz, was zu tun ist.
 - **Spielbar ohne Ton und ohne Lesen** des Erzählers – die Sache zeigt alles; die Stimme ist Zugang, nicht Anleitung.
@@ -69,7 +74,7 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 - **Passt es nicht:** ein Satz, der beschreibt, was ist („6 Stäbchen sind nicht 48.“).
 - **Hilfe:** Zahlen und Zeichen im Bild, dazu höchstens ein Satz mit höchstens zehn Wörtern, in den Wörtern des Kindes
   („5 · 7 = 35. Und noch ein Stäbchen?“). Fachbegriffe nur, wenn sie das Thema selbst sind.
-- **Rundenanfang:** höchstens ein Satz. **Einführung:** macht es einmal vor, höchstens drei Sätze.
+- **Rundenanfang:** höchstens ein Satz. **Einführung:** höchstens drei Schritte mit je einem Satz, im Tempo des Kindes (§8).
 - **Satzlänge:** bis Kl. 2 höchstens 8 Wörter, Kl. 3–4 höchstens 12.
 - **Alle festen Texte eines Spiels zusammen** (ohne die aus Daten erzeugten Varianten je Zahl): höchstens etwa
   2 500 Zeichen. M37 hatte 10 200.
@@ -130,7 +135,36 @@ sie da sind, nur, ob sie stören.
 Bevor etwas Neues dazukommt, fragt jeder Schritt: **Was kann weg, ohne dass das Lernen leidet?** Ein Teil, das
 in der Idee keinen Satz im Spielkern hat, kommt nicht ins Spiel. Ein Prüfbefund wird nie durch *mehr* Text oder
 eine weitere Anzeige gelöst, wenn er sich durch Weglassen lösen lässt.
+
+### §8 Zeigen statt erklären – kein Transfer (Christian, 2026-11-15)
+
+Die Einführung von M37 war viel zu schnell und erklärte Zusammenhänge („Ein Stäbchen sind die Teile von einer
+Packung“), die schon ein Erwachsener kaum so schnell aufnimmt; ein Kind ist damit überfordert **(Christian)**. Für
+alle Spiele gilt deshalb:
+
+- **Was dasselbe bedeutet, ist im Bild dasselbe Ding.** Wenn ein Perlenstäbchen eine Packung ist, ist die Packung
+  gemalt, und man sieht die Perlen in ihr (die Packung *ist* das Stäbchen). Das Kind muss nichts übertragen, was es
+  nicht sieht. Geht das nicht, fällt die Gleichsetzung weg – sie wird nie mit Worten nachgereicht.
+- **Kein Satz der Form „X ist Y“, „X bedeutet Y“, „Jedes X bringt Y“.** Sätze beschreiben, was zu sehen ist oder was
+  passiert, nie eine Beziehung, die man sich denken muss.
+- **Eine neue Sache je Einführung.** Alles andere ist schon bekannt oder kommt später von selbst.
+- **Die Einführung macht das Kind selbst:** Ein Kind der Runde zeigt den Zug einmal, dann leuchtet beim Kind die
+  Stelle, die es tippen soll (Sonnenring), und es tippt selbst. Je Schritt ein Satz und ein Bild; der nächste Schritt
+  kommt erst nach dem Tipp des Kindes, nie nach einer Zeit. Nach dem Satz bleibt mindestens etwa 2 s Ruhe, bevor
+  etwas Neues ins Bild kommt.
+- **Prüffrage:** Muss das Kind etwas verstehen oder übertragen, das nicht zu sehen ist? Dann ist es zu schwer – das
+  Bild wird einfacher, nicht die Erklärung länger.
 <!-- ende regeln -->
+
+## Die Regeln bleiben klein
+
+Das Bauheft ist die einzige Quelle der Agenten; dort sammelt sich Gewicht am leichtesten wieder an. Deshalb:
+
+- **Eine neue Regel kommt nur hinein, wenn eine alte wegfällt oder gekürzt wird.** Der Regelblock oben bleibt unter
+  etwa 4 500 Token, das ganze Bauheft eines Spiels unter 25 000 Token; `tests/skill-spiel-entwickeln.test.mjs` prüft
+  beides.
+- Neue Erkenntnisse aus einem Spiel gehören zuerst in das Werkzeug (Prüfstand, Textprüfung, Bausteine), erst dann in
+  einen Satz.
 
 ## Ablauf
 
@@ -149,7 +183,7 @@ Abschluss   (Skript)  → Audio, Kosten, Merge nach main      (nach 2 Runden rot
 | Idee | frischer Agent | `opus` | nur das Bauheft | Idee: Spielkern, Woher die Schwierigkeit, Stufen, alle Sätze wörtlich, Momente der Freude, Streichliste |
 | Bau | frischer Agent | `sonnet` | Bauheft, Idee, Vorlage | Spiel, `spiele.json`, Tests, Commit |
 | Prüfstand | `werkzeuge/spielbau/pruefstand.mjs` | – | das Spiel | `pruefstand.json` grün/rot mit Befunden, Bilder, Filmstreifen |
-| Spielprüfung | frischer Agent | `opus` | Bauheft, Idee, Filmstreifen, Texte, Prüfstand | Urteil nach §5 und vier Fragen, Streichliste |
+| Spielprüfung | frischer Agent | `opus` | Bauheft, Idee, Filmstreifen, Texte, Prüfstand | Urteil nach §5 und fünf Fragen, Streichliste |
 | Abschluss | `werkzeuge/spielbau/abschliessen.mjs` | – | Ablage | Audio, Kosten gebucht, Merge |
 
 - **Die Steuerung ist ein Skript** (`.claude/workflows/spiel-bauen.js`, gestartet vom Skill „Spiel entwickeln“).
@@ -159,21 +193,26 @@ Abschluss   (Skript)  → Audio, Kosten, Merge nach main      (nach 2 Runden rot
 - **Jeder Agent ist frisch** und bekommt nur das Bauheft und seine Dateien; kein Agent wird fortgesetzt.
 - **Mit echten Dingen** gehört nicht zum Lauf: Die Anleitungen entstehen in eigenen Sammelläufen
   (`.claude/skills/mit-echten-dingen/`).
-- **Christian sieht** geparkte Spiele und jedes gemergte Spiel als Spielblatt (`spielblatt.png` in der
-  Arbeitsablage: Filmstreifen richtig/daneben und je Stufe ein Bild), Stichprobe zum Selbst-Spielen 1 zu 5.
+- **Ein Spiel nach dem anderen** (Christian, 2026-11-15): nie zwei Läufe gleichzeitig; der nächste startet erst nach
+  dem Abschluss des vorigen.
+- **Erst Probe, dann fertig** (Christian, 2026-11-15): Ein grünes Spiel kommt als **Probe** nach `main`
+  (`"probe": true` in `spiele/spiele.json`). Christian oder Noelia spielt zwei Minuten; erst danach gilt es als
+  fertig (`node werkzeuge/spielbau/freigeben.mjs <Id>` nimmt die Markierung weg, oder die Befunde gehen als neue
+  Runde in den nächsten Lauf). Spaß beurteilt am Ende ein Mensch, kein Prüfer.
 
 ### Die Spielprüfung
 
 Ein frischer Prüfer sieht das Spiel so, wie ein Kind es erlebt (Filmstreifen in Bildern, Takt in Millisekunden) und
-beantwortet zuerst vier Fragen, dann die Grenzen:
+beantwortet zuerst fünf Fragen, dann die Grenzen:
 
 1. **Würde ein Kind das freiwillig zehnmal spielen?** Woran sieht man es, woran nicht?
 2. **Ist der Spielkern sofort klar?** Held, Handlung, Wirkung; Fünf-Sekunden-Test.
 3. **Ist das Schwierige das Thema oder die Bedienung?**
 4. **Ist es schön?** Stil, Farbe, Bewegung mit Gewicht, nichts ruckelt, nichts ist leer oder überladen.
+5. **Kommt es ohne Transfer aus?** Alles ist zu sehen, nichts muss übertragen werden; die Einführung wartet auf das Kind (§8).
 
 Dazu die **Streichliste**: was weg kann (mit Grund). Rot ist ein Spiel, wenn eine Grenze G1–G13 verletzt ist, eine
-der vier Fragen mit Nein beantwortet wird oder die Streichliste etwas nennt, das den Spielkern verdeckt.
+der fünf Fragen mit Nein beantwortet wird oder die Streichliste etwas nennt, das den Spielkern verdeckt.
 
 ### Kosten
 

@@ -97,6 +97,8 @@ async function main() {
       let z = await zustand();
       while (!phasen.includes(z.phase)) {
         if (Date.now() - t0 > frist) throw new Error(`nach ${frist} ms noch in Phase ${z.phase}`);
+        // Die Einführung wartet auf das Kind (§8): Weiter tippen, sobald er da ist, und mitzählen.
+        if (z.phase === "einfuehrung" && await seite.evaluate(() => { const k = document.querySelector(".einf-weiter.da"); if (k) k.click(); return !!k; })) takt.einfuehrungSchritte = (takt.einfuehrungSchritte ?? 0) + 1;
         await warte(40);
         z = await zustand();
       }

@@ -38,7 +38,6 @@ test("Bauheft: enthält die Regeln, den Eintrag, die Themen und was es gibt – 
   assert.ok(h.includes(regeln()), "Regeln fehlen");
   for (const t of ["### M37 Kettenhüpfer", "**zweierreihe**", "In echt hat eine Woche sieben Tage.", "`<ls-perlenkette>`", "Aufgabenarten", "Es gibt dieses Spiel schon"])
     assert.ok(h.includes(t), `fehlt: ${t}`);
-  // statt rund 850 KB Dokumente: höchstens etwa 12 000 Token
   assert.ok(h.length < 45000, `Bauheft ${h.length} Zeichen`);
 });
 
@@ -49,25 +48,48 @@ test("Bauheft: jede Katalog-Id ergibt ein Heft", async () => {
   for (const id of ids) {
     const h = await bauheft(id);
     assert.ok(h.startsWith(`# Bauheft ${id} `), id);
-    assert.ok(h.length < 60000, `${id}: ${h.length} Zeichen`);
+    // docs/spielbau.md „Die Regeln bleiben klein“: höchstens 25 000 Token (etwa 3,6 Zeichen je Token)
+    assert.ok(h.length / 3.6 < 25000, `${id}: etwa ${Math.round(h.length / 3.6)} Token`);
   }
 });
 
 // --- Regeln -----------------------------------------------------------------------------------------------------
 
+test("Regeln: der Block bleibt klein – eine neue Regel nur, wenn eine alte geht (unter etwa 4 500 Token)", () => {
+  assert.ok(regeln().length / 3.6 < 4500, `Regeln etwa ${Math.round(regeln().length / 3.6)} Token`);
+  assert.match(regeln(), /^\*\*Vorrang:\*\* §1 Spielkern und §8/);
+});
+
+test("Probe: setzeProbe ändert nur den Eintrag selbst und lässt sich zurücknehmen", async () => {
+  const { mkdtempSync, mkdirSync, writeFileSync, cpSync } = await import("node:fs");
+  const { tmpdir } = await import("node:os");
+  const { setzeProbe } = await import("../werkzeuge/spielbau/freigeben.mjs");
+  const tmp = mkdtempSync(join(tmpdir(), "probe-"));
+  mkdirSync(join(tmp, "spiele"));
+  cpSync(join(WURZEL, "docs"), join(tmp, "docs"), { recursive: true });
+  const roh = lies("spiele/spiele.json");
+  writeFileSync(join(tmp, "spiele/spiele.json"), roh);
+  setzeProbe(tmp, "M37", true);
+  const mit = readFileSync(join(tmp, "spiele/spiele.json"), "utf8");
+  assert.equal(JSON.parse(mit).spiele.find((x) => x.id === "kettenhuepfer").probe, true);
+  assert.equal(mit.split("\n").length, roh.split("\n").length, "Format bleibt");
+  setzeProbe(tmp, "M37", false);
+  assert.equal(readFileSync(join(tmp, "spiele/spiele.json"), "utf8"), roh);
+});
+
 test("Regeln: Spielkern, Textbudget, Grenzen G1–G13, Werkzeuge und Streichen stehen im Block", () => {
   const r = regeln();
-  for (const t of ["§1 Der Spielkern", "§2 Herausforderung", "§3 Textbudget", "§4 Schön und flüssig", "§5 Grenzen", "§6 Werkzeuge", "§7 Streichen"])
+  for (const t of ["§1 Der Spielkern", "§2 Herausforderung", "§3 Textbudget", "§4 Schön und flüssig", "§5 Grenzen", "§6 Werkzeuge", "§7 Streichen", "§8 Zeigen statt erklären"])
     assert.ok(r.includes(t), t);
   const nummern = [...r.matchAll(/^\| (G\d+) \|/gm)].map((m) => m[1]);
   assert.deepEqual(nummern, Array.from({ length: 13 }, (_, i) => `G${i + 1}`));
 });
 
-test("Spielprüfung: Vorlage nennt die vier Fragen und G1–G13, der Workflow rechnet genau diese Fragen", () => {
+test("Spielprüfung: Vorlage nennt die fünf Fragen und G1–G13, der Workflow rechnet genau diese Fragen", () => {
   const p = readFileSync(join(SKILL, "pruefen.md"), "utf8");
   assert.match(p, /G1–G13/);
-  for (const f of ["Zehnmal", "Kern", "Schwierigkeit", "Schön"]) assert.ok(p.includes(`**${f}:**`), f);
-  assert.match(WORKFLOW, /\['zehnmal', 'kern', 'schwierigkeit', 'schoen'\]/);
+  for (const f of ["Zehnmal", "Kern", "Schwierigkeit", "Schön", "Ohne Transfer"]) assert.ok(p.includes(`**${f}:**`), f);
+  assert.match(WORKFLOW, /\['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'ohneTransfer'\]/);
 });
 
 // --- Textprüfung ------------------------------------------------------------------------------------------------

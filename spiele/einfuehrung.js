@@ -74,6 +74,9 @@ export function fuelleVorlage(vorlage, werte) {
 // ---------------------------------------------------------------- DOM-Teil
 
 const MIN_MS = 2500, MS_JE_ZEICHEN = 60;
+// Im Tempo des Kindes (docs/spielbau.md §8, Christian 2026-11-15): Nach dem Satz bleibt Ruhe, dann erscheint der
+// Weiter-Knopf; die nächste Szene kommt erst, wenn das Kind tippt – nie nach einer Zeit.
+const RUHE_MS = 2000;
 
 // Aussehen nach den Rahmen-Bausteinen (docs/bedienung.md §9, Farbwelt): Hintergrund der Spielwelt (Option
 // `hintergrund`, sonst Nebel), Erzählblase ohne Zipfel (docs/stimme.md: es spricht der Erzähler), Perlen als
@@ -100,6 +103,14 @@ const CSS = `
 .einf .zahl{font:700 18rem/1 "Andika",sans-serif}
 .einf .el.objekt{top:auto;bottom:4rem;transform:translateX(-50%)}
 .einf .el.objekt ls-objekt{display:block;height:var(--einf-objekt,14rem)}
+.einf .einf-weiter{position:absolute;right:6rem;bottom:5rem;width:16rem;height:16rem;border-radius:50%;cursor:pointer;
+  background:var(--ls-sonne,#F6C445);border:var(--ls-kontur,.3rem) solid var(--ls-tinte,#3B2A6B);box-shadow:0 .6rem 0 var(--ls-tinte,#3B2A6B);
+  display:flex;align-items:center;justify-content:center;padding:0;opacity:0;transform:scale(.6);pointer-events:none;
+  transition:opacity .35s ease,transform .45s cubic-bezier(.3,1.5,.5,1);z-index:2}
+.einf .einf-weiter.da{opacity:1;transform:scale(1);pointer-events:auto;animation:einf-atmen 2.4s ease-in-out .6s infinite}
+.einf .einf-weiter:active{transform:translateY(.3rem);box-shadow:0 .3rem 0 var(--ls-tinte,#3B2A6B)}
+.einf .einf-weiter svg{width:8rem;height:8rem;display:block}
+@keyframes einf-atmen{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 @media (prefers-reduced-motion:reduce){.einf *{animation:none!important;transition:none!important}}
 `;
 
@@ -198,6 +209,10 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
   hausEl.className = "haus"; hausEl.href = new URL("index.html", import.meta.url).href; hausEl.setAttribute("aria-label", "Alle Spiele");
   const hausBild = document.createElement("img"); hausBild.alt = ""; hausBild.src = new URL("symbole/haus.svg", import.meta.url).href;
   hausEl.appendChild(hausBild); wurzel.appendChild(hausEl);
+  const weiterEl = document.createElement("button");
+  weiterEl.type = "button"; weiterEl.className = "einf-weiter"; weiterEl.setAttribute("aria-label", "Weiter");
+  weiterEl.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  wurzel.appendChild(weiterEl);
 
   return new Promise(resolve => {
     let timer = [], fertig = false, aktuell = -1, kinder = new Map();
@@ -221,17 +236,27 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
       try { buehne.replaceChildren(); kinder = baueBild(buehne, s.bild, R, kinder); blase.textContent = text; }
       catch (e) { return ende("abgebrochen"); }
       timer.forEach(clearTimeout); timer = [];
-      const weiter = () => { if (aktuell === i) szene(i + 1); };   // alte Szenen melden sich nicht mehr
+      weiterEl.classList.remove("da");
+      // Nach Satz und Ruhe erscheint der Knopf; erst sein Tipp bringt die nächste Szene (§8).
+      const zeigeWeiter = () => {
+        if (fertig || aktuell !== i) return;
+        timer.push(setTimeout(() => {
+          if (fertig || aktuell !== i) return;
+          weiterEl.classList.add("da");
+          try { weiterEl.focus({ preventScroll: true }); } catch (e) { /* ohne Fokus geht es auch */ }
+        }, RUHE_MS));
+      };
+      weiterEl.onclick = () => { if (aktuell === i && weiterEl.classList.contains("da")) { weiterEl.classList.remove("da"); szene(i + 1); } };
       const lesezeit = MIN_MS + MS_JE_ZEICHEN * text.length;
-      if (!(mitTon && s.sprich)) { timer.push(setTimeout(weiter, lesezeit)); return; }
-      // Mit Ton: mindestens MIN_MS und bis die Stimme fertig ist (sprich hat eine eigene Notbremse).
+      if (!(mitTon && s.sprich)) { timer.push(setTimeout(zeigeWeiter, lesezeit)); return; }
+      // Mit Ton: bis die Stimme fertig ist (sprich hat eine eigene Notbremse), dann Ruhe.
       // Bleibt die Stimme still (keine Web-Sprache), gilt die Lesezeit.
       const start = Date.now();
       sprich(s.sprich).then(ergebnis => {
         if (fertig || aktuell !== i) return;
-        const mindestMs = ergebnis === "still" ? lesezeit : MIN_MS;
-        timer.push(setTimeout(weiter, Math.max(0, start + mindestMs - Date.now())));
-      }, () => { if (aktuell === i) timer.push(setTimeout(weiter, lesezeit)); });
+        const mindestMs = ergebnis === "still" ? lesezeit : 0;
+        timer.push(setTimeout(zeigeWeiter, Math.max(0, start + mindestMs - Date.now())));
+      }, () => { if (aktuell === i) timer.push(setTimeout(zeigeWeiter, lesezeit)); });
     };
     szene(0);
   });

@@ -6,7 +6,7 @@ export const meta = {
     { title: 'Idee', detail: 'ein frischer Agent, nur das Bauheft' },
     { title: 'Bau', detail: 'ein frischer Agent je Runde' },
     { title: 'Prüfstand', detail: 'Skript: Durchspielen, Texte, Filmstreifen, Takt' },
-    { title: 'Spielprüfung', detail: 'ein frischer Prüfer: vier Fragen, Grenzen, Streichliste' },
+    { title: 'Spielprüfung', detail: 'ein frischer Prüfer: fünf Fragen, Grenzen, Streichliste' },
   ],
 }
 
@@ -58,17 +58,17 @@ const JANEIN = { type: 'object', properties: { ja: { type: 'boolean' }, beleg: {
 const PRUEFUNG = {
   type: 'object',
   properties: {
-    zehnmal: JANEIN, kern: JANEIN, schwierigkeit: JANEIN, schoen: JANEIN,
+    zehnmal: JANEIN, kern: JANEIN, schwierigkeit: JANEIN, schoen: JANEIN, ohneTransfer: JANEIN,
     grenzen: { type: 'array', items: { type: 'object', properties: { nr: { type: 'string' }, ok: { type: 'boolean' }, beleg: { type: 'string' } }, required: ['nr', 'ok', 'beleg'] } },
     streichen: { type: 'array', items: { type: 'object', properties: { was: { type: 'string' }, warum: { type: 'string' }, verdecktKern: { type: 'boolean' } }, required: ['was', 'warum', 'verdecktKern'] } },
     befunde: { type: 'array', items: { type: 'string' } },
   },
-  required: ['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'grenzen', 'streichen', 'befunde'],
+  required: ['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'ohneTransfer', 'grenzen', 'streichen', 'befunde'],
 }
 
 /** Urteil aus dem Bericht des Prüfers, fest ausgerechnet (docs/spielbau.md „Die Spielprüfung“). */
 function urteil(p) {
-  const nein = ['zehnmal', 'kern', 'schwierigkeit', 'schoen'].filter((k) => !p[k].ja)
+  const nein = ['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'ohneTransfer'].filter((k) => !p[k].ja)
   const grenzen = p.grenzen.filter((g) => !g.ok)
   const verdeckt = p.streichen.filter((s) => s.verdecktKern)
   return { gruen: !nein.length && !grenzen.length && !verdeckt.length, nein, grenzen, verdeckt }
@@ -81,11 +81,15 @@ function befundText(liste, titel) {
 }
 
 async function pruefstand(runde, versuch) {
-  const r = await agent(marke('pruefstand') + '\n\nFühre genau diesen einen Befehl aus (Bash, timeout 600000) und lies sonst nichts, ändere nichts:\n\n```bash\ncd ' +
-    L.worktree + ' && ' + PW + ' node werkzeuge/spielbau/pruefstand.mjs --lauf ' + L.ablage + '/lauf.json --runde ' + runde + (versuch > 1 ? '.' + versuch : '') +
-    '\n```\n\nDie letzte Zeile der Ausgabe ist JSON. Übernimm daraus gruen, rot, hinweise und ordner unverändert, lief = true. ' +
-    'Gibt es kein JSON, dann gruen = false, rot = [die letzten Zeilen der Ausgabe], hinweise = [], ordner = "", lief = false.',
-    { label: 'Prüfstand R' + runde + (versuch > 1 ? '.' + versuch : ''), phase: 'Prüfstand', schema: STAND, model: M.laeufer, effort: 'low' })
+  const nr = runde + (versuch > 1 ? '.' + versuch : '')
+  const befehl = 'cd ' + L.worktree + ' && ' + PW + ' node werkzeuge/spielbau/pruefstand.mjs --lauf ' + L.ablage + '/lauf.json --runde ' + nr
+  const r = await agent(marke('pruefstand') + '\n\nDu startest den Prüfstand und wartest auf sein Ergebnis. Lies sonst nichts, ändere nichts.\n\n' +
+    '1. Einmal: `' + befehl + ' --start`\n' +
+    '2. Dann (Bash, timeout 600000): `' + befehl + ' --abwarten 540` – gibt die letzte Zeile {"laeuft":true} aus, rufe denselben Befehl wieder auf, ' +
+    'bis eine Zeile mit "gruen" kommt (höchstens sechsmal).\n\n' +
+    'Übernimm aus dieser JSON-Zeile gruen, rot, hinweise und ordner unverändert, lief = true. ' +
+    'Kommt nach sechs Versuchen nichts oder scheitert der Befehl, dann gruen = false, rot = [die letzten Zeilen der Ausgabe und von pruefstand.log im Ordner], hinweise = [], ordner = "", lief = false.',
+    { label: 'Prüfstand R' + nr, phase: 'Prüfstand', schema: STAND, model: M.laeufer, effort: 'low' })
   return r || { gruen: false, rot: ['Prüfstand-Agent ohne Ergebnis'], hinweise: [], ordner: '', lief: false }
 }
 

@@ -3,6 +3,11 @@
 // einer kurzen JSON-Zeile als Ergebnis für die Steuerung.
 //
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node werkzeuge/spielbau/pruefstand.mjs --lauf <ablage>/lauf.json --runde <n>
+//     [--start | --abwarten <sekunden>]
+//
+// Ein ganzer Lauf dauert länger als die 10 Minuten eines Bash-Aufrufs. Darum: --start startet ihn losgelöst im
+// Hintergrund und kehrt sofort zurück; --abwarten wartet höchstens so lange auf pruefstand.json und gibt dann das
+// Ergebnis aus oder {"laeuft":true} – einfach wiederholen. Ohne beides läuft er direkt (für Menschen).
 //
 // Schritte (im Worktree des Laufs): Eintrag in spiele.json · npm test · Durchspielen (alle Kinder, Chromium und
 // WebKit, beide Größen) und je Lernstufe (Chromium, 1280 × 800) · Textprüfung (texte.mjs) · Filmstreifen je Stufe
@@ -10,14 +15,15 @@
 // stdout { gruen, rot, hinweise, takt, ordner }. Exit 0 auch bei Rot (das Urteil steht im JSON); ≠ 0 nur, wenn der
 // Prüfstand selbst nicht laufen konnte.
 import { spawn } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, openSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { pruefeTexte, texteDesSpiels } from "./texte.mjs";
 
 const PW = "/private/tmp/claude-501/pw/node_modules";
-/** Takt-Grenzen (docs/spielbau.md §1): Wirkung höchstens etwa 2,5 s, Reaktion unter 0,3 s. */
-export const GRENZEN = { folgeRot: 4500, folgeHinweis: 3000, reaktionHinweis: 300, einfuehrungHinweis: 25000 };
+/** Takt-Grenzen (docs/spielbau.md §1): Wirkung etwa 2,5 s, höchstens 3 s (gemessen bis zur nächsten Aufgabe, daher
+ * 0,5 s Spielraum), Reaktion unter 0,3 s. */
+export const GRENZEN = { folgeRot: 3500, folgeHinweis: 3000, reaktionHinweis: 300 };
 
 function lauf(befehl, args, { cwd, frist = 900000, env = {} } = {}) {
   return new Promise((fertig) => {
@@ -44,20 +50,40 @@ export function roteLaeufe(bericht, wo) {
 export function taktBefunde(t, stufe) {
   const rot = [], hinweise = [];
   for (const f of t.fehler ?? []) (/kein Fehlversuch/.test(f) ? hinweise : rot).push(`Filmstreifen ${stufe}: ${f}`);
-  if (t.folgeMs != null && t.folgeMs > GRENZEN.folgeRot) rot.push(`§1 Wirkung ${stufe}: ${t.folgeMs} ms vom Zug bis zur nächsten Aufgabe (höchstens etwa 2 500, Grenze ${GRENZEN.folgeRot})`);
+  if (t.folgeMs != null && t.folgeMs > GRENZEN.folgeRot) rot.push(`§1 Wirkung ${stufe}: ${t.folgeMs} ms vom Zug bis zur nächsten Aufgabe (etwa 2 500, höchstens 3 000; Grenze mit Spielraum ${GRENZEN.folgeRot})`);
   else if (t.folgeMs != null && t.folgeMs > GRENZEN.folgeHinweis) hinweise.push(`§1 Wirkung ${stufe}: ${t.folgeMs} ms (Ziel etwa 2 500)`);
   if (t.reaktionMs != null && t.reaktionMs > GRENZEN.reaktionHinweis) hinweise.push(`§1 erste Reaktion ${stufe}: ${t.reaktionMs} ms nach dem Zug (Ziel unter 300)`);
   return { rot, hinweise };
 }
 
+const kurz = (e) => JSON.stringify({ ...e, rot: e.rot.slice(0, 25), hinweise: e.hinweise.slice(0, 15), mehr: Math.max(0, e.rot.length - 25) });
+
 async function main() {
   const argv = process.argv.slice(2);
   const laufDatei = argv.includes("--lauf") ? resolve(argv[argv.indexOf("--lauf") + 1]) : null;
-  const runde = argv.includes("--runde") ? Number(argv[argv.indexOf("--runde") + 1]) : 1;
-  if (!laufDatei || !existsSync(laufDatei)) throw new Error("Aufruf: pruefstand.mjs --lauf <ablage>/lauf.json --runde <n>");
+  const runde = argv.includes("--runde") ? argv[argv.indexOf("--runde") + 1] : "1";
+  if (!laufDatei || !existsSync(laufDatei)) throw new Error("Aufruf: pruefstand.mjs --lauf <ablage>/lauf.json --runde <n> [--start | --abwarten s]");
   const L = JSON.parse(readFileSync(laufDatei, "utf8"));
   const cwd = L.worktree;
   const ordner = join(L.ablage, `r${runde}`);
+  const ergebnisDatei = join(ordner, "pruefstand.json");
+  if (argv.includes("--start")) {
+    mkdirSync(ordner, { recursive: true });
+    rmSync(ergebnisDatei, { force: true });
+    const log = openSync(join(ordner, "pruefstand.log"), "w");
+    const p = spawn(process.execPath, [fileURLToPath(import.meta.url), "--lauf", laufDatei, "--runde", runde], { cwd, detached: true, stdio: ["ignore", log, log], env: { ...process.env, NODE_PATH: PW } });
+    p.unref();
+    console.log(JSON.stringify({ gestartet: true, ordner }));
+    return;
+  }
+  if (argv.includes("--abwarten")) {
+    const frist = Date.now() + 1000 * Number(argv[argv.indexOf("--abwarten") + 1] || 540);
+    while (Date.now() < frist) {
+      if (existsSync(ergebnisDatei)) return console.log(kurz(JSON.parse(readFileSync(ergebnisDatei, "utf8"))));
+      await new Promise((r) => setTimeout(r, 5000));
+    }
+    return console.log(JSON.stringify({ laeuft: true, ordner }));
+  }
   mkdirSync(ordner, { recursive: true });
   const rot = [], hinweise = [], takt = {};
 
@@ -75,7 +101,9 @@ async function main() {
     const ds = (extra, name) => lauf("node", ["tests/browser/durchspielen.mjs", seite, "--bericht", join(ordner, `${name}.json`), "--bilder", join(ordner, "bilder", name), ...extra], { cwd });
     const auftraege = [
       lauf("npm", ["test", "--silent"], { cwd, frist: 600000 }).then((r) => ({ name: "npm test", r })),
-      ds([], "durchspielen").then((r) => ({ name: "durchspielen", r })),
+      // alle Kinder in beiden Browsern und Größen – je Browser × Größe ein eigener Prozess, damit es unter 10 min bleibt
+      ...[["chromium", "1920x1080"], ["chromium", "1280x800"], ["webkit", "1920x1080"], ["webkit", "1280x800"]].map(([b, g]) =>
+        ds(["--browser", b, "--groessen", g], `durchspielen-${b}-${g}`).then((r) => ({ name: `durchspielen-${b}-${g}`, r }))),
       ...stufen.map((s) => ds(["--stufe", s, "--browser", "chromium", "--groessen", "1280x800"], `durchspielen-${s}`).then((r) => ({ name: `durchspielen-${s}`, r }))),
     ];
     for (const { name, r } of await Promise.all(auftraege)) {
@@ -85,7 +113,7 @@ async function main() {
         continue;
       }
       const datei = join(ordner, `${name}.json`);
-      if (existsSync(datei)) rot.push(...roteLaeufe(JSON.parse(readFileSync(datei, "utf8")), name.replace("durchspielen", "").replace(/^-/, "") || "alle"));
+      if (existsSync(datei)) rot.push(...roteLaeufe(JSON.parse(readFileSync(datei, "utf8")), name.replace(/^durchspielen-?/, "") || "alle"));
       else if (r.code !== 0) rot.push(`Durchspielen ${name}: lief nicht – ${r.aus.slice(-600)}`);
     }
 
@@ -108,8 +136,8 @@ async function main() {
   }
 
   const ergebnis = { gruen: rot.length === 0, runde, rot, hinweise, takt, stufen, ordner };
-  writeFileSync(join(ordner, "pruefstand.json"), JSON.stringify(ergebnis, null, 1));
-  console.log(JSON.stringify({ ...ergebnis, rot: rot.slice(0, 25), hinweise: hinweise.slice(0, 15), mehr: Math.max(0, rot.length - 25) }));
+  writeFileSync(ergebnisDatei, JSON.stringify(ergebnis, null, 1));
+  console.log(kurz(ergebnis));
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main().catch((e) => { console.error(e.stack ?? e); process.exit(2); });

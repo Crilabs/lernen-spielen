@@ -23,6 +23,9 @@
 //             alle 15 Tipps ein richtiger Zug, damit die
 //             Tipps auch Folge und Pause treffen)
 //   tastatur  nur Tab, Enter, Leertaste                       Runde lösbar, Weiter in der Pause erreichbar
+//   wegtippen wie ratend, tippt aber während jeder Folge       wie ratend: jede Aufgabe genau einmal gemeldet, ok nur
+//             dreimal mitten ins Bild (überspringt sie)         ohne Fehlversuch – nichts wird durch Wegtippen
+//                                                              fälschlich als gekonnt gebucht
 //   zurueck   verlässt mitten in der Runde über Haus,         Lernstand konsistent, Spiel startet sauber
 //             kommt zurück (neu geladen)
 // Für alle: keine Seiten- oder Konsolenfehler, nichts im Protokoll außer erwarteten Zeilen, Vorschau schreibt nichts
@@ -47,7 +50,7 @@ const require = createRequire(import.meta.url);
 const { chromium, webkit } = require("playwright");
 
 const WURZEL = resolve(fileURLToPath(import.meta.url), "../../..");
-const ALLE_KINDER = ["sicher", "ratend", "hilfe", "wild", "tastatur", "zurueck"];
+const ALLE_KINDER = ["sicher", "ratend", "hilfe", "wild", "tastatur", "zurueck", "wegtippen"];
 const PHASEN = ["laden", "einfuehrung", "aufgabe", "folge", "pause", "fehler"];
 /** Züge je Aufgabe, bevor sie als nicht lösbar gilt. */
 const MAX_ZUEGE = 60;
@@ -252,6 +255,8 @@ class Spieler {
       if (z.phase !== phase) { phase = z.phase; t0 = Date.now(); }
       const grenze = z.phase === "einfuehrung" ? MAX_EINFUEHRUNG_MS : MAX_WARTEN_MS;
       if (Date.now() - t0 > grenze) throw new Haenger(`hängt: ${Math.round(grenze / 1000)} s in Phase „${z.phase}“ ohne Zug`);
+      // Die Einführung wartet auf das Kind (spiele/einfuehrung.js, docs/spielbau.md §8): Weiter tippen, sobald er da ist.
+      if (z.phase === "einfuehrung") await this.ev(() => document.querySelector(".einf-weiter.da")?.click());
       await warte(150);
       z = await this.zustand();
     }
@@ -430,7 +435,7 @@ async function kindSicher(sp, lauf) {
     `${e.length} Meldungen für ${runde.aufgaben.length} Aufgaben: ${JSON.stringify(e)}`);
 }
 
-async function kindRatend(sp, lauf) {
+async function kindRatend(sp, lauf, _vorher, { wegtippen = false } = {}) {
   const fehlversucheMoeglich = await sp.ev(() => window.lsPruefen.fehlversuche !== false);
   const verlauf = [];
   let leuchtFehler = null;
@@ -455,7 +460,16 @@ async function kindRatend(sp, lauf) {
       const zug = auswahl[Math.floor(sp.rnd() * auswahl.length)];
       const leuchtenVorher = await sp.leuchten();
       await sp.fuehre(zug, sp.rnd() < 0.5 ? "tippen" : "ziehen");
-      const nach = await sp.zustand();
+      let nach = await sp.zustand();
+      // wegtippen: tippt während der Folge ungeduldig mitten ins Bild (docs/spielbau.md §1: der nächste Tipp
+      // überspringt die Folge). Danach darf nichts doppelt oder falsch gemeldet sein.
+      if (wegtippen && nach.phase === "folge") {
+        for (let i = 0; i < 3; i++) {
+          await sp.ev(() => window.lsPruefen.tippeBei(innerWidth / 2, innerHeight / 2));
+          await warte(60);
+        }
+        nach = await sp.zustand();
+      }
       const leuchtete = (await sp.leuchten()) > leuchtenVorher;
       const gleich = nach.phase === "aufgabe" && nach.nr === z.nr;
       if (gleich && nach.versuche > z.versuche) {
@@ -620,7 +634,8 @@ async function kindZurueck(sp, lauf, vorher) {
   lauf.pruefe("Runde nach der Rückkehr bis zur Pause spielbar", (await sp.zustand()).phase === "pause");
 }
 
-const KINDER = { sicher: kindSicher, ratend: kindRatend, hilfe: kindHilfe, wild: kindWild, tastatur: kindTastatur, zurueck: kindZurueck };
+const kindWegtippen = (sp, lauf, vorher) => kindRatend(sp, lauf, vorher, { wegtippen: true });
+const KINDER = { sicher: kindSicher, ratend: kindRatend, hilfe: kindHilfe, wild: kindWild, tastatur: kindTastatur, zurueck: kindZurueck, wegtippen: kindWegtippen };
 
 // --- Ablauf -------------------------------------------------------------------------------------------
 

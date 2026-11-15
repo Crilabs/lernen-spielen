@@ -9,7 +9,8 @@ Verbindlich: `docs/spielbau.md` (Spielkern, Grenzen, Werkzeuge, Ablauf). Du lies
 das **Bauheft**, das die Regeln enthält. Du steuerst nur: drei Befehle und ein Workflow. Du baust nicht, du prüfst
 nicht, du liest keine Berichte und keinen Code – nur die JSON-Ergebnisse.
 
-**Ein Spiel je Lauf.** Christian wird während des Laufs nicht gefragt. Anhalten nur bei Zerstörerischem (fremde
+**Ein Spiel je Lauf, eins nach dem anderen** (Christian, 2026-11-15): nie zwei Läufe gleichzeitig; ein neuer
+Lauf startet erst, wenn der vorige abgeschlossen oder geparkt ist. Christian wird während des Laufs nicht gefragt. Anhalten nur bei Zerstörerischem (fremde
 Arbeit löschen, schmutziger `main`-Worktree), Sicherheit oder Wirkung nach außen (Push, Veröffentlichen). Nie pushen.
 
 ## 1. Vorbereiten (Skript)
@@ -38,7 +39,7 @@ Workflow-Werkzeug mit `name: "spiel-bauen"` und `args: { lauf: <lauf.json als Ob
 
 Er macht: **Idee** (frischer Agent, nur Bauheft → `docs/spiele/<fach>/<spiel>.md`) → je Runde **Bau** (frischer
 Agent) → **Prüfstand** (`werkzeuge/spielbau/pruefstand.mjs`: npm test, Durchspielen je Stufe, Textprüfung,
-Filmstreifen mit Takt; rot → einmal Reparatur) → **Spielprüfung** (frischer Prüfer: vier Fragen, Grenzen G1–G13,
+Filmstreifen mit Takt; rot → einmal Reparatur) → **Spielprüfung** (frischer Prüfer: fünf Fragen, Grenzen G1–G13,
 Streichliste; Urteil fest gerechnet). Höchstens zwei Runden. Ergebnis `status`: `gruen`, `freigabe` (gebaut, aber
 neues Lernzeichen oder Widerspruch zu einer Entscheidung von Christian), `geparkt` oder `abgebrochen`.
 
@@ -57,7 +58,9 @@ cd <Hauptrepo> && node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.
 
 - `--transkripte` darf der ganze Projektordner sein: gebucht werden nur Agenten mit der Marke dieses Laufs, jeder
   nur einmal (Stand in der Ablage). Läufst du selbst als Unteragent, ist `--steuerung` dein eigenes Transkript.
-- `status: gruen` → `--audio --merge`. Ein Merge geht nur als Fast-Forward und nur ohne Probelauf; meldet das Skript
+- `status: gruen` → `--audio --merge`. Das Spiel kommt als **Probe** nach `main` (`"probe": true` in
+  `spiele/spiele.json`); fertig ist es erst, wenn Christian oder Noelia es zwei Minuten gespielt hat
+  (`node werkzeuge/spielbau/freigeben.mjs <Id>`). Ein Merge geht nur als Fast-Forward und nur ohne Probelauf; meldet das Skript
   „kein Fast-Forward“: im Worktree `git merge main` (Konflikte in `spiele.json` additiv lösen), committen, dann den
   Prüfstand einmal direkt laufen lassen (`node werkzeuge/spielbau/pruefstand.mjs --lauf … --runde 3`); grün →
   Abschluss mit `--merge` wiederholen, rot → parken.
@@ -68,11 +71,10 @@ cd <Hauptrepo> && node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.
 
 ## Schlussmeldung (deine letzte Nachricht, kurz)
 
-- **Spiel:** Id, Name, gemergt (Commit) / geparkt (Grund, Frage) / Probelauf; Branch und Worktree.
+- **Spiel:** Id, Name, gemergt als Probe (Commit; „bitte zwei Minuten spielen“, Pfad der Seite) / geparkt (Grund,
+  Frage) / Probelauf; Branch und Worktree.
 - **Wie es sich anfühlt:** die Zusammenfassung der Idee, dazu der Pfad zum Filmstreifen
   `<ablage>/r<n>/film/<stufe>/richtig.png`.
 - **Belege:** je Runde Prüfstand und Spielprüfung grün/rot; Hinweise des Prüfers, die offen bleiben.
 - **Kosten und Zeit:** aus `ergebnis.json` (Euro je Phase, Minuten). Liegt es über 10 € oder 2 Stunden, den teuersten
   Schritt nennen.
-- **Stichprobe:** mit Wahrscheinlichkeit 1 zu 5 (`node -e 'console.log(Math.random() < 0.2)'`) „Bitte selbst
-  spielen“ mit dem Pfad der Seite.

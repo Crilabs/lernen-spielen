@@ -12,12 +12,15 @@ nur, um einen Verdacht zu belegen.
 Du siehst das Spiel mit den Augen eines Kindes von etwa sieben Jahren. Vergleichsmaßstab ist das Vorbild aus §1
 (das alte Kettenhüpfer): intuitiv, schnell, Fokus auf dem Spiel.
 
-## Vier Fragen (je ja/nein mit Beleg: Bild, Takt, Satz)
+## Fünf Fragen (je ja/nein mit Beleg: Bild, Takt, Satz)
 
 1. **Zehnmal:** Würde ein Kind das freiwillig zehnmal hintereinander spielen?
 2. **Kern:** Ist der Spielkern sofort klar – Held, Handlung, Wirkung? Besteht es den Fünf-Sekunden-Test?
 3. **Schwierigkeit:** Ist das Schwierige das Thema (oder eine Entscheidung des Kindes) und nicht die Bedienung?
 4. **Schön:** Stimmen Stil und Farbe, hat die Bewegung Gewicht, ist nichts leer, überladen oder hässlich?
+5. **Ohne Transfer:** Versteht das Kind alles aus dem, was es sieht (§8)? Kommt die Einführung ohne Sätze der Form
+   „X ist Y“ aus, zeigt sie eine neue Sache und wartet sie auf das Kind (Weiter-Knopf, `takt.json`
+   `einfuehrungSchritte`)? „ja“ heißt: kein Transfer nötig.
 
 ## Grenzen G1–G13
 
