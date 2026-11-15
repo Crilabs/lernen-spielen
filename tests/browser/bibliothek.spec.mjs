@@ -94,7 +94,9 @@ for (const typ of [chromium, webkit]) {
     await page.waitForSelector('.regal[data-regal="haustiere"] .buch');
     await Promise.all([page.waitForURL(/geschichte\.html\?id=haustiere/), page.click('.regal[data-regal="haustiere"] .buch')]);
     await page.goto(page.url() + "&pruefen");
-    await page.waitForFunction(() => window.lsGeschichte?.seiten > 0);
+    await page.waitForFunction(() => window.lsGeschichte?.seiten > 0 || window.lsGeschichte?.kapitelZahl > 0);
+    // Sachbuch (haustiere): letztes Kapitel aufschlagen, dort steht „Fertig“
+    await page.evaluate(() => { const l = window.lsGeschichte; if (l.kapitelZahl > 0) l.oeffne(l.kapitelZahl - 1); });
     await bisZumEnde(page);
     await Promise.all([page.waitForURL(/bibliothek\.html\?raum=tiere/), page.evaluate(() => window.lsGeschichte.fertig())]);
     await page.waitForSelector('.regal[data-regal="haustiere"] .buch');

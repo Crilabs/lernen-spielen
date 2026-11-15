@@ -80,7 +80,9 @@ for (const typ of [chromium, webkit]) {
     return page.evaluate(() => JSON.parse(localStorage.getItem("lernstand-kind-1-lernplan") || "{}").sachthemen?.geschichten ?? {}); };
   pruefe(Object.keys(await gelesen()).join() === "zehnerpaare", `${name}: Fertig merkt die Geschichte als gelesen`);
   await page.goto(`${basis}/spiele/geschichte.html?id=haustiere&eltern&weiter=themen.html&pruefen`);
-  await page.waitForFunction(() => window.lsGeschichte?.seiten > 0);
+  await page.waitForFunction(() => window.lsGeschichte?.seiten > 0 || window.lsGeschichte?.kapitelZahl > 0);
+  // Sachbuch (haustiere): letztes Kapitel aufschlagen, dort steht „Fertig“
+  await page.evaluate(() => { const l = window.lsGeschichte; if (l.kapitelZahl > 0) l.oeffne(l.kapitelZahl - 1); });
   await bisZumEnde(page);
   await Promise.all([page.waitForURL(/themen\.html/), page.evaluate(() => window.lsGeschichte.fertig())]);
   pruefe(!("haustiere" in (await gelesen())), `${name}: Vorschau der Eltern merkt nichts`);
@@ -93,7 +95,7 @@ for (const typ of [chromium, webkit]) {
   // Text passt oder scrollt und überdeckt keine festen Knöpfe – quer, iPad quer, hoch
   for (const [b, h] of [[1366, 1024], [1180, 820], [820, 1180], [390, 844], [844, 390]]) {
     const lp = await browser.newPage({ viewport: { width: b, height: h } });
-    await lp.goto(`${basis}/spiele/geschichte.html?id=haustiere&pruefen`);
+    await lp.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
     await lp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
     let passt = true;
     const n = await lp.evaluate(() => window.lsGeschichte.seiten);
@@ -124,7 +126,7 @@ for (const typ of [chromium, webkit]) {
   // Startwahl und Vorlesemodus (ohne Systemstimme: sprich liefert „still“, umgeblättert wird nach der Lesezeit)
   const vp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await vp.addInitScript(() => { try { delete window.speechSynthesis; Object.defineProperty(window, "speechSynthesis", { value: undefined }); } catch {} });
-  await vp.goto(`${basis}/spiele/geschichte.html?id=haustiere&pruefen`);
+  await vp.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
   await vp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
   const v = (f, a) => vp.evaluate(f, a);
   pruefe(await v(() => window.lsGeschichte.modus) === null, `${name}: Startwahl vor dem Lesen`);
@@ -165,7 +167,7 @@ for (const typ of [chromium, webkit]) {
   // Ton aus mitten im Vorlesen: Selbst lesen, nichts blättert mehr von selbst
   const op = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await op.addInitScript(() => { try { Object.defineProperty(window, "speechSynthesis", { value: undefined }); } catch {} });
-  await op.goto(`${basis}/spiele/geschichte.html?id=haustiere&pruefen`);
+  await op.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
   await op.waitForFunction(() => window.lsGeschichte?.seiten > 0);
   await op.evaluate(() => window.lsGeschichte.waehle("vorlesen"));
   await op.locator("ls-leiste").evaluate((el) => el.shadowRoot.querySelector(".tonknopf").click());
@@ -176,7 +178,7 @@ for (const typ of [chromium, webkit]) {
   // Ton aus: keine Startwahl, Selbst lesen
   const tp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await tp.addInitScript(() => localStorage.setItem("lernstand-kind-1-einstellungen", JSON.stringify({ "ton.geschichte": false })));
-  await tp.goto(`${basis}/spiele/geschichte.html?id=haustiere&pruefen`);
+  await tp.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
   await tp.waitForFunction(() => window.lsGeschichte?.modus === "selbst", null, { timeout: 5000 }).catch(() => {});
   pruefe(await tp.evaluate(() => window.lsGeschichte.modus) === "selbst", `${name}: Ton aus – gleich Selbst lesen`);
   pruefe(await tp.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".startwahl").hidden), `${name}: Ton aus – keine Startwahl`);
