@@ -20,7 +20,8 @@ ansehen) und Commit-Nachrichten – du urteilst unabhängig.
 
 **Lies und sieh an:**
 - den Entwurf; den Katalog-Eintrag `{{KATALOG_DATEI}}` „### {{ID}} …“ und seinen Eintrag in
-  `docs/spielkatalog/welten.md` (Vorrang: `docs/spielkatalog.md` §8a). Der Eintrag ist ein Vorschlag: Eine begründete
+  `docs/spielkatalog/welten.md` (Vorrang: `docs/spielkatalog.md` §8a) und den Eintrag der Heimatwelt in
+  `spiele/lernplan.json` (`welten[]`, `beschreibung`: das Spiel bleibt in ihrem Rahmen oder der Bau hat sie angepasst). Der Eintrag ist ein Vorschlag: Eine begründete
   Abweichung ist kein Befund, eine unbegründete schon. **Ausnahme:** Was der Eintrag als Entscheidung von Christian
   kennzeichnet („Christian“, mit Datum), ist gesetzt; weicht der Entwurf davon ab, ist das ein Befund, nicht die
   Entscheidung.
