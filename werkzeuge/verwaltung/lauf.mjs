@@ -75,7 +75,10 @@ export function transkriptPfad(wurzel, sessionId, heim = homedir()) {
 
 /**
  * Umgebung des Laufs. Die Sperrliste VERBOTEN lässt sich umgehen (z. B. `git -C . push`), darum lenkt Git hier jede
- * Push-Adresse auf ein Schema ohne Helfer um: Ein Push scheitert immer, Fetch und lokale Arbeit gehen weiter.
+ * Push-Adresse auf ein Schema ohne Helfer um: Ein Push scheitert, Fetch und lokale Arbeit gehen weiter.
+ * Nur Schutz vor Versehen, keine Absperrung: Ein Agent könnte die Variablen selbst ändern, und eine ausdrückliche
+ * remote.<name>.pushurl wird von pushInsteadOf nicht umgelenkt (im Repo gibt es keine, Stand 2026-11-16). Echte
+ * Absperrung wäre ein Benutzer ohne Push-Zugang.
  */
 export function laufUmgebung(basis, auftragId, transkript) {
   return {

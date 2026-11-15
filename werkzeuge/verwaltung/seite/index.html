@@ -1,1 +1,56 @@
-<!doctype html><title>Verwaltung</title>
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verwaltung Lernen Spielen</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%223%22 fill=%22%232f6f8f%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/seite/stil.css">
+</head>
+<body>
+<header class="kopf">
+  <h1>Verwaltung</h1>
+  <nav class="reiter" role="tablist">
+    <button role="tab" data-reiter="lernthemen" aria-selected="true">Lernthemen</button>
+    <button role="tab" data-reiter="sachthemen">Sachthemen</button>
+    <button role="tab" data-reiter="auftraege">Aufträge <span id="zahl-offen" class="zahl"></span></button>
+    <button role="tab" data-reiter="kosten">Kosten</button>
+  </nav>
+  <div id="summe" class="summe"></div>
+</header>
+
+<section class="filter" id="filter">
+  <label>Fach <select id="f-fach"><option value="">alle</option></select></label>
+  <label>Klasse <select id="f-klasse"><option value="">alle</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+  <div class="umschalter" role="group" aria-label="Anzeige">
+    <button data-luecken="0" aria-pressed="true">alles</button>
+    <button data-luecken="1" aria-pressed="false">nur Lücken</button>
+  </div>
+  <label class="suche">Suche <input id="f-suche" type="search" placeholder="Name oder Id"></label>
+  <button id="alle-auf" class="leise">alles ausklappen</button>
+  <button id="alle-zu" class="leise">alles zuklappen</button>
+</section>
+
+<main>
+  <div id="hinweis"></div>
+  <section id="lernthemen" class="ansicht"></section>
+  <section id="sachthemen" class="ansicht" hidden></section>
+  <section id="auftraege" class="ansicht" hidden></section>
+  <section id="kosten" class="ansicht" hidden></section>
+</main>
+
+<dialog id="bestaetigen">
+  <form method="dialog">
+    <h2>Auftrag anlegen</h2>
+    <p id="b-text"></p>
+    <p id="b-schaetzung" class="leise-text"></p>
+    <menu>
+      <button value="nein">Abbrechen</button>
+      <button value="ja" class="haupt">In die Warteschlange</button>
+    </menu>
+  </form>
+</dialog>
+
+<script type="module" src="/seite/app.js"></script>
+</body>
+</html>
