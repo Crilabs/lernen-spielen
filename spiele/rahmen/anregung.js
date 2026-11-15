@@ -1,4 +1,4 @@
-// <ls-anregung></ls-anregung>   →   await anregung.oeffne({ titel, text, thema, fach, form })
+// <ls-anregung></ls-anregung>   →   await anregung.oeffne({ titel, text, thema, fach, form, pdf })
 // Karte „Mit echten Dingen“ (docs/mit-echten-dingen.md): ein kurzes Spiel mit Dingen aus dem Alltag, das Kind und
 // Erwachsene zusammen spielen. Ohne PIN. Fach-Seite, Regal, Kachel und Pause nutzen sie.
 //
@@ -20,6 +20,7 @@ import { stille } from "../kern/stimme.js";
 import { GRUND_CSS, MASSE, definiere } from "./stil.js";
 import { blockHtml, escape } from "./markdown.js";
 import { findeAnleitung, ladeAnleitung, letzteForm, merkeForm, waehleForm } from "./echte-dinge.js";
+import { druckeAnleitung } from "./echte-dinge-druck.js";
 import "./knopf.js";
 
 /** Überschrift der Karte, zugleich der Name des Knopfs, der sie öffnet. */
@@ -205,6 +206,9 @@ export class LsAnregung extends HTMLElement {
   #lauf = 0;
   /** @type {import("./markdown.js").Form[]} */
   #formen = [];
+  #pdf = false;
+  /** Name, Titel der Anleitung und Fach für das PDF. */
+  #druck = { name: "", titel: "", fach: "" };
 
   constructor() {
     super();
@@ -215,6 +219,7 @@ export class LsAnregung extends HTMLElement {
         <div class="kopf">
           <ls-knopf class="zurueck" symbol="zurueck.svg" name="Zurück"></ls-knopf>
           <div class="ueber"><h2 id="titel">${ANREGUNG_TITEL}</h2><p class="thema"></p></div>
+          <ls-knopf class="pdf" symbol="drucken.svg" wort="PDF" groesse="klein" stumm hidden></ls-knopf>
         </div>
         <div class="rumpf">
           <div class="reiter" role="tablist" aria-label="Wo spielt ihr?" hidden></div>
@@ -228,6 +233,11 @@ export class LsAnregung extends HTMLElement {
     this.reiter = /** @type {HTMLElement} */ (wurzel.querySelector(".reiter"));
     this.anleitung = /** @type {HTMLElement} */ (wurzel.querySelector(".anleitung"));
     this.zurueck = /** @type {HTMLElement} */ (wurzel.querySelector(".zurueck"));
+    // PDF (nur im Elternbereich, oeffne({ pdf: true })): druckt das Blatt mit allen Formen des Themas
+    this.pdfKnopf = /** @type {HTMLElement} */ (wurzel.querySelector(".pdf"));
+    this.pdfKnopf.addEventListener("click", () => {
+      if (this.#formen.length) druckeAnleitung({ name: this.#druck.name, titel: this.#druck.titel, fach: this.#druck.fach, formen: this.#formen });
+    });
     this.zurueck.addEventListener("click", () => this.schliesse());
     /** @type {HTMLElement} */ (wurzel.querySelector(".schleier")).addEventListener("click", () => this.schliesse());
     this.reiter.addEventListener("click", (e) => {
@@ -254,17 +264,21 @@ export class LsAnregung extends HTMLElement {
   /**
    * Zeigt die Karte. Löst auf, sobald sie wieder geschlossen ist (Zurück, Escape, Schleier oder schliesse()).
    * Ein zweites oeffne() ersetzt den Inhalt; das frühere Versprechen löst dann auf.
-   * @param {{ titel?: string, text?: string, thema?: string, fach?: string, form?: string }} anregung
+   * @param {{ titel?: string, text?: string, thema?: string, fach?: string, form?: string, pdf?: boolean }} anregung
    *   titel: Name des Themas (leise unter der Überschrift); text: Einzeiler aus dem Lernplan (ohne Anleitung);
    *   thema/fach: Id und Fach des Themas (ohne thema sucht die Karte die Anleitung über den Namen);
-   *   form: gewünschte Situation (sonst die zuletzt gewählte, sonst die erste)
+   *   form: gewünschte Situation (sonst die zuletzt gewählte, sonst die erste);
+   *   pdf: Knopf „PDF“ im Kopf (nur Elternbereich, nur wenn das Gerät drucken kann; Kinder sehen ihn nie)
    * @returns {Promise<void>}
    */
-  oeffne({ titel = "", text = "", thema = "", fach = "", form = "" }) {
+  oeffne({ titel = "", text = "", thema = "", fach = "", form = "", pdf = false }) {
     this.#zu?.();
     const lauf = ++this.#lauf;
     this.themaFeld.textContent = titel;
     this.textFeld.textContent = text;
+    this.pdfKnopf.hidden = true;
+    this.pdfKnopf.setAttribute("name", `PDF: ${titel}`);
+    this.#pdf = pdf;
     this.rumpf.setAttribute("aria-busy", "true");
     this.geladen = this.fuelle(lauf, { titel, text, thema, fach, form });
     if (!this.offen) {
@@ -290,6 +304,8 @@ export class LsAnregung extends HTMLElement {
     const gewuenscht = form || (await letzteForm());
     if (lauf !== this.#lauf) return;
     this.#formen = anleitung?.formen ?? [];
+    this.#druck = { name: titel, titel: anleitung?.titel ?? "", fach: ort?.fach ?? fach };
+    this.pdfKnopf.hidden = !this.#pdf || !this.#formen.length;
     this.reiter.innerHTML = this.#formen.length > 1
       ? this.#formen.map((f) => `<button class="knopf" type="button" role="tab" tabindex="-1" data-situation="${escape(f.situation)}"
           aria-selected="false" aria-label="${escape(f.wort)}"><span class="form neben pille"><span class="zeichen"

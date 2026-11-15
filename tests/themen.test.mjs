@@ -125,7 +125,7 @@ test("themen.html: keine Zählung, keine Prozente, kein Klassenbezug", () => {
 
 test("ls-anregung: Schnittstelle oeffne/schliesse, keine Attribute im Konstruktor, Escape und Schleier", () => {
   const a = readFileSync(new URL("../spiele/rahmen/anregung.js", import.meta.url), "utf8");
-  assert.match(a, /oeffne\(\{ titel = "", text = "", thema = "", fach = "", form = "" \}\)/);
+  assert.match(a, /oeffne\(\{ titel = "", text = "", thema = "", fach = "", form = "", pdf = false \}\)/); // pdf: nur Elternbereich
   assert.doesNotMatch(a, /vorlesen\.svg|liesVor|from "\.\.\/kern\/stimme\.js";[\s\S]*\bsprich\(/, "Elternsprache: kein Vorlesen");
   assert.match(a, /inert/);
   assert.match(a, /schliesse\(\) \{/);

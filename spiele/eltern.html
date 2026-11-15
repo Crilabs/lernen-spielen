@@ -79,6 +79,8 @@ ls-knopf.aus { opacity: 0.45; pointer-events: none; }
 /* --- Lernplan ------------------------------------------------------------------------------------- */
 .fach-kopf { display: flex; align-items: center; gap: 2.4rem; }
 .fach-kopf .zuletzt { margin-left: auto; text-align: right; }
+.fach-kopf .klapp { flex: none; margin-left: auto; }
+.fach-kopf .zuletzt + .klapp { margin-left: 0; }
 .fachkachel {
   flex: none; width: 9rem; height: 9rem; padding: 1.5rem;
   border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
@@ -91,7 +93,16 @@ ls-knopf.aus { opacity: 0.45; pointer-events: none; }
 .fachkachel.ohne i { display: none; }
 .fach-kopf h3 { color: var(--fach-tief, var(--ls-tinte)); }
 .flaeche > .spiele-links { max-width: none; border-top: var(--ls-kontur) solid var(--ls-linie); padding-top: 2rem; }
-.lp-filter { --ls-breite: 22rem; display: flex; flex-wrap: wrap; gap: 1.6rem 2rem; margin-top: -1.6rem; }
+/* Filter: eine schlanke Reihe; der gewählte in Tinte gefüllt (wie ein Hauptknopf), die anderen Papier. */
+.lp-filter { display: flex; flex-wrap: wrap; gap: 1.2rem 1.6rem; margin-top: -1.6rem; }
+.lp-filter button {
+  min-height: 7.6rem; padding: 0 3rem; font: inherit; font-size: 2.6rem; font-weight: 700; cursor: pointer;
+  color: var(--ls-tinte); background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 99rem;
+  box-shadow: var(--ls-schatten);
+}
+.lp-filter button.an { color: var(--ls-papier); background: var(--ls-tinte); box-shadow: 0 0.6rem 0 var(--ls-haupt-schatten); }
+.lp-filter button:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+.lp-filter button:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.4rem; }
 
 .spiel-beschreibungen { display: flex; flex-direction: column; gap: 0.4rem; }
 .spiel-beschreibung > summary { min-height: 6rem; display: flex; align-items: center; gap: 1.2rem; font-weight: 700; }
@@ -128,7 +139,7 @@ details > summary::-webkit-details-marker { display: none; }
 
 /* Thema: Zustand als Farbe (Fläche und Punkt) und Wort. Gekonnt in der Tönung des Fachs mit Haken im Tief-Ton,
    gerade dran in Sonne, offen ruhig in Nebel. Keine Bewertungsfarben (kein Grün, kein Rot). */
-.thema { border-radius: var(--ls-radius-klein); background: var(--ls-nebel); }
+.thema { border-radius: var(--ls-radius-klein); background: var(--ls-nebel); scroll-margin-top: 3.2rem; }
 .thema.z-kann-ich { background: var(--fach-toenung, var(--ls-nebel)); }
 .thema.z-dran { background: color-mix(in srgb, var(--ls-sonne) 30%, var(--ls-papier)); }
 .thema > summary { display: flex; align-items: center; gap: 1.6rem; min-height: 8rem; padding: 1.2rem 2.4rem; }
@@ -156,6 +167,32 @@ details > summary::-webkit-details-marker { display: none; }
 .spielpunkte i.a.da { background: var(--ls-kante); border-color: var(--ls-kante); }
 .lp-legende { display: flex; align-items: center; gap: 1.2rem; margin-top: -2rem; }
 .lp-legende .spielpunkte + * { margin-right: 2rem; }
+/* Offene Voraussetzungen: Namen als Sprung zum Thema (unterstrichen wie ein Link). */
+.voraus .sprung { font: inherit; color: var(--ls-tinte); background: none; border: 0; padding: 0; cursor: pointer;
+  text-decoration: underline; text-decoration-thickness: 0.2rem; text-underline-offset: 0.4rem; }
+.voraus .sprung:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.3rem; border-radius: 0.4rem; }
+
+/* Spiele eines Themas: kleine Karten mit Bild, Titel, Art und (nachgezogen) Kurzbeschreibung. */
+.lp-spiele { display: flex; flex-wrap: wrap; gap: 2rem; margin: 0.8rem 0; }
+.lp-spiele[hidden] { display: none; }
+.lp-karte {
+  display: flex; flex-direction: column; width: 34rem; padding: 0; overflow: hidden; text-align: left;
+  font: inherit; color: var(--ls-tinte); background: var(--ls-papier); cursor: pointer;
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); box-shadow: var(--ls-schatten);
+}
+.lp-karte:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+.lp-karte:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.4rem; }
+.lp-karte .bild { position: relative; display: grid; place-items: center; height: 14rem; border-bottom: var(--ls-kontur) solid var(--ls-tinte);
+  background: var(--fach-toenung, var(--ls-nebel)); overflow: hidden; }
+.lp-karte.analog .bild { background: var(--ls-ahorn); }
+.lp-karte .bild .welt { position: absolute; inset: 0; }
+.lp-karte .bild .welt svg { display: block; width: 100%; height: 100%; }
+.lp-karte .bild ls-objekt { position: relative; }
+.lp-karte .bild img { width: 7rem; height: 7rem; }
+.lp-karte .bild ls-objekt { height: 11rem; }
+.lp-karte .text { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.4rem 1.8rem 1.8rem; font-size: 2.3rem; line-height: 1.3; }
+.lp-karte .art { color: var(--ls-tinte-weich); font-size: 2rem; }
+.lp-karte .kurz { margin-top: 0.4rem; }
 .thema .innen { padding: 0 2.4rem 2.4rem 5rem; display: flex; flex-direction: column; gap: 0.8rem; }
 
 /* --- Geschichten ---------------------------------------------------------------------------------- */
@@ -176,7 +213,7 @@ details > summary::-webkit-details-marker { display: none; }
 .grenze .knoepfe { margin-top: 0; }
 .zeit-stand { display: flex; flex-direction: column; gap: 0.6rem; }
 .zeit-stand .lage { font-weight: 700; }
-/* --- Gerät ---------------------------------------------------------------------------------------- */
+/* --- Updates ---------------------------------------------------------------------------------------- */
 .version { font-size: 4.4rem; font-weight: 700; line-height: 1.1; }
 .notiz { white-space: pre-wrap; }
 .laden { height: 1.6rem; border-radius: 99rem; background: var(--ls-linie); overflow: hidden; max-width: 70ch; }
@@ -219,10 +256,9 @@ details > summary::-webkit-details-marker { display: none; }
   <nav class="el-nav" aria-label="Bereiche">
     <h1>Für Erwachsene</h1>
     <ls-knopf data-tab="lernstand" symbol="lernstand.svg" wort="Lernplan" groesse="klein" stumm></ls-knopf>
-    <ls-knopf id="echte-dinge" symbol="hand.svg" wort="Mit echten Dingen" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="geschichten" symbol="buch.svg" wort="Geschichten" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="spielzeit" symbol="uhr.svg" wort="Spielzeit" groesse="klein" stumm></ls-knopf>
-    <ls-knopf data-tab="geraet" symbol="update.svg" wort="Gerät" groesse="klein" stumm></ls-knopf>
+    <ls-knopf data-tab="geraet" symbol="update.svg" wort="Updates" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="hinweise" symbol="hilfe.svg" wort="Hinweise" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="sicherheit" symbol="schloss.svg" wort="Sicherheit" groesse="klein" stumm></ls-knopf>
     <ls-knopf class="unten" id="zurueck-spiele" symbol="haus.svg" wort="Zu den Spielen" groesse="klein" stumm></ls-knopf>
@@ -230,18 +266,22 @@ details > summary::-webkit-details-marker { display: none; }
   </nav>
   <main class="el-inhalt auswahl" id="inhalt"></main>
 </section>
+<ls-anregung id="anregung"></ls-anregung>
 
 <script type="module">
-import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen } from "./lernspiel.js";
+import { lade, speichere, sofortSpeichern, sperreTouch, protokoll, protokollLesen, esc } from "./lernspiel.js";
 import { pinHash, pinPruefen, pruefeUpdate } from "./eltern.js";
 import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/geraet.js";
 import { ladeEinstellungen, setzeEinstellung, geschichtenStufe, einstellung } from "./kern/einstellungen.js";
 import { regeln, aktuell, lage as spielLage, gibZugabe, ZUGABE_MINUTEN } from "./kern/spielzeit.js";
 import { STAND as SPIELZEIT_STAND } from "./rahmen/spielzeit.js";
-import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer }
+import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer, spieleFuer, alsNaechstes }
   from "./lernsteuerung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
-import { ladeVerzeichnis } from "./rahmen/echte-dinge.js";
+import { ladeVerzeichnis, ladeAnleitung } from "./rahmen/echte-dinge.js";
+import { paletteFuer, vignetteSvg } from "./start/welten.js";
+import "./rahmen/anregung.js";
+import "./objekte/objekt.js";
 import "./rahmen/knopf.js";
 
 sperreTouch();
@@ -319,7 +359,6 @@ async function taste(z) {
 const zuDenSpielen = async () => { await sofortSpeichern(); location.href = "index.html"; };
 $("pin-zurueck").addEventListener("click", zuDenSpielen);
 // Übersicht „Mit echten Dingen“ (ohne PIN, eigene Seite; docs/mit-echten-dingen.md): Zurück führt wieder hierher.
-$("echte-dinge").addEventListener("click", async () => { await sofortSpeichern(); location.href = "mit-echten-dingen.html"; });
 
 // ---------- Bereich ----------
 let tab = "lernstand";
@@ -445,11 +484,9 @@ function eingriffKnopf(text, tun, { wegnehmen = false, frage = null } = {}) {
 const ZUSTAND = { "verborgen": "kommt später", "in-sicht": "kann als Nächstes kommen", "dran": "gerade dran", "kann-ich": "kann" };
 const STUFE = { material: "übt mit Material", vorstellung: "übt in der Vorstellung", kopf: "übt im Kopf" };
 const PROBE = "fängt an: eine kurze Probe zeigt, womit es beginnt";
-const FILTER = [["alle", "Alle"], ["dran", "Gerade dran"], ["gekonnt", "Gekonnt"], ["offen", "Offen"]];
-const passt = { alle: () => true, dran: (t) => t.zustand === "dran", gekonnt: (t) => t.zustand === "kann-ich",
-  offen: (t) => t.zustand !== "dran" && t.zustand !== "kann-ich" };
-const LEER = { dran: "Gerade ist kein Thema dran.", gekonnt: "Hier steht, was das Kind kann, sobald es so weit ist.",
-  offen: "Alle Themen sind gekonnt." };
+const FILTER = [["alle", "Alle"], ["dran", "Gerade dran"], ["naechstes", "Als Nächstes"], ["gekonnt", "Gekonnt"], ["offen", "Offen"]];
+const LEER = { dran: "Gerade ist kein Thema dran.", naechstes: "Gerade ist kein Thema dran, darum kommt hier noch nichts als Nächstes.",
+  gekonnt: "Hier steht, was das Kind kann, sobald es so weit ist.", offen: "Alle Themen sind gekonnt." };
 let lpFilter = "alle";
 const offeneBereiche = new Set();
 let lernLauf = 0;
@@ -499,9 +536,9 @@ async function lernstand(spalte, offen) {
   filter.setAttribute("role", "group");
   filter.setAttribute("aria-label", "Zeigen");
   for (const [id, wort] of FILTER) {
-    const k = knopf(wort);
-    k.setAttribute("groesse", "klein");
-    if (id === lpFilter) { k.setAttribute("art", "haupt"); k.setAttribute("aria-pressed", "true"); }
+    const k = el("button", wort, id === lpFilter ? "an" : "");
+    k.type = "button";
+    k.setAttribute("aria-pressed", String(id === lpFilter));
     k.addEventListener("click", () => { if (lpFilter !== id) { lpFilter = id; neuZeichnen(offen); } });
     filter.appendChild(k);
   }
@@ -513,7 +550,24 @@ async function lernstand(spalte, offen) {
     + '<span class="spielpunkte"><i class="a da"></i></span><span>Spiel mit echten Dingen</span>';
   spalte.appendChild(legende);
 
-  const zeigt = passt[lpFilter];
+  // Als Nächstes: je Thema dran die drei, die darauf folgen (alsNaechstes in lernsteuerung.js)
+  const naechste = alsNaechstes(ctx, stand);
+  const zeigt = {
+    alle: () => true, dran: (t) => t.zustand === "dran", naechstes: (t) => naechste.has(t.id),
+    gekonnt: (t) => t.zustand === "kann-ich", offen: (t) => t.zustand !== "dran" && t.zustand !== "kann-ich",
+  }[lpFilter];
+  // Sprung zu einem Thema (offene Voraussetzung): Filter auf Alle, Bereich und Thema auf, dorthin scrollen
+  const planNach = new Map((ctx.plan.themen || []).map((x) => [x.id, x]));
+  const springe = async (id) => {
+    const p = planNach.get(id);
+    if (!p) return;
+    lpFilter = "alle";
+    offeneBereiche.add(p.strang + "|" + (p.bereich || "Weiteres"));
+    await neuZeichnen(id);
+    const ziel = spalte.querySelector(`.thema[data-id="${CSS.escape(id)}"]`);
+    ziel?.scrollIntoView({ block: "start" });
+    ziel?.querySelector("summary")?.focus({ preventScroll: true });
+  };
   let gezeigt = 0;
   for (const strang of faecher(ctx)) {
     const themen = liste.find((x) => x.strang === strang)?.themen || [];
@@ -541,7 +595,19 @@ async function lernstand(spalte, offen) {
       if (u && (!zuletzt || u > zuletzt.u)) zuletzt = { u, name: t.name };
     }
     if (zuletzt) kopf.appendChild(el("p", `Zuletzt geübt ${amDatum(zuletzt.u)}: ${zuletzt.name}`, "zuletzt leise klein"));
+    // Alle Bereiche des Fachs auf- oder zuklappen; das Wort folgt dem Zustand
+    const klapp = knopf("Alles ausklappen");
+    klapp.setAttribute("groesse", "klein");
+    klapp.classList.add("klapp");
+    kopf.appendChild(klapp);
     block.appendChild(kopf);
+    const bereichsDetails = () => [...block.querySelectorAll(":scope > details.lp-bereich")];
+    const klappWort = () => klapp.setAttribute("wort", bereichsDetails().every((d) => d.open) ? "Alles einklappen" : "Alles ausklappen");
+    klapp.addEventListener("click", () => {
+      const alleOffen = bereichsDetails().every((d) => d.open);
+      for (const d of bereichsDetails()) d.open = !alleOffen;
+      klappWort();
+    });
 
     for (const [name, alleThemen] of sichtbar) {
       const key = strang + "|" + name;
@@ -574,15 +640,17 @@ async function lernstand(spalte, offen) {
         for (const k of knoepfe.children) k.setAttribute("groesse", "klein");
         if (knoepfe.children.length) innen.appendChild(knoepfe);
         const ul = el("ul", null, "themen");
-        for (const t of gezeigte) ul.appendChild(themaZeile(t, stand, ctx, heute, offen, strang, (tun) => eingriff(tun, t.id)));
+        for (const t of gezeigte) ul.appendChild(themaZeile(t, stand, ctx, heute, offen, strang, (tun) => eingriff(tun, t.id), { liste, springe }));
         innen.appendChild(ul);
       };
       det.addEventListener("toggle", () => {
         if (det.open) { offeneBereiche.add(key); fuelle(); } else offeneBereiche.delete(key);
+        klappWort();
       });
       if (det.open) fuelle();
       block.appendChild(det);
     }
+    klappWort();
 
     const fachSpiele = spiele.filter((x) => x.kategorie === strang);
     if (fachSpiele.length) {
@@ -611,9 +679,10 @@ async function lernstand(spalte, offen) {
   if (!gezeigt) spalte.appendChild(el("p", LEER[lpFilter] || "Der Lernplan ist leer.", "flaeche leise"));
 }
 
-function themaZeile(t, stand, ctx, heute, offen, strang, eingriff) {
+function themaZeile(t, stand, ctx, heute, offen, strang, eingriff, { liste, springe }) {
   const li = el("li");
   const det = el("details", null, "thema z-" + t.zustand);
+  det.dataset.id = t.id;
   det.open = t.id === offen;
   const sum = el("summary");
   const punkt = el("span", null, "punkt");
@@ -631,9 +700,33 @@ function themaZeile(t, stand, ctx, heute, offen, strang, eingriff) {
   if (t.zustand === "dran") innen.appendChild(el("p", "Im Moment: " + (STUFE[t.stufe] || PROBE) + "."));
   if (t.wackelig.length) innen.appendChild(el("p", "Kommt gerade öfter dran: " + t.wackelig.map(aufgabeLesbar).join(", ")));
   if (t.frei && t.zustand !== "kann-ich") innen.appendChild(el("p", "Von Ihnen freigegeben.", "leise"));
+  // Voraussetzungen, die noch nicht gekonnt sind; jede führt zu ihrem Thema im Lernplan
+  if (t.zustand !== "kann-ich") {
+    const zustandVon = new Map(liste.flatMap((x) => x.themen).map((x) => [x.id, x]));
+    const offeneV = ((ctx.plan.themen || []).find((x) => x.id === t.id)?.voraussetzungen || [])
+      .map((id) => zustandVon.get(id)).filter((v) => v && v.zustand !== "kann-ich");
+    if (offeneV.length) {
+      const p = el("p", null, "voraus");
+      p.appendChild(document.createTextNode("Davor noch offen: "));
+      offeneV.forEach((v, i) => {
+        if (i) p.appendChild(document.createTextNode(", "));
+        const a = el("button", v.name, "sprung");
+        a.type = "button";
+        a.addEventListener("click", () => springe(v.id));
+        p.appendChild(a);
+      });
+      innen.appendChild(p);
+    }
+  }
   if (t.luecke === "teilweise") innen.appendChild(el("p", "Die Spiele zeigen bisher nur einen Teil dieses Themas.", "leise"));
   const mitSpiel = t.luecke !== "ohne-spiel";
-  if (!mitSpiel) innen.appendChild(el("p", "Für dieses Thema gibt es noch kein Spiel. Das Kind sieht es nicht.", "leise"));
+  if (!mitSpiel) innen.appendChild(el("p", "Für dieses Thema gibt es noch kein digitales Spiel. Das Kind sieht es in der App noch nicht.", "leise"));
+  // Die Spiele des Themas als Karten, erst beim Aufklappen (lädt die Anleitung für das Bild der Karte)
+  const karten = el("div", null, "lp-spiele");
+  innen.appendChild(karten);
+  const fuelleKarten = () => { if (!karten.dataset.voll) { karten.dataset.voll = "1"; spielKarten(karten, t, ctx, strang); } };
+  det.addEventListener("toggle", () => { if (det.open) fuelleKarten(); });
+  if (det.open) fuelleKarten();
   const knoepfe = reihe();
   if (t.zustand !== "kann-ich")
     knoepfe.appendChild(eingriffKnopf("Als gekonnt markieren", () => eingriff(() => hakeAb(ctx, stand, [t.id], heute)),
@@ -642,10 +735,50 @@ function themaZeile(t, stand, ctx, heute, offen, strang, eingriff) {
     knoepfe.appendChild(eingriffKnopf("Freigeben", () => eingriff(() => gibFrei(stand, t.id))));
   if (t.zustand === "dran" || t.zustand === "kann-ich" || t.frei)
     knoepfe.appendChild(eingriffKnopf("Zurücksetzen", () => eingriff(() => setzeZurueck(ctx, stand, t.id)), { wegnehmen: true }));
+  for (const k of knoepfe.children) k.setAttribute("groesse", "klein");
   if (knoepfe.children.length) innen.appendChild(knoepfe);
   det.appendChild(innen);
   li.appendChild(det);
   return li;
+}
+
+// Karten der Spiele eines Themas: digitale (spiele.json, Bild der Welt) und analoge (Anleitung „Mit echten Dingen“,
+// Bild der Karte aus bild: im Kopf). Die analoge öffnet <ls-anregung> über dem Lernplan (mit PDF, wenn das Gerät
+// drucken kann); Zurück schließt sie, der Baum bleibt, wie er war. Die digitale öffnet das Spiel für Erwachsene.
+// Kurzbeschreibung: digital `text` aus spiele.json; analog `text` (oder `kurz`) im Kopf der Anleitung, sobald es ihn gibt.
+// Kartenbild digital nach grundsaetze-bilder §16: die Figur des Spiels (karte.figur/zustand) vor der Welt (karte.welt).
+const SITUATION_WORT = { tisch: "Am Tisch", bewegung: "In Bewegung", unterwegs: "Unterwegs" };
+async function spielKarten(ziel, t, ctx, strang) {
+  const spielNach = new Map((ctx.spiele.spiele || []).map((x) => [x.id, x]));
+  for (const id of spieleFuer(ctx, t.id)) {
+    const sp = spielNach.get(id);
+    if (!sp) continue;
+    const palette = paletteFuer(ctx, sp.karte?.welt ?? sp.welt);
+    const figur = sp.karte?.figur
+      ? `<ls-objekt art="${esc(sp.karte.figur)}"${sp.karte.zustand ? ` zustand="${esc(sp.karte.zustand)}"` : ""} still></ls-objekt>` : "";
+    const b = el("button", null, "lp-karte digital");
+    b.type = "button";
+    b.innerHTML = `<span class="bild">${palette ? `<span class="welt">${vignetteSvg(palette)}</span>` : ""}`
+      + `${figur || (palette ? "" : `<img src="${esc(sp.symbol || "symbole/mathe.svg")}" alt="">`)}</span>`
+      + `<span class="text"><b>${esc(sp.titel || sp.id)}</b><span class="art">Digitales Spiel</span>${sp.text ? `<span class="kurz">${esc(sp.text)}</span>` : ""}</span>`;
+    b.addEventListener("click", async () => { await sofortSpeichern(); location.href = `${sp.datei || sp.id + ".html"}?eltern&thema=${encodeURIComponent(t.id)}`; });
+    ziel.appendChild(b);
+  }
+  const ed = echteDingeFuer(ctx, t.id);
+  if (ed?.formen?.length && !ed.entwurf) {
+    const a = await ladeAnleitung(strang, t.id);
+    const kopfBild = String(a?.kopf?.bild ?? "");
+    const figur = /figur:\s*([a-z0-9-]+)/.exec(kopfBild)?.[1], zustand = /zustand:\s*([a-z0-9-]+)/.exec(kopfBild)?.[1];
+    const b = el("button", null, "lp-karte analog");
+    b.type = "button";
+    b.innerHTML = `<span class="bild">${figur ? `<ls-objekt art="${esc(figur)}"${zustand ? ` zustand="${esc(zustand)}"` : ""} still></ls-objekt>` : `<img src="symbole/hand.svg" alt="">`}</span>`
+      + `<span class="text"><b>${esc(ed.titel || "Mit echten Dingen")}</b>`
+      + `<span class="art">Mit echten Dingen: ${esc(ed.formen.map((f) => SITUATION_WORT[f.situation] || f.wort).join(", "))}</span>`
+      + `${a?.kopf?.text || a?.kopf?.kurz ? `<span class="kurz">${esc(String(a.kopf.text || a.kopf.kurz))}</span>` : ""}</span>`;
+    b.addEventListener("click", () => $("anregung").oeffne({ titel: t.name, thema: t.id, fach: strang, pdf: kann.drucken }));
+    ziel.appendChild(b);
+  }
+  ziel.hidden = !ziel.childElementCount;
 }
 
 // ---------- Geschichten ----------
@@ -849,10 +982,10 @@ async function spielzeit(spalte) {
   spalte.append(standFlaeche, tageFlaeche, grenzenFlaeche, uhrFlaeche, ausFlaeche, status);
 }
 
-// ---------- Gerät ----------
+// ---------- Updates (Tab-Id geraet) ----------
 // Nur, was faehigkeiten erlaubt: Updates gibt es in der installierten App (Beenden steht in der Leiste).
 function geraet(spalte) {
-  spalte.appendChild(el("h2", "Gerät"));
+  spalte.appendChild(el("h2", "Updates"));
   const ver = el("section", null, "flaeche");
   const v = el("p", "Version …", "version");
   ver.append(el("h3", "Installiert"), v);

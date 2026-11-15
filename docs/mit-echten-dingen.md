@@ -153,27 +153,23 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   `echt.html`. Analoges Spielen zählt **nicht** für den Lernstand (Annahme): „gekonnt“ misst nur die App, niemand
   trägt Ergebnisse ein.
 
-- **Übersicht „Mit echten Dingen“ als Werkzeug für Erwachsene (Christian):** eine eigene Seite
-  `spiele/mit-echten-dingen.html`, ohne PIN, aus dem Elternbereich erreichbar (ein Zugang von der Startseite ist noch offen). Kinder dürfen mitlesen. Sie zeigt, **woran das Kind gerade ist** und was man dazu machen kann:
-  - **Gerade dran:** die Themen im Zustand „dran“ (auch ohne Spiel), je mit Name und den Formen (Am Tisch / In
-    Bewegung / Unterwegs).
-  - **Bald:** die Themen „in Sicht“.
-  - **Zum Wiederholen:** die zuletzt gekonnten Themen (wenige, nach Datum).
-  - Je Thema die Anleitung aufklappbar; Themen ohne Datei zeigen den Einzeiler aus dem Lernplan. Keine Zahlen, kein
-    Lehrplanbezug, kein Fortschritt (das steht im Elternbereich); Sprache für beide lesbar.
-  - **PDF je Thema (Christian, 2026-11-14; ersetzt den „Küchenzettel“):** Im aufgeklappten Thema steht ein Knopf „PDF“.
-    Er druckt ein A4-Blatt mit allen Formen des Themas, voll (Ihr braucht, Schritte, Darauf kommt es an,
-    Leichter/Schwerer), in der Reihenfolge Am Tisch, In Bewegung, Unterwegs. Stil wie die Seite (Andika, Tinte, Linien
-    und Schrittkreise im Tief-Ton des Fachs), ohne Flächen. Über den Druckdialog als PDF speichern; der Dateiname ist
-    „Mit echten Dingen – <Thema>“. Nur wo das Gerät drucken kann (`faehigkeiten`, Annahme: Desktop und Browser; auf
-    dem Tablet über das Teilen-Menü, sobald die Mobil-Fassung kommt). Design:
-    `docs/superpowers/specs/2026-11-14-echte-dinge-pdf-je-thema-design.md`.
+- **Für Erwachsene im Lernplan (Christian, 2026-11-15; ersetzt die eigene Übersichtsseite):** Im Elternbereich,
+  Reiter „Lernplan“, stehen im aufgeklappten Thema dessen Spiele als kleine Karten: digitale und „Mit echten Dingen“
+  (Bild der Karte aus `bild:`, Titel, Situationen, später die Kurzbeschreibung). Die analoge Karte öffnet
+  `<ls-anregung>` über dem Lernplan; Zurück schließt sie, der Lernplan steht an derselben Stelle (keine neue PIN).
+  - **PDF je Thema (Christian, 2026-11-14):** In dieser Karte steht der Knopf „PDF“ (nur im Elternbereich, nur wo das
+    Gerät drucken kann; Kinder sehen ihn nie). Er druckt ein A4-Blatt mit allen Formen des Themas, voll (Ihr braucht,
+    Schritte, Darauf kommt es an, Leichter/Schwerer), in der Reihenfolge Am Tisch, In Bewegung, Unterwegs. Stil wie
+    die Seite (Andika, Tinte, Linien und Schrittkreise im Tief-Ton des Fachs), ohne Flächen. Über den Druckdialog als
+    PDF speichern; der Dateiname ist „Mit echten Dingen – <Thema>“. Design:
+    `docs/superpowers/specs/2026-11-14-echte-dinge-pdf-je-thema-design.md`,
+    `docs/superpowers/specs/2026-11-14-lernstand-lernplan-abhaken-design.md`.
 
 - **Am Rundenende eines Spiels** als ruhiges Angebot in der Pause, neben „Alle Spiele“ und „Weiter“ (kein Muss, keine
   Belohnung, K8; der Katalog nennt das „Mach mit“) **(Christian)**; führt zur selben Seite `echt.html` (vorher wird
   gespeichert wie bei „Alle Spiele“).
 
-## Umsetzung (Stand 2026-11-14)
+## Umsetzung (Stand 2026-11-15)
 
 - **Dateien:** `spiele/mit-echten-dingen/<fach>/<thema>.md`; `npm run echte-dinge` schreibt daraus
   `verzeichnis.json` (nur **freigegebene** Anleitungen: ohne `entwurf: true` und ohne `geparkt: true`; das liest die
@@ -189,19 +185,14 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   `spiele/rahmen/echte-dinge.js` (Verzeichnis, Laden, gemerkte Form `echte-dinge.form`), die Seite `spiele/echt.html`
   mit `spiele/start/anleitung.js` (bringt jede Form in den Aufbau der Seite), Angebot in `<ls-pause>`
   (`docs/bedienung.md` §9; führt zu `echt.html`). Die Spielvorlage reicht das Thema der Runde an die Pause. Die Karte
-  `<ls-anregung>` ist der Baustein der Übersicht; die Kachel `<ls-echte-dinge-kachel>` steht nur in der Vorschau
+  `<ls-anregung>` ist die Karte (Fach-Seite, Regal, Pause; im Lernplan der Eltern mit `pdf`); die Kachel `<ls-echte-dinge-kachel>` steht nur in der Vorschau
   (`spiele/rahmen/vorschau.html?echte-dinge`), die App nutzt die Karten der Startseite.
-- **Daten:** `echteDingeFuer(ctx, themaId)` und `themenMitEchtenDingen(ctx, stand)` in `spiele/lernsteuerung.js`
-  (`ctx.echteDinge` = Verzeichnis), nur lesend. Themen ohne Spiel erscheinen in der Übersicht nur in Fächern, in denen
-  schon ein Thema dran oder gekonnt ist: je Fach das erste mit allen Voraussetzungen gekonnt unter „Gerade dran“,
-  höchstens ein weiteres unter „Bald“. Für das Kind ändert das nichts (dort bleiben Themen ohne Spiel verborgen, bis
-  die Startseite auch Themen ohne Spiel zeigt).
-- **Übersicht:** `spiele/mit-echten-dingen.html`, Zugang über „Mit echten Dingen“ in der Navigation des
-  Elternbereichs; Zurück führt dorthin zurück (die PIN wird dann erneut abgefragt). PDF je Thema: der Knopf nur an
-  Themen **mit Anleitung** (die Einzeiler des Lernplans sind Elternsprache); das Blatt baut
-  `spiele/rahmen/echte-dinge-blatt.js` (ohne DOM, `tests/echte-dinge-blatt.test.mjs`), die Seite setzt es in `#blatt`,
-  misst und setzt es eine Schriftstufe kleiner, wenn es länger als eine Seite ist (passt es dann nicht, folgt eine
-  zweite Seite; keine Form wird geteilt). Drucken über `drucke()` in `spiele/kern/geraet.js` (Fähigkeit `drucken`: Browser
-  und Desktop ja, Android/iOS nein).
+- **Daten:** `echteDingeFuer(ctx, themaId)` in `spiele/lernsteuerung.js` (`ctx.echteDinge` = Verzeichnis), nur lesend.
+- **Lernplan und PDF:** Karten in `spiele/eltern.html` (erst beim Aufklappen eines Themas, nur freigegebene
+  Anleitungen); `<ls-anregung>` mit `oeffne({ …, pdf: true })`. Das Blatt baut `spiele/rahmen/echte-dinge-blatt.js`
+  (ohne DOM, `tests/echte-dinge-blatt.test.mjs`); `spiele/rahmen/echte-dinge-druck.js` setzt es versteckt in die
+  Seite (`#ls-blatt`), misst und setzt es eine Schriftstufe kleiner, wenn es länger als eine Seite ist (passt es dann
+  nicht, folgt eine zweite Seite; keine Form wird geteilt), und druckt über `drucke()` in `spiele/kern/geraet.js`
+  (Fähigkeit `drucken`: Browser und Desktop ja, Android/iOS nein).
 - **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Bild → Prüfung E1–E11 durch einen
   frischen Agenten → höchstens 3 Runden → Datei, Verzeichnis, Kosten in `spiele/mit-echten-dingen/kosten.json`).

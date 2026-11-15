@@ -16,9 +16,9 @@
 // gespeicherte PIN), nie den Bereich; das Zahnrad führt nur durch Halten (3 s) zu eltern.html, kurzes Tippen
 // tut nichts; themen.html ohne oder mit unbekanntem Fach führt zur Startseite; ein Themenname mit Ziffer wird als
 // Aufnahme gesprochen (Ziffern-Regel), nie von der Systemstimme.
-// Übersicht „Mit echten Dingen“ (mit-echten-dingen.html, ohne PIN): Gerade dran (auch ohne Spiel), Bald, Zum
-// Wiederholen, aufklappbar mit allen Formen, keine Zahlen, kein Kopf mit Quellen; Zugang aus dem Elternbereich; PDF je
-// Thema über kern/geraet.js; das Blatt (Chromium, page.pdf) zeigt alle Formen voll, ohne Bedienelemente, A4.
+// Lernplan im Elternbereich: Baum ohne Klassen, Filter, Abhaken samt Voraussetzungen (danach still in Regal und
+// Startseite); im aufgeklappten Thema die Spiele, die analoge Karte über dem Lernplan mit PDF; das Blatt (Chromium,
+// page.pdf) zeigt alle Formen voll, ohne Flächen, A4.
 //
 // WebKit: In diesem Playwright-Build (1.65, WebKit 27.2, macOS) landen echte Mausklicks mit falschen Koordinaten
 // an <html>. Die Prüfung tippt deshalb in beiden Browsern per element.click() (evaluate); das Halten des Zahnrads
@@ -67,12 +67,6 @@ const GEKONNT = {
 const DRAN = { "zerlegen-5": eintrag("dran", "", "2026-11-13"), "rechnen-3": eintrag("dran", "", "2026-11-12"), "rechnen-4": eintrag("dran", "", "2026-11-11") };
 // von den Eltern freigegeben: in Sicht (Perlenstab-Themen zeigen dort die Karte mit dem Fachsymbol)
 const FREI = { "zerlegen-8": { z: "", k: "", stufe: "", v: [], e: "", seit: "", u: "", frei: 1 }, "rechnen-9": { z: "", k: "", stufe: "", v: [], e: "", seit: "", u: "", frei: 1 } };
-// Übersicht „Mit echten Dingen“: drei Themen mit Anleitung dran (auch ohne Spiel), gekonnte zum Wiederholen.
-const ECHT = {
-  "mehr-weniger-gleich-viele": eintrag("kann-ich", "2026-11-01"), "mengen-5": eintrag("kann-ich", "2026-11-02"),
-  "reim-hoeren": eintrag("kann-ich", "2026-11-03"), "zerlegen-5": eintrag("kann-ich", "2026-11-05"), "zerlegen-6": eintrag("kann-ich", "2026-11-08"),
-  "vorwaerts-zaehlen": eintrag("dran", "", "2026-11-12"), "zerlegen-7": eintrag("dran", "", "2026-11-13"), "silben-klatschen": eintrag("dran", "", "2026-11-11"),
-};
 // Eine Anleitung mit drei langen Formen (je sechs Schritte, etwa 120 Wörter) für die Probe „Blatt mit drei Formen“.
 const DREI_STAND = { "zerlegen-2": eintrag("dran", "", "2026-11-13") };
 const langeForm = (wort, name) => `## ${wort}: ${name}\n\n`
@@ -362,7 +356,7 @@ async function lauf(typ, name, groesse, basis) {
       const lp = await eltern.evaluate(async () => {
         const inhalt = document.getElementById("inhalt");
         const r = { titel: inhalt.querySelector("h2")?.textContent, nav: document.querySelector('[data-tab="lernstand"]').getAttribute("wort"),
-          filter: [...inhalt.querySelectorAll(".lp-filter ls-knopf")].map((k) => k.getAttribute("wort")),
+          filter: [...inhalt.querySelectorAll(".lp-filter button")].map((k) => k.textContent),
           bereiche: inhalt.querySelectorAll(".lp-bereich").length, offen: inhalt.querySelectorAll(".lp-bereich[open]").length,
           klasse: /Klasse \d|Lehrplan/.test(inhalt.innerText) };
         const d = [...inhalt.querySelectorAll(".lp-bereich")].find((x) => x.querySelector(".name").textContent === "Zahlzerlegung");
@@ -379,8 +373,8 @@ async function lauf(typ, name, groesse, basis) {
         r.nochOffen = !!document.querySelector(".lp-bereich[open]");
         return r;
       });
-      pruefe(F, "Reiter „Lernplan“: Baum Bereich → Thema ohne Klassen, alles zugeklappt, Filter Alle/Gerade dran/Gekonnt/Offen",
-        lp.titel === "Lernplan" && lp.nav === "Lernplan" && JSON.stringify(lp.filter) === JSON.stringify(["Alle", "Gerade dran", "Gekonnt", "Offen"])
+      pruefe(F, "Reiter „Lernplan“: Baum Bereich → Thema ohne Klassen, alles zugeklappt, Filter Alle/Gerade dran/Als Nächstes/Gekonnt/Offen",
+        lp.titel === "Lernplan" && lp.nav === "Lernplan" && JSON.stringify(lp.filter) === JSON.stringify(["Alle", "Gerade dran", "Als Nächstes", "Gekonnt", "Offen"])
           && lp.bereiche > 100 && lp.offen === 0 && !lp.klasse, JSON.stringify(lp));
       pruefe(F, "Abhaken: Rückfrage nennt die Themen davor; Thema samt offenen Voraussetzungen von Eltern gekonnt (Erspieltes bleibt erspielt), nichts in der Wiederholung, Bereich bleibt offen",
         /^Wirklich\? Mit \d+ Themen davor/.test(lp.frage) && lp.eltern.includes("zerlegen-8") && lp.eltern.includes("zerlegen-7")
@@ -480,94 +474,111 @@ async function lauf(typ, name, groesse, basis) {
       await kontext.close();
     }
 
-    // --- Mit echten Dingen: Übersicht, Zugang aus dem Elternbereich, PDF je Thema ------------------------
-    // ?entwurf: auch Entwürfe; Fall „app“: ohne ?entwurf liest die App nur verzeichnis.json – hier eines ohne Einträge
-    // (als gäbe es nur Entwürfe), dann zeigt sie keine Formen. Die Trennung selbst prüft tests/echte-dinge.test.mjs.
-    // „drei“: eine Anleitung mit drei langen Formen (nur im Browser per page.route): Reihenfolge, kleiner gesetzt, keine Form geteilt.
-    for (const [fall, stand, such] of [["leer", null, "?entwurf"], ["echt", ECHT, "?entwurf"], ["app", ECHT, ""], ["drei", DREI_STAND, "?entwurf"]]) {
-      const F = `${L} echte-dinge ${fall}`;
-      const kontext = await kontextFuer(browser, groesse, basis, { stand }, fehlerListe);
+    // --- Lernplan: Spiele je Thema, analoge Karte über dem Lernplan, PDF ---------------------------------------
+    // „echt“: Die 3 zerlegen mit der echten Anleitung (Familie mathe/zerlegen.md); „drei“: dieselbe Datei per page.route
+    // mit drei langen Formen (Reihenfolge, eine Schriftstufe kleiner, keine Form geteilt).
+    for (const fall of ["echt", "drei"]) {
+      const F = `${L} lernplan-spiele ${fall}`;
+      const thema = fall === "drei" ? "Die 2 zerlegen" : "Die 3 zerlegen";
+      const kontext = await kontextFuer(browser, groesse, basis, { stand: fall === "drei" ? DREI_STAND : { "zerlegen-3": eintrag("dran", "", "2026-11-13") } }, fehlerListe);
       await kontext.addInitScript(() => { window.__gedruckt = 0; window.print = () => { window.__gedruckt++; }; });
-      if (fall === "app") {
-        await kontext.route("**/mit-echten-dingen/verzeichnis.json", (r) => r.fulfill({ contentType: "application/json", body: '{"themen":{}}' }));
-      }
-      if (fall === "drei") {
-        // zerlegen-2 gehört zur Familie mathe/zerlegen.md (themen:), die Datei holt ladeAnleitung über das Verzeichnis
-        await kontext.route("**/mit-echten-dingen/mathe/zerlegen.md", (r) => r.fulfill({ contentType: "text/markdown", body: DREI_FORMEN }));
-      }
-      const seite = await kontext.newPage();
-      await seite.goto(`${basis}/spiele/mit-echten-dingen.html${such}`, { waitUntil: "load" });
-      await seite.waitForFunction(() => document.body.dataset.bereit === "1", null, { timeout: 8000 });
-      await seite.evaluate(() => document.fonts.ready);
-      const ue = await seite.evaluate(() => {
-        const teil = (titel) => [...document.querySelectorAll("section.abschnitt")].find((x) => x.querySelector("h2").textContent === titel);
-        const namen = (t) => (t ? [...t.querySelectorAll("details.thema summary .name b")].map((b) => b.textContent) : null);
-        const erstes = document.querySelector("details.thema");
-        return {
-          dran: namen(teil("Gerade dran")), bald: namen(teil("Bald")), wieder: namen(teil("Zum Wiederholen")),
-          offen: erstes?.open ?? false, formenOffen: erstes ? erstes.querySelectorAll(".spiel").length : 0,
-          formenAlle: document.querySelectorAll("article.spiel").length,
-          situationen: erstes ? [...erstes.querySelectorAll("summary .situation")].map((x) => x.textContent) : [],
-          pdf: [...document.querySelectorAll("[data-pdf]")].map((k) => k.dataset.pdf),
-          mitFormen: [...document.querySelectorAll("details.thema")].filter((d) => d.querySelector(".spiel")).length,
-          text: document.body.innerText,
-        };
-      });
-      if (fall === "leer") {
-        pruefe(F, "Übersicht ohne Lernstand: nichts dran, kein PDF-Knopf", JSON.stringify(ue.dran) === "[]" && /Gerade ist kein Thema dran/.test(ue.text) && ue.pdf.length === 0, JSON.stringify(ue.dran));
-      } else if (fall === "app") {
-        pruefe(F, "ohne ?entwurf nur verzeichnis.json: ohne Eintrag keine Formen, kein PDF-Knopf",
-          ue.dran?.includes("Die 7 zerlegen") && ue.formenAlle === 0 && ue.pdf.length === 0, JSON.stringify({ ...ue, text: undefined }));
-      } else if (fall === "echt") {
-        pruefe(F, "Übersicht: Gerade dran mit den Themen dran (auch ohne Spiel), zuerst aufgeklappt mit allen seinen Formen",
-          ["Vorwärts zählen", "Die 7 zerlegen", "Silben klatschen"].every((n) => ue.dran?.includes(n)) && ue.offen && ue.formenOffen >= 1
-            && ue.situationen.length === ue.formenOffen, JSON.stringify({ ...ue, text: undefined }));
-        pruefe(F, "Übersicht: höchstens ein Thema ohne Spiel je begonnenem Fach unter Gerade dran",
-          ue.dran.length <= 3 + 2, JSON.stringify(ue.dran));
-        pruefe(F, "Übersicht: Zum Wiederholen die drei zuletzt gekonnten, neueste zuerst",
-          JSON.stringify(ue.wieder) === JSON.stringify(["Die 6 zerlegen", "Die 5 zerlegen", "Reimt sich das?"]), JSON.stringify(ue.wieder));
-        pruefe(F, "Übersicht: Bald zeigt Themen in Sicht", (ue.bald?.length ?? 0) >= 1, JSON.stringify(ue.bald));
-      }
-      pruefe(F, "Übersicht: keine Zahl als Fortschritt, kein Lehrplan, kein Kopf mit Quellen",
-        !/\d+\s*(von|\/)\s*\d+|%|Klasse \d|Lehrplan|quellen:|https?:/i.test(ue.text), ue.text.slice(0, 300));
-      if (fall === "echt" || fall === "drei") {
-        pruefe(F, "PDF-Knopf an jedem Thema mit Anleitung, an keinem ohne", ue.pdf.length >= 1 && ue.pdf.length === ue.mitFormen, JSON.stringify(ue.pdf));
-        const thema = fall === "drei" ? "zerlegen-2" : ue.pdf[0];
-        const klick = await seite.evaluate(async (thema) => {
-          document.querySelector(`[data-pdf="${thema}"]`).click();
-          for (let i = 0; i < 40 && !window.__gedruckt; i++) await new Promise((r) => setTimeout(r, 50));
-          const blatt = document.getElementById("blatt");
-          const r = { gedruckt: window.__gedruckt, titel: document.title, eng: blatt.classList.contains("eng"),
-            formen: [...blatt.querySelectorAll("article.form h2")].map((h) => h.textContent.trim()) };
-          window.dispatchEvent(new Event("afterprint"));
-          return { ...r, danach: document.title };
+      if (fall === "drei") await kontext.route("**/mit-echten-dingen/mathe/zerlegen.md", (r) => r.fulfill({ contentType: "text/markdown", body: DREI_FORMEN }));
+      const eltern = await oeffne(kontext, `${basis}/spiele/eltern.html`);
+      await eltern.evaluate(() => { document.getElementById("pin").hidden = true; document.getElementById("bereich").hidden = false;
+        document.querySelector('[data-tab="lernstand"]').click(); });
+      await eltern.waitForFunction(() => document.querySelectorAll(".lp-bereich").length > 0, null, { timeout: 8000 });
+      const k = await eltern.evaluate(async (thema) => {
+        const d = [...document.querySelectorAll(".lp-bereich")].find((x) => x.querySelector(".name").textContent === "Zahlzerlegung");
+        d.open = true;
+        await new Promise((ok) => setTimeout(ok, 100));
+        const t = [...d.querySelectorAll(".thema")].find((x) => x.querySelector(".name").textContent === thema);
+        t.open = true;
+        for (let i = 0; i < 60 && !t.querySelector(".lp-karte"); i++) await new Promise((ok) => setTimeout(ok, 50));
+        const karte = t.querySelector(".lp-karte.analog");
+        return { leiste: !!document.getElementById("echte-dinge"), karten: t.querySelectorAll(".lp-karte").length,
+          text: karte?.innerText ?? "", bild: !!karte?.querySelector("ls-objekt"),
+          zuVorKlick: [...document.querySelectorAll(".lp-karte")].filter((x) => !x.closest(".thema[open]")).length };
+      }, thema);
+      pruefe(F, "Leiste ohne „Mit echten Dingen“; Spiele erst im aufgeklappten Thema, analoge Karte mit Bild, Titel und Situationen",
+        !k.leiste && k.karten >= 1 && k.zuVorKlick === 0 && /Mit echten Dingen: Am Tisch/.test(k.text) && (fall === "drei" || k.bild), JSON.stringify(k));
+      if (fall === "echt") {
+        const n = await eltern.evaluate(async () => {
+          const knopf = (w) => [...document.querySelectorAll(".lp-filter button")].find((x) => x.textContent === w);
+          knopf("Als Nächstes").click();
+          await new Promise((ok) => setTimeout(ok, 400));
+          const namen = [...document.querySelectorAll(".thema .name")].map((x) => x.textContent);
+          const t = [...document.querySelectorAll(".thema")].find((x) => x.querySelector(".name").textContent === "Die 4 zerlegen");
+          t.open = true;
+          await new Promise((ok) => setTimeout(ok, 200));
+          const voraus = t.querySelector(".voraus")?.innerText ?? "";
+          t.querySelector(".voraus .sprung")?.click();
+          await new Promise((ok) => setTimeout(ok, 600));
+          const ziel = document.querySelector('.thema[data-id="zerlegen-3"]');
+          const r = ziel?.getBoundingClientRect();
+          const fach = ziel.closest("section.fach"), klapp = fach.querySelector(".fach-kopf .klapp");
+          const vorher = klapp.getAttribute("wort");
+          klapp.click();
+          const alle = [...fach.querySelectorAll(":scope > details.lp-bereich")];
+          const auf = { wort: klapp.getAttribute("wort"), alleOffen: alle.every((d) => d.open) };
+          klapp.click();
+          const zu = { wort: klapp.getAttribute("wort"), alleZu: alle.every((d) => !d.open) };
+          return { namen, voraus, filter: document.querySelector(".lp-filter button.an")?.textContent,
+            zielOffen: !!ziel?.open, sichtbar: !!r && r.top >= 0 && r.top < innerHeight, klapp: { vorher, auf, zu } };
+        });
+        pruefe(F, "Als Nächstes: drei Themen nach dem Thema dran; offene Voraussetzung springt zum Thema (Filter Alle, aufgeklappt, sichtbar)",
+          n.namen.length === 3 && n.namen.includes("Die 4 zerlegen") && /^Davor noch offen: Die 3 zerlegen$/.test(n.voraus)
+            && n.filter === "Alle" && n.zielOffen && n.sichtbar, JSON.stringify(n));
+        pruefe(F, "Je Fach „Alles ausklappen“ öffnet alle Bereiche, danach „Alles einklappen“ schließt sie",
+          n.klapp.vorher === "Alles ausklappen" && n.klapp.auf.alleOffen && n.klapp.auf.wort === "Alles einklappen"
+            && n.klapp.zu.alleZu && n.klapp.zu.wort === "Alles ausklappen", JSON.stringify(n.klapp));
+        await eltern.evaluate(async (thema) => { // zurück zum Thema mit der Karte
+          const t = [...document.querySelectorAll(".thema")].find((x) => x.querySelector(".name").textContent === thema);
+          t.open = true;
+          for (let i = 0; i < 60 && !t.querySelector(".lp-karte"); i++) await new Promise((ok) => setTimeout(ok, 50));
         }, thema);
-        pruefe(F, "PDF ruft den Druckdialog über kern/geraet.js, Titel ist der Dateiname, danach wieder wie vorher",
-          klick.gedruckt === 1 && /^Mit echten Dingen – \S/.test(klick.titel) && klick.danach === "Mit echten Dingen", JSON.stringify(klick));
-        if (fall === "drei") pruefe(F, "Blatt mit drei Formen: Am Tisch, In Bewegung, Unterwegs; zu lang → eine Stufe kleiner",
-          JSON.stringify(klick.formen) === JSON.stringify(["Am Tisch: Nudeln", "In Bewegung: Hüpfen", "Unterwegs: Steine"]) && klick.eng, JSON.stringify(klick));
       }
-      if (SHOTS && fall !== "drei") {
-        await mkdir(SHOTS, { recursive: true });
-        await seite.screenshot({ path: join(SHOTS, `uebersicht-${fall}-${name}-${groesse.width}.png`), fullPage: true });
-      }
-      if (name === "chromium" && (fall === "echt" || fall === "drei")) {
-        await seite.emulateMedia({ media: "print" });
-        const druck = await seite.evaluate(() => {
-          const blatt = document.getElementById("blatt");
+      const r = await eltern.evaluate(async (thema) => {
+        const a = document.getElementById("anregung");
+        [...document.querySelectorAll(".thema[open] .lp-karte.analog")][0].click();
+        await a.geladen; await new Promise((ok) => setTimeout(ok, 100));
+        const pdf = a.shadowRoot.querySelector(".pdf");
+        const vorher = { offen: a.offen, pdf: !pdf.hidden, thema: a.shadowRoot.querySelector(".thema").textContent };
+        pdf.click();
+        for (let i = 0; i < 60 && !window.__gedruckt; i++) await new Promise((ok) => setTimeout(ok, 50));
+        const blatt = document.getElementById("ls-blatt");
+        const druck = { gedruckt: window.__gedruckt, titel: document.title, eng: blatt?.classList.contains("eng"),
+          formen: [...(blatt?.querySelectorAll("article.form h2") ?? [])].map((h) => h.textContent.trim()) };
+        window.dispatchEvent(new Event("afterprint"));
+        document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+        await new Promise((ok) => setTimeout(ok, 100));
+        const zu = { zu: !a.offen, danach: document.title, themaOffen: !!document.querySelector(".thema[open]") };
+        a.oeffne({ titel: thema, thema: "zerlegen-3", fach: "mathe" }); await a.geladen; // wie beim Kind: ohne pdf
+        const kind = a.shadowRoot.querySelector(".pdf").hidden;
+        a.schliesse();
+        return { ...vorher, ...druck, ...zu, kindOhnePdf: kind };
+      }, thema);
+      pruefe(F, "Analoge Karte öffnet über dem Lernplan mit PDF; Zurück lässt das Thema offen; ohne pdf (Kind) kein Knopf",
+        r.offen && r.pdf && r.thema === thema && r.zu && r.themaOffen && r.kindOhnePdf, JSON.stringify(r));
+      pruefe(F, "PDF: Druckdialog über kern/geraet.js, Dateiname aus dem Thema, danach alter Titel",
+        r.gedruckt === 1 && r.titel === `Mit echten Dingen – ${thema}` && r.danach === "Für Erwachsene", JSON.stringify(r));
+      if (fall === "drei") pruefe(F, "Blatt mit drei Formen: Am Tisch, In Bewegung, Unterwegs; zu lang → eine Stufe kleiner",
+        JSON.stringify(r.formen) === JSON.stringify(["Am Tisch: Nudeln", "In Bewegung: Hüpfen", "Unterwegs: Steine"]) && r.eng, JSON.stringify(r));
+      if (name === "chromium") {
+        await eltern.emulateMedia({ media: "print" });
+        const druck = await eltern.evaluate(() => {
+          const blatt = document.getElementById("ls-blatt");
           return {
-            knoepfe: [...document.querySelectorAll("ls-knopf, button, summary")].filter((k) => k.getClientRects().length > 0).length,
-            sichtbar: getComputedStyle(blatt).visibility, formen: blatt.querySelectorAll("article.form").length,
+            sichtbar: [...document.body.children].filter((e) => e.getClientRects().length > 0).map((e) => e.id || e.tagName),
             flaechen: [...blatt.querySelectorAll("*")].filter((e) => !/^(rgba\(0, 0, 0, 0\)|transparent)$/.test(getComputedStyle(e).backgroundColor)).length,
             text: blatt.innerText,
           };
         });
-        await seite.emulateMedia({ media: null }); // zurück auf „keine Vorgabe“: page.pdf() nimmt dann print
-        const pdf = await seite.pdf({ format: "A4", preferCSSPageSize: true, printBackground: true });
+        await eltern.emulateMedia({ media: null });
+        const pdf = await eltern.pdf({ format: "A4", preferCSSPageSize: true, printBackground: true });
         const seiten = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
-        pruefe(F, `Blatt: nur das Blatt, keine Bedienelemente, keine Flächen, alle Formen voll (${druck.formen} Formen, ${seiten} Seiten)`,
-          druck.knoepfe === 0 && druck.sichtbar === "visible" && druck.flaechen === 0 && druck.formen >= 1
-            && /Ihr braucht/.test(druck.text) && /Darauf kommt es an/.test(druck.text) && /Leichter/.test(druck.text) && /Schwerer/.test(druck.text)
+        pruefe(F, `Blatt: nur das Blatt im Druck, keine Flächen, alle Formen voll (${seiten} Seiten)`,
+          JSON.stringify(druck.sichtbar) === '["ls-blatt"]' && druck.flaechen === 0 && /Ihr braucht/.test(druck.text)
+            && /Darauf kommt es an/.test(druck.text) && /Leichter/.test(druck.text) && /Schwerer/.test(druck.text)
             && !/Sie |Ihr Kind/.test(druck.text) && seiten <= (fall === "drei" ? 2 : 1), JSON.stringify({ seiten, ...druck, text: undefined }));
         if (SHOTS && groesse.width === 1920) {
           const pfad = join(SHOTS, `blatt-${fall}.pdf`);
@@ -575,15 +586,7 @@ async function lauf(typ, name, groesse, basis) {
           try { execFileSync("sips", ["-s", "format", "png", "-Z", "1600", pfad, "--out", pfad.replace(/\.pdf$/, ".png")], { stdio: "ignore" }); } catch { /* nur macOS */ }
         }
       }
-      await seite.close();
-      // Zugang aus dem Elternbereich (der Knopf liegt in der Navigation hinter der PIN)
-      if (fall === "echt") {
-        const eltern = await oeffne(kontext, `${basis}/spiele/eltern.html`);
-        await eltern.evaluate(() => document.getElementById("echte-dinge").click());
-        await eltern.waitForURL(/mit-echten-dingen\.html$/, { timeout: 5000 }).catch(() => {});
-        pruefe(F, "Elternbereich: „Mit echten Dingen“ führt zur Übersicht", eltern.url().endsWith("/spiele/mit-echten-dingen.html"), eltern.url());
-        await eltern.close();
-      }
+      await eltern.close();
       await kontext.close();
     }
 
