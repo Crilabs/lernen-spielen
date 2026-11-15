@@ -147,6 +147,9 @@ alle Spiele gilt deshalb:
 - **Kein Satz der Form „X ist Y“, „X bedeutet Y“, „Jedes X bringt Y“.** Sätze beschreiben, was zu sehen ist oder was
   passiert, nie eine Beziehung, die man sich denken muss.
 - **Eine neue Sache je Einführung.** Alles andere ist schon bekannt oder kommt später von selbst.
+- **Kein Wechsel ohne Bild:** Wechselt die Lernsteuerung mitten in der Runde Stufe oder Inhalt (andere Reihe,
+  Perlen weg), zeigt das Spiel den Wechsel in einer kurzen Szene (z. B. Lena wischt die Perlen weg, malt die neue
+  Kette hin), nie ein plötzlich anderes Bild (Christian, 2026-11-15).
 - **Das Spiel beginnt mit der Einführung, und sie spielt im echten Spielbild:** derselbe Held, dieselbe Kette,
   dieselbe Tastatur. Ein Kind der Runde macht einen Zug ganz vor (tippen, Wirkung), dann leuchtet beim Kind die Taste
   im Sonnenring und es tippt selbst. Bei jedem Start; der Knopf „Anleitung“ ruft sie jederzeit wieder auf. Je Schritt
