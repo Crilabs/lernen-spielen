@@ -19,3 +19,10 @@ wimmel.json
 steine.json
 spielstand.json
 werkzeuge/audio/vergleich/
+# Verwaltung (lokal, nicht im Repo)
+werkzeuge/verwaltung/auftraege.json
+werkzeuge/verwaltung/auftraege.json.tmp-*
+werkzeuge/verwaltung/.lauf.lock
+werkzeuge/verwaltung/.anhalten
+werkzeuge/verwaltung/ergebnisse/
+werkzeuge/verwaltung/protokolle/
