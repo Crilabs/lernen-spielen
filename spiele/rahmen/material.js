@@ -4,6 +4,9 @@
 // Regeln in dieser Reihenfolge (Christian, 2026-11-14: erst die Lernzeichen, dann das Bild des Spiels, dann die Karte):
 //   1. Aufgabenart zerlegung / rechnen / zwillinge / menge mit ganzer Zahl 1 bis 10 → Perlenstab dieser Zahl
 //      (ls-perlenstab zeichnet nur 1 bis 10).
+//   1b. Einmaleins-Reihe (Themen-Id in REIHE, Aufgabenart mal mit reihe n, M37) → Perlenkette von n als Kurzkette
+//      (zehn Stäbe in der Farbe von n, zwei Reihen zu fünf, `<ls-perlenkette reihe="n" kurz="10">`). Die Kernaufgaben
+//      haben keine eine Reihe (alle n) und gehen weiter zu Regel 4 (Regal-Bild des Spiels, Annahme M37).
 //   2. Thema, dessen Lernziel die Wortart selbst ist → Wortart-Zeichen. Nur über die ausdrückliche Liste WORTART
 //      (Themen-Id → Wortart, aus dem Fach grammatik von lernplan.json; ein Test prüft, dass jede Id dort existiert).
 //      Keine Erkennung über Namen oder Bereich: Pronomen, Rechtschreibung über Nomen, Formenbildung usw. bekommen
@@ -23,7 +26,7 @@
 
 /** @typedef {{ objekt: string, wert?: "zahl"|null }} RegalBild */
 /** @typedef {{ id: string, name?: string, strang?: string, bereich?: string, art?: string|null, zahl?: number|null, regal?: RegalBild|null }} Material */
-/** @typedef {{ baustein: "perlenstab", wert: number } | { baustein: "wortart", wert: "nomen"|"verb"|"adjektiv"|"artikel" } | { baustein: "karte", wert: string, fach?: string } | { baustein: "objekt", art: string, wert: string }} Baustein */
+/** @typedef {{ baustein: "perlenstab", wert: number } | { baustein: "perlenkette", wert: number } | { baustein: "wortart", wert: "nomen"|"verb"|"adjektiv"|"artikel" } | { baustein: "karte", wert: string, fach?: string } | { baustein: "objekt", art: string, wert: string }} Baustein */
 
 import { FACH_SYMBOLE, bild } from "./stil.js";
 
@@ -33,6 +36,16 @@ export const BUCHSTABEN_BEREICHE = new Set(["Buchstaben und Laute", "Buchstabeng
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
 
 const MIT_ZAHL = new Set(["zerlegung", "rechnen", "zwillinge", "menge"]);
+
+/**
+ * Themen-Id → Reihe des Einmaleins (Aufgabenart mal mit reihe, lernplan.json; ein Test prüft, dass es die Ids gibt
+ * und ihre reihe passt). Über die Id, weil das Material eines Themas nur Art und Zahl trägt (lernsteuerung.js).
+ * @type {Record<string, number>}
+ */
+export const REIHE = {
+  zweierreihe: 2, dreierreihe: 3, viererreihe: 4, fuenferreihe: 5, sechserreihe: 6,
+  siebenerreihe: 7, achterreihe: 8, neunerreihe: 9, zehnerreihe: 10,
+};
 
 /**
  * Themen-Id → Wortart (nur Themen, deren Lernziel die Wortart selbst ist).
@@ -65,6 +78,7 @@ export function materialFuer(thema) {
   if (thema.art && MIT_ZAHL.has(thema.art) && Number.isInteger(zahl) && /** @type {number} */ (zahl) >= 1 && /** @type {number} */ (zahl) <= 10) {
     return { baustein: "perlenstab", wert: /** @type {number} */ (zahl) };
   }
+  if (Object.hasOwn(REIHE, thema.id)) return { baustein: "perlenkette", wert: REIHE[thema.id] };
   const wortart = wortartVon(thema);
   if (wortart) return { baustein: "wortart", wert: wortart };
   if (BUCHSTABEN_BEREICHE.has(thema.bereich ?? "")) {
@@ -126,6 +140,9 @@ export function bausteinHtml(b) {
     return `<ls-objekt art="${b.art}"${wert ? ` wert="${wert}"` : ""} still aria-hidden="true"></ls-objekt>`;
   }
   if (b.baustein === "perlenstab") return `<ls-perlenstab wert="${wert}" aria-hidden="true"></ls-perlenstab>`;
+  // Kurzkette in fester Größe (die Perlenkette misst sich über Attribute in rem, nicht über die Höhe aus dem CSS):
+  // zehn Stäbe zu 2,2 × 1,1 rem in zwei Reihen, etwa 13 × 2,7 rem.
+  if (b.baustein === "perlenkette") return `<ls-perlenkette reihe="${wert}" kurz="10" breite="13" perle="1.1" aria-hidden="true"></ls-perlenkette>`;
   if (b.baustein === "wortart") return `<ls-wortart art="${wert}" aria-hidden="true"></ls-wortart>`;
   if (wert) return `<span class="karte" aria-hidden="true">${wert}</span>`;
   const fach = b.baustein === "karte" && b.fach && FACH_SYMBOLE.has(b.fach) ? b.fach : "";

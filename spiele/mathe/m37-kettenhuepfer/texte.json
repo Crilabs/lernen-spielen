@@ -1,0 +1,173 @@
+{
+ "hinweis": "Alle Sätze von M37 Kettenhüpfer, die aus Daten kommen (je Reihe n und Faktor a ausgeschrieben, keine zur Laufzeit zusammengesetzten Sätze). Feste Sätze stehen als Zeichenkette im Aufruf blase.sage in spiel.js. Fakten (In echt …) mit Quelle: docs/spiele/mathe/m37-kettenhuepfer.md Abschnitt 4.",
+ "anfang": {
+  "2": {
+   "reihe": "Der Vorratskorb wird gefüllt. In echt hat ein Schuhpaar zwei Schuhe. Ein Stäbchen sind die Schuhe von einem Schuhpaar.",
+   "setzung": "Der Vorratskorb wird gefüllt. Hier hat ein Schuhpaar zwei Schuhe. Ein Stäbchen sind die Schuhe von einem Schuhpaar."
+  },
+  "3": {
+   "reihe": "Der Vorratskorb wird gefüllt. Hier kommen in eine Ballröhre drei Bälle. Ein Stäbchen sind die Bälle von einer Ballröhre.",
+   "setzung": "Der Vorratskorb wird gefüllt. Hier kommen in eine Ballröhre drei Bälle. Ein Stäbchen sind die Bälle von einer Ballröhre."
+  },
+  "4": {
+   "reihe": "Der Vorratskorb wird gefüllt. Hier hat ein Gedeck vier Dinge: Teller, Gabel, Löffel und Becher. Ein Stäbchen sind die Dinge von einem Gedeck.",
+   "setzung": "Der Vorratskorb wird gefüllt. Hier hat ein Gedeck vier Dinge: Teller, Gabel, Löffel und Becher. Ein Stäbchen sind die Dinge von einem Gedeck."
+  },
+  "5": {
+   "reihe": "Der Vorratskorb wird gefüllt. Hier kommen in eine Brötchentüte fünf Brötchen. Ein Stäbchen sind die Brötchen von einer Brötchentüte.",
+   "setzung": "Der Vorratskorb wird gefüllt. Hier kommen in eine Brötchentüte fünf Brötchen. Ein Stäbchen sind die Brötchen von einer Brötchentüte."
+  },
+  "6": {
+   "reihe": "Der Vorratskorb wird gefüllt. Hier kommen in einen Eierkarton sechs Eier. Ein Stäbchen sind die Eier von einem Eierkarton.",
+   "setzung": "Der Vorratskorb wird gefüllt. Hier kommen in einen Eierkarton sechs Eier. Ein Stäbchen sind die Eier von einem Eierkarton."
+  },
+  "7": {
+   "reihe": "Der Vorratskorb wird gefüllt. In echt hat eine Woche sieben Tage. Hier hat eine Wochenschachtel ein Fach für jeden Tag. Ein Stäbchen sind die Fächer von einer Wochenschachtel.",
+   "setzung": "Der Vorratskorb wird gefüllt. Hier hat eine Wochenschachtel sieben Fächer. Ein Stäbchen sind die Fächer von einer Wochenschachtel."
+  },
+  "8": {
+   "reihe": "Der Vorratskorb wird gefüllt. Hier kommen in eine Stiftebox acht Stifte. Ein Stäbchen sind die Stifte von einer Stiftebox.",
+   "setzung": "Der Vorratskorb wird gefüllt. Hier kommen in eine Stiftebox acht Stifte. Ein Stäbchen sind die Stifte von einer Stiftebox."
+  },
+  "9": {
+   "reihe": "Der Vorratskorb wird gefüllt. Hier kommen in einen Muffinkarton neun Muffins. Ein Stäbchen sind die Muffins von einem Muffinkarton.",
+   "setzung": "Der Vorratskorb wird gefüllt. Hier kommen in einen Muffinkarton neun Muffins. Ein Stäbchen sind die Muffins von einem Muffinkarton."
+  },
+  "10": {
+   "reihe": "Der Vorratskorb wird gefüllt. In echt ist eine Zehn-Cent-Münze zehn Cent wert. Ein Stäbchen sind die Cent von einer Zehn-Cent-Münze.",
+   "setzung": "Der Vorratskorb wird gefüllt. Hier hat eine Zehn-Cent-Münze zehn Cent. Ein Stäbchen sind die Cent von einer Zehn-Cent-Münze."
+  }
+ },
+ "wechsel": {
+  "2": "Jetzt sind es Schuhpaare. Ein Stäbchen sind die Schuhe von einem Schuhpaar.",
+  "3": "Jetzt sind es Ballröhren. Ein Stäbchen sind die Bälle von einer Ballröhre.",
+  "4": "Jetzt sind es Gedecke. Ein Stäbchen sind die Dinge von einem Gedeck.",
+  "5": "Jetzt sind es Brötchentüten. Ein Stäbchen sind die Brötchen von einer Brötchentüte.",
+  "6": "Jetzt sind es Eierkartons. Ein Stäbchen sind die Eier von einem Eierkarton.",
+  "7": "Jetzt sind es Wochenschachteln. Ein Stäbchen sind die Fächer von einer Wochenschachtel.",
+  "8": "Jetzt sind es Stifteboxen. Ein Stäbchen sind die Stifte von einer Stiftebox.",
+  "9": "Jetzt sind es Muffinkartons. Ein Stäbchen sind die Muffins von einem Muffinkarton.",
+  "10": "Jetzt sind es Zehn-Cent-Münzen. Ein Stäbchen sind die Cent von einer Zehn-Cent-Münze."
+ },
+ "timo": {
+  "2": "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Schuhe von einem Schuhpaar.",
+  "3": "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Bälle von einer Ballröhre.",
+  "4": "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Dinge von einem Gedeck.",
+  "5": "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Brötchen von einer Brötchentüte.",
+  "6": "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Eier von einem Eierkarton.",
+  "7": "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Fächer von einer Wochenschachtel.",
+  "8": "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Stifte von einer Stiftebox.",
+  "9": "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Muffins von einem Muffinkarton.",
+  "10": "Timo überlegt und tippt die Zahl. Das Pfeilchen hüpft und rastet ein. Ein Stäbchen sind die Cent von einer Zehn-Cent-Münze."
+ },
+ "auftrag": {
+  "2": {
+   "1": "Ein Schuhpaar. Wie viele Schuhe sind es?",
+   "2": "Zwei Schuhpaare. Wie viele Schuhe sind es zusammen?",
+   "3": "Drei Schuhpaare. Wie viele Schuhe sind es zusammen?",
+   "4": "Vier Schuhpaare. Wie viele Schuhe sind es zusammen?",
+   "5": "Fünf Schuhpaare. Wie viele Schuhe sind es zusammen?",
+   "6": "Sechs Schuhpaare. Wie viele Schuhe sind es zusammen?",
+   "7": "Sieben Schuhpaare. Wie viele Schuhe sind es zusammen?",
+   "8": "Acht Schuhpaare. Wie viele Schuhe sind es zusammen?",
+   "9": "Neun Schuhpaare. Wie viele Schuhe sind es zusammen?",
+   "10": "Zehn Schuhpaare. Wie viele Schuhe sind es zusammen?"
+  },
+  "3": {
+   "1": "Eine Ballröhre. Wie viele Bälle sind es?",
+   "2": "Zwei Ballröhren. Wie viele Bälle sind es zusammen?",
+   "3": "Drei Ballröhren. Wie viele Bälle sind es zusammen?",
+   "4": "Vier Ballröhren. Wie viele Bälle sind es zusammen?",
+   "5": "Fünf Ballröhren. Wie viele Bälle sind es zusammen?",
+   "6": "Sechs Ballröhren. Wie viele Bälle sind es zusammen?",
+   "7": "Sieben Ballröhren. Wie viele Bälle sind es zusammen?",
+   "8": "Acht Ballröhren. Wie viele Bälle sind es zusammen?",
+   "9": "Neun Ballröhren. Wie viele Bälle sind es zusammen?",
+   "10": "Zehn Ballröhren. Wie viele Bälle sind es zusammen?"
+  },
+  "4": {
+   "1": "Ein Gedeck. Wie viele Dinge sind es?",
+   "2": "Zwei Gedecke. Wie viele Dinge sind es zusammen?",
+   "3": "Drei Gedecke. Wie viele Dinge sind es zusammen?",
+   "4": "Vier Gedecke. Wie viele Dinge sind es zusammen?",
+   "5": "Fünf Gedecke. Wie viele Dinge sind es zusammen?",
+   "6": "Sechs Gedecke. Wie viele Dinge sind es zusammen?",
+   "7": "Sieben Gedecke. Wie viele Dinge sind es zusammen?",
+   "8": "Acht Gedecke. Wie viele Dinge sind es zusammen?",
+   "9": "Neun Gedecke. Wie viele Dinge sind es zusammen?",
+   "10": "Zehn Gedecke. Wie viele Dinge sind es zusammen?"
+  },
+  "5": {
+   "1": "Eine Brötchentüte. Wie viele Brötchen sind es?",
+   "2": "Zwei Brötchentüten. Wie viele Brötchen sind es zusammen?",
+   "3": "Drei Brötchentüten. Wie viele Brötchen sind es zusammen?",
+   "4": "Vier Brötchentüten. Wie viele Brötchen sind es zusammen?",
+   "5": "Fünf Brötchentüten. Wie viele Brötchen sind es zusammen?",
+   "6": "Sechs Brötchentüten. Wie viele Brötchen sind es zusammen?",
+   "7": "Sieben Brötchentüten. Wie viele Brötchen sind es zusammen?",
+   "8": "Acht Brötchentüten. Wie viele Brötchen sind es zusammen?",
+   "9": "Neun Brötchentüten. Wie viele Brötchen sind es zusammen?",
+   "10": "Zehn Brötchentüten. Wie viele Brötchen sind es zusammen?"
+  },
+  "6": {
+   "1": "Ein Eierkarton. Wie viele Eier sind es?",
+   "2": "Zwei Eierkartons. Wie viele Eier sind es zusammen?",
+   "3": "Drei Eierkartons. Wie viele Eier sind es zusammen?",
+   "4": "Vier Eierkartons. Wie viele Eier sind es zusammen?",
+   "5": "Fünf Eierkartons. Wie viele Eier sind es zusammen?",
+   "6": "Sechs Eierkartons. Wie viele Eier sind es zusammen?",
+   "7": "Sieben Eierkartons. Wie viele Eier sind es zusammen?",
+   "8": "Acht Eierkartons. Wie viele Eier sind es zusammen?",
+   "9": "Neun Eierkartons. Wie viele Eier sind es zusammen?",
+   "10": "Zehn Eierkartons. Wie viele Eier sind es zusammen?"
+  },
+  "7": {
+   "1": "Eine Wochenschachtel. Wie viele Fächer sind es?",
+   "2": "Zwei Wochenschachteln. Wie viele Fächer sind es zusammen?",
+   "3": "Drei Wochenschachteln. Wie viele Fächer sind es zusammen?",
+   "4": "Vier Wochenschachteln. Wie viele Fächer sind es zusammen?",
+   "5": "Fünf Wochenschachteln. Wie viele Fächer sind es zusammen?",
+   "6": "Sechs Wochenschachteln. Wie viele Fächer sind es zusammen?",
+   "7": "Sieben Wochenschachteln. Wie viele Fächer sind es zusammen?",
+   "8": "Acht Wochenschachteln. Wie viele Fächer sind es zusammen?",
+   "9": "Neun Wochenschachteln. Wie viele Fächer sind es zusammen?",
+   "10": "Zehn Wochenschachteln. Wie viele Fächer sind es zusammen?"
+  },
+  "8": {
+   "1": "Eine Stiftebox. Wie viele Stifte sind es?",
+   "2": "Zwei Stifteboxen. Wie viele Stifte sind es zusammen?",
+   "3": "Drei Stifteboxen. Wie viele Stifte sind es zusammen?",
+   "4": "Vier Stifteboxen. Wie viele Stifte sind es zusammen?",
+   "5": "Fünf Stifteboxen. Wie viele Stifte sind es zusammen?",
+   "6": "Sechs Stifteboxen. Wie viele Stifte sind es zusammen?",
+   "7": "Sieben Stifteboxen. Wie viele Stifte sind es zusammen?",
+   "8": "Acht Stifteboxen. Wie viele Stifte sind es zusammen?",
+   "9": "Neun Stifteboxen. Wie viele Stifte sind es zusammen?",
+   "10": "Zehn Stifteboxen. Wie viele Stifte sind es zusammen?"
+  },
+  "9": {
+   "1": "Ein Muffinkarton. Wie viele Muffins sind es?",
+   "2": "Zwei Muffinkartons. Wie viele Muffins sind es zusammen?",
+   "3": "Drei Muffinkartons. Wie viele Muffins sind es zusammen?",
+   "4": "Vier Muffinkartons. Wie viele Muffins sind es zusammen?",
+   "5": "Fünf Muffinkartons. Wie viele Muffins sind es zusammen?",
+   "6": "Sechs Muffinkartons. Wie viele Muffins sind es zusammen?",
+   "7": "Sieben Muffinkartons. Wie viele Muffins sind es zusammen?",
+   "8": "Acht Muffinkartons. Wie viele Muffins sind es zusammen?",
+   "9": "Neun Muffinkartons. Wie viele Muffins sind es zusammen?",
+   "10": "Zehn Muffinkartons. Wie viele Muffins sind es zusammen?"
+  },
+  "10": {
+   "1": "Eine Zehn-Cent-Münze. Wie viele Cent sind es?",
+   "2": "Zwei Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?",
+   "3": "Drei Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?",
+   "4": "Vier Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?",
+   "5": "Fünf Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?",
+   "6": "Sechs Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?",
+   "7": "Sieben Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?",
+   "8": "Acht Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?",
+   "9": "Neun Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?",
+   "10": "Zehn Zehn-Cent-Münzen. Wie viele Cent sind es zusammen?"
+  }
+ }
+}

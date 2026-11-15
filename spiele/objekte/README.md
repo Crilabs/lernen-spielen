@@ -12,10 +12,17 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
   (Aufkleber: Dose und Karton). Farben der Welt-Schicht, heller und weicher als die Perlen (6.2).
 - `schuhpaar.js` – ein Paar Turnschuhe (blau und koralle).
 - `papier.js` – zerknülltes Heftpapier. `dose.js` – leere Konservendose (keine Getränkedose: die hat Pfand).
-- `muenze.js` – kleiner Stapel goldfarbener Münzen mit einer Münze daneben (ohne Ziffer und Wappen).
+- `muenze.js` – kleiner Stapel goldfarbener Münzen mit einer Münze daneben (ohne Ziffer und Wappen); Zustand
+  `zehn-cent`: eine Zehn-Cent-Münze mit der Prägung „10“ wie die echte (Packung der Zehnerreihe in M37).
+- `ballroehre.js` – durchsichtige Röhre mit drei Bällen. `wochenschachtel.js` – Schachtel mit sieben Fächern, Deckel
+  aufgeklappt. `stiftebox.js` – Dose mit acht Buntstiften. `muffinkarton.js` – Karton mit neun Muffins (3 × 3). Alle
+  ohne Schrift und Ziffer, Farben nur aus den Welt-Paletten (Packungen der Reihen 3, 7, 8, 9 in M37).
 - `broetchen.js` – Papiertüte vom Bäcker mit zwei Brötchen (ohne Schrift und Ziffer).
 - `eierkarton.js` – offener Eierkarton aus Pappe mit sechs Mulden und je einem Ei (ohne Schrift und Ziffer).
 - `gedeck.js` – ein gedeckter Platz von oben: Teller, Gabel, Löffel und Becher (vier Dinge; ohne Schrift und Ziffer).
+- `einkaufskorb.js` – geflochtener Einkaufskorb mit hohem Henkel (leer, gefuellt: Packungen schauen heraus); Figur von
+  M37 Kettenhüpfer, Packungen fallen hinein (Einwurf), der Korb wackelt satt. Ausgabe im Maßstab 1,5, damit die
+  Kontur bei der Spielgröße so stark ist wie bei den Kindern der Runde.
 - `nudelteller.js` – zwei flache Teller nebeneinander mit Nudeln (Penne), links drei, rechts vier (eine Zahl in zwei Teilen; ohne Schrift und Ziffer).
 - `wuerfel.js` – ein Spielwürfel, schräg von oben, drei Seiten mit Augen (ohne Ziffer und Schrift).
 - `versteckvorhang.js` – ein Vorhang an der Stange mit angehobenem Saum, darunter zwei Schuhspitzen (Versteckspiel;

@@ -69,3 +69,66 @@ export function perlenstab(wert) {
     marke: n > 5 ? 5 * SCHRITT + LUECKE / 2 : null,
   };
 }
+
+// --- Perlenkette (Einmaleins, <ls-perlenkette>) -------------------------------------------------------------
+// Eine Kette von n sind gleiche Stäbchen zu je n Perlen hintereinander (Montessori-Kurzkette, hier zehn Stäbchen),
+// in Reihen zu fünf, beide Reihen von links nach rechts (wie gelesen). Zwischen zwei Stäbchen liegt ein GLIED. Am
+// Ende jedes Stäbchens ist der Ort seines Pfeilchens (Zahl k · n).
+
+/** Abstand zwischen zwei Stäbchen der Kette (das Glied), in Perlendurchmessern. */
+export const GLIED = 0.9;
+
+/**
+ * @typedef {{ nr: number, reihe: number, x0: number, x1: number, perlen: number[], marke: number | null }} KettenStab
+ *   nr 1 … staebchen; x0/x1 Anfang und Ende entlang der Reihe; perlen: Lage der Perlenmitten; marke: Fünfermarke
+ * @typedef {{ n: number, staebchen: KettenStab[], reihen: number, breite: number, hoehe: number,
+ *   ort: (zahl: number) => { reihe: number, x: number, ueber: boolean } }} Kette
+ */
+
+/**
+ * Geometrie der Kette von n.
+ * @param {unknown} wert n, ganze Zahl 1 bis 10
+ * @param {{ staebchen?: number, jeReihe?: number }} [o] Anzahl der Stäbchen (Vorgabe 10) und je Reihe (Vorgabe 5)
+ * @returns {Kette | null}
+ */
+export function perlenkette(wert, { staebchen = 10, jeReihe = 5 } = {}) {
+  const n = wertAus(wert);
+  if (n === null || !Number.isInteger(staebchen) || staebchen < 1 || staebchen > 10 || !Number.isInteger(jeReihe) || jeReihe < 1) return null;
+  const stab = /** @type {Stab} */ (perlenstab(n));
+  /** @type {KettenStab[]} */
+  const liste = [];
+  for (let i = 0; i < staebchen; i++) {
+    const x0 = (i % jeReihe) * (stab.laenge + GLIED);
+    liste.push({ nr: i + 1, reihe: Math.floor(i / jeReihe), x0, x1: x0 + stab.laenge, perlen: stab.perlen.map((p) => x0 + p), marke: stab.marke === null ? null : x0 + stab.marke });
+  }
+  const proReihe = Math.min(jeReihe, staebchen);
+  const breite = proReihe * stab.laenge + (proReihe - 1) * GLIED;
+  return {
+    n,
+    staebchen: liste,
+    reihen: Math.ceil(staebchen / jeReihe),
+    breite,
+    hoehe: HOEHE,
+    /**
+     * Stelle nach `zahl` Perlen: am Ende eines Stäbchens (Mitte des folgenden Glieds) oder zwischen zwei Perlen;
+     * hinter der letzten Perle (ueber) ein Glied hinter dem Ende der Kette.
+     * @param {number} zahl
+     */
+    ort(zahl) {
+      const z = Math.max(0, Math.round(zahl));
+      if (z === 0) return { reihe: 0, x: -GLIED / 2, ueber: false };
+      if (z > staebchen * n) {
+        const letzter = liste[liste.length - 1];
+        return { reihe: letzter.reihe, x: letzter.x1 + GLIED * 1.5, ueber: true };
+      }
+      const k = Math.floor(z / n);
+      const r = z % n;
+      if (r === 0) {
+        const s = liste[k - 1];
+        return { reihe: s.reihe, x: s.x1 + GLIED / 2, ueber: false };
+      }
+      const s = liste[k];
+      return { reihe: s.reihe, x: (s.perlen[r - 1] + s.perlen[r]) / 2, ueber: false };
+    },
+  };
+}

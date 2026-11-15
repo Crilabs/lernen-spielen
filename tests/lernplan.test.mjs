@@ -269,6 +269,11 @@ for (const t of mitEinfuehrung) {
         }
         else if (b.perlen !== undefined) for (const p of b.perlen) assert.ok(Number.isInteger(p) && p >= 1 && p <= 10, `${wo}: Perlenstab ${p}`);
         else if (b.zahl !== undefined) assert.ok(typeof b.zahl === "number" || !/[{}]/.test(b.zahl), `${wo}: Zahl ${b.zahl}`);
+        else if (b.objekt !== undefined) {
+          // Ding der Sachwelt (spiele/objekte/<art>.js), z. B. der Korb in der eigenen Einführung von M37
+          assert.ok(/^[a-z][a-z0-9-]*$/.test(b.objekt) && vorlageDa(`objekte/${b.objekt}.js`), `${wo}: Objekt ${b.objekt} fehlt in spiele/objekte/`);
+          for (const k of Object.keys(b)) assert.ok(["objekt", "zustand", "x", "hoehe"].includes(k), `${wo}: unbekanntes Feld ${k}`);
+        }
         else assert.fail(`${wo}: unbekanntes Bildelement ${JSON.stringify(b)}`);
         if (b.x !== undefined) assert.ok(typeof b.x === "number" && b.x >= 0 && b.x <= 100, `${wo}: x ${b.x}`);
       }
@@ -320,6 +325,8 @@ test("Einführung zerlegen: Werte h und r teilen n nahe der Mitte", () => {
 
 // Ketten wie „17 + 6 = 17 + 3 + 3 = 23“ oder „13 − 5 = 8“: jede Seite von links nach rechts gerechnet, alle gleich, nie negativ.
 const rechne = (ausdruck, wo) => {
+  // Malpunkt zuerst (Einmaleins, M37): „3 · 7“ wird zu 21, dann von links nach rechts plus und minus.
+  ausdruck = ausdruck.replace(/(\d+)\s*·\s*(\d+)/g, (_, a, b) => String(Number(a) * Number(b)));
   const teile = ausdruck.replace(/−/g, "-").match(/\d+|[+-]/g);
   let wert = Number(teile[0]);
   for (let i = 1; i < teile.length; i += 2) {
@@ -333,7 +340,7 @@ test("Einführungen: Gleichungen in zeig stimmen (mit den Werten jedes Themas)",
   for (const t of mitEinfuehrung) {
     const szenen = fuelleVorlage(lade(`../spiele/${t.einfuehrung.vorlage}`), t.einfuehrung.werte);
     for (const [i, s] of szenen.entries()) {
-      for (const kette of s.zeig.match(/\d+(?:\s*[+\-−=]\s*\d+)+/g) ?? []) {
+      for (const kette of s.zeig.match(/\d+(?:\s*[+\-−=·]\s*\d+)+/g) ?? []) {
         if (!kette.includes("=")) continue;
         const wo = `${t.id} Szene ${i + 1}`;
         const seiten = kette.split("=").map((x) => rechne(x, wo));

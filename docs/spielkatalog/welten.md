@@ -10,10 +10,10 @@ Grundlage: `docs/grundsaetze.md` §9 und §10 (K1–K15), `docs/figuren.md`, Wel
 
 **Zahlen**
 - 138 Spiele, jedes hat genau eine Heimatwelt. Die Zuordnung ist gegenüber der ersten Fassung unverändert.
-- 113 Welten in `lernplan.json`. **106 Welten** sind Heimat, davon 74 mit einem und **32 mit zwei Spielen**. Keine Welt hat mehr als zwei.
+- 114 Welten in `lernplan.json`. **107 Welten** sind Heimat, davon 76 mit einem und **31 mit zwei Spielen**. Keine Welt hat mehr als zwei.
 - **7 Welten** haben kein Spiel (Abschnitt 4): vulkanausbruch, dinosaurier-aussterben, dinosaurier, nicht-schuld, familien, beruehrungen, hilfe-holen.
 - **Jedes Spiel hat alle drei Stufen** (ruhig, sanft, abenteuer). Die frühere Einteilung in 80 „ruhig feste“ und 58 „anpassbare“ Spiele ist aufgehoben (Hauptdokument 4.2).
-- Rahmen der Geschichten: Forschen 24, Versorgen 17, Fest 17, Reise 15, Bauen 14, Werkstatt 13, Miteinander 11, Spur 11, Entdecken 9, Zeitreise 7.
+- Rahmen der Geschichten: Forschen 23, Versorgen 18, Fest 17, Reise 15, Bauen 14, Werkstatt 13, Miteinander 11, Spur 11, Entdecken 9, Zeitreise 7.
 - Spannungsquellen: Rätsel 40, Vorhersage 27, Lücke 24, Durcheinander 18, Verwandlung 14, Hilfe 8, Wissensvorsprung 7.
 - Fähigkeiten aus `figuren.md` §5 kommen in 31 Spielen vor, immer nur in der Szene.
 
@@ -33,7 +33,7 @@ Grundlage: `docs/grundsaetze.md` §9 und §10 (K1–K15), `docs/figuren.md`, Wel
 - Geändert wurden dabei unter anderem: S15 zu wenn-etwas-schiefgeht; gewitter zu M48 statt Z01 (Donner wäre ein plötzliches lautes Geräusch); G06 zu mensch-und-natur; M04 zu koerperteile; M06 zu feuer-notruf; M12 zu samen-reisen; M32 zu jahrhunderte; R13 zu karten.
 
 **Alter**
-- Bei 74 Spielen liegen Themen zwei oder mehr Klassen von der Klasse ihrer Welt entfernt (194 von 956 Themen). Das liegt am Zuschnitt: Viele Spiele laufen über mehrere Klassen, 62 der 113 Welten gehören zu Kl. 1.
+- Bei 74 Spielen liegen Themen zwei oder mehr Klassen von der Klasse ihrer Welt entfernt (194 von 956 Themen). Das liegt am Zuschnitt: Viele Spiele laufen über mehrere Klassen, 62 der 114 Welten gehören zu Kl. 1.
 - Die erste Fassung nannte nur drei Paarungen (M10, M31, M52), weil sie den Abstand zur nächstgelegenen Klasse des Spiels maß.
 - Antwort darauf ist die Zeile „Sache wächst mit“ (65 Spiele; bei den übrigen 9 ist nur je ein Thema betroffen). Ein Tausch von Welten hätte das Problem nur verschoben.
 
@@ -41,7 +41,7 @@ Grundlage: `docs/grundsaetze.md` §9 und §10 (K1–K15), `docs/figuren.md`, Wel
 - S18 Selbst schreiben → schulweg, L02 Abzählen → tiere-der-erdteile, Z04 Hörbühne → fuer-andere-einstehen, Z02 Wäscheleine → haende-sonne, S14 Die Karte → gute-schlechte-geheimnisse (trägt nur die gute Hälfte der Regel; die andere steht in der Pause), M14 Zwei Tonnen → muell-trennen (die Sorten bestimmen die Zerlegung, das Kind wählt sie nicht).
 
 **Doppel im selben Fach** (bewusst stehen gelassen)
-- was-pflanzen-brauchen: R08 Fläche und R09 Umfang (zum Mischen gewollt). jahreskreis: M27 und M49. wiese-und-hecke: M35 und M37. karten: R11 und R13. tuerme-bauen: M28 und R12.
+- was-pflanzen-brauchen: R08 Fläche und R09 Umfang (zum Mischen gewollt). jahreskreis: M27 und M49. karten: R11 und R13. tuerme-bauen: M28 und R12.
 
 **Stufen der Welten** (`stufe_ab` sanft)
 - gebirge-vulkane (M09): auf „ruhig“ nur Berge und Höhen, das Erdinnere ab „sanft“ in der Pause, Ausbruch nur in der Pause auf „abenteuer“.
@@ -326,13 +326,13 @@ So ist jeder Eintrag zu lesen:
 - Sanft: Vier Kinder kommen dazu. Eine Reihe mehr oder eine Spalte mehr? Die Nachbaraufgabe zeigt es.
 - Abenteuer: Mit den Riesenstiefeln schaut die Runde über mehrere Runden von oben auf Schule, Parkplatz, Obstwiese und Stadion: überall Reihen. Am Ende liegt da ein Feld, das von oben ein Bild ergibt. Bäuerin Aylin hat ein Muster gesät.
 
-**M37 Kettenhüpfer** · Tiere auf Wiese und Hecke (`wiese-und-hecke`) · Kl. 2–4 (Schw. 2) / 1
-- Sachgrund: Tiere in Wiese und Hecke haben gleich viele Beine je Art (Vogel 2, Hase 4, Käfer 6, Spinne 8): Einmaleinsreihen.
-- Sache wächst mit: Kl. 2: Beine je Tier als Einmaleinsreihen. Kl. 3–4: Zählungen wie bei echten Naturschutz-Zählungen, Teiler und Vielfache in den Listen.
-- Rahmen: Forschen · Spannung aus: Rätsel
-- Ruhig: Hecken-Beobachtung: Vögel haben zwei Beine, Hasen vier, Käfer sechs, Spinnen acht. Jeder Hüpfer auf der Kette zählt ein Tier weiter; die Gruppe kommt ins Heft.
-- Sanft: Im Heft steht „48 Beine“, aber nicht, von wem. Auf welchen Ketten hat die 48 ein Pfeilchen? Es waren Käfer.
-- Abenteuer: Abendzählung über mehrere Runden mit der Naturschützerin: In der Dämmerung kommen andere Tiere. Es knackt im Gebüsch. Ein Reh schaut heraus und geht weiter. Am Ende steht die Jahresliste der Hecke.
+**M37 Kettenhüpfer** · Vorrat und Packungen (`vorrat-und-packungen`) · Kl. 2–4 (Schw. 2) / 2 **(Christian, 2026-11-14: statt Wiese und Hecke)**
+- Sachgrund: Dinge kommen in festen Gruppen, jede Reihe hat ihre Packung (Schuhpaar 2, Ballröhre 3, Gedeck 4, Brötchentüte 5, Eierkarton 6, Wochenschachtel 7, Stiftebox 8, Muffinkarton 9, Zehn-Cent-Münze 10): Einmaleinsreihen. Fest sind nur Paar, Woche und Cent; die übrigen Packungsgrößen sind Setzungen des Spiels.
+- Sache wächst mit: Kl. 2: Packungen einräumen und zählen. Kl. 3–4: Lieferungen und Vorräte für Küche und Schulfest, Teiler und Vielfache auf den Packzetteln.
+- Rahmen: Versorgen · Spannung aus: Rätsel
+- Ruhig: Der Vorratskorb wird gefüllt: Jede Malaufgabe bringt so viele Packungen in den Korb, wie die erste Zahl sagt; jeder Hüpfer auf der Kette ist eine Packung, die Zeile kommt auf die Vorratsliste.
+- Sanft: Auf der Vorratsliste ist eine Zeile verwischt. Die Kette darunter zeigt, wohin sie gehört. Kl. 3–4: Ein Karton hat keinen Aufkleber, nur „48“; auf welchen Ketten hat die 48 ein Pfeilchen?
+- Abenteuer: Vorrat fürs Schulfest über mehrere Runden: Lieferung für Küche, Bäckerei, Schreibwaren. Es klopft am Lagertor, der Lieferwagen steht davor und fährt weiter. Am Ende steht das Regal der Schulküche voll.
 
 **M38 Gerecht verteilen** · Gerecht teilen und abwechseln (`gerecht-teilen`) · Kl. 2–4 (Schw. 4) / 2
 - Sachgrund: Gerecht teilen ist Lernkern der Welt: gleich viel für jeden, der Rest wird abgewechselt.
@@ -1110,7 +1110,8 @@ So ist jeder Eintrag zu lesen:
 
 | Welt (id) | Klasse | stufe_ab | Spiele |
 |---|---|---|---|
-| Tiere auf Wiese und Hecke (`wiese-und-hecke`) | 1 | ruhig | M35 Tüten packen, M37 Kettenhüpfer |
+| Tiere auf Wiese und Hecke (`wiese-und-hecke`) | 1 | ruhig | M35 Tüten packen |
+| Vorrat und Packungen (`vorrat-und-packungen`) | 2 | ruhig | M37 Kettenhüpfer |
 | Fell, Federn, Schuppen (`fell-federn-schuppen`) | 1 | ruhig | G01 Dreieck und Kreis |
 | Tarnen und Verstecken (`tarnen-verstecken`) | 1 | ruhig | L03 Geheimsprache, S07 Merken |
 | Wer frisst was? (`wer-frisst-was`) | 1 | sanft | G04 Satz-Bilder |

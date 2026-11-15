@@ -77,3 +77,15 @@ meldeBewegung({
 
 meldeBewegung({ id: "schrumpfen", ansicht: "dreiviertel", ende: "klein", schritte: [{ ms: 800, haltung: "klein" }] });
 meldeBewegung({ id: "wachsen", ansicht: "dreiviertel", ende: "gross", schritte: [{ ms: 800, haltung: "gross" }] });
+
+// Nicken: der Kopf nickt zweimal kurz, das Gesicht freut sich leise (eine ruhige Antwort, z. B. wenn etwas gelungen
+// ist, das die Figur mit ansieht; M37). Nur der Kopf bewegt sich, darum gilt es auch im Rollstuhl.
+meldeBewegung({
+  id: "nicken", ansicht: "dreiviertel", ende: "stehen",
+  schritte: [
+    { ms: 160, winkel: { kopf: 9 }, gesicht: "freuen-klein" },
+    { ms: 170, winkel: { kopf: -3 } },
+    { ms: 160, winkel: { kopf: 8 } },
+    { ms: 260, winkel: { kopf: 0 } },
+  ],
+});

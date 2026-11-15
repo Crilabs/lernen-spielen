@@ -97,10 +97,10 @@ Jedes der 138 Spiele hat alle drei Stimmungen (Abschnitt 4.2).
   sich eine Geschichte bauen (Anlass, jede richtige Lernhandlung bringt sie voran, Halt am Rundenende, genug Stoff
   für viele Runden, bei „anpassbar“ ein Bogen über alle Stufen); die Welt ist auf „ruhig“ tragbar; sie passt zum
   Alter (siehe „Sache wächst mit“ unten).
-- Ergebnis: 106 von 113 Welten sind Heimat, 32 davon für zwei Spiele. **Sieben Welten haben keine Heimat**, weil
+- Ergebnis: 107 von 114 Welten sind Heimat, 31 davon für zwei Spiele. **Sieben Welten haben keine Heimat**, weil
   ihre eigenen Regeln es verbieten oder kein Spiel mit richtiger Antwort sie trägt (Abschnitt 7a).
 - **Sache wächst mit (Annahme).** Die Klasse einer Welt sagt, ab wann sie passt. Viele Spiele laufen über mehrere
-  Klassen, und 62 der 113 Welten gehören zu Kl. 1. Bei 74 Spielen liegen deshalb Themen zwei oder mehr Klassen
+  Klassen, und 62 der 114 Welten gehören zu Kl. 1. Bei 74 Spielen liegen deshalb Themen zwei oder mehr Klassen
   von der Klasse ihrer Welt entfernt (194 von 956 Themen).
   - Regel: Der Sachstoff einer Runde richtet sich nach der Klasse des Themas der Runde, nicht nach der Klasse der
     Welt. Ein Kind in Kl. 4 bekommt in der Welt „Haustiere“ Futterplan und Kosten, nicht „Meerschweinchen brauchen Heu“.
@@ -180,8 +180,8 @@ setzen nichts zurück, die Runde der vier Kinder begleitet und jedes Kind zeigt 
   - *Rätsel:* wer, wo oder was war das? · *Vorhersage:* erst festlegen, dann sehen (hält es, reicht es, rollt es) ·
     *Lücke:* etwas fehlt · *Durcheinander:* etwas ist vertauscht oder verrutscht · *Verwandlung:* etwas wird sichtbar
     anders · *Hilfe:* jemand braucht etwas · *Wissensvorsprung:* das Kind weiß schon, was eine Figur noch nicht weiß.
-- **Zehn Rahmen**, der häufigste trägt 24 von 138 Spielen:
-  Forschen (24) · Versorgen (17) · Fest (17) · Reise (15) · Bauen (14) · Werkstatt (13) · Miteinander (11) · Spur (11) · Entdecken (9) · Zeitreise (7).
+- **Zehn Rahmen**, der häufigste trägt 23 von 138 Spielen:
+  Forschen (23) · Versorgen (18) · Fest (17) · Reise (15) · Bauen (14) · Werkstatt (13) · Miteinander (11) · Spur (11) · Entdecken (9) · Zeitreise (7).
 - **Keine Auflösung zweimal.** Jedes Abenteuer hat seine eigene Entdeckung; sie ist nach Möglichkeit ein Sachbild der
   Welt (ein Schnabeltier, ein Marder, ein Tagpfauenauge).
 - **Fähigkeiten** (`figuren.md` §5: schrumpfen, schweben, in die Zeit reisen, riesig werden, unter Wasser atmen,
@@ -234,7 +234,7 @@ Sachgrund und Geschichte auf drei Stufen je Spiel: [`welten.md`](spielkatalog/we
 | [M34](spielkatalog/mathe.md) So geht es | So geht es | Mathe | 1–4 | 10 | Wie Erfindungen sich verändern | Werkstatt | Durcheinander |
 | [M35](spielkatalog/mathe.md) Tüten packen | Tüten packen | Mathe | 2–3 | 7 | Tiere auf Wiese und Hecke | Forschen | Lücke |
 | [M36](spielkatalog/mathe.md) Punktefeld | Punktefeld | Mathe | 2–4 | 12 | Das Klassenzimmer von oben | Entdecken | Verwandlung |
-| [M37](spielkatalog/mathe.md) Kettenhüpfer | Kettenhüpfer | Mathe | 2–4 | 17 | Tiere auf Wiese und Hecke | Forschen | Rätsel |
+| [M37](spielkatalog/mathe.md) Kettenhüpfer | Kettenhüpfer | Mathe | 2–4 | 17 | Vorrat und Packungen | Versorgen | Rätsel |
 | [M38](spielkatalog/mathe.md) Gerecht verteilen | Gerecht verteilen | Mathe | 2–4 | 10 | Gerecht teilen und abwechseln | Miteinander | Hilfe |
 | [M39](spielkatalog/mathe.md) Mal-Marken | Mal-Marken | Mathe | 4 | 5 | Wie Kleidung hergestellt wird | Werkstatt | Hilfe |
 | [M40](spielkatalog/mathe.md) Die Rechenfrage | Die Rechenfrage | Mathe | 1–3 | 8 | Wer an meinem Brot mitgearbeitet hat | Werkstatt | Lücke |
@@ -393,7 +393,7 @@ Sekunden zwischen Blitz und Donner je Kilometer) stammen aus dem Gedächtnis. Vo
 Quelle in den Faktensatz der Welt oder fallen weg (K4).
 
 **Zwei Spiele aus demselben Fach in einer Welt:** R08 und R09 (Was Pflanzen brauchen), M27 und M49 (Jahreskreis),
-M35 und M37 (Wiese und Hecke), R11 und R13 (Karten).
+R11 und R13 (Karten).
 
 ---------------------------------------------------------------------------------------------------
 ## 8. Folgen für andere Dokumente (Aufgaben nach der Freigabe)

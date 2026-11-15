@@ -1,8 +1,15 @@
-// <ls-objekt art="muenze">: ein kleiner Stapel Münzen (Zehn-Cent-Stücke, goldfarben) mit einer Münze daneben.
-// Feld 0…100, leicht von oben gesehen: je Münze ein Oval als Oberseite, darunter die Kante mit feinen Rillen.
-// Keine Ziffer, kein Wappen: nur ein Ring und ein Glanz auf der Oberseite.
+// <ls-objekt art="muenze" zustand="stapel|zehn-cent">
+//   stapel     ein kleiner Stapel Münzen (Zehn-Cent-Stücke, goldfarben) mit einer Münze daneben. Feld 0…100, leicht
+//              von oben gesehen: je Münze ein Oval als Oberseite, darunter die Kante mit feinen Rillen. Keine Ziffer,
+//              kein Wappen: nur ein Ring und ein Glanz auf der Oberseite.
+//   zehn-cent  eine einzelne Zehn-Cent-Münze, fast von vorn, mit der Prägung „10“ wie die echte Münze (Wertseite;
+//              einziges Objekt mit Ziffer, weil die Zahl zur echten Münze gehört; Packung der Zehnerreihe in M37,
+//              „In echt ist eine Zehn-Cent-Münze zehn Cent wert.“). Farbe aus der Welt-Palette „Savanne“ (weicher als
+//              das Gold der Perle 10), Rand mit Rillen, keine Karte, keine Sterne.
+// Kein Wechsel zwischen den Zuständen im Spiel (beide sind eigene Bilder; ein Wechsel blendet nur um).
 
-import { form, flach, naht, pfad, oval, zusammen, heller, dunkler } from "../runde/kinder/stil.js";
+import { form, flach, naht, glanz, pfad, oval, zusammen, heller, dunkler } from "../runde/kinder/stil.js";
+import { PALETTEN } from "../start/welten.js";
 import { meldeObjekt, bild } from "./objekt.js";
 
 export const GOLD = "#F0CF7A";
@@ -26,7 +33,39 @@ export function muenzenStueck() {
   return zusammen(...stapel, muenze(74, 82, 15));
 }
 
+/** Gold der Zehn-Cent-Münze (Welt-Palette „Savanne“, Ferne). */
+const NORDISCH = PALETTEN.savanne[1];
+
+/**
+ * Eine Zehn-Cent-Münze fast von vorn (leicht gekippt: die Kante unten sichtbar), Prägung „10“ als Text im dunklen Ton
+ * der Münze. Feld 0…100, Mitte (50, 48). @returns {import("../runde/kinder/stil.js").Stueck}
+ */
+export function zehnCentStueck() {
+  const r = 40;
+  const ry = 36;
+  const cy = 48;
+  const dicke = 7;
+  const kante = form(pfad(`M${50 - r} ${cy} L${50 - r} ${cy + dicke} A${r} ${ry} 0 0 0 ${50 + r} ${cy + dicke} L${50 + r} ${cy} Z`),
+    dunkler(NORDISCH, 0.18), [50 - r * 0.6, cy + dicke], { s: 0.92 });
+  const rillen = [];
+  for (let i = -6; i <= 6; i++) {
+    const x = 50 + i * 5.6;
+    const y = cy + Math.sqrt(Math.max(0, 1 - ((x - 50) / r) ** 2)) * ry;
+    rillen.push(`M${x.toFixed(1)} ${(y + 1).toFixed(1)} L${x.toFixed(1)} ${(y + dicke - 1).toFixed(1)}`);
+  }
+  const vorn = form(oval(50, cy, r, ry), NORDISCH, [36, 30], { s: 0.92 });
+  const rand = naht(`M${50 - r + 5} ${cy} A${r - 5} ${ry - 5} 0 1 1 ${50 + r - 5} ${cy} A${r - 5} ${ry - 5} 0 1 1 ${50 - r + 5} ${cy}`, NORDISCH, 2.2);
+  const licht = glanz(`M24 ${cy - 16} Q30 ${cy - 26} 42 ${cy - 29}`, NORDISCH, 3);
+  const zahl = { svg: `<text x="50" y="${cy + 12}" font-size="34" text-anchor="middle" fill="${dunkler(NORDISCH, 0.5)}" stroke="none">10</text>`, kontur: "" };
+  // Schlagschatten der Prägung (Licht von oben links): die Ziffern stehen leicht erhaben.
+  const praegung = { svg: `<text x="51.2" y="${cy + 13.2}" font-size="34" text-anchor="middle" fill="${dunkler(NORDISCH, 0.28)}" stroke="none">10</text>`, kontur: "" };
+  return zusammen(kante, { svg: naht(rillen.join(" "), dunkler(NORDISCH, 0.18), 1.2).svg, kontur: "" }, vorn, rand, licht, praegung, zahl);
+}
+
 meldeObjekt("muenze", {
-  zustaende: ["stapel"],
-  zeichne: () => bild({ breite: 100, hoehe: 100, teile: [{ stueck: muenzenStueck() }], ursprung: [50, 90] }),
+  zustaende: ["stapel", "zehn-cent"],
+  zeichne: () => bild({ breite: 100, hoehe: 100, teile: [
+    { stueck: muenzenStueck(), in: "stapel" },
+    { stueck: zehnCentStueck(), in: "zehn-cent" },
+  ], ursprung: [50, 90] }),
 });
