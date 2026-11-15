@@ -110,6 +110,8 @@ test("laufUmgebung: Auftrag, Transkript und eine Git-Umgebung, in der kein Push 
   assert.equal(env.GIT_CONFIG_VALUE_0, "");
   assert.equal(env.GIT_TERMINAL_PROMPT, "0");
   assert.equal(env.GIT_SSH_COMMAND, "false");
+  // spiel-entwickeln wartet auf einen Workflow im Hintergrund; ohne das bricht claude -p ihn nach 10 Minuten ab
+  assert.equal(env.CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS, "0");
 });
 
 test("arbeiteAb: liegengebliebene laufende Aufträge eines toten Laufs werden fehlgeschlagen", async () => {

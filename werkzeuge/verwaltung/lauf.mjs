@@ -90,6 +90,9 @@ export function laufUmgebung(basis, auftragId, transkript) {
     GIT_CONFIG_VALUE_0: "",
     GIT_TERMINAL_PROMPT: "0",
     GIT_SSH_COMMAND: "false",
+    // Die Skills starten Workflows und Agenten im Hintergrund und warten auf deren Meldung. claude -p bricht
+    // Hintergrundarbeit sonst 10 Minuten nach dem letzten Zug ab (Lauf M08, 2026-11-16).
+    CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS: "0",
   };
 }
 
