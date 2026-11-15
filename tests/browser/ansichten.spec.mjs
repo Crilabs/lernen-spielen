@@ -436,9 +436,9 @@ async function lauf(typ, name, groesse, basis) {
         r.wieder = document.querySelectorAll(".sw-gruppe[open]").length;
         return r;
       });
-      pruefe(F, "Reiter „Sachwelten“: acht Themenkreise mit Vignette, zugeklappt, Filter Alle/Gesehen/Gerade dran/Als Nächstes/Offen, nur „Alles ausklappen“ als Knopf, keine Klassen",
+      pruefe(F, "Reiter „Sachwelten“: acht Themenkreise mit Vignette, zugeklappt, Filter Alle/Gesehen/Offen (keine Lernthemen-Zustände), nur „Alles ausklappen“ als Knopf, keine Klassen",
         sw.titel === "Sachwelten" && sw.nav === "Sachwelten" && sw.gruppen.length === 8 && sw.vignetten === 8 && sw.offen === 0
-          && JSON.stringify(sw.filter) === JSON.stringify(["Alle", "Gesehen", "Gerade dran", "Als Nächstes", "Offen"])
+          && JSON.stringify(sw.filter) === JSON.stringify(["Alle", "Gesehen", "Offen"])
           && sw.knoepfe.every((k) => /^Alles (aus|ein)klappen$/.test(k)) && !sw.klasse, JSON.stringify(sw));
       pruefe(F, "Sachwelten: gesehene Welt mit Haken, Beschreibung und Datum; Kopf beschreibt ohne Zahl; Filter „Gesehen“ zeigt nur sie",
         sw.wiese.gesehen && sw.wiese.wort === "gesehen" && sw.wiese.sichtbar && /Wiese und in der Hecke/.test(sw.wiese.text)

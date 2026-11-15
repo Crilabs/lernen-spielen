@@ -1,8 +1,8 @@
 // Sachwelten im Elternbereich (docs/superpowers/specs/2026-11-15-sachwelten-uebersicht-design.md): nur Übersicht;
-// gesehen wird beim Spielen mitgeschrieben, dran und als Nächstes folgen den Lernthemen der Welt.
+// gesehen wird beim Spielen mitgeschrieben; Welten sind nicht mit Lernthemen verknüpft (Christian 2026-11-15).
 import { test, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync } from "node:fs";
 
 const speicher = new Map();
 globalThis.localStorage = {
@@ -13,7 +13,6 @@ globalThis.localStorage = {
 globalThis.window = {};
 const L = await import("../spiele/lernsteuerung.js");
 const { merkeWelt, elternWelten, weltDesSpiels, migriereStand, neuerStand, runde, setzeZurueck, hakeAb } = L;
-const W = await import("../scripts/welten-lernthemen.mjs");
 
 const lies = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), "utf8"));
 const lernplan = lies("../spiele/lernplan.json");
@@ -26,9 +25,9 @@ const PLAN = {
     thema("z7", ["z5"], { art: "zerlegung", zahl: 7 })],
   ueberschriften: [{ id: "tiere", name: "Tiere" }, { id: "zeit", name: "Zeit" }, { id: "leer", name: "Leer" }],
   welten: [
-    { id: "hecke", name: "Hecke", beschreibung: "Was in der Hecke lebt.", ueberschrift: "tiere", klasse: 2, lernthemen: ["z7"] },
-    { id: "wiese", name: "Wiese", beschreibung: "Was auf der Wiese lebt.", ueberschrift: "tiere", klasse: 1, lernthemen: [] },
-    { id: "uhr", name: "Uhr", beschreibung: "Wie die Uhr geht.", ueberschrift: "zeit", klasse: 1, lernthemen: ["z5"], eltern: "Hinweis" },
+    { id: "hecke", name: "Hecke", beschreibung: "Was in der Hecke lebt.", ueberschrift: "tiere", klasse: 2 },
+    { id: "wiese", name: "Wiese", beschreibung: "Was auf der Wiese lebt.", ueberschrift: "tiere", klasse: 1 },
+    { id: "uhr", name: "Uhr", beschreibung: "Wie die Uhr geht.", ueberschrift: "zeit", klasse: 1, eltern: "Hinweis" },
   ],
 };
 const SPIELE = { spiele: [
@@ -71,12 +70,10 @@ test("elternWelten: Gruppen in Planreihenfolge, Welten nach Klasse, leere Gruppe
   assert.deepEqual(uhr.spiele, [{ id: "punkte", titel: "Punkte" }]);
 });
 
-test("elternWelten: dran über Lernthemen und Themen der Heimatspiele, als Nächstes, gesehen geht vor", () => {
+test("elternWelten: nur gesehen oder offen, unabhängig von Lernthemen", () => {
   const s = neuerStand();
-  s.themen.z5 = { z: "dran", seit: HEUTE, stufe: "material", v: [] };
-  // uhr: Lernthema z5 dran; wiese: Heimat von pb, das z5 übt; hecke: z7 als Nächstes
-  assert.deepEqual(zustand(elternWelten(CTX, s, new Set(["z7"]))), { wiese: "dran", hecke: "naechstes", uhr: "dran" });
-  assert.deepEqual(zustand(elternWelten(CTX, s)), { wiese: "dran", hecke: "offen", uhr: "dran" });
+  s.themen.z5 = { z: "dran", seit: HEUTE, stufe: "material", v: [] }; // pb (Heimat wiese) übt z5 – zählt nicht
+  assert.deepEqual(zustand(elternWelten(CTX, s)), { wiese: "offen", hecke: "offen", uhr: "offen" });
   merkeWelt(s, "uhr", HEUTE);
   const g = elternWelten(CTX, s);
   assert.equal(zustand(g).uhr, "gesehen");
@@ -111,30 +108,16 @@ test("runde: melde merkt die Heimatwelt, nurAnsehen nicht", async () => {
   assert.deepEqual(s.welten, { "wiese-und-hecke": { seit: HEUTE } });
 });
 
-test("lernplan.json: jede Welt hat eine Beschreibung und gültige Lernthemen; Skript ist eingespielt", () => {
-  const ids = new Set(lernplan.themen.map((t) => t.id));
+test("lernplan.json: jede Welt hat eine Beschreibung und keine Verknüpfung zu Lernthemen", () => {
   const ueber = new Set(lernplan.ueberschriften.map((u) => u.id));
   for (const w of lernplan.welten) {
     assert.ok(ueber.has(w.ueberschrift), w.id);
     assert.ok(typeof w.beschreibung === "string" && w.beschreibung.length >= 30 && w.beschreibung.length <= 220, `${w.id}: Beschreibung`);
-    assert.ok(Array.isArray(w.lernthemen) && w.lernthemen.every((t) => ids.has(t)), `${w.id}: Lernthemen`);
+    for (const f of ["lernthemen", "themen", "anbindung"]) assert.ok(!(f in w), `${w.id}: Feld ${f} gehört nicht mehr zur Welt`);
   }
-  const katalog = { welten: readFileSync(new URL("../docs/spielkatalog/welten.md", import.meta.url), "utf8"),
-    faecher: readdirSync(new URL("../docs/spielkatalog/", import.meta.url)).filter((f) => f.endsWith(".md") && f !== "welten.md")
-      .map((f) => readFileSync(new URL("../docs/spielkatalog/" + f, import.meta.url), "utf8")) };
-  const text = readFileSync(new URL("../spiele/lernplan.json", import.meta.url), "utf8");
-  const { welten, fehler } = W.ergaenzeWelten(JSON.parse(text), katalog, lies("../scripts/welten-beschreibungen.json"));
-  assert.deepEqual(fehler, []);
-  assert.equal(W.neuerPlanText(text, welten), text, "node scripts/welten-lernthemen.mjs ausführen");
 });
 
 test("Beschreibungen: ohne Wörter der Wortliste 3.2 und ohne Klassenbezug", () => {
   const verboten = /\b(super|toll|klasse|prima|spitze|perfekt|klug|schlau|brav|fleißig|falsch|leider|schade)\b|\bKlasse \d/; // Lobwörter klein, Schulklasse mit Zahl
   for (const w of lernplan.welten) assert.doesNotMatch(w.beschreibung, verboten, w.id);
-});
-
-test("Katalog-Parser: Welt je Spiel und umbrochene Hauptthemen", () => {
-  assert.deepEqual([...W.spielZuWelt("**M01 Paare bilden** · Sinne (`sinne`) · Kl. 1\n**X** ohne").entries()], [["M01", "sinne"]]);
-  const t = W.spielZuThemen("### M01 Paare\n- Hauptthemen: a-b, c (Kl. 1–2),\n  d-e\n- Weitere Zugänge: x\n### M02 Z\n- Hauptthemen: f");
-  assert.deepEqual(Object.fromEntries(t), { M01: ["a-b", "c", "d-e"], M02: ["f"] });
 });

@@ -219,8 +219,7 @@ details > summary::-webkit-details-marker { display: none; }
   content: ""; position: absolute; left: 0.85rem; top: 0.35rem; width: 0.7rem; height: 1.4rem;
   border-right: 0.35rem solid var(--ls-papier); border-bottom: 0.35rem solid var(--ls-papier); transform: rotate(45deg);
 }
-.thema.sw-welt.z-naechstes .punkt { border-style: dashed; border-color: var(--ls-tinte); }
-.thema.sw-welt.z-gesehen .wort, .thema.sw-welt.z-naechstes .wort { border-color: var(--ls-tinte); }
+.thema.sw-welt.z-gesehen .wort { border-color: var(--ls-tinte); }
 .thema.sw-welt.z-offen .name, .thema.sw-welt.z-offen .wort { color: var(--ls-tinte-weich); }
 .thema.sw-welt .innen > p { max-width: 70ch; }
 
@@ -825,12 +824,11 @@ async function spielKarten(ziel, t, ctx, strang) {
 // ---------- Sachwelten ----------
 // Alle Sachwelten nach Themenkreisen (Überschriften im Lernplan), darin nach dem Lehrplan geordnet, ohne Klassen.
 // Nur Übersicht: kein Abhaken, kein Eingriff, kein „gekonnt“ (grundsaetze K7, 3.3). Gesehen = das Kind hat darin
-// gespielt (runde().melde); gerade dran und als Nächstes folgen den Lernthemen der Welt (elternWelten).
+// gespielt (runde().melde). Welten sind nicht mit Lernthemen verknüpft, daher kein „gerade dran“ (Christian 2026-11-15).
 // Spec docs/superpowers/specs/2026-11-15-sachwelten-uebersicht-design.md.
-const SW_ZUSTAND = { gesehen: "gesehen", dran: "gerade dran", naechstes: "als Nächstes", offen: "kommt später" };
-const SW_FILTER = [["alle", "Alle"], ["gesehen", "Gesehen"], ["dran", "Gerade dran"], ["naechstes", "Als Nächstes"], ["offen", "Offen"]];
+const SW_ZUSTAND = { gesehen: "gesehen", offen: "noch nicht gesehen" };
+const SW_FILTER = [["alle", "Alle"], ["gesehen", "Gesehen"], ["offen", "Offen"]];
 const SW_LEER = { gesehen: "Hier steht, welche Welten das Kind gesehen hat, sobald es darin spielt.",
-  dran: "Gerade gehört keine Welt zu einem Thema, das dran ist.", naechstes: "Gerade kommt keine neue Welt als Nächstes.",
   offen: "Das Kind kennt schon alle Welten." };
 let swFilter = "alle";
 const swOffen = new Set();
@@ -838,9 +836,7 @@ let swLauf = 0;
 
 function swKopfWorte(welten) {
   const gesehen = welten.filter((w) => w.zustand === "gesehen").length;
-  return [gesehen === welten.length ? "alle gesehen" : gesehen ? "teils gesehen" : "",
-    welten.some((w) => w.zustand === "dran") ? "gerade dran" : "",
-    welten.some((w) => w.zustand === "naechstes") ? "bald" : ""].filter(Boolean).join(", ") || "noch nichts";
+  return gesehen === welten.length ? "alle gesehen" : gesehen ? "teils gesehen" : "noch nichts";
 }
 
 // neu = false beim ersten Öffnen des Reiters: alle Themenkreise zu (Christian: zugeklappt als Übersicht); beim Neuzeichnen
@@ -858,7 +854,7 @@ async function sachwelten(spalte, neu = false) {
     return;
   }
   if (tab !== "sachwelten" || lauf !== swLauf) return;
-  const gruppen = elternWelten(ctx, stand, alsNaechstes(ctx, stand));
+  const gruppen = elternWelten(ctx, stand);
 
   const neuZeichnen = async () => {
     if (tab !== "sachwelten") return;

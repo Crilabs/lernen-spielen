@@ -26780,16 +26780,6 @@
       "quellen": [
         "HSU12 3.1"
       ],
-      "anbindung": "M: Beine zählen; D: Tiernamen schreiben",
-      "lernthemen": [
-        "gleich-grosse-gruppen",
-        "malaufgabe-zum-bild",
-        "mal-eins-mal-null",
-        "aufteilen-in-gruppen",
-        "teilen-mit-rest",
-        "teilen-mit-rest-sicher",
-        "ergebnis-zur-situation"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -26801,26 +26791,6 @@
       "klasse": 2,
       "quellen": [
         "Christian 2026-11-14"
-      ],
-      "anbindung": "M: Einmaleins in festen Gruppen (Paar, Tüte, Karton, Münze)",
-      "lernthemen": [
-        "zweierreihe",
-        "zehnerreihe",
-        "fuenferreihe",
-        "kernaufgaben-einmaleins",
-        "viererreihe",
-        "achterreihe",
-        "dreierreihe",
-        "sechserreihe",
-        "neunerreihe",
-        "siebenerreihe",
-        "einmaleins-gemischt",
-        "einmaleins-sicher",
-        "geteilt-umkehrung-mal",
-        "geteilt-durch-2-5-10",
-        "geteilt-alle-reihen",
-        "teiler-vielfache",
-        "teiler-begruenden"
       ],
       "stufe_ab": "ruhig",
       "fakten": [
@@ -26838,13 +26808,6 @@
       "quellen": [
         "HSU12 3.1"
       ],
-      "anbindung": "D: Nomen und Verben sortieren (laufen, fliegen, kriechen)",
-      "lernthemen": [
-        "namenwoerter",
-        "tunwoerter",
-        "wiewoerter",
-        "nomen-proben"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -26856,25 +26819,6 @@
       "klasse": 1,
       "quellen": [
         "HSU12 3.1"
-      ],
-      "anbindung": "M: im Bild finden und zählen",
-      "lernthemen": [
-        "planvoll-abschreiben",
-        "lernwoerter-kleine-woerter",
-        "fehler-finden-durch-vergleich",
-        "merkwoerter-dehnungs-h",
-        "merkwoerter-v",
-        "merkwoerter-ae-ohne-a",
-        "merkwoerter-aa-ee-oo",
-        "merkwoerter-chs-und-x",
-        "merkwoerter-langes-i-ohne-ie",
-        "merkwoerter-dehnungs-h-3",
-        "merkwoerter-ai",
-        "fremdwoerter-mit-mustern",
-        "gleich-klingt-anders-geschrieben",
-        "silben-zusammenhoeren",
-        "laute-statt-namen",
-        "laute-verschmelzen-hoeren"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -26888,11 +26832,6 @@
       "quellen": [
         "HSU12 3.1"
       ],
-      "anbindung": "M: Reihenfolge; nur als Pfeil im Schaubild, ohne Jagdszene",
-      "lernthemen": [
-        "satz-zum-bild-legen",
-        "satz-oder-kein-satz"
-      ],
       "stufe_ab": "sanft",
       "fakten": []
     },
@@ -26904,13 +26843,6 @@
       "klasse": 2,
       "quellen": [
         "MK-S"
-      ],
-      "anbindung": "M: sortieren, Mengen vergleichen. Annahme: Fachbegriffe am LehrplanPLUS prüfen",
-      "lernthemen": [
-        "oberbegriffe",
-        "ideen-sammeln",
-        "unpassende-idee-aussortieren",
-        "ideen-baum"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -26924,10 +26856,6 @@
       "quellen": [
         "MK-S"
       ],
-      "anbindung": "M: Mengen je Erdteil vergleichen",
-      "lernthemen": [
-        "silben-klatschen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -26939,25 +26867,6 @@
       "klasse": 1,
       "quellen": [
         "HSU12 3.1"
-      ],
-      "anbindung": "M: Futtermengen über die Woche",
-      "lernthemen": [
-        "rechnen-3",
-        "rechnen-4",
-        "rechnen-5",
-        "rechnen-6",
-        "rechnen-7",
-        "rechnen-8",
-        "rechnen-9",
-        "rechnen-10",
-        "umkehraufgaben-bis-10",
-        "aufgabenfamilie-bis-10",
-        "umkehraufgaben-bis-20",
-        "probe-umkehraufgabe-bis-100",
-        "je-mehr-desto",
-        "wertetabelle",
-        "menge-und-preis",
-        "je-mehr-desto-weniger"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -26972,23 +26881,6 @@
         "HSU12 3.1",
         "WAL"
       ],
-      "anbindung": "M: Eier in Schachteln, Liter Milch",
-      "lernthemen": [
-        "verlaengern-nomen-d-t",
-        "verlaengern-nomen-g-k",
-        "verlaengern-nomen-b-p",
-        "verlaengern-verben",
-        "verlaengern-adjektive",
-        "verlaengern-doppelt",
-        "doppelt-bei-einsilbern",
-        "ck-tz-bei-einsilbern",
-        "doppelt-in-verbformen",
-        "ss-oder-scharfes-s-einsilber",
-        "endung-ig-wie-ich",
-        "ig-oder-lich",
-        "quadrat-und-rechteck",
-        "geobrett-formen-spannen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27002,22 +26894,6 @@
         "HSU12 3.1",
         "MK*"
       ],
-      "anbindung": "D: Wörter den Teilen zuordnen",
-      "lernthemen": [
-        "schreiben-mit-anlauttabelle",
-        "laute-am-wortanfang",
-        "laute-in-mitte-und-ende",
-        "ei-schreiben",
-        "au-schreiben",
-        "eu-schreiben",
-        "sch-schreiben",
-        "st-am-wortanfang",
-        "sp-am-wortanfang",
-        "ch-schreiben",
-        "qu-schreiben",
-        "pf-schreiben",
-        "ng-nk-schreiben"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27029,20 +26905,6 @@
       "klasse": 1,
       "quellen": [
         "MK*"
-      ],
-      "anbindung": "M: Gießplan über die Woche",
-      "themen": [
-        "wochentage-tageszeiten"
-      ],
-      "lernthemen": [
-        "wochentage-tageszeiten",
-        "flaechen-vergleichen",
-        "flaechen-auslegen",
-        "flaecheninhalt-kaestchen",
-        "rauminhalt-wuerfel",
-        "rand-vergleichen",
-        "umfang-bestimmen",
-        "flaeche-oder-umfang"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27057,18 +26919,6 @@
         "HSU12 3.1",
         "GDSU"
       ],
-      "anbindung": "M: Samen zählen und bündeln",
-      "lernthemen": [
-        "hundertertafel",
-        "plus-zehner-bis-100",
-        "minus-zehner-bis-100",
-        "einzahl-mehrzahl-erkennen",
-        "mehrzahl-mit-e",
-        "mehrzahl-mit-en",
-        "mehrzahl-mit-er",
-        "mehrzahl-mit-s",
-        "mehrzahl-umlaut-ohne-endung"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27080,26 +26930,6 @@
       "klasse": 2,
       "quellen": [
         "HSU12 3.1"
-      ],
-      "anbindung": "M: Monate im Kalender",
-      "themen": [
-        "kalender-lesen"
-      ],
-      "lernthemen": [
-        "kalender-lesen",
-        "ergaenzen-bis-10",
-        "ergebnis-10",
-        "minus-von-10",
-        "plus-zur-20",
-        "minus-von-20",
-        "minus-bis-zur-10",
-        "ergaenzen-zum-zehner",
-        "ergaenzen-bis-100",
-        "ergaenzen-hunderter-1000",
-        "ergaenzen-stufenzahlen",
-        "anlaut-selbstlaut",
-        "anlaut-dauerlaut",
-        "anlaut-stopplaut"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27113,13 +26943,6 @@
       "quellen": [
         "HSU12 3.1"
       ],
-      "anbindung": "Sachmoment, nicht als Gefahr erzählt",
-      "lernthemen": [
-        "lesen-wort-zum-bild",
-        "b-d-p-unterscheiden",
-        "lesen-lang-oder-kurz",
-        "genau-hinsehen-lesen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27131,18 +26954,6 @@
       "klasse": 1,
       "quellen": [
         "BOC"
-      ],
-      "anbindung": "M: Jahreszeiten als Strahl",
-      "lernthemen": [
-        "plus-verstehen",
-        "minus-verstehen",
-        "rechengeschichte-zum-bild",
-        "bild-zu-rechnung",
-        "rechnung-zu-bild",
-        "ergebnis-passt-zur-geschichte",
-        "geschichte-zur-malaufgabe",
-        "mal-oder-geteilt",
-        "rechnung-zur-geschichte"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27157,20 +26968,6 @@
         "BOC",
         "HSU34 3.1"
       ],
-      "anbindung": "M: Tage zählen",
-      "lernthemen": [
-        "silben-schwingen-beim-schreiben",
-        "silbe-hat-selbstlaut",
-        "endung-e",
-        "endung-en",
-        "endung-er",
-        "endung-el",
-        "selbstlaut-mitlaut",
-        "symmetrie-erkennen",
-        "falten-zerlegen-drehen",
-        "symmetrieachsen-einzeichnen",
-        "faltschnitte-spiegelbilder"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27184,23 +26981,6 @@
         "HSU34 3.1",
         "GDSU"
       ],
-      "anbindung": "D: Sachtext lesen",
-      "lernthemen": [
-        "plus-ueber-den-zehner-bis-100",
-        "minus-ueber-den-zehner-bis-100",
-        "plus-bis-30",
-        "minus-bis-30",
-        "plus-zweistellig-ohne-uebergang",
-        "minus-zweistellig-ohne-uebergang",
-        "plus-zweistellig-mit-uebergang",
-        "minus-zweistellig-mit-uebergang",
-        "plus-bis-100",
-        "minus-bis-100",
-        "schrittweise-rechenstrich",
-        "rechenstrich-lesen",
-        "uebergang-zehner-hunderter",
-        "halbschriftlich-plus-minus-1000"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27212,17 +26992,6 @@
       "klasse": 3,
       "quellen": [
         "HSU34 3.1"
-      ],
-      "anbindung": "D: Sachtext lesen",
-      "lernthemen": [
-        "hoeren-und-schliessen",
-        "wie-geht-es-weiter-lesen",
-        "figur-beschreiben-lesen",
-        "zwischen-den-zeilen-lesen",
-        "puzzle-im-ohr",
-        "warum-tut-sie-das-hoeren",
-        "warum-handelt-die-figur-so",
-        "ratekrimi"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27237,23 +27006,6 @@
         "MK-S",
         "MK-P"
       ],
-      "anbindung": "M: Baumdiagramme",
-      "lernthemen": [
-        "ableiten-ae-von-a",
-        "ableiten-aeu-von-au",
-        "ableiten-ae-mehrzahl",
-        "ableiten-ae-steigerung",
-        "ableiten-ae-verkleinerung",
-        "ableiten-ae-verbform",
-        "ableiten-ae-wortfamilie",
-        "aeu-ableiten-vertiefen",
-        "wortstamm-bleibt-gleich",
-        "stammvokalwechsel-schreiben",
-        "end-oder-ent",
-        "wortfamilien",
-        "stammvokalwechsel-wortfamilie",
-        "woher-kommt-das-wort"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27265,13 +27017,6 @@
       "klasse": 4,
       "quellen": [
         "MK-P"
-      ],
-      "anbindung": "D: Sachwörter",
-      "lernthemen": [
-        "unbekanntes-wort-klaeren",
-        "wortbedeutung-aus-dem-satz",
-        "redewendungen-verstehen",
-        "sprachbilder-verstehen"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27285,15 +27030,6 @@
       "quellen": [
         "HSU34 3.1"
       ],
-      "anbindung": "D: Sachtext; ohne Haltung (Grundsatz 8)",
-      "lernthemen": [
-        "was-braucht-das-verb",
-        "dativobjekt",
-        "akkusativobjekt",
-        "die-vier-faelle",
-        "artikel-im-fall",
-        "adjektiv-im-fall"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27305,14 +27041,6 @@
       "klasse": 1,
       "quellen": [
         "HSU12 3.3"
-      ],
-      "anbindung": "M: erst vorhersagen, dann sehen (L2)",
-      "lernthemen": [
-        "sicher-moeglich-unmoeglich",
-        "wahrscheinlich-unwahrscheinlich",
-        "gewinnchancen",
-        "chancen-veraendern",
-        "gewinnchance-begruenden"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27326,18 +27054,6 @@
       "quellen": [
         "HSU12 3.3"
       ],
-      "anbindung": "M: Tabelle, Skala ablesen",
-      "themen": [
-        "strichliste"
-      ],
-      "lernthemen": [
-        "strichliste",
-        "tabellen-schaubilder-lesen",
-        "tabellen-preislisten",
-        "fahrplaene",
-        "diagramme-kritisch-lesen",
-        "darstellungen-bewerten"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27350,14 +27066,6 @@
       "quellen": [
         "HSU12 3.3"
       ],
-      "anbindung": "Sachmoment, ruhig erzählt",
-      "lernthemen": [
-        "stunde-und-minute",
-        "zeitspannen",
-        "sekunden",
-        "zeitpunkt-zeitdauer",
-        "zeitspannen-stunden-minuten"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27369,15 +27077,6 @@
       "klasse": 1,
       "quellen": [
         "HSU12 3.2"
-      ],
-      "anbindung": "M: sortieren; D: Adjektive (hart, weich)",
-      "lernthemen": [
-        "nomen-genauer-machen",
-        "bestimmter-unbestimmter-begleiter",
-        "adjektive-steigern",
-        "steigerung-unregelmaessig",
-        "mit-adjektiven-beschreiben",
-        "tierbeschreibung"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27392,22 +27091,6 @@
         "HSU12 3.2",
         "BOC"
       ],
-      "anbindung": "M: sortieren und zählen",
-      "lernthemen": [
-        "zerlegen-2",
-        "zerlegen-3",
-        "zerlegen-4",
-        "zerlegen-5",
-        "zerlegen-6",
-        "zerlegen-7",
-        "zerlegen-8",
-        "zerlegen-9",
-        "zerlegen-10",
-        "zerlegungen-ordnen",
-        "mehrere-loesungen",
-        "alle-loesungen-finden",
-        "geordnet-probieren"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27420,13 +27103,6 @@
       "quellen": [
         "MK-A",
         "HSU34 3.3"
-      ],
-      "anbindung": "M: Temperatur ablesen",
-      "lernthemen": [
-        "vermutung-aeussern",
-        "ich-finde-weil",
-        "meinung-zum-text-begruenden",
-        "bitte-ueberzeugend"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27441,15 +27117,6 @@
         "MK-A",
         "HSU34 3.3"
       ],
-      "anbindung": "M: Kreislauf ordnen",
-      "lernthemen": [
-        "rechenkette-bis-10",
-        "zahlenkette-rueckwaerts",
-        "rueckwaerts-geschichte",
-        "vorwaerts-rueckwaerts-kombinieren",
-        "rueckwaerts-rechnen-sachaufgabe",
-        "algorithmus-befolgen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27463,19 +27130,6 @@
         "MK-A",
         "GDSU"
       ],
-      "anbindung": "M: Uhr und Tageszeiten",
-      "themen": [
-        "wochentage-tageszeiten"
-      ],
-      "lernthemen": [
-        "wochentage-tageszeiten",
-        "volle-stunde",
-        "uhr-halbe-stunde",
-        "uhr-viertel",
-        "uhr-fuenf-minuten",
-        "uhr-minutengenau",
-        "uhr-digital-24-stunden"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27487,12 +27141,6 @@
       "klasse": 3,
       "quellen": [
         "GDSU"
-      ],
-      "anbindung": "M: Tage im Monat",
-      "lernthemen": [
-        "ansichten-zuordnen",
-        "ansichten-wuerfelgebaeude",
-        "ansicht-und-gebaeude"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27506,11 +27154,6 @@
       "quellen": [
         "MK-P"
       ],
-      "anbindung": "M: Reihenfolge, Ordnungszahlen",
-      "lernthemen": [
-        "ordnungszahlen-bis-10",
-        "wofuer-zahlen-stehen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27522,12 +27165,6 @@
       "klasse": 2,
       "quellen": [
         "MK-P"
-      ],
-      "anbindung": "M: Gewichte vergleichen. Annahme: Klasse aus Montessori-Praxis",
-      "lernthemen": [
-        "gramm-kilogramm",
-        "gewichte-schaetzen",
-        "tonne"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27542,12 +27179,6 @@
         "MK-A",
         "MK-P"
       ],
-      "anbindung": "D: Sachwörter; Vulkan nur als Erdinneres",
-      "lernthemen": [
-        "vergleichen-bis-100",
-        "vergleichen-bis-1000",
-        "vergleichen-bis-million"
-      ],
       "stufe_ab": "sanft",
       "fakten": []
     },
@@ -27560,8 +27191,6 @@
       "quellen": [
         "MK-P"
       ],
-      "anbindung": "nur Sachmoment in der Pause, nie Spannungsquelle, keine Betroffenen",
-      "lernthemen": [],
       "stufe_ab": "abenteuer",
       "eltern": "Ein Vulkanausbruch wird sachlich erklärt (Gestein, Lava, Asche), ohne Menschen oder Tiere, die betroffen sind, und nur außerhalb der Spielgeschichte.",
       "fakten": []
@@ -27575,13 +27204,6 @@
       "quellen": [
         "HSU34 3.2"
       ],
-      "anbindung": "D: Sachtext",
-      "lernthemen": [
-        "saetze-mit-bindewort-verbinden",
-        "hauptsatz-und-nebensatz",
-        "komma-vor-aber-weil-dass",
-        "das-oder-dass"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27594,11 +27216,6 @@
       "quellen": [
         "HSU34 3.3"
       ],
-      "anbindung": "M: Liter vergleichen; ohne Haltung (Grundsatz 8)",
-      "lernthemen": [
-        "liter-milliliter",
-        "bruchteile-bei-groessen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27610,22 +27227,6 @@
       "klasse": 3,
       "quellen": [
         "MK-P"
-      ],
-      "anbindung": "M: sortieren. Annahme: fehlt in HSU 1–4",
-      "lernthemen": [
-        "aussage-pruefen",
-        "mit-plaettchen-zeigen",
-        "begruendung-waehlen",
-        "vermutung-aufstellen",
-        "vermutung-testen",
-        "gegenbeispiel-finden",
-        "immer-manchmal-nie",
-        "fehler-finden-rechnen",
-        "fehlerursache-finden",
-        "rechenfehler-finden-bis-100",
-        "passt-die-begruendung",
-        "allgemein-statt-beispiel",
-        "anna-zahlen-erklaeren"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27640,20 +27241,6 @@
         "HSU12 4.1",
         "ETH 3.1"
       ],
-      "anbindung": "M: Reihenfolge, Uhr",
-      "themen": [
-        "wochentage-tageszeiten"
-      ],
-      "lernthemen": [
-        "wochentage-tageszeiten",
-        "tag-erzaehlen-mit-bildern",
-        "erzaehlen-mit-reihenfolgewoertern",
-        "nacherzaehlen-mit-bildern",
-        "text-in-eigenen-worten",
-        "anfang-mitte-schluss-vortragen",
-        "mein-stichwortzettel",
-        "mein-kurzreferat"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27666,20 +27253,6 @@
       "quellen": [
         "HSU12 4.1",
         "MK-P"
-      ],
-      "anbindung": "M: im Kreis und auf dem Strahl zählen",
-      "themen": [
-        "kalender-lesen"
-      ],
-      "lernthemen": [
-        "kalender-lesen",
-        "zahlenfolgen-bis-20",
-        "in-schritten-zaehlen-bis-100",
-        "zaehlen-grosse-schritte",
-        "zahlenfolgen-zahleigenschaften",
-        "muster-regel-finden",
-        "wochentage-tageszeiten",
-        "zeitspannen-ueber-tage"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27694,20 +27267,6 @@
         "HSU12 4.1",
         "ETH 3.2"
       ],
-      "anbindung": "M: Tage bis …; als Brauch, gleichwertig (Grundsatz 8)",
-      "lernthemen": [
-        "erste-silben-lesen",
-        "lesen-offene-silben",
-        "lesen-endungen-en-er",
-        "lesen-kurzer-selbstlaut",
-        "lesen-zwei-mitlaute-anfang",
-        "lesen-mitlauthaeufung",
-        "lesen-lange-woerter",
-        "quatschwoerter-lesen",
-        "formen-muster-fortsetzen",
-        "muster-koerper-plaettchen",
-        "bandornamente"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27720,14 +27279,6 @@
       "quellen": [
         "HSU12 4.2",
         "MK-S"
-      ],
-      "anbindung": "M: Zeitleiste, Jahre",
-      "lernthemen": [
-        "unterschied-bis-10",
-        "ergaenzen-statt-abziehen",
-        "ergaenzen-statt-abziehen-bis-100",
-        "signalwoerter-falle",
-        "differenz-bleibt-gleich"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27743,20 +27294,6 @@
         "GDSU",
         "BOC"
       ],
-      "anbindung": "D: Wörter von früher und heute",
-      "lernthemen": [
-        "schreibschrift-vergleichen",
-        "gestern-heute-morgen",
-        "praeteritum-regelmaessig",
-        "praeteritum-unregelmaessig",
-        "zukunft-futur",
-        "zeitform-erkennen",
-        "perfekt-mit-haben",
-        "perfekt-mit-sein",
-        "partizip-bilden",
-        "zeitform-im-text-halten",
-        "einheitliche-zeitform-im-text"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27768,12 +27305,6 @@
       "klasse": 2,
       "quellen": [
         "HSU12 4.3"
-      ],
-      "anbindung": "D: Sachsatz oder Märchensatz",
-      "lernthemen": [
-        "lesen-sinn-pruefen",
-        "falsches-wort-finden",
-        "widerspruch-im-text"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27788,18 +27319,6 @@
         "MK-P",
         "MK-S"
       ],
-      "anbindung": "M: große Zahlen als Länge",
-      "lernthemen": [
-        "zahlenstrahl-bis-10",
-        "nachbarzahlen-zahlenstrahl-bis-20",
-        "zahlenstrahl-bis-100",
-        "nachbarzehner",
-        "zahlenstrahl-bis-1000",
-        "nachbarzehner-nachbarhunderter",
-        "runden-zehner-hunderter",
-        "zahlenstrahl-million",
-        "grosse-zahlen-runden"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27813,13 +27332,6 @@
         "MK-P",
         "MK-S"
       ],
-      "anbindung": "M: Längen vergleichen; ohne Aussterben",
-      "themen": [
-        "laenger-kuerzer"
-      ],
-      "lernthemen": [
-        "laenger-kuerzer"
-      ],
       "stufe_ab": "sanft",
       "fakten": []
     },
@@ -27832,8 +27344,6 @@
       "quellen": [
         "MK-P"
       ],
-      "anbindung": "nur Sachmoment in der Pause, nie Spannungsquelle",
-      "lernthemen": [],
       "stufe_ab": "abenteuer",
       "eltern": "Das Aussterben der Dinosaurier wird sachlich und ruhig erklärt, nur außerhalb der Spielgeschichte. Kommt nur in der Stufe „Abenteuer“ vor.",
       "fakten": []
@@ -27848,15 +27358,6 @@
         "MK-S",
         "MK-P"
       ],
-      "anbindung": "M: im Lernkern (Kerben, Bündeln, die Null)",
-      "lernthemen": [
-        "abzaehlen",
-        "die-null",
-        "zahlenraetsel-zwei-hinweise",
-        "tabelle-beim-probieren",
-        "raetsel-mit-tabelle",
-        "geheimschrift-zahlen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27868,18 +27369,6 @@
       "klasse": 1,
       "quellen": [
         "MK-S"
-      ],
-      "anbindung": "D: im Lernkern (Bilderschrift, Alphabet)",
-      "lernthemen": [
-        "buchstabe-silbe-wort-satz",
-        "wortabstand",
-        "trennen-am-zeilenende",
-        "trennen-doppelt-und-ck",
-        "abc-reihe",
-        "abc-zweiter-buchstabe",
-        "nachschlagen-woerterliste",
-        "woerterbuch-grundform-suchen",
-        "zweifelsfall-nachschlagen"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27894,12 +27383,6 @@
         "MK-S",
         "MK*"
       ],
-      "anbindung": "D: Sachtext",
-      "lernthemen": [
-        "buendeln-zehner-einer",
-        "hunderter-buendeln",
-        "tausender-buendeln"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27912,30 +27395,6 @@
       "quellen": [
         "HSU34 4.2",
         "HSU34 6.1"
-      ],
-      "anbindung": "D: Sachtext",
-      "lernthemen": [
-        "muster-in-worten",
-        "rechenzeichen-lesen",
-        "mathe-fachwoerter",
-        "erklaerung-ordnen",
-        "forscherbericht-ergaenzen",
-        "rechenwege-zuordnen",
-        "sprache-zu-rechnung",
-        "erklaeren-fuer-juengere",
-        "mathe-konferenz",
-        "rechenweg-notiz",
-        "woerter-zusammensetzen",
-        "wortbausteine-un-ver-vor",
-        "nachsilben-bilden-woerter",
-        "vorsilben-bei-verben",
-        "zusammensetzen-mit-verb-adjektiv",
-        "mehrfach-zusammengesetzt",
-        "wortart-wechseln",
-        "vorsilben-ver-vor",
-        "vorsilben-ent-zer-un-ver",
-        "zusammengesetzte-nomen-schreiben",
-        "fugen-s"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27950,11 +27409,6 @@
         "HSU34 4.1",
         "HSU34 4.2"
       ],
-      "anbindung": "M: große Zahlen",
-      "lernthemen": [
-        "magisches-quadrat-ergaenzen",
-        "magisches-quadrat-veraendern"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -27966,21 +27420,6 @@
       "klasse": 1,
       "quellen": [
         "HSU12 5.1"
-      ],
-      "anbindung": "M: Raumlage, links und rechts",
-      "lernthemen": [
-        "punktefeld-reihen-spalten",
-        "tauschaufgaben-mal",
-        "malaufgabe-als-punktefeld",
-        "mal-tausch-begruenden",
-        "nachbaraufgabe-mal",
-        "verdoppeln-beim-mal",
-        "quadrataufgaben",
-        "quadratzahlen",
-        "punkt-vor-strich",
-        "halbschriftlich-mal",
-        "halbschriftlich-mal-geteilt-million",
-        "loesungsweg-weiterentwickeln"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -27995,58 +27434,6 @@
         "HSU12 5.1",
         "GDSU"
       ],
-      "anbindung": "M: Wege beschreiben, Schritte zählen",
-      "lernthemen": [
-        "plus-0-und-1",
-        "plus-2-und-3",
-        "plus-mit-5",
-        "tauschaufgaben-bis-10",
-        "plus-bis-10-gemischt",
-        "minus-0-1-alles-weg",
-        "minus-bis-10-gemischt",
-        "blitzrechnen-bis-20",
-        "stifthaltung",
-        "schwung-senkrecht",
-        "schwung-waagerecht",
-        "schwung-zickzack",
-        "schwung-kreis-linksherum",
-        "schwung-girlande",
-        "schwung-arkade",
-        "schwung-welle",
-        "schwung-schleife-oben",
-        "schwung-schleife-unten",
-        "schreibrichtung-zeile",
-        "druck-klein-l-i",
-        "druck-klein-t",
-        "druck-klein-j",
-        "druck-klein-c",
-        "druck-klein-o",
-        "druck-klein-a-d",
-        "druck-klein-g",
-        "druck-klein-e",
-        "druck-klein-s",
-        "druck-klein-n-m-h-r",
-        "druck-klein-u",
-        "druck-klein-b-p",
-        "druck-klein-v-w",
-        "druck-klein-x-k-y-z",
-        "druck-klein-f",
-        "druck-klein-q",
-        "druck-klein-umlaute-sz",
-        "spiegelbuchstaben-b-d-p-q",
-        "druck-gross-gerade",
-        "druck-gross-rund",
-        "druck-gross-u-j",
-        "druck-gross-d-p-b-r",
-        "druck-gross-schraeg",
-        "gross-klein-gleiche-form",
-        "eigenen-namen-schreiben",
-        "buchstabenhaus",
-        "ziffern-schreiben-gerade",
-        "ziffern-schreiben-rund",
-        "ziffern-schreiben-bogen",
-        "spiegelziffern"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28058,17 +27445,6 @@
       "klasse": 2,
       "quellen": [
         "HSU12 5.1"
-      ],
-      "anbindung": "D: Gegensatzpaare",
-      "lernthemen": [
-        "wortfelder-gehen-sagen",
-        "wortfelder-sehen-essen",
-        "wortfeld-gehen-im-text",
-        "wortfeld-sagen-im-text",
-        "gegenteile",
-        "verhaeltniswoerter",
-        "fall-nach-verhaeltniswort",
-        "planquadrate"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28082,18 +27458,6 @@
       "quellen": [
         "HSU12 5.3"
       ],
-      "anbindung": "M: Plätze im Bus, Fahrplan",
-      "lernthemen": [
-        "rechenweg-waehlen-bis-100",
-        "rechenwege-vergleichen",
-        "kopf-oder-schriftlich",
-        "taschenrechner-wann",
-        "woerter-im-satz-zaehlen",
-        "laute-zaehlen",
-        "endlaut-hoeren",
-        "laut-in-der-mitte",
-        "laut-tauschen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28106,16 +27470,6 @@
       "quellen": [
         "HSU12 5.3"
       ],
-      "anbindung": "M: Formen der Schilder",
-      "themen": [
-        "symmetrie-erkennen"
-      ],
-      "lernthemen": [
-        "symmetrie-erkennen",
-        "kreis-dreieck-viereck",
-        "formen-sortieren",
-        "quadrat-besonderes-rechteck"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28127,20 +27481,6 @@
       "klasse": 2,
       "quellen": [
         "MK*"
-      ],
-      "anbindung": "M: Paare und Spiegelung. Annahme: aus Montessori-Praxis",
-      "lernthemen": [
-        "verdoppeln-bis-10",
-        "halbieren-bis-10",
-        "zwillinge",
-        "halbieren-bis-20",
-        "fast-verdoppeln",
-        "verdoppeln-halbieren-bis-100",
-        "verdoppeln-halbieren-bis-1000",
-        "nachzeichnen-im-gitter",
-        "symmetrie-ergaenzen",
-        "vergroessern-verkleinern",
-        "spiegeln-im-gitter"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28155,17 +27495,6 @@
         "MK*",
         "HSU34 5.1"
       ],
-      "anbindung": "M: Größen vergleichen",
-      "lernthemen": [
-        "anzahlen-schaetzen-bis-100",
-        "grosse-anzahlen-schaetzen",
-        "fermi-schaetzen",
-        "fermi-wie-viele-passen",
-        "fermi-teilfragen",
-        "annahme-pruefen",
-        "mit-ungefaehren-zahlen-rechnen",
-        "schaetzung-begruenden"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28177,18 +27506,6 @@
       "klasse": 3,
       "quellen": [
         "HSU34 5.1"
-      ],
-      "anbindung": "M: Maßstab",
-      "lernthemen": [
-        "lineal-bei-null-anlegen",
-        "zeichnen-mit-lineal",
-        "rechter-winkel",
-        "zeichnen-geodreieck",
-        "kreise-zirkel",
-        "massstab-im-plan",
-        "bauplan-zeichnen",
-        "lageplan-zeichnen",
-        "bauplan-diktieren"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28202,13 +27519,6 @@
       "quellen": [
         "HSU34 5.1"
       ],
-      "anbindung": "D: Sachtext",
-      "lernthemen": [
-        "textsorte-erkennen",
-        "maerchen-erkennen",
-        "fabel-erkennen",
-        "sage-erkennen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28220,15 +27530,6 @@
       "klasse": 3,
       "quellen": [
         "HSU34 5.2"
-      ],
-      "anbindung": "D: Sachtext; nicht exotisch (Grundsatz 6.1 Nr. 9)",
-      "lernthemen": [
-        "lernen-einschaetzen",
-        "leseerfahrung-austauschen",
-        "so-hab-ichs-gelernt",
-        "reporter-fragen",
-        "mein-ziel-sprechen",
-        "was-half-beim-zuhoeren"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28243,16 +27544,6 @@
         "HSU12 6.1",
         "GDSU"
       ],
-      "anbindung": "D: Nomen mit Artikel",
-      "lernthemen": [
-        "fehlerdetektiv",
-        "rechtschreibstrategien-kombinieren",
-        "eigenen-text-pruefen",
-        "ecken-und-seiten-zaehlen",
-        "ecken-kanten-flaechen",
-        "wuerfel-quader-vergleichen",
-        "kantenmodelle"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28266,15 +27557,6 @@
         "HSU12 6.1",
         "BOC"
       ],
-      "anbindung": "D: die Mechanikerin, der Erzieher (Grundsatz 6.1 Nr. 1)",
-      "lernthemen": [
-        "wortbausteine-lesen",
-        "wortstamm-lesen",
-        "lange-woerter-in-bausteinen-lesen",
-        "koerper-benennen",
-        "koerper-in-der-umwelt",
-        "fachbegriffe-geometrie"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28286,23 +27568,6 @@
       "klasse": 1,
       "quellen": [
         "HSU12 6.2"
-      ],
-      "anbindung": "M: Würfel, Quader, Höhe",
-      "themen": [
-        "wuerfelbauten-nachbauen",
-        "koerper-in-der-umwelt"
-      ],
-      "lernthemen": [
-        "wuerfelbauten-nachbauen",
-        "koerper-in-der-umwelt",
-        "paeckchen-mit-muster",
-        "paeckchen-muster-bis-100",
-        "passt-nicht-ins-muster",
-        "pfeile-und-farben-im-paeckchen",
-        "gleichsinnig-veraendern",
-        "anna-zahlen",
-        "wuerfelgebaeude-nach-bauplan",
-        "wuerfelgebaeude-raetsel"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28316,16 +27581,6 @@
       "quellen": [
         "HSU12 6.2"
       ],
-      "anbindung": "M: Kugel und Zylinder; erst vorhersagen",
-      "themen": [
-        "koerper-in-der-umwelt"
-      ],
-      "lernthemen": [
-        "koerper-in-der-umwelt",
-        "weg-beschreiben",
-        "missverstaendnis-aufklaeren",
-        "rollt-oder-kippt"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28338,34 +27593,6 @@
       "quellen": [
         "HSU12 6.2"
       ],
-      "anbindung": "M: Formen; Symbole sachlich (Grundsatz 8)",
-      "lernthemen": [
-        "plus-ohne-20",
-        "minus-ohne-20",
-        "zehnerzahlen-plus-minus",
-        "plus-einer-ohne-uebergang-bis-100",
-        "minus-einer-ohne-uebergang-bis-100",
-        "zehnerzahl-minus-einer",
-        "analoge-aufgabe-nutzen",
-        "hunderterzahlen-plus-minus",
-        "analog-ohne-uebergang-1000",
-        "zehner-einmaleins",
-        "analog-kopfrechnen-million",
-        "mal-geteilt-stufenzahlen",
-        "zahlenmauer-bis-10",
-        "mauer-dreieck-kette-bis-20",
-        "probieren-und-pruefen",
-        "zahlenmauer-von-oben",
-        "zahlenmauer-rechendreieck-bis-100",
-        "zahlenmauer-ziel-erreichen",
-        "mittelstein-zaehlt-doppelt",
-        "groesster-kleinster-deckstein",
-        "zahlenmauern-bis-1000",
-        "zahlenmauer-luecken-verteilt",
-        "mittelstein-begruenden",
-        "zahlenmauer-unbekannte",
-        "knobelaufgabe-erfinden"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28377,23 +27604,6 @@
       "klasse": 2,
       "quellen": [
         "MK-S"
-      ],
-      "anbindung": "M: Kette von Schritten. Annahme: Motiv nicht belegt",
-      "lernthemen": [
-        "rechenfrage-finden",
-        "passende-frage-waehlen",
-        "sachaufgabe-frage-rechnung-antwort",
-        "kapitaensaufgabe-erkennen",
-        "unwichtige-zahl-erkennen",
-        "fehlende-angabe-finden",
-        "ueberfluessige-fehlende-angaben",
-        "fragen-selbst-stellen",
-        "wuerfelnetze",
-        "netz-begruenden",
-        "quadernetze",
-        "netz-im-kopf-falten",
-        "wuerfelnetz-im-kopf",
-        "wuerfel-kippen"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28409,16 +27619,6 @@
         "HSU12 1.2",
         "ETH 1.4"
       ],
-      "anbindung": "D: Wortfeld Essen, Wohnen, Kleidung, Geborgenheit",
-      "lernthemen": [
-        "kleidung-kombinieren",
-        "kombinieren-systematisch",
-        "kombinieren-drei-mal-zwei",
-        "baumdiagramm-kombinationen",
-        "handschlag-problem",
-        "kombinatorik-reihenfolge",
-        "siegerpodest-reihenfolgen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28430,40 +27630,6 @@
       "klasse": 3,
       "quellen": [
         "WAL"
-      ],
-      "anbindung": "M: Maße",
-      "themen": [
-        "messen-mit-lineal"
-      ],
-      "lernthemen": [
-        "messen-mit-lineal",
-        "sachaufgabe-skizze",
-        "skizze-waehlen",
-        "zaunpfahl-falle",
-        "strategie-waehlen",
-        "sachaufgabe-zwei-rechenschritte",
-        "zwei-schritte-planen",
-        "situation-veraendern",
-        "passende-darstellung-waehlen",
-        "vorgehen-aendern",
-        "lang-oder-kurz-hoeren",
-        "offene-geschlossene-silbe",
-        "doppelt-ll-mm-nn",
-        "doppelt-tt-pp",
-        "doppelt-ss-ff",
-        "doppelt-rr",
-        "einfach-oder-doppelt",
-        "ck-statt-kk",
-        "tz-statt-zz",
-        "k-z-nach-mitlaut",
-        "r-nach-selbstlaut",
-        "ie-bei-langem-i",
-        "i-oder-ie",
-        "silbentrennendes-h",
-        "s-summt-ss-zischt",
-        "scharfes-s-nach-langem-vokal",
-        "ss-nach-kurzem-vokal",
-        "scharfes-s-nach-ei-au-eu"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28478,21 +27644,6 @@
         "HSU34 6.2",
         "GDSU"
       ],
-      "anbindung": "M: Last und Stabilität",
-      "lernthemen": [
-        "rechendreieck-bis-10",
-        "rechendreieck-mit-luecken",
-        "rechendreieck-rueckwaerts",
-        "unmoegliche-aufgabe",
-        "umstellprobe",
-        "praedikat-satzkern",
-        "subjekt",
-        "zweiteiliges-praedikat",
-        "ersatz-weglass-erweiterungsprobe",
-        "ortsangabe",
-        "zeitangabe",
-        "mehrteilige-satzglieder"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28505,16 +27656,6 @@
       "quellen": [
         "HSU34 6.1",
         "HSU34 6.2"
-      ],
-      "anbindung": "M: im Lernkern (Gleichgewicht ist eine Gleichung)",
-      "lernthemen": [
-        "zeichen-groesser-kleiner-gleich",
-        "was-ist-mehr-bis-20",
-        "gleichheitszeichen-gleich-viel",
-        "lueckenaufgaben-bis-10",
-        "waage-raetsel",
-        "ungleichungen-einmaleins",
-        "terme-vergleichen"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28529,27 +27670,6 @@
         "HSU34 6.1",
         "GDSU"
       ],
-      "anbindung": "D: Sachtext",
-      "lernthemen": [
-        "stellenweise-rechnen",
-        "stellengerecht-untereinander",
-        "schriftlich-plus-ohne-uebertrag",
-        "schriftlich-plus-uebertrag",
-        "schriftlich-plus-mehrere-uebertraege",
-        "schriftlich-plus-drei-summanden",
-        "schriftlich-minus-ohne-entbuendeln",
-        "entbuendeln-zehner",
-        "entbuendeln-hunderter",
-        "zweifach-entbuendeln",
-        "entbuendeln-ueber-null",
-        "probe-schriftlich-minus",
-        "schriftlich-plus-minus-million",
-        "schriftlich-mal-ohne-uebertrag",
-        "schriftlich-mal-uebertrag",
-        "schriftlich-mal-null",
-        "mal-zehnerzahl",
-        "schriftlich-mal-zweistellig"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28562,20 +27682,6 @@
       "quellen": [
         "HSU12 2.1",
         "KSS"
-      ],
-      "anbindung": "D: Nomen; alle Körperteile mit richtigem Namen, auch Penis, Vulva, Po, Brust",
-      "lernthemen": [
-        "mengen-5",
-        "zehnerfeld-fuenf-und-noch",
-        "zwanzigerfeld",
-        "menge-bild-ziffer",
-        "zahl-in-vielen-formen",
-        "nomen-gross-artikelprobe",
-        "namen-gross",
-        "abstrakte-nomen-gross",
-        "nachsilben-ung-heit-keit-nis",
-        "adjektiv-in-nominalgruppe-klein",
-        "verben-als-nomen"
       ],
       "stufe_ab": "ruhig",
       "eltern": "Alle Körperteile heißen von Anfang an richtig, auch Penis, Vulva, Po und Brust, neben Arm und Knie und ohne Besonderheit. Kinderschutz-Fachstellen empfehlen das: Wer die Wörter kennt, kann sagen, wenn etwas nicht stimmt.",
@@ -28591,17 +27697,6 @@
         "HSU12 2.1",
         "BOC"
       ],
-      "anbindung": "M: Paare und Mengen",
-      "lernthemen": [
-        "mehr-weniger-gleich-viele",
-        "gerade-ungerade",
-        "gerade-ungerade-begruenden",
-        "gerade-ungerade-bis-100",
-        "stille-hoeren",
-        "geraeusche-erkennen",
-        "laut-oder-leise",
-        "geraeusch-richtung"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28613,57 +27708,6 @@
       "klasse": 2,
       "quellen": [
         "HSU12 2.1"
-      ],
-      "anbindung": "beiläufig, aktive Rollen (Grundsatz 6.1 Nr. 5)",
-      "lernthemen": [
-        "laut-m",
-        "laut-a",
-        "laut-i",
-        "laut-o",
-        "laut-l",
-        "laut-s",
-        "laut-r",
-        "laut-u",
-        "laut-e",
-        "laut-n",
-        "laut-f",
-        "laut-t",
-        "laut-w",
-        "laut-h-anfang",
-        "laut-d",
-        "laut-k",
-        "laut-p",
-        "laut-b",
-        "laut-g",
-        "laut-ei",
-        "laut-au",
-        "laut-sch",
-        "laut-ch-ich",
-        "laut-ch-ach",
-        "laut-z",
-        "laut-ae",
-        "laut-oe",
-        "laut-ue",
-        "laut-eu",
-        "laut-aeu",
-        "laut-ie",
-        "laut-st-anfang",
-        "laut-sp-anfang",
-        "laut-tz",
-        "laut-ck",
-        "laut-ng",
-        "laut-nk",
-        "laut-pf",
-        "laut-j",
-        "laut-v",
-        "laut-eszett",
-        "laut-qu",
-        "laut-x",
-        "laut-y",
-        "laut-c",
-        "laut-ai",
-        "laut-ph",
-        "buchstabenpaare-gross-klein"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28678,20 +27722,6 @@
         "HSU12 2.1",
         "BOC"
       ],
-      "anbindung": "M: Milchzähne zählen",
-      "lernthemen": [
-        "erst-zur-10",
-        "ueber-10-mit-8",
-        "ueber-10-mit-7",
-        "fuenfertrick",
-        "tauschen-ueber-10",
-        "plus-uebergang-gemischt",
-        "minus-ueber-10-bis-5",
-        "minus-ueber-10-ab-6",
-        "minus-uebergang-gemischt",
-        "aufgabe-am-zwanzigerfeld",
-        "rechenweg-nachlegen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28705,20 +27735,6 @@
         "HSU12 2.1",
         "GDSU"
       ],
-      "anbindung": "M: Einkaufen; Inhaltsstoffe sachlich, nie gesund oder ungesund (Grundsatz 8)",
-      "themen": [
-        "geld-legen-bis-20"
-      ],
-      "lernthemen": [
-        "geld-legen-bis-20",
-        "muenzen-kennen",
-        "euro-scheine",
-        "geldbetraege-legen-bis-100",
-        "euro-und-cent",
-        "geld-wechseln",
-        "rueckgeld",
-        "geld-mit-komma-rechnen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28730,13 +27746,6 @@
       "klasse": 1,
       "quellen": [
         "Abl."
-      ],
-      "anbindung": "Sachmoment",
-      "lernthemen": [
-        "geraeuschkette-kurz",
-        "geraeuschkette-lang",
-        "hoergeschichte-reihenfolge",
-        "lesen-reihenfolge"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28750,17 +27759,6 @@
       "quellen": [
         "HSU12 2.2"
       ],
-      "anbindung": "M: Stunden am Tag",
-      "lernthemen": [
-        "punkt-heisst-pause",
-        "ueber-die-zeile-lesen",
-        "schnell-lesen-wiederholt",
-        "fragen-betont-lesen",
-        "betonen-und-pausen",
-        "mit-betonung-vorlesen",
-        "gedicht-vortragen-lesen",
-        "szenische-lesung"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28772,21 +27770,6 @@
       "klasse": 3,
       "quellen": [
         "HSU34 2.1"
-      ],
-      "anbindung": "D: Sachtext",
-      "lernthemen": [
-        "satzanfaenge-abwechseln",
-        "namen-durch-pronomen-ersetzen",
-        "saetze-im-text-verbinden",
-        "satzanfaenge-umstellen",
-        "textlupe",
-        "checkliste-fuer-texte",
-        "eigenen-text-anhoeren",
-        "hilfreicher-tipp",
-        "planen-schreiben-pruefen",
-        "gelungenes-benennen",
-        "schreibkonferenz",
-        "mein-schreibziel"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28800,14 +27783,6 @@
       "quellen": [
         "HSU34 2.1"
       ],
-      "anbindung": "D: Sachtext",
-      "lernthemen": [
-        "laenger-kuerzer",
-        "messen-mit-lineal",
-        "meter-zentimeter",
-        "laengen-schaetzen",
-        "kilometer-millimeter"
-      ],
       "stufe_ab": "ruhig",
       "eltern": "Es geht sachlich um Wachsen und Veränderungen des Körpers. Ein Satz Vorschau steht vor dem Spiel in der Elternansicht (Grundsatz 9.3).",
       "fakten": []
@@ -28820,15 +27795,6 @@
       "klasse": 3,
       "quellen": [
         "HSU34 2.1"
-      ],
-      "anbindung": "M: die Notrufnummer",
-      "lernthemen": [
-        "einladung-vollstaendig",
-        "reporter-bericht",
-        "das-wichtigste-zusammenfassen",
-        "tier-steckbrief",
-        "standpunkt-grund-beispiel",
-        "buchtipp-schreiben"
       ],
       "stufe_ab": "ruhig",
       "eltern": "Die Notrufnummer 112 und einfache Erste Hilfe werden ruhig erklärt, ohne Unfallszene.",
@@ -28845,11 +27811,6 @@
         "HSU12 2.2",
         "SEL"
       ],
-      "anbindung": "D: Gefühlswörter lesen; keine falsche Antwort (K13)",
-      "lernthemen": [
-        "blitzwoerter-1",
-        "blitzwoerter-2"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28862,17 +27823,6 @@
       "quellen": [
         "ETH 1.3",
         "CASEL"
-      ],
-      "anbindung": "keine falsche Antwort (K13)",
-      "lernthemen": [
-        "eigene-aufnahme-pruefen",
-        "reim-nachsprechen",
-        "gedicht-vortragen",
-        "stimme-verstellen",
-        "tempo-und-lautstaerke-sprechen",
-        "hoerspiel-werkstatt",
-        "ich-bin-nicht-der-wolf",
-        "jury-ohr"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28887,13 +27837,6 @@
         "HSU12 2.2",
         "SEL"
       ],
-      "anbindung": "M: bis zehn zählen als Pause",
-      "lernthemen": [
-        "vorwaerts-zaehlen",
-        "rueckwaerts-zaehlen",
-        "nachbarzahlen-bis-10",
-        "zahlen-ordnen-bis-10"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28905,14 +27848,6 @@
       "klasse": 1,
       "quellen": [
         "CASEL"
-      ],
-      "anbindung": "kurzes Vorbild zwischen Kindern (K12)",
-      "lernthemen": [
-        "ausreden-lassen",
-        "warten-bis-dran",
-        "gespraechsregel-erkennen",
-        "gespraechsrollen",
-        "videoanruf-regeln"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -28927,15 +27862,6 @@
         "CASEL",
         "KIM"
       ],
-      "anbindung": "kurzes Vorbild zwischen Kindern (K12)",
-      "lernthemen": [
-        "grundform-verb",
-        "verb-personalform",
-        "personalpronomen",
-        "gegenwart-praesens",
-        "pronomen-statt-nomen",
-        "besitzanzeigende-fuerwoerter"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28949,19 +27875,6 @@
         "ETH 2.3",
         "HSU12 1.1"
       ],
-      "anbindung": "Konflikt kurz, Lösung ausführlich (K12)",
-      "lernthemen": [
-        "gefuehl-in-der-stimme",
-        "hallo-bitte-danke",
-        "sich-entschuldigen",
-        "gefuehl-der-figur",
-        "passend-antworten",
-        "ich-botschaft",
-        "rueckmeldung-geben",
-        "troesten-und-gratulieren",
-        "daran-knuepf-ich-an",
-        "mit-wem-rede-ich"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -28974,24 +27887,6 @@
       "quellen": [
         "CASEL",
         "Abl."
-      ],
-      "anbindung": "M: im Lernkern (Verteilen)",
-      "themen": [
-        "gerecht-verteilen",
-        "aufteilen-in-gruppen"
-      ],
-      "lernthemen": [
-        "gerecht-verteilen",
-        "aufteilen-in-gruppen",
-        "sonderfaelle-teilen",
-        "halbschriftlich-geteilt",
-        "halbschriftlich-geteilt-rest",
-        "schriftlich-geteilt-ohne-rest",
-        "schriftlich-geteilt-erste-stelle",
-        "schriftlich-geteilt-null-ergebnis",
-        "schriftlich-geteilt-rest",
-        "schriftlich-geteilt-durch-10",
-        "probe-teilen"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -29007,51 +27902,6 @@
         "ETH 2.5",
         "CASEL"
       ],
-      "anbindung": "kurzes Vorbild zwischen Kindern (K12)",
-      "lernthemen": [
-        "ueber-10-mit-9",
-        "minus-9-ueber-minus-10",
-        "hilfsaufgabe-plus-minus",
-        "vereinfachen-plus-minus",
-        "gegensinnig-summe-bleibt",
-        "schreibschrift-i-u",
-        "schreibschrift-in-einem-zug",
-        "schreibschrift-n-m",
-        "schreibschrift-r",
-        "schreibschrift-t",
-        "schreibschrift-c-a-o",
-        "luftsprung-zum-oval",
-        "sas-verbindung-zum-oval",
-        "schreibschrift-d-q",
-        "oben-weiter-verbindung",
-        "schreibschrift-v-w",
-        "schreibschrift-e",
-        "schreibschrift-l-h-k-b",
-        "schleifenbuchstaben-unterscheiden",
-        "sas-knoten",
-        "schreibschrift-j-y-g",
-        "schlaufe-unten-verbindung",
-        "schreibschrift-f-p",
-        "schreibschrift-s",
-        "s-verbindungen-schreibschrift",
-        "schreibschrift-sz",
-        "schreibschrift-z-x",
-        "schreibschrift-ck-ch-tz",
-        "schreibschrift-gross-ohne-verbindung",
-        "schreibschrift-gross-bogen-anschluss",
-        "schreibschrift-gross-knifflig",
-        "schreibschrift-wort-abschreiben",
-        "druck-zu-schreibschrift",
-        "schreibschrift-satz",
-        "schreibschrift-proportionen",
-        "schreibschrift-wortende",
-        "handschrift-mittelband",
-        "handschrift-flott-und-fluessig",
-        "handschrift-lage-und-groesse",
-        "handschrift-schoenste-woerter",
-        "handschrift-eigene-abkuerzung",
-        "handschrift-sauber-korrigieren"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -29063,15 +27913,6 @@
       "klasse": 1,
       "quellen": [
         "ETH 2.4"
-      ],
-      "anbindung": "D: Bitte-Sätze und Fragesätze",
-      "themen": [
-        "hoeflich-nachfragen"
-      ],
-      "lernthemen": [
-        "hoeflich-nachfragen",
-        "unbekanntes-wort-erfragen",
-        "warum-versteh-ich-nichts"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -29086,14 +27927,6 @@
         "ETH 2.2",
         "HSU12 1.1"
       ],
-      "anbindung": "M: Stimmen zählen mit Strichliste",
-      "themen": [
-        "strichliste"
-      ],
-      "lernthemen": [
-        "strichliste",
-        "gewinnstrategie"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -29106,8 +27939,6 @@
       "quellen": [
         "HSU12 1.1"
       ],
-      "anbindung": "beiläufig, nie als Thema einer Aufgabe (Grundsatz 6.1 Nr. 2)",
-      "lernthemen": [],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -29120,28 +27951,6 @@
       "quellen": [
         "SEL",
         "Abl."
-      ],
-      "anbindung": "und wie es weitergeht; Wortliste 3.2",
-      "lernthemen": [
-        "bildergeschichte-ordnen-3",
-        "bildergeschichte-ordnen-6",
-        "satz-pro-bild",
-        "passender-zweiter-satz",
-        "fehlenden-satz-einfuegen",
-        "anfang-mitte-ende",
-        "ausgangslage-ereignis-ausgang",
-        "guter-schluss",
-        "ueberschrift-finden",
-        "was-ist-erzaehlenswert",
-        "ploetzlich-wendepunkt",
-        "neuer-absatz",
-        "bastelanleitung-schreiben",
-        "beschreibung-ordnen",
-        "reizwort-geschichte",
-        "was-waere-wenn",
-        "spannung-bauen",
-        "aus-anderer-sicht-erzaehlen",
-        "gefuehle-der-figur-schreiben"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -29156,30 +27965,6 @@
         "HSU12 1.2",
         "ETH 1.4"
       ],
-      "anbindung": "M: Geld",
-      "themen": [
-        "geld-legen-bis-20",
-        "rueckgeld"
-      ],
-      "lernthemen": [
-        "geld-legen-bis-20",
-        "rueckgeld",
-        "zehner-und-einer-bis-20",
-        "zehn-plus",
-        "minus-zehner",
-        "zehnerzahlen-bis-100",
-        "zahl-darstellungen-bis-100",
-        "zahlen-mit-null-bis-100",
-        "zerlegen-zehner-einer",
-        "darstellungen-bis-1000",
-        "null-platzhalter-bis-1000",
-        "zerlegen-bis-1000",
-        "null-in-grossen-zahlen",
-        "zerlegen-grosse-zahlen",
-        "kommaschreibweise-groessen",
-        "schreibweisen-groessen",
-        "groessen-ordnen-gemischt"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -29191,13 +27976,6 @@
       "klasse": 2,
       "quellen": [
         "HSU12 1.2"
-      ],
-      "anbindung": "D: Wörter rund um Medien",
-      "lernthemen": [
-        "ueberschrift-verraet",
-        "worum-gehts-hoeren",
-        "beste-ueberschrift-waehlen",
-        "kurz-gesagt"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -29212,21 +27990,6 @@
         "CASEL",
         "SEL"
       ],
-      "anbindung": "nur als kurzes gutes Vorbild (K12)",
-      "lernthemen": [
-        "hoergeschichte-hauptfigur",
-        "hoergeschichte-ort",
-        "hoerauftrag-gezielt",
-        "hoerdetail-nebenbei",
-        "gehoertes-pruefen",
-        "sprecher-unterscheiden",
-        "meine-hoerfrage",
-        "schluesselwort-fangen",
-        "trotz-laerm-verstehen",
-        "viele-stimmen-verstehen",
-        "stimmt-die-aussage-und-warum",
-        "zwei-geschichten-vergleichen"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -29240,18 +28003,6 @@
         "HSU34 1.1",
         "GDSU"
       ],
-      "anbindung": "M: mehr und weniger Stimmen",
-      "themen": [
-        "strichliste-und-bilddiagramm"
-      ],
-      "lernthemen": [
-        "strichliste-und-bilddiagramm",
-        "strichliste",
-        "tabelle-aus-text",
-        "balkendiagramm",
-        "daten-sammeln-darstellen",
-        "saeulendiagramm-tabelle"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -29263,17 +28014,6 @@
       "klasse": 3,
       "quellen": [
         "HSU34 1.1"
-      ],
-      "anbindung": "D: Sachtext",
-      "lernthemen": [
-        "frage-zum-text",
-        "wer-wo-wann-lesen",
-        "zeile-und-absatz-finden",
-        "fettdruck-nutzen",
-        "wichtiges-im-text-markieren",
-        "sachtext-mit-bild-lesen",
-        "wer-ist-mit-er-gemeint",
-        "informationen-verknuepfen"
       ],
       "stufe_ab": "ruhig",
       "fakten": []
@@ -29287,13 +28027,6 @@
       "quellen": [
         "HSU34 1.2"
       ],
-      "anbindung": "M: Preise vergleichen",
-      "lernthemen": [
-        "ueberschlag-plus-minus",
-        "ueberschlag-mal",
-        "genau-oder-ungefaehr",
-        "ueberschlag-als-beweis"
-      ],
       "stufe_ab": "ruhig",
       "fakten": []
     },
@@ -29306,11 +28039,6 @@
       "quellen": [
         "KSS 1",
         "TPW"
-      ],
-      "anbindung": "D: im neutralen Körperspiel",
-      "lernthemen": [
-        "der-die-das",
-        "geschlecht-des-nomens"
       ],
       "stufe_ab": "ruhig",
       "eltern": "Botschaft 1: Dein Körper gehört dir. Das Kind kennt alle Körperteile mit Namen. Schutz vor Übergriffen ist Aufgabe der Erwachsenen; die App stärkt nur Wortschatz und Zutrauen.",
@@ -29326,13 +28054,6 @@
         "KSS 2",
         "TPW"
       ],
-      "anbindung": "keine falsche Antwort (K13)",
-      "lernthemen": [
-        "ich-mag-gedicht",
-        "gedicht-umbauen",
-        "elfchen",
-        "mein-lernsatz"
-      ],
       "stufe_ab": "ruhig",
       "eltern": "Botschaft 2: Ich vertraue meinem Gefühl. Jede Antwort des Kindes wird angenommen und nicht kommentiert.",
       "fakten": []
@@ -29345,13 +28066,6 @@
       "klasse": 1,
       "quellen": [
         "KSS"
-      ],
-      "anbindung": "keine falsche Antwort (K13)",
-      "lernthemen": [
-        "reim-hoeren",
-        "reimwort-finden",
-        "reim-im-gedicht",
-        "paarreim-kreuzreim"
       ],
       "stufe_ab": "ruhig",
       "eltern": "Gefühle werden nicht bewertet. Das Kind lernt Wörter für sie.",
@@ -29367,8 +28081,6 @@
         "KSS 3",
         "Abl."
       ],
-      "anbindung": "sortieren ohne Wertung; Beispiele aus dem Alltag (Kitzeln, das nicht aufhört)",
-      "lernthemen": [],
       "stufe_ab": "ruhig",
       "eltern": "Botschaft 3: Berührungen fühlen sich verschieden an. Alltagstipp: Kitzeln sofort stoppen, wenn das Kind Stopp sagt; keine erzwungenen Küsse oder Umarmungen.",
       "fakten": []
@@ -29381,19 +28093,6 @@
       "klasse": 1,
       "quellen": [
         "KSS 4"
-      ],
-      "anbindung": "und andere dürfen es auch",
-      "lernthemen": [
-        "satzanfang-gross",
-        "punkt-am-satzende",
-        "frage-und-ausrufezeichen",
-        "satzarten",
-        "komma-bei-aufzaehlung",
-        "woertliche-rede-erkennen",
-        "woertliche-rede-begleitsatz-vorne",
-        "woertliche-rede-begleitsatz-hinten",
-        "woertliche-rede-begleitsatz-mitte",
-        "figur-sprechen-lassen"
       ],
       "stufe_ab": "ruhig",
       "eltern": "Botschaft 4: Ich darf Nein sagen. Kinder können Übergriffe in der Regel nicht selbst verhindern; ein Nein kann übergangen werden. Dann gilt: Hilfe holen.",
@@ -29409,13 +28108,6 @@
         "KSS 5",
         "AJS"
       ],
-      "anbindung": "eindeutige Sachregel: schlechte Geheimnisse darf man immer erzählen",
-      "lernthemen": [
-        "text-gestalten",
-        "anrede-und-gruss",
-        "brief-und-e-mail",
-        "blatt-gestalten"
-      ],
       "stufe_ab": "ruhig",
       "eltern": "Botschaft 5: Gute Geheimnisse (Überraschung, Geschenk) machen Freude. Schlechte Geheimnisse fühlen sich nicht gut an – die darf und soll das Kind immer weitererzählen, auch wenn jemand gesagt hat, es dürfe das nicht.",
       "fakten": []
@@ -29429,8 +28121,6 @@
       "quellen": [
         "KSS 6"
       ],
-      "anbindung": "D: Wer hilft mir? Weitererzählen, bis jemand hilft",
-      "lernthemen": [],
       "stufe_ab": "ruhig",
       "eltern": "Botschaft 6: Ich weiß, wo ich Hilfe hole – und erzähle weiter, bis mir jemand hilft. Anlaufstellen stehen in der Elternansicht.",
       "fakten": []
@@ -29444,8 +28134,6 @@
       "quellen": [
         "KSS 7"
       ],
-      "anbindung": "Querschnitt in allen Schutz-Themen, kein eigenes Spiel",
-      "lernthemen": [],
       "stufe_ab": "ruhig",
       "eltern": "Botschaft 7: Das Kind ist nie schuld, wenn jemand seine Grenzen überschreitet.",
       "fakten": []
@@ -29460,12 +28148,6 @@
         "KS",
         "AJS"
       ],
-      "anbindung": "Nein sagen, wegklicken, Hilfe holen",
-      "lernthemen": [
-        "lesen-tabelle",
-        "inhaltsverzeichnis-nutzen",
-        "auf-webseiten-suchen"
-      ],
       "stufe_ab": "ruhig",
       "eltern": "Im Netz gilt dasselbe: Nein sagen, wegklicken, einem Erwachsenen Bescheid sagen. Für Kinder geeignete Seiten: fragFINN, Internet-ABC.",
       "fakten": []
@@ -29478,18 +28160,6 @@
       "klasse": 1,
       "quellen": [
         "HSU12 5.3"
-      ],
-      "anbindung": "siehe Räume und Wege",
-      "lernthemen": [
-        "auftrag-ausfuehren",
-        "doppelauftrag",
-        "auftrag-mit-lagewort",
-        "lies-und-tu",
-        "lesen-satz-zum-bild",
-        "dreierauftrag",
-        "ding-beschreiben",
-        "wege-nach-pfeilen",
-        "ortsplan-orientieren"
       ],
       "stufe_ab": "ruhig",
       "eltern": "Verkehrsregeln werden als Sachwissen geübt, ohne Unfallszene.",
@@ -29505,14 +28175,6 @@
         "HSU12 3.2",
         "Abl."
       ],
-      "anbindung": "M: die Notrufnummer",
-      "lernthemen": [
-        "ziffern-lesen-bis-10",
-        "zahlen-bis-20-schreiben",
-        "zahlwort-ziffern-bis-100",
-        "dreistellige-zahlen-lesen",
-        "grosse-zahlen-lesen"
-      ],
       "stufe_ab": "ruhig",
       "eltern": "Feuer wird ruhig erklärt: Erwachsene holen, Notruf 112. Keine Brandszene.",
       "fakten": []
@@ -29525,13 +28187,6 @@
       "klasse": 1,
       "quellen": [
         "Abl."
-      ],
-      "anbindung": "Sachmoment",
-      "lernthemen": [
-        "formen-legen-zusammensetzen",
-        "parkettierungen",
-        "pentominos",
-        "drehen-im-kopf"
       ],
       "stufe_ab": "ruhig",
       "eltern": "Sachlicher Hinweis ohne Gefahrenszene.",
@@ -29546,15 +28201,6 @@
       "quellen": [
         "Abl."
       ],
-      "anbindung": "statt einer Fremdenregel; keine Fremdenfigur. Annahme: an keiner Quelle geprüft",
-      "lernthemen": [
-        "wozu-ist-der-zettel",
-        "fuer-wen-schreibe-ich",
-        "geschichtenanfang-erkennen",
-        "sachlich-oder-ausgeschmueckt",
-        "passende-schrift-waehlen",
-        "mundart-alltag-schulsprache"
-      ],
       "stufe_ab": "ruhig",
       "eltern": "Statt „Geh nicht mit Fremden mit“: Das Kind sagt Bescheid, wo es hingeht und mit wem. Die meisten Übergriffe gehen von bekannten Personen aus; eine Fremdenregel führt in die Irre.",
       "fakten": []
@@ -29567,12 +28213,6 @@
       "klasse": 1,
       "quellen": [
         "Abl."
-      ],
-      "anbindung": "ruhig, mit Helfer in Sicht (Grundsatz 9.2 Nr. 5)",
-      "lernthemen": [
-        "oben-unten-vorne-hinten",
-        "links-und-rechts",
-        "neben-zwischen-ueber-unter-auf"
       ],
       "stufe_ab": "ruhig",
       "eltern": "Das Kind übt, wen es fragen kann (Menschen an der Kasse, Eltern mit Kindern), ohne Angstszene.",

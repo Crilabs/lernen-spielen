@@ -144,7 +144,6 @@ const WELT = {
   selbstwert: /Ich bin (gut|liebenswert|stolz|stark|toll|wichtig|richtig)/i,
 };
 regeln.welten = ({ themen, ueberschriften = [], welten = [] }) => {
-  const tids = new Set(themen.map((t) => t.id));
   const arten = new Map(ueberschriften.map((u) => [u.id, u.art]));
   for (const u of ueberschriften) assert.ok(WELT.art.includes(u.art) && u.name, `Überschrift ${u.id}: art oder name`);
   const wids = new Set();
@@ -156,10 +155,9 @@ regeln.welten = ({ themen, ueberschriften = [], welten = [] }) => {
     assert.ok(arten.has(w.ueberschrift), `${wo}: Überschrift ${w.ueberschrift} fehlt`);
     assert.ok([1, 2, 3, 4].includes(w.klasse), `${wo}: klasse ${w.klasse}`);
     assert.ok(WELT.stufe.includes(w.stufe_ab), `${wo}: stufe_ab ${w.stufe_ab}`);
-    assert.ok(w.name && w.anbindung && w.quellen?.length > 0, `${wo}: name, anbindung oder quellen fehlt`);
+    assert.ok(w.name && w.quellen?.length > 0, `${wo}: name oder quellen fehlt`);
     assert.doesNotMatch(w.name, WELT.gesperrt, `${wo}: gesperrtes Wort im name`);
     assert.doesNotMatch(w.name, WELT.selbstwert, `${wo}: Selbstwert-Satz im name (K15)`);
-    for (const id of w.themen ?? []) assert.ok(tids.has(id), `${wo}: Thema ${id} fehlt im Plan`);
     if (arten.get(w.ueberschrift) === "schutz") assert.ok(w.eltern, `${wo}: Schutz-Thema ohne eltern`);
     assert.ok(Array.isArray(w.fakten), `${wo}: fakten fehlt`);
     for (const f of w.fakten) assert.ok(f.satz && f.quelle, `${wo}: Fakt ohne Quelle (K4)`);
@@ -362,11 +360,10 @@ test("Plan: Welten der Kosmik-Schicht sind vollständig und gültig", () => {
 test("Plan: Welten-Regel erkennt falsche Verweise, gesperrte Wörter und fehlende Elterntexte", () => {
   const themen = [{ id: "t" }];
   const ueberschriften = [{ id: "u", name: "U", art: "sache" }, { id: "s", name: "S", art: "schutz" }];
-  const w = { id: "w", name: "Maus", ueberschrift: "u", klasse: 1, quellen: ["HSU12"], anbindung: "M: zählen", themen: ["t"], stufe_ab: "ruhig", fakten: [] };
+  const w = { id: "w", name: "Maus", ueberschrift: "u", klasse: 1, quellen: ["HSU12"], stufe_ab: "ruhig", fakten: [] };
   const pruefe = (x) => regeln.welten({ themen, ueberschriften, welten: [x] });
   pruefe(w);
   assert.throws(() => pruefe({ ...w, ueberschrift: "x" }), /Überschrift x fehlt/);
-  assert.throws(() => pruefe({ ...w, themen: ["gibt-es-nicht"] }), /fehlt im Plan/);
   assert.throws(() => pruefe({ ...w, ueberschrift: "s" }), /ohne eltern/);
   pruefe({ ...w, ueberschrift: "s", eltern: "E" });
   assert.throws(() => pruefe({ ...w, fakten: [{ satz: "Mäuse haben Schnurrhaare." }] }), /ohne Quelle/);

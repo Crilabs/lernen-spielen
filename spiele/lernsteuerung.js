@@ -812,13 +812,11 @@ export function merkeWelt(stand, weltId, heute) {
   return true;
 }
 
-// Welten je Überschrift für die Eltern. naechste = Set der Thema-Ids „als Nächstes“ (aus alsNaechstes).
+// Welten je Überschrift für die Eltern. Welten sind nicht mit Lernthemen verknüpft (Christian 2026-11-15).
 // [{ id, name, welten: [{ id, name, beschreibung, eltern, zustand, seit, spiele: [{ id, titel }] }] }]
-//   zustand = "gesehen" | "dran" (ein Lernthema der Welt ist dran) | "naechstes" | "offen"; gesehen geht vor.
+//   zustand = "gesehen" (das Kind hat in der Welt gespielt) | "offen".
 //   Reihenfolge: Überschriften wie im Plan, darin nach Klasse, dann Planreihenfolge.
-//   Lernthemen = welten[].lernthemen ∪ Themen der digitalen Spiele, deren Heimatwelt sie ist.
-export function elternWelten(ctx, stand, naechste = new Set()) {
-  const z = zustaende(ctx, stand);
+export function elternWelten(ctx, stand) {
   const spiele = ctx?.spiele?.spiele ?? [];
   const welten = Array.isArray(ctx?.plan?.welten) ? ctx.plan.welten : [];
   const gruppen = (Array.isArray(ctx?.plan?.ueberschriften) ? ctx.plan.ueberschriften : []).map((u) => ({ id: u.id, name: text(u.name), welten: [] }));
@@ -828,11 +826,8 @@ export function elternWelten(ctx, stand, naechste = new Set()) {
     const g = nachId.get(w.ueberschrift);
     if (!g) continue;
     const eigene = spiele.filter((s) => (text(s.karte?.welt) || text(s.welt)) === w.id);
-    const themen = new Set(Array.isArray(w.lernthemen) ? w.lernthemen : []);
-    for (const t of themenVon(ctx)) if (eigene.some((s) => spieleFuer(ctx, t.id).includes(s.id))) themen.add(t.id);
     const seit = text(stand?.welten?.[w.id]?.seit);
-    const zustand = seit ? "gesehen" : [...themen].some((id) => z[id] === "dran") ? "dran"
-      : [...themen].some((id) => naechste.has(id)) ? "naechstes" : "offen";
+    const zustand = seit ? "gesehen" : "offen";
     g.welten.push({ id: w.id, name: text(w.name), beschreibung: text(w.beschreibung), eltern: text(w.eltern), zustand, seit,
       spiele: eigene.map((s) => ({ id: s.id, titel: text(s.titel) || s.id })) });
   }
