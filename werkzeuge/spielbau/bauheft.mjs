@@ -133,21 +133,11 @@ export async function bauheft(id, wurzel = WURZEL) {
     "## Katalog-Eintrag (Stoff und Idee, kein Bauplan)",
     "",
     "Der Eintrag sagt, **was** gelernt wird (Themen, Fehlerkontrolle, Lernzeichen). Wie das Spiel sich anfühlt, " +
-      "entscheidet der Spielkern (Regeln §1). Was mit „Christian“ und Datum markiert ist, ist gesetzt; " +
-      "Geschichten, Packungen, Listen und Zusätze aus dem Eintrag sind Vorschläge, die du weglassen darfst.",
+      "entscheidet der Spielkern (Regeln §1). Was mit „Christian“ und Datum markiert ist, ist gesetzt – außer Heimatwelt, " +
+      "Sachgrund und Ruhig/Sanft/Abenteuer: Sachwelten gehören nicht mehr ins Spiel (Regeln §6). Packungen, Listen und " +
+      "Zusätze aus dem Eintrag sind Vorschläge, die du weglassen darfst.",
     "",
     eintrag.text,
-    "",
-    "## Welt",
-    "",
-    // Seit der Überarbeitung stehen Heimatwelt und Geschichte wortgleich im Eintrag (Spielkatalog §8a): nicht doppelt.
-    /^\s*- Ruhig:/m.test(eintrag.text) ? "(Geschichte: siehe Katalog-Eintrag, wortgleich in welten.md)" : weltenEintrag(id, wurzel) ?? "(kein Eintrag in welten.md)",
-    "",
-    welt
-      ? [`Heimatwelt **${welt.name}** (\`${welt.id}\`): ${welt.beschreibung ?? ""}`,
-        ...(welt.fakten?.length ? ["", "Geprüfte Fakten (nur diese dürfen als „In echt …“ vorkommen, Regeln G11):",
-          ...welt.fakten.map((f) => `- ${f.satz} (${f.quelle})`)] : [])].join("\n")
-      : `Heimatwelt ${weltId ?? "?"}: nicht in spiele/lernplan.json`,
     "",
     "## Themen",
     "",

@@ -36,7 +36,7 @@ test("Bauheft: Katalog-Eintrag, Hauptthemen und Heimatwelt aus dem Katalog", () 
 test("Bauheft: enthält die Regeln, den Eintrag, die Themen und was es gibt – und bleibt klein", async () => {
   const h = await bauheft("M37");
   assert.ok(h.includes(regeln()), "Regeln fehlen");
-  for (const t of ["### M37 Kettenhüpfer", "**zweierreihe**", "In echt hat eine Woche sieben Tage.", "`<ls-perlenkette>`", "Aufgabenarten", "Es gibt dieses Spiel schon"])
+  for (const t of ["### M37 Kettenhüpfer", "**zweierreihe**", "`<ls-perlenkette>`", "Aufgabenarten", "Es gibt dieses Spiel schon"])
     assert.ok(h.includes(t), `fehlt: ${t}`);
   assert.ok(h.length < 45000, `Bauheft ${h.length} Zeichen`);
 });
