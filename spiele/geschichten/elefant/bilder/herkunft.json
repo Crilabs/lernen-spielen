@@ -1,0 +1,236 @@
+{
+ "01.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: NILA stands under her MOTHER between the mother's front legs and suckles with the side of her mouth at the mother's teat (elephant teats are between the front legs); Nila's own little trunk hangs loosely to the side. Dry open forest, warm morning light. Side view, both elephants fully visible.",
+  "usage": {
+   "input_tokens": 556,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 556
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2312
+  }
+ },
+ "02.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: NILA in the foreground calmly holds the tip of her own trunk in her mouth (trunk-sucking, like a child sucking a thumb). Beside her the BIG SISTER wraps her trunk around a tuft of dry grass and pulls it up. Dry forest floor.",
+  "usage": {
+   "input_tokens": 546,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 546
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2302
+  }
+ },
+ "03.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: in the foreground a dried-up forest pool: an empty hollow of cracked, dry mud, no water at all. In the middle ground the small herd (MOTHER, AUNT, BIG SISTER and NILA) walks away along the edge of the hollow into the open forest.",
+  "usage": {
+   "input_tokens": 549,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 549
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2305
+  }
+ },
+ "04.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: the small herd walks in a line through bright, hot open forest: AUNT in front, then NILA close between AUNT and MOTHER, BIG SISTER behind. The adults' ears are spread out from the head, fanning. Side view, all four elephants fully visible, sunlight.",
+  "usage": {
+   "input_tokens": 552,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 552
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2308
+  }
+ },
+ "05.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: the MOTHER flings a cloud of reddish-brown dust with her trunk over her own back, dust falling on her back. NILA stands beside her with reddish dust on the top of her head, looking up. Midday, dappled shade of trees.",
+  "usage": {
+   "input_tokens": 546,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 546
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2302
+  }
+ },
+ "06.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: a dry, sandy streambed with a steep earth bank about as high as NILA. The MOTHER, AUNT and BIG SISTER already stand on top of the far bank. NILA stands at the foot of the bank with her front feet on the steep slope, her hind feet slid back onto the sand, trying to climb. She is not hurt, only making an effort. Bright afternoon light.",
+  "usage": {
+   "input_tokens": 574,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 574
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2330
+  }
+ },
+ "07.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: the same steep earth bank of a dry streambed. The AUNT stands directly behind NILA in the streambed and pushes Nila's rump upward with her trunk; NILA is just stepping over the top edge of the bank. The MOTHER stands on top of the bank and touches Nila's head gently with her trunk tip.",
+  "usage": {
+   "input_tokens": 560,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 560
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2316
+  }
+ },
+ "08.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: the wide, flat shore of the Kabini reservoir with fresh green grass and calm blue-grey water, forested hills behind. Many Asian elephants drink in the distance. In front, the MOTHER stands at the water's edge and lifts the tip of her trunk into her open mouth, squirting water into her mouth. NILA stands next to her.",
+  "usage": {
+   "input_tokens": 563,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 563
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2319
+  }
+ },
+ "09.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: NILA in focus stands at the water's edge with all four legs straight, standing upright, and lifts her short trunk halfway up; water drips and splashes out of the trunk tip back into the lake. Her face is wet. The MOTHER's legs are visible in the background. Nila is standing, not kneeling, not drinking.",
+  "usage": {
+   "input_tokens": 563,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 563
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2319
+  }
+ },
+ "10.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: close side view at the lakeshore. NILA kneels on both bent front knees at the water's edge, head lowered and stretched forward, her open mouth touching the water surface, drinking directly with her mouth. Her short trunk is lifted and curled upward out of the water, away from the water, so it clearly does not touch the water. The BIG SISTER stands close beside her on the shore.",
+  "usage": {
+   "input_tokens": 574,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 574
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2330
+  }
+ },
+ "11.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: NILA lies on her side in wet brown mud at the lakeshore, completely smeared with brown mud, relaxed, trunk curled. MOTHER and AUNT stand in the mud behind her, mud on their legs. Bright light.",
+  "usage": {
+   "input_tokens": 539,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 539
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2295
+  }
+ },
+ "12.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: early evening golden light over the lake, still bright. The MOTHER stands calmly with her mouth slightly open, rumbling. NILA stands still close against her mother's front leg, ears slightly spread, listening. Far away along the shore, another small group of elephants.",
+  "usage": {
+   "input_tokens": 546,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 546
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2302
+  }
+ },
+ "13.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: last warm light of the day on the grassy lakeshore. NILA in the foreground firmly holds a tuft of fresh green grass curled in the tip of her trunk. The MOTHER grazes right beside her.",
+  "usage": {
+   "input_tokens": 534,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 534
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2290
+  }
+ }
+}

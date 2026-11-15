@@ -1,0 +1,120 @@
+{
+ "id": "elefant-ruhig",
+ "titel": "Nila und der große See",
+ "art": "sachgeschichte",
+ "welt": "tiere-der-erdteile",
+ "familie": null,
+ "kulisse": "dschungel",
+ "klasse": 1,
+ "fassung": "ruhig",
+ "fassungVon": "elefant",
+ "quellen": [
+  {
+   "fakt": "Asiatische Elefantenkälber trinken Milch mit der Seite des Mauls, nicht mit dem Rüssel; um sie kümmern sich die Mutter und andere erwachsene und junge Kühe der Gruppe.",
+   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/reproduction (San Diego Zoo Wildlife Alliance, Fact Sheet Asian Elephant), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Den Rüssel beherrschen Kälber erst allmählich; Rüsselmotorik und Verhalten reifen über etwa ein Jahr, während die Beine gleich nach der Geburt sicher sind (wilde Elefanten in Kabini, Südindien).",
+   "quelle": "Revathe, Anvitha & Vidya 2020, The International Journal of Developmental Biology 64: 367–382; https://ijdb.ehu.eus/article/190274tv, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Elefanten saugen Wasser in den Rüssel und blasen es dann ins Maul; der Rüssel ist kein Trinkhalm.",
+   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/characteristics (San Diego Zoo Wildlife Alliance); https://www.elephantvoices.org/the-elephant-ethogram/drinking (ElephantVoices), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Ungeübte Kälber knien sich hin und saugen das Wasser direkt mit dem Maul.",
+   "quelle": "https://www.elephantvoices.org/the-elephant-ethogram/drinking (ElephantVoices, Elephant Ethogram), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Kälber lutschen am eigenen Rüssel, wenn sie unsicher sind, offenbar zur Beruhigung.",
+   "quelle": "https://www.elephantvoices.org/the-elephant-ethogram/trunk-sucking (ElephantVoices), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Elefanten werfen an heißen Tagen Staub und Erde auf ihren Körper; das schützt die Haut vor Sonne und Insektenstichen.",
+   "quelle": "https://nationalzoo.si.edu/webcams/elephants (Smithsonian's National Zoo); https://ielc.libguides.com/sdzg/factsheets/asianelephant/behavior (San Diego Zoo Wildlife Alliance), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Schlamm hilft Elefanten in heißen Monaten, kühl zu bleiben; Sand trocknet und wärmt die Haut in kühleren Monaten.",
+   "quelle": "https://www.nationalzoo.si.edu/node/8129 (Smithsonian's National Zoo, Elephant Diaries), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Die Ohren Asiatischer Elefanten sind stark durchblutet; durch Fächeln kühlen sie sich ab.",
+   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/characteristics (San Diego Zoo Wildlife Alliance), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Junge Elefanten laufen und stehen zwischen oder hinter Erwachsenen, um geschützt zu sein.",
+   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/behavior; https://ielc.libguides.com/sdzg/factsheets/asianelephant/reproduction (San Diego Zoo Wildlife Alliance), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Elefanten berühren einander sanft mit dem Rüssel und verständigen sich mit tiefen Brummlauten.",
+   "quelle": "https://nationalzoo.si.edu/webcams/elephants (Smithsonian's National Zoo), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Tiefe Brummlaute (Rumbles) sind Kontaktrufe zwischen Tieren und Gruppen über weite Strecken; ein Teil liegt im Infraschall, unter der Hörgrenze des Menschen (entdeckt 1984 von Katy Payne an Asiatischen Elefanten).",
+   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/behavior (San Diego Zoo Wildlife Alliance); https://www.npr.org/2015/08/20/432616506/to-decode-elephant-conversation-you-must-feel-the-jungle-rumble (NPR, Elephant Listening Project), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "In der Trockenzeit trocknen Wasserlöcher im Wald aus; Herden ziehen an den Kabini-Stausee in Südindien, der auch im Hochsommer Wasser hat, und fressen das frische Gras auf dem frei werdenden Ufer.",
+   "quelle": "https://news.mongabay.com/2013/10/photo-essay-notes-from-indias-kabini-river/ (Mongabay); https://roundglasssustain.com/habitats/nagarhole-national-park (Roundglass Sustain), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Asiatische Elefantenkühe haben meist keine Stoßzähne (höchstens kleine, kaum sichtbare); die Ohren sind kleiner als beim Afrikanischen Elefanten; Kälber sind stark behaart.",
+   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/characteristics (San Diego Zoo Wildlife Alliance), abgerufen 2026-11-15"
+  }
+ ],
+ "seiten": [
+  {
+   "text": "In einem Wald in Indien ist es heiß und trocken. Nila ist ein kleines Elefantenkalb. Sie trinkt Milch bei ihrer Mutter, mit dem Maul. Ihr Rüssel baumelt dabei hin und her.",
+   "bild": "../elefant/bilder/01.webp"
+  },
+  {
+   "text": "Nila will ein Büschel Gras greifen. Doch ihr Rüssel schlenkert daneben. Ihre große Schwester rupft das Gras mit einem Griff. Nila steckt die Rüsselspitze ins Maul und nuckelt.",
+   "bild": "../elefant/bilder/02.webp"
+  },
+  {
+   "text": "Der Tümpel im Wald ist ausgetrocknet. Nur rissiger Schlamm ist übrig. Die Herde zieht los zum großen See. Dort gibt es noch Wasser.",
+   "bild": "../elefant/bilder/03.webp"
+  },
+  {
+   "text": "Die Sonne brennt. Neben Nila fächeln die Großen mit ihren Ohren. Nila spürt den Luftzug. Sie läuft dicht zwischen Mutter und Tante.",
+   "bild": "../elefant/bilder/04.webp"
+  },
+  {
+   "text": "Mittags wirft Nilas Mutter Staub über ihren Rücken. Die Fliegen auf ihrer Haut summen davon. Nila versucht es auch. Der Staub landet auf ihrem Kopf.",
+   "bild": "../elefant/bilder/05.webp"
+  },
+  {
+   "text": "Am Nachmittag kommt die Herde an ein flaches Bachbett. Die Großen gehen hinunter und drüben wieder hinauf. Nila stapft hinterher, Schritt für Schritt.",
+   "bild": "bilder/06.webp"
+  },
+  {
+   "text": "Das Ufer drüben ist hoch für ein kleines Kalb. Ihre Tante geht dicht hinter ihr. Mit Mühe klettert Nila hinauf. Oben berührt die Mutter sie sanft mit dem Rüssel.",
+   "bild": "bilder/07.webp"
+  },
+  {
+   "text": "Bald glitzert der See zwischen den Bäumen. Am Ufer wächst frisches Gras, und viele Elefanten trinken. Nilas Mutter saugt Wasser in ihren Rüssel. Dann spritzt sie es sich ins Maul.",
+   "bild": "../elefant/bilder/08.webp"
+  },
+  {
+   "text": "Nila taucht ihren Rüssel auch ins Wasser. Sie hebt ihn hoch, doch das Wasser plätschert heraus. Was glaubst du: Wie trinkt Nila jetzt?",
+   "bild": "../elefant/bilder/09.webp",
+   "frage": true
+  },
+  {
+   "text": "Nila geht vorn in die Knie. Sie streckt den Kopf vor und trinkt mit dem Maul. Schluck für Schluck.",
+   "bild": "../elefant/bilder/10.webp"
+  },
+  {
+   "text": "Danach planschen die Elefanten im Schlamm am Ufer. Nila wälzt sich hinein, bis sie ganz braun ist. Der Schlamm kühlt ihre heiße Haut.",
+   "bild": "../elefant/bilder/11.webp"
+  },
+  {
+   "text": "Am Abend brummt Nilas Mutter tief und leise. Von weit hinten am See antwortet ein anderes Brummen. Nila hält still und lauscht.",
+   "bild": "../elefant/bilder/12.webp"
+  },
+  {
+   "text": "Im letzten Licht fressen die Elefanten frisches Gras. Nila bleibt dicht bei ihrer Mutter. Sie greift mit dem Rüssel ein Büschel Gras. Diesmal hält sie es fest.",
+   "bild": "../elefant/bilder/13.webp"
+  }
+ ]
+}

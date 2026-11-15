@@ -80,6 +80,7 @@ async function main() {
     await new Promise((ok) => setTimeout(ok, warte * 1000));
   }
   if (!antwort.ok) throw new Error(`Azure OpenAI ${antwort.status}: ${JSON.stringify(daten).slice(0, 500)}`);
+  mkdirSync(dirname(ziel), { recursive: true }); // bezahltes Bild nie verlieren, weil der Ordner fehlt
   writeFileSync(ziel, Buffer.from(daten.data[0].b64_json, "base64"));
   const modell = env.AZURE_OPENAI_IMAGE_DEPLOYMENT;
   // Das Bild ist bezahlt und gespeichert; fehlt usage, nur melden statt es zu verwerfen.

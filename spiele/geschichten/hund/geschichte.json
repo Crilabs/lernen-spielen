@@ -1,0 +1,114 @@
+{
+ "id": "hund",
+ "titel": "Kalle und der rote Ball",
+ "art": "sachgeschichte",
+ "welt": "haustiere",
+ "familie": null,
+ "kulisse": "garten",
+ "klasse": 1,
+ "quellen": [
+  {
+   "fakt": "Hunde sehen Farben, nicht schwarz-weiß, aber weniger als Menschen: Sie haben zwei Zapfentypen (Gipfel bei etwa 429 und 555 nm) und sehen ähnlich wie Menschen mit Rot-Grün-Schwäche; ein Zapfen für Rot fehlt.",
+   "quelle": "Neitz, Geist & Jacobs 1989, Color vision in the dog, Visual Neuroscience 3(2):119–125, doi:10.1017/S0952523800004430; https://now.tufts.edu/2020/01/07/what-colors-can-dogs-see (Tufts University, Tierärztliche Augenheilkunde), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Rot und Grün fallen beim Hund in denselben Farbkanal: Ein roter Ball hebt sich im grünen Gras kaum ab, ein blauer gut (Ableitung aus dem Zweifarbensehen, keine eigene Studie zu Bällen).",
+   "quelle": "Neitz, Geist & Jacobs 1989 (s. o.); https://now.tufts.edu/2020/01/07/what-colors-can-dogs-see, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Hunde erkunden ihre Umwelt vor allem mit der Nase; Schnüffeln auf dem Spaziergang tut ihnen gut, man soll sie schnüffeln lassen.",
+   "quelle": "Mia Cobb (University of Melbourne), The science of happier dogs, 13.10.2024, https://findanexpert.unimelb.edu.au/news/93429-the-science-of-happier-dogs--5-tips-to-help-your-canine-friends-live-their-best-life; Duranton & Horowitz 2019, Let me sniff! Nosework induces positive judgment bias in pet dogs, Applied Animal Behaviour Science 211:61–66, doi:10.1016/j.applanim.2018.12.009, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Hunde riechen viel feiner als Menschen; beim Schnüffeln holen sie viele kurze Atemzüge hintereinander, die Luft strömt direkt zur Riechschleimhaut.",
+   "quelle": "Craven, Paterson & Settles 2010, The fluid dynamics of canine olfaction, Journal of the Royal Society Interface 7(47):933–943, doi:10.1098/rsif.2009.0490, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Hunde unterscheiden den eigenen Geruch eines Menschen; Dinge, die jemand angefasst hat, tragen seinen Geruch.",
+   "quelle": "Hepper & Wells 2005, How many footsteps do dogs need to determine the direction of an odour trail?, Chemical Senses 30(4):291–298, https://pubmed.ncbi.nlm.nih.gov/15741595/, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Hunde laden mit der Spielverbeugung zum Spielen ein: Vorderkörper tief, Hinterteil oben.",
+   "quelle": "Bekoff 1995, Play signals as punctuation: the structure of social play in canids, Behaviour 132:419–429; Broschüre „Hunde sicher verstehen“, BMSGPK / Verein Tierschutz macht Schule, 5. Aufl. 2023, S. 10, https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Schwanzwedeln zeigt Erregung und ist nicht automatisch Freude; man liest den ganzen Körper.",
+   "quelle": "Broschüre „Hunde sicher verstehen“, BMSGPK / Verein Tierschutz macht Schule, 5. Aufl. 2023, S. 11, https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Hunde schwitzen kaum; sie kühlen sich vor allem durch Hecheln und verlieren dabei viel Flüssigkeit, deshalb brauchen sie frisches Wasser, auch unterwegs.",
+   "quelle": "Stiftung Tierärztliche Hochschule Hannover, Bei Hitze auf den Hund achten, 07.08.2020, https://www.hannover.de/Service/Presse-Medien/Hannover.de/Aktuelles/Wirtschaft-Wissenschaft-2020/Bei-Hitze-auf-den-Hund-achten, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Hunde können nicht saugen; sie schlabbern, die Zungenspitze biegt sich dabei nach hinten zu einem Löffel.",
+   "quelle": "Gart, Socha, Vlachos & Jung 2015, Dogs lap using acceleration-driven open pumping, PNAS 112(52):15798–15802, https://pmc.ncbi.nlm.nih.gov/articles/PMC4703018, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Erwachsene Hunde schlafen viele Stunden am Tag (etwa 8 bis 13,5 Stunden).",
+   "quelle": "https://www.sleepfoundation.org/animals/how-much-do-dogs-sleep (Sleep Foundation), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Hunde brauchen täglich ausreichend Auslauf im Freien und mehrmals am Tag Umgang mit ihren Menschen.",
+   "quelle": "Tierschutz-Hundeverordnung § 2 Abs. 1, https://www.gesetze-im-internet.de/tierschhuv/__2.html, abgerufen 2026-11-15"
+  }
+ ],
+ "seiten": [
+  {
+   "text": "Nach der Schule wartet Kalle schon an der Tür. Kalle ist ein brauner Hund mit weißer Brust. Ida und Papa ziehen ihre Jacken an. Heute will Ida mit Kalle Ball spielen.",
+   "bild": "bilder/01.webp"
+  },
+  {
+   "text": "Draußen bleibt Kalle an jedem Baum stehen. Ida möchte schnell zur Wiese. Aber Kalles Nase riecht, wer hier schon gelaufen ist. Also wartet Ida, bis er fertig ist.",
+   "bild": "bilder/02.webp"
+  },
+  {
+   "text": "Auf der Wiese holt Ida den roten Ball heraus. Kalle drückt die Brust tief ins Gras. Sein Po bleibt oben, der Schwanz wedelt. So lädt Kalle Ida zum Spielen ein.",
+   "bild": "bilder/03.webp"
+  },
+  {
+   "text": "Ida wirft den Ball, so weit sie kann. Kalle flitzt los, seine Ohren flattern. Der Ball hüpft und rollt ins hohe Gras.",
+   "bild": "bilder/04.webp"
+  },
+  {
+   "text": "Kalle bleibt stehen und schaut sich um. Ida sieht den Ball sofort, rot im grünen Gras. Doch Kalle läuft einfach daran vorbei. Ida wundert sich.",
+   "bild": "bilder/05.webp"
+  },
+  {
+   "text": "Was Ida nicht weiß: Rot leuchtet für Kalle nicht. Für ihn sieht der Ball fast aus wie das Gras.",
+   "bild": "bilder/06.webp"
+  },
+  {
+   "text": "Kalle sucht hin und her. Was glaubst du: Wie findet Kalle den Ball?",
+   "bild": "bilder/07.webp",
+   "frage": true
+  },
+  {
+   "text": "Mit der Nase! Kalle schnüffelt schnell, dicht über dem Boden. Der Ball riecht nach Kalle und nach Ida. Schnapp, da hat er ihn!",
+   "bild": "bilder/08.webp"
+  },
+  {
+   "text": "Kalle bringt den Ball zurück, und Ida lacht. Sie wirft wieder und wieder. Dann legt sich Kalle ins Gras und hechelt. Seine Zunge hängt weit heraus.",
+   "bild": "bilder/09.webp"
+  },
+  {
+   "text": "Papa holt eine Flasche und einen Napf aus dem Rucksack. Kalle hechelt noch und schlabbert gierig. Seine Zungenspitze biegt sich nach hinten wie ein Löffel. Das Wasser spritzt nach allen Seiten.",
+   "bild": "bilder/10.webp"
+  },
+  {
+   "text": "Zu Hause schläft Kalle lange in seinem Korb. Am Abend liest Papa Ida aus einem Hundebuch vor. Im Buch steht: Hunde sehen Blau gut, Rot aber kaum.",
+   "bild": "bilder/11.webp"
+  },
+  {
+   "text": "Ida kramt in der Spielzeugkiste. Ganz unten liegt ein blauer Ball. Den kann Kalle gut sehen! Ida legt ihn neben die Leine.",
+   "bild": "bilder/12.webp"
+  },
+  {
+   "text": "Am nächsten Tag wirft Ida den blauen Ball. Er rollt ins hohe Gras. Kalle rennt los, direkt zum Ball. Diesmal muss er gar nicht suchen.",
+   "bild": "bilder/13.webp"
+  },
+  {
+   "text": "Auf dem Heimweg schnüffelt Kalle wieder an jedem Baum. Ida lässt ihm Zeit. Den blauen Ball trägt Kalle selbst nach Hause.",
+   "bild": "bilder/14.webp"
+  }
+ ]
+}

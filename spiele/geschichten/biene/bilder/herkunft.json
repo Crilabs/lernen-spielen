@@ -1,0 +1,254 @@
+{
+ "01.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Side view, close-up. Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. No pollen loads on her legs. Lotta has just walked out of the entrance slit of a light blue painted wooden beehive box with a narrow horizontal entrance slit and a small landing board, standing on a low stand in a garden: the dark entrance slit is behind her, her head and antennae point away from the hive towards the bright sunny garden. She stands on the small landing board in warm morning sunlight. Soft blurred green background.",
+  "usage": {
+   "input_tokens": 372,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 372
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2128
+  }
+ },
+ "08.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Macro side view. Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. She carries one round bright yellow pollen load on the outer side of each hind leg (two in total). Lotta stands on an open yellow dandelion flower; both yellow pollen loads on her hind legs are clearly visible. Next to the dandelion, slightly out of focus, a few white daisies. Background: a spring meadow full of yellow dandelions (Taraxacum officinale) with a few white daisies, soft daylight, softly blurred. Bright light.",
+  "usage": {
+   "input_tokens": 379,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 379
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2135
+  }
+ },
+ "09.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. She carries one round bright yellow pollen load on the outer side of each hind leg (two in total). Lotta flies over a spring meadow full of yellow dandelions (Taraxacum officinale) with a few white daisies, soft daylight, seen from the side, medium size in the frame. Above, dark grey clouds slide in front of the sun and the light turns dull; the grass bends a little in the wind. Calm mood, no storm, no lightning, no rain yet.",
+  "usage": {
+   "input_tokens": 379,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 379
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2135
+  }
+ },
+ "02.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Side view. Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. No pollen loads on her legs. Lotta hovers in the air just a short distance in front of the entrance slit of a light blue painted wooden beehive box with a narrow horizontal entrance slit and a small landing board, standing on a low stand in a garden, wings slightly motion-blurred, body sharp. In the soft blurred background a green hedge behind the hive and a flowering apple tree with white-pink blossoms beside it. Bright spring day.",
+  "usage": {
+   "input_tokens": 372,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 372
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2128
+  }
+ },
+ "03.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Close-up of honeycomb with hexagonal wax cells on a vertical comb, warm soft light as in an observation hive. In the centre one honey bee (same description as Lotta: dark brown abdomen with pale grey hair bands, exactly four wings, six legs) performs the waggle dance: she walks straight upward on the comb, her abdomen slightly motion-blurred from waggling. Two or three other honey bees stand around her on the comb, facing her. Calm, warm light, no other insects.",
+  "usage": {
+   "input_tokens": 268,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 268
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2024
+  }
+ },
+ "04.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Close-up of honeycomb with hexagonal wax cells on a vertical comb, warm soft light as in an observation hive. Two honey bees large in the frame: the dancing bee in front, and directly behind her Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. No pollen loads on her legs. Lotta follows closely and touches the dancer's abdomen with the tips of both antennae. Sharp focus on Lotta's antennae touching the dancer. Calm, warm light.",
+  "usage": {
+   "input_tokens": 361,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 361
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2117
+  }
+ },
+ "05.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Seen from behind and slightly from the side. Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. No pollen loads on her legs. Lotta flies away from the camera, high over the top of a green garden hedge, heading straight towards a soft bright sun low in a blue sky in the upper middle of the picture; the sun is in front of her, not behind her (gentle backlight, not glaring). Wings slightly motion-blurred, body sharp. Bright, calm spring day.",
+  "usage": {
+   "input_tokens": 366,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 366
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2122
+  }
+ },
+ "10.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. She carries one round bright yellow pollen load on the outer side of each hind leg (two in total). Lotta flies, seen from behind and slightly from the side, towards her home: ahead of her a green hedge behind the hive and a flowering apple tree with white-pink blossoms beside it and a light blue painted wooden beehive box with a narrow horizontal entrance slit and a small landing board, standing on a low stand in a garden. The sky is full of grey clouds with clear patches of blue sky between them. Calm, soft light.",
+  "usage": {
+   "input_tokens": 388,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 388
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2144
+  }
+ },
+ "06.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. No pollen loads on her legs. Lotta flies just above one large open yellow dandelion flower, about to land on its centre; the flower head is sharp and fills the lower part of the image; behind it a spring meadow full of yellow dandelions (Taraxacum officinale) with a few white daisies, soft daylight, gently blurred. Natural colours (not a UV false-colour image). Bright spring day.",
+  "usage": {
+   "input_tokens": 366,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 366
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2122
+  }
+ },
+ "07.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Macro side view. Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. No pollen loads on her legs. Lotta sits in the centre of an open yellow dandelion flower, her long tongue (proboscis) extended down into the florets, drinking nectar. Fine yellow pollen grains stick in the fuzz of her thorax and legs. Background: a spring meadow full of yellow dandelions (Taraxacum officinale) with a few white daisies, soft daylight, softly blurred.",
+  "usage": {
+   "input_tokens": 368,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 368
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2124
+  }
+ },
+ "11.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Close-up on the small landing board of a light blue painted wooden beehive box with a narrow horizontal entrance slit and a small landing board, standing on a low stand in a garden. Two honey bees face each other and touch antennae: on the left the guard bee (same kind of honey bee, no pollen), on the right Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. She carries one round bright yellow pollen load on the outer side of each hind leg (two in total). Lotta is sharp and in front. Overcast soft light, calm.",
+  "usage": {
+   "input_tokens": 381,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 381
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2137
+  }
+ },
+ "12.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Close-up of honeycomb with hexagonal wax cells on a vertical comb, warm soft light as in an observation hive, side view. Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. She carries one round bright yellow pollen load on the outer side of each hind leg (two in total). The two yellow pollen loads sit only on the rearmost pair of legs (hind legs); front and middle legs carry no pollen. Lotta stands at the edge of an open wax cell and lowers her abdomen and hind legs towards it to push her pollen loads in; the cell already holds packed yellow pollen. Neighbouring cells hold more pollen and honey. Calm, warm, dim light.",
+  "usage": {
+   "input_tokens": 404,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 404
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2160
+  }
+ },
+ "13.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Side view. Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. She carries one round bright yellow pollen load on the outer side of each hind leg (two in total). Lotta lands on the small landing board in front of the entrance slit of a light blue painted wooden beehive box with a narrow horizontal entrance slit and a small landing board, standing on a low stand in a garden in bright morning sunshine. Only the outside of the hive is visible, no comb, no other bees dancing. Soft blurred green garden background.",
+  "usage": {
+   "input_tokens": 373,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 373
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2129
+  }
+ },
+ "14.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Close-up of honeycomb with hexagonal wax cells on a vertical comb, warm soft light as in an observation hive. Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. No pollen loads on her legs. Lotta is in the centre and sharp, performing the waggle dance: walking straight across the comb with her abdomen slightly motion-blurred from waggling. Three other honey bees follow close behind her and touch her with their antennae. Every other bee is the same kind of honey bee (same colours, exactly four wings and six legs each), smaller or slightly out of focus behind Lotta. Calm, warm light.",
+  "usage": {
+   "input_tokens": 393,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 393
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2149
+  }
+ }
+}

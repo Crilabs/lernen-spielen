@@ -1,0 +1,20 @@
+{
+ "09.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Lotta: a single Western honey bee worker (Apis mellifera carnica) as a sharp macro photo; dark brown to black abdomen with narrow pale grey hair bands, no yellow rings, not a wasp; thorax covered in short light brown-grey fuzz; two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about one third of the frame. She carries one round bright yellow pollen load on the outer side of each hind leg (two in total). Lotta flies home over a spring meadow full of yellow dandelions (Taraxacum officinale) with a few white daisies, soft daylight, seen from the side, medium size in the frame. The sun still shines; a few soft white and light grey clouds drift in a blue sky. Calm, bright, peaceful.",
+  "usage": {
+   "input_tokens": 366,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 366
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2122
+  }
+ }
+}
