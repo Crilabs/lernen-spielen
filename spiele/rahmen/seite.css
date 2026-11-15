@@ -227,3 +227,6 @@ ls-perlenstab.teil { height: 11rem; padding: 2rem 2.4rem; }
     scroll-behavior: auto !important;
   }
 }
+
+/* Bausteine mit hidden bleiben weg (z. B. der Knopf „Anleitung“, docs/spielbau.md §8). */
+ls-knopf[hidden] { display: none !important; }

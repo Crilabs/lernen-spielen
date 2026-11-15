@@ -1,7 +1,9 @@
 // Einführungs-Abspieler: kurze Geschichten als Overlay über dem Spiel.
 //
 // VORLAGE  spiele/einfuehrungen/<name>.json (Pfad relativ zu spiele/):
-//   { "szenen": [ { "sprich": "…", "zeig": "…", "bild": [ … ] } ] }
+//   { "hintergrund": "<fach>/<spiel>/bilder/szene.webp", "szenen": [ { "sprich": "…", "zeig": "…", "bild": [ … ] } ] }
+//   hintergrund (optional, relativ zu spiele/): das Bild der Spielwelt, damit die Einführung überall (im Spiel, auf
+//           der Themen-Seite) vor dem Hintergrund des Spiels spielt; die Option `hintergrund` geht vor.
 //   sprich  wird vorgelesen: nie Ziffern, Zahlwörter oder Platzhalter (die Systemstimme spricht keine Zahlen).
 //           Es spricht der Erzähler in der dritten Person (docs/stimme.md), die Kinder sprechen nie.
 //   zeig    steht in der Erzählblase, darf Ziffern und Platzhalter enthalten; leer → sprich steht in der Blase.
@@ -110,6 +112,10 @@ const CSS = `
 .einf .einf-weiter.da{opacity:1;transform:scale(1);pointer-events:auto;animation:einf-atmen 2.4s ease-in-out .6s infinite}
 .einf .einf-weiter:active{transform:translateY(.3rem);box-shadow:0 .3rem 0 var(--ls-tinte,#3B2A6B)}
 .einf .einf-weiter svg{width:8rem;height:8rem;display:block}
+.einf .einf-ueber{position:absolute;top:4.5rem;right:4rem;padding:1.6rem 3.2rem;border-radius:5rem;cursor:pointer;z-index:2;
+  font:700 3.2rem/1 "Andika",sans-serif;color:var(--ls-tinte,#3B2A6B);background:var(--ls-papier,#FFFDF7);
+  border:var(--ls-kontur,.3rem) solid var(--ls-tinte,#3B2A6B);box-shadow:0 .5rem 0 var(--ls-tinte-weich,#8C7FB0)}
+.einf .einf-ueber:active{transform:translateY(.3rem);box-shadow:0 .2rem 0 var(--ls-tinte-weich,#8C7FB0)}
 @keyframes einf-atmen{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 @media (prefers-reduced-motion:reduce){.einf *{animation:none!important;transition:none!important}}
 `;
@@ -175,12 +181,16 @@ function baueBild(buehne, bild, R, vorher) {
 // hintergrund: CSS-Bild der Spielwelt (sonst Nebel). Eine relative Adresse in url() gilt relativ zur Seite des Spiels,
 // nicht zu dieser Datei; darum aus dem Spiel heraus absolut bauen, z. B. in spiele/<fach>/<spiel>/spiel.js:
 // `url("${new URL("bilder/wiese.jpg", import.meta.url).href}")` oder bild(…) aus rahmen/stil.js.
-export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund = "" } = {}) {
+export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund: hintergrundOption = "" } = {}) {
+  let hintergrund = hintergrundOption;
   let szenen = [];
   try {
     const r = await fetch(new URL(pfad, import.meta.url));
     if (!r.ok) return "abgebrochen";
-    szenen = fuelleVorlage(await r.json(), werte);
+    const daten = await r.json();
+    szenen = fuelleVorlage(daten, werte);
+    if (!hintergrund && typeof daten.hintergrund === "string" && daten.hintergrund)
+      hintergrund = `url("${new URL(daten.hintergrund, import.meta.url).href}")`;
   } catch (e) { return "abgebrochen"; }   // fehlende oder kaputte Vorlage: nichts als gesehen melden
   if (!szenen.length) return "abgebrochen";
 
@@ -213,6 +223,10 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
   weiterEl.type = "button"; weiterEl.className = "einf-weiter"; weiterEl.setAttribute("aria-label", "Weiter");
   weiterEl.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   wurzel.appendChild(weiterEl);
+  // Überspringen ist immer erreichbar und kostet nichts (grundsaetze.md 9.2 Nr. 7): klein, oben rechts.
+  const ueberEl = document.createElement("button");
+  ueberEl.type = "button"; ueberEl.className = "einf-ueber"; ueberEl.textContent = "Zum Spiel";
+  wurzel.appendChild(ueberEl);
 
   return new Promise(resolve => {
     let timer = [], fertig = false, aktuell = -1, kinder = new Map();
@@ -226,6 +240,7 @@ export async function spieleEinfuehrung(pfad, werte, { ton = true, hintergrund =
     };
     const abbruch = () => setTimeout(() => ende("abgebrochen"), 0);   // erst nach dem Klick entfernen, sonst bricht der Browser die Navigation ab
     hausEl.addEventListener("click", abbruch);   // Navigation läuft normal weiter
+    ueberEl.addEventListener("click", () => ende("gesehen"));
 
     const szene = i => { try { szeneSpielen(i); } catch (e) { ende("abgebrochen"); } };   // egal was passiert: das Versprechen wird eingelöst
     const szeneSpielen = i => {

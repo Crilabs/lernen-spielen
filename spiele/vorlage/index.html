@@ -79,7 +79,10 @@
 <div class="welt" aria-hidden="true"></div>
 
 <!-- Kopfleiste: spiel = Kennung (wie in spiele.json), fach, titel. Das Thema setzt spiel.js. -->
-<ls-leiste id="leiste" spiel="vorlage" fach="mathe" titel="Spielvorlage"></ls-leiste>
+<ls-leiste id="leiste" spiel="vorlage" fach="mathe" titel="Spielvorlage">
+  <!-- Einführung wieder ansehen (docs/spielbau.md §8); erscheint, wenn das Thema eine Einführung hat -->
+  <ls-knopf slot="rechts" id="anleitung" symbol="buch.svg" name="Anleitung" hidden></ls-knopf>
+</ls-leiste>
 
 <!-- Bedeutungsebene: das sichere Feld 192 × 108 rem; das Spielfeld beginnt unter der Kopfleiste. -->
 <div class="buehne">

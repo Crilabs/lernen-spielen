@@ -147,10 +147,13 @@ alle Spiele gilt deshalb:
 - **Kein Satz der Form „X ist Y“, „X bedeutet Y“, „Jedes X bringt Y“.** Sätze beschreiben, was zu sehen ist oder was
   passiert, nie eine Beziehung, die man sich denken muss.
 - **Eine neue Sache je Einführung.** Alles andere ist schon bekannt oder kommt später von selbst.
-- **Die Einführung macht das Kind selbst:** Ein Kind der Runde zeigt den Zug einmal, dann leuchtet beim Kind die
-  Stelle, die es tippen soll (Sonnenring), und es tippt selbst. Je Schritt ein Satz und ein Bild; der nächste Schritt
-  kommt erst nach dem Tipp des Kindes, nie nach einer Zeit. Nach dem Satz bleibt mindestens etwa 2 s Ruhe, bevor
-  etwas Neues ins Bild kommt.
+- **Das Spiel beginnt mit der Einführung**, bei jedem Start, vor dem Hintergrund des Spiels (`hintergrund` in der
+  Einführung); der Knopf „Anleitung“ in der Leiste ruft sie jederzeit wieder auf, „Zum Spiel“ überspringt sie. Je
+  Szene ein Satz und ein Bild; weiter erst nach dem Tipp des Kindes (Weiter-Knopf nach 2 s Ruhe), nie nach einer
+  Zeit (`spiele/einfuehrung.js`, RAHMEN der Vorlage).
+- **Kein Satz wird vom Spiel abgeschnitten**, nur ein Tipp des Kindes darf ihn abbrechen: Das Spiel wartet
+  (`await blase.sage(…)`), bevor es den nächsten Satz sagt. Die Stimme schreibt sonst „Satz abgeschnitten“ ins
+  Protokoll, und der Prüfstand wird rot.
 - **Prüffrage:** Muss das Kind etwas verstehen oder übertragen, das nicht zu sehen ist? Dann ist es zu schwer – das
   Bild wird einfacher, nicht die Erklärung länger.
 <!-- ende regeln -->
