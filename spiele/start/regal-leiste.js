@@ -12,7 +12,7 @@ import { esc } from "./zeichnen.js";
 export const ZULETZT = 5;
 
 /**
- * @typedef {{id: string, name: string, strang: string, art: string|null, zahl: number|null, bereich: string, sprich?: string}} Gekonnt
+ * @typedef {{id: string, name: string, strang: string, art: string|null, zahl: number|null, bereich: string, sprich?: string, vonEltern?: boolean}} Gekonnt
  * @typedef {{id: string, titel: string, datei: string}} SpielLink
  * @typedef {Gekonnt & {spiele: SpielLink[], eltern: boolean}} RegalThema
  * @typedef {{fach: string, name: string, bereiche: {name: string, themen: RegalThema[]}[]}} RegalFach
@@ -48,7 +48,8 @@ export function regalBaum(gekonnt, ctx, spieleFuer) {
       });
       gruppen.set(b, liste);
     }
-    // Das Neueste oben: Bereich mit dem jüngsten Thema zuerst, darin neueste zuerst (Christian, 2026-11-14).
+    // Das Neueste oben: Bereich mit dem jüngsten Thema zuerst, darin neueste zuerst (Christian, 2026-11-14). Von Eltern
+    // Abgehaktes steht in gekonnt ganz vorn (gekonnteThemen) und landet so still hinter dem Erspielten.
     const bereiche = [...gruppen.entries()]
       .sort((a, b) => juengstes.get(b[0]) - juengstes.get(a[0]))
       .map(([name, themen]) => ({ name, themen: themen.reverse() }));
@@ -62,11 +63,12 @@ const dingHtml = (t, klasse = "ding") => `<button class="${klasse}" type="button
 
 /**
  * „Zuletzt gelernt“ für die Seitenleiste der Startseite; jedes Thema führt ins Regal an genau dieses Thema.
+ * Von Eltern Abgehaktes (vonEltern) steht hier nie: das Kind hat es nicht gerade gelernt.
  * @param {Gekonnt[]} gekonnt älteste zuerst
  * @returns {string}
  */
 export function zuletztHtml(gekonnt) {
-  const liste = gekonnt.slice(-ZULETZT).reverse();
+  const liste = gekonnt.filter((g) => !g.vonEltern).slice(-ZULETZT).reverse();
   const inhalt = liste.length
     ? `<ul>${liste.map((t) => `<li><a class="ding" href="regal.html?thema=${encodeURIComponent(t.id)}" data-thema="${esc(t.id)}">`
       + `<span class="material">${bausteinHtml(materialFuer(t))}</span><span class="name">${esc(t.name)}</span></a></li>`).join("")}</ul>`

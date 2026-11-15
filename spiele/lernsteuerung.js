@@ -235,6 +235,7 @@ export function migriereStand(roh) {
       u: text(e.u), frei: e.frei === 1 ? 1 : 0, v: (Array.isArray(e.v) ? e.v : []).filter((x) => x === 0 || x === 1).slice(-K.AUF_FENSTER) };
     if (t.z !== "dran" && t.z !== "kann-ich") delete t.z;
     if (t.pb !== 1) delete t.pb;
+    if (t.q !== "eltern" || t.z !== "kann-ich") delete t.q; // q: von Eltern abgehakt, nur bei kann-ich
     s.themen[id] = t;
   }
   for (const [key, e] of Object.entries(istObjekt(roh.aufgaben) ? roh.aufgaben : {})) {
@@ -348,16 +349,22 @@ export function themaMaterial(ctx, themaId) {
 }
 
 // Alle gekonnten Themen (Zustand kann-ich, auch ohne Spiel), nach dem Datum des Gekonnt-Werdens (stand.themen[id].k,
-// von markiereGekonnt und verbucheErgebnis gesetzt), älteste zuerst; ohne Datum zuerst (ältester Bestand),
-// bei Gleichstand Planreihenfolge. bereich: Bereich des Themas im Lernplan ("" wenn keiner), für materialFuer.
-// [{ id, name, sprich, strang, art, zahl, seit, bereich, regal }]
+// von markiereGekonnt, hakeAb und verbucheErgebnis gesetzt), älteste zuerst; ohne Datum zuerst (ältester Bestand),
+// bei Gleichstand Planreihenfolge. Von Eltern Abgehaktes (vonEltern, q: "eltern") steht still ganz vorn, vor allem
+// Erspielten: Wer die Liste von hinten liest (das Neueste), bekommt es nie als neu. bereich: Bereich des Themas im
+// Lernplan ("" wenn keiner), für materialFuer.
+// [{ id, name, sprich, strang, art, zahl, seit, bereich, regal, vonEltern }]
 export function gekonnteThemen(ctx, stand) {
   const z = zustaende(ctx, stand);
+  const rang = (g) => (g.vonEltern ? 0 : 1);
   return themenVon(ctx)
     .filter((t) => z[t.id] === "kann-ich")
-    .map((t) => ({ ...materialDes(ctx, t), seit: text(stand?.themen?.[t.id]?.k) }))
-    .sort((a, b) => (a.seit < b.seit ? -1 : a.seit > b.seit ? 1 : 0)); // Array.sort ist stabil
+    .map((t) => ({ ...materialDes(ctx, t), seit: text(stand?.themen?.[t.id]?.k), vonEltern: vonEltern(stand, t.id) }))
+    .sort((a, b) => rang(a) - rang(b) || (a.seit < b.seit ? -1 : a.seit > b.seit ? 1 : 0)); // Array.sort ist stabil
 }
+
+/** Von Eltern als gekonnt abgehakt (nicht erspielt). @returns {boolean} */
+export const vonEltern = (stand, themaId) => stand?.themen?.[themaId]?.q === "eltern";
 
 // Themen dran, die ein Spiel bedienen (ohne Spiel nie), zuletzt geübt zuerst (u, sonst seit), höchstens max.
 // spiel = zuletzt gespieltes Spiel, das das Thema bedient (zuletzt: { [themaId]: spielId }, vom Aufrufer; der Lernstand
@@ -399,7 +406,7 @@ export function themaFuer(ctx, stand, spielId, { wunsch = null } = {}) {
   const neu = themen.find((t) => z[t.id] === "in-sicht" && sicht.has(t.id) && dient(t.id));
   if (neu) return { thema: neu.id, modus: "thema" };
   // 4. Wiederholung gekonnter Themen
-  if (themen.some((t) => z[t.id] === "kann-ich" && dient(t.id))) return { thema: null, modus: "wiederholung" };
+  if (themen.some((t) => z[t.id] === "kann-ich" && !vonEltern(stand, t.id) && dient(t.id))) return { thema: null, modus: "wiederholung" };
   // 5. Vorgriff: damit kein Spiel leer bleibt
   const vor = themen.find((t) => z[t.id] !== "kann-ich" && dient(t.id));
   return { thema: vor ? vor.id : null, modus: "vorgriff" };
@@ -475,13 +482,13 @@ function aufgabeDesThemas(ctx, stand, sitzung, rnd) {
   return zufallsEins(l.filter((a) => rang(a) === min), rnd);
 }
 
-// Aufgaben, aus denen die Wiederholung wählt: das gewünschte gekonnte Thema oder alle gekonnten Themen
-// (ohne das aktuelle). Große Themen nur mit Eintrag; gäbe das gar nichts, alle Aufgaben, damit die
+// Aufgaben, aus denen die Wiederholung wählt: das gewünschte gekonnte Thema oder alle erspielten gekonnten Themen
+// (ohne das aktuelle; von Eltern Abgehaktes kommt nie von selbst wieder, nur auf Wunsch des Kindes). Große Themen nur mit Eintrag; gäbe das gar nichts, alle Aufgaben, damit die
 // Wiederholungsrunde nicht leer bleibt.
 function wiederholungsAufgaben(ctx, stand, sitzung, nurFaellig = false) {
   const z = zustaende(ctx, stand);
   const ids = sitzung.modus === "wiederholung" && sitzung.thema ? [sitzung.thema]
-    : themenVon(ctx).filter((t) => z[t.id] === "kann-ich" && t.id !== sitzung.thema).map((t) => t.id);
+    : themenVon(ctx).filter((t) => z[t.id] === "kann-ich" && !vonEltern(stand, t.id) && t.id !== sitzung.thema).map((t) => t.id);
   const l = ids.flatMap((id) => zumWiederholen(ctx, stand, sitzung.spiel, id));
   return l.length || nurFaellig ? l : ids.flatMap((id) => imSpiel(ctx, sitzung.spiel, id));
 }
@@ -543,6 +550,7 @@ export function naechstesAngebot(ctx, stand, sitzung, rnd = Math.random, { jetzt
 function wirdGekonnt(stand, themaId, heute) {
   const t = stand.themen[themaId] || (stand.themen[themaId] = {});
   Object.assign(t, { z: "kann-ich", k: heute, stufe: "kopf" });
+  delete t.q; // erspielt
   return { typ: "gekonnt", thema: themaId };
 }
 
@@ -663,7 +671,7 @@ export function echteDingeFuer(ctx, themaId) {
 //               ohne dass alle Fächer auf einmal kommen)
 //   bald        Themen „in Sicht“ (wie auf der Fach-Seite, höchstens K.IN_SICHT je Strang); dazu in denselben Strängen
 //               höchstens ein weiteres Thema ohne Spiel
-//   wiederholen die zuletzt gekonnten Themen, neueste zuerst, höchstens `wiederholen`
+//   wiederholen die zuletzt erspielten Themen (ohne von Eltern Abgehaktes), neueste zuerst, höchstens `wiederholen`
 export function themenMitEchtenDingen(ctx, stand, { wiederholen = 3 } = {}) {
   const z = zustaende(ctx, stand);
   const inSicht = new Set(Object.values(sichtbar(ctx, stand)).flat().filter((id) => z[id] === "in-sicht"));
@@ -680,7 +688,7 @@ export function themenMitEchtenDingen(ctx, stand, { wiederholen = 3 } = {}) {
     if (n === 1) dran.push({ ...eintrag(t), zustand: "dran" });
     else if (n === 2) bald.push({ ...eintrag(t), zustand: "in-sicht" });
   }
-  const gekonnt = gekonnteThemen(ctx, stand).reverse().slice(0, Math.max(0, wiederholen))
+  const gekonnt = gekonnteThemen(ctx, stand).filter((g) => !g.vonEltern).reverse().slice(0, Math.max(0, wiederholen))
     .map((g) => eintrag(themaVon(ctx, g.id)));
   return { dran, bald, wiederholen: gekonnt };
 }
@@ -721,7 +729,8 @@ export function elternThemen(ctx, stand, heute) {
       })
       : [];
     nachStrang.get(t.strang).themen.push({
-      id: t.id, name: text(t.name), zustand, stufe: text(e?.stufe), wackelig, hinweis: text(t.eltern), luecke,
+      id: t.id, name: text(t.name), bereich: text(t.bereich), vonEltern: vonEltern(stand, t.id),
+      zustand, stufe: text(e?.stufe), wackelig, hinweis: text(t.eltern), luecke,
       geradeDran: zustand === "dran" && tage(e?.seit, heute) <= GERADE_DRAN_TAGE, frei: e?.frei === 1,
     });
   }
@@ -739,6 +748,35 @@ export function markiereGekonnt(stand, themaId, heute, ctx = null) {
   delete t.pb;
   if (ctx) inFachEins(ctx, stand, themaId, heute);
   return stand;
+}
+
+// Ids samt allen (auch mittelbaren, auch fachfremden) Voraussetzungen, die noch nicht gekonnt sind, in Planreihenfolge.
+// Unbekannte Ids und Zyklen im Lernplan stören nicht.
+export function mitVoraussetzungen(ctx, stand, ids) {
+  const z = zustaende(ctx, stand);
+  const nachId = new Map(themenVon(ctx).map((t) => [t.id, t]));
+  const dabei = new Set();
+  const offen = [...ids];
+  while (offen.length) {
+    const id = offen.pop();
+    if (dabei.has(id) || !nachId.has(id) || z[id] === "kann-ich") continue;
+    dabei.add(id);
+    offen.push(...(nachId.get(id).voraussetzungen ?? []));
+  }
+  return themenVon(ctx).filter((t) => dabei.has(t.id)).map((t) => t.id);
+}
+
+// Eltern haken ab (Lernplan im Elternbereich): die Themen samt offenen Voraussetzungen werden kann-ich mit
+// q: "eltern". Anders als markiereGekonnt kommt nichts in die Wiederholung (kein inFachEins): abgehakt heißt, das
+// Kind kann es und muss es nicht wieder üben. Liefert die gesetzten Ids.
+export function hakeAb(ctx, stand, ids, heute) {
+  const gesetzt = mitVoraussetzungen(ctx, stand, ids);
+  for (const id of gesetzt) {
+    const t = stand.themen[id] || (stand.themen[id] = {});
+    Object.assign(t, { z: "kann-ich", k: heute, stufe: "kopf", v: [], q: "eltern" });
+    delete t.pb;
+  }
+  return gesetzt;
 }
 
 // Thema zurücksetzen: Themen-Eintrag weg (auch Einführung und Freigabe), Aufgaben des Themas in Fach 0.

@@ -24,7 +24,8 @@ test("Regal: Reiter und Bretter aus regalBaum(gekonnteThemen, spieleFuer)", () =
 
 test("Regal: neu seit dem letzten Besuch über neuSeit und den Merker regal.gesehen (einstellungen)", () => {
   assert.match(skript, /const GESEHEN = "regal\.gesehen"/);
-  assert.match(skript, /neuSeit\(ids, alt\)/);
+  assert.match(skript, /neuSeit\(erspielt, alt\)/); // von Eltern Abgehaktes bekommt keinen Ring
+  assert.match(skript, /\.filter\(\(g\) => !g\.vonEltern\)/);
   assert.match(skript, /setzeEinstellung\(GESEHEN, ids\)/);
 });
 

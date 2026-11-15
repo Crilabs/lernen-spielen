@@ -323,6 +323,61 @@ async function lauf(typ, name, groesse, basis) {
       await kontext.close();
     }
 
+    // --- Lernplan im Elternbereich: Baum ohne Klassen, Filter, Abhaken samt Voraussetzungen, danach still ---------
+    // Der Bereich wird ohne PIN-Eingabe sichtbar gemacht (die PIN prüfen die Fälle oben); geprüft wird der Reiter.
+    {
+      const F = `${L} lernplan`;
+      const kontext = await kontextFuer(browser, groesse, basis, { stand: GEKONNT }, fehlerListe);
+      const regalVorher = await oeffne(kontext, `${basis}/spiele/regal.html`); // merkt sich, was jetzt im Regal steht
+      await regalVorher.close();
+      const eltern = await oeffne(kontext, `${basis}/spiele/eltern.html`);
+      await eltern.evaluate(() => { document.getElementById("pin").hidden = true; document.getElementById("bereich").hidden = false;
+        document.querySelector('[data-tab="lernstand"]').click(); });
+      await eltern.waitForFunction(() => document.querySelectorAll(".lp-bereich").length > 0, null, { timeout: 8000 });
+      const lp = await eltern.evaluate(async () => {
+        const inhalt = document.getElementById("inhalt");
+        const r = { titel: inhalt.querySelector("h2")?.textContent, nav: document.querySelector('[data-tab="lernstand"]').getAttribute("wort"),
+          filter: [...inhalt.querySelectorAll(".lp-filter ls-knopf")].map((k) => k.getAttribute("wort")),
+          bereiche: inhalt.querySelectorAll(".lp-bereich").length, offen: inhalt.querySelectorAll(".lp-bereich[open]").length,
+          klasse: /Klasse \d|Lehrplan/.test(inhalt.innerText) };
+        const d = [...inhalt.querySelectorAll(".lp-bereich")].find((x) => x.querySelector(".name").textContent === "Zahlzerlegung");
+        d.open = true;
+        await new Promise((ok) => setTimeout(ok, 100));
+        const t = [...d.querySelectorAll(".thema")].find((x) => x.querySelector(".name").textContent === "Die 8 zerlegen");
+        const k = [...t.querySelectorAll("ls-knopf")].find((x) => x.getAttribute("wort") === "Als gekonnt markieren");
+        k.click(); r.frage = k.getAttribute("wort"); k.click();
+        for (let i = 0; i < 40 && !document.querySelector(".lp-bereich[open] .thema.z-kann-ich .name"); i++) await new Promise((ok) => setTimeout(ok, 50));
+        await new Promise((ok) => setTimeout(ok, 300));
+        const st = JSON.parse(localStorage.getItem("lernstand-kind-1-lernplan"));
+        r.eltern = Object.entries(st.themen).filter(([, e]) => e.q === "eltern").map(([id]) => id);
+        r.aufgaben = Object.keys(st.aufgaben).length;
+        r.nochOffen = !!document.querySelector(".lp-bereich[open]");
+        return r;
+      });
+      pruefe(F, "Reiter „Lernplan“: Baum Bereich → Thema ohne Klassen, alles zugeklappt, Filter Alle/Gerade dran/Gekonnt/Offen",
+        lp.titel === "Lernplan" && lp.nav === "Lernplan" && JSON.stringify(lp.filter) === JSON.stringify(["Alle", "Gerade dran", "Gekonnt", "Offen"])
+          && lp.bereiche > 100 && lp.offen === 0 && !lp.klasse, JSON.stringify(lp));
+      pruefe(F, "Abhaken: Rückfrage nennt die Themen davor; Thema samt offenen Voraussetzungen von Eltern gekonnt (Erspieltes bleibt erspielt), nichts in der Wiederholung, Bereich bleibt offen",
+        /^Wirklich\? Mit \d+ Themen davor/.test(lp.frage) && lp.eltern.includes("zerlegen-8") && lp.eltern.includes("zerlegen-7")
+          && !lp.eltern.includes("zerlegen-4") && lp.aufgaben === 0 && lp.nochOffen, JSON.stringify(lp));
+      await bild(eltern, `eltern-lernplan-${name}-${groesse.width}`);
+      // Der Kontext setzt bei jedem Laden den Anfangsstand; ab jetzt soll der abgehakte gelten.
+      const nachher = await eltern.evaluate(() => localStorage.getItem("lernstand-kind-1-lernplan"));
+      await kontext.addInitScript((roh) => { if (location.protocol === "http:") localStorage.setItem("lernstand-kind-1-lernplan", roh); }, nachher);
+      await eltern.close();
+      const regal = await oeffne(kontext, `${basis}/spiele/regal.html?thema=zerlegen-8`);
+      await pause(300);
+      const still = await regal.evaluate(() => ({ neu: document.querySelectorAll(".ding.neu").length,
+        da: !!document.querySelector('[data-thema="zerlegen-8"]') }));
+      pruefe(F, "Regal: Abgehaktes steht da, aber ohne Ring „neu“", still.da && still.neu === 0, JSON.stringify(still));
+      await regal.close();
+      const start = await oeffne(kontext, `${basis}/spiele/index.html`);
+      const zuletzt = await start.evaluate(() => [...document.querySelectorAll(".zuletzt .name")].map((n) => n.textContent));
+      pruefe(F, "Startseite: Abgehaktes nicht unter „Zuletzt gelernt“", !zuletzt.includes("Die 8 zerlegen") && !zuletzt.includes("Die 7 zerlegen"), JSON.stringify(zuletzt));
+      await start.close();
+      await kontext.close();
+    }
+
     // --- themen.html ohne oder mit unbekanntem Fach → Startseite -------------------------------------
     for (const such of ["", "?fach=gibtsnicht"]) {
       const kontext = await kontextFuer(browser, groesse, basis, {}, fehlerListe);
