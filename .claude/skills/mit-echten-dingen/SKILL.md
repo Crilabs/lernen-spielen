@@ -23,10 +23,10 @@ Datei mit einer Grundform und bis zu zwei Varianten nach Situation (Am Tisch / I
   in die Prüfung (§4).
 - Mehrere Themen: je Thema ein eigener Durchlauf, jeder mit eigener Prüfung; im selben Arbeitsordner nacheinander,
   nie parallel (`npm run echte-dinge` schreibt dieselben Verzeichnisse).
-- Aus „Spiel entwickeln“ heraus (`.claude/skills/spiel-entwickeln/SKILL.md`, Abschnitt „Mit echten Dingen“): eigener
-  Worktree `echte-dinge-<id>`; die steuernde Sitzung startet Schreib-Agent und frische Prüfer selbst und bucht die
-  Kosten (`werkzeuge/kosten/transkript.mjs`, mit `--thema <thema-id>`). Der Schreib-Agent macht dann nur §1–§3a und
-  §5.1, ohne Unteragenten und ohne Kosten zu buchen, und committet nie `kosten.json`.
+- Aus „Spiel entwickeln“ heraus (`.claude/skills/spiel-entwickeln/SKILL.md`, Schritt 1): Ein Hintergrund-Agent führt
+  diesen Skill für die Hauptthemen des Spiels aus, in einem eigenen Worktree `echte-dinge-<id>`, unabhängig vom
+  Spiel: Er steuert Schreiben und Prüfung selbst, bucht die Kosten selbst (`werkzeuge/kosten/transkript.mjs` mit
+  `--thema <thema-id>`) und mergt selbst (§5).
 
 ## 1. Recherche (Web)
 

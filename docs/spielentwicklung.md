@@ -1,6 +1,12 @@
 # Spielentwicklung: vom Katalog-Eintrag zum fertigen Spiel
 
-Stand: 2026-11-14 · **Entwurf zur Freigabe** · Entscheidungen von Christian (2026-11-14)
+Stand: 2026-11-14 · Entscheidungen von Christian (2026-11-14)
+
+> **Abgelöst am 2026-11-15 (Christian):** Der Ablauf (Zwei Wege, Prüfung A, Prüfstand B, Ausbau, Abschluss-Review)
+> gilt nicht mehr; neue Spiele entstehen nach [`spielbau.md`](spielbau.md) (Spielkern zuerst, ein Bauheft statt aller
+> Dokumente, Steuerung als Skript, höchstens zwei Runden). Weiter gelten hier: **Ablage**, **Spielobjekte** mit
+> Schnittstelle, **Regal-Bild**, **Kartenbild** und die Kosten-Posten (§6). Der Rest bleibt als Begründung stehen.
+
 Markierung: **(Christian)** entschieden · **(Annahme)** Vorschlag, korrigierbar.
 
 ## Warum

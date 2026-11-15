@@ -446,6 +446,11 @@ braucht einen Regal-Baustein `form`; Fach in der Kopfleiste nach dem Thema der R
 ---------------------------------------------------------------------------------------------------
 ## 8a. Wie aus einem Eintrag ein Spiel wird (Annahme)
 
+- **Seit 2026-11-15 (Christian): Der Eintrag ist Stoff und Idee, kein Bauplan.** Wie das Spiel sich anfühlt,
+  entscheidet der Spielkern (`docs/spielbau.md` §1). Gesetzt bleiben Themen, Fehlerkontrolle, Lernzeichen, Heimatwelt
+  und alles, was mit „Christian“ und Datum markiert ist; Geschichten, Packungen, Listen und Zusätze in einem Eintrag
+  darf die Idee weglassen (`docs/spielbau.md` §6, §7). Die Welt ist dann Bühne und Kulisse, der Sachgrund ein
+  Werkzeug, kein Muss.
 - **Vorrang bei Widersprüchen:** Die Spiel-Einträge entstanden vor der Zuordnung der Welten.
   - Der **Eintrag im Fachteil** gilt für Lernhandlung, Material und Stufen, Fehlerkontrolle, Themen, Gesten,
     Lernzeichen und Fehlerbilder.
