@@ -4,121 +4,118 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>Kettenhüpfer</title>
-<!-- M37 Kettenhüpfer (Entwurf docs/spiele/mathe/m37-kettenhuepfer.md). Kopie der Spielvorlage: Markup, Grundstil
-     (rahmen/seite.css), ein paar Zeilen Anordnung, ein Modul. Ausbau: drei Lernstufen, Sachwelt links über die ganze Höhe. -->
+<!-- M37 Kettenhüpfer (Idee docs/spiele/mathe/m37-kettenhuepfer.md). Das Spielbild ist der ganze Raum: Wand mit Fenster,
+     Holzboden, darauf der Arbeitsteppich mit der großen Perlenkette, über die Lena hüpft; rechts die Tafel mit der
+     Aufgabe und das Ziffernbrett aus Holz. Leiste, Blase, Hilfe und Pause an ihren festen Plätzen. -->
 <link rel="stylesheet" href="../../rahmen/seite.css">
 <style>
-  /* ===== SPIELWELT: Vorrat und Packungen. Alles in rem (1rem = Bildhöhe/108). =====
-     Welt: eine Vorratskammer (Szenenbild bilder/vorratskammer.webp, Herkunft in bilder/herkunft.json): links das
-     Fenster mit Fensterbank, darauf das Ding der Reihe, unten auf dem Boden Timo und der Korb. Das Bild liegt in rem
-     fest (128 rem hoch, an der Bühne ausgerichtet), damit die Kante von Wand und Boden (72,75 % der Bildhöhe) genau
-     auf der Bodenlinie der Arbeit liegt (83,6 rem) und die Fensterbank (38 % der Bildhöhe) bei 39,2 rem. Rand und
-     Fallback: Himmel der Palette „Werkstatt“ (#EFE7DD). */
+  /* ===== SPIELWELT: Lernraum der Runde. Alles in rem (1rem = Bildhöhe/108). ===== */
+  :root {
+    --wand: #EFE7DD;          /* Werkstatt, Himmel */
+    --wand-schatten: #E4D8C8;
+    --boden: #D9B994;         /* Holzboden */
+    --boden-fuge: #C49F75;
+    --filz: #F4E7D0;          /* Arbeitsteppich */
+    --filz-naht: #D6BC97;
+    --lena-hoehe: 18rem;      /* Feld der Figur (320 × 280); die Figur selbst ist etwa 15 rem hoch */
+  }
+  /* Raum über den ganzen Bildschirm: Wand, Sockelleiste, Holzboden mit Dielen. */
   .welt {
-    background: #EFE7DD url("bilder/vorratskammer.webp") no-repeat;
-    background-size: auto 128rem;
-    background-position: max(0rem, calc((100vw - 192rem) / 2)) -9.5rem;
+    background:
+      linear-gradient(var(--wand) 0 61%, var(--ls-kante) 61% 61.6%, #E9D3B4 61.6% 62.6%, transparent 62.6%),
+      repeating-linear-gradient(90deg, var(--boden) 0 21rem, var(--boden-fuge) 21rem 21.3rem),
+      var(--boden);
   }
 
-  /* Aufbau: links die Sachwelt über die ganze Höhe von Blase und Arbeit (oben das Vorratsregal, unten auf dem Boden
-     Timo und der Korb, groß genug, dass die Folge im Korb zu sehen ist); rechts oben die Blase, darunter die Matte mit
-     der Kette und die Vorratsliste; unten über die ganze Breite die Eingabe (bedienung.md §3). */
   .spielflaeche {
     display: grid;
-    grid-template-columns: 38rem minmax(0, 1fr);
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    column-gap: 2rem;
-    row-gap: 1.6rem;
+    grid-template-columns: minmax(0, 1fr) 44rem;
+    grid-template-rows: 12rem minmax(0, 1fr);
+    column-gap: 2.4rem;
+    row-gap: 2rem;
     padding: 1.6rem 2.4rem 2.4rem;
   }
-  ls-blase { grid-column: 2; grid-row: 1; width: 100%; }
+  ls-blase { grid-column: 1; grid-row: 1; align-self: start; width: min(84rem, 100%); position: relative; z-index: 2; }
 
-  .arbeit {
-    grid-column: 2; grid-row: 2;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 46rem;
-    align-items: stretch;
-    column-gap: 2rem;
-    min-height: 0;
+  /* Fenster an der Wand rechts neben der Blase (nur Stimmung, still). */
+  .fenster { grid-column: 1; grid-row: 1; justify-self: end; align-self: start; width: 30rem; height: 13rem; margin-right: 4rem; }
+  .fenster svg { width: 100%; height: 100%; display: block; }
+
+  /* Tafel mit der Aufgabe; das Kästchen ist das Kärtchen des Pfeilchens, das nach Fertig zur Kette fliegt. */
+  .tafel {
+    grid-column: 2; grid-row: 1;
+    display: flex; align-items: center; justify-content: center; gap: 1.6rem;
+    background: var(--ls-tinte);
+    border: 1rem solid var(--ls-ahorn);
+    outline: var(--ls-kontur) solid var(--ls-tinte);
+    border-radius: var(--ls-radius);
+    color: var(--ls-papier);
+    font-size: 5.8rem; font-weight: 700; line-height: 1; white-space: nowrap;
   }
-  .vorrat { grid-column: 1; grid-row: 1 / 3; position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; }
-  /* Fensterbank im Szenenbild: darauf steht das Ding der laufenden Reihe in Ruhe (Sachbild, kein Zählmaterial). Die
-     Oberkante der Fensterbank liegt 21,9 rem unter dem Anfang der Spalte (17,4 rem); das Ding steht rechts neben dem
-     Blumentopf des Bildes (Mitte 26 rem vom Rand der Bühne). */
-  .regal { position: absolute; left: 10rem; top: 0; width: 27.2rem; height: 21.9rem; display: flex; align-items: flex-end; justify-content: center; }
-  .regal ls-objekt { height: 13rem; }
-  /* Das Schuhpaar sitzt im Feld höher als die anderen Dinge (Ursprung 74 statt 90): so steht es auf der Fensterbank. */
-  .regal ls-objekt[art="schuhpaar"] { margin-bottom: -3.2rem; }
-  /* Boden: Timo links, der Korb vorn rechts daneben (groß, die Wirkung), beide stehen auf der Bodenkante. */
-  .boden { display: flex; align-items: flex-end; }
-  /* Timo: Feld 320 × 280 (die Figur sitzt in der Mitte, etwa 4/5 so hoch wie das Feld); der Korb steht vorn rechts
-     daneben und verdeckt das hintere Rad ein wenig. Korb 18 rem hoch: so viel Platz, dass die Folge darin zu sehen ist. */
-  .boden .timo { width: 36.6rem; height: 32rem; flex: none; margin-left: -11.4rem; }
-  .boden .timo svg { width: 100%; height: 100%; display: block; overflow: visible; }
-  .korb-platz { position: relative; flex: none; margin-left: -14.6rem; }
-  .korb-platz > ls-objekt { display: block; height: 18rem; }
-  /* Was im Korb liegt: die Packungen der Reihen, ihr unterer Teil hinter dem Korbrand (Feld 30…219, Rand oben bei 105). */
-  .korb-inhalt { position: absolute; left: 6%; right: 6%; top: -10rem; height: calc(10rem + 18rem * 0.39); overflow: hidden; pointer-events: none; }
-  .korb-inhalt > * { position: absolute; width: 5.6rem; height: 5.6rem; margin-left: -2.8rem; }
-  .korb-inhalt > ls-objekt[art="schuhpaar"] { margin-bottom: -0.8rem; }
-
-  /* Schmale Bildschirme (4:3, iPad): die Sachwelt etwas schmaler, damit die Kette auf der Matte genug Breite hat. */
-  @media (max-aspect-ratio: 3/2) {
-    .spielflaeche { grid-template-columns: 30rem minmax(0, 1fr); }
-    .boden .timo { width: 29.7rem; height: 26rem; margin-left: -9.4rem; }
-    .korb-platz { margin-left: -12.4rem; }
-    .korb-platz > ls-objekt { height: 14.4rem; }
-    .korb-inhalt { top: -8rem; height: calc(8rem + 14.4rem * 0.39); }
-    .korb-inhalt > * { width: 4.6rem; height: 4.6rem; margin-left: -2.3rem; }
-    .regal { width: 27.2rem; }
-    /* Fertig rückt unter die Ziffern neben Löschen, sonst stieße es an die Hilfe unten rechts. Es steht 2 rem tiefer als
-       Löschen (unten bis 106,8 von 108 rem, Schatten 0,6 rem): so bleiben 2 rem Abstand zu den Ziffern darüber
-       (bedienung.md §4; vorher berührte die Pille mit Symbol die Tasten 9 und 0). */
-    .eingabe { position: relative; }
-    .eingabe #fertig { position: absolute; right: 0; bottom: -1.2rem; }
-  }
-
-  /* Matte: oben die Aufgabe, darunter die Kette. */
-  .matte { display: flex; flex-direction: column; align-items: center; gap: 1.6rem; padding: 2.6rem 3rem; min-height: 0; }
-  .aufgabe { display: flex; align-items: center; gap: 4rem; min-height: 8.4rem; flex: none; }
-  /* Die Gleichung bricht nie um (Ausbau-Prüfung R1). */
-  .gleichung { display: flex; align-items: center; gap: 1.6rem; font-size: 6rem; font-weight: 700; line-height: 1; white-space: nowrap; }
-  .feld {
+  .tafel .rechnung:empty::before { content: "\00a0"; }
+  .karte {
     display: inline-flex; align-items: center; justify-content: center;
-    min-width: 13rem; height: 8.4rem; padding: 0 1.6rem;
-    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
+    min-width: 11rem; height: 8.2rem; padding: 0 1.4rem;
+    background: var(--ls-papier); color: var(--ls-tinte);
+    border-radius: 1.6rem; border: var(--ls-kontur) solid var(--ls-papier);
+    font-size: 5.6rem;
   }
-  .rechnung { font-size: 4.4rem; font-weight: 700; color: var(--ls-tinte); white-space: nowrap; }
-  .rechnung:empty { display: none; }
-  /* Hilfe zu 10 · n: die Tauschaufgabe in einer eigenen Zeile unter der Gleichung, unten auf der Matte unter der Kette
-     (Ausbau-Prüfung R1). Sie liegt außerhalb des Flusses im unteren Band der Kette, das nur das hohle Pfeilchen eines
-     Fehlversuchs braucht (die Hilfe räumt es weg), so bleibt die Kette so groß wie vorher. Zehnerstäbe in Reihen zu
-     höchstens fünf; Größe, Spalten und ob das Wort daneben oder darüber steht, setzt spiel.js (zeigeTausch). */
-  .matte { position: relative; }
-  .tausch { position: absolute; left: 3rem; right: 3rem; bottom: 2.4rem; display: flex; align-items: center; justify-content: center; gap: 2.4rem; pointer-events: none; }
-  .tausch[hidden] { display: none; }
-  .tausch.oben { flex-direction: column; gap: 0.8rem; }
-  .tausch .wort { font-size: 4rem; font-weight: 700; line-height: 1; white-space: nowrap; }
-  .tausch .staebe { display: grid; gap: 0.6rem 1.2rem; justify-items: start; }
-  .kette-platz { flex: 1 1 0; align-self: stretch; display: flex; align-items: center; justify-content: center; min-height: 0; }
-  .kette-platz.zu ls-perlenkette { visibility: hidden; }
+  .karte.leer { color: transparent; }
 
-  /* Vorratsliste: flaches Papier, je Zeile die Gleichung und rechts die Kurzkette (zwei Reihen zu fünf Stäben,
-     gemeinsamer Maßstab: ein Stab ist überall gleich lang, KURZ_BREITE in spiel.js = Spalte 20 rem, Stab 3,4 × 1,6 rem). */
-  .liste { display: flex; flex-direction: column; gap: 0.5rem; padding: 2rem 2rem; min-height: 0; overflow: hidden; }
-  .liste .zeile { display: grid; grid-template-columns: 1fr 20rem; align-items: center; column-gap: 1.4rem; min-height: 4.6rem; font-size: 3.4rem; font-weight: 700; line-height: 1; white-space: nowrap; }
-  /* Sanft: die verwischte Zeile, bis das Kind sie neu getippt hat (Schrift weich, die Kurzkette bleibt). */
-  .liste .zeile.verwischt .text { color: var(--ls-tinte-weich); }
+  /* Arbeitsteppich: Filz mit gestrichelter Naht; darauf die Kette, über die Lena hüpft. */
+  .teppich {
+    grid-column: 1; grid-row: 2;
+    position: relative;
+    min-height: 0;
+    padding: 1.4rem 2rem;
+    background: var(--filz);
+    border: var(--ls-kontur) solid var(--ls-tinte);
+    border-radius: var(--ls-radius-gross);
+    box-shadow: 0 1rem 0 rgba(59, 42, 107, 0.12);
+  }
+  .teppich::before {
+    content: ""; position: absolute; inset: 1.2rem; pointer-events: none;
+    border: 0.3rem dashed var(--filz-naht); border-radius: calc(var(--ls-radius-gross) - 1.2rem);
+  }
+  .kette-platz { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 
-  /* Eingabe unten Mitte: Ziffern und Löschen (ls-tastatur), daneben Fertig (Hauptknopf). */
-  .eingabe { grid-column: 1 / 3; grid-row: 3; justify-self: center; display: flex; align-items: flex-end; gap: 3rem; }
+  /* Lena: liegt über allem Bild, nimmt keine Tipps; spiel.js setzt sie mit transform auf ihr Stäbchen. */
+  .figuren { position: fixed; inset: 0; z-index: 5; pointer-events: none; overflow: hidden; }
+  .lena { position: absolute; left: 0; top: 0; height: var(--lena-hoehe); width: calc(var(--lena-hoehe) * 320 / 280); will-change: transform; }
+  .lena > .koerper { width: 100%; height: 100%; transform-origin: 50% 90.7%; }
+  .lena svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  /* Pfeilchen im Flug von der Tafel zur Kette. */
+  .flug {
+    position: absolute; left: 0; top: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--ls-papier); color: var(--ls-tinte);
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 1.2rem;
+    font-weight: 700; line-height: 1; will-change: transform;
+  }
+  .flug.hohl { background: var(--ls-nebel); border-style: dashed; }
 
-  /* Packung im Flug (Wirkung, nie Zählmaterial): liegt über allem, nimmt keine Tipps. */
-  .flug { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
-  .flug > * { position: absolute; height: 9rem; }
+  /* Ziffernbrett aus Holz (flach wie ein Tablett): Ziffernblock, darunter Fertig. Unten bleibt Platz für die Hilfe. */
+  .brett {
+    grid-column: 2; grid-row: 2;
+    align-self: start;
+    display: flex; flex-direction: column; align-items: center; gap: 2.4rem;
+    padding: 2.4rem 2rem 2.6rem;
+    max-height: calc(100% - 13.6rem);
+  }
+  #fertig { align-self: center; }
+
+  /* Schmale Bildschirme (4:3): kein Fenster, Blase über die ganze linke Spalte. */
+  @media (max-aspect-ratio: 3/2) {
+    .fenster { display: none; }
+    ls-blase { width: 100%; }
+    .spielflaeche { grid-template-columns: minmax(0, 1fr) 40rem; }
+    .tafel { font-size: 5rem; }
+    .karte { font-size: 5rem; min-width: 9rem; }
+  }
 
   /* Pause: Sachmoment auf der Papierkarte. */
   .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
+  .sachmoment p { margin: 0; }
   .sachmoment .hinweis {
     display: inline-flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 4rem 1.6rem 1.6rem;
     border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-papier);
@@ -130,43 +127,42 @@
   .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
   .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
   .eltern p { max-width: 70ch; }
+  .eltern .beschreibung { margin: 0 0 3rem; color: var(--ls-tinte-weich); }
   .eltern a { color: var(--ls-tinte); font-weight: 700; }
 </style>
 </head>
 <body>
 <div class="welt" aria-hidden="true"></div>
 
-<ls-leiste id="leiste" spiel="kettenhuepfer" fach="mathe" titel="Kettenhüpfer" thema=""></ls-leiste>
+<ls-leiste id="leiste" spiel="kettenhuepfer" fach="mathe" titel="Kettenhüpfer" thema="">
+  <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
+  <ls-knopf slot="rechts" id="anleitung" symbol="buch.svg" name="Anleitung" hidden></ls-knopf>
+</ls-leiste>
 
 <div class="buehne">
   <main class="spielflaeche">
+    <div class="fenster" aria-hidden="true">
+      <svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid meet">
+        <rect x="6" y="6" width="288" height="118" rx="10" fill="#CFE6F5" stroke="#3B2A6B" stroke-width="4"/>
+        <path d="M6 96 C70 78 150 86 294 74 L294 114 Q294 124 284 124 L16 124 Q6 124 6 114 Z" fill="#BFE3C9"/>
+        <path d="M200 6 C210 34 236 44 276 46" fill="none" stroke="#8C6A4A" stroke-width="5" stroke-linecap="round"/>
+        <g fill="#9ED8A8" stroke="#5E9C77" stroke-width="2.5"><ellipse cx="228" cy="30" rx="12" ry="6" transform="rotate(-25 228 30)"/><ellipse cx="252" cy="44" rx="11" ry="5.5" transform="rotate(15 252 44)"/><ellipse cx="212" cy="18" rx="10" ry="5" transform="rotate(-50 212 18)"/></g>
+        <path d="M150 6 V124 M6 65 H294" stroke="#3B2A6B" stroke-width="4"/>
+        <rect x="0" y="118" width="300" height="12" rx="4" fill="#EAD5B5" stroke="#3B2A6B" stroke-width="4"/>
+      </svg>
+    </div>
     <ls-blase id="blase"></ls-blase>
-    <div class="vorrat" aria-hidden="true">
-      <div class="regal" id="ding-platz"><ls-objekt id="ding" art="schuhpaar"></ls-objekt></div>
-      <div></div>
-      <div class="boden">
-        <div class="timo" id="timo"></div>
-        <div class="korb-platz"><ls-objekt id="korb" art="einkaufskorb" zustand="leer"></ls-objekt><div class="korb-inhalt" id="korb-inhalt"></div></div>
-      </div>
-    </div>
-    <div class="arbeit">
-      <section class="lernfeld matte" id="matte" aria-label="Matte">
-        <div class="aufgabe">
-          <div class="gleichung" id="gleichung" aria-live="polite"></div>
-          <div class="rechnung" id="rechnung"></div>
-        </div>
-        <div class="tausch" id="tausch" hidden></div>
-        <div class="kette-platz" id="kette-platz"><ls-perlenkette id="kette" reihe="2" breite="100" perle="4"></ls-perlenkette></div>
-      </section>
-      <section class="lernfeld liste" id="liste" aria-label="Vorratsliste"></section>
-    </div>
-    <div class="eingabe">
-      <ls-tastatur id="tastatur" tasten="1234567890" loeschen></ls-tastatur>
+    <div class="tafel" id="tafel" aria-live="polite"><span class="rechnung" id="rechnung"></span><span class="karte leer" id="eingabe">0</span></div>
+    <section class="teppich" id="teppich" aria-label="Perlenkette">
+      <div class="kette-platz" id="kette-platz"><ls-perlenkette id="kette" reihe="2" luft="19" perle="7"></ls-perlenkette></div>
+    </section>
+    <div class="brett tablett">
+      <ls-tastatur id="tastatur" tasten="1234567890" je-reihe="3" loeschen></ls-tastatur>
       <ls-knopf id="fertig" art="haupt" symbol="fertig.svg" wort="Fertig"></ls-knopf>
     </div>
   </main>
 </div>
-<div class="flug" id="flug" aria-hidden="true"></div>
+<div class="figuren" aria-hidden="true"><div class="lena" id="lena"><div class="koerper" id="lena-koerper"></div></div></div>
 
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>

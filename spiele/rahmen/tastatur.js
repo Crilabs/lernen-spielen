@@ -4,6 +4,7 @@
 // keine Farbe je Buchstabe. Ereignis `taste` mit detail.zeichen (" " für Leertaste, "loeschen" für Löschen).
 // Die Tasten sprechen nichts; was gesagt wird, entscheidet das Spiel. Eine Hardware-Tastatur geht zusätzlich.
 // Der Host ist ein Block: wohin die Tastatur kommt (unten Mitte), bestimmt das Spiel.
+// `je-reihe="3"`: Ziffernblock, höchstens so viele Tasten je Reihe; Löschen kommt in die letzte Reihe, wenn es passt.
 // Hilfe Stufe 2 (Lösung): markiere(zeichen) gibt der Taste den Sonnenring (Klasse `markiert`), markiere(null) nimmt ihn.
 
 import { GRUND_CSS, definiere } from "./stil.js";
@@ -72,7 +73,7 @@ const ENTITAET = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" };
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ENTITAET[c]);
 
 export class LsTastatur extends HTMLElement {
-  static observedAttributes = ["tasten", "leertaste", "loeschen"];
+  static observedAttributes = ["tasten", "leertaste", "loeschen", "je-reihe"];
 
   constructor() {
     super();
@@ -103,12 +104,17 @@ export class LsTastatur extends HTMLElement {
   }
 
   zeichne() {
-    const zeilen = ausgeglichen(this.tastenListe)
-      .map((r) => `<div class="reihe">${r.map((z) => `<button class="taste" type="button" tabindex="0" data-z="${esc(z)}">${esc(z)}</button>`).join("")}</div>`)
-      .join("");
+    // je-reihe: höchstens so viele Tasten je Reihe (Ziffernblock: 3); passen Leertaste und Löschen in die letzte Reihe,
+    // stehen sie dort (1 2 3 · 4 5 6 · 7 8 9 · 0 ⌫). Ohne: bis zu zehn je Reihe, Leertaste und Löschen darunter.
+    const jeReihe = Number(this.getAttribute("je-reihe"));
+    const reihen = ausgeglichen(this.tastenListe, Number.isInteger(jeReihe) && jeReihe > 0 ? jeReihe : 10)
+      .map((r) => r.map((z) => `<button class="taste" type="button" tabindex="0" data-z="${esc(z)}">${esc(z)}</button>`));
     const fn = [];
     if (this.hasAttribute("leertaste")) fn.push(`<button class="taste leer" type="button" tabindex="0" data-z=" " aria-label="Leertaste">${LEER_SVG}</button>`);
     if (this.hasAttribute("loeschen")) fn.push(`<button class="taste weg" type="button" tabindex="0" data-z="loeschen" aria-label="Löschen">${LOESCHEN_SVG}</button>`);
+    const letzte = reihen[reihen.length - 1];
+    if (jeReihe > 0 && fn.length && letzte && letzte.length + fn.length <= jeReihe) letzte.push(...fn.splice(0));
+    const zeilen = reihen.map((r) => `<div class="reihe">${r.join("")}</div>`).join("");
     this.wurzel.innerHTML = `<style>${GRUND_CSS}${TASTATUR_CSS}</style><div class="feld">${zeilen}${fn.length ? `<div class="reihe">${fn.join("")}</div>` : ""}</div>`;
   }
 

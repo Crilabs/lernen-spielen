@@ -9,28 +9,20 @@ const TEXTE = JSON.parse(readFileSync(new URL("../../../spiele/mathe/m37-kettenh
 const REIHEN = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 const alle = [...REIHEN.map((n) => ({ art: "mal", reihe: n })), { art: "mal", kern: true }].flatMap(aufgabenVon);
 
-test("vergleiche: passt, weiter hinten, weiter vorn, hinter dem Ende der Kette", () => {
-  assert.equal(L.vergleiche(42, { a: 6, b: 7 }), "passt");
-  assert.equal(L.vergleiche(49, { a: 6, b: 7 }), "hinten");
-  assert.equal(L.vergleiche(35, { a: 6, b: 7 }), "vorn");
-  assert.equal(L.vergleiche(71, { a: 6, b: 7 }), "ueber");
-  assert.equal(L.vergleiche(70, { a: 6, b: 7 }), "hinten");
-});
-
-test("hilfeVon: über Kernaufgaben, Nachbaraufgabe nur bei einem Stäbchen Abstand, nie Hochzählen", () => {
-  for (const [a, kern, schritt] of [[3, 2, 1], [4, 5, -1], [6, 5, 1], [9, 10, -1]]) {
-    const h = L.hilfeVon(a, 7);
-    assert.deepEqual([h.art, h.kern, h.schritt], ["nachbar", kern, schritt], `a = ${a}`);
-    assert.equal(h.hell.length, 1);
+test("hilfeVon: Probe über eine nahe Kernaufgabe, nie die Lösung selbst, Stäbchen zwischen Kern und Ziel", () => {
+  assert.deepEqual(L.hilfeVon(1), { kern: null, hell: [1] });
+  assert.deepEqual(L.hilfeVon(2), { kern: 1, hell: [2] });
+  assert.deepEqual(L.hilfeVon(4), { kern: 5, hell: [5] });
+  assert.deepEqual(L.hilfeVon(5), { kern: 10, hell: [1, 2, 3, 4, 5] });
+  assert.deepEqual(L.hilfeVon(7), { kern: 5, hell: [6, 7] });
+  assert.deepEqual(L.hilfeVon(8), { kern: 10, hell: [9, 10] });
+  assert.deepEqual(L.hilfeVon(10), { kern: 5, hell: [6, 7, 8, 9, 10] });
+  for (let a = 1; a <= 10; a++) {
+    const h = L.hilfeVon(a);
+    assert.notEqual(h.kern, a, `${a}: die Probe ist nicht die Aufgabe`);
+    if (h.kern !== null) assert.ok([1, 2, 5, 10].includes(h.kern), `${a}: Kern ${h.kern}`);
+    assert.ok(h.hell.length >= 1 && h.hell.length <= 5, `${a}`);
   }
-  assert.deepEqual(L.hilfeVon(7, 6), { art: "zwei", kern: 5, schritt: 2, rechnung: "30 + 12 = ▢", hell: [6, 7] });
-  assert.deepEqual(L.hilfeVon(8, 6).rechnung, "60 − 12 = ▢");
-  assert.equal(L.hilfeVon(5, 4).art, "haelfte");
-  assert.equal(L.hilfeVon(2, 4).art, "doppelt");
-  assert.equal(L.hilfeVon(10, 4).rechnung, "4 · 10 = ▢");
-  assert.equal(L.hilfeVon(1, 4).art, "eins");
-  // Die Rechnung verrät das Ergebnis nicht.
-  for (const { daten: { a, b, c } } of alle) assert.ok(!L.hilfeVon(a, b).rechnung.includes(`= ${c}`), `${a} · ${b}`);
 });
 
 test("Eingabe: Ziffern, Löschen, höchstens drei Ziffern, keine führende Null", () => {
@@ -64,106 +56,53 @@ test("Ratendes Kind: über die Kandidaten ist jede Aufgabe mit wenigen Tasten er
   }
 });
 
-test("pfeileWaehrend: gelöste mit Zahl, das eigene Pfeilchen ohne Zahl", () => {
-  assert.deepEqual(L.pfeileWaehrend([1, 6, 3], 6), { pfeile: [1, 3], leer: [6] });
-  assert.deepEqual(L.pfeileWaehrend([1], 4), { pfeile: [1], leer: [] });
+test("pfeileWaehrend: gelöste mit Zahl, das eigene Pfeilchen nie (nichts zum Ablesen)", () => {
+  assert.deepEqual(L.pfeileWaehrend([5, 2, 7], 7), [2, 5]);
+  assert.deepEqual(L.pfeileWaehrend([], 3), []);
 });
 
-test("texte.json: zu jeder Aufgabe ein ausgeschriebener Auftrag, je Reihe Anfang, Wechsel, Timo; keine Ziffern, keine Wörter aus 3.2", () => {
-  for (const { daten: { a, b } } of alle) assert.ok(TEXTE.auftrag[b]?.[a], `${a} · ${b}`);
-  for (const n of REIHEN) for (const t of [TEXTE.anfang[n].reihe, TEXTE.anfang[n].setzung, TEXTE.wechsel[n], TEXTE.timo[n]]) assert.ok(t, `n = ${n}`);
-  const saetze = JSON.stringify({ ...TEXTE, hinweis: "" });
-  assert.doesNotMatch(saetze.replace(/"\d+":/g, ""), /\d/);
-  assert.doesNotMatch(saetze, /\b(super|toll|klasse|prima|falsch|leider|Fehler|schon wieder|endlich)\b/i);
-  assert.doesNotMatch(saetze, /…/);
-  // Fakten nur mit „In echt“ (Paar, Woche, Zehn-Cent-Münze), Setzungen mit „Hier“ (K4, K11).
-  for (const n of REIHEN) assert.match(TEXTE.anfang[n].setzung, /Hier /);
-  assert.deepEqual(REIHEN.filter((n) => /In echt/.test(TEXTE.anfang[n].reihe)), [2, 7, 10]);
-  assert.equal(TEXTE.auftrag[6][1], "Ein Eierkarton. Wie viele Eier sind es?");
-  assert.equal(TEXTE.auftrag[7][6], "Sechs Wochenschachteln. Wie viele Fächer sind es zusammen?");
+test("einfuehrungsKette: die Kette der ersten Aufgabe, eine andere, wenn sie selbst 2 · n oder 3 · n ist", () => {
+  assert.equal(L.einfuehrungsKette(6, 7), 7);
+  assert.equal(L.einfuehrungsKette(2, 7), 8);
+  assert.equal(L.einfuehrungsKette(3, 10), 9);
 });
 
-test("vorzeigeAufgabe: Timo zeigt 1 · n auf der Kette der ersten Lieferung, 10 · n, wenn diese selbst 1 · n ist", () => {
-  assert.deepEqual(L.vorzeigeAufgabe({ ziel: { key: "mal:6*7" } }), { a: 1, b: 7, key: "mal:1*7" });
-  assert.deepEqual(L.vorzeigeAufgabe({ ziel: { key: "mal:1*2" } }), { a: 10, b: 2, key: "mal:10*2" });
-  assert.equal(L.vorzeigeAufgabe(null), null);
-  assert.equal(L.vorzeigeAufgabe({ ziel: { key: "rechnen:3+4" } }), null);
+test("Hüpfer: je 0,24 s, zusammen höchstens etwa 1,6 s, der Sprung in die zweite Reihe länger; Töne steigen", () => {
+  assert.deepEqual(L.hueperZeiten(3), [240, 240, 240]);
+  for (let a = 1; a <= 10; a++) {
+    const z = L.hueperZeiten(a);
+    assert.equal(z.length, a);
+    assert.ok(z.reduce((s, x) => s + x, 0) <= 1700, `${a}: ${z}`);
+    if (a >= 6) assert.ok(z[5] > z[4], `${a}: Reihenwechsel`);
+  }
+  for (let k = 2; k <= 10; k++) assert.ok(L.hueperTon(k) > L.hueperTon(k - 1), `Ton ${k}`);
 });
 
-// Prüfstand B, Runde 2 (kritisch): Das Spiel verwarf jede Lieferung 1 · n ohne Meldung. Das kürzte die Runde, holte
-// dieselbe Aufgabe direkt hintereinander und sperrte 1 · n für die Lernsteuerung. Jetzt bekommt das Kind jede
-// Lieferung, so wie spieleRunde in spiel.js: erste Lieferung → Timo zeigt vorzeigeAufgabe() vor, dann alle Lieferungen
-// der Reihe nach, bis die Lernsteuerung null gibt (max = AUFGABEN_JE_RUNDE). Simuliert über viele Runden und Tage, mit
-// der echten Lernsteuerung, Fehlern und den Stufen des Prototyps und des Ausbaus.
-test("Runden mit der echten Lernsteuerung: AUFGABEN_JE_RUNDE Aufgaben, keine zweimal direkt hintereinander, Timos Aufgabe nie als erste, 1 · n kommt", async () => {
-  const LS = await import("../../../spiele/lernsteuerung.js");
-  const lies = (/** @type {string} */ f) => JSON.parse(readFileSync(new URL(`../../../spiele/${f}`, import.meta.url), "utf8"));
-  const plan = lies("lernplan.json");
-  let saat = 7;
+test("Freude: nie zweimal dieselbe hintereinander, der Freudentanz seltener; Witz höchstens jede fünfte Aufgabe", () => {
+  let saat = 3;
   const rnd = () => ((saat = (saat * 16807) % 2147483647) / 2147483647);
-  for (const stufen of [["material"], ["material", "vorstellung", "kopf"]]) {
-    for (const wunsch of ["zweierreihe", "zehnerreihe", "kernaufgaben-einmaleins"]) {
-      const spiele = lies("spiele.json");
-      spiele.spiele.find((/** @type {any} */ s) => s.id === "kettenhuepfer").arten[0].stufen = stufen;
-      const ctx = { plan, spiele };
-      const stand = LS.neuerStand();
-      const einsGestellt = new Set();
-      let volleRunden = 0;
-      for (let tag = 1; tag <= 12; tag++) {
-        for (let r = 0; r < 2; r++) {
-          const heute = `2026-12-${String(tag).padStart(2, "0")}`;
-          const { thema, modus } = LS.themaFuer(ctx, stand, "kettenhuepfer", { wunsch });
-          if ((modus === "thema" || modus === "vorgriff") && stand.themen[thema]?.z !== "dran") LS.startThema(stand, thema, heute);
-          const s = LS.neueSitzung(ctx, stand, "kettenhuepfer", { thema, modus }, { jetzt: 0, max: L.AUFGABEN_JE_RUNDE, rnd });
-          const naechste = () => LS.naechstesAngebot(ctx, stand, s, rnd, { jetzt: 0, heute });
-          const erste = naechste();
-          const timo = L.vorzeigeAufgabe(erste);
-          /** @type {string[]} */
-          const kind = [];
-          for (let a = erste; a; a = naechste()) {
-            kind.push(a.ziel.key);
-            LS.verbucheErgebnis(ctx, stand, s, a.ziel.key, { ok: rnd() >= 0.15, hilfe: 0, ms: 3000, heute, rnd });
-          }
-          const wo = `${wunsch} ${stufen.join("/")} Tag ${tag}.${r}: ${kind.join(" ")}`;
-          assert.ok(timo && kind[0] !== timo.key, `Timos Aufgabe als erste: ${wo}`);
-          for (let i = 1; i < kind.length; i++) assert.notEqual(kind[i], kind[i - 1], `direkt wiederholt: ${wo}`);
-          assert.ok(kind.length <= L.AUFGABEN_JE_RUNDE, wo);
-          if (modus === "thema" && s.ereignis?.typ !== "gekonnt") {
-            assert.equal(kind.length, L.AUFGABEN_JE_RUNDE, `zu kurz: ${wo}`);
-            volleRunden++;
-          }
-          for (const k of kind) if (k.startsWith("mal:1*")) einsGestellt.add(k);
-        }
-      }
-      assert.ok(volleRunden >= 3, `${wunsch}: nur ${volleRunden} volle Runden`);
-      assert.ok(einsGestellt.size > 0, `${wunsch} ${stufen.join("/")}: 1 · n kam nie`);
-    }
+  let vorige = null;
+  const zahl = /** @type {Record<string, number>} */ ({});
+  for (let i = 0; i < 400; i++) {
+    const f = L.naechsteFreude(vorige, rnd);
+    assert.ok(L.FREUDE.includes(f));
+    assert.notEqual(f, vorige);
+    zahl[f] = (zahl[f] ?? 0) + 1;
+    vorige = f;
   }
+  assert.ok(zahl.freudentanz < zahl.huepfen && zahl.freudentanz < zahl.umdrehen, JSON.stringify(zahl));
+  assert.equal(L.witz(10, 4), null);
+  assert.equal(L.witz(10, 5), "fast-umfallen");
+  assert.equal(L.witz(1, 6), "doppelblick");
+  assert.equal(L.witz(6, 9), null);
 });
 
-test("Packung je Reihe: jedes Objekt liegt in spiele/objekte/ und hat den genannten Zustand", async () => {
-  const { existsSync } = await import("node:fs");
-  const { objekte } = await import("../../../spiele/objekte/objekt.js");
-  for (let n = 2; n <= 10; n++) {
-    const p = L.PACKUNG[n];
-    assert.ok(p && existsSync(new URL(`../../../spiele/objekte/${p.art}.js`, import.meta.url)), `Reihe ${n}: ${p?.art}`);
-    await import(`../../../spiele/objekte/${p.art}.js`);
-    if (p.zustand) assert.ok(objekte.get(p.art).zustaende.includes(p.zustand), `Reihe ${n}: Zustand ${p.zustand}`);
-  }
-  assert.deepEqual(L.PACKUNG[10], { art: "muenze", zustand: "zehn-cent" });
-});
-
-test("Korb: erst füllen sich die Plätze, dann ersetzt jede neue Packung die älteste", () => {
-  assert.deepEqual(L.korbPlatz(0), { platz: 0, neu: true });
-  assert.deepEqual(L.korbPlatz(L.KORB_PLAETZE - 1), { platz: L.KORB_PLAETZE - 1, neu: true });
-  assert.deepEqual(L.korbPlatz(L.KORB_PLAETZE), { platz: 0, neu: false });
-  assert.deepEqual(L.korbPlatz(L.KORB_PLAETZE + 3), { platz: 3, neu: false });
-});
-
-test("Sanft: die verwischte Zeile ist die letzte des Kindes (nicht Timos), ab zwei Zeilen; Ruhig: keine", () => {
-  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"], "sanft"), "7*2");
-  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"], "abenteuer"), "7*2");
-  assert.equal(L.verwischteZeile(["1*2", "3*2", "7*2"], "ruhig"), null);
-  assert.equal(L.verwischteZeile(["1*2", "3*2"], "sanft"), null, "nur eine Zeile des Kindes");
-  assert.equal(L.verwischteZeile([], "sanft"), null);
+test("texte.json: je Reihe der Anfang, je Aufgabe die Gleichung, je Zahl bis 100 ihr Ort; keine Wörter aus 3.2", () => {
+  for (const n of REIHEN) assert.equal(TEXTE.anfang[n], `Lena hüpft auf der Kette von ${n}.`);
+  for (const { daten: { a, b, c } } of alle) assert.equal(TEXTE.gleichung[`${a}*${b}`], `${a} mal ${b} ist ${c}.`);
+  // Auch jede Probe (Kernaufgabe) hat ihren Satz.
+  for (const n of REIHEN) for (const k of [1, 2, 5, 10]) assert.ok(TEXTE.gleichung[`${k}*${n}`], `${k} · ${n}`);
+  for (let w = 1; w <= 100; w++) assert.equal(TEXTE.daneben[w], `Die ${w} liegt dort drüben.`);
+  const alleTexte = JSON.stringify(TEXTE);
+  for (const w of ["super", "toll", "falsch", "leider", "Fehler", "richtig"]) assert.ok(!new RegExp(`\\b${w}\\b`, "i").test(alleTexte), w);
 });

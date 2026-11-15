@@ -10,10 +10,9 @@
   "spiele": [
     { "id": "kettenhuepfer", "titel": "Kettenhüpfer", "thema": "Einmaleins", "kategorie": "mathe",
       "symbol": "mathe/m37-kettenhuepfer/symbol.svg", "datei": "mathe/m37-kettenhuepfer/index.html",
-      "text": "Ergebnis tippen, das Pfeilchen hüpft auf der Perlenkette, die Packungen kommen in den Korb.",
-      "beschreibung": "Das Kind löst Malaufgaben der Einmaleinsreihen von 2 bis 10 und tippt das Ergebnis; dann hüpft ein Pfeilchen auf einer Perlenkette Stäbchen für Stäbchen dorthin. Passt die Zahl, kommen Packungen in den Vorratskorb, etwa Schuhpaare, Eierkartons oder Muffinkartons, in denen immer gleich viele Teile stecken. So sieht das Kind jede Malaufgabe als gleich große Gruppen aus dem Alltag.",
+      "text": "Ergebnis tippen, Lena hüpft über die Perlenkette.",
+      "beschreibung": "Das Kind tippt das Ergebnis einer Malaufgabe der Reihen 2 bis 10. Lena hüpft so viele Stäbchen weit über eine Montessori-Perlenkette, wie die erste Zahl sagt, und das Pfeilchen mit der Zahl rastet an ihrem Stäbchen ein. Passt die Zahl nicht, zeigt die Kette, wo sie wirklich liegt.",
       "arten": [{ "art": "mal", "reihen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }],
-      "regal": { "objekt": "einkaufskorb", "wert": null },
-      "karte": { "figur": "einkaufskorb", "zustand": "gefuellt", "welt": "vorrat-und-packungen" } }
+      "regal": null }
   ]
 }
