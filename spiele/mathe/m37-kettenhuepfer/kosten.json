@@ -551,5 +551,16 @@
   "einheit": "zeichen",
   "menge": 8013,
   "notiz": "npm run audio"
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 5521,
+  "notiz": "npm run audio"
  }
 ]
