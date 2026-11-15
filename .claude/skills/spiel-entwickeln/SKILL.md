@@ -83,7 +83,7 @@ cd <Hauptrepo> && node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.
 ## Lauf aus der Verwaltung
 
 Ist `VERWALTUNG_AUFTRAG` gesetzt (Start über `npm run verwaltung`, `werkzeuge/verwaltung/`), schreib als Letztes
-`werkzeuge/verwaltung/ergebnisse/$VERWALTUNG_AUFTRAG.json` im Hauptrepo: `{ "status": "gruen"|"freigabe"|"geparkt"|"abgebrochen",
+`werkzeuge/verwaltung/ergebnisse/<auftrag>.json` (`<auftrag>` = Wert von `$VERWALTUNG_AUFTRAG`) im Repo, in dem der Lauf gestartet wurde: `{ "status": "gruen"|"freigabe"|"geparkt"|"abgebrochen",
 "zusammenfassung": "<ein Satz: Spiel, Ergebnis, Kosten>", "frage": "<nur bei freigabe/geparkt>", "probelauf": true|false }`.
 Fehlt die Datei, gilt der Auftrag als fehlgeschlagen. `--steuerung` nimmt dann `$VERWALTUNG_TRANSKRIPT` (oben schon so
 gesetzt), damit eine Chat-Sitzung nebenher nicht gebucht wird. Ein `git push` scheitert im Lauf absichtlich.
