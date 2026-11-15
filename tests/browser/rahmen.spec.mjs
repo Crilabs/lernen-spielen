@@ -32,6 +32,68 @@ const SHOTS = process.env.SHOTS;
 const pause = (ms) => new Promise((ok) => setTimeout(ok, ms));
 const URL_VORSCHAU = (basis) => `${basis}/spiele/rahmen/vorschau.html`;
 
+// --- Mit echten Dingen: feste Testdaten (nur im Browser per route, nichts davon im Repo) -------------
+// Die Prüfung liest nie die echten Anleitungen: Freigaben und Umbauten unter spiele/mit-echten-dingen/ ändern sie
+// nicht. verzeichnis.json ohne Eintrag (als gäbe es nur Entwürfe), verzeichnis-entwurf.json mit zwei Entwürfen.
+const ED_ZERLEGEN = `---\nthema: zerlegen-7\nfach: mathe\nentwurf: true\nquellen:\n  - Probe, https://example.org, abgerufen 2026-11-14\n---
+# Die 7 in zwei Teile legen
+
+## Am Tisch: Sieben Nudeln, zwei Teller
+
+Ihr braucht: sieben Nudeln, zwei Teller
+
+1. Verteilt die sieben Nudeln auf die zwei Teller.
+2. Sagt, was ihr seht, zum Beispiel: „7 ist gleich 3 plus 4.“
+3. Schiebt eine Nudel auf den anderen Teller und sagt es wieder.
+4. Sucht so alle Arten, die sieben Nudeln zu verteilen.
+
+**Darauf kommt es an:** Es bleiben immer sieben Nudeln. Wandert eine Nudel hinüber, hat ein Teller eine weniger und der andere eine mehr.
+
+**Leichter:** mit fünf Nudeln. **Schwerer:** Einer deckt einen Teller mit der Hand zu. Wie viele Nudeln liegen darunter?
+
+## Unterwegs: Sieben Steine in zwei Händen
+
+Ihr braucht: sieben kleine Steine, Kastanien oder Blätter vom Weg
+
+1. Sammelt unterwegs sieben Dinge.
+2. Einer von euch verteilt sie hinter dem Rücken auf beide Hände.
+3. Eine Hand geht auf. Ihr seht zum Beispiel zwei Steine.
+4. Wie viele sind in der anderen Hand? Sagt es, dann geht auch sie auf.
+
+**Darauf kommt es an:** Beide Hände zusammen haben immer sieben. Wer eine Hand sieht, weiß, wie viele zur Sieben noch fehlen.
+
+**Leichter:** mit fünf Dingen. **Schwerer:** Sagt ohne Steine alle Arten auf, wie sieben auf zwei Hände passen.
+`;
+const ED_SILBEN = `---\nthema: silben-klatschen\nfach: lesen\nentwurf: true\n---
+# Wörter in Silben klatschen
+
+## Am Tisch: Eine Klammer für jede Silbe
+
+Ihr braucht: Wäscheklammern, Dinge vom Tisch (Löffel, Becher, Teller)
+
+1. Nehmt ein Ding und sagt seinen Namen langsam: „Löf-fel“.
+2. Klatscht bei jeder Silbe einmal in die Hände.
+3. Legt für jeden Klatscher eine Wäscheklammer neben das Ding.
+
+**Darauf kommt es an:** Jede Silbe ist ein Klatscher.
+
+**Leichter:** nur kurze Wörter. **Schwerer:** lange Wörter wie „Mar-me-la-de“.
+`;
+const ED_ENTWURF = { themen: {
+  "zerlegen-7": { fach: "mathe", name: "Die 7 zerlegen", titel: "Die 7 in zwei Teile legen", entwurf: true, datei: "mathe/probe-zerlegen.md",
+    formen: [{ situation: "tisch", name: "Sieben Nudeln, zwei Teller" }, { situation: "unterwegs", name: "Sieben Steine in zwei Händen" }] },
+  "silben-klatschen": { fach: "lesen", name: "Silben klatschen", titel: "Wörter in Silben klatschen", entwurf: true, datei: "lesen/probe-silben.md",
+    formen: [{ situation: "tisch", name: "Eine Klammer für jede Silbe" }] },
+} };
+/** Leitet Verzeichnisse und Anleitungen auf die Testdaten um (Seite oder Kontext). */
+async function echteDingeTestdaten(ziel) {
+  const json = (body) => (r) => r.fulfill({ contentType: "application/json", body: JSON.stringify(body) });
+  await ziel.route("**/mit-echten-dingen/verzeichnis.json", json({ themen: {} }));
+  await ziel.route("**/mit-echten-dingen/verzeichnis-entwurf.json", json(ED_ENTWURF));
+  await ziel.route("**/mit-echten-dingen/mathe/probe-zerlegen.md", (r) => r.fulfill({ contentType: "text/markdown", body: ED_ZERLEGEN }));
+  await ziel.route("**/mit-echten-dingen/lesen/probe-silben.md", (r) => r.fulfill({ contentType: "text/markdown", body: ED_SILBEN }));
+}
+
 let fehler = 0;
 let geprueft = 0;
 /** @param {string} lauf @param {string} name @param {boolean} ok @param {string} [detail] */
@@ -287,6 +349,7 @@ async function lauf(typ, name, groesse, basis) {
     // --- Mit echten Dingen: Kachel, Karte mit Wahl der Form, Angebot in der Pause ---------------
     {
       const ed = await kontext.newPage();
+      await echteDingeTestdaten(ed);
       ed.on("pageerror", (e) => fehlerListe.push(`Seitenfehler (echte-dinge): ${e.message}`));
       ed.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole (echte-dinge): ${m.text()}`); });
       const laden = async () => {
@@ -489,6 +552,7 @@ async function pausenFormate(typ, name, basis) {
       const L = `${name} ${groesse.width}x${groesse.height}`;
       const rem = groesse.height / 108, tol = 0.75;
       const kontext = await browser.newContext({ viewport: groesse, deviceScaleFactor: 1 });
+      await echteDingeTestdaten(kontext);
       const seite = await kontext.newPage();
       seite.on("pageerror", (e) => fehlerListe.push(`Seitenfehler: ${e.message}`));
       seite.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole: ${m.text()}`); });
