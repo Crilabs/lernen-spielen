@@ -182,10 +182,12 @@ details > summary::-webkit-details-marker { display: none; }
 }
 .lp-karte:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
 .lp-karte:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.4rem; }
-.lp-karte .bild { display: grid; place-items: center; height: 14rem; border-bottom: var(--ls-kontur) solid var(--ls-tinte);
+.lp-karte .bild { position: relative; display: grid; place-items: center; height: 14rem; border-bottom: var(--ls-kontur) solid var(--ls-tinte);
   background: var(--fach-toenung, var(--ls-nebel)); overflow: hidden; }
 .lp-karte.analog .bild { background: var(--ls-ahorn); }
-.lp-karte .bild svg { display: block; width: 100%; height: 100%; }
+.lp-karte .bild .welt { position: absolute; inset: 0; }
+.lp-karte .bild .welt svg { display: block; width: 100%; height: 100%; }
+.lp-karte .bild ls-objekt { position: relative; }
 .lp-karte .bild img { width: 7rem; height: 7rem; }
 .lp-karte .bild ls-objekt { height: 11rem; }
 .lp-karte .text { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.4rem 1.8rem 1.8rem; font-size: 2.3rem; line-height: 1.3; }
@@ -743,18 +745,22 @@ function themaZeile(t, stand, ctx, heute, offen, strang, eingriff, { liste, spri
 // Karten der Spiele eines Themas: digitale (spiele.json, Bild der Welt) und analoge (Anleitung „Mit echten Dingen“,
 // Bild der Karte aus bild: im Kopf). Die analoge öffnet <ls-anregung> über dem Lernplan (mit PDF, wenn das Gerät
 // drucken kann); Zurück schließt sie, der Baum bleibt, wie er war. Die digitale öffnet das Spiel für Erwachsene.
-// Die Kurzbeschreibung (kurz) wird nachgezogen: steht sie in den Daten, zeigt die Karte sie unter dem Titel.
+// Kurzbeschreibung: digital `text` aus spiele.json; analog `text` (oder `kurz`) im Kopf der Anleitung, sobald es ihn gibt.
+// Kartenbild digital nach grundsaetze-bilder §16: die Figur des Spiels (karte.figur/zustand) vor der Welt (karte.welt).
 const SITUATION_WORT = { tisch: "Am Tisch", bewegung: "In Bewegung", unterwegs: "Unterwegs" };
 async function spielKarten(ziel, t, ctx, strang) {
   const spielNach = new Map((ctx.spiele.spiele || []).map((x) => [x.id, x]));
   for (const id of spieleFuer(ctx, t.id)) {
     const sp = spielNach.get(id);
     if (!sp) continue;
-    const palette = paletteFuer(ctx, sp.welt);
+    const palette = paletteFuer(ctx, sp.karte?.welt ?? sp.welt);
+    const figur = sp.karte?.figur
+      ? `<ls-objekt art="${esc(sp.karte.figur)}"${sp.karte.zustand ? ` zustand="${esc(sp.karte.zustand)}"` : ""} still></ls-objekt>` : "";
     const b = el("button", null, "lp-karte digital");
     b.type = "button";
-    b.innerHTML = `<span class="bild">${palette ? vignetteSvg(palette) : `<img src="${esc(sp.symbol || "symbole/spiel.svg")}" alt="">`}</span>`
-      + `<span class="text"><b>${esc(sp.titel || sp.id)}</b><span class="art">Digitales Spiel</span>${sp.kurz ? `<span class="kurz">${esc(sp.kurz)}</span>` : ""}</span>`;
+    b.innerHTML = `<span class="bild">${palette ? `<span class="welt">${vignetteSvg(palette)}</span>` : ""}`
+      + `${figur || (palette ? "" : `<img src="${esc(sp.symbol || "symbole/mathe.svg")}" alt="">`)}</span>`
+      + `<span class="text"><b>${esc(sp.titel || sp.id)}</b><span class="art">Digitales Spiel</span>${sp.text ? `<span class="kurz">${esc(sp.text)}</span>` : ""}</span>`;
     b.addEventListener("click", async () => { await sofortSpeichern(); location.href = `${sp.datei || sp.id + ".html"}?eltern&thema=${encodeURIComponent(t.id)}`; });
     ziel.appendChild(b);
   }
@@ -768,7 +774,7 @@ async function spielKarten(ziel, t, ctx, strang) {
     b.innerHTML = `<span class="bild">${figur ? `<ls-objekt art="${esc(figur)}"${zustand ? ` zustand="${esc(zustand)}"` : ""} still></ls-objekt>` : `<img src="symbole/hand.svg" alt="">`}</span>`
       + `<span class="text"><b>${esc(ed.titel || "Mit echten Dingen")}</b>`
       + `<span class="art">Mit echten Dingen: ${esc(ed.formen.map((f) => SITUATION_WORT[f.situation] || f.wort).join(", "))}</span>`
-      + `${a?.kopf?.kurz ? `<span class="kurz">${esc(String(a.kopf.kurz))}</span>` : ""}</span>`;
+      + `${a?.kopf?.text || a?.kopf?.kurz ? `<span class="kurz">${esc(String(a.kopf.text || a.kopf.kurz))}</span>` : ""}</span>`;
     b.addEventListener("click", () => $("anregung").oeffne({ titel: t.name, thema: t.id, fach: strang, pdf: kann.drucken }));
     ziel.appendChild(b);
   }
