@@ -3,13 +3,13 @@
 // Nur an 127.0.0.1. Liest das Repo bei jedem Aufruf neu; schreibt nur die Warteschlange.
 
 import { spawn } from "node:child_process";
-import { closeSync, existsSync, openSync, readFileSync, readSync, statSync } from "node:fs";
+import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readSync, statSync } from "node:fs";
 import { createServer } from "node:http";
-import { extname, join, normalize, sep } from "node:path";
+import { dirname, extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ladeAuftraege, neuerAuftrag, speichereAuftraege, streiche, verschiebe } from "./auftraege.mjs";
 import { baueUebersicht, liesQuellen } from "./daten.mjs";
-import { ORDNER, WURZEL, anhalten, pfade, sperre } from "./lauf.mjs";
+import { ORDNER, WURZEL, anhalten, laufLog, letzterLaufFehler, pfade, sperre } from "./lauf.mjs";
 
 const SEITE = join(ORDNER, "seite");
 const TYPEN = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml" };
@@ -17,7 +17,10 @@ const AUFTRAG_ID = /^a-\d+-[a-z0-9]+$/;
 
 /** Startet den Lauf als eigenen Prozess, damit er ein Beenden des Servers (Strg+C) übersteht. */
 export function starteLaufGetrennt() {
-  const kind = spawn(process.execPath, [join(ORDNER, "lauf.mjs"), "abarbeiten"], { cwd: WURZEL, detached: true, stdio: "ignore" });
+  mkdirSync(dirname(laufLog(ORDNER)), { recursive: true });
+  const log = openSync(laufLog(ORDNER), "w"); // je Start neu: die Seite zeigt den Fehler des letzten Laufs
+  const kind = spawn(process.execPath, [join(ORDNER, "lauf.mjs"), "abarbeiten"], { cwd: WURZEL, detached: true, stdio: ["ignore", log, log] });
+  closeSync(log);
   kind.unref();
 }
 
@@ -81,7 +84,7 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
       }
       if (!post && pfad === "/api/uebersicht") return antwort(200, uebersicht());
       if (!post && pfad === "/api/auftraege") {
-        return antwort(200, { auftraege: auftraege(), laeuft: !!sperre(ordner), sperre: sperre(ordner), anhalten: existsSync(p.anhalten) });
+        return antwort(200, { auftraege: auftraege(), laeuft: !!sperre(ordner), sperre: sperre(ordner), anhalten: existsSync(p.anhalten), laufFehler: sperre(ordner) ? null : letzterLaufFehler(ordner) });
       }
       if (post && pfad === "/api/auftraege") {
         const { art, ziel } = await koerper();

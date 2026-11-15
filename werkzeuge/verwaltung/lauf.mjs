@@ -137,6 +137,14 @@ export async function arbeiteAb({ ordner = ORDNER, wurzel = WURZEL, starte = sta
   const p = pfade(ordner);
   rmSync(p.anhalten, { force: true });
   try {
+    // Wer die Sperre hält, hat keinen lebenden Vorgänger: was noch „laeuft“, stammt aus einem abgebrochenen Lauf.
+    const liegen = ladeAuftraege(p.auftraege).filter((a) => a.status === "laeuft");
+    for (const a of liegen) {
+      aendere(ordner, a.id, (l, i) => {
+        l[i] = { ...l[i], status: "fehlgeschlagen", beendet: new Date().toISOString(), notiz: "Lauf abgebrochen (Prozess beendet, ohne Ergebnis)" };
+        return l;
+      });
+    }
     for (;;) {
       const a = naechsterWartender(ladeAuftraege(p.auftraege));
       if (!a) break;
@@ -164,6 +172,28 @@ export async function arbeiteAb({ ordner = ORDNER, wurzel = WURZEL, starte = sta
   }
 }
 
+/** Chat: Status setzen; die Sperre nur freigeben, wenn sie dem Chat gehört (nie die eines Laufs der Seite). */
+export function meldeFertig(ordner, id, status) {
+  if (!STATUS.includes(status)) throw new Error(`status muss ${STATUS.join(", ")} sein`);
+  aendere(ordner, id, (l, i) => {
+    if (i < 0) throw new Error(`Auftrag ${id} nicht gefunden`);
+    l[i] = { ...l[i], status, beendet: new Date().toISOString() };
+    return l;
+  });
+  const s = sperre(ordner);
+  if (s?.wer === "chat") gibSperreFrei(ordner);
+}
+
+/** Ausgabe des zuletzt gestarteten Hintergrundlaufs (die Seite startet ihn ohne Fenster). */
+export const laufLog = (ordner) => join(ordner, "protokolle", "lauf.log");
+
+/** Die Fehlermeldung des letzten Hintergrundlaufs oder null. */
+export function letzterLaufFehler(ordner) {
+  if (!existsSync(laufLog(ordner))) return null;
+  const zeile = readFileSync(laufLog(ordner), "utf8").split("\n").reverse().find((z) => z.startsWith("Fehler: "));
+  return zeile ? zeile.slice("Fehler: ".length) : null;
+}
+
 async function main(argv) {
   const [befehl, ...rest] = argv;
   const p = pfade(ORDNER);
@@ -182,13 +212,7 @@ async function main(argv) {
     console.log(JSON.stringify({ id: a.id, art: a.art, ziel: a.ziel, befehl: a.befehl }));
   } else if (befehl === "fertig") {
     const [id, status] = rest;
-    if (!STATUS.includes(status)) throw new Error(`status muss ${STATUS.join(", ")} sein`);
-    aendere(ORDNER, id, (l, i) => {
-      if (i < 0) throw new Error(`Auftrag ${id} nicht gefunden`);
-      l[i] = { ...l[i], status, beendet: new Date().toISOString() };
-      return l;
-    });
-    gibSperreFrei(ORDNER);
+    meldeFertig(ORDNER, id, status);
     console.log(`${id}: ${status}`);
   } else {
     console.error("Aufruf: lauf.mjs abarbeiten | naechster | fertig <id> <status>");
@@ -196,4 +220,9 @@ async function main(argv) {
   }
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) main(process.argv.slice(2));
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  main(process.argv.slice(2)).catch((e) => {
+    console.error(`Fehler: ${e.message}`);
+    process.exitCode = 1;
+  });
+}

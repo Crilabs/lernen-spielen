@@ -109,3 +109,9 @@ test("Server: fremde Herkunft, fremder Host und Nicht-JSON werden abgewiesen", (
   assert.equal(status, 403);
   assert.equal((await hol("/api/abarbeiten", { method: "POST", headers: { "content-type": "application/json", origin: "null" } })).status, 403);
 }));
+
+test("Server: Fehler des letzten Laufs in /api/auftraege", () => mitServer(async ({ hol, ordner }) => {
+  mkdirSync(join(ordner, "protokolle"));
+  writeFileSync(join(ordner, "protokolle", "lauf.log"), "Fehler: auftraege.json ist kein gültiges JSON\n");
+  assert.equal((await (await hol("/api/auftraege")).json()).laufFehler, "auftraege.json ist kein gültiges JSON");
+}));

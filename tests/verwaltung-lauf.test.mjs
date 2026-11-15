@@ -111,3 +111,42 @@ test("laufUmgebung: Auftrag, Transkript und eine Git-Umgebung, in der kein Push 
   assert.equal(env.GIT_TERMINAL_PROMPT, "0");
   assert.equal(env.GIT_SSH_COMMAND, "false");
 });
+
+test("arbeiteAb: liegengebliebene laufende Aufträge eines toten Laufs werden fehlgeschlagen", async () => {
+  const o = ordner();
+  const alt = { ...auftrag("frei", "alt"), status: "laeuft" };
+  mitAuftraegen(o, [alt, auftrag("frei", "neu")]);
+  await arbeiteAb({ ordner: o, wurzel: o, starte: fake(o, { neu: { status: "erledigt" } }) });
+  const l = ladeAuftraege(pfade(o).auftraege);
+  assert.deepEqual(l.map((a) => a.status), ["fehlgeschlagen", "erledigt"]);
+  assert.match(l[0].notiz, /abgebrochen/);
+  rmSync(o, { recursive: true });
+});
+
+test("meldeFertig: setzt den Status, gibt nur eine Chat-Sperre frei", async () => {
+  const { meldeFertig } = await import("../werkzeuge/verwaltung/lauf.mjs");
+  const o = ordner();
+  const [x] = mitAuftraegen(o, [{ ...auftrag("frei", "x"), status: "laeuft" }]);
+  assert.ok(nimmSperre(o, { pid: process.pid, wer: "seite" }));
+  meldeFertig(o, x.id, "erledigt");
+  assert.equal(ladeAuftraege(pfade(o).auftraege)[0].status, "erledigt");
+  assert.equal(sperre(o)?.wer, "seite");
+  gibSperreFrei(o);
+  assert.ok(nimmSperre(o, { pid: null, wer: "chat" }));
+  meldeFertig(o, x.id, "erledigt");
+  assert.equal(sperre(o), null);
+  assert.throws(() => meldeFertig(o, "a-0-nix", "erledigt"), /nicht gefunden/);
+  rmSync(o, { recursive: true });
+});
+
+test("letzterLaufFehler: Fehlerzeile aus lauf.log, sonst null", async () => {
+  const { letzterLaufFehler } = await import("../werkzeuge/verwaltung/lauf.mjs");
+  const o = ordner();
+  assert.equal(letzterLaufFehler(o), null);
+  mkdirSync(join(o, "protokolle"));
+  writeFileSync(join(o, "protokolle", "lauf.log"), "Start\nFehler: Es läuft schon ein Lauf (Sperre .lauf.lock).\n");
+  assert.equal(letzterLaufFehler(o), "Es läuft schon ein Lauf (Sperre .lauf.lock).");
+  writeFileSync(join(o, "protokolle", "lauf.log"), "Start\n");
+  assert.equal(letzterLaufFehler(o), null);
+  rmSync(o, { recursive: true });
+});

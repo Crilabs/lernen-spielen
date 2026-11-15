@@ -152,7 +152,8 @@ function zeigeAuftraege() {
     ? `<button class="haupt" disabled>Lauf aktiv${A.sperre?.wer === "chat" ? " (im Chat)" : ""}</button>
        <button class="zweit" id="anhalten" ${A.anhalten ? "disabled" : ""}>${A.anhalten ? "hält nach dem aktuellen an" : "nach dem aktuellen anhalten"}</button>`
     : `<button class="haupt" id="abarbeiten" ${wartend.length ? "" : "disabled"}>Warteschlange abarbeiten (${wartend.length}, ca. ${eur(summe)}${unbekannt ? " + unbekannt" : ""})</button>`;
-  $("#auftraege").innerHTML = `
+  const fehler = A.laufFehler ? `<p class="plakette s-fehlgeschlagen" style="white-space:normal">Letzter Lauf: ${esc(A.laufFehler)}</p>` : "";
+  $("#auftraege").innerHTML = `${fehler}
     <div class="leiste">${knopf}
       <form id="frei" class="leiste" style="margin:0"><input name="text" placeholder="Freier Auftrag …" size="40" style="padding:6px 8px;border:1px solid var(--linie);border-radius:6px;background:var(--flaeche)">
       <button class="zweit">anlegen</button></form></div>
