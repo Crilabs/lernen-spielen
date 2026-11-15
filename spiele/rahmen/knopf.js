@@ -6,6 +6,7 @@
 // Mit `wort` wird jeder Knopf zur Pille mit sichtbarem Wort. Größe (`groesse`, unabhängig von `art`):
 // `groesse="bedien|gross|klein"` (rund 11/16/8 rem; Pille 11 rem hoch, mit gross 14 rem wie die Pausenknöpfe,
 // mit klein 8 rem, nur für Erwachsene, z. B. die Leiste im Elternbereich);
+// `groesse="seite"` (Übersichtsseiten der Designsprache): sichtbar 8,4 rem (rund und Pille), Tippfläche bleibt 11 rem (K4);
 // `achtung`: Knopf in Beere samt Schatten, nur im Elternbereich (Löschen, Zurücksetzen);
 // die Tippfläche ist mindestens 11 rem, bei der kleinen Pille (nur Erwachsene) 9 rem. tabindex="0" am Knopf: WebKit (Safari, macOS-Vorgabe) erreicht
 // Knöpfe ohne tabindex nicht mit Tab.
@@ -15,7 +16,7 @@
 import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
 import { sprich } from "../kern/stimme.js";
 import { schonGesagt, sageEinmal } from "../kern/sitzung.js";
-import { GRUND_CSS, MASSE, bild, definiere } from "./stil.js";
+import { GRUND_CSS, MASSE, SEITE, bild, definiere } from "./stil.js";
 
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
 
@@ -33,7 +34,7 @@ export function findeSpiel(el) {
     const wurzel = /** @type {any} */ (k.getRootNode());
     k = wurzel?.host ?? null;
   }
-  return document.querySelector("ls-leiste")?.getAttribute("spiel") ?? null;
+  return document.querySelector("ls-leiste, ls-kopf")?.getAttribute("spiel") ?? null;
 }
 
 const KNOPF_CSS = `
@@ -103,8 +104,8 @@ export class LsKnopf extends HTMLElement {
     const g = this.getAttribute("groesse");
     this.knopf.classList.toggle("klein-pille", pille && g === "klein");
     const rem = pille
-      ? g === "gross" ? MASSE.pilleGross : g === "klein" ? MASSE.pilleKlein : MASSE.pille
-      : g === "gross" ? MASSE.gross : g === "klein" ? MASSE.klein : MASSE.bedien;
+      ? g === "gross" ? MASSE.pilleGross : g === "klein" ? MASSE.pilleKlein : g === "seite" ? SEITE.knopf : MASSE.pille
+      : g === "gross" ? MASSE.gross : g === "klein" ? MASSE.klein : g === "seite" ? SEITE.knopf : MASSE.bedien;
     this.style.setProperty("--ls-knopf", `${rem}rem`);
   }
 
