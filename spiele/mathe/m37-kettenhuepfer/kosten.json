@@ -358,5 +358,18 @@
    },
    "total_tokens": 1705
   }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "ausbau",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 460,
+  "ausgabe": 176809,
+  "einheit": "tokens",
+  "menge": 83084122,
+  "notiz": "Bau-Agent Ausbau",
+  "cache_lesen": 82396361,
+  "cache_schreiben": 510492
  }
 ]
