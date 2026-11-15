@@ -1,7 +1,7 @@
 // Szenenbilder mit Azure OpenAI erzeugen (Stimmungsebene, docs/grundsaetze-bilder.md §11 A1–A6).
-// Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <spielordner>] [--basis szene|foto] <ziel.png> "<Szene>"
-//   Basis-Prompt: basis-szene.txt (Vorgabe, gezeichnete Szene) oder basis-foto.txt (fotorealistisch, Sachgeschichten,
-//   docs/geschichten.md). --spiel darf auch der Ordner einer Geschichte sein (spiele/geschichten/<id>).
+// Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <spielordner>] [--basis szene|foto|raum] <ziel.png> "<Szene>"
+//   Basis-Prompt: basis-szene.txt (Vorgabe, gezeichnete Szene), basis-foto.txt (fotorealistisch, Sachgeschichten,
+//   docs/geschichten.md) oder basis-raum.txt (Raumbild der Bibliothek, hochkant 1024 × 1536). --spiel darf auch der Ordner einer Geschichte sein (spiele/geschichten/<id>).
 // Mit --spiel steht der Verbrauch (usage der API-Antwort) in <spielordner>/kosten.json und in herkunft.json neben dem Bild
 // (docs/spielentwicklung.md §6); fehlt usage, endet der Lauf mit Exit 1. Ohne --spiel verhält sich das Werkzeug wie zuvor:
 // kein kosten.json, keine herkunft.json, usage steht nur in der Ausgabe (fehlt sie, nur eine Warnung).
@@ -24,11 +24,11 @@ export function leseArgumente(argv) {
       if (!spiel) throw new Error("--spiel braucht einen Spielordner");
     } else if (argv[i] === "--basis") {
       basis = argv[++i] ?? "";
-      if (!["szene", "foto"].includes(basis)) throw new Error("--basis ist szene oder foto");
+      if (!["szene", "foto", "raum"].includes(basis)) throw new Error("--basis ist szene, foto oder raum");
     } else rest.push(argv[i]);
   }
   const [ziel, szene] = rest;
-  if (!ziel || !szene) throw new Error('Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <ordner>] [--basis szene|foto] <ziel.png> "<Szene>"');
+  if (!ziel || !szene) throw new Error('Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <ordner>] [--basis szene|foto|raum] <ziel.png> "<Szene>"');
   return { ziel, szene, spiel, basis };
 }
 
@@ -68,7 +68,7 @@ async function main() {
     method: "POST",
     headers: { "Content-Type": "application/json", "api-key": env.AZURE_OPENAI_API_KEY },
     // Fotos der Geschichten quadratisch (docs/geschichten.md: Bild links, Text rechts; Christian 2026-11-15)
-    body: JSON.stringify({ prompt, size: a.basis === "foto" ? "1024x1024" : "1536x1024", quality: "high", n: 1 }),
+    body: JSON.stringify({ prompt, size: a.basis === "foto" ? "1024x1024" : a.basis === "raum" ? "1024x1536" : "1536x1024", quality: "high", n: 1 }),
   });
   const daten = await antwort.json();
   if (!antwort.ok) throw new Error(`Azure OpenAI ${antwort.status}: ${JSON.stringify(daten).slice(0, 500)}`);

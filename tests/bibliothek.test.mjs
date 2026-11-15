@@ -43,11 +43,11 @@ test("regalZustand: gelesen, teils, da, kommt", () => {
   assert.equal(B.regalZustand(r([{ da: false, am: "" }])), "kommt");
 });
 
-test("waehleRaum und buchHref: gewünschter Raum, sonst der erste; Fertig führt in denselben Raum zurück", () => {
+test("waehleRaum und buchHref: gewünschter Raum, sonst die Halle (null); Fertig führt in denselben Raum zurück", () => {
   const k = B.bibliothekFuerKind(PLAN, [...FERTIG, { id: "mars", titel: "Mars" }], {});
   assert.equal(B.waehleRaum(k, "weltall").id, "weltall");
-  assert.equal(B.waehleRaum(k, "gibt-es-nicht").id, "tiere");
-  assert.equal(B.waehleRaum([], null), null);
+  assert.equal(B.waehleRaum(k, "gibt-es-nicht"), null, "unbekannt: die Halle");
+  assert.equal(B.waehleRaum(k, null), null, "ohne ?raum: die Halle");
   const href = B.buchHref("katze", "tiere");
   assert.equal(href, "geschichte.html?id=katze&weiter=bibliothek.html%3Fraum%3Dtiere");
   assert.equal(new URLSearchParams(href.split("?").slice(1).join("?")).get("weiter"), "bibliothek.html?raum=tiere");
@@ -60,6 +60,7 @@ test("raumSvg und raumBildFlach: Themenkreise und eigene Raumbilder, ohne Kontur
     assert.doesNotMatch(B.raumSvg(bild), /stroke="#3B2A6B"/, "keine Tinte-Kontur im Raumbild");
   }
   assert.match(B.raumWand("tiere-pflanzen"), /^#[0-9A-F]{6}$/i);
+  assert.match(B.raumSchatten("tiere-pflanzen"), /^#[0-9A-F]{6}$/i);
 });
 
 // ---------- der echte Plan ----------
@@ -70,6 +71,7 @@ test("bibliothek.json: Ids eindeutig, Räume mit Bild, Regale mit Büchern, Welt
   const raumIds = new Set(), regalIds = new Set(), buchIds = new Set();
   for (const r of plan.raeume) {
     assert.ok(r.id && r.name && r.bild, `Raum ${r.id}`);
+    assert.ok(typeof r.foto === "string" && existsSync(new URL(`../spiele/${r.foto}`, import.meta.url)), `Raum ${r.id}: Raumbild ${r.foto} fehlt`);
     assert.ok(!raumIds.has(r.id), `doppelter Raum ${r.id}`); raumIds.add(r.id);
     assert.ok(r.regale.length > 0, `Raum ${r.id} ohne Regale`);
     for (const rg of r.regale) {

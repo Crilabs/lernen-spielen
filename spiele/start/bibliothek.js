@@ -7,7 +7,7 @@ import { themenkreisSvg, paletteDesThemenkreises, PALETTEN } from "./welten.js";
 
 /** @typedef {{ id: string, titel: string, da: boolean, am: string }} Buch */
 /** @typedef {{ id: string, name: string, fach: string, welten: string[], buecher: Buch[] }} Regal */
-/** @typedef {{ id: string, name: string, bild: string, regale: Regal[] }} Raum */
+/** @typedef {{ id: string, name: string, bild: string, foto: string, regale: Regal[] }} Raum */
 
 /** @param {unknown} x @returns {string} */
 const text = (x) => (typeof x === "string" ? x : "");
@@ -23,7 +23,7 @@ const liste = (x) => (Array.isArray(x) ? x : []);
 export function bibliothekGanz(plan, geschichten = [], gelesen = {}) {
   const fertig = new Map(liste(geschichten).filter((g) => g && text(g.id)).map((g) => [g.id, g]));
   return liste(plan?.raeume).map((r) => ({
-    id: text(r.id), name: text(r.name), bild: text(r.bild),
+    id: text(r.id), name: text(r.name), bild: text(r.bild), foto: text(r.foto),
     regale: liste(r.regale).map((rg) => ({
       id: text(rg.id), name: text(rg.name), fach: text(rg.fach), welten: liste(rg.welten).filter((w) => typeof w === "string"),
       buecher: liste(rg.buecher).filter((b) => text(b?.id)).map((b) => {
@@ -57,8 +57,8 @@ export function regalZustand(regal) {
   return gel === da.length ? "gelesen" : gel ? "teils" : "da";
 }
 
-/** Raum aus der Adresse (?raum=), sonst der erste. @param {Raum[]} raeume @param {string|null} wunsch */
-export const waehleRaum = (raeume, wunsch) => raeume.find((r) => r.id === wunsch) ?? raeume[0] ?? null;
+/** Raum aus der Adresse (?raum=); ohne oder unbekannt: null (dann die Halle). @param {Raum[]} raeume @param {string|null} wunsch */
+export const waehleRaum = (raeume, wunsch) => raeume.find((r) => r.id === wunsch) ?? null;
 
 /** Adresse eines Buchs aus der Bibliothek; „Fertig“ führt zurück in denselben Raum. @param {string} buchId @param {string} raumId */
 export const buchHref = (buchId, raumId) =>
@@ -96,6 +96,8 @@ export function raumSvg(bild) {
 const RAUM_PALETTE = { "tiere-pflanzen": "wiese", "erde-himmel": "wasser", "werkzeug-bauen": "werkstatt", "zahlen-buchstaben": "werkstatt" };
 /** Wandton eines Raums: Himmel seiner Palette (die Seite mischt ihn mit Nebel). @param {string} bild */
 export const raumWand = (bild) => (PALETTEN[RAUM_PALETTE[bild] ?? "dorf"] ?? PALETTEN.dorf)[0];
+/** Schattenton eines Raums (Buchrücken). @param {string} bild */
+export const raumSchatten = (bild) => (PALETTEN[RAUM_PALETTE[bild] ?? "dorf"] ?? PALETTEN.dorf)[4];
 
 /** Flaches Querbild eines Raums (300 × 160) für Kopfzeilen, z. B. im Elternbereich. @param {string} bild */
 export function raumBildFlach(bild) {

@@ -4,10 +4,10 @@
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/bibliothek.spec.mjs
 //   (SHOTS=<ordner> legt Bildschirmfotos ab)
 //
-// Geprüft: Startseite hat den Knopf „Bibliothek“ ganz im Bild unter „Was ich schon kann“; die Bibliothek zeigt nur Räume
-// und Regale mit fertigen Büchern (Bauernhof fehlt), der erste Raum ist gewählt (Sonnenring), Türen wechseln den Raum
-// und die Adresse (?raum=); Bücher stehen ganz im Bild auf dem Brett; ein Buch öffnet die Geschichte, „Fertig“ führt in
-// denselben Raum zurück und das Buch trägt nun ein Lesezeichen; keine Seitenfehler.
+// Geprüft: Startseite hat den Knopf „Bibliothek“ ganz im Bild unter „Was ich schon kann“; die Halle zeigt die Räume als
+// Türbögen mit Raumbild, mittig; eine Tür öffnet den Raum (?raum=), dort nur Regale mit fertigen Büchern (Bauernhof
+// fehlt), Bücher hochkant; Zurück führt in die Halle; ein Buch öffnet die Geschichte, „Fertig“ führt in denselben Raum
+// zurück und das Buch trägt nun ein Lesezeichen; keine Seitenfehler.
 
 import { createRequire } from "node:module";
 import { mkdir } from "node:fs/promises";
@@ -53,31 +53,41 @@ for (const typ of [chromium, webkit]) {
     pruefe(knopf.unten && knopf.rechts && knopf.unter && knopf.href === "bibliothek.html" && knopf.wort === "Bibliothek",
       `${L} Startseite: Knopf „Bibliothek“ ganz im Bild unter „Was ich schon kann“`, JSON.stringify(knopf));
 
-    // Bibliothek ohne Gelesenes
+    // Halle: die Räume als Türbögen mit Raumbild, mittig
     await page.goto(`${basis}/spiele/bibliothek.html`);
-    await page.waitForSelector(".buch");
-    const b = await page.evaluate(() => {
-      const tueren = [...document.querySelectorAll(".tuer")];
-      const buecher = [...document.querySelectorAll(".buch")].map((x) => { const r = x.getBoundingClientRect(); return { r: r.toJSON(), band: !!x.querySelector(".band") }; });
-      const brett = document.querySelector(".brett").getBoundingClientRect();
-      return { tueren: tueren.map((t) => t.dataset.raum), gewaehlt: tueren.filter((t) => t.getAttribute("aria-selected") === "true").map((t) => t.dataset.raum),
-        h1: document.querySelector(".raum h1").textContent, regale: [...document.querySelectorAll(".regal")].map((r) => r.dataset.regal),
-        buecher, brett: brett.toJSON(), titel: document.title };
+    await page.waitForSelector(".tuer img");
+    const halle = await page.evaluate(() => {
+      const t = [...document.querySelectorAll(".tuer")];
+      const rs = t.map((x) => x.querySelector(".bogen").getBoundingClientRect());
+      const links = rs[0].left, rechts = innerWidth - rs[rs.length - 1].right;
+      return { tueren: t.map((x) => x.dataset.raum), bilder: t.every((x) => x.querySelector(".bogen img")?.complete), mittig: Math.abs(links - rechts) < 4,
+        imBild: rs.every((r) => r.bottom <= innerHeight && r.top >= 0) };
     });
-    const erstes = b.buecher[0].r;
-    pruefe(JSON.stringify(b.tueren) === JSON.stringify(["tiere", "zahlen-buchstaben"]) && JSON.stringify(b.gewaehlt) === JSON.stringify(["tiere"]) && b.h1 === "Tiere",
-      `${L} zwei Räume als Türen, Tiere gewählt`, JSON.stringify(b));
-    pruefe(b.regale.includes("haustiere") && !b.regale.includes("bauernhof"), `${L} nur Regale mit fertigen Büchern (Bauernhof fehlt)`, JSON.stringify(b.regale));
-    pruefe(b.buecher.every((x) => x.r.right <= w && x.r.bottom <= h && x.r.left >= 0) && Math.abs(erstes.width - erstes.height) < 2,
-      `${L} Bücher quadratisch und ganz im Bild`, JSON.stringify(erstes));
-    pruefe(erstes.bottom <= b.brett.top + 0.26 * (h / 108) * 100 && b.buecher.every((x) => !x.band), `${L} Buch steht auf dem Brett, ohne Lesezeichen`, JSON.stringify(b));
-    if (SHOTS) { await mkdir(SHOTS, { recursive: true }); await page.screenshot({ path: join(SHOTS, `bibliothek-${typ.name()}-${w}x${h}.png`) }); }
+    pruefe(JSON.stringify(halle.tueren) === JSON.stringify(["tiere", "zahlen-buchstaben"]) && halle.bilder && halle.mittig && halle.imBild,
+      `${L} Halle: zwei Türen mit Raumbild, mittig, ganz im Bild`, JSON.stringify(halle));
+    if (SHOTS) { await mkdir(SHOTS, { recursive: true }); await page.screenshot({ path: join(SHOTS, `bibliothek-halle-${typ.name()}-${w}x${h}.png`) }); }
 
-    // Raum wechseln
+    // Tür → Raum (Adresse ?raum=), nur Regale mit fertigen Büchern, Bücher hochkant, ganz im Bild
+    await page.click('.tuer[data-raum="tiere"]');
+    await page.waitForSelector(".buch");
+    const b = await page.evaluate(() => ({ url: location.search, h1: document.querySelector(".raum h1").textContent,
+      regale: [...document.querySelectorAll(".regal")].map((r) => r.dataset.regal), zurueck: !!document.querySelector("#zurueck"),
+      buecher: [...document.querySelectorAll(".buch")].map((x) => ({ r: x.getBoundingClientRect().toJSON(), band: !!x.querySelector(".band") })) }));
+    const erstes = b.buecher[0].r;
+    pruefe(b.url === "?raum=tiere" && b.h1 === "Tiere" && b.zurueck, `${L} Tür öffnet den Raum Tiere mit Zurück-Knopf`, JSON.stringify(b));
+    pruefe(b.regale.includes("haustiere") && !b.regale.includes("bauernhof"), `${L} nur Regale mit fertigen Büchern (Bauernhof fehlt)`, JSON.stringify(b.regale));
+    pruefe(b.buecher.every((x) => x.r.right <= w && x.r.left >= 0) && erstes.height > erstes.width * 1.2 && b.buecher.every((x) => !x.band),
+      `${L} Bücher hochkant, ganz in der Breite, ohne Lesezeichen`, JSON.stringify(erstes));
+    if (SHOTS) await page.screenshot({ path: join(SHOTS, `bibliothek-raum-${typ.name()}-${w}x${h}.png`) });
+
+    // Zurück → Halle, anderer Raum
+    await page.click("#zurueck");
+    await page.waitForSelector(".tuer");
+    pruefe((await page.evaluate(() => location.search)) === "", `${L} Zurück führt in die Halle`);
     await page.click('.tuer[data-raum="zahlen-buchstaben"]');
     await page.waitForFunction(() => document.querySelector(".raum h1")?.textContent === "Zahlen und Buchstaben");
     pruefe(/\?raum=zahlen-buchstaben$/.test(page.url()) && (await page.locator('.regal[data-regal="rechnen"] .buch').count()) === 1,
-      `${L} Tür wechselt Raum und Adresse`, page.url());
+      `${L} zweite Tür öffnet Zahlen und Buchstaben`, page.url());
 
     // Buch öffnen, bis Fertig, zurück im selben Raum mit Lesezeichen
     await page.goto(`${basis}/spiele/bibliothek.html?raum=tiere`);

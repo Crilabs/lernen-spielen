@@ -1,10 +1,11 @@
 {
-  "hinweis": "Bibliothek der Geschichten (docs/superpowers/specs/2026-11-15-bibliothek-design.md): Räume › Regale › Bücher. Ein Buch ist da, wenn es in geschichten/index.json steht; sonst geplant (Arbeitstitel). Das Kind sieht nur Regale und Räume mit fertigen Büchern. welten = Bezug zu den Welten im Lernplan.",
+  "hinweis": "Bibliothek der Geschichten (docs/superpowers/specs/2026-11-15-bibliothek-design.md): Räume › Regale › Bücher. Ein Buch ist da, wenn es in geschichten/index.json steht; sonst geplant (Arbeitstitel). Das Kind sieht nur Regale und Räume mit fertigen Büchern. welten = Bezug zu den Welten im Lernplan. foto = Raumbild (werkzeuge/bilder, --basis raum), bild = flaches Ersatzbild.",
   "raeume": [
     {
       "id": "tiere",
       "name": "Tiere",
       "bild": "tiere-pflanzen",
+      "foto": "bibliothek/raeume/tiere.webp",
       "regale": [
         {
           "id": "haustiere",
@@ -313,6 +314,7 @@
       "id": "zahlen-buchstaben",
       "name": "Zahlen und Buchstaben",
       "bild": "zahlen-buchstaben",
+      "foto": "bibliothek/raeume/zahlen-buchstaben.webp",
       "regale": [
         {
           "id": "rechnen",
