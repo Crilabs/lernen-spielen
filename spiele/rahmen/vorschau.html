@@ -187,6 +187,7 @@
     <ls-echte-dinge-kachel id="kachel-leer" thema="gibt-es-nicht" fach="mathe"></ls-echte-dinge-kachel>
   </div>
 </section>
+<ls-muster id="muster" hidden></ls-muster>
 <ls-anregung id="anregung"></ls-anregung>
 <ls-hilfe id="hilfe"></ls-hilfe>
 <ls-pause id="pause">
@@ -205,6 +206,7 @@
   import "./wortart.js";
   import "./anregung.js";
   import "./echte-dinge-kachel.js";
+  import "./muster.js";
   import { ziehbar, setze, zurueck } from "./ziehen.js";
   import "../objekte/papiertonne.js";
   import "../objekte/wertstofftonne.js";
@@ -270,6 +272,13 @@
     leiste.setAttribute("thema", "Mit echten Dingen");
     document.getElementById("spielkachel").addEventListener("click", (e) => e.preventDefault());
     if (q.has("karte")) document.getElementById("kachel-7").geladen.then(() => document.getElementById("kachel-7").oeffneKarte());
+  }
+  // Grundmuster der Designsprache: ?muster=huegel|wellen|blaetter|ringe zeigt es auf leerer Seite.
+  if (q.has("muster")) {
+    document.querySelector(".buehne").hidden = true;
+    const m = document.getElementById("muster");
+    m.setAttribute("art", q.get("muster") ?? "");
+    m.hidden = false;
   }
   if (q.has("leuchte")) hilfe.leuchte();
   if (q.has("pause")) zeigePause();
