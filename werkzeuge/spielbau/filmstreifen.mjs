@@ -100,6 +100,11 @@ async function main() {
         if (Date.now() - t0 > frist) throw new Error(`nach ${frist} ms noch in Phase ${z.phase}`);
         // Die Einführung wartet auf das Kind (§8): Weiter tippen, sobald er da ist, und mitzählen.
         if (z.phase === "einfuehrung" && await seite.evaluate(() => { const k = document.querySelector(".einf-weiter.da"); if (k) k.click(); return !!k; })) takt.einfuehrungSchritte = (takt.einfuehrungSchritte ?? 0) + 1;
+        // Einführung im echten Spielbild: das Kind tippt selbst die Taste im Sonnenring (richtigerZug der Phase).
+        else if (z.phase === "einfuehrung") {
+          const zug = await seite.evaluate(() => window.lsPruefen.richtigerZug());
+          if (zug) { await fuehreAus(zug); takt.einfuehrungTipps = (takt.einfuehrungTipps ?? 0) + 1; await warte(250); }
+        }
         await warte(40);
         z = await zustand();
       }

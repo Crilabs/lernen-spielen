@@ -256,7 +256,11 @@ class Spieler {
       const grenze = z.phase === "einfuehrung" ? MAX_EINFUEHRUNG_MS : MAX_WARTEN_MS;
       if (Date.now() - t0 > grenze) throw new Haenger(`hängt: ${Math.round(grenze / 1000)} s in Phase „${z.phase}“ ohne Zug`);
       // Die Einführung wartet auf das Kind (spiele/einfuehrung.js, docs/spielbau.md §8): Weiter tippen, sobald er da ist.
-      if (z.phase === "einfuehrung") await this.ev(() => document.querySelector(".einf-weiter.da")?.click());
+      // Spielt sie im echten Spielbild, tippt das Kind dort selbst (Taste im Sonnenring): richtigerZug() der Phase.
+      if (z.phase === "einfuehrung" && !(await this.ev(() => { const k = document.querySelector(".einf-weiter.da"); k?.click(); return !!k; }))) {
+        const zug = await this.richtigerZug();
+        if (zug) await this.fuehre(zug, this.lauf.kind === "tastatur" ? "tastatur" : "tippen");
+      }
       await warte(150);
       z = await this.zustand();
     }
