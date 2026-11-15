@@ -2,7 +2,7 @@
 
 ## Unveröffentlicht
 
-## v1.1.0
+## v1.1.1
 
 Neues Aussehen, eine Bibliothek mit Sachbüchern und der Kettenhüpfer neu gebaut.
 

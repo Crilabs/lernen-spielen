@@ -95,7 +95,7 @@ test("arbeiteAb: Folge-Auftrag steht direkt hinter dem Spiel; Änderungen währe
 test("transkriptPfad: Projektordner wie Claude Code ihn benennt", () => {
   assert.equal(
     transkriptPfad("/Users/christian/Code/einhorn-lernspiele", "abc", "/home"),
-    "/home/.claude/projects/-Users-christian-Code-einhorn-lernspiele/abc.jsonl",
+    join("/home", ".claude", "projects", "-Users-christian-Code-einhorn-lernspiele", "abc.jsonl"), // Trenner des Systems (Release baut auf Windows)
   );
 });
 
