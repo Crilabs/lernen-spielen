@@ -35,7 +35,7 @@ const ARTEN = {
   // Drei Reihen Wellen am unteren Rand.
   wellen: () => `<svg viewBox="0 0 1920 240" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">`
     + `<path d="${welle(70, 56, 240, 1920, 240)}" fill="${HELL}"/>`
-    + `<path d="${welle(130, 56, 240, 1920, 240)}" transform="translate(-120 0)" fill="${MITTE}"/>`
+    + `<path d="${welle(130, 56, 240, 2160, 240)}" transform="translate(-120 0)" fill="${MITTE}"/>`
     + `<path d="${welle(190, 56, 240, 2160, 240)}" fill="${TIEF}"/></svg>`,
   // Ein Zweig mit Blättern, oben rechts in die Ecke gelehnt.
   blaetter: () => `<svg viewBox="0 0 760 360" aria-hidden="true" focusable="false">`
