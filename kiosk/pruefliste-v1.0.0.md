@@ -1,7 +1,7 @@
 # Prüfliste Lernen Spielen v1.0.0 (am Windows-Kiosk, nach dem Update)
 
 Vorher: nichts vom Rechner des Kindes löschen. Handy zum Fotografieren bereithalten, Tastatur in Reichweite
-(nur für den Notfall „PIN vergessen“ und den Explorer). Das Kind spielt erst, wenn Abschnitt 2 erledigt ist.
+(nur für den Notfall „PIN vergessen“ und den Explorer).
 
 ## 1. Update von v0.1.8
 
@@ -10,20 +10,10 @@ Vorher: nichts vom Rechner des Kindes löschen. Handy zum Fotografieren bereitha
 - [ ] Installieren und abwarten.
   *Du siehst:* Ladebalken, „Fertig. Die App startet neu …“; danach die neue Startseite „Lernen Spielen“ (ohne Einhorn).
 
-## 2. Einmaliger Handgriff: Ordner `kind-1`
-
-Gleich nach dem Neustart, bevor das Kind spielt (Schritte wie in `CHANGELOG.md`, Abschnitt v1.0.0).
+## 2. Nach dem Neustart
 
 - [ ] Zahnrad 3 Sekunden halten, PIN eingeben.
-  *Du siehst:* die **alte PIN** gilt noch (sie liegt in `eltern.json` eine Ebene über `kind-1`).
-- [ ] Links unten in der Leiste „App beenden“.
-  *Du siehst:* die App schließt sich und kommt **nicht** von selbst zurück.
-- [ ] Explorer, Adresszeile `%APPDATA%\de.crilabs.lernen-spielen\lernstand\`.
-  *Du siehst:* `eltern.json`, `geraet.json` (je mit `.bak`), die alten Dateien der entfernten Spiele und einen Ordner `kind-1` vom ersten Start (sonst anlegen).
-- [ ] Alle Dateien **außer** `eltern.json`, `eltern.json.bak`, `geraet.json`, `geraet.json.bak` in `kind-1` verschieben; bei „Ersetzen?“ ja.
-  *Du siehst:* im Ordner `lernstand\` nur noch die vier Gerätedateien und `kind-1`.
-- [ ] App wieder starten, Zahnrad halten.
-  *Du siehst:* die Startseite; die PIN wird abgefragt (keine neue PIN festlegen).
+  *Du siehst:* die **alte PIN** gilt noch; das Kind beginnt mit leerem Lernstand (die alten Spiele sind weg).
 
 ## 3. Kiosk-Fenster
 

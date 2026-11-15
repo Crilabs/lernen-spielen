@@ -332,6 +332,11 @@ try {
     const seite = await browser.newPage({ viewport: { width: 1280, height: 800 } });
     const seitenFehler = [];
     seite.on("pageerror", (/** @type {Error} */ e) => seitenFehler.push(e.message));
+    // Feste Folge statt Zufall (Math.random mit festem Startwert), damit die Prüfung jedes Mal dieselben Aufgaben sieht.
+    await seite.addInitScript((startwert) => {
+      let z = startwert;
+      Math.random = () => { z = (z + 0x6d2b79f5) | 0; let t = Math.imul(z ^ (z >>> 15), 1 | z); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    }, 1);
     await seite.goto(`${basis}&thema=kernaufgaben-einmaleins&stufe=material`);
     const sp = spieler(seite);
     let gefunden = false;

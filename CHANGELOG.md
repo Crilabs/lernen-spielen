@@ -6,15 +6,7 @@
 
 Die App heißt jetzt **Lernen Spielen**. Sie ist von Grund auf neu gebaut: ein Lernplan für die ganze Grundschule, neue Seiten, eine natürliche Stimme und das erste neue Spiel. Die alten Spiele mit dem Einhorn sind entfernt.
 
-**Einmaliger Handgriff beim Aktualisieren des Kiosks** – direkt nach dem Update, bevor das Kind spielt (die App startet nach dem Update einmal selbst neu). Die Daten des Kindes liegen jetzt im Unterordner `lernstand\kind-1\`; `eltern.json` (PIN) und `geraet.json` bleiben im Ordner darüber.
-
-1. Die App beenden: im Elternbereich auf „App beenden“ tippen. Nur wenn das nicht geht: Tastatur anschließen, Strg+Alt+Entf → Task-Manager (siehe „PIN vergessen“ im README).
-2. Im Explorer in die Adresszeile `%APPDATA%\de.crilabs.lernen-spielen\lernstand\` eingeben.
-3. Dort einen Ordner `kind-1` anlegen (gibt es ihn schon, weil die neue Version schon einmal lief: einfach weiter).
-4. Alle Dateien **außer** `eltern.json`, `eltern.json.bak`, `geraet.json` und `geraet.json.bak` in `kind-1` verschieben (auch die übrigen `.bak`-Dateien). Fragt Windows, ob vorhandene Dateien ersetzt werden sollen: ja, ersetzen (die Dateien in `kind-1` stammen dann vom ersten Start mit leerem Stand).
-5. App wieder starten.
-
-Die PIN bleibt in jedem Fall erhalten. Die Lernstände der entfernten Spiele übernimmt die neue Version nicht: Das Kind beginnt mit leerem Lernstand.
+Nach dem Update beginnt das Kind mit leerem Lernstand (die alten Spiele sind weg); die PIN bleibt.
 
 **Für das Kind**
 
@@ -38,6 +30,7 @@ Die PIN bleibt in jedem Fall erhalten. Die Lernstände der entfernten Spiele üb
 - **Geschichten:** wie aufregend Geschichten sein dürfen (Ruhig, Sanft – Standard –, Abenteuer), mit einem Beispielsatz je Stufe.
 - **Updates:** installierte Version und „Nach Updates suchen“. Update, „App beenden“ und Kiosk gibt es nur dort, wo das Gerät sie kann (Windows-Kiosk).
 - **Hinweise** (Stimme, Sicherheit, Themen ohne Spiel) und **Sicherheit** (PIN ändern, Protokoll).
+- **Sachwelten:** ein eigener Reiter zeigt die Welten, in denen die Spiele spielen (zum Beispiel Vorrat und Packungen), mit einer kurzen Beschreibung je Welt und einem eigenen Bild je Themenkreis (Uhrturm, Weg mit Wegweiser, Hand und Herz, Wippe, Schirm im Regen). So siehst du, in welchen Welten das Kind schon war.
 - <!-- Elternbereich: Christians letzte Änderungen ergänzen -->
 
 **Stimme und Ton**
@@ -49,7 +42,7 @@ Die PIN bleibt in jedem Fall erhalten. Die Lernstände der entfernten Spiele üb
 
 - Lernplan für die ganze Grundschule: rund 950 kleine Themen in Mathe, Geometrie, Lesen, Schreiben (Druck- und Schreibschrift), Grammatik sowie Sprechen und Zuhören; Klasse 1 und 2 ausführlich, Klasse 3 und 4 grob. Dazu 42 typische Fehlerbilder. Themen ohne Spiel bleiben für das Kind unsichtbar.
 - Entfernt: Zahlenzauber, Perlenbrücke, der alte Kettenhüpfer, Wimmelbild, Zauberin und Einhorn-Steine samt Einhorn-Figuren und -Bildern. Sie werden nach den Grundsätzen neu gebaut, je Thema ein passendes Spiel; der Kettenhüpfer ist das erste davon.
-- Lernstand je Profil im Ordner `kind-1` (siehe Handgriff oben); aller Plattform-Zugriff liegt in `spiele/kern/`.
+- Lernstand je Profil im Ordner `kind-1`; aller Plattform-Zugriff liegt in `spiele/kern/`.
 - Aufgeräumt: Reste der früheren Web-Fassung (PHP, FTP-Upload) sind entfernt.
 
 ## v0.1.8
