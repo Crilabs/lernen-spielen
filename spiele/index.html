@@ -66,14 +66,15 @@ body { -webkit-user-select: none; user-select: none; }
 .start .karten .karte.echt .bild img { width: 12rem; height: 12rem; }
 
 /* --- Unten: Zuletzt gelernt und Was ich schon kann ---------------------------------------------- */
-.unten { display: flex; align-items: center; gap: 3.6rem; padding: 1.6rem var(--ls-seite-rand) 4.2rem; min-width: 0; }
-.zuletzt { flex: 1; min-width: 0; display: flex; align-items: center; gap: 2.8rem; }
+.unten { display: flex; align-items: flex-end; gap: 3.6rem; padding: 1.6rem var(--ls-seite-rand) 4.2rem; min-width: 0; }
+/* Alle Einträge ganz (bis zu 5): die Reihe bricht um, statt etwas abzuschneiden; der Fuß wächst mit. */
+.zuletzt { flex: 1; min-width: 0; display: flex; align-items: center; gap: 0.6rem 2.8rem; flex-wrap: wrap; }
 .zuletzt h2 { flex: none; margin: 0; font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
   font-size: 3.3rem; font-weight: 700; letter-spacing: -0.01em; }
 .zuletzt .leer { margin: 0; font-size: 2.8rem; color: var(--ls-tinte-weich); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.zuletzt ul { flex: 1; min-width: 0; display: flex; gap: 2.8rem; overflow: hidden; list-style: none; margin: 0; padding: 0; }
+.zuletzt ul { flex: 1 1 60rem; min-width: 0; display: flex; flex-wrap: wrap; gap: 0 3.2rem; list-style: none; margin: 0; padding: 0; }
 .zuletzt li { flex: none; }
-.zuletzt .ding { text-decoration: none; display: flex; align-items: center; gap: 1.2rem; min-height: 11rem; padding: 0;
+.zuletzt .ding { text-decoration: none; display: flex; align-items: center; gap: 1.2rem; min-height: 8rem; padding: 0;
   color: var(--ls-tinte); white-space: nowrap; }
 .zuletzt .ding > * { pointer-events: none; }
 .zuletzt .ding:focus-visible { outline: 0.4rem solid var(--ls-tinte); outline-offset: 0.3rem; border-radius: 1rem; }

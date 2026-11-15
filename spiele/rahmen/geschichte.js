@@ -92,8 +92,8 @@ ${SZENE_CSS}
   grid-template-rows: minmax(0, 1fr) auto auto; row-gap: 3rem;
   padding: 16rem var(--ls-seite-rand) 4.2rem 10.4rem; background: var(--ls-papier); }
 /* Vorlesen oben rechts, links neben dem Ton-Knopf der Seite (ls-leiste nur-ton): gleiche Höhe, 2,4 rem Luft. */
-.vorlesen { position: absolute; top: 1.3rem; right: calc(var(--ls-seite-rand) + var(--ls-seite-knopf) + 2.4rem); }
-.zum-inhalt { position: absolute; top: 1.3rem; left: 9.1rem; z-index: 1; }
+.vorlesen { position: absolute; top: calc(2.6rem + env(safe-area-inset-top, 0rem)); right: calc(var(--ls-seite-rand) + var(--ls-seite-knopf) + 2.4rem); }
+.zum-inhalt { position: absolute; top: calc(2.6rem + env(safe-area-inset-top, 0rem)); left: 9.1rem; z-index: 1; }
 /* Langer Text darf scrollen (Christian 2026-11-15: „Text kann scrollbar sein“). */
 .textfeld { display: flex; flex-direction: column; justify-content: safe center; min-height: 0;
   overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; scrollbar-width: thin;
@@ -112,14 +112,19 @@ ${SZENE_CSS}
 :host(.buch-modus) .text { font-size: 3.8rem; line-height: 1.5; max-width: 36ch; }
 
 /* Inhaltsverzeichnis: Titel, Wahl Vorlesen/Selbst lesen, Weiterlesen; darunter die Kapitel als Karten mit Foto. */
-.inhalt { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; padding: 14rem var(--ls-seite-rand) 6rem;
+/* Geteilt wie die Seiten (§5.5): links das Bild des Buchs, rechts auf Papier Titel, Wahl und die Kapitel (rollt). */
+.inhalt { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+.inhalt-bild { position: relative; overflow: hidden; background: var(--kulisse-grund, var(--ls-nebel)) var(--kulisse-bild, none) center bottom / cover no-repeat; }
+.inhalt-bild img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.inhalt-bild img[hidden] { display: none; }
+.inhalt-rechts { min-width: 0; overflow-y: auto; overscroll-behavior: contain; padding: 16rem var(--ls-seite-rand) 6rem 10.4rem; background: var(--ls-papier);
   scrollbar-width: thin; scrollbar-color: var(--kulisse-tief, var(--ls-tinte-weich)) transparent; }
 .inhalt .kopf { display: flex; flex-wrap: wrap; align-items: center; gap: 2.4rem 3.2rem; margin-bottom: 3.6rem;
-  padding: 3.6rem 4.4rem; background: var(--ls-papier); border-radius: var(--ls-radius-plakat); }
+  padding: 0; }
 .buchtitel { margin: 0 auto 0 0; font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
   font-size: 7.2rem; line-height: 1.05; font-weight: 750; letter-spacing: -0.035em; color: var(--ls-tinte); min-width: 0; }
 .wahl { display: flex; flex-wrap: wrap; gap: 1.6rem; }
-.karten { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 34rem), 1fr)); gap: 3.6rem 3.2rem; }
+.karten { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 30rem), 1fr)); gap: 3.6rem 3.2rem; }
 .kapitelkarte { position: relative; display: grid; grid-template-rows: auto auto auto; text-align: left; padding: 0;
   font: inherit; color: var(--ls-tinte); background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte);
   border-radius: var(--ls-radius-teil); overflow: hidden; cursor: pointer; touch-action: manipulation;
@@ -168,6 +173,8 @@ ${SZENE_CSS}
 }
 /* Hochformat und fast quadratisch: Bild oben, Text und Knöpfe darunter. */
 @container buch (aspect-ratio < 4 / 3) {
+  .inhalt { grid-template-columns: minmax(0, 1fr); grid-template-rows: 30% minmax(0, 1fr); }
+  .inhalt-rechts { padding: 4rem 4.8rem 5rem; }
   .blatt { grid-template-columns: minmax(0, 1fr); grid-template-rows: 42% minmax(0, 1fr); }
   .lese { padding: 13rem 4.8rem 3.2rem; }
   .text { font-size: 3.8rem; max-width: none; }
@@ -175,7 +182,7 @@ ${SZENE_CSS}
 }
 /* Schmal (Telefon hoch): weniger Rand, damit Startknöpfe und Fertig hineinpassen. */
 @container buch (max-width: 560px) {
-  .inhalt { padding: 12rem 2rem 4rem; }
+  .inhalt-rechts { padding: 3.2rem 2rem 4rem; }
   .inhalt .kopf { padding: 2.4rem; }
   .buchtitel { font-size: 4.6rem; }
   .lese { padding: 12rem 2.4rem 2rem; }
@@ -214,6 +221,8 @@ export class LsGeschichte extends HTMLElement {
     const w = this.attachShadow({ mode: "open" });
     w.innerHTML = `<style>${GRUND_CSS}${CSS}</style>
       <div class="buch"><div class="inhalt" hidden>
+        <div class="inhalt-bild"><img alt="" hidden></div>
+        <div class="inhalt-rechts">
         <div class="kopf">
           <h2 class="buchtitel"></h2>
           <div class="wahl" role="group" aria-label="Wie lesen?">
@@ -223,6 +232,7 @@ export class LsGeschichte extends HTMLElement {
           <ls-knopf class="weiterlesen" art="haupt" symbol="buch.svg" wort="Weiterlesen" stumm hidden></ls-knopf>
         </div>
         <div class="karten"></div>
+        </div>
       </div><div class="blatt">
         <div class="rahmen" part="bild"><div class="figuren"></div><span class="erzeugt" hidden>Bild erzeugt</span></div>
         <div class="lese">
@@ -692,6 +702,12 @@ export class LsGeschichte extends HTMLElement {
       b.addEventListener("click", () => this.oeffne(i));
       return b;
     }));
+    // Bild links: das Titelbild oder das erste Foto des Buchs; ohne Foto die Kulisse.
+    const titelbild = typeof (/** @type {any} */ (g).titelbild) === "string" ? /** @type {any} */ (g).titelbild
+      : g.kapitel.flatMap((k) => k.seiten).find((s) => typeof s.bild === "string" && s.bild)?.bild;
+    const bildEl = /** @type {HTMLImageElement} */ (this.inhaltEl.querySelector(".inhalt-bild img"));
+    if (titelbild) bildEl.src = new URL(titelbild, this.basis).href;
+    bildEl.hidden = !titelbild;
     this.inhaltEl.hidden = false;
     this.blattEl.hidden = true;
     this.erzeugtEl.hidden = true;
