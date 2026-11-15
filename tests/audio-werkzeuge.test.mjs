@@ -209,7 +209,7 @@ test("sammle findet die Sätze aus texte.json von M37 (Rundenanfang und Auftrag)
 test("sammle: Seiten der Geschichten (sprich, sonst text)", () => {
   const { eintraege } = sammle(WURZEL);
   const aus = eintraege.filter((e) => e.quellen.includes("geschichten/zehnerpaare/geschichte.json"));
-  assert.ok(aus.some((e) => e.text.startsWith("Es ist Winter. Ela und Kofi schauen aus dem Fenster.")), "erste Seite der Zehnerpaare");
+  assert.ok(aus.some((e) => e.text.startsWith("Ela und Kofi wohnen nebeneinander.")), "erste Seite der Zehnerpaare");
   const wal = eintraege.filter((e) => e.quellen.includes("geschichten/wal/geschichte.json"));
   assert.ok(wal.some((e) => e.text.startsWith("Im warmen Meer vor Australien")), "auch die Bücher der Bibliothek werden aufgenommen");
 });

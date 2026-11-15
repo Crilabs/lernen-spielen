@@ -52,7 +52,8 @@ sicher **(Annahme)**.
 
 ## 2. Regeln (Lern- und Sachgeschichten)
 
-- **Umfang (Vorlesebuch, Christian 2026-11-15):** 10–14 Abschnitte, je 2–4 Sätze; Satzlänge bis Kl. 2 höchstens 10
+- **Umfang:** gezeichnete **Lerngeschichten** (`sinn`, `form`, `struktur`) sind kurz vor dem Spiel: 6–10 Seiten, je
+  1–3 Sätze, Satzlänge wie `spielbau.md` §3 (`satzGrenze`). **Sachgeschichten** (Vorlesebuch, Christian 2026-11-15): 10–14 Abschnitte, je 2–4 Sätze; Satzlänge bis Kl. 2 höchstens 10
   Wörter, Kl. 3–4 höchstens 14 (`satzGrenzeGeschichte` in `werkzeuge/spielbau/texte.mjs`). Langer Text darf scrollen.
 - **Schreibverfahren:** (1) Wirklichkeit recherchieren, jede Tatsache mit Quelle. (2) Realistische Fassung schreiben:
   Hauptfigur mit Wunsch oder Problem, Gefühle zeigen (nicht bewerten), Wissen ist der Grund, warum etwas passiert;
