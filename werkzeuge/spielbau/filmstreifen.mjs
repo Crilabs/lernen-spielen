@@ -68,7 +68,8 @@ async function main() {
   mkdirSync(a.aus, { recursive: true });
   const pfad = relative(WURZEL, resolve(a.seite)).split("\\").join("/");
   const server = await starteServer(WURZEL);
-  const url = `http://127.0.0.1:${server.address().port}/${pfad}${a.stufe ? `?stufe=${a.stufe}` : ""}`;
+  // ?einfuehrung: auch in der Vorschau (mit ?stufe) beginnt das Spiel mit seiner Einführung, damit sie im Film ist.
+  const url = `http://127.0.0.1:${server.address().port}/${pfad}?einfuehrung${a.stufe ? `&stufe=${a.stufe}` : ""}`;
   const browser = await chromium.launch({ args: ["--autoplay-policy=no-user-gesture-required"] });
   const takt = { stufe: a.stufe, reaktionMs: null, folgeMs: null, taktMs: null, danebenMs: null, fehler: [] };
   try {

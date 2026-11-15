@@ -147,10 +147,11 @@ alle Spiele gilt deshalb:
 - **Kein Satz der Form „X ist Y“, „X bedeutet Y“, „Jedes X bringt Y“.** Sätze beschreiben, was zu sehen ist oder was
   passiert, nie eine Beziehung, die man sich denken muss.
 - **Eine neue Sache je Einführung.** Alles andere ist schon bekannt oder kommt später von selbst.
-- **Das Spiel beginnt mit der Einführung**, bei jedem Start, vor dem Hintergrund des Spiels (`hintergrund` in der
-  Einführung); der Knopf „Anleitung“ in der Leiste ruft sie jederzeit wieder auf, „Zum Spiel“ überspringt sie. Je
-  Szene ein Satz und ein Bild; weiter erst nach dem Tipp des Kindes (Weiter-Knopf nach 2 s Ruhe), nie nach einer
-  Zeit (`spiele/einfuehrung.js`, RAHMEN der Vorlage).
+- **Das Spiel beginnt mit der Einführung, und sie spielt im echten Spielbild:** derselbe Held, dieselbe Kette,
+  dieselbe Tastatur. Ein Kind der Runde macht einen Zug ganz vor (tippen, Wirkung), dann leuchtet beim Kind die Taste
+  im Sonnenring und es tippt selbst. Bei jedem Start; der Knopf „Anleitung“ ruft sie jederzeit wieder auf. Je Schritt
+  ein Satz; weiter erst nach dem Tipp des Kindes, nie nach einer Zeit. Der Abspieler `spiele/einfuehrung.js` (eigene
+  Szenen mit Stäben und Ziffern) bleibt nur für Themen ohne eigenes Spielbild.
 - **Kein Satz wird vom Spiel abgeschnitten**, nur ein Tipp des Kindes darf ihn abbrechen: Das Spiel wartet
   (`await blase.sage(…)`), bevor es den nächsten Satz sagt. Die Stimme schreibt sonst „Satz abgeschnitten“ ins
   Protokoll, und der Prüfstand wird rot.
