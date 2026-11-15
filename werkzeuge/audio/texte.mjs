@@ -6,6 +6,9 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { audioSchluessel, normalisiere } from "../../spiele/kern/audio.js";
 
+/** Pfad relativ zu spiele/, immer mit „/“ (auch unter Windows, wo relative() „\\“ liefert). */
+const rel = (/** @type {string} */ von, /** @type {string} */ zu) => relative(von, zu).split(sep).join("/");
+
 /** @typedef {{ schluessel: string, text: string, variante: string, quellen: string[] }} Eintrag */
 
 const json = (pfad) => JSON.parse(readFileSync(pfad, "utf8"));
@@ -122,14 +125,14 @@ export function sammle(wurzel) {
 
   // Einführungen
   for (const p of dateien(join(spiele, "einfuehrungen"), [".json"]))
-    for (const t of felder(json(p), "sprich")) neu(t, relative(spiele, p));
+    for (const t of felder(json(p), "sprich")) neu(t, rel(spiele, p));
   // Eigene Einführung eines Spiels im Spielordner (EINFUEHRUNG in spiele/vorlage/spiel.js)
   for (const p of dateien(spiele, [".json"], ["einfuehrungen", "kern", "audio", "mit-echten-dingen"]))
-    if (p.endsWith(`${sep}einfuehrung.json`)) for (const t of felder(json(p), "sprich")) neu(t, relative(spiele, p));
+    if (p.endsWith(`${sep}einfuehrung.json`)) for (const t of felder(json(p), "sprich")) neu(t, rel(spiele, p));
 
   // Sätze aus Daten eines Spiels (spiele/<fach>/<spiel>/texte.json): ausgeschriebene Sätze je Aufgabe, Reihe …
   for (const p of dateien(spiele, [".json"], ["einfuehrungen", "kern", "audio", "mit-echten-dingen"]))
-    if (p.endsWith(`${sep}texte.json`)) for (const t of saetzeAusTexten(json(p))) neu(t, relative(spiele, p));
+    if (p.endsWith(`${sep}texte.json`)) for (const t of saetzeAusTexten(json(p))) neu(t, rel(spiele, p));
 
   // Diktatsätze (Material für die Schreibspiele): der Satz selbst, ohne Variante, wie bisher aufgenommen.
   // Einleitungen wie „Hör noch mal hin. …“ gehören zum jeweiligen Spiel und kommen mit ihm.
@@ -139,7 +142,7 @@ export function sammle(wurzel) {
   // Feste Sätze im Spielcode
   for (const p of dateien(spiele, [".html", ".js"], ["kern", "audio"])) {
     const { texte, offen: n } = literaleAusCode(readFileSync(p, "utf8"));
-    const q = relative(spiele, p);
+    const q = rel(spiele, p);
     texte.forEach((t) => neu(t, q));
     if (!NUR_ENTWICKLUNG.has(q)) knopfNamen(readFileSync(p, "utf8")).forEach((t) => neu(t, q));
     if (n) offen[q] = n;

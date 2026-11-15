@@ -1,0 +1,4 @@
+# Zeilenenden immer LF, auch beim Checkout unter Windows (GitHub Actions, windows-latest).
+* text=auto eol=lf
+# Lizenztext mit gemischten Zeilenenden, unverändert lassen.
+spiele/schrift/OFL.txt -text

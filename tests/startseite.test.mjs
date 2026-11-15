@@ -3,6 +3,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
 const html = readFileSync(new URL("../spiele/index.html", import.meta.url), "utf8");
 const skript = html.slice(html.indexOf('<script type="module">'));
@@ -53,7 +54,7 @@ test("Startseite: Links sprechen ihren Namen einmal je Sitzung und speichern vor
 });
 
 test("Startseite: Namen der Fächer sammelt das Audio-Werkzeug", () => {
-  const texte = sammle(new URL("..", import.meta.url).pathname).eintraege.map((e) => e.text);
+  const texte = sammle(fileURLToPath(new URL("..", import.meta.url))).eintraege.map((e) => e.text);
   for (const k of JSON.parse(readFileSync(new URL("../spiele/spiele.json", import.meta.url), "utf8")).kategorien)
     assert.ok(texte.includes(k.name), k.name);
 });

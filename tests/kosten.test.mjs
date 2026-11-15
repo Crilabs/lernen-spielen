@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { join } from "node:path";
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
+import { fileURLToPath } from "node:url";
 import { katalogAnzahl, liesGeparkte, liesKosten, ordneZu, prognose, prognoseAnalog, pruefeEintrag, summen, trageEin, usageAusTranskript } from "../werkzeuge/kosten/kosten.mjs";
 import { formatiere } from "../werkzeuge/kosten/bericht.mjs";
 import { leseArgumente, schreibeVerbrauch, usageAusAntwort } from "../werkzeuge/bilder/erzeugen.mjs";
@@ -239,7 +240,7 @@ test("Transkript-Werkzeug: bucht mit Stand, zweiter Aufruf bucht nichts doppelt"
   const { spawnSync } = await import("node:child_process");
   const ordner = temp();
   const stand = join(ordner, "stand.json");
-  const lauf = () => spawnSync(process.execPath, [new URL("../werkzeuge/kosten/transkript.mjs", import.meta.url).pathname, TRANSKRIPT.pathname,
+  const lauf = () => spawnSync(process.execPath, [fileURLToPath(new URL("../werkzeuge/kosten/transkript.mjs", import.meta.url)), fileURLToPath(TRANSKRIPT),
     "--ordner", ordner, "--phase", "pruefung-a", "--notiz", "Runde 1", "--stand", stand, "--datum", "2026-11-14"], { encoding: "utf8" });
   assert.equal(lauf().status, 0);
   assert.equal(lauf().status, 0);
