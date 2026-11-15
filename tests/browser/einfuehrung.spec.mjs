@@ -12,6 +12,7 @@
 // EINFUEHRUNG in spiele/vorlage/spiel.js) bis „gesehen“.
 
 import { createRequire } from "node:module";
+import { starteStumm } from "./stumm.mjs";
 import { resolve } from "node:path";
 import { starteServer } from "./server.mjs";
 import { fileURLToPath } from "node:url";
@@ -53,7 +54,7 @@ const server = await starteServer(WURZEL, { [SEITE]: HTML, [EIGEN_SEITE]: EIGEN_
 const basis = `http://127.0.0.1:${server.address().port}`;
 try {
   for (const typ of [chromium, webkit]) {
-    const browser = await typ.launch();   // ohne Autoplay-Freigabe: wie eine frisch geladene Seite
+    const browser = await starteStumm(typ);   // ohne Autoplay-Freigabe: wie eine frisch geladene Seite
     try {
       const seite = await browser.newPage();
       const seitenfehler = [];

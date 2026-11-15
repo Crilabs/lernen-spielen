@@ -12,6 +12,7 @@
 // Fehler wirft.
 
 import { createRequire } from "node:module";
+import { starteStumm } from "./stumm.mjs";
 import http from "node:http";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
@@ -124,7 +125,7 @@ async function main() {
   await mkdir(a.ziel, { recursive: true });
   const server = await starteServer(a.dateien);
   const basis = `http://127.0.0.1:${server.address().port}`;
-  const browser = await chromium.launch();
+  const browser = await starteStumm(chromium);
   const fehler = [];
   const liste = [];
   try {

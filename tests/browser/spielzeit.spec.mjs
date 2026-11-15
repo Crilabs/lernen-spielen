@@ -11,6 +11,7 @@
 // stellen Weniger/Mehr, Tage, Ausblenden und „Heute 15 Minuten mehr“ die gespeicherten Werte; keine Konsolenfehler.
 
 import { createRequire } from "node:module";
+import { starteStumm } from "./stumm.mjs";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -74,7 +75,7 @@ const lies = (seite, k) => seite.evaluate((k) => JSON.parse(localStorage.getItem
 
 const server = await starteServer(WURZEL);
 const BASIS = `http://127.0.0.1:${server.address().port}/spiele/`;
-const browser = await chromium.launch();
+const browser = await starteStumm(chromium);
 if (SHOTS) await mkdir(SHOTS, { recursive: true });
 
 try {

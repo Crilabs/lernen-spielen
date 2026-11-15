@@ -15,6 +15,7 @@
 // Wahl der Form (gemerkt), ohne Anleitung der Einzeiler, kein Kopf mit Quellen sichtbar, Angebot in der Pause.
 
 import { createRequire } from "node:module";
+import { starteStumm } from "./stumm.mjs";
 import http from "node:http";
 import { starteServer } from "./server.mjs";
 import { readFile, mkdir } from "node:fs/promises";
@@ -131,7 +132,7 @@ const tipp = (ort, optionen) => (WEBKIT ? ort.evaluate((el, pos) => {
 async function lauf(typ, name, groesse, basis) {
   WEBKIT = name === "webkit";
   const L = `${name} ${groesse.width}x${groesse.height}`;
-  const browser = await typ.launch();
+  const browser = await starteStumm(typ);
   const fehlerListe = [];
   try {
     const kontext = await browser.newContext({ viewport: groesse, deviceScaleFactor: 1 });
@@ -571,7 +572,7 @@ async function lauf(typ, name, groesse, basis) {
 const PAUSE_FORMATE = [{ width: 1024, height: 768 }, { width: 1366, height: 1024 }, { width: 1280, height: 800 }];
 async function pausenFormate(typ, name, basis) {
   WEBKIT = name === "webkit";
-  const browser = await typ.launch();
+  const browser = await starteStumm(typ);
   const fehlerListe = [];
   try {
     for (const groesse of PAUSE_FORMATE) {

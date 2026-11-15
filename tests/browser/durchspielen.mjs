@@ -39,6 +39,7 @@
 // Ausgabe: je Lauf (Kind × Browser × Größe) grün/rot je Prüfung mit Grund; Bericht als JSON; Exit ≠ 0 bei Rot.
 
 import { createRequire } from "node:module";
+import { starteStumm } from "./stumm.mjs";
 import http from "node:http";
 import { starteServer } from "./server.mjs";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
@@ -706,7 +707,7 @@ async function laufeBrowser(name, aufruf, basis, rnd) {
   const typ = { chromium, webkit }[name];
   if (!typ) throw new Error(`unbekannter Browser ${name}`);
   // Chromium darf ohne Nutzergeste vorlesen (wie die App); so bleibt ein stummer erster Satz dort rot.
-  const browser = await typ.launch(name === "chromium" ? { args: ["--autoplay-policy=no-user-gesture-required"] } : {});
+  const browser = await starteStumm(typ, name === "chromium" ? { args: ["--autoplay-policy=no-user-gesture-required"] } : {});
   const laeufe = [];
   try {
     for (const groesse of aufruf.groessen) {
