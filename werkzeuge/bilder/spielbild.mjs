@@ -25,6 +25,7 @@ export const PROMPT = [
   "Create the key art (game card image) for a children's learning game, landscape format, based on the attached screenshots of the real game.",
   "Keep exactly what the game is: the same main character (same hair, clothes, face, hearing aids if present), the same playing field and objects, the same idea and colours of the learning material.",
   "Make it look plastic and attractive: soft three-dimensional, rounded shapes, gentle light and soft shadows, a little depth of field, like a polished illustration of a premium children's app – friendly, bright, calm, never scary.",
+  "Keep every material as it is in the game: what is drawn stays drawn (chalk stays a flat chalk drawing on the ground, paper stays paper, a printed card stays printed); only characters and real physical objects become three-dimensional. Never turn flat drawings into 3D objects.",
   "Show one lively moment of play (the character in motion, e.g. mid-jump), the playing field clearly recognisable.",
   "Absolutely no text, no letters, no words, no user interface, no buttons, no keypad, no logos. Digits only if they are part of the learning material itself, and then few and large.",
   "IMPORTANT: this image is only shown as a small thumbnail on a game card (about 300 pixels wide). Show only very few, large, simple elements: the character big and close, a short section of the playing field, a calm plain background. Leave out small objects, background scenery, fences, plants and fine details – everything must still read at thumbnail size.",
@@ -103,7 +104,15 @@ async function main() {
     readFileSync(hier("../../.env"), "utf8").split("\n").map((z) => z.match(/^\s*([A-Z_]+)\s*=\s*(.*)\s*$/)).filter(Boolean)
       .map(([, k, v]) => [k, v.replace(/^["']|["']$/g, "")]),
   );
-  const prompt = a.hinweis ? `${PROMPT}\n\nThis game: ${a.hinweis}` : PROMPT;
+  // Beschreibung des Spiels aus spiele/spiele.json (beschreibung, text), damit das Bild weiß, was es zeigt
+  // (Christian, 2026-11-15: sonst werden z. B. Kreideperlen zu 3D-Kugeln).
+  const wurzel = hier("../..");
+  const datei = `${resolve(a.spiel).slice(resolve(wurzel).length + 1).replace(/^spiele\//, "")}/index.html`;
+  const eintrag = (JSON.parse(readFileSync(join(wurzel, "spiele/spiele.json"), "utf8")).spiele ?? []).find((x) => x.datei === datei);
+  const beschreibung = [eintrag?.beschreibung, a.hinweis].filter(Boolean).join(" ");
+  const prompt = beschreibung
+    ? `${PROMPT}\n\nWhat the game is (German description by the makers, follow it exactly, especially which things are drawn and which are real): ${beschreibung}`
+    : PROMPT;
   const form = new FormData();
   for (const b of a.bilder) form.append("image[]", new Blob([readFileSync(b)], { type: "image/png" }), basename(b));
   form.append("prompt", prompt);

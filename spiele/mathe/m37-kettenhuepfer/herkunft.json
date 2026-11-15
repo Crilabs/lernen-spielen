@@ -2,19 +2,19 @@
  "spielbild.webp": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Create the key art (game card image) for a children's learning game, landscape format, based on the attached screenshots of the real game. Keep exactly what the game is: the same main character (same hair, clothes, face, hearing aids if present), the same playing field and objects, the same idea and colours of the learning material. Make it look plastic and attractive: soft three-dimensional, rounded shapes, gentle light and soft shadows, a little depth of field, like a polished illustration of a premium children's app – friendly, bright, calm, never scary. Show one lively moment of play (the character in motion, e.g. mid-jump), the playing field clearly recognisable. Absolutely no text, no letters, no words, no user interface, no buttons, no keypad, no logos. Digits only if they are part of the learning material itself, and then few and large. IMPORTANT: this image is only shown as a small thumbnail on a game card (about 300 pixels wide). Show only very few, large, simple elements: the character big and close, a short section of the playing field, a calm plain background. Leave out small objects, background scenery, fences, plants and fine details – everything must still read at thumbnail size. Nothing important at the very edges.\n\nThis game: A girl (red curly hair, freckles, hearing aids, green overalls) hops along a hopscotch drawn in chalk on asphalt; each chalk box holds a small column of Montessori beads.\n\nScreenshots: a.png, b.png, c.png",
+  "prompt": "Create the key art (game card image) for a children's learning game, landscape format, based on the attached screenshots of the real game. Keep exactly what the game is: the same main character (same hair, clothes, face, hearing aids if present), the same playing field and objects, the same idea and colours of the learning material. Make it look plastic and attractive: soft three-dimensional, rounded shapes, gentle light and soft shadows, a little depth of field, like a polished illustration of a premium children's app – friendly, bright, calm, never scary. Keep every material as it is in the game: what is drawn stays drawn (chalk stays a flat chalk drawing on the ground, paper stays paper, a printed card stays printed); only characters and real physical objects become three-dimensional. Never turn flat drawings into 3D objects. Show one lively moment of play (the character in motion, e.g. mid-jump), the playing field clearly recognisable. Absolutely no text, no letters, no words, no user interface, no buttons, no keypad, no logos. Digits only if they are part of the learning material itself, and then few and large. IMPORTANT: this image is only shown as a small thumbnail on a game card (about 300 pixels wide). Show only very few, large, simple elements: the character big and close, a short section of the playing field, a calm plain background. Leave out small objects, background scenery, fences, plants and fine details – everything must still read at thumbnail size. Nothing important at the very edges.\n\nWhat the game is (German description by the makers, follow it exactly, especially which things are drawn and which are real): Das Kind tippt das Ergebnis einer Malaufgabe der Reihen 2 bis 10. Lena hüpft so viele Stäbchen weit über eine Montessori-Perlenkette, wie die erste Zahl sagt, und das Pfeilchen mit der Zahl rastet an ihrem Stäbchen ein. Passt die Zahl nicht, zeigt die Kette, wo sie wirklich liegt.\n\nScreenshots: a.png, b.png, c.png",
   "usage": {
-   "input_tokens": 4661,
+   "input_tokens": 4778,
    "input_tokens_details": {
     "image_tokens": 4320,
-    "text_tokens": 341
+    "text_tokens": 458
    },
    "output_tokens": 1372,
    "output_tokens_details": {
     "image_tokens": 1372,
     "text_tokens": 0
    },
-   "total_tokens": 6033
+   "total_tokens": 6150
   }
  }
 }
