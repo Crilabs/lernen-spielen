@@ -66,15 +66,17 @@ spiele/geschichten/<id>/kosten.json       Kosten (werkzeuge/kosten/)
 }
 ```
 
-- `text` steht unter dem Bild und wird vorgelesen; `sprich` (optional) ersetzt den gesprochenen Text, wenn er vom
+- `text` steht rechts neben dem Bild und wird vorgelesen; `sprich` (optional) ersetzt den gesprochenen Text, wenn er vom
   geschriebenen abweichen muss.
 - `bild` (Foto, Pfad relativ zum Ordner der Geschichte) **oder** `szene` (gezeichnet): Bildelemente aus
   `spiele/rahmen/szene.js`, dieselben wie in den Einführungen (`spiele/einfuehrung.js` baut sein Bild damit). `x` ist
-  die Mitte in Prozent der Breite, `y` (optional) die Mitte in Prozent der Höhe.
+  die Mitte in Prozent der Breite, `y` (optional) die Mitte in Prozent der Höhe. Die Bühne der Geschichte ist
+  quadratisch (60 × 60 Einheiten): hinten die Häuser am Rand der Wiese, vorn die Kinder (etwas kleiner als die Häuser,
+  sie reichen nie an die Fenster, damit jede Perle zu sehen bleibt); Kinder bei `x` 13 und 87.
 
   | Element | zeigt |
   |---|---|
-  | `{ "figur": "ela", "x": 9, "haltung": "zeigen", "aufgabe": "vorzeigen" }` | ein Kind der Runde; bleibt es von Seite zu Seite an derselben Stelle, steht es still und wechselt nur die Haltung; `blick: "links"` (optional) für ein Kind rechts vom Material |
+  | `{ "figur": "ela", "x": 13, "haltung": "zeigen", "aufgabe": "vorzeigen" }` | ein Kind der Runde; bleibt es von Seite zu Seite an derselben Stelle, steht es still und wechselt nur die Haltung; `blick: "links"` (optional) für ein Kind rechts vom Material |
   | `{ "perlen": [3, 7], "hoehe": 4.4 }` | Perlenstäbe nebeneinander; `hoehe` (optional) ist die Dicke der Stäbe (in der Geschichte Sechzigstel der Bildhöhe, in der Einführung rem) |
   | `{ "zahl": 7 }`, `{ "objekt": "einkaufskorb", "zustand": "leer", "hoehe": 16 }` | große Ziffer; ein Ding aus `spiele/objekte/` |
   | `{ "haeuser": [3, 7], "zu": 1 }` | **neu (Zehnerpaare):** zwei Häuser auf dem Boden; im Fenster jedes Hauses liegt ein Perlenstab mit so vielen Perlen (0 = leer), beide links bündig, damit man die Längen vergleicht; `zu` (0 links, 1 rechts, optional): dort ist der Vorhang zu (Frage zum Vorhersagen) |

@@ -4,7 +4,7 @@
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/geschichte.spec.mjs
 //
 // Geprüft mit der Lerngeschichte „Zehnerpaare“ über die Test-Schnittstelle window.lsGeschichte (?pruefen):
-// Pfeiltaste, Wischen und Tipp blättern; auf der Frage-Seite ist Weiter zuerst nicht da und erscheint nach der Ruhe;
+// Bild quadratisch links, Text rechts; Pfeiltaste, Wischen und Tipp blättern; auf der Frage-Seite ist Weiter zuerst nicht da und erscheint nach der Ruhe;
 // Zurück auf Seite 1 tut nichts; „Fertig“ führt zu weiter; keine Seitenfehler. Unbekannte id zeigt einen ruhigen Text.
 
 import { createRequire } from "node:module";
@@ -39,6 +39,9 @@ for (const typ of [chromium, webkit]) {
   await page.keyboard.press("ArrowLeft");
   pruefe((await g()).seite === 0, `${name}: Pfeiltaste blättert zurück`);
   const r = await page.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".rahmen").getBoundingClientRect().toJSON());
+  const t = await page.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".text").getBoundingClientRect().toJSON());
+  pruefe(Math.abs(r.width - r.height) < 2 && r.height > 500, `${name}: Bild quadratisch und groß (${Math.round(r.width)} × ${Math.round(r.height)})`);
+  pruefe(r.right < t.left, `${name}: Bild links, Text rechts`);
   await page.mouse.move(r.x + r.width * 0.7, r.y + r.height / 2);
   await page.mouse.down();
   await page.mouse.move(r.x + r.width * 0.3, r.y + r.height / 2, { steps: 6 });

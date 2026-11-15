@@ -1,7 +1,8 @@
 // <ls-geschichte src="geschichten/zehnerpaare/geschichte.json">
-// Spielt eine Geschichte ab (docs/geschichten.md §4): je Seite ein großes Bild (Foto aus `bild` oder gezeichnete
-// Szene aus `szene`, rahmen/szene.js), darunter der Text in Andika. Das Kind blättert selbst: Weiter und Zurück per
-// Tipp, Wischen und Pfeiltaste; nichts läuft von allein (spielbau.md §8). Fortschritt als Punkte ohne Zahl.
+// Spielt eine Geschichte ab (docs/geschichten.md §4): je Seite links ein quadratisches Bild, so groß wie möglich (Foto
+// aus `bild`, 1024 × 1024, oder gezeichnete Szene aus `szene`, rahmen/szene.js), rechts daneben der Text in Andika.
+// Das Kind blättert selbst: Weiter und Zurück per Tipp, Wischen und Pfeiltaste; nichts läuft von allein (spielbau.md
+// §8). Fortschritt als Punkte ohne Zahl.
 // Nach der letzten Seite „Fertig“ (Hauptknopf) → Ereignis `fertig` (bubbles, composed).
 //
 // - Vorlesen: Bei Ton an (Einstellung `ton.<spiel>` wie ls-blase, Spiel-Kennung der Leiste) liest der Erzähler jede
@@ -31,45 +32,55 @@ export const RUHE_MS = 2000;
 const WISCH_PX = 60;
 const DAUER_MS = 460;
 
-/** Einheit der Szene: das Bild ist 60 Einheiten hoch (Elemente skalieren mit dem Bild). */
+/**
+ * Aufbau (geschichten.md §4, Christian 2026-11-15): links das Bild, quadratisch und so groß, wie der Platz unter der
+ * Leiste es erlaubt; rechts der Text, darunter Punkte und Knöpfe (Zurück, Vorlesen, Weiter bzw. Fertig). Bei sehr
+ * schmalem Hochformat stehen Bild und Text untereinander. Szene: das Bild ist 60 × 60 Einheiten (Elemente skalieren mit).
+ */
 const CSS = `
 :host { display: block; position: relative; width: 100%; height: 100%; font-size: 3.2rem; line-height: 1.3;
   -webkit-user-select: none; user-select: none; }
 * { box-sizing: border-box; }
-.buch { position: absolute; inset: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto auto; justify-items: center;
-  padding: 2.4rem 4rem 3.6rem; gap: 2.2rem; }
+.buch { position: absolute; inset: 0; container: buch / size; }
+.blatt { --rand: 3.6rem; --luft: 6rem;
+  --bild: min(calc(100cqh - 2 * var(--rand)), calc(58cqw - var(--rand)));
+  position: absolute; inset: 0; padding: var(--rand) calc(var(--rand) + 1rem);
+  display: grid; grid-template-columns: var(--bild) minmax(0, 1fr); grid-template-rows: var(--bild);
+  column-gap: var(--luft); align-content: center; justify-content: center; }
 
 /* Das Bild: eine flache Papierkarte mit Tinte-Kontur (Matte, kein Schatten: nicht drückbar). */
-.rahmen { position: relative; width: min(100%, 164rem); height: 100%; min-height: 30rem; border-radius: var(--ls-radius-gross);
+.rahmen { position: relative; width: var(--bild); height: var(--bild); border-radius: var(--ls-radius-gross);
   border: var(--ls-kontur) solid var(--ls-tinte); background: var(--ls-papier); overflow: hidden; touch-action: pan-y; }
 .seite { position: absolute; inset: 0; container-type: size; will-change: transform, opacity; }
 .seite.foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .figuren { position: absolute; inset: 0; container-type: size; pointer-events: none; }
+
+/* Gezeichnete Szene auf der quadratischen Bühne: hinten die Häuser am Rand der Wiese, vorn die Kinder. Die Kinder
+   reichen nie bis an die Fenster der Häuser, damit jede Perle zu sehen bleibt. */
 .szene { --szene-u: calc(100cqh / 60); }
-.szene .boden { position: absolute; left: 0; right: 0; bottom: 0; height: 13cqh; background: #EAF0DD;
+.szene .boden { position: absolute; left: 0; right: 0; bottom: 0; height: 44cqh; background: #EAF0DD;
   border-top: var(--ls-kontur) solid #CBD9B5; }
 .el { position: absolute; top: 50%; transform: translate(-50%, -50%); }
-.el.figur-h { top: auto; bottom: 5cqh; height: 76cqh; transform: translateX(-50%); }
+.el.figur-h { top: auto; bottom: 3cqh; height: 44cqh; transform: translateX(-50%); }
 .el.figur-h svg { display: block; height: 100%; width: auto; overflow: visible; }
 .el.perlen { display: flex; gap: calc(var(--szene-u) * 3); align-items: center; }
 .el.perlen ls-perlenstab { height: calc(var(--szene-u) * var(--szene-perlen, calc(10 * var(--szene-stab, 1)))); }
 .el.zahl { font: 700 calc(var(--szene-u) * 18)/1 "Andika", sans-serif; color: var(--ls-tinte); }
 .el.objekt { top: auto; bottom: 8cqh; transform: translateX(-50%); }
 .el.objekt ls-objekt { display: block; height: calc(var(--szene-u) * 18); }
-.el.haeuser { top: auto; bottom: 9cqh; transform: translateX(-50%); --haus-breite: 50; }
-.el.paare { --paar-stab: 7; }
 ${SZENE_CSS}
-.erzeugt { position: absolute; right: 2rem; bottom: 1.6rem; padding: .4rem 1.4rem; border-radius: 2rem; font-size: 2.6rem;
+.el.haeuser { top: auto; bottom: 42cqh; transform: translateX(-50%); --haus-breite: 27.5; gap: calc(var(--szene-u) * 2); }
+.el.paare { --paar-stab: 4.4; }
+.erzeugt { position: absolute; right: 1.6rem; bottom: 1.4rem; padding: .3rem 1.2rem; border-radius: 2rem; font-size: 2.2rem;
   color: var(--ls-tinte-weich); background: color-mix(in srgb, var(--ls-papier) 82%, transparent); pointer-events: none; }
 .erzeugt[hidden] { display: none; }
 
-/* Unter dem Bild: Zurück, Text mit Vorlesen, Weiter bzw. Fertig. */
-.unten { width: min(100%, 164rem); display: grid; grid-template-columns: minmax(16rem, auto) minmax(0, 1fr) minmax(16rem, auto); align-items: center; gap: 2.4rem; }
-.textfeld { display: flex; align-items: center; justify-content: center; gap: 2.4rem; min-height: 17rem; }
-.text { margin: 0; font-size: 5rem; line-height: 1.32; text-align: center; max-width: 34em; text-wrap: balance; }
-.vorlesen { flex: none; }
-.links { justify-self: start; }
-.rechts { justify-self: end; display: grid; place-items: center; }
+/* Rechts: der Text in der Mitte, unten Punkte und Knöpfe auf der Höhe der Bildkante. */
+.lese { min-width: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto auto; row-gap: 3.2rem; }
+.textfeld { display: flex; align-items: center; min-height: 0; }
+.text { margin: 0; font-size: 5.4rem; line-height: 1.38; max-width: 17em; text-wrap: pretty; hyphens: manual; }
+.knoepfe { display: flex; align-items: center; gap: 2.4rem; min-height: 16.6rem; }
+.knoepfe .rechts { margin-left: auto; display: grid; place-items: center; }
 .rechts > * { grid-area: 1 / 1; }
 .weiter { width: 16rem; height: 16rem; border-radius: 50%; cursor: pointer; padding: 0; color: var(--ls-tinte);
   background: var(--ls-sonne); border: var(--ls-kontur) solid var(--ls-tinte); box-shadow: 0 .6rem 0 var(--ls-tinte);
@@ -88,7 +99,22 @@ ${SZENE_CSS}
   background: transparent; transition: width .3s ease, background-color .3s ease; }
 .punkte i.gelesen { background: var(--ls-tinte-weich); }
 .punkte i.jetzt { width: 5rem; background: var(--ls-tinte); border-color: var(--ls-tinte); }
-.fehler { font-size: 4rem; color: var(--ls-tinte-weich); align-self: center; }
+.fehler { font-size: 4rem; color: var(--ls-tinte-weich); }
+
+/* Schmaleres Querformat (iPad quer): etwas kleineres Bild, etwas kleinerer Text. */
+@container buch (aspect-ratio < 17 / 10) {
+  .blatt { --bild: min(calc(100cqh - 2 * var(--rand)), calc(54cqw - var(--rand))); --luft: 4.8rem; }
+  .text { font-size: 4.8rem; }
+}
+/* Hochformat und fast quadratisch: Bild oben, Text und Knöpfe darunter. */
+@container buch (aspect-ratio < 4 / 3) {
+  .blatt { --bild: min(calc(100cqw - 2 * var(--rand) - 2rem), calc(44cqh - var(--rand)));
+    grid-template-columns: minmax(0, 1fr); grid-template-rows: var(--bild) minmax(0, 1fr); row-gap: 3rem;
+    align-content: stretch; justify-items: center; }
+  .lese { width: 100%; row-gap: 2.4rem; }
+  .textfeld { align-items: flex-start; }
+  .text { font-size: 4.4rem; max-width: none; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 `;
 
@@ -110,19 +136,21 @@ export class LsGeschichte extends HTMLElement {
     super();
     const w = this.attachShadow({ mode: "open" });
     w.innerHTML = `<style>${GRUND_CSS}${CSS}</style>
-      <div class="buch">
+      <div class="buch"><div class="blatt">
         <div class="rahmen" part="bild"><div class="figuren"></div><span class="erzeugt" hidden>Bild erzeugt</span></div>
-        <div class="unten">
-          <ls-knopf class="links zurueck" symbol="zurueck.svg" name="Zurück" stumm></ls-knopf>
-          <div class="textfeld"><p class="text" aria-live="polite"></p>
-            <ls-knopf class="vorlesen" symbol="vorlesen.svg" name="Vorlesen" stumm></ls-knopf></div>
-          <div class="rechts">
-            <button type="button" class="weiter" aria-label="Weiter">${PFEIL}</button>
-            <ls-knopf class="fertig" art="haupt" symbol="fertig.svg" wort="Fertig" stumm hidden></ls-knopf>
+        <div class="lese">
+          <div class="textfeld"><p class="text" aria-live="polite"></p></div>
+          <div class="punkte" aria-hidden="true"></div>
+          <div class="knoepfe">
+            <ls-knopf class="zurueck" symbol="zurueck.svg" name="Zurück" stumm></ls-knopf>
+            <ls-knopf class="vorlesen" symbol="vorlesen.svg" name="Vorlesen" stumm></ls-knopf>
+            <div class="rechts">
+              <button type="button" class="weiter" aria-label="Weiter">${PFEIL}</button>
+              <ls-knopf class="fertig" art="haupt" symbol="fertig.svg" wort="Fertig" stumm hidden></ls-knopf>
+            </div>
           </div>
         </div>
-        <div class="punkte" aria-hidden="true"></div>
-      </div>`;
+      </div></div>`;
     /** @param {string} s */
     const q = (s) => /** @type {HTMLElement} */ (w.querySelector(s));
     this.rahmen = q(".rahmen");
