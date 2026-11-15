@@ -39,6 +39,12 @@
   --ls-radius-gross: 4rem;
   --ls-radius: 2.6rem;
   --ls-radius-klein: 1.6rem;
+  --ls-radius-plakat: 4.2rem;
+  --ls-radius-teil: 3rem;
+  --ls-schrift-oberflaeche: "Inter", "Andika", sans-serif;
+  --ls-schrift-merkmale: "cv11", "cv05", "cv08";
+  --ls-seite-rand: 9.6rem;
+  --ls-seite-knopf: 8.4rem;
   --ls-knopf: 11rem;
   --ls-neben-schatten: var(--ls-tinte-weich);
   --ls-schatten: 0 0.6rem 0 var(--ls-neben-schatten);
@@ -67,6 +73,13 @@ body {
 }
 
 img, svg { -webkit-user-drag: none; }
+
+/* Oberflächenschrift (Designsprache): Titel, Namen, Navigation. Lernstoff und Lesetext bleiben Andika. */
+.oberflaeche {
+  font-family: var(--ls-schrift-oberflaeche);
+  font-feature-settings: var(--ls-schrift-merkmale);
+  letter-spacing: -0.01em;
+}
 
 /* --- Ebenen ------------------------------------------------------------------------------------ */
 
