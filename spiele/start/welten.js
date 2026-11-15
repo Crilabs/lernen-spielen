@@ -24,15 +24,6 @@ const NACH_WELT = {
 };
 
 /**
- * Palette eines Themenkreises (Überschrift im Lernplan), z. B. für den Kopf im Elternbereich „Sachwelten“.
- * @param {string} ueberschriftId
- * @returns {string}
- */
-export function paletteDerUeberschrift(ueberschriftId) {
-  return NACH_UEBERSCHRIFT[/** @type {keyof typeof NACH_UEBERSCHRIFT} */ (ueberschriftId)] ?? "wiese";
-}
-
-/**
  * @param {{plan: {welten?: {id: string, ueberschrift?: string}[]}}} ctx
  * @param {string|undefined} weltId
  * @returns {string|null}
@@ -84,3 +75,57 @@ export function vignetteSvg(palette) {
   const motiv = MOTIV[/** @type {keyof typeof MOTIV} */ (palette)] ?? MOTIV.wiese;
   return `<svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">${motiv(p)}</svg>`;
 }
+
+// Bilder der Themenkreise (Überschriften im Lernplan) für den Elternbereich „Sachwelten“: je Kreis ein eigenes Motiv,
+// gleich flach wie die Vignetten, nur in den Tönen einer Welt-Palette und Papier. Die Paletten der Spielkarten
+// (NACH_UEBERSCHRIFT) bleiben davon unberührt.
+/** @type {Record<string, { palette: string, motiv: (p: readonly string[]) => string }>} */
+const KREIS = {
+  "tiere-pflanzen": { palette: "wiese", motiv: (p) => MOTIV.wiese(p) },
+  "erde-himmel": { palette: "wasser", motiv: (p) => MOTIV.wasser(p) },
+  // Uhrturm und Sanduhr
+  zeit: { palette: "dorf", motiv: ([h, f, b, a, s]) => `<rect width="300" height="160" fill="${h}"/>
+<rect x="122" y="44" width="56" height="66" fill="${f}"/><path d="M114 46 L150 16 L186 46Z" fill="${a}"/>
+<circle cx="150" cy="72" r="19" fill="${PAPIER}"/><path d="M150 72 L150 59 M150 72 L160 76" stroke="${s}" stroke-width="4" stroke-linecap="round"/>
+<path d="M214 78 L240 78 L227 95Z M227 95 L240 112 L214 112Z" fill="${a}"/><rect x="210" y="72" width="34" height="6" fill="${s}"/><rect x="210" y="112" width="34" height="6" fill="${s}"/>
+<path d="M0 110 L300 110 L300 160 L0 160Z" fill="${b}"/>` },
+  // geschwungener Weg, Wegweiser, Ortsmarke
+  "raeume-wege": { palette: "wiese", motiv: ([h, f, b, a, s]) => `<rect width="300" height="160" fill="${h}"/>
+<path d="M0 86 C80 66 190 70 300 80 L300 160 L0 160Z" fill="${f}"/><path d="M0 104 C100 96 200 96 300 102 L300 160 L0 160Z" fill="${b}"/>
+<path d="M118 160 C142 138 92 128 150 116 C196 107 172 103 206 98 L220 98 C192 104 222 112 168 122 C122 131 170 142 152 160Z" fill="${PAPIER}"/>
+<rect x="68" y="72" width="6" height="50" fill="${s}"/><path d="M48 76 L90 76 L98 83 L90 90 L48 90Z" fill="${a}"/><path d="M94 96 L56 96 L48 103 L56 110 L94 110Z" fill="${PAPIER}"/>
+<circle cx="236" cy="54" r="13" fill="${a}"/><path d="M225 60 L236 82 L247 60Z" fill="${a}"/><circle cx="236" cy="54" r="5" fill="${PAPIER}"/>` },
+  "werkzeug-bauen": { palette: "werkstatt", motiv: (p) => MOTIV.werkstatt(p) },
+  // offene Hand und Herz
+  "mein-koerper": { palette: "dorf", motiv: ([h, f, b, a, s]) => `<rect width="300" height="160" fill="${h}"/>
+<path d="M0 128 C100 120 200 120 300 126 L300 160 L0 160Z" fill="${b}"/>
+<rect x="124" y="36" width="13" height="50" rx="6.5" fill="${a}"/><rect x="140" y="28" width="13" height="56" rx="6.5" fill="${a}"/>
+<rect x="156" y="31" width="13" height="54" rx="6.5" fill="${a}"/><rect x="172" y="42" width="12" height="44" rx="6" fill="${a}"/>
+<ellipse cx="116" cy="94" rx="8.5" ry="21" transform="rotate(-38 116 94)" fill="${a}"/><rect x="122" y="68" width="62" height="58" rx="24" fill="${a}"/>
+<path d="M232 84 C210 68 214 48 232 60 C250 48 254 68 232 84Z" fill="${s}"/>` },
+  // Wippe mit zwei Bällen: gemeinsam spielen
+  miteinander: { palette: "savanne", motiv: ([h, f, b, a, s]) => `<rect width="300" height="160" fill="${h}"/>
+<circle cx="246" cy="40" r="16" fill="${f}"/><path d="M0 116 C100 108 200 108 300 114 L300 160 L0 160Z" fill="${b}"/>
+<path d="M150 92 L134 120 L166 120Z" fill="${s}"/><path d="M68 104 L232 80" stroke="${s}" stroke-width="8" stroke-linecap="round"/>
+<circle cx="84" cy="88" r="13" fill="${a}"/><circle cx="216" cy="66" r="13" fill="${PAPIER}"/>` },
+  // Schirm im Regen über einem kleinen Spross
+  "sicher-stark": { palette: "wasser", motiv: ([h, f, b, a, s]) => `<rect width="300" height="160" fill="${h}"/>
+<path d="M0 122 C100 114 200 114 300 120 L300 160 L0 160Z" fill="${b}"/>
+<path d="M62 30 l-4 10 M98 18 l-4 10 M228 22 l-4 10 M252 52 l-4 10 M48 70 l-4 10 M240 88 l-4 10" stroke="${f}" stroke-width="4" stroke-linecap="round"/>
+<path d="M88 78 Q150 14 212 78 Q196 70 181 78 Q166 70 150 78 Q134 70 119 78 Q104 70 88 78Z" fill="${a}"/>
+<path d="M150 76 L150 116 Q150 126 140 124" stroke="${s}" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M184 122 L184 106" stroke="${s}" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="177" cy="104" rx="7" ry="4" fill="${s}"/><ellipse cx="191" cy="100" rx="7" ry="4" fill="${s}"/>` },
+};
+
+/**
+ * Bild eines Themenkreises (Überschrift im Lernplan); unbekannt → Wiese.
+ * @param {string} ueberschriftId
+ * @returns {string}
+ */
+export function themenkreisSvg(ueberschriftId) {
+  const k = KREIS[ueberschriftId] ?? KREIS["tiere-pflanzen"];
+  return `<svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">${k.motiv(PALETTEN[k.palette])}</svg>`;
+}
+
+/** Palette des Themenkreis-Bilds (für Prüfungen). @param {string} ueberschriftId */
+export const paletteDesThemenkreises = (ueberschriftId) => (KREIS[ueberschriftId] ?? KREIS["tiere-pflanzen"]).palette;

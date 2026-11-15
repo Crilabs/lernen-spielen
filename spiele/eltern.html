@@ -309,7 +309,7 @@ import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgab
   from "./lernsteuerung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
 import { ladeVerzeichnis, ladeAnleitung } from "./rahmen/echte-dinge.js";
-import { paletteFuer, paletteDerUeberschrift, vignetteSvg } from "./start/welten.js";
+import { paletteFuer, themenkreisSvg, vignetteSvg } from "./start/welten.js";
 import "./rahmen/anregung.js";
 import "./objekte/objekt.js";
 import "./rahmen/knopf.js";
@@ -908,7 +908,7 @@ async function sachwelten(spalte, neu = false) {
     det.open = swOffen.has(g.id);
     const sum = el("summary");
     const vignette = el("span", null, "sw-vignette");
-    vignette.innerHTML = vignetteSvg(paletteDerUeberschrift(g.id));
+    vignette.innerHTML = themenkreisSvg(g.id);
     sum.append(vignette, el("span", g.name, "name"), el("span", swKopfWorte(g.welten), "zustand leise"));
     det.appendChild(sum);
     const innen = el("div", null, "lp-bereich-innen");
