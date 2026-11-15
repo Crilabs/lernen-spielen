@@ -28,7 +28,7 @@ import { LERNFARBE } from "../../rahmen/stil.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
-import { runde, einmal, K } from "../../lernsteuerung.js";
+import { runde, einmal, K, rundenMs } from "../../lernsteuerung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
 import { hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend, einfuehrungsKette, hueperZeiten, hueperTon, naechsteFreude, witz, waehleAufgabe, bildWechsel } from "./logik.js";
 
@@ -1202,7 +1202,7 @@ async function spieleRunde(vorschau) {
   /** Aufgaben, die in dieser Runde nicht passten oder Hilfe brauchten (kommen als Wiedervorlage; nie getauscht). */
   const wieder = new Set();
   const beginn = Date.now();
-  const zeitDa = () => Date.now() - beginn < K.RUNDE_MS - LETZTE_AUFGABE_MS;
+  const zeitDa = () => Date.now() - beginn < rundenMs() - Math.min(LETZTE_AUFGABE_MS, rundenMs() / 4);
   const naechste = () => (zeitDa() ? waehleAufgabe(aufStufe(r.naechste()), n, wieder) : null);
   let aufgabe = naechste();
   if (!aufgabe && vorschau) {

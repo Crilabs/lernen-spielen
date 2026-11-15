@@ -530,12 +530,22 @@ function auchZu(ctx, stand, sitzung, ziel, rnd) {
     .sort((a, b) => kk(a) - kk(b)).slice(0, 2);
 }
 
+/**
+ * Rundenlänge in ms: K.RUNDE_MS, im Testbetrieb des Prüfstands kürzer (globalThis.__LS_RUNDE_MS__, gesetzt von
+ * tests/browser/durchspielen.mjs nur zusammen mit __LS_PRUEFEN__). Das Kind merkt davon nie etwas.
+ */
+export function rundenMs() {
+  const g = /** @type {any} */ (globalThis);
+  const test = g.__LS_PRUEFEN__ === true ? Number(g.__LS_RUNDE_MS__) : NaN;
+  return Number.isFinite(test) && test > 0 ? test : K.RUNDE_MS;
+}
+
 // Nächstes Angebot { ziel, auch, stufe } oder null am Rundenende
 export function naechstesAngebot(ctx, stand, sitzung, rnd = Math.random, { jetzt, heute } = {}) {
   if (sitzung.ereignis?.typ === "gekonnt") return null;
   const max = sitzung.modus === "wiederholung" ? Math.min(sitzung.max ?? WIEDERHOLUNG_MAX, WIEDERHOLUNG_MAX) : sitzung.max;
   if (max != null && sitzung.gezeigt >= max) return null;
-  if (jetzt != null && Number.isFinite(sitzung.start) && jetzt - sitzung.start >= K.RUNDE_MS) return null;
+  if (jetzt != null && Number.isFinite(sitzung.start) && jetzt - sitzung.start >= rundenMs()) return null;
 
   let ziel = null;
   const probe = !!sitzung.probe?.length;
@@ -550,7 +560,7 @@ export function naechstesAngebot(ctx, stand, sitzung, rnd = Math.random, { jetzt
       // Wiederholungen gekonnter Themen kommen gebündelt am Ende der Runde, nicht verstreut (Christian, 2026-11-15):
       // Jeder Wechsel des Themas ist im Spiel eine eigene Szene (docs/spielbau.md §8). Den Anteil ANTEIL_THEMA
       // bestimmt die Rundenlänge (max oder RUNDE_MS); erst danach kommen fällige Wiederholungen, Thema für Thema.
-      const anteil = (max != null ? sitzung.gezeigt / max : 0) || (jetzt != null && Number.isFinite(sitzung.start) ? (jetzt - sitzung.start) / K.RUNDE_MS : 0);
+      const anteil = (max != null ? sitzung.gezeigt / max : 0) || (jetzt != null && Number.isFinite(sitzung.start) ? (jetzt - sitzung.start) / rundenMs() : 0);
       const block = sitzung.wdhThema != null || anteil >= K.ANTEIL_THEMA;
       const w = block ? aufgabeZurWiederholung(ctx, stand, sitzung, rnd, heute, true) : null;
       if (w) sitzung.wdhThema = w.thema;

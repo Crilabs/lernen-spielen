@@ -616,3 +616,16 @@ test("ladeCtx sucht lernplan.json und spiele.json neben lernsteuerung.js, nicht 
   const ladeCtx = quelle.slice(quelle.indexOf("async function ladeCtx()"), quelle.indexOf("return ctxCache;"));
   assert.match(ladeCtx, /fetch\(new URL\(f, import\.meta\.url\)\)/);
 });
+
+test("rundenMs: echte Rundenlänge, kürzer nur im Testbetrieb des Prüfstands", async () => {
+  const { rundenMs } = await import("../spiele/lernsteuerung.js");
+  const g = globalThis;
+  assert.equal(rundenMs(), K.RUNDE_MS);
+  g.__LS_RUNDE_MS__ = 60000;
+  assert.equal(rundenMs(), K.RUNDE_MS, "ohne __LS_PRUEFEN__ zählt nur die echte Länge");
+  g.__LS_PRUEFEN__ = true;
+  assert.equal(rundenMs(), 60000);
+  g.__LS_RUNDE_MS__ = 0;
+  assert.equal(rundenMs(), K.RUNDE_MS);
+  delete g.__LS_RUNDE_MS__; delete g.__LS_PRUEFEN__;
+});

@@ -3,7 +3,10 @@
 //
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs spiele/<fach>/<katalog-nr>-<name>/index.html \
 //     [--kinder sicher,ratend,hilfe,wild,tastatur,zurueck] [--browser chromium,webkit] [--groessen 1920x1080,1280x800]
-//     [--bilder <ordner>] [--bericht <datei.json>] [--saat <zahl>] [--stufe material|vorstellung|kopf]
+//     [--bilder <ordner>] [--bericht <datei.json>] [--saat <zahl>] [--stufe material|vorstellung|kopf] [--runde-ms <ms>]
+//
+// --runde-ms: Rundenlänge im Testbetrieb (Vorgabe 60 000 statt der echten 4 Minuten, lernsteuerung.js rundenMs);
+// 0 = echte Rundenlänge.
 //
 // --stufe: jede Aufgabe auf dieser Lernstufe (Seite mit ?stufe=<id>, gilt nur im Testbetrieb, schreibt nicht); geprüft
 // wird, dass die Aufgaben wirklich auf der Stufe kommen (Zustand lernstufe). Ohne --stufe entscheidet die Lernsteuerung.
@@ -51,6 +54,8 @@ const require = createRequire(import.meta.url);
 const { chromium, webkit } = require("playwright");
 
 const WURZEL = resolve(fileURLToPath(import.meta.url), "../../..");
+/** Rundenlänge im Testbetrieb (statt 4 Minuten, lernsteuerung.js rundenMs); mit --runde-ms 0 die echte. */
+const RUNDE_TEST_MS = 60000;
 const ALLE_KINDER = ["sicher", "ratend", "hilfe", "wild", "tastatur", "zurueck", "wegtippen"];
 const PHASEN = ["laden", "einfuehrung", "aufgabe", "folge", "pause", "fehler"];
 /** Züge je Aufgabe, bevor sie als nicht lösbar gilt. */
@@ -79,7 +84,7 @@ const UEBERSPRUNGEN = "übersprungen in WebKit (Playwright-Build leitet echte Ma
 // --- Aufruf ----------------------------------------------------------------------------------------
 
 function leseAufruf(argv) {
-  const a = { seite: null, kinder: ALLE_KINDER, browser: ["chromium", "webkit"], groessen: ["1920x1080", "1280x800"], bilder: null, bericht: null, saat: Date.now() % 100000, stufe: null };
+  const a = { seite: null, kinder: ALLE_KINDER, browser: ["chromium", "webkit"], groessen: ["1920x1080", "1280x800"], bilder: null, bericht: null, saat: Date.now() % 100000, stufe: null, rundeMs: RUNDE_TEST_MS };
   for (let i = 0; i < argv.length; i++) {
     const x = argv[i];
     const wert = () => argv[++i];
@@ -90,6 +95,7 @@ function leseAufruf(argv) {
     else if (x === "--bericht") a.bericht = resolve(wert());
     else if (x === "--saat") a.saat = Number(wert());
     else if (x === "--stufe") a.stufe = wert();
+    else if (x === "--runde-ms") a.rundeMs = Number(wert());
     else if (!x.startsWith("--") && !a.seite) a.seite = x;
     else throw new Error(`unbekannter Schalter ${x}`);
   }
@@ -659,12 +665,15 @@ async function spieleLauf(browser, name, groesse, kind, aufruf, basis, rnd) {
   const lauf = new Lauf(kind, name, groesse);
   const kontext = await browser.newContext({ viewport: groesse, deviceScaleFactor: 1 });
   try {
-    await kontext.addInitScript((stand) => {
+    await kontext.addInitScript(([stand, rundeMs]) => {
       window.__LS_PRUEFEN__ = true;
+      // Kürzere Runde im Testbetrieb (lernsteuerung.js rundenMs): Kinder, die nie „gekonnt“ werden, spielen sonst
+      // je 4 Minuten. Geprüft wird dasselbe, nur schneller.
+      window.__LS_RUNDE_MS__ = rundeMs;
       if (sessionStorage.getItem("ls-pruefstand")) return; // nur beim ersten Laden des Tabs
       sessionStorage.setItem("ls-pruefstand", "1");
       for (const [k, v] of Object.entries(stand)) localStorage.setItem(k, v);
-    }, STAND);
+    }, [STAND, aufruf.rundeMs]);
     const seite = await kontext.newPage();
     const sp = new Spieler({ seite, lauf, webkit: name === "webkit", url: `${basis}/${aufruf.pfad}${aufruf.stufe ? `?stufe=${aufruf.stufe}` : ""}`, bilder: aufruf.bilder, rnd });
     let vorher = null;
