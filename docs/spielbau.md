@@ -74,7 +74,8 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 - **Passt es nicht:** ein Satz, der beschreibt, was ist („6 Stäbchen sind nicht 48.“).
 - **Hilfe:** Zahlen und Zeichen im Bild, dazu höchstens ein Satz mit höchstens zehn Wörtern, in den Wörtern des Kindes
   („5 · 7 = 35. Und noch ein Stäbchen?“). Fachbegriffe nur, wenn sie das Thema selbst sind.
-- **Kein Satz wiederholt, was Leiste oder Bild schon zeigen** (Christian, 2026-11-15); die Blase darf leer sein.
+- **Keine Sprechblase im Spiel** (Christian, 2026-11-15): Sätze werden nur gesprochen, ein Knopf „Nochmal hören“
+  spielt den letzten Satz wieder (`<ls-blase ohne-text>`). Kein Satz wiederholt, was Leiste oder Bild schon zeigen.
 - **Rundenanfang:** höchstens ein Satz. **Einführung:** höchstens drei Schritte mit je einem Satz, im Tempo des Kindes (§8).
 - **Satzlänge:** bis Kl. 2 höchstens 8 Wörter, Kl. 3–4 höchstens 12.
 - **Alle festen Texte eines Spiels zusammen** (ohne die aus Daten erzeugten Varianten je Zahl): höchstens etwa
