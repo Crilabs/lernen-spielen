@@ -371,5 +371,44 @@
   "notiz": "Bau-Agent Ausbau",
   "cache_lesen": 82396361,
   "cache_schreiben": 510492
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 96,
+  "ausgabe": 33441,
+  "einheit": "tokens",
+  "menge": 8267948,
+  "notiz": "Ausbau-Prüfung Welt, Runde 1",
+  "cache_lesen": 8011638,
+  "cache_schreiben": 222773
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 82,
+  "ausgabe": 32203,
+  "einheit": "tokens",
+  "menge": 5946496,
+  "notiz": "Ausbau-Prüfung Bedienung, Runde 1",
+  "cache_lesen": 5734725,
+  "cache_schreiben": 179486
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 78,
+  "ausgabe": 29954,
+  "einheit": "tokens",
+  "menge": 6118510,
+  "notiz": "Ausbau-Prüfung Didaktik, Runde 1",
+  "cache_lesen": 5887814,
+  "cache_schreiben": 200664
  }
 ]
