@@ -19,8 +19,8 @@
 // Lernplan im Elternbereich: Baum ohne Klassen, Filter, Abhaken samt Voraussetzungen (danach still in Regal und
 // Startseite); im aufgeklappten Thema die Spiele, die analoge Karte über dem Lernplan mit PDF; das Blatt (Chromium,
 // page.pdf) zeigt alle Formen voll, ohne Flächen, A4.
-// Sachthemen im Elternbereich: acht Themenkreise mit Vignette, Filter, gelesene Geschichte mit Beschreibung, Vorschau-Link
-// und Datum, „kommt noch“ ohne Inhalt, nur „Alles ausklappen“ als Knopf, keine Klassen.
+// Sachthemen im Elternbereich: die Räume der Bibliothek (spiele/bibliothek.json) mit Regalen und Büchern, gelesen mit
+// Datum und Vorschau-Link, geplante Bücher „kommt noch“, Filter, nur „Alles ausklappen“ als Knopf, keine Klassen.
 //
 // WebKit: In diesem Playwright-Build (1.65, WebKit 27.2, macOS) landen echte Mausklicks mit falschen Koordinaten
 // an <html>. Die Prüfung tippt deshalb in beiden Browsern per element.click() (evaluate); das Halten des Zahnrads
@@ -400,7 +400,7 @@ async function lauf(typ, name, groesse, basis) {
       await kontext.close();
     }
 
-    // --- Sachthemen im Elternbereich: Themenkreise, Inhalte je Form, gelesen, Vorschau-Link, Filter, keine Klassen ---
+    // --- Sachthemen im Elternbereich: Räume der Bibliothek, Regale mit Büchern, gelesen, kommt noch, Filter ---
     {
       const F = `${L} sachthemen`;
       const kontext = await kontextFuer(browser, groesse, basis, { stand: GEKONNT, sachthemen: { geschichten: { haustiere: { am: "2026-11-10" } }, spiele: {} } }, fehlerListe);
@@ -413,46 +413,42 @@ async function lauf(typ, name, groesse, basis) {
         const warte = () => new Promise((ok) => setTimeout(ok, 150));
         const r = { titel: inhalt.querySelector("h2")?.textContent, nav: document.querySelector('[data-tab="sachthemen"]').getAttribute("wort"),
           filter: [...inhalt.querySelectorAll(".lp-filter button")].map((k) => k.textContent),
-          gruppen: [...inhalt.querySelectorAll(".sw-gruppe .name")].map((n) => n.textContent),
+          raeume: [...inhalt.querySelectorAll(".sw-gruppe")].map((d) => d.dataset.id),
           offen: inhalt.querySelectorAll(".sw-gruppe[open]").length, vignetten: inhalt.querySelectorAll(".sw-vignette svg").length,
           knoepfe: [...inhalt.querySelectorAll("ls-knopf")].map((k) => k.getAttribute("wort")) };
-        const tiere = inhalt.querySelector('.sw-gruppe[data-id="tiere-pflanzen"]');
+        const tiere = inhalt.querySelector('.sw-gruppe[data-id="tiere"]');
         r.kopf = tiere.querySelector(".zustand").textContent;
         tiere.open = true; await warte();
-        const h = tiere.querySelector('.sw-welt[data-id="haustiere"]');
-        h.open = true; await warte();
-        const w = tiere.querySelector('.sw-welt[data-id="wiese-und-hecke"]');
-        w.open = true; await warte();
-        const a = h.querySelector(".innen a");
+        r.regale = [...tiere.querySelectorAll(".sw-welt")].map((d) => d.dataset.id);
+        const h = tiere.querySelector('.sw-welt[data-id="haustiere"]'); h.open = true; await warte();
+        const b = tiere.querySelector('.sw-welt[data-id="bauernhof"]'); b.open = true; await warte();
         r.haustiere = { gesehen: h.classList.contains("z-gesehen"), wort: h.querySelector(".wort").textContent, text: h.querySelector(".innen").innerText,
-          link: a?.getAttribute("href"), sichtbar: h.querySelector(".innen p").getBoundingClientRect().height > 0 };
-        r.wiese = { kommt: w.classList.contains("z-kommt"), wort: w.querySelector(".wort").textContent, text: w.querySelector(".innen").innerText,
-          links: w.querySelectorAll(".innen a").length };
-        r.klasse = /Klasse \d|Kl\. \d|Lehrplan|Lernthem/.test(inhalt.innerText);
-        [...inhalt.querySelectorAll(".lp-filter button")].find((k) => k.textContent === "Gelesen/Gespielt").click();
+          link: h.querySelector(".innen a")?.getAttribute("href"), buecher: h.querySelectorAll(".buecher li").length };
+        r.bauernhof = { kommt: b.classList.contains("z-kommt"), wort: b.querySelector(".wort").textContent, links: b.querySelectorAll(".innen a").length,
+          text: b.querySelector(".innen").innerText };
+        r.klasse = /Klasse \d|Kl\. \d|Lernthem/.test(inhalt.innerText);
+        [...inhalt.querySelectorAll(".lp-filter button")].find((k) => k.textContent === "Gelesen").click();
         for (let i = 0; i < 40 && !document.querySelector(".lp-filter button.an")?.textContent.includes("Gelesen"); i++) await warte();
         await warte();
-        r.gesehen = [...document.querySelectorAll(".sw-gruppe[open] .sw-welt .name")].map((n) => n.textContent);
-        r.nachFilter = [...document.querySelectorAll(".sw-gruppe")].map((d) => d.dataset.id + (d.open ? ":auf" : ""));
+        r.gesehen = [...document.querySelectorAll(".sw-gruppe[open] .sw-welt")].map((d) => d.dataset.id);
         document.querySelector('[data-tab="lernstand"]').click(); await warte();
         document.querySelector('[data-tab="sachthemen"]').click();
         for (let i = 0; i < 40 && !document.querySelector(".sw-gruppe"); i++) await warte();
         r.wieder = document.querySelectorAll(".sw-gruppe[open]").length;
         return r;
       });
-      pruefe(F, "Reiter „Sachthemen“: acht Themenkreise mit Vignette, zugeklappt, Filter Alle/Gelesen/Gespielt/Noch offen, nur „Alles ausklappen“ als Knopf, keine Klassen und keine Lernthemen",
-        sw.titel === "Sachthemen" && sw.nav === "Sachthemen" && sw.gruppen.length === 8 && sw.vignetten === 8 && sw.offen === 0
-          && JSON.stringify(sw.filter) === JSON.stringify(["Alle", "Gelesen/Gespielt", "Noch offen"])
+      pruefe(F, "Reiter „Sachthemen“: Räume der Bibliothek mit Bild, zugeklappt, Filter Alle/Gelesen/Noch offen, keine Klassen und keine Lernthemen",
+        sw.titel === "Sachthemen" && sw.nav === "Sachthemen" && JSON.stringify(sw.raeume) === JSON.stringify(["tiere", "zahlen-buchstaben"])
+          && sw.vignetten === 2 && sw.offen === 0 && JSON.stringify(sw.filter) === JSON.stringify(["Alle", "Gelesen", "Noch offen"])
           && sw.knoepfe.every((k) => /^Alles (aus|ein)klappen$/.test(k)) && !sw.klasse, JSON.stringify(sw));
-      pruefe(F, "Sachthemen: Haustiere gelesen mit Haken, Beschreibung, Geschichte als Vorschau-Link und Datum; Kopf ohne Zahl",
-        sw.haustiere.gesehen && sw.haustiere.wort === "gelesen" && sw.haustiere.sichtbar && /Ein Tag mit Mia, der Katze/.test(sw.haustiere.text)
+      pruefe(F, "Sachthemen: Raum Tiere mit zehn Regalen; Haustiere gelesen mit Beschreibung der Welt, Vorschau-Link, Datum und den geplanten Büchern",
+        sw.regale.length === 10 && sw.kopf === "teils gelesen" && sw.haustiere.gesehen && sw.haustiere.wort === "gelesen"
           && sw.haustiere.link === "geschichte.html?id=haustiere&eltern&weiter=eltern.html" && /gelesen am 10\. November/.test(sw.haustiere.text)
-          && sw.kopf === "teils angesehen", JSON.stringify(sw));
-      pruefe(F, "Sachthemen: Wiese und Hecke (Form beides) ohne Inhalt – „kommt noch“, „Geschichte und Spiel entstehen noch.“, kein Link",
-        sw.wiese.kommt && sw.wiese.wort === "kommt noch" && /Geschichte und Spiel entstehen noch\./.test(sw.wiese.text) && sw.wiese.links === 0, JSON.stringify(sw));
-      pruefe(F, "Sachthemen: Filter „Gelesen/Gespielt“ zeigt nur Haustiere; klappt nichts von selbst auf; neu geöffneter Reiter ist ganz zugeklappt",
-        JSON.stringify(sw.gesehen) === JSON.stringify(["Haustiere und was sie brauchen"])
-          && JSON.stringify(sw.nachFilter) === JSON.stringify(["tiere-pflanzen:auf"]) && sw.wieder === 0, JSON.stringify(sw));
+          && /Der Hund\s*kommt noch/.test(sw.haustiere.text) && sw.haustiere.buecher === 6, JSON.stringify(sw));
+      pruefe(F, "Sachthemen: Bauernhof ohne fertiges Buch – „kommt noch“, kein Link",
+        sw.bauernhof.kommt && sw.bauernhof.wort === "kommt noch" && sw.bauernhof.links === 0 && /Die Kuh/.test(sw.bauernhof.text), JSON.stringify(sw));
+      pruefe(F, "Sachthemen: Filter „Gelesen“ zeigt nur Haustiere; neu geöffneter Reiter ist ganz zugeklappt",
+        JSON.stringify(sw.gesehen) === JSON.stringify(["haustiere"]) && sw.wieder === 0, JSON.stringify(sw));
       await bild(eltern, `eltern-sachthemen-${name}-${groesse.width}`);
       await eltern.close();
       await kontext.close();

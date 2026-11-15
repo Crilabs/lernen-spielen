@@ -1,5 +1,5 @@
-// Sachthemen im Elternbereich (docs/superpowers/specs/2026-11-15-sachthemen-eltern-design.md): Sachthemen haben eigene
-// Geschichten und Spiele, keine Lernthemen (Christian 2026-11-15). Gelesen = Geschichte bis „Fertig“ geblättert,
+// Sachthemen (docs/superpowers/specs/2026-11-15-bibliothek-design.md): Sachthemen haben eigene Geschichten und
+// Spiele, keine Lernthemen (Christian 2026-11-15). Gelesen = Geschichte bis „Fertig“ geblättert,
 // gespielt = in einem Sachspiel (spiele.json: sachwelt) gespielt; nur Übersicht, kein „gekonnt“.
 import { test, beforeEach } from "node:test";
 import assert from "node:assert/strict";
@@ -13,7 +13,7 @@ globalThis.localStorage = {
 };
 globalThis.window = {};
 const L = await import("../spiele/lernsteuerung.js");
-const { merkeSachthema, merkeGeschichteGelesen, elternSachthemen, sachweltDesSpiels, migriereStand, neuerStand, runde, setzeZurueck, hakeAb } = L;
+const { merkeSachthema, merkeGeschichteGelesen, sachweltDesSpiels, migriereStand, neuerStand, runde, setzeZurueck, hakeAb } = L;
 
 const lies = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), "utf8"));
 const lernplan = lies("../spiele/lernplan.json");
@@ -38,14 +38,6 @@ const SPIELE = { spiele: [
   { id: "spuren", titel: "Spuren", datei: "sache/spuren/index.html", sachwelt: "hecke" },
 ] };
 const CTX = { plan: PLAN, spiele: SPIELE };
-const INHALT = {
-  beurteilung: { welten: { hecke: { form: "beides" }, wiese: { form: "geschichte" }, uhr: { form: "spiel" } } },
-  geschichten: [{ id: "hecke-tag", titel: "Ein Tag in der Hecke", art: "sachgeschichte", welt: "hecke" },
-    { id: "zehner", titel: "Zehner", art: "struktur", welt: null }],
-};
-const welt = (g, id) => g.flatMap((x) => x.welten).find((w) => w.id === id);
-const zustand = (g) => Object.fromEntries(g.flatMap((x) => x.welten.map((w) => [w.id, w.zustand])));
-
 beforeEach(() => speicher.clear());
 
 test("sachweltDesSpiels: nur sachwelt zählt, nicht die alte Heimatwelt", () => {
@@ -70,37 +62,6 @@ test("migriereStand: altes welten fällt weg, sachthemen bleiben, Kaputtes fäll
   assert.equal("welten" in s, false);
   assert.deepEqual(s.sachthemen, { geschichten: { a: { am: "2026-11-02" } }, spiele: {} });
   assert.equal("sachthemen" in migriereStand({ themen: {} }), false);
-});
-
-test("elternSachthemen: Gruppen in Planreihenfolge, Welten nach Klasse, leere Gruppen fehlen", () => {
-  const g = elternSachthemen(CTX, neuerStand(), INHALT);
-  assert.deepEqual(g.map((x) => x.id), ["tiere", "zeit"]);
-  assert.deepEqual(g[0].welten.map((w) => w.id), ["wiese", "hecke"]);
-  const uhr = welt(g, "uhr");
-  assert.equal(uhr.beschreibung, "Wie die Uhr geht.");
-  assert.equal(uhr.eltern, "Hinweis");
-});
-
-test("elternSachthemen: Inhalte nach Form, fehlende als „entsteht noch“, Zustand da/kommt/gesehen", () => {
-  const s = neuerStand();
-  let g = elternSachthemen(CTX, s, INHALT);
-  assert.deepEqual(welt(g, "hecke").inhalte, [
-    { art: "geschichte", id: "hecke-tag", titel: "Ein Tag in der Hecke", am: "" },
-    { art: "spiel", id: "spuren", titel: "Spuren", datei: "sache/spuren/index.html", am: "" }]);
-  assert.deepEqual(welt(g, "wiese").inhalte, [{ art: "geschichte", fehlt: true }], "Rechenspiel pb mit Heimatwelt wiese zählt nicht");
-  assert.deepEqual(welt(g, "uhr").inhalte, [{ art: "spiel", fehlt: true }]);
-  assert.deepEqual(zustand(g), { wiese: "kommt", hecke: "da", uhr: "kommt" });
-  s.themen.z5 = { z: "dran", seit: HEUTE, stufe: "material", v: [] }; // Lernthemen spielen keine Rolle
-  merkeSachthema(s, "geschichten", "hecke-tag", HEUTE);
-  g = elternSachthemen(CTX, s, INHALT);
-  assert.deepEqual(zustand(g), { wiese: "kommt", hecke: "gesehen", uhr: "kommt" });
-  assert.equal(welt(g, "hecke").inhalte[0].am, HEUTE);
-});
-
-test("elternSachthemen: ohne Beurteilung gilt Form „geschichte“; vorhandene Inhalte erscheinen auch außerhalb der Form", () => {
-  const g = elternSachthemen(CTX, neuerStand(), { beurteilung: { welten: { hecke: { form: "spiel" } } }, geschichten: INHALT.geschichten });
-  assert.deepEqual(welt(g, "hecke").inhalte.map((x) => x.art), ["geschichte", "spiel"]);
-  assert.deepEqual(welt(g, "wiese").inhalte, [{ art: "geschichte", fehlt: true }]);
 });
 
 test("Abhaken und Zurücksetzen im Lernplan fassen Sachthemen nicht an", () => {

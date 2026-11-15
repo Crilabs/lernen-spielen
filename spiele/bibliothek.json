@@ -1,0 +1,331 @@
+{
+  "hinweis": "Bibliothek der Geschichten (docs/superpowers/specs/2026-11-15-bibliothek-design.md): Räume › Regale › Bücher. Ein Buch ist da, wenn es in geschichten/index.json steht; sonst geplant (Arbeitstitel). Das Kind sieht nur Regale und Räume mit fertigen Büchern. welten = Bezug zu den Welten im Lernplan.",
+  "raeume": [
+    {
+      "id": "tiere",
+      "name": "Tiere",
+      "bild": "tiere-pflanzen",
+      "regale": [
+        {
+          "id": "haustiere",
+          "name": "Haustiere",
+          "welten": [
+            "haustiere"
+          ],
+          "buecher": [
+            {
+              "id": "haustiere",
+              "titel": "Ein Tag mit Mia, der Katze"
+            },
+            {
+              "id": "hund",
+              "titel": "Der Hund"
+            },
+            {
+              "id": "kaninchen",
+              "titel": "Das Kaninchen"
+            },
+            {
+              "id": "meerschweinchen",
+              "titel": "Das Meerschweinchen"
+            },
+            {
+              "id": "wellensittich",
+              "titel": "Der Wellensittich"
+            },
+            {
+              "id": "pferd",
+              "titel": "Das Pferd"
+            }
+          ]
+        },
+        {
+          "id": "bauernhof",
+          "name": "Auf dem Bauernhof",
+          "welten": [
+            "bauernhof"
+          ],
+          "buecher": [
+            {
+              "id": "kuh",
+              "titel": "Die Kuh"
+            },
+            {
+              "id": "schwein",
+              "titel": "Das Schwein"
+            },
+            {
+              "id": "huhn",
+              "titel": "Das Huhn"
+            },
+            {
+              "id": "schaf",
+              "titel": "Das Schaf"
+            }
+          ]
+        },
+        {
+          "id": "wiese-garten",
+          "name": "Wiese und Garten",
+          "welten": [
+            "wiese-und-hecke"
+          ],
+          "buecher": [
+            {
+              "id": "biene",
+              "titel": "Die Biene"
+            },
+            {
+              "id": "ameise",
+              "titel": "Die Ameise"
+            },
+            {
+              "id": "marienkaefer",
+              "titel": "Der Marienkäfer"
+            },
+            {
+              "id": "regenwurm",
+              "titel": "Der Regenwurm"
+            },
+            {
+              "id": "schnecke",
+              "titel": "Die Schnecke"
+            },
+            {
+              "id": "igel",
+              "titel": "Der Igel"
+            }
+          ]
+        },
+        {
+          "id": "wald",
+          "name": "Im Wald",
+          "welten": [
+            "wald-und-teich"
+          ],
+          "buecher": [
+            {
+              "id": "eichhoernchen",
+              "titel": "Das Eichhörnchen"
+            },
+            {
+              "id": "fuchs",
+              "titel": "Der Fuchs"
+            },
+            {
+              "id": "reh",
+              "titel": "Das Reh"
+            },
+            {
+              "id": "specht",
+              "titel": "Der Specht"
+            },
+            {
+              "id": "eule",
+              "titel": "Die Eule"
+            }
+          ]
+        },
+        {
+          "id": "teich",
+          "name": "Am Teich",
+          "welten": [
+            "wald-und-teich"
+          ],
+          "buecher": [
+            {
+              "id": "frosch",
+              "titel": "Der Frosch"
+            },
+            {
+              "id": "libelle",
+              "titel": "Die Libelle"
+            },
+            {
+              "id": "ente",
+              "titel": "Die Ente"
+            },
+            {
+              "id": "biber",
+              "titel": "Der Biber"
+            }
+          ]
+        },
+        {
+          "id": "meer",
+          "name": "Im Meer",
+          "welten": [
+            "tiere-der-erdteile"
+          ],
+          "buecher": [
+            {
+              "id": "wal",
+              "titel": "Der Wal"
+            },
+            {
+              "id": "delfin",
+              "titel": "Der Delfin"
+            },
+            {
+              "id": "hai",
+              "titel": "Der Hai"
+            },
+            {
+              "id": "krake",
+              "titel": "Der Krake"
+            },
+            {
+              "id": "korallenriff",
+              "titel": "Das Korallenriff"
+            }
+          ]
+        },
+        {
+          "id": "tiere-der-welt",
+          "name": "Tiere der Welt",
+          "welten": [
+            "tiere-der-erdteile"
+          ],
+          "buecher": [
+            {
+              "id": "elefant",
+              "titel": "Der Elefant"
+            },
+            {
+              "id": "loewe",
+              "titel": "Der Löwe"
+            },
+            {
+              "id": "giraffe",
+              "titel": "Die Giraffe"
+            },
+            {
+              "id": "eisbaer",
+              "titel": "Der Eisbär"
+            },
+            {
+              "id": "pinguin",
+              "titel": "Der Pinguin"
+            },
+            {
+              "id": "kaenguru",
+              "titel": "Das Känguru"
+            }
+          ]
+        },
+        {
+          "id": "wie-tiere-leben",
+          "name": "Wie Tiere leben",
+          "welten": [
+            "tarnen-verstecken",
+            "jahreszeiten-natur",
+            "vom-ei-zum-tier",
+            "wer-frisst-was",
+            "atmen-und-junge"
+          ],
+          "buecher": [
+            {
+              "id": "tarnen",
+              "titel": "Tarnen und Verstecken"
+            },
+            {
+              "id": "winterschlaf",
+              "titel": "Winterschlaf"
+            },
+            {
+              "id": "vogelzug",
+              "titel": "Vogelzug"
+            },
+            {
+              "id": "schmetterling",
+              "titel": "Vom Ei zum Schmetterling"
+            },
+            {
+              "id": "wer-frisst-wen",
+              "titel": "Wer frisst wen?"
+            },
+            {
+              "id": "tiere-der-nacht",
+              "titel": "Tiere der Nacht"
+            }
+          ]
+        },
+        {
+          "id": "tiergruppen",
+          "name": "Tiergruppen",
+          "welten": [
+            "wirbeltierklassen",
+            "fell-federn-schuppen",
+            "tierbaum-pflanzenbaum"
+          ],
+          "buecher": [
+            {
+              "id": "saeugetiere",
+              "titel": "Säugetiere"
+            },
+            {
+              "id": "voegel",
+              "titel": "Vögel"
+            },
+            {
+              "id": "fische",
+              "titel": "Fische"
+            },
+            {
+              "id": "reptilien",
+              "titel": "Reptilien"
+            },
+            {
+              "id": "amphibien",
+              "titel": "Amphibien"
+            },
+            {
+              "id": "insekten",
+              "titel": "Insekten"
+            }
+          ]
+        },
+        {
+          "id": "urzeit",
+          "name": "Urzeit",
+          "welten": [
+            "dinosaurier",
+            "dinosaurier-aussterben"
+          ],
+          "buecher": [
+            {
+              "id": "dinosaurier",
+              "titel": "Die Dinosaurier"
+            },
+            {
+              "id": "dinosaurier-ende",
+              "titel": "Warum es keine Dinosaurier mehr gibt"
+            },
+            {
+              "id": "mammut",
+              "titel": "Das Mammut"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zahlen-buchstaben",
+      "name": "Zahlen und Buchstaben",
+      "bild": "zahlen-buchstaben",
+      "regale": [
+        {
+          "id": "rechnen",
+          "name": "Rechnen",
+          "fach": "mathe",
+          "buecher": [
+            {
+              "id": "zehnerpaare",
+              "titel": "Zehn Gäste, zwei Häuser"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

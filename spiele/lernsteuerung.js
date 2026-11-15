@@ -18,8 +18,8 @@
 //           g = einmal gelernt, kk = einmal auf Stufe kopf ohne Hilfe und nicht mühsam gelöst.
 //   sachthemen { geschichten: { [id]: { am } }, spiele: { [id]: { am } } }: Geschichten, die das Kind bis „Fertig“
 //           gelesen hat (merkeGeschichteGelesen, geschichte.html), und Sachspiele (spiele.json mit sachwelt), in denen
-//           es gespielt hat (runde().melde); am = zuerst am. Gelesen von elternSachthemen
-//           (Spec 2026-11-15-sachthemen-eltern). Das alte Feld welten (Heimatwelt der Spiele) fällt beim Laden weg.
+//           es gespielt hat (runde().melde); am = zuerst am. Gelesen von der Bibliothek und dem Elternbereich
+//           (Spec 2026-11-15-bibliothek). Das alte Feld welten (Heimatwelt der Spiele) fällt beim Laden weg.
 //
 // Sitzung (eine Runde in einem Spiel):
 //   { spiel, thema, modus, stufe, probe: key[]|null, gezeigt, wieder: [{key, ab}], start, max, ereignis, letzte }
@@ -821,38 +821,6 @@ export function merkeSachthema(stand, art, id, heute) {
   if (stand.sachthemen[art][id]) return false;
   stand.sachthemen[art][id] = { am: heute };
   return true;
-}
-
-// Sachthemen je Überschrift für die Eltern.
-//   inhalt = { beurteilung: spiele/geschichten/beurteilung.json, geschichten: Liste aus spiele/geschichten/index.json }
-// [{ id, name, welten: [{ id, name, beschreibung, eltern, zustand, inhalte }] }]
-//   inhalte: je vorhandene Geschichte bzw. Sachspiel { art: "geschichte"|"spiel", id, titel, am }, dazu je Form aus der
-//            Beurteilung, die noch fehlt, { art, fehlt: true }.
-//   zustand = "gesehen" (etwas davon gelesen oder gespielt) | "da" (vorhanden, noch nicht angesehen) | "kommt" (nichts da).
-//   Reihenfolge: Überschriften wie im Plan, darin nach Klasse, dann Planreihenfolge.
-export function elternSachthemen(ctx, stand, { beurteilung = {}, geschichten = [] } = {}) {
-  const spiele = ctx?.spiele?.spiele ?? [];
-  const welten = Array.isArray(ctx?.plan?.welten) ? ctx.plan.welten : [];
-  const gruppen = (Array.isArray(ctx?.plan?.ueberschriften) ? ctx.plan.ueberschriften : []).map((u) => ({ id: u.id, name: text(u.name), welten: [] }));
-  const nachId = new Map(gruppen.map((g) => [g.id, g]));
-  const am = (art, id) => text(stand?.sachthemen?.[art]?.[id]?.am);
-  const sortiert = welten.map((w, i) => ({ w, i })).sort((a, b) => (a.w.klasse ?? 9) - (b.w.klasse ?? 9) || a.i - b.i);
-  for (const { w } of sortiert) {
-    const g = nachId.get(w.ueberschrift);
-    if (!g) continue;
-    const form = text(beurteilung?.welten?.[w.id]?.form) || "geschichte";
-    const eigeneG = (Array.isArray(geschichten) ? geschichten : []).filter((x) => x?.welt === w.id)
-      .map((x) => ({ art: "geschichte", id: x.id, titel: text(x.titel) || x.id, am: am("geschichten", x.id) }));
-    const eigeneS = spiele.filter((x) => text(x.sachwelt) === w.id)
-      .map((x) => ({ art: "spiel", id: x.id, titel: text(x.titel) || x.id, datei: text(x.datei), am: am("spiele", x.id) }));
-    const inhalte = [...eigeneG, ...eigeneS];
-    if ((form === "geschichte" || form === "beides") && !eigeneG.length) inhalte.push({ art: "geschichte", fehlt: true });
-    if ((form === "spiel" || form === "beides") && !eigeneS.length) inhalte.push({ art: "spiel", fehlt: true });
-    const da = inhalte.filter((x) => !x.fehlt);
-    const zustand = da.some((x) => x.am) ? "gesehen" : da.length ? "da" : "kommt";
-    g.welten.push({ id: w.id, name: text(w.name), beschreibung: text(w.beschreibung), eltern: text(w.eltern), zustand, inhalte });
-  }
-  return gruppen.filter((g) => g.welten.length);
 }
 
 // Geschichte als gelesen speichern (geschichte.html nach „Fertig“, nicht in der Vorschau der Eltern).

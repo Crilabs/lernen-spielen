@@ -223,6 +223,7 @@ details > summary::-webkit-details-marker { display: none; }
 .thema.sw-welt.z-da .punkt { border-color: var(--ls-tinte); }
 .thema.sw-welt.z-kommt .name, .thema.sw-welt.z-kommt .wort { color: var(--ls-tinte-weich); }
 .thema.sw-welt .inhalt { display: flex; flex-wrap: wrap; gap: 0 0.8rem; }
+.thema.sw-welt .buecher { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
 .thema.sw-welt .innen > p { max-width: 70ch; }
 
 /* --- Geschichten ---------------------------------------------------------------------------------- */
@@ -306,11 +307,12 @@ import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/g
 import { ladeEinstellungen, setzeEinstellung, geschichtenStufe, einstellung } from "./kern/einstellungen.js";
 import { regeln, aktuell, lage as spielLage, gibZugabe, ZUGABE_MINUTEN } from "./kern/spielzeit.js";
 import { STAND as SPIELZEIT_STAND } from "./rahmen/spielzeit.js";
-import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer, spieleFuer, alsNaechstes, elternSachthemen }
+import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer, spieleFuer, alsNaechstes }
   from "./lernsteuerung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
 import { ladeVerzeichnis, ladeAnleitung } from "./rahmen/echte-dinge.js";
-import { paletteFuer, themenkreisSvg, vignetteSvg } from "./start/welten.js";
+import { paletteFuer, vignetteSvg } from "./start/welten.js";
+import { bibliothekGanz, regalZustand, raumBildFlach } from "./start/bibliothek.js";
 import "./rahmen/anregung.js";
 import "./objekte/objekt.js";
 import "./rahmen/knopf.js";
@@ -824,55 +826,51 @@ async function spielKarten(ziel, t, ctx, strang) {
 }
 
 // ---------- Sachthemen ----------
-// Alle Sachthemen (Welten im Lernplan) nach Themenkreisen, darin nach dem Lehrplan geordnet, ohne Klassen. Sachthemen
-// haben eigene Geschichten und Spiele (Form aus spiele/geschichten/beurteilung.json), keine Lernthemen (Christian
-// 2026-11-15). Nur Übersicht und Vorschau: kein Abhaken, kein Eingriff, kein „gekonnt“ (grundsaetze K7, 3.3).
-// Spec docs/superpowers/specs/2026-11-15-sachthemen-eltern-design.md.
-const SW_FILTER = [["alle", "Alle"], ["gesehen", "Gelesen/Gespielt"], ["offen", "Noch offen"]];
-const SW_LEER = { gesehen: "Hier steht, was das Kind gelesen oder gespielt hat, sobald es eine Geschichte oder ein Spiel zu einem Sachthema kennt.",
-  offen: "Das Kind kennt schon alles zu allen Sachthemen." };
-const swZeigt = (filter, w) => filter === "alle" || (filter === "gesehen" ? w.zustand === "gesehen" : w.zustand !== "gesehen");
-// Wort rechts in der Zeile: was gelesen/gespielt ist, sonst was es gibt
-function swWort(w) {
-  const da = w.inhalte.filter((x) => !x.fehlt);
-  if (w.zustand === "kommt") return "kommt noch";
-  const g = da.some((x) => x.art === "geschichte" && x.am), s = da.some((x) => x.art === "spiel" && x.am);
-  if (g || s) return g && s ? "gelesen und gespielt" : g ? "gelesen" : "gespielt";
-  return da.every((x) => x.art === "spiel") ? "noch nicht gespielt" : "noch nicht gelesen";
-}
-let swInhalt = null;
-async function ladeSachInhalt() {
-  if (!swInhalt) {
-    const [beurteilung, liste] = await Promise.all(["geschichten/beurteilung.json", "geschichten/index.json"].map((f) => fetch(f).then((r) => r.json())));
-    swInhalt = { beurteilung, geschichten: Array.isArray(liste?.geschichten) ? liste.geschichten : [] };
+// Die Bibliothek der Geschichten wie beim Kind (spiele/bibliothek.json): Räume › Regale › Bücher, aber mit allem, was
+// geplant ist („kommt noch“). Sachthemen haben eigene Geschichten, keine Lernthemen (Christian 2026-11-15). Nur
+// Übersicht und Vorschau: kein Abhaken, kein Eingriff, kein „gekonnt“ (grundsaetze K7, 3.3).
+// Spec docs/superpowers/specs/2026-11-15-bibliothek-design.md.
+const SW_FILTER = [["alle", "Alle"], ["gesehen", "Gelesen"], ["offen", "Noch offen"]];
+const SW_LEER = { gesehen: "Hier steht, was das Kind gelesen hat, sobald es eine Geschichte bis zum Ende ansieht.",
+  offen: "Das Kind hat schon alle fertigen Geschichten gelesen." };
+const SW_WORT = { gelesen: "gelesen", teils: "teils gelesen", da: "noch nicht gelesen", kommt: "kommt noch" };
+const SW_KLASSE = { gelesen: "gesehen", teils: "da", da: "da", kommt: "kommt" };
+const swZeigt = (filter, rg) => filter === "alle" || (filter === "gesehen"
+  ? ["gelesen", "teils"].includes(regalZustand(rg)) : regalZustand(rg) !== "gelesen");
+let swDaten = null;
+async function ladeBibliothek() {
+  if (!swDaten) {
+    const [plan, liste] = await Promise.all(["bibliothek.json", "geschichten/index.json"].map((f) => fetch(f).then((r) => r.json())));
+    swDaten = { plan, geschichten: Array.isArray(liste?.geschichten) ? liste.geschichten : [] };
   }
-  return swInhalt;
+  return swDaten;
 }
 let swFilter = "alle";
 const swOffen = new Set();
 let swLauf = 0;
 
-function swKopfWorte(welten) {
-  const gesehen = welten.filter((w) => w.zustand === "gesehen").length;
-  return gesehen === welten.length ? "alles angesehen" : gesehen ? "teils angesehen" : "noch nichts";
+function swKopfWorte(regale) {
+  const z = regale.map(regalZustand);
+  return z.every((x) => x === "gelesen") ? "alles gelesen" : z.some((x) => x === "gelesen" || x === "teils") ? "teils gelesen" : "noch nichts";
 }
 
-// neu = false beim ersten Öffnen des Reiters: alle Themenkreise zu (Christian: zugeklappt als Übersicht); beim Neuzeichnen
+// neu = false beim ersten Öffnen des Reiters: alle Räume zu (Christian: zugeklappt als Übersicht); beim Neuzeichnen
 // nach einem Filterwechsel bleibt offen, was die Eltern selbst geöffnet haben.
 async function sachthemen(spalte, neu = false) {
   if (neu !== true) swOffen.clear();
   const lauf = ++swLauf;
   spalte.append(el("h2", "Sachthemen"),
-    el("p", "Zu Sachthemen wie Tieren, Wetter, Zeit oder Berufen gibt es eigene Geschichten und Spiele. Hier steht, worum es in jedem Thema geht, was es dazu gibt und was das Kind schon gelesen oder gespielt hat. Über den Titel können Sie selbst hineinsehen; dabei wird nichts gespeichert.", "vorspann"));
-  let ctx, stand, inhalt;
-  try { ctx = await ladeCtx(); stand = await ladeLernstand(ctx, heuteTag()); inhalt = await ladeSachInhalt(); }
+    el("p", "Zu Sachthemen wie Tieren, Wetter oder Technik gibt es eigene Geschichten. Das Kind findet sie in der Bibliothek auf der Startseite, geordnet nach Räumen und Regalen. Hier steht, was es dort gibt, was noch entsteht und was das Kind schon gelesen hat. Über den Titel können Sie selbst hineinsehen; dabei wird nichts gespeichert.", "vorspann"));
+  let ctx, stand, daten;
+  try { ctx = await ladeCtx(); stand = await ladeLernstand(ctx, heuteTag()); daten = await ladeBibliothek(); }
   catch (e) {
     protokoll("Sachthemen: " + e);
     spalte.appendChild(el("p", "Die Sachthemen konnten nicht geladen werden. Bitte den Bereich neu öffnen.", "flaeche"));
     return;
   }
   if (tab !== "sachthemen" || lauf !== swLauf) return;
-  const gruppen = elternSachthemen(ctx, stand, inhalt);
+  const raeume = bibliothekGanz(daten.plan, daten.geschichten, stand?.sachthemen?.geschichten ?? {});
+  const weltNach = new Map((ctx.plan.welten ?? []).map((w) => [w.id, w]));
 
   const neuZeichnen = async () => {
     if (tab !== "sachthemen") return;
@@ -893,16 +891,16 @@ async function sachthemen(spalte, neu = false) {
   }
   spalte.appendChild(filter);
 
-  const zeigt = (w) => swZeigt(swFilter, w);
-  const sichtbar = gruppen.filter((g) => g.welten.some(zeigt));
+  const zeigt = (rg) => swZeigt(swFilter, rg);
+  const sichtbar = raeume.filter((r) => r.regale.some(zeigt));
   if (!sichtbar.length) {
-    spalte.appendChild(el("p", SW_LEER[swFilter] || "Es gibt noch keine Sachthemen.", "flaeche leise"));
+    spalte.appendChild(el("p", SW_LEER[swFilter] || "Es gibt noch keine Geschichten.", "flaeche leise"));
     return;
   }
   const block = el("section", null, "flaeche");
   block.setAttribute("aria-label", "Sachthemen");
   const kopf = el("div", null, "sw-kopf");
-  kopf.appendChild(el("h3", "Nach Themenkreisen"));
+  kopf.appendChild(el("h3", "Räume der Bibliothek"));
   const klapp = knopf("Alles ausklappen");
   klapp.setAttribute("groesse", "klein");
   klapp.classList.add("klapp");
@@ -916,25 +914,25 @@ async function sachthemen(spalte, neu = false) {
     klappWort();
   });
 
-  for (const g of sichtbar) {
+  for (const r of sichtbar) {
     const det = el("details", null, "lp-bereich sw-gruppe");
-    det.dataset.id = g.id;
-    det.open = swOffen.has(g.id);
+    det.dataset.id = r.id;
+    det.open = swOffen.has(r.id);
     const sum = el("summary");
     const vignette = el("span", null, "sw-vignette");
-    vignette.innerHTML = themenkreisSvg(g.id);
-    sum.append(vignette, el("span", g.name, "name"), el("span", swKopfWorte(g.welten), "zustand leise"));
+    vignette.innerHTML = raumBildFlach(r.bild);
+    sum.append(vignette, el("span", r.name, "name"), el("span", swKopfWorte(r.regale), "zustand leise"));
     det.appendChild(sum);
     const innen = el("div", null, "lp-bereich-innen");
     det.appendChild(innen);
     const fuelle = () => {
       if (innen.childElementCount) return;
       const ul = el("ul", null, "themen");
-      for (const w of g.welten.filter(zeigt)) ul.appendChild(weltZeile(w));
+      for (const rg of r.regale.filter(zeigt)) ul.appendChild(regalZeile(rg, weltNach));
       innen.appendChild(ul);
     };
     det.addEventListener("toggle", () => {
-      if (det.open) { swOffen.add(g.id); fuelle(); } else swOffen.delete(g.id);
+      if (det.open) { swOffen.add(r.id); fuelle(); } else swOffen.delete(r.id);
       klappWort();
     });
     if (det.open) fuelle();
@@ -944,32 +942,35 @@ async function sachthemen(spalte, neu = false) {
   spalte.appendChild(block);
 }
 
-function weltZeile(w) {
+// Ein Regal: worum es geht (Beschreibung der Welten im Lernplan), dann jedes Buch – fertig mit Vorschau-Link und
+// „gelesen am …“, geplant leise mit „kommt noch“.
+function regalZeile(rg, weltNach) {
+  const z = regalZustand(rg);
   const li = el("li");
-  const det = el("details", null, "thema sw-welt z-" + w.zustand);
-  det.dataset.id = w.id;
+  const det = el("details", null, "thema sw-welt z-" + SW_KLASSE[z]);
+  det.dataset.id = rg.id;
   const sum = el("summary");
   const punkt = el("span", null, "punkt");
   punkt.setAttribute("aria-hidden", "true");
-  sum.append(punkt, el("span", w.name, "name"), el("span", swWort(w), "wort"));
+  sum.append(punkt, el("span", rg.name, "name"), el("span", SW_WORT[z], "wort"));
   det.appendChild(sum);
   const innen = el("div", null, "innen");
-  if (w.beschreibung) innen.appendChild(el("p", w.beschreibung));
-  if (w.eltern) innen.appendChild(el("p", w.eltern, "leise"));
-  const fehlt = w.inhalte.filter((x) => x.fehlt).map((x) => x.art);
-  for (const x of w.inhalte.filter((y) => !y.fehlt)) {
-    const p = el("p", null, "spiele-links inhalt");
-    p.appendChild(document.createTextNode(x.art === "geschichte" ? "Geschichte: " : "Spiel: "));
-    const a = el("a", x.titel);
-    a.href = x.art === "geschichte"
-      ? `geschichte.html?id=${encodeURIComponent(x.id)}&eltern&weiter=eltern.html`
-      : (x.datei || x.id + ".html") + "?eltern";
-    p.appendChild(a);
-    if (x.am) p.appendChild(el("span", `${x.art === "geschichte" ? "gelesen" : "zuerst gespielt"} ${amDatum(x.am)}`, "leise"));
-    innen.appendChild(p);
+  for (const w of rg.welten.map((id) => weltNach.get(id)).filter(Boolean)) {
+    if (w.beschreibung) innen.appendChild(el("p", w.beschreibung));
+    if (w.eltern) innen.appendChild(el("p", w.eltern, "leise"));
   }
-  if (fehlt.length) innen.appendChild(el("p", fehlt.length === 2 ? "Geschichte und Spiel entstehen noch."
-    : fehlt[0] === "geschichte" ? "Eine Geschichte entsteht noch." : "Ein Spiel entsteht noch.", "leise"));
+  const ul = el("ul", null, "buecher");
+  for (const b of rg.buecher) {
+    const p = el("li", null, "spiele-links inhalt" + (b.da ? "" : " leise"));
+    if (b.da) {
+      const a = el("a", b.titel);
+      a.href = `geschichte.html?id=${encodeURIComponent(b.id)}&eltern&weiter=eltern.html`;
+      p.appendChild(a);
+      p.appendChild(el("span", b.am ? `gelesen ${amDatum(b.am)}` : "noch nicht gelesen", "leise"));
+    } else p.append(el("span", b.titel), el("span", "kommt noch", "leise"));
+    ul.appendChild(p);
+  }
+  innen.appendChild(ul);
   det.appendChild(innen);
   li.appendChild(det);
   return li;
