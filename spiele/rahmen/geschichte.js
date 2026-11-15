@@ -320,7 +320,14 @@ export class LsGeschichte extends HTMLElement {
     /** @type {Element | null} */
     this.leiste = null;
     this.beiTon = (/** @type {Event} */ e) => {
-      if (/** @type {CustomEvent} */ (e).detail?.an !== false || this.modus === "selbst") return;
+      const an = /** @type {CustomEvent} */ (e).detail?.an !== false;
+      if (this.istBuch) {
+        // Sachbuch: Ton aus → Selbst lesen, die Wahl verschwindet; Ton an → die Wahl ist wieder da
+        this.wahlEl.hidden = !an;
+        if (!an) { clearTimeout(this.autoTimer); this.setzeModus("selbst"); }
+        return;
+      }
+      if (an || this.modus === "selbst") return;
       clearTimeout(this.autoTimer);
       this.setzeAngehalten(false);
       if (this.modus === null) { this.modus = "selbst"; this.zeigeWahl(false); this.zeigeText(); }
@@ -368,6 +375,7 @@ export class LsGeschichte extends HTMLElement {
         get frageSeite() { return el.liste.findIndex((s) => s.frage === true); },
         get kapitel() { return el.kapitel; },
         get kapitelZahl() { return el.kapitelZahl; },
+        get stand() { return el.stand; },
         oeffne: (/** @type {number} */ k, /** @type {number} */ s = 0) => el.oeffne(k, s),
         inhalt: () => el.zeigeInhalt(),
         waehle: (/** @type {"vorlesen" | "selbst"} */ m) => el.waehle(m),
@@ -624,7 +632,10 @@ export class LsGeschichte extends HTMLElement {
     if (!st) return;
     const k = Math.min(Math.max(0, st.kapitel | 0), Math.max(0, this.kapitelZahl - 1));
     const n = this.daten?.kapitel?.[k]?.seiten.length ?? 1;
-    this.stand = { kapitel: k, seite: Math.min(Math.max(0, st.seite | 0), n - 1), fertig: [...(st.fertig ?? [])] };
+    // Kommt der Stand erst, wenn schon ein Kapitel offen ist: das offene Kapitel bleibt, fertige Kapitel werden vereinigt.
+    const fertig = [...new Set([...this.stand.fertig, ...(st.fertig ?? [])])].sort((a, b) => a - b);
+    this.stand = this.kapitel >= 0 ? { ...this.stand, fertig }
+      : { kapitel: k, seite: Math.min(Math.max(0, st.seite | 0), n - 1), fertig };
     this.hatStand = true;
     if (this.kapitel < 0) this.zeigeInhalt();
   }

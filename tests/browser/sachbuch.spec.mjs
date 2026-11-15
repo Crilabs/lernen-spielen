@@ -112,6 +112,31 @@ for (const typ of [chromium, webkit]) {
   pruefe(!(await gespeichert(p)).buecher, `${name}: Vorschau der Eltern merkt keinen Stand`);
   await p.close();
 
+  // Nur das letzte Kapitel gelesen und „Fertig“: das Buch gilt noch nicht als gelesen (Spec §7)
+  p = await oeffne(browser);
+  await p.evaluate(() => { const l = window.lsGeschichte; l.oeffne(l.kapitelZahl - 1); while (l.seite < l.seiten - 1) l.weiter(); });
+  await Promise.all([p.waitForURL(/themen\.html/), p.evaluate(() => window.lsGeschichte.fertig())]);
+  await p.waitForLoadState("networkidle"); await p.waitForTimeout(300);
+  pruefe(!(await gespeichert(p)).sachthemen?.geschichten?.probebuch, `${name}: nur letztes Kapitel + Fertig – Buch noch nicht gelesen`);
+  await p.close();
+
+  // Stand kommt erst nach dem ersten Kapitel an: aufgeschlagenes Kapitel bleibt, fertige Kapitel werden vereinigt
+  p = await oeffne(browser);
+  await p.evaluate(() => { window.lsGeschichte.oeffne(0); document.querySelector("ls-geschichte").setzeStand({ kapitel: 3, seite: 2, fertig: [1, 2] }); });
+  const st2 = await p.evaluate(() => window.lsGeschichte.stand);
+  pruefe((await G(p)).kapitel === 0 && st2.kapitel === 0 && [1, 2].every((k) => st2.fertig.includes(k)), `${name}: später Stand überschreibt das offene Kapitel nicht ${JSON.stringify(st2)}`);
+  await p.close();
+
+  // Ton aus im Inhaltsverzeichnis: keine Wahl mehr, Selbst lesen, nichts blättert stumm von selbst
+  p = await oeffne(browser);
+  await p.locator("ls-leiste").evaluate((el) => el.shadowRoot.querySelector(".tonknopf").click());
+  pruefe(await p.evaluate(() => window.lsGeschichte.modus) === "selbst" && await sr(p, (el) => el.shadowRoot.querySelector(".wahl").hidden),
+    `${name}: Ton aus im Inhaltsverzeichnis – Selbst lesen, Wahl verborgen`);
+  await p.evaluate(() => window.lsGeschichte.oeffne(0));
+  await p.waitForTimeout(8000);
+  pruefe((await G(p)).seite === 0, `${name}: Ton aus – kein stummes Selbstblättern`);
+  await p.close();
+
   // Alte Form mit seiten (Lerngeschichte) spielt weiter wie bisher
   const lp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await lp.goto(`${basis}/spiele/geschichte.html?id=zehnerpaare&pruefen`);

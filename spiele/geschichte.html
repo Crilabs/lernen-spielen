@@ -70,7 +70,9 @@ geschichte.addEventListener("stand", (e) => {
   merkeBuchStand(id, { kapitel, seite, fertig }, kapitelZahl).catch((f) => protokoll("Buchstand: " + f));
 });
 geschichte.addEventListener("fertig", async () => {
-  if (gefunden && !suche.has("eltern")) {
+  // Sachbuch: „gelesen“ erst, wenn alle Kapitel fertig sind (merkeBuchStand), nicht schon beim Fertig im letzten Kapitel
+  const buch = geschichte.kapitelZahl > 0;
+  if (gefunden && !buch && !suche.has("eltern")) {
     try { await merkeGeschichteGelesen(id); } catch (e) { protokoll("Geschichte gelesen: " + e); }
   }
   location.href = weiter;

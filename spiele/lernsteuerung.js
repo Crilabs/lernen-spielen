@@ -859,7 +859,9 @@ export async function merkeBuchStand(id, wo, kapitelZahl, heute = echteUhr().heu
   if (!id) return;
   const stand = await ladeStand();
   if (!istObjekt(stand.buecher)) stand.buecher = {};
-  const b = bereinigeBuchStand(wo);
+  // Fertige Kapitel gehen nie verloren: ein früher, leerer Stand (z. B. vor dem Laden) wird vereinigt
+  const alt = istObjekt(stand.buecher[id]) ? bereinigeBuchStand(stand.buecher[id]).fertig : [];
+  const b = bereinigeBuchStand({ ...wo, fertig: [...alt, ...(Array.isArray(wo?.fertig) ? wo.fertig : [])] });
   stand.buecher[id] = b;
   if (kapitelZahl > 0 && b.fertig.filter((k) => k < kapitelZahl).length >= kapitelZahl) merkeSachthema(stand, "geschichten", id, heute);
   speichere(STAND_KEY, stand);

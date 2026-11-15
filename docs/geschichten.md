@@ -144,6 +144,17 @@ Ein **Sachbuch** hat statt `seiten` die Liste `kapitel` (`[{ "titel": "…", "se
   der Text auf einer Papierfläche daneben in Andika, beide mit Stufen-Schatten in der Kulissenfarbe; Vorlesen
   (Florian, vorab aufgenommen, `npm run audio`), Weiter und Zurück per Tipp, Wischen und Pfeiltaste, Haus; Fortschritt
   als Punkte ohne Zahl; nach der letzten Seite „Fertig“ (Ereignis `fertig`).
+- **Sachbuch** (`kapitel`, Christian 2026-11-15): Am Anfang steht das **Inhaltsverzeichnis** – Buchtitel, Umschalter
+  „Vorlesen“ / „Selbst lesen“ (bei Ton an ist Vorlesen vorgewählt; bei Ton aus fehlt der Umschalter, es gilt Selbst
+  lesen) und die Kapitel als Karten (Foto der ersten Seite, Titel, Haken für fertig). Gibt es einen Lesestand, steht oben
+  „Weiterlesen: Kapitel n“. Eine Karte schlägt ihr Kapitel auf; es läuft wie eine Geschichte (Punkte je Kapitel), oben in
+  der Textkarte der Knopf „Inhalt“ (`symbole/inhalt.svg`). Am Kapitelende „Kapitel n+1“, im letzten Kapitel „Fertig“;
+  der Vorlesemodus blättert nie über ein Kapitelende. Text mit Absätzen (Leerzeile), langer Text scrollt.
+- **Lesestand:** `<ls-geschichte>` meldet bei jedem Seitenwechsel das Ereignis `stand` (`{ kapitel, seite, fertig,
+  kapitelZahl }`); ein Kapitel ist fertig, sobald seine letzte Seite aufgeschlagen ist. `geschichte.html` speichert mit
+  `merkeBuchStand` (Lernstand `buecher.<id>`; fertige Kapitel werden vereinigt, nie verloren) und gibt den gespeicherten
+  Stand mit `setzeStand` zurück. Das Buch gilt als gelesen, wenn alle Kapitel fertig sind – nicht schon durch „Fertig“
+  im letzten Kapitel. In der Vorschau der Eltern (`&eltern`) wird nichts gemerkt.
 - **Startwahl:** Bei Ton an zeigt die erste Seite den Titel und „Vorlesen“ / „Selbst lesen“; vorher wird nichts gelesen,
   wer ohne Wahl blättert, liest selbst. Bei Ton aus keine Wahl.
 - **Vorlesen:** Der Erzähler liest jede Seite beim Aufschlagen (`sprich`, sonst `text`) und blättert nach 1,5 s Ruhe
@@ -156,6 +167,7 @@ Ein **Sachbuch** hat statt `seiten` die Liste `kapitel` (`[{ "titel": "…", "se
 - Seitenwechsel ruhig (Überblenden mit kleinem Schub, nur `transform`/`opacity`; bei wenig Bewegung nur Überblenden).
   Die Kinder der Runde stehen in einer eigenen Ebene und bleiben beim Blättern stehen.
 - Prüfen: `?pruefen` gibt `window.lsGeschichte` (`seite`, `seiten`, `weiterBereit`, `modus`, `angehalten`,
-  `frageSeite`, `waehle(m)`, `halte()`, `weiter()`, `zurueck()`, `fertig()`); `tests/geschichten.test.mjs` prüft das Format, `tests/browser/geschichte.spec.mjs` das Blättern.
+  `frageSeite`, `waehle(m)`, `halte()`, `weiter()`, `zurueck()`, `fertig()`; Sachbuch: `kapitel` (-1 = Inhalt),
+  `kapitelZahl`, `stand`, `oeffne(k, seite)`, `inhalt()`; Prüfung `tests/browser/sachbuch.spec.mjs`); `tests/geschichten.test.mjs` prüft das Format, `tests/browser/geschichte.spec.mjs` das Blättern.
 - Vor dem Spiel: Die Lerngeschichte eines Themas kommt beim ersten Start des Themas und bleibt über „Anleitung“ wieder
   aufrufbar; Sachgeschichten stehen im Bücherregal der Startseite (Christian; Umbau nach der Probe).

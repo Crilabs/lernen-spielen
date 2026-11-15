@@ -135,3 +135,9 @@ test("Buchstand: alle Kapitel fertig → das Buch gilt als gelesen (einmal, erst
   await L.merkeBuchStand("katzen", { kapitel: 0, seite: 0, fertig: [0, 1, 2, 3, 4] }, 5, "2026-11-14");
   assert.deepEqual(JSON.parse(speicher.get(SCHLUESSEL)).sachthemen.geschichten.katzen, { am: "2026-11-12" });
 });
+
+test("Buchstand: fertige Kapitel gehen nie verloren (ein früher, leerer Stand überschreibt sie nicht)", async () => {
+  await L.merkeBuchStand("katzen", { kapitel: 3, seite: 1, fertig: [0, 1, 2] }, 6);
+  await L.merkeBuchStand("katzen", { kapitel: 0, seite: 0, fertig: [] }, 6);
+  assert.deepEqual(await L.ladeBuchStand("katzen"), { kapitel: 0, seite: 0, fertig: [0, 1, 2] });
+});
