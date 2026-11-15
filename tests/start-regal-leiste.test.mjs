@@ -51,6 +51,19 @@ test("zuletztHtml: die letzten fünf, neueste zuerst, Name und Material, jedes f
   assert.doesNotMatch(h, /2026-/);
 });
 
+test("von Eltern Abgehaktes ist still: nicht unter Zuletzt gelernt, im Regal hinter dem Erspielten", () => {
+  // gekonnteThemen liefert vonEltern zuerst (älteste Stelle), dann Erspieltes
+  const liste = [g("nomen", "grammatik", "Nomen erkennen", { art: null, zahl: null, vonEltern: true }),
+    g("plus3", "mathe", "Plus bis 3", { art: null, zahl: null, vonEltern: true }), g("z3", "mathe", "Die 3 zerlegen", { vonEltern: true }),
+    g("z2", "mathe", "Die 2 zerlegen", { seit: "2026-11-05" })];
+  const namen = [...zuletztHtml(liste).matchAll(/<span class="name">([^<]+)<\/span>/g)].map((m) => m[1]);
+  assert.deepEqual(namen, ["Die 2 zerlegen"]);
+  const mathe = regalBaum(liste, CTX, spieleFuer)[0];
+  assert.deepEqual(mathe.bereiche.map((b) => b.name), ["Zahlzerlegung", "Plus und Minus bis 10"]);
+  assert.deepEqual(mathe.bereiche[0].themen.map((t) => t.id), ["z2", "z3"]);
+  assert.equal(zuletztHtml(liste.slice(0, 3)).includes('class="leer"'), true);
+});
+
 test("zuletztHtml: leer → Satz und trotzdem der Knopf", () => {
   const h = zuletztHtml([]);
   assert.match(h, /<p class="leer">Hier steht, was du kannst\.<\/p>/);

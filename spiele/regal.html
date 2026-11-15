@@ -182,9 +182,10 @@ async function start() {
   const baum = regalBaum(gekonnteThemen(ctx, stand), ctx, spieleFuer);
 
   // Neu seit dem letzten Besuch (vor dem Merken lesen); gemerkt werden genau die jetzt gekonnten Ids, so fällt ein
-  // zurückgesetztes Thema still heraus.
+  // zurückgesetztes Thema still heraus. Von Eltern Abgehaktes ist nie neu (es steht still im Regal).
   const ids = gekonnt.map((g) => g.id), alt = einstellung(GESEHEN, null);
-  const neu = new Set(neuSeit(ids, alt));
+  const erspielt = gekonnt.filter((g) => !g.vonEltern).map((g) => g.id);
+  const neu = new Set(neuSeit(erspielt, alt));
   if (!Array.isArray(alt) || alt.length !== ids.length || alt.some((id, i) => id !== ids[i])) setzeEinstellung(GESEHEN, ids);
 
   if (!baum.length) { leer(leiste); return; }

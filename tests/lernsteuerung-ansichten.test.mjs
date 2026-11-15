@@ -33,7 +33,7 @@ test("gekonnteThemen: nach Datum des Gekonnt-Werdens, älteste zuerst, auch ohne
   markiereGekonnt(stand, "z5", "2026-11-12");
   const liste = gekonnteThemen(CTX, stand);
   assert.deepEqual(liste.map((x) => x.id), ["mengen", "sub", "z5", "z7"]); // Gleichstand: Planreihenfolge
-  assert.deepEqual(liste[0], { id: "mengen", name: "Name mengen", sprich: "Sprich mengen", strang: "mathe", art: "menge", zahl: 5, seit: "2026-11-10", bereich: "", regal: null });
+  assert.deepEqual(liste[0], { id: "mengen", name: "Name mengen", sprich: "Sprich mengen", strang: "mathe", art: "menge", zahl: 5, seit: "2026-11-10", bereich: "", regal: null, vonEltern: false });
   assert.equal(liste[1].art, null);
   assert.equal(liste[1].zahl, null);
   assert.equal(liste[1].bereich, "Satzglieder");

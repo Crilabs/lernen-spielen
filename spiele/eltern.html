@@ -76,7 +76,7 @@ a { color: inherit; text-underline-offset: 0.35em; text-decoration-thickness: 0.
 /* Eingriff, der etwas wegnimmt: Kontur und Wort in Beere; beim „Wirklich?“ gefüllt. */
 ls-knopf.aus { opacity: 0.45; pointer-events: none; }
 
-/* --- Lernstand ------------------------------------------------------------------------------------ */
+/* --- Lernplan ------------------------------------------------------------------------------------- */
 .fach-kopf { display: flex; align-items: center; gap: 2.4rem; }
 .fach-kopf .zuletzt { margin-left: auto; text-align: right; }
 .fachkachel {
@@ -90,14 +90,8 @@ ls-knopf.aus { opacity: 0.45; pointer-events: none; }
 }
 .fachkachel.ohne i { display: none; }
 .fach-kopf h3 { color: var(--fach-tief, var(--ls-tinte)); }
-.stand { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-.stand h4 { margin-bottom: 1.2rem; }
-.stand ul { display: flex; flex-direction: column; gap: 1.4rem; }
-.stand li { display: flex; flex-direction: column; }
-.dran-zeile { border-left: 0.6rem solid var(--fach-fuellung, var(--ls-linie)); padding-left: 2rem; }
-.dran-zeile .name { font-weight: 700; }
-.dran-zeile .oefter { margin-top: 0.4rem; }
 .flaeche > .spiele-links { max-width: none; border-top: var(--ls-kontur) solid var(--ls-linie); padding-top: 2rem; }
+.lp-filter { --ls-breite: 22rem; display: flex; flex-wrap: wrap; gap: 1.6rem 2rem; margin-top: -1.6rem; }
 
 .spiel-beschreibungen { display: flex; flex-direction: column; gap: 0.4rem; }
 .spiel-beschreibung > summary { min-height: 6rem; display: flex; align-items: center; gap: 1.2rem; font-weight: 700; }
@@ -110,31 +104,58 @@ ls-knopf.aus { opacity: 0.45; pointer-events: none; }
 .spiel-beschreibung > p { margin: 0 0 1.6rem 3.6rem; color: var(--ls-tinte-weich); max-width: 70ch; }
 
 /* Zum Aufklappen: eine zusammengeklappte Liste je Fach, jede Zeile klappt die Eingriffe auf. */
+/* Bereich und Thema klappen auf; der Pfeil zeigt, ob offen. .aufklapp: die Listen unter „Hinweise“. */
 details > summary { list-style: none; cursor: pointer; }
 details > summary::-webkit-details-marker { display: none; }
 .aufklapp > summary {
   display: flex; align-items: center; gap: 1.6rem; min-height: 8rem;
   font-weight: 700; border-top: var(--ls-kontur) solid var(--ls-linie); padding-top: 1.6rem;
 }
-.aufklapp > summary::before, .thema > summary::before {
+.aufklapp > summary .anzahl { font-weight: 400; color: var(--ls-tinte-weich); }
+.klasse-titel { margin: 2.4rem 0 0.8rem; color: var(--ls-tinte-weich); font-weight: 700; font-size: 2.2rem; }
+.lp-bereich { border-top: var(--ls-kontur) solid var(--ls-linie); }
+.lp-bereich > summary { display: flex; align-items: center; gap: 1.6rem; min-height: 8rem; padding: 1.2rem 0; }
+.lp-bereich > summary .name { font-weight: 700; }
+.lp-bereich > summary .zustand { margin-left: auto; font-size: 2.2rem; }
+.lp-bereich > summary::before, .aufklapp > summary::before, .thema > summary::before {
   content: ""; flex: none; width: 1.4rem; height: 1.4rem;
   border-right: 0.35rem solid var(--ls-tinte); border-bottom: 0.35rem solid var(--ls-tinte);
   transform: rotate(-45deg); margin: 0 0.6rem 0 0.2rem;
 }
-.aufklapp[open] > summary::before, .thema[open] > summary::before { transform: rotate(45deg); }
-.aufklapp > summary .anzahl { font-weight: 400; color: var(--ls-tinte-weich); }
-.klasse-titel { margin: 2.4rem 0 0.8rem; color: var(--ls-tinte-weich); font-weight: 700; font-size: 2.2rem; }
+.lp-bereich[open] > summary::before, .aufklapp[open] > summary::before, .thema[open] > summary::before { transform: rotate(45deg); }
+.lp-bereich-innen { display: flex; flex-direction: column; gap: 2rem; padding: 0 0 2.4rem 3.6rem; }
 .themen { display: flex; flex-direction: column; gap: 0.8rem; }
+
+/* Thema: Zustand als Farbe (Fläche und Punkt) und Wort. Gekonnt in der Tönung des Fachs mit Haken im Tief-Ton,
+   gerade dran in Sonne, offen ruhig in Nebel. Keine Bewertungsfarben (kein Grün, kein Rot). */
 .thema { border-radius: var(--ls-radius-klein); background: var(--ls-nebel); }
+.thema.z-kann-ich { background: var(--fach-toenung, var(--ls-nebel)); }
+.thema.z-dran { background: color-mix(in srgb, var(--ls-sonne) 30%, var(--ls-papier)); }
 .thema > summary { display: flex; align-items: center; gap: 1.6rem; min-height: 8rem; padding: 1.2rem 2.4rem; }
+.thema .punkt {
+  flex: none; position: relative; width: 3rem; height: 3rem; box-sizing: border-box; border-radius: 50%;
+  border: var(--ls-kontur) solid var(--ls-naht); background: var(--ls-papier);
+}
+.thema.z-kann-ich .punkt { border-color: var(--fach-tief, var(--ls-tinte)); background: var(--fach-tief, var(--ls-tinte)); }
+.thema.z-kann-ich .punkt::after {
+  content: ""; position: absolute; left: 0.85rem; top: 0.35rem; width: 0.7rem; height: 1.4rem;
+  border-right: 0.35rem solid var(--ls-papier); border-bottom: 0.35rem solid var(--ls-papier); transform: rotate(45deg);
+}
+.thema.z-dran .punkt { border-color: var(--ls-tinte); background: var(--ls-sonne); }
 .thema .name { flex: 1; }
 .thema .wort {
   flex: none; font-size: 2.1rem; padding: 0.4rem 1.6rem; border-radius: 99rem;
   border: var(--ls-kontur) solid var(--ls-linie); background: var(--ls-papier); white-space: nowrap;
 }
-.thema.z-kann-ich .wort { border-color: var(--ls-tinte); }
-.thema.z-dran .wort { border-color: var(--ls-tinte); background: var(--fach-toenung, var(--ls-papier)); }
+.thema.z-kann-ich .wort, .thema.z-dran .wort { border-color: var(--ls-tinte); }
 .thema.z-verborgen .name, .thema.z-verborgen .wort { color: var(--ls-tinte-weich); }
+/* Aufbauzeit: zwei Punkte je Thema, links digitales Spiel (Tinte), rechts Spiel mit echten Dingen (Holz); leer = noch keins. */
+.spielpunkte { flex: none; display: inline-flex; gap: 0.8rem; vertical-align: middle; }
+.spielpunkte i { display: block; width: 1.6rem; height: 1.6rem; box-sizing: border-box; border-radius: 50%; border: 0.25rem solid var(--ls-naht); }
+.spielpunkte i.d.da { background: var(--ls-tinte); border-color: var(--ls-tinte); }
+.spielpunkte i.a.da { background: var(--ls-kante); border-color: var(--ls-kante); }
+.lp-legende { display: flex; align-items: center; gap: 1.2rem; margin-top: -2rem; }
+.lp-legende .spielpunkte + * { margin-right: 2rem; }
 .thema .innen { padding: 0 2.4rem 2.4rem 5rem; display: flex; flex-direction: column; gap: 0.8rem; }
 
 /* --- Geschichten ---------------------------------------------------------------------------------- */
@@ -197,7 +218,7 @@ details > summary::-webkit-details-marker { display: none; }
 <section id="bereich" aria-label="Elternbereich" hidden>
   <nav class="el-nav" aria-label="Bereiche">
     <h1>Für Erwachsene</h1>
-    <ls-knopf data-tab="lernstand" symbol="lernstand.svg" wort="Lernstand" groesse="klein" stumm></ls-knopf>
+    <ls-knopf data-tab="lernstand" symbol="lernstand.svg" wort="Lernplan" groesse="klein" stumm></ls-knopf>
     <ls-knopf id="echte-dinge" symbol="hand.svg" wort="Mit echten Dingen" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="geschichten" symbol="buch.svg" wort="Geschichten" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="spielzeit" symbol="uhr.svg" wort="Spielzeit" groesse="klein" stumm></ls-knopf>
@@ -217,9 +238,10 @@ import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/g
 import { ladeEinstellungen, setzeEinstellung, geschichtenStufe, einstellung } from "./kern/einstellungen.js";
 import { regeln, aktuell, lage as spielLage, gibZugabe, ZUGABE_MINUTEN } from "./kern/spielzeit.js";
 import { STAND as SPIELZEIT_STAND } from "./rahmen/spielzeit.js";
-import { elternThemen, markiereGekonnt, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, gekonnteThemen, luecken }
+import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer }
   from "./lernsteuerung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
+import { ladeVerzeichnis } from "./rahmen/echte-dinge.js";
 import "./rahmen/knopf.js";
 
 sperreTouch();
@@ -359,13 +381,12 @@ function datum(tag) {
   return `${Number(m[3])}. ${MONATE[Number(m[2]) - 1]}${jahr}`;
 }
 const amDatum = (tag) => { const d = datum(tag); return d === "heute" || d === "gestern" ? d : "am " + d; };
-const seitDatum = (tag) => "seit " + datum(tag);
 
 let lernCtx = null;
 async function ladeCtx() {
   if (!lernCtx) {
     const [plan, spiele] = await Promise.all(["lernplan.json", "spiele.json"].map((f) => fetch(f).then((r) => r.json())));
-    lernCtx = { plan, spiele };
+    lernCtx = { plan, spiele, echteDinge: await ladeVerzeichnis() };
   }
   return lernCtx;
 }
@@ -376,8 +397,6 @@ const faecher = (ctx) => {
   for (const t of ctx.plan.themen || []) if (!folge.includes(t.strang)) folge.push(t.strang);
   return folge;
 };
-// Neutraler Bezug zum Lehrplan, nur hier (grundsaetze 3.3)
-const planBezug = (t) => (t?.klasse ? `im Lehrplan Klasse ${t.klasse}` : "");
 
 function fachFarben(strang, ziel) {
   const f = FACH[strang];
@@ -398,13 +417,14 @@ function fachKachel(strang) {
 
 // Knopf mit Bestätigung auf der Seite: erster Tipp fragt „Wirklich?“, zweiter führt aus (kein confirm-Dialog im Kiosk).
 // wegnehmen (Zurücksetzen): in Beere.
-function eingriffKnopf(text, tun, { wegnehmen = false } = {}) {
+// frage: eigener Text der Rückfrage (z. B. wie viele Themen davor mitkommen), erst beim ersten Tipp berechnet.
+function eingriffKnopf(text, tun, { wegnehmen = false, frage = null } = {}) {
   const b = knopf(text, { achtung: wegnehmen });
   let timer = null;
   b.addEventListener("click", () => {
     if (b.classList.contains("aus")) return;
     if (!timer) {
-      b.setAttribute("wort", "Wirklich? Nochmal tippen");
+      b.setAttribute("wort", frage ? frage() : "Wirklich? Nochmal tippen");
       b.setAttribute("art", "haupt");
       timer = setTimeout(() => { timer = null; b.setAttribute("wort", text); b.removeAttribute("art"); }, 4000);
       return;
@@ -416,133 +436,161 @@ function eingriffKnopf(text, tun, { wegnehmen = false } = {}) {
   return b;
 }
 
-// ---------- Lernstand ----------
-// Je Fach beschreibend, von Stärken aus (grundsaetze 3.3): was das Kind kann, was gerade dran ist, wann zuletzt
-// geübt. Der Lehrplan steht nur als leiser Bezug. Darunter, zugeklappt, die Themen einzeln mit den Eingriffen.
-// Keine Alltagsanregungen hier: die stehen ohne PIN an der Fach-Seite und im Regal („Mit echten Dingen“).
+// ---------- Lernplan ----------
+// Alle Themen je Fach als Baum Bereich → Thema, ohne Klassen (Christian: Klassen erzeugen Druck und sind nicht
+// bundeseinheitlich). Der Zustand steht als Farbe und Wort an der Zeile (gekonnt, gerade dran, offen), ein Filter
+// zeigt nur eins davon. Eltern haken Bereiche und Themen ab (hakeAb: samt offenen Voraussetzungen, still, nie in der
+// Wiederholung); Zurücksetzen in Beere. Beschreibend, von Stärken aus, ohne Zahlen als Fortschritt (grundsaetze 3.3).
+// Spec docs/superpowers/specs/2026-11-14-lernstand-lernplan-abhaken-design.md.
 const ZUSTAND = { "verborgen": "kommt später", "in-sicht": "kann als Nächstes kommen", "dran": "gerade dran", "kann-ich": "kann" };
 const STUFE = { material: "übt mit Material", vorstellung: "übt in der Vorstellung", kopf: "übt im Kopf" };
 const PROBE = "fängt an: eine kurze Probe zeigt, womit es beginnt";
-const offeneFaecher = new Set();
+const FILTER = [["alle", "Alle"], ["dran", "Gerade dran"], ["gekonnt", "Gekonnt"], ["offen", "Offen"]];
+const passt = { alle: () => true, dran: (t) => t.zustand === "dran", gekonnt: (t) => t.zustand === "kann-ich",
+  offen: (t) => t.zustand !== "dran" && t.zustand !== "kann-ich" };
+const LEER = { dran: "Gerade ist kein Thema dran.", gekonnt: "Hier steht, was das Kind kann, sobald es so weit ist.",
+  offen: "Alle Themen sind gekonnt." };
+let lpFilter = "alle";
+const offeneBereiche = new Set();
 let lernLauf = 0;
+
+// Rückfrage beim Abhaken: nennt, wie viele Themen davor mitkommen, und aus welchen anderen Fächern.
+function abhakFrage(ctx, stand, ids, strang) {
+  const alle = mitVoraussetzungen(ctx, stand, ids);
+  const nachId = new Map((ctx.plan.themen || []).map((t) => [t.id, t]));
+  const davor = alle.filter((id) => !ids.includes(id));
+  if (!davor.length) return "Wirklich? Nochmal tippen";
+  const andere = [...new Set(davor.map((id) => nachId.get(id)?.strang).filter((x) => x && x !== strang))].map((x) => fachName(ctx, x));
+  return `Wirklich? Mit ${davor.length === 1 ? "einem Thema" : davor.length + " Themen"} davor`
+    + (andere.length ? `, auch in ${andere.join(" und ")}` : "");
+}
 
 async function lernstand(spalte, offen) {
   const lauf = ++lernLauf;
-  spalte.append(el("h2", "Lernstand"),
-    el("p", "Was das Kind kann und woran es gerade ist, je Fach. Gemessen wird an der Sache, verglichen wird mit niemandem.", "vorspann"));
+  spalte.append(el("h2", "Lernplan"),
+    el("p", "Alle Themen, je Fach nach Bereichen. Was das Kind schon kann, lässt sich abhaken: Es kommt dann nicht noch einmal dran, und die Themen danach werden frei.", "vorspann"));
   let ctx, stand;
   try { ctx = await ladeCtx(); stand = await ladeLernstand(ctx, heuteTag()); }
   catch (e) {
-    protokoll("Lernstand: " + e);
+    protokoll("Lernplan: " + e);
     spalte.appendChild(el("p", "Der Lernplan konnte nicht geladen werden. Bitte den Bereich neu öffnen.", "flaeche"));
     return;
   }
   if (tab !== "lernstand" || lauf !== lernLauf) return; // inzwischen anderer Bereich oder neu gezeichnet
   const heute = heuteTag();
-  const planNach = new Map((ctx.plan.themen || []).map((t) => [t.id, t]));
   const liste = elternThemen(ctx, stand, heute);
-  const gekonnt = gekonnteThemen(ctx, stand);
   const spiele = ctx.spiele.spiele || [];
 
-  const eingriff = async (tun, id, strang) => {
-    tun();
-    speichere("lernplan", stand); await sofortSpeichern();
+  const neuZeichnen = async (id) => {
     if (tab !== "lernstand") return;
     const inh = $("inhalt"), oben = inh.scrollTop;
-    offeneFaecher.add(strang);
     spalte.replaceChildren();
     await lernstand(spalte, id);
     inh.scrollTop = oben;
   };
+  const eingriff = async (tun, id) => {
+    tun();
+    speichere("lernplan", stand); await sofortSpeichern();
+    await neuZeichnen(id);
+  };
 
+  // Filter: eine Reihe kleiner Knöpfe, der gewählte gefüllt
+  const filter = el("div", null, "lp-filter");
+  filter.setAttribute("role", "group");
+  filter.setAttribute("aria-label", "Zeigen");
+  for (const [id, wort] of FILTER) {
+    const k = knopf(wort);
+    k.setAttribute("groesse", "klein");
+    if (id === lpFilter) { k.setAttribute("art", "haupt"); k.setAttribute("aria-pressed", "true"); }
+    k.addEventListener("click", () => { if (lpFilter !== id) { lpFilter = id; neuZeichnen(offen); } });
+    filter.appendChild(k);
+  }
+  spalte.appendChild(filter);
+  // Für die Aufbauzeit (Christian): zwei Punkte je Thema zeigen, ob es schon ein digitales Spiel und ein Spiel mit
+  // echten Dingen gibt. Fällt weg, wenn die Spiele im aufgeklappten Thema stehen und alle Themen Spiele haben.
+  const legende = el("p", null, "lp-legende leise klein");
+  legende.innerHTML = '<span class="spielpunkte"><i class="d da"></i></span><span>digitales Spiel</span>'
+    + '<span class="spielpunkte"><i class="a da"></i></span><span>Spiel mit echten Dingen</span>';
+  spalte.appendChild(legende);
+
+  const zeigt = passt[lpFilter];
   let gezeigt = 0;
   for (const strang of faecher(ctx)) {
-    const themen = liste.find((s) => s.strang === strang)?.themen || [];
-    // Einzeln änderbar: Themen mit Spiel, dazu alles mit einem Stand (sonst ließe es sich nicht zurücksetzen)
-    const aenderbar = themen.filter((t) => t.luecke !== "ohne-spiel" || t.zustand === "dran" || t.zustand === "kann-ich" || t.frei);
-    const fachSpiele = spiele.filter((s) => s.kategorie === strang);
-    if (!aenderbar.length && !fachSpiele.length) continue;
+    const themen = liste.find((x) => x.strang === strang)?.themen || [];
+    if (!themen.length) continue;
+    // Bereiche in Planreihenfolge (erstes Vorkommen); ein Bereich in mehreren Klassen ist einer
+    const bereiche = new Map();
+    for (const t of themen) {
+      const b = t.bereich || "Weiteres";
+      if (!bereiche.has(b)) bereiche.set(b, []);
+      bereiche.get(b).push(t);
+    }
+    const sichtbar = [...bereiche].filter(([, ts]) => ts.some(zeigt));
+    if (!sichtbar.length) continue;
     gezeigt++;
 
     const block = el("section", null, "flaeche fach");
     block.setAttribute("aria-label", fachName(ctx, strang));
     fachFarben(strang, block);
-
-    // Kopf: Fachkachel, Name, zuletzt geübt
     const kopf = el("div", null, "fach-kopf");
     kopf.append(fachKachel(strang), el("h3", fachName(ctx, strang)));
     let zuletzt = null;
     for (const t of themen) {
       const e = stand.themen[t.id];
-      const u = e?.u || e?.seit || "";
+      const u = e?.q ? "" : e?.u || e?.seit || ""; // Abhaken ist kein Üben
       if (u && (!zuletzt || u > zuletzt.u)) zuletzt = { u, name: t.name };
     }
     if (zuletzt) kopf.appendChild(el("p", `Zuletzt geübt ${amDatum(zuletzt.u)}: ${zuletzt.name}`, "zuletzt leise klein"));
     block.appendChild(kopf);
 
-    // Kann | Gerade dran
-    const raster = el("div", null, "stand");
-    const kannSp = el("div");
-    kannSp.appendChild(el("h4", "Kann"));
-    const kannListe = gekonnt.filter((g) => g.strang === strang).reverse(); // neueste zuerst
-    if (kannListe.length) {
-      const ul = el("ul");
-      for (const g of kannListe) {
-        const li = el("li");
-        li.appendChild(el("span", g.name));
-        const neben = [g.seit ? seitDatum(g.seit) : "", planBezug(planNach.get(g.id))].filter(Boolean).join(", ");
-        if (neben) li.appendChild(el("span", neben, "leise klein"));
-        ul.appendChild(li);
-      }
-      kannSp.appendChild(ul);
-    } else kannSp.appendChild(el("p", "Hier steht, was das Kind sicher kann, sobald es so weit ist.", "leise"));
-    const dranSp = el("div");
-    dranSp.appendChild(el("h4", "Gerade dran"));
-    const dran = themen.filter((t) => t.zustand === "dran");
-    if (dran.length) {
-      const ul = el("ul");
-      for (const t of dran) {
-        const e = stand.themen[t.id];
-        const li = el("li", null, "dran-zeile");
-        li.append(el("span", t.name, "name"), el("span", STUFE[t.stufe] || PROBE));
-        const seit = e?.seit ? (t.geradeDran ? "neu " : "dran ") + seitDatum(e.seit) : "";
-        const neben = [seit, planBezug(planNach.get(t.id))].filter(Boolean).join(", ");
-        if (neben) li.appendChild(el("span", neben, "leise klein"));
-        if (t.wackelig.length) li.appendChild(el("span", "Kommt gerade öfter dran: " + t.wackelig.map(aufgabeLesbar).join(", "), "oefter klein"));
-        ul.appendChild(li);
-      }
-      dranSp.appendChild(ul);
-    } else dranSp.appendChild(el("p", "Im Moment ist kein Thema dran.", "leise"));
-    raster.append(kannSp, dranSp);
-    block.appendChild(raster);
-
-    // Themen einzeln, mit Eingriffen
-    if (aenderbar.length) {
-      const det = el("details", null, "aufklapp");
-      det.open = offeneFaecher.has(strang);
-      det.addEventListener("toggle", () => { if (det.open) offeneFaecher.add(strang); else offeneFaecher.delete(strang); });
+    for (const [name, alleThemen] of sichtbar) {
+      const key = strang + "|" + name;
+      const gezeigte = alleThemen.filter(zeigt);
+      const det = el("details", null, "lp-bereich");
+      det.open = lpFilter !== "alle" || offeneBereiche.has(key) || alleThemen.some((t) => t.id === offen);
       const sum = el("summary");
-      sum.append(el("span", "Themen einzeln ansehen und ändern"), el("span", `(${aenderbar.length})`, "anzahl"));
+      const kann = alleThemen.filter((t) => t.zustand === "kann-ich").length;
+      const dran = alleThemen.some((t) => t.zustand === "dran");
+      const worte = [kann === alleThemen.length ? "alles gekonnt" : kann ? "teils gekonnt" : "", dran ? "gerade dran" : ""].filter(Boolean).join(", ");
+      sum.append(el("span", name, "name"), el("span", worte, "zustand leise"));
       det.appendChild(sum);
-      let klasse, ul = null;
-      for (const t of aenderbar) {
-        const p = planNach.get(t.id);
-        if (!ul || p?.klasse !== klasse) {
-          klasse = p?.klasse;
-          det.appendChild(el("p", klasse ? `Klasse ${klasse}` : "Ohne Klasse", "klasse-titel"));
-          ul = el("ul", null, "themen"); det.appendChild(ul);
+      const innen = el("div", null, "lp-bereich-innen");
+      det.appendChild(innen);
+      // Themenzeilen erst beim Aufklappen zeichnen (956 Themen): der Reiter steht sofort
+      const fuelle = () => {
+        if (innen.childElementCount) return;
+        const knoepfe = reihe();
+        const offenIds = alleThemen.filter((t) => t.zustand !== "kann-ich").map((t) => t.id);
+        if (offenIds.length) {
+          const k = eingriffKnopf("Alles abhaken", () => eingriff(() => hakeAb(ctx, stand, offenIds, heute), null),
+            { frage: () => abhakFrage(ctx, stand, offenIds, strang) });
+          knoepfe.appendChild(k);
         }
-        ul.appendChild(themaZeile(t, p, stand, ctx, heute, offen, (tun) => eingriff(tun, t.id, strang)));
-      }
+        const mitStand = alleThemen.filter((t) => t.zustand === "dran" || t.zustand === "kann-ich" || t.frei);
+        if (mitStand.length) {
+          knoepfe.appendChild(eingriffKnopf("Zurücksetzen", () => eingriff(() => { for (const t of mitStand) setzeZurueck(ctx, stand, t.id); }, null),
+            { wegnehmen: true }));
+        }
+        for (const k of knoepfe.children) k.setAttribute("groesse", "klein");
+        if (knoepfe.children.length) innen.appendChild(knoepfe);
+        const ul = el("ul", null, "themen");
+        for (const t of gezeigte) ul.appendChild(themaZeile(t, stand, ctx, heute, offen, strang, (tun) => eingriff(tun, t.id)));
+        innen.appendChild(ul);
+      };
+      det.addEventListener("toggle", () => {
+        if (det.open) { offeneBereiche.add(key); fuelle(); } else offeneBereiche.delete(key);
+      });
+      if (det.open) fuelle();
       block.appendChild(det);
     }
 
+    const fachSpiele = spiele.filter((x) => x.kategorie === strang);
     if (fachSpiele.length) {
       const p = el("p", null, "spiele-links klein");
       p.appendChild(document.createTextNode("Was die Spiele selbst zeigen: "));
-      fachSpiele.forEach((s, i) => {
+      fachSpiele.forEach((x, i) => {
         if (i) p.appendChild(document.createTextNode(", "));
-        const a = el("a", s.titel || s.id); a.href = (s.datei || s.id + ".html") + "?eltern"; p.appendChild(a);
+        const a = el("a", x.titel || x.id); a.href = (x.datei || x.id + ".html") + "?eltern"; p.appendChild(a);
       });
       block.appendChild(p);
       // Beschreibung für Erwachsene (Feld `beschreibung` in spiele.json): ruhig, je Spiel zum Aufklappen.
@@ -560,21 +608,26 @@ async function lernstand(spalte, offen) {
     }
     spalte.appendChild(block);
   }
-  if (!gezeigt) {
-    spalte.appendChild(el("p", "Sobald es Spiele gibt und das Kind spielt, steht hier je Fach, was es kann und woran es gerade ist.", "flaeche"));
-  }
+  if (!gezeigt) spalte.appendChild(el("p", LEER[lpFilter] || "Der Lernplan ist leer.", "flaeche leise"));
 }
 
-function themaZeile(t, p, stand, ctx, heute, offen, eingriff) {
+function themaZeile(t, stand, ctx, heute, offen, strang, eingriff) {
   const li = el("li");
   const det = el("details", null, "thema z-" + t.zustand);
   det.open = t.id === offen;
   const sum = el("summary");
-  sum.append(el("span", t.name, "name"), el("span", ZUSTAND[t.zustand] || t.zustand, "wort"));
+  const punkt = el("span", null, "punkt");
+  punkt.setAttribute("aria-hidden", "true");
+  const digital = t.luecke !== "ohne-spiel";
+  const ed = echteDingeFuer(ctx, t.id);
+  const analog = !!ed?.formen?.length && !ed.entwurf;
+  const spielpunkte = el("span", null, "spielpunkte");
+  spielpunkte.innerHTML = `<i class="d${digital ? " da" : ""}"></i><i class="a${analog ? " da" : ""}"></i>`;
+  spielpunkte.setAttribute("aria-label", [digital ? "digitales Spiel" : "", analog ? "Spiel mit echten Dingen" : ""].filter(Boolean).join(", ") || "noch kein Spiel");
+  spielpunkte.title = spielpunkte.getAttribute("aria-label");
+  sum.append(punkt, el("span", t.name, "name"), spielpunkte, el("span", ZUSTAND[t.zustand] || t.zustand, "wort"));
   det.appendChild(sum);
   const innen = el("div", null, "innen");
-  const bezug = [planBezug(p), p?.bereich].filter(Boolean).join(", ");
-  if (bezug) innen.appendChild(el("p", bezug, "leise klein"));
   if (t.zustand === "dran") innen.appendChild(el("p", "Im Moment: " + (STUFE[t.stufe] || PROBE) + "."));
   if (t.wackelig.length) innen.appendChild(el("p", "Kommt gerade öfter dran: " + t.wackelig.map(aufgabeLesbar).join(", ")));
   if (t.frei && t.zustand !== "kann-ich") innen.appendChild(el("p", "Von Ihnen freigegeben.", "leise"));
@@ -582,8 +635,9 @@ function themaZeile(t, p, stand, ctx, heute, offen, eingriff) {
   const mitSpiel = t.luecke !== "ohne-spiel";
   if (!mitSpiel) innen.appendChild(el("p", "Für dieses Thema gibt es noch kein Spiel. Das Kind sieht es nicht.", "leise"));
   const knoepfe = reihe();
-  if (mitSpiel && t.zustand !== "kann-ich")
-    knoepfe.appendChild(eingriffKnopf("Als gekonnt markieren", () => eingriff(() => markiereGekonnt(stand, t.id, heute, ctx))));
+  if (t.zustand !== "kann-ich")
+    knoepfe.appendChild(eingriffKnopf("Als gekonnt markieren", () => eingriff(() => hakeAb(ctx, stand, [t.id], heute)),
+      { frage: () => abhakFrage(ctx, stand, [t.id], strang) }));
   if (mitSpiel && t.zustand === "verborgen")
     knoepfe.appendChild(eingriffKnopf("Freigeben", () => eingriff(() => gibFrei(stand, t.id))));
   if (t.zustand === "dran" || t.zustand === "kann-ich" || t.frei)
