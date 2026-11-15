@@ -1,0 +1,90 @@
+// Warteschlange der Verwaltung (docs/superpowers/specs/2026-11-16-verwaltung-design.md, „Aufträge“).
+// Reine Listenfunktionen (geben neue Listen zurück) und Lesen/Schreiben von werkzeuge/verwaltung/auftraege.json.
+
+import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+
+export const ARTEN = ["spiel", "echte-dinge", "buch", "einfuehrung", "frei"];
+export const STATUS = ["wartet", "laeuft", "erledigt", "wartet-auf-christian", "fehlgeschlagen", "gestrichen"];
+
+const ID = /^[A-Za-z0-9-]+$/;
+
+/** Der Text, mit dem der Lauf Claude beauftragt. */
+export function befehlFuer(art, ziel) {
+  const liste = Array.isArray(ziel) ? ziel : [ziel];
+  switch (art) {
+    case "spiel": return `Spiel entwickeln ${liste[0]}`;
+    case "echte-dinge": return `Mit echten Dingen ${liste.join(" ")}`;
+    case "buch": return `Sachgeschichte ${liste[0]}`;
+    case "einfuehrung":
+      return `Einführung für Thema ${liste[0]} nach den Vorlagen in spiele/einfuehrungen/ und dem Feld einfuehrung im Lernplan`;
+    case "frei": return String(ziel);
+    default: throw new Error(`Art muss ${ARTEN.join(", ")} sein (war: ${art})`);
+  }
+}
+
+/** Legt einen wartenden Auftrag an; prüft Art und Ziel. */
+export function neuerAuftrag({ art, ziel, schaetzung_eur = null }, jetzt = new Date()) {
+  if (!ARTEN.includes(art)) throw new Error(`Art muss ${ARTEN.join(", ")} sein (war: ${art})`);
+  const liste = Array.isArray(ziel) ? ziel : [ziel];
+  const leer = !liste.length || liste.some((z) => typeof z !== "string" || !z.trim());
+  if (leer) throw new Error("Ziel fehlt");
+  if (art !== "frei" && !liste.every((z) => ID.test(z))) throw new Error(`Ziel muss eine Id sein (war: ${liste.join(" ")})`);
+  if (art !== "echte-dinge" && liste.length > 1) throw new Error("Ziel: nur eine Id für diese Art");
+  return {
+    id: `a-${jetzt.getTime()}-${Math.random().toString(36).slice(2, 7)}`,
+    art,
+    ziel: art === "echte-dinge" ? liste : liste[0],
+    befehl: befehlFuer(art, ziel),
+    schaetzung_eur,
+    angelegt: jetzt.toISOString(),
+    status: "wartet",
+    gestartet: null,
+    beendet: null,
+    ergebnis: null,
+    notiz: "",
+  };
+}
+
+/** Verschiebt einen Auftrag um eine Stelle (-1 hoch, 1 runter). */
+export function verschiebe(liste, id, richtung) {
+  const i = liste.findIndex((a) => a.id === id);
+  const j = i + richtung;
+  if (i < 0 || j < 0 || j >= liste.length) return [...liste];
+  const neu = [...liste];
+  [neu[i], neu[j]] = [neu[j], neu[i]];
+  return neu;
+}
+
+/** Streicht einen wartenden Auftrag; andere bleiben unverändert. */
+export function streiche(liste, id) {
+  return liste.map((a) => (a.id === id && a.status === "wartet" ? { ...a, status: "gestrichen" } : a));
+}
+
+export const naechsterWartender = (liste) => liste.find((a) => a.status === "wartet") ?? null;
+
+/** Status eines Auftrags aus der Ergebnisdatei des Skills (null = keine Datei). */
+export function statusAusErgebnis(ergebnis) {
+  switch (ergebnis?.status) {
+    case "gruen": case "erledigt": return "erledigt";
+    case "freigabe": case "geparkt": return "wartet-auf-christian";
+    default: return "fehlgeschlagen";
+  }
+}
+
+export function ladeAuftraege(datei) {
+  if (!existsSync(datei)) return [];
+  try {
+    const l = JSON.parse(readFileSync(datei, "utf8"));
+    if (!Array.isArray(l)) throw new Error("keine Liste");
+    return l;
+  } catch {
+    throw new Error(`auftraege.json ist kein gültiges JSON (${datei}); bitte von Hand prüfen`);
+  }
+}
+
+/** Schreibt über eine Zwischendatei, damit ein Abbruch nie eine halbe Datei hinterlässt. */
+export function speichereAuftraege(datei, liste) {
+  const tmp = `${datei}.tmp-${process.pid}`;
+  writeFileSync(tmp, JSON.stringify(liste, null, 1) + "\n");
+  renameSync(tmp, datei);
+}
