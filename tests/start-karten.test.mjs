@@ -10,7 +10,8 @@ test("Spielkarte: ganze Karte ist ein Link mit ?thema, Name fürs Vorlesen, Vign
   const h = spielKarteHtml({ spiel: SPIEL, thema: { id: "zerlegen 5", name: "Die 5 zerlegen" } }, "mathe", "<svg>V</svg>");
   assert.match(h, /^<a class="karte spiel" href="m14\.html\?thema=zerlegen%205"/);
   assert.match(h, /aria-label="Zwei Tonnen, Die 5 zerlegen"/);
-  assert.match(h, /<span class="bild"><svg>V<\/svg><\/span>/);
+  assert.match(h, /<span class="bild"><svg>V<\/svg><img class="figur" src="symbole\/m14\.svg" alt=""><\/span>/);
+  assert.doesNotMatch(h, /class="knopf"/); // kein Kreis mit Spielsymbol auf der Karte (Christian, §16)
   assert.match(h, /<b>Zwei Tonnen<\/b>/);
   assert.match(h, /<span class="thema">Die 5 zerlegen<\/span>/);
   assert.match(h, /--fach-fuellung:#F06BB0;--fach-tief:#B8327A;--fach-toenung:#FFE6F2/);
@@ -18,8 +19,14 @@ test("Spielkarte: ganze Karte ist ein Link mit ?thema, Name fürs Vorlesen, Vign
 
 test("Spielkarte: ohne Vignette eine Fläche in der Fachtönung mit dem Spielsymbol; Texte escaped", () => {
   const h = spielKarteHtml({ spiel: { ...SPIEL, titel: "A<b" }, thema: { id: "t", name: "T" } }, "mathe", null);
-  assert.match(h, /<span class="bild ohne"><img src="symbole\/m14\.svg" alt=""><\/span>/);
+  assert.match(h, /<span class="bild ohne"><img class="figur" src="symbole\/m14\.svg" alt=""><\/span>/);
   assert.match(h, /<b>A&lt;b<\/b>/);
+});
+
+test("Spielkarte mit Figur: die Figur des Spiels groß und still vor der Vignette, kein Knopf, nichts eingeschleust", () => {
+  const h = spielKarteHtml({ spiel: { ...SPIEL, karte: { figur: "einkaufskorb", zustand: 'gef"ullt' } }, thema: { id: "t", name: "T" } }, "mathe", "<svg>V</svg>");
+  assert.match(h, /<span class="bild"><svg>V<\/svg><ls-objekt class="figur" art="einkaufskorb" zustand="gef&quot;ullt" still aria-hidden="true"><\/ls-objekt><\/span>/);
+  assert.doesNotMatch(h, /class="knopf"/);
 });
 
 test("Karte Mit echten Dingen: Link zur Seite der Anleitung, eigene Gestalt, Name fürs Vorlesen", () => {

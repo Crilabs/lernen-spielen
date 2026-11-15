@@ -13,16 +13,21 @@ function farben(fach) {
 const fachZeichen = (fach) => FACH_SYMBOLE.has(fach) ? `<i style="--bild:url('symbole/${esc(fach)}.svg')"></i>` : "";
 
 /**
- * Spielkarte: die ganze Karte ist der Link ins Spiel (mit ?thema).
- * @param {{spiel: {titel: string, datei: string, symbol: string}, thema: {id: string, name: string}}} k
+ * Spielkarte: die ganze Karte ist der Link ins Spiel (mit ?thema). Kartenbild nach grundsaetze-bilder.md §16:
+ * hinten die Welt-Vignette, vorn groß die Figur des Spiels (`karte.figur` als <ls-objekt still>); kein Knopf, kein
+ * Text im Bild (Christian). Ohne Figur: das Spielsymbol groß auf der Fachtönung bzw. vor der Vignette.
+ * @param {{spiel: {titel: string, datei: string, symbol: string, karte?: {figur?: string, zustand?: string}}, thema: {id: string, name: string}}} k
  * @param {string} fach
- * @param {string|null} vignette SVG der Welt oder null (dann Fachtönung mit Spielsymbol)
+ * @param {string|null} vignette SVG der Welt oder null (dann Fachtönung)
  */
 export function spielKarteHtml(k, fach, vignette) {
-  const bild = vignette ? `<span class="bild">${vignette}</span>` : `<span class="bild ohne"><img src="${esc(k.spiel.symbol)}" alt=""></span>`;
+  const figur = k.spiel.karte?.figur;
+  const vorn = figur
+    ? `<ls-objekt class="figur" art="${esc(figur)}"${k.spiel.karte?.zustand ? ` zustand="${esc(k.spiel.karte.zustand)}"` : ""} still aria-hidden="true"></ls-objekt>`
+    : `<img class="figur" src="${esc(k.spiel.symbol)}" alt="">`;
+  const bild = `<span class="bild${vignette ? "" : " ohne"}">${vignette ?? ""}${vorn}</span>`;
   return `<a class="karte spiel" href="${esc(k.spiel.datei)}?thema=${encodeURIComponent(k.thema.id)}" aria-label="${esc(`${k.spiel.titel}, ${k.thema.name}`)}" style="${farben(fach)}">`
-    + `${bild}<span class="unten"><span class="knopf" aria-hidden="true"><img src="${esc(k.spiel.symbol)}" alt=""></span>`
-    + `<span class="text"><b>${esc(k.spiel.titel)}</b><span class="thema">${esc(k.thema.name)}</span></span></span></a>`;
+    + `${bild}<span class="unten"><span class="text"><b>${esc(k.spiel.titel)}</b><span class="thema">${esc(k.thema.name)}</span></span></span></a>`;
 }
 
 /**

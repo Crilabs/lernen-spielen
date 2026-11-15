@@ -10,19 +10,14 @@
 .karten .karte > * { pointer-events: none; }
 .karten .karte:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
 .karten .karte:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
-.karten .karte .bild { display: block; height: 13.9rem; border-bottom: var(--ls-kontur) solid var(--ls-tinte); background: var(--fach-toenung); }
+.karten .karte .bild { position: relative; display: block; height: 13.9rem; overflow: hidden; border-bottom: var(--ls-kontur) solid var(--ls-tinte); background: var(--fach-toenung); }
 .karten .karte .bild svg { display: block; width: 100%; height: 100%; }
 .karten .karte .bild.ohne { display: grid; place-items: center; }
-.karten .karte .bild img { width: 7rem; height: 7rem; }
+/* Figur des Spiels groß vor der Welt, mittig bis Mitte rechts (§16 KB2), kein Knopf. */
+.karten .karte .bild .figur { position: absolute; left: 55%; bottom: 0.4rem; height: 80%; width: auto; transform: translateX(-50%); }
+.karten .karte .bild ls-objekt.figur { display: block; aspect-ratio: 1; }
 .karten .karte { position: relative; }
-.karten .karte .unten { display: flex; padding: 4.4rem 1.6rem 2rem; min-height: 12rem; }
-/* Fachsymbol als Plakette auf dem Rand zwischen Bild und Text */
-.karten .karte .knopf {
-  position: absolute; left: 1.6rem; top: 10.4rem; display: grid; place-items: center; width: 7rem; height: 7rem;
-  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 50%; background: var(--fach-fuellung);
-}
-.karten .karte .knopf img { width: 4.4rem; height: 4.4rem; }
-.karten .karte.echt .unten { padding-top: 2rem; }
+.karten .karte .unten { display: flex; padding: 2rem 1.6rem 2rem; min-height: 12rem; }
 .karten .karte .text { display: flex; flex-direction: column; min-width: 0; }
 .karten .karte b { font-size: 2.9rem; line-height: 1.1; hyphens: manual; }
 .karten .karte .thema { font-size: 2.4rem; line-height: 1.2; color: var(--ls-tinte-weich); }
