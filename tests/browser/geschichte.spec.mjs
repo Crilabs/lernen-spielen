@@ -91,7 +91,7 @@ for (const typ of [chromium, webkit]) {
   const text = await page.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".text").textContent);
   pruefe(/geht gerade nicht/.test(text), `${name}: unbekannte Geschichte zeigt einen ruhigen Text`);
   // Text passt oder scrollt und überdeckt keine festen Knöpfe – quer, iPad quer, hoch
-  for (const [b, h] of [[1366, 1024], [1180, 820], [820, 1180]]) {
+  for (const [b, h] of [[1366, 1024], [1180, 820], [820, 1180], [390, 844], [844, 390]]) {
     const lp = await browser.newPage({ viewport: { width: b, height: h } });
     await lp.goto(`${basis}/spiele/geschichte.html?id=haustiere&pruefen`);
     await lp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
@@ -104,15 +104,20 @@ for (const typ of [chromium, webkit]) {
         const kn = s.querySelector(".knoepfe").getBoundingClientRect(), tr = t.getBoundingClientRect();
         const fr = tf.getBoundingClientRect();
         // langer Text darf scrollen (Christian 2026-11-15), überdeckt aber nie die Knöpfe
-        const erreichbar = tf.scrollHeight <= tf.clientHeight + 2 || getComputedStyle(tf).overflowY === "auto";
-        return erreichbar && fr.bottom <= kn.top + 2 && tr.right <= innerWidth;
+        const zeile = parseFloat(getComputedStyle(t).lineHeight) || 40;
+        const erreichbar = tf.clientHeight >= 2 * zeile - 2;   // mindestens zwei Zeilen sichtbar, der Rest scrollt
+        const lese = s.querySelector(".lese"), lr = lese.getBoundingClientRect();
+        const drin = [...s.querySelectorAll(".lese .text, .lese .knoepfe > *:not([hidden]), .lese .rechts > *:not([hidden])")]
+          .every((e) => { const r = e.getBoundingClientRect(); return !r.width || (r.left >= lr.left - 1 && r.right <= lr.right + 1); });
+        const ueberKnoepfen = !kn.height || fr.bottom <= kn.top + 2;   // Titelseite: Knöpfe ausgeblendet
+        return erreichbar && drin && ueberKnoepfen && tr.right <= innerWidth;
       });
-      if (!ok) { passt = false; break; }
+      if (!ok) { passt = `Seite ${i + 1}`; break; }
       await lp.evaluate(() => { const g = window.lsGeschichte; if (g.frageSeite === g.seite) return; g.weiter(); });
       if (await lp.evaluate(() => window.lsGeschichte.frageSeite === window.lsGeschichte.seite)) {
         await lp.waitForFunction(() => window.lsGeschichte.weiterBereit, null, { timeout: 30000 }); await lp.evaluate(() => window.lsGeschichte.weiter()); i++; }
     }
-    pruefe(passt, `${name}: ${b}×${h} – Text erreichbar (passt oder scrollt), über den Knöpfen`);
+    pruefe(passt === true, `${name}: ${b}×${h} – Text erreichbar (≥ 2 Zeilen), alles in der Karte, über den Knöpfen ${passt === true ? "" : passt}`);
     await lp.close();
   }
 
@@ -131,6 +136,12 @@ for (const typ of [chromium, webkit]) {
   pruefe(Date.now() - tv >= 1500, `${name}: Vorlesen blättert von selbst (${Date.now() - tv} ms)`);
   await v(() => window.lsGeschichte.halte());
   pruefe(await v(() => window.lsGeschichte.angehalten), `${name}: angehalten`);
+  pruefe(await vp.locator("ls-geschichte").evaluate((el) => { const k = el.shadowRoot.querySelector(".vorlesen"); return k.getAttribute("name") === "Weiterlesen" && k.getAttribute("aria-pressed") === "true"; }), `${name}: angehalten – Knopf heißt Weiterlesen`);
+  const vorher = await v(() => window.lsGeschichte.gelesen);
+  await v(() => { window.lsGeschichte.weiter(); });
+  await vp.waitForTimeout(400);
+  pruefe(typeof vorher === "number" && await v(() => window.lsGeschichte.gelesen) === vorher && await v(() => window.lsGeschichte.angehalten), `${name}: angehalten blättern liest nicht vor, bleibt angehalten`);
+  await v(() => { window.lsGeschichte.zurueck(); });
   await vp.waitForTimeout(9000);
   pruefe(await v(() => window.lsGeschichte.seite) === 1, `${name}: angehalten bleibt die Seite`);
   await v(() => window.lsGeschichte.halte());
@@ -150,6 +161,17 @@ for (const typ of [chromium, webkit]) {
   await vp.waitForTimeout(7000);
   pruefe(await v(() => window.lsGeschichte.seite) === fs + 2, `${name}: angehalten – kein alter Timer blättert`);
   await vp.close();
+
+  // Ton aus mitten im Vorlesen: Selbst lesen, nichts blättert mehr von selbst
+  const op = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await op.addInitScript(() => { try { Object.defineProperty(window, "speechSynthesis", { value: undefined }); } catch {} });
+  await op.goto(`${basis}/spiele/geschichte.html?id=haustiere&pruefen`);
+  await op.waitForFunction(() => window.lsGeschichte?.seiten > 0);
+  await op.evaluate(() => window.lsGeschichte.waehle("vorlesen"));
+  await op.locator("ls-leiste").evaluate((el) => el.shadowRoot.querySelector(".tonknopf").click());
+  await op.waitForTimeout(9000);
+  pruefe(await op.evaluate(() => window.lsGeschichte.modus) === "selbst" && await op.evaluate(() => window.lsGeschichte.seite) === 0, `${name}: Ton aus im Vorlesen – Selbst lesen, kein stummes Weiterblättern`);
+  await op.close();
 
   // Ton aus: keine Startwahl, Selbst lesen
   const tp = await browser.newPage({ viewport: { width: 1280, height: 800 } });

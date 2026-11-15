@@ -52,7 +52,7 @@ const CSS = `
 * { box-sizing: border-box; }
 .buch { position: absolute; inset: 0; container: buch / size; }
 .blatt { --rand: 3.6rem; --luft: 6rem;
-  --bild: min(calc(100cqh - 2 * var(--rand)), calc(58cqw - var(--rand)));
+  --bild: min(calc(100cqh - 2 * var(--rand)), calc(54cqw - var(--rand)));
   position: absolute; inset: 0; padding: var(--rand) calc(var(--rand) + 1rem);
   display: grid; grid-template-columns: var(--bild) minmax(0, 1fr); grid-template-rows: var(--bild);
   column-gap: var(--luft); align-content: center; justify-content: center; }
@@ -86,7 +86,8 @@ ${SZENE_CSS}
 .erzeugt[hidden] { display: none; }
 
 /* Rechts: eine ruhige Papierfläche auf der Kulisse – oben der Text, unten Punkte und Knöpfe. */
-.lese { min-width: 0; height: var(--bild); display: grid; grid-template-rows: minmax(0, 1fr) auto auto; row-gap: 2.4rem;
+.lese { min-width: 0; height: var(--bild); display: grid; grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto auto; row-gap: 2.4rem;
   padding: 4.4rem 4.4rem 3.6rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte);
   border-radius: var(--ls-radius-gross); box-shadow: 0 1.2rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
 /* Langer Text darf scrollen (Christian 2026-11-15: „Text kann scrollbar sein“). */
@@ -95,7 +96,7 @@ ${SZENE_CSS}
   scrollbar-color: var(--kulisse-tief, var(--ls-tinte-weich)) transparent; }
 .text { margin: 0; font-size: 4.2rem; line-height: 1.45; max-width: 28ch; text-wrap: pretty; hyphens: manual; }
 .text.titel { font-size: 6rem; line-height: 1.15; font-weight: 700; }
-.knoepfe { display: flex; align-items: center; gap: 2.4rem; min-height: 16.6rem; }
+.knoepfe { display: flex; align-items: center; gap: 1.6rem; min-height: 16.6rem; }
 .knoepfe .rechts { margin-left: auto; display: grid; place-items: center; }
 .rechts > * { grid-area: 1 / 1; }
 .weiter { width: 16rem; height: 16rem; border-radius: 50%; cursor: pointer; padding: 0; color: var(--ls-tinte);
@@ -120,12 +121,12 @@ ${SZENE_CSS}
 .startwahl { display: flex; flex-direction: column; align-items: flex-start; gap: 2.4rem; }
 .startwahl[hidden] { display: none; }
 /* Vor der Startwahl: keine Punkte, kein Weiter – die zwei Wege sind die einzigen Knöpfe auf der Fläche. */
-.lese.waehlt .punkte, .lese.waehlt .knoepfe { visibility: hidden; }
+.lese.waehlt .punkte, .lese.waehlt .knoepfe { display: none; }
 .fehler { font-size: 4rem; color: var(--ls-tinte-weich); }
 
 /* Schmaleres Querformat (iPad quer): etwas kleineres Bild, etwas kleinerer Text. */
 @container buch (aspect-ratio < 17 / 10) {
-  .blatt { --bild: min(calc(100cqh - 2 * var(--rand)), calc(54cqw - var(--rand))); --luft: 4.8rem; }
+  .blatt { --bild: min(calc(100cqh - 2 * var(--rand)), calc(50cqw - var(--rand))); --luft: 4.8rem; }
   .text { font-size: 3.8rem; }
   .text.titel { font-size: 5.2rem; }
   .lese { padding: 3.6rem 3.6rem 3rem; }
@@ -139,6 +140,12 @@ ${SZENE_CSS}
   .textfeld { justify-content: flex-start; }
   .text { font-size: 3.6rem; line-height: 1.4; max-width: none; }
   .lese { padding: 3.2rem 3.6rem 2.4rem; row-gap: 1.6rem; }
+}
+/* Schmal (Telefon hoch): weniger Rand in der Karte, damit Startknöpfe und Fertig hineinpassen. */
+@container buch (max-width: 560px) {
+  .blatt { --rand: 2.4rem; }
+  .lese { padding: 2.4rem 2rem 2rem; }
+  .knoepfe { gap: 1rem; flex-wrap: wrap; row-gap: 1.6rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 `;
@@ -196,8 +203,10 @@ export class LsGeschichte extends HTMLElement {
     this.kulisse = null;
     /** @type {"vorlesen" | "selbst" | null} null = noch nicht gewählt */
     this.modus = null;
-    /** Vorlesemodus angehalten (Tipp des Kindes). */
+    /** Vorlesemodus angehalten (Tipp des Kindes); bleibt beim Blättern, bis das Kind „Weiterlesen“ tippt. */
     this.angehalten = false;
+    /** Wie oft eine Seite vorgelesen wurde (Prüfschnittstelle). */
+    this.gelesen = 0;
     /** @type {ReturnType<typeof setTimeout> | undefined} */
     this.autoTimer = undefined;
     /** @type {Geschichte | null} */
@@ -229,6 +238,15 @@ export class LsGeschichte extends HTMLElement {
     q(".waehle-selbst").addEventListener("click", () => this.waehle("selbst"));
     this.textEl.addEventListener("click", () => this.halte());
     this.fertigEl.addEventListener("click", () => this.beende());
+    /** @type {Element | null} */
+    this.leiste = null;
+    this.beiTon = (/** @type {Event} */ e) => {
+      if (/** @type {CustomEvent} */ (e).detail?.an !== false || this.modus === "selbst") return;
+      clearTimeout(this.autoTimer);
+      this.setzeAngehalten(false);
+      if (this.modus === null) { this.modus = "selbst"; this.zeigeWahl(false); this.zeigeText(); }
+      else this.modus = "selbst";
+    };
     this.beiTaste = (/** @type {KeyboardEvent} */ e) => {
       if (e.altKey || e.ctrlKey || e.metaKey) return;
       if (e.key === "ArrowRight") { e.preventDefault(); this.weiter(); }
@@ -254,6 +272,9 @@ export class LsGeschichte extends HTMLElement {
 
   connectedCallback() {
     window.addEventListener("keydown", this.beiTaste);
+    // Ton aus in der Leiste: nichts blättert mehr stumm von selbst – es gilt „Selbst lesen“.
+    this.leiste = document.querySelector("ls-leiste");
+    this.leiste?.addEventListener("ton", this.beiTon);
     const el = this;
     if (testbetrieb()) {
       /** @type {any} */ (window).lsGeschichte = {
@@ -262,6 +283,7 @@ export class LsGeschichte extends HTMLElement {
         get weiterBereit() { return el.weiterBereit; },
         get modus() { return el.modus; },
         get angehalten() { return el.angehalten; },
+        get gelesen() { return el.gelesen; },
         get frageSeite() { return el.daten ? el.daten.seiten.findIndex((s) => s.frage === true) : -1; },
         waehle: (/** @type {"vorlesen" | "selbst"} */ m) => el.waehle(m),
         halte: () => el.halte(),
@@ -275,6 +297,7 @@ export class LsGeschichte extends HTMLElement {
 
   disconnectedCallback() {
     window.removeEventListener("keydown", this.beiTaste);
+    this.leiste?.removeEventListener("ton", this.beiTon);
     clearTimeout(this.ruheTimer);
     clearTimeout(this.autoTimer);
     stille();
@@ -427,8 +450,9 @@ export class LsGeschichte extends HTMLElement {
     });
     this.weiterBereit = !s.frage;
     this.weiterEl.classList.toggle("wartet", !!s.frage);
+    const stumm = this.modus === "vorlesen" && this.angehalten;   // angehalten: blättern liest nicht
     if (this.modus === null) { /* Startwahl: noch nichts lesen */ }
-    else if (!s.frage) this.liesUndBlaettere();
+    else if (!s.frage) { if (!stumm) this.liesUndBlaettere(); }
     else {
       const meine = this.nummer;
       const frei = () => {
@@ -439,7 +463,7 @@ export class LsGeschichte extends HTMLElement {
           this.weiterEl.classList.remove("wartet");
         }, RUHE_MS);
       };
-      this.lies().then(frei, frei);
+      if (stumm) frei(); else this.lies().then(frei, frei);
     }
   }
 
@@ -452,7 +476,9 @@ export class LsGeschichte extends HTMLElement {
     if (!s) return "still";
     const meine = this.nummer;
     if (!(await this.tonAn()) || meine !== this.nummer) return "still";
+    if (this.modus === "vorlesen" && this.angehalten) return "abgebrochen";
     const text = typeof s.sprich === "string" && s.sprich ? s.sprich : s.text;
+    this.gelesen += 1;
     return sprich(text);
   }
 
@@ -464,7 +490,7 @@ export class LsGeschichte extends HTMLElement {
     if (!this.daten || this.modus !== null) return;
     this.modus = modus === "vorlesen" ? "vorlesen" : "selbst";
     this.zeigeWahl(false);
-    this.angehalten = false;
+    this.setzeAngehalten(false);
     this.zeigeText();
     this.liesUndBlaettere();
   }
@@ -487,11 +513,22 @@ export class LsGeschichte extends HTMLElement {
   /** Hält den Vorlesemodus an bzw. liest weiter (Tipp des Kindes). */
   halte() {
     if (this.modus !== "vorlesen") return;
-    this.angehalten = !this.angehalten;
-    this.vorlesenEl.classList.toggle("angehalten", this.angehalten);
+    this.setzeAngehalten(!this.angehalten);
     clearTimeout(this.autoTimer);
     if (this.angehalten) stille();
     else this.liesUndBlaettere();
+  }
+
+  /**
+   * Angehalten ja/nein – mit sichtbarem und vorlesbarem Zustand des Knopfs („Weiterlesen“, aria-pressed).
+   * @param {boolean} an
+   */
+  setzeAngehalten(an) {
+    this.angehalten = an;
+    this.vorlesenEl.classList.toggle("angehalten", an);
+    this.vorlesenEl.setAttribute("name", an ? "Weiterlesen" : "Vorlesen");
+    if (this.modus === "vorlesen") this.vorlesenEl.setAttribute("aria-pressed", String(an));
+    else this.vorlesenEl.removeAttribute("aria-pressed");
   }
 
   /** Liest die Seite und blättert im Vorlesemodus danach von selbst um. */
@@ -508,7 +545,9 @@ export class LsGeschichte extends HTMLElement {
     const g = this.daten;
     if (!g || this.modus !== "vorlesen" || this.angehalten || meine !== this.nummer) return;
     const s = g.seiten[this._seite];
-    if (!s || s.frage || this._seite >= g.seiten.length - 1 || ergebnis === "abgebrochen") return;
+    // Abgebrochen, ohne dass das Kind geblättert hat (z. B. Systemstimme unterbrochen): sichtbar anhalten statt hängen.
+    if (ergebnis === "abgebrochen") return void this.setzeAngehalten(true);
+    if (!s || s.frage || this._seite >= g.seiten.length - 1) return;
     const warte = ergebnis === "still" ? Math.max(LESEZEIT_MIN_MS, s.text.length * LESEZEIT_MS) : PAUSE_MS;
     clearTimeout(this.autoTimer);
     this.autoTimer = setTimeout(() => {
