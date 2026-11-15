@@ -9,6 +9,13 @@ können mit einer **Lerngeschichte** eingeführt werden. Welches Thema welche Ge
 
 ## 1. Was eine Geschichte ist
 
+**Inhalt zuerst** (Christian, 2026-11-15 abends): Basis jedes Sachthemas ist eine Sammlung wissenswerter Fakten – was
+sollen Kinder dazu lernen? Erst dann wird die Form gewählt: eine Geschichte nur, wenn sie die Inhalte natürlich trägt
+(z. B. ein Lebenslauf); sonst – und für Sachthemen meist – ein **Sachbuch**: schöner, staunender Sachtext mit Fotos,
+die ihn illustrieren. Kurze Geschichten mit wenig Wissen („Mia zieht ein“, 14 Abschnitte à 2–4 Sätze) lasen sich
+„wie ein Kinderbuch für 3-Jährige“; erfundene Anlässe für Mathe-Strukturen („Zehn Meisen, zwei Zweige“) wirkten
+konstruiert. **Mathe-Lerngeschichten** bleiben gezeichnet mit der Runde und Perlen, ohne Fotos (Christian).
+
 **Eine echte Geschichte, kein Lernbuch** (Christian, 2026-11-15): emotional, mit spannenden Details, das Wissen nur
 nebenbei in der Handlung – so bleibt es besser im Kopf. Text und ein Bild je Abschnitt; das Bild zeigt die
 **Kernaussage** des Abschnitts. Das Kind wählt am Anfang „Vorlesen“ (blättert von selbst weiter) oder „Selbst lesen“
@@ -16,6 +23,7 @@ nebenbei in der Handlung – so bleibt es besser im Kopf. Text und ein Bild je A
 
 | Art | Bild | trägt |
 |---|---|---|
+| `sachbuch` | **fotorealistisch, KI**, ein Foto je Seite | Sachthema mit Kapiteln: was ein Kind zum Thema wissen soll, warm und staunend erzählt (§2a) |
 | `sachgeschichte` | **fotorealistisch, KI** (Christian), jedes Bild geprüft | Zusammenhänge, Ursachen, Wandel, Staunen über die echte Welt |
 | `sinn` | gezeichnet (Szene aus Bausteinen) | wozu man es braucht, woher es kommt |
 | `form` | gezeichnet | ein Bild wird Seite für Seite zum neuen Zeichen (Schwan → 2) |
@@ -25,7 +33,24 @@ nebenbei in der Handlung – so bleibt es besser im Kopf. Text und ein Bild je A
 Ziffern), nicht mit KI: Bei Struktur und Form müssen Anzahlen und Formen genau stimmen, und das kann ein Bildgenerator nicht
 sicher **(Annahme)**.
 
-## 2. Regeln
+## 2a. Sachbücher (Christian, 2026-11-15 abends)
+
+- **Verfahren:** (1) **Lerninhalte sammeln** → `<id>/inhalte.md`: Maßstab Lehrplan (LehrplanPLUS Bayern HSU, andere
+  Länder) und gute Kindersachbücher; 6–8 Themen à 3–6 Punkte „Das Kind weiß danach …“, jeder Punkt mit Quelle; Mythen
+  verworfen. (2) **Prüfer A** (frischer Agent): vollständig, richtig, nicht zu viel, Sicherheitswissen? (3) **Form**
+  begründen (Sachbuch oder Geschichte). (4) **Schreiben**. (5) **Prüfer B** gegen `inhalte.md`: alles abgedeckt?
+  staunenswert, nicht kindisch? Fakten gedeckt? Höchstens drei Runden. (6) **Bilder** je Seite (Kernaussage),
+  vorhandene je Seite prüfen und übernehmen.
+- **Umfang:** 5–7 Kapitel (= Themen von `inhalte.md`) à 4–6 Seiten (~25 Seiten); je Seite 60–120 Wörter;
+  **Vorlesebuch**: normale Kinderbuch-Sprache, Sätze bis 15 Wörter (Kl. 1–2, `satzGrenzeBuch`), Absätze mit
+  Leerzeile; Kapitel einzeln lesbar, die App merkt sich den Stand (§4).
+- **Ton:** warm, staunend, genau; direkte Ansprache erlaubt („Hast du schon einmal gesehen, wie …?“), Vergleiche aus
+  dem Kinderalltag, kleine echte Szenen mit einem bestimmten Tier. Keine Faktenliste in Sätzen, keine Zahlenkolonnen,
+  keine Vermenschlichung, keine Babysprache. Höchstens eine Frage zum Vorhersagen je Kapitel, aufgelöst auf der
+  nächsten Seite.
+- Vorbild: `spiele/geschichten/haustiere/` (Katzen: `inhalte.md`, `pruefung.md`).
+
+## 2. Regeln (Lern- und Sachgeschichten)
 
 - **Umfang (Vorlesebuch, Christian 2026-11-15):** 10–14 Abschnitte, je 2–4 Sätze; Satzlänge bis Kl. 2 höchstens 10
   Wörter, Kl. 3–4 höchstens 14 (`satzGrenzeGeschichte` in `werkzeuge/spielbau/texte.mjs`). Langer Text darf scrollen.
@@ -62,10 +87,13 @@ spiele/geschichten/<id>/bilder/*.webp     Fotos der Sachgeschichte (quadratisch 
 spiele/geschichten/<id>/kosten.json       Kosten (werkzeuge/kosten/)
 ```
 
+Ein **Sachbuch** hat statt `seiten` die Liste `kapitel` (`[{ "titel": "…", "seiten": [{ "text", "bild", "frage"? }] }]`),
+`art: "sachbuch"`, sonst dieselben Felder; Bilder `bilder/KK-SS.webp` (Kapitel, Seite). Absätze im `text` mit `\n\n`.
+
 ```json
 {
-  "id": "haustiere",
-  "titel": "Mia zieht ein",
+  "id": "beispiel",
+  "titel": "Ein Tag mit Mia",
   "art": "sachgeschichte",
   "welt": "haustiere",
   "familie": null,

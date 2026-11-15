@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { pruefeTexte, inSaetze, satzGrenzeGeschichte } from "../werkzeuge/spielbau/texte.mjs";
+import { pruefeTexte, inSaetze, satzGrenzeGeschichte, satzGrenzeBuch } from "../werkzeuge/spielbau/texte.mjs";
 
 const { pruefeSzene, paarLage, hausSvg, artDes, ELEMENTE } = await import("../spiele/rahmen/szene.js");
 const { laenge } = await import("../spiele/rahmen/perlen-geometrie.js");
@@ -17,7 +17,41 @@ const FAMILIEN = new Set(beurteilung.familien.map((f) => f.id));
 const WELTEN = new Set(Object.keys(beurteilung.welten));
 const KINDER = new Set(readdirSync(join(SPIELE, "runde", "kinder")).filter((d) => /^[a-z]+\.js$/.test(d) && !["schnitt.js", "stil.js"].includes(d)).map((d) => d.slice(0, -3)));
 const HALTUNGEN = new Set([...readFileSync(join(SPIELE, "runde", "haltungen.js"), "utf8").matchAll(/id: "([a-z-]+)"/g)].map((m) => m[1]));
-const ARTEN = new Set(["sachgeschichte", "sinn", "form", "struktur"]);
+const ARTEN = new Set(["sachbuch", "sachgeschichte", "sinn", "form", "struktur"]);
+/** Wörter einer Seite (wie texte.mjs). */
+const woerterVon = (text) => text.split(/\s+/).filter((w) => /\p{L}|\d/u.test(w)).length;
+
+/** Sachbuch (geschichten.md §2, §3): 5–7 Kapitel à 4–6 Seiten, je Seite 60–120 Wörter, Sätze ≤ satzGrenzeBuch. */
+function pruefeSachbuch(g, ordner) {
+  const f = [];
+  if (!WELTEN.has(g.welt)) f.push(`welt „${g.welt}“ fehlt in beurteilung.json`);
+  if (!Array.isArray(g.quellen) || !g.quellen.length || !g.quellen.every((q) => q?.fakt && q?.quelle)) f.push("Sachbuch ohne quellen (fakt, quelle)");
+  if ("seiten" in g || !Array.isArray(g.kapitel)) f.push("Sachbuch: seiten oder kapitel – ein Sachbuch hat nur kapitel");
+  const kapitel = Array.isArray(g.kapitel) ? g.kapitel : [];
+  if (kapitel.length < 5 || kapitel.length > 7) f.push(`${kapitel.length} Kapitel (5–7)`);
+  const texte = [];
+  kapitel.forEach((k, ki) => {
+    const wo = `Kapitel ${ki + 1}`;
+    if (typeof k?.titel !== "string" || !k.titel.trim()) f.push(`${wo}: titel fehlt`);
+    const seiten = Array.isArray(k?.seiten) ? k.seiten : [];
+    if (seiten.length < 4 || seiten.length > 6) f.push(`${wo}: ${seiten.length} Seiten (4–6)`);
+    const fragen = seiten.filter((s) => s?.frage === true).length;
+    if (fragen > 1) f.push(`${wo}: ${fragen} Fragen (höchstens eine je Kapitel)`);
+    if (seiten.at(-1)?.frage) f.push(`${wo}: Frage auf der letzten Seite (Auflösung fehlt)`);
+    seiten.forEach((s, i) => {
+      const ws = `${wo}, Seite ${i + 1}`;
+      if (typeof s?.text !== "string" || !s.text.trim()) return void f.push(`${ws}: text fehlt`);
+      const n = woerterVon(s.text);
+      if (n < 60 || n > 120) f.push(`${ws}: ${n} Wörter (60–120)`);
+      if (typeof s.bild !== "string" || !existsSync(join(ORDNER, ordner, s.bild))) f.push(`${ws}: Bild ${s.bild} fehlt`);
+      texte.push(s.text);
+      if (typeof s.sprich === "string") texte.push(s.sprich);
+    });
+  });
+  const r = pruefeTexte(texte, { klasse: g.klasse, grenze: satzGrenzeBuch(g.klasse), budget: Infinity });
+  f.push(...r.rot, ...r.hinweise.filter((h) => h.startsWith("§3 Satz")));
+  return f;
+}
 
 const geschichten = readdirSync(ORDNER, { withFileTypes: true })
   .filter((e) => e.isDirectory() && existsSync(join(ORDNER, e.name, "geschichte.json")))
@@ -30,6 +64,7 @@ function pruefeGeschichte(g, ordner) {
   if (typeof g.titel !== "string" || !g.titel.trim()) f.push("titel fehlt");
   if (!ARTEN.has(g.art)) f.push(`art „${g.art}“ unbekannt`);
   if (!Number.isInteger(g.klasse) || g.klasse < 1 || g.klasse > 4) f.push("klasse nicht 1–4");
+  if (g.art === "sachbuch") return [...f, ...pruefeSachbuch(g, ordner)];
   if (g.art === "sachgeschichte") {
     if (!WELTEN.has(g.welt)) f.push(`welt „${g.welt}“ fehlt in beurteilung.json`);
     if (!Array.isArray(g.quellen) || !g.quellen.length || !g.quellen.every((q) => q?.fakt && q?.quelle)) f.push("Sachgeschichte ohne quellen (fakt, quelle)");
@@ -209,4 +244,32 @@ test("Kulissen: die sechs ersten gibt es, jede als SVG ohne Schrift, höchstens 
 test("Kulissen: jede Geschichte wählt eine bekannte Kulisse", () => {
   const ids = new Set(kulissenListe().map((k) => k.id));
   for (const { ordner, g } of geschichten) assert.ok(ids.has(g.kulisse), `${ordner}: kulisse „${g.kulisse}“ unbekannt`);
+});
+
+// Sachbuch mit Kapiteln (Christian 2026-11-15: Inhalt zuerst, Kapitel, ~25 Seiten, Vorlesebuch)
+test("pruefeGeschichte findet Verstöße (Sachbuch)", () => {
+  const satz = "Eine Katze sieht in der Dämmerung viel mehr als wir Menschen.";   // 11 Wörter
+  const text = Array(7).fill(satz).join(" ");                                 // 77 Wörter
+  const seite = { text, bild: "../haustiere/bilder/01.webp" };
+  const kapitel = (n = 4) => ({ titel: "Augen", seiten: Array(n).fill(seite) });
+  const gut = { id: "probe", titel: "Probe", art: "sachbuch", welt: "haustiere", familie: null, klasse: 1, kulisse: "im-haus",
+    quellen: [{ fakt: "Katzen sehen in der Dämmerung gut.", quelle: "https://example.org, abgerufen 2026-11-15" }],
+    kapitel: Array(5).fill(0).map(() => kapitel()) };
+  assert.deepEqual(pruefeGeschichte(gut, "probe"), []);
+  const f = (aenderung) => pruefeGeschichte({ ...gut, ...aenderung }, "probe").join(" | ");
+  assert.match(f({ kapitel: Array(4).fill(0).map(() => kapitel()) }), /4 Kapitel/);
+  assert.match(f({ kapitel: Array(8).fill(0).map(() => kapitel()) }), /8 Kapitel/);
+  assert.match(f({ kapitel: [...Array(4).fill(0).map(() => kapitel()), kapitel(3)] }), /Kapitel 5: 3 Seiten/);
+  assert.match(f({ kapitel: [...Array(4).fill(0).map(() => kapitel()), kapitel(7)] }), /Kapitel 5: 7 Seiten/);
+  const kurz = { ...seite, text: Array(4).fill(satz).join(" ") };   // 44 Wörter
+  assert.match(f({ kapitel: [...Array(4).fill(0).map(() => kapitel()), { titel: "K", seiten: [kurz, seite, seite, seite] }] }), /44 Wörter/);
+  const lang = { ...seite, text: `${text} Eine Katze schleicht ganz leise und vorsichtig durch das hohe nasse Gras am Rand vom Garten.` };
+  assert.match(f({ kapitel: [...Array(4).fill(0).map(() => kapitel()), { titel: "K", seiten: [lang, seite, seite, seite] }] }), /Wörtern/);
+  const frage = { ...seite, frage: true };
+  assert.match(f({ kapitel: [...Array(4).fill(0).map(() => kapitel()), { titel: "K", seiten: [frage, frage, seite, seite] }] }), /Kapitel 5: 2 Fragen/);
+  assert.match(f({ kapitel: [...Array(4).fill(0).map(() => kapitel()), { titel: "K", seiten: [seite, seite, seite, frage] }] }), /Kapitel 5: Frage auf der letzten Seite/);
+  assert.match(f({ kapitel: [...Array(4).fill(0).map(() => kapitel()), { titel: "", seiten: Array(4).fill(seite) }] }), /Kapitel 5: titel/);
+  assert.match(f({ kapitel: [...Array(4).fill(0).map(() => kapitel()), { titel: "K", seiten: [{ ...seite, bild: "fehlt.webp" }, seite, seite, seite] }] }), /fehlt/);
+  assert.match(f({ quellen: [] }), /quellen/);
+  assert.match(f({ seiten: [seite] }), /seiten oder kapitel/);
 });

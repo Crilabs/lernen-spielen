@@ -1,13 +1,19 @@
 ---
 name: sachgeschichte
-description: Schreibt ein Buch für die Bibliothek – eine Sachgeschichte mit Fotos (spiele/geschichten/<id>/) nach docs/geschichten.md – Recherche mit Quellen, Vorlesebuch-Fassung, frischer Prüfer, Bilder je Abschnitt mit Bildprüfung, Eintrag in index.json und bibliothek.json, Ton, Kosten. Aufruf „Sachgeschichte <buch-id> [<buch-id> …]“ mit Ids aus spiele/bibliothek.json.
+description: Schreibt ein Buch für die Bibliothek – ein Sachbuch mit Kapiteln (oder, wenn die Inhalte es natürlich tragen, eine Sachgeschichte) mit Fotos (spiele/geschichten/<id>/) nach docs/geschichten.md – Recherche mit Quellen, Vorlesebuch-Fassung, frischer Prüfer, Bilder je Abschnitt mit Bildprüfung, Eintrag in index.json und bibliothek.json, Ton, Kosten. Aufruf „Sachgeschichte <buch-id> [<buch-id> …]“ mit Ids aus spiele/bibliothek.json.
 ---
 
 # Sachgeschichte
 
+> **Neu (Christian, 2026-11-15 abends): Inhalt zuerst, meist ein Sachbuch mit Kapiteln** – `docs/geschichten.md` §1 und
+> §2a gehen den Abschnitten 1–3 unten vor. Erst `inhalte.md` (Lerninhalte mit Quellen, Prüfer A), dann Form wählen,
+> dann schreiben (5–7 Kapitel à 4–6 Seiten, 60–120 Wörter je Seite, Sätze ≤ 15 Wörter), Prüfer B gegen
+> `inhalte.md`. Das kurze Maß (10–14 Abschnitte à 2–4 Sätze) gilt nur noch für Geschichten, deren Inhalte eine
+> natürliche Handlung tragen. Vorbild ist das Katzenbuch `spiele/geschichten/haustiere/` (nicht mehr „Mia zieht ein“).
+
 Verbindlich: `docs/geschichten.md` (ganz, besonders §1 „echte Geschichte, kein Lernbuch“, §2 Regeln und
 Schreibverfahren, §3 Ablage), `docs/grundsaetze.md` §3, §6, §9.3, `docs/grundsaetze-bilder.md` (Fotos, Vielfalt),
-`docs/research_notes/*/geschichten_angst_gewalt.md`. Vorbild: `spiele/geschichten/haustiere/` („Mia zieht ein“ samt
+`docs/research_notes/*/geschichten_angst_gewalt.md`. Vorbild: `spiele/geschichten/haustiere/` (Katzen-Sachbuch samt `inhalte.md` und
 `pruefung.md`). Plan der Bücher: `spiele/bibliothek.json` (Raum › Regal › Buch, Arbeitstitel).
 
 ## 0. Auswahl
