@@ -16,6 +16,7 @@
 
 import { createRequire } from "node:module";
 import { durchEinfuehrung } from "./einfuehrung-durch.mjs";
+import { starteStumm } from "./stumm.mjs";
 import http from "node:http";
 import { starteServer } from "./server.mjs";
 import { readFile, mkdir } from "node:fs/promises";
@@ -121,7 +122,7 @@ async function bild(seite, schritt, name, groesse) {
 async function lauf(typ, name, groesse, basis) {
   WEBKIT = name === "webkit";
   const L = `${name} ${groesse.width}x${groesse.height}`;
-  const browser = await typ.launch();
+  const browser = await starteStumm(typ);
   const fehlerListe = [];
   try {
     const kontext = await browser.newContext({ viewport: groesse, deviceScaleFactor: 1 });

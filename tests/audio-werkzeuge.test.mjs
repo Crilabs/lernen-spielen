@@ -198,12 +198,13 @@ test("saetzeAusTexten: Zeichenketten rekursiv, ohne Schlüssel, Zahlen und hinwe
   assert.deepEqual(saetzeAusTexten(daten), ["Satz eins.", "Satz zwei.", "Satz drei."]);
 });
 
-test("sammle findet die Sätze aus texte.json von M37 (Rundenanfang und Auftrag)", () => {
+test("sammle findet die Sätze aus texte.json von M37 (Kette, Gleichung, Ort der Zahl)", () => {
   const { eintraege } = sammle(WURZEL);
   const q = "mathe/m37-kettenhuepfer/texte.json";
   const aus = eintraege.filter((x) => x.quellen.includes(q));
-  assert.ok(aus.length >= 90, `mindestens die 90 Aufträge, gefunden ${aus.length}`);
-  assert.ok(aus.some((x) => x.text === "Sechs Wochenschachteln. Wie viele Fächer sind es zusammen?"));
+  assert.ok(aus.length >= 90, `mindestens die 90 Gleichungen, gefunden ${aus.length}`);
+  assert.ok(aus.some((x) => x.text === "6 mal 7 ist 42."));
+  assert.ok(aus.some((x) => x.text === "Die 48 liegt dort drüben."));
 });
 
 test("sammle: Seiten der Geschichten (sprich, sonst text)", () => {

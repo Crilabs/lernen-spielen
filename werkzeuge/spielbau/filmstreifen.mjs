@@ -9,6 +9,7 @@
 // aufgabe.png (Standbild), takt.json { reaktionMs, folgeMs, taktMs, danebenMs, fehler[] }.
 // Braucht die Test-Schnittstelle (spiele/rahmen/pruefen.js), sonst nichts vom Spiel.
 import { createRequire } from "node:module";
+import { starteStumm } from "../../tests/browser/stumm.mjs";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join, relative, resolve, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -70,7 +71,7 @@ async function main() {
   const server = await starteServer(WURZEL);
   // ?einfuehrung: auch in der Vorschau (mit ?stufe) beginnt das Spiel mit seiner Einführung, damit sie im Film ist.
   const url = `http://127.0.0.1:${server.address().port}/${pfad}?einfuehrung${a.stufe ? `&stufe=${a.stufe}` : ""}`;
-  const browser = await chromium.launch({ args: ["--autoplay-policy=no-user-gesture-required"] });
+  const browser = await starteStumm(chromium, { args: ["--autoplay-policy=no-user-gesture-required"] });
   const takt = { stufe: a.stufe, reaktionMs: null, folgeMs: null, taktMs: null, danebenMs: null, fehler: [] };
   try {
     const kontext = await browser.newContext({ viewport: a.groesse, deviceScaleFactor: 1 });

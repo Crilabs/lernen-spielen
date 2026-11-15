@@ -9,6 +9,7 @@
 // in der Vorschau der Eltern (&eltern) nicht; keine Seitenfehler. Unbekannte id zeigt einen ruhigen Text.
 
 import { createRequire } from "node:module";
+import { starteStumm } from "./stumm.mjs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { starteServer } from "./server.mjs";
@@ -32,7 +33,7 @@ let fehler = 0;
 const pruefe = (ok, was) => { console.log(`${ok ? "ok  " : "FEHLER"} ${was}`); if (!ok) fehler++; };
 
 for (const typ of [chromium, webkit]) {
-  const browser = await typ.launch();
+  const browser = await starteStumm(typ);
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   const seitenfehler = [];
   page.on("pageerror", (e) => seitenfehler.push(e.message));

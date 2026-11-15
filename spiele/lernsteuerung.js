@@ -22,7 +22,8 @@
 //           (Spec 2026-11-15-bibliothek). Das alte Feld welten (Heimatwelt der Spiele) fällt beim Laden weg.
 //
 // Sitzung (eine Runde in einem Spiel):
-//   { spiel, thema, modus, stufe, probe: key[]|null, gezeigt, wieder: [{key, ab}], start, max, ereignis, letzte }
+//   { spiel, thema, modus, stufe, probe: key[]|null, gezeigt, wieder: [{key, ab}], start, max, ereignis, letzte,
+//     wdhThema }  (wdhThema: Thema des laufenden Wiederholungsblocks am Rundenende, sonst fehlt es)
 
 import { aufgabenVon, darstellbar, schwierigkeit, ZIEL_MS } from "./aufgabenarten.js";
 import { lade, speichere, sofortSpeichern, protokoll } from "./lernspiel.js";
@@ -514,6 +515,9 @@ function aufgabeZurWiederholung(ctx, stand, sitzung, rnd, heute, nurFaellig) {
   const faell = kand.filter((a) => faellig(eintrag(stand, a.key), heute));
   const bezug = sitzung.thema ?? aufgabeZu(ctx, sitzung.letzte)?.thema;
   const familie = themaVon(ctx, bezug)?.familie;
+  // Gebündelt (Christian, 2026-11-15): erst die fälligen Aufgaben des zuletzt wiederholten Themas, dann ein neues Thema
+  const gleich = sitzung.wdhThema ? faell.filter((a) => a.thema === sitzung.wdhThema) : [];
+  if (gleich.length) return niedrigesFach(stand, gleich, rnd);
   const ausFamilie = familie ? faell.filter((a) => themaVon(ctx, a.thema)?.familie === familie) : [];
   if (ausFamilie.length) return niedrigesFach(stand, ausFamilie, rnd);
   if (faell.length) return niedrigesFach(stand, faell, rnd);
@@ -533,12 +537,22 @@ function auchZu(ctx, stand, sitzung, ziel, rnd) {
     .sort((a, b) => kk(a) - kk(b)).slice(0, 2);
 }
 
+/**
+ * Rundenlänge in ms: K.RUNDE_MS, im Testbetrieb des Prüfstands kürzer (globalThis.__LS_RUNDE_MS__, gesetzt von
+ * tests/browser/durchspielen.mjs nur zusammen mit __LS_PRUEFEN__). Das Kind merkt davon nie etwas.
+ */
+export function rundenMs() {
+  const g = /** @type {any} */ (globalThis);
+  const test = g.__LS_PRUEFEN__ === true ? Number(g.__LS_RUNDE_MS__) : NaN;
+  return Number.isFinite(test) && test > 0 ? test : K.RUNDE_MS;
+}
+
 // Nächstes Angebot { ziel, auch, stufe } oder null am Rundenende
 export function naechstesAngebot(ctx, stand, sitzung, rnd = Math.random, { jetzt, heute } = {}) {
   if (sitzung.ereignis?.typ === "gekonnt") return null;
   const max = sitzung.modus === "wiederholung" ? Math.min(sitzung.max ?? WIEDERHOLUNG_MAX, WIEDERHOLUNG_MAX) : sitzung.max;
   if (max != null && sitzung.gezeigt >= max) return null;
-  if (jetzt != null && Number.isFinite(sitzung.start) && jetzt - sitzung.start >= K.RUNDE_MS) return null;
+  if (jetzt != null && Number.isFinite(sitzung.start) && jetzt - sitzung.start >= rundenMs()) return null;
 
   let ziel = null;
   const probe = !!sitzung.probe?.length;
@@ -549,8 +563,16 @@ export function naechstesAngebot(ctx, stand, sitzung, rnd = Math.random, { jetzt
   }
   if (!ziel) {
     if (sitzung.modus === "wiederholung") ziel = aufgabeZurWiederholung(ctx, stand, sitzung, rnd, heute, false);
-    else ziel = (rnd() < K.ANTEIL_THEMA ? null : aufgabeZurWiederholung(ctx, stand, sitzung, rnd, heute, true))
-      ?? aufgabeDesThemas(ctx, stand, sitzung, rnd);
+    else {
+      // Wiederholungen gekonnter Themen kommen gebündelt am Ende der Runde, nicht verstreut (Christian, 2026-11-15):
+      // Jeder Wechsel des Themas ist im Spiel eine eigene Szene (docs/spielbau.md §8). Den Anteil ANTEIL_THEMA
+      // bestimmt die Rundenlänge (max oder RUNDE_MS); erst danach kommen fällige Wiederholungen, Thema für Thema.
+      const anteil = (max != null ? sitzung.gezeigt / max : 0) || (jetzt != null && Number.isFinite(sitzung.start) ? (jetzt - sitzung.start) / rundenMs() : 0);
+      const block = sitzung.wdhThema != null || anteil >= K.ANTEIL_THEMA;
+      const w = block ? aufgabeZurWiederholung(ctx, stand, sitzung, rnd, heute, true) : null;
+      if (w) sitzung.wdhThema = w.thema;
+      ziel = w ?? aufgabeDesThemas(ctx, stand, sitzung, rnd);
+    }
   }
   if (!ziel) return null;
   sitzung.gezeigt++;

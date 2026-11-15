@@ -383,18 +383,20 @@ test("Angebot: Wiederholung gekonnter Themen kommt dazu, Familie zuerst", () => 
   const ctx = { plan, spiele: SPIELE };
   s.themen.r5 = { z: "kann-ich" };
   s.themen.r10 = { z: "kann-ich" };
+  // Wiederholungen kommen gebündelt am Rundenende (Christian, 2026-11-15): hier spät in der Runde fragen
+  sitz.start = opt.jetzt - 0.8 * K.RUNDE_MS;
   const zaehle = () => {
     const n = {}, rnd = lcg(5);
     for (let i = 0; i < 60; i++) {
       const a = naechstesAngebot(ctx, s, sitz, rnd, opt);
       n[a.ziel.thema] = (n[a.ziel.thema] || 0) + 1;
-      sitz.gezeigt = 0; sitz.wieder = [];
+      sitz.gezeigt = 0; sitz.wieder = []; delete sitz.wdhThema;
     }
     return n;
   };
   const n = zaehle();
-  assert.deepEqual(Object.keys(n).sort(), ["r10", "r7"]); // z5/z7 bedient der Zahlenzauber nicht, r5 erst nach der Familie
-  assert.ok(n.r7 > n.r10);
+  // spät in der Runde nur Wiederholung, solange etwas fällig ist; z5/z7 bedient der Zahlenzauber nicht, r5 erst nach der Familie
+  assert.deepEqual(Object.keys(n).sort(), ["r10"]);
   // Familie nicht mehr fällig → andere gekonnte Themen
   for (const x of aufgabenVon({ art: "rechnen", thema: "rechnen-10" })) s.aufgaben[x.key] = { f: 2, t: HEUTE, h: [], ms: [] };
   assert.ok(zaehle().r5 > 0);
@@ -534,6 +536,28 @@ test("Befund 4b: markiereGekonnt legt in großen Themen keine neuen Einträge an
   for (const k of ZERL7) assert.equal(s.aufgaben[k].f, 1, k);
 });
 
+test("Angebot: Wiederholungen gekonnter Themen kommen gebündelt am Rundenende, Thema für Thema (Christian 2026-11-15)", () => {
+  const { stand: s, sitzung: sitz } = uebend(CTX, "zz", "r7", "kopf");
+  const plan = { themen: [...PLAN.themen,
+    thema("r5", [], { art: "rechnen", thema: "rechnen-5" }, { familie: "zahl-5", stufen: ["kopf"] }),
+    thema("r10", [], { art: "rechnen", thema: "rechnen-10" }, { familie: "zahl-7", stufen: ["kopf"] })] };
+  const ctx = { plan, spiele: SPIELE };
+  s.themen.r5 = { z: "kann-ich" };
+  s.themen.r10 = { z: "kann-ich" };
+  sitz.start = opt.jetzt;
+  const rnd = lcg(7), folge = [];
+  // erster Teil der Runde: nur das Thema
+  for (let i = 0; i < 10; i++) { folge.push(naechstesAngebot(ctx, s, sitz, rnd, opt).ziel.thema); sitz.wieder = []; }
+  assert.ok(folge.every((t) => t === "r7"), folge.join(" "));
+  // spät in der Runde: Wiederholungen, und zwar zusammenhängend (ein Thema bleibt, bis es nichts Fälliges mehr hat)
+  sitz.start = opt.jetzt - 0.8 * K.RUNDE_MS;
+  const spaet = [];
+  for (let i = 0; i < 8; i++) { spaet.push(naechstesAngebot(ctx, s, sitz, rnd, opt).ziel.thema); sitz.wieder = []; }
+  const wechsel = spaet.filter((t, i) => i > 0 && t !== spaet[i - 1]).length;
+  assert.ok(spaet.some((t) => t !== "r7"), spaet.join(" "));
+  assert.ok(wechsel <= 2, `zu viele Wechsel: ${spaet.join(" ")}`);
+});
+
 test("Befund 4c: Wiederholung großer gekonnter Themen nur aus Aufgaben mit Eintrag", () => {
   const s = neuerStand();
   s.themen["plus-bis-100"] = { z: "kann-ich", k: "2026-11-01", stufe: "kopf" };
@@ -546,11 +570,12 @@ test("Befund 4c: Wiederholung großer gekonnter Themen nur aus Aufgaben mit Eint
   s.themen["rechnen-3"] = { z: "dran", stufe: "kopf", e: HEUTE, seit: HEUTE, k: "", frei: 0, v: [] };
   const sitz = neueSitzung(ECHT, s, "zahlenzauber", { thema: "rechnen-3", modus: "thema" }, { jetzt: JETZT, rnd: lcg(3) });
   const rnd = lcg(11), gesehen = new Set();
+  sitz.start = opt.jetzt - 0.8 * K.RUNDE_MS; // Wiederholungen gebündelt am Rundenende
   for (let i = 0; i < 80; i++) {
     const a = naechstesAngebot(ECHT, s, sitz, rnd, opt);
     gesehen.add(a.ziel.thema);
     if (a.ziel.thema !== "rechnen-3") assert.ok(mit.includes(a.ziel.key), a.ziel.key);
-    sitz.gezeigt = 0; sitz.wieder = [];
+    sitz.gezeigt = 0; sitz.wieder = []; delete sitz.wdhThema;
   }
   assert.ok(gesehen.has("plus-bis-100"), "fällige Aufgaben mit Eintrag kommen dran");
   // ohne einen einzigen Eintrag bleibt die Wiederholungsrunde nicht leer
@@ -590,4 +615,17 @@ test("ladeCtx sucht lernplan.json und spiele.json neben lernsteuerung.js, nicht 
   const quelle = readFileSync(new URL("../spiele/lernsteuerung.js", import.meta.url), "utf8");
   const ladeCtx = quelle.slice(quelle.indexOf("async function ladeCtx()"), quelle.indexOf("return ctxCache;"));
   assert.match(ladeCtx, /fetch\(new URL\(f, import\.meta\.url\)\)/);
+});
+
+test("rundenMs: echte Rundenlänge, kürzer nur im Testbetrieb des Prüfstands", async () => {
+  const { rundenMs } = await import("../spiele/lernsteuerung.js");
+  const g = globalThis;
+  assert.equal(rundenMs(), K.RUNDE_MS);
+  g.__LS_RUNDE_MS__ = 60000;
+  assert.equal(rundenMs(), K.RUNDE_MS, "ohne __LS_PRUEFEN__ zählt nur die echte Länge");
+  g.__LS_PRUEFEN__ = true;
+  assert.equal(rundenMs(), 60000);
+  g.__LS_RUNDE_MS__ = 0;
+  assert.equal(rundenMs(), K.RUNDE_MS);
+  delete g.__LS_RUNDE_MS__; delete g.__LS_PRUEFEN__;
 });

@@ -183,7 +183,7 @@ Idee        (1 Agent) → docs/spiele/<fach>/<spiel>.md, höchstens 40 Zeilen
 Bau         (1 Agent) → das ganze Spiel, Einstiegsklasse auf allen Stufen
 Prüfstand   (Skript)  → Durchspielen je Stufe, npm test, Textprüfung, Filmstreifen, Takt ──rot──→ Bau (Befunde)
 Spielprüfung(1 Agent) → Freude, Streichliste, Grenzen, Schönheit ──rot──→ Bau (Befunde) → Prüfstand → Spielprüfung
-Abschluss   (Skript)  → Audio, Kosten, Merge nach main      (nach 2 Runden rot: parken)
+Abschluss   (Skript)  → Audio, Spielbild, Kosten, Merge nach main   (nach 2 Runden rot: parken)
 ```
 
 | Schritt | Wer | Modell | Liest | Ergebnis |
@@ -193,7 +193,7 @@ Abschluss   (Skript)  → Audio, Kosten, Merge nach main      (nach 2 Runden rot
 | Bau | frischer Agent | `sonnet` | Bauheft, Idee, Vorlage | Spiel, `spiele.json`, Tests, Commit |
 | Prüfstand | `werkzeuge/spielbau/pruefstand.mjs` | – | das Spiel | `pruefstand.json` grün/rot mit Befunden, Bilder, Filmstreifen |
 | Spielprüfung | frischer Agent | `opus` | Bauheft, Idee, Filmstreifen, Texte, Prüfstand | Urteil nach §5 und fünf Fragen, Streichliste |
-| Abschluss | `werkzeuge/spielbau/abschliessen.mjs` | – | Ablage | Audio, Kosten gebucht, Merge |
+| Abschluss | `werkzeuge/spielbau/abschliessen.mjs` | – | Ablage | Audio, Spielbild (`werkzeuge/bilder/spielbild.mjs`: 2–3 Screenshots → plastisches Querformat für die Mini-Vorschau der Karte), Kosten, Merge |
 
 - **Die Steuerung ist ein Skript** (`.claude/workflows/spiel-bauen.js`, gestartet vom Skill „Spiel entwickeln“).
   Sie liest nur kurze JSON-Ergebnisse, nie Berichte oder Code.

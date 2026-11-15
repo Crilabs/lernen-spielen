@@ -1,6 +1,456 @@
 {
  "stimme": "de-DE-Florian:DragonHDLatestNeural",
  "texte": {
+  "1 mal 10 ist 10.": {
+   "datei": "florian/26cf0fc132f8.mp3",
+   "h": "002649f5c2",
+   "gehoert": false
+  },
+  "1 mal 2 ist 2.": {
+   "datei": "florian/70b0b38b7194.mp3",
+   "h": "6dfc280ee2",
+   "gehoert": false
+  },
+  "1 mal 3 ist 3.": {
+   "datei": "florian/eb5dab6d670a.mp3",
+   "h": "c5c6af716a",
+   "gehoert": false
+  },
+  "1 mal 4 ist 4.": {
+   "datei": "florian/4b2180eaa506.mp3",
+   "h": "430970570e",
+   "gehoert": false
+  },
+  "1 mal 5 ist 5.": {
+   "datei": "florian/b36892ab242d.mp3",
+   "h": "72794039d4",
+   "gehoert": false
+  },
+  "1 mal 6 ist 6.": {
+   "datei": "florian/b2a81c3f872a.mp3",
+   "h": "2848a7677f",
+   "gehoert": false
+  },
+  "1 mal 7 ist 7.": {
+   "datei": "florian/1d664414218f.mp3",
+   "h": "74cff970ae",
+   "gehoert": false
+  },
+  "1 mal 8 ist 8.": {
+   "datei": "florian/5e832324a3e0.mp3",
+   "h": "97c5d0afe1",
+   "gehoert": false
+  },
+  "1 mal 9 ist 9.": {
+   "datei": "florian/754aecb011b5.mp3",
+   "h": "03043c0f97",
+   "gehoert": false
+  },
+  "10 mal 10 ist 100.": {
+   "datei": "florian/38803cd39057.mp3",
+   "h": "4778d5b15a",
+   "gehoert": false
+  },
+  "10 mal 2 ist 20.": {
+   "datei": "florian/dccf2a01c352.mp3",
+   "h": "95d11057d0",
+   "gehoert": false
+  },
+  "10 mal 3 ist 30.": {
+   "datei": "florian/f0af94d0cc11.mp3",
+   "h": "450f0a1222",
+   "gehoert": false
+  },
+  "10 mal 4 ist 40.": {
+   "datei": "florian/fdf4979b78ea.mp3",
+   "h": "107935416e",
+   "gehoert": false
+  },
+  "10 mal 5 ist 50.": {
+   "datei": "florian/e38c765b7b9b.mp3",
+   "h": "a6db7b48d8",
+   "gehoert": false
+  },
+  "10 mal 6 ist 60.": {
+   "datei": "florian/c2b24b630efa.mp3",
+   "h": "ec602cee00",
+   "gehoert": false
+  },
+  "10 mal 7 ist 70.": {
+   "datei": "florian/cbb0b784ec19.mp3",
+   "h": "fe8926fc4d",
+   "gehoert": false
+  },
+  "10 mal 8 ist 80.": {
+   "datei": "florian/ac94cbbbcf4e.mp3",
+   "h": "6c19e8c7a8",
+   "gehoert": false
+  },
+  "10 mal 9 ist 90.": {
+   "datei": "florian/d0db92a11a9c.mp3",
+   "h": "0b149845fd",
+   "gehoert": false
+  },
+  "2 mal 10 ist 20.": {
+   "datei": "florian/eeea853e1e94.mp3",
+   "h": "b9fde0b5cc",
+   "gehoert": false
+  },
+  "2 mal 2 ist 4.": {
+   "datei": "florian/716feee3cbf3.mp3",
+   "h": "1c69f0afd5",
+   "gehoert": false
+  },
+  "2 mal 3 ist 6.": {
+   "datei": "florian/579663a451ee.mp3",
+   "h": "7ac85e6616",
+   "gehoert": false
+  },
+  "2 mal 4 ist 8.": {
+   "datei": "florian/93c7d8bdadc5.mp3",
+   "h": "65bb581b9c",
+   "gehoert": false
+  },
+  "2 mal 5 ist 10.": {
+   "datei": "florian/54050a186de6.mp3",
+   "h": "2f27624175",
+   "gehoert": false
+  },
+  "2 mal 6 ist 12.": {
+   "datei": "florian/14bb9a57ca29.mp3",
+   "h": "49614c7922",
+   "gehoert": false
+  },
+  "2 mal 7 ist 14.": {
+   "datei": "florian/00cedd676008.mp3",
+   "h": "3e5a515225",
+   "gehoert": false
+  },
+  "2 mal 8 ist 16.": {
+   "datei": "florian/b680ee6944cc.mp3",
+   "h": "a08578c7ab",
+   "gehoert": false
+  },
+  "2 mal 9 ist 18.": {
+   "datei": "florian/3eb3541dd783.mp3",
+   "h": "d04d2ecced",
+   "gehoert": false
+  },
+  "3 mal 10 ist 30.": {
+   "datei": "florian/74362d573f87.mp3",
+   "h": "b5de1f1235",
+   "gehoert": false
+  },
+  "3 mal 2 ist 6.": {
+   "datei": "florian/cf1a834b7f90.mp3",
+   "h": "f4ee0bb2dc",
+   "gehoert": false
+  },
+  "3 mal 3 ist 9.": {
+   "datei": "florian/feb73556844c.mp3",
+   "h": "8a8558c5a9",
+   "gehoert": false
+  },
+  "3 mal 4 ist 12.": {
+   "datei": "florian/1452963489ba.mp3",
+   "h": "2b5efe905c",
+   "gehoert": false
+  },
+  "3 mal 5 ist 15.": {
+   "datei": "florian/59b76b792288.mp3",
+   "h": "066e88e7a2",
+   "gehoert": false
+  },
+  "3 mal 6 ist 18.": {
+   "datei": "florian/1fc7c9467459.mp3",
+   "h": "836c691c2c",
+   "gehoert": false
+  },
+  "3 mal 7 ist 21.": {
+   "datei": "florian/4f821728efd9.mp3",
+   "h": "d7f63abe50",
+   "gehoert": false
+  },
+  "3 mal 8 ist 24.": {
+   "datei": "florian/6e996deeb77f.mp3",
+   "h": "8304101520",
+   "gehoert": false
+  },
+  "3 mal 9 ist 27.": {
+   "datei": "florian/7fc4aad116d6.mp3",
+   "h": "9ee8757db9",
+   "gehoert": false
+  },
+  "4 mal 10 ist 40.": {
+   "datei": "florian/6898096a9e15.mp3",
+   "h": "918c303e73",
+   "gehoert": false
+  },
+  "4 mal 2 ist 8.": {
+   "datei": "florian/5a197176b85f.mp3",
+   "h": "eee6cfef9f",
+   "gehoert": false
+  },
+  "4 mal 3 ist 12.": {
+   "datei": "florian/f3731854d0cc.mp3",
+   "h": "32fb7ede53",
+   "gehoert": false
+  },
+  "4 mal 4 ist 16.": {
+   "datei": "florian/94c9289e02c0.mp3",
+   "h": "01c0e7934b",
+   "gehoert": false
+  },
+  "4 mal 5 ist 20.": {
+   "datei": "florian/93249784d127.mp3",
+   "h": "6c4a3183cb",
+   "gehoert": false
+  },
+  "4 mal 6 ist 24.": {
+   "datei": "florian/9c2c02604fac.mp3",
+   "h": "b75bc5c443",
+   "gehoert": false
+  },
+  "4 mal 7 ist 28.": {
+   "datei": "florian/b1da547040bc.mp3",
+   "h": "a380d757e1",
+   "gehoert": false
+  },
+  "4 mal 8 ist 32.": {
+   "datei": "florian/845e65c5c741.mp3",
+   "h": "cfc1fc8e5c",
+   "gehoert": false
+  },
+  "4 mal 9 ist 36.": {
+   "datei": "florian/7b40e302dccf.mp3",
+   "h": "f031458923",
+   "gehoert": false
+  },
+  "5 mal 10 ist 50.": {
+   "datei": "florian/e85e59cea2e9.mp3",
+   "h": "8c48c47980",
+   "gehoert": false
+  },
+  "5 mal 2 ist 10.": {
+   "datei": "florian/885240b33a15.mp3",
+   "h": "55a0cb8eeb",
+   "gehoert": false
+  },
+  "5 mal 3 ist 15.": {
+   "datei": "florian/59e0c1be9d8c.mp3",
+   "h": "f1214a47d4",
+   "gehoert": false
+  },
+  "5 mal 4 ist 20.": {
+   "datei": "florian/984f2f3de670.mp3",
+   "h": "97df5cc608",
+   "gehoert": false
+  },
+  "5 mal 5 ist 25.": {
+   "datei": "florian/a9145da8a42f.mp3",
+   "h": "41f5e0e4f0",
+   "gehoert": false
+  },
+  "5 mal 6 ist 30.": {
+   "datei": "florian/530e12cdbcec.mp3",
+   "h": "0aff99e51f",
+   "gehoert": false
+  },
+  "5 mal 7 ist 35.": {
+   "datei": "florian/b4372d90b1ba.mp3",
+   "h": "27d14e158d",
+   "gehoert": false
+  },
+  "5 mal 8 ist 40.": {
+   "datei": "florian/f27c4cda4307.mp3",
+   "h": "64aed2d3eb",
+   "gehoert": false
+  },
+  "5 mal 9 ist 45.": {
+   "datei": "florian/d28210d81ff7.mp3",
+   "h": "dbf990b6a9",
+   "gehoert": false
+  },
+  "6 mal 10 ist 60.": {
+   "datei": "florian/d699c313ed19.mp3",
+   "h": "2591ca9847",
+   "gehoert": false
+  },
+  "6 mal 2 ist 12.": {
+   "datei": "florian/5c188507d5ae.mp3",
+   "h": "d48fbcf508",
+   "gehoert": false
+  },
+  "6 mal 3 ist 18.": {
+   "datei": "florian/1f4e04b53ded.mp3",
+   "h": "cf9d6fc59e",
+   "gehoert": false
+  },
+  "6 mal 4 ist 24.": {
+   "datei": "florian/2b245754526d.mp3",
+   "h": "955c67cdfd",
+   "gehoert": false
+  },
+  "6 mal 5 ist 30.": {
+   "datei": "florian/4246579090ff.mp3",
+   "h": "cc186108c8",
+   "gehoert": false
+  },
+  "6 mal 6 ist 36.": {
+   "datei": "florian/8089abe2c613.mp3",
+   "h": "0bd272e434",
+   "gehoert": false
+  },
+  "6 mal 7 ist 42.": {
+   "datei": "florian/439b9b1aa711.mp3",
+   "h": "218ada4bdd",
+   "gehoert": false
+  },
+  "6 mal 8 ist 48.": {
+   "datei": "florian/5587c8b9eca0.mp3",
+   "h": "4830afabb5",
+   "gehoert": false
+  },
+  "6 mal 9 ist 54.": {
+   "datei": "florian/68ee302ddc8a.mp3",
+   "h": "8869dd995a",
+   "gehoert": false
+  },
+  "7 mal 10 ist 70.": {
+   "datei": "florian/a84404bd7a5b.mp3",
+   "h": "6dba8117a8",
+   "gehoert": false
+  },
+  "7 mal 2 ist 14.": {
+   "datei": "florian/58e3ea140787.mp3",
+   "h": "be2c1ae196",
+   "gehoert": false
+  },
+  "7 mal 3 ist 21.": {
+   "datei": "florian/ad150bd98d1e.mp3",
+   "h": "9852239af0",
+   "gehoert": false
+  },
+  "7 mal 4 ist 28.": {
+   "datei": "florian/2a4b4623abd8.mp3",
+   "h": "14db19e23f",
+   "gehoert": false
+  },
+  "7 mal 5 ist 35.": {
+   "datei": "florian/5f3532e13df1.mp3",
+   "h": "3fb60634b3",
+   "gehoert": false
+  },
+  "7 mal 6 ist 42.": {
+   "datei": "florian/0518416f800a.mp3",
+   "h": "01707a7af2",
+   "gehoert": false
+  },
+  "7 mal 7 ist 49.": {
+   "datei": "florian/c02986c42ce2.mp3",
+   "h": "9d757210f0",
+   "gehoert": false
+  },
+  "7 mal 8 ist 56.": {
+   "datei": "florian/cd02ed548d0b.mp3",
+   "h": "6f9ca3dc48",
+   "gehoert": false
+  },
+  "7 mal 9 ist 63.": {
+   "datei": "florian/3e069c88b718.mp3",
+   "h": "715d5087d5",
+   "gehoert": false
+  },
+  "8 mal 10 ist 80.": {
+   "datei": "florian/7e7bd31d3c10.mp3",
+   "h": "a16e14a118",
+   "gehoert": false
+  },
+  "8 mal 2 ist 16.": {
+   "datei": "florian/41e0797921a1.mp3",
+   "h": "bbdbbf8306",
+   "gehoert": false
+  },
+  "8 mal 3 ist 24.": {
+   "datei": "florian/69f2f33ada53.mp3",
+   "h": "0d55928001",
+   "gehoert": false
+  },
+  "8 mal 4 ist 32.": {
+   "datei": "florian/a09176c34fca.mp3",
+   "h": "7457cda966",
+   "gehoert": false
+  },
+  "8 mal 5 ist 40.": {
+   "datei": "florian/a1e2b86df528.mp3",
+   "h": "6991e6395e",
+   "gehoert": false
+  },
+  "8 mal 6 ist 48.": {
+   "datei": "florian/64249bf3383f.mp3",
+   "h": "60212a50da",
+   "gehoert": false
+  },
+  "8 mal 7 ist 56.": {
+   "datei": "florian/51d8795aa737.mp3",
+   "h": "e7311e97cd",
+   "gehoert": false
+  },
+  "8 mal 8 ist 64.": {
+   "datei": "florian/7f7016d50186.mp3",
+   "h": "3d791da2e0",
+   "gehoert": false
+  },
+  "8 mal 9 ist 72.": {
+   "datei": "florian/e99d62296441.mp3",
+   "h": "6fe40066a0",
+   "gehoert": false
+  },
+  "9 mal 10 ist 90.": {
+   "datei": "florian/4c23eabef54d.mp3",
+   "h": "cb2dab86fb",
+   "gehoert": false
+  },
+  "9 mal 2 ist 18.": {
+   "datei": "florian/03732df84834.mp3",
+   "h": "d8cdecfa60",
+   "gehoert": false
+  },
+  "9 mal 3 ist 27.": {
+   "datei": "florian/c5f2771a4665.mp3",
+   "h": "6a45a7c661",
+   "gehoert": false
+  },
+  "9 mal 4 ist 36.": {
+   "datei": "florian/456f3637f755.mp3",
+   "h": "d6a06c8f64",
+   "gehoert": false
+  },
+  "9 mal 5 ist 45.": {
+   "datei": "florian/bbba13949b2c.mp3",
+   "h": "7b3a285e3d",
+   "gehoert": false
+  },
+  "9 mal 6 ist 54.": {
+   "datei": "florian/cf97356bbbf7.mp3",
+   "h": "1e35ccbf66",
+   "gehoert": false
+  },
+  "9 mal 7 ist 63.": {
+   "datei": "florian/828465650504.mp3",
+   "h": "ea59723668",
+   "gehoert": false
+  },
+  "9 mal 8 ist 72.": {
+   "datei": "florian/987733c0e541.mp3",
+   "h": "7c129c535b",
+   "gehoert": false
+  },
+  "9 mal 9 ist 81.": {
+   "datei": "florian/588681f45c94.mp3",
+   "h": "01d53d1653",
+   "gehoert": false
+  },
   "Ä von A: Mehrzahl": {
    "datei": "florian/3e6331d7eeb2.mp3",
    "h": "ea3ef8f49e",
@@ -171,6 +621,11 @@
    "h": "bc11511ead",
    "gehoert": false
   },
+  "Am Abend liegt Mia bei Malik. Sie schnurrt leise. Katzen schnurren oft, wenn sie sich wohlfühlen.": {
+   "datei": "florian/1c8e3d98e49e.mp3",
+   "h": "7f6d25591d",
+   "gehoert": false
+  },
   "Am Bach liegt eine Brücke. Vorne der Zehnerstab, dahinter ein kleiner Stab.": {
    "datei": "florian/a7dcc76820cc.mp3",
    "h": "14ec8479f8",
@@ -196,6 +651,11 @@
    "h": "260311ae9e",
    "gehoert": false
   },
+  "Am Morgen läuft Mia zu Malik. Ihr Schwanz steht hoch. So begrüßen Katzen.": {
+   "datei": "florian/e8b59a7e26ff.mp3",
+   "h": "f7474862d3",
+   "gehoert": false
+  },
   "Am Morgen scheint wieder die Sonne. Lotta fliegt gleich zur Löwenzahnwiese. Mit zwei gelben Kugeln kommt sie zurück. Was glaubst du: Was macht Lotta jetzt?": {
    "datei": "florian/7bf386f321a6.mp3",
    "h": "a5b35c57c4",
@@ -206,6 +666,16 @@
    "h": "7b639701ad",
    "gehoert": false
   },
+  "Am Morgen ziehen die zehn Perlen weiter. Ela und Kofi winken.": {
+   "datei": "florian/5e917cc14875.mp3",
+   "h": "a5ade82559",
+   "gehoert": false
+  },
+  "Am Nachmittag besucht Mia die Tierärztin. Sie hört Mias Herz ab. Katzen kommen einmal im Jahr zur Kontrolle.": {
+   "datei": "florian/b13f57e7b6cd.mp3",
+   "h": "16756d6699",
+   "gehoert": false
+  },
   "Am Nachmittag kommt die Herde an ein trockenes Bachbett. Die Großen steigen hinunter und drüben wieder hinauf. Nila rutscht am steilen Ufer ab. Sie ruft laut.": {
    "datei": "florian/473e52fb3200.mp3",
    "h": "ba17e7142f",
@@ -214,6 +684,11 @@
   "Am Nachmittag sinkt die Mutter tief hinab. Dort unten ruht sie ganz still. Ole will zu ihr.": {
    "datei": "florian/a7525c241281.mp3",
    "h": "6afe6b3654",
+   "gehoert": false
+  },
+  "Am nächsten Abend kommen alle zehn wieder. Zwei schlafen bei Ela, acht bei Kofi.": {
+   "datei": "florian/65f07c92f9ef.mp3",
+   "h": "e7f9f2fb64",
    "gehoert": false
   },
   "Am nächsten Abend sitzen fünf links und fünf rechts. Beide Zweige sind gleich voll.": {
@@ -564,6 +1039,11 @@
   "Danach planschen die Elefanten im Schlamm am Ufer. Nila wälzt sich hinein, bis sie ganz braun ist. Der Schlamm kühlt ihre heiße Haut.": {
    "datei": "florian/0183fbef9a8b.mp3",
    "h": "728625f790",
+   "gehoert": false
+  },
+  "Dann drei bei Ela, sieben bei Kofi. Kofi hat wieder mehr Platz.": {
+   "datei": "florian/601bad09797f.mp3",
+   "h": "6af145de7d",
    "gehoert": false
   },
   "Dann nimmt sie den Rest vom Zehnerstab.": {
@@ -1311,6 +1791,506 @@
    "h": "5977614901",
    "gehoert": false
   },
+  "Die 1 liegt dort drüben.": {
+   "datei": "florian/cab05dd4adba.mp3",
+   "h": "bd7dd9f566",
+   "gehoert": false
+  },
+  "Die 10 liegt dort drüben.": {
+   "datei": "florian/044ab453a662.mp3",
+   "h": "daed2f9ddd",
+   "gehoert": false
+  },
+  "Die 100 liegt dort drüben.": {
+   "datei": "florian/52cd0fbb6479.mp3",
+   "h": "a8929d04df",
+   "gehoert": false
+  },
+  "Die 11 liegt dort drüben.": {
+   "datei": "florian/5a3f23049b69.mp3",
+   "h": "e5fe86f190",
+   "gehoert": false
+  },
+  "Die 12 liegt dort drüben.": {
+   "datei": "florian/6edfd0b69892.mp3",
+   "h": "a1828f842e",
+   "gehoert": false
+  },
+  "Die 13 liegt dort drüben.": {
+   "datei": "florian/8ed0567b94a7.mp3",
+   "h": "875daf718c",
+   "gehoert": false
+  },
+  "Die 14 liegt dort drüben.": {
+   "datei": "florian/547d6c7af3b6.mp3",
+   "h": "7d684562f5",
+   "gehoert": false
+  },
+  "Die 15 liegt dort drüben.": {
+   "datei": "florian/de839f69bf55.mp3",
+   "h": "1cdd8a3f41",
+   "gehoert": false
+  },
+  "Die 16 liegt dort drüben.": {
+   "datei": "florian/3ffe0f96fac3.mp3",
+   "h": "6738c3e9bb",
+   "gehoert": false
+  },
+  "Die 17 liegt dort drüben.": {
+   "datei": "florian/e693a061927c.mp3",
+   "h": "b86d414403",
+   "gehoert": false
+  },
+  "Die 18 liegt dort drüben.": {
+   "datei": "florian/9cb5d8639334.mp3",
+   "h": "7a90d6b761",
+   "gehoert": false
+  },
+  "Die 19 liegt dort drüben.": {
+   "datei": "florian/47dfc64384bf.mp3",
+   "h": "a7d81ebcd3",
+   "gehoert": false
+  },
+  "Die 2 liegt dort drüben.": {
+   "datei": "florian/480f1db75058.mp3",
+   "h": "b0a536eb00",
+   "gehoert": false
+  },
+  "Die 20 liegt dort drüben.": {
+   "datei": "florian/8498e1168cba.mp3",
+   "h": "2b8b632bce",
+   "gehoert": false
+  },
+  "Die 21 liegt dort drüben.": {
+   "datei": "florian/7416e626835e.mp3",
+   "h": "6b975c60c4",
+   "gehoert": false
+  },
+  "Die 22 liegt dort drüben.": {
+   "datei": "florian/9f3d57e20893.mp3",
+   "h": "7c0f730bde",
+   "gehoert": false
+  },
+  "Die 23 liegt dort drüben.": {
+   "datei": "florian/94da98f5e03d.mp3",
+   "h": "89ae25429d",
+   "gehoert": false
+  },
+  "Die 24 liegt dort drüben.": {
+   "datei": "florian/d8af14549b07.mp3",
+   "h": "130b89041d",
+   "gehoert": false
+  },
+  "Die 25 liegt dort drüben.": {
+   "datei": "florian/95ceec61c9e7.mp3",
+   "h": "5924eea4c2",
+   "gehoert": false
+  },
+  "Die 26 liegt dort drüben.": {
+   "datei": "florian/93d8e83df5b7.mp3",
+   "h": "bba6046e33",
+   "gehoert": false
+  },
+  "Die 27 liegt dort drüben.": {
+   "datei": "florian/9643abe4d616.mp3",
+   "h": "3181238548",
+   "gehoert": false
+  },
+  "Die 28 liegt dort drüben.": {
+   "datei": "florian/1295223a4261.mp3",
+   "h": "4fac51c87b",
+   "gehoert": false
+  },
+  "Die 29 liegt dort drüben.": {
+   "datei": "florian/eb41131d2016.mp3",
+   "h": "7a6641d15e",
+   "gehoert": false
+  },
+  "Die 3 liegt dort drüben.": {
+   "datei": "florian/e818d7c47080.mp3",
+   "h": "b07624e328",
+   "gehoert": false
+  },
+  "Die 30 liegt dort drüben.": {
+   "datei": "florian/9a585cbcfd60.mp3",
+   "h": "e6d477a65d",
+   "gehoert": false
+  },
+  "Die 31 liegt dort drüben.": {
+   "datei": "florian/8d6b50e28e10.mp3",
+   "h": "7e3f3073d8",
+   "gehoert": false
+  },
+  "Die 32 liegt dort drüben.": {
+   "datei": "florian/f991ac6d9f20.mp3",
+   "h": "b9e1c39277",
+   "gehoert": false
+  },
+  "Die 33 liegt dort drüben.": {
+   "datei": "florian/ac880ddc3d75.mp3",
+   "h": "05f03a579a",
+   "gehoert": false
+  },
+  "Die 34 liegt dort drüben.": {
+   "datei": "florian/50891b797b72.mp3",
+   "h": "fde467ad32",
+   "gehoert": false
+  },
+  "Die 35 liegt dort drüben.": {
+   "datei": "florian/3f6d241c2c0e.mp3",
+   "h": "2d96c21a79",
+   "gehoert": false
+  },
+  "Die 36 liegt dort drüben.": {
+   "datei": "florian/69278d59d950.mp3",
+   "h": "f4308f4046",
+   "gehoert": false
+  },
+  "Die 37 liegt dort drüben.": {
+   "datei": "florian/3e6a1c16815c.mp3",
+   "h": "c8b3489e14",
+   "gehoert": false
+  },
+  "Die 38 liegt dort drüben.": {
+   "datei": "florian/bd947c9faf00.mp3",
+   "h": "c512a4714f",
+   "gehoert": false
+  },
+  "Die 39 liegt dort drüben.": {
+   "datei": "florian/e71bee29f340.mp3",
+   "h": "6ce902e2f3",
+   "gehoert": false
+  },
+  "Die 4 liegt dort drüben.": {
+   "datei": "florian/8e07c2ac3023.mp3",
+   "h": "d3b77e6301",
+   "gehoert": false
+  },
+  "Die 40 liegt dort drüben.": {
+   "datei": "florian/6456bfd0847d.mp3",
+   "h": "dfe668a7b6",
+   "gehoert": false
+  },
+  "Die 41 liegt dort drüben.": {
+   "datei": "florian/a55c629f6b2f.mp3",
+   "h": "86b82e27e2",
+   "gehoert": false
+  },
+  "Die 42 liegt dort drüben.": {
+   "datei": "florian/56ab45a213ba.mp3",
+   "h": "ce4b081d38",
+   "gehoert": false
+  },
+  "Die 43 liegt dort drüben.": {
+   "datei": "florian/7cd85de17120.mp3",
+   "h": "11742d23ab",
+   "gehoert": false
+  },
+  "Die 44 liegt dort drüben.": {
+   "datei": "florian/029f99ec236c.mp3",
+   "h": "284263798d",
+   "gehoert": false
+  },
+  "Die 45 liegt dort drüben.": {
+   "datei": "florian/a8cdf53b7fc8.mp3",
+   "h": "23842525e1",
+   "gehoert": false
+  },
+  "Die 46 liegt dort drüben.": {
+   "datei": "florian/c2e258b86012.mp3",
+   "h": "160c7d477a",
+   "gehoert": false
+  },
+  "Die 47 liegt dort drüben.": {
+   "datei": "florian/19f0a5585d4e.mp3",
+   "h": "14851ec700",
+   "gehoert": false
+  },
+  "Die 48 liegt dort drüben.": {
+   "datei": "florian/912f3e63c183.mp3",
+   "h": "cc72837efa",
+   "gehoert": false
+  },
+  "Die 49 liegt dort drüben.": {
+   "datei": "florian/9d3eef30a089.mp3",
+   "h": "8b0e5bc4e8",
+   "gehoert": false
+  },
+  "Die 5 liegt dort drüben.": {
+   "datei": "florian/f2a79cddf205.mp3",
+   "h": "4b7e763158",
+   "gehoert": false
+  },
+  "Die 50 liegt dort drüben.": {
+   "datei": "florian/330c8b2414b8.mp3",
+   "h": "0b4b6dfb5f",
+   "gehoert": false
+  },
+  "Die 51 liegt dort drüben.": {
+   "datei": "florian/2fe9c09a24ea.mp3",
+   "h": "0aa50ae7ed",
+   "gehoert": false
+  },
+  "Die 52 liegt dort drüben.": {
+   "datei": "florian/42da74fd7037.mp3",
+   "h": "ff75bec431",
+   "gehoert": false
+  },
+  "Die 53 liegt dort drüben.": {
+   "datei": "florian/11d728f5f537.mp3",
+   "h": "7db1e62421",
+   "gehoert": false
+  },
+  "Die 54 liegt dort drüben.": {
+   "datei": "florian/c4803c2a6d6a.mp3",
+   "h": "1829e85b5d",
+   "gehoert": false
+  },
+  "Die 55 liegt dort drüben.": {
+   "datei": "florian/188b3ace496b.mp3",
+   "h": "cc8be1af0a",
+   "gehoert": false
+  },
+  "Die 56 liegt dort drüben.": {
+   "datei": "florian/79443cc74ed9.mp3",
+   "h": "743bae7750",
+   "gehoert": false
+  },
+  "Die 57 liegt dort drüben.": {
+   "datei": "florian/d65e34ffb758.mp3",
+   "h": "15ea76aea9",
+   "gehoert": false
+  },
+  "Die 58 liegt dort drüben.": {
+   "datei": "florian/3f3b8c91c87f.mp3",
+   "h": "a8ebf2846a",
+   "gehoert": false
+  },
+  "Die 59 liegt dort drüben.": {
+   "datei": "florian/f14344fb9a69.mp3",
+   "h": "d47059e908",
+   "gehoert": false
+  },
+  "Die 6 liegt dort drüben.": {
+   "datei": "florian/cbc5b1f6b61e.mp3",
+   "h": "c7d704e066",
+   "gehoert": false
+  },
+  "Die 60 liegt dort drüben.": {
+   "datei": "florian/17c16953611d.mp3",
+   "h": "ed05fe1496",
+   "gehoert": false
+  },
+  "Die 61 liegt dort drüben.": {
+   "datei": "florian/b55a1ce7dc18.mp3",
+   "h": "e4e2fd827d",
+   "gehoert": false
+  },
+  "Die 62 liegt dort drüben.": {
+   "datei": "florian/ffa08c3832b3.mp3",
+   "h": "83c19946b1",
+   "gehoert": false
+  },
+  "Die 63 liegt dort drüben.": {
+   "datei": "florian/c89a499c52ad.mp3",
+   "h": "f2e3e49da1",
+   "gehoert": false
+  },
+  "Die 64 liegt dort drüben.": {
+   "datei": "florian/055e29ab50bb.mp3",
+   "h": "67f7e4046e",
+   "gehoert": false
+  },
+  "Die 65 liegt dort drüben.": {
+   "datei": "florian/78d01563e408.mp3",
+   "h": "39a3b045d0",
+   "gehoert": false
+  },
+  "Die 66 liegt dort drüben.": {
+   "datei": "florian/3b1b39ab8bc3.mp3",
+   "h": "567ed08c8b",
+   "gehoert": false
+  },
+  "Die 67 liegt dort drüben.": {
+   "datei": "florian/b22c6738bc43.mp3",
+   "h": "41cd99b916",
+   "gehoert": false
+  },
+  "Die 68 liegt dort drüben.": {
+   "datei": "florian/ae15d986edfc.mp3",
+   "h": "78324ba44e",
+   "gehoert": false
+  },
+  "Die 69 liegt dort drüben.": {
+   "datei": "florian/445fbb840f41.mp3",
+   "h": "7165dd7925",
+   "gehoert": false
+  },
+  "Die 7 liegt dort drüben.": {
+   "datei": "florian/fb4ac716b065.mp3",
+   "h": "453969f321",
+   "gehoert": false
+  },
+  "Die 70 liegt dort drüben.": {
+   "datei": "florian/b8bd133ee056.mp3",
+   "h": "9ba621d633",
+   "gehoert": false
+  },
+  "Die 71 liegt dort drüben.": {
+   "datei": "florian/ada6b934f762.mp3",
+   "h": "ac82202f64",
+   "gehoert": false
+  },
+  "Die 72 liegt dort drüben.": {
+   "datei": "florian/018a1c831206.mp3",
+   "h": "4ff23b4440",
+   "gehoert": false
+  },
+  "Die 73 liegt dort drüben.": {
+   "datei": "florian/d2edddd2841e.mp3",
+   "h": "2ee1687f2e",
+   "gehoert": false
+  },
+  "Die 74 liegt dort drüben.": {
+   "datei": "florian/2bba242e1d43.mp3",
+   "h": "2e5c02d67b",
+   "gehoert": false
+  },
+  "Die 75 liegt dort drüben.": {
+   "datei": "florian/6b610523172e.mp3",
+   "h": "d77803fb72",
+   "gehoert": false
+  },
+  "Die 76 liegt dort drüben.": {
+   "datei": "florian/3cc53f1eb8d9.mp3",
+   "h": "4df99f21e2",
+   "gehoert": false
+  },
+  "Die 77 liegt dort drüben.": {
+   "datei": "florian/e7731b89a63d.mp3",
+   "h": "47345d3122",
+   "gehoert": false
+  },
+  "Die 78 liegt dort drüben.": {
+   "datei": "florian/fa0763118a65.mp3",
+   "h": "f1728ae4fb",
+   "gehoert": false
+  },
+  "Die 79 liegt dort drüben.": {
+   "datei": "florian/ece2331f6e0c.mp3",
+   "h": "64bdcaf4ef",
+   "gehoert": false
+  },
+  "Die 8 liegt dort drüben.": {
+   "datei": "florian/3e59b97cf408.mp3",
+   "h": "3af0a478ed",
+   "gehoert": false
+  },
+  "Die 80 liegt dort drüben.": {
+   "datei": "florian/c82ad1fc64c0.mp3",
+   "h": "32d8f883cd",
+   "gehoert": false
+  },
+  "Die 81 liegt dort drüben.": {
+   "datei": "florian/f80af6b76239.mp3",
+   "h": "124049f436",
+   "gehoert": false
+  },
+  "Die 82 liegt dort drüben.": {
+   "datei": "florian/886359003656.mp3",
+   "h": "ee44e0be05",
+   "gehoert": false
+  },
+  "Die 83 liegt dort drüben.": {
+   "datei": "florian/39469f6afa2f.mp3",
+   "h": "4d93ffdcc5",
+   "gehoert": false
+  },
+  "Die 84 liegt dort drüben.": {
+   "datei": "florian/957667e29619.mp3",
+   "h": "af184050c9",
+   "gehoert": false
+  },
+  "Die 85 liegt dort drüben.": {
+   "datei": "florian/a8cc7134ca3b.mp3",
+   "h": "90c2d9ae56",
+   "gehoert": false
+  },
+  "Die 86 liegt dort drüben.": {
+   "datei": "florian/b921a68b23b9.mp3",
+   "h": "cb6066b81a",
+   "gehoert": false
+  },
+  "Die 87 liegt dort drüben.": {
+   "datei": "florian/ce08b4b6d483.mp3",
+   "h": "2d151962af",
+   "gehoert": false
+  },
+  "Die 88 liegt dort drüben.": {
+   "datei": "florian/64ef6a3fe480.mp3",
+   "h": "8813e994c2",
+   "gehoert": false
+  },
+  "Die 89 liegt dort drüben.": {
+   "datei": "florian/9fa2d21481be.mp3",
+   "h": "7880965e13",
+   "gehoert": false
+  },
+  "Die 9 liegt dort drüben.": {
+   "datei": "florian/2b5c2db764cf.mp3",
+   "h": "0c86b5e598",
+   "gehoert": false
+  },
+  "Die 90 liegt dort drüben.": {
+   "datei": "florian/4a1b13a0dc70.mp3",
+   "h": "d76e02a872",
+   "gehoert": false
+  },
+  "Die 91 liegt dort drüben.": {
+   "datei": "florian/7474e94cfdd4.mp3",
+   "h": "bc23ea0507",
+   "gehoert": false
+  },
+  "Die 92 liegt dort drüben.": {
+   "datei": "florian/167400654d50.mp3",
+   "h": "c082af914c",
+   "gehoert": false
+  },
+  "Die 93 liegt dort drüben.": {
+   "datei": "florian/e33e073247a0.mp3",
+   "h": "228c6169c5",
+   "gehoert": false
+  },
+  "Die 94 liegt dort drüben.": {
+   "datei": "florian/2ba088353d10.mp3",
+   "h": "56c07220c8",
+   "gehoert": false
+  },
+  "Die 95 liegt dort drüben.": {
+   "datei": "florian/ef9ccb0624ed.mp3",
+   "h": "58058906d3",
+   "gehoert": false
+  },
+  "Die 96 liegt dort drüben.": {
+   "datei": "florian/8405ebefdf87.mp3",
+   "h": "3a16689cdd",
+   "gehoert": false
+  },
+  "Die 97 liegt dort drüben.": {
+   "datei": "florian/362b7a0a10c0.mp3",
+   "h": "d4129ec0c2",
+   "gehoert": false
+  },
+  "Die 98 liegt dort drüben.": {
+   "datei": "florian/3ff87aba2d36.mp3",
+   "h": "be0fadcda1",
+   "gehoert": false
+  },
+  "Die 99 liegt dort drüben.": {
+   "datei": "florian/75a3ff9bafb4.mp3",
+   "h": "0eec195638",
+   "gehoert": false
+  },
   "Die beste Überschrift": {
    "datei": "florian/66a6b68221c4.mp3",
    "h": "8566e4db01",
@@ -1766,6 +2746,11 @@
    "h": "a5222c1a65",
    "gehoert": false
   },
+  "Eine Perle schläft bei Ela. Neun Perlen schlafen bei Kofi. Bei Kofi wird es eng.": {
+   "datei": "florian/f8344ce7f180.mp3",
+   "h": "d43d89fdad",
+   "gehoert": false
+  },
   "Eine Stiftebox. Wie viele Stifte sind es?": {
    "datei": "florian/f59a0b061c5d.mp3",
    "h": "53cda8831e",
@@ -1836,9 +2821,19 @@
    "h": "ad8e754dfb",
    "gehoert": false
   },
+  "Ela und Kofi legen alle Nächte untereinander. Jede Reihe ist gleich lang.": {
+   "datei": "florian/1b0bc962e96d.mp3",
+   "h": "ae254a49a3",
+   "gehoert": false
+  },
   "Ela und Kofi malen alle Abende untereinander. Jede Reihe ist gleich lang. In jeder Reihe sitzen zehn.": {
    "datei": "florian/26c9d5e98cb2.mp3",
    "h": "05a7fe47d4",
+   "gehoert": false
+  },
+  "Ela und Kofi wohnen nebeneinander. Heute kommen zehn Perlen zu Besuch.": {
+   "datei": "florian/c8ef017a19da.mp3",
+   "h": "7800da6916",
    "gehoert": false
   },
   "Ela will mehr Perlen wegnehmen, als der kleine Stab hat.": {
@@ -2104,6 +3099,11 @@
   "Fünf Ballröhren. Wie viele Bälle sind es zusammen?": {
    "datei": "florian/3511ca155334.mp3",
    "h": "7617896910",
+   "gehoert": false
+  },
+  "Fünf bei Ela, fünf bei Kofi. Beide Häuser sind gleich voll.": {
+   "datei": "florian/587b9b0f6ac9.mp3",
+   "h": "5873c6e40d",
    "gehoert": false
   },
   "Fünf Brötchentüten. Wie viele Brötchen sind es zusammen?": {
@@ -2891,6 +3891,51 @@
    "h": "6f78c60585",
    "gehoert": false
   },
+  "Jetzt die Achterkette.": {
+   "datei": "florian/42743ba2f081.mp3",
+   "h": "bc7c46f97d",
+   "gehoert": false
+  },
+  "Jetzt die Dreierkette.": {
+   "datei": "florian/9d0c444295c0.mp3",
+   "h": "37274978db",
+   "gehoert": false
+  },
+  "Jetzt die Fünferkette.": {
+   "datei": "florian/1004c8f61303.mp3",
+   "h": "a73abba684",
+   "gehoert": false
+  },
+  "Jetzt die Neunerkette.": {
+   "datei": "florian/6a76fc9dc3d9.mp3",
+   "h": "ecc687354c",
+   "gehoert": false
+  },
+  "Jetzt die Sechserkette.": {
+   "datei": "florian/25c6ff41caf0.mp3",
+   "h": "0529e3cd74",
+   "gehoert": false
+  },
+  "Jetzt die Siebenerkette.": {
+   "datei": "florian/55730836ed2f.mp3",
+   "h": "703029e8a7",
+   "gehoert": false
+  },
+  "Jetzt die Viererkette.": {
+   "datei": "florian/bcae3665617a.mp3",
+   "h": "460c2617f2",
+   "gehoert": false
+  },
+  "Jetzt die Zehnerkette.": {
+   "datei": "florian/e1fac216c590.mp3",
+   "h": "244d39d33e",
+   "gehoert": false
+  },
+  "Jetzt die Zweierkette.": {
+   "datei": "florian/ea48a66f5441.mp3",
+   "h": "d169df55a6",
+   "gehoert": false
+  },
   "Jetzt ist der Zehnerstab voll. Der Rest kommt dahinter.": {
    "datei": "florian/e114b98e34b2.mp3",
    "h": "a17dffc8e9",
@@ -2919,6 +3964,11 @@
   "Jetzt rechnest du. Zehner zu den Zehnern, Einer zu den Einern.": {
    "datei": "florian/7e99a6364d75.mp3",
    "h": "31b8729c07",
+   "gehoert": false
+  },
+  "Jetzt schlafen vier bei Ela. Bei Kofi ist der Vorhang zu. Wie viele Perlen schlafen bei Kofi?": {
+   "datei": "florian/62f3d51b624f.mp3",
+   "h": "086c8ead5f",
    "gehoert": false
   },
   "Jetzt sind es Ballröhren. Ein Stäbchen sind die Bälle von einer Ballröhre.": {
@@ -2974,6 +4024,11 @@
   "Jetzt tippst du, wie viele es zusammen sind. Dann hüpft das Pfeilchen, und die Packungen kommen in den Korb.": {
    "datei": "florian/64222d4fefe0.mp3",
    "h": "d90bd6b3a3",
+   "gehoert": false
+  },
+  "Jetzt tippst du.": {
+   "datei": "florian/9b5dcf9e534a.mp3",
+   "h": "e42eec7da6",
    "gehoert": false
   },
   "Jetzt will sie mehr Perlen wegnehmen, als der kleine Stab hat.": {
@@ -3109,6 +4164,11 @@
   "Kofi springt über den kleinen Bach.": {
    "datei": "florian/d0067abd1974.mp3",
    "h": "4e94bf57a7",
+   "gehoert": false
+  },
+  "Kofi zieht den Vorhang auf. Sechs Perlen schlafen bei Kofi.": {
+   "datei": "florian/dcdf4188b364.mp3",
+   "h": "d268bf3bcc",
    "gehoert": false
   },
   "Kombinatorik mit Reihenfolge": {
@@ -3286,6 +4346,11 @@
    "h": "b4ce99846b",
    "gehoert": false
   },
+  "Legt zu zweit eine Kette aus Büroklammern.": {
+   "datei": "florian/1357d84d5d36.mp3",
+   "h": "55c5f0c944",
+   "gehoert": false
+  },
   "Leise geht Mia auf Entdeckungsreise. Hinter dem Schrank ist ein schmaler Spalt. Ihre Schnurrhaare berühren die Wände. So findet sie ihren Weg.": {
    "datei": "florian/afa4c7974438.mp3",
    "h": "901eadbc16",
@@ -3306,6 +4371,71 @@
    "h": "50ca750ec9",
    "gehoert": false
   },
+  "Lena hüpft auf der Kette von 10.": {
+   "datei": "florian/1a9afd2627d9.mp3",
+   "h": "fdf0924a95",
+   "gehoert": false
+  },
+  "Lena hüpft auf der Kette von 2.": {
+   "datei": "florian/343def5ee5f3.mp3",
+   "h": "2bf385069a",
+   "gehoert": false
+  },
+  "Lena hüpft auf der Kette von 3.": {
+   "datei": "florian/e6f3912ae5f0.mp3",
+   "h": "f0422b97a4",
+   "gehoert": false
+  },
+  "Lena hüpft auf der Kette von 4.": {
+   "datei": "florian/1612dd908c84.mp3",
+   "h": "9d4984326a",
+   "gehoert": false
+  },
+  "Lena hüpft auf der Kette von 5.": {
+   "datei": "florian/6543ea5077eb.mp3",
+   "h": "c4232c2986",
+   "gehoert": false
+  },
+  "Lena hüpft auf der Kette von 6.": {
+   "datei": "florian/5d77ba377c16.mp3",
+   "h": "5744614fb4",
+   "gehoert": false
+  },
+  "Lena hüpft auf der Kette von 7.": {
+   "datei": "florian/8a0e96238e6e.mp3",
+   "h": "350d0e2e76",
+   "gehoert": false
+  },
+  "Lena hüpft auf der Kette von 8.": {
+   "datei": "florian/32f226ac6212.mp3",
+   "h": "eba5b205c0",
+   "gehoert": false
+  },
+  "Lena hüpft auf der Kette von 9.": {
+   "datei": "florian/39fbe3db72dd.mp3",
+   "h": "6b0168d2a1",
+   "gehoert": false
+  },
+  "Lena hüpft nur ein Stäbchen.": {
+   "datei": "florian/f7bba72301ae.mp3",
+   "h": "6135f48e6b",
+   "gehoert": false
+  },
+  "Lena hüpft zwei Stäbchen weit.": {
+   "datei": "florian/26003431ab67.mp3",
+   "h": "87365cba97",
+   "gehoert": false
+  },
+  "Lena malt die Kette wieder hin.": {
+   "datei": "florian/37ed14db993e.mp3",
+   "h": "6da8ed83a1",
+   "gehoert": false
+  },
+  "Lena malt die Perlen wieder hin.": {
+   "datei": "florian/b70f62a55370.mp3",
+   "h": "e4dd61da36",
+   "gehoert": false
+  },
   "Lena nimmt ein paar Perlen vom kleinen Stab weg. Die Zehnerstäbe bleiben liegen.": {
    "datei": "florian/1a7d64f2a9e1.mp3",
    "h": "381d7a733c",
@@ -3314,6 +4444,16 @@
   "Lena nimmt ein paar Perlen weg. Sie nimmt sie vom kleinen Stab.": {
    "datei": "florian/a0fb6f7e571d.mp3",
    "h": "1bbaf4370f",
+   "gehoert": false
+  },
+  "Lena wischt die Kette weg.": {
+   "datei": "florian/65cc201e80b4.mp3",
+   "h": "858b51fd1f",
+   "gehoert": false
+  },
+  "Lena wischt die Perlen weg.": {
+   "datei": "florian/496a62e65b59.mp3",
+   "h": "260e4b6ec5",
    "gehoert": false
   },
   "Lesen": {
@@ -3449,6 +4589,11 @@
   "Malik blinzelt Mia ganz langsam zu. Mia schaut ihn an. Dann blinzelt sie langsam zurück.": {
    "datei": "florian/61ed123f280a.mp3",
    "h": "a7e1e08f69",
+   "gehoert": false
+  },
+  "Malik füllt den Napf mit Katzenfutter. Katzen fressen vor allem Fleisch.": {
+   "datei": "florian/156caf7d6f09.mp3",
+   "h": "1db94d7166",
    "gehoert": false
   },
   "Malik möchte sie so gern streicheln. Doch er setzt sich still hin und wartet. Mia soll selbst entscheiden, wann sie kommt.": {
@@ -3701,6 +4846,11 @@
    "h": "4839442099",
    "gehoert": false
   },
+  "Mia hat Durst. Was glaubst du: Was trinkt Mia?": {
+   "datei": "florian/e030935c52d3.mp3",
+   "h": "e3a92cba68",
+   "gehoert": false
+  },
   "Mia reibt ihre Wange am Tischbein. Malik riecht nichts. Doch Mias Nase riecht später: Hier war Mia.": {
    "datei": "florian/86435bbadccc.mp3",
    "h": "8056299c39",
@@ -3709,6 +4859,16 @@
   "Mia streckt die Nase heraus. Alles riecht fremd. Schwupp, flitzt sie unter das Sofa.": {
    "datei": "florian/60c0746029db.mp3",
    "h": "8dd50f81be",
+   "gehoert": false
+  },
+  "Mia trinkt frisches Wasser. Milch vertragen viele Katzen nicht.": {
+   "datei": "florian/d26e9af7cdb6.mp3",
+   "h": "537ff48e0c",
+   "gehoert": false
+  },
+  "Mia wetzt ihre Krallen am Kratzbaum. Katzen brauchen einen Platz zum Kratzen.": {
+   "datei": "florian/20ab9fb3136f.mp3",
+   "h": "461ee4df3c",
    "gehoert": false
   },
   "Minus bis zum vollen Zehner": {
@@ -3824,6 +4984,11 @@
   "Mit wem rede ich?": {
    "datei": "florian/ef8228aecdd1.mp3",
    "h": "4e92cf9bfd",
+   "gehoert": false
+  },
+  "Mittags liegt Mia in der Sonne. Katzen schlafen viele Stunden am Tag. Malik lässt sie in Ruhe.": {
+   "datei": "florian/0b7c13d13217.mp3",
+   "h": "ea0989c8cb",
    "gehoert": false
   },
   "Mittags wirft Nilas Mutter Staub über ihren Rücken. Die Fliegen auf ihrer Haut summen davon. Nila versucht es auch. Der Staub landet auf ihrem Kopf.": {
@@ -5949,6 +7114,11 @@
   "Was heißt das Wort hier?": {
    "datei": "florian/cec9c139638e.mp3",
    "h": "d7e5da93f8",
+   "gehoert": false
+  },
+  "Was ich schon kann": {
+   "datei": "florian/c38b6420ba0d.mp3",
+   "h": "84333044bf",
    "gehoert": false
   },
   "Was Ida nicht weiß: Rot leuchtet für Kalle nicht. Für ihn sieht der Ball fast aus wie das Gras.": {
