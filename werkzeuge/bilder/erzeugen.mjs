@@ -1,5 +1,7 @@
 // Szenenbilder mit Azure OpenAI erzeugen (Stimmungsebene, docs/grundsaetze-bilder.md §11 A1–A6).
-// Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <spielordner>] <ziel.png> "<Szene>"   (Basis-Prompt: basis-szene.txt)
+// Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <spielordner>] [--basis szene|foto] <ziel.png> "<Szene>"
+//   Basis-Prompt: basis-szene.txt (Vorgabe, gezeichnete Szene) oder basis-foto.txt (fotorealistisch, Sachgeschichten,
+//   docs/geschichten.md). --spiel darf auch der Ordner einer Geschichte sein (spiele/geschichten/<id>).
 // Mit --spiel steht der Verbrauch (usage der API-Antwort) in <spielordner>/kosten.json und in herkunft.json neben dem Bild
 // (docs/spielentwicklung.md §6); fehlt usage, endet der Lauf mit Exit 1. Ohne --spiel verhält sich das Werkzeug wie zuvor:
 // kein kosten.json, keine herkunft.json, usage steht nur in der Ausgabe (fehlt sie, nur eine Warnung).
@@ -15,16 +17,19 @@ const hier = (p) => fileURLToPath(new URL(p, import.meta.url));
 /** Zerlegt die Argumente: --spiel <ordner>, dann Ziel und Szene. */
 export function leseArgumente(argv) {
   const rest = [];
-  let spiel = "";
+  let spiel = "", basis = "szene";
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--spiel") {
       spiel = argv[++i] ?? "";
       if (!spiel) throw new Error("--spiel braucht einen Spielordner");
+    } else if (argv[i] === "--basis") {
+      basis = argv[++i] ?? "";
+      if (!["szene", "foto"].includes(basis)) throw new Error("--basis ist szene oder foto");
     } else rest.push(argv[i]);
   }
   const [ziel, szene] = rest;
-  if (!ziel || !szene) throw new Error('Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <ordner>] <ziel.png> "<Szene>"');
-  return { ziel, szene, spiel };
+  if (!ziel || !szene) throw new Error('Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <ordner>] [--basis szene|foto] <ziel.png> "<Szene>"');
+  return { ziel, szene, spiel, basis };
 }
 
 /** Verbrauch aus der API-Antwort (usage: input_tokens, output_tokens, …) als Zahlen; fehlt er, ist es ein Fehler. */
@@ -50,12 +55,13 @@ export function schreibeVerbrauch({ spiel, ziel, modell, prompt, usage, datum = 
 }
 
 async function main() {
-  const { ziel, szene, spiel } = leseArgumente(process.argv.slice(2));
+  const a = leseArgumente(process.argv.slice(2));
+  const { ziel, szene, spiel } = a;
   const env = Object.fromEntries(
     readFileSync(hier("../../.env"), "utf8").split("\n").map((z) => z.match(/^\s*([A-Z_]+)\s*=\s*(.*)\s*$/)).filter(Boolean)
       .map(([, k, v]) => [k, v.replace(/^["']|["']$/g, "")]),
   );
-  const basis = readFileSync(hier("basis-szene.txt"), "utf8").trim();
+  const basis = readFileSync(hier(`basis-${a.basis ?? "szene"}.txt`), "utf8").trim();
   const prompt = `${basis}\n\nScene: ${szene}`;
   const url = `${env.AZURE_OPENAI_ENDPOINT.replace(/\/$/, "")}/openai/deployments/${env.AZURE_OPENAI_IMAGE_DEPLOYMENT}/images/generations?api-version=${env.AZURE_OPENAI_API_VERSION}`;
   const antwort = await fetch(url, {
