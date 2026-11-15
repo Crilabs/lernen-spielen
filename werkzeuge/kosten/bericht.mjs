@@ -3,7 +3,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { WURZEL, findeSpielordner, katalogAnzahl, liesGeparkte, liesKosten, prognose, prognoseAnalog, summen } from "./kosten.mjs";
+import { WURZEL, findeBuecher, findeSpielordner, katalogAnzahl, liesGeparkte, liesKosten, prognose, prognoseAnalog, prognoseBuecher, summen } from "./kosten.mjs";
 
 const zahl = (n, d = 0) => n.toLocaleString("de-DE", { minimumFractionDigits: d, maximumFractionDigits: d });
 const eur = (n) => `${zahl(n, 2)} €`;
@@ -11,7 +11,7 @@ const mio = (n) => `${zahl(n / 1e6, 2)} Mio`;
 const unsicherer = (p) => (p?.unsicher ? " (unsicher)" : "");
 
 /** Baut den Berichtstext. */
-export function formatiere({ spiele, katalog, preise, analog, themenGesamt }) {
+export function formatiere({ spiele, katalog, preise, analog, themenGesamt, buecher = [], buecherGeplant = 0, bibliothek = [] }) {
   const z = [];
   const p = prognose(spiele, katalog, preise);
   z.push("Kosten je Spiel", "================", "");
@@ -62,6 +62,13 @@ export function formatiere({ spiele, katalog, preise, analog, themenGesamt }) {
         : `  je Thema ${eur(a.jeThema)}; Prognose für alle ${themenGesamt} Themen des Lernplans: ${eur(a.prognose)}`,
     );
   }
+  z.push("", "Bücher (Bibliothek)");
+  const b = prognoseBuecher(buecher, buecherGeplant, preise);
+  for (const x of b.je) z.push(`  ${x.name}: ${eur(x.s.eur)}  (Claude ${eur(x.s.claude.eur)}, Bilder ${zahl(x.s.bilder.anzahl)} Stück ${eur(x.s.bilder.eur)})`);
+  const raum = summen(bibliothek, preise);
+  z.push(`  Raumbilder der Bibliothek: ${eur(raum.eur)} (${zahl(raum.bilder.anzahl)} Bilder)`);
+  z.push(`  bisher ${eur(b.ausgegeben + raum.eur)} · fertige Bücher ${b.fertig} · geplant gesamt ${buecherGeplant}`);
+  if (b.durchschnitt !== null) z.push(`  je Buch ${eur(b.durchschnitt)}; noch offen ${b.offen} Bücher: ${eur(b.rest ?? 0)}`);
   const unsichere = [
     preise.usdInEur.unsicher && "Wechselkurs USD→EUR",
     preise.bilder.unsicher && `Bildpreis (${preise.bilder.modell})`,
@@ -82,7 +89,12 @@ function main() {
   spiele.push(...liesGeparkte().filter((g) => !imOrdner.has(g.name.split("/")[1])));
   const analogOrdner = join(WURZEL, "spiele", "mit-echten-dingen");
   const themenGesamt = JSON.parse(readFileSync(join(WURZEL, "spiele/lernplan.json"), "utf8")).themen.length;
-  console.log(formatiere({ spiele, katalog, preise, analog: liesKosten(analogOrdner), themenGesamt }));
+  const bib = JSON.parse(readFileSync(join(WURZEL, "spiele/bibliothek.json"), "utf8"));
+  const buecherGeplant = bib.raeume.flatMap((r) => r.regale.flatMap((g) => g.buecher)).length;
+  console.log(formatiere({
+    spiele, katalog, preise, analog: liesKosten(analogOrdner), themenGesamt,
+    buecher: findeBuecher(), buecherGeplant, bibliothek: liesKosten(join(WURZEL, "spiele", "bibliothek")),
+  }));
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) main();

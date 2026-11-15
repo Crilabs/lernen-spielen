@@ -191,12 +191,15 @@ export function prognoseAnalog(eintraege, themenGesamt, preise) {
   return { summe: s, themen, themenGesamt, jeThema, prognose: jeThema === null ? null : jeThema * themenGesamt };
 }
 
+/** Die Fachordner unter spiele/, in denen Spiele liegen (nicht geschichten/, bibliothek/, mit-echten-dingen/ …). */
+export const FAECHER_ORDNER = ["mathe", "geometrie", "lesen", "schreiben", "grammatik", "sprechen"];
+
 /** Findet alle Spielordner (spiele/<fach>/<spiel>/) mit kosten.json oder texte.json. */
 export function findeSpielordner(wurzel = WURZEL) {
   const basis = join(wurzel, "spiele");
   const aus = [];
   for (const fach of readdirSync(basis, { withFileTypes: true })) {
-    if (!fach.isDirectory()) continue;
+    if (!fach.isDirectory() || !FAECHER_ORDNER.includes(fach.name)) continue;
     for (const sp of readdirSync(join(basis, fach.name), { withFileTypes: true })) {
       const ordner = join(basis, fach.name, sp.name);
       if (sp.isDirectory() && (existsSync(join(ordner, KOSTEN_DATEI)) || existsSync(join(ordner, "texte.json")))) aus.push(ordner);
@@ -283,4 +286,26 @@ export function liesGeparkte(wurzel = WURZEL) {
   return readdirSync(ordner)
     .filter((d) => d.endsWith(".json"))
     .map((d) => ({ name: `geparkt/${d.replace(/\.json$/, "")}`, eintraege: liesKosten(ordner, d), geparkt: true }));
+}
+
+/** Bücher der Bibliothek mit Kosten: spiele/geschichten/<id>/kosten.json. */
+export function findeBuecher(wurzel = WURZEL) {
+  const basis = join(wurzel, "spiele", "geschichten");
+  if (!existsSync(basis)) return [];
+  return readdirSync(basis, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && existsSync(join(basis, d.name, KOSTEN_DATEI)))
+    .map((d) => ({ id: d.name, name: `geschichten/${d.name}`, eintraege: liesKosten(join(basis, d.name)) }));
+}
+
+/**
+ * Bücher: bisher ausgegeben, Durchschnitt je fertigem Buch, Hochrechnung für die noch nicht geschriebenen.
+ * @param {{ id: string, name: string, eintraege: any[] }[]} buecher
+ * @param {number} geplantAnzahl alle Bücher der Bibliothek (fertig und geplant)
+ */
+export function prognoseBuecher(buecher, geplantAnzahl, preise) {
+  const je = buecher.map((b) => ({ id: b.id, name: b.name, s: summen(b.eintraege, preise) }));
+  const ausgegeben = je.reduce((a, x) => a + x.s.eur, 0);
+  const durchschnitt = je.length ? ausgegeben / je.length : null;
+  const offen = Math.max(0, geplantAnzahl - je.length);
+  return { je, fertig: je.length, ausgegeben, durchschnitt, offen, rest: durchschnitt === null ? null : durchschnitt * offen };
 }

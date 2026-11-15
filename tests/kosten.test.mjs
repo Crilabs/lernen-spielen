@@ -274,3 +274,52 @@ test("Geparkt auf main: werkzeuge/kosten/geparkt/<ordner>.json zählt als gepark
   assert.deepEqual(liesGeparkte(temp()), []);
   rmSync(w, { recursive: true });
 });
+
+// Verwaltung (2026-11-16): Bücher sind keine Spiele; eigene Rechnung und eigener Abschnitt im Bericht.
+import { findeBuecher, findeSpielordner, prognoseBuecher } from "../werkzeuge/kosten/kosten.mjs";
+
+test("findeSpielordner: nur Fachordner, keine Bücher unter spiele/geschichten", () => {
+  const d = temp();
+  trageEin(join(d, "spiele", "mathe", "m01-x"), claude("m-a", 1, 1));
+  trageEin(join(d, "spiele", "geschichten", "wal"), claude("m-a", 1, 1));
+  assert.deepEqual(findeSpielordner(d), [join(d, "spiele", "mathe", "m01-x")]);
+  rmSync(d, { recursive: true });
+});
+
+test("findeBuecher: je Ordner unter spiele/geschichten mit kosten.json ein Buch", () => {
+  const d = temp();
+  trageEin(join(d, "spiele", "geschichten", "wal"), claude("m-a", 1, 1));
+  mkdirSync(join(d, "spiele", "geschichten", "leer"), { recursive: true });
+  const b = findeBuecher(d);
+  assert.equal(b.length, 1);
+  assert.equal(b[0].id, "wal");
+  assert.equal(b[0].name, "geschichten/wal");
+  assert.equal(b[0].eintraege.length, 1);
+  rmSync(d, { recursive: true });
+});
+
+test("prognoseBuecher: Durchschnitt, offen und Rest aus den geplanten Büchern", () => {
+  // m-b kostet 1 € je Mio Eingabe (EUR)
+  const buecher = [
+    { id: "a", name: "geschichten/a", eintraege: [claude("m-b", 1e6, 0)] },
+    { id: "b", name: "geschichten/b", eintraege: [claude("m-b", 3e6, 0)] },
+  ];
+  const p = prognoseBuecher(buecher, 5, PREISE);
+  assert.equal(p.fertig, 2);
+  assert.equal(p.ausgegeben, 4);
+  assert.equal(p.durchschnitt, 2);
+  assert.equal(p.offen, 3);
+  assert.equal(p.rest, 6);
+  assert.equal(prognoseBuecher([], 5, PREISE).durchschnitt, null);
+});
+
+test("formatiere: Abschnitt Bücher mit Raumbildern", () => {
+  const text = formatiere({
+    spiele: [], katalog: 1, preise: PREISE, analog: [], themenGesamt: 1,
+    buecher: [{ id: "a", name: "geschichten/a", eintraege: [claude("m-b", 1e6, 0)] }], buecherGeplant: 3,
+    bibliothek: [claude("m-b", 2e6, 0)],
+  });
+  assert.match(text, /Bücher \(Bibliothek\)/);
+  assert.match(text, /geschichten\/a: 1,00 €/);
+  assert.match(text, /Raumbilder der Bibliothek: 2,00 €/);
+});
