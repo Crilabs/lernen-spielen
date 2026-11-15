@@ -59,7 +59,8 @@ const CSS = `
 
 /* Das Bild: eine flache Papierkarte mit Tinte-Kontur (Matte, kein Schatten: nicht drückbar). */
 .rahmen { position: relative; width: var(--bild); height: var(--bild); border-radius: var(--ls-radius-gross);
-  border: var(--ls-kontur) solid var(--ls-tinte); background: var(--ls-papier); overflow: hidden; touch-action: pan-y; }
+  border: var(--ls-kontur) solid var(--ls-tinte); background: var(--ls-papier); overflow: hidden; touch-action: pan-y;
+  box-shadow: 0 1.2rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
 .seite { position: absolute; inset: 0; container-type: size; will-change: transform, opacity; }
 .seite.foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .figuren { position: absolute; inset: 0; container-type: size; pointer-events: none; }
@@ -84,10 +85,16 @@ ${SZENE_CSS}
   color: var(--ls-tinte-weich); background: color-mix(in srgb, var(--ls-papier) 82%, transparent); pointer-events: none; }
 .erzeugt[hidden] { display: none; }
 
-/* Rechts: der Text in der Mitte, unten Punkte und Knöpfe auf der Höhe der Bildkante. */
-.lese { min-width: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto auto; row-gap: 3.2rem; }
-.textfeld { display: flex; align-items: center; min-height: 0; }
-.text { margin: 0; font-size: 5.4rem; line-height: 1.38; max-width: 17em; text-wrap: pretty; hyphens: manual; }
+/* Rechts: eine ruhige Papierfläche auf der Kulisse – oben der Text, unten Punkte und Knöpfe. */
+.lese { min-width: 0; height: var(--bild); display: grid; grid-template-rows: minmax(0, 1fr) auto auto; row-gap: 2.4rem;
+  padding: 4.4rem 4.4rem 3.6rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte);
+  border-radius: var(--ls-radius-gross); box-shadow: 0 1.2rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
+/* Langer Text darf scrollen (Christian 2026-11-15: „Text kann scrollbar sein“). */
+.textfeld { display: flex; flex-direction: column; justify-content: safe center; gap: 3.2rem; min-height: 0;
+  overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; scrollbar-width: thin;
+  scrollbar-color: var(--kulisse-tief, var(--ls-tinte-weich)) transparent; }
+.text { margin: 0; font-size: 4.2rem; line-height: 1.45; max-width: 28ch; text-wrap: pretty; hyphens: manual; }
+.text.titel { font-size: 6rem; line-height: 1.15; font-weight: 700; }
 .knoepfe { display: flex; align-items: center; gap: 2.4rem; min-height: 16.6rem; }
 .knoepfe .rechts { margin-left: auto; display: grid; place-items: center; }
 .rechts > * { grid-area: 1 / 1; }
@@ -106,25 +113,32 @@ ${SZENE_CSS}
 .punkte { display: flex; gap: 1.4rem; align-items: center; height: 2.4rem; }
 .punkte i { display: block; width: 2rem; height: 2rem; border-radius: 1rem; border: var(--ls-kontur) solid var(--ls-tinte-weich);
   background: transparent; transition: width .3s ease, background-color .3s ease; }
-.punkte i.gelesen { background: var(--ls-tinte-weich); }
+.punkte i { border-color: var(--kulisse-tief, var(--ls-tinte-weich)); }
+.punkte i.gelesen { background: var(--kulisse-tief, var(--ls-tinte-weich)); }
 .punkte i.jetzt { width: 5rem; background: var(--ls-tinte); border-color: var(--ls-tinte); }
-.startwahl { display: flex; flex-wrap: wrap; gap: 2.4rem; align-items: center; }
+.vorlesen.angehalten { opacity: .55; }
+.startwahl { display: flex; flex-direction: column; align-items: flex-start; gap: 2.4rem; }
 .startwahl[hidden] { display: none; }
+/* Vor der Startwahl: keine Punkte, kein Weiter – die zwei Wege sind die einzigen Knöpfe auf der Fläche. */
+.lese.waehlt .punkte, .lese.waehlt .knoepfe { visibility: hidden; }
 .fehler { font-size: 4rem; color: var(--ls-tinte-weich); }
 
 /* Schmaleres Querformat (iPad quer): etwas kleineres Bild, etwas kleinerer Text. */
 @container buch (aspect-ratio < 17 / 10) {
   .blatt { --bild: min(calc(100cqh - 2 * var(--rand)), calc(54cqw - var(--rand))); --luft: 4.8rem; }
-  .text { font-size: 4.8rem; }
+  .text { font-size: 3.8rem; }
+  .text.titel { font-size: 5.2rem; }
+  .lese { padding: 3.6rem 3.6rem 3rem; }
 }
 /* Hochformat und fast quadratisch: Bild oben, Text und Knöpfe darunter. */
 @container buch (aspect-ratio < 4 / 3) {
-  .blatt { --bild: min(calc(100cqw - 2 * var(--rand) - 2rem), calc(44cqh - var(--rand)));
+  .blatt { --bild: min(calc(100cqw - 2 * var(--rand) - 2rem), calc(38cqh - var(--rand)));
     grid-template-columns: minmax(0, 1fr); grid-template-rows: var(--bild) minmax(0, 1fr); row-gap: 3rem;
     align-content: stretch; justify-items: center; }
-  .lese { width: 100%; row-gap: 2.4rem; }
-  .textfeld { align-items: flex-start; }
-  .text { font-size: 4.4rem; max-width: none; }
+  .lese { width: 100%; height: auto; min-height: 0; row-gap: 2rem; }
+  .textfeld { justify-content: flex-start; }
+  .text { font-size: 3.6rem; line-height: 1.4; max-width: none; }
+  .lese { padding: 3.2rem 3.6rem 2.4rem; row-gap: 1.6rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 `;
@@ -133,7 +147,7 @@ const PFEIL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M12 
 
 /**
  * @typedef {{ text: string, sprich?: string, bild?: string, szene?: any[], frage?: boolean }} Seite
- * @typedef {{ id: string, titel: string, art: string, klasse: number, seiten: Seite[] }} Geschichte
+ * @typedef {{ id: string, titel: string, art: string, klasse: number, kulisse?: string, seiten: Seite[] }} Geschichte
  */
 
 const weniger = () => {
@@ -178,6 +192,8 @@ export class LsGeschichte extends HTMLElement {
     this.fertigEl = q(".fertig");
     this.punkteEl = q(".punkte");
     this.startwahlEl = q(".startwahl");
+    /** @type {{ id: string, name: string, grund: string, tief: string, svg: string } | null} */
+    this.kulisse = null;
     /** @type {"vorlesen" | "selbst" | null} null = noch nicht gewählt */
     this.modus = null;
     /** Vorlesemodus angehalten (Tipp des Kindes). */
@@ -278,11 +294,11 @@ export class LsGeschichte extends HTMLElement {
       const g = /** @type {Geschichte} */ (await r.json());
       if (!g || !Array.isArray(g.seiten) || !g.seiten.length) throw new Error("keine Seiten");
       this.basis = url;
-      await this.ladeBausteine(g);
+      await Promise.all([this.ladeBausteine(g), this.ladeKulisse(g)]);
       this.daten = g;
       this.punkteEl.replaceChildren(...g.seiten.map(() => document.createElement("i")));
       this.modus = (await this.tonAn()) ? null : "selbst";
-      this.startwahlEl.hidden = this.modus !== null;
+      this.zeigeWahl(this.modus === null);
       this.zeige(0, 0);
       this._geladen(g);
     } catch (e) {
@@ -305,6 +321,28 @@ export class LsGeschichte extends HTMLElement {
       try { await import("../objekte/objekt.js"); } catch { /* ohne Baustein bleiben die Dinge weg */ }
     if (szenen.some((b) => b && b.figur))
       try { this.R = await import("../runde/runde.js"); } catch { /* ohne Runde bleiben die Kinder weg */ }
+  }
+
+  /**
+   * Kulisse der Geschichte (rahmen/kulissen/kulissen.json): setzt data-kulisse und --kulisse-grund/-tief am Host.
+   * `this.kulisse` ist danach { id, name, grund, tief, svg } oder null (dann bleibt der Nebel).
+   * @param {Geschichte} g
+   */
+  async ladeKulisse(g) {
+    this.kulisse = null;
+    if (typeof g.kulisse !== "string") return;
+    try {
+      const liste = new URL("./kulissen/kulissen.json", import.meta.url);
+      const r = await fetch(liste);
+      const k = (await r.json()).kulissen.find((/** @type {any} */ x) => x.id === g.kulisse);
+      if (!k) throw new Error(`unbekannt: ${g.kulisse}`);
+      this.kulisse = { ...k, svg: new URL(`./kulissen/${k.id}.svg`, import.meta.url).href };
+      this.dataset.kulisse = k.id;
+      this.style.setProperty("--kulisse-grund", k.grund);
+      this.style.setProperty("--kulisse-tief", k.tief);
+    } catch (e) {
+      protokoll(`ls-geschichte: Kulisse ${g.kulisse} nicht geladen (${e})`);
+    }
   }
 
   /** Ton an für diese Seite? (wie ls-blase) */
@@ -371,8 +409,11 @@ export class LsGeschichte extends HTMLElement {
       this.bewege(neu, [{ opacity: 0, transform: `translateX(${richtung * weg}%)` }, { opacity: 1, transform: "translateX(0)" }]);
     }
 
-    // Text
-    this.textEl.textContent = s.text;
+    // Text (vor der Startwahl auf Seite 1: der Titel)
+    const titelSeite = this.modus === null && i === 0;
+    this.textEl.textContent = titelSeite ? g.titel : s.text;
+    this.textEl.classList.toggle("titel", titelSeite);
+    /** @type {HTMLElement} */ (this.textEl.parentElement).scrollTop = 0;
     if (alt) this.blende(this.textEl, 0, 1);
 
     // Knöpfe und Punkte
@@ -422,9 +463,25 @@ export class LsGeschichte extends HTMLElement {
   waehle(modus) {
     if (!this.daten || this.modus !== null) return;
     this.modus = modus === "vorlesen" ? "vorlesen" : "selbst";
-    this.startwahlEl.hidden = true;
+    this.zeigeWahl(false);
     this.angehalten = false;
+    this.zeigeText();
     this.liesUndBlaettere();
+  }
+
+  /** Startwahl zeigen oder verbergen (mit ihr: keine Punkte, kein Weiter). @param {boolean} an */
+  zeigeWahl(an) {
+    this.startwahlEl.hidden = !an;
+    this.startwahlEl.parentElement?.closest(".lese")?.classList.toggle("waehlt", an);
+  }
+
+  /** Nach der Startwahl: statt des Titels der Text der Seite. */
+  zeigeText() {
+    const s = this.daten?.seiten[this._seite];
+    if (!s) return;
+    this.textEl.textContent = s.text;
+    this.textEl.classList.remove("titel");
+    this.blende(this.textEl, 0, 1);
   }
 
   /** Hält den Vorlesemodus an bzw. liest weiter (Tipp des Kindes). */
@@ -462,7 +519,7 @@ export class LsGeschichte extends HTMLElement {
 
   weiter() {
     if (!this.daten || !this.weiterBereit) return;
-    if (this.modus === null) { this.modus = "selbst"; this.startwahlEl.hidden = true; }
+    if (this.modus === null) { this.modus = "selbst"; this.zeigeWahl(false); this.zeigeText(); }
     if (this._seite >= this.daten.seiten.length - 1) return;
     this.zeige(this._seite + 1, 1);
   }

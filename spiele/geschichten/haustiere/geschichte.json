@@ -4,6 +4,7 @@
  "art": "sachgeschichte",
  "welt": "haustiere",
  "familie": null,
+ "kulisse": "im-haus",
  "klasse": 1,
  "quellen": [
   { "fakt": "Ein hoch aufgerichteter Schwanz ist bei Katzen eine Begrüßung.", "quelle": "https://www.planet-wissen.de/natur/haustiere/katzen/pwiediesprachederkatzen100.html, abgerufen 2026-11-15" },

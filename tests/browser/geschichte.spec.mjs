@@ -45,6 +45,8 @@ for (const typ of [chromium, webkit]) {
   const t = await page.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".text").getBoundingClientRect().toJSON());
   pruefe(Math.abs(r.width - r.height) < 2 && r.height > 500, `${name}: Bild quadratisch und groß (${Math.round(r.width)} × ${Math.round(r.height)})`);
   pruefe(r.right < t.left, `${name}: Bild links, Text rechts`);
+  pruefe(await page.locator("ls-geschichte").evaluate((el) => el.dataset.kulisse) === "garten", `${name}: Kulisse der Geschichte gesetzt`);
+  pruefe(await page.evaluate(() => /kulissen\/garten\.svg/.test(document.getElementById("hintergrund").innerHTML)), `${name}: Kulisse als Hintergrund`);
   await page.mouse.move(r.x + r.width * 0.7, r.y + r.height / 2);
   await page.mouse.down();
   await page.mouse.move(r.x + r.width * 0.3, r.y + r.height / 2, { steps: 6 });
@@ -78,6 +80,32 @@ for (const typ of [chromium, webkit]) {
   await page.waitForTimeout(500);
   const text = await page.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".text").textContent);
   pruefe(/geht gerade nicht/.test(text), `${name}: unbekannte Geschichte zeigt einen ruhigen Text`);
+  // Text passt oder scrollt und überdeckt keine festen Knöpfe – quer, iPad quer, hoch
+  for (const [b, h] of [[1366, 1024], [1180, 820], [820, 1180]]) {
+    const lp = await browser.newPage({ viewport: { width: b, height: h } });
+    await lp.goto(`${basis}/spiele/geschichte.html?id=haustiere&pruefen`);
+    await lp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
+    let passt = true;
+    const n = await lp.evaluate(() => window.lsGeschichte.seiten);
+    for (let i = 0; i < n; i++) {
+      await lp.waitForTimeout(80);
+      const ok = await lp.locator("ls-geschichte").evaluate((el) => {
+        const s = el.shadowRoot, tf = s.querySelector(".textfeld"), t = s.querySelector(".text");
+        const kn = s.querySelector(".knoepfe").getBoundingClientRect(), tr = t.getBoundingClientRect();
+        const fr = tf.getBoundingClientRect();
+        // langer Text darf scrollen (Christian 2026-11-15), überdeckt aber nie die Knöpfe
+        const erreichbar = tf.scrollHeight <= tf.clientHeight + 2 || getComputedStyle(tf).overflowY === "auto";
+        return erreichbar && fr.bottom <= kn.top + 2 && tr.right <= innerWidth;
+      });
+      if (!ok) { passt = false; break; }
+      await lp.evaluate(() => { const g = window.lsGeschichte; if (g.frageSeite === g.seite) return; g.weiter(); });
+      if (await lp.evaluate(() => window.lsGeschichte.frageSeite === window.lsGeschichte.seite)) {
+        await lp.waitForFunction(() => window.lsGeschichte.weiterBereit, null, { timeout: 30000 }); await lp.evaluate(() => window.lsGeschichte.weiter()); i++; }
+    }
+    pruefe(passt, `${name}: ${b}×${h} – Text erreichbar (passt oder scrollt), über den Knöpfen`);
+    await lp.close();
+  }
+
   // Startwahl und Vorlesemodus (ohne Systemstimme: sprich liefert „still“, umgeblättert wird nach der Lesezeit)
   const vp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await vp.addInitScript(() => { try { delete window.speechSynthesis; Object.defineProperty(window, "speechSynthesis", { value: undefined }); } catch {} });

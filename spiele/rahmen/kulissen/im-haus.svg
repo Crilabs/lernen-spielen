@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+<rect width="1920" height="1080" fill="#F6ECDF"/>
+<g fill="#F0E2D0"><rect x="0" width="96" height="900"/><rect x="192" width="96" height="900"/><rect x="384" width="96" height="900"/><rect x="576" width="96" height="900"/><rect x="768" width="96" height="900"/><rect x="960" width="96" height="900"/><rect x="1152" width="96" height="900"/><rect x="1344" width="96" height="900"/><rect x="1536" width="96" height="900"/><rect x="1728" width="96" height="900"/></g>
+<rect x="60" y="120" width="300" height="420" rx="18" fill="#FFFCF7"/>
+<rect x="84" y="144" width="252" height="372" rx="8" fill="#DCEBF2"/>
+<path d="M84 420 C150 380 230 400 336 370 L336 516 L84 516Z" fill="#C9DFC0"/>
+<rect x="204" y="144" width="12" height="372" fill="#FFFCF7"/><rect x="84" y="324" width="252" height="12" fill="#FFFCF7"/>
+<rect x="40" y="540" width="340" height="26" rx="8" fill="#E8D6BF"/>
+<rect x="0" y="880" width="1920" height="22" fill="#FFFCF7"/>
+<rect x="0" y="902" width="1920" height="178" fill="#DDC29E"/>
+<g fill="#CFB088"><rect x="0" y="960" width="1920" height="4"/><rect x="0" y="1024" width="1920" height="4"/><rect x="300" y="902" width="4" height="58"/><rect x="900" y="902" width="4" height="58"/><rect x="1500" y="902" width="4" height="58"/><rect x="620" y="964" width="4" height="60"/><rect x="1220" y="964" width="4" height="60"/><rect x="1780" y="964" width="4" height="60"/><rect x="420" y="1028" width="4" height="52"/><rect x="1040" y="1028" width="4" height="52"/><rect x="1640" y="1028" width="4" height="52"/></g>
+<ellipse cx="960" cy="1010" rx="620" ry="52" fill="#EBD3C6"/>
+<path d="M1712 720 L1868 720 L1846 900 L1734 900Z" fill="#C99572"/><rect x="1700" y="706" width="180" height="26" rx="8" fill="#B48A62"/>
+<g fill="#9FC08C"><path d="M1790 712 C1760 620 1700 580 1660 560 C1720 590 1770 620 1790 712Z"/><path d="M1790 712 C1800 600 1840 540 1880 500 C1850 560 1820 620 1790 712Z"/><path d="M1790 712 C1780 640 1790 560 1800 500 C1810 580 1800 650 1790 712Z"/></g>
+<g fill="#86AE77"><path d="M1790 712 C1740 660 1700 650 1660 650 C1720 670 1760 690 1790 712Z"/><path d="M1790 712 C1840 650 1880 630 1910 630 C1870 650 1830 680 1790 712Z"/></g>
+</svg>

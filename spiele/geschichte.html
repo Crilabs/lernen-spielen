@@ -9,9 +9,10 @@
 /* Eine Geschichte (docs/geschichten.md §4): geschichte.html?id=<id>[&weiter=<pfad>][&eltern]. Kopfleiste mit Haus und Titel,
    darunter <ls-geschichte>; nach „Fertig“ gilt sie als gelesen (Elternbereich „Sachthemen“, nicht mit eltern = Vorschau)
    und es geht zu weiter (relativer Pfad in spiele/) oder zur Startseite.
-   Dahinter dieselbe dezente Landschaft wie überall. */
+   Dahinter die Kulisse der Geschichte (rahmen/kulissen/), ohne Kulisse dieselbe dezente Landschaft wie überall. */
 body { -webkit-user-select: none; user-select: none; }
 .hintergrund, .hintergrund svg { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.hintergrund .kulisse { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; display: block; }
 .geschichte-seite { position: fixed; top: var(--ls-leiste-hoehe); bottom: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem); }
 </style>
 </head>
@@ -48,6 +49,15 @@ geschichte.geladen.then((g) => {
   leiste.setAttribute("titel", g.titel);
   if (typeof g.fach === "string") leiste.setAttribute("fach", g.fach);
   document.title = g.titel;
+  // Kulisse statt des lila Standardhintergrunds (Christian 2026-11-15); die Kopfleiste lässt sie durchscheinen.
+  const k = geschichte.kulisse;
+  if (k) {
+    const bild = document.createElement("img");
+    bild.src = k.svg; bild.alt = ""; bild.className = "kulisse";
+    document.getElementById("hintergrund").replaceChildren(bild);
+    document.body.style.background = k.grund;
+    leiste.style.setProperty("--fach-toenung", "transparent");
+  }
 });
 geschichte.addEventListener("fertig", async () => {
   if (gefunden && !suche.has("eltern")) {

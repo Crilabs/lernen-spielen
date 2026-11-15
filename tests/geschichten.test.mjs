@@ -175,3 +175,26 @@ test("Zehnerpaare: jedes Bild zeigt genau zehn Perlen, die Frage wird aufgelöst
     assert.doesNotMatch(s.text, /\b(eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn)\b[^.?!]*\b(ist|sind|macht|ergibt)\b[^.?!]*\bzehn\b/i, s.text);
   }
 });
+
+// Kulissen (Christian 2026-11-15: „nicht wie ein Buch“, statt des lila Standardhintergrunds je Geschichte eine Kulisse)
+const KULISSEN_ORDNER = join(SPIELE, "rahmen", "kulissen");
+const kulissenListe = () => JSON.parse(readFileSync(join(KULISSEN_ORDNER, "kulissen.json"), "utf8")).kulissen;
+
+test("Kulissen: die sechs ersten gibt es, jede als SVG ohne Schrift, höchstens 60 KB, mit Grund- und Tieffarbe", () => {
+  const liste = kulissenListe();
+  assert.deepEqual(liste.map((k) => k.id).sort(), ["dschungel", "garten", "im-haus", "stadt", "strand", "wasser"]);
+  for (const k of liste) {
+    assert.ok(k.name && /^#[0-9A-F]{6}$/i.test(k.grund) && /^#[0-9A-F]{6}$/i.test(k.tief), `${k.id}: name, grund, tief`);
+    const datei = join(KULISSEN_ORDNER, `${k.id}.svg`);
+    assert.ok(existsSync(datei), `${k.id}.svg fehlt`);
+    const svg = readFileSync(datei, "utf8");
+    assert.ok(svg.length <= 60_000, `${k.id}.svg zu groß (${svg.length})`);
+    assert.match(svg, /^<svg [^>]*viewBox="0 0 1920 1080"/, `${k.id}: viewBox 1920 × 1080`);
+    assert.doesNotMatch(svg, /<text|<script|<image|href="http/i, `${k.id}: keine Schrift, kein Skript, keine fremden Bilder`);
+  }
+});
+
+test("Kulissen: jede Geschichte wählt eine bekannte Kulisse", () => {
+  const ids = new Set(kulissenListe().map((k) => k.id));
+  for (const { ordner, g } of geschichten) assert.ok(ids.has(g.kulisse), `${ordner}: kulisse „${g.kulisse}“ unbekannt`);
+});

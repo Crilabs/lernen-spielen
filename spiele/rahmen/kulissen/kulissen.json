@@ -1,0 +1,11 @@
+{
+  "hinweis": "Kulissen der Geschichten (docs/geschichten.md §3, Feld kulisse). grund = hellster Ton (füllt Ränder, Kopfleiste), tief = dunkler Ton der Kulisse für Stufen-Schatten. Ruhig und flach, Formen nur an den Rändern; die Mitte bleibt für Foto und Text.",
+  "kulissen": [
+    { "id": "im-haus", "name": "Im Haus", "grund": "#F6ECDF", "tief": "#B48A62" },
+    { "id": "garten", "name": "Garten", "grund": "#EAF3F3", "tief": "#7FA36C" },
+    { "id": "strand", "name": "Strand", "grund": "#E7F3F7", "tief": "#C9A06E" },
+    { "id": "wasser", "name": "Wasser", "grund": "#D6EEF3", "tief": "#5E9CAD" },
+    { "id": "dschungel", "name": "Dschungel", "grund": "#E5F0DE", "tief": "#5F8F5B" },
+    { "id": "stadt", "name": "Stadt", "grund": "#EDF0F6", "tief": "#8790AE" }
+  ]
+}
