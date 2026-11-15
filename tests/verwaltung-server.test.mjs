@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { request } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { WURZEL } from "../werkzeuge/kosten/kosten.mjs";
@@ -93,4 +94,18 @@ test("Server: Protokoll ab einer Stelle", () => mitServer(async ({ hol, ordner }
 test("Server: kein Ausbruch aus dem Seitenordner", () => mitServer(async ({ hol }) => {
   assert.equal((await hol("/seite/..%2F..%2Fpackage.json")).status, 404);
   assert.equal((await hol("/seite/../server.mjs")).status, 404);
+}));
+
+test("Server: fremde Herkunft, fremder Host und Nicht-JSON werden abgewiesen", () => mitServer(async ({ hol }) => {
+  const post = (kopf, body = "{}") => hol("/api/auftraege", { method: "POST", headers: kopf, body });
+  assert.equal((await post({ "content-type": "application/json", origin: "https://boese.example" })).status, 403);
+  assert.equal((await post({ "content-type": "text/plain" }, JSON.stringify({ art: "frei", ziel: "x" }))).status, 415);
+  // fetch setzt den Host selbst; DNS-Rebinding mit node:http nachstellen
+  const port = new URL((await hol("/api/auftraege")).url).port;
+  const status = await new Promise((ok, fehler) => {
+    request({ host: "127.0.0.1", port, path: "/api/uebersicht", headers: { host: "boese.example:4711" } }, (r) => { r.resume(); ok(r.statusCode); })
+      .on("error", fehler).end();
+  });
+  assert.equal(status, 403);
+  assert.equal((await hol("/api/abarbeiten", { method: "POST", headers: { "content-type": "application/json", origin: "null" } })).status, 403);
 }));

@@ -98,3 +98,16 @@ test("transkriptPfad: Projektordner wie Claude Code ihn benennt", () => {
     "/home/.claude/projects/-Users-christian-Code-einhorn-lernspiele/abc.jsonl",
   );
 });
+
+test("laufUmgebung: Auftrag, Transkript und eine Git-Umgebung, in der kein Push ankommt", async () => {
+  const { laufUmgebung } = await import("../werkzeuge/verwaltung/lauf.mjs");
+  const env = laufUmgebung({ PATH: "/bin" }, "a-1-x", "/t.jsonl");
+  assert.equal(env.VERWALTUNG_AUFTRAG, "a-1-x");
+  assert.equal(env.VERWALTUNG_TRANSKRIPT, "/t.jsonl");
+  assert.equal(env.PATH, "/bin");
+  assert.equal(env.GIT_CONFIG_COUNT, "1");
+  assert.equal(env.GIT_CONFIG_KEY_0, "url.kein-push:///.pushInsteadOf");
+  assert.equal(env.GIT_CONFIG_VALUE_0, "");
+  assert.equal(env.GIT_TERMINAL_PROMPT, "0");
+  assert.equal(env.GIT_SSH_COMMAND, "false");
+});

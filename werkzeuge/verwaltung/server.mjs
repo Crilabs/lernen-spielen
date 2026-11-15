@@ -30,6 +30,26 @@ export function schaetze(uebersicht, art, ziel) {
   return null;
 }
 
+const ERLAUBTE_HOSTS = new Set(["127.0.0.1", "localhost"]);
+
+/**
+ * Schutz gegen fremde Webseiten im selben Browser (CSRF, DNS-Rebinding): nur Host 127.0.0.1/localhost, kein fremder
+ * Origin, Änderungen nur als JSON (das erzwingt bei fremden Seiten eine Vorabfrage, die der Server nie erlaubt).
+ * @returns {number} 0 = in Ordnung, sonst HTTP-Status
+ */
+export function pruefeHerkunft(req) {
+  const host = (req.headers.host ?? "").replace(/:\d+$/, "");
+  if (!ERLAUBTE_HOSTS.has(host)) return 403;
+  const origin = req.headers.origin;
+  if (origin !== undefined) {
+    let o;
+    try { o = new URL(origin); } catch { return 403; }
+    if (!ERLAUBTE_HOSTS.has(o.hostname) || o.host !== req.headers.host) return 403;
+  }
+  if (req.method !== "GET" && !/^application\/json\b/.test(req.headers["content-type"] ?? "")) return 415;
+  return 0;
+}
+
 export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = starteLaufGetrennt } = {}) {
   const p = pfade(ordner);
   const auftraege = () => ladeAuftraege(p.auftraege);
@@ -45,6 +65,8 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
       for await (const s of req) t += s;
       return t ? JSON.parse(t) : {};
     };
+    const abgewiesen = pruefeHerkunft(req);
+    if (abgewiesen) return antwort(abgewiesen, { fehler: "Anfrage nur von der Seite der Verwaltung" });
     try {
       const url = new URL(req.url ?? "/", "http://127.0.0.1");
       const pfad = url.pathname;

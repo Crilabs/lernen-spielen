@@ -73,6 +73,23 @@ export function transkriptPfad(wurzel, sessionId, heim = homedir()) {
   return join(heim, ".claude", "projects", wurzel.replace(/[^a-zA-Z0-9]/g, "-"), `${sessionId}.jsonl`);
 }
 
+/**
+ * Umgebung des Laufs. Die Sperrliste VERBOTEN lässt sich umgehen (z. B. `git -C . push`), darum lenkt Git hier jede
+ * Push-Adresse auf ein Schema ohne Helfer um: Ein Push scheitert immer, Fetch und lokale Arbeit gehen weiter.
+ */
+export function laufUmgebung(basis, auftragId, transkript) {
+  return {
+    ...basis,
+    VERWALTUNG_AUFTRAG: auftragId,
+    VERWALTUNG_TRANSKRIPT: transkript,
+    GIT_CONFIG_COUNT: "1",
+    GIT_CONFIG_KEY_0: "url.kein-push:///.pushInsteadOf",
+    GIT_CONFIG_VALUE_0: "",
+    GIT_TERMINAL_PROMPT: "0",
+    GIT_SSH_COMMAND: "false",
+  };
+}
+
 /** Startet einen Auftrag als `claude -p` im Repo; Ausgabe ins Protokoll. Ergebnis: Exit-Code. */
 export function startClaude({ befehl, auftragId, wurzel, protokoll }) {
   const sessionId = randomUUID();
@@ -83,7 +100,7 @@ export function startClaude({ befehl, auftragId, wurzel, protokoll }) {
     "-p", befehl, "--session-id", sessionId, "--permission-mode", "bypassPermissions", "--disallowedTools", ...VERBOTEN,
   ], {
     cwd: wurzel,
-    env: { ...process.env, VERWALTUNG_AUFTRAG: auftragId, VERWALTUNG_TRANSKRIPT: transkriptPfad(wurzel, sessionId) },
+    env: laufUmgebung(process.env, auftragId, transkriptPfad(wurzel, sessionId)),
     stdio: ["ignore", "pipe", "pipe"],
   });
   kind.stdout.pipe(log, { end: false });
