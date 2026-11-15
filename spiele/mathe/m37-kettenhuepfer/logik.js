@@ -34,12 +34,11 @@ export function korbPlatz(k) {
 }
 
 /**
- * Die Zeile, die in Sanft verwischt ist (Entwurf §7): die letzte Zeile des Kindes auf der Liste (nicht Timos), aber
- * erst, wenn das Kind mindestens zwei Zeilen geschrieben hat. Ruhig: keine. @param {string[]} zeilen Schlüssel "a*n"
- * in der Reihenfolge der Liste, Timos zuerst @param {string} geschichte ruhig | sanft | abenteuer @returns {string | null}
+ * Die verwischte Zeile (Entwurf §7): die letzte Zeile des Kindes auf der Liste (nicht Timos), aber erst, wenn das Kind
+ * mindestens zwei Zeilen geschrieben hat. Gilt für alle Kinder – Stufen der Geschichten gibt es nicht mehr (Christian
+ * 2026-11-15). @param {string[]} zeilen Schlüssel "a*n" in der Reihenfolge der Liste, Timos zuerst @returns {string | null}
  */
-export function verwischteZeile(zeilen, geschichte) {
-  if (geschichte === "ruhig") return null;
+export function verwischteZeile(zeilen) {
   const vomKind = zeilen.slice(1);
   return vomKind.length >= 2 ? vomKind[vomKind.length - 1] : null;
 }

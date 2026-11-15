@@ -1,0 +1,4285 @@
+{
+ "hinweis": "Beurteilung vom 2026-11-15 (Christian freigegeben): je Lernthema die Lerngeschichte (Art sinn/form/struktur, Familie) oder keine, je Sachwelt die Form (geschichte/spiel/beides). Siehe docs/geschichten.md.",
+ "familien": [
+  {
+   "id": "links-rechts",
+   "art": "struktur",
+   "titel": "Die Hand, die winkt",
+   "idee": "Ein Kind von hinten gesehen, linke und rechte Hand farbig; die Seiten bleiben am Körper, auch wenn es sich dreht.",
+   "themen": [
+    "links-und-rechts"
+   ]
+  },
+  {
+   "id": "pfeilwege",
+   "art": "sinn",
+   "titel": "Die Schatzkarte",
+   "idee": "Pfeile auf einer gezeichneten Karte führen Schritt für Schritt zur Kiste.",
+   "themen": [
+    "wege-nach-pfeilen"
+   ]
+  },
+  {
+   "id": "quadrat-rechteck",
+   "art": "struktur",
+   "titel": "Vier gleiche Seiten",
+   "idee": "Ein Rechteck wird gestreckt und gestaucht, bis alle Seiten gleich lang sind; das Quadrat bleibt dabei ein Rechteck.",
+   "themen": [
+    "quadrat-und-rechteck",
+    "quadrat-besonderes-rechteck"
+   ]
+  },
+  {
+   "id": "koerperteile",
+   "art": "struktur",
+   "titel": "Der Würfel packt aus",
+   "idee": "Ein Würfel mit farbig markierten Ecken, Kanten und Flächen, auch den verdeckten.",
+   "themen": [
+    "ecken-kanten-flaechen"
+   ]
+  },
+  {
+   "id": "ansichten",
+   "art": "struktur",
+   "titel": "Drei Kinder, ein Ding",
+   "idee": "Drei Kinder stehen um eine Tasse und sehen sie von vorne, oben und der Seite.",
+   "themen": [
+    "ansichten-zuordnen",
+    "ansichten-wuerfelgebaeude"
+   ]
+  },
+  {
+   "id": "symmetrie",
+   "art": "struktur",
+   "titel": "Das gefaltete Herz",
+   "idee": "Ein Blatt wird gefaltet, beide Hälften liegen genau aufeinander.",
+   "themen": [
+    "symmetrie-erkennen"
+   ]
+  },
+  {
+   "id": "flaechen-vergleichen",
+   "art": "sinn",
+   "titel": "Welche Decke ist größer?",
+   "idee": "Zwei Decken werden mit gleichen Plättchen ausgelegt und gezählt.",
+   "themen": [
+    "flaechen-vergleichen"
+   ]
+  },
+  {
+   "id": "flaeche-rand",
+   "art": "struktur",
+   "titel": "Beet und Zaun",
+   "idee": "Gleiche Anzahl Kästchen, aber der Zaunrand ist verschieden lang.",
+   "themen": [
+    "rand-vergleichen",
+    "flaeche-oder-umfang"
+   ]
+  },
+  {
+   "id": "netze",
+   "art": "struktur",
+   "titel": "Der Würfel klappt auf",
+   "idee": "Ein Würfel wird aufgeklappt zum Netz aus sechs Flächen und wieder gefaltet; später der Quader.",
+   "themen": [
+    "wuerfelnetze",
+    "quadernetze"
+   ]
+  },
+  {
+   "id": "bauplan",
+   "art": "struktur",
+   "titel": "Der Plan zum Turm",
+   "idee": "Ein Würfelgebäude neben seinem Bauplan, Zahlen in den Kästchen zeigen die Türme.",
+   "themen": [
+    "wuerfelgebaeude-nach-bauplan",
+    "bauplan-zeichnen"
+   ]
+  },
+  {
+   "id": "parkettierungen",
+   "art": "sinn",
+   "titel": "Der Fliesenleger",
+   "idee": "Fliesen füllen einen Boden ohne Lücke; runde Formen lassen Lücken.",
+   "themen": [
+    "parkettierungen"
+   ]
+  },
+  {
+   "id": "planquadrate",
+   "art": "sinn",
+   "titel": "Wo ist der Spielplatz?",
+   "idee": "Eine Karte mit Planquadraten, ein Ort wird mit Buchstabe und Zahl gefunden.",
+   "themen": [
+    "planquadrate"
+   ]
+  },
+  {
+   "id": "rechter-winkel",
+   "art": "struktur",
+   "titel": "Die Ecke aus dem Blatt",
+   "idee": "Ein Blatt wird zweimal gefaltet, die Ecke ist ein rechter Winkel, den man in der Umgebung wiederfindet.",
+   "themen": [
+    "rechter-winkel"
+   ]
+  },
+  {
+   "id": "vergroessern-verkleinern",
+   "art": "struktur",
+   "titel": "Das Bild im doppelten Gitter",
+   "idee": "Dasselbe Bild in einem Gitter mit größeren Kästchen, alles wächst im gleichen Maß.",
+   "themen": [
+    "vergroessern-verkleinern"
+   ]
+  },
+  {
+   "id": "massstab-im-plan",
+   "art": "sinn",
+   "titel": "Das Dorf auf dem Blatt",
+   "idee": "Ein Dorf wird verkleinert auf ein Blatt gezeichnet, ein Schritt auf dem Plan ist viele in Wirklichkeit.",
+   "themen": [
+    "massstab-im-plan"
+   ]
+  },
+  {
+   "id": "rauminhalt-wuerfel",
+   "art": "struktur",
+   "titel": "Die Kiste füllen",
+   "idee": "Eine Kiste wird Schicht für Schicht mit Würfeln gefüllt.",
+   "themen": [
+    "rauminhalt-wuerfel"
+   ]
+  },
+  {
+   "id": "silben",
+   "art": "struktur",
+   "titel": "Das Wort hat Glieder",
+   "idee": "Ein Wort wird im Bild in Stücke geteilt und wieder zusammengesetzt, jedes Stück ein Klatscher, wie Perlen auf einer Schnur.",
+   "themen": [
+    "silben-klatschen",
+    "silben-zusammenhoeren"
+   ]
+  },
+  {
+   "id": "laute-sprechen",
+   "art": "sinn",
+   "titel": "Warum wir Laute sprechen",
+   "idee": "Zwei Kinder versuchen, ein Wort zu ziehen: mit Lautnamen klappt es nicht, mit Lauten zieht es sich zusammen.",
+   "themen": [
+    "laute-statt-namen"
+   ]
+  },
+  {
+   "id": "buchstaben-vokale",
+   "art": "form",
+   "titel": "Die Mundformen",
+   "idee": "Jeder Vokal wird aus einem Bild seiner Mundstellung zur Buchstabenform.",
+   "themen": [
+    "laut-a",
+    "laut-i",
+    "laut-o",
+    "laut-u",
+    "laut-e"
+   ]
+  },
+  {
+   "id": "buchstaben-dauerlaute",
+   "art": "form",
+   "titel": "Die summenden Buchstaben",
+   "idee": "Jeder Dauerlaut-Buchstabe entsteht Seite für Seite aus einem Bild, das den Laut macht (Schlange zu s).",
+   "themen": [
+    "laut-m",
+    "laut-l",
+    "laut-s",
+    "laut-r",
+    "laut-n",
+    "laut-f",
+    "laut-w",
+    "laut-h-anfang",
+    "laut-j"
+   ]
+  },
+  {
+   "id": "buchstaben-stopplaute",
+   "art": "form",
+   "titel": "Die knallenden Buchstaben",
+   "idee": "Jeder kurze Laut-Buchstabe wird aus einem Bild zur Form.",
+   "themen": [
+    "laut-t",
+    "laut-d",
+    "laut-k",
+    "laut-p",
+    "laut-b",
+    "laut-g",
+    "laut-z"
+   ]
+  },
+  {
+   "id": "umlaute",
+   "art": "form",
+   "titel": "Die Buchstaben mit Punkten",
+   "idee": "Zu a, o, u kommen zwei Punkte hinzu; das Bild zeigt, wie der Laut sich dabei verändert.",
+   "themen": [
+    "laut-ae",
+    "laut-oe",
+    "laut-ue"
+   ]
+  },
+  {
+   "id": "seltene-buchstaben",
+   "art": "form",
+   "titel": "Die seltenen Gäste im Alphabet",
+   "idee": "Jeder seltene Buchstabe wird aus einem Bild zur Form, die Seite zeigt, in welchen Wörtern er vorkommt.",
+   "themen": [
+    "laut-v",
+    "laut-eszett",
+    "laut-qu",
+    "laut-x",
+    "laut-y",
+    "laut-c"
+   ]
+  },
+  {
+   "id": "buchstabengruppen-doppellaute",
+   "art": "form",
+   "titel": "Zwei Buchstaben, ein Klang",
+   "idee": "Zwei Buchstaben wandern zusammen und werden zu einem Klang, das Bild zeigt beide in einer Form.",
+   "themen": [
+    "laut-ei",
+    "laut-au",
+    "laut-eu",
+    "laut-aeu",
+    "laut-ai",
+    "laut-ie"
+   ]
+  },
+  {
+   "id": "buchstabengruppen-mitlaute",
+   "art": "form",
+   "titel": "Buchstaben, die zusammenhalten",
+   "idee": "Jede Buchstabengruppe entsteht aus einem Bild, das den gemeinsamen Klang zeigt (Gans zischt zu sch).",
+   "themen": [
+    "laut-sch",
+    "laut-ch-ich",
+    "laut-ch-ach",
+    "laut-st-anfang",
+    "laut-sp-anfang",
+    "laut-tz",
+    "laut-ck",
+    "laut-ng",
+    "laut-nk",
+    "laut-pf",
+    "laut-ph"
+   ]
+  },
+  {
+   "id": "b-d-p",
+   "art": "form",
+   "titel": "Bauch links, Bauch rechts",
+   "idee": "Ein Bild mit Bauch und Stiel dreht sich zu b, d und p und zeigt, wo der Bauch sitzt.",
+   "themen": [
+    "b-d-p-unterscheiden"
+   ]
+  },
+  {
+   "id": "satzzeichen-lesen",
+   "art": "sinn",
+   "titel": "Wozu die Zeichen am Satzende",
+   "idee": "Eine Nachricht ohne Zeichen geht durcheinander, mit Punkt, Fragezeichen und Ausrufezeichen wird sie klar.",
+   "themen": [
+    "punkt-heisst-pause",
+    "fragen-betont-lesen"
+   ]
+  },
+  {
+   "id": "offene-geschlossene-silben",
+   "art": "struktur",
+   "titel": "Silben mit und ohne Dach",
+   "idee": "Silben im Bild als Häuser: Endet die Silbe offen, klingt der Vokal lang, schließt ein Konsonant sie, klingt er kurz.",
+   "themen": [
+    "lesen-kurzer-selbstlaut",
+    "lesen-lang-oder-kurz"
+   ]
+  },
+  {
+   "id": "wortbausteine",
+   "art": "struktur",
+   "titel": "Wörter aus Bausteinen",
+   "idee": "Ein langes Wort wird im Bild aus Bausteinen gebaut: Vorsilbe, Stamm, Endung.",
+   "themen": [
+    "wortbausteine-lesen",
+    "wortstamm-lesen",
+    "lange-woerter-in-bausteinen-lesen",
+    "vorsilben-ver-vor",
+    "wortbausteine-un-ver-vor",
+    "vorsilben-ent-zer-un-ver",
+    "nachsilben-bilden-woerter",
+    "vorsilben-bei-verben"
+   ]
+  },
+  {
+   "id": "tabelle",
+   "art": "struktur",
+   "titel": "Wo sich Zeile und Spalte treffen",
+   "idee": "Ein Stundenplan wird als Gitter erzählt, ein Finger fährt Zeile und Spalte entlang bis zum Treffpunkt.",
+   "themen": [
+    "lesen-tabelle"
+   ]
+  },
+  {
+   "id": "textsorten",
+   "art": "sinn",
+   "titel": "Wozu es verschiedene Texte gibt",
+   "idee": "Rezept, Gedicht und Geschichte liegen auf dem Tisch; jeder Text wird zu seinem Zweck benutzt.",
+   "themen": [
+    "textsorte-erkennen"
+   ]
+  },
+  {
+   "id": "redewendungen",
+   "art": "sinn",
+   "titel": "Woher die Redewendung kommt",
+   "idee": "Eine Redewendung wird als Bild wörtlich gezeigt und dann dort, wo sie herkommt, in ihrer Bedeutung erzählt.",
+   "themen": [
+    "redewendungen-verstehen",
+    "sprachbilder-verstehen"
+   ]
+  },
+  {
+   "id": "reimmuster",
+   "art": "struktur",
+   "titel": "Die Reime wandern",
+   "idee": "Vier Zeilen als Bänder: Gleiche Endungen werden verbunden, nebeneinander (Paar) oder über Kreuz.",
+   "themen": [
+    "paarreim-kreuzreim"
+   ]
+  },
+  {
+   "id": "mengen-vergleichen",
+   "art": "struktur",
+   "titel": "Wer hat mehr?",
+   "idee": "Zwei Reihen werden Stück für Stück gepaart (Teller zu Gästen, Turm neben Turm); der Überhang zeigt mehr, weniger und den Unterschied.",
+   "themen": [
+    "mehr-weniger-gleich-viele",
+    "unterschied-bis-10"
+   ]
+  },
+  {
+   "id": "zaehlen",
+   "art": "sinn",
+   "titel": "Wozu zählen wir?",
+   "idee": "Wie Menschen früher mit Kerben und Steinen gezählt haben und warum eine feste Reihenfolge der Zahlen hilft.",
+   "themen": [
+    "vorwaerts-zaehlen"
+   ]
+  },
+  {
+   "id": "ziffern-0-bis-10",
+   "art": "form",
+   "titel": "Ziffern werden Bilder",
+   "idee": "Je Ziffer wird ein Bild Seite für Seite zur Form (Schwan wird 2).",
+   "themen": [
+    "ziffern-lesen-bis-10"
+   ]
+  },
+  {
+   "id": "zehnerfeld",
+   "art": "struktur",
+   "titel": "Fünf und noch",
+   "idee": "Das Zehnerfeld füllt sich: erst die volle Fünferreihe, dann der Rest, angeordnet wie das Montessori-Material.",
+   "themen": [
+    "zehnerfeld-fuenf-und-noch"
+   ]
+  },
+  {
+   "id": "die-null",
+   "art": "sinn",
+   "titel": "Die Null",
+   "idee": "Das leere Nest und der leere Korb: wozu man ein Zeichen für „nichts“ braucht und woher die Null kommt.",
+   "themen": [
+    "die-null"
+   ]
+  },
+  {
+   "id": "wofuer-zahlen-stehen",
+   "art": "sinn",
+   "titel": "Was sagt die Zahl?",
+   "idee": "Die 8 am Bus, auf dem Trikot, an der Haustür: wozu Zahlen je stehen.",
+   "themen": [
+    "wofuer-zahlen-stehen"
+   ]
+  },
+  {
+   "id": "groesser-kleiner",
+   "art": "form",
+   "titel": "Das Maul zeigt zum Mehr",
+   "idee": "Ein hungriges Tier öffnet sein Maul zur größeren Menge; Seite für Seite wird daraus < oder >.",
+   "themen": [
+    "zeichen-groesser-kleiner-gleich"
+   ]
+  },
+  {
+   "id": "zahlenstrahl",
+   "art": "struktur",
+   "titel": "Die Zahlenstraße",
+   "idee": "Die Zahlen stehen der Reihe nach am Strahl wie Häuser an einer Straße, gleich weit auseinander, mit 0 am Anfang.",
+   "themen": [
+    "zahlenstrahl-bis-10",
+    "nachbarzahlen-zahlenstrahl-bis-20"
+   ]
+  },
+  {
+   "id": "zerlegen",
+   "art": "struktur",
+   "titel": "Gäste in zwei Häusern",
+   "idee": "Eine Zahl von Gästen verteilt sich auf zwei Häuser; jede Verteilung steht als Perlenreihe da, bis alle gefunden sind.",
+   "themen": [
+    "zerlegen-2",
+    "zerlegen-3",
+    "zerlegen-4",
+    "zerlegen-5",
+    "zerlegen-6",
+    "zerlegen-7",
+    "zerlegen-8",
+    "zerlegen-9",
+    "zerlegen-10",
+    "zerlegungen-ordnen"
+   ]
+  },
+  {
+   "id": "plus-minus-zeichen",
+   "art": "form",
+   "titel": "Zwei Striche und einer",
+   "idee": "Plus und Minus entstehen aus Bild-Handlungen (Dazukommen, Weggehen) und werden zu den Zeichen + und −.",
+   "themen": [
+    "plus-verstehen",
+    "minus-verstehen"
+   ]
+  },
+  {
+   "id": "verdoppeln-halbieren",
+   "art": "struktur",
+   "titel": "Zwei Mal das Gleiche",
+   "idee": "Zwei gleiche Reihen Perlen nebeneinander: Verdoppeln zusammenlegen, Halbieren wieder auseinanderlegen.",
+   "themen": [
+    "verdoppeln-bis-10",
+    "halbieren-bis-10",
+    "zwillinge",
+    "halbieren-bis-20"
+   ]
+  },
+  {
+   "id": "paare",
+   "art": "struktur",
+   "titel": "Paare beim Tanzen",
+   "idee": "Kinder bilden Paare; bleibt eines übrig, ist die Zahl ungerade, sonst gerade.",
+   "themen": [
+    "gerade-ungerade"
+   ]
+  },
+  {
+   "id": "zehnerpaare",
+   "art": "struktur",
+   "titel": "Gäste in zwei Häusern bis zehn",
+   "idee": "Zehn Gäste: 1 und 9, 2 und 8 … 5 und 5, immer ein volles Zehnerfeld in zwei Häusern.",
+   "themen": [
+    "ergaenzen-bis-10",
+    "ergebnis-10",
+    "minus-von-10"
+   ]
+  },
+  {
+   "id": "tauschaufgaben",
+   "art": "struktur",
+   "titel": "Zwei Taschen, zwei Wege",
+   "idee": "Zwei Taschen mit Murmeln werden in beiden Reihenfolgen ausgeleert; die Summe bleibt.",
+   "themen": [
+    "tauschaufgaben-bis-10",
+    "tauschen-ueber-10"
+   ]
+  },
+  {
+   "id": "umkehraufgaben",
+   "art": "struktur",
+   "titel": "Hin und wieder zurück",
+   "idee": "Drei Zahlen bilden ein Haus mit vier Wegen: zwei hin, zwei zurück; Plus und Minus als Gegenstücke.",
+   "themen": [
+    "umkehraufgaben-bis-10",
+    "aufgabenfamilie-bis-10",
+    "umkehraufgaben-bis-20"
+   ]
+  },
+  {
+   "id": "zahlenmauer",
+   "art": "struktur",
+   "titel": "Die tragende Mauer",
+   "idee": "Jeder Stein trägt genau so viel, wie die zwei Steine darunter zusammen; von unten nach oben und zurück.",
+   "themen": [
+    "zahlenmauer-bis-10",
+    "zahlenmauer-von-oben"
+   ]
+  },
+  {
+   "id": "zehner-einer",
+   "art": "struktur",
+   "titel": "Zehnerbündel",
+   "idee": "Lose Stifte werden zu einem Zehnerbündel gebunden; 13 ist ein Bündel und drei lose, wie Stange und Würfel.",
+   "themen": [
+    "zehner-und-einer-bis-20",
+    "zahlen-bis-20-schreiben",
+    "zwanzigerfeld",
+    "zehn-plus"
+   ]
+  },
+  {
+   "id": "ueber-die-zehn",
+   "art": "struktur",
+   "titel": "Erst den Karton füllen",
+   "idee": "Der Zehnerkarton wird erst voll gemacht, der Rest kommt in den nächsten Karton.",
+   "themen": [
+    "erst-zur-10",
+    "ueber-10-mit-9",
+    "ueber-10-mit-8",
+    "ueber-10-mit-7"
+   ]
+  },
+  {
+   "id": "minus-ueber-die-zehn",
+   "art": "struktur",
+   "titel": "Das Bündel bleibt",
+   "idee": "Von 13 Stiften wird erst bis zum vollen Bündel verschenkt, dann vom Bündel weiter.",
+   "themen": [
+    "minus-bis-zur-10",
+    "minus-ueber-10-bis-5",
+    "minus-ueber-10-ab-6",
+    "minus-9-ueber-minus-10"
+   ]
+  },
+  {
+   "id": "geld",
+   "art": "sinn",
+   "titel": "Wozu Münzen?",
+   "idee": "Wie früher getauscht wurde und warum Münzen mit festen Werten das Einkaufen leichter machen.",
+   "themen": [
+    "muenzen-kennen",
+    "geld-legen-bis-20"
+   ]
+  },
+  {
+   "id": "laengen-messen",
+   "art": "sinn",
+   "titel": "Wie lang ist das?",
+   "idee": "Warum man misst: Handspanne und Fuß als erstes Maß, dann ein gemeinsames.",
+   "themen": [
+    "laenger-kuerzer"
+   ]
+  },
+  {
+   "id": "wochentage",
+   "art": "sinn",
+   "titel": "Wozu die Woche?",
+   "idee": "Wozu man Tage benennt und zählt: gestern, heute, morgen und der Morgen bis zum Ausflug.",
+   "themen": [
+    "wochentage-tageszeiten"
+   ]
+  },
+  {
+   "id": "uhr",
+   "art": "sinn",
+   "titel": "Wozu eine Uhr?",
+   "idee": "Wie Menschen früher mit Sonne und Sanduhr die Zeit lasen und warum die Zeigeruhr entstand.",
+   "themen": [
+    "volle-stunde"
+   ]
+  },
+  {
+   "id": "strichliste",
+   "art": "struktur",
+   "titel": "Fünferbündel",
+   "idee": "Striche werden zu Fünferbündeln mit dem Querstrich, wie das Montessori-Fünferfeld.",
+   "themen": [
+    "strichliste",
+    "strichliste-und-bilddiagramm"
+   ]
+  },
+  {
+   "id": "gleich-viel",
+   "art": "struktur",
+   "titel": "Die Waage im Gleichgewicht",
+   "idee": "Eine Waage zeigt, dass links und rechts gleich viel wiegen, auch wenn links eine Zahl und rechts eine Rechnung liegt.",
+   "themen": [
+    "gleichheitszeichen-gleich-viel"
+   ]
+  },
+  {
+   "id": "zehner-buendeln",
+   "art": "struktur",
+   "titel": "Zehnerhäuser",
+   "idee": "Eine Kastanienernte wird zu Zehnerbündeln und Einzelnen gebündelt, angeordnet wie Zehnerstangen und Einerwürfel; die Zehnerzahlen entstehen Bündel für Bündel.",
+   "themen": [
+    "zehnerzahlen-bis-100",
+    "buendeln-zehner-einer",
+    "zerlegen-zehner-einer"
+   ]
+  },
+  {
+   "id": "zahlwort-dreher",
+   "art": "struktur",
+   "titel": "Dreiundvierzig oder vierunddreißig?",
+   "idee": "Beim Sprechen kommen die Einer zuerst, beim Schreiben die Zehner: Stangen und Würfel zeigen 43 und das Wort läuft gegenläufig.",
+   "themen": [
+    "zahlwort-ziffern-bis-100"
+   ]
+  },
+  {
+   "id": "hundertertafel",
+   "art": "struktur",
+   "titel": "Die Straße der Hundert",
+   "idee": "Hundert Felder bilden zehn Reihen wie zehn Zehnerstangen; eine Stufe nach unten ist immer ein Zehner mehr.",
+   "themen": [
+    "hundertertafel"
+   ]
+  },
+  {
+   "id": "mal-gruppen",
+   "art": "sinn",
+   "titel": "Für jeden zwei",
+   "idee": "Beim Bäcker bekommt jedes Kind gleich viele Brötchen; statt immer wieder zu addieren zählt man die Gruppen und schreibt es als Malaufgabe.",
+   "themen": [
+    "gleich-grosse-gruppen"
+   ]
+  },
+  {
+   "id": "mal-punktefeld",
+   "art": "struktur",
+   "titel": "Das Fenster-Feld",
+   "idee": "Ein rechteckiges Punktefeld wird als Reihen mal Spalten erzählt; dreht man es, bleiben die Punkte gleich, nur die Aufgabe wechselt.",
+   "themen": [
+    "punktefeld-reihen-spalten",
+    "tauschaufgaben-mal"
+   ]
+  },
+  {
+   "id": "einmaleins-reihen",
+   "art": "struktur",
+   "titel": "Die Reihen wachsen",
+   "idee": "Jede Einmaleinsreihe wächst als Punktefeld Reihe für Reihe; die Reihen hängen über Verdoppeln, Hälfte und Zehner zusammen.",
+   "themen": [
+    "zweierreihe",
+    "zehnerreihe",
+    "fuenferreihe",
+    "viererreihe",
+    "achterreihe",
+    "dreierreihe",
+    "sechserreihe",
+    "neunerreihe",
+    "siebenerreihe"
+   ]
+  },
+  {
+   "id": "teilen",
+   "art": "sinn",
+   "titel": "Gerecht für alle",
+   "idee": "Eine Feier: Süßigkeiten werden gerecht verteilt, Kinder in Tischgruppen aufgeteilt; so entsteht das Geteiltzeichen.",
+   "themen": [
+    "gerecht-verteilen",
+    "aufteilen-in-gruppen"
+   ]
+  },
+  {
+   "id": "geteilt-umkehrung",
+   "art": "struktur",
+   "titel": "Mal und geteilt gehören zusammen",
+   "idee": "Dasselbe Punktefeld erzählt 4 · 3 = 12 und 12 : 3 = 4; die Aufgaben sind Rückweg und Hinweg.",
+   "themen": [
+    "geteilt-umkehrung-mal"
+   ]
+  },
+  {
+   "id": "euro-cent",
+   "art": "struktur",
+   "titel": "Hundert Cent im Euro",
+   "idee": "Hundert Cent-Münzen werden zu Zehnerstapeln und zu einem Euro gebündelt, wie Stangen zum Tausender.",
+   "themen": [
+    "euro-und-cent"
+   ]
+  },
+  {
+   "id": "lineal-messen",
+   "art": "sinn",
+   "titel": "Passt das?",
+   "idee": "Ein Bild soll in einen Rahmen; schätzen reicht nicht, also kommt das Lineal und die Null als Startpunkt.",
+   "themen": [
+    "messen-mit-lineal"
+   ]
+  },
+  {
+   "id": "meter-hundert",
+   "art": "struktur",
+   "titel": "Hundert Zentimeter im Meter",
+   "idee": "Hundert Zentimeter liegen in einer Reihe und bilden einen Meter.",
+   "themen": [
+    "meter-zentimeter"
+   ]
+  },
+  {
+   "id": "uhr-bruchteile",
+   "art": "struktur",
+   "titel": "Halbe und Viertel am Zifferblatt",
+   "idee": "Das Zifferblatt wird halbiert und geviertelt; der große Zeiger läuft durch die Stücke.",
+   "themen": [
+    "uhr-halbe-stunde",
+    "uhr-viertel"
+   ]
+  },
+  {
+   "id": "uhr-minuten",
+   "art": "struktur",
+   "titel": "60 Minuten im Kreis",
+   "idee": "Zwölf Fünferschritte bilden sechzig Minutenstriche und eine Stunde.",
+   "themen": [
+    "uhr-fuenf-minuten",
+    "uhr-minutengenau",
+    "stunde-und-minute"
+   ]
+  },
+  {
+   "id": "zaunpfahl",
+   "art": "struktur",
+   "titel": "Pfosten und Felder",
+   "idee": "Ein Zaun mit fünf Feldern wird gebaut: die Pfosten dazwischen und am Rand werden gezählt.",
+   "themen": [
+    "zaunpfahl-falle"
+   ]
+  },
+  {
+   "id": "summe-veraendern",
+   "art": "struktur",
+   "titel": "Wanderndes Plättchen",
+   "idee": "Zwei Kinder mit Plättchen: jedes bekommt eines dazu, eines gibt ab; Summe und Unterschied lassen sich am Bild lesen.",
+   "themen": [
+    "gleichsinnig-veraendern",
+    "gegensinnig-summe-bleibt",
+    "differenz-bleibt-gleich"
+   ]
+  },
+  {
+   "id": "kombinieren",
+   "art": "struktur",
+   "titel": "Alle Möglichkeiten",
+   "idee": "Mützen und Schals werden als Gitter geordnet, jede Kombination hat ihr Feld.",
+   "themen": [
+    "kombinieren-systematisch",
+    "kombinieren-drei-mal-zwei"
+   ]
+  },
+  {
+   "id": "stellenwert-buendeln",
+   "art": "struktur",
+   "titel": "Zehn Zehner, ein Hunderter",
+   "idee": "Zehn Zehnerstangen werden zu einer Hunderterplatte gebündelt, zehn Platten zu einem Tausenderwürfel; gelegt wie das Montessori-Material.",
+   "themen": [
+    "hunderter-buendeln",
+    "tausender-buendeln"
+   ]
+  },
+  {
+   "id": "null-platzhalter",
+   "art": "struktur",
+   "titel": "Das leere Fach",
+   "idee": "Im Stellenwert-Brett bleibt ein Fach leer; die Null hält den Platz frei, damit alle Perlen an ihrem Ort bleiben.",
+   "themen": [
+    "null-platzhalter-bis-1000",
+    "null-in-grossen-zahlen"
+   ]
+  },
+  {
+   "id": "quadratzahlen",
+   "art": "struktur",
+   "titel": "Quadrate legen",
+   "idee": "Gleich viele Reihen wie Spalten ergeben ein Quadrat aus Perlen; die Anzahl ist die Quadratzahl.",
+   "themen": [
+    "quadratzahlen"
+   ]
+  },
+  {
+   "id": "runden-ueberschlag",
+   "art": "sinn",
+   "titel": "Ungefähr reicht",
+   "idee": "Eine Alltagssituation, in der ein glatter, ungefährer Wert reicht und genauer Wert nur aufhält.",
+   "themen": [
+    "runden-zehner-hunderter"
+   ]
+  },
+  {
+   "id": "mal-stufenzahlen",
+   "art": "struktur",
+   "titel": "Alles rückt eine Stelle weiter",
+   "idee": "Beim Mal 10 rutscht jede Perle ins nächste Fach nach links, beim Geteilt durch 10 nach rechts.",
+   "themen": [
+    "mal-geteilt-stufenzahlen"
+   ]
+  },
+  {
+   "id": "halbschriftlich-mal-geteilt",
+   "art": "struktur",
+   "titel": "Das Rechteck in Stücken",
+   "idee": "Ein Perlenrechteck wird in Zehner- und Einerteile zerlegt; die Teilrechnungen ergeben zusammen das Ganze.",
+   "themen": [
+    "halbschriftlich-mal",
+    "halbschriftlich-geteilt",
+    "halbschriftlich-geteilt-rest",
+    "halbschriftlich-mal-geteilt-million"
+   ]
+  },
+  {
+   "id": "stellengerecht",
+   "art": "struktur",
+   "titel": "Jede Stelle in ihre Spalte",
+   "idee": "Hunderter, Zehner, Einer stehen in Spalten untereinander wie die Felder des Stellenwert-Bretts.",
+   "themen": [
+    "stellengerecht-untereinander"
+   ]
+  },
+  {
+   "id": "uebertrag",
+   "art": "struktur",
+   "titel": "Zehn Einer werden ein Zehner",
+   "idee": "Wenn ein Fach über neun Perlen hat, werden zehn gebündelt und wandern als eine Perle ins nächste Fach.",
+   "themen": [
+    "schriftlich-plus-uebertrag",
+    "schriftlich-plus-mehrere-uebertraege",
+    "schriftlich-plus-drei-summanden"
+   ]
+  },
+  {
+   "id": "entbuendeln",
+   "art": "struktur",
+   "titel": "Ein Bündel wird aufgemacht",
+   "idee": "Fehlen Einer, wird ein Zehnerbündel aufgemacht und liefert zehn Einer; das Bild zeigt das Auspacken Fach für Fach.",
+   "themen": [
+    "entbuendeln-zehner",
+    "entbuendeln-hunderter",
+    "zweifach-entbuendeln",
+    "entbuendeln-ueber-null"
+   ]
+  },
+  {
+   "id": "ueberschlag",
+   "art": "sinn",
+   "titel": "Stimmt das ungefähr?",
+   "idee": "Eine Rechnung mit falschem Ergebnis fällt auf, weil schon der grobe Überschlag zeigt, dass es nicht passen kann.",
+   "themen": [
+    "ueberschlag-plus-minus",
+    "ueberschlag-mal"
+   ]
+  },
+  {
+   "id": "probe",
+   "art": "struktur",
+   "titel": "Hin und zurück",
+   "idee": "Plus und Minus (Mal und Geteilt) als Weg hin und zurück zwischen denselben Zahlen; die Probe führt zum Start zurück.",
+   "themen": [
+    "probe-schriftlich-minus",
+    "probe-teilen"
+   ]
+  },
+  {
+   "id": "einheiten-1000",
+   "art": "sinn",
+   "titel": "Wozu kleine und große Einheiten",
+   "idee": "Eine Feder, ein Sack, ein Lastwagen: je nach Ding braucht man eine andere Einheit, damit die Zahlen handlich bleiben.",
+   "themen": [
+    "gramm-kilogramm",
+    "liter-milliliter",
+    "kilometer-millimeter",
+    "tonne"
+   ]
+  },
+  {
+   "id": "komma-groessen",
+   "art": "form",
+   "titel": "Das Komma trennt",
+   "idee": "Das Komma wird Seite für Seite zum Trennstrich zwischen Euro und Cent (Meter und Zentimeter).",
+   "themen": [
+    "kommaschreibweise-groessen"
+   ]
+  },
+  {
+   "id": "zeitpunkt-zeitdauer",
+   "art": "struktur",
+   "titel": "Punkt und Strecke auf dem Zeitstrahl",
+   "idee": "Auf einem Zeitstrahl ist der Zeitpunkt ein Punkt, die Dauer die Strecke zwischen zwei Punkten.",
+   "themen": [
+    "zeitpunkt-zeitdauer"
+   ]
+  },
+  {
+   "id": "bruchteile",
+   "art": "struktur",
+   "titel": "Ganz, halb, viertel",
+   "idee": "Ein Liter-Krug und eine Uhr werden in gleiche Teile geteilt; halb, viertel, dreiviertel sind sichtbare Teile desselben Ganzen.",
+   "themen": [
+    "bruchteile-bei-groessen"
+   ]
+  },
+  {
+   "id": "balkendiagramm",
+   "art": "struktur",
+   "titel": "Aus Strichen werden Balken",
+   "idee": "Eine Strichliste wird Schritt für Schritt zu Balken gestapelt; höher heißt mehr.",
+   "themen": [
+    "balkendiagramm"
+   ]
+  },
+  {
+   "id": "baumdiagramm",
+   "art": "struktur",
+   "titel": "Der Weg verzweigt sich",
+   "idee": "Jede Wahl teilt den Weg in Äste; am Ende sind alle Möglichkeiten sichtbar.",
+   "themen": [
+    "baumdiagramm-kombinationen",
+    "kombinatorik-reihenfolge"
+   ]
+  },
+  {
+   "id": "chancen",
+   "art": "struktur",
+   "titel": "Welche Kugel zieht man?",
+   "idee": "Beutel mit roten und blauen Kugeln zeigen, wie die Anzahl die Chance bestimmt.",
+   "themen": [
+    "gewinnchancen",
+    "chancen-veraendern"
+   ]
+  },
+  {
+   "id": "anna-zahlen",
+   "art": "struktur",
+   "titel": "Zahlen mit Spiegel",
+   "idee": "Eine Zahl und ihre gespiegelte Zahl liegen nebeneinander; die Summe wiederholt das Muster, bis ein Spiegelpaar entsteht.",
+   "themen": [
+    "anna-zahlen",
+    "anna-zahlen-erklaeren"
+   ]
+  },
+  {
+   "id": "teiler-vielfache",
+   "art": "struktur",
+   "titel": "Rechtecke aus gleichen Reihen",
+   "idee": "Perlen werden zu Rechtecken gelegt; welche Reihenlängen aufgehen, sind die Teiler.",
+   "themen": [
+    "teiler-vielfache",
+    "teiler-begruenden"
+   ]
+  },
+  {
+   "id": "schriftlich-mal",
+   "art": "struktur",
+   "titel": "Jede Stelle wird vervielfacht",
+   "idee": "Einer-, Zehner-, Hunderterfach werden nacheinander gleich oft genommen; ein Fach über neun bündelt in das nächste.",
+   "themen": [
+    "schriftlich-mal-ohne-uebertrag",
+    "schriftlich-mal-uebertrag",
+    "schriftlich-mal-null",
+    "mal-zehnerzahl",
+    "schriftlich-mal-zweistellig"
+   ]
+  },
+  {
+   "id": "schriftlich-geteilt",
+   "art": "struktur",
+   "titel": "Fach für Fach verteilen",
+   "idee": "Hunderter, Zehner, Einer werden nacheinander an gleich viele Kinder verteilt; Übriges wird ins nächste Fach entbündelt.",
+   "themen": [
+    "schriftlich-geteilt-ohne-rest",
+    "schriftlich-geteilt-erste-stelle",
+    "schriftlich-geteilt-null-ergebnis",
+    "schriftlich-geteilt-rest",
+    "schriftlich-geteilt-durch-10"
+   ]
+  },
+  {
+   "id": "je-mehr-desto",
+   "art": "struktur",
+   "titel": "Je mehr, desto mehr",
+   "idee": "Wenn die Menge wächst, wächst der Preis gleichmäßig mit; bei Teilen verändert sich die Gruppengröße gegenläufig.",
+   "themen": [
+    "je-mehr-desto",
+    "menge-und-preis",
+    "je-mehr-desto-weniger"
+   ]
+  },
+  {
+   "id": "punkt-vor-strich",
+   "art": "sinn",
+   "titel": "Erst die Päckchen",
+   "idee": "Ein Einkauf aus Packungen und Einzelstücken: erst die Packungen zählen, dann die einzelnen dazu, damit die Rechnung stimmt.",
+   "themen": [
+    "punkt-vor-strich"
+   ]
+  },
+  {
+   "id": "taschenrechner",
+   "art": "sinn",
+   "titel": "Wann hilft der Taschenrechner",
+   "idee": "Zwei Aufgaben: eine im Kopf schnell lösbar, eine mit großen Zahlen, bei der das Werkzeug wirklich hilft.",
+   "themen": [
+    "taschenrechner-wann"
+   ]
+  },
+  {
+   "id": "druck-klein",
+   "art": "form",
+   "titel": "Die Buchstaben-Freunde",
+   "idee": "Jeder Kleinbuchstabe entsteht Seite für Seite aus einem Bild (Angelhaken wird j, angebissener Keks wird c) und bleibt im Buchstabenhaus an seinem Platz.",
+   "themen": [
+    "druck-klein-l-i",
+    "druck-klein-t",
+    "druck-klein-j",
+    "druck-klein-c",
+    "druck-klein-o",
+    "druck-klein-a-d",
+    "druck-klein-g",
+    "druck-klein-e",
+    "druck-klein-s",
+    "druck-klein-n-m-h-r",
+    "druck-klein-u",
+    "druck-klein-b-p",
+    "druck-klein-v-w",
+    "druck-klein-x-k-y-z",
+    "druck-klein-f",
+    "druck-klein-q",
+    "druck-klein-umlaute-sz"
+   ]
+  },
+  {
+   "id": "druck-gross",
+   "art": "form",
+   "titel": "Die großen Buchstaben",
+   "idee": "Jeder Großbuchstabe wächst aus einem Bild zur Form, die Gruppen (gerade, rund, Stab mit Bauch, schräg) hängen zusammen.",
+   "themen": [
+    "druck-gross-gerade",
+    "druck-gross-rund",
+    "druck-gross-u-j",
+    "druck-gross-d-p-b-r",
+    "druck-gross-schraeg"
+   ]
+  },
+  {
+   "id": "ziffern-schreiben",
+   "art": "form",
+   "titel": "Die Ziffern-Tiere",
+   "idee": "Jede Ziffer entsteht aus einem Bild (Schwan wird 2), in der richtigen Strichfolge.",
+   "themen": [
+    "ziffern-schreiben-gerade",
+    "ziffern-schreiben-rund",
+    "ziffern-schreiben-bogen"
+   ]
+  },
+  {
+   "id": "schreibschrift-klein",
+   "art": "form",
+   "titel": "Buchstaben, die sich die Hand reichen",
+   "idee": "Jeder Schreibschrift-Kleinbuchstabe entsteht aus einem Bild und seiner Schwungform (Schaukel, Brücke, Schleife) und hängt sich an den nächsten.",
+   "themen": [
+    "schreibschrift-i-u",
+    "schreibschrift-n-m",
+    "schreibschrift-r",
+    "schreibschrift-t",
+    "schreibschrift-c-a-o",
+    "schreibschrift-d-q",
+    "schreibschrift-v-w",
+    "schreibschrift-e",
+    "schreibschrift-l-h-k-b",
+    "schreibschrift-j-y-g",
+    "schreibschrift-f-p",
+    "schreibschrift-s",
+    "schreibschrift-sz",
+    "schreibschrift-z-x"
+   ]
+  },
+  {
+   "id": "schreibschrift-gross",
+   "art": "form",
+   "titel": "Die Großen in Schreibschrift",
+   "idee": "Die Großbuchstaben der Schreibschrift entstehen aus Bildern; erst ohne, dann mit Anschluss an den kleinen Nachbarn.",
+   "themen": [
+    "schreibschrift-gross-ohne-verbindung",
+    "schreibschrift-gross-bogen-anschluss",
+    "schreibschrift-gross-knifflig"
+   ]
+  },
+  {
+   "id": "silben-schwingen",
+   "art": "struktur",
+   "titel": "Silben-Schaukel",
+   "idee": "Ein langes Wort wird in Silben-Bögen geschwungen; über jedem Bogen sitzt ein Vokal als Gast im Haus.",
+   "themen": [
+    "silben-schwingen-beim-schreiben",
+    "silbe-hat-selbstlaut"
+   ]
+  },
+  {
+   "id": "offene-geschlossene-silbe",
+   "art": "struktur",
+   "titel": "Das Silbenhaus mit und ohne Tür",
+   "idee": "Silbenhäuser, deren Vokal bei offener Tür lang hinausruft und bei geschlossener Tür kurz drinnen bleibt.",
+   "themen": [
+    "offene-geschlossene-silbe"
+   ]
+  },
+  {
+   "id": "doppelkonsonant",
+   "art": "struktur",
+   "titel": "Zwei halten den Vokal kurz",
+   "idee": "Zwei gleiche Konsonanten stehen wie zwei Hände zwischen den Silbenbögen und halten den kurzen Vokal fest.",
+   "themen": [
+    "doppelt-ll-mm-nn",
+    "doppelt-tt-pp",
+    "doppelt-ss-ff",
+    "doppelt-rr",
+    "ck-statt-kk",
+    "tz-statt-zz"
+   ]
+  },
+  {
+   "id": "verlaengern",
+   "art": "struktur",
+   "titel": "Das Wort wird länger",
+   "idee": "Ein Wort wird zum Wortzug mit Wagen: Hund wird zu Hunde, und im zweiten Wagen hört man den Buchstaben deutlich.",
+   "themen": [
+    "verlaengern-nomen-d-t",
+    "verlaengern-nomen-g-k",
+    "verlaengern-nomen-b-p",
+    "verlaengern-doppelt",
+    "verlaengern-verben",
+    "verlaengern-adjektive"
+   ]
+  },
+  {
+   "id": "ableiten",
+   "art": "struktur",
+   "titel": "Wortfamilien",
+   "idee": "Verwandte Wörter wohnen im selben Haus: Gans und Gänse, Zaun und Zäune, Haus-Nachbarn zeigen den Stamm.",
+   "themen": [
+    "ableiten-ae-von-a",
+    "ableiten-aeu-von-au"
+   ]
+  },
+  {
+   "id": "geschichtenbogen",
+   "art": "struktur",
+   "titel": "Der Geschichtenbogen",
+   "idee": "Anfang, Mitte und Ende liegen als Weg mit Start, Berg und Ziel nebeneinander.",
+   "themen": [
+    "anfang-mitte-ende"
+   ]
+  },
+  {
+   "id": "satz-grenzen",
+   "art": "sinn",
+   "titel": "Wo hört der Satz auf?",
+   "idee": "Eine Nachricht ohne Zeichen verheddert sich; mit großem Anfang und Punkt kann man sie beim Vorlesen verstehen.",
+   "themen": [
+    "satzanfang-gross",
+    "punkt-am-satzende"
+   ]
+  },
+  {
+   "id": "frage-ausruf",
+   "art": "form",
+   "titel": "Haken und Strich",
+   "idee": "Das Fragezeichen entsteht aus einem Angelhaken mit Tropfen, das Ausrufezeichen aus einem Stab mit Punkt.",
+   "themen": [
+    "frage-und-ausrufezeichen"
+   ]
+  },
+  {
+   "id": "wozu-schreiben",
+   "art": "sinn",
+   "titel": "Zettel an der Tür",
+   "idee": "Zettel, Schild und Rezept zeigen, wofür und für wen geschrieben wird, und was passiert, wenn der Zettel fehlt.",
+   "themen": [
+    "wozu-ist-der-zettel",
+    "fuer-wen-schreibe-ich"
+   ]
+  },
+  {
+   "id": "anlauttabelle",
+   "art": "sinn",
+   "titel": "Die Anlauttabelle",
+   "idee": "Ein Kind will einen Wunsch aufschreiben, den es nie gesehen hat; die Tabelle ist die Schatzkarte vom Laut zum Buchstaben.",
+   "themen": [
+    "schreiben-mit-anlauttabelle"
+   ]
+  },
+  {
+   "id": "buchstabenhaus",
+   "art": "struktur",
+   "titel": "Das Buchstabenhaus",
+   "idee": "Keller, Erdgeschoss und Dach sind drei Bänder in der Zeile, in die Buchstaben wie Bewohner einziehen.",
+   "themen": [
+    "buchstabenhaus"
+   ]
+  },
+  {
+   "id": "abc",
+   "art": "sinn",
+   "titel": "Wozu das ABC?",
+   "idee": "In der Bücherei stehen die Bücher nach dem Alphabet; wer die Reihe kennt, findet sein Buch.",
+   "themen": [
+    "abc-reihe"
+   ]
+  },
+  {
+   "id": "wortarten",
+   "art": "struktur",
+   "titel": "Drei Bausteine im Satz",
+   "idee": "Ein Satz wird aus Bausteinen gebaut: Nomen, Verb und Adjektiv haben je ihren Platz im Satzbild.",
+   "themen": [
+    "namenwoerter",
+    "tunwoerter",
+    "wiewoerter"
+   ]
+  },
+  {
+   "id": "mehrzahl",
+   "art": "struktur",
+   "titel": "Aus einem werden viele",
+   "idee": "Ein Ding steht allein, dann sind es viele; die Endung zeigt, wie aus eins viele werden.",
+   "themen": [
+    "einzahl-mehrzahl-erkennen",
+    "mehrzahl-mit-e",
+    "mehrzahl-mit-en",
+    "mehrzahl-mit-er",
+    "mehrzahl-mit-s",
+    "mehrzahl-umlaut-ohne-endung"
+   ]
+  },
+  {
+   "id": "ich-du-wir",
+   "art": "struktur",
+   "titel": "Wer tut was?",
+   "idee": "Eine Runde mit Personen, jede mit eigenem Verb und Fürwort.",
+   "themen": [
+    "verb-personalform",
+    "personalpronomen"
+   ]
+  },
+  {
+   "id": "zusammensetzen",
+   "art": "struktur",
+   "titel": "Zwei Wörter werden eins",
+   "idee": "Zwei Dinge rücken im Bild zusammen und werden zu einem neuen Ding mit neuem Namen.",
+   "themen": [
+    "woerter-zusammensetzen",
+    "zusammengesetzte-nomen-schreiben",
+    "fugen-s",
+    "zusammensetzen-mit-verb-adjektiv",
+    "mehrfach-zusammengesetzt"
+   ]
+  },
+  {
+   "id": "wortstamm",
+   "art": "struktur",
+   "titel": "Der Wortstamm und seine Familie",
+   "idee": "Ein Stamm trägt Zweige, jedes Wort der Familie hängt am selben Stamm.",
+   "themen": [
+    "wortfamilien",
+    "wortstamm-bleibt-gleich"
+   ]
+  },
+  {
+   "id": "satzglieder",
+   "art": "struktur",
+   "titel": "Der Satz zum Umstellen",
+   "idee": "Ein Satz aus Karten, die beim Umstellen zusammenbleiben; das Prädikat bleibt an seinem Platz.",
+   "themen": [
+    "umstellprobe",
+    "praedikat-satzkern",
+    "subjekt"
+   ]
+  },
+  {
+   "id": "woertliche-rede",
+   "art": "form",
+   "titel": "Wenn jemand spricht",
+   "idee": "Die Sprechblase wird Seite für Seite zu Anführungszeichen; Begleitsatz und Rede wandern.",
+   "themen": [
+    "woertliche-rede-erkennen",
+    "woertliche-rede-begleitsatz-vorne",
+    "woertliche-rede-begleitsatz-hinten",
+    "woertliche-rede-begleitsatz-mitte"
+   ]
+  },
+  {
+   "id": "faelle",
+   "art": "struktur",
+   "titel": "Vier Fragen, vier Fälle",
+   "idee": "Das Bild zeigt vier Fragen an denselben Satz und wie sich der Artikel dabei ändert.",
+   "themen": [
+    "die-vier-faelle",
+    "artikel-im-fall"
+   ]
+  },
+  {
+   "id": "gespraech-regeln",
+   "art": "sinn",
+   "titel": "Wer spricht, wer wartet",
+   "idee": "Drei Kinder am Tisch: die Geschichte des Bruders geht nur aus, wenn alle warten; im Bild wechseln Sprechende und Wartende.",
+   "themen": [
+    "ausreden-lassen",
+    "warten-bis-dran",
+    "gespraechsregel-erkennen"
+   ]
+  },
+  {
+   "id": "ohren-wozu",
+   "art": "sinn",
+   "titel": "Wozu man lauscht",
+   "idee": "Alltagsszenen (Waschmaschine, Regen), in denen ein Geräusch endet und etwas Neues beginnt; Hören als Werkzeug.",
+   "themen": [
+    "stille-hoeren"
+   ]
+  },
+  {
+   "id": "entschuldigen",
+   "art": "sinn",
+   "titel": "Wieder zusammenspielen",
+   "idee": "Ein umgestoßener Turm wird gemeinsam wieder aufgebaut; die Entschuldigung führt ins Weiterspielen.",
+   "themen": [
+    "sich-entschuldigen",
+    "troesten-und-gratulieren"
+   ]
+  },
+  {
+   "id": "erzaehl-aufbau",
+   "art": "struktur",
+   "titel": "Zuerst, danach, zum Schluss",
+   "idee": "Eine Handlung in drei Bildern nebeneinander, wie die Teile einer Reihe angeordnet, später mit Anfang, Mitte, Schluss beschriftet.",
+   "themen": [
+    "erzaehlen-mit-reihenfolgewoertern",
+    "anfang-mitte-schluss-vortragen"
+   ]
+  },
+  {
+   "id": "buchstabe-silbe-wort-satz",
+   "art": "struktur",
+   "titel": "Buchstabe, Silbe, Wort, Satz",
+   "idee": "Die vier Einheiten sind ineinander verschachtelt und im Bild sichtbar (Buchstaben bauen Silben, Silben Wörter, Wörter Sätze).",
+   "themen": [
+    "buchstabe-silbe-wort-satz"
+   ]
+  },
+  {
+   "id": "selbstlaut-mitlaut",
+   "art": "struktur",
+   "titel": "Vokal oder Konsonant?",
+   "idee": "Jede Silbe trägt einen Vokal wie ein Dach; das Bild zeigt, dass Konsonanten ohne Vokal nicht klingen.",
+   "themen": [
+    "selbstlaut-mitlaut"
+   ]
+  },
+  {
+   "id": "bestimmter-unbestimmter-begleiter",
+   "art": "sinn",
+   "titel": "ein, eine",
+   "idee": "Wozu es ein und der gibt: irgendeine oder genau die gemeinte Tasse.",
+   "themen": [
+    "bestimmter-unbestimmter-begleiter"
+   ]
+  },
+  {
+   "id": "satzarten",
+   "art": "sinn",
+   "titel": "Satzarten",
+   "idee": "Wozu man erzählt, fragt oder auffordert; Satzzeichen-Bezug kommt im Spiel.",
+   "themen": [
+    "satzarten"
+   ]
+  },
+  {
+   "id": "oberbegriffe",
+   "art": "struktur",
+   "titel": "Oberbegriffe",
+   "idee": "Ordnung im Bild: Oberbegriff als Korb oder Baum, in den Dinge gehören.",
+   "themen": [
+    "oberbegriffe"
+   ]
+  },
+  {
+   "id": "gestern-heute-morgen",
+   "art": "struktur",
+   "titel": "Gestern, heute, morgen",
+   "idee": "Zeitstrahl mit gestern, heute, morgen zeigt die Beziehung der Zeiten im Bild.",
+   "themen": [
+    "gestern-heute-morgen"
+   ]
+  },
+  {
+   "id": "adjektive-steigern",
+   "art": "struktur",
+   "titel": "Steigern: klein, kleiner, am kleinsten",
+   "idee": "Drei Stufen (Treppe oder Türme) zeigen klein, kleiner, am kleinsten sichtbar.",
+   "themen": [
+    "adjektive-steigern"
+   ]
+  },
+  {
+   "id": "mundart-alltag-schulsprache",
+   "art": "sinn",
+   "titel": "So sagt man es wo",
+   "idee": "Wozu man je nach Ort und Gegenüber anders spricht.",
+   "themen": [
+    "mundart-alltag-schulsprache"
+   ]
+  },
+  {
+   "id": "ausgangslage-ereignis-ausgang",
+   "art": "struktur",
+   "titel": "Ausgangslage – Ereignis – Ausgang",
+   "idee": "Der Erzählbogen aus drei Teilen ist als Struktur im Bild sichtbar.",
+   "themen": [
+    "ausgangslage-ereignis-ausgang"
+   ]
+  },
+  {
+   "id": "elfchen",
+   "art": "struktur",
+   "titel": "Elfchen",
+   "idee": "Die Form aus 1, 2, 3, 4, 1 Wörtern ist im Bild sichtbar.",
+   "themen": [
+    "elfchen"
+   ]
+  },
+  {
+   "id": "saetze-mit-bindewort-verbinden",
+   "art": "struktur",
+   "titel": "Sätze mit Bindewörtern verbinden",
+   "idee": "Das Verbinden zweier Sätze durch ein Bindewort ist im Bild sichtbar.",
+   "themen": [
+    "saetze-mit-bindewort-verbinden"
+   ]
+  },
+  {
+   "id": "verhaeltniswoerter",
+   "art": "struktur",
+   "titel": "Verhältniswörter",
+   "idee": "Lage und Beziehung zwischen zwei Dingen ist im Bild sichtbar.",
+   "themen": [
+    "verhaeltniswoerter"
+   ]
+  },
+  {
+   "id": "komma-bei-aufzaehlung",
+   "art": "form",
+   "titel": "Komma bei Aufzählungen",
+   "idee": "Das Komma als neues Satzzeichen: Gedächtnisstütze für Form und Platz.",
+   "themen": [
+    "komma-bei-aufzaehlung"
+   ]
+  },
+  {
+   "id": "neuer-absatz",
+   "art": "sinn",
+   "titel": "Neuer Absatz!",
+   "idee": "Wozu Absätze: der Text wird für Lesende übersichtlich und wechselt bei neuem Abschnitt.",
+   "themen": [
+    "neuer-absatz"
+   ]
+  },
+  {
+   "id": "hauptsatz-und-nebensatz",
+   "art": "struktur",
+   "titel": "Hauptsatz und Nebensatz",
+   "idee": "Haupt- und Nebensatz sind als verbundene Bausteine im Bild sichtbar.",
+   "themen": [
+    "hauptsatz-und-nebensatz"
+   ]
+  },
+  {
+   "id": "woher-kommt-das-wort",
+   "art": "sinn",
+   "titel": "Woher kommt das Wort?",
+   "idee": "Woher Wörter kommen, erzählt eine Herkunftsgeschichte.",
+   "themen": [
+    "woher-kommt-das-wort"
+   ]
+  },
+  {
+   "id": "standpunkt-grund-beispiel",
+   "art": "struktur",
+   "titel": "Standpunkt, Grund, Beispiel",
+   "idee": "Der dreiteilige Aufbau einer Meinung ist als Struktur im Bild sichtbar.",
+   "themen": [
+    "standpunkt-grund-beispiel"
+   ]
+  },
+  {
+   "id": "hoeflich-nachfragen",
+   "art": "sinn",
+   "titel": "Noch mal, bitte!",
+   "idee": "Wozu man nachfragt statt zu raten, trägt die Einführung besser als das Spiel allein.",
+   "themen": [
+    "hoeflich-nachfragen"
+   ]
+  },
+  {
+   "id": "ich-botschaft",
+   "art": "sinn",
+   "titel": "Ich fühle mich …",
+   "idee": "Wozu Ich-Botschaften: Streit lösen, ohne dass beide wütender werden.",
+   "themen": [
+    "ich-botschaft"
+   ]
+  },
+  {
+   "id": "meine-hoerfrage",
+   "art": "sinn",
+   "titel": "Meine Hörfrage",
+   "idee": "Wozu man sich vor dem Hören eine Frage stellt: man hört gezielter.",
+   "themen": [
+    "meine-hoerfrage"
+   ]
+  },
+  {
+   "id": "mein-stichwortzettel",
+   "art": "sinn",
+   "titel": "Mein Stichwortzettel",
+   "idee": "Wozu ein Stichwortzettel: man verliert beim Vortragen nicht den Faden.",
+   "themen": [
+    "mein-stichwortzettel"
+   ]
+  },
+  {
+   "id": "mit-wem-rede-ich",
+   "art": "sinn",
+   "titel": "Mit wem rede ich?",
+   "idee": "Wozu man die Sprache dem Gegenüber anpasst (Oma, Lehrerin, Freund).",
+   "themen": [
+    "mit-wem-rede-ich"
+   ]
+  }
+ ],
+ "themen": {
+  "oben-unten-vorne-hinten": null,
+  "links-und-rechts": {
+   "art": "struktur",
+   "familie": "links-rechts"
+  },
+  "neben-zwischen-ueber-unter-auf": null,
+  "wege-nach-pfeilen": {
+   "art": "sinn",
+   "familie": "pfeilwege"
+  },
+  "kreis-dreieck-viereck": null,
+  "quadrat-und-rechteck": {
+   "art": "struktur",
+   "familie": "quadrat-rechteck"
+  },
+  "ecken-und-seiten-zaehlen": null,
+  "formen-sortieren": null,
+  "formen-muster-fortsetzen": null,
+  "formen-legen-zusammensetzen": null,
+  "nachzeichnen-im-gitter": null,
+  "weg-beschreiben": null,
+  "koerper-benennen": null,
+  "rollt-oder-kippt": null,
+  "ecken-kanten-flaechen": {
+   "art": "struktur",
+   "familie": "koerperteile"
+  },
+  "quadrat-besonderes-rechteck": {
+   "art": "struktur",
+   "familie": "quadrat-rechteck"
+  },
+  "koerper-in-der-umwelt": null,
+  "ansichten-zuordnen": {
+   "art": "struktur",
+   "familie": "ansichten"
+  },
+  "wuerfelbauten-nachbauen": null,
+  "symmetrie-erkennen": {
+   "art": "struktur",
+   "familie": "symmetrie"
+  },
+  "symmetrie-ergaenzen": null,
+  "zeichnen-mit-lineal": null,
+  "falten-zerlegen-drehen": null,
+  "geobrett-formen-spannen": null,
+  "flaechen-vergleichen": {
+   "art": "sinn",
+   "familie": "flaechen-vergleichen"
+  },
+  "rand-vergleichen": {
+   "art": "struktur",
+   "familie": "flaeche-rand"
+  },
+  "muster-koerper-plaettchen": null,
+  "lineal-bei-null-anlegen": null,
+  "wuerfel-quader-vergleichen": null,
+  "wuerfelnetze": {
+   "art": "struktur",
+   "familie": "netze"
+  },
+  "wuerfelgebaeude-nach-bauplan": {
+   "art": "struktur",
+   "familie": "bauplan"
+  },
+  "bauplan-zeichnen": {
+   "art": "struktur",
+   "familie": "bauplan"
+  },
+  "ansichten-wuerfelgebaeude": {
+   "art": "struktur",
+   "familie": "ansichten"
+  },
+  "symmetrieachsen-einzeichnen": null,
+  "faltschnitte-spiegelbilder": null,
+  "bandornamente": null,
+  "parkettierungen": {
+   "art": "sinn",
+   "familie": "parkettierungen"
+  },
+  "planquadrate": {
+   "art": "sinn",
+   "familie": "planquadrate"
+  },
+  "ortsplan-orientieren": null,
+  "flaechen-auslegen": null,
+  "rechter-winkel": {
+   "art": "struktur",
+   "familie": "rechter-winkel"
+  },
+  "netz-begruenden": null,
+  "missverstaendnis-aufklaeren": null,
+  "ansicht-und-gebaeude": null,
+  "fachbegriffe-geometrie": null,
+  "quadernetze": {
+   "art": "struktur",
+   "familie": "netze"
+  },
+  "netz-im-kopf-falten": null,
+  "wuerfel-kippen": null,
+  "kantenmodelle": null,
+  "zeichnen-geodreieck": null,
+  "kreise-zirkel": null,
+  "vergroessern-verkleinern": {
+   "art": "struktur",
+   "familie": "vergroessern-verkleinern"
+  },
+  "massstab-im-plan": {
+   "art": "sinn",
+   "familie": "massstab-im-plan"
+  },
+  "lageplan-zeichnen": null,
+  "flaecheninhalt-kaestchen": null,
+  "pentominos": null,
+  "umfang-bestimmen": null,
+  "flaeche-oder-umfang": {
+   "art": "struktur",
+   "familie": "flaeche-rand"
+  },
+  "rauminhalt-wuerfel": {
+   "art": "struktur",
+   "familie": "rauminhalt-wuerfel"
+  },
+  "spiegeln-im-gitter": null,
+  "drehen-im-kopf": null,
+  "wuerfelgebaeude-raetsel": null,
+  "wuerfelnetz-im-kopf": null,
+  "bauplan-diktieren": null,
+  "reim-hoeren": null,
+  "reimwort-finden": null,
+  "silben-klatschen": {
+   "art": "struktur",
+   "familie": "silben"
+  },
+  "silben-zusammenhoeren": {
+   "art": "struktur",
+   "familie": "silben"
+  },
+  "woerter-im-satz-zaehlen": null,
+  "anlaut-selbstlaut": null,
+  "anlaut-dauerlaut": null,
+  "anlaut-stopplaut": null,
+  "endlaut-hoeren": null,
+  "laut-in-der-mitte": null,
+  "laute-statt-namen": {
+   "art": "sinn",
+   "familie": "laute-sprechen"
+  },
+  "laute-verschmelzen-hoeren": null,
+  "laute-zaehlen": null,
+  "laut-tauschen": null,
+  "laut-m": {
+   "art": "form",
+   "familie": "buchstaben-dauerlaute"
+  },
+  "laut-a": {
+   "art": "form",
+   "familie": "buchstaben-vokale"
+  },
+  "laut-i": {
+   "art": "form",
+   "familie": "buchstaben-vokale"
+  },
+  "laut-o": {
+   "art": "form",
+   "familie": "buchstaben-vokale"
+  },
+  "erste-silben-lesen": null,
+  "laut-l": {
+   "art": "form",
+   "familie": "buchstaben-dauerlaute"
+  },
+  "laut-s": {
+   "art": "form",
+   "familie": "buchstaben-dauerlaute"
+  },
+  "laut-r": {
+   "art": "form",
+   "familie": "buchstaben-dauerlaute"
+  },
+  "laut-u": {
+   "art": "form",
+   "familie": "buchstaben-vokale"
+  },
+  "laut-e": {
+   "art": "form",
+   "familie": "buchstaben-vokale"
+  },
+  "laut-n": {
+   "art": "form",
+   "familie": "buchstaben-dauerlaute"
+  },
+  "laut-f": {
+   "art": "form",
+   "familie": "buchstaben-dauerlaute"
+  },
+  "lesen-offene-silben": null,
+  "laut-t": {
+   "art": "form",
+   "familie": "buchstaben-stopplaute"
+  },
+  "laut-w": {
+   "art": "form",
+   "familie": "buchstaben-dauerlaute"
+  },
+  "laut-h-anfang": {
+   "art": "form",
+   "familie": "buchstaben-dauerlaute"
+  },
+  "lesen-endungen-en-er": null,
+  "laut-d": {
+   "art": "form",
+   "familie": "buchstaben-stopplaute"
+  },
+  "laut-k": {
+   "art": "form",
+   "familie": "buchstaben-stopplaute"
+  },
+  "laut-p": {
+   "art": "form",
+   "familie": "buchstaben-stopplaute"
+  },
+  "laut-b": {
+   "art": "form",
+   "familie": "buchstaben-stopplaute"
+  },
+  "laut-g": {
+   "art": "form",
+   "familie": "buchstaben-stopplaute"
+  },
+  "b-d-p-unterscheiden": {
+   "art": "form",
+   "familie": "b-d-p"
+  },
+  "laut-ei": {
+   "art": "form",
+   "familie": "buchstabengruppen-doppellaute"
+  },
+  "laut-au": {
+   "art": "form",
+   "familie": "buchstabengruppen-doppellaute"
+  },
+  "laut-sch": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-ch-ich": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-ch-ach": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-z": {
+   "art": "form",
+   "familie": "buchstaben-stopplaute"
+  },
+  "laut-ae": {
+   "art": "form",
+   "familie": "umlaute"
+  },
+  "laut-oe": {
+   "art": "form",
+   "familie": "umlaute"
+  },
+  "laut-ue": {
+   "art": "form",
+   "familie": "umlaute"
+  },
+  "laut-eu": {
+   "art": "form",
+   "familie": "buchstabengruppen-doppellaute"
+  },
+  "laut-aeu": {
+   "art": "form",
+   "familie": "buchstabengruppen-doppellaute"
+  },
+  "laut-ie": {
+   "art": "form",
+   "familie": "buchstabengruppen-doppellaute"
+  },
+  "laut-st-anfang": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-sp-anfang": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-tz": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-ck": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-ng": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-nk": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-pf": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "laut-j": {
+   "art": "form",
+   "familie": "buchstaben-dauerlaute"
+  },
+  "laut-v": {
+   "art": "form",
+   "familie": "seltene-buchstaben"
+  },
+  "laut-eszett": {
+   "art": "form",
+   "familie": "seltene-buchstaben"
+  },
+  "laut-qu": {
+   "art": "form",
+   "familie": "seltene-buchstaben"
+  },
+  "laut-x": {
+   "art": "form",
+   "familie": "seltene-buchstaben"
+  },
+  "laut-y": {
+   "art": "form",
+   "familie": "seltene-buchstaben"
+  },
+  "laut-c": {
+   "art": "form",
+   "familie": "seltene-buchstaben"
+  },
+  "laut-ai": {
+   "art": "form",
+   "familie": "buchstabengruppen-doppellaute"
+  },
+  "laut-ph": {
+   "art": "form",
+   "familie": "buchstabengruppen-mitlaute"
+  },
+  "buchstabenpaare-gross-klein": null,
+  "lesen-zwei-mitlaute-anfang": null,
+  "lesen-kurzer-selbstlaut": {
+   "art": "struktur",
+   "familie": "offene-geschlossene-silben"
+  },
+  "lesen-lang-oder-kurz": {
+   "art": "struktur",
+   "familie": "offene-geschlossene-silben"
+  },
+  "lesen-mitlauthaeufung": null,
+  "lesen-lange-woerter": null,
+  "blitzwoerter-1": null,
+  "lesen-wort-zum-bild": null,
+  "quatschwoerter-lesen": null,
+  "lesen-satz-zum-bild": null,
+  "lesen-sinn-pruefen": null,
+  "lies-und-tu": null,
+  "punkt-heisst-pause": {
+   "art": "sinn",
+   "familie": "satzzeichen-lesen"
+  },
+  "frage-zum-text": null,
+  "wortbausteine-lesen": {
+   "art": "struktur",
+   "familie": "wortbausteine"
+  },
+  "blitzwoerter-2": null,
+  "genau-hinsehen-lesen": null,
+  "ueber-die-zeile-lesen": null,
+  "schnell-lesen-wiederholt": null,
+  "falsches-wort-finden": null,
+  "wer-wo-wann-lesen": null,
+  "lesen-reihenfolge": null,
+  "ueberschrift-verraet": null,
+  "unbekanntes-wort-klaeren": null,
+  "wie-geht-es-weiter-lesen": null,
+  "lesen-tabelle": {
+   "art": "struktur",
+   "familie": "tabelle"
+  },
+  "textsorte-erkennen": {
+   "art": "sinn",
+   "familie": "textsorten"
+  },
+  "reim-im-gedicht": null,
+  "zeile-und-absatz-finden": null,
+  "fettdruck-nutzen": null,
+  "leseerfahrung-austauschen": null,
+  "figur-beschreiben-lesen": null,
+  "fragen-betont-lesen": {
+   "art": "sinn",
+   "familie": "satzzeichen-lesen"
+  },
+  "wortstamm-lesen": {
+   "art": "struktur",
+   "familie": "wortbausteine"
+  },
+  "lange-woerter-in-bausteinen-lesen": {
+   "art": "struktur",
+   "familie": "wortbausteine"
+  },
+  "mit-betonung-vorlesen": null,
+  "wortbedeutung-aus-dem-satz": null,
+  "wichtiges-im-text-markieren": null,
+  "zwischen-den-zeilen-lesen": null,
+  "maerchen-erkennen": null,
+  "fabel-erkennen": null,
+  "sachtext-mit-bild-lesen": null,
+  "inhaltsverzeichnis-nutzen": null,
+  "redewendungen-verstehen": {
+   "art": "sinn",
+   "familie": "redewendungen"
+  },
+  "text-in-eigenen-worten": null,
+  "wer-ist-mit-er-gemeint": null,
+  "informationen-verknuepfen": null,
+  "beste-ueberschrift-waehlen": null,
+  "warum-handelt-die-figur-so": null,
+  "sprachbilder-verstehen": {
+   "art": "sinn",
+   "familie": "redewendungen"
+  },
+  "paarreim-kreuzreim": {
+   "art": "struktur",
+   "familie": "reimmuster"
+  },
+  "sage-erkennen": null,
+  "auf-webseiten-suchen": null,
+  "widerspruch-im-text": null,
+  "gedicht-vortragen-lesen": null,
+  "meinung-zum-text-begruenden": null,
+  "mehr-weniger-gleich-viele": {
+   "art": "struktur",
+   "familie": "mengen-vergleichen"
+  },
+  "vorwaerts-zaehlen": {
+   "art": "sinn",
+   "familie": "zaehlen"
+  },
+  "rueckwaerts-zaehlen": null,
+  "abzaehlen": null,
+  "ziffern-lesen-bis-10": {
+   "art": "form",
+   "familie": "ziffern-0-bis-10"
+  },
+  "menge-bild-ziffer": null,
+  "mengen-5": null,
+  "zehnerfeld-fuenf-und-noch": {
+   "art": "struktur",
+   "familie": "zehnerfeld"
+  },
+  "die-null": {
+   "art": "sinn",
+   "familie": "die-null"
+  },
+  "wofuer-zahlen-stehen": {
+   "art": "sinn",
+   "familie": "wofuer-zahlen-stehen"
+  },
+  "ordnungszahlen-bis-10": null,
+  "nachbarzahlen-bis-10": null,
+  "zahlen-ordnen-bis-10": null,
+  "zeichen-groesser-kleiner-gleich": {
+   "art": "form",
+   "familie": "groesser-kleiner"
+  },
+  "zahlenstrahl-bis-10": {
+   "art": "struktur",
+   "familie": "zahlenstrahl"
+  },
+  "zerlegen-2": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "zerlegen-3": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "zerlegen-4": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "plus-verstehen": {
+   "art": "form",
+   "familie": "plus-minus-zeichen"
+  },
+  "minus-verstehen": {
+   "art": "form",
+   "familie": "plus-minus-zeichen"
+  },
+  "rechnen-3": null,
+  "rechnen-4": null,
+  "zerlegen-5": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "rechnen-5": null,
+  "zerlegen-6": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "rechnen-6": null,
+  "zerlegen-7": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "rechnen-7": null,
+  "zerlegen-8": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "rechnen-8": null,
+  "zerlegen-9": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "rechnen-9": null,
+  "zerlegen-10": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "rechnen-10": null,
+  "zerlegungen-ordnen": {
+   "art": "struktur",
+   "familie": "zerlegen"
+  },
+  "ergaenzen-bis-10": {
+   "art": "struktur",
+   "familie": "zehnerpaare"
+  },
+  "plus-0-und-1": null,
+  "plus-2-und-3": null,
+  "plus-mit-5": null,
+  "verdoppeln-bis-10": {
+   "art": "struktur",
+   "familie": "verdoppeln-halbieren"
+  },
+  "ergebnis-10": {
+   "art": "struktur",
+   "familie": "zehnerpaare"
+  },
+  "tauschaufgaben-bis-10": {
+   "art": "struktur",
+   "familie": "tauschaufgaben"
+  },
+  "plus-bis-10-gemischt": null,
+  "minus-0-1-alles-weg": null,
+  "minus-von-10": {
+   "art": "struktur",
+   "familie": "zehnerpaare"
+  },
+  "halbieren-bis-10": {
+   "art": "struktur",
+   "familie": "verdoppeln-halbieren"
+  },
+  "minus-bis-10-gemischt": null,
+  "umkehraufgaben-bis-10": {
+   "art": "struktur",
+   "familie": "umkehraufgaben"
+  },
+  "aufgabenfamilie-bis-10": {
+   "art": "struktur",
+   "familie": "umkehraufgaben"
+  },
+  "lueckenaufgaben-bis-10": null,
+  "unterschied-bis-10": {
+   "art": "struktur",
+   "familie": "mengen-vergleichen"
+  },
+  "rechenkette-bis-10": null,
+  "zahlenmauer-bis-10": {
+   "art": "struktur",
+   "familie": "zahlenmauer"
+  },
+  "rechendreieck-bis-10": null,
+  "zehner-und-einer-bis-20": {
+   "art": "struktur",
+   "familie": "zehner-einer"
+  },
+  "zahlen-bis-20-schreiben": {
+   "art": "struktur",
+   "familie": "zehner-einer"
+  },
+  "zwanzigerfeld": {
+   "art": "struktur",
+   "familie": "zehner-einer"
+  },
+  "nachbarzahlen-zahlenstrahl-bis-20": {
+   "art": "struktur",
+   "familie": "zahlenstrahl"
+  },
+  "gerade-ungerade": {
+   "art": "struktur",
+   "familie": "paare"
+  },
+  "zehn-plus": {
+   "art": "struktur",
+   "familie": "zehner-einer"
+  },
+  "plus-ohne-20": null,
+  "plus-zur-20": null,
+  "minus-zehner": null,
+  "minus-ohne-20": null,
+  "minus-von-20": null,
+  "zwillinge": {
+   "art": "struktur",
+   "familie": "verdoppeln-halbieren"
+  },
+  "halbieren-bis-20": {
+   "art": "struktur",
+   "familie": "verdoppeln-halbieren"
+  },
+  "fast-verdoppeln": null,
+  "erst-zur-10": {
+   "art": "struktur",
+   "familie": "ueber-die-zehn"
+  },
+  "ueber-10-mit-9": {
+   "art": "struktur",
+   "familie": "ueber-die-zehn"
+  },
+  "ueber-10-mit-8": {
+   "art": "struktur",
+   "familie": "ueber-die-zehn"
+  },
+  "ueber-10-mit-7": {
+   "art": "struktur",
+   "familie": "ueber-die-zehn"
+  },
+  "fuenfertrick": null,
+  "tauschen-ueber-10": {
+   "art": "struktur",
+   "familie": "tauschaufgaben"
+  },
+  "plus-uebergang-gemischt": null,
+  "minus-bis-zur-10": {
+   "art": "struktur",
+   "familie": "minus-ueber-die-zehn"
+  },
+  "minus-ueber-10-bis-5": {
+   "art": "struktur",
+   "familie": "minus-ueber-die-zehn"
+  },
+  "minus-ueber-10-ab-6": {
+   "art": "struktur",
+   "familie": "minus-ueber-die-zehn"
+  },
+  "minus-9-ueber-minus-10": {
+   "art": "struktur",
+   "familie": "minus-ueber-die-zehn"
+  },
+  "ergaenzen-statt-abziehen": null,
+  "minus-uebergang-gemischt": null,
+  "umkehraufgaben-bis-20": {
+   "art": "struktur",
+   "familie": "umkehraufgaben"
+  },
+  "blitzrechnen-bis-20": null,
+  "mauer-dreieck-kette-bis-20": null,
+  "was-ist-mehr-bis-20": null,
+  "paeckchen-mit-muster": null,
+  "zahlenfolgen-bis-20": null,
+  "rechengeschichte-zum-bild": null,
+  "rechenfrage-finden": null,
+  "muenzen-kennen": {
+   "art": "sinn",
+   "familie": "geld"
+  },
+  "geld-legen-bis-20": {
+   "art": "sinn",
+   "familie": "geld"
+  },
+  "laenger-kuerzer": {
+   "art": "sinn",
+   "familie": "laengen-messen"
+  },
+  "wochentage-tageszeiten": {
+   "art": "sinn",
+   "familie": "wochentage"
+  },
+  "volle-stunde": {
+   "art": "sinn",
+   "familie": "uhr"
+  },
+  "strichliste": {
+   "art": "struktur",
+   "familie": "strichliste"
+  },
+  "mehrere-loesungen": null,
+  "alle-loesungen-finden": null,
+  "geordnet-probieren": null,
+  "probieren-und-pruefen": null,
+  "zahlenmauer-von-oben": {
+   "art": "struktur",
+   "familie": "zahlenmauer"
+  },
+  "rechendreieck-mit-luecken": null,
+  "kleidung-kombinieren": null,
+  "muster-regel-finden": null,
+  "aussage-pruefen": null,
+  "mit-plaettchen-zeigen": null,
+  "gerade-ungerade-begruenden": null,
+  "passt-nicht-ins-muster": null,
+  "begruendung-waehlen": null,
+  "muster-in-worten": null,
+  "rechenweg-nachlegen": null,
+  "bild-zu-rechnung": null,
+  "rechnung-zu-bild": null,
+  "passende-frage-waehlen": null,
+  "ergebnis-passt-zur-geschichte": null,
+  "zahl-in-vielen-formen": null,
+  "aufgabe-am-zwanzigerfeld": null,
+  "strichliste-und-bilddiagramm": {
+   "art": "struktur",
+   "familie": "strichliste"
+  },
+  "rechenzeichen-lesen": null,
+  "gleichheitszeichen-gleich-viel": {
+   "art": "struktur",
+   "familie": "gleich-viel"
+  },
+  "zehnerzahlen-bis-100": {
+   "art": "struktur",
+   "familie": "zehner-buendeln"
+  },
+  "buendeln-zehner-einer": {
+   "art": "struktur",
+   "familie": "zehner-buendeln"
+  },
+  "zahlwort-ziffern-bis-100": {
+   "art": "struktur",
+   "familie": "zahlwort-dreher"
+  },
+  "zahl-darstellungen-bis-100": null,
+  "zahlen-mit-null-bis-100": null,
+  "hundertertafel": {
+   "art": "struktur",
+   "familie": "hundertertafel"
+  },
+  "zahlenstrahl-bis-100": null,
+  "nachbarzehner": null,
+  "vergleichen-bis-100": null,
+  "zerlegen-zehner-einer": {
+   "art": "struktur",
+   "familie": "zehner-buendeln"
+  },
+  "anzahlen-schaetzen-bis-100": null,
+  "in-schritten-zaehlen-bis-100": null,
+  "gerade-ungerade-bis-100": null,
+  "zehnerzahlen-plus-minus": null,
+  "ergaenzen-zum-zehner": null,
+  "ergaenzen-bis-100": null,
+  "plus-einer-ohne-uebergang-bis-100": null,
+  "minus-einer-ohne-uebergang-bis-100": null,
+  "plus-zehner-bis-100": null,
+  "minus-zehner-bis-100": null,
+  "plus-ueber-den-zehner-bis-100": null,
+  "plus-bis-30": null,
+  "zehnerzahl-minus-einer": null,
+  "minus-ueber-den-zehner-bis-100": null,
+  "minus-bis-30": null,
+  "plus-zweistellig-ohne-uebergang": null,
+  "minus-zweistellig-ohne-uebergang": null,
+  "plus-zweistellig-mit-uebergang": null,
+  "plus-bis-100": null,
+  "minus-zweistellig-mit-uebergang": null,
+  "minus-bis-100": null,
+  "schrittweise-rechenstrich": null,
+  "stellenweise-rechnen": null,
+  "hilfsaufgabe-plus-minus": null,
+  "vereinfachen-plus-minus": null,
+  "ergaenzen-statt-abziehen-bis-100": null,
+  "rechenweg-waehlen-bis-100": null,
+  "verdoppeln-halbieren-bis-100": null,
+  "probe-umkehraufgabe-bis-100": null,
+  "zahlenmauer-rechendreieck-bis-100": null,
+  "paeckchen-muster-bis-100": null,
+  "rechenfehler-finden-bis-100": null,
+  "gleich-grosse-gruppen": {
+   "art": "sinn",
+   "familie": "mal-gruppen"
+  },
+  "punktefeld-reihen-spalten": {
+   "art": "struktur",
+   "familie": "mal-punktefeld"
+  },
+  "malaufgabe-zum-bild": null,
+  "tauschaufgaben-mal": {
+   "art": "struktur",
+   "familie": "mal-punktefeld"
+  },
+  "mal-eins-mal-null": null,
+  "zweierreihe": {
+   "art": "struktur",
+   "familie": "einmaleins-reihen"
+  },
+  "zehnerreihe": {
+   "art": "struktur",
+   "familie": "einmaleins-reihen"
+  },
+  "fuenferreihe": {
+   "art": "struktur",
+   "familie": "einmaleins-reihen"
+  },
+  "kernaufgaben-einmaleins": null,
+  "quadrataufgaben": null,
+  "nachbaraufgabe-mal": null,
+  "verdoppeln-beim-mal": null,
+  "viererreihe": {
+   "art": "struktur",
+   "familie": "einmaleins-reihen"
+  },
+  "achterreihe": {
+   "art": "struktur",
+   "familie": "einmaleins-reihen"
+  },
+  "dreierreihe": {
+   "art": "struktur",
+   "familie": "einmaleins-reihen"
+  },
+  "sechserreihe": {
+   "art": "struktur",
+   "familie": "einmaleins-reihen"
+  },
+  "neunerreihe": {
+   "art": "struktur",
+   "familie": "einmaleins-reihen"
+  },
+  "siebenerreihe": {
+   "art": "struktur",
+   "familie": "einmaleins-reihen"
+  },
+  "einmaleins-gemischt": null,
+  "gerecht-verteilen": {
+   "art": "sinn",
+   "familie": "teilen"
+  },
+  "aufteilen-in-gruppen": {
+   "art": "sinn",
+   "familie": "teilen"
+  },
+  "geteilt-umkehrung-mal": {
+   "art": "struktur",
+   "familie": "geteilt-umkehrung"
+  },
+  "geteilt-durch-2-5-10": null,
+  "geteilt-alle-reihen": null,
+  "sonderfaelle-teilen": null,
+  "teilen-mit-rest": null,
+  "mal-oder-geteilt": null,
+  "euro-scheine": null,
+  "geldbetraege-legen-bis-100": null,
+  "euro-und-cent": {
+   "art": "struktur",
+   "familie": "euro-cent"
+  },
+  "geld-wechseln": null,
+  "rueckgeld": null,
+  "messen-mit-lineal": {
+   "art": "sinn",
+   "familie": "lineal-messen"
+  },
+  "meter-zentimeter": {
+   "art": "struktur",
+   "familie": "meter-hundert"
+  },
+  "laengen-schaetzen": null,
+  "uhr-halbe-stunde": {
+   "art": "struktur",
+   "familie": "uhr-bruchteile"
+  },
+  "uhr-viertel": {
+   "art": "struktur",
+   "familie": "uhr-bruchteile"
+  },
+  "uhr-fuenf-minuten": {
+   "art": "struktur",
+   "familie": "uhr-minuten"
+  },
+  "uhr-minutengenau": {
+   "art": "struktur",
+   "familie": "uhr-minuten"
+  },
+  "uhr-digital-24-stunden": null,
+  "stunde-und-minute": {
+   "art": "struktur",
+   "familie": "uhr-minuten"
+  },
+  "zeitspannen": null,
+  "kalender-lesen": null,
+  "sachaufgabe-frage-rechnung-antwort": null,
+  "sachaufgabe-skizze": null,
+  "signalwoerter-falle": null,
+  "kapitaensaufgabe-erkennen": null,
+  "kombinieren-systematisch": {
+   "art": "struktur",
+   "familie": "kombinieren"
+  },
+  "tabellen-schaubilder-lesen": null,
+  "sicher-moeglich-unmoeglich": null,
+  "wahrscheinlich-unwahrscheinlich": null,
+  "tabelle-beim-probieren": null,
+  "kombinieren-drei-mal-zwei": {
+   "art": "struktur",
+   "familie": "kombinieren"
+  },
+  "zahlenmauer-ziel-erreichen": null,
+  "mittelstein-zaehlt-doppelt": null,
+  "groesster-kleinster-deckstein": null,
+  "zahlenkette-rueckwaerts": null,
+  "rueckwaerts-geschichte": null,
+  "skizze-waehlen": null,
+  "zaunpfahl-falle": {
+   "art": "struktur",
+   "familie": "zaunpfahl"
+  },
+  "analoge-aufgabe-nutzen": null,
+  "zahlenraetsel-zwei-hinweise": null,
+  "waage-raetsel": null,
+  "strategie-waehlen": null,
+  "vermutung-aufstellen": null,
+  "vermutung-testen": null,
+  "gegenbeispiel-finden": null,
+  "gleichsinnig-veraendern": {
+   "art": "struktur",
+   "familie": "summe-veraendern"
+  },
+  "gegensinnig-summe-bleibt": {
+   "art": "struktur",
+   "familie": "summe-veraendern"
+  },
+  "differenz-bleibt-gleich": {
+   "art": "struktur",
+   "familie": "summe-veraendern"
+  },
+  "fehler-finden-rechnen": null,
+  "fehlerursache-finden": null,
+  "immer-manchmal-nie": null,
+  "mal-tausch-begruenden": null,
+  "rechenwege-zuordnen": null,
+  "erklaerung-ordnen": null,
+  "mathe-fachwoerter": null,
+  "forscherbericht-ergaenzen": null,
+  "unwichtige-zahl-erkennen": null,
+  "fehlende-angabe-finden": null,
+  "geschichte-zur-malaufgabe": null,
+  "fermi-wie-viele-passen": null,
+  "rechenstrich-lesen": null,
+  "malaufgabe-als-punktefeld": null,
+  "tabelle-aus-text": null,
+  "pfeile-und-farben-im-paeckchen": null,
+  "sprache-zu-rechnung": null,
+  "hunderter-buendeln": {
+   "art": "struktur",
+   "familie": "stellenwert-buendeln"
+  },
+  "dreistellige-zahlen-lesen": null,
+  "null-platzhalter-bis-1000": {
+   "art": "struktur",
+   "familie": "null-platzhalter"
+  },
+  "darstellungen-bis-1000": null,
+  "zahlenstrahl-bis-1000": null,
+  "nachbarzehner-nachbarhunderter": null,
+  "vergleichen-bis-1000": null,
+  "runden-zehner-hunderter": {
+   "art": "sinn",
+   "familie": "runden-ueberschlag"
+  },
+  "grosse-anzahlen-schaetzen": null,
+  "zerlegen-bis-1000": null,
+  "zaehlen-grosse-schritte": null,
+  "hunderterzahlen-plus-minus": null,
+  "ergaenzen-hunderter-1000": null,
+  "analog-ohne-uebergang-1000": null,
+  "uebergang-zehner-hunderter": null,
+  "halbschriftlich-plus-minus-1000": null,
+  "verdoppeln-halbieren-bis-1000": null,
+  "zahlenmauern-bis-1000": null,
+  "einmaleins-sicher": null,
+  "quadratzahlen": {
+   "art": "struktur",
+   "familie": "quadratzahlen"
+  },
+  "teilen-mit-rest-sicher": null,
+  "punkt-vor-strich": {
+   "art": "sinn",
+   "familie": "punkt-vor-strich"
+  },
+  "ungleichungen-einmaleins": null,
+  "zehner-einmaleins": null,
+  "halbschriftlich-mal": {
+   "art": "struktur",
+   "familie": "halbschriftlich-mal-geteilt"
+  },
+  "halbschriftlich-geteilt": {
+   "art": "struktur",
+   "familie": "halbschriftlich-mal-geteilt"
+  },
+  "halbschriftlich-geteilt-rest": {
+   "art": "struktur",
+   "familie": "halbschriftlich-mal-geteilt"
+  },
+  "stellengerecht-untereinander": {
+   "art": "struktur",
+   "familie": "stellengerecht"
+  },
+  "ueberschlag-plus-minus": {
+   "art": "sinn",
+   "familie": "ueberschlag"
+  },
+  "schriftlich-plus-ohne-uebertrag": null,
+  "schriftlich-plus-uebertrag": {
+   "art": "struktur",
+   "familie": "uebertrag"
+  },
+  "schriftlich-plus-mehrere-uebertraege": {
+   "art": "struktur",
+   "familie": "uebertrag"
+  },
+  "schriftlich-plus-drei-summanden": {
+   "art": "struktur",
+   "familie": "uebertrag"
+  },
+  "schriftlich-minus-ohne-entbuendeln": null,
+  "entbuendeln-zehner": {
+   "art": "struktur",
+   "familie": "entbuendeln"
+  },
+  "entbuendeln-hunderter": {
+   "art": "struktur",
+   "familie": "entbuendeln"
+  },
+  "zweifach-entbuendeln": {
+   "art": "struktur",
+   "familie": "entbuendeln"
+  },
+  "entbuendeln-ueber-null": {
+   "art": "struktur",
+   "familie": "entbuendeln"
+  },
+  "probe-schriftlich-minus": {
+   "art": "struktur",
+   "familie": "probe"
+  },
+  "kopf-oder-schriftlich": null,
+  "kilometer-millimeter": {
+   "art": "sinn",
+   "familie": "einheiten-1000"
+  },
+  "kommaschreibweise-groessen": {
+   "art": "form",
+   "familie": "komma-groessen"
+  },
+  "geld-mit-komma-rechnen": null,
+  "gramm-kilogramm": {
+   "art": "sinn",
+   "familie": "einheiten-1000"
+  },
+  "gewichte-schaetzen": null,
+  "tonne": {
+   "art": "sinn",
+   "familie": "einheiten-1000"
+  },
+  "sekunden": null,
+  "zeitpunkt-zeitdauer": {
+   "art": "struktur",
+   "familie": "zeitpunkt-zeitdauer"
+  },
+  "zeitspannen-stunden-minuten": null,
+  "liter-milliliter": {
+   "art": "sinn",
+   "familie": "einheiten-1000"
+  },
+  "bruchteile-bei-groessen": {
+   "art": "struktur",
+   "familie": "bruchteile"
+  },
+  "tabellen-preislisten": null,
+  "fragen-selbst-stellen": null,
+  "sachaufgabe-zwei-rechenschritte": null,
+  "ueberfluessige-fehlende-angaben": null,
+  "balkendiagramm": {
+   "art": "struktur",
+   "familie": "balkendiagramm"
+  },
+  "daten-sammeln-darstellen": null,
+  "baumdiagramm-kombinationen": {
+   "art": "struktur",
+   "familie": "baumdiagramm"
+  },
+  "gewinnchancen": {
+   "art": "struktur",
+   "familie": "chancen"
+  },
+  "zahlenfolgen-zahleigenschaften": null,
+  "je-mehr-desto": {
+   "art": "struktur",
+   "familie": "je-mehr-desto"
+  },
+  "zahlenmauer-luecken-verteilt": null,
+  "rechendreieck-rueckwaerts": null,
+  "magisches-quadrat-ergaenzen": null,
+  "magisches-quadrat-veraendern": null,
+  "handschlag-problem": null,
+  "vorwaerts-rueckwaerts-kombinieren": null,
+  "gewinnstrategie": null,
+  "unmoegliche-aufgabe": null,
+  "vorgehen-aendern": null,
+  "mittelstein-begruenden": null,
+  "rechenwege-vergleichen": null,
+  "passt-die-begruendung": null,
+  "teiler-begruenden": {
+   "art": "struktur",
+   "familie": "teiler-vielfache"
+  },
+  "schaetzung-begruenden": null,
+  "erklaeren-fuer-juengere": null,
+  "loesungsweg-weiterentwickeln": null,
+  "ergebnis-zur-situation": null,
+  "zwei-schritte-planen": null,
+  "situation-veraendern": null,
+  "rechnung-zur-geschichte": null,
+  "wertetabelle": null,
+  "passende-darstellung-waehlen": null,
+  "saeulendiagramm-tabelle": null,
+  "taschenrechner-wann": {
+   "art": "sinn",
+   "familie": "taschenrechner"
+  },
+  "tausender-buendeln": {
+   "art": "struktur",
+   "familie": "stellenwert-buendeln"
+  },
+  "grosse-zahlen-lesen": null,
+  "null-in-grossen-zahlen": {
+   "art": "struktur",
+   "familie": "null-platzhalter"
+  },
+  "zahlenstrahl-million": null,
+  "vergleichen-bis-million": null,
+  "grosse-zahlen-runden": null,
+  "fermi-schaetzen": null,
+  "zerlegen-grosse-zahlen": null,
+  "teiler-vielfache": {
+   "art": "struktur",
+   "familie": "teiler-vielfache"
+  },
+  "analog-kopfrechnen-million": null,
+  "ergaenzen-stufenzahlen": null,
+  "mal-geteilt-stufenzahlen": {
+   "art": "struktur",
+   "familie": "mal-stufenzahlen"
+  },
+  "schriftlich-plus-minus-million": null,
+  "halbschriftlich-mal-geteilt-million": {
+   "art": "struktur",
+   "familie": "halbschriftlich-mal-geteilt"
+  },
+  "schriftlich-mal-ohne-uebertrag": {
+   "art": "struktur",
+   "familie": "schriftlich-mal"
+  },
+  "schriftlich-mal-uebertrag": {
+   "art": "struktur",
+   "familie": "schriftlich-mal"
+  },
+  "schriftlich-mal-null": {
+   "art": "struktur",
+   "familie": "schriftlich-mal"
+  },
+  "mal-zehnerzahl": {
+   "art": "struktur",
+   "familie": "schriftlich-mal"
+  },
+  "schriftlich-mal-zweistellig": {
+   "art": "struktur",
+   "familie": "schriftlich-mal"
+  },
+  "ueberschlag-mal": {
+   "art": "sinn",
+   "familie": "ueberschlag"
+  },
+  "schriftlich-geteilt-ohne-rest": {
+   "art": "struktur",
+   "familie": "schriftlich-geteilt"
+  },
+  "schriftlich-geteilt-erste-stelle": {
+   "art": "struktur",
+   "familie": "schriftlich-geteilt"
+  },
+  "schriftlich-geteilt-null-ergebnis": {
+   "art": "struktur",
+   "familie": "schriftlich-geteilt"
+  },
+  "schriftlich-geteilt-rest": {
+   "art": "struktur",
+   "familie": "schriftlich-geteilt"
+  },
+  "schriftlich-geteilt-durch-10": {
+   "art": "struktur",
+   "familie": "schriftlich-geteilt"
+  },
+  "probe-teilen": {
+   "art": "struktur",
+   "familie": "probe"
+  },
+  "terme-vergleichen": null,
+  "anna-zahlen": {
+   "art": "struktur",
+   "familie": "anna-zahlen"
+  },
+  "geheimschrift-zahlen": null,
+  "schreibweisen-groessen": null,
+  "groessen-ordnen-gemischt": null,
+  "zeitspannen-ueber-tage": null,
+  "fahrplaene": null,
+  "menge-und-preis": {
+   "art": "struktur",
+   "familie": "je-mehr-desto"
+  },
+  "rueckwaerts-rechnen-sachaufgabe": null,
+  "genau-oder-ungefaehr": null,
+  "diagramme-kritisch-lesen": null,
+  "kombinatorik-reihenfolge": {
+   "art": "struktur",
+   "familie": "baumdiagramm"
+  },
+  "chancen-veraendern": {
+   "art": "struktur",
+   "familie": "chancen"
+  },
+  "zahlenmauer-unbekannte": null,
+  "siegerpodest-reihenfolgen": null,
+  "raetsel-mit-tabelle": null,
+  "knobelaufgabe-erfinden": null,
+  "allgemein-statt-beispiel": null,
+  "anna-zahlen-erklaeren": {
+   "art": "struktur",
+   "familie": "anna-zahlen"
+  },
+  "ueberschlag-als-beweis": null,
+  "gewinnchance-begruenden": null,
+  "mathe-konferenz": null,
+  "fermi-teilfragen": null,
+  "annahme-pruefen": null,
+  "mit-ungefaehren-zahlen-rechnen": null,
+  "je-mehr-desto-weniger": {
+   "art": "struktur",
+   "familie": "je-mehr-desto"
+  },
+  "darstellungen-bewerten": null,
+  "rechenweg-notiz": null,
+  "algorithmus-befolgen": null,
+  "schreiben-mit-anlauttabelle": {
+   "art": "sinn",
+   "familie": "anlauttabelle"
+  },
+  "silben-schwingen-beim-schreiben": {
+   "art": "struktur",
+   "familie": "silben-schwingen"
+  },
+  "endung-e": null,
+  "endung-en": null,
+  "endung-er": null,
+  "endung-el": null,
+  "laute-am-wortanfang": null,
+  "laute-in-mitte-und-ende": null,
+  "ei-schreiben": null,
+  "au-schreiben": null,
+  "eu-schreiben": null,
+  "sch-schreiben": null,
+  "st-am-wortanfang": null,
+  "sp-am-wortanfang": null,
+  "ch-schreiben": null,
+  "qu-schreiben": null,
+  "pf-schreiben": null,
+  "ng-nk-schreiben": null,
+  "satzanfang-gross": {
+   "art": "sinn",
+   "familie": "satz-grenzen"
+  },
+  "punkt-am-satzende": {
+   "art": "sinn",
+   "familie": "satz-grenzen"
+  },
+  "namen-gross": null,
+  "planvoll-abschreiben": null,
+  "lernwoerter-kleine-woerter": null,
+  "abc-reihe": {
+   "art": "sinn",
+   "familie": "abc"
+  },
+  "stifthaltung": null,
+  "schwung-senkrecht": null,
+  "schwung-waagerecht": null,
+  "schwung-zickzack": null,
+  "schwung-kreis-linksherum": null,
+  "schwung-girlande": null,
+  "schwung-arkade": null,
+  "schwung-welle": null,
+  "schwung-schleife-oben": null,
+  "schwung-schleife-unten": null,
+  "buchstabenhaus": {
+   "art": "struktur",
+   "familie": "buchstabenhaus"
+  },
+  "schreibrichtung-zeile": null,
+  "druck-klein-l-i": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-t": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-j": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-c": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-o": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-a-d": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-g": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-e": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-s": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-n-m-h-r": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-u": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-b-p": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-v-w": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-x-k-y-z": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-f": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-q": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "druck-klein-umlaute-sz": {
+   "art": "form",
+   "familie": "druck-klein"
+  },
+  "spiegelbuchstaben-b-d-p-q": null,
+  "druck-gross-gerade": {
+   "art": "form",
+   "familie": "druck-gross"
+  },
+  "druck-gross-rund": {
+   "art": "form",
+   "familie": "druck-gross"
+  },
+  "druck-gross-u-j": {
+   "art": "form",
+   "familie": "druck-gross"
+  },
+  "druck-gross-d-p-b-r": {
+   "art": "form",
+   "familie": "druck-gross"
+  },
+  "druck-gross-schraeg": {
+   "art": "form",
+   "familie": "druck-gross"
+  },
+  "gross-klein-gleiche-form": null,
+  "wortabstand": null,
+  "eigenen-namen-schreiben": null,
+  "ziffern-schreiben-gerade": {
+   "art": "form",
+   "familie": "ziffern-schreiben"
+  },
+  "ziffern-schreiben-rund": {
+   "art": "form",
+   "familie": "ziffern-schreiben"
+  },
+  "ziffern-schreiben-bogen": {
+   "art": "form",
+   "familie": "ziffern-schreiben"
+  },
+  "spiegelziffern": null,
+  "wozu-ist-der-zettel": {
+   "art": "sinn",
+   "familie": "wozu-schreiben"
+  },
+  "fuer-wen-schreibe-ich": {
+   "art": "sinn",
+   "familie": "wozu-schreiben"
+  },
+  "satz-zum-bild-legen": null,
+  "passender-zweiter-satz": null,
+  "geschichtenanfang-erkennen": null,
+  "ich-mag-gedicht": null,
+  "text-gestalten": null,
+  "silbe-hat-selbstlaut": {
+   "art": "struktur",
+   "familie": "silben-schwingen"
+  },
+  "bildergeschichte-ordnen-3": null,
+  "gelungenes-benennen": null,
+  "lang-oder-kurz-hoeren": null,
+  "offene-geschlossene-silbe": {
+   "art": "struktur",
+   "familie": "offene-geschlossene-silbe"
+  },
+  "doppelt-ll-mm-nn": {
+   "art": "struktur",
+   "familie": "doppelkonsonant"
+  },
+  "doppelt-tt-pp": {
+   "art": "struktur",
+   "familie": "doppelkonsonant"
+  },
+  "doppelt-ss-ff": {
+   "art": "struktur",
+   "familie": "doppelkonsonant"
+  },
+  "doppelt-rr": {
+   "art": "struktur",
+   "familie": "doppelkonsonant"
+  },
+  "einfach-oder-doppelt": null,
+  "ck-statt-kk": {
+   "art": "struktur",
+   "familie": "doppelkonsonant"
+  },
+  "tz-statt-zz": {
+   "art": "struktur",
+   "familie": "doppelkonsonant"
+  },
+  "k-z-nach-mitlaut": null,
+  "r-nach-selbstlaut": null,
+  "ie-bei-langem-i": null,
+  "i-oder-ie": null,
+  "silbentrennendes-h": null,
+  "merkwoerter-dehnungs-h": null,
+  "abc-zweiter-buchstabe": null,
+  "nachschlagen-woerterliste": null,
+  "fehler-finden-durch-vergleich": null,
+  "schreibschrift-vergleichen": null,
+  "schreibschrift-i-u": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schreibschrift-in-einem-zug": null,
+  "schreibschrift-n-m": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schreibschrift-r": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schreibschrift-t": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schreibschrift-c-a-o": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "luftsprung-zum-oval": null,
+  "sas-verbindung-zum-oval": null,
+  "schreibschrift-d-q": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "oben-weiter-verbindung": null,
+  "schreibschrift-v-w": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schreibschrift-e": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schreibschrift-l-h-k-b": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schleifenbuchstaben-unterscheiden": null,
+  "sas-knoten": null,
+  "schreibschrift-j-y-g": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schlaufe-unten-verbindung": null,
+  "schreibschrift-f-p": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schreibschrift-s": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "s-verbindungen-schreibschrift": null,
+  "schreibschrift-sz": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schreibschrift-z-x": {
+   "art": "form",
+   "familie": "schreibschrift-klein"
+  },
+  "schreibschrift-ck-ch-tz": null,
+  "schreibschrift-gross-ohne-verbindung": {
+   "art": "form",
+   "familie": "schreibschrift-gross"
+  },
+  "schreibschrift-gross-bogen-anschluss": {
+   "art": "form",
+   "familie": "schreibschrift-gross"
+  },
+  "schreibschrift-gross-knifflig": {
+   "art": "form",
+   "familie": "schreibschrift-gross"
+  },
+  "schreibschrift-wort-abschreiben": null,
+  "druck-zu-schreibschrift": null,
+  "schreibschrift-satz": null,
+  "schreibschrift-proportionen": null,
+  "schreibschrift-wortende": null,
+  "ideen-sammeln": null,
+  "unpassende-idee-aussortieren": null,
+  "bildergeschichte-ordnen-6": null,
+  "satz-pro-bild": null,
+  "anfang-mitte-ende": {
+   "art": "struktur",
+   "familie": "geschichtenbogen"
+  },
+  "guter-schluss": null,
+  "ueberschrift-finden": null,
+  "beschreibung-ordnen": null,
+  "einladung-vollstaendig": null,
+  "anrede-und-gruss": null,
+  "gedicht-umbauen": null,
+  "fehlenden-satz-einfuegen": null,
+  "mein-lernsatz": null,
+  "verlaengern-nomen-d-t": {
+   "art": "struktur",
+   "familie": "verlaengern"
+  },
+  "verlaengern-nomen-g-k": {
+   "art": "struktur",
+   "familie": "verlaengern"
+  },
+  "verlaengern-nomen-b-p": {
+   "art": "struktur",
+   "familie": "verlaengern"
+  },
+  "verlaengern-doppelt": {
+   "art": "struktur",
+   "familie": "verlaengern"
+  },
+  "fehlerdetektiv": null,
+  "ableiten-ae-von-a": {
+   "art": "struktur",
+   "familie": "ableiten"
+  },
+  "ableiten-aeu-von-au": {
+   "art": "struktur",
+   "familie": "ableiten"
+  },
+  "nomen-gross-artikelprobe": null,
+  "verlaengern-verben": {
+   "art": "struktur",
+   "familie": "verlaengern"
+  },
+  "frage-und-ausrufezeichen": {
+   "art": "form",
+   "familie": "frage-ausruf"
+  },
+  "vorsilben-ver-vor": {
+   "art": "struktur",
+   "familie": "wortbausteine"
+  },
+  "merkwoerter-v": null,
+  "tier-steckbrief": null,
+  "verlaengern-adjektive": {
+   "art": "struktur",
+   "familie": "verlaengern"
+  },
+  "satzanfaenge-abwechseln": null,
+  "hilfreicher-tipp": null,
+  "buchstabe-silbe-wort-satz": {
+   "art": "struktur",
+   "familie": "buchstabe-silbe-wort-satz"
+  },
+  "selbstlaut-mitlaut": {
+   "art": "struktur",
+   "familie": "selbstlaut-mitlaut"
+  },
+  "satz-oder-kein-satz": null,
+  "namenwoerter": {
+   "art": "struktur",
+   "familie": "wortarten"
+  },
+  "der-die-das": null,
+  "einzahl-mehrzahl-erkennen": {
+   "art": "struktur",
+   "familie": "mehrzahl"
+  },
+  "tunwoerter": {
+   "art": "struktur",
+   "familie": "wortarten"
+  },
+  "mehrzahl-mit-e": {
+   "art": "struktur",
+   "familie": "mehrzahl"
+  },
+  "mehrzahl-mit-en": {
+   "art": "struktur",
+   "familie": "mehrzahl"
+  },
+  "mehrzahl-mit-er": {
+   "art": "struktur",
+   "familie": "mehrzahl"
+  },
+  "mehrzahl-mit-s": {
+   "art": "struktur",
+   "familie": "mehrzahl"
+  },
+  "mehrzahl-umlaut-ohne-endung": {
+   "art": "struktur",
+   "familie": "mehrzahl"
+  },
+  "nomen-proben": null,
+  "bestimmter-unbestimmter-begleiter": {
+   "art": "sinn",
+   "familie": "bestimmter-unbestimmter-begleiter"
+  },
+  "grundform-verb": null,
+  "verb-personalform": {
+   "art": "struktur",
+   "familie": "ich-du-wir"
+  },
+  "personalpronomen": {
+   "art": "struktur",
+   "familie": "ich-du-wir"
+  },
+  "wiewoerter": {
+   "art": "struktur",
+   "familie": "wortarten"
+  },
+  "nomen-genauer-machen": null,
+  "gegenteile": null,
+  "satzarten": {
+   "art": "sinn",
+   "familie": "satzarten"
+  },
+  "woerter-zusammensetzen": {
+   "art": "struktur",
+   "familie": "zusammensetzen"
+  },
+  "wortfamilien": {
+   "art": "struktur",
+   "familie": "wortstamm"
+  },
+  "wortbausteine-un-ver-vor": {
+   "art": "struktur",
+   "familie": "wortbausteine"
+  },
+  "wortfelder-gehen-sagen": null,
+  "oberbegriffe": {
+   "art": "struktur",
+   "familie": "oberbegriffe"
+  },
+  "gestern-heute-morgen": {
+   "art": "struktur",
+   "familie": "gestern-heute-morgen"
+  },
+  "adjektive-steigern": {
+   "art": "struktur",
+   "familie": "adjektive-steigern"
+  },
+  "mundart-alltag-schulsprache": {
+   "art": "sinn",
+   "familie": "mundart-alltag-schulsprache"
+  },
+  "doppelt-bei-einsilbern": null,
+  "ck-tz-bei-einsilbern": null,
+  "doppelt-in-verbformen": null,
+  "s-summt-ss-zischt": null,
+  "scharfes-s-nach-langem-vokal": null,
+  "ss-nach-kurzem-vokal": null,
+  "scharfes-s-nach-ei-au-eu": null,
+  "ss-oder-scharfes-s-einsilber": null,
+  "ableiten-ae-mehrzahl": null,
+  "ableiten-ae-steigerung": null,
+  "ableiten-ae-verkleinerung": null,
+  "ableiten-ae-verbform": null,
+  "ableiten-ae-wortfamilie": null,
+  "aeu-ableiten-vertiefen": null,
+  "merkwoerter-ae-ohne-a": null,
+  "wortstamm-bleibt-gleich": {
+   "art": "struktur",
+   "familie": "wortstamm"
+  },
+  "vorsilben-ent-zer-un-ver": {
+   "art": "struktur",
+   "familie": "wortbausteine"
+  },
+  "endung-ig-wie-ich": null,
+  "ig-oder-lich": null,
+  "abstrakte-nomen-gross": null,
+  "zusammengesetzte-nomen-schreiben": {
+   "art": "struktur",
+   "familie": "zusammensetzen"
+  },
+  "fugen-s": {
+   "art": "struktur",
+   "familie": "zusammensetzen"
+  },
+  "trennen-am-zeilenende": null,
+  "trennen-doppelt-und-ck": null,
+  "merkwoerter-aa-ee-oo": null,
+  "merkwoerter-chs-und-x": null,
+  "merkwoerter-langes-i-ohne-ie": null,
+  "merkwoerter-dehnungs-h-3": null,
+  "merkwoerter-ai": null,
+  "fremdwoerter-mit-mustern": null,
+  "handschrift-mittelband": null,
+  "handschrift-flott-und-fluessig": null,
+  "handschrift-lage-und-groesse": null,
+  "handschrift-schoenste-woerter": null,
+  "handschrift-eigene-abkuerzung": null,
+  "handschrift-sauber-korrigieren": null,
+  "ideen-baum": null,
+  "was-ist-erzaehlenswert": null,
+  "ausgangslage-ereignis-ausgang": {
+   "art": "struktur",
+   "familie": "ausgangslage-ereignis-ausgang"
+  },
+  "wortfeld-gehen-im-text": null,
+  "wortfeld-sagen-im-text": null,
+  "mit-adjektiven-beschreiben": null,
+  "gefuehle-der-figur-schreiben": null,
+  "reizwort-geschichte": null,
+  "was-waere-wenn": null,
+  "elfchen": {
+   "art": "struktur",
+   "familie": "elfchen"
+  },
+  "bastelanleitung-schreiben": null,
+  "tierbeschreibung": null,
+  "textlupe": null,
+  "schreibkonferenz": null,
+  "gegenwart-praesens": null,
+  "praeteritum-regelmaessig": null,
+  "praeteritum-unregelmaessig": null,
+  "woerterbuch-grundform-suchen": null,
+  "zukunft-futur": null,
+  "zeitform-erkennen": null,
+  "pronomen-statt-nomen": null,
+  "namen-durch-pronomen-ersetzen": null,
+  "besitzanzeigende-fuerwoerter": null,
+  "geschlecht-des-nomens": null,
+  "nachsilben-bilden-woerter": {
+   "art": "struktur",
+   "familie": "wortbausteine"
+  },
+  "nachsilben-ung-heit-keit-nis": null,
+  "vorsilben-bei-verben": {
+   "art": "struktur",
+   "familie": "wortbausteine"
+  },
+  "zusammensetzen-mit-verb-adjektiv": {
+   "art": "struktur",
+   "familie": "zusammensetzen"
+  },
+  "wortfelder-sehen-essen": null,
+  "umstellprobe": {
+   "art": "struktur",
+   "familie": "satzglieder"
+  },
+  "satzanfaenge-umstellen": null,
+  "praedikat-satzkern": {
+   "art": "struktur",
+   "familie": "satzglieder"
+  },
+  "subjekt": {
+   "art": "struktur",
+   "familie": "satzglieder"
+  },
+  "zweiteiliges-praedikat": null,
+  "woertliche-rede-erkennen": {
+   "art": "form",
+   "familie": "woertliche-rede"
+  },
+  "woertliche-rede-begleitsatz-vorne": {
+   "art": "form",
+   "familie": "woertliche-rede"
+  },
+  "figur-sprechen-lassen": null,
+  "saetze-mit-bindewort-verbinden": {
+   "art": "struktur",
+   "familie": "saetze-mit-bindewort-verbinden"
+  },
+  "saetze-im-text-verbinden": null,
+  "ersatz-weglass-erweiterungsprobe": null,
+  "verhaeltniswoerter": {
+   "art": "struktur",
+   "familie": "verhaeltniswoerter"
+  },
+  "woertliche-rede-begleitsatz-hinten": {
+   "art": "form",
+   "familie": "woertliche-rede"
+  },
+  "woertliche-rede-begleitsatz-mitte": {
+   "art": "form",
+   "familie": "woertliche-rede"
+  },
+  "komma-bei-aufzaehlung": {
+   "art": "form",
+   "familie": "komma-bei-aufzaehlung"
+  },
+  "adjektiv-in-nominalgruppe-klein": null,
+  "verben-als-nomen": null,
+  "rechtschreibstrategien-kombinieren": null,
+  "stammvokalwechsel-schreiben": null,
+  "end-oder-ent": null,
+  "zweifelsfall-nachschlagen": null,
+  "gleich-klingt-anders-geschrieben": null,
+  "eigenen-text-pruefen": null,
+  "passende-schrift-waehlen": null,
+  "blatt-gestalten": null,
+  "spannung-bauen": null,
+  "ploetzlich-wendepunkt": null,
+  "aus-anderer-sicht-erzaehlen": null,
+  "reporter-bericht": null,
+  "sachlich-oder-ausgeschmueckt": null,
+  "zeitform-im-text-halten": null,
+  "neuer-absatz": {
+   "art": "sinn",
+   "familie": "neuer-absatz"
+  },
+  "checkliste-fuer-texte": null,
+  "eigenen-text-anhoeren": null,
+  "mein-schreibziel": null,
+  "planen-schreiben-pruefen": null,
+  "perfekt-mit-haben": null,
+  "perfekt-mit-sein": null,
+  "partizip-bilden": null,
+  "die-vier-faelle": {
+   "art": "struktur",
+   "familie": "faelle"
+  },
+  "artikel-im-fall": {
+   "art": "struktur",
+   "familie": "faelle"
+  },
+  "dativobjekt": null,
+  "akkusativobjekt": null,
+  "ortsangabe": null,
+  "zeitangabe": null,
+  "was-braucht-das-verb": null,
+  "mehrteilige-satzglieder": null,
+  "fall-nach-verhaeltniswort": null,
+  "adjektiv-im-fall": null,
+  "steigerung-unregelmaessig": null,
+  "mehrfach-zusammengesetzt": {
+   "art": "struktur",
+   "familie": "zusammensetzen"
+  },
+  "wortart-wechseln": null,
+  "stammvokalwechsel-wortfamilie": null,
+  "hauptsatz-und-nebensatz": {
+   "art": "struktur",
+   "familie": "hauptsatz-und-nebensatz"
+  },
+  "komma-vor-aber-weil-dass": null,
+  "das-oder-dass": null,
+  "einheitliche-zeitform-im-text": null,
+  "woher-kommt-das-wort": {
+   "art": "sinn",
+   "familie": "woher-kommt-das-wort"
+  },
+  "das-wichtigste-zusammenfassen": null,
+  "standpunkt-grund-beispiel": {
+   "art": "struktur",
+   "familie": "standpunkt-grund-beispiel"
+  },
+  "buchtipp-schreiben": null,
+  "brief-und-e-mail": null,
+  "stille-hoeren": {
+   "art": "sinn",
+   "familie": "ohren-wozu"
+  },
+  "geraeusche-erkennen": null,
+  "laut-oder-leise": null,
+  "geraeusch-richtung": null,
+  "geraeuschkette-kurz": null,
+  "geraeuschkette-lang": null,
+  "auftrag-ausfuehren": null,
+  "doppelauftrag": null,
+  "auftrag-mit-lagewort": null,
+  "hoergeschichte-hauptfigur": null,
+  "hoergeschichte-ort": null,
+  "hoerauftrag-gezielt": null,
+  "gefuehl-in-der-stimme": null,
+  "hoeflich-nachfragen": {
+   "art": "sinn",
+   "familie": "hoeflich-nachfragen"
+  },
+  "ausreden-lassen": {
+   "art": "sinn",
+   "familie": "gespraech-regeln"
+  },
+  "warten-bis-dran": {
+   "art": "sinn",
+   "familie": "gespraech-regeln"
+  },
+  "hallo-bitte-danke": null,
+  "sich-entschuldigen": {
+   "art": "sinn",
+   "familie": "entschuldigen"
+  },
+  "tag-erzaehlen-mit-bildern": null,
+  "eigene-aufnahme-pruefen": null,
+  "reim-nachsprechen": null,
+  "gefuehl-der-figur": null,
+  "lernen-einschaetzen": null,
+  "dreierauftrag": null,
+  "hoergeschichte-reihenfolge": null,
+  "hoerdetail-nebenbei": null,
+  "hoeren-und-schliessen": null,
+  "sprecher-unterscheiden": null,
+  "gehoertes-pruefen": null,
+  "unbekanntes-wort-erfragen": null,
+  "passend-antworten": null,
+  "gespraechsregel-erkennen": {
+   "art": "sinn",
+   "familie": "gespraech-regeln"
+  },
+  "ich-botschaft": {
+   "art": "sinn",
+   "familie": "ich-botschaft"
+  },
+  "erzaehlen-mit-reihenfolgewoertern": {
+   "art": "struktur",
+   "familie": "erzaehl-aufbau"
+  },
+  "nacherzaehlen-mit-bildern": null,
+  "ding-beschreiben": null,
+  "betonen-und-pausen": null,
+  "gedicht-vortragen": null,
+  "rueckmeldung-geben": null,
+  "stimme-verstellen": null,
+  "vermutung-aeussern": null,
+  "meine-hoerfrage": {
+   "art": "sinn",
+   "familie": "meine-hoerfrage"
+  },
+  "schluesselwort-fangen": null,
+  "puzzle-im-ohr": null,
+  "trotz-laerm-verstehen": null,
+  "warum-tut-sie-das-hoeren": null,
+  "worum-gehts-hoeren": null,
+  "warum-versteh-ich-nichts": null,
+  "anfang-mitte-schluss-vortragen": {
+   "art": "struktur",
+   "familie": "erzaehl-aufbau"
+  },
+  "mein-stichwortzettel": {
+   "art": "sinn",
+   "familie": "mein-stichwortzettel"
+  },
+  "tempo-und-lautstaerke-sprechen": null,
+  "troesten-und-gratulieren": {
+   "art": "sinn",
+   "familie": "entschuldigen"
+  },
+  "daran-knuepf-ich-an": null,
+  "reporter-fragen": null,
+  "hoerspiel-werkstatt": null,
+  "ich-bin-nicht-der-wolf": null,
+  "so-hab-ichs-gelernt": null,
+  "viele-stimmen-verstehen": null,
+  "stimmt-die-aussage-und-warum": null,
+  "zwei-geschichten-vergleichen": null,
+  "ratekrimi": null,
+  "kurz-gesagt": null,
+  "ich-finde-weil": null,
+  "bitte-ueberzeugend": null,
+  "mit-wem-rede-ich": {
+   "art": "sinn",
+   "familie": "mit-wem-rede-ich"
+  },
+  "mein-kurzreferat": null,
+  "jury-ohr": null,
+  "gespraechsrollen": null,
+  "videoanruf-regeln": null,
+  "szenische-lesung": null,
+  "mein-ziel-sprechen": null,
+  "was-half-beim-zuhoeren": null
+ },
+ "welten": {
+  "wiese-und-hecke": {
+   "form": "beides",
+   "grund": "Staunen über kleine Tiere, dazu eine prüfbare Handlung (Spur/Tier zuordnen).",
+   "geschichte": "Ein Tag auf der Wiese: Käfer, Spinne, Schnecke und wie jedes vorankommt, mit Fotos.",
+   "spiel": "Tier an seine Spur oder Fortbewegung legen (Kriechen, Krabbeln, Hüpfen)."
+  },
+  "vorrat-und-packungen": {
+   "form": "spiel",
+   "grund": "Gruppen legen und zählen ist selbst die Handlung; Zahlenfakten sind der Kern.",
+   "geschichte": null,
+   "spiel": "Eierkartons, Schuhpaare und Münzen zu festen Gruppen füllen und die Anzahl bestimmen."
+  },
+  "fell-federn-schuppen": {
+   "form": "spiel",
+   "grund": "Tier an seiner Haut erkennen und sortieren hat eine richtige Antwort.",
+   "geschichte": null,
+   "spiel": "Fotos von Tieren in Fell, Federn oder Schuppen sortieren und die Fortbewegung zuordnen."
+  },
+  "tarnen-verstecken": {
+   "form": "beides",
+   "grund": "Staunen über Anpassung, Suchbild ist prüfbar.",
+   "geschichte": "Wie sich Falter, Frosch und Hase in ihrer Umgebung verstecken, mit Fotos.",
+   "spiel": "Verstecktes Tier im Foto antippen."
+  },
+  "wer-frisst-was": {
+   "form": "geschichte",
+   "grund": "Zusammenhang einer Kette; Pfeile ordnen ist eher Erklärung als Spielhandlung.",
+   "geschichte": "Wer von wem lebt, als ruhige Kette von Gras bis Fuchs mit Fotos, ohne Jagd.",
+   "spiel": null
+  },
+  "wirbeltierklassen": {
+   "form": "beides",
+   "grund": "Geschichte öffnet die Gruppen, Sortieren nach Merkmalen ist prüfbar.",
+   "geschichte": "Fünf Gruppen von Wirbeltieren und woran man sie erkennt.",
+   "spiel": "Tiere nach Merkmal (Haut, Atmung, Fortbewegung) einer der fünf Gruppen zuordnen."
+  },
+  "tiere-der-erdteile": {
+   "form": "beides",
+   "grund": "Staunen über Vielfalt; Zuordnung Tier zu Erdteil ist prüfbar.",
+   "geschichte": "Eine Reise über die Erdteile mit je einem typischen Tier.",
+   "spiel": "Tier auf den passenden Erdteil der Karte setzen."
+  },
+  "haustiere": {
+   "form": "geschichte",
+   "grund": "Was ein Tier braucht und wer sich kümmert, ist ein Zusammenhang ohne eine einzige richtige Handlung.",
+   "geschichte": "Ein Tag mit einem Haustier und was es braucht.",
+   "spiel": null
+  },
+  "bauernhof": {
+   "form": "geschichte",
+   "grund": "Woher Eier, Milch, Getreide kommen: Zusammenhang und Wandel.",
+   "geschichte": "Ein Tag auf dem Hof, vom Stall bis zum Frühstückstisch.",
+   "spiel": null
+  },
+  "teile-der-pflanze": {
+   "form": "spiel",
+   "grund": "Teile benennen und zuordnen ist prüfbar und das Wissen selbst.",
+   "geschichte": null,
+   "spiel": "Teile einer echten Pflanze auf dem Foto antippen und benennen."
+  },
+  "was-pflanzen-brauchen": {
+   "form": "beides",
+   "grund": "Ursache-Wirkung (Licht, Wasser) als Geschichte, Gießplan als prüfbare Handlung.",
+   "geschichte": "Zwei Bohnen, eine bekommt Licht und Wasser, die andere nicht, Woche für Woche.",
+   "spiel": "Gießplan für die Woche füllen, damit die Pflanze nicht welkt."
+  },
+  "samen-reisen": {
+   "form": "geschichte",
+   "grund": "Wege der Samen sind ein Zusammenhang zum Staunen.",
+   "geschichte": "Eine Löwenzahn-Reise: Wind, Wasser, Fell tragen Samen fort.",
+   "spiel": null
+  },
+  "obst-gemuese-reif": {
+   "form": "spiel",
+   "grund": "Obst und Gemüse dem Reifemonat zuordnen ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Erntekorb Monat für Monat mit passendem Obst und Gemüse füllen."
+  },
+  "unbekannte-pflanzen": {
+   "form": "geschichte",
+   "grund": "Haltung und Regel „erst fragen“, keine Prüfaufgabe, nie Gefahr erzählt.",
+   "geschichte": "Beim Spaziergang Beeren entdecken und einen Erwachsenen fragen.",
+   "spiel": null
+  },
+  "jahreszeiten-natur": {
+   "form": "geschichte",
+   "grund": "Wandel im Jahr, Igel im Winter: Zusammenhang und Staunen.",
+   "geschichte": "Ein Jahr im Wald: Frühblüher, Herbstfrüchte, wie Tiere überwintern.",
+   "spiel": null
+  },
+  "vom-ei-zum-tier": {
+   "form": "geschichte",
+   "grund": "Verwandlung ist Wandel in Stufen, ideal als Geschichte.",
+   "geschichte": "Von der Raupe zum Falter und vom Laich zum Frosch in Fotos.",
+   "spiel": null
+  },
+  "wald-und-teich": {
+   "form": "geschichte",
+   "grund": "Zusammenhänge im Lebensraum, wer mit wem lebt.",
+   "geschichte": "Ein Tag im Wald und am Teich und wer wo zu Hause ist.",
+   "spiel": null
+  },
+  "atmen-und-junge": {
+   "form": "geschichte",
+   "grund": "Zusammenhänge und Vergleich, keine eigene Spielhandlung.",
+   "geschichte": "Wie Fisch, Vogel und Katze atmen und ihre Jungen aufziehen.",
+   "spiel": null
+  },
+  "tierbaum-pflanzenbaum": {
+   "form": "beides",
+   "grund": "Ordnen in Gruppen ist prüfbar, Idee der Verzweigung lässt sich erzählen.",
+   "geschichte": "Wie man Lebewesen in immer feinere Gruppen ordnet.",
+   "spiel": "Lebewesen an die richtige Stelle eines Baumdiagramms hängen."
+  },
+  "pilze-kleinstlebewesen": {
+   "form": "geschichte",
+   "grund": "Staunen über Verborgenes und Zusammenhänge im Boden.",
+   "geschichte": "Was unter einem Laubhaufen mit Lupe zu sehen ist und was Pilze tun.",
+   "spiel": null
+  },
+  "mensch-und-natur": {
+   "form": "geschichte",
+   "grund": "Wandel und Wirkung, sachlich ohne Bewertung.",
+   "geschichte": "Wie ein Bach, eine Wiese und ein Wald durch Nutzung anders werden.",
+   "spiel": null
+  },
+  "was-luft-kann": {
+   "form": "spiel",
+   "grund": "Vorhersagen und nachsehen ist eine prüfbare Handlung, die das Wissen ist.",
+   "geschichte": null,
+   "spiel": "Vorhersagen, was ein Luftballon, ein Fächer oder Fallschirm tut, dann ausprobieren."
+  },
+  "wetter-messen": {
+   "form": "spiel",
+   "grund": "Skala ablesen und Tabelle füllen ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Thermometer und Regenmesser ablesen und in die Wochentabelle eintragen."
+  },
+  "gewitter": {
+   "form": "geschichte",
+   "grund": "Ruhig erzählter Sachmoment, keine Prüfung, keine Spannung.",
+   "geschichte": "Ein Gewitter von der Wolke bis zum Donner und was man drinnen tut.",
+   "spiel": null
+  },
+  "stoffe": {
+   "form": "spiel",
+   "grund": "Stoffe erkennen und sortieren ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Dinge nach Stoff (Holz, Metall, Glas, Wolle, Papier) sortieren."
+  },
+  "muell-trennen": {
+   "form": "spiel",
+   "grund": "Abfall der richtigen Tonne zuordnen hat eine richtige Antwort.",
+   "geschichte": null,
+   "spiel": "Abfall in die passende Tonne sortieren."
+  },
+  "eis-wasser-dampf": {
+   "form": "beides",
+   "grund": "Zustandswechsel ist Ursache und Wirkung, Temperatur zuordnen ist prüfbar.",
+   "geschichte": "Ein Eiswürfel wird Wasser wird Dampf, je wärmer.",
+   "spiel": "Temperatur ablesen und den Zustand zuordnen."
+  },
+  "wasserkreislauf": {
+   "form": "geschichte",
+   "grund": "Klassische Geschichte über einen Kreislauf.",
+   "geschichte": "Der Weg eines Tropfens von Meer über Wolke und Regen zurück.",
+   "spiel": null
+  },
+  "tag-und-nacht": {
+   "form": "geschichte",
+   "grund": "Ursache (Drehung der Erde) erzählen, Uhr gehört zu anderen Welten.",
+   "geschichte": "Warum bei uns Tag ist, wenn es woanders Nacht ist.",
+   "spiel": null
+  },
+  "mond": {
+   "form": "geschichte",
+   "grund": "Wiederkehrender Wandel zum Staunen.",
+   "geschichte": "Der Mond in einem Monat, Nacht für Nacht fotografiert.",
+   "spiel": null
+  },
+  "am-himmel": {
+   "form": "geschichte",
+   "grund": "Staunen über Sonne, Mond, Sterne, Planeten.",
+   "geschichte": "Eine Nacht und ein Tag am Himmel und was dort kreist.",
+   "spiel": null
+  },
+  "steine-boden": {
+   "form": "beides",
+   "grund": "Staunen über Steine, Sortieren nach Merkmal ist prüfbar.",
+   "geschichte": "Woraus Boden besteht, vom Stein zum Sand.",
+   "spiel": "Steine nach Härte oder Aussehen sortieren und benennen."
+  },
+  "gebirge-vulkane": {
+   "form": "geschichte",
+   "grund": "Entstehung und Aufbau, erzählend.",
+   "geschichte": "Wie Berge wachsen und wie die Erde innen aufgebaut ist.",
+   "spiel": null
+  },
+  "vulkanausbruch": {
+   "form": "geschichte",
+   "grund": "Sachlich erklärt, keine Handlung, nie Spannungsquelle.",
+   "geschichte": "Was bei einem Ausbruch aus Gestein, Lava und Asche wird.",
+   "spiel": null
+  },
+  "strom": {
+   "form": "beides",
+   "grund": "Woher Strom kommt als Geschichte, Stromkreis schließen ist prüfbar.",
+   "geschichte": "Der Weg des Stroms vom Kraftwerk zur Lampe und wie man sicher damit umgeht.",
+   "spiel": "Stromkreis aus Batterie, Kabel und Lampe richtig schließen."
+  },
+  "wasser-sauber": {
+   "form": "geschichte",
+   "grund": "Weg des Wassers und Alltag, sachlich ohne Bewertung.",
+   "geschichte": "Vom Brunnen über das Wasserwerk zum Wasserhahn und zurück.",
+   "spiel": null
+  },
+  "magnete": {
+   "form": "spiel",
+   "grund": "Vermuten und ausprobieren ist die prüfbare Handlung und das Wissen.",
+   "geschichte": null,
+   "spiel": "Dinge vermuten, ob der Magnet sie anzieht, dann prüfen und sortieren."
+  },
+  "mein-tag": {
+   "form": "spiel",
+   "grund": "Tageszeiten ordnen ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Bilder eines Tages in die richtige Reihenfolge und zur Tageszeit legen."
+  },
+  "jahreskreis": {
+   "form": "spiel",
+   "grund": "Tage, Wochen, Monate ordnen ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Monate und Wochentage in Kreis und Strahl legen."
+  },
+  "feste-im-kalender": {
+   "form": "geschichte",
+   "grund": "Bräuche gleichwertig nebeneinander, keine richtige Antwort.",
+   "geschichte": "Ein Jahr, in dem Familien verschiedene Feste feiern.",
+   "spiel": null
+  },
+  "lebenskette": {
+   "form": "geschichte",
+   "grund": "Wandel der eigenen Jahre, Zeitleiste erzählt.",
+   "geschichte": "Vom Baby zum Schulkind in Jahresschritten.",
+   "spiel": null
+  },
+  "frueher-heute": {
+   "form": "geschichte",
+   "grund": "Wandel und Vergleich früher und heute.",
+   "geschichte": "Spielzeug, Schule und Familie früher und heute mit Fotos.",
+   "spiel": null
+  },
+  "echt-oder-ausgedacht": {
+   "form": "spiel",
+   "grund": "Sachsatz oder Märchensatz unterscheiden ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Sätze oder Bilder als echt oder ausgedacht einordnen."
+  },
+  "zeitleiste-des-lebens": {
+   "form": "geschichte",
+   "grund": "Staunen über große Zeiträume, Wandel.",
+   "geschichte": "Das Band des Lebens vom ersten Tier bis zu uns, Länge als Zeit.",
+   "spiel": null
+  },
+  "dinosaurier": {
+   "form": "beides",
+   "grund": "Staunen über Größe, Längenvergleich ist prüfbar.",
+   "geschichte": "Wie groß Dinosaurier waren und was sie fraßen.",
+   "spiel": "Dinosaurier mit Dingen von heute der Länge nach vergleichen."
+  },
+  "dinosaurier-aussterben": {
+   "form": "geschichte",
+   "grund": "Ruhiger Sachmoment, Ursache und Wandel, kein Spiel.",
+   "geschichte": "Was vor langer Zeit geschah und warum es heute keine mehr gibt.",
+   "spiel": null
+  },
+  "geschichte-der-zahlen": {
+   "form": "geschichte",
+   "grund": "Woher Zahlen kommen, Kerben, Bündel, Null: reiner Wandel.",
+   "geschichte": "Wie Menschen mit Kerben und Bündeln zu zählen begannen.",
+   "spiel": null
+  },
+  "geschichte-der-schrift": {
+   "form": "geschichte",
+   "grund": "Wandel von Bild zu Zeichen zu Alphabet.",
+   "geschichte": "Vom Bild an der Höhlenwand zum Buchstaben.",
+   "spiel": null
+  },
+  "erste-menschen": {
+   "form": "geschichte",
+   "grund": "Wandel und Zusammenhang über lange Zeit.",
+   "geschichte": "Wie Werkzeug, Feuer und Ackerbau das Leben änderten.",
+   "spiel": null
+  },
+  "erfindungen": {
+   "form": "geschichte",
+   "grund": "Wandel von Licht, Fahrzeug, Telefon.",
+   "geschichte": "Vom Talglicht zur Lampe und vom Boten zum Telefon.",
+   "spiel": null
+  },
+  "jahrhunderte": {
+   "form": "beides",
+   "grund": "Zeiträume erzählen, Einordnen auf der Zeitleiste ist prüfbar.",
+   "geschichte": "Wie lang ein Jahrzehnt und ein Jahrhundert sind, an Dingen erzählt.",
+   "spiel": "Ereignisse in Jahrzehnt oder Jahrhundert auf der Zeitleiste einordnen."
+  },
+  "von-oben": {
+   "form": "spiel",
+   "grund": "Raum zum Plan zeichnen ist prüfbare Handlung.",
+   "geschichte": null,
+   "spiel": "Möbel von oben im Plan an die richtige Stelle legen."
+  },
+  "schulweg": {
+   "form": "spiel",
+   "grund": "Weg beschreiben und legen hat eine richtige Antwort.",
+   "geschichte": null,
+   "spiel": "Den Schulweg mit Abzweigungen und Orientierungspunkten nach Beschreibung legen."
+  },
+  "stadt-und-land": {
+   "form": "geschichte",
+   "grund": "Vergleich von Lebensweisen, keine richtige Antwort.",
+   "geschichte": "Ein Tag in der Stadt und ein Tag auf dem Land.",
+   "spiel": null
+  },
+  "unterwegs": {
+   "form": "spiel",
+   "grund": "Fahrplan lesen und Plätze zählen ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Mit Fahrplan die richtige Abfahrt wählen und einsteigen."
+  },
+  "verkehrszeichen": {
+   "form": "spiel",
+   "grund": "Zeichen deuten ist prüfbar und das Wissen selbst.",
+   "geschichte": null,
+   "spiel": "Zeichen der Bedeutung zuordnen und Ampel richtig nutzen."
+  },
+  "land-und-wasser": {
+   "form": "spiel",
+   "grund": "Formen zu Paaren legen ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Landform und passende Wasserform als Paar auf der Karte legen."
+  },
+  "erdteile-ozeane": {
+   "form": "beides",
+   "grund": "Staunen über die Erde, Zuordnung auf der Karte ist prüfbar.",
+   "geschichte": "Eine Reise um die Erde über Ozeane und Erdteile.",
+   "spiel": "Erdteile und Ozeane auf den Globus legen."
+  },
+  "karten": {
+   "form": "spiel",
+   "grund": "Karte lesen und Himmelsrichtung bestimmen ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Auf der Karte mit Himmelsrichtungen und Maßstab ein Ziel finden."
+  },
+  "gemeinde-bis-europa": {
+   "form": "geschichte",
+   "grund": "Zugehörigkeit als Zusammenhang, ineinander liegende Räume.",
+   "geschichte": "Vom Haus zur Gemeinde, Bayern, Deutschland und Europa, von oben gesehen.",
+   "spiel": null
+  },
+  "kinder-anderswo": {
+   "form": "geschichte",
+   "grund": "Alltag nicht exotisch zeigen, keine richtige Antwort.",
+   "geschichte": "Ein Tag von Kindern an anderen Orten mit Fotos.",
+   "spiel": null
+  },
+  "werkzeuge": {
+   "form": "spiel",
+   "grund": "Werkzeug dem Zweck zuordnen ist prüfbar.",
+   "geschichte": null,
+   "spiel": "Das passende Werkzeug für eine Arbeit wählen und benennen."
+  },
+  "berufe": {
+   "form": "geschichte",
+   "grund": "Was Menschen tun, Vielfalt, keine Prüfung.",
+   "geschichte": "Ein Tag in Hof, Werkstatt, Laden und Pflege, von Frauen und Männern.",
+   "spiel": null
+  },
+  "tuerme-bauen": {
+   "form": "spiel",
+   "grund": "Turm bauen, der hält, ist prüfbare Handlung.",
+   "geschichte": null,
+   "spiel": "Turm aus Würfeln und Quadern bauen, der nicht umfällt."
+  },
+  "was-rollt": {
+   "form": "spiel",
+   "grund": "Vorhersagen und ausprobieren ist die Handlung und das Wissen.",
+   "geschichte": null,
+   "spiel": "Vorhersagen, welche Formen die Murmelbahn hinunterrollen, dann ausprobieren."
+  },
+  "burg-kloster-schloss": {
+   "form": "geschichte",
+   "grund": "Bauweise und Leben darin, sachlich erklärt.",
+   "geschichte": "Eine Burg, ein Kloster und ein Schloss von außen und innen.",
+   "spiel": null
+  },
+  "wer-macht-mein-brot": {
+   "form": "geschichte",
+   "grund": "Kette vieler Menschen und Schritte, Zusammenhang.",
+   "geschichte": "Vom Korn auf dem Feld über Mühle und Bäckerei zum Brot.",
+   "spiel": null
+  },
+  "was-menschen-brauchen": {
+   "form": "geschichte",
+   "grund": "Gemeinsames aller Menschen, Staunen und Gleichheit.",
+   "geschichte": "Was Menschen an verschiedenen Orten zum Leben brauchen.",
+   "spiel": null
+  },
+  "ackerbau-hausbau": {
+   "form": "geschichte",
+   "grund": "Zusammenhang von Arbeit und Maß, erzählend.",
+   "geschichte": "Wie ein Feld bestellt und ein Haus gebaut wird.",
+   "spiel": null
+  },
+  "bruecken": {
+   "form": "beides",
+   "grund": "Warum Formen tragen als Geschichte, Bauen und Belasten ist prüfbar.",
+   "geschichte": "Warum Bogen und Dreieck eine Brücke tragen.",
+   "spiel": "Brücke aus Teilen bauen und mit Last testen."
+  },
+  "hebel-waage": {
+   "form": "spiel",
+   "grund": "Gleichgewicht herstellen ist prüfbare Handlung, die das Wissen ist.",
+   "geschichte": null,
+   "spiel": "Wippe oder Balkenwaage mit Gewichten ins Gleichgewicht bringen."
+  },
+  "kleidung": {
+   "form": "geschichte",
+   "grund": "Herstellungsweg, Wandel von Faser zu Stoff.",
+   "geschichte": "Von der Wolle am Schaf zum Pullover.",
+   "spiel": null
+  },
+  "koerperteile": {
+   "form": "spiel",
+   "grund": "Körperteile mit richtigem Namen benennen ist prüfbarer Kern.",
+   "geschichte": null,
+   "spiel": "Körperteile im Bild antippen und richtig benennen."
+  },
+  "sinne": {
+   "form": "beides",
+   "grund": "Wozu die Sinne da sind als Geschichte, Zuordnung Sinn zu Sinnesorgan prüfbar.",
+   "geschichte": "Ein Spaziergang mit allen fünf Sinnen.",
+   "spiel": "Dinge dem passenden Sinn zuordnen."
+  },
+  "sinne-anders": {
+   "form": "geschichte",
+   "grund": "Beiläufig und mit aktiven Rollen, keine Aufgabe.",
+   "geschichte": "Eine Freundin ohne Sehen und ein Freund ohne Hören beim Spielen.",
+   "spiel": null
+  },
+  "zaehne": {
+   "form": "beides",
+   "grund": "Milchzähne und Wechsel als Geschichte, Zähne pflegen/zählen prüfbar.",
+   "geschichte": "Wie Milchzähne den bleibenden Zähnen Platz machen.",
+   "spiel": "Zähne im Gebiss zählen und Zahnpflege-Schritte ordnen."
+  },
+  "was-im-essen-steckt": {
+   "form": "spiel",
+   "grund": "Inhaltsstoffe auf der Packung finden ist prüfbar, sachlich ohne Wertung.",
+   "geschichte": null,
+   "spiel": "Auf einer Packung die Zutat suchen und die Menge ablesen."
+  },
+  "haende-sonne": {
+   "form": "geschichte",
+   "grund": "Warum, Ursache und Wirkung, ohne Prüfung.",
+   "geschichte": "Warum Hände waschen und Sonnencreme wichtig sind, Schritt für Schritt.",
+   "spiel": null
+  },
+  "bewegen-schlafen": {
+   "form": "geschichte",
+   "grund": "Tagesablauf, keine richtige Antwort.",
+   "geschichte": "Ein Tag zwischen Bewegen, Spielen, Ausruhen und Schlafen.",
+   "spiel": null
+  },
+  "das-auge": {
+   "form": "beides",
+   "grund": "Wie wir sehen als Geschichte, Teile benennen ist prüfbar.",
+   "geschichte": "Der Weg des Lichts durchs Auge.",
+   "spiel": "Teile des Auges im Foto benennen."
+  },
+  "wachsen": {
+   "form": "geschichte",
+   "grund": "Wandel über Jahre, sachlich, ohne Vergleich.",
+   "geschichte": "Wie ein Körper mit den Jahren wächst und sich verändert.",
+   "spiel": null
+  },
+  "erste-hilfe": {
+   "form": "beides",
+   "grund": "Ruhige Geschichte, Notruf-Nummer ist prüfbarer Kern.",
+   "geschichte": "Was man bei kleinem Unfall tut, ruhig erzählt.",
+   "spiel": "Notrufnummer wählen und die wichtigen Angaben sagen."
+  },
+  "gefuehle": {
+   "form": "geschichte",
+   "grund": "Gefühle haben keine falsche Antwort, nie gekonnt.",
+   "geschichte": "Kinder erleben Freude, Ärger, Angst, Traurigkeit, ohne Bewertung.",
+   "spiel": null
+  },
+  "gefuehle-erkennen": {
+   "form": "geschichte",
+   "grund": "Gefühlsfragen ohne falsche Antwort.",
+   "geschichte": "Woran Kinder Gefühle bei sich und anderen bemerken.",
+   "spiel": null
+  },
+  "wenn-die-wut-kommt": {
+   "form": "geschichte",
+   "grund": "Gefühlsthema, Vorbild statt Abfrage.",
+   "geschichte": "Ein Kind bemerkt die Wut, zählt bis zehn und atmet durch.",
+   "spiel": null
+  },
+  "warten-verlieren": {
+   "form": "geschichte",
+   "grund": "Kurzes Vorbild unter Kindern, keine Prüfung.",
+   "geschichte": "Zwei Kinder warten, eines verliert und spielt trotzdem weiter.",
+   "spiel": null
+  },
+  "mitspielen": {
+   "form": "geschichte",
+   "grund": "Kurzes Vorbild, keine richtige Antwort.",
+   "geschichte": "Ein Kind fragt, ob es mitspielen darf, und wird aufgenommen.",
+   "spiel": null
+  },
+  "streit-versoehnen": {
+   "form": "geschichte",
+   "grund": "Konflikt kurz, Lösung ausführlich, Vorbild.",
+   "geschichte": "Ein kurzer Streit und der Weg zur Versöhnung.",
+   "spiel": null
+  },
+  "gerecht-teilen": {
+   "form": "beides",
+   "grund": "Vorbild als Geschichte, Verteilen mit prüfbarem Ergebnis im Lernkern.",
+   "geschichte": "Kinder teilen Kuchen so, dass alle etwas bekommen.",
+   "spiel": "Gerecht verteilen: alle bekommen gleich viel."
+  },
+  "hilfe-und-danke": {
+   "form": "geschichte",
+   "grund": "Kurzes Vorbild, keine falsche Antwort.",
+   "geschichte": "Ein Kind bittet um Hilfe, jemand hilft, es sagt Danke.",
+   "spiel": null
+  },
+  "hoeflich-reden": {
+   "form": "geschichte",
+   "grund": "Haltung und Vorbild, Bitte-Sätze sind Sprachthema andernorts.",
+   "geschichte": "Kinder fragen, bitten und hören zu.",
+   "spiel": null
+  },
+  "regeln": {
+   "form": "geschichte",
+   "grund": "Wozu Regeln und Abstimmen als Zusammenhang, Gruppe entscheidet.",
+   "geschichte": "Eine Gruppe beschließt per Abstimmung eine Spielregel.",
+   "spiel": null
+  },
+  "familien": {
+   "form": "geschichte",
+   "grund": "Beiläufig, nie als eigene Aufgabe: nur Bild im Hintergrund.",
+   "geschichte": "Verschiedene Familien beim gemeinsamen Alltag, beiläufig erzählt.",
+   "spiel": null
+  },
+  "wenn-etwas-schiefgeht": {
+   "form": "geschichte",
+   "grund": "Vorbild, wie es weitergeht, keine Prüfung.",
+   "geschichte": "Etwas geht schief und es geht gut weiter.",
+   "spiel": null
+  },
+  "wuensche-taschengeld": {
+   "form": "beides",
+   "grund": "Wünsche als Geschichte, Preise und Münzen prüfbar.",
+   "geschichte": "Ein Kind wünscht sich etwas und teilt sein Taschengeld ein.",
+   "spiel": "Mit Taschengeld passende Münzen für einen Preis legen."
+  },
+  "medien-alltag": {
+   "form": "geschichte",
+   "grund": "Überblick und Zweck, keine richtige Antwort.",
+   "geschichte": "Welche Medien eine Familie am Tag nutzt und wofür.",
+   "spiel": null
+  },
+  "fuer-andere-einstehen": {
+   "form": "geschichte",
+   "grund": "Nur kurzes gutes Vorbild, nie Abfrage.",
+   "geschichte": "Kinder halten zusammen, damit niemand ausgelacht wird.",
+   "spiel": null
+  },
+  "mehrheit": {
+   "form": "beides",
+   "grund": "Wahl als Geschichte, Stimmen zählen prüfbar.",
+   "geschichte": "Eine Klasse wählt die Klassensprecherin oder den Klassensprecher.",
+   "spiel": "Stimmen zählen und die Mehrheit bestimmen."
+  },
+  "kinderrechte": {
+   "form": "geschichte",
+   "grund": "Sachtext zu Rechten, Zusammenhänge ohne richtige Antwort.",
+   "geschichte": "Welche Rechte Kinder haben, mit Alltagsbildern.",
+   "spiel": null
+  },
+  "werbung": {
+   "form": "beides",
+   "grund": "Was Werbung will als Geschichte, Preise vergleichen prüfbar.",
+   "geschichte": "Wie Werbung wirbt und was sie will.",
+   "spiel": "Preise zweier Angebote vergleichen und das günstigere wählen."
+  },
+  "mein-koerper-gehoert-mir": {
+   "form": "geschichte",
+   "grund": "Schutzthema, Gefühl und Selbstbestimmung, nie gekonnt; Körperteile benennt koerperteile.",
+   "geschichte": "Ein Kind bestimmt über seinen Körper, ruhig und mit Namen der Körperteile.",
+   "spiel": null
+  },
+  "ja-und-nein-gefuehl": {
+   "form": "geschichte",
+   "grund": "Keine falsche Antwort, Gefühlsfrage.",
+   "geschichte": "Wie sich Ja und Nein im Körper anfühlen, an Alltagsbildern.",
+   "spiel": null
+  },
+  "alle-gefuehle": {
+   "form": "geschichte",
+   "grund": "Gefühle ohne Bewertung, nie gekonnt.",
+   "geschichte": "Alle Gefühle sind richtig, Kinder finden Worte für sie.",
+   "spiel": null
+  },
+  "beruehrungen": {
+   "form": "geschichte",
+   "grund": "Sortieren ohne Wertung, Gefühlsfrage.",
+   "geschichte": "Angenehme, unangenehme und komische Berührungen aus dem Alltag.",
+   "spiel": null
+  },
+  "nein-sagen": {
+   "form": "geschichte",
+   "grund": "Haltung und Vorbild, keine Abfrage.",
+   "geschichte": "Ein Kind sagt Nein und andere achten es.",
+   "spiel": null
+  },
+  "gute-schlechte-geheimnisse": {
+   "form": "geschichte",
+   "grund": "Eindeutige Regel als Vorbild erzählt, nie Test.",
+   "geschichte": "Ein Kind erzählt ein schlechtes Geheimnis weiter und wird gehört.",
+   "spiel": null
+  },
+  "hilfe-holen": {
+   "form": "geschichte",
+   "grund": "Vorbild: weitererzählen, bis jemand hilft.",
+   "geschichte": "Ein Kind erzählt bei mehreren Personen, bis jemand hilft.",
+   "spiel": null
+  },
+  "nicht-schuld": {
+   "form": "geschichte",
+   "grund": "Querschnittsbotschaft, kein eigenes Spiel.",
+   "geschichte": "Ein Kind erfährt, dass es nie schuld ist.",
+   "spiel": null
+  },
+  "sicher-im-netz": {
+   "form": "geschichte",
+   "grund": "Vorbild: wegklicken und Bescheid sagen.",
+   "geschichte": "Ein Kind sieht etwas Komisches, klickt weg und sagt Bescheid.",
+   "spiel": null
+  },
+  "sicher-ueber-die-strasse": {
+   "form": "beides",
+   "grund": "Regeln als Geschichte, Straße überqueren richtig ist prüfbar (siehe Räume und Wege).",
+   "geschichte": "Warum man bei Grün geht und den Helm trägt.",
+   "spiel": "Ampel und Zebrastreifen richtig überqueren."
+  },
+  "feuer-notruf": {
+   "form": "beides",
+   "grund": "Ruhiges Vorbild, Notrufnummer ist prüfbarer Kern.",
+   "geschichte": "Ein Kind holt bei Feuer einen Erwachsenen.",
+   "spiel": "Notrufnummer 112 wählen."
+  },
+  "schwimmen-aufsicht": {
+   "form": "geschichte",
+   "grund": "Sachmoment, Regel als Vorbild.",
+   "geschichte": "Kinder gehen mit Aufsicht schwimmen.",
+   "spiel": null
+  },
+  "bescheid-sagen": {
+   "form": "geschichte",
+   "grund": "Haltung, keine Fremdenfigur, keine Abfrage.",
+   "geschichte": "Ein Kind sagt zu Hause, wohin es geht und mit wem.",
+   "spiel": null
+  },
+  "verlaufen": {
+   "form": "geschichte",
+   "grund": "Ruhiges Vorbild mit Helfer in Sicht, nie gekonnt.",
+   "geschichte": "Ein Kind verläuft sich, fragt eine Helferin und findet zurück.",
+   "spiel": null
+  }
+ }
+}

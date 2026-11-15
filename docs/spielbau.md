@@ -123,10 +123,10 @@ Diese Mittel sind gut, wenn sie dem Spielkern dienen, und weg, wenn sie ihn verd
 sie da sind, nur, ob sie stören.
 
 - **Keine Sachwelt im Spiel** (Christian, 2026-11-15): Sachthemen und ihre Fakten leben in Geschichten und
-  Sachspielen (`docs/geschichten.md`); Heimatwelt, Sachgrund und Geschichten-Stufen eines Katalog-Eintrags gelten nicht.
+  Sachspielen (`docs/geschichten.md`); Heimatwelt, Sachgrund und Stufen eines Katalog-Eintrags gelten nicht.
 - **Figur der Runde legt vor** (L5): die Einführung macht es einmal vor; nicht jede Runde.
-- **Stimmungen sanft und abenteuer** (§9.3, Spielkatalog 4.2): Der erste Bau ist auf jeder Stufe gleich ruhig
-  spielbar; eine Komplikation oder ein Bogen kommt erst in einem späteren Ausbau **(Annahme)**.
+- **Keine Stufen** (grundsaetze.md §9.3, Christian 2026-11-15): ein Spiel hat genau eine Fassung für alle Kinder;
+  höchstens eine kleine Komplikation, rasch gelöst.
 - **Mach-mit-Moment** (L13, Spielkatalog 4.3, Christian): ein Satz in der Pause, sonst nichts.
 - **Listen, Sammelanzeigen, Zweitfiguren:** nur, wenn das Spiel ohne sie nicht verständlich wäre.
 - **Neue Lernzeichen** (Bedeutung für alle Spiele): erlaubt, aber dann wird nicht gemergt, sondern Christian gefragt

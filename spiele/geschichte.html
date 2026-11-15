@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geschichte</title>
+<link rel="stylesheet" href="rahmen/seite.css">
+<style>
+/* Eine Geschichte (docs/geschichten.md §4): geschichte.html?id=<id>[&weiter=<pfad>][&eltern]. Kopfleiste mit Haus und Titel,
+   darunter <ls-geschichte>; nach „Fertig“ gilt sie als gelesen (Elternbereich „Sachthemen“, nicht mit eltern = Vorschau)
+   und es geht zu weiter (relativer Pfad in spiele/) oder zur Startseite.
+   Dahinter die Kulisse der Geschichte (rahmen/kulissen/), ohne Kulisse dieselbe dezente Landschaft wie überall. */
+body { -webkit-user-select: none; user-select: none; }
+.hintergrund, .hintergrund svg { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.hintergrund .kulisse { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; display: block; }
+.geschichte-seite { position: fixed; top: var(--ls-leiste-hoehe); bottom: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem); }
+</style>
+</head>
+<body>
+<div class="hintergrund" id="hintergrund"></div>
+<ls-leiste id="leiste" spiel="geschichte" titel="Geschichte"></ls-leiste>
+<main class="geschichte-seite"><ls-geschichte id="geschichte"></ls-geschichte></main>
+
+<script type="module">
+import { sperreTouch, protokoll } from "./lernspiel.js";
+import { merkeGeschichteGelesen } from "./lernsteuerung.js";
+import "./rahmen/leiste.js";
+import "./rahmen/geschichte.js";
+import { hintergrundSvg } from "./start/hintergrund.js";
+
+document.getElementById("hintergrund").innerHTML = hintergrundSvg();
+sperreTouch();
+
+const suche = new URLSearchParams(location.search);
+const id = suche.get("id") ?? "";
+// Nur ein Pfad innerhalb von spiele/ (kein Schema, kein //, kein ..), sonst die Startseite.
+const roh = suche.get("weiter") ?? "";
+const weiter = /^[a-z0-9][\w\-./]*(\?[\w\-=&.%]*)?$/i.test(roh) && !roh.includes("..") && !roh.includes("//") ? roh : "index.html";
+
+const leiste = document.getElementById("leiste");
+const geschichte = document.getElementById("geschichte");
+if (/^[a-z0-9-]+$/.test(id)) geschichte.setAttribute("src", `geschichten/${id}/geschichte.json`);
+else geschichte.setAttribute("src", "geschichten/-/geschichte.json");   // zeigt „geht gerade nicht“
+
+let gefunden = false;
+geschichte.geladen.then((g) => {
+  if (!g) return;
+  gefunden = true;
+  leiste.setAttribute("titel", g.titel);
+  if (typeof g.fach === "string") leiste.setAttribute("fach", g.fach);
+  document.title = g.titel;
+  // Kulisse statt des lila Standardhintergrunds (Christian 2026-11-15); die Kopfleiste lässt sie durchscheinen.
+  const k = geschichte.kulisse;
+  if (k) {
+    const bild = document.createElement("img");
+    bild.src = k.svg; bild.alt = ""; bild.className = "kulisse";
+    document.getElementById("hintergrund").replaceChildren(bild);
+    document.body.style.background = k.grund;
+    leiste.style.setProperty("--fach-toenung", "transparent");
+  }
+});
+geschichte.addEventListener("fertig", async () => {
+  if (gefunden && !suche.has("eltern")) {
+    try { await merkeGeschichteGelesen(id); } catch (e) { protokoll("Geschichte gelesen: " + e); }
+  }
+  location.href = weiter;
+});
+</script>
+</body>
+</html>

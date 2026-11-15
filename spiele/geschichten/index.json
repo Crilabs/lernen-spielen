@@ -1,0 +1,54 @@
+{
+  "hinweis": "Alle Geschichten (docs/geschichten.md §3) für Seiten, die keine Ordner auflisten können (Bibliothek, Elternbereich „Sachthemen“). tests/geschichten.test.mjs prüft, dass die Liste zu den Ordnern passt. Je Geschichte gibt es genau eine Fassung (Christian 2026-11-15).",
+  "geschichten": [
+    {
+      "id": "haustiere",
+      "titel": "Mia zieht ein",
+      "art": "sachgeschichte",
+      "welt": "haustiere",
+      "familie": null
+    },
+    {
+      "id": "zehnerpaare",
+      "titel": "Zehn Meisen, zwei Zweige",
+      "art": "struktur",
+      "welt": null,
+      "familie": "zehnerpaare"
+    },
+    {
+      "id": "hund",
+      "titel": "Kalle und der rote Ball",
+      "art": "sachgeschichte",
+      "welt": "haustiere",
+      "familie": null
+    },
+    {
+      "id": "biene",
+      "titel": "Lotta folgt dem Tanz",
+      "art": "sachgeschichte",
+      "welt": "wiese-und-hecke",
+      "familie": null
+    },
+    {
+      "id": "wal",
+      "titel": "Ole taucht hinterher",
+      "art": "sachgeschichte",
+      "welt": "tiere-der-erdteile",
+      "familie": null
+    },
+    {
+      "id": "elefant",
+      "titel": "Nila und der große See",
+      "art": "sachgeschichte",
+      "welt": "tiere-der-erdteile",
+      "familie": null
+    },
+    {
+      "id": "dinosaurier",
+      "titel": "Selin malt einen Dinosaurier",
+      "art": "sachgeschichte",
+      "welt": "dinosaurier",
+      "familie": null
+    }
+  ]
+}

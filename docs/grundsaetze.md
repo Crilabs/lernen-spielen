@@ -381,51 +381,47 @@ Familien und Hautfarben abzubilden ist Abbildung der Wirklichkeit und keine Part
    Verfolgung während einer Aufgabe. Das verbindet N5/N6/N7 mit 9.1.
 5. **Sieben Sicherheitssignale:** (1) Ein freundlicher Helfer ist sichtbar oder in Rufweite. (2) Das Kind
    löst (siehe 2). (3) Humor bricht Anspannung. (4) Das Problem löst sich in derselben Szene. (5) Helle
-   Farben, ruhige Musik; Dunkel oder Moll nur in der Stufe „Abenteuer“ und nur kurz. (6) Kein Wesen ist
+   Farben, ruhige Musik; Dunkel (Abend, Dämmerung) oder Moll nur kurz und nie als Bedrohung. (6) Kein Wesen ist
    „böse“. (7) Jede Geschichte und jede Runde endet in Ruhe, im Hellen, ohne offenen Ausgang.
 6. **Keine Schockeffekte:** keine plötzlichen lauten Geräusche, keine Sprünge ins Bild, keine
    bedrohliche Anbahnungsmusik.
 7. **Kontrolle beim Kind, ohne Nachteil:** Ton aus, Überspringen und ein Knopf „Wie geht es aus?“
    (verrät das gute Ende) sind immer erreichbar und kosten nichts.
-8. **Themen, die nie Spannungsquelle sind** (in keiner Stufe): Tod, Verlust oder Bedrohung von Eltern,
+8. **Themen, die nie Spannungsquelle sind:** Tod, Verlust oder Bedrohung von Eltern,
    Kindern oder Tierkindern, Verlassenwerden, Krankheit, Strafen, Mobbing, Krieg, Naturkatastrophen,
    Entführung, Einbruch. Ab etwa 10 dürfen Tod oder Krankheit höchstens als **Sachthema außerhalb der
    Spielgeschichte** vorkommen (z. B. ein Tier im Herbst, Lebenszyklus), sachlich und ruhig.
-   **Natur-Härten** (Nahrungsketten, Dinosaurier, Vulkane) regelt 9.3 nach Stufe. Ausnahme vom „ab etwa 10“:
-   In der Stufe „Abenteuer“ dürfen das Aussterben der Dinosaurier und ein Vulkanausbruch als ruhiger
-   Sachmoment in der Pause vorkommen, nie in der Spielgeschichte, nie mit betroffenen Menschen oder
-   Tierkindern [E].
+   **Natur-Härten** (Nahrungsketten, Dinosaurier, Vulkane) regelt 9.3. Ausnahme vom „ab etwa 10“: Das
+   Aussterben der Dinosaurier und ein Vulkanausbruch dürfen als ruhiger Sachmoment vorkommen (in der Pause oder
+   in einem Buch der Bibliothek), nie als Spannungsquelle, nie mit betroffenen Menschen oder Tierkindern [E].
 9. **Märchen werden bearbeitet:** Motive ja (suchen, finden, helfen, verwandeln, Rätsel, das kluge
    Kleine), Grausamkeiten nein (Fressen, Verbrennen, Verstoßen, Strafen, böse Stiefmutter als Typ). Keine
    Hexe als Bösewicht (siehe 8: Magie freundlich). Das passt zu „Fantasie im Rahmen“ (4).
 10. **Die Hauptfigur bleibt sicher:** Die Hauptfigur gerät nie selbst in echte Gefahr; sie ist der
     sichere Hafen, von dem aus erkundet wird.
 
-### 9.3 Stufen je Kind
+### 9.3 Eine Grenze für alle Kinder
 
-Was ein Kind verträgt, hängt mehr vom Kind ab als vom Alter. Deshalb gibt es eine **Einstellung je Profil
-in der Elternansicht** mit drei Stufen [E]. Das Alter liefert nur den Vorschlag:
+**Keine Stufen** (Christian, 2026-11-15): Kleinere Schwierigkeiten halten Grundschulkinder aus. Es gibt keine
+Einstellung je Profil und keine Fassungen einer Geschichte; jede Geschichte und jedes Spiel hat genau eine Fassung,
+die für alle Kinder passt. Erfahrung aus den ersten Büchern der Bibliothek: Ruhigere Fassungen strichen genau den
+Moment, der Spannung und Wissen trägt; eine aufregendere Fassung hielt kein Prüfer für nötig [E].
 
-| Stufe | Für wen (Vorschlag) | Was vorkommt |
-|---|---|---|
-| **Ruhig** | empfindsame Kinder, jedes Alter | Suchen, Helfen, Sortieren, Wetter. Keine Komplikation, kein Dunkel. |
-| **Sanft** (Standard) | 6–8 Jahre | dazu eine kleine Komplikation, sofort gelöst (der Schlüssel ist weg – das Kind sieht ihn schon). Ab 8: mehrstufige Probleme mit kleinem Rückschlag ohne Schuld (die Brücke hält beim ersten Mal nicht), kurzes Verlaufen *mit* Freund. |
-| **Abenteuer** (nur auf Wunsch) | etwa 8–10 Jahre | dazu milder Grusel mit komischer Auflösung (Nebel, ein Geräusch, es ist eine Eule), etwas längere Bögen über mehrere Runden, jede Runde endet in Ruhe. Ab 10: Dilemmata ohne Gewalt, Sach- und Umweltprobleme. |
+| Was vorkommt | Beispiel |
+|---|---|
+| eine kleine Komplikation aus der Wirklichkeit, rasch gelöst (meist auf der nächsten Seite) | die Katze ist verschwunden – sie liegt im Karton; das Kalb rutscht am Ufer ab – die Tante schiebt es hinauf |
+| ab etwa 8: ein mehrstufiges Problem mit kleinem Rückschlag ohne Schuld | die Brücke hält beim ersten Mal nicht |
+| milder Grusel nur mit sofortiger, komischer oder staunender Auflösung, nie als Spannungsquelle | ein Geräusch im Nebel – es ist eine Eule |
 
-- Zu **jeder Geschichte gibt es einen Satz Vorschau für Eltern**, was passiert und wie es ausgeht.
-- **Warnzeichen** für Eltern (in der Elternansicht erklärt): das Kind überspringt oft, schaltet den Ton
-  ab, bricht Geschichten ab, meidet ein Spiel, spricht abends darüber. Dann eine Stufe ruhiger.
-  *Annahme:* Die App kann häufiges Überspringen still mitzählen und in der Elternansicht zeigen, ohne das
-  Kind darauf anzusprechen.
-- **Umsetzung:** gestellt im Elternbereich (Einstellung `geschichten` am Profil, Standard „Sanft“); Spiele lesen
-  sie mit `geschichtenStufe()` (`docs/bedienung.md` §9, „Für Spiele“).
-- Eine Stufe stellt nur der Erwachsene um, nicht das Spiel von selbst. Das Kind kann aber jederzeit
-  überspringen (9.2, Nr. 7).
-- **Natur-Härten nach Stufe** [E] (Feld `stufe_ab` der Welten im Lernplan):
-  *Ruhig:* Nahrungsketten, Dinosaurier und Vulkane kommen nicht vor. *Sanft:* sachlich ohne Szene –
-  Nahrungskette als Pfeil im Schaubild, ohne Jagd und ohne benanntes Opfer; Dinosaurier als Zeitleiste,
-  Größe und Nahrung; Vulkane als Erdinneres. *Abenteuer:* zusätzlich Aussterben und Ausbruch, nur als
-  Sachmoment (9.2 Nr. 8).
+- **Natur-Härten** sachlich, ohne Szene [E]: Nahrungsketten als Pfeil im Schaubild, ohne Jagd und ohne benanntes
+  Opfer; kein Leid, keine Verletzung, kein Tod im Bild. Dinosaurier mit Zeitleiste, Größe, Nahrung und Fundstücken;
+  Aussterben der Dinosaurier und Vulkanausbruch nur als ruhiger Sachmoment, nie mit betroffenen Menschen oder
+  Tierkindern (9.2 Nr. 8).
+- **Heikle Themen** (Gewitter, Feuer, „Sicher und stark“) bekommen einen Satz für Eltern (`eltern` der Welt bzw.
+  Vorschau im Elternbereich), keine zweite Fassung.
+- **Warnzeichen** für Eltern bleiben ein Gesprächsanlass, keine Einstellung: Überspringt ein Kind oft, meidet es ein
+  Spiel oder spricht es abends darüber, reden Erwachsene in Ruhe darüber. Das Kind kann jede Geschichte jederzeit
+  überspringen (9.2 Nr. 7).
 
 ---------------------------------------------------------------------------------------------------
 ## 10. Kosmik-Schicht – Sachthemen quer zu den Spielen
@@ -492,9 +488,9 @@ nicht; sie würde die Kategorie zum Thema machen (6).
 - [ ] **Fachbegriffe** nach 5.1; Proben statt Regeln mit Verfallsdatum.
 - [ ] **Bilder und Sätze** gegen 6.1–6.3 geprüft; Bestand ausgezählt.
 - [ ] **Sprache** nach 7; **Neutralität** nach 8.
-- [ ] **Geschichte** nach 9: Spannungsquelle ohne Gewalt, Sicherheitssignale, Stufe festgelegt, Elternvorschau-Satz.
+- [ ] **Geschichte** nach 9: Spannungsquelle ohne Gewalt, Sicherheitssignale, Grenze nach 9.3, Elternvorschau-Satz.
 - [ ] **Elternansicht:** beschreibend, von Stärken aus, kein Vergleich, keine Defizitwörter.
-- [ ] **Sachthema** an einem der drei Plätze (K1), Fakt aus dem geprüften Faktensatz der Welt (K4), Stufe nach 9.3.
+- [ ] **Sachthema** an einem der drei Plätze (K1), Fakt aus dem geprüften Faktensatz der Welt (K4), Natur-Härten nach 9.3.
 - [ ] **Soziale Szene / Schutz:** gewünschtes Verhalten gezeigt, Konflikt kurz (K12); Rechte statt Warnung (K14).
 
 ---------------------------------------------------------------------------------------------------

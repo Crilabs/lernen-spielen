@@ -1,0 +1,144 @@
+{
+ "id": "zehnerpaare",
+ "titel": "Zehn Meisen, zwei Zweige",
+ "art": "struktur",
+ "welt": null,
+ "familie": "zehnerpaare",
+ "fach": "mathe",
+ "kulisse": "garten",
+ "klasse": 1,
+ "quellen": [
+  {
+   "fakt": "Schwanzmeisen leben im Winter in Trupps von etwa 5 bis 30 Vögeln und schlafen eng zusammengekuschelt.",
+   "quelle": "BirdLife Österreich, Artporträt Schwanzmeise (Suchauszug); https://www.discoverwildlife.com/animal-facts/birds/5-things-you-didnt-know-about-roosting-birds, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Sie schlafen dicht nebeneinander auf Zweigen in dichtem Gebüsch, nicht in Höhlen.",
+   "quelle": "https://www.discoverwildlife.com/animal-facts/birds/5-things-you-didnt-know-about-roosting-birds; Der Vogelzug 7 (1936) 175–179, https://www.zobodat.at/pdf/Der-Vogelzug_7_1936_0175-0179.pdf, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Eine Schwanzmeise, die allein schläft, verliert über Nacht mehr Gewicht (Wärme) als eine in der Gruppe.",
+   "quelle": "https://www.discoverwildlife.com/animal-facts/birds/5-things-you-didnt-know-about-roosting-birds (BBC Wildlife), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Schwanzmeisen sind sehr klein und rundlich mit einem Schwanz, der länger ist als der Körper.",
+   "quelle": "https://www.nabu.de/tiere-und-pflanzen/voegel/portraets/schwanzmeise/, abgerufen 2026-11-15"
+  }
+ ],
+ "seiten": [
+  {
+   "text": "Es ist Winter. Ela und Kofi schauen aus dem Fenster. In der Hecke wohnen zehn Schwanzmeisen. Sie sind klein und rund und haben einen langen Schwanz.",
+   "bild": "bilder/01.webp"
+  },
+  {
+   "text": "Den ganzen Tag suchen die Meisen Futter. Am Abend wird es kalt. Dann suchen sie einen Schlafplatz in der Hecke.",
+   "bild": "bilder/02.webp"
+  },
+  {
+   "text": "Am ersten Abend sitzt eine Meise auf dem linken Zweig. Neun drängen sich auf dem rechten Zweig zusammen.",
+   "bild": "bilder/03.webp",
+   "zaehlung": [
+    1,
+    9
+   ]
+  },
+  {
+   "text": "Die eine Meise plustert sich auf. Allein wird ihr schneller kalt. Eng beieinander bleiben die Meisen warm.",
+   "bild": "bilder/04.webp"
+  },
+  {
+   "text": "Am nächsten Abend sitzen zwei Meisen links. Acht kuscheln sich rechts aneinander.",
+   "bild": "bilder/05.webp",
+   "zaehlung": [
+    2,
+    8
+   ]
+  },
+  {
+   "text": "Dann sitzen drei links und sieben rechts. Rechts ist nicht mehr ganz so eng.",
+   "bild": "bilder/06.webp",
+   "zaehlung": [
+    3,
+    7
+   ]
+  },
+  {
+   "text": "Heute sitzen vier Meisen links. Den rechten Zweig verdeckt ein Ast voller Schnee. Was glaubst du: Wie viele sitzen rechts?",
+   "bild": "bilder/07.webp",
+   "zaehlung": [
+    4,
+    6
+   ],
+   "verdeckt": 1,
+   "frage": true
+  },
+  {
+   "text": "Ein Windstoß weht den Schnee vom Ast. Rechts sitzen sechs Meisen. Wieder sind alle zehn beisammen.",
+   "bild": "bilder/08.webp",
+   "zaehlung": [
+    4,
+    6
+   ]
+  },
+  {
+   "text": "Am nächsten Abend sitzen fünf links und fünf rechts. Beide Zweige sind gleich voll.",
+   "bild": "bilder/09.webp",
+   "zaehlung": [
+    5,
+    5
+   ]
+  },
+  {
+   "text": "In der Nacht fällt leise Schnee. Die Meisen rücken noch enger zusammen. Keine sitzt allein.",
+   "bild": "bilder/10.webp",
+   "zaehlung": [
+    5,
+    5
+   ]
+  },
+  {
+   "text": "Ela und Kofi malen alle Abende untereinander. Jede Reihe ist gleich lang. In jeder Reihe sitzen zehn.",
+   "szene": [
+    {
+     "figur": "ela",
+     "x": 13,
+     "haltung": "zeigen",
+     "aufgabe": "vorzeigen"
+    },
+    {
+     "paare": [
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       5
+      ]
+     ],
+     "x": 50,
+     "y": 29
+    },
+    {
+     "figur": "kofi",
+     "x": 87,
+     "blick": "links",
+     "haltung": "staunen",
+     "aufgabe": "wundern"
+    }
+   ]
+  }
+ ]
+}

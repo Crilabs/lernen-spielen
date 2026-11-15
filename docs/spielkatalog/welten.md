@@ -43,7 +43,7 @@ Grundlage: `docs/grundsaetze.md` §9 und §10 (K1–K15), `docs/figuren.md`, Wel
 **Doppel im selben Fach** (bewusst stehen gelassen)
 - was-pflanzen-brauchen: R08 Fläche und R09 Umfang (zum Mischen gewollt). jahreskreis: M27 und M49. karten: R11 und R13. tuerme-bauen: M28 und R12.
 
-**Stufen der Welten** (`stufe_ab` sanft)
+**Stufen der Welten** (`stufe_ab` sanft) – *überholt seit 2026-11-15: keine Stufen, Feld `stufe_ab` entfällt (`grundsaetze.md` §9.3)*
 - gebirge-vulkane (M09): auf „ruhig“ nur Berge und Höhen, das Erdinnere ab „sanft“ in der Pause, Ausbruch nur in der Pause auf „abenteuer“.
 - wer-frisst-was (G04): auf „ruhig“ nur Pflanzenfutter, ab „sanft“ Pfeil im Schaubild ohne Jagd und ohne Opfer.
 - dinosaurier: nicht tragbar, siehe Abschnitt 4.

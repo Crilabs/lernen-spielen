@@ -1,0 +1,74 @@
+[
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 250,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "tiere.png",
+  "usage": {
+   "input_tokens": 250,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 250
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1622
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 256,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zahlen-buchstaben.png",
+  "usage": {
+   "input_tokens": 256,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 256
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1628
+  }
+ },
+ {
+  "datum": "2026-11-15",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 293,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zahlen-buchstaben.png",
+  "usage": {
+   "input_tokens": 293,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 293
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1665
+  }
+ }
+]

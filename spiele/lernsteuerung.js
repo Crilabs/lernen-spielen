@@ -16,8 +16,10 @@
 //   Aufgabe { f, t, h: [], ms: [], g?: 1, kk?: 1 }
 //           f = Fach, t = Tag der letzten Einstufung, h = letzte Ergebnisse, ms = letzte Antwortzeiten,
 //           g = einmal gelernt, kk = einmal auf Stufe kopf ohne Hilfe und nicht mühsam gelöst.
-//   welten  { [weltId]: { seit } }: Sachwelten, in denen das Kind gespielt hat (seit = zuerst gesehen am);
-//           geschrieben von runde().melde, gelesen von elternWelten (Spec 2026-11-15-sachwelten-uebersicht).
+//   sachthemen { geschichten: { [id]: { am } }, spiele: { [id]: { am } } }: Geschichten, die das Kind bis „Fertig“
+//           gelesen hat (merkeGeschichteGelesen, geschichte.html), und Sachspiele (spiele.json mit sachwelt), in denen
+//           es gespielt hat (runde().melde); am = zuerst am. Gelesen von der Bibliothek und dem Elternbereich
+//           (Spec 2026-11-15-bibliothek). Das alte Feld welten (Heimatwelt der Spiele) fällt beim Laden weg.
 //
 // Sitzung (eine Runde in einem Spiel):
 //   { spiel, thema, modus, stufe, probe: key[]|null, gezeigt, wieder: [{key, ab}], start, max, ereignis, letzte }
@@ -231,9 +233,14 @@ export function neuerStand() {
 export function migriereStand(roh) {
   if (!istObjekt(roh)) return neuerStand();
   const s = { ...roh, version: 1, themen: {}, aufgaben: {}, verlauf: Array.isArray(roh.verlauf) ? roh.verlauf : [] };
-  if ("welten" in roh) {
-    s.welten = {};
-    for (const [id, e] of Object.entries(istObjekt(roh.welten) ? roh.welten : {})) if (istObjekt(e) && text(e.seit)) s.welten[id] = { seit: e.seit };
+  delete s.welten; // alte Sachwelten über die Heimatwelt der Spiele (bis 2026-11-15), nicht mehr gültig
+  if ("sachthemen" in roh) {
+    const alt = istObjekt(roh.sachthemen) ? roh.sachthemen : {};
+    s.sachthemen = {};
+    for (const art of SACH_ARTEN) {
+      s.sachthemen[art] = {};
+      for (const [id, e] of Object.entries(istObjekt(alt[art]) ? alt[art] : {})) if (istObjekt(e) && text(e.am)) s.sachthemen[art][id] = { am: e.am };
+    }
   }
   for (const [id, e] of Object.entries(istObjekt(roh.themen) ? roh.themen : {})) {
     if (!istObjekt(e)) continue;
@@ -794,49 +801,35 @@ export function gibFrei(stand, themaId) {
   return stand;
 }
 
-// ---------- Sachwelten im Elternbereich ----------
-// Nur Übersicht, kein „gekonnt“ (grundsaetze K7, 3.3). Spec docs/superpowers/specs/2026-11-15-sachwelten-uebersicht-design.md.
+// ---------- Sachthemen im Elternbereich ----------
+// Sachthemen (Welten im Lernplan) haben eigene Geschichten und Spiele, keine Lernthemen (Christian 2026-11-15).
+// Nur Übersicht, kein „gekonnt“ (grundsaetze K7, 3.3). Spec docs/superpowers/specs/2026-11-15-sachthemen-eltern-design.md.
 
-// Heimatwelt eines Spiels aus spiele.json (karte.welt, sonst welt)
-export function weltDesSpiels(ctx, spielId) {
+const SACH_ARTEN = ["geschichten", "spiele"];
+
+// Sachwelt eines Sachspiels (spiele.json: sachwelt), sonst null
+export function sachweltDesSpiels(ctx, spielId) {
   const s = (ctx?.spiele?.spiele ?? []).find((x) => x.id === spielId);
-  return text(s?.karte?.welt) || text(s?.welt) || null;
+  return text(s?.sachwelt) || null;
 }
 
-// Welt als gesehen merken; das erste Datum bleibt.
-export function merkeWelt(stand, weltId, heute) {
-  if (!weltId) return false;
-  if (!istObjekt(stand.welten)) stand.welten = {};
-  if (stand.welten[weltId]) return false;
-  stand.welten[weltId] = { seit: heute };
+// Geschichte gelesen bzw. Sachspiel gespielt merken (art "geschichten" | "spiele"); das erste Datum bleibt.
+export function merkeSachthema(stand, art, id, heute) {
+  if (!SACH_ARTEN.includes(art) || !id) return false;
+  if (!istObjekt(stand.sachthemen)) stand.sachthemen = {};
+  if (!istObjekt(stand.sachthemen[art])) stand.sachthemen[art] = {};
+  if (stand.sachthemen[art][id]) return false;
+  stand.sachthemen[art][id] = { am: heute };
   return true;
 }
 
-// Welten je Überschrift für die Eltern. naechste = Set der Thema-Ids „als Nächstes“ (aus alsNaechstes).
-// [{ id, name, welten: [{ id, name, beschreibung, eltern, zustand, seit, spiele: [{ id, titel }] }] }]
-//   zustand = "gesehen" | "dran" (ein Lernthema der Welt ist dran) | "naechstes" | "offen"; gesehen geht vor.
-//   Reihenfolge: Überschriften wie im Plan, darin nach Klasse, dann Planreihenfolge.
-//   Lernthemen = welten[].lernthemen ∪ Themen der digitalen Spiele, deren Heimatwelt sie ist.
-export function elternWelten(ctx, stand, naechste = new Set()) {
-  const z = zustaende(ctx, stand);
-  const spiele = ctx?.spiele?.spiele ?? [];
-  const welten = Array.isArray(ctx?.plan?.welten) ? ctx.plan.welten : [];
-  const gruppen = (Array.isArray(ctx?.plan?.ueberschriften) ? ctx.plan.ueberschriften : []).map((u) => ({ id: u.id, name: text(u.name), welten: [] }));
-  const nachId = new Map(gruppen.map((g) => [g.id, g]));
-  const sortiert = welten.map((w, i) => ({ w, i })).sort((a, b) => (a.w.klasse ?? 9) - (b.w.klasse ?? 9) || a.i - b.i);
-  for (const { w } of sortiert) {
-    const g = nachId.get(w.ueberschrift);
-    if (!g) continue;
-    const eigene = spiele.filter((s) => (text(s.karte?.welt) || text(s.welt)) === w.id);
-    const themen = new Set(Array.isArray(w.lernthemen) ? w.lernthemen : []);
-    for (const t of themenVon(ctx)) if (eigene.some((s) => spieleFuer(ctx, t.id).includes(s.id))) themen.add(t.id);
-    const seit = text(stand?.welten?.[w.id]?.seit);
-    const zustand = seit ? "gesehen" : [...themen].some((id) => z[id] === "dran") ? "dran"
-      : [...themen].some((id) => naechste.has(id)) ? "naechstes" : "offen";
-    g.welten.push({ id: w.id, name: text(w.name), beschreibung: text(w.beschreibung), eltern: text(w.eltern), zustand, seit,
-      spiele: eigene.map((s) => ({ id: s.id, titel: text(s.titel) || s.id })) });
-  }
-  return gruppen.filter((g) => g.welten.length);
+// Geschichte als gelesen speichern (geschichte.html nach „Fertig“, nicht in der Vorschau der Eltern).
+export async function merkeGeschichteGelesen(id, heute = echteUhr().heute) {
+  const stand = await ladeStand();
+  if (!merkeSachthema(stand, "geschichten", id, heute)) return false;
+  speichere(STAND_KEY, stand);
+  await sofortSpeichern();
+  return true;
 }
 
 // ---------- Runde (Async-Schicht für die Spiele) ----------
@@ -908,7 +901,7 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
     },
     melde(key, { ok, hilfe = 0, ms } = {}) {
       const ereignis = verbucheErgebnis(ctx, stand, sitzung, key, { ok, hilfe, ms, heute: uhr().heute, rnd });
-      merkeWelt(stand, weltDesSpiels(ctx, spielId), uhr().heute); // Sachwelt gesehen (Elternbereich „Sachwelten“)
+      if (sachweltDesSpiels(ctx, spielId)) merkeSachthema(stand, "spiele", spielId, uhr().heute); // Elternbereich „Sachthemen“
       sichere();
       return ereignis;
     },

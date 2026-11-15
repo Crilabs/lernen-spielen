@@ -110,29 +110,13 @@ Jedes der 138 Spiele hat alle drei Stimmungen (Abschnitt 4.2).
 - Die Zuordnung steht in der Übersicht (Abschnitt 5), Sachgrund und Geschichte in [`welten.md`](spielkatalog/welten.md).
 - **Folge für `grundsaetze.md`:** K9 („Das Kind wählt die Welt“) wird ersetzt (Abschnitt 8).
 
-### 4.2 Stimmung: ruhig, sanft, abenteuer (Christian)
+### 4.2 Stimmung: eine Fassung für alle (Christian, 2026-11-15)
 
-Die Stufen aus `grundsaetze.md` §9.3 (Einstellung `geschichten` je Profil) **passen das Spiel an, sie sind kein
-Filter auf Spiele.** Jedes Spiel ist auf jeder Stufe spielbar. Es ändern sich nur Bogen und Szene, nie die
-Lernhandlung.
-
-- **Jedes Spiel hat alle drei Stufen (Annahme).** Die frühere Einteilung in „ruhig fest“ und „anpassbar“ entfällt.
-  Die Gründe für „ruhig fest“ („Ordnen trägt keinen Bogen“, „Hörarbeit braucht Stille“) galten dem Moment der Aufgabe.
-  Der ist auf jeder Stufe still (K1, 9.2 Nr. 4). Der Bogen liegt davor und danach.
-- **Was die Stufen heißen:**
-  - *ruhig:* Anlass und Ziel ohne Komplikation, kein Dunkel. Auch hier gibt es eine Frage, die das Kind beantworten
-    will (4.7).
-  - *sanft* (Standard): dazu eine kleine Komplikation, die in derselben Szene gelöst wird.
-  - *abenteuer* (nur auf Wunsch): ein Bogen über mehrere Runden mit einer Entdeckung oder einem milden Rätsel, die
-    Auflösung ist komisch oder zum Staunen.
-- **Wo die Stufe wirkt:** in der Einführung, in der Wirkung einer Antwort, am Rundenende und in der Pause.
-  Aufgabe, Material, Hilfe-Leiter und Schwierigkeit sind auf allen Stufen gleich.
-- **Bogen über mehrere Runden:** Jede Runde endet abgeschlossen, in Ruhe und im Hellen, ohne offenen Ausgang
-  (9.2 Nr. 5). Hört das Kind auf, wartet der Bogen ohne Verlust und ohne Hinweis (N6).
-- **Schutz-Welten und Gefühlsfragen** (S11, S12, S14, S17, G09, L01, L09, Z09, R01): Die Stufe ändert nur den
-  Rahmen (Aufführung, Fest, Rallye), nie die Botschaft und nie in Richtung Bedrängnis. In R01 geht auf keiner Stufe
-  ein Kind verloren (9.2 Nr. 8).
-- Die drei Stufen je Spiel stehen in [`welten.md`](spielkatalog/welten.md) und wortgleich im Eintrag des Spiels.
+Die drei Stufen ruhig, sanft und abenteuer **entfallen** (`grundsaetze.md` §9.3: keine Stufen, keine Einstellung
+`geschichten`). Jedes Spiel hat genau eine Fassung: Anlass und Ziel mit höchstens einer kleinen Komplikation, die in
+derselben Szene gelöst wird; die Lernhandlung bleibt still (K1, 9.2 Nr. 4). Schutz-Welten und Gefühlsfragen: der
+Rahmen nie in Richtung Bedrängnis; in R01 geht kein Kind verloren (9.2 Nr. 8). Die Stufen-Angaben in
+[`welten.md`](spielkatalog/welten.md) und in älteren Einträgen sind überholt; es gilt die Fassung „sanft“.
 
 ### 4.3 Mach mit statt Elternansicht (Christian)
 
@@ -376,10 +360,9 @@ Kleine Wegwerf-Versuche, bevor die betroffenen Spiele geplant werden:
 ## 7a. Offen bei den Welten
 
 **Sieben Welten ohne Heimat:**
-- `vulkanausbruch`, `dinosaurier-aussterben`: laut Welt nur Pausenmoment auf „abenteuer“.
+- `vulkanausbruch`, `dinosaurier-aussterben`: nur ruhiger Sachmoment (Pause oder Buch der Bibliothek, §9.3).
 - `nicht-schuld`: laut Welt „kein eigenes Spiel“. `familien`: laut Welt „nie Thema einer Aufgabe“.
-- `dinosaurier`: §9.3 schließt Dinosaurier auf „ruhig“ aus; als Notlösung nur in M18, wenn Dinosaurier auf
-  „ruhig“ freigegeben werden.
+- `dinosaurier`: seit dem Wegfall der Stufen (§9.3) ohne Einschränkung; Buch „Selin malt einen Dinosaurier“.
 - `beruehrungen`, `hilfe-holen`: passen in kein Spiel mit richtiger Antwort, ohne K13 zu verletzen. Vorschlag: ein
   eigenes kleines Schutz-Spiel ohne richtige Antwort (wäre Spiel 139).
 

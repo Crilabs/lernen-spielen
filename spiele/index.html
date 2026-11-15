@@ -9,7 +9,8 @@
 <style>
 /* Startseite „Karten“ (Spec docs/superpowers/specs/2026-11-14-startseite-karten-design.md).
    Links und in der Mitte die Karten, je Fach ein Abschnitt mit höchstens 5 Spielen und den Karten „Mit echten
-   Dingen“; rechts „Zuletzt gelernt“ (führt ins Regal an das Thema) und der Knopf „Was ich schon kann“ (das Regal).
+   Dingen“; rechts „Zuletzt gelernt“ (führt ins Regal an das Thema), die Knöpfe „Was ich schon kann“ (das Regal) und
+   „Bibliothek“ (Geschichten).
    Dahinter eine dezente Landschaft in Grundtönen. Keine Zahl, keine Zählung, kein Klassenbezug (N5, N8).
    Diese Seite liest den Lernstand nur, sie schreibt ihn nie.
    Spielzeit der Eltern (Spec 2026-11-14-spielzeit): Die Startseite ist nie gesperrt. Ist die Zeit um oder der Tag
@@ -176,10 +177,11 @@ async function start() {
     if (t?.sprich && leiste.ton) sageEinmal(t.sprich, sprich);
     linkKlick(e);
   }));
-  document.querySelector(".regal-knopf").addEventListener("click", (e) => {
-    if (leiste.ton) sageEinmal("Was ich schon kann", () => sprich("Was ich schon kann"));
+  document.querySelectorAll(".regal-knopf").forEach((k) => k.addEventListener("click", (e) => {
+    const wort = k.querySelector("b").textContent;
+    if (leiste.ton) sageEinmal(wort, () => sprich(wort));
     linkKlick(e);
-  });
+  }));
 
   // Mit echten Dingen: Karten führen zur eigenen Seite; gibt es eine Anleitung, steht ihr Titel auf der Karte.
   const echtKarten = [...raster.querySelectorAll("a.karte.echt")];

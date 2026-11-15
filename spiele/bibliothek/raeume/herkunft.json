@@ -1,0 +1,38 @@
+{
+ "tiere.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Flat illustration for the room of a children's library in a learning app for 6- to 10-year-olds, calm modern picture-book style.\nSoft pastel colours on warm paper white, a few clear shapes, soft dark-violet outlines (#3B2A6B), matte paper texture, no gradients\nexcept a soft sky, gentle daylight, no harsh shadows. Tall portrait format that will be shown inside an arched doorway: one clear,\nfriendly motif in the middle and lower part of the image, generous calm space at the top, nothing important at the very edges.\nRealistic proportions, animals look like real animals (no clothes, no human poses, no big cartoon eyes). Calm, bright, nothing scary.\nAbsolutely no text, letters, numbers, logos or signs anywhere in the image. No people, no faces.\n\nScene: Room 'Animals': a calm meadow at the edge of a light forest. In the lower middle a ginger cat sits in the grass, next to it a brown rabbit, a hedgehog under a bush, a robin on a low branch, a fox peeking from behind a tree trunk at the side, a few butterflies. Soft green and sky blue, warm sunlight.",
+  "usage": {
+   "input_tokens": 250,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 250
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1622
+  }
+ },
+ "zahlen-buchstaben.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Flat illustration for the room of a children's library in a learning app for 6- to 10-year-olds, calm modern picture-book style.\nSoft pastel colours on warm paper white, a few clear shapes, soft dark-violet outlines (#3B2A6B), matte paper texture, no gradients\nexcept a soft sky, gentle daylight, no harsh shadows. Tall portrait format that will be shown inside an arched doorway: one clear,\nfriendly motif in the middle and lower part of the image, generous calm space at the top, nothing important at the very edges.\nRealistic proportions, animals look like real animals (no clothes, no human poses, no big cartoon eyes). Calm, bright, nothing scary.\nAbsolutely no text, letters, numbers, logos or signs anywhere in the image. No people, no faces.\nFull-bleed illustration that fills the whole canvas edge to edge: do not draw any frame, border, arch or vignette.\n\nScene: Room 'Numbers and letters': a calm Montessori classroom corner seen from the front. On a low light-wood table: a short staircase of wooden number rods in soft pastel tones, a string of natural wooden beads, wooden geometric shapes (circle, triangle, square), an open book with blank pages, a small blank slate. Behind: a low shelf with baskets and a plant, a tall window with soft daylight. No readable letters or digits at all.",
+  "usage": {
+   "input_tokens": 293,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 293
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 1665
+  }
+ }
+}

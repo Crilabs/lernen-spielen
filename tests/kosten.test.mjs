@@ -155,7 +155,9 @@ test("Bericht: Spiel, geparkt, Prognose mit Spannweite, analoge Spiele getrennt"
 });
 
 test("Bild-Werkzeug: Argumente, usage und Eintrag in kosten.json und herkunft.json", () => {
-  assert.deepEqual(leseArgumente(["--spiel", "x/y", "b.png", "Szene"]), { ziel: "b.png", szene: "Szene", spiel: "x/y" });
+  assert.deepEqual(leseArgumente(["--spiel", "x/y", "b.png", "Szene"]), { ziel: "b.png", szene: "Szene", spiel: "x/y", basis: "szene" });
+  assert.equal(leseArgumente(["--basis", "foto", "b.png", "S"]).basis, "foto");
+  assert.throws(() => leseArgumente(["--basis", "kino", "b.png", "S"]), /basis/);
   assert.equal(leseArgumente(["b.png", "S"]).spiel, "");
   assert.throws(() => leseArgumente(["--spiel"]), /Spielordner/);
   assert.throws(() => leseArgumente(["b.png"]), /Aufruf/);

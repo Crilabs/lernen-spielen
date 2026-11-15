@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bibliothek</title>
+<link rel="stylesheet" href="rahmen/seite.css">
+<style>
+/* Bibliothek (Spec docs/superpowers/specs/2026-11-15-bibliothek-design.md): Halle › Raum › Regal › Buch.
+   Halle: die Räume als hohe Türbögen mit ihrem Raumbild (spiele/bibliothek/raeume/, gezeichnet), darunter der Name;
+   es dürfen viele werden, die Bögen brechen in Reihen um. Raum: Zurück zur Halle, der Bogen klein, der Name groß; darunter
+   die Regale, jedes mit seinen Büchern in Ebenen (so viele Reihen, wie es braucht). Ein Buch steht hochkant: Buchrücken im
+   Schattenton des Raums, Foto, Titelschild; gelesen trägt es ein Lesezeichen in Tinte. Keine Zählung, keine Reihenfolge,
+   nichts gesperrt; Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen (bedienung.md 4.1).
+   Diese Seite liest den Lernstand nur. */
+body { -webkit-user-select: none; user-select: none; }
+.bib { position: absolute; inset: var(--ls-leiste-hoehe) 0 0 0; overflow-y: auto; scrollbar-width: none; }
+.bib::-webkit-scrollbar { display: none; }
+
+/* --- Halle ---------------------------------------------------------------------------------------- */
+.halle {
+  min-height: 100%; display: grid; grid-template-columns: repeat(auto-fit, 34rem); justify-content: center; align-content: center;
+  gap: 4.8rem 5.6rem; padding: 2.4rem 4.4rem 6rem;
+}
+.tuer {
+  display: flex; flex-direction: column; align-items: center; gap: 2rem; padding: 0;
+  background: none; border: 0; color: var(--ls-tinte); font: inherit; cursor: pointer; text-decoration: none;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.tuer > * { pointer-events: none; }
+.bogen {
+  display: block; overflow: hidden; background: var(--ls-papier);
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 999rem 999rem var(--ls-radius-klein) var(--ls-radius-klein);
+}
+.bogen img, .bogen svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+.halle .bogen { width: 34rem; height: 50rem; box-shadow: var(--ls-schatten); }
+.tuer b { font-size: 3.6rem; line-height: 1.1; text-align: center; }
+.tuer:active .bogen { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+.tuer:focus-visible .bogen { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
+
+/* --- Raum ----------------------------------------------------------------------------------------- */
+.raum { min-height: 100%; background: color-mix(in srgb, var(--wand, var(--ls-nebel)) 45%, var(--ls-nebel)); padding-bottom: 8rem; }
+.raum-kopf { display: flex; align-items: center; gap: 3.2rem; padding: 2.4rem 4.4rem 1.6rem 2.4rem; }
+.raum-kopf .bogen { flex: none; width: 10rem; height: 14rem; }
+.raum-kopf h1 { margin: 0; font-size: 6.4rem; line-height: 1; }
+.regale { padding: 0 4.4rem 0 16rem; }
+.regal { margin-top: 4.8rem; }
+.regal h2 { margin: 0 0 2.4rem; font-size: 3.6rem; line-height: 1.1; }
+/* Ebenen: so viele Reihen, wie die Bücher brauchen */
+.ebenen { display: grid; grid-template-columns: repeat(auto-fill, var(--buch-b)); gap: 4rem 3.2rem; --buch-b: 23rem; }
+
+/* --- Ein Buch: hochkant, Buchrücken links, Foto, Titelschild ------------------------------------- */
+.buch {
+  --ruecken: 1.4rem;
+  position: relative; display: flex; flex-direction: column; width: var(--buch-b); height: calc(var(--buch-b) * 1.3);
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 0.6rem 1.6rem 1.6rem 0.6rem;
+  background: var(--ls-papier); box-shadow: var(--ls-schatten); color: var(--ls-tinte); text-decoration: none; cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.buch > * { pointer-events: none; }
+.buch::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: var(--ruecken);
+  background: var(--ruecken-farbe, var(--ls-tinte-weich)); border-right: var(--ls-kontur) solid var(--ls-tinte); border-radius: 0.3rem 0 0 0.3rem; }
+.buch .deckel { position: relative; flex: none; margin-left: calc(var(--ruecken) + var(--ls-kontur)); aspect-ratio: 1; overflow: hidden;
+  border-radius: 0 1.3rem 0 0; background: var(--toenung, var(--ls-papier)); border-bottom: var(--ls-kontur) solid var(--ls-tinte); }
+.buch img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Ohne Foto (Lerngeschichte ohne Bild): Tönung des Fachs mit dem Fachsymbol */
+.buch .zeichen { position: absolute; inset: 0; margin: auto; width: 40%; height: 40%;
+  background: var(--ls-tinte); -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
+.buch .schild { flex: 1; display: flex; align-items: center; margin-left: calc(var(--ruecken) + var(--ls-kontur)); padding: 0 1rem;
+  font-size: 2.1rem; font-weight: 700; line-height: 1.12; }
+.buch .schild span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* Gelesen: ein Lesezeichen in Tinte schaut oben aus dem Buch (mit Kerbe am Ende) */
+.buch .band { position: absolute; top: -1.8rem; right: 2.6rem; width: 2.8rem; height: 9rem; z-index: 1;
+  background: var(--ls-tinte); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 84%, 0 100%); }
+.buch:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+.buch:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.6rem; }
+
+.leer { margin: 4rem; font-size: 3.2rem; color: var(--ls-tinte-weich); }
+
+@media (max-aspect-ratio: 4/3) {
+  .halle .bogen { width: 30rem; height: 44rem; }
+  .halle { grid-template-columns: repeat(auto-fit, 30rem); gap: 4rem 4rem; }
+  .regale { padding-left: 4.4rem; }
+  .ebenen { --buch-b: 22rem; column-gap: 2.8rem; }
+}
+@media (prefers-reduced-motion: reduce) { .tuer:active .bogen, .buch:active { transform: none; } }
+</style>
+</head>
+<body>
+<ls-leiste id="leiste" spiel="ansichten" titel="Bibliothek"></ls-leiste>
+<main class="bib" id="bib"></main>
+
+<script type="module">
+import { sperreTouch, protokoll, esc, linkKlick } from "./lernspiel.js";
+import { ladeLernstand } from "./lernsteuerung.js";
+import { sprich } from "./kern/stimme.js";
+import { sageEinmal } from "./kern/sitzung.js";
+import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
+import "./rahmen/leiste.js";
+import "./rahmen/knopf.js";
+import { bibliothekFuerKind, waehleRaum, buchHref, raumSvg, raumWand, raumSchatten } from "./start/bibliothek.js";
+
+start();
+
+async function start() {
+  sperreTouch();
+  const leiste = document.getElementById("leiste"), feld = document.getElementById("bib");
+  let raeume;
+  try {
+    const [plan, index] = await Promise.all(["bibliothek.json", "geschichten/index.json"].map((d) => fetch(d).then((r) => r.json())));
+    const stand = await ladeLernstand(null, new Date().toLocaleDateString("sv"));
+    raeume = bibliothekFuerKind(plan, index?.geschichten ?? [], stand?.sachthemen?.geschichten ?? {});
+  } catch (e) {
+    protokoll("bibliothek: " + e);
+    feld.innerHTML = `<p class="leer">Die Bibliothek geht gerade nicht auf.</p>`;
+    return;
+  }
+  await leiste.bereit();
+  if (!raeume.length) { feld.innerHTML = `<p class="leer">Hier stehen bald Bücher.</p>`; return; }
+  const sage = (wort) => { if (leiste.ton && wort) sageEinmal(wort, () => sprich(wort)); };
+
+  // Titelbild je Buch: das erste Foto der Geschichte (titelbild hat Vorrang); ohne Foto die Tönung des Fachs.
+  const deckel = new Map();
+  await Promise.all(raeume.flatMap((r) => r.regale.flatMap((rg) => rg.buecher)).map(async (b) => {
+    try {
+      const g = await fetch(`geschichten/${encodeURIComponent(b.id)}/geschichte.json`).then((x) => x.json());
+      const foto = typeof g.titelbild === "string" ? g.titelbild : g.seiten?.find((s) => typeof s.bild === "string")?.bild;
+      deckel.set(b.id, foto ? `geschichten/${b.id}/${foto}` : null);
+    } catch (e) { protokoll("bibliothek, Titelbild " + b.id + ": " + e); }
+  }));
+
+  const bogenHtml = (r) => `<span class="bogen">${r.foto ? `<img src="${esc(r.foto)}" alt="" decoding="async">` : raumSvg(r.bild)}</span>`;
+
+  function halle() {
+    document.title = "Bibliothek";
+    feld.innerHTML = `<nav class="halle" aria-label="Räume">` + raeume.map((r) =>
+      `<a class="tuer" href="?raum=${encodeURIComponent(r.id)}" data-raum="${esc(r.id)}">${bogenHtml(r)}<b>${esc(r.name)}</b></a>`).join("") + `</nav>`;
+    feld.scrollTop = 0;
+    feld.querySelectorAll(".tuer").forEach((t) => t.addEventListener("click", (e) => {
+      e.preventDefault();
+      const r = raeume.find((x) => x.id === t.dataset.raum);
+      sage(r.name);
+      history.pushState({ raum: r.id }, "", `?raum=${encodeURIComponent(r.id)}`);
+      raum(r);
+    }));
+  }
+
+  function buchHtml(b, regal, r) {
+    const foto = deckel.get(b.id);
+    const innen = foto ? `<img src="${esc(foto)}" alt="" loading="lazy" decoding="async">`
+      : FACH_SYMBOLE.has(regal.fach) ? `<i class="zeichen" style="--bild:${bild(`symbole/${regal.fach}.svg`)}"></i>` : "";
+    const ton = !foto && FACH[regal.fach] ? `--toenung:${FACH[regal.fach].toenung};` : "";
+    return `<a class="buch" href="${buchHref(b.id, r.id)}" data-titel="${esc(b.titel)}" aria-label="${esc(b.titel + (b.am ? ", gelesen" : ""))}" style="${ton}">`
+      + `<span class="deckel">${innen}</span>${b.am ? `<span class="band" aria-hidden="true"></span>` : ""}`
+      + `<span class="schild"><span>${esc(b.titel)}</span></span></a>`;
+  }
+
+  function raum(r) {
+    document.title = `${r.name} – Bibliothek`;
+    feld.innerHTML = `<section class="raum" aria-label="${esc(r.name)}" style="--wand:${raumWand(r.bild)};--ruecken-farbe:${raumSchatten(r.bild)}">`
+      + `<div class="raum-kopf"><ls-knopf id="zurueck" symbol="zurueck.svg" name="Alle Räume"></ls-knopf>${bogenHtml(r)}<h1>${esc(r.name)}</h1></div>`
+      + `<div class="regale">` + r.regale.map((rg) => `<section class="regal" data-regal="${esc(rg.id)}" aria-label="${esc(rg.name)}"><h2>${esc(rg.name)}</h2>`
+        + `<div class="ebenen">${rg.buecher.map((b) => buchHtml(b, rg, r)).join("")}</div></section>`).join("") + `</div></section>`;
+    feld.scrollTop = 0;
+    feld.querySelector("#zurueck").addEventListener("click", () => {
+      if (history.state?.raum) history.back();
+      else { history.replaceState(null, "", location.pathname); halle(); }
+    });
+    feld.querySelectorAll(".buch").forEach((a) => a.addEventListener("click", (e) => { sage(a.dataset.titel); linkKlick(e); }));
+  }
+
+  const zeige = () => { const r = waehleRaum(raeume, new URLSearchParams(location.search).get("raum")); r ? raum(r) : halle(); };
+  addEventListener("popstate", zeige);
+  zeige();
+}
+</script>
+</body>
+</html>

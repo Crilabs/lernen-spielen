@@ -1,0 +1,110 @@
+{
+ "id": "dinosaurier",
+ "titel": "Selin malt einen Dinosaurier",
+ "art": "sachgeschichte",
+ "welt": "dinosaurier",
+ "familie": null,
+ "kulisse": "stadt",
+ "klasse": 2,
+ "quellen": [
+  {
+   "fakt": "Plateosaurus lebte vor etwa 210 Millionen Jahren (späte Trias) in Mitteleuropa; das erste vollständige Skelett grub Eberhard Fraas 1912 in Trossingen (Baden-Württemberg) aus, die meisten Funde von dort liegen im Naturkundemuseum Stuttgart.",
+   "quelle": "https://www.naturkundemuseum-bw.de/en/press/detailansicht/new-insights-into-one-of-europes-oldest-dinosaurs (Staatliches Museum für Naturkunde Stuttgart), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Menschen (Homo sapiens) gibt es seit etwa 300 000 Jahren; Dinosaurier wie Plateosaurus lebten Hunderte Millionen Jahre früher. Niemand hat einen lebenden Plateosaurus gesehen.",
+   "quelle": "https://www.mpg.de/11322481/ (Max-Planck-Gesellschaft, Jebel Irhoud), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Bei der Versteinerung wird das Knochenmaterial nach und nach durch Mineralien ersetzt; die Form bleibt erhalten. Museumsskelette sind meist aus mehreren Tieren zusammengesetzt und ergänzt.",
+   "quelle": "https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf (Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Die Hand von Plateosaurus war eine Greifhand mit großen Krallen, die größte am Daumen; der Arm reichte kaum vor die Schulter.",
+   "quelle": "Mallison 2010, The digital Plateosaurus II, Acta Palaeontologica Polonica 55(3), https://www.app.pan.pl/article/item/app20090075.html; https://en.wikipedia.org/wiki/Plateosaurus, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Plateosaurus konnte die Hand nicht so drehen, dass die Handfläche zum Boden zeigt (keine Pronation); die Handflächen blieben zur Seite gedreht, er lief deshalb nur auf den Hinterbeinen (Zweibeiner).",
+   "quelle": "Bonnan & Senter 2007, Special Papers in Palaeontology 77; Mallison 2010, The digital Plateosaurus I, Palaeontologia Electronica 13(2), https://paleo.carleton.ca/2010_2/198/index.html, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Plateosaurus hatte dicke, blattförmige Zähne mit stumpfen Zacken, geeignet zum Zerdrücken von Pflanzen; er fraß vor allem oder nur Pflanzen (vielleicht gelegentlich kleine Tiere).",
+   "quelle": "https://en.wikipedia.org/wiki/Plateosaurus (Abschnitt Ernährung, nach Barrett 2000); https://www.nhm.ac.uk/discover/dino-directory/plateosaurus.html (Natural History Museum London), abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "In der Trias wuchsen an Land Farne, Ginkgos, Nadelbäume und Schachtelhalme; Gras gab es nicht. Blütenpflanzen kamen erst in der Kreidezeit dazu, Gras erst gegen Ende der Kreidezeit.",
+   "quelle": "Senckenberg-Handreichung (wie oben, S. 3–4); https://wissenschaft.de/artikel/vor-212-millionen-jahren (bild der wissenschaft); Prasad et al. 2005, Science 310, https://ui.adsabs.harvard.edu/abs/2005Sci...310.1177P/abstract, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Erwachsene Plateosaurus waren etwa 5 bis 10 Meter lang, oft um 7 Meter; ein Auto (VW Golf) ist etwa 4,3 Meter lang.",
+   "quelle": "https://www.sciencedaily.com/releases/2005/12/051219084817.htm (Universität Bonn, Sander & Klein 2005); https://www.nhm.ac.uk/discover/dino-directory/plateosaurus.html; https://www.angurten.de/is/abmessungen/1679-vw-golf-viii/1.htm, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "In Plateosaurus-Knochen sieht man unter dem Mikroskop Jahresringe wie bei Bäumen; manche Tiere waren mit 12 Jahren ausgewachsen, andere wuchsen mit 27 noch.",
+   "quelle": "Sander & Klein 2005, Science 310: 1800–1802; https://www.sciencedaily.com/releases/2005/12/051219084817.htm, abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Die Farbe der Dinosaurier ist meist nicht erhalten, nur Vermutungen sind möglich; Hautabdrücke sind sehr selten. Von Plateosaurus ist keine Haut bekannt; Verwandte (Sauropodomorphe) hatten vermutlich Schuppen, Federn gab es wohl nur bei Theropoden.",
+   "quelle": "Senckenberg-Handreichung (wie oben, S. 3); Barrett, Evans & Campione 2015, Biology Letters 11, https://pmc.ncbi.nlm.nih.gov/articles/PMC4528472, abgerufen 2026-11-15"
+  }
+ ],
+ "seiten": [
+  {
+   "text": "Selin sitzt im Museum vor einem großen Skelett. Hals und Schwanz sind lang, der Kopf ist klein. Auf dem Schild steht: Plateosaurus, gefunden in Deutschland.",
+   "bild": "bilder/01.webp"
+  },
+  {
+   "text": "Selin hat ihren Malblock dabei. Sie möchte ihn malen, wie er lebendig aussah. Doch vor ihr stehen nur Knochen.",
+   "bild": "bilder/02.webp"
+  },
+  {
+   "text": "Niemand hat je einen lebenden Plateosaurus gesehen. Er lebte lange, lange vor den ersten Menschen. Selin seufzt. Ihr Blatt bleibt leer.",
+   "bild": "bilder/03.webp"
+  },
+  {
+   "text": "Da bringt eine Forscherin eine Kiste. Selin darf einen Knochen hochheben. Er ist schwer wie ein Stein. In Millionen Jahren ist er zu Stein geworden.",
+   "bild": "bilder/04.webp"
+  },
+  {
+   "text": "Selin fängt an zu malen. Sie stellt ihren Plateosaurus auf vier Beine. Die Forscherin legt eine Hand aus Stein daneben. Am Daumen sitzt eine große, krumme Kralle.",
+   "bild": "bilder/05.webp"
+  },
+  {
+   "text": "Selin legt eine Papierhand daneben, so groß wie ihre. So flach kann auch ihre echte Hand liegen. Plateosaurus konnte das nicht. Seine Handflächen blieben immer zur Seite gedreht.",
+   "bild": "bilder/06.webp"
+  },
+  {
+   "text": "Also lief Plateosaurus nur auf seinen Hinterbeinen. Selin radiert die Vorderbeine weg. Jetzt hat er Arme mit Greifhänden.",
+   "bild": "bilder/07.webp"
+  },
+  {
+   "text": "Nun fehlt noch etwas zu fressen. Was glaubst du: Was hat Plateosaurus gefressen?",
+   "bild": "bilder/08.webp",
+   "frage": true
+  },
+  {
+   "text": "Die Forscherin zeigt Selin den Schädel. Die Zähne sehen aus wie kleine Blätter mit Zacken. Damit zerdrückte Plateosaurus wohl Pflanzen.",
+   "bild": "bilder/09.webp"
+  },
+  {
+   "text": "Selin malt eine grüne Wiese unter seine Füße. Doch Gras gab es damals noch nicht. Auch Blumen gab es keine. Selin malt Farne, Schachtelhalme und Nadelbäume.",
+   "bild": "bilder/10.webp"
+  },
+  {
+   "text": "Selin misst das Skelett mit ihren Schritten. Vom Kopf bis zur Schwanzspitze sind es vierzehn. Das ist viel länger als ein Auto.",
+   "bild": "bilder/11.webp"
+  },
+  {
+   "text": "Dann schaut Selin durch ein Mikroskop auf eine Knochenscheibe. Sie hat Ringe wie ein Baumstamm, einen für jedes Jahr. Selin zählt mehr als zwölf Ringe. So alt wurde dieser Plateosaurus mindestens.",
+   "bild": "bilder/12.webp"
+  },
+  {
+   "text": "Im nächsten Saal steht ein Modell in echter Größe. So stellen sich Forschende Plateosaurus heute vor. Er steht auf zwei Beinen zwischen Farnen. Das Modell hat graubraune, schuppige Haut.",
+   "bild": "bilder/13.webp"
+  },
+  {
+   "text": "Welche Farbe er wirklich hatte, weiß niemand. Seine Haut hat nie jemand gefunden. Also wählt Selin selbst: Rotbraun mit hellen Streifen. Unter ihr Bild schreibt sie: So könnte er ausgesehen haben.",
+   "bild": "bilder/14.webp"
+  }
+ ]
+}

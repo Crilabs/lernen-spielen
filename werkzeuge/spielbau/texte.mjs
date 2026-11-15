@@ -29,6 +29,8 @@ const KEINE_SAETZE = new Set(["hinweis", "quelle", "id", "art", "objekt", "zusta
 
 /** Höchstzahl der Wörter je Satz nach Klasse (§3, Annahme). */
 export const satzGrenze = (klasse) => (klasse <= 2 ? 8 : 12);
+/** Geschichten werden vorgelesen (Vorlesebuch-Maß, Christian 2026-11-15, docs/geschichten.md §2). */
+export const satzGrenzeGeschichte = (klasse) => (klasse <= 2 ? 10 : 14);
 /** Budget aller festen Texte in Zeichen (§3). */
 export const BUDGET = 2500;
 
@@ -59,12 +61,11 @@ const woerter = (satz) => satz.replace(/[·=+−\-:]/g, " ").split(/\s+/).filter
 /**
  * Prüft die Texte.
  * @param {string[]} texte
- * @param {{ klasse?: number }} [opt]
+ * @param {{ klasse?: number, grenze?: number }} [opt] grenze überschreibt satzGrenze(klasse) (z. B. Geschichten)
  */
-export function pruefeTexte(texte, { klasse = 2 } = {}) {
+export function pruefeTexte(texte, { klasse = 2, grenze = satzGrenze(klasse) } = {}) {
   const rot = [], hinweise = [];
   const einzeln = [...new Set(texte)];
-  const grenze = satzGrenze(klasse);
   const gesehen = new Set();
   for (const text of einzeln) {
     for (const w of URTEIL) if (wortMuster(w).test(text)) rot.push(`G1 urteilendes Wort „${w}“: „${text}“`);
