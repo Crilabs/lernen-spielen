@@ -71,7 +71,7 @@ trägst die Kosten ein. Du baust nicht selbst und prüfst nicht selbst.
   `docs/spielkatalog/mathe.md`), `{{BILDER}}` (Ordner `b-<runde>/bilder` aus dem Durchspielen dieser Runde),
   `{{STADIUM}}` (Prototyp oder Ausbau), `{{STUFEN}}` (Lernstufen des Spiels), `{{RUNDE}}`, `{{BEFUNDE}}`,
   `{{VORIGE_BEFUNDE}}` (Runde 1 leer; sonst wie im Kopf der Vorlage), `{{BERICHT}}` (Datei des Prüfberichts in der
-  Arbeitsablage, z. B. `runde-a-2.md`), für `pruefung-e.md` außerdem `{{THEMA}}` und `{{FACH}}` (`{{WORKTREE}}` ist
+  Arbeitsablage, z. B. `runde-a-2.md`), für `pruefung-e.md` außerdem `{{THEMA}}`, `{{FACH}}` und `{{DATEI}}` (Dateiname ohne `.md`; Einzelthema = `{{THEMA}}`) (`{{WORKTREE}}` ist
   dort der Worktree der Anleitungen).
 - **Befunde** für „Befunde umsetzen“: die roten Zeilen und kritischen Befunde wörtlich, dazu die Hinweise des Prüfers
   zu grünen Zeilen (als solche gekennzeichnet).
@@ -233,7 +233,8 @@ Erst nach grünem Prüfstand. Bau-Agent (`bauen.md`, **Ausbau**) nach `docs/spie
 ## Mit echten Dingen (eigener Branch)
 
 - **Themen:** die Hauptthemen des Eintrags, die in `spiele/lernplan.json` stehen und für die
-  `spiele/mit-echten-dingen/<fach>/<thema>.md` fehlt **oder** `entwurf: true` ohne `geparkt` im Kopf hat. Höchstens
+  keine Datei in `spiele/mit-echten-dingen/<fach>/` trägt (`thema:` oder `themen:` einer Familie, siehe
+  `.claude/skills/mit-echten-dingen/SKILL.md` §0) **oder** deren Datei `entwurf: true` ohne `geparkt` im Kopf hat. Höchstens
   **5** je Lauf: zuerst vorhandene Entwürfe (`entwurf: true`, sie brauchen nur noch die Prüfung), dann die fehlenden
   Themen der Einstiegsklasse in der Reihenfolge des Eintrags; die übrigen stehen als offen in der Schlussmeldung.
 - **Worktree:** `git -C <Hauptrepo> worktree add <Hauptrepo>/.worktrees/echte-dinge-<id klein> -b

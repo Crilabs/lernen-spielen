@@ -271,7 +271,7 @@ async function lauf(typ, name, groesse, basis) {
       await bild(regal, s("regal", fall));
       await regal.close();
 
-      // --- Mit echten Dingen: Anleitung aus der Datei, sonst der Einzeiler ---------------------------
+      // --- Mit echten Dingen: Anleitung aus der Datei (zerlegen-2 über die Familie mathe/zerlegen.md), sonst der Einzeiler
       if (fall === "leer") {
         const echt = await oeffne(kontext, `${basis}/spiele/echt.html?thema=zerlegen-2`);
         const ea = await echt.evaluate(async () => {
@@ -292,7 +292,7 @@ async function lauf(typ, name, groesse, basis) {
           return { titel, schritte, quellen, vorher, nachher, sichtbar, fach: document.getElementById("leiste").getAttribute("fach") };
         });
         pruefe(F, "Mit echten Dingen: Anleitung mit Titel, Wahl der Situation (eine Form zur Zeit), vier Schritten, ohne Quellen, Fach Mathe; eine Stufe zur Zeit",
-          ea.titel === "Die 2 in zwei Teile legen" && JSON.stringify(ea.vorher) === '["tisch"]' && JSON.stringify(ea.nachher) === '["unterwegs"]'
+          ea.titel === "Eine Zahl in zwei Teile legen" && JSON.stringify(ea.vorher) === '["tisch"]' && JSON.stringify(ea.nachher) === '["unterwegs"]'
           && ea.schritte === 4 && !ea.quellen && ea.fach === "mathe" && JSON.stringify(ea.sichtbar) === '["schwerer"]', JSON.stringify(ea));
         await bild(echt, s("echt", "anleitung"));
         await echt.close();
@@ -401,14 +401,19 @@ async function lauf(typ, name, groesse, basis) {
     }
 
     // --- Mit echten Dingen: Übersicht, Zugang aus dem Elternbereich, PDF je Thema ------------------------
-    // ?entwurf: die Anleitungen sind noch Entwürfe; ohne ?entwurf sieht die App sie nicht (Fall „app“).
+    // ?entwurf: auch Entwürfe; Fall „app“: ohne ?entwurf liest die App nur verzeichnis.json – hier eines ohne Einträge
+    // (als gäbe es nur Entwürfe), dann zeigt sie keine Formen. Die Trennung selbst prüft tests/echte-dinge.test.mjs.
     // „drei“: eine Anleitung mit drei langen Formen (nur im Browser per page.route): Reihenfolge, kleiner gesetzt, keine Form geteilt.
     for (const [fall, stand, such] of [["leer", null, "?entwurf"], ["echt", ECHT, "?entwurf"], ["app", ECHT, ""], ["drei", DREI_STAND, "?entwurf"]]) {
       const F = `${L} echte-dinge ${fall}`;
       const kontext = await kontextFuer(browser, groesse, basis, { stand }, fehlerListe);
       await kontext.addInitScript(() => { window.__gedruckt = 0; window.print = () => { window.__gedruckt++; }; });
+      if (fall === "app") {
+        await kontext.route("**/mit-echten-dingen/verzeichnis.json", (r) => r.fulfill({ contentType: "application/json", body: '{"themen":{}}' }));
+      }
       if (fall === "drei") {
-        await kontext.route("**/mit-echten-dingen/mathe/zerlegen-2.md", (r) => r.fulfill({ contentType: "text/markdown", body: DREI_FORMEN }));
+        // zerlegen-2 gehört zur Familie mathe/zerlegen.md (themen:), die Datei holt ladeAnleitung über das Verzeichnis
+        await kontext.route("**/mit-echten-dingen/mathe/zerlegen.md", (r) => r.fulfill({ contentType: "text/markdown", body: DREI_FORMEN }));
       }
       const seite = await kontext.newPage();
       await seite.goto(`${basis}/spiele/mit-echten-dingen.html${such}`, { waitUntil: "load" });
@@ -431,12 +436,12 @@ async function lauf(typ, name, groesse, basis) {
       if (fall === "leer") {
         pruefe(F, "Übersicht ohne Lernstand: nichts dran, kein PDF-Knopf", JSON.stringify(ue.dran) === "[]" && /Gerade ist kein Thema dran/.test(ue.text) && ue.pdf.length === 0, JSON.stringify(ue.dran));
       } else if (fall === "app") {
-        pruefe(F, "ohne ?entwurf: Entwürfe erreichen die App nicht (keine Formen, kein PDF-Knopf)",
+        pruefe(F, "ohne ?entwurf nur verzeichnis.json: ohne Eintrag keine Formen, kein PDF-Knopf",
           ue.dran?.includes("Die 7 zerlegen") && ue.formenAlle === 0 && ue.pdf.length === 0, JSON.stringify({ ...ue, text: undefined }));
       } else if (fall === "echt") {
-        pruefe(F, "Übersicht: Gerade dran mit den Themen dran (auch ohne Spiel), zuerst aufgeklappt mit beiden Formen",
-          ["Vorwärts zählen", "Die 7 zerlegen", "Silben klatschen"].every((n) => ue.dran?.includes(n)) && ue.offen && ue.formenOffen === 2
-            && JSON.stringify(ue.situationen) === JSON.stringify(["Am Tisch", "In Bewegung"]), JSON.stringify({ ...ue, text: undefined }));
+        pruefe(F, "Übersicht: Gerade dran mit den Themen dran (auch ohne Spiel), zuerst aufgeklappt mit allen seinen Formen",
+          ["Vorwärts zählen", "Die 7 zerlegen", "Silben klatschen"].every((n) => ue.dran?.includes(n)) && ue.offen && ue.formenOffen >= 1
+            && ue.situationen.length === ue.formenOffen, JSON.stringify({ ...ue, text: undefined }));
         pruefe(F, "Übersicht: höchstens ein Thema ohne Spiel je begonnenem Fach unter Gerade dran",
           ue.dran.length <= 3 + 2, JSON.stringify(ue.dran));
         pruefe(F, "Übersicht: Zum Wiederholen die drei zuletzt gekonnten, neueste zuerst",

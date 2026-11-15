@@ -5,7 +5,9 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 
 const { objekte, meldeObjekt, bild, dauerVon, KONTUR } = await import("../spiele/objekte/objekt.js");
-const ARTEN = ["papier", "dose", "papiertonne", "wertstofftonne", "schuhpaar", "muenze", "broetchen", "eierkarton", "gedeck", "einkaufskorb", "ballroehre", "wochenschachtel", "stiftebox", "muffinkarton"];
+// Alle Arten aus dem Ordner (Dateiname = Art), damit ein neues Objekt keinen Eintrag hier braucht.
+const ARTEN = readdirSync(new URL("../spiele/objekte/", import.meta.url))
+  .filter((d) => d.endsWith(".js") && !["objekt.js", "tonne.js"].includes(d)).map((d) => d.slice(0, -3)).sort();
 for (const art of ARTEN) await import(`../spiele/objekte/${art}.js`);
 
 const teileIn = (svg) => new Set([...svg.matchAll(/data-teil="([^"]+)"/g)].map((m) => m[1]));

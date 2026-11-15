@@ -12,7 +12,8 @@ Du prüfst eine Anleitung „Mit echten Dingen“ (kurzes Spiel mit Alltagsdinge
 spielen) für das Thema `{{THEMA}}`. Du hast sie nicht geschrieben und sollst sie nicht verbessern, sondern beurteilen.
 Arbeitsordner `{{WORKTREE}}`: nur lesen, nichts ändern, nichts committen, keine Unteragenten.
 
-**Lies nur:** die Datei `spiele/mit-echten-dingen/{{FACH}}/{{THEMA}}.md`, den Eintrag mit `"id": "{{THEMA}}"` in
+**Lies nur:** die Datei `spiele/mit-echten-dingen/{{FACH}}/{{DATEI}}.md` (beim Einzelthema ist `{{DATEI}}` =
+`{{THEMA}}`; bei einer Familie stehen alle Themen unter `themen:` im Kopf), den Eintrag jedes dieser Themen in
 `spiele/lernplan.json`, `docs/mit-echten-dingen.md` (ganz) und `docs/grundsaetze.md`. Nicht die Git-Historie, keine
 anderen Anleitungen, nicht die Prüfberichte `runde-*.md` in `{{PRUEFUNGEN}}` (die Bilder dort darfst du ansehen). Öffne mindestens eine der Quellen im Kopf der Datei (Web) und vergleiche
 (E7). Für E11: das Objekt aus `bild` im Kopf (`spiele/objekte/<figur>.js`) im genannten Zustand ansehen
@@ -23,7 +24,7 @@ spiele/objekte/<figur>.js`) und mit den Bildern der anderen Anleitungen des Fach
 
 | Nr. | Kriterium |
 |---|---|
-| E1 | trifft genau das Thema und isoliert seine Schwierigkeit |
+| E1 | trifft genau das Thema und isoliert seine Schwierigkeit; bei einer Familie (`themen:`): trägt jedes Thema der Liste |
 | E2 | „Darauf kommt es an“ benennt den Kern sachlich richtig |
 | E3 | nur Alltagsdinge, nichts zu kaufen, sicher |
 | E4 | Anrede „ihr“, kurze Sätze, für ein Kind der Klassenstufe lesbar |

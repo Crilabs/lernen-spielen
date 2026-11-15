@@ -1,5 +1,100 @@
 {
  "themen": {
+  "abstrakte-nomen-gross": {
+   "fach": "schreiben",
+   "name": "Gefühle und Gedanken groß",
+   "titel": "Wörter für Gefühle und Gedanken groß schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eine Karte voller Wünsche"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/abstrakte-nomen-gross.md"
+  },
+  "achterreihe": {
+   "fach": "mathe",
+   "name": "Achterreihe",
+   "titel": "Achter aus gefaltetem Papier",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Merkzettel falten"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/achterreihe.md"
+  },
+  "adjektiv-in-nominalgruppe-klein": {
+   "fach": "schreiben",
+   "name": "Adjektiv vor dem Nomen klein",
+   "titel": "Welche Socke? Das Adjektiv davor bleibt klein",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Socken-Auftrag"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/adjektiv-in-nominalgruppe-klein.md"
+  },
+  "der-die-das": {
+   "fach": "grammatik",
+   "name": "der, die, das",
+   "titel": "Der, die oder das?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Hier ist der Pulli"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Wo ist die Rutsche?"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/der-die-das.md"
+  },
+  "dreierreihe": {
+   "fach": "mathe",
+   "name": "Dreierreihe",
+   "titel": "Drei auf jedem Teller",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Brotzeit verteilen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/dreierreihe.md"
+  },
+  "einmaleins-gemischt": {
+   "fach": "mathe",
+   "name": "Einmaleins gemischt",
+   "titel": "Wie viele Fenster hat das Haus?",
+   "formen": [
+    {
+     "situation": "unterwegs",
+     "name": "Fenster rechnen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/einmaleins-gemischt.md"
+  },
+  "einmaleins-sicher": {
+   "fach": "mathe",
+   "name": "Einmaleins sicher",
+   "titel": "Wie viele für alle?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kochen und auftun"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/einmaleins-sicher.md"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
@@ -10,7 +105,218 @@
      "name": "Kleingeld für die Brötchen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/fuenferreihe.md"
+  },
+  "geschlecht-des-nomens": {
+   "fach": "grammatik",
+   "name": "Männlich, weiblich, sächlich",
+   "titel": "Er, sie oder es?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Einkauf einräumen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Ein Ding, zwei Wörter"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/geschlecht-des-nomens.md"
+  },
+  "geteilt-alle-reihen": {
+   "fach": "mathe",
+   "name": "Geteilt in allen Reihen",
+   "titel": "Karten für alle austeilen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Karten austeilen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/geteilt-alle-reihen.md"
+  },
+  "geteilt-durch-2-5-10": {
+   "fach": "mathe",
+   "name": "Geteilt durch 2, 5 und 10",
+   "titel": "Vom Ersparten einkaufen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Das Geld abzählen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/geteilt-durch-2-5-10.md"
+  },
+  "geteilt-umkehrung-mal": {
+   "fach": "mathe",
+   "name": "Geteilt als Umkehrung von Mal",
+   "titel": "Geteilt und mal gehören zusammen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Erdbeeren teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Joghurt für die Woche"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/geteilt-umkehrung-mal.md"
+  },
+  "nachsilben-ung-heit-keit-nis": {
+   "fach": "schreiben",
+   "name": "-ung, -heit, -keit, -nis: groß",
+   "titel": "Nachsilben machen Nomen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Packungen lesen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Schilder lesen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/nachsilben-ung-heit-keit-nis.md"
+  },
+  "namen-gross": {
+   "fach": "schreiben",
+   "name": "Namen groß",
+   "titel": "Namen schreiben: vorn groß, dann klein",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Tischkärtchen für alle"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/namen-gross.md"
+  },
+  "neunerreihe": {
+   "fach": "mathe",
+   "name": "Neunerreihe",
+   "titel": "Neun ist eins weniger als zehn",
+   "formen": [
+    {
+     "situation": "unterwegs",
+     "name": "Eintritt für alle"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/neunerreihe.md"
+  },
+  "nomen-gross-artikelprobe": {
+   "fach": "schreiben",
+   "name": "Nomen groß: die Artikelprobe",
+   "titel": "Groß oder klein? Die Artikelprobe",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Auftragszettel"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/nomen-gross-artikelprobe.md"
+  },
+  "sechserreihe": {
+   "fach": "mathe",
+   "name": "Sechserreihe",
+   "titel": "Sechs Eier in jedem Karton",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eierkartons für den Einkauf"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Am Eierregal"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/sechserreihe.md"
+  },
+  "siebenerreihe": {
+   "fach": "mathe",
+   "name": "Siebenerreihe",
+   "titel": "Wie viele Tage noch?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Wochen bis zum großen Tag"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/siebenerreihe.md"
+  },
+  "silben-klatschen": {
+   "fach": "lesen",
+   "name": "Silben klatschen",
+   "titel": "Wörter in Silben klatschen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Wer holt den Löffel?"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Wer sucht beim Verstecken?"
+    }
+   ],
+   "entwurf": false,
+   "datei": "lesen/silben-klatschen.md"
+  },
+  "teiler-begruenden": {
+   "fach": "mathe",
+   "name": "Teiler begründen",
+   "titel": "Gerecht teilen, bevor ihr austeilt",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Es klingelt"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/teiler-begruenden.md"
+  },
+  "teiler-vielfache": {
+   "fach": "mathe",
+   "name": "Teiler und Vielfache",
+   "titel": "Teiler und Vielfache auf dem Backblech",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Alle Bleche für 24 Kekse"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Klatschen und Stampfen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/teiler-vielfache.md"
+  },
+  "verben-als-nomen": {
+   "fach": "schreiben",
+   "name": "Verben als Nomen",
+   "titel": "Wenn ein Verb ein Nomen wird",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Die Kramkiste beschriften"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Geräusche sammeln"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/verben-als-nomen.md"
   },
   "viererreihe": {
    "fach": "mathe",
@@ -22,7 +328,21 @@
      "name": "Tisch decken in zwei Gängen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/viererreihe.md"
+  },
+  "vorwaerts-zaehlen": {
+   "fach": "mathe",
+   "name": "Vorwärts zählen",
+   "titel": "Von einer Zahl aus weiterzählen",
+   "formen": [
+    {
+     "situation": "bewegung",
+     "name": "Verstecken ab einer Startzahl"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/vorwaerts-zaehlen.md"
   },
   "zehnerreihe": {
    "fach": "mathe",
@@ -34,39 +354,161 @@
      "name": "Das Geld für den Einkauf"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zehnerreihe.md"
+  },
+  "zerlegen-10": {
+   "fach": "mathe",
+   "name": "Die 10 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
   },
   "zerlegen-2": {
    "fach": "mathe",
    "name": "Die 2 zerlegen",
-   "titel": "Die 2 in zwei Teile legen",
+   "titel": "Eine Zahl in zwei Teile legen",
    "formen": [
     {
      "situation": "tisch",
-     "name": "Zwei Nudeln, zwei Teller"
+     "name": "Essen für zwei teilen"
     },
     {
      "situation": "unterwegs",
-     "name": "Zwei Steine in zwei Händen"
+     "name": "Steine in zwei Händen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
   },
   "zerlegen-3": {
    "fach": "mathe",
    "name": "Die 3 zerlegen",
-   "titel": "Die 3 in zwei Teile legen",
+   "titel": "Eine Zahl in zwei Teile legen",
    "formen": [
     {
      "situation": "tisch",
-     "name": "Drei Löffel, zwei Teller"
+     "name": "Essen für zwei teilen"
     },
     {
      "situation": "unterwegs",
-     "name": "Drei Zapfen in zwei Händen"
+     "name": "Steine in zwei Händen"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-4": {
+   "fach": "mathe",
+   "name": "Die 4 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-5": {
+   "fach": "mathe",
+   "name": "Die 5 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-6": {
+   "fach": "mathe",
+   "name": "Die 6 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-7": {
+   "fach": "mathe",
+   "name": "Die 7 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-8": {
+   "fach": "mathe",
+   "name": "Die 8 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
+  },
+  "zerlegen-9": {
+   "fach": "mathe",
+   "name": "Die 9 zerlegen",
+   "titel": "Eine Zahl in zwei Teile legen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Essen für zwei teilen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Steine in zwei Händen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zerlegen.md"
   },
   "zweierreihe": {
    "fach": "mathe",
@@ -78,7 +520,8 @@
      "name": "Schuhe in den Schrank"
     }
    ],
-   "entwurf": false
+   "entwurf": false,
+   "datei": "mathe/zweierreihe.md"
   }
  }
 }

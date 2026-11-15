@@ -2,6 +2,9 @@
 // spiele/mit-echten-dingen/<fach>/<thema>.md und schreibt zwei Verzeichnisse:
 //   verzeichnis.json          nur freigegebene Anleitungen (ohne `entwurf: true` und ohne `geparkt: true`): das liest die App
 //   verzeichnis-entwurf.json  dazu die Entwürfe (nie geparkte): nur für Vorschau und Prüfungen (`?entwurf` an der Seite)
+// Eine Datei trägt ein Thema (`thema: <id>`, Dateiname = Id) oder eine Familie (`themen:` als Liste, Dateiname = Name
+// der Familie): dieselbe Handlung, nur ein Wert wechselt (docs/mit-echten-dingen.md). Jedes Thema bekommt einen
+// Eintrag mit `datei`; ein Thema in zwei Dateien ist ein Fehler.
 // So erreicht kein ungeprüfter Text das Kind. Die Seiten laden nur das Verzeichnis (eine Datei statt einer Anfrage je
 // Thema) und die Anleitung, die sie zeigen.
 // tests/echte-dinge.test.mjs prüft, dass das Verzeichnis zu den Dateien passt, und die Form jeder Datei.
@@ -32,7 +35,18 @@ export function anleitungen(ordner = ORDNER) {
 }
 
 /**
- * Das Verzeichnis als Objekt: { themen: { [thema]: { fach, name, titel, formen: [{ situation, name }], entwurf } } }.
+ * Die Themen, die eine Datei trägt: `themen` (Liste) oder `thema` (eine Id).
+ * @param {Record<string, unknown>} kopf
+ * @returns {string[]}
+ */
+export function themenDerDatei(kopf) {
+  if (Array.isArray(kopf.themen)) return kopf.themen.map(String);
+  return typeof kopf.thema === "string" && kopf.thema ? [kopf.thema] : [];
+}
+
+/**
+ * Das Verzeichnis als Objekt: { themen: { [thema]: { fach, name, titel, formen: [{ situation, name }], entwurf, datei } } }.
+ * datei = Pfad unter spiele/mit-echten-dingen/ (bei einer Familie für alle ihre Themen derselbe).
  * name = Name des Themas im Lernplan, nur wenn ihn im ganzen Lernplan kein anderes Thema trägt (die Karte erkennt ein
  * Thema auch an ihm), sonst ""; titel = Überschrift der Datei.
  * Ohne `entwuerfe` nur freigegebene Anleitungen; geparkte (`geparkt: true`) nie.
@@ -43,18 +57,29 @@ export function baueVerzeichnis(liste = anleitungen(), plan = JSON.parse(readFil
   const namen = new Map((plan.themen ?? []).map((t) => [t.id, zahl.get(t.name) === 1 ? t.name : ""]));
   /** @type {Record<string, any>} */
   const themen = {};
+  /** @type {Map<string, string>} */
+  const woher = new Map();
   for (const a of liste) {
     const l = liesAnleitung(a.text);
+    const datei = `${a.fach}/${a.thema}.md`;
+    const ids = themenDerDatei(l.kopf);
+    for (const id of ids) {
+      if (woher.has(id)) throw new Error(`Thema ${id} steht in zwei Dateien: ${woher.get(id)} und ${datei}`);
+      woher.set(id, datei);
+    }
     if (l.kopf.geparkt === true || (l.kopf.entwurf === true && !entwuerfe)) continue;
-    themen[a.thema] = {
-      fach: a.fach,
-      name: namen.get(a.thema) ?? "",
-      titel: l.titel,
-      formen: l.formen.map((f) => ({ situation: f.situation, name: f.name })),
-      entwurf: l.kopf.entwurf === true,
-    };
+    for (const id of ids) {
+      themen[id] = {
+        fach: a.fach,
+        name: namen.get(id) ?? "",
+        titel: l.titel,
+        formen: l.formen.map((f) => ({ situation: f.situation, name: f.name })),
+        entwurf: l.kopf.entwurf === true,
+        datei,
+      };
+    }
   }
-  return { themen };
+  return { themen: Object.fromEntries(Object.entries(themen).sort(([x], [y]) => x.localeCompare(y))) };
 }
 
 export const alsText = (v) => JSON.stringify(v, null, 1) + "\n";
