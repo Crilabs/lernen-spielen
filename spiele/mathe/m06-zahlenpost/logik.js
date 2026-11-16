@@ -193,9 +193,10 @@ export function stabDicke(anzahl, { breite, hoehe, luecke, max }, verhaeltnis = 
 
 /** Vorgabe für tickZeiten (eine Fahrt über etwa sieben Häuser). */
 export const FAHRT_MS = 1400;
-/** Anfahren und Bremsen (ms) und Zeit je Haus (ms): Timo fährt immer gleich schnell. */
+/** Anfahren und Bremsen (ms) und Zeit je Haus (ms): Timo fährt immer gleich schnell. Die längste Fahrt (Post bis 99)
+ * dauert so 0,6 s + 99 × 74 ms ≈ 7,9 s – höchstens 8 s (Christian, 2026-11-16: „das reicht als Lerneffekt“). */
 export const FAHRT_START_MS = 600;
-export const FAHRT_JE_HAUS_MS = 110;
+export const FAHRT_JE_HAUS_MS = 74;
 
 /**
  * Wie lange Timo von Haus `von` nach Haus `nach` fährt (Christian, 2026-11-16): immer gleich schnell, ein weiter Weg

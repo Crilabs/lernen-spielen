@@ -211,3 +211,11 @@ test("Rundenzeit beginnt nach der Einführung (M06 und M08)", async () => {
     assert.match(runde.slice(einf, einf + 200), /beginn = Date\.now\(\);/, `${ordner}: beginn nach der Einführung neu`);
   }
 });
+
+// Christian 2026-11-16: Die längste Fahrt dauert höchstens 8 s („das reicht als Lerneffekt“) – Timo fährt weiter
+// gleich schnell, damit die Dauer den Weg zeigt; nur die Geschwindigkeit ist höher.
+test("fahrtDauer: die längste Fahrt (Post 0 bis Haus 99) dauert höchstens 8 s", () => {
+  assert.ok(L.fahrtDauer(0, 99) <= 8000, String(L.fahrtDauer(0, 99)));
+  assert.ok(L.fahrtDauer(0, 99) > 7000);
+  assert.equal(L.fahrtDauer(0, 50) - L.fahrtDauer(0, 40), 10 * L.FAHRT_JE_HAUS_MS);
+});

@@ -67,7 +67,7 @@ Ersetzt die Angaben oben, wo sie sich widersprechen.
   und in der Hilfe 1. Die Tür des Zielhauses steht rechts neben Timo (vorher verdeckte er sie).
 - **Kleines Spiel** für Themen bis 10: nur Post und Häuser 1–10, Taste „10“, kein Fertig, kein Löschen; ein Tipp
   schickt den Brief los. Bei 11–20 bleiben Fertig und Löschen.
-- **Fahrt immer gleich schnell** (0,6 s plus 0,11 s je Haus; zu 99 etwa 11,5 s): die Dauer zeigt, wie weit es ist.
+- **Fahrt immer gleich schnell** (0,6 s plus 74 ms je Haus; zu 99 knapp 8 s – höchstens 8 s, Christian 2026-11-16: „das reicht als Lerneffekt“): die Dauer zeigt, wie weit es ist.
   Vorher dauerte jede Fahrt 1,4 s, und Timo raste zu hohen Zahlen. Ein Tipp kürzt ab; die Folge wartet entsprechend.
 - **Brief** mit Klappe und Briefmarke, ohne Schatten (er ist kein Knopf). Fertig-Symbol: ein Haken (alle Spiele).
 - **Übergänge im Ton:** Am Ende der Einführung „Jetzt geht es los.“; nach einem Fehlversuch „Timo steht bei Nummer …
