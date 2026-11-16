@@ -144,6 +144,12 @@ test("Server: liefert Spiele aus, ohne Ausbruch aus spiele/", () => mitServer(as
   assert.equal((await hol("/spiele/..%2Fpackage.json")).status, 404);
 }));
 
+test("Server: /spiele/ liefert die Startseite der App (Knopf „App öffnen“)", () => mitServer(async ({ hol }) => {
+  const r = await hol("/spiele/");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("content-type") ?? "", /text\/html/);
+}));
+
 test("Server: Probe abschließen – unbekannte Id → 400", () => mitServer(async ({ sende }) => {
   assert.equal((await sende("/api/proben/X1/abschliessen")).status, 400);
 }));

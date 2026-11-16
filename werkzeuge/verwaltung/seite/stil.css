@@ -26,6 +26,8 @@ button { cursor: pointer; }
 .kopf h1 { font-size: 16px; margin: 0; letter-spacing: .02em; }
 .reiter { display: flex; gap: 2px; }
 .reiter button { border: 0; background: none; padding: 6px 12px; border-radius: 6px; color: var(--leise); }
+.app-link { padding: 5px 12px; border: 1px solid var(--linie); border-radius: 6px; color: var(--text); text-decoration: none; white-space: nowrap; }
+.app-link:hover { background: var(--grund); }
 .reiter button[aria-selected="true"] { background: var(--grund); color: var(--text); font-weight: 600; }
 .zahl:not(:empty) { display: inline-block; min-width: 18px; padding: 0 5px; border-radius: 9px; background: var(--auftrag); color: var(--flaeche); font-size: 12px; text-align: center; }
 .summe { margin-left: auto; color: var(--leise); font-variant-numeric: tabular-nums; }
