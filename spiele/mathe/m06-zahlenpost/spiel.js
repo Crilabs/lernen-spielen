@@ -122,22 +122,14 @@ function fuelleEltern(feld) {
     <p>Welche Zahlen dran sind und was Ihr Kind schon kann, steht bei den Themen im Elternbereich.</p>`;
 }
 
-/** Pause (K1, K8): das Material der letzten Zahl, dazu das Angebot zum Mitmachen (Idee §6). @param {HTMLElement} feld @param {boolean} ton */
+/** Pause (K1, K8): nur das Angebot zum Mitmachen (Idee §6). @param {HTMLElement} feld @param {boolean} ton */
 function fuelleSachmoment(feld, ton) {
   feld.replaceChildren();
-  if (letzteZahl !== null) {
-    const g = document.createElement("ls-goldmaterial");
-    g.setAttribute("zahl", String(Math.min(99, letzteZahl)));
-    g.style.height = "12rem";
-    feld.append(g);
-  }
   const satz = document.createElement("p");
   satz.textContent = "Lass dir Zahlen sagen und schreib sie auf.";
   feld.append(satz);
   if (ton) sprich("Lass dir Zahlen sagen und schreib sie auf.");
 }
-/** Die letzte gelöste Zahl der Runde (für die Pause). @type {number | null} */
-let letzteZahl = null;
 
 // --- Klänge (Web Audio, leise; Ton aus gilt) ---------------------------------------------------------
 /** @type {AudioContext | null} */
@@ -275,10 +267,12 @@ function beimTippen(fn) {
 }
 
 // --- Häuser ---------------------------------------------------------------------------------------------
-/** Abstand der Straße links vom ersten Haus (rem) und Lage des Hauses, vor dem Timo steht, links von der Mitte Timos (rem). */
+/** Abstand der Straße links vom ersten Haus (rem) und Lage des Hauses, vor dem Timo steht, relativ zur Mitte Timos (rem; das Zielhaus steht mit seiner Mitte über Timos Mitte). */
 const RAND_LINKS = 70;
 const TIMO_X = 40;
-const HAUS_VOR_TIMO = 14;
+const HAUS_VOR_TIMO = -16;
+/** Durchmesser einer Perle im Goldmaterial der Tür (rem). */
+const PERLE_TUER = 2;
 const WAENDE = ["#F4E3C8", "#EBD5CF", "#DCE8D4", "#DDE4F0", "#F2E1B9"];
 const DAECHER = ["#C97B63", "#8F6FA8", "#5E8FA8", "#B5654F", "#6FA37F"];
 const TUEREN = ["#4F8FB3", "#B3315A", "#3DB98F", "#8C6FE0", "#F08A4B"];
@@ -337,7 +331,7 @@ function oeffneTuer(k) {
   if (g && g.zahl > 0) {
     const el = document.createElement("ls-goldmaterial");
     el.setAttribute("zahl", String(k));
-    el.style.height = `${Math.min(20, 12.2 / (g.breite / (g.hoehe + 0.2))).toFixed(2)}rem`;
+    el.style.height = `${(g.hoehe * PERLE_TUER).toFixed(2)}rem`; // Perle 2 rem: bleibt zählbar, die Stange als Stange erkennbar
     mat.append(el);
   }
   haus.classList.add("offen");
@@ -460,6 +454,8 @@ function zeigeMaterial(stelle, zahl) {
   ziel.replaceChildren();
   const g = document.createElement("ls-goldmaterial");
   g.setAttribute("zahl", String(zahl));
+  // Perlen (Einer) groß in der Mitte des Felds, die Stange füllt ihr Feld in der Höhe.
+  g.style.height = stelle === "e" ? "20rem" : "9.6rem";
   ziel.append(g);
 }
 function leereMaterial() {
@@ -643,7 +639,6 @@ function stelleAufgabe(aufgabe, melde) {
       abmelden();
       ohneMarkierung();
       // Gemeldet wird sofort (die Zeit der Aufgabe endet mit Fertig); die Wirkung läuft in der Zeit der Folge.
-      letzteZahl = n;
       melde.geloest(aufgabe.ziel.key);
       wirkungFertig = wirkungRichtig(n, { satz: versuche > 0 || hilfeGezeigt });
       return;
