@@ -398,7 +398,7 @@ async function kofiHuepftHier(L) {
     { transform: kofiTransform(x, 0), easing: "ease-out" },
     { transform: kofiTransform(x, 2.2 * rem), offset: 0.5, easing: "ease-in" },
     { transform: kofiTransform(x, 0) },
-  ], { duration: 240, fill: "forwards" });
+  ], { duration: 210, fill: "forwards" });
   L.anims.add(a);
   await a.finished.catch(() => undefined);
   L.anims.delete(a);
@@ -600,7 +600,7 @@ async function wirkungRichtig(k, art, teil, { letztes, freude, kurz, ohneSatz })
   if (aus) return;
 
   // 2. Kofi hüpft hinter das Kästchen (0,45 s).
-  await kofiZu(L, wegMass().mitte(kasten), { ms: kurz ? 280 : 380 });
+  await kofiZu(L, wegMass().mitte(kasten), { ms: kurz ? 240 : 320 });
   if (aus) return;
   kofiHaltung("zeigen", 140, L);
 
@@ -622,10 +622,10 @@ async function wirkungRichtig(k, art, teil, { letztes, freude, kurz, ohneSatz })
     if (!L.skip) klang.probe(1);
     await kofiHuepftHier(L);
     if (aus) return;
-    await warte(kurz ? 120 : 250);
+    await warte(kurz ? 80 : 150);
   } else {
     probeZeile(kasten, probeKreide(w));
-    await warte(kurz ? 400 : 650);
+    await warte(kurz ? 280 : 450);
   }
   if (aus) return;
 
@@ -635,7 +635,7 @@ async function wirkungRichtig(k, art, teil, { letztes, freude, kurz, ohneSatz })
   await warte(100);
   if (aus) return;
   if (!L.skip) klang.plopp();
-  await bewege(chip, [{ transform: "scale(1)" }, { transform: "scale(1.12)", offset: 0.5 }, { transform: "scale(1)" }], 180);
+  await bewege(chip, [{ transform: "scale(1)" }, { transform: "scale(1.12)", offset: 0.5 }, { transform: "scale(1)" }], 150);
   if (aus) return;
   schliessen();
   if (!letztes || ohneSatz) {
@@ -658,7 +658,7 @@ async function wirkungRichtig(k, art, teil, { letztes, freude, kurz, ohneSatz })
     if (lauf2.skip) break;
     el.classList.add("leuchtet");
     if (!lauf2.skip) klang.huepf(n);
-    await kofiZu(lauf2, wegMass().mitte(el), { ms: 190, hoch: 3 });
+    await kofiZu(lauf2, wegMass().mitte(el), { ms: 150, hoch: 3 });
     n++;
     el.classList.remove("leuchtet");
   }
