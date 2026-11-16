@@ -2,7 +2,7 @@
 // Kein Teil von `npm test`: braucht Playwright und installierte Browser (Chromium, WebKit).
 //
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/durchspielen.mjs spiele/<fach>/<katalog-nr>-<name>/index.html \
-//     [--kinder sicher,ratend,hilfe,wild,tastatur,zurueck] [--browser chromium,webkit] [--groessen 1920x1080,1280x800]
+//     [--kinder sicher,ratend,hilfe,wild,tastatur,knoepfe,zurueck] [--browser chromium,webkit] [--groessen 1920x1080,1280x800]
 //     [--bilder <ordner>] [--bericht <datei.json>] [--saat <zahl>] [--stufe material|vorstellung|kopf] [--runde-ms <ms>]
 //
 // --runde-ms: Rundenlänge im Testbetrieb (Vorgabe 60 000 statt der echten 4 Minuten, lernsteuerung.js rundenMs);
@@ -29,6 +29,9 @@
 //   wegtippen wie ratend, tippt aber während jeder Folge       wie ratend: jede Aufgabe genau einmal gemeldet, ok nur
 //             dreimal mitten ins Bild (überspringt sie)         ohne Fehlversuch – nichts wird durch Wegtippen
 //                                                              fälschlich als gekonnt gebucht
+//   knoepfe   wie ratend, misst aber nach jedem Zug 600 ms:  jeder Zug bekommt eine sichtbare Antwort (Zustand, laufende
+//             Animation oder Änderung im DOM, auch in offenen shadowRoots); ein Tipp ohne jede Reaktion ist rot;
+//             im zweiten Zug jeder Aufgabe kommt der Haken/Fertig-Knopf, auch bei leerer Eingabe
 //   zurueck   verlässt mitten in der Runde über Haus,         Lernstand konsistent, Spiel startet sauber
 //             kommt zurück (neu geladen)
 // Für alle: keine Seiten- oder Konsolenfehler, nichts im Protokoll außer erwarteten Zeilen, Vorschau schreibt nichts
@@ -56,7 +59,7 @@ const { chromium, webkit } = require("playwright");
 const WURZEL = resolve(fileURLToPath(import.meta.url), "../../..");
 /** Rundenlänge im Testbetrieb (statt 4 Minuten, lernsteuerung.js rundenMs); mit --runde-ms 0 die echte. */
 const RUNDE_TEST_MS = 60000;
-const ALLE_KINDER = ["sicher", "ratend", "hilfe", "wild", "tastatur", "zurueck", "wegtippen"];
+const ALLE_KINDER = ["sicher", "ratend", "hilfe", "wild", "tastatur", "zurueck", "wegtippen", "knoepfe"];
 const PHASEN = ["laden", "einfuehrung", "aufgabe", "folge", "pause", "fehler"];
 /** Züge je Aufgabe, bevor sie als nicht lösbar gilt. */
 const MAX_ZUEGE = 60;
@@ -457,7 +460,49 @@ async function kindSicher(sp, lauf, standVorher) {
     `gekonnt: ${neuGekonnt.join(", ") || "keins"}, ${runde.aufgaben.length} Aufgaben, Phase ${z.phase}`);
 }
 
-async function kindRatend(sp, lauf, _vorher, { wegtippen = false } = {}) {
+/** Beobachtet im Browser DOM-Änderungen (body und jeder offene shadowRoot, auch später hinzugekommene) und Animationen. */
+function beobachteAntwort() {
+  window.__antwort?.stop();
+  const a = { dom: 0, anim: document.getAnimations().length, max: 0, beobachter: [], gesehen: new WeakSet() };
+  const optionen = { subtree: true, attributes: true, childList: true, characterData: true };
+  const hefte = (wurzel) => {
+    if (a.gesehen.has(wurzel)) return;
+    a.gesehen.add(wurzel);
+    const b = new MutationObserver((liste) => {
+      a.dom += liste.length;
+      for (const m of liste) for (const n of m.addedNodes) if (n.nodeType === 1) alleShadow(n);
+    });
+    b.observe(wurzel, optionen);
+    a.beobachter.push(b);
+  };
+  const alleShadow = (el) => {
+    if (el.shadowRoot) { hefte(el.shadowRoot); alleShadow2(el.shadowRoot); }
+    alleShadow2(el);
+  };
+  const alleShadow2 = (wurzel) => {
+    for (const k of wurzel.querySelectorAll("*")) if (k.shadowRoot) { hefte(k.shadowRoot); alleShadow2(k.shadowRoot); }
+  };
+  hefte(document.body);
+  alleShadow(document.body);
+  const takt = setInterval(() => { a.max = Math.max(a.max, document.getAnimations().length); }, 30);
+  a.stop = () => { clearInterval(takt); a.beobachter.forEach((b) => b.disconnect()); };
+  window.__antwort = a;
+}
+
+/** Nach dem Zug: 600 ms warten, dann sagen, ob Zustand, DOM oder Animationen reagiert haben. */
+async function messeAntwort(sp, zustandVorher) {
+  await warte(600);
+  const r = await sp.ev(() => {
+    const a = window.__antwort;
+    const gemessen = { dom: a.dom, animationen: Math.max(a.max, document.getAnimations().length) > a.anim };
+    a.stop();
+    return gemessen;
+  });
+  return r.dom > 0 || r.animationen || JSON.stringify(await sp.zustand()) !== zustandVorher;
+}
+
+async function kindRatend(sp, lauf, _vorher, { wegtippen = false, antwort = false } = {}) {
+  const ohneAntwort = [];
   const fehlversucheMoeglich = await sp.ev(() => window.lsPruefen.fehlversuche !== false);
   const verlauf = [];
   let leuchtFehler = null;
@@ -479,9 +524,23 @@ async function kindRatend(sp, lauf, _vorher, { wegtippen = false } = {}) {
         const daneben = auswahl.filter((x) => schluessel(x) !== richtig);
         if (daneben.length) auswahl = daneben;
       }
-      const zug = auswahl[Math.floor(sp.rnd() * auswahl.length)];
+      // knoepfe: im zweiten Zug jeder Aufgabe zuerst der Haken/Fertig-Knopf, auch wenn noch nichts eingegeben ist: ein Knopf,
+      // der dann nichts tut, ist der Fehler, den dieses Kind sucht. Steht er nicht in zuege() (das bietet nur
+      // sinnvolle Züge an), nimmt das Kind den sichtbaren Knopf mit fertig/haken in der Id.
+      let haken = [];
+      if (antwort && (a.zuegeZahl = (a.zuegeZahl ?? 0) + 1) === 2) {
+        haken = auswahl.filter((x) => /fertig|haken/i.test(x.von ?? ""));
+        if (!haken.length) {
+          const id = await sp.ev(() => [...document.querySelectorAll("[id*=fertig i], [id*=haken i]")].find((el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== "hidden"; })?.id);
+          if (id) haken = [{ art: "tippen", von: `#${id}` }];
+        }
+      }
+      const zug = (haken.length ? haken : auswahl)[Math.floor(sp.rnd() * (haken.length || auswahl.length))];
       const leuchtenVorher = await sp.leuchten();
+      const zustandVorher = antwort ? JSON.stringify(await sp.zustand()) : null;
+      if (antwort) await sp.ev(beobachteAntwort);
       await sp.fuehre(zug, sp.rnd() < 0.5 ? "tippen" : "ziehen");
+      if (antwort && !(await messeAntwort(sp, zustandVorher))) ohneAntwort.push(`Aufgabe ${z.aufgabe}: Zug ${zug.von ?? JSON.stringify(zug)} ohne Antwort`);
       let nach = await sp.zustand();
       // wegtippen: tippt während der Folge ungeduldig mitten ins Bild (docs/spielbau.md §1: der nächste Tipp
       // überspringt die Folge). Danach darf nichts doppelt oder falsch gemeldet sein.
@@ -508,6 +567,7 @@ async function kindRatend(sp, lauf, _vorher, { wegtippen = false } = {}) {
       }
     },
   });
+  if (antwort) lauf.pruefe("jeder Zug bekommt eine sichtbare Antwort", ohneAntwort.length === 0, ohneAntwort.slice(0, 5).join(" | "));
   const e = await sp.ergebnisse();
   const zweite = verlauf.filter((v) => v.versuch === 2).length;
   lauf.pruefe("jede Aufgabe ist lösbar (Runde endet in der Pause)", (await sp.zustand()).phase === "pause");
@@ -657,7 +717,8 @@ async function kindZurueck(sp, lauf, vorher) {
 }
 
 const kindWegtippen = (sp, lauf, vorher) => kindRatend(sp, lauf, vorher, { wegtippen: true });
-const KINDER = { sicher: kindSicher, ratend: kindRatend, hilfe: kindHilfe, wild: kindWild, tastatur: kindTastatur, zurueck: kindZurueck, wegtippen: kindWegtippen };
+const kindKnoepfe = (sp, lauf, vorher) => kindRatend(sp, lauf, vorher, { antwort: true });
+const KINDER = { knoepfe: kindKnoepfe, sicher: kindSicher, ratend: kindRatend, hilfe: kindHilfe, wild: kindWild, tastatur: kindTastatur, zurueck: kindZurueck, wegtippen: kindWegtippen };
 
 // --- Ablauf -------------------------------------------------------------------------------------------
 
