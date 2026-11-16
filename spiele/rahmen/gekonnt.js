@@ -53,7 +53,7 @@ const STRAHLEN = Array.from({ length: 16 }, (_, i) => {
   const w = (Math.PI * 2) / 16;
   const a0 = i * w - w * 0.32;
   const a1 = i * w + w * 0.32;
-  const r = 140;
+  const r = 420; // weit über das Feld hinaus: die Strahlen laufen über jeden Rand
   const p = (/** @type {number} */ a) => `${(100 + Math.cos(a) * r).toFixed(1)},${(100 + Math.sin(a) * r).toFixed(1)}`;
   return `<polygon points="100,100 ${p(a0)} ${p(a1)}" fill="#FFFFFF" fill-opacity="${i % 2 ? 0.32 : 0.55}"/>`;
 }).join("");
@@ -78,7 +78,7 @@ const CSS = `
 .szene { position: absolute; left: 0; top: 0; width: 192rem; height: 108rem; }
 
 /* Die Sonne in der oberen Hälfte, hinter dem Boden: Strahlen drehen sich langsam um ihre Mitte (56 | 40 rem). */
-.strahlen { position: absolute; left: -29rem; top: -45rem; width: 170rem; height: 170rem; animation: drehen 80s linear infinite; }
+.strahlen { position: absolute; left: -29rem; top: -45rem; width: 170rem; height: 170rem; animation: drehen 80s linear infinite; overflow: visible; }
 .sonne { position: absolute; left: 30rem; top: 14rem; width: 52rem; height: 52rem; border-radius: 50%; background: var(--ls-sonne);
   box-shadow: 0 0 5rem 2.5rem rgba(255, 217, 90, 0.95), 0 0 16rem 9rem rgba(255, 240, 190, 0.85); }
 @keyframes drehen { to { transform: rotate(360deg); } }
