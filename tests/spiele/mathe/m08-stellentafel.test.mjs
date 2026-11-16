@@ -112,3 +112,20 @@ test("bildWechsel: nur beim Wechsel von Plus zu Minus und zurück ein Satz", () 
   assert.equal(L.bildWechsel("plus", "minus"), "wegnehmen");
   assert.equal(L.bildWechsel("minus", "plus"), "dazulegen");
 });
+
+// Review Christian 2026-11-16: Ein Kind der Klasse 1 kennt „Z“ und „E“ nicht – die Köpfe heißen ausgeschrieben.
+test("Spaltenköpfe ausgeschrieben: Zehner und Einer, nicht Z und E", () => {
+  const html = readFileSync(new URL("../../../spiele/mathe/m08-stellentafel/index.html", import.meta.url), "utf8");
+  assert.match(html, /class="kopf z"[^>]*>Zehner</);
+  assert.match(html, /class="kopf e"[^>]*>Einer</);
+  assert.doesNotMatch(html, /class="kopf [ze]"[^>]*>\s*[ZE]\s*</);
+});
+
+// Farbwelt C3: Die Welt schmückt nie mit Bedeutungsfarben (Perlen, Stellenwerte).
+test("Raum ohne Bedeutungsfarben (C3)", async () => {
+  const { raumSvg } = await import("../../../spiele/mathe/m08-stellentafel/raum.js");
+  const svg = raumSvg().toUpperCase();
+  assert.match(svg, /^<SVG/);
+  for (const f of ["#E5484D", "#3FA34D", "#F4A3C0", "#F7D038", "#6CB8F0", "#9B5DE5", "#2F5BC4", "#D9A520", "#0FA3A3", "#F07C1E", "#5B6478"])
+    assert.ok(!svg.includes(f), f);
+});

@@ -4,23 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>Zahlen legen</title>
-<!-- M08 Stellentafel (Idee docs/spiele/mathe/m08-stellentafel.md). Das Spielbild ist ein heller Pausenhof über den
-     ganzen Bildschirm: mit Kreide eine Stellentafel aus zwei Feldern (Z und E), Timo rollt davor und legt goldenes
-     Material hinein. Rechts mit Kreide die Aufgabe, darunter das Ziffernbrett. Leiste, Blase, Hilfe und Pause an ihren
-     festen Plätzen. -->
+<!-- M08 Stellentafel (Idee docs/spiele/mathe/m08-stellentafel.md, Review 2026-11-16). Das Spielbild ist ein heller
+     Montessori-Werkraum über den ganzen Bildschirm (raum.js): oben ein Streifen Wand mit Fenster und Regal, darunter
+     Ahornboden. Auf dem Boden liegt die Arbeitsmatte mit der Stellentafel (Spalten Zehner und Einer), Timo rollt davor
+     und legt das Material hinein. Rechts die Aufgabenkarte, darunter das Ziffernbrett (Tablett). Leiste, Blase, Hilfe
+     und Pause an ihren festen Plätzen. -->
 <link rel="stylesheet" href="../../rahmen/seite.css">
 <style>
-  /* ===== SPIELWELT: Pausenhof mit Kreide. Alles in rem (1rem = Bildhöhe/108). ===== */
+  /* ===== SPIELWELT: Montessori-Werkraum, die Stellentafel auf der Arbeitsmatte. Alles in rem (1rem = Bildhöhe/108). ===== */
   :root {
-    --kreide: #FBF8F1;
     --timo-hoehe: 56rem;      /* Feld der Figur (320 × 280); die Figur selbst ist etwa 47 rem hoch */
     --stange: 4.4rem;         /* Dicke der goldenen Stangen und der Einerperlen */
   }
-  .welt {
-    background:
-      radial-gradient(ellipse 70% 40% at 40% 88%, rgba(255, 255, 255, 0.28), transparent 70%),
-      linear-gradient(#D9D3C6 0 62%, #C9C2B3 62% 100%);
-  }
+  /* Der Raum (raum.js) füllt die Welt; die Wandkante liegt bei 29 rem. Bis das SVG da ist: Wand und Boden als Fläche. */
+  .welt { background: linear-gradient(#F6ECDF 0 29rem, #EDDCC0 29rem); }
+  .welt svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
   .spielflaeche {
     display: grid;
@@ -32,10 +30,13 @@
   }
   ls-blase { grid-column: 1; grid-row: 1; align-self: start; justify-self: start; position: relative; z-index: 7; }
 
-  /* Die Aufgabe auf den Boden geschrieben; das Kästchen nimmt die getippte Zahl auf. */
+  /* Die Aufgabe auf einer Papierkarte (flach, kein Knopf); das Kästchen nimmt die getippte Zahl auf. */
   .gleichung {
     grid-column: 2; grid-row: 1;
+    justify-self: center; align-self: start;
     display: flex; align-items: center; justify-content: center; gap: 1.6rem;
+    padding: 1.2rem 2.4rem;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-gross);
     color: #3B2A6B;
     font-size: 6.2rem; font-weight: 700; line-height: 1; white-space: nowrap;
   }
@@ -51,19 +52,24 @@
   }
   .karte.leer { color: transparent; }
 
-  /* Der Hof: Tafel oben (mit Kreide auf den Boden gemalt), darunter der Weg, auf dem Timo rollt.
-     Keine Kästen: zwei Köpfe als Farbflächen, die Spalten sind Kreidelinien, der Boden bleibt Boden. */
+  /* Der Boden: oben die Arbeitsmatte mit der Stellentafel, davor der Weg, auf dem Timo rollt. Die Matte ist Papier mit
+     Tinte-Kontur und gestrichelter Naht (Lernfeld, grundsaetze-bilder.md §6.2, C3); die Köpfe sind Farbflächen mit
+     Kontur, die Spalten trennen feine Nahtlinien. */
   .hof:focus { outline: none; }
   .hof { grid-column: 1; grid-row: 1 / 3; position: relative; z-index: 6; min-height: 0; margin-top: 1rem; }
   .tafel {
-    position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    position: absolute; left: 50%; top: 13.6rem; transform: translateX(-50%);
     display: grid; grid-template-columns: 56rem 56rem; column-gap: 2.4rem;
-    grid-template-rows: 8rem 13rem 21rem; row-gap: 0;
+    grid-template-rows: 8rem 12rem 18rem; row-gap: 0;
   }
+  /* Die Matte liegt unter der Tafel (eigener Stapel der Tafel, darum z-index −1 hinter den Spalten). */
+  .tafel::before, .tafel::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
+  .tafel::before { inset: -2.4rem -2.4rem -1.6rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-gross); }
+  .tafel::after { inset: -1.2rem -1.2rem -0.4rem; border: 0.25rem dashed var(--ls-naht); border-radius: calc(var(--ls-radius-gross) - 1.2rem); }
   .kopf {
     display: flex; align-items: center; justify-content: center;
-    border-radius: 3rem 3rem 0.6rem 0.6rem;
-    font-size: 6rem; font-weight: 700; color: #3B2A6B; line-height: 1;
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 2rem;
+    font-size: 5.2rem; font-weight: 700; color: var(--ls-tinte); line-height: 1;
   }
   .kopf.z { background: #F07C1E; }
   .kopf.e { background: #0FA3A3; }
@@ -73,10 +79,9 @@
   .kopf { grid-row: 1; }
   .karten { grid-row: 2; }
   .feld { grid-row: 3; }
-  /* Kreidelinien: die Spalte ist links und rechts mit einem rauen Strich gezogen, unten läuft er aus. */
+  /* Nahtlinien: jede Spalte ist links und rechts mit einer feinen Linie gezogen. */
   .karten::before, .feld::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0; pointer-events: none;
-    border-left: 0.45rem solid rgba(251, 248, 241, 0.85); border-right: 0.45rem solid rgba(251, 248, 241, 0.85); border-radius: 0.5rem 0.4rem 0.6rem 0.3rem / 0.3rem 0.5rem 0.3rem 0.4rem; }
-  .feld::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 0.45rem; background: rgba(251, 248, 241, 0.85); border-radius: 0.4rem 0.6rem 0.3rem 0.5rem; }
+    border-left: 0.3rem solid var(--ls-naht); border-right: 0.3rem solid var(--ls-naht); }
   .karten { display: flex; align-items: center; justify-content: center; }
   .karten > * { flex: none; }
   /* Das Material liegt groß in der Spalte; die Perlen der Einer füllen sie. */
@@ -87,7 +92,7 @@
     display: grid; grid-template-columns: repeat(2, max-content); gap: 0.5rem 1.6rem; justify-content: start;
   }
   .hohl.wenig { grid-template-columns: max-content; gap: 1rem; }
-  .hohl .hohlstab { display: block; padding: 0.3rem 0.7rem; border: 0.35rem dashed var(--kreide); border-radius: 1.4rem; opacity: 0.9; line-height: 0; }
+  .hohl .hohlstab { display: block; padding: 0.3rem 0.7rem; border: 0.35rem dashed var(--ls-tinte-weich); border-radius: 1.4rem; opacity: 0.9; line-height: 0; }
   .hohl ls-perlenstab { height: 2rem; }
   .hohl.wenig ls-perlenstab { height: 3.4rem; }
   #hohl-e.wenig ls-perlenstab { height: var(--stange); }
@@ -128,7 +133,7 @@
     .spielflaeche { grid-template-columns: minmax(0, 1fr) 42rem; }
     .gleichung { font-size: 5.2rem; }
     .karte { font-size: 5rem; min-width: 9rem; }
-    .tafel { grid-template-columns: 48rem 48rem; column-gap: 1.6rem; }
+    .tafel { grid-template-columns: 44rem 44rem; column-gap: 1.6rem; }
   }
 
   /* Pause: Sachmoment auf der Papierkarte. */
@@ -152,7 +157,11 @@
 </style>
 </head>
 <body>
-<div class="welt" aria-hidden="true"></div>
+<div class="welt" id="welt" aria-hidden="true"></div>
+<script type="module">
+  import { raumSvg } from "./raum.js";
+  document.getElementById("welt").innerHTML = raumSvg();
+</script>
 
 <ls-leiste id="leiste" spiel="stellentafel" fach="mathe" titel="Zahlen legen" thema="">
   <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
@@ -160,13 +169,13 @@
 </ls-leiste>
 
 <div class="buehne">
-  <main class="spielflaeche" aria-label="Stellentafel auf dem Pausenhof">
+  <main class="spielflaeche" aria-label="Stellentafel auf der Arbeitsmatte">
     <ls-blase id="blase" ohne-text></ls-blase>
     <div class="gleichung" id="aufgabe" aria-live="polite"><span class="rechnung" id="rechnung"></span><span class="karte leer" id="eingabe">0</span></div>
     <div class="hof" id="hof">
       <div class="tafel" id="tafel">
-        <div class="kopf z" aria-hidden="true">Z</div>
-        <div class="kopf e" aria-hidden="true">E</div>
+        <div class="kopf z" aria-hidden="true">Zehner</div>
+        <div class="kopf e" aria-hidden="true">Einer</div>
         <div class="karten" id="karten-z" role="img" aria-label="Zehnerkarten"></div>
         <div class="karten" id="karten-e" role="img" aria-label="Einerkarten"></div>
         <div class="feld" id="feld-z" role="img" aria-label="Zehnerfeld"><div class="real" id="real-z"></div><div class="hohl" id="hohl-z"></div></div>
