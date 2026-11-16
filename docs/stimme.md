@@ -73,6 +73,10 @@ Auch erzählt gilt: kein „Du machst Kofi glücklich“, kein Lob, keine Wörte
   stehen in `zeig` und im Bild (`fuelleVorlage` in `spiele/einfuehrung.js` prüft das). Beim Anhören auf
   Ordinalzahlen achten („fünfter“ statt „fünf“). Die Systemstimme spricht nie Zahlen. Ob ein Satz eine Lösung
   verrät, entscheidet das Spiel (Grundsätze).
+- **Kein Zahlwort nach „der“, „zur“, „zum“ (Christian, 2026-11-16).** „Timo bringt den Brief zur Dreizehn.“ klang
+  wie „zu dreizehnt“; die Spracherkennung hört bei „zur Dreizehn“ und „bei der Dreizehn“ jedes Mal „dreizehnten“,
+  mit und ohne Punkt. Die Stimme liest die Zahl dort als Ordnungszahl. Stattdessen ein Nomen davor, das die Zahl
+  zur Grundzahl macht: „zu Nummer Dreizehn“, „bei Nummer Dreizehn“ (in Proben immer richtig).
 - **Keine Abkürzungen, Sonderzeichen, Gendersternchen** (Grundsätze §6). Schwierige Wörter mit Bild.
 - **Gleicher Text, gleiche Aufnahme.** Dieselbe Sache immer gleich formulieren. Das spart Aufnahmen und hilft
   dem Kind, Sätze wiederzuerkennen.

@@ -1,34 +1,36 @@
 // M06 Zahlenpost (Idee: docs/spiele/mathe/m06-zahlenpost.md). Die Stimme sagt ein Zahlwort („siebzehn“), das Kind tippt die
 // Ziffern auf den Umschlag auf Timos Schoß und bestätigt mit Fertig. Dann rollt Timo die Häuserreihe entlang zu genau
 // dieser Hausnummer (immer 1,4 s, weit heißt schneller), der Brief rutscht in den Schlitz, die Tür springt auf, und in
-// der Tür steht die Zahl als Goldmaterial. Ein Zahlendreher führt zu einem anderen Haus: der Brief bleibt auf dem
+// der Tür steht die Zahl als Perlenstäbe (goldene Zehnerstäbe, die Einer als farbiges Stäbchen). Ein Zahlendreher führt zu einem anderen Haus: der Brief bleibt auf dem
 // Schoß, die Tür geht auf, und man sieht, wie weit es weg ist.
 //
 // Aufbau wie die Spielvorlage (spiele/vorlage/spiel.js, dort die Schritte zum eigenen Spiel):
 //   SPIELWELT  Kennung, Aufgabenarten, Sätze des Erzählers, Klänge
 //   STRASSE    Häuser, Kamera, Timo, Umschlag
 //   AUFGABE    eine Aufgabe darstellen, prüfen (das Haus urteilt), Hilfe-Stufen
-//   EINFÜHRUNG im echten Spielbild (docs/spielbau.md §8): Timo bringt den Brief zur 13, das Kind tippt die 5
+//   EINFÜHRUNG im echten Spielbild (docs/spielbau.md §8): eine kleine Geschichte, das Kind tippt die 5
+//   Themen bis 10 spielen klein (Häuser 0 bis 10, Taste 10, ohne Fertig und Löschen; Christian 2026-11-16)
 //   RAHMEN     aus der Vorlage; die Lernsteuerung bestimmt die Länge der Runde
 //
-// Vorschau-Parameter wie in der Vorlage (?pause, ?hinweis, ?eltern, ?einfuehrung, ?thema=, ?pruefen, ?stufe=).
+// Vorschau-Parameter wie in der Vorlage (?pause, ?hinweis, ?eltern, ?einfuehrung, ?thema=, ?pruefen, ?stufe=), dazu im
+// Testbetrieb ?bis=<n> (als ginge das Thema bis n: ?bis=20 spielt mit Fertig, ?bis=10 klein).
 
 import "../../rahmen/leiste.js";
-import "../../rahmen/blase.js";
+import { lesezeit } from "../../rahmen/blase.js";
 import "../../rahmen/hilfe.js";
 import "../../rahmen/pause.js";
 import "../../rahmen/knopf.js";
 import "../../rahmen/tastatur.js";
-import "../../rahmen/goldmaterial.js";
+import "../../rahmen/perlenstab.js";
 import * as Runde from "../../runde/runde.js";
 import { zahlAus } from "../../aufgabenarten.js";
-import { gold } from "../../rahmen/gold-geometrie.js";
+import { perlenstab } from "../../rahmen/perlen-geometrie.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
 import { runde, einmal, rundenMs } from "../../lernsteuerung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
-import { felderFuer, tippe, bereit, naechsteTaste, kandidaten, tastenZu, probeVon, FAHRT_MS, HAUS_ABSTAND, tickZeiten, naechsteFreude, witz } from "./logik.js";
+import { felderFuer, tippe, bereit, naechsteTaste, kandidaten, tastenZu, probeVon, FAHRT_MS, HAUS_ABSTAND, tickZeiten, naechsteFreude, witz, istKlein, kandidatenKlein, KLEIN_BIS, staebe, stabDicke } from "./logik.js";
 
 sperreTouch();
 
@@ -109,15 +111,38 @@ const erzaehler = {
   probe: (n) => sagt(TEXTE?.hilfe1?.[n], { zeigen: true }),
   /** Hilfe 2: die Lösung, die das Kind selbst tippt. @param {number} n */
   loesung: (n) => sagt(TEXTE?.hilfe2?.[n], { zeigen: true }),
-  einfuehrungVor: () => spricht(() => blase.sage("Timo bringt den Brief zur Dreizehn.")),
-  einfuehrungDu: () => spricht(() => blase.sage("Jetzt tippst du.")),
+  /** Hilfe 2 im kleinen Spiel bei der Zehn (eine Taste „10“ statt zwei Ziffern). */
+  loesungZehn: () => sagt("Die Zehn tippen.", { zeigen: true }),
   gehtNicht: () => blase.sage("Das Spiel geht gerade nicht."),
+};
+
+/**
+ * Die Sätze der Einführung (docs/spielbau.md §8, Christian 2026-11-16: in Ruhe, als kleine Geschichte). Jeder steht als
+ * feste Zeichenkette in blase.sage (für `npm run audio`); jeder Schritt wartet, bis der Satz zu Ende ist.
+ */
+const einleitung = {
+  postbotin: (/** @type {any} */ o) => spricht(() => blase.sage("Timo hilft heute der Postbotin.", o)),
+  briefe: (/** @type {any} */ o) => spricht(() => blase.sage("Er bringt die Briefe zur richtigen Hausnummer.", o)),
+  hoeren: (/** @type {any} */ o) => spricht(() => blase.sage("Du hörst eine Zahl.", o)),
+  tippen: (/** @type {any} */ o) => spricht(() => blase.sage("Die tippst du auf den Brief.", o)),
+  zuhoeren: (/** @type {any} */ o) => spricht(() => blase.sage("Hör gut zu.", o)),
+  tippeFuenf: (/** @type {any} */ o) => spricht(() => blase.sage("Tippe die Fünf.", o)),
+  fertig: (/** @type {any} */ o) => spricht(() => blase.sage("Jetzt tippe auf Fertig.", o)),
+  haken: (/** @type {any} */ o) => spricht(() => blase.sage("Das ist der Knopf mit dem Haken.", o)),
+  bringt: (/** @type {any} */ o) => spricht(() => blase.sage("Timo bringt den Brief zu Nummer Fünf.", o)),
+  andere: (/** @type {any} */ o) => spricht(() => blase.sage("Tippst du eine andere Zahl?", o)),
+  faehrt: (/** @type {any} */ o) => spricht(() => blase.sage("Dann fährt Timo zu diesem Haus.", o)),
+  nochmal: (/** @type {any} */ o) => spricht(() => blase.sage("Probier es dann einfach noch einmal.", o)),
+  aendern: (/** @type {any} */ o) => spricht(() => blase.sage("Willst du deine Zahl ändern?", o)),
+  loeschen: (/** @type {any} */ o) => spricht(() => blase.sage("Dann tippe auf den Knopf neben der Null.", o)),
+  lernen: (/** @type {any} */ o) => spricht(() => blase.sage("So lernst du, Zahlen zu schreiben, die du hörst.", o)),
+  lernenKlein: (/** @type {any} */ o) => spricht(() => blase.sage("So lernst du die Zahlen von null bis zehn.", o)),
 };
 
 /** Elternansicht (?eltern): beschreibend, von Stärken aus, kein Vergleich (3.3). @param {HTMLElement} feld */
 function fuelleEltern(feld) {
   feld.innerHTML = `<p>Ihr Kind hört ein Zahlwort und tippt die Ziffern auf einen Umschlag. Timo bringt den Brief zu dem Haus mit
-    dieser Nummer; in der Tür steht die Zahl als goldenes Perlenmaterial. Bei Zahlen wie siebzehn, die man mit den Einern
+    dieser Nummer; in der Tür steht die Zahl als Perlenstäbe (goldene Zehnerstäbe und ein farbiges Stäbchen für die Einer). Bei Zahlen wie siebzehn, die man mit den Einern
     zuerst spricht, führt ein Zahlendreher zu einem ganz anderen Haus, und man sieht, wie weit es entfernt ist.</p>
     <p>Welche Zahlen dran sind und was Ihr Kind schon kann, steht bei den Themen im Elternbereich.</p>`;
 }
@@ -267,12 +292,14 @@ function beimTippen(fn) {
 }
 
 // --- Häuser ---------------------------------------------------------------------------------------------
-/** Abstand der Straße links vom ersten Haus (rem) und Lage des Hauses, vor dem Timo steht, relativ zur Mitte Timos (rem; das Zielhaus steht mit seiner Mitte über Timos Mitte). */
+/** Abstand der Straße links vom ersten Haus (rem) und Lage des Hauses, vor dem Timo steht, relativ zur Mitte Timos (rem; das Zielhaus beginnt an Timos Mitte, damit die offene Tür mit den Perlenstäben rechts neben ihm frei steht, Christian 2026-11-16). */
 const RAND_LINKS = 70;
 const TIMO_X = 40;
-const HAUS_VOR_TIMO = -16;
-/** Durchmesser einer Perle im Goldmaterial der Tür (rem). */
-const PERLE_TUER = 2;
+const HAUS_VOR_TIMO = 0;
+/** Platz für die Perlenstäbe in der Tür (rem): ein Zehnerstab fast so hoch wie die Tür, Stäbe höchstens 2,3 rem dick. */
+const TUER_FELD = { breite: 12, hoehe: 20.5, luecke: 0.5, max: 2.3 };
+/** Platz für die Perlenstäbe in einem Feld des Umschlags (Hilfe 1); hier füllt der längste Stab das Feld. */
+const UMSCHLAG_FELD = { breite: 6.6, hoehe: 9, luecke: 0.4, max: 2.6, fuellen: true };
 const WAENDE = ["#F4E3C8", "#EBD5CF", "#DCE8D4", "#DDE4F0", "#F2E1B9"];
 const DAECHER = ["#C97B63", "#8F6FA8", "#5E8FA8", "#B5654F", "#6FA37F"];
 const TUEREN = ["#4F8FB3", "#B3315A", "#3DB98F", "#8C6FE0", "#F08A4B"];
@@ -319,21 +346,50 @@ const haeuser = [];
   strasse.append(teile);
 }
 
+/**
+ * Kleines Spiel (Themen bis 10, Christian 2026-11-16): nur die Post und die Häuser 1 bis 10, eine Taste „10“, kein
+ * Fertig und kein Löschen – ein Tipp auf eine Taste schickt den Brief los. Der Umschlag hat eine freie Zeile.
+ */
+let klein = false;
+/** @param {boolean} k */
+function setzeKlein(k) {
+  klein = k;
+  for (let i = KLEIN_BIS + 1; i <= LETZTES_HAUS; i++) haeuser[i].hidden = k;
+  tastatur.toggleAttribute("zehn", k);
+  tastatur.toggleAttribute("loeschen", !k);
+  fertigKnopf.hidden = k;
+}
+/** Felder des Umschlags für die Zahl n (im kleinen Spiel immer die freie Zeile). @param {number} n @param {string} stufe */
+const felderVon = (n, stufe) => (klein ? 0 : felderFuer(n, stufe));
+
 /** Häuser, deren Tür für den Fortschritt offen bleibt (der Brief ist dort angekommen). @type {Set<number>} */
 let besucht = new Set();
 
-/** Öffnet die Tür von Haus k; in der Tür steht die Zahl als Goldmaterial. @param {number} k */
+/**
+ * Perlenstäbe nach Montessori in ein Feld (Christian, 2026-11-16): so viele goldene Zehnerstäbe wie Zehner, die Einer
+ * als ein Stäbchen in der Farbe der Perlentreppe (7 weiß, 4 gelb …), alle senkrecht und unten bündig wie auf der
+ * Seguin-Tafel. Die Dicke passt sich an, damit auch viele Stäbe ins Feld passen.
+ * @param {HTMLElement} ziel @param {number[]} werte @param {{ breite: number, hoehe: number, luecke: number, max: number, fuellen?: boolean }} feld
+ */
+function zeichneStaebe(ziel, werte, feld) {
+  ziel.replaceChildren();
+  const laengster = werte.length ? perlenstab(Math.max(...werte)) : null;
+  const dicke = stabDicke(werte.length, feld, feld.fuellen && laengster ? laengster.laenge / laengster.hoehe : undefined);
+  ziel.style.gap = `${feld.luecke}rem`;
+  for (const w of werte) {
+    const stab = document.createElement("ls-perlenstab");
+    stab.setAttribute("wert", String(w));
+    stab.setAttribute("ausrichtung", "senkrecht");
+    stab.style.width = `${dicke.toFixed(2)}rem`;
+    ziel.append(stab);
+  }
+}
+
+/** Öffnet die Tür von Haus k; in der Tür stehen die Perlenstäbe der Zahl. @param {number} k */
 function oeffneTuer(k) {
   const haus = haeuser[k];
   const mat = /** @type {HTMLElement} */ (haus.querySelector(".mat"));
-  mat.replaceChildren();
-  const g = gold(k);
-  if (g && g.zahl > 0) {
-    const el = document.createElement("ls-goldmaterial");
-    el.setAttribute("zahl", String(k));
-    el.style.height = `${(g.hoehe * PERLE_TUER).toFixed(2)}rem`; // Perle 2 rem: bleibt zählbar, die Stange als Stange erkennbar
-    mat.append(el);
-  }
+  zeichneStaebe(mat, staebe(k), TUER_FELD);
   haus.classList.add("offen");
 }
 /** Schließt die Tür von Haus k wieder (außer bei einem Haus, in dem der Brief angekommen ist). @param {number} k */
@@ -445,18 +501,13 @@ function setzeEingabe(text) {
     setze(feldFrei, text);
   }
 }
-/** Material in einem Feld des Umschlags (Hilfe 1): z = Zehnerstangen, e = Perlen. @param {"z" | "e"} stelle @param {number} zahl */
+/** Perlenstäbe in einem Feld des Umschlags (Hilfe 1): z = Zehnerstäbe (zahl 10, 20 …), e = das Einerstäbchen. @param {"z" | "e"} stelle @param {number} zahl */
 function zeigeMaterial(stelle, zahl) {
   const feld = felderJetzt === 0 ? feldFrei : stelle === "z" ? feldZ : feldE;
   const mat = /** @type {HTMLElement} */ (feld.querySelector(".mat"));
   const ziel = felderJetzt === 0 ? /** @type {HTMLElement} */ (mat.querySelector(stelle === "z" ? ".mz" : ".me")) : mat;
   if (!ziel || zahl <= 0) return;
-  ziel.replaceChildren();
-  const g = document.createElement("ls-goldmaterial");
-  g.setAttribute("zahl", String(zahl));
-  // Perlen (Einer) groß in der Mitte des Felds, die Stange füllt ihr Feld in der Höhe.
-  g.style.height = stelle === "e" ? "20rem" : "9.6rem";
-  ziel.append(g);
+  zeichneStaebe(ziel, staebe(zahl), UMSCHLAG_FELD);
 }
 function leereMaterial() {
   for (const f of [feldZ, feldE]) f.querySelector(".mat")?.replaceChildren();
@@ -466,7 +517,7 @@ function leereMaterial() {
 function neuerUmschlag(n, stufe) {
   umschlag.getAnimations().forEach((a) => a.cancel());
   umschlag.dataset.stufe = stufe;
-  zeigeFelder(felderFuer(n, stufe));
+  zeigeFelder(felderVon(n, stufe));
   leereMaterial();
   setzeEingabe("");
   for (const f of [feldZ, feldE, feldFrei]) f.querySelector(".ziffer")?.replaceChildren();
@@ -532,7 +583,7 @@ function freue(k, art) {
 
 /**
  * Wirkung einer richtigen Antwort: Timo rollt zum Haus, der Brief rutscht in den Schlitz, die Tür springt auf und das
- * Goldmaterial der Hausnummer steht darin, dazu Freude (dauert insgesamt etwa 2,3 s).
+ * die Perlenstäbe der Hausnummer stehen darin, dazu Freude (dauert insgesamt etwa 2,3 s).
  * @param {number} n @param {{ satz?: boolean, freude?: boolean }} [o]
  */
 async function wirkungRichtig(n, { satz = false, freude = true } = {}) {
@@ -564,13 +615,16 @@ async function wirkungRichtig(n, { satz = false, freude = true } = {}) {
  * die Tür geht auf, und man sieht, wie viel dort steht. Timo schaut auf den Brief, dann zur Tür (staunen).
  * @param {number} w die getippte Zahl @param {number} n die gesuchte
  */
-async function wirkungDaneben(w, n) {
+async function wirkungDaneben(w, n, abbruch = { weg: false }) {
   await fahre(hausBei, w);
+  if (abbruch.weg) return;
   oeffneTuer(w);
   klang.klingel();
   timo.haltung("staunen", { ms: 260 });
   klang.boing();
   await warte(260);
+  // Hat das Kind schon weitergetippt (neue Taste, Hilfe), fallen die Sätze weg: sie kämen sonst nach der Hilfe.
+  if (abbruch.weg) return;
   // Danach sagt die Stimme das Zahlwort noch einmal; die Aufgabe bleibt.
   erzaehler.daneben(w);
   await erzaehler.wortNochmal(n);
@@ -586,7 +640,7 @@ function stelleAufgabe(aufgabe, melde) {
   ueberspringeAlles();
   const { n } = ziel;
   const stufe = aufgabe.stufe ?? "material";
-  const felder = felderFuer(n, stufe);
+  const felder = felderVon(n, stufe);
 
   let eingabe = "";
   let fertig = false;
@@ -605,8 +659,10 @@ function stelleAufgabe(aufgabe, melde) {
   };
   zeige();
 
+  /** Die nächste Taste zur Lösung (im kleinen Spiel die Taste der Zahl selbst, auch „10“). */
+  const naechste = (/** @type {string} */ e) => (klein ? String(n) : naechsteTaste(e, n, felder));
   const markiereNaechste = () => {
-    const t = naechsteTaste(eingabe, n, felder);
+    const t = naechste(eingabe);
     tastatur.markiere(t === "fertig" ? null : t);
     fertigKnopf.classList.toggle("markiert", t === "fertig");
   };
@@ -624,6 +680,14 @@ function stelleAufgabe(aufgabe, melde) {
     if (fertig || einfuehrungLaeuft) return;
     // Die Eingabe des Fehlversuchs steht noch auf dem Umschlag; die erste neue Taste beginnt von vorn.
     raeumeFehlerBild();
+    if (klein) {
+      // Im kleinen Spiel schickt jede Taste den Brief sofort los (kein Fertig).
+      if (!/^\d+$/.test(taste)) return;
+      eingabe = taste;
+      setzeEingabe(eingabe);
+      pruefe();
+      return;
+    }
     eingabe = tippe(eingabe, taste, felder);
     setzeEingabe(eingabe);
     if (loesungGezeigt) markiereNaechste();
@@ -648,8 +712,10 @@ function stelleAufgabe(aufgabe, melde) {
     melde.passtNicht();
     versucht.add(getippt);
     ohneMarkierung();
-    const lauf = wirkungDaneben(zahl, n);
+    const abbruch = { weg: false };
+    const lauf = wirkungDaneben(zahl, n, abbruch);
     fehlerBild = () => {
+      abbruch.weg = true;
       ueberspringeAlles();
       void lauf;
       schliesseTuer(zahl);
@@ -680,13 +746,14 @@ function stelleAufgabe(aufgabe, melde) {
     // eine Zahl, die das Haus eben als „passt nicht“ gezeigt hat, tippt es nicht noch einmal.
     zuege() {
       if (fertig) return [];
+      if (klein) return kandidatenKlein(n).filter((x) => !versucht.has(x)).map(zug).filter(Boolean);
       const start = fehlerBild ? "" : eingabe;
       const ziele = kandidaten(n, felder).filter((x) => !versucht.has(x));
       return tastenZu(start, ziele, felder).map(zug).filter(Boolean);
     },
     richtigerZug() {
       if (fertig) return null;
-      return zug(naechsteTaste(fehlerBild ? "" : eingabe, n, felder));
+      return zug(naechste(fehlerBild ? "" : eingabe));
     },
     /** Nach der Einführung über „Anleitung“: der Umschlag liegt wieder da, die Hilfe steht wieder. */
     async zeigeWieder() {
@@ -700,7 +767,7 @@ function stelleAufgabe(aufgabe, melde) {
       hilfeGezeigt = true;
       const p = probeVon(n);
       if (hilfeStufe === 1) {
-        // Probe: das Goldmaterial in der Reihenfolge des Wortes, zuerst die Perlen (Einer, rechts), dann die Stange (Zehner, links).
+        // Probe: die Perlenstäbe in der Reihenfolge des Wortes, zuerst das Einerstäbchen (rechts), dann die Zehnerstäbe (links).
         leereMaterial();
         const satz = erzaehler.probe(n);
         zeigeMaterial("e", p.einer);
@@ -710,7 +777,7 @@ function stelleAufgabe(aufgabe, melde) {
       // Lösung: die nächste Taste im Sonnenring; das Kind tippt selbst (L12).
       loesungGezeigt = true;
       markiereNaechste();
-      return erzaehler.loesung(n);
+      return klein && n === 10 ? erzaehler.loesungZehn() : erzaehler.loesung(n);
     },
   };
 }
@@ -756,19 +823,14 @@ async function bereiteBild(stufe) {
 // =====================================================================================================
 // EINFÜHRUNG im echten Spielbild (docs/spielbau.md §8, Idee §6)
 // =====================================================================================================
-// Schritt 1: die Stimme sagt „dreizehn“, die Tasten 1 und 3 sinken von selbst ein, Fertig, Timo rollt von der Post zur 13,
-// die Tür springt auf. Schritt 2: „fünf“, der Sonnenring liegt auf der Taste, die das Kind tippt, dann Fertig; Timo rollt
-// zur 5. Weiter geht es nur mit dem Tipp des Kindes, nie nach einer Zeit. Nicht gebucht.
+// In Ruhe, als kleine Geschichte (Christian, 2026-11-16): Timo hilft der Postbotin; die Stimme erklärt, was das Kind hört
+// und tippt. Beispiel Fünf: das Kind tippt die Fünf (Sonnenring), dann Fertig, den Knopf mit dem Haken; Timo bringt den
+// Brief zur Fünf. Danach: was bei einer anderen Zahl passiert, wie man korrigiert (Sonnenring auf Löschen), was man
+// lernt. Im kleinen Spiel (bis 10) ohne Fertig und Löschen. Weiter geht es bei den Tasten nur mit dem Tipp des Kindes,
+// nie nach einer Zeit. Die Hilfe sagt den Schritt noch einmal. Nicht gebucht.
 
 /** Taste, auf der in der Einführung der Sonnenring liegt (für richtigerZug). @type {string | null} */
 let einfuehrungTaste = null;
-
-/** Eine Taste sinkt von selbst ein (Vormachen). @param {string} t */
-function drueckeVor(t) {
-  const el = t === "fertig" ? fertigKnopf : tastatur.shadowRoot.querySelector(`button[data-z="${t}"]`);
-  if (!el) return;
-  if (typeof el.animate === "function" && !wenigBewegung()) el.animate([{ transform: "translateY(0)" }, { transform: "translateY(0.7rem)", offset: 0.4 }, { transform: "translateY(0)" }], { duration: 260 });
-}
 
 /** Das Kind tippt die Folge von Tasten, je eine im Sonnenring; andere Tasten tun nichts. @param {string[]} folge @param {number} felder */
 function kindTippt(folge, felder) {
@@ -804,45 +866,74 @@ function kindTippt(folge, felder) {
   });
 }
 
+/** Was die Hilfe in der Einführung tut: den Satz des Schritts noch einmal sagen. @type {(() => any) | null} */
+let einfuehrungHilfe = null;
+
+/**
+ * Ein Satz der Einführung: wartet, bis er gesprochen ist; ohne Ton steht er kurz als Blase da und bleibt eine Lesezeit
+ * lang. Danach eine kleine Atempause. @param {(o: { zeigen: boolean }) => Promise<any>} sag
+ */
+async function satz(sag) {
+  const zeigen = !leiste.ton;
+  await sag({ zeigen });
+  if (zeigen) await warte(lesezeit(blase.text));
+  await warte(280);
+}
+
 /** Spielt die Einführung in der Fassung der ersten Aufgabe. @param {string} [stufe] */
 async function einfuehrung(stufe = "material") {
   einfuehrungLaeuft = true;
+  const e = einleitung;
   try {
     stand.phase = "einfuehrung";
     ueberspringeAlles();
-    // Timo rollt erst zur Post zurück (kein plötzlich anderes Bild), die Türen schließen sich.
+    // Timo rollt erst zur Post zurück (kein plötzlich anderes Bild), die Türen schließen sich, der Schoß ist leer.
+    umschlag.style.visibility = "hidden";
     if (hausBei !== 0) await fahre(hausBei, 0, 900);
     besucht = new Set();
     stelleTueren();
     bildStufe = stufe;
-    // Schritt 1: Timo macht es vor.
-    await neuerUmschlag(13, stufe);
-    const felder1 = felderFuer(13, stufe);
-    await erzaehler.wort(13);
-    let vor = "";
-    for (const z of "13") {
-      drueckeVor(z);
-      vor = tippe(vor, z, felder1);
-      setzeEingabe(vor);
-      await warte(450);
-    }
-    drueckeVor("fertig");
-    await warte(300);
-    const satz1 = erzaehler.einfuehrungVor();
-    await Promise.all([wirkungRichtig(13, { freude: false }), satz1]);
-    await warte(500);
-    // Schritt 2: das Kind tippt.
+    // Die Geschichte.
+    einfuehrungHilfe = () => satz(e.briefe);
+    await satz(e.postbotin);
     await neuerUmschlag(5, stufe);
+    await satz(e.briefe);
+    einfuehrungHilfe = () => satz(e.tippen);
+    await satz(e.hoeren);
+    await satz(e.tippen);
+    // Das Beispiel: das Kind tippt selbst.
+    await satz(e.zuhoeren);
     await erzaehler.wort(5);
-    const satz2 = erzaehler.einfuehrungDu();
-    await satz2;
-    await kindTippt(["5", "fertig"], felderFuer(5, stufe));
-    await wirkungRichtig(5, { freude: false });
-    await warte(400);
+    await warte(250);
+    einfuehrungHilfe = () => erzaehler.wort(5).then(() => satz(e.tippeFuenf));
+    const fuenf = kindTippt(["5"], felderVon(5, stufe));
+    await satz(e.tippeFuenf);
+    await fuenf;
+    if (!klein) {
+      einfuehrungHilfe = () => satz(e.fertig).then(() => satz(e.haken));
+      const fertig = kindTippt(["fertig"], felderVon(5, stufe));
+      await satz(e.fertig);
+      await satz(e.haken);
+      await fertig;
+    }
+    einfuehrungHilfe = null;
+    await Promise.all([wirkungRichtig(5, { freude: false }), satz(e.bringt)]);
+    // Was bei einer anderen Zahl passiert, wie man korrigiert, was man lernt.
+    await satz(e.andere);
+    await satz(e.faehrt);
+    await satz(e.nochmal);
+    if (!klein) {
+      await satz(e.aendern);
+      tastatur.markiere("loeschen");
+      await satz(e.loeschen);
+      tastatur.markiere(null);
+    }
+    await satz(klein ? e.lernenKlein : e.lernen);
   } finally {
     ueberspringeAlles();
     einfuehrungLaeuft = false;
     einfuehrungTaste = null;
+    einfuehrungHilfe = null;
     tastatur.markiere(null);
     fertigKnopf.classList.remove("markiert");
   }
@@ -856,6 +947,8 @@ const params = new URLSearchParams(location.search);
 const wunsch = einmal(params.get("thema")); // ?thema= gilt nur für die erste Runde der Seite
 // ?stufe=<id> nur im Testbetrieb: jede Aufgabe auf dieser Lernstufe; die Runde ist dann eine Vorschau (schreibt nicht).
 const PRUEF_STUFE = testbetrieb() ? params.get("stufe") || null : null;
+/** ?bis=<n> nur im Testbetrieb: das Spiel tut, als ginge das Thema bis n (z. B. ?bis=20: großes Spiel mit Fertig). */
+const PRUEF_BIS = testbetrieb() && params.has("bis") ? Number(params.get("bis")) : null;
 /** @param {any} a */
 const aufStufe = (a) => (a && PRUEF_STUFE ? { ...a, stufe: PRUEF_STUFE } : a);
 
@@ -888,7 +981,8 @@ meldePruefSchnittstelle({
 // --- Hilfe-Leiter (grundsaetze.md L12, bedienung.md 6) ---------------------------------------------
 /** @type {(() => void) | null} */
 let hilfeTippen = null;
-hilfe.addEventListener("hilfe", () => { if (!einfuehrungLaeuft) hilfeTippen?.(); });
+// In der Einführung sagt die Hilfe den Schritt noch einmal (sonst hörte das Kind nur den Namen „Hilfe“).
+hilfe.addEventListener("hilfe", () => { if (einfuehrungLaeuft) einfuehrungHilfe?.(); else hilfeTippen?.(); });
 
 /**
  * Spielt eine Aufgabe bis zur Lösung.
@@ -998,6 +1092,8 @@ async function starteRunde(vorschau) {
   const plan = r.thema ? c.plan.themen.find((/** @type {any} */ t) => t.id === r.thema?.id) : null;
   return {
     thema: r.thema?.name ?? "",
+    /** Bis zu welcher Zahl das Thema der Runde geht (kleines Spiel bis 10). */
+    bis: plan?.aufgaben?.bis ?? null,
     echteDinge: plan ? { thema: plan.id, fach: plan.strang, titel: plan.name, text: plan.eltern ?? "" } : null,
     einfuehrungGesehen: () => r.einfuehrungGesehen(),
     naechste: () => r.naechste(),
@@ -1011,6 +1107,7 @@ function vorschauRunde() {
   const keys = [...VORSCHAU.aufgaben];
   return {
     thema: VORSCHAU.thema,
+    bis: null,
     echteDinge: { titel: VORSCHAU.thema },
     einfuehrungGesehen() {},
     naechste() {
@@ -1066,6 +1163,8 @@ async function spieleRunde(vorschau) {
     aufgabe = naechste();
   }
   leiste.setAttribute("thema", r.thema);
+  // Themen bis 10 spielen klein: nur die Häuser 0 bis 10, Taste „10“, ohne Fertig und Löschen.
+  setzeKlein(istKlein(PRUEF_BIS ?? r.bis));
 
   // Das Spiel beginnt mit der Einführung im echten Spielbild (bei jedem Start; in der Vorschau nur mit ?einfuehrung).
   const erste = zahlAus(aufgabe?.ziel?.key);
@@ -1079,6 +1178,8 @@ async function spieleRunde(vorschau) {
   while (aufgabe) {
     raeumeAuf();
     const z = zahlAus(aufgabe.ziel.key);
+    // Kommt im kleinen Spiel doch eine Zahl über 10 (Wiederholung eines anderen Themas), gilt das ganze Spiel.
+    if (z && klein && z.n > KLEIN_BIS) setzeKlein(false);
     if (z) {
       leiste.setAttribute("thema", themaName(aufgabe.ziel.thema) ?? r.thema);
       await bereiteBild(aufgabe.stufe ?? "material");

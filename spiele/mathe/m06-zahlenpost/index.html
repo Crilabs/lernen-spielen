@@ -6,7 +6,7 @@
 <title>Zahlenpost</title>
 <!-- M06 Zahlenpost (Idee docs/spiele/mathe/m06-zahlenpost.md). Das Spielbild ist die Straße über den ganzen Bildschirm:
      Timo rollt mit dem Brief auf dem Schoß die Häuserreihe entlang, die Kamera folgt ihm. Links Timo mit dem Umschlag
-     (Spalten Z | E), rechts das Ziffernbrett aus Holz mit Fertig. Leiste, Blase, Hilfe und Pause an ihren Plätzen. -->
+     (Spalten Z | E), rechts das Ziffernbrett aus Holz mit Fertig (im kleinen Spiel bis 10: Taste 10, ohne Fertig). Leiste, Blase, Hilfe und Pause an ihren Plätzen. -->
 <link rel="stylesheet" href="../../rahmen/seite.css">
 <style>
   /* ===== SPIELWELT: eine ruhige Straße. Alles in rem (1rem = Bildhöhe/108). ===== */
@@ -54,11 +54,17 @@
   .timo svg { width: 100%; height: 100%; display: block; overflow: visible; }
   .schatten { position: absolute; left: 27rem; top: 84.4rem; width: 26rem; height: 3.2rem; border-radius: 50%; background: rgba(43, 38, 34, 0.26); filter: blur(0.3rem); }
 
-  /* Der Umschlag auf Timos Schoß: Spalten Z | E (material beschriftet und gefärbt, vorstellung nur gefärbt, kopf eine freie Zeile). */
-  .umschlag { position: absolute; left: 40.5rem; top: 66.5rem; width: 18rem; height: 13.5rem; padding: 1.8rem 1rem 1rem; box-sizing: border-box;
-    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 1.8rem; box-shadow: 0 0.6rem 0 var(--ls-tinte-weich);
-    display: flex; flex-direction: column; justify-content: flex-end; align-items: center; will-change: transform, opacity; }
-  .umschlag::before { content: ""; position: absolute; left: 0.3rem; right: 0.3rem; top: 0.3rem; height: 3.4rem; background: #EEE6D6; clip-path: polygon(0 0, 100% 0, 50% 100%); border-radius: 1.4rem 1.4rem 0 0; }
+  /* Der Umschlag auf Timos Schoß (Christian, 2026-11-16: als Brief erkennbar, ohne Schatten – er ist kein Knopf):
+     Papier mit Kontur, die Klappe als Dreieck mit Tinte-Linie, rechts oben eine Briefmarke. Darauf die Spalten Z | E
+     (material beschriftet und gefärbt, vorstellung nur gefärbt, kopf und das kleine Spiel eine freie Zeile). */
+  .umschlag { position: absolute; left: 39.5rem; top: 65.5rem; width: 24rem; height: 15rem; padding: 0 1.2rem 1rem; box-sizing: border-box;
+    background: #FBF3E4; border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 0.9rem;
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; will-change: transform, opacity; }
+  .umschlag > .klappe { position: absolute; left: 0; top: 0; width: 100%; height: 6.4rem; pointer-events: none; }
+  .umschlag > .klappe path { fill: #F1E3C8; stroke: var(--ls-tinte); stroke-width: 0.3rem; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  .umschlag > .marke { position: absolute; right: 1rem; top: 0.9rem; width: 3.6rem; height: 4.4rem; box-sizing: border-box; background: #E5484D;
+    border: 0.25rem dotted #FBF3E4; outline: 0.25rem solid var(--ls-tinte); border-radius: 0.3rem; }
+  .umschlag > .marke::after { content: ""; position: absolute; left: 0.7rem; right: 0.7rem; top: 0.8rem; height: 1.6rem; border-radius: 50% 50% 0.3rem 0.3rem; background: #FFE07A; }
   .umschlag .wort { position: absolute; left: 0; right: 0; top: 0.3rem; text-align: center; font: 700 1.6rem/1 "Andika", sans-serif; color: var(--ls-tinte); z-index: 1; }
   .umschlag .wort[hidden] { display: none; }
   .felder { position: relative; display: flex; gap: 1rem; align-items: stretch; z-index: 1; }
@@ -74,7 +80,11 @@
   .ziffer.sinkt { animation: sinkt 0.22s ease-out; }
   @keyframes sinkt { from { transform: translateY(-1.6rem); opacity: 0.2; } to { transform: none; opacity: 1; } }
   .feld-z .mat, .feld-e .mat { position: absolute; left: 0; right: 0; top: 0.4rem; height: 9.6rem; display: flex; justify-content: center; align-items: flex-start; }
-  .feld-frei .mat { position: absolute; left: 0; right: 0; top: 0.4rem; height: 9.6rem; display: flex; justify-content: center; align-items: flex-start; gap: 1.4rem; }
+  .feld-z .mat, .feld-e .mat { align-items: flex-end; }
+  .feld-frei .mat { position: absolute; left: 0; right: 0; top: 0.4rem; height: 9.6rem; display: flex; justify-content: center; align-items: flex-end; gap: 1.4rem; }
+  .feld-frei .mz, .feld-frei .me { display: flex; align-items: flex-end; }
+  /* Die Perlenstäbe stehen unten bündig wie auf der Seguin-Tafel. */
+  .mat ls-perlenstab { flex: none; }
 
   /* Ziffernbrett aus Holz, liegt rechts auf der Straße: Ziffernblock, darunter Fertig. Unten bleibt Platz für die Hilfe. */
   .spielflaeche { display: grid; grid-template-columns: minmax(0, 1fr) 46rem; grid-template-rows: 12rem minmax(0, 1fr); column-gap: 2.4rem; row-gap: 1.6rem; padding: 1.6rem 2.4rem 2.4rem; }
@@ -124,6 +134,8 @@
     <div class="schatten" id="schatten"></div>
     <div class="timo" id="timo"><div class="koerper" id="timo-koerper"></div></div>
     <div class="umschlag" id="umschlag" data-stufe="material">
+      <svg class="klappe" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M1 1 L50 96 L99 1"/></svg>
+      <div class="marke"></div>
       <div class="wort" id="wort" hidden></div>
       <div class="felder">
         <div class="feld-z" id="feld-z"><span class="stempel">Z</span><div class="mat"></div><span class="ziffer"></span></div>

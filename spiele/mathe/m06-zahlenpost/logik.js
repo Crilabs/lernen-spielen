@@ -48,11 +48,13 @@ export function texteErzeugen(bis = 20) {
   /** @type {Record<string, Record<string, string>>} */
   const t = { wort: {}, bei: {}, daneben: {}, hilfe1: {}, hilfe2: {} };
   for (let n = 0; n <= bis; n++) t.wort[n] = `${nomen(n)}.`;
+  // „bei Nummer Dreizehn“, nie „bei der Dreizehn“: die Stimme (Azure Florian HD) macht daraus „bei der dreizehnten“
+  // (Christian, 2026-11-16; mit Spracherkennung nachgeprüft, docs/stimme.md).
   for (let n = 0; n <= 99; n++) {
-    const wo = n === 0 ? "Post" : nomen(n);
-    t.daneben[n] = `Timo steht bei der ${wo}.`;
+    const wo = n === 0 ? "der Post" : `Nummer ${nomen(n)}`;
+    t.daneben[n] = `Timo steht bei ${wo}.`;
     if (n > bis) continue;
-    t.bei[n] = `Der Brief ist bei der ${wo}.`;
+    t.bei[n] = `Der Brief ist bei ${wo}.`;
     const e = n % 10;
     const z = Math.floor(n / 10);
     if (n === 0) t.hilfe1[n] = "Keine Perle.";
@@ -140,6 +142,51 @@ export function tastenZu(eingabe, ziele, felder) {
   if (ziele.includes(eingabe) && bereit(eingabe, felder)) aus.push("fertig");
   if (eingabe && !aus.length) aus.push("loeschen");
   return aus;
+}
+
+// --- Bis zehn (Christian, 2026-11-16) ------------------------------------------------------------------------------
+
+/** Themen bis zu dieser Zahl spielen „klein“: nur die Häuser 0 bis 10, eine Taste „10“, kein Fertig, kein Löschen. */
+export const KLEIN_BIS = 10;
+
+/** Spielt ein Thema mit Aufgaben bis `bis` klein? @param {number | null | undefined} bis */
+export const istKlein = (bis) => typeof bis === "number" && bis <= KLEIN_BIS;
+
+/**
+ * Tasten, die ein ratendes Kind im kleinen Spiel am ehesten tippt (jede Taste schickt den Brief sofort los): die Zahl,
+ * dann die Nachbarn. Nur für die Test-Schnittstelle.
+ * @param {number} n @returns {string[]}
+ */
+export function kandidatenKlein(n) {
+  const wahl = [n, n + 1, n - 1, n + 2, n - 2].filter((x) => x >= 0 && x <= KLEIN_BIS);
+  return [...new Set(wahl)].map(String);
+}
+
+// --- Perlenstäbe (Montessori: goldene Zehnerstäbe, die Einer als ein farbiges Stäbchen) -------------------------
+
+/** Länge eines Zehnerstabs geteilt durch seine Dicke (perlen-geometrie.js: 11,8 zu 1,4). */
+export const STAB_VERHAELTNIS = 11.8 / 1.4;
+
+/**
+ * Die Stäbe einer Zahl wie auf der Seguin-Tafel: so viele Zehnerstäbe wie Zehner, dazu ein Stäbchen mit den Einern.
+ * @param {number} n 0 bis 99 @returns {number[]} Werte der Stäbe von links nach rechts (10, 10, 7)
+ */
+export function staebe(n) {
+  const aus = Array.from({ length: Math.floor(n / 10) }, () => 10);
+  if (n % 10) aus.push(n % 10);
+  return aus;
+}
+
+/**
+ * Dicke der senkrechten Stäbe (rem), damit sie in ein Feld passen: der längste Stab höchstens `hoehe` hoch (Vorgabe:
+ * ein Zehnerstab, `verhaeltnis` = Länge zu Dicke des längsten), alle Stäbe mit Lücken höchstens `breite` breit, nie
+ * dicker als `max`.
+ * @param {number} anzahl @param {{ breite: number, hoehe: number, luecke: number, max: number }} feld @param {number} [verhaeltnis]
+ */
+export function stabDicke(anzahl, { breite, hoehe, luecke, max }, verhaeltnis = STAB_VERHAELTNIS) {
+  const nachHoehe = hoehe / verhaeltnis;
+  const nachBreite = anzahl > 0 ? (breite - (anzahl - 1) * luecke) / anzahl : max;
+  return Math.max(0.3, Math.min(max, nachHoehe, nachBreite));
 }
 
 // --- Fahrt ---------------------------------------------------------------------------------------------------------

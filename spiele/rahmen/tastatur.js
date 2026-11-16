@@ -5,6 +5,7 @@
 // Die Tasten sprechen nichts; was gesagt wird, entscheidet das Spiel. Eine Hardware-Tastatur geht zusätzlich.
 // Der Host ist ein Block: wohin die Tastatur kommt (unten Mitte), bestimmt das Spiel.
 // `je-reihe="3"`: Ziffernblock, höchstens so viele Tasten je Reihe; Löschen kommt in die letzte Reihe, wenn es passt.
+// `zehn`: eine Taste „10“ (detail.zeichen "10") nach der 0, für Ziffernblöcke bis 10 (M06 Zahlenpost, Christian 2026-11-16).
 // Hilfe Stufe 2 (Lösung): markiere(zeichen) gibt der Taste den Sonnenring (Klasse `markiert`), markiere(null) nimmt ihn.
 
 import { GRUND_CSS, definiere } from "./stil.js";
@@ -73,7 +74,7 @@ const ENTITAET = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" };
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ENTITAET[c]);
 
 export class LsTastatur extends HTMLElement {
-  static observedAttributes = ["tasten", "leertaste", "loeschen", "je-reihe"];
+  static observedAttributes = ["tasten", "leertaste", "loeschen", "je-reihe", "zehn"];
 
   constructor() {
     super();
@@ -110,6 +111,7 @@ export class LsTastatur extends HTMLElement {
     const reihen = ausgeglichen(this.tastenListe, Number.isInteger(jeReihe) && jeReihe > 0 ? jeReihe : 10)
       .map((r) => r.map((z) => `<button class="taste" type="button" tabindex="0" data-z="${esc(z)}">${esc(z)}</button>`));
     const fn = [];
+    if (this.hasAttribute("zehn")) fn.push(`<button class="taste" type="button" tabindex="0" data-z="10">10</button>`);
     if (this.hasAttribute("leertaste")) fn.push(`<button class="taste leer" type="button" tabindex="0" data-z=" " aria-label="Leertaste">${LEER_SVG}</button>`);
     if (this.hasAttribute("loeschen")) fn.push(`<button class="taste weg" type="button" tabindex="0" data-z="loeschen" aria-label="Löschen">${LOESCHEN_SVG}</button>`);
     const letzte = reihen[reihen.length - 1];

@@ -23,13 +23,36 @@ const hier = (p) => fileURLToPath(new URL(p, import.meta.url));
 
 export const PROMPT = [
   "Create the key art (game card image) for a children's learning game, landscape format, based on the attached screenshots of the real game.",
-  "Keep exactly what the game is: the same main character (same hair, clothes, face, hearing aids if present), the same playing field and objects, the same idea and colours of the learning material.",
+  "Keep exactly what the game is: the same main character (same hair, clothes, face, body), the same playing field and objects, the same idea and colours of the learning material. Add nothing to the character that is not in the screenshots and in the character description below (no glasses, hearing aids, hats or jewellery of your own).",
   "Make it look plastic and attractive: soft three-dimensional, rounded shapes, gentle light and soft shadows, a little depth of field, like a polished illustration of a premium children's app – friendly, bright, calm, never scary.",
   "Show one lively moment of play (the character in motion, e.g. mid-jump), the playing field clearly recognisable.",
   "Absolutely no text, no letters, no words, no user interface, no buttons, no keypad, no logos. Digits only if they are part of the learning material itself, and then few and large.",
   "IMPORTANT: this image is only shown as a small thumbnail on a game card (about 300 pixels wide). Show only very few, large, simple elements: the character big and close, a short section of the playing field, a calm plain background. Leave out small objects, background scenery, fences, plants and fine details – everything must still read at thumbnail size.",
   "Nothing important at the very edges.",
 ].join(" ");
+
+/**
+ * Die Kinder der Runde (docs/figuren.md, Tabelle „Aussehen“/„Bewegt sich“), für das Bild ausgeschrieben, damit das
+ * Bildmodell nichts dazuerfindet (Christian, 2026-11-16: Timo bekam Hörgeräte, die nur Lena trägt). Jede Beschreibung
+ * sagt auch, was die Figur NICHT hat. Bei einer Änderung in figuren.md hier mitziehen.
+ */
+export const FIGUREN = {
+  ela: "Ela: a girl with medium-brown skin, short dark hair with a hair clip, and glasses. She walks and climbs. No hearing aids, no wheelchair.",
+  kofi: "Kofi: a slim boy with dark-brown skin and short black curls. He runs and jumps. No glasses, no hearing aids, no wheelchair.",
+  lena: "Lena: a girl with fair skin, long red wavy curls, freckles and two visible turquoise hearing aids. She walks and hops. No glasses, no wheelchair.",
+  timo: "Timo: a roundish boy with fair to olive skin and straight, tousled light-brown hair, fairly long (side parting with a cowlick, down to the middle of the ears). He sits in a wheelchair that he drives himself, fast and skilfully, and carries things on his lap. No hearing aids, no glasses.",
+};
+
+/** Welche Kinder der Runde das Spiel zeichnet (Runde.zeichne("timo", …) in spiel.js). @param {string} spielordner */
+export function figurenIm(spielordner) {
+  let code = "";
+  try {
+    code = readFileSync(join(resolve(spielordner), "spiel.js"), "utf8");
+  } catch {
+    return [];
+  }
+  return Object.keys(FIGUREN).filter((n) => new RegExp(`zeichne\\(\\s*["'\`]${n}["'\`]`).test(code));
+}
 
 /** Nimmt drei Screenshots des Spiels auf (Testbetrieb, stumm): mitten in der Wirkung und in der nächsten Aufgabe. */
 export async function nimmAuf(spielordner, ziel) {
@@ -109,9 +132,12 @@ async function main() {
   const datei = `${resolve(a.spiel).slice(resolve(wurzel).length + 1).replace(/^spiele\//, "")}/index.html`;
   const eintrag = (JSON.parse(readFileSync(join(wurzel, "spiele/spiele.json"), "utf8")).spiele ?? []).find((x) => x.datei === datei);
   const beschreibung = [eintrag?.beschreibung, a.hinweis].filter(Boolean).join(" ");
-  const prompt = beschreibung
-    ? `${PROMPT}\n\nWhat the game is (German description by the makers, follow it): ${beschreibung}`
-    : PROMPT;
+  const figuren = figurenIm(a.spiel).map((n) => FIGUREN[/** @type {keyof typeof FIGUREN} */ (n)]);
+  const prompt = [
+    PROMPT,
+    beschreibung && `What the game is (German description by the makers, follow it): ${beschreibung}`,
+    figuren.length && `The character${figuren.length > 1 ? "s" : ""} (draw exactly like this, add nothing): ${figuren.join(" ")}`,
+  ].filter(Boolean).join("\n\n");
   const form = new FormData();
   for (const b of a.bilder) form.append("image[]", new Blob([readFileSync(b)], { type: "image/png" }), basename(b));
   form.append("prompt", prompt);

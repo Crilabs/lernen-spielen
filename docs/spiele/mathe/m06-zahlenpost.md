@@ -50,3 +50,22 @@ Katalog M06 · Mathe · `spiele/mathe/m06-zahlenpost/` · Kl. 1 (0 bis 20), Date
 - Lesen-Richtung (Zahlwort lesen): eigene Handlung, nicht zwei in einem Spiel.
 - Regal-Karte „Ziffer passt“: es gibt noch kein Regal-Format dafür.
 - „Spielbar ohne Ton“: das Hören ist hier der Stoff. Bei Ton aus steht das Zahlwort geschrieben auf dem Umschlag **(Annahme)**.
+
+## Überarbeitung nach Christians Spielprobe (2026-11-16)
+
+Ersetzt die Angaben oben, wo sie sich widersprechen.
+
+- **Einführung** in Ruhe, als kleine Geschichte (spielbau.md §8 neu): „Timo hilft heute der Postbotin. Er bringt die
+  Briefe zur richtigen Hausnummer. Du hörst eine Zahl. Die tippst du auf den Brief. Hör gut zu. – Fünf. – Tippe die
+  Fünf. Jetzt tippe auf Fertig. Das ist der Knopf mit dem Haken. Timo bringt den Brief zu Nummer Fünf. Tippst du eine
+  andere Zahl? Dann fährt Timo zu diesem Haus. Probier es dann einfach noch einmal. Willst du deine Zahl ändern? Dann
+  tippe auf den Knopf neben der Null. So lernst du, Zahlen zu schreiben, die du hörst.“ Das Kind tippt 5 und Fertig
+  selbst (Sonnenring); Fertig und Löschen bekommen den Sonnenring, wenn sie genannt werden. Die Hilfe sagt in der
+  Einführung den Schritt noch einmal (vorher hörte man nur „Hilfe“).
+- **Perlenstäbe statt Goldmaterial** (Montessori-Farben): goldene Zehnerstäbe, so viele wie Zehner, die Einer als
+  ein Stäbchen der Perlentreppe (`<ls-perlenstab>`), senkrecht und unten bündig wie auf der Seguin-Tafel, in der Tür
+  und in der Hilfe 1. Die Tür des Zielhauses steht rechts neben Timo (vorher verdeckte er sie).
+- **Kleines Spiel** für Themen bis 10: nur Post und Häuser 1–10, Taste „10“, kein Fertig, kein Löschen; ein Tipp
+  schickt den Brief los. Bei 11–20 bleiben Fertig und Löschen.
+- **Brief** mit Klappe und Briefmarke, ohne Schatten (er ist kein Knopf). Fertig-Symbol: ein Haken (alle Spiele).
+- **Sätze** „bei Nummer Dreizehn“ statt „bei der Dreizehn“: die Stimme sprach dort eine Ordnungszahl (stimme.md).

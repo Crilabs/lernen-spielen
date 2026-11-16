@@ -150,11 +150,39 @@ test("texte.json: Sätze zu jeder Zahl, Wörter stimmen mit dem Erzeuger überei
     }
   }
   assert.equal(TEXTE.bei[0], "Der Brief ist bei der Post.");
-  assert.equal(TEXTE.daneben[71], "Timo steht bei der Einundsiebzig.");
+  assert.equal(TEXTE.daneben[71], "Timo steht bei Nummer Einundsiebzig.");
+  assert.equal(TEXTE.bei[13], "Der Brief ist bei Nummer Dreizehn.");
+  // Nie „bei der Dreizehn“: die Stimme spricht daraus eine Ordnungszahl („bei der dreizehnten“).
+  for (const gruppe of ["bei", "daneben"]) for (const satz of Object.values(TEXTE[gruppe])) assert.doesNotMatch(satz, /\b(der|zur) (?!Post)\p{Lu}/u, satz);
   assert.equal(TEXTE.hilfe1[13], "Drei und zehn.");
   assert.equal(TEXTE.hilfe1[20], "Zwei Zehner.");
   assert.equal(TEXTE.hilfe1[12], "Zwei und zehn.");
   assert.equal(TEXTE.hilfe1[4], "Vier Perlen.");
   assert.equal(TEXTE.hilfe2[17], "Erst die Eins, dann die Sieben.");
   assert.equal(TEXTE.hilfe2[5], "Die Fünf tippen.");
+});
+
+test("klein (Themen bis 10): nur bis 10, Kandidaten sind einzelne Tasten bis 10 (auch „10“)", () => {
+  assert.equal(L.istKlein(10), true);
+  assert.equal(L.istKlein(20), false);
+  assert.equal(L.istKlein(null), false);
+  assert.deepEqual(L.kandidatenKlein(5), ["5", "6", "4", "7", "3"]);
+  assert.deepEqual(L.kandidatenKlein(10), ["10", "9", "8"]);
+  assert.deepEqual(L.kandidatenKlein(0), ["0", "1", "2"]);
+});
+
+test("staebe: Zehnerstäbe wie Zehner, die Einer als ein Stäbchen (Seguin-Tafel)", () => {
+  assert.deepEqual(L.staebe(0), []);
+  assert.deepEqual(L.staebe(7), [7]);
+  assert.deepEqual(L.staebe(10), [10]);
+  assert.deepEqual(L.staebe(17), [10, 7]);
+  assert.deepEqual(L.staebe(45), [10, 10, 10, 10, 5]);
+});
+
+test("stabDicke: Zehnerstab passt in die Höhe, viele Stäbe in die Breite, nie dicker als max", () => {
+  const feld = { breite: 12, hoehe: 20.5, luecke: 0.5, max: 2.3 };
+  assert.equal(L.stabDicke(1, feld), 2.3);
+  const neun = L.stabDicke(10, feld);
+  assert.ok(10 * neun + 9 * 0.5 <= 12 + 1e-9, "zehn Stäbe passen in die Breite");
+  assert.ok(L.stabDicke(1, { ...feld, hoehe: 10 }) * L.STAB_VERHAELTNIS <= 10 + 1e-9, "ein Zehnerstab passt in die Höhe");
 });

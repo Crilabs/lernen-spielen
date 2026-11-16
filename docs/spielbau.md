@@ -77,7 +77,8 @@ oder in einer Entscheidung des Kindes, nie in der Bedienung.
 - **Keine Sprechblase im Spiel** (Christian, 2026-11-15): Sätze werden nur gesprochen, ein Knopf „Nochmal hören“
   spielt den letzten Satz wieder (`<ls-blase ohne-text>`); ist ein Satz zum Lesen wichtig, erscheint die Blase kurz
   und verschwindet von selbst. Kein Satz wiederholt, was Leiste oder Bild schon zeigen.
-- **Rundenanfang:** höchstens ein Satz. **Einführung:** höchstens drei Schritte mit je einem Satz, im Tempo des Kindes (§8).
+- **Rundenanfang:** höchstens ein Satz. **Einführung:** in Ruhe, als kleine Geschichte (§8, Christian 2026-11-16);
+  ihre Sätze zählen nicht zum Budget unten, jeder einzelne hält aber die Satzlänge.
 - **Satzlänge:** bis Kl. 2 höchstens 8 Wörter, Kl. 3–4 höchstens 12.
 - **Alle festen Texte eines Spiels zusammen** (ohne die aus Daten erzeugten Varianten je Zahl): höchstens etwa
   2 500 Zeichen. M37 hatte 10 200.
@@ -155,8 +156,16 @@ alle Spiele gilt deshalb:
   Kette hin), nie ein plötzlich anderes Bild (Christian, 2026-11-15).
 - **Das Spiel beginnt mit der Einführung, und sie spielt im echten Spielbild:** derselbe Held, dieselbe Kette,
   dieselbe Tastatur. Ein Kind der Runde macht einen Zug ganz vor (tippen, Wirkung), dann leuchtet beim Kind die Taste
-  im Sonnenring und es tippt selbst. Bei jedem Start; der Knopf „Anleitung“ ruft sie jederzeit wieder auf. Je Schritt
-  ein Satz; weiter erst nach dem Tipp des Kindes, nie nach einer Zeit. Der Abspieler `spiele/einfuehrung.js` (eigene
+  im Sonnenring und es tippt selbst. Bei jedem Start; der Knopf „Anleitung“ ruft sie jederzeit wieder auf. Weiter
+  erst nach dem Tipp des Kindes, nie nach einer Zeit.
+- **Die Einführung erklärt in Ruhe, mit einer kleinen Geschichte (Christian, 2026-11-16).** Die Einführung von M06
+  („Timo bringt den Brief zur Dreizehn. Jetzt tippst du.“) war viel zu knapp. Sie erzählt deshalb der Reihe nach,
+  je Gedanke ein kurzer Satz: wer was tut und warum (die Geschichte: „Timo hilft heute der Postbotin. Er bringt die
+  Briefe zur richtigen Hausnummer.“), was das Kind hört oder sieht, was es tippt und mit welchem Knopf (der Knopf
+  bekommt dabei den Sonnenring), ein Beispiel, das das Kind selbst ausführt, was passiert, wenn es etwas anderes
+  tippt („Dann probierst du es einfach noch einmal.“), wie es korrigiert, und zum Schluss, was es dabei lernt.
+  Knöpfe heißen nach dem, was man an ihnen sieht („der Knopf mit dem Haken“, „der Knopf neben der Null“), nicht
+  nach einer Farbe. Die Hilfe wirkt auch in der Einführung (sie sagt den Schritt noch einmal und zeigt die Taste). Der Abspieler `spiele/einfuehrung.js` (eigene
   Szenen mit Stäben und Ziffern) bleibt nur für Themen ohne eigenes Spielbild.
 - **Kein Satz wird vom Spiel abgeschnitten**, nur ein Tipp des Kindes darf ihn abbrechen: Das Spiel wartet
   (`await blase.sage(…)`), bevor es den nächsten Satz sagt. Die Stimme schreibt sonst „Satz abgeschnitten“ ins
