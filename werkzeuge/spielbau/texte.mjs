@@ -29,7 +29,7 @@ export const ERSATZ = [
  * stimme.md). Zahlwörter nur als ganze Wörter – „Zehner“, „Einer“, „Zwanziger“ sind keine Zahlwörter.
  */
 export const ZAHL_NACH_ARTIKEL =
-  /\b(der|dem|zur|zum)\s+(\d+|(?:null|eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}*zehn|\p{L}*zig|hundert|tausend))(?![\p{L}\d])/iu;
+  /\b(der|dem|zur|zum)\s+(\d+|(?:eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}*zehn|\p{L}*zig|hundert|tausend))(?![\p{L}\d])/iu;
 
 /** Schlüssel in JSON, deren Werte keine Sätze für das Kind sind. */
 const KEINE_SAETZE = new Set(["hinweis", "quelle", "id", "art", "objekt", "zustand", "vorlage", "packung", "symbol", "datei", "welt", "figur", "farbe"]);

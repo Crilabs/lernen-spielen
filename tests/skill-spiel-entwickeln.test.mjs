@@ -110,6 +110,7 @@ test("Texte: Zahl nach Artikel wird als Ordnungszahl gesprochen und ist rot", ()
   assert.equal(rot("Das ist ZUM 7 gehörig.").length, 1);
   assert.equal(rot("Timo steht bei Nummer Dreizehn.").length, 0);
   assert.equal(rot("Die Zwei passt.").length, 0);
+  assert.equal(rot("Tippe auf den Knopf neben der Null.").length, 0); // „der Null“ hat keine Ordnungszahl-Lesung
   assert.equal(rot("Das ist der Zehner.").length, 0);
   assert.equal(rot("Der Einer links, dem Zwanziger folgt.").length, 0);
   assert.ok(ZAHL_NACH_ARTIKEL.test("der Zwanzig"));
