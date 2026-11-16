@@ -72,7 +72,7 @@ sicher **(Annahme)**.
   nichts wird gespeichert, nichts geprüft (K7).
 - **Wahres stimmt** (G11): Jede Tatsache steht mit Quelle in `quellen` (dort generisch: „Katzen …“), im Erzähltext steckt
   sie in der Handlung; keine Mythen, keine falschen Erwartungen (z. B. Eingewöhnung dauert Wochen, nicht einen Tag);
-  jedes Bild zeigt nur, was stimmt. Auch Lerngeschichten mit Tierwissen haben `quellen`. Erzeugte Bilder tragen den kleinen Hinweis „Bild erzeugt“.
+  jedes Bild zeigt nur, was stimmt. Auch Lerngeschichten mit Tierwissen haben `quellen`. Erzeugte Bilder tragen kein Label im Bild; der Hinweis steht in den Eltern-Hinweisen (Christian 2026-11-16).
 - **Grenzen wie bei Spielen:** G1 keine Bewertung, G8 Vielfalt beiläufig, G9 Sicherheit (ruhig, hell, Ende in Ruhe), G10
   Erzähler in der dritten Person, Figuren sprechen nicht.
 - **Keine Regeln mit Verfallsdatum** (`grundsaetze.md` §5): Eine Geschichte trägt eine Form oder Struktur, nie eine

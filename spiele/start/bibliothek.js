@@ -1,11 +1,11 @@
 // Bibliothek der Geschichten: Räume › Regale › Bücher (Spec docs/superpowers/specs/2026-11-15-bibliothek-design.md).
 // Reine Logik ohne DOM und ohne fetch (in Node testbar, tests/bibliothek.test.mjs).
-//   plan     = spiele/bibliothek.json ({ raeume: [{ id, name, bild, regale: [{ id, name, welten?, fach?, buecher: [{ id, titel }] }] }] })
+//   plan     = spiele/bibliothek.json ({ raeume: [{ id, name, bild, regale: [{ id, name, welten?, fach?, buecher: [{ id, titel, thema }] }] }] })
 //   liste    = geschichten/index.json → geschichten (fertige Geschichten: id, titel, art, welt, familie)
 //   gelesen  = Lernstand sachthemen.geschichten ({ [id]: { am } })
 import { themenkreisSvg, paletteDesThemenkreises, PALETTEN } from "./welten.js";
 
-/** @typedef {{ id: string, titel: string, da: boolean, am: string }} Buch */
+/** @typedef {{ id: string, titel: string, thema: string, da: boolean, am: string }} Buch */
 /** @typedef {{ id: string, name: string, fach: string, welten: string[], buecher: Buch[] }} Regal */
 /** @typedef {{ id: string, name: string, bild: string, foto: string, regale: Regal[] }} Raum */
 
@@ -28,7 +28,7 @@ export function bibliothekGanz(plan, geschichten = [], gelesen = {}) {
       id: text(rg.id), name: text(rg.name), fach: text(rg.fach), welten: liste(rg.welten).filter((w) => typeof w === "string"),
       buecher: liste(rg.buecher).filter((b) => text(b?.id)).map((b) => {
         const g = fertig.get(b.id);
-        return { id: b.id, titel: text(g?.titel) || text(b.titel) || b.id, da: Boolean(g), am: text(gelesen?.[b.id]?.am) };
+        return { id: b.id, titel: text(g?.titel) || text(b.titel) || b.id, thema: text(b.thema), da: Boolean(g), am: text(gelesen?.[b.id]?.am) };
       }),
     })),
   }));

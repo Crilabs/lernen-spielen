@@ -71,17 +71,17 @@ for (const typ of [chromium, webkit]) {
       `${L} Halle: Reiter Wissen aktiv, zwei Raum-Kacheln mit Bild, quer, linksbündig, ganz im Bild`, JSON.stringify(halle));
     if (SHOTS) { await mkdir(SHOTS, { recursive: true }); await page.screenshot({ path: join(SHOTS, `bibliothek-halle-${typ.name()}-${w}x${h}.png`) }); }
 
-    // Tür → Raum (Adresse ?raum=), nur Regale mit fertigen Büchern, Bücher als Karten quer, ganz im Bild
+    // Tür → Raum (Adresse ?raum=), nur Regale mit fertigen Büchern, Bücher als Karten mit quadratischem Bild, ganz im Bild
     await page.click('.tuer[data-raum="tiere"]');
     await page.waitForSelector(".buch");
     const b = await page.evaluate(() => ({ url: location.search, h1: document.querySelector(".raum h1").textContent,
       regale: [...document.querySelectorAll(".regal")].map((r) => r.dataset.regal), zurueck: !!document.querySelector("#zurueck"),
-      buecher: [...document.querySelectorAll(".buch")].map((x) => ({ r: x.getBoundingClientRect().toJSON(), band: !!x.querySelector(".gelesen-punkt") })) }));
+      buecher: [...document.querySelectorAll(".buch")].map((x) => ({ r: x.getBoundingClientRect().toJSON(), d: x.querySelector(".deckel").getBoundingClientRect().toJSON(), band: !!x.querySelector(".gelesen-punkt") })) }));
     const erstes = b.buecher[0].r;
     pruefe(b.url === "?raum=tiere" && b.h1 === "Tiere" && b.zurueck, `${L} Tür öffnet den Raum Tiere mit Zurück-Knopf`, JSON.stringify(b));
     pruefe(b.regale.includes("haustiere") && !b.regale.includes("bauernhof"), `${L} nur Regale mit fertigen Büchern (Bauernhof fehlt)`, JSON.stringify(b.regale));
-    pruefe(b.buecher.every((x) => x.r.right <= w && x.r.left >= 0) && erstes.width > erstes.height && b.buecher.every((x) => !x.band),
-      `${L} Bücher als Karten quer, ganz in der Breite, ohne Sonnenpunkt`, JSON.stringify(erstes));
+    pruefe(b.buecher.every((x) => x.r.right <= w && x.r.left >= 0) && Math.abs(b.buecher[0].d.width - b.buecher[0].d.height) < 1 && b.buecher.every((x) => !x.band),
+      `${L} Bücher als Karten mit quadratischem Bild, ganz in der Breite, ohne Sonnenpunkt`, JSON.stringify(erstes));
     if (SHOTS) await page.screenshot({ path: join(SHOTS, `bibliothek-raum-${typ.name()}-${w}x${h}.png`) });
 
     // Zurück → Halle, anderer Raum

@@ -12,7 +12,7 @@ const lernplan = lies("../spiele/lernplan.json");
 
 const PLAN = { raeume: [
   { id: "tiere", name: "Tiere", bild: "tiere-pflanzen", regale: [
-    { id: "haus", name: "Haustiere", welten: ["haustiere"], buecher: [{ id: "katze", titel: "Katze (Arbeitstitel)" }, { id: "hund", titel: "Hund" }] },
+    { id: "haus", name: "Haustiere", welten: ["haustiere"], buecher: [{ id: "katze", titel: "Katze (Arbeitstitel)", thema: "Katze" }, { id: "hund", titel: "Hund" }] },
     { id: "meer", name: "Im Meer", buecher: [{ id: "wal", titel: "Wal" }] }] },
   { id: "weltall", name: "Weltall", bild: "erde-himmel", regale: [{ id: "planeten", name: "Planeten", buecher: [{ id: "mars", titel: "Mars" }] }] },
 ] };
@@ -21,8 +21,8 @@ const FERTIG = [{ id: "katze", titel: "Ein Tag mit Mia" }, { id: "wal", titel: "
 test("bibliothekGanz: jedes Buch mit da/geplant, Titel fertiger Bücher aus der Geschichte, gelesen am", () => {
   const g = B.bibliothekGanz(PLAN, FERTIG, { katze: { am: "2026-11-10" } });
   assert.deepEqual(g[0].regale[0].buecher, [
-    { id: "katze", titel: "Ein Tag mit Mia", da: true, am: "2026-11-10" },
-    { id: "hund", titel: "Hund", da: false, am: "" }]);
+    { id: "katze", titel: "Ein Tag mit Mia", thema: "Katze", da: true, am: "2026-11-10" },
+    { id: "hund", titel: "Hund", thema: "", da: false, am: "" }]);
   assert.deepEqual(g[0].regale[0].welten, ["haustiere"]);
   assert.equal(g[1].regale[0].buecher[0].da, false);
 });
@@ -101,4 +101,11 @@ test("Regal Tiere: zehn Regale, 51 Bücher (Plan 2026-11-15)", () => {
   const tiere = plan.raeume.find((r) => r.id === "tiere");
   assert.equal(tiere.regale.length, 10);
   assert.equal(tiere.regale.reduce((n, rg) => n + rg.buecher.length, 0), 51);
+});
+
+test("bibliothek.json: jedes Buch nennt sein Thema (Tier oder Sache), kurz, über dem Titel der Karte", () => {
+  for (const r of plan.raeume) for (const rg of r.regale) for (const b of rg.buecher) {
+    assert.ok(typeof b.thema === "string" && b.thema.trim(), `${b.id}: thema fehlt`);
+    assert.ok(b.thema.length <= 16, `${b.id}: thema „${b.thema}“ zu lang`);
+  }
 });

@@ -9,8 +9,9 @@
 /* Bibliothek, Reiter „Wissen“ (Spec docs/superpowers/specs/2026-11-15-bibliothek-design.md: Halle › Raum › Regal › Buch;
    Aussehen nach der Designsprache 2026-11-15, Spec 2026-11-15-designsprache-design.md §5.4).
    Halle: Titel und die Räume als Kacheln im Querformat mit ihrem Raumbild, darunter der Name; linksbündig, sie brechen
-   in Reihen um (höchstens drei je Reihe). Grundmuster Wellen. Raum: Zurück, das Raumbild klein, der Name groß; darunter
-   jedes Regal (Thema) als eigene Papierfläche, darin die Bücher als kleine Karten (Titelbild quer, Titel darunter),
+   in Reihen um (höchstens drei je Reihe). Grundmuster Wellen. Raum: Zurück und der Name groß (ohne Raumbild); darunter
+   die Regale (Themen) durch eine dezente Linie getrennt, darin die Bücher als kleine Karten (Titelbild quadratisch wie die Fotos, darunter das Thema
+   kräftig und der Buchtitel klein),
    die Reihen brechen um. Gelesen: ein
    Sonnenpunkt vor dem Titel. Grundmuster Blätter. Keine Zählung, keine Reihenfolge, kein „Weiterlesen“, nichts gesperrt;
    Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen. Diese Seite liest den Lernstand nur. */
@@ -45,12 +46,9 @@ body { -webkit-user-select: none; user-select: none; }
 
 /* --- Raum ----------------------------------------------------------------------------------------- */
 .raum-kopf { display: flex; align-items: center; gap: 2.4rem; margin: 0 0 3.2rem -1.3rem; }
-.raum-kopf .bogen { flex: none; width: 8.4rem; height: 8.4rem; border-radius: 1.8rem; }
 .raum-kopf h1 { margin: 0 0 0 0.4rem; font-size: 7.2rem; font-weight: 750; line-height: 1; letter-spacing: -0.035em; }
-.regale { display: flex; flex-direction: column; gap: 3.6rem; }
-/* Jedes Thema (Regal) ist eine eigene ruhige Fläche aus Papier: flach, ohne Schatten (nicht drückbar), Kante in Linie. */
-.regal { padding: 3rem 3.6rem 3.8rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-linie);
-  border-radius: var(--ls-radius-plakat); }
+/* Themen (Regale) offen auf dem Grund, getrennt durch eine dezente Linie und Luft davor und danach. */
+.regal + .regal { margin-top: 4.4rem; padding-top: 4rem; border-top: 0.25rem solid var(--ls-naht); }
 .regal h2 { margin: 0 0 2.6rem; font-size: 3.6rem; font-weight: 700; line-height: 1.1; }
 .ebenen { display: grid; grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr)); gap: 3.2rem 2.6rem; }
 
@@ -60,17 +58,21 @@ body { -webkit-user-select: none; user-select: none; }
   touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 .buch > * { pointer-events: none; }
-.buch .deckel { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; border: var(--ls-kontur) solid var(--ls-tinte);
+.buch .deckel { position: relative; display: block; aspect-ratio: 1; overflow: hidden; border: var(--ls-kontur) solid var(--ls-tinte);
   border-radius: var(--ls-radius-teil); background: var(--toenung, var(--ls-papier)); box-shadow: var(--ls-schatten); }
 .buch img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* Ohne Foto (Lerngeschichte ohne Bild): Tönung des Fachs mit dem Fachsymbol */
 .buch .zeichen { position: absolute; inset: 0; margin: auto; width: 34%; height: 50%;
   background: var(--ls-tinte); -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
-.buch .schild { display: flex; align-items: flex-start; gap: 1rem; font-size: 2.5rem; font-weight: 700; line-height: 1.15; }
-.buch .schild span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.buch .schild { display: flex; align-items: flex-start; gap: 0.9rem; line-height: 1.15; }
+/* Oben das Thema (Tier oder Sache) kräftig, darunter klein und leise der Titel des Buches. */
+.buch .worte { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+.buch .worte b { font-size: 2.1rem; font-weight: 650; }
+.buch .titel { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: 1.7rem; font-weight: 500; color: var(--ls-tinte-weich); }
 /* Gelesen: ein Sonnenpunkt vor dem Titel (bewertet nichts) */
-.buch .gelesen-punkt { flex: none; width: 2.6rem; height: 2.6rem; margin-top: 0.05rem; border-radius: 50%; background: var(--ls-sonne);
-  box-shadow: inset 0 0 0 0.9rem var(--ls-sonne), inset 0 0 0 3rem var(--ls-tinte); }
+.buch .gelesen-punkt { flex: none; width: 2.2rem; height: 2.2rem; margin-top: 0.05rem; border-radius: 50%; background: var(--ls-sonne);
+  box-shadow: inset 0 0 0 0.75rem var(--ls-sonne), inset 0 0 0 3rem var(--ls-tinte); }
 .buch:active .deckel { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
 .buch:focus-visible .deckel { outline: 1rem solid var(--ls-sonne); outline-offset: 0.6rem; }
 
@@ -151,16 +153,17 @@ async function start() {
     const innen = foto ? `<img src="${esc(foto)}" alt="" loading="lazy" decoding="async">`
       : FACH_SYMBOLE.has(regal.fach) ? `<i class="zeichen" style="--bild:${bild(`symbole/${regal.fach}.svg`)}"></i>` : "";
     const ton = !foto && FACH[regal.fach] ? `--toenung:${FACH[regal.fach].toenung};` : "";
-    return `<a class="buch" href="${buchHref(b.id, r.id)}" data-titel="${esc(b.titel)}" aria-label="${esc(b.titel + (b.am ? ", gelesen" : ""))}" style="${ton}">`
+    return `<a class="buch" href="${buchHref(b.id, r.id)}" data-titel="${esc(b.titel)}" aria-label="${esc((b.thema ? b.thema + ": " : "") + b.titel + (b.am ? ", gelesen" : ""))}" style="${ton}">`
       + `<span class="deckel">${innen}</span>`
-      + `<span class="schild ui">${b.am ? `<span class="gelesen-punkt" aria-hidden="true"></span>` : ""}<span>${esc(b.titel)}</span></span></a>`;
+      + `<span class="schild ui">${b.am ? `<span class="gelesen-punkt" aria-hidden="true"></span>` : ""}`
+      + `<span class="worte">${b.thema ? `<b>${esc(b.thema)}</b>` : ""}<span class="titel">${esc(b.titel)}</span></span></span></a>`;
   }
 
   function raum(r) {
     document.title = `${r.name} – Bibliothek`;
     muster.setAttribute("art", "blaetter");
     feld.innerHTML = `<section class="raum" aria-label="${esc(r.name)}">`
-      + `<div class="raum-kopf"><ls-knopf id="zurueck" symbol="zurueck.svg" name="Alle Räume" groesse="seite"></ls-knopf>${bogenHtml(r)}<h1 class="ui">${esc(r.name)}</h1></div>`
+      + `<div class="raum-kopf"><ls-knopf id="zurueck" symbol="zurueck.svg" name="Alle Räume" groesse="seite"></ls-knopf><h1 class="ui">${esc(r.name)}</h1></div>`
       + `<div class="regale">` + r.regale.map((rg) => `<section class="regal" data-regal="${esc(rg.id)}" aria-label="${esc(rg.name)}"><h2 class="ui">${esc(rg.name)}</h2>`
         + `<div class="ebenen">${rg.buecher.map((b) => buchHtml(b, rg, r)).join("")}</div></section>`).join("") + `</div></section>`;
     feld.scrollTop = 0;

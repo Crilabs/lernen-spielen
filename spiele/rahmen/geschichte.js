@@ -17,7 +17,7 @@
 //   Ein Satz wird nur durch einen Tipp des Kindes abgebrochen (Blättern), nie vom Abspieler.
 // - Frage (`frage: true`): Weiter erscheint erst nach dem Vorlesen und einer Ruhe von RUHE_MS, damit das Kind
 //   überlegt; bis dahin blättern auch Wischen und Pfeiltaste nicht weiter. Es wird nichts geprüft oder gespeichert.
-// - Fotos tragen klein den Hinweis „Bild erzeugt“ (geschichten.md §2).
+// - Fotos tragen kein Label; dass Bilder erzeugt sind, steht in den Eltern-Hinweisen (Christian 2026-11-16).
 // - Seitenwechsel: nur transform und opacity; bei wenig Bewegung nur ein kurzes Überblenden.
 // - Testbetrieb (`?pruefen`, rahmen/pruefen.js): window.lsGeschichte = { seite, seiten, weiterBereit, weiter(),
 //   zurueck(), fertig } (seite ab 0).
@@ -83,9 +83,6 @@ const CSS = `
 ${SZENE_CSS}
 .el.haeuser { top: auto; bottom: 42cqh; transform: translateX(-50%); --haus-breite: 27.5; gap: calc(var(--szene-u) * 2); }
 .el.paare { --paar-stab: 4.4; }
-.erzeugt { position: absolute; left: 4.2rem; bottom: 4.2rem; padding: .8rem 1.8rem; border-radius: 1.6rem; font-size: 2.2rem;
-  color: var(--ls-tinte-weich); background: var(--ls-papier); pointer-events: none; }
-.erzeugt[hidden] { display: none; }
 
 /* Rechts: Papier über die ganze Höhe – oben Vorlesen (neben dem Ton der Seite), dann Titel und Text, unten die Knöpfe. */
 .lese { position: relative; min-width: 0; height: 100%; display: grid; grid-template-columns: minmax(0, 1fr);
@@ -234,7 +231,7 @@ export class LsGeschichte extends HTMLElement {
         <div class="karten"></div>
         </div>
       </div><div class="blatt">
-        <div class="rahmen" part="bild"><div class="figuren"></div><span class="erzeugt" hidden>Bild erzeugt</span></div>
+        <div class="rahmen" part="bild"><div class="figuren"></div></div>
         <div class="lese">
           <ls-knopf class="zum-inhalt" symbol="inhalt.svg" name="Inhalt" groesse="seite" stumm hidden></ls-knopf>
           <ls-knopf class="vorlesen" symbol="vorlesen.svg" wort="Vorlesen" name="Vorlesen" groesse="seite" stumm></ls-knopf>
@@ -258,7 +255,6 @@ export class LsGeschichte extends HTMLElement {
     const q = (s) => /** @type {HTMLElement} */ (w.querySelector(s));
     this.rahmen = q(".rahmen");
     this.figurenEbene = q(".figuren");
-    this.erzeugtEl = q(".erzeugt");
     this.textEl = q(".text");
     this.zurueckEl = q(".zurueck");
     this.vorlesenEl = q(".vorlesen");
@@ -533,7 +529,6 @@ export class LsGeschichte extends HTMLElement {
       this.kinder = kinder;
       for (const el of neuesKind) this.blende(el, 0, 1);
     }
-    this.erzeugtEl.hidden = !neu.classList.contains("foto");
     if (neu.classList.contains("foto")) for (const f of this.kinder.values()) { f.steuer.halt(); f.el.remove(); }
     if (neu.classList.contains("foto")) this.kinder = new Map();
     this.rahmen.insertBefore(neu, this.figurenEbene);
@@ -710,7 +705,6 @@ export class LsGeschichte extends HTMLElement {
     bildEl.hidden = !titelbild;
     this.inhaltEl.hidden = false;
     this.blattEl.hidden = true;
-    this.erzeugtEl.hidden = true;
   }
 
   /**

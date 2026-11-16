@@ -80,7 +80,7 @@ Index-Test schlägt fehl, bis §6 gelaufen ist – das ist erwartet).
 ## 6. Eintragen (einmal, nach allen Büchern)
 
 - `spiele/geschichten/index.json`: je Buch `{ id, titel, art, welt, familie }`.
-- `spiele/bibliothek.json`: der Arbeitstitel des Buchs darf bleiben (die Bibliothek zeigt den Titel der Geschichte).
+- `spiele/bibliothek.json`: der Arbeitstitel des Buchs darf bleiben (die Bibliothek zeigt den Titel der Geschichte). Das Feld `thema` (Tier oder Sache, kurz, z. B. „Katze“) steht über dem Titel der Karte; ein neues Buch bekommt es mit.
 - Ton: `npm run audio` (Azure, Florian HD) für die neuen Seiten; ohne Schlüssel berichten.
 - `node --test tests/*.test.mjs`, `node tests/browser/bibliothek.spec.mjs` (NODE_PATH wie dort), Bildschirmfoto
   des Raums ansehen.

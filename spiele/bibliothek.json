@@ -16,27 +16,33 @@
           "buecher": [
             {
               "id": "haustiere",
-              "titel": "Ein Tag mit Mia, der Katze"
+              "titel": "Ein Tag mit Mia, der Katze",
+              "thema": "Katze"
             },
             {
               "id": "hund",
-              "titel": "Der Hund"
+              "titel": "Der Hund",
+              "thema": "Hund"
             },
             {
               "id": "kaninchen",
-              "titel": "Das Kaninchen"
+              "titel": "Das Kaninchen",
+              "thema": "Kaninchen"
             },
             {
               "id": "meerschweinchen",
-              "titel": "Das Meerschweinchen"
+              "titel": "Das Meerschweinchen",
+              "thema": "Meerschweinchen"
             },
             {
               "id": "wellensittich",
-              "titel": "Der Wellensittich"
+              "titel": "Der Wellensittich",
+              "thema": "Wellensittich"
             },
             {
               "id": "pferd",
-              "titel": "Das Pferd"
+              "titel": "Das Pferd",
+              "thema": "Pferd"
             }
           ]
         },
@@ -49,19 +55,23 @@
           "buecher": [
             {
               "id": "kuh",
-              "titel": "Die Kuh"
+              "titel": "Die Kuh",
+              "thema": "Kuh"
             },
             {
               "id": "schwein",
-              "titel": "Das Schwein"
+              "titel": "Das Schwein",
+              "thema": "Schwein"
             },
             {
               "id": "huhn",
-              "titel": "Das Huhn"
+              "titel": "Das Huhn",
+              "thema": "Huhn"
             },
             {
               "id": "schaf",
-              "titel": "Das Schaf"
+              "titel": "Das Schaf",
+              "thema": "Schaf"
             }
           ]
         },
@@ -74,27 +84,33 @@
           "buecher": [
             {
               "id": "biene",
-              "titel": "Die Biene"
+              "titel": "Die Biene",
+              "thema": "Biene"
             },
             {
               "id": "ameise",
-              "titel": "Die Ameise"
+              "titel": "Die Ameise",
+              "thema": "Ameise"
             },
             {
               "id": "marienkaefer",
-              "titel": "Der Marienkäfer"
+              "titel": "Der Marienkäfer",
+              "thema": "Marienkäfer"
             },
             {
               "id": "regenwurm",
-              "titel": "Der Regenwurm"
+              "titel": "Der Regenwurm",
+              "thema": "Regenwurm"
             },
             {
               "id": "schnecke",
-              "titel": "Die Schnecke"
+              "titel": "Die Schnecke",
+              "thema": "Schnecke"
             },
             {
               "id": "igel",
-              "titel": "Der Igel"
+              "titel": "Der Igel",
+              "thema": "Igel"
             }
           ]
         },
@@ -107,23 +123,28 @@
           "buecher": [
             {
               "id": "eichhoernchen",
-              "titel": "Das Eichhörnchen"
+              "titel": "Das Eichhörnchen",
+              "thema": "Eichhörnchen"
             },
             {
               "id": "fuchs",
-              "titel": "Der Fuchs"
+              "titel": "Der Fuchs",
+              "thema": "Fuchs"
             },
             {
               "id": "reh",
-              "titel": "Das Reh"
+              "titel": "Das Reh",
+              "thema": "Reh"
             },
             {
               "id": "specht",
-              "titel": "Der Specht"
+              "titel": "Der Specht",
+              "thema": "Specht"
             },
             {
               "id": "eule",
-              "titel": "Die Eule"
+              "titel": "Die Eule",
+              "thema": "Eule"
             }
           ]
         },
@@ -136,19 +157,23 @@
           "buecher": [
             {
               "id": "frosch",
-              "titel": "Der Frosch"
+              "titel": "Der Frosch",
+              "thema": "Frosch"
             },
             {
               "id": "libelle",
-              "titel": "Die Libelle"
+              "titel": "Die Libelle",
+              "thema": "Libelle"
             },
             {
               "id": "ente",
-              "titel": "Die Ente"
+              "titel": "Die Ente",
+              "thema": "Ente"
             },
             {
               "id": "biber",
-              "titel": "Der Biber"
+              "titel": "Der Biber",
+              "thema": "Biber"
             }
           ]
         },
@@ -161,23 +186,28 @@
           "buecher": [
             {
               "id": "wal",
-              "titel": "Der Wal"
+              "titel": "Der Wal",
+              "thema": "Wal"
             },
             {
               "id": "delfin",
-              "titel": "Der Delfin"
+              "titel": "Der Delfin",
+              "thema": "Delfin"
             },
             {
               "id": "hai",
-              "titel": "Der Hai"
+              "titel": "Der Hai",
+              "thema": "Hai"
             },
             {
               "id": "krake",
-              "titel": "Der Krake"
+              "titel": "Der Krake",
+              "thema": "Krake"
             },
             {
               "id": "korallenriff",
-              "titel": "Das Korallenriff"
+              "titel": "Das Korallenriff",
+              "thema": "Korallenriff"
             }
           ]
         },
@@ -190,27 +220,33 @@
           "buecher": [
             {
               "id": "elefant",
-              "titel": "Der Elefant"
+              "titel": "Der Elefant",
+              "thema": "Elefant"
             },
             {
               "id": "loewe",
-              "titel": "Der Löwe"
+              "titel": "Der Löwe",
+              "thema": "Löwe"
             },
             {
               "id": "giraffe",
-              "titel": "Die Giraffe"
+              "titel": "Die Giraffe",
+              "thema": "Giraffe"
             },
             {
               "id": "eisbaer",
-              "titel": "Der Eisbär"
+              "titel": "Der Eisbär",
+              "thema": "Eisbär"
             },
             {
               "id": "pinguin",
-              "titel": "Der Pinguin"
+              "titel": "Der Pinguin",
+              "thema": "Pinguin"
             },
             {
               "id": "kaenguru",
-              "titel": "Das Känguru"
+              "titel": "Das Känguru",
+              "thema": "Känguru"
             }
           ]
         },
@@ -227,27 +263,33 @@
           "buecher": [
             {
               "id": "tarnen",
-              "titel": "Tarnen und Verstecken"
+              "titel": "Tarnen und Verstecken",
+              "thema": "Tarnen"
             },
             {
               "id": "winterschlaf",
-              "titel": "Winterschlaf"
+              "titel": "Winterschlaf",
+              "thema": "Winterschlaf"
             },
             {
               "id": "vogelzug",
-              "titel": "Vogelzug"
+              "titel": "Vogelzug",
+              "thema": "Vogelzug"
             },
             {
               "id": "schmetterling",
-              "titel": "Vom Ei zum Schmetterling"
+              "titel": "Vom Ei zum Schmetterling",
+              "thema": "Schmetterling"
             },
             {
               "id": "wer-frisst-wen",
-              "titel": "Wer frisst wen?"
+              "titel": "Wer frisst wen?",
+              "thema": "Nahrungskette"
             },
             {
               "id": "tiere-der-nacht",
-              "titel": "Tiere der Nacht"
+              "titel": "Tiere der Nacht",
+              "thema": "Nachttiere"
             }
           ]
         },
@@ -262,27 +304,33 @@
           "buecher": [
             {
               "id": "saeugetiere",
-              "titel": "Säugetiere"
+              "titel": "Säugetiere",
+              "thema": "Säugetiere"
             },
             {
               "id": "voegel",
-              "titel": "Vögel"
+              "titel": "Vögel",
+              "thema": "Vögel"
             },
             {
               "id": "fische",
-              "titel": "Fische"
+              "titel": "Fische",
+              "thema": "Fische"
             },
             {
               "id": "reptilien",
-              "titel": "Reptilien"
+              "titel": "Reptilien",
+              "thema": "Reptilien"
             },
             {
               "id": "amphibien",
-              "titel": "Amphibien"
+              "titel": "Amphibien",
+              "thema": "Amphibien"
             },
             {
               "id": "insekten",
-              "titel": "Insekten"
+              "titel": "Insekten",
+              "thema": "Insekten"
             }
           ]
         },
@@ -296,15 +344,18 @@
           "buecher": [
             {
               "id": "dinosaurier",
-              "titel": "Die Dinosaurier"
+              "titel": "Die Dinosaurier",
+              "thema": "Dinosaurier"
             },
             {
               "id": "dinosaurier-ende",
-              "titel": "Warum es keine Dinosaurier mehr gibt"
+              "titel": "Warum es keine Dinosaurier mehr gibt",
+              "thema": "Aussterben"
             },
             {
               "id": "mammut",
-              "titel": "Das Mammut"
+              "titel": "Das Mammut",
+              "thema": "Mammut"
             }
           ]
         }
@@ -323,7 +374,8 @@
           "buecher": [
             {
               "id": "zehnerpaare",
-              "titel": "Zehn Gäste, zwei Häuser"
+              "titel": "Zehn Gäste, zwei Häuser",
+              "thema": "Zehnerpaare"
             }
           ]
         }

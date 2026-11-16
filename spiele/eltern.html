@@ -1192,6 +1192,12 @@ async function hinweise(spalte) {
     el("p", "Die Spiele lesen mit einer computererzeugten Stimme vor (Microsoft Azure). Die Sätze wurden vorab erzeugt und liegen auf diesem Gerät; beim Spielen geht nichts ins Internet."));
   spalte.appendChild(stimme);
 
+  // Bilder: Hinweis auf erzeugte Bilder statt eines Labels im Bild (Christian 2026-11-16; grundsaetze-bilder.md A5).
+  const bilder = el("section", null, "flaeche");
+  bilder.append(el("h3", "Die Bilder"),
+    el("p", "Die Fotos in den Büchern und der Bibliothek, die Spielbilder und die gezeichneten Hintergründe sind mit künstlicher Intelligenz erzeugt (Azure OpenAI). Jedes Bild wird vor dem Einbau geprüft: Es zeigt nur, was in echt so sein kann."));
+  spalte.appendChild(bilder);
+
   // Sicher und stark (grundsaetze 3.3); „Missbrauch“ steht nur hier, nie im Kindertext.
   const schutz = el("section", null, "flaeche");
   schutz.append(el("h3", "Sicher und stark"),
