@@ -2,6 +2,21 @@
 
 ## Unveröffentlicht
 
+## v1.2.0
+
+Zwei neue Spiele zu Zehnern und Einern, die Tierbücher neu geschrieben und vorgelesen und Fotos für alle Anleitungen mit echten Dingen.
+
+- **Zahlenpost (neu):** Zahlen bis 20 mit Montessori-Perlen zustellen. Die Einführung ist eine kleine Geschichte, und eine Wechsel-Szene führt vom Bereich bis 10 in den Bereich bis 20.
+- **Stellentafel (neu):** Zahlen in Zehner und Einer zerlegen, in einem Montessori-Werkraum mit Arbeitsmatte. Eine Wanderung lässt die Aufgabe in die Stellentafel laufen.
+- **Gekonnt:** Hat das Kind ein Thema gekonnt, zeigt ein eigener Bildschirm eine Landschaft mit aufgehender Sonne, Konfetti und der Runde. Die Pause bietet nur noch „Weiter“ und „Alle Spiele“.
+- **Rundenzeit:** Die Zeit einer Runde zählt erst nach der Einführung. In den letzten 30 Sekunden kommt keine neue Aufgabe mehr.
+- **Tierbücher neu:** Hund, Biene, Wal, Elefant und Dinosaurier sind jetzt richtige Sachbücher mit Kapiteln und neuen Fotos. Alle Bücher werden vorgelesen.
+- **Inhaltsverzeichnis:** Es zeigt links das Titelbild und rechts alle Kapitel. „Anhören“ und „Lesen“ machen dort weiter, wo das Kind aufgehört hat. „Selbst lesen“ liest nicht mehr vor.
+- **Bibliothek:** Die Räume haben Fotos, die Themen eigene Flächen, und die Bücher sind quadratisch.
+- **Mit echten Dingen:** Alle 37 Anleitungen haben ein Foto mit dem Siegel „echt“. Neu sind Anleitungen zum Lesen und Schreiben von Zahlen bis 100 und zu großen Zahlen.
+- **Startseite:** kleinere Spielplakate, fünf je Reihe.
+- **Aussprache:** Eine Wörterliste korrigiert die Aussprache von Namen wie Ida in allen Texten.
+
 ## v1.1.1
 
 Neues Aussehen, eine Bibliothek mit Sachbüchern und der Kettenhüpfer neu gebaut.
