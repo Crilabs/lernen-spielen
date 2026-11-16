@@ -616,6 +616,11 @@
    "h": "a6847883ab",
    "gehoert": false
   },
+  "alte.": {
+   "datei": "livia/da946c6f4b8e.mp3",
+   "h": "2ad36c06a1",
+   "gehoert": false
+  },
   "Am Abend brummt Nilas Mutter tief und leise. Von weit hinten am See antwortet ein anderes Brummen. Nila hält still und lauscht.": {
    "datei": "florian/98d75d599a34.mp3",
    "h": "7ba786092b",
@@ -776,6 +781,11 @@
    "h": "29c4e799a3",
    "gehoert": false
   },
+  "Apfel.": {
+   "datei": "livia/2734b9f2a3aa.mp3",
+   "h": "3fe211df86",
+   "gehoert": false
+  },
   "Artikel im Fall": {
    "datei": "florian/cb2699c7e646.mp3",
    "h": "41da8a0146",
@@ -824,6 +834,11 @@
   "Auf einmal schieben sich dunkle Wolken vor die Sonne. Der Wind frischt auf. Lotta macht sich auf den Heimweg. Doch die Sonne ist nicht mehr zu sehen.": {
    "datei": "florian/fc41a7179a17.mp3",
    "h": "c01d01f85a",
+   "gehoert": false
+  },
+  "auf.": {
+   "datei": "livia/5b8f56b2ebb9.mp3",
+   "h": "367670e1c6",
    "gehoert": false
   },
   "Aufgabe und Zwanzigerfeld": {
@@ -876,6 +891,11 @@
    "h": "d6184692e5",
    "gehoert": false
   },
+  "Ball.": {
+   "datei": "livia/8241fefcc7fe.mp3",
+   "h": "a6a5f3e2f7",
+   "gehoert": false
+  },
   "Bandornamente": {
    "datei": "florian/7b8d6b4d2567.mp3",
    "h": "66a7181f21",
@@ -884,6 +904,11 @@
   "Bastelanleitung": {
    "datei": "florian/c4cedb88e593.mp3",
    "h": "239efee8f9",
+   "gehoert": false
+  },
+  "Baum.": {
+   "datei": "livia/35bbfa5f1cf6.mp3",
+   "h": "1c36be974a",
    "gehoert": false
   },
   "Baumdiagramm": {
@@ -924,6 +949,11 @@
   "Beide Zahlen wachsen": {
    "datei": "florian/83e57f588ca2.mp3",
    "h": "fc6e5c9329",
+   "gehoert": false
+  },
+  "bellt.": {
+   "datei": "livia/f5105f8509c7.mp3",
+   "h": "662cadc3e4",
    "gehoert": false
   },
   "Berg und Tal": {
@@ -1141,6 +1171,21 @@
    "h": "2f60d3ee1a",
    "gehoert": false
   },
+  "Das alte Haus steht.": {
+   "datei": "livia/741e2edca1cc.mp3",
+   "h": "1b619ebdbe",
+   "gehoert": false
+  },
+  "Das alte Haus.": {
+   "datei": "livia/6a6bdb5177bf.mp3",
+   "h": "0af29017a5",
+   "gehoert": false
+  },
+  "Das Apfel Haus?": {
+   "datei": "livia/ea8034ebaf51.mp3",
+   "h": "807db5621e",
+   "gehoert": false
+  },
   "Das Auto ist rot.": {
    "datei": "florian/cd8b2aa3e3db.mp3",
    "h": "1a15508397",
@@ -1149,6 +1194,16 @@
   "Das Baby weint.": {
    "datei": "florian/5493cd602135.mp3",
    "h": "b397a41e82",
+   "gehoert": false
+  },
+  "Das Ball Haus?": {
+   "datei": "livia/c7da7b89382c.mp3",
+   "h": "030b368d1a",
+   "gehoert": false
+  },
+  "Das bellt Haus?": {
+   "datei": "livia/c87a40ab8f05.mp3",
+   "h": "e455ca3d0f",
    "gehoert": false
   },
   "Das Besen.": {
@@ -1181,6 +1236,26 @@
    "h": "5b0f177fb7",
    "gehoert": false
   },
+  "Das das Haus?": {
+   "datei": "livia/a8d4fccc448d.mp3",
+   "h": "9b9e40d274",
+   "gehoert": false
+  },
+  "Das der Haus?": {
+   "datei": "livia/3d0847f02637.mp3",
+   "h": "f24c7cf415",
+   "gehoert": false
+  },
+  "Das die Haus?": {
+   "datei": "livia/7c700bc39334.mp3",
+   "h": "9813e8d114",
+   "gehoert": false
+  },
+  "Das Dreieck bleibt liegen.": {
+   "datei": "livia/029220ba77d1.mp3",
+   "h": "702617e6e2",
+   "gehoert": false
+  },
   "Das Eimer.": {
    "datei": "florian/2545e96e299a.mp3",
    "h": "352da56d80",
@@ -1206,6 +1281,11 @@
    "h": "1423bff07b",
    "gehoert": false
   },
+  "Das gähnt Haus?": {
+   "datei": "livia/497748ba1cab.mp3",
+   "h": "2862f0d988",
+   "gehoert": false
+  },
   "Das Glas.": {
    "datei": "florian/2d8fdf929fad.mp3",
    "h": "df8288d070",
@@ -1219,6 +1299,26 @@
   "Das Hammer.": {
    "datei": "florian/9cefaadc1bf1.mp3",
    "h": "1d094867b6",
+   "gehoert": false
+  },
+  "Das Haus Haus?": {
+   "datei": "livia/438b8f47042f.mp3",
+   "h": "122ebe25c2",
+   "gehoert": false
+  },
+  "Das Haus steht.": {
+   "datei": "livia/8638415bbdae.mp3",
+   "h": "de15523c06",
+   "gehoert": false
+  },
+  "Das Haus.": {
+   "datei": "livia/3727dcdb18cc.mp3",
+   "h": "d7cc6e78a9",
+   "gehoert": false
+  },
+  "Das Hund Haus?": {
+   "datei": "livia/ce5cd4b811e6.mp3",
+   "h": "e0b0956c62",
    "gehoert": false
   },
   "Das Ich-mag-Gedicht": {
@@ -1245,6 +1345,11 @@
    "datei": "livia/cc2a68b805d4.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Das Katze Haus?": {
+   "datei": "livia/34295b078efa.mp3",
+   "h": "82d5e9d2b7",
+   "gehoert": false
   },
   "Das Kind lacht und tanzt.": {
    "datei": "florian/90e65015554e.mp3",
@@ -1316,6 +1421,11 @@
    "h": "9d7c45cc30",
    "gehoert": false
   },
+  "Das rollt Haus?": {
+   "datei": "livia/31a24afe8d1c.mp3",
+   "h": "86de1f0351",
+   "gehoert": false
+  },
   "Das Säge.": {
    "datei": "florian/9f48588f2937.mp3",
    "h": "1ebef52ff1",
@@ -1346,14 +1456,29 @@
    "h": "c125264987",
    "gehoert": false
   },
+  "Das steht Haus?": {
+   "datei": "livia/98e4d203fd46.mp3",
+   "h": "da16117328",
+   "gehoert": false
+  },
   "Das Subjekt": {
    "datei": "florian/1ace701946de.mp3",
    "h": "af13fc473e",
    "gehoert": false
   },
+  "Das Tasse Haus?": {
+   "datei": "livia/8e652c839621.mp3",
+   "h": "e284a846fc",
+   "gehoert": false
+  },
   "Das verbindende S": {
    "datei": "florian/3a9072ce79b7.mp3",
    "h": "94f0c5857d",
+   "gehoert": false
+  },
+  "Das Wasser.": {
+   "datei": "livia/3402ac5c7447.mp3",
+   "h": "cc8c0a6917",
    "gehoert": false
   },
   "Das Wichtigste": {
@@ -1364,6 +1489,11 @@
   "Das Zange.": {
    "datei": "florian/5426c85a9d11.mp3",
    "h": "acc12971ec",
+   "gehoert": false
+  },
+  "Das.": {
+   "datei": "livia/565d220550bc.mp3",
+   "h": "c55fa4f1e1",
    "gehoert": false
   },
   "Daten sammeln und darstellen": {
@@ -1380,6 +1510,11 @@
    "datei": "livia/9b71e70136eb.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "dem.": {
+   "datei": "livia/2020f84aff09.mp3",
+   "h": "dc24ee60c6",
+   "gehoert": false
   },
   "Den Anfang wie bei Qualle schreiben": {
    "datei": "florian/6707396cefe6.mp3",
@@ -1411,6 +1546,11 @@
    "h": "ac2732b7ea",
    "gehoert": false
   },
+  "den.": {
+   "datei": "livia/3fee7d082ee8.mp3",
+   "h": "b57d160c71",
+   "gehoert": false
+  },
   "Der Ach-Laut wie bei Dach": {
    "datei": "florian/d7e2b49c0462.mp3",
    "h": "db690d8e43",
@@ -1426,14 +1566,64 @@
    "h": "9aaf1fab55",
    "gehoert": false
   },
+  "Der Apfel liegt auf dem Teller.": {
+   "datei": "livia/b4b20cfe3401.mp3",
+   "h": "0b9a019970",
+   "gehoert": false
+  },
+  "Der Apfel rollt.": {
+   "datei": "livia/900e00192057.mp3",
+   "h": "d500493515",
+   "gehoert": false
+  },
+  "Der Apfel.": {
+   "datei": "livia/aa406a153c7e.mp3",
+   "h": "f4f4712734",
+   "gehoert": false
+  },
+  "Der auf?": {
+   "datei": "livia/d90c12685393.mp3",
+   "h": "ffcb959639",
+   "gehoert": false
+  },
+  "Der Ball hüpft.": {
+   "datei": "livia/a69936e4ed28.mp3",
+   "h": "7ba2c4fd42",
+   "gehoert": false
+  },
   "Der Ball liegt auf dem Dach.": {
    "datei": "florian/5179dc35f6c3.mp3",
    "h": "c9d0a678cd",
    "gehoert": false
   },
+  "Der Ball rollt zum Baum.": {
+   "datei": "livia/fb08fe3d72f0.mp3",
+   "h": "f55b6b350e",
+   "gehoert": false
+  },
   "Der Ball rollt.": {
    "datei": "florian/c57ac5ce4acb.mp3",
    "h": "d4ce1d477f",
+   "gehoert": false
+  },
+  "Der Ball.": {
+   "datei": "livia/17cc5cd9b14f.mp3",
+   "h": "79ad03c220",
+   "gehoert": false
+  },
+  "Der Baum rauscht.": {
+   "datei": "livia/9802f7c21b4a.mp3",
+   "h": "c390193f0a",
+   "gehoert": false
+  },
+  "Der Baum.": {
+   "datei": "livia/705892130286.mp3",
+   "h": "97bd3bdab5",
+   "gehoert": false
+  },
+  "Der bellt?": {
+   "datei": "livia/eac56e99af41.mp3",
+   "h": "1716b1dfef",
    "gehoert": false
   },
   "Der Besen.": {
@@ -1601,6 +1791,36 @@
    "h": "044f9f66f7",
    "gehoert": false
   },
+  "Der das?": {
+   "datei": "livia/bbef635e9652.mp3",
+   "h": "d55b17650a",
+   "gehoert": false
+  },
+  "Der dem?": {
+   "datei": "livia/bc2f839f4938.mp3",
+   "h": "caef17a6bd",
+   "gehoert": false
+  },
+  "Der den?": {
+   "datei": "livia/80f45560187d.mp3",
+   "h": "54d0597735",
+   "gehoert": false
+  },
+  "Der der?": {
+   "datei": "livia/2523eb5d8062.mp3",
+   "h": "89e8649dc0",
+   "gehoert": false
+  },
+  "Der die?": {
+   "datei": "livia/b5ecf9948fb4.mp3",
+   "h": "bfa3951548",
+   "gehoert": false
+  },
+  "Der Durst.": {
+   "datei": "livia/9c1244a38642.mp3",
+   "h": "873015527e",
+   "gehoert": false
+  },
   "Der Eimer.": {
    "datei": "florian/47ed953033d8.mp3",
    "h": "5a0f6d338b",
@@ -1621,9 +1841,24 @@
    "h": "0b88d304f5",
    "gehoert": false
   },
+  "Der gähnt?": {
+   "datei": "livia/0e169bbefb42.mp3",
+   "h": "0ca889af03",
+   "gehoert": false
+  },
   "Der Glas.": {
    "datei": "florian/f9a42bbbdb80.mp3",
    "h": "5e06a4bd26",
+   "gehoert": false
+  },
+  "Der große Hund bellt.": {
+   "datei": "livia/8233622583dc.mp3",
+   "h": "ff5c659d43",
+   "gehoert": false
+  },
+  "Der große Hund.": {
+   "datei": "livia/2f53200afd4c.mp3",
+   "h": "a2dae657bf",
    "gehoert": false
   },
   "Der gute Schluss": {
@@ -1636,9 +1871,19 @@
    "h": "09f9caec8c",
    "gehoert": false
   },
+  "Der hat?": {
+   "datei": "livia/17803cb9658b.mp3",
+   "h": "7743e155b4",
+   "gehoert": false
+  },
   "Der Hauch zwischen den Silben": {
    "datei": "florian/cf1dcf6bde5b.mp3",
    "h": "fd0cd8a0ce",
+   "gehoert": false
+  },
+  "Der holt?": {
+   "datei": "livia/2ba426716223.mp3",
+   "h": "ec48c7dccf",
    "gehoert": false
   },
   "Der Honig ist der Wintervorrat des Volkes. Im Sommer nimmt Tante Defne einige Waben mit verdeckeltem Honig heraus. Sie schneidet die Wachsdeckel ab und schleudert den Honig heraus. Er fließt golden ins Glas. Aus dem Wachs macht sie Kerzen. Noa darf einen Löffel probieren. Er schmeckt nach Löwenzahn und nach Sommer. Weil Tante Defne Honig genommen hat, gibt sie den Bienen im Spätsommer Zuckerfutter. So haben sie trotzdem genug für den Winter.": {
@@ -1661,9 +1906,59 @@
    "h": "d6cd753a47",
    "gehoert": false
   },
+  "Der Hund gähnt.": {
+   "datei": "livia/cdc1da27feea.mp3",
+   "h": "5a03c5ac85",
+   "gehoert": false
+  },
+  "Der Hund hat Durst.": {
+   "datei": "livia/d36eed683da1.mp3",
+   "h": "575d308627",
+   "gehoert": false
+  },
+  "Der Hund holt den Ball.": {
+   "datei": "livia/436a6d14fe67.mp3",
+   "h": "739c7042fc",
+   "gehoert": false
+  },
   "Der Hund liegt am Bach.": {
    "datei": "florian/0c47996d49a8.mp3",
    "h": "44c983dbbb",
+   "gehoert": false
+  },
+  "Der Hund liegt unter dem Baum.": {
+   "datei": "livia/aebbac1a011d.mp3",
+   "h": "de5c64a6af",
+   "gehoert": false
+  },
+  "Der Hund rennt zum Haus.": {
+   "datei": "livia/c599e5fa28ff.mp3",
+   "h": "9deabd571b",
+   "gehoert": false
+  },
+  "Der Hund springt über den Zaun.": {
+   "datei": "livia/7a4a6c0897b0.mp3",
+   "h": "04cb497aa7",
+   "gehoert": false
+  },
+  "Der Hund trinkt Wasser.": {
+   "datei": "livia/9c8cbd9a7eab.mp3",
+   "h": "860366b267",
+   "gehoert": false
+  },
+  "Der Hund.": {
+   "datei": "livia/20e7fe2d5c0c.mp3",
+   "h": "dc62ebed9f",
+   "gehoert": false
+  },
+  "Der Hunger.": {
+   "datei": "livia/da33c0e29b52.mp3",
+   "h": "ae03b89ed7",
+   "gehoert": false
+  },
+  "Der hüpft?": {
+   "datei": "livia/d335f7008ef6.mp3",
+   "h": "1319cc0a5a",
    "gehoert": false
   },
   "Der Ich-Laut wie bei Licht": {
@@ -1686,9 +1981,19 @@
    "h": "d705aeb0fd",
    "gehoert": false
   },
+  "Der jagt?": {
+   "datei": "livia/7942e380e687.mp3",
+   "h": "378b7a32ba",
+   "gehoert": false
+  },
   "Der Knoten": {
    "datei": "florian/36129a9fcf42.mp3",
    "h": "a055f787ac",
+   "gehoert": false
+  },
+  "Der Kreis bleibt liegen.": {
+   "datei": "livia/d87ecb88cc7e.mp3",
+   "h": "22cfc607db",
    "gehoert": false
   },
   "Der lange Laut wie bei Biene": {
@@ -1911,6 +2216,11 @@
    "h": "51b31e4377",
    "gehoert": false
   },
+  "Der liegt?": {
+   "datei": "livia/c998d5ab6a9a.mp3",
+   "h": "4e1b779138",
+   "gehoert": false
+  },
   "Der Lineal.": {
    "datei": "florian/abaf192285b1.mp3",
    "h": "846a63084a",
@@ -1919,6 +2229,11 @@
   "Der Messer.": {
    "datei": "florian/b1cb4ecd7165.mp3",
    "h": "d2c1763031",
+   "gehoert": false
+  },
+  "Der miaut?": {
+   "datei": "livia/7411460056ae.mp3",
+   "h": "74ac8c032b",
    "gehoert": false
   },
   "Der Mond ist rund.": {
@@ -1956,6 +2271,51 @@
    "h": "4a0d305c35",
    "gehoert": false
   },
+  "Der rauscht?": {
+   "datei": "livia/58da515f263f.mp3",
+   "h": "7380a38b5b",
+   "gehoert": false
+  },
+  "Der Regen tropft.": {
+   "datei": "livia/66e8107cff9d.mp3",
+   "h": "f5db868ef5",
+   "gehoert": false
+  },
+  "Der Regen.": {
+   "datei": "livia/fc713620a332.mp3",
+   "h": "3cdb30b229",
+   "gehoert": false
+  },
+  "Der rennt?": {
+   "datei": "livia/7b3a4dc43244.mp3",
+   "h": "2cbc54c6cc",
+   "gehoert": false
+  },
+  "Der rollt?": {
+   "datei": "livia/cfca01e54107.mp3",
+   "h": "59ce0f88f9",
+   "gehoert": false
+  },
+  "Der rote Ball rollt.": {
+   "datei": "livia/fff3a9346251.mp3",
+   "h": "2d81499574",
+   "gehoert": false
+  },
+  "Der rote Ball.": {
+   "datei": "livia/e6ec5dddccbc.mp3",
+   "h": "45b27d5d54",
+   "gehoert": false
+  },
+  "Der runde Apfel rollt.": {
+   "datei": "livia/5b8b02310d78.mp3",
+   "h": "9aec6a4977",
+   "gehoert": false
+  },
+  "Der runde Apfel.": {
+   "datei": "livia/e98d35dea407.mp3",
+   "h": "e02240c48c",
+   "gehoert": false
+  },
   "Der Rüssel ist Nase und Oberlippe zugleich. Er hat keinen einzigen Knochen. Er besteht nur aus Muskeln. Darum kann der Elefant ihn biegen, rollen und strecken, wie er will. Mit dem Rüssel atmet Zuri und riecht. Sie hebt ihn hoch in die Luft und schnuppert. Riecht es nach Wasser? Nach frischem Gras? Die Großen greifen mit dem Rüssel, sie trinken damit und begrüßen ihre Familie. Ein Rüssel ist Nase, Hand und Arm in einem.": {
    "datei": "livia/8bdf4a3bb8f8.mp3",
    "hand": true,
@@ -1964,6 +2324,11 @@
   "Der Säge.": {
    "datei": "florian/f2e5e4ae02ca.mp3",
    "h": "f4d6565688",
+   "gehoert": false
+  },
+  "Der scheint?": {
+   "datei": "livia/c6ec612d45a2.mp3",
+   "h": "b3f6ea096f",
    "gehoert": false
   },
   "Der Schere.": {
@@ -1976,9 +2341,24 @@
    "h": "5a334bc808",
    "gehoert": false
   },
+  "Der Schuh liegt.": {
+   "datei": "livia/18cf1814e828.mp3",
+   "h": "4a2b5e4617",
+   "gehoert": false
+  },
+  "Der Schuh.": {
+   "datei": "livia/11c78140037d.mp3",
+   "h": "29837979c4",
+   "gehoert": false
+  },
   "Der Seil.": {
    "datei": "florian/174d9f4d7947.mp3",
    "h": "061cbf0748",
+   "gehoert": false
+  },
+  "Der springt?": {
+   "datei": "livia/df84c8f7e1d6.mp3",
+   "h": "3028fcbecd",
    "gehoert": false
   },
   "Der Stachel einer Honigbiene hat feine Widerhaken. Sticht sie in unsere Haut, bleibt er darin stecken. Die Biene kann ihn nicht mehr herausziehen und verliert ihn. Nie wieder kann sie stechen. Eine Honigbiene sticht nur, wenn sie selbst oder ihr Stock bedrängt wird. Nur Weibchen haben einen Stachel. Die Drohnen haben keinen. Und die Wildbienen? Ihr Stachel ist meist schwach. Bei vielen kommt er gar nicht durch unsere Haut.": {
@@ -1989,6 +2369,11 @@
   "Der Stamm verändert sich": {
    "datei": "florian/4452c03c9639.mp3",
    "h": "2698d31270",
+   "gehoert": false
+  },
+  "Der steht?": {
+   "datei": "livia/2aac6e106ff6.mp3",
+   "h": "3aaa0c2655",
    "gehoert": false
   },
   "Der Stopper wie bei Jacke": {
@@ -2006,9 +2391,39 @@
    "h": "7a44905b3a",
    "gehoert": false
   },
+  "Der Teller.": {
+   "datei": "livia/0282f352e469.mp3",
+   "h": "30f4ba1377",
+   "gehoert": false
+  },
+  "Der Tisch.": {
+   "datei": "livia/367a400cf481.mp3",
+   "h": "72d956ebd2",
+   "gehoert": false
+  },
+  "Der trinkt?": {
+   "datei": "livia/16f478e16a3c.mp3",
+   "h": "0c8495c7ab",
+   "gehoert": false
+  },
+  "Der tropft?": {
+   "datei": "livia/d1dcddab0092.mp3",
+   "h": "545b4155f1",
+   "gehoert": false
+  },
   "Der Tümpel im Wald ist ausgetrocknet. Nur rissiger Schlamm ist übrig. Die Herde zieht los zum großen See. Dort gibt es noch Wasser.": {
    "datei": "florian/3e3b686ee20d.mp3",
    "h": "496182638e",
+   "gehoert": false
+  },
+  "Der über?": {
+   "datei": "livia/587a2d938a8d.mp3",
+   "h": "c836395c65",
+   "gehoert": false
+  },
+  "Der unter?": {
+   "datei": "livia/dabbd12c4c97.mp3",
+   "h": "3d3008bf2b",
    "gehoert": false
   },
   "Der versteckte Laut wie bei Garten": {
@@ -2016,9 +2431,19 @@
    "h": "518792a191",
    "gehoert": false
   },
+  "Der weht?": {
+   "datei": "livia/44d9506e9c07.mp3",
+   "h": "3713e06b22",
+   "gehoert": false
+  },
   "Der Wind weht.": {
    "datei": "florian/0da2a378fb41.mp3",
    "h": "01f2a7a4ef",
+   "gehoert": false
+  },
+  "Der Wind.": {
+   "datei": "livia/8ba70c6e0fb0.mp3",
+   "h": "54256d5943",
    "gehoert": false
   },
   "Der Wortstamm bleibt": {
@@ -2036,6 +2461,11 @@
    "h": "c2927ede0f",
    "gehoert": false
   },
+  "Der Zaun.": {
+   "datei": "livia/330ef015fcf2.mp3",
+   "h": "8a62fc3cbd",
+   "gehoert": false
+  },
   "Der Zehner und noch was": {
    "datei": "florian/5560991ab806.mp3",
    "h": "1917f6ac53",
@@ -2051,6 +2481,11 @@
    "h": "713173c96d",
    "gehoert": false
   },
+  "Der zum?": {
+   "datei": "livia/9efd65e5587f.mp3",
+   "h": "9002e5d33a",
+   "gehoert": false
+  },
   "der, die, das": {
    "datei": "florian/6823272b065b.mp3",
    "h": "ef2054c003",
@@ -2059,6 +2494,11 @@
   "der, die, das kannst du.": {
    "datei": "florian/39026a966ba2.mp3",
    "h": "721651173e",
+   "gehoert": false
+  },
+  "Der.": {
+   "datei": "livia/ae2b7784e03c.mp3",
+   "h": "6dba0a8065",
    "gehoert": false
   },
   "Diagramme kritisch lesen": {
@@ -2686,6 +3126,31 @@
    "h": "76755dc92d",
    "gehoert": false
   },
+  "Die heiße Tasse steht.": {
+   "datei": "livia/c5e0e74944b9.mp3",
+   "h": "d995bf851f",
+   "gehoert": false
+  },
+  "Die heiße Tasse.": {
+   "datei": "livia/e5ee9ca2f360.mp3",
+   "h": "bc5372727f",
+   "gehoert": false
+  },
+  "Die Katze gähnt.": {
+   "datei": "livia/589c9479f736.mp3",
+   "h": "293cbd189e",
+   "gehoert": false
+  },
+  "Die Katze hat Hunger.": {
+   "datei": "livia/b2aaca818537.mp3",
+   "h": "6d663d1a02",
+   "gehoert": false
+  },
+  "Die Katze jagt den Ball.": {
+   "datei": "livia/245cfa4baec1.mp3",
+   "h": "fc44268376",
+   "gehoert": false
+  },
   "Die Katze miaut.": {
    "datei": "florian/8f2de4a28683.mp3",
    "h": "ffe65d7524",
@@ -2701,9 +3166,34 @@
    "h": "4bbdc3bc9d",
    "gehoert": false
   },
+  "Die Katze springt auf den Baum.": {
+   "datei": "livia/6fdeda6665b9.mp3",
+   "h": "4fff5697b2",
+   "gehoert": false
+  },
+  "Die Katze trinkt Milch.": {
+   "datei": "livia/742c2e8e430b.mp3",
+   "h": "e1f183c199",
+   "gehoert": false
+  },
+  "Die Katze.": {
+   "datei": "livia/776880f7eb1c.mp3",
+   "h": "c960623136",
+   "gehoert": false
+  },
   "Die kleine Aufgabe hilft": {
    "datei": "florian/26f463348190.mp3",
    "h": "a57a9342d6",
+   "gehoert": false
+  },
+  "Die kleine Katze gähnt.": {
+   "datei": "livia/c5be358420d5.mp3",
+   "h": "d0645900d5",
+   "gehoert": false
+  },
+  "Die kleine Katze.": {
+   "datei": "livia/adb068d7d1f4.mp3",
+   "h": "d8ee44ebda",
    "gehoert": false
   },
   "Die kleinen Stäbchen kommen zu den Einern.": {
@@ -2784,6 +3274,11 @@
   "Die Messer.": {
    "datei": "florian/9c1e10662053.mp3",
    "h": "c7752963a4",
+   "gehoert": false
+  },
+  "Die Milch.": {
+   "datei": "livia/63da7eb3a470.mp3",
+   "h": "8b6a11ccf8",
    "gehoert": false
   },
   "Die Mutter berührt Ole sanft mit ihrer Flosse. Ihre Flossen sind riesig und lang. Weiß leuchten sie im blauen Wasser.": {
@@ -2901,9 +3396,34 @@
    "h": "cf9f8e3cbc",
    "gehoert": false
   },
+  "Die Sonne scheint.": {
+   "datei": "livia/118b7cac81a3.mp3",
+   "h": "2924892641",
+   "gehoert": false
+  },
+  "Die Sonne.": {
+   "datei": "livia/c270f78ebd26.mp3",
+   "h": "5de5daed24",
+   "gehoert": false
+  },
   "Die Straße": {
    "datei": "florian/025ba0acb513.mp3",
    "h": "d9cbbd3192",
+   "gehoert": false
+  },
+  "Die Tasse steht auf dem Tisch.": {
+   "datei": "livia/06bfc5271a12.mp3",
+   "h": "c14f48a010",
+   "gehoert": false
+  },
+  "Die Tasse steht.": {
+   "datei": "livia/93056b8edf65.mp3",
+   "h": "d90246d610",
+   "gehoert": false
+  },
+  "Die Tasse.": {
+   "datei": "livia/06ff4929c4b7.mp3",
+   "h": "903229f996",
    "gehoert": false
   },
   "Die tippst du auf den Brief.": {
@@ -2964,6 +3484,11 @@
   "Die Zwei tippen.": {
    "datei": "florian/47b745022aa0.mp3",
    "h": "1cb06d0a85",
+   "gehoert": false
+  },
+  "Die.": {
+   "datei": "livia/73098ffb6a83.mp3",
+   "h": "bdc5406a79",
    "gehoert": false
   },
   "Diese Brücke braucht genau so viele Perlen. Sie sitzen alle auf einem Stab.": {
@@ -3091,6 +3616,11 @@
    "h": "acc578c5c9",
    "gehoert": false
   },
+  "Dreieck und Kreis": {
+   "datei": "livia/3b638b67b4f3.mp3",
+   "h": "8876bae9ba",
+   "gehoert": false
+  },
   "Dreierauftrag": {
    "datei": "florian/3c847292726d.mp3",
    "h": "c00487da20",
@@ -3159,6 +3689,11 @@
   "Du hörst eine Zahl.": {
    "datei": "florian/d74cf58e5017.mp3",
    "h": "eaa5b0ae1c",
+   "gehoert": false
+  },
+  "Durst.": {
+   "datei": "livia/3813e888f746.mp3",
+   "h": "008cb10fc3",
    "gehoert": false
   },
   "Ecken und Seiten zählen": {
@@ -3499,6 +4034,16 @@
   "Er hat ein Bild gemalt.": {
    "datei": "florian/a7759188e92c.mp3",
    "h": "4d75513103",
+   "gehoert": false
+  },
+  "Er probiert: ich gähne, du gähnst?": {
+   "datei": "livia/4ad382b0fc3e.mp3",
+   "h": "f09b602cd3",
+   "gehoert": false
+  },
+  "Er probiert: Passt der, die oder das davor?": {
+   "datei": "livia/6cd141c3ede9.mp3",
+   "h": "0ede606b5e",
    "gehoert": false
   },
   "Ergänzen statt Abziehen": {
@@ -3951,6 +4496,11 @@
    "h": "551af43a7a",
    "gehoert": false
   },
+  "gähnt.": {
+   "datei": "livia/1c334f9ae268.mp3",
+   "h": "79730dbece",
+   "gehoert": false
+  },
   "Ganz anders sehen die Zähne von Tyrannosaurus aus. Sie sind groß und spitz und haben am Rand feine Zacken, wie ein Brotmesser. Solche Zähne haben Fleischfresser. Wie er an sein Futter kam, darüber sind sich die Fachleute nicht einig. Früher stellte man Tyrannosaurus aufrecht hin, wie ein Känguru, den Schwanz auf dem Boden. Heute zeigt man ihn anders: Sein Rücken war waagerecht, der Kopf erhoben. Rätselhaft sind seine kurzen, kräftigen Arme. Wozu er sie brauchte, weiß bis heute niemand sicher.": {
    "datei": "livia/96bb2588077d.mp3",
    "hand": true,
@@ -4236,6 +4786,11 @@
    "h": "c22e0de22c",
    "gehoert": false
   },
+  "große.": {
+   "datei": "livia/f7252e26e9e3.mp3",
+   "h": "6ba634f6bc",
+   "gehoert": false
+  },
   "Größen vergleichen und ordnen": {
    "datei": "florian/bf608fc0d2a4.mp3",
    "h": "2f261c8709",
@@ -4336,9 +4891,24 @@
    "hand": true,
    "gehoert": true
   },
+  "hat.": {
+   "datei": "livia/4f7a7fe3cb44.mp3",
+   "h": "3106ffe77a",
+   "gehoert": false
+  },
   "Hauptsatz und Nebensatz": {
    "datei": "florian/4f1a52cc22ab.mp3",
    "h": "68b40ea801",
+   "gehoert": false
+  },
+  "Haus.": {
+   "datei": "livia/999d1de8c545.mp3",
+   "h": "58ddafd2d5",
+   "gehoert": false
+  },
+  "heiße.": {
+   "datei": "livia/884d717e5f2f.mp3",
+   "h": "f9aface689",
    "gehoert": false
   },
   "Heute ist es warm.": {
@@ -4441,9 +5011,19 @@
    "h": "fafc9d0f22",
    "gehoert": false
   },
+  "Hier liegt das Nomen-Dreieck.": {
+   "datei": "livia/e6fed99b20fe.mp3",
+   "h": "47c9faa922",
+   "gehoert": false
+  },
   "Hier liegt der Pinsel.": {
    "datei": "florian/b82618321a38.mp3",
    "h": "2c7268359e",
+   "gehoert": false
+  },
+  "Hier liegt der Verb-Kreis.": {
+   "datei": "livia/0ac7f64d2b25.mp3",
+   "h": "9839652f67",
    "gehoert": false
   },
   "Hier liegt eine Perle.": {
@@ -4454,6 +5034,11 @@
   "Hier liegt eine Stange.": {
    "datei": "florian/49899c996f16.mp3",
    "h": "363ebc2c05",
+   "gehoert": false
+  },
+  "Hier liegt jetzt auch das Nomen-Dreieck.": {
+   "datei": "livia/86124c6a2edf.mp3",
+   "h": "f5894f92ff",
    "gehoert": false
   },
   "Hier liegt keine Perle.": {
@@ -4506,6 +5091,11 @@
    "h": "3a0b416e59",
    "gehoert": false
   },
+  "holt.": {
+   "datei": "livia/673ecd51de73.mp3",
+   "h": "262a0d3eed",
+   "gehoert": false
+  },
   "Hör dich selbst": {
    "datei": "florian/bb8be30d1877.mp3",
    "h": "3bbee3c7b6",
@@ -4536,6 +5126,11 @@
    "h": "86e07c0ae9",
    "gehoert": false
   },
+  "Hund.": {
+   "datei": "livia/e9f12077ee50.mp3",
+   "h": "ba9cfbf33d",
+   "gehoert": false
+  },
   "Hunde reden nicht mit Wörtern. Sie reden mit ihrem ganzen Körper. Gesicht, Ohren, Schwanz und Haltung sagen etwas. Andere Hunde verstehen das sofort. Und wer genau hinschaut, kann es auch lernen. Schau dir Kalle an, wenn er sich wohlfühlt. Sein Körper ist locker, nichts an ihm ist steif. Sein Maul ist leicht offen, das Gesicht weich. Der Schwanz hängt entspannt herunter oder schwingt locker hin und her. So sieht ein freundlicher, ruhiger Hund aus.": {
    "datei": "livia/051a672ab430.mp3",
    "hand": true,
@@ -4559,6 +5154,41 @@
   "Hunderterzahlen plus und minus": {
    "datei": "florian/fc302b095522.mp3",
    "h": "8369429c2d",
+   "gehoert": false
+  },
+  "Hunger.": {
+   "datei": "livia/8bcfb90d8936.mp3",
+   "h": "a6fe15ea23",
+   "gehoert": false
+  },
+  "hüpft.": {
+   "datei": "livia/c2c03b641ade.mp3",
+   "h": "8b1c872641",
+   "gehoert": false
+  },
+  "Ich Apfel?": {
+   "datei": "livia/c09cc3af4524.mp3",
+   "h": "06d474ad6a",
+   "gehoert": false
+  },
+  "Ich auf?": {
+   "datei": "livia/a7c070fac7fa.mp3",
+   "h": "8c21c15967",
+   "gehoert": false
+  },
+  "Ich Ball?": {
+   "datei": "livia/1eb78c646b34.mp3",
+   "h": "47518d0cc2",
+   "gehoert": false
+  },
+  "Ich Baum?": {
+   "datei": "livia/075e55ec3828.mp3",
+   "h": "d0b2f1a3c7",
+   "gehoert": false
+  },
+  "Ich belle, du bellst.": {
+   "datei": "livia/873b3901319d.mp3",
+   "h": "4980fa6329",
    "gehoert": false
   },
   "Ich beschreib es dir": {
@@ -4586,6 +5216,36 @@
    "h": "c072aab424",
    "gehoert": false
   },
+  "Ich das?": {
+   "datei": "livia/2a96e063e58f.mp3",
+   "h": "57bf68dba4",
+   "gehoert": false
+  },
+  "Ich dem?": {
+   "datei": "livia/814b83b12beb.mp3",
+   "h": "9e495d03a4",
+   "gehoert": false
+  },
+  "Ich den?": {
+   "datei": "livia/9475e76f9efd.mp3",
+   "h": "a3035bb41f",
+   "gehoert": false
+  },
+  "Ich der?": {
+   "datei": "livia/5e18cb33fceb.mp3",
+   "h": "d52369baa5",
+   "gehoert": false
+  },
+  "Ich die?": {
+   "datei": "livia/c6003f9c8563.mp3",
+   "h": "6fe503bde2",
+   "gehoert": false
+  },
+  "Ich Durst?": {
+   "datei": "livia/739220218ade.mp3",
+   "h": "ffabbdec28",
+   "gehoert": false
+  },
   "Ich esse Brot und Käse.": {
    "datei": "florian/caa12015799f.mp3",
    "h": "c15dc9d8bf",
@@ -4604,6 +5264,11 @@
   "Ich fühle mich so": {
    "datei": "florian/fa7a7e4efd29.mp3",
    "h": "55a1c72b1d",
+   "gehoert": false
+  },
+  "Ich gähne, du gähnst.": {
+   "datei": "livia/6671b79b1840.mp3",
+   "h": "50f25eb6c6",
    "gehoert": false
   },
   "Ich gehe zu Oma.": {
@@ -4631,9 +5296,54 @@
    "h": "79b8b25be0",
    "gehoert": false
   },
+  "Ich habe, du hast.": {
+   "datei": "livia/b55fd8f3f121.mp3",
+   "h": "7f2c2f705b",
+   "gehoert": false
+  },
+  "Ich Haus?": {
+   "datei": "livia/f040813d2114.mp3",
+   "h": "61c391369f",
+   "gehoert": false
+  },
+  "Ich hole, du holst.": {
+   "datei": "livia/9e336e1f424f.mp3",
+   "h": "24e86e8f7e",
+   "gehoert": false
+  },
+  "Ich Hund?": {
+   "datei": "livia/4938a33dc1be.mp3",
+   "h": "1ef6808581",
+   "gehoert": false
+  },
+  "Ich Hunger?": {
+   "datei": "livia/2f3484ed76b5.mp3",
+   "h": "6a995909d0",
+   "gehoert": false
+  },
+  "Ich hüpfe, du hüpfst.": {
+   "datei": "livia/3e4b0a377f90.mp3",
+   "h": "d8381a3f75",
+   "gehoert": false
+  },
+  "Ich jage, du jagst.": {
+   "datei": "livia/ddfcb99ffa83.mp3",
+   "h": "3583ab9b18",
+   "gehoert": false
+  },
+  "Ich Katze?": {
+   "datei": "livia/e6c92430271a.mp3",
+   "h": "e904f508fb",
+   "gehoert": false
+  },
   "Ich lese gern Bücher.": {
    "datei": "florian/0501795ce170.mp3",
    "h": "31325cc15e",
+   "gehoert": false
+  },
+  "Ich liege, du liegst.": {
+   "datei": "livia/96e5358c001b.mp3",
+   "h": "5a1f47678a",
    "gehoert": false
   },
   "Ich mag Eis.": {
@@ -4646,9 +5356,109 @@
    "h": "c354125f57",
    "gehoert": false
   },
+  "Ich miaue, du miaust.": {
+   "datei": "livia/b589144a277c.mp3",
+   "h": "ca8787d061",
+   "gehoert": false
+  },
+  "Ich Milch?": {
+   "datei": "livia/93d999b96714.mp3",
+   "h": "e647aa5ff9",
+   "gehoert": false
+  },
   "Ich putze mir die Zähne.": {
    "datei": "florian/59611feb206b.mp3",
    "h": "bd2990fbc6",
+   "gehoert": false
+  },
+  "Ich rausche, du rauschst.": {
+   "datei": "livia/a88700d1b7a3.mp3",
+   "h": "4a2d3df68c",
+   "gehoert": false
+  },
+  "Ich Regen?": {
+   "datei": "livia/8ecbe0def6fc.mp3",
+   "h": "5810a96aef",
+   "gehoert": false
+  },
+  "Ich renne, du rennst.": {
+   "datei": "livia/35e49ed918bf.mp3",
+   "h": "f8191c3170",
+   "gehoert": false
+  },
+  "Ich rolle, du rollst.": {
+   "datei": "livia/e849e2fdbb88.mp3",
+   "h": "210cf4d85f",
+   "gehoert": false
+  },
+  "Ich scheine, du scheinst.": {
+   "datei": "livia/2456ec04e221.mp3",
+   "h": "53cf854b81",
+   "gehoert": false
+  },
+  "Ich Schuh?": {
+   "datei": "livia/3a7829103d09.mp3",
+   "h": "6372cf932f",
+   "gehoert": false
+  },
+  "Ich Sonne?": {
+   "datei": "livia/c651744c421f.mp3",
+   "h": "f93e6fef48",
+   "gehoert": false
+  },
+  "Ich springe, du springst.": {
+   "datei": "livia/b78154d4a50b.mp3",
+   "h": "0a71a913f5",
+   "gehoert": false
+  },
+  "Ich stehe, du stehst.": {
+   "datei": "livia/b9a0da7977ac.mp3",
+   "h": "bd5d06d470",
+   "gehoert": false
+  },
+  "Ich Tasse?": {
+   "datei": "livia/c0934334bbb6.mp3",
+   "h": "f2f3584b99",
+   "gehoert": false
+  },
+  "Ich Teller?": {
+   "datei": "livia/03cf29d81bc5.mp3",
+   "h": "07b8cab492",
+   "gehoert": false
+  },
+  "Ich Tisch?": {
+   "datei": "livia/9f803189e5f0.mp3",
+   "h": "21fae115de",
+   "gehoert": false
+  },
+  "Ich trinke, du trinkst.": {
+   "datei": "livia/ea446be63803.mp3",
+   "h": "5e9e2948f2",
+   "gehoert": false
+  },
+  "Ich tropfe, du tropfst.": {
+   "datei": "livia/242f722cce24.mp3",
+   "h": "d6678e562f",
+   "gehoert": false
+  },
+  "Ich über?": {
+   "datei": "livia/84401bebae8e.mp3",
+   "h": "8d49cd35ee",
+   "gehoert": false
+  },
+  "Ich unter?": {
+   "datei": "livia/208759190b63.mp3",
+   "h": "82d0ad44ca",
+   "gehoert": false
+  },
+  "Ich Wasser?": {
+   "datei": "livia/c31a6565e18c.mp3",
+   "h": "389d6fc434",
+   "gehoert": false
+  },
+  "Ich wehe, du wehst.": {
+   "datei": "livia/6a37c80285e6.mp3",
+   "h": "71a85494c7",
    "gehoert": false
   },
   "Ich weiß, weil": {
@@ -4656,9 +5466,24 @@
    "h": "a023ed2792",
    "gehoert": false
   },
+  "Ich Wind?": {
+   "datei": "livia/98664beb2bbf.mp3",
+   "h": "16feece60f",
+   "gehoert": false
+  },
+  "Ich Zaun?": {
+   "datei": "livia/843f0c650c9a.mp3",
+   "h": "491e5aca14",
+   "gehoert": false
+  },
   "Ich ziehe meine Jacke an.": {
    "datei": "florian/8243e478fdb3.mp3",
    "h": "8a752a0b1b",
+   "gehoert": false
+  },
+  "Ich zum?": {
+   "datei": "livia/7f8ffe8bc87c.mp3",
+   "h": "83f9879ef1",
    "gehoert": false
   },
   "ich, du, er, sie, es, wir, ihr": {
@@ -4906,6 +5731,11 @@
    "hand": true,
    "gehoert": true
   },
+  "jagt.": {
+   "datei": "livia/1495e896daa2.mp3",
+   "h": "5fbd1ec287",
+   "gehoert": false
+  },
   "Je mehr, desto": {
    "datei": "florian/b3a75b833c3c.mp3",
    "h": "7254ab17f0",
@@ -5011,6 +5841,16 @@
    "h": "f98a4619aa",
    "gehoert": false
   },
+  "Jetzt du: Leg das Dreieck über Ball.": {
+   "datei": "livia/f5f3efb64e35.mp3",
+   "h": "7a50aa6647",
+   "gehoert": false
+  },
+  "Jetzt du: Leg den Kreis über rollt.": {
+   "datei": "livia/b92039cdee6c.mp3",
+   "h": "fdf5eb713f",
+   "gehoert": false
+  },
   "Jetzt geht es los.": {
    "datei": "florian/22f43be99076.mp3",
    "h": "219b932533",
@@ -5054,6 +5894,16 @@
   "Jetzt liegt das Werkzeug wieder auf der Werkbank.": {
    "datei": "florian/fee897548646.mp3",
    "h": "9de75c6a42",
+   "gehoert": false
+  },
+  "Jetzt malt Kofi keine Bilder mehr.": {
+   "datei": "livia/33d58dd67973.mp3",
+   "h": "374ec694de",
+   "gehoert": false
+  },
+  "Jetzt malt Kofi wieder Bilder.": {
+   "datei": "livia/d8dd051ceb1a.mp3",
+   "h": "f3fa5edd8b",
    "gehoert": false
   },
   "Jetzt nimmt Kofi einen Teil weg. Der andere Teil bleibt liegen.": {
@@ -5166,6 +6016,11 @@
    "h": "6720562319",
    "gehoert": false
   },
+  "Katze.": {
+   "datei": "livia/e2d5afcbb2c0.mp3",
+   "h": "0f3ccf1a4d",
+   "gehoert": false
+  },
   "Katzen spielen gern, und für sie ist Spielen Jagen üben. Am besten spielt man mit einem Ball oder einer Katzenangel. Das ist ein Stab mit einer Schnur und einer Feder daran. Zieh die Feder über den Boden wie eine flitzende Maus. Lass sie hinter einem Kissen verschwinden. Dann lauert Mia und springt. Aber spiel nie mit Händen oder Füßen. Sonst lernt die Katze, auf Hände zu jagen, und das tut weh. Nach dem Spielen räumt man Angel, Wolle und Schnüre weg. Verschluckt sind sie gefährlich.": {
    "datei": "livia/d3b0fba72b31.mp3",
    "hand": true,
@@ -5251,6 +6106,11 @@
    "h": "60952a68a3",
    "gehoert": false
   },
+  "kleine.": {
+   "datei": "livia/2507842fb477.mp3",
+   "h": "cdd1b20d65",
+   "gehoert": false
+  },
   "Kleines Detail": {
    "datei": "florian/2c02f0dc913b.mp3",
    "h": "d065843e14",
@@ -5286,9 +6146,24 @@
    "h": "3f781d7a94",
    "gehoert": false
   },
+  "Kofi hat Wörter auf den Hof gemalt.": {
+   "datei": "livia/8c6fc80a812d.mp3",
+   "h": "d04c594066",
+   "gehoert": false
+  },
   "Kofi legt die beiden Teile zusammen. Zusammen sind sie so lang wie die ganze Brücke.": {
    "datei": "florian/9cb23adee5b6.mp3",
    "h": "6c37fb7df9",
+   "gehoert": false
+  },
+  "Kofi legt es über Katze.": {
+   "datei": "livia/384f0a7ef451.mp3",
+   "h": "a2ccd21a92",
+   "gehoert": false
+  },
+  "Kofi legt ihn über gähnt.": {
+   "datei": "livia/d08e19cfb6f3.mp3",
+   "h": "37c22c0f18",
    "gehoert": false
   },
   "Kofi nimmt den ganzen Zehnerstab weg. Übrig bleibt der kleine Stab.": {
@@ -5299,6 +6174,11 @@
   "Kofi springt über den kleinen Bach.": {
    "datei": "florian/d0067abd1974.mp3",
    "h": "4e94bf57a7",
+   "gehoert": false
+  },
+  "Kofi zeigt auf das Wort.": {
+   "datei": "livia/00d7f97467e6.mp3",
+   "h": "d6f0733f5a",
    "gehoert": false
   },
   "Kofi zieht den Vorhang auf. Sechs Perlen schlafen bei Kofi.": {
@@ -5575,6 +6455,11 @@
    "datei": "livia/0197bd8a89e4.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "liegt.": {
+   "datei": "livia/158fdc146334.mp3",
+   "h": "01f9aa6b0f",
+   "gehoert": false
   },
   "Lies und tu": {
    "datei": "florian/5cef50be073e.mp3",
@@ -6020,6 +6905,16 @@
    "datei": "livia/3cc113839b68.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "miaut.": {
+   "datei": "livia/ef747e1ec13b.mp3",
+   "h": "1cb9218664",
+   "gehoert": false
+  },
+  "Milch.": {
+   "datei": "livia/4334b6aecac7.mp3",
+   "h": "b245109df2",
+   "gehoert": false
   },
   "Minus bis zum vollen Zehner": {
    "datei": "florian/6e43a4a66229.mp3",
@@ -6641,6 +7536,11 @@
    "h": "f27aea2f37",
    "gehoert": false
   },
+  "Nomen kannst du.": {
+   "datei": "livia/eee13c201813.mp3",
+   "h": "78a583e2ca",
+   "gehoert": false
+  },
   "Nomen-Proben": {
    "datei": "florian/220ff00f4b1f.mp3",
    "h": "55b87ceb40",
@@ -7141,6 +8041,11 @@
    "h": "f99d6ce574",
    "gehoert": false
   },
+  "rauscht.": {
+   "datei": "livia/54dc0d15bc0d.mp3",
+   "h": "39746ea662",
+   "gehoert": false
+  },
   "Rechenarten verbinden": {
    "datei": "florian/30979edef7f0.mp3",
    "h": "dafd85d730",
@@ -7251,6 +8156,11 @@
    "h": "3268a6c7f3",
    "gehoert": false
   },
+  "Regen.": {
+   "datei": "livia/7d785c8793fa.mp3",
+   "h": "3267e34c91",
+   "gehoert": false
+  },
   "Reim im Gedicht": {
    "datei": "florian/19ca763375ec.mp3",
    "h": "dfe42f2526",
@@ -7276,6 +8186,11 @@
    "h": "2e7acc05be",
    "gehoert": false
   },
+  "rennt.": {
+   "datei": "livia/a3d80618ea50.mp3",
+   "h": "7e989c1196",
+   "gehoert": false
+  },
   "Reporter-Bericht": {
    "datei": "florian/ffe2ce3cace1.mp3",
    "h": "2128be4d69",
@@ -7299,6 +8214,16 @@
   "Rollt oder kippt": {
    "datei": "florian/9907191ffb61.mp3",
    "h": "a6d22031d7",
+   "gehoert": false
+  },
+  "rollt.": {
+   "datei": "livia/6175bec2231d.mp3",
+   "h": "30a601fc59",
+   "gehoert": false
+  },
+  "rote.": {
+   "datei": "livia/23ca717fc1d5.mp3",
+   "h": "156120ea23",
    "gehoert": false
   },
   "Rückgeld": {
@@ -7329,6 +8254,11 @@
   "Runde Ziffern": {
    "datei": "florian/a21c32ee6ea7.mp3",
    "h": "f569242cfc",
+   "gehoert": false
+  },
+  "runde.": {
+   "datei": "livia/bf803e90d70a.mp3",
+   "h": "4143bd3a7c",
    "gehoert": false
   },
   "Runden auf Zehner und Hunderter": {
@@ -7481,6 +8411,11 @@
    "h": "e68b7120b3",
    "gehoert": false
   },
+  "scheint.": {
+   "datei": "livia/991bbd4bbd96.mp3",
+   "h": "c39d771edd",
+   "gehoert": false
+  },
   "Schere.": {
    "datei": "florian/b8740cb0fed3.mp3",
    "h": "8b7146a7a1",
@@ -7509,6 +8444,11 @@
   "Schlüsselwort fangen": {
    "datei": "florian/4547b4930886.mp3",
    "h": "fe2add37bc",
+   "gehoert": false
+  },
+  "Schneidet Dreiecke und Kreise aus Papier aus.": {
+   "datei": "livia/774511eb92e0.mp3",
+   "h": "d842a05273",
    "gehoert": false
   },
   "Schnell lesen durch Wiederholen": {
@@ -7609,6 +8549,11 @@
   "Schritt für Schritt am Rechenstrich": {
    "datei": "florian/c16aad1277ec.mp3",
    "h": "2c2fd6cfa6",
+   "gehoert": false
+  },
+  "Schuh.": {
+   "datei": "livia/505a0c378dbd.mp3",
+   "h": "98fd5f8db9",
    "gehoert": false
   },
   "Sechs Perlen.": {
@@ -7826,6 +8771,16 @@
    "h": "bc8de1228e",
    "gehoert": false
   },
+  "So findest du die Nomen.": {
+   "datei": "livia/42c6f2ad04f5.mp3",
+   "h": "9cefb0771b",
+   "gehoert": false
+  },
+  "So findest du die Verben.": {
+   "datei": "livia/7aae38509df1.mp3",
+   "h": "32161ca73b",
+   "gehoert": false
+  },
   "So hab ich's gelernt": {
    "datei": "florian/889f4788d3f9.mp3",
    "h": "6d31768b35",
@@ -7886,6 +8841,11 @@
    "h": "ee7a175172",
    "gehoert": false
   },
+  "Sonne.": {
+   "datei": "livia/f0adf89eeb53.mp3",
+   "h": "edfa3f9e17",
+   "gehoert": false
+  },
   "Spannung bauen": {
    "datei": "florian/765f86c34bdf.mp3",
    "h": "d428ae88a3",
@@ -7941,6 +8901,11 @@
    "h": "999ba2f737",
    "gehoert": false
   },
+  "springt.": {
+   "datei": "livia/6271c27c7290.mp3",
+   "h": "df8b5ca9c8",
+   "gehoert": false
+  },
   "Stab mit Bauch": {
    "datei": "florian/d87737ecb6c5.mp3",
    "h": "dea00a9820",
@@ -7964,6 +8929,11 @@
   "Standpunkt, Grund, Beispiel": {
    "datei": "florian/741e0a400c9a.mp3",
    "h": "8cf6e11a23",
+   "gehoert": false
+  },
+  "steht.": {
+   "datei": "livia/c04de1a676be.mp3",
+   "h": "9c214c63f2",
    "gehoert": false
   },
   "Steigern: klein, kleiner, am kleinsten": {
@@ -8091,6 +9061,11 @@
    "h": "9e817ca263",
    "gehoert": false
   },
+  "Tasse.": {
+   "datei": "livia/8926887ff406.mp3",
+   "h": "0885ac0321",
+   "gehoert": false
+  },
   "Tauschaufgabe beim Mal begründen": {
    "datei": "florian/3f9900e8a049.mp3",
    "h": "83b14f6d2f",
@@ -8134,6 +9109,11 @@
   "Teiler und Vielfache": {
    "datei": "florian/9bbf880c55c0.mp3",
    "h": "0468e14392",
+   "gehoert": false
+  },
+  "Teller.": {
+   "datei": "livia/27f72d84c3c3.mp3",
+   "h": "f6c172cc8f",
    "gehoert": false
   },
   "Tempo und Lautstärke": {
@@ -8786,6 +9766,11 @@
    "h": "e62375ec6a",
    "gehoert": false
   },
+  "Tisch.": {
+   "datei": "livia/084f143a5e75.mp3",
+   "h": "182d39f705",
+   "gehoert": false
+  },
   "Tom rennt weg.": {
    "datei": "florian/413879379575.mp3",
    "h": "41bc98035b",
@@ -8804,6 +9789,16 @@
   "Trennen bei Doppelkonsonanten": {
    "datei": "florian/cc92682837bf.mp3",
    "h": "cf3cf14aff",
+   "gehoert": false
+  },
+  "trinkt.": {
+   "datei": "livia/c68138c50640.mp3",
+   "h": "1ece607088",
+   "gehoert": false
+  },
+  "tropft.": {
+   "datei": "livia/2985fb2e3b3b.mp3",
+   "h": "9f7c7feaba",
    "gehoert": false
   },
   "Trösten und gratulieren": {
@@ -8834,6 +9829,11 @@
   "Über Zehner und Hunderter hinweg": {
    "datei": "florian/ce342a0c9949.mp3",
    "h": "d16f0868aa",
+   "gehoert": false
+  },
+  "über.": {
+   "datei": "livia/b10aab224540.mp3",
+   "h": "7e5a3967be",
    "gehoert": false
   },
   "Überall helfen Menschen den Elefanten. Sie schützen Wälder und pflanzen Futterbäume. Sie lassen Wege frei, damit die Elefanten von einem Gebiet ins nächste wandern können. Es wird Abend in der Savanne. Die Großmutter führt die Familie zum Wasserloch. Zuris Mutter trinkt, Rüssel für Rüssel. Zuri kniet am Ufer und trinkt mit dem Maul. Bald wird sie es mit dem Rüssel schaffen. Dann stehen alle beieinander und brummen leise. Zuri lehnt sich an das Bein ihrer Mutter.": {
@@ -8951,6 +9951,11 @@
    "hand": true,
    "gehoert": true
   },
+  "unter.": {
+   "datei": "livia/2b0af186a977.mp3",
+   "h": "a64f3a6de0",
+   "gehoert": false
+  },
   "Unterlängen-Schleifen": {
    "datei": "florian/4f42e0920d03.mp3",
    "h": "9945c4a610",
@@ -8979,6 +9984,11 @@
   "Verben als Nomen": {
    "datei": "florian/8c2893efad14.mp3",
    "h": "41abc035b0",
+   "gehoert": false
+  },
+  "Verben kannst du.": {
+   "datei": "livia/a370802f0cc7.mp3",
+   "h": "f546f3109c",
    "gehoert": false
   },
   "Verbindungen wie bei Stern und Spiel": {
@@ -9371,6 +10381,11 @@
    "h": "0bc15d79cf",
    "gehoert": false
   },
+  "Wasser.": {
+   "datei": "livia/1e4537470e22.mp3",
+   "h": "02b4fef02e",
+   "gehoert": false
+  },
   "Weg beschreiben": {
    "datei": "florian/5b9dfcda6cb7.mp3",
    "h": "12e4a204c1",
@@ -9379,6 +10394,11 @@
   "Wege folgen": {
    "datei": "florian/36ddffc49fce.mp3",
    "h": "1ae71ed632",
+   "gehoert": false
+  },
+  "weht.": {
+   "datei": "livia/45c31289001b.mp3",
+   "h": "ed04c58fd0",
    "gehoert": false
   },
   "Weit weg brummt eine andere Elefantenfamilie. Das Brummen ist so tief, dass Menschen es nicht hören können. Elefanten hören es noch mehrere Kilometer weit. Manche dieser tiefen Laute laufen sogar durch den Boden. Forschende vermuten, dass Elefanten sie mit den Füßen spüren. Vielleicht hob die Großmutter darum den Fuß. Jetzt brummt sie zurück. Bald darauf kommt die andere Familie näher. Es sind Verwandte. Die Elefanten laufen aufeinander zu und brummen laut.": {
@@ -9634,6 +10654,11 @@
   "Willst du deine Zahl ändern?": {
    "datei": "florian/a50fc85155f9.mp3",
    "h": "6f30dbcc02",
+   "gehoert": false
+  },
+  "Wind.": {
+   "datei": "livia/bc5dc0c38160.mp3",
+   "h": "2a35d99596",
    "gehoert": false
   },
   "Wir backen heute einen Kuchen.": {
@@ -10036,6 +11061,11 @@
    "h": "45739db421",
    "gehoert": false
   },
+  "Zaun.": {
+   "datei": "livia/900719d69802.mp3",
+   "h": "267d1260a6",
+   "gehoert": false
+  },
   "Zaunpfahlfalle": {
    "datei": "florian/e8d9d8369da3.mp3",
    "h": "1711340b68",
@@ -10359,6 +11389,11 @@
   "Zum Beispiel zehn plus drei.": {
    "datei": "florian/a63a98f4557d.mp3",
    "h": "9223598ed9",
+   "gehoert": false
+  },
+  "zum.": {
+   "datei": "livia/ce979ddbf9ec.mp3",
+   "h": "777401ff90",
    "gehoert": false
   },
   "Zur Begrüßung strecken die Elefanten einander den Rüssel entgegen. Sie berühren sich am Kopf und am Maul. Elefanten erkennen ihre Verwandten wieder, auch nach langer Zeit. Zuris großer Bruder ist zwölf Jahre alt. In ein, zwei Jahren zieht er los. Dann lebt er allein oder mit anderen jungen Bullen. Forschende haben noch etwas entdeckt. Afrikanische Elefanten rufen einander mit eigenen Lauten, ähnlich wie mit Namen. Hört eine Elefantenkuh den Ruf, der ihr gilt, antwortet sie besonders rasch. Zuri drückt ihren Rüssel an das Maul ihrer Mutter.": {
