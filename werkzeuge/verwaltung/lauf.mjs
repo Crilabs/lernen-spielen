@@ -11,8 +11,10 @@ import { spawn } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { createWriteStream, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
+import { createInterface } from "node:readline";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { journalBeobachter, mitUhr, zeilenAusAusgabe } from "./protokoll.mjs";
 import { STATUS, ladeAuftraege, naechsterWartender, speichereAuftraege, statusAusErgebnis } from "./auftraege.mjs";
 
 export const ORDNER = dirname(fileURLToPath(import.meta.url));
@@ -96,24 +98,35 @@ export function laufUmgebung(basis, auftragId, transkript) {
   };
 }
 
-/** Startet einen Auftrag als `claude -p` im Repo; Ausgabe ins Protokoll. Ergebnis: Exit-Code. */
-export function startClaude({ befehl, auftragId, wurzel, protokoll }) {
+/** Argumente für `claude -p`: stream-json, damit das Protokoll während des Laufs wächst (Textmodus druckt nur das Ende). */
+export function claudeArgumente(befehl, sessionId) {
+  return [
+    "-p", befehl, "--session-id", sessionId, "--output-format", "stream-json", "--verbose",
+    "--permission-mode", "bypassPermissions", "--disallowedTools", ...VERBOTEN,
+  ];
+}
+
+/** Startet einen Auftrag als `claude -p` im Repo; lesbares Protokoll (protokoll.mjs). Ergebnis: Exit-Code. */
+export function startClaude({ befehl, auftragId, wurzel, protokoll, alleMs = 5000 }) {
   const sessionId = randomUUID();
+  const transkript = transkriptPfad(wurzel, sessionId);
   mkdirSync(dirname(protokoll), { recursive: true });
   const log = createWriteStream(protokoll, { flags: "a" });
   log.write(`# ${new Date().toISOString()} ${befehl}\n# Sitzung ${sessionId}\n`);
-  const kind = spawn("claude", [
-    "-p", befehl, "--session-id", sessionId, "--permission-mode", "bypassPermissions", "--disallowedTools", ...VERBOTEN,
-  ], {
+  const schreibe = (zeile) => log.write(mitUhr(zeile));
+  const kind = spawn("claude", claudeArgumente(befehl, sessionId), {
     cwd: wurzel,
-    env: laufUmgebung(process.env, auftragId, transkriptPfad(wurzel, sessionId)),
+    env: laufUmgebung(process.env, auftragId, transkript),
     stdio: ["ignore", "pipe", "pipe"],
   });
-  kind.stdout.pipe(log, { end: false });
-  kind.stderr.pipe(log, { end: false });
+  createInterface({ input: kind.stdout }).on("line", (z) => zeilenAusAusgabe(z).forEach(schreibe));
+  createInterface({ input: kind.stderr }).on("line", (z) => { if (z.trim()) schreibe(`! ${z}`); });
+  const journal = journalBeobachter(transkript.replace(/\.jsonl$/, ""), schreibe);
+  const takt = setInterval(journal, alleMs);
   return new Promise((ok) => {
-    kind.on("error", (e) => { log.end(`\n# Start fehlgeschlagen: ${e.message}\n`); ok(-1); });
-    kind.on("close", (code) => { log.end(`\n# Ende, Exit-Code ${code}\n`); ok(code ?? -1); });
+    const ende = (text, code) => { clearInterval(takt); journal(); log.end(`\n# ${text}\n`); ok(code); };
+    kind.on("error", (e) => ende(`Start fehlgeschlagen: ${e.message}`, -1));
+    kind.on("close", (code) => ende(`Ende, Exit-Code ${code}`, code ?? -1));
   });
 }
 
