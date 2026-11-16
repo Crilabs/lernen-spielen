@@ -3,11 +3,11 @@
 // links das Bild randlos über die halbe Breite (Foto aus `bild`, 1024 × 1024, oder gezeichnete Szene aus `szene` auf
 // einer quadratischen Bühne vor der Kulisse, rahmen/szene.js), rechts auf Papier der Titel (Inter) und der Text in
 // Andika (Kurzgeschichte ein Satz je Zeile, Sachbuch in Absätzen). Oben rechts Vorlesen, unten Zurück, Punkte und Weiter.
-// Weiter und Zurück per Tipp, Wischen und Pfeiltaste. Fortschritt als Punkte ohne Zahl.
+// Weiter und Zurück per Tipp und Pfeiltaste; das Bild reagiert nicht auf Berühren. Fortschritt als Punkte ohne Zahl.
 // - Startwahl (Christian 2026-11-15): Bei Ton an zeigt die erste Seite „Vorlesen“ und „Selbst lesen“; vorher wird nichts
 //   gelesen. Wer ohne Wahl blättert, liest selbst. Bei Ton aus gibt es keine Wahl (Selbst lesen).
 // - Vorlesemodus: nach dem Satz und PAUSE_MS Ruhe blättert die Geschichte von selbst um (Ausnahme zu spielbau.md §8,
-//   nur für Geschichten); ohne Stimme nach der geschätzten Lesezeit. Ein Tipp auf Bild, Text oder den Vorlese-Knopf
+//   nur für Geschichten); ohne Stimme nach der geschätzten Lesezeit. Ein Tipp auf Text oder den Vorlese-Knopf
 //   hält an, ein zweiter liest weiter. Die Frage-Seite und die letzte Seite blättern nie von selbst.
 // Nach der letzten Seite „Fertig“ (Hauptknopf) → Ereignis `fertig` (bubbles, composed).
 //
@@ -16,7 +16,7 @@
 //   Systemstimme); der Knopf Vorlesen liest noch einmal, bei Selbst lesen auf Wunsch die Seite. `sprich` der Seite ersetzt den gesprochenen Text.
 //   Ein Satz wird nur durch einen Tipp des Kindes abgebrochen (Blättern), nie vom Abspieler.
 // - Frage (`frage: true`): Weiter erscheint erst nach dem Vorlesen und einer Ruhe von RUHE_MS, damit das Kind
-//   überlegt; bis dahin blättern auch Wischen und Pfeiltaste nicht weiter. Es wird nichts geprüft oder gespeichert.
+//   überlegt; bis dahin blättert auch die Pfeiltaste nicht weiter. Es wird nichts geprüft oder gespeichert.
 // - Fotos tragen kein Label; dass Bilder erzeugt sind, steht in den Eltern-Hinweisen (Christian 2026-11-16).
 // - Seitenwechsel: nur transform und opacity; bei wenig Bewegung nur ein kurzes Überblenden.
 // - Testbetrieb (`?pruefen`, rahmen/pruefen.js): window.lsGeschichte = { seite, seiten, weiterBereit, weiter(),
@@ -39,8 +39,6 @@ export const PAUSE_MS = 1500;
 /** Ohne Stimme: geschätzte Lesezeit je Zeichen, mindestens LESEZEIT_MIN_MS. */
 const LESEZEIT_MS = 60;
 const LESEZEIT_MIN_MS = 3000;
-/** Wischweg in Pixeln, ab dem geblättert wird. */
-const WISCH_PX = 60;
 const DAUER_MS = 460;
 /** Einstellung für den zuletzt gewählten Lesemodus der Bücher (Anhören/Lesen), gilt für alle Bücher. */
 const MODUS_EINSTELLUNG = "buch.modus";
@@ -172,6 +170,9 @@ ${SZENE_CSS}
 .kapitel.gelesen .haken { display: grid; }
 /* Ton aus: es gibt nichts anzuhören – nur Lesen. */
 :host(.ohne-ton) .anhoeren { display: none; }
+/* Bücher-Grenze der Eltern (Spec 2026-11-16-buecherzeit): der aufgebrauchte Modus hat keinen Knopf */
+:host(.ohne-vorlesen) .anhoeren, :host(.ohne-vorlesen) .waehle-vorlesen { display: none; }
+:host(.ohne-selbst) .start-lesen, :host(.ohne-selbst) .kapitel .lesen, :host(.ohne-selbst) .waehle-selbst { display: none; }
 .knoepfe { display: flex; align-items: center; gap: 2rem; min-height: 11rem; }
 .knoepfe .rechts { display: grid; justify-items: end; align-items: center; min-width: 11rem; }
 .rechts > * { grid-area: 1 / 1; }
@@ -344,6 +345,11 @@ export class LsGeschichte extends HTMLElement {
     /** @type {ReturnType<typeof setTimeout> | undefined} */
     this.ruheTimer = undefined;
     this.nummer = 0;
+    /** Bücher-Grenze der Eltern: welche Modi dieses Buch heute öffnen darf (vor `src` setzen; geschichte.html). */
+    this.erlaubt = { vorlesen: true, selbst: true };
+    /** Modi, in denen dieses Buch schon aufgeschlagen wurde (Ereignis „liest“ nur einmal je Modus). */
+    this.gemeldet = new Set();
+    this.ton = true;
     /** @type {(g: Geschichte | null) => void} */
     let fertig = () => {};
     /** @type {Promise<Geschichte | null>} */
@@ -365,6 +371,7 @@ export class LsGeschichte extends HTMLElement {
     this.leiste = null;
     this.beiTon = (/** @type {Event} */ e) => {
       const an = /** @type {CustomEvent} */ (e).detail?.an !== false;
+      this.ton = an;
       if (this.istBuch) {
         // Sachbuch: Ton aus → Selbst lesen, Anhören verschwindet; Ton an → Anhören ist wieder da
         this.classList.toggle("ohne-ton", !an);
@@ -382,25 +389,24 @@ export class LsGeschichte extends HTMLElement {
       if (e.key === "ArrowRight") { e.preventDefault(); this.weiter(); }
       else if (e.key === "ArrowLeft") { e.preventDefault(); this.zurueck(); }
     };
-    // Wischen über dem Bild (waagrecht; senkrecht bleibt dem Blättern der Seite)
-    /** @type {{ x: number, y: number, id: number } | null} */
-    let start = null;
-    this.rahmen.addEventListener("pointerdown", (e) => { start = { x: e.clientX, y: e.clientY, id: e.pointerId }; });
-    this.rahmen.addEventListener("pointerup", (e) => {
-      if (!start || start.id !== e.pointerId) return;
-      const dx = e.clientX - start.x, dy = e.clientY - start.y;
-      start = null;
-      if (Math.abs(dx) < WISCH_PX && Math.abs(dy) < WISCH_PX) return void this.halte();
-      if (Math.abs(dx) < WISCH_PX || Math.abs(dx) < Math.abs(dy) * 1.2) return;
-      if (dx < 0) this.weiter(); else this.zurueck();
-    });
-    this.rahmen.addEventListener("pointercancel", () => { start = null; });
+    // Das Bild reagiert nicht auf Berühren: kein Anhalten, kein Wischen (Kinder fassen gern die Bilder an, Christian 2026-11-16).
   }
 
   get seite() { return this._seite; }
   get seiten() { return this.liste.length; }
   get kapitelZahl() { return Array.isArray(this.daten?.kapitel) ? this.daten.kapitel.length : 0; }
   get istBuch() { return this.kapitelZahl > 0; }
+  /** Darf in diesem Modus gelesen werden (Grenze der Eltern, Vorlesen nur mit Ton)? @param {string | null} m */
+  nutzbar(m) {
+    if (m !== "vorlesen" && m !== "selbst") return false;
+    return this.erlaubt?.[m] !== false && (m === "selbst" || this.ton);
+  }
+  /** Meldet einmal je Modus, dass das Buch aufgeschlagen ist (Ereignis „liest“, für die Bücher-Grenze). */
+  meldeLesen() {
+    if (!this.modus || this.gemeldet.has(this.modus)) return;
+    this.gemeldet.add(this.modus);
+    this.dispatchEvent(new CustomEvent("liest", { bubbles: true, composed: true, detail: { modus: this.modus } }));
+  }
 
   connectedCallback() {
     window.addEventListener("keydown", this.beiTaste);
@@ -459,18 +465,24 @@ export class LsGeschichte extends HTMLElement {
       // Bücher mit Kapiteln haben kein Hintergrundbild (Christian 2026-11-16), nur Geschichten ohne Kapitel eine Kulisse.
       await Promise.all([this.ladeBausteine(g), buch ? null : this.ladeKulisse(g)]);
       this.daten = g;
+      this.classList.toggle("ohne-vorlesen", this.erlaubt?.vorlesen === false);
+      this.classList.toggle("ohne-selbst", this.erlaubt?.selbst === false);
       if (buch) {
         // Sachbuch: Inhaltsverzeichnis. Modus = zuletzt gewählter (gemerkt), sonst bei Ton an Anhören (Vorlesebuch,
         // Christian 2026-11-15); bei Ton aus immer Lesen.
         const ton = await this.tonAn();
+        this.ton = ton;
         this.modus = ton ? (gemerkterModus() ?? "vorlesen") : "selbst";
+        if (!this.nutzbar(this.modus)) this.modus = this.modus === "vorlesen" ? "selbst" : "vorlesen";
         this.classList.toggle("ohne-ton", !ton);
         this.classList.add("buch-modus");
         this.zeigeInhalt();
       } else {
         this.liste = /** @type {Seite[]} */ (g.seiten);
         this.punkteEl.replaceChildren(...this.liste.map(() => document.createElement("i")));
-        this.modus = (await this.tonAn()) ? null : "selbst";
+        this.ton = await this.tonAn();
+        // Ohne Ton oder ohne erlaubtes Vorlesen gibt es keine Wahl: Selbst lesen.
+        this.modus = this.nutzbar("vorlesen") ? null : "selbst";
         this.zeigeWahl(this.modus === null);
         this.zeige(0, 0);
       }
@@ -545,6 +557,7 @@ export class LsGeschichte extends HTMLElement {
     const s = this.liste[i];
     this._seite = i;
     this.nummer += 1;
+    this.meldeLesen();
     clearTimeout(this.ruheTimer);
     clearTimeout(this.autoTimer);
 
@@ -652,6 +665,7 @@ export class LsGeschichte extends HTMLElement {
     if (this.istBuch) return void this.setzeModus(modus, true);
     if (!this.daten || this.modus !== null) return;
     this.modus = modus === "vorlesen" ? "vorlesen" : "selbst";
+    this.meldeLesen();
     this.zeigeWahl(false);
     this.setzeAngehalten(false);
     this.zeigeText();
@@ -762,7 +776,7 @@ export class LsGeschichte extends HTMLElement {
       /** @type {HTMLElement} */ (li.querySelector(".titel")).textContent = k.titel;
       const zeile = /** @type {HTMLElement} */ (li.querySelector(".zeile"));
       zeile.setAttribute("aria-label", `Kapitel ${i + 1}: ${k.titel}${gelesen ? ", gelesen" : ""}`);
-      zeile.addEventListener("click", () => this.oeffne(i));
+      zeile.addEventListener("click", () => { if (this.nutzbar(this.modus)) this.oeffne(i); });
       const an = /** @type {HTMLElement} */ (li.querySelector(".anhoeren")), le = /** @type {HTMLElement} */ (li.querySelector(".lesen"));
       an.setAttribute("name", `Kapitel ${i + 1} anhören`);
       le.setAttribute("name", `Kapitel ${i + 1} lesen`);
@@ -862,7 +876,10 @@ export class LsGeschichte extends HTMLElement {
 
   weiter() {
     if (!this.daten || !this.weiterBereit || (this.istBuch && this.kapitel < 0)) return;
-    if (this.modus === null) { this.modus = "selbst"; this.zeigeWahl(false); this.zeigeText(); }
+    if (this.modus === null) {
+      if (!this.nutzbar("selbst")) return void this.waehle("vorlesen");   // Selbst lesen ist heute aufgebraucht
+      this.modus = "selbst"; this.meldeLesen(); this.zeigeWahl(false); this.zeigeText();
+    }
     if (this._seite >= this.liste.length - 1) return;
     this.zeige(this._seite + 1, 1);
   }

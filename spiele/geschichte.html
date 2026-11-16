@@ -32,6 +32,7 @@ import "./rahmen/leiste.js";
 import "./rahmen/knopf.js";
 import "./rahmen/geschichte.js";
 import { hintergrundSvg } from "./start/hintergrund.js";
+import { buecherLage, merkeBuch } from "./rahmen/buecherzeit.js";
 
 document.getElementById("hintergrund").innerHTML = hintergrundSvg();
 sperreTouch();
@@ -46,7 +47,20 @@ const leiste = document.getElementById("leiste");
 // Zurück: dorthin, woher das Kind kam (Bibliothek oder Elternbereich), ohne die Geschichte als gelesen zu merken.
 document.getElementById("zurueck").addEventListener("click", () => { location.href = weiter; });
 const geschichte = document.getElementById("geschichte");
-if (/^[a-z0-9-]+$/.test(id)) geschichte.setAttribute("src", `geschichten/${id}/geschichte.json`);
+// Bücher-Grenze der Eltern (Spec 2026-11-16-buecherzeit), nicht in der Vorschau der Eltern: vor dem Laden setzen,
+// welche Modi das Buch heute öffnen darf; ist keiner frei, zurück (die Bibliothek zeigt es dann nicht drückbar).
+let gesperrt = false;
+if (!suche.has("eltern")) {
+  const erlaubt = (await buecherLage()).erlaubt(id);
+  gesperrt = !erlaubt.vorlesen && !erlaubt.selbst;
+  if (gesperrt) location.replace(weiter);
+  geschichte.erlaubt = erlaubt;
+  geschichte.addEventListener("liest", (e) => {
+    merkeBuch(e.detail.modus, id).catch((f) => protokoll("Bücher-Grenze: " + f));
+  });
+}
+if (gesperrt) { /* nichts laden */ }
+else if (/^[a-z0-9-]+$/.test(id)) geschichte.setAttribute("src", `geschichten/${id}/geschichte.json`);
 else geschichte.setAttribute("src", "geschichten/-/geschichte.json");   // zeigt „geht gerade nicht“
 
 let gefunden = false;

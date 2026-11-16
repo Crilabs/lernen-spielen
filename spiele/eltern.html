@@ -299,6 +299,8 @@ import { faehigkeiten, appVersion, beende, neuStart, kioskPause } from "./kern/g
 import { ladeEinstellungen, setzeEinstellung, einstellung } from "./kern/einstellungen.js";
 import { regeln, aktuell, lage as spielLage, gibZugabe, ZUGABE_MINUTEN } from "./kern/spielzeit.js";
 import { STAND as SPIELZEIT_STAND } from "./rahmen/spielzeit.js";
+import { regeln as buchRegeln, aktuell as buchAktuell, zahlen as buchZahlen, gibZugabe as buchZugabe, HOECHSTENS as BUECHER_HOECHSTENS } from "./kern/buecherzeit.js";
+import { STAND as BUECHER_STAND, EINSTELLUNG as BUECHER_EINSTELLUNG } from "./rahmen/buecherzeit.js";
 import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer, spieleFuer, alsNaechstes }
   from "./lernsteuerung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
@@ -1000,9 +1002,10 @@ const minutenAus = (sek) => Math.floor(sek / 60);
 
 async function spielzeit(spalte) {
   spalte.append(el("h2", "Spielzeit"),
-    el("p", "Wann und wie lange Ihr Kind digitale Spiele spielen darf. Startseite, Regal und „Mit echten Dingen“ sind nie gesperrt und zählen nicht mit. Im Standard ist alles aus: Die App selbst setzt keine Zeit fest. Ist die Zeit um, spielt Ihr Kind die laufende Runde zu Ende.", "vorspann"));
+    el("p", "Wann und wie lange Ihr Kind digitale Spiele spielen darf, und wie viele Bücher es anhört und selbst liest. Startseite, Regal und „Mit echten Dingen“ sind nie gesperrt und zählen nicht mit. Im Standard ist alles aus: Die App selbst setzt keine Zeit fest. Ist die Zeit um, spielt Ihr Kind die laufende Runde zu Ende.", "vorspann"));
   try { await ladeEinstellungen(); } catch (e) { protokoll("Einstellungen: " + e); }
   let st = aktuell(await lade(SPIELZEIT_STAND, {}), new Date());
+  let bst = buchAktuell(await lade(BUECHER_STAND, {}), new Date());
   if (tab !== "spielzeit") return;
   const status = el("p", "", "status leise");
   status.setAttribute("role", "status");
@@ -1026,12 +1029,22 @@ async function spielzeit(spalte) {
   // Uhrzeit
   const uhrFlaeche = el("section", null, "flaeche");
   uhrFlaeche.setAttribute("aria-label", "Uhrzeit");
+  // Bücher (Spec 2026-11-16-buecherzeit)
+  const buecherFlaeche = el("section", null, "flaeche");
+  buecherFlaeche.setAttribute("aria-label", "Bücher");
+  const br = () => buchRegeln(einstellung(BUECHER_EINSTELLUNG, null));
+  const setzeBuecher = async (aenderung, meldung) => {
+    setzeEinstellung(BUECHER_EINSTELLUNG, { ...br(), ...aenderung });
+    await sofortSpeichern();
+    status.textContent = meldung;
+    zeichne();
+  };
   // Ausblenden
   const ausFlaeche = el("section", null, "flaeche");
   ausFlaeche.setAttribute("aria-label", "Digitale Spiele ausblenden");
 
   // Eine Zeile Wert mit zwei Knöpfen; null in werte heißt „aus“. zeige formatiert den Wert.
-  const grenze = (titel, wert, werte, feld, { zeige = dauer, worte = ["Weniger", "Mehr"] } = {}) => {
+  const grenze = (titel, wert, werte, feld, { zeige = dauer, worte = ["Weniger", "Mehr"], ablegen = setze } = {}) => {
     const zeile = el("div", null, "grenze");
     const links = el("div", null, "spalten");
     links.append(el("h4", titel), el("p", wert === null ? "Aus" : zeige(wert), "wert"));
@@ -1040,7 +1053,7 @@ async function spielzeit(spalte) {
     const mehr = knopf(worte[1], { klasse: i === werte.length - 1 ? "aus" : "" });
     weniger.setAttribute("name", `${titel}: ${worte[0].toLowerCase()}`);
     mehr.setAttribute("name", `${titel}: ${worte[1].toLowerCase()}`);
-    const neu = (w) => setze({ [feld]: w }, `${titel}: ${w === null ? "aus" : zeige(w)}.`);
+    const neu = (w) => ablegen({ [feld]: w }, `${titel}: ${w === null ? "aus" : zeige(w)}.`);
     weniger.addEventListener("click", () => { if (i > 0) neu(werte[i - 1]); });
     mehr.addEventListener("click", () => { if (i < werte.length - 1) neu(werte[i + 1]); });
     zeile.append(links, reihe(weniger, mehr));
@@ -1102,6 +1115,39 @@ async function spielzeit(spalte) {
       grenze("Spätestens bis", regel.bis, [...UHR_WERTE.filter((w) => regel.von === null || w > regel.von), null], "bis", uhrArt),
       el("p", "Vor dem Beginn und nach dem Ende gibt es keine digitalen Spiele. Läuft gerade eine Runde, spielt Ihr Kind sie zu Ende. „Heute mehr“ gibt Minuten dazu, verschiebt aber keine Uhrzeit.", "leise klein"));
 
+    // Bücher: je Modus heute und diese Woche, vier Grenzen, „Heute ein Buch mehr“
+    const bregel = br();
+    const buecher = (n) => (n === 1 ? "1 Buch" : `${n} Bücher`);
+    const vonBuechern = (n) => (n === 1 ? "1 Buch" : `${n} Büchern`);   // „0 von 2 Büchern“
+    const bzeilen = el("div", null, "zeit-stand");
+    for (const [modus, wort] of [["vorlesen", "Vorgelesen"], ["selbst", "Selbst gelesen"]]) {
+      const z = buchZahlen(bst, modus, jetzt);
+      const tag = bregel[`${modus}Tag`], woche = bregel[`${modus}Woche`];
+      bzeilen.append(el("p", `${wort} heute: ${tag === null ? buecher(z.heute) : `${z.heute} von ${vonBuechern(tag)}`}`
+        + ` · diese Woche: ${woche === null ? buecher(z.woche) : `${z.woche} von ${vonBuechern(woche)}`}.`));
+    }
+    const bz = buchZahlen(bst, "vorlesen", jetzt).zugabe;
+    if (bz) bzeilen.append(el("p", `Heute dazugegeben: ${buecher(bz)}.`, "leise"));
+    const einMehr = knopf("Heute ein Buch mehr");
+    einMehr.addEventListener("click", async () => {
+      bst = buchZugabe(bst, 1, new Date());
+      speichere(BUECHER_STAND, bst);
+      await sofortSpeichern();
+      status.textContent = "Heute ein Buch mehr.";
+      zeichne();
+    });
+    const BUCH_WERTE = [null, ...Array.from({ length: BUECHER_HOECHSTENS }, (_, i) => i + 1)];
+    const buchArt = { zeige: buecher, ablegen: setzeBuecher };
+    buecherFlaeche.replaceChildren(el("h3", "Bücher"),
+      el("p", "Wie viele Bücher Ihr Kind anhört und selbst liest, getrennt einstellbar. Ein Buch zählt, sobald Ihr Kind es öffnet; dasselbe Buch am selben Tag noch einmal oder das nächste Kapitel zählt nicht. Ist die Grenze erreicht, bleiben die Bücher sichtbar; ein angefangenes Buch geht heute weiter. Tage und Uhrzeit oben gelten nur für digitale Spiele.", "leise klein"),
+      bzeilen,
+      grenze("Vorlesen am Tag", bregel.vorlesenTag, BUCH_WERTE, "vorlesenTag", buchArt),
+      grenze("Vorlesen in der Woche", bregel.vorlesenWoche, BUCH_WERTE, "vorlesenWoche", buchArt),
+      grenze("Selbst lesen am Tag", bregel.selbstTag, BUCH_WERTE, "selbstTag", buchArt),
+      grenze("Selbst lesen in der Woche", bregel.selbstWoche, BUCH_WERTE, "selbstWoche", buchArt),
+      reihe(einMehr),
+      el("p", "„Heute ein Buch mehr“ gilt für Vorlesen und Selbst lesen, nur heute und auch über die Grenze der Woche hinaus.", "leise klein"));
+
     const schalter = knopf(regel.ausgeblendet ? "Wieder zeigen" : "Ausblenden", { art: regel.ausgeblendet ? "haupt" : undefined });
     schalter.setAttribute("aria-pressed", String(regel.ausgeblendet));
     schalter.addEventListener("click", () => setze({ ausgeblendet: !regel.ausgeblendet },
@@ -1113,7 +1159,7 @@ async function spielzeit(spalte) {
       reihe(schalter));
   }
   zeichne();
-  spalte.append(standFlaeche, tageFlaeche, grenzenFlaeche, uhrFlaeche, ausFlaeche, status);
+  spalte.append(standFlaeche, tageFlaeche, grenzenFlaeche, uhrFlaeche, ausFlaeche, buecherFlaeche, status);
 }
 
 // ---------- Updates (Tab-Id geraet) ----------

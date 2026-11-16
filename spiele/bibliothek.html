@@ -13,7 +13,7 @@
    die Regale (Themen) durch eine dezente Linie getrennt, darin die Bücher als kleine Karten (Titelbild quadratisch wie die Fotos, darunter das Thema
    kräftig und der Buchtitel klein),
    die Reihen brechen um. Gelesen: ein
-   Sonnenpunkt vor dem Titel. Grundmuster Blätter. Keine Zählung, keine Reihenfolge, kein „Weiterlesen“, nichts gesperrt;
+   Sonnenpunkt vor dem Titel. Grundmuster Blätter. Keine Zählung, keine Reihenfolge, kein „Weiterlesen“; gesperrt nur über die Bücher-Grenze der Eltern;
    Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen. Diese Seite liest den Lernstand nur. */
 body { -webkit-user-select: none; user-select: none; }
 .bib {
@@ -73,7 +73,10 @@ body { -webkit-user-select: none; user-select: none; }
 /* Gelesen: ein Sonnenpunkt vor dem Titel (bewertet nichts) */
 .buch .gelesen-punkt { flex: none; width: 2.2rem; height: 2.2rem; margin-top: 0.05rem; border-radius: 50%; background: var(--ls-sonne);
   box-shadow: inset 0 0 0 0.75rem var(--ls-sonne), inset 0 0 0 3rem var(--ls-tinte); }
+.buch.zu { cursor: default; }
+.buch.zu .deckel { box-shadow: none; }
 .buch:active .deckel { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+.buch.zu:active .deckel { transform: none; box-shadow: none; }
 .buch:focus-visible .deckel { outline: 1rem solid var(--ls-sonne); outline-offset: 0.6rem; }
 
 .leer { margin: 2rem 0; font-size: 4.5rem; color: var(--ls-tinte-weich); }
@@ -99,6 +102,7 @@ import "./rahmen/kopf.js";
 import "./rahmen/knopf.js";
 import "./rahmen/muster.js";
 import { bibliothekFuerKind, waehleRaum, buchHref, raumSvg } from "./start/bibliothek.js";
+import { buecherLage } from "./rahmen/buecherzeit.js";
 
 start();
 
@@ -116,6 +120,10 @@ async function start() {
     return;
   }
   await leiste.bereit();
+  // Bücher-Grenze der Eltern (Spec 2026-11-16-buecherzeit): ist heute kein Modus mehr frei, bleibt das Buch sichtbar,
+  // ist aber nicht drückbar (ohne Schatten). Heute schon geöffnete Bücher bleiben frei.
+  const zeit = await buecherLage();
+  const frei = (id) => { const e = zeit.erlaubt(id); return e.vorlesen || e.selbst; };
   if (!raeume.length) { feld.innerHTML = `<p class="leer">Hier stehen bald Bücher.</p>`; return; }
   const sage = (wort) => { if (leiste.ton && wort) sageEinmal(wort, () => sprich(wort)); };
 
@@ -154,10 +162,14 @@ async function start() {
     const innen = foto ? `<img src="${esc(foto)}" alt="" loading="lazy" decoding="async">`
       : FACH_SYMBOLE.has(regal.fach) ? `<i class="zeichen" style="--bild:${bild(`symbole/${regal.fach}.svg`)}"></i>` : "";
     const ton = !foto && FACH[regal.fach] ? `--toenung:${FACH[regal.fach].toenung};` : "";
-    return `<a class="buch" href="${buchHref(b.id, r.id)}" data-titel="${esc(b.titel)}" aria-label="${esc((b.thema ? b.thema + ": " : "") + b.titel + (b.am ? ", gelesen" : ""))}" style="${ton}">`
+    const label = esc((b.thema ? b.thema + ": " : "") + b.titel + (b.am ? ", gelesen" : ""));
+    const auf = frei(b.id);
+    return (auf ? `<a class="buch" href="${buchHref(b.id, r.id)}" data-titel="${esc(b.titel)}" aria-label="${label}" style="${ton}">`
+      : `<span class="buch zu" role="img" aria-label="${label}" style="${ton}">`)
       + `<span class="deckel">${innen}</span>`
       + `<span class="schild ui">${b.am ? `<span class="gelesen-punkt" aria-hidden="true"></span>` : ""}`
-      + `<span class="worte">${b.thema ? `<b>${esc(b.thema)}</b>` : ""}<span class="titel">${esc(b.titel)}</span></span></span></a>`;
+      + `<span class="worte">${b.thema ? `<b>${esc(b.thema)}</b>` : ""}<span class="titel">${esc(b.titel)}</span></span></span>`
+      + (auf ? `</a>` : `</span>`);
   }
 
   function raum(r) {
@@ -172,7 +184,7 @@ async function start() {
       if (history.state?.raum) history.back();
       else { history.replaceState(null, "", location.pathname); halle(); }
     });
-    feld.querySelectorAll(".buch").forEach((a) => a.addEventListener("click", (e) => { sage(a.dataset.titel); linkKlick(e); }));
+    feld.querySelectorAll("a.buch").forEach((a) => a.addEventListener("click", (e) => { sage(a.dataset.titel); linkKlick(e); }));
   }
 
   const zeige = () => { const r = waehleRaum(raeume, new URLSearchParams(location.search).get("raum")); r ? raum(r) : halle(); };

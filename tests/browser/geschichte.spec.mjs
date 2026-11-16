@@ -4,7 +4,7 @@
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/geschichte.spec.mjs
 //
 // Geprüft mit der Lerngeschichte „Zehnerpaare“ über die Test-Schnittstelle window.lsGeschichte (?pruefen):
-// geteilt (Designsprache): Bild links über die halbe Breite und die ganze Höhe, Text rechts; Pfeiltaste, Wischen und Tipp blättern; auf der Frage-Seite ist Weiter zuerst nicht da und erscheint nach der Ruhe;
+// geteilt (Designsprache): Bild links über die halbe Breite und die ganze Höhe, Text rechts; Pfeiltaste und Tipp auf Weiter blättern, das Bild reagiert nicht (kein Wischen, kein Anhalten); auf der Frage-Seite ist Weiter zuerst nicht da und erscheint nach der Ruhe;
 // Zurück auf Seite 1 tut nichts; „Fertig“ führt zu weiter und merkt die Geschichte als gelesen (Elternbereich „Sachthemen“),
 // in der Vorschau der Eltern (&eltern) nicht; keine Seitenfehler. Unbekannte id zeigt einen ruhigen Text.
 
@@ -63,9 +63,10 @@ for (const typ of [chromium, webkit]) {
   await page.mouse.down();
   await page.mouse.move(r.x + r.width * 0.3, r.y + r.height / 2, { steps: 6 });
   await page.mouse.up();
-  pruefe((await g()).seite === 1, `${name}: Wischen nach links blättert weiter`);
+  await page.mouse.click(r.x + r.width / 2, r.y + r.height / 2);
+  pruefe((await g()).seite === 0, `${name}: Wischen und Tipp auf das Bild bewirken nichts`);
   await page.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".weiter").click());
-  pruefe((await g()).seite === 2, `${name}: Tipp auf Weiter blättert`);
+  pruefe((await g()).seite === 1, `${name}: Tipp auf Weiter blättert`);
   await page.evaluate((f) => { while (window.lsGeschichte.seite < f) window.lsGeschichte.weiter(); }, frageSeite);
   const frage = await g();
   pruefe(frage.seite === frageSeite && !frage.bereit, `${name}: Frage-Seite – Weiter wartet`);

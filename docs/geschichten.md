@@ -146,7 +146,7 @@ Ein **Sachbuch** hat statt `seiten` die Liste `kapitel` (`[{ "titel": "…", "se
   ein Pfad innerhalb von `spiele/`, sonst die Startseite).
 - **Auf der Kulisse: Bild links, Text rechts** (Christian, 2026-11-15): das Bild quadratisch und so groß wie möglich,
   der Text auf einer Papierfläche daneben in Andika, beide mit Stufen-Schatten in der Kulissenfarbe; Vorlesen
-  (Florian, vorab aufgenommen, `npm run audio`), Weiter und Zurück per Tipp, Wischen und Pfeiltaste, Haus; Fortschritt
+  (Florian, vorab aufgenommen, `npm run audio`), Weiter und Zurück per Tipp und Pfeiltaste, Haus; das Bild reagiert nicht auf Berühren (kein Anhalten, kein Wischen; Kinder fassen gern die Bilder an, Christian 2026-11-16); Fortschritt
   als Punkte ohne Zahl; nach der letzten Seite „Fertig“ (Ereignis `fertig`).
 - **Sachbuch** (`kapitel`, Christian 2026-11-15/16): Am Anfang steht das **Inhaltsverzeichnis**, offen auf Papier und
   ohne Hintergrundbild (Spec 2026-11-16-inhaltsverzeichnis): links das **Titelbild** als Streifen 2 : 1 (`titelbild`),
@@ -165,11 +165,11 @@ Ein **Sachbuch** hat statt `seiten` die Liste `kapitel` (`[{ "titel": "…", "se
 - **Startwahl:** Bei Ton an zeigt die erste Seite den Titel und „Vorlesen“ / „Selbst lesen“; vorher wird nichts gelesen,
   wer ohne Wahl blättert, liest selbst. Bei Ton aus keine Wahl.
 - **Vorlesen:** Der Erzähler liest jede Seite beim Aufschlagen (`sprich`, sonst `text`) und blättert nach 1,5 s Ruhe
-  um (ohne Stimme nach geschätzter Lesezeit). Tipp auf Bild, Text oder den Vorlese-Knopf hält an, ein zweiter liest
+  um (ohne Stimme nach geschätzter Lesezeit). Tipp auf den Text oder den Vorlese-Knopf hält an, ein zweiter liest
   weiter. Frage- und letzte Seite blättern nie von selbst.
 - **Selbst lesen:** Bei Ton an liest der Erzähler jede Seite beim Aufschlagen vor, der Knopf Vorlesen noch einmal; das
   Kind blättert. Nur ein Tipp des Kindes (Blättern) bricht einen Satz ab.
-- Auf der Seite mit `frage` erscheint Weiter erst nach dem Vorlesen und 2 s Ruhe; bis dahin blättern auch Wischen und
+- Auf der Seite mit `frage` erscheint Weiter erst nach dem Vorlesen und 2 s Ruhe; bis dahin blättert auch die
   Pfeiltaste nicht weiter.
 - Seitenwechsel ruhig (Überblenden mit kleinem Schub, nur `transform`/`opacity`; bei wenig Bewegung nur Überblenden).
   Die Kinder der Runde stehen in einer eigenen Ebene und bleiben beim Blättern stehen.

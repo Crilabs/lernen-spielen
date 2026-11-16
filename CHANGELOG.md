@@ -2,6 +2,11 @@
 
 ## Unveröffentlicht
 
+## v1.2.1
+
+- **Bücher in der Spielzeit:** Im Elternbereich unter „Spielzeit“ lässt sich festlegen, wie viele Bücher das Kind am Tag und in der Woche anhört und selbst liest, je aus oder 1 bis 10, getrennt für Vorlesen und Selbst lesen. Ein Buch zählt beim Öffnen; dasselbe Buch am selben Tag noch einmal und das nächste Kapitel zählen nicht. Ist eine Grenze erreicht, fehlt bei neuen Büchern der passende Knopf. Sind beide erreicht, bleiben die Bücher sichtbar, lassen sich aber nicht öffnen. Dazu gibt es den Knopf „Heute ein Buch mehr“.
+- **Bilder in Geschichten:** Berühren hat keine Wirkung mehr. Die Geschichte hält nicht an und blättert nicht durch Wischen.
+
 ## v1.2.0
 
 Zwei neue Spiele zu Zehnern und Einern, die Tierbücher neu geschrieben und vorgelesen und Fotos für alle Anleitungen mit echten Dingen.
