@@ -176,3 +176,84 @@ test("Fehlversuch: nach dem Daneben-Satz „Versuch es noch einmal.“, nur ohne
   assert.match(daneben, /erzaehler\.nochmal\(\)/);
   assert.match(daneben, /tippZaehler/);
 });
+
+// --- Wanderung (Christian 2026-11-16): Ergebnis in Zehner und Einer tippen, die Aufgabe wandert in die Tafel --------
+test("Stellen: Zehner zuerst, dann Einer; Einer zuerst geht auch", () => {
+  let s = L.leereStellen();
+  assert.deepEqual(s, { z: "", e: "", aktiv: "z" });
+  s = L.tippeStelle(s, "1");
+  assert.deepEqual(s, { z: "1", e: "", aktiv: "e" });
+  s = L.tippeStelle(s, "8");
+  assert.deepEqual(s, { z: "1", e: "8", aktiv: "e" });
+  assert.equal(L.zahlAusStellen(s), 18);
+  let t = L.waehleStelle(L.leereStellen(), "e");
+  t = L.tippeStelle(t, "8");
+  t = L.waehleStelle(t, "z");
+  t = L.tippeStelle(t, "1");
+  assert.equal(L.zahlAusStellen(t), 18);
+  assert.equal(L.tippeStelle(L.leereStellen(), "x").z, "");
+});
+
+test("Stellen: Zahl ohne Zehner zählt, führende Null und fehlende Einer nicht", () => {
+  assert.equal(L.zahlAusStellen({ z: "", e: "8", aktiv: "e" }), 8);
+  assert.equal(L.zahlAusStellen({ z: "0", e: "8", aktiv: "e" }), null);
+  assert.equal(L.zahlAusStellen({ z: "1", e: "", aktiv: "e" }), null);
+  assert.equal(L.zahlAusStellen(L.leereStellen()), null);
+  assert.equal(L.zahlAusStellen({ z: "1", e: "0", aktiv: "e" }), 10);
+});
+
+test("Stellen: Löschen leert den aktiven Platz, sonst den anderen und wechselt dorthin", () => {
+  assert.deepEqual(L.loescheStelle({ z: "1", e: "8", aktiv: "e" }), { z: "1", e: "", aktiv: "e" });
+  assert.deepEqual(L.loescheStelle({ z: "1", e: "", aktiv: "e" }), { z: "", e: "", aktiv: "z" });
+  assert.deepEqual(L.loescheStelle(L.leereStellen()), L.leereStellen());
+});
+
+test("Stellen: welche Stelle nicht passt", () => {
+  assert.deepEqual(L.falscheStellen({ z: "1", e: "7", aktiv: "e" }, 18), ["e"]);
+  assert.deepEqual(L.falscheStellen({ z: "8", e: "1", aktiv: "e" }, 18), ["z", "e"]);
+  assert.deepEqual(L.falscheStellen({ z: "1", e: "8", aktiv: "e" }, 8), ["z"]);
+  assert.deepEqual(L.falscheStellen({ z: "", e: "8", aktiv: "e" }, 8), []);
+});
+
+test("Stellen: nächster Zug führt von jedem Stand zur Antwort (Hilfe 2, Prüfstand)", () => {
+  const spiele = (s, antwort) => {
+    for (let i = 0; i < 10; i++) {
+      const z = L.naechsterStellenZug(s, antwort);
+      if (z.art === "fertig") return s;
+      if (z.art === "platz") s = L.waehleStelle(s, z.stelle);
+      else s = z.taste === "loeschen" ? L.loescheStelle(s) : L.tippeStelle(s, z.taste);
+    }
+    throw new Error("kein Ende");
+  };
+  assert.equal(L.zahlAusStellen(spiele(L.leereStellen(), 18)), 18);
+  assert.equal(L.zahlAusStellen(spiele(L.leereStellen(), 8)), 8);
+  assert.equal(L.zahlAusStellen(spiele({ z: "8", e: "1", aktiv: "e" }, 18)), 18);
+  assert.equal(L.zahlAusStellen(spiele({ z: "1", e: "3", aktiv: "e" }, 3)), 3);
+  assert.deepEqual(L.naechsterStellenZug(L.leereStellen(), 8), { art: "platz", stelle: "e" });
+  assert.deepEqual(L.naechsterStellenZug(L.leereStellen(), 18), { art: "taste", taste: "1" });
+  const zuege = L.zuegeZu(L.leereStellen(), [18, 81, 8]);
+  assert.deepEqual(zuege, [{ art: "taste", taste: "1" }, { art: "taste", taste: "8" }, { art: "platz", stelle: "e" }]);
+});
+
+test("Aufgabe aus Täfelchen: Stelle und Rolle jeder Ziffer, Material darunter", () => {
+  const zif = (t) => t.taefelchen.map((x) => (x.art === "zeichen" ? x.zeichen : `${x.ziffer}${x.stelle}:${x.rolle}`));
+  const plus = L.aufgabenTaefelchen(L.aufgabeAus("plus:8+10"));
+  assert.deepEqual(zif(plus), ["1z:wandert", "0e:bleibt", "+", "8e:wandert", "="]);
+  assert.equal(plus.nullDarunter, false);
+  assert.deepEqual(plus.material, [{ wert: 10, unter: 0, stelle: "z", rolle: "wandert" }, { wert: 8, unter: 1, stelle: "e", rolle: "wandert" }]);
+  const m10 = L.aufgabenTaefelchen(L.aufgabeAus("minus:18-10"));
+  assert.deepEqual(zif(m10), ["1z:geht", "8e:wandert", "−", "1z:bleibt", "0e:bleibt", "="]);
+  assert.deepEqual(m10.material, [{ wert: 10, unter: 0, stelle: "z", rolle: "geht" }, { wert: 8, unter: 0, stelle: "e", rolle: "wandert" }]);
+  const m8 = L.aufgabenTaefelchen(L.aufgabeAus("minus:18-8"));
+  assert.deepEqual(zif(m8), ["1z:wandert", "8e:geht", "−", "8e:bleibt", "="]);
+  assert.equal(m8.nullDarunter, true);
+  assert.deepEqual(m8.material, [{ wert: 10, unter: 0, stelle: "z", rolle: "wandert" }, { wert: 8, unter: 0, stelle: "e", rolle: "geht" }]);
+  // Jede Ziffer, die wandert, gehört an die Stelle, an der sie in der Antwort steht.
+  for (const key of ["plus:3+10", "minus:13-10", "minus:13-3"]) {
+    const a = L.aufgabeAus(key);
+    const t = L.aufgabenTaefelchen(a);
+    const ziel = { z: a.antwort >= 10 ? String(Math.floor(a.antwort / 10)) : "", e: String(a.antwort % 10) };
+    for (const x of t.taefelchen.filter((x) => x.rolle === "wandert")) assert.equal(x.ziffer, ziel[x.stelle], key);
+    if (t.nullDarunter) assert.equal(ziel.e, "0", key);
+  }
+});

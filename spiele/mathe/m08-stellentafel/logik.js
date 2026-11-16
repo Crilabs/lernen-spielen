@@ -118,6 +118,109 @@ export function tippe(eingabe, taste) {
   return eingabe + taste;
 }
 
+// --- Stellen-Eingabe (Christian 2026-11-16): das Ergebnis in Zehner und Einer tippen ---------------------------
+/** @typedef {"z" | "e"} Stelle */
+/** @typedef {{ z: string, e: string, aktiv: Stelle }} Stellen Ziffer je Platz ("" = leer), aktiv trägt den Sonnenring. */
+
+/** @returns {Stellen} */
+export const leereStellen = () => ({ z: "", e: "", aktiv: "z" });
+
+/** Eine Ziffer auf den aktiven Platz; danach ist der Einer-Platz dran. @param {Stellen} s @param {string} ziffer @returns {Stellen} */
+export function tippeStelle(s, ziffer) {
+  if (!/^\d$/.test(ziffer)) return s;
+  return { ...s, [s.aktiv]: ziffer, aktiv: "e" };
+}
+
+/** Ein Tipp auf einen Platz wählt ihn aus. @param {Stellen} s @param {Stelle} stelle @returns {Stellen} */
+export const waehleStelle = (s, stelle) => ({ ...s, aktiv: stelle });
+
+/** Löschen: leert den aktiven Platz; ist er leer, den anderen gefüllten, und der Ring geht dorthin. @param {Stellen} s @returns {Stellen} */
+export function loescheStelle(s) {
+  if (s[s.aktiv]) return { ...s, [s.aktiv]: "" };
+  const andere = s.aktiv === "z" ? "e" : "z";
+  return s[andere] ? { ...s, [andere]: "", aktiv: andere } : s;
+}
+
+/**
+ * Die getippte Zahl, oder null, wenn sie so nicht gilt: ohne Einer, oder mit einer Null als Zehner („08“). Ein leerer
+ * Zehner-Platz heißt: keine Zehner (18 − 10 = 8). @param {Stellen} s @returns {number | null}
+ */
+export function zahlAusStellen(s) {
+  if (!s.e || s.z === "0") return null;
+  return Number(s.z || "0") * 10 + Number(s.e);
+}
+
+/** Die Plätze, wie sie für `antwort` aussehen müssen. @param {number} antwort @returns {{ z: string, e: string }} */
+const zielStellen = (antwort) => ({ z: antwort >= 10 ? String(Math.floor(antwort / 10)) : "", e: String(antwort % 10) });
+
+/** Stellen, deren Ziffer nicht zur Antwort passt (leer zählt als 0). @param {Stellen} s @param {number} antwort @returns {Stelle[]} */
+export function falscheStellen(s, antwort) {
+  const t = zielStellen(antwort);
+  return /** @type {Stelle[]} */ (["z", "e"]).filter((k) => Number(s[k] || "0") !== Number(t[k] || "0"));
+}
+
+/**
+ * Der nächste Zug auf dem Weg zur Zahl `antwort` (Hilfe 2 und Prüfstand): erst den Zehner-, dann den Einer-Platz
+ * richtig machen (Platz wählen, falsche Ziffer löschen, Ziffer tippen), dann Fertig.
+ * @param {Stellen} s @param {number} antwort
+ * @returns {{ art: "platz", stelle: Stelle } | { art: "taste", taste: string } | { art: "fertig" }}
+ */
+export function naechsterStellenZug(s, antwort) {
+  const t = zielStellen(antwort);
+  for (const k of /** @type {Stelle[]} */ (["z", "e"])) {
+    if (s[k] === t[k]) continue;
+    if (s.aktiv !== k) return { art: "platz", stelle: k };
+    return { art: "taste", taste: s[k] ? "loeschen" : t[k] };
+  }
+  return { art: "fertig" };
+}
+
+/** Die verschiedenen nächsten Züge zu mehreren Zahlen (für zuege() des Prüfstands). @param {Stellen} s @param {number[]} zahlen */
+export function zuegeZu(s, zahlen) {
+  const aus = new Map();
+  for (const x of zahlen) {
+    const z = naechsterStellenZug(s, x);
+    aus.set(JSON.stringify(z), z);
+  }
+  return [...aus.values()];
+}
+
+/**
+ * Die Aufgabe aus Zifferntäfelchen (die Oberfläche ist das Spiel): jede Ziffer mit ihrer Stelle (Rand in
+ * Stellenfarbe) und ihrer Rolle beim Haken – „wandert“ auf ihren Platz in der Tafel, „bleibt“ stehen, „geht“ mit Timo
+ * weg. Dazu das Material unter den Zahlen (unter: Index der Zahl, 0 = links). Bei c − e kommt unter der Einerziffer
+ * von c eine 0 zum Vorschein, die auf den Einer-Platz wandert (nullDarunter).
+ * @param {Aufgabe} a
+ */
+export function aufgabenTaefelchen(a) {
+  /** @param {string} ziffer @param {Stelle} stelle @param {"wandert" | "bleibt" | "geht"} rolle */
+  const t = (ziffer, stelle, rolle) => ({ art: "ziffer", ziffer, stelle, rolle });
+  /** @param {string} zeichen */
+  const z = (zeichen) => ({ art: "zeichen", zeichen });
+  const e = String(a.e);
+  if (a.op === "plus")
+    return {
+      taefelchen: [t("1", "z", "wandert"), t("0", "e", "bleibt"), z("+"), t(e, "e", "wandert"), z("=")],
+      nullDarunter: false,
+      material: [{ wert: 10, unter: 0, stelle: "z", rolle: "wandert" }, { wert: a.e, unter: 1, stelle: "e", rolle: "wandert" }],
+    };
+  const zehnerWeg = a.weg === 10;
+  return {
+    taefelchen: [
+      t("1", "z", zehnerWeg ? "geht" : "wandert"),
+      t(e, "e", zehnerWeg ? "wandert" : "geht"),
+      z("−"),
+      ...(zehnerWeg ? [t("1", "z", "bleibt"), t("0", "e", "bleibt")] : [t(e, "e", "bleibt")]),
+      z("="),
+    ],
+    nullDarunter: !zehnerWeg,
+    material: [
+      { wert: 10, unter: 0, stelle: "z", rolle: zehnerWeg ? "geht" : "wandert" },
+      { wert: a.e, unter: 0, stelle: "e", rolle: zehnerWeg ? "wandert" : "geht" },
+    ],
+  };
+}
+
 // --- Klang und Takt der Perlen ---------------------------------------------------------------------------
 /** Pentatonik (C-Dur ab C5): jede Perle einen Ton höher. */
 const PENTATONIK = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 1567.98];
