@@ -508,6 +508,7 @@ async function starteRunde(vorschau) {
     // Jedes Spiel beginnt mit der Einführung, nicht nur beim ersten Mal (docs/spielbau.md §8, Christian 2026-11-15).
     einfuehrung: plan?.einfuehrung ?? null,
     einfuehrungGesehen: () => r.einfuehrungGesehen(),
+    beginneZeit: () => r.beginneZeit(),
     naechste: () => r.naechste(),
     melde: (/** @type {string} */ key, /** @type {any} */ e) => r.melde(key, e),
     ende: () => r.ende(),
@@ -522,6 +523,7 @@ function vorschauRunde() {
     echteDinge: { titel: VORSCHAU.thema }, // die Karte findet die Anleitung über den Namen des Themas
     einfuehrung: null,
     einfuehrungGesehen() {},
+    beginneZeit() {},
     naechste() {
       const key = keys.shift();
       return key ? { ziel: { key }, auch: [], stufe: "material" } : null;
@@ -552,6 +554,7 @@ async function spieleRunde(vorschau) {
   if (r.einfuehrung && (!vorschau || params.has("einfuehrung"))) {
     if (!(await zeigeEinfuehrung(r.einfuehrung))) return;
     r.einfuehrungGesehen();
+    r.beginneZeit(); // die Rundenzeit zählt erst ab der ersten Aufgabe
   }
   if (r.einfuehrung) {
     const knopf = $("anleitung");

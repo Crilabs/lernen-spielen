@@ -11,7 +11,7 @@ globalThis.localStorage = {
   removeItem: (k) => speicher.delete(k),
 };
 globalThis.window = {};
-const { runde, einmal, ladeLernstand } = await import("../spiele/lernsteuerung.js");
+const { K, runde, einmal, ladeLernstand } = await import("../spiele/lernsteuerung.js");
 const { sofortSpeichern } = await import("../spiele/lernspiel.js");
 const AA = await import("../spiele/aufgabenarten.js");
 
@@ -265,4 +265,13 @@ test("Befund 7: themen.html zeigt bei Ladefehler einen kurzen Text und protokoll
   assert.match(html, /catch \(e\) \{ protokoll\("themen: " \+ e\); zeigeFehler\(\); return; \}/);
   assert.match(html, /function zeigeFehler\(\)/);
   assert.doesNotMatch(html, /\balert\(|\bconfirm\(/);
+});
+
+test("runde: beginneZeit setzt den Rundenbeginn neu", async () => {
+  let jetzt = 1_000_000;
+  const r = await runde("perlenbruecke", { ctx: CTX, uhr: () => ({ heute: datum, jetzt }), rnd: lcg(7) });
+  jetzt = 1_000_000 + K.RUNDE_MS - 10_000; // Einführung hat lange gedauert
+  assert.equal(r.naechste(), null, "ohne beginneZeit zählt die Einführung zur Runde");
+  r.beginneZeit();
+  assert.ok(r.naechste(), "ab beginneZeit läuft die volle Runde");
 });

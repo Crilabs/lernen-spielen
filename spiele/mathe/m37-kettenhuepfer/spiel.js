@@ -28,7 +28,7 @@ import { LERNFARBE } from "../../rahmen/stil.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
-import { runde, einmal, K, rundenMs } from "../../lernsteuerung.js";
+import { runde, einmal } from "../../lernsteuerung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
 import { hilfeVon, kandidaten, naechsteTaste, tastenZu, tippe, pfeileWaehrend, einfuehrungsKette, hueperZeiten, hueperTon, naechsteFreude, witz, waehleAufgabe, bildWechsel } from "./logik.js";
 
@@ -68,11 +68,6 @@ const NACH_WIRKUNG_MS = 150;
 const FOLGE_MAX_MS = 2600;
 /** Der Satz zu einem Wechsel (Reihe oder Stufe) steht mindestens so lange, auch ohne Ton. */
 const WECHSEL_SATZ_MS = 1400;
-/**
- * Eine neue Aufgabe beginnt nur, solange von der Rundenlänge der Lernsteuerung (K.RUNDE_MS, 4 Minuten) noch so viel
- * übrig ist: auch ein Kind, das lange rät, ist mit seiner letzten Aufgabe vor dem Ende der 4 Minuten fertig.
- */
-const LETZTE_AUFGABE_MS = 30000;
 /** Ein Stäbchen wischen oder malen (Lena hüpft drauf, Schwamm oder Kreide gehen darüber): zehn zusammen etwa 1,5 s. */
 const STAB_MS = 150;
 
@@ -1146,6 +1141,7 @@ async function starteRunde(vorschau) {
     thema: r.thema?.name ?? "",
     echteDinge: plan ? { thema: plan.id, fach: plan.strang, titel: plan.name, text: plan.eltern ?? "" } : null,
     einfuehrungGesehen: () => r.einfuehrungGesehen(),
+    beginneZeit: () => r.beginneZeit(),
     naechste: () => r.naechste(),
     melde: (/** @type {string} */ key, /** @type {any} */ e) => r.melde(key, e),
     ende: () => r.ende(),
@@ -1159,6 +1155,7 @@ function vorschauRunde() {
     thema: VORSCHAU.thema,
     echteDinge: { titel: VORSCHAU.thema },
     einfuehrungGesehen() {},
+    beginneZeit() {},
     naechste() {
       const key = keys.shift();
       return key ? { ziel: { key }, auch: [], stufe: "material" } : null;
@@ -1201,9 +1198,7 @@ async function spieleRunde(vorschau) {
 
   /** Aufgaben, die in dieser Runde nicht passten oder Hilfe brauchten (kommen als Wiedervorlage; nie getauscht). */
   const wieder = new Set();
-  const beginn = Date.now();
-  const zeitDa = () => Date.now() - beginn < rundenMs() - Math.min(LETZTE_AUFGABE_MS, rundenMs() / 4);
-  const naechste = () => (zeitDa() ? waehleAufgabe(aufStufe(r.naechste()), n, wieder) : null);
+  const naechste = () => waehleAufgabe(aufStufe(r.naechste()), n, wieder);
   let aufgabe = naechste();
   if (!aufgabe && vorschau) {
     r = vorschauRunde();
@@ -1217,6 +1212,7 @@ async function spieleRunde(vorschau) {
     einfuehrungGespielt = true;
     await einfuehrung(einfuehrungsKette(erste.a, erste.b), aufgabe?.stufe === "kopf" ? "kopf" : "material");
     r.einfuehrungGesehen();
+    r.beginneZeit(); // die Rundenzeit zählt erst ab der ersten Aufgabe
   }
   $("anleitung")?.removeAttribute("hidden");
 

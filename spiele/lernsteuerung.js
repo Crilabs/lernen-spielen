@@ -40,6 +40,7 @@ export const K = {
   ANTEIL_THEMA: 0.7,         // Anteil des aktuellen Themas in einer Runde
   WIEDER_NACH: [2, 4],       // Fehler kommt nach so vielen anderen Aufgaben wieder (von, bis)
   RUNDE_MS: 240000,          // Rundenlänge
+  LETZTE_AUFGABE_MS: 30000,  // Reserve: so kurz vor dem Rundenende beginnt keine neue Aufgabe mehr (höchstens ein Viertel der Runde)
   GROSS: 40,                 // ab mehr als so vielen darstellbaren Aufgaben ist ein Thema „groß“ …
   STICHPROBE: 20,            // … und gilt nach dem Üben mit so vielen verschiedenen kk als gekonnt (je Klasse zwei, höchstens vier Klassen)
 };
@@ -552,7 +553,7 @@ export function naechstesAngebot(ctx, stand, sitzung, rnd = Math.random, { jetzt
   if (sitzung.ereignis?.typ === "gekonnt") return null;
   const max = sitzung.modus === "wiederholung" ? Math.min(sitzung.max ?? WIEDERHOLUNG_MAX, WIEDERHOLUNG_MAX) : sitzung.max;
   if (max != null && sitzung.gezeigt >= max) return null;
-  if (jetzt != null && Number.isFinite(sitzung.start) && jetzt - sitzung.start >= rundenMs()) return null;
+  if (jetzt != null && Number.isFinite(sitzung.start) && jetzt - sitzung.start >= rundenMs() - Math.min(K.LETZTE_AUFGABE_MS, rundenMs() / 4)) return null;
 
   let ziel = null;
   const probe = !!sitzung.probe?.length;
@@ -953,6 +954,8 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
       r.einfuehrungFaellig = false;
       sichere();
     },
+    /** Die Rundenzeit beginnt neu (nach der Einführung); ohne Aufruf zählt sie ab dem Start der Runde. */
+    beginneZeit() { sitzung.start = uhr().jetzt; },
     naechste() {
       const { heute, jetzt } = uhr();
       if (startet && themaId && stand.themen[themaId]?.z !== "dran") { startThema(stand, themaId, heute); sichere(); }

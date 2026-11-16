@@ -1191,6 +1191,7 @@ async function starteRunde(vorschau) {
     thema: r.thema?.name ?? "",
     echteDinge: plan ? { thema: plan.id, fach: plan.strang, titel: plan.name, text: plan.eltern ?? "" } : null,
     einfuehrungGesehen: () => r.einfuehrungGesehen(),
+    beginneZeit: () => r.beginneZeit(),
     naechste: () => r.naechste(),
     melde: (/** @type {string} */ key, /** @type {any} */ e) => r.melde(key, e),
     ende: () => r.ende(),
@@ -1204,6 +1205,7 @@ function vorschauRunde() {
     thema: VORSCHAU.thema,
     echteDinge: { titel: VORSCHAU.thema },
     einfuehrungGesehen() {},
+    beginneZeit() {},
     naechste() {
       const key = keys.shift();
       return key ? { ziel: { key }, auch: [], stufe: "kopf" } : null;
@@ -1262,6 +1264,7 @@ async function spieleRunde(vorschau) {
     await einfuehrung(erste.op);
     r.einfuehrungGesehen();
     beginn = Date.now();
+    r.beginneZeit();
     letzteArt = null;
     leereMatte();
   }
