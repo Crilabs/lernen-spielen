@@ -4,7 +4,16 @@
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 
 export const ARTEN = ["spiel", "echte-dinge", "buch", "einfuehrung", "frei"];
-export const STATUS = ["wartet", "laeuft", "erledigt", "wartet-auf-christian", "fehlgeschlagen", "gestrichen"];
+export const STATUS = ["wartet", "laeuft", "erledigt", "wartet-auf-christian", "beantwortet", "fehlgeschlagen", "gestrichen"];
+
+/** Schätzung für einen Antwort-Auftrag (Fortsetzen mit Christians Antwort: Merge, Nachprüfung o. ä.). */
+export const SCHAETZUNG_ANTWORT = 2;
+
+const SKILL_JE_ART = {
+  spiel: ".claude/skills/spiel-entwickeln/SKILL.md",
+  "echte-dinge": ".claude/skills/mit-echten-dingen/SKILL.md",
+  buch: ".claude/skills/sachgeschichte/SKILL.md",
+};
 
 const ID = /^[A-Za-z0-9-]+$/;
 
@@ -58,6 +67,54 @@ export function verschiebe(liste, id, richtung) {
 /** Streicht einen wartenden Auftrag; andere bleiben unverändert. */
 export function streiche(liste, id) {
   return liste.map((a) => (a.id === id && a.status === "wartet" ? { ...a, status: "gestrichen" } : a));
+}
+
+function wartetAufAntwort(liste, id) {
+  const i = liste.findIndex((x) => x.id === id);
+  if (i < 0) throw new Error("Auftrag nicht gefunden");
+  if (liste[i].status !== "wartet-auf-christian") throw new Error("Auftrag wartet nicht auf eine Antwort");
+  return i;
+}
+
+/** Befehl für den Lauf, der einen geparkten Auftrag mit Christians Antwort fortsetzt. */
+export function befehlAntwort(alt, text) {
+  const art = alt.ursprung_art ?? alt.art;
+  const skill = SKILL_JE_ART[art];
+  return [
+    "Antwort von Christian auf einen Auftrag der Verwaltung, der auf ihn gewartet hat.",
+    `Ursprünglicher Auftrag: ${alt.befehl}`,
+    `Ergebnis damals: ${alt.ergebnis?.zusammenfassung ?? "–"}`,
+    `Frage: ${alt.ergebnis?.frage ?? "–"}`,
+    `Antwort von Christian: ${text}`,
+    "",
+    `Setze den ursprünglichen Auftrag mit dieser Antwort fort${skill ? ` und halte dich an ${skill} (auch an dessen Abschnitt „Lauf aus der Verwaltung“)` : ""}. ` +
+      "Tu nur, was die Antwort freigibt oder verlangt; frag nicht zurück. Ist danach noch etwas offen, das nur Christian entscheiden kann, parke es mit einer Frage.",
+    'Schreib als Letztes werkzeuge/verwaltung/ergebnisse/<auftrag>.json (<auftrag> = Wert von $VERWALTUNG_AUFTRAG): ' +
+      '{ "status": "erledigt"|"geparkt"|"abgebrochen", "zusammenfassung": "<ein Satz: was, Ergebnis, Kosten>", "frage": "<nur bei geparkt>" }.',
+  ].join("\n");
+}
+
+/** Christian beantwortet einen wartenden Auftrag: Folgeauftrag ans Ende, der alte wird „beantwortet“. */
+export function beantworte(liste, id, text, jetzt = new Date()) {
+  const antwort = String(text ?? "").trim();
+  if (!antwort) throw new Error("Antwort fehlt");
+  if (antwort.length > 4000) throw new Error("Antwort zu lang (höchstens 4000 Zeichen)");
+  const i = wartetAufAntwort(liste, id);
+  const alt = liste[i];
+  const neu = {
+    id: `a-${jetzt.getTime()}-${Math.random().toString(36).slice(2, 7)}`,
+    art: "antwort", ziel: alt.id, ursprung_art: alt.ursprung_art ?? alt.art, befehl: befehlAntwort(alt, antwort),
+    schaetzung_eur: SCHAETZUNG_ANTWORT, angelegt: jetzt.toISOString(), status: "wartet",
+    gestartet: null, beendet: null, ergebnis: null, notiz: "",
+  };
+  const kopie = liste.map((x, j) => (j === i ? { ...x, status: "beantwortet", notiz: `Antwort: ${antwort}` } : x));
+  return { liste: [...kopie, neu], neu };
+}
+
+/** Christian lehnt ab: kein Lauf, der Auftrag ist erledigt. */
+export function lehneAb(liste, id) {
+  const i = wartetAufAntwort(liste, id);
+  return liste.map((x, j) => (j === i ? { ...x, status: "erledigt", notiz: "abgelehnt" } : x));
 }
 
 export const naechsterWartender = (liste) => liste.find((a) => a.status === "wartet") ?? null;

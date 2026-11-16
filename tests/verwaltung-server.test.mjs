@@ -8,6 +8,7 @@ import { WURZEL } from "../werkzeuge/kosten/kosten.mjs";
 import { echteDingeNachSpiel } from "../werkzeuge/verwaltung/folge.mjs";
 import { gibSperreFrei, nimmSperre, pfade } from "../werkzeuge/verwaltung/lauf.mjs";
 import { erstelleServer } from "../werkzeuge/verwaltung/server.mjs";
+import { speichereAuftraege } from "../werkzeuge/verwaltung/auftraege.mjs";
 
 test("echteDingeNachSpiel: Hauptthemen ohne Anleitung, Einstiegsklasse zuerst, höchstens fünf", () => {
   const u = {
@@ -114,4 +115,24 @@ test("Server: Fehler des letzten Laufs in /api/auftraege", () => mitServer(async
   mkdirSync(join(ordner, "protokolle"));
   writeFileSync(join(ordner, "protokolle", "lauf.log"), "Fehler: auftraege.json ist kein gültiges JSON\n");
   assert.equal((await (await hol("/api/auftraege")).json()).laufFehler, "auftraege.json ist kein gültiges JSON");
+}));
+
+test("Server: antworten legt Folgeauftrag an, ablehnen schließt ab", () => mitServer(async ({ hol, sende, ordner }) => {
+  const warte = (id) => ({ id, art: "spiel", ziel: "M08", befehl: "Spiel entwickeln M08", status: "wartet-auf-christian",
+    ergebnis: { status: "freigabe", zusammenfassung: "geparkt", frage: "Darf das?" } });
+  speichereAuftraege(pfade(ordner).auftraege, [warte("a-1"), warte("a-2")]);
+  let r = await sende("/api/auftraege/a-1/antwort", { text: "Ja" });
+  assert.equal(r.status, 201);
+  const neu = await r.json();
+  assert.equal(neu.art, "antwort");
+  r = await sende("/api/auftraege/a-1/antwort", { text: "Ja" });
+  assert.equal(r.status, 409);
+  r = await sende("/api/auftraege/a-2/antwort", { text: " " });
+  assert.equal(r.status, 400);
+  r = await sende("/api/auftraege/a-2/ablehnen");
+  assert.equal(r.status, 200);
+  r = await sende("/api/auftraege/fehlt/ablehnen");
+  assert.equal(r.status, 404);
+  const l = (await (await hol("/api/auftraege")).json()).auftraege;
+  assert.deepEqual(l.map((x) => x.status), ["beantwortet", "erledigt", "wartet"]);
 }));

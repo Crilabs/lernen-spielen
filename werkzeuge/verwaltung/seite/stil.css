@@ -65,7 +65,7 @@ td.zahl-z, th.zahl-z { text-align: right; font-variant-numeric: tabular-nums; wh
 .s-fertig, .s-erledigt { color: var(--fertig); background: var(--fertig-g); }
 .s-probe, .s-entwurf, .s-geparkt, .s-wartet-auf-christian, .s-laeuft { color: var(--wartet); background: var(--wartet-g); }
 .s-beauftragt, .s-wartet { color: var(--auftrag); background: var(--auftrag-g); }
-.s-geplant, .s-gestrichen { color: var(--geplant); background: var(--geplant-g); }
+.s-geplant, .s-gestrichen, .s-beantwortet { color: var(--geplant); background: var(--geplant-g); }
 .s-fehlt, .s-fehlgeschlagen { color: var(--fehlt); background: var(--fehlt-g); }
 .plus { border: 1px solid var(--linie); background: var(--flaeche); border-radius: 10px; padding: 0 7px; font-size: 12px; color: var(--akzent); }
 .plus:hover { border-color: var(--akzent); }
@@ -92,3 +92,4 @@ dialog h2 { margin: 0 0 8px; font-size: 16px; }
 dialog menu { display: flex; justify-content: flex-end; gap: 8px; padding: 0; margin: 16px 0 0; }
 dialog menu button:not(.haupt) { background: none; border: 1px solid var(--linie); border-radius: 6px; padding: 6px 14px; }
 .leer { color: var(--leise); padding: 16px 0; }
+dialog textarea { width: 100%; box-sizing: border-box; padding: 6px 8px; border: 1px solid var(--linie); border-radius: 6px; background: var(--flaeche); color: var(--text); font: inherit; }

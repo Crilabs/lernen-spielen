@@ -7,7 +7,7 @@ import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readSync, sta
 import { createServer } from "node:http";
 import { dirname, extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { ladeAuftraege, neuerAuftrag, speichereAuftraege, streiche, verschiebe } from "./auftraege.mjs";
+import { beantworte, ladeAuftraege, lehneAb, neuerAuftrag, speichereAuftraege, streiche, verschiebe } from "./auftraege.mjs";
 import { baueUebersicht, liesQuellen } from "./daten.mjs";
 import { ORDNER, WURZEL, anhalten, laufLog, letzterLaufFehler, pfade, sperre } from "./lauf.mjs";
 
@@ -101,6 +101,22 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
         const neu = m[2] === "streichen" ? streiche(l, m[1]) : verschiebe(l, m[1], m[2] === "hoch" ? -1 : 1);
         speichereAuftraege(p.auftraege, neu);
         return antwort(200, { auftraege: neu });
+      }
+      const ant = pfad.match(/^\/api\/auftraege\/([^/]+)\/(antwort|ablehnen)$/);
+      if (post && ant) {
+        const l = auftraege();
+        const alt = l.find((a) => a.id === ant[1]);
+        if (!alt) return antwort(404, { fehler: "Auftrag nicht gefunden" });
+        if (alt.status !== "wartet-auf-christian") return antwort(409, { fehler: "Auftrag wartet nicht auf eine Antwort" });
+        if (ant[2] === "ablehnen") {
+          const neu = lehneAb(l, alt.id);
+          speichereAuftraege(p.auftraege, neu);
+          return antwort(200, { auftraege: neu });
+        }
+        let r;
+        try { r = beantworte(l, alt.id, (await koerper()).text); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
+        speichereAuftraege(p.auftraege, r.liste);
+        return antwort(201, r.neu);
       }
       if (post && pfad === "/api/abarbeiten") {
         if (sperre(ordner)) return antwort(409, { fehler: "Es läuft schon ein Lauf.", sperre: sperre(ordner) });

@@ -4,7 +4,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
-  ARTEN, befehlFuer, ladeAuftraege, naechsterWartender, neuerAuftrag, speichereAuftraege, statusAusErgebnis, streiche, verschiebe,
+  ARTEN, STATUS, befehlFuer, ladeAuftraege, naechsterWartender, neuerAuftrag, speichereAuftraege, statusAusErgebnis, streiche, verschiebe,
 } from "../werkzeuge/verwaltung/auftraege.mjs";
 
 const JETZT = new Date("2026-11-16T10:00:00Z");
@@ -78,4 +78,41 @@ test("ladeAuftraege/speichereAuftraege: fehlende Datei leer, Rundreise, kaputte 
   assert.throws(() => ladeAuftraege(f), /auftraege.json ist kein gültiges JSON/);
   assert.equal(readFileSync(f, "utf8"), "{kaputt");
   rmSync(d, { recursive: true });
+});
+
+test("beantworte: Folgeauftrag mit Bezug, Frage und Antwort; der alte wird beantwortet", async () => {
+  const { beantworte, SCHAETZUNG_ANTWORT } = await import("../werkzeuge/verwaltung/auftraege.mjs");
+  const alt = { ...a("x1", "wartet-auf-christian"), art: "spiel", befehl: "Spiel entwickeln M08",
+    ergebnis: { status: "freigabe", zusammenfassung: "M08 gebaut, geparkt", frage: "Darf die Karte rein?" } };
+  const { liste, neu } = beantworte([alt, a("x2")], "x1", "  Ja  ", JETZT);
+  assert.equal(neu.art, "antwort");
+  assert.equal(neu.ziel, "x1");
+  assert.equal(neu.status, "wartet");
+  assert.equal(neu.schaetzung_eur, SCHAETZUNG_ANTWORT);
+  for (const teil of ["Spiel entwickeln M08", "M08 gebaut, geparkt", "Darf die Karte rein?", "Antwort von Christian: Ja",
+    "werkzeuge/verwaltung/ergebnisse/", ".claude/skills/spiel-entwickeln/SKILL.md"]) assert.ok(neu.befehl.includes(teil), teil);
+  assert.equal(liste.length, 3);
+  assert.equal(liste[2], neu);
+  assert.equal(liste[0].status, "beantwortet");
+  assert.equal(liste[0].notiz, "Antwort: Ja");
+});
+
+test("beantworte: nur bei „wartet auf dich“ und mit Text", async () => {
+  const { beantworte } = await import("../werkzeuge/verwaltung/auftraege.mjs");
+  assert.throws(() => beantworte([a("x1", "erledigt")], "x1", "Ja", JETZT), /wartet nicht auf eine Antwort/);
+  assert.throws(() => beantworte([a("x1", "wartet-auf-christian")], "x1", "   ", JETZT), /Antwort fehlt/);
+  assert.throws(() => beantworte([], "x1", "Ja", JETZT), /nicht gefunden/);
+});
+
+test("lehneAb: erledigt mit Notiz, kein neuer Auftrag; nur bei „wartet auf dich“", async () => {
+  const { lehneAb } = await import("../werkzeuge/verwaltung/auftraege.mjs");
+  const l = lehneAb([a("x1", "wartet-auf-christian"), a("x2")], "x1");
+  assert.equal(l.length, 2);
+  assert.equal(l[0].status, "erledigt");
+  assert.equal(l[0].notiz, "abgelehnt");
+  assert.throws(() => lehneAb([a("x1")], "x1"), /wartet nicht auf eine Antwort/);
+});
+
+test("STATUS kennt „beantwortet“", () => {
+  assert.ok(STATUS.includes("beantwortet"));
 });

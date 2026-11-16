@@ -39,6 +39,18 @@
   <section id="kosten" class="ansicht" hidden></section>
 </main>
 
+<dialog id="antworten">
+  <form method="dialog">
+    <h2>Antworten</h2>
+    <p id="a-frage" class="leise-text"></p>
+    <textarea id="a-text" rows="5" cols="60" maxlength="4000" placeholder="Deine Antwort …"></textarea>
+    <p class="leise-text">Kommt als Folgeauftrag in die Warteschlange (ca. 2 €), startet erst mit „Warteschlange abarbeiten“.</p>
+    <menu>
+      <button value="nein">Abbrechen</button>
+      <button value="ja" class="haupt">In die Warteschlange</button>
+    </menu>
+  </form>
+</dialog>
 <dialog id="bestaetigen">
   <form method="dialog">
     <h2>Auftrag anlegen</h2>

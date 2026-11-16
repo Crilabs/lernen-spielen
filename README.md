@@ -72,7 +72,9 @@ Dingen“, Einführung und Büchern, Kosten wie `npm run kosten`, und eine Warte
 abarbeiten“ startet einen Hintergrundlauf (`claude -p`, ein Auftrag nach dem anderen, kein `git push`); Protokolle unter
 `werkzeuge/verwaltung/protokolle/`. Im Chat: „Aufträge abarbeiten“ holt den nächsten Auftrag mit
 `node werkzeuge/verwaltung/lauf.mjs naechster` und meldet ihn mit `lauf.mjs fertig <id> <status>` zurück (dieselbe
-Sperre wie die Seite). Warteschlange, Sperre, Ergebnisse und Protokolle sind gitignored.
+Sperre wie die Seite). Wartet ein Auftrag auf Christian, beantwortet er ihn in der Seite: „Ja“ oder „Antworten …“ legt
+einen Folgeauftrag (Art `antwort`, ca. 2 €) an, der den Auftrag mit der Antwort fortsetzt; „Nein“ schließt ihn ohne
+Lauf ab. Warteschlange, Sperre, Ergebnisse und Protokolle sind gitignored.
 
 ## Release
 

@@ -7,9 +7,9 @@ const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<
 const STATUS_TEXT = {
   fertig: "fertig", probe: "Probe – bitte spielen", geparkt: "geparkt", entwurf: "Entwurf", beauftragt: "beauftragt",
   geplant: "geplant", fehlt: "fehlt", wartet: "wartet", laeuft: "läuft", erledigt: "erledigt",
-  "wartet-auf-christian": "wartet auf dich", fehlgeschlagen: "fehlgeschlagen", gestrichen: "gestrichen",
+  "wartet-auf-christian": "wartet auf dich", beantwortet: "beantwortet", fehlgeschlagen: "fehlgeschlagen", gestrichen: "gestrichen",
 };
-const ART_TEXT = { spiel: "Spiel", "echte-dinge": "Mit echten Dingen", buch: "Buch", einfuehrung: "Einführung", frei: "Frei" };
+const ART_TEXT = { spiel: "Spiel", "echte-dinge": "Mit echten Dingen", buch: "Buch", einfuehrung: "Einführung", frei: "Frei", antwort: "Antwort" };
 const plakette = (status, text = STATUS_TEXT[status] ?? status, titel = "") =>
   `<span class="plakette s-${esc(status)}" title="${esc(titel)}">${esc(text)}</span>`;
 
@@ -139,12 +139,21 @@ function zeigeAuftraege() {
     const steuer = a.status === "wartet"
       ? `<button class="klein" data-schritt="hoch" data-id="${esc(a.id)}" title="nach oben">↑</button>
          <button class="klein" data-schritt="runter" data-id="${esc(a.id)}" title="nach unten">↓</button>
-         <button class="klein" data-schritt="streichen" data-id="${esc(a.id)}">streichen</button>` : "";
+         <button class="klein" data-schritt="streichen" data-id="${esc(a.id)}">streichen</button>`
+      : a.status === "wartet-auf-christian"
+      ? `<button class="klein" data-antwort="Ja" data-id="${esc(a.id)}" title="Ja: Folgeauftrag in die Warteschlange">Ja</button>
+         <button class="klein" data-antworten="${esc(a.id)}" title="Eigene Antwort schreiben">Antworten …</button>
+         <button class="klein" data-schritt="ablehnen" data-id="${esc(a.id)}" title="Nein: kein Lauf, Auftrag erledigt">Nein</button>` : "";
     const zeit = a.beendet ? new Date(a.beendet).toLocaleString("de-DE") : a.gestartet ? `seit ${new Date(a.gestartet).toLocaleTimeString("de-DE")}` : "";
     const frage = a.ergebnis?.frage ? `<div class="leise-text">Frage: ${esc(a.ergebnis.frage)}</div>` : "";
     const zus = a.ergebnis?.zusammenfassung ? `<div class="leise-text">${esc(a.ergebnis.zusammenfassung)}</div>` : "";
+    const bezug = a.art === "antwort" ? l.find((x) => x.id === a.ziel) : null;
+    const befehl = a.art === "antwort"
+      ? `${bezug?.notiz ? `${bezug.notiz} – ` : ""}auf: ${bezug?.befehl ?? a.ziel}`
+      : a.befehl;
+    const notiz = a.notiz && a.status !== "beantwortet" ? `<div class="leise-text">${esc(a.notiz)}</div>` : "";
     return `<tr data-zeile="${esc(a.id)}" class="${a.id === gewaehlt ? "gewaehlt" : ""}">
-      <td>${esc(ART_TEXT[a.art] ?? a.art)}</td><td class="befehl">${esc(a.befehl)}${zus}${frage}</td>
+      <td>${esc(ART_TEXT[a.art] ?? a.art)}</td><td class="befehl">${esc(befehl)}${zus}${frage}${notiz}</td>
       <td class="zahl-z">${eur(a.schaetzung_eur)}</td><td>${plakette(a.status)}</td><td class="leise-text">${esc(zeit)}</td>
       <td>${steuer} <button class="klein" data-protokoll="${esc(a.id)}">Protokoll</button></td></tr>`;
   }).join("");
@@ -260,6 +269,21 @@ function bestaetige(art, ziel) {
   }, { once: true });
 }
 
+function antworten(id) {
+  const a = A.auftraege.find((x) => x.id === id);
+  const d = /** @type {HTMLDialogElement} */ ($("#antworten"));
+  const feld = /** @type {HTMLTextAreaElement} */ ($("#a-text"));
+  $("#a-frage").textContent = a?.ergebnis?.frage ?? "";
+  feld.value = "";
+  d.returnValue = "";
+  d.showModal();
+  d.addEventListener("close", async () => {
+    const text = feld.value.trim();
+    if (d.returnValue !== "ja" || !text) return;
+    try { await api(`/api/auftraege/${id}/antwort`, { text }); await ladeAlles(); } catch (err) { $("#hinweis").textContent = /** @type {Error} */ (err).message; }
+  }, { once: true });
+}
+
 document.addEventListener("click", async (e) => {
   const z = /** @type {HTMLElement} */ (e.target).closest("button");
   if (!z) return;
@@ -272,6 +296,8 @@ document.addEventListener("click", async (e) => {
     }
     else if (z.dataset.auftrag) bestaetige(z.dataset.auftrag, z.dataset.ziel);
     else if (z.dataset.schritt) { A = { ...A, ...(await api(`/api/auftraege/${z.dataset.id}/${z.dataset.schritt}`, {})) }; await ladeAlles(); }
+    else if (z.dataset.antwort) { await api(`/api/auftraege/${z.dataset.id}/antwort`, { text: z.dataset.antwort }); await ladeAlles(); }
+    else if (z.dataset.antworten) antworten(z.dataset.antworten);
     else if (z.dataset.protokoll) { gewaehlt = z.dataset.protokoll; zeigeAuftraege(); }
     else if (z.id === "abarbeiten") { await api("/api/abarbeiten", {}); setTimeout(ladeAlles, 800); }
     else if (z.id === "anhalten") { await api("/api/anhalten", {}); await ladeAlles(); }
