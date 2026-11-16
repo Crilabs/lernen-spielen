@@ -9078,7 +9078,7 @@
       "voraussetzungen": [
         "buchstabe-silbe-wort-satz"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "wortart", "ziel": ["nomen"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -9172,7 +9172,7 @@
       "verwechslung": [
         "namenwoerter"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "wortart", "ziel": ["verb"], "kopf": ["verb", "nomen"] },
       "stufen": [
         "material",
         "vorstellung",

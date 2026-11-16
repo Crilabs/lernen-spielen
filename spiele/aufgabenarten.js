@@ -13,8 +13,14 @@
 //              Spezifikation { art: "zahlwort", von, bis } (alle Zahlen von bis bis, 0 bis 100).
 //   artikel    "artikel:hammer"   daten { wort: "Hammer", artikel: "der", bild: "hammer" }   (Artikel zum Nomen; Werkzeugwand G09)
 //              Spezifikation { art: "artikel", wortschatz: "werkzeug" } (Wörter in spiele/woerter/artikel.js).
+//   wortart    "wortart:nomen:katze-gaehnt"   daten { satz, woerter, ziel: ["nomen"], kopfZiel: ["nomen"] }   (Wortartensymbole über
+//              die Wörter eines Satzes legen; Dreieck und Kreis G01). Der Schlüssel trägt die Wortart des Themas, denn derselbe
+//              Satz dient mehreren Themen (nomen, verb, adjektiv). Spezifikation { art: "wortart", ziel: ["nomen"] }; `kopf` nennt die
+//              Wortarten, die auf der Stufe kopf zusätzlich Symbole tragen ({ ziel: ["verb"], kopf: ["verb", "nomen"] }).
+//              Sätze in spiele/woerter/wortarten.js.
 
 import { WORTSCHAETZE, wortMit } from "./woerter/artikel.js";
+import { saetzeFuer, satzMit } from "./woerter/wortarten.js";
 
 export const ZIEL_MS = {
   zerlegung: 8000,
@@ -23,6 +29,7 @@ export const ZIEL_MS = {
   mal: 8000, // Annahme (Entwurf M37): Abruf einer Einmaleinsaufgabe; darüber gilt sie als mühsam gelöst
   zahlwort: 6000, // Annahme (Entwurf M06): Zahlwort hören und zwei Ziffern tippen
   artikel: 6000, // Annahme (Entwurf G09): Wort ansehen, Plättchen ziehen; darüber gilt der Artikel als nicht sicher
+  wortart: 12000, // Annahme (Entwurf G01): je Symbol etwa 4 s (ziehen und Probe), bis zu drei Symbole je Satz
 };
 
 // Einmaleins: die Kernaufgaben (mal 1, 2, 5, 10) und die Reihen, deren Aufgaben alle zur eigenen Reihe gehören.
@@ -53,6 +60,12 @@ export function artikelAus(key) {
   const m = /^artikel:([a-z]+)$/.exec(String(key ?? ""));
   const w = m ? wortMit(m[1]) : null;
   return w ? { id: w.id, wort: w.wort, artikel: w.artikel } : null;
+}
+
+/** "wortart:nomen:katze-gaehnt" → { key, ziel, id }, sonst null. */
+export function wortartAus(key) {
+  const m = /^wortart:(nomen|verb|adjektiv):([a-z-]+)$/.exec(String(key ?? ""));
+  return m && satzMit(m[2]) ? { key: m[0], ziel: m[1], id: m[2] } : null;
 }
 
 const UEBERGANG_AB = 20; // darüber kein Übertrag der Einer
@@ -144,6 +157,13 @@ export function aufgabenVon(spec) {
       const liste = Object.hasOwn(WORTSCHAETZE, spec.wortschatz) ? WORTSCHAETZE[/** @type {keyof typeof WORTSCHAETZE} */ (spec.wortschatz)] : [];
       return liste.map((w) => ({ key: `artikel:${w.id}`, art: "artikel", daten: { wort: w.wort, artikel: w.artikel, bild: w.id } }));
     }
+    case "wortart": {
+      const ziel = Array.isArray(spec.ziel) ? spec.ziel : [];
+      const kopfZiel = Array.isArray(spec.kopf) ? spec.kopf : ziel;
+      return ziel.length
+        ? saetzeFuer(ziel[0]).map((s) => ({ key: `wortart:${ziel[0]}:${s.id}`, art: "wortart", daten: { satz: s.id, woerter: s.woerter, ziel, kopfZiel } }))
+        : [];
+    }
     default:
       return [];
   }
@@ -168,6 +188,7 @@ export function schwierigkeit(aufgabe) {
   if (aufgabe.art === "menge") return d.n;
   if (aufgabe.art === "zahlwort") return zahlwortSchwer(d.n);
   if (aufgabe.art === "artikel") return wortMit(d.bild)?.schwierigkeit ?? 1;
+  if (aufgabe.art === "wortart") return satzMit(d.satz)?.schwierigkeit ?? 1;
   // mal: Kernaufgabe 0, eine Gruppe neben einer Kernaufgabe (3, 4, 6, 9) 1, zwei Gruppen daneben (7, 8) 2
   if (aufgabe.art === "mal") return KERN_FAKTOREN.includes(d.a) ? 0 : [7, 8].includes(d.a) ? 2 : 1;
   if (d.op === "plus") return Math.min(d.a, d.b) + ((d.a % 10) + (d.b % 10) >= 10 ? 5 : 0);
