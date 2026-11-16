@@ -5,6 +5,7 @@
   "scripts": {
     "test": "tsc -p tsconfig.json && node --test \"tests/**/*.test.mjs\"",
     "luecken": "node scripts/luecken.mjs",
+    "dev": "tauri dev",
     "tauri": "tauri",
     "audio": "node werkzeuge/audio/erzeugen.mjs",
     "kosten": "node werkzeuge/kosten/bericht.mjs",

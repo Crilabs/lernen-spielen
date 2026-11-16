@@ -54,7 +54,7 @@ Die frühere Web-Fassung mit PHP ist entfernt.
 ```sh
 npm install
 npm test                      # Node-Tests
-npm run tauri dev             # App im Entwicklungsmodus
+npm run dev                   # App im Entwicklungsmodus (= npm run tauri dev)
 python3 -m http.server -d spiele   # nur im Browser ansehen: http://localhost:8000
 ```
 
