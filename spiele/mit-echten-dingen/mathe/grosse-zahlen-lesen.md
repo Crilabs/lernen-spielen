@@ -1,8 +1,6 @@
 ---
 thema: grosse-zahlen-lesen
 fach: mathe
-entwurf: true
-geparkt: true
 bild: { figur: landkarte, zustand: aufgefaltet }
 quellen:
   - Zentrale mathematische Themen Klasse 4 – Stellenwerte (Lernen auf Distanz), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/unterricht_neu/zahlen_und_operationen/zr_1mio/stellenwerte/lad_mathematische_themen_klasse_4_komplett_2022_buendeln.pdf, abgerufen 2026-11-16

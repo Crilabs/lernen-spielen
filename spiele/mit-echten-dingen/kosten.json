@@ -3059,5 +3059,22 @@
   "thema": [
    "grosse-zahlen-lesen"
   ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 12,
+  "ausgabe": 1749,
+  "einheit": "tokens",
+  "menge": 412165,
+  "notiz": "grosse-zahlen-lesen, Freigabe durch Christian (ohne 4. Prüfer)",
+  "cache_lesen": 348714,
+  "cache_schreiben": 61690,
+  "themen": 1,
+  "thema": [
+   "grosse-zahlen-lesen"
+  ]
  }
 ]

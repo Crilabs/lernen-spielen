@@ -233,6 +233,23 @@
    "entwurf": false,
    "datei": "mathe/geteilt-umkehrung-mal.md"
   },
+  "grosse-zahlen-lesen": {
+   "fach": "mathe",
+   "name": "Große Zahlen lesen und schreiben",
+   "titel": "Wie viele Menschen wohnen dort?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zahlen an die Karte legen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Die Zahl abgehen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/grosse-zahlen-lesen.md"
+  },
   "minus-zehner": {
    "fach": "mathe",
    "name": "Minus mit ganzen Zehnern",
