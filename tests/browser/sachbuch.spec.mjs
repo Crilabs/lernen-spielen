@@ -86,6 +86,15 @@ for (const typ of [chromium, webkit]) {
   pruefe(g.kapitel === 1 && g.seite === 2, `${name}: Weiterlesen springt zu Kapitel 2, Seite 3`);
   await p.close();
 
+  // Selbst lesen: das Kapitel wird weder beim Öffnen noch beim Blättern vorgelesen
+  p = await oeffne(browser);
+  await p.evaluate(() => window.lsGeschichte.waehle("selbst"));
+  await p.evaluate(() => window.lsGeschichte.oeffne(1));
+  await p.evaluate(() => window.lsGeschichte.weiter());
+  await p.waitForTimeout(600);
+  pruefe(await p.evaluate(() => window.lsGeschichte.gelesen) === 0, `${name}: Selbst lesen – nichts wird vorgelesen (${await p.evaluate(() => window.lsGeschichte.gelesen)})`);
+  await p.close();
+
   // Vorlesen blättert nie ins nächste Kapitel
   p = await oeffne(browser);
   await p.evaluate(() => window.lsGeschichte.waehle("vorlesen"));

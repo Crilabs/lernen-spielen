@@ -12,8 +12,8 @@
 // Nach der letzten Seite „Fertig“ (Hauptknopf) → Ereignis `fertig` (bubbles, composed).
 //
 // - Vorlesen: Bei Ton an (Einstellung `ton.<spiel>` wie ls-blase, Spiel-Kennung der Leiste) liest der Erzähler jede
-//   Seite beim Aufschlagen vor (`sprich` aus kern/stimme.js, vorab aufgenommen mit `npm run audio`, sonst die
-//   Systemstimme); der Knopf Vorlesen liest noch einmal. `sprich` der Seite ersetzt den gesprochenen Text.
+//   Seite im Vorlesemodus beim Aufschlagen vor (`sprich` aus kern/stimme.js, vorab aufgenommen mit `npm run audio`, sonst die
+//   Systemstimme); der Knopf Vorlesen liest noch einmal, bei Selbst lesen auf Wunsch die Seite. `sprich` der Seite ersetzt den gesprochenen Text.
 //   Ein Satz wird nur durch einen Tipp des Kindes abgebrochen (Blättern), nie vom Abspieler.
 // - Frage (`frage: true`): Weiter erscheint erst nach dem Vorlesen und einer Ruhe von RUHE_MS, damit das Kind
 //   überlegt; bis dahin blättern auch Wischen und Pfeiltaste nicht weiter. Es wird nichts geprüft oder gespeichert.
@@ -566,7 +566,9 @@ export class LsGeschichte extends HTMLElement {
     });
     this.weiterBereit = !s.frage;
     this.weiterEl.classList.toggle("wartet", !!s.frage);
-    const stumm = this.modus === "vorlesen" && this.angehalten;   // angehalten: blättern liest nicht
+    // Gelesen wird beim Aufschlagen nur im Vorlesemodus und nicht angehalten; Selbst lesen bleibt still
+    // (der Vorlese-Knopf liest auf Wunsch die Seite).
+    const stumm = this.modus !== "vorlesen" || this.angehalten;
     if (this.modus === null) { /* Startwahl: noch nichts lesen */ }
     else if (!s.frage) { if (!stumm) this.liesUndBlaettere(); }
     else {
@@ -609,7 +611,7 @@ export class LsGeschichte extends HTMLElement {
     this.zeigeWahl(false);
     this.setzeAngehalten(false);
     this.zeigeText();
-    this.liesUndBlaettere();
+    if (this.modus === "vorlesen") this.liesUndBlaettere();
   }
 
   /**

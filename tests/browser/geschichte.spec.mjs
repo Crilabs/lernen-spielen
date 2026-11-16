@@ -178,6 +178,20 @@ for (const typ of [chromium, webkit]) {
   pruefe(await op.evaluate(() => window.lsGeschichte.modus) === "selbst" && await op.evaluate(() => window.lsGeschichte.seite) === 0, `${name}: Ton aus im Vorlesen – Selbst lesen, kein stummes Weiterblättern`);
   await op.close();
 
+  // Selbst lesen bei Ton an: nichts wird beim Aufschlagen oder Blättern vorgelesen; der Vorlese-Knopf liest die Seite
+  const sp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await sp.addInitScript(() => { try { Object.defineProperty(window, "speechSynthesis", { value: undefined }); } catch {} });
+  await sp.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
+  await sp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
+  await sp.evaluate(() => window.lsGeschichte.waehle("selbst"));
+  await sp.evaluate(() => window.lsGeschichte.weiter());
+  await sp.waitForTimeout(600);
+  pruefe(await sp.evaluate(() => window.lsGeschichte.gelesen) === 0, `${name}: Selbst lesen – nichts wird vorgelesen (${await sp.evaluate(() => window.lsGeschichte.gelesen)})`);
+  await sp.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".vorlesen").click());
+  await sp.waitForTimeout(300);
+  pruefe(await sp.evaluate(() => window.lsGeschichte.gelesen) === 1, `${name}: Selbst lesen – der Vorlese-Knopf liest die Seite`);
+  await sp.close();
+
   // Ton aus: keine Startwahl, Selbst lesen
   const tp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await tp.addInitScript(() => localStorage.setItem("lernstand-kind-1-einstellungen", JSON.stringify({ "ton.geschichte": false })));
