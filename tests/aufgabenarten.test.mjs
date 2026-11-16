@@ -116,3 +116,30 @@ test("mal: Schwierigkeit nach dem Abstand zur Kernaufgabe, Zielzeit, darstellbar
   assert.equal(darstellbar(a, { art: "mal" }), true);
   assert.equal(darstellbar(a, { art: "rechnen", max: 100 }), false);
 });
+
+// --- zahlwort (Zahlenpost M06, Idee docs/spiele/mathe/m06-zahlenpost.md §8) --------------------------------
+test("zahlwort: alle Zahlen von bis bis mit Schlüssel zahl:n, ungültige Angaben ergeben nichts", async () => {
+  const { zahlAus } = await import("../spiele/aufgabenarten.js");
+  const z = aufgabenVon({ art: "zahlwort", von: 11, bis: 20 });
+  assert.deepEqual(z.map((a) => a.key), Array.from({ length: 10 }, (_, i) => `zahl:${11 + i}`));
+  assert.deepEqual(z[6], { key: "zahl:17", art: "zahlwort", daten: { n: 17 } });
+  assert.equal(aufgabenVon({ art: "zahlwort", von: 0, bis: 10 }).length, 11);
+  assert.deepEqual(aufgabenVon({ art: "zahlwort", von: 5, bis: 4 }), []);
+  assert.deepEqual(aufgabenVon({ art: "zahlwort", von: 0, bis: 101 }), []);
+  assert.deepEqual(aufgabenVon({ art: "zahlwort" }), []);
+  assert.deepEqual(zahlAus("zahl:17"), { n: 17 });
+  assert.equal(zahlAus("mal:6*7"), null);
+  assert.equal(zahlAus("zahl:101"), null);
+});
+test("zahlwort: Schwierigkeit (Einer zuerst ist schwer), Zielzeit, darstellbar nach Zahlenraum", () => {
+  const s = (n) => schwierigkeit({ art: "zahlwort", daten: { n } });
+  assert.deepEqual([0, 7, 10].map(s), [0, 0, 0]);
+  assert.deepEqual([11, 12, 20].map(s), [1, 1, 1]);
+  assert.deepEqual([13, 17, 19].map(s), [2, 2, 2]);
+  assert.deepEqual([30, 22, 43].map(s), [1, 2, 3]);
+  assert.equal(ZIEL_MS.zahlwort, 6000);
+  const a = aufgabenVon({ art: "zahlwort", von: 0, bis: 100 });
+  assert.equal(darstellbar(a[17], { art: "zahlwort", zahlen: [0, 20] }), true);
+  assert.equal(darstellbar(a[43], { art: "zahlwort", zahlen: [0, 20] }), false);
+  assert.equal(darstellbar(a[43], { art: "mal" }), false);
+});

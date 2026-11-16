@@ -9,12 +9,15 @@
 //              Spezifikation { art: "mal", reihe: n } (die Reihe von n) oder { art: "mal", kern: true } (Kernaufgaben
 //              mal 1, 2, 5, 10 der übrigen Reihen); `faktoren` bzw. `reihen` legen die Faktoren ausdrücklich fest.
 //              Nichts darin gehört einem Spiel: Kette (M37), Punktefeld (M36) und Tüten (M35) lesen dieselben daten.
+//   zahlwort   "zahl:17"      daten { n }   (Zahlwort hören, Ziffern schreiben; Zahlenpost M06)
+//              Spezifikation { art: "zahlwort", von, bis } (alle Zahlen von bis bis, 0 bis 100).
 
 export const ZIEL_MS = {
   zerlegung: 8000,
   rechnen: (raum) => ({ 10: 12000, 20: 16000, 30: 20000, 100: 30000 })[raum],
   menge: 4000,
   mal: 8000, // Annahme (Entwurf M37): Abruf einer Einmaleinsaufgabe; darüber gilt sie als mühsam gelöst
+  zahlwort: 6000, // Annahme (Entwurf M06): Zahlwort hören und zwei Ziffern tippen
 };
 
 // Einmaleins: die Kernaufgaben (mal 1, 2, 5, 10) und die Reihen, deren Aufgaben alle zur eigenen Reihe gehören.
@@ -32,6 +35,12 @@ const malAufgabe = (a, b) => ({ key: `mal:${a}*${b}`, art: "mal", daten: { a, b,
 export function malAus(key) {
   const m = /^mal:(\d+)\*(\d+)$/.exec(String(key ?? ""));
   return m ? { a: Number(m[1]), b: Number(m[2]), c: Number(m[1]) * Number(m[2]) } : null;
+}
+
+/** "zahl:17" → { n: 17 }, sonst null. */
+export function zahlAus(key) {
+  const m = /^zahl:(\d+)$/.exec(String(key ?? ""));
+  return m && Number(m[1]) <= 100 ? { n: Number(m[1]) } : null;
 }
 
 const UEBERGANG_AB = 20; // darüber kein Übertrag der Einer
@@ -114,9 +123,26 @@ export function aufgabenVon(spec) {
       if (!Number.isInteger(n) || n < 1) return [];
       return (spec.faktoren ?? faktorenDerReihe(n)).map((a) => malAufgabe(a, n));
     }
+    case "zahlwort": {
+      const { von, bis } = spec;
+      if (!Number.isInteger(von) || !Number.isInteger(bis) || von < 0 || bis > 100 || von > bis) return [];
+      return Array.from({ length: bis - von + 1 }, (_, i) => ({ key: `zahl:${von + i}`, art: "zahlwort", daten: { n: von + i } }));
+    }
     default:
       return [];
   }
+}
+
+/**
+ * Schwierigkeit eines Zahlworts: Einer-zuerst im Wort (13 bis 19, später 21 bis 99 mit zwei verschiedenen Ziffern) ist
+ * am schwersten; elf, zwölf und zwanzig sind eigene Wörter (1); Zehnerzahlen darüber 1; gleiche Ziffern 2.
+ */
+function zahlwortSchwer(n) {
+  if (n <= 10) return 0;
+  if (n === 11 || n === 12 || n === 20) return 1;
+  if (n <= 19) return 2;
+  if (n % 10 === 0) return 1;
+  return Math.floor(n / 10) === n % 10 ? 2 : 3;
 }
 
 // größer = schwerer
@@ -124,6 +150,7 @@ export function schwierigkeit(aufgabe) {
   const d = aufgabe.daten;
   if (aufgabe.art === "zerlegung") return Math.min(d.a, d.b);
   if (aufgabe.art === "menge") return d.n;
+  if (aufgabe.art === "zahlwort") return zahlwortSchwer(d.n);
   // mal: Kernaufgabe 0, eine Gruppe neben einer Kernaufgabe (3, 4, 6, 9) 1, zwei Gruppen daneben (7, 8) 2
   if (aufgabe.art === "mal") return KERN_FAKTOREN.includes(d.a) ? 0 : [7, 8].includes(d.a) ? 2 : 1;
   if (d.op === "plus") return Math.min(d.a, d.b) + ((d.a % 10) + (d.b % 10) >= 10 ? 5 : 0);

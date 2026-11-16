@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Zahlenpost</title>
+<!-- M06 Zahlenpost (Idee docs/spiele/mathe/m06-zahlenpost.md). Das Spielbild ist die Straße über den ganzen Bildschirm:
+     Timo rollt mit dem Brief auf dem Schoß die Häuserreihe entlang, die Kamera folgt ihm. Links Timo mit dem Umschlag
+     (Spalten Z | E), rechts das Ziffernbrett aus Holz mit Fertig. Leiste, Blase, Hilfe und Pause an ihren Plätzen. -->
+<link rel="stylesheet" href="../../rahmen/seite.css">
+<style>
+  /* ===== SPIELWELT: eine ruhige Straße. Alles in rem (1rem = Bildhöhe/108). ===== */
+  :root {
+    --feld-links: max(0rem, calc((100vw - 192rem) / 2));
+    --feld-breite: min(100vw, 192rem);
+    --boden-oben: 64rem;       /* Fuß der Häuser, Beginn des Gehwegs */
+    --timo-hoehe: 45rem;       /* Feld der Figur (320 × 280); die Figur selbst ist etwa 34 rem hoch */
+    --zehner: #F59A2B;
+    --einer: #2BB5B0;
+  }
+  .welt { background: linear-gradient(#EAF1F4 0, #F6EFE0 var(--boden-oben)); overflow: hidden; }
+  .feld { position: absolute; top: 0; bottom: 0; left: var(--feld-links); width: var(--feld-breite); }
+
+  /* Die Straße: ein langer Streifen, die Kamera schiebt ihn (transform). Gehweg mit Fugen, Bordstein, Fahrbahn. */
+  .strasse { position: absolute; left: 0; top: 0; width: 3500rem; height: 108rem; will-change: transform; }
+  .gehweg { position: absolute; left: 0; right: 0; top: var(--boden-oben); height: 29rem;
+    background: repeating-linear-gradient(90deg, transparent 0 7.7rem, rgba(59, 42, 107, 0.13) 7.7rem 8rem), #E9E0D1; }
+  .bordstein { position: absolute; left: 0; right: 0; top: 93rem; height: 2.4rem; background: #CFC6B8; border-top: 0.3rem solid var(--ls-tinte); }
+  .fahrbahn { position: absolute; left: 0; right: 0; top: 95.4rem; bottom: 0; background: #918CA0; }
+  .fahrbahn::after { content: ""; position: absolute; left: 0; right: 0; top: 7rem; height: 1.2rem;
+    background: repeating-linear-gradient(90deg, #F4EFE6 0 9rem, transparent 9rem 22rem); }
+
+  /* Ein Haus (spiel.js baut es aus einem SVG und dem Türfeld). */
+  .haus { position: absolute; top: calc(var(--boden-oben) - var(--h)); width: 32rem; height: var(--h); }
+  .haus > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .haus .fahne { transition: transform 0.38s cubic-bezier(0.3, 1.7, 0.5, 1); }
+  .haus.fahne-hoch .fahne { transform: rotate(0deg) !important; }
+  .haus .tuer { position: absolute; left: 16rem; bottom: 0; width: 14rem; height: 24rem; perspective: 60rem; }
+  .haus .innen { position: absolute; inset: 0; background: #4A3A5C; border: 0.3rem solid var(--ls-tinte); border-bottom: 0; border-radius: 7rem 7rem 0 0; box-sizing: border-box; }
+  .haus .mat { position: absolute; left: 0; right: 0; bottom: 0.7rem; display: flex; justify-content: center; align-items: flex-end; }
+  .haus .blatt { position: absolute; inset: 0; background: var(--tuer, #4F8FB3); border: 0.3rem solid var(--ls-tinte); border-bottom: 0; border-radius: 7rem 7rem 0 0; box-sizing: border-box;
+    transform-origin: 0 50%; transition: transform 0.34s cubic-bezier(0.3, 1.5, 0.5, 1); }
+  .haus .schlitz { position: absolute; left: 3.4rem; right: 3.4rem; top: 11.6rem; height: 0.9rem; border-radius: 0.5rem; background: var(--ls-tinte); }
+  .haus .griff { position: absolute; right: 1.4rem; top: 15rem; width: 1.1rem; height: 1.1rem; border-radius: 50%; background: #FFFCF7; border: 0.2rem solid var(--ls-tinte); box-sizing: border-box; }
+  .haus.offen .blatt { transform: rotateY(-84deg); }
+  .haus .nr { position: absolute; left: 16.2rem; width: 13.6rem; top: calc(var(--h) - 33rem); height: 6.4rem; display: flex; align-items: center; justify-content: center;
+    background: var(--ls-papier); border: 0.3rem solid var(--ls-tinte); border-radius: 1.4rem; box-sizing: border-box;
+    font: 700 5.2rem/1 "Andika", sans-serif; color: var(--ls-tinte); }
+  .haus .nr.post { font-size: 4rem; background: #FFE9A8; }
+
+  /* Figuren, Schatten und Brief über der Straße; nehmen keine Tipps. */
+  .timo { position: absolute; left: 14.3rem; top: 45.2rem; height: var(--timo-hoehe); width: calc(var(--timo-hoehe) * 320 / 280); will-change: transform; }
+  .timo > .koerper { width: 100%; height: 100%; transform-origin: 50% 90.7%; }
+  .timo svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .schatten { position: absolute; left: 27rem; top: 84.4rem; width: 26rem; height: 3.2rem; border-radius: 50%; background: rgba(43, 38, 34, 0.26); filter: blur(0.3rem); }
+
+  /* Der Umschlag auf Timos Schoß: Spalten Z | E (material beschriftet und gefärbt, vorstellung nur gefärbt, kopf eine freie Zeile). */
+  .umschlag { position: absolute; left: 36rem; top: 67rem; width: 27rem; height: 19.5rem; padding: 2.2rem 1.4rem 1.4rem; box-sizing: border-box;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 1.8rem; box-shadow: 0 0.6rem 0 var(--ls-tinte-weich);
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: center; will-change: transform, opacity; }
+  .umschlag::before { content: ""; position: absolute; left: 0.3rem; right: 0.3rem; top: 0.3rem; height: 4.6rem; background: #EEE6D6; clip-path: polygon(0 0, 100% 0, 50% 100%); border-radius: 1.4rem 1.4rem 0 0; }
+  .umschlag .wort { position: absolute; left: 0; right: 0; top: 0.5rem; text-align: center; font: 700 2.2rem/1 "Andika", sans-serif; color: var(--ls-tinte); z-index: 1; }
+  .umschlag .wort[hidden] { display: none; }
+  .felder { position: relative; display: flex; gap: 1.6rem; align-items: stretch; z-index: 1; }
+  .feld-e, .feld-z, .feld-frei { position: relative; box-sizing: border-box; width: 10rem; height: 14.2rem; border: 0.35rem solid var(--ls-tinte); border-radius: 1.2rem; background: #FFFFFF;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end; overflow: hidden; }
+  .feld-frei { width: 21rem; }
+  .felder > [hidden] { display: none; }
+  .umschlag[data-stufe="material"] .feld-z, .umschlag[data-stufe="vorstellung"] .feld-z { background: #FEE5C4; }
+  .umschlag[data-stufe="material"] .feld-e, .umschlag[data-stufe="vorstellung"] .feld-e { background: #CDEFEE; }
+  .feld-z .stempel, .feld-e .stempel { position: absolute; left: 0.8rem; top: 0.6rem; font: 700 2.2rem/1 "Andika", sans-serif; color: var(--ls-tinte); transition: opacity 1.1s, transform 1.1s; }
+  .umschlag:not([data-stufe="material"]) .stempel { opacity: 0; transform: translateY(-3rem) rotate(-18deg); }
+  .feld-z .ziffer, .feld-e .ziffer, .feld-frei .ziffer { font: 700 7.2rem/1 "Andika", sans-serif; color: var(--ls-tinte); min-height: 7.2rem; padding-bottom: 0.4rem; }
+  .ziffer.sinkt { animation: sinkt 0.22s ease-out; }
+  @keyframes sinkt { from { transform: translateY(-1.6rem); opacity: 0.2; } to { transform: none; opacity: 1; } }
+  .feld-z .mat, .feld-e .mat { position: absolute; left: 0; right: 0; top: 0.6rem; height: 7.6rem; display: flex; justify-content: center; align-items: flex-start; }
+  .feld-frei .mat { position: absolute; left: 0; right: 0; top: 0.6rem; height: 7.6rem; display: flex; justify-content: center; align-items: flex-start; gap: 2rem; }
+  .feld-z .mat ls-goldmaterial, .feld-e .mat ls-goldmaterial, .feld-frei .mat ls-goldmaterial { height: 7.6rem; }
+
+  /* Ziffernbrett aus Holz, liegt rechts auf der Straße: Ziffernblock, darunter Fertig. Unten bleibt Platz für die Hilfe. */
+  .spielflaeche { display: grid; grid-template-columns: minmax(0, 1fr) 46rem; grid-template-rows: 12rem minmax(0, 1fr); column-gap: 2.4rem; row-gap: 1.6rem; padding: 1.6rem 2.4rem 2.4rem; }
+  ls-blase { grid-column: 1; grid-row: 1; align-self: start; justify-self: start; position: relative; z-index: 6; }
+  .brett { grid-column: 2; grid-row: 2; align-self: start; display: flex; flex-direction: column; align-items: center; gap: 2.4rem; padding: 2.4rem 2rem 2.6rem; max-height: calc(100% - 13.6rem); }
+  #fertig { align-self: center; }
+  @media (prefers-reduced-motion: reduce) { .haus .blatt, .haus .fahne, .stempel { transition: none !important; } .ziffer.sinkt { animation: none; } }
+  @media (max-aspect-ratio: 3/2) { .spielflaeche { grid-template-columns: minmax(0, 1fr) 42rem; } }
+
+  /* Pause: Sachmoment auf der Papierkarte. */
+  .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
+  .sachmoment p { margin: 0; }
+  .sachmoment .hinweis {
+    display: inline-flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 4rem 1.6rem 1.6rem;
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-papier);
+    box-shadow: var(--ls-schatten); color: var(--ls-tinte); font-weight: 700; text-decoration: none;
+  }
+  .sachmoment .hinweis img { width: 8rem; height: 8rem; }
+  .sachmoment .hinweis:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+
+  .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
+  .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
+  .eltern p { max-width: 70ch; }
+  .eltern .beschreibung { margin: 0 0 3rem; color: var(--ls-tinte-weich); }
+  .eltern a { color: var(--ls-tinte); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="welt" aria-hidden="true"><div class="feld"><div class="strasse" id="strasse"><div class="gehweg"></div><div class="bordstein"></div><div class="fahrbahn"></div></div></div></div>
+
+<ls-leiste id="leiste" spiel="zahlenpost" fach="mathe" titel="Zahlenpost" thema="">
+  <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
+  <ls-knopf slot="rechts" id="anleitung" symbol="buch.svg" name="Anleitung" hidden></ls-knopf>
+</ls-leiste>
+
+<div class="buehne">
+  <main class="spielflaeche" aria-label="Straße mit Häusern">
+    <ls-blase id="blase" ohne-text></ls-blase>
+    <div class="brett tablett" id="brett">
+      <ls-tastatur id="tastatur" tasten="1234567890" je-reihe="3" loeschen></ls-tastatur>
+      <ls-knopf id="fertig" art="haupt" symbol="fertig.svg" wort="Fertig"></ls-knopf>
+    </div>
+  </main>
+</div>
+<div class="welt-vorn" aria-hidden="true" style="position:fixed;inset:0;z-index:5;pointer-events:none">
+  <div class="feld" id="figuren">
+    <div class="schatten" id="schatten"></div>
+    <div class="timo" id="timo"><div class="koerper" id="timo-koerper"></div></div>
+    <div class="umschlag" id="umschlag" data-stufe="material">
+      <div class="wort" id="wort" hidden></div>
+      <div class="felder">
+        <div class="feld-z" id="feld-z"><span class="stempel">Z</span><div class="mat"></div><span class="ziffer"></span></div>
+        <div class="feld-e" id="feld-e"><span class="stempel">E</span><div class="mat"></div><span class="ziffer"></span></div>
+        <div class="feld-frei" id="feld-frei" hidden><div class="mat"><span class="mz"></span><span class="me"></span></div><span class="ziffer"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ls-hilfe id="hilfe"></ls-hilfe>
+<ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
+
+<script type="module" src="spiel.js"></script>
+</body>
+</html>

@@ -120,7 +120,7 @@
       "klasse": 1,
       "bereich": "Zahlbegriff bis 10",
       "voraussetzungen": [],
-      "aufgaben": null,
+      "aufgaben": { "art": "zahlwort", "von": 0, "bis": 10 },
       "stufen": [
         "material",
         "vorstellung",
@@ -1816,7 +1816,7 @@
         "ziffern-lesen-bis-10",
         "zehner-und-einer-bis-20"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "zahlwort", "von": 11, "bis": 20 },
       "stufen": [
         "material",
         "vorstellung",

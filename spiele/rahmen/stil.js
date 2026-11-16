@@ -102,6 +102,8 @@ export const LERNFARBE = Object.freeze({
   }),
   /** Draht der Perlenstäbchen. */
   draht: FARBE.tinteWeich,
+  /** Stellenwertfarben (M5, nur zusätzlich zu Spalte, Beschriftung und Ziffer): Einer türkis, Zehner orange, Hunderter schiefergrau. */
+  stellenwert: Object.freeze({ einer: "#2BB5B0", zehner: "#F59A2B", hunderter: "#69768A" }),
   /** Wortartensymbole (D1). */
   wortart: Object.freeze({ nomen: "#1E1A2E", artikel: "#7CC4F0", adjektiv: "#2F5BC4", verb: "#E5484D" }),
 });
