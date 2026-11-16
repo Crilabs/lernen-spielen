@@ -16,7 +16,7 @@
 // Testbetrieb ?bis=<n> (als ginge das Thema bis n: ?bis=20 spielt mit Fertig, ?bis=10 klein).
 
 import "../../rahmen/leiste.js";
-import { lesezeit } from "../../rahmen/blase.js";
+import "../../rahmen/blase.js";
 import "../../rahmen/hilfe.js";
 import "../../rahmen/pause.js";
 import "../../rahmen/gekonnt.js";
@@ -27,9 +27,10 @@ import * as Runde from "../../runde/runde.js";
 import { zahlAus } from "../../aufgabenarten.js";
 import { perlenstab } from "../../rahmen/perlen-geometrie.js";
 import { meldePruefSchnittstelle, selektor, testbetrieb } from "../../rahmen/pruefen.js";
+import { einfuehrungsLauf } from "../../rahmen/einfuehrung-lauf.js";
 import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
-import { runde, einmal, rundenMs } from "../../lernsteuerung.js";
+import { runde, einmal } from "../../lernsteuerung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
 import { felderFuer, tippe, bereit, naechsteTaste, kandidaten, tastenZu, probeVon, fahrtDauer, HAUS_ABSTAND, tickZeiten, naechsteFreude, witz, istKlein, kandidatenKlein, KLEIN_BIS, staebe, stabDicke } from "./logik.js";
 
@@ -68,8 +69,6 @@ const FOLGE_MAX_MS = 2700;
 const NACH_WIRKUNG_MS = 150;
 /** Der Stufenwechsel des Umschlags (Aufkleber ab, Farben weg) dauert so lange; ein Tipp kürzt ab. */
 const WECHSEL_MS = 1200;
-/** Eine neue Aufgabe beginnt nur, solange von der Rundenlänge noch so viel übrig ist (wie M37). */
-const LETZTE_AUFGABE_MS = 30000;
 /** So lange wartet die Pause längstens auf die letzten Sätze (je etwa 2 s, dazu die Ruhe dazwischen; eine Notbremse,
  * falls die Stimme hängt – die Stimme selbst bricht spätestens nach Dauer der Datei plus 2 s ab). */
 const SATZ_WARTE_MS = 9000;
@@ -581,8 +580,6 @@ let vorigeFreude = /** @type {string | null} */ (null);
 let seitWitz = 0;
 /** Die Wirkung der letzten Lösung (die Folge wartet darauf). @type {Promise<any>} */
 let wirkungFertig = Promise.resolve();
-/** Die Einführung läuft: die Aufgabe nimmt keine Tasten an. */
-let einfuehrungLaeuft = false;
 
 /**
  * Timo freut sich, nie zweimal gleich: Fähnchen am Briefkasten klappt hoch, Pirouette, selten ein Wheelie (Idee §7).
@@ -696,7 +693,7 @@ function stelleAufgabe(aufgabe, melde) {
 
   /** @param {string} taste */
   const beiTaste = (taste) => {
-    if (fertig || einfuehrungLaeuft) return;
+    if (fertig || E.laeuft) return;
     // Die Eingabe des Fehlversuchs steht noch auf dem Umschlag; die erste neue Taste beginnt von vorn.
     raeumeFehlerBild();
     if (klein) {
@@ -713,7 +710,7 @@ function stelleAufgabe(aufgabe, melde) {
   };
 
   const pruefe = () => {
-    if (fertig || einfuehrungLaeuft || !bereit(eingabe, felder)) return;
+    if (fertig || E.laeuft || !bereit(eingabe, felder)) return;
     const getippt = eingabe;
     const zahl = Number(getippt);
     eingabe = "";
@@ -848,116 +845,120 @@ async function bereiteBild(stufe) {
 // lernt. Im kleinen Spiel (bis 10) ohne Fertig und Löschen. Weiter geht es bei den Tasten nur mit dem Tipp des Kindes,
 // nie nach einer Zeit. Die Hilfe sagt den Schritt noch einmal. Nicht gebucht.
 
-/** Taste, auf der in der Einführung der Sonnenring liegt (für richtigerZug). @type {string | null} */
-let einfuehrungTaste = null;
-
-/** Das Kind tippt die Folge von Tasten, je eine im Sonnenring; andere Tasten tun nichts. @param {string[]} folge @param {number} felder */
-function kindTippt(folge, felder) {
-  return new Promise((ok) => {
-    let i = 0;
-    let eingabe = "";
-    const ring = () => {
-      const t = folge[i];
-      einfuehrungTaste = t;
+/**
+ * Das Kind tippt die Folge von Tasten, je eine im Sonnenring; andere Tasten tun nichts. Jede Taste ist ein Zug der
+ * Einführung (E.kind, für den Prüfstand). @param {string[]} folge @param {number} felder
+ */
+async function kindTippt(folge, felder) {
+  let eingabe = "";
+  try {
+    for (const t of folge) {
       tastatur.markiere(t === "fertig" ? null : t);
       fertigKnopf.classList.toggle("markiert", t === "fertig");
-    };
-    const weiter = (/** @type {string} */ t) => {
-      if (t !== folge[i]) return;
+      await E.kind(zug(t), eineTaste(t));
       if (t !== "fertig") {
         eingabe = tippe(eingabe, t, felder);
         setzeEingabe(eingabe);
       }
-      i++;
-      if (i < folge.length) return ring();
-      tastatur.removeEventListener("taste", taste);
-      fertigKnopf.removeEventListener("click", fertig);
-      einfuehrungTaste = null;
-      tastatur.markiere(null);
-      fertigKnopf.classList.remove("markiert");
-      ok(undefined);
-    };
-    const taste = (/** @type {any} */ e) => weiter(e.detail.zeichen);
-    const fertig = () => weiter("fertig");
-    tastatur.addEventListener("taste", taste);
-    fertigKnopf.addEventListener("click", fertig);
-    ring();
-  });
-}
-
-/** Was die Hilfe in der Einführung tut: den Satz des Schritts noch einmal sagen. @type {(() => any) | null} */
-let einfuehrungHilfe = null;
-
-/**
- * Ein Satz der Einführung: wartet, bis er gesprochen ist; ohne Ton steht er kurz als Blase da und bleibt eine Lesezeit
- * lang. Die Atempause zwischen den Sätzen macht die Sprechschlange (SATZ_PAUSE_MS). @param {(o: { zeigen: boolean }) => Promise<any>} sag
- */
-async function satz(sag) {
-  const zeigen = !leiste.ton;
-  await sag({ zeigen });
-  if (zeigen) await warte(lesezeit(blase.text));
-}
-
-/** Spielt die Einführung in der Fassung der ersten Aufgabe. @param {string} [stufe] */
-async function einfuehrung(stufe = "material") {
-  einfuehrungLaeuft = true;
-  const e = einleitung;
-  try {
-    stand.phase = "einfuehrung";
-    ueberspringeAlles();
-    // Timo rollt erst zur Post zurück (kein plötzlich anderes Bild), die Türen schließen sich, der Schoß ist leer.
-    umschlag.style.visibility = "hidden";
-    if (hausBei !== 0) await fahre(hausBei, 0, 900);
-    besucht = new Set();
-    stelleTueren();
-    bildStufe = stufe;
-    // Die Geschichte.
-    einfuehrungHilfe = () => satz(e.briefe);
-    await satz(e.postbotin);
-    await neuerUmschlag(5, stufe);
-    await satz(e.briefe);
-    einfuehrungHilfe = () => satz(e.tippen);
-    await satz(e.hoeren);
-    await satz(e.tippen);
-    // Das Beispiel: das Kind tippt selbst.
-    await satz(e.zuhoeren);
-    await erzaehler.wort(5);
-    await warte(250);
-    einfuehrungHilfe = () => erzaehler.wort(5).then(() => satz(e.tippeFuenf));
-    const fuenf = kindTippt(["5"], felderVon(5, stufe));
-    await satz(e.tippeFuenf);
-    await fuenf;
-    if (!klein) {
-      einfuehrungHilfe = () => satz(e.fertig).then(() => satz(e.haken));
-      const fertig = kindTippt(["fertig"], felderVon(5, stufe));
-      await satz(e.fertig);
-      await satz(e.haken);
-      await fertig;
     }
-    einfuehrungHilfe = null;
-    await Promise.all([wirkungRichtig(5, { freude: false }), satz(e.bringt)]);
-    // Was bei einer anderen Zahl passiert, wie man korrigiert, was man lernt.
-    await satz(e.andere);
-    await satz(e.faehrt);
-    await satz(e.nochmal);
-    if (!klein) {
-      await satz(e.aendern);
-      tastatur.markiere("loeschen");
-      await satz(e.loeschen);
-      tastatur.markiere(null);
-    }
-    if (!klein) grossErklaert = true;
-    await satz(klein ? e.lernenKlein : e.lernen);
-    // Übergang zur ersten Aufgabe (Christian, 2026-11-16).
-    await satz(e.los);
   } finally {
-    ueberspringeAlles();
-    einfuehrungLaeuft = false;
-    einfuehrungTaste = null;
-    einfuehrungHilfe = null;
     tastatur.markiere(null);
     fertigKnopf.classList.remove("markiert");
   }
+}
+
+/** Wartet, bis das Kind die Taste t tippt (oder Fertig, wenn t „fertig“ ist). @param {string} t */
+function eineTaste(t) {
+  return new Promise((ok) => {
+    const getippt = (/** @type {string} */ z) => {
+      if (z !== t) return;
+      tastatur.removeEventListener("taste", taste);
+      fertigKnopf.removeEventListener("click", fertig);
+      ok(undefined);
+    };
+    const taste = (/** @type {any} */ e) => getippt(e.detail.zeichen);
+    const fertig = () => getippt("fertig");
+    tastatur.addEventListener("taste", taste);
+    fertigKnopf.addEventListener("click", fertig);
+  });
+}
+
+/**
+ * Hilfe in einem Schritt, in dem das Kind tippt: `sag` sagt den ganzen Schritt noch einmal (mehrere Sätze). E.satz setzt
+ * die Hilfe auf seinen eigenen Satz; danach gilt wieder der ganze Schritt, solange das Kind ihn nicht getippt hat.
+ * @param {Promise<any>} getan @param {() => Promise<any>} sag
+ */
+function hilfeBis(getan, sag) {
+  let offen = true;
+  getan.then(() => {
+    offen = false;
+  });
+  const h = () => sag().then(() => {
+    if (offen) E.hilfe(h);
+  });
+  E.hilfe(h);
+}
+
+/**
+ * Spielt die Einführung in der Fassung der ersten Aufgabe (rahmen/einfuehrung-lauf.js: Sätze, Lesezeit ohne Ton, Hilfe,
+ * Prüfstand). Mit `r` gilt sie danach als gesehen, und die Rundenzeit beginnt. Die Atempause zwischen den Sätzen macht
+ * die Sprechschlange (SATZ_PAUSE_MS).
+ * @param {string} [stufe] @param {{ einfuehrungGesehen(): void, beginneZeit(): void }} [r]
+ */
+function einfuehrung(stufe = "material", r) {
+  const e = einleitung;
+  const satz = E.satz;
+  return E.spiele(async () => {
+    try {
+      ueberspringeAlles();
+      // Timo rollt erst zur Post zurück (kein plötzlich anderes Bild), die Türen schließen sich, der Schoß ist leer.
+      umschlag.style.visibility = "hidden";
+      if (hausBei !== 0) await fahre(hausBei, 0, 900);
+      besucht = new Set();
+      stelleTueren();
+      bildStufe = stufe;
+      // Die Geschichte.
+      await satz(e.postbotin);
+      await neuerUmschlag(5, stufe);
+      await satz(e.briefe);
+      await satz(e.hoeren);
+      await satz(e.tippen);
+      // Das Beispiel: das Kind tippt selbst.
+      await satz(e.zuhoeren);
+      await erzaehler.wort(5);
+      await warte(250);
+      const fuenf = kindTippt(["5"], felderVon(5, stufe));
+      await satz(e.tippeFuenf);
+      hilfeBis(fuenf, () => erzaehler.wort(5).then(() => satz(e.tippeFuenf)));
+      await fuenf;
+      if (!klein) {
+        const fertig = kindTippt(["fertig"], felderVon(5, stufe));
+        await satz(e.fertig);
+        await satz(e.haken);
+        hilfeBis(fertig, () => satz(e.fertig).then(() => satz(e.haken)));
+        await fertig;
+      }
+      await Promise.all([wirkungRichtig(5, { freude: false }), satz(e.bringt)]);
+      // Was bei einer anderen Zahl passiert, wie man korrigiert, was man lernt.
+      await satz(e.andere);
+      await satz(e.faehrt);
+      await satz(e.nochmal);
+      if (!klein) {
+        await satz(e.aendern);
+        tastatur.markiere("loeschen");
+        await satz(e.loeschen);
+        tastatur.markiere(null);
+      }
+      if (!klein) grossErklaert = true;
+      await satz(klein ? e.lernenKlein : e.lernen);
+      // Übergang zur ersten Aufgabe (Christian, 2026-11-16).
+      await satz(e.los);
+    } finally {
+      ueberspringeAlles();
+      tastatur.markiere(null);
+      fertigKnopf.classList.remove("markiert");
+    }
+  }, r);
 }
 
 /** Fertig und Löschen sind schon einmal erklärt (in der Einführung oder im Wechsel), je Start. */
@@ -980,58 +981,56 @@ async function zeigeWechsel(ein, haeuserNr) {
  * Bild“, spielbau.md §8). Zu 11–20 beim ersten Mal je Start eine Mini-Einführung nur für das Neue: die Häuser über 10
  * stehen auf, Fertig und Löschen kommen dazu, das Kind tippt 13 und Fertig selbst; später nur der sichtbare Wechsel und
  * zwei Sätze. Zurück zu bis 10: die Häuser über 10 und die Knöpfe gehen weg, zwei Sätze.
+ * Ohne Runde: die Rundenzeit läuft schon.
  * @param {boolean} zuKlein @param {string} stufe
  */
-async function wechsle(zuKlein, stufe) {
-  einfuehrungLaeuft = true;
+function wechsle(zuKlein, stufe) {
   const e = einleitung;
-  try {
-    stand.phase = "einfuehrung";
-    ueberspringeAlles();
-    umschlag.style.visibility = "hidden";
-    const sichtbar = Array.from({ length: 10 }, (_, i) => KLEIN_BIS + 1 + i);
-    if (zuKlein) {
-      if (hausBei > KLEIN_BIS) await fahre(hausBei, KLEIN_BIS, 900);
-      await zeigeWechsel(false, sichtbar);
-      setzeKlein(true);
-      await satz(e.wiederKlein);
-      await satz(e.einTipp);
-    } else {
-      setzeKlein(false);
-      await zeigeWechsel(true, sichtbar);
-      await satz(e.groesser);
-      await satz(e.zweiZiffern);
-      if (!grossErklaert) {
-        await neuerUmschlag(13, stufe);
-        await satz(e.zuhoeren);
-        await erzaehler.wort(13);
-        einfuehrungHilfe = () => erzaehler.wort(13).then(() => satz(e.einsDrei));
-        const tippen = kindTippt(["1", "3"], felderVon(13, stufe));
-        await satz(e.einsDrei);
-        await tippen;
-        einfuehrungHilfe = () => satz(e.fertig).then(() => satz(e.haken));
-        const fertig = kindTippt(["fertig"], felderVon(13, stufe));
-        await satz(e.fertig);
-        await satz(e.haken);
-        await fertig;
-        einfuehrungHilfe = null;
-        await Promise.all([wirkungRichtig(13, { freude: false }), erzaehler.bei(13)]);
-        await satz(e.aendern);
-        tastatur.markiere("loeschen");
-        await satz(e.loeschen);
-        tastatur.markiere(null);
-        grossErklaert = true;
+  const satz = E.satz;
+  return E.spiele(async () => {
+    try {
+      ueberspringeAlles();
+      umschlag.style.visibility = "hidden";
+      const sichtbar = Array.from({ length: 10 }, (_, i) => KLEIN_BIS + 1 + i);
+      if (zuKlein) {
+        if (hausBei > KLEIN_BIS) await fahre(hausBei, KLEIN_BIS, 900);
+        await zeigeWechsel(false, sichtbar);
+        setzeKlein(true);
+        await satz(e.wiederKlein);
+        await satz(e.einTipp);
+      } else {
+        setzeKlein(false);
+        await zeigeWechsel(true, sichtbar);
+        await satz(e.groesser);
+        await satz(e.zweiZiffern);
+        if (!grossErklaert) {
+          await neuerUmschlag(13, stufe);
+          await satz(e.zuhoeren);
+          await erzaehler.wort(13);
+          const tippen = kindTippt(["1", "3"], felderVon(13, stufe));
+          await satz(e.einsDrei);
+          hilfeBis(tippen, () => erzaehler.wort(13).then(() => satz(e.einsDrei)));
+          await tippen;
+          const fertig = kindTippt(["fertig"], felderVon(13, stufe));
+          await satz(e.fertig);
+          await satz(e.haken);
+          hilfeBis(fertig, () => satz(e.fertig).then(() => satz(e.haken)));
+          await fertig;
+          await Promise.all([wirkungRichtig(13, { freude: false }), erzaehler.bei(13)]);
+          await satz(e.aendern);
+          tastatur.markiere("loeschen");
+          await satz(e.loeschen);
+          tastatur.markiere(null);
+          grossErklaert = true;
+        }
       }
+      await satz(e.los);
+    } finally {
+      ueberspringeAlles();
+      tastatur.markiere(null);
+      fertigKnopf.classList.remove("markiert");
     }
-    await satz(e.los);
-  } finally {
-    ueberspringeAlles();
-    einfuehrungLaeuft = false;
-    einfuehrungTaste = null;
-    einfuehrungHilfe = null;
-    tastatur.markiere(null);
-    fertigKnopf.classList.remove("markiert");
-  }
+  });
 }
 
 // =====================================================================================================
@@ -1069,7 +1068,9 @@ const ORTE = { hilfe: "#hilfe >>> ls-knopf", haus: "#leiste >>> a.haus", weiter:
 /** Wo Weiter liegt: in der Pause oder auf dem Bildschirm „Gekonnt“. */
 let weiterOrt = ORTE.weiter;
 const weiterZug = () => ({ art: "tippen", von: weiterOrt });
-const einfuehrungsZug = () => (einfuehrungTaste ? zug(einfuehrungTaste) : null);
+/** Die Einführung: Sätze, Hilfe und Zug für den Prüfstand (rahmen/einfuehrung-lauf.js). */
+const E = einfuehrungsLauf({ ton: () => leiste.ton, text: () => blase.text, stand });
+const einfuehrungsZug = () => E.zug;
 meldePruefSchnittstelle({
   zustand: () => ({ ...stand }),
   zuege: () => (stand.phase === "aufgabe" ? offeneAufgabe?.zuege() ?? [] : stand.phase === "pause" ? [weiterZug()] : stand.phase === "einfuehrung" ? [einfuehrungsZug()].filter(Boolean) : []),
@@ -1081,7 +1082,7 @@ meldePruefSchnittstelle({
 /** @type {(() => void) | null} */
 let hilfeTippen = null;
 // In der Einführung sagt die Hilfe den Schritt noch einmal (sonst hörte das Kind nur den Namen „Hilfe“).
-hilfe.addEventListener("hilfe", () => { if (einfuehrungLaeuft) einfuehrungHilfe?.(); else hilfeTippen?.(); });
+hilfe.addEventListener("hilfe", () => { if (!E.hilfeGedrueckt()) hilfeTippen?.(); });
 
 /**
  * Spielt eine Aufgabe bis zur Lösung.
@@ -1241,7 +1242,7 @@ let rundenZahl = 0;
 
 // „Anleitung“: die Einführung im Spielbild jederzeit wieder (während einer Aufgabe); danach steht die Aufgabe wieder da.
 $("anleitung")?.addEventListener("click", async () => {
-  if (stand.phase !== "aufgabe" || einfuehrungLaeuft) return;
+  if (stand.phase !== "aufgabe" || E.laeuft) return;
   const merke = { haus: hausBei, besucht: new Set(besucht), aufgabe: offeneAufgabe, stufe: bildStufe ?? "material" };
   await einfuehrung(stand.lernstufe === "kopf" ? "kopf" : "material");
   // Zurück an den Ort vor der Einführung: Timo rollt zum Haus, die Türen stehen wieder wie vorher.
@@ -1268,11 +1269,9 @@ async function spieleRunde(vorschau) {
     r = vorschauRunde();
   }
 
-  // Die Rundenzeit beginnt nach der Einführung (sie erzählt in Ruhe; sonst endet die Runde eines sicheren Kindes
-  // vor „gekonnt“ – G14, gefunden in M08, Christian 2026-11-16).
-  let beginn = Date.now();
-  const zeitDa = () => Date.now() - beginn < rundenMs() - Math.min(LETZTE_AUFGABE_MS, rundenMs() / 4);
-  const naechste = () => (zeitDa() ? aufStufe(r.naechste()) : null);
+  // Die Rundenzeit beginnt nach der Einführung (E.spiele ruft r.beginneZeit(), G14); in den letzten 30 s gibt die
+  // Lernsteuerung keine neue Aufgabe mehr.
+  const naechste = () => aufStufe(r.naechste());
   let aufgabe = naechste();
   if (!aufgabe && vorschau) {
     r = vorschauRunde();
@@ -1291,14 +1290,11 @@ async function spieleRunde(vorschau) {
   if (!einfuehrungGespielt && erste && (!vorschau || params.has("einfuehrung"))) {
     einfuehrungGespielt = true;
     setzeKlein(kleinJetzt);
-    await einfuehrung(stufeJetzt);
-    r.einfuehrungGesehen();
-    beginn = Date.now();
-    r.beginneZeit();
+    await einfuehrung(stufeJetzt, r);
   } else if (erste) {
     // Später: hat sich das Thema geändert, sagt die Stimme es (ein Satz, Christian 2026-11-16); wechselt dabei
     // „bis 10“ und „11 bis 20“, zeigt eine kurze Szene den Wechsel.
-    if (r.themaId && letztesThema && r.themaId !== letztesThema && r.sprich) await satz((o) => spricht(() => blase.sage(r.sprich, o)));
+    if (r.themaId && letztesThema && r.themaId !== letztesThema && r.sprich) await E.satz((o) => spricht(() => blase.sage(r.sprich, o)));
     if (kleinJetzt !== klein) await wechsle(kleinJetzt, stufeJetzt);
   }
   if (r.themaId) letztesThema = r.themaId;
