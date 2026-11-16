@@ -61,3 +61,28 @@ export function ssml(eintrag, einstellungen, aussprache = {}, woerter = {}) {
     `<voice name="${xml(einstellungen.stimme)}">${koerper}</voice></speak>`
   );
 }
+
+/**
+ * Klartext für Stimmen ohne SSML (ElevenLabs): `sprich` des Textes und der Wörterliste angewandt.
+ * Liefert null, wenn eine Korrektur nur als SSML geht (ssml je Text, Wort mit ssml oder sprache) –
+ * dann bleibt dieser Text bei Azure, das SSML versteht.
+ * @param {{ text: string }} eintrag
+ * @param {Aussprache} [aussprache]
+ * @param {Record<string, Wort>} [woerter]
+ * @returns {string | null}
+ */
+export function klartext(eintrag, aussprache = {}, woerter = {}) {
+  if (aussprache.ssml) return null;
+  const text = aussprache.sprich ?? eintrag.text;
+  const liste = Object.keys(woerter).sort((a, b) => b.length - a.length);
+  if (!liste.length) return text;
+  const muster = new RegExp(`${RAND}(${liste.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})${ENDE}`, "gu");
+  let nurSsml = false;
+  const ergebnis = text.replace(muster, (w) => {
+    const e = woerter[w];
+    if (e.sprich !== undefined) return e.sprich;
+    nurSsml = true;
+    return w;
+  });
+  return nurSsml ? null : ergebnis;
+}

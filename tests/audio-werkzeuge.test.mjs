@@ -5,7 +5,8 @@ import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from "nod
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { audioSchluessel, normalisiere } from "../spiele/kern/audio.js";
-import { ssml } from "../werkzeuge/audio/ssml.mjs";
+import { klartext, ssml } from "../werkzeuge/audio/ssml.mjs";
+import { elevenlabs } from "../werkzeuge/audio/elevenlabs.mjs";
 import { azure } from "../werkzeuge/audio/azure.mjs";
 import { knopfNamen, literaleAusCode, saetzeAusTexten, sammle } from "../werkzeuge/audio/texte.mjs";
 import { erzeuge } from "../werkzeuge/audio/erzeugen.mjs";
@@ -247,4 +248,53 @@ test("sammle: Seiten der Geschichten (sprich, sonst text)", () => {
   assert.ok(wal.some((e) => e.text.startsWith("Im warmen, hellblauen Meer vor Australien")), "auch die Bücher der Bibliothek werden aufgenommen");
   const katze = eintraege.filter((e) => e.quellen.includes("geschichten/haustiere/geschichte.json"));
   assert.ok(katze.some((e) => e.text.startsWith("Hier liegt Mia.")) && katze.length >= 25, `Sachbuch: Seiten aller Kapitel (${katze.length})`);
+});
+
+test("klartext: sprich angewandt, SSML-Korrektur → null", () => {
+  assert.equal(klartext({ text: "Ida spielt." }, {}, { Ida: { sprich: "Ihda" } }), "Ihda spielt.");
+  assert.equal(klartext({ text: "Ein Einhorn" }, { sprich: "Ein Ein-horn" }), "Ein Ein-horn");
+  assert.equal(klartext({ text: "Hallo" }, { ssml: "<phoneme/>" }), null);
+  assert.equal(klartext({ text: "Mein Computer" }, {}, { Computer: { sprache: "en-US" } }), null);
+  assert.equal(klartext({ text: "Idas Ball" }, {}, { Ida: { sprich: "Ihda" } }), "Idas Ball", "nur ganze Wörter");
+});
+
+test("erzeuge mit ElevenLabs: neue Texte → livia, SSML-Korrektur → Azure, Vorhandenes bleibt", async () => {
+  const MIT = { ...EIN, elevenlabs: { ordner: "livia", varianten: { diktat: { tempo: 0.85 } } } };
+  const azureRufe = [], elRufe = [];
+  const basis = { schreibe: () => {}, synth: async (s) => (azureRufe.push(s), Buffer.from("a")), synthText: async (t, o) => (elRufe.push([t, o?.tempo]), Buffer.from("e")) };
+  // Erst nur Azure: „Alt“ liegt schon vor.
+  const vorher = await erzeuge({ ...basis, einstellungen: EIN, eintraege: [eintrag("Alt")], aussprache: {}, index: { stimme: "", texte: {} } });
+  azureRufe.length = 0;
+  const eintraege = [eintrag("Alt"), eintrag("Neu"), eintrag("Neu", "diktat"), eintrag("Phonem")];
+  const r = await erzeuge({ ...basis, einstellungen: MIT, eintraege, aussprache: { Phonem: { ssml: "<phoneme/>" } }, index: vorher.index });
+  assert.equal(r.bericht.gleich, 1, "vorhandene Azure-Aufnahme wird nicht neu erzeugt");
+  assert.equal(r.index.texte.Alt.datei, vorher.index.texte.Alt.datei);
+  assert.match(r.index.texte.Neu.datei, /^livia\//);
+  assert.match(r.index.texte.Phonem.datei, /^test\//);
+  assert.deepEqual(elRufe, [["Neu", undefined], ["Neu", 0.85]]);
+  assert.equal(azureRufe.length, 1);
+  assert.deepEqual(r.bericht.erzeugt.map((t) => t.anbieter), ["elevenlabs", "elevenlabs", "azure"]);
+  // Zweiter Lauf erzeugt nichts.
+  const z = await erzeuge({ ...basis, einstellungen: MIT, eintraege, aussprache: { Phonem: { ssml: "<phoneme/>" } }, index: r.index });
+  assert.equal(z.bericht.neu, 0);
+  // Prüflauf ohne Erzeuger meldet fehlend.
+  const p = await erzeuge({ einstellungen: MIT, eintraege: [eintrag("Ganz neu")], aussprache: {}, index: { stimme: "", texte: {} } });
+  assert.deepEqual(p.bericht.fehlt, ["Ganz neu"]);
+});
+
+test("elevenlabs: Anfrage, Wiederholung bei 429, Fehlertext", async () => {
+  const anfragen = [];
+  const antworten = [
+    new Response("zu viel", { status: 429 }),
+    new Response("mp3", { status: 200 }),
+    new Response("kaputt", { status: 401 }),
+  ];
+  const synth = elevenlabs({ schluessel: "k", stimme: "V1", modell: "m", format: "mp3_44100_128", fetch: async (u, o) => (anfragen.push([u, o]), antworten.shift()), schlafe: async () => {} });
+  assert.equal(String(await synth("Hallo", { tempo: 0.9 })), "mp3");
+  assert.equal(anfragen.length, 2);
+  assert.equal(anfragen[0][0], "https://api.elevenlabs.io/v1/text-to-speech/V1?output_format=mp3_44100_128");
+  assert.equal(anfragen[0][1].headers["xi-api-key"], "k");
+  assert.deepEqual(JSON.parse(anfragen[0][1].body), { text: "Hallo", model_id: "m", language_code: "de", voice_settings: { speed: 0.9 } });
+  await assert.rejects(synth("x"), /ElevenLabs 401: kaputt/);
+  assert.throws(() => elevenlabs({ stimme: "V", modell: "m", format: "f" }), /Kein ElevenLabs-Schlüssel/);
 });

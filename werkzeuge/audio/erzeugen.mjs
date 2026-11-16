@@ -6,13 +6,16 @@
 //   npm run audio -- --aufraeumen Dateien zu Texten löschen, die kein Spiel mehr spricht
 //
 // Von Hand ersetzte Dateien (aussprache.json › datei) werden nie erzeugt oder überschrieben.
+// Neue oder geänderte Texte spricht ElevenLabs (einstellungen.json › elevenlabs), Texte mit SSML-Korrektur Azure.
+// Vorhandene Aufnahmen bleiben, wie sie sind: Die Prüfsumme h hängt weiter am Azure-SSML, nicht an der Stimme.
 
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { azure, holeSchluessel } from "./azure.mjs";
-import { ssml } from "./ssml.mjs";
+import { elevenlabs, holeElevenlabsSchluessel } from "./elevenlabs.mjs";
+import { klartext, ssml } from "./ssml.mjs";
 import { sammle } from "./texte.mjs";
 import { findeSpielordner, ordneZu, texteDesSpiels, trageEin } from "../kosten/kosten.mjs";
 
@@ -27,20 +30,22 @@ const kurz = (s, n = 12) => createHash("sha1").update(s).digest("hex").slice(0, 
  * @param {{
  *   eintraege: Eintrag[],
  *   index: Index,
- *   einstellungen: { stimme: string, ordner: string, zahlen?: boolean, varianten?: Record<string, { tempo?: string }> },
+ *   einstellungen: { stimme: string, ordner: string, zahlen?: boolean, varianten?: Record<string, { tempo?: string }>,
+ *     elevenlabs?: { ordner: string, varianten?: Record<string, { tempo?: number }> } },
  *   aussprache: Record<string, import("./ssml.mjs").Aussprache>,
  *   woerter?: Record<string, import("./ssml.mjs").Wort>,
  *   synth?: (ssml: string) => Promise<Buffer>,
+ *   synthText?: (text: string, o?: { tempo?: number }) => Promise<Buffer>,
  *   schreibe?: (datei: string, daten: Buffer) => void,
  *   loesche?: (datei: string) => void,
  *   aufraeumen?: boolean,
  *   melde?: (zeile: string) => void,
  * }} o
  */
-export async function erzeuge({ eintraege, index, einstellungen, aussprache, woerter = {}, synth, schreibe, loesche, aufraeumen = false, melde = () => {} }) {
+export async function erzeuge({ eintraege, index, einstellungen, aussprache, woerter = {}, synth, synthText, schreibe, loesche, aufraeumen = false, melde = () => {} }) {
   /** @type {Record<string, IndexEintrag>} */
   const texte = {};
-  const bericht = { neu: 0, gleich: 0, hand: 0, fehlt: /** @type {string[]} */ ([]), zahl: /** @type {string[]} */ ([]), verwaist: /** @type {string[]} */ ([]), zeichen: 0, erzeugt: /** @type {{ text: string, zeichen: number }[]} */ ([]), fehler: "" };
+  const bericht = { neu: 0, gleich: 0, hand: 0, fehlt: /** @type {string[]} */ ([]), zahl: /** @type {string[]} */ ([]), verwaist: /** @type {string[]} */ ([]), zeichen: 0, erzeugt: /** @type {{ text: string, zeichen: number, anbieter: string }[]} */ ([]), fehler: "" };
 
   for (const e of eintraege) {
     const alt = index.texte[e.schluessel];
@@ -61,15 +66,24 @@ export async function erzeuge({ eintraege, index, einstellungen, aussprache, woe
       bericht.gleich += 1;
       continue;
     }
-    if (!synth || !schreibe || bericht.fehler) {
+    const el = einstellungen.elevenlabs;
+    const text = el ? klartext(e, korrektur, woerter) : null;
+    const anbieter = text !== null ? "elevenlabs" : "azure";
+    const erzeuger = anbieter === "elevenlabs" ? synthText : synth;
+    if (!erzeuger || !schreibe || bericht.fehler) {
       bericht.fehlt.push(e.schluessel);
       if (alt) texte[e.schluessel] = alt;   // im Prüflauf nichts verlieren
       continue;
     }
-    const datei = `${einstellungen.ordner}/${kurz(e.schluessel)}.mp3`;
+    const ordner = anbieter === "elevenlabs" ? /** @type {any} */ (el).ordner : einstellungen.ordner;
+    const datei = `${ordner}/${kurz(e.schluessel)}.mp3`;
     melde(`erzeuge ${datei}  ${e.schluessel}`);
     try {
-      schreibe(datei, await synth(s));
+      const daten =
+        anbieter === "elevenlabs"
+          ? await /** @type {NonNullable<typeof synthText>} */ (synthText)(/** @type {string} */ (text), { tempo: e.variante ? el?.varianten?.[e.variante]?.tempo : undefined })
+          : await /** @type {NonNullable<typeof synth>} */ (synth)(s);
+      schreibe(datei, daten);
     } catch (err) {
       // Abbruch: was bis hier erzeugt wurde, bleibt im Index (bezahlte Zeichen gehen nicht verloren).
       bericht.fehler = String(/** @type {any} */ (err)?.message ?? err);
@@ -80,7 +94,7 @@ export async function erzeuge({ eintraege, index, einstellungen, aussprache, woe
     texte[e.schluessel] = { datei, h, gehoert: false };
     bericht.neu += 1;
     bericht.zeichen += e.text.length;
-    bericht.erzeugt.push({ text: e.text, zeichen: e.text.length });
+    bericht.erzeugt.push({ text: e.text, zeichen: e.text.length, anbieter });
   }
 
   for (const [k, alt] of Object.entries(index.texte)) {
@@ -130,12 +144,22 @@ export function speichereAussprache(aussprache) {
  */
 export function trageZeichenEin(erzeugt, { spiel = "", spielordner = findeSpielordner(WURZEL), datum = new Date().toISOString().slice(0, 10) } = {}) {
   if (!erzeugt.length) return { je: {}, ohneSpiel: 0 };
+  const el = erzeugt.filter((t) => t.anbieter === "elevenlabs");
+  if (el.length && el.length < erzeugt.length) {
+    // Je Anbieter ein eigener Eintrag, damit die Notiz stimmt.
+    const a = trageZeichenEin(erzeugt.filter((t) => t.anbieter !== "elevenlabs"), { spiel, spielordner, datum });
+    const b = trageZeichenEin(el, { spiel, spielordner, datum });
+    const je = { ...a.je };
+    for (const [o, n] of Object.entries(b.je)) je[o] = (je[o] ?? 0) + n;
+    return { je, ohneSpiel: a.ohneSpiel + b.ohneSpiel };
+  }
+  const notiz = el.length ? "npm run audio · ElevenLabs Livia, Abrechnung über das ElevenLabs-Abo" : "npm run audio";
   const alle = erzeugt.reduce((a, t) => a + t.zeichen, 0);
   const { je, ohneSpiel } = spiel
     ? { je: { [spiel]: alle }, ohneSpiel: 0 }
     : ordneZu(erzeugt, Object.fromEntries(spielordner.map((o) => [o, texteDesSpiels(o)])));
   for (const [ordner, menge] of Object.entries(je))
-    trageEin(ordner, { datum, phase: "stimme", posten: "stimme", einheit: "zeichen", menge, notiz: "npm run audio" });
+    trageEin(ordner, { datum, phase: "stimme", posten: "stimme", einheit: "zeichen", menge, notiz });
   return { je, ohneSpiel };
 }
 
@@ -150,9 +174,18 @@ export async function lauf({ pruefen = false, aufraeumen = false, spiel = "", me
   const index = ladeIndex();
   const { eintraege, offen } = sammle(WURZEL);
   let kosten = { je: /** @type {Record<string, number>} */ ({}), ohneSpiel: 0 };
+  // Erst beim ersten Bedarf anlegen: Ein Lauf, der nur ElevenLabs braucht, braucht keine Azure-Anmeldung (und umgekehrt).
+  /** @type {any} */ let az, el;
   const synth = pruefen
     ? undefined
-    : azure({ schluessel: holeSchluessel(einstellungen), region: process.env.AZURE_SPEECH_REGION ?? einstellungen.region, format: einstellungen.format });
+    : (/** @type {string} */ s) =>
+        (az ??= azure({ schluessel: holeSchluessel(einstellungen), region: process.env.AZURE_SPEECH_REGION ?? einstellungen.region, format: einstellungen.format }))(s);
+  const e11 = einstellungen.elevenlabs;
+  const synthText =
+    pruefen || !e11
+      ? undefined
+      : (/** @type {string} */ t, /** @type {any} */ o) =>
+          (el ??= elevenlabs({ schluessel: holeElevenlabsSchluessel(WURZEL), stimme: e11.stimme, modell: e11.modell, format: e11.format }))(t, o);
   const { index: neu, bericht } = await erzeuge({
     eintraege,
     index,
@@ -160,6 +193,7 @@ export async function lauf({ pruefen = false, aufraeumen = false, spiel = "", me
     aussprache: aussprache.texte ?? {},
     woerter: aussprache.woerter ?? {},
     synth,
+    synthText,
     schreibe: pruefen
       ? undefined
       : (datei, daten) => {
