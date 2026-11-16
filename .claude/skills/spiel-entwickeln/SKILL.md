@@ -54,7 +54,7 @@ Platzhalter wie in `.claude/workflows/spiel-bauen.js`).
 cd <Hauptrepo> && node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.json \
   --transkripte ~/.claude/projects/-Users-christian-Code-einhorn-lernspiele/ \
   --steuerung "${VERWALTUNG_TRANSKRIPT:-$(ls -t ~/.claude/projects/-Users-christian-Code-einhorn-lernspiele/*.jsonl | head -1)}" \
-  --audio [--merge] [--parken "<Grund>"]
+  --audio [--spielbild] [--merge] [--parken "<Grund>"]
 ```
 
 - `--transkripte` darf der ganze Projektordner sein: gebucht werden nur Agenten mit der Marke dieses Laufs, jeder
@@ -65,9 +65,11 @@ cd <Hauptrepo> && node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.
   „kein Fast-Forward“: im Worktree `git merge main` (Konflikte in `spiele.json` additiv lösen), committen, dann den
   Prüfstand einmal direkt laufen lassen (`node werkzeuge/spielbau/pruefstand.mjs --lauf … --runde 3`); grün →
   Abschluss mit `--merge` wiederholen, rot → parken.
-- `status: freigabe` → `--audio --parken "Freigabe nötig: <Frage>"`; die Frage steht im Ergebnis des Workflows.
-- `status: geparkt` → `--parken "<Grund>"`; trag zuvor in die Idee einen Abschnitt „Geparkt“ ein (Datum, Grund,
+- `status: freigabe` → `--audio --spielbild --parken "Freigabe nötig: <Frage>"`; die Frage steht im Ergebnis des Workflows.
+- `status: geparkt` → `--spielbild --parken "<Grund>"`; trag zuvor in die Idee einen Abschnitt „Geparkt“ ein (Datum, Grund,
   offene Befunde aus dem Ergebnis, Frage an Christian) und committe ihn.
+- **Spielbild ansehen, bevor es bleibt** (Christian, 2026-11-16, M08): Die Figur entspricht ihrer Beschreibung, und
+  das Lernmaterial stimmt (Zahl und Farbe der Perlen, Ziffern). Sonst neu erzeugen.
 - **Anhören ist Christians Sache:** Audio nie als angehört melden.
 
 ## Schlussmeldung (deine letzte Nachricht, kurz)

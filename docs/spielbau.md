@@ -39,7 +39,8 @@ Ein Spiel hat genau einen Kern, und alles andere muss sich vor ihm rechtfertigen
 - **Eine Wirkung**, die man sieht und hört: Sie beginnt sofort (unter 0,3 s nach dem Tippen), dauert etwa 2,5 s,
   höchstens 3 s (wie `grundsaetze-bilder.md` B6), und endet in einem Bild, das bleibt. Der nächste Tipp überspringt sie.
   **Ausnahme (Christian, 2026-11-16):** Ist die Dauer selbst das Lernziel (wie weit ist es?), dauert die Wirkung so
-  lange, wie die Sache es verlangt – in M06 fährt Timo immer gleich schnell, zu Haus 45 also länger als zu Haus 5.
+  lange, wie die Sache es verlangt, **höchstens 8 s** (Christian, 2026-11-16: „das reicht als Lerneffekt“) – in M06
+  fährt Timo immer gleich schnell, zu Haus 45 also länger als zu Haus 5.
   Eine Fahrt, die immer gleich lang dauert, verwischt die Entfernung. Der nächste Tipp überspringt auch hier.
 - **Ein Takt:** Für ein sicheres Kind vergehen von der Aufgabe bis zur nächsten Aufgabe unter 10 s.
 - **Fünf-Sekunden-Test:** Wer das Spiel einmal vorgemacht bekommen hat (Einführung), weiß ohne Satz, was zu tun ist.
@@ -175,6 +176,13 @@ alle Spiele gilt deshalb:
 - **Kein Satz wird vom Spiel abgeschnitten**, nur ein Tipp des Kindes darf ihn abbrechen: Das Spiel wartet
   (`await blase.sage(…)`), bevor es den nächsten Satz sagt. Die Stimme schreibt sonst „Satz abgeschnitten“ ins
   Protokoll, und der Prüfstand wird rot.
+- **Keine Abkürzungen, die nicht eingeführt sind** (Christian, 2026-11-16, M08: „Z und E wird nicht erklärt“).
+  Beschriftungen stehen ausgeschrieben („Zehner“, „Einer“), bis ein Thema die Abkürzung selbst einführt. Die
+  Einführung zeigt jede Beschriftung mit dem Sonnenring und nennt sie.
+- **Die Rundenzeit beginnt nach der Einführung.** Die Einführung erzählt in Ruhe und dauert über 30 s; zählt sie mit,
+  endet die Runde eines sicheren Kindes vor „gekonnt“ (G14).
+- **Ohne Ton bleibt jeder Satz der Einführung eine Lesezeit lang stehen**, auch bei „Bewegung reduzieren“. Nur ein
+  Tipp des Kindes kürzt ab, nie die Einstellung.
 - **Prüffrage:** Muss das Kind etwas verstehen oder übertragen, das nicht zu sehen ist? Dann ist es zu schwer – das
   Bild wird einfacher, nicht die Erklärung länger.
 <!-- ende regeln -->
@@ -186,6 +194,15 @@ Das Bauheft ist die einzige Quelle der Agenten; dort sammelt sich Gewicht am lei
 - **Eine neue Regel kommt nur hinein, wenn eine alte wegfällt oder gekürzt wird.** Der Regelblock oben bleibt unter
   etwa 4 500 Token, das ganze Bauheft eines Spiels unter 25 000 Token; `tests/skill-spiel-entwickeln.test.mjs` prüft
   beides.
+- **Die Bühne ist ein Ort, an dem man gern ist** (Christian, 2026-11-16, M08: „wenig einladend“). Sie ist ein echter
+  Ort aus der Farbwelt mit Licht und Tiefe: Wand und Boden, ein Fenster, wenige große Dinge im Stil der Runde
+  (Beispiel: der Werkraum in `m08-stellentafel/raum.js`), nie leere Farbflächen. Das Lernfeld liegt darin als Matte
+  (Papier, Naht) und ist das Hellste. Die Welt schmückt nie mit Bedeutungsfarben (C3). Vor dem Bau der Bühne
+  `frontend-design` laden, die erste Fassung als Screenshot zeigen.
+- **Perlen nach Montessori** (Christian, 2026-11-16, M06/M08): Zehner sind goldene Zehnerstangen, größere Zahlen haben
+  mehrere davon. Die Einer sind ein Stäbchen in der Farbe ihrer Zahl (4 gelb, 7 weiß …), nie einzelne Perlen.
+- **Nur Knöpfe tragen Schatten** (Christian, 2026-11-16, M06): Was man nicht drücken kann (Brief, Karte, Aufgabe,
+  Matte), ist flach.
 - Neue Erkenntnisse aus einem Spiel gehören zuerst in das Werkzeug (Prüfstand, Textprüfung, Bausteine), erst dann in
   einen Satz.
 
@@ -231,7 +248,8 @@ beantwortet zuerst fünf Fragen, dann die Grenzen:
 1. **Würde ein Kind das freiwillig zehnmal spielen?** Woran sieht man es, woran nicht?
 2. **Ist der Spielkern sofort klar?** Held, Handlung, Wirkung; Fünf-Sekunden-Test.
 3. **Ist das Schwierige das Thema oder die Bedienung?**
-4. **Ist es schön?** Stil, Farbe, Bewegung mit Gewicht, nichts ruckelt, nichts ist leer oder überladen.
+4. **Ist es schön, und lädt der Ort ein?** Stil, Farbe, Bewegung mit Gewicht, nichts ruckelt, nichts ist leer oder
+   überladen; jede Beschriftung ist ohne Erklärung lesbar.
 5. **Kommt es ohne Transfer aus?** Alles ist zu sehen, nichts muss übertragen werden; die Einführung wartet auf das Kind (§8).
 
 Dazu die **Streichliste**: was weg kann (mit Grund). Rot ist ein Spiel, wenn eine Grenze G1–G14 verletzt ist, eine
@@ -253,4 +271,6 @@ Agenten des Laufs aus ihren Transkripten (Phasen `idee`, `bau`, `pruefstand`, `p
 ### Parken
 
 Bleibt das Spiel nach zwei Runden rot, oder braucht es ein neues Lernzeichen: Abschnitt „Geparkt“ in der Idee mit
-Grund, offenen Befunden und der Frage an Christian; Kosten-Eintrag `geparkt`; Branch und Worktree bleiben.
+Grund, offenen Befunden und der Frage an Christian; Kosten-Eintrag `geparkt`; Branch und Worktree bleiben. Auch ein
+geparktes Spiel bekommt sein Spielbild (`--spielbild`), sonst fehlt es auf der Karte, sobald es als Probe nach `main`
+kommt (M08).
