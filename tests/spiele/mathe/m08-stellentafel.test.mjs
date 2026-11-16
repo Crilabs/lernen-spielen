@@ -250,3 +250,12 @@ test("Richtig bei Plus: „Zehn und acht. Achtzehn.“ für jede Aufgabe 10 + e"
   assert.equal(TEXTE.richtig["plus:8+10"], "Zehn und acht. Achtzehn.");
   for (let e = 1; e <= 9; e++) assert.ok(TEXTE.richtig[`plus:${e}+10`], String(e));
 });
+
+// Abschlussprüfung: Der Haken darf nie ohne Reaktion bleiben (ein Kind steckte bei 18 − 10 mit „8“ im Zehner fest).
+test("vorFertig: 0 im Zehner rutscht weg, fehlende Einer werden gezeigt", () => {
+  assert.deepEqual(L.vorFertig({ z: "0", e: "8", aktiv: "e" }), { s: { z: "", e: "8", aktiv: "e" }, art: "zahl", nullWeg: true });
+  assert.deepEqual(L.vorFertig({ z: "1", e: "8", aktiv: "e" }), { s: { z: "1", e: "8", aktiv: "e" }, art: "zahl", nullWeg: false });
+  assert.deepEqual(L.vorFertig({ z: "8", e: "", aktiv: "e" }), { s: { z: "8", e: "", aktiv: "e" }, art: "einer-fehlt", nullWeg: false });
+  assert.deepEqual(L.vorFertig({ z: "", e: "", aktiv: "z" }), { s: { z: "", e: "", aktiv: "e" }, art: "einer-fehlt", nullWeg: false });
+  assert.equal(L.zahlAusStellen(L.vorFertig({ z: "0", e: "8", aktiv: "e" }).s), 8);
+});

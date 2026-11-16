@@ -318,5 +318,29 @@
   "einheit": "zeichen",
   "menge": 123,
   "notiz": "Wanderung: Sätze der Einführung (gefilterter Lauf nur M08)"
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 3664,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 3664,
+   "input_tokens_details": {
+    "image_tokens": 3000,
+    "text_tokens": 664
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 5036
+  }
  }
 ]

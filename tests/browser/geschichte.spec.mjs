@@ -98,8 +98,10 @@ for (const typ of [chromium, webkit]) {
   // Text passt oder scrollt und überdeckt keine festen Knöpfe – quer, iPad quer, hoch
   for (const [b, h] of [[1366, 1024], [1180, 820], [820, 1180], [390, 844], [844, 390]]) {
     const lp = await browser.newPage({ viewport: { width: b, height: h } });
+    // hund ist ein Sachbuch: Kapitel 1 aufschlagen (seiten zählt die Seiten des offenen Kapitels)
     await lp.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
-    await lp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
+    await lp.waitForFunction(() => window.lsGeschichte?.kapitelZahl > 0);
+    await lp.evaluate(() => window.lsGeschichte.oeffne(0));
     let passt = true;
     const n = await lp.evaluate(() => window.lsGeschichte.seiten);
     for (let i = 0; i < n; i++) {
@@ -129,7 +131,7 @@ for (const typ of [chromium, webkit]) {
   // Startwahl und Vorlesemodus (ohne Systemstimme: sprich liefert „still“, umgeblättert wird nach der Lesezeit)
   const vp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await vp.addInitScript(() => { try { delete window.speechSynthesis; Object.defineProperty(window, "speechSynthesis", { value: undefined }); } catch {} });
-  await vp.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
+  await vp.goto(`${basis}/spiele/geschichte.html?id=zehnerpaare&pruefen`);   // Kurzgeschichte (Startwahl gibt es nur dort)
   await vp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
   const v = (f, a) => vp.evaluate(f, a);
   pruefe(await v(() => window.lsGeschichte.modus) === null, `${name}: Startwahl vor dem Lesen`);
@@ -170,7 +172,7 @@ for (const typ of [chromium, webkit]) {
   // Ton aus mitten im Vorlesen: Selbst lesen, nichts blättert mehr von selbst
   const op = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await op.addInitScript(() => { try { Object.defineProperty(window, "speechSynthesis", { value: undefined }); } catch {} });
-  await op.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
+  await op.goto(`${basis}/spiele/geschichte.html?id=zehnerpaare&pruefen`);   // Kurzgeschichte (Startwahl gibt es nur dort)
   await op.waitForFunction(() => window.lsGeschichte?.seiten > 0);
   await op.evaluate(() => window.lsGeschichte.waehle("vorlesen"));
   await op.locator("ls-leiste").evaluate((el) => el.shadowRoot.querySelector(".tonknopf").click());
@@ -181,7 +183,7 @@ for (const typ of [chromium, webkit]) {
   // Selbst lesen bei Ton an: nichts wird beim Aufschlagen oder Blättern vorgelesen; der Vorlese-Knopf liest die Seite
   const sp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await sp.addInitScript(() => { try { Object.defineProperty(window, "speechSynthesis", { value: undefined }); } catch {} });
-  await sp.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
+  await sp.goto(`${basis}/spiele/geschichte.html?id=zehnerpaare&pruefen`);   // Kurzgeschichte (Startwahl gibt es nur dort)
   await sp.waitForFunction(() => window.lsGeschichte?.seiten > 0);
   await sp.evaluate(() => window.lsGeschichte.waehle("selbst"));
   await sp.evaluate(() => window.lsGeschichte.weiter());
@@ -195,7 +197,7 @@ for (const typ of [chromium, webkit]) {
   // Ton aus: keine Startwahl, Selbst lesen
   const tp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await tp.addInitScript(() => localStorage.setItem("lernstand-kind-1-einstellungen", JSON.stringify({ "ton.geschichte": false })));
-  await tp.goto(`${basis}/spiele/geschichte.html?id=hund&pruefen`);
+  await tp.goto(`${basis}/spiele/geschichte.html?id=zehnerpaare&pruefen`);   // Kurzgeschichte (Startwahl gibt es nur dort)
   await tp.waitForFunction(() => window.lsGeschichte?.modus === "selbst", null, { timeout: 5000 }).catch(() => {});
   pruefe(await tp.evaluate(() => window.lsGeschichte.modus) === "selbst", `${name}: Ton aus – gleich Selbst lesen`);
   pruefe(await tp.locator("ls-geschichte").evaluate((el) => el.shadowRoot.querySelector(".startwahl").hidden), `${name}: Ton aus – keine Startwahl`);

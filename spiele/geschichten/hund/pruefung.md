@@ -96,3 +96,7 @@ WebP q 82; Prompts in `bilder/herkunft.json`.
 alte Bilder 04 und 12 gelöscht. **Zwischenfall:** Durch einen gemeinsam genutzten Scratchpad lief der erste
 Bildlauf zum Teil mit den Prompts eines anderen Buchs (Biene); 10 Bienenbilder entstanden in diesem Ordner, wurden
 gelöscht und sind in `kosten.json` als „verworfen“ markiert. Kosten in `kosten.json`.
+
+## 4. Titelbild
+
+`bilder/03-05.webp`, Ausschnitt `50% 25%` (gewählt von einem frischen Agenten, 2026-11-16): Kalle, die Hauptfigur, liegt entspannt und freundlich im hellen Gras. Er liegt quer und passt gut in den Streifen: Kopf, Augen, Ohren und Brust bleiben ganz zu sehen.

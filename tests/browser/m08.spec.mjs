@@ -221,6 +221,42 @@ for (const [name, typ] of [["chromium", chromium], ["webkit", webkit]]) {
       }
       await k.close();
     }
+    // Abschlussprüfung: Tipp im Fehlversuch-Flug lässt nichts hängen; der Haken ohne Einer bleibt nie ohne Reaktion.
+    {
+      const k = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+      await k.addInitScript(() => { window.__LS_PRUEFEN__ = true; });
+      const p = await k.newPage();
+      await p.goto(`${basis}?pruefen`);
+      const zustand = () => p.evaluate(() => window.lsPruefen?.zustand());
+      const taste = (/** @type {string} */ z) => p.locator("#tastatur button", { hasText: new RegExp(`^${z}$`) }).first().click();
+      const loeschen = () => p.locator('#tastatur button[data-z="loeschen"]').click();
+      const t0 = Date.now();
+      while (Date.now() - t0 < FRIST_MS && (await zustand())?.phase !== "aufgabe") {
+        const z = await p.evaluate(() => window.lsPruefen?.richtigerZug());
+        if (z) await p.evaluate((zz) => window.lsPruefen.fuehreAus(zz), z);
+        await warte(200);
+      }
+      await warte(400);
+      await taste("9");
+      await taste("9");
+      await p.locator("#fertig").click();
+      await warte(300);
+      await loeschen();
+      await warte(2500);
+      const r1 = await p.evaluate(() => ({ flug: document.querySelectorAll(".flug").length, wackelt: document.querySelectorAll(".platz.passt-nicht").length }));
+      pruefe(r1.flug === 0 && r1.wackelt === 0, `${name}: Tipp im Fehlversuch-Flug lässt nichts hängen (${JSON.stringify(r1)})`);
+      await loeschen();
+      await warte(200);
+      await p.locator("#platz-z").click();
+      await taste("8");
+      await p.locator("#platz-z").click();
+      await warte(100);
+      await p.locator("#fertig").click();
+      await warte(150);
+      const r2 = await p.evaluate(() => ({ anim: document.getElementById("platz-e").getAnimations().length, ring: document.getElementById("platz-e").classList.contains("markiert") }));
+      pruefe(r2.anim > 0 && r2.ring, `${name}: Haken ohne Einer – Einer-Platz wackelt und trägt den Ring (${JSON.stringify(r2)})`);
+      await k.close();
+    }
     // Minus: Die Vorschau bringt zwei Plus-, dann Minusaufgaben (VORSCHAU in spiel.js). In der ersten Minusaufgabe ruft
     // „Anleitung“ die Einführung in der Minus-Fassung auf; ihr Beispiel ist 13 − 10.
     const k = await browser.newContext({ viewport: { width: 1280, height: 800 } });

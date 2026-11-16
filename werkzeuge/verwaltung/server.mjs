@@ -85,7 +85,8 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
         const [basis, rel] = pfad.startsWith("/spiele/")
           ? [join(wurzel, "spiele"), decodeURIComponent(pfad.slice("/spiele/".length))]
           : [SEITE, pfad === "/" ? "index.html" : decodeURIComponent(pfad.slice("/seite/".length))];
-        const datei = normalize(join(basis, rel));
+        // Ordnerpfade (/spiele/, /spiele/mathe/…/) liefern ihre index.html – so öffnet „App öffnen“ die Startseite
+        const datei = normalize(join(basis, rel === "" || rel.endsWith("/") ? rel + "index.html" : rel));
         if (!datei.startsWith(basis + sep) || !existsSync(datei) || !statSync(datei).isFile()) return antwort(404, { fehler: "nicht gefunden" });
         res.writeHead(200, { "content-type": TYPEN[extname(datei)] ?? "application/octet-stream", "cache-control": "no-store" });
         return res.end(readFileSync(datei));

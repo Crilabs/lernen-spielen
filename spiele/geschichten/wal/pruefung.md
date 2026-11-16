@@ -116,3 +116,7 @@ damit die alten Fotos passen):
 20 Bilder neu (24 Bildaufrufe, davon 4 Neuversuche; ein weiterer Aufruf scheiterte am Ratenlimit und kostete nichts),
 12 übernommen und umbenannt; alt 06 und 07 gelöscht (Tauchversuch des Kalbs, kommt im Text nicht mehr als eigene
 Seite vor). Kosten in `kosten.json` (Neufassung 16.11.: Bilder 1,55 €, Claude 13,44 € bis zur Buchung).
+
+## 4. Titelbild
+
+`bilder/03-03.webp`, Ausschnitt `50% 35%` (gewählt von einem frischen Agenten, 2026-11-16): Mira schwimmt mit ihrem Kalb im hellen, klaren Wasser, der Kern des Buchs. Die Buckelwale liegen waagrecht, die Mutter ist im Streifen vom Kopf bis zur Fluke zu sehen.

@@ -127,7 +127,11 @@ Ein **Sachbuch** hat statt `seiten` die Liste `kapitel` (`[{ "titel": "…", "se
 
   Neue Elemente kommen nach `szene.js` und werden in `tests/geschichten.test.mjs` geprüft.
 - `fach` (optional, z. B. `mathe`): Fach für die Kopfleiste (Kachel).
-- `kulisse` (Pflicht): gezeichneter Hintergrund aus `spiele/rahmen/kulissen/kulissen.json` (Dschungel, Strand, Wasser,
+- `titelbild` (Sachbuch): `{ "bild": "bilder/03-02.webp", "fokus": "50% 40%" }` – von der KI nach den Bildern gewählt
+  (Skill sachgeschichte §4a): das Foto, das das Buch am besten zusammenfasst und im Streifen 2 : 1 das Wesentliche
+  zeigt; `fokus` ist der Bildausschnitt (`object-position`). Ohne Feld: das erste Foto, mittig. Auch Deckel in der
+  Bibliothek.
+- `kulisse` (Pflicht; bei Büchern mit Kapiteln ohne Wirkung, sie haben kein Hintergrundbild): gezeichneter Hintergrund aus `spiele/rahmen/kulissen/kulissen.json` (Dschungel, Strand, Wasser,
   Garten, Im Haus, Stadt …), den die Geschichte wählt – nicht wie ein Buch, kein lila Standard (Christian 2026-11-15).
   Neue Kulissen: ruhig, flach im Stil der Runde, Formen nur am Rand.
 - `zaehlung: [links, rechts]` (an einem Foto): die geprüfte Anzahl links und rechts (Zehnerpaare); `verdeckt: 0|1`:
@@ -144,11 +148,14 @@ Ein **Sachbuch** hat statt `seiten` die Liste `kapitel` (`[{ "titel": "…", "se
   der Text auf einer Papierfläche daneben in Andika, beide mit Stufen-Schatten in der Kulissenfarbe; Vorlesen
   (Florian, vorab aufgenommen, `npm run audio`), Weiter und Zurück per Tipp, Wischen und Pfeiltaste, Haus; Fortschritt
   als Punkte ohne Zahl; nach der letzten Seite „Fertig“ (Ereignis `fertig`).
-- **Sachbuch** (`kapitel`, Christian 2026-11-15): Am Anfang steht das **Inhaltsverzeichnis** – Buchtitel, Umschalter
-  „Vorlesen“ / „Selbst lesen“ (bei Ton an ist Vorlesen vorgewählt; bei Ton aus fehlt der Umschalter, es gilt Selbst
-  lesen) und die Kapitel als Karten (Foto der ersten Seite, Titel, Haken für fertig). Gibt es einen Lesestand, steht oben
-  „Weiterlesen: Kapitel n“. Eine Karte schlägt ihr Kapitel auf; es läuft wie eine Geschichte (Punkte je Kapitel), oben in
-  der Textkarte der Knopf „Inhalt“ (`symbole/inhalt.svg`). Am Kapitelende „Kapitel n+1“, im letzten Kapitel „Fertig“;
+- **Sachbuch** (`kapitel`, Christian 2026-11-15/16): Am Anfang steht das **Inhaltsverzeichnis**, offen auf Papier und
+  ohne Hintergrundbild (Spec 2026-11-16-inhaltsverzeichnis): links das **Titelbild** als Streifen 2 : 1 (`titelbild`),
+  darunter groß der Buchtitel und die Knöpfe „Anhören“ und „Lesen“ (machen beim Lesestand weiter, dann steht darunter
+  „Weiter bei Kapitel n“, sonst ab Kapitel 1); rechts alle Kapitel als Liste mit dezenten Linien – rundes Foto der
+  ersten Seite, Titel, Haken für fertig, zwei Symbol-Knöpfe Anhören und Lesen. Der Tipp auf die Zeile öffnet im zuletzt
+  gewählten Modus (gemerkt für alle Bücher; ohne Wahl bei Ton an Anhören); bei Ton aus fehlen die Anhören-Knöpfe. Ein
+  Kapitel läuft wie eine Geschichte (Punkte je Kapitel), oben in der Textkarte der Knopf „Inhalt“
+  (`symbole/inhalt.svg`). Am Kapitelende „Kapitel n+1“, im letzten Kapitel „Fertig“;
   der Vorlesemodus blättert nie über ein Kapitelende. Text mit Absätzen (Leerzeile), langer Text scrollt.
 - **Lesestand:** `<ls-geschichte>` meldet bei jedem Seitenwechsel das Ereignis `stand` (`{ kapitel, seite, fertig,
   kapitelZahl }`); ein Kapitel ist fertig, sobald seine letzte Seite aufgeschlagen ist. `geschichte.html` speichert mit

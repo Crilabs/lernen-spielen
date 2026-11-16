@@ -5,6 +5,7 @@
  "welt": "tiere-der-erdteile",
  "familie": null,
  "kulisse": "wasser",
+ "titelbild": { "bild": "bilder/03-03.webp", "fokus": "50% 35%" },
  "klasse": 2,
  "quellen": [
   {

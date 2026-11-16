@@ -5,6 +5,7 @@
  "welt": "haustiere",
  "familie": null,
  "kulisse": "garten",
+ "titelbild": { "bild": "bilder/03-05.webp", "fokus": "50% 25%" },
  "klasse": 1,
  "quellen": [
   {

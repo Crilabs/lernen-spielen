@@ -23,7 +23,7 @@
 //   zurueck(), fertig } (seite ab 0).
 // Eigenschaften: `seite` (Index), `seiten` (Anzahl), `geladen` (Versprechen, löst mit der Geschichte oder null).
 
-import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
+import { ladeEinstellungen, einstellung, setzeEinstellung } from "../kern/einstellungen.js";
 import { sprich, stille } from "../kern/stimme.js";
 import { protokoll } from "../kern/protokoll.js";
 import { GRUND_CSS, definiere } from "./stil.js";
@@ -42,6 +42,34 @@ const LESEZEIT_MIN_MS = 3000;
 /** Wischweg in Pixeln, ab dem geblättert wird. */
 const WISCH_PX = 60;
 const DAUER_MS = 460;
+/** Einstellung für den zuletzt gewählten Lesemodus der Bücher (Anhören/Lesen), gilt für alle Bücher. */
+const MODUS_EINSTELLUNG = "buch.modus";
+
+/** Nach ladeEinstellungen (tonAn lädt sie). @returns {"vorlesen" | "selbst" | null} */
+function gemerkterModus() {
+  const m = einstellung(MODUS_EINSTELLUNG, null);
+  return m === "vorlesen" || m === "selbst" ? m : null;
+}
+/** @param {"vorlesen" | "selbst"} m */
+function merkeModus(m) {
+  try { setzeEinstellung(MODUS_EINSTELLUNG, m); } catch (e) { protokoll(`ls-geschichte: Modus nicht gemerkt (${e})`); }
+}
+
+/**
+ * Titelbild eines Buchs: `titelbild` als { bild, fokus } (KI-Wahl, Skill sachgeschichte) oder als Pfad; sonst das erste
+ * Foto. fokus ist die object-position für den Streifen 2 : 1 (Vorgabe Mitte).
+ * @param {any} g
+ * @returns {{ bild: string, fokus: string } | null}
+ */
+export function titelbildVon(g) {
+  const t = g?.titelbild;
+  const fokusOk = (/** @type {unknown} */ f) => typeof f === "string" && /^\d{1,3}% \d{1,3}%$/.test(f);
+  if (t && typeof t === "object" && typeof t.bild === "string" && t.bild) return { bild: t.bild, fokus: fokusOk(t.fokus) ? t.fokus : "50% 50%" };
+  if (typeof t === "string" && t) return { bild: t, fokus: "50% 50%" };
+  const seiten = Array.isArray(g?.kapitel) ? g.kapitel.flatMap((/** @type {any} */ k) => k?.seiten ?? []) : (g?.seiten ?? []);
+  const bild = seiten.find((/** @type {any} */ s) => typeof s?.bild === "string" && s.bild)?.bild;
+  return bild ? { bild, fokus: "50% 50%" } : null;
+}
 
 /**
  * Aufbau (geschichten.md §4, Christian 2026-11-15): links das Bild, quadratisch und so groß, wie der Platz unter der
@@ -108,44 +136,49 @@ ${SZENE_CSS}
 :host(.buch-modus) .seitentitel { font-size: 5.4rem; margin-bottom: 3.2rem; }
 :host(.buch-modus) .text { font-size: 3.8rem; line-height: 1.5; max-width: 36ch; }
 
-/* Inhaltsverzeichnis: Titel, Wahl Vorlesen/Selbst lesen, Weiterlesen; darunter die Kapitel als Karten mit Foto. */
-/* Geteilt wie die Seiten (§5.5): links das Bild des Buchs, rechts auf Papier Titel, Wahl und die Kapitel (rollt). */
-.inhalt { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
-.inhalt-bild { position: relative; overflow: hidden; background: var(--kulisse-grund, var(--ls-nebel)) var(--kulisse-bild, none) center bottom / cover no-repeat; }
-.inhalt-bild img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.inhalt-bild img[hidden] { display: none; }
-.inhalt-rechts { min-width: 0; overflow-y: auto; overscroll-behavior: contain; padding: 16rem var(--ls-seite-rand) 6rem 10.4rem; background: var(--ls-papier);
-  scrollbar-width: thin; scrollbar-color: var(--kulisse-tief, var(--ls-tinte-weich)) transparent; }
-.inhalt .kopf { display: flex; flex-wrap: wrap; align-items: center; gap: 2.4rem 3.2rem; margin-bottom: 3.6rem;
-  padding: 0; }
-.buchtitel { margin: 0 auto 0 0; font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
-  font-size: 7.2rem; line-height: 1.05; font-weight: 750; letter-spacing: -0.035em; color: var(--ls-tinte); min-width: 0; }
-.wahl { display: flex; flex-wrap: wrap; gap: 1.6rem; }
-.karten { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 30rem), 1fr)); gap: 3.6rem 3.2rem; }
-.kapitelkarte { position: relative; display: grid; grid-template-rows: auto auto auto; text-align: left; padding: 0;
-  font: inherit; color: var(--ls-tinte); background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte);
-  border-radius: var(--ls-radius-teil); overflow: hidden; cursor: pointer; touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent; box-shadow: 0 1rem 0 var(--kulisse-tief, var(--ls-tinte-weich));
-  transition: transform .15s ease, box-shadow .15s ease; }
-.kapitelkarte:active { transform: translateY(.5rem); box-shadow: 0 .5rem 0 var(--kulisse-tief, var(--ls-tinte-weich)); }
-.kapitelkarte:focus-visible { outline: .8rem solid var(--ls-sonne); outline-offset: .4rem; }
-.karte-bild { display: block; aspect-ratio: 4 / 3; background: var(--kulisse-grund, var(--ls-nebel));
-  border-bottom: var(--ls-kontur) solid var(--ls-tinte); }
-.karte-bild img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.karte-nr { padding: 2rem 2.4rem 0; font-size: 2.6rem; color: var(--ls-tinte-weich); }
-.karte-titel { padding: .4rem 2.4rem 2.4rem; font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
-  font-size: 3.4rem; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
-.haken { position: absolute; top: 1.6rem; right: 1.6rem; width: 6rem; height: 6rem; border-radius: 50%; display: none;
-  place-items: center; font-size: 3.6rem; font-weight: 700; color: var(--ls-tinte); background: var(--ls-sonne);
-  border: var(--ls-kontur) solid var(--ls-tinte); }
-.kapitelkarte.gelesen .haken { display: grid; }
+/* Inhaltsverzeichnis (Spec 2026-11-16-inhaltsverzeichnis): offen auf Papier wie die Lese-Ansicht, kein Hintergrundbild.
+   Links das Titelbild als Streifen 2 : 1, der Buchtitel und Anhören/Lesen (macht beim Stand weiter); rechts alle Kapitel
+   als Liste mit dezenten Linien: rundes Bild, Titel, Haken, zwei Symbol-Knöpfe. Die Zeile öffnet im zuletzt gewählten Modus. */
+.inhalt { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start;
+  column-gap: 9.6rem; padding: 14rem var(--ls-seite-rand) 4rem; background: var(--ls-papier); overflow-y: auto;
+  overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--ls-naht) transparent; }
+.inhalt-links { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.titelbild { width: 100%; aspect-ratio: 2 / 1; border-radius: var(--ls-radius-teil); overflow: hidden; background: var(--ls-nebel); }
+.titelbild img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--fokus, 50% 50%); }
+.titelbild img[hidden] { display: none; }
+.buchtitel { margin: 4.4rem 0 0; font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
+  font-size: 6.4rem; line-height: 1.05; font-weight: 750; letter-spacing: -0.035em; color: var(--ls-tinte); text-wrap: balance; }
+.start { display: flex; flex-wrap: wrap; gap: 1.6rem 2rem; margin-top: 4rem; }
+.stand-hinweis { margin: 2rem 0 0; font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
+  font-size: 2.4rem; color: var(--ls-tinte-weich); }
+.stand-hinweis[hidden] { display: none; }
+.kapitel-liste { list-style: none; margin: 0; padding: 0; min-width: 0; }
+/* Die Symbol-Knöpfe sind sichtbar 8,4 rem, ihre Tippfläche 11 rem: die Zeile ist so hoch wie die Tippfläche (7 Kapitel passen). */
+.kapitel { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; column-gap: 1rem; padding: 0.4rem 0; }
+.kapitel + .kapitel { border-top: 0.25rem solid var(--ls-naht); }
+.kapitel:first-child { padding-top: 0; }
+.zeile { display: grid; grid-template-columns: 7.6rem minmax(0, 1fr) auto; align-items: center; column-gap: 2.8rem; min-height: 9rem;
+  padding: 0; border: 0; background: none; text-align: left; font: inherit; color: var(--ls-tinte); cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; border-radius: var(--ls-radius-klein); }
+.zeile > * { pointer-events: none; }
+.zeile:focus-visible { outline: .6rem solid var(--ls-sonne); outline-offset: .6rem; }
+.zeile:active .rund { transform: scale(.96); }
+.rund { width: 7.6rem; height: 7.6rem; border-radius: 50%; overflow: hidden; background: var(--ls-nebel); transition: transform .15s ease; }
+.rund img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.zeile .titel { font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
+  font-size: 3.2rem; line-height: 1.15; font-weight: 650; letter-spacing: -0.01em; hyphens: manual; }
+.haken { display: none; place-items: center; width: 3.8rem; height: 3.8rem; border-radius: 50%; background: var(--ls-sonne);
+  font-size: 2.2rem; font-weight: 700; color: var(--ls-tinte); }
+.kapitel.gelesen .haken { display: grid; }
+/* Ton aus: es gibt nichts anzuhören – nur Lesen. */
+:host(.ohne-ton) .anhoeren { display: none; }
 .knoepfe { display: flex; align-items: center; gap: 2rem; min-height: 11rem; }
 .knoepfe .rechts { display: grid; justify-items: end; align-items: center; min-width: 11rem; }
 .rechts > * { grid-area: 1 / 1; }
 .weiter { transition: opacity .35s ease; }
 .weiter.wartet { opacity: 0; pointer-events: none; }
-.weiter[hidden], .fertig[hidden], .zurueck[hidden], .naechstes[hidden], .zum-inhalt[hidden], .weiterlesen[hidden],
-.blatt[hidden], .inhalt[hidden], .wahl[hidden] { display: none; }
+.weiter[hidden], .fertig[hidden], .zurueck[hidden], .naechstes[hidden], .zum-inhalt[hidden],
+.blatt[hidden], .inhalt[hidden] { display: none; }
 .zurueck.unsichtbar { visibility: hidden; }
 
 /* Fortschritt: Punkte ohne Zahl in der Mitte; die aufgeschlagene Seite ist ein Sonnenpunkt mit Tinte-Kern. */
@@ -164,14 +197,21 @@ ${SZENE_CSS}
 
 /* Schmaleres Querformat (iPad quer): etwas kleinerer Text. */
 @container buch (aspect-ratio < 17 / 10) {
+  .inhalt { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); column-gap: 7.2rem; }
+  .buchtitel { font-size: 5.6rem; }
   .lese { padding-left: 7.2rem; }
   .text { font-size: 4.2rem; }
   .text.titel { font-size: 7.2rem; }
 }
 /* Hochformat und fast quadratisch: Bild oben, Text und Knöpfe darunter. */
 @container buch (aspect-ratio < 4 / 3) {
-  .inhalt { grid-template-columns: minmax(0, 1fr); grid-template-rows: 30% minmax(0, 1fr); }
-  .inhalt-rechts { padding: 4rem 4.8rem 5rem; }
+  .inhalt { grid-template-columns: minmax(0, 1fr); row-gap: 5.6rem; padding: 14rem 4.8rem 5rem; }
+  /* Hochformat: Titelbild neben Titel und Knöpfen, damit die Kapitel gleich darunter beginnen. */
+  .inhalt-links { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto auto 1fr;
+    column-gap: 4rem; align-items: start; }
+  .titelbild { grid-row: 1 / span 4; }
+  .buchtitel { margin-top: 0; font-size: 5.2rem; }
+  .start { margin-top: 3.2rem; }
   .blatt { grid-template-columns: minmax(0, 1fr); grid-template-rows: 42% minmax(0, 1fr); }
   .lese { padding: 13rem 4.8rem 3.2rem; }
   .text { font-size: 3.8rem; max-width: none; }
@@ -179,9 +219,12 @@ ${SZENE_CSS}
 }
 /* Schmal (Telefon hoch): weniger Rand, damit Startknöpfe und Fertig hineinpassen. */
 @container buch (max-width: 560px) {
-  .inhalt-rechts { padding: 3.2rem 2rem 4rem; }
-  .inhalt .kopf { padding: 2.4rem; }
-  .buchtitel { font-size: 4.6rem; }
+  .inhalt { padding: 13rem 2.4rem 4rem; }
+  .inhalt-links { display: flex; }
+  .buchtitel { margin-top: 3.2rem; font-size: 4.6rem; }
+  .zeile { grid-template-columns: 6.4rem minmax(0, 1fr) auto; column-gap: 1.6rem; }
+  .rund { width: 6.4rem; height: 6.4rem; }
+  .zeile .titel { font-size: 2.8rem; }
   .lese { padding: 12rem 2.4rem 2rem; }
   .knoepfe { gap: 1rem; flex-wrap: wrap; row-gap: 1.6rem; }
 }
@@ -218,18 +261,16 @@ export class LsGeschichte extends HTMLElement {
     const w = this.attachShadow({ mode: "open" });
     w.innerHTML = `<style>${GRUND_CSS}${CSS}</style>
       <div class="buch"><div class="inhalt" hidden>
-        <div class="inhalt-bild"><img alt="" hidden></div>
-        <div class="inhalt-rechts">
-        <div class="kopf">
+        <div class="inhalt-links">
+          <div class="titelbild"><img alt="" hidden></div>
           <h2 class="buchtitel"></h2>
-          <div class="wahl" role="group" aria-label="Wie lesen?">
-            <ls-knopf class="wahl-vorlesen" symbol="vorlesen.svg" wort="Vorlesen" groesse="klein" stumm></ls-knopf>
-            <ls-knopf class="wahl-selbst" symbol="buch.svg" wort="Selbst lesen" groesse="klein" stumm></ls-knopf>
+          <div class="start" role="group" aria-label="Wie lesen?">
+            <ls-knopf class="start-anhoeren anhoeren" symbol="vorlesen.svg" wort="Anhören" groesse="seite" stumm></ls-knopf>
+            <ls-knopf class="start-lesen" symbol="buch.svg" wort="Lesen" groesse="seite" stumm></ls-knopf>
           </div>
-          <ls-knopf class="weiterlesen" art="haupt" symbol="buch.svg" wort="Weiterlesen" stumm hidden></ls-knopf>
+          <p class="stand-hinweis" hidden></p>
         </div>
-        <div class="karten"></div>
-        </div>
+        <ol class="kapitel-liste" aria-label="Kapitel"></ol>
       </div><div class="blatt">
         <div class="rahmen" part="bild"><div class="figuren"></div></div>
         <div class="lese">
@@ -265,11 +306,11 @@ export class LsGeschichte extends HTMLElement {
     this.startwahlEl = q(".startwahl");
     this.inhaltEl = q(".inhalt");
     this.blattEl = q(".blatt");
-    this.kartenEl = q(".karten");
-    this.weiterlesenEl = q(".weiterlesen");
+    this.listeEl = q(".kapitel-liste");
+    this.standEl = q(".stand-hinweis");
     this.naechstesEl = q(".naechstes");
     this.zumInhaltEl = q(".zum-inhalt");
-    this.wahlEl = q(".wahl");
+    this.startEl = q(".start");
     /** Sachbuch: aufgeschlagenes Kapitel (-1 = Inhaltsverzeichnis); ohne Kapitel immer -1. */
     this.kapitel = -1;
     /** @type {Seite[]} die Seiten, die gerade gelesen werden (Geschichte oder Kapitel) */
@@ -318,16 +359,15 @@ export class LsGeschichte extends HTMLElement {
     this.fertigEl.addEventListener("click", () => this.beende());
     this.naechstesEl.addEventListener("click", () => this.oeffne(this.kapitel + 1));
     this.zumInhaltEl.addEventListener("click", () => this.zeigeInhalt());
-    this.weiterlesenEl.addEventListener("click", () => this.oeffne(this.stand.kapitel, this.stand.seite));
-    q(".wahl-vorlesen").addEventListener("click", () => this.setzeModus("vorlesen"));
-    q(".wahl-selbst").addEventListener("click", () => this.setzeModus("selbst"));
+    q(".start-anhoeren").addEventListener("click", () => this.starte("vorlesen"));
+    q(".start-lesen").addEventListener("click", () => this.starte("selbst"));
     /** @type {Element | null} */
     this.leiste = null;
     this.beiTon = (/** @type {Event} */ e) => {
       const an = /** @type {CustomEvent} */ (e).detail?.an !== false;
       if (this.istBuch) {
-        // Sachbuch: Ton aus → Selbst lesen, die Wahl verschwindet; Ton an → die Wahl ist wieder da
-        this.wahlEl.hidden = !an;
+        // Sachbuch: Ton aus → Selbst lesen, Anhören verschwindet; Ton an → Anhören ist wieder da
+        this.classList.toggle("ohne-ton", !an);
         if (!an) { clearTimeout(this.autoTimer); this.setzeModus("selbst"); }
         return;
       }
@@ -383,6 +423,7 @@ export class LsGeschichte extends HTMLElement {
         oeffne: (/** @type {number} */ k, /** @type {number} */ s = 0) => el.oeffne(k, s),
         inhalt: () => el.zeigeInhalt(),
         waehle: (/** @type {"vorlesen" | "selbst"} */ m) => el.waehle(m),
+        starte: (/** @type {"vorlesen" | "selbst"} */ m, /** @type {number | undefined} */ k) => el.starte(m, k),
         halte: () => el.halte(),
         weiter: () => el.weiter(),
         zurueck: () => el.zurueck(),
@@ -415,12 +456,15 @@ export class LsGeschichte extends HTMLElement {
       const buch = Array.isArray(g?.kapitel) && g.kapitel.length && g.kapitel.every((k) => Array.isArray(k?.seiten) && k.seiten.length);
       if (!g || (!buch && (!Array.isArray(g.seiten) || !g.seiten.length))) throw new Error("keine Seiten");
       this.basis = url;
-      await Promise.all([this.ladeBausteine(g), this.ladeKulisse(g)]);
+      // Bücher mit Kapiteln haben kein Hintergrundbild (Christian 2026-11-16), nur Geschichten ohne Kapitel eine Kulisse.
+      await Promise.all([this.ladeBausteine(g), buch ? null : this.ladeKulisse(g)]);
       this.daten = g;
       if (buch) {
-        // Sachbuch: Inhaltsverzeichnis; bei Ton an ist „Vorlesen“ vorgewählt (Vorlesebuch, Christian 2026-11-15)
-        this.modus = (await this.tonAn()) ? "vorlesen" : "selbst";
-        this.wahlEl.hidden = this.modus === "selbst";
+        // Sachbuch: Inhaltsverzeichnis. Modus = zuletzt gewählter (gemerkt), sonst bei Ton an Anhören (Vorlesebuch,
+        // Christian 2026-11-15); bei Ton aus immer Lesen.
+        const ton = await this.tonAn();
+        this.modus = ton ? (gemerkterModus() ?? "vorlesen") : "selbst";
+        this.classList.toggle("ohne-ton", !ton);
         this.classList.add("buch-modus");
         this.zeigeInhalt();
       } else {
@@ -605,7 +649,7 @@ export class LsGeschichte extends HTMLElement {
    * @param {"vorlesen" | "selbst"} modus
    */
   waehle(modus) {
-    if (this.istBuch) return void this.setzeModus(modus);
+    if (this.istBuch) return void this.setzeModus(modus, true);
     if (!this.daten || this.modus !== null) return;
     this.modus = modus === "vorlesen" ? "vorlesen" : "selbst";
     this.zeigeWahl(false);
@@ -635,15 +679,34 @@ export class LsGeschichte extends HTMLElement {
     this.seitentitelEl.hidden = !an || !titel;
   }
 
-  /** Sachbuch: Vorlesen oder Selbst lesen (im Inhaltsverzeichnis umschaltbar). @param {"vorlesen" | "selbst"} modus */
-  setzeModus(modus) {
+  /**
+   * Sachbuch: Anhören („vorlesen“) oder Lesen („selbst“). Der Modus gilt für den Tipp auf eine Kapitelzeile; der
+   * große Knopf des Modus ist der Hauptknopf. @param {"vorlesen" | "selbst"} modus @param {boolean} [merken] als zuletzt gewählt merken
+   */
+  setzeModus(modus, merken = false) {
     this.modus = modus === "vorlesen" ? "vorlesen" : "selbst";
+    if (merken) merkeModus(this.modus);
     this.setzeAngehalten(false);
-    for (const [k, m] of [[".wahl-vorlesen", "vorlesen"], [".wahl-selbst", "selbst"]]) {
-      const b = /** @type {HTMLElement} */ (this.wahlEl.querySelector(k));
-      b.setAttribute("aria-pressed", String(this.modus === m));
+    for (const [k, m] of [[".start-anhoeren", "vorlesen"], [".start-lesen", "selbst"]]) {
+      const b = /** @type {HTMLElement} */ (this.startEl.querySelector(k));
       if (this.modus === m) b.setAttribute("art", "haupt"); else b.removeAttribute("art");
     }
+  }
+
+  /** Wo das Buch weitergeht: beim Lesestand, wenn das Buch angefangen und nicht ganz gelesen ist; sonst vorn. */
+  get fortsetzung() {
+    const weiter = this.hatStand && this.stand.fertig.length < this.kapitelZahl && (this.stand.kapitel > 0 || this.stand.seite > 0);
+    return weiter ? { kapitel: this.stand.kapitel, seite: this.stand.seite } : null;
+  }
+
+  /**
+   * Sachbuch: Anhören oder Lesen – ab dem Lesestand (oder Kapitel 1) bzw. das Kapitel k.
+   * @param {"vorlesen" | "selbst"} modus @param {number} [k] @param {number} [seite]
+   */
+  starte(modus, k, seite = 0) {
+    this.setzeModus(modus, true);
+    if (k === undefined) { const f = this.fortsetzung; k = f?.kapitel ?? 0; seite = f?.seite ?? 0; }
+    this.oeffne(k, seite);
   }
 
   /**
@@ -670,7 +733,7 @@ export class LsGeschichte extends HTMLElement {
     this.dispatchEvent(new CustomEvent("stand", { bubbles: true, composed: true, detail: { ...this.stand, kapitelZahl: this.kapitelZahl } }));
   }
 
-  /** Sachbuch: Inhaltsverzeichnis mit Kapitelkarten. */
+  /** Sachbuch: Inhaltsverzeichnis – links Titelbild, Titel und Anhören/Lesen, rechts alle Kapitel als Liste. */
   zeigeInhalt() {
     const g = this.daten;
     if (!g?.kapitel) return;
@@ -683,30 +746,38 @@ export class LsGeschichte extends HTMLElement {
     this._seite = -1;
     this.setzeModus(this.modus ?? "selbst");
     /** @type {HTMLElement} */ (this.inhaltEl.querySelector(".buchtitel")).textContent = g.titel;
-    const weiter = this.hatStand && this.stand.fertig.length < this.kapitelZahl && (this.stand.kapitel > 0 || this.stand.seite > 0);
-    this.weiterlesenEl.hidden = !weiter;
-    if (weiter) this.weiterlesenEl.setAttribute("wort", `Weiterlesen: Kapitel ${this.stand.kapitel + 1}`);
-    this.kartenEl.replaceChildren(...g.kapitel.map((k, i) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "kapitelkarte";
-      b.classList.toggle("gelesen", this.stand.fertig.includes(i));
-      const bild = k.seiten[0]?.bild;
-      b.innerHTML = `<span class="karte-bild">${bild ? `<img alt="" src="${new URL(bild, this.basis).href}">` : ""}</span>
-        <span class="karte-nr">Kapitel ${i + 1}</span><span class="karte-titel"></span><span class="haken" aria-hidden="true">✓</span>`;
-      /** @type {HTMLElement} */ (b.querySelector(".karte-titel")).textContent = k.titel;
-      b.setAttribute("aria-label", `Kapitel ${i + 1}: ${k.titel}${this.stand.fertig.includes(i) ? ", gelesen" : ""}`);
-      b.addEventListener("click", () => this.oeffne(i));
-      return b;
+    const f = this.fortsetzung;
+    this.standEl.hidden = !f;
+    if (f) this.standEl.textContent = `Weiter bei Kapitel ${f.kapitel + 1}`;
+    this.listeEl.replaceChildren(...g.kapitel.map((k, i) => {
+      const li = document.createElement("li");
+      const gelesen = this.stand.fertig.includes(i);
+      li.className = "kapitel";
+      li.classList.toggle("gelesen", gelesen);
+      const bild = k.seiten.find((s) => typeof s.bild === "string" && s.bild)?.bild;
+      li.innerHTML = `<button type="button" class="zeile"><span class="rund">${bild ? `<img alt="" loading="lazy" src="${new URL(bild, this.basis).href}">` : ""}</span>
+        <span class="titel"></span><span class="haken" aria-hidden="true">✓</span></button>
+        <ls-knopf class="anhoeren" symbol="vorlesen.svg" groesse="seite" stumm></ls-knopf>
+        <ls-knopf class="lesen" symbol="buch.svg" groesse="seite" stumm></ls-knopf>`;
+      /** @type {HTMLElement} */ (li.querySelector(".titel")).textContent = k.titel;
+      const zeile = /** @type {HTMLElement} */ (li.querySelector(".zeile"));
+      zeile.setAttribute("aria-label", `Kapitel ${i + 1}: ${k.titel}${gelesen ? ", gelesen" : ""}`);
+      zeile.addEventListener("click", () => this.oeffne(i));
+      const an = /** @type {HTMLElement} */ (li.querySelector(".anhoeren")), le = /** @type {HTMLElement} */ (li.querySelector(".lesen"));
+      an.setAttribute("name", `Kapitel ${i + 1} anhören`);
+      le.setAttribute("name", `Kapitel ${i + 1} lesen`);
+      an.addEventListener("click", () => this.starte("vorlesen", i));
+      le.addEventListener("click", () => this.starte("selbst", i));
+      return li;
     }));
-    // Bild links: das Titelbild oder das erste Foto des Buchs; ohne Foto die Kulisse.
-    const titelbild = typeof (/** @type {any} */ (g).titelbild) === "string" ? /** @type {any} */ (g).titelbild
-      : g.kapitel.flatMap((k) => k.seiten).find((s) => typeof s.bild === "string" && s.bild)?.bild;
-    const bildEl = /** @type {HTMLImageElement} */ (this.inhaltEl.querySelector(".inhalt-bild img"));
-    if (titelbild) bildEl.src = new URL(titelbild, this.basis).href;
-    bildEl.hidden = !titelbild;
+    // Titelbild (von der KI gewählt, mit Ausschnitt für 2 : 1) oder das erste Foto des Buchs mittig.
+    const tb = titelbildVon(g);
+    const bildEl = /** @type {HTMLImageElement} */ (this.inhaltEl.querySelector(".titelbild img"));
+    if (tb) { bildEl.src = new URL(tb.bild, this.basis).href; bildEl.style.setProperty("--fokus", tb.fokus); }
+    bildEl.hidden = !tb;
     this.inhaltEl.hidden = false;
     this.blattEl.hidden = true;
+    this.inhaltEl.scrollTop = 0;
   }
 
   /**
