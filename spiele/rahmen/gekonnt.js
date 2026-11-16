@@ -11,7 +11,8 @@
 // „kannst du!“. Keine Zahl, kein Stern zum Sammeln, kein Zähler (N5, N8). Unten drei gleich gestaltete Papierknöpfe:
 // Weiter, Alle Spiele, Was ich schon kann – keiner hervorgehoben, Aufhören ist gleichwertig (N6); nichts geht von selbst.
 //
-// zeige({ thema: { name, sprich }, figur }) → Promise<"weiter">; Alle Spiele und Was ich schon kann sind Links
+// zeige({ thema: { name, sprich }, figur }) → Promise<"weiter">; figur ist der Held des Spiels (steht groß in der Mitte);
+// ohne figur steht ein zufälliges Kind der Runde in der Mitte (Christian, 2026-11-16). Alle Spiele und Was ich schon kann sind Links
 // (linkKlick in lernspiel.js speichert vorher). Gesprochen wird nur bei Ton an:
 //   „<sprich> kannst du.“ (kern/saetze.js, aufgenommen für jedes Thema) – „<Figur> freut sich mit dir.“ –
 //   „Du findest das Thema jetzt bei: Was ich schon kann.“
@@ -210,7 +211,7 @@ export class LsGekonnt extends HTMLElement {
    * @param {{ thema: { name: string, sprich?: string }, figur?: string }} o
    * @returns {Promise<"weiter">}
    */
-  zeige({ thema, figur = "timo" }) {
+  zeige({ thema, figur = RUNDE[Math.floor(Math.random() * RUNDE.length)] }) {
     if (this._offen) return this._offen;
     const nr = ++this._nr;
     this.themaFeld.textContent = thema.name;
