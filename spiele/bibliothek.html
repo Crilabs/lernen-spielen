@@ -14,7 +14,11 @@
    kräftig und der Buchtitel klein),
    die Reihen brechen um. Gelesen: ein
    Sonnenpunkt vor dem Titel. Grundmuster Blätter. Keine Zählung, keine Reihenfolge, kein „Weiterlesen“; gesperrt nur über die Bücher-Grenze der Eltern;
-   Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen. Diese Seite liest den Lernstand nur. */
+   Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen. Diese Seite liest den Lernstand nur –
+   außer „Weißt du noch?“ (docs/geschichten.md §2b): höchstens einmal am Tag eine Erinnerungsfrage aus einem Kapitel,
+   das frühestens gestern fertig wurde, in einem ruhigen Fenster; „Später“ schiebt sie auf morgen, nichts wird gezählt.
+   Gesperrte Bücher tragen eine Uhr, ein Tippen zeigt den Hinweis (rahmen/zeitsperre.js). Rechts im Kopf das Zahnrad für
+   Erwachsene wie auf „Können“ (rahmen/zahnrad.js). */
 body { -webkit-user-select: none; user-select: none; }
 .bib {
   position: absolute; top: var(--ls-leiste-hoehe); bottom: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem);
@@ -73,14 +77,23 @@ body { -webkit-user-select: none; user-select: none; }
 /* Gelesen: ein Sonnenpunkt vor dem Titel (bewertet nichts) */
 .buch .gelesen-punkt { flex: none; width: 2.2rem; height: 2.2rem; margin-top: 0.05rem; border-radius: 50%; background: var(--ls-sonne);
   box-shadow: inset 0 0 0 0.75rem var(--ls-sonne), inset 0 0 0 3rem var(--ls-tinte); }
-.buch.zu { cursor: default; }
-.buch.zu .deckel { box-shadow: none; }
 .buch:active .deckel { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
-.buch.zu:active .deckel { transform: none; box-shadow: none; }
 .buch:focus-visible .deckel { outline: 1rem solid var(--ls-sonne); outline-offset: 0.6rem; }
 
 .leer { margin: 2rem 0; font-size: 4.5rem; color: var(--ls-tinte-weich); }
 
+/* --- „Weißt du noch?“ ------------------------------------------------------------------------------ */
+.erinnern-grund { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 4rem var(--ls-seite-rand);
+  background: color-mix(in srgb, var(--ls-tinte) 38%, transparent); }
+.erinnern-grund[hidden] { display: none; }
+.erinnern-fenster { width: min(112rem, 100%); max-height: 100%; overflow-y: auto; scrollbar-width: none; padding: 5.6rem 6.4rem 4.8rem;
+  background: var(--ls-papier); border-radius: var(--ls-radius-plakat); box-shadow: var(--ls-schatten); }
+.erinnern-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 2.4rem; margin: 0 0 3.2rem; }
+.erinnern-kopf h2 { margin: 0; font-size: 5.6rem; font-weight: 750; line-height: 1; letter-spacing: -0.03em; }
+.erinnern-kopf span { font-size: 2.4rem; font-weight: 600; color: var(--ls-tinte-weich); text-align: right; }
+.erinnern-fuss { display: flex; justify-content: flex-end; margin-top: 3.6rem; }
+@media (min-aspect-ratio: 4/3) { .erinnern-fenster { width: min(150rem, 100%); } }
+.erinnern-fuss ls-knopf[hidden] { display: none; }
 @media (max-aspect-ratio: 3/2) {
   .halle { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -89,12 +102,12 @@ body { -webkit-user-select: none; user-select: none; }
 </head>
 <body>
 <ls-muster id="muster" art="wellen"></ls-muster>
-<ls-kopf id="leiste" reiter="wissen" spiel="ansichten"></ls-kopf>
+<ls-kopf id="leiste" reiter="wissen" spiel="ansichten"><span id="zahnrad" slot="rechts"></span></ls-kopf>
 <main class="bib" id="bib"></main>
 
 <script type="module">
 import { sperreTouch, protokoll, esc, linkKlick } from "./lernspiel.js";
-import { ladeLernstand } from "./lernsteuerung.js";
+import { ladeLernstand, ladeErinnerung, merkeErinnert } from "./lernsteuerung.js";
 import { sprich } from "./kern/stimme.js";
 import { sageEinmal } from "./kern/sitzung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
@@ -103,11 +116,15 @@ import "./rahmen/knopf.js";
 import "./rahmen/muster.js";
 import { bibliothekFuerKind, waehleRaum, buchHref, raumSvg } from "./start/bibliothek.js";
 import { buecherLage } from "./rahmen/buecherzeit.js";
+import { sperre, SAETZE } from "./rahmen/zeitsperre.js";
+import { zahnrad } from "./rahmen/zahnrad.js";
+import "./rahmen/erinnern.js";
 
 start();
 
 async function start() {
   sperreTouch();
+  zahnrad(document.getElementById("zahnrad"));
   const leiste = document.getElementById("leiste"), feld = document.getElementById("bib"), muster = document.getElementById("muster");
   let raeume;
   try {
@@ -120,8 +137,8 @@ async function start() {
     return;
   }
   await leiste.bereit();
-  // Bücher-Grenze der Eltern (Spec 2026-11-16-buecherzeit): ist heute kein Modus mehr frei, bleibt das Buch sichtbar,
-  // ist aber nicht drückbar (ohne Schatten). Heute schon geöffnete Bücher bleiben frei.
+  // Bücher-Grenze der Eltern (Spec 2026-11-16-buecherzeit): ist kein Modus mehr frei, trägt das Buch eine Uhr und ein
+  // Tippen zeigt den Hinweis (rahmen/zeitsperre.js). Im Zeitraum schon geöffnete Bücher bleiben frei.
   const zeit = await buecherLage();
   const frei = (id) => { const e = zeit.erlaubt(id); return e.vorlesen || e.selbst; };
   if (!raeume.length) { feld.innerHTML = `<p class="leer">Hier stehen bald Bücher.</p>`; return; }
@@ -129,6 +146,8 @@ async function start() {
 
   // Titelbild je Buch: das erste Foto der Geschichte (titelbild hat Vorrang); ohne Foto die Tönung des Fachs.
   const deckel = new Map();
+  /** Erinnerungsfragen je Buch (Sachbücher, geschichten.md §2b): { titel, fragen: (erinnern | undefined)[] } */
+  const fragen = new Map();
   await Promise.all(raeume.flatMap((r) => r.regale.flatMap((rg) => rg.buecher)).map(async (b) => {
     try {
       const g = await fetch(`geschichten/${encodeURIComponent(b.id)}/geschichte.json`).then((x) => x.json());
@@ -137,6 +156,7 @@ async function start() {
       const foto = (typeof g.titelbild === "string" ? g.titelbild : typeof g.titelbild?.bild === "string" ? g.titelbild.bild : null)
         ?? seiten.find((s) => typeof s.bild === "string")?.bild;
       deckel.set(b.id, foto ? `geschichten/${b.id}/${foto}` : null);
+      if (Array.isArray(g.kapitel) && g.kapitel.some((k) => k?.erinnern)) fragen.set(b.id, { titel: g.titel, fragen: g.kapitel.map((k) => k?.erinnern) });
     } catch (e) { protokoll("bibliothek, Titelbild " + b.id + ": " + e); }
   }));
 
@@ -163,13 +183,12 @@ async function start() {
       : FACH_SYMBOLE.has(regal.fach) ? `<i class="zeichen" style="--bild:${bild(`symbole/${regal.fach}.svg`)}"></i>` : "";
     const ton = !foto && FACH[regal.fach] ? `--toenung:${FACH[regal.fach].toenung};` : "";
     const label = esc((b.thema ? b.thema + ": " : "") + b.titel + (b.am ? ", gelesen" : ""));
-    const auf = frei(b.id);
-    return (auf ? `<a class="buch" href="${buchHref(b.id, r.id)}" data-titel="${esc(b.titel)}" aria-label="${label}" style="${ton}">`
-      : `<span class="buch zu" role="img" aria-label="${label}" style="${ton}">`)
+    const zu = frei(b.id) ? "" : " zu";
+    return `<a class="buch${zu}" href="${buchHref(b.id, r.id)}" data-titel="${esc(b.titel)}" aria-label="${label}" style="${ton}">`
       + `<span class="deckel">${innen}</span>`
       + `<span class="schild ui">${b.am ? `<span class="gelesen-punkt" aria-hidden="true"></span>` : ""}`
       + `<span class="worte">${b.thema ? `<b>${esc(b.thema)}</b>` : ""}<span class="titel">${esc(b.titel)}</span></span></span>`
-      + (auf ? `</a>` : `</span>`);
+      + `</a>`;
   }
 
   function raum(r) {
@@ -184,12 +203,41 @@ async function start() {
       if (history.state?.raum) history.back();
       else { history.replaceState(null, "", location.pathname); halle(); }
     });
-    feld.querySelectorAll("a.buch").forEach((a) => a.addEventListener("click", (e) => { sage(a.dataset.titel); linkKlick(e); }));
+    feld.querySelectorAll("a.buch.zu").forEach((a) => sperre(a, a.querySelector(".deckel"), SAETZE.pause, () => leiste.ton));
+    feld.querySelectorAll("a.buch:not(.gesperrt)").forEach((a) => a.addEventListener("click", (e) => { sage(a.dataset.titel); linkKlick(e); }));
   }
 
   const zeige = () => { const r = waehleRaum(raeume, new URLSearchParams(location.search).get("raum")); r ? raum(r) : halle(); };
   addEventListener("popstate", zeige);
   zeige();
+  weisstDuNoch().catch((e) => protokoll("bibliothek, Weißt du noch: " + e));
+
+  // „Weißt du noch?“: höchstens einmal am Tag eine Kapitelfrage mit Abstand (verteiltes Wiederholen, geschichten.md §2b)
+  async function weisstDuNoch() {
+    const wahl = await ladeErinnerung(fragen.keys());
+    const buch = wahl && fragen.get(wahl.id);
+    const e = buch?.fragen[wahl.kapitel];
+    if (!e) return;
+    const grund = document.createElement("div");
+    grund.className = "erinnern-grund";
+    grund.innerHTML = `<section class="erinnern-fenster" role="dialog" aria-modal="true" aria-labelledby="erinnern-titel">
+      <div class="erinnern-kopf ui"><h2 id="erinnern-titel">Weißt du noch?</h2><span></span></div>
+      <ls-erinnern></ls-erinnern>
+      <div class="erinnern-fuss"><ls-knopf class="spaeter" symbol="zurueck.svg" wort="Später" stumm></ls-knopf>
+        <ls-knopf class="fertig" art="haupt" symbol="fertig.svg" wort="Fertig" stumm hidden></ls-knopf></div></section>`;
+    grund.querySelector(".erinnern-kopf span").textContent = buch.titel;
+    document.body.appendChild(grund);
+    const frage = grund.querySelector("ls-erinnern"), spaeter = grund.querySelector(".spaeter"), fertig = grund.querySelector(".fertig");
+    const zu = () => grund.remove();
+    if (leiste.ton) sprich("Weißt du noch?");
+    frage.zeige(e, { ton: leiste.ton, bild: e.bild ? `geschichten/${wahl.id}/${e.bild}` : "" });
+    frage.addEventListener("gewaehlt", () => {
+      spaeter.hidden = true; fertig.hidden = false;
+      merkeErinnert(wahl.id, wahl.kapitel, true).catch((f) => protokoll("Weißt du noch: " + f));
+    });
+    spaeter.addEventListener("click", () => { merkeErinnert(wahl.id, wahl.kapitel, false).catch((f) => protokoll("Weißt du noch: " + f)); zu(); });
+    fertig.addEventListener("click", zu);
+  }
 }
 </script>
 </body>

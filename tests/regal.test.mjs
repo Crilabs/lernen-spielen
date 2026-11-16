@@ -67,7 +67,10 @@ test("Regal: immer etwas gewählt, passend zum Reiter – beim Öffnen der erste
   assert.doesNotMatch(skript, /fachVon\(\[\.\.\.neu\]\[0\]\)/);
 });
 
-test("Regal: Spielzeit der Eltern – gesperrt fehlen die Spielkarten im Detail, Mit echten Dingen bleibt", () => {
+test("Regal: Spielzeit der Eltern – gesperrt tragen die Spielkarten eine Uhr (zeitsperre.js), ausgeblendet fehlen sie", () => {
   assert.match(skript, /import \{ spielzeitLage \} from "\.\/rahmen\/spielzeit\.js";/);
-  assert.match(skript, /\(spielFrei \? t\.spiele : \[\]\)/);
+  assert.match(skript, /import \{ sperre, satzFuer \} from "\.\/rahmen\/zeitsperre\.js";/);
+  assert.match(skript, /\(spieleZeigen \? t\.spiele : \[\]\)/);
+  assert.match(skript, /sperre\(a, a\.querySelector\("\.bild"\), satzFuer\(zeit\.lage\.grund\)/);
+  assert.match(skript, /a\.karte\.spiel:not\(\.gesperrt\)/);
 });

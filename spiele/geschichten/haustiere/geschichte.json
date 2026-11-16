@@ -165,7 +165,19 @@
      "text": "Im Frühling ist draußen viel los. In den Hecken sitzen junge Vögel, die gerade das Fliegen lernen. Sie flattern noch unsicher von Ast zu Ast und hüpfen über den Boden.\n\nKatzen jagen auch Vögel. Das ist ihre Natur, so wie bei allen Katzen. Mia schaut den Vögeln deshalb besonders aufmerksam zu. Damit die kleinen Vögel es leichter haben, bleibt Mia im Frühling morgens und abends drinnen. Dann sitzt sie am Fenster, und ihre Ohren zucken bei jedem Piepsen.",
      "bild": "bilder/01-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Warum kamen Wildkatzen früher zu den Menschen?",
+    "bild": "bilder/01-01.webp",
+    "antworten": [
+     "Sie wollten gestreichelt werden",
+     "Sie jagten die Mäuse am Korn",
+     "Menschen haben sie eingefangen"
+    ],
+    "richtig": 1,
+    "aufloesung": "Das Korn der Menschen lockte Mäuse an. Und die Mäuse lockten die Wildkatzen an.",
+    "seite": 1
+   }
   },
   {
    "titel": "Leise Pfoten, scharfe Krallen",
@@ -195,7 +207,19 @@
      "text": "Mias Zunge kann zwei Kunststücke. Sie fühlt sich rau an, ein bisschen wie Schmirgelpapier. Darauf sitzen viele winzige Häkchen, und jedes ist innen hohl. Beim Putzen nehmen die Häkchen Spucke auf und bringen sie tief ins Fell. So kämmt und wäscht sich Mia jeden Tag lange.\n\nUnd beim Trinken? Da tippt Mia mit der Zungenspitze nur kurz aufs Wasser. Dann zieht sie die Zunge blitzschnell hoch. Ein kleines Wassertürmchen saust mit nach oben, und zack, schnappt sie es. Ihr Kinn bleibt dabei trocken.",
      "bild": "bilder/02-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Warum kratzt eine Katze am Kratzbaum?",
+    "bild": "bilder/02-03.webp",
+    "antworten": [
+     "Sie pflegt ihre Krallen und hinterlässt Duft",
+     "Sie ist wütend und tobt sich aus",
+     "Sie will gern etwas kaputt machen"
+    ],
+    "richtig": 0,
+    "aufloesung": "Beim Kratzen pflegt die Katze ihre Krallen. Und sie hinterlässt Duft, für andere Katzen heißt das: Hier wohne ich.",
+    "seite": 2
+   }
   },
   {
    "titel": "Supersinne",
@@ -216,7 +240,19 @@
      "text": "Mias Nase ist viel feiner als unsere. Bevor sie etwas frisst, schnuppert sie ganz genau daran. Manchmal macht sie dabei ein lustiges Gesicht. Sie öffnet das Maul ein bisschen, zieht die Oberlippe hoch und hält ganz still.\n\nSo schmeckt sie einen Geruch. Ein besonders spannender Duft wird damit noch genauer untersucht. Und noch etwas ist anders als bei uns: Katzen können nicht schmecken, was süß ist. Ein Keks oder ein Bonbon lockt sie darum gar nicht.",
      "bild": "bilder/03-04.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wann sieht eine Katze viel besser als wir?",
+    "bild": "bilder/03-03.webp",
+    "antworten": [
+     "Wenn es ganz dunkel ist",
+     "Wenn die Sonne hell scheint",
+     "Wenn es dämmrig wird"
+    ],
+    "richtig": 2,
+    "aufloesung": "In der Dämmerung werden die Pupillen groß, und ein Spiegel im Auge wirft das Licht zurück. Ganz im Dunkeln sieht auch eine Katze nichts.",
+    "seite": 0
+   }
   },
   {
    "titel": "Katzenkinder",
@@ -242,7 +278,19 @@
      "text": "Nach ein paar Wochen fangen die Kätzchen an zu spielen. Sie jagen den Schwanz der Mutter, springen sich gegenseitig an und rollen übereinander. Dabei üben sie, was eine Katze können muss.\n\nSie lernen lauern, anspringen und zupacken. Ungefähr drei Monate sollen Kätzchen bei Mutter und Geschwistern bleiben. Dort lernen sie, sich wie Katzen zu benehmen. Lernen sie in dieser Zeit freundliche Menschen kennen, werden sie später zutraulich. Mia hat das gelernt. Heute tretelt sie auf Maliks Schoß, wenn sie sich wohlfühlt.",
      "bild": "bilder/04-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wie finden neugeborene Kätzchen den Weg zu ihrer Mutter?",
+    "bild": "bilder/04-02.webp",
+    "antworten": [
+     "Sie sehen ihre Mutter genau",
+     "Sie folgen Geruch und Wärme",
+     "Die Mutter ruft sie laut"
+    ],
+    "richtig": 1,
+    "aufloesung": "Neugeborene Kätzchen sehen und hören noch nichts. Sie kriechen der Wärme und dem Geruch ihrer Mutter nach.",
+    "seite": 1
+   }
   },
   {
    "titel": "Was die Katze sagt",
@@ -272,7 +320,19 @@
      "text": "Manchmal sagt eine Katze es noch deutlicher. Sie legt die Ohren flach nach hinten. Der Schwanz peitscht hin und her, das Fell sträubt sich, und sie faucht. Das heißt: Lass mich in Ruhe! Dann geht man ruhig weg.\n\nUnd wenn sich Mia auf den Rücken rollt und den Bauch zeigt? Dann zeigt sie, dass sie Malik vertraut. Aber Achtung: Das ist keine Einladung zum Bauchkraulen. Viele Katzen mögen das gar nicht und packen dann mit den Pfoten zu.",
      "bild": "bilder/05-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Beim Streicheln zuckt die Schwanzspitze einer Katze. Was sagt sie damit?",
+    "bild": "bilder/05-04.webp",
+    "antworten": [
+     "Sie möchte mehr gestreichelt werden",
+     "Sie möchte gleich spielen",
+     "Sie möchte, dass es aufhört"
+    ],
+    "richtig": 2,
+    "aufloesung": "Eine zuckende Schwanzspitze ist ein frühes Stopp-Zeichen. Dann hört man auf und nimmt die Hand ruhig weg.",
+    "seite": 4
+   }
   },
   {
    "titel": "So werden wir Freunde",
@@ -301,7 +361,19 @@
      "text": "Als Mia zu Malik kam, versteckte sie sich zuerst in einer Kiste. Malik setzte sich still auf den Boden und wartete. Er wartete viele Tage. Eines Abends streckte Mia zum ersten Mal den Kopf heraus. Dann kam sie langsam zu ihm.\n\nHeute gehört Mia zur Familie. Eine Katze lebt viele Jahre, oft mehr als zehn. So lange sorgt die Familie jeden Tag für sie. Auch an Regentagen und in den Ferien. Dafür bekommt Malik etwas Schönes zurück. Eine Freundin mit leisen Pfoten liegt abends schnurrend neben ihm.",
      "bild": "bilder/06-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wie freundest du dich mit einer Katze an?",
+    "bild": "bilder/06-06.webp",
+    "antworten": [
+     "Die Hand hinhalten und warten",
+     "Sie hochheben und fest drücken",
+     "Ihr eine Schale Milch geben"
+    ],
+    "richtig": 0,
+    "aufloesung": "Man hält eine Hand ruhig hin und wartet. Die Katze entscheidet, ob sie kommt.",
+    "seite": 0
+   }
   }
  ]
 }

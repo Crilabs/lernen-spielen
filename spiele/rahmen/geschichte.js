@@ -17,6 +17,10 @@
 //   Ein Satz wird nur durch einen Tipp des Kindes abgebrochen (Blättern), nie vom Abspieler.
 // - Frage (`frage: true`): Weiter erscheint erst nach dem Vorlesen und einer Ruhe von RUHE_MS, damit das Kind
 //   überlegt; bis dahin blättert auch die Pfeiltaste nicht weiter. Es wird nichts geprüft oder gespeichert.
+// - Erinnerungsfrage (Sachbuch, `kapitel[].erinnern`, geschichten.md §2b, Christian 2026-11-16): nach der letzten Seite
+//   eines Kapitels als eigene Seite (<ls-erinnern>, Foto in der Bildhälfte). Weiter zum nächsten Kapitel bzw. Fertig
+//   erst nach einer Wahl (welche, ist egal); erst dann gilt das Kapitel als gelesen. Vorgelesen wird sie bei Ton an in
+//   beiden Modi. „Nachlesen“ schlägt die Seite mit der Antwort auf.
 // - Fotos tragen kein Label; dass Bilder erzeugt sind, steht in den Eltern-Hinweisen (Christian 2026-11-16).
 // - Seitenwechsel: nur transform und opacity; bei wenig Bewegung nur ein kurzes Überblenden.
 // - Testbetrieb (`?pruefen`, rahmen/pruefen.js): window.lsGeschichte = { seite, seiten, weiterBereit, weiter(),
@@ -31,6 +35,7 @@ import { findeSpiel } from "./knopf.js";
 import { baueBild, SZENE_CSS } from "./szene.js";
 import { testbetrieb } from "./pruefen.js";
 import "./knopf.js";
+import "./erinnern.js";
 
 /** Ruhe vor Weiter auf der Seite mit Frage (geschichten.md §2, Christian 2026-11-15). */
 export const RUHE_MS = 2000;
@@ -217,6 +222,9 @@ ${SZENE_CSS}
   .lese { padding: 13rem 4.8rem 3.2rem; }
   .text { font-size: 3.8rem; max-width: none; }
   :host(.buch-modus) .text { font-size: 3.6rem; max-width: none; }
+  /* Erinnerungsfrage im Hochformat: Foto als schmaler Streifen, ohne Kapiteltitel, damit alle Antworten zu sehen sind. */
+  :host(.frage-offen) .blatt { grid-template-rows: 24% minmax(0, 1fr); }
+  :host(.frage-offen) .seitentitel { display: none; }
 }
 /* Schmal (Telefon hoch): weniger Rand, damit Startknöpfe und Fertig hineinpassen. */
 @container buch (max-width: 560px) {
@@ -234,8 +242,9 @@ ${SZENE_CSS}
 
 
 /**
- * @typedef {{ text: string, sprich?: string, bild?: string, szene?: any[], frage?: boolean }} Seite
- * @typedef {{ titel: string, seiten: Seite[] }} Kapitel
+ * @typedef {{ frage: string, bild: string, antworten: string[], richtig: number, aufloesung: string, seite?: number }} Erinnern
+ * @typedef {{ text: string, sprich?: string, bild?: string, szene?: any[], frage?: boolean, erinnern?: Erinnern }} Seite
+ * @typedef {{ titel: string, seiten: Seite[], erinnern?: Erinnern }} Kapitel
  * @typedef {{ id: string, titel: string, art: string, klasse: number, kulisse?: string, seiten?: Seite[], kapitel?: Kapitel[] }} Geschichte
  * @typedef {{ kapitel: number, seite: number, fertig: number[] }} BuchStand
  */
@@ -277,7 +286,7 @@ export class LsGeschichte extends HTMLElement {
         <div class="lese">
           <ls-knopf class="zum-inhalt" symbol="inhalt.svg" name="Inhalt" groesse="seite" stumm hidden></ls-knopf>
           <ls-knopf class="vorlesen" symbol="vorlesen.svg" wort="Vorlesen" name="Vorlesen" groesse="seite" stumm></ls-knopf>
-          <div class="textfeld"><h2 class="seitentitel ui" hidden></h2><div class="text" aria-live="polite"></div></div>
+          <div class="textfeld"><h2 class="seitentitel ui" hidden></h2><div class="text" aria-live="polite"></div><ls-erinnern class="erinnern" hidden></ls-erinnern></div>
           <div class="startwahl" hidden>
             <ls-knopf class="waehle-vorlesen" art="haupt" symbol="vorlesen.svg" wort="Vorlesen" stumm></ls-knopf>
             <ls-knopf class="waehle-selbst" symbol="buch.svg" wort="Selbst lesen" stumm></ls-knopf>
@@ -312,6 +321,12 @@ export class LsGeschichte extends HTMLElement {
     this.naechstesEl = q(".naechstes");
     this.zumInhaltEl = q(".zum-inhalt");
     this.startEl = q(".start");
+    this.erinnernEl = /** @type {import("./erinnern.js").LsErinnern} */ (q(".erinnern"));
+    this.erinnernEl.addEventListener("gewaehlt", () => this.nachWahl());
+    this.erinnernEl.addEventListener("nachlesen", () => {
+      const ziel = this.liste[this._seite]?.erinnern?.seite;
+      if (Number.isInteger(ziel)) { this.setzeAngehalten(this.modus === "vorlesen"); this.zeige(/** @type {number} */ (ziel), -1); }
+    });
     /** Sachbuch: aufgeschlagenes Kapitel (-1 = Inhaltsverzeichnis); ohne Kapitel immer -1. */
     this.kapitel = -1;
     /** @type {Seite[]} die Seiten, die gerade gelesen werden (Geschichte oder Kapitel) */
@@ -423,6 +438,8 @@ export class LsGeschichte extends HTMLElement {
         get angehalten() { return el.angehalten; },
         get gelesen() { return el.gelesen; },
         get frageSeite() { return el.liste.findIndex((s) => s.frage === true); },
+        get erinnern() { return !!el.liste[el.seite]?.erinnern; },
+        antworte: (/** @type {number} */ i) => el.erinnernEl.waehle(i),
         get kapitel() { return el.kapitel; },
         get kapitelZahl() { return el.kapitelZahl; },
         get stand() { return el.stand; },
@@ -601,7 +618,12 @@ export class LsGeschichte extends HTMLElement {
 
     // Text (vor der Startwahl auf Seite 1: der Titel)
     const titelSeite = this.modus === null && i === 0 && !this.istBuch;
-    this.setzeText(titelSeite ? g.titel : s.text);
+    const frage = s.erinnern ?? null;
+    this.textEl.hidden = !!frage;
+    this.erinnernEl.hidden = !frage;
+    this.vorlesenEl.hidden = !!frage;
+    this.classList.toggle("frage-offen", !!frage);
+    this.setzeText(frage ? "" : titelSeite ? g.titel : s.text);
     this.textEl.classList.toggle("titel", titelSeite);
     this.zeigeSeitentitel(!titelSeite);
     /** @type {HTMLElement} */ (this.textEl.parentElement).scrollTop = 0;
@@ -612,17 +634,23 @@ export class LsGeschichte extends HTMLElement {
     const letztesKapitel = !this.istBuch || this.kapitel === this.kapitelZahl - 1;
     this.zurueckEl.classList.toggle("unsichtbar", i === 0);
     this.weiterEl.hidden = letzte;
-    this.fertigEl.hidden = !(letzte && letztesKapitel);
-    this.naechstesEl.hidden = !(letzte && !letztesKapitel);
+    // Nach der Erinnerungsfrage erst nach einer Wahl (nachWahl)
+    this.fertigEl.hidden = !(letzte && letztesKapitel) || !!frage;
+    this.naechstesEl.hidden = !(letzte && !letztesKapitel) || !!frage;
     if (!this.naechstesEl.hidden) this.naechstesEl.setAttribute("wort", `Kapitel ${this.kapitel + 2}`);
     this.zumInhaltEl.hidden = !this.istBuch;
-    if (this.istBuch) this.merkeStand(i, letzte);
+    if (this.istBuch) this.merkeStand(i, letzte && !frage);
     [...this.punkteEl.children].forEach((p, k) => {
       p.classList.toggle("jetzt", k === i);
       p.classList.toggle("gelesen", k < i);
     });
-    this.weiterBereit = !s.frage;
+    this.weiterBereit = !s.frage && !frage;
     this.weiterEl.classList.toggle("wartet", !!s.frage);
+    if (frage) {
+      // Alles vorlesen bei Ton an, auch beim Selbst lesen (Christian 2026-11-16); nichts blättert von selbst.
+      this.erinnernEl.zeige(frage, { ton: this.ton && this.modus !== null, nachlesen: Number.isInteger(frage.seite) });
+      return;
+    }
     // Gelesen wird beim Aufschlagen nur im Vorlesemodus und nicht angehalten; Selbst lesen bleibt still
     // (der Vorlese-Knopf liest auf Wunsch die Seite).
     const stumm = this.modus !== "vorlesen" || this.angehalten;
@@ -640,6 +668,16 @@ export class LsGeschichte extends HTMLElement {
       };
       if (stumm) frei(); else this.lies().then(frei, frei);
     }
+  }
+
+  /** Nach der Wahl in der Erinnerungsfrage: Kapitel gelesen, weiter zum nächsten Kapitel bzw. Fertig. */
+  nachWahl() {
+    if (!this.liste[this._seite]?.erinnern) return;
+    const letztesKapitel = this.kapitel === this.kapitelZahl - 1;
+    this.fertigEl.hidden = !letztesKapitel;
+    this.naechstesEl.hidden = letztesKapitel;
+    if (!letztesKapitel) this.naechstesEl.setAttribute("wort", `Kapitel ${this.kapitel + 2}`);
+    this.merkeStand(this._seite, true);
   }
 
   /**
@@ -756,6 +794,7 @@ export class LsGeschichte extends HTMLElement {
     stille();
     this.nummer += 1;
     this.kapitel = -1;
+    this.classList.remove("frage-offen");
     this.liste = [];
     this._seite = -1;
     this.setzeModus(this.modus ?? "selbst");
@@ -803,7 +842,9 @@ export class LsGeschichte extends HTMLElement {
     const g = this.daten;
     if (!g?.kapitel || k < 0 || k >= g.kapitel.length) return;
     this.kapitel = k;
-    this.liste = g.kapitel[k].seiten;
+    const e = g.kapitel[k].erinnern;
+    const mitFrage = e && typeof e.frage === "string" && Array.isArray(e.antworten) && e.antworten.length >= 2;
+    this.liste = mitFrage ? [...g.kapitel[k].seiten, { text: e.frage, bild: e.bild, erinnern: e }] : g.kapitel[k].seiten;
     this.punkteEl.replaceChildren(...this.liste.map(() => document.createElement("i")));
     this.inhaltEl.hidden = true;
     this.blattEl.hidden = false;

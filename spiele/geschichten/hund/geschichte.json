@@ -197,7 +197,19 @@
      "text": "Schau einmal genau in Kalles Gesicht, wenn er dich ansieht. Über seinen Augen bewegt sich etwas. Er zieht die inneren Ecken seiner Augenbrauen ein Stück nach oben. Dann wirken seine Augen größer und ganz weich.\n\nDafür haben Hunde einen kleinen Muskel über dem Auge. Forscher haben entdeckt: Wölfe haben diesen Muskel fast nicht. Hunde zeigen den Blick oft, wenn ein Mensch sie anschaut. Und wir Menschen reagieren stark darauf. Viele nennen ihn den Hundeblick.",
      "bild": "bilder/01-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Woher kommen alle Hunde auf der Welt?",
+    "bild": "bilder/01-01.webp",
+    "antworten": [
+     "Jede Rasse hat andere Urahnen",
+     "Alle stammen vom Wolf ab",
+     "Alle stammen vom Fuchs ab"
+    ],
+    "richtig": 1,
+    "aufloesung": "Jeder Hund auf der Welt stammt vom Wolf ab. Auch der winzige Chihuahua und der riesige Irische Wolfshund.",
+    "seite": 0
+   }
   },
   {
    "titel": "Die Supernase",
@@ -223,7 +235,19 @@
      "text": "Manche Hunde haben mit ihrer Nase eine Arbeit. Spürhunde suchen am Flughafen nach Dingen, die nicht in einen Koffer gehören. Lawinenhunde lernen, Menschen im Schnee zu finden. Beim Üben versteckt sich ein Helfer im Schnee. Der Hund sucht mit der Nase, bis er ihn findet.\n\nFür die Hunde ist auch das ein Suchspiel. Finden sie, was sie suchen, bekommen sie eine Belohnung. Sie üben lange mit ihren Menschen. Kalle ist kein Spürhund. Aber seine Nase funktioniert genauso. Er übt nur jeden Tag auf dem Spaziergang.",
      "bild": "bilder/02-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Was macht ein Hund, wenn er lange an einem Baum schnüffelt?",
+    "bild": "bilder/02-01.webp",
+    "antworten": [
+     "Er sucht nur nach Futter",
+     "Er trödelt, weil ihm langweilig ist",
+     "Er liest Nachrichten anderer Hunde"
+    ],
+    "richtig": 2,
+    "aufloesung": "Für einen Hund ist der Baum voller Nachrichten anderer Hunde. Er liest sie mit der Nase.",
+    "seite": 0
+   }
   },
   {
    "titel": "Körper und Sinne",
@@ -253,7 +277,19 @@
      "text": "Papa gießt frisches Wasser aus der Flasche in einen Napf. Kalle trinkt sofort. Schlapp, schlapp, schlapp! Das Wasser spritzt bis auf Idas Schuhe.\n\nHunde können nicht saugen wie wir mit einem Strohhalm. Sie schlabbern. Dabei biegt sich die Zungenspitze nach hinten, wie ein kleiner Löffel. Die Zunge schnellt ins Wasser und gleich wieder hoch. Dabei reißt sie eine kleine Wassersäule mit. Die schnappt Kalle mit dem Maul. Darum hat Papa immer Wasser dabei, wenn sie unterwegs sind. Vor allem, wenn es warm ist.",
      "bild": "bilder/03-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wie kühlt sich ein Hund ab, wenn ihm warm ist?",
+    "bild": "bilder/03-06.webp",
+    "antworten": [
+     "Er hechelt mit offenem Maul",
+     "Er schwitzt am ganzen Körper",
+     "Er fächelt sich mit den Ohren Luft zu"
+    ],
+    "richtig": 0,
+    "aufloesung": "Ein Hund kann kaum schwitzen. Er kühlt sich mit dem Hecheln ab.",
+    "seite": 4
+   }
   },
   {
    "titel": "Welpen",
@@ -278,7 +314,19 @@
      "text": "Als kleiner Welpe hatte Kalle dünne, scharfe Milchzähne. Ab ungefähr vier Monaten fielen sie aus. Darunter wuchsen die großen Zähne nach. In dieser Zeit wollte Kalle auf allem herumkauen, sogar auf Idas Hausschuhen.\n\nDarum bekam er Kauspielzeug, das ihm gehörte. Ein junger Hund lernt jeden Tag dazu. Er lernt, an der Leine zu gehen. Er lernt, wo sein Schlafplatz ist. Heute ist Kalle erwachsen. Aber ein Hund lernt sein ganzes Leben lang dazu.",
      "bild": "bilder/04-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Was lernen Welpen, wenn sie mit ihren Geschwistern raufen?",
+    "bild": "bilder/04-02.webp",
+    "antworten": [
+     "Wie man kämpft und gewinnt",
+     "Wie fest sie zubeißen dürfen",
+     "Nichts, sie toben nur herum"
+    ],
+    "richtig": 1,
+    "aufloesung": "Beim Spielen lernt jeder Welpe, wie fest er zubeißen darf. Und er lernt die Sprache der anderen Hunde.",
+    "seite": 2
+   }
   },
   {
    "titel": "Was der Hund sagt",
@@ -308,7 +356,19 @@
      "text": "Manchmal sagt ein Hund ganz deutlich: Bleib weg! Er wird steif und starrt. Vielleicht knurrt er, zeigt die Zähne, und das Fell auf seinem Nacken stellt sich auf. Dann hält man Abstand. Man schaut ihn nicht an, geht langsam weg und fasst ihn nie an. Ist ein Erwachsener in der Nähe, sagt man es ihm.\n\nKnurren ist eine Warnung. Es ist gut, dass ein Hund warnt. Er sagt damit vorher, was er nicht will. Kalle knurrt zum Beispiel leise, wenn jemand an seinen Kauknochen geht. Darum lassen Ida und Jonas ihn beim Kauen in Ruhe.",
      "bild": "bilder/05-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Worauf schaust du, um zu sehen, wie es einem Hund geht?",
+    "bild": "bilder/05-01.webp",
+    "antworten": [
+     "Auf den wedelnden Schwanz",
+     "Auf sein lautes Bellen",
+     "Auf den ganzen Hund"
+    ],
+    "richtig": 2,
+    "aufloesung": "Wedeln heißt vor allem: Der Hund ist aufgeregt. Erst der ganze Hund zusammen verrät, wie es ihm geht.",
+    "seite": 3
+   }
   },
   {
    "titel": "Sicher mit Hunden",
@@ -333,7 +393,19 @@
      "text": "Idas Freundin Mira hat Angst vor Hunden. Auf dem Weg kommt ihnen ein großer Hund an der Leine entgegen. Mira wird ganz still. Der Mann mit dem Hund meint, sie könne ihn ruhig streicheln. Er sei ganz lieb.\n\nMira muss das nicht. Niemand muss einen Hund streicheln. Auch nicht, wenn jemand sagt, er sei lieb. Mira geht ruhig weiter und macht einen großen Bogen um den Hund. Sie schaut nicht zu ihm hin. Auch für Hunde ist ein Bogen ein freundliches Zeichen. Er heißt: Keine Sorge, hier will niemand etwas von dir. Der Hund schnuppert am Wegrand und beachtet Mira gar nicht.",
      "bild": "bilder/06-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Was tust du, wenn ein fremder Hund auf dich zuläuft?",
+    "bild": "bilder/06-05.webp",
+    "antworten": [
+     "Still stehen wie ein Baum",
+     "Ganz schnell davonrennen",
+     "Hingehen und ihn streicheln"
+    ],
+    "richtig": 0,
+    "aufloesung": "Wer rennt, weckt bei vielen Hunden die Lust, hinterherzulaufen. Ein stiller Baum ist für einen Hund langweilig.",
+    "seite": 2
+   }
   },
   {
    "titel": "Was ein Hund braucht",
@@ -358,7 +430,19 @@
      "text": "Nach dem Spaziergang wäscht sich Ida die Hände. Das macht man nach dem Streicheln von Hunden immer, auch nach dem eigenen. Und wenn ein Hund einmal zwickt oder kratzt, zeigt man es einem Erwachsenen. Auch wenn es ganz klein ist.\n\nAm Abend ist es still im Haus. Kalle liegt in seinem Körbchen und schläft. Seine Pfoten zucken ein wenig. Ida und Papa sitzen in seiner Nähe und blättern in einem Hundebuch. Ida weiß jetzt, wie Kalle redet. Sie weiß, was seine Nase kann. Und sie weiß, wann er seine Ruhe braucht. So werden Kind und Hund Freunde.",
      "bild": "bilder/07-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wie lernt ein Hund am besten etwas Neues?",
+    "bild": "bilder/07-05.webp",
+    "antworten": [
+     "Mit Strafe, wenn es nicht klappt",
+     "Mit Belohnung, wenn es klappt",
+     "Mit Erklären, so wie bei Kindern"
+    ],
+    "richtig": 1,
+    "aufloesung": "Hunde lernen am besten mit Belohnung, nicht mit Strafe. Belohnen kann man mit Leckerchen, Spielen, Streicheln oder einer freundlichen Stimme.",
+    "seite": 1
+   }
   }
  ]
 }

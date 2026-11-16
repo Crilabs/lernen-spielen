@@ -225,6 +225,10 @@ Abschluss   (Skript)  → Audio, Spielbild, Kosten, Merge nach main   (nach 2 Ru
 - **Jeder Agent ist frisch** und bekommt nur das Bauheft und seine Dateien; kein Agent wird fortgesetzt.
 - **Mit echten Dingen** gehört nicht zum Lauf: Die Anleitungen entstehen in eigenen Sammelläufen
   (`.claude/skills/mit-echten-dingen/`).
+- **Jeder Browser ist stumm** (Christian, 2026-11-16): Christian arbeitet und telefoniert neben den Läufen.
+  Screenshots mit `werkzeuge/spielbau/bildschirm.mjs`, Skripte über `starteStumm` (`tests/browser/stumm.mjs`).
+  Ein eigener Browserstart lädt das Spiel mit Ton; der Hook `.claude/hooks/nur-stumme-browser.mjs` lehnt ihn ab
+  (Bau-Agenten taten das bis dahin bei fast jedem Screenshot).
 - **Ein Spiel nach dem anderen** (Christian, 2026-11-15): nie zwei Läufe gleichzeitig; der nächste startet erst nach
   dem Abschluss des vorigen.
 - **Erst Probe, dann fertig** (Christian, 2026-11-15): Ein grünes Spiel kommt als **Probe** nach `main`

@@ -354,3 +354,7 @@ test("prognose: nur alte Spiele → kein Durchschnitt", () => {
   assert.equal(p.durchschnitt, null);
   assert.equal(p.ausgegeben, 50);
 });
+
+test("pruefeEintrag: Phase „bilder“ für die Claude-Agenten des Bildteils eines Buchs (Bilder erzeugen, Bildprüfung)", () => {
+  assert.equal(pruefeEintrag(claude("m-b", 1, 1, "bilder")).phase, "bilder");
+});

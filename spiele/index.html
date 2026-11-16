@@ -13,10 +13,10 @@
    die Karten „Mit echten Dingen“); unten „Zuletzt gelernt“ (führt ins Regal an das Thema) und die Pille
    „Was ich schon kann“. Dahinter das Grundmuster Hügel. Kein Plakat ist hervorgehoben; keine Zahl, keine Zählung,
    kein Klassenbezug (N5, N8). Diese Seite liest den Lernstand nur, sie schreibt ihn nie.
-   Spielzeit der Eltern (Spec 2026-11-14-spielzeit): Die Startseite ist nie gesperrt. Ist die Zeit um oder der Tag
-   gesperrt, fehlen nur die Spielkarten; über dem Raster steht ein ruhiger Satz, einmal je Sitzung gesprochen.
-   „Mit echten Dingen“, die Fächer (Kopf → Fach-Seite) und „Zuletzt gelernt“ bleiben.
-   Zahnrad für Erwachsene rechts im Kopf: gedrückt halten, dabei läuft leise ein Ring herum. */
+   Spielzeit der Eltern (Spec 2026-11-14-spielzeit, 2026-11-16-buecherzeit): Die Startseite ist nie gesperrt. Ist die
+   Zeit um oder der Tag gesperrt, tragen die Spielkarten eine Uhr; ein Tippen zeigt den Hinweis (rahmen/zeitsperre.js).
+   Von den Eltern ausgeblendet fehlen sie. „Mit echten Dingen“, die Fächer und „Zuletzt gelernt“ bleiben.
+   Zahnrad für Erwachsene rechts im Kopf (rahmen/zahnrad.js): gedrückt halten, dabei läuft leise ein Ring herum. */
 body { -webkit-user-select: none; user-select: none; }
 
 .start {
@@ -34,8 +34,6 @@ body { -webkit-user-select: none; user-select: none; }
 .raster { overflow-y: auto; padding: 1.4rem var(--ls-seite-rand) 4rem; scrollbar-width: none; }
 .raster::-webkit-scrollbar { display: none; }
 .raster .leer { margin: 4rem 0 0; font-size: 4.5rem; color: var(--ls-tinte-weich); }
-.schluss { margin: 0 0 3.2rem; max-width: 70ch; font-size: 3.6rem; line-height: 1.3; }
-.schluss[hidden] { display: none; }
 .fach-abschnitt + .fach-abschnitt { margin-top: 7rem; }
 .fach-kopf { display: inline-flex; align-items: center; gap: 2.6rem; margin-bottom: 4.6rem; color: var(--ls-tinte); text-decoration: none;
   -webkit-tap-highlight-color: transparent; }
@@ -100,15 +98,6 @@ body { -webkit-user-select: none; user-select: none; }
 .regal-knopf:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
 .regal-knopf:focus-visible { outline: 1rem solid var(--ls-sonne); outline-offset: 0.6rem; }
 
-/* --- Zahnrad für Erwachsene (im Slot rechts des Kopfes) ----------------------------------------- */
-.zahnrad { position: relative; display: flex; width: 11rem; height: 11rem; touch-action: none; }
-/* Der Ring sitzt um die sichtbare Form beim Halten: Knopf eingesunken (0.3rem) samt Kante unten (0.6 − 0.3rem),
-   deren Mitte liegt 0.45rem unter der Mitte des Kastens. */
-.zahnrad svg { position: absolute; inset: 0.6rem; width: calc(100% - 1.2rem); height: calc(100% - 1.2rem); transform: translateY(0.45rem) rotate(-90deg); pointer-events: none; opacity: 0; transition: opacity 0.2s; }
-.zahnrad circle { fill: none; stroke: var(--ls-tinte-weich); stroke-width: 2.8; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; }
-.zahnrad.haelt svg { opacity: 1; }
-.zahnrad.haelt circle { stroke-dashoffset: 0; transition: stroke-dashoffset var(--halten) linear; }
-
 @media (max-aspect-ratio: 4/3) {
   .fach-kopf b { font-size: 8rem; }
   .zuletzt .name { font-size: 2.5rem; }
@@ -118,10 +107,10 @@ body { -webkit-user-select: none; user-select: none; }
 <body>
 <ls-muster art="huegel"></ls-muster>
 <ls-kopf id="leiste" reiter="koennen" spiel="ansichten">
-  <span class="zahnrad" id="zahnrad" slot="rechts"><ls-knopf id="eltern" symbol="zahnrad.svg" name="Für Erwachsene: gedrückt halten" groesse="seite" stumm></ls-knopf><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.6" pathLength="100"/></svg></span>
+  <span id="zahnrad" slot="rechts"></span>
 </ls-kopf>
 <main class="start">
-  <div class="raster" aria-label="Spiele"><p class="schluss" id="schluss" role="status" hidden></p><div id="raster"></div></div>
+  <div class="raster" aria-label="Spiele"><div id="raster"></div></div>
   <footer class="unten" id="seite">
     <div id="regal"></div>
   </footer>
@@ -143,15 +132,14 @@ import { startKarten } from "./start/auswahl.js";
 import { paletteFuer, vignetteSvg } from "./start/welten.js";
 import { spielKarteHtml, echtKarteHtml, echtBildHtml, abschnittHtml } from "./start/karten.js";
 import { zuletztHtml } from "./start/regal-leiste.js";
-import { spielzeitLage, schlussSatz, sage } from "./rahmen/spielzeit.js";
+import { spielzeitLage } from "./rahmen/spielzeit.js";
+import { sperre, satzFuer } from "./rahmen/zeitsperre.js";
+import { zahnrad } from "./rahmen/zahnrad.js";
 import { ladeVerzeichnis, fotoUrl } from "./rahmen/echte-dinge.js";
-
-/** So lange hält ein Erwachsener das Zahnrad (wie bisher). */
-const HALTEN_MS = 3000;
 
 sperreTouch();
 const leiste = document.getElementById("leiste");
-zahnrad();
+zahnrad(document.getElementById("zahnrad"));
 start();
 
 async function start() {
@@ -163,14 +151,11 @@ async function start() {
     stand = await ladeLernstand(ctx, heute);
   } catch (e) { ctx = null; protokoll("start: " + e); } // ohne Daten: leeres Raster und leeres Regal, ohne Meldung
   await leiste.bereit();
-  // Spielzeit: gesperrt heißt nur „keine Spielkarten“; nicht lesbar heißt frei (nie ohne Grund sperren).
+  // Spielzeit: gesperrt bleiben die Spielkarten sichtbar, mit Uhr und Hinweis (zeitsperre.js); von den Eltern
+  // ausgeblendet fehlen sie. Nicht lesbar heißt frei (nie ohne Grund sperren).
   const zeit = await spielzeitLage().catch((e) => { protokoll("Spielzeit: " + e); return null; });
   const spielFrei = !zeit || zeit.lage.frei;
-  const satz = zeit ? schlussSatz(zeit) : null;
-  const schluss = document.getElementById("schluss");
-  schluss.textContent = satz ?? "";
-  schluss.hidden = !satz;
-  if (satz && leiste.ton) sage(satz);
+  const spieleZeigen = spielFrei || zeit.lage.grund !== "aus";
 
   const themaNach = new Map((ctx?.plan.themen ?? []).map((t) => [t.id, t]));
   const kategorien = new Map((ctx?.spiele.kategorien ?? []).map((k) => [k.id, k]));
@@ -179,12 +164,15 @@ async function start() {
   const raster = document.getElementById("raster");
   const faecher = ctx ? startKarten(uebersicht(ctx, stand), ctx, stand, heute) : [];
   raster.innerHTML = faecher.length ? faecher.map((f) => abschnittHtml(kategorien.get(f.fach) ?? { id: f.fach, name: f.fach },
-    (spielFrei ? f.spiele : []).map((k) => {
+    (spieleZeigen ? f.spiele : []).map((k) => {
       const palette = paletteFuer(ctx, k.spiel.karte?.welt ?? k.spiel.welt);
       return spielKarteHtml(k, f.fach, palette ? vignetteSvg(palette) : null);
     }).join("") + f.echt.map((k) => echtKarteHtml(k, f.fach)).join(""))).join("")
-    : (satz ? "" : `<p class="leer">Hier kommen bald Spiele.</p>`);
-  raster.querySelectorAll("a.karte.spiel").forEach((a) => nenne(a, a.querySelector("b").textContent));
+    : `<p class="leer">Hier kommen bald Spiele.</p>`;
+  if (!spielFrei) {
+    raster.querySelectorAll("a.karte.spiel").forEach((a) => sperre(a, a.querySelector(".bild"), satzFuer(zeit.lage.grund), () => leiste.ton));
+  }
+  raster.querySelectorAll("a.karte.spiel:not(.gesperrt)").forEach((a) => nenne(a, a.querySelector("b").textContent));
   raster.querySelectorAll("a.fach-kopf").forEach((a) => nenne(a, a.querySelector("b").textContent));
 
   // Unten: zuletzt gelernt (bleibt kurz), daneben der Knopf zum Regal
@@ -221,27 +209,6 @@ function nenne(a, name) {
   });
 }
 
-// Zugang für Erwachsene: Zahnrad gedrückt halten (Finger, Maus oder Eingabe-/Leertaste). Der Knopf ist stumm:
-// sein Name wird nicht gesprochen, ein kurzes Tippen tut nichts.
-function zahnrad() {
-  const rad = document.getElementById("zahnrad");
-  rad.style.setProperty("--halten", HALTEN_MS + "ms");
-  let uhr = null;
-  const los = () => { clearTimeout(uhr); uhr = null; rad.classList.remove("haelt"); };
-  const halte = () => {
-    if (uhr) return;
-    rad.classList.add("haelt");
-    uhr = setTimeout(() => { los(); location.href = "eltern.html"; }, HALTEN_MS);
-  };
-  rad.addEventListener("pointerdown", (e) => {
-    try { rad.setPointerCapture(e.pointerId); } catch { /* egal */ }
-    halte();
-  });
-  ["pointerup", "pointercancel", "lostpointercapture"].forEach((t) => rad.addEventListener(t, los));
-  rad.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); halte(); } });
-  rad.addEventListener("keyup", (e) => { if (e.key === "Enter" || e.key === " ") los(); });
-  rad.addEventListener("focusout", los);
-}
 </script>
 </body>
 </html>

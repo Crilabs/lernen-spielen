@@ -72,7 +72,8 @@ test("claudeArgumente: stream-json mit --verbose, Sperrliste zuletzt", () => {
   assert.equal(a.at(-1), "Bash(./release.sh:*)");
 });
 
-test("startClaude: Protokoll wächst während des Laufs lesbar, Exit-Code zurück", async () => {
+// Das vorgetäuschte claude ist ein sh-Skript; die Verwaltung läuft nur auf dem Mac (npm run verwaltung).
+test("startClaude: Protokoll wächst während des Laufs lesbar, Exit-Code zurück", { skip: process.platform === "win32" && "braucht sh" }, async () => {
   const o = mkdtempSync(join(tmpdir(), "start-"));
   const bin = join(o, "bin");
   mkdirSync(bin);

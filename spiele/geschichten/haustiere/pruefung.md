@@ -69,3 +69,11 @@ Je Seite die Kernaussage; jedes Bild mit dem Read-Werkzeug angesehen. Mias Steck
 ## 4. Titelbild
 
 `bilder/05-03.webp`, Ausschnitt `50% 50%` (gewählt von einem frischen Agenten, 2026-11-16): Mia liegt entspannt auf dem Sofa, eine Kinderhand streichelt sie. Das fasst die Hauskatze und das Freundwerden zusammen, und der liegende Körper passt mit Ohren, Gesicht und Pfoten in den Streifen.
+
+## 5. Erinnerungsfragen (2026-11-16)
+
+Je Kapitel eine Frage nach docs/geschichten.md §2b, geschrieben von einem Agenten, geprüft von einem frischen Prüfer (Text, Seite, Bild angesehen).
+
+Haustiere (Katze): 6 Fragen gegen Text, Seiten und Bilder geprüft; Seiten und Sachaussagen stimmen, Auflösungen neutral.
+Geändert: K2 passende Antwort war als einzige zweiteilig und länger → beide Ablenker ebenfalls zweiteilig („Sie ist wütend und tobt sich aus“, „Sie will gern etwas kaputt machen“).
+K3 Bild 03-01 (Abendlampe, große Pupillen) deutete auf „dämmrig“ → 03-03; Ablenker „Am hellen Mittag“ → „Wenn die Sonne hell scheint“ (gleich gebaut). K5 Bild 05-03 (Schnurren) → 05-04, das genau die gefragte Streichelszene zeigt, ohne die Antwort zu verraten.

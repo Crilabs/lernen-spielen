@@ -100,3 +100,11 @@ gelöscht und sind in `kosten.json` als „verworfen“ markiert. Kosten in `kos
 ## 4. Titelbild
 
 `bilder/03-05.webp`, Ausschnitt `50% 25%` (gewählt von einem frischen Agenten, 2026-11-16): Kalle, die Hauptfigur, liegt entspannt und freundlich im hellen Gras. Er liegt quer und passt gut in den Streifen: Kopf, Augen, Ohren und Brust bleiben ganz zu sehen.
+
+## 5. Erinnerungsfragen (2026-11-16)
+
+Je Kapitel eine Frage nach docs/geschichten.md §2b, geschrieben von einem Agenten, geprüft von einem frischen Prüfer (Text, Seite, Bild angesehen).
+
+Hund: 7 Fragen gegen Text, Seiten und Bilder geprüft; Seiten und Sachaussagen stimmen, Bilder verraten nichts.
+Geändert: K2 fragte nach der Figur („Was macht Kalle …“) → nach der Sache („Was macht ein Hund …“), Auflösung entsprechend allgemein.
+K5 hatte „Nur … / Nur … / Am ganzen Hund“ (Form verriet die Antwort) → „Worauf schaust du, um zu sehen, wie es einem Hund geht?“ mit drei gleich gebauten „Auf …“-Antworten.

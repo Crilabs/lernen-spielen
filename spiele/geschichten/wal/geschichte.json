@@ -178,7 +178,19 @@
      "text": "Wenn du Mira ganz nah sehen könntest, würdest du staunen. Auf ihrem Kopf sitzen viele runde Knubbel, ungefähr so groß wie Golfbälle. In jedem Knubbel wächst ein einzelnes Haar. Ja, auch Wale haben Haare, nur sehr wenige. Wozu sie gut sind, wissen Forschende noch nicht genau.\n\nEin Fell hat Mira nicht. Warm hält sie etwas anderes. Unter ihrer glatten Haut liegt eine dicke Schicht aus Speck. Er umhüllt sie wie eine warme Decke. Darum friert Mira nicht, auch nicht im eiskalten Meer bei der Antarktis.",
      "bild": "bilder/01-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Womit atmet ein Wal?",
+    "bild": "bilder/01-01.webp",
+    "antworten": [
+     "Mit Kiemen, wie ein Fisch",
+     "Mit einer Lunge, wie du",
+     "Mit Wasser durch das Blasloch"
+    ],
+    "richtig": 1,
+    "aufloesung": "Ein Wal hat eine Lunge, so wie du. Darum taucht er zum Atmen auf und pustet seinen Atem aus.",
+    "seite": 2
+   }
   },
   {
    "titel": "Barten statt Zähne",
@@ -208,7 +220,19 @@
      "text": "Mira ist riesig. Doch es gibt einen Wal, der noch viel größer ist: den Blauwal. Er ist das größte Tier, das je auf der Erde gelebt hat. Er ist sogar schwerer als die größten Dinosaurier. Ein großer Blauwal ist ungefähr so lang wie zwei Linienbusse hintereinander.\n\nUnd was frisst dieser Riese? Fast nur Krill, die kleinen Krebse, so lang wie dein Finger. An einem Tag schluckt er davon riesige Mengen. Auch der Blauwal hat Barten statt Zähnen. Das größte Tier der Welt lebt also von winzigen Krebsen.",
      "bild": "bilder/02-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wozu braucht ein Bartenwal seine Barten?",
+    "bild": "bilder/02-06.webp",
+    "antworten": [
+     "Als Sieb für winzige Krebse",
+     "Zum Kauen von großen Fischen",
+     "Zum Kämpfen mit anderen Walen"
+    ],
+    "richtig": 0,
+    "aufloesung": "Das Wasser fließt durch die Barten ab wie durch ein Sieb. Der Krill bleibt hängen, und der Wal schluckt ihn.",
+    "seite": 2
+   }
   },
   {
    "titel": "Ein Walkind wächst heran",
@@ -233,7 +257,19 @@
      "text": "Am Nachmittag ruht Mira. Sie sinkt tief hinab und bleibt dort lange ganz still. Ihr Kalb kann die Luft noch nicht so lange anhalten. Alle paar Minuten steigt es allein nach oben. Pfff! macht es an der Oberfläche. Es atmet drei- oder viermal.\n\nDabei schwimmt es kleine Kreise, genau über seiner Mutter. Dann taucht es wieder zu ihr hinab. Manchmal schafft es die Tiefe noch nicht. Dann treibt es wieder nach oben, mit dem Schwanz voran. Ein Kalb muss eben öfter atmen als eine große Walmutter. Ungefähr ein Jahr lang bleibt es bei ihr und lernt von ihr.",
      "bild": "bilder/03-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Was frisst ein Walkalb in seinem ersten Jahr?",
+    "bild": "bilder/03-02.webp",
+    "antworten": [
+     "Krill, wie seine Mutter",
+     "Algen aus dem Wasser",
+     "Milch von seiner Mutter"
+    ],
+    "richtig": 2,
+    "aufloesung": "Das Kalb trinkt fette Milch bei seiner Mutter. Erst nach fast einem Jahr frisst es selbst Krill.",
+    "seite": 2
+   }
   },
   {
    "titel": "Lieder und Rufe",
@@ -259,7 +295,19 @@
      "text": "Delfine sind Zahnwale. Lange Lieder wie die Buckelwale singen sie nicht. Sie pfeifen und klicken. Jeder Große Tümmler hat seinen eigenen Pfiff. Daran erkennen ihn die anderen, fast wie an einem Namen.\n\nDie Klicks kommen ganz schnell hintereinander: klick, klick, klick. Sie fliegen durchs Wasser und prallen an einem Fisch oder einem Felsen ab. Zurück kommt ein Echo. Am Echo hört der Delfin, wo etwas ist. Du kennst ein Echo vielleicht aus einem leeren Treppenhaus. Du rufst laut, und der Ruf kommt zurück.",
      "bild": "bilder/04-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wer singt bei den Buckelwalen die langen Lieder?",
+    "bild": "bilder/04-01.webp",
+    "antworten": [
+     "Die Männchen, viele Stunden lang",
+     "Die Mütter, für ihre Kälber",
+     "Die Kälber, wenn sie rufen"
+    ],
+    "richtig": 0,
+    "aufloesung": "Nur die Buckelwal-Männchen singen solche langen Lieder. Mutter und Kalb rufen einander nur leise.",
+    "seite": 2
+   }
   },
   {
    "titel": "Die große Reise",
@@ -289,7 +337,19 @@
      "text": "Nach vielen Wochen sind Mira und ihr Kalb im kalten Meer angekommen. Auf dem Wasser treiben weiße Eisschollen. In der Ferne glänzt eine Küste aus Eis. Die Luft ist kalt und klar.\n\nPfff! Das Kalb taucht auf und atmet. Über dem kalten Wasser steht seine kleine weiße Atemwolke. Es trinkt noch Milch bei seiner Mutter. Aber bald probiert es auch selbst den Krill. Mira frisst sich hier wieder rund. Wird es hier wieder dunkel und kalt, schwimmt sie zurück nach Norden ins warme Meer.",
      "bild": "bilder/05-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Warum schwimmen Buckelwale jedes Jahr hin und her?",
+    "bild": "bilder/05-04.webp",
+    "antworten": [
+     "Im warmen Meer gibt es mehr Futter",
+     "Zum Fressen ins Kalte, für Kälber ins Warme",
+     "Sie suchen jedes Jahr ein neues Zuhause"
+    ],
+    "richtig": 1,
+    "aufloesung": "Zum Fressen schwimmen die Wale ins kalte Meer, für die Kälber ins warme. Dort kann ein Kalb in Ruhe trinken und wachsen.",
+    "seite": 1
+   }
   },
   {
    "titel": "Wale und wir",
@@ -314,7 +374,19 @@
      "text": "Vielleicht siehst du eines Tages selbst einen Wal. Von einer Küste aus oder von einem Boot. Dann hält man Abstand und ist leise. Die Wale sollen in Ruhe atmen, fressen und ihre Kälber versorgen können. Boote fahren deshalb nicht direkt auf Wale zu.\n\nUnd Mira? Sie schwimmt durch das kalte, klare Meer. Sie frisst Krill, und ihr Speck wird wieder dick. Neben ihr taucht ihr Kalb auf, schon ein ganzes Stück größer. Im nächsten Jahr zieht Mira wieder nach Norden. Vielleicht klingt dort bald wieder ein langes Lied durchs Wasser.",
      "bild": "bilder/06-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Was geschah mit den Buckelwalen, als die Jagd verboten wurde?",
+    "bild": "bilder/06-05.webp",
+    "antworten": [
+     "Heute gibt es gar keine mehr",
+     "Sie sind immer noch sehr selten",
+     "Heute gibt es wieder viel mehr"
+    ],
+    "richtig": 2,
+    "aufloesung": "Die Buckelwale kamen zurück. Wenn man Tiere in Ruhe lässt und schützt, können sie sich erholen.",
+    "seite": 1
+   }
   }
  ]
 }

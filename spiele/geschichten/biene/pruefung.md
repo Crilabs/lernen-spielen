@@ -113,3 +113,10 @@ zweimal), 5 alte Bilder gelöscht (01, 05, 09, 10, 12: Seiten gibt es nicht mehr
 ## 4. Titelbild
 
 `bilder/01-02.webp`, Ausschnitt `50% 40%` (gewählt von einem frischen Agenten, 2026-11-16): Eine Honigbiene wie Lotta sammelt auf einem Löwenzahn in der hellen Frühlingswiese, scharf und von der Seite mit Kopf, Augen, Rüssel, Flügeln und gestreiftem Hinterleib. Das Bild fasst Insekt, Sammeln und Blüte zusammen, und die Biene passt ganz in den Streifen.
+
+## 5. Erinnerungsfragen (2026-11-16)
+
+Je Kapitel eine Frage nach docs/geschichten.md §2b, geschrieben von einem Agenten, geprüft von einem frischen Prüfer (Text, Seite, Bild angesehen).
+
+Biene: 7 Fragen gegen Kapiteltext, Seitenindex und alle 7 Bilder geprüft. Kernaussagen, Antworten (genau eine passt, Fehlvorstellungen plausibel), Auflösungen neutral, Seiten stimmen, kein Bild verrät die Antwort.
+Geändert: K5 „Wofür sammeln die Bienen den Honig?“ → „Wofür machen die Bienen den Honig?“ (Bienen sammeln Nektar, Honig machen sie im Stock, wie das Kapitel erzählt).

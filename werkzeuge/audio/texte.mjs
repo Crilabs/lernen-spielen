@@ -149,6 +149,14 @@ export function sammle(wurzel) {
         const t = typeof s?.sprich === "string" && s.sprich ? s.sprich : s?.text;
         if (typeof t === "string") neu(t, rel(spiele, p));
       }
+  // Erinnerungsfragen der Sachbücher (geschichten.md §2b): Frage, jede Antwort, Auflösung – alles wird vorgelesen.
+  for (const p of existsSync(join(spiele, "geschichten")) ? dateien(join(spiele, "geschichten"), [".json"]) : [])
+    if (p.endsWith(`${sep}geschichte.json`))
+      for (const k of Array.isArray(json(p)?.kapitel) ? json(p).kapitel : []) {
+        const e = k?.erinnern;
+        if (!e) continue;
+        for (const t of [e.frage, ...(Array.isArray(e.antworten) ? e.antworten : []), e.aufloesung]) if (typeof t === "string" && t) neu(t, rel(spiele, p));
+      }
 
   // Diktatsätze (Material für die Schreibspiele): der Satz selbst, ohne Variante, wie bisher aufgenommen.
   // Einleitungen wie „Hör noch mal hin. …“ gehören zum jeweiligen Spiel und kommen mit ihm.

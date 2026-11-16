@@ -857,20 +857,26 @@ export async function merkeGeschichteGelesen(id, heute = echteUhr().heute) {
 }
 
 // ---------- Lesestand eines Sachbuchs (docs/geschichten.md §4) ----------
-// stand.buecher[id] = { kapitel, seite, fertig: Kapitel-Indizes, die einmal bis zur letzten Seite gelesen sind }
+// stand.buecher[id] = { kapitel, seite, fertig: Kapitel-Indizes, die einmal bis zur letzten Seite gelesen sind,
+//   am: { [kapitel]: Datum, an dem es zuerst fertig wurde } } (am für „Weißt du noch?“, geschichten.md §2b)
 
-/** @param {any} e @returns {{ kapitel: number, seite: number, fertig: number[] }} */
+/** @param {any} e @returns {{ kapitel: number, seite: number, fertig: number[], am: Record<string, string> }} */
 function bereinigeBuchStand(e) {
   const zahl = (x) => (Number.isInteger(x) && x >= 0 ? x : 0);
   const fertig = [...new Set((Array.isArray(e?.fertig) ? e.fertig : []).filter((x) => Number.isInteger(x) && x >= 0))].sort((a, b) => a - b);
-  return { kapitel: zahl(e?.kapitel), seite: zahl(e?.seite), fertig };
+  /** @type {Record<string, string>} */
+  const am = {};
+  for (const [k, d] of Object.entries(istObjekt(e?.am) ? e.am : {})) if (fertig.includes(Number(k)) && text(d)) am[k] = d;
+  return { kapitel: zahl(e?.kapitel), seite: zahl(e?.seite), fertig, am };
 }
 
 /** Wo das Kind im Buch war (oder null). @param {string} id */
 export async function ladeBuchStand(id) {
   const stand = await ladeStand();
   const e = istObjekt(stand.buecher) ? stand.buecher[id] : null;
-  return istObjekt(e) ? bereinigeBuchStand(e) : null;
+  if (!istObjekt(e)) return null;
+  const { kapitel, seite, fertig } = bereinigeBuchStand(e);   // die Daten fürs Erinnern braucht der Abspieler nicht
+  return { kapitel, seite, fertig };
 }
 
 /**
@@ -884,10 +890,55 @@ export async function merkeBuchStand(id, wo, kapitelZahl, heute = echteUhr().heu
   const stand = await ladeStand();
   if (!istObjekt(stand.buecher)) stand.buecher = {};
   // Fertige Kapitel gehen nie verloren: ein früher, leerer Stand (z. B. vor dem Laden) wird vereinigt
-  const alt = istObjekt(stand.buecher[id]) ? bereinigeBuchStand(stand.buecher[id]).fertig : [];
-  const b = bereinigeBuchStand({ ...wo, fertig: [...alt, ...(Array.isArray(wo?.fertig) ? wo.fertig : [])] });
+  const vorher = istObjekt(stand.buecher[id]) ? bereinigeBuchStand(stand.buecher[id]) : { fertig: [], am: {} };
+  const alt = vorher.fertig;
+  const b = bereinigeBuchStand({ ...wo, fertig: [...alt, ...(Array.isArray(wo?.fertig) ? wo.fertig : [])], am: vorher.am });
+  for (const k of b.fertig) if (!alt.includes(k)) b.am[k] = heute;   // neu fertig: Datum für das Erinnern mit Abstand
   stand.buecher[id] = b;
   if (kapitelZahl > 0 && b.fertig.filter((k) => k < kapitelZahl).length >= kapitelZahl) merkeSachthema(stand, "geschichten", id, heute);
+  speichere(STAND_KEY, stand);
+  await sofortSpeichern();
+}
+
+// ---------- „Weißt du noch?“ (docs/geschichten.md §2b) ----------
+// stand.erinnern = { am: Datum der letzten Frage (gestellt oder „Später“), gestellt: { "<buch>/<kapitel>": Datum } }
+
+/**
+ * Welche Kapitelfrage die Bibliothek heute zurückholt: höchstens eine am Tag, nur aus Kapiteln, die frühestens gestern
+ * fertig wurden (ohne Datum: früher), die am längsten nicht gestellte zuerst, dann die am längsten fertige.
+ * @param {any} stand @param {string} heute @param {Iterable<string>} buchIds Bücher, die Fragen haben
+ * @returns {{ id: string, kapitel: number } | null}
+ */
+export function naechsteErinnerung(stand, heute, buchIds) {
+  const er = istObjekt(stand?.erinnern) ? stand.erinnern : {};
+  if (er.am === heute) return null;
+  const gestellt = istObjekt(er.gestellt) ? er.gestellt : {};
+  const ids = new Set(buchIds);
+  /** @type {{ id: string, kapitel: number, g: string, f: string }[]} */
+  const kandidaten = [];
+  for (const [id, e] of Object.entries(istObjekt(stand?.buecher) ? stand.buecher : {})) {
+    if (!ids.has(id) || !istObjekt(e)) continue;
+    const b = bereinigeBuchStand(e);
+    for (const k of b.fertig) {
+      const f = b.am[k] ?? "";
+      if (f >= heute) continue;
+      kandidaten.push({ id, kapitel: k, g: text(gestellt[`${id}/${k}`]), f });
+    }
+  }
+  kandidaten.sort((a, b) => a.g.localeCompare(b.g) || a.f.localeCompare(b.f) || a.id.localeCompare(b.id) || a.kapitel - b.kapitel);
+  return kandidaten.length ? { id: kandidaten[0].id, kapitel: kandidaten[0].kapitel } : null;
+}
+
+/** @param {Iterable<string>} buchIds */
+export async function ladeErinnerung(buchIds, heute = echteUhr().heute) {
+  return naechsteErinnerung(await ladeStand(), heute, buchIds);
+}
+
+/** Frage gestellt oder auf später geschoben: heute keine weitere. @param {string} id @param {number} kapitel @param {boolean} gestellt */
+export async function merkeErinnert(id, kapitel, gestellt, heute = echteUhr().heute) {
+  const stand = await ladeStand();
+  const er = istObjekt(stand.erinnern) ? stand.erinnern : {};
+  stand.erinnern = { am: heute, gestellt: { ...(istObjekt(er.gestellt) ? er.gestellt : {}), ...(gestellt ? { [`${id}/${kapitel}`]: heute } : {}) } };
   speichere(STAND_KEY, stand);
   await sofortSpeichern();
 }

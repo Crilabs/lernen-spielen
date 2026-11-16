@@ -120,3 +120,10 @@ Seite vor). Kosten in `kosten.json` (Neufassung 16.11.: Bilder 1,55 €, Claude 
 ## 4. Titelbild
 
 `bilder/03-03.webp`, Ausschnitt `50% 35%` (gewählt von einem frischen Agenten, 2026-11-16): Mira schwimmt mit ihrem Kalb im hellen, klaren Wasser, der Kern des Buchs. Die Buckelwale liegen waagrecht, die Mutter ist im Streifen vom Kopf bis zur Fluke zu sehen.
+
+## 5. Erinnerungsfragen (2026-11-16)
+
+Je Kapitel eine Frage nach docs/geschichten.md §2b, geschrieben von einem Agenten, geprüft von einem frischen Prüfer (Text, Seite, Bild angesehen).
+
+Wal: 6 Fragen gegen Text, Seiten und Bilder geprüft; Kernaussagen, Antworten, Seiten und Bilder passen, richtig-Positionen verteilt.
+Geändert: nur K1-Auflösung „genau wie du“ → „so wie du“, damit nach der Wahl kein „genau“ wie eine Bestätigung klingt.

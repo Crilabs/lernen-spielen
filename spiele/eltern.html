@@ -236,6 +236,8 @@ details > summary::-webkit-details-marker { display: none; }
 .grenze { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1.6rem 4rem; }
 .grenze .wert { font-size: 3.4rem; font-weight: 700; line-height: 1.2; }
 .grenze .knoepfe { margin-top: 0; }
+.haken { display: flex; align-items: center; gap: 1.6rem; margin-top: 2.4rem; font-size: 2.4rem; cursor: pointer; }
+.haken input { width: 3.6rem; height: 3.6rem; margin: 0; accent-color: var(--ls-tinte); cursor: pointer; }
 .zeit-stand { display: flex; flex-direction: column; gap: 0.6rem; }
 .zeit-stand .lage { font-weight: 700; }
 /* --- Updates ---------------------------------------------------------------------------------------- */
@@ -1115,19 +1117,18 @@ async function spielzeit(spalte) {
       grenze("Spätestens bis", regel.bis, [...UHR_WERTE.filter((w) => regel.von === null || w > regel.von), null], "bis", uhrArt),
       el("p", "Vor dem Beginn und nach dem Ende gibt es keine digitalen Spiele. Läuft gerade eine Runde, spielt Ihr Kind sie zu Ende. „Heute mehr“ gibt Minuten dazu, verschiebt aber keine Uhrzeit.", "leise klein"));
 
-    // Bücher: je Modus heute und diese Woche, vier Grenzen, „Heute ein Buch mehr“
+    // Bücher: eine Grenze (höchstens n am Tag oder in der Woche), „Gilt auch für Lesen“, „Heute ein Buch mehr“
     const bregel = br();
     const buecher = (n) => (n === 1 ? "1 Buch" : `${n} Bücher`);
     const vonBuechern = (n) => (n === 1 ? "1 Buch" : `${n} Büchern`);   // „0 von 2 Büchern“
+    const bz = buchZahlen(bregel, bst, jetzt);
     const bzeilen = el("div", null, "zeit-stand");
-    for (const [modus, wort] of [["vorlesen", "Vorgelesen"], ["selbst", "Selbst gelesen"]]) {
-      const z = buchZahlen(bst, modus, jetzt);
-      const tag = bregel[`${modus}Tag`], woche = bregel[`${modus}Woche`];
-      bzeilen.append(el("p", `${wort} heute: ${tag === null ? buecher(z.heute) : `${z.heute} von ${vonBuechern(tag)}`}`
-        + ` · diese Woche: ${woche === null ? buecher(z.woche) : `${z.woche} von ${vonBuechern(woche)}`}.`));
-    }
-    const bz = buchZahlen(bst, "vorlesen", jetzt).zugabe;
-    if (bz) bzeilen.append(el("p", `Heute dazugegeben: ${buecher(bz)}.`, "leise"));
+    const wann = bregel.je === "woche" ? "Diese Woche" : "Heute";
+    const was = bregel.auchLesen ? "geöffnet" : "vorgelesen";
+    bzeilen.append(el("p", bregel.anzahl === null
+      ? `${wann} ${was}: ${buecher(bz.offen.size)}.`
+      : `${wann} ${was}: ${bz.offen.size} von ${vonBuechern(bregel.anzahl)}.`));
+    if (bz.zugabe) bzeilen.append(el("p", `Heute dazugegeben: ${buecher(bz.zugabe)}.`, "leise"));
     const einMehr = knopf("Heute ein Buch mehr");
     einMehr.addEventListener("click", async () => {
       bst = buchZugabe(bst, 1, new Date());
@@ -1137,16 +1138,30 @@ async function spielzeit(spalte) {
       zeichne();
     });
     const BUCH_WERTE = [null, ...Array.from({ length: BUECHER_HOECHSTENS }, (_, i) => i + 1)];
-    const buchArt = { zeige: buecher, ablegen: setzeBuecher };
+    const je = el("div", null, "tage");
+    je.append(...[["tag", "Am Tag"], ["woche", "In der Woche"]].map(([wert, wort]) => {
+      const an = bregel.je === wert;
+      const k = knopf(wort, { art: an ? "haupt" : undefined });
+      k.setAttribute("name", `Bücher: ${wort.toLowerCase()}`);
+      k.setAttribute("aria-pressed", String(an));
+      k.addEventListener("click", () => { if (!an) setzeBuecher({ je: wert }, `Bücher: höchstens ${wort.toLowerCase()}.`); });
+      return k;
+    }));
+    const haken = document.createElement("label");
+    haken.className = "haken";
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.checked = bregel.auchLesen;
+    box.addEventListener("change", () => setzeBuecher({ auchLesen: box.checked },
+      box.checked ? "Die Grenze gilt auch für Lesen." : "Die Grenze gilt nur für Vorlesen."));
+    haken.append(box, document.createTextNode("Gilt auch für Lesen"));
     buecherFlaeche.replaceChildren(el("h3", "Bücher"),
-      el("p", "Wie viele Bücher Ihr Kind anhört und selbst liest, getrennt einstellbar. Ein Buch zählt, sobald Ihr Kind es öffnet; dasselbe Buch am selben Tag noch einmal oder das nächste Kapitel zählt nicht. Ist die Grenze erreicht, bleiben die Bücher sichtbar; ein angefangenes Buch geht heute weiter. Tage und Uhrzeit oben gelten nur für digitale Spiele.", "leise klein"),
+      el("p", "Wie viele Bücher Ihr Kind am Tag oder in der Woche öffnet. Die Grenze gilt fürs Vorlesen; mit „Gilt auch für Lesen“ zählen Vorlesen und Selbstlesen zusammen. Ein Buch zählt beim ersten Öffnen; dasselbe Buch noch einmal oder das nächste Kapitel zählt nicht. Ist die Grenze erreicht, tragen die übrigen Bücher eine Uhr; ein angefangenes Buch geht weiter. Tage und Uhrzeit oben gelten nur für digitale Spiele.", "leise klein"),
       bzeilen,
-      grenze("Vorlesen am Tag", bregel.vorlesenTag, BUCH_WERTE, "vorlesenTag", buchArt),
-      grenze("Vorlesen in der Woche", bregel.vorlesenWoche, BUCH_WERTE, "vorlesenWoche", buchArt),
-      grenze("Selbst lesen am Tag", bregel.selbstTag, BUCH_WERTE, "selbstTag", buchArt),
-      grenze("Selbst lesen in der Woche", bregel.selbstWoche, BUCH_WERTE, "selbstWoche", buchArt),
+      grenze("Höchstens", bregel.anzahl, BUCH_WERTE, "anzahl", { zeige: buecher, ablegen: setzeBuecher }),
+      je, haken,
       reihe(einMehr),
-      el("p", "„Heute ein Buch mehr“ gilt für Vorlesen und Selbst lesen, nur heute und auch über die Grenze der Woche hinaus.", "leise klein"));
+      el("p", "„Heute ein Buch mehr“ gilt nur heute und auch über die Grenze der Woche hinaus.", "leise klein"));
 
     const schalter = knopf(regel.ausgeblendet ? "Wieder zeigen" : "Ausblenden", { art: regel.ausgeblendet ? "haupt" : undefined });
     schalter.setAttribute("aria-pressed", String(regel.ausgeblendet));

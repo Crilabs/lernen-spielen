@@ -2,6 +2,12 @@
 
 ## Unveröffentlicht
 
+## v1.2.3
+
+- **Bücher in der Spielzeit einfacher:** Im Elternbereich gibt es nur noch eine Zahl „Höchstens“ (aus oder 1 bis 10), dazu die Wahl „Am Tag“ oder „In der Woche“. Die Grenze gilt fürs Vorlesen; mit dem Häkchen „Gilt auch für Lesen“ zählen Vorlesen und Selbstlesen zusammen. Eine Einstellung aus v1.2.1 wird übernommen.
+- **Uhr statt Verschwinden:** Gesperrte Spiele und Bücher bleiben sichtbar und tragen eine Uhr über dem Bild. Ein Tippen zeigt den Hinweis „Du hast heute schon viel geschafft. Jetzt ist Zeit für eine Pause!“, der vorgelesen wird und nur mit OK zugeht. Von den Eltern ausgeblendete Spiele bleiben unsichtbar.
+- **Elternbereich auch von „Wissen“:** Das Zahnrad zum Gedrückthalten steht jetzt auch in der Bibliothek.
+
 ## v1.2.1
 
 - **Bücher in der Spielzeit:** Im Elternbereich unter „Spielzeit“ lässt sich festlegen, wie viele Bücher das Kind am Tag und in der Woche anhört und selbst liest, je aus oder 1 bis 10, getrennt für Vorlesen und Selbst lesen. Ein Buch zählt beim Öffnen; dasselbe Buch am selben Tag noch einmal und das nächste Kapitel zählen nicht. Ist eine Grenze erreicht, fehlt bei neuen Büchern der passende Knopf. Sind beide erreicht, bleiben die Bücher sichtbar, lassen sich aber nicht öffnen. Dazu gibt es den Knopf „Heute ein Buch mehr“.
