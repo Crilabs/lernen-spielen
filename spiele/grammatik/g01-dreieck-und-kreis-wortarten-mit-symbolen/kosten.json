@@ -152,5 +152,42 @@
   "einheit": "zeichen",
   "menge": 2835,
   "notiz": "npm run audio · ElevenLabs Livia, Abrechnung über das ElevenLabs-Abo"
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 2337,
+  "einheit": "tokens",
+  "menge": 680508,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 672379,
+  "cache_schreiben": 5774
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4794,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4794,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 474
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6166
+  }
  }
 ]

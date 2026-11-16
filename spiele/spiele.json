@@ -33,7 +33,7 @@
       "arten": [{ "art": "artikel", "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null },
     { "id": "wortartsymbole", "titel": "Dreieck und Kreis", "thema": "Nomen und Verben", "kategorie": "grammatik",
-      "symbol": "grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen/symbol.svg", "datei": "grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen/index.html",
+      "symbol": "grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen/symbol.svg", "bild": "grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen/spielbild.webp", "datei": "grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen/index.html",
       "text": "Dreieck oder Kreis über das Wort legen, Kofi macht die Probe.",
       "beschreibung": "Das Kind legt Wortartensymbole über Wörter, die Kofi in Kreidekästchen auf den Hof gemalt hat: das Dreieck über Nomen, den Kreis über Verben. Kofi hüpft hin, und die Probe läuft im Bild: der, die oder das davor, oder ich und du mit der passenden Endung. Passt die Probe nicht, rutscht das Symbol zurück, und die Probe ist zu hören.",
       "arten": [{ "art": "wortart", "stufen": ["material", "vorstellung", "kopf"] }],
