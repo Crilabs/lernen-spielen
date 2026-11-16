@@ -38,15 +38,17 @@ function formHtml(f) {
 
 /**
  * Das Blatt eines Themas.
- * @param {{ name: string, titel: string, fach: string, formen: Form[], fachSvg?: string }} thema
- *   formen in der Reihenfolge der Situationen (liesAnleitung sortiert schon); fachSvg: Inhalt von symbole/<fach>.svg
+ * @param {{ name: string, titel: string, fach: string, formen: Form[], fachSvg?: string, foto?: string }} thema
+ *   formen in der Reihenfolge der Situationen (liesAnleitung sortiert schon); fachSvg: Inhalt von symbole/<fach>.svg;
+ *   foto: Adresse des Fotos der Anleitung (ohne Siegel, rechts im Kopf; Christian, 2026-11-16)
  * @returns {string}
  */
-export function blattHtml({ name, titel, fach, formen, fachSvg = "" }) {
+export function blattHtml({ name, titel, fach, formen, fachSvg = "", foto = "" }) {
   const farbe = FACH[/** @type {keyof typeof FACH} */ (fach)]?.tief ?? FARBE.tinte;
   const svg = fachSvg.replace(/stroke="#fff(fff)?"/gi, `stroke="${farbe}"`);
   return `<div class="blatt-wurzel" style="--fach:${farbe}">`
     + `<header><span class="fachkachel" aria-hidden="true">${svg}</span><div><h1>${escape(name)}</h1>`
-    + (titel ? `<p>${escape(titel)}</p>` : "") + `</div></header>`
+    + (titel ? `<p>${escape(titel)}</p>` : "") + `</div>`
+    + (foto ? `<img class="foto" src="${escape(foto)}" alt="">` : "") + `</header>`
     + formen.map(formHtml).join("") + `</div>`;
 }

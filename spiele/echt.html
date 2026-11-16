@@ -25,6 +25,10 @@ body { -webkit-user-select: none; user-select: none; }
 .anleitung::before { content: ""; position: absolute; inset: 1.3rem; border: 0.25rem dashed var(--ls-naht);
   border-radius: calc(var(--ls-radius-gross) - 1.3rem); pointer-events: none; }
 .anleitung h1 { margin: 0 0 3.2rem; font-size: 6rem; line-height: 1.1; }
+/* Foto der Anleitung (ohne Siegel) rechts oben, der Text fließt daneben (Christian, 2026-11-16). */
+.anleitung > img.foto { float: right; width: 36rem; height: 36rem; object-fit: cover; margin: 0 0 3.2rem 4rem;
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); }
+@media (max-aspect-ratio: 4/3) { .anleitung > img.foto { width: 28rem; height: 28rem; } }
 .anleitung h2 { margin: 0 0 0.8rem; font-size: 2.8rem; line-height: 1.2; color: var(--ls-tinte-weich); font-weight: 700; }
 .anleitung p { margin: 0; font-size: 3.6rem; line-height: 1.35; }
 
@@ -92,7 +96,7 @@ body { -webkit-user-select: none; user-select: none; }
 <script type="module">
 import { sperreTouch, protokoll } from "./lernspiel.js";
 import "./rahmen/leiste.js";
-import { findeAnleitung, ladeAnleitung, letzteForm, merkeForm } from "./rahmen/echte-dinge.js";
+import { findeAnleitung, ladeAnleitung, letzteForm, merkeForm, fotoUrl } from "./rahmen/echte-dinge.js";
 import { anleitungHtml, einzeilerHtml } from "./start/anleitung.js";
 import { hintergrundSvg } from "./start/hintergrund.js";
 
@@ -116,7 +120,8 @@ async function start() {
   // Die Anleitung, wenn das Verzeichnis sie nennt (nur freigegebene; mit ?entwurf auch Entwürfe); sonst der Einzeiler.
   const fund = await findeAnleitung({ thema: thema.id, fach: thema.strang });
   const anleitung = fund ? await ladeAnleitung(fund.fach, fund.thema) : null;
-  if (anleitung) feld.innerHTML = anleitungHtml(anleitung, await letzteForm());
+  const foto = fund && anleitung ? fotoUrl({ foto: `${fund.fach}/${anleitung.kopf.foto ?? ""}` }) : "";
+  if (anleitung) feld.innerHTML = anleitungHtml(anleitung, await letzteForm(), "symbole/", foto);
   else if (thema.eltern) feld.innerHTML = einzeilerHtml(thema.name, thema.eltern);
   else { zeigeFehler(); return; }
 

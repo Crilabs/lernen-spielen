@@ -53,7 +53,7 @@ Name in der App und im Projekt: **„Mit echten Dingen“** (Annahme; der Knopf 
 ```markdown
 ---
 thema: vorwaerts-zaehlen
-bild: { figur: treppe, zustand: hinauf }
+foto: bilder/vorwaerts-zaehlen.webp
 quellen:
   - <Titel, Herausgeber, URL, abgerufen am>
 ---
@@ -88,16 +88,30 @@ geschrieben (sonst erkennt der Leser die Form nicht; je Situation zählt nur die
 als kleine Wahl (Knopf mit Symbol und Wort). Weitere Ideen zum selben Thema kommen nicht in die Datei; eine Abstufung
 desselben Kerns gehört in „Leichter“ oder „Schwerer“.
 
-## Bild der Karte (Christian)
+## Foto der Anleitung (Christian, 2026-11-16)
 
-- Die Karte „Mit echten Dingen“ behält ihr eigenes Aussehen: Papier mit Naht, keine Welt-Vignette. Ihr Bild ist **das
-  echte Alltagsding der Anleitung** im Stil der Runde (`figuren.md` §4), z. B. sieben Nudeln auf zwei Tellern, ein
-  Würfel, eine Treppe; klein in der Ecke des Bildes eine Hand als Zeichen „echt“; kein runder Knopf (Christian). Regeln wie für jedes Kartenbild
-  (`grundsaetze-bilder.md` §16): ein Ding, groß, an der Silhouette von den anderen Karten des Fachs zu unterscheiden,
-  kein Text, keine Ziffern, keine Lernzeichen.
-- Im Kopf der Datei: `bild: { figur: <art>, zustand: <zustand> }` (Annahme). Das Ding liegt als
-  `spiele/objekte/<art>.js` und ist wiederverwendbar (Nudeln, Teller, Würfel, Treppe …); zuerst im Bestand nachsehen.
-  Gibt es für eine Anleitung mehrere Formen, zeigt das Bild die Grundform.
+- Jede Anleitung hat ein **Foto der Dinge, mit denen gespielt wird**, erzeugt aus ihrem Text:
+  `node werkzeuge/echte-dinge/foto.mjs <fach>/<datei>` gibt die Grundform („Am Tisch“, sonst die erste Form: Name,
+  „Ihr braucht“, Schritte) mit der Vorlage `werkzeuge/bilder/basis-echt.txt` an den Bildgenerator. Kern,
+  Leichter/Schwerer und alles in Anführungszeichen gehen nicht mit; Ziffern, Zahlwörter und Ordnungszahlen werden
+  „einige“ bzw. „weitere“. Ergebnis: `<fach>/bilder/<datei>.webp` (1024 × 1024), `herkunft.json` daneben (A4), Kosten
+  (Posten `bild`, mit `thema`) in `kosten.json`, im Kopf `foto: bilder/<datei>.webp`. `--alle --parallel 6` macht jede
+  freigegebene Anleitung ohne Foto; `--nur-szene` zeigt nur den Text, der an den Generator geht.
+- **Die Dinge im Mittelpunkt**, nicht die Menschen: höchstens eine Hand, ein Fuß, ein Arm, angeschnitten, nie ein
+  Gesicht. **Keine zählbare Menge** (Christian): Kleinteile liegen gesammelt in Schale, Korb oder Haufen, Teller und
+  Becher stehen leer – so zeigt ein Foto nie eine falsche Zahl („Bilder bleiben wahr“). Kein Text, keine Ziffern
+  (A6), nichts Gefährliches.
+- **Abnahme durch Ansehen** (Christian, 2026-11-16): Wer das Foto erzeugt, sieht es an (Read) – passt es zur Grundform,
+  ist es wahr, ohne Schrift, ohne zählbare Menge im Mittelpunkt, Menschen nur am Rand? Sonst höchstens zwei neue
+  Versuche mit `--hinweis "…"`; bleibt es falsch, bleibt die Anleitung ohne Foto (sie zeigt dann die Hand).
+- **Wo:** auf den Karten mit dem **Siegel „echt“** oben rechts (`spiele/symbole/siegel-echt.svg`, runder Stempel;
+  ersetzt die Hand als Zeichen): Startseite und Regal (`start/karten.js`), Kachel der Fach-Seite
+  (`rahmen/echte-dinge-kachel.js`), Lernplan-Karte im Elternbereich. **Ohne Siegel**: oben rechts auf `echt.html`, in
+  der Karte `<ls-anregung>` und im Kopf des PDF-Blatts (35 mm). Ohne Foto das bisherige Bild (Hand bzw. gezeichnetes
+  Ding aus `bild:`).
+- Die Karte „Mit echten Dingen“ behält ihr eigenes Aussehen: Papier mit Naht, keine Welt-Vignette, kein runder Knopf.
+- Früher (bis 2026-11-16): `bild: { figur, zustand }` mit einem gezeichneten Ding aus `spiele/objekte/`; `foto:`
+  ersetzt es. Die Dinge in `spiele/objekte/` bleiben für die Spiele.
 
 ## Regeln für den Text
 
@@ -141,7 +155,7 @@ Spiels, die noch keine Anleitung haben.
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
 | E9 | Methode laut Recherche wirksam für dieses Thema (Quelle im Kopf); die Handlung ist praxisnah und hat einen Zweck über das Üben hinaus |
 | E10 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
-| E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
+| E11 | Foto: zeigt das Material der Grundform, wahr, ohne Text und ohne zählbare Menge, Menschen nur angeschnitten (`foto` im Kopf, „Foto der Anleitung“) |
 | E12 | In Bewegung: da; jede Bewegung trägt den Inhalt; zeigt sie das Prinzip nicht selbst, steht vorn „Zum Verinnerlichen“ mit der Form zum Verstehen; sicher, ohne Wettlauf |
 
 E9 für eine Form zum Verinnerlichen: Ihr Zweck ist Spaß an der Bewegung und Behalten; sie braucht keinen Alltagszweck,
@@ -149,7 +163,7 @@ die Form zum Verstehen hat ihn (Christian, 2026-11-15). E12 seit 2026-11-15 (Chr
 
 Nummern seit der Zusammenführung (Christian, 2026-11-14): E9 wie auf `main` beschlossen, die Prüfung der Varianten
 (vorher E9 im Prüfstand) ist E10, das Bild (vorher E10) ist E11. Die Spielobjekte (`spiele/objekte/`) sind auf
-`main`, E11 gilt also; das Bild der Karte ist in der App noch nicht gebaut (E11 prüft das Objekt und `bild` im Kopf).
+`main`. Seit 2026-11-16 prüft E11 das Foto der Anleitung (Christian).
 
 Die Grundsätze (`grundsaetze.md`) gelten für jede Anleitung ganz, auch wo E1–E12 sie nicht einzeln nennen.
 
@@ -174,7 +188,7 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
 
 - **Für Erwachsene im Lernplan (Christian, 2026-11-15; ersetzt die eigene Übersichtsseite):** Im Elternbereich,
   Reiter „Lernplan“, stehen im aufgeklappten Thema dessen Spiele als kleine Karten: digitale und „Mit echten Dingen“
-  (Bild der Karte aus `bild:`, Titel, Situationen, später die Kurzbeschreibung). Die analoge Karte öffnet
+  (Foto der Anleitung mit Siegel „echt“, Titel, Situationen, später die Kurzbeschreibung). Die analoge Karte öffnet
   `<ls-anregung>` über dem Lernplan; Zurück schließt sie, der Lernplan steht an derselben Stelle (keine neue PIN).
   - **PDF je Thema (Christian, 2026-11-14):** In dieser Karte steht der Knopf „PDF“ (nur im Elternbereich, nur wo das
     Gerät drucken kann; Kinder sehen ihn nie). Er druckt ein A4-Blatt mit allen Formen des Themas, voll (Ihr braucht,

@@ -45,8 +45,9 @@ export function themenDerDatei(kopf) {
 }
 
 /**
- * Das Verzeichnis als Objekt: { themen: { [thema]: { fach, name, titel, formen: [{ situation, name }], entwurf, datei } } }.
- * datei = Pfad unter spiele/mit-echten-dingen/ (bei einer Familie für alle ihre Themen derselbe).
+ * Das Verzeichnis als Objekt: { themen: { [thema]: { fach, name, titel, formen: [{ situation, name }], entwurf, datei, foto? } } }.
+ * datei = Pfad unter spiele/mit-echten-dingen/ (bei einer Familie für alle ihre Themen derselbe); foto = Pfad des Fotos
+ * unter spiele/mit-echten-dingen/ aus `foto:` im Kopf (relativ zum Ordner des Fachs; nur wenn es gesetzt ist).
  * name = Name des Themas im Lernplan, nur wenn ihn im ganzen Lernplan kein anderes Thema trägt (die Karte erkennt ein
  * Thema auch an ihm), sonst ""; titel = Überschrift der Datei.
  * Ohne `entwuerfe` nur freigegebene Anleitungen; geparkte (`geparkt: true`) nie.
@@ -76,6 +77,7 @@ export function baueVerzeichnis(liste = anleitungen(), plan = JSON.parse(readFil
         formen: l.formen.map((f) => ({ situation: f.situation, name: f.name })),
         entwurf: l.kopf.entwurf === true,
         datei,
+        ...(typeof l.kopf.foto === "string" && l.kopf.foto ? { foto: `${a.fach}/${l.kopf.foto}` } : {}),
       };
     }
   }

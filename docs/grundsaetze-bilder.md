@@ -320,7 +320,7 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
 
 | Nr. | Regel | Stand |
 |---|---|---|
-| A1 | **Wofür KI-Bilder.** Szenen- und Pausenbilder, das Spielbild der Karte (§16) und die fotorealistischen Fotos der Sachbücher (`geschichten.md`) dürfen generiert werden; ein Wimmelbild gibt es nicht (`spielbau.md`). Figuren, Wortbilder, Lernzeichen und Bedienzeichen entstehen von Hand als SVG. | [E]; [b] erfundene Anatomie häufig |
+| A1 | **Wofür KI-Bilder.** Szenen- und Pausenbilder, das Spielbild der Karte (§16), die fotorealistischen Fotos der Sachbücher (`geschichten.md`) und die Fotos der Anleitungen „Mit echten Dingen“ (KB9; Christian 2026-11-16) dürfen generiert werden; ein Wimmelbild gibt es nicht (`spielbau.md`). Figuren, Wortbilder, Lernzeichen und Bedienzeichen entstehen von Hand als SVG. | [E]; [b] erfundene Anatomie häufig |
 | A2 | **Fester Basis-Prompt und Stilreferenz** je Bildart, im Repo abgelegt, damit die Welten zusammenpassen. | [P] |
 | A3 | **Prüfen vor Verwendung:** Anatomie und Art der Tiere gegen ein Referenzfoto, Menschen nach 6.3, Bestand nach 6.2 auszählen. Generatoren verstärken Stereotype auch ohne Personenangabe im Prompt und trotz Gegenanweisung. | [B] Bianchi 2023 |
 | A4 | **Herkunftseintrag je Bild:** Quelle, KI ja/nein, Modell, Prompt, geprüft gegen, von wem, Datum. | [E] |
@@ -391,4 +391,4 @@ Spielbild, Titel und Thema, keinen runden Knopf.
 | Nr. | Regel | Stand |
 |---|---|---|
 | KB8 | **Spielsymbol = Kopfform der Figur:** Das Spielsymbol ist die Kopf- bzw. Kurzform der Figur und steht in der Kopfleiste und im Regal-Detail, nicht auf der Karte. | (Christian) |
-| KB9 | **Karten „Mit echten Dingen“** behalten ihr eigenes Aussehen (Papier mit Naht, keine Welt). Bild: das echte Alltagsding im Stil der Runde (z. B. sieben Nudeln auf zwei Tellern, ein Würfel, eine Treppe), klein in der Ecke des Bildes eine Hand als Zeichen „echt“; kein Knopf. Die Dinge liegen in `spiele/objekte/` und sind wiederverwendbar ([`mit-echten-dingen.md`](mit-echten-dingen.md) „Bild der Karte“). | (Christian) |
+| KB9 | **Karten „Mit echten Dingen“** behalten ihr eigenes Aussehen (Papier mit Naht, keine Welt), kein Knopf. Bild: ein **Foto der Dinge der Anleitung**, aus ihrem Text erzeugt (`werkzeuge/echte-dinge/foto.mjs`, Vorlage `basis-echt.txt`): die Dinge im Mittelpunkt, Menschen höchstens als Hand oder Fuß am Rand, keine zählbare Menge, kein Text. Oben rechts das **Siegel „echt“** (runder Stempel, `symbole/siegel-echt.svg`); auf der Seite der Anleitung und im PDF ohne Siegel ([`mit-echten-dingen.md`](mit-echten-dingen.md) „Foto der Anleitung“). Bis 2026-11-16: gezeichnetes Ding aus `spiele/objekte/` mit der Hand als Zeichen. | (Christian, 2026-11-16) |

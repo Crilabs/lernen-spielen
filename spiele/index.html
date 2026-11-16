@@ -141,10 +141,10 @@ import "./rahmen/wortart.js";
 import "./objekte/objekt.js";
 import { startKarten } from "./start/auswahl.js";
 import { paletteFuer, vignetteSvg } from "./start/welten.js";
-import { spielKarteHtml, echtKarteHtml, abschnittHtml } from "./start/karten.js";
+import { spielKarteHtml, echtKarteHtml, echtBildHtml, abschnittHtml } from "./start/karten.js";
 import { zuletztHtml } from "./start/regal-leiste.js";
 import { spielzeitLage, schlussSatz, sage } from "./rahmen/spielzeit.js";
-import { ladeVerzeichnis } from "./rahmen/echte-dinge.js";
+import { ladeVerzeichnis, fotoUrl } from "./rahmen/echte-dinge.js";
 
 /** So lange hält ein Erwachsener das Zahnrad (wie bisher). */
 const HALTEN_MS = 3000;
@@ -209,6 +209,7 @@ async function start() {
     const t = themaNach.get(a.dataset.thema);
     const e = t && Object.hasOwn(themen, t.id) ? themen[t.id] : null;
     if (e && e.fach === t.strang && e.titel) a.querySelector("b").textContent = e.titel;
+    if (e && e.fach === t.strang && fotoUrl(e)) a.querySelector(".bild").outerHTML = echtBildHtml(fotoUrl(e));
   });
 }
 

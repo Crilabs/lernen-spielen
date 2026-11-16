@@ -28,6 +28,7 @@ const STIL = `
   background: none; padding: 0; display: grid; place-items: center; }
 #ls-blatt .fachkachel svg { width: 8.4mm; height: 8.4mm; }
 #ls-blatt h1 { font-size: 20pt; line-height: 1.1; }
+#ls-blatt header img.foto { flex: none; width: 35mm; height: 35mm; margin-left: auto; object-fit: cover; border-radius: 2.8mm; }
 #ls-blatt header p { font-size: 11pt; color: #6B5C96; margin-top: 1mm; }
 #ls-blatt article.form { break-inside: avoid; padding: 5mm 0 4.5mm; }
 #ls-blatt article.form + article.form { border-top: 0.3mm solid #CFC4E3; }
@@ -87,16 +88,16 @@ globalThis.addEventListener?.("afterprint", () => {
 
 /**
  * Druckt das Blatt eines Themas.
- * @param {{ name: string, titel: string, fach: string, formen: import("./markdown.js").Form[] }} thema
+ * @param {{ name: string, titel: string, fach: string, formen: import("./markdown.js").Form[], foto?: string }} thema
  * @returns {Promise<boolean>} true, wenn der Druckdialog aufging
  */
-export async function druckeAnleitung({ name, titel, fach, formen }) {
+export async function druckeAnleitung({ name, titel, fach, formen, foto = "" }) {
   if (!formen?.length || druckt) return false;
   druckt = true;
   try {
     const blatt = blattElement();
     blatt.classList.remove("eng");
-    blatt.innerHTML = blattHtml({ name, titel, fach, formen, fachSvg: await fachSvg(fach) });
+    blatt.innerHTML = blattHtml({ name, titel, fach, formen, fachSvg: await fachSvg(fach), foto });
     await document.fonts.ready;
     await Promise.all([...blatt.querySelectorAll("img")].map((i) => (i.complete ? null : new Promise((ok) => { i.onload = i.onerror = ok; }))));
     if (blatt.getBoundingClientRect().height > SEITE_HOEHE) blatt.classList.add("eng");

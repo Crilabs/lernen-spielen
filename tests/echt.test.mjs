@@ -13,9 +13,9 @@ test("Mit echten Dingen: Kopfleiste mit Titel, Fach des Themas, Thema als Unterz
 });
 
 test("Mit echten Dingen: Anleitung über das Verzeichnis (nur freigegebene), sonst der Einzeiler aus dem Lernplan", () => {
-  assert.match(skript, /import \{ findeAnleitung, ladeAnleitung, letzteForm, merkeForm \} from "\.\/rahmen\/echte-dinge\.js";/);
+  assert.match(skript, /import \{ findeAnleitung, ladeAnleitung, letzteForm, merkeForm, fotoUrl \} from "\.\/rahmen\/echte-dinge\.js";/);
   assert.match(skript, /findeAnleitung\(\{ thema: thema\.id, fach: thema\.strang \}\)/);
-  assert.match(skript, /anleitungHtml\(anleitung, await letzteForm\(\)\)/);
+  assert.match(skript, /anleitungHtml\(anleitung, await letzteForm\(\), "symbole\/", foto\)/);
   assert.match(skript, /einzeilerHtml\(thema\.name, thema\.eltern\)/);
   assert.doesNotMatch(html, /index\.json/);
 });

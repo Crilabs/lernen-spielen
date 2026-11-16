@@ -2,7 +2,7 @@
 // Kachel „Mit echten Dingen“ (docs/mit-echten-dingen.md „Wo es zu sehen ist“): das analoge Spiel eines Themas,
 // gleichwertig neben den digitalen Spielen und genau so groß wie eine Spiel-Kachel der Fach-Seite (mindestens
 // 40 × 16 rem, Symbolfeld 12 rem in der Füllung des Fachs, Papier, Tinte-Kontur, Schatten: drückbar).
-// Symbol: die Hand. Groß der Name der Form (die zuletzt gewählte Situation, sonst die erste), darunter leiser
+// Symbol: das Foto der Anleitung mit dem Siegel „echt“ (Christian, 2026-11-16), ohne Foto die Hand. Groß der Name der Form (die zuletzt gewählte Situation, sonst die erste), darunter leiser
 // „Mit echten Dingen“. Ohne Anleitung steht „Mit echten Dingen“ allein (dann öffnet sie den Einzeiler aus `text`);
 // ohne Anleitung und ohne text ist die Kachel verborgen.
 // Antippen öffnet die Karte (<ls-anregung>) mit dieser Form; gibt es auf der Seite keine Karte, legt die Kachel
@@ -10,7 +10,7 @@
 // Attribute: thema, fach (Pflicht), titel (Name des Themas, auf der Karte), text; Ereignis `bereit` nach dem Laden.
 
 import { GRUND_CSS, FACH, definiere } from "./stil.js";
-import { ladeVerzeichnis, letzteForm, waehleForm } from "./echte-dinge.js";
+import { ladeVerzeichnis, letzteForm, waehleForm, fotoUrl, SIEGEL } from "./echte-dinge.js";
 import { SITUATIONEN } from "./markdown.js";
 import { ANREGUNG_TITEL } from "./anregung.js";
 
@@ -52,7 +52,13 @@ const KACHEL_CSS = `
   border-radius: var(--ls-radius-klein);
   background: var(--fach-fuellung, var(--ls-nebel));
 }
+.ico { position: relative; }
 .ico img { display: block; width: 100%; height: 100%; pointer-events: none; }
+.ico.foto { padding: 0; overflow: hidden; }
+.ico.foto img.bild { object-fit: cover; }
+.ico .siegel { display: none; position: absolute; top: 0.6rem; right: 0.6rem; width: 4.4rem; height: 4.4rem;
+  filter: drop-shadow(0 0.15rem 0.25rem rgb(59 42 107 / 0.25)); }
+.ico.foto .siegel { display: block; }
 .worte { display: flex; flex-direction: column; gap: 0.8rem; min-width: 0; }
 b { font-size: 4rem; line-height: 1.15; font-weight: 700; }
 .leise { font-size: 3rem; line-height: 1.2; color: var(--ls-tinte-weich); }
@@ -69,11 +75,13 @@ export class LsEchteDingeKachel extends HTMLElement {
     super();
     const wurzel = this.attachShadow({ mode: "open" });
     wurzel.innerHTML = `<style>${GRUND_CSS}${KACHEL_CSS}</style>
-      <button class="kachel" type="button" tabindex="0"><span class="ico"><img alt="" draggable="false" src="${SYMBOLE}hand.svg"></span>
+      <button class="kachel" type="button" tabindex="0"><span class="ico"><img class="bild" alt="" draggable="false" src="${SYMBOLE}hand.svg"><img class="siegel" alt="" draggable="false" src="${SIEGEL}"></span>
         <span class="worte"><b></b><span class="leise"></span></span></button>`;
     this.knopf = /** @type {HTMLButtonElement} */ (wurzel.querySelector("button"));
     this.nameFeld = /** @type {HTMLElement} */ (wurzel.querySelector("b"));
     this.leiseFeld = /** @type {HTMLElement} */ (wurzel.querySelector(".leise"));
+    this.icoFeld = /** @type {HTMLElement} */ (wurzel.querySelector(".ico"));
+    this.bildFeld = /** @type {HTMLImageElement} */ (wurzel.querySelector("img.bild"));
     this.addEventListener("click", () => this.oeffneKarte()); // am Host: auch ein ausgelöstes click() am Element öffnet
     /** Versprechen: Name der Form steht. */
     this.geladen = Promise.resolve();
@@ -99,6 +107,9 @@ export class LsEchteDingeKachel extends HTMLElement {
     const formen = (e?.formen ?? []).filter((f) => SITUATIONEN.some((s) => s.id === f.situation));
     const form = waehleForm(formen, letzte);
     this.situation = form?.situation ?? "";
+    const foto = form ? fotoUrl(e) : "";
+    this.icoFeld.classList.toggle("foto", !!foto);
+    this.bildFeld.src = foto || `${SYMBOLE}hand.svg`;
     this.nameFeld.textContent = form?.name ?? ANREGUNG_TITEL;
     this.leiseFeld.textContent = form ? ANREGUNG_TITEL : "";
     this.knopf.setAttribute("aria-label", form ? `${form.name}, ${ANREGUNG_TITEL}` : ANREGUNG_TITEL);

@@ -2,8 +2,10 @@
 // für den Text, soweit sie sich ohne Lesen prüfen lassen (Rest: Prüfung E1–E12 durch einen frischen Agenten).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import { anleitungen, baueVerzeichnis, themenDerDatei, alsText, VERZEICHNIS, VERZEICHNIS_ENTWURF } from "../werkzeuge/echte-dinge/verzeichnis.mjs";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { anleitungen, baueVerzeichnis, themenDerDatei, alsText, ORDNER, VERZEICHNIS, VERZEICHNIS_ENTWURF } from "../werkzeuge/echte-dinge/verzeichnis.mjs";
+import { ohneMengen, setzeFoto, szeneAus } from "../werkzeuge/echte-dinge/foto.mjs";
 import { liesAnleitung, formText } from "../spiele/rahmen/markdown.js";
 
 const plan = JSON.parse(readFileSync(new URL("../spiele/lernplan.json", import.meta.url), "utf8"));
@@ -78,6 +80,33 @@ test("Name des Themas nur, wenn er im ganzen Lernplan eindeutig ist", () => {
   }
 });
 
+test("Foto: steht als Pfad unter spiele/mit-echten-dingen/ im Verzeichnis, nur wenn der Kopf es nennt", () => {
+  const v = baueVerzeichnis([datei("a", "foto: bilder/a.webp\n"), datei("b", "")], PLAN).themen;
+  assert.equal(v.a.foto, "mathe/bilder/a.webp");
+  assert.ok(!("foto" in v.b));
+});
+
+test("Foto: ohneMengen ersetzt Ziffern, Zahlwörter und Ordnungszahlen und lässt Gesprochenes weg", () => {
+  assert.equal(ohneMengen("Stellt fünf Teller hin, auf jeden 3 Stück."), "Stellt einige Teller hin, auf jeden einige Stück.");
+  assert.equal(ohneMengen("Ein sechster Teller. Sagt: „5 mal 3 ist gleich 15.“"), "Ein weiterer Teller. Sagt: …");
+  assert.equal(ohneMengen("Kein Achtel, keine Elfe, kein Dreieck."), "Kein Achtel, keine Elfe, kein Dreieck.");
+});
+
+test("Foto: die Szene nimmt die Grundform ohne Kern, Leichter und Schwerer", () => {
+  const md = "---\nthema: a\nfach: mathe\n---\n# T\n\n## In Bewegung: Gehen\n\nIhr braucht: Flur\n\n1. Geht.\n2. Steht.\n\n"
+    + "## Am Tisch: Teller\n\nIhr braucht: sechs Teller, Kekse\n\n1. Stellt vier Teller hin.\n2. Esst.\n\n**Darauf kommt es an:** Kern\n\n**Leichter:** L **Schwerer:** S";
+  const s = szeneAus(md);
+  assert.match(s, /„Teller“/);
+  assert.match(s, /Material: einige Teller, Kekse/);
+  assert.match(s, /Stellt einige Teller hin\. Esst\./);
+  assert.doesNotMatch(s, /Kern|Leichter|Schwerer|Flur|sechs|vier/);
+});
+
+test("Foto: setzeFoto ersetzt bild: oder setzt foto: nach fach:", () => {
+  assert.equal(setzeFoto("---\nthema: a\nfach: mathe\nbild: { figur: x }\n---\n# T", "bilder/a.webp"), "---\nthema: a\nfach: mathe\nfoto: bilder/a.webp\n---\n# T");
+  assert.equal(setzeFoto("---\nthema: a\nfach: mathe\n---\n# T", "bilder/a.webp"), "---\nthema: a\nfach: mathe\nfoto: bilder/a.webp\n---\n# T");
+});
+
 for (const a of liste) {
   test(`${a.fach}/${a.thema}.md: Kopf, Thema im Lernplan, Formen vollständig, Regeln für den Text`, () => {
     const l = liesAnleitung(a.text);
@@ -89,6 +118,12 @@ for (const a of liste) {
     assert.ok(Array.isArray(l.kopf.quellen) && l.kopf.quellen.length >= 1, "Quellen im Kopf");
     for (const q of /** @type {string[]} */ (l.kopf.quellen)) assert.match(q, /https?:\/\/\S+/, `Quelle mit Adresse: ${q}`);
     assert.ok(l.titel, "Überschrift # in Alltagssprache");
+    // Foto der Anleitung (Christian, 2026-11-16): `foto:` nennt eine vorhandene WebP-Datei; das alte `bild:` nicht daneben.
+    if ("foto" in l.kopf) {
+      assert.match(String(l.kopf.foto), /^bilder\/[a-z0-9-]+\.webp$/, "foto: bilder/<name>.webp");
+      assert.ok(existsSync(join(ORDNER, a.fach, String(l.kopf.foto))), `Foto ${l.kopf.foto} ist da`);
+      assert.ok(!("bild" in l.kopf), "foto ersetzt bild");
+    }
     assert.ok(l.formen.length >= 1 && l.formen.length <= 3, "eine Grundform, höchstens zwei Varianten");
     assert.equal(l.vorspann.length, 0, "nichts zwischen Überschrift und erster Form");
     // Immer auch in Bewegung (Christian, 2026-11-15): jede freigegebene oder zu prüfende Anleitung hat eine Form

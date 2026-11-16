@@ -60,7 +60,6 @@ Zeit, nichts Gefährliches.
 thema: <thema-id>          # oder für eine Familie: themen: mit einer Zeile „  - <thema-id>“ je Thema
 fach: <fach>
 entwurf: true
-bild: { figur: <art>, zustand: <zustand> }
 quellen:
   - <Titel>, <Herausgeber>, <URL>, abgerufen <JJJJ-MM-TT>
 ---
@@ -94,20 +93,23 @@ Danach: `npm run echte-dinge` (Verzeichnis) und `node --test tests/echte-dinge.t
 (prüft Kopf, Thema im Lernplan, Ihr braucht / Schritte / Darauf kommt es an / Leichter / Schwerer, Wortzahl, Wortliste
 §3.2, Anrede). Grün ist Pflicht vor der Prüfung.
 
-## 3a. Bild der Karte
+## 3a. Foto der Anleitung
 
-Nach `docs/mit-echten-dingen.md` „Bild der Karte“ und `docs/grundsaetze-bilder.md` §16: das Alltagsding der
-Grundform wählen (z. B. sieben Nudeln auf zwei Tellern, ein Würfel, eine Treppe). Zuerst in `spiele/objekte/`
-nachsehen, auch auf `main` (`git show main:spiele/objekte/`, ein anderes Spiel kann die Art inzwischen gebracht haben);
-fehlt es, als `spiele/objekte/<art>.js` zeichnen (Schnittstelle und Stil: `docs/spielentwicklung.md`
-„Spielobjekte“, `docs/figuren.md` §4; von Hand, nie KI; `tests/objekte.test.mjs` grün). Ein Ding, groß, kein Text,
-keine Ziffern, keine Lernzeichen; an der Silhouette von den Bildern der anderen Anleitungen des Fachs zu unterscheiden.
-Im Kopf `bild: { figur: <art>, zustand: <zustand> }`. Die Hand als Zeichen „echt“ setzt die Karte selbst.
+Nach `docs/mit-echten-dingen.md` „Foto der Anleitung“ (Christian, 2026-11-16): Erst wenn die Tests aus §3 grün sind,
+`node werkzeuge/echte-dinge/foto.mjs <fach>/<datei>` (vorher gern `--nur-szene`, kostet nichts). Das Skript gibt die
+Grundform ohne Mengen an den Bildgenerator, speichert `<fach>/bilder/<datei>.webp`, bucht die Kosten und setzt
+`foto:` in den Kopf. Dauert etwa 3–4 Minuten (im Hintergrund starten).
+
+**Ansehen** (Read, gern verkleinert mit `magick … -resize 512x512`): passt das Foto zur Grundform, sind die Dinge
+erkennbar, ist es wahr (echte Gegenstände, Hände mit fünf Fingern), keine Schrift, keine Ziffern, keine zählbare Menge
+im Mittelpunkt, Menschen nur angeschnitten am Rand, nichts Gefährliches? Sonst neu mit `--hinweis "<was anders sein
+muss>"`, höchstens zwei Mal; bleibt es falsch, `foto:` aus dem Kopf löschen, das Bild löschen und im Bericht melden
+(die Karte zeigt dann die Hand). Das Siegel „echt“ setzt die Karte selbst.
 
 ## 4. Prüfung E1–E12 (frischer Agent)
 
 Ein **neuer Agent, der nicht geschrieben hat**, bekommt nur: die Datei, den Lernplan-Eintrag des Themas,
-`docs/mit-echten-dingen.md`, `docs/grundsaetze.md` und das Objekt aus `bild` (nicht die Ideen, nicht diesen Bericht). Auftrag: je Kriterium
+`docs/mit-echten-dingen.md`, `docs/grundsaetze.md` und das Foto aus `foto` (Pfad zum Ansehen; nicht die Ideen, nicht diesen Bericht). Auftrag: je Kriterium
 **grün** oder **rot** mit Beleg (Zitat aus der Datei, Zeile), dazu kritische Befunde.
 
 | Nr. | Kriterium |
@@ -122,14 +124,14 @@ Ein **neuer Agent, der nicht geschrieben hat**, bekommt nur: die Datei, den Lern
 | E8 | Leichter und Schwerer sinnvoll, Dauer etwa 5 Minuten |
 | E9 | Methode laut Recherche wirksam für dieses Thema (Quelle im Kopf); die Handlung ist praxisnah und hat einen Zweck über das Üben hinaus |
 | E10 | jede Variante passt wirklich zur Situation und trifft dasselbe Thema; keine erzwungene Variante |
-| E11 | Bild: Alltagsding passt, erkennbar, im Stil der Runde (`bild` im Kopf, Objekt in `spiele/objekte/`, „Bild der Karte“) |
+| E11 | Foto: zeigt das Material der Grundform, wahr, ohne Text und ohne zählbare Menge, Menschen nur angeschnitten (`foto` im Kopf, „Foto der Anleitung“) |
 | E12 | In Bewegung: da; jede Bewegung trägt den Inhalt; zeigt sie das Prinzip nicht selbst, steht vorn „Zum Verinnerlichen“ mit der Form zum Verstehen; sicher, ohne Wettlauf |
 
 E9 für eine Form zum Verinnerlichen: Spaß an der Bewegung und Behalten genügen als Zweck; den Alltagszweck trägt die
 Form zum Verstehen.
 
 **Nachrüsten** (Anleitung ohne In Bewegung, z. B. nach einer Regeländerung): nur §2 (Bewegung) und §3 für die neue Form,
-Kopf, Bild und übrige Formen bleiben; geprüft wird die ganze Datei, mit Schwerpunkt E1, E4, E5, E8, E10, E12.
+Kopf, Foto und übrige Formen bleiben; geprüft wird die ganze Datei, mit Schwerpunkt E1, E4, E5, E8, E10, E12.
 
 Grün heißt: alle zwölf grün, kein kritischer Befund. Rot → überarbeiten und mit einem **wieder neuen** Prüfer prüfen,
 **höchstens 3 Runden**. Bleibt es rot: Datei nicht anlegen (bzw. mit `entwurf: true` und `geparkt: true` im Kopf
@@ -168,7 +170,8 @@ die eigene Seite der Anleitung `spiele/echt.html?thema=<id>`; die Karte „Mit e
 (`spiele/start/karten.js`, mit dem Titel der Anleitung) und im Regal; der Knopf auf der Fach-Seite; das ruhige Angebot
 in der Pause am Rundenende eines Spiels (`spiele/rahmen/pause.js`). Sie führen zu `echt.html`. Für Erwachsene steht
 die Anleitung im Lernplan des Elternbereichs als Karte im aufgeklappten Thema (mit PDF je Thema); dort zeigt die Karte
-auch das Bild der Karte (`bild`), das Kinderseiten noch nicht zeigen. Analoges Spielen zählt nie für den Lernstand.
+das Foto mit dem Siegel „echt“ wie die Karten der Kinderseiten; ohne Siegel steht es auf `echt.html`, in
+`<ls-anregung>` und im PDF. Analoges Spielen zählt nie für den Lernstand.
 
 ## Lauf aus der Verwaltung
 

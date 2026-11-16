@@ -19,7 +19,7 @@
 import { stille } from "../kern/stimme.js";
 import { GRUND_CSS, MASSE, definiere } from "./stil.js";
 import { blockHtml, escape } from "./markdown.js";
-import { findeAnleitung, ladeAnleitung, letzteForm, merkeForm, waehleForm } from "./echte-dinge.js";
+import { findeAnleitung, ladeAnleitung, letzteForm, merkeForm, waehleForm, fotoUrl } from "./echte-dinge.js";
 import { druckeAnleitung } from "./echte-dinge-druck.js";
 import "./knopf.js";
 
@@ -29,6 +29,9 @@ export const ANREGUNG_TITEL = "Mit echten Dingen";
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
 
 const ANREGUNG_CSS = `
+.rumpf > img.foto { float: right; width: 28rem; height: 28rem; object-fit: cover; margin: 0 0 2.4rem 3.2rem;
+  border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); }
+.rumpf > img.foto[hidden] { display: none; }
 :host {
   position: fixed;
   inset: 0;
@@ -208,7 +211,7 @@ export class LsAnregung extends HTMLElement {
   #formen = [];
   #pdf = false;
   /** Name, Titel der Anleitung und Fach für das PDF. */
-  #druck = { name: "", titel: "", fach: "" };
+  #druck = { name: "", titel: "", fach: "", foto: "" };
 
   constructor() {
     super();
@@ -222,6 +225,7 @@ export class LsAnregung extends HTMLElement {
           <ls-knopf class="pdf" symbol="drucken.svg" wort="PDF" groesse="klein" stumm hidden></ls-knopf>
         </div>
         <div class="rumpf">
+          <img class="foto" alt="" draggable="false" hidden>
           <div class="reiter" role="tablist" aria-label="Wo spielt ihr?" hidden></div>
           <div class="anleitung" role="tabpanel" hidden></div>
           <p class="text"></p>
@@ -231,12 +235,13 @@ export class LsAnregung extends HTMLElement {
     this.textFeld = /** @type {HTMLElement} */ (wurzel.querySelector(".text"));
     this.rumpf = /** @type {HTMLElement} */ (wurzel.querySelector(".rumpf"));
     this.reiter = /** @type {HTMLElement} */ (wurzel.querySelector(".reiter"));
+    this.fotoFeld = /** @type {HTMLImageElement} */ (wurzel.querySelector("img.foto"));
     this.anleitung = /** @type {HTMLElement} */ (wurzel.querySelector(".anleitung"));
     this.zurueck = /** @type {HTMLElement} */ (wurzel.querySelector(".zurueck"));
     // PDF (nur im Elternbereich, oeffne({ pdf: true })): druckt das Blatt mit allen Formen des Themas
     this.pdfKnopf = /** @type {HTMLElement} */ (wurzel.querySelector(".pdf"));
     this.pdfKnopf.addEventListener("click", () => {
-      if (this.#formen.length) druckeAnleitung({ name: this.#druck.name, titel: this.#druck.titel, fach: this.#druck.fach, formen: this.#formen });
+      if (this.#formen.length) druckeAnleitung({ name: this.#druck.name, titel: this.#druck.titel, fach: this.#druck.fach, foto: this.#druck.foto, formen: this.#formen });
     });
     this.zurueck.addEventListener("click", () => this.schliesse());
     /** @type {HTMLElement} */ (wurzel.querySelector(".schleier")).addEventListener("click", () => this.schliesse());
@@ -304,7 +309,11 @@ export class LsAnregung extends HTMLElement {
     const gewuenscht = form || (await letzteForm());
     if (lauf !== this.#lauf) return;
     this.#formen = anleitung?.formen ?? [];
-    this.#druck = { name: titel, titel: anleitung?.titel ?? "", fach: ort?.fach ?? fach };
+    // Foto der Anleitung (ohne Siegel), rechts oben neben der Wahl und der Form (Christian, 2026-11-16).
+    const foto = ort && anleitung ? fotoUrl({ foto: `${ort.fach}/${anleitung.kopf.foto ?? ""}` }) : "";
+    this.fotoFeld.hidden = !foto;
+    if (foto) this.fotoFeld.src = foto; else this.fotoFeld.removeAttribute("src");
+    this.#druck = { name: titel, titel: anleitung?.titel ?? "", fach: ort?.fach ?? fach, foto };
     this.pdfKnopf.hidden = !this.#pdf || !this.#formen.length;
     this.reiter.innerHTML = this.#formen.length > 1
       ? this.#formen.map((f) => `<button class="knopf" type="button" role="tab" tabindex="-1" data-situation="${escape(f.situation)}"

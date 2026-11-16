@@ -13,10 +13,23 @@ import { liesAnleitung } from "./markdown.js";
 
 /** @typedef {import("./markdown.js").Anleitung} Anleitung */
 /** @typedef {import("./markdown.js").Form} Form */
-/** @typedef {{ fach: string, name: string, titel: string, formen: { situation: string, name: string }[], entwurf: boolean, datei?: string }} Eintrag */
+/** @typedef {{ fach: string, name: string, titel: string, formen: { situation: string, name: string }[], entwurf: boolean, datei?: string, foto?: string }} Eintrag */
 
 const ORDNER = new URL("../mit-echten-dingen/", import.meta.url);
 export const FORM_EINSTELLUNG = "echte-dinge.form";
+
+/** Siegel „echt“ auf dem Foto der Karten (docs/mit-echten-dingen.md „Foto der Anleitung“). */
+export const SIEGEL = new URL("../symbole/siegel-echt.svg", import.meta.url).href;
+
+/**
+ * Adresse des Fotos einer Anleitung (`foto` im Verzeichnis, aus `foto:` im Kopf), sonst "".
+ * @param {{ foto?: string } | null | undefined} eintrag
+ * @returns {string}
+ */
+export function fotoUrl(eintrag) {
+  const f = eintrag?.foto;
+  return typeof f === "string" && /^[a-z0-9-]+\/bilder\/[a-z0-9-]+\.webp$/.test(f) ? new URL(f, ORDNER).href : "";
+}
 
 /** @type {Promise<{ themen: Record<string, Eintrag> }> | null} */
 let verzeichnis = null;

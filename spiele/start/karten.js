@@ -34,15 +34,28 @@ export function spielKarteHtml(k, fach, vignette) {
 }
 
 /**
+ * Bildfeld der Karte „Mit echten Dingen“: das Foto der Anleitung mit dem Siegel „echt“ in der Ecke (Christian,
+ * 2026-11-16); ohne Foto die Hand auf Ahorn.
+ * @param {string} [foto] Adresse des Fotos (fotoUrl aus spiele/rahmen/echte-dinge.js)
+ */
+export function echtBildHtml(foto = "") {
+  return foto
+    ? `<span class="bild foto"><img class="foto" src="${esc(foto)}" alt=""><img class="siegel" src="symbole/siegel-echt.svg" alt=""></span>`
+    : `<span class="bild"><img src="symbole/hand.svg" alt=""></span>`;
+}
+
+/**
  * Karte „Mit echten Dingen“: führt zur Seite der Anleitung (echt.html). titel = Titel der Anleitung aus dem
- * Verzeichnis (spiele/rahmen/echte-dinge.js); ohne steht „Mit echten Dingen“ (die Startseite setzt ihn nachträglich).
+ * Verzeichnis (spiele/rahmen/echte-dinge.js); ohne steht „Mit echten Dingen“ (die Startseite setzt ihn nachträglich,
+ * ebenso das Foto).
  * @param {{thema: {id: string, name: string}}} k
  * @param {string} fach
  * @param {string} [titel]
+ * @param {string} [foto] Adresse des Fotos
  */
-export function echtKarteHtml(k, fach, titel = "") {
+export function echtKarteHtml(k, fach, titel = "", foto = "") {
   return `<a class="karte echt" href="echt.html?thema=${encodeURIComponent(k.thema.id)}" data-thema="${esc(k.thema.id)}" aria-label="${esc(`Mit echten Dingen: ${k.thema.name}`)}" style="${farben(fach)}">`
-    + `<span class="bild"><img src="symbole/hand.svg" alt=""></span>`
+    + echtBildHtml(foto)
     + `<span class="unten"><span class="text"><b>${esc(titel || "Mit echten Dingen")}</b><span class="thema">${esc(k.thema.name)}</span></span></span></a>`;
 }
 

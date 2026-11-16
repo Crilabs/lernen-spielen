@@ -35,7 +35,7 @@ test("echteDingeFuer: mit Anleitung (nur gültige Formen), ohne Anleitung, falsc
   assert.deepEqual(echteDingeFuer(CTX, "z7"), {
     id: "z7", name: "Name z7", sprich: "Sprich z7", fach: "mathe", datei: "mathe/z7.md", titel: "Die 7 in zwei Teile",
     formen: [{ situation: "tisch", wort: "Am Tisch", name: "Nudeln" }, { situation: "unterwegs", wort: "Unterwegs", name: "Steine" }],
-    eltern: "Eltern z7", entwurf: true,
+    eltern: "Eltern z7", entwurf: true, foto: "",
   });
   const ohne = echteDingeFuer(CTX, "z5");
   assert.equal(ohne.datei, null);

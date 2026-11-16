@@ -159,7 +159,7 @@ import { regalBaum, reiterHtml, bretterHtml } from "./start/regal-leiste.js";
 import { spielKarteHtml, echtKarteHtml } from "./start/karten.js";
 import { paletteFuer, vignetteSvg } from "./start/welten.js";
 import { spielzeitLage } from "./rahmen/spielzeit.js";
-import { ladeVerzeichnis } from "./rahmen/echte-dinge.js";
+import { ladeVerzeichnis, fotoUrl } from "./rahmen/echte-dinge.js";
 
 /** Merker im Profil (einstellungen): Ids, die beim letzten Besuch im Regal standen. */
 const GESEHEN = "regal.gesehen";
@@ -251,7 +251,7 @@ async function start() {
       const spiel = spielNach.get(s.id) ?? s;
       const palette = paletteFuer(ctx, spiel.karte?.welt ?? spiel.welt);
       return spielKarteHtml({ spiel, thema: { id, name: t.name } }, fach, palette ? vignetteSvg(palette) : null);
-    }).join("") + (echtDa ? echtKarteHtml({ thema: { id, name: t.name } }, fach, anleitung?.titel) : "");
+    }).join("") + (echtDa ? echtKarteHtml({ thema: { id, name: t.name } }, fach, anleitung?.titel, fotoUrl(anleitung)) : "");
     spieleTitel.hidden = !(spielFrei && t.spiele.length) && !echtDa;
     spieleFeld.querySelectorAll("a.karte.spiel").forEach((a) => a.addEventListener("click", (e) => {
       if (leiste.ton) sageEinmal(a.querySelector("b").textContent, sprich);

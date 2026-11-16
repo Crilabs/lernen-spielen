@@ -90,9 +90,10 @@ export function formHtml(form, sichtbar) {
  * @param {Anleitung} a
  * @param {string} [situation] gewünschte Situation (letzte Wahl)
  * @param {string} [symbole] Ordner der Symbole (mit / am Ende)
+ * @param {string} [foto] Adresse des Fotos der Anleitung (fotoUrl), steht rechts oben
  * @returns {string}
  */
-export function anleitungHtml(a, situation = "", symbole = "symbole/") {
+export function anleitungHtml(a, situation = "", symbole = "symbole/", foto = "") {
   const gewaehlt = (a.formen.find((f) => f.situation === situation) ?? a.formen[0])?.situation ?? "";
   const wahl = a.formen.length > 1
     ? `<div class="formwahl" role="group" aria-label="Wo spielt ihr?">`
@@ -100,7 +101,8 @@ export function anleitungHtml(a, situation = "", symbole = "symbole/") {
         + `<img src="${esc(symbole + f.symbol)}" alt=""><span>${esc(f.wort)}</span></button>`).join("")
       + `</div>`
     : "";
-  return `<h1>${esc(a.titel)}</h1>`
+  // Foto der Anleitung (ohne Siegel) neben dem Titel (Christian, 2026-11-16).
+  return (foto ? `<img class="foto" src="${esc(foto)}" alt="">` : "") + `<h1>${esc(a.titel)}</h1>`
     + (a.vorspann.length ? `<div class="vorspann">${blockHtml(a.vorspann, { ebene: 2 })}</div>` : "")
     + wahl
     + a.formen.map((f) => formHtml(f, f.situation === gewaehlt)).join("");

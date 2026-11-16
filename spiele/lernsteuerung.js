@@ -696,7 +696,8 @@ export function echteDingeFuer(ctx, themaId) {
       .map((f) => ({ situation: f.situation, wort: SITUATION_WORT[f.situation], name: text(f.name) }))
     : [];
   return { id: t.id, name: text(t.name), sprich: text(t.sprich), fach: t.strang, datei: da ? `${t.strang}/${t.id}.md` : null,
-    titel: da ? text(v.titel) : "", formen, eltern: text(t.eltern), entwurf: da && v.entwurf === true };
+    titel: da ? text(v.titel) : "", formen, eltern: text(t.eltern), entwurf: da && v.entwurf === true,
+    foto: da ? text(v.foto) : "" };
 }
 
 // ---------- Elternbereich ----------

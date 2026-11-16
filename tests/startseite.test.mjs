@@ -45,7 +45,7 @@ test("Startseite: Grundmuster Hügel (Designsprache); kein Kind", () => {
 
 test("Startseite: Mit echten Dingen führt zur eigenen Seite; der Titel der Anleitung steht auf der Karte, wenn es sie gibt", () => {
   assert.doesNotMatch(html, /<ls-anregung/);
-  assert.match(skript, /import \{ ladeVerzeichnis \} from "\.\/rahmen\/echte-dinge\.js";/);
+  assert.match(skript, /import \{ ladeVerzeichnis, fotoUrl \} from "\.\/rahmen\/echte-dinge\.js";/);
   assert.match(skript, /a\.querySelector\("b"\)\.textContent = e\.titel/);
 });
 
