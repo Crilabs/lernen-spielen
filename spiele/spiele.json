@@ -14,7 +14,7 @@
       "beschreibung": "Das Kind tippt das Ergebnis einer Malaufgabe der Reihen 2 bis 10. Auf die Straße ist eine Montessori-Perlenkette als Hüpfkästchen mit Kreide gemalt: zehn Felder, in jedem ein Stäbchen aus gemalten Perlen. Lena hüpft so viele Felder weit, wie die erste Zahl sagt, und die Zahl wird mit Kreide an ihr Feld geschrieben. Passt die Zahl nicht, zeigt die Kette, wo sie wirklich liegt.",
       "arten": [{ "art": "mal", "reihen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null },
-    { "id": "stellentafel", "titel": "Zahlen legen", "thema": "Zehner und Einer", "kategorie": "mathe",
+    { "id": "stellentafel", "probe": true, "titel": "Zahlen legen", "thema": "Zehner und Einer", "kategorie": "mathe",
       "symbol": "mathe/m08-stellentafel/symbol.svg", "datei": "mathe/m08-stellentafel/index.html",
       "text": "Zahl tippen, Timo legt sie in die Stellentafel.",
       "beschreibung": "Das Kind tippt das Ergebnis von Aufgaben wie 10 + 4 oder 13 − 10. Timo legt goldenes Material in eine Stellentafel mit Zehnern und Einern, und die Stellenwertkarten schieben sich zur Zahl zusammen. Passt die Zahl nicht, zeigt hohles Material, wie die getippte Zahl wirklich aussieht.",
