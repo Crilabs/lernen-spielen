@@ -16,11 +16,11 @@ Du siehst das Spiel mit den Augen eines Kindes von etwa sieben Jahren. Vergleich
 
 1. **Zehnmal:** Würde ein Kind das freiwillig zehnmal hintereinander spielen?
 2. **Kern:** Ist der Spielkern sofort klar – Held, Handlung, Wirkung? Besteht es den Fünf-Sekunden-Test?
-3. **Schwierigkeit:** Ist das Schwierige das Thema (oder eine Entscheidung des Kindes) und nicht die Bedienung?
+3. **Schwierigkeit:** **Ist das Schwierige das Thema – und braucht man den Lerngedanken, um es zu lösen?** Nein, wenn die Bedienung schwer ist oder ein Umweg (abzählen, raten) genauso schnell zum Ziel führt.
 4. **Schön:** Stimmen Stil und Farbe, hat die Bewegung Gewicht, ist nichts leer, überladen oder hässlich?
 5. **Ohne Transfer:** Versteht das Kind alles aus dem, was es sieht (§8)? Kommt die Einführung ohne Sätze der Form
-   „X ist Y“ aus, zeigt sie eine neue Sache und wartet sie auf das Kind (Weiter-Knopf, `takt.json`
-   `einfuehrungSchritte`)? „ja“ heißt: kein Transfer nötig.
+   „X ist Y“ aus, zeigt sie eine neue Sache und wartet sie auf das Kind (sie geht erst nach dem Tipp des
+   Kindes weiter; `takt.json` `einfuehrungSchritte`)? „ja“ heißt: kein Transfer nötig.
 
 ## Grenzen G1–G14
 

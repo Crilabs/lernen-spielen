@@ -142,7 +142,7 @@ test("Einführung erzählt eine kleine Geschichte (alle Sätze wörtlich, die al
   ]) assert.ok(js.includes(`blase.sage("${satz}"`), satz);
   for (const alt of ["Jetzt tippst du.", "Du tippst das Ergebnis.", "Timo legt eine Stange und drei Perlen."]) assert.ok(!js.includes(`"${alt}"`), alt);
   // Die Hilfe wirkt in der Einführung (sagt den Schritt noch einmal).
-  assert.match(js, /einfuehrungLaeuft\) einfuehrungHilfe\?\.\(\)/);
+  assert.match(js, /if \(!E\.hilfeGedrueckt\(\)\) hilfeTippen\?\.\(\)/);
 });
 
 // Review Christian 2026-11-16 (Regel spielbau.md §8 aus M06): nach einem Fehlversuch ein klarer Auftrag, kein Urteil;

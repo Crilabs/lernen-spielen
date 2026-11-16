@@ -94,3 +94,165 @@ test("spiele räumt auch bei Fehler ab und startet die Zeit nur nach Erfolg", as
   assert.deepEqual(aufrufe, { gesehen: 1, zeit: 1 });
   assert.equal(l.laeuft, false);
 });
+
+// spielbau.md §8: „Nur ein Tipp des Kindes kürzt ab, nie die Einstellung.“
+test("abkuerzen beendet die Lesezeit sofort", async () => {
+  const stand = { phase: "" };
+  let gewartet = 0;
+  const l = einfuehrungsLauf({
+    ton: () => false,
+    text: () => "Timo bringt den Brief.",
+    stand,
+    warte: () => {
+      gewartet++;
+      return new Promise(() => {}); // endet nie von selbst
+    },
+  });
+  let fertig = false;
+  await l.spiele(async () => {
+    const s = l.satz(async () => {}).then(() => (fertig = true));
+    await new Promise((ok) => setTimeout(ok, 0));
+    assert.equal(gewartet, 1);
+    assert.equal(fertig, false);
+    l.abkuerzen();
+    await s;
+    assert.equal(fertig, true);
+  });
+});
+
+test("abkuerzen ohne laufende Lesezeit tut nichts", async () => {
+  const { l, gewartet } = lauf({ ton: true });
+  l.abkuerzen();
+  let n = 0;
+  await l.spiele(async () => {
+    l.abkuerzen();
+    await l.satz(async () => void n++);
+    l.abkuerzen();
+  });
+  l.abkuerzen();
+  assert.equal(n, 1);
+  assert.deepEqual(gewartet, []);
+});
+
+test("hilfe mit bis überlebt satz-Aufrufe bis zum Ende", async () => {
+  const { l } = lauf({ ton: true });
+  let h = 0;
+  let b = 0;
+  const sagB = async () => void b++;
+  let getan = () => {};
+  const bis = new Promise((ok) => (getan = ok));
+  await l.spiele(async () => {
+    await l.satz(async () => {});
+    l.hilfe(() => void h++, { bis });
+    await l.satz(sagB);
+    assert.equal(b, 1);
+    assert.equal(l.hilfeGedrueckt(), true);
+    assert.equal(h, 1, "die gehaltene Hilfe gilt noch");
+    assert.equal(b, 1);
+    getan(undefined);
+    await bis;
+    await Promise.resolve();
+    assert.equal(l.hilfeGedrueckt(), true);
+    assert.equal(h, 1, "danach nicht mehr");
+    assert.equal(b, 2, "danach wiederholt sie den laufenden Satz");
+  });
+});
+
+test("hilfe mit bis endet auch, wenn bis abgelehnt wird; spiele beginnt ohne Hilfe", async () => {
+  const { l } = lauf({ ton: true });
+  let h = 0;
+  let ablehnen = (/** @type {any} */ _) => {};
+  const bis = new Promise((_, nein) => (ablehnen = nein));
+  await l.spiele(async () => {
+    l.hilfe(() => void h++, { bis });
+    ablehnen(new Error("weg"));
+    await bis.catch(() => {});
+    await Promise.resolve();
+    l.hilfeGedrueckt();
+    assert.equal(h, 0);
+  });
+  // Eine Hilfe, die vor spiele gesetzt wurde, gilt im neuen Ablauf nicht.
+  l.hilfe(() => void h++);
+  await l.spiele(async () => {
+    l.hilfeGedrueckt();
+  });
+  assert.equal(h, 0);
+});
+
+/** Lauf, dessen Lesezeit nie von selbst endet. */
+function laufOhneEnde() {
+  return einfuehrungsLauf({
+    ton: () => false,
+    text: () => "Timo bringt den Brief.",
+    stand: { phase: "" },
+    warte: () => new Promise(() => {}),
+  });
+}
+
+test("abkuerzen beendet alle gleichzeitig laufenden Lesezeiten (Satz der Hilfe während des Hauptsatzes)", async () => {
+  const l = laufOhneEnde();
+  await l.spiele(async () => {
+    let fertig = 0;
+    const haupt = l.satz(async () => {}).then(() => fertig++);
+    const hilfe = l.satz(async () => {}).then(() => fertig++);
+    await new Promise((ok) => setTimeout(ok, 0));
+    assert.equal(fertig, 0);
+    l.abkuerzen();
+    await Promise.all([haupt, hilfe]);
+    assert.equal(fertig, 2);
+  });
+});
+
+/** Ziel, das Hörer wie ein EventTarget führt und Ereignisse mit eigenem composedPath zustellt. */
+function ziel() {
+  /** @type {Map<string, Set<(ev: any) => void>>} */
+  const hoerer = new Map();
+  return {
+    addEventListener(/** @type {string} */ typ, /** @type {any} */ fn, /** @type {any} */ capture) {
+      assert.equal(capture, true, "lauscht in der Capture-Phase");
+      if (!hoerer.has(typ)) hoerer.set(typ, new Set());
+      hoerer.get(typ)?.add(fn);
+    },
+    removeEventListener(/** @type {string} */ typ, /** @type {any} */ fn) {
+      hoerer.get(typ)?.delete(fn);
+    },
+    anzahl: () => [...hoerer.values()].reduce((n, s) => n + s.size, 0),
+    /** @param {string} type @param {{ key?: string, pfad?: object[] }} [o] */
+    sende(type, { key, pfad = [] } = {}) {
+      for (const fn of hoerer.get(type) ?? []) fn({ type, key, composedPath: () => pfad });
+    },
+  };
+}
+
+test("verbindeTippen: Tipp oder Enter/Leertaste/Escape kürzt ab, nicht aber Hilfe, Pause, Leiste oder andere Tasten", async () => {
+  const l = laufOhneEnde();
+  const doc = ziel();
+  const hilfe = {};
+  const pause = {};
+  const knopf = {};
+  const trennen = l.verbindeTippen(doc, { ausser: [hilfe, pause, null] });
+  assert.equal(doc.anzahl(), 2);
+  /** Startet einen Satz und meldet, ob er nach dem Ereignis fertig ist. @param {() => void} ereignis */
+  const kuerzt = async (ereignis) => {
+    let fertig = false;
+    const s = l.satz(async () => {}).then(() => (fertig = true));
+    await new Promise((ok) => setTimeout(ok, 0));
+    ereignis();
+    await new Promise((ok) => setTimeout(ok, 0));
+    const war = fertig;
+    l.abkuerzen(); // aufräumen
+    await s;
+    return war;
+  };
+  // Außerhalb der Einführung tut der Tipp nichts (und es läuft keine Lesezeit).
+  doc.sende("pointerdown", { pfad: [knopf] });
+  await l.spiele(async () => {
+    assert.equal(await kuerzt(() => doc.sende("pointerdown", { pfad: [knopf, doc] })), true);
+    for (const key of ["Enter", " ", "Escape"]) assert.equal(await kuerzt(() => doc.sende("keydown", { key })), true, key);
+    assert.equal(await kuerzt(() => doc.sende("keydown", { key: "a" })), false);
+    assert.equal(await kuerzt(() => doc.sende("pointerdown", { pfad: [{}, hilfe, doc] })), false);
+    assert.equal(await kuerzt(() => doc.sende("keydown", { key: "Enter", pfad: [pause] })), false);
+  });
+  trennen();
+  assert.equal(doc.anzahl(), 0);
+});

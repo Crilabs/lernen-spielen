@@ -200,15 +200,17 @@ test("fahrtDauer: immer gleich schnell, weit dauert länger (die Dauer zeigt den
 });
 
 // Review M08 (2026-11-16): Die erzählte Einführung dauert über 30 s; zählte sie zur Rundenzeit, endete die Runde eines
-// sicheren Kindes vor „gekonnt“ (G14). Die Rundenzeit beginnt deshalb erst nach der Einführung – in M06 wie in M08.
+// sicheren Kindes vor „gekonnt“ (G14). Die Rundenzeit beginnt deshalb erst nach der Einführung – in M06 wie in M08:
+// die Einführung bekommt die Runde, rahmen/einfuehrung-lauf.js ruft danach r.beginneZeit(); die 30-s-Reserve hält die
+// Lernsteuerung (keine eigene Zeitrechnung im Spiel).
 test("Rundenzeit beginnt nach der Einführung (M06 und M08)", async () => {
   const { readFileSync } = await import("node:fs");
   for (const ordner of ["m06-zahlenpost", "m08-stellentafel"]) {
     const js = readFileSync(new URL(`../../../spiele/mathe/${ordner}/spiel.js`, import.meta.url), "utf8");
     const runde = js.slice(js.indexOf("async function spieleRunde"));
-    const einf = runde.search(/await einfuehrung\(/);
-    assert.ok(einf > 0, ordner);
-    assert.match(runde.slice(einf, einf + 200), /beginn = Date\.now\(\);/, `${ordner}: beginn nach der Einführung neu`);
+    assert.match(runde, /await einfuehrung\([^)]*, r\);/, `${ordner}: Einführung mit der Runde`);
+    assert.match(js, /E\.spiele\(/, ordner);
+    assert.doesNotMatch(js, /LETZTE_AUFGABE_MS|zeitDa|beginn = Date\.now\(\)/, `${ordner}: keine eigene Rundenzeit`);
   }
 });
 
