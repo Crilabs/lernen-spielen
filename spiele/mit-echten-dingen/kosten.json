@@ -3076,5 +3076,23 @@
   "thema": [
    "grosse-zahlen-lesen"
   ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 6,
+  "ausgabe": 925,
+  "einheit": "tokens",
+  "menge": 196336,
+  "notiz": "zehnerzahlen-bis-100, zahl-darstellungen-bis-100, Freigabe durch Christian (ohne 4. Prüfer)",
+  "cache_lesen": 136427,
+  "cache_schreiben": 58978,
+  "themen": 2,
+  "thema": [
+   "zehnerzahlen-bis-100",
+   "zahl-darstellungen-bis-100"
+  ]
  }
 ]

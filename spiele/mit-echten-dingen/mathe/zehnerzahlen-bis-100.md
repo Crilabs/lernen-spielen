@@ -1,8 +1,6 @@
 ---
 thema: zehnerzahlen-bis-100
 fach: mathe
-entwurf: true
-geparkt: true
 bild: { figur: kleiderbuegel, zustand: klammern }
 quellen:
   - Bündeln (Handout Rechnenlernen), ISB Bayern, https://isb.bayern.de/fileadmin/user_upload/Foerderschulen/Geistige_Entwicklung/Rechnenlernen/Handouts/5_Buendeln_Handout.pdf, abgerufen 2026-11-16

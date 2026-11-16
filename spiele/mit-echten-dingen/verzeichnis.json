@@ -479,6 +479,23 @@
    "entwurf": false,
    "datei": "mathe/vorwaerts-zaehlen.md"
   },
+  "zahl-darstellungen-bis-100": {
+   "fach": "mathe",
+   "name": "Eine Zahl, viele Bilder",
+   "titel": "Eine Zahl, viele Bilder",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Die geheime Seite"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Stampfen und Klatschen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zahl-darstellungen-bis-100.md"
+  },
   "zahlen-bis-20-schreiben": {
    "fach": "mathe",
    "name": "Zahlen 11 bis 20 schreiben",
@@ -567,6 +584,27 @@
    ],
    "entwurf": false,
    "datei": "mathe/zehnerreihe.md"
+  },
+  "zehnerzahlen-bis-100": {
+   "fach": "mathe",
+   "name": "Zehnerzahlen",
+   "titel": "Zehn, zwanzig, dreißig",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Klammern an den Bügel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zehn Hüpfer, ein Klatschen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Zahlen auf Schildern"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zehnerzahlen-bis-100.md"
   },
   "zerlegen-10": {
    "fach": "mathe",

@@ -1,8 +1,6 @@
 ---
 thema: zahl-darstellungen-bis-100
 fach: mathe
-entwurf: true
-geparkt: true
 bild: { figur: buch, zustand: lesezeichen }
 quellen:
   - Stellenwerte üben – Darstellungen vernetzen (bis 100), DZLM, https://maco.dzlm.de/sites/maco/files/material-lul/dzlm_difprim_stellenwert_darstellungsvernetzung_um_100_240412.pdf, abgerufen 2026-11-16
