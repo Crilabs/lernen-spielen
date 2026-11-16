@@ -126,18 +126,19 @@ export const perlenTon = (i) => PENTATONIK[Math.min(PENTATONIK.length, Math.max(
 /** Ab der fünften Perle klingt ein heller Oberton mit. @param {number} i */
 export const perleHell = (i) => i >= 5;
 /** Abstand der Perlen in ms: alle zusammen höchstens etwa 1,1 s (Idee §1). @param {number} e */
-export const perlenAbstand = (e) => Math.round(Math.min(130, 1000 / Math.max(1, e)));
+export const perlenAbstand = (e) => Math.round(Math.min(100, 760 / Math.max(1, e)));
 
 // --- Freude und Witz ------------------------------------------------------------------------------------
 /** Bewegungen für eine richtige Antwort (Idee §7): nie zweimal dieselbe hintereinander. */
-export const FREUDE = ["nicken", "wheelie", "ehrenrunde"];
+export const FREUDE = ["nicken", "bunny-hop"];
 /**
- * Nächste Freude, zufällig; die Ehrenrunde seltener (etwa jede vierte). @param {string | null} vorige @param {() => number} [zufall]
+ * Nächste Freude, zufällig; der Bunny-Hop seltener (etwa jede zweite bis dritte). Alle ohne Wende (Timo fällt nie zu einem Strich
+ * zusammen) und kurz; sie beginnen schon mit den Perlen, damit die Folge unter 3 s bleibt. @param {string | null} vorige @param {() => number} [zufall]
  */
 export function naechsteFreude(vorige, zufall = Math.random) {
-  const wahl = zufall() < 0.25 ? "ehrenrunde" : zufall() < 0.5 ? "nicken" : "wheelie";
+  const wahl = zufall() < 0.4 ? "bunny-hop" : "nicken";
   if (wahl !== vorige) return wahl;
-  return wahl === "nicken" ? "wheelie" : "nicken";
+  return wahl === "nicken" ? "bunny-hop" : "nicken";
 }
 
 /**

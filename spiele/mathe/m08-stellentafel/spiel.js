@@ -278,7 +278,7 @@ const bodenY = () => hof.getBoundingClientRect().bottom - 2.6 * remPx();
 const timoTransform = (/** @type {number} */ x) => `translate(${(x - timoEl.offsetWidth / 2).toFixed(1)}px, ${(bodenY() - timoEl.offsetHeight * FUSS).toFixed(1)}px)`;
 const schattenTransform = (/** @type {number} */ x) => `translate(${x.toFixed(1)}px, ${bodenY().toFixed(1)}px)`;
 /** Startplatz links neben Z und die Plätze vor den beiden Spalten. */
-const startX = () => hof.getBoundingClientRect().left + 14 * remPx();
+const startX = () => hof.getBoundingClientRect().left + 20 * remPx();
 const spalteX = (/** @type {"z" | "e"} */ s) => mitte((s === "z" ? feldZ : feldE).getBoundingClientRect()).x - 12 * remPx();
 
 /** Timo steht auf x, ohne Bewegung. @param {number} x */
@@ -525,7 +525,7 @@ async function fliegeVomSchoss(el, lap) {
     { transform: `translate(${dx}px, ${dy}px) scale(0.45)`, opacity: 0.9 },
     { transform: `translate(${dx * 0.35}px, ${dy * 0.35 - 4 * rem}px) scale(0.85)`, offset: 0.5, opacity: 1 },
     { transform: "translate(0, 0) scale(1)", opacity: 1 },
-  ], 260, { transform: "" }, { easing: "ease-out" });
+  ], 220, { transform: "" }, { easing: "ease-out" });
 }
 /** Ein Teil fliegt von seinem Platz auf den Schoß und ist dann weg. @param {HTMLElement} el */
 async function fliegeZumSchoss(el) {
@@ -544,21 +544,21 @@ async function fliegeZumSchoss(el) {
 /**
  * Das Material der Aufgabe wird gelegt (Plus) bis die Karten liegen, aber noch nicht gestapelt sind: Timo rollt an Z und
  * legt die Stange (Klack), rollt an E und legt die Perlen einzeln (je ein Ton höher); unter jeder Spalte landet ihre Karte.
- * @param {any} a
+ * @param {any} a @param {() => void} [freudeStart] wird gerufen, sobald Timo bei E ist (seine Freude beginnt mit den Perlen)
  */
-async function legePlus(a) {
+async function legePlus(a, freudeStart = () => {}) {
   legeKarten(a.c);
   if (B.kz) B.kz.style.visibility = "hidden";
   if (B.ke) B.ke.style.visibility = "hidden";
-  await rolle(spalteX("z"), 280);
+  await rolle(spalteX("z"), 200);
   await fliegeVomSchoss(/** @type {HTMLElement} */ (B.stange), B.lapStange);
   klang.klack();
-  const k1 = landeKarte(B.kz);
-  await Promise.all([feder(), k1]);
-  await rolle(spalteX("e"), 260);
+  // Die Zehnerkarte fällt, während Timo schon zu E rollt (das Wippen der Fahrt ist sein Nachfedern).
+  await Promise.all([landeKarte(B.kz), rolle(spalteX("e"), 220)]);
   if (B.lapPerlen) B.lapPerlen.style.visibility = "hidden";
   const k2 = landeKarte(B.ke);
   const abstand = perlenAbstand(a.e);
+  freudeStart();
   for (let k = 1; k <= a.e; k++) {
     zeigePerlenBis(k);
     klang.perle(k);
@@ -570,9 +570,9 @@ async function legePlus(a) {
 /**
  * Das Material der Aufgabe wird genommen (Minus): Das Material zu c erscheint, Timo nimmt die Stange (weg = 10) oder die
  * Perlen (weg = Einer) auf den Schoß; die Karte des Weggenommenen zieht unter der anderen heraus und fährt mit.
- * @param {any} a @param {string} war Lage vor der Wirkung
+ * @param {any} a @param {string} war Lage vor der Wirkung @param {() => void} [freudeStart]
  */
-async function nimmMinus(a, war) {
+async function nimmMinus(a, war, freudeStart = () => {}) {
   if (war === "start") {
     // Das Material zu c erscheint (0,3 s).
     for (const el of [B.stange, B.perlen]) if (el) el.style.visibility = "visible";
@@ -582,7 +582,8 @@ async function nimmMinus(a, war) {
   const nimmStange = a.weg === 10;
   const gehtMit = nimmStange ? B.kz : B.ke;
   // Die Karte des Weggenommenen zieht heraus: die Einerkarte gleitet an ihren Platz zurück, bei weg = e fährt sie mit.
-  await rolle(spalteX(nimmStange ? "z" : "e"), 340);
+  await rolle(spalteX(nimmStange ? "z" : "e"), 280);
+  freudeStart();
   if (nimmStange) {
     const zug = fliegeZumSchoss(/** @type {HTMLElement} */ (B.stange));
     const zurueck = schiebeKarte(false);
@@ -619,16 +620,16 @@ async function karteMit(k) {
  * Das Brett zeigt die Aufgabe (Plus: die Zahl liegt als Stange und Perlen, die Karten liegen noch getrennt; Minus: das
  * Weggenommene ist weg). `ziel` ist die Karte, die das Ergebnis trägt; `abschluss()` schiebt bei Plus die Karten
  * zusammen (der Aufrufer lässt es zugleich mit der Zahl im Flug laufen).
- * @param {any} a @param {{ witz?: string | null }} [o]
+ * @param {any} a @param {{ witz?: string | null, freudeStart?: () => void }} [o]
  * @returns {Promise<{ ziel: HTMLElement | null, abschluss: () => Promise<void> }>}
  */
-async function zeigeAufgabeFertig(a, { witz: w = null } = {}) {
+async function zeigeAufgabeFertig(a, { witz: w = null, freudeStart = () => {} } = {}) {
   const nichts = async () => {};
   if (B.lage === "fertig") return { ziel: a.op === "plus" ? B.kz : a.weg === 10 ? B.ke : B.kz, abschluss: nichts };
   const war = B.lage;
   B.lage = "fertig";
   if (a.op === "plus") {
-    if (war === "start") await legePlus(a);
+    if (war === "start") await legePlus(a, freudeStart);
     else {
       // Nach der Probe: das Material liegt schon; die Karten kommen.
       legeKarten(a.c);
@@ -641,7 +642,7 @@ async function zeigeAufgabeFertig(a, { witz: w = null } = {}) {
     legeKarten(a.c);
     setzeDx(stapelDx());
   }
-  await nimmMinus(a, war);
+  await nimmMinus(a, war, freudeStart);
   return { ziel: a.weg === 10 ? B.ke : B.kz, abschluss: nichts };
 }
 
@@ -687,25 +688,30 @@ async function rolltDavon() {
 async function wirkungRichtig(a, { satz = false, freude = true, getippt = String(a.antwort) } = {}) {
   const lage = B.lage;
   const w = freude && lage === "start" ? witz(a, seitWitz + 1) : null;
-  const { ziel, abschluss } = await zeigeAufgabeFertig(a, { witz: w === "linsen" ? "linsen" : null });
+  // Timos Freude beginnt schon mit dem Legen der Perlen (bzw. dem Wegnehmen), nicht erst danach: so bleibt die Folge kurz.
+  /** @type {Promise<any> | null} */
+  let gefreut = null;
+  const freudeStart = () => { if (freude && !gefreut) gefreut = freue(a).fertig; };
+  const { ziel, abschluss } = await zeigeAufgabeFertig(a, { witz: w === "linsen" ? "linsen" : null, freudeStart });
+  freudeStart();
   const f = Promise.all([fliege(getippt, kartenZiel(ziel)), abschluss()]);
-  const gefreut = freude ? freue(a).fertig : Promise.resolve();
   await f;
   if (satz) letzterSatz = erzaehler.gleichung(a).catch(() => undefined);
-  await gefreut;
+  await (gefreut ?? Promise.resolve());
 }
 
 /**
- * Daneben: Timo legt trotzdem, was die Aufgabe sagt; die getippte Zahl fliegt hohl an ihren Ort: hohles Material über
- * den Feldern, daneben hohl die Karte der Zahl; sie wackelt einmal, Timo schaut verdutzt hin (Idee §4). Nie reizvoller als richtig (N7).
+ * Daneben ohne Lösung: nur das hohle Material der getippten Zahl liegt über den Feldern, die hohle Karte der Zahl im
+ * Kartenstreifen, das Kästchen zeigt „?“. Das richtige Material und die richtige Karte erscheinen erst mit Hilfe 1 (G6).
+ * Timo schaut verdutzt hin; nie reizvoller als richtig (N7).
  * @param {any} a @param {number} w
  */
 async function wirkungDaneben(a, w) {
-  const { abschluss } = await zeigeAufgabeFertig(a);
-  await abschluss();
   timo.haltung("staunen", { ms: 200 });
   const kar = zeigeHohl(w);
   await fliege(String(w), kartenZiel(kar), { hohl: true });
+  setzeEingabe("?");
+  karteEingabe.classList.remove("leer");
   klang.boing();
   if (kar) bewege(kar, [{ transform: "rotate(0deg)" }, { transform: "rotate(-4deg)", offset: 0.3 }, { transform: "rotate(3deg)", offset: 0.6 }, { transform: "rotate(0deg)" }], 420);
   await erzaehler.daneben(w, a.antwort);
@@ -717,6 +723,8 @@ function zeigeHohl(w) {
   hohlKarte.replaceChildren(k);
   if (w <= 99) {
     const { z, e } = teile(w);
+    hohlZ.classList.toggle("wenig", z <= 3);
+    hohlE.classList.add("wenig");
     for (let i = 0; i < z; i++) hohlZ.append(hohlStab(10));
     if (e) hohlE.append(hohlStab(e));
   }
@@ -735,6 +743,7 @@ function hohlStab(wert) {
 /** Räumt das hohle Bild weg (das nächste Tippen). */
 function raeumeHohl() {
   for (const el of [hohlZ, hohlE, hohlKarte]) el.replaceChildren();
+  setzeEingabe("");
   timo.haltung("tragen", { ms: 160 });
 }
 
@@ -926,13 +935,13 @@ async function bereiteBild(a) {
 /** Das Brett wird leer geräumt; bei einem Wechsel rollt Timo dabei einmal über die Tafel. @param {boolean} ueberDieTafel */
 async function raeumeBrett(ueberDieTafel) {
   const teile = [realZ, realE, kartenZ, kartenE, hohlZ, hohlE, hohlKarte].flatMap((el) => [...el.children]);
-  const weg = Promise.all(teile.map((el) => bewege(/** @type {HTMLElement} */ (el), [{ opacity: 1 }, { opacity: 0 }], ueberDieTafel ? 500 : 160, {}, { easing: "ease-in" })));
+  const weg = Promise.all(teile.map((el) => bewege(/** @type {HTMLElement} */ (el), [{ opacity: 1 }, { opacity: 0 }], ueberDieTafel ? 500 : 110, {}, { easing: "ease-in" })));
   if (ueberDieTafel) {
     await rolle(spalteX("e"), 450);
     await weg;
     await rolle(startX(), 450);
   } else {
-    await Promise.all([weg, rolle(startX(), 300)]);
+    await Promise.all([weg, rolle(startX(), 200)]);
   }
   leereBrett();
 }
@@ -988,6 +997,19 @@ function kindTippt(folge) {
   });
 }
 
+/** Der Schritt 1 steht, bis das Kind irgendwo tippt (oder Enter, Leertaste, Escape drückt); dafür gibt der Prüfstand den Zug „tippen“. */
+let einfuehrungWartet = false;
+function warteAufTipp() {
+  return new Promise((ok) => {
+    einfuehrungWartet = true;
+    const abmelden = beimTippen(() => {
+      abmelden();
+      einfuehrungWartet = false;
+      ok(undefined);
+    });
+  });
+}
+
 /** Spielt die Einführung: in einer Minus-Runde mit „13 − 10“ und „15 − 10“, sonst mit „10 + 3“ und „10 + 5“. @param {"plus" | "minus"} art */
 async function einfuehrung(art) {
   einfuehrungLaeuft = true;
@@ -1011,7 +1033,8 @@ async function einfuehrung(art) {
     await warte(300);
     const satz1 = art === "minus" ? erzaehler.einfuehrungMinus() : erzaehler.einfuehrungPlus();
     await Promise.all([wirkungRichtig(vor, { freude: false }), satz1]);
-    await warte(500);
+    // Weiter erst mit einem Tipp des Kindes, nie nach einer Zeit (Regeln §8).
+    await warteAufTipp();
     // Schritt 2: das Kind tippt.
     neuerLauf();
     await raeumeBrett(false);
@@ -1025,6 +1048,7 @@ async function einfuehrung(art) {
   } finally {
     ueberspringeAlles();
     einfuehrungLaeuft = false;
+    einfuehrungWartet = false;
     einfuehrungTaste = null;
   }
 }
@@ -1058,7 +1082,7 @@ const stand = { phase: "laden", aufgabe: /** @type {string | null} */ (null), nr
 let offeneAufgabe = null;
 const ORTE = { hilfe: "#hilfe >>> ls-knopf", haus: "#leiste >>> a.haus", weiter: "#pause >>> ls-knopf.weiter" };
 const WEITER = { art: "tippen", von: ORTE.weiter };
-const einfuehrungsZug = () => (einfuehrungTaste ? zug(einfuehrungTaste) : null);
+const einfuehrungsZug = () => (einfuehrungTaste ? zug(einfuehrungTaste) : einfuehrungWartet ? { art: "tippen", von: "#hof" } : null);
 meldePruefSchnittstelle({
   zustand: () => ({ ...stand }),
   zuege: () => (stand.phase === "aufgabe" ? offeneAufgabe?.zuege() ?? [] : stand.phase === "pause" ? [WEITER] : stand.phase === "einfuehrung" ? [einfuehrungsZug()].filter(Boolean) : []),
