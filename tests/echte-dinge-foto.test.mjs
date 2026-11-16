@@ -48,3 +48,13 @@ test("Startseite, Regal, Kachel, Elternbereich und Karte zeigen das Foto aus dem
   assert.match(lies("rahmen/anregung.js"), /fotoUrl\(\{ foto: `\$\{ort\.fach\}\/\$\{anleitung\.kopf\.foto/);
   assert.match(lies("echt.html"), /anleitungHtml\(anleitung, await letzteForm\(\), "symbole\/", foto\)/);
 });
+
+test("Karten-CSS: Foto und Siegel sind spezifischer als die Größe des Hand-Zeichens der Seiten (index.html)", () => {
+  const css = readFileSync(new URL("../spiele/start/karten.css", import.meta.url), "utf8");
+  assert.match(css, /\.karten \.karte\.echt \.bild\.foto img\.foto \{[^}]*width: 100%; height: 100%/);
+  assert.match(css, /\.karten \.karte\.echt \.bild\.foto img\.siegel \{/);
+  // index.html setzt „.start .karten .karte.echt .bild img“ (0,5,1); das Foto braucht mehr (0,6,1).
+  const index = readFileSync(new URL("../spiele/index.html", import.meta.url), "utf8");
+  for (const m of index.matchAll(/^([^{\n]*\.karte\.echt[^{\n]*img[^{\n]*)\{/gm))
+    assert.ok((m[1].match(/[.#:]/g) ?? []).length <= 5, `zu spezifisch für das Foto: ${m[1]}`);
+});
