@@ -15,7 +15,7 @@
       "arten": [{ "art": "mal", "reihen": [2, 10], "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null },
     { "id": "zahlenpost", "titel": "Zahlenpost", "thema": "Zahlen hören und schreiben", "kategorie": "mathe",
-      "symbol": "mathe/m06-zahlenpost/symbol.svg", "datei": "mathe/m06-zahlenpost/index.html",
+      "symbol": "mathe/m06-zahlenpost/symbol.svg", "bild": "mathe/m06-zahlenpost/spielbild.webp", "datei": "mathe/m06-zahlenpost/index.html",
       "text": "Zahl hören, tippen, Timo bringt den Brief zum Haus.",
       "beschreibung": "Das Kind hört ein Zahlwort und tippt die Ziffern auf einen Umschlag. Timo rollt die Häuserreihe entlang zu genau dieser Hausnummer; in der Tür steht die Zahl als Goldmaterial. Ein Zahlendreher führt zu einem anderen Haus, und man sieht, wie weit es weg ist.",
       "arten": [{ "art": "zahlwort", "zahlen": [0, 20], "stufen": ["material", "vorstellung", "kopf"] }],

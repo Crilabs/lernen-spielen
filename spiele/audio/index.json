@@ -491,10 +491,30 @@
    "h": "5e9f58eb7a",
    "gehoert": true
   },
+  "Acht Perlen.": {
+   "datei": "florian/a26ba183fa9d.mp3",
+   "h": "ad467df35c",
+   "gehoert": false
+  },
+  "Acht und zehn.": {
+   "datei": "florian/1a88341d20c7.mp3",
+   "h": "71be6f58b3",
+   "gehoert": false
+  },
+  "Acht.": {
+   "datei": "florian/53d032235a80.mp3",
+   "h": "9d4545a1f3",
+   "gehoert": false
+  },
   "Achterreihe": {
    "datei": "florian/c74e73f4033c.mp3",
    "h": "2ac65c2297",
    "gehoert": true
+  },
+  "Achtzehn.": {
+   "datei": "florian/b25da800cd0f.mp3",
+   "h": "f80989a822",
+   "gehoert": false
   },
   "Adjektiv im Fall": {
    "datei": "florian/d5fcaa0c464d.mp3",
@@ -1159,6 +1179,111 @@
   "Der Ball rollt.": {
    "datei": "florian/c57ac5ce4acb.mp3",
    "h": "d4ce1d477f",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Acht.": {
+   "datei": "florian/3511793204bd.mp3",
+   "h": "811cc09730",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Achtzehn.": {
+   "datei": "florian/c3fb25d523e4.mp3",
+   "h": "7c059759e4",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Drei.": {
+   "datei": "florian/5c58ce8e519c.mp3",
+   "h": "fca2d08ce7",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Dreizehn.": {
+   "datei": "florian/f1df57f1ce56.mp3",
+   "h": "b5d807e943",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Eins.": {
+   "datei": "florian/e66d3cebb815.mp3",
+   "h": "fdcf3a8a2b",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Elf.": {
+   "datei": "florian/50bd133a001c.mp3",
+   "h": "d072f6b927",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Fünf.": {
+   "datei": "florian/1f7af76022b0.mp3",
+   "h": "f77c9162fe",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Fünfzehn.": {
+   "datei": "florian/ab7fdf710e11.mp3",
+   "h": "0e47274788",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Neun.": {
+   "datei": "florian/b21804d0c70a.mp3",
+   "h": "1a283e4e39",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Neunzehn.": {
+   "datei": "florian/5987ddca3258.mp3",
+   "h": "d494c69608",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Post.": {
+   "datei": "florian/a1bd81524d42.mp3",
+   "h": "66a38179a0",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Sechs.": {
+   "datei": "florian/0b8029e1d5c2.mp3",
+   "h": "b4a0cf8f6b",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Sechzehn.": {
+   "datei": "florian/b91bcf7117c4.mp3",
+   "h": "b3a9e8c3a7",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Sieben.": {
+   "datei": "florian/ac5af7f270cb.mp3",
+   "h": "4f02774b74",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Siebzehn.": {
+   "datei": "florian/32fc9096a53f.mp3",
+   "h": "2d1bb99596",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Vier.": {
+   "datei": "florian/1f82246da932.mp3",
+   "h": "a3154dd77f",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Vierzehn.": {
+   "datei": "florian/a5f2e3888e39.mp3",
+   "h": "8b8bb0fef2",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Zehn.": {
+   "datei": "florian/c124a0eb2a8c.mp3",
+   "h": "c63f5c8b62",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Zwanzig.": {
+   "datei": "florian/2dbd1cf87cbc.mp3",
+   "h": "26562215de",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Zwei.": {
+   "datei": "florian/3b7052ab5dee.mp3",
+   "h": "97ffcce185",
+   "gehoert": false
+  },
+  "Der Brief ist bei der Zwölf.": {
+   "datei": "florian/6b37df277d59.mp3",
+   "h": "4c3fc59b12",
    "gehoert": false
   },
   "Der Buchstabe aus Vater und Vase": {
@@ -2066,6 +2191,11 @@
    "h": "0eec195638",
    "gehoert": false
   },
+  "Die Acht tippen.": {
+   "datei": "florian/e15f5c9adb1f.mp3",
+   "h": "cb54484196",
+   "gehoert": false
+  },
   "Die beste Überschrift": {
    "datei": "florian/66a6b68221c4.mp3",
    "h": "8566e4db01",
@@ -2079,6 +2209,16 @@
   "Die Buchstaben wie bei Zebra und Hexe": {
    "datei": "florian/b5415d860222.mp3",
    "h": "e786a60be4",
+   "gehoert": false
+  },
+  "Die Drei tippen.": {
+   "datei": "florian/360c8f2e5710.mp3",
+   "h": "ae7a2106aa",
+   "gehoert": false
+  },
+  "Die Eins tippen.": {
+   "datei": "florian/5437656c5199.mp3",
+   "h": "0c0f38664e",
    "gehoert": false
   },
   "Die Ente ist im Teich.": {
@@ -2109,6 +2249,11 @@
   "Die Forscherin zeigt Selin den Schädel. Die Zähne sehen aus wie kleine Blätter mit Zacken. Damit zerdrückte Plateosaurus wohl Pflanzen.": {
    "datei": "florian/a7f80314b1cd.mp3",
    "h": "477be7bac7",
+   "gehoert": false
+  },
+  "Die Fünf tippen.": {
+   "datei": "florian/93c7981e648a.mp3",
+   "h": "13557d7e85",
    "gehoert": false
   },
   "Die Katze miaut.": {
@@ -2186,6 +2331,16 @@
    "h": "fa7a896f6a",
    "gehoert": false
   },
+  "Die Neun tippen.": {
+   "datei": "florian/dd01747db78d.mp3",
+   "h": "83a3158926",
+   "gehoert": false
+  },
+  "Die Null tippen.": {
+   "datei": "florian/96d4eda83311.mp3",
+   "h": "fbe6d680e7",
+   "gehoert": false
+  },
   "Die Perlen sind weg. Der Zehnerstab bleibt ganz.": {
    "datei": "florian/aa89ff96e47e.mp3",
    "h": "d04060d48f",
@@ -2204,6 +2359,16 @@
   "Die schönsten Wörter finden": {
    "datei": "florian/8918b84adb7e.mp3",
    "h": "09b35ac7f0",
+   "gehoert": false
+  },
+  "Die Sechs tippen.": {
+   "datei": "florian/7162af0f6eb8.mp3",
+   "h": "6e9cb85700",
+   "gehoert": false
+  },
+  "Die Sieben tippen.": {
+   "datei": "florian/f2ae4b804ea5.mp3",
+   "h": "56c5d75aea",
    "gehoert": false
   },
   "Die Sonne brennt. Neben Nila fächeln die Großen mit ihren Ohren. Nila spürt den Luftzug. Sie läuft dicht zwischen Mutter und Tante.": {
@@ -2231,9 +2396,19 @@
    "h": "611ad44d46",
    "gehoert": false
   },
+  "Die Vier tippen.": {
+   "datei": "florian/c1bb0c1384c7.mp3",
+   "h": "a04b5ccfad",
+   "gehoert": false
+  },
   "Die Vorsilben wie bei verstecken und vorsingen": {
    "datei": "florian/291b8a8c5f2b.mp3",
    "h": "99c87cb673",
+   "gehoert": false
+  },
+  "Die Zwei tippen.": {
+   "datei": "florian/47b745022aa0.mp3",
+   "h": "1cb06d0a85",
    "gehoert": false
   },
   "Diese Brücke braucht genau so viele Perlen. Sie sitzen alle auf einem Stab.": {
@@ -2331,6 +2506,21 @@
    "h": "7ca157489b",
    "gehoert": false
   },
+  "Drei Perlen.": {
+   "datei": "florian/5e364f74bc52.mp3",
+   "h": "2ed8c57593",
+   "gehoert": false
+  },
+  "Drei und zehn.": {
+   "datei": "florian/024e1df82492.mp3",
+   "h": "c5f89b530b",
+   "gehoert": false
+  },
+  "Drei.": {
+   "datei": "florian/bc80a1ff59e0.mp3",
+   "h": "acc578c5c9",
+   "gehoert": false
+  },
   "Dreierauftrag": {
    "datei": "florian/3c847292726d.mp3",
    "h": "c00487da20",
@@ -2344,6 +2534,11 @@
   "Dreistellige Zahlen lesen und schreiben": {
    "datei": "florian/95628afca589.mp3",
    "h": "b780417828",
+   "gehoert": false
+  },
+  "Dreizehn.": {
+   "datei": "florian/eebc0a67d7b1.mp3",
+   "h": "fac5c91228",
    "gehoert": false
   },
   "Druck wird Schreibschrift": {
@@ -2406,6 +2601,11 @@
    "h": "d4b735acf7",
    "gehoert": false
   },
+  "Ein Zehner.": {
+   "datei": "florian/f3cdd255eebc.mp3",
+   "h": "a19eafd9a0",
+   "gehoert": false
+  },
   "Ein Zehnerstab bleibt ganz. Vom anderen bleibt ein Stück übrig.": {
    "datei": "florian/73dcb967957b.mp3",
    "h": "e2ffdaba97",
@@ -2424,6 +2624,11 @@
   "Eine Perle schläft bei Ela. Neun Perlen schlafen bei Kofi. Bei Kofi wird es eng.": {
    "datei": "florian/f8344ce7f180.mp3",
    "h": "d43d89fdad",
+   "gehoert": false
+  },
+  "Eine Perle.": {
+   "datei": "florian/c4d93f841959.mp3",
+   "h": "9d5ff816f7",
    "gehoert": false
   },
   "Eine Schale Milch? Davon bekommen viele große Katzen Durchfall. Wasser ist das richtige Getränk. Vom Menschenteller bekommt Mia nichts, denn manches ist für Katzen giftig. Schokolade zum Beispiel oder Zwiebeln. Auch manche Zimmerpflanzen sind giftig, etwa Lilien. Das prüfen die Eltern. Gras dagegen knabbern viele Katzen gern. Darum hat Mia ein Töpfchen Katzengras. Manchmal würgt sie danach Haare heraus. Und die Fenster sind bei Malik nie gekippt, wenn Mia allein im Zimmer ist.": {
@@ -2454,6 +2659,16 @@
   "Einmaleins sicher": {
    "datei": "florian/7e77fec5c7cd.mp3",
    "h": "e68665633e",
+   "gehoert": false
+  },
+  "Eins und zehn.": {
+   "datei": "florian/ec30e6dfbb3f.mp3",
+   "h": "ffa65246a9",
+   "gehoert": false
+  },
+  "Eins.": {
+   "datei": "florian/f2839bb99788.mp3",
+   "h": "df8fe390ae",
    "gehoert": false
   },
   "Einzahl oder Mehrzahl?": {
@@ -2494,6 +2709,11 @@
   "Ela will mehr Perlen wegnehmen, als der kleine Stab hat.": {
    "datei": "florian/f943ceeafe97.mp3",
    "h": "201f4087d1",
+   "gehoert": false
+  },
+  "Elf.": {
+   "datei": "florian/3a65d09acfb7.mp3",
+   "h": "82a477ae52",
    "gehoert": false
   },
   "Elfchen-Gedicht": {
@@ -2569,6 +2789,61 @@
   "Erst bis zum Zehner wegnehmen, dann den Rest. Jetzt rechnest du so.": {
    "datei": "florian/2cbddf048205.mp3",
    "h": "344ddfa6a3",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Acht.": {
+   "datei": "florian/8175334bc97d.mp3",
+   "h": "22e097f4a0",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Drei.": {
+   "datei": "florian/22298f3a8e91.mp3",
+   "h": "d9d265a8dd",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Eins.": {
+   "datei": "florian/63f2955859bb.mp3",
+   "h": "4ee4631d1d",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Fünf.": {
+   "datei": "florian/a195bc3e81dd.mp3",
+   "h": "eee18be89a",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Neun.": {
+   "datei": "florian/c2d33f960308.mp3",
+   "h": "717df77fbe",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Null.": {
+   "datei": "florian/98ad99c3cc1b.mp3",
+   "h": "9e67b47138",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Sechs.": {
+   "datei": "florian/5332918d9d35.mp3",
+   "h": "513aea3767",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Sieben.": {
+   "datei": "florian/a5d79e797c0b.mp3",
+   "h": "ebac89bd23",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Vier.": {
+   "datei": "florian/a8921ec709be.mp3",
+   "h": "73fffd282c",
+   "gehoert": false
+  },
+  "Erst die Eins, dann die Zwei.": {
+   "datei": "florian/81ef0f3a83ce.mp3",
+   "h": "5d23b13c9a",
+   "gehoert": false
+  },
+  "Erst die Zwei, dann die Null.": {
+   "datei": "florian/c790ed392991.mp3",
+   "h": "7c8944cbd9",
    "gehoert": false
   },
   "Erst zum vollen Zehner, dann weiter": {
@@ -2751,9 +3026,29 @@
    "h": "5873c6e40d",
    "gehoert": false
   },
+  "Fünf Perlen.": {
+   "datei": "florian/cbf1692d6b5a.mp3",
+   "h": "4b0de295b8",
+   "gehoert": false
+  },
+  "Fünf und zehn.": {
+   "datei": "florian/4332d99df0bc.mp3",
+   "h": "beed5abdf2",
+   "gehoert": false
+  },
+  "Fünf.": {
+   "datei": "florian/6f4cd1ca83c0.mp3",
+   "h": "c5a9f8daff",
+   "gehoert": false
+  },
   "Fünferreihe": {
    "datei": "florian/14b6e683a9c2.mp3",
    "h": "dff8eeec94",
+   "gehoert": false
+  },
+  "Fünfzehn.": {
+   "datei": "florian/854d0138b0b3.mp3",
+   "h": "17a286a88e",
    "gehoert": false
   },
   "Für heute ist das Spielen fertig.": {
@@ -3621,6 +3916,11 @@
    "h": "867530cc28",
    "gehoert": false
   },
+  "Keine Perle.": {
+   "datei": "florian/9e85254c3934.mp3",
+   "h": "21c6236f15",
+   "gehoert": false
+  },
   "Kernaufgaben des Einmaleins": {
    "datei": "florian/4952760d9213.mp3",
    "h": "890788e154",
@@ -3859,6 +4159,11 @@
   "Lass die Figur sprechen": {
    "datei": "florian/aa169648b2ef.mp3",
    "h": "eaf893b995",
+   "gehoert": false
+  },
+  "Lass dir Zahlen sagen und schreib sie auf.": {
+   "datei": "florian/fcfb8ea89b40.mp3",
+   "h": "084e3ad654",
    "gehoert": false
   },
   "Laut oder leise?": {
@@ -4636,9 +4941,29 @@
    "h": "dbd7dd5d5d",
    "gehoert": false
   },
+  "Neun Perlen.": {
+   "datei": "florian/074173abbbb8.mp3",
+   "h": "35cda2b410",
+   "gehoert": false
+  },
+  "Neun und zehn.": {
+   "datei": "florian/9834b8b776a7.mp3",
+   "h": "efbe57e154",
+   "gehoert": false
+  },
+  "Neun.": {
+   "datei": "florian/375bf8698c15.mp3",
+   "h": "d5a10f807d",
+   "gehoert": false
+  },
   "Neunerreihe": {
    "datei": "florian/c0f14b0a07d0.mp3",
    "h": "8ee6edb69f",
+   "gehoert": false
+  },
+  "Neunzehn.": {
+   "datei": "florian/e8eea0caf1d3.mp3",
+   "h": "b1e4e39f8b",
    "gehoert": false
   },
   "Nicht immer dann": {
@@ -4724,6 +5049,11 @@
   "Nomen-Proben": {
    "datei": "florian/220ff00f4b1f.mp3",
    "h": "55b87ceb40",
+   "gehoert": false
+  },
+  "Null.": {
+   "datei": "florian/25efd5d77f71.mp3",
+   "h": "40999818df",
    "gehoert": false
   },
   "Nullen als Platzhalter": {
@@ -5556,9 +5886,29 @@
    "h": "2c2fd6cfa6",
    "gehoert": false
   },
+  "Sechs Perlen.": {
+   "datei": "florian/da5e0aa5172c.mp3",
+   "h": "9b8480cd59",
+   "gehoert": false
+  },
+  "Sechs und zehn.": {
+   "datei": "florian/ad512495782c.mp3",
+   "h": "3bd664c7ed",
+   "gehoert": false
+  },
+  "Sechs.": {
+   "datei": "florian/7b8c3a0cbdff.mp3",
+   "h": "ab20891491",
+   "gehoert": false
+  },
   "Sechserreihe": {
    "datei": "florian/743519db3aa6.mp3",
    "h": "6a9dd88ea4",
+   "gehoert": false
+  },
+  "Sechzehn.": {
+   "datei": "florian/09c2ada92a9e.mp3",
+   "h": "5b13c6e062",
    "gehoert": false
   },
   "Sekunden": {
@@ -5621,9 +5971,29 @@
    "h": "3732f14f42",
    "gehoert": false
   },
+  "Sieben Perlen.": {
+   "datei": "florian/d5ad9780edc2.mp3",
+   "h": "64021066d1",
+   "gehoert": false
+  },
+  "Sieben und zehn.": {
+   "datei": "florian/34ed14de2ba4.mp3",
+   "h": "75b920670b",
+   "gehoert": false
+  },
+  "Sieben.": {
+   "datei": "florian/6da078c14f43.mp3",
+   "h": "2c57c3dfd8",
+   "gehoert": false
+  },
   "Siebenerreihe": {
    "datei": "florian/a0dea3c0ab29.mp3",
    "h": "0b5c01b7cf",
+   "gehoert": false
+  },
+  "Siebzehn.": {
+   "datei": "florian/c9d0515dabec.mp3",
+   "h": "476e7a7c75",
    "gehoert": false
   },
   "Siegerpodest, Reihenfolge zählt": {
@@ -5966,6 +6336,11 @@
    "h": "d887606f7b",
    "gehoert": false
   },
+  "Timo bringt den Brief zur Dreizehn.": {
+   "datei": "florian/7db0bb9a2d91.mp3",
+   "h": "cf8ede3c88",
+   "gehoert": false
+  },
   "Timo legt noch ein paar Perlen dazu.": {
    "datei": "florian/97790e107af6.mp3",
    "h": "ff66ab1cc3",
@@ -5974,6 +6349,506 @@
   "Timo nimmt ein paar Perlen weg. Er nimmt sie von einem Zehnerstab.": {
    "datei": "florian/ab595b6f472a.mp3",
    "h": "9a74f0fff6",
+   "gehoert": false
+  },
+  "Timo steht bei der Acht.": {
+   "datei": "florian/3f2b36d6e186.mp3",
+   "h": "a5a1f7f1ba",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtundachtzig.": {
+   "datei": "florian/6d10ec08f44a.mp3",
+   "h": "28b6cd1bd3",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtunddreißig.": {
+   "datei": "florian/d9fbd92c7a50.mp3",
+   "h": "262a82f283",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtundfünfzig.": {
+   "datei": "florian/b2bc271570d8.mp3",
+   "h": "4b2ab99c24",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtundneunzig.": {
+   "datei": "florian/e07b56b64b2c.mp3",
+   "h": "fa7205c998",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtundsechzig.": {
+   "datei": "florian/62d5f45cda65.mp3",
+   "h": "de8fa8002d",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtundsiebzig.": {
+   "datei": "florian/e2adca9da01e.mp3",
+   "h": "214713dbaf",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtundvierzig.": {
+   "datei": "florian/f40f152fb257.mp3",
+   "h": "e6062e6074",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtundzwanzig.": {
+   "datei": "florian/c9cf3c4c2180.mp3",
+   "h": "b485394a1a",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtzehn.": {
+   "datei": "florian/0e4ec16d5b64.mp3",
+   "h": "79bd81eec8",
+   "gehoert": false
+  },
+  "Timo steht bei der Achtzig.": {
+   "datei": "florian/c5de934b8df3.mp3",
+   "h": "1c8e274550",
+   "gehoert": false
+  },
+  "Timo steht bei der Drei.": {
+   "datei": "florian/33906729e1c3.mp3",
+   "h": "c7a1296b0d",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreißig.": {
+   "datei": "florian/50b4bfd7ba07.mp3",
+   "h": "50bedbafa6",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreiundachtzig.": {
+   "datei": "florian/33c89597e74f.mp3",
+   "h": "4c5557ec3f",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreiunddreißig.": {
+   "datei": "florian/37df5584c78a.mp3",
+   "h": "aaa5479ec3",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreiundfünfzig.": {
+   "datei": "florian/67a3b7c4156d.mp3",
+   "h": "e3533118cb",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreiundneunzig.": {
+   "datei": "florian/ef340549adc3.mp3",
+   "h": "517cc24079",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreiundsechzig.": {
+   "datei": "florian/cd068480c9b9.mp3",
+   "h": "407e49546a",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreiundsiebzig.": {
+   "datei": "florian/3923c2f79e11.mp3",
+   "h": "d6cb2887fb",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreiundvierzig.": {
+   "datei": "florian/5c83b3c9163a.mp3",
+   "h": "ec78e7e306",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreiundzwanzig.": {
+   "datei": "florian/b42787d74c23.mp3",
+   "h": "c0bc76cd54",
+   "gehoert": false
+  },
+  "Timo steht bei der Dreizehn.": {
+   "datei": "florian/d8f3da5585a4.mp3",
+   "h": "293133199c",
+   "gehoert": false
+  },
+  "Timo steht bei der Eins.": {
+   "datei": "florian/84f43e0757de.mp3",
+   "h": "78f146c33d",
+   "gehoert": false
+  },
+  "Timo steht bei der Einundachtzig.": {
+   "datei": "florian/87adb26941de.mp3",
+   "h": "b309359371",
+   "gehoert": false
+  },
+  "Timo steht bei der Einunddreißig.": {
+   "datei": "florian/9dfbed1d8a5e.mp3",
+   "h": "4a6170633b",
+   "gehoert": false
+  },
+  "Timo steht bei der Einundfünfzig.": {
+   "datei": "florian/6ba7806eaf80.mp3",
+   "h": "ef35b587eb",
+   "gehoert": false
+  },
+  "Timo steht bei der Einundneunzig.": {
+   "datei": "florian/0e74a81f675b.mp3",
+   "h": "3bdeb33a2b",
+   "gehoert": false
+  },
+  "Timo steht bei der Einundsechzig.": {
+   "datei": "florian/90194f7d99d0.mp3",
+   "h": "1a02cab7b5",
+   "gehoert": false
+  },
+  "Timo steht bei der Einundsiebzig.": {
+   "datei": "florian/a8ba722717d6.mp3",
+   "h": "3a3c6b6a20",
+   "gehoert": false
+  },
+  "Timo steht bei der Einundvierzig.": {
+   "datei": "florian/349d07e1bb02.mp3",
+   "h": "a58ca1699d",
+   "gehoert": false
+  },
+  "Timo steht bei der Einundzwanzig.": {
+   "datei": "florian/c4b7034dc506.mp3",
+   "h": "77b803344f",
+   "gehoert": false
+  },
+  "Timo steht bei der Elf.": {
+   "datei": "florian/ab4a3b003cd1.mp3",
+   "h": "9d7a95bff1",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünf.": {
+   "datei": "florian/93c3827bba22.mp3",
+   "h": "4e8817b5c4",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfundachtzig.": {
+   "datei": "florian/8528a66fd233.mp3",
+   "h": "86001d5ea0",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfunddreißig.": {
+   "datei": "florian/87ed7613d138.mp3",
+   "h": "c18e0e3dc2",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfundfünfzig.": {
+   "datei": "florian/58e13f7ee4f7.mp3",
+   "h": "1f9ded0022",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfundneunzig.": {
+   "datei": "florian/51c72ad056a4.mp3",
+   "h": "dc4b5f9458",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfundsechzig.": {
+   "datei": "florian/746974464e35.mp3",
+   "h": "4af215ec72",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfundsiebzig.": {
+   "datei": "florian/ffe85d63206a.mp3",
+   "h": "2babf004c7",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfundvierzig.": {
+   "datei": "florian/91ea5b8a085e.mp3",
+   "h": "947333a985",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfundzwanzig.": {
+   "datei": "florian/4220f0c2cc24.mp3",
+   "h": "5a69cf577c",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfzehn.": {
+   "datei": "florian/d8e04db7d4f8.mp3",
+   "h": "e7dcfbd9e3",
+   "gehoert": false
+  },
+  "Timo steht bei der Fünfzig.": {
+   "datei": "florian/265936322c61.mp3",
+   "h": "521967ccf3",
+   "gehoert": false
+  },
+  "Timo steht bei der Neun.": {
+   "datei": "florian/7d3caf6af17e.mp3",
+   "h": "23d017e016",
+   "gehoert": false
+  },
+  "Timo steht bei der Neunundachtzig.": {
+   "datei": "florian/a1d1a1749190.mp3",
+   "h": "4a70e124ec",
+   "gehoert": false
+  },
+  "Timo steht bei der Neununddreißig.": {
+   "datei": "florian/921e558b653a.mp3",
+   "h": "e8457eb9ca",
+   "gehoert": false
+  },
+  "Timo steht bei der Neunundfünfzig.": {
+   "datei": "florian/3c12c4578ff0.mp3",
+   "h": "24bf4f5399",
+   "gehoert": false
+  },
+  "Timo steht bei der Neunundneunzig.": {
+   "datei": "florian/f7dda8af8f61.mp3",
+   "h": "afb7ee7d6b",
+   "gehoert": false
+  },
+  "Timo steht bei der Neunundsechzig.": {
+   "datei": "florian/efa74737b226.mp3",
+   "h": "47abd13d75",
+   "gehoert": false
+  },
+  "Timo steht bei der Neunundsiebzig.": {
+   "datei": "florian/d34699cc41de.mp3",
+   "h": "b1821ae508",
+   "gehoert": false
+  },
+  "Timo steht bei der Neunundvierzig.": {
+   "datei": "florian/a3536be33a75.mp3",
+   "h": "8886ca0e26",
+   "gehoert": false
+  },
+  "Timo steht bei der Neunundzwanzig.": {
+   "datei": "florian/3386dc6f38a5.mp3",
+   "h": "5e8bee4b00",
+   "gehoert": false
+  },
+  "Timo steht bei der Neunzehn.": {
+   "datei": "florian/fa5f6cc1df05.mp3",
+   "h": "0d9f41178d",
+   "gehoert": false
+  },
+  "Timo steht bei der Neunzig.": {
+   "datei": "florian/5e7d2af2d134.mp3",
+   "h": "bca98d16eb",
+   "gehoert": false
+  },
+  "Timo steht bei der Post.": {
+   "datei": "florian/ee526f768f21.mp3",
+   "h": "777e2097a7",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechs.": {
+   "datei": "florian/f7d8189ca39c.mp3",
+   "h": "551d6f9d8f",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechsundachtzig.": {
+   "datei": "florian/9a6a6ca2ed6d.mp3",
+   "h": "129b4a7046",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechsunddreißig.": {
+   "datei": "florian/ff02accabacb.mp3",
+   "h": "62a9b93f3e",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechsundfünfzig.": {
+   "datei": "florian/378eabb594d8.mp3",
+   "h": "ab99045cd3",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechsundneunzig.": {
+   "datei": "florian/b3ea65593cc9.mp3",
+   "h": "71b08e26b8",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechsundsechzig.": {
+   "datei": "florian/fce449be36ab.mp3",
+   "h": "75e54a740e",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechsundsiebzig.": {
+   "datei": "florian/d9d69964a29b.mp3",
+   "h": "23bd2d10e3",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechsundvierzig.": {
+   "datei": "florian/33ec2812f1d3.mp3",
+   "h": "a4b39f5840",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechsundzwanzig.": {
+   "datei": "florian/b82321303335.mp3",
+   "h": "b47728f293",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechzehn.": {
+   "datei": "florian/705e82c83997.mp3",
+   "h": "f18644311b",
+   "gehoert": false
+  },
+  "Timo steht bei der Sechzig.": {
+   "datei": "florian/6c242868c3ae.mp3",
+   "h": "1ef4a08d80",
+   "gehoert": false
+  },
+  "Timo steht bei der Sieben.": {
+   "datei": "florian/0bf65a5a149a.mp3",
+   "h": "bc4cb217f8",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebenundachtzig.": {
+   "datei": "florian/ada980137f47.mp3",
+   "h": "bebf0a2505",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebenunddreißig.": {
+   "datei": "florian/3a276bed940d.mp3",
+   "h": "5ddfb331bb",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebenundfünfzig.": {
+   "datei": "florian/6388058590cd.mp3",
+   "h": "ba5f37b49d",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebenundneunzig.": {
+   "datei": "florian/da73c3f2a56f.mp3",
+   "h": "45e5b8d9ba",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebenundsechzig.": {
+   "datei": "florian/8d90d35a73c1.mp3",
+   "h": "c19a17d3b5",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebenundsiebzig.": {
+   "datei": "florian/705e91b96062.mp3",
+   "h": "a86889279b",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebenundvierzig.": {
+   "datei": "florian/74bd2f619425.mp3",
+   "h": "13821464cc",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebenundzwanzig.": {
+   "datei": "florian/4662d84ec65f.mp3",
+   "h": "493a2ba522",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebzehn.": {
+   "datei": "florian/d2e05e985d58.mp3",
+   "h": "3fa84f54df",
+   "gehoert": false
+  },
+  "Timo steht bei der Siebzig.": {
+   "datei": "florian/a08b66264d09.mp3",
+   "h": "b9887fd05e",
+   "gehoert": false
+  },
+  "Timo steht bei der Vier.": {
+   "datei": "florian/03b651c7d6a9.mp3",
+   "h": "d90c6912ed",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierundachtzig.": {
+   "datei": "florian/2f861bd0d697.mp3",
+   "h": "e7a6cf0c41",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierunddreißig.": {
+   "datei": "florian/84a9b733cc01.mp3",
+   "h": "f2641f757d",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierundfünfzig.": {
+   "datei": "florian/c9064ff011fd.mp3",
+   "h": "f07d5c6e15",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierundneunzig.": {
+   "datei": "florian/68c919d7b5a7.mp3",
+   "h": "4b7aacceea",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierundsechzig.": {
+   "datei": "florian/71bc14304846.mp3",
+   "h": "32c759468b",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierundsiebzig.": {
+   "datei": "florian/7fa08a3ce7f1.mp3",
+   "h": "38711c2c64",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierundvierzig.": {
+   "datei": "florian/cf5b496d8e09.mp3",
+   "h": "d4ad9a3450",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierundzwanzig.": {
+   "datei": "florian/8231c1f4da99.mp3",
+   "h": "28ba2b60ec",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierzehn.": {
+   "datei": "florian/20dfba8b6bc2.mp3",
+   "h": "3c12066b71",
+   "gehoert": false
+  },
+  "Timo steht bei der Vierzig.": {
+   "datei": "florian/70e335eee6a3.mp3",
+   "h": "07c518bc58",
+   "gehoert": false
+  },
+  "Timo steht bei der Zehn.": {
+   "datei": "florian/15dd29a038c9.mp3",
+   "h": "7ffaaaf04e",
+   "gehoert": false
+  },
+  "Timo steht bei der Zwanzig.": {
+   "datei": "florian/30a0b6875822.mp3",
+   "h": "b5310b9eab",
+   "gehoert": false
+  },
+  "Timo steht bei der Zwei.": {
+   "datei": "florian/80dd699502fc.mp3",
+   "h": "7739cb89c2",
+   "gehoert": false
+  },
+  "Timo steht bei der Zweiundachtzig.": {
+   "datei": "florian/54852ed4e99e.mp3",
+   "h": "8295d97994",
+   "gehoert": false
+  },
+  "Timo steht bei der Zweiunddreißig.": {
+   "datei": "florian/623481dca615.mp3",
+   "h": "80c38291ed",
+   "gehoert": false
+  },
+  "Timo steht bei der Zweiundfünfzig.": {
+   "datei": "florian/4fc7265d6cb6.mp3",
+   "h": "e3d21a7a1e",
+   "gehoert": false
+  },
+  "Timo steht bei der Zweiundneunzig.": {
+   "datei": "florian/97720f1c6ecf.mp3",
+   "h": "17cd22ae8c",
+   "gehoert": false
+  },
+  "Timo steht bei der Zweiundsechzig.": {
+   "datei": "florian/8dab7428cd89.mp3",
+   "h": "0c3d66766d",
+   "gehoert": false
+  },
+  "Timo steht bei der Zweiundsiebzig.": {
+   "datei": "florian/7bb77bc7ca3b.mp3",
+   "h": "c0e38532dc",
+   "gehoert": false
+  },
+  "Timo steht bei der Zweiundvierzig.": {
+   "datei": "florian/619b3d949bce.mp3",
+   "h": "19bd901588",
+   "gehoert": false
+  },
+  "Timo steht bei der Zweiundzwanzig.": {
+   "datei": "florian/3ef6cfa166ad.mp3",
+   "h": "4597510653",
+   "gehoert": false
+  },
+  "Timo steht bei der Zwölf.": {
+   "datei": "florian/ee8afe100c8c.mp3",
+   "h": "c62154f76b",
    "gehoert": false
   },
   "Timo wiegt das Mehl ab.": {
@@ -6241,6 +7116,21 @@
    "h": "9cdc85aecf",
    "gehoert": false
   },
+  "Vier Perlen.": {
+   "datei": "florian/ab80ea9eb318.mp3",
+   "h": "395281eaa5",
+   "gehoert": false
+  },
+  "Vier und zehn.": {
+   "datei": "florian/18309d1aed60.mp3",
+   "h": "f28fa985b7",
+   "gehoert": false
+  },
+  "Vier.": {
+   "datei": "florian/b452a869ecc1.mp3",
+   "h": "01c91276b8",
+   "gehoert": false
+  },
   "Viererreihe": {
    "datei": "florian/63b67077639f.mp3",
    "h": "3613c35640",
@@ -6249,6 +7139,11 @@
   "Viertel nach und Viertel vor": {
    "datei": "florian/01f47451b13b.mp3",
    "h": "15540b0ed6",
+   "gehoert": false
+  },
+  "Vierzehn.": {
+   "datei": "florian/87597332634f.mp3",
+   "h": "1d49cfd8d5",
    "gehoert": false
   },
   "Vokal oder Konsonant?": {
@@ -6991,6 +7886,11 @@
    "h": "e60c774e2c",
    "gehoert": false
   },
+  "Zahlenpost": {
+   "datei": "florian/ef0d20458a1c.mp3",
+   "h": "756d308312",
+   "gehoert": false
+  },
   "Zahlenrätsel mit Hinweisen": {
    "datei": "florian/5cf9e90478ab.mp3",
    "h": "dfa4c1de82",
@@ -7019,6 +7919,11 @@
   "Zaunpfahlfalle": {
    "datei": "florian/e8d9d8369da3.mp3",
    "h": "1711340b68",
+   "gehoert": false
+  },
+  "Zehn.": {
+   "datei": "florian/8e0c3ab03eef.mp3",
+   "h": "fadf4ca9a4",
    "gehoert": false
   },
   "Zehner bündeln": {
@@ -7186,14 +8091,39 @@
    "h": "f210e3e409",
    "gehoert": false
   },
+  "Zwanzig.": {
+   "datei": "florian/e51f4a6a2b6a.mp3",
+   "h": "d16583baf0",
+   "gehoert": false
+  },
   "Zwanzigerfeld": {
    "datei": "florian/577afda6fbb9.mp3",
    "h": "550ccb4db7",
    "gehoert": false
   },
+  "Zwei Perlen.": {
+   "datei": "florian/5d57ef8f05ec.mp3",
+   "h": "c754122426",
+   "gehoert": false
+  },
   "Zwei Stäbe, zusammen so lang wie der lange Stab.": {
    "datei": "florian/67bfb4b747cc.mp3",
    "h": "1d7c7931f5",
+   "gehoert": false
+  },
+  "Zwei und zehn.": {
+   "datei": "florian/8efce47816f8.mp3",
+   "h": "32243bd13d",
+   "gehoert": false
+  },
+  "Zwei Zehner.": {
+   "datei": "florian/8c94398b0984.mp3",
+   "h": "d10819d27f",
+   "gehoert": false
+  },
+  "Zwei.": {
+   "datei": "florian/f1bde7f6f3ad.mp3",
+   "h": "fcaabd8926",
    "gehoert": false
   },
   "Zweierreihe": {
@@ -7219,6 +8149,11 @@
   "Zwischen den Zeilen lesen": {
    "datei": "florian/f71f3999bb2d.mp3",
    "h": "5d507dfbb3",
+   "gehoert": false
+  },
+  "Zwölf.": {
+   "datei": "florian/f0eaac03b7ad.mp3",
+   "h": "ce58c29e4f",
    "gehoert": false
   }
  }
