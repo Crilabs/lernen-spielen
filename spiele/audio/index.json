@@ -1006,9 +1006,19 @@
    "h": "e05ffce0de",
    "gehoert": false
   },
+  "Dann probierst du es einfach noch einmal.": {
+   "datei": "florian/e53722888dcd.mp3",
+   "h": "c331e2ae5d",
+   "gehoert": false
+  },
   "Dann schaut Selin durch ein Mikroskop auf eine Knochenscheibe. Sie hat Ringe wie ein Baumstamm, einen für jedes Jahr. Selin zählt mehr als zwölf Ringe. So alt wurde dieser Plateosaurus mindestens.": {
    "datei": "florian/4671c79a9def.mp3",
    "h": "26cd6ecbfd",
+   "gehoert": false
+  },
+  "Dann tippe auf den Knopf mit dem Haken.": {
+   "datei": "florian/b4f17fd7b1b7.mp3",
+   "h": "78e584c41a",
    "gehoert": false
   },
   "Dann tippe auf den Knopf neben der Null.": {
@@ -2316,6 +2326,11 @@
    "h": "a57a9342d6",
    "gehoert": false
   },
+  "Die kleinen Stäbchen kommen zu den Einern.": {
+   "datei": "florian/281a08b1fd58.mp3",
+   "h": "db054904e4",
+   "gehoert": false
+  },
   "Die kleinen Stäbe werden zu einem goldenen Zehnerstab. Jetzt liegen da lauter Zehner.": {
    "datei": "florian/6510d6566ec3.mp3",
    "h": "da38cd6b34",
@@ -2454,6 +2469,11 @@
   "Die Zehn tippen.": {
    "datei": "florian/1950e31c797b.mp3",
    "h": "72ec63850b",
+   "gehoert": false
+  },
+  "Die Zehnerstangen kommen in dieses Feld.": {
+   "datei": "florian/e666c03f26a9.mp3",
+   "h": "1322e93bef",
    "gehoert": false
   },
   "Die Zwei tippen.": {
@@ -2629,6 +2649,11 @@
   "Du hörst eine Zahl.": {
    "datei": "florian/d74cf58e5017.mp3",
    "h": "eaa5b0ae1c",
+   "gehoert": false
+  },
+  "Du tippst das Ergebnis.": {
+   "datei": "florian/0c49031c471c.mp3",
+   "h": "519b39e0a9",
    "gehoert": false
   },
   "Ecken und Seiten zählen": {
@@ -5456,6 +5481,11 @@
    "h": "1cbf9d6a4f",
    "gehoert": false
   },
+  "Oben steht eine Aufgabe.": {
+   "datei": "florian/75edd18160ca.mp3",
+   "h": "5c29709919",
+   "gehoert": false
+  },
   "Oben weiter": {
    "datei": "florian/d4db93e17b09.mp3",
    "h": "0ca9c7ab55",
@@ -6461,6 +6491,11 @@
    "h": "7bf3e8a467",
    "gehoert": false
   },
+  "So lernst du Zehner und Einer.": {
+   "datei": "florian/be87191f98d0.mp3",
+   "h": "2ec84f0404",
+   "gehoert": false
+  },
   "So lernst du, Zahlen zu schreiben, die du hörst.": {
    "datei": "florian/33f530d3c2ee.mp3",
    "h": "3a6794f32f",
@@ -6839,6 +6874,11 @@
   "Timo nimmt ein paar Perlen weg. Er nimmt sie von einem Zehnerstab.": {
    "datei": "florian/ab595b6f472a.mp3",
    "h": "9a74f0fff6",
+   "gehoert": false
+  },
+  "Timo räumt heute das Perlenmaterial ein.": {
+   "datei": "florian/aee5e972d66d.mp3",
+   "h": "9945484edb",
    "gehoert": false
   },
   "Timo steht bei der Post.": {
@@ -7346,9 +7386,24 @@
    "h": "58333965ea",
    "gehoert": false
   },
+  "Tippe die Drei.": {
+   "datei": "florian/30bea5df5fbc.mp3",
+   "h": "c1e52115b8",
+   "gehoert": false
+  },
+  "Tippe die Eins und die Drei.": {
+   "datei": "florian/8840fd28a994.mp3",
+   "h": "611605d557",
+   "gehoert": false
+  },
   "Tippe die Fünf.": {
    "datei": "florian/895e5ec65246.mp3",
    "h": "15eb41b5b6",
+   "gehoert": false
+  },
+  "Tippst du eine andere Zahl, zeigt Timo sie.": {
+   "datei": "florian/6253e710587b.mp3",
+   "h": "aa4f5f88e0",
    "gehoert": false
   },
   "Tippst du eine andere Zahl?": {
@@ -7604,6 +7659,11 @@
   "Versuch es noch einmal.": {
    "datei": "florian/ddd82af991d2.mp3",
    "h": "eec35f44e7",
+   "gehoert": false
+  },
+  "Vertippt? Dann tippe auf den Knopf neben der Null.": {
+   "datei": "florian/6d0d7e2b2b56.mp3",
+   "h": "9ceff2257f",
    "gehoert": false
   },
   "Videoanruf-Regeln": {
@@ -8699,6 +8759,16 @@
   "Zukunft": {
    "datei": "florian/41ddbc098b70.mp3",
    "h": "1793b274e1",
+   "gehoert": false
+  },
+  "Zum Beispiel dreizehn minus zehn.": {
+   "datei": "florian/5a3525247a25.mp3",
+   "h": "426b50a09a",
+   "gehoert": false
+  },
+  "Zum Beispiel zehn plus drei.": {
+   "datei": "florian/a63a98f4557d.mp3",
+   "h": "9223598ed9",
    "gehoert": false
   },
   "Zurück": {

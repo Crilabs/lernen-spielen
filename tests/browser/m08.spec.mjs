@@ -58,6 +58,21 @@ for (const [name, typ] of [["chromium", chromium], ["webkit", webkit]]) {
         await warte(200);
       }
       pruefe((await zustand())?.phase === "aufgabe", `${was}: Einführung endet in der ersten Aufgabe (${Math.round((Date.now() - t0) / 1000)} s)`);
+      if (ton) {
+        // Fehlversuch, dann sofort Hilfe: der Auftrag „Versuch es noch einmal.“ und andere alte Sätze fallen weg,
+        // die Hilfe spricht ihren Satz (wie M06).
+        const antwort = String(await p.evaluate(() => window.lsPruefen.zustand().aufgabe)).includes("minus") ? null : "41";
+        if (antwort) {
+          for (const z of antwort) await p.locator("#tastatur button", { hasText: new RegExp(`^${z}$`) }).first().click();
+          await p.locator("#fertig").click();
+          await warte(1200);
+          await p.locator("#hilfe ls-knopf").click();
+          const nachHilfe = [];
+          for (let i = 0; i < 40; i++) { const t = await blase(); if (nachHilfe.at(-1) !== t) nachHilfe.push(t); await warte(150); }
+          pruefe(!nachHilfe.includes("Versuch es noch einmal.") && /^Eine Stange und/.test(nachHilfe.at(-1) ?? ""),
+            `${was}: nach Fehlversuch und Hilfe nur der Hilfesatz (${nachHilfe.join(" | ")})`);
+        }
+      }
       pruefe(fehler.length === 0, `${was}: keine Seitenfehler ${fehler.join(" | ")}`);
       await k.close();
     }

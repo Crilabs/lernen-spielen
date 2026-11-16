@@ -166,3 +166,13 @@ test("Einführung erzählt eine kleine Geschichte (alle Sätze wörtlich, die al
   // Die Hilfe wirkt in der Einführung (sagt den Schritt noch einmal).
   assert.match(js, /einfuehrungLaeuft\) einfuehrungHilfe\?\.\(\)/);
 });
+
+// Review Christian 2026-11-16 (Regel spielbau.md §8 aus M06): nach einem Fehlversuch ein klarer Auftrag, kein Urteil;
+// er fällt weg, wenn das Kind schon wieder tippt.
+test("Fehlversuch: nach dem Daneben-Satz „Versuch es noch einmal.“, nur ohne neuen Tipp", () => {
+  const js = readFileSync(new URL("../../../spiele/mathe/m08-stellentafel/spiel.js", import.meta.url), "utf8");
+  assert.ok(js.includes('blase.sage("Versuch es noch einmal.")'));
+  const daneben = js.slice(js.indexOf("async function wirkungDaneben"), js.indexOf("function zeigeHohl"));
+  assert.match(daneben, /erzaehler\.nochmal\(\)/);
+  assert.match(daneben, /tippZaehler/);
+});

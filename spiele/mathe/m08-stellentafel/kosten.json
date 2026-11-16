@@ -202,5 +202,16 @@
   "einheit": "keine",
   "menge": 0,
   "notiz": "Freigabe nötig: Darf die Stellenwertkarte (Montessori-Karten türkis/orange/schiefer, rechtsbündig übereinander, verdecken die Nullen) als neues Lernzeichen nach spiele/rahmen/stellenwertkarte.js, und darf <ls-perlenstab> das Attribut „gold“ für einzelne goldene Einerperlen bekommen?"
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 476,
+  "notiz": "Review Christian: 14 Sätze der Einführung (gefilterter Lauf nur M08)"
  }
 ]

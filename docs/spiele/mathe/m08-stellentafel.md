@@ -51,3 +51,17 @@ Katalog M08 · Mathe · `spiele/mathe/m08-stellentafel/` · zuerst Kl. 1 (zehn-p
 - Platte (Hunderterplatte) im Bild: in Kl. 1 nicht nötig.
 - Regal-Material Mini-Stellentafel: kommt mit den Themen, die sie brauchen.
 - Fehlerbild ziffernweises Rechnen (Übung): gehört zu späteren Themen.
+## 11. Review Christian (2026-11-16)
+- **Raum:** statt grauem Hof ein heller Montessori-Werkraum (`raum.js`): oben ein Streifen Wand mit Fenster und niedrigem
+  Regal, darunter Ahornboden mit Lichtfleck; die Stellentafel liegt als Arbeitsmatte (Papier, Naht) auf dem Boden, die
+  Aufgabe steht auf einer flachen Papierkarte. Keine Bedeutungsfarben in der Welt (C3, per Test).
+- **Zehner und Einer** statt „Z“ und „E“ in den Köpfen, in der Einführung und im Elternhinweis.
+- **Einer als farbiges Perlenstäbchen** (Montessori-Farben, wie M06); die Zehner bleiben goldene Stangen. Die Variante
+  `gold` von `<ls-perlenstab>` entfällt.
+- **Einführung als kleine Geschichte** (spielbau.md §8): Timo räumt das Perlenmaterial ein; Sonnenring auf „Zehner“,
+  „Einer“ und der Aufgabe; das Kind tippt 10 + 3 (bzw. 13 − 10) selbst und dann den Knopf mit dem Haken; andere Zahl,
+  Korrigieren, was man lernt, „Jetzt geht es los.“ Die Hilfe sagt in der Einführung den Schritt noch einmal.
+- **Übergang nach Fehlversuch:** „Versuch es noch einmal.“, nur wenn der Satz davor zu Ende ist und das Kind nicht schon
+  wieder tippt.
+- **Rundenzeit** beginnt nach der Einführung (sonst endete die Runde eines sicheren Kindes vor „gekonnt“, G14).
+- Neue Aufnahmen per Spracherkennung geprüft (keine Ordnungszahlen). Browser-Prüfung `tests/browser/m08.spec.mjs`.

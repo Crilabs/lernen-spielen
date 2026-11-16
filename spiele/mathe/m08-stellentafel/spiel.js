@@ -113,8 +113,14 @@ const erzaehler = {
   },
   /** Die Rechenart wechselt (Regeln §8). @param {"wegnehmen" | "dazulegen"} art */
   wechsel: (art) => (art === "wegnehmen" ? blase.sage("Jetzt nimmt Timo etwas weg.") : blase.sage("Jetzt legt Timo etwas dazu.")),
+  /** Nach einem Fehlversuch ein klarer Auftrag (Christian, 2026-11-16, wie M06). */
+  nochmal: () => blase.sage("Versuch es noch einmal."),
   gehtNicht: () => blase.sage("Das Spiel geht gerade nicht."),
 };
+
+/** Zählt die Tipps des Kindes: Ein Satz nach einer Wirkung fällt weg, wenn das Kind inzwischen getippt hat. */
+let tippZaehler = 0;
+document.addEventListener("pointerdown", () => { tippZaehler++; }, true);
 
 /**
  * Die Sätze der Einführung (docs/spielbau.md §8, Review Christian 2026-11-16: in Ruhe, als kleine Geschichte; Zehner
@@ -734,7 +740,10 @@ async function wirkungDaneben(a, w) {
   karteEingabe.classList.remove("leer");
   klang.boing();
   if (kar) bewege(kar, [{ transform: "rotate(0deg)" }, { transform: "rotate(-4deg)", offset: 0.3 }, { transform: "rotate(3deg)", offset: 0.6 }, { transform: "rotate(0deg)" }], 420);
-  await erzaehler.daneben(w, a.antwort);
+  const tipps = tippZaehler;
+  const gesagt = await erzaehler.daneben(w, a.antwort);
+  // Der Auftrag folgt nur, wenn der Satz zu Ende gesprochen ist und das Kind nicht schon wieder tippt.
+  if (gesagt === "gesprochen" && tipps === tippZaehler) await erzaehler.nochmal();
 }
 /** Die getippte Zahl als hohles Bild: Stangen über Z, Perlen über E, daneben die hohle Karte. @param {number} w @returns {HTMLElement | null} */
 function zeigeHohl(w) {
@@ -1304,7 +1313,9 @@ async function spieleRunde(vorschau) {
     r = vorschauRunde();
   }
 
-  const beginn = Date.now();
+  // Die Rundenzeit beginnt nach der Einführung (sie erzählt in Ruhe, ~35 s; sonst endete die Runde eines sicheren
+  // Kindes nach drei Aufgaben, bevor das Thema gekonnt ist – G14).
+  let beginn = Date.now();
   const zeitDa = () => Date.now() - beginn < rundenMs() - Math.min(LETZTE_AUFGABE_MS, rundenMs() / 4);
   const naechste = () => (zeitDa() ? aufStufe(r.naechste()) : null);
   let aufgabe = naechste();
@@ -1320,6 +1331,7 @@ async function spieleRunde(vorschau) {
     einfuehrungGespielt = true;
     await einfuehrung(erste.op);
     r.einfuehrungGesehen();
+    beginn = Date.now();
     letzteArt = null;
     leereBrett();
   }
