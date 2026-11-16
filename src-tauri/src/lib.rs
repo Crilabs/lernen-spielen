@@ -114,10 +114,16 @@ fn wachhund(window: &tauri::Window, event: &WindowEvent) {
 }
 
 /// Nur die eigene App-Oberfläche darf geladen werden (keine neuen Fenster, keine Fremdseiten).
+/// Im Debug-Build zusätzlich der eingebaute Dev-Server der Tauri-CLI (`npm run tauri dev`
+/// lädt `http://localhost:1430`).
 fn navigation_erlaubt(url: &tauri::Url) -> bool {
     match url.scheme() {
         "tauri" => true,
-        "http" | "https" => url.host_str() == Some("tauri.localhost"),
+        "http" | "https" => match url.host_str() {
+            Some("tauri.localhost") => true,
+            Some("localhost" | "127.0.0.1") => cfg!(debug_assertions),
+            _ => false,
+        },
         _ => false,
     }
 }
