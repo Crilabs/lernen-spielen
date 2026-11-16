@@ -1281,5 +1281,16 @@
   "einheit": "zeichen",
   "menge": 14928,
   "notiz": "ElevenLabs Livia (eleven_multilingual_v2), ganzes Buch; Abrechnung über das ElevenLabs-Abo, der Bericht rechnet mit dem Azure-Satz"
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 1430,
+  "notiz": "Erinnerungsfragen · ElevenLabs Livia, Abrechnung über das ElevenLabs-Abo"
  }
 ]

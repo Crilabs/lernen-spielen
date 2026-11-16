@@ -102,11 +102,13 @@ for (const typ of [chromium, webkit]) {
     await Promise.all([page.waitForURL(/geschichte\.html\?id=haustiere/), page.click('.regal[data-regal="haustiere"] .buch')]);
     await page.goto(page.url() + "&pruefen");
     await page.waitForFunction(() => window.lsGeschichte?.seiten > 0 || window.lsGeschichte?.kapitelZahl > 0);
-    // Sachbuch (haustiere): gelesen erst, wenn alle Kapitel zu Ende gelesen sind – jedes Kapitel bis zur letzten Seite
+    // Sachbuch (haustiere): gelesen erst, wenn alle Kapitel zu Ende gelesen sind – jedes Kapitel bis zur letzten Seite und zur Wahl in der Erinnerungsfrage
     const kapitelZahl = await page.evaluate(() => window.lsGeschichte.kapitelZahl);
     for (let k = 0; k < Math.max(1, kapitelZahl); k++) {
       if (kapitelZahl) await page.evaluate((i) => window.lsGeschichte.oeffne(i), k);
       await bisZumEnde(page);
+      // Erinnerungsfrage am Kapitelende (geschichten.md §2b): erst nach einer Wahl gilt das Kapitel als gelesen
+      if (await page.evaluate(() => window.lsGeschichte.erinnern)) await page.evaluate(() => window.lsGeschichte.antworte(0));
     }
     await Promise.all([page.waitForURL(/bibliothek\.html\?raum=tiere/), page.evaluate(() => window.lsGeschichte.fertig())]);
     await page.waitForSelector('.regal[data-regal="haustiere"] .buch');

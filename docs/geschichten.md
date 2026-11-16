@@ -50,6 +50,46 @@ sicher **(Annahme)**.
   nächsten Seite.
 - Vorbild: `spiele/geschichten/haustiere/` (Katzen: `inhalte.md`, `pruefung.md`).
 
+## 2b. Erinnern statt Berieseln (Christian, 2026-11-16)
+
+Bücher sollen nicht in Schleife nebenher laufen, ohne dass etwas hängen bleibt. Deshalb fragt jedes Sachbuch nach
+jedem Kapitel einmal ab, was das Kind behalten hat (Abrufübung), und die Bibliothek holt Fragen mit Abstand zurück
+(verteiltes Wiederholen). Beides bewertet nicht (grundsaetze.md §3, N7): keine Punkte, kein „richtig“/„falsch“, nichts
+wird gezählt; eine Antwort, die nicht passt, löst nichts Besonderes aus.
+
+- **Eine Erinnerungsfrage je Kapitel** (`kapitel[].erinnern`, Pflicht für jedes Sachbuch). Sie steht nach der letzten
+  Seite des Kapitels; weiter zum nächsten Kapitel (oder Fertig) geht es erst nach einer Wahl – welche, ist egal.
+  Das Kapitel gilt erst danach als gelesen.
+- **Frage:** nach der Kernerkenntnis des Kapitels (das, was ein Kind nach dem Kapitel über die Sache wissen soll),
+  nie nach Namen, Zahlen zum Auswendiglernen oder Nebensachen. Kurz (≤ 15 Wörter), Kindersprache, Fachbegriff wie im
+  Buch. Keine Vorhersage („Was glaubst du“) – hier wird erinnert.
+- **Drei Antworten**, je ≤ 8 Wörter, ähnlich lang und ähnlich gebaut. Genau eine passt. Die beiden anderen sind
+  Vorstellungen, die Kinder wirklich haben (am besten die, die das Buch selbst ausräumt, z. B. „Wale sind Fische“),
+  nie albern, witzig oder abwegig (N7) und nie „alle“/„keine davon“. Die passende Antwort steht nicht immer an
+  derselben Stelle (`richtig`: 0, 1 oder 2, über das Buch verteilt).
+- **Auflösung** (`aufloesung`): ein bis zwei Sätze, die die Sache sagen, nah am Wortlaut des Buchs. Sie passt nach jeder
+  Wahl: kein „Ja“, „Genau“, „Richtig“, „Leider“, „Nicht ganz“, kein Lob. Danach leuchtet die passende Antwort auf.
+- **Bild** (`bild`): ein Foto aus diesem Kapitel, das zur Frage passt, aber die Antwort nicht verrät. Keine neuen Bilder.
+- **Nachlesen** (`seite`): Index der Seite im Kapitel (ab 0), auf der die Antwort steht; der Knopf „Nachlesen“ springt
+  dorthin.
+- **Alles wird vorgelesen** (bei Ton an, in beiden Modi): Frage, jede Antwort, beim Tippen die gewählte Antwort, dann die
+  Auflösung (`npm run audio` nimmt alles auf).
+- **„Weißt du noch?“ in der Bibliothek:** Höchstens einmal am Tag kommt beim Öffnen der Bibliothek die Frage eines
+  Kapitels zurück, das das Kind frühestens gestern beendet hat; die am längsten nicht gestellte zuerst. Überspringbar
+  („Später“), nichts wird gezählt.
+- Ein frischer Prüfer prüft die Fragen mit dem Buch (`pruefung.md` §5 „Erinnerungsfragen“).
+
+```json
+"erinnern": {
+  "frage": "Wie atmet ein Wal?",
+  "bild": "bilder/01-02.webp",
+  "antworten": ["Mit Kiemen, wie ein Fisch", "Mit einer Lunge, wie du", "Durch die Haut"],
+  "richtig": 1,
+  "aufloesung": "Ein Wal hat eine Lunge. Er muss zum Atmen auftauchen.",
+  "seite": 2
+}
+```
+
 ## 2. Regeln (Lern- und Sachgeschichten)
 
 - **Umfang:** gezeichnete **Lerngeschichten** (`sinn`, `form`, `struktur`) sind kurz vor dem Spiel: 6–10 Seiten, je

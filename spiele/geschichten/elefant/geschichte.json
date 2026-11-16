@@ -193,7 +193,19 @@
           "text": "Elefanten können nicht schwitzen. Wie kühlen sie sich trotzdem ab? Am Wasserloch zeigt es Zuris Familie. Die Großen spritzen sich mit dem Rüssel Wasser über den Rücken. Zuri wälzt sich im nassen Schlamm, bis sie ganz braun ist.\n\nIhre Haut ist dick und voller Falten. Darin sitzen winzige, feine Risse, wie ein Netz. In diesen Rissen halten sich Wasser und Schlamm viel länger als auf glatter Haut. Der Schlamm kühlt. Und er schützt vor stechenden Insekten. Danach werfen die Großen manchmal noch Staub darüber.",
           "bild": "bilder/01-04.webp"
         }
-      ]
+      ],
+      "erinnern": {
+        "frage": "Wie kühlt sich ein Elefant ab, wenn ihm heiß ist?",
+        "bild": "bilder/01-01.webp",
+        "antworten": [
+          "Er schwitzt am ganzen Körper",
+          "Er fächelt mit den Ohren, nimmt ein Schlammbad",
+          "Er hechelt mit offenem Maul"
+        ],
+        "richtig": 1,
+        "aufloesung": "Elefanten können nicht schwitzen. Sie fächeln mit den Ohren und kühlen sich mit Wasser und Schlamm.",
+        "seite": 2
+      }
     },
     {
       "titel": "Ein Rüssel für alles",
@@ -219,7 +231,19 @@
           "text": "Zuris Mutter hat zwei lange, helle Stoßzähne. Das sind Zähne! Es sind Schneidezähne, die ein Leben lang weiterwachsen. Bei Afrikanischen Elefanten haben meist Weibchen und Männchen solche Zähne. Damit schält die Mutter Rinde von einem Ast. Mit ihnen kann sie auch in der Erde graben.\n\nBei den Männchen, den Bullen, werden die Stoßzähne besonders lang. Bei einem alten Bullen können sie bis zu drei Meter lang werden. Das ist länger als ein Bett. Zuri hat noch keine Stoßzähne, die man sieht. Bei ihr dauert das noch.",
           "bild": "bilder/02-05.webp"
         }
-      ]
+      ],
+      "erinnern": {
+        "frage": "Wie trinkt ein großer Elefant?",
+        "bild": "bilder/02-01.webp",
+        "antworten": [
+          "Durch den Rüssel, wie mit einem Strohhalm",
+          "Er hält das Maul ins Wasser",
+          "Er spritzt Wasser aus dem Rüssel ins Maul"
+        ],
+        "richtig": 2,
+        "aufloesung": "Der Elefant saugt das Wasser in den Rüssel. Dann spritzt er es ins Maul und schluckt.",
+        "seite": 2
+      }
     },
     {
       "titel": "Eine Familie hält zusammen",
@@ -245,7 +269,19 @@
           "text": "Zur Begrüßung strecken die Elefanten einander den Rüssel entgegen. Sie berühren sich am Kopf und am Maul. Elefanten erkennen ihre Verwandten wieder, auch nach langer Zeit.\n\nZuris großer Bruder ist zwölf Jahre alt. In ein, zwei Jahren zieht er los. Dann lebt er allein oder mit anderen jungen Bullen.\n\nForschende haben noch etwas entdeckt. Afrikanische Elefanten rufen einander mit eigenen Lauten, ähnlich wie mit Namen. Hört eine Elefantenkuh den Ruf, der ihr gilt, antwortet sie besonders rasch. Zuri drückt ihren Rüssel an das Maul ihrer Mutter.",
           "bild": "bilder/03-05.webp"
         }
-      ]
+      ],
+      "erinnern": {
+        "frage": "Wer führt eine Elefantenfamilie an?",
+        "bild": "bilder/03-05.webp",
+        "antworten": [
+          "Die älteste Elefantenkuh",
+          "Ein großer, starker Bulle",
+          "Die Mutter des jüngsten Kalbs"
+        ],
+        "richtig": 0,
+        "aufloesung": "Die älteste Elefantenkuh führt, die Leitkuh. Sie weiß noch, wo es in einer Dürre Wasser gab.",
+        "seite": 0
+      }
     },
     {
       "titel": "Zuri wird groß",
@@ -271,7 +307,19 @@
           "text": "Eine Tante steht dicht neben Zuri. Auch ihre große Cousine passt auf sie auf. In einer Elefantenfamilie kümmern sich viele um ein Kalb. So kann die Mutter in Ruhe fressen und sich ausruhen.\n\nUnd Zuri hat Zeit zum Spielen. Mit den anderen Kindern rennt sie um die Wette und schiebt mit dem Kopf. Sie wälzt sich im Schlamm und planscht am Wasser. Danach drängt sie sich müde an die Beine ihrer Tante.",
           "bild": "bilder/04-05.webp"
         }
-      ]
+      ],
+      "erinnern": {
+        "frage": "Was muss ein Elefantenkind erst lange üben?",
+        "bild": "bilder/04-05.webp",
+        "antworten": [
+          "Auf vier Beinen stehen",
+          "Den Rüssel richtig benutzen",
+          "Milch mit dem Maul trinken"
+        ],
+        "richtig": 1,
+        "aufloesung": "Den Rüssel muss ein Elefantenkind erst lernen. Stehen kann es schon bald nach der Geburt.",
+        "seite": 2
+      }
     },
     {
       "titel": "Fressen, trinken, graben",
@@ -296,7 +344,19 @@
           "text": "Wann schlafen Elefanten eigentlich? Viel weniger als du. Zusammen sind es meist nur ein paar Stunden am Tag.\n\nTagsüber dösen die Großen oft im Stehen, im Schatten eines Baumes. Ihre Ohren hängen ruhig herab, der Rüssel baumelt. In der Nacht legen sie sich manchmal auf die Seite. Oft ruht die ganze Familie zur gleichen Zeit.\n\nZuri liegt im Sand, dicht neben ihrer Mutter. Sie schläft. Ihre Mutter steht neben ihr und wacht.",
           "bild": "bilder/05-05.webp"
         }
-      ]
+      ],
+      "erinnern": {
+        "frage": "Wie helfen Elefanten anderen Tieren in der Trockenzeit?",
+        "bild": "bilder/05-01.webp",
+        "antworten": [
+          "Sie tragen ihnen Wasser im Rüssel",
+          "Sie teilen ihr Futter mit ihnen",
+          "Sie graben Wasserlöcher in den Sand"
+        ],
+        "richtig": 2,
+        "aufloesung": "Elefanten graben im trockenen Flussbett, bis Wasser hineinsickert. Danach trinken auch Zebras, Antilopen und Vögel daraus.",
+        "seite": 2
+      }
     },
     {
       "titel": "Nila in Asien",
@@ -317,7 +377,19 @@
           "text": "Mittags wird es auch im Wald heiß. Nilas Mutter rollt ihren Rüssel ein. Dann wirft sie eine Wolke aus roter Erde über ihren Rücken. Der Staub rieselt auf ihre Haut. Er schützt sie vor der Sonne und vor stechenden Insekten.\n\nNila steht dicht daneben. Ein bisschen Staub landet auf ihrem Kopf. Sie versucht es selbst. Noch gelingt es ihr nicht so gut.\n\nWie Zuri muss auch Nila den Rüssel erst üben. Ihre Mutter wirft gleich noch eine Wolke hinterher.",
           "bild": "bilder/06-04.webp"
         }
-      ]
+      ],
+      "erinnern": {
+        "frage": "Woran erkennt man einen Asiatischen Elefanten?",
+        "bild": "bilder/06-04.webp",
+        "antworten": [
+          "An den viel kleineren Ohren",
+          "An den viel größeren Ohren",
+          "An den viel längeren Stoßzähnen"
+        ],
+        "richtig": 0,
+        "aufloesung": "Asiatische Elefanten haben viel kleinere Ohren. Oben auf dem Kopf haben sie zwei Höcker.",
+        "seite": 1
+      }
     },
     {
       "titel": "Platz für Elefanten",
@@ -338,7 +410,19 @@
           "text": "Überall helfen Menschen den Elefanten. Sie schützen Wälder und pflanzen Futterbäume. Sie lassen Wege frei, damit die Elefanten von einem Gebiet ins nächste wandern können.\n\nEs wird Abend in der Savanne. Die Großmutter führt die Familie zum Wasserloch. Zuris Mutter trinkt, Rüssel für Rüssel. Zuri kniet am Ufer und trinkt mit dem Maul. Bald wird sie es mit dem Rüssel schaffen.\n\nDann stehen alle beieinander und brummen leise. Zuri lehnt sich an das Bein ihrer Mutter.",
           "bild": "bilder/07-04.webp"
         }
-      ]
+      ],
+      "erinnern": {
+        "frage": "Warum gibt es heute weniger Elefanten als früher?",
+        "bild": "bilder/07-03.webp",
+        "antworten": [
+          "Löwen fressen zu viele Elefanten",
+          "Menschen nehmen Platz und jagen sie",
+          "Elefanten bekommen keine Kinder mehr"
+        ],
+        "richtig": 1,
+        "aufloesung": "Menschen bauen Felder, Dörfer und Straßen, wo Elefanten wandern. Und Wilderer jagen sie wegen des Elfenbeins.",
+        "seite": 0
+      }
     }
   ]
 }

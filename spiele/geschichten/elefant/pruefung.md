@@ -109,3 +109,11 @@ nicht immer zu sehen; für die Aussagen unerheblich.
 ## 4. Titelbild
 
 `bilder/01-01.webp`, Ausschnitt `50% 55%` (gewählt von einem frischen Agenten, 2026-11-16): Die Elefantenfamilie mit Zuri neben der Mutter zieht ruhig und hell durch die Savanne. Das zeigt Familie, Elefantenkind und Lebensraum in einem Bild, und Mutter und Kind sind im Streifen ganz zu sehen.
+
+## 5. Erinnerungsfragen (2026-11-16)
+
+Je Kapitel eine Frage nach docs/geschichten.md §2b, geschrieben von einem Agenten, geprüft von einem frischen Prüfer (Text, Seite, Bild angesehen).
+
+Elefant: 7 Fragen gegen Text, Seiten und Bilder geprüft; Seiten und Sachaussagen stimmen, Bilder verraten nichts (06-04 zeigt zwangsläufig Asiatische Elefanten, ohne Vergleich unkritisch).
+Geändert: K1 passende Antwort war als einzige eine Aufzählung („Mit Ohren, Wasser und Schlamm“) → „Er fächelt mit den Ohren, nimmt ein Schlammbad“, gebaut wie die beiden anderen.
+K2 Frage „… mit dem Rüssel?“ schloss die Antwort „Maul ins Wasser“ schon aus → „Wie trinkt ein großer Elefant?“.

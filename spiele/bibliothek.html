@@ -14,7 +14,9 @@
    kräftig und der Buchtitel klein),
    die Reihen brechen um. Gelesen: ein
    Sonnenpunkt vor dem Titel. Grundmuster Blätter. Keine Zählung, keine Reihenfolge, kein „Weiterlesen“; gesperrt nur über die Bücher-Grenze der Eltern;
-   Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen. Diese Seite liest den Lernstand nur.
+   Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen. Diese Seite liest den Lernstand nur –
+   außer „Weißt du noch?“ (docs/geschichten.md §2b): höchstens einmal am Tag eine Erinnerungsfrage aus einem Kapitel,
+   das frühestens gestern fertig wurde, in einem ruhigen Fenster; „Später“ schiebt sie auf morgen, nichts wird gezählt.
    Gesperrte Bücher tragen eine Uhr, ein Tippen zeigt den Hinweis (rahmen/zeitsperre.js). Rechts im Kopf das Zahnrad für
    Erwachsene wie auf „Können“ (rahmen/zahnrad.js). */
 body { -webkit-user-select: none; user-select: none; }
@@ -80,6 +82,18 @@ body { -webkit-user-select: none; user-select: none; }
 
 .leer { margin: 2rem 0; font-size: 4.5rem; color: var(--ls-tinte-weich); }
 
+/* --- „Weißt du noch?“ ------------------------------------------------------------------------------ */
+.erinnern-grund { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 4rem var(--ls-seite-rand);
+  background: color-mix(in srgb, var(--ls-tinte) 38%, transparent); }
+.erinnern-grund[hidden] { display: none; }
+.erinnern-fenster { width: min(112rem, 100%); max-height: 100%; overflow-y: auto; scrollbar-width: none; padding: 5.6rem 6.4rem 4.8rem;
+  background: var(--ls-papier); border-radius: var(--ls-radius-plakat); box-shadow: var(--ls-schatten); }
+.erinnern-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 2.4rem; margin: 0 0 3.2rem; }
+.erinnern-kopf h2 { margin: 0; font-size: 5.6rem; font-weight: 750; line-height: 1; letter-spacing: -0.03em; }
+.erinnern-kopf span { font-size: 2.4rem; font-weight: 600; color: var(--ls-tinte-weich); text-align: right; }
+.erinnern-fuss { display: flex; justify-content: flex-end; margin-top: 3.6rem; }
+@media (min-aspect-ratio: 4/3) { .erinnern-fenster { width: min(150rem, 100%); } }
+.erinnern-fuss ls-knopf[hidden] { display: none; }
 @media (max-aspect-ratio: 3/2) {
   .halle { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -93,7 +107,7 @@ body { -webkit-user-select: none; user-select: none; }
 
 <script type="module">
 import { sperreTouch, protokoll, esc, linkKlick } from "./lernspiel.js";
-import { ladeLernstand } from "./lernsteuerung.js";
+import { ladeLernstand, ladeErinnerung, merkeErinnert } from "./lernsteuerung.js";
 import { sprich } from "./kern/stimme.js";
 import { sageEinmal } from "./kern/sitzung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
@@ -104,6 +118,7 @@ import { bibliothekFuerKind, waehleRaum, buchHref, raumSvg } from "./start/bibli
 import { buecherLage } from "./rahmen/buecherzeit.js";
 import { sperre, SAETZE } from "./rahmen/zeitsperre.js";
 import { zahnrad } from "./rahmen/zahnrad.js";
+import "./rahmen/erinnern.js";
 
 start();
 
@@ -131,6 +146,8 @@ async function start() {
 
   // Titelbild je Buch: das erste Foto der Geschichte (titelbild hat Vorrang); ohne Foto die Tönung des Fachs.
   const deckel = new Map();
+  /** Erinnerungsfragen je Buch (Sachbücher, geschichten.md §2b): { titel, fragen: (erinnern | undefined)[] } */
+  const fragen = new Map();
   await Promise.all(raeume.flatMap((r) => r.regale.flatMap((rg) => rg.buecher)).map(async (b) => {
     try {
       const g = await fetch(`geschichten/${encodeURIComponent(b.id)}/geschichte.json`).then((x) => x.json());
@@ -139,6 +156,7 @@ async function start() {
       const foto = (typeof g.titelbild === "string" ? g.titelbild : typeof g.titelbild?.bild === "string" ? g.titelbild.bild : null)
         ?? seiten.find((s) => typeof s.bild === "string")?.bild;
       deckel.set(b.id, foto ? `geschichten/${b.id}/${foto}` : null);
+      if (Array.isArray(g.kapitel) && g.kapitel.some((k) => k?.erinnern)) fragen.set(b.id, { titel: g.titel, fragen: g.kapitel.map((k) => k?.erinnern) });
     } catch (e) { protokoll("bibliothek, Titelbild " + b.id + ": " + e); }
   }));
 
@@ -192,6 +210,34 @@ async function start() {
   const zeige = () => { const r = waehleRaum(raeume, new URLSearchParams(location.search).get("raum")); r ? raum(r) : halle(); };
   addEventListener("popstate", zeige);
   zeige();
+  weisstDuNoch().catch((e) => protokoll("bibliothek, Weißt du noch: " + e));
+
+  // „Weißt du noch?“: höchstens einmal am Tag eine Kapitelfrage mit Abstand (verteiltes Wiederholen, geschichten.md §2b)
+  async function weisstDuNoch() {
+    const wahl = await ladeErinnerung(fragen.keys());
+    const buch = wahl && fragen.get(wahl.id);
+    const e = buch?.fragen[wahl.kapitel];
+    if (!e) return;
+    const grund = document.createElement("div");
+    grund.className = "erinnern-grund";
+    grund.innerHTML = `<section class="erinnern-fenster" role="dialog" aria-modal="true" aria-labelledby="erinnern-titel">
+      <div class="erinnern-kopf ui"><h2 id="erinnern-titel">Weißt du noch?</h2><span></span></div>
+      <ls-erinnern></ls-erinnern>
+      <div class="erinnern-fuss"><ls-knopf class="spaeter" symbol="zurueck.svg" wort="Später" stumm></ls-knopf>
+        <ls-knopf class="fertig" art="haupt" symbol="fertig.svg" wort="Fertig" stumm hidden></ls-knopf></div></section>`;
+    grund.querySelector(".erinnern-kopf span").textContent = buch.titel;
+    document.body.appendChild(grund);
+    const frage = grund.querySelector("ls-erinnern"), spaeter = grund.querySelector(".spaeter"), fertig = grund.querySelector(".fertig");
+    const zu = () => grund.remove();
+    if (leiste.ton) sprich("Weißt du noch?");
+    frage.zeige(e, { ton: leiste.ton, bild: e.bild ? `geschichten/${wahl.id}/${e.bild}` : "" });
+    frage.addEventListener("gewaehlt", () => {
+      spaeter.hidden = true; fertig.hidden = false;
+      merkeErinnert(wahl.id, wahl.kapitel, true).catch((f) => protokoll("Weißt du noch: " + f));
+    });
+    spaeter.addEventListener("click", () => { merkeErinnert(wahl.id, wahl.kapitel, false).catch((f) => protokoll("Weißt du noch: " + f)); zu(); });
+    fertig.addEventListener("click", zu);
+  }
 }
 </script>
 </body>

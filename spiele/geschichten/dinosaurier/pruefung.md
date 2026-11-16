@@ -133,3 +133,11 @@ Schreiber, Prüfer A und Prüfer B (~13,90 €, mit `werkzeuge/kosten/transkript
 ## 4. Titelbild
 
 `bilder/01-01.webp`, Ausschnitt `50% 12%` (gewählt von einem frischen Agenten, 2026-11-16): Das ganze Skelett des Plateosaurus steht im hellen Museumssaal und passt zum Buch (Fossilien, Museum, Plateosaurus als Leitfigur). Es ist ruhig und vollständig im Streifen zu sehen.
+
+## 5. Erinnerungsfragen (2026-11-16)
+
+Je Kapitel eine Frage nach docs/geschichten.md §2b, geschrieben von einem Agenten, geprüft von einem frischen Prüfer (Text, Seite, Bild angesehen).
+
+Dinosaurier: 6 Fragen gegen Text, Seiten und Bilder geprüft; Seiten stimmen, Sachaussagen decken sich mit dem Buch.
+Geändert: K2 hatte das „Ja, … / Ja, … / Nein, …“-Muster (Form verriet die Antwort) → neu „Wann kamen die Menschen auf die Erde?“ mit drei gleich gebauten Zeitangaben.
+K4 Auflösung ohne Artnamen (Compsognathus). K6 Bild 06-03 (Citipati brütet wie ein Vogel, verrät „Vögel“) → 06-02 (Sinosauropteryx).

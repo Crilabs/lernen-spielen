@@ -182,7 +182,19 @@
      "text": "Nein, Rot kann Lotta nicht sehen. Dafür sieht sie ein Licht, das für uns unsichtbar ist. Es heißt ultraviolettes Licht. Für Lotta schimmert der Mohn deshalb in einer ganz eigenen Farbe.\n\nViele Blüten tragen in der Mitte ein Zeichen aus diesem Licht. Wir sehen es nicht. Für eine Biene ist es wie ein Wegweiser: Hier geht es zum süßen Saft! Lotta fliegt auf einen Löwenzahn zu. Sie landet genau in der Mitte, dort, wo der süße Saft ist.",
      "bild": "bilder/01-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wie sieht eine Biene die Farben?",
+    "bild": "bilder/01-03.webp",
+    "antworten": [
+     "Genauso wie wir Menschen",
+     "Kein Rot, dafür ultraviolettes Licht",
+     "Nur in Schwarz und Weiß"
+    ],
+    "richtig": 1,
+    "aufloesung": "Rot kann eine Biene nicht sehen. Dafür sieht sie ultraviolettes Licht, das für uns unsichtbar ist.",
+    "seite": 4
+   }
   },
   {
    "titel": "Ein Volk in der Wabe",
@@ -211,7 +223,19 @@
      "text": "Und woher kommt eine neue Königin? Sie entsteht aus genau so einem Ei wie eine Arbeiterin. Der Unterschied ist das Futter.\n\nFür eine Königin bauen die Bienen eine besonders große Zelle. Sie hängt nach unten am Rand der Wabe. Die Larve darin bekommt die ganze Zeit nur einen besonderen Futtersaft. Er heißt Gelée royale. Die anderen Larven bekommen nach ein paar Tagen auch Honig und Blütenstaub. Aus der Larve mit dem Futtersaft wird eine Königin.",
      "bild": "bilder/02-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Was macht die Königin im Bienenvolk?",
+    "bild": "bilder/02-01.webp",
+    "antworten": [
+     "Sie legt die Eier",
+     "Sie gibt allen Befehle",
+     "Sie sammelt den meisten Honig"
+    ],
+    "richtig": 0,
+    "aufloesung": "Die Königin legt Eier, sonst niemand im Volk. Befehle gibt sie keine, die Arbeit teilen die Bienen unter sich auf.",
+    "seite": 1
+   }
   },
   {
    "titel": "Jeden Tag eine neue Aufgabe",
@@ -236,7 +260,19 @@
      "text": "Im Mai hängt am Apfelbaum eine große, brummende Traube aus Bienen. Tausende Bienen halten sich aneinander fest. Das ist ein Schwarm.\n\nSo entsteht ein neues Volk. Wird es im Kasten zu eng, ziehen die Bienen eine neue Königin groß. Dann fliegt ungefähr die Hälfte des Volkes mit der alten Königin aus. Am Ast warten sie, bis sie eine neue Wohnung gefunden haben. Einen Schwarm lässt man in Ruhe. Erwachsene rufen eine Imkerin. Tante Defne schüttelt die Traube vorsichtig in eine Kiste. Bald wohnt das neue Volk in einem eigenen Kasten.",
      "bild": "bilder/03-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Was ändert sich, wenn eine Arbeiterin älter wird?",
+    "bild": "bilder/03-01.webp",
+    "antworten": [
+     "Sie bleibt immer bei einer Arbeit",
+     "Sie sammelt vom ersten Tag an",
+     "Sie wechselt zu einer neuen Arbeit"
+    ],
+    "richtig": 2,
+    "aufloesung": "Eine Biene wechselt ihre Aufgabe, wenn sie älter wird. Zuerst putzt sie Zellen, erst später fliegt sie als Sammlerin hinaus.",
+    "seite": 0
+   }
   },
   {
    "titel": "Blüten, Tanz und Blütenstaub",
@@ -262,7 +298,19 @@
      "text": "Im dunklen Stock kann man den Tanz nicht sehen. Darum laufen andere Bienen dicht hinter Lotta her. Mit den Fühlern tasten sie sie ab und spüren jede Bewegung.\n\nDabei riechen sie auch den Duft in Lottas Pelz. Er riecht nach Löwenzahn. Manchmal bekommen sie ein Tröpfchen Nektar zum Kosten. Dann fliegen sie los, in die getanzte Richtung. Draußen suchen sie genau diesen Duft. So finden bald viele Bienen die gelbe Wiese.",
      "bild": "bilder/04-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wie zeigt eine Biene den anderen den Weg zu Blüten?",
+    "bild": "bilder/04-02.webp",
+    "antworten": [
+     "Sie fliegt allen voraus",
+     "Sie tanzt auf der Wabe",
+     "Sie summt den Weg vor"
+    ],
+    "richtig": 1,
+    "aufloesung": "Die Biene tanzt auf der Wabe den Schwänzeltanz. Der Tanz zeigt die Richtung und wie weit es ist.",
+    "seite": 3
+   }
   },
   {
    "titel": "Honig, Äpfel und ein warmer Winter",
@@ -292,7 +340,19 @@
      "text": "Im Winter ist es still am Bienenkasten. Kein Summen ist zu hören. Schlafen die Bienen? Nein! Drinnen sitzen sie dicht zusammen, in einer Kugel aus Bienen. Sie heißt Wintertraube. In der Mitte sitzt die Königin.\n\nDie Bienen zittern mit den Muskeln, mit denen sie sonst fliegen. Davon wird es warm. Außen ist die Kugel kühler, innen ist sie warm. Immer wieder tauschen die Bienen ihre Plätze. Und sie essen vom Honig, den sie im Sommer gesammelt haben.",
      "bild": "bilder/05-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wofür machen die Bienen den Honig?",
+    "bild": "bilder/05-01.webp",
+    "antworten": [
+     "Als Futter nur für die Königin",
+     "Damit Imker ihn verkaufen können",
+     "Als Vorrat für den Winter"
+    ],
+    "richtig": 2,
+    "aufloesung": "Der Honig ist der Wintervorrat des Volkes. Im Winter essen die Bienen davon.",
+    "seite": 2
+   }
   },
   {
    "titel": "Ruhig bleiben, wenn es summt",
@@ -321,7 +381,19 @@
      "text": "Die meiste Zeit summen Bienen einfach an uns vorbei. Sie suchen Blüten, nicht uns.\n\nNoa liegt im Gras neben dem Klee und hält ganz still. Eine Biene landet auf einer Kleeblüte, nur eine Handbreit entfernt. Noa sieht ihren Rüssel, ihre Fühler und ihre Höschen. Dann fliegt sie weiter, zur nächsten Blüte und zur übernächsten. Wer ruhig bleibt, kann Bienen ganz nah zuschauen.",
      "bild": "bilder/06-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wann sticht eine Honigbiene?",
+    "bild": "bilder/06-01.webp",
+    "antworten": [
+     "Nur wenn sie sich wehren muss",
+     "Sobald sie einen Menschen sieht",
+     "Immer wenn sie bei uns landet"
+    ],
+    "richtig": 0,
+    "aufloesung": "Bienen stechen nur, wenn sie sich wehren müssen. Ruhig bleiben oder langsam weggehen, das hilft.",
+    "seite": 0
+   }
   },
   {
    "titel": "Die wilden Schwestern",
@@ -346,7 +418,19 @@
      "text": "Vielen Wildbienen geht es nicht gut. Mehr als die Hälfte der Arten ist bedroht. Es fehlen Blüten und Plätze für ihre Nester. Viele Wildbienen besuchen nämlich nur ganz bestimmte Blüten. Lotta, die Honigbiene, ist dagegen nicht bedroht. Imkerinnen und Imker kümmern sich um sie.\n\nWas hilft den Wildbienen? Heimische Blumen, eine wilde Ecke im Garten, alte Stängel und offene, sandige Stellen. Bei Noa wird die Wiese nie auf einmal gemäht. Ein Streifen blüht immer, und dort summt es den ganzen Sommer.",
      "bild": "bilder/07-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wie leben die meisten Wildbienen?",
+    "bild": "bilder/07-05.webp",
+    "antworten": [
+     "In einem Volk mit Königin",
+     "Jedes Weibchen baut allein ein Nest",
+     "Im Kasten bei einer Imkerin"
+    ],
+    "richtig": 1,
+    "aufloesung": "Die meisten Wildbienen haben kein Volk und keine Königin. Jedes Weibchen baut sein Nest allein.",
+    "seite": 1
+   }
   }
  ]
 }

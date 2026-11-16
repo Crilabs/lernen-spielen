@@ -161,7 +161,19 @@
      "text": "Im nächsten Saal steht Plateosaurus noch einmal, diesmal mit Haut. Es ist ein Modell in Lebensgröße. So stellen sich Fachleute ihn heute vor. Seine Form kennen sie gut, denn sie steckt in den Knochen. Aber welche Farbe hatte er? Das weiß niemand. Haut und Farbe bleiben fast nie erhalten.\n\nDarum ist jedes Bild von einem lebenden Dinosaurier eine Vorstellung. Das gilt auch für die Bilder in diesem Buch. Fachleute nennen so ein Bild eine Rekonstruktion. Sie machen es so genau wie möglich. Und wenn neue Funde auftauchen, malen sie es neu.",
      "bild": "bilder/01-06.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Woher wissen Fachleute so viel über die Dinosaurier?",
+    "bild": "bilder/01-06.webp",
+    "antworten": [
+     "Menschen haben sie damals gesehen",
+     "Aus Fossilien im Gestein",
+     "Aus alten Zeichnungen von früher"
+    ],
+    "richtig": 1,
+    "aufloesung": "Kein Mensch hat je einen lebenden Dinosaurier gesehen. Das Wissen steckt in Fossilien, in Spuren, die zu Stein geworden sind.",
+    "seite": 1
+   }
   },
   {
    "titel": "Eine Welt lange vor uns",
@@ -183,7 +195,19 @@
      "text": "Es sind Blumen, und auch das Gras fehlt! Im Jura gab es noch keine Blumen. Blütenpflanzen kamen erst in der Kreidezeit dazu. Auch Wiesen gab es nicht. Gras kam erst in der Kreidezeit auf und war lange selten. Ein Dinosaurier auf einer bunten Blumenwiese ist also eine Erfindung.\n\nManche Pflanzen von damals kannst du heute noch finden. Schachtelhalme wachsen am Wegrand oder am Bach. Fühl einmal ihre Stängel, sie sind rau und haben Glieder. Farne und Ginkgobäume gibt es bei uns auch. Diese Pflanzen haben eine sehr lange Geschichte.",
      "bild": "bilder/02-04.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wann kamen die Menschen auf die Erde?",
+    "bild": "bilder/02-02.webp",
+    "antworten": [
+     "Zusammen mit den ersten Dinosauriern",
+     "Kurz bevor die Dinosaurier verschwanden",
+     "Viele Millionen Jahre nach den Dinosauriern"
+    ],
+    "richtig": 2,
+    "aufloesung": "Menschen und Dinosaurier lebten nie zur selben Zeit. Menschen wie wir gibt es erst seit ungefähr 300.000 Jahren.",
+    "seite": 1
+   }
   },
   {
    "titel": "Was ist ein Dinosaurier?",
@@ -209,7 +233,19 @@
      "text": "Dinosaurier sahen sehr verschieden aus. Manche trugen Hörner auf dem Kopf, wie Triceratops. Andere hatten einen Panzer aus Knochenplatten oder eine dicke Keule am Schwanzende. Es gab Riesen und Winzlinge, Zweibeiner und Vierbeiner.\n\nEines aber hatten alle gemeinsam: Sie legten Eier. Man hat versteinerte Eier gefunden, manchmal ganze Nester. Selbst die größten Dinosaurier legten Eier, die im Vergleich zu ihrem Körper klein waren. Aus so einem Ei wurde mit den Jahren ein Riese. Wie riesig, erzählt das nächste Kapitel.",
      "bild": "bilder/03-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Woran erkennt man einen Dinosaurier?",
+    "bild": "bilder/03-05.webp",
+    "antworten": [
+     "Die Beine stehen gerade unter dem Körper",
+     "Die Beine stehen seitlich vom Körper ab",
+     "Er ist riesig und hat Schuppen"
+    ],
+    "richtig": 0,
+    "aufloesung": "Bei den Dinosauriern standen die Beine gerade unter dem Körper, wie Säulen. Bei Eidechsen und Krokodilen stehen sie seitlich ab.",
+    "seite": 0
+   }
   },
   {
    "titel": "Riesen und Winzlinge",
@@ -234,7 +270,19 @@
      "text": "Wie schnell wuchs ein Dinosaurier heran? Auch das verraten die Knochen. Fachleute schneiden eine hauchdünne Scheibe aus einem Knochen. Unter dem Mikroskop sieht man darin Ringe, wie in einem Baumstamm. Jeder Ring steht für ein Jahr.\n\nSo fand man heraus: Manche Plateosaurier waren mit zwölf Jahren ausgewachsen. Andere wuchsen mit 27 Jahren noch weiter. Ein Plateosaurus wuchs also viele Jahre lang, so wie du auch.",
      "bild": "bilder/04-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Wie groß waren die Dinosaurier?",
+    "bild": "bilder/04-01.webp",
+    "antworten": [
+     "Alle waren größer als ein Haus",
+     "Es gab Riesen und Winzlinge",
+     "Alle waren so groß wie Elefanten"
+    ],
+    "richtig": 1,
+    "aufloesung": "Nicht alle Dinosaurier waren Riesen. Manche waren nur so schwer wie eine Hauskatze.",
+    "seite": 3
+   }
   },
   {
    "titel": "Was Dinosaurier fraßen",
@@ -260,7 +308,19 @@
      "text": "Es gibt noch einen Hinweis auf das Futter: versteinerten Dinosaurierkot. Fachleute nennen ihn Koprolith. Nach Millionen Jahren ist daraus fester Stein geworden. Selin betrachtet einen davon durch eine Lupe.\n\nWer so einen Stein genau untersucht, erfährt etwas darüber, was das Tier gefressen hat. Kot, Zähne, Schädel und Knochen: Wie Detektive setzen Forscherinnen und Forscher die Hinweise zusammen. Kein einzelner Fund erzählt alles. Erst zusammen ergeben sie ein Bild davon, wie die Dinosaurier lebten.",
      "bild": "bilder/05-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Woran erkennen Fachleute, was ein Dinosaurier gefressen hat?",
+    "bild": "bilder/05-03.webp",
+    "antworten": [
+     "Daran, wie groß er war",
+     "An der Farbe seiner Haut",
+     "An seinen Zähnen und seinem Kot"
+    ],
+    "richtig": 2,
+    "aufloesung": "Zähne verraten, was ein Tier gefressen hat. Auch versteinerter Kot erzählt etwas über das Futter.",
+    "seite": 4
+   }
   },
   {
    "titel": "Federn, Eier und die Vögel",
@@ -285,7 +345,19 @@
      "text": "Aus kleinen, gefiederten Raubdinosauriern entwickelten sich die Vögel. Darum zählen Fachleute die Vögel zu den Dinosauriern. Schau dir einmal den Fuß eines Huhns an, mit seinen Schuppen und Krallen. Oder eine Amsel, die über den Rasen hüpft. Erinnert sie dich an einen kleinen Raubdinosaurier?\n\nDie großen Dinosaurier wie Tyrannosaurus und Patagotitan gibt es heute nicht mehr. Warum sie verschwunden sind, erzählt ein anderes Buch. Aber ihre gefiederten Verwandten sind überall um dich herum. Wenn morgen früh ein Vogel vor deinem Fenster singt, hörst du einen kleinen Dinosaurier.",
      "bild": "bilder/06-05.webp"
     }
-   ]
+   ],
+   "erinnern": {
+    "frage": "Welche Tiere von heute zählen Fachleute zu den Dinosauriern?",
+    "bild": "bilder/06-02.webp",
+    "antworten": [
+     "Die Vögel, zum Beispiel Amseln",
+     "Die Eidechsen mit ihren Schuppen",
+     "Die Krokodile mit ihren Zähnen"
+    ],
+    "richtig": 0,
+    "aufloesung": "Aus kleinen, gefiederten Raubdinosauriern entwickelten sich die Vögel. Darum zählen Fachleute die Vögel zu den Dinosauriern.",
+    "seite": 4
+   }
   }
  ]
 }

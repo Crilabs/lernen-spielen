@@ -6,7 +6,8 @@
 // Ein Probebuch (5 Kapitel à 4 Seiten, Bilder aus haustiere/) wird per page.route ausgeliefert, damit die Prüfung nicht
 // am Text eines echten Buchs hängt. Geprüft: Inhaltsverzeichnis mit Kapitelliste (Spec 2026-11-16), Zeile öffnet ihr Kapitel im zuletzt gewählten Modus,
 // Kapitelende mit „Kapitel n+1“ und „Inhalt“, Vorlesen blättert nie ins nächste Kapitel, der Lesestand wird gemerkt und
-// Anhören/Lesen machen dort weiter, Symbol-Knöpfe je Kapitel, kein Hintergrundbild, alle Kapitel fertig → gelesen, Vorschau der Eltern merkt nichts, Absätze, Layout.
+// Anhören/Lesen machen dort weiter, Symbol-Knöpfe je Kapitel, kein Hintergrundbild, alle Kapitel fertig → gelesen, Vorschau der Eltern merkt nichts, Absätze, Layout;
+// Erinnerungsfrage am Kapitelende (geschichten.md §2b): weiter erst nach einer Wahl, dann gilt das Kapitel als gelesen, Nachlesen.
 
 import { createRequire } from "node:module";
 import { resolve } from "node:path";
@@ -29,6 +30,10 @@ const seite = (k, s) => ({ text: `Kapitel ${k + 1}, Seite ${s + 1}. ${Array(5).f
 const BUCH = { id: "probebuch", titel: "Das Probebuch", art: "sachbuch", welt: "haustiere", familie: null, kulisse: "im-haus", klasse: 1,
   quellen: [{ fakt: "x", quelle: "y" }],
   kapitel: [0, 1, 2, 3, 4].map((k) => ({ titel: `Kapitel ${k + 1} Titel`, seiten: [0, 1, 2, 3].map((s) => ({ ...seite(k, s), ...(k === 1 && s === 1 ? { frage: true } : {}) })) })) };
+// Nur Kapitel 1 trägt eine Erinnerungsfrage; die übrigen prüfen das Kapitelende ohne Frage (ältere Bücher).
+BUCH.kapitel[0].erinnern = { frage: "Wann sieht eine Katze besser als wir?", bild: BUCH.kapitel[0].seiten[2].bild,
+  antworten: ["Wenn es ganz dunkel ist", "Wenn es dämmrig wird", "Am hellen Mittag"], richtig: 1,
+  aufloesung: "In der Dämmerung sieht eine Katze viel mehr als wir.", seite: 2 };
 
 const STAND = "lernstand-kind-1-lernplan";
 const oeffne = async (browser, { eltern = false, stand = null, ohneStimme = true, groesse = [1280, 800] } = {}) => {
@@ -152,6 +157,27 @@ for (const typ of [chromium, webkit]) {
   pruefe((await G(p)).kapitel === 0 && st2.kapitel === 0 && [1, 2].every((k) => st2.fertig.includes(k)), `${name}: später Stand überschreibt das offene Kapitel nicht ${JSON.stringify(st2)}`);
   await p.close();
 
+  // Erinnerungsfrage am Ende von Kapitel 1
+  p = await oeffne(browser);
+  await p.evaluate(() => { const l = window.lsGeschichte; l.oeffne(0); while (l.seite < l.seiten - 1) l.weiter(); });
+  g = await G(p);
+  pruefe(g.seiten === 5 && g.seite === 4 && await p.evaluate(() => window.lsGeschichte.erinnern), `${name}: Kapitel mit Frage – fünfte Seite ist die Erinnerungsfrage`);
+  pruefe(await sr(p, (el) => { const s = el.shadowRoot; return s.querySelector(".naechstes").hidden && s.querySelector(".text").hidden && !s.querySelector(".erinnern").hidden
+    && s.querySelector(".erinnern").shadowRoot.querySelectorAll(".antwort").length === 3; }), `${name}: Frage mit drei Antworten, noch kein „Kapitel 2“`);
+  pruefe(!((await gespeichert(p)).buecher?.probebuch?.fertig ?? []).includes(0), `${name}: vor der Wahl ist das Kapitel nicht gelesen`);
+  await sr(p, (el) => el.shadowRoot.querySelector(".erinnern").shadowRoot.querySelectorAll(".antwort")[0].click());
+  pruefe(await sr(p, (el) => { const s = el.shadowRoot, e = s.querySelector(".erinnern").shadowRoot, a = e.querySelectorAll(".antwort");
+    return !s.querySelector(".naechstes").hidden && a[1].classList.contains("passt") && a[0].classList.contains("gewaehlt") && !e.querySelector(".aufloesung").hidden
+      && !/richtig|falsch/i.test(s.querySelector(".erinnern").shadowRoot.textContent); }),
+    `${name}: nach der Wahl – passende Antwort leuchtet, Auflösung, „Kapitel 2“ (ohne richtig/falsch)`);
+  const st3 = (await gespeichert(p)).buecher?.probebuch;
+  pruefe(st3?.fertig.includes(0) && /^\d{4}-\d\d-\d\d$/.test(st3?.am?.[0] ?? ""), `${name}: nach der Wahl ist Kapitel 1 gelesen, mit Datum ${JSON.stringify(st3)}`);
+  await sr(p, (el) => el.shadowRoot.querySelector(".erinnern").shadowRoot.querySelector(".nachlesen").click());
+  g = await G(p);
+  pruefe(g.kapitel === 0 && g.seite === 2 && await sr(p, (el) => !el.shadowRoot.querySelector(".text").hidden), `${name}: Nachlesen schlägt Seite 3 auf`);
+  pruefe(!p.fehler.length, `${name}: keine Fehler auf der Seite ${p.fehler.join(" | ")}`);
+  await p.close();
+
   // Ton aus im Inhaltsverzeichnis: keine Wahl mehr, Selbst lesen, nichts blättert stumm von selbst
   p = await oeffne(browser);
   await p.locator("ls-leiste").evaluate((el) => el.shadowRoot.querySelector(".tonknopf").click());
@@ -186,7 +212,9 @@ for (const typ of [chromium, webkit]) {
       const zeile = parseFloat(getComputedStyle(s.querySelector(".text")).lineHeight) || 40;
       const drin = [...s.querySelectorAll(".lese .knoepfe > *:not([hidden]), .lese .rechts > *:not([hidden])")]
         .every((e) => { const r = e.getBoundingClientRect(); return !r.width || (r.left >= lese.left - 1 && r.right <= lese.right + 1 && r.bottom <= lese.bottom + 1); });
-      return tf.clientHeight >= 2 * zeile - 2 && drin;
+      const fr = s.querySelector(".erinnern"), fb = fr.getBoundingClientRect();
+      const frageOk = fr.hidden || (fb.left >= lese.left - 1 && fb.right <= lese.right + 1);
+      return tf.clientHeight >= 2 * zeile - 2 && drin && frageOk;
     });
     pruefe(inhaltOk && seiteOk, `${name}: ${groesse.join("×")} – Inhaltsverzeichnis und Kapitelende passen (${inhaltOk}, ${seiteOk})`);
     await p.close();
