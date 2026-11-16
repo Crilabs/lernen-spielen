@@ -700,7 +700,7 @@ async function kindZurueck(sp, lauf, vorher) {
   if (!zug) throw new Haenger("kein richtigerZug() in der ersten Aufgabe");
   await sp.fuehre(zug, "tippen");
   await sp.tippe(orte.haus);
-  const weg = await sp.seite.waitForURL(/index\.html/, { timeout: 5000 }).then(() => true, () => false);
+  const weg = await sp.seite.waitForURL((u) => u.pathname !== new URL(sp.url).pathname, { timeout: 5000 }).then(() => true, () => false);
   lauf.pruefe("Haus führt mitten in der Runde zur Startseite", weg, sp.seite.url());
   await sp.seite.waitForLoadState("load");
   await warte(1000);
