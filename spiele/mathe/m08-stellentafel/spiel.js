@@ -1002,9 +1002,13 @@ let einfuehrungWartet = false;
 function warteAufTipp() {
   return new Promise((ok) => {
     einfuehrungWartet = true;
+    // Mit Tab erreichbar: die Tafel trägt den Fokus, bis das Kind Enter oder Leertaste drückt.
+    hof.tabIndex = 0;
+    hof.focus({ preventScroll: true });
     const abmelden = beimTippen(() => {
       abmelden();
       einfuehrungWartet = false;
+      hof.removeAttribute("tabindex");
       ok(undefined);
     });
   });
@@ -1049,6 +1053,7 @@ async function einfuehrung(art) {
     ueberspringeAlles();
     einfuehrungLaeuft = false;
     einfuehrungWartet = false;
+    hof.removeAttribute("tabindex");
     einfuehrungTaste = null;
   }
 }
