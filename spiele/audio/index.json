@@ -931,6 +931,11 @@
    "h": "ba81086ed8",
    "gehoert": false
   },
+  "Besen.": {
+   "datei": "florian/dd65e84d1f33.mp3",
+   "h": "5523e418f4",
+   "gehoert": false
+  },
   "Besondere Formen": {
    "datei": "florian/0dd596c1ba04.mp3",
    "h": "d5c42af4e5",
@@ -996,6 +1001,11 @@
    "h": "f9bbd3f0fe",
    "gehoert": false
   },
+  "Brett.": {
+   "datei": "florian/5d29828268a9.mp3",
+   "h": "ca27f94e19",
+   "gehoert": false
+  },
   "Brief und E-Mail": {
    "datei": "florian/34a7eb8fab79.mp3",
    "h": "55a339a3c0",
@@ -1029,6 +1039,11 @@
   "Buchtipp": {
    "datei": "florian/f21d7a59c992.mp3",
    "h": "a61e16e613",
+   "gehoert": false
+  },
+  "Bürste.": {
+   "datei": "florian/59493abea673.mp3",
+   "h": "20222f28d0",
    "gehoert": false
   },
   "Chancen gezielt verändern": {
@@ -1136,9 +1151,19 @@
    "h": "b397a41e82",
    "gehoert": false
   },
+  "Das Besen.": {
+   "datei": "florian/aff92ee10be5.mp3",
+   "h": "378d200e5d",
+   "gehoert": false
+  },
   "Das Boot fährt.": {
    "datei": "florian/db34fec876b9.mp3",
    "h": "ddd2d93025",
+   "gehoert": false
+  },
+  "Das Brett.": {
+   "datei": "florian/e603be621300.mp3",
+   "h": "31c7ec80bb",
    "gehoert": false
   },
   "Das Buch ist neu.": {
@@ -1149,6 +1174,16 @@
   "Das Buchstabenhaus": {
    "datei": "florian/981290c7319f.mp3",
    "h": "2fbd10a05d",
+   "gehoert": false
+  },
+  "Das Bürste.": {
+   "datei": "florian/23db54d1064b.mp3",
+   "h": "5b0f177fb7",
+   "gehoert": false
+  },
+  "Das Eimer.": {
+   "datei": "florian/2545e96e299a.mp3",
+   "h": "352da56d80",
    "gehoert": false
   },
   "Das Eis ist kalt.": {
@@ -1171,9 +1206,19 @@
    "h": "1423bff07b",
    "gehoert": false
   },
+  "Das Glas.": {
+   "datei": "florian/2d8fdf929fad.mp3",
+   "h": "df8288d070",
+   "gehoert": false
+  },
   "Das Gleichheitszeichen heißt gleich viel": {
    "datei": "florian/dba6d0885856.mp3",
    "h": "9ccab78fe1",
+   "gehoert": false
+  },
+  "Das Hammer.": {
+   "datei": "florian/9cefaadc1bf1.mp3",
+   "h": "1d094867b6",
    "gehoert": false
   },
   "Das Ich-mag-Gedicht": {
@@ -1211,6 +1256,31 @@
    "h": "12e88574a2",
    "gehoert": false
   },
+  "Das Leiter.": {
+   "datei": "florian/5e78aa7d5687.mp3",
+   "h": "4ed4cc86df",
+   "gehoert": false
+  },
+  "Das Lineal.": {
+   "datei": "florian/cd29f30b483e.mp3",
+   "h": "85a2f10794",
+   "gehoert": false
+  },
+  "Das Messer.": {
+   "datei": "florian/7c52aedb4fc9.mp3",
+   "h": "6c335617dc",
+   "gehoert": false
+  },
+  "Das Nadel.": {
+   "datei": "florian/a16fd0f73101.mp3",
+   "h": "3be6b5fbca",
+   "gehoert": false
+  },
+  "Das Nagel.": {
+   "datei": "florian/1b5e656d2a99.mp3",
+   "h": "79c03c099e",
+   "gehoert": false
+  },
   "Das oder dass?": {
    "datei": "florian/d5d2dc4b87f7.mp3",
    "h": "f581690d4c",
@@ -1219,6 +1289,11 @@
   "Das Pferd frisst einen Apfel.": {
    "datei": "florian/f99a8405635b.mp3",
    "h": "c1c4c536ba",
+   "gehoert": false
+  },
+  "Das Pinsel.": {
+   "datei": "florian/4490ef70228d.mp3",
+   "h": "8bbb8a1c8b",
    "gehoert": false
   },
   "Das Pony frisst Gras.": {
@@ -1234,6 +1309,31 @@
   "Das Prädikat": {
    "datei": "florian/ac63aec13a87.mp3",
    "h": "b647ead328",
+   "gehoert": false
+  },
+  "Das Rad.": {
+   "datei": "florian/ddb494507e1b.mp3",
+   "h": "9d7c45cc30",
+   "gehoert": false
+  },
+  "Das Säge.": {
+   "datei": "florian/9f48588f2937.mp3",
+   "h": "1ebef52ff1",
+   "gehoert": false
+  },
+  "Das Schere.": {
+   "datei": "florian/a083f2167e4a.mp3",
+   "h": "14ff752a81",
+   "gehoert": false
+  },
+  "Das Schlüssel.": {
+   "datei": "florian/038e74098691.mp3",
+   "h": "c751125d05",
+   "gehoert": false
+  },
+  "Das Seil.": {
+   "datei": "florian/8f914b1b9682.mp3",
+   "h": "842ac7eeb2",
    "gehoert": false
   },
   "Das Spiel geht gerade nicht.": {
@@ -1261,9 +1361,19 @@
    "h": "c0d113ac79",
    "gehoert": false
   },
+  "Das Zange.": {
+   "datei": "florian/5426c85a9d11.mp3",
+   "h": "acc12971ec",
+   "gehoert": false
+  },
   "Daten sammeln und darstellen": {
    "datei": "florian/6037f15a4796.mp3",
    "h": "3008f175a3",
+   "gehoert": false
+  },
+  "Davor fehlt ein kleines Wort.": {
+   "datei": "florian/8f25bcc58a90.mp3",
+   "h": "4d61311cda",
    "gehoert": false
   },
   "Delfine sind Zahnwale. Lange Lieder wie die Buckelwale singen sie nicht. Sie pfeifen und klicken. Jeder Große Tümmler hat seinen eigenen Pfiff. Daran erkennen ihn die anderen, fast wie an einem Namen. Die Klicks kommen ganz schnell hintereinander: klick, klick, klick. Sie fliegen durchs Wasser und prallen an einem Fisch oder einem Felsen ab. Zurück kommt ein Echo. Am Echo hört der Delfin, wo etwas ist. Du kennst ein Echo vielleicht aus einem leeren Treppenhaus. Du rufst laut, und der Ruf kommt zurück.": {
@@ -1326,10 +1436,20 @@
    "h": "d4ce1d477f",
    "gehoert": false
   },
+  "Der Besen.": {
+   "datei": "florian/8ffbaa7f7c34.mp3",
+   "h": "9bdff8afbe",
+   "gehoert": false
+  },
   "Der Blütenstaub sitzt überall in Lottas Pelz. Mit ihren Beinen kämmt sie ihn heraus. Dann drückt sie ihn mit etwas Nektar zusammen. An ihren Hinterbeinen hat sie zwei kleine Körbchen. Dort hinein schiebt sie den Blütenstaub. Bald hängt an jedem Hinterbein eine runde Kugel. Imker nennen sie Höschen. Vom Löwenzahn sind Lottas Höschen gelb. Auf diesem Flug bleibt Lotta bei einer Blütensorte, beim Löwenzahn. Die Gänseblümchen daneben lässt sie aus.": {
    "datei": "livia/e6a701b1d843.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Der Brett.": {
+   "datei": "florian/c193d5d06bfe.mp3",
+   "h": "005e5c16b5",
+   "gehoert": false
   },
   "Der Brief ist bei der Post.": {
    "datei": "florian/a1bd81524d42.mp3",
@@ -1466,6 +1586,11 @@
    "h": "8a44129b7c",
    "gehoert": false
   },
+  "Der Bürste.": {
+   "datei": "florian/2b59893c8bfd.mp3",
+   "h": "50bd2c0937",
+   "gehoert": false
+  },
   "Der Bus hupt.": {
    "datei": "florian/daf4db713cdd.mp3",
    "h": "2be7234f93",
@@ -1474,6 +1599,11 @@
   "Der Bus kommt zu spät.": {
    "datei": "florian/d1f225d36715.mp3",
    "h": "044f9f66f7",
+   "gehoert": false
+  },
+  "Der Eimer.": {
+   "datei": "florian/47ed953033d8.mp3",
+   "h": "5a0f6d338b",
    "gehoert": false
   },
   "Der Erste bis der Zehnte": {
@@ -1491,9 +1621,19 @@
    "h": "0b88d304f5",
    "gehoert": false
   },
+  "Der Glas.": {
+   "datei": "florian/f9a42bbbdb80.mp3",
+   "h": "5e06a4bd26",
+   "gehoert": false
+  },
   "Der gute Schluss": {
    "datei": "florian/424328818b0a.mp3",
    "h": "dc687b5a9d",
+   "gehoert": false
+  },
+  "Der Hammer.": {
+   "datei": "florian/b1e968bd2a54.mp3",
+   "h": "09f9caec8c",
    "gehoert": false
   },
   "Der Hauch zwischen den Silben": {
@@ -1766,9 +1906,34 @@
    "h": "fb1c3eca3c",
    "gehoert": false
   },
+  "Der Leiter.": {
+   "datei": "florian/729e82218f4a.mp3",
+   "h": "51b31e4377",
+   "gehoert": false
+  },
+  "Der Lineal.": {
+   "datei": "florian/abaf192285b1.mp3",
+   "h": "846a63084a",
+   "gehoert": false
+  },
+  "Der Messer.": {
+   "datei": "florian/b1cb4ecd7165.mp3",
+   "h": "d2c1763031",
+   "gehoert": false
+  },
   "Der Mond ist rund.": {
    "datei": "florian/7a596147465d.mp3",
    "h": "1ac418465e",
+   "gehoert": false
+  },
+  "Der Nadel.": {
+   "datei": "florian/aaa08fc993b3.mp3",
+   "h": "c37213f21a",
+   "gehoert": false
+  },
+  "Der Nagel.": {
+   "datei": "florian/7c59528ad3b1.mp3",
+   "h": "e411c31203",
    "gehoert": false
   },
   "Der neue Zehnerstab ist voll. Der Rest kommt dahinter.": {
@@ -1781,10 +1946,40 @@
    "h": "90c89f7023",
    "gehoert": false
   },
+  "Der Pinsel.": {
+   "datei": "florian/541860036724.mp3",
+   "h": "185698841c",
+   "gehoert": false
+  },
+  "Der Rad.": {
+   "datei": "florian/4080af921169.mp3",
+   "h": "4a0d305c35",
+   "gehoert": false
+  },
   "Der Rüssel ist Nase und Oberlippe zugleich. Er hat keinen einzigen Knochen. Er besteht nur aus Muskeln. Darum kann der Elefant ihn biegen, rollen und strecken, wie er will. Mit dem Rüssel atmet Zuri und riecht. Sie hebt ihn hoch in die Luft und schnuppert. Riecht es nach Wasser? Nach frischem Gras? Die Großen greifen mit dem Rüssel, sie trinken damit und begrüßen ihre Familie. Ein Rüssel ist Nase, Hand und Arm in einem.": {
    "datei": "livia/8bdf4a3bb8f8.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Der Säge.": {
+   "datei": "florian/f2e5e4ae02ca.mp3",
+   "h": "f4d6565688",
+   "gehoert": false
+  },
+  "Der Schere.": {
+   "datei": "florian/c6ab6f9d9d15.mp3",
+   "h": "80e3d5e37b",
+   "gehoert": false
+  },
+  "Der Schlüssel.": {
+   "datei": "florian/2b208469055f.mp3",
+   "h": "5a334bc808",
+   "gehoert": false
+  },
+  "Der Seil.": {
+   "datei": "florian/174d9f4d7947.mp3",
+   "h": "061cbf0748",
+   "gehoert": false
   },
   "Der Stachel einer Honigbiene hat feine Widerhaken. Sticht sie in unsere Haut, bleibt er darin stecken. Die Biene kann ihn nicht mehr herausziehen und verliert ihn. Nie wieder kann sie stechen. Eine Honigbiene sticht nur, wenn sie selbst oder ihr Stock bedrängt wird. Nur Weibchen haben einen Stachel. Die Drohnen haben keinen. Und die Wildbienen? Ihr Stachel ist meist schwach. Bei vielen kommt er gar nicht durch unsere Haut.": {
    "datei": "livia/482d3825dda0.mp3",
@@ -1831,6 +2026,11 @@
    "h": "39ce42bf41",
    "gehoert": false
   },
+  "Der Zange.": {
+   "datei": "florian/3c79f3dc8e05.mp3",
+   "h": "de4f169ffa",
+   "gehoert": false
+  },
   "Der Zauberbogen": {
    "datei": "florian/1bea03ca24da.mp3",
    "h": "c2927ede0f",
@@ -1854,6 +2054,11 @@
   "der, die, das": {
    "datei": "florian/6823272b065b.mp3",
    "h": "ef2054c003",
+   "gehoert": false
+  },
+  "der, die, das kannst du.": {
+   "datei": "florian/39026a966ba2.mp3",
+   "h": "721651173e",
    "gehoert": false
   },
   "Diagramme kritisch lesen": {
@@ -2366,9 +2571,19 @@
    "h": "cb54484196",
    "gehoert": false
   },
+  "Die Besen.": {
+   "datei": "florian/64ee52a32130.mp3",
+   "h": "ac5a741fdc",
+   "gehoert": false
+  },
   "Die beste Überschrift": {
    "datei": "florian/66a6b68221c4.mp3",
    "h": "8566e4db01",
+   "gehoert": false
+  },
+  "Die Brett.": {
+   "datei": "florian/834970e2a57b.mp3",
+   "h": "cc1005e88c",
    "gehoert": false
   },
   "Die Brücke soll einen ganzen Zehnerstab bekommen. Dem langen Stab fehlen wenige Perlen.": {
@@ -2381,6 +2596,11 @@
    "h": "e786a60be4",
    "gehoert": false
   },
+  "Die Bürste.": {
+   "datei": "florian/ed80a038283a.mp3",
+   "h": "e1c4b60076",
+   "gehoert": false
+  },
   "Die Dinosaurier lebten im Erdmittelalter. Die ersten gab es vor ungefähr 235 Millionen Jahren. Vor 66 Millionen Jahren endete die Zeit der großen Dinosaurier. Solche Zahlen kann sich niemand richtig vorstellen. Versuch es einmal so: Ein Blatt Papier steht für ein Jahr. Für dein Leben brauchst du nur ein paar Blätter. Für die Zeit seit den letzten großen Dinosauriern braucht man 66 Millionen Blätter. Dieser Stapel wäre über sechs Kilometer hoch. Er wäre höher als jeder Berg in Deutschland! Und die Dinosaurier selbst lebten über 160 Millionen Jahre lang.": {
    "datei": "livia/9903bea00e41.mp3",
    "hand": true,
@@ -2389,6 +2609,11 @@
   "Die Drei tippen.": {
    "datei": "florian/360c8f2e5710.mp3",
    "h": "ae7a2106aa",
+   "gehoert": false
+  },
+  "Die Eimer.": {
+   "datei": "florian/254c72653299.mp3",
+   "h": "e9a1f005ea",
    "gehoert": false
   },
   "Die Einer tippst du hier.": {
@@ -2446,10 +2671,20 @@
    "h": "13557d7e85",
    "gehoert": false
   },
+  "Die Glas.": {
+   "datei": "florian/9c93434b8a24.mp3",
+   "h": "157ebada01",
+   "gehoert": false
+  },
   "Die größten Langhals-Dinosaurier waren über dreißig Meter lang. Das ist so lang wie zweieinhalb Linienbusse hintereinander. Einer von ihnen heißt Patagotitan. Er lebte in Südamerika und war so schwer wie acht bis zehn Elefanten. Diese Riesen waren die größten Tiere, die je auf dem Land gelebt haben. Stell dir vor, wie so ein Riese durch einen Wald aus Nadelbäumen zieht. Sein Hals reicht weit nach vorn, sein Schwanz weit nach hinten. Seine Beine stehen wie dicke Säulen unter ihm. So stellen sich Fachleute ihn heute vor.": {
    "datei": "livia/0592d42efeaf.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Die Hammer.": {
+   "datei": "florian/cd81e934f673.mp3",
+   "h": "76755dc92d",
+   "gehoert": false
   },
   "Die Katze miaut.": {
    "datei": "florian/8f2de4a28683.mp3",
@@ -2511,6 +2746,16 @@
    "h": "17cb7f7c35",
    "gehoert": false
   },
+  "Die Leiter.": {
+   "datei": "florian/1954f08a2ec0.mp3",
+   "h": "f60f887026",
+   "gehoert": false
+  },
+  "Die Lineal.": {
+   "datei": "florian/f5d00d57ecbf.mp3",
+   "h": "4e99a1d3fc",
+   "gehoert": false
+  },
   "Die Luftblasen steigen auf und bilden einen Ring. Er ist wie eine Wand aus glitzerndem Schaum. Das Futter bleibt innerhalb der Blasen und drängt sich in der Mitte dicht zusammen. Forschende nennen das ein Blasennetz. Der Wal baut es sich selbst. Jetzt schießt der Wal von unten mit offenem Maul durch die Mitte nach oben. Mit einem einzigen Schluck hat er nun viel mehr Futter. Bei Fischschwärmen arbeiten manchmal mehrere Buckelwale zusammen. Dann tauchen gleichzeitig viele riesige, offene Mäuler aus dem Wasser auf.": {
    "datei": "livia/41b1e0af7650.mp3",
    "hand": true,
@@ -2536,6 +2781,11 @@
    "hand": true,
    "gehoert": true
   },
+  "Die Messer.": {
+   "datei": "florian/9c1e10662053.mp3",
+   "h": "c7752963a4",
+   "gehoert": false
+  },
   "Die Mutter berührt Ole sanft mit ihrer Flosse. Ihre Flossen sind riesig und lang. Weiß leuchten sie im blauen Wasser.": {
    "datei": "florian/649278308d2d.mp3",
    "h": "2800953db4",
@@ -2549,6 +2799,16 @@
   "Die Mutter selbst frisst hier im warmen Meer nichts. Sie lebt von dem dicken Fett unter ihrer Haut. Ole wird runder, seine Mutter wird dünner.": {
    "datei": "florian/ba7d0a76f820.mp3",
    "h": "fa7a896f6a",
+   "gehoert": false
+  },
+  "Die Nadel.": {
+   "datei": "florian/3ce136a364ca.mp3",
+   "h": "a7fb4688e8",
+   "gehoert": false
+  },
+  "Die Nagel.": {
+   "datei": "florian/7e4e72fbe6b2.mp3",
+   "h": "d88f8904f0",
    "gehoert": false
   },
   "Die Neun tippen.": {
@@ -2566,6 +2826,16 @@
    "h": "d04060d48f",
    "gehoert": false
   },
+  "Die Pinsel.": {
+   "datei": "florian/56f19ac6d17d.mp3",
+   "h": "7d51518fd4",
+   "gehoert": false
+  },
+  "Die Rad.": {
+   "datei": "florian/c7c203cef893.mp3",
+   "h": "6bbf41e611",
+   "gehoert": false
+  },
   "Die Reise ist sehr weit. Vom warmen Meer bis ins kalte Meer sind es viele tausend Kilometer. Stell dir vor, du fährst mit dem Auto, von morgens bis abends, viele Tage lang. So weit schwimmt Mira mit ihrem Kalb. Und im nächsten Jahr schwimmt sie den ganzen Weg zurück. Unterwegs frisst sie kaum. Nur manchmal hält sie an, wenn sie Futter findet. Wie finden die Wale ihren Weg durch das weite Meer? Forschende vermuten, dass sie das Magnetfeld der Erde spüren. Auch Strömungen und die Wärme des Wassers helfen ihnen wohl.": {
    "datei": "livia/d837ac9097dd.mp3",
    "hand": true,
@@ -2574,6 +2844,21 @@
   "Die richtige Schrift wählen": {
    "datei": "florian/26c0fc391a49.mp3",
    "h": "a5213e2e67",
+   "gehoert": false
+  },
+  "Die Säge.": {
+   "datei": "florian/05b55e6e87d6.mp3",
+   "h": "93f15493e1",
+   "gehoert": false
+  },
+  "Die Schere.": {
+   "datei": "florian/6ae37d78a583.mp3",
+   "h": "23fe8e436f",
+   "gehoert": false
+  },
+  "Die Schlüssel.": {
+   "datei": "florian/bc1e9aeb0eef.mp3",
+   "h": "07664d2fc5",
    "gehoert": false
   },
   "Die Schnecke rollt": {
@@ -2589,6 +2874,11 @@
   "Die Sechs tippen.": {
    "datei": "florian/7162af0f6eb8.mp3",
    "h": "6e9cb85700",
+   "gehoert": false
+  },
+  "Die Seil.": {
+   "datei": "florian/2ddfb6e75728.mp3",
+   "h": "9b3bef7ed9",
    "gehoert": false
   },
   "Die Sieben tippen.": {
@@ -2650,6 +2940,11 @@
    "datei": "livia/707b4bae1bfc.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Die Zange.": {
+   "datei": "florian/3a7c2a9cdc15.mp3",
+   "h": "6b51d4614f",
+   "gehoert": false
   },
   "Die Zehn tippen.": {
    "datei": "florian/1950e31c797b.mp3",
@@ -2886,6 +3181,11 @@
    "h": "b349f5cac9",
    "gehoert": false
   },
+  "Eimer.": {
+   "datei": "florian/42413d68fbbb.mp3",
+   "h": "e458a3017d",
+   "gehoert": false
+  },
   "Ein Apfel! Aus einer bestäubten Blüte wächst eine Frucht mit Kernen darin. Die Blütenblätter fallen ab. In der Mitte wird ein kleiner grüner Apfel dick und rund. Im Herbst pflückt Noa ihn vom Baum. Bei Kirschen und Erdbeeren ist es genauso. Beim Bestäuben helfen auch Wildbienen, Schwebfliegen, Käfer und Schmetterlinge. Und manche Pflanzen brauchen gar keine Insekten. Weizen, Roggen, Mais und Reis bestäubt der Wind.": {
    "datei": "livia/dd4d9f2c23fa.mp3",
    "hand": true,
@@ -3076,6 +3376,11 @@
    "h": "b41ff4bbc0",
    "gehoert": false
   },
+  "Ela dreht das Schild um.": {
+   "datei": "florian/4eda1abb4843.mp3",
+   "h": "0d0be93bc7",
+   "gehoert": false
+  },
   "Ela dreht die Teile um. Sie staunt: Der Stab bleibt genau so lang.": {
    "datei": "florian/074f2f8c80f4.mp3",
    "h": "607d1e34d4",
@@ -3086,9 +3391,19 @@
    "h": "8dc46cff42",
    "gehoert": false
   },
+  "Ela hängt ihn auf.": {
+   "datei": "florian/3b7a5e33af72.mp3",
+   "h": "56073fe72e",
+   "gehoert": false
+  },
   "Ela legt genau so viele Perlen dazu, dass ein neuer Zehner voll wird.": {
    "datei": "florian/f8e08aafd715.mp3",
    "h": "28ab811a7d",
+   "gehoert": false
+  },
+  "Ela räumt ihre Werkzeugwand auf.": {
+   "datei": "florian/d30eb829ad2e.mp3",
+   "h": "aad314c531",
    "gehoert": false
   },
   "Ela teilt den Stab. Jetzt liegt links ein Teil und rechts ein Teil.": {
@@ -3821,6 +4136,11 @@
    "h": "7fffa067bc",
    "gehoert": false
   },
+  "Glas.": {
+   "datei": "florian/4f93f4345e5a.mp3",
+   "h": "430a6bd5ab",
+   "gehoert": false
+  },
   "Gleich große Gruppen": {
    "datei": "florian/cd0346a6acfa.mp3",
    "h": "3fdddcd8ee",
@@ -4001,6 +4321,11 @@
    "h": "88d4330022",
    "gehoert": false
   },
+  "Hammer.": {
+   "datei": "florian/99535c485be9.mp3",
+   "h": "6b4fa87893",
+   "gehoert": false
+  },
   "Hast du schon einmal gehört, wie eine Katze kommt? Wahrscheinlich nicht. Katzen laufen auf ihren Zehen, auf weichen Ballen. Damit schleichen sie fast ohne ein Geräusch. Ihre Krallen verstecken sie dabei in den Pfoten, wie in kleinen Taschen. Und noch etwas ist erstaunlich. Beim Gehen setzt eine Katze die Hinterpfoten genau in die Abdrücke der Vorderpfoten. Im frischen Schnee siehst du darum eine ordentliche Spur. Die Abdrücke liegen hintereinander, fast wie Perlen an einer Schnur.": {
    "datei": "livia/d3774aa77329.mp3",
    "hand": true,
@@ -4039,6 +4364,11 @@
   "Hier liegen acht Stangen.": {
    "datei": "florian/d07e28362768.mp3",
    "h": "cf88830a3d",
+   "gehoert": false
+  },
+  "Hier liegen der, die und das.": {
+   "datei": "florian/27de7de867e3.mp3",
+   "h": "a6bab5fa6d",
    "gehoert": false
   },
   "Hier liegen drei Perlen.": {
@@ -4109,6 +4439,11 @@
   "Hier liegen zwei Stangen.": {
    "datei": "florian/85db7fbcb1ab.mp3",
    "h": "fafc9d0f22",
+   "gehoert": false
+  },
+  "Hier liegt der Pinsel.": {
+   "datei": "florian/b82618321a38.mp3",
+   "h": "2c7268359e",
    "gehoert": false
   },
   "Hier liegt eine Perle.": {
@@ -4586,6 +4921,11 @@
    "h": "96b803b794",
    "gehoert": false
   },
+  "Jedes Werkzeug hat seinen Platz.": {
+   "datei": "florian/a5df81e985ac.mp3",
+   "h": "6a960e616c",
+   "gehoert": false
+  },
   "Jetzt baust du solche Brücken.": {
    "datei": "florian/7880e7f2e396.mp3",
    "h": "6191911b36",
@@ -4614,6 +4954,11 @@
   "Jetzt bist du dran. Wie viele Perlen fehlen bis zum vollen Zehner?": {
    "datei": "florian/dab682275bc6.mp3",
    "h": "6f78c60585",
+   "gehoert": false
+  },
+  "Jetzt bleibt das Werkzeug in der Kiste.": {
+   "datei": "florian/ef7da6839437.mp3",
+   "h": "4005bd3810",
    "gehoert": false
   },
   "Jetzt die Achterkette.": {
@@ -4661,6 +5006,11 @@
    "h": "d169df55a6",
    "gehoert": false
   },
+  "Jetzt du: Hier liegt die Säge.": {
+   "datei": "florian/5751f4886a36.mp3",
+   "h": "f98a4619aa",
+   "gehoert": false
+  },
   "Jetzt geht es los.": {
    "datei": "florian/22f43be99076.mp3",
    "h": "219b932533",
@@ -4701,6 +5051,11 @@
    "h": "057d0dd56b",
    "gehoert": false
   },
+  "Jetzt liegt das Werkzeug wieder auf der Werkbank.": {
+   "datei": "florian/fee897548646.mp3",
+   "h": "9de75c6a42",
+   "gehoert": false
+  },
   "Jetzt nimmt Kofi einen Teil weg. Der andere Teil bleibt liegen.": {
    "datei": "florian/fb906cdef431.mp3",
    "h": "ea29f335a5",
@@ -4735,6 +5090,11 @@
    "datei": "livia/62f3d51b624f.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Jetzt steht das Wort in einem Satz.": {
+   "datei": "florian/cdb1cab1fe51.mp3",
+   "h": "38eb224ff6",
+   "gehoert": false
   },
   "Jetzt teilst du den Stab. Wie viele Perlen hat jeder Teil?": {
    "datei": "florian/a9a01176f725.mp3",
@@ -4844,6 +5204,11 @@
   "Kilometer und Millimeter": {
    "datei": "florian/38548703219d.mp3",
    "h": "2ae1258a1b",
+   "gehoert": false
+  },
+  "Kleb zu Hause Zettel mit der, die, das.": {
+   "datei": "florian/f27cf48d3cc2.mp3",
+   "h": "049b27a571",
    "gehoert": false
   },
   "Kleidung kombinieren": {
@@ -5131,6 +5496,11 @@
    "h": "55c5f0c944",
    "gehoert": false
   },
+  "Leiter.": {
+   "datei": "florian/b190bcf2ce42.mp3",
+   "h": "4d74b8d523",
+   "gehoert": false
+  },
   "Lena": {
    "datei": "florian/3dca01b08ef1.mp3",
    "h": "b0cdda9816",
@@ -5219,6 +5589,11 @@
   "Lineal richtig anlegen": {
    "datei": "florian/af81cfbdb4de.mp3",
    "h": "4a7f3caa7e",
+   "gehoert": false
+  },
+  "Lineal.": {
+   "datei": "florian/9a65a0da6622.mp3",
+   "h": "aa74623735",
    "gehoert": false
   },
   "Links und rechts": {
@@ -5611,6 +5986,11 @@
    "h": "9b5608dceb",
    "gehoert": false
   },
+  "Messer.": {
+   "datei": "florian/301fbc452682.mp3",
+   "h": "b467c6dde3",
+   "gehoert": false
+  },
   "Meter und Zentimeter": {
    "datei": "florian/61bc8db62643.mp3",
    "h": "4839442099",
@@ -5841,6 +6221,96 @@
    "h": "3014fdafea",
    "gehoert": false
   },
+  "Mmh, Besen hängt an der Wand.": {
+   "datei": "florian/5966fefe3747.mp3",
+   "h": "bab51f660d",
+   "gehoert": false
+  },
+  "Mmh, Brett hängt an der Wand.": {
+   "datei": "florian/dc6b56a49dad.mp3",
+   "h": "9bfd4f0ce3",
+   "gehoert": false
+  },
+  "Mmh, Bürste hängt an der Wand.": {
+   "datei": "florian/28c57bc2f5d0.mp3",
+   "h": "84eb8d3a1f",
+   "gehoert": false
+  },
+  "Mmh, Eimer hängt an der Wand.": {
+   "datei": "florian/593cd223ee3d.mp3",
+   "h": "c7efa98732",
+   "gehoert": false
+  },
+  "Mmh, Glas hängt an der Wand.": {
+   "datei": "florian/80694de1786a.mp3",
+   "h": "b91d7a18d7",
+   "gehoert": false
+  },
+  "Mmh, Hammer hängt an der Wand.": {
+   "datei": "florian/f49e95e41972.mp3",
+   "h": "335d193167",
+   "gehoert": false
+  },
+  "Mmh, Leiter hängt an der Wand.": {
+   "datei": "florian/dcd431f54260.mp3",
+   "h": "c9263e5e93",
+   "gehoert": false
+  },
+  "Mmh, Lineal hängt an der Wand.": {
+   "datei": "florian/5801d833604a.mp3",
+   "h": "d76b729a4f",
+   "gehoert": false
+  },
+  "Mmh, Messer hängt an der Wand.": {
+   "datei": "florian/5cda540b2379.mp3",
+   "h": "77da29f2e5",
+   "gehoert": false
+  },
+  "Mmh, Nadel hängt an der Wand.": {
+   "datei": "florian/e36a2cf8f700.mp3",
+   "h": "f20bf87bab",
+   "gehoert": false
+  },
+  "Mmh, Nagel hängt an der Wand.": {
+   "datei": "florian/e0cac67ecbec.mp3",
+   "h": "83844f9a49",
+   "gehoert": false
+  },
+  "Mmh, Pinsel hängt an der Wand.": {
+   "datei": "florian/94f3a03378d0.mp3",
+   "h": "0344b62804",
+   "gehoert": false
+  },
+  "Mmh, Rad hängt an der Wand.": {
+   "datei": "florian/f6c1a0041620.mp3",
+   "h": "c315eee4dc",
+   "gehoert": false
+  },
+  "Mmh, Säge hängt an der Wand.": {
+   "datei": "florian/cf70f9492919.mp3",
+   "h": "073f2f2c99",
+   "gehoert": false
+  },
+  "Mmh, Schere hängt an der Wand.": {
+   "datei": "florian/c1854d901470.mp3",
+   "h": "783b8183db",
+   "gehoert": false
+  },
+  "Mmh, Schlüssel hängt an der Wand.": {
+   "datei": "florian/cf209fd4ed14.mp3",
+   "h": "9820267fee",
+   "gehoert": false
+  },
+  "Mmh, Seil hängt an der Wand.": {
+   "datei": "florian/cdb7dc5af46b.mp3",
+   "h": "6e287103a7",
+   "gehoert": false
+  },
+  "Mmh, Zange hängt an der Wand.": {
+   "datei": "florian/0676ad5b9a55.mp3",
+   "h": "1ff9259b29",
+   "gehoert": false
+  },
   "Morgen fahren wir ans Meer.": {
    "datei": "florian/35635685a368.mp3",
    "h": "2b5b667257",
@@ -5969,6 +6439,16 @@
   "Nachzeichnen im Gitter": {
    "datei": "florian/1c358369b33b.mp3",
    "h": "573ef4e596",
+   "gehoert": false
+  },
+  "Nadel.": {
+   "datei": "florian/dc67f1b1be65.mp3",
+   "h": "11511cb284",
+   "gehoert": false
+  },
+  "Nagel.": {
+   "datei": "florian/94f20cfcd353.mp3",
+   "h": "3c9a3672b6",
    "gehoert": false
   },
   "Namen groß": {
@@ -6371,6 +6851,11 @@
    "h": "6b86067a9c",
    "gehoert": false
   },
+  "Passt es nicht, rutscht es zurück.": {
+   "datei": "florian/9668c0ccec4e.mp3",
+   "h": "f19b3f1569",
+   "gehoert": false
+  },
   "Passt nicht": {
    "datei": "florian/335d551fe080.mp3",
    "h": "b74987f895",
@@ -6404,6 +6889,11 @@
   "Pfff! Ole bläst oben seinen warmen Atem aus. Über dem Wasser wird daraus eine kleine Wolke. Schnell holt er frische Luft und taucht wieder ab.": {
    "datei": "florian/294457f00a2e.mp3",
    "h": "0b80d8990b",
+   "gehoert": false
+  },
+  "Pinsel.": {
+   "datei": "florian/bd0bdfb82e52.mp3",
+   "h": "997075770c",
    "gehoert": false
   },
   "Planen, Schreiben, Prüfen": {
@@ -6629,6 +7119,11 @@
   "Querstrich zuerst": {
    "datei": "florian/cab4057330ce.mp3",
    "h": "ecd9110b4f",
+   "gehoert": false
+  },
+  "Rad.": {
+   "datei": "florian/157378f2632d.mp3",
+   "h": "ad818d051c",
    "gehoert": false
   },
   "Ratekrimi": {
@@ -6866,6 +7361,11 @@
    "h": "ab8c9eb632",
    "gehoert": false
   },
+  "Säge.": {
+   "datei": "florian/1a875838ff73.mp3",
+   "h": "a6bfa95f2e",
+   "gehoert": false
+  },
   "Satz oder kein Satz?": {
    "datei": "florian/bef9b1fe37cc.mp3",
    "h": "fec6929445",
@@ -6981,6 +7481,11 @@
    "h": "e68b7120b3",
    "gehoert": false
   },
+  "Schere.": {
+   "datei": "florian/b8740cb0fed3.mp3",
+   "h": "8b7146a7a1",
+   "gehoert": false
+  },
   "Schlangenbuchstabe": {
    "datei": "florian/c4269a420ac2.mp3",
    "h": "e334c47422",
@@ -6994,6 +7499,11 @@
   "Schleifen nicht verwechseln": {
    "datei": "florian/975090a00a4c.mp3",
    "h": "e896d7efa5",
+   "gehoert": false
+  },
+  "Schlüssel.": {
+   "datei": "florian/152d11527be2.mp3",
+   "h": "01209ff209",
    "gehoert": false
   },
   "Schlüsselwort fangen": {
@@ -7155,6 +7665,11 @@
    "datei": "livia/8e25b068218f.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Seil.": {
+   "datei": "florian/2c4a14610408.mp3",
+   "h": "e3212aea51",
+   "gehoert": false
   },
   "Sekunden": {
    "datei": "florian/3655e933dceb.mp3",
@@ -7329,6 +7844,11 @@
   "So lang ist die Brücke jetzt.": {
    "datei": "florian/27f08a5283e3.mp3",
    "h": "ff99fae951",
+   "gehoert": false
+  },
+  "So lernst du der, die und das.": {
+   "datei": "florian/78469b247c7e.mp3",
+   "h": "7696c48830",
    "gehoert": false
   },
   "So lernst du die Zahlen von null bis zehn.": {
@@ -9001,6 +9521,11 @@
    "h": "de68e7b76f",
    "gehoert": false
   },
+  "Werkzeugwand": {
+   "datei": "florian/a0331b74354f.mp3",
+   "h": "d9627e8314",
+   "gehoert": false
+  },
   "Wertetabelle": {
    "datei": "florian/e627c880226a.mp3",
    "h": "2c21e01cb5",
@@ -9504,6 +10029,11 @@
   "Zahlwörter und Ziffern": {
    "datei": "florian/4fdfbc5c3bcf.mp3",
    "h": "7855446c7b",
+   "gehoert": false
+  },
+  "Zange.": {
+   "datei": "florian/44aa135c4fcb.mp3",
+   "h": "45739db421",
    "gehoert": false
   },
   "Zaunpfahlfalle": {
