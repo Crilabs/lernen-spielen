@@ -107,6 +107,17 @@ export function zahlAusStellen(s) {
   return Number(s.z || "0") * 10 + Number(s.e);
 }
 
+/**
+ * Was der Haken mit den Plätzen tut, bevor geprüft wird (der Haken bleibt nie ohne Reaktion): eine 0 auf dem
+ * Zehner-Platz rutscht weg (0 Zehner = keine Zehner), fehlen die Einer, geht der Ring dorthin.
+ * @param {Stellen} s @returns {{ s: Stellen, art: "zahl" | "einer-fehlt", nullWeg: boolean }}
+ */
+export function vorFertig(s) {
+  if (!s.e) return { s: { ...s, aktiv: "e" }, art: "einer-fehlt", nullWeg: false };
+  if (s.z === "0") return { s: { ...s, z: "" }, art: "zahl", nullWeg: true };
+  return { s, art: "zahl", nullWeg: false };
+}
+
 /** Die Plätze, wie sie für `antwort` aussehen müssen. @param {number} antwort @returns {{ z: string, e: string }} */
 const zielStellen = (antwort) => ({ z: antwort >= 10 ? String(Math.floor(antwort / 10)) : "", e: String(antwort % 10) });
 

@@ -26,7 +26,7 @@ import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
 import { runde, einmal, rundenMs } from "../../lernsteuerung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
-import { aufgabeAus, anzeige, kandidaten, danebenSatz, probeVon, perlenTon, perleHell, naechsteFreude, witz, bildWechsel, leereStellen, tippeStelle, waehleStelle, loescheStelle, zahlAusStellen, falscheStellen, naechsterStellenZug, zuegeZu, aufgabenTaefelchen } from "./logik.js";
+import { aufgabeAus, anzeige, kandidaten, danebenSatz, probeVon, perlenTon, perleHell, naechsteFreude, witz, bildWechsel, leereStellen, tippeStelle, waehleStelle, loescheStelle, zahlAusStellen, falscheStellen, naechsterStellenZug, zuegeZu, aufgabenTaefelchen, vorFertig } from "./logik.js";
 
 sperreTouch();
 
@@ -370,8 +370,15 @@ function zeigeStellen(s, { ring = true, ringAuf } = {}) {
   }
 }
 
+/**
+ * Zählt jedes Wegräumen des Bildes (holeZurueck, leereMatte): Eine Wirkung, die noch fliegt, merkt daran, dass ihr Bild
+ * inzwischen weg ist, und legt nichts mehr hin (sonst blieben schwebende Ziffern stehen, Abschlussprüfung).
+ */
+let bildNr = 0;
+
 /** Die Matte ist leer, Timo steht an seinem Platz, nichts liegt auf seinem Schoß. */
 function leereMatte() {
+  bildNr++;
   aufgabeFeld.replaceChildren();
   realZ.replaceChildren();
   realE.replaceChildren();
@@ -489,10 +496,21 @@ function rastetEin(k) {
   if (t) bewege(t, [{ transform: "scale(1)" }, { transform: "scale(1.12)", offset: 0.4 }, { transform: "scale(1)" }], 220);
 }
 
-/** Ein Platz wackelt (seine Ziffer passt nicht). @param {"z" | "e"} k */
-function wackelt(k) {
-  platzEl[k].classList.add("passt-nicht");
+/** Ein Platz wackelt (seine Ziffer passt nicht, oder er ist leer). @param {"z" | "e"} k @param {{ passtNicht?: boolean }} [o] */
+function wackelt(k, { passtNicht = true } = {}) {
+  if (passtNicht) platzEl[k].classList.add("passt-nicht");
   bewege(platzEl[k], [{ transform: "rotate(0deg)" }, { transform: "rotate(-5deg)", offset: 0.25 }, { transform: "rotate(4deg)", offset: 0.55 }, { transform: "rotate(-2deg)", offset: 0.8 }, { transform: "rotate(0deg)" }], 460);
+}
+
+/** Ein Täfelchen rutscht von seinem Platz nach oben weg und verschwindet (die 0 im Zehner beim Haken). @param {Element | null} el */
+function rutschtWeg(el) {
+  if (!el) return;
+  const r = el.getBoundingClientRect();
+  const k = /** @type {HTMLElement} */ (el.cloneNode(true));
+  k.classList.add("flug");
+  Object.assign(k.style, { width: `${r.width}px`, height: `${r.height}px`, boxSizing: "border-box", transform: `translate(${r.left}px, ${r.top}px)` });
+  fluege.append(k);
+  bewege(k, [{ transform: `translate(${r.left}px, ${r.top}px)`, opacity: 1 }, { transform: `translate(${r.left}px, ${r.top - 4 * remPx()}px)`, opacity: 0 }], 320, { opacity: "0" }, { easing: "ease-in" }).then(() => k.remove());
 }
 
 /** Das getippte Täfelchen kommt aus dem Ziffernkasten geflogen. @param {string} ziffer @param {"z" | "e"} k */
@@ -517,6 +535,7 @@ function zeigeProbe() {
 
 /** Nach einem Fehlversuch: schwebende Ziffern weg, Material zurück unter die Aufgabe, Plätze ruhig. */
 function holeZurueck() {
+  bildNr++;
   for (const f of B.flieger) f.remove();
   B.flieger = [];
   for (const k of /** @type {("z" | "e")[]} */ (["z", "e"])) platzEl[k].classList.remove("passt-nicht");
@@ -643,7 +662,7 @@ async function wirkungDaneben(a, s) {
   timo.haltung("staunen", { ms: 200 });
   zeigeStellen(s, { ring: false });
   const t = aufgabenTaefelchen(a);
-  const rem = remPx();
+  const nr = bildNr;
   // Die Ziffern, die zur Antwort gehören (bei c − e die 0 unter der Einerziffer).
   const ziele = B.ziffern.filter((z) => z.info.rolle === "wandert").map((z) => ({ von: z.el, stelle: /** @type {"z" | "e"} */ (z.info.stelle), ziffer: undefined }));
   if (t.nullDarunter) {
@@ -654,14 +673,16 @@ async function wirkungDaneben(a, s) {
     const passt = !falsch.includes(z.stelle);
     const ziel = platzEl[z.stelle].getBoundingClientRect();
     const kopie = await fliegeZiffer(z.von, ziel, { verzoegerung: i * 150, ziffer: z.ziffer, stelle: z.stelle, ...(passt ? {} : { versatz: [ziel.width * 0.62, -ziel.height * 0.42] }) });
+    // Hat das Kind inzwischen getippt (oder kam Hilfe oder Anleitung), ist dieses Bild schon weggeräumt.
+    if (nr !== bildNr) return kopie?.remove();
     if (kopie) B.flieger.push(kopie);
     if (passt) rastetEin(z.stelle);
   });
   const stoff = B.stoff.filter((m) => m.info.rolle === "wandert" && !falsch.includes(m.info.stelle)).map((m) => ziehtUm(m.el, realEl[/** @type {"z" | "e"} */ (m.info.stelle)]));
   await Promise.all([...fluegeFertig, ...stoff]);
+  if (nr !== bildNr) return;
   klang.boing();
   for (const k of falsch) wackelt(k);
-  void rem;
   const tipps = tippZaehler;
   const gesagt = await erzaehler.daneben(w, a.antwort);
   // Der Auftrag folgt nur, wenn der Satz zu Ende gesprochen ist und das Kind nicht schon wieder tippt.
@@ -745,6 +766,22 @@ function stelleAufgabe(aufgabe, melde) {
     },
     fertig() {
       if (fertig || einfuehrungLaeuft) return;
+      // Der Haken bleibt nie ohne Reaktion: fehlen die Einer, wackelt ihr Platz und bekommt den Ring; eine 0 im
+      // Zehner rutscht weg (Abschlussprüfung, ein Kind steckte sonst fest).
+      const v = vorFertig(B.s);
+      if (v.art === "einer-fehlt") {
+        raeumeFehlerBild();
+        B.s = v.s;
+        nachEingabe();
+        neuerLauf();
+        wackelt("e", { passtNicht: false });
+        return;
+      }
+      if (v.nullWeg) {
+        rutschtWeg(platzEl.z.firstElementChild);
+        B.s = v.s;
+        zeigeStellen(B.s);
+      }
       const zahl = zahlAusStellen(B.s);
       if (zahl === null) return;
       raeumeFehlerBild();
@@ -874,7 +911,7 @@ async function bereiteBild(a) {
 /** Die Matte wird leer geräumt (Timo kommt zurück an seinen Platz); bei einem Wechsel rollt er dabei einmal vor die Matte. @param {boolean} ueberDieTafel */
 async function raeumeBrett(ueberDieTafel) {
   const teile = [aufgabeFeld, realZ, realE, platzEl.z, platzEl.e].flatMap((el) => [...el.children]);
-  const weg = Promise.all(teile.map((el) => bewege(/** @type {HTMLElement} */ (el), [{ opacity: 1 }, { opacity: 0 }], ueberDieTafel ? 500 : 140, {}, { easing: "ease-in" })));
+  const weg = Promise.all(teile.map((el) => bewege(/** @type {HTMLElement} */ (el), [{ opacity: 1 }, { opacity: 0 }], ueberDieTafel ? 500 : 140, { opacity: "0" }, { easing: "ease-in" })));
   for (const f of B.flieger) f.remove();
   if (ueberDieTafel) {
     await rolle(startX() + 10 * remPx(), 450);
