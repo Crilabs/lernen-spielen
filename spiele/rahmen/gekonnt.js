@@ -259,23 +259,23 @@ export class LsGekonnt extends HTMLElement {
     }
   }
 
-  /** Einmal Konfetti: etwa 90 Schnipsel fallen in 3–5 s durchs Bild und bleiben nicht liegen. */
+  /** Einmal Konfetti: etwa 130 Schnipsel rieseln langsam (je 6–9 s, über 5 s verteilt) durchs Bild und bleiben nicht liegen. */
   streueKonfetti() {
     this.konfetti.replaceChildren();
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < 130; i++) {
       const el = document.createElement("i");
       if (i % 3 === 0) el.className = "rund";
       el.style.left = `${(Math.random() * 100).toFixed(1)}%`;
       el.style.background = FEST[i % FEST.length];
       this.konfetti.append(el);
-      const dauer = 3000 + Math.random() * 2200;
+      const dauer = 6000 + Math.random() * 3000;
       const dx = (Math.random() - 0.5) * 24;
       const dreh = (Math.random() - 0.5) * 1440;
       el.animate?.([
         { transform: "translate(0, 0) rotate(0deg)", opacity: 1 },
         { transform: `translate(${dx}rem, 70rem) rotate(${dreh * 0.6}deg)`, opacity: 1, offset: 0.7 },
         { transform: `translate(${dx * 1.4}rem, 118rem) rotate(${dreh}deg)`, opacity: 0 },
-      ], { duration: dauer, delay: Math.random() * 900, easing: "cubic-bezier(0.25, 0.4, 0.5, 1)", fill: "both" });
+      ], { duration: dauer, delay: Math.random() * 5000, easing: "linear", fill: "both" });
     }
   }
 
