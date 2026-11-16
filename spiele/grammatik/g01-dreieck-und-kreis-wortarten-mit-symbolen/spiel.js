@@ -398,7 +398,7 @@ async function kofiHuepftHier(L) {
     { transform: kofiTransform(x, 0), easing: "ease-out" },
     { transform: kofiTransform(x, 2.2 * rem), offset: 0.5, easing: "ease-in" },
     { transform: kofiTransform(x, 0) },
-  ], { duration: 280, fill: "forwards" });
+  ], { duration: 240, fill: "forwards" });
   L.anims.add(a);
   await a.finished.catch(() => undefined);
   L.anims.delete(a);
@@ -566,7 +566,7 @@ async function klappe(L, kasten, neueEndung) {
 /**
  * Richtig: Das Symbol setzt sich über das Wort, Kofi hüpft hinter das Kästchen, die Probe läuft im Bild (Nomen: das Artikelwort
  * schreibt sich davor; Verb: ich und du mit ihrer Endung, je ein Hüpfer, ein Ton höher), verweht, und das Symbol drückt sich
- * mit Plopp fest. Etwa 2,2 s; ein Tipp springt ans Ende (Regeln §1). Ist es das letzte Symbol, hüpft Kofi danach den Satz ab.
+ * mit Plopp fest. Etwa 2,2 s (Verb), ein Tipp springt ans Ende (Regeln §1). Ist es das letzte Symbol, hüpft Kofi danach den Satz ab.
  * @param {any} k die Karte @param {string} art @param {HTMLElement} teil @param {{ letztes: boolean, freude: boolean, kurz: boolean, ohneSatz: boolean }} o
  */
 async function wirkungRichtig(k, art, teil, { letztes, freude, kurz, ohneSatz }) {
@@ -600,7 +600,7 @@ async function wirkungRichtig(k, art, teil, { letztes, freude, kurz, ohneSatz })
   if (aus) return;
 
   // 2. Kofi hüpft hinter das Kästchen (0,45 s).
-  await kofiZu(L, wegMass().mitte(kasten), { ms: kurz ? 300 : 440 });
+  await kofiZu(L, wegMass().mitte(kasten), { ms: kurz ? 280 : 380 });
   if (aus) return;
   kofiHaltung("zeigen", 140, L);
 
@@ -614,7 +614,7 @@ async function wirkungRichtig(k, art, teil, { letztes, freude, kurz, ohneSatz })
     if (!L.skip) klang.probe(0);
     await kofiHuepftHier(L);
     if (aus) return;
-    await warte(kurz ? 120 : 260);
+    await warte(kurz ? 80 : 100);
     if (aus) return;
     probeZeile(kasten, probeKreide(w, "du"));
     await klappe(L, kasten, t.du);
@@ -622,17 +622,17 @@ async function wirkungRichtig(k, art, teil, { letztes, freude, kurz, ohneSatz })
     if (!L.skip) klang.probe(1);
     await kofiHuepftHier(L);
     if (aus) return;
-    await warte(kurz ? 200 : 520);
+    await warte(kurz ? 120 : 250);
   } else {
     probeZeile(kasten, probeKreide(w));
-    await warte(kurz ? 520 : 1100);
+    await warte(kurz ? 400 : 650);
   }
   if (aus) return;
 
   // 4. Die Kreide verweht, das Symbol drückt sich mit Plopp fest.
   probeZeile(kasten, null);
   endungZurueck(kasten, w);
-  await warte(160);
+  await warte(100);
   if (aus) return;
   if (!L.skip) klang.plopp();
   await bewege(chip, [{ transform: "scale(1)" }, { transform: "scale(1.12)", offset: 0.5 }, { transform: "scale(1)" }], 180);
@@ -658,9 +658,8 @@ async function wirkungRichtig(k, art, teil, { letztes, freude, kurz, ohneSatz })
     if (lauf2.skip) break;
     el.classList.add("leuchtet");
     if (!lauf2.skip) klang.huepf(n);
-    await kofiZu(lauf2, wegMass().mitte(el), { ms: 230, hoch: 3 });
+    await kofiZu(lauf2, wegMass().mitte(el), { ms: 190, hoch: 3 });
     n++;
-    await warte(40);
     el.classList.remove("leuchtet");
   }
   fertigSchluss();
