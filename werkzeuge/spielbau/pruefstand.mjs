@@ -120,7 +120,8 @@ async function main() {
     }
 
     // 4. Texte
-    const t = pruefeTexte(texteDesSpiels(join(cwd, L.spielordner)), { klasse: L.klasse ?? 2 });
+    const spielTexte = texteDesSpiels(join(cwd, L.spielordner));
+    const t = pruefeTexte(spielTexte, { klasse: L.klasse ?? 2, beschriftungen: spielTexte.beschriftungen });
     rot.push(...t.rot);
     hinweise.push(...t.hinweise);
 

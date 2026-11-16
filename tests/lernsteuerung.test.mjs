@@ -61,7 +61,7 @@ function uebend(ctx, spiel, id, stufe, rnd = lcg(1)) {
 
 test("K: feste Werte", () => {
   assert.deepEqual(K, { ABSTAND: [0, 1, 3, 7, 21], GELERNT: 4, IN_SICHT: 2, PROBE: 5, PROBE_SCHWER: 2, AUF_FENSTER: 5,
-    AUF_OK: 4, AB_FEHLER: 2, ANTEIL_THEMA: 0.7, WIEDER_NACH: [2, 4], RUNDE_MS: 240000, GROSS: 40, STICHPROBE: 20 });
+    AUF_OK: 4, AB_FEHLER: 2, ANTEIL_THEMA: 0.7, WIEDER_NACH: [2, 4], RUNDE_MS: 240000, LETZTE_AUFGABE_MS: 30000, GROSS: 40, STICHPROBE: 20 });
   assert.deepEqual(neuerStand(), { version: 1, themen: {}, aufgaben: {}, verlauf: [] });
 });
 
@@ -402,6 +402,26 @@ test("Angebot: Wiederholung gekonnter Themen kommt dazu, Familie zuerst", () => 
   assert.ok(zaehle().r5 > 0);
 });
 
+test("naechstesAngebot: keine neue Aufgabe in den letzten 30 s", () => {
+  const { stand: s, sitzung: sitz } = uebend(CTX, "pb", "z7", "material");
+  sitz.start = 0;
+  assert.equal(naechstesAngebot(CTX, s, sitz, lcg(1), { jetzt: K.RUNDE_MS - 29_999, heute: HEUTE }), null);
+  assert.ok(naechstesAngebot(CTX, s, sitz, lcg(1), { jetzt: K.RUNDE_MS - 30_001, heute: HEUTE }));
+});
+
+test("naechstesAngebot: bei kurzer Testrunde höchstens ein Viertel Reserve", () => {
+  const g = /** @type {any} */ (globalThis);
+  g.__LS_PRUEFEN__ = true; g.__LS_RUNDE_MS__ = 60000;
+  try {
+    const { stand: s, sitzung: sitz } = uebend(CTX, "pb", "z7", "material");
+    sitz.start = 0;
+    assert.ok(naechstesAngebot(CTX, s, sitz, lcg(1), { jetzt: 44_999, heute: HEUTE }));
+    assert.equal(naechstesAngebot(CTX, s, sitz, lcg(1), { jetzt: 45_000, heute: HEUTE }), null);
+  } finally {
+    delete g.__LS_RUNDE_MS__; delete g.__LS_PRUEFEN__;
+  }
+});
+
 test("Angebot: null nach gekonnt, nach max, nach RUNDE_MS", () => {
   const { stand: s, sitzung: sitz } = uebend(CTX, "pb", "z7", "material");
   sitz.max = 3;
@@ -411,8 +431,8 @@ test("Angebot: null nach gekonnt, nach max, nach RUNDE_MS", () => {
   }
   assert.equal(naechstesAngebot(CTX, s, sitz, lcg(9), opt), null);
   const { stand: t, sitzung: z } = uebend(CTX, "pb", "z7", "material");
-  assert.ok(naechstesAngebot(CTX, t, z, lcg(1), { jetzt: JETZT + K.RUNDE_MS - 1, heute: HEUTE }));
-  assert.equal(naechstesAngebot(CTX, t, z, lcg(1), { jetzt: JETZT + K.RUNDE_MS, heute: HEUTE }), null);
+  assert.ok(naechstesAngebot(CTX, t, z, lcg(1), { jetzt: JETZT + K.RUNDE_MS - K.LETZTE_AUFGABE_MS - 1, heute: HEUTE }));
+  assert.equal(naechstesAngebot(CTX, t, z, lcg(1), { jetzt: JETZT + K.RUNDE_MS - K.LETZTE_AUFGABE_MS, heute: HEUTE }), null);
   // gekonnt (siehe auch Probe- und kk-Test)
   const { stand: u, sitzung: m } = uebend(CTX, "pb", "z5", "kopf");
   for (const k of ["zerl:5:1+4", "zerl:5:2+3", "zerl:5:3+2"]) verbucheErgebnis(CTX, u, m, k, sauber);

@@ -2,11 +2,12 @@
 // Transkripte, und dass Skill, Vorlagen und Workflow zusammenpassen (Platzhalter, Pfade, Marken, Grenzen).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, mkdtempSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { bauheft, hauptthemen, katalogEintrag, ordnername, regeln } from "../werkzeuge/spielbau/bauheft.mjs";
-import { pruefeTexte, saetzeAusCode, saetzeAusJson } from "../werkzeuge/spielbau/texte.mjs";
+import { pruefeTexte, saetzeAusCode, saetzeAusJson, texteDesSpiels, ZAHL_NACH_ARTIKEL } from "../werkzeuge/spielbau/texte.mjs";
 import { GRENZEN, roteLaeufe, taktBefunde } from "../werkzeuge/spielbau/pruefstand.mjs";
 import { phaseAusTranskript } from "../werkzeuge/spielbau/abschliessen.mjs";
 import { CLAUDE_PHASEN } from "../werkzeuge/kosten/kosten.mjs";
@@ -100,6 +101,34 @@ test("Texte: urteilende Wörter und Ersatznamen sind rot, Sätze ohne sie nicht"
   assert.equal(pruefeTexte(["6 Stäbchen sind nicht 48.", "Kofi staunt."]).rot.length, 0);
   // Teilwörter zählen nicht: „Klasse“ ist nicht in der Liste, „tolle“ ist nicht „toll“, „Fehlerbild“ steht nicht im Kindertext
   assert.equal(pruefeTexte(["Die tollkühne Katze."]).rot.length, 0);
+});
+
+test("Texte: Zahl nach Artikel wird als Ordnungszahl gesprochen und ist rot", () => {
+  const rot = (t) => pruefeTexte([t]).rot.filter((x) => x.startsWith("Stimme:"));
+  assert.equal(rot("Timo bringt den Brief zur Dreizehn.").length, 1);
+  assert.equal(rot("Timo geht zum 45.").length, 1);
+  assert.equal(rot("Das ist ZUM 7 gehörig.").length, 1);
+  assert.equal(rot("Timo steht bei Nummer Dreizehn.").length, 0);
+  assert.equal(rot("Die Zwei passt.").length, 0);
+  assert.equal(rot("Tippe auf den Knopf neben der Null.").length, 0); // „der Null“ hat keine Ordnungszahl-Lesung
+  assert.equal(rot("Das ist der Zehner.").length, 0);
+  assert.equal(rot("Der Einer links, dem Zwanziger folgt.").length, 0);
+  assert.ok(ZAHL_NACH_ARTIKEL.test("der Zwanzig"));
+});
+
+test("Texte: Abkürzung als Beschriftung ist nur ein Hinweis", () => {
+  const h = (b) => pruefeTexte(["Kofi staunt."], { beschriftungen: b }).hinweise.filter((x) => x.startsWith("§8"));
+  const r = pruefeTexte(["Kofi staunt."], { beschriftungen: ["Z"] });
+  assert.equal(r.rot.length, 0);
+  assert.equal(h(["Z"]).length, 1);
+  assert.equal(h(["Zehner"]).length, 0);
+  assert.equal(pruefeTexte(["Kofi staunt."]).hinweise.length, 0);
+});
+
+test("Texte: texteDesSpiels liest Beschriftungen aus index.html", () => {
+  const dir = mkdtempSync(join(tmpdir(), "texte-"));
+  writeFileSync(join(dir, "index.html"), '<div class="kopf">Z</div><div>Zehner</div><span> HE </span><p>Text</p>');
+  assert.deepEqual(texteDesSpiels(dir).beschriftungen, ["Z", "HE"]);
 });
 
 test("Texte: Satzlänge nach Klasse, Budget aller festen Texte", () => {

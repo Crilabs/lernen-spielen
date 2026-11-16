@@ -1203,6 +1203,7 @@ async function starteRunde(vorschau) {
     sprich: plan?.sprich ?? null,
     echteDinge: plan ? { thema: plan.id, fach: plan.strang, titel: plan.name, text: plan.eltern ?? "" } : null,
     einfuehrungGesehen: () => r.einfuehrungGesehen(),
+    beginneZeit: () => r.beginneZeit(),
     naechste: () => r.naechste(),
     melde: (/** @type {string} */ key, /** @type {any} */ e) => r.melde(key, e),
     ende: () => r.ende(),
@@ -1219,6 +1220,7 @@ function vorschauRunde() {
     sprich: null,
     echteDinge: { titel: VORSCHAU.thema },
     einfuehrungGesehen() {},
+    beginneZeit() {},
     naechste() {
       const key = keys.shift();
       return key ? { ziel: { key }, auch: [], stufe: "material" } : null;
@@ -1292,6 +1294,7 @@ async function spieleRunde(vorschau) {
     await einfuehrung(stufeJetzt);
     r.einfuehrungGesehen();
     beginn = Date.now();
+    r.beginneZeit();
   } else if (erste) {
     // Später: hat sich das Thema geändert, sagt die Stimme es (ein Satz, Christian 2026-11-16); wechselt dabei
     // „bis 10“ und „11 bis 20“, zeigt eine kurze Szene den Wechsel.

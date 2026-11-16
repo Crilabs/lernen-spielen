@@ -15,6 +15,7 @@ import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
 import { sprich } from "../kern/stimme.js";
 import { GRUND_CSS, MASSE, definiere } from "./stil.js";
 import { findeSpiel } from "./knopf.js";
+import { lesezeit } from "./lesezeit.js";
 
 const BLASE_CSS = `
 :host { display: block; }
@@ -56,8 +57,7 @@ ls-knopf { flex: none; }
 :host([ohne-text]:not([hat-text])) ls-knopf { visibility: hidden; }
 `;
 
-/** So lange steht ein kurz gezeigter Satz mindestens (ms): 1,5 s und 0,4 s je Wort. @param {string} text */
-export const lesezeit = (text) => 1500 + 400 * text.trim().split(/\s+/).filter(Boolean).length;
+export { lesezeit } from "./lesezeit.js";
 
 export class LsBlase extends HTMLElement {
   constructor() {
