@@ -43,8 +43,28 @@ export const FARBE = {
   beereTief: "#7A1E3C",
 };
 
-/** Radien in rem: groß (Blase, Karten), normal (Kacheln), klein. */
-export const RADIUS = { gross: 4, normal: 2.6, klein: 1.6 };
+/**
+ * Radien in rem: groß (Blase, Karten), normal (Kacheln), klein; plakat und teil nach der Designsprache
+ * (Vorlage 28/20 px bei 720 px Höhe; 1 px = 0,15 rem).
+ */
+export const RADIUS = { gross: 4, normal: 2.6, klein: 1.6, plakat: 4.2, teil: 3 };
+
+/**
+ * Maße der Übersichtsseiten (Können, Regal, Wissen, Geschichte) nach der Designsprache
+ * (docs/superpowers/specs/2026-11-15-designsprache-design.md). Spiele behalten MASSE.
+ * rand: Außenrand; knopf: sichtbarer Nebenknopf, tipp: Tippfläche (K4); titel/titelKlein/name/lese: Schriftgrößen.
+ */
+export const SEITE = Object.freeze({ rand: 9.6, knopf: 8.4, tipp: 11, titel: 8.4, titelKlein: 6.6, name: 3.6, lese: 4.5 });
+
+/**
+ * Schriftrollen: Inter nur für die Oberfläche (Titel, Namen, Wörter auf Knöpfen, Navigation), mit festen
+ * Zeichenvarianten (einfaches a, l mit Bogen, I mit Querstrichen). Lernstoff und Lesetext bleiben Andika.
+ */
+export const SCHRIFT = Object.freeze({
+  oberflaeche: '"Inter", "Andika", sans-serif',
+  lesen: '"Andika", sans-serif',
+  merkmale: '"cv11", "cv05", "cv08"',
+});
 
 /**
  * Fachfarben (Rahmen): Füllung (Kachel), Tief (Schrift), Tönung (Kopfleiste). Sachthemen haben keine.
@@ -84,6 +104,8 @@ export const LERNFARBE = Object.freeze({
   stelle: Object.freeze({ e: "#0FA3A3", z: "#F07C1E", h: "#5B6478" }),
   /** Draht der Perlenstäbchen. */
   draht: FARBE.tinteWeich,
+  /** Stellenwertfarben (M5, nur zusätzlich zu Spalte, Beschriftung und Ziffer): Einer türkis, Zehner orange, Hunderter schiefergrau. */
+  stellenwert: Object.freeze({ einer: "#2BB5B0", zehner: "#F59A2B", hunderter: "#69768A" }),
   /** Wortartensymbole (D1). */
   wortart: Object.freeze({ nomen: "#1E1A2E", artikel: "#7CC4F0", adjektiv: "#2F5BC4", verb: "#E5484D" }),
 });
@@ -115,6 +137,12 @@ export const TOKENS = Object.freeze({
   "--ls-radius-gross": `${RADIUS.gross}rem`,
   "--ls-radius": `${RADIUS.normal}rem`,
   "--ls-radius-klein": `${RADIUS.klein}rem`,
+  "--ls-radius-plakat": `${RADIUS.plakat}rem`,
+  "--ls-radius-teil": `${RADIUS.teil}rem`,
+  "--ls-schrift-oberflaeche": SCHRIFT.oberflaeche,
+  "--ls-schrift-merkmale": SCHRIFT.merkmale,
+  "--ls-seite-rand": `${SEITE.rand}rem`,
+  "--ls-seite-knopf": `${SEITE.knopf}rem`,
   "--ls-knopf": `${MASSE.bedien}rem`,
   "--ls-neben-schatten": "var(--ls-tinte-weich)",
   "--ls-schatten": `0 ${MASSE.tiefe}rem 0 var(--ls-neben-schatten)`,
@@ -215,7 +243,9 @@ ${TOKEN_CSS}
 .haupt .zeichen img { visibility: hidden; }
 .zeichen[hidden], .wort[hidden] { display: none; }
 .gespiegelt .zeichen { transform: scaleX(-1); }
-.wort { display: block; line-height: 1; padding-bottom: 0.08em; }
+/* Wörter auf Knöpfen sind Oberfläche: Inter mit festen Zeichenvarianten (Designsprache); Lernstoff bleibt Andika. */
+.wort { display: block; line-height: 1; padding-bottom: 0.04em; font-family: var(--ls-schrift-oberflaeche);
+  font-feature-settings: var(--ls-schrift-merkmale); letter-spacing: -0.01em; }
 
 /* Sonnenring: Fokus (in ls-hilfe auch das Aufleuchten). Immer ein Ring, nie eine Fläche; er liegt direkt
    an der Tinte-Kontur an, damit kein Hintergrund durchscheint. */

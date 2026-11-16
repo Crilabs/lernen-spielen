@@ -197,7 +197,7 @@ function zeigeKosten() {
       ${kennzahl(eur(pb.ausgegeben + k.bibliothekEur), `Bücher (${pb.fertig}) und Raumbilder`)}
     </div>
     <div class="karte"><h3>Prognose für das Offene</h3><table>
-      <tr><td>Spiele: ${ps.offen} von ${k.katalog} noch nicht begonnen, je ${eur(ps.durchschnitt?.eur ?? null)}</td><td class="zahl-z">${eur(ps.rest?.mittel ?? null)}</td></tr>
+      <tr><td>Spiele: ${ps.offen} von ${k.katalog} noch nicht begonnen, je ${eur(ps.durchschnitt?.eur ?? null)} (neuer Spielbau, ${ps.basisSpiele} Spiel${ps.basisSpiele === 1 ? "" : "e"})</td><td class="zahl-z">${eur(ps.rest?.mittel ?? null)}</td></tr>
       <tr><td>Mit echten Dingen: ${pa.themenGesamt - pa.themen} Themen offen, je ${eur(pa.jeThema)}</td><td class="zahl-z">${eur(offenAnalog)}</td></tr>
       <tr><td>Bücher: ${pb.offen} geplant, je ${eur(pb.durchschnitt)}</td><td class="zahl-z">${eur(pb.rest)}</td></tr>
     </table></div>

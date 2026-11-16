@@ -129,6 +129,19 @@ export function summen(eintraege, preise) {
   return s;
 }
 
+/** Phasen des alten Spielbaus (bis 2026-11-15), ersetzt durch docs/spielbau.md (idee, bau, pruefstand, pruefung). */
+export const ALTE_PHASEN = ["entwurf", "pruefung-a", "prototyp", "pruefung-b", "ausbau", "review"];
+
+/**
+ * Die Einträge eines Spiels, die zum neuen Spielbau gehören (Christian, 2026-11-16: die Schätzung soll nicht mit dem
+ * alten, teuren Ablauf rechnen). Alte Phasen fallen weg; hat ein Spiel beides, auch seine Steuerung, weil sie sich
+ * dort nicht trennen lässt.
+ */
+export function kostenNeuerSpielbau(eintraege) {
+  const gemischt = eintraege.some((e) => ALTE_PHASEN.includes(e.phase));
+  return eintraege.filter((e) => !ALTE_PHASEN.includes(e.phase) && !(gemischt && e.phase === "steuerung") && e.posten !== "status");
+}
+
 /** Ist das Spiel geparkt? (Eintrag phase „geparkt“ in kosten.json) */
 export const istGeparkt = (eintraege) => eintraege.some((e) => e.phase === "geparkt");
 
@@ -140,6 +153,12 @@ export const istGeparkt = (eintraege) => eintraege.some((e) => e.phase === "gepa
 export function prognose(spiele, katalogAnzahl, preise) {
   const je = spiele.map((sp) => ({ name: sp.name, geparkt: sp.geparkt ?? istGeparkt(sp.eintraege), s: summen(sp.eintraege, preise) }));
   const fertig = je.filter((x) => !x.geparkt);
+  // Durchschnitt und Hochrechnung nur aus dem neuen Spielbau; ausgegeben zählt weiter alles
+  const basis = spiele
+    .filter((sp) => !(sp.geparkt ?? istGeparkt(sp.eintraege)))
+    .map((sp) => kostenNeuerSpielbau(sp.eintraege))
+    .filter((l) => l.length)
+    .map((l) => ({ s: summen(l, preise) }));
   const geparkt = je.filter((x) => x.geparkt);
   const summiere = (l) => l.reduce((a, x) => a + x.s.eur, 0);
   const bericht = {
@@ -149,19 +168,20 @@ export function prognose(spiele, katalogAnzahl, preise) {
     geparkt: { anzahl: geparkt.length, eur: summiere(geparkt), tokens: geparkt.reduce((a, x) => a + x.s.claude.tokens, 0) },
     ausgegeben: summiere(je),
     offen: Math.max(0, katalogAnzahl - je.length),
+    basisSpiele: basis.length,
     durchschnitt: /** @type {any} */ (null),
     spanne: /** @type {any} */ (null),
     gesamt: /** @type {any} */ (null),
     rest: /** @type {any} */ (null),
   };
-  if (!fertig.length) return bericht;
-  const n = fertig.length;
-  const mittel = (f) => fertig.reduce((a, x) => a + f(x.s), 0) / n;
+  if (!basis.length) return bericht;
+  const n = basis.length;
+  const mittel = (f) => basis.reduce((a, x) => a + f(x.s), 0) / n;
   bericht.durchschnitt = {
     eur: mittel((s) => s.eur), claude: mittel((s) => s.claude.eur), bilder: mittel((s) => s.bilder.eur), stimme: mittel((s) => s.stimme.eur),
     tokens: mittel((s) => s.claude.tokens), bildAnzahl: mittel((s) => s.bilder.anzahl), zeichen: mittel((s) => s.stimme.zeichen),
   };
-  const eurs = fertig.map((x) => x.s.eur);
+  const eurs = basis.map((x) => x.s.eur);
   bericht.spanne = { min: Math.min(...eurs), max: Math.max(...eurs) };
   const mal = (k) => ({ mittel: bericht.durchschnitt.eur * k, min: bericht.spanne.min * k, max: bericht.spanne.max * k });
   // gesamt: alle Katalog-Spiele zum Durchschnitt; rest: die noch nicht begonnenen

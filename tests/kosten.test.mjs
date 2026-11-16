@@ -16,7 +16,7 @@ const PREISE = {
   bilder: { modell: "bild", eingabeProMio: 5, ausgabeProMio: 40, waehrung: "EUR", unsicher: true },
   stimme: { proMioZeichen: 20, waehrung: "EUR" },
 };
-const claude = (modell, eingabe, ausgabe, phase = "entwurf") => ({ datum: "2026-11-14", phase, posten: "claude", modell, eingabe, ausgabe, einheit: "tokens", menge: eingabe + ausgabe, notiz: "" });
+const claude = (modell, eingabe, ausgabe, phase = "bau") => ({ datum: "2026-11-14", phase, posten: "claude", modell, eingabe, ausgabe, einheit: "tokens", menge: eingabe + ausgabe, notiz: "" });
 const bild = (eingabe, ausgabe) => ({ datum: "2026-11-14", phase: "bild", posten: "bild", modell: "bild", eingabe, ausgabe, einheit: "bilder", menge: 1, notiz: "" });
 const stimme = (menge) => ({ datum: "2026-11-14", phase: "stimme", posten: "stimme", modell: "", eingabe: 0, ausgabe: 0, einheit: "zeichen", menge, notiz: "" });
 const geparkt = { datum: "2026-11-14", phase: "geparkt", posten: "status", einheit: "keine", menge: 0 };
@@ -322,4 +322,35 @@ test("formatiere: Abschnitt Bücher mit Raumbildern", () => {
   assert.match(text, /Bücher \(Bibliothek\)/);
   assert.match(text, /geschichten\/a: 1,00 €/);
   assert.match(text, /Raumbilder der Bibliothek: 2,00 €/);
+});
+
+// Schätzung nur nach dem neuen Spielbau (Christian, 2026-11-16): alte Phasen zählen ausgegeben, nicht in den Durchschnitt.
+import { kostenNeuerSpielbau } from "../werkzeuge/kosten/kosten.mjs";
+
+test("kostenNeuerSpielbau: alte Phasen raus; in gemischten Spielen auch die Steuerung", () => {
+  const rein = [claude("m-b", 1e6, 0, "bau"), claude("m-b", 1e6, 0, "steuerung")];
+  assert.equal(kostenNeuerSpielbau(rein).length, 2);
+  const gemischt = [claude("m-b", 1e6, 0, "prototyp"), claude("m-b", 1e6, 0, "steuerung"), claude("m-b", 2e6, 0, "bau"), stimme(10)];
+  assert.deepEqual(kostenNeuerSpielbau(gemischt).map((e) => e.phase), ["bau", "stimme"]);
+  assert.deepEqual(kostenNeuerSpielbau([claude("m-b", 1e6, 0, "entwurf")]), []);
+});
+
+test("prognose: Durchschnitt nur aus dem neuen Spielbau, ausgegeben bleibt alles", () => {
+  const sp = [
+    { name: "mathe/m37", eintraege: [claude("m-b", 100e6, 0, "ausbau"), claude("m-b", 20e6, 0, "steuerung"), claude("m-b", 30e6, 0, "bau")] },
+    { name: "mathe/m01", eintraege: [claude("m-b", 10e6, 0, "bau"), claude("m-b", 2e6, 0, "steuerung")] },
+    { name: "mathe/m02", eintraege: [claude("m-b", 50e6, 0, "entwurf")] }, // nur alt: nicht im Durchschnitt
+  ];
+  const p = prognose(sp, 10, PREISE);
+  assert.equal(p.ausgegeben, 212);
+  assert.equal(p.basisSpiele, 2);
+  assert.equal(p.durchschnitt.eur, (30 + 12) / 2);
+  assert.deepEqual(p.spanne, { min: 12, max: 30 });
+  assert.equal(p.rest.mittel, 21 * 7);
+});
+
+test("prognose: nur alte Spiele → kein Durchschnitt", () => {
+  const p = prognose([{ name: "mathe/m02", eintraege: [claude("m-b", 50e6, 0, "entwurf")] }], 10, PREISE);
+  assert.equal(p.durchschnitt, null);
+  assert.equal(p.ausgegeben, 50);
 });

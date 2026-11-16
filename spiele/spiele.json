@@ -19,6 +19,12 @@
       "text": "Zahl tippen, Timo legt sie in die Stellentafel.",
       "beschreibung": "Das Kind tippt das Ergebnis von Aufgaben wie 10 + 4 oder 13 − 10. Timo legt goldenes Material in eine Stellentafel mit Zehnern und Einern, und die Stellenwertkarten schieben sich zur Zahl zusammen. Passt die Zahl nicht, zeigt hohles Material, wie die getippte Zahl wirklich aussieht.",
       "arten": [{ "art": "rechnen", "max": 20, "zehner": true, "stufen": ["kopf"] }],
+      "regal": null },
+    { "id": "zahlenpost", "probe": true, "titel": "Zahlenpost", "thema": "Zahlen hören und schreiben", "kategorie": "mathe",
+      "symbol": "mathe/m06-zahlenpost/symbol.svg", "bild": "mathe/m06-zahlenpost/spielbild.webp", "datei": "mathe/m06-zahlenpost/index.html",
+      "text": "Zahl hören, tippen, Timo bringt den Brief zum Haus.",
+      "beschreibung": "Das Kind hört ein Zahlwort und tippt die Ziffern auf einen Umschlag. Timo rollt die Häuserreihe entlang zu genau dieser Hausnummer; in der Tür steht die Zahl als Goldmaterial. Ein Zahlendreher führt zu einem anderen Haus, und man sieht, wie weit es weg ist.",
+      "arten": [{ "art": "zahlwort", "zahlen": [0, 20], "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null }
   ]
 }

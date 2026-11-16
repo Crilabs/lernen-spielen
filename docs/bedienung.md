@@ -34,7 +34,8 @@ von keinem Spiel neu erfunden.
   Bedienelemente) bleibt im sicheren Feld 192 × 108 rem, mittig. Der Rand gehört der Stimmungsebene
   (Szene läuft weiter). Bedienelemente kleben am sicheren Feld, nicht am Bildschirmrand.
 - **Ränder:** 2,4 rem Abstand von jeder Kante des sicheren Felds. Auf Geräten mit Aussparung kommt
-  `env(safe-area-inset-*)` dazu.
+  `env(safe-area-inset-*)` dazu. Die Übersichtsseiten (Können, Regal, Wissen, Geschichte) haben nach der Designsprache
+  (2026-11-15) 9,6 rem Außenrand (`SEITE.rand`, `--ls-seite-rand`); Spiele behalten 2,4 rem.
 
 ---------------------------------------------------------------------------------------------------
 ## 3. Feste Plätze (Christian)
@@ -65,9 +66,9 @@ von keinem Spiel neu erfunden.
 | unten Mitte | **Bildschirm-Tastatur**, nur in Spielen mit Eingabe | – |
 | Pause/Rundenende, unten Mitte | **Alle Spiele** und **Weiter**, nebeneinander, gleich groß | „Alle Spiele“ / „Weiter“ |
 
-- **Kopfleiste (Christian):** ein Band über die ganze Breite des sicheren Felds, 15,8 rem hoch, in der
-  Tönung des Fachs (Rahmen-Schicht, `grundsaetze-bilder.md` 6.2). Ohne Fachfarbe (Sachthemen, Startseite
-  von Welten) ist das Band Nebel, ohne Kachel, der Name steht in Tinte. Das Spielfeld beginnt darunter:
+- **Kopfleiste (Christian, Designsprache 2026-11-15):** ein ruhiger Grund in Nebel über die ganze Breite des sicheren
+  Felds, 15,8 rem hoch – kein Band in der Fachtönung mehr. Die Fachfarbe erscheint nur klein in der flachen Fachkachel
+  (ohne Kontur). Der Spielname steht in Inter in Tinte, das Thema darunter leiser in Andika. Ohne Fach keine Kachel. Das Spielfeld beginnt darunter:
   `<ls-leiste>` setzt `--ls-leiste-hoehe` am `<html>` (15,8 rem = `MASSE.leiste`, plus
   `env(safe-area-inset-top)`); das Spiel legt seine Fläche mit `top: var(--ls-leiste-hoehe)` darunter.
 - Das Thema kommt aus der Lernsteuerung (`thema` in `spiele.json` bzw. das Thema der Runde) und darf sich
@@ -78,14 +79,16 @@ von keinem Spiel neu erfunden.
   Noch-mal-hören-Knopf sitzt immer rechts in der Blase, weil er zu genau diesem Text gehört.
   Welche Figuren es gibt, was sie können und wie der Erzähler über sie spricht, steht in
   [`docs/figuren.md`](figuren.md).
-- Die Startseite hat ihre eigene Ordnung (Fächer, Spiele, Zahnrad für Erwachsene). Diese Datei regelt
-  die Spielseiten.
+- Die Übersichtsseiten haben ihre eigene Ordnung (Designsprache 2026-11-15): oben links die Reiter „Können“
+  (Startseite) und „Wissen“ (Bibliothek), oben rechts Ton (und auf der Startseite das Zahnrad für Erwachsene),
+  `<ls-kopf>`. Diese Datei regelt die Spielseiten.
 
 ---------------------------------------------------------------------------------------------------
 ## 4. Größen
 
 | Element | Größe | Bemerkung |
 |---|---|---|
+| Nebenknopf auf Übersichtsseiten (`groesse="seite"`) | sichtbar 8,4 rem, Tippfläche 11 rem | Designsprache 2026-11-15; K4 bleibt über die Tippfläche erfüllt |
 | Nebenknopf (Haus, Ton, Hilfe) | 11 rem rund | am Kiosk (1080 px, 21,5″) ≈ 2,9 cm, auf 10″-Tablet (800 px) ≈ 2,3 cm; Mindestmaß K4: 2 × 2 cm **(Annahme, am Tablet prüfen)** |
 | Hauptknopf (z. B. Fertig, wenn das Kind selbst sagt, dass es fertig ist) | Pille, 11 rem hoch, mindestens 24 rem breit | Symbol und Wort; Wort 4 rem fett. Kein Weiter zwischen Aufgaben (7.1) |
 | Pausenknöpfe (Alle Spiele, Weiter) | Pille, 14 rem hoch (`groesse="gross"`), beide 50 rem breit | gleich groß und gleich gestaltet: Nebenknöpfe aus Papier, keiner ist Hauptknopf (N6); Wort 5 rem fett |
@@ -96,7 +99,7 @@ von keinem Spiel neu erfunden.
 | Schatten drückbarer Teile | 0,6 rem, beim Drücken 0,3 rem | Knöpfe und Teile (`.teil`); Ausnahme Tasten, s. nächste Zeile |
 | Taste der Bildschirm-Tastatur | mindestens 9 × 8,6 rem; Schatten 0,8 rem, sinkt beim Drücken 0,7 rem ein | Ausnahme (Annahme): beim schnellen Tippen soll jeder Anschlag deutlich zu sehen sein, daher tiefer als bei Knöpfen (`TASTE` in `tastatur.js`) |
 | Abstand zwischen Tippzielen | mindestens 2 rem | |
-| Schrift im Spiel | mindestens 3,2 rem, Andika | Kontur und Schrift `#3B2A6B` |
+| Schrift im Spiel | mindestens 3,2 rem, Andika | Kontur und Schrift `#3B2A6B`; Spielname und Wörter auf Knöpfen in Inter (Oberfläche, D6) |
 
 Begründung Hauptknopf (Annahme): Die Pille ist so hoch wie ein Nebenknopf, damit sie in derselben Zeile
 stehen kann; Breite und Wort machen sie zum Hauptknopf, nicht die Höhe. Die alte runde Hauptaktion mit
@@ -212,8 +215,10 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 
 | Baustein | Aufgabe | Schnittstelle (Kurzform) |
 |---|---|---|
-| `<ls-knopf>` | Grundknopf: Neben- oder Hauptknopf, Symbol, Name, Einsinken, Mindestgröße, Name beim ersten Tippen | Attribute `art="neben\|haupt"` (Gestalt, Vorgabe neben), `symbol`, `name`, `wort` (sichtbares Wort, macht den Knopf zur Pille), `groesse="bedien\|gross\|klein"` (nur die Größe: rund 11/16/8 rem, Pille 11 rem, mit `gross` 14 rem, mit `klein` 8 rem und Tippfläche 9 rem – nur im Elternbereich), `gespiegelt`, `achtung` (Beere samt Schatten, nur Elternbereich: Löschen, Zurücksetzen), `stumm`, `spiel`; Ereignis `click` |
-| `<ls-leiste>` | Kopfleiste: Haus, Fachkachel, Spielname, Thema, Ton | Attribute `spiel`, `fach`, `titel`, `thema` (zur Laufzeit änderbar), `ohne-haus` (nur Startseite); Slot `rechts` (neben Ton, Zahnrad der Startseite); Eigenschaft `ton` (boolean); Ereignisse `ton` (`detail.an`), `bereit`; `await leiste.bereit()` (Versprechen, sobald die Einstellungen geladen sind, auch für späte Aufrufer); setzt `--ls-leiste-hoehe` am Dokument |
+| `<ls-knopf>` | Grundknopf: Neben- oder Hauptknopf, Symbol, Name, Einsinken, Mindestgröße, Name beim ersten Tippen | Attribute `art="neben\|haupt"` (Gestalt, Vorgabe neben), `symbol`, `name`, `wort` (sichtbares Wort, macht den Knopf zur Pille), `groesse="bedien\|gross\|klein\|seite"` (nur die Größe: rund 11/16/8 rem, Pille 11 rem, mit `gross` 14 rem, mit `klein` 8 rem und Tippfläche 9 rem – nur im Elternbereich; `seite` sichtbar 8,4 rem, Tippfläche 11 rem – Übersichtsseiten), `gespiegelt`, `hinten` (Symbol hinter dem Wort, z. B. Weiter →), `achtung` (Beere samt Schatten, nur Elternbereich: Löschen, Zurücksetzen), `stumm`, `spiel`; Ereignis `click` |
+| `<ls-kopf>` (`kopf.js`) | Kopf der Übersichtsseiten (Designsprache): Reiter „Können“ (`index.html`) und „Wissen“ (`bibliothek.html`), der aktive mit Strich in Sonne (`aria-current="page"`); rechts Ton (`groesse="seite"`) und Slot `rechts` (Zahnrad); setzt `--ls-leiste-hoehe` (14 rem) | Attribute `reiter="koennen\|wissen"`, `spiel`; Eigenschaft `ton`, Ereignisse `ton`, `bereit`; `await kopf.bereit()` – wie `<ls-leiste>` |
+| `<ls-muster>` (`muster.js`) | Grundmuster im Ton des Grundes, fest hinter allem, ohne Zeiger | Attribut `art="huegel\|wellen\|blaetter\|ringe"`; `musterSvg(art)` ohne DOM |
+| `<ls-leiste>` | Kopfleiste: Haus, Fachkachel, Spielname, Thema, Ton; mit `nur-ton` nur der Ton-Knopf oben rechts (Geschichte) | Attribute `spiel`, `fach`, `titel`, `thema` (zur Laufzeit änderbar), `ohne-haus` (nur Startseite); Slot `rechts` (neben Ton, Zahnrad der Startseite); Eigenschaft `ton` (boolean); Ereignisse `ton` (`detail.an`), `bereit`; `await leiste.bereit()` (Versprechen, sobald die Einstellungen geladen sind, auch für späte Aufrufer); setzt `--ls-leiste-hoehe` am Dokument |
 | `<ls-blase>` | Sprechblase des Erzählers mit Noch-mal-hören, ohne Zipfel; mit `ohne-text` keine sichtbare Blase, nur der runde Knopf „Noch mal hören“ (bedien), sichtbar erst, wenn es einen Satz gibt (Christian, 2026-11-15) | Attribute `spiel` (sonst die Leiste der Seite), `ohne-text`; `sage(text, { sprechen = true, tempo, zeigen })` spricht und merkt sich den Text, mit `zeigen` (nur bei `ohne-text`) erscheint der Satz kurz als Blase neben dem Knopf und blendet sich nach dem Sprechen, frühestens nach `lesezeit(text)`, von selbst aus; Eigenschaft `text`; Host-Attribute `hat-text`, `zeigt` |
 | `<ls-hilfe>` | Hilfe-Knopf unten rechts | Attribut `spiel` (sonst die Leiste der Seite); `leuchte()` (Sonnenring, einmal ~1 s); Ereignis `hilfe` |
 | `<ls-pause>` | Pause/Rundenende mit Alle Spiele und Weiter; optional in derselben Reihe nach den beiden das ruhige Angebot „Mit echten Dingen“ (kleine Papier-Pille, 11 rem, Hand und Wort, kleiner als die beiden Pausenknöpfe; auf schmalen Bildschirmen wie 4:3 allein in einer Reihe darunter, die beiden bleiben mittig; öffnet die Karte zum Thema der Runde in der Pause; `docs/mit-echten-dingen.md`) | Attribute `spiel` (sonst die Leiste der Seite), `offen` (gesetzt, solange sie zu sehen ist; setzt `zeige()`); Inhalt (Bild, Sachmoment) per Slot; `await zeige({ echteDinge })` → `"weiter"` (`echteDinge = { thema, fach, titel, text }` des Themas der Runde; ohne: kein Angebot) |
@@ -223,7 +228,8 @@ Speicher). Das Spiel setzt sie ein und hört auf ihre Ereignisse; es baut diese 
 | `ziehbar()` (`ziehen.js`) | Ziehen mit Tipp-Alternative (§5): ziehen ab 1 rem Bewegung, sonst antippen → angehoben mit Sonnenring → Ziel antippen; Enter/Leertaste auf Teil und Ziel | `ziehbar(teil, { ziele, beimAblegen(teil, ziel) })` → `loesen()`; das Spiel ruft `setze(teil, ziel, { vor })` oder `zurueck(teil)` (0,3 s, bei wenig Bewegung sofort); die Reihenfolge im Ziel bestimmt das Spiel über `vor` (Knoten, vor den das Teil kommt; ohne `vor` ans Ende); Escape setzt ab, auch vom Ziel aus; Ziele heißen für Vorleser nach ihrem Attribut `name`, sonst „Ablage“; Klassen `angehoben`, `gezogen`, `gedrueckt`, an Zielen `ziel-frei`, `ziel-ueber`; Zustand ohne DOM in `ziehen-zustand.js` |
 | `<ls-perlenstab>` (`perlenstab.js`) | Lernzeichen Perlenstäbchen (grundsaetze-bilder §4 M1–M3, M7): Montessori-Farbe, jede Perle einzeln, Lücke und Marke nach der fünften, Länge proportional; flach (ziehbar nur mit `class="teil"`) | Attribute `wert` (1–10; ungültig oder fehlend: nichts gezeichnet, einmal ins Protokoll), `ausrichtung="waagrecht\|senkrecht"`, `ziffer` (Ziffer davor bzw. darüber), `verdeckt` (Tuch in Nebel mit Fünfermarke, Ziffer darauf); Dicke per CSS am Host: waagrecht `height`, senkrecht `width` (Vorgabe 7 rem), mit `verdeckt` und `ziffer` mindestens 6 rem; als Teil (`class="teil"`) gibt `seite.css` das Grundmaß vor (`ls-perlenstab.teil`: 11 rem hoch, Polster 2 rem, darin der Stab); Name „Perlenstab 7“ als aria-label; Geometrie ohne DOM in `perlen-geometrie.js` |
 | `<ls-perlenkette>` (`perlenkette.js`) | Lernzeichen Perlenkette fürs Einmaleins (§4 M1–M3, M7; Christian 2026-11-14, M37): zehn Stäbchen zu je n Perlen in zwei Reihen zu fünf, je Stäbchen wie `<ls-perlenstab>`, dazwischen ein Glied; unter dem Ende jedes Stäbchens sein Pfeilchen mit k · n; flach | Attribute `reihe`, `pfeile`, `leer`, `markiert` (Sonnenring am Pfeilchen), `hell` (Sonnenring um Stäbchen), `ring`, `frage` (Pfeilchen mit „?“), `hohl` (getippte Zahl an ihrem Ort: hohles Pfeilchen über der Reihe, zeigt von oben auf seine Perle, wackelt einmal), `verdeckt`, `luft` (Freiraum über jeder Reihe für eine Figur, die auf der Kette steht; dann ein Startplatz vor dem ersten Stäbchen), `bis` (nur Stäbchen 1 … bis sichtbar, neue rollen aus; Stufe Kopf), `kurz` (Kurzkette, Vorratsliste: so viele gleich lange Stäbe in zwei Reihen zu fünf, ein Stab = ein Fünftel von `breite` für jedes n, also gemeinsamer Maßstab aller Zeilen mit derselben `breite`; Lücke mehrere Konturen breit), `breite`, `hoehe`, `perle` (Pfeilchen wachsen mit großen Perlen mit); `huepfe(bis, { wert, schritt })` (Zählpfeilchen, Folge einer Eingabe), `zeigerWeg()`, `stabPunkt(k)`, `standPunkt(k)` (wo eine Figur auf Stäbchen k steht, 0 = Startplatz), `pfeilPunkt(k)`, `hohlPunkt(zahl)`, `leuchte(k)`, `einrasten(k)`; Geometrie ohne DOM `perlenkette()` in `perlen-geometrie.js` |
-| `<ls-geschichte>` (`geschichte.js`) | Abspieler für Geschichten (`docs/geschichten.md` §4): links das Bild quadratisch (Foto oder Szene aus `szene.js`), rechts der Text in Andika, Zurück (Nebenknopf), Vorlesen (Nebenknopf), Weiter (Sonne, rund 16 rem wie in der Einführung), auf der letzten Seite Fertig (Hauptknopf); Punkte ohne Zahl | Attribut `src`; Eigenschaften `seite`, `seiten`, Versprechen `geladen`; Ereignis `fertig` |
+| `<ls-goldmaterial>` (`goldmaterial.js`) | Lernzeichen Goldenes Perlenmaterial (§4 M4; M06 Zahlenpost): eine Zahl von 0 bis 99 als Zehnerstangen (senkrecht, wie `<ls-perlenstab>` mit Marke nach der fünften Perle) und einzelne Perlen in Säulen zu fünf; flach, keine Bewegung | Attribut `zahl` (0 bis 99; 0 zeichnet nichts, ungültig einmal ins Protokoll); Größe per CSS `height` am Host (Vorgabe 10 rem), die Breite folgt; `aria-label` wie „1 Zehnerstange und 7 Perlen“; Geometrie ohne DOM `gold()` in `gold-geometrie.js` |
+| `<ls-geschichte>` (`geschichte.js`) | Abspieler für Geschichten (`docs/geschichten.md` §4), geteilt nach der Designsprache: links das Bild randlos (Foto oder Szene aus `szene.js` vor der Kulisse), rechts auf Papier Titel (Inter) und Text (Andika; Kurzgeschichte ein Satz je Zeile, Sachbuch Absätze); oben rechts Vorlesen (Pille), unten Zurück, Punkte ohne Zahl (aktuelle Seite als Sonnenpunkt) und Weiter (Hauptknopf-Pille, Pfeil hinter dem Wort), auf der letzten Seite Fertig | Attribut `src`; Eigenschaften `seite`, `seiten`, Versprechen `geladen`; Ereignis `fertig` |
 | `<ls-wortart>` (`wortart.js`) | Lernzeichen Wortart (§5 D1): Nomen, Artikel, Adjektiv als Dreiecke in drei Größen, Verb als Kreis, gemeinsame Grundlinie | Attribut `art="nomen\|artikel\|adjektiv\|verb"` (unbekannt oder fehlend: nichts gezeichnet, einmal ins Protokoll); Größe per `height` am Host (Vorgabe 8 rem, quadratisch); Name („Nomen“ …) als aria-label |
 
 - **Aussehen über CSS-Variablen:** `--ls-tinte`, `--ls-tinte-weich`, `--ls-papier`, `--ls-nebel`,

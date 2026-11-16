@@ -2,7 +2,12 @@
 
 ## Unveröffentlicht
 
-- **Bibliothek:** Ein Knopf auf der Startseite führt in die Bibliothek mit Räumen, Regalen und Büchern. Dort stehen Sachbücher mit Fotos, darunter fünf Tierbücher (Hund, Biene, Wal, Elefant, Dinosaurier), und kurze Geschichten. Vorlesen oder selbst lesen.
+## v1.1.1
+
+Neues Aussehen, eine Bibliothek mit Sachbüchern und der Kettenhüpfer neu gebaut.
+
+- **Neues Aussehen:** ruhige Seiten mit großem Lernmaterial. Oben die Reiter „Können“ und „Wissen“; Können zeigt die Spiele auf Plakaten, Wissen führt in die Bibliothek. Geschichten zeigen das Bild links und den Text rechts.
+- **Bibliothek:** Der Reiter „Wissen“ führt in die Bibliothek mit Räumen, Regalen und Büchern. Dort stehen Sachbücher mit Fotos, darunter fünf Tierbücher (Hund, Biene, Wal, Elefant, Dinosaurier), und kurze Geschichten. Vorlesen oder selbst lesen.
 - **Sachbuch „Mia, die kleine Wildkatze“:** sechs Kapitel mit Inhaltsverzeichnis; die App merkt sich, wo das Kind zuletzt gelesen hat.
 - **Kettenhüpfer neu:** Lena hüpft über eine mit Kreide auf die Straße gemalte Perlenkette. Jedes Spiel beginnt jetzt mit seiner Einführung; weiter geht es erst, wenn das Kind tippt.
 - **Geschichten ohne Stufen:** Es gibt eine Geschichte für alle Kinder. Die Einstellung Ruhig, Sanft, Abenteuer im Elternbereich entfällt; dafür zeigt der Reiter „Sachthemen“ die Themen mit ihren Büchern und Spielen.

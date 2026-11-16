@@ -99,7 +99,7 @@ Figuren, Wortbilder und Bedienzeichen als eine Familie zusammen.
 | D3 | **Vokale beim Wortbauen dezent markiert,** ausblendbar; beim Lesen fertiger Texte ohne Markierung. | [P]/[b] |
 | D4 | **Farbige Silben nicht als Standard.** Zuschaltbar, nur für mehrsilbige Wörter. | [b] Brügelmann 2025 (Befunde widersprüchlich, Effekte um 0,1) |
 | D5 | **Beim Erlesen kommt das Bild danach.** Soll ein Wort gelesen werden, verrät kein Bild es vorher; das Bild bestätigt. Bei Hör-, Anlaut- und Zuordnungsaufgaben sind Bilder richtig. | [b] Samuels 1967, Torcasio & Sweller 2010 |
-| D6 | **Schrift groß und weit gesetzt,** Andika in den Richtformen der Grundschule; Größe und Abstand einstellbar. | [B] Hughes & Wilkins 2000; [b] Zorzi 2012 |
+| D6 | **Schrift groß und weit gesetzt,** Andika in den Richtformen der Grundschule für alles, was das Kind liest oder lernt (Lesetext, Lernfeld, Tasten, Lernzeichen, Sprechblase); Größe und Abstand einstellbar. Die Oberfläche (Titel, Namen, Wörter auf Knöpfen, Navigation) steht in Inter mit festen Zeichenvarianten (einfaches a, l mit Bogen, I mit Querstrichen; Designsprache 2026-11-15, Christian). | [B] Hughes & Wilkins 2000; [b] Zorzi 2012 |
 | D7 | **Schreiben statt Nachspuren.** Strichfolge vorführen, dann frei schreiben lassen, tolerant erkennen, Laut dazu sprechen. Sandpapierbuchstaben als Mach-mit-Moment im Spiel (`grundsaetze.md` L13). | [b] Longcamp 2005, Mayer 2020, James & Engelhardt 2012 |
 | D8 | **Buchstaben tragen keine Einzelfarben.** Kein Farbcode je Buchstabe (auch kein Regenbogen nach dem Alphabet): 30 willkürliche Farbpaare muss das Kind erst lernen, benachbarte Töne sind kaum zu unterscheiden, und die Vokalmarkierung (D3) wäre nicht mehr möglich. Auf Tastaturen helfen **feste Plätze** beim Finden: Das ganze Alphabet steht immer an derselben Stelle, Tasten, die gerade nicht gebraucht werden, sind blass statt zu verschwinden. | [B] Farbe als Suchmerkmal nur bei bekannter Zielfarbe (Treisman, Wolfe; an Erwachsenen); feste Plätze [P]; Regel [E] |
 
@@ -254,7 +254,13 @@ Lagune `#2EC4B6`, Kornblume `#6C8CFF`, Orchidee `#C77DFF`, Kirschblüte `#FF9EC7
   Schatten im Tief-Ton und sinken beim Drücken ein: Hauptknopf `#24184A`, Nebenknopf und Taste Tinte weich
   `#6B5C96`, Fachkachel der Startseite im Fach-Tief. Linie und Naht sind nie Schatten. Alles Flache ist zum
   Ansehen.
-- **Eine Kontur für alles:** Tinte, Strich 3–4, runde Enden.
+- **Eine Kontur für alles:** Tinte, Strich 3–4, runde Enden; an Bedienelementen nur an dem, was man drücken kann, und
+  an Lernzeichen (Designsprache 2026-11-15). Flache Flächen (Fachkachel, Detailkarte, Papier der Geschichte) haben keine.
+- **Ruhige Bühne, großes Material (Designsprache 2026-11-15):** Ein Bildschirm hat einen Grund und höchstens eine
+  Fachfarbe, und die nur klein (Punkt, Kachel, Plakatschatten). Jeder Bereich hat ein Grundmuster im Ton des Grundes
+  (Hügel = Können, Wellen = Wissen, Blätter = ein Raum, Jahresringe = Regal; `rahmen/muster.js`), an einem Rand, höchstens
+  ein Drittel, nie hinter Text oder Lernfeld. Spiele erscheinen als Plakate (Bild oben, Papier mit Name und Thema).
+  Titel und Text stehen linksbündig.
 - **Verläufe nur in der Welt** (Himmel, Wasser, Licht); Lernzeichen immer flach, ohne Glanz.
 - **Große, weiche Formen,** viel Papier um das Lernfeld.
 - **Nacht für Pausen** mit Sonne und Papier, ohne Ablaufbalken.
