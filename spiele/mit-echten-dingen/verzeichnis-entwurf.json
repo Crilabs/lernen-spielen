@@ -89,6 +89,23 @@
    "entwurf": false,
    "datei": "mathe/dreierreihe.md"
   },
+  "dreistellige-zahlen-lesen": {
+   "fach": "mathe",
+   "name": "Dreistellige Zahlen lesen und schreiben",
+   "titel": "Hunderter, Zehner, Einer – lesen und schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Ein Rezept finden"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Drei Kissen, drei Stellen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/dreistellige-zahlen-lesen.md"
+  },
   "einmaleins-gemischt": {
    "fach": "mathe",
    "name": "Einmaleins gemischt",
@@ -445,6 +462,44 @@
    "entwurf": false,
    "datei": "mathe/vorwaerts-zaehlen.md"
   },
+  "zahlen-bis-20-schreiben": {
+   "fach": "mathe",
+   "name": "Zahlen 11 bis 20 schreiben",
+   "titel": "Erst den Zehner schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Einkaufszettel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zahlen in die Luft schreiben"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zahlen-bis-20-schreiben.md"
+  },
+  "zahlwort-ziffern-bis-100": {
+   "fach": "mathe",
+   "name": "Zahlen bis 100 hören und schreiben",
+   "titel": "Zahlwort hören, Zahl schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Adressen für Briefe"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Links tippen, rechts tippen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Hausnummern lesen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zahlwort-ziffern-bis-100.md"
+  },
   "zehn-plus": {
    "fach": "mathe",
    "name": "Zehn und noch was",
@@ -684,6 +739,27 @@
    ],
    "entwurf": false,
    "datei": "mathe/zerlegen.md"
+  },
+  "ziffern-lesen-bis-10": {
+   "fach": "mathe",
+   "name": "Ziffern 0 bis 10 lesen",
+   "titel": "Die richtige Ziffer finden",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eine Nummer wählen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Ziffern im Haus suchen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Hausnummern"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/ziffern-lesen-bis-10.md"
   },
   "zweierreihe": {
    "fach": "mathe",

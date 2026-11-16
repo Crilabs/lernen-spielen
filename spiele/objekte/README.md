@@ -54,6 +54,11 @@ Regal-Bilder (`regal` in `spiele.json`) müssen hier liegen.
 - `brotdose.js` – offene Brotdose aus Kunststoff mit runden Ecken, Deckel hinten aufgeklappt, darin ein Häufchen aus zehn Weintrauben (ohne Schrift und Ziffer).
 - `kleiderbuegel.js` – Kleiderbügel aus Holz mit Haken, an der Stange zehn bunte Wäscheklammern (ein Zehner; ohne Schrift und Ziffer).
 - `buch.js` – aufgeschlagenes Buch mit Wellenlinien statt Text, oben ein Lesezeichen aus Papier (ohne Schrift und Ziffer).
+- `einkaufszettel.js` – schmaler, hoher Einkaufszettel (oben gewellt abgerissen) mit fünf Zeilen Bleistift-Wellen, vor jeder ein kurzer Strich, daneben schräg eine Laugenbrezel mit Salz (ohne Schrift und Ziffer).
+- `tastentelefon.js` – Mobilteil eines schnurlosen Haustelefons, leicht schräg: leeres Display mit Glanz, zwei Ruftasten, Tastenfeld 3 × 4 aus runden Tasten (ohne Schrift und Ziffer).
+- `briefkasten.js` – eckiger Wand-Briefkasten mit Dachkante, aus dem Einwurfschlitz schaut ein Briefumschlag halb heraus; leeres Namensschild und Schloss (ohne Schrift und Ziffer).
+- `landkarte.js` – aufgefaltete Papier-Landkarte mit vier Feldern in Zickzack-Faltung: grüne Flächen, Fluss, Straße, Orte als Punkte in drei Größen (ohne Schrift, Ziffer und Legende).
+- `kochbuch.js` – geschlossenes, dickes Kochbuch schräg liegend mit Kochtopf als Bild auf dem Einband, Seitenschnitt mit vielen Seiten, oben drei Papierzettel als Lesezeichen (anders als das aufgeschlagene `buch`; ohne Schrift und Ziffer).
 
 Eine Datei je Art, angemeldet beim Import; Name der Datei = Name der Art (so lädt `<ls-objekt>` eine unbekannte Art
 selbst nach). Ansehen: `spiele/rahmen/vorschau.html?objekte`. Prüfen: `tests/objekte.test.mjs`.
