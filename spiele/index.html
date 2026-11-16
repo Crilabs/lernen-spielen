@@ -51,19 +51,21 @@ body { -webkit-user-select: none; user-select: none; }
 .fach-kopf:active .knopf { transform: translateY(0.3rem); box-shadow: 0 0.3rem 0 var(--fach-tief); }
 .fach-kopf:focus-visible { outline: 0.5rem solid var(--ls-tinte); outline-offset: 0.8rem; border-radius: 2rem; }
 
-/* Plakat: oben das Spielbild, unten Papier mit Name und Thema; Schatten im Tief-Ton des Fachs. */
-.start .karten { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4.4rem 3.9rem; }
-.start .karten .karte { width: auto; border-radius: var(--ls-radius-plakat); box-shadow: 0 0.9rem 0 var(--fach-tief); }
+/* Plakat: oben das Spielbild, unten Papier mit Name und Thema; Schatten im Tief-Ton des Fachs.
+   Fünf je Reihe in jedem Format (höchstens 5 Spiele je Fach = eine Reihe). Die Schrift wächst mit der Plakatbreite
+   (Container-Einheiten), damit der Name auch bei 4:3 ganz auf das Plakat passt. */
+.start .karten { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3.4rem 2.8rem; }
+.start .karten .karte { width: auto; container-type: inline-size; border-radius: var(--ls-radius-teil); box-shadow: 0 0.7rem 0 var(--fach-tief); }
 .start .karten .karte .bild { height: auto; aspect-ratio: 16 / 9; }
-.start .karten .karte .unten { min-height: 0; padding: 3.4rem 3.6rem 4.2rem; }
+.start .karten .karte .unten { min-height: 0; padding: 2.2rem 2.2rem 2.6rem; }
 .start .karten .karte b { font-family: var(--ls-schrift-oberflaeche); font-feature-settings: var(--ls-schrift-merkmale);
-  font-size: 4.5rem; font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; }
-.start .karten .karte .thema { margin-top: 1.2rem; font-size: 2.8rem; }
-.start .karten .karte:active { transform: translateY(0.45rem); box-shadow: 0 0.45rem 0 var(--fach-tief); }
+  font-size: min(3.4rem, 11.5cqi); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; }
+.start .karten .karte .thema { margin-top: 0.8rem; font-size: min(2.4rem, 8.5cqi); }
+.start .karten .karte:active { transform: translateY(0.35rem); box-shadow: 0 0.35rem 0 var(--fach-tief); }
 /* Sonnenring nur als Fokus (hier bist du), nie als Empfehlung. */
-.start .karten .karte:focus-visible { outline: 1rem solid var(--ls-sonne); outline-offset: 0.8rem; }
-.start .karten .karte.echt::after { border-radius: calc(var(--ls-radius-plakat) - 1rem); }
-.start .karten .karte.echt .bild img { width: 12rem; height: 12rem; }
+.start .karten .karte:focus-visible { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0.6rem; }
+.start .karten .karte.echt::after { border-radius: calc(var(--ls-radius-teil) - 1rem); }
+.start .karten .karte.echt .bild img { width: 9rem; height: 9rem; }
 
 /* --- Unten: Zuletzt gelernt und Was ich schon kann ---------------------------------------------- */
 .unten { display: flex; align-items: flex-end; gap: 3.6rem; padding: 1.6rem var(--ls-seite-rand) 4.2rem; min-width: 0; }
@@ -107,9 +109,6 @@ body { -webkit-user-select: none; user-select: none; }
 .zahnrad.haelt svg { opacity: 1; }
 .zahnrad.haelt circle { stroke-dashoffset: 0; transition: stroke-dashoffset var(--halten) linear; }
 
-@media (max-aspect-ratio: 3/2) {
-  .start .karten { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 @media (max-aspect-ratio: 4/3) {
   .fach-kopf b { font-size: 8rem; }
   .zuletzt .name { font-size: 2.5rem; }
