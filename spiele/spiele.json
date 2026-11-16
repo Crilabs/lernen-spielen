@@ -25,6 +25,12 @@
       "text": "Zahl hören, tippen, Timo bringt den Brief zum Haus.",
       "beschreibung": "Das Kind hört ein Zahlwort und tippt die Ziffern auf einen Umschlag. Timo rollt die Häuserreihe entlang zu genau dieser Hausnummer; in der Tür steht die Zahl als Perlenstäbe (goldene Zehnerstäbe, die Einer als farbiges Stäbchen). Ein Zahlendreher führt zu einem anderen Haus, und man sieht, wie weit es weg ist.",
       "arten": [{ "art": "zahlwort", "zahlen": [0, 20], "stufen": ["material", "vorstellung", "kopf"] }],
+      "regal": null },
+    { "id": "artikelwand", "titel": "Werkzeugwand", "thema": "der, die, das", "kategorie": "grammatik",
+      "symbol": "grammatik/g09-der-die-das-artikel/symbol.svg", "datei": "grammatik/g09-der-die-das-artikel/index.html",
+      "text": "Der, die oder das an das Wort legen, Ela hängt das Werkzeug auf.",
+      "beschreibung": "Das Kind legt ein Artikelplättchen der, die oder das an ein Nomen wie Hammer, Säge oder Seil. Passt es, sagt der Erzähler das Paar, und Ela hängt das Werkzeug in seinen Umriss an der Werkzeugwand; das Wort kommt auf das Schild darunter. Passt es nicht, gleitet das Plättchen zurück, und auf der Rückseite des Schilds steht als Hilfe der richtige Artikel.",
+      "arten": [{ "art": "artikel", "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null }
   ]
 }

@@ -11,6 +11,10 @@
 //              Nichts darin gehört einem Spiel: Kette (M37), Punktefeld (M36) und Tüten (M35) lesen dieselben daten.
 //   zahlwort   "zahl:17"      daten { n }   (Zahlwort hören, Ziffern schreiben; Zahlenpost M06)
 //              Spezifikation { art: "zahlwort", von, bis } (alle Zahlen von bis bis, 0 bis 100).
+//   artikel    "artikel:hammer"   daten { wort: "Hammer", artikel: "der", bild: "hammer" }   (Artikel zum Nomen; Werkzeugwand G09)
+//              Spezifikation { art: "artikel", wortschatz: "werkzeug" } (Wörter in spiele/woerter/artikel.js).
+
+import { WORTSCHAETZE, wortMit } from "./woerter/artikel.js";
 
 export const ZIEL_MS = {
   zerlegung: 8000,
@@ -18,6 +22,7 @@ export const ZIEL_MS = {
   menge: 4000,
   mal: 8000, // Annahme (Entwurf M37): Abruf einer Einmaleinsaufgabe; darüber gilt sie als mühsam gelöst
   zahlwort: 6000, // Annahme (Entwurf M06): Zahlwort hören und zwei Ziffern tippen
+  artikel: 6000, // Annahme (Entwurf G09): Wort ansehen, Plättchen ziehen; darüber gilt der Artikel als nicht sicher
 };
 
 // Einmaleins: die Kernaufgaben (mal 1, 2, 5, 10) und die Reihen, deren Aufgaben alle zur eigenen Reihe gehören.
@@ -41,6 +46,13 @@ export function malAus(key) {
 export function zahlAus(key) {
   const m = /^zahl:(\d+)$/.exec(String(key ?? ""));
   return m && Number(m[1]) <= 100 ? { n: Number(m[1]) } : null;
+}
+
+/** "artikel:hammer" → { id, wort, artikel }, sonst null. */
+export function artikelAus(key) {
+  const m = /^artikel:([a-z]+)$/.exec(String(key ?? ""));
+  const w = m ? wortMit(m[1]) : null;
+  return w ? { id: w.id, wort: w.wort, artikel: w.artikel } : null;
 }
 
 const UEBERGANG_AB = 20; // darüber kein Übertrag der Einer
@@ -128,6 +140,10 @@ export function aufgabenVon(spec) {
       if (!Number.isInteger(von) || !Number.isInteger(bis) || von < 0 || bis > 100 || von > bis) return [];
       return Array.from({ length: bis - von + 1 }, (_, i) => ({ key: `zahl:${von + i}`, art: "zahlwort", daten: { n: von + i } }));
     }
+    case "artikel": {
+      const liste = Object.hasOwn(WORTSCHAETZE, spec.wortschatz) ? WORTSCHAETZE[/** @type {keyof typeof WORTSCHAETZE} */ (spec.wortschatz)] : [];
+      return liste.map((w) => ({ key: `artikel:${w.id}`, art: "artikel", daten: { wort: w.wort, artikel: w.artikel, bild: w.id } }));
+    }
     default:
       return [];
   }
@@ -151,6 +167,7 @@ export function schwierigkeit(aufgabe) {
   if (aufgabe.art === "zerlegung") return Math.min(d.a, d.b);
   if (aufgabe.art === "menge") return d.n;
   if (aufgabe.art === "zahlwort") return zahlwortSchwer(d.n);
+  if (aufgabe.art === "artikel") return wortMit(d.bild)?.schwierigkeit ?? 1;
   // mal: Kernaufgabe 0, eine Gruppe neben einer Kernaufgabe (3, 4, 6, 9) 1, zwei Gruppen daneben (7, 8) 2
   if (aufgabe.art === "mal") return KERN_FAKTOREN.includes(d.a) ? 0 : [7, 8].includes(d.a) ? 2 : 1;
   if (d.op === "plus") return Math.min(d.a, d.b) + ((d.a % 10) + (d.b % 10) >= 10 ? 5 : 0);

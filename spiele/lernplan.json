@@ -9108,7 +9108,7 @@
       "voraussetzungen": [
         "namenwoerter"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "artikel", "wortschatz": "werkzeug" },
       "stufen": [
         "material",
         "vorstellung",

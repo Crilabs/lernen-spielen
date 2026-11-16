@@ -153,3 +153,28 @@ test("zahlwort: Schwierigkeit (Einer zuerst ist schwer), Zielzeit, darstellbar n
   assert.equal(darstellbar(a[43], { art: "zahlwort", zahlen: [0, 20] }), false);
   assert.equal(darstellbar(a[43], { art: "mal" }), false);
 });
+
+// --- artikel (Werkzeugwand G09, Idee docs/spiele/grammatik/g09-der-die-das-artikel.md §8) -------------------
+test("artikel: 18 Werkzeuge, je sechs mit der, die, das; Schlüssel artikel:<id>, daten mit Wort, Artikel, Bild", async () => {
+  const { artikelAus } = await import("../spiele/aufgabenarten.js");
+  const a = aufgabenVon({ art: "artikel", wortschatz: "werkzeug" });
+  assert.equal(a.length, 18);
+  for (const art of ["der", "die", "das"]) assert.equal(a.filter((x) => x.daten.artikel === art).length, 6, art);
+  assert.deepEqual(a[0], { key: "artikel:hammer", art: "artikel", daten: { wort: "Hammer", artikel: "der", bild: "hammer" } });
+  assert.equal(new Set(a.map((x) => x.key)).size, 18);
+  assert.deepEqual(artikelAus("artikel:saege"), { id: "saege", wort: "Säge", artikel: "die" });
+  assert.equal(artikelAus("artikel:gibtesnicht"), null);
+  assert.equal(artikelAus("mal:6*7"), null);
+  assert.deepEqual(aufgabenVon({ art: "artikel", wortschatz: "gibtesnicht" }), []);
+  assert.deepEqual(aufgabenVon({ art: "artikel" }), []);
+});
+test("artikel: Schwierigkeit (Endung verrät den Artikel 0, Verwechsler 2), Zielzeit, darstellbar nur für die eigene Art", () => {
+  const s = (id) => schwierigkeit(aufgabenVon({ art: "artikel", wortschatz: "werkzeug" }).find((x) => x.daten.bild === id));
+  assert.deepEqual(["saege", "schere", "zange", "buerste"].map(s), [0, 0, 0, 0]);
+  assert.deepEqual(["hammer", "seil", "glas"].map(s), [1, 1, 1]);
+  assert.deepEqual(["leiter", "nadel", "messer"].map(s), [2, 2, 2]);
+  assert.equal(ZIEL_MS.artikel, 6000);
+  const a = aufgabenVon({ art: "artikel", wortschatz: "werkzeug" })[0];
+  assert.equal(darstellbar(a, { art: "artikel", stufen: ["material"] }), true);
+  assert.equal(darstellbar(a, { art: "zahlwort", zahlen: [0, 20] }), false);
+});

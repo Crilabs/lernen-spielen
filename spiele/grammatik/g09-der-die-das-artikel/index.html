@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Werkzeugwand</title>
+<!-- G09 Werkzeugwand (Idee docs/spiele/grammatik/g09-der-die-das-artikel.md). Elas Werkraum (raum.js): oben die Lochwand
+     mit Umrissen und leeren Schildern, unten die Werkbank als helle Matte mit der Wortkarte und den drei Plättchen
+     der · die · das, rechts die Kiste. Ela steht links auf ihrem Tritt, nie vor Karte oder Umriss. Leiste, Blase,
+     Hilfe und Pause an ihren festen Plätzen. -->
+<link rel="stylesheet" href="../../rahmen/seite.css">
+<style>
+  /* ===== SPIELWELT: Elas Werkraum. Alles in rem (1rem = Bildhöhe/108). ===== */
+  :root {
+    --ela-hoehe: 46rem;      /* Feld der Figur (320 × 280); die Figur selbst ist etwa 38 rem hoch */
+    --spalte: 40rem;
+    --holz: #C9A06E;
+    --holz-dunkel: #8F6A43;
+    --wandholz: #E3C79C;
+    --umriss: #B9976A;
+    --artikel-blau: #8FD3EE;
+  }
+  .welt { background: linear-gradient(#F6ECDF 0 55rem, #EDDCC0 55rem); }
+  .welt svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* Zwei Spalten: links Ela (und die Blase), rechts oben die Lochwand, darunter die Werkbank mit der Kiste. */
+  .spielflaeche {
+    display: grid;
+    grid-template-columns: var(--spalte) minmax(0, 1fr);
+    grid-template-rows: 35rem minmax(0, 1fr);
+    column-gap: 2.4rem; row-gap: 3rem;
+    padding: 1.6rem 2.4rem 2.4rem;
+  }
+  ls-blase { grid-column: 1; grid-row: 1; align-self: start; justify-self: start; position: relative; z-index: 7; }
+  .fenster { grid-column: 1; grid-row: 1; align-self: end; justify-self: end; width: 24rem; height: 24rem; position: relative; z-index: 1; }
+  .fenster svg { width: 100%; height: 100%; display: block; }
+
+  /* Die Lochwand: Holzbrett mit Lochreihen, sechs Plätze mit Umriss (oder Werkzeug) und Schild darunter. */
+  .wand {
+    grid-column: 2; grid-row: 1; position: relative; z-index: 2;
+    display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 1rem;
+    padding: 1.8rem 1.6rem 1.4rem;
+    background: var(--wandholz);
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
+    background-image: radial-gradient(circle, rgba(143, 106, 67, 0.28) 0.32rem, transparent 0.4rem);
+    background-size: 3.2rem 3.2rem; background-position: 1.1rem 1.1rem;
+  }
+  .fach { display: grid; grid-template-rows: auto auto; justify-items: center; row-gap: 1.2rem; min-width: 0; position: relative; }
+  .haken { position: relative; width: min(21.5rem, 100%); aspect-ratio: 1; }
+  .haken > * { position: absolute; inset: 0; }
+  .haken svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .umriss { transition: opacity 0.2s; }
+  /* Schlichtes Rechteck statt Umriss (Stufen vorstellung und kopf). */
+  .umriss.schlicht { inset: 12% 22%; background: var(--umriss); border-radius: 1.6rem; }
+  .umriss.leer { opacity: 0; }
+  .umriss.puls { animation: puls 0.7s ease-in-out; }
+  @keyframes puls { 50% { transform: scale(1.08); } }
+  .werkzeug { transform-origin: 50% 8%; }
+  .werkzeug[hidden] { display: none; }
+  .werkzeug.schaukelt { animation: schaukel 0.9s ease-in-out; }
+  @keyframes schaukel { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(5deg); } 60% { transform: rotate(-3.5deg); } }
+
+  /* Das Schild: vorn leer oder beschriftet, hinten (Kontrollkarte) der Artikel. Flach, es dreht sich nur. */
+  .schild { position: relative; width: 100%; height: 7.6rem; perspective: 60rem; container-type: inline-size; }
+  .dreher { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .seite {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 1.4rem;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    font-weight: 700; font-size: min(3.5rem, 13cqw); line-height: 1; white-space: nowrap; color: var(--ls-tinte);
+  }
+  .seite.hinten { transform: rotateY(180deg); background: var(--ls-nebel); font-size: min(4.6rem, 17cqw); }
+  .seite ls-wortart { height: 3.2rem; }
+  .schild.leer .vorn { border-style: dashed; border-color: var(--holz-dunkel); background: transparent; }
+
+  /* Die Werkbank (Lernfeld): oben die Wortkarte, darunter die drei Plättchen in fester Reihe. */
+  .bank { grid-column: 2; grid-row: 2; display: grid; grid-template-columns: minmax(0, 1fr) 24rem; column-gap: 3rem; min-height: 0; }
+  .matte { z-index: 3; padding: 2.4rem 3rem 2.2rem; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; align-self: start; }
+  .matte::before { inset: 1rem; }
+  .karte {
+    position: relative; z-index: 1; min-height: 25rem;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.6rem 3rem;
+    padding: 1.6rem 3rem; background: var(--ls-nebel); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius);
+  }
+  .karte .bild { width: 20rem; height: 20rem; flex: 0 0 auto; position: relative; }
+  .karte .bild svg { width: 100%; height: 100%; display: block; }
+  .karte .bild:empty { display: none; }
+  .satz { display: flex; align-items: flex-end; justify-content: center; flex-wrap: wrap; gap: 1.2rem 2rem; }
+  .luecke {
+    position: relative; width: 18rem; height: 13rem; flex: 0 0 auto;
+    border: 0.5rem dashed var(--ls-tinte-weich); border-radius: var(--ls-radius-klein); background: var(--ls-papier);
+  }
+  .luecke.markiert { border-style: solid; }
+  .nomen { display: inline-flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+  .nomen ls-wortart { height: 4.6rem; }
+  .nomen b { font-size: 8rem; line-height: 1; font-weight: 700; }
+  .satz.kopf .nomen b { font-size: 5.6rem; }
+  .satz.kopf .rest { font-size: 5.6rem; font-weight: 700; line-height: 1; padding-bottom: 0.2rem; }
+
+  .reihe { position: relative; z-index: 1; display: flex; justify-content: center; gap: 3rem; }
+  .plaettchen { flex-direction: column; gap: 0.6rem; min-width: 17rem; min-height: 12.5rem; padding: 1rem 2.4rem; }
+  .plaettchen ls-wortart { height: 3.6rem; }
+  .plaettchen b { font-size: 6.4rem; line-height: 1; }
+  .plaettchen.verborgen { visibility: hidden; }
+  .plaettchen.klingt { background: #FFF1B8; }
+  /* Das eingerastete Plättchen in der Lücke: flach (kein Knopf, kein Schatten). */
+  .eingerastet {
+    position: absolute; inset: -0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
+    font-weight: 700; color: var(--ls-tinte);
+  }
+  .eingerastet ls-wortart { height: 3.6rem; }
+  .eingerastet b { font-size: 6.4rem; line-height: 1; }
+
+  /* Die Kiste: Holz, das nächste Werkzeug rutscht aus ihr auf die Werkbank. */
+  .kiste { align-self: start; margin-top: 4rem; z-index: 2; position: relative; }
+  .kiste svg { width: 100%; display: block; }
+
+  /* Fliegende Dinge (Werkzeug, Karte): eigene Ebene über allem Bild, nehmen keine Tipps. */
+  .flug { position: absolute; left: 0; top: 0; z-index: 9; will-change: transform; pointer-events: none; }
+
+  /* Ela und ihr Tritt: über der Welt, nehmen keine Tipps. */
+  .ela { position: absolute; left: 0; bottom: 3rem; width: calc(var(--ela-hoehe) * 320 / 280); height: var(--ela-hoehe); z-index: 5; pointer-events: none; margin-left: calc((var(--spalte) + 4.8rem - var(--ela-hoehe) * 320 / 280) / 2); }
+  .ela .koerper { position: absolute; inset: 0; transform-origin: 50% 90.7%; will-change: transform; }
+  .ela svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .tritt { position: absolute; left: 30%; width: 40%; top: 90.7%; height: 6.4rem; z-index: -1; }
+  .tritt svg { width: 100%; height: 100%; }
+
+  /* Schmale Bildschirme (4:3). */
+  @media (max-aspect-ratio: 3/2) {
+    :root { --ela-hoehe: 38rem; --spalte: 31rem; }
+    .fenster { width: 18rem; height: 20rem; }
+    .karte .bild { width: 16rem; height: 16rem; }
+    .luecke { width: 15rem; height: 11rem; }
+    .nomen b { font-size: 6.4rem; }
+    .satz.kopf .nomen b, .satz.kopf .rest { font-size: 4.4rem; }
+    .plaettchen { min-width: 14rem; }
+    .plaettchen b { font-size: 5.2rem; }
+    .bank { grid-template-columns: minmax(0, 1fr) 17rem; column-gap: 2rem; }
+    .spielflaeche { grid-template-rows: 28rem minmax(0, 1fr); }
+  }
+
+  /* Pause: Sachmoment auf der Papierkarte. */
+  .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
+  .sachmoment p { margin: 0; }
+  .sachmoment .zettel { display: flex; gap: 3rem; }
+  .sachmoment .zettel span {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 0.6rem; min-width: 15rem; padding: 1.2rem 2.4rem;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein); font-weight: 700; font-size: 5.6rem; line-height: 1;
+  }
+  .sachmoment .zettel ls-wortart { height: 3.4rem; }
+  .sachmoment .hinweis {
+    display: inline-flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 4rem 1.6rem 1.6rem;
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-papier);
+    box-shadow: var(--ls-schatten); color: var(--ls-tinte); font-weight: 700; text-decoration: none;
+  }
+  .sachmoment .hinweis img { width: 8rem; height: 8rem; }
+  .sachmoment .hinweis:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+
+  .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
+  .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
+  .eltern p { max-width: 70ch; }
+  .eltern .beschreibung { margin: 0 0 3rem; color: var(--ls-tinte-weich); }
+  .eltern a { color: var(--ls-tinte); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="welt" id="welt" aria-hidden="true"></div>
+<script type="module">
+  import { raumSvg } from "./raum.js";
+  document.getElementById("welt").innerHTML = raumSvg();
+</script>
+
+<ls-leiste id="leiste" spiel="artikelwand" fach="grammatik" titel="Werkzeugwand" thema="">
+  <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
+  <ls-knopf slot="rechts" id="anleitung" symbol="buch.svg" name="Anleitung" hidden></ls-knopf>
+</ls-leiste>
+
+<div class="buehne">
+  <main class="spielflaeche" aria-label="Werkzeugwand und Werkbank">
+    <ls-blase id="blase" ohne-text></ls-blase>
+    <div class="fenster" id="fenster" aria-hidden="true"></div>
+    <section class="wand" id="wand" aria-label="Werkzeugwand"></section>
+    <div class="bank">
+      <section class="lernfeld matte" id="matte" aria-label="Werkbank">
+        <div class="karte" id="karte"></div>
+        <div class="reihe" id="reihe"></div>
+      </section>
+      <div class="kiste" id="kiste" aria-hidden="true"></div>
+    </div>
+  </main>
+  <div class="ela" id="ela" aria-hidden="true"><div class="tritt" id="tritt"></div><div class="koerper" id="ela-koerper"></div></div>
+</div>
+
+<ls-hilfe id="hilfe"></ls-hilfe>
+<ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
+
+<script type="module" src="spiel.js"></script>
+</body>
+</html>

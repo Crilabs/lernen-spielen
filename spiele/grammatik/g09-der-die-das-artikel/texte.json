@@ -1,0 +1,155 @@
+{
+ "hinweis": "Sätze von G09 Werkzeugwand, die aus Daten kommen (je Werkzeug ausgeschrieben, keine zur Laufzeit zusammengesetzten Sätze). aufgabe: das Wort zum Noch-mal-hören (wird nicht von selbst gesprochen). kopf: der Satz mit Lücke zum Noch-mal-hören (Stufe kopf; an der Lücke steht ein leises Summen). richtig: das Paar, zugleich die Wirkung. hilfe1: die Hörprobe, die drei Paare im selben Ton (Stufe 1 der Hilfe, keine Lösung). Feste Sätze stehen im Aufruf blase.sage in spiel.js.",
+ "aufgabe": {
+  "artikel:hammer": "Hammer.",
+  "artikel:pinsel": "Pinsel.",
+  "artikel:nagel": "Nagel.",
+  "artikel:eimer": "Eimer.",
+  "artikel:besen": "Besen.",
+  "artikel:schluessel": "Schlüssel.",
+  "artikel:zange": "Zange.",
+  "artikel:saege": "Säge.",
+  "artikel:schere": "Schere.",
+  "artikel:leiter": "Leiter.",
+  "artikel:nadel": "Nadel.",
+  "artikel:buerste": "Bürste.",
+  "artikel:messer": "Messer.",
+  "artikel:seil": "Seil.",
+  "artikel:brett": "Brett.",
+  "artikel:lineal": "Lineal.",
+  "artikel:rad": "Rad.",
+  "artikel:glas": "Glas."
+ },
+ "kopf": {
+  "artikel:hammer": "Mmh, Hammer hängt an der Wand.",
+  "artikel:pinsel": "Mmh, Pinsel hängt an der Wand.",
+  "artikel:nagel": "Mmh, Nagel hängt an der Wand.",
+  "artikel:eimer": "Mmh, Eimer hängt an der Wand.",
+  "artikel:besen": "Mmh, Besen hängt an der Wand.",
+  "artikel:schluessel": "Mmh, Schlüssel hängt an der Wand.",
+  "artikel:zange": "Mmh, Zange hängt an der Wand.",
+  "artikel:saege": "Mmh, Säge hängt an der Wand.",
+  "artikel:schere": "Mmh, Schere hängt an der Wand.",
+  "artikel:leiter": "Mmh, Leiter hängt an der Wand.",
+  "artikel:nadel": "Mmh, Nadel hängt an der Wand.",
+  "artikel:buerste": "Mmh, Bürste hängt an der Wand.",
+  "artikel:messer": "Mmh, Messer hängt an der Wand.",
+  "artikel:seil": "Mmh, Seil hängt an der Wand.",
+  "artikel:brett": "Mmh, Brett hängt an der Wand.",
+  "artikel:lineal": "Mmh, Lineal hängt an der Wand.",
+  "artikel:rad": "Mmh, Rad hängt an der Wand.",
+  "artikel:glas": "Mmh, Glas hängt an der Wand."
+ },
+ "richtig": {
+  "artikel:hammer": "Der Hammer.",
+  "artikel:pinsel": "Der Pinsel.",
+  "artikel:nagel": "Der Nagel.",
+  "artikel:eimer": "Der Eimer.",
+  "artikel:besen": "Der Besen.",
+  "artikel:schluessel": "Der Schlüssel.",
+  "artikel:zange": "Die Zange.",
+  "artikel:saege": "Die Säge.",
+  "artikel:schere": "Die Schere.",
+  "artikel:leiter": "Die Leiter.",
+  "artikel:nadel": "Die Nadel.",
+  "artikel:buerste": "Die Bürste.",
+  "artikel:messer": "Das Messer.",
+  "artikel:seil": "Das Seil.",
+  "artikel:brett": "Das Brett.",
+  "artikel:lineal": "Das Lineal.",
+  "artikel:rad": "Das Rad.",
+  "artikel:glas": "Das Glas."
+ },
+ "hilfe1": {
+  "artikel:hammer": [
+   "Der Hammer.",
+   "Die Hammer.",
+   "Das Hammer."
+  ],
+  "artikel:pinsel": [
+   "Der Pinsel.",
+   "Die Pinsel.",
+   "Das Pinsel."
+  ],
+  "artikel:nagel": [
+   "Der Nagel.",
+   "Die Nagel.",
+   "Das Nagel."
+  ],
+  "artikel:eimer": [
+   "Der Eimer.",
+   "Die Eimer.",
+   "Das Eimer."
+  ],
+  "artikel:besen": [
+   "Der Besen.",
+   "Die Besen.",
+   "Das Besen."
+  ],
+  "artikel:schluessel": [
+   "Der Schlüssel.",
+   "Die Schlüssel.",
+   "Das Schlüssel."
+  ],
+  "artikel:zange": [
+   "Der Zange.",
+   "Die Zange.",
+   "Das Zange."
+  ],
+  "artikel:saege": [
+   "Der Säge.",
+   "Die Säge.",
+   "Das Säge."
+  ],
+  "artikel:schere": [
+   "Der Schere.",
+   "Die Schere.",
+   "Das Schere."
+  ],
+  "artikel:leiter": [
+   "Der Leiter.",
+   "Die Leiter.",
+   "Das Leiter."
+  ],
+  "artikel:nadel": [
+   "Der Nadel.",
+   "Die Nadel.",
+   "Das Nadel."
+  ],
+  "artikel:buerste": [
+   "Der Bürste.",
+   "Die Bürste.",
+   "Das Bürste."
+  ],
+  "artikel:messer": [
+   "Der Messer.",
+   "Die Messer.",
+   "Das Messer."
+  ],
+  "artikel:seil": [
+   "Der Seil.",
+   "Die Seil.",
+   "Das Seil."
+  ],
+  "artikel:brett": [
+   "Der Brett.",
+   "Die Brett.",
+   "Das Brett."
+  ],
+  "artikel:lineal": [
+   "Der Lineal.",
+   "Die Lineal.",
+   "Das Lineal."
+  ],
+  "artikel:rad": [
+   "Der Rad.",
+   "Die Rad.",
+   "Das Rad."
+  ],
+  "artikel:glas": [
+   "Der Glas.",
+   "Die Glas.",
+   "Das Glas."
+  ]
+ }
+}
