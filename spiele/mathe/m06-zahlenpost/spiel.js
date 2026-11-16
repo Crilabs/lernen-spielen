@@ -1266,7 +1266,9 @@ async function spieleRunde(vorschau) {
     r = vorschauRunde();
   }
 
-  const beginn = Date.now();
+  // Die Rundenzeit beginnt nach der Einführung (sie erzählt in Ruhe; sonst endet die Runde eines sicheren Kindes
+  // vor „gekonnt“ – G14, gefunden in M08, Christian 2026-11-16).
+  let beginn = Date.now();
   const zeitDa = () => Date.now() - beginn < rundenMs() - Math.min(LETZTE_AUFGABE_MS, rundenMs() / 4);
   const naechste = () => (zeitDa() ? aufStufe(r.naechste()) : null);
   let aufgabe = naechste();
@@ -1289,6 +1291,7 @@ async function spieleRunde(vorschau) {
     setzeKlein(kleinJetzt);
     await einfuehrung(stufeJetzt);
     r.einfuehrungGesehen();
+    beginn = Date.now();
   } else if (erste) {
     // Später: hat sich das Thema geändert, sagt die Stimme es (ein Satz, Christian 2026-11-16); wechselt dabei
     // „bis 10“ und „11 bis 20“, zeigt eine kurze Szene den Wechsel.
