@@ -216,6 +216,23 @@
    "entwurf": false,
    "datei": "mathe/geteilt-umkehrung-mal.md"
   },
+  "minus-zehner": {
+   "fach": "mathe",
+   "name": "Minus mit ganzen Zehnern",
+   "titel": "Ein ganzer Zehner geht weg",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zehn für die Brotdose"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Hände runter"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/minus-zehner.md"
+  },
   "nachsilben-ung-heit-keit-nis": {
    "fach": "schreiben",
    "name": "-ung, -heit, -keit, -nis: groß",
@@ -427,6 +444,40 @@
    ],
    "entwurf": false,
    "datei": "mathe/vorwaerts-zaehlen.md"
+  },
+  "zehn-plus": {
+   "fach": "mathe",
+   "name": "Zehn und noch was",
+   "titel": "Zehn und noch was",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eier im Kühlschrank"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Hände hoch und stampfen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zehn-plus.md"
+  },
+  "zehner-und-einer-bis-20": {
+   "fach": "mathe",
+   "name": "Zehner und Einer bis 20",
+   "titel": "Ein Zehner und noch Einer",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Stifte im Becher"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Großer Sprung, kleine Hüpfer"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zehner-und-einer-bis-20.md"
   },
   "zehnerreihe": {
    "fach": "mathe",

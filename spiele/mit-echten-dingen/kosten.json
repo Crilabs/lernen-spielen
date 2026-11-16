@@ -2469,5 +2469,247 @@
   "thema": [
    "geteilt-durch-2-5-10"
   ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 106,
+  "ausgabe": 86183,
+  "einheit": "tokens",
+  "menge": 8932127,
+  "notiz": "Fünf Mathe-Themen (Zehner), Recherche, Schreiben, 6 Objekte",
+  "cache_lesen": 8594812,
+  "cache_schreiben": 251026,
+  "themen": 5,
+  "thema": [
+   "zehner-und-einer-bis-20",
+   "zehn-plus",
+   "minus-zehner",
+   "zehnerzahlen-bis-100",
+   "zahl-darstellungen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 8003,
+  "einheit": "tokens",
+  "menge": 701178,
+  "notiz": "zehner-und-einer-bis-20, Prüfung Runde 1",
+  "cache_lesen": 606868,
+  "cache_schreiben": 86285,
+  "themen": 1,
+  "thema": [
+   "zehner-und-einer-bis-20"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 7798,
+  "einheit": "tokens",
+  "menge": 913388,
+  "notiz": "zehner-und-einer-bis-20, Prüfung Runde 2",
+  "cache_lesen": 829632,
+  "cache_schreiben": 75930,
+  "themen": 1,
+  "thema": [
+   "zehner-und-einer-bis-20"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 9494,
+  "einheit": "tokens",
+  "menge": 677589,
+  "notiz": "zehn-plus, Prüfung Runde 1",
+  "cache_lesen": 594151,
+  "cache_schreiben": 73922,
+  "themen": 1,
+  "thema": [
+   "zehn-plus"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 26,
+  "ausgabe": 9367,
+  "einheit": "tokens",
+  "menge": 795238,
+  "notiz": "zehn-plus, Prüfung Runde 2",
+  "cache_lesen": 715385,
+  "cache_schreiben": 70460,
+  "themen": 1,
+  "thema": [
+   "zehn-plus"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 8238,
+  "einheit": "tokens",
+  "menge": 677382,
+  "notiz": "zehn-plus, Prüfung Runde 3",
+  "cache_lesen": 597876,
+  "cache_schreiben": 71246,
+  "themen": 1,
+  "thema": [
+   "zehn-plus"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 8375,
+  "einheit": "tokens",
+  "menge": 662968,
+  "notiz": "minus-zehner, Prüfung Runde 1",
+  "cache_lesen": 582908,
+  "cache_schreiben": 71663,
+  "themen": 1,
+  "thema": [
+   "minus-zehner"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 8177,
+  "einheit": "tokens",
+  "menge": 626999,
+  "notiz": "minus-zehner, Prüfung Runde 2",
+  "cache_lesen": 543256,
+  "cache_schreiben": 75546,
+  "themen": 1,
+  "thema": [
+   "minus-zehner"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 8682,
+  "einheit": "tokens",
+  "menge": 593958,
+  "notiz": "zehnerzahlen-bis-100, Prüfung Runde 1",
+  "cache_lesen": 513389,
+  "cache_schreiben": 71867,
+  "themen": 1,
+  "thema": [
+   "zehnerzahlen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 9769,
+  "einheit": "tokens",
+  "menge": 699715,
+  "notiz": "zehnerzahlen-bis-100, Prüfung Runde 2",
+  "cache_lesen": 610598,
+  "cache_schreiben": 79326,
+  "themen": 1,
+  "thema": [
+   "zehnerzahlen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 10596,
+  "einheit": "tokens",
+  "menge": 760367,
+  "notiz": "zehnerzahlen-bis-100, Prüfung Runde 3",
+  "cache_lesen": 671106,
+  "cache_schreiben": 78641,
+  "themen": 1,
+  "thema": [
+   "zehnerzahlen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 7320,
+  "einheit": "tokens",
+  "menge": 424368,
+  "notiz": "zahl-darstellungen-bis-100, Prüfung Runde 1",
+  "cache_lesen": 339382,
+  "cache_schreiben": 77652,
+  "themen": 1,
+  "thema": [
+   "zahl-darstellungen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 8643,
+  "einheit": "tokens",
+  "menge": 588501,
+  "notiz": "zahl-darstellungen-bis-100, Prüfung Runde 2",
+  "cache_lesen": 506266,
+  "cache_schreiben": 73572,
+  "themen": 1,
+  "thema": [
+   "zahl-darstellungen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 8958,
+  "einheit": "tokens",
+  "menge": 601980,
+  "notiz": "zahl-darstellungen-bis-100, Prüfung Runde 3",
+  "cache_lesen": 509990,
+  "cache_schreiben": 83014,
+  "themen": 1,
+  "thema": [
+   "zahl-darstellungen-bis-100"
+  ]
  }
 ]
