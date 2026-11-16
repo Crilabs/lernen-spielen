@@ -138,5 +138,7 @@ export function darstellbar(aufgabe, artSpec) {
   if (artSpec.zahlen && !(d.n >= artSpec.zahlen[0] && d.n <= artSpec.zahlen[1])) return false;
   if (artSpec.max !== undefined && d.raum > artSpec.max) return false;
   if (artSpec.reihen && !(d.b >= artSpec.reihen[0] && d.b <= artSpec.reihen[1])) return false;
+  // zehner: nur Aufgaben mit einem ganzen Zehner (10 + x, c − 10, c − x mit c − x = 10); Stellentafel (M08)
+  if (artSpec.zehner === true && !(d.op === "plus" ? d.a === 10 || d.b === 10 : d.b === 10 || d.a === 10)) return false;
   return true;
 }

@@ -52,6 +52,16 @@ test("darstellbar: Zahlenzauber kann keine Zwillinge, Perlenbrücke nur 2–10",
   assert.equal(darstellbar(aufgabenVon({ art: "menge", bis: 3 })[0], pb), false);
   assert.equal(darstellbar(aufgabenVon({ art: "rechnen", thema: "plus-bis-100" })[0], { art: "rechnen", max: 20 }), false);
 });
+test("darstellbar: zehner (Stellentafel M08) nimmt nur Aufgaben mit einem ganzen Zehner", () => {
+  const sp = { art: "rechnen", max: 20, zehner: true };
+  const ja = (thema) => aufgabenVon({ art: "rechnen", thema }).every((a) => darstellbar(a, sp));
+  assert.equal(ja("zehn-plus"), true);
+  assert.equal(ja("minus-zehner"), true);
+  assert.equal(darstellbar(aufgabenVon({ art: "rechnen", thema: "ueber-10-mit-7" })[0], sp), false);
+  assert.equal(darstellbar(aufgabenVon({ art: "rechnen", thema: "minus-von-20" })[0], sp), false);
+  assert.equal(darstellbar(aufgabenVon({ art: "rechnen", thema: "zehn-plus" })[0], { art: "rechnen", max: 20 }), true);
+  assert.equal(darstellbar(aufgabenVon({ art: "rechnen", thema: "ueber-10-mit-7" })[0], { art: "rechnen", max: 20 }), true);
+});
 test("schwierigkeit: 3+4 schwerer als 1+6", () => {
   const k = (key) => schwierigkeit(aufgabenVon({ art: "zerlegung", zahl: 7 }).find(a => a.key === key));
   assert.ok(k("zerl:7:3+4") > k("zerl:7:1+6"));

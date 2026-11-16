@@ -80,6 +80,8 @@ export const LERNFARBE = Object.freeze({
     9: "#2F5BC4",
     10: "#D9A520",
   }),
+  /** Stellenwerte (M5): Einer türkis, Zehner orange, Hunderter schiefergrau; nur zusätzlich zu Spalte, Buchstabe und Ziffer. */
+  stelle: Object.freeze({ e: "#0FA3A3", z: "#F07C1E", h: "#5B6478" }),
   /** Draht der Perlenstäbchen. */
   draht: FARBE.tinteWeich,
   /** Wortartensymbole (D1). */

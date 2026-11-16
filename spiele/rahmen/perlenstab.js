@@ -13,6 +13,8 @@
 //   wie das Stäbchen. Ab 6 liegt die Fünfermarke quer über dem Tuch (die Gliederung bleibt, die Perlen sind
 //   nicht zu zählen). Mit `ziffer` steht die Ziffer auf dem Tuch, ab 6 mittig über den ersten fünf.
 //   Mit `ziffer` mindestens 6 rem dick, sonst wird die Ziffer kleiner als 3,2 rem.
+// - `gold`: alle Perlen in Gold (Farbe des Zehnerstabs), auch bei Werten unter 10 – die einzelnen goldenen
+//   Einerperlen der Stellentafel (M08). Die Bedeutung des Zeichens bleibt: Länge und Fünfergliederung tragen.
 // - Ungültiger Wert (nicht 1 bis 10) oder fehlender Wert: es wird nichts gezeichnet und einmal je Element
 //   ins Protokoll geschrieben (kern/protokoll.js).
 //
@@ -57,7 +59,7 @@ text { font-family: "Andika", sans-serif; font-weight: 700; fill: var(--ls-tinte
 const z = (x) => String(Math.round(x * 1000) / 1000);
 
 export class LsPerlenstab extends HTMLElement {
-  static observedAttributes = ["wert", "ausrichtung", "verdeckt", "ziffer"];
+  static observedAttributes = ["wert", "ausrichtung", "verdeckt", "ziffer", "gold"];
 
   constructor() {
     super();
@@ -142,7 +144,8 @@ export class LsPerlenstab extends HTMLElement {
       if (ziffer) inhalt += schrift(stab.marke !== null ? (stab.marke - LUECKE / 2) / 2 : laenge / 2, ZIFFER.deckel, String(stab.wert));
     } else {
       inhalt += `<rect class="draht" ${r(0, laenge, mitte - DRAHT / 2, DRAHT)} rx="${z(DRAHT / 2)}" fill="${LERNFARBE.draht}"/>`;
-      const farbe = LERNFARBE.perle[/** @type {keyof typeof LERNFARBE.perle} */ (stab.wert)];
+      // `gold`: goldenes Material (Stellentafel, M08): jede Perle golden wie die Zehnerstange, auch bei Werten unter 10.
+      const farbe = LERNFARBE.perle[/** @type {keyof typeof LERNFARBE.perle} */ (this.hasAttribute("gold") ? 10 : stab.wert)];
       for (const a of stab.perlen) inhalt += `<circle class="kontur perle" ${c(a, mitte)} r="0.5" fill="${farbe}"/>`;
       if (stab.marke !== null) inhalt += marke(stab.marke);
     }
