@@ -38,7 +38,8 @@ const FACH_JE_BUCHSTABE = { M: "mathe", R: "geometrie", L: "lesen", Z: "sprechen
 const spielPlus = (id, s) => ["geplant", "geparkt"].includes(s.status)
   ? ` <button class="plus" data-auftrag="spiel" data-ziel="${esc(id)}" title="${esc(s.name)} beauftragen">+</button>` : "";
 
-function zeileLernthema(t) {
+/** @param {any} t @param {boolean} mitEinfuehrung nur bei Lernthemen ohne Spiel: ein Spiel bringt seine Einführung selbst mit */
+function zeileLernthema(t, mitEinfuehrung) {
   const echt = plakette(t.echteDinge, STATUS_TEXT[t.echteDinge] + (t.echteDingeEur !== null ? ` · ${eur(t.echteDingeEur)}` : ""))
     + (t.echteDinge === "fehlt" ? ` <button class="plus" data-auftrag="echte-dinge" data-ziel="${esc(t.id)}" title="Mit echten Dingen beauftragen">+</button>` : "");
   const einf = t.einfuehrung
@@ -46,11 +47,11 @@ function zeileLernthema(t) {
     : t.einfuehrungBeauftragt ? plakette("beauftragt")
     : `<span class="leise-text">–</span> <button class="plus" data-auftrag="einfuehrung" data-ziel="${esc(t.id)}" title="Einführung beauftragen">+</button>`;
   return `<tr><td>${esc(t.name)}<span class="id">${esc(t.id)}</span><div class="leise-text">${esc(t.bereich)}</div></td>
-    <td class="zahl-z">${t.klasse}</td><td>${echt}</td><td>${einf}</td></tr>`;
+    <td class="zahl-z">${t.klasse}</td><td>${echt}</td>${mitEinfuehrung ? `<td>${einf}</td>` : ""}</tr>`;
 }
 
-const themenTabelle = (liste) => `<table><thead><tr><th>Lernthema</th><th class="zahl-z">Kl.</th><th>Mit echten Dingen</th><th>Einführung</th></tr></thead>
-  <tbody>${liste.map(zeileLernthema).join("")}</tbody></table>`;
+const themenTabelle = (liste, mitEinfuehrung = false) => `<table><thead><tr><th>Lernthema</th><th class="zahl-z">Kl.</th><th>Mit echten Dingen</th>${mitEinfuehrung ? "<th>Einführung (Vorlage)</th>" : ""}</tr></thead>
+  <tbody>${liste.map((t) => zeileLernthema(t, mitEinfuehrung)).join("")}</tbody></table>`;
 
 /** Spiele je Fach mit ihren Lernthemen; Lernthemen ohne Spiel am Ende des Fachs. */
 function zeigeSpiele() {
@@ -77,7 +78,7 @@ function zeigeSpiele() {
       const schl = `spiel/${s.id}`;
       return [`<details class="spiel" data-schluessel="${esc(schl)}" ${offen.has(schl) || (such && !spielTreffer) ? "open" : ""}>
         <summary><span class="spiel-id">${esc(s.id)}</span><span class="titel">${esc(s.name)}</span>
-          <span class="leise-text">Kl. ${kl}</span>${plakette(s.status)}${spielPlus(s.id, s)}
+          <span class="leise-text">Kl. ${kl}</span>${plakette(s.status)}${spielPlus(s.id, s)}${FERTIG.includes(s.status) ? `<span class="leise-text">Einführung im Spiel</span>` : ""}
           <span class="zahl-z">${s.eur !== null ? eur(s.eur) : ""}</span>
           <span class="stand">${themen.length} Lernthemen · Echte Dinge ${echt}/${themen.length}</span></summary>
         ${themen.length ? themenTabelle(themen) : `<p class="leer">Im Katalog stehen für dieses Spiel keine Hauptthemen, die der Lernplan kennt.</p>`}</details>`];
@@ -90,7 +91,7 @@ function zeigeSpiele() {
       const schl = `ohne/${f.id}`;
       zeilen.push(`<details class="spiel ohne" data-schluessel="${esc(schl)}" ${offen.has(schl) || such ? "open" : ""}>
         <summary><span class="spiel-id">–</span><span class="titel">Ohne Spiel</span>
-          <span class="stand">${ohne.length} Lernthemen ohne Katalog-Spiel</span></summary>${themenTabelle(ohne)}</details>`);
+          <span class="stand">${ohne.length} Lernthemen ohne Katalog-Spiel</span></summary>${themenTabelle(ohne, true)}</details>`);
     }
     if (!zeilen.length) continue;
     const fertig = spiele.filter(({ s }) => FERTIG.includes(s.status)).length;
