@@ -105,3 +105,7 @@ nicht immer zu sehen; für die Aussagen unerheblich.
 
 28 Bilder neu (29 erzeugt, ein Neuversuch), 4 übernommen; nicht mehr verwendete alte Bilder (01, 03, 06–12) gelöscht,
 `herkunft.json` enthält genau die 32 verwendeten Bilder (übernommene mit Vermerk). Kosten in `kosten.json`.
+
+## 4. Titelbild
+
+`bilder/01-01.webp`, Ausschnitt `50% 55%` (gewählt von einem frischen Agenten, 2026-11-16): Die Elefantenfamilie mit Zuri neben der Mutter zieht ruhig und hell durch die Savanne. Das zeigt Familie, Elefantenkind und Lebensraum in einem Bild, und Mutter und Kind sind im Streifen ganz zu sehen.

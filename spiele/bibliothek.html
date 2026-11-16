@@ -126,7 +126,8 @@ async function start() {
       const g = await fetch(`geschichten/${encodeURIComponent(b.id)}/geschichte.json`).then((x) => x.json());
       // Sachbuch: die Seiten stehen in den Kapiteln (geschichten.md §2a)
       const seiten = Array.isArray(g.seiten) ? g.seiten : (g.kapitel ?? []).flatMap((k) => k.seiten ?? []);
-      const foto = typeof g.titelbild === "string" ? g.titelbild : seiten.find((s) => typeof s.bild === "string")?.bild;
+      const foto = (typeof g.titelbild === "string" ? g.titelbild : typeof g.titelbild?.bild === "string" ? g.titelbild.bild : null)
+        ?? seiten.find((s) => typeof s.bild === "string")?.bild;
       deckel.set(b.id, foto ? `geschichten/${b.id}/${foto}` : null);
     } catch (e) { protokoll("bibliothek, Titelbild " + b.id + ": " + e); }
   }));

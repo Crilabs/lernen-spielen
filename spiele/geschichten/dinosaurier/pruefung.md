@@ -129,3 +129,7 @@ Kein lebender Dinosaurier zusammen mit Menschen; Selin nur bei Skeletten, Modell
 `kosten.json` enthält auch die Posten des alten Buchs (15.11.). Neu am 16.11.: 23 Bilder (~1,48 €) und Claude für
 Schreiber, Prüfer A und Prüfer B (~13,90 €, mit `werkzeuge/kosten/transkript.mjs` gebucht). Bericht danach:
 `geschichten/dinosaurier: 21,73 € (Claude 19,21 €, Bilder 39 Stück 2,52 €)` einschließlich der alten Posten.
+
+## 4. Titelbild
+
+`bilder/01-01.webp`, Ausschnitt `50% 12%` (gewählt von einem frischen Agenten, 2026-11-16): Das ganze Skelett des Plateosaurus steht im hellen Museumssaal und passt zum Buch (Fossilien, Museum, Plateosaurus als Leitfigur). Es ist ruhig und vollständig im Streifen zu sehen.

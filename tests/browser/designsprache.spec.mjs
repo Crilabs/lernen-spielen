@@ -1,6 +1,6 @@
 // Browser-Prüfung der Designsprache (Spec docs/superpowers/specs/2026-11-15-designsprache-design.md), Funde der Abschluss-
 // prüfung: „Zuletzt gelernt“ zeigt alle Einträge ganz (nichts abgeschnitten und doch per Tab erreichbar); das
-// Inhaltsverzeichnis des Sachbuchs ist geteilt (Bild links, Titel und Kapitel rechts, §5.5); Vorlesen steht auf derselben
+// Inhaltsverzeichnis des Sachbuchs zeigt links das Titelbild 2 : 1, rechts alle Kapitel ohne Rollen (Spec 2026-11-16); Vorlesen steht auf derselben
 // Höhe wie der Ton-Knopf. Chromium und WebKit bei 1920 × 1080, 1280 × 800 und 1024 × 768.
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/designsprache.spec.mjs
 import { createRequire } from "node:module";
@@ -57,11 +57,14 @@ for (const typ of [chromium, webkit]) {
     await p.waitForTimeout(300);
     const i = await p.locator("ls-geschichte").evaluate((el) => {
       const s = el.shadowRoot, r = (q) => s.querySelector(q)?.getBoundingClientRect().toJSON() ?? null;
-      return { bild: r(".inhalt-bild"), kopf: r(".inhalt .kopf"), karten: r(".inhalt .karten"), breite: el.getBoundingClientRect().width };
+      const inhalt = s.querySelector(".inhalt"), zeilen = [...s.querySelectorAll(".kapitel")].map((k) => k.getBoundingClientRect());
+      const titel = [...s.querySelectorAll(".kapitel .titel")].map((t) => Math.round(t.getBoundingClientRect().height / parseFloat(getComputedStyle(t).lineHeight)));
+      return { bild: r(".titelbild"), links: r(".inhalt-links"), liste: r(".kapitel-liste"), rollt: inhalt.scrollHeight - inhalt.clientHeight,
+        unten: Math.max(...zeilen.map((z) => z.bottom)), hoehe: el.getBoundingClientRect().bottom, zeilen: titel };
     });
-    const geteilt = h <= w * 3 / 4 + 1;   // 4:3 und breiter: geteilt
-    pruefe(geteilt && i.bild && i.kopf && i.karten && i.bild.left <= 1 && Math.abs(i.bild.width - i.breite / 2) < 3 && i.kopf.left >= i.bild.right - 1 && i.karten.left >= i.bild.right - 1,
-      `${L} Inhaltsverzeichnis geteilt: Bild links, Titel und Kapitel rechts`, JSON.stringify(i));
+    pruefe(i.bild && Math.abs(i.bild.width / i.bild.height - 2) < 0.05 && i.liste.left >= i.links.right - 1 && i.rollt <= 1 && i.unten <= i.hoehe + 1
+      && (w < 1280 || i.zeilen.every((n) => n === 1)),
+      `${L} Inhaltsverzeichnis: Titelbild 2 : 1 links, alle Kapitel rechts ohne Rollen${w >= 1280 ? ", je eine Zeile" : ""}`, JSON.stringify(i));
     await p.evaluate(() => window.lsGeschichte.oeffne(0));
     await p.waitForTimeout(300);
     const v = await p.evaluate(() => {

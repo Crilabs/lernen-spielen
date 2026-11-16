@@ -109,3 +109,7 @@ WebP q 82; Prompts in `bilder/herkunft.json`. Zwei Prompts mit Kind wurden von d
 zweimal), 5 alte Bilder gelöscht (01, 05, 09, 10, 12: Seiten gibt es nicht mehr). Kosten in `kosten.json`: am
 2026-11-16 Bilder 1,93 € (30 Stück), Claude 21,57 € (Schreiber bis zur Bildprüfung und drei Prüferläufe), zusammen
 23,50 €; dazu die Einträge der alten Fassung vom 2026-11-15.
+
+## 4. Titelbild
+
+`bilder/01-02.webp`, Ausschnitt `50% 40%` (gewählt von einem frischen Agenten, 2026-11-16): Eine Honigbiene wie Lotta sammelt auf einem Löwenzahn in der hellen Frühlingswiese, scharf und von der Seite mit Kopf, Augen, Rüssel, Flügeln und gestreiftem Hinterleib. Das Bild fasst Insekt, Sammeln und Blüte zusammen, und die Biene passt ganz in den Streifen.

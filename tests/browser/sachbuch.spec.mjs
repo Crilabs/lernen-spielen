@@ -4,14 +4,15 @@
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/sachbuch.spec.mjs
 //
 // Ein Probebuch (5 Kapitel à 4 Seiten, Bilder aus haustiere/) wird per page.route ausgeliefert, damit die Prüfung nicht
-// am Text eines echten Buchs hängt. Geprüft: Inhaltsverzeichnis mit Kapitelkarten, Karte öffnet ihr Kapitel,
+// am Text eines echten Buchs hängt. Geprüft: Inhaltsverzeichnis mit Kapitelliste (Spec 2026-11-16), Zeile öffnet ihr Kapitel im zuletzt gewählten Modus,
 // Kapitelende mit „Kapitel n+1“ und „Inhalt“, Vorlesen blättert nie ins nächste Kapitel, der Lesestand wird gemerkt und
-// „Weiterlesen“ springt dorthin, alle Kapitel fertig → gelesen, Vorschau der Eltern merkt nichts, Absätze, Layout.
+// Anhören/Lesen machen dort weiter, Symbol-Knöpfe je Kapitel, kein Hintergrundbild, alle Kapitel fertig → gelesen, Vorschau der Eltern merkt nichts, Absätze, Layout.
 
 import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { starteServer } from "./server.mjs";
+import { starteStumm } from "./stumm.mjs";
 
 const require = createRequire(import.meta.url);
 const { chromium, webkit } = require("playwright");
@@ -48,20 +49,22 @@ const sr = (page, f) => page.locator("ls-geschichte").evaluate(f);
 const gespeichert = (page) => page.evaluate((k) => JSON.parse(localStorage.getItem(k) || "{}"), STAND);
 
 for (const typ of [chromium, webkit]) {
-  const browser = await typ.launch();
+  const browser = await starteStumm(typ);
   const name = typ.name();
 
   // Buchanfang: Inhaltsverzeichnis
   let p = await oeffne(browser);
   pruefe((await G(p)).kapitel === -1, `${name}: Buchanfang zeigt das Inhaltsverzeichnis`);
-  pruefe(await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitelkarte").length) === 5, `${name}: fünf Kapitelkarten`);
-  pruefe(await sr(p, (el) => /Kapitel 3 Titel/.test(el.shadowRoot.querySelector(".inhalt").textContent)), `${name}: Kapiteltitel auf den Karten`);
-  pruefe(await sr(p, (el) => !el.shadowRoot.querySelector(".inhalt .weiterlesen") || el.shadowRoot.querySelector(".inhalt .weiterlesen").hidden), `${name}: ohne Stand kein „Weiterlesen“`);
+  pruefe(await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitel .zeile").length) === 5, `${name}: fünf Kapitelzeilen`);
+  pruefe(await sr(p, (el) => /Kapitel 3 Titel/.test(el.shadowRoot.querySelector(".inhalt").textContent)), `${name}: Kapiteltitel in der Liste`);
+  pruefe(await sr(p, (el) => el.shadowRoot.querySelector(".inhalt .stand-hinweis").hidden), `${name}: ohne Stand kein „Weiter bei“`);
+  pruefe(await p.evaluate(() => getComputedStyle(document.body).backgroundImage === "none" && !document.querySelector("#hintergrund").children.length
+    && getComputedStyle(document.querySelector("ls-geschichte").shadowRoot.querySelector(".inhalt")).backgroundImage === "none"), `${name}: Buch ohne Hintergrundbild`);
 
-  // Karte öffnet ihr Kapitel; Absätze
-  await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitelkarte")[2].click());
+  // Zeile öffnet ihr Kapitel; Absätze
+  await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitel .zeile")[2].click());
   let g = await G(p);
-  pruefe(g.kapitel === 2 && g.seite === 0 && g.seiten === 4, `${name}: Karte 3 öffnet Kapitel 3, Seite 1`);
+  pruefe(g.kapitel === 2 && g.seite === 0 && g.seiten === 4, `${name}: Zeile 3 öffnet Kapitel 3, Seite 1`);
   pruefe(await sr(p, (el) => el.shadowRoot.querySelectorAll(".text p").length === 2), `${name}: Absätze als zwei p`);
   // Kapitelende
   await p.evaluate(() => { const l = window.lsGeschichte; while (l.seite < l.seiten - 1) l.weiter(); });
@@ -74,16 +77,29 @@ for (const typ of [chromium, webkit]) {
   pruefe((await G(p)).kapitel === -1, `${name}: „Inhalt“ führt zum Inhaltsverzeichnis`);
   const st = (await gespeichert(p)).buecher?.probebuch;
   pruefe(st && st.kapitel === 3 && st.fertig.includes(2) && !st.fertig.includes(3), `${name}: Stand gemerkt (Kapitel 4, Kapitel 3 fertig) ${JSON.stringify(st)}`);
-  pruefe(await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitelkarte.gelesen").length === 1), `${name}: gelesenes Kapitel mit Haken`);
+  pruefe(await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitel.gelesen").length === 1), `${name}: gelesenes Kapitel mit Haken`);
   pruefe(!p.fehler.length, `${name}: keine Seitenfehler ${p.fehler.join(" | ")}`);
   await p.close();
 
-  // Weiterlesen springt zum Stand
+  // Lesen (großer Knopf) macht beim Stand weiter, im Modus Lesen
   p = await oeffne(browser, { stand: { kapitel: 1, seite: 2, fertig: [0] } });
-  pruefe(await sr(p, (el) => { const w = el.shadowRoot.querySelector(".inhalt .weiterlesen"); return w && !w.hidden && /Kapitel 2/.test(w.getAttribute("wort") ?? ""); }), `${name}: „Weiterlesen: Kapitel 2“ sichtbar`);
-  await sr(p, (el) => el.shadowRoot.querySelector(".inhalt .weiterlesen").click());
+  pruefe(await sr(p, (el) => { const w = el.shadowRoot.querySelector(".inhalt .stand-hinweis"); return !w.hidden && /Kapitel 2/.test(w.textContent); }), `${name}: „Weiter bei Kapitel 2“ sichtbar`);
+  await sr(p, (el) => el.shadowRoot.querySelector(".inhalt .start-lesen").click());
   g = await G(p);
-  pruefe(g.kapitel === 1 && g.seite === 2, `${name}: Weiterlesen springt zu Kapitel 2, Seite 3`);
+  pruefe(g.kapitel === 1 && g.seite === 2 && await p.evaluate(() => window.lsGeschichte.modus) === "selbst", `${name}: Lesen springt zu Kapitel 2, Seite 3 (Modus Lesen)`);
+  await p.close();
+
+  // Symbol-Knöpfe je Kapitel; der Tipp auf die Zeile nimmt den zuletzt gewählten Modus, auch nach dem Neuladen
+  p = await oeffne(browser);
+  await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitel .lesen")[3].click());
+  g = await G(p);
+  pruefe(g.kapitel === 3 && g.seite === 0 && await p.evaluate(() => window.lsGeschichte.modus) === "selbst", `${name}: Lesen-Knopf in Zeile 4 öffnet Kapitel 4 zum Lesen`);
+  await p.evaluate(() => window.lsGeschichte.inhalt());
+  await p.reload();
+  await p.waitForFunction(() => window.lsGeschichte?.kapitelZahl > 0);
+  await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitel .zeile")[0].click());
+  pruefe(await p.evaluate(() => window.lsGeschichte.kapitel) === 0 && await p.evaluate(() => window.lsGeschichte.modus) === "selbst", `${name}: Zeile öffnet im zuletzt gewählten Modus (Lesen, gemerkt)`);
+  pruefe(await sr(p, (el) => el.shadowRoot.querySelector(".start-lesen").getAttribute("art") === "haupt"), `${name}: gewählter Modus ist der Hauptknopf`);
   await p.close();
 
   // Selbst lesen: das Kapitel wird weder beim Öffnen noch beim Blättern vorgelesen
@@ -109,13 +125,13 @@ for (const typ of [chromium, webkit]) {
 
   // Alle Kapitel fertig → gelesen; Vorschau der Eltern merkt nichts
   p = await oeffne(browser, { stand: { kapitel: 4, seite: 0, fertig: [0, 1, 2, 3] } });
-  await sr(p, (el) => el.shadowRoot.querySelector(".inhalt .weiterlesen").click());
+  await sr(p, (el) => el.shadowRoot.querySelector(".inhalt .start-lesen").click());
   await p.evaluate(() => { const l = window.lsGeschichte; while (l.seite < l.seiten - 1) l.weiter(); });
   await p.waitForTimeout(400);
   pruefe(!!(await gespeichert(p)).sachthemen?.geschichten?.probebuch, `${name}: alle Kapitel fertig – Buch gelesen`);
   await p.close();
   p = await oeffne(browser, { eltern: true });
-  await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitelkarte")[0].click());
+  await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitel .zeile")[0].click());
   await p.evaluate(() => { const l = window.lsGeschichte; while (l.seite < l.seiten - 1) l.weiter(); });
   await p.waitForTimeout(400);
   pruefe(!(await gespeichert(p)).buecher, `${name}: Vorschau der Eltern merkt keinen Stand`);
@@ -139,8 +155,8 @@ for (const typ of [chromium, webkit]) {
   // Ton aus im Inhaltsverzeichnis: keine Wahl mehr, Selbst lesen, nichts blättert stumm von selbst
   p = await oeffne(browser);
   await p.locator("ls-leiste").evaluate((el) => el.shadowRoot.querySelector(".tonknopf").click());
-  pruefe(await p.evaluate(() => window.lsGeschichte.modus) === "selbst" && await sr(p, (el) => el.shadowRoot.querySelector(".wahl").hidden),
-    `${name}: Ton aus im Inhaltsverzeichnis – Selbst lesen, Wahl verborgen`);
+  pruefe(await p.evaluate(() => window.lsGeschichte.modus) === "selbst" && await sr(p, (el) => [...el.shadowRoot.querySelectorAll(".anhoeren")].every((k) => getComputedStyle(k).display === "none")),
+    `${name}: Ton aus im Inhaltsverzeichnis – Lesen, alle Anhören-Knöpfe verborgen`);
   await p.evaluate(() => window.lsGeschichte.oeffne(0));
   await p.waitForTimeout(8000);
   pruefe((await G(p)).seite === 0, `${name}: Ton aus – kein stummes Selbstblättern`);
@@ -159,10 +175,10 @@ for (const typ of [chromium, webkit]) {
     p = await oeffne(browser, { groesse });
     const inhaltOk = await sr(p, (el) => {
       const i = el.shadowRoot.querySelector(".inhalt"), r = i.getBoundingClientRect();
-      const karten = [...i.querySelectorAll(".kapitelkarte")];
+      const karten = [...i.querySelectorAll(".kapitel")];
       return r.width > 0 && i.scrollWidth <= i.clientWidth + 1 && karten.every((k) => { const kr = k.getBoundingClientRect(); return kr.left >= r.left - 1 && kr.right <= r.right + 1; });
     });
-    await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitelkarte")[0].click());
+    await sr(p, (el) => el.shadowRoot.querySelectorAll(".inhalt .kapitel .zeile")[0].click());
     await p.evaluate(() => { const l = window.lsGeschichte; while (l.seite < l.seiten - 1) l.weiter(); });
     await p.waitForTimeout(300);
     const seiteOk = await sr(p, (el) => {

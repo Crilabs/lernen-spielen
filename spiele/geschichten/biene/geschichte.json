@@ -5,6 +5,7 @@
  "welt": "wiese-und-hecke",
  "familie": null,
  "kulisse": "garten",
+ "titelbild": { "bild": "bilder/01-02.webp", "fokus": "50% 40%" },
  "klasse": 1,
  "quellen": [
   {

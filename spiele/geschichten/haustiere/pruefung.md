@@ -65,3 +65,7 @@ Je Seite die Kernaussage; jedes Bild mit dem Read-Werkzeug angesehen. Mias Steck
 | 6-6 | schaut aus der Kiste (Einzug) | übernommen (Mia zieht ein 12) | ✓ |
 
 24 Bilder erzeugt (23 Seiten + 1 Neuversuch), 9 übernommen; Kosten in `kosten.json`.
+
+## 4. Titelbild
+
+`bilder/05-03.webp`, Ausschnitt `50% 50%` (gewählt von einem frischen Agenten, 2026-11-16): Mia liegt entspannt auf dem Sofa, eine Kinderhand streichelt sie. Das fasst die Hauskatze und das Freundwerden zusammen, und der liegende Körper passt mit Ohren, Gesicht und Pfoten in den Streifen.

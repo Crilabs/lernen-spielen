@@ -5,6 +5,7 @@
  "welt": "dinosaurier",
  "familie": null,
  "kulisse": "dschungel",
+ "titelbild": { "bild": "bilder/01-01.webp", "fokus": "50% 12%" },
  "klasse": 2,
  "quellen": [
   {

@@ -71,10 +71,21 @@ höchstens drei Runden, sonst parken und berichten. Urteil zusammengefasst in `p
   höchstens zwei neue Versuche mit geschärftem Prompt – oder den **Text an das Bild anpassen**, wenn das Bild die
   Wahrheit besser zeigt. Ergebnis je Bild als Tabelle in `pruefung.md` §3 (Kernaussage, was stimmt, Versuche).
 
+## 4a. Titelbild wählen (frischer Agent)
+
+Nach der Bildprüfung sieht sich ein **frischer Agent** (Agent-Werkzeug, Typ general-purpose) alle Fotos des Buchs mit
+dem Read-Werkzeug an und wählt das Titelbild fürs Inhaltsverzeichnis und den Deckel in der Bibliothek: das eine Foto,
+das das ganze Buch am besten zusammenfasst und **im Streifen 2 : 1 (doppelt so breit wie hoch) das Wesentliche zeigt**
+– Motiv nicht angeschnitten (Kopf, Augen, Körper des Tiers), ruhig, hell, keine Frage-Seite, wahr nach
+`docs/grundsaetze-bilder.md`. Er bestimmt den Ausschnitt als `fokus` (`object-position` in Prozent, z. B. `"50% 35%"`:
+waagrecht egal bei 1024 × 1024, senkrecht so, dass der Streifen das Motiv trifft) und schreibt
+`"titelbild": { "bild": "bilder/NN-MM.webp", "fokus": "50% 35%" }` in `geschichte.json` (nach `kulisse`) und einen
+Satz Begründung in `pruefung.md` §4 „Titelbild“. Er erzeugt keine neuen Bilder.
+
 ## 5. Abschluss im Buch-Ordner
 
 `geschichte.json`, `bilder/*.webp`, `bilder/herkunft.json` (schreibt das Werkzeug), `kosten.json`, `pruefung.md`
-(§1 Recherche, §2 Prüfer, §3 Bilder). Prüfen: `node --test tests/geschichten.test.mjs` (Format, Satzlängen; der
+(§1 Recherche, §2 Prüfer, §3 Bilder, §4 Titelbild). Prüfen: `node --test tests/geschichten.test.mjs` (Format, Satzlängen; der
 Index-Test schlägt fehl, bis §6 gelaufen ist – das ist erwartet).
 
 ## 6. Eintragen (einmal, nach allen Büchern)
