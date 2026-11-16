@@ -966,7 +966,7 @@ async function zeigeWechsel(ein, haeuserNr) {
  * Bild“, spielbau.md §8). Zu 11–20 beim ersten Mal je Start eine Mini-Einführung nur für das Neue: die Häuser über 10
  * stehen auf, Fertig und Löschen kommen dazu, das Kind tippt 13 und Fertig selbst; später nur der sichtbare Wechsel und
  * zwei Sätze. Zurück zu bis 10: die Häuser über 10 und die Knöpfe gehen weg, zwei Sätze.
- * Ohne Runde: die Rundenzeit läuft schon.
+ * Die Rundenzeit beginnt danach neu (spieleRunde ruft r.beginneZeit()).
  * @param {boolean} zuKlein @param {string} stufe
  */
 function wechsle(zuKlein, stufe) {
@@ -1283,7 +1283,11 @@ async function spieleRunde(vorschau) {
     // Später: hat sich das Thema geändert, sagt die Stimme es (ein Satz, Christian 2026-11-16); wechselt dabei
     // „bis 10“ und „11 bis 20“, zeigt eine kurze Szene den Wechsel.
     if (r.themaId && letztesThema && r.themaId !== letztesThema && r.sprich) await E.satz((o) => spricht(() => blase.sage(r.sprich, o)));
-    if (kleinJetzt !== klein) await wechsle(kleinJetzt, stufeJetzt);
+    // Der Wechsel zählt nicht zur Rundenzeit (Christian, 2026-11-16): sie beginnt danach neu.
+    if (kleinJetzt !== klein) {
+      await wechsle(kleinJetzt, stufeJetzt);
+      r.beginneZeit();
+    }
   }
   if (r.themaId) letztesThema = r.themaId;
   rundenZahl++;
