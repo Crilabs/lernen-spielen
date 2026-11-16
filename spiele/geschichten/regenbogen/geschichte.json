@@ -1,0 +1,349 @@
+{
+  "id": "regenbogen",
+  "titel": "Aylin und der Regenbogen",
+  "art": "sachbuch",
+  "welt": "wetter-messen",
+  "familie": null,
+  "kulisse": "stadt",
+  "titelbild": { "bild": "bilder/01-01.webp", "fokus": "50% 10%" },
+  "klasse": 1,
+  "quellen": [
+    {
+      "fakt": "Für einen Regenbogen braucht es Regentropfen in der Luft, Sonnenschein auf diese Tropfen und einen Betrachter mit der Sonne im Rücken.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; Klexikon, „Regenbogen“: https://klexikon.zum.de/wiki/Regenbogen; Lernhelfer (Duden Learnattack), Schülerlexikon Physik „Regenbogen“: https://www.lernhelfer.de/schuelerlexikon/physik/artikel/regenbogen; familie.de, „Kunterbunt: Wie entsteht ein Regenbogen?“: https://www.familie.de/artikel/kunterbunt-wie-entsteht-ein-regenbogen--jjcmv52f9g – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Regenbögen entstehen oft, wenn ein Schauer abzieht und die Sonne dahinter wieder herauskommt.",
+      "quelle": "Lernhelfer (Duden Learnattack), Schülerlexikon Physik „Regenbogen“: https://www.lernhelfer.de/schuelerlexikon/physik/artikel/regenbogen; Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; Siemens Stiftung, Experiment C4.4 „Woher kommen die Farben des Regenbogens?“: https://medienportal.siemens-stiftung.org/view/107996 – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Der Regenbogen steht immer gegenüber der Sonne: am Abend im Osten, am Morgen im Westen.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Regenbogen und seine Freunde“ (06.09.2012): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/731/der-regenbogen-und-seine-freunde; SRF Meteo, „Regenbogen machen Mittagspause“: https://www.srf.ch/meteo/meteo-stories/buntes-lichtspiel-am-himmel-regenbogen-machen-mittagspause; Siemens Stiftung, Experiment C4.4 „Woher kommen die Farben des Regenbogens?“: https://medienportal.siemens-stiftung.org/view/107996 – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Steht die Sonne mittags hoch, besonders im Sommer, liegt der Regenbogen unter dem Horizont; morgens und abends bei tiefer Sonne steht er hoch, und man sieht fast einen Halbkreis.",
+      "quelle": "SRF Meteo, „Regenbogen machen Mittagspause“: https://www.srf.ch/meteo/meteo-stories/buntes-lichtspiel-am-himmel-regenbogen-machen-mittagspause; Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; Deutscher Wetterdienst, Thema des Tages „Der Regenbogen und seine Freunde“ (06.09.2012): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/731/der-regenbogen-und-seine-freunde – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Wettererscheinungen werden in der Grundschule beobachtet und dokumentiert.",
+      "quelle": "LehrplanPLUS Bayern, Fachlehrplan HSU Grundschule 1/2, Lernbereich 3.3 „Luft, Wasser, Wetter“: https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/hsu; Siemens Stiftung, Experiment C4.4 „Woher kommen die Farben des Regenbogens?“: https://medienportal.siemens-stiftung.org/view/107996 – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Sonnenlicht sieht weiß aus, ist aber aus vielen Farben zusammengesetzt; Wassertropfen, ein Glas Wasser oder ein Prisma fächern sie auf.",
+      "quelle": "Klexikon, „Regenbogen“: https://klexikon.zum.de/wiki/Regenbogen; IAU Office of Astronomy for Education, Glossar „Regenbogen“: https://astro4edu.org/de/resources/glossary/term/275; Siemens Stiftung, Experiment C4.4 „Woher kommen die Farben des Regenbogens?“: https://medienportal.siemens-stiftung.org/view/107996 – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Ein drei viertel volles Glas Wasser, im direkten Sonnenlicht etwa 20 cm über dem Papier gehalten und leicht gekippt, wirft einen kleinen farbigen Fleck auf ein weißes Blatt im Schatten; bei bedecktem Himmel klappt es nicht.",
+      "quelle": "Siemens Stiftung, Experiment C4.4 „Woher kommen die Farben des Regenbogens?“: https://medienportal.siemens-stiftung.org/view/107996 – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Die Farben des Regenbogens liegen immer in derselben Reihenfolge: außen Rot, dann Orange, Gelb, Grün, Blau, innen Violett.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; Lernhelfer (Duden Learnattack), Schülerlexikon Physik „Regenbogen“: https://www.lernhelfer.de/schuelerlexikon/physik/artikel/regenbogen; IAU Office of Astronomy for Education, Glossar „Regenbogen“: https://astro4edu.org/de/resources/glossary/term/275 – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Die Farben gehen fließend ineinander über; wie viele man zählt, ist eine Einteilung: oft sieben (mit Indigo), manchmal sechs.",
+      "quelle": "Lernhelfer (Duden Learnattack), Schülerlexikon Physik „Regenbogen“: https://www.lernhelfer.de/schuelerlexikon/physik/artikel/regenbogen; Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Im Regentropfen wird das Licht beim Hineingehen und Hinausgehen geknickt, die Farben nehmen verschiedene Wege, und an der Rückseite des Tropfens wird das Licht zurückgeworfen.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Regenbogen und seine Freunde“ (06.09.2012): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/731/der-regenbogen-und-seine-freunde; Lernhelfer (Duden Learnattack), Schülerlexikon Physik „Regenbogen“: https://www.lernhelfer.de/schuelerlexikon/physik/artikel/regenbogen; wissen.de, „Warum ist der Regenbogen ein Bogen?“: https://www.wissen.de/warum-ist-der-regenbogen-ein-bogen; Siemens Stiftung, Experiment C4.4 „Woher kommen die Farben des Regenbogens?“: https://medienportal.siemens-stiftung.org/view/107996 – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Das Licht kommt aus dem Tropfen ungefähr in die Richtung zurück, aus der die Sonne scheint; darum muss die Sonne hinter dem Betrachter stehen.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Regenbogen und seine Freunde“ (06.09.2012): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/731/der-regenbogen-und-seine-freunde; Lernhelfer (Duden Learnattack), Schülerlexikon Physik „Regenbogen“: https://www.lernhelfer.de/schuelerlexikon/physik/artikel/regenbogen; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Jeden Regentropfen verlässt Licht aller Farben, ins Auge des Betrachters gelangt aber aus jedem Tropfen nur eine Farbe; den Bogen bilden unzählige Tropfen, die roten oben, darunter die anderen Farben.",
+      "quelle": "Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen; Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Der Regenbogen ist kein Gegenstand, sondern Licht aus Tropfen; ohne Sonnenschein oder ohne Tropfen verschwindet er.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; Klexikon, „Regenbogen“: https://klexikon.zum.de/wiki/Regenbogen; wissen.de, „Warum ist der Regenbogen ein Bogen?“: https://www.wissen.de/warum-ist-der-regenbogen-ein-bogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Der Regenbogen ist eigentlich ein ganzer Kreis; vom Boden aus schneidet der Boden den unteren Teil ab, aus dem Flugzeug oder von hohen Bergen sieht man manchmal den ganzen Kreis.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; wissen.de, „Warum ist der Regenbogen ein Bogen?“: https://www.wissen.de/warum-ist-der-regenbogen-ein-bogen; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Der Mittelpunkt des Regenbogenkreises liegt auf der Linie von der Sonne durch das Auge, also beim Schatten des Kopfes des Betrachters.",
+      "quelle": "wissen.de, „Warum ist der Regenbogen ein Bogen?“: https://www.wissen.de/warum-ist-der-regenbogen-ein-bogen; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Jeder Mensch sieht seinen eigenen Regenbogen, weil zu jedem Auge das Licht aus anderen Tropfen kommt.",
+      "quelle": "wissen.de, „Warum ist der Regenbogen ein Bogen?“: https://www.wissen.de/warum-ist-der-regenbogen-ein-bogen; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Das Ende des Regenbogens kann man nicht erreichen: Er wandert mit dem Betrachter und hat keinen festen Ort.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; wissen.de, „Warum ist der Regenbogen ein Bogen?“: https://www.wissen.de/warum-ist-der-regenbogen-ein-bogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Menschen erzählen seit langer Zeit Geschichten über den Regenbogen (Brücke zwischen Himmel und Erde, Zeichen nach der Flut bei Noah, Schatz am Ende); heute gilt er auch als Zeichen für Frieden.",
+      "quelle": "Klexikon, „Regenbogen“: https://klexikon.zum.de/wiki/Regenbogen; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Beim doppelten Regenbogen ist der äußere Nebenregenbogen größer und blasser, seine Farben liegen umgekehrt (Rot innen); er entsteht durch zweifache Spiegelung im Tropfen.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; SRF Meteo, „Doppelte Regenbogen – das dunkle Geheimnis“: https://www.srf.ch/meteo/meteo-stories/optisches-phaenomen-doppelte-regenbogen-das-dunkle-geheimnis; IAU Office of Astronomy for Education, Glossar „Regenbogen“: https://astro4edu.org/de/resources/glossary/term/275; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Zwischen Hauptregenbogen und Nebenregenbogen ist der Himmel dunkler.",
+      "quelle": "SRF Meteo, „Doppelte Regenbogen – das dunkle Geheimnis“: https://www.srf.ch/meteo/meteo-stories/optisches-phaenomen-doppelte-regenbogen-das-dunkle-geheimnis; Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Große Regentropfen machen kräftige Farben, feine Tröpfchen lassen sie verschwimmen; im Nebel entsteht ein fast weißer Nebelbogen.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Bei hellem Vollmond gibt es selten einen Mondregenbogen; er wirkt meist weiß, weil das Licht zu schwach ist, um Farben zu sehen.",
+      "quelle": "Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Mit einem Gartenschlauch oder Zerstäuber kann man an einem sonnigen Tag mit der Sonne im Rücken einen Regenbogen im Sprühnebel machen; Regenbögen gibt es auch an Springbrunnen, Rasensprengern und Wasserfällen.",
+      "quelle": "familie.de, „Kunterbunt: Wie entsteht ein Regenbogen?“: https://www.familie.de/artikel/kunterbunt-wie-entsteht-ein-regenbogen--jjcmv52f9g; Wikipedia, „Regenbogen“: https://de.wikipedia.org/wiki/Regenbogen; Klexikon, „Regenbogen“: https://klexikon.zum.de/wiki/Regenbogen; Deutscher Wetterdienst, Thema des Tages „Der Himmel ist bunt – der Regenbogen“ (27.05.2025): https://www.wetterdienst.de/Deutschlandwetter/Thema_des_Tages/6187/der-himmel-ist-bunt-der-regenbogen – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Eine CD wirft im Sonnenlicht bunte Farben an eine helle Wand oder auf weißes Papier, mit ihrer glänzenden Oberfläche statt mit Wassertropfen.",
+      "quelle": "DLR next, „Warum ist ein Regenbogen bunt?“: https://www.dlr.de/de/next/schule-und-ausbildung/scienceathome/warum-ist-ein-regenbogen-bunt – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Direkt in die Sonne zu schauen kann schon in wenigen Sekunden die Netzhaut dauerhaft schädigen; es tut nicht weh, darum bleibt der Schaden zunächst unbemerkt; Kinderaugen sind besonders gefährdet.",
+      "quelle": "Deutsche Ophthalmologische Gesellschaft, Pressemitteilung zur Sonnenfinsternis 12.08.2026: https://dog.org/wp-content/uploads/sites/11/2026/08/DOG_PM_Sonnenfinsternis_August_2026_F.pdf; Pharmazeutische Zeitung, „Augenärzte warnen vor bleibenden Netzhautschäden“ (11.08.2026): https://www.pharmazeutische-zeitung.de/augenaerzte-warnen-vor-bleibenden-netzhautschaeden-167513/; DOG über idw, „Kinderaugen: Frühe Sonnenschäden zählen doppelt schwer“ (24.07.2024): https://idw-online.de/de/news837397; Pharmazeutische Zeitung, „Wie die Sonne den Augen schadet“ (2008): https://www.pharmazeutische-zeitung.de/ausgabe-272008/wie-die-sonne-den-augen-schadet/ – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Bei Gewitter bleibt man drinnen; ein Regenbogen kann nach einem Gewitter erscheinen.",
+      "quelle": "LehrplanPLUS Bayern, Fachlehrplan HSU Grundschule 1/2, Lernbereich 3.3 „Luft, Wasser, Wetter“: https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/hsu; Lernhelfer (Duden Learnattack), Schülerlexikon Physik „Regenbogen“: https://www.lernhelfer.de/schuelerlexikon/physik/artikel/regenbogen – abgerufen 2026-11-16"
+    }
+  ],
+  "kapitel": [
+    {
+      "titel": "Sonne im Rücken, Regen vor dir",
+      "seiten": [
+        {
+          "text": "Den ganzen Nachmittag hat es geregnet. Dicke Tropfen klopfen an Aylins Fenster. Aylin wohnt mit ihrer Familie im siebten Stock eines Hochhauses. Von ihrem Balkon sieht sie weit über die Dächer der Stadt.\n\nAm Abend wird es plötzlich hell. Hinter dem Haus kommt die Sonne heraus. Sie steht schon tief und scheint golden. Vor Aylin hängt noch die dunkle Regenwolke. Aylin tritt hinaus auf den Balkon. Und da steht er, quer über der Stadt: ein riesiger bunter Bogen. Ein Regenbogen!",
+          "bild": "bilder/01-01.webp"
+        },
+        {
+          "text": "Für einen Regenbogen braucht es drei Dinge zur gleichen Zeit. Es braucht Regentropfen in der Luft. Es braucht Sonnenschein auf diesen Tropfen. Und es braucht dich, mit der Sonne im Rücken.\n\nDu schaust also von der Sonne weg, mitten in den Regen hinein. Genau so steht Aylin auf ihrem Balkon. Die Sonne scheint hinter dem Haus, in ihrem Rücken. Vor ihr glitzert der Regen.\n\nOft passiert das, wenn ein Schauer gerade weiterzieht. Hinter ihm reißen die Wolken auf, und die Sonne kommt wieder heraus. Sie scheint dann auf die Regenwolke, die ihr gegenüber liegt.",
+          "bild": "bilder/01-02.webp"
+        },
+        {
+          "text": "Ein paar Wochen später ist Sommer. Es ist Mittag, und die Sonne steht hoch am Himmel. Aus einer kleinen Wolke fällt ein leichter Sommerregen. Gleichzeitig scheint die Sonne.\n\nSonne und Regen, beides ist da! Aylin läuft hinaus auf die Wiese hinter dem Haus. Sie dreht der Sonne den Rücken zu und sucht den Himmel ab. Ihr Schatten ist ganz kurz. Er liegt fast unter ihren Füßen.\n\nWas glaubst du: Sieht Aylin jetzt einen Regenbogen?",
+          "bild": "bilder/01-03.webp",
+          "frage": true
+        },
+        {
+          "text": "Aylin sucht und sucht, aber sie findet keinen Regenbogen. Das ist kein Zufall. Steht die Sonne mittags hoch am Himmel, liegt der Bogen tief unten. Er liegt dann sozusagen unter dem Boden. Niemand kann ihn sehen.\n\nDarum gibt es um die Mittagszeit kaum Regenbögen, besonders im Sommer. Die besten Zeiten sind der Morgen und der Abend. Dann steht die Sonne tief, und die Schatten sind lang. Und der Regenbogen steht hoch über dem Land. Manchmal sieht man dann fast einen halben Kreis. So wie Aylin an jenem Abend auf dem Balkon.",
+          "bild": "bilder/01-04.webp"
+        },
+        {
+          "text": "Ein Regenbogen steht immer gegenüber der Sonne. Am Abend sinkt die Sonne im Westen. Dann suchst du den Regenbogen im Osten. Am Morgen ist es umgekehrt. Dann steht die Sonne im Osten, und der Bogen leuchtet im Westen.\n\nAylin hat ein Wetterheft. Darin malt sie jeden Regenbogen, den sie entdeckt. Dazu schreibt sie, wann es war und in welcher Richtung er stand. Sie notiert auch, wo die Sonne war und ob es geregnet hat. So hält sie den Regenbogen fest wie anderes Wetter. Später kann sie vergleichen: Wann kamen ihre Regenbögen?",
+          "bild": "bilder/01-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Wo muss die Sonne sein, damit du einen Regenbogen siehst?",
+        "bild": "bilder/01-01.webp",
+        "antworten": [
+          "Vor dir, neben dem Regen",
+          "Hinter dir, in deinem Rücken",
+          "Hoch über dir am Himmel"
+        ],
+        "richtig": 1,
+        "aufloesung": "Die Sonne steht hinter dir, in deinem Rücken. Du schaust von ihr weg in den Regen.",
+        "seite": 1
+      }
+    },
+    {
+      "titel": "Im weißen Licht stecken alle Farben",
+      "seiten": [
+        {
+          "text": "Schau dir einmal den hellen Sonnenfleck an, der morgens auf dem Boden liegt. Er sieht hell und weiß aus, ganz ohne Farbe. Doch das täuscht.\n\nIm weißen Sonnenlicht stecken viele Farben zugleich. Sie sind so gut gemischt, dass wir sie nicht einzeln sehen. Zusammen sehen sie für unsere Augen weiß aus.\n\nManche Dinge können diese Farben auffächern, so wie man einen zusammengeklappten Fächer öffnet. Dann liegt jede Farbe neben der anderen, und man sieht sie einzeln. Regentropfen können das. Ein Glas Wasser kann es auch. Und das kannst du selbst ausprobieren.",
+          "bild": "bilder/02-01.webp"
+        },
+        {
+          "text": "Für den Versuch brauchst du einen sonnigen Tag. Die Sonne muss direkt und hell scheinen. Bei grauem Himmel klappt es nicht.\n\nFüll ein Trinkglas drei viertel voll mit Wasser. Leg ein weißes Blatt Papier in den Schatten, dicht neben einen Sonnenfleck. Halte das Glas etwa eine Handspanne über dem Papier in die Sonne. Kipp es ein wenig hin und her, bis ein bunter Fleck erscheint.\n\nDa ist er: ein kleiner bunter Fleck auf dem weißen Papier! Das Sonnenlicht ist durch das Wasser gegangen. Dabei hat es seine Farben aufgefächert.",
+          "bild": "bilder/02-02.webp"
+        },
+        {
+          "text": "Aylin macht den Versuch am Fenster. Der bunte Fleck auf ihrem Papier ist ganz klein. Sie schaut genau hin. An einem Rand ist er rot, am anderen Rand blau und lila. Dazwischen leuchten Orange, Gelb und Grün.\n\nAm Abend blättert Aylin in ihrem Wetterheft. Darin ist ihr Bild vom Regenbogen über der Stadt. Sie hat ihn schnell gemalt und weiß nicht mehr genau, wo welche Farbe war.\n\nWas glaubst du: Liegen die Farben im Regenbogen am Himmel genauso wie im kleinen Fleck? Wo ist beim Regenbogen das Rot, außen oder innen?",
+          "bild": "bilder/02-03.webp",
+          "frage": true
+        },
+        {
+          "text": "Im Regenbogen liegen die Farben genauso nebeneinander wie im Fleck. Die Reihenfolge ist immer gleich, bei jedem Regenbogen auf der ganzen Welt. Ganz außen, oben am Bogen, liegt Rot. Darunter kommt Orange, dann Gelb, dann Grün. Danach folgt Blau. Ganz innen liegt Violett, ein bläuliches Lila.\n\nAylin schaut noch einmal auf ihr Bild im Wetterheft. Ganz oben hat sie Rot gemalt, ganz unten Lila. Es stimmt mit dem Himmel überein.\n\nAuch Aylins kleiner Fleck auf dem Papier hat diese Reihenfolge. Rot liegt neben Orange, Orange neben Gelb, und so weiter bis Violett. Nie springt Grün plötzlich neben das Rot.",
+          "bild": "bilder/02-04.webp"
+        },
+        {
+          "text": "Schau beim nächsten Regenbogen ganz genau hin. Siehst du Striche zwischen den Farben? Die gibt es nicht. Die Farben fließen sanft ineinander. Aus Rot wird langsam Orange, aus Orange langsam Gelb.\n\nDarum ist es gar nicht so einfach, die Farben zu zählen. Wie viele es sind, haben Menschen miteinander abgemacht. Viele Bücher sagen: sieben Farben. Sie zählen zwischen Blau und Violett noch ein dunkles Blau mit. Das heißt Indigo. Andere Bücher sagen: sechs Farben.\n\nDu darfst selbst zählen. Aylin zählt im Regenbogen über der Stadt sechs Farben. Ihre Oma zählt sieben. Beide haben genau hingeschaut.",
+          "bild": "bilder/02-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Woher kommen die Farben im Regenbogen?",
+        "bild": "bilder/02-01.webp",
+        "antworten": [
+          "Das Wasser färbt das Licht bunt",
+          "Die Regenwolke selbst ist bunt",
+          "Sie stecken schon im weißen Sonnenlicht"
+        ],
+        "richtig": 2,
+        "aufloesung": "Im weißen Sonnenlicht stecken viele Farben zugleich. Regentropfen und Wasser fächern sie nur auf.",
+        "seite": 0
+      }
+    },
+    {
+      "titel": "Jeder Tropfen ist ein winziges Wasserglas",
+      "seiten": [
+        {
+          "text": "Erinnerst du dich an Aylins Wasserglas? Das Sonnenlicht ging hinein, und auf dem Papier lag ein bunter Fleck. Ein Regentropfen macht dasselbe. Er ist wie ein Wasserglas, nur winzig klein und rund.\n\nDas Sonnenlicht fliegt in den Tropfen hinein. Dabei macht es einen kleinen Knick. Und beim Knicken fächern sich die Farben auf. Jede Farbe nimmt einen etwas anderen Weg durch das Wasser. Rot läuft ein bisschen anders als Gelb, Gelb ein bisschen anders als Blau.\n\nSo wird aus dem weißen Licht im Tropfen ein feiner bunter Fächer.",
+          "bild": "bilder/03-01.webp"
+        },
+        {
+          "text": "Du willst den Regenbogen sehen. Dafür muss das bunte Licht aus dem Tropfen wieder herauskommen. Und es muss genau in deine Augen fliegen.\n\nDas Sonnenlicht kommt von hinten, über deine Schultern. Es fliegt in einen Tropfen vor dir. Drinnen fächert es sich auf. Dann trifft es auf die Rückseite des runden Tropfens.\n\nWas glaubst du: In welche Richtung fliegt das bunte Licht jetzt weiter? Fliegt es geradeaus durch den Tropfen hindurch und weiter von dir weg? Oder kommt es zurück?",
+          "bild": "bilder/03-02.webp",
+          "frage": true
+        },
+        {
+          "text": "Ein Teil davon kommt zurück! Die Rückseite des Tropfens wirft etwas Licht zurück, wie ein kleiner Spiegel. Dieses bunte Licht fliegt also ungefähr dorthin, woher die Sonne scheint. Beim Hinausgehen aus dem Tropfen macht es noch einmal einen kleinen Knick.\n\nUnd wer steht da, mit der Sonne im Rücken? Du! Darum musst du die Sonne hinter dir haben. Stehst du andersherum, fliegt das bunte Licht an dir vorbei.\n\nDas kannst du später selbst prüfen, mit einem Gartenschlauch an einem sonnigen Tag. Nur mit der Sonne im Rücken siehst du den Bogen im Sprühnebel.",
+          "bild": "bilder/03-03.webp"
+        },
+        {
+          "text": "Jetzt kommt etwas Erstaunliches. Jeder Tropfen fächert alle Farben auf. Aber nur eine Farbe fliegt aus ihm genau in dein Auge. Die anderen Farben fliegen knapp an dir vorbei.\n\nWelche Farbe zu dir kommt, hängt davon ab, wo der Tropfen am Himmel ist. Aus Tropfen weiter oben kommt Rot zu dir. Aus Tropfen etwas tiefer kommt Gelb, dann Grün, dann Blau.\n\nEin einzelner Tropfen macht also noch keinen Regenbogen. Erst unzählige Tropfen zusammen malen den ganzen bunten Bogen. Jeder schickt dir seinen eigenen bunten Lichtpunkt. Zusammen leuchten sie wie ein Bild aus winzigen Lampen.",
+          "bild": "bilder/03-04.webp"
+        },
+        {
+          "text": "Ein Regenbogen ist also kein Ding, das irgendwo am Himmel steht. Er ist Licht aus vielen Tropfen. Man kann ihn nicht anfassen und nicht einpacken.\n\nDas hat Aylin selbst gesehen. Eines Abends leuchtet wieder ein Bogen über der Stadt. Es regnet noch ein wenig. Dann schiebt sich eine Wolke vor die Sonne. Im selben Augenblick verblasst der Bogen und ist fort. Kein Sonnenlicht, kein Regenbogen.\n\nEin paar Minuten später kommt die Sonne wieder hervor. Und der Bogen ist wieder da! Hört der Regen ganz auf, verschwindet er ebenso. Ohne Tropfen in der Luft fächert nichts das Licht auf.",
+          "bild": "bilder/03-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Was ist ein Regenbogen eigentlich?",
+        "bild": "bilder/03-05.webp",
+        "antworten": [
+          "Licht aus unzähligen Regentropfen",
+          "Ein fester Bogen, der dort steht",
+          "Bunte Farbe in der Regenwolke"
+        ],
+        "richtig": 0,
+        "aufloesung": "Ein Regenbogen ist Licht aus vielen Tropfen. Jeder Tropfen schickt dir einen bunten Lichtpunkt.",
+        "seite": 4
+      }
+    },
+    {
+      "titel": "Ein Kreis, der mit dir wandert",
+      "seiten": [
+        {
+          "text": "Ein Regenbogen sieht aus wie ein Bogen. Doch eigentlich ist er ein ganzer Kreis! Vom Boden aus sehen wir nur den oberen Teil. Den unteren Teil schneidet der Boden ab, mit seinen Wiesen, Häusern und Straßen.\n\nWer hoch oben ist, kann manchmal mehr sehen. Aus einem Flugzeug oder von einem hohen Berg aus sieht man den Regenbogen manchmal ganz. Dann ist er ein runder, bunter Ring. Er leuchtet wie ein Reifen in den Regentropfen unter dem Flugzeug.\n\nStell dir das einmal vor: ein Regenbogen ohne Anfang und ohne Ende, rundherum geschlossen.",
+          "bild": "bilder/04-01.webp"
+        },
+        {
+          "text": "Wo ist die Mitte dieses Kreises? Das kannst du selbst herausfinden, mit der Sonne im Rücken. Schau auf deinen Schatten. Die Mitte des Regenbogenkreises liegt genau beim Schatten deines Kopfes.\n\nAylin probiert es aus. Nach einem Schauer steht sie auf der nassen Wiese, die Abendsonne hinter sich. Ihr langer Schatten reicht weit über das Gras. Ganz vorn liegt der Schatten ihres Kopfes. Und rund um diesen Punkt spannt sich der Regenbogen.\n\nGeht Aylin ein paar Schritte zur Seite, wandert ihr Schatten mit. Und mit ihm wandert auch die Mitte des Regenbogens.",
+          "bild": "bilder/04-02.webp"
+        },
+        {
+          "text": "Aylins Oma steht neben ihr auf der Wiese. Beide sehen einen Regenbogen. Aber es ist nicht derselbe! Jeder Mensch sieht seinen eigenen Regenbogen.\n\nWie kann das sein? Denk an die Tropfen. Zu jedem Auge kommt das Licht aus ganz bestimmten Tropfen. Aylin steht ein Stück neben Oma. Darum kommt Aylins rotes Licht aus anderen Tropfen als Omas rotes Licht. Die beiden sehen das Licht aus verschiedenen Tropfen.\n\nAuch der Schatten von Omas Kopf liegt woanders als der Schatten von Aylins Kopf. Und jeder Bogen hat seine Mitte beim eigenen Schatten.",
+          "bild": "bilder/04-03.webp"
+        },
+        {
+          "text": "Aylin möchte wissen, wo der Regenbogen den Boden berührt. Sein Ende scheint am Waldrand hinter der Wiese zu stehen. Das ist gar nicht weit weg.\n\nAylin läuft los, schräg über das nasse Gras. Ihre Gummistiefel quietschen bei jedem Schritt. Oma bleibt stehen und schaut ihr nach. Der Waldrand kommt näher und näher.\n\nWas glaubst du: Kommt Aylin am Ende des Regenbogens an?",
+          "bild": "bilder/04-04.webp",
+          "frage": true
+        },
+        {
+          "text": "Sie kommt nicht an. Das kann niemand auf der Welt. Während Aylin läuft, wandert der Regenbogen mit ihr mit. Sein Ende bleibt immer gleich weit vor ihr.\n\nErinnerst du dich? Die Mitte des Bogens liegt beim Schatten ihres Kopfes. Und dieser Schatten läuft ja mit. Mit jedem Schritt kommt das Licht aus anderen Tropfen zu ihr. Darum hat der Regenbogen keinen festen Ort. Man kann nicht hingehen und nicht unter ihm durchlaufen.\n\nAylin bleibt stehen und lacht. Der Bogen leuchtet weiter vor ihr, so weit weg wie am Anfang.",
+          "bild": "bilder/04-05.webp"
+        },
+        {
+          "text": "Der Regenbogen ist geheimnisvoll. Darum erzählen Menschen sich seit sehr langer Zeit Geschichten über ihn. In manchen Geschichten ist er eine Brücke zwischen Himmel und Erde. In der alten Geschichte von Noah ist er ein Zeichen nach einer großen Flut. Andere erzählen von einem Schatz, der am Ende des Bogens liegt.\n\nFür viele Menschen ist der Regenbogen heute auch ein Zeichen für Frieden.\n\nDie Geschichten sind schön, und man kann sie gut weitererzählen. Aber einen Ort am Ende des Regenbogens gibt es nicht. Den Schatz kann niemand finden. Den bunten Bogen selbst kann jeder sehen.",
+          "bild": "bilder/04-06.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Warum kommt niemand am Ende des Regenbogens an?",
+        "bild": "bilder/04-04.webp",
+        "antworten": [
+          "Das Ende ist viel zu weit weg",
+          "Er verschwindet, wenn man näher kommt",
+          "Der Regenbogen wandert mit dir mit"
+        ],
+        "richtig": 2,
+        "aufloesung": "Der Regenbogen wandert mit dir mit. Sein Ende bleibt immer gleich weit vor dir.",
+        "seite": 4
+      }
+    },
+    {
+      "titel": "Zwei Bögen und seltene Bögen",
+      "seiten": [
+        {
+          "text": "Manchmal hat man großes Glück. Dann leuchten zwei Regenbögen am Himmel, einer über dem anderen. Aylin hat das einmal von ihrem Balkon aus gesehen.\n\nDer innere Bogen ist der helle, den du schon kennst. Der äußere Bogen ist größer und viel blasser. Er heißt Nebenregenbogen. Aylin hält den Atem an und schaut genau auf seine Farben.\n\nWas glaubst du: Liegen die Farben beim zweiten Bogen genauso wie beim ersten? Ist bei ihm auch Rot ganz außen?",
+          "bild": "bilder/05-01.webp",
+          "frage": true
+        },
+        {
+          "text": "Beim zweiten Bogen ist es umgekehrt! Bei ihm liegt Rot innen und Violett außen. Die roten Ränder der beiden Bögen zeigen also zueinander.\n\nWoher kommt das? Das Licht für den zweiten Bogen wird im Tropfen zweimal zurückgeworfen, nicht nur einmal. Dabei dreht sich die Reihenfolge der Farben um.\n\nAylin malt beide Bögen in ihr Wetterheft. Innen malt sie einen Bogen mit Rot oben. Darüber malt sie einen größeren, blasseren Bogen mit Rot unten. Zwischen den beiden roten Streifen bleibt eine Lücke. Gleich wirst du sehen, was dort am Himmel Besonderes zu finden ist.",
+          "bild": "bilder/05-02.webp"
+        },
+        {
+          "text": "Bei einem doppelten Regenbogen gibt es noch etwas zu entdecken. Schau auf den Himmel zwischen den beiden Bögen. Dort ist er dunkler als drumherum. Wie ein graues Band liegt er zwischen den zwei bunten Streifen.\n\nAylin hat das dunkle Band am Himmel entdeckt. Erst hat sie gedacht, dort hängt eine dunklere Wolke. Aber das Band folgt genau der Form der Bögen. Es gehört zum doppelten Regenbogen dazu.\n\nSuch es beim nächsten doppelten Regenbogen einmal! Viele Menschen schauen nur auf die Farben. Das dunkle Band bemerken sie nie.",
+          "bild": "bilder/05-03.webp"
+        },
+        {
+          "text": "Nicht jeder Regenbogen leuchtet gleich bunt. Das hängt von der Größe der Tropfen ab. Große, dicke Regentropfen machen kräftige, klare Farben. Je feiner die Tröpfchen sind, desto mehr verschwimmen die Farben.\n\nGanz feine Tröpfchen schweben im Nebel. Scheint die Sonne in eine Nebelwand, kann ein besonderer Bogen entstehen. Er ist breit und fast weiß. Man nennt ihn Nebelbogen. Er sieht aus wie ein blasser, heller Regenbogen ohne bunte Streifen.\n\nFür einen Nebelbogen gilt dieselbe Regel wie für jeden Regenbogen. Die Sonne ist im Rücken, die Tröpfchen sind vor dir.",
+          "bild": "bilder/05-04.webp"
+        },
+        {
+          "text": "Es gibt sogar Regenbögen in der Nacht. Dafür muss der Mond voll und hell am Himmel stehen. Der Mond ist dann im Rücken, und vor dir fällt Regen. So kann ein Mondregenbogen entstehen.\n\nEr ist sehr selten. Und er sieht meist weißlich aus, fast wie ein Nebelbogen. Das Mondlicht ist nämlich viel schwächer als das Sonnenlicht. Bei so schwachem Licht sehen unsere Augen kaum Farben. Darum erscheint uns der Mondregenbogen weiß.\n\nAylin hat noch nie einen Mondregenbogen gesehen. Ihre Oma auch nicht. Vielleicht entdeckst du einmal einen, in einer hellen, regnerischen Vollmondnacht.",
+          "bild": "bilder/05-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Wie liegen die Farben beim zweiten, blassen Bogen?",
+        "bild": "bilder/05-01.webp",
+        "antworten": [
+          "Umgekehrt: Rot innen, Violett außen",
+          "Genauso: Rot außen, Violett innen",
+          "Durcheinander, jedes Mal ein bisschen anders"
+        ],
+        "richtig": 0,
+        "aufloesung": "Beim zweiten Bogen liegt Rot innen und Violett außen. Die roten Ränder zeigen zueinander.",
+        "seite": 1
+      }
+    },
+    {
+      "titel": "Einen Regenbogen selbst machen",
+      "seiten": [
+        {
+          "text": "An einem sonnigen Sommertag ist Aylin bei Oma im Kleingarten. Es ist später Nachmittag. Die Beete sind trocken, und Oma holt den Gartenschlauch. Aylin darf gießen.\n\nDa hat Aylin eine Idee. Sie stellt sich so hin, dass die Sonne ihr in den Rücken scheint. Ihr Schatten liegt vor ihr auf dem Rasen. Sie stellt die Brause am Schlauch auf feinen Sprühnebel. Dann sprüht sie das Wasser nach vorn in die Luft.\n\nUnd mitten im Sprühnebel leuchtet ein kleiner Regenbogen! Rot außen, Violett innen, genau wie am Himmel.",
+          "bild": "bilder/06-01.webp"
+        },
+        {
+          "text": "Oma dreht den Wasserhahn zu. Der Sprühnebel fällt zu Boden, und der kleine Regenbogen ist sofort weg. Kein Tropfen in der Luft, kein Regenbogen. Oma dreht das Wasser wieder auf, und der Bogen ist wieder da.\n\nAuch mit einer Sprühflasche für Blumen klappt es. Sprüh in der Sonne einfach nach vorn.\n\nÜberall, wo Wasser in der Sonne zu feinen Tropfen zerstäubt, kann ein Regenbogen entstehen. An einem Springbrunnen im Park zum Beispiel. Oder an einem Rasensprenger. Und an großen Wasserfällen, wo die Gischt in die Luft steigt. Denk dabei an die Regel: Sonne im Rücken!",
+          "bild": "bilder/06-02.webp"
+        },
+        {
+          "text": "Auch drinnen kannst du Regenbogenfarben machen. Erinnerst du dich an das Wasserglas? Es wirft einen kleinen bunten Fleck auf weißes Papier. Das klappt nur bei direktem, hellem Sonnenschein. Bei bedecktem Himmel bleibt das Papier weiß.\n\nEs gibt noch einen Versuch. Halte eine CD mit der glänzenden Seite in die Sonne. Dann wirft sie bunte Farben an die Wand oder auf ein weißes Blatt. Die CD macht das allerdings auf eine andere Weise. Sie hat keine Wassertropfen, sondern ihre glänzende Oberfläche.\n\nLenk das Licht von CD, Glas oder Spiegel nur auf Wand oder Papier. Nie in deine Augen und nie in die Augen von anderen.",
+          "bild": "bilder/06-03.webp"
+        },
+        {
+          "text": "Bei allen Versuchen gilt eine wichtige Regel: Schau nie direkt in die Sonne. Auch nicht kurz, und auch nicht, um sie zu suchen. Schon wenige Sekunden können die Augen für immer schädigen.\n\nDas Tückische ist: Es tut nicht weh. Darum merkt man den Schaden nicht sofort. Kinderaugen sind dabei besonders empfindlich.\n\nFür einen Regenbogen musst du die Sonne nie anschauen. Er steht ja immer auf der anderen Seite des Himmels, gegenüber der Sonne. Du drehst der Sonne einfach den Rücken zu und schaust nach vorn. Genau so macht es Aylin. Sie spürt die Sonne warm im Nacken und sucht den Regen vor sich.",
+          "bild": "bilder/06-04.webp"
+        },
+        {
+          "text": "Manchmal kommt ein Regenbogen nach einem Gewitter. Solange es donnert und blitzt, bleibst du drinnen. Von dort aus kannst du den Regenbogen gut durchs Fenster anschauen. Oder du wartest, bis das Gewitter ganz vorbei ist.\n\nAn einem Abend im Herbst zieht wieder ein Schauer über die Stadt. Danach kommt die tiefe Abendsonne hervor. Aylin steht auf ihrem Balkon, die Sonne im Rücken, und schaut nach Osten. Da ist er wieder, der bunte Bogen über den Dächern.\n\nAylin holt ihr Wetterheft und malt ihn hinein. Dann schaut sie zu, wie er langsam verblasst.",
+          "bild": "bilder/06-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Was brauchst du, um selbst einen Regenbogen zu machen?",
+        "bild": "bilder/06-02.webp",
+        "antworten": [
+          "Wasser, das du zur Sonne hin sprühst",
+          "Sprühnebel und die Sonne im Rücken",
+          "Sprühnebel, auch ohne Sonnenschein"
+        ],
+        "richtig": 1,
+        "aufloesung": "Dreh der Sonne den Rücken zu und sprüh feinen Nebel. Darin leuchtet dann ein kleiner Regenbogen.",
+        "seite": 0
+      }
+    }
+  ]
+}
