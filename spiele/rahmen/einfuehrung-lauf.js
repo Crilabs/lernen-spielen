@@ -1,5 +1,8 @@
 import { lesezeit } from "./lesezeit.js";
 
+/** Tasten, die wie ein Tipp die Lesezeit abkürzen. */
+const KUERZT = new Set(["Enter", " ", "Escape"]);
+
 /**
  * Gemeinsamer Ablauf der Einführung im Spielbild (docs/spielbau.md §8): Sätze abwarten, ohne Ton die Lesezeit stehen
  * lassen (nur ein Tipp des Kindes kürzt sie ab, nie die Einstellung), die Hilfe wiederholt den Schritt, der Prüfstand
@@ -18,17 +21,20 @@ export function einfuehrungsLauf(o) {
   let hilfeHalten = null;
   /** Der zuletzt begonnene Satz (für die Vorgabe der Hilfe, wenn eine gehaltene Hilfe endet). @type {((o: { zeigen: boolean }) => Promise<any>) | null} */
   let letzterSatz = null;
-  /** Beendet die laufende Lesezeit sofort. @type {(() => void) | null} */
-  let lesenAbbrechen = null;
+  /**
+   * Beendet je eine laufende Lesezeit sofort. Mehrere können zugleich laufen (etwa ein Satz der Hilfe während der
+   * Lesezeit des Hauptsatzes); `abkuerzen` beendet alle. @type {Set<() => void>}
+   */
+  const lesenAbbrechen = new Set();
 
   /** Lesezeit: endet nach ms oder bei `abkuerzen`. @param {number} ms */
   const lesen = (ms) =>
     new Promise((ok) => {
       const fertig = () => {
-        if (lesenAbbrechen === fertig) lesenAbbrechen = null;
+        lesenAbbrechen.delete(fertig);
         ok(undefined);
       };
-      lesenAbbrechen = fertig;
+      lesenAbbrechen.add(fertig);
       warte(ms).then(fertig, fertig);
     });
 
@@ -54,9 +60,35 @@ export function einfuehrungsLauf(o) {
       if (zeigen) await lesen(lesezeit(o.text()));
     },
 
-    /** Ein Tipp des Kindes: beendet die laufende Lesezeit sofort; sonst nichts. */
+    /** Ein Tipp des Kindes: beendet alle laufenden Lesezeiten sofort; sonst nichts. */
     abkuerzen() {
-      lesenAbbrechen?.();
+      for (const fertig of [...lesenAbbrechen]) fertig();
+    },
+
+    /**
+     * Verbindet den Tipp des Kindes mit `abkuerzen` (spielbau.md §8): ein Zeigen irgendwo in `wurzel` oder Enter,
+     * Leertaste, Escape kürzt, solange die Einführung läuft, die Lesezeit ab; der Tipp tut sonst, was er immer tut.
+     * Ereignisse an einem Element aus `ausser` (Hilfe, Pause, Leiste) kürzen nicht ab – die Hilfe sagt den Schritt noch
+     * einmal. Lauscht in der Capture-Phase.
+     * @param {Pick<EventTarget, "addEventListener" | "removeEventListener">} wurzel etwa `document`
+     * @param {{ ausser?: (EventTarget | null | undefined)[] }} [opt]
+     * @returns {() => void} trennt die Verbindung wieder
+     */
+    verbindeTippen(wurzel, { ausser = [] } = {}) {
+      const ausgenommen = ausser.filter(Boolean);
+      const hoer = (/** @type {Event} */ ev) => {
+        if (!laeuft) return;
+        if (ev.type === "keydown" && !KUERZT.has(/** @type {KeyboardEvent} */ (ev).key)) return;
+        const pfad = ev.composedPath();
+        if (ausgenommen.some((el) => pfad.includes(/** @type {EventTarget} */ (el)))) return;
+        lauf.abkuerzen();
+      };
+      wurzel.addEventListener("pointerdown", hoer, true);
+      wurzel.addEventListener("keydown", hoer, true);
+      return () => {
+        wurzel.removeEventListener("pointerdown", hoer, true);
+        wurzel.removeEventListener("keydown", hoer, true);
+      };
     },
 
     /**

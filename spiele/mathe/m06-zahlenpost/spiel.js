@@ -912,14 +912,15 @@ function einfuehrung(stufe = "material", r) {
       await erzaehler.wort(5);
       await warte(250);
       const fuenf = kindTippt(["5"], felderVon(5, stufe));
-      await satz(e.tippeFuenf);
+      // Die Hilfe gilt schon während der Sätze des Schritts (Wort und Satz), bis das Kind getippt hat.
       E.hilfe(() => erzaehler.wort(5).then(() => satz(e.tippeFuenf)), { bis: fuenf });
+      await satz(e.tippeFuenf);
       await fuenf;
       if (!klein) {
         const fertig = kindTippt(["fertig"], felderVon(5, stufe));
+        E.hilfe(() => satz(e.fertig).then(() => satz(e.haken)), { bis: fertig });
         await satz(e.fertig);
         await satz(e.haken);
-        E.hilfe(() => satz(e.fertig).then(() => satz(e.haken)), { bis: fertig });
         await fertig;
       }
       await Promise.all([wirkungRichtig(5, { freude: false }), satz(e.bringt)]);
@@ -992,13 +993,13 @@ function wechsle(zuKlein, stufe) {
           await satz(e.zuhoeren);
           await erzaehler.wort(13);
           const tippen = kindTippt(["1", "3"], felderVon(13, stufe));
-          await satz(e.einsDrei);
           E.hilfe(() => erzaehler.wort(13).then(() => satz(e.einsDrei)), { bis: tippen });
+          await satz(e.einsDrei);
           await tippen;
           const fertig = kindTippt(["fertig"], felderVon(13, stufe));
+          E.hilfe(() => satz(e.fertig).then(() => satz(e.haken)), { bis: fertig });
           await satz(e.fertig);
           await satz(e.haken);
-          E.hilfe(() => satz(e.fertig).then(() => satz(e.haken)), { bis: fertig });
           await fertig;
           await Promise.all([wirkungRichtig(13, { freude: false }), erzaehler.bei(13)]);
           await satz(e.aendern);
@@ -1054,13 +1055,9 @@ let weiterOrt = ORTE.weiter;
 const weiterZug = () => ({ art: "tippen", von: weiterOrt });
 /** Die Einführung: Sätze, Hilfe und Zug für den Prüfstand (rahmen/einfuehrung-lauf.js). */
 const E = einfuehrungsLauf({ ton: () => leiste.ton, text: () => blase.text, stand });
-// Ohne Ton kürzt nur ein Tipp des Kindes die Lesezeit ab, nie die Einstellung (spielbau.md §8): irgendwo auf der Seite
-// oder Enter/Leertaste; der Tipp tut sonst, was er immer tut. Die Hilfe nicht – sie sagt den Schritt noch einmal.
-const kuerzeAb = (/** @type {Event} */ ev) => {
-  if (E.laeuft && !ev.composedPath().includes(hilfe)) E.abkuerzen();
-};
-document.addEventListener("pointerdown", kuerzeAb, true);
-document.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") kuerzeAb(ev); }, true);
+// Ohne Ton kürzt nur ein Tipp des Kindes die Lesezeit ab, nie die Einstellung (spielbau.md §8). Hilfe, Pause und
+// Leiste nicht – die Hilfe sagt den Schritt noch einmal.
+E.verbindeTippen(document, { ausser: [hilfe, pause, leiste] });
 const einfuehrungsZug = () => E.zug;
 meldePruefSchnittstelle({
   zustand: () => ({ ...stand }),

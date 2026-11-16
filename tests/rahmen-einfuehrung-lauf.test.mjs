@@ -178,3 +178,81 @@ test("hilfe mit bis endet auch, wenn bis abgelehnt wird; spiele beginnt ohne Hil
   });
   assert.equal(h, 0);
 });
+
+/** Lauf, dessen Lesezeit nie von selbst endet. */
+function laufOhneEnde() {
+  return einfuehrungsLauf({
+    ton: () => false,
+    text: () => "Timo bringt den Brief.",
+    stand: { phase: "" },
+    warte: () => new Promise(() => {}),
+  });
+}
+
+test("abkuerzen beendet alle gleichzeitig laufenden Lesezeiten (Satz der Hilfe während des Hauptsatzes)", async () => {
+  const l = laufOhneEnde();
+  await l.spiele(async () => {
+    let fertig = 0;
+    const haupt = l.satz(async () => {}).then(() => fertig++);
+    const hilfe = l.satz(async () => {}).then(() => fertig++);
+    await new Promise((ok) => setTimeout(ok, 0));
+    assert.equal(fertig, 0);
+    l.abkuerzen();
+    await Promise.all([haupt, hilfe]);
+    assert.equal(fertig, 2);
+  });
+});
+
+/** Ziel, das Hörer wie ein EventTarget führt und Ereignisse mit eigenem composedPath zustellt. */
+function ziel() {
+  /** @type {Map<string, Set<(ev: any) => void>>} */
+  const hoerer = new Map();
+  return {
+    addEventListener(/** @type {string} */ typ, /** @type {any} */ fn, /** @type {any} */ capture) {
+      assert.equal(capture, true, "lauscht in der Capture-Phase");
+      if (!hoerer.has(typ)) hoerer.set(typ, new Set());
+      hoerer.get(typ)?.add(fn);
+    },
+    removeEventListener(/** @type {string} */ typ, /** @type {any} */ fn) {
+      hoerer.get(typ)?.delete(fn);
+    },
+    anzahl: () => [...hoerer.values()].reduce((n, s) => n + s.size, 0),
+    /** @param {string} type @param {{ key?: string, pfad?: object[] }} [o] */
+    sende(type, { key, pfad = [] } = {}) {
+      for (const fn of hoerer.get(type) ?? []) fn({ type, key, composedPath: () => pfad });
+    },
+  };
+}
+
+test("verbindeTippen: Tipp oder Enter/Leertaste/Escape kürzt ab, nicht aber Hilfe, Pause, Leiste oder andere Tasten", async () => {
+  const l = laufOhneEnde();
+  const doc = ziel();
+  const hilfe = {};
+  const pause = {};
+  const knopf = {};
+  const trennen = l.verbindeTippen(doc, { ausser: [hilfe, pause, null] });
+  assert.equal(doc.anzahl(), 2);
+  /** Startet einen Satz und meldet, ob er nach dem Ereignis fertig ist. @param {() => void} ereignis */
+  const kuerzt = async (ereignis) => {
+    let fertig = false;
+    const s = l.satz(async () => {}).then(() => (fertig = true));
+    await new Promise((ok) => setTimeout(ok, 0));
+    ereignis();
+    await new Promise((ok) => setTimeout(ok, 0));
+    const war = fertig;
+    l.abkuerzen(); // aufräumen
+    await s;
+    return war;
+  };
+  // Außerhalb der Einführung tut der Tipp nichts (und es läuft keine Lesezeit).
+  doc.sende("pointerdown", { pfad: [knopf] });
+  await l.spiele(async () => {
+    assert.equal(await kuerzt(() => doc.sende("pointerdown", { pfad: [knopf, doc] })), true);
+    for (const key of ["Enter", " ", "Escape"]) assert.equal(await kuerzt(() => doc.sende("keydown", { key })), true, key);
+    assert.equal(await kuerzt(() => doc.sende("keydown", { key: "a" })), false);
+    assert.equal(await kuerzt(() => doc.sende("pointerdown", { pfad: [{}, hilfe, doc] })), false);
+    assert.equal(await kuerzt(() => doc.sende("keydown", { key: "Enter", pfad: [pause] })), false);
+  });
+  trennen();
+  assert.equal(doc.anzahl(), 0);
+});

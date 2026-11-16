@@ -11,6 +11,7 @@ in `spiele/rahmen/` bzw. `spiele/objekte/`; lies gezielt, nicht alles.
 **Lade vor der UI-Arbeit** den Skill `frontend-design:frontend-design`. Der Fokus ist ein Spiel, das Spaß macht,
 mit schönen Bildern und flüssigen Animationen (Regeln §1, §4): ein Held mit Gewicht, eine Wirkung, die sofort kommt
 und in etwa 2,5 s fertig ist (bis 8 s, wenn die Dauer das Lernziel ist, §1), Klänge aus Web Audio, nichts ruckelt.
+Die erste Fassung der Bühne als Screenshot ansehen (Read-Werkzeug), bevor du weiterbaust.
 
 ## Bauen
 
@@ -24,8 +25,10 @@ und in etwa 2,5 s fertig ist (bis 8 s, wenn die Dauer das Lernziel ist, §1), Kl
 - Was nur dieses Spiel braucht, liegt im Spielordner; ein neues gemeinsames Objekt nach `spiele/objekte/`
   (Schnittstelle `spiele/objekte/objekt.js`, Eintrag in `spiele/objekte/README.md`).
 - Tests für die Spiellogik (`tests/spiele/`), wenn das Spiel eigene Logik hat (`logik.js`).
-- Einführung mit `spiele/rahmen/einfuehrung-lauf.js` (Muster: `einfuehrung()` in `spiele/mathe/m06-zahlenpost/spiel.js`, dort auch Tipp/Enter → `E.abkuerzen()` und `E.hilfe(…, { bis })`).
-- Rundenzeit: nach der Einführung `r.beginneZeit()`; keine eigene Zeitrechnung (die Lernsteuerung hält die letzten 30 s frei).
+- Einführung mit `spiele/rahmen/einfuehrung-lauf.js` (Muster: `einfuehrung()` in `spiele/mathe/m06-zahlenpost/spiel.js`,
+  dort auch `E.verbindeTippen(document, { ausser: [Hilfe, Pause, Leiste] })` und `E.hilfe(…, { bis })`).
+- Rundenzeit: `E.spiele(ablauf, r)` ruft danach `r.beginneZeit()` – nicht selbst aufrufen; keine eigene Zeitrechnung
+  (die Lernsteuerung hält die letzten 30 s frei).
 - Wirkungen, die ein Tipp abbricht, prüfen vor jedem Schritt, ob ihr Bild noch steht (Zähler wie `bildNr` in M08), und legen sonst nichts mehr hin.
 
 ## Selbst laufen lassen (du urteilst nicht, du reparierst)
