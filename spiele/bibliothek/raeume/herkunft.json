@@ -70,5 +70,185 @@
    },
    "total_tokens": 2056
   }
+ },
+ "forschen-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Exploring' of a children's library: a light wooden table by a sunny window: a magnifying glass, a red horseshoe magnet holding a few steel paper clips, a glass of water with a cork floating on it, and a small glass prism casting a little rainbow onto the table. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 258,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 258
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2014
+  }
+ },
+ "miteinander-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Together' of a children's library: a low wooden table seen from slightly above, set for children playing together: a simple wooden board game with coloured pawns and a die, a bowl of apples to share, four cushions around the table, no people, soft daylight. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 254,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 254
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2010
+  }
+ },
+ "frueher-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Times past' of a children's library: a calm still life on an old wooden table: a large hourglass with running sand, a stone hand axe, a small clay oil lamp and an old brass pocket watch, soft daylight from the side. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 249,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 249
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2005
+  }
+ },
+ "sicher-stark-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Safe and strong' of a children's library: a child's bicycle helmet and a small backpack on a wooden bench next to a quiet pedestrian crossing with white zebra stripes on a calm residential street, soft afternoon light, no cars moving, no people. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 248,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 248
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2004
+  }
+ },
+ "weltall-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Space' of a children's library: the calm blue hour just after sunset over a quiet meadow: a thin crescent moon and the bright evening star Venus in the deep blue sky, the first stars appearing, a lone tree on a low hill as a soft silhouette. Astronomically correct. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 258,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 258
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2014
+  }
+ },
+ "erde-wetter-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Earth and weather' of a children's library: a wide landscape of green hills with a river winding towards distant mountains, big white cumulus clouds, a light rain shower falling in the distance on one side while the sun shines on the meadow in front. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 250,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 250
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2006
+  }
+ },
+ "laender-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Countries and routes' of a children's library: a country path winding through fields towards a small village with a church tower, a railway line with a short regional train in the middle distance, hills behind, a wooden signpost with blank arrows (no writing) at the path. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 255,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 255
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2011
+  }
+ },
+ "pflanzen-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Plants and fungi' of a children's library: an old orchard meadow in early autumn: an apple tree with ripe red apples, below it tall grass with wildflowers, and a small group of field mushrooms growing in the grass near the trunk. Real species, correct botany. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 255,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 255
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2011
+  }
+ },
+ "technik-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Technology and work' of a children's library: a tidy workshop bench in daylight: a hammer, a hand saw, pliers and a few wooden gears on the bench, a bicycle wheel leaning against it, shelves with jars of screws behind, a window with soft light. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 254,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 254
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2010
+  }
+ },
+ "koerper-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'My body' of a children's library: a bright bathroom shelf in soft morning light: a cup with two small toothbrushes, a bar of soap on a dish, a neatly folded towel, a small round hand mirror and a green plant. No people. Wide calm composition with the subject in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 251,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 251
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2007
+  }
  }
 }

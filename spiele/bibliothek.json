@@ -362,6 +362,1433 @@
       ]
     },
     {
+      "id": "pflanzen",
+      "name": "Pflanzen und Pilze",
+      "bild": "tiere-pflanzen",
+      "foto": "bibliothek/raeume/pflanzen-foto.webp",
+      "regale": [
+        {
+          "id": "wie-pflanzen-leben",
+          "name": "Wie Pflanzen leben",
+          "welten": [
+            "teile-der-pflanze",
+            "was-pflanzen-brauchen",
+            "samen-reisen"
+          ],
+          "buecher": [
+            {
+              "id": "pflanzenteile",
+              "titel": "Von der Wurzel bis zur Blüte",
+              "thema": "Pflanze"
+            },
+            {
+              "id": "was-pflanzen-brauchen",
+              "titel": "Was eine Pflanze braucht",
+              "thema": "Wachsen"
+            },
+            {
+              "id": "samen-reisen",
+              "titel": "Samen gehen auf Reisen",
+              "thema": "Samen"
+            }
+          ]
+        },
+        {
+          "id": "baeume",
+          "name": "Bäume",
+          "buecher": [
+            {
+              "id": "eiche",
+              "titel": "Die Eiche",
+              "thema": "Eiche"
+            },
+            {
+              "id": "baeume-im-jahr",
+              "titel": "Bäume im Jahr",
+              "thema": "Laubwechsel"
+            },
+            {
+              "id": "nadelbaeume",
+              "titel": "Nadelbäume",
+              "thema": "Nadelbaum"
+            },
+            {
+              "id": "jahresringe",
+              "titel": "Wie alt ist ein Baum?",
+              "thema": "Jahresringe"
+            }
+          ]
+        },
+        {
+          "id": "blumen",
+          "name": "Blumen",
+          "buecher": [
+            {
+              "id": "fruehblueher",
+              "titel": "Die ersten Blumen im Jahr",
+              "thema": "Frühblüher"
+            },
+            {
+              "id": "sonnenblume",
+              "titel": "Die Sonnenblume",
+              "thema": "Sonnenblume"
+            }
+          ]
+        },
+        {
+          "id": "essen-vom-feld",
+          "name": "Woher unser Essen kommt",
+          "welten": [
+            "obst-gemuese-reif",
+            "wer-macht-mein-brot"
+          ],
+          "buecher": [
+            {
+              "id": "korn-zum-brot",
+              "titel": "Vom Korn zum Brot",
+              "thema": "Brot"
+            },
+            {
+              "id": "apfel",
+              "titel": "Der Apfel",
+              "thema": "Apfel"
+            },
+            {
+              "id": "kartoffel",
+              "titel": "Die Kartoffel",
+              "thema": "Kartoffel"
+            },
+            {
+              "id": "erntejahr",
+              "titel": "Was wann reif wird",
+              "thema": "Erntejahr"
+            },
+            {
+              "id": "banane",
+              "titel": "Die Banane",
+              "thema": "Banane"
+            },
+            {
+              "id": "kakao",
+              "titel": "Kakao und Schokolade",
+              "thema": "Kakao"
+            },
+            {
+              "id": "reis",
+              "titel": "Der Reis",
+              "thema": "Reis"
+            }
+          ]
+        },
+        {
+          "id": "pilze-winziges",
+          "name": "Pilze und Winziges",
+          "welten": [
+            "pilze-kleinstlebewesen",
+            "unbekannte-pflanzen"
+          ],
+          "buecher": [
+            {
+              "id": "pilze",
+              "titel": "Pilze",
+              "thema": "Pilz"
+            },
+            {
+              "id": "leben-im-boden",
+              "titel": "Leben im Boden",
+              "thema": "Bodenleben"
+            },
+            {
+              "id": "giftpflanzen",
+              "titel": "Nicht jede Beere ist essbar",
+              "thema": "Giftpflanzen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "koerper",
+      "name": "Mein Körper",
+      "bild": "mein-koerper",
+      "foto": "bibliothek/raeume/koerper-foto.webp",
+      "regale": [
+        {
+          "id": "koerper-sinne",
+          "name": "Körper und Sinne",
+          "welten": [
+            "koerperteile",
+            "sinne",
+            "das-auge",
+            "sinne-anders"
+          ],
+          "buecher": [
+            {
+              "id": "kopf-bis-fuss",
+              "titel": "Von Kopf bis Fuß",
+              "thema": "Körper"
+            },
+            {
+              "id": "fuenf-sinne",
+              "titel": "Fünf Sinne",
+              "thema": "Sinne"
+            },
+            {
+              "id": "auge",
+              "titel": "Das Auge",
+              "thema": "Auge"
+            },
+            {
+              "id": "ohr",
+              "titel": "Das Ohr",
+              "thema": "Ohr"
+            },
+            {
+              "id": "nase-zunge",
+              "titel": "Nase und Zunge",
+              "thema": "Riechen"
+            },
+            {
+              "id": "haut",
+              "titel": "Die Haut",
+              "thema": "Haut"
+            },
+            {
+              "id": "fingern-lesen",
+              "titel": "Mit den Fingern lesen, mit den Händen sprechen",
+              "thema": "Braille, Gebärde"
+            }
+          ]
+        },
+        {
+          "id": "innen-im-koerper",
+          "name": "Innen im Körper",
+          "buecher": [
+            {
+              "id": "herz-blut",
+              "titel": "Herz und Blut",
+              "thema": "Herz"
+            },
+            {
+              "id": "atmen",
+              "titel": "Atmen",
+              "thema": "Lunge"
+            },
+            {
+              "id": "knochen-muskeln",
+              "titel": "Knochen und Muskeln",
+              "thema": "Knochen"
+            },
+            {
+              "id": "verdauung",
+              "titel": "Der Weg durch den Bauch",
+              "thema": "Verdauung"
+            },
+            {
+              "id": "gehirn",
+              "titel": "Das Gehirn",
+              "thema": "Gehirn"
+            }
+          ]
+        },
+        {
+          "id": "gesund-bleiben",
+          "name": "Gesund bleiben",
+          "welten": [
+            "zaehne",
+            "haende-sonne",
+            "bewegen-schlafen",
+            "was-im-essen-steckt"
+          ],
+          "buecher": [
+            {
+              "id": "zaehne",
+              "titel": "Unsere Zähne",
+              "thema": "Zähne"
+            },
+            {
+              "id": "haende-waschen",
+              "titel": "Saubere Hände",
+              "thema": "Hände"
+            },
+            {
+              "id": "sonnenschutz",
+              "titel": "Schutz vor der Sonne",
+              "thema": "Sonnenschutz"
+            },
+            {
+              "id": "schlafen",
+              "titel": "Warum wir schlafen",
+              "thema": "Schlaf"
+            },
+            {
+              "id": "im-essen",
+              "titel": "Was im Essen steckt",
+              "thema": "Lebensmittel"
+            }
+          ]
+        },
+        {
+          "id": "wachsen",
+          "name": "Wachsen",
+          "welten": [
+            "lebenskette",
+            "wachsen"
+          ],
+          "buecher": [
+            {
+              "id": "baby-zum-schulkind",
+              "titel": "Vom Baby zum Schulkind",
+              "thema": "Wachsen"
+            },
+            {
+              "id": "koerper-veraendert",
+              "titel": "Wie der Körper sich verändert",
+              "thema": "Großwerden"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "erde-wetter",
+      "name": "Erde und Wetter",
+      "bild": "erde-himmel",
+      "foto": "bibliothek/raeume/erde-wetter-foto.webp",
+      "regale": [
+        {
+          "id": "wetter",
+          "name": "Wetter",
+          "welten": [
+            "wetter-messen",
+            "gewitter"
+          ],
+          "buecher": [
+            {
+              "id": "wetter-beobachten",
+              "titel": "Wetter beobachten",
+              "thema": "Wetter"
+            },
+            {
+              "id": "wind",
+              "titel": "Der Wind",
+              "thema": "Wind"
+            },
+            {
+              "id": "gewitter",
+              "titel": "Wenn es gewittert",
+              "thema": "Gewitter"
+            },
+            {
+              "id": "schnee",
+              "titel": "Schnee und Eis",
+              "thema": "Schnee"
+            },
+            {
+              "id": "regenbogen",
+              "titel": "Der Regenbogen",
+              "thema": "Regenbogen"
+            }
+          ]
+        },
+        {
+          "id": "wasser",
+          "name": "Wasser",
+          "welten": [
+            "wasserkreislauf",
+            "eis-wasser-dampf",
+            "wasser-sauber"
+          ],
+          "buecher": [
+            {
+              "id": "weg-des-wassers",
+              "titel": "Der Weg des Wassers",
+              "thema": "Wasserkreislauf"
+            },
+            {
+              "id": "eis-wasser-dampf",
+              "titel": "Eis, Wasser, Dampf",
+              "thema": "Eis und Dampf"
+            },
+            {
+              "id": "trinkwasser",
+              "titel": "Woher unser Wasser kommt",
+              "thema": "Trinkwasser"
+            },
+            {
+              "id": "bach-zum-meer",
+              "titel": "Vom Bach zum Meer",
+              "thema": "Fluss"
+            }
+          ]
+        },
+        {
+          "id": "steine-berge-vulkane",
+          "name": "Steine, Berge, Vulkane",
+          "welten": [
+            "steine-boden",
+            "gebirge-vulkane",
+            "vulkanausbruch"
+          ],
+          "buecher": [
+            {
+              "id": "steine-sand",
+              "titel": "Steine und Sand",
+              "thema": "Steine"
+            },
+            {
+              "id": "berge",
+              "titel": "Wie Berge entstehen",
+              "thema": "Gebirge"
+            },
+            {
+              "id": "vulkan",
+              "titel": "Der Vulkan",
+              "thema": "Vulkan"
+            },
+            {
+              "id": "erdbeben",
+              "titel": "Wenn die Erde bebt",
+              "thema": "Erdbeben"
+            },
+            {
+              "id": "kristalle",
+              "titel": "Kristalle",
+              "thema": "Kristalle"
+            }
+          ]
+        },
+        {
+          "id": "landschaften",
+          "name": "Landschaften der Welt",
+          "buecher": [
+            {
+              "id": "wueste",
+              "titel": "Die Wüste",
+              "thema": "Wüste"
+            },
+            {
+              "id": "regenwald",
+              "titel": "Der Regenwald",
+              "thema": "Regenwald"
+            },
+            {
+              "id": "polargebiete",
+              "titel": "Am Nordpol und am Südpol",
+              "thema": "Polargebiet"
+            },
+            {
+              "id": "kueste",
+              "titel": "An der Küste",
+              "thema": "Küste"
+            }
+          ]
+        },
+        {
+          "id": "erde-und-mensch",
+          "name": "Erde und Mensch",
+          "welten": [
+            "muell-trennen",
+            "mensch-und-natur"
+          ],
+          "buecher": [
+            {
+              "id": "muell",
+              "titel": "Wohin mit dem Müll?",
+              "thema": "Müll"
+            },
+            {
+              "id": "natur-nutzen",
+              "titel": "Wie Menschen die Natur nutzen",
+              "thema": "Natur nutzen"
+            },
+            {
+              "id": "klima",
+              "titel": "Das Klima",
+              "thema": "Klima"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "weltall",
+      "name": "Weltall",
+      "bild": "erde-himmel",
+      "foto": "bibliothek/raeume/weltall-foto.webp",
+      "regale": [
+        {
+          "id": "sonne-erde-mond",
+          "name": "Sonne, Erde, Mond",
+          "welten": [
+            "tag-und-nacht",
+            "mond"
+          ],
+          "buecher": [
+            {
+              "id": "tag-nacht",
+              "titel": "Tag und Nacht",
+              "thema": "Erde"
+            },
+            {
+              "id": "jahreszeiten-erdachse",
+              "titel": "Warum es Jahreszeiten gibt",
+              "thema": "Erdachse"
+            },
+            {
+              "id": "mond",
+              "titel": "Der Mond",
+              "thema": "Mond"
+            },
+            {
+              "id": "mondlandung",
+              "titel": "Die Mondlandung",
+              "thema": "Mondlandung"
+            }
+          ]
+        },
+        {
+          "id": "sterne",
+          "name": "Sterne",
+          "welten": [
+            "am-himmel"
+          ],
+          "buecher": [
+            {
+              "id": "sonne-stern",
+              "titel": "Die Sonne ist ein Stern",
+              "thema": "Sonne"
+            },
+            {
+              "id": "sterne-nacht",
+              "titel": "Sterne in der Nacht",
+              "thema": "Sterne"
+            },
+            {
+              "id": "sternbilder",
+              "titel": "Bilder am Himmel",
+              "thema": "Sternbild"
+            },
+            {
+              "id": "kometen",
+              "titel": "Kometen und Sternschnuppen",
+              "thema": "Komet"
+            }
+          ]
+        },
+        {
+          "id": "planeten",
+          "name": "Die Planeten",
+          "welten": [
+            "am-himmel"
+          ],
+          "buecher": [
+            {
+              "id": "planeten",
+              "titel": "Die Planeten",
+              "thema": "Planeten"
+            },
+            {
+              "id": "sonnensystem",
+              "titel": "Wie groß ist das Sonnensystem?",
+              "thema": "Sonnensystem"
+            },
+            {
+              "id": "merkur",
+              "titel": "Merkur",
+              "thema": "Merkur"
+            },
+            {
+              "id": "venus",
+              "titel": "Venus",
+              "thema": "Venus"
+            },
+            {
+              "id": "mars",
+              "titel": "Mars",
+              "thema": "Mars"
+            },
+            {
+              "id": "jupiter",
+              "titel": "Jupiter",
+              "thema": "Jupiter"
+            },
+            {
+              "id": "saturn",
+              "titel": "Saturn",
+              "thema": "Saturn"
+            },
+            {
+              "id": "uranus",
+              "titel": "Uranus",
+              "thema": "Uranus"
+            },
+            {
+              "id": "neptun",
+              "titel": "Neptun",
+              "thema": "Neptun"
+            }
+          ]
+        },
+        {
+          "id": "raumfahrt",
+          "name": "Raumfahrt",
+          "buecher": [
+            {
+              "id": "rakete",
+              "titel": "Die Rakete",
+              "thema": "Rakete"
+            },
+            {
+              "id": "raumstation",
+              "titel": "Die Raumstation",
+              "thema": "Raumstation"
+            },
+            {
+              "id": "astronauten",
+              "titel": "Arbeiten im Weltraum",
+              "thema": "Astronauten"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forschen",
+      "name": "Forschen",
+      "bild": "werkzeug-bauen",
+      "foto": "bibliothek/raeume/forschen-foto.webp",
+      "regale": [
+        {
+          "id": "luft-stoffe",
+          "name": "Luft und Stoffe",
+          "welten": [
+            "was-luft-kann",
+            "stoffe"
+          ],
+          "buecher": [
+            {
+              "id": "luft",
+              "titel": "Was Luft kann",
+              "thema": "Luft"
+            },
+            {
+              "id": "stoffe",
+              "titel": "Holz, Metall, Glas",
+              "thema": "Stoffe"
+            }
+          ]
+        },
+        {
+          "id": "licht",
+          "name": "Licht",
+          "buecher": [
+            {
+              "id": "licht-schatten",
+              "titel": "Licht und Schatten",
+              "thema": "Schatten"
+            },
+            {
+              "id": "farben",
+              "titel": "Woher die Farben kommen",
+              "thema": "Farben"
+            },
+            {
+              "id": "spiegel",
+              "titel": "Der Spiegel",
+              "thema": "Spiegel"
+            }
+          ]
+        },
+        {
+          "id": "klang",
+          "name": "Klang",
+          "buecher": [
+            {
+              "id": "toene",
+              "titel": "Wie Töne entstehen",
+              "thema": "Töne"
+            },
+            {
+              "id": "laut-leise",
+              "titel": "Laut und leise",
+              "thema": "Lautstärke"
+            },
+            {
+              "id": "echo",
+              "titel": "Das Echo",
+              "thema": "Echo"
+            }
+          ]
+        },
+        {
+          "id": "kraefte",
+          "name": "Kräfte",
+          "welten": [
+            "magnete",
+            "hebel-waage",
+            "was-rollt"
+          ],
+          "buecher": [
+            {
+              "id": "magnet",
+              "titel": "Der Magnet",
+              "thema": "Magnet"
+            },
+            {
+              "id": "wippe-waage",
+              "titel": "Wippe und Waage",
+              "thema": "Hebel"
+            },
+            {
+              "id": "was-rollt",
+              "titel": "Was rollt?",
+              "thema": "Rollen"
+            },
+            {
+              "id": "schwimmen-sinken",
+              "titel": "Schwimmen und Sinken",
+              "thema": "Auftrieb"
+            },
+            {
+              "id": "fallen",
+              "titel": "Warum Dinge fallen",
+              "thema": "Schwerkraft"
+            },
+            {
+              "id": "reibung",
+              "titel": "Rutschen und Bremsen",
+              "thema": "Reibung"
+            },
+            {
+              "id": "fliegen",
+              "titel": "Was fliegt?",
+              "thema": "Fliegen"
+            }
+          ]
+        },
+        {
+          "id": "waerme-feuer",
+          "name": "Wärme und Feuer",
+          "buecher": [
+            {
+              "id": "warm-kalt",
+              "titel": "Warm und kalt",
+              "thema": "Wärme"
+            },
+            {
+              "id": "was-feuer-braucht",
+              "titel": "Was Feuer braucht",
+              "thema": "Verbrennen"
+            }
+          ]
+        },
+        {
+          "id": "stoffe-verwandeln",
+          "name": "Stoffe verwandeln sich",
+          "buecher": [
+            {
+              "id": "loesen",
+              "titel": "Wo ist der Zucker hin?",
+              "thema": "Lösen"
+            },
+            {
+              "id": "mischen-trennen",
+              "titel": "Mischen und Trennen",
+              "thema": "Trennen"
+            },
+            {
+              "id": "teig-geht-auf",
+              "titel": "Wie der Teig aufgeht",
+              "thema": "Hefe"
+            },
+            {
+              "id": "rost",
+              "titel": "Rost",
+              "thema": "Rost"
+            }
+          ]
+        },
+        {
+          "id": "strom",
+          "name": "Strom",
+          "welten": [
+            "strom"
+          ],
+          "buecher": [
+            {
+              "id": "stromkreis",
+              "titel": "Wie die Lampe leuchtet",
+              "thema": "Stromkreis"
+            },
+            {
+              "id": "woher-strom",
+              "titel": "Woher der Strom kommt",
+              "thema": "Strom"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "technik",
+      "name": "Technik und Arbeit",
+      "bild": "werkzeug-bauen",
+      "foto": "bibliothek/raeume/technik-foto.webp",
+      "regale": [
+        {
+          "id": "bauen",
+          "name": "Bauen",
+          "welten": [
+            "tuerme-bauen",
+            "bruecken",
+            "burg-kloster-schloss"
+          ],
+          "buecher": [
+            {
+              "id": "tuerme",
+              "titel": "Türme, die stehen",
+              "thema": "Turm"
+            },
+            {
+              "id": "bruecken",
+              "titel": "Brücken, die tragen",
+              "thema": "Brücke"
+            },
+            {
+              "id": "burg",
+              "titel": "Die Burg",
+              "thema": "Burg"
+            },
+            {
+              "id": "kloster",
+              "titel": "Das Kloster",
+              "thema": "Kloster"
+            }
+          ]
+        },
+        {
+          "id": "wie-funktioniert",
+          "name": "Wie funktioniert …?",
+          "buecher": [
+            {
+              "id": "auto",
+              "titel": "Das Auto",
+              "thema": "Auto"
+            },
+            {
+              "id": "zug",
+              "titel": "Der Zug",
+              "thema": "Zug"
+            },
+            {
+              "id": "flugzeug",
+              "titel": "Das Flugzeug",
+              "thema": "Flugzeug"
+            },
+            {
+              "id": "schiff",
+              "titel": "Das Schiff",
+              "thema": "Schiff"
+            },
+            {
+              "id": "baustelle",
+              "titel": "Kran und Baustelle",
+              "thema": "Baustelle"
+            },
+            {
+              "id": "telefon-internet",
+              "titel": "Telefon und Internet",
+              "thema": "Internet"
+            },
+            {
+              "id": "roboter",
+              "titel": "Der Roboter",
+              "thema": "Roboter"
+            }
+          ]
+        },
+        {
+          "id": "werkzeuge-erfindungen",
+          "name": "Werkzeuge und Erfindungen",
+          "welten": [
+            "werkzeuge",
+            "erfindungen"
+          ],
+          "buecher": [
+            {
+              "id": "werkzeuge",
+              "titel": "Hammer, Säge, Zange",
+              "thema": "Werkzeug"
+            },
+            {
+              "id": "rad",
+              "titel": "Das Rad",
+              "thema": "Rad"
+            },
+            {
+              "id": "gluehbirne",
+              "titel": "Vom Feuer zur Glühbirne",
+              "thema": "Licht"
+            },
+            {
+              "id": "fahrrad",
+              "titel": "Das Fahrrad",
+              "thema": "Fahrrad"
+            },
+            {
+              "id": "buchdruck",
+              "titel": "Der Buchdruck",
+              "thema": "Buchdruck"
+            },
+            {
+              "id": "computer",
+              "titel": "Der Computer",
+              "thema": "Computer"
+            }
+          ]
+        },
+        {
+          "id": "arbeit",
+          "name": "Arbeit",
+          "welten": [
+            "berufe",
+            "kleidung",
+            "ackerbau-hausbau"
+          ],
+          "buecher": [
+            {
+              "id": "berufe",
+              "titel": "Wer arbeitet wo?",
+              "thema": "Berufe"
+            },
+            {
+              "id": "kleidung",
+              "titel": "Vom Schaf zum Pullover",
+              "thema": "Kleidung"
+            },
+            {
+              "id": "hausbau",
+              "titel": "Ein Haus wird gebaut",
+              "thema": "Hausbau"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frueher",
+      "name": "Früher und die Zeit",
+      "bild": "zeit",
+      "foto": "bibliothek/raeume/frueher-foto.webp",
+      "regale": [
+        {
+          "id": "die-zeit",
+          "name": "Die Zeit",
+          "welten": [
+            "mein-tag",
+            "jahreskreis",
+            "feste-im-kalender",
+            "jahrhunderte"
+          ],
+          "buecher": [
+            {
+              "id": "tageslauf",
+              "titel": "Morgens, mittags, abends",
+              "thema": "Tageslauf"
+            },
+            {
+              "id": "jahr-im-kreis",
+              "titel": "Ein Jahr im Kreis",
+              "thema": "Kalender"
+            },
+            {
+              "id": "feste-im-jahr",
+              "titel": "Feste im Jahr",
+              "thema": "Feste"
+            },
+            {
+              "id": "hundert-jahre",
+              "titel": "Hundert Jahre",
+              "thema": "Jahrhundert"
+            }
+          ]
+        },
+        {
+          "id": "lange-her",
+          "name": "Lange her",
+          "welten": [
+            "zeitleiste-des-lebens",
+            "erste-menschen",
+            "frueher-heute"
+          ],
+          "buecher": [
+            {
+              "id": "band-des-lebens",
+              "titel": "Das lange Band des Lebens",
+              "thema": "Erdgeschichte"
+            },
+            {
+              "id": "steinzeit",
+              "titel": "Leben in der Steinzeit",
+              "thema": "Steinzeit"
+            },
+            {
+              "id": "erste-bauern",
+              "titel": "Die ersten Bauern",
+              "thema": "Ackerbau"
+            },
+            {
+              "id": "als-oma-klein-war",
+              "titel": "Als Oma klein war",
+              "thema": "Früher"
+            }
+          ]
+        },
+        {
+          "id": "voelker-von-frueher",
+          "name": "Völker von früher",
+          "buecher": [
+            {
+              "id": "aegypter",
+              "titel": "Die alten Ägypter",
+              "thema": "Ägypten"
+            },
+            {
+              "id": "roemer",
+              "titel": "Die Römer",
+              "thema": "Römer"
+            },
+            {
+              "id": "wikinger",
+              "titel": "Die Wikinger",
+              "thema": "Wikinger"
+            },
+            {
+              "id": "entdecker",
+              "titel": "Seefahrer und Entdecker",
+              "thema": "Entdecker"
+            }
+          ]
+        },
+        {
+          "id": "zahlen-schrift",
+          "name": "Zahlen und Schrift",
+          "welten": [
+            "geschichte-der-zahlen",
+            "geschichte-der-schrift"
+          ],
+          "buecher": [
+            {
+              "id": "kerbe-zur-null",
+              "titel": "Von der Kerbe zur Null",
+              "thema": "Zahlen"
+            },
+            {
+              "id": "bild-zum-buchstaben",
+              "titel": "Vom Bild zum Buchstaben",
+              "thema": "Schrift"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "laender",
+      "name": "Länder und Wege",
+      "bild": "raeume-wege",
+      "foto": "bibliothek/raeume/laender-foto.webp",
+      "regale": [
+        {
+          "id": "wege-karten",
+          "name": "Wege und Karten",
+          "welten": [
+            "von-oben",
+            "schulweg",
+            "karten"
+          ],
+          "buecher": [
+            {
+              "id": "von-oben",
+              "titel": "Von oben gesehen",
+              "thema": "Plan"
+            },
+            {
+              "id": "schulweg",
+              "titel": "Mein Schulweg",
+              "thema": "Schulweg"
+            },
+            {
+              "id": "karte-kompass",
+              "titel": "Karte und Kompass",
+              "thema": "Karte"
+            }
+          ]
+        },
+        {
+          "id": "unterwegs",
+          "name": "Unterwegs",
+          "welten": [
+            "unterwegs",
+            "verkehrszeichen"
+          ],
+          "buecher": [
+            {
+              "id": "bus-bahn",
+              "titel": "Mit Bus und Bahn",
+              "thema": "Bus und Bahn"
+            },
+            {
+              "id": "ampel-zebrastreifen",
+              "titel": "Ampel und Zebrastreifen",
+              "thema": "Verkehr"
+            }
+          ]
+        },
+        {
+          "id": "die-erde",
+          "name": "Die Erde",
+          "welten": [
+            "erdteile-ozeane",
+            "land-und-wasser",
+            "stadt-und-land",
+            "gemeinde-bis-europa"
+          ],
+          "buecher": [
+            {
+              "id": "erdteile-ozeane",
+              "titel": "Erdteile und Ozeane",
+              "thema": "Erdteile"
+            },
+            {
+              "id": "insel-see",
+              "titel": "Insel und See",
+              "thema": "Insel"
+            },
+            {
+              "id": "stadt-land",
+              "titel": "Stadt und Land",
+              "thema": "Stadt und Land"
+            },
+            {
+              "id": "dorf-bis-europa",
+              "titel": "Vom Dorf bis Europa",
+              "thema": "Europa"
+            }
+          ]
+        },
+        {
+          "id": "menschen-welt",
+          "name": "Menschen auf der Welt",
+          "welten": [
+            "kinder-anderswo",
+            "was-menschen-brauchen"
+          ],
+          "buecher": [
+            {
+              "id": "kinder-der-welt",
+              "titel": "Kinder auf der Welt",
+              "thema": "Kinder"
+            },
+            {
+              "id": "was-menschen-brauchen",
+              "titel": "Was alle Menschen brauchen",
+              "thema": "Was man braucht"
+            },
+            {
+              "id": "sprachen-schriften",
+              "titel": "Sprachen und Schriften",
+              "thema": "Sprachen"
+            },
+            {
+              "id": "essen-der-welt",
+              "titel": "Essen auf der Welt",
+              "thema": "Essen"
+            },
+            {
+              "id": "feste-der-welt",
+              "titel": "Feste auf der Welt",
+              "thema": "Feste"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "miteinander",
+      "name": "Miteinander",
+      "bild": "miteinander",
+      "foto": "bibliothek/raeume/miteinander-foto.webp",
+      "regale": [
+        {
+          "id": "gefuehle",
+          "name": "Gefühle",
+          "welten": [
+            "gefuehle",
+            "gefuehle-erkennen",
+            "wenn-die-wut-kommt",
+            "wenn-etwas-schiefgeht"
+          ],
+          "buecher": [
+            {
+              "id": "wie-fuehlt-sich-das-an",
+              "titel": "Wie fühlt sich das an?",
+              "thema": "Gefühle"
+            },
+            {
+              "id": "gefuehle-sehen",
+              "titel": "Gefühle sieht man",
+              "thema": "Gesicht"
+            },
+            {
+              "id": "wut",
+              "titel": "Wenn die Wut kommt",
+              "thema": "Wut"
+            },
+            {
+              "id": "etwas-geht-schief",
+              "titel": "Wenn etwas schiefgeht",
+              "thema": "Missgeschick"
+            }
+          ]
+        },
+        {
+          "id": "zusammen-spielen",
+          "name": "Zusammen spielen",
+          "welten": [
+            "warten-verlieren",
+            "mitspielen",
+            "streit-versoehnen",
+            "gerecht-teilen",
+            "fuer-andere-einstehen"
+          ],
+          "buecher": [
+            {
+              "id": "warten-verlieren",
+              "titel": "Warten und verlieren",
+              "thema": "Verlieren"
+            },
+            {
+              "id": "mitspielen",
+              "titel": "Darf ich mitspielen?",
+              "thema": "Mitspielen"
+            },
+            {
+              "id": "streit",
+              "titel": "Streit und Versöhnung",
+              "thema": "Streit"
+            },
+            {
+              "id": "teilen",
+              "titel": "Gerecht teilen",
+              "thema": "Teilen"
+            },
+            {
+              "id": "niemand-ausgelacht",
+              "titel": "Niemand wird ausgelacht",
+              "thema": "Zusammenhalten"
+            }
+          ]
+        },
+        {
+          "id": "freundlich",
+          "name": "Freundlich miteinander",
+          "welten": [
+            "hilfe-und-danke",
+            "hoeflich-reden",
+            "familien"
+          ],
+          "buecher": [
+            {
+              "id": "bitte-danke",
+              "titel": "Bitte, danke, hilf mir",
+              "thema": "Helfen"
+            },
+            {
+              "id": "freundlich-reden",
+              "titel": "Freundlich reden",
+              "thema": "Zuhören"
+            }
+          ]
+        },
+        {
+          "id": "regeln-rechte",
+          "name": "Regeln und Rechte",
+          "welten": [
+            "regeln",
+            "mehrheit",
+            "kinderrechte"
+          ],
+          "buecher": [
+            {
+              "id": "regeln",
+              "titel": "Wozu Regeln?",
+              "thema": "Regeln"
+            },
+            {
+              "id": "klasse-waehlt",
+              "titel": "Die Klasse wählt",
+              "thema": "Wahl"
+            },
+            {
+              "id": "kinderrechte",
+              "titel": "Kinderrechte",
+              "thema": "Kinderrechte"
+            }
+          ]
+        },
+        {
+          "id": "geld-medien",
+          "name": "Geld und Medien",
+          "welten": [
+            "wuensche-taschengeld",
+            "werbung",
+            "medien-alltag",
+            "echt-oder-ausgedacht"
+          ],
+          "buecher": [
+            {
+              "id": "taschengeld",
+              "titel": "Mein Taschengeld",
+              "thema": "Taschengeld"
+            },
+            {
+              "id": "werbung",
+              "titel": "Was Werbung will",
+              "thema": "Werbung"
+            },
+            {
+              "id": "medien",
+              "titel": "Bücher, Radio, Tablet",
+              "thema": "Medien"
+            },
+            {
+              "id": "echt-ausgedacht",
+              "titel": "Echt oder ausgedacht?",
+              "thema": "Echt, ausgedacht"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sicher-stark",
+      "name": "Sicher und stark",
+      "bild": "sicher-stark",
+      "foto": "bibliothek/raeume/sicher-stark-foto.webp",
+      "regale": [
+        {
+          "id": "koerper-gehoert-mir",
+          "name": "Mein Körper gehört mir",
+          "welten": [
+            "mein-koerper-gehoert-mir",
+            "ja-und-nein-gefuehl",
+            "alle-gefuehle",
+            "beruehrungen",
+            "nein-sagen",
+            "gute-schlechte-geheimnisse",
+            "hilfe-holen",
+            "nicht-schuld"
+          ],
+          "buecher": [
+            {
+              "id": "mein-koerper",
+              "titel": "Mein Körper gehört mir",
+              "thema": "Mein Körper"
+            },
+            {
+              "id": "ja-nein-gefuehl",
+              "titel": "Ja-Gefühl, Nein-Gefühl",
+              "thema": "Bauchgefühl"
+            },
+            {
+              "id": "alle-gefuehle",
+              "titel": "Alle Gefühle sind richtig",
+              "thema": "Gefühle"
+            },
+            {
+              "id": "beruehrungen",
+              "titel": "Berührungen",
+              "thema": "Berührungen"
+            },
+            {
+              "id": "nein-sagen",
+              "titel": "Ich darf Nein sagen",
+              "thema": "Nein sagen"
+            },
+            {
+              "id": "geheimnisse",
+              "titel": "Gute und schlechte Geheimnisse",
+              "thema": "Geheimnisse"
+            },
+            {
+              "id": "hilfe-holen",
+              "titel": "Ich hole mir Hilfe",
+              "thema": "Hilfe holen"
+            }
+          ]
+        },
+        {
+          "id": "sicher-unterwegs",
+          "name": "Sicher unterwegs",
+          "welten": [
+            "sicher-ueber-die-strasse",
+            "schwimmen-aufsicht",
+            "bescheid-sagen",
+            "verlaufen",
+            "sicher-im-netz"
+          ],
+          "buecher": [
+            {
+              "id": "ueber-die-strasse",
+              "titel": "Sicher über die Straße",
+              "thema": "Straße"
+            },
+            {
+              "id": "schwimmen-aufsicht",
+              "titel": "Nur mit Aufsicht ins Wasser",
+              "thema": "Schwimmen"
+            },
+            {
+              "id": "bescheid-sagen",
+              "titel": "Ich sage Bescheid",
+              "thema": "Bescheid sagen"
+            },
+            {
+              "id": "verlaufen",
+              "titel": "Wenn ich mich verlaufe",
+              "thema": "Verlaufen"
+            },
+            {
+              "id": "wegklicken",
+              "titel": "Wegklicken und Bescheid sagen",
+              "thema": "Internet"
+            }
+          ]
+        },
+        {
+          "id": "wenn-etwas-passiert",
+          "name": "Wenn etwas passiert",
+          "welten": [
+            "feuer-notruf",
+            "erste-hilfe"
+          ],
+          "buecher": [
+            {
+              "id": "feuer-erwachsene",
+              "titel": "Feuer: Erwachsene holen",
+              "thema": "Feuer"
+            },
+            {
+              "id": "erste-hilfe",
+              "titel": "Erste Hilfe und Notruf",
+              "thema": "Erste Hilfe"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "zahlen-buchstaben",
       "name": "Zahlen und Buchstaben",
       "bild": "zahlen-buchstaben",
@@ -371,11 +1798,19 @@
           "id": "rechnen",
           "name": "Rechnen",
           "fach": "mathe",
+          "welten": [
+            "vorrat-und-packungen"
+          ],
           "buecher": [
             {
               "id": "zehnerpaare",
               "titel": "Zehn Gäste, zwei Häuser",
               "thema": "Zehnerpaare"
+            },
+            {
+              "id": "alles-in-packungen",
+              "titel": "Alles in Packungen",
+              "thema": "Packungen"
             }
           ]
         }

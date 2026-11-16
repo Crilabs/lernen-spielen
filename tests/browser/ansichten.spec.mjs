@@ -41,6 +41,8 @@ const { chromium, webkit } = require("playwright");
 const { pinHash } = await import("../../spiele/eltern.js");
 
 const WURZEL = resolve(fileURLToPath(import.meta.url), "../../..");
+/** Räume der Bibliothek in Planreihenfolge (spiele/bibliothek.json) – der Reiter „Sachthemen“ zeigt alle. */
+const RAEUME = JSON.parse(await readFile(join(WURZEL, "spiele/bibliothek.json"), "utf8")).raeume.map((r) => r.id);
 // Server mit Byte-Bereichen: tests/browser/server.mjs (WebKit braucht Range für Audio).
 
 const AUFLOESUNGEN = [{ width: 1920, height: 1080 }, { width: 1280, height: 800 }, { width: 1440, height: 1080 }];
@@ -446,8 +448,8 @@ async function lauf(typ, name, groesse, basis) {
         return r;
       });
       pruefe(F, "Reiter „Sachthemen“: Räume der Bibliothek mit Bild, zugeklappt, Filter Alle/Gelesen/Noch offen, keine Klassen und keine Lernthemen",
-        sw.titel === "Sachthemen" && sw.nav === "Sachthemen" && JSON.stringify(sw.raeume) === JSON.stringify(["tiere", "zahlen-buchstaben"])
-          && sw.vignetten === 2 && sw.offen === 0 && JSON.stringify(sw.filter) === JSON.stringify(["Alle", "Gelesen", "Noch offen"])
+        sw.titel === "Sachthemen" && sw.nav === "Sachthemen" && JSON.stringify(sw.raeume) === JSON.stringify(RAEUME)
+          && sw.vignetten === RAEUME.length && sw.offen === 0 && JSON.stringify(sw.filter) === JSON.stringify(["Alle", "Gelesen", "Noch offen"])
           && sw.knoepfe.every((k) => /^Alles (aus|ein)klappen$/.test(k)) && !sw.klasse, JSON.stringify(sw));
       pruefe(F, "Sachthemen: Raum Tiere mit zehn Regalen; Haustiere teils gelesen mit Beschreibung der Welt, Vorschau-Link, Datum, ungelesenem und geplantem Buch",
         sw.regale.length === 10 && sw.kopf === "teils gelesen" && !sw.haustiere.gesehen && sw.haustiere.wort === "teils gelesen"
