@@ -3,8 +3,15 @@
 Regeln für gesprochene Texte (Erzähler statt sprechender Figuren): `docs/stimme.md`.
 
 Die Spiele lesen mit vorab erzeugten Dateien vor (`spiele/audio/`). `spiele/kern/stimme.js` spielt die Datei
-zum Text ab. Gibt es keine, spricht die Systemstimme (weiterhin ohne Zahlen). Erzeugt wird am Mac mit
-**Azure Speech**. Die App selbst braucht kein Internet und keinen Schlüssel.
+zum Text ab. Gibt es keine, spricht die Systemstimme (weiterhin ohne Zahlen). Erzeugt wird am Mac: neue oder geänderte
+Texte mit **ElevenLabs** (Stimme Livia, seit 2026-11-16, `einstellungen.json › elevenlabs`, Ordner `livia/`),
+Texte mit SSML-Korrektur (`ssml`, Wort mit `ssml`/`sprache`) mit **Azure Speech** (Florian, Ordner `florian/`).
+Vorhandene Aufnahmen bleiben bei ihrer Stimme: Die Prüfsumme `h` hängt am Azure-SSML, ein Wechsel des Anbieters
+erzeugt nichts neu. Fehlt der Block `elevenlabs`, spricht Azure alles Neue. Die App selbst braucht kein Internet
+und keinen Schlüssel.
+
+ElevenLabs-Schlüssel: `ELEVENLABS_API_KEY` in `.env` (nie ins Repo) oder in der Shell. Er braucht nur die
+Berechtigung Text to Speech. Die Kosten trägt `npm run audio` mit dem Anbieter in der Notiz in `kosten.json` ein.
 
 ## Einmal einrichten
 

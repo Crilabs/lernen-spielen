@@ -7,8 +7,10 @@ Markierung: **(Christian)** = von Christian entschieden, **(Annahme)** = Vorschl
 
 ## Kurz
 
-- **Eine Stimme: ein Erzähler.** Azure `de-DE-Florian:DragonHDLatestNeural`, Originalhöhe, 10 % langsamer
-  **(Christian, 2026-11-13)**.
+- **Eine Stimme: ein Erzähler.** Neue Texte spricht seit 2026-11-16 ElevenLabs **Livia** (`eleven_multilingual_v2`),
+  weil sie deutlich besser klingt **(Christian)**; alle Bücher sind damit vertont. Ältere Aufnahmen der Spiele
+  bleiben Azure `de-DE-Florian:DragonHDLatestNeural` (Originalhöhe, 10 % langsamer, Christian 2026-11-13) –
+  nicht rückwirkend getauscht. Azure bleibt eingerichtet: für Texte mit SSML-Korrektur und als Rückfall.
 - **Die Stimme passt nicht zu den Kindern und Tieren der Spiele (Christian, 2026-11-14).** Deshalb sprechen
   die Figuren nie selbst. **Der Erzähler spricht, die Figuren handeln.**
 - Gesprochen wird aus vorab erzeugten und angehörten Aufnahmen. Fehlt eine, springt die Systemstimme ein.
@@ -124,6 +126,10 @@ Im Elternbereich (Protokoll) steht „Keine Audiodatei: …“, wenn ein Spiel e
   Erzähler-Regel oben.
 - **Stimme wechseln:** neue Stimme und neuer `ordner` in `einstellungen.json`, `npm run audio` erzeugt alles
   neu, alles muss neu angehört werden, danach `npm run audio -- --aufraeumen`.
+- **ElevenLabs** (`einstellungen.json › elevenlabs`, Schlüssel `ELEVENLABS_API_KEY` in `.env`): Die
+  Nutzungsregeln von ElevenLabs verbieten Angebote für unter 18-Jährige ohne schriftliche Freigabe. Christian
+  kennt das und hat sich am 2026-11-16 trotzdem für Livia entschieden. Ohne den Block in `einstellungen.json`
+  spricht wieder Azure alles Neue.
 - **Hinweis an die Eltern** (Azure-Vorgabe für Angebote für Kinder): im Elternbereich unter „Hinweise“.
   Er bleibt, solange eine erzeugte Stimme spricht.
 - Azure-Ressource `lernen-spielen-stimme` (Gruppe `lernen-spielen`, westeurope, S0). Warum Azure und nicht

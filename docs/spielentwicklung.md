@@ -133,7 +133,7 @@ für alle Spiele des Katalogs vorhersagen lassen.
     review; die steuernde Sitzung selbst einmal am Ende als `steuerung`; `einheit`: tokens).
   - **Bilder** (Azure OpenAI): je erzeugtem Bild der Verbrauch aus der API-Antwort (`usage`: Ein- und Ausgabe-Token,
     bzw. Bildanzahl und Größe), eingetragen vom Bild-Werkzeug; dasselbe steht in `herkunft.json` des Bildes (A4).
-  - **Stimme** (Azure Speech): je Lauf von `npm run audio` die Zahl der neu erzeugten Zeichen für die Texte des
+  - **Stimme** (ElevenLabs Livia, Rückfall Azure Speech; Notiz nennt den Anbieter): je Lauf von `npm run audio` die Zahl der neu erzeugten Zeichen für die Texte des
     Spiels (`einheit`: zeichen).
 - **Werkzeuge:** `werkzeuge/kosten/kosten.mjs` (`trageEin`, `summen`, `prognose`, `usageAusTranskript`) und
   `werkzeuge/kosten/transkript.mjs` (bucht einen Agenten aus seinem Transkript; mit `--stand` bei Fortsetzungen nur den
