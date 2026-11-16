@@ -15,7 +15,7 @@
 // Vorschau-Parameter wie in der Vorlage (?pause, ?hinweis, ?eltern, ?einfuehrung, ?thema=, ?pruefen, ?stufe=).
 
 import "../../rahmen/leiste.js";
-import "../../rahmen/blase.js";
+import { lesezeit } from "../../rahmen/blase.js";
 import "../../rahmen/hilfe.js";
 import "../../rahmen/pause.js";
 import "../../rahmen/knopf.js";
@@ -113,10 +113,31 @@ const erzaehler = {
   },
   /** Die Rechenart wechselt (Regeln §8). @param {"wegnehmen" | "dazulegen"} art */
   wechsel: (art) => (art === "wegnehmen" ? blase.sage("Jetzt nimmt Timo etwas weg.") : blase.sage("Jetzt legt Timo etwas dazu.")),
-  einfuehrungPlus: () => blase.sage("Timo legt eine Stange und drei Perlen."),
-  einfuehrungMinus: () => blase.sage("Timo nimmt die Stange mit."),
-  einfuehrungDu: () => blase.sage("Jetzt tippst du."),
   gehtNicht: () => blase.sage("Das Spiel geht gerade nicht."),
+};
+
+/**
+ * Die Sätze der Einführung (docs/spielbau.md §8, Review Christian 2026-11-16: in Ruhe, als kleine Geschichte; Zehner
+ * und Einer werden genannt, nicht abgekürzt). Jeder steht als feste Zeichenkette in blase.sage (für `npm run audio`).
+ */
+const einleitung = {
+  raeumt: (/** @type {any} */ o) => blase.sage("Timo räumt heute das Perlenmaterial ein.", o),
+  zehner: (/** @type {any} */ o) => blase.sage("Die Zehnerstangen kommen in dieses Feld.", o),
+  einer: (/** @type {any} */ o) => blase.sage("Die kleinen Stäbchen kommen zu den Einern.", o),
+  aufgabe: (/** @type {any} */ o) => blase.sage("Oben steht eine Aufgabe.", o),
+  ergebnis: (/** @type {any} */ o) => blase.sage("Du tippst das Ergebnis.", o),
+  beispielPlus: (/** @type {any} */ o) => blase.sage("Zum Beispiel zehn plus drei.", o),
+  beispielMinus: (/** @type {any} */ o) => blase.sage("Zum Beispiel dreizehn minus zehn.", o),
+  tippeDreizehn: (/** @type {any} */ o) => blase.sage("Tippe die Eins und die Drei.", o),
+  tippeDrei: (/** @type {any} */ o) => blase.sage("Tippe die Drei.", o),
+  haken: (/** @type {any} */ o) => blase.sage("Dann tippe auf den Knopf mit dem Haken.", o),
+  legt: (/** @type {any} */ o) => blase.sage("Timo legt eine Stange und drei Perlen.", o),
+  nimmt: (/** @type {any} */ o) => blase.sage("Timo nimmt die Stange mit.", o),
+  andere: (/** @type {any} */ o) => blase.sage("Tippst du eine andere Zahl, zeigt Timo sie.", o),
+  nochmal: (/** @type {any} */ o) => blase.sage("Dann probierst du es einfach noch einmal.", o),
+  vertippt: (/** @type {any} */ o) => blase.sage("Vertippt? Dann tippe auf den Knopf neben der Null.", o),
+  lernen: (/** @type {any} */ o) => blase.sage("So lernst du Zehner und Einer.", o),
+  los: (/** @type {any} */ o) => blase.sage("Jetzt geht es los.", o),
 };
 
 /** Elternansicht (?eltern): beschreibend, von Stärken aus, kein Vergleich (3.3). @param {HTMLElement} feld */
@@ -955,13 +976,6 @@ async function raeumeBrett(ueberDieTafel) {
 /** Taste, auf der in der Einführung der Sonnenring liegt (für richtigerZug). @type {string | null} */
 let einfuehrungTaste = null;
 
-/** Eine Taste sinkt von selbst ein (Vormachen). @param {string} t */
-function drueckeVor(t) {
-  const el = t === "fertig" ? fertigKnopf : tastatur.shadowRoot.querySelector(`button[data-z="${t}"]`);
-  if (!el) return;
-  if (typeof el.animate === "function" && !wenigBewegung()) el.animate([{ transform: "translateY(0)" }, { transform: "translateY(0.7rem)", offset: 0.4 }, { transform: "translateY(0)" }], { duration: 260 });
-}
-
 /** Das Kind tippt die Folge von Tasten, je eine im Sonnenring; andere Tasten tun nichts. @param {string[]} folge */
 function kindTippt(folge) {
   return new Promise((ok) => {
@@ -996,64 +1010,94 @@ function kindTippt(folge) {
   });
 }
 
-/** Der Schritt 1 steht, bis das Kind irgendwo tippt (oder Enter, Leertaste, Escape drückt); dafür gibt der Prüfstand den Zug „tippen“. */
-let einfuehrungWartet = false;
-function warteAufTipp() {
-  return new Promise((ok) => {
-    einfuehrungWartet = true;
-    // Mit Tab erreichbar: die Tafel trägt den Fokus, bis das Kind Enter oder Leertaste drückt.
-    hof.tabIndex = 0;
-    hof.focus({ preventScroll: true });
-    const abmelden = beimTippen(() => {
-      abmelden();
-      einfuehrungWartet = false;
-      hof.removeAttribute("tabindex");
-      ok(undefined);
-    });
-  });
+/** Was die Hilfe in der Einführung tut: den Satz des Schritts noch einmal sagen. @type {(() => any) | null} */
+let einfuehrungHilfe = null;
+
+/** Sonnenring auf einem Ding der Einführung (Kopf Zehner/Einer, Aufgabe), höchstens einem. @type {Element | null} */
+let ringAuf = null;
+/** @param {Element | null} el */
+function ring(el) {
+  ringAuf?.classList.remove("markiert");
+  ringAuf = el;
+  el?.classList.add("markiert");
 }
 
-/** Spielt die Einführung: in einer Minus-Runde mit „13 − 10“ und „15 − 10“, sonst mit „10 + 3“ und „10 + 5“. @param {"plus" | "minus"} art */
+/**
+ * Ein Satz der Einführung: wartet, bis er gesprochen ist; ohne Ton steht er als Blase da und bleibt eine Lesezeit lang.
+ * @param {(o: { zeigen: boolean }) => Promise<any>} sag
+ */
+async function satz(sag) {
+  const zeigen = !leiste.ton;
+  await sag({ zeigen });
+  if (zeigen) await warte(lesezeit(blase.text));
+}
+
+/**
+ * Die Einführung im echten Spielbild (docs/spielbau.md §8; Review Christian 2026-11-16): eine kleine Geschichte. Timo
+ * räumt das Perlenmaterial ein; der Sonnenring zeigt die Köpfe Zehner und Einer und die Aufgabe. Das Beispiel (10 + 3,
+ * in einer Minus-Runde 13 − 10) tippt das Kind selbst, Taste für Taste im Sonnenring, dann den Knopf mit dem Haken;
+ * Timo legt bzw. nimmt. Danach: was bei einer anderen Zahl passiert, wie man korrigiert, was man lernt, und der
+ * Übergang zur ersten Aufgabe. Weiter geht es bei den Tasten nur mit dem Tipp des Kindes. Die Hilfe sagt den Schritt
+ * noch einmal. Nicht gebucht.
+ * @param {"plus" | "minus"} art
+ */
 async function einfuehrung(art) {
   einfuehrungLaeuft = true;
+  const e = einleitung;
+  const minus = art === "minus";
   try {
     stand.phase = "einfuehrung";
-    const vor = /** @type {any} */ (aufgabeAus(art === "minus" ? "minus:13-10" : "plus:3+10"));
-    const du = /** @type {any} */ (aufgabeAus(art === "minus" ? "minus:15-10" : "plus:5+10"));
-    // Schritt 1: Timo macht es vor.
+    const vor = /** @type {any} */ (aufgabeAus(minus ? "minus:13-10" : "plus:3+10"));
     neuerLauf();
+    // Timo steht mit dem Material am Rand der Matte; die Aufgabe kommt erst, wenn von ihr die Rede ist.
     zeigeStart(vor);
+    aufgabeFeld.classList.add("still");
+    einfuehrungHilfe = () => satz(e.raeumt);
+    await satz(e.raeumt);
+    ring(document.querySelector(".kopf.z"));
+    einfuehrungHilfe = () => satz(e.zehner);
+    await satz(e.zehner);
+    ring(document.querySelector(".kopf.e"));
+    einfuehrungHilfe = () => satz(e.einer);
+    await satz(e.einer);
     zeigeAufgabe(vor);
-    await warte(900);
-    let getippt = "";
-    for (const z of String(vor.antwort)) {
-      drueckeVor(z);
-      getippt += z;
-      setzeEingabe(getippt);
-      await warte(450);
-    }
-    drueckeVor("fertig");
-    await warte(300);
-    const satz1 = art === "minus" ? erzaehler.einfuehrungMinus() : erzaehler.einfuehrungPlus();
-    await Promise.all([wirkungRichtig(vor, { freude: false }), satz1]);
-    // Weiter erst mit einem Tipp des Kindes, nie nach einer Zeit (Regeln §8).
-    await warteAufTipp();
-    // Schritt 2: das Kind tippt.
+    ring(aufgabeFeld);
+    einfuehrungHilfe = () => satz(e.aufgabe).then(() => satz(e.ergebnis));
+    await satz(e.aufgabe);
+    ring(null);
+    await satz(e.ergebnis);
+    // Das Beispiel: das Kind tippt selbst.
+    await satz(minus ? e.beispielMinus : e.beispielPlus);
+    const tippSatz = minus ? e.tippeDrei : e.tippeDreizehn;
+    einfuehrungHilfe = () => satz(tippSatz);
+    const ziffern = kindTippt([...String(vor.antwort)]);
+    await satz(tippSatz);
+    await ziffern;
+    einfuehrungHilfe = () => satz(e.haken);
+    const haken = kindTippt(["fertig"]);
+    await satz(e.haken);
+    await haken;
+    einfuehrungHilfe = null;
     neuerLauf();
-    await raeumeBrett(false);
-    zeigeStart(du);
-    zeigeAufgabe(du);
-    const satz2 = erzaehler.einfuehrungDu();
-    await kindTippt([...String(du.antwort), "fertig"]);
-    neuerLauf();
-    await Promise.all([wirkungRichtig(du), satz2]);
-    await warte(600);
+    await Promise.all([wirkungRichtig(vor, { freude: false }), satz(minus ? e.nimmt : e.legt)]);
+    // Was bei einer anderen Zahl passiert, wie man korrigiert, was man lernt.
+    await satz(e.andere);
+    await satz(e.nochmal);
+    tastatur.markiere("loeschen");
+    await satz(e.vertippt);
+    tastatur.markiere(null);
+    await satz(e.lernen);
+    // Übergang zur ersten Aufgabe (Christian, 2026-11-16).
+    await satz(e.los);
   } finally {
     ueberspringeAlles();
     einfuehrungLaeuft = false;
-    einfuehrungWartet = false;
-    hof.removeAttribute("tabindex");
     einfuehrungTaste = null;
+    einfuehrungHilfe = null;
+    ring(null);
+    aufgabeFeld.classList.remove("still");
+    tastatur.markiere(null);
+    fertigKnopf.classList.remove("markiert");
   }
 }
 
@@ -1086,7 +1130,7 @@ const stand = { phase: "laden", aufgabe: /** @type {string | null} */ (null), nr
 let offeneAufgabe = null;
 const ORTE = { hilfe: "#hilfe >>> ls-knopf", haus: "#leiste >>> a.haus", weiter: "#pause >>> ls-knopf.weiter" };
 const WEITER = { art: "tippen", von: ORTE.weiter };
-const einfuehrungsZug = () => (einfuehrungTaste ? zug(einfuehrungTaste) : einfuehrungWartet ? { art: "tippen", von: "#hof" } : null);
+const einfuehrungsZug = () => (einfuehrungTaste ? zug(einfuehrungTaste) : null);
 meldePruefSchnittstelle({
   zustand: () => ({ ...stand }),
   zuege: () => (stand.phase === "aufgabe" ? offeneAufgabe?.zuege() ?? [] : stand.phase === "pause" ? [WEITER] : stand.phase === "einfuehrung" ? [einfuehrungsZug()].filter(Boolean) : []),
@@ -1097,7 +1141,8 @@ meldePruefSchnittstelle({
 // --- Hilfe-Leiter (grundsaetze.md L12, bedienung.md 6) ---------------------------------------------
 /** @type {(() => void) | null} */
 let hilfeTippen = null;
-hilfe.addEventListener("hilfe", () => { if (!einfuehrungLaeuft) hilfeTippen?.(); });
+// In der Einführung sagt die Hilfe den Schritt noch einmal (sonst hörte das Kind nur den Namen „Hilfe“).
+hilfe.addEventListener("hilfe", () => { if (einfuehrungLaeuft) einfuehrungHilfe?.(); else hilfeTippen?.(); });
 
 /**
  * Spielt eine Aufgabe bis zur Lösung.

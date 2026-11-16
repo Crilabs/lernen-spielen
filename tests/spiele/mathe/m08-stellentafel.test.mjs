@@ -137,3 +137,32 @@ test("Einer als farbiges Stäbchen: kein gold an Einer-Stäben", () => {
   assert.doesNotMatch(js, /wert: String\((a\.e|wert|e)\), gold/);
   assert.doesNotMatch(js, /gold: ""/);
 });
+
+// Review Christian 2026-11-16 (Regel spielbau.md §8): Die Einführung erzählt in Ruhe eine kleine Geschichte, nennt
+// Zehner und Einer, führt das Beispiel durch das Kind aus, sagt, was bei einer anderen Zahl passiert und wie man
+// korrigiert, was man lernt, und endet mit einem Übergang.
+test("Einführung erzählt eine kleine Geschichte (alle Sätze wörtlich, die alte Kurzform ist weg)", () => {
+  const js = readFileSync(new URL("../../../spiele/mathe/m08-stellentafel/spiel.js", import.meta.url), "utf8");
+  for (const satz of [
+    "Timo räumt heute das Perlenmaterial ein.",
+    "Die Zehnerstangen kommen in dieses Feld.",
+    "Die kleinen Stäbchen kommen zu den Einern.",
+    "Oben steht eine Aufgabe.",
+    "Du tippst das Ergebnis.",
+    "Zum Beispiel zehn plus drei.",
+    "Zum Beispiel dreizehn minus zehn.",
+    "Tippe die Eins und die Drei.",
+    "Tippe die Drei.",
+    "Dann tippe auf den Knopf mit dem Haken.",
+    "Timo legt eine Stange und drei Perlen.",
+    "Timo nimmt die Stange mit.",
+    "Tippst du eine andere Zahl, zeigt Timo sie.",
+    "Dann probierst du es einfach noch einmal.",
+    "Vertippt? Dann tippe auf den Knopf neben der Null.",
+    "So lernst du Zehner und Einer.",
+    "Jetzt geht es los.",
+  ]) assert.ok(js.includes(`blase.sage("${satz}"`), satz);
+  assert.ok(!js.includes("Jetzt tippst du."));
+  // Die Hilfe wirkt in der Einführung (sagt den Schritt noch einmal).
+  assert.match(js, /einfuehrungLaeuft\) einfuehrungHilfe\?\.\(\)/);
+});
