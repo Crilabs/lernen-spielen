@@ -38,13 +38,6 @@ test("anzeige: immer 10 + x, nie x + 10; Minus mit Startzahl", () => {
   assert.equal(L.anzeige(L.aufgabeAus("minus:14-4")), "14 − 4 =");
 });
 
-test("karten: eine Karte je Stelle, fehlt die Stelle, fehlt die Karte; über 99 eine lange Karte", () => {
-  assert.deepEqual(L.karten(14), { z: "10", e: "4", lang: null });
-  assert.deepEqual(L.karten(40), { z: "40", e: null, lang: null });
-  assert.deepEqual(L.karten(7), { z: null, e: "7", lang: null });
-  assert.deepEqual(L.karten(123), { z: null, e: null, lang: "123" });
-});
-
 test("zahlendreher und Kandidaten: das Ergebnis und was ein ratendes Kind tippt", () => {
   assert.equal(L.zahlendreher(14), 41);
   assert.equal(L.zahlendreher(11), null);
@@ -54,10 +47,9 @@ test("zahlendreher und Kandidaten: das Ergebnis und was ein ratendes Kind tippt"
   assert.ok(L.kandidaten(4).every((x) => x > 0 && x <= 99));
 });
 
-test("danebenSatz: verschiedene Zehner sagen die Stangen, sonst die Perlen; über 99 ein eigener Satz", () => {
+test("danebenSatz: verschiedene Zehner sagen die Stangen, sonst die Perlen", () => {
   assert.deepEqual(L.danebenSatz(41, 14), { art: "stangen", n: 4 });
   assert.deepEqual(L.danebenSatz(15, 14), { art: "perlen", n: 5 });
-  assert.deepEqual(L.danebenSatz(140, 14), { art: "gross", n: 0 });
   assert.equal(TEXTE.daneben.stangen[0], "Hier liegt keine Stange.");
   assert.equal(TEXTE.daneben.perlen[1], "Hier liegt eine Perle.");
   for (let n = 0; n <= 9; n++) assert.ok(TEXTE.daneben.stangen[n] && TEXTE.daneben.perlen[n]);
@@ -71,25 +63,10 @@ test("probeVon: nie die Lösung, nur das Material; bei Minus der Ring auf dem We
   assert.ok(TEXTE.hilfe1.stange && TEXTE.hilfe1.perlen);
 });
 
-test("Tasten: nächste Taste, Eingabe, höchstens drei Ziffern, keine führende Null", () => {
-  assert.equal(L.naechsteTaste("", 14), "1");
-  assert.equal(L.naechsteTaste("1", 14), "4");
-  assert.equal(L.naechsteTaste("14", 14), "fertig");
-  assert.equal(L.naechsteTaste("2", 14), "loeschen");
-  assert.equal(L.tippe("", "0"), "");
-  assert.equal(L.tippe("1", "4"), "14");
-  assert.equal(L.tippe("123", "4"), "123");
-  assert.equal(L.tippe("14", "loeschen"), "1");
-  assert.deepEqual(L.tastenZu("1", [14, 41]), ["4"]);
-  assert.deepEqual(L.tastenZu("14", [14]), ["fertig"]);
-  assert.deepEqual(L.tastenZu("9", [14]), ["loeschen"]);
-});
-
-test("Perlen: jede Perle einen Ton höher, alle zusammen höchstens etwa 1,1 s", () => {
+test("Perlen: jede Perle einen Ton höher", () => {
   for (let i = 1; i < 9; i++) assert.ok(L.perlenTon(i + 1) > L.perlenTon(i));
   assert.equal(L.perleHell(4), false);
   assert.equal(L.perleHell(5), true);
-  for (let e = 1; e <= 9; e++) assert.ok(L.perlenAbstand(e) * e <= 1150, `e=${e}`);
 });
 
 test("Freude: nie zweimal dieselbe hintereinander; Witz höchstens jede fünfte Aufgabe, nie zu früh", () => {
@@ -148,21 +125,22 @@ test("Einführung erzählt eine kleine Geschichte (alle Sätze wörtlich, die al
     "Die Zehnerstangen kommen in dieses Feld.",
     "Die kleinen Stäbchen kommen zu den Einern.",
     "Oben steht eine Aufgabe.",
-    "Du tippst das Ergebnis.",
+    "Unter jeder Zahl liegen ihre Perlen.",
+    "Die Zehner tippst du hier.",
+    "Die Einer tippst du hier.",
     "Zum Beispiel zehn plus drei.",
     "Zum Beispiel dreizehn minus zehn.",
     "Tippe die Eins und die Drei.",
     "Tippe die Drei.",
     "Dann tippe auf den Knopf mit dem Haken.",
-    "Timo legt eine Stange und drei Perlen.",
     "Timo nimmt die Stange mit.",
-    "Tippst du eine andere Zahl, zeigt Timo sie.",
+    "Passt eine Zahl nicht, siehst du es.",
     "Dann probierst du es einfach noch einmal.",
     "Vertippt? Tippe auf den Knopf neben der Null.",
     "So lernst du Zehner und Einer.",
     "Jetzt geht es los.",
   ]) assert.ok(js.includes(`blase.sage("${satz}"`), satz);
-  assert.ok(!js.includes("Jetzt tippst du."));
+  for (const alt of ["Jetzt tippst du.", "Du tippst das Ergebnis.", "Timo legt eine Stange und drei Perlen."]) assert.ok(!js.includes(`"${alt}"`), alt);
   // Die Hilfe wirkt in der Einführung (sagt den Schritt noch einmal).
   assert.match(js, /einfuehrungLaeuft\) einfuehrungHilfe\?\.\(\)/);
 });
@@ -256,4 +234,19 @@ test("Aufgabe aus Täfelchen: Stelle und Rolle jeder Ziffer, Material darunter",
     for (const x of t.taefelchen.filter((x) => x.rolle === "wandert")) assert.equal(x.ziffer, ziel[x.stelle], key);
     if (t.nullDarunter) assert.equal(ziel.e, "0", key);
   }
+});
+
+// Die Oberfläche ist das Spiel: Aufgabe aus Täfelchen auf der Matte, zwei Plätze für Zehner und Einer, kein hohles
+// Material, keine Aufgabenkarte, keine Kartenreihe mehr.
+test("Matte: Aufgabe aus Täfelchen, Plätze für Zehner und Einer, nichts vom alten Bild", () => {
+  const html = readFileSync(new URL("../../../spiele/mathe/m08-stellentafel/index.html", import.meta.url), "utf8");
+  assert.match(html, /class="aufgabe" id="aufgabe"/);
+  assert.match(html, /class="platz" id="platz-z" data-stelle="z"/);
+  assert.match(html, /class="platz" id="platz-e" data-stelle="e"/);
+  for (const alt of ["hohl", "gleichung", "karten-z", "rechnung"]) assert.ok(!html.includes(alt), alt);
+});
+
+test("Richtig bei Plus: „Zehn und acht. Achtzehn.“ für jede Aufgabe 10 + e", () => {
+  assert.equal(TEXTE.richtig["plus:8+10"], "Zehn und acht. Achtzehn.");
+  for (let e = 1; e <= 9; e++) assert.ok(TEXTE.richtig[`plus:${e}+10`], String(e));
 });

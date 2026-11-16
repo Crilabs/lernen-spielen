@@ -296,5 +296,27 @@
   "einheit": "zeichen",
   "menge": 45,
   "notiz": "Review-Fix: Satz „Vertippt?“ auf 8 Wörter gekürzt"
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 211,
+  "notiz": "npm run audio"
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 123,
+  "notiz": "Wanderung: Sätze der Einführung (gefilterter Lauf nur M08)"
  }
 ]

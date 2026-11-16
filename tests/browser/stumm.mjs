@@ -3,8 +3,8 @@
 //
 // Chromium bekommt --mute-audio. WebKit kennt keinen solchen Schalter; dort (und zur Sicherheit auch in Chromium)
 // macht ein Init-Skript die Seite selbst leise, ohne den Ablauf zu ändern: Medien laufen mit Lautstärke 0
-// weiter (ended, Zeiten, Fehler und Autoplay-Sperre wie sonst), Web Audio geht über einen Gain-Knoten mit 0, die Systemstimme spricht mit
-// Lautstärke 0 und meldet start/end wie sonst. Prüfungen, die speechSynthesis.speak selbst ersetzen, bleiben gültig.
+// weiter (ended, Zeiten, Fehler und Autoplay-Sperre wie sonst), Web Audio geht über einen Gain-Knoten mit 0, die Systemstimme spricht
+// gar nicht (eine stille Nachbildung meldet start/end wie sonst). Prüfungen, die speechSynthesis.speak selbst ersetzen, bleiben gültig.
 
 /** Läuft in jeder Seite vor deren Skripten. */
 function leise() {
@@ -30,10 +30,31 @@ function leise() {
     return connect.call(this, ziel, ...a);
   };
   if (window.speechSynthesis) {
-    const speak = window.speechSynthesis.speak.bind(window.speechSynthesis);
-    window.speechSynthesis.speak = (u) => {
-      u.volume = 0;
-      speak(u);
+    // Die Systemstimme spricht nie wirklich: WebKit hält sich nicht an volume = 0, und Sätze ohne Aufnahme liefen
+    // hörbar über die Lautsprecher (Christian, 2026-11-16). Stattdessen kommen „start“ und „end“ wie bei einer echten
+    // Stimme, nach einer Dauer, die zur Länge des Textes passt; cancel() meldet „canceled“ wie Chromium.
+    const s = window.speechSynthesis;
+    /** @type {{ u: SpeechSynthesisUtterance, t1: ReturnType<typeof setTimeout>, t2: ReturnType<typeof setTimeout> }[]} */
+    let offen = [];
+    s.speak = (u) => {
+      const ms = Math.max(400, (u.text.length * 60) / (u.rate || 1));
+      const t1 = setTimeout(() => u.dispatchEvent(new Event("start")), 30);
+      const t2 = setTimeout(() => {
+        offen = offen.filter((o) => o.u !== u);
+        u.dispatchEvent(new Event("end"));
+      }, ms);
+      offen.push({ u, t1, t2 });
+    };
+    s.cancel = () => {
+      const alle = offen;
+      offen = [];
+      for (const o of alle) {
+        clearTimeout(o.t1);
+        clearTimeout(o.t2);
+        const ev = new Event("error");
+        Object.defineProperty(ev, "error", { value: "canceled" });
+        o.u.dispatchEvent(ev);
+      }
     };
   }
 }

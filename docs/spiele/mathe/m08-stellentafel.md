@@ -1,6 +1,9 @@
 # M08 Stellentafel – Spielidee (2026-11-16)
 
 Katalog M08 · Mathe · `spiele/mathe/m08-stellentafel/` · zuerst Kl. 1 (zehn-plus, minus-zehner, Stufe kopf). **(Annahme)** = korrigierbar.
+
+> **Stand 2026-11-16:** §12 (Wanderung) ersetzt §1, §3, §4 und §6; §11 hält das Review davor fest. Goldene Einerperlen
+> (§9) und Stellenwertkarten im Spiel gibt es nicht mehr.
 ## 1. Spielkern
 - **Held:** Timo (Rollstuhl, trägt Dinge auf dem Schoß). Er rollt an der Stellentafel entlang und legt goldenes Material hinein: die Zehnerstange in die Spalte Z, einzelne Perlen in die Spalte E. Bei Minus nimmt er Material auf den Schoß und rollt ein Stück weg.
 - **Handlung:** Ergebnis tippen, dann „Fertig“ (erst festlegen, dann sehen). Nur diese eine.
@@ -65,3 +68,28 @@ Katalog M08 · Mathe · `spiele/mathe/m08-stellentafel/` · zuerst Kl. 1 (zehn-p
   wieder tippt.
 - **Rundenzeit** beginnt nach der Einführung (sonst endete die Runde eines sicheren Kindes vor „gekonnt“, G14).
 - Neue Aufnahmen per Spracherkennung geprüft (keine Ordnungszahlen). Browser-Prüfung `tests/browser/m08.spec.mjs`.
+
+## 12. Wanderung (Christian, 2026-11-16)
+Anlass: „Es soll klar werden, dass vor die 8 einfach eine 1 kommt – rechnen ohne zu rechnen. Wer jede Aufgabe mit den
+Fingern abzählt, kommt sonst auch durch.“ Die Oberfläche ist das Spiel, kein Hintergrund.
+- **Matte:** Die Aufgabe steht groß aus Zifferntäfelchen, jedes mit dem Rand seiner Stelle (die 1 der 10 orange, die 0
+  und die Einer türkis); unter jeder Zahl ihr Material (goldene Zehnerstange, farbiges Einerstäbchen). Darunter die
+  Stellentafel mit den Köpfen Zehner und Einer und je einem leeren Platz in Täfelchengröße.
+- **Handlung:** Das Kind tippt das Ergebnis in die beiden Plätze (Ring springt vom Zehner- zum Einer-Platz, ein Tipp
+  auf einen Platz wählt ihn, Löschen nimmt die letzte Ziffer), dann den Haken. Eine Zahl ohne Zehner (18 − 10) hat
+  einen leeren Zehner-Platz; „08“ gilt nicht.
+- **Wirkung richtig:** Die 1 der 10 und die 8 fliegen im Bogen auf ihre Plätze und rasten auf den getippten Täfelchen
+  ein, Stange und Stäbchen wandern in ihre Spalten, die 0 verblasst; Timo (links neben der Matte) freut sich; bei Plus
+  „Zehn und acht. Achtzehn.“ Bei Minus geht zuerst das Weggenommene mit seinen Ziffern zu Timo auf den Schoß; bei
+  c − e kommt unter der Einerziffer eine 0 zum Vorschein und wandert auf den Einer-Platz.
+- **Daneben:** Was passt, rastet ein; die Ziffer einer Stelle, die nicht passt, bleibt schwebend neben der getippten
+  Ziffer stehen, der Platz wackelt, ihr Material bleibt oben. Satz nach Spalte, dann „Versuch es noch einmal.“ Der
+  nächste Tipp holt alles zurück; die getippten Täfelchen bleiben, das Kind korrigiert nur die falsche Stelle.
+- **Hilfe:** Stufe 1 legt das Material still in die Spalten (was geht, mit Sonnenring), Ring auf der falschen Stelle;
+  Stufe 2 Ring Zug für Zug.
+- **Einführung:** Timo räumt das Perlenmaterial ein · Oben steht eine Aufgabe · Unter jeder Zahl liegen ihre Perlen ·
+  Zehnerstangen/Stäbchen in ihre Felder · Die Zehner/Einer tippst du hier (Ring auf den Plätzen) · Beispiel 10 + 3
+  bzw. 13 − 10, das Kind tippt selbst · Haken · Passt eine Zahl nicht, siehst du es · noch einmal · Vertippt? · So
+  lernst du Zehner und Einer · Jetzt geht es los.
+- **Gestrichen:** Aufgabenkarte, Stellenwertkarten-Reihe, hohles Material, Timo legt selbst (dauerte zu lange und
+  verdeckte die Plätze), Lückenaufgaben (Christian: erst einmal nicht).

@@ -31,7 +31,22 @@ const pruefe = (/** @type {boolean} */ ok, /** @type {string} */ was) => {
 };
 
 for (const [name, typ] of [["chromium", chromium], ["webkit", webkit]]) {
-  const browser = await starteStumm(typ, {});
+  // Jeder Kontext bekommt einen frisch gestarteten Browser: WebKit stürzte im langen Lauf nach vielen Kontexten
+  // gelegentlich ab („Target closed“), einzeln lief derselbe Block grün.
+  /** @type {any[]} */
+  const offen = [];
+  const browser = {
+    newContext: async (/** @type {any} */ o) => {
+      const b = await starteStumm(typ, {});
+      offen.push(b);
+      const k = await b.newContext(o);
+      // Mit dem Kontext geht auch sein Browser zu (sonst laufen viele WebKit-Prozesse gleichzeitig).
+      const zu = k.close.bind(k);
+      k.close = async () => { await zu(); await b.close().catch(() => {}); };
+      return k;
+    },
+    close: async () => { for (const b of offen) await b.close().catch(() => {}); },
+  };
   try {
     for (const ton of [true, false]) {
       const k = await browser.newContext({ viewport: { width: 1280, height: 800 } });
@@ -102,7 +117,7 @@ for (const [name, typ] of [["chromium", chromium], ["webkit", webkit]]) {
           await p.evaluate((zz) => window.lsPruefen.fuehreAus(zz), z);
         }
         const saetze = await p.evaluate(() => window.__saetze);
-        if (!hilfeGetippt && saetze.at(-1) === "Tippst du eine andere Zahl, zeigt Timo sie.") {
+        if (!hilfeGetippt && saetze.at(-1) === "Passt eine Zahl nicht, siehst du es.") {
           hilfeGetippt = true;
           await p.locator("#hilfe ls-knopf").click();
           await warte(400);
@@ -112,7 +127,98 @@ for (const [name, typ] of [["chromium", chromium], ["webkit", webkit]]) {
       const nachHaken = haken ? Date.now() - haken : 0;
       pruefe(nachHaken > 12000, `${name}, ohne Ton, Bewegung reduziert: nach dem Haken noch ${Math.round(nachHaken / 1000)} s Einführung (Sätze bleiben lesbar)`);
       const saetze = await p.evaluate(() => window.__saetze);
-      pruefe(saetze.filter((t) => t === "Tippst du eine andere Zahl, zeigt Timo sie.").length >= 2, `${name}: Hilfe nach dem Haken wiederholt den laufenden Satz`);
+      pruefe(saetze.filter((t) => t === "Passt eine Zahl nicht, siehst du es.").length >= 2, `${name}: Hilfe nach dem Haken wiederholt den laufenden Satz`);
+      await k.close();
+    }
+    // Wanderung (Christian 2026-11-16): Stellen tippen, Ziffern und Material wandern in die Tafel.
+    for (const reduziert of [false, true]) {
+      const k = await browser.newContext({ viewport: { width: 1280, height: 800 }, ...(reduziert ? { reducedMotion: "reduce" } : {}) });
+      await k.addInitScript(() => { window.__LS_PRUEFEN__ = true; });
+      const p = await k.newPage();
+      const fehler = [];
+      p.on("pageerror", (e) => fehler.push(String(e)));
+      await p.goto(`${basis}?pruefen`);
+      const zustand = () => p.evaluate(() => window.lsPruefen?.zustand());
+      const was = `${name}${reduziert ? ", Bewegung reduziert" : ""}`;
+      const t0 = Date.now();
+      // Die Einführung (beim Start) zügig durchtippen, bis die erste Aufgabe dasteht.
+      while (Date.now() - t0 < FRIST_MS && (await zustand())?.phase !== "aufgabe") {
+        const z = await p.evaluate(() => window.lsPruefen?.richtigerZug());
+        if (z) await p.evaluate((zz) => window.lsPruefen.fuehreAus(zz), z);
+        await warte(200);
+      }
+      await warte(500);
+      const taste = (/** @type {string} */ z) => p.locator("#tastatur button", { hasText: new RegExp(`^${z}$`) }).first().click();
+      const aufgabe = String((await zustand())?.aufgabe);
+      const e = Number(/plus:(\d)\+10/.exec(aufgabe)?.[1] ?? 0);
+      pruefe(e > 0, `${was}: erste Aufgabe ist Plus (${aufgabe})`);
+      // Falsch in den Einern: nur der Einer-Platz wackelt, die Zehner rasten ein.
+      const falschE = String(e === 9 ? 8 : e + 1);
+      await taste("1");
+      await taste(falschE);
+      await p.locator("#fertig").click();
+      await warte(2600);
+      const wackeln = await p.evaluate(() => ["z", "e"].filter((k) => document.getElementById(`platz-${k}`).classList.contains("passt-nicht")));
+      pruefe(JSON.stringify(wackeln) === JSON.stringify(["e"]), `${was}: bei 1${falschE} wackelt nur der Einer-Platz (${wackeln.join(",")})`);
+      // Korrigieren nur die Einer: Einer-Platz, richtige Ziffer, Haken.
+      await p.locator("#platz-e").click();
+      await taste(String(e));
+      await p.locator("#fertig").click();
+      // Die Endlage abwarten (bei reduzierter Bewegung sofort; die nächste Aufgabe räumt sie bald wieder ab).
+      const lies = () => p.evaluate(() => ({
+        z: document.querySelector("#platz-z .taefelchen")?.textContent,
+        e: document.querySelector("#platz-e .taefelchen")?.textContent,
+        stabZ: document.querySelector("#real-z ls-perlenstab")?.getAttribute("wert"),
+        stabE: document.querySelector("#real-e ls-perlenstab")?.getAttribute("wert"),
+        fliegen: document.querySelectorAll(".flug").length,
+      }));
+      let ende = await lies();
+      for (let i = 0; i < 120 && !(ende.z === "1" && ende.stabE && ende.fliegen === 0); i++) { await warte(50); ende = await lies(); }
+      pruefe(ende.z === "1" && ende.e === String(e) && ende.stabZ === "10" && ende.stabE === String(e) && ende.fliegen === 0,
+        `${was}: Endlage 1 | ${e} mit Stange und Stäbchen in den Spalten (${JSON.stringify(ende)})`);
+      pruefe(fehler.length === 0, `${was}: keine Seitenfehler ${fehler.join(" | ")}`);
+      await k.close();
+    }
+    // Einer zuerst: Platz Einer, Ziffer, Platz Zehner, 1, Haken.
+    {
+      const k = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+      await k.addInitScript(() => { window.__LS_PRUEFEN__ = true; });
+      const p = await k.newPage();
+      await p.goto(`${basis}?pruefen`);
+      const zustand = () => p.evaluate(() => window.lsPruefen?.zustand());
+      const taste = (/** @type {string} */ z) => p.locator("#tastatur button", { hasText: new RegExp(`^${z}$`) }).first().click();
+      const t0 = Date.now();
+      const geloest = [];
+      p.on("console", () => {});
+      await p.exposeFunction("__geloest", (/** @type {string} */ key) => geloest.push(key));
+      await p.evaluate(() => document.addEventListener("ls-ergebnis", (/** @type {any} */ ev) => window.__geloest(`${ev.detail.key}:${ev.detail.ok}`)));
+      let einerZuerst = false;
+      while (Date.now() - t0 < FRIST_MS && !einerZuerst) {
+        const st = await zustand();
+        if (st?.phase !== "aufgabe") {
+          const z = await p.evaluate(() => window.lsPruefen?.richtigerZug());
+          if (z && st?.phase === "einfuehrung") await p.evaluate((zz) => window.lsPruefen.fuehreAus(zz), z);
+          await warte(200);
+          continue;
+        }
+        const key = String(st.aufgabe);
+        const plus = /plus:(\d)\+10/.exec(key);
+        const vorher = geloest.length;
+        if (plus && !einerZuerst) {
+          await p.locator("#platz-e").click();
+          await taste(plus[1]);
+          await p.locator("#platz-z").click();
+          await taste("1");
+          await p.locator("#fertig").click();
+          await warte(300);
+          einerZuerst = geloest.length > vorher && geloest.at(-1) === `${key}:true`;
+          pruefe(einerZuerst, `${name}: Einer zuerst getippt löst ${key}`);
+        } else {
+          const z = await p.evaluate(() => window.lsPruefen.richtigerZug());
+          if (z) await p.evaluate((zz) => window.lsPruefen.fuehreAus(zz), z);
+        }
+        await warte(250);
+      }
       await k.close();
     }
     // Minus: Die Vorschau bringt zwei Plus-, dann Minusaufgaben (VORSCHAU in spiel.js). In der ersten Minusaufgabe ruft
@@ -137,6 +243,19 @@ for (const [name, typ] of [["chromium", chromium], ["webkit", webkit]]) {
       await warte(150);
     }
     pruefe(saetze.has("Zum Beispiel dreizehn minus zehn."), `${name}: Anleitung in einer Minusaufgabe zeigt 13 − 10`);
+    // Das Kind tippt das Beispiel selbst: Platz Einer, 3, Haken – der Zehner-Platz bleibt leer (Zahl ohne Zehner).
+    const ersterZug = async () => { for (let i = 0; i < 100; i++) { const z = await p.evaluate(() => window.lsPruefen?.richtigerZug()); if (z) return z; await warte(150); } return null; };
+    const z1 = await ersterZug();
+    pruefe(z1?.von === "#platz-e", `${name}: bei 13 − 10 zuerst der Platz Einer (${z1?.von})`);
+    await p.locator("#platz-e").click();
+    await warte(200);
+    await p.locator("#tastatur button", { hasText: /^3$/ }).first().click();
+    await (async () => { for (let i = 0; i < 100; i++) { if ((await p.evaluate(() => window.lsPruefen?.richtigerZug()))?.von === "#fertig") return; await warte(150); } })();
+    await p.locator("#fertig").click();
+    const liesMinus = () => p.evaluate(() => ({ z: document.querySelector("#platz-z .taefelchen")?.textContent ?? "", e: document.querySelector("#platz-e .taefelchen")?.textContent, stabE: document.querySelector("#real-e ls-perlenstab")?.getAttribute("wert"), schoss: document.querySelectorAll("#schoss ls-perlenstab").length }));
+    let minusEnde = await liesMinus();
+    for (let i = 0; i < 60 && !(minusEnde.stabE && minusEnde.schoss); i++) { await warte(100); minusEnde = await liesMinus(); }
+    pruefe(minusEnde.z === "" && minusEnde.e === "3" && minusEnde.stabE === "3" && minusEnde.schoss === 1, `${name}: 13 − 10: Zehner leer, Einer 3, Stange bei Timo (${JSON.stringify(minusEnde)})`);
     await k.close();
   } finally {
     await browser.close();

@@ -2271,6 +2271,11 @@
    "h": "ae7a2106aa",
    "gehoert": false
   },
+  "Die Einer tippst du hier.": {
+   "datei": "florian/5c570bbcb0b8.mp3",
+   "h": "0a29d87f7f",
+   "gehoert": false
+  },
   "Die Eins tippen.": {
    "datei": "florian/5437656c5199.mp3",
    "h": "0c0f38664e",
@@ -2309,11 +2314,6 @@
   "Die Fünf tippen.": {
    "datei": "florian/93c7981e648a.mp3",
    "h": "13557d7e85",
-   "gehoert": false
-  },
-  "Die Karte passt nicht auf die Tafel.": {
-   "datei": "florian/ee7bb45b01a2.mp3",
-   "h": "d35fcf9ab4",
    "gehoert": false
   },
   "Die Katze miaut.": {
@@ -2484,6 +2484,11 @@
   "Die Zehn tippen.": {
    "datei": "florian/1950e31c797b.mp3",
    "h": "72ec63850b",
+   "gehoert": false
+  },
+  "Die Zehner tippst du hier.": {
+   "datei": "florian/67eb8f81c285.mp3",
+   "h": "32bafdbd06",
    "gehoert": false
   },
   "Die Zehnerstangen kommen in dieses Feld.": {
@@ -2674,11 +2679,6 @@
   "Du hörst eine Zahl.": {
    "datei": "florian/d74cf58e5017.mp3",
    "h": "eaa5b0ae1c",
-   "gehoert": false
-  },
-  "Du tippst das Ergebnis.": {
-   "datei": "florian/0c49031c471c.mp3",
-   "h": "519b39e0a9",
    "gehoert": false
   },
   "Ecken und Seiten zählen": {
@@ -5746,6 +5746,11 @@
    "h": "e2ff1251ff",
    "gehoert": false
   },
+  "Passt eine Zahl nicht, siehst du es.": {
+   "datei": "florian/dd06dcbd601e.mp3",
+   "h": "6b86067a9c",
+   "gehoert": false
+  },
   "Passt nicht": {
    "datei": "florian/335d551fe080.mp3",
    "h": "b74987f895",
@@ -6976,11 +6981,6 @@
    "h": "b58d0b1e69",
    "gehoert": false
   },
-  "Timo legt eine Stange und drei Perlen.": {
-   "datei": "florian/5f4177f6acef.mp3",
-   "h": "826eb3f445",
-   "gehoert": false
-  },
   "Timo legt elf.": {
    "datei": "florian/376baddc88b5.mp3",
    "h": "08e24dfee2",
@@ -7566,11 +7566,6 @@
    "h": "15eb41b5b6",
    "gehoert": false
   },
-  "Tippst du eine andere Zahl, zeigt Timo sie.": {
-   "datei": "florian/6253e710587b.mp3",
-   "h": "aa4f5f88e0",
-   "gehoert": false
-  },
   "Tippst du eine andere Zahl?": {
    "datei": "florian/2f01c8dbe2c0.mp3",
    "h": "e62375ec6a",
@@ -7704,6 +7699,11 @@
   "Unser Hase frisst gern Möhren.": {
    "datei": "florian/12e6a853917b.mp3",
    "h": "668e21b4fb",
+   "gehoert": false
+  },
+  "Unter jeder Zahl liegen ihre Perlen.": {
+   "datei": "florian/9f344fab2897.mp3",
+   "h": "07024fccb4",
    "gehoert": false
   },
   "Unterlängen-Schleifen": {
@@ -8779,6 +8779,51 @@
   "Zehn plus zwei.": {
    "datei": "florian/3b82bc8c496d.mp3",
    "h": "6c4ecedfa4",
+   "gehoert": false
+  },
+  "Zehn und acht. Achtzehn.": {
+   "datei": "florian/e31fc8962856.mp3",
+   "h": "a24ddca137",
+   "gehoert": false
+  },
+  "Zehn und drei. Dreizehn.": {
+   "datei": "florian/44a606e7a938.mp3",
+   "h": "d326248b9b",
+   "gehoert": false
+  },
+  "Zehn und eins. Elf.": {
+   "datei": "florian/8838ae68a6ff.mp3",
+   "h": "3621fd192c",
+   "gehoert": false
+  },
+  "Zehn und fünf. Fünfzehn.": {
+   "datei": "florian/c2c5ef746d09.mp3",
+   "h": "c4f1a1cb0c",
+   "gehoert": false
+  },
+  "Zehn und neun. Neunzehn.": {
+   "datei": "florian/2a2ca7d0a690.mp3",
+   "h": "a348430797",
+   "gehoert": false
+  },
+  "Zehn und sechs. Sechzehn.": {
+   "datei": "florian/440786b94282.mp3",
+   "h": "61f1770f86",
+   "gehoert": false
+  },
+  "Zehn und sieben. Siebzehn.": {
+   "datei": "florian/5bd3641b31f0.mp3",
+   "h": "e72e192b0f",
+   "gehoert": false
+  },
+  "Zehn und vier. Vierzehn.": {
+   "datei": "florian/294349e334b2.mp3",
+   "h": "75a4a31798",
+   "gehoert": false
+  },
+  "Zehn und zwei. Zwölf.": {
+   "datei": "florian/4d731cedb357.mp3",
+   "h": "67bb5504f1",
    "gehoert": false
   },
   "Zehn.": {

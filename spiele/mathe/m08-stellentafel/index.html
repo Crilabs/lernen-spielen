@@ -4,104 +4,103 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>Zahlen legen</title>
-<!-- M08 Stellentafel (Idee docs/spiele/mathe/m08-stellentafel.md, Review 2026-11-16). Das Spielbild ist ein heller
-     Montessori-Werkraum über den ganzen Bildschirm (raum.js): oben ein Streifen Wand mit Fenster und Regal, darunter
-     Ahornboden. Auf dem Boden liegt die Arbeitsmatte mit der Stellentafel (Spalten Zehner und Einer), Timo rollt davor
-     und legt das Material hinein. Rechts die Aufgabenkarte, darunter das Ziffernbrett (Tablett). Leiste, Blase, Hilfe
-     und Pause an ihren festen Plätzen. -->
+<!-- M08 Stellentafel (Idee docs/spiele/mathe/m08-stellentafel.md, Wanderung 2026-11-16). Heller Montessori-Werkraum
+     (raum.js). Die Oberfläche ist das Spiel: Auf der Matte steht die Aufgabe aus Zifferntäfelchen (Rand in der Farbe
+     ihrer Stelle), unter jeder Zahl ihr Material; darunter die Stellentafel mit je einem Platz für Zehner und Einer.
+     Das Kind tippt das Ergebnis aus dem Ziffernkasten auf die Plätze; beim Haken wandern die Ziffern der Aufgabe und
+     ihr Material in die Tafel. Timo steht links daneben. Leiste, Blase, Hilfe und Pause an ihren festen Plätzen. -->
 <link rel="stylesheet" href="../../rahmen/seite.css">
 <style>
   /* ===== SPIELWELT: Montessori-Werkraum, die Stellentafel auf der Arbeitsmatte. Alles in rem (1rem = Bildhöhe/108). ===== */
   :root {
     --timo-hoehe: 56rem;      /* Feld der Figur (320 × 280); die Figur selbst ist etwa 47 rem hoch */
-    --stange: 4.4rem;         /* Dicke der goldenen Stangen und der Einerperlen */
+    /* Auf :root, damit auch die fliegenden Täfelchen (eigene Ebene über der Matte) sie kennen. */
+    --tf-b: 8.6rem;           /* Täfelchen: Breite, Höhe, Schrift */
+    --tf-h: 10.6rem;
+    --tf-schrift: 7.6rem;
+    --stab: 3.6rem;           /* Dicke der Perlenstäbe */
+    --zehner: #F07C1E;
+    --einer: #0FA3A3;
   }
   /* Der Raum (raum.js) füllt die Welt; die Wandkante liegt bei 29 rem. Bis das SVG da ist: Wand und Boden als Fläche. */
   .welt { background: linear-gradient(#F6ECDF 0 29rem, #EDDCC0 29rem); }
   .welt svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
+  /* Drei Spalten: links Timo (und die Blase), in der Mitte die Matte, rechts der Ziffernkasten. */
   .spielflaeche {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 46rem;
-    grid-template-rows: 12rem minmax(0, 1fr);
+    grid-template-columns: 24rem minmax(0, 1fr) 46rem;
     column-gap: 2.4rem;
-    row-gap: 1.6rem;
     padding: 1.6rem 2.4rem 2.4rem;
   }
   ls-blase { grid-column: 1; grid-row: 1; align-self: start; justify-self: start; position: relative; z-index: 7; }
 
-  /* Die Aufgabe auf einer Papierkarte (flach, kein Knopf); das Kästchen nimmt die getippte Zahl auf. */
-  .gleichung {
-    grid-column: 2; grid-row: 1;
-    justify-self: center; align-self: start;
-    display: flex; align-items: center; justify-content: center; gap: 1.6rem;
-    padding: 1.2rem 2.4rem;
+  /* Die Matte (Lernfeld, grundsaetze-bilder.md §6.2): Papier, Tinte-Kontur, gestrichelte Naht. Alles darauf ist
+     Material – die Aufgabe aus Zifferntäfelchen, darunter ihr Material, darunter die Stellentafel mit zwei Plätzen. */
+  .hof { grid-column: 2; grid-row: 1; position: relative; z-index: 6; min-height: 0; }
+  .matte {
+    position: relative;
+    display: flex; flex-direction: column; gap: 2rem;
+    padding: 2.4rem 3rem 3rem;
     background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-gross);
-    color: #3B2A6B;
-    font-size: 6.2rem; font-weight: 700; line-height: 1; white-space: nowrap;
   }
-  .gleichung.still { visibility: hidden; }
-  .gleichung .rechnung:empty::before { content: "\00a0"; }
-  .karte {
-    display: inline-flex; align-items: center; justify-content: center;
-    min-width: 11rem; height: 8.6rem; padding: 0 1.4rem;
-    border: 0.55rem solid #3B2A6B;
-    border-radius: 2rem 1.4rem 2.2rem 1.2rem;
-    background: rgba(251, 248, 241, 0.7);
-    font-size: 6rem;
-  }
-  .karte.leer { color: transparent; }
+  .matte::after { content: ""; position: absolute; inset: 1.2rem; border: 0.25rem dashed var(--ls-naht); border-radius: calc(var(--ls-radius-gross) - 1.2rem); pointer-events: none; }
 
-  /* Der Boden: oben die Arbeitsmatte mit der Stellentafel, davor der Weg, auf dem Timo rollt. Die Matte ist Papier mit
-     Tinte-Kontur und gestrichelter Naht (Lernfeld, grundsaetze-bilder.md §6.2, C3); die Köpfe sind Farbflächen mit
-     Kontur, die Spalten trennen feine Nahtlinien. */
-  .hof:focus { outline: none; }
-  .hof { grid-column: 1; grid-row: 1 / 3; position: relative; z-index: 6; min-height: 0; margin-top: 1rem; }
-  .tafel {
-    position: absolute; left: 50%; top: 13.6rem; transform: translateX(-50%);
-    display: grid; grid-template-columns: 56rem 56rem; column-gap: 2.4rem;
-    grid-template-rows: 8rem 12rem 18rem; row-gap: 0;
+  /* Die Aufgabe: Zahlen aus Täfelchen, unter jeder Zahl ihr Material; Zeichen in Tinte. */
+  .aufgabe { position: relative; z-index: 1; display: flex; justify-content: center; align-items: flex-start; gap: 3.2rem; min-height: calc(var(--tf-h) + 1.2rem + var(--stab)); }
+  .aufgabe.still { visibility: hidden; }
+  .zahl { display: grid; justify-items: center; gap: 1.2rem; }
+  .ziffern { display: flex; gap: 0.6rem; }
+  .stoff { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; min-height: var(--stab); }
+  .zeichen { height: var(--tf-h); display: flex; align-items: center; font-size: var(--tf-schrift); font-weight: 700; color: var(--ls-tinte); line-height: 1; }
+  .taefelchen {
+    --farbe: var(--ls-tinte);
+    position: relative;
+    width: var(--tf-b); height: var(--tf-h);
+    display: grid; place-items: center;
+    background: var(--ls-papier); color: var(--ls-tinte);
+    border: 0.7rem solid var(--farbe); border-radius: 1.4rem;
+    box-shadow: 0 0 0 0.3rem var(--ls-tinte);   /* Kontur wie bei den Stellenwertkarten, kein Schatten (kein Knopf) */
+    font-family: "Andika", sans-serif; font-size: var(--tf-schrift); font-weight: 700; line-height: 1;
   }
-  /* Die Matte liegt unter der Tafel (eigener Stapel der Tafel, darum z-index −1 hinter den Spalten). */
-  .tafel::before, .tafel::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
-  .tafel::before { inset: -2.4rem -2.4rem -1.6rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-gross); }
-  .tafel::after { inset: -1.2rem -1.2rem -0.4rem; border: 0.25rem dashed var(--ls-naht); border-radius: calc(var(--ls-radius-gross) - 1.2rem); }
+  .taefelchen[data-stelle="z"] { --farbe: var(--zehner); }
+  .taefelchen[data-stelle="e"] { --farbe: var(--einer); }
+  .taefelchen.verblasst { opacity: 0.35; transition: opacity 0.4s; }
+  /* Die 0, die bei c − e unter der Einerziffer liegt (kommt zum Vorschein, wenn die Ziffer mit Timo geht). */
+  .taefelchen .darunter { position: absolute; inset: -0.7rem; border-radius: inherit; }
+  .flug { position: absolute; left: 0; top: 0; z-index: 9; will-change: transform; pointer-events: none; }
+
+  /* Die Stellentafel: Köpfe Zehner und Einer, darunter je ein Feld mit dem Material und dem Platz für die Ziffer. */
+  .tafel { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; grid-template-rows: 6.4rem auto; }
   .kopf {
     display: flex; align-items: center; justify-content: center;
     border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 2rem;
-    font-size: 5.2rem; font-weight: 700; color: var(--ls-tinte); line-height: 1;
+    font-size: 4.6rem; font-weight: 700; color: var(--ls-tinte); line-height: 1;
   }
-  .kopf.z { background: #F07C1E; }
-  .kopf.e { background: #0FA3A3; }
-  .karten, .feld { position: relative; }
-  .kopf.z, #karten-z, #feld-z { grid-column: 1; }
-  .kopf.e, #karten-e, #feld-e { grid-column: 2; }
-  .kopf { grid-row: 1; }
-  .karten { grid-row: 2; }
-  .feld { grid-row: 3; }
-  /* Nahtlinien: jede Spalte ist links und rechts mit einer feinen Linie gezogen. */
-  .karten::before, .feld::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0; pointer-events: none;
-    border-left: 0.3rem solid var(--ls-naht); border-right: 0.3rem solid var(--ls-naht); }
-  .karten { display: flex; align-items: center; justify-content: center; }
-  .karten > * { flex: none; }
-  /* Das Material liegt groß in der Spalte; die Perlen der Einer füllen sie. */
-  .real { position: absolute; left: 2rem; top: 4.4rem; display: flex; align-items: center; }
-  .real ls-perlenstab { height: var(--stange); }
-  .hohl {
-    position: absolute; left: 2rem; right: 2rem; top: 1.2rem;
-    display: grid; grid-template-columns: repeat(2, max-content); gap: 0.5rem 1.6rem; justify-content: start;
+  .kopf.z { background: var(--zehner); }
+  .kopf.e { background: var(--einer); }
+  .feld {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1.6rem;
+    padding: 1.6rem 0 0.4rem;
+    border-left: 0.3rem solid var(--ls-naht); border-right: 0.3rem solid var(--ls-naht);
   }
-  .hohl.wenig { grid-template-columns: max-content; gap: 1rem; }
-  .hohl .hohlstab { display: block; padding: 0.3rem 0.7rem; border: 0.35rem dashed var(--ls-tinte-weich); border-radius: 1.4rem; opacity: 0.9; line-height: 0; }
-  .hohl ls-perlenstab { height: 2rem; }
-  .hohl.wenig ls-perlenstab { height: 3.4rem; }
-  #hohl-e.wenig ls-perlenstab { height: var(--stange); }
-  /* Die hohle Karte der getippten Zahl liegt im Kartenstreifen, mittig über den beiden Spalten. */
-  .hohlkarte { grid-column: 1 / 3; grid-row: 2; justify-self: center; align-self: center; z-index: 3; line-height: 0; pointer-events: none; }
-  .hohlkarte ls-stellenwertkarte { --karte-hoehe: 11rem; }
-  .karten ls-stellenwertkarte { --karte-hoehe: 11rem; will-change: transform; }
+  .real { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; min-height: var(--stab); }
+  .matte ls-perlenstab, .schoss ls-perlenstab { height: var(--stab); display: block; }
+  /* Der Platz für eine Ziffer: so groß wie ein Täfelchen, gestrichelt in der Farbe der Stelle; ausgewählt mit dem
+     Sonnenring. Flach – er wählt nur aus (Tippziel, kein Knopf-Schatten). */
+  .platz {
+    --farbe: var(--ls-tinte);
+    width: calc(var(--tf-b) + 2rem); height: calc(var(--tf-h) + 2rem);
+    display: grid; place-items: center; padding: 0; margin: 0;
+    background: transparent; border: 0.45rem dashed var(--farbe); border-radius: 1.8rem;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .platz[data-stelle="z"] { --farbe: var(--zehner); }
+  .platz[data-stelle="e"] { --farbe: var(--einer); }
+  .platz:focus-visible { outline: 0.6rem solid var(--ls-sonne); }
 
-  /* Timo und die Dinge, die mit ihm rollen: über allem Bild, nehmen keine Tipps. */
+  /* Timo und die Dinge, die mit ihm gehen: über allem Bild, nehmen keine Tipps. */
   .figuren { position: fixed; inset: 0; z-index: 5; pointer-events: none; overflow: hidden; }
   .timo { position: absolute; left: 0; top: 0; height: var(--timo-hoehe); width: calc(var(--timo-hoehe) * 320 / 280); transform-origin: 50% 90.7%; will-change: transform; }
   .timo > .koerper { width: 100%; height: 100%; transform-origin: 50% 90.7%; }
@@ -110,16 +109,12 @@
     position: absolute; left: 0; top: 0; width: 20rem; height: 3rem; margin: -1.5rem 0 0 -10rem;
     border-radius: 50%; background: rgba(43, 38, 34, 0.28); filter: blur(0.25rem); will-change: transform;
   }
-  /* Auf dem Schoß: die Stange und die Perlen, die Timo gleich legt. */
-  .schoss { position: absolute; left: 47%; top: 60%; display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-start; }
-  .schoss ls-perlenstab { height: 3rem; display: block; }
-  /* Die getippte Zahl im Flug von der Aufgabe auf die Karte. */
-  .flug { position: absolute; left: 0; top: 0; color: #3B2A6B; font-weight: 700; line-height: 1; white-space: nowrap; will-change: transform; z-index: 9; }
-  .flug.hohl { opacity: 0.8; }
+  /* Auf dem Schoß: was Timo bei Minus mitnimmt. */
+  .schoss { position: absolute; left: 47%; top: 58%; display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-start; }
 
-  /* Ziffernbrett, liegt rechts auf dem Hof: Ziffernblock, darunter Fertig. Unten bleibt Platz für die Hilfe. */
+  /* Der Ziffernkasten (Tablett): Täfelchen 0–9, Löschen, darunter der Knopf mit dem Haken. */
   .brett {
-    grid-column: 2; grid-row: 2;
+    grid-column: 3; grid-row: 1;
     align-self: start;
     display: flex; flex-direction: column; align-items: center; gap: 2.4rem;
     padding: 2.4rem 2rem 2.6rem;
@@ -128,12 +123,12 @@
   }
   #fertig { align-self: center; }
 
-  /* Schmale Bildschirme (4:3): kleinere Aufgabe und schmalere Tafel. */
+  /* Schmale Bildschirme (4:3): kleinere Täfelchen und Stäbe. */
   @media (max-aspect-ratio: 3/2) {
-    .spielflaeche { grid-template-columns: minmax(0, 1fr) 42rem; }
-    .gleichung { font-size: 5.2rem; }
-    .karte { font-size: 5rem; min-width: 9rem; }
-    .tafel { grid-template-columns: 44rem 44rem; column-gap: 1.6rem; }
+    :root { --tf-b: 7rem; --tf-h: 8.8rem; --tf-schrift: 6.2rem; --stab: 2.8rem; }
+    .spielflaeche { grid-template-columns: 20rem minmax(0, 1fr) 42rem; }
+    .kopf { font-size: 4rem; }
+    .aufgabe { gap: 2.4rem; }
   }
 
   /* Pause: Sachmoment auf der Papierkarte. */
@@ -171,16 +166,15 @@
 <div class="buehne">
   <main class="spielflaeche" aria-label="Stellentafel auf der Arbeitsmatte">
     <ls-blase id="blase" ohne-text></ls-blase>
-    <div class="gleichung" id="aufgabe" aria-live="polite"><span class="rechnung" id="rechnung"></span><span class="karte leer" id="eingabe">0</span></div>
     <div class="hof" id="hof">
-      <div class="tafel" id="tafel">
-        <div class="kopf z" aria-hidden="true">Zehner</div>
-        <div class="kopf e" aria-hidden="true">Einer</div>
-        <div class="karten" id="karten-z" role="img" aria-label="Zehnerkarten"></div>
-        <div class="karten" id="karten-e" role="img" aria-label="Einerkarten"></div>
-        <div class="feld" id="feld-z" role="img" aria-label="Zehnerfeld"><div class="real" id="real-z"></div><div class="hohl" id="hohl-z"></div></div>
-        <div class="feld" id="feld-e" role="img" aria-label="Einerfeld"><div class="real" id="real-e"></div><div class="hohl" id="hohl-e"></div></div>
-        <div class="hohlkarte" id="hohlkarte"></div>
+      <div class="matte" id="matte">
+        <div class="aufgabe" id="aufgabe" aria-live="polite"></div>
+        <div class="tafel" id="tafel">
+          <div class="kopf z" aria-hidden="true">Zehner</div>
+          <div class="kopf e" aria-hidden="true">Einer</div>
+          <div class="feld" id="feld-z"><div class="real" id="real-z"></div><button class="platz" id="platz-z" data-stelle="z" type="button" aria-label="Zehner"></button></div>
+          <div class="feld" id="feld-e"><div class="real" id="real-e"></div><button class="platz" id="platz-e" data-stelle="e" type="button" aria-label="Einer"></button></div>
+        </div>
       </div>
     </div>
     <div class="brett tablett" id="brett">

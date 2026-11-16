@@ -1,7 +1,7 @@
 // Stellentafel – reine Spiellogik ohne DOM (in Node testbar: tests/spiele/mathe/m08-stellentafel.test.mjs).
 // Idee: docs/spiele/mathe/m08-stellentafel.md. Eine Aufgabe 10 + e, c − 10 oder c − e (Art `rechnen`, Themen zehn-plus
-// und minus-zehner): Timo legt goldenes Material in die Stellentafel (Spalte Z: Stangen, Spalte E: Perlen), und die
-// Stellenwertkarten schieben sich zur Zahl zusammen.
+// und minus-zehner): Das Kind tippt das Ergebnis in die Plätze Zehner und Einer; die Ziffern der Aufgabe und ihr
+// Material wandern in die Stellentafel (Christian, 2026-11-16).
 
 /**
  * @typedef {{ op: "plus" | "minus", e: number, c: number, weg: number, antwort: number, key: string }} Aufgabe
@@ -37,17 +37,6 @@ export const anzeige = (a) => (a.op === "plus" ? `10 + ${a.e} =` : `${a.c} − $
 /** Zehner und Einer einer Zahl bis 99. @param {number} w @returns {{ z: number, e: number }} */
 export const teile = (w) => ({ z: Math.floor(w / 10), e: w % 10 });
 
-/**
- * Die Karten einer Zahl: Zehnerkarte (z. B. „10“, „40“) und Einerkarte; fehlt eine Stelle, fehlt die Karte (die
- * Spalte bleibt leer und sichtbar). Über 99 gibt es keine Spalte dafür: eine einzige lange Karte.
- * @param {number} w @returns {{ z: string | null, e: string | null, lang: string | null }}
- */
-export function karten(w) {
-  if (w > 99) return { z: null, e: null, lang: String(w) };
-  const { z, e } = teile(w);
-  return { z: z ? `${z}0` : null, e: e ? String(e) : null, lang: null };
-}
-
 /** Zahlendreher (14 → 41); bei gleichen Ziffern oder Einerzahlen null. @param {number} w @returns {number | null} */
 export function zahlendreher(w) {
   if (w < 10 || w > 99) return null;
@@ -68,11 +57,10 @@ export function kandidaten(antwort) {
 
 /**
  * Welcher Satz sagt, was an der getippten Zahl w nicht passt (texte.json › daneben): unterscheiden sich die Zehner,
- * sagt er, wie viele Stangen dort liegen, sonst, wie viele Perlen; über 99 gibt es nur den einen Satz.
- * @param {number} w getippt @param {number} antwort @returns {{ art: "stangen" | "perlen" | "gross", n: number }}
+ * sagt er, wie viele Stangen dort liegen, sonst, wie viele Perlen.
+ * @param {number} w getippt @param {number} antwort @returns {{ art: "stangen" | "perlen", n: number }}
  */
 export function danebenSatz(w, antwort) {
-  if (w > 99) return { art: "gross", n: 0 };
   const t = teile(w);
   return teile(antwort).z !== t.z ? { art: "stangen", n: t.z } : { art: "perlen", n: t.e };
 }
@@ -85,37 +73,6 @@ export function danebenSatz(w, antwort) {
 export function probeVon(a) {
   if (a.op === "plus") return { stange: true, perlen: a.e, ring: null, satz: `plus:${a.e}` };
   return { stange: true, perlen: a.e, ring: a.weg === 10 ? "stange" : "perlen", satz: a.weg === 10 ? "stange" : "perlen" };
-}
-
-/**
- * Nächste Taste auf dem Weg zur Zahl `ziel`: die nächste Ziffer, "loeschen", wenn die Eingabe nicht mehr passt,
- * sonst "fertig". @param {string} eingabe @param {number} ziel @returns {string}
- */
-export function naechsteTaste(eingabe, ziel) {
-  const z = String(ziel);
-  if (eingabe === z) return "fertig";
-  if (!z.startsWith(eingabe)) return "loeschen";
-  return z[eingabe.length];
-}
-
-/**
- * Tasten, die die Eingabe zu einer der Zahlen weiterführen (für zuege()), dazu "fertig", wo es geht, und "loeschen",
- * wenn nichts anderes mehr geht. @param {string} eingabe @param {number[]} zahlen @returns {string[]}
- */
-export function tastenZu(eingabe, zahlen) {
-  const t = new Set();
-  for (const x of zahlen.map(String)) if (x.startsWith(eingabe) && x.length > eingabe.length) t.add(x[eingabe.length]);
-  const aus = [...t].sort();
-  if (zahlen.map(String).includes(eingabe)) aus.push("fertig");
-  if (eingabe && !aus.length) aus.push("loeschen");
-  return aus;
-}
-
-/** Eingabe nach einer Taste (höchstens drei Ziffern, keine führende Null). @param {string} eingabe @param {string} taste */
-export function tippe(eingabe, taste) {
-  if (taste === "loeschen") return eingabe.slice(0, -1);
-  if (!/^\d$/.test(taste) || eingabe.length >= 3 || (eingabe === "" && taste === "0")) return eingabe;
-  return eingabe + taste;
 }
 
 // --- Stellen-Eingabe (Christian 2026-11-16): das Ergebnis in Zehner und Einer tippen ---------------------------
@@ -228,8 +185,6 @@ const PENTATONIK = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.5
 export const perlenTon = (i) => PENTATONIK[Math.min(PENTATONIK.length, Math.max(1, i)) - 1];
 /** Ab der fünften Perle klingt ein heller Oberton mit. @param {number} i */
 export const perleHell = (i) => i >= 5;
-/** Abstand der Perlen in ms: alle zusammen höchstens etwa 1,1 s (Idee §1). @param {number} e */
-export const perlenAbstand = (e) => Math.round(Math.min(100, 760 / Math.max(1, e)));
 
 // --- Freude und Witz ------------------------------------------------------------------------------------
 /** Bewegungen für eine richtige Antwort (Idee §7): nie zweimal dieselbe hintereinander. */

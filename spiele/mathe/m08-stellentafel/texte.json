@@ -1,5 +1,5 @@
 {
- "hinweis": "Sätze von M08 Stellentafel, die aus Daten kommen (je Aufgabe und Zahl ausgeschrieben, keine zur Laufzeit zusammengesetzten Sätze). aufgabe: die Aufgabe zum Vorlesen (Noch-mal-hören, wird nicht von selbst gesprochen). gleichung: nach einem Fehlversuch oder mit Hilfe gelöst. daneben: wo die getippte Zahl nicht passt, nach Spalte (Stangen oder Perlen). hilfe1: die Probe (Material liegt still in der Tafel); hilfe2: die Lösung (das Kind tippt selbst). Feste Sätze stehen im Aufruf blase.sage in spiel.js.",
+ "hinweis": "Sätze von M08 Stellentafel, die aus Daten kommen (je Aufgabe und Zahl ausgeschrieben, keine zur Laufzeit zusammengesetzten Sätze). aufgabe: die Aufgabe zum Vorlesen (Noch-mal-hören, wird nicht von selbst gesprochen). gleichung: Minus nach einem Fehlversuch oder mit Hilfe gelöst. richtig: Plus, bei jeder Lösung („Zehn und acht. Achtzehn.“ – die Acht steckt in der Achtzehn). daneben: wo die getippte Zahl nicht passt, nach Spalte (Stangen oder Perlen). hilfe1: die Probe (Material liegt still in der Tafel); hilfe2: die Lösung (das Kind tippt selbst). Feste Sätze stehen im Aufruf blase.sage in spiel.js.",
  "aufgabe": {
   "plus:1+10": "Zehn plus eins.",
   "minus:11-10": "Elf minus zehn.",
@@ -58,6 +58,17 @@
   "minus:19-10": "Neunzehn minus zehn ist neun.",
   "minus:19-9": "Neunzehn minus neun ist zehn."
  },
+ "richtig": {
+  "plus:1+10": "Zehn und eins. Elf.",
+  "plus:2+10": "Zehn und zwei. Zwölf.",
+  "plus:3+10": "Zehn und drei. Dreizehn.",
+  "plus:4+10": "Zehn und vier. Vierzehn.",
+  "plus:5+10": "Zehn und fünf. Fünfzehn.",
+  "plus:6+10": "Zehn und sechs. Sechzehn.",
+  "plus:7+10": "Zehn und sieben. Siebzehn.",
+  "plus:8+10": "Zehn und acht. Achtzehn.",
+  "plus:9+10": "Zehn und neun. Neunzehn."
+ },
  "daneben": {
   "stangen": {
    "0": "Hier liegt keine Stange.",
@@ -82,8 +93,7 @@
    "7": "Hier liegen sieben Perlen.",
    "8": "Hier liegen acht Perlen.",
    "9": "Hier liegen neun Perlen."
-  },
-  "gross": "Die Karte passt nicht auf die Tafel."
+  }
  },
  "hilfe1": {
   "plus": {
