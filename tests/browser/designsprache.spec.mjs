@@ -41,6 +41,17 @@ for (const typ of [chromium, webkit]) {
     });
     pruefe(z.anzahl === 5 && z.ganz.every(Boolean) && z.regal, `${L} Zuletzt gelernt: alle fünf Einträge ganz sichtbar, Knopf im Bild`, JSON.stringify(z));
 
+    // Regal „Was ich schon kann“: der Sonnenring um das gewählte Ding (0,9 rem um das Material) wird nicht abgeschnitten
+    await p.goto(`${basis}/regal.html`);
+    await p.waitForFunction(() => document.querySelector('.ding[aria-pressed="true"] .material'));
+    const ring = await p.evaluate(() => {
+      const m = document.querySelector('.ding[aria-pressed="true"] .material').getBoundingClientRect();
+      const b = document.querySelector(".bretter").getBoundingClientRect();
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      return { links: m.left - 0.9 * rem - b.left, oben: m.top - 0.9 * rem - b.top };
+    });
+    pruefe(ring.links >= -0.5 && ring.oben >= -0.5, `${L} Regal: Sonnenring des gewählten Dings ganz sichtbar`, JSON.stringify(ring));
+
     await p.goto(`${basis}/geschichte.html?id=haustiere&pruefen`);
     await p.waitForFunction(() => window.lsGeschichte?.kapitelZahl > 0);
     await p.waitForTimeout(300);
