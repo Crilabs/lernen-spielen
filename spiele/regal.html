@@ -159,6 +159,7 @@ import { regalBaum, reiterHtml, bretterHtml } from "./start/regal-leiste.js";
 import { spielKarteHtml, echtKarteHtml } from "./start/karten.js";
 import { paletteFuer, vignetteSvg } from "./start/welten.js";
 import { spielzeitLage } from "./rahmen/spielzeit.js";
+import { sperre, satzFuer } from "./rahmen/zeitsperre.js";
 import { ladeVerzeichnis, fotoUrl } from "./rahmen/echte-dinge.js";
 
 /** Merker im Profil (einstellungen): Ids, die beim letzten Besuch im Regal standen. */
@@ -185,9 +186,11 @@ async function start() {
     const e = Object.hasOwn(verzeichnis.themen, id) ? verzeichnis.themen[id] : null;
     return e && e.fach === fach ? e : null;
   };
-  // Spielzeit der Eltern: gesperrt fehlen die Spielkarten im Detail; „Mit echten Dingen“ bleibt.
+  // Spielzeit der Eltern: gesperrt tragen die Spielkarten eine Uhr (zeitsperre.js), ausgeblendet fehlen sie;
+  // „Mit echten Dingen“ bleibt.
   const zeit = await spielzeitLage().catch((e) => { protokoll("Spielzeit: " + e); return null; });
   const spielFrei = !zeit || zeit.lage.frei;
+  const spieleZeigen = spielFrei || zeit.lage.grund !== "aus";
 
   const themaNach = new Map((ctx.plan.themen ?? []).map((t) => [t.id, t]));
   const spielNach = new Map((ctx.spiele.spiele ?? []).map((s) => [s.id, s]));
@@ -247,13 +250,16 @@ async function start() {
     const fach = t.strang;
     const anleitung = anleitungVon(id, fach);
     const echtDa = !!jetzt.eltern || !!anleitung;
-    spieleFeld.innerHTML = (spielFrei ? t.spiele : []).map((s) => {
+    spieleFeld.innerHTML = (spieleZeigen ? t.spiele : []).map((s) => {
       const spiel = spielNach.get(s.id) ?? s;
       const palette = paletteFuer(ctx, spiel.karte?.welt ?? spiel.welt);
       return spielKarteHtml({ spiel, thema: { id, name: t.name } }, fach, palette ? vignetteSvg(palette) : null);
     }).join("") + (echtDa ? echtKarteHtml({ thema: { id, name: t.name } }, fach, anleitung?.titel, fotoUrl(anleitung)) : "");
-    spieleTitel.hidden = !(spielFrei && t.spiele.length) && !echtDa;
-    spieleFeld.querySelectorAll("a.karte.spiel").forEach((a) => a.addEventListener("click", (e) => {
+    spieleTitel.hidden = !(spieleZeigen && t.spiele.length) && !echtDa;
+    if (!spielFrei) {
+      spieleFeld.querySelectorAll("a.karte.spiel").forEach((a) => sperre(a, a.querySelector(".bild"), satzFuer(zeit.lage.grund), () => leiste.ton));
+    }
+    spieleFeld.querySelectorAll("a.karte.spiel:not(.gesperrt)").forEach((a) => a.addEventListener("click", (e) => {
       if (leiste.ton) sageEinmal(a.querySelector("b").textContent, sprich);
       linkKlick(e);
     }));

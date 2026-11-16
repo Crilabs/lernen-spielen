@@ -1,11 +1,7 @@
-// Browser-Prüfung der Bücher-Grenze (Spec 2026-11-16-buecherzeit): Bibliothek, Abspieler, Elternbereich.
+// Browser-Prüfung der Grenzen der Eltern (Spec 2026-11-16-buecherzeit): Bibliothek, Abspieler, Elternbereich, Uhr
+// über gesperrten Spielen und Büchern, Hinweis nur mit OK, Zahnrad auf „Wissen“.
 // Kein Teil von `npm test`: braucht Playwright und Chromium.
 //   NODE_PATH=/private/tmp/claude-501/pw/node_modules node tests/browser/buecherzeit.spec.mjs
-//
-// Geprüft: beide Modi aufgebraucht → neues Buch in der Bibliothek nicht drückbar, heute geöffnetes Buch drückbar, direkt
-// geöffnet zurück zur Bibliothek; nur Vorlesen aufgebraucht → Sachbuch ohne Anhören, Lesen merkt das Buch; Kurzgeschichte
-// mit aufgebrauchtem Selbst lesen → nur Vorlesen, Blättern liest vor; Vorschau der Eltern merkt nichts; Elternbereich
-// stellt die Grenzen und „Heute ein Buch mehr“; keine Konsolenfehler.
 
 import { createRequire } from "node:module";
 import { resolve } from "node:path";
@@ -60,16 +56,34 @@ async function speicher(grenzen, geoeffnet) {
 }
 
 try {
-  // 1. Beide aufgebraucht: Bibliothek zeigt neue Bücher nicht drückbar, das heute geöffnete drückbar.
+  /** Prüft den Hinweis: geht auf, Escape und Tippen daneben schließen nicht, OK schließt; die Seite bleibt. */
+  async function pruefeHinweis(seite, wo, satz) {
+    const url = seite.url();
+    await seite.waitForSelector("dialog.ls-hinweis[open]");
+    pruefe(`${wo}: Hinweis mit Satz`, (await seite.locator("dialog.ls-hinweis p").innerText()) === satz);
+    await seite.keyboard.press("Escape");
+    await seite.mouse.click(5, 5);
+    await seite.waitForTimeout(200);
+    pruefe(`${wo}: Escape und daneben schließen nicht`, await seite.locator("dialog.ls-hinweis[open]").count() === 1);
+    await seite.evaluate(() => document.querySelector("dialog.ls-hinweis .ok").click());
+    await seite.waitForTimeout(200);
+    pruefe(`${wo}: OK schließt, Seite bleibt`, await seite.locator("dialog.ls-hinweis[open]").count() === 0 && seite.url() === url);
+  }
+  const PAUSE = "Du hast heute schon viel geschafft. Jetzt ist Zeit für eine Pause!";
+
+  // 1. Grenze 1 am Tag, auch für Lesen, heute vorgelesen: das Buch bleibt frei, die anderen tragen die Uhr.
   {
-    const s = await speicher({ vorlesenTag: 1, selbstTag: 1 }, { vorlesen: ["haustiere"], selbst: ["haustiere"] });
+    const s = await speicher({ anzahl: 1, je: "tag", auchLesen: true }, { vorlesen: ["haustiere"] });
     const { kontext, seite, konsole } = await neueSeite(browser, s);
     await seite.goto(BASIS + "bibliothek.html?raum=tiere");
     await seite.waitForSelector(".buch");
-    pruefe("Bibliothek: heute geöffnetes Buch drückbar", (await seite.locator('a.buch[href*="id=haustiere"]').count()) === 1);
-    const zu = await seite.locator(".buch.zu").count(), offen = await seite.locator("a.buch").count();
-    pruefe("Bibliothek: neue Bücher sichtbar, nicht drückbar", zu > 0 && offen === 1, `${zu} zu, ${offen} offen`);
-    pruefe("Bibliothek: nicht drückbar ohne Schatten", await seite.locator(".buch.zu .deckel").first().evaluate((d) => getComputedStyle(d).boxShadow === "none"));
+    pruefe("Bibliothek: heute geöffnetes Buch frei", (await seite.locator('a.buch:not(.gesperrt)[href*="id=haustiere"]').count()) === 1);
+    const zu = await seite.locator(".buch.gesperrt").count(), offen = await seite.locator(".buch:not(.gesperrt)").count();
+    pruefe("Bibliothek: übrige Bücher gesperrt", zu > 0 && offen === 1, `${zu} zu, ${offen} offen`);
+    pruefe("Bibliothek: Uhr über dem Deckel", await seite.locator(".buch.gesperrt .deckel .ls-sperre").count() === zu);
+    await seite.locator(".buch.gesperrt").first().click();
+    await pruefeHinweis(seite, "Bibliothek", PAUSE);
+    pruefe("Wissen: Zahnrad für Erwachsene", await seite.locator('#zahnrad ls-knopf[name="Für Erwachsene: gedrückt halten"]').count() === 1);
     await seite.goto(BASIS + "geschichte.html?id=hund&weiter=" + encodeURIComponent("bibliothek.html?raum=tiere"));
     await seite.waitForURL(/bibliothek\.html/);
     pruefe("Direkt geöffnet: zurück zur Bibliothek", /bibliothek\.html\?raum=tiere/.test(seite.url()), seite.url());
@@ -77,43 +91,33 @@ try {
     pruefe("Bibliothek ohne Konsolenfehler", konsole.length === 0, konsole.join(" | "));
     await kontext.close();
   }
-  // 2. Nur Vorlesen aufgebraucht: Sachbuch ohne Anhören, Lesen merkt das Buch.
+  // 2. Grenze nur fürs Vorlesen erreicht: keine Uhr; Sachbuch ohne Anhören, Lesen merkt das Buch.
   {
-    const s = await speicher({ vorlesenTag: 1 }, { vorlesen: ["haustiere"] });
+    const s = await speicher({ anzahl: 1, je: "tag" }, { vorlesen: ["haustiere"] });
     const { kontext, seite, konsole } = await neueSeite(browser, s);
+    await seite.goto(BASIS + "bibliothek.html?raum=tiere");
+    await seite.waitForSelector(".buch");
+    pruefe("Nur Vorlesen: kein Buch gesperrt", await seite.locator(".buch.gesperrt").count() === 0);
     await seite.goto(BASIS + "geschichte.html?id=hund&weiter=bibliothek.html&pruefen");
     await seite.waitForFunction(() => window.lsGeschichte?.kapitelZahl > 0);
     const k = await seite.locator("ls-geschichte").evaluate((el) => ({
       ohneVor: el.classList.contains("ohne-vorlesen"), ohneSelbst: el.classList.contains("ohne-selbst"),
       anhoeren: getComputedStyle(el.shadowRoot.querySelector(".start-anhoeren")).display,
       lesen: getComputedStyle(el.shadowRoot.querySelector(".start-lesen")).display, modus: el.modus }));
-    pruefe("Sachbuch: Anhören fehlt, Lesen da, Modus Lesen", k.ohneVor && !k.ohneSelbst && k.anhoeren === "none" && k.lesen !== "none" && k.modus === "selbst", JSON.stringify(k));
-    pruefe("Sachbuch: Inhaltsverzeichnis merkt noch nichts", (await lies(seite, STAND)).tage[heute].selbst.length === 0);
+    pruefe("Sachbuch: Anhören fehlt, Lesen da", k.ohneVor && !k.ohneSelbst && k.anhoeren === "none" && k.lesen !== "none" && k.modus === "selbst", JSON.stringify(k));
     await seite.evaluate(() => window.lsGeschichte.starte("selbst"));
-    await seite.waitForFunction((k) => JSON.parse(localStorage.getItem(k)).tage[Object.keys(JSON.parse(localStorage.getItem(k)).tage)[0]].selbst.includes("hund"), STAND);
-    pruefe("Sachbuch: Lesen merkt das Buch unter Selbst lesen", true);
-    pruefe("Sachbuch ohne Konsolenfehler", konsole.length === 0, konsole.join(" | "));
-    await kontext.close();
-  }
-  // 3. Kurzgeschichte, Selbst lesen aufgebraucht: nur Vorlesen; Blättern ohne Wahl liest vor.
-  {
-    const s = await speicher({ selbstTag: 1 }, { selbst: ["haustiere"] });
-    const { kontext, seite, konsole } = await neueSeite(browser, s);
+    await seite.waitForFunction((k) => Object.values(JSON.parse(localStorage.getItem(k)).tage).some((t) => t.selbst.includes("hund")), STAND);
+    pruefe("Sachbuch: Lesen merkt das Buch", true);
     await seite.goto(BASIS + "geschichte.html?id=zehnerpaare&weiter=bibliothek.html&pruefen");
     await seite.waitForFunction(() => window.lsGeschichte?.seiten > 0);
     const w = await seite.locator("ls-geschichte").evaluate((el) => [".waehle-vorlesen", ".waehle-selbst"].map((q) => getComputedStyle(el.shadowRoot.querySelector(q)).display));
-    pruefe("Kurzgeschichte: nur Vorlesen zur Wahl", w[0] !== "none" && w[1] === "none", JSON.stringify(w));
-    await seite.evaluate(() => window.lsGeschichte.weiter());
-    pruefe("Kurzgeschichte: Blättern ohne Wahl liest vor", (await seite.evaluate(() => window.lsGeschichte.modus)) === "vorlesen");
-    await seite.waitForTimeout(300);
-    const st = (await lies(seite, STAND)).tage[heute];
-    pruefe("Kurzgeschichte: unter Vorlesen gemerkt", st.vorlesen.includes("zehnerpaare") && !st.selbst.includes("zehnerpaare"), JSON.stringify(st));
-    pruefe("Kurzgeschichte ohne Konsolenfehler", konsole.length === 0, konsole.join(" | "));
+    pruefe("Kurzgeschichte: nur Selbst lesen zur Wahl", w[0] === "none" && w[1] !== "none", JSON.stringify(w));
+    pruefe("Abspieler ohne Konsolenfehler", konsole.length === 0, konsole.join(" | "));
     await kontext.close();
   }
-  // 4. Vorschau der Eltern: keine Grenze, nichts gemerkt.
+  // 3. Vorschau der Eltern: keine Grenze, nichts gemerkt.
   {
-    const s = await speicher({ vorlesenTag: 1, selbstTag: 1 }, { vorlesen: ["x"], selbst: ["x"] });
+    const s = await speicher({ anzahl: 1, je: "tag", auchLesen: true }, { vorlesen: ["x"] });
     const { kontext, seite } = await neueSeite(browser, s);
     await seite.goto(BASIS + "geschichte.html?id=hund&eltern&weiter=eltern.html&pruefen");
     await seite.waitForFunction(() => window.lsGeschichte?.kapitelZahl > 0);
@@ -123,26 +127,48 @@ try {
     pruefe("Vorschau: offen und merkt nichts", /geschichte\.html/.test(seite.url()) && !st.selbst.includes("hund"), JSON.stringify(st));
     await kontext.close();
   }
-  // 5. Elternbereich: Grenzen und „Heute ein Buch mehr“.
+  // 4. Spielzeit um: Spielkarten auf Startseite mit Uhr, Tippen zeigt den Hinweis statt das Spiel.
+  {
+    const { kontext, seite } = await neueSeite(browser);
+    await seite.goto(BASIS + "bibliothek.html");
+    const woche = await seite.evaluate(async () => (await import("./kern/spielzeit.js")).wochenSchluessel(new Date()));
+    await kontext.close();
+    const { kontext: k2, seite: s2, konsole } = await neueSeite(browser, {
+      [EINST]: JSON.stringify({ spielzeit: { proTag: 1 } }),
+      "lernstand-kind-1-spielzeit-stand": JSON.stringify({ woche, tage: { [heute]: { sekunden: 120, zugabe: 0 } } }),
+    });
+    await s2.goto(BASIS + "index.html");
+    await s2.waitForSelector("a.karte.spiel");
+    const n = await s2.locator("a.karte.spiel").count(), g = await s2.locator("a.karte.spiel.gesperrt .bild .ls-sperre").count();
+    pruefe("Startseite: alle Spielkarten mit Uhr", n > 0 && g === n, `${g} von ${n}`);
+    await s2.locator("a.karte.spiel").first().click();
+    await pruefeHinweis(s2, "Startseite", PAUSE);
+    pruefe("Startseite: Echte Dinge ohne Uhr", await s2.locator("a.karte.echt.gesperrt").count() === 0);
+    pruefe("Startseite ohne Konsolenfehler", konsole.length === 0, konsole.join(" | "));
+    await k2.close();
+  }
+  // 5. Elternbereich: Höchstens, Tag/Woche, „Gilt auch für Lesen“, „Heute ein Buch mehr“.
   {
     const { kontext, seite, konsole } = await neueSeite(browser, { "lernstand-eltern": JSON.stringify({ pinHash: await pinHash("1234") }) });
     await seite.goto(BASIS + "eltern.html");
     for (const z of "1234") await seite.evaluate((z) => [...document.querySelectorAll("#ziffern ls-knopf")].find((k) => k.getAttribute("wort") === z).click(), z);
     await seite.waitForFunction(() => !document.getElementById("bereich").hidden);
     await seite.evaluate(() => document.querySelector('[data-tab="spielzeit"]').click());
-    await seite.waitForSelector('ls-knopf[name="Vorlesen am Tag: mehr"]');
+    await seite.waitForSelector('ls-knopf[name="Höchstens: mehr"]');
     const klick = async (sel) => { await seite.evaluate((sel) => document.querySelector(sel).click(), sel); await seite.waitForTimeout(150); };
-    await klick('ls-knopf[name="Vorlesen am Tag: mehr"]');
-    await klick('ls-knopf[name="Vorlesen am Tag: mehr"]');
-    await klick('ls-knopf[name="Selbst lesen in der Woche: mehr"]');
+    await klick('ls-knopf[name="Höchstens: mehr"]');
+    await klick('ls-knopf[name="Höchstens: mehr"]');
+    await klick('ls-knopf[name="Bücher: in der woche"]');
+    await klick('.haken input');
     await klick('ls-knopf[wort="Heute ein Buch mehr"]');
     await seite.waitForTimeout(400);
     const e = (await lies(seite, EINST))?.buecher;
-    pruefe("Eltern: Vorlesen 2 am Tag, Selbst lesen 1 in der Woche", e?.vorlesenTag === 2 && e?.selbstWoche === 1 && e?.vorlesenWoche === null && e?.selbstTag === null, JSON.stringify(e));
+    pruefe("Eltern: höchstens 2 in der Woche, auch Lesen", e?.anzahl === 2 && e?.je === "woche" && e?.auchLesen === true, JSON.stringify(e));
     pruefe("Eltern: ein Buch mehr für heute", (await lies(seite, STAND))?.tage?.[heute]?.zugabe === 1);
     const text = await seite.locator("#inhalt").innerText();
-    pruefe("Eltern: Stand zeigt Grenzen und Zugabe", /Vorgelesen heute: 0 von 2 Büchern/.test(text) && /Heute dazugegeben: 1 Buch\./.test(text), text.slice(text.indexOf("Bücher\n"), text.indexOf("Bücher\n") + 600));
+    pruefe("Eltern: Stand zeigt Grenze und Zugabe", /Diese Woche geöffnet: 0 von 2 Büchern/.test(text) && /Heute dazugegeben: 1 Buch\./.test(text), text.slice(text.indexOf("Bücher\n"), text.indexOf("Bücher\n") + 600));
     pruefe("Eltern: Spielzeit-Einstellung unberührt", (await lies(seite, EINST))?.spielzeit === undefined);
+    await seite.screenshot({ path: process.env.BILD ?? "/dev/null" }).catch(() => {});
     pruefe("Eltern ohne Konsolenfehler", konsole.length === 0, konsole.join(" | "));
     await kontext.close();
   }

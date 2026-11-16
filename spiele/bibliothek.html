@@ -14,7 +14,9 @@
    kräftig und der Buchtitel klein),
    die Reihen brechen um. Gelesen: ein
    Sonnenpunkt vor dem Titel. Grundmuster Blätter. Keine Zählung, keine Reihenfolge, kein „Weiterlesen“; gesperrt nur über die Bücher-Grenze der Eltern;
-   Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen. Diese Seite liest den Lernstand nur. */
+   Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen. Diese Seite liest den Lernstand nur.
+   Gesperrte Bücher tragen eine Uhr, ein Tippen zeigt den Hinweis (rahmen/zeitsperre.js). Rechts im Kopf das Zahnrad für
+   Erwachsene wie auf „Können“ (rahmen/zahnrad.js). */
 body { -webkit-user-select: none; user-select: none; }
 .bib {
   position: absolute; top: var(--ls-leiste-hoehe); bottom: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem);
@@ -73,10 +75,7 @@ body { -webkit-user-select: none; user-select: none; }
 /* Gelesen: ein Sonnenpunkt vor dem Titel (bewertet nichts) */
 .buch .gelesen-punkt { flex: none; width: 2.2rem; height: 2.2rem; margin-top: 0.05rem; border-radius: 50%; background: var(--ls-sonne);
   box-shadow: inset 0 0 0 0.75rem var(--ls-sonne), inset 0 0 0 3rem var(--ls-tinte); }
-.buch.zu { cursor: default; }
-.buch.zu .deckel { box-shadow: none; }
 .buch:active .deckel { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
-.buch.zu:active .deckel { transform: none; box-shadow: none; }
 .buch:focus-visible .deckel { outline: 1rem solid var(--ls-sonne); outline-offset: 0.6rem; }
 
 .leer { margin: 2rem 0; font-size: 4.5rem; color: var(--ls-tinte-weich); }
@@ -89,7 +88,7 @@ body { -webkit-user-select: none; user-select: none; }
 </head>
 <body>
 <ls-muster id="muster" art="wellen"></ls-muster>
-<ls-kopf id="leiste" reiter="wissen" spiel="ansichten"></ls-kopf>
+<ls-kopf id="leiste" reiter="wissen" spiel="ansichten"><span id="zahnrad" slot="rechts"></span></ls-kopf>
 <main class="bib" id="bib"></main>
 
 <script type="module">
@@ -103,11 +102,14 @@ import "./rahmen/knopf.js";
 import "./rahmen/muster.js";
 import { bibliothekFuerKind, waehleRaum, buchHref, raumSvg } from "./start/bibliothek.js";
 import { buecherLage } from "./rahmen/buecherzeit.js";
+import { sperre, SAETZE } from "./rahmen/zeitsperre.js";
+import { zahnrad } from "./rahmen/zahnrad.js";
 
 start();
 
 async function start() {
   sperreTouch();
+  zahnrad(document.getElementById("zahnrad"));
   const leiste = document.getElementById("leiste"), feld = document.getElementById("bib"), muster = document.getElementById("muster");
   let raeume;
   try {
@@ -120,8 +122,8 @@ async function start() {
     return;
   }
   await leiste.bereit();
-  // Bücher-Grenze der Eltern (Spec 2026-11-16-buecherzeit): ist heute kein Modus mehr frei, bleibt das Buch sichtbar,
-  // ist aber nicht drückbar (ohne Schatten). Heute schon geöffnete Bücher bleiben frei.
+  // Bücher-Grenze der Eltern (Spec 2026-11-16-buecherzeit): ist kein Modus mehr frei, trägt das Buch eine Uhr und ein
+  // Tippen zeigt den Hinweis (rahmen/zeitsperre.js). Im Zeitraum schon geöffnete Bücher bleiben frei.
   const zeit = await buecherLage();
   const frei = (id) => { const e = zeit.erlaubt(id); return e.vorlesen || e.selbst; };
   if (!raeume.length) { feld.innerHTML = `<p class="leer">Hier stehen bald Bücher.</p>`; return; }
@@ -163,13 +165,12 @@ async function start() {
       : FACH_SYMBOLE.has(regal.fach) ? `<i class="zeichen" style="--bild:${bild(`symbole/${regal.fach}.svg`)}"></i>` : "";
     const ton = !foto && FACH[regal.fach] ? `--toenung:${FACH[regal.fach].toenung};` : "";
     const label = esc((b.thema ? b.thema + ": " : "") + b.titel + (b.am ? ", gelesen" : ""));
-    const auf = frei(b.id);
-    return (auf ? `<a class="buch" href="${buchHref(b.id, r.id)}" data-titel="${esc(b.titel)}" aria-label="${label}" style="${ton}">`
-      : `<span class="buch zu" role="img" aria-label="${label}" style="${ton}">`)
+    const zu = frei(b.id) ? "" : " zu";
+    return `<a class="buch${zu}" href="${buchHref(b.id, r.id)}" data-titel="${esc(b.titel)}" aria-label="${label}" style="${ton}">`
       + `<span class="deckel">${innen}</span>`
       + `<span class="schild ui">${b.am ? `<span class="gelesen-punkt" aria-hidden="true"></span>` : ""}`
       + `<span class="worte">${b.thema ? `<b>${esc(b.thema)}</b>` : ""}<span class="titel">${esc(b.titel)}</span></span></span>`
-      + (auf ? `</a>` : `</span>`);
+      + `</a>`;
   }
 
   function raum(r) {
@@ -184,7 +185,8 @@ async function start() {
       if (history.state?.raum) history.back();
       else { history.replaceState(null, "", location.pathname); halle(); }
     });
-    feld.querySelectorAll("a.buch").forEach((a) => a.addEventListener("click", (e) => { sage(a.dataset.titel); linkKlick(e); }));
+    feld.querySelectorAll("a.buch.zu").forEach((a) => sperre(a, a.querySelector(".deckel"), SAETZE.pause, () => leiste.ton));
+    feld.querySelectorAll("a.buch:not(.gesperrt)").forEach((a) => a.addEventListener("click", (e) => { sage(a.dataset.titel); linkKlick(e); }));
   }
 
   const zeige = () => { const r = waehleRaum(raeume, new URLSearchParams(location.search).get("raum")); r ? raum(r) : halle(); };

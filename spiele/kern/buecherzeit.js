@@ -1,14 +1,14 @@
-// Bücher in der Spielzeit (Spec 2026-11-16-buecherzeit): wie viele Bücher das Kind am Tag und in der Woche anhört
-// („vorlesen“) und selbst liest („selbst“). Ohne DOM und ohne Speicher; die Uhrzeit kommt von außen.
-// Einstellung "buecher" (am Profil): { vorlesenTag, vorlesenWoche, selbstTag, selbstWoche }, je null (aus) oder 1–10.
-// Stand "buecher-stand" (am Profil): je Tag der laufenden ISO-Woche die heute in jedem Modus geöffneten Bücher und
-// die Zugabe der Eltern. Ein Buch zählt beim ersten Öffnen am Tag in diesem Modus; die Woche zählt verschiedene Bücher.
+// Bücher in der Spielzeit (Spec 2026-11-16-buecherzeit): wie viele Bücher das Kind am Tag oder in der Woche öffnet.
+// Ohne DOM und ohne Speicher; die Uhrzeit kommt von außen.
+// Einstellung "buecher" (am Profil): { anzahl, je, auchLesen }: höchstens anzahl (null = aus, sonst 1–10) Bücher
+// je "tag" oder "woche"; die Grenze gilt fürs Vorlesen, mit auchLesen auch fürs Selbstlesen, dann gemeinsam gezählt.
+// Stand "buecher-stand" (am Profil): je Tag der laufenden ISO-Woche die in jedem Modus geöffneten Bücher und die
+// Zugabe der Eltern. Gezählt werden verschiedene Bücher; ein Buch, das im Zeitraum schon offen war, kostet nichts.
 
 import { tagSchluessel, wochenSchluessel } from "./spielzeit.js";
 
 /** @typedef {"vorlesen" | "selbst"} Modus */
-/** @typedef {{ vorlesenTag: number | null, vorlesenWoche: number | null, selbstTag: number | null,
- *   selbstWoche: number | null }} Regeln */
+/** @typedef {{ anzahl: number | null, je: "tag" | "woche", auchLesen: boolean }} Regeln */
 /** @typedef {{ vorlesen: string[], selbst: string[], zugabe: number }} Tag */
 /** @typedef {{ woche: string, tage: Record<string, Tag> }} Stand */
 
@@ -16,18 +16,23 @@ export const MODI = /** @type {const} */ (["vorlesen", "selbst"]);
 export const HOECHSTENS = 10;
 
 /** @param {unknown} v @returns {number | null} */
-const anzahl = (v) => (Number.isInteger(v) && /** @type {number} */ (v) >= 1 && /** @type {number} */ (v) <= HOECHSTENS
+const zahl = (v) => (Number.isInteger(v) && /** @type {number} */ (v) >= 1 && /** @type {number} */ (v) <= HOECHSTENS
   ? /** @type {number} */ (v) : null);
 
 /**
- * Bereinigt die gespeicherte Einstellung; Unbrauchbares heißt „aus“.
+ * Bereinigt die gespeicherte Einstellung; Unbrauchbares heißt „aus“. Übernimmt die vier Grenzen aus v1.2.1
+ * (vorlesenTag, vorlesenWoche, selbstTag, selbstWoche) so gut es geht: die erste gesetzte zählt.
  * @param {any} roh
  * @returns {Regeln}
  */
 export function regeln(roh) {
   const r = roh && typeof roh === "object" ? roh : {};
-  return { vorlesenTag: anzahl(r.vorlesenTag), vorlesenWoche: anzahl(r.vorlesenWoche),
-    selbstTag: anzahl(r.selbstTag), selbstWoche: anzahl(r.selbstWoche) };
+  if (!("anzahl" in r)) {
+    const alt = [["vorlesenTag", "tag"], ["vorlesenWoche", "woche"], ["selbstTag", "tag"], ["selbstWoche", "woche"]]
+      .find(([k]) => zahl(r[k]) !== null);
+    if (alt) return { anzahl: zahl(r[alt[0]]), je: /** @type {"tag" | "woche"} */ (alt[1]), auchLesen: zahl(r.selbstTag) !== null || zahl(r.selbstWoche) !== null };
+  }
+  return { anzahl: zahl(r.anzahl), je: r.je === "woche" ? "woche" : "tag", auchLesen: r.auchLesen === true };
 }
 
 /** @param {any} l @returns {string[]} */
@@ -50,32 +55,31 @@ export function aktuell(roh, jetzt) {
   return { woche, tage: Object.fromEntries(Object.entries(roh.tage).map(([k, t]) => [k, tagAus(t)])) };
 }
 
+/** Die Modi, die die Grenze zählt. @param {Regeln} r @returns {Modus[]} */
+export const gezaehlt = (r) => (r.auchLesen ? ["vorlesen", "selbst"] : ["vorlesen"]);
+
 /**
- * Heute und in der Woche geöffnete Bücher eines Modus.
- * @param {Stand} stand @param {Modus} modus @param {Date} jetzt
+ * Verschiedene Bücher in den gezählten Modi: heute, im Zeitraum der Grenze (Tag oder Woche), dazu die Zugabe von heute.
+ * @param {Regeln} r @param {Stand} stand @param {Date} jetzt
  */
-export function zahlen(stand, modus, jetzt) {
+export function zahlen(r, stand, jetzt) {
   const s = aktuell(stand, jetzt);
   const t = tagAus(s.tage[tagSchluessel(jetzt)]);
-  const woche = new Set(Object.values(s.tage).flatMap((x) => x[modus]));
-  return { heute: t[modus].length, woche: woche.size, zugabe: t.zugabe };
+  const modi = gezaehlt(r);
+  const heute = new Set(modi.flatMap((m) => t[m]));
+  const woche = new Set(Object.values(s.tage).flatMap((x) => modi.flatMap((m) => x[m])));
+  return { heute, woche, offen: r.je === "woche" ? woche : heute, zugabe: t.zugabe };
 }
 
 /**
- * Darf das Kind dieses Buch jetzt in diesem Modus öffnen? Heute schon in diesem Modus geöffnet: immer.
- * Sonst muss unter der Tagesgrenze und unter der Wochengrenze (ein Buch, das diese Woche schon offen war, kostet die
- * Woche nichts) noch Platz sein; die Zugabe von heute erhöht beide.
+ * Darf das Kind dieses Buch jetzt in diesem Modus öffnen? Ohne Grenze und in einem nicht gezählten Modus immer;
+ * ein Buch, das im Zeitraum schon offen war, auch. Sonst muss unter der Grenze plus der Zugabe von heute Platz sein.
  * @param {Regeln} r @param {Stand} stand @param {Modus} modus @param {string} id @param {Date} jetzt
  */
 export function darf(r, stand, modus, id, jetzt) {
-  const s = aktuell(stand, jetzt);
-  const t = tagAus(s.tage[tagSchluessel(jetzt)]);
-  if (t[modus].includes(id)) return true;
-  const tag = r[`${modus}Tag`], woche = r[`${modus}Woche`];
-  if (tag !== null && t[modus].length >= tag + t.zugabe) return false;
-  const inWoche = new Set(Object.values(s.tage).flatMap((x) => x[modus]));
-  if (woche !== null && !inWoche.has(id) && inWoche.size >= woche + t.zugabe) return false;
-  return true;
+  if (r.anzahl === null || !gezaehlt(r).includes(modus)) return true;
+  const z = zahlen(r, stand, jetzt);
+  return z.offen.has(id) || z.offen.size < r.anzahl + z.zugabe;
 }
 
 /**
@@ -93,7 +97,7 @@ export function merke(stand, modus, id, jetzt) {
 }
 
 /**
- * „Heute ein Buch mehr“: gilt für beide Modi und nur heute, auch über die Wochengrenze.
+ * „Heute ein Buch mehr“: nur heute, auch über die Grenze der Woche.
  * @param {Stand} stand @param {number} dazu @param {Date} jetzt
  * @returns {Stand}
  */

@@ -12,14 +12,20 @@ const { literaleAusCode, knopfNamen, sammle } = await import("../werkzeuge/audio
 test("Startseite: Kopf mit Reiter „Können“ (Designsprache), Zahnrad im Slot rechts", () => {
   assert.match(html, /<ls-kopf id="leiste" reiter="koennen" spiel="ansichten">/);
   assert.doesNotMatch(html, /<ls-leiste/);
-  assert.match(html, /<span class="zahnrad" id="zahnrad" slot="rechts"><ls-knopf id="eltern" symbol="zahnrad\.svg"[^>]*\bstumm>/);
+  assert.match(html, /<span id="zahnrad" slot="rechts"><\/span>/);
+  assert.match(skript, /zahnrad\(document\.getElementById\("zahnrad"\)\);/);
   assert.deepEqual(knopfNamen(html), [], "der Name des Zahnrads wird nicht gesprochen");
 });
 
-test("Startseite: Zahnrad gedrückt halten führt zu eltern.html, loslassen bricht ab", () => {
-  assert.match(skript, /const HALTEN_MS = 3000;/);
-  assert.match(skript, /setTimeout\(\(\) => \{ los\(\); location\.href = "eltern\.html"; \}, HALTEN_MS\)/);
-  assert.match(skript, /\["pointerup", "pointercancel", "lostpointercapture"\]\.forEach/);
+test("Startseite und Wissen: Zahnrad gedrückt halten führt zu eltern.html, loslassen bricht ab (rahmen/zahnrad.js)", () => {
+  const rad = readFileSync(new URL("../spiele/rahmen/zahnrad.js", import.meta.url), "utf8");
+  assert.match(rad, /export const HALTEN_MS = 3000;/);
+  assert.match(rad, /<ls-knopf id="eltern" symbol="zahnrad\.svg"[^>]*\bstumm>/);
+  assert.match(rad, /setTimeout\(\(\) => \{ los\(\); location\.href = ziel; \}, HALTEN_MS\)/);
+  assert.match(rad, /\["pointerup", "pointercancel", "lostpointercapture"\]\.forEach/);
+  const bib = readFileSync(new URL("../spiele/bibliothek.html", import.meta.url), "utf8");
+  assert.match(bib, /<ls-kopf id="leiste" reiter="wissen" spiel="ansichten"><span id="zahnrad" slot="rechts"><\/span><\/ls-kopf>/);
+  assert.match(bib, /zahnrad\(document\.getElementById\("zahnrad"\)\);/);
 });
 
 test("Startseite: Karten aus startKarten (uebersicht), Abschnitte je Fach, Vignette aus der Welt-Palette", () => {
@@ -66,10 +72,11 @@ test("Startseite: schreibt den Lernstand nie, keine Balken, keine Zählung, kein
   assert.doesNotMatch(html, /\$\{[^}]*\.(length|size)\}| von \$\{/);
 });
 
-test("Startseite: Spielzeit der Eltern – gesperrt fehlen nur die Spielkarten, an ihrer Stelle ein ruhiger Satz (einmal je Sitzung); Mit echten Dingen, Fächer und Regal bleiben", () => {
-  assert.match(skript, /import \{ spielzeitLage, schlussSatz, sage \} from "\.\/rahmen\/spielzeit\.js";/);
+test("Startseite: Spielzeit der Eltern – gesperrt tragen die Spielkarten eine Uhr und zeigen den Hinweis; ausgeblendet fehlen sie; Mit echten Dingen, Fächer und Regal bleiben", () => {
+  assert.match(skript, /import \{ spielzeitLage \} from "\.\/rahmen\/spielzeit\.js";/);
   assert.match(skript, /const spielFrei = !zeit \|\| zeit\.lage\.frei;/);
-  assert.match(skript, /\(spielFrei \? f\.spiele : \[\]\)/);
-  assert.match(skript, /if \(satz && leiste\.ton\) sage\(satz\);/);
-  assert.match(html, /<p class="schluss" id="schluss" role="status" hidden><\/p>/);
+  assert.match(skript, /const spieleZeigen = spielFrei \|\| zeit\.lage\.grund !== "aus";/);
+  assert.match(skript, /\(spieleZeigen \? f\.spiele : \[\]\)/);
+  assert.match(skript, /sperre\(a, a\.querySelector\("\.bild"\), satzFuer\(zeit\.lage\.grund\)/);
+  assert.doesNotMatch(html, /id="schluss"/);
 });
