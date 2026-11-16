@@ -5,6 +5,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { audioSchluessel, normalisiere } from "../../spiele/kern/audio.js";
+import { gekonntSatz } from "../../spiele/kern/saetze.js";
 
 /** Pfad relativ zu spiele/, immer mit „/“ (auch unter Windows, wo relative() „\\“ liefert). */
 const rel = (/** @type {string} */ von, /** @type {string} */ zu) => relative(von, zu).split(sep).join("/");
@@ -125,6 +126,10 @@ export function sammle(wurzel) {
   // Lernplan: Namen der Themen zum Vorlesen. Die Anregungen `eltern` (ls-anregung) sind Elternsprache und werden
   // nicht vorgelesen, also auch nicht gesammelt.
   for (const t of felder(json(join(spiele, "lernplan.json")), "sprich")) neu(t, "lernplan.json");
+  // Bildschirm „Gekonnt“ (rahmen/gekonnt.js): je Thema „<Sprechname> kannst du.“ – nur für Themen mit Aufgaben, denn
+  // nur die kann ein Spiel als gekonnt verbuchen (Sachthemen und Themen ohne Aufgaben nie).
+  for (const t of json(join(spiele, "lernplan.json")).themen ?? [])
+    if (t.aufgaben && typeof t.sprich === "string" && t.sprich.trim()) neu(gekonntSatz(t.sprich), "lernplan.json");
 
   // Einführungen
   for (const p of dateien(join(spiele, "einfuehrungen"), [".json"]))

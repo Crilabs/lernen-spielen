@@ -149,14 +149,14 @@ test("runde: hinweisSpiel nennt anderes Spiel mit neuem Thema", async () => {
   setzeStand({ t1: gekonnt });
   const r = await runde("a", { ctx: MINI, uhr, rnd: lcg(3) });
   assert.equal(r.modus, "wiederholung");
-  assert.deepEqual(await r.ende(), { hinweisSpiel: "b" });
+  assert.deepEqual(await r.ende(), { hinweisSpiel: "b", gekonnt: null });
 });
 
 test("runde: hinweisSpiel null ohne neues Thema im anderen Spiel", async () => {
   setzeStand({ t1: gekonnt, t2: gekonnt });
   const r = await runde("a", { ctx: MINI, uhr, rnd: lcg(3) });
   assert.equal(r.modus, "wiederholung");
-  assert.deepEqual(await r.ende(), { hinweisSpiel: null });
+  assert.deepEqual(await r.ende(), { hinweisSpiel: null, gekonnt: null });
 });
 
 test("luecken-Skript: Ausgabe enthält 'ohne Spiel: Mengen bis 5 auf einen Blick'", () => {
@@ -172,8 +172,8 @@ async function spieleRunde(spiel, opt = {}) {
   if (r.einfuehrungFaellig) r.einfuehrungGesehen();
   let ereignis = null;
   for (let a; (a = r.naechste());) { ereignis = r.melde(a.ziel.key, { ok: true, hilfe: 0, ms: 1000 }); if (ereignis?.typ === "gekonnt") break; }
-  await r.ende();
-  return { r, ereignis };
+  const ende = await r.ende();
+  return { r, ereignis, ende };
 }
 
 test("Befund 1: frisch, erst Zahlenzauber, dann Perlenbrücke → nach zerlegen-2 kommt zerlegen-3 (nicht Wiederholung)", async () => {
@@ -181,8 +181,11 @@ test("Befund 1: frisch, erst Zahlenzauber, dann Perlenbrücke → nach zerlegen-
   assert.equal(z.modus, "vorgriff");
   z.einfuehrungGesehen(); z.naechste(); await z.ende();
   assert.equal(stand().themen["rechnen-3"].z, "dran");
-  const { r, ereignis } = await spieleRunde("perlenbruecke");
+  const { r, ereignis, ende } = await spieleRunde("perlenbruecke");
   assert.equal(r.thema.id, "zerlegen-2"); assert.equal(r.modus, "thema");
+  // ende() meldet das gekonnte Thema für den Bildschirm „Gekonnt“ (Name und Sprechname aus dem Lernplan)
+  assert.equal(ende.gekonnt?.id, "zerlegen-2");
+  assert.ok(ende.gekonnt.name && ende.gekonnt.sprich);
   assert.deepEqual(ereignis, { typ: "gekonnt", thema: "zerlegen-2" });
   const r2 = await start("perlenbruecke");
   assert.equal(r2.thema.id, "zerlegen-3");

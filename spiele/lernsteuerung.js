@@ -970,7 +970,11 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
         const andere = (ctx.spiele?.spiele ?? []).map((s) => s.id).filter((id) => id !== spielId);
         hinweisSpiel = andere.find((id) => themaFuer(ctx, stand, id).modus === "thema") ?? null;
       }
-      return { hinweisSpiel };
+      // Ist in dieser Runde ein Thema gekonnt geworden, zeigt das Spiel statt der Pause den Bildschirm „Gekonnt“
+      // (rahmen/gekonnt.js, Christian 2026-11-16).
+      const g = sitzung.ereignis?.typ === "gekonnt" ? themaVon(ctx, sitzung.ereignis.thema) : null;
+      const gekonnt = g ? { id: g.id, name: text(g.name), sprich: text(g.sprich) || text(g.name) } : null;
+      return { hinweisSpiel, gekonnt };
     },
   };
   return r;

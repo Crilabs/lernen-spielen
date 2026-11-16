@@ -73,3 +73,11 @@ Ersetzt die Angaben oben, wo sie sich widersprechen.
 - **Übergänge im Ton:** Am Ende der Einführung „Jetzt geht es los.“; nach einem Fehlversuch „Timo steht bei Nummer …
   – Versuch es noch einmal. – <Zahlwort>.“ (ein klarer Auftrag, kein Urteil).
 - **Sätze** „bei Nummer Dreizehn“ statt „bei der Dreizehn“: die Stimme sprach dort eine Ordnungszahl (stimme.md).
+- **Rundenende (Christian, 2026-11-16):** Die Pause hat nur noch Weiter und Alle Spiele (kein Mitmach-Satz, kein
+  „Mit echten Dingen“, kein Hinweis auf andere Spiele). Ist ein Thema gekonnt, kommt `<ls-gekonnt>` mit Timo.
+- **Wechsel der Themen:** Die Lernsteuerung wechselt von Runde zu Runde zum am längsten nicht geübten Thema. Hat sich
+  das Thema geändert, sagt die Stimme seinen Sprechnamen. Wechselt dabei „bis 10“ und „11 bis 20“, zeigt eine Szene
+  den Wechsel: zu 11–20 stehen die Häuser über 10 auf, Fertig und Löschen kommen dazu; beim ersten Mal je Start tippt
+  das Kind 13 und Fertig selbst (Mini-Einführung nur für das Neue). Zurück: Häuser und Knöpfe gehen, „Jetzt kommen
+  wieder die Zahlen bis zehn. Ein Tipp genügt.“ Testbetrieb: `?wechsel&bis=20`, Vorschau des Bildschirms: `?gekonnt`.
+

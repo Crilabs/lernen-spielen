@@ -94,17 +94,6 @@
   @media (prefers-reduced-motion: reduce) { .haus .blatt, .haus .fahne, .stempel { transition: none !important; } .ziffer.sinkt { animation: none; } }
   @media (max-aspect-ratio: 3/2) { .spielflaeche { grid-template-columns: minmax(0, 1fr) 42rem; } }
 
-  /* Pause: Sachmoment auf der Papierkarte. */
-  .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
-  .sachmoment p { margin: 0; }
-  .sachmoment .hinweis {
-    display: inline-flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 4rem 1.6rem 1.6rem;
-    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-papier);
-    box-shadow: var(--ls-schatten); color: var(--ls-tinte); font-weight: 700; text-decoration: none;
-  }
-  .sachmoment .hinweis img { width: 8rem; height: 8rem; }
-  .sachmoment .hinweis:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
-
   .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
   .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
   .eltern p { max-width: 70ch; }
@@ -147,7 +136,8 @@
 </div>
 
 <ls-hilfe id="hilfe"></ls-hilfe>
-<ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
+<ls-pause id="pause"></ls-pause>
+<ls-gekonnt id="gekonnt"></ls-gekonnt>
 
 <script type="module" src="spiel.js"></script>
 </body>

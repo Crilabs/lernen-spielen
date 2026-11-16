@@ -19,6 +19,7 @@ import "../../rahmen/leiste.js";
 import { lesezeit } from "../../rahmen/blase.js";
 import "../../rahmen/hilfe.js";
 import "../../rahmen/pause.js";
+import "../../rahmen/gekonnt.js";
 import "../../rahmen/knopf.js";
 import "../../rahmen/tastatur.js";
 import "../../rahmen/perlenstab.js";
@@ -39,6 +40,7 @@ const leiste = $("leiste");
 const blase = $("blase");
 const hilfe = $("hilfe");
 const pause = $("pause");
+const gekonntEl = $("gekonnt");
 const tastatur = $("tastatur");
 const fertigKnopf = $("fertig");
 const strasse = $("strasse");
@@ -152,6 +154,12 @@ const einleitung = {
   lernen: (/** @type {any} */ o) => spricht(() => blase.sage("So lernst du, Zahlen zu schreiben, die du hörst.", o)),
   lernenKlein: (/** @type {any} */ o) => spricht(() => blase.sage("So lernst du die Zahlen von null bis zehn.", o)),
   los: (/** @type {any} */ o) => spricht(() => blase.sage("Jetzt geht es los.", o)),
+  // Wechsel zwischen den Themen (Christian, 2026-11-16): nur das Neue, mit einem Beispiel zum Mittippen.
+  groesser: (/** @type {any} */ o) => spricht(() => blase.sage("Jetzt kommen größere Zahlen.", o)),
+  zweiZiffern: (/** @type {any} */ o) => spricht(() => blase.sage("Die tippst du mit zwei Ziffern.", o)),
+  einsDrei: (/** @type {any} */ o) => spricht(() => blase.sage("Erst die Eins, dann die Drei.", o)),
+  wiederKlein: (/** @type {any} */ o) => spricht(() => blase.sage("Jetzt kommen wieder die Zahlen bis zehn.", o)),
+  einTipp: (/** @type {any} */ o) => spricht(() => blase.sage("Ein Tipp genügt.", o)),
 };
 
 /** Elternansicht (?eltern): beschreibend, von Stärken aus, kein Vergleich (3.3). @param {HTMLElement} feld */
@@ -160,15 +168,6 @@ function fuelleEltern(feld) {
     dieser Nummer; in der Tür steht die Zahl als Perlenstäbe (goldene Zehnerstäbe und ein farbiges Stäbchen für die Einer). Bei Zahlen wie siebzehn, die man mit den Einern
     zuerst spricht, führt ein Zahlendreher zu einem ganz anderen Haus, und man sieht, wie weit es entfernt ist.</p>
     <p>Welche Zahlen dran sind und was Ihr Kind schon kann, steht bei den Themen im Elternbereich.</p>`;
-}
-
-/** Pause (K1, K8): nur das Angebot zum Mitmachen (Idee §6). @param {HTMLElement} feld @param {boolean} ton */
-function fuelleSachmoment(feld, ton) {
-  feld.replaceChildren();
-  const satz = document.createElement("p");
-  satz.textContent = "Lass dir Zahlen sagen und schreib sie auf.";
-  feld.append(satz);
-  if (ton) sprich("Lass dir Zahlen sagen und schreib sie auf.");
 }
 
 // --- Klänge (Web Audio, leise; Ton aus gilt) ---------------------------------------------------------
@@ -947,8 +946,83 @@ async function einfuehrung(stufe = "material") {
       await satz(e.loeschen);
       tastatur.markiere(null);
     }
+    if (!klein) grossErklaert = true;
     await satz(klein ? e.lernenKlein : e.lernen);
     // Übergang zur ersten Aufgabe (Christian, 2026-11-16).
+    await satz(e.los);
+  } finally {
+    ueberspringeAlles();
+    einfuehrungLaeuft = false;
+    einfuehrungTaste = null;
+    einfuehrungHilfe = null;
+    tastatur.markiere(null);
+    fertigKnopf.classList.remove("markiert");
+  }
+}
+
+/** Fertig und Löschen sind schon einmal erklärt (in der Einführung oder im Wechsel), je Start. */
+let grossErklaert = false;
+
+/** Häuser, Fertig und Löschen erscheinen (ein) oder verschwinden (aus) sichtbar. @param {boolean} ein @param {number[]} haeuserNr */
+async function zeigeWechsel(ein, haeuserNr) {
+  const loeschenTaste = /** @type {HTMLElement | null} */ (tastatur.shadowRoot?.querySelector('button[data-z="loeschen"]'));
+  const knoepfe = [fertigKnopf, loeschenTaste].filter(Boolean);
+  const auf = [{ transform: "translateY(24rem)", opacity: 0 }, { transform: "none", opacity: 1 }];
+  const ab = [...auf].reverse();
+  const laeufe = haeuserNr.map((k, i) => anim(haeuser[k], ein ? auf : ab, { duration: 420, delay: i * 70, easing: ein ? "cubic-bezier(0.3, 1.4, 0.5, 1)" : "ease-in", fill: ein ? "none" : "forwards" }));
+  laeufe.push(...knoepfe.map((el) => anim(/** @type {HTMLElement} */ (el), ein ? [{ transform: "scale(0)", opacity: 0 }, { transform: "none", opacity: 1 }] : [{ transform: "none", opacity: 1 }, { transform: "scale(0)", opacity: 0 }], { duration: 380, easing: "ease-out", fill: ein ? "none" : "forwards" })));
+  await Promise.all(laeufe);
+  if (!ein) for (const el of [...haeuserNr.map((k) => haeuser[k]), ...knoepfe]) el.getAnimations().forEach((a) => a.cancel());
+}
+
+/**
+ * Wechsel zwischen „bis 10“ (klein) und „11 bis 20“ zwischen zwei Runden (Christian, 2026-11-16: „Kein Wechsel ohne
+ * Bild“, spielbau.md §8). Zu 11–20 beim ersten Mal je Start eine Mini-Einführung nur für das Neue: die Häuser über 10
+ * stehen auf, Fertig und Löschen kommen dazu, das Kind tippt 13 und Fertig selbst; später nur der sichtbare Wechsel und
+ * zwei Sätze. Zurück zu bis 10: die Häuser über 10 und die Knöpfe gehen weg, zwei Sätze.
+ * @param {boolean} zuKlein @param {string} stufe
+ */
+async function wechsle(zuKlein, stufe) {
+  einfuehrungLaeuft = true;
+  const e = einleitung;
+  try {
+    stand.phase = "einfuehrung";
+    ueberspringeAlles();
+    umschlag.style.visibility = "hidden";
+    const sichtbar = Array.from({ length: 10 }, (_, i) => KLEIN_BIS + 1 + i);
+    if (zuKlein) {
+      if (hausBei > KLEIN_BIS) await fahre(hausBei, KLEIN_BIS, 900);
+      await zeigeWechsel(false, sichtbar);
+      setzeKlein(true);
+      await satz(e.wiederKlein);
+      await satz(e.einTipp);
+    } else {
+      setzeKlein(false);
+      await zeigeWechsel(true, sichtbar);
+      await satz(e.groesser);
+      await satz(e.zweiZiffern);
+      if (!grossErklaert) {
+        await neuerUmschlag(13, stufe);
+        await satz(e.zuhoeren);
+        await erzaehler.wort(13);
+        einfuehrungHilfe = () => erzaehler.wort(13).then(() => satz(e.einsDrei));
+        const tippen = kindTippt(["1", "3"], felderVon(13, stufe));
+        await satz(e.einsDrei);
+        await tippen;
+        einfuehrungHilfe = () => satz(e.fertig).then(() => satz(e.haken));
+        const fertig = kindTippt(["fertig"], felderVon(13, stufe));
+        await satz(e.fertig);
+        await satz(e.haken);
+        await fertig;
+        einfuehrungHilfe = null;
+        await Promise.all([wirkungRichtig(13, { freude: false }), erzaehler.bei(13)]);
+        await satz(e.aendern);
+        tastatur.markiere("loeschen");
+        await satz(e.loeschen);
+        tastatur.markiere(null);
+        grossErklaert = true;
+      }
+    }
     await satz(e.los);
   } finally {
     ueberspringeAlles();
@@ -970,6 +1044,8 @@ const wunsch = einmal(params.get("thema")); // ?thema= gilt nur für die erste R
 const PRUEF_STUFE = testbetrieb() ? params.get("stufe") || null : null;
 /** ?bis=<n> nur im Testbetrieb: das Spiel tut, als ginge das Thema bis n (z. B. ?bis=20: großes Spiel mit Fertig). */
 const PRUEF_BIS = testbetrieb() && params.has("bis") ? Number(params.get("bis")) : null;
+/** ?wechsel nur im Testbetrieb: die erste Runde beginnt mit dem Wechsel (zu ?bis bzw. zum Thema der Runde). */
+const PRUEF_WECHSEL = testbetrieb() && params.has("wechsel");
 /** @param {any} a */
 const aufStufe = (a) => (a && PRUEF_STUFE ? { ...a, stufe: PRUEF_STUFE } : a);
 
@@ -990,12 +1066,14 @@ const stand = { phase: "laden", aufgabe: /** @type {string | null} */ (null), nr
 /** @type {{ zuege: () => any[], richtigerZug: () => any, zeigeWieder: () => Promise<void> } | null} */
 let offeneAufgabe = null;
 const ORTE = { hilfe: "#hilfe >>> ls-knopf", haus: "#leiste >>> a.haus", weiter: "#pause >>> ls-knopf.weiter" };
-const WEITER = { art: "tippen", von: ORTE.weiter };
+/** Wo Weiter liegt: in der Pause oder auf dem Bildschirm „Gekonnt“. */
+let weiterOrt = ORTE.weiter;
+const weiterZug = () => ({ art: "tippen", von: weiterOrt });
 const einfuehrungsZug = () => (einfuehrungTaste ? zug(einfuehrungTaste) : null);
 meldePruefSchnittstelle({
   zustand: () => ({ ...stand }),
-  zuege: () => (stand.phase === "aufgabe" ? offeneAufgabe?.zuege() ?? [] : stand.phase === "pause" ? [WEITER] : stand.phase === "einfuehrung" ? [einfuehrungsZug()].filter(Boolean) : []),
-  richtigerZug: () => (stand.phase === "aufgabe" ? offeneAufgabe?.richtigerZug() ?? null : stand.phase === "pause" ? WEITER : stand.phase === "einfuehrung" ? einfuehrungsZug() : null),
+  zuege: () => (stand.phase === "aufgabe" ? offeneAufgabe?.zuege() ?? [] : stand.phase === "pause" ? [weiterZug()] : stand.phase === "einfuehrung" ? [einfuehrungsZug()].filter(Boolean) : []),
+  richtigerZug: () => (stand.phase === "aufgabe" ? offeneAufgabe?.richtigerZug() ?? null : stand.phase === "pause" ? weiterZug() : stand.phase === "einfuehrung" ? einfuehrungsZug() : null),
   orte: ORTE,
 });
 
@@ -1072,22 +1150,26 @@ function warteFolge() {
 }
 
 // --- Pause am Rundenende (bedienung.md 7.1) --------------------------------------------------------
-/** @param {{ hinweis?: string | null, zeit?: { schluss: boolean, satz: string | null }, echteDinge?: { thema?: string, fach?: string, titel?: string, text?: string } | null }} [optionen] */
-async function zeigePause({ hinweis = null, zeit = { schluss: false, satz: null }, echteDinge = null } = {}) {
-  const feld = $("sachmoment");
-  fuelleSachmoment(feld, leiste.ton && !zeit.satz);
+// Christian, 2026-11-16: Das Kind entscheidet, sonst nichts – nur „Weiter“ und „Alle Spiele“ (kein Mitmach-Satz, kein
+// Angebot „Mit echten Dingen“, kein Hinweis auf ein anderes Spiel). Der Satz der Spielzeit bleibt.
+/** @param {{ zeit?: { schluss: boolean, satz: string | null } }} [optionen] */
+async function zeigePause({ zeit = { schluss: false, satz: null } } = {}) {
   if (zeit.satz && leiste.ton) sage(zeit.satz);
-  const spiel = hinweis ? (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id === hinweis) : null;
-  if (spiel) {
-    const a = document.createElement("a");
-    a.className = "hinweis";
-    a.href = spiel.datei;
-    a.tabIndex = 0; // WebKit (Safari, macOS-Vorgabe) erreicht Links mit Tab nur mit tabindex
-    a.innerHTML = `<img src="${esc(new URL(spiel.symbol, new URL("../../", import.meta.url)).href)}" alt=""><span>${esc(spiel.titel)}</span>`;
-    feld.append(a);
-  }
   stand.phase = "pause";
-  await pause.zeige({ ...zeit, echteDinge }); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
+  weiterOrt = ORTE.weiter;
+  await pause.zeige({ ...zeit, echteDinge: null }); // „Alle Spiele“ navigiert selbst (speichert vorher), „Weiter“ löst auf
+  stand.phase = "laden";
+}
+
+/**
+ * Ein Thema ist gekonnt (Christian, 2026-11-16): statt der Pause der Bildschirm „Gekonnt“, Timo feiert mit dem Kind.
+ * @param {{ name: string, sprich?: string }} thema
+ */
+async function zeigeGekonnt(thema) {
+  stand.phase = "pause"; // für den Prüfstand wie die Pause: der nächste Zug ist Weiter
+  weiterOrt = "#gekonnt >>> ls-knopf.weiter";
+  await gekonntEl.zeige({ thema, figur: "timo" });
+  weiterOrt = ORTE.weiter;
   stand.phase = "laden";
 }
 
@@ -1116,6 +1198,9 @@ async function starteRunde(vorschau) {
     thema: r.thema?.name ?? "",
     /** Bis zu welcher Zahl das Thema der Runde geht (kleines Spiel bis 10). */
     bis: plan?.aufgaben?.bis ?? null,
+    themaId: plan?.id ?? null,
+    /** Sprechname des Themas (aufgenommen über lernplan.json). */
+    sprich: plan?.sprich ?? null,
     echteDinge: plan ? { thema: plan.id, fach: plan.strang, titel: plan.name, text: plan.eltern ?? "" } : null,
     einfuehrungGesehen: () => r.einfuehrungGesehen(),
     naechste: () => r.naechste(),
@@ -1130,6 +1215,8 @@ function vorschauRunde() {
   return {
     thema: VORSCHAU.thema,
     bis: null,
+    themaId: null,
+    sprich: null,
     echteDinge: { titel: VORSCHAU.thema },
     einfuehrungGesehen() {},
     naechste() {
@@ -1146,6 +1233,9 @@ const themaName = (id) => (id ? ctx?.plan?.themen?.find((/** @type {any} */ t) =
 
 /** Die Einführung lief schon (sie kommt bei jedem Start einmal, danach über „Anleitung“). */
 let einfuehrungGespielt = false;
+/** Thema der letzten Runde (für den Satz am Rundenanfang) und Zahl der Runden seit dem Start. */
+let letztesThema = /** @type {string | null} */ (null);
+let rundenZahl = 0;
 
 // „Anleitung“: die Einführung im Spielbild jederzeit wieder (während einer Aufgabe); danach steht die Aufgabe wieder da.
 $("anleitung")?.addEventListener("click", async () => {
@@ -1186,15 +1276,27 @@ async function spieleRunde(vorschau) {
   }
   leiste.setAttribute("thema", r.thema);
   // Themen bis 10 spielen klein: nur die Häuser 0 bis 10, Taste „10“, ohne Fertig und Löschen.
-  setzeKlein(istKlein(PRUEF_BIS ?? r.bis));
+  const kleinJetzt = istKlein(PRUEF_BIS ?? r.bis);
+  const stufeJetzt = aufgabe?.stufe === "kopf" ? "kopf" : "material";
+  const erste = zahlAus(aufgabe?.ziel?.key);
+  // ?wechsel (nur Testbetrieb): die erste Runde beginnt mit dem Wechsel aus dem anderen Spiel.
+  if (rundenZahl === 0 && PRUEF_WECHSEL) setzeKlein(!kleinJetzt);
+  else if (rundenZahl === 0) setzeKlein(kleinJetzt);
 
   // Das Spiel beginnt mit der Einführung im echten Spielbild (bei jedem Start; in der Vorschau nur mit ?einfuehrung).
-  const erste = zahlAus(aufgabe?.ziel?.key);
   if (!einfuehrungGespielt && erste && (!vorschau || params.has("einfuehrung"))) {
     einfuehrungGespielt = true;
-    await einfuehrung(aufgabe?.stufe === "kopf" ? "kopf" : "material");
+    setzeKlein(kleinJetzt);
+    await einfuehrung(stufeJetzt);
     r.einfuehrungGesehen();
+  } else if (erste) {
+    // Später: hat sich das Thema geändert, sagt die Stimme es (ein Satz, Christian 2026-11-16); wechselt dabei
+    // „bis 10“ und „11 bis 20“, zeigt eine kurze Szene den Wechsel.
+    if (r.themaId && letztesThema && r.themaId !== letztesThema && r.sprich) await satz((o) => spricht(() => blase.sage(r.sprich, o)));
+    if (kleinJetzt !== klein) await wechsle(kleinJetzt, stufeJetzt);
   }
+  if (r.themaId) letztesThema = r.themaId;
+  rundenZahl++;
   $("anleitung")?.removeAttribute("hidden");
 
   while (aufgabe) {
@@ -1219,8 +1321,14 @@ async function spieleRunde(vorschau) {
   // wird abgeschnitten); steht die Stimme länger still als ein Satz dauert, geht es weiter.
   await wirkungFertig.catch(() => undefined);
   await Promise.race([sprechSchlange, new Promise((ok) => setTimeout(ok, SATZ_WARTE_MS))]);
-  const { hinweisSpiel } = await r.ende();
-  await zeigePause({ hinweis: hinweisSpiel, zeit: vorschau ? undefined : await amRundenende(), echteDinge: r.echteDinge });
+  const { gekonnt } = await r.ende();
+  const zeit = vorschau ? undefined : await amRundenende();
+  if (gekonnt) {
+    await zeigeGekonnt(gekonnt);
+    if (zeit?.schluss) await zeigePause({ zeit });
+  } else {
+    await zeigePause({ zeit });
+  }
   return spieleRunde(vorschau);
 }
 
@@ -1231,15 +1339,18 @@ async function start() {
   const c = await ladeCtx().catch(() => null);
   const nichtEingetragen = c !== null && !eingetragen(c);
   if (nichtEingetragen) protokoll(`${SPIEL_ID}: nicht in spiele.json – Vorschau, schreibt nicht`);
-  const vorschau = ["pause", "hinweis", "eltern", "einfuehrung"].some((p) => params.has(p)) || PRUEF_STUFE !== null || !c || nichtEingetragen;
+  const vorschau = ["pause", "hinweis", "eltern", "einfuehrung", "gekonnt"].some((p) => params.has(p)) || PRUEF_STUFE !== null || !c || nichtEingetragen;
   stand.vorschau = vorschau;
   if (!(await starteSpielzeit({ zaehlen: !vorschau }))) return;
   await new Promise((ok) => requestAnimationFrame(() => ok(undefined)));
   stelleKamera(0);
   umschlag.style.visibility = "hidden";
+  // ?gekonnt: der Bildschirm „Gekonnt“ mit einem Beispielthema (Vorschau)
+  if (params.has("gekonnt")) await zeigeGekonnt({ name: "Ziffern 0 bis 10 lesen", sprich: "Ziffern lesen" });
   if (params.has("pause") || params.has("hinweis")) {
     const andere = (ctx?.spiele?.spiele ?? []).find((/** @type {any} */ s) => s.id !== SPIEL_ID)?.id ?? null;
-    await zeigePause({ hinweis: params.has("hinweis") ? params.get("hinweis") || andere : null, echteDinge: { titel: VORSCHAU.thema } });
+    void andere;
+    await zeigePause();
   }
   await spieleRunde(vorschau);
 }
