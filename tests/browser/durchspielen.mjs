@@ -521,8 +521,12 @@ async function kindRatend(sp, lauf, _vorher, { wegtippen = false, antwort = fals
       let auswahl = alle.filter((x) => !a.versucht.has(schluessel(x)));
       if (!auswahl.length) throw new Haenger(`Aufgabe ${z.aufgabe}: alle ${alle.length} Züge probiert, keiner bringt sie voran`);
       if (z.versuche < 2) {
+        // Gibt es keinen neuen falschen Zug mehr (Aufgabe mit nur einem falschen Zug), tippt das Kind denselben falschen
+        // Zug noch einmal: auch das ist ein zweiter Fehlversuch und lässt die Hilfe leuchten.
+        const falsch = alle.filter((x) => schluessel(x) !== richtig);
         const daneben = auswahl.filter((x) => schluessel(x) !== richtig);
         if (daneben.length) auswahl = daneben;
+        else if (falsch.length) auswahl = falsch;
       }
       // knoepfe: im zweiten Zug jeder Aufgabe zuerst der Haken/Fertig-Knopf, auch wenn noch nichts eingegeben ist: ein Knopf,
       // der dann nichts tut, ist der Fehler, den dieses Kind sucht. Steht er nicht in zuege() (das bietet nur
