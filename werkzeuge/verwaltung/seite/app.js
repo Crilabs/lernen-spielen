@@ -187,6 +187,22 @@ async function ladeProtokoll() {
   } catch { /* nächster Versuch beim nächsten Abruf */ }
 }
 
+// ---------- Proben ----------
+
+function zeigeProben() {
+  const proben = Object.values(U.spiele).filter((s) => s.status === "probe");
+  $("#proben").innerHTML = proben.length
+    ? `<p class="leise-text">Fertig ist ein Spiel erst, wenn du oder Noelia es zwei Minuten gespielt habt. „Probe abschließen“ nimmt die
+        Markierung aus spiele/spiele.json und committet nur diese Datei auf main (kein Push).</p>
+      <div class="karte"><table><thead><tr><th>Id</th><th>Spiel</th><th>Hauptthemen</th><th class="zahl-z">Kosten</th><th></th></tr></thead><tbody>
+      ${proben.map((s) => `<tr><td>${esc(s.id)}</td><td>${esc(s.name)}</td>
+        <td class="leise-text">${esc(s.hauptthemen.join(", "))}</td><td class="zahl-z">${eur(s.eur)}</td>
+        <td style="white-space:nowrap"><a class="knopf-link" href="/spiele/${esc(s.ordner)}" target="_blank" rel="noopener">Spielen</a>
+          <button class="klein" data-probe="${esc(s.id)}">Probe abschließen</button></td></tr>`).join("")}
+      </tbody></table></div>`
+    : `<p class="leer">Gerade ist kein Spiel zur Probe.</p>`;
+}
+
 // ---------- Kosten ----------
 
 function zeigeKosten() {
@@ -220,6 +236,8 @@ function zeigeKosten() {
 // ---------- Kopf, Hinweise, Steuerung ----------
 
 function zeigeKopf() {
+  const proben = Object.values(U.spiele).filter((s) => s.status === "probe").length;
+  $("#zahl-proben").textContent = proben ? String(proben) : "";
   const k = U.kosten;
   const offenAnalog = k.analog.prognose === null ? 0 : Math.max(0, k.analog.prognose - k.analog.summe.eur);
   const offen = (k.spiele.rest?.mittel ?? 0) + offenAnalog + (k.buecher.rest ?? 0);
@@ -241,6 +259,7 @@ function zeige() {
   if (zustand.reiter === "lernthemen") zeigeLernthemen();
   if (zustand.reiter === "sachthemen") zeigeSachthemen();
   if (zustand.reiter === "auftraege") zeigeAuftraege();
+  if (zustand.reiter === "proben") zeigeProben();
   if (zustand.reiter === "kosten") zeigeKosten();
 }
 
@@ -298,6 +317,12 @@ document.addEventListener("click", async (e) => {
     else if (z.dataset.schritt) { A = { ...A, ...(await api(`/api/auftraege/${z.dataset.id}/${z.dataset.schritt}`, {})) }; await ladeAlles(); }
     else if (z.dataset.antwort) { await api(`/api/auftraege/${z.dataset.id}/antwort`, { text: z.dataset.antwort }); await ladeAlles(); }
     else if (z.dataset.antworten) antworten(z.dataset.antworten);
+    else if (z.dataset.probe && z.dataset.sicher !== "1") { z.dataset.sicher = "1"; z.textContent = `${z.dataset.probe} wirklich abschließen?`; }
+    else if (z.dataset.probe) {
+      const r = await api(`/api/proben/${z.dataset.probe}/abschliessen`, {});
+      $("#hinweis").textContent = `${r.id}: Probe abgeschlossen, gilt als fertig (Commit ${r.commit}, nicht gepusht).`;
+      await ladeAlles();
+    }
     else if (z.dataset.protokoll) { gewaehlt = z.dataset.protokoll; zeigeAuftraege(); }
     else if (z.id === "abarbeiten") { await api("/api/abarbeiten", {}); setTimeout(ladeAlles, 800); }
     else if (z.id === "anhalten") { await api("/api/anhalten", {}); await ladeAlles(); }

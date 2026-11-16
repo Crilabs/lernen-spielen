@@ -136,3 +136,14 @@ test("Server: antworten legt Folgeauftrag an, ablehnen schließt ab", () => mitS
   const l = (await (await hol("/api/auftraege")).json()).auftraege;
   assert.deepEqual(l.map((x) => x.status), ["beantwortet", "erledigt", "wartet"]);
 }));
+
+test("Server: liefert Spiele aus, ohne Ausbruch aus spiele/", () => mitServer(async ({ hol }) => {
+  const r = await hol("/spiele/rahmen/seite.css");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("content-type") ?? "", /text\/css/);
+  assert.equal((await hol("/spiele/..%2Fpackage.json")).status, 404);
+}));
+
+test("Server: Probe abschließen – unbekannte Id → 400", () => mitServer(async ({ sende }) => {
+  assert.equal((await sende("/api/proben/X1/abschliessen")).status, 400);
+}));

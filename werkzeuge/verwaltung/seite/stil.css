@@ -93,3 +93,5 @@ dialog menu { display: flex; justify-content: flex-end; gap: 8px; padding: 0; ma
 dialog menu button:not(.haupt) { background: none; border: 1px solid var(--linie); border-radius: 6px; padding: 6px 14px; }
 .leer { color: var(--leise); padding: 16px 0; }
 dialog textarea { width: 100%; box-sizing: border-box; padding: 6px 8px; border: 1px solid var(--linie); border-radius: 6px; background: var(--flaeche); color: var(--text); font: inherit; }
+.knopf-link { display: inline-block; padding: 0 6px; margin-right: 4px; border: 1px solid var(--linie); border-radius: 4px; color: var(--text); text-decoration: none; }
+.knopf-link:hover { background: var(--flaeche); }

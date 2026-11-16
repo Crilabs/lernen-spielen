@@ -74,7 +74,9 @@ abarbeiten“ startet einen Hintergrundlauf (`claude -p`, ein Auftrag nach dem a
 `node werkzeuge/verwaltung/lauf.mjs naechster` und meldet ihn mit `lauf.mjs fertig <id> <status>` zurück (dieselbe
 Sperre wie die Seite). Wartet ein Auftrag auf Christian, beantwortet er ihn in der Seite: „Ja“ oder „Antworten …“ legt
 einen Folgeauftrag (Art `antwort`, ca. 2 €) an, der den Auftrag mit der Antwort fortsetzt; „Nein“ schließt ihn ohne
-Lauf ab. Warteschlange, Sperre, Ergebnisse und Protokolle sind gitignored.
+Lauf ab. Der Reiter „Proben“ zeigt die Spiele mit `"probe": true`, spielbar unter `127.0.0.1:4711/spiele/…`;
+„Probe abschließen“ nimmt die Markierung heraus und committet nur `spiele/spiele.json` auf main (kein Push).
+Warteschlange, Sperre, Ergebnisse und Protokolle sind gitignored.
 
 ## Release
 

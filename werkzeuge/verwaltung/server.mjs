@@ -9,10 +9,15 @@ import { dirname, extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { beantworte, ladeAuftraege, lehneAb, neuerAuftrag, speichereAuftraege, streiche, verschiebe } from "./auftraege.mjs";
 import { baueUebersicht, liesQuellen } from "./daten.mjs";
+import { ProbeZustand, schliesseProbeAb } from "./proben.mjs";
 import { ORDNER, WURZEL, anhalten, laufLog, letzterLaufFehler, pfade, sperre } from "./lauf.mjs";
 
 const SEITE = join(ORDNER, "seite");
-const TYPEN = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml" };
+const TYPEN = {
+  ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".json": "application/json; charset=utf-8",
+  ".mp3": "audio/mpeg", ".webp": "image/webp", ".png": "image/png", ".jpg": "image/jpeg", ".woff2": "font/woff2",
+};
 const AUFTRAG_ID = /^a-\d+-[a-z0-9]+$/;
 
 /** Startet den Lauf als eigenen Prozess, damit er ein Beenden des Servers (Strg+C) übersteht. */
@@ -75,10 +80,13 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
       const pfad = url.pathname;
       const post = req.method === "POST";
 
-      if (!post && (pfad === "/" || pfad.startsWith("/seite/"))) {
-        const rel = pfad === "/" ? "index.html" : decodeURIComponent(pfad.slice("/seite/".length));
-        const datei = normalize(join(SEITE, rel));
-        if (!datei.startsWith(SEITE + sep) || !existsSync(datei) || !statSync(datei).isFile()) return antwort(404, { fehler: "nicht gefunden" });
+      if (!post && (pfad === "/" || pfad.startsWith("/seite/") || pfad.startsWith("/spiele/"))) {
+        // /spiele/… liefert die Spiele aus dem Repo, damit Proben hier gespielt werden können
+        const [basis, rel] = pfad.startsWith("/spiele/")
+          ? [join(wurzel, "spiele"), decodeURIComponent(pfad.slice("/spiele/".length))]
+          : [SEITE, pfad === "/" ? "index.html" : decodeURIComponent(pfad.slice("/seite/".length))];
+        const datei = normalize(join(basis, rel));
+        if (!datei.startsWith(basis + sep) || !existsSync(datei) || !statSync(datei).isFile()) return antwort(404, { fehler: "nicht gefunden" });
         res.writeHead(200, { "content-type": TYPEN[extname(datei)] ?? "application/octet-stream", "cache-control": "no-store" });
         return res.end(readFileSync(datei));
       }
@@ -117,6 +125,12 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
         try { r = beantworte(l, alt.id, (await koerper()).text); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
         speichereAuftraege(p.auftraege, r.liste);
         return antwort(201, r.neu);
+      }
+      const pb = pfad.match(/^\/api\/proben\/([A-Z]\d+)\/abschliessen$/);
+      if (post && pb) {
+        try { return antwort(200, schliesseProbeAb(wurzel, pb[1])); } catch (e) {
+          return antwort(e instanceof ProbeZustand ? 409 : 400, { fehler: /** @type {any} */ (e).message });
+        }
       }
       if (post && pfad === "/api/abarbeiten") {
         if (sperre(ordner)) return antwort(409, { fehler: "Es läuft schon ein Lauf.", sperre: sperre(ordner) });
