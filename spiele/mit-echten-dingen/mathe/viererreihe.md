@@ -1,7 +1,7 @@
 ---
 thema: viererreihe
 fach: mathe
-bild: { figur: gedeck, zustand: gedeckt }
+foto: bilder/viererreihe.webp
 quellen:
   - 1·1 richtig üben, Basisinfos (Verdoppelungsaufgaben von 2 · 8 zu 4 · 8; Reihen verstehen statt aufsagen), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
   - Operationsverständnis Multiplikation, Lernen auf Distanz Klasse 2 (Gruppensprache „Ich sehe drei Vierer“), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-multiplikation.pdf, abgerufen 2026-11-14

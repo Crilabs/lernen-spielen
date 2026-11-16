@@ -1,7 +1,7 @@
 ---
 thema: einmaleins-sicher
 fach: mathe
-bild: { figur: kartoffeltopf, zustand: voll }
+foto: bilder/einmaleins-sicher.webp
 quellen:
   - Fachlehrplan Mathematik 3/4 Grundschule, 1.2 (Zahlensätze des kleinen Einmaleins und ihre Umkehrungen automatisiert und flexibel anwenden), LehrplanPLUS Bayern, ISB, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/3/mathematik, abgerufen 2026-11-14
   - Sicher im 1·1 (Wissensnetz statt Einzelfakten; 36 geteilt durch 9 über die Umkehraufgabe 9 mal 4; automatisiert bis Mitte Klasse 3), Mahiko, DZLM, https://mahiko.dzlm.de/node/73, abgerufen 2026-11-14

@@ -10,7 +10,7 @@ themen:
   - zerlegen-9
   - zerlegen-10
 fach: mathe
-bild: { figur: nudelteller, zustand: verteilt }
+foto: bilder/zerlegen.webp
 quellen:
   - Zahlverständnis Anfangsunterricht – Zahlzerlegung, PIKAS kompakt, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/unterricht_neu/gute_aufgaben/pikaskompakt/unterricht_guteaufgaben_pikaskompakt_anfangsunterricht_zahlzerlegung.pdf, abgerufen 2026-11-14
   - Zahlen zerlegen (Lernen auf Distanz, Hinweise für Eltern), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-im-anfangsunterricht-1.halbjahr-zahlen-zerlegen.pdf, abgerufen 2026-11-14

@@ -1,7 +1,7 @@
 ---
 thema: ziffern-lesen-bis-10
 fach: mathe
-bild: { figur: tastentelefon, zustand: tasten }
+foto: bilder/ziffern-lesen-bis-10.webp
 quellen:
   - Zahlen darstellen (Lernen auf Distanz, Klasse 1), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/unterricht_neu/zahlen_und_operationen/zr_20/zahlen_darstellen/lad-mathematische-themen-klasse1-komplett_2022_zahlendarstellen.pdf, abgerufen 2026-11-16
   - Mathe – ein Kinderspiel (Elternratgeber), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_1_-_Entdecken_Beschreiben_Begruenden/IM/Elternratgeber/ER_Mathe_ein_Kinderspiel.pdf, abgerufen 2026-11-16

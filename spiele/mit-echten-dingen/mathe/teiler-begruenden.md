@@ -1,7 +1,7 @@
 ---
 thema: teiler-begruenden
 fach: mathe
-bild: { figur: keksteller, zustand: haufen }
+foto: bilder/teiler-begruenden.webp
 quellen:
   - Fachlehrplan Mathematik 3/4 Grundschule, 1.1 (Beziehungen zwischen Zahlen begründen, z. B. Teiler, Vielfache), LehrplanPLUS Bayern, ISB, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/3/mathematik, abgerufen 2026-11-14
   - Playing With Factors and Multiples / Using Books: The Doorbell Rang (Kekse gerecht teilen, wenn weitere Kinder klingeln; „What will happen if another person turns up now?“, „Can you explain why you think that?“), NRICH, University of Cambridge, https://nrich.maths.org/node/56278, abgerufen 2026-11-14

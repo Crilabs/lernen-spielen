@@ -1,7 +1,7 @@
 ---
 thema: achterreihe
 fach: mathe
-bild: { figur: faltzettel, zustand: abgerissen }
+foto: bilder/achterreihe.webp
 quellen:
   - 1·1 richtig üben, Basisinfos (Verdoppelungsaufgaben von 2 · 8 zu 4 · 8; 4 · 8 = 16 + 16; 9 · 8 = 80 − 8; Reihen erschließen statt früh aufsagen), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
   - Fachlehrplan Mathematik Jahrgangsstufe 1/2 (Kernaufgaben nutzen, Nachbaraufgaben, Beispiel 9 · 8 = 10 · 8 − 1 · 8 = 80 − 8), LehrplanPLUS Bayern, ISB, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/mathematik, abgerufen 2026-11-14

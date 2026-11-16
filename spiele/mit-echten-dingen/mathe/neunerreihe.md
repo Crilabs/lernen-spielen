@@ -1,7 +1,7 @@
 ---
 thema: neunerreihe
 fach: mathe
-bild: { figur: eintrittskarte, zustand: zwei }
+foto: bilder/neunerreihe.webp
 quellen:
   - Fachlehrplan Mathematik Jahrgangsstufe 1/2 (Einmaleins über Kernaufgaben ableiten, z. B. 9 · 8 = 10 · 8 − 1 · 8), LehrplanPLUS Bayern, ISB, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/mathematik, abgerufen 2026-11-14
   - Übung 3, Schwierigere Malaufgaben mit der Kernaufgaben-Strategie lösen (von 10 · 7 einen Siebener abziehen), mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/2_schuljahr/SicherimEinmaleins/pdf/2sj_sicherimeinmaleins_uebungen_3._220504docx.pdf, abgerufen 2026-11-14

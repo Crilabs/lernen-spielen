@@ -1,7 +1,7 @@
 ---
 thema: dreierreihe
 fach: mathe
-bild: { figur: brotzeitteller, zustand: drei }
+foto: bilder/dreierreihe.webp
 quellen:
   - 1·1 richtig üben, Basisinfos (Kernaufgaben mit 1, 2, 5 und 10; 6 · 7 = 5 · 7 + 1 · 7; Nachbaraufgaben statt Reihen aufsagen), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
   - Übung 3, Schwierigere Malaufgaben mit der Kernaufgaben-Strategie lösen (Sicher im 1·1), Mahiko (DZLM), https://mahiko.dzlm.de/sites/mahiko/files/uploads/2_schuljahr/SicherimEinmaleins/pdf/2sj_sicherimeinmaleins_uebungen_3._220504docx.pdf, abgerufen 2026-11-14

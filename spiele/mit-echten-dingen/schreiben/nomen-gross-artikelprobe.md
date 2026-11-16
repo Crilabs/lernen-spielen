@@ -1,7 +1,7 @@
 ---
 thema: nomen-gross-artikelprobe
 fach: schreiben
-bild: { figur: auftragszettel, zustand: liegt }
+foto: bilder/nomen-gross-artikelprobe.webp
 quellen:
   - LehrplanPLUS Grundschule Deutsch, Fachlehrplan Jahrgangsstufe 1/2 (Strategien zum Erkennen von Nomen: Artikelprobe im Satzzusammenhang, Mehrzahl bilden), ISB Bayern, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/2/deutsch, abgerufen 2026-11-14
   - Montessori einfach klar, Band 3, Leseprobe, 4.3.2 Bestimmter Artikel (schriftlicher Auftrag, das Kind liest und holt den Gegenstand), Institut für Lebendiges Lernen, https://www.montessori-material.de/tpl/download/leseprobe-montessori-einfach-klar-band-3.pdf, abgerufen 2026-11-14

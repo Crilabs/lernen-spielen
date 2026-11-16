@@ -1,7 +1,7 @@
 ---
 thema: fuenferreihe
 fach: mathe
-bild: { figur: broetchen, zustand: tuete }
+foto: bilder/fuenferreihe.webp
 quellen:
   - Von Kernaufgaben zum Aufgabennetz: Das Einmaleins über Beziehungen erschließen (Fünfmal-Aufgaben durch Halbieren der Zehnmal-Aufgaben), Schulimpulse, https://www.schulimpulse.de/von-einer-aufgabe-zur-naechsten-ueber-kernaufgaben-und-beziehungen-das-einmaleins-erschliessen/, abgerufen 2026-11-14
 ---

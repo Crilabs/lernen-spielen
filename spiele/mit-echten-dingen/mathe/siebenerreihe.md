@@ -1,7 +1,7 @@
 ---
 thema: siebenerreihe
 fach: mathe
-bild: { figur: wandkalender, zustand: haengt }
+foto: bilder/siebenerreihe.webp
 quellen:
   - 1·1 richtig üben, Basisinfos (Kernaufgaben der Reihe mit 7: 1 · 7, 2 · 7, 5 · 7, 10 · 7; 6 · 7 ist 5 · 7 plus 1 · 7), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14
   - Übung 3: Schwierigere Malaufgaben mit der Kernaufgaben-Strategie lösen (Sicher im 1·1), Mahiko (DZLM), https://mahiko.dzlm.de/sites/mahiko/files/uploads/2_schuljahr/SicherimEinmaleins/pdf/2sj_sicherimeinmaleins_uebungen_3._220504docx.pdf, abgerufen 2026-11-14

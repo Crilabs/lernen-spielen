@@ -1,7 +1,7 @@
 ---
 thema: zweierreihe
 fach: mathe
-bild: { figur: schuhpaar, zustand: liegt }
+foto: bilder/zweierreihe.webp
 quellen:
   - Rechenrabe Trax 2, Begleitband für Lehrerinnen und Lehrer (Die 2er-Reihe), öbv, https://www.oebv.at/flippingbook/9783209097378/81/, abgerufen 2026-11-14
   - Einmaleins (Einführung der Reihen: Kernaufgaben handelnd, Verdoppeln), MILOS WELT, https://blog.miloswelt.de/2022/05/28/einmaleins/, abgerufen 2026-11-14

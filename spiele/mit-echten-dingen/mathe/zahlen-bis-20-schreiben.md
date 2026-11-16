@@ -1,7 +1,7 @@
 ---
 thema: zahlen-bis-20-schreiben
 fach: mathe
-bild: { figur: einkaufszettel, zustand: brezel }
+foto: bilder/zahlen-bis-20-schreiben.webp
 quellen:
   - Moderationspfad Haus 3, Modul 3.4 Entwicklung des Stellenwertverständnisses, PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/FM/Modul_3.4/Moderationspfad%20Modul%203.4.pdf, abgerufen 2026-11-16
   - Info-Mail 9 Zahlenraumerweiterung Teil 1, IQSH Schleswig-Holstein, https://fachportal.lernnetz.de/files/Inhalte%20der%20Unterrichtsf%C3%A4cher/Mathematik/oberste%20Ebene/Fachfortbildung/Basale%20Kompetenzen/Info-Mail%20Nr.9.pdf, abgerufen 2026-11-16

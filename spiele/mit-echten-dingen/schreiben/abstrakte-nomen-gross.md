@@ -1,7 +1,7 @@
 ---
 thema: abstrakte-nomen-gross
 fach: schreiben
-bild: { figur: glueckwunschkarte, zustand: im-umschlag }
+foto: bilder/abstrakte-nomen-gross.webp
 quellen:
   - Nomenproben erforschen (Artikelprobe, Zählprobe, Adjektivprobe; „Der Satz bestimmt, welche Wörter großgeschrieben werden“), Agnes Fulde für Jambus NRW, QUA-LiS NRW, https://www.qua-lis.nrw.de/system/files/media/document/file/jambus_m_09_nomenprobenerforschen.pdf, abgerufen 2026-11-14
   - LehrplanPLUS Grundschule Deutsch, Fachlehrplan Jahrgangsstufe 3/4 (den Nominalkern erweitern, um die Großschreibung des Nomens zu erkennen), ISB Bayern, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/4/deutsch, abgerufen 2026-11-14

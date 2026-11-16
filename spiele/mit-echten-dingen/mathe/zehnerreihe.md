@@ -1,7 +1,7 @@
 ---
 thema: zehnerreihe
 fach: mathe
-bild: { figur: muenze, zustand: stapel }
+foto: bilder/zehnerreihe.webp
 quellen:
   - Zehnereinmaleins (Materialpaket, Basiskompetenzen sichern), PIKAS mi, DZLM, https://pikas-mi.dzlm.de/pikasmifiles/uploads/Inhalte/BasiskompetenzenSichern/Zehnereinmaleins/materialpaket_final.pdf, abgerufen 2026-11-14
   - Denken in Bündeln, Friedrich Verlag, https://www.friedrich-verlag.de/friedrich-plus/grundschule/mathematik/zahlen-operationen/denken-in-buendeln-6859, abgerufen 2026-11-14

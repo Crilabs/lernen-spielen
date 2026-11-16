@@ -3094,5 +3094,1133 @@
    "zehnerzahlen-bis-100",
    "zahl-darstellungen-bis-100"
   ]
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 459,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "dreierreihe.png",
+  "themen": 1,
+  "thema": [
+   "dreierreihe"
+  ],
+  "usage": {
+   "input_tokens": 459,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 459
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2215
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 508,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "dreierreihe.png",
+  "themen": 1,
+  "thema": [
+   "dreierreihe"
+  ],
+  "usage": {
+   "input_tokens": 508,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 508
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2264
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 527,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "achterreihe.png",
+  "themen": 1,
+  "thema": [
+   "achterreihe"
+  ],
+  "usage": {
+   "input_tokens": 527,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 527
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2283
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 507,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "einmaleins-sicher.png",
+  "themen": 1,
+  "thema": [
+   "einmaleins-sicher"
+  ],
+  "usage": {
+   "input_tokens": 507,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 507
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2263
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 515,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "der-die-das.png",
+  "themen": 1,
+  "thema": [
+   "der-die-das"
+  ],
+  "usage": {
+   "input_tokens": 515,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 515
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2271
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 542,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "fuenferreihe.png",
+  "themen": 1,
+  "thema": [
+   "fuenferreihe"
+  ],
+  "usage": {
+   "input_tokens": 542,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 542
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2298
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 530,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "dreistellige-zahlen-lesen.png",
+  "themen": 1,
+  "thema": [
+   "dreistellige-zahlen-lesen"
+  ],
+  "usage": {
+   "input_tokens": 530,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 530
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2286
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 494,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "geschlecht-des-nomens.png",
+  "themen": 1,
+  "thema": [
+   "geschlecht-des-nomens"
+  ],
+  "usage": {
+   "input_tokens": 494,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 494
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2250
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 556,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "grosse-zahlen-lesen.png",
+  "themen": 1,
+  "thema": [
+   "grosse-zahlen-lesen"
+  ],
+  "usage": {
+   "input_tokens": 556,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 556
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2312
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 526,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "minus-zehner.png",
+  "themen": 1,
+  "thema": [
+   "minus-zehner"
+  ],
+  "usage": {
+   "input_tokens": 526,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 526
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2282
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 506,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "geteilt-umkehrung-mal.png",
+  "themen": 1,
+  "thema": [
+   "geteilt-umkehrung-mal"
+  ],
+  "usage": {
+   "input_tokens": 506,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 506
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2262
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 529,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "neunerreihe.png",
+  "themen": 1,
+  "thema": [
+   "neunerreihe"
+  ],
+  "usage": {
+   "input_tokens": 529,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 529
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2285
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 512,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "teiler-begruenden.png",
+  "themen": 1,
+  "thema": [
+   "teiler-begruenden"
+  ],
+  "usage": {
+   "input_tokens": 512,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 512
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2268
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 522,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "teiler-vielfache.png",
+  "themen": 1,
+  "thema": [
+   "teiler-vielfache"
+  ],
+  "usage": {
+   "input_tokens": 522,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 522
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2278
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 523,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "vorwaerts-zaehlen.png",
+  "themen": 1,
+  "thema": [
+   "vorwaerts-zaehlen"
+  ],
+  "usage": {
+   "input_tokens": 523,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 523
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2279
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 537,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "sechserreihe.png",
+  "themen": 1,
+  "thema": [
+   "sechserreihe"
+  ],
+  "usage": {
+   "input_tokens": 537,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 537
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2293
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 537,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zahl-darstellungen-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "zahl-darstellungen-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 537,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 537
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2293
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 516,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zahlen-bis-20-schreiben.png",
+  "themen": 1,
+  "thema": [
+   "zahlen-bis-20-schreiben"
+  ],
+  "usage": {
+   "input_tokens": 516,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 516
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2272
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 503,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zehner-und-einer-bis-20.png",
+  "themen": 1,
+  "thema": [
+   "zehner-und-einer-bis-20"
+  ],
+  "usage": {
+   "input_tokens": 503,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 503
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2259
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 530,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zehnerreihe.png",
+  "themen": 1,
+  "thema": [
+   "zehnerreihe"
+  ],
+  "usage": {
+   "input_tokens": 530,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 530
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2286
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 534,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zehn-plus.png",
+  "themen": 1,
+  "thema": [
+   "zehn-plus"
+  ],
+  "usage": {
+   "input_tokens": 534,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 534
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2290
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 529,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zehnerzahlen-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "zehnerzahlen-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 529,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 529
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2285
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 517,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zweierreihe.png",
+  "themen": 1,
+  "thema": [
+   "zweierreihe"
+  ],
+  "usage": {
+   "input_tokens": 517,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 517
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2273
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 528,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "adjektiv-in-nominalgruppe-klein.png",
+  "themen": 1,
+  "thema": [
+   "adjektiv-in-nominalgruppe-klein"
+  ],
+  "usage": {
+   "input_tokens": 528,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 528
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2284
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 556,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "nachsilben-ung-heit-keit-nis.png",
+  "themen": 1,
+  "thema": [
+   "nachsilben-ung-heit-keit-nis"
+  ],
+  "usage": {
+   "input_tokens": 556,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 556
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2312
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 499,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "abstrakte-nomen-gross.png",
+  "themen": 1,
+  "thema": [
+   "abstrakte-nomen-gross"
+  ],
+  "usage": {
+   "input_tokens": 499,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 499
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2255
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 505,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ziffern-lesen-bis-10.png",
+  "themen": 1,
+  "thema": [
+   "ziffern-lesen-bis-10"
+  ],
+  "usage": {
+   "input_tokens": 505,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 505
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2261
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 520,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "namen-gross.png",
+  "themen": 1,
+  "thema": [
+   "namen-gross"
+  ],
+  "usage": {
+   "input_tokens": 520,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 520
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2276
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 506,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "nomen-gross-artikelprobe.png",
+  "themen": 1,
+  "thema": [
+   "nomen-gross-artikelprobe"
+  ],
+  "usage": {
+   "input_tokens": 506,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 506
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2262
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 505,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "verben-als-nomen.png",
+  "themen": 1,
+  "thema": [
+   "verben-als-nomen"
+  ],
+  "usage": {
+   "input_tokens": 505,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 505
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2261
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 528,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "silben-klatschen.png",
+  "themen": 1,
+  "thema": [
+   "silben-klatschen"
+  ],
+  "usage": {
+   "input_tokens": 528,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 528
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2284
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 514,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "einmaleins-gemischt.png",
+  "themen": 1,
+  "thema": [
+   "einmaleins-gemischt"
+  ],
+  "usage": {
+   "input_tokens": 514,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 514
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2270
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 550,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "geteilt-alle-reihen.png",
+  "themen": 1,
+  "thema": [
+   "geteilt-alle-reihen"
+  ],
+  "usage": {
+   "input_tokens": 550,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 550
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2306
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 544,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ziffern-lesen-bis-10.png",
+  "themen": 1,
+  "thema": [
+   "ziffern-lesen-bis-10"
+  ],
+  "usage": {
+   "input_tokens": 544,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 544
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2300
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 553,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "geteilt-durch-2-5-10.png",
+  "themen": 1,
+  "thema": [
+   "geteilt-durch-2-5-10"
+  ],
+  "usage": {
+   "input_tokens": 553,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 553
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2309
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 534,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "siebenerreihe.png",
+  "themen": 1,
+  "thema": [
+   "siebenerreihe"
+  ],
+  "usage": {
+   "input_tokens": 534,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 534
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2290
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 526,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zahlwort-ziffern-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "zahlwort-ziffern-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 526,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 526
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2282
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 527,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "viererreihe.png",
+  "themen": 1,
+  "thema": [
+   "viererreihe"
+  ],
+  "usage": {
+   "input_tokens": 527,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 527
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2283
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 514,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zerlegen.png",
+  "themen": 9,
+  "thema": [
+   "zerlegen-2",
+   "zerlegen-3",
+   "zerlegen-4",
+   "zerlegen-5",
+   "zerlegen-6",
+   "zerlegen-7",
+   "zerlegen-8",
+   "zerlegen-9",
+   "zerlegen-10"
+  ],
+  "usage": {
+   "input_tokens": 514,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 514
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2270
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 586,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "geteilt-durch-2-5-10.png",
+  "themen": 1,
+  "thema": [
+   "geteilt-durch-2-5-10"
+  ],
+  "usage": {
+   "input_tokens": 586,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 586
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2342
+  }
  }
 ]

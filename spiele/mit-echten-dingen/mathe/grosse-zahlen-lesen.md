@@ -1,7 +1,7 @@
 ---
 thema: grosse-zahlen-lesen
 fach: mathe
-bild: { figur: landkarte, zustand: aufgefaltet }
+foto: bilder/grosse-zahlen-lesen.webp
 quellen:
   - Zentrale mathematische Themen Klasse 4 – Stellenwerte (Lernen auf Distanz), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/unterricht_neu/zahlen_und_operationen/zr_1mio/stellenwerte/lad_mathematische_themen_klasse_4_komplett_2022_buendeln.pdf, abgerufen 2026-11-16
   - Plättchen in der Stellentafel (ZR 1 Mio.), mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/4_schuljahr/stellenwerte/pdf/stellenwerte_zr1mio_plattchen_in_der_stellentafel.pdf, abgerufen 2026-11-16

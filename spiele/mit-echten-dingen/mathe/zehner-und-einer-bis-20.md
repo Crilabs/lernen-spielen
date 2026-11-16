@@ -1,7 +1,7 @@
 ---
 thema: zehner-und-einer-bis-20
 fach: mathe
-bild: { figur: stiftebecher, zustand: zehn-und-vier }
+foto: bilder/zehner-und-einer-bis-20.webp
 quellen:
   - Bündeln (Handout Rechnenlernen), ISB Bayern, https://isb.bayern.de/fileadmin/user_upload/Foerderschulen/Geistige_Entwicklung/Rechnenlernen/Handouts/5_Buendeln_Handout.pdf, abgerufen 2026-11-16
   - Bündeln (Lernen auf Distanz, Klasse 2), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-1.halbjahr-buendeln.pdf, abgerufen 2026-11-16

@@ -1,7 +1,7 @@
 ---
 thema: minus-zehner
 fach: mathe
-bild: { figur: brotdose, zustand: gepackt }
+foto: bilder/minus-zehner.webp
 quellen:
   - Zehner- und Zwanzigerfeld mit Plättchen (Material einsetzen), mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/basics/materialeinsetzen/pdf/basics_materialeinsetzen_zehner_zwanzigerfeld.pdf, abgerufen 2026-11-16
   - Zehner und Einer: Bündeln im Hunderterraum, mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/2_schuljahr/zehnerundeiner/pdf/zehner_und_einer_zr_100_bundeln_im_hunderterraum.pdf, abgerufen 2026-11-16

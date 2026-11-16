@@ -1,7 +1,7 @@
 ---
 thema: nachsilben-ung-heit-keit-nis
 fach: schreiben
-bild: { figur: nudelpackung, zustand: steht }
+foto: bilder/nachsilben-ung-heit-keit-nis.webp
 quellen:
   - Sprachwelt 2, Arbeitsheft Sprache erforschen, Grossschreibung in Sätzen – Nachmorpheme für die Grossschreibung nutzen, Schulverlag plus, https://www.schulverlag.ch/assets/SPRACHWELT/AH_Sprache_erforschen_SPRACHWELT-2_Grossschreibung_web.pdf, abgerufen 2026-11-14
   - LehrplanPLUS Grundschule Deutsch, Fachlehrplan Jahrgangsstufe 1/2 (Vor- und Nachsilben, Wortstämme), ISB Bayern, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/2/deutsch, abgerufen 2026-11-14

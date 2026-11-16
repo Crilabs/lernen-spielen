@@ -1,7 +1,7 @@
 ---
 thema: teiler-vielfache
 fach: mathe
-bild: { figur: keksblech, zustand: reihen }
+foto: bilder/teiler-vielfache.webp
 quellen:
   - Zerlegungsbäume, Unterrichtsplanung Kl. 3–4 (Teiler passen ohne Rest in eine Zahl; Plättchenfelder zur Visualisierung der Teiler), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/unterricht_neu/gute_aufgaben/zahlen_und_operationen/zerlegungsbaeume/unterricht_guteaufgaben_zerlegungsbaeume_unterrichtsplanung.pdf, abgerufen 2026-11-14
   - Playing With Factors and Multiples (Dicey Array: aus einer Anzahl Plättchen alle Rechtecke legen), NRICH, University of Cambridge, https://nrich.maths.org/node/56278, abgerufen 2026-11-14

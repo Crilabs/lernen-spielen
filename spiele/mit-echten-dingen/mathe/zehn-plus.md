@@ -1,7 +1,7 @@
 ---
 thema: zehn-plus
 fach: mathe
-bild: { figur: eierpappe, zustand: zehn }
+foto: bilder/zehn-plus.webp
 quellen:
   - Bündeln (Lernen auf Distanz, Klasse 2), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-1.halbjahr-buendeln.pdf, abgerufen 2026-11-16
   - Zehner- und Zwanzigerfeld mit Plättchen (Material einsetzen), mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/basics/materialeinsetzen/pdf/basics_materialeinsetzen_zehner_zwanzigerfeld.pdf, abgerufen 2026-11-16

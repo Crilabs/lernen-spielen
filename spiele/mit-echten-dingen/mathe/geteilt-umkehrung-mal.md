@@ -1,7 +1,7 @@
 ---
 thema: geteilt-umkehrung-mal
 fach: mathe
-bild: { figur: erdbeerschale, zustand: voll }
+foto: bilder/geteilt-umkehrung-mal.webp
 quellen:
   - Operationsverständnis Division, Lernen auf Distanz Klasse 2 (Divisionsaufgaben als Umkehraufgaben der Multiplikation verstehen und nutzen; Gruppensprache „zwei Fünfer“), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-division.pdf, abgerufen 2026-11-14
   - Aufgabenstellung kompakt: Aufgabenfamilien Mal/Geteilt (Mal- und Geteiltaufgaben zu Rechteckdarstellungen finden; Aufgabe, Tauschaufgabe, Umkehraufgabe), Mathe inklusiv mit PIKAS (DZLM), https://pikas-mi.dzlm.de/pikasmifiles/uploads/Dokumente/opv_multipl._division_material_aufg._komp._aufgabenfamilien_komplett_text_1_.pdf, abgerufen 2026-11-14

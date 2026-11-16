@@ -1,7 +1,7 @@
 ---
 thema: geschlecht-des-nomens
 fach: grammatik
-bild: { figur: einkaufstasche, zustand: voll }
+foto: bilder/geschlecht-des-nomens.webp
 quellen:
   - LehrplanPLUS Grundschule Deutsch 3/4, Lernbereich 4.3 (Merkmale von Nomen, Artikeln, Pronomen, z. B. Geschlecht), ISB Bayern, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/3/deutsch, abgerufen 2026-11-14
   - Ist die Genuszuweisung eine gute und sinnvolle Möglichkeit für grammatische Lernprozesse aller Grundschulkinder? (Ida Wolfram, 2023), peDOCS/DIPF, https://www.pedocs.de/volltexte/2025/32475/pdf/Wolfram_2023_Ist_die_Genuszuweisung.pdf, abgerufen 2026-11-14

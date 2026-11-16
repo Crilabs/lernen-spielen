@@ -15,7 +15,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "schreiben/abstrakte-nomen-gross.md"
+   "datei": "schreiben/abstrakte-nomen-gross.md",
+   "foto": "schreiben/bilder/abstrakte-nomen-gross.webp"
   },
   "achterreihe": {
    "fach": "mathe",
@@ -32,7 +33,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/achterreihe.md"
+   "datei": "mathe/achterreihe.md",
+   "foto": "mathe/bilder/achterreihe.webp"
   },
   "adjektiv-in-nominalgruppe-klein": {
    "fach": "schreiben",
@@ -49,7 +51,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "schreiben/adjektiv-in-nominalgruppe-klein.md"
+   "datei": "schreiben/adjektiv-in-nominalgruppe-klein.md",
+   "foto": "schreiben/bilder/adjektiv-in-nominalgruppe-klein.webp"
   },
   "der-die-das": {
    "fach": "grammatik",
@@ -70,7 +73,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "grammatik/der-die-das.md"
+   "datei": "grammatik/der-die-das.md",
+   "foto": "grammatik/bilder/der-die-das.webp"
   },
   "dreierreihe": {
    "fach": "mathe",
@@ -87,7 +91,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/dreierreihe.md"
+   "datei": "mathe/dreierreihe.md",
+   "foto": "mathe/bilder/dreierreihe.webp"
   },
   "dreistellige-zahlen-lesen": {
    "fach": "mathe",
@@ -104,7 +109,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/dreistellige-zahlen-lesen.md"
+   "datei": "mathe/dreistellige-zahlen-lesen.md",
+   "foto": "mathe/bilder/dreistellige-zahlen-lesen.webp"
   },
   "einmaleins-gemischt": {
    "fach": "mathe",
@@ -121,7 +127,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/einmaleins-gemischt.md"
+   "datei": "mathe/einmaleins-gemischt.md",
+   "foto": "mathe/bilder/einmaleins-gemischt.webp"
   },
   "einmaleins-sicher": {
    "fach": "mathe",
@@ -138,7 +145,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/einmaleins-sicher.md"
+   "datei": "mathe/einmaleins-sicher.md",
+   "foto": "mathe/bilder/einmaleins-sicher.webp"
   },
   "fuenferreihe": {
    "fach": "mathe",
@@ -155,7 +163,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/fuenferreihe.md"
+   "datei": "mathe/fuenferreihe.md",
+   "foto": "mathe/bilder/fuenferreihe.webp"
   },
   "geschlecht-des-nomens": {
    "fach": "grammatik",
@@ -176,7 +185,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "grammatik/geschlecht-des-nomens.md"
+   "datei": "grammatik/geschlecht-des-nomens.md",
+   "foto": "grammatik/bilder/geschlecht-des-nomens.webp"
   },
   "geteilt-alle-reihen": {
    "fach": "mathe",
@@ -193,7 +203,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/geteilt-alle-reihen.md"
+   "datei": "mathe/geteilt-alle-reihen.md",
+   "foto": "mathe/bilder/geteilt-alle-reihen.webp"
   },
   "geteilt-durch-2-5-10": {
    "fach": "mathe",
@@ -210,7 +221,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/geteilt-durch-2-5-10.md"
+   "datei": "mathe/geteilt-durch-2-5-10.md",
+   "foto": "mathe/bilder/geteilt-durch-2-5-10.webp"
   },
   "geteilt-umkehrung-mal": {
    "fach": "mathe",
@@ -231,7 +243,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/geteilt-umkehrung-mal.md"
+   "datei": "mathe/geteilt-umkehrung-mal.md",
+   "foto": "mathe/bilder/geteilt-umkehrung-mal.webp"
   },
   "grosse-zahlen-lesen": {
    "fach": "mathe",
@@ -248,7 +261,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/grosse-zahlen-lesen.md"
+   "datei": "mathe/grosse-zahlen-lesen.md",
+   "foto": "mathe/bilder/grosse-zahlen-lesen.webp"
   },
   "minus-zehner": {
    "fach": "mathe",
@@ -265,7 +279,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/minus-zehner.md"
+   "datei": "mathe/minus-zehner.md",
+   "foto": "mathe/bilder/minus-zehner.webp"
   },
   "nachsilben-ung-heit-keit-nis": {
    "fach": "schreiben",
@@ -286,7 +301,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "schreiben/nachsilben-ung-heit-keit-nis.md"
+   "datei": "schreiben/nachsilben-ung-heit-keit-nis.md",
+   "foto": "schreiben/bilder/nachsilben-ung-heit-keit-nis.webp"
   },
   "namen-gross": {
    "fach": "schreiben",
@@ -303,7 +319,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "schreiben/namen-gross.md"
+   "datei": "schreiben/namen-gross.md",
+   "foto": "schreiben/bilder/namen-gross.webp"
   },
   "neunerreihe": {
    "fach": "mathe",
@@ -320,7 +337,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/neunerreihe.md"
+   "datei": "mathe/neunerreihe.md",
+   "foto": "mathe/bilder/neunerreihe.webp"
   },
   "nomen-gross-artikelprobe": {
    "fach": "schreiben",
@@ -337,7 +355,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "schreiben/nomen-gross-artikelprobe.md"
+   "datei": "schreiben/nomen-gross-artikelprobe.md",
+   "foto": "schreiben/bilder/nomen-gross-artikelprobe.webp"
   },
   "sechserreihe": {
    "fach": "mathe",
@@ -358,7 +377,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/sechserreihe.md"
+   "datei": "mathe/sechserreihe.md",
+   "foto": "mathe/bilder/sechserreihe.webp"
   },
   "siebenerreihe": {
    "fach": "mathe",
@@ -375,7 +395,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/siebenerreihe.md"
+   "datei": "mathe/siebenerreihe.md",
+   "foto": "mathe/bilder/siebenerreihe.webp"
   },
   "silben-klatschen": {
    "fach": "lesen",
@@ -392,7 +413,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "lesen/silben-klatschen.md"
+   "datei": "lesen/silben-klatschen.md",
+   "foto": "lesen/bilder/silben-klatschen.webp"
   },
   "teiler-begruenden": {
    "fach": "mathe",
@@ -409,7 +431,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/teiler-begruenden.md"
+   "datei": "mathe/teiler-begruenden.md",
+   "foto": "mathe/bilder/teiler-begruenden.webp"
   },
   "teiler-vielfache": {
    "fach": "mathe",
@@ -426,7 +449,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/teiler-vielfache.md"
+   "datei": "mathe/teiler-vielfache.md",
+   "foto": "mathe/bilder/teiler-vielfache.webp"
   },
   "verben-als-nomen": {
    "fach": "schreiben",
@@ -447,7 +471,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "schreiben/verben-als-nomen.md"
+   "datei": "schreiben/verben-als-nomen.md",
+   "foto": "schreiben/bilder/verben-als-nomen.webp"
   },
   "viererreihe": {
    "fach": "mathe",
@@ -464,7 +489,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/viererreihe.md"
+   "datei": "mathe/viererreihe.md",
+   "foto": "mathe/bilder/viererreihe.webp"
   },
   "vorwaerts-zaehlen": {
    "fach": "mathe",
@@ -477,7 +503,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/vorwaerts-zaehlen.md"
+   "datei": "mathe/vorwaerts-zaehlen.md",
+   "foto": "mathe/bilder/vorwaerts-zaehlen.webp"
   },
   "zahl-darstellungen-bis-100": {
    "fach": "mathe",
@@ -494,7 +521,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zahl-darstellungen-bis-100.md"
+   "datei": "mathe/zahl-darstellungen-bis-100.md",
+   "foto": "mathe/bilder/zahl-darstellungen-bis-100.webp"
   },
   "zahlen-bis-20-schreiben": {
    "fach": "mathe",
@@ -511,7 +539,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zahlen-bis-20-schreiben.md"
+   "datei": "mathe/zahlen-bis-20-schreiben.md",
+   "foto": "mathe/bilder/zahlen-bis-20-schreiben.webp"
   },
   "zahlwort-ziffern-bis-100": {
    "fach": "mathe",
@@ -532,7 +561,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zahlwort-ziffern-bis-100.md"
+   "datei": "mathe/zahlwort-ziffern-bis-100.md",
+   "foto": "mathe/bilder/zahlwort-ziffern-bis-100.webp"
   },
   "zehn-plus": {
    "fach": "mathe",
@@ -549,7 +579,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zehn-plus.md"
+   "datei": "mathe/zehn-plus.md",
+   "foto": "mathe/bilder/zehn-plus.webp"
   },
   "zehner-und-einer-bis-20": {
    "fach": "mathe",
@@ -566,7 +597,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zehner-und-einer-bis-20.md"
+   "datei": "mathe/zehner-und-einer-bis-20.md",
+   "foto": "mathe/bilder/zehner-und-einer-bis-20.webp"
   },
   "zehnerreihe": {
    "fach": "mathe",
@@ -583,7 +615,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zehnerreihe.md"
+   "datei": "mathe/zehnerreihe.md",
+   "foto": "mathe/bilder/zehnerreihe.webp"
   },
   "zehnerzahlen-bis-100": {
    "fach": "mathe",
@@ -604,7 +637,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zehnerzahlen-bis-100.md"
+   "datei": "mathe/zehnerzahlen-bis-100.md",
+   "foto": "mathe/bilder/zehnerzahlen-bis-100.webp"
   },
   "zerlegen-10": {
    "fach": "mathe",
@@ -625,7 +659,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen.md"
+   "datei": "mathe/zerlegen.md",
+   "foto": "mathe/bilder/zerlegen.webp"
   },
   "zerlegen-2": {
    "fach": "mathe",
@@ -646,7 +681,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen.md"
+   "datei": "mathe/zerlegen.md",
+   "foto": "mathe/bilder/zerlegen.webp"
   },
   "zerlegen-3": {
    "fach": "mathe",
@@ -667,7 +703,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen.md"
+   "datei": "mathe/zerlegen.md",
+   "foto": "mathe/bilder/zerlegen.webp"
   },
   "zerlegen-4": {
    "fach": "mathe",
@@ -688,7 +725,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen.md"
+   "datei": "mathe/zerlegen.md",
+   "foto": "mathe/bilder/zerlegen.webp"
   },
   "zerlegen-5": {
    "fach": "mathe",
@@ -709,7 +747,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen.md"
+   "datei": "mathe/zerlegen.md",
+   "foto": "mathe/bilder/zerlegen.webp"
   },
   "zerlegen-6": {
    "fach": "mathe",
@@ -730,7 +769,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen.md"
+   "datei": "mathe/zerlegen.md",
+   "foto": "mathe/bilder/zerlegen.webp"
   },
   "zerlegen-7": {
    "fach": "mathe",
@@ -751,7 +791,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen.md"
+   "datei": "mathe/zerlegen.md",
+   "foto": "mathe/bilder/zerlegen.webp"
   },
   "zerlegen-8": {
    "fach": "mathe",
@@ -772,7 +813,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen.md"
+   "datei": "mathe/zerlegen.md",
+   "foto": "mathe/bilder/zerlegen.webp"
   },
   "zerlegen-9": {
    "fach": "mathe",
@@ -793,7 +835,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zerlegen.md"
+   "datei": "mathe/zerlegen.md",
+   "foto": "mathe/bilder/zerlegen.webp"
   },
   "ziffern-lesen-bis-10": {
    "fach": "mathe",
@@ -814,7 +857,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/ziffern-lesen-bis-10.md"
+   "datei": "mathe/ziffern-lesen-bis-10.md",
+   "foto": "mathe/bilder/ziffern-lesen-bis-10.webp"
   },
   "zweierreihe": {
    "fach": "mathe",
@@ -831,7 +875,8 @@
     }
    ],
    "entwurf": false,
-   "datei": "mathe/zweierreihe.md"
+   "datei": "mathe/zweierreihe.md",
+   "foto": "mathe/bilder/zweierreihe.webp"
   }
  }
 }

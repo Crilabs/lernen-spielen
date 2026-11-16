@@ -1,7 +1,7 @@
 ---
 thema: namen-gross
 fach: schreiben
-bild: { figur: tischkaertchen, zustand: beschrieben }
+foto: bilder/namen-gross.webp
 quellen:
   - Grundschrift – wie es dazu kam und warum sie schriftdidaktisch nötig ist (Horst Bartnitzky, in „Grundschrift. Kinder entwickeln ihre Handschrift“, Beiträge zur Reform der Grundschule 142, 2016, S. 12–38; Kinder schreiben zuerst in Großbuchstaben und nehmen Schrift für eigene Absichten in Gebrauch, „mit Namen kennzeichnen“), Grundschulverband, https://www.pedocs.de/volltexte/2019/17691/pdf/GSV_2016_Bartnitzky_Grundschrift_wie_es_dazu_kam_und_warum_sie_schriftdidaktisch_noetig_ist.pdf, abgerufen 2026-11-14
   - Handreichung SCHNABEL Klasse 1–10 (Stand April 2024; Abschnitt 2.2 Satzinterne Großschreibung: Eigennamen werden großgeschrieben, dabei gibt es wenig Lernbedarf), Institut für Bildungsmonitoring und Qualitätsentwicklung Hamburg, https://ifbq.hamburg.de/wp-content/uploads/sites/803/2024/11/Handreichung-SCHNABEL-Klasse-1-10_-Stand-April-2024.pdf, abgerufen 2026-11-14

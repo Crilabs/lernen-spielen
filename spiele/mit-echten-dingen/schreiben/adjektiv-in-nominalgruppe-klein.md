@@ -1,7 +1,7 @@
 ---
 thema: adjektiv-in-nominalgruppe-klein
 fach: schreiben
-bild: { figur: ringelsocken, zustand: paar }
+foto: bilder/adjektiv-in-nominalgruppe-klein.webp
 quellen:
   - LehrplanPLUS Grundschule Deutsch, Fachlehrplan Jahrgangsstufe 3/4, Lernbereich 4.4 (den Nominalkern erweitern, um die Großschreibung des Nomens zu erkennen), ISB Bayern, https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/4/deutsch, abgerufen 2026-11-14
   - Montessori einfach klar, Band 3, Leseprobe (Übung „Das aufschlussreiche Adjektiv“), Institut für Lebendiges Lernen, https://www.montessori-material.de/tpl/download/leseprobe-montessori-einfach-klar-band-3.pdf, abgerufen 2026-11-14

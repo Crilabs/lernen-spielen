@@ -1,7 +1,7 @@
 ---
 thema: verben-als-nomen
 fach: schreiben
-bild: { figur: kramkiste, zustand: beschriftet }
+foto: bilder/verben-als-nomen.webp
 quellen:
   - Rechtschreibung für Eltern, Arbeitsblatt 6 Groß- und Kleinschreibung 3./4. Klasse (zum = zu dem als Hinweis auf die Großschreibung), Klett Lerntraining, https://static.klett-lerntraining.de/grundschule/docs/926092_AB_06_Gross_Kleinschreibung_3_4.pdf, abgerufen 2026-11-14
   - Nomenproben erforschen (Nomen und Wörter, die wie Nomen genutzt werden, schreiben wir groß; der Satz bestimmt), Agnes Fulde für Jambus, QUA-LiS NRW, https://www.qua-lis.nrw.de/system/files/media/document/file/jambus_m_09_nomenprobenerforschen.pdf, abgerufen 2026-11-14

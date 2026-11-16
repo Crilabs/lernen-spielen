@@ -1,7 +1,7 @@
 ---
 thema: sechserreihe
 fach: mathe
-bild: { figur: eierkarton, zustand: karton }
+foto: bilder/sechserreihe.webp
 quellen:
   - Operationsverständnis Multiplikation, Lernen auf Distanz Klasse 2 (Malaufgaben an Verpackungen wie Eierkartons zu Hause finden, räumlich-simultane Vorstellung), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse-2-multiplikation.pdf, abgerufen 2026-11-14
   - 1·1 richtig üben, Basisinfos (Kernaufgaben mit 1, 2, 5, 10; Nachbaraufgabe 6 · 7 = 5 · 7 + 7; Verdoppelungsaufgaben; Quadrataufgabe 6 · 6), PIKAS (DZLM), https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14

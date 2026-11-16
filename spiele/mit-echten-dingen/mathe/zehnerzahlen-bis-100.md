@@ -1,7 +1,7 @@
 ---
 thema: zehnerzahlen-bis-100
 fach: mathe
-bild: { figur: kleiderbuegel, zustand: klammern }
+foto: bilder/zehnerzahlen-bis-100.webp
 quellen:
   - Bündeln (Handout Rechnenlernen), ISB Bayern, https://isb.bayern.de/fileadmin/user_upload/Foerderschulen/Geistige_Entwicklung/Rechnenlernen/Handouts/5_Buendeln_Handout.pdf, abgerufen 2026-11-16
   - Zehner und Einer: Bündeln im Hunderterraum, mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/2_schuljahr/zehnerundeiner/pdf/zehner_und_einer_zr_100_bundeln_im_hunderterraum.pdf, abgerufen 2026-11-16

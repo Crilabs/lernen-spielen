@@ -1,7 +1,7 @@
 ---
 thema: zahlwort-ziffern-bis-100
 fach: mathe
-bild: { figur: briefkasten, zustand: brief }
+foto: bilder/zahlwort-ziffern-bis-100.webp
 quellen:
   - Zahlen hören, sprechen und schreiben, mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/2_schuljahr/zehnerundeiner/pdf/zehner_und_einer_zr100_zahlen_horen_sprechen_und_schreiben.pdf, abgerufen 2026-11-16
   - Moderationspfad Haus 3, Modul 3.4 Entwicklung des Stellenwertverständnisses, PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/FM/Modul_3.4/Moderationspfad%20Modul%203.4.pdf, abgerufen 2026-11-16

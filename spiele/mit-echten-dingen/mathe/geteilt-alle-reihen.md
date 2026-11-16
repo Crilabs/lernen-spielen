@@ -1,7 +1,7 @@
 ---
 thema: geteilt-alle-reihen
 fach: mathe
-bild: { figur: spielkarten, zustand: faecher }
+foto: bilder/geteilt-alle-reihen.webp
 quellen:
   - Handreichung Baustein N4 B, Divisions-Aufgaben zu Situationen finden (Beispiel „32 Karten werden an 4 Spieler verteilt“; vom Verteilen zur Division als Umkehrung der Multiplikation), Mathe sicher können, DZLM, https://maco.dzlm.de/sites/maco/files/material-lul/dzlm_difprim_multdiv_foerdern_division_handreichung_240412.pdf, abgerufen 2026-11-14
   - Basisinfos 1·1 richtig üben (Kernaufgaben mit 1, 2, 5, 10; schwere Aufgaben davon ableiten, z. B. 6 · 7 = 5 · 7 + 7), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/Haus_3_-_Umgang_mit_Rechenschwierigkeiten/UM/1x1_richtig_ueben/Basisinfos/basisinfos_1x1_ueben.pdf, abgerufen 2026-11-14

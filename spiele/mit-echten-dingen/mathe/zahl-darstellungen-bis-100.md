@@ -1,7 +1,7 @@
 ---
 thema: zahl-darstellungen-bis-100
 fach: mathe
-bild: { figur: buch, zustand: lesezeichen }
+foto: bilder/zahl-darstellungen-bis-100.webp
 quellen:
   - Stellenwerte üben – Darstellungen vernetzen (bis 100), DZLM, https://maco.dzlm.de/sites/maco/files/material-lul/dzlm_difprim_stellenwert_darstellungsvernetzung_um_100_240412.pdf, abgerufen 2026-11-16
   - Zahl unter der Lupe (sprachliche Impulse, ZR 100), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/unterricht_neu/zahlen_und_operationen/zr_100/zahlen_darstellen/unterricht_zr100_zahlendarstellen_zahl_unter_der_lupe_sprachliche_impulse.pdf, abgerufen 2026-11-16

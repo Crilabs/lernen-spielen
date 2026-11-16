@@ -1,7 +1,7 @@
 ---
 thema: dreistellige-zahlen-lesen
 fach: mathe
-bild: { figur: kochbuch, zustand: zettel }
+foto: bilder/dreistellige-zahlen-lesen.webp
 quellen:
   - Bündeln in der Stellentafel (Hunderter, Zehner, Einer, ZR 1000), mahiko, DZLM, https://mahiko.dzlm.de/sites/mahiko/files/uploads/3_schuljahr/HunderterZehnerEiner/pdf/hunderter_zehner_einer_zr1000_bundeln_in_der_stellentafel.pdf, abgerufen 2026-11-16
   - Handreichung zur Standortbestimmung – Orientierung im Zahlraum bis 1000, PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/diagnose_und_foerderung/Klasse4/handreichung_zr_1000_orientierung_in_neuen_zahlenraumen_220809.pdf, abgerufen 2026-11-16
