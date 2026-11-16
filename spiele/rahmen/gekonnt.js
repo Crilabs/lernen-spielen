@@ -5,7 +5,7 @@
 //
 // Die freudigste und strahlendste Ansicht der App (Christian, 2026-11-16: „Hier darf gefeiert werden. Das ist die
 // eigentliche Motivation – ich kann etwas.“). Sie ist eine eigene Welt (Schicht 3, Verläufe erlaubt): ein Sonnenhimmel
-// mit Strahlen, die sich langsam um die Figur drehen, eine bunte Wimpelkette, einmal Konfetti in den Farben der Perlen
+// mit Strahlen um die Sonne, die hinter grünen Hügeln aufgeht, einmal Konfetti in den Farben der Perlen
 // und Fächer, eine kurze helle Fanfare. Die ganze Runde feiert: die Figur des Spiels groß im Licht, die anderen drei
 // Kinder kleiner daneben, alle jubeln. Rechts der Satz als Bild: der Name des Themas groß in Tinte, darunter
 // „kannst du!“. Keine Zahl, kein Stern zum Sammeln, kein Zähler (N5, N8). Unten drei gleich gestaltete Papierknöpfe:
@@ -15,7 +15,7 @@
 // (linkKlick in lernspiel.js speichert vorher). Gesprochen wird nur bei Ton an:
 //   „<sprich> kannst du.“ (kern/saetze.js, aufgenommen für jedes Thema) – „<Figur> freut sich mit dir.“ –
 //   „Du findest das Thema jetzt bei: Was ich schon kann.“
-// Bei prefers-reduced-motion steht alles still (B3), Strahlen, Wimpel und Konfetti bleiben als Bild.
+// Bei prefers-reduced-motion steht alles still (B3), Strahlen und Landschaft bleiben als Bild.
 
 import { ladeEinstellungen, einstellung } from "../kern/einstellungen.js";
 import { sprich } from "../kern/stimme.js";
@@ -58,42 +58,42 @@ const STRAHLEN = Array.from({ length: 16 }, (_, i) => {
   return `<polygon points="100,100 ${p(a0)} ${p(a1)}" fill="#FFFFFF" fill-opacity="${i % 2 ? 0.32 : 0.55}"/>`;
 }).join("");
 
-/** Wimpelkette quer über den Himmel (Durchhang als Bogen). */
-const WIMPEL = (() => {
-  const n = 15;
-  let aus = `<path d="M-10 18 Q 960 120 1930 18" fill="none" stroke="#3B2A6B" stroke-width="3"/>`;
-  for (let i = 0; i < n; i++) {
-    const t = (i + 0.5) / n;
-    const x = -10 + t * 1940;
-    const y = (1 - t) * (1 - t) * 18 + 2 * (1 - t) * t * 120 + t * t * 18;
-    aus += `<polygon points="${(x - 34).toFixed(0)},${(y + 1).toFixed(0)} ${(x + 34).toFixed(0)},${(y + 1).toFixed(0)} ${x.toFixed(0)},${(y + 78).toFixed(0)}" fill="${FEST[(i * 5) % FEST.length]}" stroke="#3B2A6B" stroke-width="3" stroke-linejoin="round"/>`;
-  }
-  return aus;
-})();
+/**
+ * Landschaft (Christian, 2026-11-16): drei Hügel in den Grüntönen der Garten-Kulisse; die Sonne geht hinter dem
+ * hinteren Hügel auf und steht in der oberen Hälfte, alle Figuren stehen auf dem vorderen. Die Hügel reichen weit
+ * über den Rand (das Feld ist 192 × 108 rem, der Bildschirm kann breiter sein).
+ */
+const LANDSCHAFT = [
+  ["#C6DDB2", "M-2400 610 C 0 500, 420 470, 820 530 S 1500 600, 1900 500 S 3200 470, 4300 560 V 2400 H -2400 Z"],
+  ["#B7D39E", "M-2400 680 C -200 640, 500 600, 1050 650 S 1800 700, 2300 640 S 3600 660, 4300 680 V 2400 H -2400 Z"],
+  ["#A9CB93", "M-2400 740 C 0 720, 600 700, 1200 725 S 2300 735, 4300 720 V 2400 H -2400 Z"],
+].map(([farbe, d]) => `<path d="${d}" fill="${farbe}"/>`).join("");
 
 const CSS = `
 :host { position: fixed; inset: 0; z-index: 100; display: block; overflow: hidden;
-  background: radial-gradient(circle at 28% 44%, #FFF8DC 0, #FFE58A 38%, #FFD45A 72%, #F9C23C 110%); }
+  background: radial-gradient(circle at 30% 34%, #FFFBEA 0, #FFEFB0 22%, #FFE07A 52%, #FFD24D 100%); }
 :host(:not([offen])) { display: none; }
-.wimpel { position: absolute; left: 0; top: 0; width: 100%; height: 14rem; z-index: 2; }
 .feld { position: absolute; top: 0; bottom: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem); }
+/* Die Szene hat immer die Maße des Felds 192 × 108 rem; auf schmalen Bildschirmen rückt sie nach links. */
+.szene { position: absolute; left: 0; top: 0; width: 192rem; height: 108rem; }
 
-/* Die Sonne hinter der Figur: Strahlen, die sich langsam drehen, darin die leuchtende Scheibe. */
-.strahlen { position: absolute; left: -24rem; top: -32rem; width: 150rem; height: 150rem; animation: drehen 80s linear infinite; }
-.sonne { position: absolute; left: 17rem; top: 9rem; width: 68rem; height: 68rem; border-radius: 50%; background: var(--ls-sonne);
-  box-shadow: 0 0 6rem 3rem rgba(255, 217, 90, 0.9), 0 0 18rem 10rem rgba(255, 233, 166, 0.8); }
+/* Die Sonne in der oberen Hälfte, hinter dem Boden: Strahlen drehen sich langsam um ihre Mitte (56 | 40 rem). */
+.strahlen { position: absolute; left: -29rem; top: -45rem; width: 170rem; height: 170rem; animation: drehen 80s linear infinite; }
+.sonne { position: absolute; left: 30rem; top: 14rem; width: 52rem; height: 52rem; border-radius: 50%; background: var(--ls-sonne);
+  box-shadow: 0 0 5rem 2.5rem rgba(255, 217, 90, 0.95), 0 0 16rem 9rem rgba(255, 240, 190, 0.85); }
 @keyframes drehen { to { transform: rotate(360deg); } }
+.land { position: absolute; left: 0; top: 0; width: 192rem; height: 108rem; overflow: visible; }
 
-/* Alle stehen auf einem Boden (Füße und Räder bei etwa 67 rem), die anderen Kinder etwas kleiner. */
-.mit { position: absolute; top: 36rem; width: 32rem; height: 38rem; }
+/* Alle stehen auf dem vorderen Hügel (Füße und Räder bei etwa 72 rem), die anderen Kinder etwas kleiner. */
+.mit { position: absolute; top: 41rem; width: 32rem; height: 38rem; }
 .mit svg, .figur svg { width: 100%; height: 100%; display: block; overflow: visible; }
 .mit.m1 { left: -3rem; }
 .mit.m2 { left: 70rem; }
-.mit.m3 { left: 90rem; top: 40rem; width: 28rem; height: 34rem; }
-.figur { position: absolute; left: 21rem; top: 12rem; width: 60rem; height: 66rem; }
-.boden { position: absolute; left: 26rem; top: 65rem; width: 50rem; height: 3.6rem; border-radius: 50%; background: rgba(59, 42, 107, 0.16); }
+.mit.m3 { left: 90rem; top: 45rem; width: 28rem; height: 34rem; }
+.figur { position: absolute; left: 21rem; top: 17rem; width: 60rem; height: 66rem; }
+.boden { position: absolute; left: 26rem; top: 70rem; width: 50rem; height: 3.6rem; border-radius: 50%; background: rgba(59, 42, 107, 0.16); }
 
-.satz { position: absolute; left: 112rem; right: 6rem; top: 18rem; margin: 0; color: var(--ls-tinte); }
+.satz { position: absolute; left: 112rem; right: 6rem; top: 14rem; margin: 0; color: var(--ls-tinte); }
 .thema { display: block; font: 800 9.2rem/1.04 var(--ls-schrift-oberflaeche, "Andika"), sans-serif; letter-spacing: -0.015em;
   text-wrap: balance; overflow-wrap: anywhere; }
 .kannst { display: inline-block; margin-top: 2.6rem; padding: 0.6rem 3.2rem 1.2rem; border-radius: 99rem; background: var(--ls-tinte);
@@ -109,15 +109,8 @@ const CSS = `
 a.knopf { --ls-knopf: ${MASSE.pilleGross}rem; }
 
 @media (max-aspect-ratio: 3/2) {
-  .strahlen { left: -34rem; }
-  .sonne { left: 7rem; width: 60rem; height: 60rem; }
-  .figur { left: 10rem; width: 54rem; height: 60rem; }
-  .feld > :not(.aktionen):not(.satz) { translate: 0 -6rem; }
-  .boden { left: 14rem; top: 60rem; }
-  .mit.m1 { left: -8rem; }
-  .mit.m2 { left: 56rem; }
-  .mit.m3 { left: 74rem; }
-  .satz { left: 92rem; right: 4rem; top: 18rem; }
+  .szene { translate: -6rem -6rem; }
+  .satz { left: 92rem; right: 4rem; top: 14rem; }
   .thema { font-size: 7.6rem; }
   .kannst { font-size: 6rem; }
   .aktionen { gap: 3.2rem; }
@@ -170,15 +163,17 @@ export class LsGekonnt extends HTMLElement {
     super();
     const wurzel = this.attachShadow({ mode: "open" });
     wurzel.innerHTML = `<style>${GRUND_CSS}${CSS}</style>
-      <svg class="wimpel" viewBox="0 0 1920 140" preserveAspectRatio="none" aria-hidden="true">${WIMPEL}</svg>
       <div class="feld">
-        <svg class="strahlen" viewBox="0 0 200 200" aria-hidden="true">${STRAHLEN}</svg>
-        <div class="sonne" aria-hidden="true"></div>
-        <div class="mit m1" aria-hidden="true"></div>
-        <div class="mit m2" aria-hidden="true"></div>
-        <div class="mit m3" aria-hidden="true"></div>
-        <div class="boden" aria-hidden="true"></div>
-        <div class="figur" aria-hidden="true"></div>
+        <div class="szene" aria-hidden="true">
+          <svg class="strahlen" viewBox="0 0 200 200">${STRAHLEN}</svg>
+          <div class="sonne"></div>
+          <svg class="land" viewBox="0 0 1920 1080" preserveAspectRatio="none">${LANDSCHAFT}</svg>
+          <div class="mit m1"></div>
+          <div class="mit m2"></div>
+          <div class="mit m3"></div>
+          <div class="boden"></div>
+          <div class="figur"></div>
+        </div>
         <p class="satz" role="status"><span class="thema"></span><span class="kannst">kannst du!</span></p>
         <div class="aktionen" tabindex="-1">
           <ls-knopf class="weiter" symbol="zurueck.svg" name="Weiter" wort="Weiter" groesse="gross" gespiegelt></ls-knopf>

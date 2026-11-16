@@ -182,7 +182,7 @@ Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.
    Füllbalken (`grundsaetze.md` 12).
 4. **Gekonnt (Christian, 2026-11-16):** Hat die Lernsteuerung in der Runde ein Thema als gekonnt verbucht
    (`runde().ende()` → `gekonnt`), kommt statt der Pause `<ls-gekonnt>`: die freudigste und strahlendste Ansicht
-   der App – Sonnenhimmel mit Strahlen, Wimpelkette, einmal Konfetti, kurze Fanfare, die ganze Runde jubelt. Die
+   der App – Sonne mit Strahlen, die hinter grünen Hügeln aufgeht, alle stehen auf dem Boden, einmal Konfetti, kurze Fanfare, die ganze Runde jubelt. Die
    Stimme sagt „<Thema> kannst du.“, „<Figur> freut sich mit dir.“, „Du findest das Thema jetzt bei: Was ich schon
    kann.“ Drei gleichwertige Papierknöpfe: Weiter, Alle Spiele, Was ich schon kann.
 
