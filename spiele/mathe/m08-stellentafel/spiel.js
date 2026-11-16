@@ -1,6 +1,6 @@
 // M08 Stellentafel (Idee: docs/spiele/mathe/m08-stellentafel.md). Das Kind tippt das Ergebnis einer Aufgabe wie
-// 10 + 4 oder 13 − 10 und bestätigt mit Fertig; dann rollt Timo an der Stellentafel entlang und legt goldenes Material
-// in ihre Felder (die Stange in Z, die Perlen einzeln in E), und die Stellenwertkarten schieben sich zur Zahl zusammen
+// 10 + 4 oder 13 − 10 und bestätigt mit Fertig; dann rollt Timo an der Stellentafel entlang und legt Perlenmaterial
+// in ihre Felder (die goldene Stange zu den Zehnern, ein farbiges Stäbchen zu den Einern), und die Stellenwertkarten schieben sich zur Zahl zusammen
 // („10“ und „4“ werden „14“). Passt die getippte Zahl nicht, zeigt hohles Material, wie sie wirklich aussieht.
 //
 // Aufbau wie die Spielvorlage (spiele/vorlage/spiel.js, dort die Schritte zum eigenen Spiel):
@@ -121,8 +121,8 @@ const erzaehler = {
 
 /** Elternansicht (?eltern): beschreibend, von Stärken aus, kein Vergleich (3.3). @param {HTMLElement} feld */
 function fuelleEltern(feld) {
-  feld.innerHTML = `<p>Timo legt goldenes Montessori-Material in eine Stellentafel: die Zehnerstange in die Spalte Z, einzelne
-    Perlen in die Spalte E. Ihr Kind tippt vorher, welche Zahl dabei entsteht. Dazu schieben sich Stellenwertkarten
+  feld.innerHTML = `<p>Timo legt Montessori-Perlenmaterial in eine Stellentafel: die goldene Zehnerstange in die Spalte
+    Zehner, ein farbiges Perlenstäbchen in die Spalte Einer. Ihr Kind tippt vorher, welche Zahl dabei entsteht. Dazu schieben sich Stellenwertkarten
     zusammen: Die Einerkarte „4“ deckt die Null der Zehnerkarte „10“, und es steht „14“. Passt die getippte Zahl nicht,
     zeigt hohles Material, wie sie wirklich aussieht.</p>
     <p>Welche Aufgaben dran sind und was Ihr Kind schon kann, steht bei den Themen im Elternbereich.</p>`;
@@ -139,7 +139,6 @@ function fuelleSachmoment(feld, ton) {
   for (const [w, zahl, stelle] of [[10, "10", "z"], [4, "4", "e"]]) {
     const stab = document.createElement("ls-perlenstab");
     stab.setAttribute("wert", String(w));
-    stab.setAttribute("gold", "");
     const k = document.createElement("ls-stellenwertkarte");
     k.setAttribute("zahl", zahl);
     k.setAttribute("stelle", stelle);
@@ -349,8 +348,8 @@ function leereBrett() {
 
 /** Material der Aufgabe (unsichtbar) in beide Felder legen. @param {any} a */
 function baueMaterial(a) {
-  B.stange = neu("ls-perlenstab", { wert: "10", gold: "", ausrichtung: "waagrecht" });
-  B.perlen = neu("ls-perlenstab", { wert: String(a.e), gold: "" });
+  B.stange = neu("ls-perlenstab", { wert: "10", ausrichtung: "waagrecht" });
+  B.perlen = neu("ls-perlenstab", { wert: String(a.e) });
   for (const el of [B.stange, B.perlen]) el.style.visibility = "hidden";
   realZ.replaceChildren(B.stange);
   realE.replaceChildren(B.perlen);
@@ -372,8 +371,8 @@ function zeigeMaterialGanz() {
 }
 /** Das Material auf dem Schoß: eine kleine Stange und die Perlen (vor dem Legen). @param {any} a */
 function fuelleSchoss(a) {
-  B.lapStange = neu("ls-perlenstab", { wert: "10", gold: "" });
-  B.lapPerlen = neu("ls-perlenstab", { wert: String(a.e), gold: "" });
+  B.lapStange = neu("ls-perlenstab", { wert: "10" });
+  B.lapPerlen = neu("ls-perlenstab", { wert: String(a.e) });
   schoss.replaceChildren(B.lapStange, B.lapPerlen);
 }
 /** Die Karten der Zahl c liegen gestapelt im Kartenstreifen (Minus: die Startzahl). @param {number} c */
@@ -737,7 +736,7 @@ function zeigeHohl(w) {
 function hohlStab(wert) {
   const rahmen = document.createElement("span");
   rahmen.className = "hohlstab";
-  rahmen.append(neu("ls-perlenstab", { wert: String(wert), gold: "" }));
+  rahmen.append(neu("ls-perlenstab", { wert: String(wert) }));
   return rahmen;
 }
 /** Räumt das hohle Bild weg (das nächste Tippen). */

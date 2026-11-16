@@ -129,3 +129,11 @@ test("Raum ohne Bedeutungsfarben (C3)", async () => {
   for (const f of ["#E5484D", "#3FA34D", "#F4A3C0", "#F7D038", "#6CB8F0", "#9B5DE5", "#2F5BC4", "#D9A520", "#0FA3A3", "#F07C1E", "#5B6478"])
     assert.ok(!svg.includes(f), f);
 });
+
+// Review Christian 2026-11-16 (wie M06): Zehner sind goldene Stangen, die Einer ein farbiges Perlenstäbchen
+// (Montessori-Farben: 4 gelb, 7 weiß …), nicht einzelne goldene Perlen.
+test("Einer als farbiges Stäbchen: kein gold an Einer-Stäben", () => {
+  const js = readFileSync(new URL("../../../spiele/mathe/m08-stellentafel/spiel.js", import.meta.url), "utf8");
+  assert.doesNotMatch(js, /wert: String\((a\.e|wert|e)\), gold/);
+  assert.doesNotMatch(js, /gold: ""/);
+});

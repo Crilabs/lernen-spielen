@@ -17,7 +17,7 @@
     { "id": "stellentafel", "probe": true, "titel": "Zahlen legen", "thema": "Zehner und Einer", "kategorie": "mathe",
       "symbol": "mathe/m08-stellentafel/symbol.svg", "datei": "mathe/m08-stellentafel/index.html",
       "text": "Zahl tippen, Timo legt sie in die Stellentafel.",
-      "beschreibung": "Das Kind tippt das Ergebnis von Aufgaben wie 10 + 4 oder 13 − 10. Timo legt goldenes Material in eine Stellentafel mit Zehnern und Einern, und die Stellenwertkarten schieben sich zur Zahl zusammen. Passt die Zahl nicht, zeigt hohles Material, wie die getippte Zahl wirklich aussieht.",
+      "beschreibung": "Das Kind tippt das Ergebnis von Aufgaben wie 10 + 4 oder 13 − 10. Timo legt eine goldene Zehnerstange und ein farbiges Perlenstäbchen in eine Stellentafel mit Zehnern und Einern, und die Stellenwertkarten schieben sich zur Zahl zusammen. Passt die Zahl nicht, zeigt hohles Material, wie die getippte Zahl wirklich aussieht.",
       "arten": [{ "art": "rechnen", "max": 20, "zehner": true, "stufen": ["kopf"] }],
       "regal": null },
     { "id": "zahlenpost", "probe": true, "titel": "Zahlenpost", "thema": "Zahlen hören und schreiben", "kategorie": "mathe",
