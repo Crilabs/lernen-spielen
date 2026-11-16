@@ -371,5 +371,620 @@
   "notiz": "Agent Sachgeschichte: Recherche, Text, Bilder, Bildprüfung",
   "cache_lesen": 11617560,
   "cache_schreiben": 178359
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 371,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "01-01.png",
+  "usage": {
+   "input_tokens": 371,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 371
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2127
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 375,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "01-03.png",
+  "usage": {
+   "input_tokens": 375,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 375
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2131
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 407,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "01-04.png",
+  "usage": {
+   "input_tokens": 407,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 407
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2163
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 393,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "01-05.png",
+  "usage": {
+   "input_tokens": 393,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 393
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2149
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 387,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "02-01.png",
+  "usage": {
+   "input_tokens": 387,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 387
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2143
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 228,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "02-02.png",
+  "usage": {
+   "input_tokens": 228,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 228
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1984
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 368,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "02-03.png",
+  "usage": {
+   "input_tokens": 368,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 368
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2124
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 280,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "02-04.png",
+  "usage": {
+   "input_tokens": 280,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 280
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2036
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 243,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "02-05.png",
+  "usage": {
+   "input_tokens": 243,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 243
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1999
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 250,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "02-06.png",
+  "usage": {
+   "input_tokens": 250,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 250
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2006
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 275,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "04-03.png",
+  "usage": {
+   "input_tokens": 275,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 275
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2031
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 241,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "04-04.png",
+  "usage": {
+   "input_tokens": 241,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 241
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1997
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 232,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "04-05.png",
+  "usage": {
+   "input_tokens": 232,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 232
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1988
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 425,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "05-04.png",
+  "usage": {
+   "input_tokens": 425,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 425
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2181
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 353,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "05-05.png",
+  "usage": {
+   "input_tokens": 353,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 353
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2109
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 233,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "06-01.png",
+  "usage": {
+   "input_tokens": 233,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 233
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1989
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 247,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "06-02.png",
+  "usage": {
+   "input_tokens": 247,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 247
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2003
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 238,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "06-03.png",
+  "usage": {
+   "input_tokens": 238,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 238
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1994
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 352,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "06-04.png",
+  "usage": {
+   "input_tokens": 352,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 352
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2108
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 434,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "06-05.png",
+  "usage": {
+   "input_tokens": 434,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 434
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2190
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 401,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "01-03.png",
+  "usage": {
+   "input_tokens": 401,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 401
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2157
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 285,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "02-06.png",
+  "usage": {
+   "input_tokens": 285,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 285
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2041
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 284,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "06-02.png",
+  "usage": {
+   "input_tokens": 284,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 284
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2040
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 263,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "06-02.png",
+  "usage": {
+   "input_tokens": 263,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 263
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2019
+  }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung-a",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 6330,
+  "einheit": "tokens",
+  "menge": 537831,
+  "notiz": "Prüfer A: inhalte.md",
+  "cache_lesen": 462882,
+  "cache_schreiben": 68603
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "pruefung-b",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 10223,
+  "einheit": "tokens",
+  "menge": 541742,
+  "notiz": "Prüfer B: geschichte.json gegen inhalte.md",
+  "cache_lesen": 442824,
+  "cache_schreiben": 88681
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 302,
+  "ausgabe": 105698,
+  "einheit": "tokens",
+  "menge": 31986659,
+  "notiz": "Agent Sachbuch Wal (Neufassung): Recherche, inhalte.md, Text, Bilder, Bildprüfung",
+  "cache_lesen": 30665121,
+  "cache_schreiben": 1215538
  }
 ]

@@ -1,110 +1,290 @@
 {
  "id": "dinosaurier",
- "titel": "Selin malt einen Dinosaurier",
- "art": "sachgeschichte",
+ "titel": "Was die Steine erzählen",
+ "art": "sachbuch",
  "welt": "dinosaurier",
  "familie": null,
- "kulisse": "stadt",
+ "kulisse": "dschungel",
  "klasse": 2,
  "quellen": [
   {
-   "fakt": "Plateosaurus lebte vor etwa 210 Millionen Jahren (späte Trias) in Mitteleuropa; das erste vollständige Skelett grub Eberhard Fraas 1912 in Trossingen (Baden-Württemberg) aus, die meisten Funde von dort liegen im Naturkundemuseum Stuttgart.",
-   "quelle": "https://www.naturkundemuseum-bw.de/en/press/detailansicht/new-insights-into-one-of-europes-oldest-dinosaurs (Staatliches Museum für Naturkunde Stuttgart), abgerufen 2026-11-15"
+   "fakt": "Kein Mensch hat je einen lebenden Dinosaurier gesehen; alles Wissen über Aussehen und Lebensweise stammt aus Fossilien.",
+   "quelle": "Klexikon, „Dinosaurier“: https://klexikon.zum.de/wiki/Dinosaurier; Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Menschen (Homo sapiens) gibt es seit etwa 300 000 Jahren; Dinosaurier wie Plateosaurus lebten Hunderte Millionen Jahre früher. Niemand hat einen lebenden Plateosaurus gesehen.",
-   "quelle": "https://www.mpg.de/11322481/ (Max-Planck-Gesellschaft, Jebel Irhoud), abgerufen 2026-11-15"
+   "fakt": "Plateosaurus lebte vor etwa 210 Millionen Jahren (späte Trias) in Mitteleuropa; viele Skelette stammen aus Trossingen (Baden-Württemberg); erwachsene Tiere waren 5 bis 10 Meter lang, oft um 7 Meter.",
+   "quelle": "Staatliches Museum für Naturkunde Stuttgart: https://www.naturkundemuseum-bw.de/en/press/detailansicht/new-insights-into-one-of-europes-oldest-dinosaurs; Universität Bonn / ScienceDaily (Sander & Klein 2005): https://www.sciencedaily.com/releases/2005/12/051219084817.htm – abgerufen 2026-11-15"
   },
   {
-   "fakt": "Bei der Versteinerung wird das Knochenmaterial nach und nach durch Mineralien ersetzt; die Form bleibt erhalten. Museumsskelette sind meist aus mehreren Tieren zusammengesetzt und ergänzt.",
-   "quelle": "https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf (Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3), abgerufen 2026-11-15"
+   "fakt": "Damit ein Knochen versteinert, muss er rasch von Schlamm oder Sand bedeckt werden; Mineralien aus dem Wasser lagern sich in ihm ab und ersetzen teils das Knochenmaterial, die Form bleibt. Dass ein Fossil entsteht, erhalten bleibt und gefunden wird, ist sehr selten.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Die Hand von Plateosaurus war eine Greifhand mit großen Krallen, die größte am Daumen; der Arm reichte kaum vor die Schulter.",
-   "quelle": "Mallison 2010, The digital Plateosaurus II, Acta Palaeontologica Polonica 55(3), https://www.app.pan.pl/article/item/app20090075.html; https://en.wikipedia.org/wiki/Plateosaurus, abgerufen 2026-11-15"
+   "fakt": "Fossilien werden mit kleinen Meißeln und feinen Werkzeugen freigelegt; große Funde werden in Gipshüllen transportiert; ein schwieriges Stück freizulegen kann ein Jahr dauern.",
+   "quelle": "Der Standard, „Naturhistorisches Museum bekommt sechs Meter langen Plateosaurus“: https://derstandard.at/2000097899017/Naturhistorisches-Museumbekommt-sechs-Meter-langen-Plateosaurus (Suchauszug) – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Plateosaurus konnte die Hand nicht so drehen, dass die Handfläche zum Boden zeigt (keine Pronation); die Handflächen blieben zur Seite gedreht, er lief deshalb nur auf den Hinterbeinen (Zweibeiner).",
-   "quelle": "Bonnan & Senter 2007, Special Papers in Palaeontology 77; Mallison 2010, The digital Plateosaurus I, Palaeontologia Electronica 13(2), https://paleo.carleton.ca/2010_2/198/index.html, abgerufen 2026-11-15"
+   "fakt": "Museumsskelette sind meist aus mehreren Tieren zusammengesetzt und ergänzt; der Tyrannosaurus in Frankfurt ist ein Abguss des Fundes in New York.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Plateosaurus hatte dicke, blattförmige Zähne mit stumpfen Zacken, geeignet zum Zerdrücken von Pflanzen; er fraß vor allem oder nur Pflanzen (vielleicht gelegentlich kleine Tiere).",
-   "quelle": "https://en.wikipedia.org/wiki/Plateosaurus (Abschnitt Ernährung, nach Barrett 2000); https://www.nhm.ac.uk/discover/dino-directory/plateosaurus.html (Natural History Museum London), abgerufen 2026-11-15"
+   "fakt": "Spurenfossilien sind Fußspuren, Nester, Eierschalen und versteinerter Kot (Koprolithen); aus Fährten lässt sich die Geschwindigkeit ablesen, aus Koprolithen die Nahrung.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf; Klexikon, „Dinosaurier“: https://klexikon.zum.de/wiki/Dinosaurier – abgerufen 2026-11-16"
   },
   {
-   "fakt": "In der Trias wuchsen an Land Farne, Ginkgos, Nadelbäume und Schachtelhalme; Gras gab es nicht. Blütenpflanzen kamen erst in der Kreidezeit dazu, Gras erst gegen Ende der Kreidezeit.",
-   "quelle": "Senckenberg-Handreichung (wie oben, S. 3–4); https://wissenschaft.de/artikel/vor-212-millionen-jahren (bild der wissenschaft); Prasad et al. 2005, Science 310, https://ui.adsabs.harvard.edu/abs/2005Sci...310.1177P/abstract, abgerufen 2026-11-15"
+   "fakt": "Früher hielt man Fossilien für Reste von Drachen oder Riesen; der Name Dinosaurier entstand im 19. Jahrhundert (Richard Owen, 1842) und bedeutet „schreckliche Echse“.",
+   "quelle": "Klexikon, „Dinosaurier“: https://klexikon.zum.de/wiki/Dinosaurier – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Erwachsene Plateosaurus waren etwa 5 bis 10 Meter lang, oft um 7 Meter; ein Auto (VW Golf) ist etwa 4,3 Meter lang.",
-   "quelle": "https://www.sciencedaily.com/releases/2005/12/051219084817.htm (Universität Bonn, Sander & Klein 2005); https://www.nhm.ac.uk/discover/dino-directory/plateosaurus.html; https://www.angurten.de/is/abmessungen/1679-vw-golf-viii/1.htm, abgerufen 2026-11-15"
+   "fakt": "Die Farbe der Dinosaurier ist fast nie erhalten, Haut selten; Bilder lebender Dinosaurier sind Rekonstruktionen.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf; Senckenberg, Aktivblatt „Die Welt der Dinosaurier“, Informationen für Lehrkräfte: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2025/12/aktivblatt_welt_der_dinosaurier_information.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "In Plateosaurus-Knochen sieht man unter dem Mikroskop Jahresringe wie bei Bäumen; manche Tiere waren mit 12 Jahren ausgewachsen, andere wuchsen mit 27 noch.",
-   "quelle": "Sander & Klein 2005, Science 310: 1800–1802; https://www.sciencedaily.com/releases/2005/12/051219084817.htm, abgerufen 2026-11-15"
+   "fakt": "Dinosaurier lebten im Erdmittelalter, vor etwa 235 bis 66 Millionen Jahren; es gliedert sich in Trias, Jura und Kreide. In der Trias waren alle Kontinente zu Pangaea vereint, das später auseinanderbrach.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Die Farbe der Dinosaurier ist meist nicht erhalten, nur Vermutungen sind möglich; Hautabdrücke sind sehr selten. Von Plateosaurus ist keine Haut bekannt; Verwandte (Sauropodomorphe) hatten vermutlich Schuppen, Federn gab es wohl nur bei Theropoden.",
-   "quelle": "Senckenberg-Handreichung (wie oben, S. 3); Barrett, Evans & Campione 2015, Biology Letters 11, https://pmc.ncbi.nlm.nih.gov/articles/PMC4528472, abgerufen 2026-11-15"
+   "fakt": "Ein Blatt Papier ist etwa 0,1 mm dick; 66 Millionen Blätter ergeben 6,6 km, mehr als die Zugspitze (2.962 m); 300.000 Blätter ergeben 3 cm.",
+   "quelle": "Eigene Rechnung (Papierdicke 0,1 mm als Annahme)"
+  },
+  {
+   "fakt": "Menschen wie wir (Homo sapiens) gibt es seit etwa 300.000 Jahren; Menschen und Dinosaurier lebten nie zur selben Zeit.",
+   "quelle": "Max-Planck-Gesellschaft (Jebel Irhoud): https://www.mpg.de/11322481/ – abgerufen 2026-11-15; Klexikon, „Dinosaurier“: https://klexikon.zum.de/wiki/Dinosaurier – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Stegosaurus lebte im Jura (vor 201–145 Mio. Jahren), Tyrannosaurus vor 70–66 Mio. Jahren; zwischen beiden liegen mehr Jahre als zwischen Tyrannosaurus und heute.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf; Smithsonian Magazine, „On Dinosaur Time“: https://www.smithsonianmag.com/science-nature/on-dinosaur-time-65556840/ (Suchauszug) – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "In Trias und Jura wuchsen Farne, Schachtelhalme, Ginkgos und Nadelbäume; Blütenpflanzen kamen in der Kreidezeit dazu; Gras trat erst in der Kreidezeit auf und war selten, Wiesen gab es nicht.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf – abgerufen 2026-11-16; Prasad et al. 2005, Science 310 (Gras in Koprolithen der späten Kreide) – abgerufen 2026-11-15; Wu et al. 2018, National Science Review (Gras in der frühen Kreide), nach Prüfer A"
+  },
+  {
+   "fakt": "Dinosaurier sind Reptilien, deren Beine gerade unter dem Körper standen, möglich durch eine Hüftpfanne mit Loch; bei Eidechsen und Krokodilen stehen die Beine seitlich ab.",
+   "quelle": "AMNH, „What Makes a Dinosaur a Dinosaur?“: https://www.amnh.org/learn-teach/curriculum-collections/dinosaurs-activities-and-lesson-plans/what-makes-a-dinosaur-a-dinosaur (Suchauszug); Science News: https://www.sciencenews.org/article/new-fossils-are-redefining-what-makes-dinosaur; Austria-Forum „Dinosaurier“: https://austria-forum.org/af/AustriaWiki/Dinosaurier – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Plateosaurus konnte die Hand nicht so drehen, dass die Handfläche zum Boden zeigt; er lief auf den Hinterbeinen; seine Hand hatte Greiffinger und eine große Daumenkralle.",
+   "quelle": "Mallison 2010, Palaeontologia Electronica / Acta Palaeontologica Polonica: https://www.app.pan.pl/article/item/app20090075.html; Bonnan & Senter 2007 – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Flugsaurier (Flughaut zwischen einem langen Finger und dem Körper) und Meeressaurier wie Fischsaurier sind keine Dinosaurier, sondern eigene Reptiliengruppen; Krokodile und Schildkröten lebten schon in der Trias.",
+   "quelle": "Senckenberg, Aktivblatt „Die Welt der Dinosaurier“, Informationen für Lehrkräfte: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2025/12/aktivblatt_welt_der_dinosaurier_information.pdf (S. 6); Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf; Planetarium Jena, Arbeitsblätter Dinosaurier: https://planetarium-jena.de/wp-content/uploads/2024/06/Dinosaurier_Arbeitsblaetter.pdf (Suchauszug) – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Das Mammut war ein Säugetier der Eiszeit und lebte lange nach den Dinosauriern.",
+   "quelle": "Klexikon, „Dinosaurier“: https://klexikon.zum.de/wiki/Dinosaurier (Menschen und Säugetiere viel später); Klexikon „Mammut“: https://klexikon.zum.de/wiki/Mammut – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Es gab gehörnte, gepanzerte, zwei- und vierbeinige Dinosaurier; Euoplocephalus hatte eine Keule am Schwanz; alle Dinosaurier legten Eier, die im Verhältnis zum Körper klein waren.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf; Senckenberg, Aktivblatt „Die Welt der Dinosaurier“, Informationen für Lehrkräfte: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2025/12/aktivblatt_welt_der_dinosaurier_information.pdf; Klexikon, „Dinosaurier“: https://klexikon.zum.de/wiki/Dinosaurier – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Das Skelett des Giraffatitan (früher Brachiosaurus brancai) im Museum für Naturkunde Berlin ist 13,27 m hoch und gilt als höchstes aufgestelltes Dinosaurierskelett; die Knochen stammen von der Tendaguru-Expedition 1909–1913 im heutigen Tansania.",
+   "quelle": "Spektrum der Wissenschaft: https://www.spektrum.de/kolumne/kleine-geschichte-des-groessten-dinoskeletts-eines-geraubten-fossils/1812149; Museum für Naturkunde Berlin: https://www.museumfuernaturkunde.berlin/en/visit/exhibitions/world-dinosaurs – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Die größten Langhals-Dinosaurier waren über 30 m lang; Patagotitan (Südamerika) wird auf 31–37 m und etwa 50–70 t geschätzt (neuere Schätzungen 50–57 t, Paul 2019; Otero & Carballido 2020); ein Linienbus ist etwa 12 m lang, ein Elefant wiegt etwa 6 t.",
+   "quelle": "Klexikon, „Dinosaurier“: https://klexikon.zum.de/wiki/Dinosaurier; Scientific American, „Why the World's Biggest Dinosaurs Keep Getting Cut Down to Size“: https://www.scientificamerican.com/article/why-the-worlds-biggest-dinosaurs-keep-getting-cut-down-to-size/ (nach Prüfer A); Elefant nach Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf (T. rex 5–7 t „Gewicht eines Elefanten“) – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Tyrannosaurus war etwa 12 m lang und so schwer wie ein Elefant; er hatte spitze, sägeartig gezackte Zähne eines Fleischfressers; ob er vor allem jagte, ist umstritten; seine kurzen, muskulösen Arme sind ungeklärt; heute rekonstruiert man ihn mit waagerechtem Rücken.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Compsognathus lebte im späten Jura (vor 145–140 Mio. Jahren, wie Archaeopteryx vor ~150–145 Mio.) in Deutschland und Frankreich, war etwa 0,7 m lang und wog etwa 3 kg; der Name bedeutet „hübscher Kiefer“; das Münchner Skelett stammt aus den Solnhofener Plattenkalken in Bayern.",
+   "quelle": "NHM London, Dino Directory „Compsognathus“: https://www.nhm.ac.uk/discover/dino-directory/compsognathus.html; M. Moser (Bayerische Staatssammlung): https://epub.ub.uni-muenchen.de/40477/1/moser_online.pdf (Suchauszug) – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "In Plateosaurus-Knochen sieht man unter dem Mikroskop Jahresringe; manche Tiere waren mit 12 Jahren ausgewachsen, andere wuchsen mit 27 noch.",
+   "quelle": "Sander & Klein 2005, Science 310; ScienceDaily: https://www.sciencedaily.com/releases/2005/12/051219084817.htm – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Plateosaurus hatte blattförmige Zähne mit stumpfen Zacken zum Zerkleinern von Pflanzen; er fraß vor allem Pflanzen, gelegentlich vielleicht kleine Tiere.",
+   "quelle": "NHM London, Dino Directory „Plateosaurus“: https://www.nhm.ac.uk/discover/dino-directory/plateosaurus.html; Wikipedia „Plateosaurus“ (nach Barrett 2000) – abgerufen 2026-11-15"
+  },
+  {
+   "fakt": "Viele Dinosaurier fraßen Pflanzen, darunter Triceratops, Stegosaurus und die Langhälse; Triceratops hatte einen Schnabel wie ein Vogel; der lange Hals erlaubte, viel Futter zu erreichen, ohne sich viel zu bewegen.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf; Senckenberg, Aktivblatt „Die Welt der Dinosaurier“, Informationen für Lehrkräfte: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2025/12/aktivblatt_welt_der_dinosaurier_information.pdf; Klexikon, „Dinosaurier“: https://klexikon.zum.de/wiki/Dinosaurier – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Viele Dinosaurier, vor allem kleinere zweibeinige Raubdinosaurier, trugen Federn; große Pflanzenfresser hatten wohl Schuppen (Barrett, Evans & Campione 2015, Biology Letters: https://pmc.ncbi.nlm.nih.gov/articles/PMC4528472, abgerufen 2026-11-15); Velociraptor war etwa truthahngroß, hatte Höcker für Federkiele am Unterarm und konnte nicht fliegen.",
+   "quelle": "NBC News / AP 2007 (Turner, Makovicky & Norell, Science): https://www.nbcnews.com/id/wbna20891903; wissenschaft.de „Flugunfähiger Vogelvorfahr“: https://wissenschaft.de/artikel/flugunfaehiger-vogelvorfahr – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Federn dienen zum Wärmen, als Schmuck und zur Tarnung.",
+   "quelle": "Senckenberg, Aktivblatt „Die Welt der Dinosaurier“, Informationen für Lehrkräfte: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2025/12/aktivblatt_welt_der_dinosaurier_information.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "In den Federn von Sinosauropteryx fand man erstmals Melanosomen (Farbkörperchen); sein Schwanz war rotbraun und weiß geringelt.",
+   "quelle": "ScienceDaily (Univ. Bristol), 27.01.2010: https://www.sciencedaily.com/releases/2010/01/100127134245.htm – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "In der Wüste Gobi (Mongolei) wurden Citipati-Skelette auf Nestern mit kreisförmig gelegten Eiern gefunden, die Arme über dem Nestrand; ob sie brüteten oder bewachten, wird diskutiert.",
+   "quelle": "Norell & Balanoff 2018, American Museum Novitates 3899: https://digitallibrary.amnh.org/handle/2246/6858 – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Archaeopteryx lebte vor etwa 150 Millionen Jahren, war etwa elstergroß, hatte Federn und Flügel, aber Zähne, einen langen Knochenschwanz und Krallen an den Fingern; alle Funde stammen aus den seit Jahrhunderten betriebenen Plattenkalk-Steinbrüchen bei Solnhofen und Eichstätt (Altmühltal); der erste Fund war eine einzelne Feder.",
+   "quelle": "NHM London, Dino Directory „Archaeopteryx“: https://www.nhm.ac.uk/discover/dino-directory/Archaeopteryx.html; Planet Wissen „Ursprung des Vogelflugs“: https://www.planet-wissen.de/natur/tierwelt/tierische_flieger/pwiederursprungdesvogelflugeseinnochungeloestesraetsel100.html; idw / SNSB 04.12.2017: https://idw-online.de/de/news685805 – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Vögel stammen von kleinen Raubdinosauriern ab und zählen zu den Dinosauriern; Füße und Krallen der Vögel erinnern an Dinosaurier.",
+   "quelle": "Senckenberg Naturmuseum Frankfurt, Handreichung „Vom Leben der Dinosaurier“, S. 3–4: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2026/02/Handreichung-Vom-Leben-der-Dinosaurier_final.pdf; Senckenberg, Aktivblatt „Die Welt der Dinosaurier“, Informationen für Lehrkräfte: https://museumfrankfurt.senckenberg.de/wp-content/uploads/2025/12/aktivblatt_welt_der_dinosaurier_information.pdf; Klexikon, „Dinosaurier“: https://klexikon.zum.de/wiki/Dinosaurier – abgerufen 2026-11-16"
   }
  ],
- "seiten": [
+ "kapitel": [
   {
-   "text": "Selin sitzt im Museum vor einem großen Skelett. Hals und Schwanz sind lang, der Kopf ist klein. Auf dem Schild steht: Plateosaurus, gefunden in Deutschland.",
-   "bild": "bilder/01.webp"
+   "titel": "Spuren im Stein",
+   "seiten": [
+    {
+     "text": "Selin sitzt im Museum vor einem riesigen Skelett. Der Hals ist lang, der Schwanz noch länger. Der Kopf dagegen ist klein. Das Tier heißt Plateosaurus. Es lebte vor über 200 Millionen Jahren, auch dort, wo heute Deutschland liegt.\n\nHat jemals ein Mensch einen lebenden Plateosaurus gesehen? Nein. Kein Mensch hat je einen lebenden Dinosaurier gesehen. Als die Dinosaurier lebten, gab es noch gar keine Menschen. Und doch weiß man heute sehr viel über sie. Woher eigentlich? Die Antwort steckt in Steinen.",
+     "bild": "bilder/01-01.webp"
+    },
+    {
+     "text": "Ein Knochen wird nur ganz selten zu Stein. Dafür muss vieles zusammenpassen. Zuerst müssen Schlamm oder Sand ihn rasch zudecken. Dann vergehen Millionen Jahre. Wasser sickert durch den Boden und bringt winzige Körnchen aus Mineralien mit. Sie setzen sich in die feinen Löcher im Knochen.\n\nSo wird der Knochen langsam hart und schwer wie Stein. Seine Form bleibt dabei erhalten, bis in feine Einzelheiten. Solche Spuren aus uralter Zeit heißen Fossilien. Dass ein Fossil entsteht, erhalten bleibt und gefunden wird, ist ein großer Glücksfall.",
+     "bild": "bilder/01-02.webp"
+    },
+    {
+     "text": "Fossilien stecken im Gestein, zum Beispiel in Steinbrüchen. Wer sie erforscht, heißt Paläontologin oder Paläontologe. An einer Ausgrabung arbeiten diese Fachleute sehr geduldig. Mit kleinen Meißeln und Pinseln legen sie einen Knochen frei, Körnchen für Körnchen.\n\nDamit nichts zerbricht, bekommt ein großer Fund eine Hülle aus Gips. Das ist so ähnlich wie bei einem gebrochenen Bein. So reist er sicher ins Museum. Dort kratzen Fachleute den letzten Stein mit feinen Werkzeugen ab. Bei einem schwierigen Stück kann das ein ganzes Jahr dauern.",
+     "bild": "bilder/01-03.webp"
+    },
+    {
+     "text": "Im Museum darf Selin einen echten fossilen Knochen hochheben. Eine Forscherin hält die Kiste fest. Selin staunt. Der Knochen ist schwer wie ein Stein. Kein Wunder, er ist ja zu Stein geworden.\n\nÜbrigens stammt das große Skelett im Saal nicht von einem einzigen Tier. Vollständige Skelette sind selten. Darum setzt man Knochen von mehreren Tieren zusammen. Was fehlt, wird nachgebaut. Manche Skelette sind sogar ganz aus Abgüssen. Der Tyrannosaurus im Museum in Frankfurt ist so ein Abguss. Der echte Fund steht in New York.",
+     "bild": "bilder/01-04.webp"
+    },
+    {
+     "text": "Nicht nur Knochen werden zu Stein. Manchmal findet man Fußspuren, die ein Dinosaurier in weichen Schlamm getreten hat. Aus dem Abstand der Spuren lesen Fachleute ab, wie schnell er lief. Man hat auch versteinerte Eier, Nester und sogar versteinerten Kot gefunden.\n\nFrüher hielten Menschen große Knochen für Reste von Drachen oder Riesen. Erst vor fast 200 Jahren bekamen die Tiere einen eigenen Namen. Ein Forscher staunte, wie riesig die Knochen waren. Er nannte die Tiere Dinosaurier. Das bedeutet „schreckliche Echse“. Dabei fraßen viele von ihnen nur Pflanzen.",
+     "bild": "bilder/01-05.webp"
+    },
+    {
+     "text": "Im nächsten Saal steht Plateosaurus noch einmal, diesmal mit Haut. Es ist ein Modell in Lebensgröße. So stellen sich Fachleute ihn heute vor. Seine Form kennen sie gut, denn sie steckt in den Knochen. Aber welche Farbe hatte er? Das weiß niemand. Haut und Farbe bleiben fast nie erhalten.\n\nDarum ist jedes Bild von einem lebenden Dinosaurier eine Vorstellung. Das gilt auch für die Bilder in diesem Buch. Fachleute nennen so ein Bild eine Rekonstruktion. Sie machen es so genau wie möglich. Und wenn neue Funde auftauchen, malen sie es neu.",
+     "bild": "bilder/01-06.webp"
+    }
+   ]
   },
   {
-   "text": "Selin hat ihren Malblock dabei. Sie möchte ihn malen, wie er lebendig aussah. Doch vor ihr stehen nur Knochen.",
-   "bild": "bilder/02.webp"
+   "titel": "Eine Welt lange vor uns",
+   "seiten": [
+    {
+     "text": "Die Dinosaurier lebten im Erdmittelalter. Die ersten gab es vor ungefähr 235 Millionen Jahren. Vor 66 Millionen Jahren endete die Zeit der großen Dinosaurier. Solche Zahlen kann sich niemand richtig vorstellen.\n\nVersuch es einmal so: Ein Blatt Papier steht für ein Jahr. Für dein Leben brauchst du nur ein paar Blätter. Für die Zeit seit den letzten großen Dinosauriern braucht man 66 Millionen Blätter. Dieser Stapel wäre über sechs Kilometer hoch. Er wäre höher als jeder Berg in Deutschland! Und die Dinosaurier selbst lebten über 160 Millionen Jahre lang.",
+     "bild": "bilder/02-01.webp"
+    },
+    {
+     "text": "In Filmen sieht man manchmal Menschen und Dinosaurier zusammen. Das hat es nie gegeben. Menschen wie wir leben erst seit ungefähr 300.000 Jahren auf der Erde. Im Papierstapel wären das nur drei Zentimeter ganz oben.\n\nNoch etwas ist erstaunlich. Auch die Dinosaurier lebten nicht alle zur gleichen Zeit. Stegosaurus mit den großen Platten auf dem Rücken lebte im Jura. Tyrannosaurus kam erst viel später, kurz vor dem Ende der Dinosaurierzeit. Zwischen den beiden liegt mehr Zeit als zwischen Tyrannosaurus und dir!",
+     "bild": "bilder/02-02.webp"
+    },
+    {
+     "text": "Die lange Zeit der Dinosaurier hat drei Abschnitte: Trias, Jura und Kreide. Am Anfang hingen alle Länder der Erde zusammen. Es gab nur einen riesigen Kontinent. Später brach er langsam auseinander, und dazwischen entstanden Meere.\n\nWie sah es damals aus? Geh in Gedanken durch einen Wald aus der Jurazeit. Hohe Nadelbäume wachsen hier und Ginkgos mit Blättern wie kleine Fächer. Am Boden stehen Farne und Schachtelhalme. Doch eine Sache, die du von jeder Wiese kennst, wächst hier nirgends. Was glaubst du: Was fehlt?",
+     "bild": "bilder/02-03.webp",
+     "frage": true
+    },
+    {
+     "text": "Es sind Blumen, und auch das Gras fehlt! Im Jura gab es noch keine Blumen. Blütenpflanzen kamen erst in der Kreidezeit dazu. Auch Wiesen gab es nicht. Gras kam erst in der Kreidezeit auf und war lange selten. Ein Dinosaurier auf einer bunten Blumenwiese ist also eine Erfindung.\n\nManche Pflanzen von damals kannst du heute noch finden. Schachtelhalme wachsen am Wegrand oder am Bach. Fühl einmal ihre Stängel, sie sind rau und haben Glieder. Farne und Ginkgobäume gibt es bei uns auch. Diese Pflanzen haben eine sehr lange Geschichte.",
+     "bild": "bilder/02-04.webp"
+    }
+   ]
   },
   {
-   "text": "Niemand hat je einen lebenden Plateosaurus gesehen. Er lebte lange, lange vor den ersten Menschen. Selin seufzt. Ihr Blatt bleibt leer.",
-   "bild": "bilder/03.webp"
+   "titel": "Was ist ein Dinosaurier?",
+   "seiten": [
+    {
+     "text": "Dinosaurier waren Reptilien, so wie Eidechsen und Krokodile. Aber woran erkennt man einen? Zum Beispiel an den Beinen. Schau dir eine Eidechse an. Ihre Beine stehen seitlich vom Körper ab. Ihr Bauch ist dabei nah am Boden. Bei Krokodilen ist es ähnlich.\n\nBei den Dinosauriern standen die Beine gerade unter dem Körper, wie Säulen. Möglich machte das eine besondere Hüfte mit einem Loch in der Hüftpfanne. So stehen auch ein Pferd und ein Elefant. Und so stehen auch deine Beine. Dinosaurier waren also keine großen Eidechsen. Manche liefen auf zwei Beinen, andere auf vier.",
+     "bild": "bilder/03-01.webp"
+    },
+    {
+     "text": "Lief ein Dinosaurier auf zwei oder auf vier Beinen? Das lesen Fachleute an den Knochen ab. Beim Plateosaurus war man sich lange nicht sicher. Dann untersuchten Forschende seine Hand ganz genau.\n\nLeg einmal deine Hand flach auf den Tisch. Das geht leicht, weil du deinen Unterarm drehen kannst. Plateosaurus konnte das nicht. Seine Handflächen blieben immer zur Seite gedreht. Zum Auftreten taugten solche Hände nicht. Also lief er auf den Hinterbeinen. Seine Hände hatten Finger zum Greifen und eine große Kralle am Daumen.",
+     "bild": "bilder/03-02.webp"
+    },
+    {
+     "text": "Im Museum hängt ein großes Modell unter der Decke. Es hat riesige Flügel. Zwischen einem sehr langen Finger und dem Körper spannte sich eine dünne Flughaut. Das Tier heißt Flugsaurier. Es lebte zur selben Zeit wie die Dinosaurier.\n\nUnten in einer Vitrine liegt ein anderes Fossil. Es sieht aus wie ein Delfin aus Stein. Das ist ein Fischsaurier, er lebte im Meer. Beide Tiere stehen in vielen Büchern über Dinosaurier. Was glaubst du: Waren der Flugsaurier und der Fischsaurier Dinosaurier?",
+     "bild": "bilder/03-03.webp",
+     "frage": true
+    },
+    {
+     "text": "Nein, beide waren keine Dinosaurier. Sie waren Verwandte, aber eigene Gruppen von Reptilien. Fachleute erkennen das an ihren Knochen. Dinosaurier lebten an Land. Keiner von ihnen lebte ganz im Meer wie ein Fischsaurier.\n\nViele Spielzeugkisten mischen sie trotzdem zusammen. Manchmal liegt dort auch ein Mammut dazwischen. Das Mammut lebte aber viel später. Es war ein Säugetier, verwandt mit dem Elefanten, mit dichtem Fell. Übrigens gab es zur Zeit der Dinosaurier schon Krokodile und Schildkröten. Auch sie waren keine Dinosaurier.",
+     "bild": "bilder/03-04.webp"
+    },
+    {
+     "text": "Dinosaurier sahen sehr verschieden aus. Manche trugen Hörner auf dem Kopf, wie Triceratops. Andere hatten einen Panzer aus Knochenplatten oder eine dicke Keule am Schwanzende. Es gab Riesen und Winzlinge, Zweibeiner und Vierbeiner.\n\nEines aber hatten alle gemeinsam: Sie legten Eier. Man hat versteinerte Eier gefunden, manchmal ganze Nester. Selbst die größten Dinosaurier legten Eier, die im Vergleich zu ihrem Körper klein waren. Aus so einem Ei wurde mit den Jahren ein Riese. Wie riesig, erzählt das nächste Kapitel.",
+     "bild": "bilder/03-05.webp"
+    }
+   ]
   },
   {
-   "text": "Da bringt eine Forscherin eine Kiste. Selin darf einen Knochen hochheben. Er ist schwer wie ein Stein. In Millionen Jahren ist er zu Stein geworden.",
-   "bild": "bilder/04.webp"
+   "titel": "Riesen und Winzlinge",
+   "seiten": [
+    {
+     "text": "Im Museum für Naturkunde in Berlin steht ein gewaltiges Skelett. Es gehörte einem Giraffatitan. Sein Kopf ragt über zwölf Meter hoch. Das ist so hoch wie ein Haus mit vier Stockwerken. Wer davor steht, muss den Kopf weit in den Nacken legen.\n\nGiraffatitan war ein Langhals-Dinosaurier. Seine Knochen wurden vor über hundert Jahren in Afrika ausgegraben, in Tansania. Es gilt als das höchste aufgestellte Dinosaurierskelett der Welt. Und doch gab es noch größere Dinosaurier!",
+     "bild": "bilder/04-01.webp"
+    },
+    {
+     "text": "Die größten Langhals-Dinosaurier waren über dreißig Meter lang. Das ist so lang wie zweieinhalb Linienbusse hintereinander. Einer von ihnen heißt Patagotitan. Er lebte in Südamerika und war so schwer wie acht bis zehn Elefanten. Diese Riesen waren die größten Tiere, die je auf dem Land gelebt haben.\n\nStell dir vor, wie so ein Riese durch einen Wald aus Nadelbäumen zieht. Sein Hals reicht weit nach vorn, sein Schwanz weit nach hinten. Seine Beine stehen wie dicke Säulen unter ihm. So stellen sich Fachleute ihn heute vor.",
+     "bild": "bilder/04-02.webp"
+    },
+    {
+     "text": "Auch in Deutschland lebten große Dinosaurier. Viele Skelette von Plateosaurus hat man in Trossingen in Baden-Württemberg ausgegraben. Selin misst den Plateosaurus im Museum mit ihren Schritten aus. Vom Kopf bis zur Schwanzspitze braucht sie vierzehn große Schritte. Das sind ungefähr sieben Meter, so lang wie eineinhalb Autos.\n\nUnd Tyrannosaurus? Er wurde etwa zwölf Meter lang und so schwer wie ein Elefant. Probier es selbst aus: Wie viele Schritte brauchst du für zwölf Meter? Vielleicht passt das auf euren Schulhof.",
+     "bild": "bilder/04-03.webp"
+    },
+    {
+     "text": "Nicht alle Dinosaurier waren Riesen. In Bayern hat man vor langer Zeit das Skelett eines kleinen Dinosauriers gefunden. Er heißt Compsognathus. Das bedeutet „hübscher Kiefer“. Er war etwa siebzig Zentimeter lang, mit seinem langen Schwanz. Und er wog ungefähr so viel wie eine Hauskatze.\n\nCompsognathus lief auf zwei dünnen Beinen. Er lebte im Jura, ungefähr zur selben Zeit wie der Urvogel Archaeopteryx. Sein Skelett liegt heute in München, eingebettet in eine helle Steinplatte. Wer genau hinsieht, erkennt den Kopf, die zierlichen Beine und den langen Schwanz.",
+     "bild": "bilder/04-04.webp"
+    },
+    {
+     "text": "Wie schnell wuchs ein Dinosaurier heran? Auch das verraten die Knochen. Fachleute schneiden eine hauchdünne Scheibe aus einem Knochen. Unter dem Mikroskop sieht man darin Ringe, wie in einem Baumstamm. Jeder Ring steht für ein Jahr.\n\nSo fand man heraus: Manche Plateosaurier waren mit zwölf Jahren ausgewachsen. Andere wuchsen mit 27 Jahren noch weiter. Ein Plateosaurus wuchs also viele Jahre lang, so wie du auch.",
+     "bild": "bilder/04-05.webp"
+    }
+   ]
   },
   {
-   "text": "Selin fängt an zu malen. Sie stellt ihren Plateosaurus auf vier Beine. Die Forscherin legt eine Hand aus Stein daneben. Am Daumen sitzt eine große, krumme Kralle.",
-   "bild": "bilder/05.webp"
+   "titel": "Was Dinosaurier fraßen",
+   "seiten": [
+    {
+     "text": "Die Forscherin legt einen Schädel auf den Tisch. Er gehört einem Plateosaurus. Selin beugt sich darüber. Im Kiefer sitzen viele kleine Zähne, dicht an dicht. Jeder sieht aus wie ein kleines Blatt mit stumpfen Zacken am Rand.\n\nZähne verraten, was ein Tier gefressen hat. Das gilt für Dinosaurier genauso wie für Tiere von heute. Die Forscherin fährt mit dem Finger an den Zacken entlang. Selin denkt an die Pflanzen im Urzeitwald und an die Tiere dort. Was glaubst du: Was hat Plateosaurus mit diesen Zähnen gefressen?",
+     "bild": "bilder/05-01.webp",
+     "frage": true
+    },
+    {
+     "text": "Vor allem Pflanzen! Mit seinen gezackten Blattzähnen konnte Plateosaurus Blätter und Triebe zerkleinern. Auf den Hinterbeinen kam er auch an höhere Zweige. Ganz sicher sind sich die Fachleute nicht. Vielleicht fraß er manchmal auch kleine Tiere. Aber Pflanzen waren sein Hauptfutter.\n\nSo stellt man sich Plateosaurus heute vor. Er steht auf den Hinterbeinen am Rand eines Waldes. Der lange Schwanz hält das Gleichgewicht. Er streckt den Hals hoch zu den Zweigen eines Nadelbaums. Ringsum wachsen Farne, aber keine Blumen.",
+     "bild": "bilder/05-02.webp"
+    },
+    {
+     "text": "Sehr viele Dinosaurier fraßen Pflanzen. Triceratops mit seinen drei Hörnern hatte vorn am Maul einen Hornschnabel, fast wie ein Vogel. Damit konnte er Pflanzen abknipsen. Auch Stegosaurus mit den Rückenplatten fraß Pflanzen.\n\nUnd die Langhälse? Mit ihrem langen Hals erreichten sie viel Futter, ohne weit zu laufen. Sie konnten stehen bleiben und den Hals nach allen Seiten schwenken. Auf dem Speiseplan standen Farne, Schachtelhalme, Ginkgos und Nadelbäume. Ein Riese wie Patagotitan brauchte jeden Tag sicher sehr viel davon.",
+     "bild": "bilder/05-03.webp"
+    },
+    {
+     "text": "Ganz anders sehen die Zähne von Tyrannosaurus aus. Sie sind groß und spitz und haben am Rand feine Zacken, wie ein Brotmesser. Solche Zähne haben Fleischfresser. Wie er an sein Futter kam, darüber sind sich die Fachleute nicht einig.\n\nFrüher stellte man Tyrannosaurus aufrecht hin, wie ein Känguru, den Schwanz auf dem Boden. Heute zeigt man ihn anders: Sein Rücken war waagerecht, der Kopf erhoben. Rätselhaft sind seine kurzen, kräftigen Arme. Wozu er sie brauchte, weiß bis heute niemand sicher.",
+     "bild": "bilder/05-04.webp"
+    },
+    {
+     "text": "Es gibt noch einen Hinweis auf das Futter: versteinerten Dinosaurierkot. Fachleute nennen ihn Koprolith. Nach Millionen Jahren ist daraus fester Stein geworden. Selin betrachtet einen davon durch eine Lupe.\n\nWer so einen Stein genau untersucht, erfährt etwas darüber, was das Tier gefressen hat. Kot, Zähne, Schädel und Knochen: Wie Detektive setzen Forscherinnen und Forscher die Hinweise zusammen. Kein einzelner Fund erzählt alles. Erst zusammen ergeben sie ein Bild davon, wie die Dinosaurier lebten.",
+     "bild": "bilder/05-05.webp"
+    }
+   ]
   },
   {
-   "text": "Selin legt eine Papierhand daneben, so groß wie ihre. So flach kann auch ihre echte Hand liegen. Plateosaurus konnte das nicht. Seine Handflächen blieben immer zur Seite gedreht.",
-   "bild": "bilder/06.webp"
-  },
-  {
-   "text": "Also lief Plateosaurus nur auf seinen Hinterbeinen. Selin radiert die Vorderbeine weg. Jetzt hat er Arme mit Greifhänden.",
-   "bild": "bilder/07.webp"
-  },
-  {
-   "text": "Nun fehlt noch etwas zu fressen. Was glaubst du: Was hat Plateosaurus gefressen?",
-   "bild": "bilder/08.webp",
-   "frage": true
-  },
-  {
-   "text": "Die Forscherin zeigt Selin den Schädel. Die Zähne sehen aus wie kleine Blätter mit Zacken. Damit zerdrückte Plateosaurus wohl Pflanzen.",
-   "bild": "bilder/09.webp"
-  },
-  {
-   "text": "Selin malt eine grüne Wiese unter seine Füße. Doch Gras gab es damals noch nicht. Auch Blumen gab es keine. Selin malt Farne, Schachtelhalme und Nadelbäume.",
-   "bild": "bilder/10.webp"
-  },
-  {
-   "text": "Selin misst das Skelett mit ihren Schritten. Vom Kopf bis zur Schwanzspitze sind es vierzehn. Das ist viel länger als ein Auto.",
-   "bild": "bilder/11.webp"
-  },
-  {
-   "text": "Dann schaut Selin durch ein Mikroskop auf eine Knochenscheibe. Sie hat Ringe wie ein Baumstamm, einen für jedes Jahr. Selin zählt mehr als zwölf Ringe. So alt wurde dieser Plateosaurus mindestens.",
-   "bild": "bilder/12.webp"
-  },
-  {
-   "text": "Im nächsten Saal steht ein Modell in echter Größe. So stellen sich Forschende Plateosaurus heute vor. Er steht auf zwei Beinen zwischen Farnen. Das Modell hat graubraune, schuppige Haut.",
-   "bild": "bilder/13.webp"
-  },
-  {
-   "text": "Welche Farbe er wirklich hatte, weiß niemand. Seine Haut hat nie jemand gefunden. Also wählt Selin selbst: Rotbraun mit hellen Streifen. Unter ihr Bild schreibt sie: So könnte er ausgesehen haben.",
-   "bild": "bilder/14.webp"
+   "titel": "Federn, Eier und die Vögel",
+   "seiten": [
+    {
+     "text": "Viele Menschen stellen sich Dinosaurier schuppig und grau vor. Doch viele Dinosaurier trugen Federn, vor allem kleinere Zweibeiner. Das weiß man aus Fossilien, in denen Federn abgedrückt sind.\n\nEin Beispiel ist Velociraptor. In Filmen ist er oft so groß wie ein Mensch und ganz ohne Federn. In Wirklichkeit war er ungefähr so groß wie ein Truthahn. An seinem Unterarmknochen fand man eine Reihe kleiner Höcker. Genau dort sitzen bei Vögeln heute die langen Federn der Flügel. Fliegen konnte Velociraptor aber nicht. Dafür waren seine Arme zu kurz.",
+     "bild": "bilder/06-01.webp"
+    },
+    {
+     "text": "Wozu braucht ein Tier Federn, wenn es nicht fliegt? Federn halten warm, wie eine Daunenjacke. Sie können auch schmücken oder ein Tier tarnen.\n\nBei einem kleinen Dinosaurier aus China ist Fachleuten etwas Besonderes gelungen. Er heißt Sinosauropteryx. In seinen versteinerten Federn fanden sie winzige Farbkörnchen. Man sieht sie nur unter einem sehr starken Mikroskop. Ihre Form verriet die Farbe: Der Schwanz war rotbraun und weiß geringelt. So erfuhr man zum ersten Mal etwas über die echte Farbe eines Dinosauriers.",
+     "bild": "bilder/06-02.webp"
+    },
+    {
+     "text": "In der Mongolei, in der Wüste Gobi, fand man ein ganz besonderes Fossil. Ein Dinosaurier namens Citipati sitzt auf einem Nest voller Eier. Die Eier liegen im Kreis. Seine Arme liegen ausgebreitet über dem Rand des Nestes.\n\nGenau so sitzen heute Vögel auf ihren Eiern. Vielleicht wärmte Citipati seine Eier, vielleicht beschützte er sie. Darüber denken die Fachleute noch nach. Sicher ist: Hier sieht man einen Dinosaurier, der sich um sein Gelege kümmert. Das Bild zeigt, wie man sich das heute vorstellt.",
+     "bild": "bilder/06-03.webp"
+    },
+    {
+     "text": "Im Altmühltal in Bayern spalten Menschen seit Jahrhunderten hellen Kalkstein in dünne Platten. Darin fand man zuerst eine einzelne versteinerte Feder. Später kamen ganze Skelette dazu. Sie gehören dem Urvogel Archaeopteryx. Er lebte vor ungefähr 150 Millionen Jahren und war so groß wie eine Elster.\n\nAuf den Platten sieht man seine Federn und Flügel, wie bei einem Vogel. Doch er hatte auch Zähne im Maul und einen langen Schwanz aus Knochen. An seinen Fingern saßen Krallen. Fachleute sagen: Er war ein kleiner, vogelähnlicher Dinosaurier.",
+     "bild": "bilder/06-04.webp"
+    },
+    {
+     "text": "Aus kleinen, gefiederten Raubdinosauriern entwickelten sich die Vögel. Darum zählen Fachleute die Vögel zu den Dinosauriern. Schau dir einmal den Fuß eines Huhns an, mit seinen Schuppen und Krallen. Oder eine Amsel, die über den Rasen hüpft. Erinnert sie dich an einen kleinen Raubdinosaurier?\n\nDie großen Dinosaurier wie Tyrannosaurus und Patagotitan gibt es heute nicht mehr. Warum sie verschwunden sind, erzählt ein anderes Buch. Aber ihre gefiederten Verwandten sind überall um dich herum. Wenn morgen früh ein Vogel vor deinem Fenster singt, hörst du einen kleinen Dinosaurier.",
+     "bild": "bilder/06-05.webp"
+    }
+   ]
   }
  ]
 }

@@ -1,126 +1,319 @@
 {
  "id": "wal",
- "titel": "Ole taucht hinterher",
- "art": "sachgeschichte",
+ "titel": "Mira, die Riesin im Meer",
+ "art": "sachbuch",
  "welt": "tiere-der-erdteile",
  "familie": null,
  "kulisse": "wasser",
  "klasse": 2,
  "quellen": [
   {
-   "fakt": "Buckelwale der Ostküste Australiens bekommen ihre Kälber im warmen Wasser vor Queensland (Great Barrier Reef) und fressen im Sommer im kalten Meer der Antarktis Krill; der direkte Weg ist etwa 6.500 bis 8.000 km lang (einfach).",
-   "quelle": "https://www.barrierreef.org/news/explainers/why-do-humpback-whales-migrate (Great Barrier Reef Foundation), abgerufen 2026-11-15"
+   "fakt": "Wale sind Säugetiere, keine Fische: Sie atmen mit Lungen Luft, sind warmblütig, bekommen lebende Junge, die Milch trinken, und haben keine Schuppen.",
+   "quelle": "National Geographic, „Whales don't spray water from their blowholes, and other myths debunked“: https://www.nationalgeographic.com/animals/article/whales-dont-spray-water-from-their-blowholes-and-other-myths-debunked; Klexikon, „Wale“: https://klexikon.zum.de/wiki/Wale – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Buckelwal-Mütter halten sich dicht bei ihren Kälbern und berühren sie oft mit ihren Brustflossen; die Brustflossen sind sehr lang (daher der wissenschaftliche Name). Buckelwale der Südhalbkugel haben mehr Weiß.",
-   "quelle": "https://www.fisheries.noaa.gov/species/humpback-whale (NOAA Fisheries), abgerufen 2026-11-15"
+   "fakt": "Buckelwale werden bis etwa 18 Meter lang und bis etwa 40 Tonnen schwer; ein Linienbus ist rund 12 Meter lang, ein Afrikanischer Elefant wiegt 2,5 bis 7 Tonnen.",
+   "quelle": "NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale; Natural History Museum London, „Record breaker“: https://nhm.ac.uk/bluewhale/ocean/record-breaker – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Ein neugeborenes Kalb schwimmt oft direkt unter dem Kinn der Mutter oder unter ihrer Brustflosse.",
-   "quelle": "https://whaletrust.org/the-life-of-a-newborn-humpback-whale/ (Whale Trust Maui, Walforschung), abgerufen 2026-11-15"
+   "fakt": "Das Blasloch ist die Nase des Wals; Bartenwale haben zwei Blaslöcher, Zahnwale eines.",
+   "quelle": "Catalina Island Marine Institute, „Blowholes“: https://cimi.org/blog/blowhole-what-are-they-and-what-are-they-used-for/ – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Wale sind Säugetiere mit Lungen und atmen Luft durch das Blasloch oben auf dem Kopf. Der Blas ist ausgeatmete warme Luft (mit Tröpfchen), kein Wasser, das aus dem Körper gespritzt wird.",
-   "quelle": "https://www.nationalgeographic.com/animals/article/whales-dont-spray-water-from-their-blowholes-and-other-myths-debunked (National Geographic), abgerufen 2026-11-15"
+   "fakt": "Der Blas ist ausgeatmete warme Luft, die zu einer Wolke wird, mit Tröpfchen von Meerwasser über dem Blasloch – keine Wasserfontäne.",
+   "quelle": "National Geographic, „Whales don't spray water from their blowholes, and other myths debunked“: https://www.nationalgeographic.com/animals/article/whales-dont-spray-water-from-their-blowholes-and-other-myths-debunked – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Bartenwale wie der Buckelwal haben zwei Blaslöcher nebeneinander, Zahnwale nur eines.",
-   "quelle": "https://cimi.org/blog/blowhole-what-are-they-and-what-are-they-used-for/ (Catalina Island Marine Institute), abgerufen 2026-11-15"
+   "fakt": "Die Schwanzflosse (Fluke) der Wale steht waagrecht und bewegt sich auf und ab; bei Fischen und Haien steht sie senkrecht und schlägt hin und her.",
+   "quelle": "Klexikon, „Wale“: https://klexikon.zum.de/wiki/Wale; National Geographic, „Whales don't spray water from their blowholes, and other myths debunked“: https://www.nationalgeographic.com/animals/article/whales-dont-spray-water-from-their-blowholes-and-other-myths-debunked – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Das Kalb stupst die Mutter an, wenn es trinken will; Kälber machen leise Brumm- und Quieklaute zur Mutter, meist beim Schwimmen.",
-   "quelle": "Videsen et al. 2017, Functional Ecology, doi:10.1111/1365-2435.12871; https://www.sciencedaily.com/releases/2017/04/170426093314.htm, abgerufen 2026-11-15"
+   "fakt": "Auch Wale haben Haare; beim Buckelwal sitzt in den golfballgroßen Knubbeln am Kopf je ein Haar, wozu, ist noch nicht geklärt.",
+   "quelle": "National Geographic, „Whales don't spray water from their blowholes, and other myths debunked“: https://www.nationalgeographic.com/animals/article/whales-dont-spray-water-from-their-blowholes-and-other-myths-debunked; NSW National Parks, „Lumpy bumpy whales“: https://www.nationalparks.nsw.gov.au/get-inspired/stories/lumpy-bumpy-whales – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Buckelwal-Milch ist sehr fett (bis 50–60 %); das Kalb nimmt stark zu (bis etwa 45 kg am Tag). Mütter fressen während der Säugezeit im warmen Meer nicht und leben von ihren Fettreserven.",
-   "quelle": "https://www.oceanicsociety.org/resources/ocean-facts/deep-dive-into-the-humpback-whales-life-cycle-and-role-in-ocean-health/ (Oceanic Society), abgerufen 2026-11-15"
+   "fakt": "Eine dicke Speckschicht unter der Haut hält Wale warm und ist ihr Vorrat für Zeiten ohne Futter.",
+   "quelle": "Great Barrier Reef Foundation, „Why do humpback whales migrate?“: https://www.barrierreef.org/news/explainers/why-do-humpback-whales-migrate; Oceanic Society, „Deep dive into the humpback whale's life cycle“: https://www.oceanicsociety.org/resources/ocean-facts/deep-dive-into-the-humpback-whales-life-cycle-and-role-in-ocean-health/ – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Buckelwal-Mütter säugen und fasten zugleich im Brutgebiet; Kälber wachsen im ersten Jahr sehr schnell.",
-   "quelle": "https://www.hawaii.edu/news/2025/10/02/humpback-calves/ (University of Hawaiʻi), abgerufen 2026-11-15"
+   "fakt": "Es gibt Bartenwale (z. B. Buckelwal, Blauwal) und Zahnwale (z. B. Pottwal, Delfine).",
+   "quelle": "Klexikon, „Wale“: https://klexikon.zum.de/wiki/Wale – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Buckelwale fressen auf der Wanderung und im warmen Meer kaum; sie leben von ihrem gespeicherten Fett.",
-   "quelle": "https://www.barrierreef.org/news/explainers/why-do-humpback-whales-migrate (Great Barrier Reef Foundation), abgerufen 2026-11-15"
+   "fakt": "Barten hängen als Platten am Oberkiefer und bestehen aus Keratin wie Fingernägel; mit der Zunge drückt der Wal das Wasser durch die Barten, das Futter bleibt zurück.",
+   "quelle": "Center for Coastal Studies, „Baleen Whales“: https://coastalstudies.org/connect-learn/stellwagen-bank-national-marine-sanctuary/marine-mammals/cetaceans/baleen-whales/; Natural History Museum London, „Baleen whales: filter feeding explained“: https://nhm.ac.uk/discover/baleen-whales-filter-feeding-explained.html – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Beim Ruhen tauchen Buckelwal-Mütter lange und tief, das Kalb bleibt oben und taucht mehrmals allein zum Atmen auf; getrennt rufen Mutter und Kalb öfter, aber nicht lauter.",
-   "quelle": "Indeck, Noad & Dunlop 2022, Ecology and Evolution 12: e8604; https://pmc.ncbi.nlm.nih.gov/articles/PMC8826064/, abgerufen 2026-11-15"
+   "fakt": "Buckelwale fressen vor allem Krill (kleine garnelenähnliche Krebse) und kleine Fische; Krill bildet riesige Schwärme und frisst winzige, nur unter dem Mikroskop sichtbare Algen (Phytoplankton).",
+   "quelle": "NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale; Australian Antarctic Program, „Krill“: https://www.antarctica.gov.au/news/explore-antarctica/krill – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Das Kalb muss öfter atmen als die Mutter: es steigt alle paar Minuten allein auf, atmet drei- bis viermal und schwimmt dabei Kreise über der ruhenden Mutter; manchmal erreicht es ihre Tiefe nicht und treibt mit dem Schwanz voran wieder nach oben.",
-   "quelle": "https://whaletrust.org/the-life-of-a-newborn-humpback-whale/ (Whale Trust Maui), abgerufen 2026-11-15"
+   "fakt": "Antarktischer Krill ist meist etwa 1,5 bis 5 Zentimeter lang.",
+   "quelle": "Riaz et al. 2023, Frontiers in Marine Science: https://www.frontiersin.org/articles/10.3389/fmars.2023.1107567/full – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Nur männliche Buckelwale singen den langen Gesang, meist im warmen Brutgebiet; sie singen oft stundenlang, und der Gesang ist viele Kilometer weit zu hören.",
-   "quelle": "https://dosits.org/animals/use-of-sound/marine-mammal-communication/vocalizations-associated-with-reproduction (Discovery of Sound in the Sea, University of Rhode Island); National Geographic (s. o.), abgerufen 2026-11-15"
+   "fakt": "Die langen Kehlfurchen der Furchenwale lassen die Kehle sich stark dehnen, wenn der Wal einen Schluck Wasser mit Futter nimmt.",
+   "quelle": "Center for Coastal Studies, „Baleen Whales“: https://coastalstudies.org/connect-learn/stellwagen-bank-national-marine-sanctuary/marine-mammals/cetaceans/baleen-whales/ – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Mutter und Kalb wandern nach einigen Wochen bis Monaten im Brutgebiet gemeinsam zum Futtergebiet; die Reise dauert Wochen (Alaska–Hawaiʻi, rund 4.800 km, in nur 28 Tagen möglich). Kälber bleiben bis zu einem Jahr bei der Mutter.",
-   "quelle": "https://www.fisheries.noaa.gov/species/humpback-whale (NOAA Fisheries); Oceanic Society (s. o.), abgerufen 2026-11-15"
+   "fakt": "Manche Buckelwale fangen Krill oder Fische mit einem Netz aus Luftblasen: Sie schwimmen im Kreis und blasen Luft aus, die Blasen halten verteilte Beute dicht zusammen (etwa siebenmal dichter), dann schwimmen sie mit offenem Maul nach oben; bei Fischen arbeiten mehrere Wale zusammen.",
+   "quelle": "NPR 2024, „Humpback whales make custom fishing nets out of bubbles“ (Szabo et al.): https://www.npr.org/2024/09/06/nx-s1-5087900/humpback-whales-krill-bubble-net-feeding; NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Krill (kleine Krebstiere) ist die wichtigste Nahrung der Buckelwale in der Antarktis; Buckelwale filtern Krill und kleine Fische aus dem Wasser.",
-   "quelle": "https://www.antarctica.gov.au/news/2018/hungry-humpbacks-stop-for-snacks-during-migration-south (Australian Antarctic Division); https://www.fisheries.noaa.gov/species/humpback-whale, abgerufen 2026-11-15"
+   "fakt": "Der Blauwal ist das größte Tier, das je gelebt hat, schwerer als die größten Dinosaurier; er wird meist rund 25 Meter lang und frisst vor allem Krill.",
+   "quelle": "Natural History Museum London, „Record breaker“: https://nhm.ac.uk/bluewhale/ocean/record-breaker; NOAA Fisheries, „Blue Whale“: https://www.fisheries.noaa.gov/species/blue-whale – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Buckelwal-Kälber kommen im warmen Meer zur Welt und sind bei der Geburt etwa 4 bis 5 Meter lang; Buckelwale der Südhalbkugel haben mehr Weiß, auch an den Brustflossen.",
+   "quelle": "Whale Trust Maui, „The life of a newborn humpback whale“: https://whaletrust.org/the-life-of-a-newborn-humpback-whale/; NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale; Great Barrier Reef Foundation, „Why do humpback whales migrate?“: https://www.barrierreef.org/news/explainers/why-do-humpback-whales-migrate – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Kälber trinken fast das ganze erste Jahr Milch; sie werden mit 6 bis 12 Monaten entwöhnt und fressen dann selbst Krill und kleine Fische.",
+   "quelle": "Oceanic Society, „Deep dive into the humpback whale's life cycle“: https://www.oceanicsociety.org/resources/ocean-facts/deep-dive-into-the-humpback-whales-life-cycle-and-role-in-ocean-health/; Whale Trust Maui, „The life of a newborn humpback whale“: https://whaletrust.org/the-life-of-a-newborn-humpback-whale/ – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Ein Kalb schwimmt oft direkt unter dem Kinn der Mutter oder unter ihrer Brustflosse; Mütter beschützen ihre Kälber und berühren sie oft mit den Brustflossen.",
+   "quelle": "Whale Trust Maui, „The life of a newborn humpback whale“: https://whaletrust.org/the-life-of-a-newborn-humpback-whale/; NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Die Brustflossen des Buckelwals sind sehr lang, bis zu einem Drittel der Körperlänge; sie gaben ihm seinen wissenschaftlichen Namen (Megaptera, „großer Flügel“).",
+   "quelle": "Center for Coastal Studies, „Baleen Whales“: https://coastalstudies.org/connect-learn/stellwagen-bank-national-marine-sanctuary/marine-mammals/cetaceans/baleen-whales/; NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Buckelwal-Milch ist sehr fett (bis 50–60 % Fett); ein Kalb kann bis zu 45 Kilogramm am Tag zunehmen.",
+   "quelle": "Oceanic Society, „Deep dive into the humpback whale's life cycle“: https://www.oceanicsociety.org/resources/ocean-facts/deep-dive-into-the-humpback-whales-life-cycle-and-role-in-ocean-health/ – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Kälber stupsen die Mutter an, wenn sie trinken wollen, und rufen sie mit leisen Brumm- und Quieklauten; leise Rufe werden von anderen Tieren schlechter gehört.",
+   "quelle": "Videsen et al. 2017, Functional Ecology, doi:10.1111/1365-2435.12871; https://www.sciencedaily.com/releases/2017/04/170426093314.htm – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Buckelwal-Mütter fressen im warmen Meer nicht und leben von ihrem Speck, aus dem sie auch die Milch bilden; sie können vier bis sechs Monate ohne Futter auskommen.",
+   "quelle": "Oceanic Society, „Deep dive into the humpback whale's life cycle“: https://www.oceanicsociety.org/resources/ocean-facts/deep-dive-into-the-humpback-whales-life-cycle-and-role-in-ocean-health/; Great Barrier Reef Foundation, „Why do humpback whales migrate?“: https://www.barrierreef.org/news/explainers/why-do-humpback-whales-migrate – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Ruht die Mutter in der Tiefe, steigt das Kalb alle paar Minuten allein auf, atmet drei- bis viermal und kreist über ihr; manchmal erreicht es ihre Tiefe nicht und treibt mit dem Schwanz voran wieder hoch.",
+   "quelle": "Whale Trust Maui, „The life of a newborn humpback whale“: https://whaletrust.org/the-life-of-a-newborn-humpback-whale/; Indeck, Noad & Dunlop 2022, Ecology and Evolution 12: e8604: https://pmc.ncbi.nlm.nih.gov/articles/PMC8826064/ – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Sind Mutter und Kalb getrennt, rufen beide öfter, aber nicht lauter.",
+   "quelle": "Indeck, Noad & Dunlop 2022, Ecology and Evolution 12: e8604: https://pmc.ncbi.nlm.nih.gov/articles/PMC8826064/ – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Kälber bleiben bis zu etwa einem Jahr bei der Mutter und ahmen sie nach, auch beim Springen.",
+   "quelle": "NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale; Whale Trust Maui, „The life of a newborn humpback whale“: https://whaletrust.org/the-life-of-a-newborn-humpback-whale/ – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Nur männliche Buckelwale singen den langen Gesang, vor allem im warmen Brutgebiet; ein Lied hat mehrere Teile in fester Reihenfolge, dauert etwa 10 bis 15 Minuten und wird oft stundenlang wiederholt; es ist viele Kilometer weit zu hören.",
+   "quelle": "Discovery of Sound in the Sea (University of Rhode Island): https://dosits.org/animals/use-of-sound/marine-mammal-communication/vocalizations-associated-with-reproduction; National Geographic, „Whales don't spray water from their blowholes, and other myths debunked“: https://www.nationalgeographic.com/animals/article/whales-dont-spray-water-from-their-blowholes-and-other-myths-debunked – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Die Männchen einer Meeresgegend singen ähnliche Lieder; die Lieder ändern sich langsam von Monat zu Monat und von Jahr zu Jahr; warum, ist nicht ganz geklärt.",
+   "quelle": "Discovery of Sound in the Sea (University of Rhode Island): https://dosits.org/animals/use-of-sound/marine-mammal-communication/vocalizations-associated-with-reproduction – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Zahnwale wie Delfine singen keine Lieder; sie nutzen Klicklaute zur Echoortung. Jeder Große Tümmler hat einen eigenen Pfiff, an dem er erkannt wird.",
+   "quelle": "National Geographic, „Whales don't spray water from their blowholes, and other myths debunked“: https://www.nationalgeographic.com/animals/article/whales-dont-spray-water-from-their-blowholes-and-other-myths-debunked; Discovery of Sound in the Sea, „Individual-specific vocalizations“: https://dosits.org/animals/use-of-sound/marine-mammal-communication/individual-specific-vocalizations/ – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Buckelwale der Ostküste Australiens wandern jedes Jahr zwischen dem Futtergebiet bei der Antarktis und dem warmen Meer am Great Barrier Reef, wo die Kälber zur Welt kommen; der direkte Weg ist 6.500 bis 8.000 Kilometer lang. Im kalten Meer gibt es im Sommer viel Krill; das warme, ruhige Meer gibt den Kälbern einen sicheren Ort zum Trinken und Wachsen.",
+   "quelle": "Great Barrier Reef Foundation, „Why do humpback whales migrate?“: https://www.barrierreef.org/news/explainers/why-do-humpback-whales-migrate – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Auf der Wanderung und im warmen Meer fressen Buckelwale selten; auf dem Weg nach Süden machen ostaustralische Buckelwale manchmal Halt zum Fressen. Vermutlich orientieren sie sich am Magnetfeld, an Strömungen und an der Wassertemperatur.",
+   "quelle": "Great Barrier Reef Foundation, „Why do humpback whales migrate?“: https://www.barrierreef.org/news/explainers/why-do-humpback-whales-migrate; Australian Antarctic Division 2018, „Hungry humpbacks stop for snacks“: https://www.antarctica.gov.au/news/2018/hungry-humpbacks-stop-for-snacks-during-migration-south – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Buckelwale springen oft aus dem Wasser und schlagen mit Brustflossen oder Fluke auf die Oberfläche.",
+   "quelle": "NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Die Unterseite der Fluke ist bei jedem Buckelwal anders, wie ein Fingerabdruck; Forschende erkennen einzelne Wale auf Fotos und verfolgen sie über Jahre.",
+   "quelle": "NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale; Klexikon, „Wale“: https://klexikon.zum.de/wiki/Wale – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Früher wurden Wale stark gejagt, vor allem wegen ihres Fetts (z. B. für Lampenöl und Seife); seit dem Moratorium (ab 1985/86, also seit rund 40 Jahren) ist der große Walfang fast überall verboten, einige Länder jagen weiter.",
+   "quelle": "Klexikon, „Wale“: https://klexikon.zum.de/wiki/Wale; WWF Deutschland, „Wale und Delfine“: https://www.wwf.de/themen-projekte/bedrohte-tier-und-pflanzenarten/wale-und-delfine; NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Die Buckelwale vor Ostaustralien haben sich seit dem Ende des Walfangs 1962 erholt; 2019 schätzte man rund 25.000 Tiere; Forschende sprechen von „im Wesentlichen erholt“.",
+   "quelle": "University of Queensland 2019, „Reaching peak whale“: https://news.uq.edu.au/2019-03-04-reaching-peak-whale – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Heute gefährden Fischernetze, Zusammenstöße mit Schiffen, Unterwasserlärm und Plastikmüll Wale; Schutzgebiete und Arbeit gegen Beifang helfen.",
+   "quelle": "WWF Deutschland, „Wale und Delfine“: https://www.wwf.de/themen-projekte/bedrohte-tier-und-pflanzenarten/wale-und-delfine; NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale; Klexikon, „Wale“: https://klexikon.zum.de/wiki/Wale – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Wale fressen oft in der Tiefe und geben ihren Kot nahe der Oberfläche ab; das düngt die winzigen Algen, die die Grundlage für Krill sind („Walpumpe“).",
+   "quelle": "Roman & McCarthy 2010, „The Whale Pump“, PLOS ONE 5(10): e13255: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013255; Oceanic Society, „Deep dive into the humpback whale's life cycle“: https://www.oceanicsociety.org/resources/ocean-facts/deep-dive-into-the-humpback-whales-life-cycle-and-role-in-ocean-health/ – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Wale beobachtet man mit Abstand, ohne sie zu bedrängen; Störung durch Boote belastet sie.",
+   "quelle": "NOAA Fisheries, „Humpback Whale“: https://www.fisheries.noaa.gov/species/humpback-whale – abgerufen 2026-11-16"
   }
  ],
- "seiten": [
+ "kapitel": [
   {
-   "text": "Im warmen Meer vor Australien schwimmt ein kleiner Buckelwal. Er heißt Ole und ist erst ein paar Tage alt. Ganz dicht bleibt er unter dem Kinn seiner Mutter.",
-   "bild": "bilder/01.webp"
+   "titel": "Eine Riesin, die Luft holt",
+   "seiten": [
+    {
+     "text": "Im warmen, hellblauen Meer vor Australien schwimmt ein Buckelwal. Forschende nennen sie Mira. Mira ist ungefähr so lang wie ein Linienbus. Sie ist so schwer wie viele Elefanten zusammen.\n\nTrotzdem gleitet sie ganz ruhig durchs Wasser. Ihr Rücken ist dunkelgrau, ihr Bauch ist weiß. An den Seiten trägt sie zwei riesige weiße Flossen. Mit ihnen lenkt sie wie mit Flügeln. Am Ende ihres Körpers sitzt eine breite Schwanzflosse. Mit ihr schiebt sich Mira voran. Gleich wirst du sehen, was Mira von allen Fischen unterscheidet.",
+     "bild": "bilder/01-01.webp"
+    },
+    {
+     "text": "Jetzt hebt sich Miras Kopf aus dem Wasser. Pffffh! Ein lautes Schnaufen ist zu hören. Über ihrem Kopf steigt eine helle, buschige Wolke in die Luft. Einen Moment lang steht sie über dem Meer. Dann weht der Wind sie weg, und Mira taucht wieder ab.\n\nDiese Wolke nennt man den Blas. Man sieht ihn von der Küste aus schon von weit her. Viele Menschen denken, der Wal spritzt dabei eine Fontäne aus Wasser in die Luft. Was glaubst du: Was kommt da aus Miras Kopf?",
+     "bild": "bilder/01-02.webp",
+     "frage": true
+    },
+    {
+     "text": "Es ist Miras Atem! Oben auf ihrem Kopf hat sie zwei Löcher nebeneinander. Das sind ihre Nasenlöcher, man nennt sie Blaslöcher. Beim Auftauchen pustet Mira die verbrauchte Luft kräftig hinaus. Ihr warmer Atem wird über dem Wasser zu einer Wolke. Ein paar Tropfen Meerwasser fliegen mit.\n\nDann holt sie tief Luft und taucht. Ein Fisch atmet unter Wasser mit Kiemen. Mira kann das nicht. Sie hat eine Lunge, genau wie du. Ihr Körper ist warm wie deiner, und Schuppen hat sie keine. Bald wirst du sehen: Ihr Kind trinkt Milch. Mira ist also kein Fisch, sondern ein Säugetier.",
+     "bild": "bilder/01-03.webp"
+    },
+    {
+     "text": "Schau dir einmal die Schwanzflosse eines Fisches an. Sie steht senkrecht, wie ein kleines Segel. Der Fisch schlägt sie hin und her, von links nach rechts. Bei Mira ist das anders. Ihre Schwanzflosse liegt waagrecht, flach wie eine Tischplatte. Man nennt sie Fluke.\n\nMira bewegt ihre Fluke auf und ab, auf und ab. So schwimmen alle Wale, die großen und die kleinen. Manchmal hebt Mira beim Abtauchen ihre Fluke hoch aus dem Wasser. Dann rinnen Tropfen an ihrem Rand herunter. Einen Augenblick später ist Mira in der Tiefe verschwunden.",
+     "bild": "bilder/01-04.webp"
+    },
+    {
+     "text": "Wenn du Mira ganz nah sehen könntest, würdest du staunen. Auf ihrem Kopf sitzen viele runde Knubbel, ungefähr so groß wie Golfbälle. In jedem Knubbel wächst ein einzelnes Haar. Ja, auch Wale haben Haare, nur sehr wenige. Wozu sie gut sind, wissen Forschende noch nicht genau.\n\nEin Fell hat Mira nicht. Warm hält sie etwas anderes. Unter ihrer glatten Haut liegt eine dicke Schicht aus Speck. Er umhüllt sie wie eine warme Decke. Darum friert Mira nicht, auch nicht im eiskalten Meer bei der Antarktis.",
+     "bild": "bilder/01-05.webp"
+    }
+   ]
   },
   {
-   "text": "Die Mutter berührt Ole sanft mit ihrer Flosse. Ihre Flossen sind riesig und lang. Weiß leuchten sie im blauen Wasser.",
-   "bild": "bilder/02.webp"
+   "titel": "Barten statt Zähne",
+   "seiten": [
+    {
+     "text": "Mira öffnet ihr Maul ganz weit. Zähne siehst du darin keine. Stattdessen hängen oben viele dünne Platten dicht an dicht. Sie sehen aus wie die Borsten eines riesigen Besens. Man nennt sie Barten. Sie sind aus demselben Stoff wie deine Fingernägel.\n\nWale mit Barten heißen Bartenwale. Andere Wale haben richtige Zähne, sie heißen Zahnwale. Dazu gehören der Pottwal und auch die Delfine. Ja, Delfine sind kleine Wale! Ein Bartenwal hat zwei Blaslöcher, ein Zahnwal nur eines. Daran kannst du sie auseinanderhalten.",
+     "bild": "bilder/02-01.webp"
+    },
+    {
+     "text": "Wozu braucht Mira so einen Besen im Maul? Ihr Futter ist winzig. Es heißt Krill. Krill sind kleine Krebse, ähnlich wie Garnelen. Die meisten sind ungefähr so lang wie dein kleiner Finger.\n\nKrill lebt vor allem im kalten Meer bei der Antarktis. Dort schwimmen unzählige Krebse zusammen in riesigen Schwärmen. Und was frisst der Krill? Winzige Algen, die im Sonnenlicht im Wasser schweben. Sie sind so klein, dass man jede einzelne nur unter dem Mikroskop sieht. So hängt alles zusammen: Die Algen ernähren den Krill, und der Krill ernährt den Wal.",
+     "bild": "bilder/02-02.webp"
+    },
+    {
+     "text": "Mira schwimmt mit weit offenem Maul mitten in einen Krillschwarm. Ein riesiger Schluck Wasser strömt hinein, mit sehr vielen Krebsen darin. Unter ihrem Kinn hat Mira lange Falten, die Kehlfurchen. Jetzt dehnen sie sich aus. Ihre Kehle wird rund und prall wie ein Ballon.\n\nDann schließt Mira das Maul. Mit der Zunge drückt sie das Wasser wieder hinaus, durch die Barten hindurch. Das Wasser fließt ab wie durch ein Sieb. Der Krill bleibt an den Barten hängen. Den schluckt Mira hinunter. So frisst ein Bartenwal viele winzige Tiere auf einmal.",
+     "bild": "bilder/02-03.webp"
+    },
+    {
+     "text": "Manchmal schwimmt das Futter weit verteilt im Wasser. Hier ein paar Krebse, dort ein paar Fische. Mit einem Schluck bekäme ein Wal dann nur wenig. Manche Buckelwale kennen dafür einen Trick. Forschende haben ihn mit Kameras unter Wasser beobachtet.\n\nDer Wal taucht unter das Futter. Dort schwimmt er langsam im Kreis. Dabei lässt er aus seinen Blaslöchern Luft heraus. Viele kleine Blasen steigen glitzernd nach oben. Der Kreis wird dabei immer enger. Was glaubst du: Wozu bläst der Wal unter Wasser Luft aus?",
+     "bild": "bilder/02-04.webp",
+     "frage": true
+    },
+    {
+     "text": "Die Luftblasen steigen auf und bilden einen Ring. Er ist wie eine Wand aus glitzerndem Schaum. Das Futter bleibt innerhalb der Blasen und drängt sich in der Mitte dicht zusammen. Forschende nennen das ein Blasennetz. Der Wal baut es sich selbst.\n\nJetzt schießt der Wal von unten mit offenem Maul durch die Mitte nach oben. Mit einem einzigen Schluck hat er nun viel mehr Futter. Bei Fischschwärmen arbeiten manchmal mehrere Buckelwale zusammen. Dann tauchen gleichzeitig viele riesige, offene Mäuler aus dem Wasser auf.",
+     "bild": "bilder/02-05.webp"
+    },
+    {
+     "text": "Mira ist riesig. Doch es gibt einen Wal, der noch viel größer ist: den Blauwal. Er ist das größte Tier, das je auf der Erde gelebt hat. Er ist sogar schwerer als die größten Dinosaurier. Ein großer Blauwal ist ungefähr so lang wie zwei Linienbusse hintereinander.\n\nUnd was frisst dieser Riese? Fast nur Krill, die kleinen Krebse, so lang wie dein Finger. An einem Tag schluckt er davon riesige Mengen. Auch der Blauwal hat Barten statt Zähnen. Das größte Tier der Welt lebt also von winzigen Krebsen.",
+     "bild": "bilder/02-06.webp"
+    }
+   ]
   },
   {
-   "text": "Pfff! Ole bläst oben seinen warmen Atem aus. Über dem Wasser wird daraus eine kleine Wolke. Schnell holt er frische Luft und taucht wieder ab.",
-   "bild": "bilder/03.webp"
+   "titel": "Ein Walkind wächst heran",
+   "seiten": [
+    {
+     "text": "Im warmen Meer am Great Barrier Reef bekommt Mira ein Kalb. So heißt ein Walkind. Es schlüpft nicht aus einem Ei, sondern kommt lebend zur Welt. Schon bei der Geburt ist es ungefähr so lang wie ein Auto. Seine Haut ist grau und glatt, seine Flossen sind weiß.\n\nDas Kalb bleibt ganz dicht bei seiner Mutter. Oft schwimmt es direkt unter ihrem Kinn. Das Wasser hier ist warm und ruhig. Für ein neugeborenes Kalb ist das wichtig. Es hat nämlich noch kaum Speck, der es wärmt.",
+     "bild": "bilder/03-01.webp"
+    },
+    {
+     "text": "Immer wieder berührt Mira ihr Kalb mit ihrer langen Brustflosse. Sanft streift sie seinen Rücken oder seine Seite. Forschende haben das bei Buckelwalen oft beobachtet. Die Mutter bleibt in der Nähe und beschützt ihr Kalb.\n\nDie Brustflossen eines Buckelwals sind riesig. Eine einzige Flosse kann ein Drittel so lang sein wie der ganze Wal. Daher kommt auch sein Name in der Wissenschaft: Megaptera. Das bedeutet „großer Flügel“. Und wirklich: Wenn Mira durchs Wasser gleitet, sieht es fast aus, als flöge sie.",
+     "bild": "bilder/03-02.webp"
+    },
+    {
+     "text": "Das Kalb stupst seine Mutter mit dem Kopf an. Dann trinkt es Milch an ihrem Bauch. Walmilch ist sehr fett, viel fetter als die Milch aus dem Supermarkt. Davon wächst das Kalb sehr schnell.\n\nAn manchen Tagen nimmt es so viel zu, wie ein großer Hund wiegt. Bald ist es rund und prall. Unter seiner Haut wächst nun auch eine Speckschicht. Die braucht es bald für eine lange Reise. Fast das ganze erste Jahr trinkt das Kalb Milch bei seiner Mutter. Erst danach frisst es selbst Krill.",
+     "bild": "bilder/03-03.webp"
+    },
+    {
+     "text": "Und Mira? Was frisst sie hier im warmen Meer? Gar nichts. Mira lebt von ihrem Speck. Den hat sie sich vorher im kalten Meer angefressen. Aus diesem Vorrat macht ihr Körper jetzt auch die fette Milch für ihr Kalb.\n\nViele Wochen geht das so. Das Kalb wird jeden Tag runder. Mira wird dabei langsam schlanker. Das ist bei Buckelwalen ganz normal. Ihr Körper ist dafür gemacht. Monatelang kann ein Buckelwal ohne Futter auskommen. Der dicke Speck ist für Mira wie ein gut gefüllter Vorratskeller.",
+     "bild": "bilder/03-04.webp"
+    },
+    {
+     "text": "Am Nachmittag ruht Mira. Sie sinkt tief hinab und bleibt dort lange ganz still. Ihr Kalb kann die Luft noch nicht so lange anhalten. Alle paar Minuten steigt es allein nach oben. Pfff! macht es an der Oberfläche. Es atmet drei- oder viermal.\n\nDabei schwimmt es kleine Kreise, genau über seiner Mutter. Dann taucht es wieder zu ihr hinab. Manchmal schafft es die Tiefe noch nicht. Dann treibt es wieder nach oben, mit dem Schwanz voran. Ein Kalb muss eben öfter atmen als eine große Walmutter. Ungefähr ein Jahr lang bleibt es bei ihr und lernt von ihr.",
+     "bild": "bilder/03-05.webp"
+    }
+   ]
   },
   {
-   "text": "Ole hat Hunger. Er stupst seine Mutter an. Dann trinkt er ihre Milch, dick und fett. Davon wird er jeden Tag ein Stück größer.",
-   "bild": "bilder/04.webp"
+   "titel": "Lieder und Rufe",
+   "seiten": [
+    {
+     "text": "Unter Wasser kann man nicht weit sehen. Schon nach einem Stück wird alles blau und verschwommen. Aber hören kann man sehr weit. Im Wasser trägt ein Klang viele Kilometer.\n\nDarum rufen Wale einander. Ruht Mira in der Tiefe, ruft ihr Kalb nach ihr. Es klingt wie ein leises Brummen und Quieken. Auch Mira ruft leise. Sind die beiden getrennt, rufen sie öfter, aber nicht lauter. Forschende sagen: Mutter und Kalb flüstern miteinander. Andere Tiere in der Nähe hören sie so kaum. Später steigt Mira zum Atmen auf, und die beiden schwimmen wieder Seite an Seite.",
+     "bild": "bilder/04-01.webp"
+    },
+    {
+     "text": "Eines Morgens ist das Meer voller Klänge. Ein tiefes Brummen, dann ein hohes Jaulen. Danach ein Knarren und ein langes Seufzen. Es klingt wie ein seltsames Lied. Das Lied ist viel lauter als die Rufe von Mira und ihrem Kalb.\n\nEs hört gar nicht mehr auf, Stunde um Stunde. Mira und ihr Kalb schwimmen ruhig weiter. Woher das Lied kommt, sieht man nicht. Was glaubst du: Wer singt da so lange – Mira, ihr Kalb oder jemand anderes?",
+     "bild": "bilder/04-02.webp",
+     "frage": true
+    },
+    {
+     "text": "Es ist ein Buckelwal-Männchen. Nur die Männchen singen solche langen Lieder. Mira singt nicht, und ihr Kalb auch nicht. Die Männchen singen vor allem hier im warmen Meer, wo die Kälber zur Welt kommen.\n\nEin Lied hat mehrere Teile, immer in derselben Reihenfolge. Einmal durchgesungen dauert es ungefähr zehn bis fünfzehn Minuten. Das ist ungefähr so lang wie eine Pause in der Schule. Dann fängt das Männchen wieder von vorn an. Manche singen so viele Stunden lang. Ihr Lied ist viele Kilometer weit zu hören.",
+     "bild": "bilder/04-03.webp"
+    },
+    {
+     "text": "Jetzt kommt etwas Erstaunliches. Alle Männchen in einer Meeresgegend singen ein ähnliches Lied. Und das Lied bleibt nicht gleich. Von Monat zu Monat ändert es sich ein bisschen. Nach einigen Jahren klingt es ganz anders als früher.\n\nWarum die Männchen singen, weiß man noch nicht ganz genau. Auch warum sich ihr Lied ändert, ist ein Rätsel. Forschende hören den Walen mit Mikrofonen unter Wasser zu. Sie nehmen die Lieder auf und vergleichen sie. Vielleicht hörst du auch einmal so eine Aufnahme. Dann weißt du, wer da singt.",
+     "bild": "bilder/04-04.webp"
+    },
+    {
+     "text": "Delfine sind Zahnwale. Lange Lieder wie die Buckelwale singen sie nicht. Sie pfeifen und klicken. Jeder Große Tümmler hat seinen eigenen Pfiff. Daran erkennen ihn die anderen, fast wie an einem Namen.\n\nDie Klicks kommen ganz schnell hintereinander: klick, klick, klick. Sie fliegen durchs Wasser und prallen an einem Fisch oder einem Felsen ab. Zurück kommt ein Echo. Am Echo hört der Delfin, wo etwas ist. Du kennst ein Echo vielleicht aus einem leeren Treppenhaus. Du rufst laut, und der Ruf kommt zurück.",
+     "bild": "bilder/04-05.webp"
+    }
+   ]
   },
   {
-   "text": "Die Mutter selbst frisst hier im warmen Meer nichts. Sie lebt von dem dicken Fett unter ihrer Haut. Ole wird runder, seine Mutter wird dünner.",
-   "bild": "bilder/05.webp"
+   "titel": "Die große Reise",
+   "seiten": [
+    {
+     "text": "Ein paar Monate sind vergangen. Das Kalb ist gewachsen und hat eine Speckschicht bekommen. Eines Tages schwimmt Mira los, immer weiter nach Süden. Ihr Kalb bleibt dicht an ihrer Seite. Sie schwimmen Tag und Nacht, Woche um Woche.\n\nMira hat seit Monaten fast nichts gefressen. Trotzdem schwimmt sie weiter und weiter, an der langen Küste Australiens vorbei. Was glaubst du: Warum macht Mira diese weite Reise?",
+     "bild": "bilder/05-01.webp",
+     "frage": true
+    },
+    {
+     "text": "Mira schwimmt zum Futter. Ganz im Süden liegt die Antarktis, ein Land aus Eis. Das Meer dort ist eiskalt. Aber in der hellen Jahreszeit wimmelt es dort von Krill. Viele Wochen lang frisst Mira nun jeden Tag. Ihr Speck wird wieder dick.\n\nWarum bekommen die Buckelwale ihre Kälber dann nicht gleich dort? Ein neugeborenes Kalb hat noch kaum Speck. Im warmen, ruhigen Meer kann es in Ruhe trinken und wachsen. Darum schwimmen die Wale jedes Jahr hin und her. Zum Fressen geht es ins kalte Meer, für die Kälber ins warme.",
+     "bild": "bilder/05-02.webp"
+    },
+    {
+     "text": "Die Reise ist sehr weit. Vom warmen Meer bis ins kalte Meer sind es viele tausend Kilometer. Stell dir vor, du fährst mit dem Auto, von morgens bis abends, viele Tage lang. So weit schwimmt Mira mit ihrem Kalb. Und im nächsten Jahr schwimmt sie den ganzen Weg zurück.\n\nUnterwegs frisst sie kaum. Nur manchmal hält sie an, wenn sie Futter findet. Wie finden die Wale ihren Weg durch das weite Meer? Forschende vermuten, dass sie das Magnetfeld der Erde spüren. Auch Strömungen und die Wärme des Wassers helfen ihnen wohl.",
+     "bild": "bilder/05-03.webp"
+    },
+    {
+     "text": "Platsch! Neben Mira schießt ihr Kalb aus dem Wasser. Fast sein ganzer Körper ist für einen Moment in der Luft. Dann fällt es mit einem lauten Klatschen zurück. Weißer Schaum spritzt hoch. Kurz danach springt auch Mira. Bei ihr ist das Klatschen noch viel lauter.\n\nBuckelwale springen oft. Sie schlagen auch mit der Brustflosse oder der Fluke aufs Wasser. Warum sie das tun, weiß man nicht genau. Das Kalb macht vieles nach, was seine Mutter tut. So lernt es auch das Springen. Von weit her sieht man dann die weißen Spritzer.",
+     "bild": "bilder/05-04.webp"
+    },
+    {
+     "text": "Bevor Mira tief abtaucht, hebt sie ihre Fluke hoch in die Luft. Jetzt sieht man die Unterseite. Sie ist weiß, mit einem schwarzen Rand und dunklen Flecken. Dieses Muster hat nur Mira. Jeder Buckelwal hat ein eigenes, so wie jeder Mensch einen eigenen Fingerabdruck hat.\n\nForschende fotografieren die Flukes und sammeln die Bilder. Taucht Mira im nächsten Jahr wieder auf, erkennen sie sie am Foto. So wissen sie, wo Mira schon überall war. Sie wissen auch, wann sie ein Kalb hatte. Deshalb hat Mira überhaupt einen Namen bekommen.",
+     "bild": "bilder/05-05.webp"
+    },
+    {
+     "text": "Nach vielen Wochen sind Mira und ihr Kalb im kalten Meer angekommen. Auf dem Wasser treiben weiße Eisschollen. In der Ferne glänzt eine Küste aus Eis. Die Luft ist kalt und klar.\n\nPfff! Das Kalb taucht auf und atmet. Über dem kalten Wasser steht seine kleine weiße Atemwolke. Es trinkt noch Milch bei seiner Mutter. Aber bald probiert es auch selbst den Krill. Mira frisst sich hier wieder rund. Wird es hier wieder dunkel und kalt, schwimmt sie zurück nach Norden ins warme Meer.",
+     "bild": "bilder/05-06.webp"
+    }
+   ]
   },
   {
-   "text": "Am Nachmittag sinkt die Mutter tief hinab. Dort unten ruht sie ganz still. Ole will zu ihr.",
-   "bild": "bilder/06.webp"
-  },
-  {
-   "text": "Ole taucht hinterher, so tief er kann. Doch seine Luft reicht nicht bis zu ihr. Plopp, treibt er wieder nach oben, den Schwanz voran.",
-   "bild": "bilder/07.webp"
-  },
-  {
-   "text": "Oben holt Ole drei, vier Mal Luft. Seine Mutter ruht weit unter ihm. Er schwimmt kleine Kreise über ihr.",
-   "bild": "bilder/08.webp"
-  },
-  {
-   "text": "Ole ruft leise: ein Brummen und ein Quieken. Einen Moment ist es still. Dann brummt es von unten zurück. Langsam steigt die Mutter zu ihm herauf.",
-   "bild": "bilder/09.webp"
-  },
-  {
-   "text": "Eines Morgens hört Ole einen langen, tiefen Gesang. Weit weg singt ein Buckelwal-Männchen, stundenlang. Das Wasser trägt sein Lied viele Kilometer weit.",
-   "bild": "bilder/10.webp"
-  },
-  {
-   "text": "Ein paar Wochen später schwimmt die Mutter los nach Süden. Ole bleibt dicht an ihrer Seite. Die Reise dauert viele Wochen, Tag und Nacht.",
-   "bild": "bilder/11.webp"
-  },
-  {
-   "text": "Die Mutter hat lange nichts gefressen. Sie schwimmt weiter und weiter, an ganz Australien vorbei. Was glaubst du: Warum schwimmt sie so weit?",
-   "bild": "bilder/12.webp",
-   "frage": true
-  },
-  {
-   "text": "Im kalten Meer bei der Antarktis wimmelt es von Krill. Winzige Krebse schwimmen dort in riesigen Schwärmen. Mit weit offenem Maul schluckt die Mutter Wasser und Krill. Sie frisst und frisst.",
-   "bild": "bilder/13.webp"
-  },
-  {
-   "text": "Ole trinkt noch Milch und bleibt dicht bei ihr. Er taucht mit ihr ein Stück hinab und wieder auf. Pfff! Über dem kalten Meer steht seine kleine Atemwolke.",
-   "bild": "bilder/14.webp"
+   "titel": "Wale und wir",
+   "seiten": [
+    {
+     "text": "Früher haben Menschen sehr viele Wale gejagt. Sie wollten vor allem ihr Fett. Daraus machten sie Öl für Lampen und Seife. Mit der Zeit wurden die Wale in vielen Meeren sehr selten. Auch Buckelwale gab es nur noch wenige.\n\nDa merkten die Menschen: So kann es nicht weitergehen. Viele Länder einigten sich auf ein Verbot. Seit ungefähr 40 Jahren ist der große Walfang fast überall auf der Welt verboten. Nur noch wenige Länder jagen heute Wale. Die Wale bekamen Zeit, sich zu erholen.",
+     "bild": "bilder/06-01.webp"
+    },
+    {
+     "text": "Und dann geschah etwas Schönes. Die Buckelwale kamen zurück. Vor der Küste von Ostaustralien gab es nach dem Walfang nur noch sehr wenige. Heute schwimmen dort wieder ungefähr 25.000 Buckelwale. Forschende sagen: Sie haben sich fast ganz erholt.\n\nJedes Jahr stehen nun viele Menschen an der Küste und schauen aufs Meer. Sie sehen den Blas aufsteigen und Flossen aufs Wasser klatschen. Manche zählen die Wale, die vorbeiziehen. Mira ist eine von ihnen. Wenn man Tiere in Ruhe lässt und schützt, können sie sich erholen.",
+     "bild": "bilder/06-02.webp"
+    },
+    {
+     "text": "Einfach haben es die Wale aber auch heute nicht. Auf ihrer Reise schwimmt Mira an Häfen vorbei. Dort fahren große Schiffe, und unter Wasser brummen ihre Motoren laut. Vor der Küste stehen Fischernetze, in denen sich manchmal ein Wal verfängt. Und im Meer treibt Plastikmüll.\n\nViele Menschen arbeiten daran, dass es besser wird. Es gibt Schutzgebiete, in denen Wale ungestört leben können. Fischer und Forschende suchen nach Netzen, in denen sich weniger Tiere verfangen. Und Plastik, das gar nicht erst ins Meer kommt, kann kein Tier verschlucken. Dabei kann jeder ein bisschen helfen.",
+     "bild": "bilder/06-03.webp"
+    },
+    {
+     "text": "Wale helfen sogar dem Meer. Das klingt erst einmal seltsam. Wale fressen oft in der Tiefe. Ihren Kot lassen sie aber meist oben an der Oberfläche. Dort wirkt er wie Dünger in einem Garten.\n\nVon diesem Dünger wachsen die winzigen Algen im Sonnenlicht besonders gut. Von den Algen lebt der Krill. Und vom Krill leben viele Tiere, auch die Wale selbst. Forschende nennen das die Walpumpe. Wo viele Wale leben, wachsen also mehr Algen. Ein Meer mit vielen Walen ist ein Meer voller Leben.",
+     "bild": "bilder/06-04.webp"
+    },
+    {
+     "text": "Vielleicht siehst du eines Tages selbst einen Wal. Von einer Küste aus oder von einem Boot. Dann hält man Abstand und ist leise. Die Wale sollen in Ruhe atmen, fressen und ihre Kälber versorgen können. Boote fahren deshalb nicht direkt auf Wale zu.\n\nUnd Mira? Sie schwimmt durch das kalte, klare Meer. Sie frisst Krill, und ihr Speck wird wieder dick. Neben ihr taucht ihr Kalb auf, schon ein ganzes Stück größer. Im nächsten Jahr zieht Mira wieder nach Norden. Vielleicht klingt dort bald wieder ein langes Lied durchs Wasser.",
+     "bild": "bilder/06-05.webp"
+    }
+   ]
   }
  ]
 }

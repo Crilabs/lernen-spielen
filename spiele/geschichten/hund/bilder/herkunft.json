@@ -1,5 +1,5 @@
 {
- "01.png": {
+ "01-01.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Bright, warm family hallway at the front door. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) sits attentively in front of the closed front door, looking up expectantly. A child's hand reaches up to take a dark green leash from a wall hook beside the door. Ida, a girl of about seven: only her hands, arms, legs and feet are visible, never her face or head; medium-brown skin; mustard-yellow jacket sleeves, blue jeans, white sneakers. Calm, cosy, no text anywhere.",
@@ -15,171 +15,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2117
-  }
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (01)"
  },
- "03.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) performs a classic play bow facing the camera: front legs stretched forward flat on the grass, chest pressed low to the ground, hindquarters and hind legs raised high, tail up and wagging, mouth relaxed and slightly open, ears soft. In the foreground at one side, a child's hand holds out a plain bright red rubber ball the size of a tennis ball, no print. Ida, a girl of about seven: only her hands, arms, legs and feet are visible, never her face or head; medium-brown skin; mustard-yellow jacket sleeves, blue jeans, white sneakers.",
-  "usage": {
-   "input_tokens": 404,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 404
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2160
-  }
- },
- "04.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) runs happily across the short grass away from the camera at an angle, floppy ears flying, all four legs anatomically correct in a gallop. Ahead of him, a plain bright red rubber ball the size of a tennis ball, no print is in the air, flying toward a patch of taller grass. Motion feels joyful and safe.",
-  "usage": {
-   "input_tokens": 353,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 353
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2109
-  }
- },
- "05.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight, a patch of taller grass. a plain bright red rubber ball the size of a tennis ball, no print lies clearly visible, still, nestled in the green grass in the foreground. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) trots past it a short distance behind, head raised, looking away into the distance, not noticing the ball. Calm, gently puzzling moment.",
-  "usage": {
-   "input_tokens": 351,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 351
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2107
-  }
- },
- "06.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Low camera close to the ground in a quiet green meadow in a park with a few trees in the background, bright overcast daylight. In the sharp foreground, a plain bright red rubber ball the size of a tennis ball, no print lies still in green grass. Just behind it, Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) stands very close to the ball but with head turned to the side, looking searchingly in another direction. The ball is clearly visible to the viewer.",
-  "usage": {
-   "input_tokens": 353,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 353
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2109
-  }
- },
- "07.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight, a patch of taller grass. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) stands in the taller grass, head raised high, looking around searchingly to the side, ears soft. No ball is visible anywhere in the picture. His nose is not near the ground.",
-  "usage": {
-   "input_tokens": 330,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 330
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2086
-  }
- },
- "08.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Close-up in a quiet green meadow in a park with a few trees in the background, bright overcast daylight. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) has his head low, his black nose right down just above the grass, sniffing intently, and a plain bright red rubber ball the size of a tennis ball, no print lies directly in front of his nose in the grass, about to be picked up. Focus on nose and ball.",
-  "usage": {
-   "input_tokens": 348,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 348
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2104
-  }
- },
- "09.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) lies relaxed on the grass on his belly after playing, panting with his mouth open and his pink tongue hanging far out, eyes soft and content. a plain bright red rubber ball the size of a tennis ball, no print lies next to his front paws. Calm, happy, tired.",
-  "usage": {
-   "input_tokens": 344,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 344
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2100
-  }
- },
- "10.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) drinks eagerly from a plain metal water bowl on the grass, lapping water, small droplets splashing, his tongue in the water. One adult hand holds a plain reusable water bottle without any label just above the bowl. Papa: only his hands, arms and legs are visible, never his face or head; medium-brown skin, a little darker than Ida's; grey jacket sleeves, dark trousers. Next to the bowl, a child's white sneakers with a few water droplets. Ida, a girl of about seven: only her hands, arms, legs and feet are visible, never her face or head; medium-brown skin; mustard-yellow jacket sleeves, blue jeans, white sneakers.",
-  "usage": {
-   "input_tokens": 424,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 424
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2180
-  }
- },
- "13.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight, a patch of taller grass. a plain bright blue rubber ball the size of a tennis ball, no print lies still, clearly visible in the green grass. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) runs straight toward it with determination, head and eyes fixed on the blue ball, ears bouncing, all four legs anatomically correct.",
-  "usage": {
-   "input_tokens": 343,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 343
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2099
-  }
- },
- "02.png": {
+ "02-01.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A sunny park path lined with trees. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) on a loose dark green leash stops beside a tree and sniffs the grass and fallen leaves with curiosity, head lowered. At the edge of the frame, the person with the dog is a child, shown only at the edge of the frame as a mustard-yellow jacket sleeve with a medium-brown-skinned hand, blue jeans and white sneakers; no face, no head, standing still and patiently holding the end of the leash. a quiet green meadow in a park with a few trees in the background, bright overcast daylight.",
@@ -195,45 +34,162 @@
     "text_tokens": 0
    },
    "total_tokens": 2136
-  }
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (02)"
  },
- "11.png": {
+ "02-04.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Bright, warm living room in the early evening with soft lamp light, still bright and cosy. In the background Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) sleeps curled up deeply in a round dog bed, eyes closed. In the foreground, an open hardcover picture book about dogs lies on the laps of a child and an adult sitting on a sofa; the open pages show only large photographs of dogs and coloured balls, no letters or readable text. Only hands and knees of the two people are visible. Ida, a girl of about seven: only her hands, arms, legs and feet are visible, never her face or head; medium-brown skin; mustard-yellow jacket sleeves, blue jeans, white sneakers. Papa: only his hands, arms and legs are visible, never his face or head; medium-brown skin, a little darker than Ida's; grey jacket sleeves, dark trousers. No text anywhere.",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Close-up in a quiet green meadow in a park with a few trees in the background, bright overcast daylight. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) has his head low, his black nose right down just above the grass, sniffing intently, and a plain bright red rubber ball the size of a tennis ball, no print lies directly in front of his nose in the grass, about to be picked up. Focus on nose and ball.",
   "usage": {
-   "input_tokens": 440,
+   "input_tokens": 348,
    "input_tokens_details": {
     "image_tokens": 0,
-    "text_tokens": 440
+    "text_tokens": 348
    },
    "output_tokens": 1756,
    "output_tokens_details": {
     "image_tokens": 1756,
     "text_tokens": 0
    },
-   "total_tokens": 2196
-  }
+   "total_tokens": 2104
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (08)"
  },
- "12.png": {
+ "03-02.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Bright, tidy room with a wooden floor. An open wooden toy chest full of colourful plush toys and toy blocks. A hand in a mustard-yellow sleeve (medium-brown skin) lifts a plain bright blue rubber ball the size of a tennis ball, no print out of the chest. Next to the chest, a dark green dog leash lies neatly coiled on the floor. Still-life feeling, no person visible except the hand and sleeve, no text anywhere.",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight, a patch of taller grass. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) stands in the taller grass, head raised high, looking around searchingly to the side, ears soft. No ball is visible anywhere in the picture. His nose is not near the ground.",
   "usage": {
-   "input_tokens": 263,
+   "input_tokens": 330,
    "input_tokens_details": {
     "image_tokens": 0,
-    "text_tokens": 263
+    "text_tokens": 330
    },
    "output_tokens": 1756,
    "output_tokens_details": {
     "image_tokens": 1756,
     "text_tokens": 0
    },
-   "total_tokens": 2019
-  }
+   "total_tokens": 2086
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (07)"
  },
- "14.png": {
+ "03-03.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Low camera close to the ground in a quiet green meadow in a park with a few trees in the background, bright overcast daylight. In the sharp foreground, a plain bright red rubber ball the size of a tennis ball, no print lies still in green grass. Just behind it, Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) stands very close to the ball but with head turned to the side, looking searchingly in another direction. The ball is clearly visible to the viewer.",
+  "usage": {
+   "input_tokens": 353,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 353
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2109
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (06)"
+ },
+ "03-04.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight, a patch of taller grass. a plain bright blue rubber ball the size of a tennis ball, no print lies still, clearly visible in the green grass. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) runs straight toward it with determination, head and eyes fixed on the blue ball, ears bouncing, all four legs anatomically correct.",
+  "usage": {
+   "input_tokens": 343,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 343
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2099
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (13)"
+ },
+ "03-05.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) lies relaxed on the grass on his belly after playing, panting with his mouth open and his pink tongue hanging far out, eyes soft and content. a plain bright red rubber ball the size of a tennis ball, no print lies next to his front paws. Calm, happy, tired.",
+  "usage": {
+   "input_tokens": 344,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 344
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2100
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (09)"
+ },
+ "03-06.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) drinks eagerly from a plain metal water bowl on the grass, lapping water, small droplets splashing, his tongue in the water. One adult hand holds a plain reusable water bottle without any label just above the bowl. Papa: only his hands, arms and legs are visible, never his face or head; medium-brown skin, a little darker than Ida's; grey jacket sleeves, dark trousers. Next to the bowl, a child's white sneakers with a few water droplets. Ida, a girl of about seven: only her hands, arms, legs and feet are visible, never her face or head; medium-brown skin; mustard-yellow jacket sleeves, blue jeans, white sneakers.",
+  "usage": {
+   "input_tokens": 424,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 424
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2180
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (10)"
+ },
+ "05-02.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) performs a classic play bow facing the camera: front legs stretched forward flat on the grass, chest pressed low to the ground, hindquarters and hind legs raised high, tail up and wagging, mouth relaxed and slightly open, ears soft. In the foreground at one side, a child's hand holds out a plain bright red rubber ball the size of a tennis ball, no print. Ida, a girl of about seven: only her hands, arms, legs and feet are visible, never her face or head; medium-brown skin; mustard-yellow jacket sleeves, blue jeans, white sneakers.",
+  "usage": {
+   "input_tokens": 404,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 404
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2160
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (03)"
+ },
+ "05-04.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. a quiet green meadow in a park with a few trees in the background, bright overcast daylight, a patch of taller grass. a plain bright red rubber ball the size of a tennis ball, no print lies clearly visible, still, nestled in the green grass in the foreground. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) trots past it a short distance behind, head raised, looking away into the distance, not noticing the ball. Calm, gently puzzling moment.",
+  "usage": {
+   "input_tokens": 351,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 351
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2107
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (05)"
+ },
+ "07-03.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A park path lined with trees in soft, warm late-afternoon light, still bright. Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) walks calmly on a loose dark green leash, carrying a plain bright blue rubber ball the size of a tennis ball, no print gently in his mouth, and sniffs the bark of a tree beside the path. At the edge of the frame, the person with the dog is a child, shown only at the edge of the frame as a mustard-yellow jacket sleeve with a medium-brown-skinned hand, blue jeans and white sneakers; no face, no head, walking slowly. Peaceful, calm ending.",
@@ -249,6 +205,476 @@
     "text_tokens": 0
    },
    "total_tokens": 2142
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (14)"
+ },
+ "07-05.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Bright, warm living room in the early evening with soft lamp light, still bright and cosy. In the background Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) sleeps curled up deeply in a round dog bed, eyes closed. In the foreground, an open hardcover picture book about dogs lies on the laps of a child and an adult sitting on a sofa; the open pages show only large photographs of dogs and coloured balls, no letters or readable text. Only hands and knees of the two people are visible. Ida, a girl of about seven: only her hands, arms, legs and feet are visible, never her face or head; medium-brown skin; mustard-yellow jacket sleeves, blue jeans, white sneakers. Papa: only his hands, arms and legs are visible, never his face or head; medium-brown skin, a little darker than Ida's; grey jacket sleeves, dark trousers. No text anywhere.",
+  "usage": {
+   "input_tokens": 440,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 440
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2196
+  },
+  "hinweis": "übernommen aus „Kalle und der rote Ball“ (11)"
+ },
+ "01-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A single adult grey wolf (Canis lupus; one animal, four legs, two upright ears, bushy tail) stands calmly at the edge of a sunny summer meadow in front of a forest, looking attentively to the side, mouth closed, relaxed. Wild, natural and peaceful. No other animals, no people.",
+  "usage": {
+   "input_tokens": 236,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 236
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1992
+  }
+ },
+ "01-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A sunny lawn. Three different dogs sit side by side, calm and relaxed, facing the camera: on the left a tiny short-haired fawn Chihuahua; in the middle the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail); on the right a very tall grey rough-coated Irish Wolfhound. The size difference is clearly visible. Each dog anatomically correct (four legs, two ears, one tail each). No people.",
+  "usage": {
+   "input_tokens": 341,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 341
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2097
+  }
+ },
+ "01-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A bright, cosy living room in the early evening, warm lamp light. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) lies relaxed on a rug and rests his chin on the socked foot of a child about seven years old (only hands, arms, legs and feet visible, never the face or head; medium-brown skin; mustard-yellow sleeves, blue jeans, white sneakers), who sits on the floor leaning against the sofa. Beside her on the sofa the legs of an adult man (only hands, arms and legs visible, never the face; medium-brown skin, slightly darker than the child's; grey jacket sleeves, dark trousers). No faces visible.",
+  "usage": {
+   "input_tokens": 393,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 393
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2149
+  }
+ },
+ "01-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Close-up portrait of the face of the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail). He looks up towards the camera and raises the inner corners of his eyebrows, the typical soft 'puppy dog eyes' look, eyes large and gentle, mouth closed. Bright indoor daylight, softly blurred background.",
+  "usage": {
+   "input_tokens": 317,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 317
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2073
+  }
+ },
+ "02-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Extreme close-up of the black, moist nose of the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail), with its two nostrils and the small slits at their sides, sniffing just above green grass and a few fallen leaves. Part of his reddish-brown muzzle and white chin visible; eyes out of focus at the top edge.",
+  "usage": {
+   "input_tokens": 326,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 326
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2082
+  }
+ },
+ "02-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A quiet green meadow in a park, bright overcast daylight, a patch of tall grass far in the background. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) sits attentively on short grass, looking ahead eagerly. The hand of an adult man (only hands, arms and legs visible, never the face; medium-brown skin, slightly darker than the child's; grey jacket sleeves, dark trousers) holds the dark green leash, clipped to his collar. Far in the background, small, the legs of a child about seven years old (only hands, arms, legs and feet visible, never the face or head; medium-brown skin; mustard-yellow sleeves, blue jeans, white sneakers) walk back from the tall grass. No ball visible anywhere.",
+  "usage": {
+   "input_tokens": 410,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 410
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2166
+  }
+ },
+ "02-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A snowy mountain meadow on a bright sunny day with blue sky. A black-and-tan German Shepherd dog in a plain red working harness (no text, no logo) sniffs with its nose on the snow surface, concentrating, scraping lightly with one front paw. In the background, small and seen from behind, a dog handler in a red winter jacket. Calm training scene: no person in the snow, nobody in danger.",
+  "usage": {
+   "input_tokens": 257,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 257
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2013
+  }
+ },
+ "03-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. View from above onto a soft muddy park path: a clear trail of fresh dog paw prints in the mud; each print shows four oval toe pads, one larger main pad and small claw marks in front of the toes. At the top edge of the frame the brown front paws (no white) of the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) stand in the mud, short dark claws visible.",
+  "usage": {
+   "input_tokens": 338,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 338
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2094
+  }
+ },
+ "04-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A cosy whelping box lined with soft clean blankets in a bright, warm room. A reddish-brown mixed-breed mother dog with a white chest lies relaxed on her side; six tiny newborn puppies, reddish-brown, some with white chests, lie snuggled against her belly and against each other, eyes closed, tiny ears folded. Calm, peaceful, warm daylight.",
+  "usage": {
+   "input_tokens": 249,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 249
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2005
+  }
+ },
+ "04-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A whelping box with soft blankets in a bright room. Several two-week-old reddish-brown puppies with small white chest marks, their eyes just open and still small, crawl clumsily and wobble over the blanket; one lifts its head. At the edge, the paw and flank of the relaxed mother dog.",
+  "usage": {
+   "input_tokens": 236,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 236
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1992
+  }
+ },
+ "04-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A sunny garden lawn. Five-week-old reddish-brown mixed-breed puppies with white chest marks play-wrestle gently: one rolls on its back with paws in the air, another nibbles playfully at its sibling's ear. Their relaxed mother dog lies close by and watches. All puppies healthy and unhurt.",
+  "usage": {
+   "input_tokens": 236,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 236
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1992
+  }
+ },
+ "04-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A bright room with a wooden floor. An eight-week-old reddish-brown puppy with a white blaze on the chest and a white tail tip sniffs curiously at the open hand of an adult resting low and calm on the floor (only hand and forearm visible, light skin, light blue sweater sleeve). The puppy's nose touches the fingers.",
+  "usage": {
+   "input_tokens": 241,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 241
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1997
+  }
+ },
+ "04-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A bright room with a wooden floor. A four-month-old puppy lies on the floor and chews a sturdy rope toy held between his front paws. The puppy: short smooth reddish-brown coat, a white blaze only on the chest and throat, NO white on the face, brown paws with no white at all, white tip on the tail, floppy slightly darker brown ears, small dark green collar. Nearby on the floor a pair of plain child's slippers, untouched.",
+  "usage": {
+   "input_tokens": 265,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 265
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2021
+  }
+ },
+ "05-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A sunny garden lawn. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) stands relaxed, body loose, mouth slightly open, soft and friendly face, tail hanging down loosely, looking calmly at the camera.",
+  "usage": {
+   "input_tokens": 299,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 299
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2055
+  }
+ },
+ "05-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A garden with a low white wooden picket fence. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) stands upright and alert just behind the fence, head held high, ears lifted at the base, his long tail held high and stiff with the white tip visible, looking at the path outside where, out of focus, another dog on a leash walks past. Mouth closed, not barking. No people's faces.",
+  "usage": {
+   "input_tokens": 340,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 340
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2096
+  }
+ },
+ "05-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A bright living room. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) lies in a round grey dog bed; he turns his head away to the side and briefly licks his nose with the tip of his tongue, eyes looking sideways. From the edge of the frame a child's hand (light skin with freckles, red sleeve) is being pulled back, not touching him.",
+  "usage": {
+   "input_tokens": 333,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 333
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2089
+  }
+ },
+ "05-06.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A bright living room. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) lies on a rug and chews a large natural chew bone between his front paws, relaxed and focused. In the background, several metres away, two children sit on a sofa: only their legs visible (one in blue jeans and white sneakers with medium-brown skin, one in red trousers with light skin). Peaceful.",
+  "usage": {
+   "input_tokens": 338,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 338
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2094
+  }
+ },
+ "06-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A park path in daylight. A black-and-white medium-sized spaniel mix on a leash stands relaxed and sniffs the back of a child's hand that is held low and calm; the child crouches sideways to the dog (only arm and knee visible, medium-brown skin, mustard-yellow sleeve, blue jeans). The dog's owner, a woman, is visible only as legs in beige trousers and one hand with dark brown skin holding the leash. No faces.",
+  "usage": {
+   "input_tokens": 263,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 263
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2019
+  }
+ },
+ "06-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A bright kitchen. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) eats from a stainless steel bowl on the floor, head lowered into the bowl. In the background, at a distance, the legs of a child about seven years old (only hands, arms, legs and feet visible, never the face or head; medium-brown skin; mustard-yellow sleeves, blue jeans, white sneakers) under a kitchen table, sitting calmly.",
+  "usage": {
+   "input_tokens": 345,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 345
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2101
+  }
+ },
+ "06-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A wide park path in daylight. On one side a child walks on the grass in a wide curve away from the path: only her legs visible, light skin, green trousers, red rubber boots. On the other side of the path a large calm brown dog on a leash sniffs the grass at the roadside, not looking at the child; its owner visible only as legs in dark trousers.",
+  "usage": {
+   "input_tokens": 250,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 250
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2006
+  }
+ },
+ "07-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A bright living room on a rainy day, raindrops on the window in the background. Three plain blue upside-down plastic cups stand on a rug. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) sniffs closely at one of the cups, his nose touching it. The hands of a child about seven years old (only hands, arms, legs and feet visible, never the face or head; medium-brown skin; mustard-yellow sleeves, blue jeans, white sneakers) rest on her knees nearby; behind on the sofa the legs of an adult man (only hands, arms and legs visible, never the face; medium-brown skin, slightly darker than the child's; grey jacket sleeves, dark trousers).",
+  "usage": {
+   "input_tokens": 401,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 401
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2157
+  }
+ },
+ "07-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A bright room with a wooden floor. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) sits neatly and looks up attentively; the open flat hand of a child about seven years old (only hands, arms, legs and feet visible, never the face or head; medium-brown skin; mustard-yellow sleeves, blue jeans, white sneakers) offers him one small brown dog treat on her palm.",
+  "usage": {
+   "input_tokens": 338,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 338
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2094
+  }
+ },
+ "07-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A bright, friendly veterinary practice. the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) stands calmly on an examination table with a rubber mat. A veterinarian, visible only as hands and forearms with light olive skin and light blue medical sleeves, listens to his chest with a stethoscope. Calm; no needles, no instruments other than the stethoscope.",
+  "usage": {
+   "input_tokens": 330,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 330
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2086
+  }
+ },
+ "06-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Close-up in a bright garden: a small hand with medium-brown skin in a mustard-yellow knitted sleeve gently strokes the white chest of the dog Kalle: a medium-sized adult mixed-breed dog (about knee height of an adult, slim athletic build), short smooth reddish-brown coat, a white blaze on the chest and throat, white tip on the long tail, brown paws without white, soft floppy ears that hang down and are slightly darker brown, warm amber-brown eyes, black nose, dark green fabric collar with no tag and no text (one dog, four legs, two ears, one tail) from the side. The dog sits relaxed and leans slightly into the hand, soft eyes, mouth slightly open. Only the hand and forearm of the person are visible.",
+  "usage": {
+   "input_tokens": 330,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 330
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2086
+  }
+ },
+ "06-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. A sunny park lawn, camera low at grass level. A friendly yellow Labrador retriever without a leash calmly sniffs the grass next to a pair of white sneakers and blue jeans hems standing still on the lawn (only shoes and ankles visible). The dog is relaxed, tail low and loose, mouth closed. Peaceful everyday park scene, trees softly blurred in the background.",
+  "usage": {
+   "input_tokens": 245,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 245
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2001
   }
  }
 }

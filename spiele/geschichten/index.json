@@ -17,36 +17,36 @@
     },
     {
       "id": "hund",
-      "titel": "Kalle und der rote Ball",
-      "art": "sachgeschichte",
+      "titel": "Kalle, ein Wolf in der Familie",
+      "art": "sachbuch",
       "welt": "haustiere",
       "familie": null
     },
     {
       "id": "biene",
-      "titel": "Lotta folgt dem Tanz",
-      "art": "sachgeschichte",
+      "titel": "Lotta und ihre summenden Schwestern",
+      "art": "sachbuch",
       "welt": "wiese-und-hecke",
       "familie": null
     },
     {
       "id": "wal",
-      "titel": "Ole taucht hinterher",
-      "art": "sachgeschichte",
+      "titel": "Mira, die Riesin im Meer",
+      "art": "sachbuch",
       "welt": "tiere-der-erdteile",
       "familie": null
     },
     {
       "id": "elefant",
-      "titel": "Nila und der große See",
-      "art": "sachgeschichte",
+      "titel": "Zuri und die Riesen der Savanne",
+      "art": "sachbuch",
       "welt": "tiere-der-erdteile",
       "familie": null
     },
     {
       "id": "dinosaurier",
-      "titel": "Selin malt einen Dinosaurier",
-      "art": "sachgeschichte",
+      "titel": "Was die Steine erzählen",
+      "art": "sachbuch",
       "welt": "dinosaurier",
       "familie": null
     }

@@ -1,173 +1,111 @@
-# Prüfung – Lotta folgt dem Tanz
+# Prüfung – Lotta und ihre summenden Schwestern (Sachbuch)
 
-Stand 2026-11-15: Recherche, Vorlesebuch-Fassung, Prüfer (§2), Bilder (§3). Fassung `ruhig`: `../biene-ruhig/`.
+Stand 2026-11-16. Ersetzt die Sachgeschichte „Lotta folgt dem Tanz“ (14 Abschnitte à 2–4 Sätze, nur Sammelflug und
+Tanz): Sie entstand vor den Regeln vom 15.11. abends und las sich laut Christian „wie für 3-Jährige“. Neu nach
+`docs/geschichten.md` §2a: erst Lerninhalte, dann Form, dann Text. Buch `biene` (Raum Tiere › Regal „Wiese und
+Garten“), Welt `wiese-und-hecke`, Klasse 1, Kulisse `garten`.
 
-Buch `biene` (Raum Tiere › Regal „Wiese und Garten“), Welt `wiese-und-hecke`, Klasse 1, Kulisse `garten`.
-Anregung aus `beurteilung.json` („Ein Tag auf der Wiese … wie jedes vorankommt“) bewusst nur teilweise übernommen: ein
-Tier statt vier, damit es eine Geschichte mit Hauptfigur wird; Fortbewegung (Fliegen, Heimweg finden) bleibt der Kern.
+## 1. Inhalte, Recherche und Form
 
-**Bogen:** Lotta fliegt zum ersten Mal hinaus und prägt sich ihr Zuhause ein → folgt einem Tanz und findet so die
-Löwenzahnwiese → sammelt → Wolken verdecken die Sonne (Komplikation, Stufe Sanft) → findet trotzdem heim (Lichtmuster,
-die Merkpunkte vom ersten Flug) → schläft → Frage: was macht sie jetzt? → sie tanzt selbst, andere folgen ihr. Das
-Wissen ist jeweils der Grund der Handlung (Tanz → Richtung und Weite, Duft → Wiese finden, UV-Mitte → Landeplatz,
-Merkpunkte und Himmelslicht → Heimweg, Geruch → Einlass).
+- Lerninhalte in `inhalte.md`: Maßstab LehrplanPLUS Bayern HSU 1/2 (Tiere aus Wiese oder Hecke: Merkmale, Ernährung;
+  Nutztiere; jahreszeitliche Veränderungen) und 3/4 (Entwicklung über Stadien, Abhängigkeiten), BMUV-Leitfragen für
+  die Grundschule (Wildbienen), Bienenkoffer „Deutschland summt“, Klexikon, Planet Wissen; Fachquellen Uni
+  Hohenheim, LAVES Celle, LWG Bayern, Umweltbundesamt; 24 Quellen, alle abgerufen 2026-11-16. **Honigbiene
+  (Kap. 1–5) und Wildbienen (Kap. 7) getrennt**, Sicherheit (Kap. 6) nennt jeweils, welche Biene gemeint ist.
+- **Verworfene Mythen** (Tabelle in `inhalte.md`): Bienen gelb-schwarz gestreift (Maja-Bild; Honigbienen sind braun),
+  jede Biene stirbt beim Stich (nur Honigbiene in elastischer Haut), Hummeln stechen nicht, „Bienensterben“ =
+  Honigbiene (bedroht sind Wildbienen), die Königin regiert, Bienen sehen Rot, Tanz in Metern, Honig ist Erbrochenes,
+  Winterschlaf, Insektenhotels allein retten Wildbienen, Drohnen sind faul, wegwedeln/-rennen, „nicht pusten“ (ohne
+  Fachquelle).
+- **Form: Sachbuch** (`art: "sachbuch"`), weil die Inhalte keine natürliche Handlung tragen: Körperbau, Volk,
+  Entwicklung, Arbeitsteilung, Tanz, Honig, Winter, Sicherheit und Wildbienen sind Querschnitte, kein Lebenslauf mit
+  Bogen. Eine Handlung (wie die alte Sammelflug-Geschichte) trüge nur einen Bruchteil davon. Lotta (eine Arbeiterin
+  aus Tante Defnes Kasten) ist das durchgehende Beispiel, Noa schaut zu (nur Hände, Arme, Beine im Bild); so bleibt
+  jede Tatsache eine kleine echte Szene.
+- **Umfang:** 7 Kapitel, 38 Seiten, 2.898 Wörter (64–102 je Seite, kein Satz über 15 Wörter), drei Fragen zum
+  Vorhersagen (1-4 Mohn, 4-3 Tanz, 5-4 Apfelblüte), jede auf der nächsten Seite aufgelöst. Kapitel: 1 Ein Insekt mit
+  Pelz (5) · 2 Ein Volk in der Wabe (6) · 3 Jeden Tag eine neue Aufgabe (5) · 4 Blüten, Tanz und Blütenstaub (5) ·
+  5 Honig, Äpfel und ein warmer Winter (6) · 6 Ruhig bleiben, wenn es summt (6) · 7 Die wilden Schwestern (5).
 
-**Behalten soll das Kind (Annahme):** (1) Bienen zeigen einander den Weg mit einem Wackeltanz. (2) Bienen sehen Farben,
-die wir nicht sehen, und finden so die Blütenmitte. (3) Die „gelben Kugeln“ an den Hinterbeinen sind gesammelter
-Blütenstaub – kann das Kind im Frühling an jeder Biene am Löwenzahn selbst sehen.
+## 2. Prüfer
 
-## 1. Recherche
+**Prüfer A** (frisch, nur Regeln und `inhalte.md`): solide und sauber getrennt. [muss] „nicht pusten“ ohne Quelle →
+gestrichen; „nur Hummeln leben in Völkern“ → „vor allem Hummeln“; Tod nach dem Stich widerspricht `grundsaetze.md`
+9.2 Nr. 8 → Entscheidung für Christian (siehe unten). [soll] umgesetzt: Hummeln/Kälte mit Quelle, „hinsehen, wohin
+man tritt“ statt Schuhpflicht, nach dem Stich ruhig weggehen, Imkerin mit Kasten, Rähmchen, Baumhöhle, Wachs für
+Kerzen, andere Bestäuber (Schwebfliegen, Käfer, Schmetterlinge), Sicherheit endet ruhig, **Kapitel Sicherheit vor
+Wildbienen** (das Buch endet mit dem, was das Kind tun kann), Mythen „gelb-schwarz gestreift“ und „Drohnen sind
+faul“. [kann] umgesetzt: Schwarm nach Kapitel 3, polarisiertes Himmelslicht gestrichen, Lebensdauer ohne „sterben“.
 
-Quellen (alle abgerufen 2026-11-15; je Tatsache in `quellen` der `geschichte.json`):
+**Prüfer B, Runde 1** (frisch, gegen `inhalte.md`): „staunenswert, genau, fast vollständig“; stärkste Stellen Mohn
+und UV, Tanz im Dunkeln, Wintertraube, Mauerbiene. [muss] umgesetzt: Grammatik „Wer den Kasten stört, gegen den
+wehren sich die Bienen“; unbelegte „drei Wochen“ beim ersten Ausflug gestrichen und Ausflug vor den Wachdienst
+gestellt; „Danach stirbt sie“ → „Nie wieder kann sie stechen“. [soll] umgesetzt: Kühlen der Brut, Notfallzeichen
+und Notfallset, Vermenschlichungen („will nicht stechen“, „wenn es wirklich nicht anders geht“), Widerspruch 4-3,
+„mehr Blüten als auf einer Wiese“ gestrichen, „kleiner als eine Ameise“ ersetzt, fehlende Belege in `quellen`.
+**Runde 2:** alle Punkte gelöst, nichts [muss]; die letzten [soll] (zwei `quellen`-Einträge ergänzt, „viele Male am
+Tag“, „Erdnuss“, „nachts wird gearbeitet“ gestrichen, „darf nicht gequetscht werden“, Hummel-Satz) und die [kann]
+(Wespe „glatt“, in 5-4 „eine Biene“ statt Lotta wegen der Jahreszeit, „Sie suchen Blüten, nicht uns“) umgesetzt →
+nach Aussage des Prüfers freigabereif. Zwei Runden.
 
-1. Universität Hohenheim, Landesanstalt für Bienenkunde: Rosenkranz, Skript „Nutztierethologie: Honigbienen“ –
-   Arbeitsteilung nach Alter (Sammelbiene meist ab ca. 2 Wochen, flexibel), Schwänzeltanz (Winkel zum Lot = Winkel
-   Sonne–Futter), Fühlerkontakt, Blütenduft, Nektargaben, Polarisationslicht bei bedecktem Himmel, Blütenstetigkeit,
-   Wächterbienen.
-2. LAVES Institut für Bienenkunde Celle: „Bienen können Farben unterscheiden“ (UV ja, Rot nein, Saftmale, Duft im
-   Pelz als Kennzeichen der Tracht), „Pollen – ein wichtiger Bestandteil der Bienenernährung“ (Pollenhöschen,
-   Blütenstetigkeit, Bienenbrot), „Bienenbiologie – eine Einführung“ (Tabelle Aufgaben: Sammelbiene ab ca. Tag 21).
-3. Bayerische Landesanstalt für Weinbau und Gartenbau, Fachzentrum Bienen: „Wir erforschen die Bienenanatomie“
-   (3 Teile, 2 Flügelpaare mit Häkchen, 3 Beinpaare, 2 Facetten- und 3 Punktaugen, Rüssel, Körbchen, Stachel mit
-   Widerhaken).
-4. Bayerische Akademie für Naturschutz (ANL), Aktion 8 „Ein Bienenvolk im Schulhof“: Orientierungsflug in kurzen
-   Bögen, Wächterbienen prüfen Ankommende, erfahrene Bienen fliegen gleich in die bekannte Richtung.
-5. R. Menzel (FU Berlin), „Was Bienen im Tanz mitteilen“, Schweizerische Bienen-Zeitung 08/2019; SRF Kids 2025:
-   je länger das Wackeln, desto weiter.
-6. Koski & Ashman 2014 (Functional Ecology): UV-Bullseye verbreitet, lockt Bienen; UV-Foto Löwenzahn (Kennard):
-   Blütenblätter UV-hell, Mitte UV-dunkel.
-7. Eban-Rothschild & Bloch 2008 (J. Exp. Biol.): Sammlerinnen schlafen nachts; Kaiser 1988 (über scienceabc):
-   Fühler sinken im Schlaf.
-8. Vincze et al. 2025 (Int. J. Biometeorology): Regen, Wind und Kälte behindern den Flug.
-9. Pollenfarbe Löwenzahn orange/rötlich-gelb: Wikipedia „Pollen source“ (nach Kirk, Colour Guide to Pollen Loads) –
-   schwächste Quelle, siehe Unsicherheiten.
-
-**Verworfen bzw. abgeschwächt:**
-
-- „Jede Biene stirbt, wenn sie sticht“ – nur beim Stich in elastische Haut (Mensch, Säugetier) bleiben die
-  Widerhaken hängen und der Stachelapparat reißt heraus; gegen Insekten mit Panzer kann sie mehrfach stechen (SRF
-  2026, LWG Anatomie). Die Geschichte kommt ohne Stich aus (Stufe Sanft; Wächterin prüft nur mit den Fühlern).
-- „Bienen sehen Rot“ – nein, Rot ist für das Bienenauge unsichtbar, UV dagegen sichtbar (LAVES). Deshalb kein roter
-  Mohn als Zielblume. Auch nicht: „Die Mitte sieht für Bienen dunkel aus“ – Bienen sehen dort eine *andere Farbe*
-  (UV fehlt), nicht Dunkelheit → Text: „hat für Bienen eine eigene Farbe“.
-- „Das Vorspiel vor dem Flugloch sind Jungbienen beim Orientierungsflug“ – laut neuerer Imkerliteratur besteht die
-  schwebende „Bienenwolke“ kaum aus Jungbienen. Text sagt nur, was die ANL belegt: kurze Bögen, Lage einprägen; kein
-  Begriff „Vorspiel“, kein „Kopf zum Stock“.
-- „Der Tanz gibt die Entfernung in Metern an“ – die Entfernungsangabe ist ungenau (Spektrum: über Wasser anders als
-  über Land) → nur „lange gewackelt – weit“.
-- „Neue Sammlerin fliegt per Tanz exakt zur Blüte“ – Nachfolgerinnen fliegen grob in die Richtung und suchen dann
-  am Duft (Hohenheim, LAVES) → S. 6 „Da riecht Lotta den Duft der Tänzerin“.
-- „Bienen arbeiten genau 21 Tage im Stock“ – Angaben schwanken (Hohenheim ca. 2 Wochen, ab 5 Tagen möglich; LAVES
-  ca. 21 Tage, „nur Anhalt“) → „Viele Tage lang“.
-- „Bienen verkriechen sich bei Regen unter Blättern“ – nur in Imker-Blogs belegt → nicht im Text; Lotta kommt vor
-  dem Regen heim.
-- Der Schwänzeltanz wird erst ab ca. 100 m getanzt (darunter Rundtanz) → Wiese „weit, weit über die Hecke“.
-
-**Offene Unsicherheiten:**
-
-- Pollenfarbe Löwenzahn „orange“ steht nur in einer Sekundärtabelle (Wikipedia nach Kirk); Imkerquellen nennen
-  Löwenzahn als Pollenquelle, aber keine Farbe. Für Fotos und Text plausibel (Löwenzahn-Pollen kräftig gelb-orange),
-  der Prüfer soll entscheiden, ob „orange“ bleibt oder „gelbe Kugeln“ sicherer ist. → entschieden: „gelb“ (§2).
-- „Fühler sinken im Schlaf“ (Kaiser 1988) nur populär belegt → gestrichen (§2).
-- Polarisationslicht: Hohenheim „bei bedecktem Himmel“; genauer braucht die Biene Flecken freien Himmels. Text sagt
-  „ein Lichtmuster, unsichtbar für uns“ – Bild deshalb mit Wolken *und* blauen Lücken.
-- Wächterin prüft am Geruch: ANL + Butler & Free 1952 (nur Katalogeintrag gelesen). Wächterinnen stehen nicht immer
-  am Flugloch – für eine Geschichte vertretbar.
-- Zeitablauf: S. 1 → S. 3 „ein paar Tage“ Orientierung, dann ein Sammeltag, Nacht, Morgen – realistisch. Löwenzahn,
-  Gänseblümchen und Apfelblüte blühen gleichzeitig im April/Mai.
-- Lotta ist auf Fotos nicht von anderen Bienen zu unterscheiden. Auf Seiten mit mehreren Bienen (3, 4, 11, 14) muss
-  der Bildaufbau sie zeigen (vorn, scharf, mittig) – Prüfer und Bildschritt entscheiden; kein Farbpunkt auf dem
-  Rücken (müsste erklärt werden, Imkereingriff).
-
-## 2. Urteil des frischen Prüfers (Zusammenfassung)
-
-- **Stark:** Bogen „Tanz lernen → selbst tanzen“; die Komplikation (Wolken) wird mit Wissen gelöst (Merkpunkte von S. 2,
-  Lichtmuster); Frage S. 13 sehr gut; Mythen sauber verworfen; Titel gut.
-- **Umgesetzt:**
-  1. S. 5 war zu abstrakt („gerade nach oben gelaufen → zur Sonne“) → „Der Tanz zeigt Lotta die Richtung: zur Sonne
-     hin. Und er zeigt: Es ist weit.“ Die Regel oben = Sonne steht nur in `quellen`.
-  2. S. 6 Lehrsatz („Die Mitte jeder Blüte hat für Bienen eine eigene Farbe“, „mehr als wir“) → aus Lottas Sicht:
-     „In der Mitte der Blüten leuchtet für Lotta ein Fleck. Menschen können seine Farbe nicht sehen.“ Allgemein
-     „der Blüten“, weil das UV-Muster beim Löwenzahn nur durch UV-Fotos belegt ist, nicht durch eine Studie.
-  3. Pollenfarbe: keine Pollenfarbtafel eines Bieneninstituts für Löwenzahn gefunden → „gelbe Kugeln“ (S. 8, 13),
-     im Steckbrief und in den Bildern ebenso gelb.
-  4. „Fühler sinken im Schlaf“ (nur populär belegt) gestrichen → „Lotta hält still und schläft.“
-  5. Fassung `ruhig` angelegt (`../biene-ruhig/`): S. 9–12 ohne Unsicherheit, Lotta ist vor dem Regen zu Hause.
-     `abenteuer` nicht nötig.
-
-## Steckbrief (für jeden Bild-Prompt wörtlich)
-
-**Lotta:** „a single Western honey bee worker (Apis mellifera carnica), photographed as a sharp macro photo; dark
-brown to black abdomen with narrow pale grey hair bands, no yellow rings; thorax covered in short light brown-grey fuzz;
-two large dark compound eyes; two elbowed dark antennae; exactly four transparent wings with fine dark veins (two on
-each side, a larger forewing over a smaller hindwing); exactly six legs, all attached to the thorax; the bee fills about
-one third of the frame“.
-
-**Pollenhöschen** (nur ab Seite 8 und auf 11–13; Seite 7 nur gelber Staub im Pelz): „one round bright yellow pollen
-load on the outer side of each hind leg (two in total)“. Seiten 1–6, 9–10 ohne Pollenhöschen; 11 mit; 12 beim
-Abstreifen; 13 mit; 14 ohne (abgestreift).
-
-**Orte (wörtlich gleich):**
-
-- Stock: „a light blue painted wooden beehive box with a narrow horizontal entrance slit and a small landing board,
-  standing on a low stand in a garden“.
-- Merkpunkte: „a green hedge behind the hive and a flowering apple tree with white-pink blossoms beside it“.
-- Wiese: „a spring meadow full of yellow dandelions (Taraxacum officinale) with a few white daisies, soft daylight“.
-- Im Stock: „honeycomb with hexagonal wax cells on a vertical comb, warm dim light as in an observation hive“.
-- Alle Bilder: Frühling, hell, ruhig, Hintergrund weich unscharf, keine Menschen, keine Schrift, kein Imker, kein
-  Stich, keine toten oder kranken Bienen, keine Wespen/Hornissen, keine Spinnen.
-
-**Körperbau prüfbar halten:** Bienen bevorzugt in Seitenansicht oder Schrägaufsicht, sitzend (Beine und Flügel zählbar);
-Flugbilder seitlich mit ganz leichter Flügelunschärfe, Biene nicht zu klein; auf Waben höchstens 3–5 Bienen deutlich,
-Lotta vorn; keine Schwärme in Nahaufnahme.
-
-## Geplante Kernaussage je Abschnitt (Bild)
-
-| Seite | Kernaussage des Bildes | Motiv (Körperbau prüfbar) |
-|---|---|---|
-| 01 | Lotta kommt zum ersten Mal ins Licht | Lotta sitzt seitlich auf dem Anflugbrett vor dem Flugloch des blauen Kastens, Sonnenlicht, ohne Pollen |
-| 02 | Kurzer Bogenflug vor dem eigenen Stock; Merkpunkte sichtbar | Lotta seitlich im Flug nah vor dem Flugloch; im weichen Hintergrund Hecke und Apfelbaum |
-| 03 | Eine Biene tanzt auf der Wabe (Wackellauf) | Wabe senkrecht, eine Tänzerin mittig, Hinterleib leicht unscharf vom Wackeln, 2–3 Bienen ringsum |
-| 04 | Lotta folgt der Tänzerin, Fühler berühren sie | zwei Bienen groß im Bild auf der Wabe: Lotta dicht hinter der Tänzerin, Fühler an ihrem Hinterleib |
-| 05 | Lotta fliegt weit, über die Hecke, zur Sonne hin | Lotta seitlich im Flug, unter/hinter ihr die Hecke, Sonne tief im Bildhintergrund (Gegenlicht weich) |
-| 06 | Unten liegt die gelbe Wiese; die Blütenmitte ist das Ziel | Lotta im Anflug knapp über einer Löwenzahnblüte, die Blüte groß und scharf, Wiese dahinter (kein UV-Falschfarbenbild – Annahme; sonst Text anpassen) |
-| 07 | Rüssel trinkt Nektar, Staub bleibt im Pelz | Makro seitlich: Lotta in der Blütenmitte, Rüssel sichtbar, gelber Pollen im Brustpelz |
-| 08 | Zwei gelbe Pollenkugeln an den Hinterbeinen; Gänseblümchen daneben bleiben unbesucht | Lotta seitlich auf Löwenzahn, beide Höschen gut sichtbar, Gänseblümchen unscharf daneben |
-| 09 | Dunkle Wolken verdecken die Sonne, Lotta fliegt los | Lotta klein bis mittel im Flug über der Wiese, Himmel mit dunklen Wolken, ruhig (kein Gewitter, kein Blitz) |
-| 10 | Blaue Himmelslücken – und die Merkpunkte sind wieder da | Lotta im Flug, vor ihr Hecke, Apfelbaum und blauer Kasten; Wolken mit blauen Lücken |
-| 11 | Wächterin prüft Lotta am Flugloch mit den Fühlern | zwei Bienen auf dem Anflugbrett, Fühler aneinander, Lotta mit gelben Höschen (ohne Tropfen, damit das Bild auch zur Fassung `ruhig` passt) |
-| 12 | Kugeln in die Zelle – dann Nachtruhe | Lotta am Rand einer Wabenzelle, in der gelber Pollen liegt; ruhig, gedämpftes Licht (eine Szene; der Schlaf steht im Text) |
-| 13 | Frage: Lotta kommt wieder mit Pollen heim (verrät den Tanz nicht) | Lotta landet im Morgenlicht auf dem Anflugbrett, gelbe Höschen, keine Wabe, kein Tanz |
-| 14 | Lotta tanzt, andere folgen ihr | wie 03/04: Lotta mittig auf der Wabe (ohne Höschen), Hinterleib leicht unscharf, 2–3 Bienen folgen mit Fühlern |
+**Offen für Christian:** Im Buch steht nicht, dass die Honigbiene nach dem Stich stirbt („Nie wieder kann sie
+stechen“), weil `grundsaetze.md` 9.2 Nr. 8 Tod als Sachthema erst ab etwa 10 vorsieht. Beide Prüfer halten den
+sachlichen Satz „Danach stirbt sie“ für vertretbar und eher beruhigend (erklärt, warum sie kaum sticht); er steht
+in `quellen` und `inhalte.md` und kann auf Wunsch in 6-4 zurück, dann mit Elternsatz nach 9.3.
 
 ## 3. Bilder
 
-Jedes Bild mit dem Read-Werkzeug angesehen. Maßstab: Kernaussage des Abschnitts, Körperbau (sechs Beine an der Brust,
-je Seite Vorder- über Hinterflügel, zwei geknickte Fühler, Carnica-Färbung ohne Wespenringe), Lotta auf Bildern mit
-mehreren Bienen vorn und scharf, Pollenhöschen nur an den Hinterbeinen und nur auf 08–13, hell, ruhig, keine Schrift.
-Steckbrief und Orte stehen wörtlich in jedem Prompt; 1024 × 1024 `--basis foto`, WebP `cwebp -q 82`; Prompts in
-`bilder/herkunft.json` (bei Neuversuchen der letzte).
+Je Seite die Kernaussage; jedes Bild mit dem Read-Werkzeug angesehen (Körperbau: drei Teile, sechs Beine, vier
+Flügel, zwei Fühler, soweit nicht verdeckt; keine Schrift; nichts vermenschlicht; kein Räuber neben Beute – die
+Wespe steht allein). Lottas Steckbrief wörtlich in jedem Prompt (Westliche Honigbiene, Carnica: dunkelbrauner
+Hinterleib mit schmalen hellgrauen Haarbinden, keine gelben Ringe, keine Wespe, hellbraun-grauer Pelz auf der Brust,
+genau vier Flügel, sechs Beine); Noa nur Hände, Arme, Beine (heller olivfarbener Hautton mit Sommersprossen,
+rostroter Ärmel), Tante Defne nur Hände und Unterarme (warmbraun, helles Imkerhemd). 1024 × 1024 `--basis foto`,
+WebP q 82; Prompts in `bilder/herkunft.json`. Zwei Prompts mit Kind wurden von der Moderation abgelehnt (05-03,
+06-01) und ohne „Kind“ neu formuliert.
 
-| Bild | Kernaussage | was stimmt | Versuche |
+| Seite | Kernaussage | Herkunft | geprüft |
 |---|---|---|---|
-| 01 | Lotta kommt zum ersten Mal hinaus ins Licht | steht auf dem Anflugbrett, das Flugloch hinter ihr, Kopf zum sonnigen Garten; ohne Pollen | 2 (Versuch 1 zeigte sie zum Flugloch hin, wirkte wie Heimkehr) |
-| 02 | kurzer Bogen vor dem eigenen Stock, Merkpunkte | fliegt nah vor dem blauen Kasten, dahinter Hecke und blühender Apfelbaum | 1 |
-| 03 | eine Biene tanzt auf der Wabe | Tänzerin mittig, Hinterleib vom Wackeln unscharf, drei Bienen ringsum | 1 |
-| 04 | Lotta folgt der Tänzerin, Fühler an ihr | zwei Bienen groß, Lottas Fühler am Hinterleib der Tänzerin | 1 |
-| 05 | Lotta fliegt über die Hecke zur Sonne hin | von hinten, fliegt auf die tiefe Sonne zu, unter ihr die Hecke | 2 (Versuch 1 flog von der Sonne weg) |
-| 06 | Wiese voller Löwenzahn, Anflug auf die Blütenmitte | Lotta knapp über einer großen Löwenzahnblüte, Wiese mit Gänseblümchen; Naturfarben, kein UV-Falschfarbenbild | 1 |
-| 07 | Rüssel trinkt Nektar, Staub im Pelz | Rüssel in den Blütchen, gelber Pollen im Brustpelz | 1 |
-| 08 | gelbe Pollenkugeln, Gänseblümchen bleiben unbesucht | Höschen am Hinterbein deutlich, Gänseblümchen daneben | 1 |
-| 09 | dunkle Wolken vor der Sonne, Lotta fliegt los | graue Wolkendecke, Lotta mit beiden Höschen über der Wiese; ruhig, kein Gewitter | 1 |
-| 10 | Wolken mit blauen Lücken, die Merkpunkte sind da | Lotta fliegt auf Hecke, Apfelbaum und blauen Kasten zu; blaue Lücken zwischen Wolken | 1 |
-| 11 | Wächterin prüft Lotta mit den Fühlern | zwei Bienen auf dem Anflugbrett, Fühler aneinander, Lotta mit Höschen vorn rechts; keine Tropfen (passt zu `ruhig`) | 1 |
-| 12 | Pollen in die Zelle | Lotta am Zellrand, Höschen nur an den Hinterbeinen, Zellen mit Pollen und Honig | 2 (Versuch 1: zweite Kugel schien am Mittelbein) |
-| 13 | Frage: Lotta kommt mit Pollen heim | landet im Morgenlicht auf dem Anflugbrett, beide Höschen; keine Wabe, kein Tanz | 1 |
-| 14 | Lotta tanzt, andere folgen | Lotta vorn rechts, scharf, Hinterleib unscharf vom Wackeln, drei Bienen tasten sie mit den Fühlern; ohne Höschen | 1 |
+| 1-1 | Körper unter der Lupe: drei Teile, Beine, Flügel | neu, 1 | Lupe mit Holzgriff, Biene auf Löwenzahn, Kinderhände und Arm (heller Hautton, rostroter Ärmel), kein Gesicht; kleines Höschen sichtbar |
+| 1-2 | Rüssel in der Blüte, Blütenstaub im Pelz | übernommen („Lotta folgt dem Tanz“ 07) | ✓ (Körperbau 2026-11-15 geprüft, heute erneut angesehen) |
+| 1-3 | fünf Augen: zwei Facettenaugen, drei Punktaugen | neu, 1 | drei Punktaugen im Dreieck deutlich, zwei Facettenaugen, zwei Fühler, vier Flügel; von vorn sind nur vier Beine zu sehen (Rest verdeckt) |
+| 1-4 | Mohnfeld mit Kornblumen, Lotta fliegt darüber (Frage) | neu, 1 | verrät die Antwort nicht; Biene braun mit Haarbinden, vier Flügel, sechs Beine |
+| 1-5 | fliegt auf die Mitte des Löwenzahns zu | übernommen („Lotta folgt dem Tanz“ 06) | ✓ (Körperbau 2026-11-15 geprüft, heute erneut angesehen) |
+| 2-1 | Imkerin hebt einen Rahmen voller Bienen aus dem blauen Kasten | neu, 2 (erster Lauf Ratenlimit, kein Bild) | Hände und Unterarme mit hellem Imkerhemd, kein Gesicht; Rahmen mit Wabe, verdeckeltem Honig oben; Kasten mit Rähmchen |
+| 2-2 | Königin mit langem Hinterleib, Arbeiterinnen im Kreis | neu, 1 | Hinterleib ragt weit über die Flügel, Hofstaat wendet sich ihr zu, kein Farbpunkt |
+| 2-3 | Bienen auf sechseckigen Wachszellen | übernommen („Lotta folgt dem Tanz“ 14) | ✓ (Körperbau 2026-11-15 geprüft, heute erneut angesehen) |
+| 2-4 | Eier und gekrümmte Larven in Zellen, Ammenbiene | neu, 1 | Eier stehen aufrecht am Zellboden, weiße C-förmige Larven, Biene am Zellrand; nicht eklig |
+| 2-5 | junge Biene nagt sich aus der verdeckelten Zelle | neu, 1 | heller flauschiger Kopf, zwei Fühler, Vorderbeine, Wachskrümel am Loch; verdeckelte Brutzellen |
+| 2-6 | große, nach unten hängende Königinnenzelle am Wabenrand | neu, 1 | genarbte Weiselzelle, Arbeiterinnen daran; Bienenstreifen etwas kräftig, aber braun-grau behaart, keine Wespenform |
+| 3-1 | Lotta putzt eine leere Zelle, Kopf in der Zelle | neu, 2 (erster Lauf Ratenlimit) | nur Hinterleib, Hinterbeine und Flügel ragen heraus (Rest in der Zelle verdeckt); Honigzellen daneben |
+| 3-2 | erster Ausflug: Orientierungsflug vor dem blauen Kasten | übernommen („Lotta folgt dem Tanz“ 02) | ✓ (Körperbau 2026-11-15 geprüft, heute erneut angesehen) |
+| 3-3 | Wächterin betastet ankommende Biene mit den Fühlern | übernommen („Lotta folgt dem Tanz“ 11) | ✓ (Körperbau 2026-11-15 geprüft, heute erneut angesehen) |
+| 3-4 | Abends kommen die Sammlerinnen heim | neu, 2 (erster Lauf Ratenlimit) | Abendlicht, Bienen mit Höschen landen am Flugloch; im Gegenlicht wirken die kleinen Bienen etwas gelblich, Körperform und Höschen eindeutig Honigbiene |
+| 3-5 | Schwarm als Traube am blühenden Apfelbaum | neu, 1 | ruhige, ovale Traube, einzelne Bienen fliegen, keine Menschen, hell |
+| 4-1 | Rüssel im Rotklee, Blütenstaub im Pelz | neu, 2 (erster Lauf abgebrochen) | Rüssel in einem Blütenröhrchen, Pollenkörnchen auf der Brust, keine Höschen; Beine teils verdeckt |
+| 4-2 | gelbe Höschen am Löwenzahn, Gänseblümchen daneben | übernommen („Lotta folgt dem Tanz“ 08) | ✓ (Körperbau 2026-11-15 geprüft, heute erneut angesehen) |
+| 4-3 | landet mit Höschen am Flugloch (Frage) | übernommen („Lotta folgt dem Tanz“ 13) | ✓ (Körperbau 2026-11-15 geprüft, heute erneut angesehen) |
+| 4-4 | Schwänzeltanz, Hinterleib verwischt | übernommen („Lotta folgt dem Tanz“ 03) | ✓ (Körperbau 2026-11-15 geprüft, heute erneut angesehen) |
+| 4-5 | Nachfolgerin berührt die Tänzerin mit den Fühlern | übernommen („Lotta folgt dem Tanz“ 04) | ✓ (Körperbau 2026-11-15 geprüft, heute erneut angesehen) |
+| 5-1 | zwei Bienen geben Nektar von Mund zu Mund weiter | neu, 1 | Tröpfchen zwischen den Mundwerkzeugen; Fühler kreuzen sich über den Köpfen (wirkt dicht, aber stimmig) |
+| 5-2 | Bienen fächeln über offenem Nektar, oben verdeckelte Honigzellen | neu, 1 | Flügel verwischt vom Fächeln, weiße Wachsdeckel oben, glänzender Nektar unten |
+| 5-3 | Honigernte: Honig fließt ins Glas, Wabe, Wachsdeckel, Bienenwachskerze | neu, 2 (erster Versuch mit Kinderhand von der Moderation abgelehnt; jetzt ohne Menschen) | keine Schrift, keine Marken; Löffel mit Honig auf dem Teller |
+| 5-4 | Biene in der Apfelblüte, Pollen im Pelz (Frage) | neu, 1 | zwischen den Staubblättern, Pollenkörner im Pelz; verrät den Apfel nicht |
+| 5-5 | aus der Blüte wurde ein Apfel, Noa pflückt | neu, 1 | Kinderarme mit Sommersprossen, rostroter Ärmel, kein Gesicht; reife Äpfel am Zweig |
+| 5-6 | Wintertraube im Kasten, Honigwaben am Rand | neu, 1 | dichte Kugel aus Bienen, verdeckelter Honig links und rechts, hell, keine Kälte-Dramatik |
+| 6-1 | Picknick: Biene auf Klee, Noas Hand ruht still | neu, 2 (erster Versuch Moderationssperre) | Biene sechs Beine, Picknickdecke, Apfelschnitze; Hand als ruhige Faust etwas plump gezeichnet, kein Gesicht |
+| 6-2 | Wespe an der Pflaume, Becher mit Strohhalm | neu, 1 | gelb-schwarz, glatt, Wespentaille, keine Biene im Bild (kein Räuber neben Beute); Strohhalm im Becher |
+| 6-3 | Klee mit Bienen, Abstand zum Bienenkasten | neu, 1 (Prompt nach Moderationssperre bei 06-01 ohne Kind) | leere Kindersandalen auf dem Weg neben Klee mit Bienen, seitlich vom Kasten, Flugbahn vor dem Flugloch frei; keine Menschen |
+| 6-4 | Stachelspitze am Hinterleib, ruhige Biene | neu, 1 | sechs Beine, vier Flügel, zwei Fühler, Stachelspitze als feiner Punkt; keine Haut, nicht bedrohlich |
+| 6-5 | Erwachsene kühlt die Stelle | neu, 1 | Erwachsenenhand (warmbraun) hält Kühlkissen im Tuch an Noas Arm (rostroter Ärmel), kein Gesicht, keine Wunde |
+| 6-6 | ganz nah: Biene mit Höschen auf Weißklee | neu, 2 (erster Versuch: Kinderhand und Arm verzerrt → verworfen, jetzt ohne Hand) | sechs Beine, vier Flügel, Rüssel in einer Einzelblüte, gelbe Höschen |
+| 7-1 | Hummel am Krokus, Raureif im Gras | neu, 1 | Erdhummel mit gelben Binden und weißem Hinterende, pelzig; Frost zeigt: früh im Jahr, kühl |
+| 7-2 | Sandbiene kommt aus ihrem Erdloch, Sandkrümel daneben | neu, 1 | kleine braune Wildbiene, Erdhaufen daneben; zweiter Fühler verdeckt, Loch etwas groß geraten |
+| 7-3 | Mauerbiene trägt Lehm in ein Loch der Gartenmauer | neu, 1 | rotbraun behaarter Hinterleib, schwarzer Kopf, Lehmklümpchen zwischen den Kiefern; Mörtelloch |
+| 7-4 | aufgeschnittener Stängel: Kammern mit Pollenvorrat und Ei, Lehmwände, Lehmdeckel | neu, 1 | Reihe von Kammern, je ein Ei auf gelbem Pollenkloß, Lehmpfropfen am Eingang; Text auf „Loch oder hohler Stängel“ angepasst |
+| 7-5 | blühender, ungemähter Streifen neben gemähtem Rasen, Totholz, offener Sand | neu, 1 (Prompt ohne „Kind“ nach Moderationssperre) | Kornblume, Wilde Möhre, Margerite, Flockenblume, Klee; Hummeln und Bienen; Noas Arm (rostroter Ärmel) berührt einen Stängel |
 
-17 Versuche für 14 Bilder (Fassung `ruhig`: 1 weiteres Bild, `../biene-ruhig/bilder/09.webp`, 1 Versuch). Kosten laut
-`node werkzeuge/kosten/bericht.mjs`: biene 1,10 €, biene-ruhig 0,06 € (`kosten.json`).
-
-## Nachtrag 2026-11-15
-
-Die Fassung `biene-ruhig` ist entfernt: Christian hat entschieden, dass es je Geschichte nur eine Fassung gibt und keine Stufen (`grundsaetze.md` 9.3). Kleine Schwierigkeiten halten Grundschulkinder aus.
+9 Bilder aus „Lotta folgt dem Tanz“ übernommen (umbenannt, Hinweis in `herkunft.json`), 29 neu (30 erzeugt: 06-06
+zweimal), 5 alte Bilder gelöscht (01, 05, 09, 10, 12: Seiten gibt es nicht mehr). Kosten in `kosten.json`: am
+2026-11-16 Bilder 1,93 € (30 Stück), Claude 21,57 € (Schreiber bis zur Bildprüfung und drei Prüferläufe), zusammen
+23,50 €; dazu die Einträge der alten Fassung vom 2026-11-15.

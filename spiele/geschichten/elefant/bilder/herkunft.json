@@ -1,59 +1,5 @@
 {
- "01.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: NILA stands under her MOTHER between the mother's front legs and suckles with the side of her mouth at the mother's teat (elephant teats are between the front legs); Nila's own little trunk hangs loosely to the side. Dry open forest, warm morning light. Side view, both elephants fully visible.",
-  "usage": {
-   "input_tokens": 556,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 556
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2312
-  }
- },
- "02.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: NILA in the foreground calmly holds the tip of her own trunk in her mouth (trunk-sucking, like a child sucking a thumb). Beside her the BIG SISTER wraps her trunk around a tuft of dry grass and pulls it up. Dry forest floor.",
-  "usage": {
-   "input_tokens": 546,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 546
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2302
-  }
- },
- "03.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: in the foreground a dried-up forest pool: an empty hollow of cracked, dry mud, no water at all. In the middle ground the small herd (MOTHER, AUNT, BIG SISTER and NILA) walks away along the edge of the hollow into the open forest.",
-  "usage": {
-   "input_tokens": 549,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 549
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2305
-  }
- },
- "04.png": {
+ "06-01.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: the small herd walks in a line through bright, hot open forest: AUNT in front, then NILA close between AUNT and MOTHER, BIG SISTER behind. The adults' ears are spread out from the head, fanning. Side view, all four elephants fully visible, sunlight.",
@@ -69,153 +15,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2308
-  }
+  },
+  "notiz": "übernommen aus „Nila und der große See“ (Bild 04), 2026-11-16"
  },
- "05.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: the MOTHER flings a cloud of reddish-brown dust with her trunk over her own back, dust falling on her back. NILA stands beside her with reddish dust on the top of her head, looking up. Midday, dappled shade of trees.",
-  "usage": {
-   "input_tokens": 546,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 546
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2302
-  }
- },
- "06.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: a dry, sandy streambed with a steep earth bank about as high as NILA. The MOTHER, AUNT and BIG SISTER already stand on top of the far bank. NILA stands at the foot of the bank with her front feet on the steep slope, her hind feet slid back onto the sand, trying to climb. She is not hurt, only making an effort. Bright afternoon light.",
-  "usage": {
-   "input_tokens": 574,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 574
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2330
-  }
- },
- "07.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: the same steep earth bank of a dry streambed. The AUNT stands directly behind NILA in the streambed and pushes Nila's rump upward with her trunk; NILA is just stepping over the top edge of the bank. The MOTHER stands on top of the bank and touches Nila's head gently with her trunk tip.",
-  "usage": {
-   "input_tokens": 560,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 560
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2316
-  }
- },
- "08.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: the wide, flat shore of the Kabini reservoir with fresh green grass and calm blue-grey water, forested hills behind. Many Asian elephants drink in the distance. In front, the MOTHER stands at the water's edge and lifts the tip of her trunk into her open mouth, squirting water into her mouth. NILA stands next to her.",
-  "usage": {
-   "input_tokens": 563,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 563
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2319
-  }
- },
- "09.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: NILA in focus stands at the water's edge with all four legs straight, standing upright, and lifts her short trunk halfway up; water drips and splashes out of the trunk tip back into the lake. Her face is wet. The MOTHER's legs are visible in the background. Nila is standing, not kneeling, not drinking.",
-  "usage": {
-   "input_tokens": 563,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 563
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2319
-  }
- },
- "10.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: close side view at the lakeshore. NILA kneels on both bent front knees at the water's edge, head lowered and stretched forward, her open mouth touching the water surface, drinking directly with her mouth. Her short trunk is lifted and curled upward out of the water, away from the water, so it clearly does not touch the water. The BIG SISTER stands close beside her on the shore.",
-  "usage": {
-   "input_tokens": 574,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 574
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2330
-  }
- },
- "11.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: NILA lies on her side in wet brown mud at the lakeshore, completely smeared with brown mud, relaxed, trunk curled. MOTHER and AUNT stand in the mud behind her, mud on their legs. Bright light.",
-  "usage": {
-   "input_tokens": 539,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 539
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2295
-  }
- },
- "12.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: early evening golden light over the lake, still bright. The MOTHER stands calmly with her mouth slightly open, rumbling. NILA stands still close against her mother's front leg, ears slightly spread, listening. Far away along the shore, another small group of elephants.",
-  "usage": {
-   "input_tokens": 546,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 546
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2302
-  }
- },
- "13.png": {
+ "06-02.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: last warm light of the day on the grassy lakeshore. NILA in the foreground firmly holds a tuft of fresh green grass curled in the tip of her trunk. The MOTHER grazes right beside her.",
@@ -231,6 +34,549 @@
     "text_tokens": 0
    },
    "total_tokens": 2290
+  },
+  "notiz": "übernommen aus „Nila und der große See“ (Bild 13), 2026-11-16"
+ },
+ "06-03.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: NILA in the foreground calmly holds the tip of her own trunk in her mouth (trunk-sucking, like a child sucking a thumb). Beside her the BIG SISTER wraps her trunk around a tuft of dry grass and pulls it up. Dry forest floor.",
+  "usage": {
+   "input_tokens": 546,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 546
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2302
+  },
+  "notiz": "übernommen aus „Nila und der große See“ (Bild 02), 2026-11-16"
+ },
+ "06-04.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Species: wild Asian elephants (Elephas maximus indicus), NOT African elephants: small, roughly rectangular ears with the top edge folded forward, domed forehead with two rounded bumps on top of the head, level or slightly arched back, trunk tip with a single finger-like lobe. None of the elephants has tusks (all are females). Skin grey to grey-brown, lightly dusted with reddish-brown earth. No harness, no chains, no blankets, no riders, no people, no fences. Characters (only those named in the scene appear): NILA, a female calf about five months old, about 1 metre at the shoulder, reaching just under her mother's belly, round body, short trunk, lots of soft fuzzy brown hair standing up on her head and back with a tuft on the crown, light grey skin with a pinkish tint behind the ears, no tusks. MOTHER: large adult cow about 2.5 m at the shoulder, dark grey skin with pale pink freckled depigmentation spots on the base of the trunk, the forehead and the ear edges, no tusks. AUNT: adult cow slightly smaller than the mother, uniformly dark grey with no pale spots, top edge of the ears strongly folded forward, no tusks. BIG SISTER: young cow about six years old, about 1.7 m at the shoulder, grey, a little hair on the head, no tusks. Setting: dry season in Nagarhole, southern India: open deciduous forest with pale tree trunks, dry brown leaves, reddish-brown earth. Scene: the MOTHER flings a cloud of reddish-brown dust with her trunk over her own back, dust falling on her back. NILA stands beside her with reddish dust on the top of her head, looking up. Midday, dappled shade of trees.",
+  "usage": {
+   "input_tokens": 546,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 546
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2302
+  },
+  "notiz": "übernommen aus „Nila und der große See“ (Bild 05), 2026-11-16"
+ },
+ "01-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: at a muddy waterhole ZURI lies rolling on her side in wet brown mud, her whole body covered in mud, relaxed, legs in the air a little. Behind her two adult elephants spray water over their own backs with their trunks. Bright day.",
+  "usage": {
+   "input_tokens": 487,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 487
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2243
+  }
+ },
+ "01-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: ZURI walks close beside her MOTHER through tall golden grass; Zuri's back reaches just under the mother's belly, showing the huge size difference. A few more family members walk behind them. Wide savanna and an acacia tree. Side view, both fully visible.",
+  "usage": {
+   "input_tokens": 491,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 491
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2247
+  }
+ },
+ "01-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: the MOTHER stands in the sun with both large Africa-shaped ears spread wide from her head, fanning. Sunlight shines through the thin back of one ear so a fine network of blood vessels is faintly visible. ZURI stands in the shade beside her front legs.",
+  "usage": {
+   "input_tokens": 491,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 491
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2247
+  }
+ },
+ "01-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: low close view at ground level of the MOTHER's huge round front foot stepping softly onto dusty ground; the broad, thick, cushioned sole is visible as the foot lifts slightly; ZURI's much smaller foot stands next to it. Only legs and feet in frame, soft dust, warm light.",
+  "usage": {
+   "input_tokens": 497,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 497
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2253
+  }
+ },
+ "02-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: at a waterhole the MOTHER stands at the water's edge; she has curled her trunk up and holds the trunk tip inside her open mouth, water spilling from the corner of her mouth as she squirts water into it. ZURI stands next to her in the shallow water. Clear water, blue sky.",
+  "usage": {
+   "input_tokens": 499,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 499
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2255
+  }
+ },
+ "02-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: at a waterhole two adult elephants spray fountains of water high over their own backs with their trunks, like a shower, droplets sparkling in the sun. ZURI stands in the very shallow water at the edge, splashing, water landing everywhere around her. Joyful but natural.",
+  "usage": {
+   "input_tokens": 492,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 492
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2248
+  }
+ },
+ "03-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: the whole family walks in a line across the open savanna: the GRANDMOTHER leads in front, then the MOTHER with ZURI close at her side, two aunts, two young cousins, and at the back a young male about twelve years old with short thick tusks. Side view, all elephants clearly visible, acacia trees, golden grass.",
+  "usage": {
+   "input_tokens": 509,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 509
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2265
+  }
+ },
+ "02-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: close-up of the MOTHER's trunk tip near the ground: its two finger-like tips pinch and lift a single small round fruit from the dry ground. Part of the mother's face, tusks and Zuri's legs in the background. No water in the picture.",
+  "usage": {
+   "input_tokens": 490,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 490
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2246
+  }
+ },
+ "03-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: two elephant families meet in the open savanna: elephants walk toward each other, several raise their trunks, ears flapping, in a joyful greeting. ZURI stands close to her MOTHER in the middle. Dust in warm light.",
+  "usage": {
+   "input_tokens": 483,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 483
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2239
+  }
+ },
+ "03-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: close view of two adult female elephants greeting: they stretch their trunks toward each other and touch, one trunk tip at the other's mouth. ZURI stands between their legs. Behind them the young male about twelve years old with short thick tusks.",
+  "usage": {
+   "input_tokens": 485,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 485
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2241
+  }
+ },
+ "03-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: dry season, yellow dry grass and dusty ground; at evening light the family led by the GRANDMOTHER arrives at a waterhole that is still full of water; the first adults dip their trunks in. ZURI walks beside her MOTHER. Bright warm evening light, calm, hopeful.",
+  "usage": {
+   "input_tokens": 494,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 494
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2250
+  }
+ },
+ "04-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: ZURI as a newborn calf only a few hours old, tiny, wobbly, standing on stiff unsteady legs between her MOTHER's front legs; the mother lowers her trunk gently toward the calf. Soft morning light, savanna. No blood, clean calf.",
+  "usage": {
+   "input_tokens": 491,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 491
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2247
+  }
+ },
+ "04-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: close side view at a waterhole: ZURI kneels on both bent front knees at the water's edge, head stretched forward and lowered, her open mouth touching the water surface, drinking directly with her mouth. Her short trunk is held to the side and curled up, away from the water, clearly not in the water. MOTHER beside her.",
+  "usage": {
+   "input_tokens": 507,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 507
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2263
+  }
+ },
+ "04-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: ZURI stands at the edge of a waterhole with all four legs straight, upright, and lifts her short trunk halfway up; water dribbles and drips out of her trunk tip back into the water. Her face is wet. The MOTHER's legs in the background. Zuri is standing, not kneeling.",
+  "usage": {
+   "input_tokens": 502,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 502
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2258
+  }
+ },
+ "04-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: ZURI stands under her MOTHER and suckles with her mouth at the mother's breast, which is between the mother's front legs; Zuri's short trunk is lifted back up over her own head out of the way. Side view, both fully visible.",
+  "usage": {
+   "input_tokens": 487,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 487
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2243
+  }
+ },
+ "05-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: in a wide dry sandy riverbed a small hole dug in the sand holds clear water. Two zebras drink from it and small birds sit at its edge. Far in the background the elephant family walks away. No predators, calm.",
+  "usage": {
+   "input_tokens": 483,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 483
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2239
+  }
+ },
+ "05-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: a wide dry sandy riverbed with no flowing water. The GRANDMOTHER digs with one front foot and her trunk in the sand; she has made a hole, and at the bottom of the hole the sand is dark and wet, a little clear water seeping in. The family waits nearby. Bright day.",
+  "usage": {
+   "input_tokens": 499,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 499
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2255
+  }
+ },
+ "05-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: the MOTHER wraps her trunk around a leafy branch of a bush and breaks it off, leaves in her mouth; ZURI nibbles at grass next to her. Green bush, acacia trees, bright day.",
+  "usage": {
+   "input_tokens": 480,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 480
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2236
+  }
+ },
+ "07-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: wide view: an elephant family walks along the edge of the savanna; in the distance, farmland with green maize fields and a few small houses. The elephants walk calmly. Bright day, no people visible.",
+  "usage": {
+   "input_tokens": 478,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 478
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2234
+  }
+ },
+ "05-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: on the dry savanna ground lies an old, dried elephant dung pile; several small fresh green seedlings sprout out of it. ZURI's legs and trunk tip are visible at the edge as she walks past. Close, natural, not disgusting, bright light.",
+  "usage": {
+   "input_tokens": 489,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 489
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2245
+  }
+ },
+ "05-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: late afternoon, warm golden light. ZURI lies asleep on her side in the sand under an acacia tree. Her MOTHER stands right beside her, resting, ears hanging relaxed, trunk hanging down. Other adults doze standing in the shade. Peaceful.",
+  "usage": {
+   "input_tokens": 489,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 489
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2245
+  }
+ },
+ "07-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: wide view of the edge of a small green maize field. Along the field runs a beehive fence: simple wooden box beehives HANG one after another from a long horizontal wire stretched between wooden posts, about knee-high above the ground, the hives swinging slightly. A few honeybees fly near one hive. One adult elephant (MOTHER) stands a few metres outside the fence with her back half turned, walking AWAY from the fence back into the open savanna; ZURI follows her. The elephants are outside the field, not inside, not touching the fence. No people, bright day.",
+  "usage": {
+   "input_tokens": 561,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 561
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2317
+  }
+ },
+ "07-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: in the savanna a ranger in a green uniform, seen only from behind at the edge of the frame (back, shoulders, arms holding binoculars, dark skin on the hands, short sleeves, no face visible), watches an elephant family grazing peacefully at a distance. Calm, bright.",
+  "usage": {
+   "input_tokens": 494,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 494
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2250
+  }
+ },
+ "07-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: evening, still bright golden light at a waterhole: the GRANDMOTHER and the MOTHER drink with their trunks; ZURI kneels on her front knees at the water's edge and drinks with her mouth, trunk to the side. The family stands close together, calm.",
+  "usage": {
+   "input_tokens": 492,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 492
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2248
+  }
+ },
+ "02-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: close view of the MOTHER's head: with her two ivory tusks and trunk she strips a strip of bark from a fallen acacia branch. ZURI stands beside her; Zuri has no visible tusks. Bright light, savanna background.",
+  "usage": {
+   "input_tokens": 487,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 487
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2243
+  }
+ },
+ "03-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: the GRANDMOTHER stands completely still in the open savanna with both ears spread wide out from her head, head raised, one front foot lifted slightly off the ground. Behind her the MOTHER and ZURI stand still. No other elephants visible anywhere. Bright day.",
+  "usage": {
+   "input_tokens": 490,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 490
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2246
+  }
+ },
+ "02-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: ZURI stands in short grass and lifts her short trunk high up into the air, curved like an S, the trunk tip open, sniffing the wind. Her MOTHER stands behind her. Close side view, calm.",
+  "usage": {
+   "input_tokens": 481,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 481
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2237
+  }
+ },
+ "04-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Animals: wild AFRICAN SAVANNA ELEPHANTS (Loxodonta africana) in Kenya, never Asian elephants: very large ears shaped like the outline of Africa, a concave dip in the middle of the back, two finger-like tips at the end of the trunk, wrinkled grey skin dusted with reddish-brown earth, four legs, one trunk, two ears each. ZURI: female calf about five months old, about 1 m at the shoulder, reaching just under her mother's belly, round body, short trunk, sparse fine hair on head and back, NO visible tusks, large ears. MOTHER: adult female, about 2.5 m at the shoulder, two slender, slightly curved, medium-length ivory tusks, a small V-shaped notch in the lower edge of her left ear. GRANDMOTHER (matriarch): the largest and oldest female, long curved tusks, the right tusk a little shorter with a blunt tip, ragged ear edges. Setting: Kenyan savanna, wide open grassland with scattered flat-topped acacia trees, bright warm daylight, calm. Natural elephant behaviour only, no human-like expressions, no smiling mouths, no standing on hind legs. No people, no vehicles, no fences, no collars unless the scene says so.\n\nScene: ZURI and another small calf push their heads against each other playfully in the dust. An aunt and an older female cousin (a young female about eight years old) stand close by, watching over them. The MOTHER grazes a bit further away.",
+  "usage": {
+   "input_tokens": 488,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 488
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2244
   }
  }
 }

@@ -1,5 +1,5 @@
 {
- "01.png": {
+ "01-01.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. SKELETON: a mounted fossil skeleton of Plateosaurus, about 7 metres long, standing on its two hind legs only, back horizontal, long slender neck reaching forward, small narrow skull about three times as long as high, very long tail held straight out behind, long strong hind legs, much shorter arms held beside the chest with grasping five-fingered hands, palms turned sideways toward each other (never flat on the ground), a large curved claw on each thumb; fossil bones in warm medium brown, on a low dark grey plinth in a bright, calm museum hall with pale walls and soft daylight. View: the whole skeleton from the side, filling the frame, in the bright museum hall. In the foreground at the bottom edge, small, two red sneakers and blue jeans legs of the child standing in front of the plinth, showing how big the skeleton is. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. A small information plaque on a stand is far to the side, blurred and seen at an angle, unreadable. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
@@ -15,45 +15,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2194
-  }
+  },
+  "hinweis": "übernommen aus „Selin malt einen Dinosaurier“ (01): ganzes Plateosaurus-Skelett, Selin sitzt davor"
  },
- "02.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Over-the-shoulder view without any head: the child's two hands hold an empty DRAWING PAD: a white A4 sketch pad with black spiral binding at the top,  and a pencil, the blank page facing the viewer; behind it, softly blurred, the brown bones of the skeleton. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. SKELETON: a mounted fossil skeleton of Plateosaurus, about 7 metres long, standing on its two hind legs only, back horizontal, long slender neck reaching forward, small narrow skull about three times as long as high, very long tail held straight out behind, long strong hind legs, much shorter arms held beside the chest with grasping five-fingered hands, palms turned sideways toward each other (never flat on the ground), a large curved claw on each thumb; fossil bones in warm medium brown, on a low dark grey plinth in a bright, calm museum hall with pale walls and soft daylight. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
-  "usage": {
-   "input_tokens": 421,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 421
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2177
-  }
- },
- "03.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. The child sits on a plain grey museum bench; only knees in blue jeans and hands visible. On the knees lies the sketch pad with a completely blank white page, a pencil resting on it, hands still. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. Softly blurred in the background: SKELETON: a mounted fossil skeleton of Plateosaurus, about 7 metres long, standing on its two hind legs only, back horizontal, long slender neck reaching forward, small narrow skull about three times as long as high, very long tail held straight out behind, long strong hind legs, much shorter arms held beside the chest with grasping five-fingered hands, palms turned sideways toward each other (never flat on the ground), a large curved claw on each thumb; fossil bones in warm medium brown, on a low dark grey plinth in a bright, calm museum hall with pale walls and soft daylight. Calm, slightly thoughtful mood, bright light. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
-  "usage": {
-   "input_tokens": 419,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 419
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2175
-  }
- },
- "04.png": {
+ "01-04.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. On a light wooden work table in a bright museum room: a grey archive box with foam padding, held at its sides by the researcher's hands. The child's two hands lift a fossil bone out of the box, holding it carefully with both hands as if it is heavy. FOSSIL BONE: a fossil limb bone of Plateosaurus about as long as a child's forearm, medium brown, stone-like surface. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. RESEARCHER: only hands and forearms visible, never a face or head; medium-brown skin; white lab coat sleeves over a dark green sweater cuff; short nails; no gloves. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
@@ -69,81 +34,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2115
-  }
+  },
+  "hinweis": "übernommen aus „Selin malt einen Dinosaurier“ (04): Selin hebt fossilen Knochen aus der Kiste"
  },
- "05.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Top-down view of a light wooden table. Left: DRAWING PAD: a white A4 sketch pad with black spiral binding at the top, lying on a light wooden table, with THE DRAWING (always the same drawing, same lines, same position on the page): a child's simple drawing in grey pencil of a long-necked dinosaur seen from the side, facing left, rounded body in the middle of the page, long neck curving up to the left, small oval head with a dot eye, long tail stretching to the right edge, wobbly childlike lines; in this drawing the dinosaur stands on FOUR legs like an elephant, two front legs and two hind legs, all touching a pencil ground line. Right next to the pad: FOSSIL HAND: a fossil Plateosaurus hand in medium brown stone, five fingers, the thumb with a large curved claw, second and third fingers with smaller claws, fourth and fifth fingers short and small, just placed there by the researcher's hand. The child's hand holds a pencil at the edge of the pad. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. RESEARCHER: only hands and forearms visible, never a face or head; medium-brown skin; white lab coat sleeves over a dark green sweater cuff; short nails; no gloves. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
-  "usage": {
-   "input_tokens": 490,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 490
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2246
-  }
- },
- "09.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Close-up on a light wooden table in a bright museum room: FOSSIL SKULL: a fossil Plateosaurus skull, small and narrow, three times as long as high, a row of many small, thick, leaf-shaped teeth with blunt serrations along both jaws, medium brown, seen from the side so the teeth are clearly visible. The researcher's index finger points at the leaf-shaped teeth. RESEARCHER: only hands and forearms visible, never a face or head; medium-brown skin; white lab coat sleeves over a dark green sweater cuff; short nails; no gloves. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
-  "usage": {
-   "input_tokens": 317,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 317
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2073
-  }
- },
- "10.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Top-down view of DRAWING PAD: a white A4 sketch pad with black spiral binding at the top, lying on a light wooden table, with THE DRAWING (always the same drawing, same lines, same position on the page): a child's simple drawing in grey pencil of a long-necked dinosaur seen from the side, facing left, rounded body in the middle of the page, long neck curving up to the left, small oval head with a dot eye, long tail stretching to the right edge, wobbly childlike lines; thin grey pencil outline only, the neck rising in a smooth arc to a small head near the top left corner of the page, a slim body in the middle, the tail tapering in a long thin line to the right, a straight pencil ground line under the feet. The dinosaur stands on two hind legs with short arms. A green grass strip under its feet has been rubbed out, only a faint green smear remains; instead, around the dinosaur, the child has drawn in coloured pencils: green ferns with curled fronds, upright jointed horsetail stems, and two small pointed conifer trees. No flowers, no grass. Green coloured pencils lie beside the pad. The child's hand holds a green pencil. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
-  "usage": {
-   "input_tokens": 489,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 489
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2245
-  }
- },
- "11.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Low view along the plinth of the skeleton in the bright museum hall: the child's legs in blue jeans and red sneakers take a big step along the plinth, walking from the head end toward the tail. Above, the long skeleton stretches across the frame. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. SKELETON: a mounted fossil skeleton of Plateosaurus, about 7 metres long, standing on its two hind legs only, back horizontal, long slender neck reaching forward, small narrow skull about three times as long as high, very long tail held straight out behind, long strong hind legs, much shorter arms held beside the chest with grasping five-fingered hands, palms turned sideways toward each other (never flat on the ground), a large curved claw on each thumb; fossil bones in warm medium brown, on a low dark grey plinth in a bright, calm museum hall with pale walls and soft daylight. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
-  "usage": {
-   "input_tokens": 413,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 413
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2169
-  }
- },
- "13.png": {
+ "01-06.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. MODEL: a life-size museum model of Plateosaurus in a museum diorama, standing on its two hind legs only, back horizontal, long neck, small head, long tail, long strong hind legs, much shorter arms with palms turned sideways toward each other (not flat, not touching the ground), large curved thumb claws, grey-brown scaly skin, no feathers, no spikes, calm posture, mouth closed, among ferns, horsetails and small conifer trees, no grass, no flowers; a visible low plinth edge and museum spotlights make clear it is a model in a museum. View: the whole model from the side in a bright museum hall, standing between plants on the diorama. In the foreground, small, the child's legs in blue jeans and red sneakers stand in front of the diorama. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
@@ -159,27 +53,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2159
-  }
+  },
+  "hinweis": "übernommen aus „Selin malt einen Dinosaurier“ (13): lebensgroßes Plateosaurus-Modell im Diorama"
  },
- "14.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. The child's two hands hold up DRAWING PAD: a white A4 sketch pad with black spiral binding at the top, , with THE DRAWING (always the same drawing, same lines, same position on the page): a child's simple drawing in grey pencil of a long-necked dinosaur seen from the side, facing left, rounded body in the middle of the page, long neck curving up to the left, small oval head with a dot eye, long tail stretching to the right edge, wobbly childlike lines; thin grey pencil outline only, the neck rising in a smooth arc to a small head near the top left corner of the page, a slim body in the middle, the tail tapering in a long thin line to the right, a straight pencil ground line under the feet. The drawing is now finished and coloured in with coloured pencils: the dinosaur on two hind legs with short arms, coloured reddish brown with pale cream stripes across its back and tail, among green ferns, horsetails and two small conifers. No writing on the page. Softly blurred in the background: MODEL: a life-size museum model of Plateosaurus in a museum diorama, standing on its two hind legs only, back horizontal, long neck, small head, long tail, long strong hind legs, much shorter arms with palms turned sideways toward each other (not flat, not touching the ground), large curved thumb claws, grey-brown scaly skin, no feathers, no spikes, calm posture, mouth closed, among ferns, horsetails and small conifer trees, no grass, no flowers; a visible low plinth edge and museum spotlights make clear it is a model in a museum. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces. Important: the coloured drawing must look clearly made by a seven-year-old child, with simple wobbly lines, uneven colouring with visible pencil strokes and white gaps, simple shapes, not a professional illustration. The museum model in the background is heavily blurred and plain grey-brown without any stripes, so its colour clearly differs from the child's drawing.",
-  "usage": {
-   "input_tokens": 649,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 649
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2405
-  }
- },
- "06.png": {
+ "03-02.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Close-up on a light wooden museum work table in soft daylight: FOSSIL HAND: a fossil Plateosaurus hand in medium brown stone, five fingers, the thumb with a large curved claw, second and third fingers with smaller claws, fourth and fifth fingers short and small, lying on its side edge on the tabletop, so that its palm faces sideways, not down; the five fingers point to the right, the big curved thumb claw is on top. Next to it, flat on the table, lies a simple paper cut-out outline of a child's hand, palm down, for comparison. No people in the picture. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
@@ -195,27 +72,29 @@
     "text_tokens": 0
    },
    "total_tokens": 2077
-  }
+  },
+  "hinweis": "übernommen aus „Selin malt einen Dinosaurier“ (06): fossile Plateosaurus-Hand neben Papierhand"
  },
- "07.png": {
+ "04-03.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Top-down view of DRAWING PAD: a white A4 sketch pad with black spiral binding at the top, lying on a light wooden table, with THE DRAWING (always the same drawing, same lines, same position on the page): a child's simple drawing in grey pencil of a long-necked dinosaur seen from the side, facing left, rounded body in the middle of the page, long neck curving up to the left, small oval head with a dot eye, long tail stretching to the right edge, wobbly childlike lines; thin grey pencil outline only, the neck rising in a smooth arc to a small head near the top left corner of the page, a slim body in the middle, the tail tapering in a long thin line to the right, a straight pencil ground line under the feet. Now the dinosaur stands only on its two hind legs; where the two front legs were, there are faint grey erasing smudges and little eraser crumbs; instead two short arms with small grasping hands are drawn at the chest. The child's hand holds a pink eraser on the page. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Low view along the plinth of the skeleton in the bright museum hall: the child's legs in blue jeans and red sneakers take a big step along the plinth, walking from the head end toward the tail. Above, the long skeleton stretches across the frame. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. SKELETON: a mounted fossil skeleton of Plateosaurus, about 7 metres long, standing on its two hind legs only, back horizontal, long slender neck reaching forward, small narrow skull about three times as long as high, very long tail held straight out behind, long strong hind legs, much shorter arms held beside the chest with grasping five-fingered hands, palms turned sideways toward each other (never flat on the ground), a large curved claw on each thumb; fossil bones in warm medium brown, on a low dark grey plinth in a bright, calm museum hall with pale walls and soft daylight. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
   "usage": {
-   "input_tokens": 460,
+   "input_tokens": 413,
    "input_tokens_details": {
     "image_tokens": 0,
-    "text_tokens": 460
+    "text_tokens": 413
    },
    "output_tokens": 1756,
    "output_tokens_details": {
     "image_tokens": 1756,
     "text_tokens": 0
    },
-   "total_tokens": 2216
-  }
+   "total_tokens": 2169
+  },
+  "hinweis": "übernommen aus „Selin malt einen Dinosaurier“ (11): Selin schreitet das Skelett ab"
  },
- "12.png": {
+ "04-05.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. View through a microscope eyepiece, a round bright circle of view filling most of the frame, showing BONE SECTION: a thin polished cross-section of a fossil bone, translucent honey brown, with fine dark concentric rings like tree rings; the rings are clearly countable, about thirteen. Dark soft vignette outside the circle only. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
@@ -231,24 +110,440 @@
     "text_tokens": 0
    },
    "total_tokens": 2020
-  }
+  },
+  "hinweis": "übernommen aus „Selin malt einen Dinosaurier“ (12): Knochenscheibe mit Jahresringen"
  },
- "08.png": {
+ "05-01.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Top-down view of DRAWING PAD: a white A4 sketch pad with black spiral binding at the top, lying on a light wooden table, with THE DRAWING (always the same drawing, same lines, same position on the page): a child's simple drawing in grey pencil of a long-necked dinosaur seen from the side, facing left, rounded body in the middle of the page, long neck curving up to the left, small oval head with a dot eye, long tail stretching to the right edge, wobbly childlike lines; thin grey pencil outline only, the neck rising in a smooth arc to a small head near the top left corner of the page, a slim body in the middle, the tail tapering in a long thin line to the right, a straight pencil ground line under the feet. The dinosaur stands on its two hind legs, two short arms with small hands at the chest, faint old erasing smudges where front legs once were. Below its feet only the plain pencil ground line, the rest of the page is white paper. A grey pencil lies on the table beside the pad. No people in the picture. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, subject centred. Close-up on a light wooden table in a bright museum room: FOSSIL SKULL: a fossil Plateosaurus skull, small and narrow, three times as long as high, a row of many small, thick, leaf-shaped teeth with blunt serrations along both jaws, medium brown, seen from the side so the teeth are clearly visible. The researcher's index finger points at the leaf-shaped teeth. RESEARCHER: only hands and forearms visible, never a face or head; medium-brown skin; white lab coat sleeves over a dark green sweater cuff; short nails; no gloves. No text, no letters, no numbers, no signs with writing, no labels anywhere in the image. No human faces.",
   "usage": {
-   "input_tokens": 429,
+   "input_tokens": 317,
    "input_tokens_details": {
     "image_tokens": 0,
-    "text_tokens": 429
+    "text_tokens": 317
    },
    "output_tokens": 1756,
    "output_tokens_details": {
     "image_tokens": 1756,
     "text_tokens": 0
    },
-   "total_tokens": 2185
+   "total_tokens": 2073
+  },
+  "hinweis": "übernommen aus „Selin malt einen Dinosaurier“ (09): Plateosaurus-Schädel mit Blattzähnen"
+ },
+ "01-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. A pale sandstone and mudstone rock face at a fossil excavation site, with clearly visible horizontal rock layers in different shades of beige, grey and reddish brown. In one layer near the centre, a large brown fossil dinosaur limb bone is partly exposed, still half embedded in the rock, its shape clearly visible. Small hand tools (a little chisel, a soft brush) lie on the rock ledge below. Bright sunny day, blue sky at the top edge. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 289,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 289
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2045
+  }
+ },
+ "01-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, close view of a dinosaur excavation in pale sandy rock under bright daylight. RESEARCHER: only hands and forearms visible, never a face or head; medium-brown skin; white lab coat sleeves over a dark green sweater cuff; short nails; no gloves. One hand carefully brushes sand from a brown fossil bone lying half exposed in the rock, the other hand holds a small metal chisel. Next to it on the ground lies a large fossil bone already wrapped in a white plaster jacket with burlap strips, like a cast on a broken leg. A small bucket and brushes nearby. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 311,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 311
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2067
+  }
+ },
+ "02-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. On a light wooden table in a bright room, a thin, small stack of about eight sheets of white paper. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. One child hand rests on the little stack. Behind the table, through a large window, high snow-capped Alpine mountain peaks under a clear blue sky, bright and calm. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 290,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 290
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2046
+  }
+ },
+ "02-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. Realistic landscape photograph reconstructing a Jurassic forest: tall conifer trees (araucaria-like and redwood-like), several ginkgo trees with fan-shaped leaves, dense green ferns and tall jointed horsetails covering the ground, a small clear stream, soft morning sunlight through light mist. Only green plants and brown earth: absolutely no flowers, no blossoms, no grass, no meadow, no animals, no people. Calm, bright and peaceful. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 284,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 284
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2040
+  }
+ },
+ "02-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, close view at the edge of a small stream in a German forest today: a cluster of green horsetail plants (Equisetum) with jointed, ribbed stems and whorls of thin green branches, ferns around them, no flowers. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. One child hand gently touches a horsetail stem, fingers on a joint. Bright daylight. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 301,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 301
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2057
+  }
+ },
+ "03-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, a glass display case in a bright, calm natural history museum hall with pale walls, daylight from tall windows, fossils on low dark grey plinths: inside lies a large flat dark grey stone slab with a complete fossil ichthyosaur, its body outline preserved as a dark shadow around the skeleton, shaped like a dolphin: long narrow snout with many small teeth, large round eye socket, four paddle-shaped flippers, a crescent-shaped tail fin and a triangular dorsal fin. Calm, well lit. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 299,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 299
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2055
+  }
+ },
+ "04-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, low viewpoint in a tall, historic natural history museum hall with a glass roof: a mounted fossil skeleton of Giraffatitan (Brachiosaurus brancai), a huge long-necked sauropod standing on four pillar-like legs, front legs longer than hind legs so the back slopes down to the tail, very long neck raised steeply upwards so the small head is very high up, relatively short tail. Brown fossil bones. At the bottom edge, very small, the red sneakers and jeans of a child standing in front of the plinth to show the enormous height. CHILD (Selin): only hands, forearms, legs or feet visible, never a face or head; light olive skin; sleeves of a mustard-yellow sweater; blue jeans; red sneakers. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 350,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 350
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2106
+  }
+ },
+ "04-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. Scientific life reconstruction in the style of a high-quality, realistic museum paleoart photograph: the animal is calm, standing or walking peacefully, mouth closed, bright daylight, no humans, no buildings, no other animals, no flowers, no grass meadow. A giant titanosaur sauropod (Patagotitan) walking slowly through an open forest of tall conifer trees on soft brown ground with ferns: four thick pillar-like legs directly under the body, very long neck held forward and slightly raised, small head, long tapering tail held off the ground, wide barrel-shaped body, grey-brown wrinkled scaly skin, no feathers. The whole animal visible from the side, its size shown by the trees around it.",
+  "usage": {
+   "input_tokens": 316,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 316
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2072
+  }
+ },
+ "04-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, close view of a fossil in a museum: a small, complete fossil skeleton of the dinosaur Compsognathus on a pale cream-yellow limestone slab (Solnhofen limestone), lying on its side with neck curved, small pointed skull, two slender hind legs with three-toed feet, two short arms, and a very long thin tail. Bones dark brown on the pale stone, every small bone visible. The slab lies on a dark grey museum plinth under soft light. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 292,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 292
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2048
+  }
+ },
+ "05-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. Scientific life reconstruction in the style of a high-quality, realistic museum paleoart photograph: the animal is calm, standing or walking peacefully, mouth closed, bright daylight, no humans, no buildings, no other animals, no flowers, no grass meadow. A Plateosaurus standing on its two hind legs at the edge of a forest of conifers and ferns, back horizontal, long slender neck stretched up and forward toward a conifer branch, small narrow head with mouth closed nibbling the needles, very long tail held straight out behind, short arms with grasping hands, palms facing inward toward each other (never flat), a large curved claw on each thumb, grey-brown scaly skin, no feathers. No flowers.",
+  "usage": {
+   "input_tokens": 314,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 314
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2070
+  }
+ },
+ "05-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. Scientific life reconstruction in the style of a high-quality, realistic museum paleoart photograph: the animal is calm, standing or walking peacefully, mouth closed, bright daylight, no humans, no buildings, no other animals, no flowers, no grass meadow. A Triceratops standing on four legs among green ferns, lowering its head to bite off fern fronds with its narrow, hooked horny beak at the front of its mouth: two long brow horns above the eyes, one short horn on the nose, a large solid bony frill behind the head, heavy body, short thick tail, grey-brown scaly skin. Calm, bright daylight.",
+  "usage": {
+   "input_tokens": 301,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 301
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2057
+  }
+ },
+ "05-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, in a bright, calm natural history museum hall with pale walls, daylight from tall windows, fossils on low dark grey plinths: a mounted Tyrannosaurus rex skeleton cast seen from the side, standing on two hind legs with its back held horizontal and the long tail stretched straight out behind, off the ground, large skull held up level, jaws closed, very short two-fingered arms. Calm, natural pose, not attacking. Warm brown bones. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 289,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 289
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2045
+  }
+ },
+ "06-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. Scientific life reconstruction in the style of a high-quality, realistic museum paleoart photograph: the animal is calm, standing or walking peacefully, mouth closed, bright daylight, no humans, no buildings, no other animals, no flowers, no grass meadow. A Velociraptor standing calmly on two legs in dry, sandy scrubland with a few low bushes: small animal only about the size of a turkey, body fully covered in brown and buff feathers, arms folded like small wings with long pennaceous feathers along the forearm, a fan of feathers on the long stiff tail, narrow long snout, mouth closed, three-toed feet with the second toe's large curved claw held raised off the ground.",
+  "usage": {
+   "input_tokens": 310,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 310
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2066
+  }
+ },
+ "06-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. Scientific life reconstruction in the style of a high-quality, realistic museum paleoart photograph: the animal is calm, standing or walking peacefully, mouth closed, bright daylight, no humans, no buildings, no other animals, no flowers, no grass meadow. A small Sinosauropteryx, about the size of a chicken, standing on two legs on the mossy bank of a lake with ferns: body covered in short, fuzzy, hair-like filament feathers, reddish-brown on the back, pale white underside, a very long tail with clear alternating rufous-brown and white rings along its whole length, short arms, small head with mouth closed.",
+  "usage": {
+   "input_tokens": 302,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 302
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2058
+  }
+ },
+ "06-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. Scientific life reconstruction in the style of a high-quality, realistic museum paleoart photograph: the animal is calm, standing or walking peacefully, mouth closed, bright daylight, no humans, no buildings, no other animals, no flowers, no grass meadow. A Citipati, an emu-sized feathered oviraptorid dinosaur, sitting calmly on its ground nest in a sandy desert with low dunes: a ring of elongated blue-grey eggs arranged in a circle in the nest, the animal sitting in the middle with its long feathered arms spread wide over the rim of the nest like a brooding bird, short toothless parrot-like beak, tall rounded crest on the head, body covered in brown and grey feathers.",
+  "usage": {
+   "input_tokens": 314,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 314
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2070
+  }
+ },
+ "06-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, close view in a museum: a fossil of Archaeopteryx on a pale cream limestone slab: a magpie-sized skeleton with both wings spread, clear impressions of long flight feathers fanning out from the arms, a long bony tail with a row of feathers on each side, three clawed fingers on each hand, small skull with tiny teeth, legs with clawed feet. Soft museum light, slab on a dark grey plinth. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 285,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 285
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2041
+  }
+ },
+ "06-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. A male Eurasian blackbird (Turdus merula), glossy black plumage, bright yellow-orange beak and yellow eye ring, standing on a green garden lawn in morning sunlight, seen from the side so its scaly legs and clawed toes are visible. Calm, natural. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 254,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 254
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2010
+  }
+ },
+ "01-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, outdoor fossil site on a flat, pale grey rock slab in sunlight: a straight row of four large three-toed dinosaur footprints pressed into the stone, each print about 40 centimetres long with three blunt toes, clearly visible as a trackway leading diagonally into the distance. In the lower corner, small for scale, a small geologist's rock hammer lies beside the first footprint. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 274,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 274
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2030
+  }
+ },
+ "02-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition. A mounted fossil skeleton of Stegosaurus in a bright, calm natural history museum hall with pale walls, daylight from tall windows, fossils on low dark grey plinths: four legs, short front legs and long hind legs, small low head, two rows of large flat diamond-shaped bony plates standing upright along the back, four long spikes at the end of the tail, back arched. Seen from the side, whole skeleton visible, warm brown fossil bones. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 290,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 290
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2046
+  }
+ },
+ "03-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, in a bright, calm natural history museum hall with pale walls, daylight from tall windows, fossils on low dark grey plinths, two skeletons side by side on a low plinth, seen from the front so the leg posture is clearly visible: on the left a modern crocodile skeleton, low to the ground, its legs sprawling out sideways from the body with bent elbows and knees; on the right a small two-legged theropod dinosaur skeleton about the same length, its two hind legs standing straight down directly under the body like pillars, body held high, long tail. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 313,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 313
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2069
+  }
+ },
+ "03-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, looking up in a bright, calm natural history museum hall with pale walls, daylight from tall windows, fossils on low dark grey plinths: a large pterosaur skeleton (Pteranodon-like) hangs from the ceiling on thin wires, wings spread wide, each wing supported by one very long fourth finger, a thin translucent reconstructed wing membrane stretched between that long finger and the body and hind legs, long pointed toothless beak and a backward crest on the head, small body. No feathers. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 298,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 298
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2054
+  }
+ },
+ "03-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, a museum display in a bright, calm natural history museum hall with pale walls, daylight from tall windows, fossils on low dark grey plinths: a fossil dinosaur nest, a block of reddish sandstone with about ten round fossil eggs, each about the size of a large grapefruit, arranged in a cluster, eggshells grey-brown and slightly cracked, all closed. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 270,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 270
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2026
+  }
+ },
+ "05-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square composition, close view on a light wooden table in a bright museum education room: a fossil coprolite lies on a soft grey cloth next to a large round magnifying glass, a brown-grey lumpy, sausage-shaped stone about the length of a hand, with a slightly rough, mineral surface, clearly a stone. Background softly blurred museum shelves with fossils. No people. No text, no letters, no numbers, no labels, no signs with writing anywhere in the image. No human faces.",
+  "usage": {
+   "input_tokens": 266,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 266
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2022
   }
  }
 }

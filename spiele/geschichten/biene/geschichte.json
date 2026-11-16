@@ -1,126 +1,351 @@
 {
  "id": "biene",
- "titel": "Lotta folgt dem Tanz",
- "art": "sachgeschichte",
+ "titel": "Lotta und ihre summenden Schwestern",
+ "art": "sachbuch",
  "welt": "wiese-und-hecke",
  "familie": null,
  "kulisse": "garten",
  "klasse": 1,
  "quellen": [
   {
-   "fakt": "Junge Arbeiterinnen arbeiten zuerst im Stock (Zellen putzen, Larven füttern, Waben bauen) und werden erst nach etwa zwei bis drei Wochen Sammelbienen; der Zeitpunkt ist flexibel.",
-   "quelle": "https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf (Landesanstalt für Bienenkunde, Universität Hohenheim, Abschnitte 3.3 und 4.1); https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf (LAVES Institut für Bienenkunde Celle, Tabelle „Aufgaben einer Arbeiterin“), abgerufen 2026-11-15"
+   "fakt": "Honigbienen sind Insekten mit drei Körperteilen (Kopf, Brust, Hinterleib), sechs Beinen und vier Flügeln an der Brust; Vorder- und Hinterflügel werden mit einer Häkchenreihe verbunden.",
+   "quelle": "Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene; LWG Bayern, Fachzentrum Bienen, „Wir erforschen die Bienenanatomie“: https://www.lwg.bayern.de/mam/cms06/bienen/dateien/wir_erforschen_die_bienenanatomie_.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Junge Bienen fliegen beim Orientierungsflug auf und in einem kurzen Bogen zurück, um sich die Lage des Fluglochs einzuprägen; erfahrene Sammelbienen fliegen rasch in die bekannte Richtung der Futterquelle.",
-   "quelle": "https://www.anl.bayern.de/projekte/tierelive/doc/08_bienen_a8.pdf (Bayerische Akademie für Naturschutz und Landschaftspflege, Aktion 8, Beobachtungstipps), abgerufen 2026-11-15"
+   "fakt": "Honigbienen sind dunkelbraun, behaart und etwa eineinhalb Zentimeter lang; Blütenstaub bleibt im Haarkleid hängen.",
+   "quelle": "Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene; LWG Bayern, Fachzentrum Bienen, „Wir erforschen die Bienenanatomie“: https://www.lwg.bayern.de/mam/cms06/bienen/dateien/wir_erforschen_die_bienenanatomie_.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Mit dem Schwänzeltanz zeigen Sammelbienen Richtung und Entfernung einer Futterquelle: Auf der senkrechten Wabe im dunklen Stock entspricht der Winkel des Schwänzellaufs zur Senkrechten dem Winkel zwischen Sonne und Futterquelle (gerade nach oben = zur Sonne hin); je länger der Schwänzellauf, desto weiter weg.",
-   "quelle": "https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf (Abschnitt 4.2); https://www.bcp.fu-berlin.de/biologie/arbeitsgruppen/neurobiologie/ag_menzel/Res/Was-Bienen-im-Tanz-mitteilen---Randolf-Menzel---SBZ-08-2019.pdf (R. Menzel, FU Berlin); https://www.srf.ch/kids/eltern/weltbienentag-bienen-zeigen-mit-tanz-moves-ihren-gefaehrtinnen-den-weg, abgerufen 2026-11-15"
+   "fakt": "Bienen tasten und riechen mit den Fühlern und lernen Düfte sehr schnell; mit dem Rüssel nehmen sie Nektar auf.",
+   "quelle": "LAVES Institut für Bienenkunde Celle, „Bienen können Farben unterscheiden“: https://www.laves.niedersachsen.de/download/40998/Bienen_koennen_Farben_unterscheiden.pdf; LWG Bayern, Fachzentrum Bienen, „Wir erforschen die Bienenanatomie“: https://www.lwg.bayern.de/mam/cms06/bienen/dateien/wir_erforschen_die_bienenanatomie_.pdf; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Bienen folgen der Tänzerin mit Fühlerkontakt; dabei helfen der Blütenduft im Pelz der Tänzerin und kleine Nektargaben. Den Duft lernen Bienen besonders schnell.",
-   "quelle": "https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf (Abschnitt 4.2); https://www.laves.niedersachsen.de/download/40998/Bienen_koennen_Farben_unterscheiden.pdf (Bieneninstitut Celle informiert 13), abgerufen 2026-11-15"
+   "fakt": "Bienen haben zwei Facettenaugen aus vielen sechseckigen Einzelaugen und drei Punktaugen auf der Stirn, mit denen sie Helligkeit unterscheiden.",
+   "quelle": "LWG Bayern, Fachzentrum Bienen, „Wir erforschen die Bienenanatomie“: https://www.lwg.bayern.de/mam/cms06/bienen/dateien/wir_erforschen_die_bienenanatomie_.pdf; lernhelfer Schülerlexikon, „Honigbiene“: https://www.lernhelfer.de/schuelerlexikon/biologie-abitur/artikel/honigbiene – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Bienen sehen ultraviolettes Licht, Rot dagegen nicht. Viele Blüten haben in der Mitte ein für Menschen unsichtbares UV-Feld (Saftmal, „Bullseye“); für Bienen hat die Blütenmitte dadurch eine andere Farbe als die Blütenblätter. Für Löwenzahn nur durch UV-Fotos belegt, nicht durch eine Studie.",
-   "quelle": "https://www.laves.niedersachsen.de/download/40998/Bienen_koennen_Farben_unterscheiden.pdf (Dustmann & Geffcken, Bieneninstitut Celle); Koski & Ashman 2014, Functional Ecology 28: 868–877 (https://ui.adsabs.harvard.edu/abs/2014FuEco..28..868K); UV-Aufnahme Löwenzahn: https://www.davidkennardphotography.com/photos/3814-Common-Dandelion-Taraxacum-officinale-flowers-in-ultraviolet.xhtml, abgerufen 2026-11-15"
+   "fakt": "Bienen sehen ultraviolettes Licht, aber kein Rot; roter Mohn erscheint ihnen „UV-farbig“; viele Blüten haben in der Mitte ein für uns unsichtbares UV-Saftmal.",
+   "quelle": "LAVES Institut für Bienenkunde Celle, „Bienen können Farben unterscheiden“: https://www.laves.niedersachsen.de/download/40998/Bienen_koennen_Farben_unterscheiden.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Bienen saugen Nektar mit dem Rüssel und tragen ihn im Honigmagen heim; Löwenzahn liefert Nektar und Pollen.",
-   "quelle": "https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf (Abschnitt 2.2); https://www.lwg.bayern.de/mam/cms06/bienen/dateien/wir_erforschen_die_bienenanatomie_.pdf (LWG Bayern, Fachzentrum Bienen), abgerufen 2026-11-15"
+   "fakt": "Honigbienen wohnen ohne Imker in geschützten Höhlungen (z. B. hohlen Bäumen); Imker halten sie in Kästen mit Rähmchen, an denen die Waben hängen.",
+   "quelle": "LAVES Institut für Bienenkunde Celle, „Bienenbiologie – eine Einführung“: https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf; Deutschland summt!, Faktenblatt „Bienenkoffer für Grundschulkinder“: https://shop.deutschland-summt.de/files/bilder/content/pdfs/bk_grundschule_faktenblatt_2023-04-20.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Pollen bleibt im Haarkleid hängen; die Biene kämmt ihn mit den Beinen heraus und drückt ihn mit etwas Nektar in die Körbchen an den Hinterbeinen: Es entstehen Pollenhöschen.",
-   "quelle": "https://www.laves.niedersachsen.de/download/41022 (W. von der Ohe, „Pollen – ein wichtiger Bestandteil der Bienenernährung“, Bieneninstitut Celle); https://www.lwg.bayern.de/mam/cms06/bienen/dateien/wir_erforschen_die_bienenanatomie_.pdf, abgerufen 2026-11-15"
+   "fakt": "Ein Bienenvolk besteht im Sommer aus vielen zehntausend Arbeiterinnen (Weibchen), einigen hundert Drohnen (Männchen mit großen Facettenaugen, ohne Stachel und ohne Sammelapparat) und einer Königin, die länger ist als die Arbeiterinnen.",
+   "quelle": "Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene; LAVES Institut für Bienenkunde Celle, „Bienenbiologie – eine Einführung“: https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf; Planet Wissen, „Bienen“: https://www.planet-wissen.de/natur/insekten_und_spinnentiere/bienen/index.html; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; lernhelfer Schülerlexikon, „Honigbiene“: https://www.lernhelfer.de/schuelerlexikon/biologie-abitur/artikel/honigbiene – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Pollenhöschen haben die Farbe des gesammelten Pollens; vom Löwenzahn sind sie gelb (bis rötlich-gelb). Löwenzahn ist im Frühjahr eine wichtige Pollen- und Nektarquelle.",
-   "quelle": "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_und_oekologie.pdf (LWG Bayern: Löwenzahn als Frühjahrstracht, Pollenhöschen nach Farben sortiert); https://en.wikipedia.org/wiki/Pollen_source (Tabelle, Taraxacum officinale: rot-gelb/orange), abgerufen 2026-11-15"
+   "fakt": "Nur die Königin legt Eier, im Frühjahr bis zu 2.000 am Tag; Arbeiterinnen füttern und putzen sie; die Arbeit regeln die Bienen untereinander, nicht durch Befehle der Königin.",
+   "quelle": "Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene; Planet Wissen, „Bienen“: https://www.planet-wissen.de/natur/insekten_und_spinnentiere/bienen/index.html; LAVES Institut für Bienenkunde Celle, „Bienenbiologie – eine Einführung“: https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Honigbienen sind blütenstet: Auf einem Sammelflug besuchen sie meist nur Blüten einer Pflanzenart.",
-   "quelle": "https://www.laves.niedersachsen.de/download/41022 (Bieneninstitut Celle); https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf (Abschnitt „Sammeln“), abgerufen 2026-11-15"
+   "fakt": "Junge Bienen bilden Wachs in vier Paar Drüsen an der Unterseite des Hinterleibs, kneten es mit den Oberkiefern und bauen daraus sechseckige Zellen, in denen Brut wächst und Honig und Pollen lagern.",
+   "quelle": "Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; LAVES Institut für Bienenkunde Celle, „Bienenbiologie – eine Einführung“: https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf; Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Bienen richten sich nach dem Sonnenstand; ist die Sonne verdeckt, erkennen sie ihn am polarisierten Licht des Himmels, das Menschen nicht sehen.",
-   "quelle": "https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf (Abschnitt 4.2), abgerufen 2026-11-15"
+   "fakt": "Aus dem Ei schlüpft nach drei Tagen eine Larve, die von Ammenbienen gefüttert wird; im Brutnest halten die Bienen rund 35 °C, gewärmt durch Muskelzittern, an heißen Tagen gekühlt durch Fächeln und eingetragenes Wasser.",
+   "quelle": "Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; LAVES Institut für Bienenkunde Celle, „Bienenbiologie – eine Einführung“: https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Regen, Wind und Kälte behindern den Bienenflug; bei schlechtem Wetter endet der Flug früher.",
-   "quelle": "Vincze et al. 2025, International Journal of Biometeorology 69: 303–317, doi:10.1007/s00484-024-02824-0, abgerufen 2026-11-15"
+   "fakt": "Die Zelle der großen Larve wird mit Wachs verdeckelt, die Larve spinnt sich ein und verpuppt sich; nach etwa 21 Tagen nagt die fertige Arbeiterin den Deckel auf.",
+   "quelle": "Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; lernhelfer Schülerlexikon, „Honigbiene“: https://www.lernhelfer.de/schuelerlexikon/biologie-abitur/artikel/honigbiene – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Wächterbienen am Flugloch prüfen ankommende Bienen, ob sie zum Volk gehören; Stockgenossinnen erkennen sie am vertrauten Geruch.",
-   "quelle": "https://www.anl.bayern.de/projekte/tierelive/doc/08_bienen_a8.pdf (ANL Bayern); Butler & Free 1952, „The Behaviour of Worker Honeybees at the Hive Entrance“, Behaviour 4; https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf (Verteidigung), abgerufen 2026-11-15"
+   "fakt": "Eine Königin entsteht aus einem befruchteten Ei wie eine Arbeiterin; ihre Larve in der großen, nach unten hängenden Weiselzelle am Wabenrand bekommt nur Futtersaft (Gelée royale), Arbeiterinnenlarven nach etwa drei Tagen auch Honig und Pollen.",
+   "quelle": "LAVES Institut für Bienenkunde Celle, „Bienenbiologie – eine Einführung“: https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; lernhelfer Schülerlexikon, „Honigbiene“: https://www.lernhelfer.de/schuelerlexikon/biologie-abitur/artikel/honigbiene – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Sammelbienen lagern ihre Pollenhöschen in Zellen nahe dem Brutnest ein (Bienenbrot).",
-   "quelle": "https://www.laves.niedersachsen.de/download/41022 (Bieneninstitut Celle), abgerufen 2026-11-15"
+   "fakt": "Arbeiterinnen wechseln ihre Aufgaben mit dem Alter (Zellen putzen, Larven füttern, Waben bauen, Nektar abnehmen, Wächterdienst, Sammeln); die Tage sind nur ein Anhalt, bei Bedarf springen Bienen ein.",
+   "quelle": "LAVES Institut für Bienenkunde Celle, „Bienenbiologie – eine Einführung“: https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf – abgerufen 2026-11-16"
   },
   {
-   "fakt": "Sammelbienen sind am Tag aktiv und schlafen in der Nacht; im Schlaf halten sie still.",
-   "quelle": "Eban-Rothschild & Bloch 2008, Journal of Experimental Biology 211: 2408–2416 (PMID 18626074), abgerufen 2026-11-15"
+   "fakt": "Wächterbienen am Flugloch prüfen ankommende Bienen, ob sie zum Volk gehören, und verteidigen den Stock gegen Störer; jedes Volk hat seinen Geruch.",
+   "quelle": "ANL Bayern, „Tiere live – Aktion 8: Ein Bienenvolk“: https://www.anl.bayern.de/projekte/tierelive/doc/08_bienen_a8.pdf; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Jungbienen fliegen beim Orientierungsflug auf und im kurzen Bogen zurück, um sich die Lage ihres Stocks einzuprägen; erst danach sammeln sie.",
+   "quelle": "ANL Bayern, „Tiere live – Aktion 8: Ein Bienenvolk“: https://www.anl.bayern.de/projekte/tierelive/doc/08_bienen_a8.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Sammelbienen schlafen nachts und halten dabei still.",
+   "quelle": "Eban-Rothschild & Bloch (2008), J Exp Biol 211:2408–2416: https://pubmed.ncbi.nlm.nih.gov/18626074/ – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Sommerbienen leben einige Wochen, Winterbienen, die ab dem Spätsommer schlüpfen, mehrere Monate; das Volk ist eine Dauergemeinschaft, die durch ständig neue Bienen über Jahre besteht (Königin bis 5 Jahre).",
+   "quelle": "LAVES Institut für Bienenkunde Celle, „Bienenbiologie – eine Einführung“: https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; Planet Wissen, „Bienen“: https://www.planet-wissen.de/natur/insekten_und_spinnentiere/bienen/index.html – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Ein Volk vermehrt sich durch Schwärmen: Bei Platzmangel werden neue Königinnen aufgezogen, etwa die Hälfte zieht mit der alten Königin aus, hängt sich als Traube auf und sucht eine neue Behausung; bei einem Schwarm verständigt man eine Imkerin oder einen Imker.",
+   "quelle": "LAVES Institut für Bienenkunde Celle, „Bienenbiologie – eine Einführung“: https://www.laves.niedersachsen.de/download/41629/Bienenbiologie_-_eine_Einfuehrung.pdf; Umweltbundesamt, „Bienen“: https://www.umweltbundesamt.de/bienen – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Bienen sammeln Nektar mit dem Rüssel und tragen ihn in der Honigblase heim; Pollen ist das Eiweißfutter der Brut.",
+   "quelle": "Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene; LWG Bayern, Fachzentrum Bienen, „Wir erforschen die Bienenanatomie“: https://www.lwg.bayern.de/mam/cms06/bienen/dateien/wir_erforschen_die_bienenanatomie_.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Bienen kämmen Pollen aus dem Haarkleid und formen ihn mit etwas Nektar in den Körbchen der Hinterbeine zu Pollenhöschen; Honigbienen sind blütenstet.",
+   "quelle": "LWG Bayern, Fachzentrum Bienen, „Wir erforschen die Bienenanatomie“: https://www.lwg.bayern.de/mam/cms06/bienen/dateien/wir_erforschen_die_bienenanatomie_.pdf; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Mit dem Schwänzeltanz auf der senkrechten Wabe im dunklen Stock zeigen Sammelbienen Richtung (Winkel zum Lot = Winkel zur Sonne) und Entfernung; für nahe Futterquellen gibt es den Rundtanz.",
+   "quelle": "Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; Planet Wissen, „Bienen“: https://www.planet-wissen.de/natur/insekten_und_spinnentiere/bienen/index.html – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Andere Bienen folgen der Tänzerin mit Fühlerkontakt, riechen den Blütenduft und bekommen kleine Nektargaben; am Ziel suchen sie nach dem Duft.",
+   "quelle": "Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; LAVES Institut für Bienenkunde Celle, „Bienen können Farben unterscheiden“: https://www.laves.niedersachsen.de/download/40998/Bienen_koennen_Farben_unterscheiden.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Im Stock wird der Nektar von Biene zu Biene weitergegeben, mit körpereigenen Stoffen (Enzymen) versetzt, in Zellen verteilt, durch Fächeln eingedickt und schließlich mit Wachs verdeckelt.",
+   "quelle": "Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf; Planet Wissen, „So entsteht Bienenhonig“: https://www.planet-wissen.de/natur/insekten_und_spinnentiere/bienen/pwiehonig100.html – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Für ein Kilogramm Honig sind im Schnitt drei bis vier Millionen Blütenbesuche nötig.",
+   "quelle": "Planet Wissen, „So entsteht Bienenhonig“: https://www.planet-wissen.de/natur/insekten_und_spinnentiere/bienen/pwiehonig100.html – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Honig ist der Wintervorrat; der Imker entdeckelt die Waben und schleudert den Honig, Wachs wird ebenfalls genutzt (z. B. für Kerzen); als Ersatz bekommt das Volk im Spätsommer Zuckerfutter.",
+   "quelle": "Planet Wissen, „So entsteht Bienenhonig“: https://www.planet-wissen.de/natur/insekten_und_spinnentiere/bienen/pwiehonig100.html; NABU, „Wintertrauben im Bienenstock“: https://www.nabu.de/natur-und-artenwissen/voegel/vogelwissen-und-verhalten/warum-enten-auf-dem-eis-nicht-festfrieren; Deutschland summt!, Faktenblatt „Bienenkoffer für Grundschulkinder“: https://shop.deutschland-summt.de/files/bilder/content/pdfs/bk_grundschule_faktenblatt_2023-04-20.pdf; Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Beim Blütenbesuch tragen Bienen Pollen von Blüte zu Blüte (Bestäubung); bestäubte Blüten bilden Früchte und Samen, z. B. Obst wie Äpfel, Kirschen, Erdbeeren.",
+   "quelle": "Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene; Umwelt im Unterricht (BMUV), „Warum sind Bienen und andere Bestäuber wichtig – und warum sind viele Arten bedroht?“: https://www.umwelt-im-unterricht.de/hintergrund/warum-sind-bienen-und-andere-bestaeuber-wichtig-und-warum-sind-viele-arten-bedroht – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Auch Wildbienen, Schwebfliegen, Käfer und Schmetterlinge bestäuben; Weizen, Roggen, Mais und Reis werden vom Wind bestäubt.",
+   "quelle": "Umwelt im Unterricht (BMUV), „Warum sind Bienen und andere Bestäuber wichtig – und warum sind viele Arten bedroht?“: https://www.umwelt-im-unterricht.de/hintergrund/warum-sind-bienen-und-andere-bestaeuber-wichtig-und-warum-sind-viele-arten-bedroht – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Im Winter bilden Honigbienen eine Wintertraube mit der Königin in der Mitte, heizen durch Zittern der Flugmuskulatur, wechseln zwischen außen und innen und zehren vom Honig.",
+   "quelle": "Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene; NABU, „Wintertrauben im Bienenstock“: https://www.nabu.de/natur-und-artenwissen/voegel/vogelwissen-und-verhalten/warum-enten-auf-dem-eis-nicht-festfrieren; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Bienen stechen nur zur Abwehr, wenn sie bedroht oder eingeengt werden; ruhig bleiben und nicht herumschlagen, abrupte Bewegungen vermeiden.",
+   "quelle": "Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene; Umweltbundesamt, „Bienen“: https://www.umweltbundesamt.de/bienen; Stiftung Warentest, „Wespen, Bienen, Mücken: Wann Insektenstiche gefährlich sind“: https://www.test.de/Wespen-Bienen-Muecken-Wann-Insektenstiche-gefaehrlich-sind-4877219-0/; wissen.de, „Einen Stich büßt sie mit dem Leben“: https://www.wissen.de/einen-stich-buesst-sie-mit-dem-leben – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Wespen sind auffällig schwarz-gelb mit Wespentaille; sie kommen auch an Obst, Fleisch, Kuchen und süße Getränke; aus süßen Getränken draußen mit Strohhalm trinken. Imker tragen am Stock oft Schutzkleidung.",
+   "quelle": "Klexikon, „Wespe“: https://klexikon.zum.de/wiki/Wespe; Stiftung Warentest, „Wespen, Bienen, Mücken: Wann Insektenstiche gefährlich sind“: https://www.test.de/Wespen-Bienen-Muecken-Wann-Insektenstiche-gefaehrlich-sind-4877219-0/; Apotheken Umschau, „Insektenstiche bei Kindern“: https://www.apotheken-umschau.de/familie/kindergesundheit/insektenstiche-bei-kindern-977529.html; Deutschland summt!, Faktenblatt „Bienenkoffer für Grundschulkinder“: https://shop.deutschland-summt.de/files/bilder/content/pdfs/bk_grundschule_faktenblatt_2023-04-20.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Barfuß auf Wiesen auf Bienen achten; Störung am Stock führt zum Angriff der Wächterbienen.",
+   "quelle": "Stiftung Warentest, „Wespen, Bienen, Mücken: Wann Insektenstiche gefährlich sind“: https://www.test.de/Wespen-Bienen-Muecken-Wann-Insektenstiche-gefaehrlich-sind-4877219-0/; Universität Hohenheim, Landesanstalt für Bienenkunde, Skript „Nutztierethologie: Honigbienen“: https://bienenkunde.uni-hohenheim.de/uploads/media/Skript_Nutztierethologie.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Der Stachel der Honigbiene bleibt mit Widerhaken in menschlicher Haut stecken und wird abgerissen; die Biene stirbt danach. Nur Weibchen haben einen Stachel; der Stachel vieler Wildbienen ist zu schwach für unsere Haut.",
+   "quelle": "Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene; LWG Bayern, Fachzentrum Bienen, „Wir erforschen die Bienenanatomie“: https://www.lwg.bayern.de/mam/cms06/bienen/dateien/wir_erforschen_die_bienenanatomie_.pdf; wissen.de, „Einen Stich büßt sie mit dem Leben“: https://www.wissen.de/einen-stich-buesst-sie-mit-dem-leben; Umweltbundesamt, „Wildbienen“: https://www.umweltbundesamt.de/wildbienen; BMUV, Kinderplakat „Wildbienen“: https://www.bmuv.de/fileadmin/Daten_Kids/wildbienen_a3_plakat.pdf – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Nach einem Bienenstich: sich ruhig von den Bienen entfernen, Stachel schnell entfernen (seitlich mit dem Fingernagel oder mit Pinzette, Giftblase nicht zusammendrücken), kühlen; Stich in Mund oder Rachen, Atemnot, Schwindel oder Quaddeln/Juckreiz am ganzen Körper: sofort Notruf 112; Allergiker tragen ein Notfallset.",
+   "quelle": "Umweltbundesamt, „Bienen“: https://www.umweltbundesamt.de/bienen; LWG Bayern, „Erste Hilfe nach Bienenstich“: https://lwg.bayern.de/mam/cms06/bienen/dateien/erste_hilfe_beim_bienenstich.pdf; Apotheken Umschau, „Insektenstiche bei Kindern“: https://www.apotheken-umschau.de/familie/kindergesundheit/insektenstiche-bei-kindern-977529.html; Stiftung Warentest, „Wespen, Bienen, Mücken: Wann Insektenstiche gefährlich sind“: https://www.test.de/Wespen-Bienen-Muecken-Wann-Insektenstiche-gefaehrlich-sind-4877219-0/ – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "In Deutschland gibt es rund 560 Wildbienenarten von wenigen Millimetern bis drei Zentimetern, darunter die Hummeln; Hummeln vertragen Kälte besser und fliegen früher im Jahr.",
+   "quelle": "Umweltbundesamt, „Wildbienen“: https://www.umweltbundesamt.de/wildbienen; BMUV, Kinderplakat „Wildbienen“: https://www.bmuv.de/fileadmin/Daten_Kids/wildbienen_a3_plakat.pdf; Umwelt im Unterricht (BMUV), „Warum sind Bienen und andere Bestäuber wichtig – und warum sind viele Arten bedroht?“: https://www.umwelt-im-unterricht.de/hintergrund/warum-sind-bienen-und-andere-bestaeuber-wichtig-und-warum-sind-viele-arten-bedroht; Klexikon, „Honigbiene“: https://klexikon.zum.de/wiki/Honigbiene – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Die meisten Wildbienen leben allein, jedes Weibchen baut sein Nest selbst; nur wenige Arten, vor allem Hummeln, bilden Völker; viele nisten im Boden, andere in Stängeln, Totholz, Mauerritzen oder Schneckenhäusern.",
+   "quelle": "Umweltbundesamt, „Wildbienen“: https://www.umweltbundesamt.de/wildbienen; BMUV, Kinderplakat „Wildbienen“: https://www.bmuv.de/fileadmin/Daten_Kids/wildbienen_a3_plakat.pdf; Umwelt im Unterricht (BMUV), „Warum sind Bienen und andere Bestäuber wichtig – und warum sind viele Arten bedroht?“: https://www.umwelt-im-unterricht.de/hintergrund/warum-sind-bienen-und-andere-bestaeuber-wichtig-und-warum-sind-viele-arten-bedroht – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Die Rote Mauerbiene (rötlich-braun, pelzig) trägt feuchten Lehm ein und baut in Hohlräumen eine Reihe von Brutzellen mit Pollen-Nektar-Vorrat und einem Ei, getrennt durch Lehmwände; die neue Generation schlüpft im folgenden Frühjahr.",
+   "quelle": "Planet Wissen, „Mauerbiene“: https://www.planet-wissen.de/natur/insekten_und_spinnentiere/bienen/insekten-bienen-mauerbiene-100.html – abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Mehr als die Hälfte der Wildbienenarten ist bedroht (Mangel an Blüten und Nistplätzen, viele sind Spezialisten); die Honigbiene ist als Nutztier nicht bedroht; helfen: heimische Blumen, wilde Ecken, Stängel, offene Bodenstellen, abschnittsweise mähen.",
+   "quelle": "Umwelt im Unterricht (BMUV), „Warum sind Bienen und andere Bestäuber wichtig – und warum sind viele Arten bedroht?“: https://www.umwelt-im-unterricht.de/hintergrund/warum-sind-bienen-und-andere-bestaeuber-wichtig-und-warum-sind-viele-arten-bedroht; Umweltbundesamt, „Wildbienen“: https://www.umweltbundesamt.de/wildbienen – abgerufen 2026-11-16"
   }
  ],
- "seiten": [
+ "kapitel": [
   {
-   "text": "Viele Tage lang hat Lotta nur im Bienenstock gearbeitet. Sie hat Zellen geputzt und kleine Larven gefüttert. Heute krabbelt sie zum ersten Mal hinaus ins Licht.",
-   "bild": "bilder/01.webp"
+   "titel": "Ein Insekt mit Pelz",
+   "seiten": [
+    {
+     "text": "Noa kniet im Garten vor einem Löwenzahn. Mit der Lupe sieht Noa eine Honigbiene ganz groß. Noa nennt sie Lotta. Lotta wohnt im blauen Bienenkasten von Tante Defne.\n\nZähl einmal mit! Lottas Körper hat drei Teile: Kopf, Brust und Hinterleib. An der Brust sitzen sechs Beine. Oben auf der Brust sitzen vier Flügel, zwei auf jeder Seite. Im Flug hakt Lotta sie mit winzigen Häkchen zusammen. So wird aus zwei kleinen Flügeln ein großer.",
+     "bild": "bilder/01-01.webp"
+    },
+    {
+     "text": "Lotta ist dunkelbraun mit hellen Streifen und trägt einen Pelz aus feinen Härchen. Sie ist etwa so lang, wie dein Fingernagel breit ist.\n\nVorn am Kopf hat sie zwei Fühler. Damit tastet sie und riecht. Einen Duft merkt sich eine Biene sehr schnell. Unter dem Kopf hat sie einen langen Rüssel. Den steckt sie tief in die Blüte und trinkt den süßen Saft. Wenn Lotta wieder auffliegt, ist ihr Pelz gelb gepudert. Das ist Blütenstaub. Er bleibt in den Härchen hängen wie Mehl in einem Wollpullover.",
+     "bild": "bilder/01-02.webp"
+    },
+    {
+     "text": "Schau Lotta einmal genau ins Gesicht. Wie viele Augen hat sie? Zwei große sieht man sofort, links und rechts am Kopf. Jedes große Auge ist aus vielen winzigen Augen zusammengesetzt, wie ein Mosaik aus Sechsecken.\n\nOben auf der Stirn sitzen noch drei kleine Punktaugen. Mit ihnen merkt Lotta, ob es hell oder dunkel ist. Zusammen hat eine Biene also fünf Augen. Unter der Lupe kann Noa die drei Pünktchen gerade so erkennen.",
+     "bild": "bilder/01-03.webp"
+    },
+    {
+     "text": "Hinter dem Gartenzaun blüht ein Feld voller Mohn. Die Blüten leuchten knallrot in der Sonne. Dazwischen stehen blaue Kornblumen.\n\nFür Noa ist das Rot die stärkste Farbe auf der ganzen Wiese. Aber sehen Bienen die Farben genauso wie wir? Bienenaugen sind ja ganz anders gebaut als unsere. Lotta fliegt über das Feld und sucht Blüten.\n\nWas glaubst du: Sieht Lotta, dass der Mohn rot ist?",
+     "bild": "bilder/01-04.webp",
+     "frage": true
+    },
+    {
+     "text": "Nein, Rot kann Lotta nicht sehen. Dafür sieht sie ein Licht, das für uns unsichtbar ist. Es heißt ultraviolettes Licht. Für Lotta schimmert der Mohn deshalb in einer ganz eigenen Farbe.\n\nViele Blüten tragen in der Mitte ein Zeichen aus diesem Licht. Wir sehen es nicht. Für eine Biene ist es wie ein Wegweiser: Hier geht es zum süßen Saft! Lotta fliegt auf einen Löwenzahn zu. Sie landet genau in der Mitte, dort, wo der süße Saft ist.",
+     "bild": "bilder/01-05.webp"
+    }
+   ]
   },
   {
-   "text": "Lotta fliegt auf, aber nur ein kleines Stück. In kurzen Bögen kehrt sie zum Flugloch zurück. Sie prägt sich ihr Zuhause ein. Den blauen Kasten, die Hecke, den Apfelbaum.",
-   "bild": "bilder/02.webp"
+   "titel": "Ein Volk in der Wabe",
+   "seiten": [
+    {
+     "text": "Tante Defne ist Imkerin. Ohne Imker wohnen Honigbienen in hohlen Bäumen. Bei Tante Defne wohnen sie in einem Holzkasten. Darin hängen Holzrahmen nebeneinander, und in jedem Rahmen bauen die Bienen eine Wabe.\n\nHeute hebt Tante Defne vorsichtig einen Rahmen heraus. Darauf krabbeln so viele Bienen, dass Noa sie nicht zählen kann. Im Sommer wohnen in einem Kasten viele zehntausend Bienen. Fast alle sind Arbeiterinnen, also Weibchen, so wie Lotta. Dazu kommen einige hundert Männchen. Sie heißen Drohnen, haben große Augen und keinen Stachel. Sammeln gehen sie nicht.",
+     "bild": "bilder/02-01.webp"
+    },
+    {
+     "text": "Tante Defne zeigt auf eine Biene. Sie ist länger als die anderen, ihr Hinterleib ist schmal und lang. Das ist die Königin. Es gibt nur eine im ganzen Volk.\n\nDie Königin legt Eier, sonst niemand im Volk. Im Frühling legt sie an einem Tag bis zu zweitausend Stück. Jedes Ei kommt in eine eigene Zelle. Um die Königin herum stehen immer Arbeiterinnen. Sie füttern und putzen sie. Befehle gibt die Königin aber keine. Die Arbeit teilen die Bienen unter sich auf.",
+     "bild": "bilder/02-02.webp"
+    },
+    {
+     "text": "Die Waben sind aus Wachs, und das Wachs machen die Bienen selbst. An der Unterseite ihres Hinterleibs haben junge Bienen kleine Drüsen. Daraus kommen hauchdünne Wachsplättchen. Die Bienen kneten sie mit den Kiefern weich und bauen daraus Zellen.\n\nJede Zelle hat sechs Ecken, eine passt genau an die nächste. So entsteht ohne Lücken eine ganze Wand aus Zellen. In manchen Zellen lagern Honig und Blütenstaub. In anderen wachsen junge Bienen heran.",
+     "bild": "bilder/02-03.webp"
+    },
+    {
+     "text": "Ganz unten in einer Zelle liegt ein winziges, längliches Ei. Nach drei Tagen schlüpft daraus eine weiße Larve. Sie sieht aus wie ein winziger, gekrümmter Wurm.\n\nDie Larve hat großen Hunger. Junge Bienen füttern sie immer wieder. Man nennt sie Ammenbienen. Die Larve wächst und wächst, bis sie die Zelle fast ausfüllt.\n\nBei den Larven ist es im Stock immer warm, so warm wie in einer Badewanne. Das schaffen die Bienen selbst. Sie zittern mit ihren Muskeln und wärmen so die Brut. An heißen Tagen fächeln sie mit den Flügeln und holen Wassertröpfchen. So wird es nicht zu heiß.",
+     "bild": "bilder/02-04.webp"
+    },
+    {
+     "text": "Ist die Larve groß genug, verschließen die Bienen ihre Zelle mit einem Deckel aus Wachs. Darunter spinnt sich die Larve ein. Sie wird zur Puppe. Jetzt bekommen Kopf, Beine und Flügel ihre Form.\n\nEtwa drei Wochen nach dem Ei knabbert etwas am Deckel. Ein Loch entsteht, es wird größer. Dann schiebt sich ein Kopf mit zwei Fühlern heraus. Eine junge Biene klettert aus der Zelle, ihr Pelz ist noch hell und flauschig. Genau so ist auch Lotta auf die Welt gekommen.",
+     "bild": "bilder/02-05.webp"
+    },
+    {
+     "text": "Und woher kommt eine neue Königin? Sie entsteht aus genau so einem Ei wie eine Arbeiterin. Der Unterschied ist das Futter.\n\nFür eine Königin bauen die Bienen eine besonders große Zelle. Sie hängt nach unten am Rand der Wabe. Die Larve darin bekommt die ganze Zeit nur einen besonderen Futtersaft. Er heißt Gelée royale. Die anderen Larven bekommen nach ein paar Tagen auch Honig und Blütenstaub. Aus der Larve mit dem Futtersaft wird eine Königin.",
+     "bild": "bilder/02-06.webp"
+    }
+   ]
   },
   {
-   "text": "Ein paar Tage später tanzt im dunklen Stock eine Biene. Sie läuft ein Stück geradeaus und wackelt mit dem Hinterleib. Dann dreht sie eine Runde und wackelt wieder.",
-   "bild": "bilder/03.webp"
+   "titel": "Jeden Tag eine neue Aufgabe",
+   "seiten": [
+    {
+     "text": "Gleich nach dem Schlüpfen hat Lotta mit der Arbeit angefangen. Zuerst hat sie Zellen geputzt, damit dort neue Eier hineinkommen. Danach war sie Ammenbiene und hat Larven gefüttert. Später hat sie Wachs gemacht und Waben gebaut. Dann hat sie den Sammlerinnen den süßen Saft abgenommen.\n\nEine Biene wechselt ihre Aufgabe, wenn sie älter wird. Braucht das Volk aber etwas dringend, springen andere Bienen ein.",
+     "bild": "bilder/03-01.webp"
+    },
+    {
+     "text": "Eines Tages krabbelt Lotta zum ersten Mal ganz hinaus ins Licht. Draußen ist alles hell und warm. Doch sie fliegt noch nicht davon. Zuerst muss sie lernen, wo ihr Zuhause ist.\n\nLotta hebt ab, aber nur ein kleines Stück. Sie fliegt in kurzen Bögen vor dem Kasten hin und her. Dann landet sie wieder. Das macht sie an mehreren Tagen. So prägt sie sich das Flugloch ein, die Hecke und den Apfelbaum. Erst später fliegt sie als Sammlerin weit hinaus.",
+     "bild": "bilder/03-02.webp"
+    },
+    {
+     "text": "Bevor sie Sammlerin wird, ist Lotta eine Zeit lang Wächterin. Wächterinnen stehen vorn am Flugloch, dem Eingang des Bienenkastens. Jede Biene, die landet, betasten sie mit den Fühlern.\n\nRiecht die Biene nach dem eigenen Stock, darf sie hinein. Jedes Volk hat nämlich seinen eigenen Duft. Riecht sie fremd, wird sie aufgehalten. So schützen die Wächterinnen den Honig vor Bienen aus anderen Völkern und vor Wespen.\n\nNoa schaut von der Seite aus zu. Vor dem Flugloch bleibt Noa nie stehen. Dort ist die Flugbahn der Bienen.",
+     "bild": "bilder/03-03.webp"
+    },
+    {
+     "text": "Am Abend kommen die Sammlerinnen heim. In der Nacht schlafen sie und halten ganz still, wie Noa im Bett.\n\nIm Sommer ist eine Arbeiterin nur ein paar Wochen lang unterwegs. Aber jeden Tag schlüpfen viele neue Bienen. Deshalb bleibt das Volk groß und stark. Im Spätsommer schlüpfen besondere Bienen, die Winterbienen. Sie bleiben viele Monate, den ganzen Winter hindurch. Im Frühling füttern sie die ersten neuen Larven. So kann ein Bienenvolk viele Jahre lang bestehen.",
+     "bild": "bilder/03-04.webp"
+    },
+    {
+     "text": "Im Mai hängt am Apfelbaum eine große, brummende Traube aus Bienen. Tausende Bienen halten sich aneinander fest. Das ist ein Schwarm.\n\nSo entsteht ein neues Volk. Wird es im Kasten zu eng, ziehen die Bienen eine neue Königin groß. Dann fliegt ungefähr die Hälfte des Volkes mit der alten Königin aus. Am Ast warten sie, bis sie eine neue Wohnung gefunden haben. Einen Schwarm lässt man in Ruhe. Erwachsene rufen eine Imkerin. Tante Defne schüttelt die Traube vorsichtig in eine Kiste. Bald wohnt das neue Volk in einem eigenen Kasten.",
+     "bild": "bilder/03-05.webp"
+    }
+   ]
   },
   {
-   "text": "Lotta läuft dicht hinter der Tänzerin her. Mit den Fühlern tastet sie die Tänzerin ab. Die Tänzerin duftet nach Blüten. Lotta bekommt ein Tröpfchen Nektar zum Kosten.",
-   "bild": "bilder/04.webp"
+   "titel": "Blüten, Tanz und Blütenstaub",
+   "seiten": [
+    {
+     "text": "Jetzt ist Lotta Sammlerin. Auf der Wiese holt sie zwei Dinge aus den Blüten. Mit dem Rüssel trinkt sie Nektar, den süßen Blütensaft. Er fließt in ihre Honigblase, einen kleinen Beutel in ihrem Körper. Darin trägt sie ihn nach Hause.\n\nAußerdem sammelt Lotta Blütenstaub. Er heißt auch Pollen. Für die Larven ist er wichtiges Futter, so wie für uns Brot und Käse. Nektar gibt Kraft, Pollen lässt die Larven wachsen.",
+     "bild": "bilder/04-01.webp"
+    },
+    {
+     "text": "Der Blütenstaub sitzt überall in Lottas Pelz. Mit ihren Beinen kämmt sie ihn heraus. Dann drückt sie ihn mit etwas Nektar zusammen. An ihren Hinterbeinen hat sie zwei kleine Körbchen. Dort hinein schiebt sie den Blütenstaub.\n\nBald hängt an jedem Hinterbein eine runde Kugel. Imker nennen sie Höschen. Vom Löwenzahn sind Lottas Höschen gelb. Auf diesem Flug bleibt Lotta bei einer Blütensorte, beim Löwenzahn. Die Gänseblümchen daneben lässt sie aus.",
+     "bild": "bilder/04-02.webp"
+    },
+    {
+     "text": "Mit zwei dicken gelben Höschen landet Lotta am Flugloch. Sie hat eine Wiese voller Löwenzahn gefunden, weit hinter der Hecke. Dort gibt es genug für viele Bienen.\n\nAber Bienen können nicht sprechen. Mitnehmen kann sie die anderen nicht, und im Stock ist es dunkel. Trotzdem wissen bald viele Bienen, wo die Wiese liegt.\n\nWas glaubst du: Wie zeigt Lotta den anderen, wo die Wiese liegt?",
+     "bild": "bilder/04-03.webp",
+     "frage": true
+    },
+    {
+     "text": "Sie tanzt! Drinnen auf der senkrechten Wabe läuft Lotta ein Stück geradeaus. Dabei wackelt sie schnell mit dem Hinterleib hin und her. Dann läuft sie im Bogen zurück, mal links, mal rechts herum, und wieder geradeaus. Das ist der Schwänzeltanz.\n\nDie Richtung des geraden Laufs zeigt den Weg. Läuft Lotta gerade nach oben, heißt das: zur Sonne hin. Läuft sie schräg, heißt das: schräg neben der Sonne. Und je länger sie wackelt, desto weiter ist es. Liegen Blüten ganz nah, tanzt eine Biene nur im Kreis.",
+     "bild": "bilder/04-04.webp"
+    },
+    {
+     "text": "Im dunklen Stock kann man den Tanz nicht sehen. Darum laufen andere Bienen dicht hinter Lotta her. Mit den Fühlern tasten sie sie ab und spüren jede Bewegung.\n\nDabei riechen sie auch den Duft in Lottas Pelz. Er riecht nach Löwenzahn. Manchmal bekommen sie ein Tröpfchen Nektar zum Kosten. Dann fliegen sie los, in die getanzte Richtung. Draußen suchen sie genau diesen Duft. So finden bald viele Bienen die gelbe Wiese.",
+     "bild": "bilder/04-05.webp"
+    }
+   ]
   },
   {
-   "text": "Der Tanz zeigt Lotta die Richtung: zur Sonne hin. Und er zeigt: Es ist weit. Lotta fliegt los, weit über die Hecke.",
-   "bild": "bilder/05.webp"
+   "titel": "Honig, Äpfel und ein warmer Winter",
+   "seiten": [
+    {
+     "text": "Zu Hause gibt Lotta den Nektar weiter. Eine junge Biene streckt ihr den Rüssel entgegen. Lotta gibt ihr ein Tröpfchen aus ihrer Honigblase. Die junge Biene gibt es an die nächste weiter und die wieder an die nächste.\n\nBei jedem Weitergeben kommen Stoffe aus dem Körper der Bienen dazu. Sie verwandeln den Nektar langsam. Dann verteilen die Bienen ihn in die Zellen der Wabe. Der Nektar ist aber noch dünn und wässrig, fast wie Saft.",
+     "bild": "bilder/05-01.webp"
+    },
+    {
+     "text": "Damit Honig daraus wird, muss viel Wasser heraus. Die Bienen fächeln mit ihren Flügeln, viele zugleich. So weht ein warmer Luftzug über die Waben, und das Wasser verdunstet. Tag für Tag wird der Nektar dicker und süßer.\n\nIst er fertig, verschließen die Bienen die Zelle mit einem Deckel aus Wachs. Jetzt ist es Honig. Für ein einziges Glas Honig besuchen Bienen Millionen von Blüten.",
+     "bild": "bilder/05-02.webp"
+    },
+    {
+     "text": "Der Honig ist der Wintervorrat des Volkes. Im Sommer nimmt Tante Defne einige Waben mit verdeckeltem Honig heraus. Sie schneidet die Wachsdeckel ab und schleudert den Honig heraus. Er fließt golden ins Glas. Aus dem Wachs macht sie Kerzen.\n\nNoa darf einen Löffel probieren. Er schmeckt nach Löwenzahn und nach Sommer. Weil Tante Defne Honig genommen hat, gibt sie den Bienen im Spätsommer Zuckerfutter. So haben sie trotzdem genug für den Winter.",
+     "bild": "bilder/05-03.webp"
+    },
+    {
+     "text": "Im Frühling blüht der Apfelbaum. Eine Biene krabbelt in eine Blüte und trinkt. Dabei bleibt Blütenstaub an ihr hängen. Dann fliegt sie zur nächsten Blüte, und ein paar Körnchen bleiben dort hängen.\n\nDas sieht nach nichts Besonderem aus. Doch es ist wichtig für den Baum. Es heißt Bestäubung: Blütenstaub kommt von einer Blüte zur anderen.\n\nWas glaubst du: Was wird aus einer Apfelblüte, die bestäubt wurde?",
+     "bild": "bilder/05-04.webp",
+     "frage": true
+    },
+    {
+     "text": "Ein Apfel! Aus einer bestäubten Blüte wächst eine Frucht mit Kernen darin. Die Blütenblätter fallen ab. In der Mitte wird ein kleiner grüner Apfel dick und rund. Im Herbst pflückt Noa ihn vom Baum.\n\nBei Kirschen und Erdbeeren ist es genauso. Beim Bestäuben helfen auch Wildbienen, Schwebfliegen, Käfer und Schmetterlinge. Und manche Pflanzen brauchen gar keine Insekten. Weizen, Roggen, Mais und Reis bestäubt der Wind.",
+     "bild": "bilder/05-05.webp"
+    },
+    {
+     "text": "Im Winter ist es still am Bienenkasten. Kein Summen ist zu hören. Schlafen die Bienen? Nein! Drinnen sitzen sie dicht zusammen, in einer Kugel aus Bienen. Sie heißt Wintertraube. In der Mitte sitzt die Königin.\n\nDie Bienen zittern mit den Muskeln, mit denen sie sonst fliegen. Davon wird es warm. Außen ist die Kugel kühler, innen ist sie warm. Immer wieder tauschen die Bienen ihre Plätze. Und sie essen vom Honig, den sie im Sommer gesammelt haben.",
+     "bild": "bilder/05-06.webp"
+    }
+   ]
   },
   {
-   "text": "Da riecht Lotta den Duft der Tänzerin. Unter ihr liegt eine Wiese voller Löwenzahn. In der Mitte der Blüten leuchtet für Lotta ein Fleck. Menschen können seine Farbe nicht sehen.",
-   "bild": "bilder/06.webp"
+   "titel": "Ruhig bleiben, wenn es summt",
+   "seiten": [
+    {
+     "text": "Noa macht mit Tante Defne ein Picknick auf der Wiese. Da summt eine Biene heran und landet auf dem Klee. Noa bleibt ruhig sitzen und schaut ihr zu.\n\nEine Biene, die Blüten sucht, sticht nicht ohne Grund. Bienen stechen nur, wenn sie sich wehren müssen. Zum Beispiel, wenn jemand sie drückt, einklemmt oder nach ihnen schlägt. Darum schlägt Noa nicht nach ihr und wedelt nicht wild herum. Ruhig bleiben oder langsam weggehen, das hilft. Dann fliegt die Biene weiter zur nächsten Blüte.",
+     "bild": "bilder/06-01.webp"
+    },
+    {
+     "text": "Am Pflaumenbaum summt es auch. Doch das ist keine Biene, sondern eine Wespe. Woran erkennt man sie? Die Wespe leuchtet gelb und schwarz und ist glatt. Zwischen Brust und Hinterleib ist sie ganz schmal, das heißt Wespentaille. Lotta dagegen ist braun und pelzig und eher rundlich.\n\nHonigbienen holen ihr Futter an Blüten. Wespen kommen auch an reifes Obst, Kuchen und süße Getränke. Darum trinkt Noa den Saft draußen mit einem Strohhalm. Oder Noa schaut vor jedem Schluck in den Becher.",
+     "bild": "bilder/06-02.webp"
+    },
+    {
+     "text": "Auf einer Wiese mit Klee sind oft viele Bienen. Barfuß schaut Noa darum genau auf den Boden. So tritt Noa auf keine Biene.\n\nUnd am Bienenkasten? Dort greift Noa nie hinein. Noa bleibt auch nie vor dem Flugloch stehen. Wer den Kasten stört, gegen den wehren sich die Bienen. Tante Defne trägt am Kasten oft eine Jacke mit Schleier. Und sie bewegt sich langsam. Noa schaut aus ein paar Schritten Abstand zu.",
+     "bild": "bilder/06-03.webp"
+    },
+    {
+     "text": "Der Stachel einer Honigbiene hat feine Widerhaken. Sticht sie in unsere Haut, bleibt er darin stecken. Die Biene kann ihn nicht mehr herausziehen und verliert ihn. Nie wieder kann sie stechen. Eine Honigbiene sticht nur, wenn sie selbst oder ihr Stock bedrängt wird.\n\nNur Weibchen haben einen Stachel. Die Drohnen haben keinen. Und die Wildbienen? Ihr Stachel ist meist schwach. Bei vielen kommt er gar nicht durch unsere Haut.",
+     "bild": "bilder/06-04.webp"
+    },
+    {
+     "text": "Und wenn doch einmal eine Biene sticht? Es piekst und tut weh. Dann geht man ruhig ein Stück weg und sagt es einem Erwachsenen. Der Stachel muss schnell heraus. Ein Erwachsener schiebt ihn seitlich weg, mit dem Fingernagel oder einer Pinzette. Er darf dabei nicht gequetscht werden. Danach kühlt man die Stelle. Sie wird rot, schwillt an und tut eine Weile weh. Das geht wieder weg.\n\nBei einem Stich in den Mund oder Hals ruft ein Erwachsener sofort die 112. Ebenso, wenn jemand schlecht Luft bekommt, wenn ihm schwindelig wird oder der ganze Körper juckt. Wer eine Allergie hat, hat ein Notfallset dabei.",
+     "bild": "bilder/06-05.webp"
+    },
+    {
+     "text": "Die meiste Zeit summen Bienen einfach an uns vorbei. Sie suchen Blüten, nicht uns.\n\nNoa liegt im Gras neben dem Klee und hält ganz still. Eine Biene landet auf einer Kleeblüte, nur eine Handbreit entfernt. Noa sieht ihren Rüssel, ihre Fühler und ihre Höschen. Dann fliegt sie weiter, zur nächsten Blüte und zur übernächsten. Wer ruhig bleibt, kann Bienen ganz nah zuschauen.",
+     "bild": "bilder/06-06.webp"
+    }
+   ]
   },
   {
-   "text": "Lotta landet in der Mitte einer Blüte. Sie streckt ihren langen Rüssel aus und trinkt Nektar. Dabei bleibt Blütenstaub in ihrem Pelz hängen.",
-   "bild": "bilder/07.webp"
-  },
-  {
-   "text": "Mit den Beinen kämmt sie den Staub zusammen. An ihren Hinterbeinen wachsen zwei gelbe Kugeln. Daneben blühen Gänseblümchen, doch Lotta bleibt beim Löwenzahn.",
-   "bild": "bilder/08.webp"
-  },
-  {
-   "text": "Auf einmal schieben sich dunkle Wolken vor die Sonne. Der Wind frischt auf. Lotta macht sich auf den Heimweg. Doch die Sonne ist nicht mehr zu sehen.",
-   "bild": "bilder/09.webp"
-  },
-  {
-   "text": "Am Himmel sieht Lotta ein Lichtmuster, unsichtbar für uns. Daran erkennt sie, wo die Sonne steht. Bald tauchen die Hecke und der Apfelbaum auf. Da ist der blaue Kasten!",
-   "bild": "bilder/10.webp"
-  },
-  {
-   "text": "Die ersten Tropfen fallen, als Lotta am Flugloch landet. Eine Wächterin betastet sie mit den Fühlern. Lotta riecht nach ihrem Stock. Sie darf hinein.",
-   "bild": "bilder/11.webp"
-  },
-  {
-   "text": "Lotta streift ihre Kugeln in eine Wabenzelle. Draußen regnet es bis in die Nacht. Lotta hält still und schläft.",
-   "bild": "bilder/12.webp"
-  },
-  {
-   "text": "Am Morgen scheint wieder die Sonne. Lotta fliegt gleich zur Löwenzahnwiese. Mit zwei gelben Kugeln kommt sie zurück. Was glaubst du: Was macht Lotta jetzt?",
-   "bild": "bilder/13.webp",
-   "frage": true
-  },
-  {
-   "text": "Lotta tanzt, so wie die andere Biene. Sie läuft geradeaus und wackelt mit dem Hinterleib. Andere Bienen folgen ihr und tasten sie ab. Bald summen viele Bienen über der gelben Wiese.",
-   "bild": "bilder/14.webp"
+   "titel": "Die wilden Schwestern",
+   "seiten": [
+    {
+     "text": "Lotta hat viele Verwandte, die frei leben. Es sind die Wildbienen. In Deutschland gibt es rund 560 Arten. Manche sind winzig, nur wenige Millimeter lang, andere groß und kugelrund.\n\nDie großen, dicken, pelzigen kennst du bestimmt: die Hummeln. Auch sie sind Wildbienen. Hummeln vertragen Kälte gut. Darum brummen sie schon früh im Jahr durch den Garten. Dann blühen erst wenige Blumen, und viele andere Bienen bleiben noch zu Hause.",
+     "bild": "bilder/07-01.webp"
+    },
+    {
+     "text": "Die meisten Wildbienen leben ganz anders als Lotta. Sie haben kein Volk und keine Königin. Jedes Weibchen baut sein Nest allein. Nur wenige Arten leben in kleinen Völkern, vor allem die Hummeln. Honig für uns machen Wildbienen nicht.\n\nViele Wildbienen graben ihr Nest in die Erde. Am Rand des Weges entdeckt Noa ein winziges Loch im sandigen Boden. Daneben liegt ein Häufchen Krümel. Da kommt eine kleine Biene heraus und fliegt davon. Hier unten wachsen ihre Jungen heran.",
+     "bild": "bilder/07-02.webp"
+    },
+    {
+     "text": "Andere Wildbienen wohnen in hohlen Pflanzenstängeln, in Löchern im alten Holz oder in Mauerritzen. Manche ziehen sogar in ein leeres Schneckenhaus.\n\nAn der Gartenmauer krabbelt eine rotbraune, pelzige Biene in ein Loch. Es ist eine Mauerbiene. Gerade eben hat sie ein Klümpchen feuchten Lehm geholt. Mit ihren Kiefern trägt sie es hinein. Dann kommt sie wieder heraus und fliegt los, das nächste holen. Noa schaut ihr lange zu. Immer wieder kommt sie zum selben Loch zurück.",
+     "bild": "bilder/07-03.webp"
+    },
+    {
+     "text": "Was macht die Mauerbiene mit dem Lehm? Im Loch oder im hohlen Stängel legt sie einen Vorrat aus Blütenstaub und Nektar an. Darauf legt sie ein einziges Ei. Dann mauert sie die Kammer mit Lehm zu.\n\nDavor baut sie die nächste Kammer, mit Vorrat und Ei. So entsteht eine Reihe von Kammern, eine hinter der anderen. Zum Schluss verschließt sie das Loch mit einem Lehmdeckel. Die Larven fressen den Vorrat und verpuppen sich. Die jungen Mauerbienen kommen erst im nächsten Frühling heraus.",
+     "bild": "bilder/07-04.webp"
+    },
+    {
+     "text": "Vielen Wildbienen geht es nicht gut. Mehr als die Hälfte der Arten ist bedroht. Es fehlen Blüten und Plätze für ihre Nester. Viele Wildbienen besuchen nämlich nur ganz bestimmte Blüten. Lotta, die Honigbiene, ist dagegen nicht bedroht. Imkerinnen und Imker kümmern sich um sie.\n\nWas hilft den Wildbienen? Heimische Blumen, eine wilde Ecke im Garten, alte Stängel und offene, sandige Stellen. Bei Noa wird die Wiese nie auf einmal gemäht. Ein Streifen blüht immer, und dort summt es den ganzen Sommer.",
+     "bild": "bilder/07-05.webp"
+    }
+   ]
   }
  ]
 }

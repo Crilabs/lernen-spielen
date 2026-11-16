@@ -1,122 +1,343 @@
 {
- "id": "elefant",
- "titel": "Nila und der große See",
- "art": "sachgeschichte",
- "welt": "tiere-der-erdteile",
- "familie": null,
- "kulisse": "dschungel",
- "klasse": 1,
- "quellen": [
-  {
-   "fakt": "Asiatische Elefantenkälber trinken Milch mit der Seite des Mauls, nicht mit dem Rüssel; um sie kümmern sich die Mutter und andere erwachsene und junge Kühe der Gruppe.",
-   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/reproduction (San Diego Zoo Wildlife Alliance, Fact Sheet Asian Elephant), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Den Rüssel beherrschen Kälber erst allmählich; Rüsselmotorik und Verhalten reifen über etwa ein Jahr, während die Beine gleich nach der Geburt sicher sind (wilde Elefanten in Kabini, Südindien).",
-   "quelle": "Revathe, Anvitha & Vidya 2020, The International Journal of Developmental Biology 64: 367–382; https://ijdb.ehu.eus/article/190274tv, abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Elefanten saugen Wasser in den Rüssel und blasen es dann ins Maul; der Rüssel ist kein Trinkhalm.",
-   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/characteristics (San Diego Zoo Wildlife Alliance); https://www.elephantvoices.org/the-elephant-ethogram/drinking (ElephantVoices), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Ungeübte Kälber knien sich hin und saugen das Wasser direkt mit dem Maul.",
-   "quelle": "https://www.elephantvoices.org/the-elephant-ethogram/drinking (ElephantVoices, Elephant Ethogram), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Kälber lutschen am eigenen Rüssel, wenn sie unsicher sind, offenbar zur Beruhigung.",
-   "quelle": "https://www.elephantvoices.org/the-elephant-ethogram/trunk-sucking (ElephantVoices), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Elefanten werfen an heißen Tagen Staub und Erde auf ihren Körper; das schützt die Haut vor Sonne und Insektenstichen.",
-   "quelle": "https://nationalzoo.si.edu/webcams/elephants (Smithsonian's National Zoo); https://ielc.libguides.com/sdzg/factsheets/asianelephant/behavior (San Diego Zoo Wildlife Alliance), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Schlamm hilft Elefanten in heißen Monaten, kühl zu bleiben; Sand trocknet und wärmt die Haut in kühleren Monaten.",
-   "quelle": "https://www.nationalzoo.si.edu/node/8129 (Smithsonian's National Zoo, Elephant Diaries), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Die Ohren Asiatischer Elefanten sind stark durchblutet; durch Fächeln kühlen sie sich ab.",
-   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/characteristics (San Diego Zoo Wildlife Alliance), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Junge Elefanten laufen und stehen zwischen oder hinter Erwachsenen, um geschützt zu sein.",
-   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/behavior; https://ielc.libguides.com/sdzg/factsheets/asianelephant/reproduction (San Diego Zoo Wildlife Alliance), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Elefanten helfen einander, indem sie ein anderes Tier schieben, heben oder ziehen, etwa ein steiles Ufer hinauf oder aus einem Fluss oder Schlammloch.",
-   "quelle": "https://elephantvoices.org/elephant-ethogram/ethogram-table/behaviorconstellation?id=39 (ElephantVoices, „Helping“), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Elefanten berühren einander sanft mit dem Rüssel und verständigen sich mit tiefen Brummlauten.",
-   "quelle": "https://nationalzoo.si.edu/webcams/elephants (Smithsonian's National Zoo), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Tiefe Brummlaute (Rumbles) sind Kontaktrufe zwischen Tieren und Gruppen über weite Strecken; ein Teil liegt im Infraschall, unter der Hörgrenze des Menschen (entdeckt 1984 von Katy Payne an Asiatischen Elefanten).",
-   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/behavior (San Diego Zoo Wildlife Alliance); https://www.npr.org/2015/08/20/432616506/to-decode-elephant-conversation-you-must-feel-the-jungle-rumble (NPR, Elephant Listening Project), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "In der Trockenzeit trocknen Wasserlöcher im Wald aus; Herden ziehen an den Kabini-Stausee in Südindien, der auch im Hochsommer Wasser hat, und fressen das frische Gras auf dem frei werdenden Ufer.",
-   "quelle": "https://news.mongabay.com/2013/10/photo-essay-notes-from-indias-kabini-river/ (Mongabay); https://roundglasssustain.com/habitats/nagarhole-national-park (Roundglass Sustain), abgerufen 2026-11-15"
-  },
-  {
-   "fakt": "Asiatische Elefantenkühe haben meist keine Stoßzähne (höchstens kleine, kaum sichtbare); die Ohren sind kleiner als beim Afrikanischen Elefanten; Kälber sind stark behaart.",
-   "quelle": "https://ielc.libguides.com/sdzg/factsheets/asianelephant/characteristics (San Diego Zoo Wildlife Alliance), abgerufen 2026-11-15"
-  }
- ],
- "seiten": [
-  {
-   "text": "In einem Wald in Indien ist es heiß und trocken. Nila ist ein kleines Elefantenkalb. Sie trinkt Milch bei ihrer Mutter, mit dem Maul. Ihr Rüssel baumelt dabei hin und her.",
-   "bild": "bilder/01.webp"
-  },
-  {
-   "text": "Nila will ein Büschel Gras greifen. Doch ihr Rüssel schlenkert daneben. Ihre große Schwester rupft das Gras mit einem Griff. Nila steckt die Rüsselspitze ins Maul und nuckelt.",
-   "bild": "bilder/02.webp"
-  },
-  {
-   "text": "Der Tümpel im Wald ist ausgetrocknet. Nur rissiger Schlamm ist übrig. Die Herde zieht los zum großen See. Dort gibt es noch Wasser.",
-   "bild": "bilder/03.webp"
-  },
-  {
-   "text": "Die Sonne brennt. Neben Nila fächeln die Großen mit ihren Ohren. Nila spürt den Luftzug. Sie läuft dicht zwischen Mutter und Tante.",
-   "bild": "bilder/04.webp"
-  },
-  {
-   "text": "Mittags wirft Nilas Mutter Staub über ihren Rücken. Die Fliegen auf ihrer Haut summen davon. Nila versucht es auch. Der Staub landet auf ihrem Kopf.",
-   "bild": "bilder/05.webp"
-  },
-  {
-   "text": "Am Nachmittag kommt die Herde an ein trockenes Bachbett. Die Großen steigen hinunter und drüben wieder hinauf. Nila rutscht am steilen Ufer ab. Sie ruft laut.",
-   "bild": "bilder/06.webp"
-  },
-  {
-   "text": "Sofort ist ihre Tante hinter ihr. Sie schiebt Nila mit dem Rüssel von hinten hinauf. Mit einem Ruck steht Nila oben. Ihre Mutter berührt sie sanft mit dem Rüssel.",
-   "bild": "bilder/07.webp"
-  },
-  {
-   "text": "Bald glitzert der See zwischen den Bäumen. Am Ufer wächst frisches Gras, und viele Elefanten trinken. Nilas Mutter saugt Wasser in ihren Rüssel. Dann spritzt sie es sich ins Maul.",
-   "bild": "bilder/08.webp"
-  },
-  {
-   "text": "Nila taucht ihren Rüssel auch ins Wasser. Sie hebt ihn hoch, doch das Wasser plätschert heraus. Was glaubst du: Wie trinkt Nila jetzt?",
-   "bild": "bilder/09.webp",
-   "frage": true
-  },
-  {
-   "text": "Nila geht vorn in die Knie. Sie streckt den Kopf vor und trinkt mit dem Maul. Schluck für Schluck.",
-   "bild": "bilder/10.webp"
-  },
-  {
-   "text": "Danach planschen die Elefanten im Schlamm am Ufer. Nila wälzt sich hinein, bis sie ganz braun ist. Der Schlamm kühlt ihre heiße Haut.",
-   "bild": "bilder/11.webp"
-  },
-  {
-   "text": "Am Abend brummt Nilas Mutter tief und leise. Von weit hinten am See antwortet ein anderes Brummen. Nila hält still und lauscht.",
-   "bild": "bilder/12.webp"
-  },
-  {
-   "text": "Im letzten Licht fressen die Elefanten frisches Gras. Nila bleibt dicht bei ihrer Mutter. Sie greift mit dem Rüssel ein Büschel Gras. Diesmal hält sie es fest.",
-   "bild": "bilder/13.webp"
-  }
- ]
+  "id": "elefant",
+  "titel": "Zuri und die Riesen der Savanne",
+  "art": "sachbuch",
+  "welt": "tiere-der-erdteile",
+  "familie": null,
+  "kulisse": "dschungel",
+  "klasse": 2,
+  "quellen": [
+    {
+      "fakt": "Elefanten sind die größten Landtiere; eine erwachsene Savannenelefantenkuh wiegt rund 2.800 kg, ein Bulle rund 6.000 kg.",
+      "quelle": "Klexikon, „Elefanten“: https://klexikon.zum.de/wiki/Elefanten; SDZWA Fact Sheet African Elephant, Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Savannenelefanten leben in Afrika südlich der Sahara (Ost-, Zentral- und Südafrika, z. B. Kenia) in Savannen, also Grasland mit wenigen Bäumen; in Trockenzeiten sammeln sie sich nahe am Wasser.",
+      "quelle": "WWF Österreich, TEAMPANDA-Wissen „Elefanten“: https://www.wwf.at/wp-content/uploads/2021/07/TEAMPANDA_Wissen_Elefanten.pdf; SDZWA African Elephant, Distribution & Habitat: https://ielc.libguides.com/sdzg/factsheets/african_elephant/distribution; Save the Elephants (Kenia): https://savetheelephants.org/project/elephants-and-bees – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten stehen auf den Zehen; ein großes, weiches Fettpolster unter der Ferse federt die Schritte ab; sie gehen fast lautlos.",
+      "quelle": "Hutchinson et al. 2011, Science 334:1699 (Zusammenfassung): https://pure.southwales.ac.uk/en/publications/from-flat-foot-to-fat-foot-structure-ontogeny-function-and-evolut/; SDZWA Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics; WWF TEAMPANDA (s. o.) – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten können nicht springen; auch beim schnellen Laufen bleibt immer mindestens ein Fuß am Boden.",
+      "quelle": "Live Science, „Why Can't Elephants Jump?“: https://www.livescience.com/54606-why-elephants-cannot-jump.html – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Die Ohren sind hinten dünn und stark durchblutet; durch Fächeln geben Elefanten Wärme ab. Afrikanische Elefanten haben etwa doppelt so große Ohren wie Asiatische, geformt wie der Umriss Afrikas.",
+      "quelle": "SDZWA Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics; Klexikon „Elefanten“ – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten haben keine Schweißdrüsen (höchstens an den Füßen); feine Risse in der Haut halten Wasser und Schlamm, das dient der Kühlung und dem Schutz vor Parasiten.",
+      "quelle": "SDZWA Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics; Martins et al. 2018, Nature Communications 9:3865: https://doi.org/10.1038/s41467-018-06257-3; ScienceDaily: https://www.sciencedaily.com/releases/2018/10/181002082437.htm – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Schlamm kühlt Elefanten in heißen Monaten.",
+      "quelle": "Smithsonian's National Zoo, Elephant Diaries: https://www.nationalzoo.si.edu/node/8129 – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Der Rüssel ist Nase und Oberlippe zugleich, hat keine Knochen und besteht aus Muskeln; er dient zum Atmen, Riechen, Greifen, Trinken, Grüßen und Bespritzen des Körpers.",
+      "quelle": "Klexikon „Elefanten“; SDZWA Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics; WWF TEAMPANDA (s. o.) – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Afrikanische Elefanten haben an der Rüsselspitze zwei fingerartige Fortsätze, Asiatische einen.",
+      "quelle": "SDZWA Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics; SDZWA Asian Elephant, Characteristics: https://ielc.libguides.com/sdzg/factsheets/asianelephant/characteristics – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten greifen kleine Futterteile mit der Rüsselspitze, umwickeln Grasbüschel mit dem Rüssel und schlagen sie gegen den Körper, um Erde abzuschütteln.",
+      "quelle": "SDZWA African Elephant, Diet: https://ielc.libguides.com/sdzg/factsheets/african_elephant/diet – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten saugen Wasser in den Rüssel und spritzen es ins Maul; der Rüssel ist kein Strohhalm; ein erwachsener Rüssel fasst mehrere Liter (etwa 4–9 Liter).",
+      "quelle": "SDZWA Diet: https://ielc.libguides.com/sdzg/factsheets/african_elephant/diet; ElephantVoices, Ethogram „Drinking“: https://www.elephantvoices.org/the-elephant-ethogram/drinking – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Die Stoßzähne der Bullen werden bis zu 3 Meter lang.",
+      "quelle": "WWF TEAMPANDA (s. o.) – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten schwimmen und nutzen den Rüssel dabei als Schnorchel; mit dem Rüssel verteilen sie Wasser und Sand auf dem Körper.",
+      "quelle": "WWF TEAMPANDA (s. o.); Klexikon „Elefanten“: https://klexikon.zum.de/wiki/Elefanten – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Stoßzähne sind umgebildete obere Schneidezähne und wachsen weiter; bei Afrikanischen Elefanten haben meist beide Geschlechter Stoßzähne; Elefanten graben auch mit Stoßzähnen.",
+      "quelle": "SDZWA Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics; SDZWA Diet: https://ielc.libguides.com/sdzg/factsheets/african_elephant/diet; Klexikon „Elefanten“ – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Familiengruppen bestehen aus verwandten Weibchen und ihren Jungen und werden von einer erfahrenen Leitkuh (Matriarchin) geführt.",
+      "quelle": "SDZWA African Elephant, Behavior: https://ielc.libguides.com/sdzg/factsheets/african_elephant/behavior; Klexikon „Elefanten“ – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Erfahrene Leitkühe führen ihre Familien in Dürren mit ihrem Wissen über Wasser und Futter über weite Strecken; Elefanten merken sich Landschaften und erkennen Familienmitglieder.",
+      "quelle": "SDZWA Behavior: https://ielc.libguides.com/sdzg/factsheets/african_elephant/behavior; NABU „Sanfte Dickhäuter“: https://www.nabu.de/natur-und-artenwissen/saeugetiere/portraets-saeugetiere/sanfte-dickhaeuter – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten verständigen sich mit tiefem Brummen, meist im Infraschall (für Menschen unhörbar); Savannenelefanten hören es mehrere Kilometer weit; manche Laute laufen durch den Boden und werden vermutlich mit den Füßen gespürt.",
+      "quelle": "SDZWA Behavior: https://ielc.libguides.com/sdzg/factsheets/african_elephant/behavior; SDZWA Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten erstarren beim Lauschen, spreizen die Ohren und heben manchmal einen Fuß an; Forschende vermuten, dass sie so Erschütterungen im Boden spüren.",
+      "quelle": "ElephantVoices, Ethogram „Foot-Lift“: https://elephantvoices.org/elephant-ethogram/ethogram-table/behavior?id=103; Stanford News 2001 (O'Connell-Rodwell): https://news.stanford.edu/pr/01/elephants37.html – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten begrüßen sich mit dem Rüssel und mit Brummen.",
+      "quelle": "SDZWA Behavior: https://ielc.libguides.com/sdzg/factsheets/african_elephant/behavior – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Afrikanische Elefanten sprechen einander mit individuellen, namensähnlichen Rufen an; angesprochene Tiere reagieren auf die an sie gerichteten Rufe schneller und stärker als auf andere.",
+      "quelle": "Pardo et al. 2024, Nature Ecology & Evolution 8:1353: https://doi.org/10.1038/s41559-024-02420-w; ElephantVoices: https://elephantvoices.org/latest-news-updates/enewsletters/like-us-elephants-have-names-too – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Junge Bullen verlassen die Familie im Mittel mit etwa 13–14 Jahren und leben allein oder in Bullengruppen.",
+      "quelle": "SDZWA Behavior: https://ielc.libguides.com/sdzg/factsheets/african_elephant/behavior; Klexikon „Elefanten“ – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Die Tragzeit dauert im Mittel etwa 22 Monate; ein Savannenelefantenkalb wiegt bei der Geburt etwa 90–120 kg.",
+      "quelle": "SDZWA African Elephant, Reproduction: https://ielc.libguides.com/sdzg/factsheets/african_elephant/reproduction; Klexikon „Elefanten“ – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Neugeborene stehen etwa 15 Minuten nach der Geburt, laufen anfangs unsicher und ziehen nach etwa zwei Tagen mit der Herde.",
+      "quelle": "SDZWA Reproduction: https://ielc.libguides.com/sdzg/factsheets/african_elephant/reproduction – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Kälber trinken Milch mit dem Maul an den Milchdrüsen zwischen den Vorderbeinen der Mutter und legen den Rüssel dabei über den Kopf.",
+      "quelle": "ElephantVoices, Ethogram „Suckling“: https://www.elephantvoices.org/the-elephant-ethogram/suckling; Knysna Elephant Park, „Reproduction“: https://knysnaelephantpark.co.za/reproduction/; SDZWA Asian Elephant, Reproduction: https://ielc.libguides.com/sdzg/factsheets/asianelephant/reproduction – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Kälber trinken die ersten drei Monate nur Milch, fressen dann auch Pflanzen und sind etwa zwei Jahre auf Milch angewiesen.",
+      "quelle": "SDZWA Reproduction: https://ielc.libguides.com/sdzg/factsheets/african_elephant/reproduction – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Kälber lernen den Rüssel im ersten Lebensjahr; Savannenelefantenkälber können erst mit etwa 8–9 Monaten Wasser mit dem Rüssel saugen; ungeübte Kälber knien und trinken mit dem Maul; unsichere Kälber lutschen am Rüssel.",
+      "quelle": "SDZWA Reproduction: https://ielc.libguides.com/sdzg/factsheets/african_elephant/reproduction; ElephantVoices „Drinking“: https://www.elephantvoices.org/the-elephant-ethogram/drinking; ElephantVoices „Trunk-Sucking“: https://www.elephantvoices.org/the-elephant-ethogram/trunk-sucking – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Andere Weibchen der Familie helfen bei der Betreuung der Kälber, damit die Mutter fressen und ruhen kann; junge Elefanten spielen viel (rennen, schieben, planschen, im Schlamm wälzen).",
+      "quelle": "SDZWA Reproduction: https://ielc.libguides.com/sdzg/factsheets/african_elephant/reproduction; SDZWA Behavior: https://ielc.libguides.com/sdzg/factsheets/african_elephant/behavior – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten fressen nur Pflanzen (Gras, Blätter, Zweige, Rinde, Früchte) und verbringen den größten Teil des Tages mit Fressen, bis zu 150 kg am Tag.",
+      "quelle": "Klexikon „Elefanten“; SDZWA Diet: https://ielc.libguides.com/sdzg/factsheets/african_elephant/diet; WWF TEAMPANDA (s. o.) – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Savannenelefanten trinken etwa 150–200 Liter Wasser am Tag.",
+      "quelle": "SDZWA Diet: https://ielc.libguides.com/sdzg/factsheets/african_elephant/diet – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten graben in trockenen Flussbetten Löcher bis zum Grundwasser; andere Tiere nutzen die Wasserlöcher danach; Elefanten gelten als Ökosystem-Ingenieure.",
+      "quelle": "Tsavo Trust, „How do elephants dig for water?“: https://tsavotrust.org/how-do-elephants-dig-for-water/; Haynes 2012, Geomorphology 157–158:99: https://doi.org/10.1016/j.geomorph.2011.04.045; NABU „Sanfte Dickhäuter“ – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Ein großer Teil der Nahrung bleibt unverdaut; im Elefantenkot stecken Samen, aus denen neue Pflanzen wachsen.",
+      "quelle": "WWF TEAMPANDA (s. o.); SDZWA Diet: https://ielc.libguides.com/sdzg/factsheets/african_elephant/diet – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Savannenelefanten schlafen insgesamt nur etwa 3–5 Stunden am Tag, ruhen tagsüber meist im Stehen und legen sich nachts manchmal hin; die Herde ruht oft gleichzeitig.",
+      "quelle": "SDZWA Behavior: https://ielc.libguides.com/sdzg/factsheets/african_elephant/behavior – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Es gibt drei Elefantenarten: Afrikanischer Savannenelefant, Afrikanischer Waldelefant (kleiner, im Regenwald) und Asiatischer Elefant.",
+      "quelle": "WWF TEAMPANDA (s. o.); Klexikon „Elefanten“ – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Asiatische Elefanten leben in Wäldern Süd- und Südostasiens, z. B. in Indien, und suchen schattige Wälder.",
+      "quelle": "WWF TEAMPANDA (s. o.); SDZWA Asian Elephant, Behavior: https://ielc.libguides.com/sdzg/factsheets/asianelephant/behavior; NABU „Sanfte Dickhäuter“ – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Asiatische Elefanten haben kleinere Ohren, zwei Höcker auf der Stirn, einen gewölbten Rücken, einen Rüsselfinger; Weibchen haben keine oder winzige Stoßzähne, auch viele Bullen haben keine; manche Tiere haben rosa Flecken; Kälber sind stark behaart. Savannenelefanten haben einen eingesenkten Rücken.",
+      "quelle": "SDZWA Asian Elephant, Characteristics: https://ielc.libguides.com/sdzg/factsheets/asianelephant/characteristics; SDZWA African Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Asiatische Elefanten werfen Erde auf ihren Rücken; das schützt die Haut vor Sonne und Insektenstichen.",
+      "quelle": "SDZWA Asian Elephant, Behavior: https://ielc.libguides.com/sdzg/factsheets/asianelephant/behavior – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Alle Elefantenarten sind gefährdet; ihr Lebensraum schrumpft durch Felder, Siedlungen und Plantagen, was zu Konflikten mit Bauern führt.",
+      "quelle": "NABU „Sanfte Dickhäuter“; WWF TEAMPANDA (s. o.) – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Wilderer jagen Elefanten illegal wegen des Elfenbeins; der Elfenbeinhandel ist fast überall verboten.",
+      "quelle": "Klexikon „Elefanten“; WWF TEAMPANDA (s. o.) – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Menschen schützen Elefanten mit Schutzgebieten, Waldschutz, Futterbäumen und Salzlecken, damit sie Felder meiden.",
+      "quelle": "WWF TEAMPANDA (s. o.) – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Elefanten meiden Afrikanische Honigbienen; Bienenstockzäune halten sie von Feldern fern, die Bauern ernten zusätzlich Honig.",
+      "quelle": "Save the Elephants, „Elephants and Bees“: https://savetheelephants.org/project/elephants-and-bees; „How beehive fences help elephants and farmers“: https://savetheelephants.org/news/how-beehive-fences-help-elephants-and-farmers – abgerufen 2026-11-16"
+    },
+    {
+      "fakt": "Ein Menschenkind wächst rund neun Monate im Bauch (Vergleich); 150 kg entsprechen etwa zwei Erwachsenen, 2.800 kg etwa zwei Autos (Vergleiche, gerundet).",
+      "quelle": "Allgemeinwissen, Vergleichswerte gerundet; Gewicht der Kuh: SDZWA Characteristics: https://ielc.libguides.com/sdzg/factsheets/african_elephant/characteristics – abgerufen 2026-11-16"
+    }
+  ],
+  "kapitel": [
+    {
+      "titel": "Riesen auf leisen Sohlen",
+      "seiten": [
+        {
+          "text": "In Kenia, in Afrika, zieht eine Elefantenfamilie durch das hohe Gras. Mittendrin läuft Zuri. Sie ist ein Elefantenkind, fünf Monate alt. Zuri reicht ihrer Mutter gerade bis unter den Bauch.\n\nIhre Mutter ist riesig. Sie ist so schwer wie zwei Autos zusammen. Elefanten sind die größten Tiere, die auf dem Land leben. Zuri und ihre Familie sind Afrikanische Savannenelefanten. Die Savanne ist ein weites Grasland mit wenigen Bäumen. In der Regenzeit wird alles grün. In der Trockenzeit ist es heiß, und das Gras wird gelb.",
+          "bild": "bilder/01-01.webp"
+        },
+        {
+          "text": "Stell dir vor, so ein Riese geht an dir vorbei. Du hörst ihn kaum. Er geht fast lautlos.\n\nDas Geheimnis steckt in den Füßen. Elefanten gehen auf den Zehenspitzen. Unter der Ferse liegt ein dickes, weiches Polster aus Fett. Es federt jeden Schritt ab, wie ein Kissen im Schuh.\n\nUnd noch etwas: Ein Elefant kann nicht springen. Auch wenn er schnell rennt, bleibt immer ein Fuß auf dem Boden. Zuri trippelt neben ihrer Mutter her. Die Mutter macht große, ruhige Schritte.",
+          "bild": "bilder/01-02.webp"
+        },
+        {
+          "text": "Die Sonne brennt. Zuris Mutter bewegt langsam ihre Ohren vor und zurück. Wie zwei riesige Fächer sehen sie aus.\n\nHinten sind die Ohren ganz dünn. Unter der Haut liegen viele Adern voller Blut. Beim Fächeln streicht Luft darüber. So gibt das Blut Wärme ab, und der Elefant kühlt sich.\n\nAfrikanische Elefanten haben die größten Ohren von allen Elefanten. Schau dir ein Ohr einmal genau an. Seine Form sieht ein bisschen aus wie der Umriss von Afrika.",
+          "bild": "bilder/01-03.webp"
+        },
+        {
+          "text": "Elefanten können nicht schwitzen. Wie kühlen sie sich trotzdem ab? Am Wasserloch zeigt es Zuris Familie. Die Großen spritzen sich mit dem Rüssel Wasser über den Rücken. Zuri wälzt sich im nassen Schlamm, bis sie ganz braun ist.\n\nIhre Haut ist dick und voller Falten. Darin sitzen winzige, feine Risse, wie ein Netz. In diesen Rissen halten sich Wasser und Schlamm viel länger als auf glatter Haut. Der Schlamm kühlt. Und er schützt vor stechenden Insekten. Danach werfen die Großen manchmal noch Staub darüber.",
+          "bild": "bilder/01-04.webp"
+        }
+      ]
+    },
+    {
+      "titel": "Ein Rüssel für alles",
+      "seiten": [
+        {
+          "text": "Der Rüssel ist Nase und Oberlippe zugleich. Er hat keinen einzigen Knochen. Er besteht nur aus Muskeln. Darum kann der Elefant ihn biegen, rollen und strecken, wie er will.\n\nMit dem Rüssel atmet Zuri und riecht. Sie hebt ihn hoch in die Luft und schnuppert. Riecht es nach Wasser? Nach frischem Gras? Die Großen greifen mit dem Rüssel, sie trinken damit und begrüßen ihre Familie. Ein Rüssel ist Nase, Hand und Arm in einem.",
+          "bild": "bilder/02-01.webp"
+        },
+        {
+          "text": "Ganz vorn an der Rüsselspitze hat ein Afrikanischer Elefant zwei kleine Zipfel. Sie greifen wie zwei Finger. Damit pflückt Zuris Mutter ein einzelnes Blatt oder hebt eine Frucht vom Boden auf.\n\nFür Gras macht sie es anders. Sie wickelt den Rüssel um ein dickes Büschel und rupft es aus. Dann klopft sie das Büschel an ihr Bein. Die Erde fällt ab, und erst dann frisst sie es.\n\nJetzt steht die Mutter am Wasserloch und taucht den Rüssel tief ein. Was glaubst du: Wie trinkt sie?",
+          "bild": "bilder/02-02.webp",
+          "frage": true
+        },
+        {
+          "text": "Viele Menschen denken, ein Elefant trinkt durch den Rüssel wie durch einen Strohhalm. Doch so ist es nicht.\n\nDie Mutter saugt das Wasser nur in den Rüssel hinein. In ihren Rüssel passen mehrere Liter. Dann rollt sie ihn ein und steckt das Rüsselende ins Maul. Pfffff, sie spritzt das Wasser hinein und schluckt.\n\nGleich taucht sie den Rüssel wieder ein. Saugen, rollen, spritzen, immer wieder. So trinkt ein Elefant Schluck für Schluck.",
+          "bild": "bilder/02-03.webp"
+        },
+        {
+          "text": "Manchmal wird es am Wasserloch richtig nass. Die Großen saugen ihre Rüssel voll. Dann lassen sie das Wasser auf Kopf und Rücken prasseln, wie unter einer Dusche. Die Kleinen planschen am Ufer.\n\nElefanten können sogar schwimmen, die Rüsselspitze ragt dann heraus wie ein Schnorchel.\n\nZuri bleibt lieber am flachen Ufer. Sie schlägt mit dem Rüssel aufs Wasser. Es spritzt überall hin, nur nicht auf ihren Rücken.",
+          "bild": "bilder/02-04.webp"
+        },
+        {
+          "text": "Zuris Mutter hat zwei lange, helle Stoßzähne. Das sind Zähne! Es sind Schneidezähne, die ein Leben lang weiterwachsen. Bei Afrikanischen Elefanten haben meist Weibchen und Männchen solche Zähne. Damit schält die Mutter Rinde von einem Ast. Mit ihnen kann sie auch in der Erde graben.\n\nBei den Männchen, den Bullen, werden die Stoßzähne besonders lang. Bei einem alten Bullen können sie bis zu drei Meter lang werden. Das ist länger als ein Bett. Zuri hat noch keine Stoßzähne, die man sieht. Bei ihr dauert das noch.",
+          "bild": "bilder/02-05.webp"
+        }
+      ]
+    },
+    {
+      "titel": "Eine Familie hält zusammen",
+      "seiten": [
+        {
+          "text": "Zuri ist nie allein. Zu ihrer Familie gehören ihre Mutter, zwei Tanten, ihre Cousinen und ihr großer Bruder. Alle Erwachsenen in der Familie sind Weibchen, und sie sind miteinander verwandt.\n\nGanz vorn geht die Großmutter. Sie ist die älteste und erfahrenste Elefantenkuh. Sie ist die Leitkuh. Wenn sie stehen bleibt, bleiben alle stehen. Wenn sie weitergeht, folgen ihr alle. Zuri läuft immer dicht neben ihrer Mutter.",
+          "bild": "bilder/03-01.webp"
+        },
+        {
+          "text": "Es hat lange nicht geregnet. Das Gras ist gelb, viele Wasserlöcher sind ausgetrocknet. Jetzt braucht die Familie die Großmutter besonders.\n\nDie Großmutter hat ein sehr gutes Gedächtnis. Sie weiß noch, wo es in einer Dürre Wasser gab. Nun führt sie ihre Familie dorthin, einen weiten Weg durch die Savanne.\n\nAm Abend erreichen sie ein Wasserloch, das noch voll ist. Die Großmutter hat den Weg gefunden.",
+          "bild": "bilder/03-02.webp"
+        },
+        {
+          "text": "Plötzlich bleibt die Großmutter stehen. Sie spreizt die Ohren ab und hält ganz still. Dann hebt sie einen Fuß ein wenig vom Boden.\n\nAuch die anderen werden still. Zuris Mutter dreht den Kopf langsam hin und her. Ihre Ohren stehen weit ab, wie zwei große Segel. Zuri hört nichts. Es raschelt nicht, kein Vogel ruft. Und doch lauschen alle Großen in dieselbe Richtung. Was glaubst du: Was ist da los?",
+          "bild": "bilder/03-03.webp",
+          "frage": true
+        },
+        {
+          "text": "Weit weg brummt eine andere Elefantenfamilie. Das Brummen ist so tief, dass Menschen es nicht hören können. Elefanten hören es noch mehrere Kilometer weit.\n\nManche dieser tiefen Laute laufen sogar durch den Boden. Forschende vermuten, dass Elefanten sie mit den Füßen spüren. Vielleicht hob die Großmutter darum den Fuß.\n\nJetzt brummt sie zurück. Bald darauf kommt die andere Familie näher. Es sind Verwandte. Die Elefanten laufen aufeinander zu und brummen laut.",
+          "bild": "bilder/03-04.webp"
+        },
+        {
+          "text": "Zur Begrüßung strecken die Elefanten einander den Rüssel entgegen. Sie berühren sich am Kopf und am Maul. Elefanten erkennen ihre Verwandten wieder, auch nach langer Zeit.\n\nZuris großer Bruder ist zwölf Jahre alt. In ein, zwei Jahren zieht er los. Dann lebt er allein oder mit anderen jungen Bullen.\n\nForschende haben noch etwas entdeckt. Afrikanische Elefanten rufen einander mit eigenen Lauten, ähnlich wie mit Namen. Hört eine Elefantenkuh den Ruf, der ihr gilt, antwortet sie besonders rasch. Zuri drückt ihren Rüssel an das Maul ihrer Mutter.",
+          "bild": "bilder/03-05.webp"
+        }
+      ]
+    },
+    {
+      "titel": "Zuri wird groß",
+      "seiten": [
+        {
+          "text": "Fast zwei Jahre ist Zuri im Bauch ihrer Mutter gewachsen. Ein Menschenkind wächst nur neun Monate im Bauch. Bei der Geburt wog sie ungefähr hundert Kilogramm. Das ist so schwer wie ein großer Mann.\n\nSchon bald nach der Geburt stand Zuri auf ihren vier Beinen. Oft dauert das nur eine Viertelstunde. Sie wackelte noch und plumpste wieder hin. Doch nach zwei Tagen lief sie schon mit der Familie mit. Ihre Mutter blieb dabei immer dicht neben ihr.",
+          "bild": "bilder/04-01.webp"
+        },
+        {
+          "text": "Wenn Zuri Durst hat, läuft sie zu ihrer Mutter. Sie trinkt Milch. Aber nicht mit dem Rüssel, sondern mit dem Maul. Die Mutter hat ihre Brust vorn zwischen den Vorderbeinen.\n\nZuri stellt sich darunter und legt den Rüssel nach oben über den Kopf. So ist er nicht im Weg. Dann trinkt sie, Schluck für Schluck.\n\nAb etwa drei Monaten probieren Elefantenkinder auch Gras und Blätter. Aber noch ungefähr zwei Jahre lang ist Milch ihr wichtigstes Essen.",
+          "bild": "bilder/04-02.webp"
+        },
+        {
+          "text": "Ihren Rüssel muss Zuri erst lernen. Oft schlenkert er hin und her, als gehöre er gar nicht zu ihr. Und wenn sie unsicher ist, steckt sie die Rüsselspitze ins Maul und lutscht daran.\n\nHeute steht Zuri am Wasserloch neben ihrer Mutter. Sie taucht ihren Rüssel ins Wasser, so wie die Großen. Sie hebt ihn hoch. Doch das Wasser plätschert vorn wieder heraus. Was glaubst du: Wie trinkt Zuri jetzt?",
+          "bild": "bilder/04-03.webp",
+          "frage": true
+        },
+        {
+          "text": "Zuri geht vorn in die Knie. Sie streckt den Kopf weit vor, bis ihr Maul das Wasser berührt. Dann trinkt sie direkt mit dem Maul. Den Rüssel hält sie dabei zur Seite.\n\nSo machen es junge Elefanten. Mit dem Rüssel Wasser saugen können sie erst mit acht bis neun Monaten. Bis dahin üben sie jeden Tag. Zuri wird es auch lernen. Wenn sie ein Jahr alt ist, kann sie ihren Rüssel richtig gut bewegen.",
+          "bild": "bilder/04-04.webp"
+        },
+        {
+          "text": "Eine Tante steht dicht neben Zuri. Auch ihre große Cousine passt auf sie auf. In einer Elefantenfamilie kümmern sich viele um ein Kalb. So kann die Mutter in Ruhe fressen und sich ausruhen.\n\nUnd Zuri hat Zeit zum Spielen. Mit den anderen Kindern rennt sie um die Wette und schiebt mit dem Kopf. Sie wälzt sich im Schlamm und planscht am Wasser. Danach drängt sie sich müde an die Beine ihrer Tante.",
+          "bild": "bilder/04-05.webp"
+        }
+      ]
+    },
+    {
+      "titel": "Fressen, trinken, graben",
+      "seiten": [
+        {
+          "text": "Elefanten fressen nur Pflanzen: Gras, Blätter, Zweige, Rinde und Früchte. Und davon brauchen sie sehr viel. Darum fressen sie fast den ganzen Tag.\n\nZuris Mutter rupft Gras, schält Rinde und bricht Zweige von einem Busch. An einem einzigen Tag frisst sie ungefähr 150 Kilogramm Grünzeug. Das ist so schwer wie zwei Erwachsene zusammen. Dazu trinkt sie am Tag ungefähr so viel Wasser, wie in eine Badewanne passt.",
+          "bild": "bilder/05-01.webp"
+        },
+        {
+          "text": "In der Trockenzeit fließt im Fluss kein Wasser mehr. Übrig ist nur ein breites Bett aus Sand. Die Familie bleibt trotzdem dort stehen.\n\nDie Großmutter scharrt mit einem Vorderfuß im Sand. Sie schiebt den Sand mit dem Rüssel zur Seite. Sie gräbt und gräbt, bis ein tiefes Loch entsteht. Unten im Loch wird der Sand dunkel und feucht. Dann sickert langsam Wasser hinein. Die Großmutter saugt es mit dem Rüssel auf und trinkt.",
+          "bild": "bilder/05-02.webp"
+        },
+        {
+          "text": "Die Familie trinkt sich satt und zieht weiter. Doch das Wasserloch im Sand bleibt.\n\nBald kommen andere Tiere vorbei. Zebras trinken daraus, Antilopen und kleine Vögel. Sie trinken aus dem Loch, das die Großmutter gegraben hat.\n\nSo verändern Elefanten die Savanne für viele Tiere. Sie graben Wasserlöcher, sie trampeln Wege und knicken Büsche um. Forschende nennen Elefanten darum auch Baumeister der Natur.",
+          "bild": "bilder/05-03.webp"
+        },
+        {
+          "text": "Elefanten pflanzen sogar Bäume, ohne es zu wissen. Das geht so: Ein Elefant kann viel von seinem Futter nicht verdauen. Im Elefantendung stecken darum viele Samen von Früchten, ganz heil.\n\nDer Elefant läuft weiter, oft viele Kilometer. Dort, wo der Dunghaufen liegt, keimen später die Samen. Kleine Pflanzen wachsen heraus, manche werden zu Bäumen. Der Dung ist für sie wie Dünger.\n\nZuri läuft an einem alten Dunghaufen vorbei. Aus ihm sprießen schon grüne Spitzen.",
+          "bild": "bilder/05-04.webp"
+        },
+        {
+          "text": "Wann schlafen Elefanten eigentlich? Viel weniger als du. Zusammen sind es meist nur ein paar Stunden am Tag.\n\nTagsüber dösen die Großen oft im Stehen, im Schatten eines Baumes. Ihre Ohren hängen ruhig herab, der Rüssel baumelt. In der Nacht legen sie sich manchmal auf die Seite. Oft ruht die ganze Familie zur gleichen Zeit.\n\nZuri liegt im Sand, dicht neben ihrer Mutter. Sie schläft. Ihre Mutter steht neben ihr und wacht.",
+          "bild": "bilder/05-05.webp"
+        }
+      ]
+    },
+    {
+      "titel": "Nila in Asien",
+      "seiten": [
+        {
+          "text": "Weit weg von Zuri, auf einem anderen Erdteil, lebt auch ein Elefantenkind. Es heißt Nila. Nila lebt in Indien, in Asien. Sie ist ein Asiatischer Elefant. Es gibt drei Arten von Elefanten. Zwei leben in Afrika, eine in Asien.\n\nNilas Familie wohnt nicht in der offenen Savanne, sondern im Wald. Zwischen hohen Bäumen finden die Elefanten Blätter, Gras und Schatten. Gerade ist Trockenzeit, und der Boden ist mit braunen Blättern bedeckt. Nila läuft mitten in ihrer Familie, zwischen Mutter und Tante.",
+          "bild": "bilder/06-01.webp"
+        },
+        {
+          "text": "Sieh dir Nila und ihre Familie genau an. Was ist anders als bei Zuri?\n\nIhre Ohren sind viel kleiner. Oben auf dem Kopf haben Asiatische Elefanten zwei Höcker. Der Kopf ist bei ihnen der höchste Punkt des Körpers. Bei Zuris Familie hat der Rücken dagegen in der Mitte eine Mulde.\n\nUnd an der Rüsselspitze hat Nila nur einen Zipfel, nicht zwei. Damit greift sie trotzdem geschickt zu. Gerade hält sie ein Büschel Gras fest.",
+          "bild": "bilder/06-02.webp"
+        },
+        {
+          "text": "Schau auf die Gesichter der Großen. Nilas Mutter und ihre Tanten haben keine Stoßzähne. Bei Asiatischen Elefanten haben die Weibchen meist keine oder nur ganz kleine. Auch manche Männchen haben keine.\n\nNilas Mutter hat rosa Flecken an Rüssel, Stirn und Ohren. Solche Flecken haben manche Asiatische Elefanten.\n\nUnd Nila selbst? Sie ist ganz schön haarig. Auf Kopf und Rücken wachsen ihr viele braune Haare. Asiatische Elefantenkinder sind besonders behaart.",
+          "bild": "bilder/06-03.webp"
+        },
+        {
+          "text": "Mittags wird es auch im Wald heiß. Nilas Mutter rollt ihren Rüssel ein. Dann wirft sie eine Wolke aus roter Erde über ihren Rücken. Der Staub rieselt auf ihre Haut. Er schützt sie vor der Sonne und vor stechenden Insekten.\n\nNila steht dicht daneben. Ein bisschen Staub landet auf ihrem Kopf. Sie versucht es selbst. Noch gelingt es ihr nicht so gut.\n\nWie Zuri muss auch Nila den Rüssel erst üben. Ihre Mutter wirft gleich noch eine Wolke hinterher.",
+          "bild": "bilder/06-04.webp"
+        }
+      ]
+    },
+    {
+      "titel": "Platz für Elefanten",
+      "seiten": [
+        {
+          "text": "Früher gab es viel mehr Elefanten als heute, in Afrika und in Asien. Alle Elefantenarten sind heute gefährdet.\n\nElefanten brauchen viel Platz. Sie wandern weit, um genug Futter und Wasser zu finden. Doch an vielen Orten bauen Menschen Felder, Dörfer und Straßen. Dann finden die Elefanten ihre alten Wege nicht mehr. Manchmal laufen sie dann über ein Feld und fressen dort, was die Bauern angepflanzt haben. Für die Bauern ist das ein großes Problem.",
+          "bild": "bilder/07-01.webp"
+        },
+        {
+          "text": "Es gibt noch einen Grund, warum es weniger Elefanten gibt. Die Stoßzähne bestehen aus Elfenbein. Manche Menschen jagen Elefanten heimlich, um das Elfenbein zu verkaufen. Das ist verboten, und diese Menschen heißen Wilderer.\n\nFast überall auf der Welt ist der Handel mit Elfenbein verboten. Darum kauft man keinen Schmuck und keine Figuren aus Elfenbein.\n\nIn Schutzgebieten passen Ranger auf die Elefanten auf. Sie kennen die Familien und fahren jeden Tag durch das Gebiet. Zuris Familie lebt in so einem Schutzgebiet.",
+          "bild": "bilder/07-02.webp"
+        },
+        {
+          "text": "Wie können Bauern und Elefanten nebeneinander leben? Forschende in Kenia haben etwas entdeckt. Elefanten meiden Bienen. Sie gehen ihnen aus dem Weg.\n\nDarum hängen Bauern Bienenstöcke an einen Zaun rund um ihr Feld. Stößt ein Elefant an den Zaun, schaukeln die Bienenstöcke. Die Bienen summen heraus, und der Elefant dreht um.\n\nDas Feld bleibt heil, und der Elefant sucht sich anderswo Futter. Und die Bauern ernten auch noch Honig.",
+          "bild": "bilder/07-03.webp"
+        },
+        {
+          "text": "Überall helfen Menschen den Elefanten. Sie schützen Wälder und pflanzen Futterbäume. Sie lassen Wege frei, damit die Elefanten von einem Gebiet ins nächste wandern können.\n\nEs wird Abend in der Savanne. Die Großmutter führt die Familie zum Wasserloch. Zuris Mutter trinkt, Rüssel für Rüssel. Zuri kniet am Ufer und trinkt mit dem Maul. Bald wird sie es mit dem Rüssel schaffen.\n\nDann stehen alle beieinander und brummen leise. Zuri lehnt sich an das Bein ihrer Mutter.",
+          "bild": "bilder/07-04.webp"
+        }
+      ]
+    }
+  ]
 }

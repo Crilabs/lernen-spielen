@@ -1,160 +1,107 @@
-# Prüfung – Nila und der große See
+# Prüfung – Zuri und die Riesen der Savanne (Sachbuch)
 
-Stand 2026-11-15: Recherche und Vorlesebuch-Fassung (§1), frischer Prüfer (§2), Bilder (§3). Fassung `ruhig`:
-`../elefant-ruhig/`.
+Stand 2026-11-16. Ersetzt die Sachgeschichte „Nila und der große See“ (13 Abschnitte à 3–4 Sätze, vor den Regeln vom
+15.11. abends): Sie las sich „wie für 3-Jährige“ und trug zu wenig Wissen. Neu nach `docs/geschichten.md` §2a: erst
+Lerninhalte, dann Form, dann Text (Christian hat den Neubau freigegeben).
 
-## 1. Recherche
+## 1. Inhalte, Recherche und Form
 
-**Art: Asiatischer Elefant** (*Elephas maximus*, Unterart Indischer Elefant), wilde Herde am Kabini-Stausee
-(Nagarhole, Südindien), Trockenzeit. Gründe:
+- Lerninhalte in `inhalte.md`: Maßstab LehrplanPLUS Bayern HSU 1/2 und 3/4 (Angepasstheit an den Lebensraum,
+  Entwicklung einer Tierart, Einfluss des Menschen), Berlin/Brandenburg nur über Zusammenfassung; Kinderseiten und
+  Kinderblätter (Klexikon, WWF TEAMPANDA, NABU) als Maßstab für die Themen; 27 Quellen, Kern: San Diego Zoo Wildlife
+  Alliance Fact Sheets (Afrika und Asien), ElephantVoices Ethogram, Pardo et al. 2024 (Namen), Martins et al. 2018
+  (Hautrisse), Save the Elephants (Bienenzaun).
+- **Arten sauber getrennt:** Hauptfigur Zuri ist ein **Afrikanischer Savannenelefant** (Kenia); Kapitel 6 wechselt zu
+  Nila, einem **Asiatischen Elefanten** in Indien. Was nur für eine Art belegt ist, steht nur dort (Leitkuh,
+  Wassergraben, Namen: Afrika; Staub als Sonnenschutz nach SDZWA-Asien: Asien).
+- **Mythen verworfen** (Tabelle in `inhalte.md`): Trinken „wie mit dem Strohhalm“ (im Buch als Frage und Auflösung,
+  Kap. 2), Angst vor Mäusen, Elefantenfriedhof, „vergisst nie“, Leitkuh bei allen Arten, „vier Jahre nur Milch“
+  (Klexikon), 200 kg Futter, 40.000 Muskeln, Infraschall „über zehn Kilometer“, „hören mit den Füßen“ als Gewissheit,
+  Erdnüsse. Weggelassen: Trauer um Tote, Löwen und Kälber, Wilderei-Zahlen, Arbeitselefanten, Backenzähne, Spiegeltest.
+- **Belastung (grundsaetze 9.2/9.3):** Dürre nur mit Lösung auf derselben Seite; der Bruder zieht „in ein, zwei Jahren“
+  aus, ohne Abschied; Wilderei in zwei Sätzen ohne Zahl, ohne „töten“, ohne Bild, ohne Kalb, auf derselben Seite
+  Verbot, „keinen Schmuck und keine Figuren aus Elfenbein“ und Ranger; das Buch endet mit dem Bienenzaun und der Familie am Wasserloch. Satz für die
+  Eltern (bei der Eintragung): „Das Buch erwähnt Wilderei in zwei Sätzen, ohne Bild.“
+- **Form: Sachbuch** (`art: "sachbuch"`), weil die Inhalte keine natürliche Handlung tragen: Körper, Rüssel, Familie,
+  Kalb, Nahrung, zweite Art und Schutz sind nebeneinanderstehende Themen. Ein Lebenslauf hätte das Kalb-Kapitel
+  getragen, aber nicht Asien und den Schutz. Zuri ist das durchgehende Beispiel, an dem jede Tatsache als kleine Szene
+  sichtbar wird (wie Mia im Katzenbuch).
+- **Kulisse `dschungel`**: Eine Savannen-Kulisse gibt es nicht; „Strand“ zeigt Meer. „Dschungel“ (grün, Hügel) ist die
+  passendste vorhandene – eine Kulisse „Savanne“ wäre besser (offener Punkt).
+- `klasse: 2` wie die Welt „Tiere auf allen Erdteilen“ im Lernplan.
+- Umfang: 7 Kapitel, 32 Seiten, 2.385 Wörter (62–87 je Seite), drei Fragen zum Vorhersagen (2-2 „Wie trinkt
+  sie?“, 3-3 „Was ist da los?“, 4-3 „Wie trinkt Zuri jetzt?“), je auf der nächsten Seite aufgelöst; 41 Einträge in
+  `quellen`.
 
-- **Kulisse:** Es gibt keine Savanne. Der Asiatische Elefant lebt in Wäldern; Nagarhole ist feuchter und trockener
-  Laubwald – „dschungel“ ist die passendste vorhandene Kulisse (grüner Wald). Für einen Afrikanischen
-  Savannenelefanten fehlt eine Kulisse „Savanne“ (für spätere Bücher melden).
-- **Forschung genau dazu:** Die Entwicklung der Rüsselmotorik wilder Kälber ist gerade in Kabini untersucht (Revathe,
-  Anvitha & Vidya 2020). Der Zug der Herden an den Stausee in der Trockenzeit ist dort jedes Jahr zu sehen
-  (Mongabay, Roundglass). Die Handlung ist also nicht ausgedacht, sondern das, was dort jedes Jahr geschieht.
-- **Erdteil:** Asien (Welt `tiere-der-erdteile`), im Text beiläufig „in einem Wald in Indien“.
+## 2. Prüfer
 
-Alle Tatsachen der Geschichte stehen mit Quelle in `quellen` (San Diego Zoo Wildlife Alliance Fact Sheet,
-ElephantVoices Elephant Ethogram, Smithsonian's National Zoo, Revathe et al. 2020, NPR/Elephant Listening Project,
-Mongabay, Roundglass Sustain).
+**Prüfer A** (frisch, nur Regeln und `inhalte.md`): zwei [muss] – Backenzähne falsch gezählt („sechsmal ersetzt“,
+richtig: sechs Sätze) und Lebensraum Afrika fehlte (Erdteil-Zuordnung der Welt). Umgesetzt: Backenzähne gestrichen,
+Savanne/Kenia/Regen- und Trockenzeit ergänzt, Rücken der Asiatischen Kuh berichtigt (Kopf höchster Punkt statt
+„gewölbt“), „manche Bullen“ ohne Stoßzähne, „zwei Autos“ statt „Lastwagen“, Spiegeltest gestrichen, Schnorchel und
+Waldelefant gekürzt, Bedingungen für den Wilderei-Satz und Bildregeln (kein Strohhalm, kein Kalb unter acht Monaten
+mit Rüssel-Trinken) festgehalten, Erdnüsse als Klischee verworfen. Schlaf blieb (SDZWA belegt Stehen am Tag, Liegen
+nachts).
 
-**Verworfen oder abgeschwächt:**
-
-- **„Elefanten trinken durch den Rüssel wie mit einem Strohhalm.“** Falsch: Sie saugen Wasser in den Rüssel und blasen
-  es ins Maul; der Rüssel ist nicht mit dem Magen verbunden (SDZWA). → S. 8 „saugt Wasser in ihren Rüssel. Dann
-  spritzt sie es sich ins Maul.“
-- **„Kälber trinken Milch mit dem Rüssel.“** Falsch: mit der Seite des Mauls (SDZWA). → S. 1.
-- **„Die Leitkuh führt die Herde“** (Matriarchin). Gut belegt beim Afrikanischen Savannenelefanten; für Asiatische
-  Elefanten nennt die SDZWA „no clear dominance hierarchies or matriarchal leaders“, Gruppen sind klein und wechselnd.
-  → Keine Leitkuh in der Geschichte; „die Herde zieht los“, Helferin ist die Tante.
-- **„Der Kreis um das Kalb“** (Herde bildet einen Ring). Für Asiatische Elefanten nicht belegt gefunden; belegt ist:
-  Junge laufen zwischen oder hinter Erwachsenen, bei Gefahr rückt die Gruppe eng zusammen. → S. 4 „Nila läuft
-  zwischen ihnen“, ohne Gefahr.
-- **„Elefanten haben Angst vor Mäusen.“** Volksglaube seit der Antike; Fachleute (R. Lair, J. Plotnik laut Live
-  Science bzw. The Star) sehen eher Schreck vor plötzlicher Bewegung, Mäuse in Gehegen werden meist übergangen. Kommt
-  nicht vor.
-- **„Elefantenfriedhöfe“** (sterbende Elefanten gehen an einen geheimen Ort). Mythos (Princeton University Press);
-  belegt ist nur, dass Elefanten Knochen toter Tiere aufsuchen. Kommt nicht vor (Tod ist ohnehin tabu).
-- **„Ein Elefant vergisst nie“, „Elefanten finden Wasser über viele Kilometer, weil die Älteste sich erinnert“.**
-  Für Afrikanische Elefanten in Dürrejahren untersucht, für diese Art nicht belegt gefunden → weggelassen.
-- **„Elefanten graben in der Trockenzeit nach Wasser.“** Gut belegt für Afrikanische Elefanten, für Asiatische nur
-  in Zeitungs- und Forenberichten → weggelassen.
-- **Infraschall „über zehn Kilometer“.** Keine verlässliche Zahl für diese Art gefunden; im dichten Wald wird
-  Infraschall laut SDZWA teils geschluckt → S. 12 nur „von weit hinten am See“ (offenes Ufer).
-- **„40 000 Muskeln im Rüssel“.** Zahl je nach Zählweise strittig, für Kl. 1 auch nicht nötig → weggelassen.
-- **Zeitmaß:** Trinken mit dem Rüssel gelingt Kälbern nach mehreren Monaten, die Rüsselmotorik reift über etwa ein
-  Jahr (Revathe 2020). Nila ist etwa fünf Monate alt: kann mit dem Rüssel noch nicht trinken, kann ein Grasbüschel
-  manchmal schon festhalten (S. 13 „Diesmal“ – ein Schritt, kein „jetzt kann sie es“).
-
-**Plausibel, belegt nur allgemein** (Ausgestaltung, keine Einzelbeobachtung dieser Art):
-
-- S. 7 Die Tante schiebt Nila das Ufer hinauf: belegt ist „Helping“ (schieben, heben, ziehen, „to get up a bank“,
-  ElephantVoices); die vielen Berichte von Kälbern am Ufer stammen von Afrikanischen Elefanten.
-- S. 12 Ein anderes Brummen antwortet von weit hinten am See: belegt ist, dass Rumbles Kontaktrufe zwischen Tieren und
-  Gruppen sind (SDZWA); keine Entfernungsangabe.
-- Tante und große Schwester: Verwandtschaft angenommen; Fürsorge durch andere Kühe ist belegt (SDZWA).
-- Nila ist etwa fünf Monate alt; dass sie auf S. 13 ein Grasbüschel festhält, passt zur allmählich reifenden
-  Rüsselmotorik (Revathe 2020), ein genaues Alter dafür ist nicht belegt.
-
-**Was das Kind behalten soll (Absicht):**
-
-1. Der Rüssel ist kein Strohhalm: Wasser einsaugen, ins Maul spritzen – und ein Kalb muss das lange üben; bis dahin
-   kniet es und trinkt mit dem Maul (S. 8–10, Frage zum Vorhersagen).
-2. Staub und Schlamm sind Sonnenschutz und Kühlung, die Ohren fächeln Kühle (S. 4, 5, 11).
-3. Die Herde hält zusammen: Das Kalb läuft zwischen den Großen, die Tante schiebt es das Ufer hinauf, tiefes Brummen
-   über weite Strecken (S. 4, 7, 12).
-
-**Spannung (Stufe Sanft):** eine Komplikation aus der Wirklichkeit – Nila rutscht am steilen Ufer ab (S. 6), auf der
-nächsten Seite gelöst (S. 7), Helferin sofort da. Hitze und ausgetrockneter Tümpel sind Anlass, keine Not (keine
-Erschöpfung, kein Verdursten). Keine Raubtiere, keine Menschen, keine Wilderei, kein Tod. Eine Frage (S. 9), aufgelöst
-auf S. 10.
-
-## 2. Urteil des frischen Prüfers (Zusammenfassung)
-
-- **Geschichte, kein Sachtext**: Wunsch (den Rüssel beherrschen) trägt den Bogen und wird auf S. 13 ein Stück
-  eingelöst; die Frage S. 9 trägt das Wissen (Kalb kniet und trinkt mit dem Maul); Mythen sauber verworfen.
-- **Umgesetzte Befunde**: Lehrsatz-Reste in Handlung aufgelöst – S. 4 „Die Großen fächeln mit ihren Ohren, das
-  kühlt. … Dort ist sie geschützt.“ → „Neben Nila fächeln die Großen mit ihren Ohren. Nila spürt den Luftzug. Sie
-  läuft dicht zwischen Mutter und Tante.“; S. 5 „So schützt sie ihre Haut vor Sonne und Insekten.“ → „Die Fliegen auf
-  ihrer Haut summen davon.“ S. 11 „Der Schlamm kühlt ihre heiße Haut.“ bleibt (Prüfer: ok).
-- **S. 2 „nuckelt“** bleibt: Rüssel-Lutschen bei Kälbern, wenn sie unsicher sind, steht in `quellen` (ElephantVoices,
-  „Trunk-Sucking“).
-- **Unsicherheiten** bleiben gelöst wie oben (keine Kilometerzahl, keine Leitkuh); Ausgestaltungen in §1 als
-  „plausibel, belegt nur allgemein“ vermerkt.
-- **Fassungen**: `ruhig` nötig (Stufe Ruhig, `grundsaetze.md` 9.3: keine Komplikation; S. 6–7 Abrutschen und Rufen)
-  → `elefant-ruhig` mit flachem Bachbett, Nila steigt mit Mühe, aber ohne Rutschen hinauf, die Tante geht hinter ihr.
-  `abenteuer` nicht nötig.
-
-## Steckbrief (wörtlich in jeden Bild-Prompt)
-
-Alle Tiere: **Asiatische Elefanten** (*Elephas maximus indicus*), wild – kein Afrikanischer Elefant: kleine, eher
-rechteckige Ohren mit nach vorn gefaltetem oberem Rand, gewölbte Stirn mit zwei Höckern, Rücken leicht gewölbt bzw.
-gerade (nicht durchhängend), Rüsselspitze mit **einem** „Finger“ oben, Haut grau bis graubraun, rot-braun bepudert vom
-Staub. **Keine Stoßzähne bei allen vier Tieren** (Kühe; kleine Zähne höchstens unsichtbar im Maul). Kein Halfter,
-keine Ketten, keine Decken, kein Reiter, keine Menschen.
-
-- **Nila (Hauptfigur):** weibliches Kalb, etwa fünf Monate alt, reicht der Mutter knapp bis unter den Bauch (etwa 1 m
-  Schulterhöhe); rundlich, kurzer Rüssel; **auffällig viel weiches, abstehendes braunes Haar auf Kopf und Rücken**,
-  besonders ein Haarschopf auf dem Scheitel; Haut hellgrau mit rosigem Hauch hinter den Ohren; kleine Ohren; keine
-  Stoßzähne.
-- **Mutter:** erwachsene Kuh, groß (etwa 2,5 m Schulterhöhe); dunkelgraue Haut; **hellrosa Sprenkel (Pigmentflecken)
-  an Rüsselansatz, Stirn und Ohrrändern**; keine Stoßzähne.
-- **Tante:** erwachsene Kuh, etwas kleiner als die Mutter; **einheitlich dunkelgrau, ohne helle Flecken**; Ohrrand oben
-  stark nach vorn umgeklappt; keine Stoßzähne.
-- **Große Schwester:** junge Kuh, etwa sechs Jahre, etwa halb so hoch wie die Mutter (rund 1,6–1,8 m); graue Haut,
-  noch etwas Haar auf dem Kopf; keine Stoßzähne.
-- **Landschaft:** Trockenzeit (März bis Mai) in Südindien, Nagarhole/Kabini: lichter Laubwald mit hellen Stämmen,
-  braunem trockenem Laub, roter bis rotbrauner Erde und Staub; ein ausgetrockneter Tümpel mit rissigem Schlamm; ein
-  trockenes Bachbett mit steilem Erdufer; der Kabini-Stausee: weites, flaches Ufer mit frischem grünem Gras, ruhiges
-  blau-graues Wasser, bewaldete Hügel dahinter, viele Elefanten in der Ferne. Licht warm und hell, nichts Bedrohliches;
-  keine Raubtiere, keine Boote, keine Gebäude.
-
-## Geplante Kernaussage je Bild
-
-| Bild | Abschnitt | Kernaussage des Bildes |
-|---|---|---|
-| 01 | Milch bei der Mutter | Nila steht unter der Mutter und trinkt mit dem Maul an der Zitze (zwischen den Vorderbeinen), ihr Rüssel hängt locker seitlich weg; trockener Wald |
-| 02 | Gras greifen | Nila mit der Rüsselspitze im Maul (nuckelt), daneben die große Schwester, die mit dem Rüssel ein Grasbüschel umschlingt |
-| 03 | Tümpel ausgetrocknet | rissiger, trockener Schlamm einer leeren Senke im Wald, die Herde (Mutter, Tante, Schwester, Nila) läuft im Hintergrund los |
-| 04 | Ohren fächeln, Nila in der Mitte | die Herde im Gänsemarsch durch hellen Wald, Ohren der Großen abgespreizt, Nila klein zwischen Mutter und Tante |
-| 05 | Staubbad | die Mutter wirft mit dem Rüssel eine Wolke roter Erde über ihren Rücken; Nila daneben mit Staub auf dem Kopf |
-| 06 | steiles Ufer | trockenes Bachbett, die Großen schon oben am Rand, Nila mit Vorderbeinen am steilen Erdufer, Hinterbeine abgerutscht (keine Verletzung, nur Mühe) |
-| 07 | Tante schiebt | die Tante direkt hinter Nila, Kopf und Rüssel an Nilas Hinterteil, Nila oben am Rand; Mutter oben berührt sie mit dem Rüssel |
-| 08 | Mutter trinkt | Ufer des Sees mit frischem Gras, die Mutter hebt den Rüssel zum offenen Maul, Wasser läuft hinein; im Hintergrund viele Elefanten |
-| 09 | Frage: Nilas Versuch | Nila steht am Wasser, Rüssel halb hochgehoben, Wasser tropft heraus; **kein Knien, keine Antwort im Bild** |
-| 10 | Nila kniet und trinkt | Nila mit eingeknickten Vorderbeinen am Ufer, Maul im Wasser, Rüssel zur Seite gelegt; Schwester dicht daneben |
-| 11 | Schlamm | Nila liegt seitlich im Schlamm am Ufer, ganz braun beschmiert, entspannt; Großen im Hintergrund im Schlamm |
-| 12 | Brummen am Abend | Abendlicht über dem See, die Mutter mit leicht geöffnetem Maul ruhig stehend, Nila still an ihrem Bein, Ohren leicht abgespreizt; weit hinten eine andere Gruppe |
-| 13 | Gras festhalten | letztes warmes Licht, Nila hält mit der Rüsselspitze ein Grasbüschel fest, die Mutter dicht daneben frisst |
+**Prüfer B** (frisch, gegen `inhalte.md`), Runde 1: zwei [muss] – 2-1 „trinkt sie“ widersprach Kap. 4 (Zuri kann
+mit fünf Monaten noch nicht mit dem Rüssel trinken), 4-1 „so lange bei keinem anderen Tier an Land“ falsch
+(Alpensalamander) → Vergleich mit dem Menschenkind. [sollte], alle umgesetzt: Namensrufe nicht überzeichnet
+(„antwortet besonders rasch“ statt „nur die Gerufene“), Fußheben nur als „vielleicht“ mit Quelle (ElephantVoices
+Foot-Lift, O'Connell-Rodwell), Wasserloch ohne „ohne Elefanten kein Wasser“, Bruder ruhig gerahmt und Seite endet bei
+Zuri und der Mutter, Schnorchel ein Nebensatz, Zuri schlägt aufs Wasser (spritzt nicht mit dem Rüssel), drei Arten in
+6-1 statt angehängt, Wilderei auf zwei Sätze gekürzt („Schmuck und Figuren“ statt „Andenken“, „fahren durch das
+Gebiet“ statt „Streife“), kleine unbelegte Ausschmückungen gestrichen, Formeln aus dem Katzenbuch ersetzt.
+Runde 2: **freigegeben**, drei [kann] übernommen (Staub „manchmal“, kein doppelter Auto-Vergleich, „meiden Bienen“).
+Stärkste Stellen laut Prüfer: Strohhalm-Frage mit „Saugen, rollen, spritzen“, die lauschende Familie (Spannung aus
+Neugier), Zuri kniet am Wasser, Bienenzaun und Rückbezug am Schluss.
 
 ## 3. Bilder
 
-Jedes Bild mit dem Read-Werkzeug angesehen. Maßstab: zeigt die Kernaussage des Abschnitts; Asiatische Elefanten
-(kleine Ohren mit gefaltetem Rand, Doppelhöcker, keine Stoßzähne bei allen Tieren, keine afrikanischen Merkmale),
-vier Beine, ein Rüssel, zwei Ohren; Nila überall dasselbe behaarte Kalb, die Mutter mit hellrosa Pigmentflecken an
-Rüssel, Stirn und Ohrrändern; keine Menschen, keine Schrift, hell und ruhig. Steckbrief (oben) wörtlich in jedem Prompt,
-1024 × 1024 `--basis foto`, WebP `cwebp -q 82`; Prompts in `bilder/herkunft.json`.
+Je Seite die Kernaussage; jedes Bild mit dem Read-Werkzeug angesehen. **Steckbrief** (wörtlich in jedem Prompt,
+Wortlaut in `bilder/herkunft.json`): Afrikanische Savannenelefanten in Kenia – sehr große, Afrika-förmige Ohren,
+Mulde im Rücken, zwei Rüsselfinger, graue Haut mit rotbraunem Staub. **Zuri**: Weibchen, etwa fünf Monate, etwa 1 m
+Schulterhöhe (reicht der Mutter bis unter den Bauch), rund, kurzer Rüssel, feine Haare, **keine sichtbaren
+Stoßzähne**. **Mutter**: etwa 2,5 m, zwei schlanke, leicht gebogene Stoßzähne mittlerer Länge, kleine V-Kerbe im
+linken Ohr. **Großmutter**: größte, älteste Kuh, lange Stoßzähne, rechter etwas kürzer und stumpf, ausgefranste
+Ohrränder. Natürliches Verhalten, kein lachendes Maul, nicht auf den Hinterbeinen. Kapitel 6 übernimmt vier Bilder
+der alten Geschichte (Nila, Asiatischer Elefant: kleine Ohren, Stirnhöcker, Kühe ohne Stoßzähne, behaartes Kalb,
+rosa Pigmentflecken der Mutter). 1024 × 1024 `--basis foto`, WebP q 82. Die feine V-Kerbe im Ohr ist auf den Fotos
+nicht immer zu sehen; für die Aussagen unerheblich.
 
-| Bild | Kernaussage | was stimmt | Versuche |
+| Seite | Kernaussage | Herkunft | geprüft |
 |---|---|---|---|
-| 01 | Nila trinkt Milch mit dem Maul | Kalb unter der Mutter am Euter zwischen den Vorderbeinen, behaart; Mutter mit Pigmentflecken, ohne Stoßzähne; trockener Laubwald | 1 |
-| 02 | Nila nuckelt am Rüssel, Schwester rupft Gras | Rüsselspitze am Maul eingerollt; Schwester hält ein Büschel trockenes Gras im Rüssel | 1 |
-| 03 | ausgetrockneter Tümpel, Herde zieht los | rissiger Schlamm vorn, die vier Tiere laufen davon | 1 |
-| 04 | Ohren fächeln, Nila zwischen Mutter und Tante | Herde nebeneinander, Ohren abgespreizt, Nila klein zwischen zwei Kühen | 1 |
-| 05 | Staubbad, Staub auf Nilas Kopf | Mutter wirft rote Erde über den Rücken, Nila mit rotem Staub auf dem Kopf | 1 |
-| 06 | Nila müht sich am steilen Ufer | Kalb mit Vorderbeinen am steilen Erdufer, Staub stiebt; die Großen oben; nicht verletzt | 1 |
-| 07 | Tante schiebt, Mutter berührt | Tante schiebt mit dem Rüssel am Hinterteil, Mutter oben berührt Nilas Kopf; die Tante wirkt etwas jung/klein (Steckbrief: „etwas kleiner als die Mutter“) – für die Aussage unerheblich | 1 |
-| 08 | Mutter spritzt Wasser ins Maul | Rüsselspitze am offenen Maul, Wasser läuft; Seeufer mit Gras, Hügel, viele Elefanten | 1 |
-| 09 | Frage: Wasser plätschert aus Nilas Rüssel | Nila steht aufrecht, Rüssel hoch, Wasser tropft heraus; kein Knien – verrät die Antwort nicht | 1 |
-| 10 | Nila kniet und trinkt mit dem Maul | Vorderbeine eingeknickt, Maul im Wasser, Rüssel nach oben weggerollt; Schwester daneben | 2 (Versuch 1: Rüsselspitze im Wasser, Maul darüber – las sich wie Trinken mit dem Rüssel; Prompt geschärft) |
-| 11 | Nila wälzt sich im Schlamm | Kalb liegt seitlich, ganz braun; Mutter und Tante im Schlamm dahinter | 1 |
-| 12 | Mutter brummt, Nila lauscht | Abendlicht, Mutter mit leicht offenem Maul, Nila still an ihrem Bein, weit hinten eine andere Gruppe; hell | 1 |
-| 13 | Nila hält Gras im Rüssel | Grasbüschel in der Rüsselspitze, Mutter frisst daneben, letztes Licht | 1 |
+| 1-1 | Zuri neben der Mutter im Gras, Größenunterschied | neu | Kalb reicht bis unter den Bauch, Afrika-Ohren, Akazien |
+| 1-2 | großer Fuß mit Polster, leise | neu | Fußsohle mit Nägeln und Polster, Kalbfuß daneben |
+| 1-3 | Ohren gespreizt, Adern im Gegenlicht | neu | Adern schwach sichtbar, Zuri im Schatten |
+| 1-4 | Zuri wälzt sich im Schlamm, Große duschen | neu | Kalb ganz braun, vier Beine, Große spritzen |
+| 2-1 | Rüssel hoch, schnuppert | neu, 3 Läufe (zwei am Ratenlimit gescheitert, ohne Bild) | Rüssel S-förmig in der Luft |
+| 2-2 | zwei Rüsselfinger greifen eine Frucht (Frage) | neu | kein Wasser im Bild, verrät nichts |
+| 2-3 | Mutter spritzt Wasser ins Maul | neu | Rüssel eingerollt am Maul, Wasser tropft; Kalbrüssel hängt nur (kein Rüssel-Trinken) |
+| 2-4 | Dusche der Großen, Zuri planscht | neu | Fontänen über dem Rücken, Kalb im flachen Wasser |
+| 2-5 | Stoßzähne schälen Rinde | neu, 2 Läufe (Ratenlimit) | Rinde am Stoßzahn, Zuri ohne Stoßzähne |
+| 3-1 | Familie in einer Reihe, Leitkuh vorn | neu | Reihe, Kalb dicht bei einer Kuh |
+| 3-2 | Ankunft am vollen Wasserloch in der Dürre | neu | gelbes Gras, Wasser, Abendlicht, hell |
+| 3-3 | Großmutter lauscht, Ohren gespreizt (Frage) | neu, 2 Läufe (Ratenlimit) | keine anderen Elefanten im Bild, verrät nichts |
+| 3-4 | zwei Familien begrüßen sich | neu | Rüssel erhoben, Staub, Kalb in der Mitte |
+| 3-5 | Begrüßung Rüssel an Maul, Bruder dahinter | neu | Rüssel berühren sich, junger Bulle mit kurzen Stoßzähnen |
+| 4-1 | neugeborenes Kalb zwischen den Beinen der Mutter | neu | winzig, sauber, Mutter senkt den Rüssel |
+| 4-2 | Milch mit dem Maul, Rüssel über dem Kopf | neu | Kalb an der Brust, Rüssel hochgelegt |
+| 4-3 | Wasser plätschert aus Zuris Rüssel (Frage) | neu | steht aufrecht, kniet nicht – verrät die Antwort nicht |
+| 4-4 | Zuri kniet und trinkt mit dem Maul | neu | Vorderbeine gebeugt, Maul im Wasser, Rüssel hochgerollt |
+| 4-5 | Kälber schieben mit den Köpfen, Tanten wachen | neu, 3 Läufe (Ratenlimit) | zwei Kälber Kopf an Kopf, drei Große |
+| 5-1 | Mutter bricht Zweige, Zuri frisst Gras | neu | Blätter am Rüssel, Kalb im Gras |
+| 5-2 | Großmutter gräbt im trockenen Flussbett | neu | Loch im Sand, Rüssel im Loch |
+| 5-3 | Zebras und Vögel trinken aus dem Loch | neu | zwei Zebras, kleine Vögel, Elefanten ziehen ab; kein Raubtier |
+| 5-4 | Dunghaufen mit Keimlingen | neu | grüne Keimlinge, Zuri daneben, sachlich |
+| 5-5 | Zuri schläft liegend, Mutter steht | neu | warmes Nachmittagslicht, Große dösen im Stehen |
+| 6-1 | Nilas Familie im Wald in Indien | übernommen (alt 04) | Asiatische Elefanten, Kalb zwischen Mutter und Tante, trockenes Laub |
+| 6-2 | kleine Ohren, Gras im Rüssel | übernommen (alt 13) | Grasbüschel in der Rüsselspitze, Abendlicht |
+| 6-3 | Kühe ohne Stoßzähne, rosa Flecken, behaartes Kalb | übernommen (alt 02) | ✓ |
+| 6-4 | Staubwolke über dem Rücken | übernommen (alt 05) | Staub auf Nilas Kopf |
+| 7-1 | Elefanten am Rand der Savanne, Felder dahinter | neu | Maisfelder, Häuser in der Ferne, ruhig |
+| 7-2 | Rangerin/Ranger beobachtet die Familie | neu | nur von hinten, kein Gesicht, dunkle Hände; Elefanten friedlich |
+| 7-3 | Bienenzaun am Feld, Elefanten gehen weg | neu, 2 Versuche | 1. Versuch: Bienenstöcke am Boden, Elefanten am Feld → Prompt geschärft; jetzt hängen die Stöcke am Draht, Mutter und Zuri ziehen ab |
+| 7-4 | Abend am Wasserloch, Zuri kniet, Mutter trinkt | neu | goldenes Licht, hell |
 
-14 Versuche für 13 Bilder; Kosten in `kosten.json`.
-
-## Nachtrag 2026-11-15
-
-Die Fassung `elefant-ruhig` ist entfernt: Christian hat entschieden, dass es je Geschichte nur eine Fassung gibt und keine Stufen (`grundsaetze.md` 9.3). Kleine Schwierigkeiten halten Grundschulkinder aus.
+28 Bilder neu (29 erzeugt, ein Neuversuch), 4 übernommen; nicht mehr verwendete alte Bilder (01, 03, 06–12) gelöscht,
+`herkunft.json` enthält genau die 32 verwendeten Bilder (übernommene mit Vermerk). Kosten in `kosten.json`.

@@ -1,114 +1,363 @@
 {
  "id": "hund",
- "titel": "Kalle und der rote Ball",
- "art": "sachgeschichte",
+ "titel": "Kalle, ein Wolf in der Familie",
+ "art": "sachbuch",
  "welt": "haustiere",
  "familie": null,
  "kulisse": "garten",
  "klasse": 1,
  "quellen": [
   {
-   "fakt": "Hunde sehen Farben, nicht schwarz-weiß, aber weniger als Menschen: Sie haben zwei Zapfentypen (Gipfel bei etwa 429 und 555 nm) und sehen ähnlich wie Menschen mit Rot-Grün-Schwäche; ein Zapfen für Rot fehlt.",
-   "quelle": "Neitz, Geist & Jacobs 1989, Color vision in the dog, Visual Neuroscience 3(2):119–125, doi:10.1017/S0952523800004430; https://now.tufts.edu/2020/01/07/what-colors-can-dogs-see (Tufts University, Tierärztliche Augenheilkunde), abgerufen 2026-11-15"
+   "fakt": "Hunde stammen vom Wolf ab; ihr wissenschaftlicher Name Canis lupus familiaris bedeutet ungefähr „Wolf, der zum Haus gehört“.",
+   "quelle": "Klexikon, „Hund“: https://klexikon.zum.de/wiki/Hund ; Planet Wissen, „Hunde“: https://www.planet-wissen.de/natur/haustiere/hunde/index.html ; BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Rot und Grün fallen beim Hund in denselben Farbkanal: Ein roter Ball hebt sich im grünen Gras kaum ab, ein blauer gut (Ableitung aus dem Zweifarbensehen, keine eigene Studie zu Bällen).",
-   "quelle": "Neitz, Geist & Jacobs 1989 (s. o.); https://now.tufts.edu/2020/01/07/what-colors-can-dogs-see, abgerufen 2026-11-15"
+   "fakt": "Wölfe leben in Familiengruppen (Rudeln), jagen gemeinsam und lesen genau die Stimmung der anderen.",
+   "quelle": "Klexikon, „Hund“: https://klexikon.zum.de/wiki/Hund ; BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Hunde erkunden ihre Umwelt vor allem mit der Nase; Schnüffeln auf dem Spaziergang tut ihnen gut, man soll sie schnüffeln lassen.",
-   "quelle": "Mia Cobb (University of Melbourne), The science of happier dogs, 13.10.2024, https://findanexpert.unimelb.edu.au/news/93429-the-science-of-happier-dogs--5-tips-to-help-your-canine-friends-live-their-best-life; Duranton & Horowitz 2019, Let me sniff! Nosework induces positive judgment bias in pet dogs, Applied Animal Behaviour Science 211:61–66, doi:10.1016/j.applanim.2018.12.009, abgerufen 2026-11-15"
+   "fakt": "Bei Bonn-Oberkassel wurden Knochen eines jungen Hundes zusammen mit zwei Menschen gefunden, rund 14.000 Jahre alt; Hunde sind die ältesten Haustiere des Menschen.",
+   "quelle": "Universität Bonn, Pressemitteilung 062/2013: https://www.uni-bonn.de/de/universitaet/presse-kommunikation/presseservice/archiv-pressemitteilungen/2013/062-2013 ; idw, Universität Tübingen: https://idw-online.de/de/news561473 ; Planet Wissen, „Hunde“: https://www.planet-wissen.de/natur/haustiere/hunde/index.html ; BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Hunde riechen viel feiner als Menschen; beim Schnüffeln holen sie viele kurze Atemzüge hintereinander, die Luft strömt direkt zur Riechschleimhaut.",
-   "quelle": "Craven, Paterson & Settles 2010, The fluid dynamics of canine olfaction, Journal of the Royal Society Interface 7(47):933–943, doi:10.1098/rsif.2009.0490, abgerufen 2026-11-15"
+   "fakt": "Es gibt mehrere hundert Hunderassen, vom Chihuahua bis zum Irischen Wolfshund; ihr Verhalten ist im Wesentlichen gleich.",
+   "quelle": "Planet Wissen, „Hunde“: https://www.planet-wissen.de/natur/haustiere/hunde/index.html ; BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf ; Klexikon, „Hund“: https://klexikon.zum.de/wiki/Hund, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Hunde unterscheiden den eigenen Geruch eines Menschen; Dinge, die jemand angefasst hat, tragen seinen Geruch.",
-   "quelle": "Hepper & Wells 2005, How many footsteps do dogs need to determine the direction of an odour trail?, Chemical Senses 30(4):291–298, https://pubmed.ncbi.nlm.nih.gov/15741595/, abgerufen 2026-11-15"
+   "fakt": "Hunde brauchen täglich Auslauf, mehrmals Umgang mit ihren Menschen und Kontakt zu anderen Hunden.",
+   "quelle": "Tierschutz-Hundeverordnung § 2: https://www.gesetze-im-internet.de/tierschhuv/__2.html ; BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Hunde laden mit der Spielverbeugung zum Spielen ein: Vorderkörper tief, Hinterteil oben.",
-   "quelle": "Bekoff 1995, Play signals as punctuation: the structure of social play in canids, Behaviour 132:419–429; Broschüre „Hunde sicher verstehen“, BMSGPK / Verein Tierschutz macht Schule, 5. Aufl. 2023, S. 10, https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-15"
+   "fakt": "Hunde haben einen Muskel, der die inneren Augenbrauen hebt; Wölfe haben ihn kaum; Hunde zeigen die Bewegung oft, wenn Menschen sie ansehen.",
+   "quelle": "Kaminski et al. 2019, Evolution of facial muscle anatomy in dogs, PNAS 116(29):14677–14681, https://doi.org/10.1073/pnas.1820653116 ; National Geographic: https://www.nationalgeographic.com/animals/article/dogs-eyebrows-humans-communication, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Schwanzwedeln zeigt Erregung und ist nicht automatisch Freude; man liest den ganzen Körper.",
-   "quelle": "Broschüre „Hunde sicher verstehen“, BMSGPK / Verein Tierschutz macht Schule, 5. Aufl. 2023, S. 11, https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-15"
+   "fakt": "Hunde riechen viel feiner als Menschen; ein großer Teil ihres Gehirns verarbeitet Gerüche.",
+   "quelle": "Klexikon, „Hund“: https://klexikon.zum.de/wiki/Hund, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Hunde schwitzen kaum; sie kühlen sich vor allem durch Hecheln und verlieren dabei viel Flüssigkeit, deshalb brauchen sie frisches Wasser, auch unterwegs.",
-   "quelle": "Stiftung Tierärztliche Hochschule Hannover, Bei Hitze auf den Hund achten, 07.08.2020, https://www.hannover.de/Service/Presse-Medien/Hannover.de/Aktuelles/Wirtschaft-Wissenschaft-2020/Bei-Hitze-auf-den-Hund-achten, abgerufen 2026-11-15"
+   "fakt": "Beim Schnüffeln atmen Hunde mehrmals pro Sekunde kurz ein; die Luft strömt in den hinteren Riechbereich der Nase; ausgeatmete Luft wird seitlich nach unten ausgestoßen.",
+   "quelle": "Craven, Paterson & Settles 2010, The fluid dynamics of canine olfaction, J R Soc Interface 7:933–943, https://pmc.ncbi.nlm.nih.gov/articles/PMC2871809/, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Hunde können nicht saugen; sie schlabbern, die Zungenspitze biegt sich dabei nach hinten zu einem Löffel.",
-   "quelle": "Gart, Socha, Vlachos & Jung 2015, Dogs lap using acceleration-driven open pumping, PNAS 112(52):15798–15802, https://pmc.ncbi.nlm.nih.gov/articles/PMC4703018, abgerufen 2026-11-15"
+   "fakt": "Schnüffeln und Nasenarbeit tun Hunden gut; Suchspiele mit Leckerbissen sind sinnvolle Spiele.",
+   "quelle": "Duranton & Horowitz 2019, Let me sniff!, Appl Anim Behav Sci 211:61–66, https://doi.org/10.1016/j.applanim.2018.12.009 ; BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Erwachsene Hunde schlafen viele Stunden am Tag (etwa 8 bis 13,5 Stunden).",
-   "quelle": "https://www.sleepfoundation.org/animals/how-much-do-dogs-sleep (Sleep Foundation), abgerufen 2026-11-15"
+   "fakt": "Spür- und Lawinenhunde finden Dinge und Menschen mit der Nase; sie üben lange, Suchen ist für sie ein Spiel mit Belohnung.",
+   "quelle": "Klexikon, „Hund“: https://klexikon.zum.de/wiki/Hund, abgerufen 2026-11-16"
   },
   {
-   "fakt": "Hunde brauchen täglich ausreichend Auslauf im Freien und mehrmals am Tag Umgang mit ihren Menschen.",
-   "quelle": "Tierschutz-Hundeverordnung § 2 Abs. 1, https://www.gesetze-im-internet.de/tierschhuv/__2.html, abgerufen 2026-11-15"
+   "fakt": "Hunde sind Zehengänger, können ihre Krallen nicht einziehen und haben 42 Zähne; ihr Gebiss ist zum Kauen und Reißen gebaut.",
+   "quelle": "Planet Wissen, „Caniden – die Tierfamilie der Hunde“: https://www.planet-wissen.de/natur/haustiere/hunde/hunde-tierfamilie-caniden-100.html, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Hunde hören sehr gut, auch hohe Töne, die Menschen nicht hören.",
+   "quelle": "Klexikon, „Hund“: https://klexikon.zum.de/wiki/Hund ; Planet Wissen, „Hunde“: https://www.planet-wissen.de/natur/haustiere/hunde/index.html, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Hunde sehen Farben gedämpft; ihnen fehlt der Zapfen für Rot (Zweifarbensehen wie bei Rot-Grün-Schwäche); Blau und Gelb unterscheiden sie, Rot hebt sich vom Grün kaum ab (abgeleitet).",
+   "quelle": "Neitz, Geist & Jacobs 1989, Color vision in the dog, Visual Neuroscience 3(2):119–125, https://doi.org/10.1017/S0952523800004430 ; Tufts University: https://now.tufts.edu/2020/01/07/what-colors-can-dogs-see ; Planet Wissen, „Hunde“: https://www.planet-wissen.de/natur/haustiere/hunde/index.html, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Eine reflektierende Schicht hinter der Netzhaut (Tapetum lucidum) verbessert bei Fleischfressern das Sehen bei wenig Licht.",
+   "quelle": "MSD/Merck Veterinary Manual, „Ocular Fundus“: https://www.merckvetmanual.com/eye-diseases-and-disorders/ophthalmology/ocular-fundus, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Hunde schwitzen nur wenig an den Pfotenballen; sie kühlen sich vor allem durch Hecheln (Verdunstung) und brauchen dabei viel Wasser.",
+   "quelle": "American Kennel Club, „Do Dogs Sweat?“: https://www.akc.org/expert-advice/health/do-dogs-sweat/ ; Stiftung Tierärztliche Hochschule Hannover, „Bei Hitze auf den Hund achten“: https://www.hannover.de/Service/Presse-Medien/Hannover.de/Aktuelles/Wirtschaft-Wissenschaft-2020/Bei-Hitze-auf-den-Hund-achten, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Hunde schlabbern: Die Zungenspitze biegt sich nach hinten wie ein Löffel und reißt eine Wassersäule hoch, die der Hund mit dem Maul schnappt.",
+   "quelle": "Gart, Socha, Vlachos & Jung 2015, Dogs lap using acceleration-driven open pumping, PNAS 112(52):15798–15802, https://pmc.ncbi.nlm.nih.gov/articles/PMC4703018, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Welpen wachsen etwa neun Wochen im Mutterleib; ein Wurf hat drei bis zwölf Welpen.",
+   "quelle": "Klexikon, „Hund“: https://klexikon.zum.de/wiki/Hund, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Welpen kommen blind und taub zur Welt, können ihre Körpertemperatur nicht selbst halten und schlafen fast den ganzen Tag; ab etwa Tag 11 öffnen sich Augen und Ohren.",
+   "quelle": "Planet Wissen, „Welpen“: https://www.planet-wissen.de/natur/haustiere/hunde/pwiewelpen100.html, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Ab der dritten Woche spielen Welpen miteinander; die Mutter stoppt zu wildes Spiel mit Knurren; Welpen lernen dabei Beißhemmung und Hundesprache.",
+   "quelle": "Planet Wissen, „Welpen“: https://www.planet-wissen.de/natur/haustiere/hunde/pwiewelpen100.html ; BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "In den ersten Lebenswochen (Sozialisierung) lernen Welpen Menschen, Geräusche und andere Tiere kennen.",
+   "quelle": "Planet Wissen, „Welpen“: https://www.planet-wissen.de/natur/haustiere/hunde/pwiewelpen100.html ; BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "In Deutschland dürfen Welpen frühestens nach acht Wochen von der Mutter getrennt werden; oft ist länger besser.",
+   "quelle": "Tierschutz-Hundeverordnung § 2: https://www.gesetze-im-internet.de/tierschhuv/__2.html ; Planet Wissen, „Welpen“: https://www.planet-wissen.de/natur/haustiere/hunde/pwiewelpen100.html, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Eine Hündin mit Jungen und die Welpen fasst man nicht an.",
+   "quelle": "BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“ (Mai 2025): https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Die Milchzähne fallen ab etwa dem vierten Monat aus; Hunde lernen ein Leben lang.",
+   "quelle": "Planet Wissen, „Welpen“: https://www.planet-wissen.de/natur/haustiere/hunde/pwiewelpen100.html ; BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Hunde verständigen sich vor allem mit Körpersprache: Gesicht, Haltung, Schwanz; ein freundlicher Hund ist locker mit entspanntem Gesicht.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf ; Planet Wissen, „Die Körpersprache der Hunde“: https://www.planet-wissen.de/natur/tierwelt/die_sprache_der_tiere/pwiediekoerpersprachederhunde100.html, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Spielaufforderung: Vorderkörper tief, Hinterteil hoch, Hüpfen.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Schwanzwedeln zeigt Erregung, nicht automatisch Freude; hohes Wedeln zeigt hohe Erregung.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Kopf wegdrehen, über Nase und Lippen lecken, zur Seite schauen sind Beschwichtigungssignale; ängstliche Hunde machen sich klein, der Schwanz ist eingeklemmt.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf ; Planet Wissen, „Die Körpersprache der Hunde“: https://www.planet-wissen.de/natur/tierwelt/die_sprache_der_tiere/pwiediekoerpersprachederhunde100.html, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Warnzeichen sind Steifwerden, Starren, Knurren, Zähnezeigen und gesträubtes Nackenfell; dann Abstand halten; Knurren ist eine Warnung.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf ; BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“ (Mai 2025): https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Einen fremden Hund nur mit Erlaubnis des Halters streicheln, ihn am Handrücken schnuppern lassen; Hunde ohne Halter, hinter Zäunen oder im Auto nicht anfassen.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf ; BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“ (Mai 2025): https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf ; Dogs Trust, „Be Dog Smart“: https://dogstrust.ie/dog-advice/education/be-dog-smart, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Hunde an Brust und Hals streicheln, nicht von oben auf den Kopf; nicht über den Hund beugen, nicht umarmen, nicht hochheben; nicht in Augen, Ohren, Maul fassen.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf ; BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“ (Mai 2025): https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Läuft ein Hund auf einen zu: nicht weglaufen, still stehen, Arme hängen lassen, ruhig atmen, den Hund nicht anstarren.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf ; BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“ (Mai 2025): https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Hunde beim Fressen und am Schlafplatz nicht stören, ihnen Futter und Spielsachen nicht streitig machen.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf ; BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“ (Mai 2025): https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf ; Dogs Trust, „Be Dog Smart“: https://dogstrust.ie/dog-advice/education/be-dog-smart, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Menschen mit Angst vor Hunden müssen Hunde nicht anfassen; einen Bogen gehen entschärft Begegnungen, auch für Hunde.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Kinder sollen nicht mit Hunden herumtoben; ruhige Such- und Versteckspiele mit Pausen eignen sich; Erwachsene beaufsichtigen.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf ; BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“ (Mai 2025): https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf ; Dogs Trust, „Be Dog Smart“: https://dogstrust.ie/dog-advice/education/be-dog-smart, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Hunde lernen am besten mit Belohnung (Futter, Spiel, Streicheln, Stimme), nicht mit Strafe.",
+   "quelle": "BMSGPK / Verein Tierschutz macht Schule, „Hunde sicher verstehen“, 5. Aufl. 2023: https://www.konsumentenfragen.at/konsumentenfragen/Zentrale_Elemente/Materialien/TierschutzMaterialien/Hunde-sicher-verstehen.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Der Border Collie Rico kannte die Namen von über 200 Gegenständen.",
+   "quelle": "Kaminski, Call & Fischer 2004, Word learning in a domestic dog, Science 304:1682–1683, https://publications.goettingen-research-online.de/ID-12945, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Weintrauben, Rosinen und Xylit (Birkenzucker, z. B. in zuckerfreiem Kaugummi) sind für Hunde giftig; Schokolade gehört außer Reichweite.",
+   "quelle": "Vetmeduni Wien, „Tipps fürs Tier – Weihnachten“: https://vetmeduni.ac.at/fileadmin/v/tierspital/TippsFuersTier_Weihnachten_NEU.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Hunde werden regelmäßig tierärztlich untersucht und geimpft.",
+   "quelle": "BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“ (Mai 2025): https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Die Lebenserwartung von Hunden liegt bei etwa elf Jahren ab Geburt, je nach Rasse unterschiedlich.",
+   "quelle": "Teng et al. 2022, Life tables of annual life expectancy and mortality for companion dogs in the UK, Sci Rep 12:6415, https://pmc.ncbi.nlm.nih.gov/articles/PMC9050668, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Nach dem Anfassen von Tieren Hände waschen.",
+   "quelle": "BIOEG / kindergesundheit-info.de, „Sicherheitsregeln im Umgang mit Tieren“ (Mai 2025): https://www.kindergesundheit-info.de/fileadmin/user_upload/kindergesundheit-info.de/Download/Haus_und_Garten/Sicherer-Umgang-mit_Tieren_BIOEG_kindergesundheit-info.pdf, abgerufen 2026-11-16"
+  },
+  {
+   "fakt": "Auch kleine Bisse und Kratzer von Tieren sollen Erwachsene ansehen und versorgen lassen.",
+   "quelle": "Apotheken Umschau, „Tierbisse bei Kindern“ (auch oberflächliche Bisse ärztlich versorgen): https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/tierbisse-bei-kindern-893211.html, abgerufen 2026-11-16"
   }
  ],
- "seiten": [
+ "kapitel": [
   {
-   "text": "Nach der Schule wartet Kalle schon an der Tür. Kalle ist ein brauner Hund mit weißer Brust. Ida und Papa ziehen ihre Jacken an. Heute will Ida mit Kalle Ball spielen.",
-   "bild": "bilder/01.webp"
+   "titel": "Ein Wolf wird Familie",
+   "seiten": [
+    {
+     "text": "Das ist Kalle. Er wohnt bei Ida und ihrem Papa. Kalle hat ein rotbraunes Fell, eine weiße Brust und weiche Schlappohren. Jetzt sitzt er an der Haustür und schaut hinauf. Gleich geht es nach draußen.\n\nKalle sieht nicht aus wie ein wildes Tier. Trotzdem steckt eines in ihm. Seine Urahnen waren Wölfe. Jeder Hund auf der Welt stammt vom Wolf ab. Sein Name in der Sprache der Forscher bedeutet sogar ungefähr: Wolf, der zum Haus gehört.",
+     "bild": "bilder/01-01.webp"
+    },
+    {
+     "text": "Wölfe leben in Familien. Eltern und Junge ziehen zusammen umher, jagen zusammen und passen aufeinander auf. Darum verstehen Wölfe sehr genau, wie es den anderen in der Gruppe geht.\n\nVor sehr langer Zeit kamen Wölfe und Menschen sich näher. Wie das genau anfing, weiß niemand sicher. Bei Bonn haben Forscher uralte Knochen gefunden. Sie stammen von zwei Menschen und ihrem jungen Hund. Sie sind ungefähr 14.000 Jahre alt. Kein anderes Tier lebt schon so lange mit Menschen zusammen.",
+     "bild": "bilder/01-02.webp"
+    },
+    {
+     "text": "Aus den Wölfen von damals sind viele verschiedene Hunde geworden. Heute gibt es mehrere hundert Rassen. Manche Hunde haben langes Fell, manche kurzes. Manche haben Stehohren, andere Schlappohren wie Kalle.\n\nEin Chihuahua ist winzig. Ein Irischer Wolfshund ist riesig. Und doch sind beide Hunde. Sie riechen, spielen und reden mit ihrem Körper auf dieselbe Art. Kalle ist ein Mischling. In ihm stecken mehrere Rassen auf einmal.",
+     "bild": "bilder/01-03.webp"
+    },
+    {
+     "text": "Wie ein Wolf mag Kalle nicht gern lange allein sein. Seine Familie sind jetzt Ida und Papa. Abends liegt er am liebsten dort, wo sie sind. Dann legt er seinen Kopf auf Idas Fuß.\n\nEin Hund braucht jeden Tag Zeit mit seinen Menschen. Er will mit ihnen spazieren gehen, schnuppern, spielen und auch einfach in ihrer Nähe dösen. Gern trifft er auch andere Hunde. Das steht in Deutschland sogar im Gesetz. Ein Hund ist kein Spielzeug, das man in die Ecke stellt. Er ist ein Familienmitglied.",
+     "bild": "bilder/01-04.webp"
+    },
+    {
+     "text": "Schau einmal genau in Kalles Gesicht, wenn er dich ansieht. Über seinen Augen bewegt sich etwas. Er zieht die inneren Ecken seiner Augenbrauen ein Stück nach oben. Dann wirken seine Augen größer und ganz weich.\n\nDafür haben Hunde einen kleinen Muskel über dem Auge. Forscher haben entdeckt: Wölfe haben diesen Muskel fast nicht. Hunde zeigen den Blick oft, wenn ein Mensch sie anschaut. Und wir Menschen reagieren stark darauf. Viele nennen ihn den Hundeblick.",
+     "bild": "bilder/01-05.webp"
+    }
+   ]
   },
   {
-   "text": "Draußen bleibt Kalle an jedem Baum stehen. Ida möchte schnell zur Wiese. Aber Kalles Nase riecht, wer hier schon gelaufen ist. Also wartet Ida, bis er fertig ist.",
-   "bild": "bilder/02.webp"
+   "titel": "Die Supernase",
+   "seiten": [
+    {
+     "text": "Draußen bleibt Kalle an jedem Baum stehen. Er senkt den Kopf und schnüffelt am Gras, an Blättern und an der Rinde. Ida würde gern weitergehen. Aber sie wartet. Forscher haben herausgefunden: Schnüffeln tut Hunden gut.\n\nFür Kalle ist der Baum voller Nachrichten. Hier haben andere Hunde geschnuppert und ihre Spuren hinterlassen. Kalle liest sie mit der Nase. Eine Hundenase riecht viel feiner als unsere. Ein großer Teil von Kalles Gehirn ist nur für Gerüche da. Was für uns nach nichts riecht, ist für Kalle eine ganze Welt aus Gerüchen.",
+     "bild": "bilder/02-01.webp"
+    },
+    {
+     "text": "Hör einmal genau hin, wenn ein Hund schnüffelt. Es klingt wie ein schnelles Schniff, schniff, schniff. Der Hund holt viele kurze Atemzüge hintereinander, mehrmals in einer einzigen Sekunde.\n\nIn seiner Nase passiert dabei etwas Besonderes. Die Luft mit den Gerüchen strömt tief nach hinten in die Nase. Dort wird gerochen. Beim Ausatmen bläst die Luft seitlich nach unten aus der Nase. So pustet Kalle die Spur vor sich nicht weg. Er kann einfach weiterschnüffeln.",
+     "bild": "bilder/02-02.webp"
+    },
+    {
+     "text": "Auf der Wiese spielen Ida und Kalle ein Suchspiel. Papa hält Kalle an der Leine, und Kalle setzt sich. Ida läuft mit Kalles rotem Ball weit weg. Sie versteckt ihn im hohen Gras, hinter einem Grasbüschel.\n\nDann kommt sie zurück. Papa macht die Leine los. Kalle steht auf und läuft los. Von hier aus kann er den Ball nicht sehen. Das Gras ist zu hoch, und der Ball liegt ganz still.\n\nWas glaubst du: Wie findet Kalle den Ball?",
+     "bild": "bilder/02-03.webp",
+     "frage": true
+    },
+    {
+     "text": "Mit der Nase! Kalle läuft hin und her, die Nase dicht über dem Boden. Schniff, schniff, schniff. Dann wird er langsamer. Er biegt ab, folgt einem Geruch und steckt die Schnauze ins Gras. Da liegt der Ball!\n\nDer Ball riecht nach Kalle selbst und nach Idas Händen. Und Ida ist genau hier entlanggelaufen. Für Kalle ist das ein Spiel, das ihm sehr gefällt. Suchspiele für die Nase sind gute Spiele für Kinder und Hunde. Sie sind ruhig, und der Hund darf das tun, was er am besten kann.",
+     "bild": "bilder/02-04.webp"
+    },
+    {
+     "text": "Manche Hunde haben mit ihrer Nase eine Arbeit. Spürhunde suchen am Flughafen nach Dingen, die nicht in einen Koffer gehören. Lawinenhunde lernen, Menschen im Schnee zu finden. Beim Üben versteckt sich ein Helfer im Schnee. Der Hund sucht mit der Nase, bis er ihn findet.\n\nFür die Hunde ist auch das ein Suchspiel. Finden sie, was sie suchen, bekommen sie eine Belohnung. Sie üben lange mit ihren Menschen. Kalle ist kein Spürhund. Aber seine Nase funktioniert genauso. Er übt nur jeden Tag auf dem Spaziergang.",
+     "bild": "bilder/02-05.webp"
+    }
+   ]
   },
   {
-   "text": "Auf der Wiese holt Ida den roten Ball heraus. Kalle drückt die Brust tief ins Gras. Sein Po bleibt oben, der Schwanz wedelt. So lädt Kalle Ida zum Spielen ein.",
-   "bild": "bilder/03.webp"
+   "titel": "Körper und Sinne",
+   "seiten": [
+    {
+     "text": "Hast du schon einmal Hundespuren im Matsch gesehen? Schau genau hin. Vorn an jedem Abdruck sind kleine Striche. Das sind Kalles Krallen.\n\nHunde laufen auf ihren Zehen, auf festen Ballen. Ihre Krallen können sie nicht einziehen wie eine Katze. Darum sind sie bei jedem Schritt dabei. Auf dem Küchenboden klicken sie leise. Auch Kalles Zähne erzählen von den Wölfen. Er hat 42 Zähne, vorn lange Eckzähne. Sein Gebiss ist zum Reißen und Kauen gebaut. Auf einem festen Kauknochen kaut Kalle gern lange.",
+     "bild": "bilder/03-01.webp"
+    },
+    {
+     "text": "Plötzlich bleibt Kalle mitten auf der Wiese stehen. Er hebt den Kopf, und seine Ohren bewegen sich ein kleines Stück nach vorn. Ida hört nichts. Kalle schon.\n\nHunde hören sehr gut. Sie hören auch ganz hohe Töne, die wir Menschen gar nicht hören können. Kalle hört Schritte vor der Haustür oft schon, wenn Ida noch gar nichts merkt. Vielleicht raschelt gerade eine Maus im Gras. Oder ein Vogel landet weit hinten in der Hecke. Was es auch ist: Kalles Ohren haben es zuerst bemerkt.",
+     "bild": "bilder/03-02.webp"
+    },
+    {
+     "text": "Ida legt Kalles roten Ball vor ihn ins Gras. Für Ida leuchtet er knallrot im Grün. Man kann ihn gar nicht übersehen. Doch Kalle schaut zur Seite und sucht weiter herum. Er läuft beinahe an dem Ball vorbei.\n\nErinnerst du dich? Im hohen Gras hat Kalle den Ball mit der Nase gefunden. Aber jetzt liegt er doch direkt vor ihm.\n\nWas glaubst du: Warum sieht Kalle den roten Ball so schlecht?",
+     "bild": "bilder/03-03.webp",
+     "frage": true
+    },
+    {
+     "text": "Kalles Augen sehen Farben anders als unsere. Hunde sehen Farben, aber blasser. Ihnen fehlt die Sehzelle für Rot. Darum hebt sich der rote Ball für Kalle kaum vom Gras ab.\n\nBlau und Gelb kann Kalle gut unterscheiden. Einen blauen Ball sieht er im Gras viel deutlicher. Suchst du ein Spielzeug für einen Hund aus, nimm also lieber Blau oder Gelb. Und in der Dämmerung sehen Hunde gut. Hinter ihrem Auge liegt eine Schicht wie ein Spiegel. Sie wirft das wenige Licht noch einmal zurück. Darum schimmern Kalles Augen, wenn abends eine Lampe auf ihn scheint.",
+     "bild": "bilder/03-04.webp"
+    },
+    {
+     "text": "Nach dem Laufen legt sich Kalle ins Gras. Sein Maul ist offen, seine Zunge hängt weit heraus. Er atmet schnell und flach. Kalle hechelt.\n\nWir Menschen schwitzen, wenn uns warm ist. Kalle kann das kaum. Er hat nur ein paar Schweißdrüsen an seinen Pfotenballen. Darum kühlt er sich mit dem Hecheln ab. Dabei verdunstet Wasser auf seiner Zunge und in seinem Maul. Das nimmt Wärme mit. Aber Kalle verliert so auch viel Wasser. Er bekommt Durst.",
+     "bild": "bilder/03-05.webp"
+    },
+    {
+     "text": "Papa gießt frisches Wasser aus der Flasche in einen Napf. Kalle trinkt sofort. Schlapp, schlapp, schlapp! Das Wasser spritzt bis auf Idas Schuhe.\n\nHunde können nicht saugen wie wir mit einem Strohhalm. Sie schlabbern. Dabei biegt sich die Zungenspitze nach hinten, wie ein kleiner Löffel. Die Zunge schnellt ins Wasser und gleich wieder hoch. Dabei reißt sie eine kleine Wassersäule mit. Die schnappt Kalle mit dem Maul. Darum hat Papa immer Wasser dabei, wenn sie unterwegs sind. Vor allem, wenn es warm ist.",
+     "bild": "bilder/03-06.webp"
+    }
+   ]
   },
   {
-   "text": "Ida wirft den Ball, so weit sie kann. Kalle flitzt los, seine Ohren flattern. Der Ball hüpft und rollt ins hohe Gras.",
-   "bild": "bilder/04.webp"
+   "titel": "Welpen",
+   "seiten": [
+    {
+     "text": "Kalle war auch einmal winzig. Ungefähr neun Wochen lang wachsen Welpen im Bauch ihrer Mutter. Dann kommen meist mehrere auf einmal zur Welt. Kalle hatte sechs Geschwister.\n\nNeugeborene Welpen sind blind und taub. Ihre Augen und Ohren sind noch zu. Sie können sich auch noch nicht selbst warm halten. Darum kuscheln sie sich dicht an die Mutter und aneinander. Sie trinken Milch und schlafen fast den ganzen Tag. Eine Hündin mit ihren Welpen lässt man in Ruhe. Die Kleinen fasst man nicht an, wenn die Mutter dabei ist.",
+     "bild": "bilder/04-01.webp"
+    },
+    {
+     "text": "Nach ungefähr zwei Wochen gehen bei den Welpen langsam die Augen auf. Auch die Ohren öffnen sich. Jetzt sehen und hören sie ihre Welt zum ersten Mal.\n\nSchon vorher haben sie angefangen, sich auf wackeligen Beinen vorwärtszuschieben. Bald krabbeln sie durch die ganze Wurfkiste. Sie stolpern übereinander, plumpsen hin und rappeln sich wieder auf. Jeden Tag werden ihre Beine ein bisschen sicherer. Ihre Mutter bleibt immer in der Nähe.",
+     "bild": "bilder/04-02.webp"
+    },
+    {
+     "text": "Ab der dritten Woche spielen die Welpen miteinander. Sie raufen, rollen sich über den Boden und knabbern an Ohren und Pfoten. Das sieht wild aus. Aber beim Spielen lernen sie viel.\n\nIst ein Welpe zu wild, knurrt die Mutter ihn an. Dann hält er inne und spielt sanfter weiter. So lernt jeder kleine Hund, wie fest er zubeißen darf. Und er lernt, die Sprache der anderen Hunde zu verstehen. Darum brauchen Welpen ihre Mutter und ihre Geschwister.",
+     "bild": "bilder/04-03.webp"
+    },
+    {
+     "text": "In den ersten Lebenswochen lernen Welpen auch Menschen kennen. Sie schnuppern an Händen und hören Stimmen und Schritte. Sie lernen auch andere Tiere kennen. Was sie jetzt freundlich erleben, macht ihnen später seltener Angst.\n\nIn Deutschland dürfen Welpen erst mit acht Wochen von der Mutter weg. Oft ist es für sie besser, wenn sie noch ein bisschen länger bleiben. Kalle kam mit zehn Wochen zu Ida und Papa. Am ersten Abend hat er an allem geschnuppert. Dann ist er in seinem neuen Körbchen eingeschlafen.",
+     "bild": "bilder/04-04.webp"
+    },
+    {
+     "text": "Als kleiner Welpe hatte Kalle dünne, scharfe Milchzähne. Ab ungefähr vier Monaten fielen sie aus. Darunter wuchsen die großen Zähne nach. In dieser Zeit wollte Kalle auf allem herumkauen, sogar auf Idas Hausschuhen.\n\nDarum bekam er Kauspielzeug, das ihm gehörte. Ein junger Hund lernt jeden Tag dazu. Er lernt, an der Leine zu gehen. Er lernt, wo sein Schlafplatz ist. Heute ist Kalle erwachsen. Aber ein Hund lernt sein ganzes Leben lang dazu.",
+     "bild": "bilder/04-05.webp"
+    }
+   ]
   },
   {
-   "text": "Kalle bleibt stehen und schaut sich um. Ida sieht den Ball sofort, rot im grünen Gras. Doch Kalle läuft einfach daran vorbei. Ida wundert sich.",
-   "bild": "bilder/05.webp"
+   "titel": "Was der Hund sagt",
+   "seiten": [
+    {
+     "text": "Hunde reden nicht mit Wörtern. Sie reden mit ihrem ganzen Körper. Gesicht, Ohren, Schwanz und Haltung sagen etwas. Andere Hunde verstehen das sofort. Und wer genau hinschaut, kann es auch lernen.\n\nSchau dir Kalle an, wenn er sich wohlfühlt. Sein Körper ist locker, nichts an ihm ist steif. Sein Maul ist leicht offen, das Gesicht weich. Der Schwanz hängt entspannt herunter oder schwingt locker hin und her. So sieht ein freundlicher, ruhiger Hund aus.",
+     "bild": "bilder/05-01.webp"
+    },
+    {
+     "text": "Kalle hat Lust zu spielen. Er drückt seine Brust tief auf den Boden, die Vorderbeine weit nach vorn gestreckt. Sein Hinterteil bleibt oben. Dann hüpft er kurz zur Seite und schaut Ida an.\n\nDiese Haltung heißt Spielaufforderung. Hunde zeigen sie auch anderen Hunden. Sie sagt: Was jetzt kommt, ist ein Spiel. Auch wenn es gleich wild aussieht. Ida legt das Spielzeug weg und versteckt ein Leckerchen für Kalles Nase. Ruhige Spiele passen für Kind und Hund am besten.",
+     "bild": "bilder/05-02.webp"
+    },
+    {
+     "text": "Am Gartenzaun bleibt Kalle stehen. Draußen geht ein fremder Hund vorbei. Kalle steht ganz aufrecht. Sein Kopf ist hoch, die Ohren sind nach vorn gerichtet. Sein Schwanz steht hoch und wedelt schnell hin und her.\n\nViele Menschen denken: Ein Hund, der mit dem Schwanz wedelt, freut sich. Ist das bei Kalle auch so?\n\nWas glaubst du: Freut sich Kalle gerade?",
+     "bild": "bilder/05-03.webp",
+     "frage": true
+    },
+    {
+     "text": "Nicht unbedingt. Wedeln heißt vor allem: Der Hund ist aufgeregt. Das kann Freude sein. Es kann aber auch Unsicherheit sein oder Ärger. Ein hoher, steifer Schwanz, der schnell wedelt, zeigt große Aufregung. Bei Kalle hört es auf, sobald der fremde Hund weg ist.\n\nDarum schaut man nie nur auf den Schwanz. Man schaut auf den ganzen Hund. Ist er locker oder steif? Ist sein Gesicht weich oder angespannt? Erst alles zusammen verrät, wie es einem Hund geht.",
+     "bild": "bilder/05-04.webp"
+    },
+    {
+     "text": "Idas Freund Jonas ist zu Besuch. Er möchte Kalle die ganze Zeit streicheln. Kalle liegt in seinem Körbchen. Er dreht den Kopf weg. Dann leckt er sich kurz über die Nase und schaut zur Seite.\n\nDas sind feine Zeichen. Sie heißen: Das wird zu viel. Bitte in Ruhe lassen. Jonas hört auf und setzt sich auf das Sofa. Kalle schläft ein.\n\nEin ängstlicher Hund zeigt es noch deutlicher. Bei ihm geht alles nach hinten und unten: die Ohren, der Blick, der ganze Körper. Der Schwanz ist eingeklemmt. Auch ihn lässt man in Ruhe und geht ein Stück weg.",
+     "bild": "bilder/05-05.webp"
+    },
+    {
+     "text": "Manchmal sagt ein Hund ganz deutlich: Bleib weg! Er wird steif und starrt. Vielleicht knurrt er, zeigt die Zähne, und das Fell auf seinem Nacken stellt sich auf. Dann hält man Abstand. Man schaut ihn nicht an, geht langsam weg und fasst ihn nie an. Ist ein Erwachsener in der Nähe, sagt man es ihm.\n\nKnurren ist eine Warnung. Es ist gut, dass ein Hund warnt. Er sagt damit vorher, was er nicht will. Kalle knurrt zum Beispiel leise, wenn jemand an seinen Kauknochen geht. Darum lassen Ida und Jonas ihn beim Kauen in Ruhe.",
+     "bild": "bilder/05-06.webp"
+    }
+   ]
   },
   {
-   "text": "Was Ida nicht weiß: Rot leuchtet für Kalle nicht. Für ihn sieht der Ball fast aus wie das Gras.",
-   "bild": "bilder/06.webp"
+   "titel": "Sicher mit Hunden",
+   "seiten": [
+    {
+     "text": "Auf dem Spaziergang begegnen Ida und Papa einer Frau mit einem schwarz-weißen Hund. Ida möchte ihn gern streicheln. Zuerst fragt sie die Frau, ob sie darf. Die Frau sagt ja.\n\nJetzt darf der Hund entscheiden. Ida kommt langsam von der Seite näher. Sie hält ihm die Hand tief hin, mit dem Handrücken nach vorn. Der Hund schnuppert daran. Er bleibt locker stehen und wedelt ruhig. Er möchte Kontakt. Ginge er weg, würde Ida ihn in Ruhe lassen. Einen Hund ohne seinen Menschen streichelt man nie. Auch nicht hinter einem Zaun oder im Auto.",
+     "bild": "bilder/06-01.webp"
+    },
+    {
+     "text": "Wo streichelt man einen Hund am besten? An der Brust und am Hals, von der Seite. Eine Hand, die von oben auf den Kopf kommt, mögen viele Hunde gar nicht. Ida streichelt kurz und hört dann auf. Sie schaut, ob der Hund mehr möchte. Er drückt sich an ihre Hand. Also streichelt sie weiter.\n\nAuch wenn man einen Hund sehr lieb hat: Man beugt sich nicht über ihn. Man umarmt ihn nicht und hebt ihn nicht hoch. Dein Gesicht bleibt weg vom Hundegesicht. Augen, Ohren und Maul fasst man nicht an, und am Schwanz zieht man nie.",
+     "bild": "bilder/06-02.webp"
+    },
+    {
+     "text": "Im Park geht Papa ein paar Schritte hinter Ida. Da kommt ein fremder Hund auf Ida zugelaufen. Ida rennt nicht weg. Wer rennt, weckt bei vielen Hunden die Lust, hinterherzulaufen.\n\nIda macht sich zu einem Baum. Sie bleibt still stehen und lässt die Arme hängen. Sie atmet ruhig und schaut den Hund nicht an. Sie schaut lieber auf ihre Füße. Der Hund schnüffelt kurz im Gras neben ihren Schuhen. Ein Baum ist für einen Hund langweilig. Er trabt zurück zu seinem Menschen. Ida geht langsam weiter und erzählt es Papa.",
+     "bild": "bilder/06-03.webp"
+    },
+    {
+     "text": "Kalle frisst aus seinem Napf. Ida setzt sich an den Küchentisch und lässt ihn in Ruhe fressen. Kaut Kalle auf seinem Kauknochen, nimmt sie ihm den Knochen nicht weg. Auch kein Spielzeug aus seinem Maul. Das gilt für fremde Hunde und genauso für den eigenen.\n\nFür einen Hund ist sein Futter sehr wichtig. Will ihm jemand etwas wegnehmen, muss er es vielleicht verteidigen. Darum lässt man ihn in Ruhe. Liegt Kalle in seinem Körbchen, wird er auch nicht gestört. Dort ist sein Platz zum Ausruhen.",
+     "bild": "bilder/06-04.webp"
+    },
+    {
+     "text": "Idas Freundin Mira hat Angst vor Hunden. Auf dem Weg kommt ihnen ein großer Hund an der Leine entgegen. Mira wird ganz still. Der Mann mit dem Hund meint, sie könne ihn ruhig streicheln. Er sei ganz lieb.\n\nMira muss das nicht. Niemand muss einen Hund streicheln. Auch nicht, wenn jemand sagt, er sei lieb. Mira geht ruhig weiter und macht einen großen Bogen um den Hund. Sie schaut nicht zu ihm hin. Auch für Hunde ist ein Bogen ein freundliches Zeichen. Er heißt: Keine Sorge, hier will niemand etwas von dir. Der Hund schnuppert am Wegrand und beachtet Mira gar nicht.",
+     "bild": "bilder/06-05.webp"
+    }
+   ]
   },
   {
-   "text": "Kalle sucht hin und her. Was glaubst du: Wie findet Kalle den Ball?",
-   "bild": "bilder/07.webp",
-   "frage": true
-  },
-  {
-   "text": "Mit der Nase! Kalle schnüffelt schnell, dicht über dem Boden. Der Ball riecht nach Kalle und nach Ida. Schnapp, da hat er ihn!",
-   "bild": "bilder/08.webp"
-  },
-  {
-   "text": "Kalle bringt den Ball zurück, und Ida lacht. Sie wirft wieder und wieder. Dann legt sich Kalle ins Gras und hechelt. Seine Zunge hängt weit heraus.",
-   "bild": "bilder/09.webp"
-  },
-  {
-   "text": "Papa holt eine Flasche und einen Napf aus dem Rucksack. Kalle hechelt noch und schlabbert gierig. Seine Zungenspitze biegt sich nach hinten wie ein Löffel. Das Wasser spritzt nach allen Seiten.",
-   "bild": "bilder/10.webp"
-  },
-  {
-   "text": "Zu Hause schläft Kalle lange in seinem Korb. Am Abend liest Papa Ida aus einem Hundebuch vor. Im Buch steht: Hunde sehen Blau gut, Rot aber kaum.",
-   "bild": "bilder/11.webp"
-  },
-  {
-   "text": "Ida kramt in der Spielzeugkiste. Ganz unten liegt ein blauer Ball. Den kann Kalle gut sehen! Ida legt ihn neben die Leine.",
-   "bild": "bilder/12.webp"
-  },
-  {
-   "text": "Am nächsten Tag wirft Ida den blauen Ball. Er rollt ins hohe Gras. Kalle rennt los, direkt zum Ball. Diesmal muss er gar nicht suchen.",
-   "bild": "bilder/13.webp"
-  },
-  {
-   "text": "Auf dem Heimweg schnüffelt Kalle wieder an jedem Baum. Ida lässt ihm Zeit. Den blauen Ball trägt Kalle selbst nach Hause.",
-   "bild": "bilder/14.webp"
+   "titel": "Was ein Hund braucht",
+   "seiten": [
+    {
+     "text": "Heute regnet es. Ida und Kalle spielen drinnen ein Suchspiel. Papa sitzt dabei. Kalle wartet in der Küche. Ida stellt drei umgedrehte Becher auf den Teppich. Unter einen legt sie ein kleines Leckerchen.\n\nDann darf Kalle kommen. Er schnüffelt an jedem Becher, stupst einen mit der Nase an und bleibt davor stehen. Treffer! Solche Spiele sind gut für Kinder und Hunde. Sie sind ruhig, und es ist immer ein Erwachsener dabei. Wildes Toben und Rangeln gehören nicht dazu. Wird ein Hund zu wild, hört das Spiel auf. Nach einer Weile ist Pause.",
+     "bild": "bilder/07-01.webp"
+    },
+    {
+     "text": "Kalle lernt gern Neues. Ida übt mit ihm „Sitz“. Setzt er sich, bekommt er sofort ein Leckerchen aus ihrer flachen Hand. So lernt Kalle: Sitzen lohnt sich. Hunde lernen am besten mit Belohnung, nicht mit Strafe. Belohnen kann man auch mit Spielen, Streicheln oder einer freundlichen Stimme.\n\nManche Hunde lernen erstaunlich viel. Ein Border Collie namens Rico kannte die Namen von über 200 Spielsachen. Sagte man ihm einen Namen, holte er genau das richtige Spielzeug. Forscher haben das sorgfältig untersucht.",
+     "bild": "bilder/07-02.webp"
+    },
+    {
+     "text": "Früh am Morgen steht Kalle schon an der Tür. Papa zieht die Jacke an, auch wenn es draußen regnet. Mehrmals am Tag geht jemand mit Kalle hinaus, bei Sonne, Regen und Schnee. Danach füllt Ida seinen Napf mit Hundefutter und frischem Wasser.\n\nDraußen braucht Kalle Bewegung und viel Zeit zum Schnuppern. Manchmal trifft er andere Hunde, die er kennt. Dann beschnuppern sie sich lange. Zu Hause hat er einen ruhigen Schlafplatz, an dem ihn niemand stört. Und er hat seine eigenen Spielsachen. Die Spielsachen von Ida sind nicht für ihn.",
+     "bild": "bilder/07-03.webp"
+    },
+    {
+     "text": "Regelmäßig geht die Familie mit Kalle zur Tierärztin. Sie hört sein Herz ab, schaut in seine Ohren und in sein Maul. Dann bekommt Kalle eine Impfung, damit er gesund bleibt.\n\nZu Hause legt Ida ihre Tüte mit Rosinen hoch oben ins Regal. Kalle schnuppert neugierig in die Luft. Aber er bekommt nichts davon. Schokolade, Weintrauben und Rosinen sind für Hunde giftig. Zuckerfreier Kaugummi auch. Von unserem Essen und von Süßigkeiten bekommt Kalle nichts. Ein Hund lebt viele Jahre, oft mehr als zehn. So lange sorgt die Familie jeden Tag für ihn.",
+     "bild": "bilder/07-04.webp"
+    },
+    {
+     "text": "Nach dem Spaziergang wäscht sich Ida die Hände. Das macht man nach dem Streicheln von Hunden immer, auch nach dem eigenen. Und wenn ein Hund einmal zwickt oder kratzt, zeigt man es einem Erwachsenen. Auch wenn es ganz klein ist.\n\nAm Abend ist es still im Haus. Kalle liegt in seinem Körbchen und schläft. Seine Pfoten zucken ein wenig. Ida und Papa sitzen in seiner Nähe und blättern in einem Hundebuch. Ida weiß jetzt, wie Kalle redet. Sie weiß, was seine Nase kann. Und sie weiß, wann er seine Ruhe braucht. So werden Kind und Hund Freunde.",
+     "bild": "bilder/07-05.webp"
+    }
+   ]
   }
  ]
 }

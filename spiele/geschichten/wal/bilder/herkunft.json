@@ -1,41 +1,23 @@
 {
- "01.png": {
-  "datum": "2026-11-15",
+ "01-01.png": {
+  "datum": "2026-11-16",
   "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo, side view. Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. Ole swims closely right underneath the chin of his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge. Both whales fully visible, calm and close together, centred. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Underwater side view of Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots. She swims alone, calm and slow, whole body visible from head to tail fluke, long white pectoral flippers spread like wings. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark. Exactly one whale. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
   "usage": {
-   "input_tokens": 471,
+   "input_tokens": 371,
    "input_tokens_details": {
     "image_tokens": 0,
-    "text_tokens": 471
+    "text_tokens": 371
    },
    "output_tokens": 1756,
    "output_tokens_details": {
     "image_tokens": 1756,
     "text_tokens": 0
    },
-   "total_tokens": 2227
+   "total_tokens": 2127
   }
  },
- "02.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo, side view showing both whales completely. Size is important: the mother is about three times as long as the calf; the calf is small next to her. his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge. She gently touches the calf's back with one of her huge, long, white pectoral flippers. The calf: Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. The flipper is clearly long and white, glowing in the blue water. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text. The calf has a completely smooth chin without any barnacles.",
-  "usage": {
-   "input_tokens": 531,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 531
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2287
-  }
- },
- "03.png": {
+ "01-02.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square photo at water level. Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. Only the calf: its head is just above the calm water surface and a small, soft, misty cloud of exhaled breath rises from the two blowholes on top of its head (a fine mist of breath, not a jet of water). Setting: calm sunny blue sea, gentle small waves, bright sky with a few white clouds, view at water level. Only one whale. No people, no boats, no text.",
@@ -51,9 +33,212 @@
     "text_tokens": 0
    },
    "total_tokens": 2120
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (03): Blas über dem Wasser (Frage)"
+ },
+ "01-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Close-up from slightly above of the top of the head of Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots, at the sea surface: the two blowholes side by side are clearly visible and open, a light puff of warm breath mist rises from them, a few water droplets. Round knobs on the head visible. Only the head and the front of the back are above the water; the tail fluke is hidden under water and not visible. Setting: calm sunny blue sea, gentle small waves, bright sky with a few white clouds, view at water level. Exactly one whale. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
+  "usage": {
+   "input_tokens": 401,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 401
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2157
+  },
+  "hinweis": "Versuch 2 (Versuch 1 verworfen)"
+ },
+ "01-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Underwater view from behind and slightly to the side of Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots swimming away: her broad tail fluke is flat and horizontal, wide from side to side like a table top, bending downward in mid-stroke. In the foreground, much smaller, one single small silver reef fish seen from the side with its upright vertical tail fin, for comparison. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark. Exactly one whale and one fish. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
+  "usage": {
+   "input_tokens": 407,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 407
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2163
   }
  },
- "04.png": {
+ "01-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Close-up of the head of Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots, just below the calm water surface: the round golf-ball-sized knobs on top of the head and on the lower jaw are clearly visible, a single short bristle hair grows from the centre of some knobs, smooth dark skin, her calm eye visible. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark. Exactly one whale. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
+  "usage": {
+   "input_tokens": 393,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 393
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2149
+  }
+ },
+ "02-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots at the calm sea surface with her mouth wide open, head raised, seen from the side: many long dark-grey baleen plates hang densely from the upper jaw like the bristles of a giant broom, no teeth at all, pinkish inside of the mouth, pleated white throat. Setting: calm sunny blue sea, gentle small waves, bright sky with a few white clouds, view at water level. No krill, no fish visible. Exactly one whale. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
+  "usage": {
+   "input_tokens": 387,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 387
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2143
+  }
+ },
+ "02-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Close-up underwater nature photo of a dense swarm of Antarctic krill: small shrimp-like crustaceans, translucent with a reddish-orange tint, small black eyes, many thin legs, hundreds of them in bright blue-green cold water, sunlight from above. No whale, no other animals, no text, no letters.",
+  "usage": {
+   "input_tokens": 228,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 228
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1984
+  }
+ },
+ "02-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Underwater side view of Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots feeding: she surges through a cloud of small pinkish-orange krill with her mouth wide open, her pleated white throat (long grooves under the chin) expanded and ballooned out, round and full like a giant balloon. Bright blue-green cold water, sunlight from above, not dark. Exactly one whale, no calf, no fish. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
+  "usage": {
+   "input_tokens": 368,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 368
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2124
+  }
+ },
+ "02-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Underwater view looking up: an adult humpback whale (dark charcoal back, white throat with grooves, very long white pectoral flippers with knobby front edge, knobs on head) swims slowly in a wide curve beneath a loose, scattered cloud of small pinkish krill near the bright surface; mouth closed; a thin trail of small silvery air bubbles rises from its head. Bright blue-green water, sunlight, high visibility. Exactly one whale. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
+  "usage": {
+   "input_tokens": 280,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 280
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2036
+  }
+ },
+ "02-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Aerial drone photo from straight above of a calm deep-blue sea on a sunny day: a clear ring of white bubbles and foam on the water surface, and in the middle of the ring the head of one humpback whale breaking the surface with its mouth wide open and throat pleats expanded. Exactly one whale. No boats, no people, no birds, no text, no letters.",
+  "usage": {
+   "input_tokens": 243,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 243
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1999
+  }
+ },
+ "02-06.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Underwater view from slightly above and to the side of one adult blue whale swimming calmly through bright open blue ocean with sun rays from above: very long slender body, mottled blue-grey skin with lighter spots, broad flat U-shaped head, small dorsal fin far back near the tail, short pointed flippers; the tail fluke is horizontal and flat like a wide table top, its two lobes spread left and right (seen from above), never upright like a fish tail. Whole body visible. Exactly one whale. No people, no boats, no other animals, no text, no letters.",
+  "usage": {
+   "input_tokens": 285,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 285
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2041
+  },
+  "hinweis": "Versuch 2 (Versuch 1 verworfen)"
+ },
+ "03-01.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo, side view. Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. Ole swims closely right underneath the chin of his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge. Both whales fully visible, calm and close together, centred. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
+  "usage": {
+   "input_tokens": 471,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 471
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2227
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (01): Kalb unter dem Kinn der Mutter"
+ },
+ "03-02.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo, side view showing both whales completely. Size is important: the mother is about three times as long as the calf; the calf is small next to her. his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge. She gently touches the calf's back with one of her huge, long, white pectoral flippers. The calf: Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. The flipper is clearly long and white, glowing in the blue water. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text. The calf has a completely smooth chin without any barnacles.",
+  "usage": {
+   "input_tokens": 531,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 531
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2287
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (02): Mutter berührt das Kalb mit der Brustflosse"
+ },
+ "03-03.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo, side view. Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. The calf is nursing: it lies at a slight angle along the belly of his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge, its head touching her underside near the tail half, both calm. No visible milk cloud. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
@@ -69,9 +254,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2240
-  }
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (04): Kalb trinkt"
  },
- "05.png": {
+ "03-04.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo, side view. his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge, looking slightly slim. Beside her, Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside, looking plump and round. Both swim slowly side by side, calm. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
@@ -87,45 +273,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2230
-  }
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (05): Mutter und rundliches Kalb nebeneinander"
  },
- "06.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo looking down from just below the surface. In the foreground at the top of the image, Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside, seen from above and behind, looking downward. Far below, resting motionless horizontally above the pale sandy bottom, his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge, smaller due to distance but clearly recognisable. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals; the deep water below is light sapphire blue, still bright. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
-  "usage": {
-   "input_tokens": 508,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 508
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2264
-  }
- },
- "07.png": {
-  "datum": "2026-11-15",
-  "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo. Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. The calf drifts back up toward the bright sunlit surface tail first, its body tilted with the tail fluke pointing up, flippers spread, relaxed and unhurt. Far below it, small in the distance, his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge rests above the pale sandy bottom. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals; the deep water below is light sapphire blue, still bright. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
-  "usage": {
-   "input_tokens": 510,
-   "input_tokens_details": {
-    "image_tokens": 0,
-    "text_tokens": 510
-   },
-   "output_tokens": 1756,
-   "output_tokens_details": {
-    "image_tokens": 1756,
-    "text_tokens": 0
-   },
-   "total_tokens": 2266
-  }
- },
- "08.png": {
+ "03-05.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square photo just below the water surface, split view slightly below the waterline. Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. The calf is at the surface breathing, a little misty breath above the water, swimming a gentle circle. Far below in the bright blue water, a pale faint outline of his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge resting. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals; the deep water below is light sapphire blue, still bright. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
@@ -141,9 +292,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2264
-  }
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (08): Kalb atmet oben, Mutter ruht tief unten"
  },
- "09.png": {
+ "04-01.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo with sun rays. his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge. She rises slowly and calmly from below toward the calf. Above her, near the bright surface, Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside, facing her. Both whales turned toward each other, peaceful. Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
@@ -159,9 +311,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2238
-  }
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (09): Mutter steigt zum Kalb auf"
  },
- "10.png": {
+ "04-02.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo with very wide visibility. In the foreground, small, Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside and his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge swim calmly side by side. Far away in the distance, in the bright open blue water, a single large adult male humpback whale hangs still, head down at an angle, long white flippers spread (singing posture). Setting: clear, bright turquoise tropical water off the Great Barrier Reef, strong sunlight from above with light rays, pale sandy bottom visible far below, high visibility, light and airy, not dark, no other animals, open water. Exactly three whales. No people, no boats, no divers, no orcas, no sharks, no text, no music notes.",
@@ -177,27 +330,64 @@
     "text_tokens": 0
    },
    "total_tokens": 2263
-  }
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (10): Gesang in der Ferne (Frage)"
  },
- "11.png": {
-  "datum": "2026-11-15",
+ "04-03.png": {
+  "datum": "2026-11-16",
   "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square photo at water level. his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge and Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside swim side by side at the surface, the calf close at her side, backs and small dorsal humps visible, travelling. Setting: open blue ocean, daylight, calm to moderate sea, a distant green-brown coastline on the horizon. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Underwater: one lone adult male humpback whale (dark charcoal back, white throat with grooves, very long white pectoral flippers with a knobby front edge, round knobs on the head) hangs motionless in open water, head angled downward and tail fluke up, the long white flippers spread out to the sides. Clear open blue tropical water with sun rays from above; the deep water below is light sapphire blue, still bright, not dark. Exactly one whale. No people, no boats, no text, no letters.",
   "usage": {
-   "input_tokens": 454,
+   "input_tokens": 275,
    "input_tokens_details": {
     "image_tokens": 0,
-    "text_tokens": 454
+    "text_tokens": 275
    },
    "output_tokens": 1756,
    "output_tokens_details": {
     "image_tokens": 1756,
     "text_tokens": 0
    },
-   "total_tokens": 2210
+   "total_tokens": 2031
   }
  },
- "12.png": {
+ "04-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Underwater photo: a research hydrophone (a small grey underwater microphone on a thin black cable) hangs still in clear bright blue tropical water, the cable rises to the sunlit surface; far in the blue background the faint silhouette of one humpback whale with long white flippers. Calm, bright. No people, no divers, no text, no letters, no logos.",
+  "usage": {
+   "input_tokens": 241,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 241
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1997
+  }
+ },
+ "04-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Underwater photo of two common bottlenose dolphins swimming side by side in clear bright blue water: grey backs, lighter bellies, short beaks, curved dorsal fins, one single blowhole on top of each head. Sun rays from above. Exactly two dolphins, no other animals, no people, no text, no letters.",
+  "usage": {
+   "input_tokens": 232,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 232
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1988
+  }
+ },
+ "05-01.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square photo at water level, wide view. his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge and Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside swim side by side at the surface far out in the open blue ocean, daylight, calm to moderate sea, the open sea stretching to the horizon, no land close. No ice, no krill, no food visible. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
@@ -213,9 +403,10 @@
     "text_tokens": 0
    },
    "total_tokens": 2210
-  }
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (12): weite Reise, offenes Meer (Frage)"
  },
- "13.png": {
+ "05-02.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square underwater photo in cold, bright blue-green water. his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge. She lunges with her huge mouth wide open through a dense pinkish-orange cloud of tiny krill (small shrimp-like crustaceans), her throat grooves expanded. A little apart, calm, Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. Bright, clear, not dark. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
@@ -231,9 +422,65 @@
     "text_tokens": 0
    },
    "total_tokens": 2214
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (13): Mutter frisst Krill"
+ },
+ "05-03.png": {
+  "datum": "2026-11-15",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square photo at water level. his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge and Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside swim side by side at the surface, the calf close at her side, backs and small dorsal humps visible, travelling. Setting: open blue ocean, daylight, calm to moderate sea, a distant green-brown coastline on the horizon. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
+  "usage": {
+   "input_tokens": 454,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 454
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2210
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (11): Reise an der Küste entlang"
+ },
+ "05-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Open ocean on a sunny day: her calf, a young humpback whale about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers entirely white with a gently knobby front edge, a few small round knobs on the head, small dorsal fin, no barnacles leaps almost completely out of the calm blue sea in a breach, white spray around it, its long white pectoral flippers visible; beside it at the surface the dark back and small dorsal fin of its mother, Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots. Distant flat coastline on the horizon. Exactly two whales. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
+  "usage": {
+   "input_tokens": 425,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 425
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2181
   }
  },
- "14.png": {
+ "05-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots raises her tail fluke high above the calm sea before diving, seen from behind so that the underside of the fluke faces the camera: the underside is white with a black trailing edge and a few irregular black spots, water dripping from the edge. Sunny blue sea and sky. Exactly one whale. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
+  "usage": {
+   "input_tokens": 353,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 353
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2109
+  }
+ },
+ "05-06.png": {
   "datum": "2026-11-15",
   "modell": "gpt-image-2-5-sunburst",
   "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Square photo at water level. Ole, a very young humpback whale calf, about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a gently knobby front edge, a few small round knobs on top of the head and on the lower jaw, small rounded dorsal hump, two blowholes side by side on top of the head, no barnacles, dark grey tail fluke with white underside. The calf at the surface right next to his mother, an adult female humpback whale, much larger than the calf; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal hump, two blowholes side by side, tail fluke black on top and mostly white underneath with a black trailing edge; a clearly visible small cloud of misty breath rises from the calf's blowholes into the cold air. Setting: calm deep-blue cold sea with scattered white ice floes, pale blue sky, soft daylight, a distant white ice coast. Calm and peaceful. Exactly two whales unless stated otherwise. No people, no boats, no divers, no orcas, no sharks, no text.",
@@ -249,6 +496,98 @@
     "text_tokens": 0
    },
    "total_tokens": 2223
+  },
+  "hinweis": "übernommen aus „Ole taucht hinterher“ (14): Atemwolke im kalten Meer"
+ },
+ "06-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Still life photo: an antique brass oil lamp with a clear glass chimney, unlit, stands on a weathered wooden windowsill; through the window a calm sunny blue sea, and far out on the horizon the small misty blow of a whale. Bright daylight, calm. No people, no text, no letters, no labels.",
+  "usage": {
+   "input_tokens": 233,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 233
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1989
+  }
+ },
+ "06-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: View over the shoulder, only forearms and hands visible: two adult hands with warm medium-brown skin and the sleeves of a blue rain jacket rest relaxed on the wooden railing of a lookout on a sunny coastal headland with low green bushes and sandy cliffs; no binoculars, nothing in the hands. Far out on the sunny blue sea several humpback whale blows and one tail fluke above the water. No faces, no other people, no boats, no text, no letters.",
+  "usage": {
+   "input_tokens": 263,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 263
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2019
+  },
+  "hinweis": "Versuch 3 ohne Fernglas (Versuche 1 und 2: Fernglas falsch herum)"
+ },
+ "06-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Close view of a child's hands with light skin and freckles and the sleeves of a yellow sweater, picking up an empty plastic bottle without any label from a clean sandy beach and putting it into a cloth bag; the calm blue sea behind, far out a single whale blow. Sunny, calm. No faces, no logos, no labels, no text, no letters.",
+  "usage": {
+   "input_tokens": 238,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 238
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1994
+  }
+ },
+ "06-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Underwater view looking up toward the bright sunlit surface: Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots swims near the surface; the sunlit water around her is slightly greenish and full of countless tiny glittering specks of floating plankton, a few small krill. Calm, bright and full of life. Exactly one whale. No people, no boats, no divers, no orcas, no sharks, no text, no letters.",
+  "usage": {
+   "input_tokens": 352,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 352
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2108
+  }
+ },
+ "06-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Mira, an adult female humpback whale; dark charcoal-black back, white throat and belly with long lengthwise grooves, very long pectoral flippers that are entirely white on both sides with a knobby front edge, rows of round knobs on top of the head and on the lower jaw, a few small pale barnacle patches on the chin, small dorsal fin on a low hump, two blowholes side by side, tail fluke black on top and white underneath with a black trailing edge and a few irregular black spots and her calf, a young humpback whale about one third the length of its mother; smooth unblemished charcoal-grey back, white throat and belly with fine lengthwise grooves, very long pectoral flippers entirely white with a gently knobby front edge, a few small round knobs on the head, small dorsal fin, no barnacles surface side by side, close together, in the foreground; the calf's small misty blow rises. Far away in the background a small white whale-watching boat waits with engine off, keeping a large distance, no people visible on it. Setting: calm deep-blue cold sea with scattered white ice floes, pale blue sky, soft daylight, a distant white ice coast. Exactly two whales. No other boats, no orcas, no text, no letters.",
+  "usage": {
+   "input_tokens": 434,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 434
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2190
   }
  }
 }
