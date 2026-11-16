@@ -1,7 +1,7 @@
 // Szenenbilder mit Azure OpenAI erzeugen (Stimmungsebene, docs/grundsaetze-bilder.md §11 A1–A6).
 // Aufruf: node werkzeuge/bilder/erzeugen.mjs [--spiel <spielordner>] [--basis szene|foto|raum] <ziel.png> "<Szene>"
 //   Basis-Prompt: basis-szene.txt (Vorgabe, gezeichnete Szene), basis-foto.txt (fotorealistisch, Sachgeschichten,
-//   docs/geschichten.md) oder basis-raum.txt (Raumbild der Bibliothek, hochkant 1024 × 1536). --spiel darf auch der Ordner einer Geschichte sein (spiele/geschichten/<id>).
+//   docs/geschichten.md) oder basis-raum.txt (gezeichnetes Raumbild, hochkant 1024 × 1536; seit 16.11. tragen die Räume Fotos mit --basis foto). --spiel darf auch der Ordner einer Geschichte sein (spiele/geschichten/<id>).
 // Mit --spiel steht der Verbrauch (usage der API-Antwort) in <spielordner>/kosten.json und in herkunft.json neben dem Bild
 // (docs/spielentwicklung.md §6); fehlt usage, endet der Lauf mit Exit 1. Ohne --spiel verhält sich das Werkzeug wie zuvor:
 // kein kosten.json, keine herkunft.json, usage steht nur in der Ausgabe (fehlt sie, nur eine Warnung).

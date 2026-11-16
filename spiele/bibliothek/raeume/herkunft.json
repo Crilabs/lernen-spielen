@@ -34,5 +34,41 @@
    },
    "total_tokens": 1665
   }
+ },
+ "zahlen-buchstaben-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Numbers and letters' of a children's library: a calm, bright Montessori classroom corner in soft daylight. On a low light-wood table: coloured glass bead bars of different lengths, a row of natural wooden counting beads, a small wooden abacus, a few smooth wooden geometric shapes and a closed linen-bound book. Behind, a low wooden shelf with woven baskets and a green plant. Absolutely no readable letters, digits or writing anywhere. Wide calm composition with the objects in the centre band of the image so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 290,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 290
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2046
+  }
+ },
+ "tiere-foto.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Room 'Animals' of a children's library: a quiet meadow at the edge of a light mixed forest on an early summer morning. A female roe deer (no antlers) grazes with her head down in the grass, a European brown hare sits upright some distance away in the meadow, both behaving naturally and wild, not looking at the camera, not posed together, no interaction. Daisies and buttercups, soft green forest edge behind. Real wildlife-photography look, correct anatomy and species. Wide calm composition with the animals in the centre band so it can be cropped to a 3:2 landscape tile; nothing important near the top or bottom edge.",
+  "usage": {
+   "input_tokens": 300,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 300
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2056
+  }
  }
 }

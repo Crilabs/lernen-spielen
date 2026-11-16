@@ -10,7 +10,8 @@
    Aussehen nach der Designsprache 2026-11-15, Spec 2026-11-15-designsprache-design.md §5.4).
    Halle: Titel und die Räume als Kacheln im Querformat mit ihrem Raumbild, darunter der Name; linksbündig, sie brechen
    in Reihen um (höchstens drei je Reihe). Grundmuster Wellen. Raum: Zurück, das Raumbild klein, der Name groß; darunter
-   die Regale als Reihen, die Bücher als Karten (Titelbild quer, Titel darunter), die Reihen brechen um. Gelesen: ein
+   jedes Regal (Thema) als eigene Papierfläche, darin die Bücher als kleine Karten (Titelbild quer, Titel darunter),
+   die Reihen brechen um. Gelesen: ein
    Sonnenpunkt vor dem Titel. Grundmuster Blätter. Keine Zählung, keine Reihenfolge, kein „Weiterlesen“, nichts gesperrt;
    Regale und Räume ohne fertiges Buch fehlen. Schatten nur an drückbaren Teilen. Diese Seite liest den Lernstand nur. */
 body { -webkit-user-select: none; user-select: none; }
@@ -35,6 +36,8 @@ body { -webkit-user-select: none; user-select: none; }
   border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-teil);
 }
 .bogen img, .bogen svg { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 62%; }
+/* Raumfotos sind quadratisch; der Ausschnitt quer hält Köpfe und Dinge im oberen Drittel im Bild. */
+.bogen img { object-position: center 40%; }
 .halle .bogen { width: 100%; aspect-ratio: 3 / 2; box-shadow: var(--ls-schatten); }
 .tuer b { font-size: 3.6rem; font-weight: 700; line-height: 1.1; }
 .tuer:active .bogen { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
@@ -44,13 +47,16 @@ body { -webkit-user-select: none; user-select: none; }
 .raum-kopf { display: flex; align-items: center; gap: 2.4rem; margin: 0 0 3.2rem -1.3rem; }
 .raum-kopf .bogen { flex: none; width: 8.4rem; height: 8.4rem; border-radius: 1.8rem; }
 .raum-kopf h1 { margin: 0 0 0 0.4rem; font-size: 7.2rem; font-weight: 750; line-height: 1; letter-spacing: -0.035em; }
-.regal + .regal { margin-top: 4.4rem; }
-.regal h2 { margin: 0 0 2rem; font-size: 3.4rem; font-weight: 700; line-height: 1.1; }
-.ebenen { display: grid; grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr)); gap: 3.6rem 3.2rem; }
+.regale { display: flex; flex-direction: column; gap: 3.6rem; }
+/* Jedes Thema (Regal) ist eine eigene ruhige Fläche aus Papier: flach, ohne Schatten (nicht drückbar), Kante in Linie. */
+.regal { padding: 3rem 3.6rem 3.8rem; background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-linie);
+  border-radius: var(--ls-radius-plakat); }
+.regal h2 { margin: 0 0 2.6rem; font-size: 3.6rem; font-weight: 700; line-height: 1.1; }
+.ebenen { display: grid; grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr)); gap: 3.2rem 2.6rem; }
 
 /* --- Ein Buch: Karte mit Titelbild (quer), Titel darunter ----------------------------------------- */
 .buch {
-  display: flex; flex-direction: column; gap: 1.6rem; color: var(--ls-tinte); text-decoration: none; cursor: pointer;
+  display: flex; flex-direction: column; gap: 1.2rem; color: var(--ls-tinte); text-decoration: none; cursor: pointer;
   touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 .buch > * { pointer-events: none; }
@@ -60,10 +66,10 @@ body { -webkit-user-select: none; user-select: none; }
 /* Ohne Foto (Lerngeschichte ohne Bild): Tönung des Fachs mit dem Fachsymbol */
 .buch .zeichen { position: absolute; inset: 0; margin: auto; width: 34%; height: 50%;
   background: var(--ls-tinte); -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
-.buch .schild { display: flex; align-items: flex-start; gap: 1.2rem; font-size: 2.9rem; font-weight: 700; line-height: 1.15; }
+.buch .schild { display: flex; align-items: flex-start; gap: 1rem; font-size: 2.5rem; font-weight: 700; line-height: 1.15; }
 .buch .schild span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 /* Gelesen: ein Sonnenpunkt vor dem Titel (bewertet nichts) */
-.buch .gelesen-punkt { flex: none; width: 3rem; height: 3rem; margin-top: 0.1rem; border-radius: 50%; background: var(--ls-sonne);
+.buch .gelesen-punkt { flex: none; width: 2.6rem; height: 2.6rem; margin-top: 0.05rem; border-radius: 50%; background: var(--ls-sonne);
   box-shadow: inset 0 0 0 0.9rem var(--ls-sonne), inset 0 0 0 3rem var(--ls-tinte); }
 .buch:active .deckel { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
 .buch:focus-visible .deckel { outline: 1rem solid var(--ls-sonne); outline-offset: 0.6rem; }

@@ -5,7 +5,7 @@
       "id": "tiere",
       "name": "Tiere",
       "bild": "tiere-pflanzen",
-      "foto": "bibliothek/raeume/tiere.webp",
+      "foto": "bibliothek/raeume/tiere-foto.webp",
       "regale": [
         {
           "id": "haustiere",
@@ -314,7 +314,7 @@
       "id": "zahlen-buchstaben",
       "name": "Zahlen und Buchstaben",
       "bild": "zahlen-buchstaben",
-      "foto": "bibliothek/raeume/zahlen-buchstaben.webp",
+      "foto": "bibliothek/raeume/zahlen-buchstaben-foto.webp",
       "regale": [
         {
           "id": "rechnen",
