@@ -2,7 +2,7 @@
 
 ## Unveröffentlicht
 
-## v1.2.2
+## v1.2.3
 
 - **Bücher in der Spielzeit einfacher:** Im Elternbereich gibt es nur noch eine Zahl „Höchstens“ (aus oder 1 bis 10), dazu die Wahl „Am Tag“ oder „In der Woche“. Die Grenze gilt fürs Vorlesen; mit dem Häkchen „Gilt auch für Lesen“ zählen Vorlesen und Selbstlesen zusammen. Eine Einstellung aus v1.2.1 wird übernommen.
 - **Uhr statt Verschwinden:** Gesperrte Spiele und Bücher bleiben sichtbar und tragen eine Uhr über dem Bild. Ein Tippen zeigt den Hinweis „Du hast heute schon viel geschafft. Jetzt ist Zeit für eine Pause!“, der vorgelesen wird und nur mit OK zugeht. Von den Eltern ausgeblendete Spiele bleiben unsichtbar.

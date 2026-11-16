@@ -3,10 +3,11 @@ import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { gesperrt } from "../.claude/hooks/nur-stumme-browser.mjs";
 import { leseAufruf } from "../werkzeuge/spielbau/bildschirm.mjs";
 
-const HOOK = new URL("../.claude/hooks/nur-stumme-browser.mjs", import.meta.url).pathname;
+const HOOK = fileURLToPath(new URL("../.claude/hooks/nur-stumme-browser.mjs", import.meta.url));
 
 test("gesperrt: eigene Browserstarts in Bash, Write, Edit, MultiEdit", () => {
   // So schrieben es die Bau-Agenten (Transkripte G01, G09, M08).
@@ -50,7 +51,7 @@ test("Repo: kein Browserstart außerhalb von stumm.mjs", () => {
       if (LAUT.test(readFileSync(p, "utf8"))) funde.push(p);
     }
   };
-  for (const o of ["tests", "werkzeuge", "spiele", ".claude"]) geh(new URL(`../${o}`, import.meta.url).pathname);
+  for (const o of ["tests", "werkzeuge", "spiele", ".claude"]) geh(fileURLToPath(new URL(`../${o}`, import.meta.url)));
   assert.deepEqual(funde, []);
 });
 
