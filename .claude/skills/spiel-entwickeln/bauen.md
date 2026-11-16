@@ -11,7 +11,11 @@ in `spiele/rahmen/` bzw. `spiele/objekte/`; lies gezielt, nicht alles.
 **Lade vor der UI-Arbeit** den Skill `frontend-design:frontend-design`. Der Fokus ist ein Spiel, das Spaß macht,
 mit schönen Bildern und flüssigen Animationen (Regeln §1, §4): ein Held mit Gewicht, eine Wirkung, die sofort kommt
 und in etwa 2,5 s fertig ist (bis 8 s, wenn die Dauer das Lernziel ist, §1), Klänge aus Web Audio, nichts ruckelt.
-Die erste Fassung der Bühne als Screenshot ansehen (Read-Werkzeug), bevor du weiterbaust.
+Die erste Fassung der Bühne als Screenshot ansehen (Read-Werkzeug), bevor du weiterbaust. Screenshots nur so, sie
+sind stumm: `NODE_PATH=/private/tmp/claude-501/pw/node_modules node werkzeuge/spielbau/bildschirm.mjs {{SEITE}}
+<bild.png> --bis-aufgabe` (Optionen im Kopf der Datei; auch für eigene HTML-Tafeln). Kein eigener Browserstart:
+Er spielt jeden Ton über Christians Lautsprecher, der Hook `.claude/hooks/nur-stumme-browser.mjs` lehnt ihn ab.
+Braucht ein Skript doch einen Browser, dann über `starteStumm` aus `tests/browser/stumm.mjs`.
 
 ## Bauen
 
