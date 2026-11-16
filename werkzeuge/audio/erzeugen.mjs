@@ -29,6 +29,7 @@ const kurz = (s, n = 12) => createHash("sha1").update(s).digest("hex").slice(0, 
  *   index: Index,
  *   einstellungen: { stimme: string, ordner: string, zahlen?: boolean, varianten?: Record<string, { tempo?: string }> },
  *   aussprache: Record<string, import("./ssml.mjs").Aussprache>,
+ *   woerter?: Record<string, import("./ssml.mjs").Wort>,
  *   synth?: (ssml: string) => Promise<Buffer>,
  *   schreibe?: (datei: string, daten: Buffer) => void,
  *   loesche?: (datei: string) => void,
@@ -36,7 +37,7 @@ const kurz = (s, n = 12) => createHash("sha1").update(s).digest("hex").slice(0, 
  *   melde?: (zeile: string) => void,
  * }} o
  */
-export async function erzeuge({ eintraege, index, einstellungen, aussprache, synth, schreibe, loesche, aufraeumen = false, melde = () => {} }) {
+export async function erzeuge({ eintraege, index, einstellungen, aussprache, woerter = {}, synth, schreibe, loesche, aufraeumen = false, melde = () => {} }) {
   /** @type {Record<string, IndexEintrag>} */
   const texte = {};
   const bericht = { neu: 0, gleich: 0, hand: 0, fehlt: /** @type {string[]} */ ([]), zahl: /** @type {string[]} */ ([]), verwaist: /** @type {string[]} */ ([]), zeichen: 0, erzeugt: /** @type {{ text: string, zeichen: number }[]} */ ([]), fehler: "" };
@@ -53,7 +54,7 @@ export async function erzeuge({ eintraege, index, einstellungen, aussprache, syn
       bericht.zahl.push(e.schluessel);
       continue;
     }
-    const s = ssml(e, einstellungen, korrektur);
+    const s = ssml(e, einstellungen, korrektur, woerter);
     const h = kurz(s, 10);
     if (alt && !alt.hand && alt.h === h) {
       texte[e.schluessel] = alt;
@@ -157,6 +158,7 @@ export async function lauf({ pruefen = false, aufraeumen = false, spiel = "", me
     index,
     einstellungen,
     aussprache: aussprache.texte ?? {},
+    woerter: aussprache.woerter ?? {},
     synth,
     schreibe: pruefen
       ? undefined

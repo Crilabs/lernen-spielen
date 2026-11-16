@@ -1,5 +1,13 @@
 {
-  "hinweis": "Korrekturen je Text (Schlüssel wie in spiele/audio/index.json). sprich: andere Schreibweise für die Stimme. ssml: SSML-Stück, z. B. <phoneme alphabet=\"ipa\" ph=\"…\">…</phoneme>. datei: von Hand ersetzte Datei unter spiele/audio/, wird nie überschrieben.",
+  "hinweis": "Korrekturen je Text (Schlüssel wie in spiele/audio/index.json). sprich: andere Schreibweise für die Stimme. ssml: SSML-Stück, z. B. <phoneme alphabet=\"ipa\" ph=\"…\">…</phoneme>. datei: von Hand ersetzte Datei unter spiele/audio/, wird nie überschrieben. woerter: gilt für jedes ganze Wort in jedem Text (Namen, Fremdwörter); je Wort sprich, ssml oder sprache (z. B. \"en-US\" für ein englisches Wort). Beugungen (Idas) eigens eintragen.",
+  "woerter": {
+    "Ida": {
+      "sprich": "Ihda"
+    },
+    "Idas": {
+      "sprich": "Ihdas"
+    }
+  },
   "texte": {
     "Ä von A: Mehrzahl": {
       "sprich": "Äh von A: Mehrzahl"

@@ -33,6 +33,11 @@ zum Text ab. Gibt es keine, spricht die Systemstimme (weiterhin ohne Zahlen). Er
 4. **Korrigieren:** Spricht die Stimme etwas falsch, in `aussprache.json` eine andere Schreibweise (`sprich`),
    SSML (`ssml`, z. B. `<phoneme>`) oder eine von Hand ersetzte Datei (`datei`) eintragen, dann
    `npm run audio`. Von Hand ersetzte Dateien werden nie überschrieben.
+   Für Wörter, die in vielen Texten vorkommen (Namen wie Ida, Fremdwörter), gibt es `aussprache.json ›
+   woerter`. Ein Eintrag gilt für jedes ganze Vorkommen in jedem Text, auch in langen Buchseiten:
+   `"Ida": { "sprich": "Ihda" }`, `"Kalle": { "ssml": "<phoneme …>" }` oder für ein Wort in einer anderen
+   Sprache `"Computer": { "sprache": "en-US" }`. Beugungen („Idas“) eigens eintragen. Neu erzeugt werden nur
+   die Texte, die das Wort enthalten.
 5. **Prüfen:** `npm run audio -- --pruefen` meldet Texte ohne Datei (Exit 1). `--aufraeumen` löscht Dateien zu
    Texten, die kein Spiel mehr spricht.
 6. Dateien und `index.json` committen. Builds brauchen dann weder Azure noch Schlüssel.

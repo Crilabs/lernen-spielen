@@ -32,6 +32,27 @@ test("SSML: Stimme, Maskierung, Tempo der Variante, Korrektur", () => {
   assert.match(ssml({ text: "Hund", variante: "diktat" }, langsam), /<prosody rate="-15%">Hund<\/prosody>/);
 });
 
+test("SSML: Wörterliste gilt für jedes ganze Wort in jedem Text", () => {
+  const woerter = {
+    Ida: { sprich: "Ihda" },
+    Kalle: { ssml: '<phoneme alphabet="ipa" ph="ˈkalə">Kalle</phoneme>' },
+    Computer: { sprache: "en-US" },
+    "Ice Age": { sprache: "en-US" },
+  };
+  const s = ssml({ text: "Ida & Kalle spielen mit Idas Computer." }, EIN, {}, woerter);
+  assert.match(s, />Ihda &amp; <phoneme alphabet="ipa" ph="ˈkalə">Kalle<\/phoneme> spielen mit Idas <lang xml:lang="en-US">Computer<\/lang>\.</);
+  // nur ganze Wörter, auch mit Umlauten und am Satzrand
+  assert.match(ssml({ text: "Idalie, Kallestraße, Ida." }, EIN, {}, woerter), />Idalie, Kallestraße, Ihda\.</);
+  // mehrteilige Einträge, Ersetzung nur einmal (Eingefügtes wird nicht erneut ersetzt)
+  assert.match(ssml({ text: "Ice Age" }, EIN, {}, { ...woerter, Age: { sprich: "X" } }), /<lang xml:lang="en-US">Ice Age<\/lang>/);
+  // gilt auch für sprich aus der Korrektur je Text, nicht für fertiges ssml
+  assert.match(ssml({ text: "x" }, EIN, { sprich: "Ida kommt." }, woerter), />Ihda kommt\.</);
+  assert.match(ssml({ text: "x" }, EIN, { ssml: "Ida" }, woerter), />Ida</);
+  // ohne passendes Wort bleibt das SSML gleich, damit nichts neu erzeugt wird
+  assert.equal(ssml({ text: "Der Hund." }, EIN, {}, woerter), ssml({ text: "Der Hund." }, EIN));
+  assert.throws(() => ssml({ text: "Ida" }, EIN, {}, { Ida: {} }), /Wörterliste.*Ida/);
+});
+
 test("Literale im Spielcode: nur feste Zeichenketten, Rest zählt als offen", () => {
   const code = `function say(text){}
     say("Für heute ist Schluss. Bis morgen!");
@@ -122,6 +143,17 @@ test("erzeuge: neue Datei, unverändert, Zahl, von Hand, verwaist", async () => 
   const d = await erzeuge({ ...basis, eintraege, aussprache, index: c.index, aufraeumen: true, loesche: (x) => geloescht.push(x) });
   assert.deepEqual(geloescht, ["test/alt.mp3"]);
   assert.equal(d.index.texte.Alt, undefined);
+});
+
+test("erzeuge: Wörterliste erzeugt nur Texte mit dem Wort neu", async () => {
+  const basis = { einstellungen: EIN, aussprache: {}, synth: async (s) => Buffer.from(s), schreibe: () => {} };
+  const eintraege = [eintrag("Ida spielt."), eintrag("Der Hund.")];
+  const a = await erzeuge({ ...basis, eintraege, index: { stimme: "", texte: {} } });
+  a.index.texte["Der Hund."].gehoert = true;
+  const b = await erzeuge({ ...basis, eintraege, index: a.index, woerter: { Ida: { sprich: "Ihda" } } });
+  assert.equal(b.bericht.neu, 1);
+  assert.equal(b.bericht.erzeugt[0].text, "Ida spielt.");
+  assert.equal(b.index.texte["Der Hund."].gehoert, true);
 });
 
 test("erzeuge: Zahlen erlaubt, Prüflauf, Abbruch behält Erzeugtes", async () => {
