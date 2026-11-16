@@ -93,6 +93,17 @@ test("baueUebersicht: Sachthemen mit Büchern fertig/geplant/beauftragt", () => 
   assert.deepEqual(w.buecher.map((b) => [b.id, b.status, b.eur]), [["hund", "fertig", 4], ["katze", "beauftragt", null]]);
 });
 
+test("baueUebersicht: Bibliothek nach Raum und Regal, Bücher mit Sachthemen", () => {
+  const u = baueUebersicht(quellen(), []);
+  assert.equal(u.bibliothek.length, 1);
+  const raum = u.bibliothek[0];
+  assert.equal(raum.id, "tiere");
+  assert.equal(raum.name, "tiere");
+  const regal = raum.regale[0];
+  assert.deepEqual([regal.id, regal.name], ["haustiere", "haustiere"]);
+  assert.deepEqual(regal.buecher.map((b) => [b.id, b.status, b.sachthemen]), [["hund", "fertig", ["haustiere"]], ["katze", "geplant", ["haustiere"]]]);
+});
+
 test("baueUebersicht: erledigte Aufträge zählen nicht als beauftragt", () => {
   const u = baueUebersicht(quellen(), [{ art: "spiel", ziel: "M02", status: "erledigt" }]);
   assert.equal(u.spiele.M02.status, "geplant");

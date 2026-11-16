@@ -17,8 +17,10 @@ let U = /** @type {any} */ (null);
 let A = /** @type {any} */ ({ auftraege: [], laeuft: false });
 let gewaehlt = /** @type {string|null} */ (null);
 let protokollAb = 0;
-const zustand = { reiter: "lernthemen", fach: "", klasse: "", luecken: false, suche: "" };
+const zustand = { reiter: "spiele", fach: "", klasse: "", luecken: false, suche: "" };
 try { Object.assign(zustand, JSON.parse(localStorage.getItem("verwaltung") ?? "{}")); } catch { /* ohne Speicher */ }
+// alte Reiter (bis 16.11.) auf die neuen abbilden
+zustand.reiter = ({ lernthemen: "spiele", sachthemen: "bibliothek" })[zustand.reiter] ?? zustand.reiter;
 const merke = () => { try { localStorage.setItem("verwaltung", JSON.stringify(zustand)); } catch { /* egal */ } };
 
 async function api(pfad, daten) {
@@ -30,30 +32,11 @@ async function api(pfad, daten) {
 
 // ---------- Lernthemen ----------
 
-function filterTreffer(t) {
-  if (zustand.fach && t.strang !== zustand.fach) return false;
-  if (zustand.klasse && String(t.klasse) !== zustand.klasse) return false;
-  if (zustand.suche) {
-    const s = zustand.suche.toLowerCase();
-    if (!t.name.toLowerCase().includes(s) && !t.id.includes(s) && !t.spiele.some((id) => id.toLowerCase() === s)) return false;
-  }
-  if (zustand.luecken) {
-    const spielFehlt = !t.spiele.length || t.spiele.every((id) => !["fertig", "probe"].includes(U.spiele[id].status));
-    if (!spielFehlt && t.echteDinge !== "fehlt") return false;
-  }
-  return true;
-}
-
-function spielZelle(t) {
-  if (!t.spiele.length) return plakette("fehlt", "kein Katalog-Spiel");
-  return t.spiele.map((id) => {
-    const s = U.spiele[id];
-    const kosten = s.eur !== null ? `, bisher ${eur(s.eur)} (Kosten stehen beim Spiel, Reiter Kosten)` : "";
-    const plus = ["geplant", "geparkt"].includes(s.status)
-      ? ` <button class="plus" data-auftrag="spiel" data-ziel="${esc(id)}" title="${esc(s.name)} beauftragen">+</button>` : "";
-    return `${plakette(s.status, `${id} ${STATUS_TEXT[s.status]}`, `${s.name} (${s.hauptthemen.length} Hauptthemen)${kosten}`)}${plus}`;
-  }).join(" ");
-}
+const FERTIG = ["fertig", "probe"];
+// Fach eines Spiels aus dem Buchstaben der Katalog-Id (wie werkzeuge/spielbau/bauheft.mjs, FAECHER)
+const FACH_JE_BUCHSTABE = { M: "mathe", R: "geometrie", L: "lesen", Z: "sprechen", S: "schreiben", G: "grammatik" };
+const spielPlus = (id, s) => ["geplant", "geparkt"].includes(s.status)
+  ? ` <button class="plus" data-auftrag="spiel" data-ziel="${esc(id)}" title="${esc(s.name)} beauftragen">+</button>` : "";
 
 function zeileLernthema(t) {
   const echt = plakette(t.echteDinge, STATUS_TEXT[t.echteDinge] + (t.echteDingeEur !== null ? ` · ${eur(t.echteDingeEur)}` : ""))
@@ -62,64 +45,109 @@ function zeileLernthema(t) {
     ? plakette("fertig", t.einfuehrung.replace(/^einfuehrungen\/|\.json$/g, ""))
     : t.einfuehrungBeauftragt ? plakette("beauftragt")
     : `<span class="leise-text">–</span> <button class="plus" data-auftrag="einfuehrung" data-ziel="${esc(t.id)}" title="Einführung beauftragen">+</button>`;
-  return `<tr><td>${esc(t.name)}<span class="id">${esc(t.id)}</span></td><td class="zahl-z">${t.klasse}</td>
-    <td>${spielZelle(t)}</td><td>${echt}</td><td>${einf}</td></tr>`;
+  return `<tr><td>${esc(t.name)}<span class="id">${esc(t.id)}</span><div class="leise-text">${esc(t.bereich)}</div></td>
+    <td class="zahl-z">${t.klasse}</td><td>${echt}</td><td>${einf}</td></tr>`;
 }
 
-function zeigeLernthemen() {
-  const offen = new Set([...document.querySelectorAll("#lernthemen details[open]")].map((d) => /** @type {HTMLElement} */ (d).dataset.schluessel));
-  const erstesMal = !document.querySelector("#lernthemen details");
-  const themen = U.lernthemen.filter(filterTreffer);
+const themenTabelle = (liste) => `<table><thead><tr><th>Lernthema</th><th class="zahl-z">Kl.</th><th>Mit echten Dingen</th><th>Einführung</th></tr></thead>
+  <tbody>${liste.map(zeileLernthema).join("")}</tbody></table>`;
+
+/** Spiele je Fach mit ihren Lernthemen; Lernthemen ohne Spiel am Ende des Fachs. */
+function zeigeSpiele() {
+  const offen = new Set([...document.querySelectorAll("#spiele details[open]")].map((d) => /** @type {HTMLElement} */ (d).dataset.schluessel));
+  const erstesMal = !document.querySelector("#spiele details");
+  const such = zustand.suche.toLowerCase();
+  const themaPasst = (t) => !such || t.name.toLowerCase().includes(such) || t.id.includes(such);
+  const lt = new Map(U.lernthemen.map((t) => [t.id, t]));
   const html = [];
   for (const f of U.faecher) {
-    const imFach = themen.filter((t) => t.strang === f.id);
-    if (!imFach.length) continue;
-    const bereiche = new Map();
-    for (const t of imFach) bereiche.set(t.bereich, [...(bereiche.get(t.bereich) ?? []), t]);
-    const innen = [...bereiche].map(([bereich, liste]) => {
-      const schluessel = `${f.id}/${bereich}`;
-      const mitSpiel = liste.filter((t) => t.spiele.some((id) => ["fertig", "probe"].includes(U.spiele[id].status))).length;
-      const mitEcht = liste.filter((t) => t.echteDinge === "fertig").length;
-      const klassen = [...new Set(liste.map((t) => t.klasse))].join("/");
-      return `<details class="gruppe" data-schluessel="${esc(schluessel)}" ${offen.has(schluessel) || zustand.suche ? "open" : ""}>
-        <summary><span class="titel">${esc(bereich)}</span><span class="leise-text">Kl. ${klassen}</span>
-        <span class="stand">${liste.length} Themen · Spiel ${mitSpiel} · Echte Dinge ${mitEcht}</span></summary>
-        <table><thead><tr><th>Thema</th><th class="zahl-z">Kl.</th><th>Spiel</th><th>Mit echten Dingen</th><th>Einführung</th></tr></thead>
-        <tbody>${liste.map(zeileLernthema).join("")}</tbody></table></details>`;
-    }).join("");
+    if (zustand.fach && zustand.fach !== f.id) continue;
+    const spiele = Object.values(U.spiele)
+      .map((s) => ({ s, themen: s.hauptthemen.map((id) => lt.get(id)).filter(Boolean) }))
+      .filter(({ s }) => FACH_JE_BUCHSTABE[s.id[0]] === f.id)
+      .sort((x, y) => Number(x.s.id.slice(1)) - Number(y.s.id.slice(1)));
+    const zeilen = spiele.flatMap(({ s, themen }) => {
+      if (zustand.klasse && !themen.some((t) => String(t.klasse) === zustand.klasse)) return [];
+      if (zustand.luecken && FERTIG.includes(s.status) && themen.every((t) => t.echteDinge !== "fehlt")) return [];
+      const spielTreffer = !such || s.name.toLowerCase().includes(such) || s.id.toLowerCase() === such;
+      if (!spielTreffer && !themen.some(themaPasst)) return [];
+      const klassen = themen.map((t) => t.klasse);
+      const kl = klassen.length ? (Math.min(...klassen) === Math.max(...klassen) ? `${klassen[0]}` : `${Math.min(...klassen)}–${Math.max(...klassen)}`) : "";
+      const echt = themen.filter((t) => t.echteDinge === "fertig").length;
+      const schl = `spiel/${s.id}`;
+      return [`<details class="spiel" data-schluessel="${esc(schl)}" ${offen.has(schl) || (such && !spielTreffer) ? "open" : ""}>
+        <summary><span class="spiel-id">${esc(s.id)}</span><span class="titel">${esc(s.name)}</span>
+          <span class="leise-text">Kl. ${kl}</span>${plakette(s.status)}${spielPlus(s.id, s)}
+          <span class="zahl-z">${s.eur !== null ? eur(s.eur) : ""}</span>
+          <span class="stand">${themen.length} Lernthemen · Echte Dinge ${echt}/${themen.length}</span></summary>
+        ${themen.length ? themenTabelle(themen) : `<p class="leer">Im Katalog stehen für dieses Spiel keine Hauptthemen, die der Lernplan kennt.</p>`}</details>`];
+    });
+    let ohne = U.lernthemen.filter((t) => t.strang === f.id && !t.spiele.length);
+    if (zustand.klasse) ohne = ohne.filter((t) => String(t.klasse) === zustand.klasse);
+    if (zustand.luecken) ohne = ohne.filter((t) => t.echteDinge === "fehlt");
+    ohne = ohne.filter(themaPasst);
+    if (ohne.length) {
+      const schl = `ohne/${f.id}`;
+      zeilen.push(`<details class="spiel ohne" data-schluessel="${esc(schl)}" ${offen.has(schl) || such ? "open" : ""}>
+        <summary><span class="spiel-id">–</span><span class="titel">Ohne Spiel</span>
+          <span class="stand">${ohne.length} Lernthemen ohne Katalog-Spiel</span></summary>${themenTabelle(ohne)}</details>`);
+    }
+    if (!zeilen.length) continue;
+    const fertig = spiele.filter(({ s }) => FERTIG.includes(s.status)).length;
     const fs = `fach/${f.id}`;
-    html.push(`<details class="gruppe fachgruppe" data-schluessel="${esc(fs)}" ${offen.has(fs) || erstesMal || zustand.fach ? "open" : ""}>
+    html.push(`<details class="gruppe fachgruppe" data-schluessel="${esc(fs)}" ${offen.has(fs) || erstesMal || zustand.fach || such ? "open" : ""}>
       <summary><span class="fach" style="background:${esc(f.farbe)}"></span><span class="titel">${esc(f.name)}</span>
-      <span class="stand">${imFach.length} Themen</span></summary>${innen}</details>`);
+      <span class="stand">${spiele.length} Spiele · fertig oder Probe ${fertig}</span></summary>${zeilen.join("")}</details>`);
   }
-  $("#lernthemen").innerHTML = html.join("") || `<p class="leer">Keine Themen für diesen Filter.</p>`;
+  $("#spiele").innerHTML = html.join("") || `<p class="leer">Keine Spiele für diesen Filter.</p>`;
 }
 
-// ---------- Sachthemen ----------
+// ---------- Bibliothek ----------
 
-function zeigeSachthemen() {
-  const offen = new Set([...document.querySelectorAll("#sachthemen details[open]")].map((d) => /** @type {HTMLElement} */ (d).dataset.schluessel));
-  const s = zustand.suche.toLowerCase();
-  const html = U.ueberschriften.map((u) => {
-    let welten = U.sachthemen.filter((w) => w.ueberschrift === u.id);
-    if (zustand.klasse) welten = welten.filter((w) => String(w.klasse) === zustand.klasse);
-    if (s) welten = welten.filter((w) => w.name.toLowerCase().includes(s) || w.id.includes(s) || w.buecher.some((b) => b.titel.toLowerCase().includes(s)));
-    if (zustand.luecken) welten = welten.filter((w) => !w.buecher.some((b) => b.status === "fertig"));
-    if (!welten.length) return "";
-    const fertig = welten.filter((w) => w.buecher.some((b) => b.status === "fertig")).length;
-    const zeilen = welten.map((w) => {
-      const buecher = w.buecher.length
-        ? w.buecher.map((b) => plakette(b.status, `${b.titel}${b.eur !== null ? ` · ${eur(b.eur)}` : ""}`, `${b.id} (${STATUS_TEXT[b.status]})`)
-          + (b.status === "geplant" ? ` <button class="plus" data-auftrag="buch" data-ziel="${esc(b.id)}" title="Buch „${esc(b.titel)}“ beauftragen">+</button>` : "")).join(" ")
-        : `<span class="leise-text">kein Buch in der Bibliothek geplant</span>`;
-      return `<tr><td>${esc(w.name)}<span class="id">${esc(w.id)}</span><div class="leise-text">${esc(w.beschreibung)}</div></td>
-        <td class="zahl-z">${w.klasse ?? ""}</td><td>${buecher}</td></tr>`;
+/** Bücher je Raum und Regal; Sachthemen ohne Buch am Ende. */
+function zeigeBibliothek() {
+  const offen = new Set([...document.querySelectorAll("#bibliothek details[open]")].map((d) => /** @type {HTMLElement} */ (d).dataset.schluessel));
+  const erstesMal = !document.querySelector("#bibliothek details");
+  const such = zustand.suche.toLowerCase();
+  const sach = new Map(U.sachthemen.map((w) => [w.id, w]));
+  const buchPasst = (b) => {
+    const themen = b.sachthemen.map((id) => sach.get(id)).filter(Boolean);
+    if (zustand.klasse && !themen.some((w) => String(w.klasse) === zustand.klasse)) return false;
+    if (zustand.luecken && b.status === "fertig") return false;
+    return !such || b.titel.toLowerCase().includes(such) || b.id.includes(such) || themen.some((w) => w.name.toLowerCase().includes(such));
+  };
+  const zeileBuch = (b) => `<tr><td>${esc(b.titel)}<span class="id">${esc(b.id)}</span></td>
+    <td>${plakette(b.status)}${b.status === "geplant" ? ` <button class="plus" data-auftrag="buch" data-ziel="${esc(b.id)}" title="Buch „${esc(b.titel)}“ beauftragen">+</button>` : ""}</td>
+    <td class="zahl-z">${b.eur !== null ? eur(b.eur) : ""}</td>
+    <td class="leise-text">${esc(b.sachthemen.map((id) => sach.get(id)?.name ?? id).join(", "))}</td></tr>`;
+  const html = U.bibliothek.map((raum) => {
+    const regale = raum.regale.map((regal) => {
+      const buecher = regal.buecher.filter(buchPasst);
+      if (!buecher.length) return "";
+      const schl = `regal/${raum.id}/${regal.id}`;
+      const fertig = regal.buecher.filter((b) => b.status === "fertig").length;
+      return `<details class="spiel" data-schluessel="${esc(schl)}" ${offen.has(schl) || such ? "open" : ""}>
+        <summary><span class="titel">${esc(regal.name)}</span><span class="stand">${regal.buecher.length} ${regal.buecher.length === 1 ? "Buch" : "Bücher"} · fertig ${fertig}</span></summary>
+        <table><thead><tr><th>Buch</th><th>Status</th><th class="zahl-z">Kosten</th><th>Sachthema</th></tr></thead>
+        <tbody>${buecher.map(zeileBuch).join("")}</tbody></table></details>`;
     }).join("");
-    return `<details class="gruppe" data-schluessel="${esc(u.id)}" ${offen.has(u.id) || s ? "open" : ""}>
-      <summary><span class="titel">${esc(u.name)}</span><span class="stand">${welten.length} Sachthemen · mit Buch ${fertig}</span></summary>
-      <table><thead><tr><th>Sachthema</th><th class="zahl-z">Kl.</th><th>Bücher</th></tr></thead><tbody>${zeilen}</tbody></table></details>`;
-  }).join("");
-  $("#sachthemen").innerHTML = html || `<p class="leer">Keine Sachthemen für diesen Filter.</p>`;
+    if (!regale) return "";
+    const schl = `raum/${raum.id}`;
+    return `<details class="gruppe fachgruppe" data-schluessel="${esc(schl)}" ${offen.has(schl) || erstesMal || such ? "open" : ""}>
+      <summary><span class="titel">${esc(raum.name)}</span><span class="stand">${raum.regale.length} ${raum.regale.length === 1 ? "Regal" : "Regale"}</span></summary>${regale}</details>`;
+  });
+  let ohne = U.sachthemen.filter((w) => !w.buecher.length);
+  if (zustand.klasse) ohne = ohne.filter((w) => String(w.klasse) === zustand.klasse);
+  if (such) ohne = ohne.filter((w) => w.name.toLowerCase().includes(such) || w.id.includes(such));
+  if (ohne.length) {
+    const schl = "ohne-buch";
+    html.push(`<details class="gruppe fachgruppe" data-schluessel="${schl}" ${offen.has(schl) || such ? "open" : ""}>
+      <summary><span class="titel">Sachthemen ohne Buch</span><span class="stand">${ohne.length} Sachthemen</span></summary>
+      <table><thead><tr><th>Sachthema</th><th class="zahl-z">Kl.</th><th>Worum es geht</th></tr></thead><tbody>
+      ${ohne.map((w) => `<tr><td>${esc(w.name)}<span class="id">${esc(w.id)}</span></td><td class="zahl-z">${w.klasse ?? ""}</td>
+        <td class="leise-text">${esc(w.beschreibung)}</td></tr>`).join("")}</tbody></table></details>`);
+  }
+  $("#bibliothek").innerHTML = html.join("") || `<p class="leer">Keine Bücher für diesen Filter.</p>`;
 }
 
 // ---------- Aufträge ----------
@@ -167,7 +195,7 @@ function zeigeAuftraege() {
       <form id="frei" class="leiste" style="margin:0"><input name="text" placeholder="Freier Auftrag …" size="40" style="padding:6px 8px;border:1px solid var(--linie);border-radius:6px;background:var(--flaeche)">
       <button class="zweit">anlegen</button></form></div>
     ${l.length ? `<div class="karte"><table><thead><tr><th>Art</th><th>Auftrag</th><th class="zahl-z">Schätzung</th><th>Status</th><th>Zeit</th><th></th></tr></thead>
-      <tbody>${tabelle}</tbody></table></div>` : `<p class="leer">Noch keine Aufträge. In Lernthemen oder Sachthemen mit + anlegen.</p>`}
+      <tbody>${tabelle}</tbody></table></div>` : `<p class="leer">Noch keine Aufträge. In Spiele oder Bibliothek mit + anlegen.</p>`}
     ${gewaehlt ? `<h3>Protokoll</h3><pre class="protokoll" id="protokoll"></pre>` : ""}`;
   protokollAb = 0;
   if (gewaehlt) ladeProtokoll();
@@ -252,12 +280,12 @@ function zeigeKopf() {
 function zeige() {
   document.querySelectorAll("[data-reiter]").forEach((b) => b.setAttribute("aria-selected", String(/** @type {HTMLElement} */ (b).dataset.reiter === zustand.reiter)));
   document.querySelectorAll(".ansicht").forEach((s) => { /** @type {HTMLElement} */ (s).hidden = s.id !== zustand.reiter; });
-  $("#filter").hidden = !["lernthemen", "sachthemen"].includes(zustand.reiter);
-  /** @type {HTMLElement} */ ($("#f-fach").parentElement).hidden = zustand.reiter !== "lernthemen";
+  $("#filter").hidden = !["spiele", "bibliothek"].includes(zustand.reiter);
+  /** @type {HTMLElement} */ ($("#f-fach").parentElement).hidden = zustand.reiter !== "spiele";
   if (!U) return;
   zeigeKopf();
-  if (zustand.reiter === "lernthemen") zeigeLernthemen();
-  if (zustand.reiter === "sachthemen") zeigeSachthemen();
+  if (zustand.reiter === "spiele") zeigeSpiele();
+  if (zustand.reiter === "bibliothek") zeigeBibliothek();
   if (zustand.reiter === "auftraege") zeigeAuftraege();
   if (zustand.reiter === "proben") zeigeProben();
   if (zustand.reiter === "kosten") zeigeKosten();
@@ -275,7 +303,7 @@ function bestaetige(art, ziel) {
   let text = "", schaetzung = null;
   if (art === "spiel") { const s = U.spiele[ziel]; text = `Spiel ${ziel} „${s.name}“ entwickeln (${s.hauptthemen.length} Hauptthemen).`; schaetzung = U.schaetzung.spiel; }
   if (art === "echte-dinge") { text = `„Mit echten Dingen“ für ${U.lernthemen.find((t) => t.id === ziel)?.name ?? ziel} schreiben.`; schaetzung = U.schaetzung.echteDingeJeThema; }
-  if (art === "buch") { text = `Buch „${U.sachthemen.flatMap((w) => w.buecher).find((b) => b.id === ziel)?.titel ?? ziel}“ schreiben.`; schaetzung = U.schaetzung.buch; }
+  if (art === "buch") { text = `Buch „${U.bibliothek.flatMap((r) => r.regale.flatMap((g) => g.buecher)).find((b) => b.id === ziel)?.titel ?? ziel}“ schreiben.`; schaetzung = U.schaetzung.buch; }
   if (art === "einfuehrung") { text = `Einführung für „${U.lernthemen.find((t) => t.id === ziel)?.name ?? ziel}“ (freier Auftrag, kein Skill).`; }
   $("#b-text").textContent = text;
   $("#b-schaetzung").textContent = schaetzung === null ? "Schätzung: unbekannt" : `Schätzung: ca. ${eur(schaetzung)} (startet erst mit „Warteschlange abarbeiten“)`;
@@ -306,6 +334,7 @@ function antworten(id) {
 document.addEventListener("click", async (e) => {
   const z = /** @type {HTMLElement} */ (e.target).closest("button");
   if (!z) return;
+  if (z.closest("summary")) e.preventDefault(); // „+“ im Kopf eines Spiels klappt es nicht auf oder zu
   try {
     if (z.dataset.reiter) { zustand.reiter = z.dataset.reiter; merke(); zeige(); }
     else if (z.dataset.luecken !== undefined) {

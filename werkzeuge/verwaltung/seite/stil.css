@@ -95,3 +95,12 @@ dialog menu button:not(.haupt) { background: none; border: 1px solid var(--linie
 dialog textarea { width: 100%; box-sizing: border-box; padding: 6px 8px; border: 1px solid var(--linie); border-radius: 6px; background: var(--flaeche); color: var(--text); font: inherit; }
 .knopf-link { display: inline-block; padding: 0 6px; margin-right: 4px; border: 1px solid var(--linie); border-radius: 4px; color: var(--text); text-decoration: none; }
 .knopf-link:hover { background: var(--flaeche); }
+details.spiel { background: var(--flaeche); border: 1px solid var(--linie); border-radius: 8px; margin: 0 0 6px 18px; }
+details.spiel > summary { cursor: pointer; padding: 7px 12px; display: flex; gap: 10px; align-items: baseline; list-style: none; }
+details.spiel > summary::-webkit-details-marker { display: none; }
+details.spiel > summary::before { content: "▸"; color: var(--leise); }
+details.spiel[open] > summary::before { content: "▾"; }
+details.spiel > table { border-top: 1px solid var(--linie); }
+details.spiel.ohne { background: none; border-style: dashed; }
+summary .spiel-id { font-variant-numeric: tabular-nums; color: var(--leise); min-width: 3.2em; }
+summary .zahl-z { min-width: 5.5em; text-align: right; font-variant-numeric: tabular-nums; }

@@ -120,12 +120,17 @@ export function baueUebersicht(q, auftraege) {
   const buchEur = new Map(q.kosten.buecher.map((b) => [b.id, summen(b.eintraege, q.preise).eur]));
   const buecherJeWelt = new Map();
   let buecherGeplant = 0;
-  for (const raum of q.bibliothek.raeume) for (const regal of raum.regale) for (const b of regal.buecher) {
+  const bibliothek = q.bibliothek.raeume.map((raum) => ({
+    id: raum.id, name: raum.name ?? raum.id,
+    regale: raum.regale.map((regal) => ({ id: regal.id, name: regal.name ?? regal.id, buecher: [] })),
+  }));
+  for (const [ri, raum] of q.bibliothek.raeume.entries()) for (const [gi, regal] of raum.regale.entries()) for (const b of regal.buecher) {
     buecherGeplant++;
     /** @type {Status} */
     const status = fertigeBuecher.has(b.id) ? "fertig" : beauftragt("buch", b.id) ? "beauftragt" : "geplant";
     const eintrag = { id: b.id, titel: b.titel, status, eur: buchEur.get(b.id) ?? null, raum: raum.id, regal: regal.id };
     for (const w of regal.welten ?? []) buecherJeWelt.set(w, [...(buecherJeWelt.get(w) ?? []), eintrag]);
+    bibliothek[ri].regale[gi].buecher.push({ ...eintrag, sachthemen: regal.welten ?? [] });
   }
   const sachthemen = q.plan.welten.map((w) => ({
     id: w.id, name: w.name, ueberschrift: w.ueberschrift, klasse: w.klasse, beschreibung: w.beschreibung ?? "",
@@ -147,6 +152,7 @@ export function baueUebersicht(q, auftraege) {
     ueberschriften: q.plan.ueberschriften,
     lernthemen,
     sachthemen,
+    bibliothek,
     spiele,
     kosten: {
       katalog,

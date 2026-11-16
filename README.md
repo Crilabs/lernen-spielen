@@ -67,8 +67,8 @@ npm run verwaltung            # http://127.0.0.1:4711
 ```
 
 Übersicht für Christian, nicht Teil der App (`werkzeuge/verwaltung/`, Spec
-`docs/superpowers/specs/2026-11-16-verwaltung-design.md`): alle Lernthemen und Sachthemen mit Spiel, „Mit echten
-Dingen“, Einführung und Büchern, Kosten wie `npm run kosten`, und eine Warteschlange von Aufträgen. „Warteschlange
+`docs/superpowers/specs/2026-11-16-verwaltung-design.md`): alle Spiele je Fach mit ihren Lernthemen („Mit echten
+Dingen“, Einführung; Lernthemen ohne Spiel je Fach am Ende), die Bibliothek nach Raum und Regal, Kosten wie `npm run kosten`, und eine Warteschlange von Aufträgen. „Warteschlange
 abarbeiten“ startet einen Hintergrundlauf (`claude -p`, ein Auftrag nach dem anderen, kein `git push`); Protokolle unter
 `werkzeuge/verwaltung/protokolle/`. Im Chat: „Aufträge abarbeiten“ holt den nächsten Auftrag mit
 `node werkzeuge/verwaltung/lauf.mjs naechster` und meldet ihn mit `lauf.mjs fertig <id> <status>` zurück (dieselbe
