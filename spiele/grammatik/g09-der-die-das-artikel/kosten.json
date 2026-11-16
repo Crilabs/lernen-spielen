@@ -161,5 +161,42 @@
    },
    "total_tokens": 6165
   }
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 12,
+  "ausgabe": 1595,
+  "einheit": "tokens",
+  "menge": 496295,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 490982,
+  "cache_schreiben": 3706
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4793,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4793,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 473
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6165
+  }
  }
 ]
