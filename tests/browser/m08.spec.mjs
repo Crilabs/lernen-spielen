@@ -76,6 +76,45 @@ for (const [name, typ] of [["chromium", chromium], ["webkit", webkit]]) {
       pruefe(fehler.length === 0, `${was}: keine Seitenfehler ${fehler.join(" | ")}`);
       await k.close();
     }
+    // Ohne Ton und mit „Bewegung reduzieren“ steht jeder Satz der Einführung eine Lesezeit lang da (Review 2026-11-16:
+    // vorher sprang die Einführung vom Haken in 0,3 s zur ersten Aufgabe). Und die Hilfe wiederholt auch einen späten
+    // Satz der Einführung (vorher tat sie nach dem Haken nichts).
+    {
+      const k = await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: "reduce" });
+      await k.addInitScript(() => { window.__LS_PRUEFEN__ = true; });
+      const p = await k.newPage();
+      await p.goto(`${basis}?einfuehrung&pruefen`);
+      await p.locator("#leiste .tonknopf").click();
+      await p.evaluate(() => {
+        const b = /** @type {any} */ (document.getElementById("blase"));
+        window.__saetze = [];
+        const sage = b.sage.bind(b);
+        b.sage = (/** @type {string} */ t, /** @type {any} */ o) => { window.__saetze.push(t); return sage(t, o); };
+      });
+      const zustand = () => p.evaluate(() => window.lsPruefen?.zustand());
+      const t0 = Date.now();
+      let haken = 0;
+      let hilfeGetippt = false;
+      while (Date.now() - t0 < FRIST_MS && (await zustand())?.phase !== "aufgabe") {
+        const z = await p.evaluate(() => window.lsPruefen.richtigerZug());
+        if (z) {
+          if (JSON.stringify(z).includes("fertig")) haken = Date.now();
+          await p.evaluate((zz) => window.lsPruefen.fuehreAus(zz), z);
+        }
+        const saetze = await p.evaluate(() => window.__saetze);
+        if (!hilfeGetippt && saetze.at(-1) === "Tippst du eine andere Zahl, zeigt Timo sie.") {
+          hilfeGetippt = true;
+          await p.locator("#hilfe ls-knopf").click();
+          await warte(400);
+        }
+        await warte(150);
+      }
+      const nachHaken = haken ? Date.now() - haken : 0;
+      pruefe(nachHaken > 12000, `${name}, ohne Ton, Bewegung reduziert: nach dem Haken noch ${Math.round(nachHaken / 1000)} s Einführung (Sätze bleiben lesbar)`);
+      const saetze = await p.evaluate(() => window.__saetze);
+      pruefe(saetze.filter((t) => t === "Tippst du eine andere Zahl, zeigt Timo sie.").length >= 2, `${name}: Hilfe nach dem Haken wiederholt den laufenden Satz`);
+      await k.close();
+    }
     // Minus: Die Vorschau bringt zwei Plus-, dann Minusaufgaben (VORSCHAU in spiel.js). In der ersten Minusaufgabe ruft
     // „Anleitung“ die Einführung in der Minus-Fassung auf; ihr Beispiel ist 13 − 10.
     const k = await browser.newContext({ viewport: { width: 1280, height: 800 } });

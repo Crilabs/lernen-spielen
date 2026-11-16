@@ -141,7 +141,7 @@ const einleitung = {
   nimmt: (/** @type {any} */ o) => blase.sage("Timo nimmt die Stange mit.", o),
   andere: (/** @type {any} */ o) => blase.sage("Tippst du eine andere Zahl, zeigt Timo sie.", o),
   nochmal: (/** @type {any} */ o) => blase.sage("Dann probierst du es einfach noch einmal.", o),
-  vertippt: (/** @type {any} */ o) => blase.sage("Vertippt? Dann tippe auf den Knopf neben der Null.", o),
+  vertippt: (/** @type {any} */ o) => blase.sage("Vertippt? Tippe auf den Knopf neben der Null.", o),
   lernen: (/** @type {any} */ o) => blase.sage("So lernst du Zehner und Einer.", o),
   los: (/** @type {any} */ o) => blase.sage("Jetzt geht es los.", o),
 };
@@ -1033,12 +1033,15 @@ function ring(el) {
 
 /**
  * Ein Satz der Einführung: wartet, bis er gesprochen ist; ohne Ton steht er als Blase da und bleibt eine Lesezeit lang.
+ * Die Lesezeit hat einen eigenen Timer: `warte` endet bei „Bewegung reduzieren“ sofort (lauf.skip), dann raste die
+ * Einführung ohne Ton durch (Review 2026-11-16). Die Hilfe wiederholt immer den Satz, der gerade dran ist.
  * @param {(o: { zeigen: boolean }) => Promise<any>} sag
  */
 async function satz(sag) {
+  einfuehrungHilfe = () => satz(sag);
   const zeigen = !leiste.ton;
   await sag({ zeigen });
-  if (zeigen) await warte(lesezeit(blase.text));
+  if (zeigen) await new Promise((ok) => setTimeout(ok, lesezeit(blase.text)));
 }
 
 /**
@@ -1061,32 +1064,25 @@ async function einfuehrung(art) {
     // Timo steht mit dem Material am Rand der Matte; die Aufgabe kommt erst, wenn von ihr die Rede ist.
     zeigeStart(vor);
     aufgabeFeld.classList.add("still");
-    einfuehrungHilfe = () => satz(e.raeumt);
     await satz(e.raeumt);
     ring(document.querySelector(".kopf.z"));
-    einfuehrungHilfe = () => satz(e.zehner);
     await satz(e.zehner);
     ring(document.querySelector(".kopf.e"));
-    einfuehrungHilfe = () => satz(e.einer);
     await satz(e.einer);
     zeigeAufgabe(vor);
     ring(aufgabeFeld);
-    einfuehrungHilfe = () => satz(e.aufgabe).then(() => satz(e.ergebnis));
     await satz(e.aufgabe);
     ring(null);
     await satz(e.ergebnis);
     // Das Beispiel: das Kind tippt selbst.
     await satz(minus ? e.beispielMinus : e.beispielPlus);
     const tippSatz = minus ? e.tippeDrei : e.tippeDreizehn;
-    einfuehrungHilfe = () => satz(tippSatz);
     const ziffern = kindTippt([...String(vor.antwort)]);
     await satz(tippSatz);
     await ziffern;
-    einfuehrungHilfe = () => satz(e.haken);
     const haken = kindTippt(["fertig"]);
     await satz(e.haken);
     await haken;
-    einfuehrungHilfe = null;
     neuerLauf();
     await Promise.all([wirkungRichtig(vor, { freude: false }), satz(minus ? e.nimmt : e.legt)]);
     // Was bei einer anderen Zahl passiert, wie man korrigiert, was man lernt.

@@ -158,7 +158,7 @@ test("Einführung erzählt eine kleine Geschichte (alle Sätze wörtlich, die al
     "Timo nimmt die Stange mit.",
     "Tippst du eine andere Zahl, zeigt Timo sie.",
     "Dann probierst du es einfach noch einmal.",
-    "Vertippt? Dann tippe auf den Knopf neben der Null.",
+    "Vertippt? Tippe auf den Knopf neben der Null.",
     "So lernst du Zehner und Einer.",
     "Jetzt geht es los.",
   ]) assert.ok(js.includes(`blase.sage("${satz}"`), satz);
