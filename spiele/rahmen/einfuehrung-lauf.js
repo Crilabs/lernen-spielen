@@ -2,8 +2,8 @@ import { lesezeit } from "./lesezeit.js";
 
 /**
  * Gemeinsamer Ablauf der Einführung im Spielbild (docs/spielbau.md §8): Sätze abwarten, ohne Ton die Lesezeit stehen
- * lassen, die Hilfe wiederholt den Schritt, der Prüfstand bekommt den richtigen Zug, danach beginnt die Rundenzeit.
- * Rührt beim Import das DOM nicht an.
+ * lassen (nur ein Tipp des Kindes kürzt sie ab, nie die Einstellung), die Hilfe wiederholt den Schritt, der Prüfstand
+ * bekommt den richtigen Zug, danach beginnt die Rundenzeit. Rührt beim Import das DOM nicht an.
  * @param {{ ton: () => boolean, text: () => string, stand: { phase: string },
  *   warte?: (ms: number) => Promise<void> }} o
  */
@@ -14,6 +14,23 @@ export function einfuehrungsLauf(o) {
   let zug = null;
   /** Was die Hilfe tut: Vorgabe ist der Satz des Schritts noch einmal. @type {(() => any) | null} */
   let hilfeFn = null;
+  /** Solange gesetzt, ändert `satz` die Hilfe nicht (Hilfe mit `bis`). @type {object | null} */
+  let hilfeHalten = null;
+  /** Der zuletzt begonnene Satz (für die Vorgabe der Hilfe, wenn eine gehaltene Hilfe endet). @type {((o: { zeigen: boolean }) => Promise<any>) | null} */
+  let letzterSatz = null;
+  /** Beendet die laufende Lesezeit sofort. @type {(() => void) | null} */
+  let lesenAbbrechen = null;
+
+  /** Lesezeit: endet nach ms oder bei `abkuerzen`. @param {number} ms */
+  const lesen = (ms) =>
+    new Promise((ok) => {
+      const fertig = () => {
+        if (lesenAbbrechen === fertig) lesenAbbrechen = null;
+        ok(undefined);
+      };
+      lesenAbbrechen = fertig;
+      warte(ms).then(fertig, fertig);
+    });
 
   const lauf = {
     get laeuft() {
@@ -25,19 +42,42 @@ export function einfuehrungsLauf(o) {
 
     /**
      * Ein Satz: wartet, bis er gesprochen ist; ohne Ton steht er als Blase da und bleibt eine Lesezeit lang. Die
-     * Lesezeit hat einen eigenen Timer, nie die Animations-Abkürzung (sonst rast die Einführung ohne Ton durch).
+     * Lesezeit hat einen eigenen Timer, nie die Animations-Abkürzung (sonst rast die Einführung ohne Ton durch); nur
+     * `abkuerzen` (ein Tipp des Kindes) beendet sie früher.
      * @param {(o: { zeigen: boolean }) => Promise<any>} sag
      */
     async satz(sag) {
-      hilfeFn = () => lauf.satz(sag);
+      letzterSatz = sag;
+      if (!hilfeHalten) hilfeFn = () => lauf.satz(sag);
       const zeigen = !o.ton();
       await sag({ zeigen });
-      if (zeigen) await warte(lesezeit(o.text()));
+      if (zeigen) await lesen(lesezeit(o.text()));
     },
 
-    /** Hilfe des Schritts überschreiben. @param {(() => any) | null} fn */
-    hilfe(fn) {
+    /** Ein Tipp des Kindes: beendet die laufende Lesezeit sofort; sonst nichts. */
+    abkuerzen() {
+      lesenAbbrechen?.();
+    },
+
+    /**
+     * Hilfe des Schritts überschreiben. Ohne `bis` gilt sie bis zum nächsten `satz`; mit `bis` auch über spätere
+     * `satz`-Aufrufe hinweg (etwa die Sätze der Hilfe selbst), bis `bis` erfüllt oder abgelehnt ist – danach wiederholt
+     * die Hilfe wieder den laufenden Satz.
+     * @param {(() => any) | null} fn @param {{ bis?: Promise<any> }} [opt]
+     */
+    hilfe(fn, { bis } = {}) {
       hilfeFn = fn;
+      hilfeHalten = null;
+      if (!bis) return;
+      const marke = {};
+      hilfeHalten = marke;
+      const ende = () => {
+        if (hilfeHalten !== marke) return;
+        hilfeHalten = null;
+        const sag = letzterSatz;
+        hilfeFn = sag ? () => lauf.satz(sag) : null;
+      };
+      bis.then(ende, ende);
     },
 
     /**
@@ -67,14 +107,20 @@ export function einfuehrungsLauf(o) {
      * @param {{ einfuehrungGesehen(): void, beginneZeit(): void }} [runde]
      */
     async spiele(ablauf, runde) {
+      const aufraeumen = () => {
+        zug = null;
+        hilfeFn = null;
+        hilfeHalten = null;
+        letzterSatz = null;
+      };
+      aufraeumen();
       laeuft = true;
       o.stand.phase = "einfuehrung";
       try {
         await ablauf();
       } finally {
         laeuft = false;
-        zug = null;
-        hilfeFn = null;
+        aufraeumen();
       }
       runde?.einfuehrungGesehen();
       runde?.beginneZeit();

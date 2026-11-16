@@ -1090,6 +1090,13 @@ const ORTE = { hilfe: "#hilfe >>> ls-knopf", haus: "#leiste >>> a.haus", weiter:
 const WEITER = { art: "tippen", von: ORTE.weiter };
 /** Die Einführung: Sätze, Hilfe und Zug für den Prüfstand (rahmen/einfuehrung-lauf.js). */
 const E = einfuehrungsLauf({ ton: () => leiste.ton, text: () => blase.text, stand });
+// Ohne Ton kürzt nur ein Tipp des Kindes die Lesezeit ab, nie die Einstellung (spielbau.md §8): irgendwo auf der Seite
+// oder Enter/Leertaste; der Tipp tut sonst, was er immer tut. Die Hilfe nicht – sie sagt den Schritt noch einmal.
+const kuerzeAb = (/** @type {Event} */ ev) => {
+  if (E.laeuft && !ev.composedPath().includes(hilfe)) E.abkuerzen();
+};
+document.addEventListener("pointerdown", kuerzeAb, true);
+document.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") kuerzeAb(ev); }, true);
 const einfuehrungsZug = () => E.zug;
 meldePruefSchnittstelle({
   zustand: () => ({ ...stand }),
