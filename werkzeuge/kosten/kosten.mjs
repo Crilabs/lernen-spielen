@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 export const WURZEL = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const KOSTEN_DATEI = "kosten.json";
 
-export const CLAUDE_PHASEN = ["entwurf", "pruefung-a", "prototyp", "pruefung-b", "ausbau", "review", "steuerung", "recherche", "schreiben", "pruefung", "idee", "bau", "pruefstand"];
+export const CLAUDE_PHASEN = ["entwurf", "pruefung-a", "prototyp", "pruefung-b", "ausbau", "review", "steuerung", "recherche", "schreiben", "pruefung", "idee", "bau", "pruefstand", "bilder"];
 export const GEPARKT_ORDNER = "werkzeuge/kosten/geparkt";
 const POSTEN = {
   claude: { einheit: "tokens", phasen: CLAUDE_PHASEN },

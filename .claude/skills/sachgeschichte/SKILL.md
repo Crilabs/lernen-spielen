@@ -16,12 +16,42 @@ Schreibverfahren, §3 Ablage), `docs/grundsaetze.md` §3, §6, §9.3, `docs/grun
 `docs/research_notes/*/geschichten_angst_gewalt.md`. Vorbild: `spiele/geschichten/haustiere/` (Katzen-Sachbuch samt `inhalte.md` und
 `pruefung.md`). Plan der Bücher: `spiele/bibliothek.json` (Raum › Regal › Buch, Arbeitstitel).
 
+## Ablauf: frische Agenten je Schritt (Christian, 2026-11-16)
+
+Kostentreiber war ein einziger Agent, der Recherche, Text, ~45 Bilder und die Bildprüfung nacheinander machte: Jeder
+Werkzeugaufruf liest den ganzen, wachsenden Verlauf neu (Bienenbuch: 64 Mio. Cache-Token, 19,50 €), und während der
+Bilderzeugung verfällt der Cache und wird teuer neu geschrieben. Darum:
+
+- **Du steuerst nur.** Du recherchierst, schreibst und siehst keine Bilder an. Du startest je Schritt einen **frischen**
+  Agenten (Agent-Werkzeug, `general-purpose`) mit dem Modell aus der Tabelle, gibst ihm nur die Buch-Id, die Pfade und
+  den Abschnitt dieses Skills, den er befolgt. Er liest, was er braucht, aus Dateien, schreibt seine Ergebnisse in
+  Dateien und antwortet zuletzt nur mit kurzem JSON (`{ "ok": true|false, "befunde": [...] }` o. ä.), keinem Bericht.
+- **Befunde setzt ein neuer frischer Agent um** (liest die Datei und die Befunde aus `pruefung.md`), nie der Agent mit
+  dem langen Verlauf. Kein SendMessage über Schritte hinweg.
+- **Kosten sofort buchen:** nach jedem Agenten `node werkzeuge/kosten/transkript.mjs <agent-transkript> --ordner
+  spiele/geschichten/<id> --phase <phase> --notiz "<Schritt>"` (Transkript:
+  `~/.claude/projects/<projekt>/<sitzung>/subagents/agent-<agentId>.jsonl`).
+
+| Schritt | Agent | Modell | liest | schreibt | Phase |
+|---|---|---|---|---|---|
+| 1 Inhalte | Recherche | opus | `docs/geschichten.md` §1–2a, Welten | `inhalte.md` (mit Quellen), `pruefung.md` §1 | recherche |
+| 1 Prüfer A | frisch | opus | `inhalte.md` | Befunde in `pruefung.md` §1 | pruefung |
+| 2 Schreiben | Schreiber | opus | `docs/geschichten.md`, `inhalte.md` | `geschichte.json` (ohne Bilder), `bilder/auftrag.md` | schreiben |
+| 3 Prüfer B | frisch | opus | `geschichte.json`, `inhalte.md` | `pruefung.md` §2 | pruefung |
+| 4 Bilder | Bildmacher | sonnet | `bilder/auftrag.md` | `bilder/*.webp`, Prompts in `bilder/auftrag.md` | bilder |
+| 4 Bildprüfung | frisch, **je Kapitel einer** | sonnet | `bilder/auftrag.md`, Kapiteltext, Bilder des Kapitels | `pruefung.md` §3 | bilder |
+| 4a Titelbild | frisch | sonnet | Bilder, `geschichte.json` | `titelbild`, `pruefung.md` §4 | bilder |
+| 4b Fragen | Schreiber, dann Prüfer | opus | `geschichte.json`, `inhalte.md` | `erinnern`, `pruefung.md` §5 | schreiben / pruefung |
+
+Korrekturrunden (Prüfer A/B, Fragen): ein frischer Agent desselben Modells wie der Schritt. Bei einer Sachgeschichte
+(§2 unten) gilt dieselbe Kette; Schritt 1 heißt dann Recherche (§1).
+
 ## 0. Auswahl
 
 - Buch-Id aus `spiele/bibliothek.json`; Ordner `spiele/geschichten/<id>/`. Gibt es ihn schon, nichts tun.
 - Die Welten des Regals (`welten`) im Lernplan lesen (`beschreibung`, `eltern`) und, falls vorhanden,
   `spiele/geschichten/beurteilung.json` → `welten.<welt>.geschichte` als Anregung.
-- Mehrere Bücher dürfen parallel entstehen (je Buch ein Agent, je eigener Ordner). **Gemeinsame Dateien**
+- Mehrere Bücher dürfen parallel entstehen (je Buch eine eigene Kette frischer Agenten wie oben, je eigener Ordner). **Gemeinsame Dateien**
   (`spiele/geschichten/index.json`, `spiele/bibliothek.json`, Audio) schreibt danach **eine** Stelle (§6), nie die Agenten.
 
 ## 1. Recherche (Web)
@@ -59,21 +89,26 @@ höchstens drei Runden, sonst parken und berichten. Urteil zusammengefasst in `p
 
 ## 4. Bilder je Abschnitt
 
-- Erst einen **Steckbrief der Figur** festlegen (Art, Farbe, Abzeichen, Augen, Alter, Halsband …) und **wörtlich in
-  jeden Prompt** schreiben, damit es überall dasselbe Tier ist; ebenso die Menschen (nur Hände/Arme/Beine, Hautton,
-  Ärmel).
-- Je Abschnitt ein Prompt, der genau die **Kernaussage** zeigt (nicht die Stimmung allgemein), Motiv mittig, hell,
-  ruhig, keine Schrift. Auf der Frage-Seite darf das Bild die Antwort nicht verraten.
-- `node werkzeuge/bilder/erzeugen.mjs --spiel spiele/geschichten/<id> --basis foto spiele/geschichten/<id>/bilder/NN.png "<Prompt>"`,
+- **Der Schreiber** legt in `bilder/auftrag.md` den **Steckbrief der Figur** fest (Art, Farbe, Abzeichen, Augen,
+  Alter, Halsband …; ebenso die Menschen: nur Hände/Arme/Beine, Hautton, Ärmel) und je Seite eine Zeile:
+  Dateiname, **Kernaussage** des Bilds (nicht die Stimmung allgemein), bei der Frage-Seite „verrät nicht: …“.
+- **Der Bildmacher** (sonnet) schreibt je Seite einen Prompt: Steckbrief **wörtlich**, damit es überall dasselbe Tier
+  ist, dazu die Kernaussage; Motiv mittig, hell, ruhig, keine Schrift. Er hält die Prompts in `bilder/auftrag.md` fest.
+  `node werkzeuge/bilder/erzeugen.mjs --spiel spiele/geschichten/<id> --basis foto spiele/geschichten/<id>/bilder/NN.png "<Prompt>"`,
   dann `cwebp -q 82 NN.png -o NN.webp` und das PNG löschen. Das Werkzeug wartet bei Ratenlimit selbst.
-- **Jedes Bild mit dem Read-Werkzeug ansehen**: zeigt es die Kernaussage? Körperbau stimmt (Beine, Ohren, Augen,
-  Flügel, Fühler zählen)? Dieselbe Figur? Keine Schrift, keine erfundenen Details, nichts Unheimliches? Sonst
-  höchstens zwei neue Versuche mit geschärftem Prompt – oder den **Text an das Bild anpassen**, wenn das Bild die
-  Wahrheit besser zeigt. Ergebnis je Bild als Tabelle in `pruefung.md` §3 (Kernaussage, was stimmt, Versuche).
+  **Er sieht die Bilder nicht an** – das ist die Bildprüfung.
+- **Bildprüfung** (sonnet, je Kapitel ein frischer Agent): jedes Bild des Kapitels mit dem Read-Werkzeug ansehen,
+  dazu Steckbrief und Seitentext: zeigt es die Kernaussage? Körperbau stimmt (Beine, Ohren, Augen, Flügel, Fühler
+  zählen)? Dieselbe Figur? Keine Schrift, keine erfundenen Details, nichts Unheimliches? Wahr nach
+  `docs/grundsaetze-bilder.md`? Urteil je Bild: `ok`, `neu` (mit geschärftem Prompt) oder `text` (das Bild zeigt die
+  Wahrheit besser – Vorschlag, wie der Text angepasst wird). Tabelle in `pruefung.md` §3 (Kernaussage, was stimmt,
+  Versuche).
+- `neu` → frischer Bildmacher nur für diese Bilder, danach frische Bildprüfung nur für diese; höchstens zwei neue
+  Versuche je Bild, dann `text` oder parken. `text` → frischer Schreiber (opus) passt nur diese Seiten an.
 
 ## 4a. Titelbild wählen (frischer Agent)
 
-Nach der Bildprüfung sieht sich ein **frischer Agent** (Agent-Werkzeug, Typ general-purpose) alle Fotos des Buchs mit
+Nach der Bildprüfung sieht sich ein **frischer Agent** (Agent-Werkzeug, Typ general-purpose, Modell sonnet) alle Fotos des Buchs mit
 dem Read-Werkzeug an und wählt das Titelbild fürs Inhaltsverzeichnis und den Deckel in der Bibliothek: das eine Foto,
 das das ganze Buch am besten zusammenfasst und **im Streifen 2 : 1 (doppelt so breit wie hoch) das Wesentliche zeigt**
 – Motiv nicht angeschnitten (Kopf, Augen, Körper des Tiers), ruhig, hell, keine Frage-Seite, wahr nach
@@ -105,8 +140,8 @@ Index-Test schlägt fehl, bis §6 gelaufen ist – das ist erwartet).
 - Ton: `npm run audio` für die neuen Seiten (ElevenLabs Livia, Schlüssel in `.env`; Texte mit SSML-Korrektur Azure); ohne Schlüssel berichten.
 - `node --test tests/*.test.mjs`, `node tests/browser/bibliothek.spec.mjs` (NODE_PATH wie dort), Bildschirmfoto
   des Raums ansehen.
-- Kosten: `node werkzeuge/kosten/bericht.mjs`; Claude-Kosten der Agenten mit `werkzeuge/kosten/transkript.mjs`
-  buchen, soweit möglich.
+- Kosten: `node werkzeuge/kosten/bericht.mjs`; die Claude-Kosten sind je Agent schon gebucht (Ablauf oben), die
+  Steuerung selbst mit `transkript.mjs` und `--phase steuerung` auf die Bücher verteilt.
 - Commit je Bündel: „feat(bibliothek): <Bücher>“ mit kurzer Liste (Titel, Abschnitte, Bilder, Kosten).
 
 ## Lauf aus der Verwaltung
