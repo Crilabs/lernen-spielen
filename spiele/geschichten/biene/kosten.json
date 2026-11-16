@@ -1191,5 +1191,16 @@
   "notiz": "Agent Sachbuch: Recherche, inhalte.md, Text, Bilder, Bildprüfung (Stand vor Abschluss)",
   "cache_lesen": 64504682,
   "cache_schreiben": 1497336
+ },
+ {
+  "datum": "2026-11-16",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 17345,
+  "notiz": "ElevenLabs Livia (eleven_multilingual_v2), ganzes Buch; Abrechnung über das ElevenLabs-Abo, der Bericht rechnet mit dem Azure-Satz"
  }
 ]
