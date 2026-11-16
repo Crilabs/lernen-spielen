@@ -105,10 +105,11 @@ test("sprich löst nach Notbremse auf", async () => {
   assert.equal(fertig, "gesprochen");
 });
 
-test("zweites sprich bricht erstes ab", async () => {
+test("zweites sprich kurz nach einem Tipp bricht erstes ab", async () => {
   const S = await frisch();
   const erstes = S.sprich("Erstes");
   await warte();
+  S.merkeEingabe();
   const zweites = S.sprich("Zweites");
   assert.equal(await erstes, "abgebrochen");
   await warte();
@@ -122,6 +123,7 @@ test("sprich mit Zahl oder leerem Text bricht laufende Sprache ab", async () => 
   const erstes = S.sprich("A wie Apfel");
   await warte();
   const vorher = abgebrochen;
+  S.merkeEingabe();
   assert.equal(await S.sprich("Die 7"), "still");
   assert.equal(await erstes, "abgebrochen");
   assert.ok(abgebrochen > vorher);
@@ -160,11 +162,48 @@ test("stimmen ohne Spaßstimmen, setzeStimme wirkt auf sprich", async () => {
   await p;
   S.setzeStimme("system");
   assert.deepEqual(liste(), [["Anna", false], ["Anna (Premium)", false]]);
+  S.merkeEingabe();
   const q = S.sprich("Hallo");
   await warte();
   assert.equal(gesprochen.at(-1).voice, undefined);
   gesprochen.at(-1).onend();
   await q;
+});
+
+test("ohne Tipp wartet ein neuer Satz, bis der laufende zu Ende ist, dann die Lücke (nie abgeschnitten)", async () => {
+  const S = await frisch();
+  const erstes = S.sprich("Erstes");
+  await warte();
+  const vorher = abgebrochen; // jedes Sprechen beginnt mit einem cancel() der Systemstimme
+  const zweites = S.sprich("Zweites");
+  await warte();
+  assert.equal(gesprochen.length, 1, "das zweite wartet");
+  assert.equal(abgebrochen, vorher, "nichts abgebrochen");
+  gesprochen[0].onend();
+  assert.equal(await erstes, "gesprochen");
+  await new Promise((r) => setTimeout(r, S.SATZ_LUECKE_MS - 100));
+  assert.equal(gesprochen.length, 1, "erst nach der Lücke");
+  await new Promise((r) => setTimeout(r, 200));
+  assert.equal(gesprochen.at(-1).text, "Zweites");
+  gesprochen.at(-1).onend();
+  assert.equal(await zweites, "gesprochen");
+});
+
+test("ein Tipp verwirft auch die wartenden Sätze; stille ebenso", async () => {
+  const S = await frisch();
+  const erstes = S.sprich("Erstes");
+  await warte();
+  const wartend = S.sprich("Wartend");
+  S.merkeEingabe();
+  const tipp = S.sprich("Nach dem Tipp");
+  assert.equal(await erstes, "abgebrochen");
+  assert.equal(await wartend, "abgebrochen");
+  await warte();
+  assert.equal(gesprochen.at(-1).text, "Nach dem Tipp");
+  const noch = S.sprich("Noch einer");
+  S.stille();
+  assert.equal(await tipp, "abgebrochen");
+  assert.equal(await noch, "abgebrochen");
 });
 
 // ---------------------------------------------------------------- Audiodateien
@@ -223,6 +262,7 @@ test("Datei darf eine Zahl enthalten, die Systemstimme nicht", async (t) => {
   await warte();
   dateien[0].onended();
   assert.equal(await p, "gesprochen");
+  S.merkeEingabe();
   assert.equal(await S.sprich("Vier mal 7"), "still");
   assert.equal(gesprochen.length, 0);
 });
@@ -288,11 +328,13 @@ test("abgelehnte Datei beim Verlassen der Seite: kein Protokolleintrag, sonst sc
   assert.match(zeilen.get("protokoll") ?? "", /Audiodatei nicht abspielbar/);
   zeilen.clear();
   globalThis.window.dispatchEvent(new Event("beforeunload"));
+  S.merkeEingabe();
   S.sprich("Hallo");
   await warte();
   await warte();
   assert.equal(zeilen.get("protokoll") ?? null, null);
   globalThis.window.dispatchEvent(new Event("pageshow")); // zurück aus dem Verlauf: wieder protokollieren
+  S.merkeEingabe();
   S.sprich("Hallo");
   await warte();
   await warte();
@@ -306,6 +348,7 @@ test("zweites sprich hält die laufende Datei an", async (t) => {
   const S = await frisch();
   const erstes = S.sprich("Eins");
   await warte();
+  S.merkeEingabe();
   const zweites = S.sprich("Zwei");
   assert.equal(await erstes, "abgebrochen");
   assert.equal(dateien[0].pausiert, true);

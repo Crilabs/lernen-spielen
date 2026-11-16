@@ -185,11 +185,25 @@ let laufenderText = "";
 let letzteEingabe = 0;
 /** So lange nach einer Eingabe darf ein neuer Satz den laufenden abbrechen: das Kind hat ihn weggetippt. */
 const EINGABE_FENSTER_MS = 800;
-if (typeof document !== "undefined" && document.addEventListener) {
-  const merke = () => { letzteEingabe = Date.now(); };
-  document.addEventListener("pointerdown", merke, true);
-  document.addEventListener("keydown", merke, true);
+/** Merkt eine Eingabe des Kindes (die Seite meldet Tippen und Tasten selbst; für Tests exportiert). */
+export function merkeEingabe() {
+  letzteEingabe = Date.now();
 }
+if (typeof document !== "undefined" && document.addEventListener) {
+  document.addEventListener("pointerdown", merkeEingabe, true);
+  document.addEventListener("keydown", merkeEingabe, true);
+}
+
+/** Ruhe nach einem Satz, bevor der nächste wartende beginnt (Christian, 2026-11-16: sonst wirkt es gehetzt). */
+export const SATZ_LUECKE_MS = 500;
+/** Längstens so lange wartet ein Satz auf den vorigen (Notbremse; jede Datei endet spätestens nach Dauer + 2 s). */
+const WARTE_MAX_MS = 20000;
+/** Die Sätze nacheinander: jeder neue wartet auf das Ende des vorigen und die Lücke. */
+let kette = Promise.resolve();
+/** Steigt bei jedem Abbruch durch das Kind oder Stille; wartende Sätze einer älteren Runde fallen weg. */
+let welle = 0;
+/** @param {number} ms */
+const schlafe = (ms) => new Promise((ok) => setTimeout(ok, ms));
 
 /** Bricht laufende Sprache ab. */
 function brichAb() {
@@ -266,8 +280,31 @@ function spieleDatei(url) {
  *   datei: false nimmt immer die Systemstimme (Probe im Elternbereich).
  * @returns {Promise<SprichErgebnis>}
  */
-export async function sprich(text, { tempo = 0.85, hoehe = 1, variante = "", datei: mitDatei = true } = {}) {
-  // docs/spielbau.md §8: Ein Satz wird nie vom Spiel abgeschnitten, nur ein Tipp des Kindes darf ihn abbrechen.
+export function sprich(text, optionen = {}) {
+  // docs/spielbau.md §8: Ein Satz wird nie vom Spiel abgeschnitten, nur ein Tipp des Kindes darf ihn abbrechen
+  // (Christian, 2026-11-16: hier durchgesetzt, für alle Spiele). Kommt der Satz kurz nach einer Eingabe (oder ist er
+  // leer = Stille), bricht er ab, was läuft und was wartet. Sonst wartet er, bis der vorige zu Ende ist, dazu eine Lücke.
+  const sofort = !text || verlassen || Date.now() - letzteEingabe <= EINGABE_FENSTER_MS;
+  /** @type {Promise<SprichErgebnis>} */
+  let p;
+  if (sofort) {
+    welle += 1;
+    p = sprichJetzt(text, optionen);
+  } else {
+    const meine = welle;
+    p = Promise.race([kette, schlafe(WARTE_MAX_MS)]).then(() => (meine !== welle ? "abgebrochen" : sprichJetzt(text, optionen)));
+  }
+  kette = p.then((e) => (e === "gesprochen" ? schlafe(SATZ_LUECKE_MS) : undefined), () => undefined);
+  return p;
+}
+
+/**
+ * Spricht sofort (bricht ab, was gerade läuft).
+ * @param {string} text
+ * @param {{ tempo?: number, hoehe?: number, variante?: string, datei?: boolean }} [optionen]
+ * @returns {Promise<SprichErgebnis>}
+ */
+async function sprichJetzt(text, { tempo = 0.85, hoehe = 1, variante = "", datei: mitDatei = true } = {}) {
   // Der Prüfstand sieht diese Zeile im Protokoll und meldet sie rot.
   if (laufend && laufenderText && !verlassen && text !== laufenderText && Date.now() - letzteEingabe > EINGABE_FENSTER_MS)
     protokoll(`Satz abgeschnitten: „${laufenderText}“ durch „${text}“`);
@@ -345,6 +382,7 @@ async function sprichSystem(text, tempo, hoehe, meine) {
 
 /** Bricht laufende Sprache ab; ein wartendes sprich löst mit "abgebrochen" auf. */
 export function stille() {
+  welle += 1;
   brichAb();
 }
 

@@ -186,3 +186,15 @@ test("stabDicke: Zehnerstab passt in die Höhe, viele Stäbe in die Breite, nie 
   assert.ok(10 * neun + 9 * 0.5 <= 12 + 1e-9, "zehn Stäbe passen in die Breite");
   assert.ok(L.stabDicke(1, { ...feld, hoehe: 10 }) * L.STAB_VERHAELTNIS <= 10 + 1e-9, "ein Zehnerstab passt in die Höhe");
 });
+
+test("fahrtDauer: immer gleich schnell, weit dauert länger (die Dauer zeigt den Weg)", () => {
+  assert.equal(L.fahrtDauer(5, 5), 0);
+  assert.equal(L.fahrtDauer(0, 10), L.FAHRT_START_MS + 10 * L.FAHRT_JE_HAUS_MS);
+  assert.equal(L.fahrtDauer(45, 4), L.fahrtDauer(4, 45));
+  assert.ok(L.fahrtDauer(0, 45) > 2 * L.fahrtDauer(0, 17));
+  // Ticks an den Zehnerhäusern liegen auch in langen Fahrten in der Fahrtzeit
+  const ms = L.fahrtDauer(3, 97);
+  const t = L.tickZeiten(3, 97, ms);
+  assert.equal(t.length, 9);
+  assert.ok(t.every((x) => x > 0 && x < ms));
+});

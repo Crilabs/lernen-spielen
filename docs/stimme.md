@@ -68,6 +68,11 @@ Auch erzählt gilt: kein „Du machst Kofi glücklich“, kein Lob, keine Wörte
 
 - **Kurze Sätze, ein Gedanke je Satz.** Punkt = Pause, Komma = kurze Pause, „…“ trennt Wortstücke.
 - **Fragen enden mit „?“**, dann hebt die Stimme am Ende.
+- **Abstand zwischen Sätzen (Christian, 2026-11-16):** Folgen Aufnahmen aufeinander, liegt dazwischen eine Pause
+  von etwa 0,5 s. Ohne Abstand wirkt die Stimme gehetzt. `sprich()` (`spiele/kern/stimme.js`) setzt das für alle Spiele
+  durch: Ein Satz ohne vorherige Eingabe des Kindes wartet, bis der laufende zu Ende ist, dann die Lücke
+  (`SATZ_LUECKE_MS`); er schneidet nie ab. Nur in den 0,8 s nach einem Tipp bricht ein neuer Satz ab, was läuft und
+  was wartet; `stille()` ebenso. M06 hat zusätzlich eine eigene Schlange mit 0,6 s (`SATZ_PAUSE_MS`).
 - **Zahlen** dürfen in Aufnahmen vorkommen **(Christian)**, als Ziffer oder Zahlwort. Ausnahme Einführungen
   (`spiele/einfuehrungen/`): Dort enthält `sprich` weder Ziffern noch Zahlwörter noch Platzhalter; Zahlen
   stehen in `zeig` und im Bild (`fuelleVorlage` in `spiele/einfuehrung.js` prüft das). Beim Anhören auf

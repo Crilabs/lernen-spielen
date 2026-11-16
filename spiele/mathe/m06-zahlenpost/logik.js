@@ -191,8 +191,19 @@ export function stabDicke(anzahl, { breite, hoehe, luecke, max }, verhaeltnis = 
 
 // --- Fahrt ---------------------------------------------------------------------------------------------------------
 
-/** Die Fahrt dauert immer so lange, egal wie weit (weit heißt schneller, die Häuser huschen vorbei). */
+/** Vorgabe für tickZeiten (eine Fahrt über etwa sieben Häuser). */
 export const FAHRT_MS = 1400;
+/** Anfahren und Bremsen (ms) und Zeit je Haus (ms): Timo fährt immer gleich schnell. */
+export const FAHRT_START_MS = 600;
+export const FAHRT_JE_HAUS_MS = 110;
+
+/**
+ * Wie lange Timo von Haus `von` nach Haus `nach` fährt (Christian, 2026-11-16): immer gleich schnell, ein weiter Weg
+ * dauert also länger – die Dauer ist hier das Lernziel (wie weit ist 45 von 4?). Ein Tipp kürzt ab. Ausnahme von
+ * „Wirkung höchstens 3 s“ (spielbau.md §1).
+ * @param {number} von @param {number} nach
+ */
+export const fahrtDauer = (von, nach) => (von === nach ? 0 : FAHRT_START_MS + Math.abs(nach - von) * FAHRT_JE_HAUS_MS);
 /** Abstand der Häuser auf der Straße in rem. */
 export const HAUS_ABSTAND = 32;
 

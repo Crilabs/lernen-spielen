@@ -38,6 +38,9 @@ Ein Spiel hat genau einen Kern, und alles andere muss sich vor ihm rechtfertigen
 - **Eine Handlung des Kindes**, und sie ist die Lernhandlung (tippen, ziehen, legen). Nicht zwei.
 - **Eine Wirkung**, die man sieht und hört: Sie beginnt sofort (unter 0,3 s nach dem Tippen), dauert etwa 2,5 s,
   höchstens 3 s (wie `grundsaetze-bilder.md` B6), und endet in einem Bild, das bleibt. Der nächste Tipp überspringt sie.
+  **Ausnahme (Christian, 2026-11-16):** Ist die Dauer selbst das Lernziel (wie weit ist es?), dauert die Wirkung so
+  lange, wie die Sache es verlangt – in M06 fährt Timo immer gleich schnell, zu Haus 45 also länger als zu Haus 5.
+  Eine Fahrt, die immer gleich lang dauert, verwischt die Entfernung. Der nächste Tipp überspringt auch hier.
 - **Ein Takt:** Für ein sicheres Kind vergehen von der Aufgabe bis zur nächsten Aufgabe unter 10 s.
 - **Fünf-Sekunden-Test:** Wer das Spiel einmal vorgemacht bekommen hat (Einführung), weiß ohne Satz, was zu tun ist.
 - **Spielbar ohne Ton und ohne Lesen** des Erzählers – die Sache zeigt alles; die Stimme ist Zugang, nicht Anleitung.
@@ -163,7 +166,9 @@ alle Spiele gilt deshalb:
   je Gedanke ein kurzer Satz: wer was tut und warum (die Geschichte: „Timo hilft heute der Postbotin. Er bringt die
   Briefe zur richtigen Hausnummer.“), was das Kind hört oder sieht, was es tippt und mit welchem Knopf (der Knopf
   bekommt dabei den Sonnenring), ein Beispiel, das das Kind selbst ausführt, was passiert, wenn es etwas anderes
-  tippt („Dann probierst du es einfach noch einmal.“), wie es korrigiert, und zum Schluss, was es dabei lernt.
+  tippt („Dann probierst du es einfach noch einmal.“), wie es korrigiert, was es dabei lernt, und zum Schluss
+  ein Übergang zur ersten Aufgabe („Jetzt geht es los.“). Auch im Spiel gibt es klare Übergänge: nach einem
+  Fehlversuch ein Auftrag („Versuch es noch einmal.“), kein Urteil.
   Knöpfe heißen nach dem, was man an ihnen sieht („der Knopf mit dem Haken“, „der Knopf neben der Null“), nicht
   nach einer Farbe. Die Hilfe wirkt auch in der Einführung (sie sagt den Schritt noch einmal und zeigt die Taste). Der Abspieler `spiele/einfuehrung.js` (eigene
   Szenen mit Stäben und Ziffern) bleibt nur für Themen ohne eigenes Spielbild.

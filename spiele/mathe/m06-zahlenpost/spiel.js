@@ -30,7 +30,7 @@ import { sperreTouch, protokoll, esc } from "../../lernspiel.js";
 import { sprich } from "../../kern/stimme.js";
 import { runde, einmal, rundenMs } from "../../lernsteuerung.js";
 import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
-import { felderFuer, tippe, bereit, naechsteTaste, kandidaten, tastenZu, probeVon, FAHRT_MS, HAUS_ABSTAND, tickZeiten, naechsteFreude, witz, istKlein, kandidatenKlein, KLEIN_BIS, staebe, stabDicke } from "./logik.js";
+import { felderFuer, tippe, bereit, naechsteTaste, kandidaten, tastenZu, probeVon, fahrtDauer, HAUS_ABSTAND, tickZeiten, naechsteFreude, witz, istKlein, kandidatenKlein, KLEIN_BIS, staebe, stabDicke } from "./logik.js";
 
 sperreTouch();
 
@@ -60,15 +60,17 @@ const SPIEL_ID = leiste.getAttribute("spiel");
 /** Aufgabenarten (gilt nur, solange das Spiel nicht in spiele.json steht; dort steht dasselbe). */
 const ARTEN = [{ art: "zahlwort", zahlen: [0, 20], stufen: ["material", "vorstellung", "kopf"] }];
 
-/** Längstens so lange wartet die Folge auf das Ende der Wirkung (Regeln §1: etwa 2,5 s, höchstens 3 s). */
+/** Längstens so lange wartet die Folge auf das Ende der Wirkung nach der Fahrt (Regeln §1: etwa 2,5 s, höchstens 3 s; die
+ * Fahrt selbst dauert je nach Weg länger, denn ihre Dauer zeigt, wie weit es ist). */
 const FOLGE_MAX_MS = 2700;
 const NACH_WIRKUNG_MS = 150;
 /** Der Stufenwechsel des Umschlags (Aufkleber ab, Farben weg) dauert so lange; ein Tipp kürzt ab. */
 const WECHSEL_MS = 1200;
 /** Eine neue Aufgabe beginnt nur, solange von der Rundenlänge noch so viel übrig ist (wie M37). */
 const LETZTE_AUFGABE_MS = 30000;
-/** So lange wartet die Pause längstens auf den letzten Satz (ein Satz dauert etwa 2 s). */
-const SATZ_WARTE_MS = 4000;
+/** So lange wartet die Pause längstens auf die letzten Sätze (je etwa 2 s, dazu die Ruhe dazwischen; eine Notbremse,
+ * falls die Stimme hängt – die Stimme selbst bricht spätestens nach Dauer der Datei plus 2 s ab). */
+const SATZ_WARTE_MS = 9000;
 /** Die Straße reicht immer bis 99. */
 const LETZTES_HAUS = 99;
 
@@ -87,10 +89,20 @@ let sprechSchlange = Promise.resolve();
 /** Zählt die Tipps des Kindes: ein Satz, der noch nicht begonnen hat und verwerfbar ist, fällt nach einem Tipp weg. */
 let tippZaehler = 0;
 document.addEventListener("pointerdown", () => { tippZaehler++; }, true);
+/** Ruhe zwischen zwei Sätzen (Christian, 2026-11-16: ohne Abstand wirkte die Stimme gehetzt). */
+const SATZ_PAUSE_MS = 600;
+/** Wann der letzte Satz zu Ende war (performance.now()). */
+let satzEnde = -Infinity;
 /** @param {() => Promise<any>} sag @param {boolean} [verwerfbar] Sätze zur Wirkung (nicht das Zahlwort der Aufgabe) @returns {Promise<any>} */
 function spricht(sag, verwerfbar = false) {
   const tipps = tippZaehler;
-  const p = sprechSchlange.catch(() => undefined).then(() => (verwerfbar && tipps !== tippZaehler ? "still" : sag()));
+  const p = sprechSchlange.catch(() => undefined)
+    .then(() => new Promise((ok) => setTimeout(ok, Math.max(0, SATZ_PAUSE_MS - (performance.now() - satzEnde)))))
+    .then(() => (verwerfbar && tipps !== tippZaehler ? "still" : sag()))
+    .then((e) => {
+      if (e !== "still") satzEnde = performance.now();
+      return e;
+    });
   sprechSchlange = p;
   return p;
 }
@@ -107,12 +119,14 @@ const erzaehler = {
   bei: (n) => sagt(TEXTE?.bei?.[n], { verwerfbar: true }),
   /** Timo steht an dem Haus, dessen Nummer das Kind getippt hat. @param {number} w */
   daneben: (w) => sagt(TEXTE?.daneben?.[w], { verwerfbar: true }),
+  /** Nach einem Fehlversuch ein klarer Auftrag (Christian, 2026-11-16); fällt nach einem Tipp weg. */
+  nochmal: () => spricht(() => blase.sage("Versuch es noch einmal."), true),
   /** Hilfe 1: was auf dem Umschlag erscheint. @param {number} n */
   probe: (n) => sagt(TEXTE?.hilfe1?.[n], { zeigen: true }),
   /** Hilfe 2: die Lösung, die das Kind selbst tippt. @param {number} n */
   loesung: (n) => sagt(TEXTE?.hilfe2?.[n], { zeigen: true }),
   /** Hilfe 2 im kleinen Spiel bei der Zehn (eine Taste „10“ statt zwei Ziffern). */
-  loesungZehn: () => sagt("Die Zehn tippen.", { zeigen: true }),
+  loesungZehn: () => spricht(() => blase.sage("Die Zehn tippen.", { zeigen: true })),
   gehtNicht: () => blase.sage("Das Spiel geht gerade nicht."),
 };
 
@@ -137,6 +151,7 @@ const einleitung = {
   loeschen: (/** @type {any} */ o) => spricht(() => blase.sage("Dann tippe auf den Knopf neben der Null.", o)),
   lernen: (/** @type {any} */ o) => spricht(() => blase.sage("So lernst du, Zahlen zu schreiben, die du hörst.", o)),
   lernenKlein: (/** @type {any} */ o) => spricht(() => blase.sage("So lernst du die Zahlen von null bis zehn.", o)),
+  los: (/** @type {any} */ o) => spricht(() => blase.sage("Jetzt geht es los.", o)),
 };
 
 /** Elternansicht (?eltern): beschreibend, von Stärken aus, kein Vergleich (3.3). @param {HTMLElement} feld */
@@ -436,10 +451,11 @@ async function schiebeRaeder(nr, ms) {
 }
 
 /**
- * Timo rollt von Haus von nach Haus nach: immer FAHRT_MS, egal wie weit (weit heißt schneller, die Häuser huschen vorbei),
+ * Timo rollt von Haus von nach Haus nach, immer gleich schnell (fahrtDauer: weit dauert länger, Christian 2026-11-16),
  * je Zehnerhaus ein leiser Tick. Danach steht er vor dem Haus. @param {number} von @param {number} nach @param {number} [ms]
  */
-async function fahre(von, nach, ms = FAHRT_MS) {
+async function fahre(von, nach, ms = fahrtDauer(von, nach)) {
+  letzteFahrtMs = von === nach ? 0 : ms;
   if (von === nach) return;
   timoKoerper.style.transform = nach < von ? "scaleX(-1)" : "";
   hausBei = nach;
@@ -460,6 +476,9 @@ async function fahre(von, nach, ms = FAHRT_MS) {
   fahrtNr++;
   await timo.haltung("stehen", { ms: 120 });
 }
+
+/** Dauer der letzten Fahrt (die Folge wartet entsprechend länger). */
+let letzteFahrtMs = 0;
 
 /** Mitte eines Elements in px. @param {Element} el */
 function mitte(el) {
@@ -627,6 +646,7 @@ async function wirkungDaneben(w, n, abbruch = { weg: false }) {
   if (abbruch.weg) return;
   // Danach sagt die Stimme das Zahlwort noch einmal; die Aufgabe bleibt.
   erzaehler.daneben(w);
+  erzaehler.nochmal();
   await erzaehler.wortNochmal(n);
 }
 
@@ -871,13 +891,12 @@ let einfuehrungHilfe = null;
 
 /**
  * Ein Satz der Einführung: wartet, bis er gesprochen ist; ohne Ton steht er kurz als Blase da und bleibt eine Lesezeit
- * lang. Danach eine kleine Atempause. @param {(o: { zeigen: boolean }) => Promise<any>} sag
+ * lang. Die Atempause zwischen den Sätzen macht die Sprechschlange (SATZ_PAUSE_MS). @param {(o: { zeigen: boolean }) => Promise<any>} sag
  */
 async function satz(sag) {
   const zeigen = !leiste.ton;
   await sag({ zeigen });
   if (zeigen) await warte(lesezeit(blase.text));
-  await warte(280);
 }
 
 /** Spielt die Einführung in der Fassung der ersten Aufgabe. @param {string} [stufe] */
@@ -929,6 +948,8 @@ async function einfuehrung(stufe = "material") {
       tastatur.markiere(null);
     }
     await satz(klein ? e.lernenKlein : e.lernen);
+    // Übergang zur ersten Aufgabe (Christian, 2026-11-16).
+    await satz(e.los);
   } finally {
     ueberspringeAlles();
     einfuehrungLaeuft = false;
@@ -1040,7 +1061,8 @@ function warteFolge() {
       abmelden();
       ok(undefined);
     };
-    const uhr = setTimeout(fertig, FOLGE_MAX_MS + NACH_WIRKUNG_MS);
+    // Die Fahrt dauert je nach Weg länger (fahrtDauer); so lange darf die Folge zusätzlich warten.
+    const uhr = setTimeout(fertig, FOLGE_MAX_MS + letzteFahrtMs + NACH_WIRKUNG_MS);
     const abmelden = beimTippen(() => {
       ueberspringeAlles();
       fertig();

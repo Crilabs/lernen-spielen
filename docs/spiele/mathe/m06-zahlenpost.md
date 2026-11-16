@@ -59,7 +59,7 @@ Ersetzt die Angaben oben, wo sie sich widersprechen.
   Briefe zur richtigen Hausnummer. Du hörst eine Zahl. Die tippst du auf den Brief. Hör gut zu. – Fünf. – Tippe die
   Fünf. Jetzt tippe auf Fertig. Das ist der Knopf mit dem Haken. Timo bringt den Brief zu Nummer Fünf. Tippst du eine
   andere Zahl? Dann fährt Timo zu diesem Haus. Probier es dann einfach noch einmal. Willst du deine Zahl ändern? Dann
-  tippe auf den Knopf neben der Null. So lernst du, Zahlen zu schreiben, die du hörst.“ Das Kind tippt 5 und Fertig
+  tippe auf den Knopf neben der Null. So lernst du, Zahlen zu schreiben, die du hörst. Jetzt geht es los.“ Das Kind tippt 5 und Fertig
   selbst (Sonnenring); Fertig und Löschen bekommen den Sonnenring, wenn sie genannt werden. Die Hilfe sagt in der
   Einführung den Schritt noch einmal (vorher hörte man nur „Hilfe“).
 - **Perlenstäbe statt Goldmaterial** (Montessori-Farben): goldene Zehnerstäbe, so viele wie Zehner, die Einer als
@@ -67,5 +67,9 @@ Ersetzt die Angaben oben, wo sie sich widersprechen.
   und in der Hilfe 1. Die Tür des Zielhauses steht rechts neben Timo (vorher verdeckte er sie).
 - **Kleines Spiel** für Themen bis 10: nur Post und Häuser 1–10, Taste „10“, kein Fertig, kein Löschen; ein Tipp
   schickt den Brief los. Bei 11–20 bleiben Fertig und Löschen.
+- **Fahrt immer gleich schnell** (0,6 s plus 0,11 s je Haus; zu 99 etwa 11,5 s): die Dauer zeigt, wie weit es ist.
+  Vorher dauerte jede Fahrt 1,4 s, und Timo raste zu hohen Zahlen. Ein Tipp kürzt ab; die Folge wartet entsprechend.
 - **Brief** mit Klappe und Briefmarke, ohne Schatten (er ist kein Knopf). Fertig-Symbol: ein Haken (alle Spiele).
+- **Übergänge im Ton:** Am Ende der Einführung „Jetzt geht es los.“; nach einem Fehlversuch „Timo steht bei Nummer …
+  – Versuch es noch einmal. – <Zahlwort>.“ (ein klarer Auftrag, kein Urteil).
 - **Sätze** „bei Nummer Dreizehn“ statt „bei der Dreizehn“: die Stimme sprach dort eine Ordnungszahl (stimme.md).
