@@ -214,6 +214,15 @@ test("Rundenzeit beginnt nach der Einführung (M06 und M08)", async () => {
   }
 });
 
+// Christian 2026-11-16: Auch der Wechsel „bis 10“ ↔ „11 bis 20“ (beim ersten Mal mit Mini-Einführung, das Kind tippt
+// 13 und Fertig) zählt nicht zur Rundenzeit – sie beginnt nach dem Wechsel neu.
+test("M06: Rundenzeit beginnt nach dem Wechsel neu", async () => {
+  const { readFileSync } = await import("node:fs");
+  const js = readFileSync(new URL("../../../spiele/mathe/m06-zahlenpost/spiel.js", import.meta.url), "utf8");
+  const runde = js.slice(js.indexOf("async function spieleRunde"));
+  assert.match(runde, /await wechsle\([^)]*\);\s*r\.beginneZeit\(\);/);
+});
+
 // Christian 2026-11-16: Die längste Fahrt dauert höchstens 8 s („das reicht als Lerneffekt“) – Timo fährt weiter
 // gleich schnell, damit die Dauer den Weg zeigt; nur die Geschwindigkeit ist höher.
 test("fahrtDauer: die längste Fahrt (Post 0 bis Haus 99) dauert höchstens 8 s", () => {
