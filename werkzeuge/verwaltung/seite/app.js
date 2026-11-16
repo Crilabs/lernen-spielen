@@ -21,7 +21,9 @@ const zustand = { reiter: "spiele", fach: "", klasse: "", luecken: false, suche:
 try { Object.assign(zustand, JSON.parse(localStorage.getItem("verwaltung") ?? "{}")); } catch { /* ohne Speicher */ }
 // alte Reiter (bis 16.11.) auf die neuen abbilden
 zustand.reiter = ({ lernthemen: "spiele", sachthemen: "bibliothek" })[zustand.reiter] ?? zustand.reiter;
-const merke = () => { try { localStorage.setItem("verwaltung", JSON.stringify(zustand)); } catch { /* egal */ } };
+// Die Suche gilt nur, solange sie im Suchfeld steht; eine gemerkte Suche filterte unsichtbar (Christian, 2026-11-16).
+zustand.suche = "";
+const merke = () => { try { localStorage.setItem("verwaltung", JSON.stringify({ ...zustand, suche: "" })); } catch { /* egal */ } };
 
 async function api(pfad, daten) {
   const r = await fetch(pfad, daten === undefined ? {} : { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(daten) });
