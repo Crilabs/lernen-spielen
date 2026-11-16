@@ -176,7 +176,7 @@ Für alle Spiele gilt:
   probierst du es einfach noch einmal.“), wie es korrigiert, was es lernt, zum Schluss „Jetzt geht es los.“ Nach
   einem Fehlversuch im Spiel: „Versuch es noch einmal.“ Knöpfe heißen nach dem, was man sieht („der Knopf mit dem
   Haken“), nie nach einer Farbe. Gebaut wird sie mit `spiele/rahmen/einfuehrung-lauf.js` (wartet jeden Satz ab, hält
-  ihn ohne Ton eine Lesezeit lang – ein Tipp kürzt ab –, Hilfe wiederholt den Schritt, Rundenzeit erst danach).
+  ihn ohne Ton eine Lesezeit lang – ein Tipp kürzt ab –, Hilfe wiederholt den Schritt, Rundenzeit erst danach). Der Abspieler `spiele/einfuehrung.js` bleibt nur für Themen ohne eigenes Spielbild.
 - **Kein Satz wird vom Spiel abgeschnitten** – `await` vor dem nächsten; sonst meldet die Stimme „Satz
   abgeschnitten“, und der Prüfstand wird rot.
 - **Keine Abkürzungen, die nicht eingeführt sind** (Christian, 2026-11-16, M08: „Z und E wird nicht erklärt“).
