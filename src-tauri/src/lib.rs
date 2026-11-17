@@ -1,4 +1,5 @@
 mod lernstand;
+mod tagesbrief;
 
 #[cfg(desktop)]
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -43,6 +44,88 @@ fn lernstand_schreiben(
     daten: String,
 ) -> Result<(), String> {
     lernstand::schreiben(&lernstand_dir(&app)?, profil.as_deref(), &spiel, &daten)
+}
+
+/// Ordner der Tagesbrief-Dateien: `tagesbrief/<profil>` neben, nicht im Lernstand-Ordner.
+fn tagesbrief_dir(
+    app: &tauri::AppHandle,
+    profil: Option<&str>,
+) -> Result<std::path::PathBuf, String> {
+    let wurzel = app.path().app_data_dir().map_err(|e| e.to_string())?;
+    tagesbrief::ordner(&wurzel, profil)
+}
+
+/// Führt blockierende Tagesbrief-Arbeit (Dateien, HTTP) abseits des Async-Threads aus.
+async fn tagesbrief_blockierend<T: Send + 'static>(
+    arbeit: impl FnOnce() -> Result<T, String> + Send + 'static,
+) -> Result<T, String> {
+    tauri::async_runtime::spawn_blocking(arbeit)
+        .await
+        .map_err(|e| e.to_string())?
+}
+
+#[tauri::command]
+async fn tagesbrief_einrichten(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+    adresse: String,
+    name: String,
+    uhrzeit: String,
+) -> Result<String, String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || {
+        tagesbrief::einrichten(&dir, tagesbrief::BASIS_URL, &adresse, &name, &uhrzeit)
+    })
+    .await
+}
+
+#[tauri::command]
+async fn tagesbrief_status(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+) -> Result<serde_json::Value, String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || tagesbrief::status(&dir, tagesbrief::BASIS_URL)).await
+}
+
+#[tauri::command]
+async fn tagesbrief_pushen(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+    ereignisse: Vec<serde_json::Value>,
+) -> Result<serde_json::Value, String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || tagesbrief::pushen(&dir, tagesbrief::BASIS_URL, ereignisse))
+        .await
+}
+
+#[tauri::command]
+async fn tagesbrief_einstellen(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+    name: String,
+    uhrzeit: String,
+) -> Result<(), String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || {
+        tagesbrief::einstellen(&dir, tagesbrief::BASIS_URL, &name, &uhrzeit)
+    })
+    .await
+}
+
+#[tauri::command]
+async fn tagesbrief_probebrief(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+) -> Result<(), String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || tagesbrief::probebrief(&dir, tagesbrief::BASIS_URL)).await
+}
+
+#[tauri::command]
+async fn tagesbrief_abmelden(app: tauri::AppHandle, profil: Option<String>) -> Result<(), String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || tagesbrief::abmelden(&dir, tagesbrief::BASIS_URL)).await
 }
 
 /// Betriebssystem der App: "macos", "windows", "linux", "android" oder "ios".
@@ -191,6 +274,12 @@ pub fn run() {
     let builder = builder.invoke_handler(tauri::generate_handler![
         lernstand_lesen,
         lernstand_schreiben,
+        tagesbrief_einrichten,
+        tagesbrief_status,
+        tagesbrief_pushen,
+        tagesbrief_einstellen,
+        tagesbrief_probebrief,
+        tagesbrief_abmelden,
         plattform,
         kiosk_pause
     ]);
@@ -198,6 +287,12 @@ pub fn run() {
     let builder = builder.invoke_handler(tauri::generate_handler![
         lernstand_lesen,
         lernstand_schreiben,
+        tagesbrief_einrichten,
+        tagesbrief_status,
+        tagesbrief_pushen,
+        tagesbrief_einstellen,
+        tagesbrief_probebrief,
+        tagesbrief_abmelden,
         plattform
     ]);
     builder
@@ -217,10 +312,7 @@ pub fn run() {
                 ));
             }
             app.handle().plugin(log.build())?;
-            log::info!(
-                "Lernen Spielen {} gestartet",
-                app.package_info().version
-            );
+            log::info!("Lernen Spielen {} gestartet", app.package_info().version);
             // Fenster aus tauri.conf.json übernehmen, aber Navigation einschränken.
             let config = app.config().app.windows[0].clone();
             let _window = WebviewWindowBuilder::from_config(app.handle(), &config)?

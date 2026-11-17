@@ -853,7 +853,15 @@ export async function merkeGeschichteGelesen(id, heute = echteUhr().heute) {
   if (!merkeSachthema(stand, "geschichten", id, heute)) return false;
   speichere(STAND_KEY, stand);
   await sofortSpeichern();
+  meldeTagesbrief((m, ctx) => m.meldeGelesen(ctx, stand, id, { heute }));
   return true;
+}
+
+// Tagesbrief: Ereignisse melden, ohne dass Spiel oder Seite warten oder etwas davon merken (nur in der App wirksam).
+function meldeTagesbrief(aufruf) {
+  void (async () => {
+    try { await aufruf(await import("./tagesbrief/anbindung.js"), await ladeCtx()); } catch { /* nie ins Spiel */ }
+  })();
 }
 
 // ---------- Lesestand eines Sachbuchs (docs/geschichten.md §4) ----------
@@ -895,9 +903,10 @@ export async function merkeBuchStand(id, wo, kapitelZahl, heute = echteUhr().heu
   const b = bereinigeBuchStand({ ...wo, fertig: [...alt, ...(Array.isArray(wo?.fertig) ? wo.fertig : [])], am: vorher.am });
   for (const k of b.fertig) if (!alt.includes(k)) b.am[k] = heute;   // neu fertig: Datum für das Erinnern mit Abstand
   stand.buecher[id] = b;
-  if (kapitelZahl > 0 && b.fertig.filter((k) => k < kapitelZahl).length >= kapitelZahl) merkeSachthema(stand, "geschichten", id, heute);
+  const erstmals = kapitelZahl > 0 && b.fertig.filter((k) => k < kapitelZahl).length >= kapitelZahl && merkeSachthema(stand, "geschichten", id, heute);
   speichere(STAND_KEY, stand);
   await sofortSpeichern();
+  if (erstmals) meldeTagesbrief((m, ctx) => m.meldeGelesen(ctx, stand, id, { heute }));
 }
 
 // ---------- „Weißt du noch?“ (docs/geschichten.md §2b) ----------
@@ -1044,6 +1053,7 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
       // (rahmen/gekonnt.js, Christian 2026-11-16).
       const g = sitzung.ereignis?.typ === "gekonnt" ? themaVon(ctx, sitzung.ereignis.thema) : null;
       const gekonnt = g ? { id: g.id, name: text(g.name), sprich: text(g.sprich) || text(g.name) } : null;
+      if (!nurAnsehen) meldeTagesbrief((m) => m.meldeRundenende(ctx, stand, { thema: themaId, gekonnt: gekonnt?.id ?? null, heute: uhr().heute }));
       return { hinweisSpiel, gekonnt };
     },
   };

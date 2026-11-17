@@ -183,3 +183,16 @@ test("gibFrei: verborgenes Thema kommt in Sicht, gilt aber nicht als erfüllte V
   // Plan und Spiele werden nie verändert
   assert.equal(PLAN.themen[2].frei, undefined);
 });
+
+// ---------- Elternbereich: Punkt „Tagesbrief“ (Verhalten: tests/browser/tagesbrief.spec.mjs) ----------
+
+test("eltern.html: Punkt Tagesbrief in der Navigation, Befehle mit Profil, setzeZurueck nach dem Neu-Einrichten", async () => {
+  const { readFileSync } = await import("node:fs");
+  const html = readFileSync(new URL("../spiele/eltern.html", import.meta.url), "utf8");
+  assert.match(html, /<ls-knopf data-tab="tagesbrief"[^>]*wort="Tagesbrief"/);
+  assert.match(html, /const ANSICHTEN = \{[^}]*\btagesbrief\b/);
+  for (const b of ["einrichten", "status", "einstellen", "probebrief", "abmelden"]) assert.match(html, new RegExp(`befehl\\("tagesbrief_${b}", \\{ profil: PROFIL`));
+  assert.match(html, /Was Ihr Kind lernt, liegt bis zum Versand auf unserem Server und wird danach gelöscht\./);
+  assert.match(html, /formularEinrichten\(status, brieflaufFreigeben\)/);
+  assert.match(html, /TB_ABFRAGE_MS = 10000/);
+});

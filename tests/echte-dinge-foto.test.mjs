@@ -39,9 +39,9 @@ test("Seite und PDF: das Foto ohne Siegel", () => {
   assert.doesNotMatch(blattHtml({ name: "N", titel: "Probe", fach: "mathe", formen: A.formen }), /class="foto"/);
 });
 
-test("Startseite, Regal, Kachel, Elternbereich und Karte zeigen das Foto aus dem Verzeichnis", () => {
+test("Regal, Kachel, Elternbereich und Karte zeigen das Foto aus dem Verzeichnis", () => {
   const lies = (p) => readFileSync(new URL(`../spiele/${p}`, import.meta.url), "utf8");
-  assert.match(lies("index.html"), /a\.querySelector\("\.bild"\)\.outerHTML = echtBildHtml\(fotoUrl\(e\)\)/);
+  assert.doesNotMatch(lies("index.html"), /echtBildHtml/); // die Startseite zeigt keine Karten „Mit echten Dingen“ mehr
   assert.match(lies("regal.html"), /fach, anleitung\?\.titel, fotoUrl\(anleitung\)\)/);
   assert.match(lies("rahmen/echte-dinge-kachel.js"), /const foto = form \? fotoUrl\(e\) : ""/);
   assert.match(lies("eltern.html"), /const foto = fotoUrl\(ed\);/);

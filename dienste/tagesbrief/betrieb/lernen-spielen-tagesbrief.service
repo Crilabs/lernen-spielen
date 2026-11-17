@@ -1,0 +1,38 @@
+# Tagesbrief-Versanddienst (dienste/tagesbrief/README.md). Installiert von betrieb/ausrollen.sh nach
+# /etc/systemd/system/. Lauscht nur auf 127.0.0.1:3600; Caddy (lernen-spielen.caddy) leitet weiter.
+# Die Zugangsdaten liest start.js selbst aus /etc/lernen-spielen/graph.env (Gruppe tagesbrief, 640),
+# darum kein EnvironmentFile. Daten: /var/lib/lernen-spielen (StateDirectory, 700, Besitzer tagesbrief).
+[Unit]
+Description=Lernen-Spielen Tagesbrief (Versanddienst)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tagesbrief
+Group=tagesbrief
+WorkingDirectory=/opt/lernen-spielen-tagesbrief
+ExecStart=/usr/bin/node dienste/tagesbrief/start.js
+Environment=NODE_ENV=production
+Environment=PORT=3600
+Environment=TAGESBRIEF_DATEI=/var/lib/lernen-spielen/tagesbrief.json
+StateDirectory=lernen-spielen
+StateDirectoryMode=0700
+UMask=0077
+Restart=on-failure
+RestartSec=5
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictSUIDSGID=yes
+LockPersonality=yes
+
+[Install]
+WantedBy=multi-user.target

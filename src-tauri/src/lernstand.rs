@@ -4,7 +4,7 @@ use std::fs::{self, File};
 use std::io::{ErrorKind, Write};
 use std::path::{Path, PathBuf};
 
-fn pruefe_id(spiel: &str) -> Result<(), String> {
+pub(crate) fn pruefe_id(spiel: &str) -> Result<(), String> {
     let ok = (1..=40).contains(&spiel.len())
         && spiel
             .bytes()
