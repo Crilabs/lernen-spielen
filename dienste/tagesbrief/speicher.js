@@ -5,9 +5,12 @@ import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 
 /** @typedef {{ id: string, art: string, daten: Record<string, any> }} Ereignis */
 /** @typedef {{ ids: string[], gekonnt: any[], dabei: any[], gelesen: any[], naechstes: any | null, naechstesSpaeter?: any, seit: string | null }} GespeicherterTopf */
-/** @typedef {{ bestaetigt: boolean, abmeldeToken: string, gesendetTag?: string, fehler?: { tag: string, n: number, bis: number } }} Empfaenger */
+/** @typedef {{ bestaetigt: boolean, rolle: "geraet" | "empfaenger", abmeldeToken: string, gesendetTag?: string, fehler?: { tag: string, n: number, bis: number } }} Empfaenger */
 /** @typedef {{ uhrzeit: string, name: string, geraete: Record<string, { name: string, angelegt: string }>, empfaenger: Record<string, Empfaenger>, topf: GespeicherterTopf, verschickt: { anleitung: string, am: string }[], letzterTag?: string }} Familie */
 /** @typedef {{ familien: Record<string, Familie>, anfragen: Record<string, any>, zaehler: Record<string, number[]>, abgemeldet: Record<string, true>, gesperrt?: string[] }} Daten */
+
+/** Name des Kindes: Buchstaben (auch Umlaute, ß), Leerzeichen, Bindestrich, höchstens 40 Zeichen; leer ist erlaubt. */
+export const NAME = /^[\p{L} -]{0,40}$/u;
 
 /** Höchstens so viele Empfänger (bestätigt und wartend zusammen) je Familie. */
 export const MAX_EMPFAENGER = 4;

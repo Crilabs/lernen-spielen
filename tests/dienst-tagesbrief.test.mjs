@@ -324,15 +324,51 @@ test("Empfänger hinzufügen: wartend bis zur Bestätigung per POST, Mail mit Te
   assert.ok(!JSON.stringify(speicher().anfragen).includes("schluessel\":\""), "kein Schlüssel für Empfänger");
 });
 
-test("Empfänger: ohne Namen heißt es „ein Kind“; Name wird in der Seite maskiert", async () => {
+test("Empfänger: ohne Namen heißt es „ein Kind“; Name nur aus Buchstaben, Leerzeichen, Bindestrich (sonst 400)", async () => {
   const { schluessel } = await einrichten();
   await post("/einstellungen", { name: "" }, bearer(schluessel));
   await post("/empfaenger", { adresse: "a@example.org" }, bearer(schluessel));
   assert.ok(t.mails.at(-1).text.includes("für ein Kind zusätzlich"));
-  await post("/einstellungen", { name: "<b>X</b>" }, bearer(schluessel));
+  for (const schlecht of ["<b>X</b>", "http://boese.example", "Mia1", "a".repeat(41), "Mia\nLena"]) {
+    assert.equal((await post("/einstellungen", { name: schlecht }, bearer(schluessel))).status, 400, schlecht);
+  }
+  assert.equal((await post("/anmelden", { adresse: "n@example.org", name: "<b>", uhrzeit: "18:00" })).status, 400);
+  assert.equal((await post("/einstellungen", { name: "Anna-Lena Müßig" }, bearer(schluessel))).status, 200);
   await post("/empfaenger", { adresse: "b@example.org" }, bearer(schluessel));
+  assert.ok(t.mails.at(-1).text.includes("für Anna-Lena Müßig zusätzlich"));
+  // Ein ungültiger, schon gespeicherter Name (z. B. aus älterer Datei) kommt nie in eine Einladung.
+  await t.dienst.stop();
+  const daten = speicher();
+  for (const f of Object.values(daten.familien)) f.name = "http://boese.example";
+  writeFileSync(t.datei, JSON.stringify(daten));
+  t.dienst = await starteDienst({ port: 0, datei: t.datei, sende: async (m) => { t.mails.push(m); }, basis: "http://basis" });
+  t.url = `http://127.0.0.1:${t.dienst.server.address().port}`;
+  await post("/empfaenger", { adresse: "c@example.org" }, bearer(schluessel));
+  assert.ok(!t.mails.at(-1).text.includes("boese") && t.mails.at(-1).text.includes("ein Kind"));
   const seite = await (await fetch(`${t.url}/bestaetigen?t=${tokenAusMail(t.mails.at(-1))}`)).text();
-  assert.ok(!seite.includes("<b>X</b>"));
+  assert.ok(!seite.includes("boese"));
+});
+
+test("Über /empfaenger hinzugefügte Adresse führt bei /anmelden zu einer neuen Familie ohne Zugriff auf die alte", async () => {
+  const alt = await einrichten();
+  await empfaengerDazu(alt.schluessel, "gast@example.org");
+  const neu = await einrichten("gast@example.org");
+  assert.equal(Object.keys(speicher().familien).length, 2);
+  assert.deepEqual((await liste(neu.schluessel)).empfaenger, [{ adresse: "gast@example.org", bestaetigt: true }]);
+  assert.deepEqual((await liste(alt.schluessel)).empfaenger.map((e) => e.adresse), [ADRESSE, "gast@example.org"]);
+  assert.ok(!t.mails.at(-1).text.includes("weiteres Gerät"));
+  assert.equal(fam(ADRESSE).empfaenger["gast@example.org"].rolle, "empfaenger");
+  assert.equal(Object.keys(fam(ADRESSE).geraete).length, 1, "kein Gerät in der alten Familie dazu");
+});
+
+test("Einladungen: höchstens 5 je Familie und Tag (zusätzlich zu IP und Adresse)", async () => {
+  const { schluessel } = await einrichten();
+  const mitIp = (i) => ({ ...bearer(schluessel), "x-forwarded-for": `10.0.0.${i}` });
+  for (let i = 0; i < 5; i++) {
+    assert.equal((await post("/empfaenger", { adresse: `e${i}@example.org` }, mitIp(i))).status, 200, `Einladung ${i + 1}`);
+    await del("/empfaenger", { adresse: `e${i}@example.org` }, schluessel);
+  }
+  assert.equal((await post("/empfaenger", { adresse: "e6@example.org" }, mitIp(9))).status, 429);
 });
 
 test("Empfänger: höchstens 4 (bestätigt und wartend), doppelt 409, ungültig 400, ohne Schlüssel 401", async () => {

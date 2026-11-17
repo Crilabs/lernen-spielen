@@ -8,7 +8,7 @@ import { GRENZEN, TAG, erlaubt, raeumeAuf } from "./grenzen.js";
 import { WEITERES_GERAET, abgemeldetSeite, esc, zusaetzlichText, abmeldenFrage, bestaetigenFrage, bestaetigtSeite, datenschutzSeite, ungueltigSeite } from "./seiten.js";
 import { gueltigesEreignis } from "./pruefung.js";
 import { berlinZeit, versendeFaellige } from "./versand.js";
-import { MAX_EMPFAENGER, bestaetigteEmpfaenger, briefTopf, hash, juengsteVerschickte, lade, legeAb, leererTopf, sichere, zufall } from "./speicher.js";
+import { MAX_EMPFAENGER, NAME, bestaetigteEmpfaenger, briefTopf, hash, juengsteVerschickte, lade, legeAb, leererTopf, sichere, zufall } from "./speicher.js";
 
 export const APP_SCHLUESSEL = "lernen-spielen-1";
 const LINK_STUNDEN = 24;
@@ -103,21 +103,26 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     return hash(`ip:${weiter || req.socket.remoteAddress}`);
   };
 
+  /** Name für Mails und Seiten an noch unbestätigte Adressen: nur ein gültiger Name, sonst leer („ein Kind“). */
+  const einladungsName = (/** @type {unknown} */ name) => (typeof name === "string" && NAME.test(name.trim()) ? name.trim() : "");
+
   async function anmelden(/** @type {any} */ req, /** @type {any} */ res) {
     if (aus) return 503;
     const k = parse(await lies(req, KLEIN));
     const adresse = typeof k?.adresse === "string" ? k.adresse.trim().toLowerCase() : "";
     const uhrzeit = k?.uhrzeit === undefined ? "18:00" : k.uhrzeit;
     if (!ADRESSE.test(adresse) || adresse.length > 254 || !UHRZEIT.test(uhrzeit)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
-    const name = typeof k.name === "string" ? k.name.trim().slice(0, 40) : "";
+    const name = typeof k.name === "string" ? k.name.trim() : "";
+    if (!NAME.test(name)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
     const t = jetzt().getTime();
     const ok = erlaubt(daten.zaehler, `anmeldenIp:${ipHash(req)}`, GRENZEN.anmeldenJeIp, t)
       && erlaubt(daten.zaehler, `anmeldenAdresse:${hash(adresse)}`, GRENZEN.anmeldenJeAdresse, t);
     if (!ok) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
     const anfrageId = zufall();
     const token = zufall();
-    // Ist die Adresse bestätigter Empfänger genau einer Familie, tritt das Gerät ihr bei; sonst entsteht eine neue.
-    const treffer = Object.keys(daten.familien).filter((id) => daten.familien[id].empfaenger[adresse]?.bestaetigt);
+    // Ein Gerät tritt nur einer Familie bei, in der die Adresse selbst ein Gerät eingerichtet hat (Rolle „geraet“) und
+    // genau eine solche Familie existiert; sonst entsteht eine neue. Über /empfaenger Hinzugefügte führen nie zum Beitritt.
+    const treffer = Object.keys(daten.familien).filter((id) => { const e = daten.familien[id].empfaenger[adresse]; return e?.bestaetigt && e.rolle === "geraet"; });
     const weiteres = treffer.length === 1;
     daten.anfragen[anfrageId] = { adresse, token, ablauf: new Date(t + LINK_STUNDEN * 3600_000).toISOString(), uhrzeit, name, art: "geraet", ...(weiteres ? { familie: treffer[0], weiteres } : {}) };
     speichern();
@@ -150,9 +155,9 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     const h = hash(schluessel);
     // Beitritt nur, solange die Adresse dort noch bestätigter Empfänger ist; sonst entsteht eine neue Familie.
     let familie = daten.familien[eintrag.familie];
-    if (!familie?.empfaenger[eintrag.adresse]?.bestaetigt) familie = undefined;
+    if (!(familie?.empfaenger[eintrag.adresse]?.bestaetigt && familie.empfaenger[eintrag.adresse].rolle === "geraet")) familie = undefined;
     if (!familie) {
-      familie = { uhrzeit: eintrag.uhrzeit, name: eintrag.name ?? "", geraete: {}, empfaenger: { [eintrag.adresse]: { bestaetigt: true, abmeldeToken: zufall() } }, topf: leererTopf(), verschickt: [] };
+      familie = { uhrzeit: eintrag.uhrzeit, name: eintrag.name ?? "", geraete: {}, empfaenger: { [eintrag.adresse]: { bestaetigt: true, rolle: "geraet", abmeldeToken: zufall() } }, topf: leererTopf(), verschickt: [] };
       daten.familien[zufall()] = familie;
     } else {
       familie.uhrzeit = eintrag.uhrzeit;
@@ -204,8 +209,9 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     const k = parse(await lies(req, KLEIN));
     if (!k || typeof k !== "object") { json(res, 400, { fehler: "ungueltig" }); return 400; }
     if (k.uhrzeit !== undefined && !UHRZEIT.test(k.uhrzeit)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
+    if (typeof k.name === "string" && !NAME.test(k.name.trim())) { json(res, 400, { fehler: "ungueltig" }); return 400; }
     if (k.uhrzeit !== undefined) g.familie.uhrzeit = k.uhrzeit;
-    if (typeof k.name === "string") g.familie.name = k.name.trim().slice(0, 40);
+    if (typeof k.name === "string") g.familie.name = k.name.trim();
     speichern();
     json(res, 200, { uhrzeit: g.familie.uhrzeit });
     return 200;
@@ -235,15 +241,16 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     if (Object.keys(g.familie.empfaenger).length >= MAX_EMPFAENGER) { json(res, 409, { fehler: "voll" }); return 409; }
     const t = jetzt().getTime();
     const ok = erlaubt(daten.zaehler, `anmeldenIp:${ipHash(req)}`, GRENZEN.anmeldenJeIp, t)
-      && erlaubt(daten.zaehler, `anmeldenAdresse:${hash(adresse)}`, GRENZEN.anmeldenJeAdresse, t);
+      && erlaubt(daten.zaehler, `anmeldenAdresse:${hash(adresse)}`, GRENZEN.anmeldenJeAdresse, t)
+      && erlaubt(daten.zaehler, `einladung:${g.familieId}`, GRENZEN.einladungenJeFamilie, t);
     if (!ok) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
     const anfrageId = zufall();
     const token = zufall();
-    g.familie.empfaenger[adresse] = { bestaetigt: false, abmeldeToken: zufall() };
+    g.familie.empfaenger[adresse] = { bestaetigt: false, rolle: "empfaenger", abmeldeToken: zufall() };
     daten.anfragen[anfrageId] = { adresse, token, ablauf: new Date(t + LINK_STUNDEN * 3600_000).toISOString(), art: "empfaenger", familie: g.familieId };
     speichern();
     const link = `${basis}/bestaetigen?t=${token}`;
-    const hinweis = zusaetzlichText(g.familie.name);
+    const hinweis = zusaetzlichText(einladungsName(g.familie.name));
     try {
       await sende({
         an: adresse,
@@ -301,7 +308,7 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
   /** Warnhinweis der Knopfseite zur Anfrage mit diesem Token (weiteres Gerät bzw. zusätzlicher Empfänger), sonst leer. */
   const hinweisZu = (/** @type {string} */ t) => {
     const a = t ? Object.values(daten.anfragen).find((x) => x.token === t) : null;
-    if (a?.art === "empfaenger") return zusaetzlichText(daten.familien[a.familie]?.name ?? "");
+    if (a?.art === "empfaenger") return zusaetzlichText(einladungsName(daten.familien[a.familie]?.name));
     return a?.weiteres ? WEITERES_GERAET : "";
   };
 
