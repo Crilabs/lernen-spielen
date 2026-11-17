@@ -29,8 +29,12 @@ export const VERBEN = [
 /** Verben für Endung und Fürwort (ohne basteln). */
 export const VERBEN_PERSON = VERBEN.filter((v) => !v.nurGrundform);
 
-/** Personen der Grundform-Aufgabe: eine einzelne Person der Runde (Timo, Ela), deren Verb auf -t endet. @type {readonly Person[]} */
-export const PERSONEN_GRUNDFORM = Object.freeze(["er", "sie"]);
+/**
+ * Personen der Grundform-Aufgabe: die gebeugten Ausgangsformen, die nicht schon die Grundform sind (ich male, du malst,
+ * Timo malt, Ela malt, ihr malt), gemischt, damit nicht immer -t abfällt. wir und sie (Mehrzahl) fehlen: ihre Form ist die Grundform.
+ * @type {readonly Person[]}
+ */
+export const PERSONEN_GRUNDFORM = Object.freeze(["ich", "du", "er", "sie", "ihr"]);
 
 /** Wer in der Szene handelt, wenn die Aufgabe für diese Person ist (Namen der Runde; „ich“ ist die eigene Hand). */
 export const NAMEN = Object.freeze({ kofi: "Kofi", lena: "Lena", timo: "Timo", ela: "Ela" });

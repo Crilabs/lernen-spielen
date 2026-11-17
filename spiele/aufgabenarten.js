@@ -15,7 +15,7 @@
 //              Spezifikation { art: "artikel", wortschatz: "werkzeug" } (Wörter in spiele/woerter/artikel.js).
 //   verbform   "verbform:endung:malen:du"   daten { ziel, verb, stamm, grundform, person, pronomen, form, endung, wer }
 //              (Verb zur Person; Ich, du, wir G02). ziel: endung (Endung an den Stamm), pronomen (Fürwort vor das Verb),
-//              grundform (die Grundform bilden, person er oder sie). Spezifikation { art: "verbform", ziel } (Wörter in
+//              grundform (aus der gebeugten Form die Grundform bilden: ich, du, er, sie, ihr; basteln nur du, er, sie, ihr). Spezifikation { art: "verbform", ziel } (Wörter in
 //              spiele/woerter/verben.js); in spiele.json `ziele` nennt, welche Ziele das Spiel darstellt.
 
 import { WORTSCHAETZE, wortMit } from "./woerter/artikel.js";
@@ -71,7 +71,7 @@ function verbformAufgabe(ziel, verbId, person) {
   const v = verbMit(verbId);
   if (!v || !VERBFORM_ZIELE.includes(ziel) || !PERSONEN.includes(/** @type {any} */ (person))) return null;
   const p = /** @type {import("./woerter/verben.js").Person} */ (person);
-  if (ziel === "grundform" ? !PERSONEN_GRUNDFORM.includes(p) : v.nurGrundform) return null;
+  if (ziel === "grundform" ? !PERSONEN_GRUNDFORM.includes(p) || (v.nurGrundform && p === "ich") : v.nurGrundform) return null;
   return {
     key: `verbform:${ziel}:${v.id}:${p}`,
     art: "verbform",

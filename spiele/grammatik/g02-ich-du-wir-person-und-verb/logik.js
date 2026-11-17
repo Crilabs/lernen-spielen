@@ -1,15 +1,17 @@
 // G02 Ich, du, wir: reine Spiellogik ohne DOM (in Node testbar, tests/spiele/grammatik/g02-ich-du-wir-person-und-verb.test.mjs).
 import { verbformAus } from "../../aufgabenarten.js";
-import { ENDUNG_VON, PERSONEN, PRONOMEN_VON, werVon } from "../../woerter/verben.js";
+import { ENDUNG_VON, PERSONEN, PRONOMEN_VON, VERBEN, werVon } from "../../woerter/verben.js";
 
-/** Die Endungsplättchen in fester Reihe (Verb zur Person und Grundform). */
+/** Alle Endungsplättchen in fester Reihe; -n liegt nur bei der Grundform in der Ablage (Wörter auf -eln und -ern). */
 export const ENDUNGEN = Object.freeze(["e", "st", "t", "en", "n"]);
 /** Die Fürwort-Plättchen in fester Reihe (sie steht für eine und für mehrere). */
 export const FUERWOERTER = Object.freeze(["ich", "du", "er", "sie", "wir", "ihr"]);
-/** Die Endungen der Hörprobe: -n gehört nur zu Wörtern auf -eln und -ern, es wird nicht mitgesprochen. */
+/** Die Endungen der Personalform (Endung an den Stamm): ohne -n, es fällt bei Endung und Fürwort weg. */
 export const PROBE_ENDUNGEN = Object.freeze(["e", "st", "t", "en"]);
-/** Plätze auf dem Bogen (sechs Spalten, zwei Reihen); danach kommt ein neuer Bogen. */
-export const BOGEN_PLAETZE = 12;
+/** Plätze auf dem Bogen (fünf Spalten, zwei Reihen, je ein großes Ding); danach kommt ein neuer Bogen. */
+export const BOGEN_PLAETZE = 10;
+/** Die Tastatur der Stufe kopf hat höchstens so viele Tasten (eine Reihe). */
+export const MAX_TASTEN = 10;
 /** So viele Stifte brauchen die fünf zusammen höchstens (wir). */
 export const MAX_AUF_EINMAL = 5;
 
@@ -22,8 +24,20 @@ export function aufgabeAus(key) {
   return d ? { key: /** @type {string} */ (key), ...d } : null;
 }
 
-/** Die Plättchen der Ablage für ein Ziel. @param {{ ziel: string }} a */
-export const plaettchenFuer = (a) => (a.ziel === "pronomen" ? FUERWOERTER : ENDUNGEN);
+/** Die Plättchen der Ablage für ein Ziel: Fürwörter, die vier Endungen der Personalform, bei der Grundform dazu -n. @param {{ ziel: string }} a */
+export const plaettchenFuer = (a) => (a.ziel === "pronomen" ? FUERWOERTER : a.ziel === "grundform" ? ENDUNGEN : PROBE_ENDUNGEN);
+
+/**
+ * Das erste Wort des Streifens bei der Grundform und in der Aufgabe: Timo (er), Ela (sie) oder das Fürwort (ich, du, ihr).
+ * @param {{ person: string, pronomen: string }} a
+ */
+export const ersteWort = (a) => (a.person === "er" ? "Timo" : a.person === "sie" ? "Ela" : a.pronomen);
+
+/**
+ * Die Endungen der Hörprobe: die vier der Personalform; bei -eln und -ern steht -n statt -en (Bastele, Bastelst, Bastelt,
+ * Basteln). @param {{ endung: string, ziel: string }} a
+ */
+export const probeFuer = (a) => (a.ziel === "grundform" && a.endung === "n" ? ["e", "st", "t", "n"] : [...PROBE_ENDUNGEN]);
 
 /**
  * Welche Person meint die Antwort? Bei „sie“ entscheidet die Endung (-t eine Person, -en mehrere), weil das Wort allein
@@ -37,8 +51,8 @@ export function personDerAntwort(a, antwort) {
     if (antwort === "sie") return a.endung === "t" ? "sie" : "sie-pl";
     return /** @type {any} */ (antwort);
   }
-  // Grundform: die Wirkung gilt allen am Tisch (der Becher kippt, jeder bekommt einen Stift)
-  if (a.ziel === "grundform") return "wir";
+  // Grundform: niemand ist gemeint, die Form lässt keinen handeln
+  if (a.ziel === "grundform") return null;
   if (a.pronomen === "sie") return antwort === "t" ? "sie" : antwort === "en" ? "sie-pl" : a.person;
   return a.person;
 }
@@ -95,10 +109,19 @@ export function naechsterBuchstabe(a, eingabe) {
   return w ? w[eingabe.length] : null;
 }
 
-/** Die Tasten der Stufe kopf: die Buchstaben der richtigen Wörter und der Endungen (e s t n), je einmal. @param {any} a */
+/**
+ * Die Tasten der Stufe kopf: die Buchstaben der richtigen Wörter und aller Endungen (e s t n), dazu Buchstaben anderer
+ * Verben bis zu einer vollen Reihe, damit das Lösungswort nicht an den Tasten abzulesen ist. Fürwörter: die Buchstaben aller
+ * Fürwörter. @param {any} a
+ */
 export function tastenFuer(a) {
-  const buchstaben = richtigeWoerter(a).join("") + (a.ziel === "pronomen" ? FUERWOERTER.join("") : "estn");
-  return [...new Set(buchstaben)].join("");
+  if (a.ziel === "pronomen") return [...new Set(richtigeWoerter(a).join("") + FUERWOERTER.join(""))].join("");
+  const tasten = new Set(richtigeWoerter(a).join("") + "estn");
+  const start = Math.max(0, VERBEN.findIndex((v) => v.id === a.verb));
+  for (let i = 1; i < VERBEN.length && tasten.size < MAX_TASTEN; i++) {
+    for (const c of VERBEN[(start + i) % VERBEN.length].grundform) if (tasten.size < MAX_TASTEN) tasten.add(c);
+  }
+  return [...tasten].join("");
 }
 
 /**
@@ -112,15 +135,15 @@ export function wirkende(a, antwort) {
 
 /**
  * Wer hebt bei einer falschen Antwort den Stift? Die, zu denen die gelegte Endung (bzw. das Fürwort) gehört – nie die
- * Gemeinten der Aufgabe, sie warten. Passt die Endung zu niemandem (maln), hebt niemand den Stift. Bei der Grundform
- * gehört -t zu der Person selbst (Ela malt), -e, -st und -en zu anderen.
+ * Gemeinten der Aufgabe, sie warten. Passt die Endung zu niemandem (maln), hebt niemand den Stift. Die Grundform
+ * gehört zu niemandem: dort hebt auch bei einer falschen Endung keiner den Stift.
  * @param {any} a @param {string} antwort
  * @returns {string[]}
  */
 export function hebenStift(a, antwort) {
+  if (a.ziel === "grundform") return [];
   const personen = PERSONEN.filter((p) => (a.ziel === "pronomen" ? PRONOMEN_VON[p] === antwort : ENDUNG_VON[p] === antwort));
   const alle = [...new Set(personen.flatMap((p) => werVon(p, a.verb)))];
-  if (a.ziel === "grundform") return alle.filter((w) => w !== "ich" && (antwort === "t" || !werVon(a.person, a.verb).includes(w)));
   const warten = werVon(a.person, a.verb);
   return alle.filter((w) => !warten.includes(w));
 }
@@ -142,19 +165,19 @@ export const freiePlaetze = (belegt) => Math.max(0, BOGEN_PLAETZE - belegt);
 export const bogenReicht = (belegt, noetig) => freiePlaetze(belegt) >= noetig;
 
 /**
- * Die Spalte des Bogens (0 bis 5), die zu einer handelnden Person gehört: Kofi links, dann Lena, die eigene Hand
- * unten Mitte, Timo und Ela rechts. @param {string} wer
+ * Die Spalte des Bogens (0 bis 4), die zu einer handelnden Person gehört: Kofi links, dann Lena, die eigene Hand
+ * in der Mitte, Timo und Ela rechts; wer sonst legt (die Grundform: das Wort selbst), legt in die Mitte. @param {string} wer
  */
-export const spalteVon = (wer) => ({ kofi: 0, lena: 2, ich: 3, timo: 4, ela: 5 })[/** @type {"kofi"} */ (wer)] ?? 3;
+export const spalteVon = (wer) => ({ kofi: 0, lena: 1, ich: 2, timo: 3, ela: 4 })[/** @type {"kofi"} */ (wer)] ?? 2;
 
 /**
- * Der nächste freie Platz für `wer` (Platz = Reihe · 6 + Spalte): erst die eigene Spalte, dann die nächste Spalte.
+ * Der nächste freie Platz für `wer` (Platz = Reihe · 5 + Spalte): erst die eigene Spalte, dann die nächste Spalte.
  * @param {boolean[]} belegt je Platz @param {string} wer @returns {number | null}
  */
 export function platzFuer(belegt, wer) {
   const s = spalteVon(wer);
-  const reihenfolge = [0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5].map((d) => s + d).filter((x) => x >= 0 && x < 6);
-  for (const spalte of reihenfolge) for (const reihe of [0, 1]) if (!belegt[reihe * 6 + spalte]) return reihe * 6 + spalte;
+  const reihenfolge = [0, 1, -1, 2, -2, 3, -3, 4, -4].map((d) => s + d).filter((x) => x >= 0 && x < 5);
+  for (const spalte of reihenfolge) for (const reihe of [0, 1]) if (!belegt[reihe * 5 + spalte]) return reihe * 5 + spalte;
   return null;
 }
 

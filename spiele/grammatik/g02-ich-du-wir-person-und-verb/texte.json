@@ -1,5 +1,5 @@
 {
- "hinweis": "Sätze von G02 Ich, du, wir, die aus Daten kommen (je Aufgabe ausgeschrieben, keine zur Laufzeit zusammengesetzten Sätze). aufgabe: das Gesagte zum Noch-mal-hören (wird nicht von selbst gesprochen), je Schlüssel verbform:<ziel>:<verb>:<person>. richtig: die Aufgabe nach dem richtigen Zug, je <verb>:<person> (Verb zur Person und Fürwort); richtigGrundform: je <verb>:<person> (er oder sie). hilfe1: die Hörprobe in dieser Reihenfolge (Verb zur Person: die Endungen -e, -st, -t, -en; Fürwort: die Fürwörter, die zur Form passen; Grundform: die vier Endungen am Stamm).",
+ "hinweis": "Sätze von G02 Ich, du, wir, die aus Daten kommen (je Aufgabe ausgeschrieben, keine zur Laufzeit zusammengesetzten Sätze). aufgabe: das Gesagte zum Noch-mal-hören (wird nicht von selbst gesprochen), je Schlüssel verbform:<ziel>:<verb>:<person>. richtig: die Aufgabe nach dem richtigen Zug, je <verb>:<person> (Verb zur Person und Fürwort); richtigGrundform: je <verb> (das bloße Verb). hilfe1: die Hörprobe in dieser Reihenfolge (Verb zur Person: die Endungen -e, -st, -t, -en; Fürwort: die Fürwörter, die zur Form passen; Grundform: die vier Endungen am Stamm).",
  "aufgabe": {
   "verbform:endung:malen:ich": "Ich … malen.",
   "verbform:endung:malen:du": "Du … malen.",
@@ -99,22 +99,45 @@
   "verbform:pronomen:stecken:wir": "… stecken.",
   "verbform:pronomen:stecken:ihr": "… steckt.",
   "verbform:pronomen:stecken:sie-pl": "… stecken.",
+  "verbform:grundform:malen:ich": "Ich male.",
+  "verbform:grundform:malen:du": "Du malst.",
   "verbform:grundform:malen:er": "Timo malt.",
   "verbform:grundform:malen:sie": "Ela malt.",
+  "verbform:grundform:malen:ihr": "Ihr malt.",
+  "verbform:grundform:kleben:ich": "Ich klebe.",
+  "verbform:grundform:kleben:du": "Du klebst.",
   "verbform:grundform:kleben:er": "Timo klebt.",
   "verbform:grundform:kleben:sie": "Ela klebt.",
+  "verbform:grundform:kleben:ihr": "Ihr klebt.",
+  "verbform:grundform:legen:ich": "Ich lege.",
+  "verbform:grundform:legen:du": "Du legst.",
   "verbform:grundform:legen:er": "Timo legt.",
   "verbform:grundform:legen:sie": "Ela legt.",
+  "verbform:grundform:legen:ihr": "Ihr legt.",
+  "verbform:grundform:bauen:ich": "Ich baue.",
+  "verbform:grundform:bauen:du": "Du baust.",
   "verbform:grundform:bauen:er": "Timo baut.",
   "verbform:grundform:bauen:sie": "Ela baut.",
+  "verbform:grundform:bauen:ihr": "Ihr baut.",
+  "verbform:grundform:rollen:ich": "Ich rolle.",
+  "verbform:grundform:rollen:du": "Du rollst.",
   "verbform:grundform:rollen:er": "Timo rollt.",
   "verbform:grundform:rollen:sie": "Ela rollt.",
+  "verbform:grundform:rollen:ihr": "Ihr rollt.",
+  "verbform:grundform:tupfen:ich": "Ich tupfe.",
+  "verbform:grundform:tupfen:du": "Du tupfst.",
   "verbform:grundform:tupfen:er": "Timo tupft.",
   "verbform:grundform:tupfen:sie": "Ela tupft.",
+  "verbform:grundform:tupfen:ihr": "Ihr tupft.",
+  "verbform:grundform:stecken:ich": "Ich stecke.",
+  "verbform:grundform:stecken:du": "Du steckst.",
   "verbform:grundform:stecken:er": "Timo steckt.",
   "verbform:grundform:stecken:sie": "Ela steckt.",
+  "verbform:grundform:stecken:ihr": "Ihr steckt.",
+  "verbform:grundform:basteln:du": "Du bastelst.",
   "verbform:grundform:basteln:er": "Timo bastelt.",
-  "verbform:grundform:basteln:sie": "Ela bastelt."
+  "verbform:grundform:basteln:sie": "Ela bastelt.",
+  "verbform:grundform:basteln:ihr": "Ihr bastelt."
  },
  "richtig": {
   "malen:ich": "Ich male.",
@@ -168,22 +191,14 @@
   "stecken:sie-pl": "Sie stecken."
  },
  "richtigGrundform": {
-  "malen:er": "Timo malt. Malen.",
-  "malen:sie": "Ela malt. Malen.",
-  "kleben:er": "Timo klebt. Kleben.",
-  "kleben:sie": "Ela klebt. Kleben.",
-  "legen:er": "Timo legt. Legen.",
-  "legen:sie": "Ela legt. Legen.",
-  "bauen:er": "Timo baut. Bauen.",
-  "bauen:sie": "Ela baut. Bauen.",
-  "rollen:er": "Timo rollt. Rollen.",
-  "rollen:sie": "Ela rollt. Rollen.",
-  "tupfen:er": "Timo tupft. Tupfen.",
-  "tupfen:sie": "Ela tupft. Tupfen.",
-  "stecken:er": "Timo steckt. Stecken.",
-  "stecken:sie": "Ela steckt. Stecken.",
-  "basteln:er": "Timo bastelt. Basteln.",
-  "basteln:sie": "Ela bastelt. Basteln."
+  "malen": "Malen.",
+  "kleben": "Kleben.",
+  "legen": "Legen.",
+  "bauen": "Bauen.",
+  "rollen": "Rollen.",
+  "tupfen": "Tupfen.",
+  "stecken": "Stecken.",
+  "basteln": "Basteln."
  },
  "hilfe1": {
   "verbform:endung:malen:ich": [
@@ -683,6 +698,18 @@
    "Sie stecken.",
    "Wir stecken."
   ],
+  "verbform:grundform:malen:ich": [
+   "Male.",
+   "Malst.",
+   "Malt.",
+   "Malen."
+  ],
+  "verbform:grundform:malen:du": [
+   "Male.",
+   "Malst.",
+   "Malt.",
+   "Malen."
+  ],
   "verbform:grundform:malen:er": [
    "Male.",
    "Malst.",
@@ -694,6 +721,24 @@
    "Malst.",
    "Malt.",
    "Malen."
+  ],
+  "verbform:grundform:malen:ihr": [
+   "Male.",
+   "Malst.",
+   "Malt.",
+   "Malen."
+  ],
+  "verbform:grundform:kleben:ich": [
+   "Klebe.",
+   "Klebst.",
+   "Klebt.",
+   "Kleben."
+  ],
+  "verbform:grundform:kleben:du": [
+   "Klebe.",
+   "Klebst.",
+   "Klebt.",
+   "Kleben."
   ],
   "verbform:grundform:kleben:er": [
    "Klebe.",
@@ -707,6 +752,24 @@
    "Klebt.",
    "Kleben."
   ],
+  "verbform:grundform:kleben:ihr": [
+   "Klebe.",
+   "Klebst.",
+   "Klebt.",
+   "Kleben."
+  ],
+  "verbform:grundform:legen:ich": [
+   "Lege.",
+   "Legst.",
+   "Legt.",
+   "Legen."
+  ],
+  "verbform:grundform:legen:du": [
+   "Lege.",
+   "Legst.",
+   "Legt.",
+   "Legen."
+  ],
   "verbform:grundform:legen:er": [
    "Lege.",
    "Legst.",
@@ -718,6 +781,24 @@
    "Legst.",
    "Legt.",
    "Legen."
+  ],
+  "verbform:grundform:legen:ihr": [
+   "Lege.",
+   "Legst.",
+   "Legt.",
+   "Legen."
+  ],
+  "verbform:grundform:bauen:ich": [
+   "Baue.",
+   "Baust.",
+   "Baut.",
+   "Bauen."
+  ],
+  "verbform:grundform:bauen:du": [
+   "Baue.",
+   "Baust.",
+   "Baut.",
+   "Bauen."
   ],
   "verbform:grundform:bauen:er": [
    "Baue.",
@@ -731,6 +812,24 @@
    "Baut.",
    "Bauen."
   ],
+  "verbform:grundform:bauen:ihr": [
+   "Baue.",
+   "Baust.",
+   "Baut.",
+   "Bauen."
+  ],
+  "verbform:grundform:rollen:ich": [
+   "Rolle.",
+   "Rollst.",
+   "Rollt.",
+   "Rollen."
+  ],
+  "verbform:grundform:rollen:du": [
+   "Rolle.",
+   "Rollst.",
+   "Rollt.",
+   "Rollen."
+  ],
   "verbform:grundform:rollen:er": [
    "Rolle.",
    "Rollst.",
@@ -742,6 +841,24 @@
    "Rollst.",
    "Rollt.",
    "Rollen."
+  ],
+  "verbform:grundform:rollen:ihr": [
+   "Rolle.",
+   "Rollst.",
+   "Rollt.",
+   "Rollen."
+  ],
+  "verbform:grundform:tupfen:ich": [
+   "Tupfe.",
+   "Tupfst.",
+   "Tupft.",
+   "Tupfen."
+  ],
+  "verbform:grundform:tupfen:du": [
+   "Tupfe.",
+   "Tupfst.",
+   "Tupft.",
+   "Tupfen."
   ],
   "verbform:grundform:tupfen:er": [
    "Tupfe.",
@@ -755,6 +872,24 @@
    "Tupft.",
    "Tupfen."
   ],
+  "verbform:grundform:tupfen:ihr": [
+   "Tupfe.",
+   "Tupfst.",
+   "Tupft.",
+   "Tupfen."
+  ],
+  "verbform:grundform:stecken:ich": [
+   "Stecke.",
+   "Steckst.",
+   "Steckt.",
+   "Stecken."
+  ],
+  "verbform:grundform:stecken:du": [
+   "Stecke.",
+   "Steckst.",
+   "Steckt.",
+   "Stecken."
+  ],
   "verbform:grundform:stecken:er": [
    "Stecke.",
    "Steckst.",
@@ -767,17 +902,35 @@
    "Steckt.",
    "Stecken."
   ],
+  "verbform:grundform:stecken:ihr": [
+   "Stecke.",
+   "Steckst.",
+   "Steckt.",
+   "Stecken."
+  ],
+  "verbform:grundform:basteln:du": [
+   "Bastele.",
+   "Bastelst.",
+   "Bastelt.",
+   "Basteln."
+  ],
   "verbform:grundform:basteln:er": [
    "Bastele.",
    "Bastelst.",
    "Bastelt.",
-   "Bastelen."
+   "Basteln."
   ],
   "verbform:grundform:basteln:sie": [
    "Bastele.",
    "Bastelst.",
    "Bastelt.",
-   "Bastelen."
+   "Basteln."
+  ],
+  "verbform:grundform:basteln:ihr": [
+   "Bastele.",
+   "Bastelst.",
+   "Bastelt.",
+   "Basteln."
   ]
  }
 }

@@ -39,15 +39,15 @@
 
   /* Der Papierbogen auf dem Tisch: flach, das Hellste auf der Platte; darauf wachsen die Striche, Sterne und Klötze. */
   .bogen {
-    position: absolute; left: 50%; top: 51rem; width: var(--bogen-b); height: 25rem; margin-left: calc(var(--bogen-b) / -2);
+    position: absolute; left: 50%; top: 48.5rem; width: var(--bogen-b); height: 27.4rem; margin-left: calc(var(--bogen-b) / -2);
     background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
     transform-origin: 0 50%; z-index: 1;
   }
   .bogen::before { content: ""; position: absolute; inset: 1rem; border: 0.25rem dashed var(--ls-naht); border-radius: 1rem; pointer-events: none; }
-  .marke { position: absolute; width: 9.6rem; height: 9.6rem; margin: -4.8rem 0 0 -4.8rem; pointer-events: none; }
+  .marke { position: absolute; width: 12.6rem; height: 12.6rem; margin: -6.3rem 0 0 -6.3rem; pointer-events: none; }
   .marke svg { width: 100%; height: 100%; display: block; overflow: visible; }
 
-  /* Dinge auf dem Tisch: der Stiftebecher (kippt bei der Grundform) und die Kiste mit Bastelsachen. */
+  /* Dinge auf dem Tisch: der Stiftebecher und die Kiste mit Bastelsachen. */
   .becher { position: absolute; left: calc(50% - var(--bogen-b) / 2 - 18rem); top: 53rem; width: 12rem; height: 14.4rem; transform-origin: 50% 96%; z-index: 1; }
   .kiste { position: absolute; left: calc(50% + var(--bogen-b) / 2 + 5rem); top: 59rem; width: 15rem; height: 11.25rem; z-index: 1; }
   .becher svg, .kiste svg { width: 100%; height: 100%; display: block; overflow: visible; }
@@ -92,6 +92,9 @@
     font-weight: 700; font-size: 6.6rem; line-height: 1;
   }
   .luecke.markiert { border-style: solid; }
+  /* Grundform: in der Lücke liegt schon die Endung der gebeugten Form; sie fällt ab, wenn das richtige Plättchen darauf liegt. */
+  .luecke.belegt { border-style: solid; border-color: var(--ls-tinte-weich); }
+  .luecke .alt { display: inline-flex; align-items: center; justify-content: center; inset: 0; color: var(--ls-tinte); font-weight: 700; }
   .luecke.geist { color: var(--ls-naht); }
   .luecke.klingt { background: #FFF1B8; }
   .eingerastet { display: inline-flex; align-items: center; justify-content: center; color: var(--ls-tinte); font-weight: 700; }

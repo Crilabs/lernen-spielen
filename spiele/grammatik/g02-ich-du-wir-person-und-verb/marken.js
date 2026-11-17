@@ -1,5 +1,5 @@
 // Bleibende Bilder auf dem Papierbogen von G02 und die Dinge, die dorthin fliegen: je Verb ein Ding (malen: Blume, kleben:
-// Stern, legen: Legestein, bauen: Klotz, rollen: Kugel, tupfen: Tupfen, stecken: Stecknadel), dazu der Stift und die Hände.
+// Stern, legen: Legestein, bauen: Klotz, rollen: Kugel, tupfen: Tupfen, stecken: Stecknadel, basteln: Windrad), dazu der Stift und die Hände.
 // Im Stil der Runde: Kontur nur um die Silhouette (guss), Schatten in Stufen (form). Felder 0…100, ohne Schrift.
 import { dunkler, flach, form, heller, naht, zeichner } from "../../start/zeichnen.js";
 
@@ -78,8 +78,17 @@ export function markeSvg(verb, farbe) {
         flach(`path d="M47.5 90 L52.5 90 L50 98 Z"`, "#C9CCD6"),
         form(`circle cx="50" cy="30" r="20"`, farbe, [42, 22], { s: 0.88, glanz: true }),
       ));
+    case "basteln":
+      // Windrad aus vier Papierecken
+      return svg(zz.guss(
+        form(`path d="M50 50 L50 8 L90 28 Z"`, farbe, [56, 22], { s: 0.9 }),
+        form(`path d="M50 50 L92 50 L72 90 Z"`, heller(farbe, 0.3), [72, 56], { s: 0.9 }),
+        form(`path d="M50 50 L50 92 L10 72 Z"`, dunkler(farbe, 0.12), [38, 76], { s: 0.9 }),
+        form(`path d="M50 50 L8 50 L28 10 Z"`, heller(farbe, 0.15), [26, 40], { s: 0.9 }),
+        flach(`circle cx="50" cy="50" r="7"`, "#FFD95A"),
+      ));
     default:
-      return svg(zz.guss(form(`circle cx="50" cy="50" r="30"`, farbe, [40, 40])));
+      return svg(zz.guss(form(`circle cx="50" cy="50" r="38"`, farbe, [38, 38])));
   }
 }
 

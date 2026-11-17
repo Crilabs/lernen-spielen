@@ -187,7 +187,7 @@ test("verbform: Schlüssel verbform:<ziel>:<verb>:<person>, je Ziel die richtige
   assert.deepEqual(e[0], { key: "verbform:endung:malen:ich", art: "verbform", daten: { ziel: "endung", verb: "malen", stamm: "mal", grundform: "malen", person: "ich", pronomen: "ich", form: "male", endung: "e", wer: ["ich"] } });
   assert.equal(new Set(e.map((x) => x.key)).size, 49);
   assert.equal(aufgabenVon({ art: "verbform", ziel: "pronomen" }).length, 49);
-  assert.equal(aufgabenVon({ art: "verbform", ziel: "grundform" }).length, 16);
+  assert.equal(aufgabenVon({ art: "verbform", ziel: "grundform" }).length, 39);
   assert.deepEqual(aufgabenVon({ art: "verbform", ziel: "gibtesnicht" }), []);
   assert.deepEqual(aufgabenVon({ art: "verbform" }), []);
   assert.equal(verbformAus("verbform:endung:malen:du").form, "malst");
