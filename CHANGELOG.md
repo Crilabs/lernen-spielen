@@ -7,6 +7,10 @@
 - **Bücher in der Spielzeit einfacher:** Im Elternbereich gibt es nur noch eine Zahl „Höchstens“ (aus oder 1 bis 10), dazu die Wahl „Am Tag“ oder „In der Woche“. Die Grenze gilt fürs Vorlesen; mit dem Häkchen „Gilt auch für Lesen“ zählen Vorlesen und Selbstlesen zusammen. Eine Einstellung aus v1.2.1 wird übernommen.
 - **Uhr statt Verschwinden:** Gesperrte Spiele und Bücher bleiben sichtbar und tragen eine Uhr über dem Bild. Ein Tippen zeigt den Hinweis „Du hast heute schon viel geschafft. Jetzt ist Zeit für eine Pause!“, der vorgelesen wird und nur mit OK zugeht. Von den Eltern ausgeblendete Spiele bleiben unsichtbar.
 - **Elternbereich auch von „Wissen“:** Das Zahnrad zum Gedrückthalten steht jetzt auch in der Bibliothek.
+- **Erinnerungsfrage:** Jedes Kapitel eines Sachbuchs endet mit einer Frage zu dem, was es erklärt hat, mit drei Antworten und Foto. Die Auflösung bewertet nicht, und das Kapitel lässt sich nachlesen. Einmal am Tag holt die Bibliothek mit „Weißt du noch?“ eine Frage aus einem früher gelesenen Kapitel zurück.
+- **Der Regenbogen (neu):** „Aylin und der Regenbogen“ ist ein Sachbuch mit sechs Kapiteln und Fotos im neuen Raum „Erde und Wetter“.
+- **Bibliothek:** Die Räume sind kleiner, bis zu vier stehen in einer Zeile.
+- **Mit echten Dingen:** neue Anleitungen zu Nomen, Verben und Adjektiven.
 
 ## v1.2.1
 
