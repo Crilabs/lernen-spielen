@@ -66,12 +66,19 @@ const PRUEFUNG = {
   required: ['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'ohneTransfer', 'grenzen', 'streichen', 'befunde'],
 }
 
-/** Urteil aus dem Bericht des Prüfers, fest ausgerechnet (docs/spielbau.md „Die Spielprüfung“). */
-function urteil(p) {
-  const nein = ['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'ohneTransfer'].filter((k) => !p[k].ja)
+const FRAGEN = ['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'ohneTransfer']
+/**
+ * Urteil aus dem Bericht des Prüfers, fest ausgerechnet (docs/spielbau.md „Die Spielprüfung“). Mit Vorgabe von
+ * Christian zählen nur Schwierigkeit und Ohne Transfer hart; ein Nein bei Zehnmal, Kern oder Schön betrifft seine Idee
+ * und wird ein Hinweis „Zur Idee“ (Christian, 2026-11-17).
+ */
+function urteil(p, mitVorgabe) {
+  const hart = mitVorgabe ? ['schwierigkeit', 'ohneTransfer'] : FRAGEN
+  const nein = hart.filter((k) => !p[k].ja)
+  const zurIdee = FRAGEN.filter((k) => !hart.includes(k) && !p[k].ja).map((k) => 'Zur Idee: ' + k + ' – ' + p[k].beleg)
   const grenzen = p.grenzen.filter((g) => !g.ok)
   const verdeckt = p.streichen.filter((s) => s.verdecktKern)
-  return { gruen: !nein.length && !grenzen.length && !verdeckt.length, nein, grenzen, verdeckt }
+  return { gruen: !nein.length && !grenzen.length && !verdeckt.length, nein, grenzen, verdeckt, zurIdee }
 }
 
 function befundText(liste, titel) {
@@ -127,18 +134,18 @@ for (let runde = 1; runde <= MAX_RUNDEN; runde++) {
     RUNDE: runde, PRUEFSTAND: ordner + '/pruefstand.json', FILM: ordner + '/film', BERICHT: L.ablage + '/spielpruefung-r' + runde + '.md',
   }), { label: 'Spielprüfung R' + runde, phase: 'Spielprüfung', schema: PRUEFUNG, model: M.pruefung })
   if (!p) return { status: 'abgebrochen', schritt: 'pruefung', runde, idee }
-  const u = urteil(p)
+  const u = urteil(p, !!L.vorgabe)
   letzte.pruefung = p
   letzte.urteil = u
   log('Spielprüfung R' + runde + ': ' + (u.gruen ? 'grün' : 'rot – Nein: ' + u.nein.join(', ') + '; Grenzen: ' + u.grenzen.map((g) => g.nr).join(', ') + '; verdeckt: ' + u.verdeckt.length))
   if (u.gruen) {
-    return { status: idee.freigabe ? 'freigabe' : 'gruen', freigabe: idee.freigabe, runde, idee, hinweise: p.befunde, streichen: p.streichen, letzte }
+    return { status: idee.freigabe ? 'freigabe' : 'gruen', freigabe: idee.freigabe, runde, idee, hinweise: [...u.zurIdee, ...p.befunde], streichen: p.streichen, letzte }
   }
   befunde = [
     ...u.nein.map((k) => 'Frage „' + k + '“ ist Nein: ' + p[k].beleg),
     ...u.grenzen.map((g) => g.nr + ': ' + g.beleg),
     ...u.verdeckt.map((s) => 'Streichen: ' + s.was + ' – ' + s.warum),
-    ...p.befunde,
+    ...p.befunde.filter((b) => !b.startsWith('Zur Idee:')), // Zweifel an Christians Idee sind kein Bauauftrag
   ].slice(0, 15)
   if (runde === MAX_RUNDEN) return { status: 'geparkt', grund: 'Spielprüfung nach ' + runde + ' Runden rot', runde, idee, befunde, letzte }
 }

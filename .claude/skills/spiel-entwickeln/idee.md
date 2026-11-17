@@ -30,6 +30,17 @@ Arbeitsordner: `{{WORKTREE}}` (Branch `{{BRANCH}}`). Niemanden fragen, keine Unt
 10. **Gestrichen** – was du aus Katalog-Eintrag, Welt oder einem vorhandenen Spiel bewusst weglässt, je eine Zeile
     mit Grund (§7). Diese Liste ist erwünscht, nicht verdächtig.
 
+11. **Abweichungen von der Vorgabe** – nur wenn das Bauheft mit „Vorgabe von Christian“ beginnt: je eine Zeile, was
+    du an seiner Idee geändert hast und warum (welche Regel). Nichts geändert: „keine“.
+
+## Mit Vorgabe von Christian
+
+Beginnt das Bauheft mit „Vorgabe von Christian“, dann ist diese Idee der Ausgangspunkt (Christian, 2026-11-17).
+Hat er eine Karte gewählt, gilt diese Skizze; hat er eigenen Text geschrieben, gilt der (die Skizzen darüber sind nur
+Bezug). **Behalte Held, Handlung, Wirkung und Witz**, so weit es geht – sie sind der Grund, warum er sie gewählt hat.
+Ändere frei, was gegen §1 oder G1–G14 verstößt oder ohne Lerngedanken lösbar wäre, und schreib jede Änderung unter
+„Abweichungen von der Vorgabe“. Ersetze die Idee nie durch eine eigene.
+
 Gesetzt ist nur, was mit „Christian“ und Datum markiert ist; widerspricht es dem Spielkern, schreib den Widerspruch
 unter „Freigabe nötig“ und bau den Spielkern trotzdem so gut es geht.
 

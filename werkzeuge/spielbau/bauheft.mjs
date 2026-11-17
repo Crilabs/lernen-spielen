@@ -74,8 +74,12 @@ export async function aufgabenarten(wurzel = WURZEL) {
   return Object.keys(m.ZIEL_MS ?? {});
 }
 
-/** Baut das Bauheft als Markdown. */
-export async function bauheft(id, wurzel = WURZEL) {
+/**
+ * Baut das Bauheft als Markdown. Mit `vorgabe` (Christians gewählte oder eigene Spielidee, Verwaltung „Ideen“) steht
+ * sie als „Vorgabe von Christian“ vor den Regeln (docs/superpowers/specs/2026-11-17-spielideen-design.md).
+ * @param {{ vorgabe?: string|null }} [opt]
+ */
+export async function bauheft(id, wurzel = WURZEL, { vorgabe = null } = {}) {
   const eintrag = katalogEintrag(id, wurzel);
   if (!eintrag) throw new Error(`Katalog-Id ${id} nicht gefunden (docs/spielkatalog/*.md, „### ${id} …“)`);
   const fach = FAECHER[id[0]];
@@ -108,6 +112,15 @@ export async function bauheft(id, wurzel = WURZEL) {
       `Katalog \`${eintrag.datei}\`. Erzeugt von \`werkzeuge/spielbau/bauheft.mjs\`; nur dieses Heft ist Pflicht, ` +
       "die Dokumente dahinter liest du nur, wenn du eine Einzelheit brauchst.",
     "",
+    ...(vorgabe ? [
+      "## Vorgabe von Christian",
+      "",
+      "Christian hat diese Idee gewählt oder selbst geschrieben. Sie ist der Ausgangspunkt: Held, Handlung, Wirkung und",
+      "Witz bleiben, so weit es geht; was gegen §1 oder G1–G14 verstößt, passt die Idee-Phase an und nennt es.",
+      "",
+      vorgabe.replace(/^# Vorgabe von Christian\s*/, "").replace(/^(#+) /gm, "#$1 ").trim(),
+      "",
+    ] : []),
     "## Regeln",
     "",
     regeln(wurzel),

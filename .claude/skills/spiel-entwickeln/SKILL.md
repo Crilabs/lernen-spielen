@@ -16,11 +16,14 @@ Arbeit löschen, schmutziger `main`-Worktree), Sicherheit oder Wirkung nach auß
 ## 1. Vorbereiten (Skript)
 
 ```bash
-cd <Hauptrepo> && node werkzeuge/spielbau/vorbereiten.mjs <Id> [--basis <branch>] [--zweig <branch>]
+cd <Hauptrepo> && node werkzeuge/spielbau/vorbereiten.mjs <Id> [--basis <branch>] [--zweig <branch>] [--vorgabe <datei>]
 ```
 
 - Legt den Worktree `.worktrees/<zweig>` an (Vorgabe `spiel-<id>`, Basis `main`), schreibt Bauheft und `lauf.json`
   in `.superpowers/spiele/<zweig>/`. Die letzte Zeile ist `lauf.json`.
+- **`--vorgabe <datei>`** reichst du unverändert durch, wenn der Aufruf ihn enthält („Spiel entwickeln G05 --vorgabe
+  werkzeuge/verwaltung/vorgaben/<auftrag>.md“): Christians gewählte Spielidee aus der Verwaltung (Skill
+  `spielideen`). Sie steht dann im Bauheft vor den Regeln; Idee und Spielprüfung richten sich danach.
 - **Basis ≠ main** ist ein Probelauf: Es wird nie gemergt. **Neubau** eines gemergten Spiels: `--zweig spiel-<id>-neu`.
 - Gibt es den Worktree schon, ist es eine **Wiederaufnahme**: Der Workflow läuft neu, die Agenten finden den Stand im
   Branch.
@@ -86,6 +89,6 @@ cd <Hauptrepo> && node werkzeuge/spielbau/abschliessen.mjs --lauf <ablage>/lauf.
 
 Ist `VERWALTUNG_AUFTRAG` gesetzt (Start über `npm run verwaltung`, `werkzeuge/verwaltung/`), schreib als Letztes
 `werkzeuge/verwaltung/ergebnisse/<auftrag>.json` (`<auftrag>` = Wert von `$VERWALTUNG_AUFTRAG`) im Repo, in dem der Lauf gestartet wurde: `{ "status": "gruen"|"freigabe"|"geparkt"|"abgebrochen",
-"zusammenfassung": "<ein Satz: Spiel, Ergebnis, Kosten>", "frage": "<nur bei freigabe/geparkt>", "probelauf": true|false }`.
+"zusammenfassung": "<ein Satz: Spiel, Ergebnis, Kosten; mit Vorgabe dazu die Hinweise „Zur Idee“ aus dem Ergebnis und die Zahl der Abweichungen von der Vorgabe>", "frage": "<nur bei freigabe/geparkt>", "probelauf": true|false }`.
 Fehlt die Datei, gilt der Auftrag als fehlgeschlagen. `--steuerung` nimmt dann `$VERWALTUNG_TRANSKRIPT` (oben schon so
 gesetzt), damit eine Chat-Sitzung nebenher nicht gebucht wird. Ein `git push` scheitert im Lauf absichtlich.

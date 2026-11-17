@@ -204,3 +204,51 @@ test("Workflow: jeder Platzhalter der Vorlagen wird gefüllt, jede Vorlage und M
   assert.match(WORKFLOW, /'\[spielbau:' \+ phase \+ ' ' \+ L\.id \+ ' ' \+ L\.branch \+ '\]'/);
   assert.match(WORKFLOW, /^export const meta = \{\n  name: 'spiel-bauen',/);
 });
+
+// --- Vorgabe von Christian (docs/superpowers/specs/2026-11-17-spielideen-design.md) -----------------------------
+
+test("Vorgabe: steht im Bauheft vor den Regeln, ohne Vorgabe fehlt der Abschnitt", async () => {
+  const mit = await bauheft("G01", WURZEL, { vorgabe: "# Vorgabe von Christian\n\nHund hüpft" });
+  assert.ok(mit.indexOf("## Vorgabe von Christian") > 0 && mit.indexOf("## Vorgabe von Christian") < mit.indexOf("## Regeln"));
+  assert.ok(mit.includes("Hund hüpft"));
+  assert.ok(!(await bauheft("G01", WURZEL)).includes("Vorgabe von Christian"));
+});
+
+const urteil = new Function(`${WORKFLOW.match(/const FRAGEN[^\n]*\n[\s\S]*?\nfunction urteil[\s\S]*?\n}\n/)[0]}; return urteil`)();
+const bericht = (nein = []) => ({
+  ...Object.fromEntries(["zehnmal", "kern", "schwierigkeit", "schoen", "ohneTransfer"].map((k) => [k, { ja: !nein.includes(k), beleg: `${k}-beleg` }])),
+  grenzen: [], streichen: [], befunde: [],
+});
+
+test("Vorgabe: Spielprüfung zählt nur Schwierigkeit und Ohne Transfer hart", () => {
+  const u = urteil(bericht(["kern"]), true);
+  assert.equal(u.gruen, true);
+  assert.deepEqual(u.zurIdee, ["Zur Idee: kern – kern-beleg"]);
+  assert.equal(urteil(bericht(["kern"]), false).gruen, false);
+  assert.equal(urteil(bericht(["schwierigkeit"]), true).gruen, false);
+  assert.equal(urteil(bericht(["ohneTransfer"]), true).gruen, false);
+  assert.deepEqual(urteil(bericht([]), false).zurIdee, []);
+});
+
+test("Vorgabe: Vorlagen und Skill kennen sie", () => {
+  const idee = readFileSync(join(SKILL, "idee.md"), "utf8");
+  assert.ok(idee.includes("Vorgabe von Christian") && idee.includes("Abweichungen von der Vorgabe"));
+  assert.ok(readFileSync(join(SKILL, "pruefen.md"), "utf8").includes("Zur Idee:"));
+  assert.ok(readFileSync(join(SKILL, "SKILL.md"), "utf8").includes("--vorgabe"));
+  assert.match(WORKFLOW, /urteil\(p, !!L\.vorgabe\)/);
+});
+
+test("Vorgabe: fehlende Datei bricht vorbereiten ab, ohne Worktree", async () => {
+  const { spawnSync } = await import("node:child_process");
+  const r = spawnSync(process.execPath, ["werkzeuge/spielbau/vorbereiten.mjs", "G01", "--zweig", "spiel-g01-vorgabe-test", "--vorgabe", "/gibt/es/nicht.md"], { cwd: WURZEL, encoding: "utf8" });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /nicht gefunden/);
+  assert.ok(!existsSync(join(WURZEL, ".worktrees/spiel-g01-vorgabe-test")));
+});
+
+test("Vorgabe: Wiederaufnahme ohne --vorgabe behält die alte", async () => {
+  const { laufVorgabe } = await import("../werkzeuge/spielbau/vorbereiten.mjs");
+  assert.equal(laufVorgabe(null, { vorgabe: "x" }), "x");
+  assert.equal(laufVorgabe("neu", { vorgabe: "x" }), "neu");
+  assert.equal(laufVorgabe(null, {}), null);
+});
