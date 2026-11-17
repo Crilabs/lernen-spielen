@@ -17,6 +17,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { journalBeobachter, mitUhr, zeilenAusAusgabe } from "./protokoll.mjs";
 import { STATUS, aendereAuftraege, ladeAuftraege, naechsterWartender, statusAusErgebnis } from "./auftraege.mjs";
+import { befehlMitRueckmeldungen } from "./rueckmeldung.mjs";
 
 export const ORDNER = dirname(fileURLToPath(import.meta.url));
 export const WURZEL = join(ORDNER, "..", "..");
@@ -198,10 +199,13 @@ export async function arbeiteAb({ ordner = ORDNER, wurzel = WURZEL, starte = sta
     for (;;) {
       const a = naechsterWartender(ladeAuftraege(p.auftraege));
       if (!a) break;
-      aendere(ordner, a.id, (l, i) => { l[i] = { ...l[i], status: "laeuft", gestartet: new Date().toISOString() }; return l; });
+      // Befehl erst beim Umschalten auf „läuft“ lesen (unter der Sperre): Eine Rückmeldung, die kurz davor an den
+      // wartenden Auftrag gehängt wurde, ist dann dabei; danach geht jede Rückmeldung in einen neuen Auftrag.
+      let befehl = a.befehl;
+      aendere(ordner, a.id, (l, i) => { l[i] = { ...l[i], status: "laeuft", gestartet: new Date().toISOString() }; befehl = befehlMitRueckmeldungen(l[i]); return l; });
       rmSync(p.ergebnis(a.id), { force: true });
       try {
-        await starte({ befehl: a.befehl, auftragId: a.id, wurzel, protokoll: p.protokoll(a.id), ergebnis: p.ergebnis(a.id) });
+        await starte({ befehl, auftragId: a.id, wurzel, protokoll: p.protokoll(a.id), ergebnis: p.ergebnis(a.id) });
       } catch (e) {
         mkdirSync(dirname(p.protokoll(a.id)), { recursive: true });
         writeFileSync(p.protokoll(a.id), `\n# Fehler: ${/** @type {any} */ (e).message}\n`, { flag: "a" });
@@ -260,8 +264,9 @@ async function main(argv) {
     }
     const a = naechsterWartender(ladeAuftraege(p.auftraege));
     if (!a) { gibSperreFrei(ORDNER); console.log(JSON.stringify({ leer: true })); return; }
-    aendere(ORDNER, a.id, (l, i) => { l[i] = { ...l[i], status: "laeuft", gestartet: new Date().toISOString() }; return l; });
-    console.log(JSON.stringify({ id: a.id, art: a.art, ziel: a.ziel, befehl: a.befehl }));
+    let befehl = a.befehl;
+    aendere(ORDNER, a.id, (l, i) => { l[i] = { ...l[i], status: "laeuft", gestartet: new Date().toISOString() }; befehl = befehlMitRueckmeldungen(l[i]); return l; });
+    console.log(JSON.stringify({ id: a.id, art: a.art, ziel: a.ziel, befehl }));
   } else if (befehl === "fertig") {
     const [id, status] = rest;
     meldeFertig(ORDNER, id, status);

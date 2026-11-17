@@ -145,3 +145,15 @@ test("baueUebersicht: Lernthemen tragen Ziel, Beispiele und Zweck für die Ideen
   assert.ok(Array.isArray(mitZiel.beispiele));
   assert.ok("zweck" in mitZiel);
 });
+
+test("baueUebersicht: offene Antwort oder Änderung zu einem ungebauten Spiel gilt als beauftragt", () => {
+  const l = [
+    { id: "s", art: "spiel", ziel: "M01", status: "beantwortet" },
+    { id: "a", art: "antwort", ziel: "s", status: "wartet" },
+    { id: "x", art: "aenderung", ziel: "M02", bereich: "spiel", status: "laeuft" },
+  ];
+  const u = baueUebersicht(quellen(), l);
+  assert.equal(u.spiele.M01.status, "beauftragt");
+  assert.equal(u.spiele.M02.status, "beauftragt");
+  assert.equal(u.spiele.M37.status, "probe", "gebaute Spiele behalten ihren Stand");
+});
