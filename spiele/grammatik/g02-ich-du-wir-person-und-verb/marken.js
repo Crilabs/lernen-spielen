@@ -74,9 +74,9 @@ export function markeSvg(verb, farbe) {
       ));
     case "stecken":
       return svg(zz.guss(
-        flach(`rect x="47.5" y="40" width="5" height="50" rx="2.5"`, "#C9CCD6"),
-        flach(`path d="M47.5 90 L52.5 90 L50 98 Z"`, "#C9CCD6"),
-        form(`circle cx="50" cy="30" r="20"`, farbe, [42, 22], { s: 0.88, glanz: true }),
+        flach(`rect x="45" y="44" width="10" height="46" rx="3"`, "#B7BBC8"),
+        flach(`path d="M45 90 L55 90 L50 100 Z"`, "#B7BBC8"),
+        form(`circle cx="50" cy="32" r="29"`, farbe, [38, 20], { s: 0.88, glanz: true }),
       ));
     case "basteln":
       // Windrad aus vier Papierecken

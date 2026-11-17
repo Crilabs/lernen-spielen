@@ -70,12 +70,12 @@ export const richtigesPlaettchen = (a) => (a.ziel === "pronomen" ? a.pronomen : 
 export const passendePlaettchen = (a, stufe = "material") => plaettchenFuer(a).filter((p) => passt(a, p, stufe));
 
 /**
- * Die Wörter, die das Kind auf der Stufe kopf schreiben darf: die Form (malst), oder das Fürwort (sie).
+ * Was das Kind auf der Stufe kopf schreibt: die Endung (st), der Stamm bleibt sichtbar im Streifen; oder das Fürwort (sie).
  * @param {any} a @returns {string[]}
  */
 export function richtigeWoerter(a) {
   if (a.ziel === "pronomen") return FUERWOERTER.filter((p) => passt(a, p, "kopf"));
-  return passendePlaettchen(a, "kopf").map((e) => `${a.stamm}${e}`);
+  return passendePlaettchen(a, "kopf");
 }
 
 /**
@@ -97,18 +97,12 @@ export function naechsterBuchstabe(a, eingabe) {
 }
 
 /**
- * Die Tasten der Stufe kopf: die Buchstaben der richtigen Wörter und aller Endungen (e s t n), dazu Buchstaben anderer
- * Verben bis zu einer vollen Reihe, damit das Lösungswort nicht an den Tasten abzulesen ist. Fürwörter: die Buchstaben aller
- * Fürwörter. @param {any} a
+ * Die Tasten der Stufe kopf: bei Endungen genau e s t n (eine Reihe), bei Fürwörtern die Buchstaben aller Fürwörter.
+ * @param {any} a
  */
 export function tastenFuer(a) {
-  if (a.ziel === "pronomen") return [...new Set(richtigeWoerter(a).join("") + FUERWOERTER.join(""))].join("");
-  const tasten = new Set(richtigeWoerter(a).join("") + "estn");
-  const start = Math.max(0, VERBEN.findIndex((v) => v.id === a.verb));
-  for (let i = 1; i < VERBEN.length && tasten.size < MAX_TASTEN; i++) {
-    for (const c of VERBEN[(start + i) % VERBEN.length].grundform) if (tasten.size < MAX_TASTEN) tasten.add(c);
-  }
-  return [...tasten].join("");
+  if (a.ziel === "pronomen") return [...new Set(FUERWOERTER.join(""))].join("");
+  return "estn";
 }
 
 /**

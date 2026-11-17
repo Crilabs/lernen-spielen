@@ -86,9 +86,9 @@ const erzaehler = {
     return satz ? blase.sage(satz) : Promise.resolve("still");
   },
   /** Hilfe 1, die Hörprobe: eine der Formen im selben Ton. @param {any} a @param {number} i */
-  paar: (a, i) => (TEXTE?.hilfe1?.[a.key]?.[i] ? blase.sage(TEXTE.hilfe1[a.key][i], { zeigen: true }) : Promise.resolve("still")),
+  paar: (a, i) => (TEXTE?.hilfe1?.[a.key]?.[i] ? blase.sage(TEXTE.hilfe1[a.key][i]) : Promise.resolve("still")),
   /** Hilfe 2, die Lösung (das Kind legt oder schreibt selbst). */
-  loesung: () => blase.sage("Kofi dreht das Kärtchen um.", { zeigen: true }),
+  loesung: () => blase.sage("Kofi dreht das Kärtchen um."),
   /** Nach einem Fehlversuch ein klarer Auftrag (wie M06, M08). */
   nochmal: () => blase.sage("Versuch es noch einmal."),
   /** Die Stufe wechselt (Regeln §8). @param {string} stufe @param {string} ziel */
@@ -393,6 +393,10 @@ function baueTeil(id, text, wert) {
   p.setAttribute("aria-label", text);
   p.textContent = text;
   p.hidden = true;
+  // lose hingelegt: jedes Plättchen etwas schräg und etwas höher oder tiefer
+  const nr = Object.keys(plaettchen).length;
+  p.style.rotate = `${[-3.2, 2.4, -1.6, 3.4, -2.4, 1.8][nr % 6]}deg`;
+  p.style.marginTop = `${[0.5, -0.3, 0.9, -0.2, 0.7, 0][nr % 6]}rem`;
   ablage.insertBefore(p, tastatur);
   plaettchen[id] = p;
 }
@@ -456,15 +460,8 @@ function legeStreifen(a, stufe) {
   const kopf = stufe === "kopf";
   // Der Wortstreifen ist ein Papierstück auf dem Holz; die Lücke ist sein abgeschnittenes Ende (Kerbe mit Naht), kein Kasten.
   const papier = (/** @type {Node[]} */ ...teile) => { const p = neu("span", "papier"); p.append(...teile); return p; };
-  if (a.ziel === "endung") {
-    if (kopf) {
-      const huelle = neu("span", "wort", `<ls-wortart art="verb"></ls-wortart>`);
-      huelle.append(luecke);
-      streifen.append(papier(wortEl(a.pronomen)), huelle);
-    } else streifen.append(papier(wortEl(a.pronomen), wortEl(a.stamm, true)), luecke);
-  } else {
-    streifen.append(luecke, papier(wortEl(`${a.form}.`, true)));
-  }
+  if (a.ziel === "endung") streifen.append(papier(wortEl(a.pronomen), wortEl(a.stamm, true)), luecke);
+  else streifen.append(luecke, papier(wortEl(`${a.form}.`, true)));
   streifen.setAttribute("aria-label", `Lücke ${a.ziel === "pronomen" ? a.form : `${a.pronomen} ${a.stamm}`}`);
 
   // Ablage: Plättchen oder (kopf) die Tastatur
@@ -566,8 +563,8 @@ async function wirkungRichtig(a, antwort, { freude = true } = {}) {
   }
 
   // 1. Plopp: das Plättchen rastet in der Lücke ein (kopf: das Wort steht schon da).
+  luecke.classList.add("voll");
   if (B.stufe !== "kopf") {
-    luecke.classList.add("voll");
     luecke.append(eingerastetEl(antwort));
     bewege(/** @type {HTMLElement} */ (luecke.lastElementChild), [{ transform: "scale(0.9)" }, { transform: "scale(1.1)", offset: 0.55 }, { transform: "scale(1)" }], 220);
   }
@@ -747,28 +744,23 @@ function stelleAufgabe(aufgabe, melde) {
   };
   B.offen = { ablegen };
 
-  // Stufe kopf: das Kind schreibt das Wort (Buchstabe für Buchstabe, wie die Tastatur es liefert).
+  // Stufe kopf: das Kind schreibt nur die Endung (bei Fürwörtern das Fürwort), Buchstabe für Buchstabe; der Stamm bleibt sichtbar.
   /** @param {any} e */
   const beiTaste = (e) => {
     if (fertig || B.lage !== "start") return;
     const z = e.detail.zeichen;
-    if (z === "loeschen") {
-      eingabe = eingabe.slice(0, -1);
-    } else {
-      const r = tippeBuchstabe(a, eingabe, z);
-      if (!r.ok) {
-        wirkungDaneben(a, "", null, null);
-        melde.passtNicht();
-        if (!fertig) erzaehler.nochmal();
-        return;
-      }
-      eingabe = r.eingabe;
-      if (r.fertig) {
-        luecke.textContent = eingabe;
-        const endung = a.ziel === "pronomen" ? eingabe : eingabe.slice(a.stamm.length);
-        loese(endung);
-        return;
-      }
+    const r = tippeBuchstabe(a, eingabe, z);
+    if (!r.ok) {
+      wirkungDaneben(a, "", null, null);
+      melde.passtNicht();
+      if (!fertig) erzaehler.nochmal();
+      return;
+    }
+    eingabe = r.eingabe;
+    if (r.fertig) {
+      luecke.textContent = eingabe;
+      loese(eingabe);
+      return;
     }
     luecke.classList.remove("geist");
     luecke.textContent = eingabe;
@@ -806,7 +798,7 @@ function stelleAufgabe(aufgabe, melde) {
       const wert = moeglich[i];
       const el = kopf ? luecke : teilFuer(a, wert);
       if (kopf) {
-        luecke.textContent = a.ziel === "pronomen" ? wert : `${a.stamm}${wert}`;
+        luecke.textContent = wert;
         luecke.classList.add("geist");
       } else el?.classList.add("klingt");
       await erzaehler.paar(a, i);

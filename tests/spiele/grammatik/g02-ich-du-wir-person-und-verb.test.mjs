@@ -103,28 +103,26 @@ test("Wer hebt bei einer falschen Endung den Stift? Zu wem sie gehört, nie die 
   assert.deepEqual(L.hebenStift(a("verbform:pronomen:malen:sie"), "er"), ["timo"]);
 });
 
-test("Stufe kopf: Buchstaben nur auf einem richtigen Weg; fertig mit dem vollständigen Wort", () => {
+test("Stufe kopf: der Stamm bleibt im Streifen, das Kind schreibt nur die Endung, eine Reihe Tasten", () => {
   const du = a("verbform:endung:malen:du");
-  assert.deepEqual(L.richtigeWoerter(du), ["malst"]);
-  assert.deepEqual(L.tippeBuchstabe(du, "mal", "t"), { ok: false, eingabe: "mal", fertig: false });
-  assert.deepEqual(L.tippeBuchstabe(du, "mal", "s"), { ok: true, eingabe: "mals", fertig: false });
-  assert.deepEqual(L.tippeBuchstabe(du, "mals", "t"), { ok: true, eingabe: "malst", fertig: true });
-  assert.equal(L.naechsterBuchstabe(du, ""), "m");
-  assert.equal(L.naechsterBuchstabe(du, "mals"), "t");
-  assert.equal(L.naechsterBuchstabe(du, "malst"), null);
+  assert.deepEqual(L.richtigeWoerter(du), ["st"]);
+  assert.deepEqual(L.tippeBuchstabe(du, "", "t"), { ok: false, eingabe: "", fertig: false });
+  assert.deepEqual(L.tippeBuchstabe(du, "", "s"), { ok: true, eingabe: "s", fertig: false });
+  assert.deepEqual(L.tippeBuchstabe(du, "s", "t"), { ok: true, eingabe: "st", fertig: true });
+  assert.equal(L.naechsterBuchstabe(du, ""), "s");
+  assert.equal(L.naechsterBuchstabe(du, "s"), "t");
+  assert.equal(L.naechsterBuchstabe(du, "st"), null);
   const sie = a("verbform:endung:malen:sie");
-  assert.deepEqual(L.richtigeWoerter(sie), ["malt", "malen"]);
-  assert.equal(L.tippeBuchstabe(sie, "malt", "x").ok, false);
+  assert.deepEqual(L.richtigeWoerter(sie), ["t", "en"]);
+  assert.equal(L.tippeBuchstabe(sie, "t", "x").ok, false);
   assert.deepEqual(L.richtigeWoerter(a("verbform:pronomen:malen:wir")), ["sie", "wir"]);
-  // jeder richtige Weg ist mit den angebotenen Tasten tippbar
+  // jeder richtige Weg ist mit den angebotenen Tasten tippbar; Endungen brauchen genau e s t n (eine Reihe, kein Löschen)
   for (const z of ["endung", "pronomen"]) {
     for (const x of ziel(z)) {
       const d = a(x.key);
       const tasten = L.tastenFuer(d);
       assert.ok(tasten.length <= L.MAX_TASTEN, x.key);
-      // das Lösungswort ist nicht an den Tasten abzulesen: es liegen mehr Buchstaben da als nur seine eigenen
-      if (z !== "pronomen") assert.ok(new Set(tasten).size > new Set(L.richtigeWoerter(d).join("")).size, x.key);
-      if (z !== "pronomen") for (const c of "estn") assert.ok(tasten.includes(c), `${x.key} ${c}`);
+      if (z !== "pronomen") assert.equal([...tasten].sort().join(""), "enst", x.key);
       for (const w of L.richtigeWoerter(d)) assert.ok([...w].every((c) => tasten.includes(c)), `${x.key} ${w}`);
       let eingabe = "";
       for (let i = 0; i < 12 && eingabe !== L.richtigeWoerter(d)[0]; i++) {
