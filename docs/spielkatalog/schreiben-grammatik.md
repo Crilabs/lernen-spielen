@@ -643,7 +643,7 @@ unter „Figuren“ sind nur ein Startvorschlag für die Verteilung.
 - **Alternative zu G01** (Christian 2026-11-17): dieselben Themen, leichter und lustiger. G01 bestimmt Wörter im
   Satz, G14 sortiert einzelne Wörter; das Kind liest dabei selbst.
 - Name fürs Kind: „Wörter-Tonnen“ · Symbol: zwei Mülltonnen mit schwarzem Dreieck und rotem Kreis auf dem Deckel
-- Handlung: Eine Wortkarte springt aus Timos Kiste; das Kind zieht sie auf eine Tonne (Nomen, Verb, Adjektiv) oder
+- Handlung: Eine Wortkarte springt aus Kofis Kiste; das Kind zieht sie auf eine Tonne (Nomen, Verb, Adjektiv) oder
   in die graue Resttonne für alles, wofür es keine Tonne gibt · Wirkung: Die Karte fliegt im Bogen hinein, der
   Deckel klappt, die Probe ist zu hören; ist die Kiste leer, kommt der Rest in den großen Container.
 - Gesten: Ziehen der Karte auf eine Tonne, beim Loslassen fliegt sie (Tipp-Alternative: Karte, dann Tonne).
@@ -654,7 +654,7 @@ unter „Figuren“ sind nur ein Startvorschlag für die Verteilung.
   zurück. Hilfe nach Zeit: vorlesen, dann die Probe als Frage, dann wackelt der richtige Deckel.
 - Fehlerbilder: nomen-klein (Vorstufe)
 - Stimme: mittel. Proben aus `spiele/woerter/wortarten.js`.
-- Figuren: Timo bringt die Kiste auf dem Schoß; Kofi wirft am Ende die Resttonne in den Container. Keine Fähigkeit.
+- Figuren: Kofi bringt die Kiste und wirft am Ende die Resttonne in den Container; Ela und Lena höchstens als Zuschauer. Nicht Timo (Christian 2026-11-17: hat schon viele Spiele). Keine Fähigkeit.
 - Mach mit: Wörter auf Zettel schreiben und in beschriftete Kartons sortieren.
 - Hauptthemen: namenwoerter (1), tunwoerter (1), wiewoerter (2), nomen-proben (2) · 4 Themen, Kl. 1/2
 - Weitere Zugänge: wie G01.
