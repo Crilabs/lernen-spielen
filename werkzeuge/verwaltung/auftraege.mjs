@@ -1,7 +1,7 @@
 // Warteschlange der Verwaltung (docs/superpowers/specs/2026-11-16-verwaltung-design.md, „Aufträge“).
 // Reine Listenfunktionen (geben neue Listen zurück) und Lesen/Schreiben von werkzeuge/verwaltung/auftraege.json.
 
-import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 
 export const ARTEN = ["spiel", "echte-dinge", "buch", "einfuehrung", "frei", "ideen"];
 export const STATUS = ["wartet", "laeuft", "erledigt", "wartet-auf-christian", "beantwortet", "fehlgeschlagen", "gestrichen"];
@@ -180,6 +180,34 @@ export function ladeAuftraege(datei) {
 }
 
 /** Schreibt über eine Zwischendatei, damit ein Abbruch nie eine halbe Datei hinterlässt. */
+const SPERRE_ALT_MS = 10_000; // länger hält niemand die Sperre; älter = Rest eines abgestürzten Prozesses
+const SPERRE_WARTE_MS = 15_000;
+const schlafe = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+
+/**
+ * Führt `fn` synchron unter einer Sperre über Prozesse hinweg aus (Ordner `<datei>.sperre`): Lauf, Ideen-Prozesse und
+ * Seite ändern auftraege.json gleichzeitig; ohne Sperre gingen Änderungen verloren (Ideen, 2026-11-17).
+ * @template T @param {string} datei @param {() => T} fn @returns {T}
+ */
+export function mitSperre(datei, fn) {
+  const sperre = `${datei}.sperre`;
+  const bis = Date.now() + SPERRE_WARTE_MS;
+  for (;;) {
+    try { mkdirSync(sperre); break; } catch (e) {
+      if (/** @type {any} */ (e).code !== "EEXIST") throw e;
+      try { if (Date.now() - statSync(sperre).mtimeMs > SPERRE_ALT_MS) { rmSync(sperre, { recursive: true, force: true }); continue; } } catch { continue; }
+      if (Date.now() > bis) throw new Error(`auftraege.json ist gesperrt (${sperre})`);
+      schlafe(10 + Math.random() * 20);
+    }
+  }
+  try { return fn(); } finally { rmSync(sperre, { recursive: true, force: true }); }
+}
+
+/** Lesen, ändern, schreiben unter der Sperre. `f` bekommt die Liste und gibt die neue zurück. */
+export function aendereAuftraege(datei, f) {
+  return mitSperre(datei, () => { const neu = f(ladeAuftraege(datei)); speichereAuftraege(datei, neu); return neu; });
+}
+
 export function speichereAuftraege(datei, liste) {
   const tmp = `${datei}.tmp-${process.pid}`;
   writeFileSync(tmp, JSON.stringify(liste, null, 1) + "\n");

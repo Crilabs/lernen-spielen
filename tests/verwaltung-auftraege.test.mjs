@@ -152,3 +152,21 @@ test("waehleIdee: falsche Karte, leerer Text, falsche Art oder Status, fehlende 
   assert.throws(() => waehleIdee([ideenAuftrag({ status: "geparkt", ideen: [] })], "i-1", { karte: 1 }));
   assert.equal(waehleIdee([ideenAuftrag({ status: "geparkt" })], "i-1", { text: "Eigenes" }).neu.art, "spiel");
 });
+
+// Ideen laufen gleichzeitig (2026-11-17): Vier Prozesse änderten auftraege.json zugleich, drei Änderungen gingen
+// verloren. aendereAuftraege sperrt Lesen–Ändern–Schreiben über Prozesse hinweg.
+test("aendereAuftraege: acht Prozesse gleichzeitig, keine Änderung geht verloren", async () => {
+  const { spawn } = await import("node:child_process");
+  const o = mkdtempSync(join(tmpdir(), "sperre-"));
+  const datei = join(o, "auftraege.json");
+  speichereAuftraege(datei, Array.from({ length: 8 }, (_, i) => ({ id: `a${i}`, status: "wartet" })));
+  const modul = new URL("../werkzeuge/verwaltung/auftraege.mjs", import.meta.url).href;
+  const skript = (i) => `import { aendereAuftraege } from ${JSON.stringify(modul)};
+    for (let k = 0; k < 5; k++) aendereAuftraege(${JSON.stringify(datei)}, (l) => l.map((a) => a.id === "a${i}" ? { ...a, n: (a.n ?? 0) + 1 } : a));`;
+  await Promise.all(Array.from({ length: 8 }, (_, i) => new Promise((ok, nein) => {
+    const k = spawn(process.execPath, ["--input-type=module", "-e", skript(i)], { stdio: "inherit" });
+    k.on("close", (c) => (c === 0 ? ok() : nein(new Error(`Prozess ${i}: ${c}`))));
+  })));
+  assert.deepEqual(ladeAuftraege(datei).map((a) => a.n), [5, 5, 5, 5, 5, 5, 5, 5]);
+  rmSync(o, { recursive: true });
+});

@@ -16,7 +16,7 @@ import { createInterface } from "node:readline";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { journalBeobachter, mitUhr, zeilenAusAusgabe } from "./protokoll.mjs";
-import { STATUS, ladeAuftraege, naechsterWartender, speichereAuftraege, statusAusErgebnis } from "./auftraege.mjs";
+import { STATUS, aendereAuftraege, ladeAuftraege, naechsterWartender, statusAusErgebnis } from "./auftraege.mjs";
 
 export const ORDNER = dirname(fileURLToPath(import.meta.url));
 export const WURZEL = join(ORDNER, "..", "..");
@@ -139,7 +139,8 @@ export function startClaude({ befehl, auftragId, wurzel, protokoll, ergebnis, al
   const journal = journalBeobachter(transkript.replace(/\.jsonl$/, ""), schreibe);
   const takt = setInterval(journal, alleMs);
   return new Promise((ok) => {
-    const ende = (text, code) => { clearInterval(takt); journal(); log.end(`\n# ${text}\n`); ok(code); };
+    // Erst melden, wenn die letzte Zeile wirklich in der Datei steht (vorher las der Test unter Last zu früh).
+    const ende = (text, code) => { clearInterval(takt); journal(); log.end(`\n# ${text}\n`, () => ok(code)); };
     kind.on("error", (e) => ende(`Start fehlgeschlagen: ${e.message}`, -1));
     kind.on("close", (code) => ende(`Ende, Exit-Code ${code}`, code ?? -1));
   });
@@ -147,11 +148,7 @@ export function startClaude({ befehl, auftragId, wurzel, protokoll, ergebnis, al
 
 /** Ändert einen Auftrag in der Datei (frisch gelesen, damit Änderungen der Seite während des Laufs bleiben). */
 function aendere(ordner, id, f) {
-  const datei = pfade(ordner).auftraege;
-  const l = ladeAuftraege(datei);
-  const neu = f(l, l.findIndex((a) => a.id === id));
-  speichereAuftraege(datei, neu);
-  return neu;
+  return aendereAuftraege(pfade(ordner).auftraege, (l) => f(l, l.findIndex((a) => a.id === id)));
 }
 
 function liesErgebnis(datei) {
