@@ -4818,5 +4818,129 @@
    "gegenwart-praesens",
    "pronomen-statt-nomen"
   ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 554,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "nomen-proben.png",
+  "themen": 1,
+  "thema": [
+   "nomen-proben"
+  ],
+  "usage": {
+   "input_tokens": 554,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 554
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2310
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 556,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "nomen-proben.png",
+  "themen": 1,
+  "thema": [
+   "nomen-proben"
+  ],
+  "usage": {
+   "input_tokens": 556,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 556
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2312
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 102,
+  "ausgabe": 27779,
+  "einheit": "tokens",
+  "menge": 5370107,
+  "notiz": "nomen-proben, Recherche und Schreiben (Steuer-Agent)",
+  "cache_lesen": 5190150,
+  "cache_schreiben": 152076,
+  "themen": 1,
+  "thema": [
+   "nomen-proben"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 6402,
+  "einheit": "tokens",
+  "menge": 468362,
+  "notiz": "nomen-proben, Prüfung Runde 1",
+  "cache_lesen": 394346,
+  "cache_schreiben": 67600,
+  "themen": 1,
+  "thema": [
+   "nomen-proben"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 7023,
+  "einheit": "tokens",
+  "menge": 575771,
+  "notiz": "nomen-proben, Prüfung Runde 2",
+  "cache_lesen": 497196,
+  "cache_schreiben": 71536,
+  "themen": 1,
+  "thema": [
+   "nomen-proben"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 7993,
+  "einheit": "tokens",
+  "menge": 578884,
+  "notiz": "nomen-proben, Prüfung Runde 3",
+  "cache_lesen": 495347,
+  "cache_schreiben": 75528,
+  "themen": 1,
+  "thema": [
+   "nomen-proben"
+  ]
  }
 ]
