@@ -118,6 +118,11 @@ drei Punkte brauchen Christian.
 - Zu 10: Das Bild der Seite Geschlechtsteile zeigt **keinen Körper**: gefaltete Kinder-Badesachen (Badehose, Badeanzug) auf einem Handtuch – „das, was die Badesachen bedecken“. Keine KI-Kinderkörper auf dieser Seite.
 - Zu 11: Formulierung ohne feste Zuordnung („Manche Kinder haben … andere …“). Elternsatz: der `eltern`-Text der Welt `koerperteile` (9.3).
 
+**Bestätigt von Christian (2026-11-17, Antwort „Ja“ über die Verwaltung):** alle drei Entscheidungen zu 9–11 gelten
+endgültig. Dazu Punkt 17 (Prüfer B): Der Elternsatz zur Seite „Mein Körper gehört mir“ steht jetzt im `eltern`-Text der
+Welt `koerperteile` (`spiele/lernplan.json`), den der Elternbereich „Sachthemen“ neben dem Buch zeigt: Recht auf Nein
+und auf Hilfe, ohne Warnung und ohne Täter, kein Wirkversprechen (K14).
+
 Nicht beanstandet (geprüft): Fingerglieder (drei, Daumen zwei), Daumen gegenüber, Muskeln ziehen nur, Kniescheibe
 locker verschiebbar, Ellbogen/Knie nur beugen und strecken (Unterarmdrehung muss das Buch nicht erklären), Bauchnabel,
 Fontanelle, morgens größer, Zwillings-Fingerabdrücke, Armspanne „bei Kindern oft etwas kürzer“, mehr als 40
@@ -216,7 +221,7 @@ Geschlechtsform (§7). Vielfalt nur beiläufig im Bild (Rollstuhl, Prothese, Bri
 selbst prüfbare Unterschiede; ruhiges Ende mit Strecken (G9). Bildregeln (keine Gesichter, keine Nacktheit, keine
 Berührung durch andere, Frage-Seiten verraten nichts) passen zu den Seiten.
 
-**Umsetzung** (frischer Schreiber, 2026-11-17): 1 umgesetzt; 2 angepasst wie Variante „fühlbarer Versuch“ (Schläfenmuskel als Kaumuskel, Quelle Unimedizin Mainz [Q24] in `quellen` und `inhalte.md`); 3 umgesetzt (Fakt in `quellen` auf Erwachsene präzisiert); 4 umgesetzt; 5 umgesetzt, 06-02 in zwei Sätze geteilt (Satzgrenze); 6 umgesetzt (Quelle AKF-Elternbrief [Q26] ergänzt); 7 umgesetzt (Küchentisch über Eck, Regeltext angepasst); 8 umgesetzt; 9 umgesetzt; 10 umgesetzt; 11 umgesetzt (Fakt in `quellen` ergänzt); 12 angepasst wie: „Becken, dem Knochenring unten am Rumpf“ [Q25], „Nerven“ bleibt; 13 umgesetzt; 14 umgesetzt (Ball, Schnur, Jacke, Lupe, Stempelkissen als Einladung); 15 umgesetzt; 16 umgesetzt; 17 offen (für Christian). Danach 29 Seiten mit 73–100 Wörtern, längster Satz 15 Wörter; `tests/geschichten.test.mjs` nur noch „Bild … fehlt“ und Index.
+**Umsetzung** (frischer Schreiber, 2026-11-17): 1 umgesetzt; 2 angepasst wie Variante „fühlbarer Versuch“ (Schläfenmuskel als Kaumuskel, Quelle Unimedizin Mainz [Q24] in `quellen` und `inhalte.md`); 3 umgesetzt (Fakt in `quellen` auf Erwachsene präzisiert); 4 umgesetzt; 5 umgesetzt, 06-02 in zwei Sätze geteilt (Satzgrenze); 6 umgesetzt (Quelle AKF-Elternbrief [Q26] ergänzt); 7 umgesetzt (Küchentisch über Eck, Regeltext angepasst); 8 umgesetzt; 9 umgesetzt; 10 umgesetzt; 11 umgesetzt (Fakt in `quellen` ergänzt); 12 angepasst wie: „Becken, dem Knochenring unten am Rumpf“ [Q25], „Nerven“ bleibt; 13 umgesetzt; 14 umgesetzt (Ball, Schnur, Jacke, Lupe, Stempelkissen als Einladung); 15 umgesetzt; 16 umgesetzt; 17 offen (für Christian; am 2026-11-17 bestätigt und umgesetzt, siehe §1). Danach 29 Seiten mit 73–100 Wörtern, längster Satz 15 Wörter; `tests/geschichten.test.mjs` nur noch „Bild … fehlt“ und Index.
 
 ## 3. Bilder
 
