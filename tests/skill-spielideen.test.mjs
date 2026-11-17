@@ -2,7 +2,7 @@
 // Skill „spielideen“ und die Kostenphase.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { CLAUDE_PHASEN } from "../werkzeuge/kosten/kosten.mjs";
@@ -19,4 +19,21 @@ test("Blatt: drei Teile, höchstens 60 Zeilen, alle sechs Prototypen", () => {
 
 test("Kosten: Phase ideen", () => {
   assert.ok(CLAUDE_PHASEN.includes("ideen"));
+});
+
+test("Skill spielideen: Kopf, Lesen, Verbote, Ergebnis", () => {
+  const s = lies(".claude/skills/spielideen/SKILL.md");
+  assert.match(s, /^---\nname: spielideen\ndescription: .+\n---/);
+  for (const x of ["docs/spielideen.md", "docs/spiele/ideen/", "ideen-", "--ff-only", "--phase ideen", '"ideen"', "Lauf aus der Verwaltung"]) assert.ok(s.includes(x), x);
+  assert.doesNotMatch(s, /[Ll]ies.*(Bauheft|G1–G14)/);
+});
+
+test("Skill spielideen: jeder genannte Pfad im Repo existiert", () => {
+  const fehlt = [];
+  for (const [, roh] of lies(".claude/skills/spielideen/SKILL.md").matchAll(/`([^`\s]+)`/g)) {
+    if (!/^(docs|spiele|tests|werkzeuge|\.claude)\//.test(roh) || /[<{…*]/.test(roh)) continue;
+    const pfad = roh.replace(/[?#].*$/, "").replace(/[:,.)]+$/, "");
+    if (!existsSync(join(WURZEL, pfad))) fehlt.push(pfad);
+  }
+  assert.deepEqual(fehlt, []);
 });
