@@ -2,6 +2,12 @@
 
 ## Unveröffentlicht
 
+## v1.2.6
+
+- **Ich, du, wir (neu):** Am Maltisch passt das Kind die Endung des Verbs an die Person an, mit Pronomen und Endungsplättchen.
+- **Dreieck und Kreis:** Das Symbol bleibt beim Ziehen sichtbar, Wörter und Symbole liegen direkt auf dem Pflaster. Das Spiel ist weiter zur Probe.
+- **Fünf Sinne (neu):** „Augen zu und Ohren auf“ ist ein Sachbuch mit sieben Kapiteln und Selbstversuchen ohne Gefahr.
+- **Tagesbrief:** Eine Familie kann mehrere Empfänger eintragen. Ein am Vortag offener Versand und ein Ladefehler der Adressliste sind behoben.
 ## v1.2.5
 
 - **Tagesbrief (neu):** Im Elternbereich lässt sich ein Brief per E-Mail einrichten. Er erzählt zur gewählten Uhrzeit, was das Kind gespielt, gekonnt und gelesen hat, mit Fotos und einer Anleitung „Mit echten Dingen“ für zu Hause.
