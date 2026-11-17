@@ -5,6 +5,9 @@
 // Optional in derselben Reihe nach den beiden ein ruhiges Angebot „Mit echten Dingen“ (kleine Papier-Pille in der Größe
 // eines Nebenknopfs mit Hand und Wort, kleiner als die beiden Pausenknöpfe; kein Muss, keine Belohnung, K8): zeige({ echteDinge: { thema, fach, titel, text } }) führt damit zur Seite „Mit echten Dingen“
 // zum Thema der Runde (echt.html). Ohne Anleitung und ohne Einzeiler gibt es den Knopf nicht.
+// „Weißt du noch?“ (Christian, 2026-11-17; geschichten.md §2b): Ist eine Kapitelfrage fällig (höchstens zwei am Tag, mit
+// Bibliothek zusammen), steht sie auf einer eigenen Papierkarte statt der Karte des Spiels. Kein Muss: Alle Spiele und
+// Weiter gehen jederzeit; ohne Wahl zählt sie nicht als gestellt. Nicht bei schluss (Spielzeit vorbei).
 // Kein Timer, kein Ablauf. Spielzeit (Spec 2026-11-14-spielzeit): zeige({ satz, schluss }) stellt einen ruhigen
 // Satz über die Knöpfe (Vorwarnung oder Schluss); bei schluss gibt es kein Weiter, nur „Alle Spiele“.
 
@@ -15,6 +18,8 @@ import { GRUND_CSS, MASSE, definiere } from "./stil.js";
 import { findeSpiel } from "./knopf.js";
 import { ANREGUNG_TITEL } from "./anregung.js";
 import { findeAnleitung } from "./echte-dinge.js";
+import { holeErinnerung, merkeErinnert } from "./weisst-du-noch.js";
+import "./erinnern.js";
 
 const SYMBOLE = new URL("../symbole/", import.meta.url).href;
 const HAUS_HREF = new URL("../index.html", import.meta.url).href;
@@ -98,6 +103,14 @@ ls-knopf.echt { --ls-breite: 0rem; }
   ls-knopf.echt { flex-basis: 100%; text-align: center; }
 }
 .ebene { position: absolute; inset: 0; }
+/* „Weißt du noch?“ statt der Karte des Spiels */
+.inhalt.mit-frage .karte:not(.frage-karte) { display: none; }
+.frage-karte { width: min(150rem, 100%); overflow-y: auto; scrollbar-width: none; }
+.frage-karte::-webkit-scrollbar { display: none; }
+.frage-karte[hidden] { display: none; }
+.frage-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 2.4rem; margin: 0 0 3.2rem; }
+.frage-kopf h2 { margin: 0; font: 750 5.6rem/1 "Inter", sans-serif; letter-spacing: -0.03em; color: var(--ls-tinte); }
+.frage-kopf span { font: 600 2.4rem/1.2 "Inter", sans-serif; color: var(--ls-tinte-weich); text-align: right; }
 `;
 
 export class LsPause extends HTMLElement {
@@ -109,7 +122,8 @@ export class LsPause extends HTMLElement {
       <svg class="himmel" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <g class="sterne">${STERNE}</g><g class="punkte">${PUNKTE}</g>
       </svg>
-      <div class="inhalt"><div class="karte leer"><slot></slot></div></div>
+      <div class="inhalt"><div class="karte leer"><slot></slot></div>
+        <section class="karte frage-karte" hidden aria-labelledby="frage-titel"><div class="frage-kopf"><h2 id="frage-titel">Weißt du noch?</h2><span></span></div><ls-erinnern></ls-erinnern></section></div>
       <p class="satz" role="status"></p>
       <div class="aktionen" tabindex="-1">
         <a class="knopf alle" href="${HAUS_HREF}" tabindex="0" aria-label="Alle Spiele" draggable="false"><span class="form neben pille"><span class="zeichen"><img alt="" draggable="false" src="${SYMBOLE}haus.svg"></span><span class="wort">Alle Spiele</span></span></a>
@@ -140,6 +154,17 @@ export class LsPause extends HTMLElement {
     this.alle.addEventListener("click", () => this.sagAlle());
     this.weiter.addEventListener("click", () => this.beendeWeiter());
     this.echt.addEventListener("click", () => this.oeffneEchteDinge());
+    this.inhalt = /** @type {HTMLElement} */ (wurzel.querySelector(".inhalt"));
+    this.frageKarte = /** @type {HTMLElement} */ (wurzel.querySelector(".frage-karte"));
+    this.erinnern = /** @type {import("./erinnern.js").LsErinnern} */ (wurzel.querySelector("ls-erinnern"));
+    /** @type {{ id: string, kapitel: number } | null} */
+    this.frage = null;
+    /** Versprechen: Ob eine Erinnerungsfrage kommt, steht fest (für die Browser-Prüfung). */
+    this.frageBereit = Promise.resolve();
+    this.erinnern.addEventListener("gewaehlt", () => {
+      const f = this.frage;
+      if (f) merkeErinnert(f.id, f.kapitel, true).catch(() => {});
+    });
   }
 
   connectedCallback() {
@@ -174,10 +199,45 @@ export class LsPause extends HTMLElement {
     this.satz.textContent = satz ?? "";
     this.weiter.hidden = schluss;
     this.angebotBereit = this.pruefeAngebot(echteDinge);
+    this.frageBereit = schluss ? Promise.resolve() : this.zeigeFrage(this._offen);
     this.setAttribute("offen", "");
     // Fokus auf die Knopfgruppe, nicht auf Weiter: keiner der beiden Wege wird hervorgehoben (N6).
     this.aktionen.focus({ preventScroll: true });
     return this._offen;
+  }
+
+  /**
+   * Holt die fällige Erinnerungsfrage und zeigt sie (gezählt wird sie schon beim Zeigen).
+   * @param {Promise<"weiter">} runde das Versprechen dieser Pause; ist es nicht mehr offen, kommt nichts mehr
+   */
+  async zeigeFrage(runde) {
+    try {
+      const f = await holeErinnerung();
+      if (!f || this._offen !== runde) return;
+      try {
+        await ladeEinstellungen();
+      } catch {
+        // Einstellungen nicht ladbar: Ton gilt als an.
+      }
+      const spiel = findeSpiel(this);
+      const ton = !(spiel && einstellung(`ton.${spiel}`, true) === false);
+      this.frage = { id: f.id, kapitel: f.kapitel };
+      /** @type {HTMLElement} */ (this.frageKarte.querySelector(".frage-kopf span")).textContent = f.titel;
+      this.frageKarte.hidden = false;
+      this.inhalt.classList.add("mit-frage");
+      if (ton) sprich("Weißt du noch?");
+      this.erinnern.zeige(f.frage, { ton, bild: f.bild, knapp: true });
+      await merkeErinnert(f.id, f.kapitel, false);
+    } catch {
+      // Keine Frage (offline, kein Lernstand): die Pause bleibt, wie sie ist.
+    }
+  }
+
+  /** Nimmt die Erinnerungsfrage wieder weg. */
+  versteckeFrage() {
+    this.frage = null;
+    this.frageKarte.hidden = true;
+    this.inhalt.classList.remove("mit-frage");
   }
 
   /**
@@ -213,6 +273,7 @@ export class LsPause extends HTMLElement {
     if (!loese) return;
     this._loese = null;
     this._offen = null;
+    this.versteckeFrage();
     this.removeAttribute("offen");
     loese("weiter");
   }

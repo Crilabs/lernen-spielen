@@ -8,6 +8,8 @@
 // Benutzung: el.zeige({ frage, antworten, richtig, aufloesung }, { ton, bild?, nachlesen? })
 //   bild: Adresse eines Fotos über der Frage (Bibliothek); im Buch steht das Foto in der Bildhälfte.
 //   nachlesen: Knopf „Nachlesen“ nach der Wahl → Ereignis `nachlesen`.
+//   knapp (Pause am Rundenende): nach der Wahl bleiben nur die gewählte und die passende Antwort stehen, damit die
+//   Auflösung Platz hat; die Auflösung wird ins Bild gerollt, falls die Karte doch zu klein ist.
 // Ereignis `gewaehlt` (detail { index }) gleich nach dem Tipp; Eigenschaft `gewaehlt` (Index oder -1);
 // `gesperrt` (true, solange die Antworten vorgelesen werden) und Versprechen `frei` (löst auf, sobald gewählt werden kann).
 
@@ -35,6 +37,7 @@ const CSS = `
 :host(.gesperrt) .antwort { cursor: default; }
 :host(.entschieden) .antwort { cursor: default; box-shadow: none; }
 :host(.entschieden) .antwort:not(.passt):not(.gewaehlt) { opacity: .55; }
+:host(.knapp.entschieden) li:has(.antwort:not(.passt):not(.gewaehlt)) { display: none; }
 .antwort.gewaehlt { border-color: var(--ls-tinte-weich); }
 .antwort.passt { background: var(--ls-sonne); border-color: var(--ls-sonne); }
 .aufloesung { margin: 3.2rem 0 0; font: 400 3.8rem/1.45 "Andika", sans-serif; color: var(--ls-tinte); max-width: 36ch; }
@@ -79,14 +82,15 @@ export class LsErinnern extends HTMLElement {
 
   /**
    * @param {{ frage: string, antworten: string[], richtig: number, aufloesung: string }} e
-   * @param {{ ton?: boolean, bild?: string, nachlesen?: boolean }} [o]
+   * @param {{ ton?: boolean, bild?: string, nachlesen?: boolean, knapp?: boolean }} [o]
    */
-  zeige(e, { ton = true, bild = "", nachlesen = false } = {}) {
+  zeige(e, { ton = true, bild = "", nachlesen = false, knapp = false } = {}) {
     this.daten = e;
     this.ton = ton;
     this.mitNachlesen = nachlesen;
     this.gewaehlt = -1;
     this.classList.remove("entschieden");
+    this.classList.toggle("knapp", knapp);
     this.bildEl.hidden = !bild;
     this.classList.toggle("mit-bild", !!bild);
     if (bild) /** @type {HTMLImageElement} */ (this.bildEl.firstElementChild).src = bild;
@@ -149,6 +153,7 @@ export class LsErinnern extends HTMLElement {
     });
     this.aufloesungEl.hidden = false;
     this.nachlesenEl.hidden = !this.mitNachlesen;
+    if (this.classList.contains("knapp")) this.aufloesungEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
     if (this.ton) {
       sprich(e.antworten[i]);
       sprich(e.aufloesung);

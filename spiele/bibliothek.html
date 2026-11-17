@@ -216,7 +216,7 @@ async function start() {
   zeige();
   weisstDuNoch().catch((e) => protokoll("bibliothek, Weißt du noch: " + e));
 
-  // „Weißt du noch?“: höchstens einmal am Tag eine Kapitelfrage mit Abstand (verteiltes Wiederholen, geschichten.md §2b)
+  // „Weißt du noch?“: höchstens zwei Kapitelfragen am Tag (mit der Pause am Rundenende zusammen) mit Abstand (verteiltes Wiederholen, geschichten.md §2b)
   async function weisstDuNoch() {
     const wahl = await ladeErinnerung(fragen.keys());
     const buch = wahl && fragen.get(wahl.id);
@@ -235,11 +235,12 @@ async function start() {
     const zu = () => grund.remove();
     if (leiste.ton) sprich("Weißt du noch?");
     frage.zeige(e, { ton: leiste.ton, bild: e.bild ? `geschichten/${wahl.id}/${e.bild}` : "" });
+    merkeErinnert(wahl.id, wahl.kapitel, false).catch((f) => protokoll("Weißt du noch: " + f));   // zählt schon beim Zeigen
     frage.addEventListener("gewaehlt", () => {
       spaeter.hidden = true; fertig.hidden = false;
       merkeErinnert(wahl.id, wahl.kapitel, true).catch((f) => protokoll("Weißt du noch: " + f));
     });
-    spaeter.addEventListener("click", () => { merkeErinnert(wahl.id, wahl.kapitel, false).catch((f) => protokoll("Weißt du noch: " + f)); zu(); });
+    spaeter.addEventListener("click", zu);
     fertig.addEventListener("click", zu);
   }
 }

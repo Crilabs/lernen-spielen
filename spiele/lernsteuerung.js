@@ -901,17 +901,30 @@ export async function merkeBuchStand(id, wo, kapitelZahl, heute = echteUhr().heu
 }
 
 // ---------- „Weißt du noch?“ (docs/geschichten.md §2b) ----------
-// stand.erinnern = { am: Datum der letzten Frage (gestellt oder „Später“), gestellt: { "<buch>/<kapitel>": Datum } }
+// stand.erinnern = { am: Tag, heute: ["<buch>/<kapitel>", …] an diesem Tag gezeigt, gestellt: { "<buch>/<kapitel>": Datum der Antwort } }
+// Gezeigt wird in der Bibliothek und in der Pause am Rundenende (Christian, 2026-11-17), zusammen höchstens
+// ERINNERN_AM_TAG Fragen, keine zweimal am Tag. Übersprungen („Später“, Weiter ohne Wahl) zählt nicht als gestellt.
+
+/** Höchstens so viele Erinnerungsfragen am Tag (Bibliothek und Pause zusammen). */
+export const ERINNERN_AM_TAG = 2;
+
+/** @param {any} er @param {string} heute @returns {string[]} heute schon gezeigte Fragen */
+function heuteGezeigt(er, heute) {
+  if (!istObjekt(er) || er.am !== heute) return [];
+  // Alter Stand ohne Liste (eine Frage am Tag): heute ist schon voll.
+  return Array.isArray(er.heute) ? er.heute.filter((k) => typeof k === "string") : Array(ERINNERN_AM_TAG).fill("");
+}
 
 /**
- * Welche Kapitelfrage die Bibliothek heute zurückholt: höchstens eine am Tag, nur aus Kapiteln, die frühestens gestern
- * fertig wurden (ohne Datum: früher), die am längsten nicht gestellte zuerst, dann die am längsten fertige.
+ * Welche Kapitelfrage heute zurückkommt: höchstens ERINNERN_AM_TAG am Tag, keine zweimal, nur aus Kapiteln, die
+ * frühestens gestern fertig wurden (ohne Datum: früher), die am längsten nicht gestellte zuerst, dann die am längsten fertige.
  * @param {any} stand @param {string} heute @param {Iterable<string>} buchIds Bücher, die Fragen haben
  * @returns {{ id: string, kapitel: number } | null}
  */
 export function naechsteErinnerung(stand, heute, buchIds) {
   const er = istObjekt(stand?.erinnern) ? stand.erinnern : {};
-  if (er.am === heute) return null;
+  const gezeigt = heuteGezeigt(er, heute);
+  if (gezeigt.length >= ERINNERN_AM_TAG) return null;
   const gestellt = istObjekt(er.gestellt) ? er.gestellt : {};
   const ids = new Set(buchIds);
   /** @type {{ id: string, kapitel: number, g: string, f: string }[]} */
@@ -921,7 +934,7 @@ export function naechsteErinnerung(stand, heute, buchIds) {
     const b = bereinigeBuchStand(e);
     for (const k of b.fertig) {
       const f = b.am[k] ?? "";
-      if (f >= heute) continue;
+      if (f >= heute || gezeigt.includes(`${id}/${k}`)) continue;
       kandidaten.push({ id, kapitel: k, g: text(gestellt[`${id}/${k}`]), f });
     }
   }
@@ -934,11 +947,13 @@ export async function ladeErinnerung(buchIds, heute = echteUhr().heute) {
   return naechsteErinnerung(await ladeStand(), heute, buchIds);
 }
 
-/** Frage gestellt oder auf später geschoben: heute keine weitere. @param {string} id @param {number} kapitel @param {boolean} gestellt */
+/** Frage gezeigt (gestellt = false) oder beantwortet (true); zählt je Frage einmal für den Tag. @param {string} id @param {number} kapitel @param {boolean} gestellt */
 export async function merkeErinnert(id, kapitel, gestellt, heute = echteUhr().heute) {
   const stand = await ladeStand();
   const er = istObjekt(stand.erinnern) ? stand.erinnern : {};
-  stand.erinnern = { am: heute, gestellt: { ...(istObjekt(er.gestellt) ? er.gestellt : {}), ...(gestellt ? { [`${id}/${kapitel}`]: heute } : {}) } };
+  const schluessel = `${id}/${kapitel}`;
+  const gezeigt = heuteGezeigt(er, heute);
+  stand.erinnern = { am: heute, heute: gezeigt.includes(schluessel) ? gezeigt : [...gezeigt, schluessel], gestellt: { ...(istObjekt(er.gestellt) ? er.gestellt : {}), ...(gestellt ? { [`${id}/${kapitel}`]: heute } : {}) } };
   speichere(STAND_KEY, stand);
   await sofortSpeichern();
 }
