@@ -213,5 +213,44 @@
    },
    "total_tokens": 6230
   }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 42,
+  "ausgabe": 12790,
+  "einheit": "tokens",
+  "menge": 1670642,
+  "notiz": "Spielbau pruefung",
+  "cache_lesen": 1556373,
+  "cache_schreiben": 101437
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 76,
+  "ausgabe": 16484,
+  "einheit": "tokens",
+  "menge": 3632929,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 3272783,
+  "cache_schreiben": 343586
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 7093,
+  "einheit": "tokens",
+  "menge": 898457,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 701312,
+  "cache_schreiben": 190028
  }
 ]
