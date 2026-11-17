@@ -52,3 +52,22 @@ Katalog G02 · Grammatik · `spiele/grammatik/g02-ich-du-wir-person-und-verb/` �
 - Verben auf -t/-d/-s (arbeiten, du arbeitest) und -eln in Personalform: eigene Ausnahme, nicht in Kl. 2.
 - backen (du backst/bäckst): zwei richtige Formen. Szenen mit Bewegung ohne Spur (winken, lachen): kein bleibendes Bild; nur als Witz.
 - Mach-mit-Satz aus dem Katalog (Frage an jemanden): länger; der kurze Satz in §6 trägt es.
+
+## Geparkt
+
+**2026-11-17**, nach zwei Runden. Der Prüfstand war grün, die Spielprüfung rot (Bericht in `.superpowers/spiele/spiel-g02/spielpruefung-r2.md`).
+
+Offene Befunde:
+- **Kern fehlt in der ersten Runde.** Die Lernsteuerung stellt einem neuen Kind zuerst die Grundform. Dort handelt niemand: Ein Ding fliegt vom Streifen auf den Bogen. „du mal-st → Kofi malt“ sieht man nur in der Einführung.
+- **Zehnmal: nein.** In der Grundform ist die Antwort immer „-en“. Ab dem zweiten Zug muss das Kind den Streifen nicht mehr lesen.
+- **Stamm vorgeschnitten.** Die alte Endung steht in einem eigenen Kasten („bastel [t]“). Das nimmt dem Kind die einzige echte Entscheidung ab.
+- **G7: Falsche Sätze bleiben stehen.** „Ela malen“ und „Timo basteln“ bleiben nach einer gelösten Grundform-Aufgabe stehen.
+- **Die Einführung bringt zwei neue Dinge auf einmal:** die Endung zur Person und die Grundform.
+- **Die Stufen sind kaum verschieden.** Material und Vorstellung sehen bei der Grundform gleich aus. Die Dinge auf dem Bogen sind klein, das Windrad springt.
+- **Prüfstand:** `?thema=` wirkt im Film nicht, deshalb hat keine Prüfung die Personalform gezeigt.
+
+Vorschläge des Prüfers: Die erste Runde spielt die Personalform. Die Grundform bekommt eine eigene Wirkung ohne Person (zum Beispiel ein Etikett „malen“ am Stiftebecher). Die Endung wird nicht vorgeschnitten. Ein gelöster Streifen zeigt nur noch „malen“. Die Einführung bringt eine Sache je Einführung.
+
+**Fragen an Christian:**
+1. Soll die Grundform aus G02 heraus? Dann ist G02 nur Personalform und Fürwörter, und die Grundform wird ein eigenes Spiel oder kommt zu G03. Oder soll sie bleiben, mit eigener Wirkung?
+2. Das Endungsplättchen ist ein neues Lernzeichen (weißer Wortstreifen mit Endung, rastet am roten Verbkreis ein). Soll es für alle Spiele gelten, also auch für G03 und S04?
