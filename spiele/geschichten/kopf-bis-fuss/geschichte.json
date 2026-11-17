@@ -1,0 +1,341 @@
+{
+  "id": "kopf-bis-fuss",
+  "titel": "Zehn Finger, zwei Knie und ein Bauchnabel",
+  "art": "sachbuch",
+  "welt": "koerperteile",
+  "familie": null,
+  "kulisse": "im-haus",
+  "titelbild": { "bild": "bilder/06-04.webp", "fokus": "50% 40%" },
+  "klasse": 1,
+  "quellen": [
+    {
+      "fakt": "Der Körper besteht aus Kopf, Hals, Rumpf, zwei Armen und zwei Beinen; jedes Teil hat einen richtigen Namen.",
+      "quelle": "LehrplanPLUS Bayern, Grundschule, HSU 1/2, Lernbereich 2.1: https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/hsu; BIÖG (früher BZgA), „Kinder liebevoll begleiten“: https://shop.bioeg.de/pdf/KONF-13660500.pdf – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Menschen gehen aufrecht auf zwei Beinen und haben deshalb die Hände frei zum Tragen und Halten; ihre Füße greifen nicht wie die von Affen.",
+      "quelle": "Klexikon, „Mensch“: https://klexikon.zum.de/wiki/Mensch – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die meisten Menschen bevorzugen die rechte Hand, etwa jeder Zehnte (10–15 %) die linke; bevorzugt werden auch ein Fuß, ein Auge und ein Ohr.",
+      "quelle": "AWMF-Leitlinie 002/017, „Händigkeit – Bedeutung und Untersuchung“: https://register.awmf.org/de/leitlinien/detail/002-017 – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Der Fuß war früher in vielen Ländern ein Längenmaß und war je nach Gegend verschieden lang; kurze Strecken misst man Fuß vor Fuß.",
+      "quelle": "Klexikon, „Fuß“: https://klexikon.zum.de/wiki/Fu%C3%9F – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Armspanne ist ungefähr so lang wie die Körpergröße; bei jüngeren Kindern meist etwas kürzer, um 12 Jahre etwa gleich.",
+      "quelle": "Turkish Journal of Pediatrics: https://turkjpediatr.org/article/view/3 ; Marmara-Universität, Normstudie Armspanne: https://openaccess.marmara.edu.tr/entities/publication/fe2d0cdf-823c-46f1-b2c9-a2c761676556/full – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Im Gesicht stecken mehr als 40 Muskeln, die Stirn, Augen, Nase und Mund bewegen; die Mimik zeigt Gefühle, ein Lächeln wird überall verstanden.",
+      "quelle": "Planet Wissen, „Das Gesicht“: https://www.planet-wissen.de/gesellschaft/kommunikation/koerpersprache/pwiedasgesicht100.html – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "An der Schläfe liegt der Schläfenmuskel, ein Kaumuskel; legt man die Hände auf die Schläfen und beißt die Zähne zusammen, spürt man ihn.",
+      "quelle": "Universitätsmedizin Mainz, Poliklinik für Kieferorthopädie, „Wenn die Kaumuskeln und Kiefergelenke schmerzen: Das kann ich selbst tun!“ (Schläfenmuskel, Übung zur Lokalisation): https://www.unimedizin-mainz.de/fileadmin/kliniken/zmk/Dokumente/UM_Brosch_Kieferorth_A5_110722_V6_final_2022-07-21.pdf; Wikipedia, „Musculus temporalis“: https://de.wikipedia.org/wiki/Musculus_temporalis – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Augen, Ohren, Nase und Mund liegen am Kopf; das Gehirn liegt geschützt im harten Schädel.",
+      "quelle": "Klexikon, „Skelett“: https://klexikon.zum.de/wiki/Skelett; Planet Wissen, „Das Gesicht“: https://www.planet-wissen.de/gesellschaft/kommunikation/koerpersprache/pwiedasgesicht100.html – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Neugeborene haben am Kopf eine weiche Stelle (Fontanelle) zwischen den Schädelknochen; sie schließt sich in den ersten ein bis zwei Jahren.",
+      "quelle": "Cleveland Clinic, „How Many Bones Does a Baby Have?“: https://health.clevelandclinic.org/how-many-bones-does-a-baby-have – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Ellenbogen und Knie bewegen sich nur in einer Ebene (beugen und strecken), die Schulter fast im Kreis, das Handgelenk auch zur Seite.",
+      "quelle": "Klexikon, „Gelenk“: https://klexikon.zum.de/wiki/Gelenk – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Muskeln können nur ziehen; zum Beugen und Strecken arbeiten zwei Muskeln gegeneinander.",
+      "quelle": "Klexikon, „Muskel“: https://klexikon.zum.de/wiki/Muskel – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Finger heißen Daumen, Zeigefinger, Mittelfinger, Ringfinger und kleiner Finger; der Daumen kann jede andere Fingerspitze berühren und macht festes Greifen möglich.",
+      "quelle": "Klexikon, „Hand“: https://klexikon.zum.de/wiki/Hand – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Jeder Finger hat drei Knochen, der Daumen zwei; die Hand besteht aus vielen kleinen Knochen; in den Fingerspitzen sitzen besonders viele Nervenenden.",
+      "quelle": "Klexikon, „Hand“: https://klexikon.zum.de/wiki/Hand – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Linien der Fingerkuppen verlaufen gerade, wellenförmig oder kreisförmig und sind bei jedem Menschen anders.",
+      "quelle": "Klexikon, „Fingerabdruck“: https://klexikon.zum.de/wiki/Fingerabdruck – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Auch eineiige Zwillinge haben verschiedene Fingerabdrücke.",
+      "quelle": "TÜV Nord, „Wie fälschungssicher sind Fingerabdrücke?“: https://www.tuev-nord.de/de/wissen/explore/wie-faelschungssicher-sind-fingerabdruecke/ – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Vor der Geburt ist das Baby über die Nabelschnur mit der Mutter verbunden und wird so versorgt; nach der Geburt wird sie abgebunden und abgeschnitten, das Abschneiden merkt das Kind nicht; der Rest fällt nach einigen Tagen ab; jeder Mensch hat einen Bauchnabel, eine Grube oder eine kleine Wölbung.",
+      "quelle": "Klexikon, „Bauchnabel“: https://klexikon.zum.de/wiki/Bauchnabel – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Rippen bilden mit Brustbein und Wirbelsäule den Brustkorb, der Herz und Lunge schützt.",
+      "quelle": "Klexikon, „Skelett“: https://klexikon.zum.de/wiki/Skelett; MSD Manual (Patienten), „Brustraum“: https://www.msdmanuals.com/de/heim/lungen-und-atemwegserkrankungen/biologie-von-lunge-und-atemwegen/brustraum – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Geschlechtsteile heißen Penis, Hoden und Hodensack oder Vulva; die Scheide liegt innen; der Urin kommt durch die Harnröhre; jeder Körper sieht dort anders aus.",
+      "quelle": "BIÖG (früher BZgA), „Kinder liebevoll begleiten“: https://shop.bioeg.de/pdf/KONF-13660500.pdf; Klexikon, „Vulva“: https://klexikon.zum.de/wiki/Vulva; Klexikon, „Penis“: https://klexikon.zum.de/wiki/Penis – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Kinder haben das Recht, Nein zu sagen; alle Gefühle sind in Ordnung; Kinder haben ein Recht auf Hilfe und dürfen sich jederzeit Hilfe bei einem Erwachsenen holen, dem sie vertrauen.",
+      "quelle": "Kinderschutz Schweiz, „Mein Körper gehört mir!“: https://www.kinderschutz.ch/mkgm; AKF e. V. (Elternbriefe du + wir) mit Diözesan-Caritasverband Köln, „Was tun gegen sexuelle Gewalt“ (Kurzversion), „Sätze, die Kinder stark machen“ 5 und 6: https://www.kita-ggmbh-trier.de/export/sites/kitas/katholische-kita-ggmbh-trier/team/.galleries/dokumente/Praevention_Elternbrief_Was-tun-gegen-sexuelle-Gewalt.pdf – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Wirbelsäule besteht aus vielen Wirbeln mit Bandscheiben dazwischen, ist fest und beweglich, die Wirbel sind am Rücken tastbar und schützen das Rückenmark, einen Strang aus Nerven.",
+      "quelle": "Klexikon, „Wirbelsäule“: https://klexikon.zum.de/wiki/Wirbels%C3%A4ule – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Das Hüftgelenk ist ein Kugelgelenk: Der Hüftkopf am Oberschenkelknochen sitzt in der Hüftpfanne des Beckens; das Bein bewegt sich nach vorn, hinten und zur Seite. Das Becken ist ein Ring aus Knochen (Beckenring) unterhalb des Bauchs und oberhalb der Beine.",
+      "quelle": "krankenhaus.de, „Das Hüftgelenk“: https://www.krankenhaus.de/hueftgelenk/; Wikipedia, „Becken (Anatomie)“: https://de.wikipedia.org/wiki/Becken_(Anatomie) – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Kniescheibe ist ein flacher Knochen vorn am Knie; das Knie ist ein Gelenk, das beugt und streckt.",
+      "quelle": "Klexikon, „Gelenk“: https://klexikon.zum.de/wiki/Gelenk – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Der Fuß hat Ferse, Sohle, Ballen, Spann (Rist) und fünf Zehen und besteht aus vielen kleinen Knochen; Hände und Füße enthalten zusammen mehr als die Hälfte aller Knochen eines erwachsenen Menschen (26 je Fuß, 27 je Hand, meist 206 insgesamt).",
+      "quelle": "Klexikon, „Hand“: https://klexikon.zum.de/wiki/Hand; Klexikon, „Fuß“: https://klexikon.zum.de/wiki/Fu%C3%9F; Cleveland Clinic, „How Many Bones Does a Baby Have?“: https://health.clevelandclinic.org/how-many-bones-does-a-baby-have – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Das Skelett gibt dem Körper Halt; wo sich Knochen gegeneinander bewegen, ist ein Gelenk.",
+      "quelle": "Klexikon, „Skelett“: https://klexikon.zum.de/wiki/Skelett; Klexikon, „Gelenk“: https://klexikon.zum.de/wiki/Gelenk – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Abends ist man etwas kleiner als morgens (bei Erwachsenen etwa 1,5–2 cm), weil die Bandscheiben tagsüber zusammengedrückt werden und nachts wieder Flüssigkeit aufnehmen.",
+      "quelle": "Techniker Krankenkasse, „Wie funktioniert die Wirbelsäule?“: https://www.tk.de/techniker/krankheit-und-behandlungen/erkrankungen/behandlungen-und-medizin/rueckenerkrankungen/wie-funktioniert-die-wirbelsaeule-2214600; Klexikon, „Wirbelsäule“: https://klexikon.zum.de/wiki/Wirbels%C3%A4ule – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Jeder Mensch ist einzigartig und darf eine positive Beziehung zu seinem Körper haben.",
+      "quelle": "LehrplanPLUS Bayern, Grundschule, HSU 1/2, Lernbereich 2.1: https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/hsu – abgerufen 2026-11-17"
+    }
+  ],
+  "kapitel": [
+    {
+      "titel": "Von oben bis unten",
+      "seiten": [
+        {
+          "text": "Stell dich einmal gerade hin. Ganz oben sitzt dein Kopf. Er ruht auf dem Hals. Unter dem Hals beginnt der Rumpf. So heißt der große Mittelteil deines Körpers, mit Brust, Bauch, Rücken und Po.\n\nAm Rumpf hängen zwei Arme und zwei Beine. Kopf, Hals, Rumpf, Arme und Beine: Das ist ein ganzer Mensch, von Kopf bis Fuß.\n\nMenschen gehen aufrecht auf zwei Beinen. Darum haben sie die Hände frei. Du kannst beim Gehen etwas tragen, halten oder jemandem winken. Jedes Teil deines Körpers hat einen Namen, und jedes kann etwas.",
+          "bild": "bilder/01-01.webp"
+        },
+        {
+          "text": "Stell dich vor einen Spiegel. Fällt dir etwas auf? Dein Körper hat zwei Seiten, links und rechts. Sie sehen fast gleich aus.\n\nZähl einmal, was du doppelt hast. Zwei Augen, zwei Ohren, zwei Augenbrauen. Zwei Schultern, zwei Hände, zwei Knie, zwei Füße. Manches gibt es aber nur einmal. Die Nase sitzt genau in der Mitte, darunter der Mund. Und mitten auf dem Bauch liegt der Bauchnabel. Fahr mit dem Finger von der Nase gerade nach unten. Er kommt über Mund und Kinn und landet beim Bauchnabel.",
+          "bild": "bilder/01-02.webp"
+        },
+        {
+          "text": "Nimm einen Stift und mal einen Kreis. Welche Hand hast du genommen? Fast jeder Mensch hat eine Lieblingshand. Mit ihr malt und schreibt er am liebsten, mit ihr wirft er den Ball.\n\nDie meisten Menschen nehmen die rechte Hand. Ungefähr jeder Zehnte nimmt die linke. Beides ist ganz normal. Auch einen Lieblingsfuß hast du. Hast du einen Ball, leg ihn vor dich hin und schieß ihn weg. Mit welchem Fuß hast du geschossen? Probier es gleich noch einmal. Wahrscheinlich nimmst du denselben Fuß, ohne nachzudenken.",
+          "bild": "bilder/01-03.webp"
+        },
+        {
+          "text": "Mit deinem Körper kannst du sogar messen. Ein Fuß war früher in vielen Ländern ein echtes Längenmaß. In jeder Gegend war er ein bisschen anders lang. Man setzte einen Fuß direkt vor den anderen und zählte mit.\n\nProbier es aus. Stell dich mit den Fersen an die Wand und geh los. Setz dabei immer die Ferse direkt vor die Zehen. Wie viele Füße lang ist dein Zimmer? Ein Erwachsener zählt weniger Füße als du.\n\nJetzt streck beide Arme weit zur Seite. Was glaubst du: Wie lang ist das, von einer Fingerspitze bis zur anderen?",
+          "bild": "bilder/01-04.webp",
+          "frage": true
+        },
+        {
+          "text": "Ungefähr so lang, wie du groß bist! Wenn du eine Schnur hast, kannst du es nachmessen. Leg dich mit ausgestreckten Armen auf den Boden. Jemand legt die Schnur von einer Fingerspitze bis zur anderen. Dann legt ihr die Schnur von deinem Scheitel bis zu deinen Fersen.\n\nBei Erwachsenen passt es oft ziemlich genau. Bei Kindern sind die Arme meist ein kleines Stück kürzer. Wenn du älter wirst, holen die Arme auf. So steckt in deinem Körper ein eigenes Maßband. Du hast es überall dabei.",
+          "bild": "bilder/01-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Wie lang sind deine ausgestreckten Arme, von Fingerspitze zu Fingerspitze?",
+        "bild": "bilder/01-05.webp",
+        "antworten": [
+          "Etwa halb so lang, wie du groß bist",
+          "Ungefähr so lang, wie du groß bist",
+          "Doppelt so lang, wie du groß bist"
+        ],
+        "richtig": 1,
+        "aufloesung": "Ungefähr so lang, wie du groß bist. Bei Kindern sind die Arme meist ein kleines Stück kürzer.",
+        "seite": 4
+      }
+    },
+    {
+      "titel": "Ein Gesicht voller Namen",
+      "seiten": [
+        {
+          "text": "Leg einen Finger ganz oben auf deine Stirn. Jetzt geht die Reise über dein Gesicht. Rechts und links neben der Stirn liegen die Schläfen. Leg die Finger darauf und beiß die Zähne fest zusammen. Da bewegt sich etwas, ein Kaumuskel.\n\nDer Finger rutscht hinunter zu den Augenbrauen. Darunter liegen die Augen mit den Wimpern am Rand. Weiter geht es die Nase hinab bis zur Nasenspitze. Unten hat sie zwei Nasenlöcher.\n\nAugen, Ohren, Nase und Mund lassen die Welt in deinen Kopf hinein. Mit ihnen siehst, hörst, riechst und schmeckst du. Davon erzählen eigene Bücher.",
+          "bild": "bilder/02-01.webp"
+        },
+        {
+          "text": "Neben der Nase wölben sich die Wangen. Blas sie einmal dick auf wie einen Luftballon. Unter der Nase liegt der Mund mit zwei Lippen, oben und unten. Ganz unten im Gesicht sitzt das Kinn. Es ist hart, denn darin steckt ein Knochen.\n\nJetzt wandern deine Hände zur Seite, zu den Ohren. Unten am Ohr hängt das weiche Ohrläppchen. Hinten ist der Hinterkopf, meistens voller Haare. Und darunter, wo der Hals hinten beginnt, liegt der Nacken. Zeig alles noch einmal der Reihe nach, von der Stirn bis zum Nacken.",
+          "bild": "bilder/02-02.webp"
+        },
+        {
+          "text": "Schau in einen Spiegel und mach ein staunendes Gesicht. Was bewegt sich? Die Augenbrauen gehen hoch, die Stirn bekommt Falten, der Mund geht auf. Jetzt lach einmal. Die Wangen heben sich, und neben den Augen entstehen kleine Fältchen. Und nun rümpf die Nase.\n\nIn deinem Gesicht stecken mehr als vierzig kleine Muskeln. Sie bewegen Stirn, Augen, Nase und Mund. So zeigt dein Gesicht, ob du dich freust, staunst oder ärgerst. Ein Lächeln verstehen Menschen auf der ganzen Welt, ganz ohne Worte.",
+          "bild": "bilder/02-03.webp"
+        },
+        {
+          "text": "Klopf einmal ganz sacht oben auf deinen Kopf. Er ist hart, fast wie eine Schale. Das hat einen guten Grund. Innen wohnt dein Gehirn. Mit ihm denkst du, fühlst du und erinnerst dich. Darum steckt es gut geschützt in einer festen Hülle aus Knochen. Beim Radfahren schützt es zusätzlich ein Helm.\n\nBei einem Baby ist der Kopf oben noch nicht ganz fest. Dort gibt es eine weiche Stelle. Die Knochen stoßen da noch nicht aneinander. In den ersten ein, zwei Jahren schließt sich die Lücke. Dein Kopf ist längst rundherum fest.",
+          "bild": "bilder/02-04.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Warum ist dein Kopf oben so hart?",
+        "bild": "bilder/02-04.webp",
+        "antworten": [
+          "Eine Hülle aus Knochen schützt das Gehirn",
+          "Die Haut ist dort besonders dick",
+          "Der Kopf ist innen ganz aus Knochen"
+        ],
+        "richtig": 0,
+        "aufloesung": "Innen wohnt dein Gehirn. Es steckt gut geschützt in einer festen Hülle aus Knochen.",
+        "seite": 3
+      }
+    },
+    {
+      "titel": "Arme und geschickte Hände",
+      "seiten": [
+        {
+          "text": "Fahr mit einer Hand an deinem anderen Arm entlang. Oben beginnt er an der Schulter. Dann kommt der Oberarm bis zum Ellenbogen. Danach der Unterarm bis zum Handgelenk, und zum Schluss die Hand.\n\nLass den Arm an der Schulter kreisen, groß wie ein Windrad. Das geht fast ganz herum. Jetzt beug den Ellenbogen und streck ihn wieder. Versuch dann, ihn zur Seite zu biegen. Das klappt nicht. Der Ellenbogen geht nur vor und zurück, wie eine Tür in ihren Angeln. Solche beweglichen Stellen heißen Gelenke.",
+          "bild": "bilder/03-01.webp"
+        },
+        {
+          "text": "Auch das Handgelenk ist ein Gelenk. Es kann mehr als der Ellenbogen. Klapp die Hand nach oben und nach unten. Dann wackel sie nach links und rechts, zur Seite.\n\nLeg jetzt deine rechte Hand auf den linken Oberarm. Nun beug den linken Arm. Spürst du, wie es unter deiner Hand dick und hart wird? Da arbeitet ein Muskel. Muskeln können nur ziehen, nicht schieben. Zum Strecken zieht deshalb ein anderer Muskel, hinten am Oberarm. Leg die Hand dorthin und drück die Faust fest nach unten auf den Tisch. Jetzt wird es hinten hart.",
+          "bild": "bilder/03-02.webp"
+        },
+        {
+          "text": "Schau dir deine Hand an. Innen ist die Handfläche, außen der Handrücken. Mach eine Faust, dann siehst du die Fingerknöchel als kleine Hügel. Vorn an den Fingern wachsen die Fingernägel.\n\nJeder Finger hat einen Namen: Daumen, Zeigefinger, Mittelfinger, Ringfinger und kleiner Finger. Der Daumen steht ein Stück ab. Tipp mit ihm nacheinander jede andere Fingerkuppe an. Er erreicht jede einzelne!\n\nWas glaubst du: Kannst du einen Knopf zumachen, ohne den Daumen zu benutzen?",
+          "bild": "bilder/03-03.webp",
+          "frage": true
+        },
+        {
+          "text": "Wenn du eine Jacke mit Knöpfen hast, probier es aus. Ohne Daumen wird es ziemlich schwierig. Die Finger rutschen ab, und der Knopf schlüpft immer wieder weg.\n\nDer Daumen liegt den anderen Fingern gegenüber. So kann die Hand von zwei Seiten zupacken, wie eine Zange. Damit hältst du einen Becher fest. Damit hebst du eine winzige Perle vom Boden auf. Damit drehst du einen Schlüssel im Schloss. Achte heute einmal darauf, wie oft dein Daumen mithilft.",
+          "bild": "bilder/03-04.webp"
+        },
+        {
+          "text": "Leg deinen Zeigefinger flach auf den Tisch. Jetzt knick ihn langsam ein. Wie viele Knicke siehst du? An jedem Knick treffen zwei Knochen aufeinander.\n\nJeder Finger hat drei Knochen hintereinander. Der Daumen hat nur zwei. Fühl einmal an deinem eigenen Daumen nach. Er hat einen Knick weniger.\n\nIn einer Hand stecken sehr viele kleine Knochen, auch im Handrücken und im Handgelenk. Weil es so viele sind, ist die Hand so beweglich. Sie kann winken, kneten, greifen und ganz sanft streicheln.",
+          "bild": "bilder/03-05.webp"
+        },
+        {
+          "text": "Mit den Fingerkuppen fühlst du besonders gut. Streich damit über Holz, über Stoff und über deine Wange. Du spürst jeden kleinen Unterschied.\n\nSchau dir eine Fingerkuppe einmal ganz genau an. Hast du eine Lupe, nimm sie dazu. Da sind feine Linien! Manche laufen gerade, manche in Wellen, manche in Kreisen. Jeder Mensch hat sein eigenes Muster. Sogar Zwillinge, die genau gleich aussehen, haben verschiedene Fingerabdrücke.\n\nWenn ihr ein Stempelkissen habt, drück einen Finger darauf und dann auf Papier. Mach das auch mit jemandem aus deiner Familie. Vergleicht eure Abdrücke.",
+          "bild": "bilder/03-06.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Warum kann deine Hand so gut zupacken?",
+        "bild": "bilder/03-04.webp",
+        "antworten": [
+          "Die Finger sind besonders lang",
+          "Die Fingernägel halten alles fest",
+          "Der Daumen liegt den Fingern gegenüber"
+        ],
+        "richtig": 2,
+        "aufloesung": "Der Daumen liegt den anderen Fingern gegenüber. So kann die Hand von zwei Seiten zupacken, wie eine Zange.",
+        "seite": 3
+      }
+    },
+    {
+      "titel": "Brust, Bauch, Rücken und Po",
+      "seiten": [
+        {
+          "text": "Jetzt geht die Reise zum Rumpf. Vorn oben liegt die Brust mit zwei Brustwarzen, links und rechts. Darunter kommt der weiche Bauch. An den Seiten, wo der Hosenbund sitzt, spürst du die Hüften.\n\nHinten ist der Rücken. Leg die linke Hand über die rechte Schulter auf den Rücken. Nun kreis mit dem rechten Arm. Da bewegt sich etwas unter der Haut, das Schulterblatt. Ganz unten am Rücken ist der Po.\n\nMitten auf dem Bauch liegt der Bauchnabel. Was glaubst du: Wozu war er einmal da?",
+          "bild": "bilder/04-01.webp",
+          "frage": true
+        },
+        {
+          "text": "Der Bauchnabel erzählt, wie alles anfing. Bevor ein Baby geboren wird, wächst es im Bauch seiner Mutter. Dort ist es durch einen weichen Strang mit ihr verbunden, die Nabelschnur. Durch sie bekommt es alles, was es zum Wachsen braucht.\n\nNach der Geburt wird die Nabelschnur abgebunden und abgeschnitten. Das spürt das Baby nicht. Ein kleiner Rest bleibt noch am Bauch. Nach einigen Tagen fällt er ab, und zurück bleibt der Bauchnabel. So war es auch bei dir. Darum hat jeder Mensch einen. Bei manchen ist er eine kleine Grube, bei anderen ein kleiner Knubbel.",
+          "bild": "bilder/04-02.webp"
+        },
+        {
+          "text": "Leg beide Hände seitlich an deine Brust. Unter der Haut fühlst du harte Streifen. Das sind die Rippen. Sie biegen sich vom Rücken nach vorn um dich herum, wie die Stäbe eines Korbs. Darum heißt das Ganze Brustkorb.\n\nJetzt atme tief ein. Merkst du, wie sich der Brustkorb hebt und weiter wird? Beim Ausatmen sinkt er wieder. In diesem Korb liegen dein Herz und deine Lunge. Die Rippen schützen sie wie ein Gitter. Wie Herz und Lunge arbeiten, erzählen eigene Bücher.",
+          "bild": "bilder/04-03.webp"
+        },
+        {
+          "text": "Unten am Bauch, zwischen den Beinen, liegen die Geschlechtsteile. Auch sie haben richtige Namen, genau wie Knie und Nase.\n\nManche Kinder haben einen Penis. Darunter hängen die Hoden in einem Beutel aus Haut, dem Hodensack. Andere Kinder haben eine Vulva. So heißt alles, was man dort von außen sieht. Innen liegt die Scheide.\n\nAus jedem Körper kommt der Urin durch einen dünnen Gang, die Harnröhre. An ihrem Ende ist eine kleine Öffnung. Beim Schwimmen bedecken die Badesachen diese Stellen. Jeder Körper sieht hier ein bisschen anders aus. Das ist ganz normal.",
+          "bild": "bilder/04-04.webp"
+        },
+        {
+          "text": "Beug dich weit nach vorn, als wolltest du deine Zehen berühren. Wenn du es erlaubst, kann dir jemand vorsichtig über den Rücken tasten. Da ist eine Reihe kleiner Knubbel, von oben bis unten. Das sind deine Wirbel.\n\nViele Wirbel liegen übereinander, dazwischen weiche Scheiben. Zusammen heißen sie Wirbelsäule. Sie macht den Rücken stark, und trotzdem kannst du dich biegen und drehen. In jedem Wirbel ist ein Loch. Durch die Löcher läuft das Rückenmark. Das ist ein dicker Strang aus Nerven, vom Gehirn den Rücken hinab. Die Wirbel schützen ihn.",
+          "bild": "bilder/04-05.webp"
+        },
+        {
+          "text": "Dein Körper gehört dir, von Kopf bis Fuß. Du spürst selbst, wie sich eine Berührung anfühlt. Eine Umarmung kann sich schön anfühlen. Manchmal möchtest du aber gerade keine.\n\nWenn sich eine Berührung nicht gut anfühlt, darfst du Nein sagen. Alle Gefühle sind in Ordnung, auch ein Nein-Gefühl im Bauch. Und du darfst einem Erwachsenen, dem du vertraust, alles erzählen. Auch das, was sich komisch anfühlt. Das heißt Hilfe holen. Du darfst so oft Hilfe holen, wie du möchtest. Hört dir einmal jemand nicht zu, darfst du es einem anderen Erwachsenen erzählen. Erwachsene sind dafür da, dir zuzuhören und zu helfen.",
+          "bild": "bilder/04-06.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Woher hast du deinen Bauchnabel?",
+        "bild": "bilder/04-02.webp",
+        "antworten": [
+          "Dort hat der Arzt ein Loch gemacht",
+          "Dort hing die Nabelschnur zur Mutter",
+          "Dort ist das Baby herausgekommen"
+        ],
+        "richtig": 1,
+        "aufloesung": "Vor der Geburt war das Baby durch die Nabelschnur mit seiner Mutter verbunden. Nach der Geburt fällt der Rest ab, und zurück bleibt der Bauchnabel.",
+        "seite": 1
+      }
+    },
+    {
+      "titel": "Beine, die dich tragen",
+      "seiten": [
+        {
+          "text": "Setz dich auf den Boden und streck die Beine aus. Oben am Bein ist die Hüfte, danach kommt der dicke Oberschenkel. In der Mitte liegt das Knie. Vorn darauf sitzt eine flache, runde Knochenscheibe, die Kniescheibe. Hinten am Knie ist eine weiche Mulde, die Kniekehle.\n\nUnter dem Knie beginnt der Unterschenkel. Vorn fühlst du einen harten Knochen, das Schienbein. Hinten ist die weiche Wade. Unten, wo das Bein in den Fuß übergeht, stehen innen und außen zwei Knubbel heraus. Das sind die Knöchel.",
+          "bild": "bilder/05-01.webp"
+        },
+        {
+          "text": "Lass das Bein ganz locker liegen. Jetzt kannst du die Kniescheibe vorsichtig hin und her schieben.\n\nDas Knie ist ein Gelenk wie der Ellenbogen. Es geht nur vor und zurück. Ganz anders die Hüfte. Stell dich hin und heb ein Bein nach vorn, dann zur Seite, dann nach hinten. Das geht, weil oben am Oberschenkelknochen eine runde Kugel sitzt. Sie steckt in einer passenden Pfanne im Becken, dem Knochenring unten am Rumpf. Darin kann sie sich in viele Richtungen drehen. Darum heißt die Hüfte ein Kugelgelenk.",
+          "bild": "bilder/05-02.webp"
+        },
+        {
+          "text": "Zieh Schuhe und Socken aus und schau dir deinen Fuß an. Hinten ist die runde Ferse, unten die Sohle. Vorn unter den Zehen liegt ein dickes Polster, der Ballen. Oben auf dem Fuß, wo die Schnürsenkel sitzen, ist der Spann. Manche sagen auch Rist dazu.\n\nVorn sitzen fünf Zehen, ganz innen der große Zeh. Auch im Fuß stecken viele kleine Knochen. In Händen und Füßen zusammen steckt mehr als die Hälfte aller Knochen eines Menschen.\n\nWas glaubst du: Kannst du mit den Zehen einen Stift aufheben?",
+          "bild": "bilder/05-03.webp",
+          "frage": true
+        },
+        {
+          "text": "Probier es aus! Ein bisschen geht es. Die Zehen krallen sich um den Stift, und mit Mühe hebst du ihn an. Mit der Hand geht es aber viel leichter.\n\nEin Affe kann das viel besser. Seine Füße greifen fast wie Hände, zum Beispiel beim Klettern. Unsere Füße sind anders gebaut. Sie tragen den ganzen Körper, wenn wir aufrecht gehen, rennen und springen. Geh einmal barfuß und langsam durchs Zimmer. Spürst du, wie Ferse, Ballen und Zehen nacheinander den Boden berühren?",
+          "bild": "bilder/05-04.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Warum kannst du dein Bein in der Hüfte in viele Richtungen bewegen?",
+        "bild": "bilder/05-02.webp",
+        "antworten": [
+          "Der Knochen dort ist ganz biegsam",
+          "Die Muskeln dort sind ganz weich",
+          "Eine Kugel steckt in einer Pfanne"
+        ],
+        "richtig": 2,
+        "aufloesung": "Oben am Oberschenkelknochen sitzt eine runde Kugel. Sie steckt in einer Pfanne im Becken und kann sich in viele Richtungen drehen.",
+        "seite": 1
+      }
+    },
+    {
+      "titel": "Biegen, wo es geht",
+      "seiten": [
+        {
+          "text": "Jetzt kommt ein Spiel: Du darfst dich nur dort biegen, wo es wirklich geht. Fang oben an. Nick mit dem Kopf, dann biegt sich der Hals. Kreis mit den Schultern. Beug die Ellenbogen und die Handgelenke. Knick die Finger, Glied für Glied.\n\nWeiter unten: Beug dich in der Hüfte. Geh in die Knie. Kreis mit den Füßen an den Knöcheln und wackel mit den Zehen. Und jetzt versuch, den Oberarm in der Mitte zu knicken. Oder das Schienbein. Das geht nicht. Dort ist kein Gelenk.",
+          "bild": "bilder/06-01.webp"
+        },
+        {
+          "text": "Innen gibt dir ein Gerüst aus Knochen Halt, das Skelett. Wo sich zwei Knochen gegeneinander bewegen, ist ein Gelenk. Wie dein Skelett gebaut ist und mitwächst, erzählt das Buch über Knochen und Muskeln.\n\nEtwas anderes an deinem Körper kannst du selbst nachprüfen. Stell dich morgens gleich nach dem Aufstehen ohne Schuhe an einen Türrahmen. Jemand legt ein Buch flach auf deinen Kopf. Genau an seine Unterkante kommt ein Zettel an den Rahmen. Am Abend stellst du dich noch einmal hin, genauso gerade.\n\nWas glaubst du: Wo landet der zweite Zettel?",
+          "bild": "bilder/06-02.webp",
+          "frage": true
+        },
+        {
+          "text": "Ein kleines Stück tiefer, oft nur so breit wie ein Bleistift! Am Abend bist du ein bisschen kleiner als am Morgen. Das liegt an deiner Wirbelsäule. Zwischen den Wirbeln liegen weiche Scheiben, wie kleine Kissen. Tagsüber stehst, sitzt und läufst du. Dabei drückt dein Körper die Kissen ein wenig flacher.\n\nIn der Nacht liegst du lang ausgestreckt im Bett. Dann drückt nichts von oben. Die Scheiben saugen sich voll wie ein Schwamm und werden dicker. Am Morgen bist du wieder ein Stückchen größer. Das passiert jeden Tag, bei Kindern und bei Erwachsenen.",
+          "bild": "bilder/06-03.webp"
+        },
+        {
+          "text": "Jetzt kennst du deinen Körper von Kopf bis Fuß. Jedes Teil hat einen Namen, und jedes kann etwas. Schau dich einmal um, in deiner Familie oder in deiner Klasse. Jeder Körper ist ein bisschen anders. Manche sind groß, manche klein. Manche haben Locken, manche glatte Haare, manche tragen eine Brille.\n\nManche schreiben mit links, manche mit rechts. Jeder Körper wächst auf seine eigene Weise. Und jeden Fingerabdruck gibt es nur einmal. Dein Körper gehört dir, dem Menschen, der in ihm wohnt. Streck dich jetzt ganz lang, bis in die Fingerspitzen. Und dann lass die Arme sinken.",
+          "bild": "bilder/06-04.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Wo kann sich dein Körper biegen?",
+        "bild": "bilder/06-01.webp",
+        "antworten": [
+          "Nur dort, wo ein Gelenk ist",
+          "Überall dort, wo Muskeln sind",
+          "Überall, wenn man fest genug drückt"
+        ],
+        "richtig": 0,
+        "aufloesung": "Biegen kannst du dich nur dort, wo ein Gelenk ist. Im Oberarm oder im Schienbein ist kein Gelenk.",
+        "seite": 0
+      }
+    }
+  ]
+}

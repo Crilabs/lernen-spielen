@@ -1,0 +1,524 @@
+{
+ "02-03.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm and friendly mood, subject centered. Strictly NO faces visible (no face from the front or in profile, no eyes, no reflection of a face), NO text, NO letters, NO numbers, NO logos anywhere (not on clothes, paper, tape or helmet). NO nudity: children are fully clothed. Correct anatomy: exactly five fingers on each hand, five toes on each foot, thumb opposite the fingers, joints bent only in natural directions. Nobody touches the child except the child themselves. Central European (German) setting. Three child-drawn faces (crayon on paper) side by side on a light wooden table: astonished (round mouth, raised eyebrows), laughing, nose wrinkled; beside them crayons and a small hand mirror reflecting only the bright room ceiling. No real faces, no writing.",
+  "usage": {
+   "input_tokens": 344,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 344
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2100
+  }
+ },
+ "03-03.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm and friendly mood, subject centered. Strictly NO faces visible (no face from the front or in profile, no eyes, no reflection of a face), NO text, NO letters, NO numbers, NO logos anywhere (not on clothes, paper, tape or helmet). NO nudity: children are fully clothed. Correct anatomy: exactly five fingers on each hand, five toes on each foot, thumb opposite the fingers, joints bent only in natural directions. Nobody touches the child except the child themselves. Central European (German) setting. Child about 7 years old, short clean fingernails, no face shown. Child B: very fair skin with freckles on arms and hands, long red-blonde curly hair in a ponytail, glasses with round dark blue frames (seen from behind only as temples behind the ears), turquoise long-sleeved shirt, grey cloth trousers. Close-up of a child's hand (freckles), the thumb touches the tip of the index finger, the other three fingers stand loosely apart; bright plain background. IMPORTANT: no button, no clothing to button in the picture.",
+  "usage": {
+   "input_tokens": 400,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 400
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2156
+  }
+ },
+ "03-04.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm and friendly mood, subject centered. Strictly NO faces visible (no face from the front or in profile, no eyes, no reflection of a face), NO text, NO letters, NO numbers, NO logos anywhere (not on clothes, paper, tape or helmet). NO nudity: children are fully clothed. Correct anatomy: exactly five fingers on each hand, five toes on each foot, thumb opposite the fingers, joints bent only in natural directions. Nobody touches the child except the child themselves. Central European (German) setting. Child about 7 years old, short clean fingernails, no face shown. Child D: light beige skin with warm undertone, short straight dark brown hair, green-and-white horizontally striped T-shirt, blue shorts; the left lower leg is a prosthesis (matte grey socket, carbon foot in a sneaker), right foot in a normal sneaker. Two child hands button a large wooden button on a dark blue knitted cardigan, thumb and index finger hold the button from two sides. Close-up, hands and cardigan only.",
+  "usage": {
+   "input_tokens": 392,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 392
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2148
+  }
+ },
+ "04-02.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm and friendly mood, subject centered. Strictly NO faces visible (no face from the front or in profile, no eyes, no reflection of a face), NO text, NO letters, NO numbers, NO logos anywhere (not on clothes, paper, tape or helmet). NO nudity: children are fully clothed. Correct anatomy: exactly five fingers on each hand, five toes on each foot, thumb opposite the fingers, joints bent only in natural directions. Nobody touches the child except the child themselves. Central European (German) setting. Torso crop only, no face: the belly of a pregnant woman with light brown skin, light blue linen shirt over the round belly, both hands resting on it. Only torso and hands. Soft daylight.",
+  "usage": {
+   "input_tokens": 328,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 328
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2084
+  }
+ },
+ "04-04.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: NOT a body. Photorealistic photograph, square, bright natural daylight, calm and friendly mood, subject centered. Strictly NO faces visible (no face from the front or in profile, no eyes, no reflection of a face), NO text, NO letters, NO numbers, NO logos anywhere (not on clothes, paper, tape or helmet). NO nudity: children are fully clothed. Correct anatomy: exactly five fingers on each hand, five toes on each foot, thumb opposite the fingers, joints bent only in natural directions. Nobody touches the child except the child themselves. Central European (German) setting. Top-down photo: folded children's swimwear, an orange swim trunks and a dark blue swimsuit, plain single-colour without print, lie on a large striped beach towel on light wood; next to them swimming goggles. Calm, sunny. No people.",
+  "usage": {
+   "input_tokens": 340,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 340
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2096
+  }
+ },
+ "04-06.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm and friendly mood, subject centered. Strictly NO faces visible (no face from the front or in profile, no eyes, no reflection of a face), NO text, NO letters, NO numbers, NO logos anywhere (not on clothes, paper, tape or helmet). NO nudity: children are fully clothed. Correct anatomy: exactly five fingers on each hand, five toes on each foot, thumb opposite the fingers, joints bent only in natural directions. Nobody touches the child except the child themselves. Central European (German) setting. Child A: dark brown skin, short black afro curls, mustard-yellow sweatshirt. Trusted adult: older man with dark brown skin, grey knitted sweater, hands with slight age wrinkles. Bright kitchen table in daylight, the two sit diagonally at a corner, not touching each other; crop from the shoulders downward (no heads). Both have a mug; the child holds its mug with one hand, the free hand in mid-air in a storytelling gesture; the adult quietly holds his mug, turned toward the child. No sofa, no blanket.",
+  "usage": {
+   "input_tokens": 394,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 394
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2150
+  }
+ },
+ "04-05.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm friendly mood, subject centered. No faces, no text, no letters, no numbers, no logos. No people. A school model of a human spine standing upright on a light wooden table in front of a plain, empty white wall: beige vertebrae stacked, light blue discs between them, natural double S-shaped curve (not straight), vertebrae clearly growing larger toward the bottom, ending in the sacrum, mounted on a small white base. Nothing else in the picture: no poster, no shelf, no books, no skeleton, no skull, no ribs, no anatomical drawings, no plants. Factual, well lit.",
+  "usage": {
+   "input_tokens": 307,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 307
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2063
+  }
+ },
+ "06-03.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm and friendly mood, subject centered. Strictly NO faces visible (no face from the front or in profile, no eyes, no reflection of a face), NO text, NO letters, NO numbers, NO logos anywhere (not on clothes, paper, tape or helmet). NO nudity: children are fully clothed. Correct anatomy: exactly five fingers on each hand, five toes on each foot, thumb opposite the fingers, joints bent only in natural directions. Nobody touches the child except the child themselves. Central European (German) setting. The same white painted wooden door frame in a hallway in the evening in lamp light, no child; two sticky notes without writing one above the other, a yellow one above and a blue one just below it (about a finger's width apart). No people.",
+  "usage": {
+   "input_tokens": 338,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 338
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2094
+  }
+ },
+ "03-05.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand. Top-down view of one small hand with dark brown skin lying palm-up on a light oak table, the sleeve end of a mustard-yellow sweatshirt at the wrist. The index finger is bent halfway so that its three segments and its two finger creases are clearly visible; the thumb lies beside it with its two segments and its single crease clearly visible; the other three fingers are relaxed and slightly curled. Short clean fingernails, plain bright background, sharp focus on the fingers, hand only.",
+  "usage": {
+   "input_tokens": 290,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 290
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2046
+  }
+ },
+ "01-02.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photograph, bright natural daylight, calm and friendly, subject centered. No faces visible, no text, letters, numbers or logos anywhere. Anatomically correct: exactly five fingers on each hand and five toes on each foot, joints bending only in natural directions. Central European (German) setting. Small stature, short clean fingernails, no face shown. Person B: very fair skin with freckles on arms and hands, long red-blonde curly hair in a ponytail, glasses with round dark blue frames (seen from behind only as temples behind the ears), turquoise long-sleeved shirt, grey cloth trousers. Child's room: light oak wooden floor, white wall, one window with daylight, light wooden table, light grey rug, tidy, little toys, no posters with writing. Seen from above: the person sits on the wooden floor; only two hands lying flat next to two bare feet are visible, mirror-symmetrical left and right (turquoise sleeves, freckles). No head visible.",
+  "usage": {
+   "input_tokens": 371,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 371
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2127
+  }
+ },
+ "03-06.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photograph, bright natural daylight, calm and friendly, subject centered. No faces visible, no text, letters, numbers or logos anywhere. Anatomically correct: exactly five fingers on each hand and five toes on each foot, joints bending only in natural directions. Central European (German) setting. Small stature, short clean fingernails, no face shown. Person C: warm medium brown (olive-brown) skin, straight black shoulder-length hair, wine-red T-shirt, dark green trousers, uses a black active wheelchair with push rims and propels it with their own arms. On white paper two red fingerprints next to each other with different patterns (one in whorls, one in arches); beside them a red ink pad, a magnifying glass and the red-stained fingertip of the person's hand. No writing.",
+  "usage": {
+   "input_tokens": 336,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 336
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2092
+  }
+ },
+ "03-01.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photograph, bright natural daylight, calm and friendly, subject centered. No faces visible, no text, letters, numbers or logos anywhere. Anatomically correct: exactly five fingers on each hand and five toes on each foot, joints bending only in natural directions. Central European (German) setting. Small stature, short clean fingernails, no face shown. Person A: dark brown skin, short black afro curls, mustard-yellow sweatshirt (mustard-yellow T-shirt in summer), dark blue jeans or shorts. Close view: the person's outstretched, slightly bent arm with rolled-up sleeve, the other hand runs along the upper arm; shoulder, upper arm, elbow, forearm, wrist and hand in the picture. No head.",
+  "usage": {
+   "input_tokens": 317,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 317
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2073
+  }
+ },
+ "02-01.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photograph, bright natural daylight, calm and friendly, subject centered. No faces visible, no text, letters, numbers or logos anywhere. Anatomically correct: exactly five fingers on each hand and five toes on each foot, joints bending only in natural directions. Central European (German) setting. Small stature, short clean fingernails, no face shown. Person B: very fair skin with freckles on arms and hands, long red-blonde curly hair in a ponytail, glasses with round dark blue frames (seen from behind only as temples behind the ears), turquoise long-sleeved shirt, grey cloth trousers. A hand-drawn face (crayon on white paper: hair, forehead, eyebrows, eyes with lashes, nose with two nostrils, mouth, ears) lies on a light wooden table; the index finger of the person (freckled hand, turquoise sleeve) points to the drawn forehead. No writing on the sheet. Only the drawing and the hand are shown, no real face.",
+  "usage": {
+   "input_tokens": 373,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 373
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2129
+  }
+ },
+ "01-04.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand, five toes per foot. Low side view at floor height: two small bare feet with dark brown skin walking heel-to-toe on a light oak floor, the rear heel touching a white wall; dark blue jeans hems.",
+  "usage": {
+   "input_tokens": 236,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 236
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1992
+  }
+ },
+ "05-03.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand, five toes per foot. A small bare foot with very fair freckled skin seen from the side on a light wooden floor: heel, sole, ball, instep and five toes, the big toe on the inside, clearly visible. Nothing else in the picture.",
+  "usage": {
+   "input_tokens": 246,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 246
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2002
+  }
+ },
+ "04-01.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand, five toes per foot. Rear view cropped at the neck: small back in a turquoise shirt, red-blonde ponytail visible, left hand laid over the right shoulder, right arm raised to the side; very fair freckled skin.",
+  "usage": {
+   "input_tokens": 240,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 240
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1996
+  }
+ },
+ "01-03.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand, five toes per foot. A left hand with olive-brown skin draws a red circle with a thick red crayon on white paper on a light wooden table; a small ball beside the paper. Only hand, forearm in a wine-red sleeve, and table.",
+  "usage": {
+   "input_tokens": 245,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 245
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2001
+  }
+ },
+ "05-04.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand, five toes per foot. A bare foot with dark brown skin grips a thick red crayon with its toes and lifts it slightly above a light wooden floor. Close crop of foot and ankle only.",
+  "usage": {
+   "input_tokens": 231,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 231
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1987
+  }
+ },
+ "01-05.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand, five toes per foot. Top-down view on a light wooden floor: two red cords lie parallel, flush at one end, one a hand's width shorter. Two hands with light beige skin in green-and-white striped sleeves smooth the shorter cord flat.",
+  "usage": {
+   "input_tokens": 242,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 242
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1998
+  }
+ },
+ "02-02.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand. Back of a head with straight black shoulder-length hair gathered up loosely in a small bun at the crown, so the nape and the back of the neck are clearly visible, olive-brown skin, both ears visible; both olive-brown hands pinch the earlobes gently; wine-red shirt collar at the bottom edge; shallow crop at the shoulders, bright plain wall behind.",
+  "usage": {
+   "input_tokens": 269,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 269
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2025
+  }
+ },
+ "05-01.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand, five toes per foot. Legs stretched out on a light grey rug, olive-brown skin, dark green trousers rolled above the knees: knees, shins, calves, ankles and bare feet visible; a black wheelchair wheel at the edge of the picture. Crop from the thighs down.",
+  "usage": {
+   "input_tokens": 249,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 249
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2005
+  }
+ },
+ "02-04.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand. Close crop of two hands with light beige skin fastening the buckle of a chin strap on a light blue bicycle helmet, a green-and-white horizontally striped sleeve at the edge, small bicycle blurred in a courtyard behind. Only hands and helmet strap, nobody's face visible.",
+  "usage": {
+   "input_tokens": 245,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 245
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2001
+  }
+ },
+ "03-02.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers. Exactly five fingers per hand, five toes per foot. A bent arm with olive-brown skin and rolled-up wine-red sleeve, the other hand resting on the upper arm feeling the muscle; a black wheelchair push rim in the background. Crop of arms only.",
+  "usage": {
+   "input_tokens": 238,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 238
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1994
+  }
+ },
+ "04-03.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm friendly mood, subject centered. No faces, no text, no letters, no numbers, no logos. Exactly five fingers on each hand. Fully dressed, Central European home. Close crop of an older adult in a fine-knit light grey wool sweater seen from the front, upper chest and ribcage area only, the picture ends below the chin. Dark brown skin, hands with light age lines resting flat on the left and right sides of the ribcage, high up just below the armpits, fingers pointing forward along the ribs, the elbows slightly out to the sides. Light oak table and white wall softly blurred behind.",
+  "usage": {
+   "input_tokens": 305,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 305
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2061
+  }
+ },
+ "06-01.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm friendly mood, subject centered. No faces, no text, no letters, no numbers, no logos. A jointed wooden artist's mannequin made of light wood in a clear squat, deeply bent knees (thighs nearly horizontal), both elbows bent at a right angle, standing on a light oak table against a plain, empty white wall with soft window light. Nothing else in the picture: no toys, no pictures, no shelf, no plants. Each limb segment between the ball joints stays perfectly straight, it bends only at the joints. Side view, full figure.",
+  "usage": {
+   "input_tokens": 293,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 293
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2049
+  }
+ },
+ "01-01.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm friendly mood, subject centered. No faces, no text, no letters, no numbers, no logos. Exactly five fingers on each hand. Fully dressed, Central European home. A wooden artist's mannequin (jointed light-wood figure) standing upright on a light oak wooden table in a tidy child's room, white wall, window light: head, neck, torso, two arms and two legs clearly visible. Thick colored pencils (red, blue, yellow, green) lie beside it.",
+  "usage": {
+   "input_tokens": 276,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 276
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2032
+  }
+ },
+ "06-04.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm friendly mood, subject centered. No faces, no text, no letters, no numbers, no logos. Exactly five fingers on each hand, thumb opposite the fingers, natural anatomy. Exactly four children's arms with open hands reach up from the bottom of the frame into a calm evening sky with warm light, different lengths and heights, no fifth arm, no other hand, no wheelchair. Left to right: dark brown skin with a mustard yellow long sleeve; very fair skin with freckles and a turquoise long sleeve; clearly warm medium olive-brown skin, noticeably darker than the others, with a burgundy short-sleeved T-shirt; light beige skin with a green-and-white striped long sleeve. Only sky and soft clouds in the background, no buildings, no hills, no tower.",
+  "usage": {
+   "input_tokens": 334,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 334
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2090
+  }
+ },
+ "05-02.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, square, bright natural daylight, calm friendly mood, subject centered. No faces, no text, no letters, no numbers, no logos. Exactly five fingers on each hand. Fully dressed, Central European setting. Low-angle view of two legs in blue shorts and sneakers on a green lawn in a garden: the right foot stands on the grass in a sneaker, the left leg has a matte grey prosthetic shank with a carbon-fiber foot in a sneaker and is lifted far out to the side. Hips down only, sunny garden.",
+  "usage": {
+   "input_tokens": 280,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 280
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2036
+  }
+ },
+ "06-02.png": {
+  "datum": "2026-11-17",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic documentary photo, bright natural daylight, calm, subject centered, no text or numbers, no people. A white painted wooden door frame in a hallway in warm morning light; at small-child head height a single plain yellow sticky note without any writing is stuck to the frame; on the floor in front of the frame a pair of small slippers; beside them on a wooden stool lie a flat book and a pencil.",
+  "usage": {
+   "input_tokens": 251,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 251
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2007
+  }
+ }
+}
