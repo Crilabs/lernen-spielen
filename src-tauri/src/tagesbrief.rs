@@ -17,6 +17,12 @@ pub const BASIS_URL: &str = "https://lernen-spielen.crilabs.de";
 const APP_KOPF: &str = "lernen-spielen-1";
 /// Obergrenze des Dienstes je Push.
 const EREIGNISSE_JE_PUSH: usize = 200;
+/// Höchste Größe eines Push-Pakets in Bytes (der Dienst lehnt über 300 KB mit 413 ab).
+const PAKET_MAX_BYTES: usize = 250_000;
+/// Zeitgrenze für Aufrufe an den Dienst in Sekunden.
+const ZEIT_NORMAL: u64 = 15;
+/// Zeitgrenze für `/anmelden`: der Dienst wartet dabei auf Graph (bis zu 30 s).
+const ZEIT_EINRICHTEN: u64 = 45;
 /// Ältere Ereignisse darüber hinaus fallen weg, damit die Datei nicht unbegrenzt wächst.
 const WARTESCHLANGE_MAX: usize = 1000;
 
@@ -160,8 +166,20 @@ fn anfrage(
     schluessel: Option<&str>,
     body: Option<&Value>,
 ) -> Result<(u16, Value), String> {
+    anfrage_mit_zeit(befehl, methode, url, schluessel, body, ZEIT_NORMAL)
+}
+
+/// Wie `anfrage`, mit eigener Zeitgrenze in Sekunden.
+fn anfrage_mit_zeit(
+    befehl: &str,
+    methode: &str,
+    url: &str,
+    schluessel: Option<&str>,
+    body: Option<&Value>,
+    zeit_s: u64,
+) -> Result<(u16, Value), String> {
     let agent = ureq::AgentBuilder::new()
-        .timeout(Duration::from_secs(15))
+        .timeout(Duration::from_secs(zeit_s))
         .build();
     let mut req = agent.request(methode, url).set("X-App", APP_KOPF);
     if let Some(s) = schluessel {
@@ -195,12 +213,13 @@ pub fn einrichten(
     uhrzeit: &str,
 ) -> Result<String, String> {
     let _sperre = SPERRE.lock().unwrap_or_else(|e| e.into_inner());
-    let (status, antwort) = anfrage(
+    let (status, antwort) = anfrage_mit_zeit(
         "einrichten",
         "POST",
         &format!("{basis}/anmelden"),
         None,
         Some(&json!({ "adresse": adresse, "name": name, "uhrzeit": uhrzeit })),
+        ZEIT_EINRICHTEN,
     )?;
     if status != 200 {
         return Err(format!("Anmeldung nicht möglich (Status {status})"));
@@ -274,6 +293,21 @@ pub fn status(dir: &Path, basis: &str) -> Result<Value, String> {
     Ok(status_json(&z))
 }
 
+/// So viele Ereignisse vom Anfang gehen in ein Paket: höchstens `EREIGNISSE_JE_PUSH` und
+/// `PAKET_MAX_BYTES` (mindestens eines, damit die Schlange nie hängt).
+fn paketgroesse(schlange: &[Value]) -> usize {
+    let mut bytes = 2;
+    let mut n = 0;
+    for e in schlange.iter().take(EREIGNISSE_JE_PUSH) {
+        bytes += e.to_string().len() + 1;
+        if n > 0 && bytes > PAKET_MAX_BYTES {
+            break;
+        }
+        n += 1;
+    }
+    n
+}
+
 /// Nimmt Ereignisse (`{art, daten}`) in die Warteschlange und sendet sie. Bleibt der Versand
 /// aus, bleiben sie in der Datei und gehen beim nächsten Push mit.
 pub fn pushen(dir: &Path, basis: &str, ereignisse: Vec<Value>) -> Result<Value, String> {
@@ -290,6 +324,10 @@ pub fn pushen(dir: &Path, basis: &str, ereignisse: Vec<Value>) -> Result<Value, 
         if let Some(o) = e.as_object_mut() {
             o.insert("id".into(), json!(format!("{}-{}", z.geraet, z.nummer)));
         }
+        // Der Dienst behält nur das letzte „naechstes“; ältere (mit Foto) würden nur das Paket sprengen.
+        if e["art"] == "naechstes" {
+            schlange.retain(|alt| alt["art"] != "naechstes");
+        }
         schlange.push(e);
     }
     if schlange.len() > WARTESCHLANGE_MAX {
@@ -300,7 +338,7 @@ pub fn pushen(dir: &Path, basis: &str, ereignisse: Vec<Value>) -> Result<Value, 
 
     let mut letzte = json!({ "verschickt": [] });
     while !schlange.is_empty() {
-        let n = schlange.len().min(EREIGNISSE_JE_PUSH);
+        let n = paketgroesse(&schlange);
         let paket = Value::Array(schlange[..n].to_vec());
         let (status, antwort) = anfrage(
             "pushen",
@@ -549,6 +587,52 @@ mod tests {
         assert!(anfrage.to_lowercase().contains("x-app: lernen-spielen-1"));
         assert!(anfrage.contains("Bearer GEHEIMER-SCHLUESSEL"));
         assert_eq!(lade(dir.path()).nummer, 2);
+    }
+
+    #[test]
+    fn nur_das_letzte_naechstes_bleibt_in_der_schlange() {
+        let dir = tempfile::tempdir().unwrap();
+        aktiv(dir.path());
+        let foto = "x".repeat(50_000);
+        for i in 0..8 {
+            let r = pushen(
+                dir.path(),
+                &tote_basis(),
+                vec![json!({"art":"naechstes","daten":{"foto":foto,"i":i}})],
+            );
+            assert!(r.is_err());
+        }
+        let (basis, gesehen) = fake(vec![(200, r#"{"verschickt":[]}"#)]);
+        pushen(
+            dir.path(),
+            &basis,
+            vec![json!({"art":"gekonnt","daten":{"name":"Achterreihe"}})],
+        )
+        .unwrap();
+        assert!(lade_schlange(dir.path()).is_empty());
+        let anfrage = gesehen.lock().unwrap()[0].clone();
+        assert!(anfrage.contains("Achterreihe"));
+        assert_eq!(anfrage.matches("\"naechstes\"").count(), 1);
+        assert!(anfrage.contains("\"i\":7"));
+    }
+
+    #[test]
+    fn pakete_bleiben_unter_der_bytegrenze() {
+        let dir = tempfile::tempdir().unwrap();
+        aktiv(dir.path());
+        let gross = "y".repeat(100_000);
+        let ereignisse = (0..3)
+            .map(|i| json!({"art":"dabei","daten":{"text":gross,"i":i}}))
+            .collect();
+        let (basis, gesehen) = fake(vec![
+            (200, r#"{"verschickt":[]}"#),
+            (200, r#"{"verschickt":[]}"#),
+        ]);
+        pushen(dir.path(), &basis, ereignisse).unwrap();
+        let g = gesehen.lock().unwrap();
+        assert_eq!(g.len(), 2);
+        assert!(g.iter().all(|a| a.len() < 260_000));
+        assert!(lade_schlange(dir.path()).is_empty());
     }
 
     #[test]
