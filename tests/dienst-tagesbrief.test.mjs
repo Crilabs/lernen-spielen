@@ -9,6 +9,7 @@ import { starteDienst } from "../dienste/tagesbrief/server.js";
 
 const KOPF = { "x-app": "lernen-spielen-1", "content-type": "application/json" };
 const ADRESSE = "familie@example.org";
+export const naechstes = (id, extra = {}) => ({ id, thema: "Neunerreihe", fach: "mathe", titel: "Die Neunerreihe", passendZuGerade: true, formen: [{ situation: "tisch", wort: "Tisch", name: "Mit Perlen", braucht: "Perlen", schritte: ["Legen"], kern: "k", verinnerlichen: "v" }], foto: "", weitere: [], ...extra });
 const GEHEIM = "Brüche-Geheimtext";
 
 /** @type {{ dienst: any, url: string, mails: any[], ordner: string, datei: string, logs: string[], originalLog: any }} */
@@ -119,8 +120,8 @@ test("doppelte Ereignis-Id zählt einmal; naechstes ersetzt den vorigen", async 
   const { schluessel } = await einrichten();
   const g = (id, did) => ({ id, art: "gekonnt", daten: { id: did, name: "N", zweck: "z", fach: "mathe" } });
   await post("/ereignisse", [g("e1", "g1"), g("e1", "g2"), g("e2", "g1"), { id: "e3", art: "gelesen", daten: { id: "b1", titel: "T", frage: "f", antwort: "a" } }, { id: "e4", art: "gelesen", daten: { id: "b1", titel: "T", frage: "f", antwort: "a" } }], bearer(schluessel));
-  await post("/ereignisse", [g("e1", "g1"), { id: "n1", art: "naechstes", daten: { id: "a1" } }], bearer(schluessel));
-  await post("/ereignisse", [{ id: "n2", art: "naechstes", daten: { id: "a2" } }], bearer(schluessel));
+  await post("/ereignisse", [g("e1", "g1"), { id: "n1", art: "naechstes", daten: naechstes("a1") }], bearer(schluessel));
+  await post("/ereignisse", [{ id: "n2", art: "naechstes", daten: naechstes("a2") }], bearer(schluessel));
   const topf = JSON.parse(readFileSync(t.datei, "utf8")).adressen[ADRESSE].topf;
   assert.equal(topf.gekonnt.length, 1);
   assert.equal(topf.gelesen.length, 1);
@@ -255,7 +256,7 @@ test("Anfragen: abgelaufene verschwinden, abgeholte behalten weder Schlüssel no
   assert.equal((await fetch(`${t.url}/status?anfrage=${zweiId}`, { headers: KOPF })).status, 404);
 });
 
-test("gesperrtes Gerät (Präfix des Hash in `gesperrt`) bekommt bei /ereignisse und /probebrief 403", async () => {
+test("gesperrtes Gerät (Präfix des Hash in `gesperrt`) bekommt bei allen Geräte-Endpunkten außer DELETE /geraet 403", async () => {
   const { schluessel } = await einrichten();
   const andere = await einrichten("andere@example.org");
   const h = createHash("sha256").update(schluessel).digest("hex");
@@ -268,7 +269,9 @@ test("gesperrtes Gerät (Präfix des Hash in `gesperrt`) bekommt bei /ereignisse
   t = { ...alt, dienst, url: `http://127.0.0.1:${dienst.server.address().port}` };
   assert.equal((await post("/ereignisse", [], bearer(schluessel))).status, 403);
   assert.equal((await post("/probebrief", {}, bearer(schluessel))).status, 403);
+  assert.equal((await post("/einstellungen", { uhrzeit: "07:30" }, bearer(schluessel))).status, 403);
   assert.equal((await post("/ereignisse", [], bearer(andere.schluessel))).status, 200);
+  assert.equal((await fetch(`${t.url}/geraet`, { method: "DELETE", headers: bearer(schluessel) })).status, 200, "sich selbst lösen bleibt erlaubt");
 });
 
 test("weiteres Gerät für eine bestätigte Adresse: Mail und Knopfseite warnen ausdrücklich", async () => {

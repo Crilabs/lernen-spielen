@@ -5,6 +5,8 @@ import { createServer } from "node:http";
 import { setzeBrief } from "../../spiele/tagesbrief/brief.js";
 import { GRENZEN, TAG, erlaubt, raeumeAuf } from "./grenzen.js";
 import { WEITERES_GERAET, abgemeldetSeite, abmeldenFrage, bestaetigenFrage, bestaetigtSeite, datenschutzSeite, ungueltigSeite } from "./seiten.js";
+import { gueltigesEreignis } from "./pruefung.js";
+import { versendeFaellige } from "./versand.js";
 import { briefTopf, hash, juengsteVerschickte, lade, legeAb, leererTopf, sichere, zufall } from "./speicher.js";
 
 export const APP_SCHLUESSEL = "lernen-spielen-1";
@@ -143,6 +145,7 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     const liste = parse(text);
     if (!Array.isArray(liste)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
     if (liste.length > GRENZEN.ereignisseJePush) { json(res, 413, { fehler: "zu-viele" }); return 413; }
+    if (!liste.every(gueltigesEreignis)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
     if (!erlaubt(daten.zaehler, `push:${g.h}`, GRENZEN.pushesJeGeraet, jetzt().getTime())) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
     // Nur die eigene Adresse: Felder wie `an` oder `adresse` im Körper werden nie gelesen.
     legeAb(g.eintrag.topf, liste, jetzt());
@@ -217,7 +220,7 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
         const g = gerät(req);
         h = g.h;
         if (g.status !== 200) { json(res, g.status, { fehler: g.status === 410 ? "abgemeldet" : "schluessel" }); ergebnis = g.status; }
-        else if (gesperrt(g.h ?? "") && (weg === "POST /ereignisse" || weg === "POST /probebrief")) { json(res, 403, { fehler: "gesperrt" }); ergebnis = 403; }
+        else if (gesperrt(g.h ?? "") && weg !== "DELETE /geraet") { json(res, 403, { fehler: "gesperrt" }); ergebnis = 403; }
         else if (weg === "POST /ereignisse") ergebnis = await ereignisse(req, res, g);
         else if (weg === "POST /einstellungen") ergebnis = await einstellungen(req, res, g);
         else if (weg === "POST /probebrief") ergebnis = await probebrief(res, g);
@@ -238,7 +241,7 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
   return {
     server,
     stop: () => new Promise((ok) => { clearInterval(aufraeumen); server.closeAllConnections(); server.close(() => ok(undefined)); }),
-    // Task 5: Versand zur Uhrzeit, Topf leeren, Löschen nach 48 h.
-    pruefeFaellige: async () => 0,
+    // Versand zur Uhrzeit, Topf leeren, Topf nach 48 h löschen; beim Not-Aus passiert nichts.
+    pruefeFaellige: async () => (aus ? 0 : versendeFaellige({ daten, jetzt: jetzt(), sende, basis, speichern })),
   };
 }

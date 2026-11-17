@@ -5,7 +5,7 @@ import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 
 /** @typedef {{ id: string, art: string, daten: Record<string, any> }} Ereignis */
 /** @typedef {{ ids: string[], gekonnt: any[], dabei: any[], gelesen: any[], naechstes: any | null, seit: string | null }} GespeicherterTopf */
-/** @typedef {{ uhrzeit: string, namen: Record<string, string>, geraete: Record<string, { name: string, angelegt: string }>, topf: GespeicherterTopf, verschickt: { anleitung: string, am: string }[], abmeldeToken: string }} Adresse */
+/** @typedef {{ uhrzeit: string, namen: Record<string, string>, geraete: Record<string, { name: string, angelegt: string }>, topf: GespeicherterTopf, verschickt: { anleitung: string, am: string }[], abmeldeToken: string, letzterTag?: string }} Adresse */
 /** @typedef {{ adressen: Record<string, Adresse>, anfragen: Record<string, any>, zaehler: Record<string, number[]>, abgemeldet: Record<string, true> }} Daten */
 
 export const VERSCHICKT_TAGE = 14;
