@@ -13,6 +13,7 @@
     "audio:anhoeren": "node werkzeuge/audio/anhoeren.mjs",
     "schrift:ansehen": "node werkzeuge/schrift/ansehen.mjs",
     "echte-dinge": "node werkzeuge/echte-dinge/verzeichnis.mjs",
+    "echte-dinge:brief-fotos": "node werkzeuge/echte-dinge/brief-fotos.mjs",
     "verwaltung": "node werkzeuge/verwaltung/server.mjs"
   },
   "devDependencies": {
