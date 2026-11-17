@@ -4959,5 +4959,33 @@
   "thema": [
    "nomen-proben"
   ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 512,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "mehr-weniger-gleich-viele.png",
+  "themen": 1,
+  "thema": [
+   "mehr-weniger-gleich-viele"
+  ],
+  "usage": {
+   "input_tokens": 512,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 512
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2268
+  }
  }
 ]
