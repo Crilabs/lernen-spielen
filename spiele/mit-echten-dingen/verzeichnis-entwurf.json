@@ -184,6 +184,24 @@
    "datei": "grammatik/gegenwart-praesens.md",
    "foto": "grammatik/bilder/gegenwart-praesens.webp"
   },
+  "gerade-ungerade": {
+   "fach": "mathe",
+   "name": "Gerade und ungerade",
+   "titel": "Bleibt eins allein?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Trauben für zwei"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zu zweit aufräumen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/gerade-ungerade.md",
+   "foto": "mathe/bilder/gerade-ungerade.webp"
+  },
   "geschlecht-des-nomens": {
    "fach": "grammatik",
    "name": "Männlich, weiblich, sächlich",
