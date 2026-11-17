@@ -53,7 +53,7 @@ async function neueSeite(browser, tb, stand) {
           if (name === "tagesbrief_status") return { zustand: t.zustand, adresse: t.adresse, uhrzeit: t.uhrzeit };
           if (name === "tagesbrief_einrichten") { t.zustand = "wartet"; t.adresse = a.adresse; t.uhrzeit = a.uhrzeit; return "anfrage-1"; }
           if (name === "tagesbrief_einstellen") { t.uhrzeit = a.uhrzeit; return null; }
-          if (name === "tagesbrief_abmelden") { t.zustand = "abbestellt"; return null; }
+          if (name === "tagesbrief_abmelden") { t.zustand = t.zustand === "wartet" ? "aus" : "abbestellt"; return null; }
           return null;
         },
       },
@@ -107,6 +107,16 @@ for (const typ of [chromium, webkit]) {
     pruefe(ein.length === 1 && JSON.stringify(ein[0].args) === JSON.stringify({ profil: "kind-1", adresse: "eltern@example.org", name: "Lena", uhrzeit: "18:00" }), `${L} Einrichten ruft den Befehl mit Profil, Adresse, Name, Uhrzeit`, JSON.stringify(ein));
     pruefe((await text(seite)).includes("Wir haben eine E-Mail an eltern@example.org geschickt. Bitte den Link darin bestätigen."), `${L} wartet: Text mit Adresse`);
 
+    // Tippfehler: „Andere Adresse“ setzt zurück und zeigt das Formular wieder
+    pruefe(await seite.evaluate(() => !!document.querySelector('#inhalt ls-knopf[wort="Andere Adresse"]')), `${L} wartet: Knopf „Andere Adresse“`);
+    await klick(seite, "Andere Adresse");
+    await seite.waitForSelector('#inhalt input[name="adresse"]');
+    pruefe((await aufrufe(seite, "tagesbrief_abmelden")).length === 1 && (await text(seite)).includes("Einrichten") && !(await text(seite)).includes("Wir haben eine E-Mail"), `${L} „Andere Adresse“: Abmelden, Formular wieder da`);
+    await seite.fill('input[name="adresse"]', "eltern@example.org");
+    await seite.fill('input[name="name"]', "Lena");
+    await klick(seite, "Einrichten");
+    await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("Bitte den Link darin bestätigen."));
+
     await seite.evaluate(() => { window.__tb.zustand = "aktiv"; }); // Link bestätigt
     await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("✓ Eingerichtet"), null, { timeout: 15000 });
     pruefe(true, `${L} wartet: nach der Bestätigung zeigt die Abfrage von selbst „✓ Eingerichtet“`);
@@ -134,16 +144,27 @@ for (const typ of [chromium, webkit]) {
     const einst = await aufrufe(seite, "tagesbrief_einstellen");
     pruefe(einst.length === 1 && einst[0].args.uhrzeit === "19:30" && einst[0].args.name === "Lena" && einst[0].args.profil === "kind-1", `${L} Uhrzeit ändern ruft einstellen (Name bleibt)`, JSON.stringify(einst));
 
+    // Abbestellen fragt auf der Seite nach (kein JS-Dialog): „Doch nicht“ bricht ab, „Ja, abbestellen“ meldet ab.
+    let dialoge = 0;
+    seite.on("dialog", (d) => { dialoge++; d.dismiss(); });
     await klick(seite, "Abbestellen");
+    const frage = await text(seite);
+    pruefe(frage.includes("Wirklich abbestellen? Danach kommen keine Briefe mehr an diese Adresse.") && (await aufrufe(seite, "tagesbrief_abmelden")).length === 1 // nur „Andere Adresse“ von vorhin
+      && await seite.evaluate(() => ["Ja, abbestellen", "Doch nicht"].every((w) => !!document.querySelector(`#inhalt ls-knopf[wort="${w}"]`))), `${L} Abbestellen fragt nach, noch kein Befehl`);
+    await klick(seite, "Doch nicht");
+    pruefe(!(await text(seite)).includes("Wirklich abbestellen?") && (await aufrufe(seite, "tagesbrief_abmelden")).length === 1 && (await text(seite)).includes("✓ Eingerichtet"), `${L} „Doch nicht“: Frage weg, kein Befehl, weiter eingerichtet`);
+    await klick(seite, "Abbestellen");
+    await klick(seite, "Ja, abbestellen");
     await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("Abbestellt"));
-    pruefe((await aufrufe(seite, "tagesbrief_abmelden")).length === 1 && await seite.evaluate(() => !!document.querySelector('#inhalt ls-knopf[wort="Neu einrichten"]')), `${L} abbestellt: „Abbestellt“ und „Neu einrichten“`);
+    pruefe(dialoge === 0, `${L} kein JS-Dialog`);
+    pruefe((await aufrufe(seite, "tagesbrief_abmelden")).length === 2 && await seite.evaluate(() => !!document.querySelector('#inhalt ls-knopf[wort="Neu einrichten"]')), `${L} abbestellt: „Abbestellt“ und „Neu einrichten“`);
     if (SHOTS) await seite.screenshot({ path: join(SHOTS, `tagesbrief-abbestellt-${typ.name()}.png`) });
 
     await klick(seite, "Neu einrichten");
     await seite.fill('input[name="adresse"]', "neu@example.org");
     await klick(seite, "Einrichten");
     await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("neu@example.org"));
-    pruefe((await aufrufe(seite, "tagesbrief_einrichten")).length === 2, `${L} Neu einrichten ruft den Befehl erneut`);
+    pruefe((await aufrufe(seite, "tagesbrief_einrichten")).length === 3, `${L} Neu einrichten ruft den Befehl erneut`);
     pruefe(fehlerListe.length === 0, `${L} keine Seiten- oder Konsolenfehler`, fehlerListe.join(" | "));
     await kontext.close();
   }

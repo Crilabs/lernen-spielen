@@ -1256,6 +1256,14 @@ async function tagesbrief(spalte) {
       f.append(el("h3", "Warten auf die Bestätigung"),
         el("p", `Wir haben eine E-Mail an ${st.adresse || "Ihre Adresse"} geschickt. Bitte den Link darin bestätigen.`, "text"),
         el("p", "Hier erscheint die Bestätigung von selbst.", "leise"));
+      // Tippfehler in der Adresse: das Gerät lokal zurücksetzen (Rust sendet im Zustand „wartet“ nichts), dann erscheint das Formular wieder.
+      const andere = knopf("Andere Adresse");
+      andere.addEventListener("click", async () => {
+        try { await befehl("tagesbrief_abmelden", { profil: PROFIL }); }
+        catch { meldeFehler(status); return; }
+        await aktualisiere();
+      });
+      f.append(reihe(andere), status);
     } else if (st.zustand === "abbestellt") {
       f.append(el("h3", "Abbestellt"), el("p", "Es werden keine Briefe mehr geschickt und nichts mehr gesammelt.", "text"));
       const knopfNeu = knopf("Neu einrichten", { art: "haupt" });
@@ -1331,12 +1339,19 @@ async function tagesbrief(spalte) {
       await aktualisiere();
     });
     aendern.append(felder, reihe(speichern));
-    abbestellen.addEventListener("click", async () => {
+    // Abbestellen entfernt das Gerät, beim letzten Gerät auch die Adresse: erst auf der Seite nachfragen (kein JS-Dialog).
+    const rueckfrage = el("div", null, "spalten"); rueckfrage.hidden = true;
+    const jaAbbestellen = knopf("Ja, abbestellen", { achtung: true });
+    const dochNicht = knopf("Doch nicht");
+    rueckfrage.append(el("p", "Wirklich abbestellen? Danach kommen keine Briefe mehr an diese Adresse.", "text"), reihe(jaAbbestellen, dochNicht));
+    abbestellen.addEventListener("click", () => { rueckfrage.hidden = false; abbestellen.hidden = true; });
+    dochNicht.addEventListener("click", () => { rueckfrage.hidden = true; abbestellen.hidden = false; });
+    jaAbbestellen.addEventListener("click", async () => {
       try { await befehl("tagesbrief_abmelden", { profil: PROFIL }); }
       catch { meldeFehler(status); return; }
       await aktualisiere();
     });
-    f.append(reihe(probe, zeit, abbestellen), aendern, status);
+    f.append(reihe(probe, zeit, abbestellen), rueckfrage, aendern, status);
     // Vorschau aus dem aktuellen Lernstand (nichts vom Server)
     const vor = el("div", null, "spalten");
     vor.append(el("h4", "Vorschau: So sähe der Brief heute aus"));
