@@ -129,6 +129,11 @@ test("Ereignisse landen im Topf der eigenen Adresse; an/adresse im Körper wird 
 });
 
 test("doppelte Ereignis-Id zählt einmal; naechstes ersetzt den vorigen", async () => {
+  // Feste Uhr vor der Brief-Uhrzeit (18:00): danach käme ein naechstes absichtlich nur auf den zweiten Platz.
+  const { originalLog } = t;
+  await t.dienst.stop();
+  rmSync(t.ordner, { recursive: true, force: true });
+  t = { ...(await starte({ jetzt: () => new Date("2026-11-17T09:00:00Z") })), originalLog };
   const { schluessel } = await einrichten();
   const g = (id, did) => ({ id, art: "gekonnt", daten: { id: did, name: "N", zweck: "z", fach: "mathe" } });
   await post("/ereignisse", [g("e1", "g1"), g("e1", "g2"), g("e2", "g1"), { id: "e3", art: "gelesen", daten: { id: "b1", titel: "T", frage: "f", antwort: "a" } }, { id: "e4", art: "gelesen", daten: { id: "b1", titel: "T", frage: "f", antwort: "a" } }], bearer(schluessel));
