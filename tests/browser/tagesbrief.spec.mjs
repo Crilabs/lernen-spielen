@@ -7,7 +7,8 @@
 //
 // Die App wird nachgebaut: ein Init-Skript setzt window.__TAURI__ mit einem `invoke`, das den Lernstand aus dem
 // localStorage liefert und die Tagesbrief-Befehle aus window.__tb beantwortet (Zustand, aufgezeichnete Aufrufe).
-// Geprüft: aus (Felder, Standard 18:00, Einrichten, Meldung „Wir haben eine E-Mail …“), wartet (Abfrage alle 10 s, dann
+// Geprüft: Empfängerliste (Adressen, bestätigt/wartend, Hinzufügen bis vier, Entfernen, letzte Adresse mit Rückfrage), Namensprüfung;
+// aus (Felder, Standard 18:00, Einrichten, Meldung „Wir haben eine E-Mail …“), wartet (Abfrage alle 10 s, dann
 // aktiv), aktiv („✓ Eingerichtet“, Vorschau im iframe, Probebrief, Uhrzeit ändern, Abbestellen), aktiv ohne Neues
 // (Hinweis statt iframe), abbestellt (Neu einrichten), Datenschutzsatz; Startseite ohne .karte.echt, echt.html lädt.
 
@@ -50,6 +51,20 @@ async function neueSeite(browser, tb, stand) {
           if (!name.startsWith("tagesbrief_")) return null;
           const t = window.__tb;
           t.aufrufe.push({ name, args: a });
+          const liste = () => t.empfaenger ??= [{ adresse: t.adresse || "eltern@example.org", bestaetigt: true }];
+          if (name === "tagesbrief_empfaenger") return { uhrzeit: t.uhrzeit, name: "", empfaenger: liste() };
+          if (name === "tagesbrief_empfaenger_hinzufuegen") {
+            if (t.fehler) return { fehler: t.fehler };
+            if (liste().length >= 4) return { fehler: "voll" };
+            if (liste().some((e) => e.adresse === a.adresse)) return { fehler: "vorhanden" };
+            liste().push({ adresse: a.adresse, bestaetigt: false });
+            return { ok: true };
+          }
+          if (name === "tagesbrief_empfaenger_entfernen") {
+            t.empfaenger = liste().filter((e) => e.adresse !== a.adresse);
+            if (!t.empfaenger.some((e) => e.bestaetigt)) { t.zustand = "aus"; return { familieGeloescht: true }; }
+            return { ok: true };
+          }
           if (name === "tagesbrief_status") return { zustand: t.zustand, adresse: t.adresse, uhrzeit: t.uhrzeit };
           if (name === "tagesbrief_einrichten") { t.zustand = "wartet"; t.adresse = a.adresse; t.uhrzeit = a.uhrzeit; return "anfrage-1"; }
           if (name === "tagesbrief_einstellen") { t.uhrzeit = a.uhrzeit; return null; }
@@ -166,6 +181,83 @@ for (const typ of [chromium, webkit]) {
     await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("neu@example.org"));
     pruefe((await aufrufe(seite, "tagesbrief_einrichten")).length === 3, `${L} Neu einrichten ruft den Befehl erneut`);
     pruefe(fehlerListe.length === 0, `${L} keine Seiten- oder Konsolenfehler`, fehlerListe.join(" | "));
+    await kontext.close();
+  }
+
+  // --- aktiv: mehrere Empfänger ----------------------------------------------------------------------------------
+  {
+    const { kontext, seite, fehlerListe } = await neueSeite(browser, { zustand: "aktiv", adresse: "mama@example.org", empfaenger: [{ adresse: "mama@example.org", bestaetigt: true }, { adresse: "papa@example.org", bestaetigt: true }, { adresse: "oma@example.org", bestaetigt: false }] }, STAND_MIT_NEUEM);
+    let dialoge = 0;
+    seite.on("dialog", (d) => { dialoge++; d.dismiss(); });
+    await oeffneTagesbrief(seite);
+    await seite.waitForSelector("#inhalt .tb-adresse");
+    const zeilen = await seite.evaluate(() => [...document.querySelectorAll("#inhalt .tb-adresse")].map((li) => li.innerText.replace(/\s+/g, " ").trim()));
+    pruefe(zeilen.length === 3 && zeilen[0].includes("mama@example.org") && zeilen[0].includes("✓ bestätigt") && zeilen[2].includes("oma@example.org") && zeilen[2].includes("wartet auf Bestätigung"), `${L} Liste: 2 bestätigt, 1 wartet`, JSON.stringify(zeilen));
+    pruefe(await seite.evaluate(() => document.querySelectorAll('#inhalt .tb-adresse ls-knopf[wort="Entfernen"]').length === 3 && !!document.querySelector('#inhalt ls-knopf[wort="Adresse hinzufügen"]')), `${L} Liste: je Adresse „Entfernen“, Knopf „Adresse hinzufügen“`);
+    if (SHOTS) { await mkdir(SHOTS, { recursive: true }); await seite.screenshot({ path: join(SHOTS, `tagesbrief-empfaenger-${typ.name()}.png`) }); }
+
+    // Hinzufügen: ungültig, dann vierte Adresse, dann ist der Knopf weg
+    await klick(seite, "Adresse hinzufügen");
+    await klick(seite, "Senden");
+    pruefe((await text(seite)).includes("gültige E-Mail-Adresse") && (await aufrufe(seite, "tagesbrief_empfaenger_hinzufuegen")).length === 0, `${L} Hinzufügen ohne Adresse: Hinweis, kein Befehl`);
+    await seite.fill('input[name="neue-adresse"]', "tante@example.org");
+    await klick(seite, "Senden");
+    await seite.waitForFunction(() => document.querySelectorAll("#inhalt .tb-adresse").length === 4);
+    const hin = await aufrufe(seite, "tagesbrief_empfaenger_hinzufuegen");
+    pruefe(hin.length === 1 && JSON.stringify(hin[0].args) === JSON.stringify({ profil: "kind-1", adresse: "tante@example.org" }), `${L} Hinzufügen ruft den Befehl mit Profil und Adresse`, JSON.stringify(hin));
+    pruefe((await text(seite)).includes("Wir haben eine E-Mail an tante@example.org geschickt.") && (await text(seite)).includes("Höchstens vier Adressen.") && await seite.evaluate(() => !document.querySelector('#inhalt ls-knopf[wort="Adresse hinzufügen"]:not([hidden])')), `${L} bei vier: Hinweis „Höchstens vier Adressen.“, kein Hinzufügen-Knopf`);
+
+    // Entfernen einer wartenden Adresse: ohne Rückfrage; Liste lädt neu
+    await seite.evaluate(() => document.querySelectorAll('#inhalt .tb-adresse ls-knopf[wort="Entfernen"]')[2].click());
+    await seite.waitForFunction(() => document.querySelectorAll("#inhalt .tb-adresse").length === 3);
+    pruefe((await aufrufe(seite, "tagesbrief_empfaenger_entfernen")).length === 1 && !(await text(seite)).includes("oma@example.org") && await seite.evaluate(() => !!document.querySelector('#inhalt ls-knopf[wort="Adresse hinzufügen"]:not([hidden])')), `${L} Entfernen (wartend): ohne Rückfrage, Hinzufügen wieder da`);
+
+    // Wartende Adresse wird bestätigt: die Liste holt sich das alle 10 s
+    await seite.evaluate(() => { window.__tb.empfaenger.find((e) => e.adresse === "tante@example.org").bestaetigt = true; });
+    await seite.waitForFunction(() => [...document.querySelectorAll("#inhalt .tb-adresse")].every((li) => li.innerText.includes("✓ bestätigt")), null, { timeout: 15000 });
+    pruefe(true, `${L} wartende Adresse: Abfrage alle 10 s zeigt „✓ bestätigt“`);
+
+    // Entfernen bis eine bestätigte übrig ist; die letzte fragt nach
+    await seite.evaluate(() => document.querySelectorAll('#inhalt .tb-adresse ls-knopf[wort="Entfernen"]')[2].click());
+    await seite.evaluate(() => document.querySelectorAll('#inhalt .tb-adresse ls-knopf[wort="Entfernen"]')[1].click()).catch(() => {});
+    await seite.waitForFunction(() => document.querySelectorAll("#inhalt .tb-adresse").length === 1);
+    const vorher = (await aufrufe(seite, "tagesbrief_empfaenger_entfernen")).length;
+    await seite.evaluate(() => document.querySelector('#inhalt .tb-adresse ls-knopf[wort="Entfernen"]').click());
+    pruefe((await text(seite)).includes("letzte bestätigte Adresse") && (await aufrufe(seite, "tagesbrief_empfaenger_entfernen")).length === vorher && await seite.evaluate(() => ["Ja, entfernen", "Behalten"].every((w) => !!document.querySelector(`#inhalt ls-knopf[wort="${w}"]`))), `${L} letzte bestätigte Adresse: Rückfrage, noch kein Befehl`);
+    await klick(seite, "Behalten");
+    pruefe(!(await text(seite)).includes("letzte bestätigte Adresse") && (await aufrufe(seite, "tagesbrief_empfaenger_entfernen")).length === vorher, `${L} „Behalten“: Rückfrage weg, kein Befehl`);
+    await seite.evaluate(() => document.querySelector('#inhalt .tb-adresse ls-knopf[wort="Entfernen"]').click());
+    await klick(seite, "Ja, entfernen");
+    await seite.waitForSelector('#inhalt input[name="adresse"]');
+    pruefe((await aufrufe(seite, "tagesbrief_empfaenger_entfernen")).length === vorher + 1 && (await text(seite)).includes("Einrichten"), `${L} „Ja, entfernen“: Familie gelöscht, Formular „Einrichten“`);
+    pruefe(dialoge === 0, `${L} Empfänger: kein JS-Dialog`);
+    pruefe(fehlerListe.length === 0, `${L} keine Fehler (Empfänger)`, fehlerListe.join(" | "));
+    await kontext.close();
+  }
+
+  // --- Fehler beim Hinzufügen und Namensprüfung --------------------------------------------------------------------
+  {
+    const { kontext, seite } = await neueSeite(browser, { zustand: "aktiv", adresse: "mama@example.org", fehler: "vorhanden" }, null);
+    await oeffneTagesbrief(seite);
+    await seite.waitForSelector("#inhalt .tb-adresse");
+    await klick(seite, "Adresse hinzufügen");
+    await seite.fill('input[name="neue-adresse"]', "mama@example.org");
+    await klick(seite, "Senden");
+    await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("Diese Adresse ist schon dabei."));
+    pruefe(true, `${L} Fehler „vorhanden“: Hinweis`);
+    await seite.evaluate(() => { window.__tb.fehler = "zu-viele"; });
+    await klick(seite, "Senden");
+    await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("zu oft"));
+    pruefe(true, `${L} Fehler „zu-viele“: Hinweis`);
+
+    await klick(seite, "Uhrzeit ändern");
+    await seite.fill('#inhalt .tb-felder input[name="name"]', "Lena 7<script>");
+    await klick(seite, "Speichern");
+    pruefe((await text(seite)).includes("Bitte nur Buchstaben, Leerzeichen und Bindestrich.") && (await aufrufe(seite, "tagesbrief_einstellen")).length === 0, `${L} Name mit Ziffern oder Zeichen: Hinweis, kein Befehl`);
+    await seite.fill('#inhalt .tb-felder input[name="name"]', "Anna-Lena Müller ß");
+    await klick(seite, "Speichern");
+    await seite.waitForFunction(() => window.__tb.aufrufe.some((a) => a.name === "tagesbrief_einstellen"));
+    pruefe((await aufrufe(seite, "tagesbrief_einstellen"))[0].args.name === "Anna-Lena Müller ß", `${L} Name mit Umlaut, ß, Bindestrich geht durch`);
     await kontext.close();
   }
 

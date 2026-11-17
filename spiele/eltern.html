@@ -273,6 +273,12 @@ details > summary::-webkit-details-marker { display: none; }
 .tb-vorschau { display: block; width: 100%; height: 64rem; border: var(--ls-kontur) solid var(--ls-linie); border-radius: var(--ls-radius-klein); background: #fff; }
 .tb-leer { padding: 3.2rem 4rem; border: var(--ls-kontur) dashed var(--ls-naht); border-radius: var(--ls-radius-klein); color: var(--ls-tinte-weich); }
 .tb-datenschutz { max-width: 70ch; }
+/* Adressen des Briefs: je Zeile Adresse, Stand und „Entfernen“; wartende Adressen leiser. */
+.tb-adressen { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.6rem; max-width: 90ch; }
+.tb-adresse { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem 2.4rem; padding-bottom: 1.6rem; border-bottom: 0.2rem solid var(--ls-linie); }
+.tb-adresse b { flex: 1 1 36rem; min-width: 0; word-break: break-word; font-weight: 700; }
+.tb-adresse .tb-wartet { color: var(--ls-tinte-weich); }
+.tb-adresse .tb-stand-wort { flex: 0 0 auto; }
 
 /* Schmal (hochkant): Spalten untereinander. */
 @media (max-aspect-ratio: 4/3) {
@@ -1204,6 +1210,12 @@ const TB_ABFRAGE_MS = 10000;
 const TB_STANDARD_UHRZEIT = "18:00";
 const TB_DATENSCHUTZ = "Was Ihr Kind lernt, liegt bis zum Versand auf unserem Server und wird danach gelöscht.";
 
+// Der Dienst nimmt nur Buchstaben (auch Umlaute, ß), Leerzeichen und Bindestrich, höchstens 40 Zeichen; sonst 400.
+const TB_NAME_MUSTER = /^[\p{L} -]{0,40}$/u;
+const TB_NAME_HINWEIS = "Bitte nur Buchstaben, Leerzeichen und Bindestrich.";
+const TB_ADRESSE_MUSTER = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const TB_MAX_ADRESSEN = 4;
+
 function tbFeld(wort, eingabe, zusatz) {
   const l = el("label", null, "tb-feld");
   l.append(wort, eingabe);
@@ -1251,7 +1263,7 @@ async function tagesbrief(spalte) {
     f.setAttribute("aria-label", "Tagesbrief");
     const status = el("p", null, "status");
     status.setAttribute("role", "status");
-    if (st.zustand === "aktiv") await zeichneAktiv(f, status, st);
+    if (st.zustand === "aktiv") await zeichneAktiv(f, status, st, mein);
     else if (st.zustand === "wartet") {
       f.append(el("h3", "Warten auf die Bestätigung"),
         el("p", `Wir haben eine E-Mail an ${st.adresse || "Ihre Adresse"} geschickt. Bitte den Link darin bestätigen.`, "text"),
@@ -1295,7 +1307,8 @@ async function tagesbrief(spalte) {
     const los = knopf("Einrichten", { art: "haupt" });
     los.addEventListener("click", async () => {
       const a = adresse.value.trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(a)) { status.textContent = "Bitte eine gültige E-Mail-Adresse eingeben."; adresse.focus(); return; }
+      if (!TB_ADRESSE_MUSTER.test(a)) { status.textContent = "Bitte eine gültige E-Mail-Adresse eingeben."; adresse.focus(); return; }
+      if (!TB_NAME_MUSTER.test(name.value.trim())) { status.textContent = TB_NAME_HINWEIS; name.focus(); return; }
       try {
         await befehl("tagesbrief_einrichten", { profil: PROFIL, adresse: a, name: name.value.trim(), uhrzeit: uhr.value || TB_STANDARD_UHRZEIT });
       } catch { meldeFehler(status); return; }
@@ -1309,9 +1322,96 @@ async function tagesbrief(spalte) {
     return k;
   }
 
-  async function zeichneAktiv(f, status, st) {
-    f.append(el("h3", "✓ Eingerichtet", "tb-stand"),
-      el("p", `Der Brief geht an ${st.adresse || "Ihre Adresse"}${st.uhrzeit ? ` um ${st.uhrzeit} Uhr` : ""}.`, "text"));
+  async function zeichneAktiv(f, status, st, mein) {
+    const zeile = el("p", `Der Brief kommt${st.uhrzeit ? ` um ${st.uhrzeit} Uhr` : ""} an diese Adressen:`, "text");
+    const liste = el("ul", null, "tb-adressen");
+    f.append(el("h3", "✓ Eingerichtet", "tb-stand"), zeile, liste);
+
+    // Entfernen der letzten bestätigten Adresse beendet den Tagesbrief: erst auf der Seite nachfragen (kein JS-Dialog).
+    const frage = el("div", null, "spalten"); frage.hidden = true;
+    const frageText = el("p", null, "text");
+    const jaEntfernen = knopf("Ja, entfernen", { achtung: true });
+    const dochNichtEntfernen = knopf("Behalten");
+    frage.append(frageText, reihe(jaEntfernen, dochNichtEntfernen));
+    let frageAdresse = "";
+    const schliesseFrage = () => { frage.hidden = true; frageAdresse = ""; };
+
+    const neu = el("div", null, "spalten"); neu.hidden = true;
+    const neuAdresse = tbEingabe("email", "", "neue-adresse");
+    const senden = knopf("Senden", { art: "haupt" });
+    neu.append(tbFeld("Weitere E-Mail-Adresse", neuAdresse, "Sie bekommt zuerst eine Mail mit einem Bestätigungslink."), reihe(senden));
+    const hinzufuegen = knopf("Adresse hinzufügen");
+    const voll = el("p", "Höchstens vier Adressen.", "leise"); voll.hidden = true;
+    hinzufuegen.addEventListener("click", () => { neu.hidden = !neu.hidden; if (!neu.hidden) neuAdresse.focus(); });
+
+    let timer = null;
+    const nochDa = () => aktiv() && mein === lauf;
+
+    async function entferne(adresse) {
+      schliesseFrage();
+      let r;
+      try { r = await befehl("tagesbrief_empfaenger_entfernen", { profil: PROFIL, adresse }); }
+      catch { meldeFehler(status); return; }
+      if (r?.familieGeloescht || r?.zustand) { await aktualisiere(); return; }
+      status.textContent = "Die Adresse wurde entfernt.";
+      await ladeListe();
+    }
+
+    function zeichneListe(eintraege) {
+      const bestaetigt = eintraege.filter((e) => e.bestaetigt).length;
+      liste.replaceChildren(...eintraege.map((e) => {
+        const li = el("li", null, "tb-adresse");
+        const stand = e.bestaetigt ? el("span", "✓ bestätigt", "tb-stand-wort") : el("span", "wartet auf Bestätigung", "tb-stand-wort tb-wartet");
+        const weg = knopf("Entfernen", { achtung: true });
+        weg.setAttribute("groesse", "klein");
+        weg.addEventListener("click", () => {
+          if (e.bestaetigt && bestaetigt === 1) {
+            frageAdresse = e.adresse;
+            frageText.textContent = `Wirklich entfernen? ${e.adresse} ist die letzte bestätigte Adresse. Danach kommen keine Briefe mehr an.`;
+            frage.hidden = false;
+          } else entferne(e.adresse);
+        });
+        li.append(el("b", e.adresse), stand, weg);
+        return li;
+      }));
+      // Eine offene Rückfrage gilt nur, solange ihre Adresse noch die letzte bestätigte ist.
+      const letzte = eintraege.find((e) => e.bestaetigt && bestaetigt === 1);
+      if (frageAdresse && letzte?.adresse !== frageAdresse) schliesseFrage();
+      const maximal = eintraege.length >= TB_MAX_ADRESSEN;
+      hinzufuegen.hidden = maximal; voll.hidden = !maximal;
+      if (maximal) neu.hidden = true;
+    }
+
+    // Die Liste kommt vom Dienst: beim Öffnen und nach jeder Aktion neu, solange eine Adresse wartet alle 10 s.
+    async function ladeListe() {
+      clearTimeout(timer);
+      let r = null;
+      try { r = await befehl("tagesbrief_empfaenger", { profil: PROFIL }); } catch { /* Fallback unten */ }
+      if (!nochDa()) return;
+      if (r?.zustand) { await aktualisiere(); return; }
+      const eintraege = r?.empfaenger ?? (st.adresse ? [{ adresse: st.adresse, bestaetigt: true }] : []);
+      if (r?.uhrzeit) zeile.textContent = `Der Brief kommt um ${r.uhrzeit} Uhr an diese Adressen:`;
+      zeichneListe(eintraege);
+      if (eintraege.some((e) => !e.bestaetigt)) timer = setTimeout(ladeListe, TB_ABFRAGE_MS);
+    }
+
+    jaEntfernen.addEventListener("click", () => entferne(frageAdresse));
+    dochNichtEntfernen.addEventListener("click", schliesseFrage);
+    senden.addEventListener("click", async () => {
+      const a = neuAdresse.value.trim();
+      if (!TB_ADRESSE_MUSTER.test(a)) { status.textContent = "Bitte eine gültige E-Mail-Adresse eingeben."; neuAdresse.focus(); return; }
+      let r;
+      try { r = await befehl("tagesbrief_empfaenger_hinzufuegen", { profil: PROFIL, adresse: a }); }
+      catch { meldeFehler(status); return; }
+      if (r?.zustand) { await aktualisiere(); return; }
+      const meldungen = { voll: "Höchstens vier Adressen.", vorhanden: "Diese Adresse ist schon dabei.", "zu-viele": "Das ging zu oft. Bitte später noch einmal versuchen.", ungueltig: "Bitte eine gültige E-Mail-Adresse eingeben." };
+      if (r?.fehler) status.textContent = meldungen[r.fehler] ?? "Das hat nicht geklappt. Bitte später noch einmal versuchen.";
+      else { status.textContent = `Wir haben eine E-Mail an ${a} geschickt. Bitte den Link darin bestätigen.`; neuAdresse.value = ""; neu.hidden = true; }
+      await ladeListe();
+    });
+    f.append(frage, reihe(hinzufuegen), voll, neu);
+    await ladeListe();
+
     const probe = knopf("Probebrief senden", { symbol: "weiter.svg" });
     probe.addEventListener("click", async () => {
       status.textContent = "Der Probebrief wird geschickt …";
@@ -1331,6 +1431,7 @@ async function tagesbrief(spalte) {
     felder.append(tbFeld("Uhrzeit", uhr), tbFeld("Name des Kindes (optional)", name, "Steht nur im Brief."));
     const speichern = knopf("Speichern", { art: "haupt" });
     speichern.addEventListener("click", async () => {
+      if (!TB_NAME_MUSTER.test(name.value.trim())) { status.textContent = TB_NAME_HINWEIS; name.focus(); return; }
       try {
         await befehl("tagesbrief_einstellen", { profil: PROFIL, name: name.value.trim(), uhrzeit: uhr.value || TB_STANDARD_UHRZEIT });
       } catch { meldeFehler(status); return; }
