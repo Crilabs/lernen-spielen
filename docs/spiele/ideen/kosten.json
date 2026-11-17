@@ -83,5 +83,22 @@
   "thema": [
    "s20"
   ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "ideen",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 12,
+  "ausgabe": 5193,
+  "einheit": "tokens",
+  "menge": 415127,
+  "notiz": "S18, Ideen",
+  "cache_lesen": 345183,
+  "cache_schreiben": 64739,
+  "themen": 1,
+  "thema": [
+   "s18"
+  ]
  }
 ]
