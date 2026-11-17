@@ -9,7 +9,7 @@ globalThis.localStorage = {
   removeItem: (k) => speicher.delete(k),
 };
 globalThis.window = {};
-const { meldeRundenende, meldeGelesen, setzeZurueck, testHaken } = await import("../spiele/tagesbrief/anbindung.js");
+const { meldeRundenende, meldeGelesen, baueVorschauTopf, setzeZurueck, testHaken } = await import("../spiele/tagesbrief/anbindung.js");
 const { gueltigesEreignis } = await import("../dienste/tagesbrief/pruefung.js");
 const { neuerStand, migriereStand } = await import("../spiele/lernsteuerung.js");
 
@@ -200,4 +200,26 @@ test("naechstes trägt das Foto als base64, wenn es eine .brief.jpg gibt", async
   const jpg = new URL(`mit-echten-dingen/${v.foto.replace(/\.webp$/, ".brief.jpg")}`, wurzel);
   assert.equal(daten.foto, existsSync(jpg) ? readFileSync(jpg).toString("base64") : "");
   assert.ok(daten.foto.length > 0);
+});
+
+test("baueVorschauTopf: zuletzt erspielte Themen, laufende Themen und naechstes aus dem Lernstand; Name aus dem Aufruf", async () => {
+  const stand = standDran("neunerreihe");
+  stand.themen.zweierreihe = { z: "kann-ich", stufe: "kopf", e: "", seit: "2026-11-10", k: "2026-11-16", u: "", frei: 0, v: [] };
+  const topf = await baueVorschauTopf(ctx, stand, { heute: HEUTE, name: "Lena" });
+  assert.deepEqual(topf.namen, ["Lena"]);
+  assert.deepEqual(topf.gekonnt.map((g) => g.id), ["zweierreihe"]);
+  assert.deepEqual(topf.dabei.map((d) => d.id), ["neunerreihe"]);
+  assert.deepEqual(topf.gelesen, []);
+  assert.ok(topf.naechstes && topf.naechstes.formen.length > 0);
+});
+
+test("baueVorschauTopf: leerer Lernstand gibt einen Topf ohne Briefwert", async () => {
+  const topf = await baueVorschauTopf(ctx, neuerStand(), { heute: HEUTE });
+  assert.deepEqual([topf.namen, topf.gekonnt, topf.dabei], [[], [], []]);
+});
+
+test("baueVorschauTopf: von Eltern abgehakte Themen zählen nicht als neu gekonnt", async () => {
+  const stand = neuerStand();
+  stand.themen.zweierreihe = { z: "kann-ich", stufe: "kopf", e: "", seit: "2026-11-10", k: "2026-11-16", u: "", frei: 0, v: [], q: "eltern" };
+  assert.deepEqual((await baueVorschauTopf(ctx, stand, { heute: HEUTE })).gekonnt, []);
 });

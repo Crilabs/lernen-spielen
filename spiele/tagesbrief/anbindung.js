@@ -6,6 +6,7 @@ import { befehl as echterBefehl, istApp } from "../kern/dienste.js";
 import { PROFIL, lade, speichere, sofortSpeichern } from "../kern/speicher.js";
 import { protokoll } from "../kern/protokoll.js";
 import { liesAnleitung } from "../rahmen/markdown.js";
+import { gekonnteThemen } from "../lernsteuerung.js";
 import { waehleAnleitung } from "./anleitung.js";
 import { dabeiEreignis, gekonntEreignis, gelesenEreignis, naechstesEreignis } from "./ereignisse.js";
 
@@ -15,6 +16,8 @@ const TB_KEY = "tagesbrief";
 const FOTO_MAX = 60_000;
 /** Gesperrte Anleitungen, die älter sind, werden aus dem Speicher entfernt (die Sperre gilt 14 Tage). */
 const SPERRE_BEHALTEN_TAGE = 30;
+/** So viele erspielte und laufende Themen zeigt die Vorschau höchstens. */
+const MAX_VORSCHAU = 3;
 
 /** @typedef {(name: string, args?: object) => Promise<any>} Befehl */
 /** @typedef {(pfad: string) => Promise<{ ok: boolean, json(): Promise<any>, text(): Promise<string>, arrayBuffer(): Promise<ArrayBuffer> }>} Lader */
@@ -101,6 +104,24 @@ async function baueNaechstes(ctx, stand, { heute, zuletztGeuebt }) {
   const fach = typeof thema?.strang === "string" ? thema.strang : wahl.datei.split("/")[0];
   const foto = await ladeFoto(ctx.echteDinge?.themen?.[wahl.thema]?.foto);
   return naechstesEreignis(wahl, anleitung, fach, foto);
+}
+
+/**
+ * Topf für die Vorschau im Elternbereich: die zuletzt erspielten Themen, die Themen, an denen das Kind dran ist, und
+ * „Als Nächstes“ – alles aus dem aktuellen Lernstand (nichts vom Server, nichts wird gespeichert).
+ * @param {any} ctx Lernplan, Spiele (echteDinge wird bei Bedarf geladen)
+ * @param {any} stand Lernstand
+ * @param {{ heute: string, name?: string }} o
+ * @returns {Promise<import("./brief.js").Topf>}
+ */
+export async function baueVorschauTopf(ctx, stand, { heute, name = "" }) {
+  const c = await mitVerzeichnis(ctx);
+  const gekonnt = gekonnteThemen(c, stand).filter((g) => !g.vonEltern).slice(-MAX_VORSCHAU).reverse()
+    .map((g) => gekonntEreignis(c, g.id)).filter((e) => e !== null);
+  const dran = Object.entries(stand?.themen ?? {}).filter(([, t]) => /** @type {any} */ (t)?.z === "dran").map(([id]) => id);
+  const dabei = dran.slice(0, MAX_VORSCHAU).map((id) => dabeiEreignis(c, id)).filter((e) => e !== null);
+  const naechstes = await baueNaechstes(c, stand, { heute, zuletztGeuebt: "" });
+  return { namen: name ? [name] : [], gekonnt, dabei, gelesen: [], naechstes };
 }
 
 /**

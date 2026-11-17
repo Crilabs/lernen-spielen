@@ -32,7 +32,7 @@ test("Startseite: Karten aus startKarten (uebersicht), Abschnitte je Fach, Vigne
   assert.match(skript, /startKarten\(uebersicht\(ctx, stand\), ctx, stand, heute\)/);
   assert.match(skript, /abschnittHtml\(/);
   assert.match(skript, /spielKarteHtml\(/);
-  assert.match(skript, /echtKarteHtml\(/);
+  assert.doesNotMatch(skript, /echtKarteHtml/);
   assert.match(skript, /vignetteSvg\(/);
   assert.match(html, /id="raster"/);
 });
@@ -49,10 +49,9 @@ test("Startseite: Grundmuster Hügel (Designsprache); kein Kind", () => {
   assert.doesNotMatch(skript, /setzeKind\(/);
 });
 
-test("Startseite: Mit echten Dingen führt zur eigenen Seite; der Titel der Anleitung steht auf der Karte, wenn es sie gibt", () => {
+test("Startseite: keine Karten „Mit echten Dingen“ mehr (die Anleitungen kommen über den Tagesbrief)", () => {
   assert.doesNotMatch(html, /<ls-anregung/);
-  assert.match(skript, /import \{ ladeVerzeichnis, fotoUrl \} from "\.\/rahmen\/echte-dinge\.js";/);
-  assert.match(skript, /a\.querySelector\("b"\)\.textContent = e\.titel/);
+  assert.doesNotMatch(skript, /karte\.echt|echte-dinge\.js|echtBildHtml/);
 });
 
 test("Startseite: Links sprechen ihren Namen einmal je Sitzung und speichern vor dem Wechsel", () => {
@@ -72,7 +71,7 @@ test("Startseite: schreibt den Lernstand nie, keine Balken, keine Zählung, kein
   assert.doesNotMatch(html, /\$\{[^}]*\.(length|size)\}| von \$\{/);
 });
 
-test("Startseite: Spielzeit der Eltern – gesperrt tragen die Spielkarten eine Uhr und zeigen den Hinweis; ausgeblendet fehlen sie; Mit echten Dingen, Fächer und Regal bleiben", () => {
+test("Startseite: Spielzeit der Eltern – gesperrt tragen die Spielkarten eine Uhr und zeigen den Hinweis; ausgeblendet fehlen sie; Fächer und Regal bleiben", () => {
   assert.match(skript, /import \{ spielzeitLage \} from "\.\/rahmen\/spielzeit\.js";/);
   assert.match(skript, /const spielFrei = !zeit \|\| zeit\.lage\.frei;/);
   assert.match(skript, /const spieleZeigen = spielFrei \|\| zeit\.lage\.grund !== "aus";/);

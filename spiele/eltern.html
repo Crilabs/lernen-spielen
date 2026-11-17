@@ -259,6 +259,21 @@ details > summary::-webkit-details-marker { display: none; }
 .protokoll { max-height: 60rem; overflow-y: auto; font-size: 2.1rem; display: flex; flex-direction: column; gap: 0.8rem; }
 .protokoll li { word-break: break-word; border-bottom: 0.2rem solid var(--ls-linie); padding-bottom: 0.8rem; }
 
+/* --- Tagesbrief ---------------------------------------------------------------------------------- */
+/* Eine Fläche je Zustand (aus, wartet, aktiv, abbestellt, gesperrt); Felder wie die Knöpfe: Tinte-Kontur, 7,6 rem hoch. */
+.tb-felder { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.4rem; max-width: 70ch; }
+.tb-feld { display: flex; flex-direction: column; gap: 0.8rem; font-weight: 700; }
+.tb-feld .leise { font-weight: 400; font-size: 2.1rem; }
+.tb-feld input {
+  box-sizing: border-box; min-height: 7.6rem; padding: 0 2.4rem; font: inherit; font-weight: 400; color: var(--ls-tinte);
+  background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
+}
+.tb-feld input[type="time"] { max-width: 24rem; }
+.tb-stand { font-size: 3.4rem; font-weight: 700; line-height: 1.2; }
+.tb-vorschau { display: block; width: 100%; height: 64rem; border: var(--ls-kontur) solid var(--ls-linie); border-radius: var(--ls-radius-klein); background: #fff; }
+.tb-leer { padding: 3.2rem 4rem; border: var(--ls-kontur) dashed var(--ls-naht); border-radius: var(--ls-radius-klein); color: var(--ls-tinte-weich); }
+.tb-datenschutz { max-width: 70ch; }
+
 /* Schmal (hochkant): Spalten untereinander. */
 @media (max-aspect-ratio: 4/3) {
   .stand, .grenze { grid-template-columns: 1fr; }
@@ -284,6 +299,7 @@ details > summary::-webkit-details-marker { display: none; }
     <ls-knopf data-tab="lernstand" symbol="lernstand.svg" wort="Lernplan" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="sachthemen" symbol="themen.svg" wort="Sachthemen" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="spielzeit" symbol="uhr.svg" wort="Spielzeit" groesse="klein" stumm></ls-knopf>
+    <ls-knopf data-tab="tagesbrief" symbol="inhalt.svg" wort="Tagesbrief" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="geraet" symbol="update.svg" wort="Updates" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="hinweise" symbol="hilfe.svg" wort="Hinweise" groesse="klein" stumm></ls-knopf>
     <ls-knopf data-tab="sicherheit" symbol="schloss.svg" wort="Sicherheit" groesse="klein" stumm></ls-knopf>
@@ -303,6 +319,10 @@ import { regeln, aktuell, lage as spielLage, gibZugabe, ZUGABE_MINUTEN } from ".
 import { STAND as SPIELZEIT_STAND } from "./rahmen/spielzeit.js";
 import { regeln as buchRegeln, aktuell as buchAktuell, zahlen as buchZahlen, gibZugabe as buchZugabe, HOECHSTENS as BUECHER_HOECHSTENS } from "./kern/buecherzeit.js";
 import { STAND as BUECHER_STAND, EINSTELLUNG as BUECHER_EINSTELLUNG } from "./rahmen/buecherzeit.js";
+import { befehl, istApp } from "./kern/dienste.js";
+import { PROFIL } from "./kern/speicher.js";
+import { baueVorschauTopf, setzeZurueck as brieflaufFreigeben } from "./tagesbrief/anbindung.js";
+import { setzeBrief } from "./tagesbrief/brief.js";
 import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer, spieleFuer, alsNaechstes }
   from "./lernsteuerung.js";
 import { FACH, FACH_SYMBOLE, bild } from "./rahmen/stil.js";
@@ -419,7 +439,7 @@ function ruheNeu() {
 for (const typ of ["pointerdown", "keydown"]) document.addEventListener(typ, ruheNeu, true);
 ruheNeu();
 
-const ANSICHTEN = { lernstand, sachthemen, spielzeit, geraet, hinweise, sicherheit };
+const ANSICHTEN = { lernstand, sachthemen, spielzeit, tagesbrief, geraet, hinweise, sicherheit };
 function waehle(name, hinweis) {
   tab = name;
   document.querySelectorAll("[data-tab]").forEach((b) => {
@@ -1175,6 +1195,167 @@ async function spielzeit(spalte) {
   }
   zeichne();
   spalte.append(standFlaeche, tageFlaeche, grenzenFlaeche, uhrFlaeche, ausFlaeche, buecherFlaeche, status);
+}
+
+// ---------- Tagesbrief ----------
+// Spec docs/superpowers/specs/2026-11-17-tagesbrief-design.md („In der App“). Die Befehle liegen in src-tauri (tagesbrief.rs);
+// die Seite sieht den Geräteschlüssel nie. Wartet die Einrichtung auf den Link in der Mail, fragt die Seite alle 10 s nach.
+const TB_ABFRAGE_MS = 10000;
+const TB_STANDARD_UHRZEIT = "18:00";
+const TB_DATENSCHUTZ = "Was Ihr Kind lernt, liegt bis zum Versand auf unserem Server und wird danach gelöscht.";
+
+function tbFeld(wort, eingabe, zusatz) {
+  const l = el("label", null, "tb-feld");
+  l.append(wort, eingabe);
+  if (zusatz) l.append(el("span", zusatz, "leise"));
+  return l;
+}
+function tbEingabe(typ, wert, name) {
+  const i = document.createElement("input");
+  i.type = typ; i.value = wert; i.name = name;
+  if (typ === "email") { i.autocomplete = "email"; i.inputMode = "email"; i.setAttribute("autocapitalize", "off"); }
+  return i;
+}
+
+async function tagesbrief(spalte) {
+  spalte.appendChild(el("h2", "Tagesbrief"));
+  spalte.appendChild(el("p", "Einmal am Tag kommt eine E-Mail: was Ihr Kind neu kann, woran es gerade übt und was Sie als Nächstes zusammen mit echten Dingen ausprobieren können.", "vorspann"));
+  if (!istApp()) {
+    const f = el("section", null, "flaeche");
+    f.append(el("p", "Den Tagesbrief gibt es nur in der installierten App.", "leise"));
+    spalte.appendChild(f);
+    return;
+  }
+  const kasten = el("div", null, "spalte");
+  spalte.appendChild(kasten);
+  spalte.appendChild(el("p", TB_DATENSCHUTZ, "leise tb-datenschutz"));
+
+  let abfrage = null;
+  let lauf = 0;
+  const aktiv = () => tab === "tagesbrief" && kasten.isConnected;
+  const meldeFehler = (status) => { status.textContent = "Das hat nicht geklappt. Bitte später noch einmal versuchen."; };
+
+  async function aktualisiere(vorgabe) {
+    clearTimeout(abfrage);
+    const mein = ++lauf;
+    let st = vorgabe;
+    try { st ??= await befehl("tagesbrief_status", { profil: PROFIL }); }
+    catch { st = { zustand: "aus" }; }
+    if (!aktiv() || mein !== lauf) return;
+    await zeichne(st, mein);
+    if (st.zustand === "wartet" && mein === lauf) abfrage = setTimeout(() => { if (aktiv()) aktualisiere(); }, TB_ABFRAGE_MS);
+  }
+
+  async function zeichne(st, mein) {
+    const f = el("section", null, "flaeche");
+    f.setAttribute("aria-label", "Tagesbrief");
+    const status = el("p", null, "status");
+    status.setAttribute("role", "status");
+    if (st.zustand === "aktiv") await zeichneAktiv(f, status, st);
+    else if (st.zustand === "wartet") {
+      f.append(el("h3", "Warten auf die Bestätigung"),
+        el("p", `Wir haben eine E-Mail an ${st.adresse || "Ihre Adresse"} geschickt. Bitte den Link darin bestätigen.`, "text"),
+        el("p", "Hier erscheint die Bestätigung von selbst.", "leise"));
+    } else if (st.zustand === "abbestellt") {
+      f.append(el("h3", "Abbestellt"), el("p", "Es werden keine Briefe mehr geschickt und nichts mehr gesammelt.", "text"));
+      const knopfNeu = knopf("Neu einrichten", { art: "haupt" });
+      const platz = el("div", null, "spalten");
+      knopfNeu.addEventListener("click", () => {
+        knopfNeu.hidden = true;
+        platz.append(formularEinrichten(status, brieflaufFreigeben));
+      });
+      platz.append(reihe(knopfNeu));
+      f.append(platz, status);
+    } else if (st.zustand === "gesperrt") {
+      f.append(el("h3", "Gesperrt"), el("p", st.hinweis || "Der Tagesbrief ist für dieses Gerät gesperrt.", "text"), status);
+    } else {
+      f.append(el("h3", "Einrichten"));
+      if (st.hinweis) f.append(el("p", "Die Verbindung war nicht mehr gültig. Bitte noch einmal einrichten.", "text"));
+      f.append(formularEinrichten(status), status);
+    }
+    if (aktiv() && mein === lauf) kasten.replaceChildren(f);
+  }
+
+  /** Formular „Einrichten“; nachErfolg läuft, wenn der Dienst die Anfrage angenommen hat. */
+  function formularEinrichten(status, nachErfolg = () => {}) {
+    const adresse = tbEingabe("email", "", "adresse");
+    const name = tbEingabe("text", daten.tagesbriefName || "", "name");
+    const uhr = tbEingabe("time", TB_STANDARD_UHRZEIT, "uhrzeit");
+    const felder = el("div", null, "tb-felder");
+    felder.append(tbFeld("E-Mail-Adresse", adresse), tbFeld("Name des Kindes (optional)", name, "Steht nur im Brief."),
+      tbFeld("Uhrzeit", uhr, "Dann kommt der Brief, wenn es etwas Neues gibt."));
+    const los = knopf("Einrichten", { art: "haupt" });
+    los.addEventListener("click", async () => {
+      const a = adresse.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(a)) { status.textContent = "Bitte eine gültige E-Mail-Adresse eingeben."; adresse.focus(); return; }
+      try {
+        await befehl("tagesbrief_einrichten", { profil: PROFIL, adresse: a, name: name.value.trim(), uhrzeit: uhr.value || TB_STANDARD_UHRZEIT });
+      } catch { meldeFehler(status); return; }
+      daten.tagesbriefName = name.value.trim();
+      speichere("eltern", daten);
+      nachErfolg();
+      await aktualisiere();
+    });
+    const k = el("div", null, "spalten");
+    k.append(felder, reihe(los));
+    return k;
+  }
+
+  async function zeichneAktiv(f, status, st) {
+    f.append(el("h3", "✓ Eingerichtet", "tb-stand"),
+      el("p", `Der Brief geht an ${st.adresse || "Ihre Adresse"}${st.uhrzeit ? ` um ${st.uhrzeit} Uhr` : ""}.`, "text"));
+    const probe = knopf("Probebrief senden", { symbol: "weiter.svg" });
+    probe.addEventListener("click", async () => {
+      status.textContent = "Der Probebrief wird geschickt …";
+      try { await befehl("tagesbrief_probebrief", { profil: PROFIL }); status.textContent = "Der Probebrief ist unterwegs."; }
+      catch { meldeFehler(status); }
+    });
+    const zeit = knopf("Uhrzeit ändern", { symbol: "uhr.svg" });
+    const abbestellen = knopf("Abbestellen", { achtung: true });
+    const aendern = el("div", null, "spalten"); aendern.hidden = true;
+    zeit.addEventListener("click", () => {
+      aendern.hidden = !aendern.hidden;
+      if (!aendern.hidden) aendern.querySelector("input").focus();
+    });
+    const name = tbEingabe("text", daten.tagesbriefName || "", "name");
+    const uhr = tbEingabe("time", st.uhrzeit || TB_STANDARD_UHRZEIT, "uhrzeit");
+    const felder = el("div", null, "tb-felder");
+    felder.append(tbFeld("Uhrzeit", uhr), tbFeld("Name des Kindes (optional)", name, "Steht nur im Brief."));
+    const speichern = knopf("Speichern", { art: "haupt" });
+    speichern.addEventListener("click", async () => {
+      try {
+        await befehl("tagesbrief_einstellen", { profil: PROFIL, name: name.value.trim(), uhrzeit: uhr.value || TB_STANDARD_UHRZEIT });
+      } catch { meldeFehler(status); return; }
+      daten.tagesbriefName = name.value.trim();
+      speichere("eltern", daten);
+      await aktualisiere();
+    });
+    aendern.append(felder, reihe(speichern));
+    abbestellen.addEventListener("click", async () => {
+      try { await befehl("tagesbrief_abmelden", { profil: PROFIL }); }
+      catch { meldeFehler(status); return; }
+      await aktualisiere();
+    });
+    f.append(reihe(probe, zeit, abbestellen), aendern, status);
+    // Vorschau aus dem aktuellen Lernstand (nichts vom Server)
+    const vor = el("div", null, "spalten");
+    vor.append(el("h4", "Vorschau: So sähe der Brief heute aus"));
+    f.append(vor);
+    try {
+      const ctx = await ladeCtx();
+      const stand = await ladeLernstand(ctx, heuteTag());
+      const topf = await baueVorschauTopf(ctx, stand, { heute: heuteTag(), name: daten.tagesbriefName || "" });
+      const brief = setzeBrief(topf, { datum: new Date(), abmeldeLink: "#", datenschutzLink: "#" });
+      if (brief) {
+        const rahmen = document.createElement("iframe");
+        rahmen.className = "tb-vorschau"; rahmen.title = "Vorschau des Briefs"; rahmen.setAttribute("sandbox", "");
+        rahmen.srcdoc = brief.html;
+        vor.append(rahmen);
+      } else vor.append(el("p", "Heute gibt es noch nichts Neues.", "tb-leer"));
+    } catch { vor.append(el("p", "Die Vorschau war nicht zu laden.", "tb-leer")); }
+  }
+
+  await aktualisiere();
 }
 
 // ---------- Updates (Tab-Id geraet) ----------
