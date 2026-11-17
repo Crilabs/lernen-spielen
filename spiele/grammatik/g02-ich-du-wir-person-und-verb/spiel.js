@@ -1,6 +1,6 @@
 // G02 Ich, du, wir (Idee: docs/spiele/grammatik/g02-ich-du-wir-person-und-verb.md). Das Kind sitzt mit Kofi, Lena, Timo und
 // Ela am Maltisch (Ich-Sicht). Auf seinem Platz liegt ein Wortstreifen mit einer Lücke: „du mal▢“, „▢ malen.“ oder
-// „Ela mal[t]“ (Grundform: die Endung der gebeugten Form liegt in der Lücke). Es zieht ein Plättchen in die Lücke (Antippen von Plättchen und Lücke geht auch); auf der Stufe kopf
+// „Ela mal[t]“ Es zieht ein Plättchen in die Lücke (Antippen von Plättchen und Lücke geht auch); auf der Stufe kopf
 // schreibt es das Wort mit der Tastatur. Passt es, tun genau die Gemeinten es auf dem gemeinsamen Bogen: ich → die eigene
 // Hand, du → Kofi (oder Lena), er → Timo, sie → Ela, wir → alle, ihr → Kofi und Lena. Passt es nicht, heben die den Stift,
 // zu denen die Form gehört, und das Plättchen gleitet zurück; nichts wird zurückgesetzt.
@@ -32,7 +32,7 @@ import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
 import { becherSvg, kisteSvg } from "./raum.js";
 import { markeSvg, stiftSvg, kaeferSvg, handSvg, MARKEN_FARBEN, HAUTTOENE } from "./marken.js";
 import {
-  aufgabeAus, FUERWOERTER, BOGEN_PLAETZE, MAX_AUF_EINMAL, passt, richtigesPlaettchen, personDerAntwort, wirkende, plaettchenFuer, ersteWort, probeFuer,
+  aufgabeAus, FUERWOERTER, BOGEN_PLAETZE, MAX_AUF_EINMAL, passt, richtigesPlaettchen, personDerAntwort, wirkende, plaettchenFuer, probeFuer,
   hebenStift, tippeBuchstabe, naechsterBuchstabe, tastenFuer, bildWechsel, bogenReicht, platzFuer, naechsteFreude, witz, akkordTon,
 } from "./logik.js";
 
@@ -57,7 +57,7 @@ const kaertchen = $("kaertchen");
 const SPIEL_ID = leiste.getAttribute("spiel");
 
 /** Aufgabenarten (gilt nur, solange das Spiel nicht in spiele.json steht; dort steht dasselbe). */
-const ARTEN = [{ art: "verbform", ziele: ["endung", "pronomen", "grundform"], stufen: ["material", "vorstellung", "kopf"] }];
+const ARTEN = [{ art: "verbform", ziele: ["endung", "pronomen"], stufen: ["material", "vorstellung", "kopf"] }];
 
 /** Die Folge einer Lösung steht nach der Wirkung noch so lange, dann kommt die nächste Aufgabe (Tippen überspringt). */
 const NACH_WIRKUNG_MS = 80;
@@ -82,7 +82,7 @@ const erzaehler = {
   /** Die Lösung als Satz, zugleich die Wirkung. @param {any} a @param {string} antwort */
   richtig: (a, antwort) => {
     const person = personDerAntwort(a, antwort);
-    const satz = a.ziel === "grundform" ? TEXTE?.richtigGrundform?.[a.verb] : TEXTE?.richtig?.[`${a.verb}:${person}`];
+    const satz = TEXTE?.richtig?.[`${a.verb}:${person}`];
     return satz ? blase.sage(satz) : Promise.resolve("still");
   },
   /** Hilfe 1, die Hörprobe: eine der Formen im selben Ton. @param {any} a @param {number} i */
@@ -117,16 +117,14 @@ const einleitung = {
   los: (/** @type {any} */ o) => blase.sage("Jetzt geht es los.", o),
   // kleine Einführungen für ein neues Ziel (Regeln §8: beim ersten Mal tippt das Kind das Neue selbst)
   fehlt: (/** @type {any} */ o) => blase.sage("Jetzt fehlt, wer es tut.", o),
-  endeDa: (/** @type {any} */ o) => blase.sage("Am Verb hängt schon ein Ende.", o),
-  faellt: (/** @type {any} */ o) => blase.sage("Das alte Ende fällt ab.", o),
 };
 
 /** Elternansicht (?eltern): beschreibend, von Stärken aus, kein Vergleich (3.3). @param {HTMLElement} feld */
 function fuelleEltern(feld) {
   feld.innerHTML = `<p>Ihr Kind sitzt mit Kofi, Lena, Timo und Ela am Maltisch. Auf seinem Platz liegt ein Wortstreifen mit
-    einer Lücke, etwa „du mal▢“. Es zieht eine Endung (-e, -st, -t, -en) in die Lücke, setzt ein Pronomen (ich, du, er, sie,
-    wir, ihr) vor das Verb oder legt auf eine gebeugte Form (du malst) die Endung -en: die Grundform. Passt es, malen, kleben oder bauen genau die Gemeinten auf dem
-    gemeinsamen Bogen: bei „ich“ die eigene Hand, bei „du“ Kofi gegenüber. Die Grundform lässt niemanden handeln. Passt es
+    einer Lücke, etwa „du mal▢“. Es zieht eine Endung (-e, -st, -t, -en) in die Lücke oder setzt ein Pronomen (ich, du, er, sie,
+    wir, ihr) vor das Verb. Passt es, malen, kleben oder bauen genau die Gemeinten auf dem
+    gemeinsamen Bogen: bei „ich“ die eigene Hand, bei „du“ Kofi gegenüber. Passt es
     nicht, heben diejenigen den Stift, zu denen die gelegte Endung gehört, und das Plättchen gleitet zurück. So erlebt Ihr Kind, dass die Endung des Verbs von der
     Person abhängt.</p>
     <p>Als Hilfe spricht der Erzähler die Formen im selben Ton, danach dreht Kofi ein Kärtchen mit der Lösung um. Welche
@@ -314,12 +312,8 @@ handRechts.style.transition = wenigBewegung() ? "" : "transform 0.22s ease-out";
 $("becher").innerHTML = becherSvg();
 $("kiste").innerHTML = kisteSvg();
 
-/** Wo ein Ding startet, wenn `wer` es auf den Bogen legt (Hand der Figur, die eigene Hand oder bei der Grundform die Lücke). @param {string} wer @param {number} k Kantenlänge */
+/** Wo ein Ding startet, wenn `wer` es auf den Bogen legt (Hand der Figur oder die eigene Hand). @param {string} wer @param {number} k Kantenlänge */
 function handRect(wer, k) {
-  if (wer === "wort") {
-    const r = luecke.getBoundingClientRect();
-    return new DOMRect(r.left + r.width / 2 - k / 2, r.top - k * 0.6, k, k);
-  }
   if (wer === "ich") {
     const r = handRechts.getBoundingClientRect();
     return new DOMRect(r.left + r.width / 2 - k / 2, r.top + r.height * 0.1 - k / 2, k, k);
@@ -402,7 +396,7 @@ function baueTeil(id, text, wert) {
   ablage.insertBefore(p, tastatur);
   plaettchen[id] = p;
 }
-for (const e of ["e", "st", "t", "en", "n"]) baueTeil(`e-${e}`, `-${e}`, e);
+for (const e of ["e", "st", "t", "en"]) baueTeil(`e-${e}`, `-${e}`, e);
 for (const f of FUERWOERTER) baueTeil(`f-${f}`, f, f);
 /** Die Plättchen, die zu einer Aufgabe gehören (Endung oder Fürwort). @param {any} a */
 const plaettchenVon = (a) => (a.ziel === "pronomen" ? FUERWOERTER.map((f) => ({ wert: f, el: plaettchen[`f-${f}`] })) : plaettchenFuer(a).map((e) => ({ wert: e, el: plaettchen[`e-${e}`] })));
@@ -460,36 +454,18 @@ function legeStreifen(a, stufe) {
   luecke.className = "luecke";
   streifen.replaceChildren();
   const kopf = stufe === "kopf";
+  // Der Wortstreifen ist ein Papierstück auf dem Holz; die Lücke ist sein abgeschnittenes Ende (Kerbe mit Naht), kein Kasten.
+  const papier = (/** @type {Node[]} */ ...teile) => { const p = neu("span", "papier"); p.append(...teile); return p; };
   if (a.ziel === "endung") {
-    streifen.append(wortEl(a.pronomen));
     if (kopf) {
       const huelle = neu("span", "wort", `<ls-wortart art="verb"></ls-wortart>`);
       huelle.append(luecke);
-      streifen.append(huelle);
-    } else {
-      const paar = neu("span", "paar");
-      paar.append(wortEl(a.stamm, true), luecke);
-      streifen.append(paar);
-    }
-  } else if (a.ziel === "pronomen") {
-    streifen.append(luecke, wortEl(`${a.form}.`, true));
-  } else if (kopf) {
-    // Grundform schreiben: die gebeugte Form steht da, das Kind schreibt das Verb daneben
-    streifen.append(neu("span", "wort", `<b>${esc(ersteWort(a))} ${esc(a.form)}.</b>`));
-    const huelle = neu("span", "wort", `<ls-wortart art="verb"></ls-wortart>`);
-    huelle.append(luecke);
-    streifen.append(huelle);
+      streifen.append(papier(wortEl(a.pronomen)), huelle);
+    } else streifen.append(papier(wortEl(a.pronomen), wortEl(a.stamm, true)), luecke);
   } else {
-    // Grundform legen: die gebeugte Form steht da, ihre Endung liegt in der Lücke; die Endung des Verbs fällt ab, sobald das
-    // richtige Plättchen darauf liegt (der Stamm ist nicht vorgeschnitten, es gibt keinen zweiten Streifen).
-    streifen.append(wortEl(ersteWort(a)));
-    const paar = neu("span", "paar");
-    luecke.classList.add("belegt");
-    luecke.append(neu("span", "alt", esc(a.form.slice(a.stamm.length))));
-    paar.append(wortEl(a.stamm, true), luecke);
-    streifen.append(paar);
+    streifen.append(luecke, papier(wortEl(`${a.form}.`, true)));
   }
-  streifen.setAttribute("aria-label", `Lücke ${a.ziel === "pronomen" ? a.form : a.ziel === "grundform" ? `${ersteWort(a)} ${a.form}` : `${a.pronomen} ${a.stamm}`}`);
+  streifen.setAttribute("aria-label", `Lücke ${a.ziel === "pronomen" ? a.form : `${a.pronomen} ${a.stamm}`}`);
 
   // Ablage: Plättchen oder (kopf) die Tastatur
   for (const p of Object.values(plaettchen)) {
@@ -561,8 +537,7 @@ const eingerastetEl = (text) => neu("span", "eingerastet", esc(text));
  */
 async function wirkungRichtig(a, antwort, { freude = true } = {}) {
   const wer = wirkende(a, antwort);
-  // Die Grundform lässt niemanden handeln: das Werkzeug des Verbs legt sich von selbst an den Bogen.
-  const traeger = a.ziel === "grundform" ? ["wort"] : wer;
+  const traeger = wer;
   const k = 12.6 * remPx();
   /** @type {HTMLElement[]} */
   const klone = [];
@@ -592,12 +567,7 @@ async function wirkungRichtig(a, antwort, { freude = true } = {}) {
 
   // 1. Plopp: das Plättchen rastet in der Lücke ein (kopf: das Wort steht schon da).
   if (B.stufe !== "kopf") {
-    // Grundform: die alte Endung fällt ab, das neue Plättchen liegt an ihrer Stelle
-    const alt = /** @type {HTMLElement | null} */ (luecke.querySelector(".alt"));
-    if (alt) {
-      alt.style.position = "absolute";
-      bewege(alt, [{ transform: "translateY(0) rotate(0deg)", opacity: 1 }, { transform: "translateY(5rem) rotate(16deg)", opacity: 0 }], 380, { opacity: "0" }, { easing: "ease-in" });
-    }
+    luecke.classList.add("voll");
     luecke.append(eingerastetEl(antwort));
     bewege(/** @type {HTMLElement} */ (luecke.lastElementChild), [{ transform: "scale(0.9)" }, { transform: "scale(1.1)", offset: 0.55 }, { transform: "scale(1)" }], 220);
   }
@@ -610,7 +580,7 @@ async function wirkungRichtig(a, antwort, { freude = true } = {}) {
   const flug = ziel.map(async (z, i) => {
     await warte(i * 90);
     if (aus) return;
-    if (z.wer !== "wort") hebe(z.wer, true);
+    hebe(z.wer, true);
     const von = handRect(z.wer, k);
     const nach = z.marke.getBoundingClientRect();
     const farbe = z.marke.dataset.farbe ?? MARKEN_FARBEN[0];
@@ -629,7 +599,7 @@ async function wirkungRichtig(a, antwort, { freude = true } = {}) {
     // malen: der Strich entsteht, sonst setzt das Ding auf (Stauchen, dann zurück)
     if (a.verb === "malen") bewege(z.marke, [{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0 0 0)" }], 260, { clipPath: "" }, { easing: "ease-out" });
     else bewege(z.marke, [{ transform: "scale(0.7)" }, { transform: "scale(1.12)", offset: 0.55 }, { transform: "scale(1)" }], 220);
-    if (z.wer !== "wort") hebe(z.wer, false);
+    hebe(z.wer, false);
   });
   await Promise.all(flug);
   if (aus) return;
@@ -795,7 +765,7 @@ function stelleAufgabe(aufgabe, melde) {
       eingabe = r.eingabe;
       if (r.fertig) {
         luecke.textContent = eingabe;
-        const endung = a.ziel === "pronomen" ? eingabe : a.ziel === "grundform" ? a.endung : eingabe.slice(a.stamm.length);
+        const endung = a.ziel === "pronomen" ? eingabe : eingabe.slice(a.stamm.length);
         loese(endung);
         return;
       }
@@ -959,7 +929,7 @@ async function bereiteAufgabe(aufgabe) {
 // EINFÜHRUNG im echten Spielbild (docs/spielbau.md §8, Idee §6)
 // =====================================================================================================
 // Eine kleine Geschichte: die Runde, die Hände, der Streifen, die Lücke, die Ablage – je mit dem Sonnenring; Timo zieht
-// „-t“ an „er mal“; dann zieht das Kind selbst „-st“ an „du mal“. Für Fürwörter und Grundform kommt danach nur das Neue
+// „-t“ an „er mal“; dann zieht das Kind selbst „-st“ an „du mal“. Für Fürwörter kommt danach nur das Neue
 // dazu (je ein Zug des Kindes). Nicht gebucht.
 
 /** Die Einführung: Sätze, Hilfe und Zug für den Prüfstand (rahmen/einfuehrung-lauf.js). */
@@ -991,7 +961,7 @@ async function kindZieht(key, wert, satz) {
 }
 
 /**
- * Die Einführung im echten Spielbild: immer die ganze Geschichte, für „pronomen“ und „grundform“ danach das Neue. Mit `r`
+ * Die Einführung im echten Spielbild: immer die ganze Geschichte, für „pronomen“ danach das Neue. Mit `r`
  * gilt sie danach als gesehen, und die Rundenzeit beginnt.
  * @param {{ einfuehrungGesehen(): void, beginneZeit(): void } | undefined} r @param {string} ziel
  */
@@ -1035,9 +1005,6 @@ function einfuehrung(r, ziel = "endung") {
         await satz(e.nochmal);
         if (ziel === "pronomen") {
           await kindZieht("verbform:pronomen:malen:sie-pl", "sie", e.fehlt);
-        } else if (ziel === "grundform") {
-          await kindZieht("verbform:grundform:malen:sie", "en", e.endeDa);
-          await satz(e.faellt);
         } else {
           await satz(e.lernen);
         }

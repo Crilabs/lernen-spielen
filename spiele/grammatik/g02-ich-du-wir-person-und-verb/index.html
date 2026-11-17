@@ -6,8 +6,8 @@
 <title>Ich, du, wir</title>
 <!-- G02 Ich, du, wir (Idee docs/spiele/grammatik/g02-ich-du-wir-person-und-verb.md). Ich-Sicht am Maltisch (raum.js): hinten
      die Wand, davor die Runde hinter dem Tisch (Kofi und Lena schauen das Kind an, Timo und Ela über ihr Papier), der Tisch
-     liegt über ihren Beinen. Auf dem Tisch der Papierbogen, unten der eigene Platz: die Matte mit dem Wortstreifen und der
-     Ablage (Endungen oder Fürwörter, auf der Stufe kopf die Tastatur), links und rechts daneben die eigenen Hände. Leiste,
+     liegt über ihren Beinen. Auf dem Tisch der Papierbogen, unten der eigene Platz: Wortstreifen und Plättchen liegen direkt auf dem Holz
+     (kein Kasten, keine Matte) (Endungen oder Fürwörter, auf der Stufe kopf die Tastatur), links und rechts daneben die eigenen Hände. Leiste,
      Blase, Hilfe und Pause an ihren festen Plätzen. -->
 <link rel="stylesheet" href="../../rahmen/seite.css">
 <style>
@@ -37,13 +37,12 @@
   .figur.timo { --x: 30rem; }
   .figur.ela { --x: 70rem; }
 
-  /* Der Papierbogen auf dem Tisch: flach, das Hellste auf der Platte; darauf wachsen die Striche, Sterne und Klötze. */
+  /* Der Papierbogen liegt flach auf dem Holz: ein Blatt mit eigener Kante, ohne Rahmen und ohne Naht; darauf wachsen die Striche, Sterne und Klötze. */
   .bogen {
     position: absolute; left: 50%; top: 48.5rem; width: var(--bogen-b); height: 27.4rem; margin-left: calc(var(--bogen-b) / -2);
-    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
-    transform-origin: 0 50%; z-index: 1;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 0.8rem;
+    transform: rotate(-0.4deg); transform-origin: 0 50%; z-index: 1;
   }
-  .bogen::before { content: ""; position: absolute; inset: 1rem; border: 0.25rem dashed var(--ls-naht); border-radius: 1rem; pointer-events: none; }
   .marke { position: absolute; width: 12.6rem; height: 12.6rem; margin: -6.3rem 0 0 -6.3rem; pointer-events: none; }
   .marke svg { width: 100%; height: 100%; display: block; overflow: visible; }
 
@@ -64,41 +63,42 @@
   .kaertchen .hinten { transform: rotateY(180deg); background: var(--ls-nebel); }
   .kaertchen .vorn::after { content: ""; width: 7rem; height: 2.4rem; border-bottom: 0.5rem solid var(--ls-tinte-weich); border-radius: 0 0 50% 50%; }
 
-  /* Die eigenen Hände: Ärmel und Hand rechts und links von der Matte, kommen von unten ins Bild. */
+  /* Die eigenen Hände: Ärmel und Hand rechts und links vom Platz, kommen von unten ins Bild. */
   .hand { position: absolute; bottom: -2rem; width: 16rem; height: 30rem; z-index: 5; pointer-events: none; transform-origin: 50% 100%; }
   .hand.links { left: 17rem; }
   .hand.rechts { right: 17rem; }
   .hand svg { width: 100%; height: 100%; display: block; overflow: visible; }
 
-  /* Die Matte (Lernfeld, das Hellste): oben der Wortstreifen, darunter die Ablage. */
-  .matte {
-    position: absolute; left: 36rem; right: 36rem; top: 76.5rem; height: 28.5rem; z-index: 4; padding: 1.8rem 3rem 1.6rem;
-    display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1.2rem;
+  /* Der eigene Platz: keine Matte, kein Kasten. Wortstreifen und Plättchen liegen unmittelbar auf dem Holz. */
+  .platz {
+    position: absolute; left: 36rem; right: 36rem; top: 78rem; height: 28rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 3.4rem;
   }
-  .matte::before { inset: 0.9rem; }
   .streifen {
-    position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: center; gap: 1.4rem 2.4rem; flex-wrap: nowrap;
-    min-height: 13.6rem; padding: 1.8rem 3rem 0.8rem; background: var(--ls-nebel); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
-    font-weight: 700; font-size: 6.6rem; line-height: 1; color: var(--ls-tinte); white-space: nowrap;
+    position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 0;
+    min-height: 13rem; font-weight: 700; font-size: 6.6rem; line-height: 1; color: var(--ls-tinte); white-space: nowrap;
+  }
+  /* Das Papierstück des Streifens (D2): sein eigener Rand ist der Rand. */
+  .streifen .papier {
+    display: inline-flex; align-items: flex-end; gap: 2.4rem; padding: 1.8rem 3rem 0.8rem; min-height: 13rem;
+    background: var(--ls-nebel); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
   }
   .streifen .wort { display: inline-flex; flex-direction: column; align-items: center; gap: 0.4rem; }
   .streifen .wort ls-wortart { height: 3.6rem; }
   .streifen .wort b { font-weight: 700; line-height: 1; }
-  .streifen .paar { display: inline-flex; align-items: flex-end; gap: 0.4rem; }
-  .streifen .rest { padding-bottom: 0.3rem; }
+  /* Die Lücke ist das abgeschnittene Ende des Streifens: eine Kerbe mit gestrichelter Naht, kein Feld mit eigenem Grund. */
   .luecke {
-    position: relative; min-width: 14rem; height: 9.6rem; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 1rem;
-    border: 0.5rem dashed var(--ls-tinte-weich); border-radius: var(--ls-radius-klein); background: var(--ls-papier);
+    position: relative; min-width: 14rem; height: 13rem; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 1.4rem;
+    border: 0.5rem dashed var(--ls-tinte-weich); border-radius: var(--ls-radius-klein); background: transparent;
     font-weight: 700; font-size: 6.6rem; line-height: 1;
   }
   .luecke.markiert { border-style: solid; }
-  /* Grundform: in der Lücke liegt schon die Endung der gebeugten Form; sie fällt ab, wenn das richtige Plättchen darauf liegt. */
-  .luecke.belegt { border-style: solid; border-color: var(--ls-tinte-weich); }
-  .luecke .alt { display: inline-flex; align-items: center; justify-content: center; inset: 0; color: var(--ls-tinte); font-weight: 700; }
   .luecke.geist { color: var(--ls-naht); }
   .luecke.klingt { background: #FFF1B8; }
+  /* Liegt die Endung darin, setzt sie den Streifen fort: Papier und Rand wie das Stück davor. */
+  .luecke.voll { background: var(--ls-nebel); border: var(--ls-kontur) solid var(--ls-tinte); }
   .eingerastet { display: inline-flex; align-items: center; justify-content: center; color: var(--ls-tinte); font-weight: 700; }
-  .ablage { position: relative; z-index: 1; display: flex; justify-content: center; align-items: flex-start; gap: 2.4rem; min-height: 9.6rem; }
+  .ablage { position: relative; display: flex; justify-content: center; align-items: flex-start; gap: 2.4rem; min-height: 9.6rem; }
   .ablage[hidden], .plaettchen[hidden], ls-tastatur[hidden] { display: none; }
   .plaettchen { min-width: 14.5rem; min-height: 9.6rem; padding: 0 2.4rem; font-size: 6rem; }
   .plaettchen.verborgen { visibility: hidden; }
@@ -115,8 +115,9 @@
   @media (max-aspect-ratio: 3/2) {
     :root { --fig: 36rem; --sp: 0.74; --bogen-b: 60rem; }
     .figur { top: 24rem; }
-    .matte { left: 18rem; right: 18rem; }
-    .streifen { font-size: 5.6rem; padding: 0.8rem 2rem; }
+    .platz { left: 18rem; right: 18rem; }
+    .streifen { font-size: 5.6rem; }
+    .streifen .papier { padding: 0.8rem 2rem; }
     .luecke { min-width: 12rem; font-size: 5.6rem; }
     .plaettchen { min-width: 12.5rem; padding: 0 1.8rem; font-size: 5.2rem; }
     .ablage { gap: 1.6rem; }
@@ -178,7 +179,7 @@
   <div class="kaertchen" id="kaertchen" aria-hidden="true"><div class="dreher"><div class="seite vorn"></div><div class="seite hinten"></div></div></div>
   <div class="hand links" id="hand-links" aria-hidden="true"></div>
   <div class="hand rechts" id="hand-rechts" aria-hidden="true"></div>
-  <section class="lernfeld matte" id="matte" aria-label="Dein Platz am Tisch">
+  <section class="platz" id="matte" aria-label="Dein Platz am Tisch">
     <div class="streifen" id="streifen"></div>
     <div class="ablage" id="ablage">
       <ls-tastatur id="tastatur" je-reihe="10" loeschen hidden></ls-tastatur>

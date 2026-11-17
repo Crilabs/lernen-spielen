@@ -18,9 +18,7 @@ test("aufgabeAus: Ziel, Verb, Person, Form; alles andere ist null", () => {
     form: "malst", endung: "st", wer: ["kofi"],
   });
   assert.equal(a("verbform:endung:basteln:du"), null);
-  assert.equal(a("verbform:grundform:malen:wir"), null);
-  assert.equal(a("verbform:grundform:malen:sie-pl"), null);
-  assert.equal(a("verbform:grundform:basteln:ich"), null);
+  assert.equal(a("verbform:grundform:malen:du")?.ziel, "grundform"); // die Art kennt es noch, G02 spielt es nicht
   assert.equal(a("verbform:endung:malen:es"), null);
   assert.equal(a("artikel:hammer"), null);
   assert.equal(a(null), null);
@@ -34,12 +32,6 @@ test("Wortschatz: sieben regelmäßige Verben ohne -t/-d/-s am Stamm, basteln nu
   }
   assert.deepEqual(ziel("endung").length, 49);
   assert.deepEqual(ziel("pronomen").length, 49);
-  // Grundform: gebeugte Ausgangsformen gemischt (ich male, du malst, Timo malt, Ela malt, ihr malt); basteln ohne „ich“
-  assert.deepEqual(ziel("grundform").length, 39);
-  assert.equal(new Set(ziel("grundform").map((x) => x.key)).size, 39);
-  assert.ok(ziel("grundform").some((x) => x.key === "verbform:grundform:basteln:sie"));
-  assert.deepEqual([...new Set(ziel("grundform").map((x) => x.daten.endung))].sort(), ["en", "n"]);
-  assert.deepEqual([...new Set(ziel("grundform").map((x) => x.daten.form.slice(x.daten.stamm.length)))].sort(), ["e", "st", "t"]);
   assert.ok(!ziel("endung").some((x) => x.daten.verb === "basteln"));
 });
 
@@ -63,9 +55,7 @@ test("Wer handelt: ich die eigene Hand, du Kofi oder Lena, er Timo, sie Ela, wir
 
 test("passt (Endung): auf material nur die genaue Endung, sonst bei „sie“ -t und -en", () => {
   const du = a("verbform:endung:malen:du");
-  // in der Ablage liegen vier Endungen, -n gibt es nur bei der Grundform
   assert.deepEqual(L.plaettchenFuer(du), ["e", "st", "t", "en"]);
-  assert.deepEqual(L.plaettchenFuer(a("verbform:grundform:malen:du")), ["e", "st", "t", "en", "n"]);
   assert.deepEqual(L.plaettchenFuer(du).map((e) => L.passt(du, e)), [false, true, false, false]);
   const sie = a("verbform:endung:malen:sie");
   assert.deepEqual(L.plaettchenFuer(sie).map((e) => L.passt(sie, e, "material")), [false, false, true, false]);
@@ -84,13 +74,8 @@ test("passt (Fürwort): „malt“ gehört zu er, sie und ihr, aber auf material
   assert.deepEqual(L.passendePlaettchen(a("verbform:pronomen:malen:du"), "kopf"), ["du"]);
 });
 
-test("passt (Grundform): -en, bei basteln -n", () => {
-  assert.deepEqual(L.ENDUNGEN.map((e) => L.passt(a("verbform:grundform:malen:sie"), e)), [false, false, false, true, false]);
-  assert.deepEqual(L.ENDUNGEN.map((e) => L.passt(a("verbform:grundform:basteln:er"), e)), [false, false, false, false, true]);
-});
-
 test("Hilfe 2 und Prüfstand: das richtige Plättchen passt immer, auf jeder Stufe", () => {
-  for (const z of ["endung", "pronomen", "grundform"]) {
+  for (const z of ["endung", "pronomen"]) {
     for (const x of ziel(z)) {
       const d = a(x.key);
       for (const stufe of ["material", "vorstellung", "kopf"]) assert.ok(L.passt(d, L.richtigesPlaettchen(d), stufe), `${x.key} ${stufe}`);
@@ -106,8 +91,6 @@ test("Wirkende: bei „sie“ entscheidet die Endung, ob Ela allein oder Ela und
   assert.deepEqual(L.wirkende(a("verbform:pronomen:malen:sie-pl"), "sie"), ["timo", "ela"]);
   assert.deepEqual(L.wirkende(a("verbform:pronomen:malen:sie"), "sie"), ["ela"]);
   assert.deepEqual(L.wirkende(a("verbform:pronomen:malen:ihr"), "ihr"), ["kofi", "lena"]);
-  // die Grundform lässt niemanden handeln: weder die Gemeinten noch alle
-  for (const p of ["ich", "du", "er", "sie", "ihr"]) assert.deepEqual(L.wirkende(a(`verbform:grundform:malen:${p}`), "en"), [], p);
 });
 
 test("Wer hebt bei einer falschen Endung den Stift? Zu wem sie gehört, nie die Gemeinten; zu niemandem: niemand", () => {
@@ -117,7 +100,6 @@ test("Wer hebt bei einer falschen Endung den Stift? Zu wem sie gehört, nie die 
   assert.deepEqual(L.hebenStift(du, "n"), []);
   assert.deepEqual(L.hebenStift(du, "st"), []);
   assert.deepEqual(L.hebenStift(a("verbform:endung:malen:ihr"), "t").sort(), ["ela", "timo"]);
-  for (const e of L.ENDUNGEN) assert.deepEqual(L.hebenStift(a("verbform:grundform:malen:sie"), e), [], `Grundform ${e}`);
   assert.deepEqual(L.hebenStift(a("verbform:pronomen:malen:sie"), "er"), ["timo"]);
 });
 
@@ -134,9 +116,8 @@ test("Stufe kopf: Buchstaben nur auf einem richtigen Weg; fertig mit dem vollst�
   assert.deepEqual(L.richtigeWoerter(sie), ["malt", "malen"]);
   assert.equal(L.tippeBuchstabe(sie, "malt", "x").ok, false);
   assert.deepEqual(L.richtigeWoerter(a("verbform:pronomen:malen:wir")), ["sie", "wir"]);
-  assert.deepEqual(L.richtigeWoerter(a("verbform:grundform:basteln:er")), ["basteln"]);
   // jeder richtige Weg ist mit den angebotenen Tasten tippbar
-  for (const z of ["endung", "pronomen", "grundform"]) {
+  for (const z of ["endung", "pronomen"]) {
     for (const x of ziel(z)) {
       const d = a(x.key);
       const tasten = L.tastenFuer(d);
@@ -175,32 +156,26 @@ test("Bogen: zehn große Plätze in fünf Spalten, jede Person hat ihre Spalte, 
 });
 
 test("jede Aufgabe ist darstellbar, hat ihre Sätze in texte.json und eine passende Plättchenzahl", () => {
-  const arten = { art: "verbform", ziele: ["endung", "pronomen", "grundform"], stufen: ["material", "vorstellung", "kopf"] };
-  for (const z of ["endung", "pronomen", "grundform"]) {
+  const arten = { art: "verbform", ziele: ["endung", "pronomen"], stufen: ["material", "vorstellung", "kopf"] };
+  for (const z of ["endung", "pronomen"]) {
     for (const x of ziel(z)) {
       assert.ok(darstellbar(x, arten), x.key);
       const d = a(x.key);
       assert.ok(TEXTE.aufgabe[x.key], `aufgabe ${x.key}`);
       assert.ok(TEXTE.hilfe1[x.key]?.length >= 1, `hilfe1 ${x.key}`);
-      if (z === "grundform") assert.equal(TEXTE.richtigGrundform[d.verb], `${gross(d.grundform)}.`); // das bloße Verb, kein Satz mit Person
-      else assert.equal(TEXTE.richtig[`${d.verb}:${d.person}`], `${gross(d.pronomen)} ${d.form}.`);
+      assert.equal(TEXTE.richtig[`${d.verb}:${d.person}`], `${gross(d.pronomen)} ${d.form}.`);
     }
   }
   assert.equal(darstellbar(ziel("endung")[0], { art: "verbform", ziele: ["pronomen"] }), false);
   assert.equal(darstellbar(ziel("endung")[0], { art: "artikel" }), false);
 });
 
-test("Sätze aus Daten: Hörprobe der Endungen, der Fürwörter und der Grundform; keine Ziffern, kein Lob", () => {
+test("Sätze aus Daten: Hörprobe der Endungen und der Fürwörter; keine Ziffern, kein Lob", () => {
   assert.deepEqual(TEXTE.hilfe1["verbform:endung:malen:du"], ["Du male.", "Du malst.", "Du malt.", "Du malen."]);
   assert.deepEqual(TEXTE.hilfe1["verbform:pronomen:malen:sie"], ["Er malt.", "Sie malt.", "Ihr malt."]);
   assert.deepEqual(TEXTE.hilfe1["verbform:pronomen:malen:ich"], ["Ich male."]);
-  assert.deepEqual(TEXTE.hilfe1["verbform:grundform:malen:sie"], ["Male.", "Malst.", "Malt.", "Malen."]);
-  assert.deepEqual(TEXTE.hilfe1["verbform:grundform:basteln:du"], ["Bastele.", "Bastelst.", "Bastelt.", "Basteln."]);
   assert.equal(TEXTE.aufgabe["verbform:endung:malen:du"], "Du … malen.");
   assert.equal(TEXTE.aufgabe["verbform:pronomen:malen:wir"], "… malen.");
-  assert.equal(TEXTE.aufgabe["verbform:grundform:basteln:sie"], "Ela bastelt.");
-  assert.equal(TEXTE.aufgabe["verbform:grundform:malen:du"], "Du malst.");
-  assert.equal(TEXTE.aufgabe["verbform:grundform:malen:ich"], "Ich male.");
   const saetze = [];
   const sammle = (o) => (typeof o === "string" ? saetze.push(o) : o && typeof o === "object" ? Object.entries(o).forEach(([k, v]) => k !== "hinweis" && sammle(v)) : null);
   sammle(TEXTE);

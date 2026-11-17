@@ -68,28 +68,31 @@ export function raumSvg() {
 export function tischSvg() {
   const zz = zeichner("g02tisch", 4.5);
   const hoehe = H - TISCH_OBEN;
+  // Lange Dielen von links nach rechts (nur Längsfugen, keine Stoßfugen: sonst liest es sich als Steinplatten oder Straße),
+  // jede etwas anders getönt, mit langer, feiner Maserung in Längsrichtung.
+  const diele = 168;
+  const toene = [HOLZ, heller(HOLZ, 0.05), dunkler(HOLZ, 0.03), heller(HOLZ, 0.03), dunkler(HOLZ, 0.05)];
+  const dielen = [];
+  for (let k = 0; k * diele < hoehe; k++) dielen.push(flach(`rect x="-20" y="${k * diele}" width="${B + 40}" height="${diele + 1}"`, toene[k % toene.length], false));
   const fugen = [];
-  for (let y = 150; y < hoehe; y += 150) fugen.push(naht(`M0 ${y} L${B} ${y}`, HOLZ, 2.6, 0.16));
-  // kurze Stoßfugen, versetzt
-  for (let i = 0; i < 26; i++) {
-    const reihe = i % 4;
-    const y0 = 16 + reihe * 150;
-    const x = 120 + ((i * 331) % (B - 240));
-    fugen.push(naht(`M${x} ${y0 + 4} l0 ${y0 + 150 > hoehe ? 60 : 130}`, HOLZ, 2.6, 0.14));
-  }
-  // Maserung
-  for (let i = 0; i < 16; i++) {
-    const x = 80 + ((i * 487) % (B - 300));
-    const y = 40 + ((i * 197) % (hoehe - 80));
-    fugen.push(naht(`M${x} ${y} q40 -8 90 0`, HOLZ, 2.4, 0.12));
+  for (let y = diele; y < hoehe; y += diele) fugen.push(naht(`M0 ${y} L${B} ${y}`, dunkler(HOLZ, 0.32), 3.2, 0.5));
+  for (let k = 0; k * diele < hoehe; k++) {
+    for (let m = 0; m < 5; m++) {
+      const y = k * diele + 24 + m * 30 + ((k * 13 + m * 7) % 11);
+      const x = ((k * 701 + m * 337) % 900) - 200;
+      fugen.push(naht(`M${x} ${y} q330 -${9 + m} 700 0 t760 ${m % 2 ? 4 : -3} t700 2`, dunkler(HOLZ, 0.2), 2.2, 0.3));
+    }
   }
   const platte = zz.guss(
-    flach(`rect x="-20" y="0" width="${B + 40}" height="${hoehe + 20}"`, HOLZ),
+    ...dielen,
     ...fugen,
-    flach(`rect x="-20" y="0" width="${B + 40}" height="26"`, heller(HOLZ, 0.16), false),
+    // die hintere Tischkante: eine Fase im Licht, darunter eine dunkle Linie
+    flach(`rect x="-20" y="0" width="${B + 40}" height="30"`, heller(HOLZ, 0.2), false),
+    flach(`rect x="-20" y="30" width="${B + 40}" height="5"`, dunkler(HOLZ, 0.3), false),
   );
-  // warmer Lichtfleck der Lampe auf der Tischplatte
-  const fleck = `<ellipse cx="1340" cy="260" rx="560" ry="200" fill="#FFF8E6" opacity="0.30"/>`;
+  // warmes Licht der Lampe: weich auslaufend, ohne harte Kante
+  const fleck = `<defs><radialGradient id="g02licht" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFF8E6" stop-opacity="0.38"/><stop offset="1" stop-color="#FFF8E6" stop-opacity="0"/></radialGradient></defs>`
+    + `<ellipse cx="1340" cy="300" rx="900" ry="330" fill="url(#g02licht)"/>`;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${B} ${hoehe}" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">`
     + platte + fleck + `</svg>`;
 }

@@ -2,11 +2,11 @@
 import { verbformAus } from "../../aufgabenarten.js";
 import { ENDUNG_VON, PERSONEN, PRONOMEN_VON, VERBEN, werVon } from "../../woerter/verben.js";
 
-/** Alle Endungsplättchen in fester Reihe; -n liegt nur bei der Grundform in der Ablage (Wörter auf -eln und -ern). */
-export const ENDUNGEN = Object.freeze(["e", "st", "t", "en", "n"]);
+/** Alle Endungsplättchen in fester Reihe. */
+export const ENDUNGEN = Object.freeze(["e", "st", "t", "en"]);
 /** Die Fürwort-Plättchen in fester Reihe (sie steht für eine und für mehrere). */
 export const FUERWOERTER = Object.freeze(["ich", "du", "er", "sie", "wir", "ihr"]);
-/** Die Endungen der Personalform (Endung an den Stamm): ohne -n, es fällt bei Endung und Fürwort weg. */
+/** Die Endungen der Personalform (Endung an den Stamm). */
 export const PROBE_ENDUNGEN = Object.freeze(["e", "st", "t", "en"]);
 /** Plätze auf dem Bogen (fünf Spalten, zwei Reihen, je ein großes Ding); danach kommt ein neuer Bogen. */
 export const BOGEN_PLAETZE = 10;
@@ -24,20 +24,11 @@ export function aufgabeAus(key) {
   return d ? { key: /** @type {string} */ (key), ...d } : null;
 }
 
-/** Die Plättchen der Ablage für ein Ziel: Fürwörter, die vier Endungen der Personalform, bei der Grundform dazu -n. @param {{ ziel: string }} a */
-export const plaettchenFuer = (a) => (a.ziel === "pronomen" ? FUERWOERTER : a.ziel === "grundform" ? ENDUNGEN : PROBE_ENDUNGEN);
+/** Die Plättchen der Ablage für ein Ziel: Fürwörter oder die vier Endungen der Personalform. @param {{ ziel: string }} a */
+export const plaettchenFuer = (a) => (a.ziel === "pronomen" ? FUERWOERTER : PROBE_ENDUNGEN);
 
-/**
- * Das erste Wort des Streifens bei der Grundform und in der Aufgabe: Timo (er), Ela (sie) oder das Fürwort (ich, du, ihr).
- * @param {{ person: string, pronomen: string }} a
- */
-export const ersteWort = (a) => (a.person === "er" ? "Timo" : a.person === "sie" ? "Ela" : a.pronomen);
-
-/**
- * Die Endungen der Hörprobe: die vier der Personalform; bei -eln und -ern steht -n statt -en (Bastele, Bastelst, Bastelt,
- * Basteln). @param {{ endung: string, ziel: string }} a
- */
-export const probeFuer = (a) => (a.ziel === "grundform" && a.endung === "n" ? ["e", "st", "t", "n"] : [...PROBE_ENDUNGEN]);
+/** Die Endungen der Hörprobe: die vier der Personalform. @param {any} _a */
+export const probeFuer = (_a) => [...PROBE_ENDUNGEN];
 
 /**
  * Welche Person meint die Antwort? Bei „sie“ entscheidet die Endung (-t eine Person, -en mehrere), weil das Wort allein
@@ -51,8 +42,6 @@ export function personDerAntwort(a, antwort) {
     if (antwort === "sie") return a.endung === "t" ? "sie" : "sie-pl";
     return /** @type {any} */ (antwort);
   }
-  // Grundform: niemand ist gemeint, die Form lässt keinen handeln
-  if (a.ziel === "grundform") return null;
   if (a.pronomen === "sie") return antwort === "t" ? "sie" : antwort === "en" ? "sie-pl" : a.person;
   return a.person;
 }
@@ -65,7 +54,6 @@ export function personDerAntwort(a, antwort) {
  */
 export function passt(a, plaettchen, stufe = "material") {
   const streng = stufe === "material";
-  if (a.ziel === "grundform") return plaettchen === a.endung;
   if (a.ziel === "endung") {
     if (streng || a.pronomen !== "sie") return plaettchen === a.endung;
     return plaettchen === "t" || plaettchen === "en";
@@ -82,11 +70,10 @@ export const richtigesPlaettchen = (a) => (a.ziel === "pronomen" ? a.pronomen : 
 export const passendePlaettchen = (a, stufe = "material") => plaettchenFuer(a).filter((p) => passt(a, p, stufe));
 
 /**
- * Die Wörter, die das Kind auf der Stufe kopf schreiben darf: die Form (malst), das Fürwort (sie) oder die Grundform.
+ * Die Wörter, die das Kind auf der Stufe kopf schreiben darf: die Form (malst), oder das Fürwort (sie).
  * @param {any} a @returns {string[]}
  */
 export function richtigeWoerter(a) {
-  if (a.ziel === "grundform") return [a.grundform];
   if (a.ziel === "pronomen") return FUERWOERTER.filter((p) => passt(a, p, "kopf"));
   return passendePlaettchen(a, "kopf").map((e) => `${a.stamm}${e}`);
 }
@@ -135,13 +122,11 @@ export function wirkende(a, antwort) {
 
 /**
  * Wer hebt bei einer falschen Antwort den Stift? Die, zu denen die gelegte Endung (bzw. das Fürwort) gehört – nie die
- * Gemeinten der Aufgabe, sie warten. Passt die Endung zu niemandem (maln), hebt niemand den Stift. Die Grundform
- * gehört zu niemandem: dort hebt auch bei einer falschen Endung keiner den Stift.
+ * Gemeinten der Aufgabe, sie warten. Passt die Endung zu niemandem (maln), hebt niemand den Stift.
  * @param {any} a @param {string} antwort
  * @returns {string[]}
  */
 export function hebenStift(a, antwort) {
-  if (a.ziel === "grundform") return [];
   const personen = PERSONEN.filter((p) => (a.ziel === "pronomen" ? PRONOMEN_VON[p] === antwort : ENDUNG_VON[p] === antwort));
   const alle = [...new Set(personen.flatMap((p) => werVon(p, a.verb)))];
   const warten = werVon(a.person, a.verb);
@@ -166,7 +151,7 @@ export const bogenReicht = (belegt, noetig) => freiePlaetze(belegt) >= noetig;
 
 /**
  * Die Spalte des Bogens (0 bis 4), die zu einer handelnden Person gehört: Kofi links, dann Lena, die eigene Hand
- * in der Mitte, Timo und Ela rechts; wer sonst legt (die Grundform: das Wort selbst), legt in die Mitte. @param {string} wer
+ * in der Mitte, Timo und Ela rechts; wer sonst legt, legt in die Mitte. @param {string} wer
  */
 export const spalteVon = (wer) => ({ kofi: 0, lena: 1, ich: 2, timo: 3, ela: 4 })[/** @type {"kofi"} */ (wer)] ?? 2;
 

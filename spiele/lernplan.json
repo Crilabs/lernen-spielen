@@ -17233,7 +17233,7 @@
       "voraussetzungen": [
         "tunwoerter"
       ],
-      "aufgaben": { "art": "verbform", "ziel": "grundform" },
+      "aufgaben": null,
       "stufen": [
         "material",
         "vorstellung",
