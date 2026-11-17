@@ -49,6 +49,13 @@
       "art": "sachbuch",
       "welt": "dinosaurier",
       "familie": null
+    },
+    {
+      "id": "regenbogen",
+      "titel": "Aylin und der Regenbogen",
+      "art": "sachbuch",
+      "welt": "wetter-messen",
+      "familie": null
     }
   ]
 }

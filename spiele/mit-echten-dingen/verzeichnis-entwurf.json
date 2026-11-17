@@ -322,6 +322,24 @@
    "datei": "schreiben/namen-gross.md",
    "foto": "schreiben/bilder/namen-gross.webp"
   },
+  "namenwoerter": {
+   "fach": "grammatik",
+   "name": "Nomen",
+   "titel": "Wer oder was? Nomen finden",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Einkaufszettel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Was kommt in die Kiste?"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/namenwoerter.md",
+   "foto": "grammatik/bilder/namenwoerter.webp"
+  },
   "neunerreihe": {
    "fach": "mathe",
    "name": "Neunerreihe",
@@ -452,6 +470,24 @@
    "datei": "mathe/teiler-vielfache.md",
    "foto": "mathe/bilder/teiler-vielfache.webp"
   },
+  "tunwoerter": {
+   "fach": "grammatik",
+   "name": "Verben",
+   "titel": "Was tut ihr da?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Fotos vom Ausflug"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Der Flüsterauftrag"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/tunwoerter.md",
+   "foto": "grammatik/bilder/tunwoerter.webp"
+  },
   "verben-als-nomen": {
    "fach": "schreiben",
    "name": "Verben als Nomen",
@@ -505,6 +541,24 @@
    "entwurf": false,
    "datei": "mathe/vorwaerts-zaehlen.md",
    "foto": "mathe/bilder/vorwaerts-zaehlen.webp"
+  },
+  "wiewoerter": {
+   "fach": "grammatik",
+   "name": "Adjektive",
+   "titel": "Wie ist es?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Welches Kuscheltier ist es?"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Etwas Weiches zum Schlafen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/wiewoerter.md",
+   "foto": "grammatik/bilder/wiewoerter.webp"
   },
   "zahl-darstellungen-bis-100": {
    "fach": "mathe",

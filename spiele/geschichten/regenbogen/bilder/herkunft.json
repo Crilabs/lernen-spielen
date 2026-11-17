@@ -1,0 +1,560 @@
+{
+ "01-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. Early morning or evening light over a meadow, low sun behind the viewer casting long shadows of trees across the grass. In front, a high, almost semicircular a physically correct rainbow: primary bow with red on the outside and violet on the inside, colors blending smoothly, in front of a dark rain cloud, sky inside the bow slightly brighter, the sun behind the viewer and never visible, with further rain clouds. No people.",
+  "usage": {
+   "input_tokens": 282,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 282
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2038
+  }
+ },
+ "01-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. Aylin's balcony on the 7th floor of a light-colored apartment block, plain grey metal railing, view east over the rooftops of a German city with apartment buildings, trees and a tiny church tower far away; the balcony and railing are in the shade of their own building, no sunlight on railing or hands, warm golden light only on the rooftops ahead. Aylin, a 7-year-old child shown only as hands, forearms, legs and feet, never a face or head, warm medium olive-brown skin, short clean fingernails, mustard-yellow knitted sweater with ribbed cuffs, dark blue jeans, : only Aylin's hands rest on the grey railing in the foreground. Across the wet rooftops a large, high, almost semicircular a physically correct rainbow: primary bow with red on the outside and violet on the inside, colors blending smoothly, in front of a dark rain cloud, sky inside the bow slightly brighter, the sun behind the viewer and never visible. Long shadows fall forward.",
+  "usage": {
+   "input_tokens": 406,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 406
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2162
+  }
+ },
+ "01-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. View over a child's shoulder height without any head, from Aylin's balcony on the 7th floor of a light-colored apartment block, plain grey metal railing, view east over the rooftops of a German city with apartment buildings, trees and a tiny church tower far away; the balcony and railing are in the shade of their own building, no sunlight on railing or hands, warm golden light only on the rooftops ahead. A dark, receding rain cloud with visible rain curtains, in front of it a rainbow (a physically correct rainbow: primary bow with red on the outside and violet on the inside, colors blending smoothly, in front of a dark rain cloud, sky inside the bow slightly brighter, the sun behind the viewer and never visible). The long shadow of the apartment block falls forward across the golden-lit rooftops toward the rain and the rainbow.",
+  "usage": {
+   "input_tokens": 370,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 370
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2126
+  }
+ },
+ "02-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A bright, whitish-golden patch of sunlight in the shape of a window lies on a wooden floor in a quiet room, light falling at a slant through the window, the sun itself not in the picture. The patch looks plain white, with no colors at all. Calm, empty room.",
+  "usage": {
+   "input_tokens": 257,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 257
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2013
+  }
+ },
+ "02-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. Close-up of a real rainbow in front of a dark cloud: clearly red on the outside, then orange, yellow, green, blue, and violet on the inside; the sky inside the bow slightly brighter. Physically correct, no people.",
+  "usage": {
+   "input_tokens": 245,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 245
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2001
+  }
+ },
+ "03-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A single large round water drop hanging from a blade of grass, lit from the side, dark background, the drop sparkling. No arrows, no rainbow, no light rays.",
+  "usage": {
+   "input_tokens": 231,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 231
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1987
+  }
+ },
+ "03-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A rainbow in front of a dense curtain of rain in which many individual falling drops are visible in the light; the bow clearly consists of light in the rain, slightly grainy, drops recognizable. Red outside, violet inside. No people.",
+  "usage": {
+   "input_tokens": 244,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 244
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2000
+  }
+ },
+ "03-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. View from behind and below, a child with the sun behind her: only legs in green rubber boots and mustard-yellow sleeves at the image edge, no head, long shadow cast forward onto wet grass. In front, against dark clouds, a physically correct rainbow (a physically correct rainbow: primary bow with red on the outside and violet on the inside, colors blending smoothly, in front of a dark rain cloud, sky inside the bow slightly brighter, the sun behind the viewer and never visible).",
+  "usage": {
+   "input_tokens": 294,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 294
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2050
+  }
+ },
+ "02-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. Detail of a real rainbow so close that the colors flow smoothly into one another without any stripes or lines (red outside, violet inside, sky inside the bow slightly brighter). Two hands reach up from the bottom edge of the picture and point toward the bow: Aylin's hand with a mustard-yellow sleeve, warm olive-brown skin, and Oma's hand with a dark red knitted sleeve, slightly lighter olive-brown skin, a slim golden ring. No faces. The sun is behind them and not visible.",
+  "usage": {
+   "input_tokens": 299,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 299
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2055
+  }
+ },
+ "03-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photo, evening view from a balcony on the seventh floor of a light apartment building, looking east over the roofs of a German city, a small church tower in the distance. In the foreground a plain grey metal balcony railing and the resting hand and forearm of a 7-year-old child in WARM MEDIUM OLIVE-BROWN skin tone, mustard-yellow knitted sweater sleeve with ribbed cuff, no head, no face. The balcony lies in the soft shadow of its own building, no direct sun on the railing or hand. The low evening sun is BEHIND the viewer, outside the picture, so the light falls onto the scene from behind: there is NO sun, NO glare, NO lens flare, NO bright glow and NO golden reflection anywhere in the view ahead. The sky ahead is dark and overcast. The main subject is the CLOUD SHADOW on the city: a large grey cloud above and behind the viewer casts a big, clearly visible, sharp-edged shadow across the rooftops, so the nearer half of the city, with its roofs, lies dim, cool and grey in shadow, while the farther half of the city beyond a distinct diagonal shadow line is still lit warm golden by the low sun from behind. Both parts, shadow and sunlit roofs with the clear border between them, are plainly visible. Far away in front, against the dark rain cloud, a very faint, almost transparent rainbow arc, red on the outside, fading out at its lower end, barely visible. Calm, bright, no text, no numbers, no logos, no faces.",
+  "usage": {
+   "input_tokens": 488,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 488
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2244
+  }
+ },
+ "03-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. Macro photograph of individual round raindrops sparkling in side light from the sun against a dark background, in a few drops tiny colored points of light (red, yellow, blue). Next to them, out of focus, a plain water glass on a windowsill.",
+  "usage": {
+   "input_tokens": 249,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 249
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2005
+  }
+ },
+ "04-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. View out of an airplane window downward and to the side (window frame at the edge): below the plane a complete, circular full-circle rainbow over rain and landscape, the sun behind the airplane and not in the picture. Red on the outside of the circle, violet inside.",
+  "usage": {
+   "input_tokens": 251,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 251
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2007
+  }
+ },
+ "04-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. Wet meadow in the evening seen from eye height looking forward and slightly downward (wide angle): a child's long shadow, cast from behind by the low sun, runs across the grass; the shadow of the head lies exactly in the center of the picture. A physically correct rainbow stands symmetrically around that point, both ends reaching the ground equally far left and right (a physically correct rainbow: primary bow with red on the outside and violet on the inside, colors blending smoothly, in front of a dark rain cloud, sky inside the bow slightly brighter, the sun behind the viewer and never visible). The child herself is not in the picture, only her long shadow reaching from the bottom edge to the center.",
+  "usage": {
+   "input_tokens": 337,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 337
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2093
+  }
+ },
+ "04-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. Two shadows side by side on a wet meadow, one of a child and one of an adult, both cast forward by the sun behind them; in front a rainbow (a physically correct rainbow: primary bow with red on the outside and violet on the inside, colors blending smoothly, in front of a dark rain cloud, sky inside the bow slightly brighter, the sun behind the viewer and never visible). At the bottom edge Aylin's green rubber boots (warm olive-brown skin) and Oma's brown garden shoes stand next to each other. No faces.",
+  "usage": {
+   "input_tokens": 309,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 309
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2065
+  }
+ },
+ "05-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. Double rainbow over rooftops seen from a balcony: bright primary bow; above it a larger, much paler secondary bow so faint that its color order is barely recognizable, partly covered by a cloud. Grey metal railing at the bottom edge. No faces, no people.",
+  "usage": {
+   "input_tokens": 250,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 250
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2006
+  }
+ },
+ "05-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A double rainbow where the sky between the two bows is clearly darker than above and below them, a dark band following the shape of the arcs. Primary bow red outside, secondary bow paler with reversed colors. No sun, no people.",
+  "usage": {
+   "input_tokens": 244,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 244
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2000
+  }
+ },
+ "04-06.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A calm, wide rainbow over an open landscape (fields, a bridge over a river, villages in the distance), peaceful evening mood, physically correct (a physically correct rainbow: primary bow with red on the outside and violet on the inside, colors blending smoothly, in front of a dark rain cloud, sky inside the bow slightly brighter, the sun behind the viewer and never visible). No figures, no symbols, no flags, no gold.",
+  "usage": {
+   "input_tokens": 284,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 284
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2040
+  }
+ },
+ "05-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A fogbow: a broad, almost white arc in a bank of fog over a meadow or a lake in the morning, with only a hint of color at its edges. The sun is behind the viewer (not visible), long shadows of grass and trees falling forward. Calm and bright. No people.",
+  "usage": {
+   "input_tokens": 257,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 257
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2013
+  }
+ },
+ "05-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A double rainbow, close and clear: the primary bow with red on the outside; the secondary bow above it paler and reversed, with red on the inside and violet on the outside, so the two red edges face each other. Dark rain cloud behind, no sun visible, no people.",
+  "usage": {
+   "input_tokens": 255,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 255
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2011
+  }
+ },
+ "06-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A fountain in a park with fine spray and a small rainbow in it, the sun behind the viewer and not visible. No people with faces, at most blurred legs on a path in the background. Red outside, violet inside.",
+  "usage": {
+   "input_tokens": 242,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 242
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 1998
+  }
+ },
+ "05-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A moonbow at night: a pale, whitish arc against a dark night sky and rain over a landscape with a waterfall or hills, the moon not in the picture (behind the viewer), faint stars visible. Calm, not eerie. No people.",
+  "usage": {
+   "input_tokens": 247,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 247
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2003
+  }
+ },
+ "06-01.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. In Oma's allotment garden in the late afternoon: Aylin, a 7-year-old child shown only as hands — only Aylin's hand with warm olive-brown skin and a mustard-yellow T-shirt sleeve holds a green garden hose with a spray nozzle and sprays a fine mist forward; in the mist a small rainbow with red on the outside. Vegetable beds, wooden fence and a small garden shed. The sun behind her, her shadow on the lawn falls forward. No faces.",
+  "usage": {
+   "input_tokens": 296,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 296
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2052
+  }
+ },
+ "06-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces. A quiet ending: Aylin, a 7-year-old child shown only as hands, forearms, legs and feet, never a face or head, warm medium olive-brown skin, short clean fingernails, mustard-yellow knitted sweater with ribbed cuffs, dark blue jeans, : only Aylin's hands hold a light-blue notebook with a freshly painted child-style rainbow on the grey metal balcony railing; the balcony is in the shade of its own building, warm light only on the rooftops. Behind, over the rooftops, a fading evening rainbow in the east, an autumn tree with colored leaves. No readable writing, no faces.",
+  "usage": {
+   "input_tokens": 328,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 328
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2084
+  }
+ },
+ "02-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, calm warm evening light in a living room, no people, no text, no letters, no numbers, no logos. A wooden table seen at a low angle. A light-blue hardcover notebook lies open, but the visible pages are almost blank: only a tiny, very faint, smudged pencil sketch of a cloud and a small sun in one far corner, plus loose coloured pencil strokes; NO rainbow, NO arcs and NO sequence of colours anywhere on the pages. A coloured pencil lies across the gutter. Next to the notebook a plain white sheet of paper is folded in half, and a smooth cylindrical drinking glass filled three quarters with clear water stands beside it. Out-of-focus window with golden evening light in the background. No coloured light spot, no rainbow reflection anywhere in the scene.",
+  "usage": {
+   "input_tokens": 329,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 329
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2085
+  }
+ },
+ "02-02.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces, no people. A smooth cylindrical drinking glass without patterns, three quarters full of clear water, stands at the edge of a table in direct sunlight falling through a window. About 20 cm beside it, a white sheet of paper lies in shadow right next to the sunlit patch, and on it a small, sharply bounded spot in rainbow colors (red at one edge, violet at the other). No people, no text.",
+  "usage": {
+   "input_tokens": 281,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 281
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2037
+  }
+ },
+ "01-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces, no people. An open light-blue-covered A5 notebook lies on a windowsill, with a child-style rainbow drawn in colored pencil (red outside, violet inside), a drawn sun and clouds in crayon. A colored pencil lies across the notebook. Outside the window blurred rooftops. No readable writing, no numbers, no people.",
+  "usage": {
+   "input_tokens": 263,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 263
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2019
+  }
+ },
+ "01-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces, no people. Summer noon on a short-mown meadow behind an apartment block, trees at the edge of a forest far behind. A plain wooden garden chair stands in the grass, its very short shadow lies almost directly beneath it, sun high overhead. Light summer rain, drops visible in the light, bright sky with one small cloud. Camera pointed slightly downward at the chair and the meadow; no rainbow, no sky area visible, no people.",
+  "usage": {
+   "input_tokens": 285,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 285
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2041
+  }
+ },
+ "04-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces, no people. Wet short-mown meadow after rain in the evening, a faint trail of boot footprints pressed into the wet grass leads from the bottom of the picture away from the camera toward a deciduous forest edge in the distance. The low sun is directly BEHIND the camera, low and warm: all shadows fall AWAY from the camera, forward into the picture, long soft shadows of grass tufts and of one wooden fence post at the right edge stretching away from the viewer toward the forest; the grass is front-lit (not backlit), small water drops visible on the grass blades. No rainbow, no arc of colors anywhere, sky only a narrow plain pale strip or cropped out. No people.",
+  "usage": {
+   "input_tokens": 339,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 339
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2095
+  }
+ },
+ "04-05.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces, no people. View across a wet meadow towards a forested hill far in the distance. A physically correct rainbow (primary bow, red on the outside and violet on the inside, colors blending smoothly) stands in front of a dark rain cloud; its end touches the ground far away behind the distant forested hill, small and hazy, clearly much farther away than the meadow edge and the nearest trees. The low sun is directly behind the camera: the meadow is front-lit and warm, the sun is never visible, and any shadows (of a wooden fence post at the left edge) fall AWAY from the camera, forward into the picture, toward the rainbow. No other shadows pointing toward the camera. No people.",
+  "usage": {
+   "input_tokens": 341,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 341
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2097
+  }
+ },
+ "06-03.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces, no people. Indoors: a CD (shiny side, no printing) leans against the windowsill in sunlight at a window; on the bright wall beside it glow colorful spots and stripes of light. Light only on the wall. No people, no text.",
+  "usage": {
+   "input_tokens": 250,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 250
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2006
+  }
+ },
+ "06-04.png": {
+  "datum": "2026-11-16",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9), like a calm, high-quality nature or documentary photo.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the subject, gentle background blur.\nEverything must be anatomically and factually correct (correct number of legs, ears, eyes; real species; real objects).\nBright, calm and safe: nothing scary, no injury, no danger, no darkness. No text, no letters, no numbers, no logos, no brands,\nno watermarks. People only if the scene needs them: ordinary, diverse, natural, never stereotyped, no recognizable real persons.\nSquare format (1:1), the subject clearly visible and centred, uncluttered composition.\n\nScene: Photorealistic photograph, bright, calm, natural light, subject centered, no text, no letters, no numbers, no logos, no faces, no people. A meadow with a wooden fence, long shadows of the fence posts fall forward away from the unseen sun toward a rainbow in front of dark clouds (a physically correct rainbow: primary bow with red on the outside and violet on the inside, colors blending smoothly, in front of a dark rain cloud, sky inside the bow slightly brighter, the sun behind the viewer and never visible). The sun is not in the picture. No people.",
+  "usage": {
+   "input_tokens": 285,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 285
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2041
+  }
+ }
+}

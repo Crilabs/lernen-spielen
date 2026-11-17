@@ -4222,5 +4222,242 @@
    },
    "total_tokens": 2342
   }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 42,
+  "ausgabe": 16559,
+  "einheit": "tokens",
+  "menge": 1795773,
+  "notiz": "namenwoerter, Recherche und Schreiben",
+  "cache_lesen": 1663253,
+  "cache_schreiben": 115919,
+  "themen": 1,
+  "thema": [
+   "namenwoerter"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 56,
+  "ausgabe": 16400,
+  "einheit": "tokens",
+  "menge": 2544036,
+  "notiz": "tunwoerter, Recherche und Schreiben",
+  "cache_lesen": 2418620,
+  "cache_schreiben": 108960,
+  "themen": 1,
+  "thema": [
+   "tunwoerter"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 54,
+  "ausgabe": 16097,
+  "einheit": "tokens",
+  "menge": 2444356,
+  "notiz": "wiewoerter, Recherche und Schreiben",
+  "cache_lesen": 2319718,
+  "cache_schreiben": 108487,
+  "themen": 1,
+  "thema": [
+   "wiewoerter"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 491,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "namenwoerter.png",
+  "themen": 1,
+  "thema": [
+   "namenwoerter"
+  ],
+  "usage": {
+   "input_tokens": 491,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 491
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2247
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 498,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "tunwoerter.png",
+  "themen": 1,
+  "thema": [
+   "tunwoerter"
+  ],
+  "usage": {
+   "input_tokens": 498,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 498
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2254
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 514,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "wiewoerter.png",
+  "themen": 1,
+  "thema": [
+   "wiewoerter"
+  ],
+  "usage": {
+   "input_tokens": 514,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 514
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2270
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 11910,
+  "einheit": "tokens",
+  "menge": 740380,
+  "notiz": "namenwoerter, Prüfung Runde 1",
+  "cache_lesen": 647463,
+  "cache_schreiben": 80985,
+  "themen": 1,
+  "thema": [
+   "namenwoerter"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 11136,
+  "einheit": "tokens",
+  "menge": 648546,
+  "notiz": "tunwoerter, Prüfung Runde 1",
+  "cache_lesen": 561400,
+  "cache_schreiben": 75990,
+  "themen": 1,
+  "thema": [
+   "tunwoerter"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 11108,
+  "einheit": "tokens",
+  "menge": 695258,
+  "notiz": "wiewoerter, Prüfung Runde 1",
+  "cache_lesen": 606166,
+  "cache_schreiben": 77962,
+  "themen": 1,
+  "thema": [
+   "wiewoerter"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 10,
+  "ausgabe": 8117,
+  "einheit": "tokens",
+  "menge": 333564,
+  "notiz": "namenwoerter, Prüfung Runde 2",
+  "cache_lesen": 254373,
+  "cache_schreiben": 71064,
+  "themen": 1,
+  "thema": [
+   "namenwoerter"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 9153,
+  "einheit": "tokens",
+  "menge": 479138,
+  "notiz": "tunwoerter, Prüfung Runde 2",
+  "cache_lesen": 398930,
+  "cache_schreiben": 71039,
+  "themen": 1,
+  "thema": [
+   "tunwoerter"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 7444,
+  "einheit": "tokens",
+  "menge": 404974,
+  "notiz": "wiewoerter, Prüfung Runde 2",
+  "cache_lesen": 326394,
+  "cache_schreiben": 71122,
+  "themen": 1,
+  "thema": [
+   "wiewoerter"
+  ]
  }
 ]
