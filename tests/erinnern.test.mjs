@@ -1,5 +1,5 @@
 // Erinnerungsfragen der Sachbücher (docs/geschichten.md §2b, Christian 2026-11-16): je Kapitel eine Frage nach der
-// Kernerkenntnis, drei Antworten, neutrale Auflösung, Foto aus dem Kapitel, Seite zum Nachlesen.
+// Kernerkenntnis, drei Antworten, neutrale Auflösung, Seite zum Nachlesen und deren Foto (2026-11-17).
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
@@ -27,8 +27,7 @@ for (const { id, g } of buecher) {
       assert.ok(typeof e.aufloesung === "string" && e.aufloesung.length > 10, `${wo}: Auflösung`);
       assert.doesNotMatch(e.aufloesung.trim(), URTEIL, `${wo}: Auflösung urteilt`);
       assert.ok(Number.isInteger(e.seite) && e.seite >= 0 && e.seite < k.seiten.length, `${wo}: seite im Kapitel`);
-      const s = k.seiten.find((x) => x.bild === e.bild);
-      assert.ok(s, `${wo}: Bild ${e.bild} ist ein Foto dieses Kapitels`);
+      assert.equal(e.bild, k.seiten[e.seite].bild, `${wo}: bild ist das Foto der Seite ${e.seite} (dort steht die Antwort)`);
       assert.ok(existsSync(join(ORDNER, id, e.bild)), `${wo}: ${e.bild} fehlt`);
     });
     assert.ok(new Set(g.kapitel.map((k) => k.erinnern.richtig)).size > 1, `${id}: die passende Antwort steht nicht immer an derselben Stelle`);

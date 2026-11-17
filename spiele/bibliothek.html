@@ -160,11 +160,7 @@ async function start() {
       const foto = (typeof g.titelbild === "string" ? g.titelbild : typeof g.titelbild?.bild === "string" ? g.titelbild.bild : null)
         ?? seiten.find((s) => typeof s.bild === "string")?.bild;
       deckel.set(b.id, foto ? `geschichten/${b.id}/${foto}` : null);
-      if (Array.isArray(g.kapitel) && g.kapitel.some((k) => k?.erinnern)) fragen.set(b.id, {
-        titel: g.titel,
-        // Foto der Seite, auf der die Antwort steht (Christian, 2026-11-17: erinnert an die Stelle im Buch); sonst das Foto der Frage
-        fragen: g.kapitel.map((k) => k?.erinnern && { ...k.erinnern, bild: k.seiten?.[k.erinnern.seite]?.bild || k.erinnern.bild }),
-      });
+      if (Array.isArray(g.kapitel) && g.kapitel.some((k) => k?.erinnern)) fragen.set(b.id, { titel: g.titel, fragen: g.kapitel.map((k) => k?.erinnern) });
     } catch (e) { protokoll("bibliothek, Titelbild " + b.id + ": " + e); }
   }));
 
