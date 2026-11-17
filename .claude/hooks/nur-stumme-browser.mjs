@@ -5,6 +5,8 @@
 // Nur Schutz vor Versehen: wer den Aufruf verschleiert, kommt durch.
 
 import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 export const LAUT = /\b(chromium|webkit|firefox)\s*\.\s*(launch|launchPersistentContext|launchServer)\s*\(/;
 const ERLAUBT = /(^|\/)tests\/browser\/stumm\.mjs$/;
@@ -33,7 +35,8 @@ export function gesperrt(eingabe) {
   return text !== null && LAUT.test(text);
 }
 
-if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split("/").pop() ?? "")) {
+// Direkt gestartet (auch unter Windows mit Backslash im Pfad), nicht nur importiert:
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   let eingabe = null;
   try { eingabe = JSON.parse(readFileSync(0, "utf8")); } catch { process.exit(0); }
   if (gesperrt(eingabe)) {
