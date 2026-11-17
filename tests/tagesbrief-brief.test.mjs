@@ -237,4 +237,8 @@ test("Dunkelfassung: jede Text/Hintergrund-Kombination erreicht mindestens 4.5:1
       [`Akzent ${fach} auf Karte`, f.akzent, DUNKEL.karte]);
   }
   for (const [name, vorn, hinten] of paare) assert.ok(kontrast(vorn, hinten) >= 4.5, `${name}: ${kontrast(vorn, hinten).toFixed(2)}`);
+  // Fließtext deutlich darüber (WCAG AAA): Mailprogramme hellen dunkle Flächen oft noch selbst auf (Christian 2026-11-17).
+  for (const [name, vorn, hinten] of paare.filter(([n]) => n.startsWith("Text"))) {
+    assert.ok(kontrast(vorn, hinten) >= 7, `${name}: ${kontrast(vorn, hinten).toFixed(2)} < 7`);
+  }
 });

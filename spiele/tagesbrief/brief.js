@@ -39,20 +39,20 @@ const SCHRIFT = "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Ar
  *   faecher: Record<string, { anleitung: string, akzent: string }> }}
  */
 export const DUNKEL = {
-  seite: "#1F1B45",
-  karte: "#2A2559",
-  text: "#F4F0FA",
-  weich: "#C9C0E6",
-  linie: "#403A7A",
-  kern: "#1F1B45",
+  seite: "#0E0C20",
+  karte: "#18152F",
+  text: "#FFFFFF",
+  weich: "#E0DAF2",
+  linie: "#3A3466",
+  kern: "#0E0C20",
   faecher: {
-    mathe: { anleitung: "#632A66", akzent: "#F490C4" },
-    grammatik: { anleitung: "#244558", akzent: "#5AC4A0" },
-    schreiben: { anleitung: "#284074", akzent: "#82B9DF" },
-    lesen: { anleitung: "#503B37", akzent: "#F2B630" },
-    geometrie: { anleitung: "#3E2F7F", akzent: "#B4A1EB" },
-    sprechen: { anleitung: "#5B353E", akzent: "#F29C66" },
-    neutral: { anleitung: "#443B71", akzent: "#C9C0E6" },
+    mathe: { anleitung: "#58214D", akzent: "#F490C4" },
+    grammatik: { anleitung: "#193C3F", akzent: "#5AC4A0" },
+    schreiben: { anleitung: "#1D365B", akzent: "#82B9DF" },
+    lesen: { anleitung: "#46321E", akzent: "#F2B630" },
+    geometrie: { anleitung: "#332666", akzent: "#B4A1EB" },
+    sprechen: { anleitung: "#502B25", akzent: "#F29C66" },
+    neutral: { anleitung: "#2E2852", akzent: "#E0DAF2" },
   },
 };
 
