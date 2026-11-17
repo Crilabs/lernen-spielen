@@ -4,7 +4,7 @@
 import { createServer } from "node:http";
 import { setzeBrief } from "../../spiele/tagesbrief/brief.js";
 import { GRENZEN, TAG, erlaubt, raeumeAuf } from "./grenzen.js";
-import { abgemeldetSeite, bestaetigtSeite, datenschutzSeite, ungueltigSeite } from "./seiten.js";
+import { WEITERES_GERAET, abgemeldetSeite, abmeldenFrage, bestaetigenFrage, bestaetigtSeite, datenschutzSeite, ungueltigSeite } from "./seiten.js";
 import { briefTopf, hash, juengsteVerschickte, lade, legeAb, leererTopf, sichere, zufall } from "./speicher.js";
 
 export const APP_SCHLUESSEL = "lernen-spielen-1";
@@ -19,7 +19,20 @@ const KLEIN = 16 * 1024;
  */
 export async function starteDienst({ port, datei, jetzt = () => new Date(), sende, basis = "https://lernen-spielen.crilabs.de", aus = false }) {
   const daten = lade(datei);
-  const speichern = () => sichere(datei, daten);
+  daten.gesperrt ??= [];
+
+  /** Entfernt abgelaufene Anfragen (24 h nach der Anmeldung) samt Adresse, Token und noch nicht abgeholtem Schlüssel. */
+  const raeumeAnfragen = () => {
+    const t = jetzt().getTime();
+    for (const [id, a] of Object.entries(daten.anfragen)) if (new Date(a.ablauf).getTime() < t) delete daten.anfragen[id];
+  };
+  const speichern = () => { raeumeAnfragen(); sichere(datei, daten); };
+
+  /** Von Hand gesperrte Geräte: `gesperrt` in der Speicherdatei, Präfixe des Geräte-Hashes (mindestens 12 Zeichen). */
+  const gesperrt = (/** @type {string} */ h) => daten.gesperrt.some((p) => p.length >= 12 && h.startsWith(p));
+
+  /** Liest ein form-urlencoded-Feld `t` aus dem Körper. */
+  const formularToken = async (/** @type {import("node:http").IncomingMessage} */ req) => new URLSearchParams((await lies(req, KLEIN)) ?? "").get("t") ?? "";
 
   /** Antwort mit JSON-Körper. */
   const json = (/** @type {import("node:http").ServerResponse} */ res, /** @type {number} */ status, /** @type {any} */ koerper = {}) => {
@@ -76,30 +89,33 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     if (!ok) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
     const anfrageId = zufall();
     const token = zufall();
-    daten.anfragen[anfrageId] = { adresse, token, ablauf: new Date(t + LINK_STUNDEN * 3600_000).toISOString(), uhrzeit, name };
+    daten.anfragen[anfrageId] = { adresse, token, ablauf: new Date(t + LINK_STUNDEN * 3600_000).toISOString(), uhrzeit, name, weiteres: Boolean(daten.adressen[adresse]) };
     speichern();
     const link = `${basis}/bestaetigen?t=${token}`;
+    const weiteres = daten.anfragen[anfrageId].weiteres;
     await sende({
       an: adresse,
       betreff: "Bitte bestätigen Sie den Tagesbrief",
-      text: `Guten Tag,\n\nbitte bestätigen Sie mit diesem Link, dass Sie den Tagesbrief der Lern-App erhalten möchten:\n${link}\n\nDer Link gilt 24 Stunden. Wenn Sie das nicht angefordert haben, ignorieren Sie diese E-Mail einfach.`,
-      html: `<p>Guten Tag,</p><p>bitte bestätigen Sie, dass Sie den Tagesbrief der Lern-App erhalten möchten:</p><p><a href="${link}">Tagesbrief bestätigen</a></p><p>Der Link gilt 24 Stunden. Wenn Sie das nicht angefordert haben, ignorieren Sie diese E-Mail einfach.</p>`,
+      text: `Guten Tag,\n\n${weiteres ? `${WEITERES_GERAET}\n\n` : ""}bitte bestätigen Sie mit diesem Link, dass Sie den Tagesbrief der Lern-App erhalten möchten:\n${link}\n\nDer Link gilt 24 Stunden. Wenn Sie das nicht angefordert haben, ignorieren Sie diese E-Mail einfach.`,
+      html: `<p>Guten Tag,</p>${weiteres ? `<p>${WEITERES_GERAET}</p>` : ""}<p>bitte bestätigen Sie, dass Sie den Tagesbrief der Lern-App erhalten möchten:</p><p><a href="${link}">Tagesbrief bestätigen</a></p><p>Der Link gilt 24 Stunden. Wenn Sie das nicht angefordert haben, ignorieren Sie diese E-Mail einfach.</p>`,
     });
     json(res, 200, { anfrageId });
     return 200;
   }
 
-  function bestaetigen(/** @type {URL} */ url, /** @type {any} */ res) {
-    const t = url.searchParams.get("t") ?? "";
+  function bestaetigen(/** @type {string} */ t, /** @type {any} */ res) {
+    raeumeAnfragen();
     const eintrag = Object.values(daten.anfragen).find((a) => a.token === t && t);
     if (!eintrag || eintrag.bestaetigt || new Date(eintrag.ablauf).getTime() < jetzt().getTime()) { html(res, 400, ungueltigSeite()); return 400; }
     const schluessel = zufall();
     const h = hash(schluessel);
     const adresse = (daten.adressen[eintrag.adresse] ??= { uhrzeit: eintrag.uhrzeit, namen: {}, geraete: {}, topf: leererTopf(), verschickt: [], abmeldeToken: zufall() });
     adresse.uhrzeit = eintrag.uhrzeit;
+    delete eintrag.weiteres;
     adresse.geraete[h] = { name: eintrag.geraet ?? "Gerät", angelegt: jetzt().toISOString() };
     adresse.namen[h] = eintrag.name ?? "";
     eintrag.bestaetigt = true;
+    eintrag.token = "";
     eintrag.schluessel = schluessel;
     speichern();
     html(res, 200, bestaetigtSeite());
@@ -107,11 +123,14 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
   }
 
   function status(/** @type {URL} */ url, /** @type {any} */ res) {
+    raeumeAnfragen();
     const eintrag = daten.anfragen[url.searchParams.get("anfrage") ?? ""];
     if (!eintrag) { json(res, 404, { fehler: "unbekannt" }); return 404; }
     if (!eintrag.bestaetigt) { json(res, 200, { bestaetigt: false }); return 200; }
     const antwort = eintrag.schluessel ? { bestaetigt: true, schluessel: eintrag.schluessel } : { bestaetigt: true };
+    // Nach der Abholung bleibt nur „bestätigt“ bis zum Ablauf; Schlüssel und Adresse gehen sofort.
     delete eintrag.schluessel;
+    delete eintrag.adresse;
     speichern();
     json(res, 200, antwort);
     return 200;
@@ -167,8 +186,7 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     return 200;
   }
 
-  function abmelden(/** @type {URL} */ url, /** @type {any} */ res) {
-    const t = url.searchParams.get("t") ?? "";
+  function abmelden(/** @type {string} */ t, /** @type {any} */ res) {
     const adresse = Object.keys(daten.adressen).find((a) => t && daten.adressen[a].abmeldeToken === t);
     if (!adresse) { html(res, 200, abgemeldetSeite()); return 200; }
     for (const h of Object.keys(daten.adressen[adresse].geraete)) daten.abgemeldet[h] = true;
@@ -185,10 +203,13 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     try {
       const url = new URL(req.url ?? "/", "http://dienst");
       const weg = `${req.method} ${url.pathname}`;
-      const seitenAufruf = weg === "GET /bestaetigen" || weg === "GET /abmelden" || weg === "GET /datenschutz";
+      const seitenAufruf = ["GET /bestaetigen", "POST /bestaetigen", "GET /abmelden", "POST /abmelden", "GET /datenschutz"].includes(weg);
       if (weg === "GET /datenschutz") { html(res, 200, datenschutzSeite()); ergebnis = 200; }
-      else if (weg === "GET /bestaetigen") ergebnis = bestaetigen(url, res);
-      else if (weg === "GET /abmelden") ergebnis = abmelden(url, res);
+      // Link-Scanner rufen GET auf: GET zeigt nur einen Knopf, erst POST bestätigt bzw. meldet ab.
+      else if (weg === "GET /bestaetigen") { html(res, 200, bestaetigenFrage(url.searchParams.get("t") ?? "", Object.values(daten.anfragen).some((a) => a.token === url.searchParams.get("t") && a.weiteres))); ergebnis = 200; }
+      else if (weg === "GET /abmelden") { html(res, 200, abmeldenFrage(url.searchParams.get("t") ?? "")); ergebnis = 200; }
+      else if (weg === "POST /bestaetigen") ergebnis = bestaetigen(await formularToken(req), res);
+      else if (weg === "POST /abmelden") ergebnis = abmelden(await formularToken(req), res);
       else if (!seitenAufruf && req.headers["x-app"] !== APP_SCHLUESSEL) { json(res, 403, { fehler: "app" }); ergebnis = 403; }
       else if (weg === "POST /anmelden") ergebnis = await anmelden(req, res);
       else if (weg === "GET /status") ergebnis = status(url, res);
@@ -196,6 +217,7 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
         const g = gerät(req);
         h = g.h;
         if (g.status !== 200) { json(res, g.status, { fehler: g.status === 410 ? "abgemeldet" : "schluessel" }); ergebnis = g.status; }
+        else if (gesperrt(g.h ?? "") && (weg === "POST /ereignisse" || weg === "POST /probebrief")) { json(res, 403, { fehler: "gesperrt" }); ergebnis = 403; }
         else if (weg === "POST /ereignisse") ergebnis = await ereignisse(req, res, g);
         else if (weg === "POST /einstellungen") ergebnis = await einstellungen(req, res, g);
         else if (weg === "POST /probebrief") ergebnis = await probebrief(res, g);

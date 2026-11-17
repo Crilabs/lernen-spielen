@@ -1,7 +1,8 @@
 // Versanddienst des Tagesbriefs: Anmeldung, Empfängerbindung, Ereignisse, Grenzen, Abmelden, Not-Aus, Protokoll.
 import { test, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, rmSync, readFileSync } from "node:fs";
+import { mkdtempSync, rmSync, readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { starteDienst } from "../dienste/tagesbrief/server.js";
@@ -34,6 +35,7 @@ afterEach(async () => {
 });
 
 const post = (pfad, koerper, kopf = KOPF) => fetch(t.url + pfad, { method: "POST", headers: kopf, body: typeof koerper === "string" ? koerper : JSON.stringify(koerper) });
+const formular = (pfad, token) => fetch(t.url + pfad, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ t: token }).toString() });
 const bearer = (schluessel) => ({ ...KOPF, authorization: `Bearer ${schluessel}` });
 
 /** Meldet an, bestätigt und holt den Schlüssel. */
@@ -41,7 +43,7 @@ async function einrichten(adresse = ADRESSE) {
   const { anfrageId } = await (await post("/anmelden", { adresse, name: "Mia", uhrzeit: "18:00" })).json();
   const mail = t.mails.at(-1);
   const token = /bestaetigen\?t=([\w-]+)/.exec(mail.text)[1];
-  await fetch(`${t.url}/bestaetigen?t=${token}`);
+  await formular("/bestaetigen", token);
   const { schluessel } = await (await fetch(`${t.url}/status?anfrage=${anfrageId}`, { headers: KOPF })).json();
   return { anfrageId, schluessel, token };
 }
@@ -59,7 +61,12 @@ test("Anmelden schickt genau eine Bestätigungsmail; Status erst nach Bestätigu
   assert.deepEqual(vor, { bestaetigt: false });
 
   const token = /bestaetigen\?t=([\w-]+)/.exec(t.mails[0].text)[1];
-  const seite = await fetch(`${t.url}/bestaetigen?t=${token}`);
+  const frage = await fetch(`${t.url}/bestaetigen?t=${token}`);
+  assert.equal(frage.status, 200);
+  assert.match(await frage.text(), /<form method="post"/);
+  assert.deepEqual(await (await fetch(`${t.url}/status?anfrage=${anfrageId}`, { headers: KOPF })).json(), { bestaetigt: false }, "GET allein bestätigt nicht");
+
+  const seite = await formular("/bestaetigen", token);
   assert.equal(seite.status, 200);
   assert.match(await seite.text(), /Bestätigt\. Sie können das Fenster schließen\./);
 
@@ -69,7 +76,7 @@ test("Anmelden schickt genau eine Bestätigungsmail; Status erst nach Bestätigu
   const zweit = await (await fetch(`${t.url}/status?anfrage=${anfrageId}`, { headers: KOPF })).json();
   assert.deepEqual(zweit, { bestaetigt: true });
 
-  const nochmal = await fetch(`${t.url}/bestaetigen?t=${token}`);
+  const nochmal = await formular("/bestaetigen", token);
   assert.equal(nochmal.status, 400);
 });
 
@@ -82,7 +89,7 @@ test("Bestätigungslink läuft nach 24 Stunden ab", async () => {
   await post("/anmelden", { adresse: ADRESSE, uhrzeit: "18:00" });
   jetzt = new Date("2026-11-18T10:00:01Z");
   const token = /bestaetigen\?t=([\w-]+)/.exec(t.mails[0].text)[1];
-  assert.equal((await fetch(`${t.url}/bestaetigen?t=${token}`)).status, 400);
+  assert.equal((await formular("/bestaetigen", token)).status, 400);
 });
 
 test("ohne X-App 403, falscher Bearer 401", async () => {
@@ -148,7 +155,11 @@ test("Abmelden: alle Geräte der Adresse 410, Topf gelöscht", async () => {
   await post("/ereignisse", [{ id: "e1", art: "dabei", daten: { id: "d1", name: "n", fach: "mathe" } }], bearer(eins.schluessel));
   const speicher = JSON.parse(readFileSync(t.datei, "utf8"));
   const abmeldeToken = speicher.adressen[ADRESSE].abmeldeToken;
-  const seite = await fetch(`${t.url}/abmelden?t=${abmeldeToken}`);
+  const frage = await fetch(`${t.url}/abmelden?t=${abmeldeToken}`);
+  assert.match(await frage.text(), /<form method="post"/);
+  assert.equal((await post("/ereignisse", [], bearer(eins.schluessel))).status, 200, "GET allein meldet nicht ab");
+  assert.ok(JSON.parse(readFileSync(t.datei, "utf8")).adressen[ADRESSE]);
+  const seite = await formular("/abmelden", abmeldeToken);
   assert.equal(seite.status, 200);
   assert.match(await seite.text(), /Abgemeldet/);
   assert.equal((await post("/ereignisse", [], bearer(eins.schluessel))).status, 410);
@@ -213,4 +224,61 @@ test("Protokoll enthält weder Adresse noch Ereignistexte noch Token", async () 
   const log = t.logs.join("\n");
   assert.ok(log.length > 0);
   for (const verboten of [ADRESSE, "example.org", GEHEIM, token, schluessel]) assert.ok(!log.includes(verboten), `Protokoll enthält ${verboten}`);
+});
+
+test("Anfragen: abgelaufene verschwinden, abgeholte behalten weder Schlüssel noch Adresse noch Token", async () => {
+  await t.dienst.stop();
+  rmSync(t.ordner, { recursive: true, force: true });
+  let jetzt = new Date("2026-11-17T10:00:00Z");
+  t = await starte({ jetzt: () => jetzt });
+  console.log = () => {};
+  // abgeholt
+  const { anfrageId } = await einrichten();
+  const nachAbholung = JSON.parse(readFileSync(t.datei, "utf8")).anfragen[anfrageId];
+  assert.deepEqual(Object.keys(nachAbholung).sort(), ["ablauf", "bestaetigt", "name", "token", "uhrzeit"].sort());
+  assert.ok(!readFileSync(t.datei, "utf8").includes(ADRESSE + '","token'), "Adresse der Anfrage nicht mehr im Klartext");
+  assert.equal(nachAbholung.token, "");
+  // bestätigt, nie abgeholt
+  const zwei = await post("/anmelden", { adresse: "zwei@example.org", uhrzeit: "18:00" });
+  const zweiId = (await zwei.json()).anfrageId;
+  await formular("/bestaetigen", /bestaetigen\?t=([\w-]+)/.exec(t.mails.at(-1).text)[1]);
+  assert.ok(JSON.parse(readFileSync(t.datei, "utf8")).anfragen[zweiId].schluessel, "wartet auf Abholung");
+  // unbestätigt
+  await post("/anmelden", { adresse: "drei@example.org", uhrzeit: "18:00" });
+  assert.equal(Object.keys(JSON.parse(readFileSync(t.datei, "utf8")).anfragen).length, 3);
+
+  jetzt = new Date("2026-11-18T10:00:01Z");
+  await post("/anmelden", { adresse: "vier@example.org", uhrzeit: "18:00" });
+  const rest = JSON.parse(readFileSync(t.datei, "utf8")).anfragen;
+  assert.equal(Object.keys(rest).length, 1, "nur die frische Anfrage bleibt");
+  assert.ok(!readFileSync(t.datei, "utf8").includes("schluessel\":\""), "kein Klartext-Schlüssel mehr in der Datei");
+  assert.equal((await fetch(`${t.url}/status?anfrage=${zweiId}`, { headers: KOPF })).status, 404);
+});
+
+test("gesperrtes Gerät (Präfix des Hash in `gesperrt`) bekommt bei /ereignisse und /probebrief 403", async () => {
+  const { schluessel } = await einrichten();
+  const andere = await einrichten("andere@example.org");
+  const h = createHash("sha256").update(schluessel).digest("hex");
+  await t.dienst.stop();
+  const speicher = JSON.parse(readFileSync(t.datei, "utf8"));
+  speicher.gesperrt = [h.slice(0, 12), "kurz"];
+  writeFileSync(t.datei, JSON.stringify(speicher));
+  const alt = t;
+  const dienst = await starteDienst({ port: 0, datei: alt.datei, sende: async () => {} });
+  t = { ...alt, dienst, url: `http://127.0.0.1:${dienst.server.address().port}` };
+  assert.equal((await post("/ereignisse", [], bearer(schluessel))).status, 403);
+  assert.equal((await post("/probebrief", {}, bearer(schluessel))).status, 403);
+  assert.equal((await post("/ereignisse", [], bearer(andere.schluessel))).status, 200);
+});
+
+test("weiteres Gerät für eine bestätigte Adresse: Mail und Knopfseite warnen ausdrücklich", async () => {
+  const WARNUNG = "Ein weiteres Gerät möchte den Tagesbrief für diese Adresse erhalten. Wenn Sie das nicht veranlasst haben, bestätigen Sie nicht.";
+  await einrichten();
+  assert.ok(!t.mails[0].text.includes("weiteres Gerät"), "erste Anmeldung ohne Warnung");
+  await post("/anmelden", { adresse: ADRESSE, uhrzeit: "18:00" });
+  const mail = t.mails.at(-1);
+  assert.ok(mail.text.includes(WARNUNG));
+  assert.ok(mail.html.includes(WARNUNG));
+  const token = /bestaetigen\?t=([\w-]+)/.exec(mail.text)[1];
+  assert.ok((await (await fetch(`${t.url}/bestaetigen?t=${token}`)).text()).includes(WARNUNG));
 });
