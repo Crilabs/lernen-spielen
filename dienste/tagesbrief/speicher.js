@@ -27,9 +27,12 @@ export const leererTopf = () => ({ ids: [], gekonnt: [], dabei: [], gelesen: [],
 export function lade(datei) {
   const leer = () => ({ familien: {}, anfragen: {}, zaehler: {}, abgemeldet: {} });
   if (!existsSync(datei)) return leer();
-  const gelesen = /** @type {Partial<Daten> & { adressen?: unknown }} */ (JSON.parse(readFileSync(datei, "utf8")));
+  const text = readFileSync(datei, "utf8");
+  if (!text.trim()) return leer(); // 0-Byte-Datei wie eine fehlende
+  const gelesen = /** @type {Partial<Daten> & { adressen?: unknown }} */ (JSON.parse(text));
   // Eine Datei aus der Zeit „eine Adresse je Topf“ (ohne `familien`) wird verworfen; es gab keine echten Anmeldungen.
   if (!gelesen || typeof gelesen.familien !== "object" || !gelesen.familien) return leer();
+  delete gelesen.adressen; // Rest der alten Tabelle nie weiterführen
   return { ...leer(), ...gelesen };
 }
 

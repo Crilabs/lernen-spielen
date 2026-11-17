@@ -463,17 +463,18 @@ test("Empfänger-Endpunkte: Not-Aus 503 beim Hinzufügen, gesperrtes Gerät 403,
   assert.equal((await fetch(`${t.url}/empfaenger`, { headers: bearer(schluessel) })).status, 403);
   assert.equal((await del("/empfaenger", { adresse: ADRESSE }, schluessel)).status, 403);
   await dienst.stop();
-  const aus = await starteDienst({ port: 0, datei: alt.datei, sende: async () => {}, aus: true });
+  writeFileSync(alt.datei, JSON.stringify({ ...speicher(), gesperrt: [] }));
+  const aus = await starteDienst({ port: 0, datei: alt.datei, sende: async () => { throw new Error("Not-Aus darf nicht senden"); }, aus: true });
   t = { ...alt, dienst: aus, url: `http://127.0.0.1:${aus.server.address().port}` };
-  const frei = speicher();
-  frei.gesperrt = [];
-  writeFileSync(t.datei, JSON.stringify(frei));
+  assert.equal((await post("/empfaenger", { adresse: "n@example.org" }, bearer(schluessel))).status, 503);
+  assert.deepEqual((await liste(schluessel)).empfaenger.map((e) => e.adresse), [ADRESSE], "nichts angelegt");
 });
 
-test("Start mit leerer und mit alter Datei (adressen) gelingt, alte Daten werden verworfen", async () => {
+test("Start mit fehlender, 0-Byte- und alter Datei (adressen) gelingt, alte Daten werden verworfen", async () => {
   await t.dienst.stop();
-  for (const inhalt of ["", '{"adressen":{"alt@example.org":{"uhrzeit":"18:00","namen":{},"geraete":{},"topf":{},"verschickt":[],"abmeldeToken":"x"}},"anfragen":{},"zaehler":{},"abgemeldet":{}}']) {
-    if (inhalt) writeFileSync(t.datei, inhalt);
+  for (const inhalt of ["", "LEER", '{"adressen":{"alt@example.org":{"uhrzeit":"18:00","namen":{},"geraete":{},"topf":{},"verschickt":[],"abmeldeToken":"x"}},"anfragen":{},"zaehler":{},"abgemeldet":{}}', '{"adressen":{"x":{}},"familien":{},"anfragen":{},"zaehler":{},"abgemeldet":{}}']) {
+    if (inhalt === "LEER") writeFileSync(t.datei, "");
+    else if (inhalt) writeFileSync(t.datei, inhalt);
     else rmSync(t.datei, { force: true });
     const dienst = await starteDienst({ port: 0, datei: t.datei, sende: async () => {} });
     const url = `http://127.0.0.1:${dienst.server.address().port}`;
