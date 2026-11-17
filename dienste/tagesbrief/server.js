@@ -6,7 +6,7 @@ import { setzeBrief } from "../../spiele/tagesbrief/brief.js";
 import { GRENZEN, TAG, erlaubt, raeumeAuf } from "./grenzen.js";
 import { WEITERES_GERAET, abgemeldetSeite, abmeldenFrage, bestaetigenFrage, bestaetigtSeite, datenschutzSeite, ungueltigSeite } from "./seiten.js";
 import { gueltigesEreignis } from "./pruefung.js";
-import { versendeFaellige } from "./versand.js";
+import { berlinZeit, versendeFaellige } from "./versand.js";
 import { briefTopf, hash, juengsteVerschickte, lade, legeAb, leererTopf, sichere, zufall } from "./speicher.js";
 
 export const APP_SCHLUESSEL = "lernen-spielen-1";
@@ -149,7 +149,7 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     if (!liste.every(gueltigesEreignis)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
     if (!erlaubt(daten.zaehler, `push:${g.h}`, GRENZEN.pushesJeGeraet, jetzt().getTime())) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
     // Nur die eigene Adresse: Felder wie `an` oder `adresse` im Körper werden nie gelesen.
-    legeAb(g.eintrag.topf, liste, jetzt());
+    legeAb(g.eintrag.topf, liste, jetzt(), berlinZeit(jetzt()).uhr >= g.eintrag.uhrzeit);
     speichern();
     json(res, 200, { verschickt: juengsteVerschickte(g.eintrag, jetzt()) });
     return 200;

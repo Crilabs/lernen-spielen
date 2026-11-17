@@ -42,6 +42,8 @@ export async function versendeFaellige({ daten, jetzt, sende, basis, speichern }
     if (uhr < eintrag.uhrzeit || eintrag.letzterTag === tag || (fehler && (fehler.n >= MAX_VERSUCHE || jetzt.getTime() < fehler.bis))) continue;
     const vor = (/** @type {any} */ x) => vorUhrzeit(x, tag, eintrag.uhrzeit);
     const topf = eintrag.topf;
+    // Ein spätes `naechstes` von einem früheren Tag gehört schon zum heutigen Brief.
+    if (topf.naechstesSpaeter && vor(topf.naechstesSpaeter)) { topf.naechstes = topf.naechstesSpaeter; delete topf.naechstesSpaeter; }
     const teil = {
       gekonnt: topf.gekonnt.filter(vor), dabei: topf.dabei.filter(vor), gelesen: topf.gelesen.filter(vor),
       naechstes: topf.naechstes && vor(topf.naechstes) ? topf.naechstes : null,
@@ -65,7 +67,10 @@ export async function versendeFaellige({ daten, jetzt, sende, basis, speichern }
     // Entfernt nur, was im Brief stand; während des Sendens Eingegangenes und spätere Ereignisse bleiben.
     const nochDa = eintrag.topf;
     for (const art of /** @type {const} */ (["gekonnt", "dabei", "gelesen"])) nochDa[art] = nochDa[art].filter((x) => !teil[art].includes(x));
-    if (nochDa.naechstes === teil.naechstes) nochDa.naechstes = null;
+    if (nochDa.naechstes === teil.naechstes) {
+      nochDa.naechstes = nochDa.naechstesSpaeter ?? null;
+      delete nochDa.naechstesSpaeter;
+    }
     const rest = [...nochDa.gekonnt, ...nochDa.dabei, ...nochDa.gelesen, ...(nochDa.naechstes ? [nochDa.naechstes] : [])];
     if (!rest.length) eintrag.topf = leererTopf();
     else nochDa.seit = rest.map((x) => x.eingang).filter(Boolean).sort()[0] ?? nochDa.seit;

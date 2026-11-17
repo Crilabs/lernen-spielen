@@ -282,3 +282,20 @@ test("Wiederholung nach Graph-429 wartet mindestens Retry-After", async () => {
   rmSync(ordner, { recursive: true, force: true });
   t.dienst = { stop: async () => {} };
 });
+
+test("Anleitung A um 17:00, B um 18:05: Brief um 18:30 hat A, der Brief am nächsten Tag B", async () => {
+  const s = await einrichten();
+  jetzt = new Date("2026-11-17T16:00:00Z");
+  await push(s, [gekonnt(), { id: "n-a", art: "naechstes", daten: naechstes("mathe/a.md") }]);
+  jetzt = new Date("2026-11-17T17:05:00Z");
+  await push(s, [{ id: "n-b", art: "naechstes", daten: naechstes("mathe/b.md") }]);
+  jetzt = new Date("2026-11-17T17:30:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+  assert.deepEqual(speicher().adressen[ADRESSE].verschickt.map((v) => v.anleitung), ["mathe/a.md"]);
+  assert.equal(speicher().adressen[ADRESSE].topf.naechstes.id, "mathe/b.md", "B rückt nach");
+  jetzt = new Date("2026-11-18T10:00:00Z");
+  await push(s, [gekonnt("g2")]);
+  jetzt = new Date("2026-11-18T17:00:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+  assert.deepEqual(speicher().adressen[ADRESSE].verschickt.map((v) => v.anleitung), ["mathe/a.md", "mathe/b.md"]);
+});

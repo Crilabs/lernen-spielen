@@ -4,7 +4,7 @@ import { createHash, randomBytes } from "node:crypto";
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 
 /** @typedef {{ id: string, art: string, daten: Record<string, any> }} Ereignis */
-/** @typedef {{ ids: string[], gekonnt: any[], dabei: any[], gelesen: any[], naechstes: any | null, seit: string | null }} GespeicherterTopf */
+/** @typedef {{ ids: string[], gekonnt: any[], dabei: any[], gelesen: any[], naechstes: any | null, naechstesSpaeter?: any, seit: string | null }} GespeicherterTopf */
 /** @typedef {{ uhrzeit: string, namen: Record<string, string>, geraete: Record<string, { name: string, angelegt: string }>, topf: GespeicherterTopf, verschickt: { anleitung: string, am: string }[], abmeldeToken: string, letzterTag?: string, fehler?: { tag: string, n: number, bis: number } }} Adresse */
 /** @typedef {{ adressen: Record<string, Adresse>, anfragen: Record<string, any>, zaehler: Record<string, number[]>, abgemeldet: Record<string, true> }} Daten */
 
@@ -37,17 +37,22 @@ export function sichere(datei, daten) {
 /**
  * Legt die Ereignisse in den Topf. Doppelte Ereignis-Ids zählen einmal, gekonnt/dabei/gelesen nach `daten.id`,
  * `naechstes` ersetzt das vorige. Ereignisse ohne bekannte Art oder ohne Objekt in `daten` werden übergangen.
- * @param {GespeicherterTopf} topf @param {Ereignis[]} ereignisse @param {Date} jetzt
+ * Ein `naechstes`, das nach der heutigen Uhrzeit eingeht (`nachUhrzeit`), kommt auf den zweiten Platz
+ * `naechstesSpaeter` und verdrängt das für den heutigen Brief nicht; ein früheres räumt diesen Platz.
+ * @param {GespeicherterTopf} topf @param {Ereignis[]} ereignisse @param {Date} jetzt @param {boolean} [nachUhrzeit]
  * @returns {number} Anzahl der neu aufgenommenen Ereignisse
  */
-export function legeAb(topf, ereignisse, jetzt) {
+export function legeAb(topf, ereignisse, jetzt, nachUhrzeit = false) {
   let neu = 0;
   for (const e of ereignisse) {
     if (!e || typeof e.id !== "string" || !ARTEN.includes(e.art) || !e.daten || typeof e.daten !== "object" || Array.isArray(e.daten)) continue;
     if (topf.ids.includes(e.id)) continue;
     topf.ids.push(e.id);
     const daten = { ...e.daten, eingang: jetzt.toISOString() };
-    if (e.art === "naechstes") topf.naechstes = daten;
+    if (e.art === "naechstes") {
+      if (nachUhrzeit && topf.naechstes) topf.naechstesSpaeter = daten;
+      else { topf.naechstes = daten; delete topf.naechstesSpaeter; }
+    }
     else {
       const liste = /** @type {any[]} */ (topf[/** @type {"gekonnt"|"dabei"|"gelesen"} */ (e.art)]);
       if (e.daten.id !== undefined && liste.some((x) => x.id === e.daten.id)) continue;
