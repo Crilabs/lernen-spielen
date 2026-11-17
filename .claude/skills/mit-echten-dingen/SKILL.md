@@ -173,6 +173,11 @@ die Anleitung im Lernplan des Elternbereichs als Karte im aufgeklappten Thema (m
 das Foto mit dem Siegel „echt“ wie die Karten der Kinderseiten; ohne Siegel steht es auf `echt.html`, in
 `<ls-anregung>` und im PDF. Analoges Spielen zählt nie für den Lernstand.
 
+## Rückmeldung von Christian
+
+Steht unter dem Aufruf ein Abschnitt „Rückmeldung von Christian“ (aus der Verwaltung, 2026-11-17): Jeder Punkt geht
+an den Schreib-Agenten als Auftrag und an den Prüfer als eigener Prüfpunkt (umgesetzt ja/nein mit Beleg).
+
 ## Lauf aus der Verwaltung
 
 Ist `VERWALTUNG_AUFTRAG` gesetzt (Start über `npm run verwaltung`, `werkzeuge/verwaltung/`), schreib als Letztes

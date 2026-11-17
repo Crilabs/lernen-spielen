@@ -8,6 +8,7 @@ export const GRENZEN = {
   anmeldenJeIp: { max: 5, fenster: STUNDE },
   anmeldenJeAdresse: { max: 3, fenster: TAG },
   pushesJeGeraet: { max: 50, fenster: TAG },
+  einladungenJeFamilie: { max: 5, fenster: TAG },
   probebriefeJeGeraet: { max: 3, fenster: TAG },
   ereignisseJePush: 200,
   bytesJePush: 300 * 1024,

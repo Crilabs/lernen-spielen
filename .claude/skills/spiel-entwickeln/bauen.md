@@ -9,6 +9,10 @@ trotzdem die Idee-Datei – ihre „Abweichungen von der Vorgabe“ sind gewollt
 `spiele/vorlage/spiel.js` (Schritte 1–7, RAHMEN, SPIELWELT). Einzelheiten zu einem Baustein stehen in seiner Datei
 in `spiele/rahmen/` bzw. `spiele/objekte/`; lies gezielt, nicht alles.
 
+**Rückmeldung von Christian** (Abschnitt am Ende des Bauhefts, falls da): Er hat das Spiel gespielt. Jeder Punkt wird
+umgesetzt; ein Fehler (etwas ist unsichtbar, reagiert falsch) zuerst mit einem roten Test belegt. Was man nur in
+Bewegung sieht (Ziehen), belegst du mit einem Screenshot mitten in der Bewegung.
+
 **Lade vor der UI-Arbeit** den Skill `frontend-design:frontend-design`. Der Fokus ist ein Spiel, das Spaß macht,
 mit schönen Bildern und flüssigen Animationen (Regeln §1, §4): ein Held mit Gewicht, eine Wirkung, die sofort kommt
 und in etwa 2,5 s fertig ist (bis 8 s, wenn die Dauer das Lernziel ist, §1), Klänge aus Web Audio, nichts ruckelt.

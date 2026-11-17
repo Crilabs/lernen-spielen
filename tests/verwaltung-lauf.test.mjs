@@ -185,3 +185,16 @@ test("fuehreIdeenAus: ohne Sperre, Status läuft → wartet auf Christian, Ergeb
   await assert.rejects(fuehreIdeenAus({ ordner: o, wurzel: o, id: x.id, starte: fake(o, {}) }), /wartet nicht/);
   rmSync(o, { recursive: true });
 });
+
+test("arbeiteAb: Rückmeldungen stehen im gestarteten Befehl, der gespeicherte Befehl bleibt", async () => {
+  const o = ordner();
+  const x = { ...auftrag("spiel", "G02"), rueckmeldungen: [{ text: "Ziehen unsichtbar", zeit: "2026-11-17T12:00:00Z" }] };
+  mitAuftraegen(o, [x]);
+  const reihe = [];
+  await arbeiteAb({ ordner: o, wurzel: o, starte: fake(o, {}, reihe) });
+  assert.equal(reihe.length, 1);
+  assert.ok(reihe[0].startsWith("Spiel entwickeln G02\n\n## Rückmeldung von Christian"));
+  assert.match(reihe[0], /- Ziehen unsichtbar/);
+  assert.equal(ladeAuftraege(pfade(o).auftraege)[0].befehl, "Spiel entwickeln G02");
+  rmSync(o, { recursive: true });
+});

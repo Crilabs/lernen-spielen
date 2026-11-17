@@ -36,7 +36,24 @@ journalctl -u lernen-spielen-tagesbrief -n 50     # nur Zeit, Weg, Status, Fehle
 ```
 
 Not-Aus: `systemctl edit lernen-spielen-tagesbrief` mit `Environment=TAGESBRIEF_AUS=1`, dann `systemctl restart`.
-Der Dienst nimmt dann keine Anmeldungen, Ereignisse oder Probebriefe mehr an (503) und sendet nichts.
+Der Dienst nimmt dann keine Anmeldungen, Empfänger, Ereignisse oder Probebriefe mehr an (503) und sendet nichts.
+
+## Familie, Empfänger, Abbestellen
+
+Ein Topf gehört einer **Familie** (eine Uhrzeit, ein Name, mehrere Geräte) mit bis zu **4 Empfängern** (bestätigt und
+wartend zusammen). Briefe gehen nur an bestätigte Adressen, je Empfänger eine eigene Mail mit eigenem Abbestell-Link.
+
+| Endpunkt (mit `X-App`) | Zweck |
+| --- | --- |
+| `POST /anmelden` (ohne Bearer) | neue Familie, oder Beitritt eines Geräts, wenn die Adresse bestätigter Empfänger genau einer Familie ist |
+| `POST /empfaenger { adresse }` (Bearer) | zusätzliche Adresse, wartet auf Bestätigung per Link (POST); 409 `voll` ab 4, 409 `vorhanden` |
+| `GET /empfaenger` (Bearer) | `{ uhrzeit, name, empfaenger: [{ adresse, bestaetigt }] }` |
+| `DELETE /empfaenger { adresse }` (Bearer) | entfernt bestätigte oder wartende Adresse; die letzte bestätigte löscht die Familie (`{ familieGeloescht: true }`, Geräte bekommen danach 410) |
+| `GET/POST /abmelden?t=` | Token je Empfänger, entfernt nur diese Adresse; die letzte löscht die Familie |
+
+Scheitert der Versand an einen Empfänger, wird nur dieser wiederholt (15 Minuten Abstand, höchstens 5 Versuche am Tag).
+Der Topf wird geleert, sobald alle bestätigten Empfänger den Brief haben oder ihre Versuche aufgebraucht sind (bekam ihn
+niemand, bleibt er bis morgen). Eine Speicherdatei aus der Zeit „eine Adresse je Topf“ (`adressen`) wird beim Start verworfen.
 
 ## Probebrief
 

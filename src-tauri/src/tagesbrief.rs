@@ -380,7 +380,29 @@ pub fn pushen(dir: &Path, basis: &str, ereignisse: Vec<Value>) -> Result<Value, 
     Ok(letzte)
 }
 
-/// Aufruf mit Schlüssel; 410 setzt den Zustand auf „abbestellt“.
+/// Aufruf mit Schlüssel; 410 setzt den Zustand auf „abbestellt“, 401 auf „aus“.
+fn mit_schluessel_antwort(
+    dir: &Path,
+    befehl: &str,
+    methode: &str,
+    url: &str,
+    body: Option<&Value>,
+) -> Result<(u16, Value), String> {
+    let mut z = lade(dir);
+    if z.zustand != "aktiv" {
+        return Err("Tagesbrief ist nicht eingerichtet".to_string());
+    }
+    let (status, antwort) = anfrage(befehl, methode, url, Some(&z.schluessel), body)?;
+    if status == 410 || status == 401 {
+        z.zustand = if status == 410 { "abbestellt" } else { "aus" }.into();
+        z.schluessel = String::new();
+        sichere(dir, &z)?;
+        sichere_schlange(dir, &[])?;
+    }
+    Ok((status, antwort))
+}
+
+/// Wie `mit_schluessel_antwort`, nur der Status.
 fn mit_schluessel(
     dir: &Path,
     befehl: &str,
@@ -388,18 +410,91 @@ fn mit_schluessel(
     url: &str,
     body: Option<&Value>,
 ) -> Result<u16, String> {
-    let mut z = lade(dir);
-    if z.zustand != "aktiv" {
-        return Err("Tagesbrief ist nicht eingerichtet".to_string());
+    mit_schluessel_antwort(dir, befehl, methode, url, body).map(|(status, _)| status)
+}
+
+/// Zustand nach 401/410 als Antwort, sonst `None`; die Seite zeichnet dann den neuen Zustand.
+fn zustand_verloren(dir: &Path, status: u16) -> Option<Value> {
+    matches!(status, 401 | 410).then(|| json!({ "zustand": lade(dir).zustand }))
+}
+
+/// Empfänger der Familie: `{ uhrzeit, name, empfaenger: [{ adresse, bestaetigt }] }`.
+/// Wurde das Gerät inzwischen abgemeldet (410/401), kommt `{ zustand }` zurück.
+pub fn empfaenger_liste(dir: &Path, basis: &str) -> Result<Value, String> {
+    let _sperre = SPERRE.lock().unwrap_or_else(|e| e.into_inner());
+    let (status, antwort) = mit_schluessel_antwort(
+        dir,
+        "empfaenger",
+        "GET",
+        &format!("{basis}/empfaenger"),
+        None,
+    )?;
+    if let Some(v) = zustand_verloren(dir, status) {
+        return Ok(v);
     }
-    let (status, _) = anfrage(befehl, methode, url, Some(&z.schluessel), body)?;
-    if status == 410 || status == 401 {
-        z.zustand = if status == 410 { "abbestellt" } else { "aus" }.into();
-        z.schluessel = String::new();
-        sichere(dir, &z)?;
-        sichere_schlange(dir, &[])?;
+    if status != 200 {
+        return Err(format!("Empfänger nicht abrufbar (Status {status})"));
     }
-    Ok(status)
+    Ok(antwort)
+}
+
+/// Fügt eine Adresse hinzu (der Dienst schickt den Bestätigungslink). `{ ok: true }` oder
+/// `{ fehler: "voll" | "vorhanden" | "zu-viele" | "ungueltig" }`; `Err` nur bei Netz- und Dienstfehlern.
+pub fn empfaenger_hinzufuegen(dir: &Path, basis: &str, adresse: &str) -> Result<Value, String> {
+    let _sperre = SPERRE.lock().unwrap_or_else(|e| e.into_inner());
+    let (status, antwort) = mit_schluessel_antwort(
+        dir,
+        "empfaenger-hinzufuegen",
+        "POST",
+        &format!("{basis}/empfaenger"),
+        Some(&json!({ "adresse": adresse })),
+    )?;
+    if let Some(v) = zustand_verloren(dir, status) {
+        return Ok(v);
+    }
+    match status {
+        200 => Ok(json!({ "ok": true })),
+        409 => Ok(
+            json!({ "fehler": if antwort["fehler"] == "vorhanden" { "vorhanden" } else { "voll" } }),
+        ),
+        429 => Ok(json!({ "fehler": "zu-viele" })),
+        400 => Ok(json!({ "fehler": "ungueltig" })),
+        _ => Err(format!("Adresse nicht hinzufügbar (Status {status})")),
+    }
+}
+
+/// Entfernt eine Adresse. `{ ok: true }`, `{ familieGeloescht: true }` (dann ist der Tagesbrief lokal
+/// „aus“; Gerätekennung und Zähler bleiben) oder `{ fehler: "unbekannt" }`.
+pub fn empfaenger_entfernen(dir: &Path, basis: &str, adresse: &str) -> Result<Value, String> {
+    let _sperre = SPERRE.lock().unwrap_or_else(|e| e.into_inner());
+    let (status, antwort) = mit_schluessel_antwort(
+        dir,
+        "empfaenger-entfernen",
+        "DELETE",
+        &format!("{basis}/empfaenger"),
+        Some(&json!({ "adresse": adresse })),
+    )?;
+    if let Some(v) = zustand_verloren(dir, status) {
+        return Ok(v);
+    }
+    match status {
+        200 if antwort["familieGeloescht"] == true => {
+            let alt = lade(dir);
+            sichere(
+                dir,
+                &Zustand {
+                    nummer: alt.nummer,
+                    geraet: alt.geraet,
+                    ..Zustand::default()
+                },
+            )?;
+            sichere_schlange(dir, &[])?;
+            Ok(json!({ "familieGeloescht": true }))
+        }
+        200 => Ok(json!({ "ok": true })),
+        404 => Ok(json!({ "fehler": "unbekannt" })),
+        _ => Err(format!("Adresse nicht entfernbar (Status {status})")),
+    }
 }
 
 /// Ändert Name und Uhrzeit im Dienst und lokal.
@@ -820,6 +915,109 @@ mod tests {
             None
         );
         assert!(ordner(app.path(), Some("../x")).is_err());
+    }
+
+    #[test]
+    fn empfaenger_liste_kommt_vom_dienst() {
+        let dir = tempfile::tempdir().unwrap();
+        aktiv(dir.path());
+        let (basis, gesehen) = fake(vec![(
+            200,
+            r#"{"uhrzeit":"18:00","name":"Lena","empfaenger":[{"adresse":"a@example.org","bestaetigt":true},{"adresse":"b@example.org","bestaetigt":false}]}"#,
+        )]);
+        let r = empfaenger_liste(dir.path(), &basis).unwrap();
+        assert_eq!(r["name"], "Lena");
+        assert_eq!(r["empfaenger"][1]["bestaetigt"], false);
+        let a = gesehen.lock().unwrap()[0].clone();
+        assert!(a.starts_with("GET /empfaenger") && a.contains("Bearer GEHEIMER-SCHLUESSEL"));
+    }
+
+    #[test]
+    fn empfaenger_liste_bei_410_meldet_abbestellt() {
+        let dir = tempfile::tempdir().unwrap();
+        aktiv(dir.path());
+        let (basis, _) = fake(vec![(410, r#"{"fehler":"abgemeldet"}"#)]);
+        assert_eq!(
+            empfaenger_liste(dir.path(), &basis).unwrap(),
+            json!({"zustand": "abbestellt"})
+        );
+        assert_eq!(lade(dir.path()).zustand, "abbestellt");
+        let (basis, _) = fake(vec![(401, "{}")]);
+        aktiv(dir.path());
+        assert_eq!(
+            empfaenger_liste(dir.path(), &basis).unwrap(),
+            json!({"zustand": "aus"})
+        );
+    }
+
+    #[test]
+    fn empfaenger_hinzufuegen_bildet_fehler_ab() {
+        let dir = tempfile::tempdir().unwrap();
+        aktiv(dir.path());
+        let (basis, gesehen) = fake(vec![
+            (200, r#"{"ok":true}"#),
+            (409, r#"{"fehler":"voll"}"#),
+            (409, r#"{"fehler":"vorhanden"}"#),
+            (429, r#"{"fehler":"zu-oft"}"#),
+            (503, r#"{"fehler":"aus"}"#),
+        ]);
+        let neu = |a| empfaenger_hinzufuegen(dir.path(), &basis, a);
+        assert_eq!(neu("x@example.org").unwrap(), json!({"ok": true}));
+        assert_eq!(neu("y@example.org").unwrap(), json!({"fehler": "voll"}));
+        assert_eq!(
+            neu("y@example.org").unwrap(),
+            json!({"fehler": "vorhanden"})
+        );
+        assert_eq!(neu("y@example.org").unwrap(), json!({"fehler": "zu-viele"}));
+        assert!(neu("y@example.org").is_err());
+        let a = gesehen.lock().unwrap()[0].clone();
+        assert!(a.starts_with("POST /empfaenger") && a.contains("x@example.org"));
+        assert!(empfaenger_hinzufuegen(dir.path(), &tote_basis(), "z@example.org").is_err());
+    }
+
+    #[test]
+    fn empfaenger_entfernen_und_letzte_adresse_setzt_aus() {
+        let dir = tempfile::tempdir().unwrap();
+        aktiv(dir.path());
+        let mut z = lade(dir.path());
+        z.nummer = 5;
+        sichere(dir.path(), &z).unwrap();
+        let (basis, gesehen) = fake(vec![
+            (200, r#"{"ok":true}"#),
+            (404, r#"{"fehler":"unbekannt"}"#),
+            (200, r#"{"familieGeloescht":true}"#),
+        ]);
+        assert_eq!(
+            empfaenger_entfernen(dir.path(), &basis, "a@example.org").unwrap(),
+            json!({"ok": true})
+        );
+        assert_eq!(lade(dir.path()).zustand, "aktiv");
+        assert!(gesehen.lock().unwrap()[0].starts_with("DELETE /empfaenger"));
+        assert_eq!(
+            empfaenger_entfernen(dir.path(), &basis, "q@example.org").unwrap(),
+            json!({"fehler": "unbekannt"})
+        );
+        assert_eq!(
+            empfaenger_entfernen(dir.path(), &basis, "a@example.org").unwrap(),
+            json!({"familieGeloescht": true})
+        );
+        let z = lade(dir.path());
+        assert_eq!(
+            (z.zustand.as_str(), z.nummer, z.geraet.as_str()),
+            ("aus", 5, "abcd1234")
+        );
+        assert!(z.schluessel.is_empty());
+    }
+
+    #[test]
+    fn empfaenger_adressen_stehen_nicht_im_log() {
+        log_einrichten();
+        let dir = tempfile::tempdir().unwrap();
+        aktiv(dir.path());
+        let (basis, _) = fake(vec![(200, r#"{"ok":true}"#), (200, r#"{"ok":true}"#)]);
+        empfaenger_hinzufuegen(dir.path(), &basis, "LOG-GEHEIM@example.org").unwrap();
+        empfaenger_entfernen(dir.path(), &basis, "LOG-GEHEIM@example.org").unwrap();
+        assert!(!LOG.lock().unwrap().join("\n").contains("LOG-GEHEIM"));
     }
 
     #[cfg(unix)]

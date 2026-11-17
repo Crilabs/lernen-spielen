@@ -5,6 +5,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { hauptthemen } from "../spielbau/bauheft.mjs";
+import { stueckVon } from "./rueckmeldung.mjs";
 import {
   findeBuecher, findeSpielordner, katalogAnzahl, liesGeparkte, liesKosten, prognose, prognoseAnalog, prognoseBuecher, summen,
 } from "../kosten/kosten.mjs";
@@ -70,6 +71,9 @@ const ziele = (a) => (Array.isArray(a.ziel) ? a.ziel : [a.ziel]);
 export function baueUebersicht(q, auftraege) {
   const beauftragt = (art, id) => auftraege.some((a) => offen(a) && a.art === art && ziele(a).includes(id));
   // Ideen sind auch offen, solange sie auf Christians Wahl warten – sonst gäbe es zwei Ideen-Aufträge für ein Spiel.
+  // Eine offene Antwort oder Änderung gehört zum Stück ihres Ursprungs (z. B. G02 nach dem Parken: sonst „geplant“ mit „+“).
+  const stueckOffen = (bereich, id) => auftraege.some((a) => offen(a) && (a.art === "antwort" || a.art === "aenderung")
+    && (() => { const s = stueckVon(auftraege, a); return !!s && s.bereich === bereich && s.ids.includes(id); })());
   const ideenOffen = (id) => auftraege.some((a) => (offen(a) || a.status === "wartet-auf-christian") && a.art === "ideen" && ziele(a).includes(id));
 
   // Spiele: Katalog-Abschnitte, dazu fertige (spiele.json), geparkte und Kosten
@@ -85,8 +89,13 @@ export function baueUebersicht(q, auftraege) {
   for (const k of q.katalog) {
     const fertig = imSpieleJson.get(k.id);
     /** @type {Status} */
-    const status = fertig ? (fertig.probe ? "probe" : "fertig")
-      : beauftragt("spiel", k.id) || ideenOffen(k.id) ? "beauftragt"
+    // Mit offenem Auftrag (Bau, Antwort, Änderung – auch wenn er auf Christian wartet) ist ein Spiel in Arbeit, keine
+    // Probe: Zur Probe steht es erst, wenn der Auftrag umgesetzt ist (Christian, 2026-11-17).
+    const inArbeit = auftraege.some((a) => (offen(a) || a.status === "wartet-auf-christian") && a.art !== "ideen"
+      && (() => { const s = stueckVon(auftraege, a); return !!s && s.bereich === "spiel" && s.ids.includes(k.id); })());
+    const status = fertig && inArbeit ? "beauftragt"
+      : fertig ? (fertig.probe ? "probe" : "fertig")
+      : beauftragt("spiel", k.id) || ideenOffen(k.id) || stueckOffen("spiel", k.id) ? "beauftragt"
       : geparktIds.has(k.id) ? "geparkt" : "geplant";
     spiele[k.id] = { ...k, status, ordner: fertig?.datei ?? null, eur: eurJeSpiel.get(k.id) ?? null };
   }

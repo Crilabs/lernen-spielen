@@ -191,7 +191,8 @@ test("eltern.html: Punkt Tagesbrief in der Navigation, Befehle mit Profil, setze
   const html = readFileSync(new URL("../spiele/eltern.html", import.meta.url), "utf8");
   assert.match(html, /<ls-knopf data-tab="tagesbrief"[^>]*wort="Tagesbrief"/);
   assert.match(html, /const ANSICHTEN = \{[^}]*\btagesbrief\b/);
-  for (const b of ["einrichten", "status", "einstellen", "probebrief", "abmelden"]) assert.match(html, new RegExp(`befehl\\("tagesbrief_${b}", \\{ profil: PROFIL`));
+  for (const b of ["einrichten", "status", "einstellen", "probebrief", "abmelden", "empfaenger", "empfaenger_hinzufuegen", "empfaenger_entfernen"]) assert.match(html, new RegExp(`befehl\\("tagesbrief_${b}", \\{ profil: PROFIL`));
+  assert.match(html, /TB_NAME_MUSTER = \/\^\[\\p\{L\} -\]\{0,40\}\$\/u/);
   assert.match(html, /Was Ihr Kind lernt, liegt bis zum Versand auf unserem Server und wird danach gelöscht\./);
   assert.match(html, /formularEinrichten\(status, brieflaufFreigeben\)/);
   assert.match(html, /TB_ABFRAGE_MS = 10000/);

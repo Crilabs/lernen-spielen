@@ -222,3 +222,65 @@ test("Server: Ideen-Auftrag startet sofort, Spiel-Auftrag nicht", () => mitServe
   const r = await sende("/api/auftraege", { art: "ideen", ziel: g1.id });
   assert.equal(r.status, 400, "zweiter Ideen-Auftrag für dasselbe Spiel");
 }));
+
+test("Server: Rückmeldung zu einem fertigen Spiel → neuer Änderungs-Auftrag (3 €), zweite wird angehängt", () => mitServer(async ({ hol, sende }) => {
+  const r = await sende("/api/rueckmeldung", { bereich: "spiel", id: "M06", text: "Knopf größer" });
+  assert.equal(r.status, 201);
+  const j = await r.json();
+  assert.equal(j.wie, "neu");
+  assert.equal(j.auftrag.art, "aenderung");
+  assert.equal(j.auftrag.schaetzung_eur, 3);
+  const r2 = await (await sende("/api/rueckmeldung", { bereich: "spiel", id: "M06", text: "Ton leiser" })).json();
+  assert.equal(r2.wie, "angehaengt");
+  const l = (await (await hol("/api/auftraege")).json()).auftraege;
+  assert.equal(l.length, 1);
+  assert.deepEqual(l[0].rueckmeldungen.map((x) => x.text), ["Knopf größer", "Ton leiser"]);
+  assert.deepEqual(l[0].stueck, { bereich: "spiel", ids: ["M06"] });
+}));
+
+test("Server: Rückmeldung zu Buch und Echten Dingen; Schätzung je Bereich", () => mitServer(async ({ sende }) => {
+  const b = await (await sende("/api/rueckmeldung", { bereich: "buch", id: "hund", text: "Foto tauschen" })).json();
+  assert.equal(b.auftrag.schaetzung_eur, 2);
+  const e = await (await sende("/api/rueckmeldung", { bereich: "echte-dinge", id: "vorwaerts-zaehlen", text: "Bewegung fehlt" })).json();
+  assert.equal(e.auftrag.schaetzung_eur, 1);
+}));
+
+test("Server: Rückmeldung zu Ungebautem ohne offenen Auftrag → 409, mit offenem Auftrag erlaubt", () => mitServer(async ({ sende }) => {
+  assert.equal((await sende("/api/rueckmeldung", { bereich: "spiel", id: "R01", text: "x" })).status, 409);
+  assert.equal((await sende("/api/rueckmeldung", { bereich: "buch", id: "kaninchen", text: "x" })).status, 409);
+  assert.equal((await sende("/api/rueckmeldung", { bereich: "echte-dinge", id: "mehr-weniger-gleich-viele", text: "x" })).status, 409);
+  assert.equal((await sende("/api/rueckmeldung", { bereich: "spiel", id: "Z99", text: "x" })).status, 404);
+  await sende("/api/auftraege", { art: "spiel", ziel: "R01" });
+  const r = await sende("/api/rueckmeldung", { bereich: "spiel", id: "R01", text: "Rahmen weg" });
+  assert.equal(r.status, 201);
+  assert.equal((await r.json()).wie, "angehaengt");
+}));
+
+test("Server: Rückmeldung ohne Text oder mit falschem Bereich → 400", () => mitServer(async ({ sende }) => {
+  assert.equal((await sende("/api/rueckmeldung", { bereich: "spiel", id: "M06", text: " " })).status, 400);
+  assert.equal((await sende("/api/rueckmeldung", { bereich: "film", id: "M06", text: "x" })).status, 400);
+}));
+
+test("Server: Rückmeldung zu einem Auftrag, der auf Christian wartet, wird seine Antwort", () => mitServer(async ({ hol, sende, ordner }) => {
+  speichereAuftraege(pfade(ordner).auftraege, [{ id: "a-1-x", art: "buch", ziel: "hund", befehl: "Sachgeschichte hund", status: "wartet-auf-christian",
+    ergebnis: { status: "geparkt", frage: "Passt es?" }, notiz: "" }]);
+  const j = await (await sende("/api/rueckmeldung", { bereich: "buch", id: "hund", text: "Seite 3 tauschen" })).json();
+  assert.equal(j.wie, "antwort");
+  const l = (await (await hol("/api/auftraege")).json()).auftraege;
+  assert.deepEqual(l.map((a) => a.status), ["beantwortet", "wartet"]);
+  assert.equal(l[1].art, "antwort");
+}));
+
+test("Review I1: Spiel mit offenen Ideen bekommt keine Rückmeldung (409), kein Änderungs-Auftrag", () => mitServer(async ({ hol, sende, ordner }) => {
+  speichereAuftraege(pfade(ordner).auftraege, [{ id: "a-1-i", art: "ideen", ziel: "R01", befehl: "Spielideen R01", status: "wartet-auf-christian", ergebnis: { ideen: [] }, notiz: "" }]);
+  const r = await sende("/api/rueckmeldung", { bereich: "spiel", id: "R01", text: "Lieber mit Tieren" });
+  assert.equal(r.status, 409);
+  assert.equal((await (await hol("/api/auftraege")).json()).auftraege.length, 1);
+}));
+
+test("Server: Probe abschließen, solange ein Auftrag zum Spiel offen ist → 409, nichts committet", () => mitServer(async ({ sende }) => {
+  await sende("/api/rueckmeldung", { bereich: "spiel", id: "G01", text: "Knopf größer" });
+  const r = await sende("/api/proben/G01/abschliessen", {});
+  assert.equal(r.status, 409);
+  assert.match((await r.json()).fehler, /offen/);
+}));

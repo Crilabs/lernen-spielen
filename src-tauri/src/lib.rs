@@ -128,6 +128,41 @@ async fn tagesbrief_abmelden(app: tauri::AppHandle, profil: Option<String>) -> R
     tagesbrief_blockierend(move || tagesbrief::abmelden(&dir, tagesbrief::BASIS_URL)).await
 }
 
+#[tauri::command]
+async fn tagesbrief_empfaenger(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+) -> Result<serde_json::Value, String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || tagesbrief::empfaenger_liste(&dir, tagesbrief::BASIS_URL)).await
+}
+
+#[tauri::command]
+async fn tagesbrief_empfaenger_hinzufuegen(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+    adresse: String,
+) -> Result<serde_json::Value, String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || {
+        tagesbrief::empfaenger_hinzufuegen(&dir, tagesbrief::BASIS_URL, &adresse)
+    })
+    .await
+}
+
+#[tauri::command]
+async fn tagesbrief_empfaenger_entfernen(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+    adresse: String,
+) -> Result<serde_json::Value, String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || {
+        tagesbrief::empfaenger_entfernen(&dir, tagesbrief::BASIS_URL, &adresse)
+    })
+    .await
+}
+
 /// Betriebssystem der App: "macos", "windows", "linux", "android" oder "ios".
 #[tauri::command]
 fn plattform() -> String {
@@ -280,6 +315,9 @@ pub fn run() {
         tagesbrief_einstellen,
         tagesbrief_probebrief,
         tagesbrief_abmelden,
+        tagesbrief_empfaenger,
+        tagesbrief_empfaenger_hinzufuegen,
+        tagesbrief_empfaenger_entfernen,
         plattform,
         kiosk_pause
     ]);
@@ -293,6 +331,9 @@ pub fn run() {
         tagesbrief_einstellen,
         tagesbrief_probebrief,
         tagesbrief_abmelden,
+        tagesbrief_empfaenger,
+        tagesbrief_empfaenger_hinzufuegen,
+        tagesbrief_empfaenger_entfernen,
         plattform
     ]);
     builder
