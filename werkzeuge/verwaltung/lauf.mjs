@@ -31,6 +31,7 @@ export function pfade(ordner) {
     anhalten: join(ordner, ".anhalten"),
     ergebnis: (id) => join(ordner, "ergebnisse", `${id}.json`),
     protokoll: (id) => join(ordner, "protokolle", `${id}.log`),
+    vorgabe: (id) => join(ordner, "vorgaben", `${id}.md`),
   };
 }
 

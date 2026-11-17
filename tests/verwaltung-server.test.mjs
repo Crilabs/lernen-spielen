@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { request } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -152,4 +152,38 @@ test("Server: /spiele/ liefert die Startseite der App (Knopf „App öffnen“)"
 
 test("Server: Probe abschließen – unbekannte Id → 400", () => mitServer(async ({ sende }) => {
   assert.equal((await sende("/api/proben/X1/abschliessen")).status, 400);
+}));
+
+test("Server: Ideen nur für geplante Spiele, Schätzung 1 €", () => mitServer(async ({ hol, sende }) => {
+  const u = await (await hol("/api/uebersicht")).json();
+  const geplant = Object.values(u.spiele).find((s) => s.status === "geplant");
+  const fertig = Object.values(u.spiele).find((s) => s.status === "fertig");
+  let r = await sende("/api/auftraege", { art: "ideen", ziel: fertig.id });
+  assert.equal(r.status, 400);
+  assert.match((await r.json()).fehler, /noch nicht gebaut/);
+  r = await sende("/api/auftraege", { art: "ideen", ziel: geplant.id });
+  assert.equal(r.status, 201);
+  assert.equal((await r.json()).schaetzung_eur, 1);
+}));
+
+test("Server: Wahl einer Idee legt Spiel-Auftrag und Vorgabe an, zweite Wahl 409", () => mitServer(async ({ hol, sende, ordner }) => {
+  const ideen = [{ titel: "A", text: "a" }, { titel: "B", text: "b" }, { titel: "C", text: "c" }];
+  speichereAuftraege(pfade(ordner).auftraege, [
+    { id: "i-1", art: "ideen", ziel: "G05", befehl: "Spielideen G05", status: "wartet-auf-christian", ergebnis: { status: "geparkt", ideen } },
+    { id: "i-2", art: "ideen", ziel: "G06", befehl: "Spielideen G06", status: "wartet-auf-christian", ergebnis: { status: "geparkt" } },
+  ]);
+  let r = await sende("/api/auftraege/i-1/wahl", { karte: 2 });
+  assert.equal(r.status, 201);
+  const neu = await r.json();
+  const datei = join(ordner, "vorgaben", `${neu.id}.md`);
+  assert.ok(existsSync(datei));
+  assert.match(readFileSync(datei, "utf8"), /Karte 2/);
+  r = await sende("/api/auftraege/i-1/wahl", { karte: 2 });
+  assert.equal(r.status, 409);
+  r = await sende("/api/auftraege/i-2/wahl", { karte: 1 });
+  assert.equal(r.status, 400);
+  r = await sende("/api/auftraege/fehlt/wahl", { karte: 1 });
+  assert.equal(r.status, 404);
+  const l = (await (await hol("/api/auftraege")).json()).auftraege;
+  assert.deepEqual(l.map((x) => x.art), ["ideen", "spiel", "ideen"]);
 }));

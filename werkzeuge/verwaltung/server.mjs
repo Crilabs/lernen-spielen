@@ -3,11 +3,11 @@
 // Nur an 127.0.0.1. Liest das Repo bei jedem Aufruf neu; schreibt nur die Warteschlange.
 
 import { spawn } from "node:child_process";
-import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readSync, statSync } from "node:fs";
+import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readSync, statSync, writeFileSync } from "node:fs";
 import { createServer } from "node:http";
 import { dirname, extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { beantworte, ladeAuftraege, lehneAb, neuerAuftrag, speichereAuftraege, streiche, verschiebe } from "./auftraege.mjs";
+import { beantworte, ladeAuftraege, lehneAb, neuerAuftrag, speichereAuftraege, streiche, verschiebe, waehleIdee } from "./auftraege.mjs";
 import { baueUebersicht, liesQuellen } from "./daten.mjs";
 import { ProbeZustand, schliesseProbeAb } from "./proben.mjs";
 import { ORDNER, WURZEL, anhalten, laufLog, letzterLaufFehler, pfade, sperre } from "./lauf.mjs";
@@ -30,10 +30,20 @@ export function starteLaufGetrennt() {
 }
 
 /** Schätzung in Euro für einen neuen Auftrag (null = unbekannt). */
+/** Ideen-Auftrag: ein Agent, drei Skizzen (Spec 2026-11-17). */
+export const SCHAETZUNG_IDEEN = 1;
+
+/** Ideen nur für Spiele, die noch nicht gebaut oder beauftragt sind (Christian, 2026-11-17); null = in Ordnung. */
+export function ideenZielFehler(uebersicht, ziel) {
+  const status = uebersicht.spiele[ziel]?.status ?? "unbekannt";
+  return status === "geplant" ? null : `Ideen nur für Spiele, die noch nicht gebaut oder beauftragt sind (${ziel}: ${status})`;
+}
+
 export function schaetze(uebersicht, art, ziel) {
   const s = uebersicht.schaetzung;
   if (art === "spiel") return s.spiel;
   if (art === "buch") return s.buch;
+  if (art === "ideen") return SCHAETZUNG_IDEEN;
   if (art === "echte-dinge") return s.echteDingeJeThema === null ? null : s.echteDingeJeThema * (Array.isArray(ziel) ? ziel.length : 1);
   return null;
 }
@@ -99,6 +109,8 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
         const { art, ziel } = await koerper();
         let a;
         try { a = neuerAuftrag({ art, ziel, schaetzung_eur: null }); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
+        const fehler = a.art === "ideen" ? ideenZielFehler(uebersicht(), a.ziel) : null;
+        if (fehler) return antwort(400, { fehler });
         a.schaetzung_eur = schaetze(uebersicht(), a.art, a.ziel);
         speichereAuftraege(p.auftraege, [...auftraege(), a]);
         return antwort(201, a);
@@ -124,6 +136,19 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
         }
         let r;
         try { r = beantworte(l, alt.id, (await koerper()).text); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
+        speichereAuftraege(p.auftraege, r.liste);
+        return antwort(201, r.neu);
+      }
+      const wahl = pfad.match(/^\/api\/auftraege\/([^/]+)\/wahl$/);
+      if (post && wahl) {
+        const l = auftraege();
+        const alt = l.find((a) => a.id === wahl[1]);
+        if (!alt) return antwort(404, { fehler: "Auftrag nicht gefunden" });
+        if (alt.status !== "wartet-auf-christian") return antwort(409, { fehler: "Auftrag wartet nicht auf eine Antwort" });
+        let r;
+        try { r = waehleIdee(l, alt.id, await koerper()); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
+        mkdirSync(dirname(p.vorgabe(r.neu.id)), { recursive: true });
+        writeFileSync(p.vorgabe(r.neu.id), r.neu.vorgabe);
         speichereAuftraege(p.auftraege, r.liste);
         return antwort(201, r.neu);
       }

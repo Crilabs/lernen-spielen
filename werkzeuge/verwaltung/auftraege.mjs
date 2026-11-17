@@ -3,7 +3,7 @@
 
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 
-export const ARTEN = ["spiel", "echte-dinge", "buch", "einfuehrung", "frei"];
+export const ARTEN = ["spiel", "echte-dinge", "buch", "einfuehrung", "frei", "ideen"];
 export const STATUS = ["wartet", "laeuft", "erledigt", "wartet-auf-christian", "beantwortet", "fehlgeschlagen", "gestrichen"];
 
 /** Schätzung für einen Antwort-Auftrag (Fortsetzen mit Christians Antwort: Merge, Nachprüfung o. ä.). */
@@ -12,6 +12,7 @@ export const SCHAETZUNG_ANTWORT = 2;
 const SKILL_JE_ART = {
   spiel: ".claude/skills/spiel-entwickeln/SKILL.md",
   "echte-dinge": ".claude/skills/mit-echten-dingen/SKILL.md",
+  ideen: ".claude/skills/spielideen/SKILL.md",
   buch: ".claude/skills/sachgeschichte/SKILL.md",
 };
 
@@ -27,6 +28,7 @@ export function befehlFuer(art, ziel) {
     case "einfuehrung":
       return `Einführung für Thema ${liste[0]} nach den Vorlagen in spiele/einfuehrungen/ und dem Feld einfuehrung im Lernplan`;
     case "frei": return String(ziel);
+    case "ideen": return `Spielideen ${liste[0]}`;
     default: throw new Error(`Art muss ${ARTEN.join(", ")} sein (war: ${art})`);
   }
 }
@@ -109,6 +111,43 @@ export function beantworte(liste, id, text, jetzt = new Date()) {
   };
   const kopie = liste.map((x, j) => (j === i ? { ...x, status: "beantwortet", notiz: `Antwort: ${antwort}` } : x));
   return { liste: [...kopie, neu], neu };
+}
+
+/** Text der Vorgabe: alle Skizzen und darunter Christians Wahl (Karte oder eigener Text). */
+function vorgabeText(ideen, wahl) {
+  const skizzen = ideen.map((x, i) => `### ${i + 1}. ${x.titel}\n\n${x.text}`).join("\n\n");
+  return ["# Vorgabe von Christian", "", "## Die drei Skizzen", "", skizzen || "(keine)", "", "## Wahl", "", wahl, ""].join("\n");
+}
+
+/**
+ * Christian wählt eine Spielidee (Karte 1..n) oder schreibt seine eigene: Der Ideen-Auftrag wird „beantwortet“, direkt
+ * dahinter steht ein Spiel-Auftrag mit Vorgabe (docs/superpowers/specs/2026-11-17-spielideen-design.md). Den Text der
+ * Vorgabe schreibt der Server nach werkzeuge/verwaltung/vorgaben/<neu.id>.md.
+ * @param {{ karte?: number, text?: string }} wahl
+ */
+export function waehleIdee(liste, id, wahl, jetzt = new Date()) {
+  const i = wartetAufAntwort(liste, id);
+  const alt = liste[i];
+  if (alt.art !== "ideen") throw new Error("Auftrag ist kein Ideen-Auftrag");
+  const ideen = Array.isArray(alt.ergebnis?.ideen) ? alt.ergebnis.ideen : [];
+  let text, notiz;
+  if (wahl?.karte !== undefined) {
+    const n = Number(wahl.karte);
+    if (!Number.isInteger(n) || n < 1 || n > ideen.length) throw new Error(`Karte muss zwischen 1 und ${ideen.length} liegen`);
+    text = `Karte ${n} „${ideen[n - 1].titel}“`;
+    notiz = `Wahl: ${text}`;
+  } else {
+    text = String(wahl?.text ?? "").trim();
+    if (!text) throw new Error("Eigene Idee fehlt");
+    if (text.length > 4000) throw new Error("Eigene Idee zu lang (höchstens 4000 Zeichen)");
+    notiz = "Wahl: eigene Idee";
+  }
+  const neu = neuerAuftrag({ art: "spiel", ziel: alt.ziel, schaetzung_eur: null }, jetzt);
+  neu.befehl = `${neu.befehl} --vorgabe werkzeuge/verwaltung/vorgaben/${neu.id}.md`;
+  neu.vorgabe = vorgabeText(ideen, text);
+  const kopie = liste.map((x, j) => (j === i ? { ...x, status: "beantwortet", notiz } : x));
+  kopie.splice(i + 1, 0, neu);
+  return { liste: kopie, neu };
 }
 
 /** Christian lehnt ab: kein Lauf, der Auftrag ist erledigt. */
