@@ -157,7 +157,8 @@ unter „Figuren“ sind nur ein Startvorschlag für die Verteilung.
   material: Langform steht da, Kind hört und zieht · vorstellung: Kind wählt die Art der Verlängerung (viele,
   wir, der …) und bildet sie · kopf: nur das kurze Wort mit Lücke, Verlängern im Kopf, Kontrolle danach.
 - Lernzeichen: Wortkärtchen in Papier; Spaltenführung, damit der Buchstabe senkrecht hinaufwandert. Neu:
-  „Langzieh-Klammer“ als Bedeutungszeichen für die Probe (in S08 wiederverwendet).
+  „Langzieh-Klammer“ als Bedeutungszeichen für die Probe (in S08 wiederverwendet). Endungen der Langform (wir-Form,
+  Mehrzahl) als Endungsplättchen (D9, Christian 2026-11-17).
 - Fehlerkontrolle: Der Buchstabe im kurzen Wort steht genau über seinem Partner im langen. Passt er nicht
   (t über d in Hun-de), rastet er nicht ein; man sieht die zwei verschiedenen Buchstaben übereinander.
 - Fehlerbilder: auslautverhaertung, schaerfung-fehlt (bei Einsilbern)
@@ -320,7 +321,7 @@ unter „Figuren“ sind nur ein Startvorschlag für die Verteilung.
   (Bibliothekar) braucht das Buch. Keine besondere Fähigkeit.
 - Mach mit: Timo sucht ein Wort in einem echten Wörterbuch. Erzähler: „Frag jemanden, ob ihr zusammen in einem Buch nachschlagt.“
 - Hauptthemen: abc-reihe (1), abc-zweiter-buchstabe (2), nachschlagen-woerterliste (2), woerterbuch-grundform-suchen (3), zweifelsfall-nachschlagen (4) · 5 Themen, Kl. 1/2/3/4
-- Weitere Zugänge: grundform-verb → G02
+- Weitere Zugänge: grundform-verb → eigenes Spiel oder G03 (Hinweis bei G03)
 - Warum perfekt: Das Alphabet ist eine Ordnung zum Finden. Einordnen und Nachschlagen sind beide Finden nach
   dieser Ordnung, mit sichtbarer Kontrolle durch die Nachbarn.
 - Bewusst nicht drin: Rechtschreibstrategie wählen → S08.
@@ -646,8 +647,8 @@ unter „Figuren“ sind nur ein Startvorschlag für die Verteilung.
 - Gesten: Tippen auf die Scheibe (dreht eine Stufe weiter), Ziehen eines Endungsplättchens an den Stamm.
 - Material und Stufen: Verbstamm und Endungsplättchen (-e, -st, -t, -en). material: Szene zeigt, wer handelt ·
   vorstellung: nur der Satz mit Pronomen · kopf: Kind schreibt die Form über die Tastatur.
-- Lernzeichen: Verb roter Kreis (D1) am Stamm; Endungsplättchen und Personenscheibe neu (Kl. 2 ohne neues
-  Grammatiksymbol, nur Wortstreifen, D2).
+- Lernzeichen: Verb roter Kreis (D1) am Stamm; Endungsplättchen (D9, für alle Spiele festgelegt, Christian
+  2026-11-17); Personenscheibe neu (Kl. 2 ohne neues Grammatiksymbol, nur Wortstreifen, D2).
 - Fehlerkontrolle: Die Szene macht, was der Satz sagt: „wir backt“ hat kein Bild, weil es niemanden gibt, auf
   den es passt; bei „sein Ball“ rollt der Ball zu Kofi, nicht zu Lena. Bei starken Verben (du läufst) hilft die
   Kontrollkarte, die das Kind umdreht (Montessori).
@@ -656,11 +657,12 @@ unter „Figuren“ sind nur ein Startvorschlag für die Verteilung.
 - Figuren: Die ganze Runde ist hier Lernkern (wer ist ich, wer du). Kein Kind wird über ein Merkmal benannt;
   Pronomen nach Geschlecht der Figur, nie zum Thema gemacht (figuren.md §7).
 - Mach mit: Die Runde spielt „Ich male, du malst“ mit echten Stiften. Erzähler: „Spiel mit jemandem: Wer malt gerade? Ich, du, wir?“
-- Hauptthemen: grundform-verb (2), verb-personalform (2), personalpronomen (2), gegenwart-praesens (3), pronomen-statt-nomen (3), besitzanzeigende-fuerwoerter (3) · 6 Themen, Kl. 2/3
+- Hauptthemen: verb-personalform (2), personalpronomen (2), gegenwart-praesens (3), pronomen-statt-nomen (3), besitzanzeigende-fuerwoerter (3) · 5 Themen, Kl. 2/3
 - Weitere Zugänge: verlaengern-verben → S04, namen-durch-pronomen-ersetzen → S16
 - Warum perfekt: Personalform und Pronomen zeigen auf Personen. Wenn die gemeinte Person in der Szene reagiert,
   ist der Bezug die Sache.
-- Bewusst nicht drin: Zeitformen → G03.
+- Bewusst nicht drin: Zeitformen → G03. Grundform des Verbs (grundform-verb): G02 übt nur Personalform und
+  Fürwörter; die Grundform wird ein eigenes Spiel oder kommt zu G03 (Christian 2026-11-17, Hinweis bei G03).
 - Regal-Material: Wortart-Baustein Verb für Personalform; Kärtchen „ich“ für Pronomen.
 - Fachübergreifend: Sprechen und Zuhören.
 
@@ -686,6 +688,9 @@ unter „Figuren“ sind nur ein Startvorschlag für die Verteilung.
 - Warum perfekt: Zeitform heißt Zeitbezug. Die Zeitreise macht den Bezug zur Wirkung, und dieselbe Uhr prüft
   einen ganzen Text.
 - Bewusst nicht drin: Personalform → G02.
+- **Hinweis (Christian 2026-11-17):** Die Grundform des Verbs (grundform-verb) ist aus G02 heraus. Sie wird ein
+  eigenes Spiel oder kommt hierher; das entscheidet der Plan von G03. Endungs- und Hilfsverbplättchen haben die
+  Gestalt des Endungsplättchens (D9).
 - Regal-Material: Wortart-Baustein Verb.
 - Fachübergreifend: Mathe (Zeit, Kalender, Zeitstrahl).
 
@@ -1179,7 +1184,7 @@ unter „Figuren“ sind nur ein Startvorschlag für die Verteilung.
 | mehrzahl-umlaut-ohne-endung | G08 | – |
 | nomen-proben | G01 | S06 |
 | bestimmter-unbestimmter-begleiter | G10 | – |
-| grundform-verb | G02 | S10 |
+| grundform-verb | offen: eigenes Spiel oder G03 (Christian 2026-11-17) | S10 |
 | verb-personalform | G02 | – |
 | personalpronomen | G02 | – |
 | wiewoerter | G01 | G10 |
