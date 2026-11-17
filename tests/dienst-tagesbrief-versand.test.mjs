@@ -299,3 +299,11 @@ test("Anleitung A um 17:00, B um 18:05: Brief um 18:30 hat A, der Brief am näch
   assert.equal(await t.dienst.pruefeFaellige(), 1);
   assert.deepEqual(speicher().adressen[ADRESSE].verschickt.map((v) => v.anleitung), ["mathe/a.md", "mathe/b.md"]);
 });
+
+test("briefTopf: gleiche Kindernamen mehrerer Geräte erscheinen nur einmal", async () => {
+  const { briefTopf } = await import("../dienste/tagesbrief/speicher.js");
+  const topf = { gekonnt: [], dabei: [], gelesen: [], naechstes: null };
+  const namen = (n) => briefTopf({ namen: n, topf }).namen;
+  assert.deepEqual(namen({ a: "Mila", b: " mila ", c: "MILA" }), ["Mila"]);
+  assert.deepEqual(namen({ a: "Mila", b: "Noah", c: "mila", d: "" }), ["Mila", "Noah"]);
+});

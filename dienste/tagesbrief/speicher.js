@@ -70,8 +70,12 @@ export function juengsteVerschickte(adresse, jetzt) {
   return adresse.verschickt.filter((v) => new Date(v.am).getTime() >= grenze);
 }
 
-/** Topf in der Form, die `setzeBrief` erwartet. @param {Adresse} adresse */
+/** Topf in der Form, die `setzeBrief` erwartet; gleiche Namen mehrerer Geräte (ohne Groß-/Kleinschreibung) nur einmal. @param {Adresse} adresse */
 export function briefTopf(adresse) {
   const { gekonnt, dabei, gelesen, naechstes } = adresse.topf;
-  return { namen: Object.values(adresse.namen).filter(Boolean), gekonnt, dabei, gelesen, naechstes };
+  const namen = [];
+  for (const n of Object.values(adresse.namen).map((x) => String(x).trim()).filter(Boolean)) {
+    if (!namen.some((v) => v.toLowerCase() === n.toLowerCase())) namen.push(n);
+  }
+  return { namen, gekonnt, dabei, gelesen, naechstes };
 }
