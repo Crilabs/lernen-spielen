@@ -4942,5 +4942,22 @@
   "thema": [
    "nomen-proben"
   ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 12,
+  "ausgabe": 1885,
+  "einheit": "tokens",
+  "menge": 931888,
+  "notiz": "nomen-proben, Abschluss (Steuer-Agent)",
+  "cache_lesen": 926011,
+  "cache_schreiben": 3980,
+  "themen": 1,
+  "thema": [
+   "nomen-proben"
+  ]
  }
 ]
