@@ -56,7 +56,7 @@ test("Betreff: erstes gekonnt, sonst Lernstand mit Datum, Namen", () => {
 
 test("HTML des Beispiel-Topfs enthält alle Abschnitte", () => {
   const { html } = setzeBrief(BEISPIEL(), OPT);
-  for (const s of ["Kann jetzt die Achterreihe.", "Ausrechnen, wie viele Beine mehrere Spinnen haben.",
+  for (const s of ["Neu gekonnt: Achterreihe", "Ausrechnen, wie viele Beine mehrere Spinnen haben.",
     "Außerdem neu: Zehner und Einer bis 20", "Im Moment dabei", "Fragen Sie mal: Womit atmet ein Wal?",
     "Mit einer Lunge, wie du.", "cid:anleitung", "Eintritt für alle", "Zehn vor, einen zurück",
     "Als Nächstes mit echten Dingen: Neunerreihe", "Danach im Lernplan:", "Einmaleins gemischt", "{{ABMELDEN}}",
@@ -77,6 +77,16 @@ test("Links und Anleitung: eigene Links, Passend zu gerade, Fachfarbe, Foto opti
   assert.ok(g.includes(FACH.grammatik.toenung));
 });
 
+test("Buch ohne erinnern-Frage: nur der Titel, keine leere „Fragen Sie mal“-Zeile", () => {
+  const topf = { ...BEISPIEL(), gelesen: [gelesen("buch", "Ein Buch ohne Frage", "", "")] };
+  const { html, text } = setzeBrief(topf, OPT);
+  for (const s of [html, text]) {
+    assert.ok(s.includes("Ein Buch ohne Frage"));
+    assert.ok(!s.includes("Fragen Sie mal"));
+    assert.ok(!s.includes("–"), "keine leere Antwortzeile");
+  }
+});
+
 test("Zum Verinnerlichen: der Satz steht über „Ihr braucht“", () => {
   const f = { ...form("tisch", "Zum Verinnerlichen", "Im Kopf"), verinnerlichen: "Sagt die Reihe laut auf." };
   const { html, text } = setzeBrief({ ...BEISPIEL(), naechstes: { ...NAECHSTES, formen: [f] } }, OPT);
@@ -88,7 +98,7 @@ test("leere Abschnitte fallen weg", () => {
   const { html, text } = setzeBrief(nurDabei, OPT);
   for (const s of [html, text]) {
     assert.ok(s.includes("Im Moment dabei"));
-    for (const nicht of ["Gelesen", "Kann jetzt", "Als Nächstes", "Danach im Lernplan", "cid:anleitung"]) assert.ok(!s.includes(nicht), nicht);
+    for (const nicht of ["Gelesen", "Neu gekonnt", "Als Nächstes", "Danach im Lernplan", "cid:anleitung"]) assert.ok(!s.includes(nicht), nicht);
   }
 });
 
@@ -152,7 +162,7 @@ test("Texte werden maskiert", () => {
 
 test("text hat dieselben Abschnitte wie html", () => {
   const { text } = setzeBrief(BEISPIEL(), OPT);
-  for (const s of ["Mila · Montag, 16. November", "Kann jetzt die Achterreihe.", "Ausrechnen, wie viele Beine mehrere Spinnen haben.",
+  for (const s of ["Mila · Montag, 16. November", "Neu gekonnt: Achterreihe", "Ausrechnen, wie viele Beine mehrere Spinnen haben.",
     "Außerdem neu: Zehner und Einer bis 20", "Im Moment dabei", "Kernaufgaben: mal 1, 2, 5, 10", "Nomen mit Artikel",
     "Gelesen", "Mira, die Riesin im Meer", "Fragen Sie mal: Womit atmet ein Wal?", "Als Nächstes mit echten Dingen: Neunerreihe",
     "Eintritt für alle", "Zehn vor, einen zurück", "Ihr braucht:", "Darauf kommt es an:", "Danach im Lernplan: Einmaleins gemischt, Geteilt durch 2, 5, 10",

@@ -116,7 +116,7 @@ for (const typ of [chromium, webkit]) {
     const vor = await seite.evaluate(() => {
       const f = document.querySelector("iframe.tb-vorschau");
       const w = [...document.querySelectorAll("#inhalt ls-knopf")].map((k) => k.getAttribute("wort"));
-      return { srcdoc: f.srcdoc.includes("<html") || f.srcdoc.includes("<body"), lena: f.srcdoc.includes("Lena"), neu: f.srcdoc.includes("Zweierreihe") || f.srcdoc.includes("zweierreihe") || /Kann jetzt/.test(f.srcdoc), knoepfe: w };
+      return { srcdoc: f.srcdoc.includes("<html") || f.srcdoc.includes("<body"), lena: f.srcdoc.includes("Lena"), neu: f.srcdoc.includes("Zweierreihe") || f.srcdoc.includes("zweierreihe") || /Neu gekonnt/.test(f.srcdoc), knoepfe: w };
     });
     pruefe(vor.srcdoc && vor.lena && vor.neu, `${L} aktiv: Vorschau (iframe srcdoc) mit Name und gekonntem Thema`, JSON.stringify(vor));
     pruefe(["Probebrief senden", "Uhrzeit ändern", "Abbestellen"].every((w) => vor.knoepfe.includes(w)), `${L} aktiv: Knöpfe Probebrief senden, Uhrzeit ändern, Abbestellen`, JSON.stringify(vor.knoepfe));

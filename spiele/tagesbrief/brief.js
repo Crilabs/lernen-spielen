@@ -72,7 +72,7 @@ export function setzeBrief(topf, { datum, abmeldeLink = "{{ABMELDEN}}", datensch
   const gelesen = topf.gelesen.slice(0, MAX.gelesen);
   const naechstes = topf.naechstes;
   const weitere = naechstes ? naechstes.weitere.slice(0, MAX.weitere) : [];
-  const kopf = erstes ? `Kann jetzt die ${erstes.name}.` : "Lernstand von heute.";
+  const kopf = erstes ? `Neu gekonnt: ${erstes.name}` : "Lernstand von heute.";
   const betreff = erstes ? `${name}: neu gekonnt – ${erstes.name}` : `${name}: Lernstand vom ${tag}`;
   const anleitungKopf = naechstes ? `${naechstes.passendZuGerade ? "Passend zu gerade" : "Als Nächstes"} mit echten Dingen: ${naechstes.thema}` : "";
   const danach = weitere.join(", ");
@@ -108,7 +108,9 @@ function htmlBrief(t) {
   }
   if (t.gelesen.length) {
     zeilen.push(abschnitt("Gelesen", t.gelesen.map((g) =>
-      `<b>${esc(g.titel)}</b><br>\n          <span style="color:${TINTE_WEICH};">Fragen Sie mal: ${esc(g.frage)}<br>– ${esc(g.antwort)}</span>`).join("<br>\n          "), zeilen.length === 0));
+      g.frage
+        ? `<b>${esc(g.titel)}</b><br>\n          <span style="color:${TINTE_WEICH};">Fragen Sie mal: ${esc(g.frage)}<br>– ${esc(g.antwort)}</span>`
+        : `<b>${esc(g.titel)}</b>`).join("<br>\n          "), zeilen.length === 0));
   }
   if (zeilen.length) {
     teile.push(`<tr><td style="padding:20px 28px 0;">
@@ -207,7 +209,7 @@ function textBrief(t) {
   if (t.dabei.length) z.push("", "Im Moment dabei", ...t.dabei.map((d) => `- ${d.name}`));
   if (t.gelesen.length) {
     z.push("", "Gelesen");
-    for (const g of t.gelesen) z.push(g.titel, `Fragen Sie mal: ${g.frage}`, `– ${g.antwort}`);
+    for (const g of t.gelesen) z.push(g.titel, ...(g.frage ? [`Fragen Sie mal: ${g.frage}`, `– ${g.antwort}`] : []));
   }
   if (t.naechstes) {
     z.push("", t.anleitungKopf, t.naechstes.titel);
