@@ -12,8 +12,8 @@ const lies = (p) => readFileSync(join(WURZEL, p), "utf8");
 test("Skill rueckmeldung: Kopf, drei Bereiche, Nachprüfung je Punkt, Probe, Ergebnis", () => {
   const s = lies(".claude/skills/rueckmeldung/SKILL.md");
   assert.match(s, /^---\nname: rueckmeldung\ndescription: .+\n---/);
-  for (const x of ["## Spiel", "## Buch", "## Mit echten Dingen", "Rückmeldung von Christian", "rueckmeldung.md",
-    "nachpruefung.json", '"umgesetzt"', "--zweig aenderung-", "--merge", "Probe", "Lauf aus der Verwaltung", "VERWALTUNG_AUFTRAG"]) assert.ok(s.includes(x), x);
+  for (const x of ["## Spiel", "## Buch", "## Mit echten Dingen", "Rückmeldung von Christian", "rueckmeldung.md", "aenderung-<id>-<marke>", "git worktree remove", "--abwarten",
+    "nachpruefung.json", '"umgesetzt"', "--merge", "Probe", "Lauf aus der Verwaltung", "VERWALTUNG_AUFTRAG"]) assert.ok(s.includes(x), x);
   assert.doesNotMatch(s, /git push(?!` scheitert)/);
 });
 

@@ -15,7 +15,7 @@ const plakette = (status, text = STATUS_TEXT[status] ?? status, titel = "") =>
 
 // ---------- Rückmeldungen (Spec 2026-11-17) ----------
 // Gebaute Stücke bekommen den Knopf; Ungebaute nur, wenn schon ein Auftrag dafür offen ist (der Server prüft dasselbe).
-const GEBAUT = ["probe", "fertig", "geparkt", "beauftragt", "entwurf"];
+const GEBAUT = ["probe", "fertig", "geparkt", "entwurf"]; // „beauftragt“ nur mit offenem Auftrag (nicht nur Ideen)
 const OFFEN = ["wartet", "laeuft", "wartet-auf-christian"];
 const BEREICH_TEXT = { spiel: "Spiel", buch: "Buch", "echte-dinge": "Mit echten Dingen" };
 const gehoertZu = (a, bereich, id) => a.stueck?.bereich === bereich && a.stueck.ids.includes(id);
@@ -422,6 +422,7 @@ const WOHIN = { angehaengt: "an den wartenden Auftrag angehängt", antwort: "als
 
 /** Fenster „Rückmeldung“: Text, was damit passieren wird, und die bisherigen Rückmeldungen zu diesem Stück. */
 function rueckmelden(bereich, id, titel) {
+  const geparkt = bereich === "spiel" && U.spiele[id]?.status === "geparkt";
   const d = /** @type {HTMLDialogElement} */ ($("#rueckmelden"));
   const feld = /** @type {HTMLTextAreaElement} */ ($("#r-text"));
   $("#r-titel").textContent = `Rückmeldung – ${BEREICH_TEXT[bereich]} ${titel}`;
@@ -430,6 +431,7 @@ function rueckmelden(bereich, id, titel) {
   const frage = l.find((a) => a.status === "wartet-auf-christian");
   $("#r-wohin").textContent = wartet ? "Wird an den Auftrag gehängt, der dafür schon in der Warteschlange wartet."
     : frage ? `Wird deine Antwort auf die offene Frage: ${frage.ergebnis?.frage ?? "–"}`
+    : geparkt ? "Wird ein Spiel-Auftrag: Das geparkte Spiel wird mit deinen Punkten im Bauheft weitergebaut (startet mit „Warteschlange abarbeiten“)."
     : "Wird ein neuer Auftrag „Änderung“ in der Warteschlange (startet mit „Warteschlange abarbeiten“). Er setzt nur deine Punkte um, lässt jeden Punkt nachprüfen und mergt bei Grün.";
   const bisher = rueckmeldungenZu(bereich, id);
   $("#r-verlauf").innerHTML = bisher.length ? `<h3>Bisher</h3><ul class="verlauf">${bisher.map((x) => `<li>${plakette(x.status)}
