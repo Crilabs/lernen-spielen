@@ -22,6 +22,7 @@ const KLEIN = 16 * 1024;
 export async function starteDienst({ port, datei, jetzt = () => new Date(), sende, basis = "https://lernen-spielen.crilabs.de", aus = false }) {
   const daten = lade(datei);
   daten.gesperrt ??= [];
+  let laeuft = false;
 
   /** Entfernt abgelaufene Anfragen (24 h nach der Anmeldung) samt Adresse, Token und noch nicht abgeholtem Schlüssel. */
   const raeumeAnfragen = () => {
@@ -242,6 +243,11 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     server,
     stop: () => new Promise((ok) => { clearInterval(aufraeumen); server.closeAllConnections(); server.close(() => ok(undefined)); }),
     // Versand zur Uhrzeit, Topf leeren, Topf nach 48 h löschen; beim Not-Aus passiert nichts.
-    pruefeFaellige: async () => (aus ? 0 : versendeFaellige({ daten, jetzt: jetzt(), sende, basis, speichern })),
+    // Läuft schon eine Prüfung (langsamer Versand), kehrt ein zweiter Aufruf sofort zurück.
+    pruefeFaellige: async () => {
+      if (aus || laeuft) return 0;
+      laeuft = true;
+      try { return await versendeFaellige({ daten, jetzt: jetzt(), sende, basis, speichern }); } finally { laeuft = false; }
+    },
   };
 }

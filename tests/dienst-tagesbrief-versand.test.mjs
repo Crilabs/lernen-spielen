@@ -142,7 +142,9 @@ test("Fehler beim Senden: Topf bleibt, die anderen Adressen bekommen ihren Brief
   assert.ok(!protokoll.includes("example.org") && !protokoll.includes("Plus") && !protokoll.includes("kaputt"));
   sendeFehler.clear();
   jetzt = new Date("2026-11-17T17:01:00Z");
-  assert.equal(await t.dienst.pruefeFaellige(), 1, "nächste Minute klappt");
+  assert.equal(await t.dienst.pruefeFaellige(), 0, "vor Ablauf der 15 Minuten kein neuer Versuch");
+  jetzt = new Date("2026-11-17T17:15:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1, "nach 15 Minuten klappt es");
 });
 
 test("Eingangsprüfung: ungültige Ereignisse geben 400, nichts wird gespeichert", async () => {
@@ -177,4 +179,106 @@ test("Probebrief sendet sofort, leert den Topf nicht, 4. am Tag 429", async () =
   await post("/probebrief", {}, bearer(s));
   await post("/probebrief", {}, bearer(s));
   assert.equal((await post("/probebrief", {}, bearer(s))).status, 429);
+});
+
+test("Push nach der Uhrzeit bei leerem Tag: kein Brief um 18:06, am nächsten Tag um 18:00", async () => {
+  const s = await einrichten();
+  const vorher = t.mails.length;
+  jetzt = new Date("2026-11-17T17:00:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 0);
+  jetzt = new Date("2026-11-17T17:05:00Z");
+  await push(s, [gekonnt()]);
+  for (const z of ["2026-11-17T17:06:00Z", "2026-11-17T22:00:00Z"]) { jetzt = new Date(z); assert.equal(await t.dienst.pruefeFaellige(), 0); }
+  jetzt = new Date("2026-11-18T17:00:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+  assert.equal(t.mails.length, vorher + 1);
+});
+
+test("Push 17:00 und 18:05: der Brief um 18:00 enthält nur das frühere, das spätere kommt morgen", async () => {
+  const s = await einrichten();
+  jetzt = new Date("2026-11-17T16:00:00Z"); // 17:00
+  await push(s, [{ id: "e-a", art: "gekonnt", daten: { id: "a", name: "Frühes", zweck: "z", fach: "mathe" } }]);
+  jetzt = new Date("2026-11-17T17:05:00Z"); // 18:05
+  await push(s, [{ id: "e-b", art: "gekonnt", daten: { id: "b", name: "Spätes", zweck: "z", fach: "mathe" } }]);
+  // Dienst war um 18:00 aus, startet 18:30: nachgeholt, aber nur mit dem Früheren.
+  jetzt = new Date("2026-11-17T17:30:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+  const m = t.mails.at(-1);
+  assert.match(m.text, /Frühes/);
+  assert.ok(!m.text.includes("Spätes"));
+  assert.deepEqual(speicher().adressen[ADRESSE].topf.gekonnt.map((x) => x.id), ["b"]);
+  jetzt = new Date("2026-11-18T17:00:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+  assert.match(t.mails.at(-1).text, /Spätes/);
+});
+
+test("zwei gleichzeitige Prüfungen mit langsamem Versand senden genau einmal", async () => {
+  await t.dienst.stop();
+  const ordner = mkdtempSync(join(tmpdir(), "tagesbrief-v-"));
+  let gesendet = 0;
+  const dienst = await starteDienst({ port: 0, datei: join(ordner, "s.json"), jetzt: () => jetzt, basis: "http://basis", sende: async (m) => {
+    if (m.betreff.includes("bestätigen")) return;
+    gesendet++;
+    await new Promise((ok) => setTimeout(ok, 100));
+  } });
+  const alt = t;
+  t = { ...alt, dienst, url: `http://127.0.0.1:${dienst.server.address().port}`, mails: [] };
+  t.mails = [];
+  // Bestätigungsmail abfangen: Sender oben verwirft sie, daher Token aus der Speicherdatei lesen.
+  const { anfrageId } = await (await post("/anmelden", { adresse: ADRESSE, uhrzeit: "18:00" })).json();
+  const token = Object.values(JSON.parse(readFileSync(join(ordner, "s.json"), "utf8")).anfragen).find((a) => a.token).token;
+  await fetch(t.url + "/bestaetigen", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ t: token }).toString() });
+  const { schluessel } = await (await fetch(`${t.url}/status?anfrage=${anfrageId}`, { headers: KOPF })).json();
+  await push(schluessel, [gekonnt()]);
+  jetzt = new Date("2026-11-17T17:00:00Z");
+  const [a, b] = await Promise.all([dienst.pruefeFaellige(), dienst.pruefeFaellige()]);
+  assert.equal(a + b, 1);
+  assert.equal(gesendet, 1);
+  await dienst.stop();
+  rmSync(ordner, { recursive: true, force: true });
+  t.dienst = { stop: async () => {} };
+});
+
+test("Wiederholung: höchstens fünf Versuche am Tag, Abstand 15 Minuten, am nächsten Tag normal", async () => {
+  const s = await einrichten();
+  await push(s, [gekonnt()]);
+  sendeFehler.add(ADRESSE);
+  let versuche = 0;
+  const vorher = log.length;
+  for (let minute = 0; minute < 8 * 60; minute++) {
+    jetzt = new Date(Date.parse("2026-11-17T17:00:00Z") + minute * 60_000);
+    await t.dienst.pruefeFaellige();
+  }
+  versuche = log.slice(vorher).filter((z) => /Versand fehlgeschlagen/.test(z)).length;
+  assert.equal(versuche, 5);
+  assert.equal(speicher().adressen[ADRESSE].topf.gekonnt.length, 1, "Topf bleibt");
+  sendeFehler.clear();
+  jetzt = new Date("2026-11-18T17:00:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+});
+
+test("Wiederholung nach Graph-429 wartet mindestens Retry-After", async () => {
+  await t.dienst.stop();
+  const ordner = mkdtempSync(join(tmpdir(), "tagesbrief-v-"));
+  let drossel = false;
+  const dienst = await starteDienst({ port: 0, datei: join(ordner, "s.json"), jetzt: () => jetzt, basis: "http://basis", sende: async (m) => {
+    if (drossel && !m.betreff.includes("bestätigen")) throw Object.assign(new Error("x"), { name: "GraphFehler", code: "GRAPH_429", status: 429, retryAfter: 3600 });
+  } });
+  t = { ...t, dienst, url: `http://127.0.0.1:${dienst.server.address().port}` };
+  const { anfrageId } = await (await post("/anmelden", { adresse: ADRESSE, uhrzeit: "18:00" })).json();
+  const token = Object.values(JSON.parse(readFileSync(join(ordner, "s.json"), "utf8")).anfragen).find((a) => a.token).token;
+  await fetch(t.url + "/bestaetigen", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ t: token }).toString() });
+  const { schluessel } = await (await fetch(`${t.url}/status?anfrage=${anfrageId}`, { headers: KOPF })).json();
+  await push(schluessel, [gekonnt()]);
+  drossel = true;
+  jetzt = new Date("2026-11-17T17:00:00Z");
+  assert.equal(await dienst.pruefeFaellige(), 0);
+  drossel = false;
+  jetzt = new Date("2026-11-17T17:30:00Z");
+  assert.equal(await dienst.pruefeFaellige(), 0, "nach 30 Minuten noch gedrosselt");
+  jetzt = new Date("2026-11-17T18:00:00Z");
+  assert.equal(await dienst.pruefeFaellige(), 1);
+  await dienst.stop();
+  rmSync(ordner, { recursive: true, force: true });
+  t.dienst = { stop: async () => {} };
 });

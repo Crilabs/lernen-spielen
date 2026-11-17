@@ -86,3 +86,9 @@ test("Antwort 4xx beim Token: Fehler mit Status, kein Senden", async () => {
   await assert.rejects(sender(fetch)(mail), (e) => e.status === 401);
   assert.equal(aufrufe.length, 1);
 });
+
+test("Graph-Aufrufe haben ein Zeitlimit; Retry-After wandert in den Fehler", async () => {
+  const { aufrufe, fetch } = attrappe({ mail: { ok: false, status: 429, headers: new Headers({ "retry-after": "120" }), json: async () => ({}) } });
+  await assert.rejects(sender(fetch)(mail), (e) => e.status === 429 && e.retryAfter === 120);
+  for (const a of aufrufe) assert.ok(a.opt.signal instanceof AbortSignal);
+});
