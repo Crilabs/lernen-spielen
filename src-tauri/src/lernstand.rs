@@ -37,7 +37,7 @@ fn gueltigen_inhalt(datei: &Path) -> std::io::Result<Option<String>> {
 }
 
 /// Ordner für Profil (`dir/<profil>/`) oder Gerät (`dir/`). Kein Rückgriff dazwischen.
-fn ordner(dir: &Path, profil: Option<&str>) -> Result<PathBuf, String> {
+pub(crate) fn ordner(dir: &Path, profil: Option<&str>) -> Result<PathBuf, String> {
     match profil {
         Some(p) => {
             pruefe_id(p)?;
