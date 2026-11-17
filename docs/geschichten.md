@@ -78,7 +78,8 @@ wird gezählt; eine Antwort, die nicht passt, löst nichts Besonderes aus.
   sofort frei.
 - **„Weißt du noch?“ in der Bibliothek:** Höchstens einmal am Tag kommt beim Öffnen der Bibliothek die Frage eines
   Kapitels zurück, das das Kind frühestens gestern beendet hat; die am längsten nicht gestellte zuerst. Überspringbar
-  („Später“), nichts wird gezählt.
+  („Später“), nichts wird gezählt. Das Foto dort ist das der Seite `seite` (wo die Antwort steht), damit das Kind
+  die Stelle im Buch wiedererkennt (Christian, 2026-11-17); im Buch selbst bleibt `bild`.
 - Ein frischer Prüfer prüft die Fragen mit dem Buch (`pruefung.md` §5 „Erinnerungsfragen“).
 
 ```json
