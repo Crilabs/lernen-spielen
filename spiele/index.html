@@ -133,10 +133,12 @@ import { zuletztHtml } from "./start/regal-leiste.js";
 import { spielzeitLage } from "./rahmen/spielzeit.js";
 import { sperre, satzFuer } from "./rahmen/zeitsperre.js";
 import { zahnrad } from "./rahmen/zahnrad.js";
+import { beimStart as tagesbriefBeimStart } from "./tagesbrief/anbindung.js";
 
 sperreTouch();
 const leiste = document.getElementById("leiste");
 zahnrad(document.getElementById("zahnrad"));
+tagesbriefBeimStart(); // liegengebliebene Brief-Ereignisse abschicken, ohne zu warten (wirft nie)
 start();
 
 async function start() {

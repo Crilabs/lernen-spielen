@@ -9,7 +9,7 @@ globalThis.localStorage = {
   removeItem: (k) => speicher.delete(k),
 };
 globalThis.window = {};
-const { meldeRundenende, meldeGelesen, baueVorschauTopf, setzeZurueck, testHaken } = await import("../spiele/tagesbrief/anbindung.js");
+const { beimStart, meldeRundenende, meldeGelesen, baueVorschauTopf, setzeZurueck, testHaken } = await import("../spiele/tagesbrief/anbindung.js");
 const { gueltigesEreignis } = await import("../dienste/tagesbrief/pruefung.js");
 const { neuerStand, migriereStand } = await import("../spiele/lernsteuerung.js");
 
@@ -222,4 +222,35 @@ test("baueVorschauTopf: von Eltern abgehakte Themen zählen nicht als neu gekonn
   const stand = neuerStand();
   stand.themen.zweierreihe = { z: "kann-ich", stufe: "kopf", e: "", seit: "2026-11-10", k: "2026-11-16", u: "", frei: 0, v: [], q: "eltern" };
   assert.deepEqual((await baueVorschauTopf(ctx, stand, { heute: HEUTE })).gekonnt, []);
+});
+
+test("beimStart: aktiv schickt die Warteschlange mit leerer Liste ab, sonst nichts", async () => {
+  attrappe();
+  await beimStart();
+  assert.equal(pushes().length, 1);
+  assert.deepEqual(pushes()[0].args, { profil: "kind-1", ereignisse: [] });
+  for (const zustand of ["aus", "wartet", "abbestellt"]) {
+    attrappe({ zustand });
+    await beimStart();
+    assert.equal(pushes().length, 0, zustand);
+  }
+});
+
+test("beimStart: wirft nie und merkt verschickte Anleitungen", async () => {
+  attrappe({ wirft: true });
+  await beimStart();
+  attrappe({ pushen: { verschickt: [{ anleitung: "mathe/zweierreihe.md", am: HEUTE }] } });
+  await beimStart();
+  assert.equal(pushes().length, 1);
+  assert.deepEqual(JSON.parse(speicher.get(TB_SCHLUESSEL)).gesperrt, { "mathe/zweierreihe.md": HEUTE });
+});
+
+test("ohne Einrichtung wird nichts geladen oder gebaut", async () => {
+  let geladen = 0;
+  testHaken.setzeLader(async (p) => { geladen++; return dateiLader(p); });
+  attrappe({ zustand: "aus" });
+  await meldeRundenende(ctx, standDran("zweierreihe"), { thema: "zweierreihe", gekonnt: null, heute: HEUTE });
+  await meldeGelesen(ctx, neuerStand(), "wal", { heute: HEUTE });
+  assert.equal(geladen, 0);
+  assert.equal(pushes().length, 0);
 });

@@ -144,17 +144,22 @@ async function merkeVerschickt(verschickt, heute) {
 }
 
 /**
- * Schiebt Ereignisse in den Topf, wenn der Brief eingerichtet ist.
- * @param {any} ctx
- * @param {any} stand
+ * Ist der Brief eingerichtet (Zustand `aktiv`)? Merkt sich „abbestellt“, damit die Seite nicht weiter pusht.
+ * @returns {Promise<boolean>}
+ */
+async function istAktiv() {
+  const status = await befehl("tagesbrief_status", { profil: PROFIL });
+  if (status?.zustand === "abbestellt") gestoppt = true;
+  return status?.zustand === "aktiv";
+}
+
+/**
+ * Schiebt Ereignisse in den Topf (der Brief ist bereits als eingerichtet geprüft).
  * @param {{ art: string, daten: object }[]} ereignisse
  * @param {string} heute
  */
-async function pushe(ctx, stand, ereignisse, heute) {
+async function pushe(ereignisse, heute) {
   if (!ereignisse.length) return;
-  const status = await befehl("tagesbrief_status", { profil: PROFIL });
-  if (status?.zustand === "abbestellt") gestoppt = true;
-  if (status?.zustand !== "aktiv") return;
   const antwort = await befehl("tagesbrief_pushen", { profil: PROFIL, ereignisse });
   if (["abbestellt", "aus", "gesperrt"].includes(antwort?.zustand)) { gestoppt = true; return; }
   if (Array.isArray(antwort?.verschickt)) await merkeVerschickt(antwort.verschickt, heute);
@@ -182,7 +187,7 @@ async function mitVerzeichnis(ctx) {
  */
 export async function meldeRundenende(ctx, stand, { thema, gekonnt, heute }) {
   try {
-    if (gestoppt) return;
+    if (gestoppt || !(await istAktiv())) return;
     const c = await mitVerzeichnis(ctx);
     /** @type {{ art: string, daten: object }[]} */
     const ereignisse = [];
@@ -195,7 +200,7 @@ export async function meldeRundenende(ctx, stand, { thema, gekonnt, heute }) {
     }
     const naechstes = await baueNaechstes(c, stand, { heute, zuletztGeuebt: gekonnt ?? thema ?? "" });
     if (naechstes) ereignisse.push({ art: "naechstes", daten: naechstes });
-    await pushe(c, stand, ereignisse, heute);
+    await pushe(ereignisse, heute);
   } catch (e) {
     melde(e);
   }
@@ -211,7 +216,7 @@ export async function meldeRundenende(ctx, stand, { thema, gekonnt, heute }) {
  */
 export async function meldeGelesen(ctx, stand, id, { heute }) {
   try {
-    if (gestoppt || !/^[a-z0-9-]+$/.test(id)) return;
+    if (gestoppt || !/^[a-z0-9-]+$/.test(id) || !(await istAktiv())) return;
     const c = await mitVerzeichnis(ctx);
     const geschichte = await ladeJson(`geschichten/${id}/geschichte.json`);
     if (!geschichte) return;
@@ -219,7 +224,23 @@ export async function meldeGelesen(ctx, stand, id, { heute }) {
     const ereignisse = [{ art: "gelesen", daten: gelesenEreignis(id, geschichte) }];
     const naechstes = await baueNaechstes(c, stand, { heute, zuletztGeuebt: "" });
     if (naechstes) ereignisse.push({ art: "naechstes", daten: naechstes });
-    await pushe(c, stand, ereignisse, heute);
+    await pushe(ereignisse, heute);
+  } catch (e) {
+    melde(e);
+  }
+}
+
+/**
+ * Beim Start der App: schickt liegengebliebene Ereignisse der Warteschlange ab (Rust leert sie bei einem Push ohne
+ * neue Ereignisse), wenn der Brief eingerichtet ist.
+ * @returns {Promise<void>} wirft nie
+ */
+export async function beimStart() {
+  try {
+    if (gestoppt || !(await istAktiv())) return;
+    const antwort = await befehl("tagesbrief_pushen", { profil: PROFIL, ereignisse: [] });
+    if (["abbestellt", "aus", "gesperrt"].includes(antwort?.zustand)) { gestoppt = true; return; }
+    if (Array.isArray(antwort?.verschickt)) await merkeVerschickt(antwort.verschickt, new Date().toLocaleDateString("sv"));
   } catch (e) {
     melde(e);
   }
