@@ -204,3 +204,36 @@ test("verbform: Schwierigkeit (ich, du leicht; ihr und sie in der Mehrzahl schwe
   assert.equal(darstellbar(a, { art: "verbform", ziele: ["grundform"] }), false);
   assert.equal(darstellbar(a, { art: "artikel" }), false);
 });
+
+// --- wortart (Dreieck und Kreis G01, Idee docs/spiele/grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen.md §8) -----
+test("wortart: Sätze je Wortart, Schlüssel wortart:<ziel>:<satz>, daten mit Satz, Wörtern und Zielen", async () => {
+  const { wortartAus } = await import("../spiele/aufgabenarten.js");
+  const nomen = aufgabenVon({ art: "wortart", ziel: ["nomen"] });
+  const verb = aufgabenVon({ art: "wortart", ziel: ["verb"], kopf: ["verb", "nomen"] });
+  const adj = aufgabenVon({ art: "wortart", ziel: ["adjektiv"] });
+  assert.ok(nomen.length >= 20 && verb.length >= 20 && adj.length >= 5);
+  assert.equal(new Set(nomen.map((x) => x.key)).size, nomen.length);
+  assert.equal(nomen[0].key, "wortart:nomen:katze-gaehnt");
+  assert.deepEqual([nomen[0].art, nomen[0].daten.satz, nomen[0].daten.ziel, nomen[0].daten.kopfZiel], ["wortart", "katze-gaehnt", ["nomen"], ["nomen"]]);
+  assert.deepEqual(verb[0].daten.kopfZiel, ["verb", "nomen"]);
+  assert.equal(nomen[0].daten.woerter.length, 3);
+  // Derselbe Satz dient zwei Themen, aber mit verschiedenen Schlüsseln (der Lernstand hängt am Schlüssel).
+  assert.ok(verb.some((x) => x.daten.satz === "katze-gaehnt") && !verb.some((x) => x.key === nomen[0].key));
+  // Nomen und Verb nutzen keine Adjektiv-Sätze, Adjektiv nur diese.
+  assert.ok(adj.every((x) => x.daten.woerter.some((w) => w.art === "adjektiv")));
+  assert.ok(nomen.concat(verb).every((x) => !x.daten.woerter.some((w) => w.art === "adjektiv")));
+  assert.deepEqual(wortartAus("wortart:verb:hund-bellt"), { key: "wortart:verb:hund-bellt", ziel: "verb", id: "hund-bellt" });
+  assert.equal(wortartAus("wortart:verb:gibtesnicht"), null);
+  assert.equal(wortartAus("wortart:artikel:hund-bellt"), null);
+  assert.equal(wortartAus("artikel:hammer"), null);
+  assert.deepEqual(aufgabenVon({ art: "wortart" }), []);
+  assert.deepEqual(aufgabenVon({ art: "wortart", ziel: ["pronomen"] }), []);
+});
+test("wortart: Schwierigkeit nach Satz, Zielzeit, darstellbar nur für die eigene Art", () => {
+  const a = aufgabenVon({ art: "wortart", ziel: ["nomen"] });
+  const s = (id) => schwierigkeit(a.find((x) => x.daten.satz === id));
+  assert.deepEqual(["katze-gaehnt", "baum-rauscht", "hund-hat-durst"].map(s), [0, 1, 2]);
+  assert.equal(ZIEL_MS.wortart, 12000);
+  assert.equal(darstellbar(a[0], { art: "wortart", stufen: ["material"] }), true);
+  assert.equal(darstellbar(a[0], { art: "artikel" }), false);
+});

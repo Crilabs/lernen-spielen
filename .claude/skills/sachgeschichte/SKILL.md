@@ -120,11 +120,11 @@ Satz Begründung in `pruefung.md` §4 „Titelbild“. Er erzeugt keine neuen Bi
 ## 4b. Erinnerungsfragen (Schreiber, dann frischer Prüfer)
 
 Nach dem Titelbild bekommt **jedes Kapitel** ein Feld `erinnern` nach `docs/geschichten.md` §2b (Frage nach der
-Kernerkenntnis, drei Antworten mit echten Fehlvorstellungen, neutrale Auflösung ohne „Ja/Richtig/Leider“, Foto des
-Kapitels, das die Antwort nicht verrät, `seite` zum Nachlesen, `richtig` über das Buch verteilt). Danach prüft ein
+Kernerkenntnis, drei Antworten mit echten Fehlvorstellungen, neutrale Auflösung ohne „Ja/Richtig/Leider“, `seite` zum
+Nachlesen und als `bild` das Foto genau dieser Seite, `richtig` über das Buch verteilt). Danach prüft ein
 **frischer Agent** jede Frage mit dem Kapiteltext: Kernerkenntnis statt Nebensache? Passt genau eine Antwort, und
 stimmt sie mit Buch und `quellen`? Sind die anderen plausibel, nicht albern? Klingt die Auflösung nach jeder Wahl
-richtig? Verrät das Bild nichts? Befunde umsetzen (höchstens zwei Runden), Urteil in `pruefung.md` §5
+richtig? Ist `bild` das Foto der Seite `seite`? Befunde umsetzen (höchstens zwei Runden), Urteil in `pruefung.md` §5
 „Erinnerungsfragen“.
 
 ## 5. Abschluss im Buch-Ordner

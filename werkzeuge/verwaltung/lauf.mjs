@@ -3,6 +3,7 @@
 // (docs/superpowers/specs/2026-11-16-verwaltung-design.md, „Abarbeiten“).
 //
 //   node werkzeuge/verwaltung/lauf.mjs abarbeiten        alle wartenden Aufträge mit `claude -p` (startet die Seite)
+//   node werkzeuge/verwaltung/lauf.mjs ideen <id>        einen Ideen-Auftrag sofort, neben der Warteschlange (startet die Seite)
 //   node werkzeuge/verwaltung/lauf.mjs naechster         Chat: nimmt die Sperre, setzt den obersten Auftrag auf „laeuft“,
 //                                                        druckt { id, art, ziel, befehl } (oder meldet „läuft schon“)
 //   node werkzeuge/verwaltung/lauf.mjs fertig <id> <status>   Chat: setzt den Status und gibt die Sperre frei
@@ -15,7 +16,7 @@ import { createInterface } from "node:readline";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { journalBeobachter, mitUhr, zeilenAusAusgabe } from "./protokoll.mjs";
-import { STATUS, ladeAuftraege, naechsterWartender, speichereAuftraege, statusAusErgebnis } from "./auftraege.mjs";
+import { STATUS, aendereAuftraege, ladeAuftraege, naechsterWartender, statusAusErgebnis } from "./auftraege.mjs";
 
 export const ORDNER = dirname(fileURLToPath(import.meta.url));
 export const WURZEL = join(ORDNER, "..", "..");
@@ -31,6 +32,7 @@ export function pfade(ordner) {
     anhalten: join(ordner, ".anhalten"),
     ergebnis: (id) => join(ordner, "ergebnisse", `${id}.json`),
     protokoll: (id) => join(ordner, "protokolle", `${id}.log`),
+    vorgabe: (id) => join(ordner, "vorgaben", `${id}.md`),
   };
 }
 
@@ -98,33 +100,47 @@ export function laufUmgebung(basis, auftragId, transkript) {
   };
 }
 
+/**
+ * Pflicht zur Ergebnisdatei im Systemprompt: Er steht in jedem Zug vorn, ein Satz am Ende des Skills nicht. Im Lauf
+ * „Mit echten Dingen“ (2026-11-17) war alles grün und committet, aber die Datei fehlte – der Auftrag galt als
+ * fehlgeschlagen.
+ */
+export const ergebnisPflicht = (datei) =>
+  `Dieser Lauf kommt aus der Verwaltung. Dein letzter Schritt, bevor du endest: Schreib die Ergebnisdatei ${datei} ` +
+  "so, wie der Skill es im Abschnitt „Lauf aus der Verwaltung“ vorgibt (Status und Zusammenfassung als JSON). " +
+  "Fehlt die Datei, gilt der Auftrag als fehlgeschlagen, auch wenn alles grün ist. Laufen noch Agenten im " +
+  "Hintergrund, schreib sie erst, wenn alle fertig sind.";
+
 /** Argumente für `claude -p`: stream-json, damit das Protokoll während des Laufs wächst (Textmodus druckt nur das Ende). */
-export function claudeArgumente(befehl, sessionId) {
+export function claudeArgumente(befehl, sessionId, ergebnis) {
   return [
     "-p", befehl, "--session-id", sessionId, "--output-format", "stream-json", "--verbose",
+    ...(ergebnis ? ["--append-system-prompt", ergebnisPflicht(ergebnis)] : []),
     "--permission-mode", "bypassPermissions", "--disallowedTools", ...VERBOTEN,
   ];
 }
 
 /** Startet einen Auftrag als `claude -p` im Repo; lesbares Protokoll (protokoll.mjs). Ergebnis: Exit-Code. */
-export function startClaude({ befehl, auftragId, wurzel, protokoll, alleMs = 5000 }) {
+export function startClaude({ befehl, auftragId, wurzel, protokoll, ergebnis, alleMs = 5000 }) {
   const sessionId = randomUUID();
   const transkript = transkriptPfad(wurzel, sessionId);
   mkdirSync(dirname(protokoll), { recursive: true });
   const log = createWriteStream(protokoll, { flags: "a" });
   log.write(`# ${new Date().toISOString()} ${befehl}\n# Sitzung ${sessionId}\n`);
   const schreibe = (zeile) => log.write(mitUhr(zeile));
-  const kind = spawn("claude", claudeArgumente(befehl, sessionId), {
+  const kind = spawn("claude", claudeArgumente(befehl, sessionId, ergebnis), {
     cwd: wurzel,
     env: laufUmgebung(process.env, auftragId, transkript),
     stdio: ["ignore", "pipe", "pipe"],
   });
-  createInterface({ input: kind.stdout }).on("line", (z) => zeilenAusAusgabe(z).forEach(schreibe));
+  const zustand = {};
+  createInterface({ input: kind.stdout }).on("line", (z) => zeilenAusAusgabe(z, zustand).forEach(schreibe));
   createInterface({ input: kind.stderr }).on("line", (z) => { if (z.trim()) schreibe(`! ${z}`); });
   const journal = journalBeobachter(transkript.replace(/\.jsonl$/, ""), schreibe);
   const takt = setInterval(journal, alleMs);
   return new Promise((ok) => {
-    const ende = (text, code) => { clearInterval(takt); journal(); log.end(`\n# ${text}\n`); ok(code); };
+    // Erst melden, wenn die letzte Zeile wirklich in der Datei steht (vorher las der Test unter Last zu früh).
+    const ende = (text, code) => { clearInterval(takt); journal(); log.end(`\n# ${text}\n`, () => ok(code)); };
     kind.on("error", (e) => ende(`Start fehlgeschlagen: ${e.message}`, -1));
     kind.on("close", (code) => ende(`Ende, Exit-Code ${code}`, code ?? -1));
   });
@@ -132,15 +148,32 @@ export function startClaude({ befehl, auftragId, wurzel, protokoll, alleMs = 500
 
 /** Ändert einen Auftrag in der Datei (frisch gelesen, damit Änderungen der Seite während des Laufs bleiben). */
 function aendere(ordner, id, f) {
-  const datei = pfade(ordner).auftraege;
-  const l = ladeAuftraege(datei);
-  const neu = f(l, l.findIndex((a) => a.id === id));
-  speichereAuftraege(datei, neu);
-  return neu;
+  return aendereAuftraege(pfade(ordner).auftraege, (l) => f(l, l.findIndex((a) => a.id === id)));
 }
 
 function liesErgebnis(datei) {
   try { return JSON.parse(readFileSync(datei, "utf8")); } catch { return null; }
+}
+
+/**
+ * Ein Ideen-Auftrag sofort, ohne die Sperre der Warteschlange (Christian, 2026-11-17: „die Ideen direkt erzeugen,
+ * nicht erst wenn der Bau beginnt“). Mehrere dürfen gleichzeitig laufen; jeder arbeitet in seinem eigenen Worktree.
+ * @param {{ ordner?: string, wurzel?: string, id: string, starte?: typeof startClaude }} o
+ */
+export async function fuehreIdeenAus({ ordner = ORDNER, wurzel = WURZEL, id, starte = startClaude }) {
+  const p = pfade(ordner);
+  const a = ladeAuftraege(p.auftraege).find((x) => x.id === id);
+  if (!a || a.art !== "ideen" || a.status !== "wartet") throw new Error(`Ideen-Auftrag ${id} wartet nicht`);
+  aendere(ordner, id, (l, i) => { l[i] = { ...l[i], status: "laeuft", gestartet: new Date().toISOString() }; return l; });
+  rmSync(p.ergebnis(id), { force: true });
+  try {
+    await starte({ befehl: a.befehl, auftragId: id, wurzel, protokoll: p.protokoll(id), ergebnis: p.ergebnis(id) });
+  } catch (e) {
+    mkdirSync(dirname(p.protokoll(id)), { recursive: true });
+    writeFileSync(p.protokoll(id), `\n# Fehler: ${/** @type {any} */ (e).message}\n`, { flag: "a" });
+  }
+  const ergebnis = existsSync(p.ergebnis(id)) ? liesErgebnis(p.ergebnis(id)) : null;
+  aendere(ordner, id, (l, i) => { l[i] = { ...l[i], status: statusAusErgebnis(ergebnis), beendet: new Date().toISOString(), ergebnis }; return l; });
 }
 
 /**
@@ -154,7 +187,8 @@ export async function arbeiteAb({ ordner = ORDNER, wurzel = WURZEL, starte = sta
   rmSync(p.anhalten, { force: true });
   try {
     // Wer die Sperre hält, hat keinen lebenden Vorgänger: was noch „laeuft“, stammt aus einem abgebrochenen Lauf.
-    const liegen = ladeAuftraege(p.auftraege).filter((a) => a.status === "laeuft");
+    // Ideen laufen in eigenen Prozessen neben der Warteschlange (fuehreIdeenAus) und gehören nicht dazu.
+    const liegen = ladeAuftraege(p.auftraege).filter((a) => a.status === "laeuft" && a.art !== "ideen");
     for (const a of liegen) {
       aendere(ordner, a.id, (l, i) => {
         l[i] = { ...l[i], status: "fehlgeschlagen", beendet: new Date().toISOString(), notiz: "Lauf abgebrochen (Prozess beendet, ohne Ergebnis)" };
@@ -167,7 +201,7 @@ export async function arbeiteAb({ ordner = ORDNER, wurzel = WURZEL, starte = sta
       aendere(ordner, a.id, (l, i) => { l[i] = { ...l[i], status: "laeuft", gestartet: new Date().toISOString() }; return l; });
       rmSync(p.ergebnis(a.id), { force: true });
       try {
-        await starte({ befehl: a.befehl, auftragId: a.id, wurzel, protokoll: p.protokoll(a.id) });
+        await starte({ befehl: a.befehl, auftragId: a.id, wurzel, protokoll: p.protokoll(a.id), ergebnis: p.ergebnis(a.id) });
       } catch (e) {
         mkdirSync(dirname(p.protokoll(a.id)), { recursive: true });
         writeFileSync(p.protokoll(a.id), `\n# Fehler: ${/** @type {any} */ (e).message}\n`, { flag: "a" });
@@ -216,6 +250,8 @@ async function main(argv) {
   if (befehl === "abarbeiten") {
     const { folgeAuftrag } = await import("./folge.mjs");
     await arbeiteAb({ folge: folgeAuftrag });
+  } else if (befehl === "ideen") {
+    await fuehreIdeenAus({ id: rest[0] });
   } else if (befehl === "naechster") {
     if (!nimmSperre(ORDNER, { pid: null, wer: "chat" })) {
       console.log(JSON.stringify({ laeuftSchon: sperre(ORDNER) }));
@@ -231,7 +267,7 @@ async function main(argv) {
     meldeFertig(ORDNER, id, status);
     console.log(`${id}: ${status}`);
   } else {
-    console.error("Aufruf: lauf.mjs abarbeiten | naechster | fertig <id> <status>");
+    console.error("Aufruf: lauf.mjs abarbeiten | ideen <id> | naechster | fertig <id> <status>");
     process.exitCode = 1;
   }
 }

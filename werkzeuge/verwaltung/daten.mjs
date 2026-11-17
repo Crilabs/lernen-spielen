@@ -69,6 +69,8 @@ const ziele = (a) => (Array.isArray(a.ziel) ? a.ziel : [a.ziel]);
  */
 export function baueUebersicht(q, auftraege) {
   const beauftragt = (art, id) => auftraege.some((a) => offen(a) && a.art === art && ziele(a).includes(id));
+  // Ideen sind auch offen, solange sie auf Christians Wahl warten – sonst gäbe es zwei Ideen-Aufträge für ein Spiel.
+  const ideenOffen = (id) => auftraege.some((a) => (offen(a) || a.status === "wartet-auf-christian") && a.art === "ideen" && ziele(a).includes(id));
 
   // Spiele: Katalog-Abschnitte, dazu fertige (spiele.json), geparkte und Kosten
   const imSpieleJson = new Map(q.spieleJson.spiele.map((s) => [idAusOrdner(s.datei.split("/").slice(0, -1).join("/")), s]));
@@ -84,7 +86,7 @@ export function baueUebersicht(q, auftraege) {
     const fertig = imSpieleJson.get(k.id);
     /** @type {Status} */
     const status = fertig ? (fertig.probe ? "probe" : "fertig")
-      : beauftragt("spiel", k.id) ? "beauftragt"
+      : beauftragt("spiel", k.id) || ideenOffen(k.id) ? "beauftragt"
       : geparktIds.has(k.id) ? "geparkt" : "geplant";
     spiele[k.id] = { ...k, status, ordner: fertig?.datei ?? null, eur: eurJeSpiel.get(k.id) ?? null };
   }
@@ -108,6 +110,7 @@ export function baueUebersicht(q, auftraege) {
     const echteDinge = v ? (v.entwurf ? "entwurf" : "fertig") : beauftragt("echte-dinge", t.id) ? "beauftragt" : "fehlt";
     return {
       id: t.id, name: t.name, strang: t.strang, klasse: t.klasse, bereich: t.bereich,
+      ziel: t.ziel ?? null, beispiele: t.beispiele ?? [], zweck: t.zweck ?? null,
       spiele: spieleJeThema.get(t.id) ?? [],
       echteDinge, echteDingeEur: echtEur.get(t.id) ?? null,
       einfuehrung: t.einfuehrung?.vorlage ?? null,

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { request } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -27,15 +27,17 @@ test("echteDingeNachSpiel: Hauptthemen ohne Anleitung, Einstiegsklasse zuerst, h
 async function mitServer(f) {
   const ordner = mkdtempSync(join(tmpdir(), "verwaltung-"));
   let gestartet = 0;
+  const ideenGestartet = [];
   const server = erstelleServer({
     wurzel: WURZEL, ordner,
     starteLauf: () => { gestartet++; nimmSperre(ordner, { pid: process.pid, wer: "seite" }); },
+    starteIdeen: (id) => { ideenGestartet.push(id); },
   });
   await new Promise((ok) => server.listen(0, "127.0.0.1", ok));
   const basis = `http://127.0.0.1:${/** @type {any} */ (server.address()).port}`;
   const hol = (pfad, opt = {}) => fetch(basis + pfad, opt);
   const sende = (pfad, daten) => hol(pfad, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(daten ?? {}) });
-  try { await f({ hol, sende, ordner, gestartet: () => gestartet }); } finally {
+  try { await f({ hol, sende, ordner, gestartet: () => gestartet, ideenGestartet }); } finally {
     gibSperreFrei(ordner);
     server.close();
     rmSync(ordner, { recursive: true });
@@ -152,4 +154,71 @@ test("Server: /spiele/ liefert die Startseite der App (Knopf „App öffnen“)"
 
 test("Server: Probe abschließen – unbekannte Id → 400", () => mitServer(async ({ sende }) => {
   assert.equal((await sende("/api/proben/X1/abschliessen")).status, 400);
+}));
+
+test("Server: Ideen nur für geplante Spiele, Schätzung 1 €", () => mitServer(async ({ hol, sende }) => {
+  const u = await (await hol("/api/uebersicht")).json();
+  const geplant = Object.values(u.spiele).find((s) => s.status === "geplant");
+  const fertig = Object.values(u.spiele).find((s) => s.status === "fertig");
+  let r = await sende("/api/auftraege", { art: "ideen", ziel: fertig.id });
+  assert.equal(r.status, 400);
+  assert.match((await r.json()).fehler, /noch nicht gebaut/);
+  r = await sende("/api/auftraege", { art: "ideen", ziel: geplant.id });
+  assert.equal(r.status, 201);
+  assert.equal((await r.json()).schaetzung_eur, 1);
+}));
+
+test("Server: Wahl einer Idee legt Spiel-Auftrag und Vorgabe an, zweite Wahl 409", () => mitServer(async ({ hol, sende, ordner }) => {
+  const ideen = [{ titel: "A", text: "a" }, { titel: "B", text: "b" }, { titel: "C", text: "c" }];
+  speichereAuftraege(pfade(ordner).auftraege, [
+    { id: "i-1", art: "ideen", ziel: "G05", befehl: "Spielideen G05", status: "wartet-auf-christian", ergebnis: { status: "geparkt", ideen } },
+    { id: "i-2", art: "ideen", ziel: "G06", befehl: "Spielideen G06", status: "wartet-auf-christian", ergebnis: { status: "geparkt" } },
+  ]);
+  let r = await sende("/api/auftraege/i-1/wahl", { karte: 2 });
+  assert.equal(r.status, 201);
+  const neu = await r.json();
+  const datei = join(ordner, "vorgaben", `${neu.id}.md`);
+  assert.ok(existsSync(datei));
+  assert.match(readFileSync(datei, "utf8"), /Karte 2/);
+  r = await sende("/api/auftraege/i-1/wahl", { karte: 2 });
+  assert.equal(r.status, 409);
+  r = await sende("/api/auftraege/i-2/wahl", { karte: 1 });
+  assert.equal(r.status, 400);
+  r = await sende("/api/auftraege/fehlt/wahl", { karte: 1 });
+  assert.equal(r.status, 404);
+  const l = (await (await hol("/api/auftraege")).json()).auftraege;
+  assert.deepEqual(l.map((x) => x.art), ["ideen", "spiel", "ideen"]);
+}));
+
+// Review 2026-11-17: zwei gleichzeitige Wahlen – nur eine darf gewinnen, die andere bekommt 409.
+test("Server: gleichzeitige Wahl derselben Idee – genau eine 201", () => mitServer(async ({ hol, sende, ordner }) => {
+  const ideen = [{ titel: "A", text: "a" }, { titel: "B", text: "b" }, { titel: "C", text: "c" }];
+  speichereAuftraege(pfade(ordner).auftraege, [
+    { id: "i-1", art: "ideen", ziel: "G05", befehl: "Spielideen G05", status: "wartet-auf-christian", ergebnis: { status: "geparkt", ideen } },
+  ]);
+  // A schickt Kopf sofort, Körper erst, nachdem B fertig ist – so trifft A die Prüfung, bevor B speichert.
+  const port = new URL((await hol("/api/auftraege")).url).port;
+  const koerperA = JSON.stringify({ karte: 1 });
+  let antwortA;
+  const a = request({ host: "127.0.0.1", port, method: "POST", path: "/api/auftraege/i-1/wahl",
+    headers: { host: `127.0.0.1:${port}`, "content-type": "application/json", "content-length": Buffer.byteLength(koerperA) } });
+  const fertigA = new Promise((ok) => a.on("response", (r) => { antwortA = r.statusCode; r.resume(); r.on("end", ok); }));
+  a.flushHeaders();
+  await new Promise((ok) => setTimeout(ok, 50));
+  const b = await sende("/api/auftraege/i-1/wahl", { karte: 3 });
+  a.end(koerperA);
+  await fertigA;
+  assert.deepEqual([b.status, antwortA].sort(), [201, 409]);
+  const l = (await (await hol("/api/auftraege")).json()).auftraege;
+  assert.equal(l.filter((x) => x.art === "spiel").length, 1);
+}));
+
+test("Server: Ideen-Auftrag startet sofort, Spiel-Auftrag nicht", () => mitServer(async ({ hol, sende, ideenGestartet }) => {
+  const u = await (await hol("/api/uebersicht")).json();
+  const [g1, g2] = Object.values(u.spiele).filter((s) => s.status === "geplant");
+  const a = await (await sende("/api/auftraege", { art: "ideen", ziel: g1.id })).json();
+  await sende("/api/auftraege", { art: "spiel", ziel: g2.id });
+  assert.deepEqual(ideenGestartet, [a.id]);
+  const r = await sende("/api/auftraege", { art: "ideen", ziel: g1.id });
+  assert.equal(r.status, 400, "zweiter Ideen-Auftrag für dasselbe Spiel");
 }));

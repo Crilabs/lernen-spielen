@@ -89,6 +89,26 @@ test("sprich löst bei onend auf, mit Stimme, Sprache und Tempo", async () => {
   assert.equal(await p, "gesprochen");
 });
 
+test("sprich meldet beginn erst, wenn der Satz an der Reihe ist", async () => {
+  const S = await frisch();
+  const begonnen = [];
+  const a = S.sprich("Erster Satz", { beginn: () => begonnen.push("a") });
+  const b = S.sprich("Zweiter Satz", { beginn: () => begonnen.push("b") });
+  await warte();
+  assert.deepEqual(begonnen, ["a"]);
+  gesprochen[0].onend();
+  assert.equal(await a, "gesprochen");
+  await new Promise((r) => setTimeout(r, S.SATZ_LUECKE_MS + 50));
+  await warte();
+  assert.deepEqual(begonnen, ["a", "b"]);
+  gesprochen.at(-1).onend();
+  assert.equal(await b, "gesprochen");
+  S.sprich("Dritter Satz", { beginn: () => begonnen.push("c") });
+  S.stille();
+  await warte();
+  assert.deepEqual(begonnen, ["a", "b"], "ein abgebrochener wartender Satz beginnt nie");
+});
+
 test("sprich löst nach Notbremse auf", async () => {
   mock.timers.enable({ apis: ["setTimeout"] });
   const S = await frisch();

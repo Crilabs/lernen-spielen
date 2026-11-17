@@ -106,3 +106,20 @@ details.spiel > table { border-top: 1px solid var(--linie); }
 details.spiel.ohne { background: none; border-style: dashed; }
 summary .spiel-id { font-variant-numeric: tabular-nums; color: var(--leise); min-width: 3.2em; }
 summary .zahl-z { min-width: 5.5em; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Ideen: je Spiel das Lernthema, darunter drei Skizzen und die eigene Idee als gleichwertige vierte Spalte */
+.ideen-block { padding: 16px 18px; margin-bottom: 18px; }
+.ideen-block header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.ideen-block h2 { margin: 0 0 8px; font-size: 1.15rem; }
+.lernthema { list-style: none; margin: 0 0 16px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr)); gap: 10px 24px; }
+.lernthema .ziel { margin-top: 2px; }
+.ideen-karten { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.ideen-karten .idee { background: var(--grund); border: 1px solid var(--linie); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.ideen-karten h3 { margin: 0; font-size: 1rem; }
+.ideen-karten .skizze { flex: 1; display: grid; gap: 6px; align-content: start; }
+.ideen-karten .skizze p { margin: 0; }
+.ideen-karten .eigene { border-style: dashed; }
+.ideen-karten textarea { flex: 1; min-height: 12rem; resize: vertical; font: inherit; padding: 8px; border: 1px solid var(--linie); border-radius: 6px; background: var(--flaeche); color: var(--text); }
+.ideen-karten button { align-self: flex-start; }
+@media (max-width: 1100px) { .ideen-karten { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .ideen-karten { grid-template-columns: 1fr; } }

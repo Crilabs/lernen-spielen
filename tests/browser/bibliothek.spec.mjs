@@ -65,10 +65,13 @@ for (const typ of [chromium, webkit]) {
       const reiter = document.querySelector("ls-kopf").shadowRoot.querySelector('a.reiter[aria-current="page"]');
       return { tueren: t.map((x) => x.dataset.raum), bilder: t.every((x) => x.querySelector(".bogen img")?.complete),
         links: Math.abs(rs[0].left - titel.left) < 2, quer: rs.every((r) => r.width > r.height), reiter: reiter?.dataset.reiter ?? null,
-        imBild: rs.every((r) => r.bottom <= innerHeight && r.top >= 0) };
+        imBild: rs.every((r) => r.bottom <= innerHeight && r.top >= 0),
+        spalten: getComputedStyle(document.querySelector(".halle")).gridTemplateColumns.split(" ").length };
     });
-    pruefe(JSON.stringify(halle.tueren) === JSON.stringify(["tiere", "zahlen-buchstaben"]) && halle.bilder && halle.links && halle.quer && halle.imBild && halle.reiter === "wissen",
-      `${L} Halle: Reiter Wissen aktiv, zwei Raum-Kacheln mit Bild, quer, linksbündig, ganz im Bild`, JSON.stringify(halle));
+    pruefe(halle.tueren[0] === "tiere" && halle.tueren.includes("zahlen-buchstaben") && halle.bilder && halle.links && halle.quer && halle.imBild && halle.reiter === "wissen",
+      `${L} Halle: Reiter Wissen aktiv, Raum-Kacheln mit Bild, quer, linksbündig, ganz im Bild`, JSON.stringify(halle));
+    // Bis zu vier Räume je Zeile; im Format 4:3 (iPad) drei
+    pruefe(halle.spalten === (w / h > 1.5 ? 4 : 3), `${L} Halle: ${w / h > 1.5 ? 4 : 3} Räume je Zeile`, String(halle.spalten));
     if (SHOTS) { await mkdir(SHOTS, { recursive: true }); await page.screenshot({ path: join(SHOTS, `bibliothek-halle-${typ.name()}-${w}x${h}.png`) }); }
 
     // Tür → Raum (Adresse ?raum=), nur Regale mit fertigen Büchern, Bücher als Karten mit quadratischem Bild, ganz im Bild

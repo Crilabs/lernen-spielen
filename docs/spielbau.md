@@ -200,6 +200,13 @@ Das Bauheft ist die einzige Quelle der Agenten; dort sammelt sich Gewicht am lei
 
 ## Ablauf
 
+**Ideen vor dem Bau (Christian, 2026-11-17):** Für ein noch nicht gebautes Spiel liefert der Auftrag „Ideen“ in der
+Verwaltung (das „+“ beim Spiel; startet sofort, neben der Warteschlange) drei kurze Skizzen (Skill `spielideen`, Maßstab `docs/spielideen.md`: was Christians Prototypen spaßig
+machte). Christian wählt eine oder schreibt seine eigene; daraus wird ein Spiel-Auftrag mit `--vorgabe` – die Warteschlange enthält also nur Spiele mit Christians Idee. Die Vorgabe
+steht im Bauheft vor den Regeln: Die Idee-Phase behält Held, Handlung und Witz und nennt jede Abweichung; die
+Spielprüfung misst dann die Umsetzung – Zweifel an der Idee gehen als „Zur Idee“ an Christian, nur Schwierigkeit und
+Ohne Transfer bleiben hart. Ohne Vorgabe läuft alles wie unten.
+
 ```
 Vorbereiten (Skript)  → Worktree, Bauheft, Arbeitsablage
 Idee        (1 Agent) → docs/spiele/<fach>/<spiel>.md, höchstens 40 Zeilen

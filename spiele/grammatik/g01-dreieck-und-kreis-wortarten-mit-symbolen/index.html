@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Dreieck und Kreis</title>
+<!-- G01 Dreieck und Kreis (Idee docs/spiele/grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen.md). Ein sonniger
+     Hinterhof (raum.js): oben die Hauswand, davor Kofis Weg, darunter die Kreidereihe als helle Matte (ein Kästchen je
+     Wort), rechts auf der niedrigen Mauer das Tablett mit den Symbolen. Kofi hüpft hinter der Reihe, nie davor.
+     Leiste, Blase, Hilfe und Pause an ihren festen Plätzen. -->
+<link rel="stylesheet" href="../../rahmen/seite.css">
+<style>
+  /* ===== SPIELWELT: der Hinterhof. Alles in rem (1rem = Bildhöhe/108). ===== */
+  :root {
+    --kofi-hoehe: 40rem;     /* Feld der Figur (320 × 280); die Figur selbst ist etwa 33 rem hoch */
+    --tablett-breit: 36rem;
+    --weg-hoehe: 38rem;      /* Kofis Weg: von der Leiste bis knapp unter die Wandkante */
+    --kreide: #F4F0FA;
+    --stein: #BFB5AA;
+    --stein-dunkel: #8E857B;
+  }
+  .welt { position: fixed; inset: 0; background: linear-gradient(#F3DFC8 0 55rem, #E3DDD5 55rem); z-index: 0; }
+  .welt svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  .spielflaeche {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--tablett-breit);
+    grid-template-rows: var(--weg-hoehe) minmax(0, 1fr);
+    column-gap: 3rem; row-gap: 2rem;
+    padding: 1.6rem 3rem 3rem;
+  }
+  ls-blase { grid-column: 1; grid-row: 1; align-self: start; justify-self: start; position: relative; z-index: 7; }
+  /* Kofis Weg: nur die Linie, auf der er hüpft (die Unterkante des Streifens ist der Boden unter seinen Füßen). */
+  .weg { grid-column: 1; grid-row: 1; pointer-events: none; }
+
+  /* Die Kreidereihe: die Matte, darin ein Kästchen je Wort. */
+  .matte { grid-column: 1; grid-row: 2; z-index: 3; padding: 2.4rem 2.8rem; display: flex; align-items: stretch; align-self: start; }
+  .matte::before { inset: 0.9rem; }
+  .reihe { position: relative; z-index: 1; display: flex; gap: 1.6rem; width: 100%; justify-content: center; }
+  .kaestchen {
+    position: relative; flex: 1 1 0; min-width: 0; max-width: 32rem; container-type: inline-size;
+    display: flex; flex-direction: column; align-items: center; gap: 0.8rem; padding: 1.2rem 0.8rem 1.4rem;
+    background: var(--kreide); border: 0.5rem solid var(--ls-naht); border-radius: var(--ls-radius-klein);
+    font-weight: 700; color: var(--ls-tinte);
+  }
+  .kaestchen.markiert { border-color: var(--ls-tinte); }
+  .kaestchen.leuchtet { background: #FFF1B8; }
+  .kaestchen.wackelt { animation: wackel 0.4s ease-in-out; }
+  @keyframes wackel { 20% { transform: translateX(-0.8rem); } 55% { transform: translateX(0.7rem); } 85% { transform: translateX(-0.3rem); } }
+  .symbolplatz { position: relative; width: 100%; height: 11.4rem; display: flex; align-items: center; justify-content: center; }
+  .symbolplatz ls-wortart { height: 10rem; }
+  .bild { width: 12.6rem; height: 12.6rem; flex: 0 0 auto; }
+  .bild svg { width: 100%; height: 100%; display: block; }
+  /* Die Probe in Kreide über dem Wort: erst leer, dann schreibt sie sich hin und verweht wieder. */
+  .probe {
+    height: 5.8rem; display: flex; align-items: center; justify-content: center; white-space: nowrap;
+    font-size: min(5.6rem, 19cqw); line-height: 1; color: #3E7FB0; opacity: 0; transform: translateY(0.6rem);
+  }
+  .probe.da { opacity: 1; transform: none; }
+  .wort { display: flex; align-items: baseline; justify-content: center; white-space: nowrap; font-size: min(6.8rem, 22cqw); line-height: 1; padding-bottom: 0.2rem; }
+  .wort .endung { display: inline-block; transform-origin: 50% 60%; }
+  .wort .stamm { display: inline-block; }
+  /* Ein Wort, das schon sein Symbol trägt, bleibt ruhig; die Probe ist verweht. */
+  .eingerastet { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .eingerastet ls-wortart { height: 10rem; }
+
+  /* Das Tablett auf der niedrigen Mauer rechts. */
+  .mauer {
+    grid-column: 2; grid-row: 2; align-self: start; z-index: 2; position: relative;
+    padding: 3.2rem 2.2rem 0; border-radius: 3rem 3rem 0 0; min-height: 47rem;
+    background:
+      linear-gradient(var(--stein-dunkel) 0 0.6rem, transparent 0.6rem),
+      repeating-linear-gradient(0deg, transparent 0 7.4rem, rgba(0, 0, 0, 0.08) 7.4rem 7.8rem),
+      var(--stein);
+    border: var(--ls-kontur) solid var(--ls-tinte); border-bottom: 0;
+  }
+  .tablett { padding: 2.6rem 2.6rem 3rem; }
+  .vorrat { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.8rem; min-height: 26rem; align-content: center; }
+  .symbol { min-width: 12.6rem; min-height: 12.6rem; padding: 0; }
+  .symbol ls-wortart { height: 9rem; }
+  .symbol.verborgen { visibility: hidden; }
+
+  /* Fliegende Dinge: eigene Ebene über allem Bild, nehmen keine Tipps. */
+  .flug { position: absolute; left: 0; top: 0; z-index: 9; will-change: transform; pointer-events: none; }
+
+  /* Kofi und sein Schatten: über der Welt, hinter der Reihe, nehmen keine Tipps. */
+  .kofi { position: absolute; left: 0; top: 0; height: var(--kofi-hoehe); width: calc(var(--kofi-hoehe) * 320 / 280); z-index: 2; pointer-events: none; transform-origin: 50% 90.7%; will-change: transform; }
+  .kofi .koerper { position: absolute; inset: 0; transform-origin: 50% 90.7%; will-change: transform; }
+  .kofi svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .schatten { position: absolute; left: 0; top: 0; width: 18rem; height: 3.2rem; z-index: 1; pointer-events: none; will-change: transform, opacity; }
+  .schatten::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgba(59, 42, 107, 0.2); }
+
+  /* Schmale Bildschirme (4:3). */
+  @media (max-aspect-ratio: 3/2) {
+    :root { --tablett-breit: 31rem; --kofi-hoehe: 36rem; }
+    .reihe { gap: 1rem; }
+    .vorrat { gap: 1.2rem; }
+    .symbol { min-width: 11.4rem; min-height: 11.4rem; }
+    .symbol ls-wortart { height: 8rem; }
+    .tablett { padding: 2.2rem 1.8rem 2.6rem; }
+    .mauer { padding-inline: 1.4rem; }
+  }
+
+  /* Pause: Sachmoment auf der Papierkarte. */
+  .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
+  .sachmoment p { margin: 0; }
+  .sachmoment .zettel { display: flex; gap: 3rem; }
+  .sachmoment .zettel span {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 15rem; padding: 1.2rem 2.4rem;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
+  }
+  .sachmoment .zettel ls-wortart { height: 10rem; }
+  .sachmoment .hinweis {
+    display: inline-flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 4rem 1.6rem 1.6rem;
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-papier);
+    box-shadow: var(--ls-schatten); color: var(--ls-tinte); font-weight: 700; text-decoration: none;
+  }
+  .sachmoment .hinweis img { width: 8rem; height: 8rem; }
+  .sachmoment .hinweis:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+
+  .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
+  .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
+  .eltern p { max-width: 70ch; }
+  .eltern .beschreibung { margin: 0 0 3rem; color: var(--ls-tinte-weich); }
+  .eltern a { color: var(--ls-tinte); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="welt" id="welt" aria-hidden="true"></div>
+<script type="module">
+  import { raumSvg } from "./raum.js";
+  document.getElementById("welt").innerHTML = raumSvg();
+</script>
+
+<ls-leiste id="leiste" spiel="wortartsymbole" fach="grammatik" titel="Dreieck und Kreis" thema="">
+  <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
+  <ls-knopf slot="rechts" id="anleitung" symbol="buch.svg" name="Anleitung" hidden></ls-knopf>
+</ls-leiste>
+
+<div class="buehne">
+  <main class="spielflaeche" aria-label="Kreidereihe und Tablett">
+    <ls-blase id="blase" ohne-text></ls-blase>
+    <div class="weg" id="weg" aria-hidden="true"></div>
+    <section class="lernfeld matte" id="matte" aria-label="Kreidereihe">
+      <div class="reihe" id="reihe"></div>
+    </section>
+    <div class="mauer" id="mauer">
+      <section class="tablett" id="tablett" aria-label="Tablett">
+        <div class="vorrat" id="vorrat"></div>
+      </section>
+    </div>
+  </main>
+  <div class="schatten" id="schatten" aria-hidden="true"></div>
+  <div class="kofi" id="kofi" aria-hidden="true"><div class="koerper" id="kofi-koerper"></div></div>
+</div>
+
+<ls-hilfe id="hilfe"></ls-hilfe>
+<ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
+
+<script type="module" src="spiel.js"></script>
+</body>
+</html>

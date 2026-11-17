@@ -22,6 +22,12 @@ Du siehst das Spiel mit den Augen eines Kindes von etwa sieben Jahren. Vergleich
    „X ist Y“ aus, zeigt sie eine neue Sache und wartet sie auf das Kind (sie geht erst nach dem Tipp des
    Kindes weiter; `takt.json` `einfuehrungSchritte`)? „ja“ heißt: kein Transfer nötig.
 
+**Mit Vorgabe** (das Bauheft enthält den Abschnitt „Vorgabe von Christian“, Christian 2026-11-17): Die Idee hat Christian
+gewählt. „Zehnmal“, „Kern“ und „Schön“ beurteilen, ob das Spiel **seine Idee gut umsetzt** (klar, flüssig, schön
+gemacht), nicht ob dir eine andere Idee lieber wäre. Zweifel an der Idee selbst schreibst du als Befund
+„Zur Idee: …“ – sie gehen an Christian, nicht an den nächsten Bau. „Schwierigkeit“ und „Ohne Transfer“ gelten
+unverändert: Kommt man mit Raten oder Abzählen genauso schnell durch, ist es ein Nein.
+
 ## Grenzen G1–G14
 
 Je Grenze ok/nicht ok mit Beleg. Was der Prüfstand schon zeigt (Texte, Durchspielen), übernimmst du, statt es neu zu

@@ -1,9 +1,9 @@
 // Warteschlange der Verwaltung (docs/superpowers/specs/2026-11-16-verwaltung-design.md, „Aufträge“).
 // Reine Listenfunktionen (geben neue Listen zurück) und Lesen/Schreiben von werkzeuge/verwaltung/auftraege.json.
 
-import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 
-export const ARTEN = ["spiel", "echte-dinge", "buch", "einfuehrung", "frei"];
+export const ARTEN = ["spiel", "echte-dinge", "buch", "einfuehrung", "frei", "ideen"];
 export const STATUS = ["wartet", "laeuft", "erledigt", "wartet-auf-christian", "beantwortet", "fehlgeschlagen", "gestrichen"];
 
 /** Schätzung für einen Antwort-Auftrag (Fortsetzen mit Christians Antwort: Merge, Nachprüfung o. ä.). */
@@ -12,6 +12,7 @@ export const SCHAETZUNG_ANTWORT = 2;
 const SKILL_JE_ART = {
   spiel: ".claude/skills/spiel-entwickeln/SKILL.md",
   "echte-dinge": ".claude/skills/mit-echten-dingen/SKILL.md",
+  ideen: ".claude/skills/spielideen/SKILL.md",
   buch: ".claude/skills/sachgeschichte/SKILL.md",
 };
 
@@ -27,6 +28,7 @@ export function befehlFuer(art, ziel) {
     case "einfuehrung":
       return `Einführung für Thema ${liste[0]} nach den Vorlagen in spiele/einfuehrungen/ und dem Feld einfuehrung im Lernplan`;
     case "frei": return String(ziel);
+    case "ideen": return `Spielideen ${liste[0]}`;
     default: throw new Error(`Art muss ${ARTEN.join(", ")} sein (war: ${art})`);
   }
 }
@@ -111,13 +113,51 @@ export function beantworte(liste, id, text, jetzt = new Date()) {
   return { liste: [...kopie, neu], neu };
 }
 
+/** Text der Vorgabe: alle Skizzen und darunter Christians Wahl (Karte oder eigener Text). */
+function vorgabeText(ideen, wahl) {
+  const skizzen = ideen.map((x, i) => `### ${i + 1}. ${x.titel}\n\n${x.text}`).join("\n\n");
+  return ["# Vorgabe von Christian", "", "## Die drei Skizzen", "", skizzen || "(keine)", "", "## Wahl", "", wahl, ""].join("\n");
+}
+
+/**
+ * Christian wählt eine Spielidee (Karte 1..n) oder schreibt seine eigene: Der Ideen-Auftrag wird „beantwortet“, direkt
+ * dahinter steht ein Spiel-Auftrag mit Vorgabe (docs/superpowers/specs/2026-11-17-spielideen-design.md). Den Text der
+ * Vorgabe schreibt der Server nach werkzeuge/verwaltung/vorgaben/<neu.id>.md.
+ * @param {{ karte?: number, text?: string }} wahl
+ */
+export function waehleIdee(liste, id, wahl, jetzt = new Date()) {
+  const i = wartetAufAntwort(liste, id);
+  const alt = liste[i];
+  if (alt.art !== "ideen") throw new Error("Auftrag ist kein Ideen-Auftrag");
+  const ideen = Array.isArray(alt.ergebnis?.ideen) ? alt.ergebnis.ideen : [];
+  let text, notiz;
+  if (wahl?.karte !== undefined) {
+    const n = Number(wahl.karte);
+    if (!Number.isInteger(n) || n < 1 || n > ideen.length) throw new Error(`Karte muss zwischen 1 und ${ideen.length} liegen`);
+    text = `Karte ${n} „${ideen[n - 1].titel}“`;
+    notiz = `Wahl: ${text}`;
+  } else {
+    text = String(wahl?.text ?? "").trim();
+    if (!text) throw new Error("Eigene Idee fehlt");
+    if (text.length > 4000) throw new Error("Eigene Idee zu lang (höchstens 4000 Zeichen)");
+    notiz = "Wahl: eigene Idee";
+  }
+  const neu = neuerAuftrag({ art: "spiel", ziel: alt.ziel, schaetzung_eur: null }, jetzt);
+  neu.befehl = `${neu.befehl} --vorgabe werkzeuge/verwaltung/vorgaben/${neu.id}.md`;
+  neu.vorgabe = vorgabeText(ideen, text);
+  const kopie = liste.map((x, j) => (j === i ? { ...x, status: "beantwortet", notiz } : x));
+  kopie.splice(i + 1, 0, neu);
+  return { liste: kopie, neu };
+}
+
 /** Christian lehnt ab: kein Lauf, der Auftrag ist erledigt. */
 export function lehneAb(liste, id) {
   const i = wartetAufAntwort(liste, id);
   return liste.map((x, j) => (j === i ? { ...x, status: "erledigt", notiz: "abgelehnt" } : x));
 }
 
-export const naechsterWartender = (liste) => liste.find((a) => a.status === "wartet") ?? null;
+/** Nächster Auftrag der Warteschlange; Ideen laufen sofort und eigenständig, nie aus der Warteschlange (Christian, 2026-11-17). */
+export const naechsterWartender = (liste) => liste.find((a) => a.status === "wartet" && a.art !== "ideen") ?? null;
 
 /** Status eines Auftrags aus der Ergebnisdatei des Skills (null = keine Datei). */
 export function statusAusErgebnis(ergebnis) {
@@ -140,6 +180,34 @@ export function ladeAuftraege(datei) {
 }
 
 /** Schreibt über eine Zwischendatei, damit ein Abbruch nie eine halbe Datei hinterlässt. */
+const SPERRE_ALT_MS = 10_000; // länger hält niemand die Sperre; älter = Rest eines abgestürzten Prozesses
+const SPERRE_WARTE_MS = 15_000;
+const schlafe = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+
+/**
+ * Führt `fn` synchron unter einer Sperre über Prozesse hinweg aus (Ordner `<datei>.sperre`): Lauf, Ideen-Prozesse und
+ * Seite ändern auftraege.json gleichzeitig; ohne Sperre gingen Änderungen verloren (Ideen, 2026-11-17).
+ * @template T @param {string} datei @param {() => T} fn @returns {T}
+ */
+export function mitSperre(datei, fn) {
+  const sperre = `${datei}.sperre`;
+  const bis = Date.now() + SPERRE_WARTE_MS;
+  for (;;) {
+    try { mkdirSync(sperre); break; } catch (e) {
+      if (/** @type {any} */ (e).code !== "EEXIST") throw e;
+      try { if (Date.now() - statSync(sperre).mtimeMs > SPERRE_ALT_MS) { rmSync(sperre, { recursive: true, force: true }); continue; } } catch { continue; }
+      if (Date.now() > bis) throw new Error(`auftraege.json ist gesperrt (${sperre})`);
+      schlafe(10 + Math.random() * 20);
+    }
+  }
+  try { return fn(); } finally { rmSync(sperre, { recursive: true, force: true }); }
+}
+
+/** Lesen, ändern, schreiben unter der Sperre. `f` bekommt die Liste und gibt die neue zurück. */
+export function aendereAuftraege(datei, f) {
+  return mitSperre(datei, () => { const neu = f(ladeAuftraege(datei)); speichereAuftraege(datei, neu); return neu; });
+}
+
 export function speichereAuftraege(datei, liste) {
   const tmp = `${datei}.tmp-${process.pid}`;
   writeFileSync(tmp, JSON.stringify(liste, null, 1) + "\n");

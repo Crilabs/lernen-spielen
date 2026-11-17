@@ -9,7 +9,7 @@ const STATUS_TEXT = {
   geplant: "geplant", fehlt: "fehlt", wartet: "wartet", laeuft: "läuft", erledigt: "erledigt",
   "wartet-auf-christian": "wartet auf dich", beantwortet: "beantwortet", fehlgeschlagen: "fehlgeschlagen", gestrichen: "gestrichen",
 };
-const ART_TEXT = { spiel: "Spiel", "echte-dinge": "Mit echten Dingen", buch: "Buch", einfuehrung: "Einführung", frei: "Frei", antwort: "Antwort" };
+const ART_TEXT = { spiel: "Spiel", "echte-dinge": "Mit echten Dingen", buch: "Buch", einfuehrung: "Einführung", frei: "Frei", antwort: "Antwort", ideen: "Ideen" };
 const plakette = (status, text = STATUS_TEXT[status] ?? status, titel = "") =>
   `<span class="plakette s-${esc(status)}" title="${esc(titel)}">${esc(text)}</span>`;
 
@@ -37,7 +37,11 @@ async function api(pfad, daten) {
 const FERTIG = ["fertig", "probe"];
 // Fach eines Spiels aus dem Buchstaben der Katalog-Id (wie werkzeuge/spielbau/bauheft.mjs, FAECHER)
 const FACH_JE_BUCHSTABE = { M: "mathe", R: "geometrie", L: "lesen", Z: "sprechen", S: "schreiben", G: "grammatik" };
-const spielPlus = (id, s) => ["geplant", "geparkt"].includes(s.status)
+// Geplante Spiele beginnen mit Ideen (sofort, du wählst danach); nur ein geparktes Spiel wird direkt neu beauftragt
+// (Christian, 2026-11-17: „die Warteschlange zeigt die Aufträge, die schon eine Idee haben“).
+const spielPlus = (id, s) => s.status === "geplant"
+  ? ` <button class="plus" data-auftrag="ideen" data-ziel="${esc(id)}" title="Ideen für ${esc(s.name)} (startet sofort)">+</button>`
+  : s.status === "geparkt"
   ? ` <button class="plus" data-auftrag="spiel" data-ziel="${esc(id)}" title="${esc(s.name)} beauftragen">+</button>` : "";
 
 /** @param {any} t @param {boolean} mitEinfuehrung nur bei Lernthemen ohne Spiel: ein Spiel bringt seine Einführung selbst mit */
@@ -157,20 +161,22 @@ function zeigeBibliothek() {
 
 function zeigeAuftraege() {
   const l = A.auftraege;
-  const wartend = l.filter((a) => a.status === "wartet");
+  const wartend = l.filter((a) => a.status === "wartet" && a.art !== "ideen");
   const summe = wartend.reduce((s, a) => s + (a.schaetzung_eur ?? 0), 0);
   const unbekannt = wartend.some((a) => a.schaetzung_eur === null);
   $("#zahl-offen").textContent = wartend.length ? String(wartend.length) : "";
   const laeuft = l.find((a) => a.status === "laeuft");
   if (!gewaehlt && laeuft) gewaehlt = laeuft.id;
   // wartende in Warteschlangen-Reihenfolge oben, danach der Rest, neueste zuerst
-  const wartendeReihe = l.filter((a) => a.status === "wartet");
-  const rest = [...l].reverse().filter((a) => a.status !== "wartet" && a.status !== "gestrichen");
+  const wartendeReihe = l.filter((a) => a.status === "wartet" && a.art !== "ideen");
+  const rest = [...l].reverse().filter((a) => !wartendeReihe.includes(a) && a.status !== "gestrichen");
   const tabelle = [...wartendeReihe, ...rest].map((a) => {
     const steuer = a.status === "wartet"
       ? `<button class="klein" data-schritt="hoch" data-id="${esc(a.id)}" title="nach oben">↑</button>
          <button class="klein" data-schritt="runter" data-id="${esc(a.id)}" title="nach unten">↓</button>
          <button class="klein" data-schritt="streichen" data-id="${esc(a.id)}">streichen</button>`
+      : a.status === "wartet-auf-christian" && a.art === "ideen"
+      ? `<button class="klein" data-reiter="ideen" title="Zu den Ideen">Ideen ansehen</button>`
       : a.status === "wartet-auf-christian"
       ? `<button class="klein" data-antwort="Ja" data-id="${esc(a.id)}" title="Ja: Folgeauftrag in die Warteschlange">Ja</button>
          <button class="klein" data-antworten="${esc(a.id)}" title="Eigene Antwort schreiben">Antworten …</button>
@@ -216,6 +222,61 @@ async function ladeProtokoll() {
     protokollAb = j.groesse;
     if (unten) pre.scrollTop = pre.scrollHeight;
   } catch { /* nächster Versuch beim nächsten Abruf */ }
+}
+
+// ---------- Ideen ----------
+
+/** Kreis am Reiter: Ideen, die auf deine Wahl warten. */
+function zaehleIdeen() {
+  const n = (A?.auftraege ?? []).filter((a) => a.art === "ideen" && a.status === "wartet-auf-christian").length;
+  $("#zahl-ideen").textContent = n ? String(n) : "";
+}
+
+const offeneIdeen = () => (A?.auftraege ?? []).filter((a) => a.art === "ideen" && ["wartet", "laeuft", "wartet-auf-christian"].includes(a.status));
+/** Entwürfe der eigenen Idee je Auftrag: Das Nachladen alle 2,5 s zeichnet die Ansicht neu, der Text bleibt. */
+const entwuerfe = {};
+
+/** Lernthema eines Spiels: je Hauptthema Name, Klasse, Bereich, Ziel, Beispiele und wozu. */
+function lernthemaBlock(spiel) {
+  const themen = (spiel?.hauptthemen ?? []).map((id) => U.lernthemen.find((t) => t.id === id)).filter(Boolean);
+  if (!themen.length) return `<p class="leise-text">Keine Hauptthemen im Katalog.</p>`;
+  return `<ul class="lernthema">${themen.map((t) => `<li>
+      <b>${esc(t.name)}</b> <span class="leise-text">Kl. ${t.klasse}, ${esc(t.bereich ?? "")}</span>
+      ${t.ziel ? `<div class="ziel">${esc(t.ziel)}</div>` : ""}
+      ${t.beispiele?.length ? `<div class="leise-text">Beispiele: ${esc(t.beispiele.slice(0, 4).join(", "))}</div>` : ""}
+      ${t.zweck ? `<div class="leise-text">Wozu: ${esc(t.zweck)}</div>` : ""}
+    </li>`).join("")}</ul>`;
+}
+
+/** Skizzentext: je Zeile ein Absatz, „- “ am Anfang fällt weg, **fett** wird fett (alles andere bleibt escaped). */
+const skizze = (text) => String(text ?? "").split("\n").map((z) => z.replace(/^\s*[-*]\s+/, "").trim()).filter(Boolean)
+  .map((z) => `<p>${esc(z).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")}</p>`).join("");
+
+function zeigeIdeen() {
+  const liste = offeneIdeen();
+  if (!liste.length) {
+    $("#ideen").innerHTML = `<p class="leer">Gerade warten keine Ideen. Ein „+“ bei einem geplanten Spiel im Reiter Spiele erzeugt drei.</p>`;
+    return;
+  }
+  $("#ideen").innerHTML = liste.map((a) => {
+    const spiel = U.spiele[a.ziel];
+    const ideen = Array.isArray(a.ergebnis?.ideen) ? a.ergebnis.ideen : [];
+    const karten = a.status !== "wartet-auf-christian"
+      ? `<p class="leise-text">Die drei Ideen entstehen gerade (meist ein paar Minuten).</p>`
+      : `<div class="ideen-karten">${ideen.map((x, i) => `<div class="idee">
+          <h3>${esc(x.titel)}</h3><div class="skizze">${skizze(x.text)}</div>
+          <button class="zweit" data-wahl-karte="${i + 1}" data-id="${esc(a.id)}">Diese bauen</button></div>`).join("")}
+        <div class="idee eigene">
+          <h3>Eigene Idee</h3>
+          <textarea data-entwurf="${esc(a.id)}" maxlength="4000" placeholder="Held, was das Kind tut, was dann passiert … Du kannst dich auf die anderen Karten beziehen.">${esc(entwuerfe[a.id] ?? "")}</textarea>
+          <button class="zweit" data-eigene-bauen="${esc(a.id)}">Diese bauen</button></div></div>`;
+    return `<article class="karte ideen-block">
+      <header><h2>${esc(a.ziel)} ${esc(spiel?.name ?? "")}</h2>
+        ${a.status === "wartet-auf-christian" ? `<button class="klein" data-schritt="ablehnen" data-id="${esc(a.id)}" title="Keine davon, nichts bauen">Keine davon</button>` : plakette(a.status)}</header>
+      ${lernthemaBlock(spiel)}
+      ${karten}
+    </article>`;
+  }).join("");
 }
 
 // ---------- Proben ----------
@@ -269,6 +330,7 @@ function zeigeKosten() {
 function zeigeKopf() {
   const proben = Object.values(U.spiele).filter((s) => s.status === "probe").length;
   $("#zahl-proben").textContent = proben ? String(proben) : "";
+  zaehleIdeen();
   const k = U.kosten;
   const offenAnalog = k.analog.prognose === null ? 0 : Math.max(0, k.analog.prognose - k.analog.summe.eur);
   const offen = (k.spiele.rest?.mittel ?? 0) + offenAnalog + (k.buecher.rest ?? 0);
@@ -290,6 +352,7 @@ function zeige() {
   if (zustand.reiter === "spiele") zeigeSpiele();
   if (zustand.reiter === "bibliothek") zeigeBibliothek();
   if (zustand.reiter === "auftraege") zeigeAuftraege();
+  if (zustand.reiter === "ideen") zeigeIdeen();
   if (zustand.reiter === "proben") zeigeProben();
   if (zustand.reiter === "kosten") zeigeKosten();
 }
@@ -307,9 +370,10 @@ function bestaetige(art, ziel) {
   if (art === "spiel") { const s = U.spiele[ziel]; text = `Spiel ${ziel} „${s.name}“ entwickeln (${s.hauptthemen.length} Hauptthemen).`; schaetzung = U.schaetzung.spiel; }
   if (art === "echte-dinge") { text = `„Mit echten Dingen“ für ${U.lernthemen.find((t) => t.id === ziel)?.name ?? ziel} schreiben.`; schaetzung = U.schaetzung.echteDingeJeThema; }
   if (art === "buch") { text = `Buch „${U.bibliothek.flatMap((r) => r.regale.flatMap((g) => g.buecher)).find((b) => b.id === ziel)?.titel ?? ziel}“ schreiben.`; schaetzung = U.schaetzung.buch; }
+  if (art === "ideen") { text = `Drei Ideen für Spiel ${ziel} „${U.spiele[ziel].name}“ – startet sofort, du wählst danach eine oder schreibst deine eigene; erst dann kommt das Spiel in die Warteschlange.`; schaetzung = 1; }
   if (art === "einfuehrung") { text = `Einführung für „${U.lernthemen.find((t) => t.id === ziel)?.name ?? ziel}“ (freier Auftrag, kein Skill).`; }
   $("#b-text").textContent = text;
-  $("#b-schaetzung").textContent = schaetzung === null ? "Schätzung: unbekannt" : `Schätzung: ca. ${eur(schaetzung)} (startet erst mit „Warteschlange abarbeiten“)`;
+  $("#b-schaetzung").textContent = schaetzung === null ? "Schätzung: unbekannt" : `Schätzung: ca. ${eur(schaetzung)} ${art === "ideen" ? "(startet sofort, neben der Warteschlange)" : "(startet erst mit „Warteschlange abarbeiten“)"}`;
   d.returnValue = "";
   d.showModal();
   d.addEventListener("close", async () => {
@@ -349,6 +413,14 @@ document.addEventListener("click", async (e) => {
     else if (z.dataset.schritt) { A = { ...A, ...(await api(`/api/auftraege/${z.dataset.id}/${z.dataset.schritt}`, {})) }; await ladeAlles(); }
     else if (z.dataset.antwort) { await api(`/api/auftraege/${z.dataset.id}/antwort`, { text: z.dataset.antwort }); await ladeAlles(); }
     else if (z.dataset.antworten) antworten(z.dataset.antworten);
+    else if (z.dataset.wahlKarte) { await api(`/api/auftraege/${z.dataset.id}/wahl`, { karte: Number(z.dataset.wahlKarte) }); await ladeAlles(); }
+    else if (z.dataset.eigeneBauen) {
+      const id = z.dataset.eigeneBauen, text = (entwuerfe[id] ?? "").trim();
+      if (!text) { $("#hinweis").textContent = "Schreib zuerst deine Idee in die vierte Spalte."; return; }
+      await api(`/api/auftraege/${id}/wahl`, { text });
+      delete entwuerfe[id];
+      await ladeAlles();
+    }
     else if (z.dataset.probe && z.dataset.sicher !== "1") { z.dataset.sicher = "1"; z.textContent = `${z.dataset.probe} wirklich abschließen?`; }
     else if (z.dataset.probe) {
       const r = await api(`/api/proben/${z.dataset.probe}/abschliessen`, {});
@@ -392,7 +464,13 @@ setInterval(async () => {
     const neu = await api("/api/auftraege");
     const geaendert = JSON.stringify(neu) !== JSON.stringify(A);
     A = neu;
-    if (geaendert) { if (zustand.reiter === "auftraege") zeigeAuftraege(); else $("#zahl-offen").textContent = String(A.auftraege.filter((a) => a.status === "wartet").length || ""); }
+    if (geaendert) {
+      if (zustand.reiter === "auftraege") zeigeAuftraege();
+      else $("#zahl-offen").textContent = String(A.auftraege.filter((a) => a.status === "wartet" && a.art !== "ideen").length || "");
+      // Beim Tippen in der eigenen Idee nicht neu zeichnen (sonst springt der Cursor); der Text bliebe aber erhalten.
+      if (zustand.reiter === "ideen" && !document.activeElement?.matches?.("[data-entwurf]")) zeigeIdeen();
+      zaehleIdeen();
+    }
     else if (zustand.reiter === "auftraege") ladeProtokoll();
   } catch { /* Server kurz weg */ }
 }, 2500);
@@ -401,3 +479,9 @@ ladeAlles().then(() => {
   /** @type {HTMLSelectElement} */ ($("#f-fach")).value = zustand.fach;
   zeige();
 }).catch((e) => { $("#hinweis").textContent = `Laden fehlgeschlagen: ${e.message}`; });
+
+// Eigene Idee: Entwurf merken, damit das Nachladen ihn nicht löscht
+document.addEventListener("input", (e) => {
+  const f = /** @type {HTMLElement} */ (e.target);
+  if (f.dataset?.entwurf) entwuerfe[f.dataset.entwurf] = /** @type {HTMLTextAreaElement} */ (f).value;
+});

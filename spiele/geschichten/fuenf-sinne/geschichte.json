@@ -1,0 +1,404 @@
+{
+  "id": "fuenf-sinne",
+  "titel": "Augen zu und Ohren auf",
+  "art": "sachbuch",
+  "welt": "sinne",
+  "familie": null,
+  "kulisse": "garten",
+  "titelbild": { "bild": "bilder/01-03.webp", "fokus": "50% 36%" },
+  "klasse": 1,
+  "quellen": [
+    {
+      "fakt": "Menschen nehmen die Welt mit Sinnesorganen wahr; meist werden fünf Sinne aufgezählt: Sehen (Augen), Hören (Ohren), Riechen (Nase), Schmecken (Zunge), Fühlen/Tasten (Haut).",
+      "quelle": "Gesundheitsportal Österreich, Lexikon „Sinnesorgane“: https://www.gesundheit.gv.at/lexikon/s/sinnesorgane; Planet Wissen (WDR/SWR), „Sinne“: https://www.planet-wissen.de/natur/sinne/pwtksinne100.amp – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Jedes Sinnesorgan nimmt seine eigene Art Reiz auf: das Auge Licht, das Ohr Schall, die Nase Duftstoffe aus der Luft, die Zunge gelöste Stoffe, die Haut Druck, Wärme und Kälte.",
+      "quelle": "Gesundheitsportal Österreich, Lexikon „Sinnesorgane“: https://www.gesundheit.gv.at/lexikon/s/sinnesorgane – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Sinnesorgane leiten ihre Meldungen über Nerven ins Gehirn; erst dort wird daraus eine Wahrnehmung.",
+      "quelle": "Gesundheitsportal Österreich, Lexikon „Sinnesorgane“: https://www.gesundheit.gv.at/lexikon/s/sinnesorgane – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Sinne braucht man, um die Umwelt wahrzunehmen, sich zurechtzufinden und Gefahr zu bemerken (Lehrplan: Bedeutung der Sinne für die Wahrnehmung der Umwelt).",
+      "quelle": "LehrplanPLUS Bayern, Grundschule, HSU 1/2, Lernbereich 2.1 „Körper und gesunde Ernährung“: https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/hsu; Planet Wissen (WDR/SWR), „Sinne“: https://www.planet-wissen.de/natur/sinne/pwtksinne100.amp – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Augen melden dem Gehirn Licht; das Gehirn deutet es mit Erfahrung und macht sich sein eigenes Bild; es vergleicht mit Bekanntem und nimmt nicht alles auf, was die Sinne melden.",
+      "quelle": "Planet Wissen, „Wie das Gehirn die Welt sieht“: https://www.planet-wissen.de/natur/sinne/sinnestaeuschung/pwiewiedasgehirndieweltsieht100.html – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Bei gleichbleibendem Geruch gewöhnt sich der Geruchssinn; die Empfindung wird schwächer (Adaptation).",
+      "quelle": "Universität Bremen, Chemiedidaktik, „Adaptation des Geruchssinnes“: https://projekte.chemiedidaktik.uni-bremen.de/salis_zusatz/salis_pdf/adaptation_des_geruchssinnnes_145.pdf – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Temperaturfühler der Haut passen sich an und melden vor allem Unterschiede; Drei-Schalen-Versuch mit kühlem, lauwarmem und warmem Wasser, etwa eine Minute.",
+      "quelle": "Universität Bremen, Chemiedidaktik, „Der Webersche Drei-Schalen-Versuch“: https://projekte.chemiedidaktik.uni-bremen.de/salis_zusatz/salis_pdf/webersche_drei_schalen_Versuch_148.pdf – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Zunge kennt fünf Grundgeschmäcke (süß, sauer, salzig, bitter, herzhaft-würzig; dafür auch das Wort „umami“ aus dem Japanischen) und nimmt alle überall wahr; die „Zungenkarte“ beruht auf einer missdeuteten Grafik.",
+      "quelle": "IQWiG, gesundheitsinformation.de, „Wie funktioniert der Geschmackssinn?“: https://www.gesundheitsinformation.de/wie-funktioniert-der-geschmackssinn.html; S. D. Munger, „The tongue map is wrong“, CBS News/The Conversation (22.05.2017): https://www.cbsnews.com/news/tongue-taste-buds-map-all-wrong – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Der Duft des Essens gelangt beim Kauen über den Rachen in die Nase; erst Zunge und Nase zusammen ergeben den Geschmack einer Speise; bei Schnupfen schmeckt man weniger.",
+      "quelle": "IQWiG, gesundheitsinformation.de, „Wie funktioniert der Geschmackssinn?“: https://www.gesundheitsinformation.de/wie-funktioniert-der-geschmackssinn.html; Pharmazeutische Zeitung, „Menschen könnten bis zu 33 Sinne haben“ (26.01.2026): https://www.pharmazeutische-zeitung.de/menschen-koennten-bis-zu-33-sinne-haben-161867/ – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Mit verbundenen Augen und zugehaltener Nase lassen sich Apfel und Birne kaum unterscheiden; der Versuch ist für Grundschulkinder ungefährlich.",
+      "quelle": "science.lu (FNR Luxemburg), „Womit schmecken wir?“: https://www.science.lu/sites/default/files/2021-04/2.3%20Womit%20schmecken%20wir_final.pdf – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Scharf ist kein Geschmack, sondern eine Meldung von Nerven für Hitze und Schmerz; auch Beschaffenheit und Temperatur gehören zum Essen.",
+      "quelle": "IQWiG, gesundheitsinformation.de, „Wie funktioniert der Geschmackssinn?“: https://www.gesundheitsinformation.de/wie-funktioniert-der-geschmackssinn.html – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Das Gleichgewicht entsteht aus Meldungen des Gleichgewichtsorgans im Innenohr, der Augen und von Muskeln, Gelenken und Haut (z. B. der Fußsohle), die das Gehirn vergleicht.",
+      "quelle": "Neurologen und Psychiater im Netz, „Gestörter Gleichgewichtssinn“: https://www.neurologen-und-psychiater-im-netz.org/neurologie/erkrankungen/schwindel/gestoerter-gleichgewichtssinn/; Gesundheitsportal Österreich, Lexikon „Sinnesorgane“: https://www.gesundheit.gv.at/lexikon/s/sinnesorgane – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Nach dem Drehen bewegt sich die Flüssigkeit im Gleichgewichtsorgan noch eine Weile weiter; passen die Meldungen nicht zusammen, entsteht Schwindel.",
+      "quelle": "Neurologen und Psychiater im Netz, „Gestörter Gleichgewichtssinn“: https://www.neurologen-und-psychiater-im-netz.org/neurologie/erkrankungen/schwindel/gestoerter-gleichgewichtssinn/ – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Im stehenden Zug kann man glauben zu fahren, wenn der Zug auf dem Nachbargleis anfährt; mit gekreuzten Fingern fühlt sich die Nasenspitze doppelt an (schon von Aristoteles beschrieben).",
+      "quelle": "Planet Wissen, „Sinnestäuschung“: https://www.planet-wissen.de/natur/sinne/sinnestaeuschung/index.amp – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Sinnestäuschungen kommen bei allen Menschen vor; sie zeigen, dass das Gehirn die Meldungen deutet.",
+      "quelle": "Planet Wissen, „Wie das Gehirn die Welt sieht“: https://www.planet-wissen.de/natur/sinne/sinnestaeuschung/pwiewiedasgehirndieweltsieht100.html; Planet Wissen, „Sinnestäuschung“: https://www.planet-wissen.de/natur/sinne/sinnestaeuschung/index.amp – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Reflexe wie der Lidschluss oder das Zurückziehen der Hand von etwas Heißem laufen ab, bevor man bewusst nachdenkt.",
+      "quelle": "wissen.de, „Wie steuern Reflexe unseren Körper?“: https://www.wissen.de/wie-steuern-reflexe-unseren-koerper; Gesundheitsportal Österreich, Lexikon „Sinnesorgane“: https://www.gesundheit.gv.at/lexikon/s/sinnesorgane – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Schmerz ist eine Meldung der Haut und warnt den Körper.",
+      "quelle": "Gesundheitsportal Österreich, Lexikon „Sinnesorgane“: https://www.gesundheit.gv.at/lexikon/s/sinnesorgane; wissen.de, „Wie steuern Reflexe unseren Körper?“: https://www.wissen.de/wie-steuern-reflexe-unseren-koerper – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Der Geruch warnt vor verdorbenem Essen, Gas und Feuer.",
+      "quelle": "Planet Wissen (WDR/SWR), „Sinne“: https://www.planet-wissen.de/natur/sinne/pwtksinne100.amp – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Bitteres wird vermutlich als Schutz vor Giftigem und Verdorbenem eher ausgespuckt.",
+      "quelle": "IQWiG, gesundheitsinformation.de, „Wie funktioniert der Geschmackssinn?“: https://www.gesundheitsinformation.de/wie-funktioniert-der-geschmackssinn.html – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Im Schlaf bemerkt der Mensch Brandrauch nicht zuverlässig, ein Ton weckt ihn dagegen; darum gehören Rauchmelder in Schlafräume.",
+      "quelle": "Stadt Oberhausen, Feuerwehr, „Rauchwarnmelder“: https://www.oberhausen.de/de/index/rathaus/verwaltung/burgerservice-offentliche-ordnung-personal-und-it/feuerwehr/vorbeugender-brandschutz/vb_material/20160301_informationen_zu_rauchwarnmeldern.pdf; Brown University / ScienceDaily (18.05.2004), Herz & Carskadon, „Minimal Olfactory Perception During Sleep“, Sleep 27(3): https://www.sciencedaily.com/releases/2004/05/040518075747.htm – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Man soll nie ungeschützt in die Sonne schauen; zu viel Lärm in Stärke und Dauer kann dem Gehör schaden.",
+      "quelle": "Deutsche Ophthalmologische Gesellschaft, Pressemitteilung 11.08.2026 (idw): https://idw-online.de/de/news875743; Umweltbundesamt, „Gehörschäden“: https://www.umweltbundesamt.de/themen/laerm/laermwirkungen/gehoerschaeden – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Fledermäuse orientieren sich mit Ultraschallrufen und Echo und finden so Beute; sie sind nicht blind.",
+      "quelle": "SWR Kindernetz, Tierlexikon „Steckbrief: Fledermaus“: https://www.kindernetz.de/wissen/tierlexikon/steckbrief-fledermaus-100.html – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Bienen sehen ultraviolettes Licht, aber kein Rot; manche Blüten haben für Menschen unsichtbare Saftmale zum Nektar.",
+      "quelle": "LAVES Institut für Bienenkunde Celle, „Bienen können Farben unterscheiden“: https://www.laves.niedersachsen.de/download/40998/Bienen_koennen_Farben_unterscheiden.pdf – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Haie und Rochen spüren schwache elektrische Felder lebender Tiere, auch im dunklen oder trüben Wasser, auf kurze Entfernung (etwa 40 cm).",
+      "quelle": "Wueringer et al. (2012), „Electric Field Detection in Sawfish and Shovelnose Rays“, PLoS ONE 7(7):e41605: https://pmc.ncbi.nlm.nih.gov/articles/PMC3404968/ – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Haie und Rochen finden auch Beute, die sich im Sand eingegraben hat, über deren schwaches elektrisches Feld (Versuch mit Katzenhai und Nagelrochen, eingegrabene Scholle).",
+      "quelle": "A. J. Kalmijn (1971): „The Electric Sense of Sharks and Rays“, Journal of Experimental Biology 55(2), 371–383: https://journals.biologists.com/jeb/article/55/2/371/21660/The-Electric-Sense-of-Sharks-and-Rays (Zusammenfassung über Katalogeintrag und Sekundärquellen gelesen); UC San Diego, „Adrianus Kalmijn: 1933-2021“ (Elektrosinn zum Finden von Beute „buried in the sediment“): https://today.ucsd.edu/story/adrianus-kalmijn-1933-2021 – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Zugvögel, Tauben, Meeresschildkröten und Fledermäuse nutzen das Magnetfeld der Erde zur Orientierung; wie der Magnetsinn genau funktioniert, ist noch nicht geklärt.",
+      "quelle": "LMU München, „Magnetsinn: Tauben nehmen Magnetfelder über ihr Innenohr wahr“ (21.11.2025): https://www.lmu.de/de/newsroom/newsuebersicht/news/magnetsinn-tauben-nehmen-magnetfelder-ueber-ihr-innenohr-wahr.html – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Die Zählung von fünf Sinnen geht auf Aristoteles vor mehr als 2.000 Jahren zurück; heute zählen Forschende viel mehr, manche über zwanzig.",
+      "quelle": "Pharmazeutische Zeitung, „Menschen könnten bis zu 33 Sinne haben“ (26.01.2026): https://www.pharmazeutische-zeitung.de/menschen-koennten-bis-zu-33-sinne-haben-161867/ – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Der Körpersinn (Lagesinn) meldet über Muskeln, Sehnen und Gelenke, wo Arme und Beine sind; die Haut meldet auch Wärme, Kälte und Schmerz.",
+      "quelle": "Gesundheitsportal Österreich, Lexikon „Sinnesorgane“: https://www.gesundheit.gv.at/lexikon/s/sinnesorgane; Pharmazeutische Zeitung, „Menschen könnten bis zu 33 Sinne haben“ (26.01.2026): https://www.pharmazeutische-zeitung.de/menschen-koennten-bis-zu-33-sinne-haben-161867/ – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Menschen spüren auch Vorgänge im eigenen Körper, etwa Hunger oder den Herzschlag (Innenwahrnehmung).",
+      "quelle": "Pharmazeutische Zeitung, „Menschen könnten bis zu 33 Sinne haben“ (26.01.2026): https://www.pharmazeutische-zeitung.de/menschen-koennten-bis-zu-33-sinne-haben-161867/ – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Der Lehrplan verlangt, die Bedeutung der Sinne auch unter dem Gesichtspunkt einer Behinderung zu betrachten; blinde Menschen nutzen u. a. Punktschrift und Langstock, viele gehörlose Menschen Gebärdensprache.",
+      "quelle": "LehrplanPLUS Bayern, Grundschule, HSU 1/2, Lernbereich 2.1 „Körper und gesunde Ernährung“: https://www.lehrplanplus.bayern.de/fachlehrplan/grundschule/1/hsu – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Chicorée und Radicchio schmecken bitter (Bitterstoffe, im Chicorée Intybin).",
+      "quelle": "DAK-Gesundheit, „Warum Bitterstoffe so gesund sind“: https://www.dak.de/dak/gesundheit/essen-trinken/lebensmittel/wirkung-bitterstoffe_135766 – abgerufen 2026-11-17"
+    },
+    {
+      "fakt": "Eine Kompassnadel richtet sich nach dem Magnetfeld der Erde aus und zeigt nach Norden; ein Sonnenhut beschattet die Augen gegen Blenden.",
+      "quelle": "Allgemeinwissen (Schulwissen), ohne eigene Fachquelle"
+    }
+  ],
+  "kapitel": [
+    {
+      "titel": "Wie die Welt in dich hineinkommt",
+      "seiten": [
+        {
+          "text": "Amara sitzt im Garten auf einer Holzbank. Sie macht die Augen zu und ist ganz still. Ist jetzt alles weg?\n\nNein! Eine Amsel singt im Baum. Es riecht nach frisch gemähtem Gras. Die Sonne wärmt Amaras Arme, und die Bank drückt hart an ihre Beine. Die Welt kommt zu ihr, auch mit geschlossenen Augen.\n\nProbier es selbst aus: Augen zu, ganz leise sein. Was bemerkst du jetzt noch? Womit du etwas von der Welt bemerkst, das nennt man einen Sinn.",
+          "bild": "bilder/01-01.webp"
+        },
+        {
+          "text": "Amara hat eine Schale mit Kirschen. Ihre Augen sehen, wie rot die Kirschen leuchten. Sie nimmt eine in die Hand. Ihre Haut fühlt, wie glatt und kühl sie ist. Die Nase riecht einen leichten, süßen Duft. Dann beißt Amara hinein. Ihre Zunge schmeckt, wie süß die Kirsche ist. Den Kern legt sie zurück in die Schale. Klack, hören ihre Ohren.\n\nSehen, hören, riechen, schmecken und fühlen: Diese fünf Sinne zählt man meistens auf. Augen, Ohren, Nase, Zunge und Haut heißen Sinnesorgane. Sie sind wie Türen, durch die die Welt zu dir hereinkommt.",
+          "bild": "bilder/01-02.webp"
+        },
+        {
+          "text": "Jedes Sinnesorgan hat seine eigene Aufgabe. Es wartet auf seine eigene Art von Botschaft.\n\nAm Abend macht Amara das Licht in ihrem Zimmer aus. Nun sieht sie nichts mehr, denn ihre Augen brauchen Licht. Aber sie hört, wie Papa in der Küche mit Tellern klappert. Ihre Ohren brauchen kein Licht, sie warten auf Töne. Die Nase wartet auf Düfte, die durch die Luft schweben. Die Zunge schmeckt, was sich im Essen auflöst, so wie Zucker im Tee. Die Haut spürt Druck, Wärme und Kälte.\n\nMit den Ohren kannst du nicht sehen. Und mit den Augen kannst du nicht riechen, auch nicht ganz nah an einer Blume.",
+          "bild": "bilder/01-03.webp"
+        },
+        {
+          "text": "Wie kommt die Botschaft von der Nase zu dir? Von jedem Sinnesorgan führen Nerven in den Kopf. Sie sind wie ganz feine Leitungen. Über sie schicken die Sinnesorgane ihre Meldungen ins Gehirn.\n\nErst im Gehirn merkst du, was los ist. Das ist rot. Das klingelt. Das riecht nach Brot.\n\nAmara kommt an der Bäckerei vorbei. Ihre Nase meldet einen warmen Duft. Blitzschnell ist die Meldung im Gehirn. Und schon weiß Amara: Hier gibt es frische Brötchen. Das alles geht so schnell, dass sie es gar nicht merkt.",
+          "bild": "bilder/01-04.webp"
+        },
+        {
+          "text": "Wozu brauchst du deine Sinne eigentlich? Für fast alles, was du tust!\n\nMit ihnen findest du den Weg zur Schule. Du erkennst deine Freunde schon von Weitem. Du hörst zu, wenn jemand etwas erzählt, und du kannst antworten. Du schmeckst, ob das Essen gut ist. Und deine Sinne merken, wenn Gefahr droht. Hinter Amara klingelt ein Fahrrad. Schnell tritt sie zur Seite.\n\nDie Sinne arbeiten den ganzen Tag, vom Aufwachen bis zum Einschlafen. Meistens merkst du gar nicht, wie viel sie leisten.",
+          "bild": "bilder/01-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Wo merkst du eigentlich, dass etwas rot ist?",
+        "bild": "bilder/01-04.webp",
+        "antworten": [
+          "Im Auge, sobald Licht hineinfällt",
+          "Im Gehirn, wenn die Meldung ankommt",
+          "In den Nerven, die zum Kopf führen"
+        ],
+        "richtig": 1,
+        "aufloesung": "Das Auge schickt seine Meldung über Nerven ins Gehirn. Erst im Gehirn merkst du: Das ist rot.",
+        "seite": 3
+      }
+    },
+    {
+      "titel": "Das Gehirn macht sich ein Bild",
+      "seiten": [
+        {
+          "text": "Was melden die Augen eigentlich ans Gehirn? Keine fertigen Bilder. Sie melden Licht: hell und dunkel, Farben, Flecken und Kanten.\n\nDas Gehirn hat gelernt, daraus Dinge zu machen. Hier ein runder dunkler Fleck, da ein zweiter, dazwischen ein paar Striche. Das Gehirn erkennt: ein Fahrrad! Dort eine helle Fläche mit vier Beinen und einer Lehne: ein Stuhl.\n\nDas passiert in jedem Augenblick, ohne dass du es merkst. Man kann sagen: Das Gehirn macht sich sein eigenes Bild von der Welt.",
+          "bild": "bilder/02-01.webp"
+        },
+        {
+          "text": "Wie weiß das Gehirn, dass die Flecken ein Fahrrad sind? Es vergleicht mit dem, was es schon kennt. Du hast schon viele Fahrräder gesehen. Darum erkennst du sofort eins, auch ein ganz neues.\n\nBei den anderen Sinnen ist es genauso. Das Telefon klingelt, und Amara geht dran. Sie hört nur ein einziges Wort: Hallo! Schon weiß sie, dass Opa anruft. Seine Stimme kennt sie gut.\n\nAuch den Duft von Zuhause erkennst du sofort, wenn du nach einer Reise heimkommst. Dafür musst du nicht nachdenken.",
+          "bild": "bilder/02-02.webp"
+        },
+        {
+          "text": "Deine Sinne melden in jedem Augenblick sehr viel. Das Gehirn nimmt aber nicht alles. Es sucht aus, was gerade wichtig ist.\n\nVielleicht kennst du das. Amara liegt auf dem Sofa und liest ein spannendes Buch. Papa ruft aus der Küche, dass das Essen fertig ist. Amara liest weiter. Erst als er noch einmal ruft, schaut sie auf. Ihr Kopf war ganz beim Buch und hat das Rufen beiseitegelassen.\n\nUnd jetzt? Spürst du gerade deine Socken an den Füßen? Eben hast du sie nicht gespürt. Jetzt, wo du daran denkst, schon.",
+          "bild": "bilder/02-03.webp"
+        },
+        {
+          "text": "In der Küche brät Papa Zwiebeln. Als Amara hereinkommt, riecht sie es sofort. Es duftet kräftig, ein bisschen süß und ein bisschen scharf. Amara holt die Teller aus dem Schrank und deckt den Tisch. Dann legt sie Gabeln und Servietten dazu.\n\nDie Zwiebeln brutzeln weiter in der Pfanne. Die ganze Küche ist voller Duft, die ganze Zeit.\n\nWas glaubst du: Riecht Amara die Zwiebeln nach ein paar Minuten noch so stark?",
+          "bild": "bilder/02-04.webp",
+          "frage": true
+        },
+        {
+          "text": "Amara riecht die Zwiebeln kaum noch. Der Duft ist noch da, aber ihre Nase hat sich daran gewöhnt. Wenn ein Geruch lange gleich bleibt, fällt er nach einer Weile kaum noch auf. Jetzt kommt Amaras Bruder von draußen herein. Er riecht die Zwiebeln sofort.\n\nMit Wärme und Kälte ist es ähnlich. Beim Baden im See fühlt sich das Wasser erst kalt an. Nach einer Weile ist es angenehm, obwohl es gleich kalt bleibt.\n\nAber wenn sich etwas ändert, merkst du es sofort. Auf das, was neu ist, achtet dein Gehirn besonders.",
+          "bild": "bilder/02-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Was melden die Augen eigentlich ans Gehirn?",
+        "bild": "bilder/02-01.webp",
+        "antworten": [
+          "Fertige Bilder, wie ein Foto",
+          "Was es ist, zum Beispiel: Fahrrad",
+          "Licht, Farben, Flecken und Kanten"
+        ],
+        "richtig": 2,
+        "aufloesung": "Die Augen melden Licht: hell und dunkel, Farben, Flecken und Kanten. Das Gehirn hat gelernt, daraus Dinge zu machen.",
+        "seite": 0
+      }
+    },
+    {
+      "titel": "Die Sinne arbeiten zusammen",
+      "seiten": [
+        {
+          "text": "Deine Zunge kennt fünf Grundgeschmäcke. Süß wie eine reife Erdbeere. Sauer wie eine Zitrone. Salzig wie eine Brezel. Bitter wie Chicorée. Und herzhaft-würzig wie eine kräftige Brühe oder ein Stück Käse. Für diesen fünften Geschmack gibt es auch ein japanisches Wort: Umami.\n\nManchmal sieht man ein Bild von einer Zunge mit Feldern. Süß vorn, bitter hinten, sauer an den Seiten. Das stimmt nicht. Deine Zunge schmeckt alle fünf überall. Leg ein paar Zuckerkörnchen an den Rand der Zunge. Auch dort schmeckt es süß.",
+          "bild": "bilder/03-01.webp"
+        },
+        {
+          "text": "Jetzt macht Amara einen Versuch. Papa hat einen Apfel und eine Birne in kleine Stücke geschnitten. Amara macht die Augen zu und hält sich mit zwei Fingern die Nase zu.\n\nPapa gibt ihr ein Stück in die Hand. Sie kaut. Es ist süß und saftig. Dann bekommt sie ein zweites Stück. Auch das ist süß und saftig. Welches war der Apfel, welches die Birne?\n\nWas glaubst du: Kann Amara mit zugehaltener Nase schmecken, was sie gerade isst?",
+          "bild": "bilder/03-02.webp",
+          "frage": true
+        },
+        {
+          "text": "Es ist ganz schwer! Mit zugehaltener Nase schmeckt Amara fast nur süß. Nur am Knacken kann sie ein bisschen raten. Dann lässt sie die Nase los und kaut weiter. Plötzlich ist es klar: Das ist Birne!\n\nDas liegt an der Nase. Beim Kauen steigt der Duft des Essens hinten durch den Rachen in die Nase. Die Zunge meldet süß, die Nase meldet den Duft. Erst beide zusammen machen, dass eine Birne nach Birne schmeckt. Und eine Himbeere nach Himbeere.\n\nDarum schmeckt das Essen bei Schnupfen so fad. Die Nase ist zu, und der Duft kommt nicht an.",
+          "bild": "bilder/03-03.webp"
+        },
+        {
+          "text": "Beim Essen fühlt auch dein Mund mit. Er spürt, ob etwas knusprig oder weich ist. Ein Keks knackt, ein Pudding ist glatt und kühl. Eine Suppe ist warm. Das alles gehört zum Essen dazu.\n\nUnd was ist mit scharf? Amara hat ein winziges Stück Chili probiert. Jetzt brennt es auf ihrer Zunge. Scharf ist aber gar kein Geschmack. Das Brennen melden Nerven, die sonst Hitze und Schmerz spüren. Darum fühlt sich Chili heiß an, auch wenn es aus dem Kühlschrank kommt.",
+          "bild": "bilder/03-04.webp"
+        },
+        {
+          "text": "Stell dich auf ein Bein. Wackelst du ein bisschen? Damit du nicht umfällst, arbeiten mehrere Sinne zusammen. Tief innen im Ohr sitzt ein kleines Gleichgewichtsorgan. Es meldet, ob sich dein Kopf neigt oder dreht. Die Augen sehen, wo oben und unten ist. Die Fußsohle spürt den Boden. Muskeln und Gelenke spüren, wie du stehst.\n\nDas Gehirn vergleicht alle Meldungen und hält dich im Gleichgewicht.\n\nJetzt probier es mit geschlossenen Augen. Amara steht auf einem Bein und macht die Augen zu. Sofort wackelt sie mehr. Dem Gehirn fehlt jetzt die Meldung der Augen.",
+          "bild": "bilder/03-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Warum schmeckt eine Birne nach Birne?",
+        "bild": "bilder/03-03.webp",
+        "antworten": [
+          "Zunge und Nase melden es zusammen",
+          "Die Zunge allein erkennt jede Sorte",
+          "Die Augen sehen, was du isst"
+        ],
+        "richtig": 0,
+        "aufloesung": "Beim Kauen steigt der Duft hinten durch den Rachen in die Nase. Erst Zunge und Nase zusammen machen, dass eine Birne nach Birne schmeckt.",
+        "seite": 2
+      }
+    },
+    {
+      "titel": "Wenn die Sinne sich irren",
+      "seiten": [
+        {
+          "text": "Amara sitzt mit Mama im Zug. Der Zug steht noch am Bahnhof. Auf dem Gleis daneben steht ein anderer Zug, ganz nah vor ihrem Fenster.\n\nPlötzlich bewegt sich etwas. Amara spürt fast, wie es losgeht. Fährt ihr Zug jetzt? Dann gleitet das Ende des anderen Zugs am Fenster vorbei. Dahinter liegt der Bahnsteig, ganz still. Amaras Zug hat sich gar nicht bewegt. Der andere Zug ist losgefahren!\n\nDie Augen haben Bewegung gesehen. Das Gehirn hat geraten, woher sie kommt. Diesmal lag es daneben. So etwas nennt man eine Sinnestäuschung.",
+          "bild": "bilder/04-01.webp"
+        },
+        {
+          "text": "Für den nächsten Versuch braucht Amara drei Schüsseln. Mama füllt sie mit Wasser. In die linke kommt kühles Wasser aus der Leitung. In die rechte kommt warmes Wasser, angenehm warm, nicht heiß. Und in die mittlere kommt lauwarmes Wasser.\n\nAmara legt die linke Hand ins kühle Wasser. Die rechte Hand legt sie ins warme Wasser. So wartet sie eine Minute lang.\n\nDann taucht sie beide Hände gleichzeitig ins lauwarme Wasser in der Mitte. Was glaubst du: Wie fühlt sich das lauwarme Wasser an den beiden Händen an?",
+          "bild": "bilder/04-02.webp",
+          "frage": true
+        },
+        {
+          "text": "Amara staunt. Die linke Hand meldet: warm! Die rechte Hand meldet: kühl! Dabei stecken beide Hände im selben Wasser.\n\nDeine Haut misst nicht wie ein Thermometer. Sie merkt vor allem Unterschiede. Die linke Hand war an kühles Wasser gewöhnt. Darum fühlt sich lauwarmes Wasser für sie warm an. Die rechte Hand war an warmes Wasser gewöhnt. Für sie ist dasselbe Wasser kühl.\n\nDiesen Versuch kannst du zu Hause ausprobieren. Bitte einen Erwachsenen, das warme Wasser einzufüllen. Dann spürst du selbst, wie verschieden deine Hände dasselbe Wasser melden.",
+          "bild": "bilder/04-03.webp"
+        },
+        {
+          "text": "Hier ist ein Trick, für den du nur deine Hand brauchst. Kreuze Zeigefinger und Mittelfinger. Der Mittelfinger liegt jetzt über dem Zeigefinger.\n\nNun streich mit den gekreuzten Fingerspitzen ganz sanft über deine Nasenspitze. Beide Finger berühren die Nase gleichzeitig, jeder an einer anderen Seite. Was spürst du?\n\nAmara muss lachen. Es fühlt sich an, als hätte sie zwei Nasen! Ihre Finger liegen in einer Lage, die sie sonst nie haben. Darum glaubt das Gehirn: Das sind zwei Dinge!",
+          "bild": "bilder/04-04.webp"
+        },
+        {
+          "text": "Auf der weichen Wiese dreht sich Amara im Kreis, immer rundherum. Dann setzt sie sich ins Gras. Die Wiese steht still, doch für Amara dreht sich alles weiter. Ihr ist schwindelig.\n\nDas liegt am Gleichgewichtsorgan tief im Ohr. Darin ist Flüssigkeit, die sich beim Drehen mitbewegt. Hält Amara an, schwappt die Flüssigkeit noch eine Weile weiter. Ihr Po und ihre Beine spüren aber: Der Boden steht still. Zwei Meldungen passen nicht zusammen, und so entsteht Schwindel.\n\nSolche Täuschungen hat jeder Mensch. Sie zeigen, wie viel das Gehirn rät. Meistens rät es gut.",
+          "bild": "bilder/04-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Warum fühlt sich dasselbe Wasser an zwei Händen verschieden an?",
+        "bild": "bilder/04-03.webp",
+        "antworten": [
+          "Das Wasser ist nicht überall gleich warm",
+          "Eine Hand fühlt besser als die andere",
+          "Die Haut merkt vor allem Unterschiede"
+        ],
+        "richtig": 2,
+        "aufloesung": "Deine Haut misst nicht wie ein Thermometer. Sie merkt vor allem Unterschiede, darum meldet jede Hand dasselbe Wasser anders.",
+        "seite": 2
+      }
+    },
+    {
+      "titel": "Sinne passen auf dich auf",
+      "seiten": [
+        {
+          "text": "Ein Ball fliegt genau auf Amara zu. Bevor sie überhaupt etwas denkt, sind ihre Augen schon zu. Das Lid schließt sich ganz von selbst.\n\nOder: Amara greift nach dem Henkel einer Teekanne. Der Henkel ist heiß. Ihre Hand zuckt zurück, bevor sie überlegt hat.\n\nSolche blitzschnellen Schutzbewegungen heißen Reflexe. Du musst dafür nicht nachdenken. Der Körper reagiert sofort, ganz von allein. Erst danach merkst du: Da war etwas. So schützen Reflexe deine Augen und deine Haut, oft ohne dass du es bemerkst.",
+          "bild": "bilder/05-01.webp"
+        },
+        {
+          "text": "Amara läuft zum Spielplatz. Plötzlich pikst etwas unter ihrem Fuß, bei jedem Schritt. Sie setzt sich auf eine Bank und zieht den Schuh aus. Ein kleiner spitzer Stein ist hineingerutscht. Sie schüttelt ihn heraus, und alles ist wieder gut.\n\nDas Piksen war eine Warnung. Schmerz ist eine Meldung der Haut. Er sagt: Hier stimmt etwas nicht, pass auf diese Stelle auf.\n\nSchmerz ist unangenehm, aber er hat einen guten Grund. Er bringt dich dazu, stehen zu bleiben und nachzusehen. Ohne ihn würdest du einfach weiterlaufen.",
+          "bild": "bilder/05-02.webp"
+        },
+        {
+          "text": "Amara will Milch in ihr Müsli gießen. Vorher riecht sie an der offenen Flasche. Igitt, die Milch riecht sauer! Die gießt sie lieber nicht ins Müsli.\n\nDie Nase warnt dich vor Essen, das verdorben ist. Sie riecht auch Rauch und Gas. Wenn es irgendwo brenzlig oder seltsam riecht, sag es sofort einem Erwachsenen.\n\nAuch die Zunge passt auf. Bitteres spucken Menschen eher wieder aus. Forschende vermuten, dass das ein Schutz ist. Manches Giftige und Verdorbene schmeckt nämlich bitter. So kommt es gar nicht erst in den Bauch.",
+          "bild": "bilder/05-03.webp"
+        },
+        {
+          "text": "In der Nacht schläft Amara tief und fest. Ihre Ohren hören auch im Schlaf. Ein lautes Geräusch kann sie wecken. Mit der Nase ist das anders. Im Schlaf riecht ein Mensch fast nichts. Selbst Rauch weckt einen schlafenden Menschen nicht zuverlässig auf.\n\nDarum hängt in Amaras Zimmer ein Rauchmelder an der Decke. Er ist rund und weiß und passt auf, während alle schlafen. Merkt er Rauch, piept er laut und schrill. Das Piepen weckt alle über die Ohren.\n\nEin Rauchmelder gehört in jedes Zimmer, in dem jemand schläft. Frag doch einmal, wo bei euch einer hängt.",
+          "bild": "bilder/05-04.webp"
+        },
+        {
+          "text": "Deine Sinne passen auf dich auf. Und du kannst auch auf sie aufpassen.\n\nSchau nie direkt in die Sonne, auch nicht ganz kurz. Das Licht ist viel zu stark für deine Augen. Wenn die Sonne blendet, dreh dich weg oder setz einen Sonnenhut auf.\n\nAuch die Ohren vertragen nicht alles. An der Straße dröhnt ein Presslufthammer. Amara hält sich die Ohren zu und geht ein Stück weiter. Sehr lauter Lärm tut den Ohren nicht gut, vor allem wenn er lange dauert.\n\nEin paar Schritte weiter ist es wieder ruhig. Amara hört die Vögel und geht weiter.",
+          "bild": "bilder/05-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Warum gehört ins Schlafzimmer ein Rauchmelder?",
+        "bild": "bilder/05-04.webp",
+        "antworten": [
+          "Im Schlaf riecht die Nase fast nichts",
+          "Er macht das Feuer von selbst aus",
+          "Nachts hat Rauch gar keinen Geruch"
+        ],
+        "richtig": 0,
+        "aufloesung": "Im Schlaf riecht ein Mensch fast nichts, aber die Ohren hören. Das laute Piepen des Rauchmelders weckt alle über die Ohren.",
+        "seite": 3
+      }
+    },
+    {
+      "titel": "Tiere spüren die Welt anders",
+      "seiten": [
+        {
+          "text": "Es ist ein warmer Sommerabend. Amara sitzt mit Mama im Garten. Über den Bäumen flattern kleine dunkle Tiere im Zickzack. Das sind Fledermäuse auf der Suche nach Insekten.\n\nFledermäuse rufen beim Fliegen. Aber ihre Rufe sind so hoch, dass wir Menschen sie nicht hören. Das nennt man Ultraschall. Trifft ein Ruf auf eine Motte, kommt ein Echo zurück. Am Echo hört die Fledermaus, wo die Motte fliegt.\n\nBlind sind Fledermäuse übrigens nicht. Sie können mit ihren Augen sehen. Im Dunkeln hilft ihnen aber das Echo mehr.",
+          "bild": "bilder/06-01.webp"
+        },
+        {
+          "text": "Am nächsten Morgen summt eine Honigbiene über das Blumenbeet. Sie fliegt von Blüte zu Blüte. Die Biene sieht die Blumen anders als Amara.\n\nBienen sehen ein Licht, das für uns Menschen unsichtbar ist. Es heißt Ultraviolett. Dafür sehen Bienen kein Rot. Eine rote Blüte sieht für eine Biene ganz anders aus als für uns.\n\nManche Blüten haben sogar Zeichen, die wir Menschen nicht sehen können. Bienen sehen sie. Es sind Muster, wie kleine Wegweiser. Sie zeigen der Biene den Weg zum süßen Nektar in der Mitte der Blüte. Amara sieht davon nichts. Für ihre Augen ist die Blüte einfach gelb.",
+          "bild": "bilder/06-02.webp"
+        },
+        {
+          "text": "Im Meer, am sandigen Grund, gleitet ein Rochen dahin. Er ist flach wie ein großer Pfannkuchen und bewegt seine Flossen wie Flügel.\n\nHaie und Rochen haben einen Sinn, den wir Menschen nicht haben. Jedes lebende Tier im Wasser hat um sich herum ein winziges bisschen Strom, ganz schwach. Haie und Rochen können ihn spüren. So finden sie ein Tier, auch wenn es sich im Sand versteckt. Auch im trüben oder dunklen Wasser klappt das.\n\nDieser Sinn reicht aber nicht weit. Ungefähr so weit, wie dein Arm lang ist.",
+          "bild": "bilder/06-03.webp"
+        },
+        {
+          "text": "Im Herbst sieht Amara Vögel am Himmel. Sie fliegen in einer langen Reihe nach Süden, wie ein großes V. Woher kennen die Zugvögel den Weg, über Berge und Meere hinweg?\n\nDie Erde ist von einem unsichtbaren Magnetfeld umgeben. Ein Kompass zeigt es dir: Seine Nadel dreht sich immer nach Norden. Viele Tiere können dieses Magnetfeld spüren, so als hätten sie einen Kompass eingebaut. Zugvögel und Tauben gehören dazu, aber auch Meeresschildkröten und Fledermäuse.\n\nWie genau dieser Sinn funktioniert, wissen Forschende noch nicht. Sie suchen gerade nach der Antwort.",
+          "bild": "bilder/06-04.webp"
+        },
+        {
+          "text": "Jedes Tier hat die Sinne, die zu seinem Leben passen. Die Fledermaus jagt nachts, die Biene sucht Nektar, die Zugvögel reisen weit. Für jedes dieser Leben passt ein anderer Sinn.\n\nUnd wir Menschen? Wir hören Sprache und Musik, und unsere Hände tasten fein.\n\nAmara sitzt barfuß im Gras. Auf dem Zaun gurrt eine Taube, im Beet summt eine Biene. Alle drei sind im selben Garten. Und doch spürt jedes die Welt ein bisschen anders.\n\nKeine Tierart spürt alles. Jede spürt das, was sie braucht.",
+          "bild": "bilder/06-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Warum spüren Tiere die Welt anders als wir?",
+        "bild": "bilder/06-05.webp",
+        "antworten": [
+          "Tiere haben schwächere Sinne als Menschen",
+          "Ihre Sinne passen zu ihrem Leben",
+          "Tiere spüren alles, nur viel stärker"
+        ],
+        "richtig": 1,
+        "aufloesung": "Jedes Tier hat die Sinne, die zu seinem Leben passen. Keine Tierart spürt alles, jede spürt das, was sie braucht.",
+        "seite": 4
+      }
+    },
+    {
+      "titel": "Mehr als fünf",
+      "seiten": [
+        {
+          "text": "Wer hat eigentlich gesagt, dass es fünf Sinne gibt? Das war ein Gelehrter im alten Griechenland. Er hieß Aristoteles und lebte vor mehr als zweitausend Jahren. Er hat die fünf Sinne so aufgeschrieben, und man zählt sie bis heute.\n\nAristoteles hat übrigens auch den Trick mit den gekreuzten Fingern und der Nase beschrieben. So alt ist er schon!\n\nHeute wissen Forschende: Wir haben viel mehr als fünf Sinne. Wie viele genau, darüber sind sie sich nicht einig. Manche zählen über zwanzig. Ein paar davon kennst du schon.",
+          "bild": "bilder/07-01.webp"
+        },
+        {
+          "text": "Einen weiteren Sinn kennst du schon: den Gleichgewichtssinn. Er hat dich beim Stehen auf einem Bein gehalten. Und nach dem Drehen hat er dir Schwindel gemeldet.\n\nEin anderer Sinn ist der Körpersinn. Mit ihm spürst du, wo deine Arme und Beine gerade sind. Dafür musst du nicht hinschauen. Muskeln und Gelenke melden es dem Gehirn.\n\nProbier es aus. Mach die Augen zu und streck einen Arm zur Seite aus. Dann führ den Zeigefinger langsam zu deiner Nasenspitze. Triffst du sie? Amara trifft sie fast genau. Ihr Körpersinn weiß, wo ihr Finger ist.",
+          "bild": "bilder/07-02.webp"
+        },
+        {
+          "text": "Auch die Haut kann mehr als tasten. Sie meldet Wärme und Kälte, zum Beispiel eine warme Tasse in den Händen. Und sie meldet Schmerz, wie bei dem Stein im Schuh. Fachleute zählen das als eigene Sinne.\n\nSogar in dir drin spürst du etwas. Wenn du Hunger hast, spürst du es im Bauch. Hüpf zwanzigmal auf der Stelle. Dann leg die Hand auf deine Brust. Spürst du, wie schnell dein Herz jetzt klopft?\n\nAmara hüpft und legt die Hand auf ihre Brust. Bumm, bumm, bumm, ganz schnell. Nach einer Weile wird das Klopfen wieder ruhiger.",
+          "bild": "bilder/07-03.webp"
+        },
+        {
+          "text": "Deine Sinne kannst du auch ganz bewusst benutzen. Setz dich still hin und hör genau hin. Wie viele verschiedene Geräusche hörst du? Ein Auto, ein Vogel, eine Tür, vielleicht dein eigener Atem.\n\nOder lass dir mit geschlossenen Augen Dinge in die Hand geben. Einen Löffel, eine Kastanie, einen Radiergummi. Erkennst du sie durch Tasten?\n\nMenschen, die nicht sehen, lesen zum Beispiel Punktschrift mit den Fingern. Unterwegs hilft ihnen ein Langstock. Viele Menschen, die nicht hören, sprechen miteinander in Gebärdensprache. Davon erzählt ein eigenes Buch.",
+          "bild": "bilder/07-04.webp"
+        },
+        {
+          "text": "Zum Schluss macht Amara einen Spaziergang mit allen Sinnen. Jeder Sinn kommt einmal an die Reihe.\n\nZuerst die Augen: Auf einem Blatt krabbelt ein Marienkäfer. Dann die Ohren: Im Baum singt eine Amsel. Jetzt die Nase: Nach dem Regen riecht der Waldboden würzig und feucht. Dann die Haut: Amara zieht die Schuhe aus und läuft barfuß über das kühle Gras. Und zuletzt die Zunge: Aus ihrer Brotdose holt sie einen Apfel und beißt hinein. Er schmeckt süß und ein bisschen sauer.\n\nDie ganze Welt kommt zu ihr herein, durch alle Sinne zugleich.",
+          "bild": "bilder/07-05.webp"
+        }
+      ],
+      "erinnern": {
+        "frage": "Wie viele Sinne hat ein Mensch?",
+        "bild": "bilder/07-01.webp",
+        "antworten": [
+          "Genau fünf, so wie man sie aufzählt",
+          "Sechs, wenn man den sechsten Sinn mitzählt",
+          "Mehr als fünf, manche zählen über zwanzig"
+        ],
+        "richtig": 2,
+        "aufloesung": "Die fünf Sinne hat Aristoteles vor sehr langer Zeit aufgeschrieben. Heute wissen Forschende: Wir haben viel mehr als fünf Sinne.",
+        "seite": 0
+      }
+    }
+  ]
+}

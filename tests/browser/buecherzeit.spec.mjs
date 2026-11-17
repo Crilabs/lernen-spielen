@@ -143,7 +143,6 @@ try {
     pruefe("Startseite: alle Spielkarten mit Uhr", n > 0 && g === n, `${g} von ${n}`);
     await s2.locator("a.karte.spiel").first().click();
     await pruefeHinweis(s2, "Startseite", PAUSE);
-    pruefe("Startseite: Echte Dinge ohne Uhr", await s2.locator("a.karte.echt.gesperrt").count() === 0);
     pruefe("Startseite ohne Konsolenfehler", konsole.length === 0, konsole.join(" | "));
     await k2.close();
   }

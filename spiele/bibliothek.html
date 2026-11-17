@@ -29,9 +29,10 @@ body { -webkit-user-select: none; user-select: none; }
 
 /* --- Halle ---------------------------------------------------------------------------------------- */
 .bib-titel { margin: 1.4rem 0 4.4rem; font-size: 7.2rem; font-weight: 750; line-height: 1; letter-spacing: -0.035em; }
-.halle { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4.8rem 4.4rem; }
+/* Bis zu vier Räume je Zeile, damit auch viele Räume ohne langes Scrollen in die Halle passen. */
+.halle { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4rem 3.2rem; }
 .tuer {
-  display: flex; flex-direction: column; align-items: flex-start; gap: 2.2rem; padding: 0;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1.6rem; padding: 0;
   background: none; border: 0; color: var(--ls-tinte); font: inherit; cursor: pointer; text-decoration: none;
   touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
@@ -44,7 +45,7 @@ body { -webkit-user-select: none; user-select: none; }
 /* Raumfotos sind quadratisch; der Ausschnitt quer hält Köpfe und Dinge im oberen Drittel im Bild. */
 .bogen img { object-position: center 40%; }
 .halle .bogen { width: 100%; aspect-ratio: 3 / 2; box-shadow: var(--ls-schatten); }
-.tuer b { font-size: 3.6rem; font-weight: 700; line-height: 1.1; }
+.tuer b { font-size: 2.8rem; font-weight: 700; line-height: 1.1; }
 .tuer:active .bogen { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
 .tuer:focus-visible .bogen { outline: 1rem solid var(--ls-sonne); outline-offset: 0.6rem; }
 
@@ -95,6 +96,9 @@ body { -webkit-user-select: none; user-select: none; }
 @media (min-aspect-ratio: 4/3) { .erinnern-fenster { width: min(150rem, 100%); } }
 .erinnern-fuss ls-knopf[hidden] { display: none; }
 @media (max-aspect-ratio: 3/2) {
+  .halle { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-aspect-ratio: 1/1) {
   .halle { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) { .tuer:active .bogen, .buch:active .deckel { transform: none; } }
@@ -212,7 +216,7 @@ async function start() {
   zeige();
   weisstDuNoch().catch((e) => protokoll("bibliothek, Weißt du noch: " + e));
 
-  // „Weißt du noch?“: höchstens einmal am Tag eine Kapitelfrage mit Abstand (verteiltes Wiederholen, geschichten.md §2b)
+  // „Weißt du noch?“: höchstens zwei Kapitelfragen am Tag (mit der Pause am Rundenende zusammen) mit Abstand (verteiltes Wiederholen, geschichten.md §2b)
   async function weisstDuNoch() {
     const wahl = await ladeErinnerung(fragen.keys());
     const buch = wahl && fragen.get(wahl.id);
@@ -231,11 +235,12 @@ async function start() {
     const zu = () => grund.remove();
     if (leiste.ton) sprich("Weißt du noch?");
     frage.zeige(e, { ton: leiste.ton, bild: e.bild ? `geschichten/${wahl.id}/${e.bild}` : "" });
+    merkeErinnert(wahl.id, wahl.kapitel, false).catch((f) => protokoll("Weißt du noch: " + f));   // zählt schon beim Zeigen
     frage.addEventListener("gewaehlt", () => {
       spaeter.hidden = true; fertig.hidden = false;
       merkeErinnert(wahl.id, wahl.kapitel, true).catch((f) => protokoll("Weißt du noch: " + f));
     });
-    spaeter.addEventListener("click", () => { merkeErinnert(wahl.id, wahl.kapitel, false).catch((f) => protokoll("Weißt du noch: " + f)); zu(); });
+    spaeter.addEventListener("click", zu);
     fertig.addEventListener("click", zu);
   }
 }

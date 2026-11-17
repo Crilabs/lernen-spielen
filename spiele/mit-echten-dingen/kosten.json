@@ -4459,5 +4459,364 @@
   "thema": [
    "wiewoerter"
   ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 540,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "pronomen-statt-nomen.png",
+  "themen": 1,
+  "thema": [
+   "pronomen-statt-nomen"
+  ],
+  "usage": {
+   "input_tokens": 540,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 540
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2296
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 527,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "verb-personalform.png",
+  "themen": 1,
+  "thema": [
+   "verb-personalform"
+  ],
+  "usage": {
+   "input_tokens": 527,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 527
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2283
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 513,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "personalpronomen.png",
+  "themen": 1,
+  "thema": [
+   "personalpronomen"
+  ],
+  "usage": {
+   "input_tokens": 513,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 513
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2269
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 529,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "gegenwart-praesens.png",
+  "themen": 1,
+  "thema": [
+   "gegenwart-praesens"
+  ],
+  "usage": {
+   "input_tokens": 529,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 529
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2285
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 528,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "grundform-verb.png",
+  "themen": 1,
+  "thema": [
+   "grundform-verb"
+  ],
+  "usage": {
+   "input_tokens": 528,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 528
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2284
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 552,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "grundform-verb.png",
+  "themen": 1,
+  "thema": [
+   "grundform-verb"
+  ],
+  "usage": {
+   "input_tokens": 552,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 552
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2308
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 12,
+  "ausgabe": 8702,
+  "einheit": "tokens",
+  "menge": 499734,
+  "notiz": "grundform-verb, Prüfung Runde 1",
+  "cache_lesen": 396313,
+  "cache_schreiben": 94707,
+  "themen": 1,
+  "thema": [
+   "grundform-verb"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 4842,
+  "einheit": "tokens",
+  "menge": 246402,
+  "notiz": "grundform-verb, Prüfung Runde 2",
+  "cache_lesen": 178498,
+  "cache_schreiben": 63054,
+  "themen": 1,
+  "thema": [
+   "grundform-verb"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 16,
+  "ausgabe": 7332,
+  "einheit": "tokens",
+  "menge": 588171,
+  "notiz": "verb-personalform, Prüfung Runde 1",
+  "cache_lesen": 495983,
+  "cache_schreiben": 84840,
+  "themen": 1,
+  "thema": [
+   "verb-personalform"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 5709,
+  "einheit": "tokens",
+  "menge": 247215,
+  "notiz": "verb-personalform, Prüfung Runde 2",
+  "cache_lesen": 177435,
+  "cache_schreiben": 64063,
+  "themen": 1,
+  "thema": [
+   "verb-personalform"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 14,
+  "ausgabe": 6671,
+  "einheit": "tokens",
+  "menge": 493851,
+  "notiz": "personalpronomen, Prüfung Runde 1",
+  "cache_lesen": 403151,
+  "cache_schreiben": 84015,
+  "themen": 1,
+  "thema": [
+   "personalpronomen"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 10,
+  "ausgabe": 5649,
+  "einheit": "tokens",
+  "menge": 314976,
+  "notiz": "personalpronomen, Prüfung Runde 2",
+  "cache_lesen": 244228,
+  "cache_schreiben": 65089,
+  "themen": 1,
+  "thema": [
+   "personalpronomen"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 14,
+  "ausgabe": 6177,
+  "einheit": "tokens",
+  "menge": 491511,
+  "notiz": "gegenwart-praesens, Prüfung Runde 1",
+  "cache_lesen": 401271,
+  "cache_schreiben": 84049,
+  "themen": 1,
+  "thema": [
+   "gegenwart-praesens"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 6,
+  "ausgabe": 4982,
+  "einheit": "tokens",
+  "menge": 171646,
+  "notiz": "gegenwart-praesens, Prüfung Runde 2",
+  "cache_lesen": 108747,
+  "cache_schreiben": 57911,
+  "themen": 1,
+  "thema": [
+   "gegenwart-praesens"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 12,
+  "ausgabe": 5820,
+  "einheit": "tokens",
+  "menge": 401224,
+  "notiz": "pronomen-statt-nomen, Prüfung Runde 1",
+  "cache_lesen": 312482,
+  "cache_schreiben": 82910,
+  "themen": 1,
+  "thema": [
+   "pronomen-statt-nomen"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 14,
+  "ausgabe": 6307,
+  "einheit": "tokens",
+  "menge": 584141,
+  "notiz": "pronomen-statt-nomen, Prüfung Runde 2",
+  "cache_lesen": 493332,
+  "cache_schreiben": 84488,
+  "themen": 1,
+  "thema": [
+   "pronomen-statt-nomen"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 128,
+  "ausgabe": 58817,
+  "einheit": "tokens",
+  "menge": 7645371,
+  "notiz": "G02 (5 Themen), Recherche, Schreiben, Überarbeitung, Steuerung",
+  "cache_lesen": 7254007,
+  "cache_schreiben": 332419,
+  "themen": 5,
+  "thema": [
+   "grundform-verb",
+   "verb-personalform",
+   "personalpronomen",
+   "gegenwart-praesens",
+   "pronomen-statt-nomen"
+  ]
  }
 ]

@@ -166,6 +166,24 @@
    "datei": "mathe/fuenferreihe.md",
    "foto": "mathe/bilder/fuenferreihe.webp"
   },
+  "gegenwart-praesens": {
+   "fach": "grammatik",
+   "name": "Gegenwart",
+   "titel": "Was passiert gerade?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "So mache ich mein Müsli"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Vorturnen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/gegenwart-praesens.md",
+   "foto": "grammatik/bilder/gegenwart-praesens.webp"
+  },
   "geschlecht-des-nomens": {
    "fach": "grammatik",
    "name": "Männlich, weiblich, sächlich",
@@ -263,6 +281,24 @@
    "entwurf": false,
    "datei": "mathe/grosse-zahlen-lesen.md",
    "foto": "mathe/bilder/grosse-zahlen-lesen.webp"
+  },
+  "grundform-verb": {
+   "fach": "grammatik",
+   "name": "Grundform des Verbs",
+   "titel": "Wie heißt das Verb auf der Liste?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Die Liste für morgen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Ich, wir, Grundform"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/grundform-verb.md",
+   "foto": "grammatik/bilder/grundform-verb.webp"
   },
   "minus-zehner": {
    "fach": "mathe",
@@ -376,6 +412,42 @@
    "datei": "schreiben/nomen-gross-artikelprobe.md",
    "foto": "schreiben/bilder/nomen-gross-artikelprobe.webp"
   },
+  "personalpronomen": {
+   "fach": "grammatik",
+   "name": "ich, du, er, sie, es …",
+   "titel": "Wer ist er? Wer ist wir?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Wer ist gemeint?"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Ich, du, wir"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/personalpronomen.md",
+   "foto": "grammatik/bilder/personalpronomen.webp"
+  },
+  "pronomen-statt-nomen": {
+   "fach": "grammatik",
+   "name": "Pronomen statt Nomen",
+   "titel": "Er, sie, es statt immer desselben Wortes",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Das Tischtheater"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Wo ist es?"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/pronomen-statt-nomen.md",
+   "foto": "grammatik/bilder/pronomen-statt-nomen.webp"
+  },
   "sechserreihe": {
    "fach": "mathe",
    "name": "Sechserreihe",
@@ -487,6 +559,24 @@
    "entwurf": false,
    "datei": "grammatik/tunwoerter.md",
    "foto": "grammatik/bilder/tunwoerter.webp"
+  },
+  "verb-personalform": {
+   "fach": "grammatik",
+   "name": "Verb passt zur Person",
+   "titel": "Ich hole, du holst, wir holen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Wer holt was?"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zeigen, wer es tut"
+    }
+   ],
+   "entwurf": false,
+   "datei": "grammatik/verb-personalform.md",
+   "foto": "grammatik/bilder/verb-personalform.webp"
   },
   "verben-als-nomen": {
    "fach": "schreiben",

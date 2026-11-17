@@ -69,14 +69,20 @@ wird gezählt; eine Antwort, die nicht passt, löst nichts Besonderes aus.
   derselben Stelle (`richtig`: 0, 1 oder 2, über das Buch verteilt).
 - **Auflösung** (`aufloesung`): ein bis zwei Sätze, die die Sache sagen, nah am Wortlaut des Buchs. Sie passt nach jeder
   Wahl: kein „Ja“, „Genau“, „Richtig“, „Leider“, „Nicht ganz“, kein Lob. Danach leuchtet die passende Antwort auf.
-- **Bild** (`bild`): ein Foto aus diesem Kapitel, das zur Frage passt, aber die Antwort nicht verrät. Keine neuen Bilder.
+- **Bild** (`bild`): das Foto der Seite `seite`, auf der die Antwort steht – es erinnert an die Stelle im Buch
+  (Christian, 2026-11-17). Keine neuen Bilder.
 - **Nachlesen** (`seite`): Index der Seite im Kapitel (ab 0), auf der die Antwort steht; der Knopf „Nachlesen“ springt
   dorthin.
 - **Alles wird vorgelesen** (bei Ton an, in beiden Modi): Frage, jede Antwort, beim Tippen die gewählte Antwort, dann die
-  Auflösung (`npm run audio` nimmt alles auf).
-- **„Weißt du noch?“ in der Bibliothek:** Höchstens einmal am Tag kommt beim Öffnen der Bibliothek die Frage eines
-  Kapitels zurück, das das Kind frühestens gestern beendet hat; die am längsten nicht gestellte zuerst. Überspringbar
-  („Später“), nichts wird gezählt.
+  Auflösung (`npm run audio` nimmt alles auf). Die gerade vorgelesene Antwort trägt den Sonnenring; wählen lässt sich
+  erst, wenn alle drei Antworten vorgelesen sind (Christian, 2026-11-17). Bricht etwas das Vorlesen ab, ist die Wahl
+  sofort frei.
+- **„Weißt du noch?“ in der Bibliothek und in der Pause:** Die Frage eines Kapitels, das das Kind frühestens gestern
+  beendet hat, kommt zurück – beim Öffnen der Bibliothek und in der Pause am Rundenende eines Spiels (Christian,
+  2026-11-17; dort auf eigener Karte statt der Karte des Spiels, nicht bei Schluss der Spielzeit und nicht bei
+  „Gekonnt“). Zusammen höchstens zwei am Tag, keine zweimal am Tag; die am längsten nicht gestellte zuerst.
+  Überspringbar („Später“, in der Pause Weiter oder Alle Spiele): dann zählt sie nicht als gestellt und kommt an einem
+  anderen Tag wieder. In der Pause bleiben nach der Wahl nur die gewählte und die passende Antwort stehen.
 - Ein frischer Prüfer prüft die Fragen mit dem Buch (`pruefung.md` §5 „Erinnerungsfragen“).
 
 ```json

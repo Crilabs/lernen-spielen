@@ -4,14 +4,14 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
-  ARTEN, STATUS, befehlFuer, ladeAuftraege, naechsterWartender, neuerAuftrag, speichereAuftraege, statusAusErgebnis, streiche, verschiebe,
+  ARTEN, STATUS, befehlFuer, waehleIdee, ladeAuftraege, naechsterWartender, neuerAuftrag, speichereAuftraege, statusAusErgebnis, streiche, verschiebe,
 } from "../werkzeuge/verwaltung/auftraege.mjs";
 
 const JETZT = new Date("2026-11-16T10:00:00Z");
 const a = (id, status = "wartet") => ({ id, art: "frei", ziel: id, befehl: id, status });
 
-test("ARTEN: die fünf Auftragsarten", () => {
-  assert.deepEqual(ARTEN, ["spiel", "echte-dinge", "buch", "einfuehrung", "frei"]);
+test("ARTEN: die sechs Auftragsarten", () => {
+  assert.deepEqual(ARTEN, ["spiel", "echte-dinge", "buch", "einfuehrung", "frei", "ideen"]);
 });
 
 test("befehlFuer: ein Befehl je Art", () => {
@@ -21,6 +21,7 @@ test("befehlFuer: ein Befehl je Art", () => {
   assert.equal(befehlFuer("buch", "hund"), "Sachgeschichte hund");
   assert.match(befehlFuer("einfuehrung", "zerlegen-2"), /^Einführung für Thema zerlegen-2 nach den Vorlagen in spiele\/einfuehrungen\//);
   assert.equal(befehlFuer("frei", "Mach X"), "Mach X");
+  assert.equal(befehlFuer("ideen", "G05"), "Spielideen G05");
 });
 
 test("neuerAuftrag: wartet, mit Befehl, Schätzung und Zeit", () => {
@@ -115,4 +116,57 @@ test("lehneAb: erledigt mit Notiz, kein neuer Auftrag; nur bei „wartet auf dic
 
 test("STATUS kennt „beantwortet“", () => {
   assert.ok(STATUS.includes("beantwortet"));
+});
+
+// --- Spielideen (docs/superpowers/specs/2026-11-17-spielideen-design.md) ---------------------------------------
+const IDEEN = [{ titel: "Hüpfkette", text: "Lena hüpft." }, { titel: "Brückenbau", text: "Timo baut." }, { titel: "Zauberwald", text: "Aylin zaubert." }];
+const ideenAuftrag = (ergebnis = { status: "geparkt", zusammenfassung: "drei", frage: "Welche?", ideen: IDEEN }) =>
+  ({ id: "i-1", art: "ideen", ziel: "G05", befehl: "Spielideen G05", status: "wartet-auf-christian", ergebnis });
+
+test("waehleIdee: Karte → Spiel-Auftrag mit Vorgabe direkt dahinter", () => {
+  const { liste, neu } = waehleIdee([ideenAuftrag(), a("x")], "i-1", { karte: 2 }, JETZT);
+  assert.deepEqual(liste.map((x) => x.id), ["i-1", neu.id, "x"]);
+  assert.equal(neu.art, "spiel");
+  assert.equal(neu.ziel, "G05");
+  assert.equal(neu.status, "wartet");
+  assert.equal(neu.befehl, `Spiel entwickeln G05 --vorgabe werkzeuge/verwaltung/vorgaben/${neu.id}.md`);
+  for (const t of ["Hüpfkette", "Brückenbau", "Zauberwald", "Karte 2"]) assert.ok(neu.vorgabe.includes(t), t);
+  assert.match(neu.vorgabe, /^# Vorgabe von Christian/);
+  assert.equal(liste[0].status, "beantwortet");
+  assert.equal(liste[0].notiz, "Wahl: Karte 2 „Brückenbau“");
+});
+
+test("waehleIdee: eigener Text, die Skizzen bleiben in der Vorgabe", () => {
+  const { liste, neu } = waehleIdee([ideenAuftrag()], "i-1", { text: "die zweite, aber mit Hund" }, JETZT);
+  for (const t of ["Hüpfkette", "Brückenbau", "Zauberwald", "die zweite, aber mit Hund"]) assert.ok(neu.vorgabe.includes(t), t);
+  assert.equal(liste[0].notiz, "Wahl: eigene Idee");
+});
+
+test("waehleIdee: falsche Karte, leerer Text, falsche Art oder Status, fehlende Ideen werfen", () => {
+  assert.throws(() => waehleIdee([ideenAuftrag()], "i-1", { karte: 0 }));
+  assert.throws(() => waehleIdee([ideenAuftrag()], "i-1", { karte: 4 }));
+  assert.throws(() => waehleIdee([ideenAuftrag()], "i-1", { text: "  " }));
+  assert.throws(() => waehleIdee([{ ...ideenAuftrag(), art: "spiel" }], "i-1", { karte: 1 }));
+  assert.throws(() => waehleIdee([{ ...ideenAuftrag(), status: "beantwortet" }], "i-1", { karte: 1 }));
+  assert.throws(() => waehleIdee([ideenAuftrag({ status: "geparkt" })], "i-1", { karte: 1 }));
+  assert.throws(() => waehleIdee([ideenAuftrag({ status: "geparkt", ideen: [] })], "i-1", { karte: 1 }));
+  assert.equal(waehleIdee([ideenAuftrag({ status: "geparkt" })], "i-1", { text: "Eigenes" }).neu.art, "spiel");
+});
+
+// Ideen laufen gleichzeitig (2026-11-17): Vier Prozesse änderten auftraege.json zugleich, drei Änderungen gingen
+// verloren. aendereAuftraege sperrt Lesen–Ändern–Schreiben über Prozesse hinweg.
+test("aendereAuftraege: acht Prozesse gleichzeitig, keine Änderung geht verloren", async () => {
+  const { spawn } = await import("node:child_process");
+  const o = mkdtempSync(join(tmpdir(), "sperre-"));
+  const datei = join(o, "auftraege.json");
+  speichereAuftraege(datei, Array.from({ length: 8 }, (_, i) => ({ id: `a${i}`, status: "wartet" })));
+  const modul = new URL("../werkzeuge/verwaltung/auftraege.mjs", import.meta.url).href;
+  const skript = (i) => `import { aendereAuftraege } from ${JSON.stringify(modul)};
+    for (let k = 0; k < 5; k++) aendereAuftraege(${JSON.stringify(datei)}, (l) => l.map((a) => a.id === "a${i}" ? { ...a, n: (a.n ?? 0) + 1 } : a));`;
+  await Promise.all(Array.from({ length: 8 }, (_, i) => new Promise((ok, nein) => {
+    const k = spawn(process.execPath, ["--input-type=module", "-e", skript(i)], { stdio: "inherit" });
+    k.on("close", (c) => (c === 0 ? ok() : nein(new Error(`Prozess ${i}: ${c}`))));
+  })));
+  assert.deepEqual(ladeAuftraege(datei).map((a) => a.n), [5, 5, 5, 5, 5, 5, 5, 5]);
+  rmSync(o, { recursive: true });
 });

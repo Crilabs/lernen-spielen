@@ -8,5 +8,5 @@
     "module": "ES2022",
     "lib": ["ES2022", "DOM"]
   },
-  "include": ["spiele/kern/**/*.js", "spiele/rahmen/**/*.js", "spiele/runde/**/*.js", "spiele/objekte/**/*.js", "spiele/start/**/*.js"]
+  "include": ["spiele/kern/**/*.js", "spiele/rahmen/**/*.js", "spiele/runde/**/*.js", "spiele/objekte/**/*.js", "spiele/start/**/*.js", "spiele/tagesbrief/brief.js"]
 }

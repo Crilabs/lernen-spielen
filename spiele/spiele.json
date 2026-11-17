@@ -26,7 +26,7 @@
       "beschreibung": "Das Kind hört ein Zahlwort und tippt die Ziffern auf einen Umschlag. Timo rollt die Häuserreihe entlang zu genau dieser Hausnummer; in der Tür steht die Zahl als Perlenstäbe (goldene Zehnerstäbe, die Einer als farbiges Stäbchen). Ein Zahlendreher führt zu einem anderen Haus, und man sieht, wie weit es weg ist.",
       "arten": [{ "art": "zahlwort", "zahlen": [0, 20], "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null },
-    { "id": "artikelwand", "probe": true, "titel": "Werkzeugwand", "thema": "der, die, das", "kategorie": "grammatik",
+    { "id": "artikelwand", "titel": "Werkzeugwand", "thema": "der, die, das", "kategorie": "grammatik",
       "symbol": "grammatik/g09-der-die-das-artikel/symbol.svg", "bild": "grammatik/g09-der-die-das-artikel/spielbild.webp", "datei": "grammatik/g09-der-die-das-artikel/index.html",
       "text": "Der, die oder das an das Wort legen, Ela hängt das Werkzeug auf.",
       "beschreibung": "Das Kind legt ein Artikelplättchen der, die oder das an ein Nomen wie Hammer, Säge oder Seil. Passt es, sagt der Erzähler das Paar, und Ela hängt das Werkzeug in seinen Umriss an der Werkzeugwand; das Wort kommt auf das Schild darunter. Passt es nicht, gleitet das Plättchen zurück, und auf der Rückseite des Schilds steht als Hilfe der richtige Artikel.",
@@ -37,6 +37,12 @@
       "text": "Die Endung an das Verb legen, und wer gemeint ist, malt.",
       "beschreibung": "Das Kind sitzt mit der Runde am Maltisch und legt Endungen an Verben (du malst, wir malen), Pronomen vor Verben oder tauscht bei der Grundform die Endung gegen -en. Passt es, tun genau die gemeinten Personen es auf dem gemeinsamen Bogen: bei ich malt die eigene Hand, bei du Kofi gegenüber. Passt es nicht, heben die kurz den Stift, zu denen die Endung gehört, und das Plättchen gleitet zurück.",
       "arten": [{ "art": "verbform", "ziele": ["endung", "pronomen", "grundform"], "stufen": ["material", "vorstellung", "kopf"] }],
+      "regal": null },
+    { "id": "wortartsymbole", "probe": true, "titel": "Dreieck und Kreis", "thema": "Nomen und Verben", "kategorie": "grammatik",
+      "symbol": "grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen/symbol.svg", "bild": "grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen/spielbild.webp", "datei": "grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen/index.html",
+      "text": "Dreieck oder Kreis über das Wort legen, Kofi macht die Probe.",
+      "beschreibung": "Das Kind legt Wortartensymbole über Wörter, die Kofi in Kreidekästchen auf den Hof gemalt hat: das Dreieck über Nomen, den Kreis über Verben. Kofi hüpft hin, und die Probe läuft im Bild: der, die oder das davor, oder ich und du mit der passenden Endung. Passt die Probe nicht, rutscht das Symbol zurück, und die Probe ist zu hören.",
+      "arten": [{ "art": "wortart", "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null }
   ]
 }

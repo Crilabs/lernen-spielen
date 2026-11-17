@@ -275,9 +275,10 @@ function spieleDatei(url) {
  * Liest einen Text vor: aus der erzeugten Datei, sonst mit der Systemstimme.
  * Löst auf, wenn die Stimme fertig ist, spätestens nach der Notbremse.
  * @param {string} text
- * @param {{ tempo?: number, hoehe?: number, variante?: string, datei?: boolean }} [optionen]
+ * @param {{ tempo?: number, hoehe?: number, variante?: string, datei?: boolean, beginn?: () => void }} [optionen]
  *   tempo und hoehe gelten nur für die Systemstimme; variante (z. B. "diktat") wählt eine eigene Datei;
- *   datei: false nimmt immer die Systemstimme (Probe im Elternbereich).
+ *   datei: false nimmt immer die Systemstimme (Probe im Elternbereich);
+ *   beginn: wird gerufen, wenn der Satz an der Reihe ist (nach Warten und Lücke), nie für einen abgebrochenen.
  * @returns {Promise<SprichErgebnis>}
  */
 export function sprich(text, optionen = {}) {
@@ -301,16 +302,21 @@ export function sprich(text, optionen = {}) {
 /**
  * Spricht sofort (bricht ab, was gerade läuft).
  * @param {string} text
- * @param {{ tempo?: number, hoehe?: number, variante?: string, datei?: boolean }} [optionen]
+ * @param {{ tempo?: number, hoehe?: number, variante?: string, datei?: boolean, beginn?: () => void }} [optionen]
  * @returns {Promise<SprichErgebnis>}
  */
-async function sprichJetzt(text, { tempo = 0.85, hoehe = 1, variante = "", datei: mitDatei = true } = {}) {
+async function sprichJetzt(text, { tempo = 0.85, hoehe = 1, variante = "", datei: mitDatei = true, beginn } = {}) {
   // Der Prüfstand sieht diese Zeile im Protokoll und meldet sie rot.
   if (laufend && laufenderText && !verlassen && text !== laufenderText && Date.now() - letzteEingabe > EINGABE_FENSTER_MS)
     protokoll(`Satz abgeschnitten: „${laufenderText}“ durch „${text}“`);
   brichAb();   // auch ein stiller Aufruf beendet, was gerade gesprochen wird
   laufenderText = text || "";
   if (!text) return "still";
+  try {
+    beginn?.();
+  } catch (e) {
+    protokoll("beginn fehlgeschlagen: " + e);
+  }
   const meine = nummer;
   const index = mitDatei ? await ladeAudioIndex() : new Map();
   if (meine !== nummer) return "abgebrochen";

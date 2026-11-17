@@ -610,6 +610,75 @@ async function pausenFormate(typ, name, basis) {
   }
 }
 
+// „Weißt du noch?“ in der Pause (Christian, 2026-11-17): ein gestern fertiges Wal-Kapitel bringt seine Frage auf eine
+// eigene Karte statt der Karte des Spiels; alles im Bild, nichts unter den Knöpfen; Wahl erst nach dem Vorlesen; zählt
+// als gestellt; dieselbe Frage kommt am selben Tag nicht noch einmal.
+async function pausenFrage(typ, name, basis) {
+  WEBKIT = name === "webkit";
+  const browser = await starteStumm(typ);
+  const fehlerListe = [];
+  try {
+    for (const [i, groesse] of PAUSE_FORMATE.entries()) {
+      const L = `${name} ${groesse.width}x${groesse.height} Frage`;
+      const rem = groesse.height / 108;
+      const kontext = await browser.newContext({ viewport: groesse, deviceScaleFactor: 1 });
+      await echteDingeTestdaten(kontext);
+      await kontext.addInitScript(() => {
+        if (sessionStorage.getItem("frage-gesetzt")) return;
+        sessionStorage.setItem("frage-gesetzt", "1");
+        localStorage.setItem("lernstand-kind-1-lernplan", JSON.stringify({ version: 1, themen: {}, aufgaben: {}, verlauf: [],
+          buecher: { wal: { kapitel: 1, seite: 0, fertig: [0], am: { 0: "2026-11-01" } } } }));
+      });
+      const seite = await kontext.newPage();
+      seite.on("pageerror", (e) => fehlerListe.push(`Seitenfehler: ${e.message}`));
+      seite.on("console", (m) => { if (m.type() === "error") fehlerListe.push(`Konsole: ${m.text()}`); });
+      await seite.goto(`${URL_VORSCHAU(basis)}?entwurf`, { waitUntil: "load" });
+      await seite.evaluate(async () => { await document.getElementById("leiste").bereit(); await document.fonts.ready; });
+      await tipp(seite.locator("#pausenknopf"));
+      await seite.evaluate(async () => { const p = document.getElementById("pause"); await p.angebotBereit; await p.frageBereit; });
+      await pause(400);
+      const m = await seite.evaluate(() => {
+        const w = document.getElementById("pause").shadowRoot, r = (el) => { const b = el.getBoundingClientRect(); return { l: b.left, r: b.right, o: b.top, u: b.bottom }; };
+        const fk = w.querySelector(".frage-karte"), er = w.querySelector("ls-erinnern").shadowRoot;
+        const echt = w.querySelector("ls-knopf.echt");
+        const knoepfe = [w.querySelector("a.alle .form"), w.querySelector("ls-knopf.weiter").shadowRoot.querySelector(".form"),
+          ...(echt.hidden ? [] : [echt.shadowRoot.querySelector(".form")])].map(r);
+        return { sichtbar: !fk.hidden && getComputedStyle(fk).display !== "none", spielKarte: getComputedStyle(w.querySelector(".karte:not(.frage-karte)")).display,
+          karte: r(fk), letzte: r([...er.querySelectorAll(".antwort")].at(-1)), bild: r(er.querySelector(".bild")), n: er.querySelectorAll(".antwort").length,
+          oben: Math.min(...knoepfe.map((k) => k.o)), titel: w.querySelector(".frage-kopf span").textContent, iw: innerWidth };
+      });
+      pruefe(L, "Frage auf eigener Karte statt der Karte des Spiels, mit Buchtitel und drei Antworten",
+        m.sichtbar && m.spielKarte === "none" && m.n === 3 && /Riesin/.test(m.titel), JSON.stringify(m));
+      pruefe(L, "Foto und alle Antworten in der Karte, Karte frei über den Knöpfen und im Bild",
+        m.letzte.u <= m.karte.u + 1 && m.bild.u <= m.karte.u + 1 && m.karte.u <= m.oben - 2 * rem && m.karte.o >= 0 && m.karte.l >= 0 && m.karte.r <= m.iw, JSON.stringify(m));
+      if (SHOTS) { await mkdir(SHOTS, { recursive: true }); await seite.screenshot({ path: join(SHOTS, `pause-frage-${name}-${groesse.width}x${groesse.height}.png`) }); }
+      if (i === 0) {
+        await seite.evaluate(() => document.getElementById("pause").shadowRoot.querySelector("ls-erinnern").frei);
+        await seite.evaluate(() => document.getElementById("pause").shadowRoot.querySelector("ls-erinnern").shadowRoot.querySelector(".antwort").click());
+        await pause(900);
+        const nach = await seite.evaluate(() => {
+          const w = document.getElementById("pause").shadowRoot, r = (el) => el.getBoundingClientRect();
+          return { auf: r(w.querySelector("ls-erinnern").shadowRoot.querySelector(".aufloesung")).bottom, karte: r(w.querySelector(".frage-karte")).bottom };
+        });
+        pruefe(L, "nach der Wahl: Auflösung ganz in der Karte", nach.auf <= nach.karte + 1, JSON.stringify(nach));
+        if (SHOTS) await seite.screenshot({ path: join(SHOTS, `pause-frage-gewaehlt-${name}-${groesse.width}x${groesse.height}.png`) });
+        const st = await seite.evaluate(() => JSON.parse(localStorage.getItem("lernstand-kind-1-lernplan") ?? "{}").erinnern);
+        pruefe(L, "Wahl zählt als gestellt", !!st?.gestellt?.["wal/0"] && st?.heute?.includes("wal/0"), JSON.stringify(st));
+        await tipp(seite.locator("ls-pause ls-knopf.weiter"));
+        await pause(200);
+        await tipp(seite.locator("#pausenknopf"));
+        await seite.evaluate(() => document.getElementById("pause").frageBereit);
+        const zweite = await seite.evaluate(() => { const w = document.getElementById("pause").shadowRoot; return { frage: !w.querySelector(".frage-karte").hidden }; });
+        pruefe(L, "dieselbe Frage kommt am selben Tag nicht noch einmal", !zweite.frage, JSON.stringify(zweite));
+      }
+      await kontext.close();
+    }
+    pruefe(`${name} Pause mit Frage`, "keine Seiten- oder Konsolenfehler", fehlerListe.length === 0, fehlerListe.join(" | "));
+  } finally {
+    await browser.close();
+  }
+}
+
 const server = await starteServer(WURZEL);
 const basis = `http://127.0.0.1:${server.address().port}`;
 console.log(`Server ${basis}`);
@@ -617,6 +686,7 @@ try {
   for (const [name, typ] of [["chromium", chromium], ["webkit", webkit]]) {
     for (const groesse of AUFLOESUNGEN) await lauf(typ, name, groesse, basis);
     await pausenFormate(typ, name, basis);
+    await pausenFrage(typ, name, basis);
   }
 } catch (e) {
   fehler++;

@@ -9,13 +9,13 @@
 <style>
 /* Startseite „Können“ (Designsprache 2026-11-15, Spec docs/superpowers/specs/2026-11-15-designsprache-design.md §5.2;
    Inhalt nach 2026-11-14-startseite-karten-design.md). Oben die Reiter Können/Wissen, Ton und Zahnrad (ls-kopf).
-   Je Fach der Titel (Fachkachel und Name, Link zur Fach-Seite) und die Spiele als große Plakate (höchstens 5 Spiele und
-   die Karten „Mit echten Dingen“); unten „Zuletzt gelernt“ (führt ins Regal an das Thema) und die Pille
+   Je Fach der Titel (Fachkachel und Name, Link zur Fach-Seite) und die Spiele als große Plakate (höchstens 5 Spiele; „Mit echten
+   Dingen“ erreichen Kinder über das Regal, die Eltern über den Tagesbrief); unten „Zuletzt gelernt“ (führt ins Regal an das Thema) und die Pille
    „Was ich schon kann“. Dahinter das Grundmuster Hügel. Kein Plakat ist hervorgehoben; keine Zahl, keine Zählung,
    kein Klassenbezug (N5, N8). Diese Seite liest den Lernstand nur, sie schreibt ihn nie.
    Spielzeit der Eltern (Spec 2026-11-14-spielzeit, 2026-11-16-buecherzeit): Die Startseite ist nie gesperrt. Ist die
    Zeit um oder der Tag gesperrt, tragen die Spielkarten eine Uhr; ein Tippen zeigt den Hinweis (rahmen/zeitsperre.js).
-   Von den Eltern ausgeblendet fehlen sie. „Mit echten Dingen“, die Fächer und „Zuletzt gelernt“ bleiben.
+   Von den Eltern ausgeblendet fehlen sie. Die Fächer und „Zuletzt gelernt“ bleiben.
    Zahnrad für Erwachsene rechts im Kopf (rahmen/zahnrad.js): gedrückt halten, dabei läuft leise ein Ring herum. */
 body { -webkit-user-select: none; user-select: none; }
 
@@ -62,8 +62,6 @@ body { -webkit-user-select: none; user-select: none; }
 .start .karten .karte:active { transform: translateY(0.35rem); box-shadow: 0 0.35rem 0 var(--fach-tief); }
 /* Sonnenring nur als Fokus (hier bist du), nie als Empfehlung. */
 .start .karten .karte:focus-visible { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0.6rem; }
-.start .karten .karte.echt::after { border-radius: calc(var(--ls-radius-teil) - 1rem); }
-.start .karten .karte.echt .bild img { width: 9rem; height: 9rem; }
 
 /* --- Unten: Zuletzt gelernt und Was ich schon kann ---------------------------------------------- */
 .unten { display: flex; align-items: flex-end; gap: 3.6rem; padding: 1.6rem var(--ls-seite-rand) 4.2rem; min-width: 0; }
@@ -130,16 +128,17 @@ import "./rahmen/wortart.js";
 import "./objekte/objekt.js";
 import { startKarten } from "./start/auswahl.js";
 import { paletteFuer, vignetteSvg } from "./start/welten.js";
-import { spielKarteHtml, echtKarteHtml, echtBildHtml, abschnittHtml } from "./start/karten.js";
+import { spielKarteHtml, abschnittHtml } from "./start/karten.js";
 import { zuletztHtml } from "./start/regal-leiste.js";
 import { spielzeitLage } from "./rahmen/spielzeit.js";
 import { sperre, satzFuer } from "./rahmen/zeitsperre.js";
 import { zahnrad } from "./rahmen/zahnrad.js";
-import { ladeVerzeichnis, fotoUrl } from "./rahmen/echte-dinge.js";
+import { beimStart as tagesbriefBeimStart } from "./tagesbrief/anbindung.js";
 
 sperreTouch();
 const leiste = document.getElementById("leiste");
 zahnrad(document.getElementById("zahnrad"));
+tagesbriefBeimStart(); // liegengebliebene Brief-Ereignisse abschicken, ohne zu warten (wirft nie)
 start();
 
 async function start() {
@@ -167,7 +166,7 @@ async function start() {
     (spieleZeigen ? f.spiele : []).map((k) => {
       const palette = paletteFuer(ctx, k.spiel.karte?.welt ?? k.spiel.welt);
       return spielKarteHtml(k, f.fach, palette ? vignetteSvg(palette) : null);
-    }).join("") + f.echt.map((k) => echtKarteHtml(k, f.fach)).join(""))).join("")
+    }).join(""))).join("")
     : `<p class="leer">Hier kommen bald Spiele.</p>`;
   if (!spielFrei) {
     raster.querySelectorAll("a.karte.spiel").forEach((a) => sperre(a, a.querySelector(".bild"), satzFuer(zeit.lage.grund), () => leiste.ton));
@@ -187,18 +186,6 @@ async function start() {
     if (leiste.ton) sageEinmal(wort, () => sprich(wort));
     linkKlick(e);
   }));
-
-  // Mit echten Dingen: Karten führen zur eigenen Seite; gibt es eine Anleitung, steht ihr Titel auf der Karte.
-  const echtKarten = [...raster.querySelectorAll("a.karte.echt")];
-  echtKarten.forEach((a) => nenne(a, "Mit echten Dingen"));
-  // Den Titel nennt das Verzeichnis (nur freigegebene Anleitungen, npm run echte-dinge); ohne bleibt „Mit echten Dingen“.
-  const { themen } = echtKarten.length ? await ladeVerzeichnis() : { themen: {} };
-  echtKarten.forEach((a) => {
-    const t = themaNach.get(a.dataset.thema);
-    const e = t && Object.hasOwn(themen, t.id) ? themen[t.id] : null;
-    if (e && e.fach === t.strang && e.titel) a.querySelector("b").textContent = e.titel;
-    if (e && e.fach === t.strang && fotoUrl(e)) a.querySelector(".bild").outerHTML = echtBildHtml(fotoUrl(e));
-  });
 }
 
 // Name beim ersten Tippen je Sitzung; der Link wechselt sofort (vorher speichern über linkKlick).

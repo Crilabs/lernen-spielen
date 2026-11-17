@@ -4,7 +4,7 @@ import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { ladeAuftraege, neuerAuftrag, speichereAuftraege } from "../werkzeuge/verwaltung/auftraege.mjs";
-import { anhalten, arbeiteAb, gibSperreFrei, nimmSperre, pfade, sperre, transkriptPfad } from "../werkzeuge/verwaltung/lauf.mjs";
+import { anhalten, arbeiteAb, fuehreIdeenAus, gibSperreFrei, nimmSperre, pfade, sperre, transkriptPfad } from "../werkzeuge/verwaltung/lauf.mjs";
 
 const ordner = () => mkdtempSync(join(tmpdir(), "lauf-"));
 const auftrag = (art, ziel) => neuerAuftrag({ art, ziel }, new Date());
@@ -150,5 +150,38 @@ test("letzterLaufFehler: Fehlerzeile aus lauf.log, sonst null", async () => {
   assert.equal(letzterLaufFehler(o), "Es läuft schon ein Lauf (Sperre .lauf.lock).");
   writeFileSync(join(o, "protokolle", "lauf.log"), "Start\n");
   assert.equal(letzterLaufFehler(o), null);
+  rmSync(o, { recursive: true });
+});
+
+// Ideen laufen sofort und neben der Warteschlange (Christian, 2026-11-17): die Warteschlange fasst sie nie an.
+test("arbeiteAb: überspringt Ideen-Aufträge und lässt laufende Ideen in Ruhe", async () => {
+  const o = ordner();
+  const ideeWartet = auftrag("ideen", "G05");
+  const ideeLaeuft = { ...auftrag("ideen", "G06"), status: "laeuft" };
+  mitAuftraegen(o, [ideeWartet, ideeLaeuft, auftrag("frei", "eins")]);
+  const reihe = [];
+  await arbeiteAb({ ordner: o, wurzel: o, starte: fake(o, { eins: { status: "erledigt" } }, reihe) });
+  assert.deepEqual(reihe, ["eins"]);
+  assert.deepEqual(ladeAuftraege(pfade(o).auftraege).map((a) => a.status), ["wartet", "laeuft", "erledigt"]);
+  rmSync(o, { recursive: true });
+});
+
+test("fuehreIdeenAus: ohne Sperre, Status läuft → wartet auf Christian, Ergebnis gespeichert", async () => {
+  const o = ordner();
+  const [x] = mitAuftraegen(o, [auftrag("ideen", "G05")]);
+  nimmSperre(o, { pid: process.pid, wer: "seite" }); // Warteschlange läuft gerade – Ideen trotzdem
+  let waehrend;
+  const ergebnis = { status: "geparkt", ideen: [{ titel: "A", text: "a" }] };
+  await fuehreIdeenAus({ ordner: o, wurzel: o, id: x.id, starte: async (p) => {
+    waehrend = ladeAuftraege(pfade(o).auftraege)[0].status;
+    return fake(o, { "Spielideen G05": ergebnis })(p);
+  } });
+  assert.equal(waehrend, "laeuft");
+  const [a] = ladeAuftraege(pfade(o).auftraege);
+  assert.equal(a.status, "wartet-auf-christian");
+  assert.deepEqual(a.ergebnis, ergebnis);
+  assert.ok(sperre(o), "Sperre der Warteschlange bleibt unberührt");
+  gibSperreFrei(o);
+  await assert.rejects(fuehreIdeenAus({ ordner: o, wurzel: o, id: x.id, starte: fake(o, {}) }), /wartet nicht/);
   rmSync(o, { recursive: true });
 });

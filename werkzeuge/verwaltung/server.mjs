@@ -3,11 +3,11 @@
 // Nur an 127.0.0.1. Liest das Repo bei jedem Aufruf neu; schreibt nur die Warteschlange.
 
 import { spawn } from "node:child_process";
-import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readSync, statSync } from "node:fs";
+import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readSync, statSync, writeFileSync } from "node:fs";
 import { createServer } from "node:http";
 import { dirname, extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { beantworte, ladeAuftraege, lehneAb, neuerAuftrag, speichereAuftraege, streiche, verschiebe } from "./auftraege.mjs";
+import { aendereAuftraege, beantworte, ladeAuftraege, mitSperre, lehneAb, neuerAuftrag, speichereAuftraege, streiche, verschiebe, waehleIdee } from "./auftraege.mjs";
 import { baueUebersicht, liesQuellen } from "./daten.mjs";
 import { ProbeZustand, schliesseProbeAb } from "./proben.mjs";
 import { ORDNER, WURZEL, anhalten, laufLog, letzterLaufFehler, pfade, sperre } from "./lauf.mjs";
@@ -29,11 +29,31 @@ export function starteLaufGetrennt() {
   kind.unref();
 }
 
+/** Startet einen Ideen-Auftrag sofort als eigenen Prozess, neben der Warteschlange. */
+export function starteIdeenGetrennt(id) {
+  const log = join(ORDNER, "protokolle", `${id}.prozess.log`);
+  mkdirSync(dirname(log), { recursive: true });
+  const fd = openSync(log, "w");
+  const kind = spawn(process.execPath, [join(ORDNER, "lauf.mjs"), "ideen", id], { cwd: WURZEL, detached: true, stdio: ["ignore", fd, fd] });
+  closeSync(fd);
+  kind.unref();
+}
+
 /** Schätzung in Euro für einen neuen Auftrag (null = unbekannt). */
+/** Ideen-Auftrag: ein Agent, drei Skizzen (Spec 2026-11-17). */
+export const SCHAETZUNG_IDEEN = 1;
+
+/** Ideen nur für Spiele, die noch nicht gebaut oder beauftragt sind (Christian, 2026-11-17); null = in Ordnung. */
+export function ideenZielFehler(uebersicht, ziel) {
+  const status = uebersicht.spiele[ziel]?.status ?? "unbekannt";
+  return status === "geplant" ? null : `Ideen nur für Spiele, die noch nicht gebaut oder beauftragt sind (${ziel}: ${status})`;
+}
+
 export function schaetze(uebersicht, art, ziel) {
   const s = uebersicht.schaetzung;
   if (art === "spiel") return s.spiel;
   if (art === "buch") return s.buch;
+  if (art === "ideen") return SCHAETZUNG_IDEEN;
   if (art === "echte-dinge") return s.echteDingeJeThema === null ? null : s.echteDingeJeThema * (Array.isArray(ziel) ? ziel.length : 1);
   return null;
 }
@@ -58,7 +78,7 @@ export function pruefeHerkunft(req) {
   return 0;
 }
 
-export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = starteLaufGetrennt } = {}) {
+export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = starteLaufGetrennt, starteIdeen = starteIdeenGetrennt } = {}) {
   const p = pfade(ordner);
   const auftraege = () => ladeAuftraege(p.auftraege);
   const uebersicht = () => baueUebersicht(liesQuellen(wurzel), auftraege());
@@ -99,20 +119,26 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
         const { art, ziel } = await koerper();
         let a;
         try { a = neuerAuftrag({ art, ziel, schaetzung_eur: null }); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
+        const fehler = a.art === "ideen" ? ideenZielFehler(uebersicht(), a.ziel) : null;
+        if (fehler) return antwort(400, { fehler });
         a.schaetzung_eur = schaetze(uebersicht(), a.art, a.ziel);
-        speichereAuftraege(p.auftraege, [...auftraege(), a]);
+        aendereAuftraege(p.auftraege, (l) => [...l, a]);
+        if (a.art === "ideen") starteIdeen(a.id); // sofort, nicht über die Warteschlange (Christian, 2026-11-17)
         return antwort(201, a);
       }
       const m = pfad.match(/^\/api\/auftraege\/([^/]+)\/(hoch|runter|streichen)$/);
-      if (post && m) {
+      if (post && m) return mitSperre(p.auftraege, () => {
         const l = auftraege();
         if (!l.some((a) => a.id === m[1])) return antwort(404, { fehler: "Auftrag nicht gefunden" });
         const neu = m[2] === "streichen" ? streiche(l, m[1]) : verschiebe(l, m[1], m[2] === "hoch" ? -1 : 1);
         speichereAuftraege(p.auftraege, neu);
         return antwort(200, { auftraege: neu });
-      }
+      });
       const ant = pfad.match(/^\/api\/auftraege\/([^/]+)\/(antwort|ablehnen)$/);
       if (post && ant) {
+        // Körper zuerst, dann Prüfen und Schreiben ohne await unter der Sperre (wie bei der Wahl).
+        const text = ant[2] === "antwort" ? (await koerper()).text : null;
+        return mitSperre(p.auftraege, () => {
         const l = auftraege();
         const alt = l.find((a) => a.id === ant[1]);
         if (!alt) return antwort(404, { fehler: "Auftrag nicht gefunden" });
@@ -123,9 +149,28 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
           return antwort(200, { auftraege: neu });
         }
         let r;
-        try { r = beantworte(l, alt.id, (await koerper()).text); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
+        try { r = beantworte(l, alt.id, text); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
         speichereAuftraege(p.auftraege, r.liste);
         return antwort(201, r.neu);
+        });
+      }
+      const wahl = pfad.match(/^\/api\/auftraege\/([^/]+)\/wahl$/);
+      if (post && wahl) {
+        // Erst den Körper lesen, dann prüfen und speichern ohne await dazwischen: Zwei schnelle Wahlen (Doppelklick,
+        // zweiter Tab) sehen so nie beide „wartet auf Christian“ (Review 2026-11-17).
+        const daten = await koerper();
+        return mitSperre(p.auftraege, () => {
+        const l = auftraege();
+        const alt = l.find((a) => a.id === wahl[1]);
+        if (!alt) return antwort(404, { fehler: "Auftrag nicht gefunden" });
+        if (alt.status !== "wartet-auf-christian") return antwort(409, { fehler: "Auftrag wartet nicht auf eine Antwort" });
+        let r;
+        try { r = waehleIdee(l, alt.id, daten); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
+        mkdirSync(dirname(p.vorgabe(r.neu.id)), { recursive: true });
+        writeFileSync(p.vorgabe(r.neu.id), r.neu.vorgabe);
+        speichereAuftraege(p.auftraege, r.liste);
+        return antwort(201, r.neu);
+        });
       }
       const pb = pfad.match(/^\/api\/proben\/([A-Z]\d+)\/abschliessen$/);
       if (post && pb) {
