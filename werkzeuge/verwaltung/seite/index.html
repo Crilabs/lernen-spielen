@@ -14,6 +14,7 @@
     <button role="tab" data-reiter="spiele" aria-selected="true">Spiele</button>
     <button role="tab" data-reiter="bibliothek">Bibliothek</button>
     <button role="tab" data-reiter="auftraege">Aufträge <span id="zahl-offen" class="zahl"></span></button>
+    <button role="tab" data-reiter="ideen">Ideen <span id="zahl-ideen" class="zahl"></span></button>
     <button role="tab" data-reiter="proben">Proben <span id="zahl-proben" class="zahl"></span></button>
     <button role="tab" data-reiter="kosten">Kosten</button>
   </nav>
@@ -38,22 +39,11 @@
   <section id="spiele" class="ansicht"></section>
   <section id="bibliothek" class="ansicht" hidden></section>
   <section id="auftraege" class="ansicht" hidden></section>
+  <section id="ideen" class="ansicht" hidden></section>
   <section id="proben" class="ansicht" hidden></section>
   <section id="kosten" class="ansicht" hidden></section>
 </main>
 
-<dialog id="eigene-idee">
-  <form method="dialog">
-    <h2>Eigene Idee</h2>
-    <p class="leise-text">Deine Idee wird die Vorgabe für den Bau. Du kannst dich auf die Karten beziehen („die zweite, aber mit dem Hund aus der ersten“).</p>
-    <textarea id="e-text" rows="8" cols="60" maxlength="4000" placeholder="Held, was das Kind tut, was dann passiert …"></textarea>
-    <p class="leise-text">Der Spiel-Auftrag kommt direkt hinter diesen Auftrag in die Warteschlange.</p>
-    <menu>
-      <button value="nein">Abbrechen</button>
-      <button value="ja" class="haupt">Diese Idee bauen</button>
-    </menu>
-  </form>
-</dialog>
 <dialog id="antworten">
   <form method="dialog">
     <h2>Antworten</h2>

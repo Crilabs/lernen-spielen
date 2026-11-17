@@ -137,3 +137,11 @@ test("baueUebersicht: offener Ideen-Auftrag macht das Spiel „beauftragt“, er
   assert.equal(baueUebersicht(quellen(), [{ art: "ideen", ziel: "M01", status: "wartet-auf-christian" }]).spiele.M01.status, "beauftragt");
   assert.equal(baueUebersicht(quellen(), [{ art: "ideen", ziel: "M01", status: "beantwortet" }]).spiele.M01.status, "geplant");
 });
+
+test("baueUebersicht: Lernthemen tragen Ziel, Beispiele und Zweck für die Ideen-Ansicht", () => {
+  const u = baueUebersicht(liesQuellen(WURZEL), []);
+  const mitZiel = u.lernthemen.find((t) => t.ziel);
+  assert.ok(mitZiel, "mindestens ein Thema mit Ziel");
+  assert.ok(Array.isArray(mitZiel.beispiele));
+  assert.ok("zweck" in mitZiel);
+});

@@ -38,11 +38,17 @@ test("Skill spielideen: jeder genannte Pfad im Repo existiert", () => {
   assert.deepEqual(fehlt, []);
 });
 
-test("Seite: Ideen-Knopf, Karten und Wahl", () => {
+// Eigene Ansicht „Ideen“ zwischen Aufträgen und Proben (Christian, 2026-11-17): Lernthema oben, drei Karten und die
+// eigene Idee als gleichwertige vierte Spalte zum Eintippen, Kreis mit der Zahl offener Ideen.
+test("Seite: Ansicht Ideen mit Lernthema, vier Spalten und Zähler", () => {
   const app = lies("werkzeuge/verwaltung/seite/app.js");
-  for (const x of ['data-auftrag="ideen"', "/wahl", "ideen-karten", 'ideen: "Ideen"', "data-wahl-karte", "data-eigene-idee"]) assert.ok(app.includes(x), x);
-  assert.match(lies("werkzeuge/verwaltung/seite/index.html"), /id="eigene-idee"/);
-  assert.match(lies("werkzeuge/verwaltung/seite/stil.css"), /\.ideen-karten/);
+  const html = lies("werkzeuge/verwaltung/seite/index.html");
+  for (const x of ['data-auftrag="ideen"', "/wahl", "ideen-karten", 'ideen: "Ideen"', "data-wahl-karte", "data-eigene-bauen", "function zeigeIdeen", "zahl-ideen", ".ziel"]) assert.ok(app.includes(x), x);
+  assert.ok(html.indexOf('data-reiter="auftraege"') < html.indexOf('data-reiter="ideen"') && html.indexOf('data-reiter="ideen"') < html.indexOf('data-reiter="proben"'), "Reiter zwischen Aufträge und Proben");
+  assert.match(html, /<span id="zahl-ideen" class="zahl"><\/span>/);
+  assert.match(html, /<section id="ideen" class="ansicht" hidden>/);
+  assert.ok(!html.includes('id="eigene-idee"'), "kein Dialog mehr – die eigene Idee ist die vierte Spalte");
+  assert.match(lies("werkzeuge/verwaltung/seite/stil.css"), /\.ideen-karten[^{]*\{[^}]*repeat\(4/);
 });
 
 // Review 2026-11-17: Kosten im Hauptrepo machten main schmutzig, danach mergte der Abschluss kein Spiel mehr.

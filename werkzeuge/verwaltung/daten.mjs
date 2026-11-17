@@ -110,6 +110,7 @@ export function baueUebersicht(q, auftraege) {
     const echteDinge = v ? (v.entwurf ? "entwurf" : "fertig") : beauftragt("echte-dinge", t.id) ? "beauftragt" : "fehlt";
     return {
       id: t.id, name: t.name, strang: t.strang, klasse: t.klasse, bereich: t.bereich,
+      ziel: t.ziel ?? null, beispiele: t.beispiele ?? [], zweck: t.zweck ?? null,
       spiele: spieleJeThema.get(t.id) ?? [],
       echteDinge, echteDingeEur: echtEur.get(t.id) ?? null,
       einfuehrung: t.einfuehrung?.vorlage ?? null,
