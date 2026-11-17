@@ -36,6 +36,7 @@ afterEach(async () => {
 const post = (pfad, koerper, kopf = KOPF) => fetch(t.url + pfad, { method: "POST", headers: kopf, body: JSON.stringify(koerper) });
 const bearer = (s) => ({ ...KOPF, authorization: `Bearer ${s}` });
 const speicher = () => JSON.parse(readFileSync(t.datei, "utf8"));
+const fam = (adresse = ADRESSE) => Object.values(speicher().familien).find((f) => adresse in f.empfaenger);
 
 async function einrichten(adresse = ADRESSE, uhrzeit = "18:00") {
   const { anfrageId } = await (await post("/anmelden", { adresse, name: "Mia", uhrzeit })).json();
@@ -60,7 +61,7 @@ test("vor der Uhrzeit nichts, um 18:00 genau ein Brief; Links ersetzt, Topf leer
   assert.equal(m.foto, "QUJD");
   assert.ok(!m.html.includes("{{"));
   assert.match(m.html, /http:\/\/basis\/abmelden\?t=/);
-  const a = speicher().adressen[ADRESSE];
+  const a = fam();
   assert.deepEqual(a.topf, { ids: [], gekonnt: [], dabei: [], gelesen: [], naechstes: null, seit: null });
   assert.equal(a.verschickt.length, 1);
   assert.equal(a.verschickt[0].anleitung, "mathe/neunerreihe.md");
@@ -87,7 +88,7 @@ test("Topf nur mit naechstes: kein Brief, Topf bleibt", async () => {
   jetzt = new Date("2026-11-17T17:30:00Z");
   assert.equal(await t.dienst.pruefeFaellige(), 0);
   assert.equal(t.mails.length, vorher);
-  assert.equal(speicher().adressen[ADRESSE].topf.naechstes.id, "a.md");
+  assert.equal(fam().topf.naechstes.id, "a.md");
 });
 
 test("Topf älter als 48 Stunden ohne Versand wird gelöscht", async () => {
@@ -95,8 +96,8 @@ test("Topf älter als 48 Stunden ohne Versand wird gelöscht", async () => {
   await push(s, [{ id: "n1", art: "naechstes", daten: naechstes("a.md") }]);
   jetzt = new Date("2026-11-19T10:01:00Z");
   await t.dienst.pruefeFaellige();
-  assert.equal(speicher().adressen[ADRESSE].topf.seit, null);
-  assert.equal(speicher().adressen[ADRESSE].topf.naechstes, null);
+  assert.equal(fam().topf.seit, null);
+  assert.equal(fam().topf.naechstes, null);
 });
 
 test("Sommerzeit: 16:00 UTC am 29.3.2026 ist 18:00 MESZ", async () => {
@@ -133,10 +134,9 @@ test("Fehler beim Senden: Topf bleibt, die anderen Adressen bekommen ihren Brief
   assert.equal(await t.dienst.pruefeFaellige(), 1);
   assert.equal(t.mails.length, vorher + 1);
   assert.equal(t.mails.at(-1).an, "b@example.org");
-  const d = speicher().adressen;
-  assert.equal(d["a@example.org"].topf.gekonnt.length, 1, "Topf bleibt");
-  assert.ok(d["a@example.org"].topf.seit);
-  assert.equal(d["b@example.org"].topf.gekonnt.length, 0);
+  assert.equal(fam("a@example.org").topf.gekonnt.length, 1, "Topf bleibt");
+  assert.ok(fam("a@example.org").topf.seit);
+  assert.equal(fam("b@example.org").topf.gekonnt.length, 0);
   const protokoll = log.join("\n");
   assert.match(protokoll, /Error ECONNRESET/);
   assert.ok(!protokoll.includes("example.org") && !protokoll.includes("Plus") && !protokoll.includes("kaputt"));
@@ -164,7 +164,7 @@ test("Eingangsprüfung: ungültige Ereignisse geben 400, nichts wird gespeichert
     { id: 7, art: "gekonnt", daten: gut.daten },
   ];
   for (const e of ungueltig) assert.equal((await push(s, [gut, e])).status, 400, JSON.stringify(e).slice(0, 80));
-  assert.equal(speicher().adressen[ADRESSE].topf.gekonnt.length, 0, "auch das gültige Ereignis wird nicht gespeichert");
+  assert.equal(fam().topf.gekonnt.length, 0, "auch das gültige Ereignis wird nicht gespeichert");
   assert.equal((await push(s, [gut, { id: "n", art: "naechstes", daten: naechstes("a", { foto: "QUJD" }) }])).status, 200);
 });
 
@@ -175,7 +175,7 @@ test("Probebrief sendet sofort, leert den Topf nicht, 4. am Tag 429", async () =
   assert.equal((await post("/probebrief", {}, bearer(s))).status, 200);
   assert.equal(t.mails.length, vorher + 1);
   assert.ok(!t.mails.at(-1).html.includes("{{"));
-  assert.equal(speicher().adressen[ADRESSE].topf.gekonnt.length, 1);
+  assert.equal(fam().topf.gekonnt.length, 1);
   await post("/probebrief", {}, bearer(s));
   await post("/probebrief", {}, bearer(s));
   assert.equal((await post("/probebrief", {}, bearer(s))).status, 429);
@@ -206,7 +206,7 @@ test("Push 17:00 und 18:05: der Brief um 18:00 enthält nur das frühere, das sp
   const m = t.mails.at(-1);
   assert.match(m.text, /Frühes/);
   assert.ok(!m.text.includes("Spätes"));
-  assert.deepEqual(speicher().adressen[ADRESSE].topf.gekonnt.map((x) => x.id), ["b"]);
+  assert.deepEqual(fam().topf.gekonnt.map((x) => x.id), ["b"]);
   jetzt = new Date("2026-11-18T17:00:00Z");
   assert.equal(await t.dienst.pruefeFaellige(), 1);
   assert.match(t.mails.at(-1).text, /Spätes/);
@@ -251,7 +251,7 @@ test("Wiederholung: höchstens fünf Versuche am Tag, Abstand 15 Minuten, am nä
   }
   versuche = log.slice(vorher).filter((z) => /Versand fehlgeschlagen/.test(z)).length;
   assert.equal(versuche, 5);
-  assert.equal(speicher().adressen[ADRESSE].topf.gekonnt.length, 1, "Topf bleibt");
+  assert.equal(fam().topf.gekonnt.length, 1, "Topf bleibt");
   sendeFehler.clear();
   jetzt = new Date("2026-11-18T17:00:00Z");
   assert.equal(await t.dienst.pruefeFaellige(), 1);
@@ -291,19 +291,127 @@ test("Anleitung A um 17:00, B um 18:05: Brief um 18:30 hat A, der Brief am näch
   await push(s, [{ id: "n-b", art: "naechstes", daten: naechstes("mathe/b.md") }]);
   jetzt = new Date("2026-11-17T17:30:00Z");
   assert.equal(await t.dienst.pruefeFaellige(), 1);
-  assert.deepEqual(speicher().adressen[ADRESSE].verschickt.map((v) => v.anleitung), ["mathe/a.md"]);
-  assert.equal(speicher().adressen[ADRESSE].topf.naechstes.id, "mathe/b.md", "B rückt nach");
+  assert.deepEqual(fam().verschickt.map((v) => v.anleitung), ["mathe/a.md"]);
+  assert.equal(fam().topf.naechstes.id, "mathe/b.md", "B rückt nach");
   jetzt = new Date("2026-11-18T10:00:00Z");
   await push(s, [gekonnt("g2")]);
   jetzt = new Date("2026-11-18T17:00:00Z");
   assert.equal(await t.dienst.pruefeFaellige(), 1);
-  assert.deepEqual(speicher().adressen[ADRESSE].verschickt.map((v) => v.anleitung), ["mathe/a.md", "mathe/b.md"]);
+  assert.deepEqual(fam().verschickt.map((v) => v.anleitung), ["mathe/a.md", "mathe/b.md"]);
 });
 
-test("briefTopf: gleiche Kindernamen mehrerer Geräte erscheinen nur einmal", async () => {
+test("briefTopf: der eine Name der Familie, ohne Namen leer", async () => {
   const { briefTopf } = await import("../dienste/tagesbrief/speicher.js");
   const topf = { gekonnt: [], dabei: [], gelesen: [], naechstes: null };
-  const namen = (n) => briefTopf({ namen: n, topf }).namen;
-  assert.deepEqual(namen({ a: "Mila", b: " mila ", c: "MILA" }), ["Mila"]);
-  assert.deepEqual(namen({ a: "Mila", b: "Noah", c: "mila", d: "" }), ["Mila", "Noah"]);
+  assert.deepEqual(briefTopf({ name: " Mila ", topf }).namen, ["Mila"]);
+  assert.deepEqual(briefTopf({ name: "", topf }).namen, []);
+});
+
+/** Familie mit Gerät und weiteren bestätigten Empfängern; liefert den Schlüssel. */
+async function mitEmpfaengern(...weitere) {
+  const s = await einrichten();
+  for (const a of weitere) {
+    await post("/empfaenger", { adresse: a }, bearer(s));
+    const token = /bestaetigen\?t=([\w-]+)/.exec(t.mails.at(-1).text)[1];
+    await fetch(t.url + "/bestaetigen", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ t: token }).toString() });
+  }
+  return s;
+}
+
+test("Versand je Empfänger: eigene Mail, eigener Abbestell-Link, nie mehrere im An, Topf danach leer", async () => {
+  const s = await mitEmpfaengern("zwei@example.org", "drei@example.org");
+  await push(s, [gekonnt()]);
+  const vorher = t.mails.length;
+  jetzt = new Date("2026-11-17T17:00:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 3);
+  const neu = t.mails.slice(vorher);
+  assert.deepEqual(neu.map((m) => m.an).sort(), ["drei@example.org", ADRESSE, "zwei@example.org"]);
+  const links = neu.map((m) => /abmelden\?t=([\w-]+)/.exec(m.text)[1]);
+  assert.equal(new Set(links).size, 3, "je Empfänger ein eigener Link");
+  for (const m of neu) assert.ok(!m.an.includes(","), "ein Empfänger je Mail");
+  assert.equal(fam().topf.gekonnt.length, 0);
+  assert.equal(await t.dienst.pruefeFaellige(), 0, "einmal am Tag je Familie");
+});
+
+test("Versand: wartende Adresse bekommt nichts", async () => {
+  const s = await einrichten();
+  await post("/empfaenger", { adresse: "wartet@example.org" }, bearer(s));
+  await push(s, [gekonnt()]);
+  const vorher = t.mails.length;
+  jetzt = new Date("2026-11-17T17:00:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+  assert.ok(t.mails.slice(vorher).every((m) => m.an === ADRESSE));
+});
+
+test("Fehler bei einem Empfänger: nur dieser wird wiederholt, Topf erst danach leer, kein zweiter Brief an die anderen", async () => {
+  const s = await mitEmpfaengern("zwei@example.org");
+  await push(s, [gekonnt()]);
+  const vorher = t.mails.length;
+  sendeFehler.add("zwei@example.org");
+  jetzt = new Date("2026-11-17T17:00:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+  assert.equal(fam().topf.gekonnt.length, 1, "Topf bleibt, solange ein Empfänger offen ist");
+  sendeFehler.clear();
+  jetzt = new Date("2026-11-17T17:01:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 0, "vor Ablauf der 15 Minuten kein Versuch");
+  jetzt = new Date("2026-11-17T17:15:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+  assert.deepEqual(t.mails.slice(vorher).map((m) => m.an).sort(), [ADRESSE, "zwei@example.org"], "jeder genau einen Brief");
+  assert.equal(fam().topf.gekonnt.length, 0);
+  assert.equal(await t.dienst.pruefeFaellige(), 0);
+});
+
+test("Ein Empfänger mit aufgebrauchten Versuchen hält den Topf nicht fest, die anderen haben den Brief", async () => {
+  const s = await mitEmpfaengern("kaputt@example.org");
+  await push(s, [gekonnt()]);
+  sendeFehler.add("kaputt@example.org");
+  const vorher = t.mails.length;
+  for (let minute = 0; minute < 8 * 60; minute++) {
+    jetzt = new Date(Date.parse("2026-11-17T17:00:00Z") + minute * 60_000);
+    await t.dienst.pruefeFaellige();
+  }
+  assert.equal(log.filter((z) => /Versand fehlgeschlagen/.test(z)).length, 5);
+  assert.deepEqual(t.mails.slice(vorher).map((m) => m.an), [ADRESSE]);
+  assert.equal(fam().topf.gekonnt.length, 0);
+});
+
+test("Probebrief geht an alle bestätigten Empfänger mit eigenem Link und zählt einmal gegen die Tagesgrenze", async () => {
+  const s = await mitEmpfaengern("zwei@example.org");
+  await push(s, [gekonnt()]);
+  const vorher = t.mails.length;
+  assert.equal((await post("/probebrief", {}, bearer(s))).status, 200);
+  const neu = t.mails.slice(vorher);
+  assert.deepEqual(neu.map((m) => m.an).sort(), [ADRESSE, "zwei@example.org"]);
+  assert.notEqual(/abmelden\?t=([\w-]+)/.exec(neu[0].text)[1], /abmelden\?t=([\w-]+)/.exec(neu[1].text)[1]);
+  await post("/probebrief", {}, bearer(s));
+  await post("/probebrief", {}, bearer(s));
+  assert.equal((await post("/probebrief", {}, bearer(s))).status, 429);
+});
+
+test("Später Brief, Wiederholung über Mitternacht: offener Lauf vom Vortag wird geschlossen, jeder bekommt je Tag genau einen Brief", async () => {
+  const s = await mitEmpfaengern("zwei@example.org");
+  await post("/einstellungen", { uhrzeit: "23:30" }, bearer(s));
+  jetzt = new Date("2026-11-17T20:00:00Z"); // 21:00 Berlin
+  await push(s, [gekonnt("g1")]);
+  const vorher = t.mails.length;
+  sendeFehler.add("zwei@example.org");
+  jetzt = new Date("2026-11-17T22:30:00Z"); // 23:30 Berlin
+  assert.equal(await t.dienst.pruefeFaellige(), 1);
+  jetzt = new Date("2026-11-17T22:45:00Z"); // 23:45 Berlin, zweiter Fehlschlag
+  assert.equal(await t.dienst.pruefeFaellige(), 0);
+  sendeFehler.clear();
+  jetzt = new Date("2026-11-18T08:00:00Z");
+  await push(s, [gekonnt("g2")]);
+  jetzt = new Date("2026-11-18T09:00:00Z"); // 10:00 Berlin, vor der Uhrzeit: nichts, der Vortag ist aber schon zu
+  assert.equal(await t.dienst.pruefeFaellige(), 0);
+  assert.equal(fam().letzterTag, "2026-11-17", "Lauf vom Vortag geschlossen");
+  assert.deepEqual(fam().topf.gekonnt.map((e) => e.id), ["g2"], "nur das Verschickte aus dem Topf entfernt");
+  jetzt = new Date("2026-11-18T22:30:00Z");
+  assert.equal(await t.dienst.pruefeFaellige(), 2);
+  const mails = t.mails.slice(vorher);
+  assert.equal(mails.length, 3);
+  assert.deepEqual(mails.filter((m) => m.an === ADRESSE).length, 2, "A: ein Brief je Tag");
+  assert.equal(mails.filter((m) => m.an === "zwei@example.org").length, 1, "B: nur der Brief vom neuen Tag");
+  assert.equal(fam().topf.gekonnt.length, 0);
+  assert.equal(await t.dienst.pruefeFaellige(), 0, "nichts doppelt am selben Tag");
 });

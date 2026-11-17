@@ -1,13 +1,14 @@
 // Versanddienst des Tagesbriefs (Spec „Versanddienst“): Anmeldung mit Bestätigungslink, Ereignisse in den Topf der
-// bestätigten Adresse, Einstellungen, Probebrief, Abmelden. Der Versand zur Uhrzeit folgt in `pruefeFaellige`.
-// Kernregel: Ein Gerät kann nur in den Topf der Adresse pushen, die es bestätigt hat; Empfänger stehen nie in einer Anfrage.
+// Familie, Empfänger (bis 4 je Familie), Einstellungen, Probebrief, Abmelden. Der Versand zur Uhrzeit folgt in `pruefeFaellige`.
+// Kernregel: Ein Gerät kann nur in den Topf seiner Familie pushen; Empfänger stehen nie in einem Ereignis-Körper, nur die
+// zu bestätigende Adresse in /anmelden bzw. /empfaenger, und Briefe gehen nur an bestätigte Adressen.
 import { createServer } from "node:http";
 import { setzeBrief } from "../../spiele/tagesbrief/brief.js";
 import { GRENZEN, TAG, erlaubt, raeumeAuf } from "./grenzen.js";
-import { WEITERES_GERAET, abgemeldetSeite, abmeldenFrage, bestaetigenFrage, bestaetigtSeite, datenschutzSeite, ungueltigSeite } from "./seiten.js";
+import { WEITERES_GERAET, abgemeldetSeite, esc, zusaetzlichText, abmeldenFrage, bestaetigenFrage, bestaetigtSeite, datenschutzSeite, ungueltigSeite } from "./seiten.js";
 import { gueltigesEreignis } from "./pruefung.js";
 import { berlinZeit, versendeFaellige } from "./versand.js";
-import { briefTopf, hash, juengsteVerschickte, lade, legeAb, leererTopf, sichere, zufall } from "./speicher.js";
+import { MAX_EMPFAENGER, NAME, bestaetigteEmpfaenger, briefTopf, hash, juengsteVerschickte, lade, legeAb, leererTopf, sichere, zufall } from "./speicher.js";
 
 export const APP_SCHLUESSEL = "lernen-spielen-1";
 const LINK_STUNDEN = 24;
@@ -27,7 +28,30 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
   /** Entfernt abgelaufene Anfragen (24 h nach der Anmeldung) samt Adresse, Token und noch nicht abgeholtem Schlüssel. */
   const raeumeAnfragen = () => {
     const t = jetzt().getTime();
-    for (const [id, a] of Object.entries(daten.anfragen)) if (new Date(a.ablauf).getTime() < t) delete daten.anfragen[id];
+    for (const [id, a] of Object.entries(daten.anfragen)) {
+      if (new Date(a.ablauf).getTime() >= t) continue;
+      // Ein nie bestätigter zusätzlicher Empfänger verschwindet mit seinem Link und gibt den Platz frei.
+      const e = a.art === "empfaenger" ? daten.familien[a.familie]?.empfaenger[a.adresse] : null;
+      if (e && !e.bestaetigt) delete daten.familien[a.familie].empfaenger[a.adresse];
+      delete daten.anfragen[id];
+    }
+  };
+  /** Löscht eine Familie samt Anfragen; mit `sperren` bekommen ihre Geräte danach 410. */
+  const loescheFamilie = (/** @type {string} */ id, /** @type {boolean} */ sperren) => {
+    const f = daten.familien[id];
+    if (!f) return;
+    if (sperren) for (const h of Object.keys(f.geraete)) daten.abgemeldet[h] = true;
+    delete daten.familien[id];
+    for (const [aid, a] of Object.entries(daten.anfragen)) if (a.familie === id) delete daten.anfragen[aid];
+  };
+  /** Entfernt einen Empfänger (bestätigt oder wartend) samt offenem Link; ohne bestätigte Adresse fällt die Familie. @returns {boolean} Familie gelöscht */
+  const entferneEmpfaenger = (/** @type {string} */ id, /** @type {string} */ adresse) => {
+    const f = daten.familien[id];
+    delete f.empfaenger[adresse];
+    for (const [aid, a] of Object.entries(daten.anfragen)) if (a.art === "empfaenger" && a.familie === id && a.adresse === adresse) delete daten.anfragen[aid];
+    if (bestaetigteEmpfaenger(f).length) return false;
+    loescheFamilie(id, true);
+    return true;
   };
   const speichern = () => { raeumeAnfragen(); sichere(datei, daten); };
 
@@ -66,7 +90,7 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     if (!m) return { status: 401 };
     const h = hash(m[1]);
     if (daten.abgemeldet[h]) return { status: 410, h };
-    for (const [adresse, eintrag] of Object.entries(daten.adressen)) if (eintrag.geraete[h]) return { status: 200, h, adresse, eintrag };
+    for (const [familieId, familie] of Object.entries(daten.familien)) if (familie.geraete[h]) return { status: 200, h, familieId, familie };
     return { status: 401, h };
   };
 
@@ -79,23 +103,30 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     return hash(`ip:${weiter || req.socket.remoteAddress}`);
   };
 
+  /** Name für Mails und Seiten an noch unbestätigte Adressen: nur ein gültiger Name, sonst leer („ein Kind“). */
+  const einladungsName = (/** @type {unknown} */ name) => (typeof name === "string" && NAME.test(name.trim()) ? name.trim() : "");
+
   async function anmelden(/** @type {any} */ req, /** @type {any} */ res) {
     if (aus) return 503;
     const k = parse(await lies(req, KLEIN));
     const adresse = typeof k?.adresse === "string" ? k.adresse.trim().toLowerCase() : "";
     const uhrzeit = k?.uhrzeit === undefined ? "18:00" : k.uhrzeit;
     if (!ADRESSE.test(adresse) || adresse.length > 254 || !UHRZEIT.test(uhrzeit)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
-    const name = typeof k.name === "string" ? k.name.trim().slice(0, 40) : "";
+    const name = typeof k.name === "string" ? k.name.trim() : "";
+    if (!NAME.test(name)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
     const t = jetzt().getTime();
     const ok = erlaubt(daten.zaehler, `anmeldenIp:${ipHash(req)}`, GRENZEN.anmeldenJeIp, t)
       && erlaubt(daten.zaehler, `anmeldenAdresse:${hash(adresse)}`, GRENZEN.anmeldenJeAdresse, t);
     if (!ok) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
     const anfrageId = zufall();
     const token = zufall();
-    daten.anfragen[anfrageId] = { adresse, token, ablauf: new Date(t + LINK_STUNDEN * 3600_000).toISOString(), uhrzeit, name, weiteres: Boolean(daten.adressen[adresse]) };
+    // Ein Gerät tritt nur einer Familie bei, in der die Adresse selbst ein Gerät eingerichtet hat (Rolle „geraet“) und
+    // genau eine solche Familie existiert; sonst entsteht eine neue. Über /empfaenger Hinzugefügte führen nie zum Beitritt.
+    const treffer = Object.keys(daten.familien).filter((id) => { const e = daten.familien[id].empfaenger[adresse]; return e?.bestaetigt && e.rolle === "geraet"; });
+    const weiteres = treffer.length === 1;
+    daten.anfragen[anfrageId] = { adresse, token, ablauf: new Date(t + LINK_STUNDEN * 3600_000).toISOString(), uhrzeit, name, art: "geraet", ...(weiteres ? { familie: treffer[0], weiteres } : {}) };
     speichern();
     const link = `${basis}/bestaetigen?t=${token}`;
-    const weiteres = daten.anfragen[anfrageId].weiteres;
     await sende({
       an: adresse,
       betreff: "Bitte bestätigen Sie den Tagesbrief",
@@ -110,13 +141,30 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     raeumeAnfragen();
     const eintrag = Object.values(daten.anfragen).find((a) => a.token === t && t);
     if (!eintrag || eintrag.bestaetigt || new Date(eintrag.ablauf).getTime() < jetzt().getTime()) { html(res, 400, ungueltigSeite()); return 400; }
+    if (eintrag.art === "empfaenger") {
+      // Zusätzliche Adresse: wird bestätigter Empfänger der Familie, bekommt aber keinen Schlüssel.
+      const e = daten.familien[eintrag.familie]?.empfaenger[eintrag.adresse];
+      if (!e || e.bestaetigt) { html(res, 400, ungueltigSeite()); return 400; }
+      e.bestaetigt = true;
+      for (const [id, a] of Object.entries(daten.anfragen)) if (a === eintrag) delete daten.anfragen[id];
+      speichern();
+      html(res, 200, bestaetigtSeite());
+      return 200;
+    }
     const schluessel = zufall();
     const h = hash(schluessel);
-    const adresse = (daten.adressen[eintrag.adresse] ??= { uhrzeit: eintrag.uhrzeit, namen: {}, geraete: {}, topf: leererTopf(), verschickt: [], abmeldeToken: zufall() });
-    adresse.uhrzeit = eintrag.uhrzeit;
+    // Beitritt nur, solange die Adresse dort noch bestätigter Empfänger ist; sonst entsteht eine neue Familie.
+    let familie = daten.familien[eintrag.familie];
+    if (!(familie?.empfaenger[eintrag.adresse]?.bestaetigt && familie.empfaenger[eintrag.adresse].rolle === "geraet")) familie = undefined;
+    if (!familie) {
+      familie = { uhrzeit: eintrag.uhrzeit, name: eintrag.name ?? "", geraete: {}, empfaenger: { [eintrag.adresse]: { bestaetigt: true, rolle: "geraet", abmeldeToken: zufall() } }, topf: leererTopf(), verschickt: [] };
+      daten.familien[zufall()] = familie;
+    } else {
+      familie.uhrzeit = eintrag.uhrzeit;
+      if (!familie.name) familie.name = eintrag.name ?? "";
+    }
+    familie.geraete[h] = { name: eintrag.geraet ?? "Gerät", angelegt: jetzt().toISOString() };
     delete eintrag.weiteres;
-    adresse.geraete[h] = { name: eintrag.geraet ?? "Gerät", angelegt: jetzt().toISOString() };
-    adresse.namen[h] = eintrag.name ?? "";
     eintrag.bestaetigt = true;
     eintrag.token = "";
     eintrag.schluessel = schluessel;
@@ -131,9 +179,11 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     if (!eintrag) { json(res, 404, { fehler: "unbekannt" }); return 404; }
     if (!eintrag.bestaetigt) { json(res, 200, { bestaetigt: false }); return 200; }
     const antwort = eintrag.schluessel ? { bestaetigt: true, schluessel: eintrag.schluessel } : { bestaetigt: true };
-    // Nach der Abholung bleibt nur „bestätigt“ bis zum Ablauf; Schlüssel und Adresse gehen sofort.
+    // Nach der Abholung bleibt nur „bestätigt“ bis zum Ablauf; Schlüssel, Adresse und Familie gehen sofort.
     delete eintrag.schluessel;
     delete eintrag.adresse;
+    delete eintrag.familie;
+    delete eintrag.art;
     speichern();
     json(res, 200, antwort);
     return 200;
@@ -148,10 +198,10 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     if (liste.length > GRENZEN.ereignisseJePush) { json(res, 413, { fehler: "zu-viele" }); return 413; }
     if (!liste.every(gueltigesEreignis)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
     if (!erlaubt(daten.zaehler, `push:${g.h}`, GRENZEN.pushesJeGeraet, jetzt().getTime())) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
-    // Nur die eigene Adresse: Felder wie `an` oder `adresse` im Körper werden nie gelesen.
-    legeAb(g.eintrag.topf, liste, jetzt(), berlinZeit(jetzt()).uhr >= g.eintrag.uhrzeit);
+    // Nur die eigene Familie: Felder wie `an` oder `adresse` im Körper werden nie gelesen.
+    legeAb(g.familie.topf, liste, jetzt(), berlinZeit(jetzt()).uhr >= g.familie.uhrzeit);
     speichern();
-    json(res, 200, { verschickt: juengsteVerschickte(g.eintrag, jetzt()) });
+    json(res, 200, { verschickt: juengsteVerschickte(g.familie, jetzt()) });
     return 200;
   }
 
@@ -159,10 +209,11 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     const k = parse(await lies(req, KLEIN));
     if (!k || typeof k !== "object") { json(res, 400, { fehler: "ungueltig" }); return 400; }
     if (k.uhrzeit !== undefined && !UHRZEIT.test(k.uhrzeit)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
-    if (k.uhrzeit !== undefined) g.eintrag.uhrzeit = k.uhrzeit;
-    if (typeof k.name === "string") g.eintrag.namen[g.h] = k.name.trim().slice(0, 40);
+    if (typeof k.name === "string" && !NAME.test(k.name.trim())) { json(res, 400, { fehler: "ungueltig" }); return 400; }
+    if (k.uhrzeit !== undefined) g.familie.uhrzeit = k.uhrzeit;
+    if (typeof k.name === "string") g.familie.name = k.name.trim();
     speichern();
-    json(res, 200, { uhrzeit: g.eintrag.uhrzeit });
+    json(res, 200, { uhrzeit: g.familie.uhrzeit });
     return 200;
   }
 
@@ -170,36 +221,96 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     if (aus) return 503;
     if (!erlaubt(daten.zaehler, `probe:${g.h}`, GRENZEN.probebriefeJeGeraet, jetzt().getTime())) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
     speichern();
-    const brief = setzeBrief(briefTopf(g.eintrag), {
-      datum: jetzt(),
-      abmeldeLink: `${basis}/abmelden?t=${g.eintrag.abmeldeToken}`,
-      datenschutzLink: `${basis}/datenschutz`,
-    });
-    if (!brief) { json(res, 409, { fehler: "leer" }); return 409; }
-    await sende({ an: g.adresse, ...brief, foto: g.eintrag.topf.naechstes?.foto || undefined });
+    const adressen = bestaetigteEmpfaenger(g.familie);
+    const brief = (/** @type {string} */ token) => setzeBrief(briefTopf(g.familie), { datum: jetzt(), abmeldeLink: `${basis}/abmelden?t=${token}`, datenschutzLink: `${basis}/datenschutz` });
+    if (!brief("")) { json(res, 409, { fehler: "leer" }); return 409; }
+    // Eine eigene Mail je bestätigtem Empfänger mit dessen Abbestell-Link; zählt einmal gegen die Tagesgrenze.
+    for (const adresse of adressen) {
+      await sende({ an: adresse, ...brief(g.familie.empfaenger[adresse].abmeldeToken), foto: g.familie.topf.naechstes?.foto || undefined });
+    }
     json(res, 200, { gesendet: true });
     return 200;
   }
 
+  async function empfaengerHinzufuegen(/** @type {any} */ req, /** @type {any} */ res, /** @type {any} */ g) {
+    if (aus) return 503;
+    const k = parse(await lies(req, KLEIN));
+    const adresse = typeof k?.adresse === "string" ? k.adresse.trim().toLowerCase() : "";
+    if (!ADRESSE.test(adresse) || adresse.length > 254) { json(res, 400, { fehler: "ungueltig" }); return 400; }
+    if (g.familie.empfaenger[adresse]) { json(res, 409, { fehler: "vorhanden" }); return 409; }
+    if (Object.keys(g.familie.empfaenger).length >= MAX_EMPFAENGER) { json(res, 409, { fehler: "voll" }); return 409; }
+    const t = jetzt().getTime();
+    const ok = erlaubt(daten.zaehler, `anmeldenIp:${ipHash(req)}`, GRENZEN.anmeldenJeIp, t)
+      && erlaubt(daten.zaehler, `anmeldenAdresse:${hash(adresse)}`, GRENZEN.anmeldenJeAdresse, t)
+      && erlaubt(daten.zaehler, `einladung:${g.familieId}`, GRENZEN.einladungenJeFamilie, t);
+    if (!ok) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
+    const anfrageId = zufall();
+    const token = zufall();
+    g.familie.empfaenger[adresse] = { bestaetigt: false, rolle: "empfaenger", abmeldeToken: zufall() };
+    daten.anfragen[anfrageId] = { adresse, token, ablauf: new Date(t + LINK_STUNDEN * 3600_000).toISOString(), art: "empfaenger", familie: g.familieId };
+    speichern();
+    const link = `${basis}/bestaetigen?t=${token}`;
+    const hinweis = zusaetzlichText(einladungsName(g.familie.name));
+    try {
+      await sende({
+        an: adresse,
+        betreff: "Bitte bestätigen Sie den Tagesbrief",
+        text: `Guten Tag,\n\n${hinweis}\n\nWenn doch, bestätigen Sie mit diesem Link:\n${link}\n\nDer Link gilt 24 Stunden.`,
+        html: `<p>Guten Tag,</p><p>${esc(hinweis)}</p><p>Wenn doch: <a href="${link}">Tagesbrief bestätigen</a></p><p>Der Link gilt 24 Stunden.</p>`,
+      });
+    } catch (e) {
+      // Ohne zugestellte Mail bleibt kein wartender Empfänger zurück, der einen der vier Plätze belegt.
+      delete g.familie.empfaenger[adresse];
+      delete daten.anfragen[anfrageId];
+      speichern();
+      throw e;
+    }
+    json(res, 200, { ok: true });
+    return 200;
+  }
+
+  function empfaengerListe(/** @type {any} */ res, /** @type {any} */ g) {
+    raeumeAnfragen();
+    json(res, 200, { uhrzeit: g.familie.uhrzeit, name: g.familie.name, empfaenger: Object.entries(g.familie.empfaenger).map(([adresse, e]) => ({ adresse, bestaetigt: /** @type {any} */ (e).bestaetigt })) });
+    return 200;
+  }
+
+  async function empfaengerEntfernen(/** @type {any} */ req, /** @type {any} */ res, /** @type {any} */ g) {
+    const k = parse(await lies(req, KLEIN));
+    const adresse = typeof k?.adresse === "string" ? k.adresse.trim().toLowerCase() : "";
+    if (!g.familie.empfaenger[adresse]) { json(res, 404, { fehler: "unbekannt" }); return 404; }
+    const geloescht = entferneEmpfaenger(g.familieId, adresse);
+    speichern();
+    json(res, 200, geloescht ? { familieGeloescht: true } : { ok: true });
+    return 200;
+  }
+
   function geraetLoesen(/** @type {any} */ res, /** @type {any} */ g) {
-    delete g.eintrag.geraete[g.h];
-    delete g.eintrag.namen[g.h];
-    if (!Object.keys(g.eintrag.geraete).length) delete daten.adressen[g.adresse];
+    delete g.familie.geraete[g.h];
+    if (!Object.keys(g.familie.geraete).length) loescheFamilie(g.familieId, false);
     speichern();
     json(res, 200);
     return 200;
   }
 
+  /** Entfernt nur die Adresse zum Token; ohne bestätigte Adresse fällt die Familie (ihre Geräte bekommen dann 410). */
   function abmelden(/** @type {string} */ t, /** @type {any} */ res) {
-    const adresse = Object.keys(daten.adressen).find((a) => t && daten.adressen[a].abmeldeToken === t);
-    if (!adresse) { html(res, 200, abgemeldetSeite()); return 200; }
-    for (const h of Object.keys(daten.adressen[adresse].geraete)) daten.abgemeldet[h] = true;
-    delete daten.adressen[adresse];
-    for (const [id, a] of Object.entries(daten.anfragen)) if (a.adresse === adresse) delete daten.anfragen[id];
-    speichern();
+    const id = Object.keys(daten.familien).find((i) => t && Object.values(daten.familien[i].empfaenger).some((e) => e.abmeldeToken === t));
+    if (id) {
+      const adresse = /** @type {string} */ (Object.keys(daten.familien[id].empfaenger).find((a) => daten.familien[id].empfaenger[a].abmeldeToken === t));
+      entferneEmpfaenger(id, adresse);
+      speichern();
+    }
     html(res, 200, abgemeldetSeite());
     return 200;
   }
+
+  /** Warnhinweis der Knopfseite zur Anfrage mit diesem Token (weiteres Gerät bzw. zusätzlicher Empfänger), sonst leer. */
+  const hinweisZu = (/** @type {string} */ t) => {
+    const a = t ? Object.values(daten.anfragen).find((x) => x.token === t) : null;
+    if (a?.art === "empfaenger") return zusaetzlichText(einladungsName(daten.familien[a.familie]?.name));
+    return a?.weiteres ? WEITERES_GERAET : "";
+  };
 
   const server = createServer(async (req, res) => {
     let ergebnis = 500;
@@ -211,14 +322,14 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
       const seitenAufruf = ["GET /bestaetigen", "POST /bestaetigen", "GET /abmelden", "POST /abmelden", "GET /datenschutz"].includes(weg);
       if (weg === "GET /datenschutz") { html(res, 200, datenschutzSeite()); ergebnis = 200; }
       // Link-Scanner rufen GET auf: GET zeigt nur einen Knopf, erst POST bestätigt bzw. meldet ab.
-      else if (weg === "GET /bestaetigen") { html(res, 200, bestaetigenFrage(url.searchParams.get("t") ?? "", Object.values(daten.anfragen).some((a) => a.token === url.searchParams.get("t") && a.weiteres))); ergebnis = 200; }
+      else if (weg === "GET /bestaetigen") { html(res, 200, bestaetigenFrage(url.searchParams.get("t") ?? "", hinweisZu(url.searchParams.get("t") ?? ""))); ergebnis = 200; }
       else if (weg === "GET /abmelden") { html(res, 200, abmeldenFrage(url.searchParams.get("t") ?? "")); ergebnis = 200; }
       else if (weg === "POST /bestaetigen") ergebnis = bestaetigen(await formularToken(req), res);
       else if (weg === "POST /abmelden") ergebnis = abmelden(await formularToken(req), res);
       else if (!seitenAufruf && req.headers["x-app"] !== APP_SCHLUESSEL) { json(res, 403, { fehler: "app" }); ergebnis = 403; }
       else if (weg === "POST /anmelden") ergebnis = await anmelden(req, res);
       else if (weg === "GET /status") ergebnis = status(url, res);
-      else if (["POST /ereignisse", "POST /einstellungen", "POST /probebrief", "DELETE /geraet"].includes(weg)) {
+      else if (["POST /ereignisse", "POST /einstellungen", "POST /probebrief", "DELETE /geraet", "POST /empfaenger", "GET /empfaenger", "DELETE /empfaenger"].includes(weg)) {
         const g = gerät(req);
         h = g.h;
         if (g.status !== 200) { json(res, g.status, { fehler: g.status === 410 ? "abgemeldet" : "schluessel" }); ergebnis = g.status; }
@@ -226,6 +337,9 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
         else if (weg === "POST /ereignisse") ergebnis = await ereignisse(req, res, g);
         else if (weg === "POST /einstellungen") ergebnis = await einstellungen(req, res, g);
         else if (weg === "POST /probebrief") ergebnis = await probebrief(res, g);
+        else if (weg === "POST /empfaenger") ergebnis = await empfaengerHinzufuegen(req, res, g);
+        else if (weg === "GET /empfaenger") ergebnis = empfaengerListe(res, g);
+        else if (weg === "DELETE /empfaenger") ergebnis = await empfaengerEntfernen(req, res, g);
         else ergebnis = geraetLoesen(res, g);
       } else { json(res, 404, { fehler: "unbekannt" }); ergebnis = 404; }
       if (ergebnis === 503) json(res, 503, { fehler: "aus" });

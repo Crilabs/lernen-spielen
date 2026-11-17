@@ -1,13 +1,19 @@
 // Speicher des Versanddienstes: eine JSON-Datei, atomar geschrieben (Temp-Datei + rename), und die Operationen auf dem
-// Topf einer Adresse. Geräteschlüssel liegen nur als SHA-256-Hash darin, Adressen nur als Schlüssel der Tabelle.
+// Topf einer Familie. Geräteschlüssel liegen nur als SHA-256-Hash darin, Adressen nur als Schlüssel der Empfängertabelle.
 import { createHash, randomBytes } from "node:crypto";
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 
 /** @typedef {{ id: string, art: string, daten: Record<string, any> }} Ereignis */
 /** @typedef {{ ids: string[], gekonnt: any[], dabei: any[], gelesen: any[], naechstes: any | null, naechstesSpaeter?: any, seit: string | null }} GespeicherterTopf */
-/** @typedef {{ uhrzeit: string, namen: Record<string, string>, geraete: Record<string, { name: string, angelegt: string }>, topf: GespeicherterTopf, verschickt: { anleitung: string, am: string }[], abmeldeToken: string, letzterTag?: string, fehler?: { tag: string, n: number, bis: number } }} Adresse */
-/** @typedef {{ adressen: Record<string, Adresse>, anfragen: Record<string, any>, zaehler: Record<string, number[]>, abgemeldet: Record<string, true> }} Daten */
+/** @typedef {{ bestaetigt: boolean, rolle: "geraet" | "empfaenger", abmeldeToken: string, gesendetTag?: string, fehler?: { tag: string, n: number, bis: number } }} Empfaenger */
+/** @typedef {{ uhrzeit: string, name: string, geraete: Record<string, { name: string, angelegt: string }>, empfaenger: Record<string, Empfaenger>, topf: GespeicherterTopf, verschickt: { anleitung: string, am: string }[], letzterTag?: string }} Familie */
+/** @typedef {{ familien: Record<string, Familie>, anfragen: Record<string, any>, zaehler: Record<string, number[]>, abgemeldet: Record<string, true>, gesperrt?: string[] }} Daten */
 
+/** Name des Kindes: Buchstaben (auch Umlaute, ß), Leerzeichen, Bindestrich, höchstens 40 Zeichen; leer ist erlaubt. */
+export const NAME = /^[\p{L} -]{0,40}$/u;
+
+/** Höchstens so viele Empfänger (bestätigt und wartend zusammen) je Familie. */
+export const MAX_EMPFAENGER = 4;
 export const VERSCHICKT_TAGE = 14;
 const ARTEN = ["gekonnt", "dabei", "gelesen", "naechstes"];
 
@@ -22,9 +28,15 @@ export const leererTopf = () => ({ ids: [], gekonnt: [], dabei: [], gelesen: [],
 
 /** @param {string} datei @returns {Daten} */
 export function lade(datei) {
-  const leer = { adressen: {}, anfragen: {}, zaehler: {}, abgemeldet: {} };
-  if (!existsSync(datei)) return leer;
-  return { ...leer, .../** @type {Partial<Daten>} */ (JSON.parse(readFileSync(datei, "utf8"))) };
+  const leer = () => ({ familien: {}, anfragen: {}, zaehler: {}, abgemeldet: {} });
+  if (!existsSync(datei)) return leer();
+  const text = readFileSync(datei, "utf8");
+  if (!text.trim()) return leer(); // 0-Byte-Datei wie eine fehlende
+  const gelesen = /** @type {Partial<Daten> & { adressen?: unknown }} */ (JSON.parse(text));
+  // Eine Datei aus der Zeit „eine Adresse je Topf“ (ohne `familien`) wird verworfen; es gab keine echten Anmeldungen.
+  if (!gelesen || typeof gelesen.familien !== "object" || !gelesen.familien) return leer();
+  delete gelesen.adressen; // Rest der alten Tabelle nie weiterführen
+  return { ...leer(), ...gelesen };
 }
 
 /** Schreibt atomar: erst in eine Temp-Datei neben dem Ziel, dann umbenennen. @param {string} datei @param {Daten} daten */
@@ -64,18 +76,18 @@ export function legeAb(topf, ereignisse, jetzt, nachUhrzeit = false) {
   return neu;
 }
 
-/** Zuletzt verschickte Anleitungen der letzten 14 Tage. @param {Adresse} adresse @param {Date} jetzt */
-export function juengsteVerschickte(adresse, jetzt) {
+/** Zuletzt verschickte Anleitungen der letzten 14 Tage. @param {Familie} familie @param {Date} jetzt */
+export function juengsteVerschickte(familie, jetzt) {
   const grenze = jetzt.getTime() - VERSCHICKT_TAGE * 86400_000;
-  return adresse.verschickt.filter((v) => new Date(v.am).getTime() >= grenze);
+  return familie.verschickt.filter((v) => new Date(v.am).getTime() >= grenze);
 }
 
-/** Topf in der Form, die `setzeBrief` erwartet; gleiche Namen mehrerer Geräte (ohne Groß-/Kleinschreibung) nur einmal. @param {Adresse} adresse */
-export function briefTopf(adresse) {
-  const { gekonnt, dabei, gelesen, naechstes } = adresse.topf;
-  const namen = [];
-  for (const n of Object.values(adresse.namen).map((x) => String(x).trim()).filter(Boolean)) {
-    if (!namen.some((v) => v.toLowerCase() === n.toLowerCase())) namen.push(n);
-  }
-  return { namen, gekonnt, dabei, gelesen, naechstes };
+/** Topf in der Form, die `setzeBrief` erwartet: der eine Name der Familie (oder keiner) und die Ereignisse. @param {Pick<Familie, "name" | "topf">} familie */
+export function briefTopf(familie) {
+  const { gekonnt, dabei, gelesen, naechstes } = familie.topf;
+  const name = String(familie.name ?? "").trim();
+  return { namen: name ? [name] : [], gekonnt, dabei, gelesen, naechstes };
 }
+
+/** Bestätigte Empfänger (Adressen) einer Familie. @param {Familie} familie */
+export const bestaetigteEmpfaenger = (familie) => Object.keys(familie.empfaenger).filter((a) => familie.empfaenger[a].bestaetigt);
