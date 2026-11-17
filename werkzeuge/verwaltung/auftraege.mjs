@@ -3,7 +3,7 @@
 
 import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 
-export const ARTEN = ["spiel", "echte-dinge", "buch", "einfuehrung", "frei", "ideen"];
+export const ARTEN = ["spiel", "echte-dinge", "buch", "einfuehrung", "frei", "ideen", "aenderung"];
 export const STATUS = ["wartet", "laeuft", "erledigt", "wartet-auf-christian", "beantwortet", "fehlgeschlagen", "gestrichen"];
 
 /** Schätzung für einen Antwort-Auftrag (Fortsetzen mit Christians Antwort: Merge, Nachprüfung o. ä.). */
@@ -14,12 +14,13 @@ const SKILL_JE_ART = {
   "echte-dinge": ".claude/skills/mit-echten-dingen/SKILL.md",
   ideen: ".claude/skills/spielideen/SKILL.md",
   buch: ".claude/skills/sachgeschichte/SKILL.md",
+  aenderung: ".claude/skills/rueckmeldung/SKILL.md",
 };
 
 const ID = /^[A-Za-z0-9-]+$/;
 
-/** Der Text, mit dem der Lauf Claude beauftragt. */
-export function befehlFuer(art, ziel) {
+/** Der Text, mit dem der Lauf Claude beauftragt. `bereich` nur bei einer Änderung (spiel, buch, echte-dinge). */
+export function befehlFuer(art, ziel, bereich) {
   const liste = Array.isArray(ziel) ? ziel : [ziel];
   switch (art) {
     case "spiel": return `Spiel entwickeln ${liste[0]}`;
@@ -29,12 +30,15 @@ export function befehlFuer(art, ziel) {
       return `Einführung für Thema ${liste[0]} nach den Vorlagen in spiele/einfuehrungen/ und dem Feld einfuehrung im Lernplan`;
     case "frei": return String(ziel);
     case "ideen": return `Spielideen ${liste[0]}`;
+    case "aenderung":
+      if (!["spiel", "buch", "echte-dinge"].includes(bereich)) throw new Error(`Bereich muss spiel, buch oder echte-dinge sein (war: ${bereich})`);
+      return `Rückmeldung umsetzen ${bereich} ${liste[0]}`;
     default: throw new Error(`Art muss ${ARTEN.join(", ")} sein (war: ${art})`);
   }
 }
 
 /** Legt einen wartenden Auftrag an; prüft Art und Ziel. */
-export function neuerAuftrag({ art, ziel, schaetzung_eur = null }, jetzt = new Date()) {
+export function neuerAuftrag({ art, ziel, schaetzung_eur = null, bereich = undefined }, jetzt = new Date()) {
   if (!ARTEN.includes(art)) throw new Error(`Art muss ${ARTEN.join(", ")} sein (war: ${art})`);
   const liste = Array.isArray(ziel) ? ziel : [ziel];
   const leer = !liste.length || liste.some((z) => typeof z !== "string" || !z.trim());
@@ -45,7 +49,8 @@ export function neuerAuftrag({ art, ziel, schaetzung_eur = null }, jetzt = new D
     id: `a-${jetzt.getTime()}-${Math.random().toString(36).slice(2, 7)}`,
     art,
     ziel: art === "echte-dinge" ? liste : liste[0],
-    befehl: befehlFuer(art, ziel),
+    befehl: befehlFuer(art, ziel, bereich),
+    ...(art === "aenderung" ? { bereich } : {}),
     schaetzung_eur,
     angelegt: jetzt.toISOString(),
     status: "wartet",

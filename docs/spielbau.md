@@ -242,6 +242,9 @@ Abschluss   (Skript)  → Audio, Spielbild, Kosten, Merge nach main   (nach 2 Ru
   (`"probe": true` in `spiele/spiele.json`). Christian oder Noelia spielt zwei Minuten; erst danach gilt es als
   fertig (`node werkzeuge/spielbau/freigeben.mjs <Id>` nimmt die Markierung weg, oder die Befunde gehen als neue
   Runde in den nächsten Lauf). Spaß beurteilt am Ende ein Mensch, kein Prüfer.
+- **Rückmeldung** (Christian, 2026-11-17): Was beim Spielen auffällt, schreibt Christian in der Verwaltung unter
+  „Rückmeldung“. Sie hängt sich an einen wartenden Auftrag, wird die Antwort auf eine offene Frage oder wird ein
+  Auftrag „Änderung“ (Skill `rueckmeldung`: nur die Punkte, Nachprüfung je Punkt, Merge wieder als Probe).
 
 ### Die Spielprüfung
 

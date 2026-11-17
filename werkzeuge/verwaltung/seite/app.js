@@ -9,9 +9,25 @@ const STATUS_TEXT = {
   geplant: "geplant", fehlt: "fehlt", wartet: "wartet", laeuft: "läuft", erledigt: "erledigt",
   "wartet-auf-christian": "wartet auf dich", beantwortet: "beantwortet", fehlgeschlagen: "fehlgeschlagen", gestrichen: "gestrichen",
 };
-const ART_TEXT = { spiel: "Spiel", "echte-dinge": "Mit echten Dingen", buch: "Buch", einfuehrung: "Einführung", frei: "Frei", antwort: "Antwort", ideen: "Ideen" };
+const ART_TEXT = { spiel: "Spiel", "echte-dinge": "Mit echten Dingen", buch: "Buch", einfuehrung: "Einführung", frei: "Frei", antwort: "Antwort", ideen: "Ideen", aenderung: "Änderung" };
 const plakette = (status, text = STATUS_TEXT[status] ?? status, titel = "") =>
   `<span class="plakette s-${esc(status)}" title="${esc(titel)}">${esc(text)}</span>`;
+
+// ---------- Rückmeldungen (Spec 2026-11-17) ----------
+// Gebaute Stücke bekommen den Knopf; Ungebaute nur, wenn schon ein Auftrag dafür offen ist (der Server prüft dasselbe).
+const GEBAUT = ["probe", "fertig", "geparkt", "beauftragt", "entwurf"];
+const OFFEN = ["wartet", "laeuft", "wartet-auf-christian"];
+const BEREICH_TEXT = { spiel: "Spiel", buch: "Buch", "echte-dinge": "Mit echten Dingen" };
+const gehoertZu = (a, bereich, id) => a.stueck?.bereich === bereich && a.stueck.ids.includes(id);
+const offenerAuftrag = (bereich, id) => (A?.auftraege ?? []).some((a) => OFFEN.includes(a.status) && a.art !== "ideen" && gehoertZu(a, bereich, id));
+/** Rückmeldungen zu einem Stück, neueste zuerst, mit dem Stand ihres Auftrags. */
+const rueckmeldungenZu = (bereich, id) => (A?.auftraege ?? []).filter((a) => a.rueckmeldungen?.length && gehoertZu(a, bereich, id))
+  .flatMap((a) => a.rueckmeldungen.map((x) => ({ ...x, status: a.status }))).sort((x, y) => y.zeit.localeCompare(x.zeit));
+function rueckKnopf(bereich, id, titel, stand) {
+  if (!GEBAUT.includes(stand) && !offenerAuftrag(bereich, id)) return "";
+  const offen = rueckmeldungenZu(bereich, id).filter((x) => x.status === "wartet" || x.status === "laeuft").length;
+  return ` <button class="klein rueck" data-rueck="${esc(bereich)}" data-ziel="${esc(id)}" data-titel="${esc(titel)}" title="Was soll anders werden?">Rückmeldung${offen ? ` (${offen} offen)` : ""}</button>`;
+}
 
 let U = /** @type {any} */ (null);
 let A = /** @type {any} */ ({ auftraege: [], laeuft: false });
@@ -47,7 +63,8 @@ const spielPlus = (id, s) => s.status === "geplant"
 /** @param {any} t @param {boolean} mitEinfuehrung nur bei Lernthemen ohne Spiel: ein Spiel bringt seine Einführung selbst mit */
 function zeileLernthema(t, mitEinfuehrung) {
   const echt = plakette(t.echteDinge, STATUS_TEXT[t.echteDinge] + (t.echteDingeEur !== null ? ` · ${eur(t.echteDingeEur)}` : ""))
-    + (t.echteDinge === "fehlt" ? ` <button class="plus" data-auftrag="echte-dinge" data-ziel="${esc(t.id)}" title="Mit echten Dingen beauftragen">+</button>` : "");
+    + (t.echteDinge === "fehlt" ? ` <button class="plus" data-auftrag="echte-dinge" data-ziel="${esc(t.id)}" title="Mit echten Dingen beauftragen">+</button>` : "")
+    + rueckKnopf("echte-dinge", t.id, `Mit echten Dingen: ${t.name}`, t.echteDinge);
   const einf = t.einfuehrung
     ? plakette("fertig", t.einfuehrung.replace(/^einfuehrungen\/|\.json$/g, ""))
     : t.einfuehrungBeauftragt ? plakette("beauftragt")
@@ -84,7 +101,7 @@ function zeigeSpiele() {
       const schl = `spiel/${s.id}`;
       return [`<details class="spiel" data-schluessel="${esc(schl)}" ${offen.has(schl) || (such && !spielTreffer) ? "open" : ""}>
         <summary><span class="spiel-id">${esc(s.id)}</span><span class="titel">${esc(s.name)}</span>
-          <span class="leise-text">Kl. ${kl}</span>${plakette(s.status)}${spielPlus(s.id, s)}${FERTIG.includes(s.status) ? `<span class="leise-text">Einführung im Spiel</span>` : ""}
+          <span class="leise-text">Kl. ${kl}</span>${plakette(s.status)}${spielPlus(s.id, s)}${rueckKnopf("spiel", s.id, `${s.id} ${s.name}`, s.status)}${FERTIG.includes(s.status) ? `<span class="leise-text">Einführung im Spiel</span>` : ""}
           <span class="zahl-z">${s.eur !== null ? eur(s.eur) : ""}</span>
           <span class="stand">${themen.length} Lernthemen · Echte Dinge ${echt}/${themen.length}</span></summary>
         ${themen.length ? themenTabelle(themen) : `<p class="leer">Im Katalog stehen für dieses Spiel keine Hauptthemen, die der Lernplan kennt.</p>`}</details>`];
@@ -124,7 +141,7 @@ function zeigeBibliothek() {
     return !such || b.titel.toLowerCase().includes(such) || b.id.includes(such) || themen.some((w) => w.name.toLowerCase().includes(such));
   };
   const zeileBuch = (b) => `<tr><td>${esc(b.titel)}<span class="id">${esc(b.id)}</span></td>
-    <td>${plakette(b.status)}${b.status === "geplant" ? ` <button class="plus" data-auftrag="buch" data-ziel="${esc(b.id)}" title="Buch „${esc(b.titel)}“ beauftragen">+</button>` : ""}</td>
+    <td>${plakette(b.status)}${b.status === "geplant" ? ` <button class="plus" data-auftrag="buch" data-ziel="${esc(b.id)}" title="Buch „${esc(b.titel)}“ beauftragen">+</button>` : ""}${rueckKnopf("buch", b.id, b.titel, b.status)}</td>
     <td class="zahl-z">${b.eur !== null ? eur(b.eur) : ""}</td>
     <td class="leise-text">${esc(b.sachthemen.map((id) => sach.get(id)?.name ?? id).join(", "))}</td></tr>`;
   const html = U.bibliothek.map((raum) => {
@@ -189,8 +206,9 @@ function zeigeAuftraege() {
       ? `${bezug?.notiz ? `${bezug.notiz} – ` : ""}auf: ${bezug?.befehl ?? a.ziel}`
       : a.befehl;
     const notiz = a.notiz && a.status !== "beantwortet" ? `<div class="leise-text">${esc(a.notiz)}</div>` : "";
+    const rueck = a.rueckmeldungen?.length ? `<ul class="rueckmeldungen leise-text">${a.rueckmeldungen.map((x) => `<li>Rückmeldung: ${esc(x.text)}</li>`).join("")}</ul>` : "";
     return `<tr data-zeile="${esc(a.id)}" class="${a.id === gewaehlt ? "gewaehlt" : ""}">
-      <td>${esc(ART_TEXT[a.art] ?? a.art)}</td><td class="befehl">${esc(befehl)}${zus}${frage}${notiz}</td>
+      <td>${esc(ART_TEXT[a.art] ?? a.art)}</td><td class="befehl">${esc(befehl)}${zus}${frage}${notiz}${rueck}</td>
       <td class="zahl-z">${eur(a.schaetzung_eur)}</td><td>${plakette(a.status)}</td><td class="leise-text">${esc(zeit)}</td>
       <td>${steuer} <button class="klein" data-protokoll="${esc(a.id)}">Protokoll</button></td></tr>`;
   }).join("");
@@ -285,11 +303,13 @@ function zeigeProben() {
   const proben = Object.values(U.spiele).filter((s) => s.status === "probe");
   $("#proben").innerHTML = proben.length
     ? `<p class="leise-text">Fertig ist ein Spiel erst, wenn du oder Noelia es zwei Minuten gespielt habt. „Probe abschließen“ nimmt die
-        Markierung aus spiele/spiele.json und committet nur diese Datei auf main (kein Push).</p>
+        Markierung aus spiele/spiele.json und committet nur diese Datei auf main (kein Push). Soll etwas anders werden, schreib es
+        unter „Rückmeldung“ und schließ die Probe erst nach der Änderung ab.</p>
       <div class="karte"><table><thead><tr><th>Id</th><th>Spiel</th><th>Hauptthemen</th><th class="zahl-z">Kosten</th><th></th></tr></thead><tbody>
       ${proben.map((s) => `<tr><td>${esc(s.id)}</td><td>${esc(s.name)}</td>
         <td class="leise-text">${esc(s.hauptthemen.join(", "))}</td><td class="zahl-z">${eur(s.eur)}</td>
         <td style="white-space:nowrap"><a class="knopf-link" href="/spiele/${esc(s.ordner)}" target="_blank" rel="noopener">Spielen</a>
+          ${rueckKnopf("spiel", s.id, `${s.id} ${s.name}`, s.status)}
           <button class="klein" data-probe="${esc(s.id)}">Probe abschließen</button></td></tr>`).join("")}
       </tbody></table></div>`
     : `<p class="leer">Gerade ist kein Spiel zur Probe.</p>`;
@@ -398,6 +418,36 @@ function antworten(id) {
   }, { once: true });
 }
 
+const WOHIN = { angehaengt: "an den wartenden Auftrag angehängt", antwort: "als Antwort auf die wartende Frage übergeben", neu: "als neuer Auftrag in die Warteschlange gestellt" };
+
+/** Fenster „Rückmeldung“: Text, was damit passieren wird, und die bisherigen Rückmeldungen zu diesem Stück. */
+function rueckmelden(bereich, id, titel) {
+  const d = /** @type {HTMLDialogElement} */ ($("#rueckmelden"));
+  const feld = /** @type {HTMLTextAreaElement} */ ($("#r-text"));
+  $("#r-titel").textContent = `Rückmeldung – ${BEREICH_TEXT[bereich]} ${titel}`;
+  const l = A.auftraege.filter((a) => a.art !== "ideen" && gehoertZu(a, bereich, id));
+  const wartet = l.find((a) => a.status === "wartet");
+  const frage = l.find((a) => a.status === "wartet-auf-christian");
+  $("#r-wohin").textContent = wartet ? "Wird an den Auftrag gehängt, der dafür schon in der Warteschlange wartet."
+    : frage ? `Wird deine Antwort auf die offene Frage: ${frage.ergebnis?.frage ?? "–"}`
+    : "Wird ein neuer Auftrag „Änderung“ in der Warteschlange (startet mit „Warteschlange abarbeiten“). Er setzt nur deine Punkte um, lässt jeden Punkt nachprüfen und mergt bei Grün.";
+  const bisher = rueckmeldungenZu(bereich, id);
+  $("#r-verlauf").innerHTML = bisher.length ? `<h3>Bisher</h3><ul class="verlauf">${bisher.map((x) => `<li>${plakette(x.status)}
+    <span class="leise-text">${esc(new Date(x.zeit).toLocaleString("de-DE"))}</span><div>${esc(x.text)}</div></li>`).join("")}</ul>` : "";
+  feld.value = "";
+  d.returnValue = "";
+  d.showModal();
+  d.addEventListener("close", async () => {
+    const text = feld.value.trim();
+    if (d.returnValue !== "ja" || !text) return;
+    try {
+      const r = await api("/api/rueckmeldung", { bereich, id, text });
+      await ladeAlles(); // zeichnet die Kopfzeile neu, deshalb erst danach den Hinweis
+      $("#hinweis").textContent = `Rückmeldung zu ${titel} ${WOHIN[r.wie] ?? r.wie}${r.wie === "neu" && r.auftrag?.schaetzung_eur ? ` (ca. ${eur(r.auftrag.schaetzung_eur)})` : ""}.`;
+    } catch (err) { $("#hinweis").textContent = /** @type {Error} */ (err).message; }
+  }, { once: true });
+}
+
 document.addEventListener("click", async (e) => {
   const z = /** @type {HTMLElement} */ (e.target).closest("button");
   if (!z) return;
@@ -413,6 +463,7 @@ document.addEventListener("click", async (e) => {
     else if (z.dataset.schritt) { A = { ...A, ...(await api(`/api/auftraege/${z.dataset.id}/${z.dataset.schritt}`, {})) }; await ladeAlles(); }
     else if (z.dataset.antwort) { await api(`/api/auftraege/${z.dataset.id}/antwort`, { text: z.dataset.antwort }); await ladeAlles(); }
     else if (z.dataset.antworten) antworten(z.dataset.antworten);
+    else if (z.dataset.rueck) rueckmelden(z.dataset.rueck, z.dataset.ziel ?? "", z.dataset.titel ?? "");
     else if (z.dataset.wahlKarte) { await api(`/api/auftraege/${z.dataset.id}/wahl`, { karte: Number(z.dataset.wahlKarte) }); await ladeAlles(); }
     else if (z.dataset.eigeneBauen) {
       const id = z.dataset.eigeneBauen, text = (entwuerfe[id] ?? "").trim();

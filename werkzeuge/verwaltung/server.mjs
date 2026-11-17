@@ -8,6 +8,7 @@ import { createServer } from "node:http";
 import { dirname, extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { aendereAuftraege, beantworte, ladeAuftraege, mitSperre, lehneAb, neuerAuftrag, speichereAuftraege, streiche, verschiebe, waehleIdee } from "./auftraege.mjs";
+import { BEREICHE, ordneRueckmeldung, stueckVon } from "./rueckmeldung.mjs";
 import { baueUebersicht, liesQuellen } from "./daten.mjs";
 import { ProbeZustand, schliesseProbeAb } from "./proben.mjs";
 import { ORDNER, WURZEL, anhalten, laufLog, letzterLaufFehler, pfade, sperre } from "./lauf.mjs";
@@ -57,6 +58,20 @@ export function schaetze(uebersicht, art, ziel) {
   if (art === "echte-dinge") return s.echteDingeJeThema === null ? null : s.echteDingeJeThema * (Array.isArray(ziel) ? ziel.length : 1);
   return null;
 }
+
+/** Stände, ab denen ein Stück als gebaut gilt und Rückmeldungen bekommt (Spec Rückmeldungen 2026-11-17). */
+const GEBAUT = ["probe", "fertig", "geparkt", "beauftragt", "entwurf"];
+
+/** Stand eines Stücks in der Übersicht (undefined = unbekannt). */
+export function standFuerRueckmeldung(u, bereich, id) {
+  if (bereich === "spiel") return u.spiele[id]?.status;
+  if (bereich === "buch") return u.bibliothek.flatMap((r) => r.regale.flatMap((g) => g.buecher)).find((b) => b.id === id)?.status;
+  if (bereich === "echte-dinge") return u.lernthemen.find((t) => t.id === id)?.echteDinge;
+  return undefined;
+}
+
+/** Aufträge für die Seite, je mit ihrem Stück (für Knöpfe und den Verlauf der Rückmeldungen). */
+const mitStueck = (l) => l.map((a) => ({ ...a, stueck: stueckVon(l, a) }));
 
 const ERLAUBTE_HOSTS = new Set(["127.0.0.1", "localhost"]);
 
@@ -113,7 +128,7 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
       }
       if (!post && pfad === "/api/uebersicht") return antwort(200, uebersicht());
       if (!post && pfad === "/api/auftraege") {
-        return antwort(200, { auftraege: auftraege(), laeuft: !!sperre(ordner), sperre: sperre(ordner), anhalten: existsSync(p.anhalten), laufFehler: sperre(ordner) ? null : letzterLaufFehler(ordner) });
+        return antwort(200, { auftraege: mitStueck(auftraege()), laeuft: !!sperre(ordner), sperre: sperre(ordner), anhalten: existsSync(p.anhalten), laufFehler: sperre(ordner) ? null : letzterLaufFehler(ordner) });
       }
       if (post && pfad === "/api/auftraege") {
         const { art, ziel } = await koerper();
@@ -152,6 +167,25 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
         try { r = beantworte(l, alt.id, text); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
         speichereAuftraege(p.auftraege, r.liste);
         return antwort(201, r.neu);
+        });
+      }
+      if (post && pfad === "/api/rueckmeldung") {
+        // Körper zuerst, dann Prüfen und Schreiben ohne await unter der Sperre (wie Antwort und Wahl).
+        const daten = await koerper();
+        return mitSperre(p.auftraege, () => {
+        const l = auftraege();
+        const u = baueUebersicht(liesQuellen(wurzel), l);
+        const stand = standFuerRueckmeldung(u, daten?.bereich, daten?.id);
+        if (stand === undefined) return antwort(BEREICHE.includes(daten?.bereich) ? 404 : 400, { fehler: `Unbekannt: ${daten?.bereich} ${daten?.id}` });
+        const offen = l.some((a) => ["wartet", "laeuft", "wartet-auf-christian"].includes(a.status) && a.art !== "ideen"
+          && (() => { const s = stueckVon(l, a); return !!s && s.bereich === daten.bereich && s.ids.includes(daten.id); })());
+        if (!GEBAUT.includes(stand) && !offen) return antwort(409, { fehler: `${daten.id} ist noch nicht gebaut – Rückmeldung erst danach` });
+        let r;
+        try {
+          r = ordneRueckmeldung(l, { bereich: daten.bereich, id: daten.id, text: daten.text, geparkt: stand === "geparkt", schaetzungSpiel: u.schaetzung.spiel });
+        } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
+        speichereAuftraege(p.auftraege, r.liste);
+        return antwort(201, { wie: r.wie, auftrag: r.auftrag });
         });
       }
       const wahl = pfad.match(/^\/api\/auftraege\/([^/]+)\/wahl$/);

@@ -28,6 +28,9 @@ cd <Hauptrepo> && node werkzeuge/spielbau/vorbereiten.mjs <Id> [--basis <branch>
 - Gibt es den Worktree schon, ist es eine **Wiederaufnahme**: Der Workflow läuft neu, die Agenten finden den Stand im
   Branch.
 - Bricht das Skript ab (Id unbekannt, Basis ohne `werkzeuge/spielbau/`): Christian melden, nichts weiter.
+- **Rückmeldung von Christian** (Abschnitt unter dem Aufruf, aus der Verwaltung; Christian 2026-11-17): Häng ihn
+  unverändert als Abschnitt „## Rückmeldung von Christian“ ans Ende des Bauhefts (Pfad in `lauf.json`), bevor der
+  Workflow startet. Bau setzt jeden Punkt um; die Spielprüfung prüft jeden Punkt ausdrücklich.
 
 **Mit echten Dingen** (Auslöser Christian, `docs/mit-echten-dingen.md`): Gleich danach einen Hintergrund-Agenten
 (`general-purpose`, `run_in_background`) starten: „Führe den Skill `mit-echten-dingen` für die Hauptthemen von <Id>

@@ -89,6 +89,12 @@ tr.gewaehlt td { background: var(--grund); }
 .kennzahl span { color: var(--leise); font-size: 12px; }
 
 dialog { border: 1px solid var(--linie); border-radius: 10px; background: var(--flaeche); color: var(--text); max-width: 460px; }
+dialog.breit { max-width: 640px; width: calc(100vw - 32px); }
+.rueck { margin-left: 4px; }
+.verlauf { list-style: none; padding: 0; margin: 12px 0 0; max-height: 14rem; overflow: auto; }
+.verlauf li { padding: 6px 0; border-top: 1px solid var(--linie); white-space: pre-wrap; }
+.rueckmeldungen { margin: 4px 0 0; padding-left: 18px; }
+.rueckmeldungen li { white-space: pre-wrap; }
 dialog::backdrop { background: rgb(0 0 0 / .35); }
 dialog h2 { margin: 0 0 8px; font-size: 16px; }
 dialog menu { display: flex; justify-content: flex-end; gap: 8px; padding: 0; margin: 16px 0 0; }

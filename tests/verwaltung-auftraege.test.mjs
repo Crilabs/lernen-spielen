@@ -10,8 +10,8 @@ import {
 const JETZT = new Date("2026-11-16T10:00:00Z");
 const a = (id, status = "wartet") => ({ id, art: "frei", ziel: id, befehl: id, status });
 
-test("ARTEN: die sechs Auftragsarten", () => {
-  assert.deepEqual(ARTEN, ["spiel", "echte-dinge", "buch", "einfuehrung", "frei", "ideen"]);
+test("ARTEN: die sieben Auftragsarten", () => {
+  assert.deepEqual(ARTEN, ["spiel", "echte-dinge", "buch", "einfuehrung", "frei", "ideen", "aenderung"]);
 });
 
 test("befehlFuer: ein Befehl je Art", () => {
