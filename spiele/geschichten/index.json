@@ -63,6 +63,13 @@
       "art": "sachbuch",
       "welt": "koerperteile",
       "familie": null
+    },
+    {
+      "id": "fuenf-sinne",
+      "titel": "Augen zu und Ohren auf",
+      "art": "sachbuch",
+      "welt": "sinne",
+      "familie": null
     }
   ]
 }
