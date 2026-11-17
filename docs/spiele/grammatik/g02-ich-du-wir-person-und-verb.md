@@ -1,73 +1,60 @@
-# G02 Ich, du, wir – Spielidee (2026-11-17)
+# G02 Ich, du, wir – Spielidee (2026-11-17, Folgerunde)
 
-Katalog G02 · Grammatik · `spiele/grammatik/g02-ich-du-wir-person-und-verb/` · zuerst Kl. 2: verb-personalform, personalpronomen, grundform-verb, je material, vorstellung, kopf. **(Annahme)** = korrigierbar.
+Katalog G02 · Grammatik · `spiele/grammatik/g02-ich-du-wir-person-und-verb/` · Kl. 2: verb-personalform, personalpronomen, je material, vorstellung, kopf. Überarbeitet, nicht neu erfunden. **(Annahme)** = korrigierbar.
 ## 1. Spielkern
-- **Held:** Kofi und die Runde am großen Maltisch; Kofi sitzt dem Kind gegenüber und schaut es an. Das Kind sitzt selbst mit am Tisch: unten sieht man seine Hände und seinen Platz (Ich-Sicht). Gegenüber Kofi und Lena (sie schauen das Kind an), an der rechten Tischecke Timo im Rollstuhl und Ela (sie schauen auf ihr Papier).
-- **Handlung:** Das Kind zieht ein Plättchen an den Wortstreifen auf seinem Platz (Antippen geht auch, `ziehbar()`). Je Runde ein Thema, also eine Ablage: Endungen `-e -st -t -en -n` an den Verbstamm (verb-personalform, grundform-verb) oder Fürwörter `ich du er sie wir ihr` vor das Verb (personalpronomen).
-- **Wirkung richtig (sofort, ≤ 2,6 s):** Plättchen rastet ein (Plopp mit Überschwingen, 0,2 s), der Erzähler liest den Streifen („du malst.“), und genau die gemeinten Personen tun es auf dem gemeinsamen Bogen: ich → die eigene Hand malt, du → Kofi (oder Lena) schaut her und malt, er → Timo, sie → Ela, wir → alle fünf, ihr → Kofi und Lena, sie (Mehrzahl) → Timo und Ela (bis 2,4 s). Bleibendes Bild: ein neuer Strich, Stern, Klotz … auf dem Bogen. Der nächste Tipp überspringt.
+- **Held:** Kofi und die Runde am Maltisch. Ich-Sicht: unten die Hände des Kindes an seinem Platz; gegenüber Kofi und Lena (schauen das Kind an), rechts an der Tischecke Timo im Rollstuhl und Ela (über ihr Papier gebeugt).
+- **Handlung:** Das Kind zieht ein Plättchen an den Wortstreifen vor seinen Händen (Antippen geht auch, `ziehbar()`). Endungen `-e -st -t -en` an den Verbstamm (verb-personalform) oder Fürwörter `ich du er sie wir ihr` vor das Verb (personalpronomen). Je Runde ein Thema.
+- **Während des Ziehens** liegt das Plättchen die ganze Zeit sichtbar unter dem Finger, leicht angehoben (Schatten länger), über allem außer Leiste und Knöpfen.
+- **Wirkung richtig (sofort, ≤ 2,6 s):** Plättchen rastet ein (Plopp, Überschwingen, 0,2 s), der Erzähler liest „du malst.“, genau die Gemeinten malen auf dem Bogen: ich → die eigene Hand, du → Kofi, er → Timo, sie → Ela, wir → alle fünf, ihr → Kofi und Lena, sie (Mehrzahl) → Timo und Ela. Bleibt: ein neuer Strich, Stern, Klotz auf dem Bogen. Nächster Tipp überspringt.
 - **Takt:** ≈ 1,5 s ziehen + ≤ 2,6 s Wirkung + 0,5 s neuer Streifen → unter 5 s.
-- Ein Kind sieht „du mal▢“ auf seinem Platz, Kofi, der es mit erhobenem Stift anschaut, und fünf Endungen daneben und weiß sofort, dass es eine Endung an „mal“ legen soll.
-- **Lernweg:** Der Umweg ist alle Endungen durchprobieren. Er ist länger: jede andere Endung kostet einen ruhigen Zug, der Streifen kommt in der Runde wieder (gebucht wird nur der erste Versuch). Der kurze Weg ist die Sache selbst: wer ist gemeint (die Person sitzt da und schaut her oder nicht) → die Endung, die zu ihr gehört; das Paar hört das Kind bei jeder Wirkung.
+- Ein Kind sieht „du mal▢“ vor seinen Händen, Kofi, der es mit erhobenem Stift anschaut, und vier Endungen daneben auf dem Tisch und weiß sofort, dass es eine Endung an „mal“ legen soll.
+- **Lernweg:** Umweg ist Durchprobieren. Er ist länger: jede andere Endung kostet einen ruhigen Zug, der Streifen kommt in der Runde wieder (gebucht wird der erste Versuch). Kurzer Weg: wer ist gemeint (sitzt da, schaut her oder nicht) → seine Endung; das Paar hört das Kind bei jeder Wirkung. Ohne Grundform gibt es kein „immer -en“ mehr: jede Aufgabe verlangt den Blick auf die Person.
 ## 2. Woher die Schwierigkeit kommt
 - Aus dem Stoff: -t gehört zu er, sie und ihr, -en zu wir und sie (Mehrzahl); „sie“ ist eine oder mehrere Personen – nur wer gemeint ist, entscheidet.
-## 3. Bühne (ganzer Bildschirm, Ich-Sicht)
-- Eine helle Wohnküche aus der Farbwelt (wie `m08-stellentafel/raum.js`): Fenster mit Nachmittagslicht, Lampe über dem Tisch, Holztisch leicht von oben. Auf dem Tisch ein langer Papierbogen als Matte (das Hellste), darauf wächst das gemeinsame Bild; Stiftebecher und eine Kiste mit Bastelsachen.
-- Unten am Tischrand der eigene Platz: zwei Hände (Ärmel, wechselnde Hautfarbe je Start, **Annahme**), davor der Wortstreifen, rechts daneben die Ablage mit den Plättchen. Die Figuren sitzen hinter und neben dem Bogen, nie vor Streifen oder Ablage. Leiste, Blase (`ohne-text`), Hilfe, Pause an festen Plätzen.
+## 3. Bühne (ganzer Bildschirm, Ich-Sicht, eine Fläche)
+- Helle Wohnküche (vorhanden `raum.js`): Wand, Fenster mit Nachmittagslicht, Lampe. **Der Tisch ist sichtbar ein Holztisch** (Maserung in Längsrichtung, Brettfugen, vorn eine Tischkante mit Licht), keine Steinplatten, nichts liest sich wie Straße.
+- Auf dem Holz liegt hinten der große Papierbogen (das Hellste, flach, ein Ding mit leicht gewellter Ecke, kein Rahmen). Davor, direkt auf dem Holz: der Wortstreifen (ein Papierstreifen, D2, sein eigener Rand ist der Rand) und lose die Plättchen, leicht schräg, wie hingelegt. **Keine Matte-Box, kein Kasten um Streifen oder Ablage, kein eigener Bereichshintergrund**, kein Feld mit anderer Farbe.
+- Die Lücke ist das abgeschnittene Ende des Streifens: hinter „mal“ eine Kerbe im Papier mit gestrichelter Naht, keine Box.
+- Stiftebecher und Bastelkiste stehen am Rand des Holzes. Die Figuren sitzen hinter dem Bogen, nie vor Streifen oder Plättchen; die Hände links und rechts neben dem Streifen. Leiste, Blase (`ohne-text`), Hilfe, Pause an festen Plätzen.
 ## 4. Eine Aufgabe, Sekunde für Sekunde (verb-personalform)
-- **0 s:** Ein neuer Streifen „du mal▢“ gleitet auf den Platz (roter Verbkreis über „mal“, D1). material: Kofi hebt den Stift und schaut das Kind an. Kein Satz (Noch-mal-hören: „du … malen.“).
-- **Richtig (-st):** wie §1, Kofi malt eine Blume auf den Bogen; Freude-Variante §7.
-- **Daneben (-t):** Das Plättchen legt sich an, rastet nicht ein, kippt leicht (0,3 s), weiches Boing; die Sache zeigt, zu wem „malt“ gehört: Timo und Ela heben kurz den Stift und schauen zum Streifen, Kofi wartet; das Plättchen gleitet zurück (bis 1,6 s). Passt die Endung zu niemandem („maln“), hebt niemand den Stift. Dann „Versuch es noch einmal.“ Kein falsches Paar wird gesprochen.
-- **Hilfe 1 (Probe):** Hörprobe – die Endungen -e, -st, -t, -en leuchten nacheinander am Stamm auf, der Erzähler spricht im selben Ton „du male · du malst · du malt · du malen“; das Kind entscheidet.
-- **Hilfe 2 (Lösung, Kind führt aus):** Vor Kofi steht ein Tischkärtchen; er dreht es um (Kontrollkarte): „du …st“. Das Plättchen „-st“ bekommt den Sonnenring, das Kind zieht es. Zählt nicht als gekonnt.
-- **personalpronomen:** Streifen „▢ malen.“; material: Timo und Ela heben den Stift → „sie“. Daneben „ihr“: Kofi und Lena heben kurz den Stift. Hilfe 1: „wer malt?“ – die Wartenden nicken einmal (nur Bild). Hilfe 2: Kärtchen „sie“.
-- **grundform-verb:** Streifen „Ela mal|t“: die gebeugte Form steht ganz da (ich male, du malst, Timo malt, Ela malt, ihr malt, gemischt), ihre Endung liegt in der Lücke, der Stamm ist nicht vorgeschnitten, es gibt keinen zweiten Streifen. Das Kind legt -en (bei basteln -n) darauf, die alte Endung fällt ab, der Erzähler liest das bloße Verb („Malen.“), das Werkzeug des Verbs legt sich als großes Ding von selbst an den Bogen. Die Grundform lässt niemanden handeln, auch bei einer falschen Endung hebt keiner den Stift (nur das Plättchen kippt und gleitet zurück). Ablage: -e -st -t -en -n; bei Endung und Fürwort ohne -n.
+- **0 s:** Ein neuer Streifen „du mal▢“ wird von der eigenen Hand vor den Platz geschoben (roter Verbkreis über „mal“, D1). material: Kofi hebt den Stift und schaut das Kind an. Kein Satz (Noch mal hören: „du … malen.“).
+- **Richtig (-st):** wie §1, Kofi malt eine Blume auf den Bogen; Freude §7.
+- **Daneben (-t):** Plättchen legt sich an, rastet nicht ein, kippt leicht (0,3 s), weiches Boing; Timo und Ela heben kurz den Stift und schauen zum Streifen (zu ihnen gehört „malt“), Kofi wartet; das Plättchen gleitet zurück auf seinen Platz auf dem Holz (bis 1,6 s). Passt es zu niemandem („male“ bei du: nur ich), hebt die eigene Hand kurz den Stift. „Versuch es noch einmal.“ Kein falsches Paar wird gesprochen.
+- **Hilfe 1 (Probe):** Hörprobe – die Endungen leuchten nacheinander an der Kerbe auf, der Erzähler spricht im gleichen Ton „du male · du malst · du malt · du malen“; das Kind entscheidet.
+- **Hilfe 2 (Lösung, Kind führt aus):** Kofi dreht sein Tischkärtchen um (Kontrollkarte): „du …st“. „-st“ bekommt den Sonnenring, das Kind zieht es. Zählt nicht als gekonnt.
+- **personalpronomen:** Streifen „▢ malen.“; material: Timo und Ela heben den Stift → „sie“. Daneben „ihr“: Kofi und Lena heben kurz den Stift. Hilfe 1: die Wartenden nicken einmal (nur Bild). Hilfe 2: Kärtchen „sie“.
 ## 5. Stufen
 - **material:** die Gemeinten heben vorher den Stift und schauen (du, ihr) oder sind über ihr Papier gebeugt (er, sie).
-- **vorstellung:** alle sitzen gleich still; nur der Streifen sagt, wer. „sie“ ohne Bild: -t und -en zählen beide, die Szene tut, was die Form sagt (Ela allein oder Ela und Timo) **(Annahme)**.
-- **kopf:** Streifen „du ▢“ – das Kind schreibt „malst“ über `<ls-tastatur>`; Wirkung gleich. personalpronomen kopf: das Fürwort schreiben.
-- Wechsel mitten in der Runde: die Runde legt die Stifte hin und setzt sich gerade (≤ 1,5 s), ohne Satz; beim ersten Mal Mini-Einführung.
+- **vorstellung:** alle sitzen gleich still, Stifte liegen; nur der Streifen sagt, wer. „sie“: -t und -en zählen beide, die Szene tut, was die Form sagt (Ela allein oder Timo und Ela) **(Annahme)**.
+- **kopf:** Streifen „du ▢“ – das Kind schreibt „malst“ über `<ls-tastatur>`; Plättchen liegen nicht da. Wirkung gleich.
+- Wechsel mitten in der Runde: die Runde legt die Stifte hin und setzt sich gerade (≤ 1,5 s), beim ersten Mal Mini-Einführung.
 ## 6. Alle Sätze wörtlich (Erzähler, dritte Person, ≤ 8 Wörter)
-- Rundenanfang: kein Satz. Aufgabe (nur Noch-mal-hören): „{person} … {grundform}.“ · Richtig: „{person} {form}.“ · Daneben: „Versuch es noch einmal.“
-- Hilfe 1: „{person} {stamm}e · {stamm}st · {stamm}t · {stamm}en.“ · Pronomen: „Wer {form}?“ · Hilfe 2: „{Name} dreht das Kärtchen um.“
-- Wechsel vorstellung: „Jetzt zeigt nur der Satz, wer es tut.“ · kopf: „Jetzt schreibst du das Verb.“
-- **Einführung** (echtes Spielbild, eine neue Sache: Endung an den Stamm legen): „Die Runde malt zusammen ein großes Bild.“ · „Du sitzt mit am Tisch.“ (Ring auf Hände) · „Kofi schaut dich an.“ · „Timo und Ela malen da drüben.“ · „Hier liegt dein Satz.“ (Ring auf Streifen) · „Am Verb fehlt das Ende.“ (Ring auf Lücke) · „Hier liegen die Endungen.“ (Ring auf Ablage) · Timo zieht „-t“ an „er mal▢“: „Er malt.“ Timo malt. · „Jetzt du. Du sagst zu Kofi: du …“ (Sonnenring auf „-st“, Kind zieht) · „Du malst.“ Kofi malt. · „Passt es nicht, rutscht es zurück.“ · „Dann probierst du es einfach noch einmal.“ · „So lernst du, wer was tut.“ · „Jetzt geht es los.“ Jede Einführung erzählt die ganze Geschichte, auch wenn die Lernsteuerung mit Pronomen oder Grundform beginnt; danach kommt nur das Neue dazu: Pronomen „Jetzt fehlt, wer es tut.“ · Grundform „Am Verb hängt schon ein Ende.“ (das Kind legt -en) und „Das alte Ende fällt ab.“ Gebaut mit `einfuehrung-lauf.js`.
-- Pause (Mach mit): „Malt zusammen: ich male, du malst.“ · feste Texte zusammen ≈ 1 000 Zeichen.
+- Rundenanfang: kein Satz. Aufgabe (nur Noch mal hören): „{person} … {grundform}.“ · Richtig: „{person} {form}.“ · Daneben: „Versuch es noch einmal.“
+- Hilfe 1: „{person} {stamm}e · {stamm}st · {stamm}t · {stamm}en.“ · Pronomen: „Wer {form}?“ · Hilfe 2: „{Name} dreht das Kärtchen um.“ · Wechsel vorstellung: „Jetzt zeigt nur der Satz, wer es tut.“ · kopf: „Jetzt schreibst du das Verb.“
+- **Einführung** (echtes Spielbild, eine neue Sache: Endung zur Person an den Stamm legen): „Die Runde malt zusammen ein großes Bild.“ · „Du sitzt mit am Tisch.“ (Ring auf Hände) · „Kofi schaut dich an.“ · „Timo und Ela malen da drüben.“ · „Hier liegt dein Satz.“ (Ring auf Streifen) · „Am Verb fehlt das Ende.“ (Ring auf Kerbe) · „Hier liegen die Endungen.“ (Ring auf Plättchen) · Timo zieht „-t“ an „er mal▢“: „Er malt.“ Timo malt. · „Jetzt du. Du sagst zu Kofi: du …“ (Ring auf „-st“, Kind zieht) · „Du malst.“ Kofi malt. · „Passt es nicht, rutscht es zurück.“ · „Dann probierst du es einfach noch einmal.“ · „So lernst du, wer was tut.“ · „Jetzt geht es los.“ Beginnt die Runde mit Pronomen, kommt danach nur: „Jetzt fehlt, wer es tut.“ Gebaut mit `einfuehrung-lauf.js`.
+- Pause (Mach mit): „Malt zusammen: ich male, du malst.“ · feste Texte zusammen ≈ 900 Zeichen.
 ## 7. Freude
-- Richtig, zufällig, verschieden groß: der Gemeinte nickt dem Kind zu · bei „wir“ malen alle gleichzeitig, fünf Töne als Akkord · selten (jede dritte bis vierte) hält der Gemeinte sein Werk kurz hoch (`huepfen` im Sitzen, Stauchen).
-- Klänge (Web Audio, leise): Plopp beim Einrasten, Kratzen des Stifts, Papier-Tapp, Klötzchen-Klack, weiches Boing beim Zurückgleiten. Ist der Bogen voll, rollt die Runde ihn auf und legt einen neuen hin (≤ 1,5 s).
-- Witz ab und zu (höchstens jede fünfte, nie nach daneben): Kofis Klotzturm wackelt, er hält die Luft an · Lena malt dem Kind einen kleinen Käfer an seinen Platz · Timos Knetschlange wird viel zu lang.
+- Richtig, zufällig, verschieden groß: der Gemeinte nickt dem Kind zu · bei „wir“ malen alle gleichzeitig, fünf Töne als Akkord · selten hält der Gemeinte sein Werk kurz hoch (Stauchen im Sitzen). Die Dinge auf dem Bogen sind groß genug, um sie zu erkennen, und stehen still.
+- Klänge (Web Audio, leise): Plopp beim Einrasten, Kratzen des Stifts, Papier-Tapp, Klötzchen-Klack, Boing beim Zurückgleiten. Ist der Bogen voll, rollt die Runde ihn auf und legt einen neuen hin (≤ 1,5 s).
+- Witz ab und zu (höchstens jede fünfte, nie nach daneben): Kofis Klotzturm wackelt, er hält die Luft an · Lena malt dem Kind einen Käfer an seinen Platz · Timos Knetschlange wird viel zu lang.
 ## 8. Daten
-- `spiele/spiele.json`, Eintrag `ichduwir` neu: titel „Ich, du, wir“, thema „Verb passt zur Person“, kategorie „grammatik“, symbol `grammatik/g02-ich-du-wir-person-und-verb/symbol.svg` (Wortstreifen „mal“ mit rotem Kreis und angelegtem „-st“), datei `grammatik/g02-ich-du-wir-person-und-verb/index.html`, text „Die Endung an das Verb legen, und wer gemeint ist, malt.“, beschreibung „Das Kind sitzt mit der Runde am Maltisch und legt Endungen an Verben (du malst, wir malen), Fürwörter vor Verben oder bildet die Grundform. Passt es, tun genau die gemeinten Personen es auf dem gemeinsamen Bogen: bei ich malt die eigene Hand, bei du Kofi gegenüber. Passt es nicht, heben die kurz den Stift, zu denen die Form gehört, und das Plättchen gleitet zurück.“, arten `[{ "art": "verbform", "ziele": ["endung","pronomen","grundform"], "stufen": ["material","vorstellung","kopf"] }]`, regal `null` (wie G09, Annahme).
-- **Aufgabenart neu `verbform`:** Schlüssel `verbform:endung:malen:du`, `verbform:pronomen:malen:sie-pl`, `verbform:grundform:malen:er`; daten `{ ziel, verb: "malen", stamm: "mal", person: "du", form: "malst", endung: "st", wer: ["kofi"] }`. Spezifikation `{ art: "verbform", ziel: "endung" }` je Thema. Wortliste `spiele/woerter/verben.js`: malen, kleben, legen, bauen, rollen, tupfen, stecken (alle regelmäßig, Stamm ohne -t/-d/-s); grundform zusätzlich basteln. Personen ich, du, er, sie, wir, ihr, sie-pl. `ZIEL_MS.verbform` 6000 (Annahme). Später starke Verben (`stark: true`, Kontrollkarte) und Kl. 3 aus denselben Daten.
+- `spiele/spiele.json` `ichduwir` bleibt (titel, thema, symbol, datei, text, regal `null`); **arten** `[{ "art": "verbform", "ziele": ["endung","pronomen"], "stufen": ["material","vorstellung","kopf"] }]`; **beschreibung** ohne Grundform: „Das Kind sitzt mit der Runde am Maltisch und legt Endungen an Verben (du malst, wir malen) oder Fürwörter vor Verben. Passt es, tun genau die gemeinten Personen es auf dem gemeinsamen Bogen: bei ich malt die eigene Hand, bei du Kofi gegenüber. Passt es nicht, heben die kurz den Stift, zu denen die Form gehört, und das Plättchen gleitet zurück.“
+- Aufgabenart `verbform` vorhanden; Ziel `grundform` bleibt in `aufgabenarten.js` für ein späteres Spiel, G02 erzeugt und meldet es nicht mehr. `spiele/lernplan.json`: grundform-verb ohne Aufgaben aus G02 (Verweis auf `ichduwir` entfernen). Wortliste ohne basteln, Ablage ohne -n.
+- Prüfstand: `?thema=verb-personalform` muss im Film wirken; ein neues Kind beginnt mit verb-personalform.
 ## 9. Bausteine
-- vorhanden: `spiele/rahmen/` leiste, blase (`ohne-text`), hilfe, pause, knopf, tastatur, `ziehbar()`, `<ls-wortart art="verb">` (D1), `einfuehrung-lauf.js`, `pruefen.js`; `spiele/lernsteuerung.js`; Vorlage; Runde aus `spiele/runde/` (`nicken`, `huepfen`); Objekte `stiftebecher`, `papier`, `tischkaertchen`; Raum nach `m08-stellentafel/raum.js`.
-- neu im Spielordner: Wohnküche mit Maltisch und Bogen, Ich-Sicht-Hände, Sitzhaltungen der Runde (Stift heben, hinschauen, malen, kleben, bauen), Wortstreifen mit Lücke, Klänge, Einführung im Spielbild.
-- **Endungsplättchen** neu: ein Stück Wortstreifen mit der Endung, rastet rechts am Verbstamm ein, ohne Farbe und Symbol. Fürwort-Plättchen: nur Wortstreifen (D2, kein Symbol).
-- Freigabe nötig: Soll das Endungsplättchen (weißes Wortstreifen-Stück „-st“, rastet rechts am Stamm mit rotem Verbkreis ein) als Lernzeichen für alle Spiele gelten (G02, G03 Zeitformen, S04 Verlängern)?
+- vorhanden: `spiele/rahmen/` leiste, blase, hilfe, pause, knopf, tastatur, `ziehbar()`, `<ls-wortart art="verb">` (D1), `einfuehrung-lauf.js`, `pruefen.js`; `lernsteuerung.js`; Runde aus `spiele/runde/`; Objekte `stiftebecher`, `tischkaertchen`; im Spielordner `raum.js`, `runde.js`, `marken.js`, `logik.js`, `spiel.js` (umbauen).
+- **Ziehen-Fehler, Fix in `spiele/rahmen/ziehen.js`:** Verdacht Stapelkontext – das Teil bleibt beim Ziehen im Fluss seines Elternteils (`.ablage` z-index 1 in `.matte` z-index 4, darüber Hände z 5 und andere Schichten), `.gezogen { z-index: 40 }` wirkt nur innerhalb davon. Ursache im Browser belegen; Lösung in `ziehbar()` für alle Spiele (z. B. gezogenes Teil für die Dauer des Ziehens auf eine oberste Ebene heben). Browser-Test: mitten im Ziehen `elementFromPoint` am Zeiger trifft das Plättchen, und es ist sichtbar.
+- neu im Spielordner: Holztisch statt Steinplatten in `raum.js`, Kerbe am Streifen, lose Plättchen auf dem Holz ohne Ablage-Kasten; Grundform-Zweig aus `spiel.js`/`logik.js` entfernen.
+- Endungsplättchen = Lernzeichen D9 (Christian 2026-11-17), Fürwort-Plättchen = Wortstreifen-Stück (D2). Kein neues Lernzeichen.
 ## 10. Gestrichen
-- Personenscheibe zum Drehen: zweite Geste und neues Lernzeichen; die Ablage mit Fürwort-Plättchen trägt dasselbe mit derselben Handlung.
-- „es“: kein Kind der Runde ist „es“; kommt mit pronomen-statt-nomen (Kl. 3, „das Pferd → es“).
-- Besitzanzeigende Fürwörter (mein, dein, sein, Ball rollt zu Kofi): Kl. 3, zweiter Gedanke; die Daten (wer) tragen es später.
-- Starke Verben (du läufst) mit Kontrollkarte zum Umdrehen: erst nach den regelmäßigen; die Kontrollkarte bleibt als Hilfe 2.
-- Verben auf -t/-d/-s (arbeiten, du arbeitest) und -eln in Personalform: eigene Ausnahme, nicht in Kl. 2.
-- backen (du backst/bäckst): zwei richtige Formen. Szenen mit Bewegung ohne Spur (winken, lachen): kein bleibendes Bild; nur als Witz.
-- Mach-mit-Satz aus dem Katalog (Frage an jemanden): länger; der kurze Satz in §6 trägt es.
+- Grundform (grundform-verb): Entscheidung Christian 2026-11-17; eigenes Spiel oder G03.
+- Matte als Kasten, weiße Felder um Streifen und Ablage, Steinplatten-Tisch: Rückmeldung Christian, eine Fläche (§4).
+- Personenscheibe zum Drehen: zweite Geste; die Fürwort-Plättchen tragen dasselbe mit derselben Handlung.
+- „es“: kein Kind der Runde ist „es“; kommt mit pronomen-statt-nomen (Kl. 3).
+- Besitzanzeigende Fürwörter, starke Verben, Verben auf -t/-d/-s, backen (zwei Formen): Kl. 3 bzw. später; Daten (wer) tragen es.
+## 11. Abweichungen von der Vorgabe
+- keine (Maltisch in Ich-Sicht, Kofi gegenüber, Endung an den Stamm, die Gemeinten handeln: alles bleibt).
 
-## Geparkt
-
-**2026-11-17**, nach zwei Runden. Der Prüfstand war grün, die Spielprüfung rot (Bericht in `.superpowers/spiele/spiel-g02/spielpruefung-r2.md`).
-
-Offene Befunde:
-- **Kern fehlt in der ersten Runde.** Die Lernsteuerung stellt einem neuen Kind zuerst die Grundform. Dort handelt niemand: Ein Ding fliegt vom Streifen auf den Bogen. „du mal-st → Kofi malt“ sieht man nur in der Einführung.
-- **Zehnmal: nein.** In der Grundform ist die Antwort immer „-en“. Ab dem zweiten Zug muss das Kind den Streifen nicht mehr lesen.
-- **Stamm vorgeschnitten.** Die alte Endung steht in einem eigenen Kasten („bastel [t]“). Das nimmt dem Kind die einzige echte Entscheidung ab.
-- **G7: Falsche Sätze bleiben stehen.** „Ela malen“ und „Timo basteln“ bleiben nach einer gelösten Grundform-Aufgabe stehen.
-- **Die Einführung bringt zwei neue Dinge auf einmal:** die Endung zur Person und die Grundform.
-- **Die Stufen sind kaum verschieden.** Material und Vorstellung sehen bei der Grundform gleich aus. Die Dinge auf dem Bogen sind klein, das Windrad springt.
-- **Prüfstand:** `?thema=` wirkt im Film nicht, deshalb hat keine Prüfung die Personalform gezeigt.
-
-Vorschläge des Prüfers: Die erste Runde spielt die Personalform. Die Grundform bekommt eine eigene Wirkung ohne Person (zum Beispiel ein Etikett „malen“ am Stiftebecher). Die Endung wird nicht vorgeschnitten. Ein gelöster Streifen zeigt nur noch „malen“. Die Einführung bringt eine Sache je Einführung.
-
-**Fragen an Christian:**
-1. Soll die Grundform aus G02 heraus? Dann ist G02 nur Personalform und Fürwörter, und die Grundform wird ein eigenes Spiel oder kommt zu G03. Oder soll sie bleiben, mit eigener Wirkung?
-2. Das Endungsplättchen ist ein neues Lernzeichen (weißer Wortstreifen mit Endung, rastet am roten Verbkreis ein). Soll es für alle Spiele gelten, also auch für G03 und S04?
+## Antwort von Christian (2026-11-17)
+- Grundform kommt aus G02 heraus (eigenes Spiel oder G03). Endungsplättchen gilt als Lernzeichen D9 für alle Spiele.
+- Nach Anspielen: Plättchen beim Ziehen unsichtbar (Fehler in `ziehbar()` beheben, Browser-Test); keine Rahmen, Kästen, Bereichshintergründe – alles liegt auf einer Fläche, der Tisch ist lesbar ein Tisch.
