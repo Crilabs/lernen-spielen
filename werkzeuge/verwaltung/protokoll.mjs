@@ -23,13 +23,21 @@ function werkzeug(name, e = {}) {
 }
 
 /**
- * Zeilen zu einem Ereignis aus `--output-format stream-json` (ohne Uhrzeit).
+ * Zeilen zu einem Ereignis aus `--output-format stream-json` (ohne Uhrzeit). Mit Hintergrund-Agenten besteht eine
+ * Sitzung aus mehreren Zügen: Jede Meldung eines Agenten weckt sie, jeder Zug bringt eigenes init und result
+ * (Lauf „Mit echten Dingen“, 2026-11-17). `zustand` merkt sich den Start, damit er nur einmal im Protokoll steht;
+ * das result eines Zugs wiederholt seinen Text nicht (steht schon als ✎ da), das Ende des Laufs ist „# Ende“.
  * @param {any} ev
+ * @param {{ gestartet?: boolean }} [zustand]
  * @returns {string[]}
  */
-export function zeilenAusEreignis(ev) {
+export function zeilenAusEreignis(ev, zustand = {}) {
   if (!ev || typeof ev !== "object") return [];
-  if (ev.type === "system" && ev.subtype === "init") return [`· Sitzung gestartet (${ev.model ?? "?"})`];
+  if (ev.type === "system" && ev.subtype === "init") {
+    if (zustand.gestartet) return [];
+    zustand.gestartet = true;
+    return [`· Sitzung gestartet (${ev.model ?? "?"})`];
+  }
   if (ev.type === "assistant") {
     return (ev.message?.content ?? []).flatMap((b) => {
       if (b.type === "text" && b.text?.trim()) return [`✎ ${kuerze(b.text, 400)}`];
@@ -46,19 +54,20 @@ export function zeilenAusEreignis(ev) {
     });
   }
   if (ev.type === "result") {
-    const kosten = typeof ev.total_cost_usd === "number" ? `, ${ev.total_cost_usd.toFixed(2)} $` : "";
-    const dauer = typeof ev.duration_ms === "number" ? `, ${Math.round(ev.duration_ms / 60000)} min` : "";
-    return [`■ Ende der Sitzung (${ev.subtype ?? "?"}${dauer}${kosten})`, ...(ev.result ? [kuerze(ev.result, 2000)] : [])];
+    const kosten = typeof ev.total_cost_usd === "number" ? `bisher ${ev.total_cost_usd.toFixed(2)} $` : "";
+    if (ev.subtype === "success") return [`· Zug fertig${kosten ? ` (${kosten})` : ""}`];
+    const grund = [ev.subtype ?? "?", kosten].filter(Boolean).join(", ");
+    return [`✗ Zug abgebrochen (${grund})${ev.result ? `: ${kuerze(ev.result, 600)}` : ""}`];
   }
   return [];
 }
 
 /** Zeile für die Ausgabe von claude: JSON wird übersetzt, alles andere bleibt wörtlich. */
-export function zeilenAusAusgabe(zeile) {
+export function zeilenAusAusgabe(zeile, zustand = {}) {
   if (!zeile.trim()) return [];
   let ev;
   try { ev = JSON.parse(zeile); } catch { return [zeile]; }
-  return zeilenAusEreignis(ev);
+  return zeilenAusEreignis(ev, zustand);
 }
 
 /** Was ein Agent des Workflows zurückgegeben hat, in einer Zeile. */
