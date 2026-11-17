@@ -98,28 +98,41 @@ export function laufUmgebung(basis, auftragId, transkript) {
   };
 }
 
+/**
+ * Pflicht zur Ergebnisdatei im Systemprompt: Er steht in jedem Zug vorn, ein Satz am Ende des Skills nicht. Im Lauf
+ * „Mit echten Dingen“ (2026-11-17) war alles grün und committet, aber die Datei fehlte – der Auftrag galt als
+ * fehlgeschlagen.
+ */
+export const ergebnisPflicht = (datei) =>
+  `Dieser Lauf kommt aus der Verwaltung. Dein letzter Schritt, bevor du endest: Schreib die Ergebnisdatei ${datei} ` +
+  "so, wie der Skill es im Abschnitt „Lauf aus der Verwaltung“ vorgibt (Status und Zusammenfassung als JSON). " +
+  "Fehlt die Datei, gilt der Auftrag als fehlgeschlagen, auch wenn alles grün ist. Laufen noch Agenten im " +
+  "Hintergrund, schreib sie erst, wenn alle fertig sind.";
+
 /** Argumente für `claude -p`: stream-json, damit das Protokoll während des Laufs wächst (Textmodus druckt nur das Ende). */
-export function claudeArgumente(befehl, sessionId) {
+export function claudeArgumente(befehl, sessionId, ergebnis) {
   return [
     "-p", befehl, "--session-id", sessionId, "--output-format", "stream-json", "--verbose",
+    ...(ergebnis ? ["--append-system-prompt", ergebnisPflicht(ergebnis)] : []),
     "--permission-mode", "bypassPermissions", "--disallowedTools", ...VERBOTEN,
   ];
 }
 
 /** Startet einen Auftrag als `claude -p` im Repo; lesbares Protokoll (protokoll.mjs). Ergebnis: Exit-Code. */
-export function startClaude({ befehl, auftragId, wurzel, protokoll, alleMs = 5000 }) {
+export function startClaude({ befehl, auftragId, wurzel, protokoll, ergebnis, alleMs = 5000 }) {
   const sessionId = randomUUID();
   const transkript = transkriptPfad(wurzel, sessionId);
   mkdirSync(dirname(protokoll), { recursive: true });
   const log = createWriteStream(protokoll, { flags: "a" });
   log.write(`# ${new Date().toISOString()} ${befehl}\n# Sitzung ${sessionId}\n`);
   const schreibe = (zeile) => log.write(mitUhr(zeile));
-  const kind = spawn("claude", claudeArgumente(befehl, sessionId), {
+  const kind = spawn("claude", claudeArgumente(befehl, sessionId, ergebnis), {
     cwd: wurzel,
     env: laufUmgebung(process.env, auftragId, transkript),
     stdio: ["ignore", "pipe", "pipe"],
   });
-  createInterface({ input: kind.stdout }).on("line", (z) => zeilenAusAusgabe(z).forEach(schreibe));
+  const zustand = {};
+  createInterface({ input: kind.stdout }).on("line", (z) => zeilenAusAusgabe(z, zustand).forEach(schreibe));
   createInterface({ input: kind.stderr }).on("line", (z) => { if (z.trim()) schreibe(`! ${z}`); });
   const journal = journalBeobachter(transkript.replace(/\.jsonl$/, ""), schreibe);
   const takt = setInterval(journal, alleMs);
@@ -167,7 +180,7 @@ export async function arbeiteAb({ ordner = ORDNER, wurzel = WURZEL, starte = sta
       aendere(ordner, a.id, (l, i) => { l[i] = { ...l[i], status: "laeuft", gestartet: new Date().toISOString() }; return l; });
       rmSync(p.ergebnis(a.id), { force: true });
       try {
-        await starte({ befehl: a.befehl, auftragId: a.id, wurzel, protokoll: p.protokoll(a.id) });
+        await starte({ befehl: a.befehl, auftragId: a.id, wurzel, protokoll: p.protokoll(a.id), ergebnis: p.ergebnis(a.id) });
       } catch (e) {
         mkdirSync(dirname(p.protokoll(a.id)), { recursive: true });
         writeFileSync(p.protokoll(a.id), `\n# Fehler: ${/** @type {any} */ (e).message}\n`, { flag: "a" });

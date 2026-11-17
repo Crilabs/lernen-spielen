@@ -19,9 +19,22 @@ test("zeilenAusEreignis: Start, Text, Werkzeuge, Fehler, Ende", () => {
     { type: "tool_result", content: "ok" },
     { type: "tool_result", is_error: true, content: [{ type: "text", text: "Exit code 1" }] },
   ] } }), ["✗ Exit code 1"]);
-  assert.deepEqual(zeilenAusEreignis({ type: "result", subtype: "success", duration_ms: 5_400_000, total_cost_usd: 7.456, result: "G09 gemergt." }),
-    ["■ Ende der Sitzung (success, 90 min, 7.46 $)", "G09 gemergt."]);
+  assert.deepEqual(zeilenAusEreignis({ type: "result", subtype: "success", total_cost_usd: 7.456, result: "G09 gemergt." }),
+    ["· Zug fertig (bisher 7.46 $)"]);
+  assert.deepEqual(zeilenAusEreignis({ type: "result", subtype: "error_max_turns", total_cost_usd: 1, result: "zu viele Züge" }),
+    ["✗ Zug abgebrochen (error_max_turns, bisher 1.00 $): zu viele Züge"]);
   assert.deepEqual(zeilenAusEreignis({ type: "stream_event" }), []);
+});
+
+// Jede Meldung eines Hintergrund-Agenten weckt die Sitzung für einen neuen Zug mit eigenem init und result
+// (Lauf „Mit echten Dingen“, 2026-11-17): nur der erste Start zählt, der Text des Zugs steht schon als ✎ da.
+test("zeilenAusEreignis mit Zustand: Sitzung startet einmal, Züge enden ohne Wiederholung", () => {
+  const z = {};
+  const init = { type: "system", subtype: "init", model: "claude-opus-5-5" };
+  assert.deepEqual(zeilenAusEreignis(init, z), ["· Sitzung gestartet (claude-opus-5-5)"]);
+  assert.deepEqual(zeilenAusEreignis({ type: "result", subtype: "success", total_cost_usd: 5.31, result: "Text" }, z), ["· Zug fertig (bisher 5.31 $)"]);
+  assert.deepEqual(zeilenAusEreignis(init, z), []);
+  assert.deepEqual(zeilenAusAusgabe(JSON.stringify(init), z), []);
 });
 
 test("zeilenAusAusgabe: kein JSON bleibt wörtlich, Leerzeilen fallen weg", () => {
@@ -70,6 +83,16 @@ test("claudeArgumente: stream-json mit --verbose, Sperrliste zuletzt", () => {
   assert.deepEqual(a.slice(0, 7), ["-p", "Spiel entwickeln G09", "--session-id", "s1", "--output-format", "stream-json", "--verbose"]);
   assert.equal(a[a.indexOf("--disallowedTools") + 1], "Bash(git push:*)");
   assert.equal(a.at(-1), "Bash(./release.sh:*)");
+  assert.ok(!a.includes("--append-system-prompt"));
+});
+
+// Lauf „Mit echten Dingen“ (2026-11-17): alles grün, aber die Ergebnisdatei fehlte – die Pflicht stand nur am Ende des Skills.
+test("claudeArgumente: mit Ergebnisdatei steht die Pflicht im Systemprompt", () => {
+  const a = claudeArgumente("Mit echten Dingen x", "s1", "/repo/werkzeuge/verwaltung/ergebnisse/a-1.json");
+  const text = a[a.indexOf("--append-system-prompt") + 1];
+  assert.match(text, /\/repo\/werkzeuge\/verwaltung\/ergebnisse\/a-1\.json/);
+  assert.match(text, /fehlgeschlagen/);
+  assert.equal(a.at(-1), "Bash(./release.sh:*)");
 });
 
 // Das vorgetäuschte claude ist ein sh-Skript; die Verwaltung läuft nur auf dem Mac (npm run verwaltung).
@@ -80,21 +103,27 @@ test("startClaude: Protokoll wächst während des Laufs lesbar, Exit-Code zurüc
   const ereignisse = [
     { type: "system", subtype: "init", model: "m" },
     { type: "assistant", message: { content: [{ type: "tool_use", name: "Skill", input: { skill: "spiel-entwickeln" } }] } },
-    { type: "result", subtype: "success", result: "fertig" },
+    { type: "result", subtype: "success", total_cost_usd: 1, result: "erster Zug" },
+    { type: "system", subtype: "init", model: "m" },
+    { type: "result", subtype: "success", total_cost_usd: 2, result: "fertig" },
   ];
-  writeFileSync(join(bin, "claude"), `#!/bin/sh\ncat <<'E'\n${ereignisse.map((e) => JSON.stringify(e)).join("\n")}\nE\necho kaputt >&2\nexit 3\n`);
+  writeFileSync(join(bin, "claude"), `#!/bin/sh\nprintf '%s\\n' "$@" > "$0.args"\ncat <<'E'\n${ereignisse.map((e) => JSON.stringify(e)).join("\n")}\nE\necho kaputt >&2\nexit 3\n`);
   chmodSync(join(bin, "claude"), 0o755);
   const pfadVorher = process.env.PATH;
   process.env.PATH = `${bin}:${pfadVorher}`;
   try {
     const protokoll = join(o, "protokolle", "a.log");
-    const code = await startClaude({ befehl: "Spiel entwickeln G09", auftragId: "a", wurzel: o, protokoll, alleMs: 20 });
+    const ergebnis = join(o, "ergebnisse", "a.json");
+    const code = await startClaude({ befehl: "Spiel entwickeln G09", auftragId: "a", wurzel: o, protokoll, ergebnis, alleMs: 20 });
     assert.equal(code, 3);
     const text = readFileSync(protokoll, "utf8");
     assert.match(text, /^# .* Spiel entwickeln G09\n# Sitzung [0-9a-f-]+\n/);
-    for (const z of ["· Sitzung gestartet (m)", "→ Skill: spiel-entwickeln", "■ Ende der Sitzung (success)", "fertig", "! kaputt", "# Ende, Exit-Code 3"]) {
+    for (const z of ["· Sitzung gestartet (m)", "→ Skill: spiel-entwickeln", "· Zug fertig (bisher 1.00 $)", "· Zug fertig (bisher 2.00 $)", "! kaputt", "# Ende, Exit-Code 3"]) {
       assert.ok(text.includes(z), `fehlt: ${z}\n${text}`);
     }
+    assert.equal(text.split("Sitzung gestartet").length, 2, "Sitzung startet nur einmal");
+    assert.ok(!text.includes("erster Zug"), "Text des Zugs wird nicht wiederholt");
+    assert.ok(readFileSync(join(bin, "claude.args"), "utf8").includes(ergebnis), "Ergebnisdatei im Systemprompt");
     assert.ok(!text.includes('{"type"'), "kein rohes JSON im Protokoll");
   } finally {
     process.env.PATH = pfadVorher;
