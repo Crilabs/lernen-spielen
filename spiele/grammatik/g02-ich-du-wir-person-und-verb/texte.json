@@ -1,0 +1,783 @@
+{
+ "hinweis": "Sätze von G02 Ich, du, wir, die aus Daten kommen (je Aufgabe ausgeschrieben, keine zur Laufzeit zusammengesetzten Sätze). aufgabe: das Gesagte zum Noch-mal-hören (wird nicht von selbst gesprochen), je Schlüssel verbform:<ziel>:<verb>:<person>. richtig: die Aufgabe nach dem richtigen Zug, je <verb>:<person> (Verb zur Person und Fürwort); richtigGrundform: je <verb>:<person> (er oder sie). hilfe1: die Hörprobe in dieser Reihenfolge (Verb zur Person: die Endungen -e, -st, -t, -en; Fürwort: die Fürwörter, die zur Form passen; Grundform: die vier Endungen am Stamm).",
+ "aufgabe": {
+  "verbform:endung:malen:ich": "Ich … malen.",
+  "verbform:endung:malen:du": "Du … malen.",
+  "verbform:endung:malen:er": "Er … malen.",
+  "verbform:endung:malen:sie": "Sie … malen.",
+  "verbform:endung:malen:wir": "Wir … malen.",
+  "verbform:endung:malen:ihr": "Ihr … malen.",
+  "verbform:endung:malen:sie-pl": "Sie … malen.",
+  "verbform:endung:kleben:ich": "Ich … kleben.",
+  "verbform:endung:kleben:du": "Du … kleben.",
+  "verbform:endung:kleben:er": "Er … kleben.",
+  "verbform:endung:kleben:sie": "Sie … kleben.",
+  "verbform:endung:kleben:wir": "Wir … kleben.",
+  "verbform:endung:kleben:ihr": "Ihr … kleben.",
+  "verbform:endung:kleben:sie-pl": "Sie … kleben.",
+  "verbform:endung:legen:ich": "Ich … legen.",
+  "verbform:endung:legen:du": "Du … legen.",
+  "verbform:endung:legen:er": "Er … legen.",
+  "verbform:endung:legen:sie": "Sie … legen.",
+  "verbform:endung:legen:wir": "Wir … legen.",
+  "verbform:endung:legen:ihr": "Ihr … legen.",
+  "verbform:endung:legen:sie-pl": "Sie … legen.",
+  "verbform:endung:bauen:ich": "Ich … bauen.",
+  "verbform:endung:bauen:du": "Du … bauen.",
+  "verbform:endung:bauen:er": "Er … bauen.",
+  "verbform:endung:bauen:sie": "Sie … bauen.",
+  "verbform:endung:bauen:wir": "Wir … bauen.",
+  "verbform:endung:bauen:ihr": "Ihr … bauen.",
+  "verbform:endung:bauen:sie-pl": "Sie … bauen.",
+  "verbform:endung:rollen:ich": "Ich … rollen.",
+  "verbform:endung:rollen:du": "Du … rollen.",
+  "verbform:endung:rollen:er": "Er … rollen.",
+  "verbform:endung:rollen:sie": "Sie … rollen.",
+  "verbform:endung:rollen:wir": "Wir … rollen.",
+  "verbform:endung:rollen:ihr": "Ihr … rollen.",
+  "verbform:endung:rollen:sie-pl": "Sie … rollen.",
+  "verbform:endung:tupfen:ich": "Ich … tupfen.",
+  "verbform:endung:tupfen:du": "Du … tupfen.",
+  "verbform:endung:tupfen:er": "Er … tupfen.",
+  "verbform:endung:tupfen:sie": "Sie … tupfen.",
+  "verbform:endung:tupfen:wir": "Wir … tupfen.",
+  "verbform:endung:tupfen:ihr": "Ihr … tupfen.",
+  "verbform:endung:tupfen:sie-pl": "Sie … tupfen.",
+  "verbform:endung:stecken:ich": "Ich … stecken.",
+  "verbform:endung:stecken:du": "Du … stecken.",
+  "verbform:endung:stecken:er": "Er … stecken.",
+  "verbform:endung:stecken:sie": "Sie … stecken.",
+  "verbform:endung:stecken:wir": "Wir … stecken.",
+  "verbform:endung:stecken:ihr": "Ihr … stecken.",
+  "verbform:endung:stecken:sie-pl": "Sie … stecken.",
+  "verbform:pronomen:malen:ich": "… male.",
+  "verbform:pronomen:malen:du": "… malst.",
+  "verbform:pronomen:malen:er": "… malt.",
+  "verbform:pronomen:malen:sie": "… malt.",
+  "verbform:pronomen:malen:wir": "… malen.",
+  "verbform:pronomen:malen:ihr": "… malt.",
+  "verbform:pronomen:malen:sie-pl": "… malen.",
+  "verbform:pronomen:kleben:ich": "… klebe.",
+  "verbform:pronomen:kleben:du": "… klebst.",
+  "verbform:pronomen:kleben:er": "… klebt.",
+  "verbform:pronomen:kleben:sie": "… klebt.",
+  "verbform:pronomen:kleben:wir": "… kleben.",
+  "verbform:pronomen:kleben:ihr": "… klebt.",
+  "verbform:pronomen:kleben:sie-pl": "… kleben.",
+  "verbform:pronomen:legen:ich": "… lege.",
+  "verbform:pronomen:legen:du": "… legst.",
+  "verbform:pronomen:legen:er": "… legt.",
+  "verbform:pronomen:legen:sie": "… legt.",
+  "verbform:pronomen:legen:wir": "… legen.",
+  "verbform:pronomen:legen:ihr": "… legt.",
+  "verbform:pronomen:legen:sie-pl": "… legen.",
+  "verbform:pronomen:bauen:ich": "… baue.",
+  "verbform:pronomen:bauen:du": "… baust.",
+  "verbform:pronomen:bauen:er": "… baut.",
+  "verbform:pronomen:bauen:sie": "… baut.",
+  "verbform:pronomen:bauen:wir": "… bauen.",
+  "verbform:pronomen:bauen:ihr": "… baut.",
+  "verbform:pronomen:bauen:sie-pl": "… bauen.",
+  "verbform:pronomen:rollen:ich": "… rolle.",
+  "verbform:pronomen:rollen:du": "… rollst.",
+  "verbform:pronomen:rollen:er": "… rollt.",
+  "verbform:pronomen:rollen:sie": "… rollt.",
+  "verbform:pronomen:rollen:wir": "… rollen.",
+  "verbform:pronomen:rollen:ihr": "… rollt.",
+  "verbform:pronomen:rollen:sie-pl": "… rollen.",
+  "verbform:pronomen:tupfen:ich": "… tupfe.",
+  "verbform:pronomen:tupfen:du": "… tupfst.",
+  "verbform:pronomen:tupfen:er": "… tupft.",
+  "verbform:pronomen:tupfen:sie": "… tupft.",
+  "verbform:pronomen:tupfen:wir": "… tupfen.",
+  "verbform:pronomen:tupfen:ihr": "… tupft.",
+  "verbform:pronomen:tupfen:sie-pl": "… tupfen.",
+  "verbform:pronomen:stecken:ich": "… stecke.",
+  "verbform:pronomen:stecken:du": "… steckst.",
+  "verbform:pronomen:stecken:er": "… steckt.",
+  "verbform:pronomen:stecken:sie": "… steckt.",
+  "verbform:pronomen:stecken:wir": "… stecken.",
+  "verbform:pronomen:stecken:ihr": "… steckt.",
+  "verbform:pronomen:stecken:sie-pl": "… stecken.",
+  "verbform:grundform:malen:er": "Timo malt.",
+  "verbform:grundform:malen:sie": "Ela malt.",
+  "verbform:grundform:kleben:er": "Timo klebt.",
+  "verbform:grundform:kleben:sie": "Ela klebt.",
+  "verbform:grundform:legen:er": "Timo legt.",
+  "verbform:grundform:legen:sie": "Ela legt.",
+  "verbform:grundform:bauen:er": "Timo baut.",
+  "verbform:grundform:bauen:sie": "Ela baut.",
+  "verbform:grundform:rollen:er": "Timo rollt.",
+  "verbform:grundform:rollen:sie": "Ela rollt.",
+  "verbform:grundform:tupfen:er": "Timo tupft.",
+  "verbform:grundform:tupfen:sie": "Ela tupft.",
+  "verbform:grundform:stecken:er": "Timo steckt.",
+  "verbform:grundform:stecken:sie": "Ela steckt.",
+  "verbform:grundform:basteln:er": "Timo bastelt.",
+  "verbform:grundform:basteln:sie": "Ela bastelt."
+ },
+ "richtig": {
+  "malen:ich": "Ich male.",
+  "malen:du": "Du malst.",
+  "malen:er": "Er malt.",
+  "malen:sie": "Sie malt.",
+  "malen:wir": "Wir malen.",
+  "malen:ihr": "Ihr malt.",
+  "malen:sie-pl": "Sie malen.",
+  "kleben:ich": "Ich klebe.",
+  "kleben:du": "Du klebst.",
+  "kleben:er": "Er klebt.",
+  "kleben:sie": "Sie klebt.",
+  "kleben:wir": "Wir kleben.",
+  "kleben:ihr": "Ihr klebt.",
+  "kleben:sie-pl": "Sie kleben.",
+  "legen:ich": "Ich lege.",
+  "legen:du": "Du legst.",
+  "legen:er": "Er legt.",
+  "legen:sie": "Sie legt.",
+  "legen:wir": "Wir legen.",
+  "legen:ihr": "Ihr legt.",
+  "legen:sie-pl": "Sie legen.",
+  "bauen:ich": "Ich baue.",
+  "bauen:du": "Du baust.",
+  "bauen:er": "Er baut.",
+  "bauen:sie": "Sie baut.",
+  "bauen:wir": "Wir bauen.",
+  "bauen:ihr": "Ihr baut.",
+  "bauen:sie-pl": "Sie bauen.",
+  "rollen:ich": "Ich rolle.",
+  "rollen:du": "Du rollst.",
+  "rollen:er": "Er rollt.",
+  "rollen:sie": "Sie rollt.",
+  "rollen:wir": "Wir rollen.",
+  "rollen:ihr": "Ihr rollt.",
+  "rollen:sie-pl": "Sie rollen.",
+  "tupfen:ich": "Ich tupfe.",
+  "tupfen:du": "Du tupfst.",
+  "tupfen:er": "Er tupft.",
+  "tupfen:sie": "Sie tupft.",
+  "tupfen:wir": "Wir tupfen.",
+  "tupfen:ihr": "Ihr tupft.",
+  "tupfen:sie-pl": "Sie tupfen.",
+  "stecken:ich": "Ich stecke.",
+  "stecken:du": "Du steckst.",
+  "stecken:er": "Er steckt.",
+  "stecken:sie": "Sie steckt.",
+  "stecken:wir": "Wir stecken.",
+  "stecken:ihr": "Ihr steckt.",
+  "stecken:sie-pl": "Sie stecken."
+ },
+ "richtigGrundform": {
+  "malen:er": "Timo malt. Malen.",
+  "malen:sie": "Ela malt. Malen.",
+  "kleben:er": "Timo klebt. Kleben.",
+  "kleben:sie": "Ela klebt. Kleben.",
+  "legen:er": "Timo legt. Legen.",
+  "legen:sie": "Ela legt. Legen.",
+  "bauen:er": "Timo baut. Bauen.",
+  "bauen:sie": "Ela baut. Bauen.",
+  "rollen:er": "Timo rollt. Rollen.",
+  "rollen:sie": "Ela rollt. Rollen.",
+  "tupfen:er": "Timo tupft. Tupfen.",
+  "tupfen:sie": "Ela tupft. Tupfen.",
+  "stecken:er": "Timo steckt. Stecken.",
+  "stecken:sie": "Ela steckt. Stecken.",
+  "basteln:er": "Timo bastelt. Basteln.",
+  "basteln:sie": "Ela bastelt. Basteln."
+ },
+ "hilfe1": {
+  "verbform:endung:malen:ich": [
+   "Ich male.",
+   "Ich malst.",
+   "Ich malt.",
+   "Ich malen."
+  ],
+  "verbform:endung:malen:du": [
+   "Du male.",
+   "Du malst.",
+   "Du malt.",
+   "Du malen."
+  ],
+  "verbform:endung:malen:er": [
+   "Er male.",
+   "Er malst.",
+   "Er malt.",
+   "Er malen."
+  ],
+  "verbform:endung:malen:sie": [
+   "Sie male.",
+   "Sie malst.",
+   "Sie malt.",
+   "Sie malen."
+  ],
+  "verbform:endung:malen:wir": [
+   "Wir male.",
+   "Wir malst.",
+   "Wir malt.",
+   "Wir malen."
+  ],
+  "verbform:endung:malen:ihr": [
+   "Ihr male.",
+   "Ihr malst.",
+   "Ihr malt.",
+   "Ihr malen."
+  ],
+  "verbform:endung:malen:sie-pl": [
+   "Sie male.",
+   "Sie malst.",
+   "Sie malt.",
+   "Sie malen."
+  ],
+  "verbform:endung:kleben:ich": [
+   "Ich klebe.",
+   "Ich klebst.",
+   "Ich klebt.",
+   "Ich kleben."
+  ],
+  "verbform:endung:kleben:du": [
+   "Du klebe.",
+   "Du klebst.",
+   "Du klebt.",
+   "Du kleben."
+  ],
+  "verbform:endung:kleben:er": [
+   "Er klebe.",
+   "Er klebst.",
+   "Er klebt.",
+   "Er kleben."
+  ],
+  "verbform:endung:kleben:sie": [
+   "Sie klebe.",
+   "Sie klebst.",
+   "Sie klebt.",
+   "Sie kleben."
+  ],
+  "verbform:endung:kleben:wir": [
+   "Wir klebe.",
+   "Wir klebst.",
+   "Wir klebt.",
+   "Wir kleben."
+  ],
+  "verbform:endung:kleben:ihr": [
+   "Ihr klebe.",
+   "Ihr klebst.",
+   "Ihr klebt.",
+   "Ihr kleben."
+  ],
+  "verbform:endung:kleben:sie-pl": [
+   "Sie klebe.",
+   "Sie klebst.",
+   "Sie klebt.",
+   "Sie kleben."
+  ],
+  "verbform:endung:legen:ich": [
+   "Ich lege.",
+   "Ich legst.",
+   "Ich legt.",
+   "Ich legen."
+  ],
+  "verbform:endung:legen:du": [
+   "Du lege.",
+   "Du legst.",
+   "Du legt.",
+   "Du legen."
+  ],
+  "verbform:endung:legen:er": [
+   "Er lege.",
+   "Er legst.",
+   "Er legt.",
+   "Er legen."
+  ],
+  "verbform:endung:legen:sie": [
+   "Sie lege.",
+   "Sie legst.",
+   "Sie legt.",
+   "Sie legen."
+  ],
+  "verbform:endung:legen:wir": [
+   "Wir lege.",
+   "Wir legst.",
+   "Wir legt.",
+   "Wir legen."
+  ],
+  "verbform:endung:legen:ihr": [
+   "Ihr lege.",
+   "Ihr legst.",
+   "Ihr legt.",
+   "Ihr legen."
+  ],
+  "verbform:endung:legen:sie-pl": [
+   "Sie lege.",
+   "Sie legst.",
+   "Sie legt.",
+   "Sie legen."
+  ],
+  "verbform:endung:bauen:ich": [
+   "Ich baue.",
+   "Ich baust.",
+   "Ich baut.",
+   "Ich bauen."
+  ],
+  "verbform:endung:bauen:du": [
+   "Du baue.",
+   "Du baust.",
+   "Du baut.",
+   "Du bauen."
+  ],
+  "verbform:endung:bauen:er": [
+   "Er baue.",
+   "Er baust.",
+   "Er baut.",
+   "Er bauen."
+  ],
+  "verbform:endung:bauen:sie": [
+   "Sie baue.",
+   "Sie baust.",
+   "Sie baut.",
+   "Sie bauen."
+  ],
+  "verbform:endung:bauen:wir": [
+   "Wir baue.",
+   "Wir baust.",
+   "Wir baut.",
+   "Wir bauen."
+  ],
+  "verbform:endung:bauen:ihr": [
+   "Ihr baue.",
+   "Ihr baust.",
+   "Ihr baut.",
+   "Ihr bauen."
+  ],
+  "verbform:endung:bauen:sie-pl": [
+   "Sie baue.",
+   "Sie baust.",
+   "Sie baut.",
+   "Sie bauen."
+  ],
+  "verbform:endung:rollen:ich": [
+   "Ich rolle.",
+   "Ich rollst.",
+   "Ich rollt.",
+   "Ich rollen."
+  ],
+  "verbform:endung:rollen:du": [
+   "Du rolle.",
+   "Du rollst.",
+   "Du rollt.",
+   "Du rollen."
+  ],
+  "verbform:endung:rollen:er": [
+   "Er rolle.",
+   "Er rollst.",
+   "Er rollt.",
+   "Er rollen."
+  ],
+  "verbform:endung:rollen:sie": [
+   "Sie rolle.",
+   "Sie rollst.",
+   "Sie rollt.",
+   "Sie rollen."
+  ],
+  "verbform:endung:rollen:wir": [
+   "Wir rolle.",
+   "Wir rollst.",
+   "Wir rollt.",
+   "Wir rollen."
+  ],
+  "verbform:endung:rollen:ihr": [
+   "Ihr rolle.",
+   "Ihr rollst.",
+   "Ihr rollt.",
+   "Ihr rollen."
+  ],
+  "verbform:endung:rollen:sie-pl": [
+   "Sie rolle.",
+   "Sie rollst.",
+   "Sie rollt.",
+   "Sie rollen."
+  ],
+  "verbform:endung:tupfen:ich": [
+   "Ich tupfe.",
+   "Ich tupfst.",
+   "Ich tupft.",
+   "Ich tupfen."
+  ],
+  "verbform:endung:tupfen:du": [
+   "Du tupfe.",
+   "Du tupfst.",
+   "Du tupft.",
+   "Du tupfen."
+  ],
+  "verbform:endung:tupfen:er": [
+   "Er tupfe.",
+   "Er tupfst.",
+   "Er tupft.",
+   "Er tupfen."
+  ],
+  "verbform:endung:tupfen:sie": [
+   "Sie tupfe.",
+   "Sie tupfst.",
+   "Sie tupft.",
+   "Sie tupfen."
+  ],
+  "verbform:endung:tupfen:wir": [
+   "Wir tupfe.",
+   "Wir tupfst.",
+   "Wir tupft.",
+   "Wir tupfen."
+  ],
+  "verbform:endung:tupfen:ihr": [
+   "Ihr tupfe.",
+   "Ihr tupfst.",
+   "Ihr tupft.",
+   "Ihr tupfen."
+  ],
+  "verbform:endung:tupfen:sie-pl": [
+   "Sie tupfe.",
+   "Sie tupfst.",
+   "Sie tupft.",
+   "Sie tupfen."
+  ],
+  "verbform:endung:stecken:ich": [
+   "Ich stecke.",
+   "Ich steckst.",
+   "Ich steckt.",
+   "Ich stecken."
+  ],
+  "verbform:endung:stecken:du": [
+   "Du stecke.",
+   "Du steckst.",
+   "Du steckt.",
+   "Du stecken."
+  ],
+  "verbform:endung:stecken:er": [
+   "Er stecke.",
+   "Er steckst.",
+   "Er steckt.",
+   "Er stecken."
+  ],
+  "verbform:endung:stecken:sie": [
+   "Sie stecke.",
+   "Sie steckst.",
+   "Sie steckt.",
+   "Sie stecken."
+  ],
+  "verbform:endung:stecken:wir": [
+   "Wir stecke.",
+   "Wir steckst.",
+   "Wir steckt.",
+   "Wir stecken."
+  ],
+  "verbform:endung:stecken:ihr": [
+   "Ihr stecke.",
+   "Ihr steckst.",
+   "Ihr steckt.",
+   "Ihr stecken."
+  ],
+  "verbform:endung:stecken:sie-pl": [
+   "Sie stecke.",
+   "Sie steckst.",
+   "Sie steckt.",
+   "Sie stecken."
+  ],
+  "verbform:pronomen:malen:ich": [
+   "Ich male."
+  ],
+  "verbform:pronomen:malen:du": [
+   "Du malst."
+  ],
+  "verbform:pronomen:malen:er": [
+   "Er malt.",
+   "Sie malt.",
+   "Ihr malt."
+  ],
+  "verbform:pronomen:malen:sie": [
+   "Er malt.",
+   "Sie malt.",
+   "Ihr malt."
+  ],
+  "verbform:pronomen:malen:wir": [
+   "Sie malen.",
+   "Wir malen."
+  ],
+  "verbform:pronomen:malen:ihr": [
+   "Er malt.",
+   "Sie malt.",
+   "Ihr malt."
+  ],
+  "verbform:pronomen:malen:sie-pl": [
+   "Sie malen.",
+   "Wir malen."
+  ],
+  "verbform:pronomen:kleben:ich": [
+   "Ich klebe."
+  ],
+  "verbform:pronomen:kleben:du": [
+   "Du klebst."
+  ],
+  "verbform:pronomen:kleben:er": [
+   "Er klebt.",
+   "Sie klebt.",
+   "Ihr klebt."
+  ],
+  "verbform:pronomen:kleben:sie": [
+   "Er klebt.",
+   "Sie klebt.",
+   "Ihr klebt."
+  ],
+  "verbform:pronomen:kleben:wir": [
+   "Sie kleben.",
+   "Wir kleben."
+  ],
+  "verbform:pronomen:kleben:ihr": [
+   "Er klebt.",
+   "Sie klebt.",
+   "Ihr klebt."
+  ],
+  "verbform:pronomen:kleben:sie-pl": [
+   "Sie kleben.",
+   "Wir kleben."
+  ],
+  "verbform:pronomen:legen:ich": [
+   "Ich lege."
+  ],
+  "verbform:pronomen:legen:du": [
+   "Du legst."
+  ],
+  "verbform:pronomen:legen:er": [
+   "Er legt.",
+   "Sie legt.",
+   "Ihr legt."
+  ],
+  "verbform:pronomen:legen:sie": [
+   "Er legt.",
+   "Sie legt.",
+   "Ihr legt."
+  ],
+  "verbform:pronomen:legen:wir": [
+   "Sie legen.",
+   "Wir legen."
+  ],
+  "verbform:pronomen:legen:ihr": [
+   "Er legt.",
+   "Sie legt.",
+   "Ihr legt."
+  ],
+  "verbform:pronomen:legen:sie-pl": [
+   "Sie legen.",
+   "Wir legen."
+  ],
+  "verbform:pronomen:bauen:ich": [
+   "Ich baue."
+  ],
+  "verbform:pronomen:bauen:du": [
+   "Du baust."
+  ],
+  "verbform:pronomen:bauen:er": [
+   "Er baut.",
+   "Sie baut.",
+   "Ihr baut."
+  ],
+  "verbform:pronomen:bauen:sie": [
+   "Er baut.",
+   "Sie baut.",
+   "Ihr baut."
+  ],
+  "verbform:pronomen:bauen:wir": [
+   "Sie bauen.",
+   "Wir bauen."
+  ],
+  "verbform:pronomen:bauen:ihr": [
+   "Er baut.",
+   "Sie baut.",
+   "Ihr baut."
+  ],
+  "verbform:pronomen:bauen:sie-pl": [
+   "Sie bauen.",
+   "Wir bauen."
+  ],
+  "verbform:pronomen:rollen:ich": [
+   "Ich rolle."
+  ],
+  "verbform:pronomen:rollen:du": [
+   "Du rollst."
+  ],
+  "verbform:pronomen:rollen:er": [
+   "Er rollt.",
+   "Sie rollt.",
+   "Ihr rollt."
+  ],
+  "verbform:pronomen:rollen:sie": [
+   "Er rollt.",
+   "Sie rollt.",
+   "Ihr rollt."
+  ],
+  "verbform:pronomen:rollen:wir": [
+   "Sie rollen.",
+   "Wir rollen."
+  ],
+  "verbform:pronomen:rollen:ihr": [
+   "Er rollt.",
+   "Sie rollt.",
+   "Ihr rollt."
+  ],
+  "verbform:pronomen:rollen:sie-pl": [
+   "Sie rollen.",
+   "Wir rollen."
+  ],
+  "verbform:pronomen:tupfen:ich": [
+   "Ich tupfe."
+  ],
+  "verbform:pronomen:tupfen:du": [
+   "Du tupfst."
+  ],
+  "verbform:pronomen:tupfen:er": [
+   "Er tupft.",
+   "Sie tupft.",
+   "Ihr tupft."
+  ],
+  "verbform:pronomen:tupfen:sie": [
+   "Er tupft.",
+   "Sie tupft.",
+   "Ihr tupft."
+  ],
+  "verbform:pronomen:tupfen:wir": [
+   "Sie tupfen.",
+   "Wir tupfen."
+  ],
+  "verbform:pronomen:tupfen:ihr": [
+   "Er tupft.",
+   "Sie tupft.",
+   "Ihr tupft."
+  ],
+  "verbform:pronomen:tupfen:sie-pl": [
+   "Sie tupfen.",
+   "Wir tupfen."
+  ],
+  "verbform:pronomen:stecken:ich": [
+   "Ich stecke."
+  ],
+  "verbform:pronomen:stecken:du": [
+   "Du steckst."
+  ],
+  "verbform:pronomen:stecken:er": [
+   "Er steckt.",
+   "Sie steckt.",
+   "Ihr steckt."
+  ],
+  "verbform:pronomen:stecken:sie": [
+   "Er steckt.",
+   "Sie steckt.",
+   "Ihr steckt."
+  ],
+  "verbform:pronomen:stecken:wir": [
+   "Sie stecken.",
+   "Wir stecken."
+  ],
+  "verbform:pronomen:stecken:ihr": [
+   "Er steckt.",
+   "Sie steckt.",
+   "Ihr steckt."
+  ],
+  "verbform:pronomen:stecken:sie-pl": [
+   "Sie stecken.",
+   "Wir stecken."
+  ],
+  "verbform:grundform:malen:er": [
+   "Male.",
+   "Malst.",
+   "Malt.",
+   "Malen."
+  ],
+  "verbform:grundform:malen:sie": [
+   "Male.",
+   "Malst.",
+   "Malt.",
+   "Malen."
+  ],
+  "verbform:grundform:kleben:er": [
+   "Klebe.",
+   "Klebst.",
+   "Klebt.",
+   "Kleben."
+  ],
+  "verbform:grundform:kleben:sie": [
+   "Klebe.",
+   "Klebst.",
+   "Klebt.",
+   "Kleben."
+  ],
+  "verbform:grundform:legen:er": [
+   "Lege.",
+   "Legst.",
+   "Legt.",
+   "Legen."
+  ],
+  "verbform:grundform:legen:sie": [
+   "Lege.",
+   "Legst.",
+   "Legt.",
+   "Legen."
+  ],
+  "verbform:grundform:bauen:er": [
+   "Baue.",
+   "Baust.",
+   "Baut.",
+   "Bauen."
+  ],
+  "verbform:grundform:bauen:sie": [
+   "Baue.",
+   "Baust.",
+   "Baut.",
+   "Bauen."
+  ],
+  "verbform:grundform:rollen:er": [
+   "Rolle.",
+   "Rollst.",
+   "Rollt.",
+   "Rollen."
+  ],
+  "verbform:grundform:rollen:sie": [
+   "Rolle.",
+   "Rollst.",
+   "Rollt.",
+   "Rollen."
+  ],
+  "verbform:grundform:tupfen:er": [
+   "Tupfe.",
+   "Tupfst.",
+   "Tupft.",
+   "Tupfen."
+  ],
+  "verbform:grundform:tupfen:sie": [
+   "Tupfe.",
+   "Tupfst.",
+   "Tupft.",
+   "Tupfen."
+  ],
+  "verbform:grundform:stecken:er": [
+   "Stecke.",
+   "Steckst.",
+   "Steckt.",
+   "Stecken."
+  ],
+  "verbform:grundform:stecken:sie": [
+   "Stecke.",
+   "Steckst.",
+   "Steckt.",
+   "Stecken."
+  ],
+  "verbform:grundform:basteln:er": [
+   "Bastele.",
+   "Bastelst.",
+   "Bastelt.",
+   "Bastelen."
+  ],
+  "verbform:grundform:basteln:sie": [
+   "Bastele.",
+   "Bastelst.",
+   "Bastelt.",
+   "Bastelen."
+  ]
+ }
+}

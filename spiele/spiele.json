@@ -31,6 +31,12 @@
       "text": "Der, die oder das an das Wort legen, Ela hängt das Werkzeug auf.",
       "beschreibung": "Das Kind legt ein Artikelplättchen der, die oder das an ein Nomen wie Hammer, Säge oder Seil. Passt es, sagt der Erzähler das Paar, und Ela hängt das Werkzeug in seinen Umriss an der Werkzeugwand; das Wort kommt auf das Schild darunter. Passt es nicht, gleitet das Plättchen zurück, und auf der Rückseite des Schilds steht als Hilfe der richtige Artikel.",
       "arten": [{ "art": "artikel", "stufen": ["material", "vorstellung", "kopf"] }],
+      "regal": null },
+    { "id": "ichduwir", "titel": "Ich, du, wir", "thema": "Verb passt zur Person", "kategorie": "grammatik",
+      "symbol": "grammatik/g02-ich-du-wir-person-und-verb/symbol.svg", "datei": "grammatik/g02-ich-du-wir-person-und-verb/index.html",
+      "text": "Die Endung an das Verb legen, und wer gemeint ist, malt.",
+      "beschreibung": "Das Kind sitzt mit der Runde am Maltisch und legt Endungen an Verben (du malst, wir malen), Pronomen vor Verben oder bildet die Grundform. Passt es, tun genau die gemeinten Personen es auf dem gemeinsamen Bogen: bei ich malt die eigene Hand, bei du Kofi gegenüber. Passt es nicht, heben die kurz den Stift, zu denen die Form gehört, und das Plättchen gleitet zurück.",
+      "arten": [{ "art": "verbform", "ziele": ["endung", "pronomen", "grundform"], "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null }
   ]
 }

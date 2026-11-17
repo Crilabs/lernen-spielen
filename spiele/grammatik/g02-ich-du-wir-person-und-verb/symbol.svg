@@ -1,0 +1,10 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" stroke="#3B2A6B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="8" y="34" width="104" height="52" rx="10" fill="#F4F0FA"/>
+  <circle cx="26" cy="46" r="9" fill="#E24B3B"/>
+  <g stroke="none" fill="#3B2A6B" font-family="Andika, sans-serif" font-weight="700" font-size="30" text-anchor="start">
+    <text x="20" y="78">mal</text>
+  </g>
+  <rect x="74" y="46" width="30" height="30" rx="6" fill="#FFFCF7"/>
+  <path d="M82 70 L82 52 M82 61 Q88 54 94 61 L94 70" fill="none" stroke-width="3.6"/>
+  <path d="M30 100 Q60 114 90 100" fill="none" stroke="#8FD3EE" stroke-width="6"/>
+</svg>

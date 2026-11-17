@@ -178,3 +178,29 @@ test("artikel: Schwierigkeit (Endung verrät den Artikel 0, Verwechsler 2), Ziel
   assert.equal(darstellbar(a, { art: "artikel", stufen: ["material"] }), true);
   assert.equal(darstellbar(a, { art: "zahlwort", zahlen: [0, 20] }), false);
 });
+
+// --- verbform (Ich, du, wir G02, Idee docs/spiele/grammatik/g02-ich-du-wir-person-und-verb.md §8) ----------------
+test("verbform: Schlüssel verbform:<ziel>:<verb>:<person>, je Ziel die richtigen Aufgaben", async () => {
+  const { verbformAus } = await import("../spiele/aufgabenarten.js");
+  const e = aufgabenVon({ art: "verbform", ziel: "endung" });
+  assert.equal(e.length, 49);
+  assert.deepEqual(e[0], { key: "verbform:endung:malen:ich", art: "verbform", daten: { ziel: "endung", verb: "malen", stamm: "mal", grundform: "malen", person: "ich", pronomen: "ich", form: "male", endung: "e", wer: ["ich"] } });
+  assert.equal(new Set(e.map((x) => x.key)).size, 49);
+  assert.equal(aufgabenVon({ art: "verbform", ziel: "pronomen" }).length, 49);
+  assert.equal(aufgabenVon({ art: "verbform", ziel: "grundform" }).length, 16);
+  assert.deepEqual(aufgabenVon({ art: "verbform", ziel: "gibtesnicht" }), []);
+  assert.deepEqual(aufgabenVon({ art: "verbform" }), []);
+  assert.equal(verbformAus("verbform:endung:malen:du").form, "malst");
+  assert.equal(verbformAus("verbform:endung:basteln:du"), null);
+  assert.equal(verbformAus("mal:6*7"), null);
+});
+test("verbform: Schwierigkeit (ich, du leicht; ihr und sie in der Mehrzahl schwer), Zielzeit, darstellbar nach Ziel", () => {
+  const s = (ziel, verb, person) => schwierigkeit(aufgabenVon({ art: "verbform", ziel }).find((x) => x.key === `verbform:${ziel}:${verb}:${person}`));
+  assert.deepEqual(["ich", "du", "er", "wir", "ihr", "sie-pl"].map((p) => s("endung", "malen", p)), [0, 0, 1, 1, 2, 2]);
+  assert.deepEqual([s("grundform", "malen", "er"), s("grundform", "basteln", "er")], [1, 2]);
+  assert.equal(ZIEL_MS.verbform, 6000);
+  const a = aufgabenVon({ art: "verbform", ziel: "endung" })[0];
+  assert.equal(darstellbar(a, { art: "verbform", ziele: ["endung", "pronomen"] }), true);
+  assert.equal(darstellbar(a, { art: "verbform", ziele: ["grundform"] }), false);
+  assert.equal(darstellbar(a, { art: "artikel" }), false);
+});

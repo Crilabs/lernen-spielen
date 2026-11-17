@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Ich, du, wir</title>
+<!-- G02 Ich, du, wir (Idee docs/spiele/grammatik/g02-ich-du-wir-person-und-verb.md). Ich-Sicht am Maltisch (raum.js): hinten
+     die Wand, davor die Runde hinter dem Tisch (Kofi und Lena schauen das Kind an, Timo und Ela über ihr Papier), der Tisch
+     liegt über ihren Beinen. Auf dem Tisch der Papierbogen, unten der eigene Platz: die Matte mit dem Wortstreifen und der
+     Ablage (Endungen oder Fürwörter, auf der Stufe kopf die Tastatur), links und rechts daneben die eigenen Hände. Leiste,
+     Blase, Hilfe und Pause an ihren festen Plätzen. -->
+<link rel="stylesheet" href="../../rahmen/seite.css">
+<style>
+  /* ===== SPIELWELT: Wohnküche und Maltisch. Alles in rem (1rem = Bildhöhe/108). ===== */
+  :root {
+    --fig: 44rem;            /* Höhe der Figurenfelder (320 × 280); die Figur selbst ist etwa 38 rem hoch */
+    --sp: 1;                 /* Abstand der Figuren: 4:3 rückt sie zusammen */
+    --bogen-b: 76rem;
+    --holz: #C9A06E;
+    --holz-dunkel: #8F6A43;
+  }
+  .welt { background: #F6ECDF; }
+  .welt svg, .tisch svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* Schichten: Wand → Runde → Tisch → Bühne. Die Runde sitzt hinter dem Tisch. */
+  .schicht, .tisch { position: fixed; pointer-events: none; }
+  .schicht { top: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem); height: 108rem; z-index: 1; }
+  .tisch { left: 0; right: 0; top: 47rem; height: 61rem; z-index: 2; overflow: hidden; }
+  .buehne { z-index: 3; }
+
+  /* Die Runde: Feld je Figur, mittig auf der Position (Abstand zur Bildmitte in rem). */
+  .figur { position: absolute; top: 20rem; width: calc(var(--fig) * 320 / 280); height: var(--fig); margin-left: calc(var(--fig) * -160 / 280); left: calc(50% + var(--sp) * var(--x)); }
+  .figur .koerper { position: absolute; inset: 0; transform-origin: 50% 90.7%; will-change: transform; }
+  .figur svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .figur.kofi { --x: -62rem; }
+  .figur.lena { --x: -22rem; }
+  .figur.timo { --x: 30rem; }
+  .figur.ela { --x: 70rem; }
+
+  /* Der Papierbogen auf dem Tisch: flach, das Hellste auf der Platte; darauf wachsen die Striche, Sterne und Klötze. */
+  .bogen {
+    position: absolute; left: 50%; top: 51rem; width: var(--bogen-b); height: 25rem; margin-left: calc(var(--bogen-b) / -2);
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
+    transform-origin: 0 50%; z-index: 1;
+  }
+  .bogen::before { content: ""; position: absolute; inset: 1rem; border: 0.25rem dashed var(--ls-naht); border-radius: 1rem; pointer-events: none; }
+  .marke { position: absolute; width: 9.6rem; height: 9.6rem; margin: -4.8rem 0 0 -4.8rem; pointer-events: none; }
+  .marke svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+  /* Dinge auf dem Tisch: der Stiftebecher (kippt bei der Grundform) und die Kiste mit Bastelsachen. */
+  .becher { position: absolute; left: calc(50% - var(--bogen-b) / 2 - 18rem); top: 53rem; width: 12rem; height: 14.4rem; transform-origin: 50% 96%; z-index: 1; }
+  .kiste { position: absolute; left: calc(50% + var(--bogen-b) / 2 + 5rem); top: 59rem; width: 15rem; height: 11.25rem; z-index: 1; }
+  .becher svg, .kiste svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+  /* Das Tischkärtchen vor Kofi (Hilfe 2): vorn leer, hinten die Lösung. Flach, es dreht sich nur. */
+  .kaertchen { position: absolute; top: 54rem; width: 15rem; height: 9.4rem; perspective: 60rem; z-index: 2; opacity: 0; pointer-events: none; }
+  .kaertchen.da { opacity: 1; }
+  .kaertchen .dreher { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .kaertchen .seite {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 1.4rem;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden; font-weight: 700; font-size: 5.2rem; line-height: 1; color: var(--ls-tinte);
+  }
+  .kaertchen .hinten { transform: rotateY(180deg); background: var(--ls-nebel); }
+  .kaertchen .vorn::after { content: ""; width: 7rem; height: 2.4rem; border-bottom: 0.5rem solid var(--ls-tinte-weich); border-radius: 0 0 50% 50%; }
+
+  /* Die eigenen Hände: Ärmel und Hand rechts und links von der Matte, kommen von unten ins Bild. */
+  .hand { position: absolute; bottom: -2rem; width: 16rem; height: 30rem; z-index: 5; pointer-events: none; transform-origin: 50% 100%; }
+  .hand.links { left: 17rem; }
+  .hand.rechts { right: 17rem; }
+  .hand svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+  /* Die Matte (Lernfeld, das Hellste): oben der Wortstreifen, darunter die Ablage. */
+  .matte {
+    position: absolute; left: 36rem; right: 36rem; top: 76.5rem; height: 28.5rem; z-index: 4; padding: 1.8rem 3rem 1.6rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1.2rem;
+  }
+  .matte::before { inset: 0.9rem; }
+  .streifen {
+    position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: center; gap: 1.4rem 2.4rem; flex-wrap: nowrap;
+    min-height: 13.6rem; padding: 1.8rem 3rem 0.8rem; background: var(--ls-nebel); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
+    font-weight: 700; font-size: 6.6rem; line-height: 1; color: var(--ls-tinte); white-space: nowrap;
+  }
+  .streifen .wort { display: inline-flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+  .streifen .wort ls-wortart { height: 3.6rem; }
+  .streifen .wort b { font-weight: 700; line-height: 1; }
+  .streifen .paar { display: inline-flex; align-items: flex-end; gap: 0.4rem; }
+  .streifen .rest { padding-bottom: 0.3rem; }
+  .luecke {
+    position: relative; min-width: 14rem; height: 9.6rem; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 1rem;
+    border: 0.5rem dashed var(--ls-tinte-weich); border-radius: var(--ls-radius-klein); background: var(--ls-papier);
+    font-weight: 700; font-size: 6.6rem; line-height: 1;
+  }
+  .luecke.markiert { border-style: solid; }
+  .luecke.geist { color: var(--ls-naht); }
+  .luecke.klingt { background: #FFF1B8; }
+  .eingerastet { display: inline-flex; align-items: center; justify-content: center; color: var(--ls-tinte); font-weight: 700; }
+  .ablage { position: relative; z-index: 1; display: flex; justify-content: center; align-items: flex-start; gap: 2.4rem; min-height: 9.6rem; }
+  .ablage[hidden], .plaettchen[hidden], ls-tastatur[hidden] { display: none; }
+  .plaettchen { min-width: 14.5rem; min-height: 9.6rem; padding: 0 2.4rem; font-size: 6rem; }
+  .plaettchen.verborgen { visibility: hidden; }
+  .plaettchen.klingt { background: #FFF1B8; }
+  ls-tastatur { display: block; }
+
+  /* Fliegende Dinge (Stift, Stern, Klotz …): eigene Ebene über allem Bild, nehmen keine Tipps. */
+  .flug { position: absolute; left: 0; top: 0; z-index: 9; will-change: transform; pointer-events: none; }
+
+  .blase-platz { position: absolute; left: 4rem; top: calc(var(--ls-leiste-hoehe) + 1rem); z-index: 7; }
+  ls-blase { position: relative; }
+
+  /* Schmale Bildschirme (4:3). */
+  @media (max-aspect-ratio: 3/2) {
+    :root { --fig: 36rem; --sp: 0.74; --bogen-b: 60rem; }
+    .figur { top: 24rem; }
+    .matte { left: 18rem; right: 18rem; }
+    .streifen { font-size: 5.6rem; padding: 0.8rem 2rem; }
+    .luecke { min-width: 12rem; font-size: 5.6rem; }
+    .plaettchen { min-width: 12.5rem; padding: 0 1.8rem; font-size: 5.2rem; }
+    .ablage { gap: 1.6rem; }
+    .hand { width: 13rem; height: 26rem; }
+    .hand.links { left: 1rem; }
+    .hand.rechts { right: 1rem; }
+    .becher { left: calc(50% - var(--bogen-b) / 2 - 15rem); width: 10rem; height: 12rem; }
+    .kiste { left: calc(50% + var(--bogen-b) / 2 + 3rem); width: 12rem; height: 9rem; }
+  }
+
+  /* Pause: Mach mit auf der Papierkarte. */
+  .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
+  .sachmoment p { margin: 0; }
+  .sachmoment .zettel { display: flex; gap: 3rem; }
+  .sachmoment .zettel span {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 15rem; padding: 1.2rem 2.4rem;
+    background: var(--ls-papier); border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein); font-weight: 700; font-size: 5.6rem; line-height: 1;
+  }
+  .sachmoment .hinweis {
+    display: inline-flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 4rem 1.6rem 1.6rem;
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-papier);
+    box-shadow: var(--ls-schatten); color: var(--ls-tinte); font-weight: 700; text-decoration: none;
+  }
+  .sachmoment .hinweis img { width: 8rem; height: 8rem; }
+  .sachmoment .hinweis:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+
+  .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
+  .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
+  .eltern p { max-width: 70ch; }
+  .eltern .beschreibung { margin: 0 0 3rem; color: var(--ls-tinte-weich); }
+  .eltern a { color: var(--ls-tinte); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="welt" id="welt" aria-hidden="true"></div>
+<div class="schicht" aria-hidden="true">
+  <div class="figur kofi" id="figur-kofi"><div class="koerper"></div></div>
+  <div class="figur lena" id="figur-lena"><div class="koerper"></div></div>
+  <div class="figur timo" id="figur-timo"><div class="koerper"></div></div>
+  <div class="figur ela" id="figur-ela"><div class="koerper"></div></div>
+</div>
+<div class="tisch" id="tisch" aria-hidden="true"></div>
+<script type="module">
+  import { raumSvg, tischSvg } from "./raum.js";
+  document.getElementById("welt").innerHTML = raumSvg();
+  document.getElementById("tisch").innerHTML = tischSvg();
+</script>
+
+<ls-leiste id="leiste" spiel="ichduwir" fach="grammatik" titel="Ich, du, wir" thema="">
+  <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
+  <ls-knopf slot="rechts" id="anleitung" symbol="buch.svg" name="Anleitung" hidden></ls-knopf>
+</ls-leiste>
+
+<div class="buehne">
+  <div class="blase-platz"><ls-blase id="blase" ohne-text></ls-blase></div>
+  <div class="becher" id="becher" aria-hidden="true"></div>
+  <div class="kiste" id="kiste" aria-hidden="true"></div>
+  <div class="bogen" id="bogen" aria-label="Papierbogen"></div>
+  <div class="kaertchen" id="kaertchen" aria-hidden="true"><div class="dreher"><div class="seite vorn"></div><div class="seite hinten"></div></div></div>
+  <div class="hand links" id="hand-links" aria-hidden="true"></div>
+  <div class="hand rechts" id="hand-rechts" aria-hidden="true"></div>
+  <section class="lernfeld matte" id="matte" aria-label="Dein Platz am Tisch">
+    <div class="streifen" id="streifen"></div>
+    <div class="ablage" id="ablage">
+      <ls-tastatur id="tastatur" je-reihe="10" loeschen hidden></ls-tastatur>
+    </div>
+  </section>
+</div>
+
+<ls-hilfe id="hilfe"></ls-hilfe>
+<ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
+
+<script type="module" src="spiel.js"></script>
+</body>
+</html>

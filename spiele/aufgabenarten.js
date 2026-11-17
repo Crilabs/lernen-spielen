@@ -13,8 +13,15 @@
 //              Spezifikation { art: "zahlwort", von, bis } (alle Zahlen von bis bis, 0 bis 100).
 //   artikel    "artikel:hammer"   daten { wort: "Hammer", artikel: "der", bild: "hammer" }   (Artikel zum Nomen; Werkzeugwand G09)
 //              Spezifikation { art: "artikel", wortschatz: "werkzeug" } (Wörter in spiele/woerter/artikel.js).
+//   verbform   "verbform:endung:malen:du"   daten { ziel, verb, stamm, grundform, person, pronomen, form, endung, wer }
+//              (Verb zur Person; Ich, du, wir G02). ziel: endung (Endung an den Stamm), pronomen (Fürwort vor das Verb),
+//              grundform (die Grundform bilden, person er oder sie). Spezifikation { art: "verbform", ziel } (Wörter in
+//              spiele/woerter/verben.js); in spiele.json `ziele` nennt, welche Ziele das Spiel darstellt.
 
 import { WORTSCHAETZE, wortMit } from "./woerter/artikel.js";
+import { PERSONEN, PERSONEN_GRUNDFORM, VERBEN, VERBEN_PERSON, ENDUNG_VON, PRONOMEN_VON, formVon, verbMit, werVon } from "./woerter/verben.js";
+
+const VERBFORM_ZIELE = ["endung", "pronomen", "grundform"];
 
 export const ZIEL_MS = {
   zerlegung: 8000,
@@ -23,6 +30,7 @@ export const ZIEL_MS = {
   mal: 8000, // Annahme (Entwurf M37): Abruf einer Einmaleinsaufgabe; darüber gilt sie als mühsam gelöst
   zahlwort: 6000, // Annahme (Entwurf M06): Zahlwort hören und zwei Ziffern tippen
   artikel: 6000, // Annahme (Entwurf G09): Wort ansehen, Plättchen ziehen; darüber gilt der Artikel als nicht sicher
+  verbform: 6000, // Annahme (Entwurf G02): Streifen ansehen, Plättchen ziehen oder die Form schreiben
 };
 
 // Einmaleins: die Kernaufgaben (mal 1, 2, 5, 10) und die Reihen, deren Aufgaben alle zur eigenen Reihe gehören.
@@ -53,6 +61,33 @@ export function artikelAus(key) {
   const m = /^artikel:([a-z]+)$/.exec(String(key ?? ""));
   const w = m ? wortMit(m[1]) : null;
   return w ? { id: w.id, wort: w.wort, artikel: w.artikel } : null;
+}
+
+/**
+ * Die Aufgabe zu Ziel, Verb und Person (daten wie im Kopf der Datei), oder null.
+ * @param {string} ziel @param {string} verbId @param {string} person
+ */
+function verbformAufgabe(ziel, verbId, person) {
+  const v = verbMit(verbId);
+  if (!v || !VERBFORM_ZIELE.includes(ziel) || !PERSONEN.includes(/** @type {any} */ (person))) return null;
+  const p = /** @type {import("./woerter/verben.js").Person} */ (person);
+  if (ziel === "grundform" ? !PERSONEN_GRUNDFORM.includes(p) : v.nurGrundform) return null;
+  return {
+    key: `verbform:${ziel}:${v.id}:${p}`,
+    art: "verbform",
+    daten: {
+      ziel, verb: v.id, stamm: v.stamm, grundform: v.grundform, person: p, pronomen: PRONOMEN_VON[p],
+      form: ziel === "grundform" ? `${v.stamm}${ENDUNG_VON[p]}` : formVon(v, p), endung: ziel === "grundform" ? (v.grundform.endsWith("eln") || v.grundform.endsWith("ern") ? "n" : "en") : ENDUNG_VON[p],
+      wer: werVon(p, v.id),
+    },
+  };
+}
+
+/** "verbform:endung:malen:du" → { ziel, verb, person }, sonst null. */
+export function verbformAus(key) {
+  const m = /^verbform:([a-z]+):([a-z]+):([a-z-]+)$/.exec(String(key ?? ""));
+  const a = m ? verbformAufgabe(m[1], m[2], m[3]) : null;
+  return a ? a.daten : null;
 }
 
 const UEBERGANG_AB = 20; // darüber kein Übertrag der Einer
@@ -144,6 +179,12 @@ export function aufgabenVon(spec) {
       const liste = Object.hasOwn(WORTSCHAETZE, spec.wortschatz) ? WORTSCHAETZE[/** @type {keyof typeof WORTSCHAETZE} */ (spec.wortschatz)] : [];
       return liste.map((w) => ({ key: `artikel:${w.id}`, art: "artikel", daten: { wort: w.wort, artikel: w.artikel, bild: w.id } }));
     }
+    case "verbform": {
+      if (!VERBFORM_ZIELE.includes(spec.ziel)) return [];
+      const verben = spec.ziel === "grundform" ? VERBEN : VERBEN_PERSON;
+      const personen = spec.ziel === "grundform" ? PERSONEN_GRUNDFORM : PERSONEN;
+      return verben.flatMap((v) => personen.map((p) => verbformAufgabe(spec.ziel, v.id, p))).filter((x) => x !== null);
+    }
     default:
       return [];
   }
@@ -168,6 +209,8 @@ export function schwierigkeit(aufgabe) {
   if (aufgabe.art === "menge") return d.n;
   if (aufgabe.art === "zahlwort") return zahlwortSchwer(d.n);
   if (aufgabe.art === "artikel") return wortMit(d.bild)?.schwierigkeit ?? 1;
+  // verbform: ich und du verraten ihre Endung am Fürwort (0); er, sie, wir (1); ihr und sie (Mehrzahl) teilen die Endung (2)
+  if (aufgabe.art === "verbform") return d.ziel === "grundform" ? (d.grundform.endsWith("eln") ? 2 : 1) : { ich: 0, du: 0, er: 1, sie: 1, wir: 1, ihr: 2, "sie-pl": 2 }[/** @type {"ich"} */ (d.person)] ?? 1;
   // mal: Kernaufgabe 0, eine Gruppe neben einer Kernaufgabe (3, 4, 6, 9) 1, zwei Gruppen daneben (7, 8) 2
   if (aufgabe.art === "mal") return KERN_FAKTOREN.includes(d.a) ? 0 : [7, 8].includes(d.a) ? 2 : 1;
   if (d.op === "plus") return Math.min(d.a, d.b) + ((d.a % 10) + (d.b % 10) >= 10 ? 5 : 0);
@@ -180,6 +223,7 @@ export function darstellbar(aufgabe, artSpec) {
   if (aufgabe.art !== artSpec.art && !zwilling) return false;
   const d = aufgabe.daten;
   if (artSpec.zahlen && !(d.n >= artSpec.zahlen[0] && d.n <= artSpec.zahlen[1])) return false;
+  if (artSpec.ziele && !artSpec.ziele.includes(d.ziel)) return false;
   if (artSpec.max !== undefined && d.raum > artSpec.max) return false;
   if (artSpec.reihen && !(d.b >= artSpec.reihen[0] && d.b <= artSpec.reihen[1])) return false;
   // zehner: nur Aufgaben mit einem ganzen Zehner (10 + x, c − 10, c − x mit c − x = 10); Stellentafel (M08)

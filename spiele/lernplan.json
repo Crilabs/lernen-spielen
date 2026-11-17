@@ -17233,7 +17233,7 @@
       "voraussetzungen": [
         "tunwoerter"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "verbform", "ziel": "grundform" },
       "stufen": [
         "material",
         "vorstellung",
@@ -17263,7 +17263,7 @@
       "voraussetzungen": [
         "grundform-verb"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "verbform", "ziel": "endung" },
       "stufen": [
         "material",
         "vorstellung",
@@ -17294,7 +17294,7 @@
       "voraussetzungen": [
         "verb-personalform"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "verbform", "ziel": "pronomen" },
       "stufen": [
         "material",
         "vorstellung",
