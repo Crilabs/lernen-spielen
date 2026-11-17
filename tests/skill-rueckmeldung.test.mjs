@@ -21,6 +21,7 @@ test("Skill rueckmeldung: jeder genannte Pfad im Repo existiert", () => {
   const fehlt = [];
   for (const [, roh] of lies(".claude/skills/rueckmeldung/SKILL.md").matchAll(/`([^`\s]+)`/g)) {
     if (!/^(docs|spiele|tests|werkzeuge|\.claude)\//.test(roh) || /[<{…*]/.test(roh)) continue;
+    if (roh.startsWith("docs/superpowers/")) continue;   // liegt nur lokal (.gitignore), fehlt in CI und frischen Checkouts
     const pfad = roh.replace(/[?#].*$/, "").replace(/[:,.)]+$/, "");
     if (!existsSync(join(WURZEL, pfad))) fehlt.push(pfad);
   }
