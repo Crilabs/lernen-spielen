@@ -2,7 +2,7 @@
 // einer Adresse Betreff, HTML und Text. Geprüft werden Inhalt, Obergrenzen, Knappheit und Sprache.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { setzeBrief, istBriefWert, FACH_FARBEN, DUNKEL } from "../spiele/tagesbrief/brief.js";
+import { setzeBrief, istBriefWert, FACH_FARBEN } from "../spiele/tagesbrief/brief.js";
 import { FACH } from "../spiele/rahmen/stil.js";
 
 const DATUM = new Date("2026-11-16T12:00:00+01:00");
@@ -181,64 +181,9 @@ test("ohne gekonnt/dabei/gelesen kein Brief", () => {
   assert.equal(istBriefWert({ ...leer, gekonnt: [gekonnt("a", "A")] }), true);
 });
 
-/** WCAG-Kontrast zweier Hex-Farben. */
-const kontrast = (a, b) => {
-  const lum = (h) => {
-    const [r, g, bl] = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
-    return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
-  };
-  const [x, y] = [lum(a), lum(b)];
-  return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
-};
-const mische = (a, b, t) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * t + parseInt(b.slice(i, i + 2), 16) * (1 - t)).toString(16).padStart(2, "0")).join("").toUpperCase();
-
-test("Dunkelfassung: Meta für beide Farbschemata, Style-Block mit Media-Query und [data-ogsc]", () => {
-  const { html } = setzeBrief(BEISPIEL(), OPT);
-  assert.ok(html.includes('<meta name="color-scheme" content="light dark">'));
-  assert.ok(html.includes('<meta name="supported-color-schemes" content="light dark">'));
-  assert.ok(!html.includes("light only"));
-  const style = html.match(/<style>([\s\S]*?)<\/style>/)[1];
-  assert.ok(style.includes("@media (prefers-color-scheme: dark)"));
-  const schnitt = style.indexOf("\n[data-ogsc]");
-  const [medien, ogsc] = [style.slice(0, schnitt), style.slice(schnitt)];
-  const regeln = (medien.match(/\.tb-[^{]+\{/g) ?? []).length;
-  assert.ok(regeln > 10);
-  assert.equal((ogsc).match(/\[data-ogsc\] \.tb-[^{]+\{/g).length, regeln);
-  assert.ok(style.includes(`background-color:${DUNKEL.seite} !important`) && style.includes(`background-color:${DUNKEL.karte} !important`));
-  assert.ok(!/@import|<link|url\(/.test(html));
-});
-
-test("Dunkelfassung: Klassen an Seite, Karte, Anleitung, Akzenten, Linien und Kernfeld", () => {
-  const { html } = setzeBrief(BEISPIEL(), OPT);
-  assert.ok(html.includes('<body class="tb-seite"'));
-  assert.ok(html.includes('class="tb-karte"'));
-  assert.ok(html.includes('class="tb-anleitung-mathe"'));
-  assert.ok(html.includes('class="tb-akzent-mathe"') && html.includes('class="tb-akzent-grammatik"'));
-  assert.ok(html.includes('class="tb-kern"') && html.includes("tb-linie") && html.includes("tb-weich"));
-  assert.ok(!html.includes('class="tb-anleitung-neutral"'));
-  assert.ok(setzeBrief({ ...BEISPIEL(), naechstes: { ...NAECHSTES, fach: "unbekannt" } }, OPT).html.includes('class="tb-anleitung-neutral"'));
-  // helle Fassung bleibt: Inline-Farben unverändert
-  assert.ok(html.includes(`background:${FACH.mathe.toenung}`) && html.includes("background:#FFFCF7"));
-});
-
-test("Dunkelfassung: Anleitungskarte ist Fach-tief zu 40 % über die Karte gemischt", () => {
-  for (const [fach, f] of Object.entries(FACH_FARBEN)) assert.equal(DUNKEL.faecher[fach].anleitung, mische(f.tief, DUNKEL.karte, 0.4), fach);
-  assert.deepEqual(Object.keys(DUNKEL.faecher).sort(), [...Object.keys(FACH_FARBEN), "neutral"].sort());
-});
-
-test("Dunkelfassung: jede Text/Hintergrund-Kombination erreicht mindestens 4.5:1", () => {
-  const paare = [
-    ["Text auf Karte", DUNKEL.text, DUNKEL.karte],
-    ["Text weich auf Karte", DUNKEL.weich, DUNKEL.karte],
-    ["Text auf Kernfeld", DUNKEL.text, DUNKEL.kern],
-  ];
-  for (const [fach, f] of Object.entries(DUNKEL.faecher)) {
-    paare.push([`Text auf Anleitung ${fach}`, DUNKEL.text, f.anleitung], [`Akzent ${fach} auf Anleitung`, f.akzent, f.anleitung],
-      [`Akzent ${fach} auf Karte`, f.akzent, DUNKEL.karte]);
-  }
-  for (const [name, vorn, hinten] of paare) assert.ok(kontrast(vorn, hinten) >= 4.5, `${name}: ${kontrast(vorn, hinten).toFixed(2)}`);
-  // Fließtext deutlich darüber (WCAG AAA): Mailprogramme hellen dunkle Flächen oft noch selbst auf (Christian 2026-11-17).
-  for (const [name, vorn, hinten] of paare.filter(([n]) => n.startsWith("Text"))) {
-    assert.ok(kontrast(vorn, hinten) >= 7, `${name}: ${kontrast(vorn, hinten).toFixed(2)} < 7`);
-  }
+test("Nur helle Fassung: Mailprogramme sollen nicht umfärben (Christian 2026-11-17)", () => {
+  const { html } = /** @type {{ html: string }} */ (setzeBrief(BEISPIEL(), { datum: DATUM }));
+  assert.ok(html.includes('<meta name="color-scheme" content="light only">'));
+  assert.ok(html.includes('<meta name="supported-color-schemes" content="light only">'));
+  assert.ok(!html.includes("prefers-color-scheme"));
 });
