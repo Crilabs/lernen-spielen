@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>Dreieck und Kreis</title>
 <!-- G01 Dreieck und Kreis (Idee docs/spiele/grammatik/g01-dreieck-und-kreis-wortarten-mit-symbolen.md). Ein sonniger
-     Hinterhof (raum.js): oben die Hauswand, davor Kofis Weg, darunter die Kreidereihe als helle Matte (ein Kästchen je
-     Wort), rechts auf der niedrigen Mauer das Tablett mit den Symbolen. Kofi hüpft hinter der Reihe, nie davor.
+     Hinterhof (raum.js): oben die Hauswand, davor Kofis Weg, darunter die Wörter, rechts die Symbole, beides direkt auf dem
+     Pflaster (keine Matte, kein Tablett, keine Kästen). Kofi hüpft hinter der Reihe, nie davor.
      Leiste, Blase, Hilfe und Pause an ihren festen Plätzen. -->
 <link rel="stylesheet" href="../../rahmen/seite.css">
 <style>
@@ -15,9 +15,6 @@
     --kofi-hoehe: 40rem;     /* Feld der Figur (320 × 280); die Figur selbst ist etwa 33 rem hoch */
     --tablett-breit: 36rem;
     --weg-hoehe: 38rem;      /* Kofis Weg: von der Leiste bis knapp unter die Wandkante */
-    --kreide: #F4F0FA;
-    --stein: #BFB5AA;
-    --stein-dunkel: #8E857B;
   }
   .welt { position: fixed; inset: 0; background: linear-gradient(#F3DFC8 0 55rem, #E3DDD5 55rem); z-index: 0; }
   .welt svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -33,14 +30,14 @@
   /* Kofis Weg: nur die Linie, auf der er hüpft (die Unterkante des Streifens ist der Boden unter seinen Füßen). */
   .weg { grid-column: 1; grid-row: 1; pointer-events: none; }
 
-  /* Die Kreidereihe: die Matte, darin ein Kästchen je Wort. */
-  .matte { grid-column: 1; grid-row: 2; z-index: 3; padding: 2.4rem 2.8rem; display: flex; align-items: stretch; align-self: start; }
-  .matte::before { inset: 0.9rem; }
-  .reihe { position: relative; z-index: 1; display: flex; gap: 1.6rem; width: 100%; justify-content: center; }
+  /* Die Wörter liegen direkt auf dem Pflaster: keine Matte, kein Kasten (Christian, 2026-11-17). */
+  .matte { grid-column: 1; grid-row: 2; z-index: 3; padding: 2.4rem 2.8rem; display: flex; align-items: stretch; align-self: start; background: none; border: 0; border-radius: 0; }
+  .matte::before { content: none; }
+  .reihe { position: relative; display: flex; gap: 1.6rem; width: 100%; justify-content: center; }
   .kaestchen {
     position: relative; flex: 1 1 0; min-width: 0; max-width: 32rem; container-type: inline-size;
     display: flex; flex-direction: column; align-items: center; gap: 0.8rem; padding: 1.2rem 0.8rem 1.4rem;
-    background: var(--kreide); border: 0.5rem solid var(--ls-naht); border-radius: var(--ls-radius-klein);
+    border: 0.5rem solid transparent; border-radius: var(--ls-radius-klein);
     font-weight: 700; color: var(--ls-tinte);
   }
   .kaestchen.markiert { border-color: var(--ls-tinte); }
@@ -64,19 +61,12 @@
   .eingerastet { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
   .eingerastet ls-wortart { height: 10rem; }
 
-  /* Das Tablett auf der niedrigen Mauer rechts. */
-  .mauer {
-    grid-column: 2; grid-row: 2; align-self: start; z-index: 2; position: relative;
-    padding: 3.2rem 2.2rem 0; border-radius: 3rem 3rem 0 0; min-height: 47rem;
-    background:
-      linear-gradient(var(--stein-dunkel) 0 0.6rem, transparent 0.6rem),
-      repeating-linear-gradient(0deg, transparent 0 7.4rem, rgba(0, 0, 0, 0.08) 7.4rem 7.8rem),
-      var(--stein);
-    border: var(--ls-kontur) solid var(--ls-tinte); border-bottom: 0;
-  }
-  .tablett { padding: 2.6rem 2.6rem 3rem; }
-  .vorrat { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.8rem; min-height: 26rem; align-content: center; }
-  .symbol { min-width: 12.6rem; min-height: 12.6rem; padding: 0; }
+  /* Die Symbole liegen direkt auf dem Pflaster rechts: kein Tablett, keine Mauer, kein eigener Hintergrund. Die Ebenen
+     (.mauer, .vorrat) bilden keinen eigenen Stapel, damit das gezogene Symbol über allem liegt (z-index .gezogen). */
+  .mauer { grid-column: 2; grid-row: 2; align-self: start; position: relative; padding: 3.2rem 2.2rem 0; min-height: 47rem; }
+  .tablett { padding: 2.6rem 2.6rem 3rem; background: none; border: 0; border-radius: 0; box-shadow: none; }
+  .vorrat { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.8rem; min-height: 26rem; align-content: center; }
+  .symbol { min-width: 12.6rem; min-height: 12.6rem; padding: 0; background: none; border-color: transparent; box-shadow: none; }
   .symbol ls-wortart { height: 9rem; }
   .symbol.verborgen { visibility: hidden; }
 
