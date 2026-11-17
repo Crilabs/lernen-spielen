@@ -144,7 +144,8 @@ Hinweis: Die drei ersten Dateien (`mathe/vorwaerts-zaehlen`, `mathe/zerlegen-7`,
 
 1. Prüfung grün: `entwurf: true` aus dem Kopf löschen (erst dann steht die Anleitung in `verzeichnis.json` und
    erreicht die App). Geparkt: `geparkt: true` in den Kopf (steht in keinem Verzeichnis). Datei liegt unter
-   `spiele/mit-echten-dingen/<fach>/<thema-id>.md`, `npm run echte-dinge` ist gelaufen, `npm test` grün.
+   `spiele/mit-echten-dingen/<fach>/<thema-id>.md`, `npm run echte-dinge` und für freigegebene Anleitungen mit Foto
+   `npm run echte-dinge:brief-fotos` (JPEG für den Tagesbrief, sonst ist `npm test` rot) sind gelaufen, `npm test` grün.
 2. Kosten je Agent (Recherche, Schreiben, Prüfung) aus seinem Transkript buchen, immer mit `--stand` (bei einer
    Fortsetzung desselben Agenten per SendMessage bucht es nur den Zuwachs, nie doppelt) und mit `--thema`:
 
