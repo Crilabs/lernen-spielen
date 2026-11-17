@@ -242,7 +242,7 @@ test("Vorgabe: fehlende Datei bricht vorbereiten ab, ohne Worktree", async () =>
   const { spawnSync } = await import("node:child_process");
   const r = spawnSync(process.execPath, ["werkzeuge/spielbau/vorbereiten.mjs", "G01", "--zweig", "spiel-g01-vorgabe-test", "--vorgabe", "/gibt/es/nicht.md"], { cwd: WURZEL, encoding: "utf8" });
   assert.notEqual(r.status, 0);
-  assert.match(r.stderr, /nicht gefunden/);
+  assert.match(r.stderr, /Vorgabe \/gibt\/es\/nicht\.md nicht gefunden/);
   assert.ok(!existsSync(join(WURZEL, ".worktrees/spiel-g01-vorgabe-test")));
 });
 
