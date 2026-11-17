@@ -5043,5 +5043,61 @@
    },
    "total_tokens": 2311
   }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 559,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "gerade-ungerade-begruenden.png",
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-begruenden"
+  ],
+  "usage": {
+   "input_tokens": 559,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 559
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2315
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 556,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "gerade-ungerade-begruenden.png",
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-begruenden"
+  ],
+  "usage": {
+   "input_tokens": 556,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 556
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2312
+  }
  }
 ]
