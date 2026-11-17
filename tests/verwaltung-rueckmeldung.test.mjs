@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { ARTEN, befehlFuer, neuerAuftrag } from "../werkzeuge/verwaltung/auftraege.mjs";
+import { ARTEN, beantworte, befehlFuer, neuerAuftrag } from "../werkzeuge/verwaltung/auftraege.mjs";
 import {
   BEREICHE, SCHAETZUNG_AENDERUNG, befehlMitRueckmeldungen, ordneRueckmeldung, rueckmeldungenZu, stueckVon,
 } from "../werkzeuge/verwaltung/rueckmeldung.mjs";
@@ -142,4 +142,15 @@ test("rueckmeldungenZu: alle Rückmeldungen eines Stücks mit dem Stand ihres Au
     auftrag("b", "aenderung", "G02", "wartet", { bereich: "buch", rueckmeldungen: [{ text: "anderes Stück", zeit: "2026-11-17T11:00:00Z" }] }),
   ];
   assert.deepEqual(rueckmeldungenZu(l, "spiel", "G02").map((x) => [x.text, x.status, x.auftrag]), [["neu", "wartet", "a"], ["alt", "erledigt", "s"]]);
+});
+
+test("Review I2: Antwort übernimmt die Rückmeldungen des alten Auftrags; Rückmeldung als Antwort hängt die alten davor", () => {
+  const alt = { text: "Tieren", zeit: "2026-11-17T10:00:00Z" };
+  const l = [auftrag("x", "aenderung", "M06", "wartet-auf-christian", { bereich: "spiel", rueckmeldungen: [alt], ergebnis: { frage: "Farbe?" } })];
+  const n = beantworte(l, "x", "blau", JETZT).neu;
+  assert.deepEqual(n.rueckmeldungen, [alt]);
+  assert.match(befehlMitRueckmeldungen(n), /Tieren/);
+  const r = ordneRueckmeldung(l, { bereich: "spiel", id: "M06", text: "größer" }, JETZT);
+  assert.equal(r.wie, "antwort");
+  assert.deepEqual(r.auftrag.rueckmeldungen.map((x) => x.text), ["Tieren", "größer"]);
 });

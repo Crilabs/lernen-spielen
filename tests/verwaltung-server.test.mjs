@@ -270,3 +270,10 @@ test("Server: Rückmeldung zu einem Auftrag, der auf Christian wartet, wird sein
   assert.deepEqual(l.map((a) => a.status), ["beantwortet", "wartet"]);
   assert.equal(l[1].art, "antwort");
 }));
+
+test("Review I1: Spiel mit offenen Ideen bekommt keine Rückmeldung (409), kein Änderungs-Auftrag", () => mitServer(async ({ hol, sende, ordner }) => {
+  speichereAuftraege(pfade(ordner).auftraege, [{ id: "a-1-i", art: "ideen", ziel: "R01", befehl: "Spielideen R01", status: "wartet-auf-christian", ergebnis: { ideen: [] }, notiz: "" }]);
+  const r = await sende("/api/rueckmeldung", { bereich: "spiel", id: "R01", text: "Lieber mit Tieren" });
+  assert.equal(r.status, 409);
+  assert.equal((await (await hol("/api/auftraege")).json()).auftraege.length, 1);
+}));

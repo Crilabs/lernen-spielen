@@ -144,6 +144,11 @@ Index-Test schlägt fehl, bis §6 gelaufen ist – das ist erwartet).
   Steuerung selbst mit `transkript.mjs` und `--phase steuerung` auf die Bücher verteilt.
 - Commit je Bündel: „feat(bibliothek): <Bücher>“ mit kurzer Liste (Titel, Abschnitte, Bilder, Kosten).
 
+## Rückmeldung von Christian
+
+Steht unter dem Aufruf ein Abschnitt „Rückmeldung von Christian“ (aus der Verwaltung, 2026-11-17): Jeder Punkt geht
+an den Schreib-Agenten als Auftrag und an den Prüfer als eigener Prüfpunkt (umgesetzt ja/nein mit Beleg).
+
 ## Lauf aus der Verwaltung
 
 Ist `VERWALTUNG_AUFTRAG` gesetzt (Start über `npm run verwaltung`, `werkzeuge/verwaltung/`), schreib als Letztes

@@ -59,7 +59,7 @@ export function ordneRueckmeldung(liste, { bereich, id, text, geparkt = false, s
   if (w) {
     // Der Text kommt über `rueckmeldungen` in den Befehl (befehlMitRueckmeldungen), nicht doppelt in die Antwort.
     const r = beantworte(liste, w.id, "Siehe „Rückmeldung von Christian“ unten.", jetzt);
-    const auftrag = { ...r.neu, rueckmeldungen: [eintrag(t, jetzt)] };
+    const auftrag = { ...r.neu, rueckmeldungen: [...(r.neu.rueckmeldungen ?? []), eintrag(t, jetzt)] };
     return { liste: r.liste.map((a) => (a.id === auftrag.id ? auftrag : a)), wie: "antwort", auftrag };
   }
 

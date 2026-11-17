@@ -113,6 +113,8 @@ export function beantworte(liste, id, text, jetzt = new Date()) {
     art: "antwort", ziel: alt.id, ursprung_art: alt.ursprung_art ?? alt.art, befehl: befehlAntwort(alt, antwort),
     schaetzung_eur: SCHAETZUNG_ANTWORT, angelegt: jetzt.toISOString(), status: "wartet",
     gestartet: null, beendet: null, ergebnis: null, notiz: "",
+    // Rückmeldungen stehen nicht im gespeicherten Befehl; der Folgeauftrag muss sie erben (Review 2026-11-17).
+    ...(alt.rueckmeldungen?.length ? { rueckmeldungen: [...alt.rueckmeldungen] } : {}),
   };
   const kopie = liste.map((x, j) => (j === i ? { ...x, status: "beantwortet", notiz: `Antwort: ${antwort}` } : x));
   return { liste: [...kopie, neu], neu };

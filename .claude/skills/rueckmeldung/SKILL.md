@@ -16,24 +16,31 @@ um, dass beides stimmt, und nenne den Konflikt in der Schlussmeldung. Geht das n
 Du steuerst nur: Du änderst nichts selbst und prüfst nichts selbst. Je Schritt ein frischer Agent (Agent-Werkzeug,
 `general-purpose`, Vordergrund). Christian wird während des Laufs nicht gefragt. Nie pushen.
 
-**Punkte festhalten:** Schreib die Punkte nummeriert nach `<ablage>/rueckmeldung.md` (Ablage je Bereich unten). Jeder
-Agent bekommt diese Datei; der Prüfer urteilt je Nummer.
+**Punkte festhalten:** Schreib alle Punkte des Abschnitts (er enthält auch frühere Rückmeldungen) nummeriert nach
+`<ablage>/rueckmeldung.md` (Ablage je Bereich unten). Jeder Agent bekommt diese Datei; der Prüfer urteilt je Nummer.
+
+**Eigener Zweig je Auftrag:** `<zweig>` = `aenderung-<id>-<marke>` (Id klein; `<marke>` = die letzten fünf Zeichen von
+`$VERWALTUNG_AUFTRAG`, ohne Verwaltung Datum und Uhrzeit `MMTTHHMM`). So liegt nie eine alte Ablage, ein altes
+`nachpruefung.json` oder ein alter Worktree im Weg. Nach dem Merge (und beim Parken nicht) Worktree und Branch
+entfernen: `git worktree remove .worktrees/<zweig> && git branch -d <zweig>`.
 
 ## Spiel
 
-1. **Vorbereiten:** `cd <Hauptrepo> && node werkzeuge/spielbau/vorbereiten.mjs <Id> --zweig aenderung-<id>` (Id klein im
-   Branch). Die letzte Zeile ist `lauf.json`; Ablage, Worktree, Bauheft, Idee und Seite stehen darin. Ist das Spiel
-   nicht auf `main` (geparkt): abbrechen mit Ergebnis `abgebrochen` – geparkte Spiele baut der Skill `spiel-entwickeln`
-   weiter (die Verwaltung legt dafür einen Spiel-Auftrag an).
-2. **Ändern** (frischer Agent, Modell sonnet; erste Zeile `[spielbau:bau <Id> aenderung-<id>]`): Auftrag aus
+1. **Vorbereiten:** Erst prüfen, ob das Spiel in `spiele/spiele.json` auf `main` steht; sonst (geparkt) sofort
+   abbrechen mit Ergebnis `abgebrochen` – geparkte Spiele baut der Skill `spiel-entwickeln` weiter (die Verwaltung
+   legt dafür einen Spiel-Auftrag an). Dann `cd <Hauptrepo> && node werkzeuge/spielbau/vorbereiten.mjs <Id> --zweig
+   <zweig>`. Die letzte Zeile ist `lauf.json`; Ablage, Worktree, Bauheft, Idee und Seite stehen darin.
+2. **Ändern** (frischer Agent, Modell sonnet; erste Zeile `[spielbau:bau <Id> <zweig>]`, Id groß – sonst bucht
+   `abschliessen.mjs` die Kosten nicht): Auftrag aus
    `.claude/skills/spiel-entwickeln/bauen.md` mit den Platzhaltern aus `lauf.json`, davor: „Du baust nicht neu: Setz
    nur die Punkte aus `<ablage>/rueckmeldung.md` um. Ein Fehler (etwas sieht man nicht, reagiert falsch) wird zuerst
    mit einem Test belegt, der rot ist, dann behoben. Was man nur in Bewegung sieht (Ziehen, Animation), belegst du
    mit einem Screenshot mitten in der Bewegung (`werkzeuge/spielbau/bildschirm.mjs`, Optionen im Kopf) in
    `<ablage>/r1/belege/`. Am Ende: je Punkt ein Satz, was du geändert hast, nach `<ablage>/r1/aenderungen.md`.“
-3. **Prüfstand:** `NODE_PATH=/private/tmp/claude-501/pw/node_modules node werkzeuge/spielbau/pruefstand.mjs --lauf
-   <ablage>/lauf.json --runde 1` (rot → zurück zu Schritt 2 als Reparatur, zählt als die eine Reparatur).
-4. **Nachprüfung** (frischer Agent, Modell opus; erste Zeile `[spielbau:pruefung <Id> aenderung-<id>]`): Er hat nicht
+3. **Prüfstand:** `node werkzeuge/spielbau/pruefstand.mjs --lauf <ablage>/lauf.json --runde 1 --start`, dann
+   `… --abwarten 540` wiederholen, bis ein Ergebnis kommt (ein Lauf dauert länger als ein Bash-Aufruf). Rot → zurück
+   zu Schritt 2 als Reparatur, zählt als die eine Reparatur.
+4. **Nachprüfung** (frischer Agent, Modell opus; erste Zeile `[spielbau:pruefung <Id> <zweig>]`): Er hat nicht
    geändert und ändert nichts. Er liest `rueckmeldung.md`, `aenderungen.md`, den Prüfstand und sieht sich Film und
    Belege an (Read-Werkzeug). Er schreibt `<ablage>/r1/nachpruefung.json`:
    `{ "punkte": [{ "nr": 1, "umgesetzt": true|false, "beleg": "<Bild/Test/Satz>" }], "hart": { "schwierigkeit": true|false,
@@ -51,7 +58,7 @@ Agent bekommt diese Datei; der Prüfer urteilt je Nummer.
 
 ## Buch
 
-Ablage `spiele/geschichten/<id>/` im Worktree `.worktrees/aenderung-<id>` (Branch `aenderung-<id>` von `main`).
+Ablage `spiele/geschichten/<id>/` im Worktree `.worktrees/<zweig>` (Branch `<zweig>` von `main`).
 
 1. **Ändern** (frischer Agent, opus): liest `docs/geschichten.md`, `geschichte.json`, `inhalte.md`, `pruefung.md` und
    `rueckmeldung.md`; ändert nur, was die Punkte verlangen (Text, Bild, Frage). Ein neues Bild geht durch die
@@ -66,7 +73,7 @@ Ablage `spiele/geschichten/<id>/` im Worktree `.worktrees/aenderung-<id>` (Branc
 
 ## Mit echten Dingen
 
-Datei `spiele/mit-echten-dingen/<fach>/<thema>.md` (aus dem Verzeichnis), Worktree `.worktrees/aenderung-<id>`.
+Datei `spiele/mit-echten-dingen/<fach>/<thema>.md` (aus dem Verzeichnis), Worktree `.worktrees/<zweig>`.
 
 1. **Ändern** (frischer Agent, sonnet): liest `docs/mit-echten-dingen.md`, die Datei und `rueckmeldung.md`; ändert nur
    die Punkte (Form, Text, Foto nach `mit-echten-dingen` §3a).

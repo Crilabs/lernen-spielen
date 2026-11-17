@@ -59,8 +59,9 @@ export function schaetze(uebersicht, art, ziel) {
   return null;
 }
 
-/** Stände, ab denen ein Stück als gebaut gilt und Rückmeldungen bekommt (Spec Rückmeldungen 2026-11-17). */
-const GEBAUT = ["probe", "fertig", "geparkt", "beauftragt", "entwurf"];
+/** Stände eines gebauten Stücks (Spec Rückmeldungen 2026-11-17). „beauftragt“ zählt nicht: Das kann auch heißen,
+ *  dass nur Ideen auf Christians Wahl warten – dann gilt eine Rückmeldung nur mit offenem Auftrag (Review I1). */
+const GEBAUT = ["probe", "fertig", "geparkt", "entwurf"];
 
 /** Stand eines Stücks in der Übersicht (undefined = unbekannt). */
 export function standFuerRueckmeldung(u, bereich, id) {
