@@ -89,7 +89,12 @@ export function baueUebersicht(q, auftraege) {
   for (const k of q.katalog) {
     const fertig = imSpieleJson.get(k.id);
     /** @type {Status} */
-    const status = fertig ? (fertig.probe ? "probe" : "fertig")
+    // Mit offenem Auftrag (Bau, Antwort, Änderung – auch wenn er auf Christian wartet) ist ein Spiel in Arbeit, keine
+    // Probe: Zur Probe steht es erst, wenn der Auftrag umgesetzt ist (Christian, 2026-11-17).
+    const inArbeit = auftraege.some((a) => (offen(a) || a.status === "wartet-auf-christian") && a.art !== "ideen"
+      && (() => { const s = stueckVon(auftraege, a); return !!s && s.bereich === "spiel" && s.ids.includes(k.id); })());
+    const status = fertig && inArbeit ? "beauftragt"
+      : fertig ? (fertig.probe ? "probe" : "fertig")
       : beauftragt("spiel", k.id) || ideenOffen(k.id) || stueckOffen("spiel", k.id) ? "beauftragt"
       : geparktIds.has(k.id) ? "geparkt" : "geplant";
     spiele[k.id] = { ...k, status, ordner: fertig?.datei ?? null, eur: eurJeSpiel.get(k.id) ?? null };

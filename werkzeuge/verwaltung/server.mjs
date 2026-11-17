@@ -209,6 +209,10 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
       }
       const pb = pfad.match(/^\/api\/proben\/([A-Z]\d+)\/abschliessen$/);
       if (post && pb) {
+        const l = auftraege();
+        const offen = l.find((a) => ["wartet", "laeuft", "wartet-auf-christian"].includes(a.status) && a.art !== "ideen"
+          && (() => { const s = stueckVon(l, a); return !!s && s.bereich === "spiel" && s.ids.includes(pb[1]); })());
+        if (offen) return antwort(409, { fehler: `${pb[1]}: Ein Auftrag dazu ist noch offen – Probe erst, wenn er umgesetzt ist` });
         try { return antwort(200, schliesseProbeAb(wurzel, pb[1])); } catch (e) {
           return antwort(e instanceof ProbeZustand ? 409 : 400, { fehler: /** @type {any} */ (e).message });
         }

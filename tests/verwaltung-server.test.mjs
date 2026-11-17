@@ -277,3 +277,10 @@ test("Review I1: Spiel mit offenen Ideen bekommt keine Rückmeldung (409), kein 
   assert.equal(r.status, 409);
   assert.equal((await (await hol("/api/auftraege")).json()).auftraege.length, 1);
 }));
+
+test("Server: Probe abschließen, solange ein Auftrag zum Spiel offen ist → 409, nichts committet", () => mitServer(async ({ sende }) => {
+  await sende("/api/rueckmeldung", { bereich: "spiel", id: "G01", text: "Knopf größer" });
+  const r = await sende("/api/proben/G01/abschliessen", {});
+  assert.equal(r.status, 409);
+  assert.match((await r.json()).fehler, /offen/);
+}));

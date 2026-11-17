@@ -157,3 +157,14 @@ test("baueUebersicht: offene Antwort oder Änderung zu einem ungebauten Spiel gi
   assert.equal(u.spiele.M02.status, "beauftragt");
   assert.equal(u.spiele.M37.status, "probe", "gebaute Spiele behalten ihren Stand");
 });
+
+test("baueUebersicht: Probe oder fertiges Spiel mit offenem Auftrag steht als beauftragt, nicht als Probe (Christian, 2026-11-17)", () => {
+  const l = [{ id: "x", art: "aenderung", ziel: "M37", bereich: "spiel", status: "wartet" }];
+  const u = baueUebersicht(quellen(), l);
+  assert.equal(u.spiele.M37.status, "beauftragt");
+  assert.ok(u.spiele.M37.ordner, "Seite bleibt erreichbar");
+  const fertig = baueUebersicht(quellen(), [{ id: "x", art: "aenderung", ziel: "M37", bereich: "spiel", status: "erledigt" }]);
+  assert.equal(fertig.spiele.M37.status, "probe");
+  const frage = baueUebersicht(quellen(), [{ id: "x", art: "aenderung", ziel: "M37", bereich: "spiel", status: "wartet-auf-christian" }]);
+  assert.equal(frage.spiele.M37.status, "beauftragt");
+});
