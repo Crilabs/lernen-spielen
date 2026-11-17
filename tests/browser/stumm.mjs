@@ -4,7 +4,7 @@
 // Chromium bekommt --mute-audio. WebKit kennt keinen solchen Schalter; dort (und zur Sicherheit auch in Chromium)
 // macht ein Init-Skript die Seite selbst leise, ohne den Ablauf zu ändern: Medien laufen mit Lautstärke 0
 // weiter (ended, Zeiten, Fehler und Autoplay-Sperre wie sonst), Web Audio geht über einen Gain-Knoten mit 0, die Systemstimme spricht
-// gar nicht (eine stille Nachbildung meldet start/end wie sonst). Prüfungen, die speechSynthesis.speak selbst ersetzen, bleiben gültig.
+// gar nicht (eine stille Nachbildung am Prototyp meldet start/end wie sonst). Prüfungen, die speechSynthesis.speak selbst ersetzen, bleiben gültig.
 
 /** Läuft in jeder Seite vor deren Skripten. */
 function leise() {
@@ -29,14 +29,16 @@ function leise() {
     }
     return connect.call(this, ziel, ...a);
   };
-  if (window.speechSynthesis) {
+  if (window.speechSynthesis && window.SpeechSynthesis) {
     // Die Systemstimme spricht nie wirklich: WebKit hält sich nicht an volume = 0, und Sätze ohne Aufnahme liefen
     // hörbar über die Lautsprecher (Christian, 2026-11-16). Stattdessen kommen „start“ und „end“ wie bei einer echten
     // Stimme, nach einer Dauer, die zur Länge des Textes passt; cancel() meldet „canceled“ wie Chromium.
-    const s = window.speechSynthesis;
+    // Am Prototyp, nicht am Objekt: WebKit verwirft das JS-Objekt hinter speechSynthesis bei der Speicherbereinigung,
+    // eine eigene Eigenschaft daran ging verloren und die echte Stimme sprach (Prüfstand G02, 2026-11-17).
+    const proto = window.SpeechSynthesis.prototype;
     /** @type {{ u: SpeechSynthesisUtterance, t1: ReturnType<typeof setTimeout>, t2: ReturnType<typeof setTimeout> }[]} */
     let offen = [];
-    s.speak = (u) => {
+    const speak = (u) => {
       const ms = Math.max(400, (u.text.length * 60) / (u.rate || 1));
       const t1 = setTimeout(() => u.dispatchEvent(new Event("start")), 30);
       const t2 = setTimeout(() => {
@@ -45,7 +47,7 @@ function leise() {
       }, ms);
       offen.push({ u, t1, t2 });
     };
-    s.cancel = () => {
+    const cancel = () => {
       const alle = offen;
       offen = [];
       for (const o of alle) {
@@ -56,6 +58,8 @@ function leise() {
         o.u.dispatchEvent(ev);
       }
     };
+    Object.defineProperty(proto, "speak", { value: speak, writable: true, configurable: true });
+    Object.defineProperty(proto, "cancel", { value: cancel, writable: true, configurable: true });
   }
 }
 
