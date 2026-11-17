@@ -439,7 +439,7 @@ export class LsGeschichte extends HTMLElement {
         get gelesen() { return el.gelesen; },
         get frageSeite() { return el.liste.findIndex((s) => s.frage === true); },
         get erinnern() { return !!el.liste[el.seite]?.erinnern; },
-        antworte: (/** @type {number} */ i) => el.erinnernEl.waehle(i),
+        antworte: async (/** @type {number} */ i) => { await el.erinnernEl.frei; el.erinnernEl.waehle(i); },
         get kapitel() { return el.kapitel; },
         get kapitelZahl() { return el.kapitelZahl; },
         get stand() { return el.stand; },

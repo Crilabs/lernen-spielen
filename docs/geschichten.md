@@ -73,7 +73,9 @@ wird gezählt; eine Antwort, die nicht passt, löst nichts Besonderes aus.
 - **Nachlesen** (`seite`): Index der Seite im Kapitel (ab 0), auf der die Antwort steht; der Knopf „Nachlesen“ springt
   dorthin.
 - **Alles wird vorgelesen** (bei Ton an, in beiden Modi): Frage, jede Antwort, beim Tippen die gewählte Antwort, dann die
-  Auflösung (`npm run audio` nimmt alles auf).
+  Auflösung (`npm run audio` nimmt alles auf). Die gerade vorgelesene Antwort trägt den Sonnenring; wählen lässt sich
+  erst, wenn alle drei Antworten vorgelesen sind (Christian, 2026-11-17). Bricht etwas das Vorlesen ab, ist die Wahl
+  sofort frei.
 - **„Weißt du noch?“ in der Bibliothek:** Höchstens einmal am Tag kommt beim Öffnen der Bibliothek die Frage eines
   Kapitels zurück, das das Kind frühestens gestern beendet hat; die am längsten nicht gestellte zuerst. Überspringbar
   („Später“), nichts wird gezählt.

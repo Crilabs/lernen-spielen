@@ -165,6 +165,7 @@ for (const typ of [chromium, webkit]) {
   pruefe(await sr(p, (el) => { const s = el.shadowRoot; return s.querySelector(".naechstes").hidden && s.querySelector(".text").hidden && !s.querySelector(".erinnern").hidden
     && s.querySelector(".erinnern").shadowRoot.querySelectorAll(".antwort").length === 3; }), `${name}: Frage mit drei Antworten, noch kein „Kapitel 2“`);
   pruefe(!((await gespeichert(p)).buecher?.probebuch?.fertig ?? []).includes(0), `${name}: vor der Wahl ist das Kapitel nicht gelesen`);
+  await sr(p, (el) => el.shadowRoot.querySelector(".erinnern").frei);
   await sr(p, (el) => el.shadowRoot.querySelector(".erinnern").shadowRoot.querySelectorAll(".antwort")[0].click());
   pruefe(await sr(p, (el) => { const s = el.shadowRoot, e = s.querySelector(".erinnern").shadowRoot, a = e.querySelectorAll(".antwort");
     return !s.querySelector(".naechstes").hidden && a[1].classList.contains("passt") && a[0].classList.contains("gewaehlt") && !e.querySelector(".aufloesung").hidden

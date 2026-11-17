@@ -2,11 +2,14 @@
 // Frage, drei Antworten; nach dem Tipp leuchtet die passende Antwort auf und die Auflösung erscheint. Bewertet nicht:
 // kein „richtig“/„falsch“, die gewählte Antwort bekommt nur einen Rand, jede Wahl führt zur selben ruhigen Auflösung (N7).
 // Vorgelesen wird alles (bei ton): Frage, jede Antwort, die gewählte Antwort, die Auflösung.
+// Während eine Antwort vorgelesen wird, trägt sie den Sonnenring (Klasse `liest`). Wählen geht erst, wenn alle Antworten
+// vorgelesen sind (Christian, 2026-11-17); bricht etwas das Vorlesen ab, ist die Wahl sofort frei.
 //
 // Benutzung: el.zeige({ frage, antworten, richtig, aufloesung }, { ton, bild?, nachlesen? })
 //   bild: Adresse eines Fotos über der Frage (Bibliothek); im Buch steht das Foto in der Bildhälfte.
 //   nachlesen: Knopf „Nachlesen“ nach der Wahl → Ereignis `nachlesen`.
-// Ereignis `gewaehlt` (detail { index }) gleich nach dem Tipp; Eigenschaft `gewaehlt` (Index oder -1).
+// Ereignis `gewaehlt` (detail { index }) gleich nach dem Tipp; Eigenschaft `gewaehlt` (Index oder -1);
+// `gesperrt` (true, solange die Antworten vorgelesen werden) und Versprechen `frei` (löst auf, sobald gewählt werden kann).
 
 import { sprich } from "../kern/stimme.js";
 import { GRUND_CSS, definiere } from "./stil.js";
@@ -27,6 +30,9 @@ const CSS = `
   -webkit-tap-highlight-color: transparent;
 }
 .antwort:focus-visible { outline: 0.6rem solid var(--ls-beere); outline-offset: 0.4rem; }
+/* Gerade vorgelesen: Sonnenring wie das Aufleuchten in ls-hilfe – ein Ring, nie eine Fläche (die Fläche heißt „passt“). */
+.antwort.liest { outline: 0.8rem solid var(--ls-sonne); outline-offset: 0.4rem; }
+:host(.gesperrt) .antwort { cursor: default; }
 :host(.entschieden) .antwort { cursor: default; box-shadow: none; }
 :host(.entschieden) .antwort:not(.passt):not(.gewaehlt) { opacity: .55; }
 .antwort.gewaehlt { border-color: var(--ls-tinte-weich); }
@@ -65,6 +71,10 @@ export class LsErinnern extends HTMLElement {
     this.daten = null;
     this.ton = true;
     this.mitNachlesen = false;
+    this.gesperrt = false;
+    /** @type {Promise<void>} */
+    this.frei = Promise.resolve();
+    this.runde = 0;
   }
 
   /**
@@ -94,21 +104,47 @@ export class LsErinnern extends HTMLElement {
       li.appendChild(b);
       return li;
     }));
-    if (ton) {
-      sprich(e.frage);
-      for (const a of e.antworten) sprich(a);
+    const runde = ++this.runde;
+    const knoepfe = [...this.listeEl.querySelectorAll(".antwort")];
+    this.setzeGesperrt(ton);
+    if (!ton) {
+      this.frei = Promise.resolve();
+      return;
+    }
+    sprich(e.frage);
+    const vorgelesen = e.antworten.map((a, i) => sprich(a, {
+      beginn: () => {
+        if (runde !== this.runde) return;
+        knoepfe.forEach((b, k) => b.classList.toggle("liest", k === i));
+      },
+    }).finally(() => {
+      if (runde === this.runde) knoepfe[i].classList.remove("liest");
+    }));
+    this.frei = Promise.allSettled(vorgelesen).then(() => {
+      if (runde === this.runde) this.setzeGesperrt(false);
+    });
+  }
+
+  /** @param {boolean} an */
+  setzeGesperrt(an) {
+    this.gesperrt = an;
+    this.classList.toggle("gesperrt", an);
+    for (const b of this.listeEl.querySelectorAll(".antwort")) {
+      if (an) b.setAttribute("aria-disabled", "true");
+      else if (this.gewaehlt < 0) b.removeAttribute("aria-disabled");
     }
   }
 
   /** @param {number} i */
   waehle(i) {
     const e = this.daten;
-    if (!e || this.gewaehlt >= 0 || i < 0 || i >= e.antworten.length) return;
+    if (!e || this.gesperrt || this.gewaehlt >= 0 || i < 0 || i >= e.antworten.length) return;
     this.gewaehlt = i;
     this.classList.add("entschieden");
     [...this.listeEl.querySelectorAll(".antwort")].forEach((b, k) => {
       b.classList.toggle("gewaehlt", k === i);
       b.classList.toggle("passt", k === e.richtig);
+      b.classList.remove("liest");
       b.setAttribute("aria-disabled", "true");
     });
     this.aufloesungEl.hidden = false;
