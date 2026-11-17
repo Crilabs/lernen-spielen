@@ -1,0 +1,167 @@
+[
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 36,
+  "ausgabe": 17120,
+  "einheit": "tokens",
+  "menge": 1753086,
+  "notiz": "Spielbau pruefung",
+  "cache_lesen": 1605009,
+  "cache_schreiben": 130921
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefstand",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 6,
+  "ausgabe": 1091,
+  "einheit": "tokens",
+  "menge": 130327,
+  "notiz": "Spielbau pruefstand",
+  "cache_lesen": 41292,
+  "cache_schreiben": 87938
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 38,
+  "ausgabe": 18401,
+  "einheit": "tokens",
+  "menge": 1719826,
+  "notiz": "Spielbau pruefung",
+  "cache_lesen": 1583165,
+  "cache_schreiben": 118222
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 14,
+  "ausgabe": 1485,
+  "einheit": "tokens",
+  "menge": 339417,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 285978,
+  "cache_schreiben": 51940
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefstand",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 1334,
+  "einheit": "tokens",
+  "menge": 177273,
+  "notiz": "Spielbau pruefstand",
+  "cache_lesen": 81322,
+  "cache_schreiben": 94609
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 130,
+  "ausgabe": 59287,
+  "einheit": "tokens",
+  "menge": 11374435,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 10853194,
+  "cache_schreiben": 461824
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 200,
+  "ausgabe": 153486,
+  "einheit": "tokens",
+  "menge": 27657319,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 25688932,
+  "cache_schreiben": 1814701
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefstand",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 6,
+  "ausgabe": 1197,
+  "einheit": "tokens",
+  "menge": 129741,
+  "notiz": "Spielbau pruefstand",
+  "cache_lesen": 34310,
+  "cache_schreiben": 94228
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "idee",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 19230,
+  "einheit": "tokens",
+  "menge": 562579,
+  "notiz": "Spielbau idee",
+  "cache_lesen": 452787,
+  "cache_schreiben": 90546
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 4472,
+  "einheit": "tokens",
+  "menge": 481379,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 352338,
+  "cache_schreiben": 124555
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4763,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4763,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 443
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6135
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "geparkt",
+  "posten": "status",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "keine",
+  "menge": 0,
+  "notiz": "Spielprüfung nach 2 Runden rot: Grundform ohne Held, Stamm vorgeschnitten, G7"
+ }
+]

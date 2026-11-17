@@ -33,7 +33,7 @@
       "arten": [{ "art": "artikel", "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null },
     { "id": "ichduwir", "titel": "Ich, du, wir", "thema": "Verb passt zur Person", "kategorie": "grammatik",
-      "symbol": "grammatik/g02-ich-du-wir-person-und-verb/symbol.svg", "datei": "grammatik/g02-ich-du-wir-person-und-verb/index.html",
+      "symbol": "grammatik/g02-ich-du-wir-person-und-verb/symbol.svg", "bild": "grammatik/g02-ich-du-wir-person-und-verb/spielbild.webp", "datei": "grammatik/g02-ich-du-wir-person-und-verb/index.html",
       "text": "Die Endung an das Verb legen, und wer gemeint ist, malt.",
       "beschreibung": "Das Kind sitzt mit der Runde am Maltisch und legt Endungen an Verben (du malst, wir malen), Pronomen vor Verben oder tauscht bei der Grundform die Endung gegen -en. Passt es, tun genau die gemeinten Personen es auf dem gemeinsamen Bogen: bei ich malt die eigene Hand, bei du Kofi gegenüber. Passt es nicht, heben die kurz den Stift, zu denen die Endung gehört, und das Plättchen gleitet zurück.",
       "arten": [{ "art": "verbform", "ziele": ["endung", "pronomen", "grundform"], "stufen": ["material", "vorstellung", "kopf"] }],
