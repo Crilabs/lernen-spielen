@@ -1,7 +1,7 @@
 // Graph-Sender: Token mit Zertifikats-JWT, Cache, sendMail-Form, Fehler ohne Mailinhalt. Kein echter Netzaufruf.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { createHash, createPublicKey, generateKeyPairSync, randomBytes, verify } from "node:crypto";
+import { createHash, generateKeyPairSync, randomBytes, verify } from "node:crypto";
 import { graphSender } from "../dienste/tagesbrief/graph.js";
 
 const { privateKey, publicKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
@@ -44,7 +44,7 @@ test("erster Versand holt ein Token mit signiertem JWT, zweiter nutzt den Cache"
   assert.equal(inhalt.sub, "client-1");
   assert.ok(inhalt.jti);
   assert.equal(inhalt.exp - inhalt.nbf, 600);
-  assert.ok(verify("RSA-SHA256", Buffer.from(`${k}.${p}`), createPublicKey(publicKey), Buffer.from(s, "base64url")), "Signatur stimmt");
+  assert.ok(verify("RSA-SHA256", Buffer.from(`${k}.${p}`), publicKey, Buffer.from(s, "base64url")), "Signatur stimmt");
 });
 
 test("sendMail: HTML-Body, saveToSentItems false, Foto als Inline-Anlage mit contentId anleitung", async () => {
