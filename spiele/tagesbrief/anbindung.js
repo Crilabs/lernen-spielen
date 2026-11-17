@@ -9,11 +9,11 @@ import { liesAnleitung } from "../rahmen/markdown.js";
 import { waehleAnleitung } from "./anleitung.js";
 import { dabeiEreignis, gekonntEreignis, gelesenEreignis, naechstesEreignis } from "./ereignisse.js";
 
-/** Schlüssel des Lernstands der Lernsteuerung (wie STAND_KEY in lernsteuerung.js). */
-const STAND_KEY = "lernplan";
+/** Eigener Speicherschlüssel (je Profil) für Sperren und letztes Fach, damit er nicht mit dem Lernstand um Schreibvorgänge streitet. */
+const TB_KEY = "tagesbrief";
 /** Größte Foto-Größe als base64 (wie FOTO_MAX im Dienst). */
 const FOTO_MAX = 60_000;
-/** Gesperrte Anleitungen, die älter sind, werden aus dem Lernstand entfernt (die Sperre gilt 14 Tage). */
+/** Gesperrte Anleitungen, die älter sind, werden aus dem Speicher entfernt (die Sperre gilt 14 Tage). */
 const SPERRE_BEHALTEN_TAGE = 30;
 
 /** @typedef {(name: string, args?: object) => Promise<any>} Befehl */
@@ -37,6 +37,9 @@ export const testHaken = {
   /** @param {Lader | null} fn */
   setzeLader(fn) { lader = fn ?? echterLader; verzeichnis = null; },
 };
+
+/** Hebt das Stoppen nach „abbestellt“ auf (nach neuem Einrichten, ohne die Seite neu zu laden). */
+export function setzeZurueck() { gestoppt = false; }
 
 /** @param {unknown} x */
 const istObjekt = (x) => Boolean(x) && typeof x === "object" && !Array.isArray(x);
@@ -84,7 +87,7 @@ async function ladeFoto(foto) {
  * @param {{ heute: string, zuletztGeuebt: string }} o
  */
 async function baueNaechstes(ctx, stand, { heute, zuletztGeuebt }) {
-  const tb = istObjekt(stand.tagesbrief) ? stand.tagesbrief : {};
+  const tb = await lade(TB_KEY, { gesperrt: {}, letztesFach: "" });
   const wahl = waehleAnleitung(ctx, stand, {
     heute, gesperrt: istObjekt(tb.gesperrt) ? tb.gesperrt : {}, zuletztGeuebt,
     letztesFach: typeof tb.letztesFach === "string" ? tb.letztesFach : "",
@@ -101,27 +104,21 @@ async function baueNaechstes(ctx, stand, { heute, zuletztGeuebt }) {
 }
 
 /**
- * Hält verschickte Anleitungen im Lernstand fest (14-Tage-Sperre, letztes Fach) und speichert.
- * Schreibt auf den frisch geladenen Stand, damit eine spätere Runde nicht überschrieben wird.
- * @param {any} stand
+ * Hält verschickte Anleitungen fest (14-Tage-Sperre, letztes Fach) und speichert unter eigenem Schlüssel.
  * @param {{ anleitung?: string, am?: string }[]} verschickt
  * @param {string} heute
  */
-async function merkeVerschickt(stand, verschickt, heute) {
+async function merkeVerschickt(verschickt, heute) {
   const gueltig = verschickt.filter((v) => istObjekt(v) && typeof v.anleitung === "string" && /^[a-z0-9-]+\/[a-z0-9-]+\.md$/.test(v.anleitung));
   if (!gueltig.length) return;
-  const frisch = await lade(STAND_KEY, {});
-  for (const ziel of [stand, frisch]) {
-    const tb = istObjekt(ziel.tagesbrief) ? ziel.tagesbrief : {};
-    /** @type {Record<string, string>} */
-    const gesperrt = {};
-    for (const [datei, am] of Object.entries(istObjekt(tb.gesperrt) ? tb.gesperrt : {})) {
-      if (typeof am === "string" && (Date.parse(heute) - Date.parse(am)) / 86400000 <= SPERRE_BEHALTEN_TAGE) gesperrt[datei] = am;
-    }
-    for (const v of gueltig) gesperrt[/** @type {string} */ (v.anleitung)] = String(v.am ?? heute).slice(0, 10);
-    ziel.tagesbrief = { ...tb, gesperrt, letztesFach: /** @type {string} */ (gueltig[gueltig.length - 1].anleitung).split("/")[0] };
+  const tb = await lade(TB_KEY, { gesperrt: {}, letztesFach: "" });
+  /** @type {Record<string, string>} */
+  const gesperrt = {};
+  for (const [datei, am] of Object.entries(istObjekt(tb.gesperrt) ? tb.gesperrt : {})) {
+    if (typeof am === "string" && (Date.parse(heute) - Date.parse(am)) / 86400000 <= SPERRE_BEHALTEN_TAGE) gesperrt[datei] = am;
   }
-  speichere(STAND_KEY, frisch);
+  for (const v of gueltig) gesperrt[/** @type {string} */ (v.anleitung)] = String(v.am ?? heute).slice(0, 10);
+  speichere(TB_KEY, { gesperrt, letztesFach: /** @type {string} */ (gueltig[gueltig.length - 1].anleitung).split("/")[0] });
   await sofortSpeichern();
 }
 
@@ -133,18 +130,18 @@ async function merkeVerschickt(stand, verschickt, heute) {
  * @param {string} heute
  */
 async function pushe(ctx, stand, ereignisse, heute) {
-  if (gestoppt || !ereignisse.length) return;
+  if (!ereignisse.length) return;
   const status = await befehl("tagesbrief_status", { profil: PROFIL });
   if (status?.zustand === "abbestellt") gestoppt = true;
   if (status?.zustand !== "aktiv") return;
   const antwort = await befehl("tagesbrief_pushen", { profil: PROFIL, ereignisse });
   if (["abbestellt", "aus", "gesperrt"].includes(antwort?.zustand)) { gestoppt = true; return; }
-  if (Array.isArray(antwort?.verschickt)) await merkeVerschickt(stand, antwort.verschickt, heute);
+  if (Array.isArray(antwort?.verschickt)) await merkeVerschickt(antwort.verschickt, heute);
 }
 
 /** @param {unknown} e */
 function melde(e) {
-  if (istApp()) protokoll(`tagesbrief: ${/** @type {any} */ (e)?.message ?? e}`);
+  if (istApp()) protokoll(`tagesbrief: Fehler ${/** @type {any} */ (e)?.name ?? "unbekannt"}`);
 }
 
 /**

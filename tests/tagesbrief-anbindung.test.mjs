@@ -9,7 +9,7 @@ globalThis.localStorage = {
   removeItem: (k) => speicher.delete(k),
 };
 globalThis.window = {};
-const { meldeRundenende, meldeGelesen, testHaken } = await import("../spiele/tagesbrief/anbindung.js");
+const { meldeRundenende, meldeGelesen, setzeZurueck, testHaken } = await import("../spiele/tagesbrief/anbindung.js");
 const { gueltigesEreignis } = await import("../dienste/tagesbrief/pruefung.js");
 const { neuerStand, migriereStand } = await import("../spiele/lernsteuerung.js");
 
@@ -128,23 +128,50 @@ test("Status abbestellt: kein Push, und die Seite fragt nicht erneut", async () 
   assert.equal(aufrufe.length, 1);
 });
 
-test("verschickt: gesperrt und letztesFach im Stand gesetzt und gespeichert, 2. Brief wählt eine andere Anleitung", async () => {
+const TB_SCHLUESSEL = "lernstand-kind-1-tagesbrief";
+
+test("verschickt: gesperrt und letztesFach unter eigenem Schlüssel, 2. Brief wählt eine andere Anleitung", async () => {
   attrappe();
   const stand = standDran("zweierreihe");
   await meldeRundenende(ctx, stand, { thema: "zweierreihe", gekonnt: null, heute: HEUTE });
   const erste = pushes()[0].args.ereignisse.find((e) => e.art === "naechstes").daten.id;
   attrappe({ pushen: { verschickt: [{ anleitung: erste, am: "2026-11-17" }] } });
   await meldeRundenende(ctx, stand, { thema: "zweierreihe", gekonnt: null, heute: HEUTE });
-  assert.deepEqual(stand.tagesbrief.gesperrt, { [erste]: "2026-11-17" });
-  assert.equal(stand.tagesbrief.letztesFach, erste.split("/")[0]);
-  const gespeichert = JSON.parse(speicher.get(SCHLUESSEL));
-  assert.deepEqual(gespeichert.tagesbrief, stand.tagesbrief);
-  assert.equal(migriereStand(gespeichert).tagesbrief.gesperrt[erste], "2026-11-17");
-  // Danach kommt die gesperrte Anleitung nicht mehr als naechstes
+  assert.deepEqual(JSON.parse(speicher.get(TB_SCHLUESSEL)), { gesperrt: { [erste]: "2026-11-17" }, letztesFach: erste.split("/")[0] });
+  assert.equal(speicher.get(SCHLUESSEL), undefined); // der Lernstand bleibt unberührt
   attrappe();
   await meldeRundenende(ctx, stand, { thema: "zweierreihe", gekonnt: null, heute: "2026-11-18" });
   const zweite = pushes()[0]?.args.ereignisse.find((e) => e.art === "naechstes")?.daten.id;
   assert.notEqual(zweite, erste);
+});
+
+test("ausstehendes Speichern einer Runde und Sperre bleiben beide erhalten", async () => {
+  const { speichere, lade, sofortSpeichern } = await import("../spiele/kern/speicher.js");
+  attrappe();
+  const stand = standDran("zweierreihe");
+  await meldeRundenende(ctx, stand, { thema: "zweierreihe", gekonnt: null, heute: HEUTE });
+  const erste = pushes()[0].args.ereignisse.find((e) => e.art === "naechstes").daten.id;
+  attrappe({ pushen: { verschickt: [{ anleitung: erste, am: HEUTE }] } });
+  const runde = { ...neuerStand(), verlauf: [{ marke: "runde-laeuft" }] };
+  speichere("lernplan", runde); // Runde hat gespeichert, noch nicht geschrieben
+  await meldeRundenende(ctx, stand, { thema: "zweierreihe", gekonnt: null, heute: HEUTE });
+  await sofortSpeichern();
+  assert.deepEqual(JSON.parse(speicher.get(SCHLUESSEL)).verlauf, [{ marke: "runde-laeuft" }]);
+  assert.deepEqual((await lade("tagesbrief", {})).gesperrt, { [erste]: HEUTE });
+  speichere("lernplan", { ...runde, verlauf: [{ marke: "naechste-runde" }] }); // spätere Runde löscht die Sperre nicht
+  await sofortSpeichern();
+  assert.deepEqual((await lade("tagesbrief", {})).gesperrt, { [erste]: HEUTE });
+});
+
+test("setzeZurueck: nach abbestellt wird wieder gepusht", async () => {
+  attrappe({ pushen: { zustand: "abbestellt" } });
+  const stand = standDran("zweierreihe");
+  await meldeRundenende(ctx, stand, { thema: "zweierreihe", gekonnt: null, heute: HEUTE });
+  await meldeRundenende(ctx, stand, { thema: "zweierreihe", gekonnt: null, heute: HEUTE });
+  assert.equal(pushes().length, 1);
+  setzeZurueck();
+  await meldeRundenende(ctx, stand, { thema: "zweierreihe", gekonnt: null, heute: HEUTE });
+  assert.equal(pushes().length, 2);
 });
 
 test("alle gebauten Ereignisse bestehen die Prüfung des Dienstes", async () => {
