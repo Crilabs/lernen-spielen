@@ -46,12 +46,13 @@ fn lernstand_schreiben(
     lernstand::schreiben(&lernstand_dir(&app)?, profil.as_deref(), &spiel, &daten)
 }
 
-/// Ordner des Profils für die Tagesbrief-Dateien (wie beim Lernstand).
+/// Ordner der Tagesbrief-Dateien: `tagesbrief/<profil>` neben, nicht im Lernstand-Ordner.
 fn tagesbrief_dir(
     app: &tauri::AppHandle,
     profil: Option<&str>,
 ) -> Result<std::path::PathBuf, String> {
-    lernstand::ordner(&lernstand_dir(app)?, profil)
+    let wurzel = app.path().app_data_dir().map_err(|e| e.to_string())?;
+    tagesbrief::ordner(&wurzel, profil)
 }
 
 /// Führt blockierende Tagesbrief-Arbeit (Dateien, HTTP) abseits des Async-Threads aus.

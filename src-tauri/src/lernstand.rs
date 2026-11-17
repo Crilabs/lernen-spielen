@@ -4,7 +4,7 @@ use std::fs::{self, File};
 use std::io::{ErrorKind, Write};
 use std::path::{Path, PathBuf};
 
-fn pruefe_id(spiel: &str) -> Result<(), String> {
+pub(crate) fn pruefe_id(spiel: &str) -> Result<(), String> {
     let ok = (1..=40).contains(&spiel.len())
         && spiel
             .bytes()
@@ -37,7 +37,7 @@ fn gueltigen_inhalt(datei: &Path) -> std::io::Result<Option<String>> {
 }
 
 /// Ordner für Profil (`dir/<profil>/`) oder Gerät (`dir/`). Kein Rückgriff dazwischen.
-pub(crate) fn ordner(dir: &Path, profil: Option<&str>) -> Result<PathBuf, String> {
+fn ordner(dir: &Path, profil: Option<&str>) -> Result<PathBuf, String> {
     match profil {
         Some(p) => {
             pruefe_id(p)?;

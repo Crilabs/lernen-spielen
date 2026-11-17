@@ -72,12 +72,46 @@ fn warteschlange_datei(dir: &Path) -> PathBuf {
     dir.join("tagesbrief-warteschlange.json")
 }
 
+/// Ordner für Profil (`tagesbrief/<profil>`) oder Gerät (`tagesbrief/_geraet`), getrennt
+/// vom Lernstand-Ordner, damit die Seite den Schlüssel nicht über `lernstand_*` erreicht.
+pub fn ordner(app_daten: &Path, profil: Option<&str>) -> Result<PathBuf, String> {
+    let name = match profil {
+        Some(p) => {
+            crate::lernstand::pruefe_id(p)?;
+            p
+        }
+        None => "_geraet",
+    };
+    Ok(app_daten.join("tagesbrief").join(name))
+}
+
+fn lege_ordner_an(ordner: &Path) -> std::io::Result<()> {
+    let mut b = fs::DirBuilder::new();
+    b.recursive(true);
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::DirBuilderExt;
+        b.mode(0o700);
+    }
+    b.create(ordner)
+}
+
 fn schreibe_atomar(pfad: &Path, text: &str) -> Result<(), String> {
+    use std::io::Write;
     if let Some(eltern) = pfad.parent() {
-        fs::create_dir_all(eltern).map_err(|e| e.to_string())?;
+        lege_ordner_an(eltern).map_err(|e| e.to_string())?;
     }
     let tmp = pfad.with_extension("json.tmp");
-    fs::write(&tmp, text).map_err(|e| e.to_string())?;
+    let mut o = fs::OpenOptions::new();
+    o.write(true).create(true).truncate(true);
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::OpenOptionsExt;
+        o.mode(0o600);
+    }
+    let mut f = o.open(&tmp).map_err(|e| e.to_string())?;
+    f.write_all(text.as_bytes()).map_err(|e| e.to_string())?;
+    drop(f);
     fs::rename(&tmp, pfad).map_err(|e| e.to_string())
 }
 
@@ -202,15 +236,30 @@ fn status_json(z: &Zustand) -> Value {
 pub fn status(dir: &Path, basis: &str) -> Result<Value, String> {
     let _sperre = SPERRE.lock().unwrap_or_else(|e| e.into_inner());
     let mut z = lade(dir);
-    if z.zustand == "wartet" && !z.anfrage.is_empty() {
+    if z.zustand == "wartet" && !z.schluessel.is_empty() {
+        // Schlüssel ist schon gesichert (früherer Abruf), nur der Zustand fehlt noch.
+        z.zustand = "aktiv".into();
+        z.anfrage = String::new();
+        sichere(dir, &z)?;
+    } else if z.zustand == "wartet" && !z.anfrage.is_empty() {
         let url = format!("{basis}/status?anfrage={}", z.anfrage);
         match anfrage("status", "GET", &url, None, None) {
             Ok((200, k)) if k["bestaetigt"] == true => {
                 if let Some(s) = k["schluessel"].as_str() {
+                    // Erst den Schlüssel sichern (Dienst gibt ihn nur einmal heraus), dann aktivieren.
                     z.schluessel = s.to_string();
+                    sichere(dir, &z)?;
                     z.zustand = "aktiv".into();
                     z.anfrage = String::new();
                     sichere(dir, &z)?;
+                } else {
+                    // Schlüssel wurde schon abgeholt und ist verloren: neu einrichten.
+                    z.zustand = "aus".into();
+                    z.anfrage = String::new();
+                    sichere(dir, &z)?;
+                    let mut antwort = status_json(&z);
+                    antwort["hinweis"] = json!("Schluessel verloren, bitte neu einrichten");
+                    return Ok(antwort);
                 }
             }
             Ok((404, _)) => {
@@ -273,6 +322,14 @@ pub fn pushen(dir: &Path, basis: &str, ereignisse: Vec<Value>) -> Result<Value, 
                 sichere_schlange(dir, &[])?;
                 return Ok(json!({ "zustand": "abbestellt" }));
             }
+            401 => {
+                // Schlüssel unbekannt: verwerfen, sonst bliebe der Push endlos hängen.
+                z.zustand = "aus".into();
+                z.schluessel = String::new();
+                sichere(dir, &z)?;
+                sichere_schlange(dir, &[])?;
+                return Ok(json!({ "zustand": "aus" }));
+            }
             403 => return Ok(json!({ "zustand": "gesperrt" })),
             400 | 413 => {
                 // Ungültiger Stapel: verwerfen, sonst bliebe er für immer hängen.
@@ -298,8 +355,8 @@ fn mit_schluessel(
         return Err("Tagesbrief ist nicht eingerichtet".to_string());
     }
     let (status, _) = anfrage(befehl, methode, url, Some(&z.schluessel), body)?;
-    if status == 410 {
-        z.zustand = "abbestellt".into();
+    if status == 410 || status == 401 {
+        z.zustand = if status == 410 { "abbestellt" } else { "aus" }.into();
         z.schluessel = String::new();
         sichere(dir, &z)?;
         sichere_schlange(dir, &[])?;
@@ -622,5 +679,74 @@ mod tests {
         ] {
             assert!(!log.contains(geheim), "Log enthält {geheim}: {log}");
         }
+    }
+
+    #[test]
+    fn antwort_401_setzt_aus() {
+        let dir = tempfile::tempdir().unwrap();
+        aktiv(dir.path());
+        let (basis, _) = fake(vec![(401, "{}")]);
+        let r = pushen(dir.path(), &basis, vec![json!({"art":"a","daten":{}})]).unwrap();
+        assert_eq!(r, json!({"zustand": "aus"}));
+        let z = lade(dir.path());
+        assert_eq!(z.zustand, "aus");
+        assert!(z.schluessel.is_empty());
+        assert!(lade_schlange(dir.path()).is_empty());
+    }
+
+    #[test]
+    fn bestaetigt_ohne_schluessel_setzt_aus_mit_hinweis() {
+        let dir = tempfile::tempdir().unwrap();
+        let (basis, _) = fake(vec![
+            (200, r#"{"anfrageId":"A1"}"#),
+            (200, r#"{"bestaetigt":true}"#),
+        ]);
+        einrichten(dir.path(), &basis, "mama@example.org", "Lena", "18:00").unwrap();
+        let s = status(dir.path(), &basis).unwrap();
+        assert_eq!(s["zustand"], "aus");
+        assert!(s["hinweis"].is_string());
+        assert_eq!(lade(dir.path()).zustand, "aus");
+    }
+
+    #[test]
+    fn gesicherter_schluessel_wird_ohne_dienst_aktiv() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut z = Zustand::default();
+        z.zustand = "wartet".into();
+        z.anfrage = "A1".into();
+        z.schluessel = "S9".into();
+        sichere(dir.path(), &z).unwrap();
+        let s = status(dir.path(), &tote_basis()).unwrap();
+        assert_eq!(s["zustand"], "aktiv");
+    }
+
+    #[test]
+    fn tagesbrief_ordner_liegt_getrennt_vom_lernstand() {
+        let app = tempfile::tempdir().unwrap();
+        let t = ordner(app.path(), None).unwrap();
+        aktiv(&t);
+        let lernstand = app.path().join("lernstand");
+        assert!(!t.starts_with(&lernstand));
+        assert_eq!(
+            crate::lernstand::lesen(&lernstand, None, "tagesbrief").unwrap(),
+            None
+        );
+        assert_eq!(
+            crate::lernstand::lesen(&lernstand, Some("kind1"), "tagesbrief").unwrap(),
+            None
+        );
+        assert!(ordner(app.path(), Some("../x")).is_err());
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn dateien_nur_fuer_den_besitzer() {
+        use std::os::unix::fs::PermissionsExt;
+        let app = tempfile::tempdir().unwrap();
+        let t = ordner(app.path(), Some("kind1")).unwrap();
+        aktiv(&t);
+        let modus = |p: &Path| fs::metadata(p).unwrap().permissions().mode() & 0o777;
+        assert_eq!(modus(&datei(&t)), 0o600);
+        assert_eq!(modus(&t), 0o700);
     }
 }
