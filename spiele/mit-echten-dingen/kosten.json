@@ -5099,5 +5099,282 @@
    },
    "total_tokens": 2312
   }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 602,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "gerade-ungerade-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 602,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 602
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2358
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 610,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "gerade-ungerade-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 610,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 610
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2366
+  }
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 50,
+  "ausgabe": 18054,
+  "einheit": "tokens",
+  "menge": 2382395,
+  "notiz": "mehr-weniger-gleich-viele, Recherche und Schreiben",
+  "cache_lesen": 2241416,
+  "cache_schreiben": 122875,
+  "themen": 1,
+  "thema": [
+   "mehr-weniger-gleich-viele"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 8085,
+  "einheit": "tokens",
+  "menge": 647461,
+  "notiz": "mehr-weniger-gleich-viele, Prüfung Runde 1",
+  "cache_lesen": 563991,
+  "cache_schreiben": 75365,
+  "themen": 1,
+  "thema": [
+   "mehr-weniger-gleich-viele"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 8402,
+  "einheit": "tokens",
+  "menge": 640703,
+  "notiz": "mehr-weniger-gleich-viele, Prüfung Runde 2",
+  "cache_lesen": 546016,
+  "cache_schreiben": 86267,
+  "themen": 1,
+  "thema": [
+   "mehr-weniger-gleich-viele"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 7180,
+  "einheit": "tokens",
+  "menge": 701107,
+  "notiz": "mehr-weniger-gleich-viele, Prüfung Runde 3",
+  "cache_lesen": 622206,
+  "cache_schreiben": 71699,
+  "themen": 1,
+  "thema": [
+   "mehr-weniger-gleich-viele"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 70,
+  "ausgabe": 20830,
+  "einheit": "tokens",
+  "menge": 3592833,
+  "notiz": "gerade-ungerade, Recherche und Schreiben",
+  "cache_lesen": 3452050,
+  "cache_schreiben": 119883,
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 5482,
+  "einheit": "tokens",
+  "menge": 406302,
+  "notiz": "gerade-ungerade, Prüfung Runde 1",
+  "cache_lesen": 327706,
+  "cache_schreiben": 73100,
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 52,
+  "ausgabe": 23648,
+  "einheit": "tokens",
+  "menge": 2583907,
+  "notiz": "gerade-ungerade-begruenden, Recherche und Schreiben",
+  "cache_lesen": 2440569,
+  "cache_schreiben": 119638,
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-begruenden"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 10,
+  "ausgabe": 7961,
+  "einheit": "tokens",
+  "menge": 331567,
+  "notiz": "gerade-ungerade-begruenden, Prüfung Runde 1",
+  "cache_lesen": 245284,
+  "cache_schreiben": 78312,
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-begruenden"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 8738,
+  "einheit": "tokens",
+  "menge": 563071,
+  "notiz": "gerade-ungerade-begruenden, Prüfung Runde 2",
+  "cache_lesen": 476000,
+  "cache_schreiben": 78315,
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-begruenden"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 8474,
+  "einheit": "tokens",
+  "menge": 537007,
+  "notiz": "gerade-ungerade-begruenden, Prüfung Runde 3",
+  "cache_lesen": 457330,
+  "cache_schreiben": 71185,
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-begruenden"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 56,
+  "ausgabe": 25721,
+  "einheit": "tokens",
+  "menge": 2782020,
+  "notiz": "gerade-ungerade-bis-100, Recherche und Schreiben",
+  "cache_lesen": 2637933,
+  "cache_schreiben": 118310,
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 8256,
+  "einheit": "tokens",
+  "menge": 574818,
+  "notiz": "gerade-ungerade-bis-100, Prüfung Runde 1",
+  "cache_lesen": 490658,
+  "cache_schreiben": 75886,
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 8258,
+  "einheit": "tokens",
+  "menge": 490651,
+  "notiz": "gerade-ungerade-bis-100, Prüfung Runde 2",
+  "cache_lesen": 405494,
+  "cache_schreiben": 76883,
+  "themen": 1,
+  "thema": [
+   "gerade-ungerade-bis-100"
+  ]
  }
 ]

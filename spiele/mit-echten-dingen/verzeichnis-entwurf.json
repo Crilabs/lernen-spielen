@@ -202,6 +202,28 @@
    "datei": "mathe/gerade-ungerade.md",
    "foto": "mathe/bilder/gerade-ungerade.webp"
   },
+  "gerade-ungerade-bis-100": {
+   "fach": "mathe",
+   "name": "Gerade und ungerade bis 100",
+   "titel": "Nur die Einer entscheiden",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Klammern für zwei"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Über den Schal"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Hier oder drüben?"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/gerade-ungerade-bis-100.md",
+   "foto": "mathe/bilder/gerade-ungerade-bis-100.webp"
+  },
   "geschlecht-des-nomens": {
    "fach": "grammatik",
    "name": "Männlich, weiblich, sächlich",
