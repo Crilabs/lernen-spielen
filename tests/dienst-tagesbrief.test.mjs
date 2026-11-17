@@ -218,6 +218,11 @@ test("Datenschutzseite ohne App-Schlüssel erreichbar", async () => {
   assert.match(await r.text(), /Datenschutz/);
 });
 
+test("HEAD auf Seiten antwortet wie GET (Link-Prüfer, curl -I)", async () => {
+  assert.equal((await fetch(`${t.url}/datenschutz`, { method: "HEAD" })).status, 200);
+  assert.equal((await fetch(`${t.url}/abmelden?t=x`, { method: "HEAD" })).status, 200);
+});
+
 test("Protokoll enthält weder Adresse noch Ereignistexte noch Token", async () => {
   const { schluessel, token } = await einrichten();
   await post("/ereignisse", [{ id: "e1", art: "gekonnt", daten: { id: "g1", name: GEHEIM, zweck: GEHEIM, fach: "mathe" } }], bearer(schluessel));

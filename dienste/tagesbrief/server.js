@@ -206,7 +206,8 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     /** @type {string | undefined} */ let h;
     try {
       const url = new URL(req.url ?? "/", "http://dienst");
-      const weg = `${req.method} ${url.pathname}`;
+      // HEAD wie GET (Link-Prüfer, curl -I); Node lässt den Körper bei HEAD selbst weg.
+      const weg = `${req.method === "HEAD" ? "GET" : req.method} ${url.pathname}`;
       const seitenAufruf = ["GET /bestaetigen", "POST /bestaetigen", "GET /abmelden", "POST /abmelden", "GET /datenschutz"].includes(weg);
       if (weg === "GET /datenschutz") { html(res, 200, datenschutzSeite()); ergebnis = 200; }
       // Link-Scanner rufen GET auf: GET zeigt nur einen Knopf, erst POST bestätigt bzw. meldet ab.

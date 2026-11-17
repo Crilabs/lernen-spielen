@@ -1,0 +1,13 @@
+# Site-Block für den gemeinsamen Caddy auf crilabs-app-server. Liegt als /etc/caddy/lernen-spielen.caddy und wird
+# am Ende von /etc/caddy/Caddyfile importiert; nach einer Änderung dorthin kopieren, `caddy validate`, dann
+# `systemctl reload caddy` (nie restart: andere Seiten laufen mit).
+# Kein `log`-Block mit Absicht: Zugriffsprotokolle enthielten Adressen und Links mit Tokens (?t=…).
+lernen-spielen.crilabs.de {
+	# /ereignisse nimmt höchstens 300 KB an (server.js); alles darüber endet schon hier.
+	request_body {
+		max_size 1MB
+	}
+
+	# Der Dienst lauscht nur auf Loopback und nimmt die letzte X-Forwarded-For-Adresse (die setzt Caddy).
+	reverse_proxy 127.0.0.1:3600
+}
