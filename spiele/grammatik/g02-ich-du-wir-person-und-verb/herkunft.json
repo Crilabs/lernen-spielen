@@ -2,19 +2,19 @@
  "spielbild.webp": {
   "datum": "2026-11-17",
   "modell": "gpt-image-2-5-sunburst",
-  "prompt": "Create the key art (game card image) for a children's learning game, landscape format, based on the attached screenshots of the real game. Keep exactly what the game is: the same main character (same hair, clothes, face, body), the same playing field and objects, the same idea and colours of the learning material. Add nothing to the character that is not in the screenshots and in the character description below (no glasses, hearing aids, hats or jewellery of your own). Make it look plastic and attractive: soft three-dimensional, rounded shapes, gentle light and soft shadows, a little depth of field, like a polished illustration of a premium children's app – friendly, bright, calm, never scary. Show one lively moment of play (the character in motion, e.g. mid-jump), the playing field clearly recognisable. Absolutely no text, no letters, no words, no user interface, no buttons, no keypad, no logos. Digits only if they are part of the learning material itself, and then few and large. IMPORTANT: this image is only shown as a small thumbnail on a game card (about 300 pixels wide). Show only very few, large, simple elements: the character big and close, a short section of the playing field, a calm plain background. Leave out small objects, background scenery, fences, plants and fine details – everything must still read at thumbnail size. Nothing important at the very edges.\n\nWhat the game is (German description by the makers, follow it): Das Kind sitzt mit der Runde am Maltisch und legt Endungen an Verben (du malst, wir malen), Pronomen vor Verben oder tauscht bei der Grundform die Endung gegen -en. Passt es, tun genau die gemeinten Personen es auf dem gemeinsamen Bogen: bei ich malt die eigene Hand, bei du Kofi gegenüber. Passt es nicht, heben die kurz den Stift, zu denen die Endung gehört, und das Plättchen gleitet zurück.\n\nScreenshots: spielbild-1.png, spielbild-2.png, spielbild-3.png",
+  "prompt": "Create the key art (game card image) for a children's learning game, landscape format, based on the attached screenshots of the real game. Keep exactly what the game is: the same main character (same hair, clothes, face, body), the same playing field and objects, the same idea and colours of the learning material. Add nothing to the character that is not in the screenshots and in the character description below (no glasses, hearing aids, hats or jewellery of your own). Make it look plastic and attractive: soft three-dimensional, rounded shapes, gentle light and soft shadows, a little depth of field, like a polished illustration of a premium children's app – friendly, bright, calm, never scary. Show one lively moment of play (the character in motion, e.g. mid-jump), the playing field clearly recognisable. Absolutely no text, no letters, no words, no user interface, no buttons, no keypad, no logos. Digits only if they are part of the learning material itself, and then few and large. IMPORTANT: this image is only shown as a small thumbnail on a game card (about 300 pixels wide). Show only very few, large, simple elements: the character big and close, a short section of the playing field, a calm plain background. Leave out small objects, background scenery, fences, plants and fine details – everything must still read at thumbnail size. Nothing important at the very edges.\n\nWhat the game is (German description by the makers, follow it): Das Kind sitzt mit der Runde am Maltisch und legt Endungen an Verben (du malst, wir malen) oder Fürwörter vor Verben. Passt es, tun genau die gemeinten Personen es auf dem gemeinsamen Bogen: bei ich malt die eigene Hand, bei du Kofi gegenüber. Passt es nicht, heben die kurz den Stift, zu denen die Form gehört, und das Plättchen gleitet zurück.\n\nScreenshots: spielbild-1.png, spielbild-2.png, spielbild-3.png",
   "usage": {
-   "input_tokens": 4763,
+   "input_tokens": 4751,
    "input_tokens_details": {
     "image_tokens": 4320,
-    "text_tokens": 443
+    "text_tokens": 431
    },
    "output_tokens": 1372,
    "output_tokens_details": {
     "image_tokens": 1372,
     "text_tokens": 0
    },
-   "total_tokens": 6135
+   "total_tokens": 6123
   }
  }
 }

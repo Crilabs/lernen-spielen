@@ -163,5 +163,144 @@
   "einheit": "keine",
   "menge": 0,
   "notiz": "Spielprüfung nach 2 Runden rot: Grundform ohne Held, Stamm vorgeschnitten, G7"
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 36,
+  "ausgabe": 17547,
+  "einheit": "tokens",
+  "menge": 1729273,
+  "notiz": "Spielbau pruefung",
+  "cache_lesen": 1584307,
+  "cache_schreiben": 127383
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefstand",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 1334,
+  "einheit": "tokens",
+  "menge": 179867,
+  "notiz": "Spielbau pruefstand",
+  "cache_lesen": 82614,
+  "cache_schreiben": 95911
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 54,
+  "ausgabe": 21028,
+  "einheit": "tokens",
+  "menge": 3165580,
+  "notiz": "Spielbau pruefung",
+  "cache_lesen": 2991729,
+  "cache_schreiben": 152769
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 58,
+  "ausgabe": 16544,
+  "einheit": "tokens",
+  "menge": 2812080,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 2557456,
+  "cache_schreiben": 238022
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 112,
+  "ausgabe": 41269,
+  "einheit": "tokens",
+  "menge": 9277923,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 9013927,
+  "cache_schreiben": 222615
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "idee",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 10798,
+  "einheit": "tokens",
+  "menge": 897302,
+  "notiz": "Spielbau idee",
+  "cache_lesen": 795905,
+  "cache_schreiben": 90575
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "pruefstand",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 1334,
+  "einheit": "tokens",
+  "menge": 180267,
+  "notiz": "Spielbau pruefstand",
+  "cache_lesen": 82814,
+  "cache_schreiben": 96111
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 70,
+  "ausgabe": 16719,
+  "einheit": "tokens",
+  "menge": 3580275,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 3331316,
+  "cache_schreiben": 232170
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 2948,
+  "notiz": "npm run audio · ElevenLabs Livia, Abrechnung über das ElevenLabs-Abo"
+ },
+ {
+  "datum": "2026-11-17",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4751,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4751,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 431
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6123
+  }
  }
 ]

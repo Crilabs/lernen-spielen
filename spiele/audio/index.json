@@ -1,6 +1,146 @@
 {
  "stimme": "de-DE-Florian:DragonHDLatestNeural",
  "texte": {
+  "… baue.": {
+   "datei": "livia/c242fd30ee5d.mp3",
+   "h": "7255400ed7",
+   "gehoert": false
+  },
+  "… bauen.": {
+   "datei": "livia/10bcae8661da.mp3",
+   "h": "6bbc8ac9aa",
+   "gehoert": false
+  },
+  "… baust.": {
+   "datei": "livia/8e53c8338147.mp3",
+   "h": "ca02e7b193",
+   "gehoert": false
+  },
+  "… baut.": {
+   "datei": "livia/29c3970543f4.mp3",
+   "h": "dcd5c71a81",
+   "gehoert": false
+  },
+  "… klebe.": {
+   "datei": "livia/c8e72224bbd6.mp3",
+   "h": "0daf741d54",
+   "gehoert": false
+  },
+  "… kleben.": {
+   "datei": "livia/51c0dbd8d6e7.mp3",
+   "h": "b6fa6d39f2",
+   "gehoert": false
+  },
+  "… klebst.": {
+   "datei": "livia/29b5a6ae6645.mp3",
+   "h": "4116659b9c",
+   "gehoert": false
+  },
+  "… klebt.": {
+   "datei": "livia/4f552884bea7.mp3",
+   "h": "5925e228b5",
+   "gehoert": false
+  },
+  "… lege.": {
+   "datei": "livia/9591dd1eedef.mp3",
+   "h": "716efb2f51",
+   "gehoert": false
+  },
+  "… legen.": {
+   "datei": "livia/856f45adffb3.mp3",
+   "h": "f48bed9bc2",
+   "gehoert": false
+  },
+  "… legst.": {
+   "datei": "livia/d50dc1c9f23f.mp3",
+   "h": "29628de755",
+   "gehoert": false
+  },
+  "… legt.": {
+   "datei": "livia/d0a3ac413643.mp3",
+   "h": "114f9bf848",
+   "gehoert": false
+  },
+  "… male.": {
+   "datei": "livia/4d6222e3a15b.mp3",
+   "h": "d10ec257b0",
+   "gehoert": false
+  },
+  "… malen.": {
+   "datei": "livia/a2197c62ce40.mp3",
+   "h": "86a6754de5",
+   "gehoert": false
+  },
+  "… malst.": {
+   "datei": "livia/3efd151f4919.mp3",
+   "h": "28c212a576",
+   "gehoert": false
+  },
+  "… malt.": {
+   "datei": "livia/3675f97cd706.mp3",
+   "h": "026b9514ab",
+   "gehoert": false
+  },
+  "… rolle.": {
+   "datei": "livia/70ff8160dc18.mp3",
+   "h": "ff049dd02c",
+   "gehoert": false
+  },
+  "… rollen.": {
+   "datei": "livia/b68cb92b070f.mp3",
+   "h": "ef3e9a649f",
+   "gehoert": false
+  },
+  "… rollst.": {
+   "datei": "livia/bbc55d8cbdd0.mp3",
+   "h": "f1d3ff7839",
+   "gehoert": false
+  },
+  "… rollt.": {
+   "datei": "livia/8c5e2d4a3497.mp3",
+   "h": "52a813c81b",
+   "gehoert": false
+  },
+  "… stecke.": {
+   "datei": "livia/7b37d0557f21.mp3",
+   "h": "1dabfb3c9d",
+   "gehoert": false
+  },
+  "… stecken.": {
+   "datei": "livia/6b97cd7ea0ea.mp3",
+   "h": "a64abbc634",
+   "gehoert": false
+  },
+  "… steckst.": {
+   "datei": "livia/be4168bd0b81.mp3",
+   "h": "64e203d62f",
+   "gehoert": false
+  },
+  "… steckt.": {
+   "datei": "livia/3da4d5e8e9fa.mp3",
+   "h": "4533e0adbb",
+   "gehoert": false
+  },
+  "… tupfe.": {
+   "datei": "livia/40e25dc1bf19.mp3",
+   "h": "780f356d61",
+   "gehoert": false
+  },
+  "… tupfen.": {
+   "datei": "livia/f08afadaab75.mp3",
+   "h": "95a4d8c92e",
+   "gehoert": false
+  },
+  "… tupfst.": {
+   "datei": "livia/b93c27dd362e.mp3",
+   "h": "9f6cff18f1",
+   "gehoert": false
+  },
+  "… tupft.": {
+   "datei": "livia/ad491bd965f3.mp3",
+   "h": "aa64824a75",
+   "gehoert": false
+  },
   "1 mal 10 ist 10.": {
    "datei": "florian/26cf0fc132f8.mp3",
    "h": "002649f5c2",
@@ -745,6 +885,11 @@
    "datei": "livia/f9254ea79951.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Am Verb fehlt das Ende.": {
+   "datei": "livia/df042c69ab0f.mp3",
+   "h": "ec8337b48c",
+   "gehoert": false
   },
   "Amara hat eine Schale mit Kirschen. Ihre Augen sehen, wie rot die Kirschen leuchten. Sie nimmt eine in die Hand. Ihre Haut fühlt, wie glatt und kühl sie ist. Die Nase riecht einen leichten, süßen Duft. Dann beißt Amara hinein. Ihre Zunge schmeckt, wie süß die Kirsche ist. Den Kern legt sie zurück in die Schale. Klack, hören ihre Ohren. Sehen, hören, riechen, schmecken und fühlen: Diese fünf Sinne zählt man meistens auf. Augen, Ohren, Nase, Zunge und Haut heißen Sinnesorgane. Sie sind wie Türen, durch die die Welt zu dir hereinkommt.": {
    "datei": "livia/1319a0304868.mp3",
@@ -3866,6 +4011,11 @@
    "h": "a5213e2e67",
    "gehoert": false
   },
+  "Die Runde malt zusammen ein großes Bild.": {
+   "datei": "livia/f3ee3dcfd5e0.mp3",
+   "h": "0da38c0935",
+   "gehoert": false
+  },
   "Die Säge.": {
    "datei": "florian/05b55e6e87d6.mp3",
    "h": "93f15493e1",
@@ -4241,6 +4391,61 @@
    "h": "bc01100a24",
    "gehoert": false
   },
+  "Du … bauen.": {
+   "datei": "livia/8e94da23d856.mp3",
+   "h": "00d2baca33",
+   "gehoert": false
+  },
+  "Du … kleben.": {
+   "datei": "livia/40bbb4d4a71b.mp3",
+   "h": "7e9274177f",
+   "gehoert": false
+  },
+  "Du … legen.": {
+   "datei": "livia/eda426de6571.mp3",
+   "h": "b06c5dd86a",
+   "gehoert": false
+  },
+  "Du … malen.": {
+   "datei": "livia/0dccd201b20c.mp3",
+   "h": "f9fa1b328c",
+   "gehoert": false
+  },
+  "Du … rollen.": {
+   "datei": "livia/2117d089d548.mp3",
+   "h": "37c99c3925",
+   "gehoert": false
+  },
+  "Du … stecken.": {
+   "datei": "livia/0a7ec67689cd.mp3",
+   "h": "0af8972246",
+   "gehoert": false
+  },
+  "Du … tupfen.": {
+   "datei": "livia/238c3219cd22.mp3",
+   "h": "141e1259b5",
+   "gehoert": false
+  },
+  "Du baue.": {
+   "datei": "livia/39d6b5113885.mp3",
+   "h": "8371bce5e2",
+   "gehoert": false
+  },
+  "Du bauen.": {
+   "datei": "livia/e592f9c3e580.mp3",
+   "h": "9394127930",
+   "gehoert": false
+  },
+  "Du baust.": {
+   "datei": "livia/9c98816b280c.mp3",
+   "h": "4f246211fc",
+   "gehoert": false
+  },
+  "Du baut.": {
+   "datei": "livia/0df31a54f6e4.mp3",
+   "h": "efd72299d7",
+   "gehoert": false
+  },
   "Du bist dran.": {
    "datei": "florian/4947d47e34f2.mp3",
    "h": "11fb0ce1f4",
@@ -4259,6 +4464,131 @@
   "Du hörst eine Zahl.": {
    "datei": "florian/d74cf58e5017.mp3",
    "h": "eaa5b0ae1c",
+   "gehoert": false
+  },
+  "Du klebe.": {
+   "datei": "livia/883d35b97814.mp3",
+   "h": "5dc418fd84",
+   "gehoert": false
+  },
+  "Du kleben.": {
+   "datei": "livia/caaf98a31adc.mp3",
+   "h": "d637e8b878",
+   "gehoert": false
+  },
+  "Du klebst.": {
+   "datei": "livia/e62a09012bb8.mp3",
+   "h": "a26e456d84",
+   "gehoert": false
+  },
+  "Du klebt.": {
+   "datei": "livia/5a53952b5227.mp3",
+   "h": "23bd92a90e",
+   "gehoert": false
+  },
+  "Du lege.": {
+   "datei": "livia/7fabf211814b.mp3",
+   "h": "962e5570c0",
+   "gehoert": false
+  },
+  "Du legen.": {
+   "datei": "livia/774c32bee786.mp3",
+   "h": "d0efd0c226",
+   "gehoert": false
+  },
+  "Du legst.": {
+   "datei": "livia/ef4e2fdfe6ef.mp3",
+   "h": "cd2d5968c0",
+   "gehoert": false
+  },
+  "Du legt.": {
+   "datei": "livia/430c943e8871.mp3",
+   "h": "1693c16fd2",
+   "gehoert": false
+  },
+  "Du male.": {
+   "datei": "livia/7e8f55c8d593.mp3",
+   "h": "1236767581",
+   "gehoert": false
+  },
+  "Du malen.": {
+   "datei": "livia/4ba0d1cac695.mp3",
+   "h": "955872b4d9",
+   "gehoert": false
+  },
+  "Du malst.": {
+   "datei": "livia/c0286618e7f0.mp3",
+   "h": "2a7d6df01f",
+   "gehoert": false
+  },
+  "Du malt.": {
+   "datei": "livia/6f01b5aaf4e1.mp3",
+   "h": "cc2947a678",
+   "gehoert": false
+  },
+  "Du rolle.": {
+   "datei": "livia/91736ddd1cfe.mp3",
+   "h": "4ad0e715f4",
+   "gehoert": false
+  },
+  "Du rollen.": {
+   "datei": "livia/9cee25debfd6.mp3",
+   "h": "76ec60e0c0",
+   "gehoert": false
+  },
+  "Du rollst.": {
+   "datei": "livia/6a1d66c6dbf1.mp3",
+   "h": "4b53b61fa8",
+   "gehoert": false
+  },
+  "Du rollt.": {
+   "datei": "livia/ef23a0c9904b.mp3",
+   "h": "b2d21184d3",
+   "gehoert": false
+  },
+  "Du sitzt mit am Tisch.": {
+   "datei": "livia/e0f65d11d84a.mp3",
+   "h": "4e28966d7d",
+   "gehoert": false
+  },
+  "Du stecke.": {
+   "datei": "livia/1278e69fc24a.mp3",
+   "h": "e10871c96b",
+   "gehoert": false
+  },
+  "Du stecken.": {
+   "datei": "livia/3acbd32c2580.mp3",
+   "h": "fbe0e2db7d",
+   "gehoert": false
+  },
+  "Du steckst.": {
+   "datei": "livia/7b5e5699cb3c.mp3",
+   "h": "90e01daeb0",
+   "gehoert": false
+  },
+  "Du steckt.": {
+   "datei": "livia/6003c07f613e.mp3",
+   "h": "7f76624e70",
+   "gehoert": false
+  },
+  "Du tupfe.": {
+   "datei": "livia/db637fb7034a.mp3",
+   "h": "3abab4c9b2",
+   "gehoert": false
+  },
+  "Du tupfen.": {
+   "datei": "livia/46fedb2f86c1.mp3",
+   "h": "db60292409",
+   "gehoert": false
+  },
+  "Du tupfst.": {
+   "datei": "livia/8d5668c0d001.mp3",
+   "h": "154d2d4f89",
+   "gehoert": false
+  },
+  "Du tupft.": {
+   "datei": "livia/1e937a40734c.mp3",
+   "h": "970119dc9f",
    "gehoert": false
   },
   "Du willst den Regenbogen sehen. Dafür muss das bunte Licht aus dem Tropfen wieder herauskommen. Und es muss genau in deine Augen fliegen. Das Sonnenlicht kommt von hinten, über deine Schultern. Es fliegt in einen Tropfen vor dir. Drinnen fächert es sich auf. Dann trifft es auf die Rückseite des runden Tropfens. Was glaubst du: In welche Richtung fliegt das bunte Licht jetzt weiter? Fliegt es geradeaus durch den Tropfen hindurch und weiter von dir weg? Oder kommt es zurück?": {
@@ -4716,6 +5046,61 @@
    "h": "2bd39d94bf",
    "gehoert": false
   },
+  "Er … bauen.": {
+   "datei": "livia/1b60e32260ba.mp3",
+   "h": "6b63b27e87",
+   "gehoert": false
+  },
+  "Er … kleben.": {
+   "datei": "livia/dc1bcea54d44.mp3",
+   "h": "082709f329",
+   "gehoert": false
+  },
+  "Er … legen.": {
+   "datei": "livia/286bfdac8b52.mp3",
+   "h": "11dcea6888",
+   "gehoert": false
+  },
+  "Er … malen.": {
+   "datei": "livia/e6a5ce63ecb2.mp3",
+   "h": "9b7597c99c",
+   "gehoert": false
+  },
+  "Er … rollen.": {
+   "datei": "livia/992e53394df4.mp3",
+   "h": "a246d11a7b",
+   "gehoert": false
+  },
+  "Er … stecken.": {
+   "datei": "livia/a3380cc2827f.mp3",
+   "h": "fbb629b7b6",
+   "gehoert": false
+  },
+  "Er … tupfen.": {
+   "datei": "livia/9720b86946c3.mp3",
+   "h": "5c8dc75ad9",
+   "gehoert": false
+  },
+  "Er baue.": {
+   "datei": "livia/4bb65626b2c9.mp3",
+   "h": "04b1b3b4a1",
+   "gehoert": false
+  },
+  "Er bauen.": {
+   "datei": "livia/6dc3aa07ad75.mp3",
+   "h": "f559b80441",
+   "gehoert": false
+  },
+  "Er baust.": {
+   "datei": "livia/8f56def61d0c.mp3",
+   "h": "d4462006a8",
+   "gehoert": false
+  },
+  "Er baut.": {
+   "datei": "livia/5b0b1940844c.mp3",
+   "h": "cad7c17e53",
+   "gehoert": false
+  },
   "Er bringt die Briefe zur richtigen Hausnummer.": {
    "datei": "florian/fdebb4c4c005.mp3",
    "h": "d8878d24f4",
@@ -4751,6 +5136,46 @@
    "h": "9d55ea11b5",
    "gehoert": false
   },
+  "Er klebe.": {
+   "datei": "livia/b8c5b13195b8.mp3",
+   "h": "8228fd691d",
+   "gehoert": false
+  },
+  "Er kleben.": {
+   "datei": "livia/21f4bf275a28.mp3",
+   "h": "588f264d71",
+   "gehoert": false
+  },
+  "Er klebst.": {
+   "datei": "livia/7278b4c02a1a.mp3",
+   "h": "400c9cf9dc",
+   "gehoert": false
+  },
+  "Er klebt.": {
+   "datei": "livia/ef71c5f77fbc.mp3",
+   "h": "cec308addb",
+   "gehoert": false
+  },
+  "Er lege.": {
+   "datei": "livia/bc5991843ea1.mp3",
+   "h": "67d011b734",
+   "gehoert": false
+  },
+  "Er legen.": {
+   "datei": "livia/f817f53f0e13.mp3",
+   "h": "159b2a3246",
+   "gehoert": false
+  },
+  "Er legst.": {
+   "datei": "livia/ca91d99883ac.mp3",
+   "h": "c0752df469",
+   "gehoert": false
+  },
+  "Er legt.": {
+   "datei": "livia/aa6eb87d2076.mp3",
+   "h": "754f3cace4",
+   "gehoert": false
+  },
   "Er liest Nachrichten anderer Hunde": {
    "datei": "livia/f10e632f8e47.mp3",
    "h": "20b7d33d0f",
@@ -4759,6 +5184,26 @@
   "Er macht das Feuer von selbst aus": {
    "datei": "livia/bfa5b5844cac.mp3",
    "h": "31805ed126",
+   "gehoert": false
+  },
+  "Er male.": {
+   "datei": "livia/7a1cf2aea3bb.mp3",
+   "h": "1e69780867",
+   "gehoert": false
+  },
+  "Er malen.": {
+   "datei": "livia/d6468319cf2e.mp3",
+   "h": "b62ff054a7",
+   "gehoert": false
+  },
+  "Er malst.": {
+   "datei": "livia/e9e3c2e8af32.mp3",
+   "h": "dc9c68a09e",
+   "gehoert": false
+  },
+  "Er malt.": {
+   "datei": "livia/3aade054ad9a.mp3",
+   "h": "eebe9ee26f",
    "gehoert": false
   },
   "Er probiert: ich gähne, du gähnst?": {
@@ -4771,6 +5216,26 @@
    "h": "0ede606b5e",
    "gehoert": false
   },
+  "Er rolle.": {
+   "datei": "livia/bb158324a767.mp3",
+   "h": "25c1a72225",
+   "gehoert": false
+  },
+  "Er rollen.": {
+   "datei": "livia/e930c89132dc.mp3",
+   "h": "5fa594a715",
+   "gehoert": false
+  },
+  "Er rollst.": {
+   "datei": "livia/5c0b8dd07528.mp3",
+   "h": "20f4678b44",
+   "gehoert": false
+  },
+  "Er rollt.": {
+   "datei": "livia/41076c82d6e9.mp3",
+   "h": "4302192b55",
+   "gehoert": false
+  },
   "Er schwitzt am ganzen Körper": {
    "datei": "livia/79d44843aa4f.mp3",
    "h": "ead7e4057b",
@@ -4781,6 +5246,26 @@
    "h": "a680663eda",
    "gehoert": false
   },
+  "Er stecke.": {
+   "datei": "livia/532dffb7423e.mp3",
+   "h": "9b2a9c905d",
+   "gehoert": false
+  },
+  "Er stecken.": {
+   "datei": "livia/0632c1c84ef5.mp3",
+   "h": "c0b3a73ac8",
+   "gehoert": false
+  },
+  "Er steckst.": {
+   "datei": "livia/33030b16e9b9.mp3",
+   "h": "e523a91a87",
+   "gehoert": false
+  },
+  "Er steckt.": {
+   "datei": "livia/c95fff9614f7.mp3",
+   "h": "f819388211",
+   "gehoert": false
+  },
   "Er sucht nur nach Futter": {
    "datei": "livia/2a2d29f4c125.mp3",
    "h": "8355897b86",
@@ -4789,6 +5274,26 @@
   "Er trödelt, weil ihm langweilig ist": {
    "datei": "livia/4c02aacfecff.mp3",
    "h": "e3184c8657",
+   "gehoert": false
+  },
+  "Er tupfe.": {
+   "datei": "livia/5696369e78da.mp3",
+   "h": "74096e874d",
+   "gehoert": false
+  },
+  "Er tupfen.": {
+   "datei": "livia/4ca66467a43d.mp3",
+   "h": "a76735ebfa",
+   "gehoert": false
+  },
+  "Er tupfst.": {
+   "datei": "livia/048e600bff1b.mp3",
+   "h": "d3febc533c",
+   "gehoert": false
+  },
+  "Er tupft.": {
+   "datei": "livia/b7b5c0f94149.mp3",
+   "h": "af1b4396ae",
    "gehoert": false
   },
   "Er verschwindet, wenn man näher kommt": {
@@ -5786,6 +6291,11 @@
    "h": "a6bab5fa6d",
    "gehoert": false
   },
+  "Hier liegen die Endungen.": {
+   "datei": "livia/420b9e420a95.mp3",
+   "h": "b838f85c37",
+   "gehoert": false
+  },
   "Hier liegen drei Perlen.": {
    "datei": "florian/273b5f5f4d2c.mp3",
    "h": "1b644b69d2",
@@ -5859,6 +6369,11 @@
   "Hier liegt das Nomen-Dreieck.": {
    "datei": "livia/e6fed99b20fe.mp3",
    "h": "47c9faa922",
+   "gehoert": false
+  },
+  "Hier liegt dein Satz.": {
+   "datei": "livia/6d8486af26f7.mp3",
+   "h": "2b8cdc1c2f",
    "gehoert": false
   },
   "Hier liegt der Pinsel.": {
@@ -6031,6 +6546,41 @@
    "h": "8b1c872641",
    "gehoert": false
   },
+  "Ich … bauen.": {
+   "datei": "livia/785782868c0e.mp3",
+   "h": "29b03fa412",
+   "gehoert": false
+  },
+  "Ich … kleben.": {
+   "datei": "livia/33930d7f1de7.mp3",
+   "h": "80eede39b1",
+   "gehoert": false
+  },
+  "Ich … legen.": {
+   "datei": "livia/6a4ebda23f13.mp3",
+   "h": "f3d059ecb5",
+   "gehoert": false
+  },
+  "Ich … malen.": {
+   "datei": "livia/4a5e62b81ba0.mp3",
+   "h": "3f816001a9",
+   "gehoert": false
+  },
+  "Ich … rollen.": {
+   "datei": "livia/eda922e89ebc.mp3",
+   "h": "d7d283bfa9",
+   "gehoert": false
+  },
+  "Ich … stecken.": {
+   "datei": "livia/9dab50b2df76.mp3",
+   "h": "f80e270f4e",
+   "gehoert": false
+  },
+  "Ich … tupfen.": {
+   "datei": "livia/f08532347647.mp3",
+   "h": "e61557af4c",
+   "gehoert": false
+  },
   "Ich Apfel?": {
    "datei": "livia/c09cc3af4524.mp3",
    "h": "06d474ad6a",
@@ -6046,9 +6596,29 @@
    "h": "47518d0cc2",
    "gehoert": false
   },
+  "Ich baue.": {
+   "datei": "livia/1e8190a748d3.mp3",
+   "h": "0bf5c39405",
+   "gehoert": false
+  },
+  "Ich bauen.": {
+   "datei": "livia/2891c8b43348.mp3",
+   "h": "e78689a439",
+   "gehoert": false
+  },
   "Ich Baum?": {
    "datei": "livia/075e55ec3828.mp3",
    "h": "d0b2f1a3c7",
+   "gehoert": false
+  },
+  "Ich baust.": {
+   "datei": "livia/588dc046bf26.mp3",
+   "h": "9dbb410523",
+   "gehoert": false
+  },
+  "Ich baut.": {
+   "datei": "livia/4c0a8bddb84b.mp3",
+   "h": "5ff088f6b0",
    "gehoert": false
   },
   "Ich belle, du bellst.": {
@@ -6201,6 +6771,46 @@
    "h": "e904f508fb",
    "gehoert": false
   },
+  "Ich klebe.": {
+   "datei": "livia/cd550fb6d4b4.mp3",
+   "h": "9f4abb2121",
+   "gehoert": false
+  },
+  "Ich kleben.": {
+   "datei": "livia/1c9703d74dec.mp3",
+   "h": "a41a63dd1d",
+   "gehoert": false
+  },
+  "Ich klebst.": {
+   "datei": "livia/fa4c40ac9e5d.mp3",
+   "h": "e4d97d9b70",
+   "gehoert": false
+  },
+  "Ich klebt.": {
+   "datei": "livia/92afea85bd34.mp3",
+   "h": "c7487cbb60",
+   "gehoert": false
+  },
+  "Ich lege.": {
+   "datei": "livia/c1ea0fd179c2.mp3",
+   "h": "e79bf4ad3f",
+   "gehoert": false
+  },
+  "Ich legen.": {
+   "datei": "livia/586d4bacad4d.mp3",
+   "h": "0843f0a40f",
+   "gehoert": false
+  },
+  "Ich legst.": {
+   "datei": "livia/8546fed24ae4.mp3",
+   "h": "56b79bc547",
+   "gehoert": false
+  },
+  "Ich legt.": {
+   "datei": "livia/2f006b12881a.mp3",
+   "h": "c858a90c28",
+   "gehoert": false
+  },
   "Ich lese gern Bücher.": {
    "datei": "florian/0501795ce170.mp3",
    "h": "31325cc15e",
@@ -6219,6 +6829,26 @@
   "Ich male ein Bild für Oma.": {
    "datei": "florian/9344fbe1bfaa.mp3",
    "h": "c354125f57",
+   "gehoert": false
+  },
+  "Ich male.": {
+   "datei": "livia/d182f7773714.mp3",
+   "h": "46a681445d",
+   "gehoert": false
+  },
+  "Ich malen.": {
+   "datei": "livia/bd6c3a9f1127.mp3",
+   "h": "eeb265f35d",
+   "gehoert": false
+  },
+  "Ich malst.": {
+   "datei": "livia/dca4bec36c0a.mp3",
+   "h": "c94123520e",
+   "gehoert": false
+  },
+  "Ich malt.": {
+   "datei": "livia/d84b1671c1e6.mp3",
+   "h": "ee0b77e4d3",
    "gehoert": false
   },
   "Ich miaue, du miaust.": {
@@ -6256,6 +6886,26 @@
    "h": "210cf4d85f",
    "gehoert": false
   },
+  "Ich rolle.": {
+   "datei": "livia/bd9ea70da12b.mp3",
+   "h": "fe8f12b82b",
+   "gehoert": false
+  },
+  "Ich rollen.": {
+   "datei": "livia/ba3fd6a770d2.mp3",
+   "h": "dd605842d5",
+   "gehoert": false
+  },
+  "Ich rollst.": {
+   "datei": "livia/88777255fef5.mp3",
+   "h": "286c71d440",
+   "gehoert": false
+  },
+  "Ich rollt.": {
+   "datei": "livia/21d557d1d3e0.mp3",
+   "h": "c8a3d3a1b2",
+   "gehoert": false
+  },
   "Ich scheine, du scheinst.": {
    "datei": "livia/2456ec04e221.mp3",
    "h": "53cf854b81",
@@ -6274,6 +6924,26 @@
   "Ich springe, du springst.": {
    "datei": "livia/b78154d4a50b.mp3",
    "h": "0a71a913f5",
+   "gehoert": false
+  },
+  "Ich stecke.": {
+   "datei": "livia/17045436c9d0.mp3",
+   "h": "cc780b053a",
+   "gehoert": false
+  },
+  "Ich stecken.": {
+   "datei": "livia/695deaacfc32.mp3",
+   "h": "af7cf054b0",
+   "gehoert": false
+  },
+  "Ich steckst.": {
+   "datei": "livia/fe743aa21de0.mp3",
+   "h": "26df17e07d",
+   "gehoert": false
+  },
+  "Ich steckt.": {
+   "datei": "livia/953f20aa1e4a.mp3",
+   "h": "b4b8069d35",
    "gehoert": false
   },
   "Ich stehe, du stehst.": {
@@ -6304,6 +6974,26 @@
   "Ich tropfe, du tropfst.": {
    "datei": "livia/242f722cce24.mp3",
    "h": "d6678e562f",
+   "gehoert": false
+  },
+  "Ich tupfe.": {
+   "datei": "livia/04aecf6651b2.mp3",
+   "h": "8b2e6f2829",
+   "gehoert": false
+  },
+  "Ich tupfen.": {
+   "datei": "livia/f082896039b5.mp3",
+   "h": "1e809666be",
+   "gehoert": false
+  },
+  "Ich tupfst.": {
+   "datei": "livia/c284b934d214.mp3",
+   "h": "ffb422e1a4",
+   "gehoert": false
+  },
+  "Ich tupft.": {
+   "datei": "livia/6b848d09e453.mp3",
+   "h": "a8f1d068d3",
    "gehoert": false
   },
   "Ich über?": {
@@ -6356,6 +7046,16 @@
    "h": "fd3b8070ab",
    "gehoert": false
   },
+  "ich, du, er, sie, es, wir, ihr kannst du.": {
+   "datei": "livia/116328e9d93e.mp3",
+   "h": "ff373f62ee",
+   "gehoert": false
+  },
+  "Ich, du, wir": {
+   "datei": "livia/70b7bbda814a.mp3",
+   "h": "f6262fa8e0",
+   "gehoert": false
+  },
   "Ida kramt in der Spielzeugkiste. Ganz unten liegt ein blauer Ball. Den kann Kalle gut sehen! Ida legt ihn neben die Leine.": {
    "datei": "florian/b874d80d658d.mp3",
    "h": "e38dae1673",
@@ -6391,9 +7091,184 @@
    "h": "a403214d5a",
    "gehoert": false
   },
+  "Ihr … bauen.": {
+   "datei": "livia/a7dc634b6488.mp3",
+   "h": "70c7630db7",
+   "gehoert": false
+  },
+  "Ihr … kleben.": {
+   "datei": "livia/b7a2b4d0e364.mp3",
+   "h": "e576c2ba5f",
+   "gehoert": false
+  },
+  "Ihr … legen.": {
+   "datei": "livia/e6c1b945a2aa.mp3",
+   "h": "d7361e0f11",
+   "gehoert": false
+  },
+  "Ihr … malen.": {
+   "datei": "livia/29e90c555d0a.mp3",
+   "h": "a324a1aec3",
+   "gehoert": false
+  },
+  "Ihr … rollen.": {
+   "datei": "livia/d1e74fb9f3f2.mp3",
+   "h": "bcbd510669",
+   "gehoert": false
+  },
+  "Ihr … stecken.": {
+   "datei": "livia/38bb6a8bf375.mp3",
+   "h": "b81b99b76b",
+   "gehoert": false
+  },
+  "Ihr … tupfen.": {
+   "datei": "livia/17e09db3d41a.mp3",
+   "h": "b3a3967487",
+   "gehoert": false
+  },
+  "Ihr baue.": {
+   "datei": "livia/34783d1e70ba.mp3",
+   "h": "4fa38f904f",
+   "gehoert": false
+  },
+  "Ihr bauen.": {
+   "datei": "livia/012ab158149c.mp3",
+   "h": "8786ecf956",
+   "gehoert": false
+  },
+  "Ihr baust.": {
+   "datei": "livia/c158955ac98e.mp3",
+   "h": "eec7fbce54",
+   "gehoert": false
+  },
+  "Ihr baut.": {
+   "datei": "livia/c39e906e6dcd.mp3",
+   "h": "4c58678f5e",
+   "gehoert": false
+  },
   "Ihr eine Schale Milch geben": {
    "datei": "livia/80de465b9a73.mp3",
    "h": "a27593ba7a",
+   "gehoert": false
+  },
+  "Ihr klebe.": {
+   "datei": "livia/a650c34a0685.mp3",
+   "h": "f870721cbf",
+   "gehoert": false
+  },
+  "Ihr kleben.": {
+   "datei": "livia/1282bd916693.mp3",
+   "h": "35c248783d",
+   "gehoert": false
+  },
+  "Ihr klebst.": {
+   "datei": "livia/33974afb4609.mp3",
+   "h": "c27063bc04",
+   "gehoert": false
+  },
+  "Ihr klebt.": {
+   "datei": "livia/03dc51ba27a4.mp3",
+   "h": "c7add30f84",
+   "gehoert": false
+  },
+  "Ihr lege.": {
+   "datei": "livia/24ab1e8f5b65.mp3",
+   "h": "d57c268787",
+   "gehoert": false
+  },
+  "Ihr legen.": {
+   "datei": "livia/4cd9dceb84a2.mp3",
+   "h": "5c36f89167",
+   "gehoert": false
+  },
+  "Ihr legst.": {
+   "datei": "livia/359375b27818.mp3",
+   "h": "727676e995",
+   "gehoert": false
+  },
+  "Ihr legt.": {
+   "datei": "livia/5501dbd6f265.mp3",
+   "h": "c412cb89a6",
+   "gehoert": false
+  },
+  "Ihr male.": {
+   "datei": "livia/e5772a4a2aaa.mp3",
+   "h": "8eec352b2c",
+   "gehoert": false
+  },
+  "Ihr malen.": {
+   "datei": "livia/2bf694ed027f.mp3",
+   "h": "b3c3f060de",
+   "gehoert": false
+  },
+  "Ihr malst.": {
+   "datei": "livia/83694b7cb7c8.mp3",
+   "h": "00cf7466fe",
+   "gehoert": false
+  },
+  "Ihr malt.": {
+   "datei": "livia/d2ffbcbc7aea.mp3",
+   "h": "9cb09439e1",
+   "gehoert": false
+  },
+  "Ihr rolle.": {
+   "datei": "livia/b7571b51ae6e.mp3",
+   "h": "07ca7ccb3a",
+   "gehoert": false
+  },
+  "Ihr rollen.": {
+   "datei": "livia/a38e0dcd9335.mp3",
+   "h": "4b1b990a3f",
+   "gehoert": false
+  },
+  "Ihr rollst.": {
+   "datei": "livia/a5330001b23b.mp3",
+   "h": "e751cf282a",
+   "gehoert": false
+  },
+  "Ihr rollt.": {
+   "datei": "livia/0165c0a0257a.mp3",
+   "h": "33c1950b66",
+   "gehoert": false
+  },
+  "Ihr stecke.": {
+   "datei": "livia/4402009634e0.mp3",
+   "h": "d69adb4e8f",
+   "gehoert": false
+  },
+  "Ihr stecken.": {
+   "datei": "livia/2f439d714c57.mp3",
+   "h": "bcb75c60d7",
+   "gehoert": false
+  },
+  "Ihr steckst.": {
+   "datei": "livia/c6cc756c87d8.mp3",
+   "h": "d22ff313ce",
+   "gehoert": false
+  },
+  "Ihr steckt.": {
+   "datei": "livia/88492d71bc75.mp3",
+   "h": "8da525087d",
+   "gehoert": false
+  },
+  "Ihr tupfe.": {
+   "datei": "livia/a1a5f0c872e7.mp3",
+   "h": "64ac66ec2d",
+   "gehoert": false
+  },
+  "Ihr tupfen.": {
+   "datei": "livia/ad646f3e0ffd.mp3",
+   "h": "53c697f7b8",
+   "gehoert": false
+  },
+  "Ihr tupfst.": {
+   "datei": "livia/67d1df51d271.mp3",
+   "h": "44a2ab5f84",
+   "gehoert": false
+  },
+  "Ihr tupft.": {
+   "datei": "livia/8640a3b3b97b.mp3",
+   "h": "1488146608",
    "gehoert": false
   },
   "Ihre Sinne passen zu ihrem Leben": {
@@ -6846,6 +7721,16 @@
    "h": "fdf5eb713f",
    "gehoert": false
   },
+  "Jetzt du. Du sagst zu Kofi: du …": {
+   "datei": "livia/50d3233c4751.mp3",
+   "h": "410e65c69a",
+   "gehoert": false
+  },
+  "Jetzt fehlt, wer es tut.": {
+   "datei": "livia/bf6ddfb8889c.mp3",
+   "h": "3dfdf54a82",
+   "gehoert": false
+  },
   "Jetzt geht die Reise zum Rumpf. Vorn oben liegt die Brust mit zwei Brustwarzen, links und rechts. Darunter kommt der weiche Bauch. An den Seiten, wo der Hosenbund sitzt, spürst du die Hüften. Hinten ist der Rücken. Leg die linke Hand über die rechte Schulter auf den Rücken. Nun kreis mit dem rechten Arm. Da bewegt sich etwas unter der Haut, das Schulterblatt. Ganz unten am Rücken ist der Po. Mitten auf dem Bauch liegt der Bauchnabel. Was glaubst du: Wozu war er einmal da?": {
    "datei": "livia/b4d6eec5be6a.mp3",
    "h": "de11e90539",
@@ -6854,6 +7739,11 @@
   "Jetzt geht es los.": {
    "datei": "florian/22f43be99076.mp3",
    "h": "219b932533",
+   "gehoert": false
+  },
+  "Jetzt hebt den Stift, wer es tut.": {
+   "datei": "livia/b738ce689e4f.mp3",
+   "h": "c67c4fcca4",
    "gehoert": false
   },
   "Jetzt hebt sich Miras Kopf aus dem Wasser. Pffffh! Ein lautes Schnaufen ist zu hören. Über ihrem Kopf steigt eine helle, buschige Wolke in die Luft. Einen Moment lang steht sie über dem Meer. Dann weht der Wind sie weg, und Mira taucht wieder ab. Diese Wolke nennt man den Blas. Man sieht ihn von der Küste aus schon von weit her. Viele Menschen denken, der Wal spritzt dabei eine Fontäne aus Wasser in die Luft. Was glaubst du: Was kommt da aus Miras Kopf?": {
@@ -6961,6 +7851,16 @@
    "hand": true,
    "gehoert": true
   },
+  "Jetzt schreibst du das Pronomen.": {
+   "datei": "livia/cfe1b9d06e1b.mp3",
+   "h": "8c5d1970ff",
+   "gehoert": false
+  },
+  "Jetzt schreibst du das Verb.": {
+   "datei": "livia/8cf0460c7a5c.mp3",
+   "h": "9cb4204de7",
+   "gehoert": false
+  },
   "Jetzt steht das Wort in einem Satz.": {
    "datei": "florian/cdb1cab1fe51.mp3",
    "h": "38eb224ff6",
@@ -6984,6 +7884,11 @@
   "Jetzt will sie mehr Perlen wegnehmen, als der kleine Stab hat.": {
    "datei": "florian/e5d1324f1b74.mp3",
    "h": "31809db94f",
+   "gehoert": false
+  },
+  "Jetzt zeigt nur der Satz, wer es tut.": {
+   "datei": "livia/3c9c21e029d1.mp3",
+   "h": "9afe533601",
    "gehoert": false
   },
   "Jury-Ohr": {
@@ -7171,6 +8076,11 @@
    "h": "fb82c185b8",
    "gehoert": false
   },
+  "Kofi dreht das Kärtchen um.": {
+   "datei": "livia/55b777827146.mp3",
+   "h": "5d809bba2d",
+   "gehoert": false
+  },
   "Kofi freut sich mit dir.": {
    "datei": "florian/862830f16aba.mp3",
    "h": "df5e193f3f",
@@ -7204,6 +8114,11 @@
   "Kofi nimmt den ganzen Zehnerstab weg. Übrig bleibt der kleine Stab.": {
    "datei": "florian/421620ce750a.mp3",
    "h": "ffa007e79b",
+   "gehoert": false
+  },
+  "Kofi schaut dich an.": {
+   "datei": "livia/956fbba23592.mp3",
+   "h": "7e42e87e80",
    "gehoert": false
   },
   "Kofi springt über den kleinen Bach.": {
@@ -7685,6 +8600,11 @@
    "datei": "livia/943f252e17ad.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Malt zusammen: ich male, du malst.": {
+   "datei": "livia/deb77103e879.mp3",
+   "h": "319ed259bf",
+   "gehoert": false
   },
   "Mama holt mich ab.": {
    "datei": "florian/8fc85a721a84.mp3",
@@ -9941,6 +10861,61 @@
    "h": "f8a2d2f5e5",
    "gehoert": false
   },
+  "Sie … bauen.": {
+   "datei": "livia/7b15fbcd1320.mp3",
+   "h": "11b1b2becb",
+   "gehoert": false
+  },
+  "Sie … kleben.": {
+   "datei": "livia/b26200f06d82.mp3",
+   "h": "8e271873b6",
+   "gehoert": false
+  },
+  "Sie … legen.": {
+   "datei": "livia/6fa7790b2b47.mp3",
+   "h": "8e28df7b65",
+   "gehoert": false
+  },
+  "Sie … malen.": {
+   "datei": "livia/f50b5432bf50.mp3",
+   "h": "0b48994698",
+   "gehoert": false
+  },
+  "Sie … rollen.": {
+   "datei": "livia/ccb07e57aca9.mp3",
+   "h": "61d478a335",
+   "gehoert": false
+  },
+  "Sie … stecken.": {
+   "datei": "livia/e3e64a4855b8.mp3",
+   "h": "a88b31f1e9",
+   "gehoert": false
+  },
+  "Sie … tupfen.": {
+   "datei": "livia/0c30393c7b41.mp3",
+   "h": "88cc407d4d",
+   "gehoert": false
+  },
+  "Sie baue.": {
+   "datei": "livia/6552f3a495f3.mp3",
+   "h": "a75ff0ce7c",
+   "gehoert": false
+  },
+  "Sie bauen.": {
+   "datei": "livia/f030bb679880.mp3",
+   "h": "890b476e89",
+   "gehoert": false
+  },
+  "Sie baust.": {
+   "datei": "livia/c85bb3709b11.mp3",
+   "h": "dc26d0f9a2",
+   "gehoert": false
+  },
+  "Sie baut.": {
+   "datei": "livia/9040dfbb7d4d.mp3",
+   "h": "be6cf8e1f9",
+   "gehoert": false
+  },
   "Sie bleibt immer bei einer Arbeit": {
    "datei": "livia/5e4e5ef80344.mp3",
    "h": "d052a902b6",
@@ -9991,14 +10966,74 @@
    "h": "14c632594f",
    "gehoert": false
   },
+  "Sie klebe.": {
+   "datei": "livia/4660ba448311.mp3",
+   "h": "a5b962057d",
+   "gehoert": false
+  },
+  "Sie kleben.": {
+   "datei": "livia/ac0f23cb67a4.mp3",
+   "h": "b86f071465",
+   "gehoert": false
+  },
+  "Sie klebst.": {
+   "datei": "livia/b481c4b4b65c.mp3",
+   "h": "3ffc8cb8e3",
+   "gehoert": false
+  },
+  "Sie klebt.": {
+   "datei": "livia/e94237c9a0d1.mp3",
+   "h": "4689aafcbc",
+   "gehoert": false
+  },
   "Sie kommt nicht an. Das kann niemand auf der Welt. Während Aylin läuft, wandert der Regenbogen mit ihr mit. Sein Ende bleibt immer gleich weit vor ihr. Erinnerst du dich? Die Mitte des Bogens liegt beim Schatten ihres Kopfes. Und dieser Schatten läuft ja mit. Mit jedem Schritt kommt das Licht aus anderen Tropfen zu ihr. Darum hat der Regenbogen keinen festen Ort. Man kann nicht hingehen und nicht unter ihm durchlaufen. Aylin bleibt stehen und lacht. Der Bogen leuchtet weiter vor ihr, so weit weg wie am Anfang.": {
    "datei": "livia/19964d18a334.mp3",
    "h": "62ca6b78bb",
    "gehoert": false
   },
+  "Sie lege.": {
+   "datei": "livia/5afe6016e1f5.mp3",
+   "h": "44a7b1e481",
+   "gehoert": false
+  },
+  "Sie legen.": {
+   "datei": "livia/12babd884598.mp3",
+   "h": "2213529982",
+   "gehoert": false
+  },
+  "Sie legst.": {
+   "datei": "livia/baa525f35c6c.mp3",
+   "h": "eeca7491a6",
+   "gehoert": false
+  },
   "Sie legt die Eier": {
    "datei": "livia/af0b35879f3a.mp3",
    "h": "635f80715d",
+   "gehoert": false
+  },
+  "Sie legt.": {
+   "datei": "livia/270507f52fb2.mp3",
+   "h": "6a4d4917ab",
+   "gehoert": false
+  },
+  "Sie male.": {
+   "datei": "livia/89afb203c116.mp3",
+   "h": "93fed4da6e",
+   "gehoert": false
+  },
+  "Sie malen.": {
+   "datei": "livia/c1e43cb877b2.mp3",
+   "h": "0b458b2282",
+   "gehoert": false
+  },
+  "Sie malst.": {
+   "datei": "livia/d9b9d8ed0667.mp3",
+   "h": "ecab78acd2",
+   "gehoert": false
+  },
+  "Sie malt.": {
+   "datei": "livia/259cdd2eaabe.mp3",
+   "h": "91ba59f474",
    "gehoert": false
   },
   "Sie möchte gleich spielen": {
@@ -10019,6 +11054,26 @@
   "Sie pflegt ihre Krallen und hinterlässt Duft": {
    "datei": "livia/28fab52e5dd4.mp3",
    "h": "d2f162cbc1",
+   "gehoert": false
+  },
+  "Sie rolle.": {
+   "datei": "livia/8a35eaca7289.mp3",
+   "h": "91c94a69c8",
+   "gehoert": false
+  },
+  "Sie rollen.": {
+   "datei": "livia/93e51c0c1850.mp3",
+   "h": "9279f589f2",
+   "gehoert": false
+  },
+  "Sie rollst.": {
+   "datei": "livia/0b9278d118cb.mp3",
+   "h": "8c94298246",
+   "gehoert": false
+  },
+  "Sie rollt.": {
+   "datei": "livia/a8d39622e7e8.mp3",
+   "h": "11e47b0ecc",
    "gehoert": false
   },
   "Sie sagt: Jetzt ist es genug! Das sind die frühen Stopp-Zeichen. Viele Kinder übersehen sie, und dann kratzt die Katze plötzlich. Malik hat aufgepasst. Er hört sofort auf und nimmt seine Hand ruhig weg. Mia bleibt entspannt liegen. Vielleicht kommt sie später wieder und möchte mehr. Dreht eine Katze beim Streicheln schnell den Kopf zur Hand, heißt das auch: Stopp! Früher hat Malik die Zeichen übersehen und einen kleinen Kratzer bekommen. Den hat er gleich seiner Mutter gezeigt. Seitdem streichelt er kürzer, und nur am Kopf.": {
@@ -10046,9 +11101,29 @@
    "h": "adf97caa42",
    "gehoert": false
   },
+  "Sie stecke.": {
+   "datei": "livia/6314dd84e047.mp3",
+   "h": "810bde1060",
+   "gehoert": false
+  },
   "Sie stecken schon im weißen Sonnenlicht": {
    "datei": "livia/a32cd124ecdc.mp3",
    "h": "76a68921e7",
+   "gehoert": false
+  },
+  "Sie stecken.": {
+   "datei": "livia/ba114ed768bd.mp3",
+   "h": "1c541feaa5",
+   "gehoert": false
+  },
+  "Sie steckst.": {
+   "datei": "livia/15260757fffd.mp3",
+   "h": "6f06fa2b0e",
+   "gehoert": false
+  },
+  "Sie steckt.": {
+   "datei": "livia/ed4e7403570b.mp3",
+   "h": "6d31c8dcd1",
    "gehoert": false
   },
   "Sie suchen jedes Jahr ein neues Zuhause": {
@@ -10079,6 +11154,26 @@
   "Sie tragen ihnen Wasser im Rüssel": {
    "datei": "livia/f8670170db15.mp3",
    "h": "abe3aab8cd",
+   "gehoert": false
+  },
+  "Sie tupfe.": {
+   "datei": "livia/cea8412bbdf0.mp3",
+   "h": "a9028bddc2",
+   "gehoert": false
+  },
+  "Sie tupfen.": {
+   "datei": "livia/ebb3f834feb6.mp3",
+   "h": "5a949a22c3",
+   "gehoert": false
+  },
+  "Sie tupfst.": {
+   "datei": "livia/5298c35ecd02.mp3",
+   "h": "365751693f",
+   "gehoert": false
+  },
+  "Sie tupft.": {
+   "datei": "livia/84ce9894bce3.mp3",
+   "h": "a3bd4653e7",
    "gehoert": false
   },
   "Sie wechselt zu einer neuen Arbeit": {
@@ -10229,6 +11324,11 @@
   "So lernst du Zehner und Einer.": {
    "datei": "florian/be87191f98d0.mp3",
    "h": "2ec84f0404",
+   "gehoert": false
+  },
+  "So lernst du, wer was tut.": {
+   "datei": "livia/2c209e9acfd4.mp3",
+   "h": "2b1f2344dd",
    "gehoert": false
   },
   "So lernst du, Zahlen zu schreiben, die du hörst.": {
@@ -11201,6 +12301,11 @@
    "h": "27d7c1802e",
    "gehoert": false
   },
+  "Timo und Ela malen da drüben.": {
+   "datei": "livia/61c73264a6aa.mp3",
+   "h": "ffb350a249",
+   "gehoert": false
+  },
   "Timo wiegt das Mehl ab.": {
    "datei": "florian/a7dcab9f739a.mp3",
    "h": "58333965ea",
@@ -11469,6 +12574,11 @@
   "Verb passt zur Person": {
    "datei": "florian/37091477d568.mp3",
    "h": "7ea60c1ba3",
+   "gehoert": false
+  },
+  "Verb passt zur Person kannst du.": {
+   "datei": "livia/b474f94680c2.mp3",
+   "h": "158780abf2",
    "gehoert": false
   },
   "Verben": {
@@ -12461,9 +13571,64 @@
    "h": "2a35d99596",
    "gehoert": false
   },
+  "Wir … bauen.": {
+   "datei": "livia/e2799c30b612.mp3",
+   "h": "ab215760a4",
+   "gehoert": false
+  },
+  "Wir … kleben.": {
+   "datei": "livia/accc5b89d18d.mp3",
+   "h": "6cf7a9aa26",
+   "gehoert": false
+  },
+  "Wir … legen.": {
+   "datei": "livia/33bc77f91543.mp3",
+   "h": "a5666facb1",
+   "gehoert": false
+  },
+  "Wir … malen.": {
+   "datei": "livia/d74bb64c348d.mp3",
+   "h": "daecd2cf52",
+   "gehoert": false
+  },
+  "Wir … rollen.": {
+   "datei": "livia/5a8300d02c09.mp3",
+   "h": "a43bb23c78",
+   "gehoert": false
+  },
+  "Wir … stecken.": {
+   "datei": "livia/31d6597e5e57.mp3",
+   "h": "93324990be",
+   "gehoert": false
+  },
+  "Wir … tupfen.": {
+   "datei": "livia/6cf8ed6af3f2.mp3",
+   "h": "44f3710ef3",
+   "gehoert": false
+  },
   "Wir backen heute einen Kuchen.": {
    "datei": "florian/55aac5602d73.mp3",
    "h": "7e5f693092",
+   "gehoert": false
+  },
+  "Wir baue.": {
+   "datei": "livia/86f2269b746c.mp3",
+   "h": "96ea5d0cc0",
+   "gehoert": false
+  },
+  "Wir bauen.": {
+   "datei": "livia/ee56fd6c2d71.mp3",
+   "h": "4dafc2c474",
+   "gehoert": false
+  },
+  "Wir baust.": {
+   "datei": "livia/c052dd584e7b.mp3",
+   "h": "129422291f",
+   "gehoert": false
+  },
+  "Wir baut.": {
+   "datei": "livia/d92272bdd52a.mp3",
+   "h": "872cca00b6",
    "gehoert": false
   },
   "Wir essen heute Suppe.": {
@@ -12486,6 +13651,51 @@
    "h": "e647909d07",
    "gehoert": false
   },
+  "Wir klebe.": {
+   "datei": "livia/7cf003b4d52e.mp3",
+   "h": "a08cc10837",
+   "gehoert": false
+  },
+  "Wir kleben.": {
+   "datei": "livia/acb0c817cc6c.mp3",
+   "h": "8255492792",
+   "gehoert": false
+  },
+  "Wir klebst.": {
+   "datei": "livia/a5afb96f4af3.mp3",
+   "h": "8bd1643949",
+   "gehoert": false
+  },
+  "Wir klebt.": {
+   "datei": "livia/d67c34d50429.mp3",
+   "h": "105f6e9ef3",
+   "gehoert": false
+  },
+  "Wir lege.": {
+   "datei": "livia/0335ef5d7093.mp3",
+   "h": "b9f3e3028e",
+   "gehoert": false
+  },
+  "Wir legen.": {
+   "datei": "livia/5ad192e33428.mp3",
+   "h": "9b67c72962",
+   "gehoert": false
+  },
+  "Wir legst.": {
+   "datei": "livia/a02d522b4938.mp3",
+   "h": "dffe08c83c",
+   "gehoert": false
+  },
+  "Wir legt.": {
+   "datei": "livia/6e9ffee46d55.mp3",
+   "h": "b5faac69e2",
+   "gehoert": false
+  },
+  "Wir male.": {
+   "datei": "livia/14f1519629c4.mp3",
+   "h": "c6417ce0cd",
+   "gehoert": false
+  },
   "Wir malen bunt.": {
    "datei": "florian/8522bfd6edc9.mp3",
    "h": "fe159c2852",
@@ -12496,6 +13706,41 @@
    "h": "16c4da95b2",
    "gehoert": false
   },
+  "Wir malen.": {
+   "datei": "livia/a407d1b1ae4d.mp3",
+   "h": "b5084d573d",
+   "gehoert": false
+  },
+  "Wir malst.": {
+   "datei": "livia/bd01cb641aeb.mp3",
+   "h": "df4d95a40f",
+   "gehoert": false
+  },
+  "Wir malt.": {
+   "datei": "livia/abc064f4fb2f.mp3",
+   "h": "51a364d3c9",
+   "gehoert": false
+  },
+  "Wir rolle.": {
+   "datei": "livia/804bd44c2b22.mp3",
+   "h": "2f41a9336f",
+   "gehoert": false
+  },
+  "Wir rollen.": {
+   "datei": "livia/826c13f6a7cc.mp3",
+   "h": "9266791d76",
+   "gehoert": false
+  },
+  "Wir rollst.": {
+   "datei": "livia/1635b2faf27c.mp3",
+   "h": "ff6b9810a2",
+   "gehoert": false
+  },
+  "Wir rollt.": {
+   "datei": "livia/02ba1b373836.mp3",
+   "h": "e6658eb045",
+   "gehoert": false
+  },
   "Wir sind da.": {
    "datei": "florian/3b104e3e12e3.mp3",
    "h": "790af285d9",
@@ -12504,6 +13749,46 @@
   "Wir spielen heute im Garten.": {
    "datei": "florian/862fc4d0a19a.mp3",
    "h": "661d86003e",
+   "gehoert": false
+  },
+  "Wir stecke.": {
+   "datei": "livia/854e3d565e11.mp3",
+   "h": "3c3b9005f5",
+   "gehoert": false
+  },
+  "Wir stecken.": {
+   "datei": "livia/04af4487059b.mp3",
+   "h": "6a33af8c3d",
+   "gehoert": false
+  },
+  "Wir steckst.": {
+   "datei": "livia/d291bf219e2a.mp3",
+   "h": "ea5f8d9d91",
+   "gehoert": false
+  },
+  "Wir steckt.": {
+   "datei": "livia/e87497a1dda4.mp3",
+   "h": "c8b8389f21",
+   "gehoert": false
+  },
+  "Wir tupfe.": {
+   "datei": "livia/13b789a6ee85.mp3",
+   "h": "18081ec350",
+   "gehoert": false
+  },
+  "Wir tupfen.": {
+   "datei": "livia/6b1079ed9c44.mp3",
+   "h": "98522c36d8",
+   "gehoert": false
+  },
+  "Wir tupfst.": {
+   "datei": "livia/9a2af015d84d.mp3",
+   "h": "209220e011",
+   "gehoert": false
+  },
+  "Wir tupft.": {
+   "datei": "livia/998895b26189.mp3",
+   "h": "4a2f52253d",
    "gehoert": false
   },
   "Wo ist der Laut?": {
