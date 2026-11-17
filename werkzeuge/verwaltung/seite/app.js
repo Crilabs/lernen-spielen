@@ -9,7 +9,7 @@ const STATUS_TEXT = {
   geplant: "geplant", fehlt: "fehlt", wartet: "wartet", laeuft: "läuft", erledigt: "erledigt",
   "wartet-auf-christian": "wartet auf dich", beantwortet: "beantwortet", fehlgeschlagen: "fehlgeschlagen", gestrichen: "gestrichen",
 };
-const ART_TEXT = { spiel: "Spiel", "echte-dinge": "Mit echten Dingen", buch: "Buch", einfuehrung: "Einführung", frei: "Frei", antwort: "Antwort" };
+const ART_TEXT = { spiel: "Spiel", "echte-dinge": "Mit echten Dingen", buch: "Buch", einfuehrung: "Einführung", frei: "Frei", antwort: "Antwort", ideen: "Ideen" };
 const plakette = (status, text = STATUS_TEXT[status] ?? status, titel = "") =>
   `<span class="plakette s-${esc(status)}" title="${esc(titel)}">${esc(text)}</span>`;
 
@@ -37,8 +37,10 @@ async function api(pfad, daten) {
 const FERTIG = ["fertig", "probe"];
 // Fach eines Spiels aus dem Buchstaben der Katalog-Id (wie werkzeuge/spielbau/bauheft.mjs, FAECHER)
 const FACH_JE_BUCHSTABE = { M: "mathe", R: "geometrie", L: "lesen", Z: "sprechen", S: "schreiben", G: "grammatik" };
-const spielPlus = (id, s) => ["geplant", "geparkt"].includes(s.status)
-  ? ` <button class="plus" data-auftrag="spiel" data-ziel="${esc(id)}" title="${esc(s.name)} beauftragen">+</button>` : "";
+const spielPlus = (id, s) => (["geplant", "geparkt"].includes(s.status)
+  ? ` <button class="plus" data-auftrag="spiel" data-ziel="${esc(id)}" title="${esc(s.name)} beauftragen">+</button>` : "")
+  // Ideen nur für Spiele, die noch nicht gebaut oder beauftragt sind (Christian, 2026-11-17)
+  + (s.status === "geplant" ? ` <button class="plus" data-auftrag="ideen" data-ziel="${esc(id)}" title="Ideen für ${esc(s.name)}">💡</button>` : "");
 
 /** @param {any} t @param {boolean} mitEinfuehrung nur bei Lernthemen ohne Spiel: ein Spiel bringt seine Einführung selbst mit */
 function zeileLernthema(t, mitEinfuehrung) {
@@ -155,6 +157,30 @@ function zeigeBibliothek() {
 
 // ---------- Aufträge ----------
 
+/** Die Skizzen eines Ideen-Auftrags, der auf Christian wartet, als Karten mit „Diese bauen“. */
+function ideenKarten(a) {
+  if (a.art !== "ideen" || a.status !== "wartet-auf-christian") return "";
+  const ideen = Array.isArray(a.ergebnis?.ideen) ? a.ergebnis.ideen : [];
+  if (!ideen.length) return "";
+  const karten = ideen.map((x, i) => `<div class="idee">
+      <h3>${i + 1}. ${esc(x.titel)}</h3><p>${esc(x.text)}</p>
+      <button class="zweit" data-wahl-karte="${i + 1}" data-id="${esc(a.id)}">Diese bauen</button></div>`).join("");
+  return `<tr class="ideen-zeile"><td colspan="6"><div class="ideen-karten">${karten}</div></td></tr>`;
+}
+
+function eigeneIdee(id) {
+  const d = /** @type {HTMLDialogElement} */ ($("#eigene-idee"));
+  const feld = /** @type {HTMLTextAreaElement} */ ($("#e-text"));
+  feld.value = "";
+  d.returnValue = "";
+  d.showModal();
+  d.addEventListener("close", async () => {
+    const text = feld.value.trim();
+    if (d.returnValue !== "ja" || !text) return;
+    try { await api(`/api/auftraege/${id}/wahl`, { text }); await ladeAlles(); } catch (err) { $("#hinweis").textContent = /** @type {Error} */ (err).message; }
+  }, { once: true });
+}
+
 function zeigeAuftraege() {
   const l = A.auftraege;
   const wartend = l.filter((a) => a.status === "wartet");
@@ -171,6 +197,9 @@ function zeigeAuftraege() {
       ? `<button class="klein" data-schritt="hoch" data-id="${esc(a.id)}" title="nach oben">↑</button>
          <button class="klein" data-schritt="runter" data-id="${esc(a.id)}" title="nach unten">↓</button>
          <button class="klein" data-schritt="streichen" data-id="${esc(a.id)}">streichen</button>`
+      : a.status === "wartet-auf-christian" && a.art === "ideen"
+      ? `<button class="klein" data-eigene-idee="${esc(a.id)}" title="Eigene Idee als Vorgabe für den Bau">Eigene Idee …</button>
+         <button class="klein" data-schritt="ablehnen" data-id="${esc(a.id)}" title="Keine davon, nichts bauen">Nein</button>`
       : a.status === "wartet-auf-christian"
       ? `<button class="klein" data-antwort="Ja" data-id="${esc(a.id)}" title="Ja: Folgeauftrag in die Warteschlange">Ja</button>
          <button class="klein" data-antworten="${esc(a.id)}" title="Eigene Antwort schreiben">Antworten …</button>
@@ -186,7 +215,7 @@ function zeigeAuftraege() {
     return `<tr data-zeile="${esc(a.id)}" class="${a.id === gewaehlt ? "gewaehlt" : ""}">
       <td>${esc(ART_TEXT[a.art] ?? a.art)}</td><td class="befehl">${esc(befehl)}${zus}${frage}${notiz}</td>
       <td class="zahl-z">${eur(a.schaetzung_eur)}</td><td>${plakette(a.status)}</td><td class="leise-text">${esc(zeit)}</td>
-      <td>${steuer} <button class="klein" data-protokoll="${esc(a.id)}">Protokoll</button></td></tr>`;
+      <td>${steuer} <button class="klein" data-protokoll="${esc(a.id)}">Protokoll</button></td></tr>${ideenKarten(a)}`;
   }).join("");
   const knopf = A.laeuft
     ? `<button class="haupt" disabled>Lauf aktiv${A.sperre?.wer === "chat" ? " (im Chat)" : ""}</button>
@@ -307,6 +336,7 @@ function bestaetige(art, ziel) {
   if (art === "spiel") { const s = U.spiele[ziel]; text = `Spiel ${ziel} „${s.name}“ entwickeln (${s.hauptthemen.length} Hauptthemen).`; schaetzung = U.schaetzung.spiel; }
   if (art === "echte-dinge") { text = `„Mit echten Dingen“ für ${U.lernthemen.find((t) => t.id === ziel)?.name ?? ziel} schreiben.`; schaetzung = U.schaetzung.echteDingeJeThema; }
   if (art === "buch") { text = `Buch „${U.bibliothek.flatMap((r) => r.regale.flatMap((g) => g.buecher)).find((b) => b.id === ziel)?.titel ?? ziel}“ schreiben.`; schaetzung = U.schaetzung.buch; }
+  if (art === "ideen") { text = `Drei Ideen für Spiel ${ziel} „${U.spiele[ziel].name}“ – du wählst danach eine oder schreibst deine eigene.`; schaetzung = 1; }
   if (art === "einfuehrung") { text = `Einführung für „${U.lernthemen.find((t) => t.id === ziel)?.name ?? ziel}“ (freier Auftrag, kein Skill).`; }
   $("#b-text").textContent = text;
   $("#b-schaetzung").textContent = schaetzung === null ? "Schätzung: unbekannt" : `Schätzung: ca. ${eur(schaetzung)} (startet erst mit „Warteschlange abarbeiten“)`;
@@ -349,6 +379,8 @@ document.addEventListener("click", async (e) => {
     else if (z.dataset.schritt) { A = { ...A, ...(await api(`/api/auftraege/${z.dataset.id}/${z.dataset.schritt}`, {})) }; await ladeAlles(); }
     else if (z.dataset.antwort) { await api(`/api/auftraege/${z.dataset.id}/antwort`, { text: z.dataset.antwort }); await ladeAlles(); }
     else if (z.dataset.antworten) antworten(z.dataset.antworten);
+    else if (z.dataset.wahlKarte) { await api(`/api/auftraege/${z.dataset.id}/wahl`, { karte: Number(z.dataset.wahlKarte) }); await ladeAlles(); }
+    else if (z.dataset.eigeneIdee) eigeneIdee(z.dataset.eigeneIdee);
     else if (z.dataset.probe && z.dataset.sicher !== "1") { z.dataset.sicher = "1"; z.textContent = `${z.dataset.probe} wirklich abschließen?`; }
     else if (z.dataset.probe) {
       const r = await api(`/api/proben/${z.dataset.probe}/abschliessen`, {});

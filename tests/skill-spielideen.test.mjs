@@ -37,3 +37,10 @@ test("Skill spielideen: jeder genannte Pfad im Repo existiert", () => {
   }
   assert.deepEqual(fehlt, []);
 });
+
+test("Seite: Ideen-Knopf, Karten und Wahl", () => {
+  const app = lies("werkzeuge/verwaltung/seite/app.js");
+  for (const x of ['data-auftrag="ideen"', "/wahl", "ideen-karten", 'ideen: "Ideen"', "data-wahl-karte", "data-eigene-idee"]) assert.ok(app.includes(x), x);
+  assert.match(lies("werkzeuge/verwaltung/seite/index.html"), /id="eigene-idee"/);
+  assert.match(lies("werkzeuge/verwaltung/seite/stil.css"), /\.ideen-karten/);
+});
