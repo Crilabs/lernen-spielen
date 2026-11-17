@@ -52,6 +52,7 @@ async function neueSeite(browser, tb, stand) {
           const t = window.__tb;
           t.aufrufe.push({ name, args: a });
           const liste = () => t.empfaenger ??= [{ adresse: t.adresse || "eltern@example.org", bestaetigt: true }];
+          if (name === "tagesbrief_empfaenger" && t.ladefehler) throw new Error("nicht erreichbar");
           if (name === "tagesbrief_empfaenger") return { uhrzeit: t.uhrzeit, name: "", empfaenger: liste() };
           if (name === "tagesbrief_empfaenger_hinzufuegen") {
             if (t.fehler) return { fehler: t.fehler };
@@ -232,6 +233,24 @@ for (const typ of [chromium, webkit]) {
     pruefe((await aufrufe(seite, "tagesbrief_empfaenger_entfernen")).length === vorher + 1 && (await text(seite)).includes("Einrichten"), `${L} „Ja, entfernen“: Familie gelöscht, Formular „Einrichten“`);
     pruefe(dialoge === 0, `${L} Empfänger: kein JS-Dialog`);
     pruefe(fehlerListe.length === 0, `${L} keine Fehler (Empfänger)`, fehlerListe.join(" | "));
+    await kontext.close();
+  }
+
+  // --- Ladefehler der Adressliste ------------------------------------------------------------------------------------
+  {
+    const { kontext, seite } = await neueSeite(browser, { zustand: "aktiv", adresse: "mama@example.org", ladefehler: true }, null);
+    await oeffneTagesbrief(seite);
+    await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("Die Adressen konnten nicht geladen werden."));
+    pruefe(await seite.evaluate(() => !document.querySelector("#inhalt .tb-adresse") && !document.getElementById("inhalt").innerText.includes("mama@example.org") && !document.getElementById("inhalt").innerText.includes("✓ bestätigt") && !!document.querySelector('#inhalt ls-knopf[wort="Erneut laden"]')), `${L} Ladefehler: Hinweis und „Erneut laden“, keine Ersatzliste`);
+    const n1 = (await aufrufe(seite, "tagesbrief_empfaenger")).length;
+    await klick(seite, "Erneut laden");
+    pruefe((await aufrufe(seite, "tagesbrief_empfaenger")).length === n1 + 1 && (await text(seite)).includes("nicht geladen"), `${L} „Erneut laden“ fragt neu, Hinweis bleibt solange es scheitert`);
+    await seite.waitForFunction((n) => window.__tb.aufrufe.filter((a) => a.name === "tagesbrief_empfaenger").length > n, n1 + 1, { timeout: 15000 });
+    pruefe(true, `${L} Ladefehler: Abfrage alle 10 s läuft weiter`);
+    await seite.evaluate(() => { window.__tb.ladefehler = false; });
+    await klick(seite, "Erneut laden");
+    await seite.waitForSelector("#inhalt .tb-adresse");
+    pruefe(await seite.evaluate(() => !document.getElementById("inhalt").innerText.includes("nicht geladen") && document.querySelectorAll("#inhalt .tb-adresse").length === 1 && !!document.querySelector('#inhalt ls-knopf[wort="Adresse hinzufügen"]:not([hidden])')), `${L} nach Erfolg: echte Liste, Hinweis weg, Hinzufügen wieder da`);
     await kontext.close();
   }
 

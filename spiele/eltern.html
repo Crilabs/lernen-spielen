@@ -1382,17 +1382,30 @@ async function tagesbrief(spalte) {
       if (maximal) neu.hidden = true;
     }
 
-    // Die Liste kommt vom Dienst: beim Öffnen und nach jeder Aktion neu, solange eine Adresse wartet alle 10 s.
+    // Die Liste kommt vom Dienst: beim Öffnen und nach jeder Aktion neu, solange eine Adresse wartet (oder das Laden
+    // scheiterte) alle 10 s. Scheitert das Laden, gibt es keine Ersatzliste, nur den Hinweis mit „Erneut laden“.
+    const ladefehler = el("div", null, "spalten"); ladefehler.hidden = true;
+    const erneutLaden = knopf("Erneut laden");
+    erneutLaden.addEventListener("click", ladeListe);
+    ladefehler.append(el("p", "Die Adressen konnten nicht geladen werden.", "text"), reihe(erneutLaden));
+
     async function ladeListe() {
       clearTimeout(timer);
       let r = null;
-      try { r = await befehl("tagesbrief_empfaenger", { profil: PROFIL }); } catch { /* Fallback unten */ }
+      try { r = await befehl("tagesbrief_empfaenger", { profil: PROFIL }); } catch { /* unten als Ladefehler */ }
       if (!nochDa()) return;
       if (r?.zustand) { await aktualisiere(); return; }
-      const eintraege = r?.empfaenger ?? (st.adresse ? [{ adresse: st.adresse, bestaetigt: true }] : []);
-      if (r?.uhrzeit) zeile.textContent = `Der Brief kommt um ${r.uhrzeit} Uhr an diese Adressen:`;
-      zeichneListe(eintraege);
-      if (eintraege.some((e) => !e.bestaetigt)) timer = setTimeout(ladeListe, TB_ABFRAGE_MS);
+      const geladen = Array.isArray(r?.empfaenger);
+      ladefehler.hidden = geladen;
+      zeile.hidden = !geladen; liste.hidden = !geladen;
+      if (!geladen) {
+        schliesseFrage(); hinzufuegen.hidden = true; voll.hidden = true; neu.hidden = true;
+        timer = setTimeout(ladeListe, TB_ABFRAGE_MS);
+        return;
+      }
+      if (r.uhrzeit) zeile.textContent = `Der Brief kommt um ${r.uhrzeit} Uhr an diese Adressen:`;
+      zeichneListe(r.empfaenger);
+      if (r.empfaenger.some((e) => !e.bestaetigt)) timer = setTimeout(ladeListe, TB_ABFRAGE_MS);
     }
 
     jaEntfernen.addEventListener("click", () => entferne(frageAdresse));
@@ -1409,7 +1422,7 @@ async function tagesbrief(spalte) {
       else { status.textContent = `Wir haben eine E-Mail an ${a} geschickt. Bitte den Link darin bestätigen.`; neuAdresse.value = ""; neu.hidden = true; }
       await ladeListe();
     });
-    f.append(frage, reihe(hinzufuegen), voll, neu);
+    f.append(ladefehler, frage, reihe(hinzufuegen), voll, neu);
     await ladeListe();
 
     const probe = knopf("Probebrief senden", { symbol: "weiter.svg" });
