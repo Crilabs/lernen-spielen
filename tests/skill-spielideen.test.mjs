@@ -44,3 +44,11 @@ test("Seite: Ideen-Knopf, Karten und Wahl", () => {
   assert.match(lies("werkzeuge/verwaltung/seite/index.html"), /id="eigene-idee"/);
   assert.match(lies("werkzeuge/verwaltung/seite/stil.css"), /\.ideen-karten/);
 });
+
+// Review 2026-11-17: Kosten im Hauptrepo machten main schmutzig, danach mergte der Abschluss kein Spiel mehr.
+test("Skill spielideen: Kosten im Worktree vor dem Commit, nie im Hauptrepo", () => {
+  const s = lies(".claude/skills/spielideen/SKILL.md");
+  const buchen = s.indexOf("werkzeuge/kosten/transkript.mjs");
+  assert.ok(buchen > 0 && buchen < s.indexOf("`docs(ideen): Spielideen"), "Buchung vor dem Commit");
+  assert.ok(buchen < s.indexOf("git merge --ff-only"), "Buchung vor dem Merge");
+});

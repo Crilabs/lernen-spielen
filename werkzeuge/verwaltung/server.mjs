@@ -141,12 +141,15 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
       }
       const wahl = pfad.match(/^\/api\/auftraege\/([^/]+)\/wahl$/);
       if (post && wahl) {
+        // Erst den Körper lesen, dann prüfen und speichern ohne await dazwischen: Zwei schnelle Wahlen (Doppelklick,
+        // zweiter Tab) sehen so nie beide „wartet auf Christian“ (Review 2026-11-17).
+        const daten = await koerper();
         const l = auftraege();
         const alt = l.find((a) => a.id === wahl[1]);
         if (!alt) return antwort(404, { fehler: "Auftrag nicht gefunden" });
         if (alt.status !== "wartet-auf-christian") return antwort(409, { fehler: "Auftrag wartet nicht auf eine Antwort" });
         let r;
-        try { r = waehleIdee(l, alt.id, await koerper()); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
+        try { r = waehleIdee(l, alt.id, daten); } catch (e) { return antwort(400, { fehler: /** @type {any} */ (e).message }); }
         mkdirSync(dirname(p.vorgabe(r.neu.id)), { recursive: true });
         writeFileSync(p.vorgabe(r.neu.id), r.neu.vorgabe);
         speichereAuftraege(p.auftraege, r.liste);

@@ -4,7 +4,8 @@ Du baust das Spiel **{{ID}} „{{NAME}}“** nach seiner Idee, ganz und spielbar
 (Branch `{{BRANCH}}`), nur dort arbeiten. Niemanden fragen, keine Unteragenten, nicht pushen, nicht mergen,
 `spiele/mit-echten-dingen/` nicht anfassen.
 
-**Lies:** das Bauheft `{{BAUHEFT}}` (Regeln, Themen, was es gibt), die Idee `{{IDEE}}`, den Kopf von
+**Lies:** das Bauheft `{{BAUHEFT}}` (Regeln, Themen, was es gibt; enthält es eine „Vorgabe von Christian“, gilt
+trotzdem die Idee-Datei – ihre „Abweichungen von der Vorgabe“ sind gewollt), die Idee `{{IDEE}}`, den Kopf von
 `spiele/vorlage/spiel.js` (Schritte 1–7, RAHMEN, SPIELWELT). Einzelheiten zu einem Baustein stehen in seiner Datei
 in `spiele/rahmen/` bzw. `spiele/objekte/`; lies gezielt, nicht alles.
 

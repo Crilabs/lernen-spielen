@@ -67,6 +67,7 @@ const PRUEFUNG = {
 }
 
 const FRAGEN = ['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'ohneTransfer']
+const FRAGE_NAME = { zehnmal: 'Zehnmal', kern: 'Kern', schwierigkeit: 'Schwierigkeit', schoen: 'Schön', ohneTransfer: 'Ohne Transfer' }
 /**
  * Urteil aus dem Bericht des Prüfers, fest ausgerechnet (docs/spielbau.md „Die Spielprüfung“). Mit Vorgabe von
  * Christian zählen nur Schwierigkeit und Ohne Transfer hart; ein Nein bei Zehnmal, Kern oder Schön betrifft seine Idee
@@ -75,7 +76,7 @@ const FRAGEN = ['zehnmal', 'kern', 'schwierigkeit', 'schoen', 'ohneTransfer']
 function urteil(p, mitVorgabe) {
   const hart = mitVorgabe ? ['schwierigkeit', 'ohneTransfer'] : FRAGEN
   const nein = hart.filter((k) => !p[k].ja)
-  const zurIdee = FRAGEN.filter((k) => !hart.includes(k) && !p[k].ja).map((k) => 'Zur Idee: ' + k + ' – ' + p[k].beleg)
+  const zurIdee = FRAGEN.filter((k) => !hart.includes(k) && !p[k].ja).map((k) => 'Zur Idee: ' + FRAGE_NAME[k] + ' – ' + p[k].beleg)
   const grenzen = p.grenzen.filter((g) => !g.ok)
   const verdeckt = p.streichen.filter((s) => s.verdecktKern)
   return { gruen: !nein.length && !grenzen.length && !verdeckt.length, nein, grenzen, verdeckt, zurIdee }
@@ -108,6 +109,8 @@ log('Idee: ' + idee.zusammenfassung)
 
 // --- Runden ---------------------------------------------------------------------------------------------------
 let befunde = []
+const zurIdeeAlle = [] // Hinweise an Christian zu seiner Idee, über alle Runden (Vorgabe, Review 2026-11-17)
+const istZurIdee = (b) => /^\W*zur idee/i.test(b)
 let letzte = { pruefstand: null, pruefung: null, urteil: null, bau: null }
 for (let runde = 1; runde <= MAX_RUNDEN; runde++) {
   let stand = null
@@ -124,7 +127,7 @@ for (let runde = 1; runde <= MAX_RUNDEN; runde++) {
     befunde = stand.rot.slice(0, 15)
   }
   if (!stand.gruen) {
-    if (runde === MAX_RUNDEN) return { status: 'geparkt', grund: 'Prüfstand nach ' + runde + ' Runden rot', runde, idee, befunde, letzte }
+    if (runde === MAX_RUNDEN) return { status: 'geparkt', grund: 'Prüfstand nach ' + runde + ' Runden rot', runde, idee, befunde, zurIdee: zurIdeeAlle, letzte }
     continue
   }
 
@@ -137,16 +140,17 @@ for (let runde = 1; runde <= MAX_RUNDEN; runde++) {
   const u = urteil(p, !!L.vorgabe)
   letzte.pruefung = p
   letzte.urteil = u
+  zurIdeeAlle.push(...u.zurIdee, ...p.befunde.filter(istZurIdee))
   log('Spielprüfung R' + runde + ': ' + (u.gruen ? 'grün' : 'rot – Nein: ' + u.nein.join(', ') + '; Grenzen: ' + u.grenzen.map((g) => g.nr).join(', ') + '; verdeckt: ' + u.verdeckt.length))
   if (u.gruen) {
-    return { status: idee.freigabe ? 'freigabe' : 'gruen', freigabe: idee.freigabe, runde, idee, hinweise: [...u.zurIdee, ...p.befunde], streichen: p.streichen, letzte }
+    return { status: idee.freigabe ? 'freigabe' : 'gruen', freigabe: idee.freigabe, runde, idee, hinweise: p.befunde.filter((b) => !istZurIdee(b)), zurIdee: zurIdeeAlle, streichen: p.streichen, letzte }
   }
   befunde = [
     ...u.nein.map((k) => 'Frage „' + k + '“ ist Nein: ' + p[k].beleg),
     ...u.grenzen.map((g) => g.nr + ': ' + g.beleg),
     ...u.verdeckt.map((s) => 'Streichen: ' + s.was + ' – ' + s.warum),
-    ...p.befunde.filter((b) => !b.startsWith('Zur Idee:')), // Zweifel an Christians Idee sind kein Bauauftrag
+    ...p.befunde.filter((b) => !istZurIdee(b)), // Zweifel an Christians Idee sind kein Bauauftrag
   ].slice(0, 15)
-  if (runde === MAX_RUNDEN) return { status: 'geparkt', grund: 'Spielprüfung nach ' + runde + ' Runden rot', runde, idee, befunde, letzte }
+  if (runde === MAX_RUNDEN) return { status: 'geparkt', grund: 'Spielprüfung nach ' + runde + ' Runden rot', runde, idee, befunde, zurIdee: zurIdeeAlle, letzte }
 }
-return { status: 'geparkt', grund: 'ohne Ergebnis', idee, befunde, letzte }
+return { status: 'geparkt', grund: 'ohne Ergebnis', idee, befunde, zurIdee: zurIdeeAlle, letzte }

@@ -187,3 +187,26 @@ test("Server: Wahl einer Idee legt Spiel-Auftrag und Vorgabe an, zweite Wahl 409
   const l = (await (await hol("/api/auftraege")).json()).auftraege;
   assert.deepEqual(l.map((x) => x.art), ["ideen", "spiel", "ideen"]);
 }));
+
+// Review 2026-11-17: zwei gleichzeitige Wahlen – nur eine darf gewinnen, die andere bekommt 409.
+test("Server: gleichzeitige Wahl derselben Idee – genau eine 201", () => mitServer(async ({ hol, sende, ordner }) => {
+  const ideen = [{ titel: "A", text: "a" }, { titel: "B", text: "b" }, { titel: "C", text: "c" }];
+  speichereAuftraege(pfade(ordner).auftraege, [
+    { id: "i-1", art: "ideen", ziel: "G05", befehl: "Spielideen G05", status: "wartet-auf-christian", ergebnis: { status: "geparkt", ideen } },
+  ]);
+  // A schickt Kopf sofort, Körper erst, nachdem B fertig ist – so trifft A die Prüfung, bevor B speichert.
+  const port = new URL((await hol("/api/auftraege")).url).port;
+  const koerperA = JSON.stringify({ karte: 1 });
+  let antwortA;
+  const a = request({ host: "127.0.0.1", port, method: "POST", path: "/api/auftraege/i-1/wahl",
+    headers: { host: `127.0.0.1:${port}`, "content-type": "application/json", "content-length": Buffer.byteLength(koerperA) } });
+  const fertigA = new Promise((ok) => a.on("response", (r) => { antwortA = r.statusCode; r.resume(); r.on("end", ok); }));
+  a.flushHeaders();
+  await new Promise((ok) => setTimeout(ok, 50));
+  const b = await sende("/api/auftraege/i-1/wahl", { karte: 3 });
+  a.end(koerperA);
+  await fertigA;
+  assert.deepEqual([b.status, antwortA].sort(), [201, 409]);
+  const l = (await (await hol("/api/auftraege")).json()).auftraege;
+  assert.equal(l.filter((x) => x.art === "spiel").length, 1);
+}));

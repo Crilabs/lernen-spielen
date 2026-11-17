@@ -223,7 +223,7 @@ const bericht = (nein = []) => ({
 test("Vorgabe: Spielprüfung zählt nur Schwierigkeit und Ohne Transfer hart", () => {
   const u = urteil(bericht(["kern"]), true);
   assert.equal(u.gruen, true);
-  assert.deepEqual(u.zurIdee, ["Zur Idee: kern – kern-beleg"]);
+  assert.deepEqual(u.zurIdee, ["Zur Idee: Kern – kern-beleg"]);
   assert.equal(urteil(bericht(["kern"]), false).gruen, false);
   assert.equal(urteil(bericht(["schwierigkeit"]), true).gruen, false);
   assert.equal(urteil(bericht(["ohneTransfer"]), true).gruen, false);
@@ -251,4 +251,13 @@ test("Vorgabe: Wiederaufnahme ohne --vorgabe behält die alte", async () => {
   assert.equal(laufVorgabe(null, { vorgabe: "x" }), "x");
   assert.equal(laufVorgabe("neu", { vorgabe: "x" }), "neu");
   assert.equal(laufVorgabe(null, {}), null);
+});
+
+// Review 2026-11-17: Hinweise „Zur Idee“ gehen bei Rot und über Runden nicht verloren; Vorlagen sagen „enthält“.
+test("Vorgabe: Zur-Idee-Hinweise in jedem Ergebnis, Vorlagen und Bau kennen die Vorgabe", () => {
+  assert.match(WORKFLOW, /zurIdeeAlle/);
+  for (const m of WORKFLOW.matchAll(/return \{ status: '(geparkt|gruen|freigabe)[^\n]*/g)) assert.match(m[0], /zurIdee/, m[0]);
+  for (const v of ["idee.md", "pruefen.md"]) assert.doesNotMatch(readFileSync(join(SKILL, v), "utf8"), /[Bb]eginnt das Bauheft mit/, v);
+  assert.match(readFileSync(join(SKILL, "bauen.md"), "utf8"), /Vorgabe von Christian/);
+  assert.match(WORKFLOW, /\/\^\\W\*zur idee\/i/);
 });

@@ -38,22 +38,29 @@ einer Idee. Prüfe jede gegen „Woran man eine langweilige Idee erkennt“ und 
 cd <Hauptrepo> && git worktree add .worktrees/ideen-<id> -b ideen-<id> main
 ```
 
+Gibt es Worktree oder Branch `ideen-<id>` schon (abgebrochener Lauf), weiterverwenden; nie mit `--force` oder
+`branch -D` löschen.
+
 In `.worktrees/ideen-<id>` die Datei `docs/spiele/ideen/<id>.md` schreiben (`<id>` klein, z. B. `g05`): Überschrift
 `# Spielideen <Id> „<Name>“`, Datum, dann `## 1. <Titel>` bis `## 3. <Titel>` mit den Zeilen aus Schritt 2.
-Commit `docs(ideen): Spielideen <Id>` mit Leerzeile und `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 
-Dann im Hauptrepo `git merge --ff-only ideen-<id>` (nie im Hauptrepo selbst committen: dort liegt oft fremde Arbeit),
-danach `git worktree remove .worktrees/ideen-<id>` und `git branch -d ideen-<id>`. Scheitert der Merge, weil `main`
-sich bewegt hat: im Worktree `git rebase main`, noch einmal `--ff-only`; scheitert es wieder, Status `abgebrochen`.
-
-## 4. Kosten
+Dann **im Worktree** die Kosten buchen (bis hierher; der kleine Rest danach bleibt ungebucht). Nie im Hauptrepo
+buchen: Eine ungetrackte `kosten.json` dort macht `main` schmutzig, und der Abschluss des nächsten Spiels mergt
+nicht mehr (Review 2026-11-17).
 
 ```bash
-node werkzeuge/kosten/transkript.mjs "$VERWALTUNG_TRANSKRIPT" --ordner docs/spiele/ideen --phase ideen \
-  --thema <id> --notiz "<Id>, Ideen"
+cd .worktrees/ideen-<id> && node werkzeuge/kosten/transkript.mjs "$VERWALTUNG_TRANSKRIPT" --ordner docs/spiele/ideen \
+  --phase ideen --thema <id> --notiz "<Id>, Ideen"
 ```
 
 Ohne `VERWALTUNG_TRANSKRIPT` das eigene Transkript (neueste Datei in `~/.claude/projects/<Projekt>/`).
+
+Commit beider Dateien `docs(ideen): Spielideen <Id>` mit Leerzeile und `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
+
+Dann im Hauptrepo – nur wenn dort `git branch --show-current` `main` ist, sonst `abgebrochen` –
+`git merge --ff-only ideen-<id>` (nie im Hauptrepo selbst committen: dort liegt oft fremde Arbeit),
+danach `git worktree remove .worktrees/ideen-<id>` und `git branch -d ideen-<id>`. Scheitert der Merge, weil `main`
+sich bewegt hat: im Worktree `git rebase main`, noch einmal `--ff-only`; scheitert es wieder, Status `abgebrochen`.
 
 ## Lauf aus der Verwaltung
 
