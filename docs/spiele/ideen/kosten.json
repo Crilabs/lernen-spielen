@@ -1,0 +1,19 @@
+[
+ {
+  "datum": "2026-11-17",
+  "phase": "ideen",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 5270,
+  "einheit": "tokens",
+  "menge": 482343,
+  "notiz": "S02, Ideen",
+  "cache_lesen": 415976,
+  "cache_schreiben": 61083,
+  "themen": 1,
+  "thema": [
+   "s02"
+  ]
+ }
+]
