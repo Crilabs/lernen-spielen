@@ -3,6 +3,7 @@
 // (docs/superpowers/specs/2026-11-16-verwaltung-design.md, „Abarbeiten“).
 //
 //   node werkzeuge/verwaltung/lauf.mjs abarbeiten        alle wartenden Aufträge mit `claude -p` (startet die Seite)
+//   node werkzeuge/verwaltung/lauf.mjs ideen <id>        einen Ideen-Auftrag sofort, neben der Warteschlange (startet die Seite)
 //   node werkzeuge/verwaltung/lauf.mjs naechster         Chat: nimmt die Sperre, setzt den obersten Auftrag auf „laeuft“,
 //                                                        druckt { id, art, ziel, befehl } (oder meldet „läuft schon“)
 //   node werkzeuge/verwaltung/lauf.mjs fertig <id> <status>   Chat: setzt den Status und gibt die Sperre frei
@@ -158,6 +159,27 @@ function liesErgebnis(datei) {
 }
 
 /**
+ * Ein Ideen-Auftrag sofort, ohne die Sperre der Warteschlange (Christian, 2026-11-17: „die Ideen direkt erzeugen,
+ * nicht erst wenn der Bau beginnt“). Mehrere dürfen gleichzeitig laufen; jeder arbeitet in seinem eigenen Worktree.
+ * @param {{ ordner?: string, wurzel?: string, id: string, starte?: typeof startClaude }} o
+ */
+export async function fuehreIdeenAus({ ordner = ORDNER, wurzel = WURZEL, id, starte = startClaude }) {
+  const p = pfade(ordner);
+  const a = ladeAuftraege(p.auftraege).find((x) => x.id === id);
+  if (!a || a.art !== "ideen" || a.status !== "wartet") throw new Error(`Ideen-Auftrag ${id} wartet nicht`);
+  aendere(ordner, id, (l, i) => { l[i] = { ...l[i], status: "laeuft", gestartet: new Date().toISOString() }; return l; });
+  rmSync(p.ergebnis(id), { force: true });
+  try {
+    await starte({ befehl: a.befehl, auftragId: id, wurzel, protokoll: p.protokoll(id), ergebnis: p.ergebnis(id) });
+  } catch (e) {
+    mkdirSync(dirname(p.protokoll(id)), { recursive: true });
+    writeFileSync(p.protokoll(id), `\n# Fehler: ${/** @type {any} */ (e).message}\n`, { flag: "a" });
+  }
+  const ergebnis = existsSync(p.ergebnis(id)) ? liesErgebnis(p.ergebnis(id)) : null;
+  aendere(ordner, id, (l, i) => { l[i] = { ...l[i], status: statusAusErgebnis(ergebnis), beendet: new Date().toISOString(), ergebnis }; return l; });
+}
+
+/**
  * Arbeitet die Warteschlange ab, ein Auftrag nach dem anderen.
  * @param {{ ordner?: string, wurzel?: string, starte?: typeof startClaude, folge?: (a: any, ergebnis: any) => any }} o
  *   folge: liefert nach einem Spiel-Auftrag ggf. einen Auftrag, der direkt dahinter eingereiht wird.
@@ -168,7 +190,8 @@ export async function arbeiteAb({ ordner = ORDNER, wurzel = WURZEL, starte = sta
   rmSync(p.anhalten, { force: true });
   try {
     // Wer die Sperre hält, hat keinen lebenden Vorgänger: was noch „laeuft“, stammt aus einem abgebrochenen Lauf.
-    const liegen = ladeAuftraege(p.auftraege).filter((a) => a.status === "laeuft");
+    // Ideen laufen in eigenen Prozessen neben der Warteschlange (fuehreIdeenAus) und gehören nicht dazu.
+    const liegen = ladeAuftraege(p.auftraege).filter((a) => a.status === "laeuft" && a.art !== "ideen");
     for (const a of liegen) {
       aendere(ordner, a.id, (l, i) => {
         l[i] = { ...l[i], status: "fehlgeschlagen", beendet: new Date().toISOString(), notiz: "Lauf abgebrochen (Prozess beendet, ohne Ergebnis)" };
@@ -230,6 +253,8 @@ async function main(argv) {
   if (befehl === "abarbeiten") {
     const { folgeAuftrag } = await import("./folge.mjs");
     await arbeiteAb({ folge: folgeAuftrag });
+  } else if (befehl === "ideen") {
+    await fuehreIdeenAus({ id: rest[0] });
   } else if (befehl === "naechster") {
     if (!nimmSperre(ORDNER, { pid: null, wer: "chat" })) {
       console.log(JSON.stringify({ laeuftSchon: sperre(ORDNER) }));
@@ -245,7 +270,7 @@ async function main(argv) {
     meldeFertig(ORDNER, id, status);
     console.log(`${id}: ${status}`);
   } else {
-    console.error("Aufruf: lauf.mjs abarbeiten | naechster | fertig <id> <status>");
+    console.error("Aufruf: lauf.mjs abarbeiten | ideen <id> | naechster | fertig <id> <status>");
     process.exitCode = 1;
   }
 }

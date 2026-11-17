@@ -27,15 +27,17 @@ test("echteDingeNachSpiel: Hauptthemen ohne Anleitung, Einstiegsklasse zuerst, h
 async function mitServer(f) {
   const ordner = mkdtempSync(join(tmpdir(), "verwaltung-"));
   let gestartet = 0;
+  const ideenGestartet = [];
   const server = erstelleServer({
     wurzel: WURZEL, ordner,
     starteLauf: () => { gestartet++; nimmSperre(ordner, { pid: process.pid, wer: "seite" }); },
+    starteIdeen: (id) => { ideenGestartet.push(id); },
   });
   await new Promise((ok) => server.listen(0, "127.0.0.1", ok));
   const basis = `http://127.0.0.1:${/** @type {any} */ (server.address()).port}`;
   const hol = (pfad, opt = {}) => fetch(basis + pfad, opt);
   const sende = (pfad, daten) => hol(pfad, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(daten ?? {}) });
-  try { await f({ hol, sende, ordner, gestartet: () => gestartet }); } finally {
+  try { await f({ hol, sende, ordner, gestartet: () => gestartet, ideenGestartet }); } finally {
     gibSperreFrei(ordner);
     server.close();
     rmSync(ordner, { recursive: true });
@@ -209,4 +211,14 @@ test("Server: gleichzeitige Wahl derselben Idee – genau eine 201", () => mitSe
   assert.deepEqual([b.status, antwortA].sort(), [201, 409]);
   const l = (await (await hol("/api/auftraege")).json()).auftraege;
   assert.equal(l.filter((x) => x.art === "spiel").length, 1);
+}));
+
+test("Server: Ideen-Auftrag startet sofort, Spiel-Auftrag nicht", () => mitServer(async ({ hol, sende, ideenGestartet }) => {
+  const u = await (await hol("/api/uebersicht")).json();
+  const [g1, g2] = Object.values(u.spiele).filter((s) => s.status === "geplant");
+  const a = await (await sende("/api/auftraege", { art: "ideen", ziel: g1.id })).json();
+  await sende("/api/auftraege", { art: "spiel", ziel: g2.id });
+  assert.deepEqual(ideenGestartet, [a.id]);
+  const r = await sende("/api/auftraege", { art: "ideen", ziel: g1.id });
+  assert.equal(r.status, 400, "zweiter Ideen-Auftrag für dasselbe Spiel");
 }));

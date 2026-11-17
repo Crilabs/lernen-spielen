@@ -37,10 +37,12 @@ async function api(pfad, daten) {
 const FERTIG = ["fertig", "probe"];
 // Fach eines Spiels aus dem Buchstaben der Katalog-Id (wie werkzeuge/spielbau/bauheft.mjs, FAECHER)
 const FACH_JE_BUCHSTABE = { M: "mathe", R: "geometrie", L: "lesen", Z: "sprechen", S: "schreiben", G: "grammatik" };
-const spielPlus = (id, s) => (["geplant", "geparkt"].includes(s.status)
-  ? ` <button class="plus" data-auftrag="spiel" data-ziel="${esc(id)}" title="${esc(s.name)} beauftragen">+</button>` : "")
-  // Ideen nur für Spiele, die noch nicht gebaut oder beauftragt sind (Christian, 2026-11-17)
-  + (s.status === "geplant" ? ` <button class="plus" data-auftrag="ideen" data-ziel="${esc(id)}" title="Ideen für ${esc(s.name)}">💡</button>` : "");
+// Geplante Spiele beginnen mit Ideen (sofort, du wählst danach); nur ein geparktes Spiel wird direkt neu beauftragt
+// (Christian, 2026-11-17: „die Warteschlange zeigt die Aufträge, die schon eine Idee haben“).
+const spielPlus = (id, s) => s.status === "geplant"
+  ? ` <button class="plus" data-auftrag="ideen" data-ziel="${esc(id)}" title="Ideen für ${esc(s.name)} (startet sofort)">+</button>`
+  : s.status === "geparkt"
+  ? ` <button class="plus" data-auftrag="spiel" data-ziel="${esc(id)}" title="${esc(s.name)} beauftragen">+</button>` : "";
 
 /** @param {any} t @param {boolean} mitEinfuehrung nur bei Lernthemen ohne Spiel: ein Spiel bringt seine Einführung selbst mit */
 function zeileLernthema(t, mitEinfuehrung) {
@@ -183,15 +185,15 @@ function eigeneIdee(id) {
 
 function zeigeAuftraege() {
   const l = A.auftraege;
-  const wartend = l.filter((a) => a.status === "wartet");
+  const wartend = l.filter((a) => a.status === "wartet" && a.art !== "ideen");
   const summe = wartend.reduce((s, a) => s + (a.schaetzung_eur ?? 0), 0);
   const unbekannt = wartend.some((a) => a.schaetzung_eur === null);
   $("#zahl-offen").textContent = wartend.length ? String(wartend.length) : "";
   const laeuft = l.find((a) => a.status === "laeuft");
   if (!gewaehlt && laeuft) gewaehlt = laeuft.id;
   // wartende in Warteschlangen-Reihenfolge oben, danach der Rest, neueste zuerst
-  const wartendeReihe = l.filter((a) => a.status === "wartet");
-  const rest = [...l].reverse().filter((a) => a.status !== "wartet" && a.status !== "gestrichen");
+  const wartendeReihe = l.filter((a) => a.status === "wartet" && a.art !== "ideen");
+  const rest = [...l].reverse().filter((a) => !wartendeReihe.includes(a) && a.status !== "gestrichen");
   const tabelle = [...wartendeReihe, ...rest].map((a) => {
     const steuer = a.status === "wartet"
       ? `<button class="klein" data-schritt="hoch" data-id="${esc(a.id)}" title="nach oben">↑</button>
@@ -336,10 +338,10 @@ function bestaetige(art, ziel) {
   if (art === "spiel") { const s = U.spiele[ziel]; text = `Spiel ${ziel} „${s.name}“ entwickeln (${s.hauptthemen.length} Hauptthemen).`; schaetzung = U.schaetzung.spiel; }
   if (art === "echte-dinge") { text = `„Mit echten Dingen“ für ${U.lernthemen.find((t) => t.id === ziel)?.name ?? ziel} schreiben.`; schaetzung = U.schaetzung.echteDingeJeThema; }
   if (art === "buch") { text = `Buch „${U.bibliothek.flatMap((r) => r.regale.flatMap((g) => g.buecher)).find((b) => b.id === ziel)?.titel ?? ziel}“ schreiben.`; schaetzung = U.schaetzung.buch; }
-  if (art === "ideen") { text = `Drei Ideen für Spiel ${ziel} „${U.spiele[ziel].name}“ – du wählst danach eine oder schreibst deine eigene.`; schaetzung = 1; }
+  if (art === "ideen") { text = `Drei Ideen für Spiel ${ziel} „${U.spiele[ziel].name}“ – startet sofort, du wählst danach eine oder schreibst deine eigene; erst dann kommt das Spiel in die Warteschlange.`; schaetzung = 1; }
   if (art === "einfuehrung") { text = `Einführung für „${U.lernthemen.find((t) => t.id === ziel)?.name ?? ziel}“ (freier Auftrag, kein Skill).`; }
   $("#b-text").textContent = text;
-  $("#b-schaetzung").textContent = schaetzung === null ? "Schätzung: unbekannt" : `Schätzung: ca. ${eur(schaetzung)} (startet erst mit „Warteschlange abarbeiten“)`;
+  $("#b-schaetzung").textContent = schaetzung === null ? "Schätzung: unbekannt" : `Schätzung: ca. ${eur(schaetzung)} ${art === "ideen" ? "(startet sofort, neben der Warteschlange)" : "(startet erst mit „Warteschlange abarbeiten“)"}`;
   d.returnValue = "";
   d.showModal();
   d.addEventListener("close", async () => {

@@ -156,7 +156,8 @@ export function lehneAb(liste, id) {
   return liste.map((x, j) => (j === i ? { ...x, status: "erledigt", notiz: "abgelehnt" } : x));
 }
 
-export const naechsterWartender = (liste) => liste.find((a) => a.status === "wartet") ?? null;
+/** Nächster Auftrag der Warteschlange; Ideen laufen sofort und eigenständig, nie aus der Warteschlange (Christian, 2026-11-17). */
+export const naechsterWartender = (liste) => liste.find((a) => a.status === "wartet" && a.art !== "ideen") ?? null;
 
 /** Status eines Auftrags aus der Ergebnisdatei des Skills (null = keine Datei). */
 export function statusAusErgebnis(ergebnis) {

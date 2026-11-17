@@ -52,3 +52,10 @@ test("Skill spielideen: Kosten im Worktree vor dem Commit, nie im Hauptrepo", ()
   assert.ok(buchen > 0 && buchen < s.indexOf("`docs(ideen): Spielideen"), "Buchung vor dem Commit");
   assert.ok(buchen < s.indexOf("git merge --ff-only"), "Buchung vor dem Merge");
 });
+
+test("Seite: „+“ bei geplanten Spielen startet Ideen, Warteschlange zählt Ideen nicht", () => {
+  const app = lies("werkzeuge/verwaltung/seite/app.js");
+  assert.match(app, /s\.status === "geplant"[\s\S]{0,200}data-auftrag="ideen"[^>]*>\+</);
+  assert.ok(!app.includes("💡"));
+  assert.match(app, /const wartend = l\.filter\(\(a\) => a\.status === "wartet" && a\.art !== "ideen"\)/);
+});

@@ -29,6 +29,16 @@ export function starteLaufGetrennt() {
   kind.unref();
 }
 
+/** Startet einen Ideen-Auftrag sofort als eigenen Prozess, neben der Warteschlange. */
+export function starteIdeenGetrennt(id) {
+  const log = join(ORDNER, "protokolle", `${id}.prozess.log`);
+  mkdirSync(dirname(log), { recursive: true });
+  const fd = openSync(log, "w");
+  const kind = spawn(process.execPath, [join(ORDNER, "lauf.mjs"), "ideen", id], { cwd: WURZEL, detached: true, stdio: ["ignore", fd, fd] });
+  closeSync(fd);
+  kind.unref();
+}
+
 /** Schätzung in Euro für einen neuen Auftrag (null = unbekannt). */
 /** Ideen-Auftrag: ein Agent, drei Skizzen (Spec 2026-11-17). */
 export const SCHAETZUNG_IDEEN = 1;
@@ -68,7 +78,7 @@ export function pruefeHerkunft(req) {
   return 0;
 }
 
-export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = starteLaufGetrennt } = {}) {
+export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = starteLaufGetrennt, starteIdeen = starteIdeenGetrennt } = {}) {
   const p = pfade(ordner);
   const auftraege = () => ladeAuftraege(p.auftraege);
   const uebersicht = () => baueUebersicht(liesQuellen(wurzel), auftraege());
@@ -113,6 +123,7 @@ export function erstelleServer({ wurzel = WURZEL, ordner = ORDNER, starteLauf = 
         if (fehler) return antwort(400, { fehler });
         a.schaetzung_eur = schaetze(uebersicht(), a.art, a.ziel);
         speichereAuftraege(p.auftraege, [...auftraege(), a]);
+        if (a.art === "ideen") starteIdeen(a.id); // sofort, nicht über die Warteschlange (Christian, 2026-11-17)
         return antwort(201, a);
       }
       const m = pfad.match(/^\/api\/auftraege\/([^/]+)\/(hoch|runter|streichen)$/);

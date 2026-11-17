@@ -131,3 +131,9 @@ test("echtes Repo: 956 Lernthemen, 114 Sachthemen, M37 vorhanden", () => {
   assert.equal(u.sachthemen.length, 114);
   assert.ok(u.spiele.M37);
 });
+
+test("baueUebersicht: offener Ideen-Auftrag macht das Spiel „beauftragt“, erledigter nicht", () => {
+  assert.equal(baueUebersicht(quellen(), [{ art: "ideen", ziel: "M01", status: "laeuft" }]).spiele.M01.status, "beauftragt");
+  assert.equal(baueUebersicht(quellen(), [{ art: "ideen", ziel: "M01", status: "wartet-auf-christian" }]).spiele.M01.status, "beauftragt");
+  assert.equal(baueUebersicht(quellen(), [{ art: "ideen", ziel: "M01", status: "beantwortet" }]).spiele.M01.status, "geplant");
+});
