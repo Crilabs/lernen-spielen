@@ -2,6 +2,13 @@
 
 ## Unveröffentlicht
 
+## v1.2.5
+
+- **Tagesbrief (neu):** Im Elternbereich lässt sich ein Brief per E-Mail einrichten. Er erzählt zur gewählten Uhrzeit, was das Kind gespielt, gekonnt und gelesen hat, mit Fotos und einer Anleitung „Mit echten Dingen“ für zu Hause.
+- **„Weißt du noch?“ auch am Rundenende:** Nach einer Spielrunde kann eine Erinnerungsfrage aus einem gelesenen Buch kommen, zusammen mit der Bibliothek höchstens zwei am Tag.
+- **Erinnerungsfrage:** Sie zeigt das Foto der Seite mit der Antwort und hebt die vorgelesene Antwort hervor; wählen lässt sich erst, wenn alle drei vorgelesen sind.
+- **Von Kopf bis Fuß (neu):** „Zehn Finger, zwei Knie und ein Bauchnabel“ ist ein neues Sachbuch in der Bibliothek.
+- **Dreieck und Kreis (neu, zur Probe):** Nomen und Verben mit den Wortartsymbolen, Kofi hüpft im Hinterhof die Kreidereihe entlang.
 ## v1.2.4
 
 - **Bücher in der Spielzeit einfacher:** Im Elternbereich gibt es nur noch eine Zahl „Höchstens“ (aus oder 1 bis 10), dazu die Wahl „Am Tag“ oder „In der Woche“. Die Grenze gilt fürs Vorlesen; mit dem Häkchen „Gilt auch für Lesen“ zählen Vorlesen und Selbstlesen zusammen. Eine Einstellung aus v1.2.1 wird übernommen.
