@@ -50,7 +50,8 @@ export function phaseAusTranskript(text, id, branch) {
     if (d?.type !== "user") continue;
     const inhalt = typeof d.message?.content === "string" ? d.message.content : (d.message?.content ?? []).map((c) => c.text ?? "").join("\n");
     const m = inhalt.match(/\[spielbau:(idee|bau|pruefstand|pruefung) ([A-Z]\d\d) ([^\]\s]+)\]/);
-    return m && m[2] === id && m[3] === branch ? m[1] : null;
+    // Die Workflow-Umgebung stellt eine eigene Nachricht vor den Auftrag: weitersuchen bis zur ersten Marke.
+    if (m) return m[2] === id && m[3] === branch ? m[1] : null;
   }
   return null;
 }

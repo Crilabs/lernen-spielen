@@ -166,6 +166,8 @@ test("Abschluss: gebucht werden nur Transkripte mit der Marke dieses Laufs", () 
   assert.equal(phaseAusTranskript(zeile("[spielbau:bau M37 spiel-m37-neu]"), "M37", "spiel-m37"), null);
   assert.equal(phaseAusTranskript(zeile("[spielbau:idee M15 spiel-m15]"), "M37", "spiel-m37"), null);
   assert.equal(phaseAusTranskript(zeile("irgendein Auftrag"), "M37", "spiel-m37"), null);
+  // Workflow-Umgebung stellt eine eigene Nachricht vor den Auftrag (G14, 2026-11-17)
+  assert.equal(phaseAusTranskript(zeile("[Workflow harness — user request] …") + "\n" + zeile("[spielbau:idee M37 spiel-m37]"), "M37", "spiel-m37"), "idee");
   for (const p of ["idee", "bau", "pruefstand", "pruefung", "steuerung"]) assert.ok(CLAUDE_PHASEN.includes(p), p);
 });
 
