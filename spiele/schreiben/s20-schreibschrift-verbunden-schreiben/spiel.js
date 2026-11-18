@@ -56,8 +56,6 @@ const ARTEN = [{ art: "schreibschrift", stufen: ["material", "vorstellung", "kop
 const AUFGABEN_JE_RUNDE = 8;
 /** Längstens so lange wartet die Folge auf das Ende der Wirkung (Idee §1: etwa 2,5 s). */
 const FOLGE_MAX_MS = 4200;
-/** Wie viele Fotos an die Leine passen, bevor das älteste Platz macht. */
-const LEINE_PLAETZE = 11;
 /** Eine Spur unter dieser Wegstrecke (Einheiten) ist ein Tupfer: sie sprüht kurz und ist kein Versuch. */
 const MIN_WEG = 40;
 
@@ -234,9 +232,13 @@ const remPx = () => parseFloat(getComputedStyle(document.documentElement).fontSi
 
 /**
  * Maße der Zeichenfläche. Zwei Zeilen übereinander (e = Ela oben, k = Kind unten), je 300 Einheiten hoch
- * (Oberlinie 0, Mittellinie 100, Grundlinie 200, Unterlänge bis 300); s = Bildpunkte je Einheit.
+ * (Oberlinie 0, Mittellinie 100, Grundlinie 200, Unterlänge bis 300). Die Kinderzeile bekommt den Großteil der Fläche (ihr
+ * Mittelband ist etwa doppelt so hoch wie Elas), Elas Vorlage steht kleiner direkt darüber; sK / sE = Bildpunkte je Einheit.
  */
-const G = { s: 0.1, w: 0, h: 0, dpr: 1, pad: 0, x0: 0, yE: 0, yK: 0 };
+const G = { sK: 0.1, sE: 0.045, w: 0, h: 0, dpr: 1, pad: 0, x0: 0, yE: 0, yK: 0 };
+/** Elas Zeile im Verhältnis zur Kinderzeile, und der Abstand dazwischen (Einheiten der Kinderzeile). */
+const ELA_ANTEIL = 0.45;
+const ZEILENABSTAND = 36;
 
 /** Passt den Canvas an seine Größe an und wählt den Maßstab für ein Wort der Breite `breite` (Einheiten). @param {number} [breite] */
 function messen(breite = 420) {
@@ -248,31 +250,35 @@ function messen(breite = 420) {
   G.dpr = dpr;
   G.w = r.width;
   G.h = r.height;
-  G.pad = 1.8 * remPx();
-  const hoeheE = 300 + 56 + 300;
-  const sH = (G.h - 2 * G.pad) / hoeheE;
+  G.pad = 1.4 * remPx();
+  const hoehe = 300 * ELA_ANTEIL + ZEILENABSTAND + 300;
+  const sH = (G.h - 2 * G.pad) / hoehe;
   const sW = (G.w - 2 * G.pad) / (breite + 190);
-  G.s = Math.min(sH, sW);
-  G.x0 = G.pad + 80 * G.s;
-  G.yE = (G.h - hoeheE * G.s) / 2;
-  G.yK = G.yE + (300 + 56) * G.s;
+  G.sK = Math.min(sH, sW);
+  G.sE = G.sK * ELA_ANTEIL;
+  G.x0 = G.pad + 80 * G.sK;
+  G.yE = (G.h - hoehe * G.sK) / 2;
+  G.yK = G.yE + (300 * ELA_ANTEIL + ZEILENABSTAND) * G.sK;
   zeichneAlles();
 }
 
 /** Einheiten in Bildpunkte der Zeile. @param {"e" | "k"} z @param {{ x: number, y: number }} p */
-const px = (z, p) => ({ x: G.x0 + p.x * G.s, y: (z === "e" ? G.yE : G.yK) + p.y * G.s });
+const px = (z, p) => {
+  const s = z === "e" ? G.sE : G.sK;
+  return { x: G.x0 + p.x * s, y: (z === "e" ? G.yE : G.yK) + p.y * s };
+};
 /** Bildpunkte (Canvas) in Einheiten der Kinderzeile. @param {number} x @param {number} y */
-const einh = (x, y) => ({ x: (x - G.x0) / G.s, y: (y - G.yK) / G.s });
+const einh = (x, y) => ({ x: (x - G.x0) / G.sK, y: (y - G.yK) / G.sK });
 
 /**
  * @typedef {{ z: "e" | "k", art: "ela" | "kind" | "stueck" | "hilfe", pts: { x: number, y: number }[], teil: number, alpha: number,
- *   dicke: number, punkt?: boolean }} Spur
+ *   dicke: number, punkt?: boolean, boost?: number }} Spur
  */
 /** @type {Spur[]} */
 let spuren = [];
 /** Ein kurzes Aufglühen der Linie oder Stelle (Band): { y (Einheiten), bis (ms) }. @type {{ z: "k", y: number, bis: number, von: number } | null} */
 let blinkLinie = null;
-/** Ringe und Glühen auf einer Stelle: { z, x, y (Einheiten), bis, von }. @type {{ z: "e" | "k", x: number, y: number, von: number, bis: number }[]} */
+/** Ringe und Glühen auf einer Stelle: { z, x, y (Einheiten), bis, von, ring }. @type {{ z: "e" | "k", x: number, y: number, von: number, bis: number, ring?: boolean }[]} */
 let gluehen = [];
 
 /** @type {{ x: number, y: number, vx: number, vy: number, l: number, d: number, r: number, hell: number }[]} */
@@ -324,18 +330,19 @@ function takt(jetzt) {
 /** Lineatur einer Zeile: Mittelband als Streifen, Oberlinie, Mittellinie und Grundlinie. @param {"e" | "k"} z @param {number} jetzt */
 function lineatur(z, jetzt) {
   const y0 = z === "e" ? G.yE : G.yK;
+  const s = z === "e" ? G.sE : G.sK;
   const x1 = G.pad;
   const x2 = G.w - G.pad;
   const rem = remPx();
   cx.fillStyle = "rgba(125, 155, 235, 0.13)";
-  cx.fillRect(x1, y0 + 100 * G.s, x2 - x1, 100 * G.s);
+  cx.fillRect(x1, y0 + 100 * s, x2 - x1, 100 * s);
   const linie = (/** @type {number} */ v, /** @type {number} */ alpha, /** @type {number} */ dicke, /** @type {number[]} */ strich = []) => {
     cx.beginPath();
     cx.setLineDash(strich);
     cx.strokeStyle = `rgba(170, 195, 250, ${alpha})`;
-    cx.lineWidth = dicke * rem;
-    cx.moveTo(x1, y0 + v * G.s);
-    cx.lineTo(x2, y0 + v * G.s);
+    cx.lineWidth = dicke * rem * (z === "e" ? 0.7 : 1);
+    cx.moveTo(x1, y0 + v * s);
+    cx.lineTo(x2, y0 + v * s);
     cx.stroke();
     cx.setLineDash([]);
   };
@@ -348,8 +355,8 @@ function lineatur(z, jetzt) {
     cx.beginPath();
     cx.strokeStyle = `rgba(255, 233, 160, ${0.85 * a})`;
     cx.lineWidth = 0.5 * rem;
-    cx.moveTo(x1, y0 + blinkLinie.y * G.s);
-    cx.lineTo(x2, y0 + blinkLinie.y * G.s);
+    cx.moveTo(x1, y0 + blinkLinie.y * s);
+    cx.lineTo(x2, y0 + blinkLinie.y * s);
     cx.stroke();
   }
 }
@@ -380,11 +387,13 @@ function leuchteSpur(s) {
     for (let i = 1; i < pp.length; i++) cx.lineTo(pp[i].x, pp[i].y);
     cx.stroke();
   };
-  schicht(3.2, 0.1, f.glanz);
-  schicht(1.9, 0.2, f.glanz);
-  schicht(1.15, 0.45, f.glanz);
+  // boost: die Spur glüht einmal heller (kurz vor dem Foto)
+  const b = s.boost ?? 0;
+  schicht(3.2 * (1 + 0.9 * b), 0.1 + 0.2 * b, f.glanz);
+  schicht(1.9 * (1 + 0.7 * b), 0.2 + 0.25 * b, f.glanz);
+  schicht(1.15 * (1 + 0.5 * b), 0.45 + 0.3 * b, f.glanz);
   cx.globalCompositeOperation = "source-over";
-  schicht(0.62, 0.95, f.kern);
+  schicht(0.62 * (1 + 0.3 * b), 0.95, f.kern);
 }
 
 /** Zeichnet alles neu: Lineaturen, Spuren, Spitzenglühen, Funken. @param {number} [jetzt] */
@@ -401,7 +410,7 @@ function zeichneAlles(jetzt = performance.now()) {
   for (const s of spuren) {
     if (!s.punkt && s.teil < s.pts.length + 0.5 && s.alpha > 0.3 && s.pts.length && (s.art === "kind" ? schreibtGerade : s.teil < s.pts.length)) {
       const p = px(s.z, s.pts[Math.min(s.teil, s.pts.length) - 1] ?? s.pts[0]);
-      const r = (2.2 + Math.random() * 0.5) * rem;
+      const r = (2.2 + Math.random() * 0.5) * rem * Math.max(0.7, s.dicke);
       const grad = cx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
       grad.addColorStop(0, `rgba(${FARBEN[s.art].kern}, 0.95)`);
       grad.addColorStop(0.35, `rgba(${FARBEN[s.art].glanz}, 0.5)`);
@@ -420,6 +429,15 @@ function zeichneAlles(jetzt = performance.now()) {
     grad.addColorStop(1, "rgba(255, 200, 90, 0)");
     cx.fillStyle = grad;
     cx.fillRect(p.x - r, p.y - r, 2 * r, 2 * r);
+    if (g.ring) {
+      // der Ring liegt direkt auf der Spur des Kindes (Lücke) und verblasst zuletzt
+      const ra = u < 0.75 ? 1 : (1 - u) / 0.25;
+      cx.beginPath();
+      cx.arc(p.x, p.y, 4.2 * rem, 0, Math.PI * 2);
+      cx.lineWidth = 0.6 * rem;
+      cx.strokeStyle = `rgba(255, 217, 90, ${0.95 * ra})`;
+      cx.stroke();
+    }
   }
   for (const f of funken) {
     cx.fillStyle = `rgba(255, ${Math.round(190 + 50 * f.hell)}, ${Math.round(90 + 120 * f.hell)}, ${Math.max(0, f.l) * 0.95})`;
@@ -512,7 +530,6 @@ const elaBewegung = (id) => { if (!lauf.skip) ela.bewegung(id); };
 
 const kamera = $("kamera");
 kamera.innerHTML = `<div class="ring" id="kamera-ring"></div>${kameraSvg()}`;
-const blitz = $("blitz");
 
 /** Ein Tipp auf Ela (Stufe vorstellung): Ela schreibt das Wort noch einmal. @type {(() => void) | null} */
 let elaTippen = null;
@@ -534,7 +551,7 @@ async function elaSchreibt(L, wege, luft = [], { tempo = 1, bleibt = "blass", ho
     if (!weg.length) continue;
     const punkt = !!luft[k];
     const q = punkt ? weg : P.abtasten(weg, 6);
-    const spur = neueSpur(z, art, q, L.skip ? q.length : 0, { punkt, alpha: bleibt === "stueck" ? 1 : 0.95 });
+    const spur = neueSpur(z, art, q, L.skip ? q.length : 0, { punkt, alpha: bleibt === "stueck" ? 1 : 0.95, dicke: z === "e" ? 0.62 : 1 });
     gemacht.push(spur);
     if (L.skip) continue;
     const spitzenNr = new Set(punkt ? [] : P.spitzenIndizes(q));
@@ -630,11 +647,14 @@ function fotoSvg(text) {
 }
 
 // --- Foto: gemalt auf einen kleinen Canvas, hängt an einer Klammer --------------------------------------------
-/** Ein Foto der Spuren (Einheiten). @param {{ x: number, y: number }[][]} striche @param {{ x: number, y: number } | null} ring */
-function machFoto(striche, ring) {
+/** Größe der Foto-Zeichenfläche (Verhältnis wie das Foto an der Leine, siehe --foto-b / --foto-h in index.html). */
+const FOTO_PX = { b: 640, h: 300 };
+
+/** Ein Foto der Spuren (Einheiten). @param {{ x: number, y: number }[][]} striche */
+function machFoto(striche) {
   const el = document.createElement("div");
   el.className = "foto";
-  el.innerHTML = `<div class="klammer"></div><div class="rahmen"><canvas width="420" height="316"></canvas></div>`;
+  el.innerHTML = `<div class="klammer"></div><div class="rahmen"><canvas width="${FOTO_PX.b}" height="${FOTO_PX.h}"></canvas></div>`;
   const c = /** @type {HTMLCanvasElement} */ (el.querySelector("canvas"));
   const g = /** @type {CanvasRenderingContext2D} */ (c.getContext("2d"));
   const alle = striche.flat();
@@ -643,11 +663,14 @@ function machFoto(striche, ring) {
   if (alle.length) {
     const xs = alle.map((p) => p.x);
     const ys = alle.map((p) => p.y);
-    const rand = 46;
+    const rand = 40;
     const bx = Math.min(...xs) - rand;
-    const by = Math.min(Math.min(...ys), 100) - rand;
+    // Die Fläche zeigt das Wort, so groß es passt (mindestens das Mittelband, damit ein flaches Wort nicht aufgeblasen wirkt).
+    const oben = Math.min(...ys, 120);
+    const unten = Math.max(...ys, 190);
+    const by = oben - rand;
     const bb = Math.max(...xs) - Math.min(...xs) + 2 * rand;
-    const bh = Math.max(Math.max(...ys), 200) - Math.min(Math.min(...ys), 100) + 2 * rand;
+    const bh = unten - oben + 2 * rand;
     const sk = Math.min(c.width / bb, c.height / bh);
     const ox = (c.width - bb * sk) / 2 - bx * sk;
     const oy = (c.height - bh * sk) / 2 - by * sk;
@@ -671,14 +694,6 @@ function machFoto(striche, ring) {
       }
     }
     g.globalCompositeOperation = "source-over";
-    if (ring) {
-      const r = um(ring);
-      g.beginPath();
-      g.arc(r.x, r.y, 34 * sk + 10, 0, Math.PI * 2);
-      g.lineWidth = 7;
-      g.strokeStyle = "#FFD95A";
-      g.stroke();
-    }
   }
   spielflaeche.append(el);
   return el;
@@ -693,33 +708,55 @@ function rechteck(el) {
 /** Transform eines Fotos: obere Mitte bei (x, y). @param {number} x @param {number} y @param {number} [skala] @param {number} [grad] @param {HTMLElement} el */
 const fotoTransform = (el, x, y, skala = 1, grad = 0) => `translate(${(x - el.offsetWidth / 2).toFixed(1)}px, ${y.toFixed(1)}px) rotate(${grad}deg) scale(${skala})`;
 
-/** Fotos an der Leine, in der Reihenfolge, wie sie hingen. @type {HTMLElement[]} */
+/** Fotos an der Leine, in der Reihenfolge, wie sie hingen (das neueste zuletzt, es liegt zuoberst). @type {HTMLElement[]} */
 let leineFotos = [];
+/** Zählt alle Fotos dieser Runde (für die Abwechslung im Flug und die Neigung an der Klammer). */
 let leineNr = 0;
-/** Das Foto, das noch bei der Kamera liegt (nach einem Fehlversuch). @type {HTMLElement | null} */
-let liegtFoto = null;
+/** So viele Fotos hängen höchstens an der Leine; eine Runde hat acht Aufgaben. */
+const LEINE_MAX = 8;
+const neigung = (/** @type {HTMLElement} */ el) => ((Number(el.dataset.nr) * 7) % 5) - 2;
 
-/** Platz an der Leine: obere Mitte des Fotos in Bildpunkten der Spielfläche. @param {number} nr */
-function leinePlatz(nr) {
+/**
+ * Platz des i-ten von n Fotos: obere Mitte in Bildpunkten der Spielfläche. Die Fotos behalten ihre Größe; ist die Leine voll,
+ * rücken sie zusammen und überlappen (das neueste zuoberst), statt kleiner zu werden. @param {number} i @param {number} n @param {number} bw Breite eines Fotos
+ */
+function leinePlatz(i, n, bw) {
   const l = rechteck($("leine"));
-  const u = 0.045 + 0.91 * (((nr % LEINE_PLAETZE) + 0.5) / LEINE_PLAETZE);
+  const rand = 1.2 * remPx();
+  const frei = l.w - 2 * rand - bw;
+  const schritt = n > 1 ? Math.min(bw + 0.8 * remPx(), frei / (n - 1)) : 0;
+  const x = l.l + rand + bw / 2 + i * schritt;
+  const u = Math.min(0.98, Math.max(0.02, (x - l.l) / l.w));
   const seilY = (1.5 + 14 * u * (1 - u)) / 10 * l.h;
-  return { x: l.l + u * l.w, y: l.t + seilY - 1.5 * remPx() };
+  return { x, y: l.t + seilY - 1.5 * remPx() };
 }
-/** Hängt ein Foto ohne Flug an seinen Platz. @param {HTMLElement} el @param {number} nr */
-function haengeAn(el, nr) {
-  const p = leinePlatz(nr);
-  el.style.transform = fotoTransform(el, p.x, p.y, 1, ((nr * 7) % 5) - 2);
+/**
+ * Alle Fotos an ihre Plätze (nach einem neuen Foto rücken die anderen zusammen).
+ * @param {{ ausser?: HTMLElement | null, ms?: number }} [o]
+ */
+function ordneLeine({ ausser = null, ms = 0 } = {}) {
+  const n = leineFotos.length;
+  leineFotos.forEach((el, i) => {
+    if (el === ausser) return;
+    const p = leinePlatz(i, n, el.offsetWidth);
+    el.style.transition = ms && !wenigBewegung() ? `transform ${ms}ms ease-out` : "none";
+    el.style.transform = fotoTransform(el, p.x, p.y, 1, neigung(el));
+    el.style.zIndex = String(6 + i);
+  });
+}
+/** Nimmt ein Foto in die Reihe der Leine auf (ist sie voll, geht das älteste); liefert seinen Platz. @param {HTMLElement} foto */
+function nimmAnDieLeine(foto) {
+  foto.dataset.nr = String(leineNr++);
+  leineFotos.push(foto);
+  while (leineFotos.length > LEINE_MAX) leineFotos.shift()?.remove();
+  const i = leineFotos.length - 1;
+  foto.style.zIndex = String(6 + i);
+  return leinePlatz(i, leineFotos.length, foto.offsetWidth);
 }
 function raeumeLeine() {
   for (const f of leineFotos) f.remove();
   leineFotos = [];
   leineNr = 0;
-  entferneLiegt();
-}
-function entferneLiegt() {
-  liegtFoto?.remove();
-  liegtFoto = null;
 }
 
 /** Die Fläche, auf der das Wort steht (Mitte oben, Breite, Höhe in Bildpunkten der Spielfläche). @param {{ x: number, y: number }[]} pts Einheiten der Kinderzeile */
@@ -728,25 +765,57 @@ function wortFlaeche(pts) {
   if (!pts.length) return { x: c.l + c.w / 2, y: c.t + G.yK, b: c.w / 3 };
   const xs = pts.map((p) => px("k", p).x);
   const ys = pts.map((p) => px("k", p).y);
-  return { x: c.l + (Math.min(...xs) + Math.max(...xs)) / 2, y: c.t + Math.min(...ys, G.yK + 100 * G.s), b: Math.max(...xs) - Math.min(...xs) };
+  return { x: c.l + (Math.min(...xs) + Math.max(...xs)) / 2, y: c.t + Math.min(...ys, G.yK + 100 * G.sK), b: Math.max(...xs) - Math.min(...xs) };
 }
 
-/** Der Blitz der Kamera: die Fläche leuchtet kurz auf, die Kamera federt. @param {Lauf} L @param {number} [stark] */
-async function klickUndBlitz(L, stark = 0.85) {
-  const { bewege } = mit(L);
+/**
+ * Der Klick der Kamera: kurzes warmes Aufleuchten an der Kamera (Linse und Blitz, ein warmer Hof um sie), kein Schleier über der Fläche.
+ * @param {Lauf} L
+ */
+async function klickUndBlitz(L) {
+  const { warte } = mit(L);
   klang.klick();
+  if (L.skip) return;
   const lampe = kamera.querySelector(".blitzlicht");
-  if (!L.skip) {
-    if (lampe) /** @type {SVGElement} */ (lampe).animate?.([{ opacity: 0 }, { opacity: 1, offset: 0.2 }, { opacity: 0 }], { duration: 380 });
-    kamera.animate?.([{ transform: "scale(1)" }, { transform: "scale(1.06, 0.95)", offset: 0.25 }, { transform: "scale(0.99, 1.02)", offset: 0.6 }, { transform: "scale(1)" }], { duration: 360 });
-  }
-  await bewege(blitz, [{ opacity: 0 }, { opacity: stark, offset: 0.18 }, { opacity: 0 }], 300, { opacity: "0" }, { easing: "ease-out" });
+  if (lampe) /** @type {SVGElement} */ (lampe).animate?.([{ opacity: 0 }, { opacity: 1, offset: 0.2 }, { opacity: 0.6, offset: 0.55 }, { opacity: 0 }], { duration: 460 });
+  kamera.animate?.([
+    { transform: "scale(1)", filter: "drop-shadow(0 0 0 rgba(255, 196, 96, 0))" },
+    { transform: "scale(1.06, 0.95)", filter: "drop-shadow(0 0 3.4rem rgba(255, 196, 96, 0.95)) brightness(1.12)", offset: 0.25 },
+    { transform: "scale(0.99, 1.02)", filter: "drop-shadow(0 0 2rem rgba(255, 196, 96, 0.5))", offset: 0.6 },
+    { transform: "scale(1)", filter: "drop-shadow(0 0 0 rgba(255, 196, 96, 0))" }], { duration: 460 });
+  await warte(260);
+}
+
+/**
+ * Die Spur des Kindes glüht einmal heller (kurz vor dem Klick), dann schrumpft sie zum Foto.
+ * @param {Lauf} L @param {Spur[]} liste @param {number} ms
+ */
+function gluehAuf(L, liste, ms) {
+  if (L.skip || !liste.length) return Promise.resolve();
+  return new Promise((fertig) => {
+    const t0 = performance.now();
+    const a = {
+      tick(t) {
+        const u = Math.min(1, (t - t0) / ms);
+        for (const sp of liste) sp.boost = Math.sin(Math.min(1, u * 1.1) * Math.PI * 0.5);
+        if (u >= 1) ende();
+      },
+    };
+    const ende = () => {
+      animierte.delete(a);
+      L.uhren.delete(ende);
+      fertig(undefined);
+    };
+    animierte.add(a);
+    L.uhren.add(ende);
+    an();
+  });
 }
 
 /** Das Leuchtwort wird zum Foto und fliegt an die Leine (die Wirkung einer richtigen Antwort). @param {Lauf} L @param {{ x: number, y: number }[][]} striche */
 async function fotoAnDieLeine(L, striche) {
   const { warte } = mit(L);
-  const nr = leineNr++;
+  const nr = leineNr;
   const alle = striche.flat();
   const von = wortFlaeche(alle);
   const variante = nr % 7 === 3 ? "hoch" : "gerade";
@@ -756,44 +825,43 @@ async function fotoAnDieLeine(L, striche) {
     if (letzte) { const p = px("k", letzte); streue(p.x, p.y, 36, 1.8, 1); klang.zisch(); }
     await warte(420);
   }
-  const foto = machFoto(striche, null);
+  const foto = machFoto(striche);
   foto.style.transform = fotoTransform(foto, von.x, von.y, 0.01);
   foto.style.opacity = "0";
-  const platz = leinePlatz(nr);
-  // Wer schon an diesem Platz hängt (die Leine ist voll), macht Platz.
-  const alt = leineFotos.find((f) => f.dataset.platz === String(nr % LEINE_PLAETZE));
-  if (alt) { alt.remove(); leineFotos = leineFotos.filter((f) => f !== alt); }
-  foto.dataset.platz = String(nr % LEINE_PLAETZE);
-  leineFotos.push(foto);
+  // Die Spur glüht einmal heller, die Kamera leuchtet warm auf, dann schrumpft die Spur zum Foto.
+  await gluehAuf(L, spuren.filter((s) => s.art === "kind"), 340);
+  const platz = nimmAnDieLeine(foto);
+  ordneLeine({ ausser: foto, ms: 600 });
   await klickUndBlitz(L);
   entferneSpuren((s) => s.art === "kind");
   elaBewegung(nr % 7 === 5 ? "doppelblick" : "nicken");
+  const g0 = neigung(foto);
   if (L.skip || wenigBewegung() || typeof foto.animate !== "function") {
     foto.style.opacity = "1";
-    haengeAn(foto, nr);
+    foto.style.transform = fotoTransform(foto, platz.x, platz.y, 1, g0);
     return;
   }
   const { bewege } = mit(L);
-  const sk = Math.max(1.2, Math.min(5, (von.b + 6 * remPx()) / foto.offsetWidth));
+  // Das Foto beginnt so groß wie das Wort in der Zeile und schrumpft auf seinen Platz.
+  const sk = Math.max(1.1, Math.min(4, (von.b + 6 * remPx()) / foto.offsetWidth));
   const start = fotoTransform(foto, von.x, von.y, sk, 0);
-  const oben = fotoTransform(foto, von.x, von.y - 6 * remPx(), sk * 0.9, -3);
-  const mitte = fotoTransform(foto, (von.x + platz.x) / 2, Math.min(von.y, platz.y) + 4 * remPx(), 0.55, 6);
-  const ziel = fotoTransform(foto, platz.x, platz.y, 1, ((nr * 7) % 5) - 2);
+  const oben = fotoTransform(foto, von.x, von.y - 5 * remPx(), sk * 0.92, -3);
+  const mitte = fotoTransform(foto, (von.x + platz.x) / 2, Math.min(von.y, platz.y) + 3 * remPx(), Math.max(0.8, (sk + 1) / 2.4), 6);
+  const ziel = fotoTransform(foto, platz.x, platz.y, 1, g0);
   foto.style.opacity = "1";
   if (variante === "hoch") {
     // Ela hält das Foto kurz hoch (zum Kind), dann kommt es an die Leine.
-    await bewege(foto, [{ transform: start }, { transform: oben }], 380, { transform: oben }, { easing: "ease-out" });
-    await warte(480);
-    await bewege(foto, [{ transform: oben }, { transform: mitte, offset: 0.55 }, { transform: ziel }], 640, { transform: ziel }, { easing: "ease-in-out" });
+    await bewege(foto, [{ transform: start }, { transform: oben }], 320, { transform: oben }, { easing: "ease-out" });
+    await warte(380);
+    await bewege(foto, [{ transform: oben }, { transform: mitte, offset: 0.55 }, { transform: ziel }], 600, { transform: ziel }, { easing: "ease-in-out" });
   } else {
-    await bewege(foto, [{ transform: start }, { transform: mitte, offset: 0.5 }, { transform: ziel }], 760, { transform: ziel }, { easing: "cubic-bezier(.25,.6,.35,1)" });
+    await bewege(foto, [{ transform: start }, { transform: mitte, offset: 0.5 }, { transform: ziel }], 640, { transform: ziel }, { easing: "cubic-bezier(.25,.6,.35,1)" });
   }
   klang.plopp();
   // Pendel: die Klammer fängt das Foto, es schwingt aus.
-  const g0 = ((nr * 7) % 5) - 2;
   await bewege(foto, [
-    { transform: ziel }, { transform: fotoTransform(foto, platz.x, platz.y, 1, g0 + 9) }, { transform: fotoTransform(foto, platz.x, platz.y, 1, g0 - 5), offset: 0.55 },
-    { transform: fotoTransform(foto, platz.x, platz.y, 1, g0 + 2), offset: 0.8 }, { transform: ziel }], 640, { transform: ziel }, { easing: "ease-out" });
+    { transform: ziel }, { transform: fotoTransform(foto, platz.x, platz.y, 1, g0 + 6) }, { transform: fotoTransform(foto, platz.x, platz.y, 1, g0 - 3), offset: 0.55 },
+    { transform: fotoTransform(foto, platz.x, platz.y, 1, g0 + 1), offset: 0.8 }, { transform: ziel }], 480, { transform: ziel }, { easing: "ease-out" });
 }
 
 // =====================================================================================================
@@ -818,7 +886,7 @@ const eingabe = {
 const leereKind = () => entferneSpuren((s) => s.art === "kind");
 
 /** Die Grenze zwischen Elas Zeile und der Kinderzeile (Bildpunkte im Canvas). */
-const grenzeY = () => G.yK - 22 * G.s;
+const grenzeY = () => G.yK - (ZEILENABSTAND / 2) * G.sK;
 
 /** @param {PointerEvent} e */
 function lokal(e) {
@@ -847,7 +915,6 @@ cv.addEventListener("pointerdown", (e) => {
   if (!eingabe.striche.length) {
     neuerLauf();
     leereKind();
-    entferneLiegt();
     $("startring").hidden = !hilfeRing;
   }
   eingabe.aktiv = e.pointerId;
@@ -867,7 +934,7 @@ function nimmPunkt(e) {
   const l = lokal(e);
   const u = einh(l.x, l.y);
   const vor = st.punkte.at(-1);
-  if (vor && Math.hypot(u.x - vor.x, u.y - vor.y) * G.s < 1.1) return;
+  if (vor && Math.hypot(u.x - vor.x, u.y - vor.y) * G.sK < 1.1) return;
   st.punkte.push({ x: u.x, y: u.y, t: performance.now() });
   st.spur.pts = st.punkte;
   st.spur.teil = st.punkte.length;
@@ -1011,7 +1078,6 @@ function raeumeAuf() {
   gluehen = [];
   blinkLinie = null;
   setzeStartring(null);
-  entferneLiegt();
   eingabe.striche = [];
   eingabe.strich = null;
   clearTimeout(eingabe.uhr);
@@ -1120,43 +1186,37 @@ function stelleAufgabe(aufgabe, melde, o = {}) {
     if (urteil.befund === "leer") return;
     B.letzter = urteil;
     melde.passtNicht();
-    daneben(urteil, punkteEinheiten).catch((e) => protokoll(`${SPIEL_ID}: Daneben: ${e?.message ?? e}`));
+    daneben(urteil).catch((e) => protokoll(`${SPIEL_ID}: Daneben: ${e?.message ?? e}`));
   };
   eingabe.beiVersuch = beiVersuch;
 
-  /** Das Foto des Versuchs bleibt bei der Kamera liegen; dann erklärt Elas Zeile, was abwich. @param {import("./logik.js").Urteil} u @param {{ x: number, y: number }[][]} striche */
-  async function daneben(u, striche) {
+  /** Elas Zeile und die Spur des Kindes selbst zeigen, was abwich (Lücke mit Ring, Aufglühen der Stelle); es entsteht kein Foto. @param {import("./logik.js").Urteil} u */
+  async function daneben(u) {
     if (u.ok) return;
     const R = neuerLauf();
-    const { warte, bewege } = mit(R);
-    const luecke = u.befund === "luecke";
-    // Klick; das Foto bleibt bei der Kamera liegen (Lücke: mit Ring an der Naht).
-    const foto = machFoto(striche, luecke ? u.stelle : null);
-    foto.style.opacity = "0";
-    entferneLiegt();
-    liegtFoto = foto;
-    const k = rechteck(kamera);
-    const x = k.l + k.w * 0.5;
-    const y = k.t + k.h * 0.5;
-    foto.style.transform = fotoTransform(foto, x, y, 0.01);
-    await klickUndBlitz(R, 0.5);
-    foto.style.opacity = "1";
-    if (luecke) klang.pff();
-    const ziel = fotoTransform(foto, x, y + 1.4 * remPx(), 0.9, 7);
-    await bewege(foto, [{ transform: fotoTransform(foto, x, y, 0.2, 0) }, { transform: ziel }], 420, { transform: ziel }, { easing: "cubic-bezier(.3,.7,.3,1)" });
+    const { warte } = mit(R);
+    const jetzt = performance.now();
+    if (u.befund === "luecke") klang.pff();
     elaHaltung("fragen", 240);
-    const satz = u.befund === "luecke" ? erzaehler.luecke() : u.befund === "start" ? erzaehler.start() : u.befund === "richtung" ? erzaehler.richtung() : erzaehler.band();
+    const satz = u.befund === "luecke" ? erzaehler.luecke() : u.befund === "start" ? erzaehler.start() : u.befund === "richtung" ? erzaehler.richtung()
+      : u.befund === "wort" ? erzaehler.probe() : erzaehler.band();
     if (u.befund === "luecke" && u.stelle) {
-      // der Ring liegt schon auf dem Foto; in der Zeile glüht die Stelle
-      gluehen.push({ z: "k", x: u.stelle.x, y: u.stelle.y, von: performance.now(), bis: performance.now() + 1400 });
+      // Ring und Glühen liegen direkt auf der Lücke der Spur
+      gluehen.push({ z: "k", x: u.stelle.x, y: u.stelle.y, von: jetzt, bis: jetzt + 2200, ring: true });
       an();
     } else if (u.befund === "band" && u.stelle) {
-      gluehen.push({ z: "k", x: u.stelle.x, y: u.stelle.y, von: performance.now(), bis: performance.now() + 1500 });
+      gluehen.push({ z: "k", x: u.stelle.x, y: u.stelle.y, von: jetzt, bis: jetzt + 1500 });
       const ueber = u.stelle.y < 100 ? (u.stelle.y < 50 ? 0 : 100) : 200;
-      blinkLinie = { z: "k", y: ueber, von: performance.now(), bis: performance.now() + 1100 };
+      blinkLinie = { z: "k", y: ueber, von: jetzt, bis: jetzt + 1100 };
       an();
+    } else if (u.befund === "wort") {
+      // Es ist nicht das Wort: Ela schreibt es noch einmal langsam vor, in einem Zug
+      const teile = ref.striche.filter((_, i) => !ref.luft[i]);
+      void elaSchreibt(R, teile, [], { tempo: 0.6, bleibt: "weg", hold: 250, art: "stueck" });
     } else if (u.stelle) {
-      // Ela schreibt nur diesen Buchstaben ganz langsam nach; ein Funke zeigt Anfang und Richtung
+      // Die Stelle der Spur glüht auf; Ela schreibt nur diesen Buchstaben ganz langsam nach, ein Funke zeigt Anfang und Richtung
+      gluehen.push({ z: "k", x: u.stelle.x, y: u.stelle.y, von: jetzt, bis: jetzt + 1400 });
+      an();
       const stueck = P.buchstabenStueck(ref, formen, u.buchstabe);
       void elaSchreibt(R, [stueck], [], { tempo: 0.5, bleibt: "weg", hold: 0, art: "stueck" });
     }
@@ -1167,7 +1227,7 @@ function stelleAufgabe(aufgabe, melde, o = {}) {
     elaHaltung("stehen", 300);
     await warte(150);
     if (R.skip) return;
-    // Die Zeile wird für den neuen Zug frei; das Foto bleibt bei der Kamera.
+    // Die Zeile wird für den neuen Zug frei.
     const kind = spuren.filter((s) => s.art === "kind");
     await verglimme(R, kind, 380);
   }
@@ -1180,7 +1240,7 @@ function stelleAufgabe(aufgabe, melde, o = {}) {
       elaHaltung("zeigen", 200);
       erzaehler.probe();
       const u = B.letzter;
-      const teile = u && !u.ok ? [P.buchstabenStueck(ref, formen, u.buchstabe)] : ref.striche.filter((_, i) => !ref.luft[i]);
+      const teile = u && !u.ok && u.befund !== "wort" ? [P.buchstabenStueck(ref, formen, u.buchstabe)] : ref.striche.filter((_, i) => !ref.luft[i]);
       void elaSchreibt(R, teile, [], { tempo: 0.5, bleibt: "weg", hold: 400, art: "stueck" }).then(() => elaHaltung("stehen", 300));
       return;
     }
@@ -1323,6 +1383,7 @@ function einfuehrung(r) {
       for (const f of leineFotos) if (!fotosVorher.includes(f)) f.remove();
       leineFotos = fotosVorher;
       leineNr = nrVorher;
+      ordneLeine();
       B.aufgabe = null;
       B.letzteStufe = null;
       elaHaltung("stehen", 0);
@@ -1333,24 +1394,21 @@ function einfuehrung(r) {
 /** Elas Foto in der Einführung: die Kamera klickt, das Foto fliegt kurz an die Leine. @param {Lauf} L @param {{ x: number, y: number }[][]} striche */
 async function fotoDerVorlage(L, striche) {
   // Elas Spur steht in ihrer Zeile (Einheiten der oberen Zeile); das Foto zeigt sie gleich.
-  const nr = leineNr++;
-  const foto = machFoto(striche, null);
+  const foto = machFoto(striche);
   const e = rechteck(cv);
-  const von = { x: e.l + e.w / 2, y: e.t + G.yE + 60 * G.s };
+  const von = { x: e.l + e.w / 2, y: e.t + G.yE + 60 * G.sE };
   foto.style.opacity = "0";
   foto.style.transform = fotoTransform(foto, von.x, von.y, 0.01);
-  foto.dataset.platz = String(nr % LEINE_PLAETZE);
-  leineFotos.push(foto);
+  const platz = nimmAnDieLeine(foto);
   await klickUndBlitz(L);
   entferneSpuren((s) => s.art === "ela");
   foto.style.opacity = "1";
-  const platz = leinePlatz(nr);
-  const ziel = fotoTransform(foto, platz.x, platz.y, 1, -1);
+  const ziel = fotoTransform(foto, platz.x, platz.y, 1, neigung(foto));
   if (L.skip || wenigBewegung() || typeof foto.animate !== "function") {
     foto.style.transform = ziel;
     return;
   }
-  await mit(L).bewege(foto, [{ transform: fotoTransform(foto, von.x, von.y, 2.2, 0) }, { transform: fotoTransform(foto, (von.x + platz.x) / 2, platz.y + 4 * remPx(), 0.6, 5), offset: 0.5 }, { transform: ziel }], 760, { transform: ziel });
+  await mit(L).bewege(foto, [{ transform: fotoTransform(foto, von.x, von.y, 1.8, 0) }, { transform: fotoTransform(foto, (von.x + platz.x) / 2, platz.y + 3 * remPx(), 0.85, 5), offset: 0.5 }, { transform: ziel }], 700, { transform: ziel });
   klang.plopp();
 }
 

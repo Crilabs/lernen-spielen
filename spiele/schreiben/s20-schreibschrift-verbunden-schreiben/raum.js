@@ -114,7 +114,7 @@ export function kameraSvg() {
   const schlitz = flach(`rect x="40" y="226" width="104" height="10" rx="4"`, "#3B2A6B", false);
   return `<svg viewBox="0 0 210 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">`
     + zz.guss(...beine, koerper, band, sucher, linseAussen, linse, glanz, schlitz, blitz)
-    + `<rect class="blitzlicht" x="130" y="64" width="50" height="40" rx="8" fill="#FFFDF0" opacity="0"/></svg>`;
+    + `<rect class="blitzlicht" x="130" y="64" width="50" height="40" rx="8" fill="#FFD27A" opacity="0"/></svg>`;
 }
 
 void zusammen;

@@ -12,26 +12,25 @@
 <style>
   /* ===== SPIELWELT: der Zeltplatz. Alles in rem (1rem = Bildhöhe/108). ===== */
   :root {
-    --foto-b: 13rem;           /* Leuchtfoto an der Leine */
-    --foto-h: 9.8rem;
+    --foto-b: 30rem;           /* Leuchtfoto an der Leine: groß und lesbar (Seitenverhältnis wie die Zeichenfläche 640 × 300) */
+    --foto-h: 15rem;
     --ela-hoehe: 44rem;
   }
   .welt { position: fixed; inset: 0; background: #0E1842; z-index: 0; }
   .welt svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
   .spielflaeche { overflow: visible; }
-  ls-blase { position: absolute; left: 3.4rem; top: 15rem; z-index: 7; }
+  ls-blase { position: absolute; left: 3.4rem; top: 47rem; z-index: 7; }
 
   /* Die Himmelsfläche: dunkel und glatt, damit die Spur das Hellste ist (Umkehr von §4, Idee §3). Flach, kein Schatten. */
   .matte {
-    position: absolute; left: 42rem; right: 27rem; top: 17.4rem; bottom: 3rem; z-index: 3; padding: 0;
+    position: absolute; left: 42rem; right: 27rem; top: 26rem; bottom: 3rem; z-index: 3; padding: 0;
     background: radial-gradient(130% 120% at 50% 36%, #1C2D68 0%, #121E4B 62%, #0E1840 100%);
     border: var(--ls-kontur) solid #7F98D6; border-radius: var(--ls-radius-gross); overflow: hidden;
     touch-action: none; user-select: none; -webkit-user-select: none;
   }
   .matte::before { inset: 1.3rem; border: 0.25rem dashed rgba(150, 175, 235, 0.22); }
   #zeichen { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
-  .blitz { position: absolute; inset: 0; background: #FFFDF0; opacity: 0; pointer-events: none; z-index: 4; }
   .matte.wackelt { animation: wackel 0.4s ease-in-out; }
   @keyframes wackel { 20% { transform: translateX(-0.8rem); } 55% { transform: translateX(0.7rem); } 85% { transform: translateX(-0.3rem); } }
   /* Der Startpunkt im Sonnenring (Hilfe 2, Einführung): ein runder Ring, der Ring selbst ist .markiert aus seite.css. */
@@ -48,9 +47,9 @@
     position: absolute; left: 0; top: 0; width: var(--foto-b); height: calc(var(--foto-h) + 2.2rem); z-index: 6; pointer-events: none;
     transform-origin: 50% 0; will-change: transform;
   }
-  .foto .rahmen { position: absolute; inset: 1.1rem 0 0 0; background: #FFFCF7; border-radius: 0.5rem; padding: 0.7rem 0.7rem 2rem; box-sizing: border-box; }
+  .foto .rahmen { position: absolute; inset: 1.1rem 0 0 0; background: #FFFCF7; border-radius: 0.7rem; padding: 0.7rem 0.7rem 2rem; box-sizing: border-box; box-shadow: 0 0.6rem 1.6rem rgba(5, 10, 35, 0.45); }
   .foto canvas { width: 100%; height: 100%; display: block; background: #121E4B; border-radius: 0.3rem; }
-  .foto .klammer { position: absolute; left: 50%; top: 0; width: 1.5rem; height: 3rem; margin-left: -0.75rem; background: #D9A55B; border: 0.25rem solid #8A5A24; border-radius: 0.4rem; z-index: 1; }
+  .foto .klammer { position: absolute; left: 50%; top: 0; width: 1.8rem; height: 3.4rem; margin-left: -0.9rem; background: #D9A55B; border: 0.25rem solid #8A5A24; border-radius: 0.4rem; z-index: 1; }
   .foto.gross .rahmen { padding: 0.7rem 0.7rem 2rem; }
 
   /* Ela steht links neben der Himmelsfläche, auf der Wiese. Ihre Füße stehen unten im Feld (Anteil 0,907 der Höhe). */
@@ -86,7 +85,6 @@
   /* Die Kamera auf dem Stativ, rechts am Rand; das Foto, das noch bei ihr liegt, ragt aus ihrem Schlitz. */
   .kamera { position: absolute; right: 2.6rem; bottom: 16.4rem; width: 21rem; height: 44rem; z-index: 4; pointer-events: none; transform-origin: 50% 70%; }
   .kamera svg { width: 100%; height: 100%; display: block; overflow: visible; }
-  .liegt { position: absolute; right: 2.2rem; bottom: 15.4rem; z-index: 5; pointer-events: none; }
 
   /* Pause: Sachmoment auf der Papierkarte. */
   .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
@@ -137,13 +135,11 @@
     <section class="lernfeld matte" id="matte" aria-label="Himmelsfläche mit Lineatur">
       <canvas id="zeichen" aria-label="Hier schreibst du das Wort"></canvas>
       <div class="startring markiert" id="startring" hidden></div>
-      <div class="blitz" id="blitz" aria-hidden="true"></div>
     </section>
     <div class="schild" id="schild" hidden aria-hidden="true"><span></span></div>
     <div class="schatten" id="schatten" aria-hidden="true"></div>
     <div class="ela" id="ela" aria-hidden="true"><div class="koerper" id="ela-koerper"></div><div class="ring" id="ela-ring"></div><div class="kerze" id="kerze"><i class="stab"></i><i class="kopf"></i></div></div>
     <div class="kamera" id="kamera" aria-hidden="true"></div>
-    <div class="liegt" id="liegt" aria-hidden="true"></div>
   </main>
 </div>
 
