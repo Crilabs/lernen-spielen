@@ -74,9 +74,13 @@ test("Größe und Lage im Zeilenfeld ändern nichts, solange das Band stimmt (na
   assert.deepEqual(pruefe("nun", breiter), { ok: true });
 });
 
-test("Punkte kommen nach dem Zug und dürfen fehlen oder zusätzlich da sein; ein Tupfer zählt nicht", () => {
+test("Punkte kommen nach dem Zug und sind Pflicht, wo die Vorlage welche hat; zusätzliche Tupfer stören nicht", () => {
   const ohne = richtig("ui").slice(0, 1);
-  assert.deepEqual(pruefe("ui", ohne), { ok: true });
+  assert.equal(pruefe("ui", ohne).befund, "wort");
+  assert.equal(pruefe("ü", richtig("ü").slice(0, 1)).befund, "wort");
+  // ein Tupfer (kaum Weg) reicht als Punkt; ein Wort ohne Punkte in der Vorlage braucht keinen
+  assert.deepEqual(pruefe("ui", [...richtig("ui").slice(0, 1), strichDes([{ x: 200, y: 60 }, { x: 201, y: 61 }], 0, 0, 9000)]), { ok: true });
+  assert.deepEqual(pruefe("nun", richtig("nun")), { ok: true });
   const mit = [...richtig("ui"), strichDes([{ x: 200, y: 60 }, { x: 205, y: 66 }], 0, 0, 9000)];
   assert.deepEqual(pruefe("ui", mit), { ok: true });
   const tupfer = [...richtig("ui"), strichDes([{ x: 500, y: 150 }, { x: 502, y: 151 }], 0, 0, 9000)];
@@ -129,7 +133,8 @@ test("Drehrichtung: ein Oval im Uhrzeigersinn statt dagegen (gleicher Start, gle
 
 test("Band: eine Oberlänge, die weit über das Band ragt, wird gefunden; im Band bleibt es ruhig", () => {
   const w = V.wort("sas", "nun");
-  const zuHoch = [{ punkte: w.striche[0].map((p, i) => ({ x: 60 + p.x, y: i > 12 && p.y < 140 ? p.y - 110 : p.y })) }];
+  const n = w.striche[0].length;
+  const zuHoch = [{ punkte: w.striche[0].map((p, i) => ({ x: 60 + p.x, y: p.y - 110 * Math.sin((Math.PI * i) / (n - 1)) ** 2 })) }];
   const u = pruefe("nun", zuHoch);
   assert.equal(u.ok, false);
   assert.equal(u.befund, "band");
@@ -138,6 +143,45 @@ test("Band: eine Oberlänge, die weit über das Band ragt, wird gefunden; im Ban
   assert.deepEqual(pruefe("l", richtig("l")), { ok: true });
   // und ein g darf in den Keller
   assert.deepEqual(pruefe("g", richtig("g")), { ok: true });
+});
+
+test("Die Prüfung verlangt das Wort: ein anderes Wort, ein anderer Buchstabe oder ein Kritzel in einem Zug kommen nicht durch", () => {
+  const haupt = (/** @type {string} */ t) => { const w = V.wort("sas", t); return w.striche.filter((_, i) => !w.luft[i]).flat(); };
+  /** das Kind schreibt Wort `kind` (samt Punkten), verlangt war `soll` */
+  const probe = (/** @type {string} */ soll, /** @type {string} */ kind) => pruefe(soll, richtig(kind));
+  for (const [soll, kind] of [["hallo", "i"], ["u", "uu"], ["ü", "u"], ["a", "o"], ["o", "a"], ["nun", "u"], ["hallo", "ui"]]) {
+    const u = probe(soll, kind);
+    assert.equal(u.ok, false, `${kind} für ${soll}`);
+    assert.equal(u.befund, "wort", `${kind} für ${soll}`);
+  }
+  // Zickzack im Band, ein Kritzel in einem Zug
+  const zz = Array.from({ length: 9 }, (_, i) => ({ x: 60 + i * 40, y: i % 2 ? 200 : 100 }));
+  assert.equal(pruefe("nun", [strichDes(zz)]).befund, "wort");
+  // eine Welle, ein Kreis, ein Strich: auch nicht
+  const welle = Array.from({ length: 80 }, (_, i) => ({ x: 60 + i * 4, y: 150 + 40 * Math.sin(i / 4) }));
+  assert.equal(pruefe("hallo", [strichDes(welle)]).ok, false);
+  const strich = Array.from({ length: 40 }, (_, i) => ({ x: 60 + i * 8, y: 150 }));
+  assert.equal(pruefe("nun", [strichDes(strich)]).ok, false);
+  void haupt;
+});
+
+test("Die Prüfung bleibt tolerant: Zittern, andere Größe, breiter und schiefer geschrieben besteht", () => {
+  const verzerrt = (/** @type {string} */ t, sx, sy, a) => {
+    const w = V.wort("sas", t);
+    // wie ein Finger: etwa alle 9 Einheiten ein Messpunkt, dazu Zittern, Verzerrung und eine leichte Schlangenlinie
+    return w.striche.map((s, k) => ({ punkte: L.abtasten(s, 9).map((q, i) => ({ x: 40 + q.x * sx + 20 * Math.sin(q.y / 60) + Math.sin(i * 1.7 + k) * a, y: 100 + (q.y - 100) * sy + Math.cos(i * 2.3) * a, t: i * 10 + k * 4000 })) }));
+  };
+  for (const w of ["nun", "hallo", "a", "uu", "ui", "backen", "kühl", "heißen"]) {
+    for (const [sx, sy, a] of [[1.3, 1.2, 6], [0.8, 0.85, 6], [1, 1, 14]]) {
+      assert.deepEqual(pruefe(w, verzerrt(w, sx, sy, a)), { ok: true }, `${w} ${sx} ${sy} ${a}`);
+    }
+  }
+});
+
+test("Formabstand: dasselbe Wort liegt dicht beieinander, ein anderes weit", () => {
+  const haupt = (/** @type {string} */ t) => { const w = V.wort("sas", t); return w.striche.filter((_, i) => !w.luft[i]).flat(); };
+  assert.ok(L.formAbstand(haupt("nun"), haupt("nun")).mittel < 3);
+  assert.ok(L.formAbstand(haupt("o"), haupt("a")).mittel > 28);
 });
 
 test("leere Eingabe: nur Tupfer ergibt „leer“", () => {

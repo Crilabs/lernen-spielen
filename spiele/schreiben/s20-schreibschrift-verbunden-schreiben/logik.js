@@ -3,8 +3,9 @@
 // Alles rechnet in Vorlagen-Einheiten (spiele/schrift/vorlagen/raster.json: Oberlänge 0, Mittellinie 100, Grundlinie 200,
 // Unterlänge 300, x gleiche Einheit). Das Spiel rechnet Bildpunkte vorher in diese Einheiten um.
 //
-// Die Prüfung ist tolerant und sieht nur, was messbar ist (Idee §4): Absetzen mitten im Wort, Startpunkt, Drehrichtung,
-// Band. Nie Schönheit, Druck, Größe oder Lage der Hand. Es kommt höchstens ein Befund heraus, der erste in dieser Reihe.
+// Die Prüfung ist tolerant und sieht nur, was messbar ist (Idee §4): Absetzen mitten im Wort, ob das Wort überhaupt
+// geschrieben wurde (Länge, Breite, Punkte, Form), Startpunkt, Drehrichtung, Band. Nie Schönheit, Druck, Größe oder Lage
+// der Hand. Es kommt höchstens ein Befund heraus, der erste in dieser Reihe.
 
 /** @typedef {{ x: number, y: number }} Punkt */
 /** @typedef {{ x: number, y: number, t?: number }} Probe */
@@ -12,7 +13,7 @@
 /** @typedef {{ breite: number, striche: Punkt[][], luft: boolean[] }} Wort */
 /** @typedef {{ zeichen: string, striche: Punkt[][], luft: boolean[] }} FormTeil */
 /**
- * @typedef {{ ok: true } | { ok: false, befund: "leer" | "luecke" | "start" | "richtung" | "band",
+ * @typedef {{ ok: true } | { ok: false, befund: "leer" | "luecke" | "wort" | "start" | "richtung" | "band",
  *   stelle: Punkt | null, buchstabe: number }} Urteil
  */
 
@@ -31,6 +32,14 @@ const BAND_RAND = 50;
 /** Drehrichtung: so stark muss ein Buchstabe der Vorlage drehen, und so stark das Gegenteil beim Kind (Bogenmaß). */
 const DREHT_VORLAGE = 2.6;
 const DREHT_KIND = 1.5;
+/** Weglänge und Breite der Kinderspur im Verhältnis zur Vorlage (dazu je ein fester Zuschlag für sehr kurze Buchstaben wie i). */
+const VERHAELTNIS_MIN = 0.6;
+const VERHAELTNIS_MAX = 1.6;
+const ZUSCHLAG_WEG = 30;
+const ZUSCHLAG_BREITE = 20;
+/** Form: so weit liegen gleich weit gelaufene Stellen von Kind und Vorlage im Mittel und höchstens (90 %) auseinander (Einheiten). */
+const FORM_MITTEL = 28;
+const FORM_P90 = 52;
 /** Eine Richtungsänderung ab diesem Winkel (Bogenmaß) ist eine Spitze, keine Kurve. */
 const SPITZE = 2.5;
 
@@ -188,6 +197,30 @@ export function buchstabeAn(kind, stelle, buchstaben) {
   return Math.floor(u * buchstaben);
 }
 
+
+/**
+ * Wie weit liegt die Spur des Kindes von der Vorlage? Beide Wege werden an 48 gleich weit gelaufenen Stellen verglichen; die
+ * Spur des Kindes wird waagerecht an den linken Rand und die Breite der Vorlage angelegt (Größe und Lage ändern nichts), senkrecht
+ * zählen die festen Linien. Liefert Mittel und 90-%-Wert der Abstände in Einheiten.
+ * @param {Punkt[]} kind @param {Punkt[]} soll @returns {{ mittel: number, p90: number }}
+ */
+export function formAbstand(kind, soll) {
+  const N = 48;
+  const xs = kind.map((p) => p.x);
+  const ys = soll.map((p) => p.x);
+  const klo = Math.min(...xs);
+  const slo = Math.min(...ys);
+  const f = (Math.max(...ys) - slo) / Math.max(1, Math.max(...xs) - klo);
+  const aufN = (/** @type {Punkt[]} */ p) => abtasten(p, weg(p) / (N - 1)).slice(0, N);
+  const k = aufN(glaette(abtasten(kind.map((p) => ({ x: (p.x - klo) * f + slo, y: p.y })), 4), 2));
+  const s = aufN(glaette(abtasten(soll, 4), 2));
+  const n = Math.min(k.length, s.length);
+  const d = [];
+  for (let i = 0; i < n; i++) d.push(Math.hypot(k[i].x - s[i].x, k[i].y - s[i].y));
+  d.sort((a, b) => a - b);
+  return { mittel: d.reduce((a, b) => a + b, 0) / Math.max(1, n), p90: d[Math.floor(n * 0.9)] ?? 0 };
+}
+
 /**
  * Prüft, was das Kind aufgezeichnet hat, gegen die Vorlage (SAS) des Wortes. Tolerant.
  * @param {Wort} ref das Wort aus kern/vorlagen.js `wort()`
@@ -222,7 +255,19 @@ export function pruefe(ref, formen, aufzeichnung) {
     return { ok: false, befund: "luecke", stelle, buchstabe: buchstabeAn(kind, stelle, buchstaben) };
   }
 
+  // 2. Ist es überhaupt das Wort? Länge und Breite im Verhältnis zur Vorlage, und die Punkte (i, ü …), die die Vorlage hat.
+  // Ein Tupfer zählt hier als Punkt, nur nicht als Versuch (oben).
   const soll = sollZug.flat();
+  const sollWeg = sollZug.reduce((l, s) => l + weg(s), 0);
+  const kindWeg0 = haupt.reduce((l, s) => l + weg(glaette(abtasten(s.punkte, 8), 2)), 0);
+  const breiteKind = Math.max(...kind.map((p) => p.x)) - Math.min(...kind.map((p) => p.x));
+  const breiteSoll = Math.max(...soll.map((p) => p.x)) - Math.min(...soll.map((p) => p.x));
+  const keinWort = { ok: /** @type {const} */ (false), befund: /** @type {const} */ ("wort"), stelle: null, buchstabe: 0 };
+  if (kindWeg0 < VERHAELTNIS_MIN * sollWeg - ZUSCHLAG_WEG || kindWeg0 > VERHAELTNIS_MAX * sollWeg + ZUSCHLAG_WEG) return keinWort;
+  if (breiteKind < VERHAELTNIS_MIN * breiteSoll - ZUSCHLAG_BREITE || breiteKind > VERHAELTNIS_MAX * breiteSoll + ZUSCHLAG_BREITE) return keinWort;
+  const punkteKind = aufzeichnung.length - haupt.length;
+  if (punkteErlaubt && punkteKind < 1) return keinWort;
+
   const start = kind[0];
 
   // 2. Startpunkt: waagerecht vom linken Rand der eigenen Schrift aus, senkrecht auf den festen Linien.
@@ -247,6 +292,8 @@ export function pruefe(ref, formen, aufzeichnung) {
     if (stueck.length < 4) continue;
     const dK = drehung(stueck);
     if (Math.sign(dK) === -Math.sign(sollK) && Math.abs(dK) >= DREHT_KIND) {
+      // Ein Kritzel, der zufällig andersherum dreht, ist kein Wort mit falscher Richtung.
+      if (formAbstand(kind, soll).mittel > FORM_MITTEL * 1.25) return keinWort;
       const mitte = stueck[Math.floor(stueck.length / 2)];
       return { ok: false, befund: "richtung", stelle: mitte, buchstabe: k };
     }
@@ -265,6 +312,10 @@ export function pruefe(ref, formen, aufzeichnung) {
     }
   }
   if (schlimm) return { ok: false, befund: "band", stelle: schlimm, buchstabe: buchstabeAn(kind, schlimm, buchstaben) };
+
+  // 5. Form: die Spur folgt dem Verlauf der Vorlage (an gleich weit gelaufenen Stellen), sonst ist es ein anderes Wort oder ein Kritzel.
+  const f = formAbstand(kind, soll);
+  if (f.mittel > FORM_MITTEL || f.p90 > FORM_P90) return keinWort;
 
   return { ok: true };
 }
