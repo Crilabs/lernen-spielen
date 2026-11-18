@@ -5376,5 +5376,377 @@
   "thema": [
    "gerade-ungerade-bis-100"
   ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 16194,
+  "einheit": "tokens",
+  "menge": 2137792,
+  "notiz": "stifthaltung, Recherche und Schreiben",
+  "cache_lesen": 2003166,
+  "cache_schreiben": 118384,
+  "themen": 1,
+  "thema": [
+   "stifthaltung"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 46,
+  "ausgabe": 14924,
+  "einheit": "tokens",
+  "menge": 1864182,
+  "notiz": "schwung-senkrecht, Recherche und Schreiben",
+  "cache_lesen": 1749306,
+  "cache_schreiben": 99906,
+  "themen": 1,
+  "thema": [
+   "schwung-senkrecht"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 13469,
+  "einheit": "tokens",
+  "menge": 1971917,
+  "notiz": "schwung-waagerecht, Recherche und Schreiben",
+  "cache_lesen": 1860743,
+  "cache_schreiben": 97657,
+  "themen": 1,
+  "thema": [
+   "schwung-waagerecht"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 60,
+  "ausgabe": 16946,
+  "einheit": "tokens",
+  "menge": 2780307,
+  "notiz": "schwung-zickzack, Recherche und Schreiben",
+  "cache_lesen": 2648153,
+  "cache_schreiben": 115148,
+  "themen": 1,
+  "thema": [
+   "schwung-zickzack"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 46,
+  "ausgabe": 14385,
+  "einheit": "tokens",
+  "menge": 1917883,
+  "notiz": "schwung-kreis-linksherum, Recherche und Schreiben",
+  "cache_lesen": 1805022,
+  "cache_schreiben": 98430,
+  "themen": 1,
+  "thema": [
+   "schwung-kreis-linksherum"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 528,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "schwung-kreis-linksherum.png",
+  "themen": 1,
+  "thema": [
+   "schwung-kreis-linksherum"
+  ],
+  "usage": {
+   "input_tokens": 528,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 528
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2284
+  }
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 539,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "stifthaltung.png",
+  "themen": 1,
+  "thema": [
+   "stifthaltung"
+  ],
+  "usage": {
+   "input_tokens": 539,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 539
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2295
+  }
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 519,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "schwung-senkrecht.png",
+  "themen": 1,
+  "thema": [
+   "schwung-senkrecht"
+  ],
+  "usage": {
+   "input_tokens": 519,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 519
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2275
+  }
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 531,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "schwung-zickzack.png",
+  "themen": 1,
+  "thema": [
+   "schwung-zickzack"
+  ],
+  "usage": {
+   "input_tokens": 531,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 531
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2287
+  }
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 500,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "schwung-waagerecht.png",
+  "themen": 1,
+  "thema": [
+   "schwung-waagerecht"
+  ],
+  "usage": {
+   "input_tokens": 500,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 500
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2256
+  }
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 581,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "schwung-kreis-linksherum.png",
+  "themen": 1,
+  "thema": [
+   "schwung-kreis-linksherum"
+  ],
+  "usage": {
+   "input_tokens": 581,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 581
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2337
+  }
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 26,
+  "ausgabe": 9276,
+  "einheit": "tokens",
+  "menge": 1061892,
+  "notiz": "stifthaltung, Prüfung Runde 1",
+  "cache_lesen": 949260,
+  "cache_schreiben": 103330,
+  "themen": 1,
+  "thema": [
+   "stifthaltung"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 6912,
+  "einheit": "tokens",
+  "menge": 549140,
+  "notiz": "schwung-senkrecht, Prüfung Runde 1",
+  "cache_lesen": 454480,
+  "cache_schreiben": 87732,
+  "themen": 1,
+  "thema": [
+   "schwung-senkrecht"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 7834,
+  "einheit": "tokens",
+  "menge": 857053,
+  "notiz": "schwung-waagerecht, Prüfung Runde 1",
+  "cache_lesen": 770254,
+  "cache_schreiben": 78941,
+  "themen": 1,
+  "thema": [
+   "schwung-waagerecht"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 7691,
+  "einheit": "tokens",
+  "menge": 926955,
+  "notiz": "schwung-zickzack, Prüfung Runde 1",
+  "cache_lesen": 826432,
+  "cache_schreiben": 92808,
+  "themen": 1,
+  "thema": [
+   "schwung-zickzack"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 9390,
+  "einheit": "tokens",
+  "menge": 1105867,
+  "notiz": "schwung-kreis-linksherum, Prüfung Runde 1",
+  "cache_lesen": 1008862,
+  "cache_schreiben": 87585,
+  "themen": 1,
+  "thema": [
+   "schwung-kreis-linksherum"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 8637,
+  "einheit": "tokens",
+  "menge": 791177,
+  "notiz": "stifthaltung, Prüfung Runde 2",
+  "cache_lesen": 746944,
+  "cache_schreiben": 35572,
+  "themen": 1,
+  "thema": [
+   "stifthaltung"
+  ]
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 34,
+  "ausgabe": 8927,
+  "einheit": "tokens",
+  "menge": 1209020,
+  "notiz": "schwung-zickzack, Prüfung Runde 2",
+  "cache_lesen": 1145311,
+  "cache_schreiben": 54748,
+  "themen": 1,
+  "thema": [
+   "schwung-zickzack"
+  ]
  }
 ]

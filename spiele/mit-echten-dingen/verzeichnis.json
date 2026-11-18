@@ -488,6 +488,90 @@
    "datei": "grammatik/pronomen-statt-nomen.md",
    "foto": "grammatik/bilder/pronomen-statt-nomen.webp"
   },
+  "schwung-kreis-linksherum": {
+   "fach": "schreiben",
+   "name": "Die Schnecke rollt",
+   "titel": "Kreise: oben los, linksherum",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Becher als Kreis"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Die Riesenseifenblase"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Sonnen im Sand"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/schwung-kreis-linksherum.md",
+   "foto": "schreiben/bilder/schwung-kreis-linksherum.webp"
+  },
+  "schwung-senkrecht": {
+   "fach": "schreiben",
+   "name": "Regen fällt",
+   "titel": "Regen fällt: Striche von oben nach unten",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Ein Zaun für den Garten"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Regentropfen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Strichliste auf der Bank"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/schwung-senkrecht.md",
+   "foto": "schreiben/bilder/schwung-senkrecht.webp"
+  },
+  "schwung-waagerecht": {
+   "fach": "schreiben",
+   "name": "Die Straße",
+   "titel": "Eine Straße von links nach rechts",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eine Straße für das Auto"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Die Hand fährt an der Wand"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Straße im Sand"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/schwung-waagerecht.md",
+   "foto": "schreiben/bilder/schwung-waagerecht.webp"
+  },
+  "schwung-zickzack": {
+   "fach": "schreiben",
+   "name": "Berg und Tal",
+   "titel": "Berg und Tal: oben spitz, unten spitz",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eine Bergkette für ein Bild"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Bergwanderung im Flur"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/schwung-zickzack.md",
+   "foto": "schreiben/bilder/schwung-zickzack.webp"
+  },
   "sechserreihe": {
    "fach": "mathe",
    "name": "Sechserreihe",
@@ -545,6 +629,24 @@
    "entwurf": false,
    "datei": "lesen/silben-klatschen.md",
    "foto": "lesen/bilder/silben-klatschen.webp"
+  },
+  "stifthaltung": {
+   "fach": "schreiben",
+   "name": "So hält der Stift",
+   "titel": "So liegt der Stift locker in der Hand",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Eine Karte für Oma"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Stifte nach Hause bringen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/stifthaltung.md",
+   "foto": "schreiben/bilder/stifthaltung.webp"
   },
   "teiler-begruenden": {
    "fach": "mathe",

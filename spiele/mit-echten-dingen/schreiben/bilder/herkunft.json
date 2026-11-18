@@ -118,5 +118,105 @@
   },
   "ki": true,
   "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "schwung-kreis-linksherum.webp": {
+  "datum": "2026-11-18",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Der Becher als Kreis“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: einen Becher, ein Blatt Papier, einige Buntstifte\nWhat happens: Stellt den Becher umgedreht auf das gerade Blatt. Einer hält ihn fest. Der andere setzt den Stift oben an und fährt am Rand nach links, rund herum, bis oben. Sprecht: … Hebt den Becher weg. Fahrt die Linie mit der weiteren Farbe nach. Zieht daneben einen Kreis ohne Becher. Tauscht. Macht aus den Kreisen Sonnen, Bälle oder Gesichter.\nImportant: The cup stands upside down on the paper: its opening faces down onto the paper, its closed flat bottom faces up; no opening visible from above. Only a few pencils, lying loosely crossed in a small heap, not side by side in a row.",
+  "usage": {
+   "input_tokens": 581,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 581
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2337
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "stifthaltung.webp": {
+  "datum": "2026-11-18",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Eine Karte für Oma“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: einige Blätter Papier, Buntstifte\nWhat happens: Legt die Blätter aufeinander. Dreht sie, bis der Rand so schräg liegt wie der Unterarm der Schreibhand. Legt den Stift mit der Mine zum Bauch. Greift vorn mit Daumen und Zeigefinger und kippt das Ende nach hinten an die Hand. Malt eine Karte für Oma, Opa oder eine Freundin. Zwischendurch tippt der Zeigefinger einige auf den Stift. Am Ende schaut ihr auf das untere Blatt.",
+  "usage": {
+   "input_tokens": 539,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 539
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2295
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "schwung-senkrecht.webp": {
+  "datum": "2026-11-18",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Ein Zaun für den Garten“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: ein Blatt Papier, Buntstifte\nWhat happens: Malt zusammen einen Garten mit Blumen. Zieht darunter eine Linie quer: den Boden. Eine Daumenlänge darüber kommt eine weitere Linie. Einer setzt den Stift oben an und zieht eine Latte in einem Zug hinunter bis zum Boden. Der andere setzt die nächste Latte daneben. Abwechselnd geht es weiter, bis der Zaun steht. Jeder malt mit seiner Schreibhand, links oder rechts.",
+  "usage": {
+   "input_tokens": 519,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 519
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2275
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "schwung-zickzack.webp": {
+  "datum": "2026-11-18",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Eine Bergkette für ein Bild“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: ein Backblech mit etwas Mehl, ein großes Blatt Papier, Wachsmalstifte\nWhat happens: Streut Mehl dünn auf das Blech. Einer zieht mit dem Finger Berge von links nach rechts und spricht: …. Der andere fährt sie nach, ohne abzuheben. Dann tauscht ihr. Malt auf dem Papier eine Bergkette quer über das Blatt, in einem Zug. Mit links: das Blatt links vor euch, etwas nach rechts gedreht. Malt Schnee auf die Spitzen.",
+  "usage": {
+   "input_tokens": 531,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 531
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2287
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "schwung-waagerecht.webp": {
+  "datum": "2026-11-18",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Eine Straße für das Auto“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: einen großen Bogen Papier, Stifte, ein Spielzeugauto\nWhat happens: Legt das Papier quer. Malt links eine Garage und rechts einen Baum. Einer zieht von der Garage eine Linie bis zum Baum, ohne abzusetzen. Der andere zieht darunter den weiteren Straßenrand, auch von links nach rechts. Das Auto fährt los. Dann malt ihr die nächste Straße.",
+  "usage": {
+   "input_tokens": 500,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 500
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2256
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
  }
 }
