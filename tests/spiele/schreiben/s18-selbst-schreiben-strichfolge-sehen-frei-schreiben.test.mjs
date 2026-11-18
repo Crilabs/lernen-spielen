@@ -132,6 +132,19 @@ test("aufKind: Lena fährt genau auf die Linie des Kindes; Prüfzüge sind richt
   const kind = d.map((s) => s.map(([x, y]) => [x + 200, y]));
   assert.equal(Math.round(L.aufKind(d, kind, false).flat()[0][0]), Math.round(kind.flat()[0][0]));
   const zuege = L.pruefZuege(d, false);
-  assert.deepEqual(zuege.map((z) => [z.wie, z.ok]), [["richtig", true], ["rueckwaerts", false], ["gespiegelt", false]]);
+  assert.deepEqual(zuege.map((z) => [z.wie, z.ok]), [["richtig", true], ["rueckwaerts", false], ["gespiegelt", false], ["kopfueber", false], ["gekritzel", false]]);
   assert.equal(L.pruefZuege(L.vorlageImBlatt(daten("l"), "material"), false).find((z) => z.wie === "gespiegelt")?.ok, true, "ein gespiegeltes l ist ein l");
+});
+
+test("jede Aufgabe hat für den Prüfstand mindestens einen falschen Zug", () => {
+  const ids = new Set(Object.values(PLAN.themen ?? PLAN).flatMap((t) => (t?.aufgaben?.zeichen ?? [])));
+  assert.ok(ids.size > 0);
+  for (const id of ids) {
+    const a = aufgabenVon({ art: "schreiben", zeichen: [id] })[0];
+    if (!a) continue;
+    for (const frei of [false, true]) {
+      const z = L.pruefZuege(L.vorlageImBlatt(a.daten, "material"), frei);
+      assert.ok(z.some((x) => !x.ok), `${id} (frei ${frei}): kein falscher Zug`);
+    }
+  }
 });

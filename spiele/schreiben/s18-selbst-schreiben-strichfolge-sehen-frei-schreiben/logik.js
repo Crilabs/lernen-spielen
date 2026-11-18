@@ -186,8 +186,16 @@ export function aufKind(vorlage, kind, frei) {
   return vorlage.map((s) => s.map(([x, y]) => /** @type {Punkt} */ ([x + dx, y + dy])));
 }
 
-/** Kind-Striche für den Prüfstand: richtig, rückwärts, gespiegelt (je mit Versatz im Blatt). @param {Punkt[][]} vorlage @param {"richtig" | "rueckwaerts" | "gespiegelt"} wie */
+/** Kind-Striche für den Prüfstand: richtig, rückwärts, gespiegelt, kopfüber, Gekritzel. @param {Punkt[][]} vorlage @param {"richtig" | "rueckwaerts" | "gespiegelt" | "kopfueber" | "gekritzel"} wie */
 export function pruefZug(vorlage, wie) {
+  if (wie === "kopfueber" || wie === "gekritzel") {
+    const alle = vorlage.flat();
+    const [x0, x1] = [Math.min(...alle.map((p) => p[0])), Math.max(...alle.map((p) => p[0]))];
+    const [y0, y1] = [Math.min(...alle.map((p) => p[1])), Math.max(...alle.map((p) => p[1]))];
+    if (wie === "kopfueber") return vorlage.map((s) => s.map(([x, y]) => /** @type {Punkt} */ ([x, y0 + y1 - y])));
+    // Ein Zickzack quer über die Vorlage: kein Zeichen, immer daneben.
+    return [[[x0, y1], [x1, y0], [x0, y0], [x1, y1], [(x0 + x1) / 2, y0]]];
+  }
   if (wie === "rueckwaerts") return vorlage.map((s) => [...s].reverse()).reverse();
   if (wie === "gespiegelt") return gespiegelt(vorlage);
   return vorlage;
@@ -196,8 +204,9 @@ export function pruefZug(vorlage, wie) {
 /**
  * Welche Prüfzüge gibt es jetzt, und welcher davon ist richtig? Nur Züge, die wirklich so ausgehen (ein l gespiegelt bleibt ein l).
  * @param {Punkt[][]} vorlage @param {boolean} frei
- * @returns {{ wie: "richtig" | "rueckwaerts" | "gespiegelt", ok: boolean }[]}
+ * Kopfüber und Gekritzel kommen dazu, damit es auch dort einen falschen Zug gibt, wo rückwärts oder gespiegelt als gleich gelten.
+ * @returns {{ wie: "richtig" | "rueckwaerts" | "gespiegelt" | "kopfueber" | "gekritzel", ok: boolean }[]}
  */
 export function pruefZuege(vorlage, frei) {
-  return /** @type {const} */ (["richtig", "rueckwaerts", "gespiegelt"]).map((wie) => ({ wie, ok: erkenne(pruefZug(vorlage, wie), vorlage, { frei }).ok }));
+  return /** @type {const} */ (["richtig", "rueckwaerts", "gespiegelt", "kopfueber", "gekritzel"]).map((wie) => ({ wie, ok: erkenne(pruefZug(vorlage, wie), vorlage, { frei }).ok }));
 }

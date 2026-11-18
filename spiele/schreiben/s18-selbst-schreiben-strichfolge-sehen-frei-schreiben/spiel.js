@@ -1339,7 +1339,7 @@ async function bereiteAufgabe(aufgabe) {
       await fahreZu(L, lena, { x: ela.heim.x + (lena.heim.x - ela.heim.x) * 0.5, y: lena.heim.y }, 340);
       await fahreZu(L, lena, lena.heim, 280);
       raeumeSpur();
-      await Promise.race([erzaehler.wechsel(wechsel).catch(() => undefined), tipp]);
+      await Promise.race([erzaehler.wechsel(wechsel).catch(() => undefined), tipp, new Promise((ok) => setTimeout(ok, 4000))]); // nie länger als 4 s in der Folge hängen
       B.wechsel = wechsel;
     }
   } finally {
