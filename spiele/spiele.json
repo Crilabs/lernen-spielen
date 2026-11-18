@@ -45,7 +45,7 @@
       "arten": [{ "art": "wortart", "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null },
     { "id": "kreidebahn", "probe": true, "titel": "Selbst schreiben", "thema": "Schwünge, Buchstaben, Ziffern", "kategorie": "schreiben",
-      "symbol": "schreiben/s18-selbst-schreiben-strichfolge-sehen-frei-schreiben/symbol.svg", "datei": "schreiben/s18-selbst-schreiben-strichfolge-sehen-frei-schreiben/index.html",
+      "symbol": "schreiben/s18-selbst-schreiben-strichfolge-sehen-frei-schreiben/symbol.svg", "bild": "schreiben/s18-selbst-schreiben-strichfolge-sehen-frei-schreiben/spielbild.webp", "datei": "schreiben/s18-selbst-schreiben-strichfolge-sehen-frei-schreiben/index.html",
       "text": "Mit dem Finger schreiben, Ela fährt die Kreidespur ab.",
       "beschreibung": "Das Kind schreibt Schwünge, Buchstaben und Ziffern mit dem Finger in eine Kreidezeile auf dem Schulhof. Ela fährt die Linie mit dem Roller ab, genau in der Reihenfolge und Richtung, in der sie gezogen wurde. Weicht sie ab, fährt Lena die Vorlage darauf, und man sieht, wo es anders losgeht.",
       "arten": [{ "art": "schreiben", "stufen": ["material", "vorstellung", "kopf"] }],
