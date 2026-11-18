@@ -15363,7 +15363,7 @@
         "schwung-girlande",
         "schreibschrift-vergleichen"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["i", "u", "ü", "uu"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-i-u", "woerter": ["i", "u", "ü", "uu"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15395,7 +15395,7 @@
       "voraussetzungen": [
         "schreibschrift-i-u"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["ui", "iu", "üi"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-in-einem-zug", "woerter": ["ui", "iu", "üi"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15427,7 +15427,7 @@
         "schwung-arkade",
         "schreibschrift-in-einem-zug"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["n", "m", "nun", "im"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-n-m", "woerter": ["n", "m", "nun", "im"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15459,7 +15459,7 @@
       "voraussetzungen": [
         "schreibschrift-n-m"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["r", "ur", "ir", "nur"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-r", "woerter": ["r", "ur", "ir", "nur"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15491,7 +15491,7 @@
       "voraussetzungen": [
         "schreibschrift-i-u"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["t", "tu", "tut", "ut"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-t", "woerter": ["t", "tu", "tut", "ut"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15524,7 +15524,7 @@
         "schwung-kreis-linksherum",
         "schreibschrift-i-u"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["c", "a", "o", "au"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-c-a-o", "woerter": ["c", "a", "o", "au"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15589,7 +15589,7 @@
         "schreibschrift-c-a-o",
         "schreibschrift-n-m"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["an", "on", "ma", "na"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "sas-verbindung-zum-oval", "woerter": ["an", "on", "ma", "na"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15621,7 +15621,7 @@
       "voraussetzungen": [
         "schreibschrift-c-a-o"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["d", "q", "du", "da"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-d-q", "woerter": ["d", "q", "du", "da"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15654,7 +15654,7 @@
         "schreibschrift-c-a-o",
         "schreibschrift-n-m"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["on", "om", "oi"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "oben-weiter-verbindung", "woerter": ["on", "om", "oi"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15688,7 +15688,7 @@
       "verwechslung": [
         "schreibschrift-i-u"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["v", "w", "wo", "vom"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-v-w", "woerter": ["v", "w", "wo", "vom"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15720,7 +15720,7 @@
       "voraussetzungen": [
         "schreibschrift-i-u"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["e", "ie", "ei", "nie"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-e", "woerter": ["e", "ie", "ei", "nie"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15753,7 +15753,7 @@
         "schwung-schleife-oben",
         "schreibschrift-e"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["l", "h", "k", "b", "alle", "hallo"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-l-h-k-b", "woerter": ["l", "h", "k", "b", "alle", "hallo"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15785,7 +15785,7 @@
       "voraussetzungen": [
         "schreibschrift-l-h-k-b"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["be", "le", "ke", "he", "hell", "kühl"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schleifenbuchstaben-unterscheiden", "woerter": ["be", "le", "ke", "he", "hell", "kühl"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15817,7 +15817,7 @@
       "voraussetzungen": [
         "schreibschrift-l-h-k-b"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["b", "bi", "be", "lieb"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "sas-knoten", "woerter": ["b", "bi", "be", "lieb"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15850,7 +15850,7 @@
         "schwung-schleife-unten",
         "schreibschrift-c-a-o"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["j", "y", "g", "ja"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-j-y-g", "woerter": ["j", "y", "g", "ja"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15883,7 +15883,7 @@
         "schreibschrift-j-y-g",
         "schreibschrift-e"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["ja", "ge", "ju", "gegen"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schlaufe-unten-verbindung", "woerter": ["ja", "ge", "ju", "gegen"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15916,7 +15916,7 @@
         "schreibschrift-l-h-k-b",
         "schreibschrift-j-y-g"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["f", "p", "auf", "hupen"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-f-p", "woerter": ["f", "p", "auf", "hupen"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15948,7 +15948,7 @@
       "voraussetzungen": [
         "schreibschrift-e"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["so", "lesen", "aus"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-s", "woerter": ["so", "lesen", "aus"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -15983,7 +15983,7 @@
         "schreibschrift-l-h-k-b",
         "schreibschrift-c-a-o"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["ist", "spielen", "schön", "essen"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "s-verbindungen-schreibschrift", "woerter": ["ist", "spielen", "schön", "essen"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -16015,7 +16015,7 @@
       "voraussetzungen": [
         "schreibschrift-s"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["süß", "weiß", "heißen"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-sz", "woerter": ["süß", "weiß", "heißen"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -16046,7 +16046,7 @@
       "voraussetzungen": [
         "schreibschrift-j-y-g"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["z", "zu", "zum", "x"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-z-x", "woerter": ["z", "zu", "zum", "x"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -16081,7 +16081,7 @@
         "schreibschrift-t",
         "schreibschrift-c-a-o"
       ],
-      "aufgaben": { "art": "schreibschrift", "woerter": ["ich", "acht", "jetzt", "backen"] },
+      "aufgaben": { "art": "schreibschrift", "thema": "schreibschrift-ck-ch-tz", "woerter": ["ich", "acht", "jetzt", "backen"] },
       "stufen": [
         "material",
         "vorstellung",

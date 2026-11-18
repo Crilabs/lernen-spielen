@@ -62,7 +62,7 @@ const LEINE_PLAETZE = 11;
 const MIN_WEG = 40;
 
 /** Nur Vorschau: Aufgaben, falls die Lernsteuerung nichts liefert. */
-const VORSCHAU = { thema: "Schaukel-Buchstaben", aufgaben: ["schreib:i", "schreib:u", "schreib:ui"] };
+const VORSCHAU = { thema: "Schaukel-Buchstaben", aufgaben: ["schreib:schreibschrift-i-u:i", "schreib:schreibschrift-i-u:u", "schreib:schreibschrift-i-u:uu"] };
 
 /** Sätze aus Daten (je Wort ausgeschrieben, texte.json). */
 const TEXTE = await fetch(new URL("texte.json", import.meta.url)).then((r) => r.json()).catch(() => null);
@@ -511,7 +511,7 @@ const elaHaltung = (id, ms = 260) => {
 const elaBewegung = (id) => { if (!lauf.skip) ela.bewegung(id); };
 
 const kamera = $("kamera");
-kamera.innerHTML = kameraSvg();
+kamera.innerHTML = `<div class="ring" id="kamera-ring"></div>${kameraSvg()}`;
 const blitz = $("blitz");
 
 /** Ein Tipp auf Ela (Stufe vorstellung): Ela schreibt das Wort noch einmal. @type {(() => void) | null} */
@@ -1079,6 +1079,7 @@ function stelleAufgabe(aufgabe, melde, o = {}) {
   B.aufgabe = { text: a.wort, ref, formen, stufe };
   B.letzter = null;
   schild.querySelector("span").textContent = a.wort;
+  schild.style.fontSize = `${Math.min(8.4, 30 / (Math.max(3, [...a.wort].length) * 0.62))}rem`;
   if (!o.ohneSatz) erzaehler.wort(a.wort);
 
   const wechsel = B.letzteStufe !== null && B.letzteStufe !== stufe && !o.ohneVorzeigen ? [B.letzteStufe, stufe] : null;
@@ -1247,7 +1248,7 @@ E.verbindeTippen(document, { ausser: [hilfe, pause, leiste, cv] });
 
 /** @param {HTMLElement | null | undefined} el */
 const ringUm = (el) => el?.classList.add("markiert");
-const ringWeg = () => document.querySelectorAll(".ela.markiert, .kamera.markiert").forEach((e) => e.classList.remove("markiert"));
+const ringWeg = () => document.querySelectorAll(".ring.markiert").forEach((e) => e.classList.remove("markiert"));
 
 /**
  * Die Einführung im echten Spielbild. Mit `r` gilt sie danach als gesehen, und die Rundenzeit beginnt.
@@ -1258,19 +1259,20 @@ function einfuehrung(r) {
   return E.spiele(async () => {
     /** @type {ReturnType<typeof stelleAufgabe> | null} */
     let du = null;
+    const fotosVorher = [...leineFotos];
+    const nrVorher = leineNr;
     try {
-      raeumeLeine();
       neuerLauf();
       B.letzteStufe = null;
       schild.hidden = true;
       kerze.hidden = false;
       kerze.classList.remove("sand");
       // Das Kind sieht zuerst das leere Bild: der Himmel, Ela, die Zeilen.
-      const vorlage = stelleAufgabe({ ziel: { key: "schreib:ui" }, stufe: "material" }, { passtNicht() {}, geloest() {} }, { ohneSatz: true, ohneVorzeigen: true });
+      const vorlage = stelleAufgabe({ ziel: { key: "schreib:schreibschrift-in-einem-zug:ui" }, stufe: "material" }, { passtNicht() {}, geloest() {} }, { ohneSatz: true, ohneVorzeigen: true });
       eingabe.offen = false;
       entferneSpuren(() => true);
       await satz(einleitung.dunkel);
-      ringUm($("ela"));
+      ringUm($("ela-ring"));
       await satz(einleitung.kerze);
       // Ela schreibt ui; der Satz läuft währenddessen.
       const L = neuerLauf();
@@ -1285,7 +1287,7 @@ function einfuehrung(r) {
       }
       ringWeg();
       elaHaltung("stehen", 300);
-      ringUm(kamera);
+      ringUm($("kamera-ring"));
       const ela1 = a ? a.ref.striche.map((s) => s.map((p) => ({ x: p.x, y: p.y }))) : [];
       const saetze = satz(einleitung.foto);
       await mit(L).warte(500);
@@ -1298,7 +1300,7 @@ function einfuehrung(r) {
       /** @type {() => void} */
       let getan = () => {};
       const gelegt = new Promise((ok) => { getan = () => ok(undefined); });
-      du = stelleAufgabe({ ziel: { key: "schreib:ui" }, stufe: "material" }, { passtNicht() {}, geloest: () => getan() }, { ohneSatz: true, ohneVorzeigen: true });
+      du = stelleAufgabe({ ziel: { key: "schreib:schreibschrift-in-einem-zug:ui" }, stufe: "material" }, { passtNicht() {}, geloest: () => getan() }, { ohneSatz: true, ohneVorzeigen: true });
       entferneSpuren(() => true);
       const start = B.aufgabe?.ref.striche.filter((_, i) => !B.aufgabe?.ref.luft[i])[0]?.[0];
       setzeStartring(start ?? null);
@@ -1317,7 +1319,10 @@ function einfuehrung(r) {
       eingabe.offen = false;
       eingabe.beiVersuch = null;
       raeumeAuf();
-      raeumeLeine();
+      // nur die Fotos der Einführung abnehmen; was die Runde schon an die Leine gehängt hat, bleibt
+      for (const f of leineFotos) if (!fotosVorher.includes(f)) f.remove();
+      leineFotos = fotosVorher;
+      leineNr = nrVorher;
       B.aufgabe = null;
       B.letzteStufe = null;
       elaHaltung("stehen", 0);
@@ -1384,10 +1389,6 @@ meldePruefSchnittstelle({
   /** Eigene Mechanik: der Prüfstand schreibt mit Zeiger-Ereignissen am Canvas. @param {any} zug */
   fuehreAus: async (zug) => {
     if (zug?.art === "schreiben") return schreibeSimuliert(zug.wie);
-    if (zug?.art === "tippen") {
-      const el = zug.von.includes(">>>") ? null : document.querySelector(zug.von);
-      if (el) { /** @type {HTMLElement} */ (el).click(); return; }
-    }
     const { fuehreAus } = await import("../../rahmen/pruefen.js");
     return fuehreAus(zug);
   },

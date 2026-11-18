@@ -27,19 +27,24 @@ function richtig(/** @type {string} */ text, dx = 60, dy = 0) {
 }
 const pruefe = (/** @type {string} */ text, /** @type {any} */ auf) => L.pruefe(V.wort("sas", text), formenVon(text), auf);
 
-test("schreibAus und aufgabenVon: Schlüssel schreib:<wort>, Wörter ohne Doppelte, nur kleine Buchstaben", () => {
-  assert.deepEqual(schreibAus("schreib:nun"), { wort: "nun" });
-  assert.deepEqual(schreibAus("schreib:küh"), { wort: "küh" });
-  assert.equal(schreibAus("schreib:Nun"), null);
-  assert.equal(schreibAus("schreib:"), null);
+test("schreibAus und aufgabenVon: Schlüssel schreib:<thema>:<wort>, Wörter ohne Doppelte, nur kleine Buchstaben", () => {
+  assert.deepEqual(schreibAus("schreib:schreibschrift-n-m:nun"), { thema: "schreibschrift-n-m", wort: "nun" });
+  assert.deepEqual(schreibAus("schreib:schreibschrift-i-u:ü"), { thema: "schreibschrift-i-u", wort: "ü" });
+  assert.equal(schreibAus("schreib:schreibschrift-i-u:Nun"), null);
+  assert.equal(schreibAus("schreib:nun"), null);
+  assert.equal(schreibAus("schreib:schreibschrift-i-u:"), null);
   assert.equal(schreibAus("zahl:7"), null);
-  const a = aufgabenVon({ art: "schreibschrift", woerter: ["i", "u", "ü", "uu", "u", "Hose", "a b"] });
-  assert.deepEqual(a.map((x) => x.key), ["schreib:i", "schreib:u", "schreib:ü", "schreib:uu"]);
-  assert.deepEqual(a[0], { key: "schreib:i", art: "schreibschrift", daten: { wort: "i" } });
+  const a = aufgabenVon({ art: "schreibschrift", thema: "schreibschrift-i-u", woerter: ["i", "u", "ü", "uu", "u", "Hose", "a b"] });
+  assert.deepEqual(a.map((x) => x.key), ["schreib:schreibschrift-i-u:i", "schreib:schreibschrift-i-u:u", "schreib:schreibschrift-i-u:ü", "schreib:schreibschrift-i-u:uu"]);
+  assert.deepEqual(a[0], { key: "schreib:schreibschrift-i-u:i", art: "schreibschrift", daten: { wort: "i", thema: "schreibschrift-i-u" } });
   assert.deepEqual(aufgabenVon({ art: "schreibschrift" }), []);
   assert.ok(schwierigkeit(a[3]) > schwierigkeit(a[0]));
   assert.equal(darstellbar(a[0], { art: "schreibschrift", stufen: ["material"] }), true);
   assert.equal(darstellbar(a[0], { art: "artikel" }), false);
+  // dasselbe Wort in zwei Themen: zwei Aufgaben mit verschiedenen Schlüsseln
+  const x = aufgabenVon({ art: "schreibschrift", thema: "oben-weiter-verbindung", woerter: ["on"] })[0];
+  const y = aufgabenVon({ art: "schreibschrift", thema: "sas-verbindung-zum-oval", woerter: ["on"] })[0];
+  assert.notEqual(x.key, y.key);
 });
 
 test("Lernplan: jedes Thema mit Schreibschrift-Aufgaben hat nur Wörter, die die SAS-Vorlage schreiben kann", () => {
@@ -49,6 +54,7 @@ test("Lernplan: jedes Thema mit Schreibschrift-Aufgaben hat nur Wörter, die die
   for (const t of mit) {
     assert.ok(t.tempo === false, `${t.id}: tempo`);
     const a = aufgabenVon(t.aufgaben);
+    assert.equal(t.aufgaben.thema, t.id, `${t.id}: thema im Schlüssel`);
     assert.equal(a.length, new Set(t.aufgaben.woerter).size, `${t.id}: Wörter ohne Aufgabe`);
     for (const x of a) assert.doesNotThrow(() => V.wort("sas", x.daten.wort), `${t.id}: ${x.daten.wort}`);
   }

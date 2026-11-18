@@ -60,23 +60,28 @@
   .schatten { position: absolute; left: 7.4rem; bottom: 1.2rem; width: 22rem; height: 3.4rem; z-index: 3; pointer-events: none; }
   .schatten::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgba(8, 16, 40, 0.38); }
 
+  /* Sonnenring der Einführung: eng um Ela bzw. den Kamerakörper (der Ring selbst ist .markiert aus seite.css). */
+  .ring { position: absolute; display: none; pointer-events: none; border-radius: 4rem; }
+  .ring.markiert { display: block; }
+  .ela .ring { left: 35%; top: 25%; width: 30%; height: 72%; }
+  .kamera .ring { left: 6%; top: 22%; width: 88%; height: 35%; border-radius: 2.6rem; }
+
   /* Die Wunderkerze in Elas Hand (steckt später im Sand) und das Holzschild am Zelt (Stufe kopf). */
   .kerze { position: absolute; left: 60%; top: 18rem; width: 1rem; height: 9rem; transform-origin: 50% 100%; transition: left 0.3s ease-out, top 0.3s ease-out, transform 0.3s ease-out; }
   .ela.zeigt .kerze { left: 75%; top: 9.6rem; transform: rotate(52deg); }
-  .ela .kerze.sand, .ela.zeigt .kerze.sand { left: 91%; top: 30rem; transform: rotate(10deg) !important; transition-duration: 0.7s; }
+  .ela .kerze.sand, .ela.zeigt .kerze.sand { left: 68%; top: 33rem; transform: rotate(8deg) !important; transition-duration: 0.7s; }
   .kerze .stab { position: absolute; left: 0.3rem; top: 1.2rem; width: 0.4rem; height: 7.8rem; background: #A9B4C8; border-radius: 0.2rem; }
   .kerze .kopf { position: absolute; left: -0.6rem; top: -0.2rem; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: radial-gradient(circle, #FFF6D0 0 25%, rgba(255, 190, 80, 0.7) 45%, rgba(255, 190, 80, 0) 72%); }
   .kerze.sand .kopf { opacity: 0.3; }
   .kerze[hidden] { display: none; }
   .schild {
     position: absolute; left: 4rem; top: 28rem; width: 34rem; height: 15rem; z-index: 4; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(#C9A06E, #B98E5E); border: var(--ls-kontur) solid #6B4A26; border-radius: 1.6rem; color: #2B1B0C; pointer-events: none;
+    background: linear-gradient(#C9A06E, #B98E5E); border: var(--ls-kontur) solid #6B4A26; border-radius: 1.6rem; color: #2B1B0C; pointer-events: none; font-size: 8.4rem;
   }
   .schild[hidden] { display: none; }
-  .schild span { font-size: 8.4rem; font-weight: 700; line-height: 1; letter-spacing: 0.04em; }
-  .schild::before, .schild::after { content: ""; position: absolute; top: -3rem; width: 0.4rem; height: 3rem; background: #E7D7B8; }
-  .schild::before { left: 18%; }
-  .schild::after { right: 18%; }
+  .schild span { font-size: inherit; font-weight: 700; line-height: 1; letter-spacing: 0.04em; }
+  /* Das Schild steht auf einem Pfosten hinter Ela. */
+  .schild::after { content: ""; position: absolute; left: 50%; top: 100%; width: 2.2rem; height: 42rem; margin-left: -1.1rem; background: linear-gradient(90deg, #A47F52 0 55%, #7C5C38 55%); z-index: -1; }
 
   /* Die Kamera auf dem Stativ, rechts am Rand; das Foto, das noch bei ihr liegt, ragt aus ihrem Schlitz. */
   .kamera { position: absolute; right: 2.6rem; bottom: 16.4rem; width: 21rem; height: 44rem; z-index: 4; pointer-events: none; transform-origin: 50% 70%; }
@@ -136,7 +141,7 @@
     </section>
     <div class="schild" id="schild" hidden aria-hidden="true"><span></span></div>
     <div class="schatten" id="schatten" aria-hidden="true"></div>
-    <div class="ela" id="ela" aria-hidden="true"><div class="koerper" id="ela-koerper"></div><div class="kerze" id="kerze"><i class="stab"></i><i class="kopf"></i></div></div>
+    <div class="ela" id="ela" aria-hidden="true"><div class="koerper" id="ela-koerper"></div><div class="ring" id="ela-ring"></div><div class="kerze" id="kerze"><i class="stab"></i><i class="kopf"></i></div></div>
     <div class="kamera" id="kamera" aria-hidden="true"></div>
     <div class="liegt" id="liegt" aria-hidden="true"></div>
   </main>

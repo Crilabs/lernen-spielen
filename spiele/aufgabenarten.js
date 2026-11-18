@@ -22,9 +22,10 @@
 //              Satz dient mehreren Themen (nomen, verb, adjektiv). Spezifikation { art: "wortart", ziel: ["nomen"] }; `kopf` nennt die
 //              Wortarten, die auf der Stufe kopf zusätzlich Symbole tragen ({ ziel: ["verb"], kopf: ["verb", "nomen"] }).
 //              Sätze in spiele/woerter/wortarten.js.
-//   schreibschrift  "schreib:nun"   daten { wort }   (ein Wort in Schreibschrift in einem Zug schreiben; Leuchtschrift S20).
-//              Spezifikation { art: "schreibschrift", woerter: ["i", "u", "nun"] } (kleine Buchstaben a–z, ä, ö, ü, ß; die Wörter
-//              stammen aus den Beispielen des Themas). Welche Schrift (SAS oder VA) gilt, entscheidet erst das Spiel
+//   schreibschrift  "schreib:schreibschrift-n-m:nun"   daten { wort, thema }   (ein Wort in Schreibschrift in einem Zug schreiben;
+//              Leuchtschrift S20). Spezifikation { art: "schreibschrift", thema: "schreibschrift-n-m", woerter: ["n", "m", "nun"] }
+//              (kleine Buchstaben a–z, ä, ö, ü, ß; die Wörter stammen aus den Beispielen des Themas). Der Schlüssel trägt das
+//              Thema, denn dasselbe Wort (on, be, ja) steht in mehreren Themen, und jede Aufgabe gehört zu genau einem. Welche Schrift (SAS oder VA) gilt, entscheidet erst das Spiel
 //              (schriftPfad), nicht die Aufgabe. Ohne Zielzeit: Schreiben ist nie ein Tempo-Thema (tempo: false).
 
 import { WORTSCHAETZE, wortMit } from "./woerter/artikel.js";
@@ -107,10 +108,10 @@ export function wortartAus(key) {
   return m && satzMit(m[2]) ? { key: m[0], ziel: m[1], id: m[2] } : null;
 }
 
-/** "schreib:nun" → { wort: "nun" }, sonst null. */
+/** "schreib:schreibschrift-n-m:nun" → { thema: "schreibschrift-n-m", wort: "nun" }, sonst null. */
 export function schreibAus(key) {
-  const m = /^schreib:([a-zäöüß]+)$/.exec(String(key ?? ""));
-  return m ? { wort: m[1] } : null;
+  const m = /^schreib:([a-z0-9]+(?:-[a-z0-9]+)*):([a-zäöüß]+)$/.exec(String(key ?? ""));
+  return m ? { thema: m[1], wort: m[2] } : null;
 }
 
 const UEBERGANG_AB = 20; // darüber kein Übertrag der Einer
@@ -217,7 +218,9 @@ export function aufgabenVon(spec) {
     }
     case "schreibschrift": {
       const woerter = Array.isArray(spec.woerter) ? spec.woerter : [];
-      return [...new Set(woerter)].filter((w) => schreibAus(`schreib:${w}`)).map((w) => ({ key: `schreib:${w}`, art: "schreibschrift", daten: { wort: w } }));
+      const thema = String(spec.thema ?? "");
+      return [...new Set(woerter)].filter((w) => schreibAus(`schreib:${thema}:${w}`))
+        .map((w) => ({ key: `schreib:${thema}:${w}`, art: "schreibschrift", daten: { wort: w, thema } }));
     }
     default:
       return [];

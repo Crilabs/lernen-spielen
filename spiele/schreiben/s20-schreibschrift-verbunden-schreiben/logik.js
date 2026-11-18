@@ -277,9 +277,9 @@ export function verschiebe(p, dx, dy, s = 1) {
   return p.map((q) => ({ x: q.x * s + dx, y: q.y * s + dy }));
 }
 
-/** Die Feinheit der Hilfe (nach dem 2. Versuch) und der Befunde: Dauer in ms, mit der Ela einen Weg von `laenge` Einheiten schreibt. @param {number} laenge @param {number} [tempo] 1 = Vorzeigen, 0.5 = sehr langsam */
+/** Die Feinheit der Hilfe (nach dem 2. Versuch) und der Befunde: Dauer in ms, mit der Ela einen Weg von `laenge` Einheiten schreibt (400 Einheiten je Sekunde, höchstens 4,2 s). @param {number} laenge @param {number} [tempo] 1 = Vorzeigen, 0.5 = sehr langsam */
 export function schreibDauer(laenge, tempo = 1) {
-  return Math.max(500, Math.min(4200, (laenge / 190) * 1000 / tempo));
+  return Math.max(500, Math.min(4200, (laenge / 400) * 1000 / tempo));
 }
 
 /** Wörter, die Ela zum Einüben nennt (Daten der Sätze, Idee §6): Aufgabe → fester Satz in texte.json. @param {string} w */
