@@ -22,6 +22,10 @@
 //              Satz dient mehreren Themen (nomen, verb, adjektiv). Spezifikation { art: "wortart", ziel: ["nomen"] }; `kopf` nennt die
 //              Wortarten, die auf der Stufe kopf zusätzlich Symbole tragen ({ ziel: ["verb"], kopf: ["verb", "nomen"] }).
 //              Sätze in spiele/woerter/wortarten.js.
+//   schreibschrift  "schreib:nun"   daten { wort }   (ein Wort in Schreibschrift in einem Zug schreiben; Leuchtschrift S20).
+//              Spezifikation { art: "schreibschrift", woerter: ["i", "u", "nun"] } (kleine Buchstaben a–z, ä, ö, ü, ß; die Wörter
+//              stammen aus den Beispielen des Themas). Welche Schrift (SAS oder VA) gilt, entscheidet erst das Spiel
+//              (schriftPfad), nicht die Aufgabe. Ohne Zielzeit: Schreiben ist nie ein Tempo-Thema (tempo: false).
 
 import { WORTSCHAETZE, wortMit } from "./woerter/artikel.js";
 import { PERSONEN, PERSONEN_GRUNDFORM, VERBEN, VERBEN_PERSON, ENDUNG_VON, PRONOMEN_VON, formVon, verbMit, werVon } from "./woerter/verben.js";
@@ -101,6 +105,12 @@ export function verbformAus(key) {
 export function wortartAus(key) {
   const m = /^wortart:(nomen|verb|adjektiv):([a-z-]+)$/.exec(String(key ?? ""));
   return m && satzMit(m[2]) ? { key: m[0], ziel: m[1], id: m[2] } : null;
+}
+
+/** "schreib:nun" → { wort: "nun" }, sonst null. */
+export function schreibAus(key) {
+  const m = /^schreib:([a-zäöüß]+)$/.exec(String(key ?? ""));
+  return m ? { wort: m[1] } : null;
 }
 
 const UEBERGANG_AB = 20; // darüber kein Übertrag der Einer
@@ -205,6 +215,10 @@ export function aufgabenVon(spec) {
         ? saetzeFuer(ziel[0]).map((s) => ({ key: `wortart:${ziel[0]}:${s.id}`, art: "wortart", daten: { satz: s.id, woerter: s.woerter, ziel, kopfZiel } }))
         : [];
     }
+    case "schreibschrift": {
+      const woerter = Array.isArray(spec.woerter) ? spec.woerter : [];
+      return [...new Set(woerter)].filter((w) => schreibAus(`schreib:${w}`)).map((w) => ({ key: `schreib:${w}`, art: "schreibschrift", daten: { wort: w } }));
+    }
     default:
       return [];
   }
@@ -232,6 +246,8 @@ export function schwierigkeit(aufgabe) {
   // verbform: ich und du verraten ihre Endung am Fürwort (0); er, sie, wir (1); ihr und sie (Mehrzahl) teilen die Endung (2)
   if (aufgabe.art === "verbform") return d.ziel === "grundform" ? (d.grundform.endsWith("eln") ? 2 : 1) : { ich: 0, du: 0, er: 1, sie: 1, wir: 1, ihr: 2, "sie-pl": 2 }[/** @type {"ich"} */ (d.person)] ?? 1;
   if (aufgabe.art === "wortart") return satzMit(d.satz)?.schwierigkeit ?? 1;
+  // schreibschrift: je Buchstabe eins mehr (mehr Verbindungen, mehr Weg); mit Umlaut, ß oder Unterlänge-Buchstaben (g, j, y, q, p, z) etwas schwerer
+  if (aufgabe.art === "schreibschrift") return [...d.wort].length + ([...d.wort].some((c) => "äöüßgjyqpz".includes(c)) ? 1 : 0) - 1;
   // mal: Kernaufgabe 0, eine Gruppe neben einer Kernaufgabe (3, 4, 6, 9) 1, zwei Gruppen daneben (7, 8) 2
   if (aufgabe.art === "mal") return KERN_FAKTOREN.includes(d.a) ? 0 : [7, 8].includes(d.a) ? 2 : 1;
   if (d.op === "plus") return Math.min(d.a, d.b) + ((d.a % 10) + (d.b % 10) >= 10 ? 5 : 0);

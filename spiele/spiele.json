@@ -43,6 +43,12 @@
       "text": "Dreieck oder Kreis über das Wort legen, Kofi macht die Probe.",
       "beschreibung": "Das Kind legt Wortartensymbole über Wörter, die Kofi in Kreidekästchen auf den Hof gemalt hat: das Dreieck über Nomen, den Kreis über Verben. Kofi hüpft hin, und die Probe läuft im Bild: der, die oder das davor, oder ich und du mit der passenden Endung. Passt die Probe nicht, rutscht das Symbol zurück, und die Probe ist zu hören.",
       "arten": [{ "art": "wortart", "stufen": ["material", "vorstellung", "kopf"] }],
+      "regal": null },
+    { "id": "leuchtschrift", "titel": "Leuchtschrift", "thema": "Schreibschrift", "kategorie": "schreiben",
+      "symbol": "schreiben/s20-schreibschrift-verbunden-schreiben/symbol.svg", "datei": "schreiben/s20-schreibschrift-verbunden-schreiben/index.html",
+      "text": "Ein Wort in einem Zug schreiben, Ela macht ein Leuchtfoto.",
+      "beschreibung": "Das Kind schreibt Buchstaben und Wörter in Schreibschrift mit Stift oder Finger in einem Zug in die Lineatur. Die Spur leuchtet wie eine Wunderkerze; hebt das Kind am Ende ab, macht die Kamera ein Foto, und das Wort hängt an Elas Leine. Wo abgesetzt wurde, zeigt das Foto eine Lücke; Startpunkt, Drehrichtung und Band zeigt Elas Vorlage daneben.",
+      "arten": [{ "art": "schreibschrift", "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null }
   ]
 }
