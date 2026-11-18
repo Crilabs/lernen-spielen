@@ -174,5 +174,29 @@
   "einheit": "keine",
   "menge": 0,
   "notiz": "Freigabe nötig: (1) Lineatur mit Mittelband als neues Lernzeichen für alle Handschrift-Spiele + Eingabe Freihand-Strich in bedienung.md? (2) Dunkler Himmel statt heller Matte (§4)? (3) Karte geändert: Ela pustet/zündet nicht neu (G11/G9), Gast mit Postkarte nur gelegentlich?"
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4878,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4878,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 558
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6250
+  }
  }
 ]
