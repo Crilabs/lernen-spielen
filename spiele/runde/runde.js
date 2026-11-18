@@ -11,6 +11,7 @@ import "./rolli.js";
 import "./zubehoer/zauberstab-umhang.js";
 import "./zubehoer/lupenmuetze.js";
 import "./zubehoer/schirm.js";
+import "./zubehoer/roller.js";
 import "./kinder/ela.js";
 import "./kinder/kofi.js";
 import "./kinder/lena.js";

@@ -7360,7 +7360,7 @@
       "voraussetzungen": [
         "stifthaltung"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["schwung-senkrecht"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -7391,7 +7391,7 @@
       "voraussetzungen": [
         "stifthaltung"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["schwung-waagerecht"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -7454,7 +7454,7 @@
       "voraussetzungen": [
         "schwung-senkrecht"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["schwung-kreis-linksherum"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -7485,7 +7485,7 @@
       "voraussetzungen": [
         "schwung-kreis-linksherum"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["schwung-girlande"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -7519,7 +7519,7 @@
       "verwechslung": [
         "schwung-girlande"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["schwung-arkade"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -7712,7 +7712,7 @@
         "laut-l",
         "laut-i"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["l", "i"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -7746,7 +7746,7 @@
         "schwung-waagerecht",
         "laut-t"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["t"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -7810,7 +7810,7 @@
         "schwung-kreis-linksherum",
         "laut-c"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["c"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -7842,7 +7842,7 @@
         "druck-klein-c",
         "laut-o"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["o"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -7876,7 +7876,7 @@
         "laut-a",
         "laut-d"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["a", "d"] },
       "stufen": [
         "material",
         "vorstellung",
@@ -8627,7 +8627,7 @@
         "schwung-zickzack",
         "ziffern-lesen-bis-10"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "schreiben", "zeichen": ["ziffer-1", "ziffer-4", "ziffer-7"] },
       "stufen": [
         "material",
         "vorstellung",

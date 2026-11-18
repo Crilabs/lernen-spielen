@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Selbst schreiben</title>
+<!-- S18 Selbst schreiben (Idee docs/spiele/schreiben/s18-selbst-schreiben-strichfolge-sehen-frei-schreiben.md). Ein Schulhof (raum.js):
+     hinten Backsteinmauer und Zaun mit dem Hof-Schild, links ein Baum, vorn Pflaster. Das Buchstabenhaus (Keller, Erdgeschoss, Dach)
+     ist mit Kreide auf das Pflaster gemalt und das Hellste; das Kind schreibt mit dem Finger hinein. Ela fährt die Linie mit dem
+     Roller ab, Lena legt vor. Leiste, Blase, Hilfe und Pause an ihren festen Plätzen. -->
+<link rel="stylesheet" href="../../rahmen/seite.css">
+<style>
+  /* ===== SPIELWELT: der Schulhof. Alles in rem (1rem = Bildhöhe/108). ===== */
+  :root {
+    /* Höhe eines Bandes im Buchstabenhaus; das Blatt ist 6,4 Bänder breit und 3 hoch. Schmale Bildschirme verkleinern es. */
+    --band: min(17rem, calc((min(100vw, 192rem) - 44rem) / 6.4));
+    --fig: calc(var(--band) * 1);
+  }
+  body[data-stufe="vorstellung"], body[data-stufe="kopf"] { --band: min(13.6rem, calc((min(100vw, 192rem) - 44rem) / 6.4)); }
+  .welt { position: fixed; inset: 0; background: linear-gradient(#E8B79A 0 41rem, #DDD7D0 41rem); z-index: 0; }
+  .welt svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  .spielflaeche { overflow: visible; }
+  ls-blase { position: absolute; left: 3rem; top: 1.4rem; z-index: 7; }
+
+  /* Das Hof-Schild: flaches Holz am Zaun, Platz für die Zeichen der Runde. */
+  .schild {
+    position: absolute; right: 8rem; top: 3.2rem; width: 54rem; height: 19rem; z-index: 4;
+    background: #EBD3AA; border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius-klein);
+    display: flex; align-items: center; justify-content: center; padding: 1.4rem 2rem;
+  }
+  .schild::before, .schild::after { content: ""; position: absolute; bottom: -6.4rem; width: 2.6rem; height: 6.4rem; background: #C9A06E; border: var(--ls-kontur) solid var(--ls-tinte); border-top: 0; z-index: -1; }
+  .schild::before { left: 6rem; } .schild::after { right: 6rem; }
+  .plaetze { display: flex; gap: 1.2rem; width: 100%; height: 100%; align-items: stretch; justify-content: flex-start; }
+  .platz { position: relative; flex: 0 0 7.6rem; border-radius: 1.2rem; background: rgba(255, 252, 247, 0.5); border: 0.25rem dashed #C9A06E; }
+  .platz svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .platz.belegt { border-style: solid; border-color: transparent; background: rgba(255, 252, 247, 0.85); }
+
+  /* Das Buchstabenhaus: mit Kreide auf das Pflaster gemalt. Erdgeschoss am hellsten, nur Hell-Dunkel (keine Bandfarben). */
+  .feld { position: absolute; left: 50%; top: 28rem; width: calc(var(--band) * 6.4); height: calc(var(--band) * 3); transform: translateX(-50%); z-index: 3; touch-action: none; }
+  .feld svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; pointer-events: none; }
+  .zeile { position: absolute; inset: 0; border-radius: 2.4rem; touch-action: none; cursor: crosshair; outline-offset: 0.6rem; }
+  .zeile:focus-visible { outline: 0.8rem solid var(--ls-sonne); box-shadow: 0 0 0 1.1rem var(--ls-tinte); }
+  .zeile.sperre { cursor: default; }
+  .startpunkt {
+    position: absolute; width: 6rem; height: 6rem; margin: -3rem 0 0 -3rem; border-radius: 50%; z-index: 2; pointer-events: none;
+    background: var(--ls-sonne); border: var(--ls-kontur) solid var(--ls-tinte); opacity: 0; transition: opacity 0.18s;
+  }
+  .startpunkt.da { opacity: 1; }
+  .startpunkt.markiert { opacity: 1; }
+  .wackelt { animation: wackel 0.4s ease-in-out; }
+  @keyframes wackel { 20% { translate: -0.8rem 0; } 55% { translate: 0.7rem 0; } 85% { translate: -0.3rem 0; } }
+
+  /* Ela und Lena: kleiner als eine Bandhöhe; ihre Räder stehen auf der Linie (Unterkante des Feldes = Radunterkante). */
+  .figur {
+    position: absolute; left: 0; top: 0; z-index: 5; width: calc(var(--fig) * 320 / 280); height: var(--fig);
+    padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; transform-origin: 50% 99%; will-change: transform;
+  }
+  .figur .koerper { position: absolute; inset: 0; transform-origin: 50% 99%; will-change: transform; pointer-events: none; }
+  .figur svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .figur:focus-visible { outline: 0.8rem solid var(--ls-sonne); outline-offset: -0.8rem; border-radius: 3rem; }
+  .figur.sperre { cursor: default; }
+  .schatten { position: absolute; left: 0; top: 0; width: calc(var(--fig) * 0.62); height: calc(var(--fig) * 0.1); z-index: 4; pointer-events: none; will-change: transform, opacity; }
+  .schatten::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgba(59, 42, 107, 0.2); }
+
+  /* Fliegende Dinge (das Zeichen zum Schild): eigene Ebene über allem Bild. */
+  .fluege { position: absolute; inset: 0; z-index: 9; pointer-events: none; overflow: visible; }
+  .flug { position: absolute; left: 0; top: 0; will-change: transform; pointer-events: none; }
+  .flug svg { width: 100%; height: 100%; overflow: visible; }
+
+  /* Pause: Sachmoment auf der Papierkarte. */
+  .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
+  .sachmoment p { margin: 0; }
+  .sachmoment .zettel { display: flex; gap: 3rem; align-items: flex-end; }
+  .sachmoment .zettel svg { height: 13rem; width: auto; overflow: visible; }
+  .sachmoment .hinweis {
+    display: inline-flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 4rem 1.6rem 1.6rem;
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-papier);
+    box-shadow: var(--ls-schatten); color: var(--ls-tinte); font-weight: 700; text-decoration: none;
+  }
+  .sachmoment .hinweis img { width: 8rem; height: 8rem; }
+  .sachmoment .hinweis:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+
+  .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
+  .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
+  .eltern p { max-width: 70ch; }
+  .eltern .beschreibung { margin: 0 0 3rem; color: var(--ls-tinte-weich); }
+  .eltern a { color: var(--ls-tinte); font-weight: 700; }
+
+  @media (prefers-reduced-motion: reduce) { .wackelt { animation: none; } }
+</style>
+</head>
+<body data-stufe="material">
+<div class="welt" id="welt" aria-hidden="true"></div>
+<script type="module">
+  import { raumSvg } from "./raum.js";
+  document.getElementById("welt").innerHTML = raumSvg();
+</script>
+
+<ls-leiste id="leiste" spiel="kreidebahn" fach="schreiben" titel="Selbst schreiben" thema="">
+  <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
+  <ls-knopf slot="rechts" id="anleitung" symbol="buch.svg" name="Anleitung" hidden></ls-knopf>
+</ls-leiste>
+
+<div class="buehne">
+  <main class="spielflaeche" aria-label="Schulhof mit Buchstabenhaus">
+    <ls-blase id="blase" ohne-text></ls-blase>
+    <section class="schild" id="schild" aria-label="Hof-Schild"><div class="plaetze" id="plaetze"></div></section>
+    <div class="feld" id="feld">
+      <svg id="blatt" viewBox="0 0 640 300" preserveAspectRatio="none" aria-hidden="true">
+        <g id="haus"></g>
+        <g id="spur-lena"></g>
+        <g id="spur-fest"></g>
+        <g id="spur-kind"></g>
+      </svg>
+      <div class="startpunkt" id="startpunkt"></div>
+      <div class="zeile" id="zeile" role="button" tabindex="0" aria-label="Buchstabenhaus: hier schreiben"></div>
+    </div>
+    <div class="schatten" id="lena-schatten" aria-hidden="true"></div>
+    <button type="button" class="figur" id="lena" aria-label="Lena: noch einmal vorfahren"><div class="koerper" id="lena-koerper"></div></button>
+    <div class="schatten" id="ela-schatten" aria-hidden="true"></div>
+    <button type="button" class="figur" id="ela" aria-label="Ela: fahre los"><div class="koerper" id="ela-koerper"></div></button>
+    <div class="fluege" id="fluege" aria-hidden="true"></div>
+  </main>
+</div>
+
+<ls-hilfe id="hilfe"></ls-hilfe>
+<ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
+
+<script type="module" src="spiel.js"></script>
+</body>
+</html>
