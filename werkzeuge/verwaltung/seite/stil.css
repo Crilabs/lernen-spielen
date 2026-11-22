@@ -184,3 +184,8 @@ main:has(#lernweg:not([hidden])) { max-width: none; padding-bottom: 12px; }
 .lw-angebot div { margin-top: 3px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
 .lw-angebot button.klein { padding: 1px 8px; color: var(--akzent); border: 1px solid var(--akzent); border-radius: 5px; background: var(--flaeche); }
 .lw-angebot button.klein:hover { background: var(--grund); text-decoration: none; }
+
+/* Aufträge filtern (2026-11-22) */
+.auftrag-filter label { display: flex; gap: 6px; align-items: center; color: var(--leise); }
+.auftrag-filter select { background: var(--flaeche); border: 1px solid var(--linie); border-radius: 6px; padding: 4px 8px; }
+.auftrag-filter [aria-pressed="true"] { background: var(--akzent); color: var(--akzent-text); border-color: var(--akzent); }

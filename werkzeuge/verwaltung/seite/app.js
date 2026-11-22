@@ -35,7 +35,7 @@ let U = /** @type {any} */ (null);
 let A = /** @type {any} */ ({ auftraege: [], laeuft: false });
 let gewaehlt = /** @type {string|null} */ (null);
 let protokollAb = 0;
-const zustand = { reiter: "spiele", fach: "", klasse: "", luecken: false, suche: "", lernwegFach: "mathe", lernwegThema: "" };
+const zustand = { reiter: "spiele", fach: "", klasse: "", luecken: false, suche: "", lernwegFach: "mathe", lernwegThema: "", auftragFach: "", auftragStatus: "", erledigteZeigen: false };
 try { Object.assign(zustand, JSON.parse(localStorage.getItem("verwaltung") ?? "{}")); } catch { /* ohne Speicher */ }
 // alte Reiter (bis 16.11.) auf die neuen abbilden
 zustand.reiter = ({ lernthemen: "spiele", sachthemen: "bibliothek" })[zustand.reiter] ?? zustand.reiter;
@@ -178,8 +178,44 @@ function zeigeBibliothek() {
 
 // ---------- Aufträge ----------
 
+// Filter der Aufträge (Christian, 2026-11-22): nach Fach und Status; Abgeschlossenes erst auf Wunsch
+const ABGESCHLOSSEN = ["erledigt", "beantwortet", "gestrichen"];
+const STATUS_REIHE = ["wartet", "laeuft", "wartet-auf-christian", "fehlgeschlagen", "erledigt", "beantwortet", "gestrichen"];
+const SONDER_FACH = { buecher: "Bücher", ohne: "ohne Fach" };
+
+/** Fächer eines Auftrags: Spiele über den Buchstaben der Id, Lernthemen über ihren Strang, Bücher eigen, freie ohne. */
+function faecherVon(a) {
+  const st = a.stueck ?? (a.art === "ideen" ? { bereich: "spiel", ids: [a.ziel] }
+    : a.art === "einfuehrung" ? { bereich: "echte-dinge", ids: [a.ziel] } : null);
+  if (!st) return ["ohne"];
+  if (st.bereich === "buch") return ["buecher"];
+  const ids = st.ids ?? [];
+  const f = st.bereich === "spiel" ? ids.map((id) => FACH_JE_BUCHSTABE[String(id)[0]]) : ids.map((id) => lernthema(id)?.strang);
+  const da = [...new Set(f.filter(Boolean))];
+  return da.length ? da : ["ohne"];
+}
+
+/** Filterleiste und die Aufträge, die durch den Filter kommen. */
+function auftragFilter(l) {
+  const statusPasst = (a) => zustand.auftragStatus ? a.status === zustand.auftragStatus : zustand.erledigteZeigen || !ABGESCHLOSSEN.includes(a.status);
+  const fachPasst = (a) => !zustand.auftragFach || faecherVon(a).includes(zustand.auftragFach);
+  const zahlFach = (f) => l.filter((a) => statusPasst(a) && (!f || faecherVon(a).includes(f))).length;
+  const zahlStatus = (st) => l.filter((a) => fachPasst(a) && (!st ? zustand.erledigteZeigen || !ABGESCHLOSSEN.includes(a.status) : a.status === st)).length;
+  const faecher = [...(U?.faecher ?? []).map((f) => [f.id, f.name]), ...Object.entries(SONDER_FACH)];
+  const opt = (wert, text, gewaehlt, n) => `<option value="${esc(wert)}" ${gewaehlt ? "selected" : ""}>${esc(text)} (${n})</option>`;
+  const leiste = `<div class="leiste auftrag-filter">
+    <label>Fach <select data-af="auftragFach">${opt("", "alle", !zustand.auftragFach, zahlFach(""))}
+      ${faecher.map(([id, name]) => opt(id, name, zustand.auftragFach === id, zahlFach(id))).join("")}</select></label>
+    <label>Status <select data-af="auftragStatus">${opt("", zustand.erledigteZeigen ? "alle" : "alle offenen", !zustand.auftragStatus, zahlStatus(""))}
+      ${STATUS_REIHE.map((st) => opt(st, STATUS_TEXT[st] ?? st, zustand.auftragStatus === st, zahlStatus(st))).join("")}</select></label>
+    <button class="zweit" data-erledigte aria-pressed="${zustand.erledigteZeigen}" title="erledigt, beantwortet und gestrichen">${zustand.erledigteZeigen ? "Erledigte ausblenden" : "Erledigte zeigen"}</button>
+  </div>`;
+  return { leiste, passt: (a) => statusPasst(a) && fachPasst(a) };
+}
+
 function zeigeAuftraege() {
   const l = A.auftraege;
+  const filter = auftragFilter(l);
   const wartend = l.filter((a) => a.status === "wartet" && a.art !== "ideen");
   const summe = wartend.reduce((s, a) => s + (a.schaetzung_eur ?? 0), 0);
   const unbekannt = wartend.some((a) => a.schaetzung_eur === null);
@@ -188,8 +224,9 @@ function zeigeAuftraege() {
   if (!gewaehlt && laeuft) gewaehlt = laeuft.id;
   // wartende in Warteschlangen-Reihenfolge oben, danach der Rest, neueste zuerst
   const wartendeReihe = l.filter((a) => a.status === "wartet" && a.art !== "ideen");
-  const rest = [...l].reverse().filter((a) => !wartendeReihe.includes(a) && a.status !== "gestrichen");
-  const tabelle = [...wartendeReihe, ...rest].map((a) => {
+  const rest = [...l].reverse().filter((a) => !wartendeReihe.includes(a));
+  const sichtbar = [...wartendeReihe, ...rest].filter(filter.passt);
+  const tabelle = sichtbar.map((a) => {
     const steuer = a.status === "wartet"
       ? `<button class="klein" data-schritt="hoch" data-id="${esc(a.id)}" title="nach oben">↑</button>
          <button class="klein" data-schritt="runter" data-id="${esc(a.id)}" title="nach unten">↓</button>
@@ -223,8 +260,11 @@ function zeigeAuftraege() {
     <div class="leiste">${knopf}
       <form id="frei" class="leiste" style="margin:0"><input name="text" placeholder="Freier Auftrag …" size="40" style="padding:6px 8px;border:1px solid var(--linie);border-radius:6px;background:var(--flaeche)">
       <button class="zweit">anlegen</button></form></div>
-    ${l.length ? `<div class="karte"><table><thead><tr><th>Art</th><th>Auftrag</th><th class="zahl-z">Schätzung</th><th>Status</th><th>Zeit</th><th></th></tr></thead>
-      <tbody>${tabelle}</tbody></table></div>` : `<p class="leer">Noch keine Aufträge. In Spiele oder Bibliothek mit + anlegen.</p>`}
+    ${l.length ? filter.leiste : ""}
+    ${sichtbar.length ? `<div class="karte"><table><thead><tr><th>Art</th><th>Auftrag</th><th class="zahl-z">Schätzung</th><th>Status</th><th>Zeit</th><th></th></tr></thead>
+      <tbody>${tabelle}</tbody></table></div>`
+      : l.length ? `<p class="leer">Keine Aufträge für diesen Filter${zustand.erledigteZeigen ? "" : " – Erledigte sind ausgeblendet"}.</p>`
+      : `<p class="leer">Noch keine Aufträge. In Spiele oder Bibliothek mit + anlegen.</p>`}
     ${gewaehlt ? `<h3>Protokoll</h3><pre class="protokoll" id="protokoll"></pre>` : ""}`;
   protokollAb = 0;
   if (gewaehlt) ladeProtokoll();
@@ -359,7 +399,7 @@ let lwSuche = "";
 const lwAusschnitte = /** @type {Record<string, { s: number, x: number, y: number }>} */ ({});
 let blick = { s: 1, x: 0, y: 0 };
 const fachName = (id) => U.faecher.find((f) => f.id === id)?.name ?? id;
-const lernthema = (id) => U.lernthemen.find((t) => t.id === id);
+const lernthema = (id) => (U?.lernthemen ?? []).find((t) => t.id === id);
 
 function zeigeLernweg() {
   const fach = zustand.lernwegFach;
@@ -703,6 +743,7 @@ document.addEventListener("click", async (e) => {
       document.querySelectorAll("[data-luecken]").forEach((b) => b.setAttribute("aria-pressed", String(b === z)));
       zeige();
     }
+    else if (z.dataset.erledigte !== undefined) { zustand.erledigteZeigen = !zustand.erledigteZeigen; merke(); zeigeAuftraege(); }
     else if (z.dataset.lwThema) springe(z.dataset.lwThema);
     else if (z.dataset.lw) lwKnopf(z.dataset.lw);
     else if (z.dataset.auftrag) bestaetige(z.dataset.auftrag, z.dataset.ziel);
@@ -746,6 +787,13 @@ $("#f-fach").addEventListener("change", (e) => {
   const wert = /** @type {HTMLSelectElement} */ (e.target).value;
   if (zustand.reiter === "lernweg") zustand.lernwegFach = wert; else zustand.fach = wert;
   merke(); zeige();
+});
+document.addEventListener("change", (e) => {
+  const f = /** @type {HTMLSelectElement} */ (e.target);
+  if (!f.dataset?.af) return;
+  zustand[/** @type {"auftragFach"|"auftragStatus"} */ (f.dataset.af)] = f.value;
+  merke();
+  zeigeAuftraege();
 });
 $("#f-klasse").addEventListener("change", (e) => { zustand.klasse = /** @type {HTMLSelectElement} */ (e.target).value; merke(); zeige(); });
 let suchTakt = 0;
