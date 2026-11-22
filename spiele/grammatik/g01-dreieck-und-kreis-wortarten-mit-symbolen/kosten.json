@@ -317,5 +317,18 @@
   "notiz": "Spielbau Steuerung",
   "cache_lesen": 398063,
   "cache_schreiben": 2012
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 80,
+  "ausgabe": 17746,
+  "einheit": "tokens",
+  "menge": 4925875,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 4778829,
+  "cache_schreiben": 129220
  }
 ]
