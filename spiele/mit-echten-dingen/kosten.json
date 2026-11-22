@@ -4818,5 +4818,339 @@
    "gegenwart-praesens",
    "pronomen-statt-nomen"
   ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 546,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ergaenzen-zum-zehner.png",
+  "themen": 1,
+  "thema": [
+   "ergaenzen-zum-zehner"
+  ],
+  "usage": {
+   "input_tokens": 546,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 546
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2302
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 581,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ergaenzen-zum-zehner.png",
+  "themen": 1,
+  "thema": [
+   "ergaenzen-zum-zehner"
+  ],
+  "usage": {
+   "input_tokens": 581,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 581
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2337
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 16,
+  "ausgabe": 8951,
+  "einheit": "tokens",
+  "menge": 558866,
+  "notiz": "ergaenzen-zum-zehner, Prüfung Runde 1",
+  "cache_lesen": 469613,
+  "cache_schreiben": 80286,
+  "themen": 1,
+  "thema": [
+   "ergaenzen-zum-zehner"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 16,
+  "ausgabe": 11472,
+  "einheit": "tokens",
+  "menge": 590884,
+  "notiz": "ergaenzen-zum-zehner, Prüfung Runde 2",
+  "cache_lesen": 505821,
+  "cache_schreiben": 73575,
+  "themen": 1,
+  "thema": [
+   "ergaenzen-zum-zehner"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 564,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ergaenzen-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "ergaenzen-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 564,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 564
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2320
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 573,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ergaenzen-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "ergaenzen-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 573,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 573
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2329
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 12,
+  "ausgabe": 14798,
+  "einheit": "tokens",
+  "menge": 515605,
+  "notiz": "ergaenzen-bis-100, Prüfung Runde 1",
+  "cache_lesen": 405243,
+  "cache_schreiben": 95552,
+  "themen": 1,
+  "thema": [
+   "ergaenzen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 19857,
+  "einheit": "tokens",
+  "menge": 843534,
+  "notiz": "ergaenzen-bis-100, Prüfung Runde 2",
+  "cache_lesen": 720627,
+  "cache_schreiben": 103032,
+  "themen": 1,
+  "thema": [
+   "ergaenzen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 579,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-ueber-den-zehner-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 579,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 579
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2335
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 606,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-ueber-den-zehner-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 606,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 606
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2362
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 594,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-ueber-den-zehner-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 594,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 594
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2350
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 10,
+  "ausgabe": 7133,
+  "einheit": "tokens",
+  "menge": 345128,
+  "notiz": "plus-ueber-den-zehner-bis-100, Prüfung Runde 1",
+  "cache_lesen": 267747,
+  "cache_schreiben": 70238,
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 10810,
+  "einheit": "tokens",
+  "menge": 622979,
+  "notiz": "plus-ueber-den-zehner-bis-100, Prüfung Runde 2",
+  "cache_lesen": 537380,
+  "cache_schreiben": 74771,
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 13574,
+  "einheit": "tokens",
+  "menge": 633021,
+  "notiz": "plus-ueber-den-zehner-bis-100, Prüfung Runde 3",
+  "cache_lesen": 541664,
+  "cache_schreiben": 77765,
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 218,
+  "ausgabe": 88670,
+  "einheit": "tokens",
+  "menge": 20282751,
+  "notiz": "ergaenzen-zum-zehner, ergaenzen-bis-100, plus-ueber-den-zehner-bis-100: Recherche, Schreiben, Überarbeitung, Fotos, Steuerung",
+  "cache_lesen": 19921878,
+  "cache_schreiben": 271985,
+  "themen": 3,
+  "thema": [
+   "ergaenzen-zum-zehner",
+   "ergaenzen-bis-100",
+   "plus-ueber-den-zehner-bis-100"
+  ]
  }
 ]
