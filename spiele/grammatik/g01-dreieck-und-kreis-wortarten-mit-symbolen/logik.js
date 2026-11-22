@@ -4,6 +4,13 @@ import { satzMit, probeText, danebenText } from "../../woerter/wortarten.js";
 
 /** Die Wortarten, die ein Symbol auf dem Tablett tragen, in fester Reihe (Dreieck vor Kreis vor Adjektiv). */
 export const SYMBOLE = Object.freeze(["nomen", "verb", "adjektiv"]);
+/**
+ * Wie G01 ein Wort zeigt: in Versalien („DIE KATZE SCHLÄFT“). Die Großschreibung darf nicht verraten, welches Wort ein
+ * Nomen ist (Rückmeldung Christian, 2026-11-22); die Wortdaten bleiben unverändert. ß bleibt ß (toUpperCase machte „SS“
+ * daraus), Umlaute bleiben Umlaute. @param {string} text
+ */
+export const versalien = (text) => text.split("ß").map((t) => t.toUpperCase()).join("ß");
+
 /** Wortarten, deren Wörter in der Stufe „material“ einzeln mit Bild stehen (der Artikel und Füllwörter bleiben weg). */
 const INHALT = new Set(["nomen", "verb", "adjektiv"]);
 
