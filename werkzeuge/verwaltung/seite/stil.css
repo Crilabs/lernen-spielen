@@ -179,3 +179,8 @@ main:has(#lernweg:not([hidden])) { max-width: none; padding-bottom: 12px; }
 .lw-punkt.a-spiel { background: var(--fertig); }
 .lw-punkt.a-echte { background: var(--wartet); }
 .lw-punkt.a-fehlt { background: var(--fehlt); }
+.lw-angebot li { padding: 4px 0; border-top: 1px solid var(--linie); }
+.lw-angebot li:first-child { border-top: 0; }
+.lw-angebot div { margin-top: 3px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.lw-angebot button.klein { padding: 1px 8px; color: var(--akzent); border: 1px solid var(--akzent); border-radius: 5px; background: var(--flaeche); }
+.lw-angebot button.klein:hover { background: var(--grund); text-decoration: none; }

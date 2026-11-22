@@ -454,12 +454,31 @@ function markiereLernweg() {
     ${t.ziel ? `<p>${esc(t.ziel)}</p>` : ""}
     <h4>Abdeckung</h4>
     <p><span class="lw-legende a-${a.art}${a.inArbeit ? " in-arbeit" : ""}">${ABDECKUNG_TEXT[a.art]}</span></p>
-    <ul class="lw-liste">${spiele.map((s) => `<li>${esc(s.id)} ${esc(s.name)} ${plakette(s.status)}</li>`).join("") || `<li class="leise-text">kein Spiel im Katalog</li>`}
-      <li>Mit echten Dingen ${plakette(t.echteDinge)}</li></ul>
+    <h4>Digitale Spiele (${spiele.length})</h4>
+    <ul class="lw-liste lw-angebot">${spiele.map((s) => `<li><span class="leise-text">${esc(s.id)}</span> ${esc(s.name)}<div>${plakette(s.status)}${lwSpielAktion(s)}</div></li>`).join("")
+      || `<li class="leise-text">Kein Spiel im Katalog nennt dieses Thema – ein digitales Spiel braucht erst einen Katalog-Eintrag.</li>`}</ul>
+    <h4>Mit echten Dingen</h4>
+    <ul class="lw-liste lw-angebot"><li>${plakette(t.echteDinge)}${lwEchtAktion(t)}</li></ul>
     <h4>Voraussetzungen (${vorher.length})</h4>
     <ul class="lw-liste">${vorher.map(verweis).join("") || `<li class="leise-text">keine – ein Anfang</li>`}</ul>
     <h4>Baut darauf auf (${nachher.length})</h4>
     <ul class="lw-liste">${nachher.map(verweis).join("") || `<li class="leise-text">nichts – ein Ende des Wegs</li>`}</ul>`;
+}
+
+/** Knöpfe zu einem Spiel im Feld: spielen, beauftragen (geplant: erst Ideen, geparkt: weiterbauen), Rückmeldung. */
+function lwSpielAktion(s) {
+  const teile = [];
+  if (FERTIG.includes(s.status) && s.ordner) teile.push(`<a class="knopf-link" href="/spiele/${esc(s.ordner)}" target="_blank" rel="noopener">Spielen ↗</a>`);
+  if (s.status === "geplant") teile.push(`<button class="klein" data-auftrag="ideen" data-ziel="${esc(s.id)}" title="Drei Ideen, du wählst danach – dann wird gebaut">beauftragen (erst 3 Ideen, ca. ${eur(1)})</button>`);
+  if (s.status === "geparkt") teile.push(`<button class="klein" data-auftrag="spiel" data-ziel="${esc(s.id)}">weiterbauen beauftragen${U.schaetzung.spiel !== null ? ` (ca. ${eur(U.schaetzung.spiel)})` : ""}</button>`);
+  return teile.join(" ") + rueckKnopf("spiel", s.id, `${s.id} ${s.name}`, s.status);
+}
+
+/** Knöpfe zu „Mit echten Dingen“ im Feld: ansehen oder beauftragen, Rückmeldung. */
+function lwEchtAktion(t) {
+  if (t.echteDinge === "fehlt") return ` <button class="klein" data-auftrag="echte-dinge" data-ziel="${esc(t.id)}">beauftragen${U.schaetzung.echteDingeJeThema !== null ? ` (ca. ${eur(U.schaetzung.echteDingeJeThema)})` : ""}</button>`;
+  const ansehen = ["fertig", "entwurf"].includes(t.echteDinge) ? ` <a class="knopf-link" href="/spiele/echt.html?thema=${encodeURIComponent(t.id)}" target="_blank" rel="noopener">Anleitung ↗</a>` : "";
+  return ansehen + rueckKnopf("echte-dinge", t.id, `Mit echten Dingen: ${t.name}`, t.echteDinge);
 }
 
 function setzeFokus(id) {
