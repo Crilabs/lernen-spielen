@@ -925,8 +925,10 @@ function heuteGezeigt(er, heute) {
 }
 
 /**
- * Welche Kapitelfrage heute zurückkommt: höchstens ERINNERN_AM_TAG am Tag, keine zweimal, nur aus Kapiteln, die
- * frühestens gestern fertig wurden (ohne Datum: früher), die am längsten nicht gestellte zuerst, dann die am längsten fertige.
+ * Welche Kapitelfrage heute zurückkommt: höchstens ERINNERN_AM_TAG am Tag, keine zweimal, nur aus Büchern, die das
+ * Kind ganz gelesen oder gehört hat (sachthemen.geschichten, merkeBuchStand), und zwar frühestens gestern – ein
+ * angefangenes Buch fragt nichts ab (Christian 2026-11-22). Ohne Datum: früher. Die am längsten nicht gestellte
+ * zuerst, dann die am längsten fertige.
  * @param {any} stand @param {string} heute @param {Iterable<string>} buchIds Bücher, die Fragen haben
  * @returns {{ id: string, kapitel: number } | null}
  */
@@ -936,10 +938,12 @@ export function naechsteErinnerung(stand, heute, buchIds) {
   if (gezeigt.length >= ERINNERN_AM_TAG) return null;
   const gestellt = istObjekt(er.gestellt) ? er.gestellt : {};
   const ids = new Set(buchIds);
+  const gelesen = istObjekt(stand?.sachthemen?.geschichten) ? stand.sachthemen.geschichten : {};
   /** @type {{ id: string, kapitel: number, g: string, f: string }[]} */
   const kandidaten = [];
   for (const [id, e] of Object.entries(istObjekt(stand?.buecher) ? stand.buecher : {})) {
     if (!ids.has(id) || !istObjekt(e)) continue;
+    if (!istObjekt(gelesen[id]) || text(gelesen[id].am) >= heute) continue;   // Buch noch nicht ganz gelesen, oder erst heute
     const b = bereinigeBuchStand(e);
     for (const k of b.fertig) {
       const f = b.am[k] ?? "";
