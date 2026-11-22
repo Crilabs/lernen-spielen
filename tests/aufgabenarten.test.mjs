@@ -237,3 +237,16 @@ test("wortart: Schwierigkeit nach Satz, Zielzeit, darstellbar nur für die eigen
   assert.equal(darstellbar(a[0], { art: "wortart", stufen: ["material"] }), true);
   assert.equal(darstellbar(a[0], { art: "artikel" }), false);
 });
+
+// --- paket (Streifenbrett M20, Idee docs/spiele/mathe/m20-streifenbrett.md §8) -------------------------------
+test("paket: Schlüssel mit Thema, daten wie rechnen plus Kniff, Zielzeit, darstellbar; die Pools stehen in tests/spiele/mathe/m20-streifenbrett.test.mjs", async () => {
+  const { paketAus } = await import("../spiele/aufgabenarten.js");
+  const a = aufgabenVon({ art: "paket", thema: "plus-2-und-3" });
+  assert.deepEqual(a.find((t) => t.key === "paket:plus-2-und-3:5+2"), { key: "paket:plus-2-und-3:5+2", art: "paket", daten: { op: "plus", a: 5, b: 2, c: 7, raum: 10, kniff: "zwei-drei" } });
+  assert.deepEqual(paketAus("paket:minus-bis-10-gemischt:9-4"), { thema: "minus-bis-10-gemischt", op: "minus", a: 5, b: 4, c: 9 });
+  assert.equal(paketAus("paket:plus-2-und-3:15+9"), null);
+  assert.deepEqual(aufgabenVon({ art: "paket", thema: "gibt-es-nicht" }), []);
+  assert.equal(ZIEL_MS.paket, 6000);
+  assert.equal(darstellbar(a[0], { art: "paket", max: 20 }), true);
+  assert.equal(darstellbar(a[0], { art: "rechnen", max: 20 }), false);
+});

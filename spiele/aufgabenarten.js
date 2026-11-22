@@ -26,6 +26,11 @@
 //              punkte, baender, reihe }   (Zeichen mit dem Finger schreiben, Strichfolge; Selbst schreiben S18). striche: Linienzüge
 //              in Haus-Einheiten (ein Band 100 hoch), punkte: Tupfer (i). Spezifikation { art: "schreiben", zeichen: ["l", "i"] };
 //              Vorlagen in spiele/woerter/schriftzeichen.js. Schwünge zeigt das Spiel auf vorstellung und kopf als Reihe.
+//   paket      "paket:plus-2-und-3:5+2" / "paket:minus-bis-10-gemischt:9-4"   daten { op, a, b, c, raum, kniff }   (Plus oder Minus bis 20
+//              aus dem Gedächtnis abrufen; Streifenbrett M20). Wie `rechnen` (a + b = c, bei Minus c − b = a), aber mit Aufgaben, die
+//              `rechnen` nicht hat (+ 0, a = b, kleine Zahl zuerst), und mit dem Thema im Schlüssel, denn 5 + 2 steht in mehreren
+//              Paketen. `kniff` (null, nachbar, zwei-drei, fuenf, tausch, alles, gemischt) wählt das Bild der Hilfe Stufe 1.
+//              Spezifikation { art: "paket", thema } (Pakete: PAKETE unten).
 //   schreibschrift  "schreib:schreibschrift-n-m:nun"   daten { wort, thema }   (ein Wort in Schreibschrift in einem Zug schreiben;
 //              Leuchtschrift S20). Spezifikation { art: "schreibschrift", thema: "schreibschrift-n-m", woerter: ["n", "m", "nun"] }
 //              (kleine Buchstaben a–z, ä, ö, ü, ß; die Wörter stammen aus den Beispielen des Themas). Der Schlüssel trägt das
@@ -49,6 +54,7 @@ export const ZIEL_MS = {
   verbform: 6000, // Annahme (Entwurf G02): Streifen ansehen, Plättchen ziehen oder die Form schreiben
   wortart: 12000, // Annahme (Entwurf G01): je Symbol etwa 4 s (ziehen und Probe), bis zu drei Symbole je Satz
   schreiben: 8000, // Annahme (Entwurf S18): Zeichen ansehen, schreiben, Ela fährt; darüber gilt es als mühsam geschrieben
+  paket: 6000, // Annahme (Entwurf M20): Aufgabe ansehen, Ergebnis aus dem Gedächtnis tippen; darüber gilt es als gezählt
 };
 
 // Einmaleins: die Kernaufgaben (mal 1, 2, 5, 10) und die Reihen, deren Aufgaben alle zur eigenen Reihe gehören.
@@ -118,6 +124,72 @@ export function wortartAus(key) {
 export function schreibAus(key) {
   const m = /^schreib:([a-z0-9]+(?:-[a-z0-9]+)*):([a-zäöüß]+)$/.exec(String(key ?? ""));
   return m ? { thema: m[1], wort: m[2] } : null;
+}
+
+// --- paket (Streifenbrett M20): Plus und Minus bis 20 in Paketen ---------------------------------------------------------
+
+/** [a, b] mit a + b = c, c von bis (a und b dürfen 0 sein, außer es steht anders). */
+function plusPaare(filter, maxC = 20) {
+  const l = [];
+  for (let a = 0; a <= maxC; a++) for (let b = 0; a + b <= maxC; b++) if (a + b > 0 && filter(a, b, a + b)) l.push([a, b]);
+  return l;
+}
+/** [c, b] mit c − b = a (0 ≤ b ≤ c ≤ maxC, c ≥ 1). */
+function minusPaare(filter, maxC = 20) {
+  const l = [];
+  for (let c = 1; c <= maxC; c++) for (let b = 0; b <= c; b++) if (filter(c - b, b, c)) l.push([c, b]);
+  return l;
+}
+
+/**
+ * Die Pakete (Themen des Streifenbretts): welche Aufgaben, und welcher Kniff das Bild der Hilfe bestimmt.
+ * plus/minus: Listen [a, b] bzw. [c, b]; `kniff` je Aufgabe (op, a, b, c) → Name.
+ * @type {Record<string, { plus: number[][], minus: number[][], kniff: (op: string, a: number, b: number, c: number) => string }>}
+ */
+const PAKETE = {
+  "plus-0-und-1": {
+    plus: [...plusPaare((a, b, c) => c <= 10 && (b === 0 || b === 1) && a >= 1), ...plusPaare((a, b, c) => c <= 10 && a <= 1 && b >= 2)],
+    minus: [],
+    kniff: (_op, a, b) => (a === 0 || b === 0 ? "null" : "nachbar"),
+  },
+  "plus-2-und-3": { plus: plusPaare((a, b, c) => c <= 10 && (b === 2 || b === 3) && a >= 1), minus: [], kniff: () => "zwei-drei" },
+  "plus-mit-5": { plus: plusPaare((a, b, c) => c <= 10 && (b === 5 ? a >= 1 : a === 5 && b >= 1 && b <= 5)), minus: [], kniff: () => "fuenf" },
+  "tauschaufgaben-bis-10": { plus: plusPaare((a, b, c) => c <= 10 && a >= 1 && a <= 3 && b > 3), minus: [], kniff: () => "tausch" },
+  "plus-bis-10-gemischt": { plus: plusPaare((_a, _b, c) => c <= 10), minus: [], kniff: () => "gemischt" },
+  "minus-0-1-alles-weg": {
+    plus: [],
+    minus: minusPaare((a, b, c) => c <= 10 && (b === 0 || b === 1 || a === 0)),
+    kniff: (_op, a, b) => (b === 0 ? "null" : a === 0 ? "alles" : "nachbar"),
+  },
+  "minus-bis-10-gemischt": { plus: [], minus: minusPaare((_a, _b, c) => c <= 10), kniff: () => "gemischt" },
+  "blitzrechnen-bis-20": {
+    plus: plusPaare((a, b) => a >= 1 && b >= 1),
+    minus: minusPaare((_a, b) => b >= 1),
+    kniff: () => "gemischt",
+  },
+};
+
+const paketAufgabe = (thema, op, x, b) => {
+  const [a, c] = op === "plus" ? [x, x + b] : [x - b, x];
+  return {
+    key: `paket:${thema}:${op === "plus" ? `${a}+${b}` : `${c}-${b}`}`,
+    art: "paket",
+    daten: { op, a, b, c, raum: raumVon(c), kniff: PAKETE[thema].kniff(op, a, b, c) },
+  };
+};
+
+/** Der Kniff einer Aufgabe eines Pakets (daten.kniff). @param {string} thema @param {string} op @param {number} a @param {number} b @param {number} c */
+export const paketKniff = (thema, op, a, b, c) => (Object.hasOwn(PAKETE, thema) ? PAKETE[thema].kniff(op, a, b, c) : "gemischt");
+
+/** "paket:plus-2-und-3:5+2" → { thema, op, a, b, c }, sonst null. */
+export function paketAus(key) {
+  const m = /^paket:([a-z0-9]+(?:-[a-z0-9]+)*):(\d+)([+-])(\d+)$/.exec(String(key ?? ""));
+  if (!m || !Object.hasOwn(PAKETE, m[1])) return null;
+  const [x, b] = [Number(m[2]), Number(m[4])];
+  const plus = m[3] === "+";
+  if (x > 20 || b > 20 || (plus && x + b > 20) || (!plus && b > x)) return null;
+  const a = plus ? x : x - b;
+  return { thema: m[1], op: plus ? "plus" : "minus", a, b, c: plus ? x + b : x };
 }
 
 const UEBERGANG_AB = 20; // darüber kein Übertrag der Einer
@@ -225,6 +297,12 @@ export function aufgabenVon(spec) {
     case "schreiben": {
       const ids = Array.isArray(spec.zeichen) ? spec.zeichen : [];
       return ids.map((id) => zeichenMit(id)).filter((z) => z !== null).map((z) => ({ key: `schreiben:${z.id}`, art: "schreiben", daten: aufgabenDaten(z) }));
+    }
+    case "paket": {
+      const p = Object.hasOwn(PAKETE, spec.thema) ? PAKETE[spec.thema] : null;
+      if (!p) return [];
+      const l = [...p.plus.map(([a, b]) => paketAufgabe(spec.thema, "plus", a, b)), ...p.minus.map(([c, b]) => paketAufgabe(spec.thema, "minus", c, b))];
+      return [...new Map(l.map((x) => [x.key, x])).values()];
     }
     case "schreibschrift": {
       const woerter = Array.isArray(spec.woerter) ? spec.woerter : [];
