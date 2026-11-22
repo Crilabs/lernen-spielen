@@ -4818,5 +4818,210 @@
    "gegenwart-praesens",
    "pronomen-statt-nomen"
   ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 568,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "schrittweise-rechenstrich.png",
+  "themen": 1,
+  "thema": [
+   "schrittweise-rechenstrich"
+  ],
+  "usage": {
+   "input_tokens": 568,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 568
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2324
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 594,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "stellenweise-rechnen.png",
+  "themen": 1,
+  "thema": [
+   "stellenweise-rechnen"
+  ],
+  "usage": {
+   "input_tokens": 594,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 594
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2350
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 591,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "hilfsaufgabe-plus-minus.png",
+  "themen": 1,
+  "thema": [
+   "hilfsaufgabe-plus-minus"
+  ],
+  "usage": {
+   "input_tokens": 591,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 591
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2347
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 11746,
+  "einheit": "tokens",
+  "menge": 540703,
+  "notiz": "schrittweise-rechenstrich, Prüfung Runde 1",
+  "cache_lesen": 446015,
+  "cache_schreiben": 82928,
+  "themen": 1,
+  "thema": [
+   "schrittweise-rechenstrich"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 12671,
+  "einheit": "tokens",
+  "menge": 544920,
+  "notiz": "stellenweise-rechnen, Prüfung Runde 1",
+  "cache_lesen": 446818,
+  "cache_schreiben": 85417,
+  "themen": 1,
+  "thema": [
+   "stellenweise-rechnen"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 15100,
+  "einheit": "tokens",
+  "menge": 677372,
+  "notiz": "hilfsaufgabe-plus-minus, Prüfung Runde 1",
+  "cache_lesen": 575872,
+  "cache_schreiben": 86382,
+  "themen": 1,
+  "thema": [
+   "hilfsaufgabe-plus-minus"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 11450,
+  "einheit": "tokens",
+  "menge": 833584,
+  "notiz": "schrittweise-rechenstrich, Prüfung Runde 2",
+  "cache_lesen": 734616,
+  "cache_schreiben": 87498,
+  "themen": 1,
+  "thema": [
+   "schrittweise-rechenstrich"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 12965,
+  "einheit": "tokens",
+  "menge": 1013015,
+  "notiz": "stellenweise-rechnen, Prüfung Runde 2",
+  "cache_lesen": 907318,
+  "cache_schreiben": 92708,
+  "themen": 1,
+  "thema": [
+   "stellenweise-rechnen"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 13958,
+  "einheit": "tokens",
+  "menge": 1197875,
+  "notiz": "hilfsaufgabe-plus-minus, Prüfung Runde 2",
+  "cache_lesen": 1088097,
+  "cache_schreiben": 95792,
+  "themen": 1,
+  "thema": [
+   "hilfsaufgabe-plus-minus"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 136,
+  "ausgabe": 67309,
+  "einheit": "tokens",
+  "menge": 9964289,
+  "notiz": "schrittweise-rechenstrich, stellenweise-rechnen, hilfsaufgabe-plus-minus: Recherche, Schreiben, Überarbeitung, Steuerung",
+  "cache_lesen": 9671967,
+  "cache_schreiben": 224877,
+  "themen": 3,
+  "thema": [
+   "schrittweise-rechenstrich",
+   "stellenweise-rechnen",
+   "hilfsaufgabe-plus-minus"
+  ]
  }
 ]

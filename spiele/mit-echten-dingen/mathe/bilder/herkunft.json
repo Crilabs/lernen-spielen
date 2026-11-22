@@ -558,5 +558,65 @@
   },
   "ki": true,
   "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "schrittweise-rechenstrich.webp": {
+  "datum": "2026-11-22",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Ein Lesezeichen für das Ziel“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: ein Buch mit Seitenzahlen, einige Lesezeichen, Papier, Stift\nWhat happens: Ein Lesezeichen liegt auf Seite weitere Diese Woche wollt ihr einige Seiten lesen. Zeichnet einen langen Strich. Schreibt einige links daran. Zerlegt die einige in einige. Ein großer Bogen für plus einige geht von einige. Ein kleiner Bogen für plus einige geht von einige. Legt das weitere Lesezeichen auf Seite einige: euer Ziel für die Woche.\nImportant: The book lies closed with two paper bookmarks sticking out. Next to it a sheet of paper with a plain hand-drawn pencil line and two arcs above it, no writing, no digits anywhere. A pencil.",
+  "usage": {
+   "input_tokens": 568,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 568
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2324
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "stellenweise-rechnen.webp": {
+  "datum": "2026-11-22",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Kleingeld zusammenlegen“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: einige-Cent-Münzen, einige-Cent-Münzen, einige Schälchen. Ersatz: Stifte, je einige gebündelt, und einzelne Stifte.\nWhat happens: einige von euch legen ihr Kleingeld für Brötchen zusammen, etwa einige Cent und einige Cent, jeder Betrag in ein Schälchen. Schiebt alle einige-Cent-Münzen zusammen: einige ist gleich einige. Schiebt alle einige-Cent-Münzen zusammen: einige ist gleich einige. Stapelt einige einige-Cent-Münzen. Der Stapel ist ein Zehner. Zusammen: einige ist gleich einige Cent.\nImportant: Two small bowls with loose copper and gold euro cent coins heaped inside, plus a loose heap between them. Coins seen at an angle so no numerals are legible. No writing anywhere.",
+  "usage": {
+   "input_tokens": 594,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 594
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2350
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "hilfsaufgabe-plus-minus.webp": {
+  "datum": "2026-11-22",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Mit einige Zehnern bezahlen“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: einige-Cent-Münzen, einige-Cent-Münzen, ein Portemonnaie\nWhat happens: Eine Person hat das Portemonnaie mit einige Cent, die andere ist die Kasse. Etwas kostet einige Cent, fast weitere Bezahlt mit einige einige-Cent-Münzen: einige ist gleich einige. einige Cent war zu viel. Die Kasse gibt ihn zurück: einige. Nun kommen zu einige Cent einige dazu. Die Kasse gibt einige einige-Cent-Münzen: einige. einige Cent war zu viel. Das Portemonnaie gibt ihn zurück: einige.\nImportant: An open small wallet with a loose heap of copper and gold euro cent coins spilling next to it on a kitchen table. Coins seen at an angle so no numerals are legible. No writing anywhere.",
+  "usage": {
+   "input_tokens": 591,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 591
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2347
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
  }
 }

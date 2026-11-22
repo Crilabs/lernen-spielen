@@ -300,6 +300,24 @@
    "datei": "grammatik/grundform-verb.md",
    "foto": "grammatik/bilder/grundform-verb.webp"
   },
+  "hilfsaufgabe-plus-minus": {
+   "fach": "mathe",
+   "name": "Mit dem Nachbarzehner rechnen",
+   "titel": "Rechnen mit dem Nachbarzehner",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Mit drei Zehnern bezahlen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Ein Sprung zu weit"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/hilfsaufgabe-plus-minus.md",
+   "foto": "mathe/bilder/hilfsaufgabe-plus-minus.webp"
+  },
   "minus-zehner": {
    "fach": "mathe",
    "name": "Minus mit ganzen Zehnern",
@@ -448,6 +466,24 @@
    "datei": "grammatik/pronomen-statt-nomen.md",
    "foto": "grammatik/bilder/pronomen-statt-nomen.webp"
   },
+  "schrittweise-rechenstrich": {
+   "fach": "mathe",
+   "name": "Schritt für Schritt am Rechenstrich",
+   "titel": "Erst die Zehner, dann die Einer",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Ein Lesezeichen für das Ziel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Große Sprünge, ein Hüpfer"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/schrittweise-rechenstrich.md",
+   "foto": "mathe/bilder/schrittweise-rechenstrich.webp"
+  },
   "sechserreihe": {
    "fach": "mathe",
    "name": "Sechserreihe",
@@ -505,6 +541,24 @@
    "entwurf": false,
    "datei": "lesen/silben-klatschen.md",
    "foto": "lesen/bilder/silben-klatschen.webp"
+  },
+  "stellenweise-rechnen": {
+   "fach": "mathe",
+   "name": "Zehner extra, Einer extra",
+   "titel": "Zehner zu Zehnern, Einer zu Einern",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kleingeld zusammenlegen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Stampfen und Klatschen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/stellenweise-rechnen.md",
+   "foto": "mathe/bilder/stellenweise-rechnen.webp"
   },
   "teiler-begruenden": {
    "fach": "mathe",
