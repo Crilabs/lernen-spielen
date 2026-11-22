@@ -12,6 +12,10 @@ export const GRENZEN = {
   probebriefeJeGeraet: { max: 3, fenster: TAG },
   ereignisseJePush: 200,
   bytesJePush: 300 * 1024,
+  // Test-Protokoll (docs/testprotokoll.md): die App sendet alle paar Minuten und am Rundenende.
+  protokollJeGeraet: { max: 2000, fenster: TAG },
+  protokollEintraegeJePush: 2000,
+  protokollBytesJePush: 900 * 1024,
 };
 
 /**

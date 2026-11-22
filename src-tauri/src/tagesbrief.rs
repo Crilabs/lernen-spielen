@@ -533,6 +533,26 @@ pub fn probebrief(dir: &Path, basis: &str) -> Result<(), String> {
     }
 }
 
+/// Schlüssel des Geräts, solange der Tagesbrief eingerichtet ist; das Test-Protokoll
+/// (`testprotokoll.rs`) meldet sich damit beim Dienst an.
+pub fn aktiver_schluessel(dir: &Path) -> Option<String> {
+    let z = lade(dir);
+    (z.zustand == "aktiv" && !z.schluessel.is_empty()).then_some(z.schluessel)
+}
+
+/// Schickt einen Stapel Protokolleinträge an `/protokoll`. `Ok(status)`, `Err` nur ohne Verbindung.
+/// Ändert nichts am Zustand des Tagesbriefs (auch nicht bei 401/410).
+pub fn protokoll_senden(basis: &str, schluessel: &str, stapel: &Value) -> Result<u16, String> {
+    anfrage(
+        "protokoll",
+        "POST",
+        &format!("{basis}/protokoll"),
+        Some(schluessel),
+        Some(stapel),
+    )
+    .map(|(status, _)| status)
+}
+
 /// Löst das Gerät im Dienst und setzt die lokale Einrichtung zurück (Gerätekennung und
 /// Zähler bleiben, damit Ereignis-IDs eindeutig bleiben).
 pub fn abmelden(dir: &Path, basis: &str) -> Result<(), String> {
@@ -562,7 +582,7 @@ pub fn abmelden(dir: &Path, basis: &str) -> Result<(), String> {
 }
 
 #[cfg(test)]
-mod tests {
+pub(crate) mod tests {
     use super::*;
     use std::io::{Read, Write};
     use std::net::TcpListener;
@@ -591,7 +611,7 @@ mod tests {
 
     /// Fake-Dienst: beantwortet nacheinander jede Anfrage mit der nächsten Antwort und
     /// merkt sich Kopf und Körper der Anfragen.
-    fn fake(antworten: Vec<(u16, &'static str)>) -> (String, Arc<Mutex<Vec<String>>>) {
+    pub(crate) fn fake(antworten: Vec<(u16, &'static str)>) -> (String, Arc<Mutex<Vec<String>>>) {
         let l = TcpListener::bind("127.0.0.1:0").unwrap();
         let basis = format!("http://{}", l.local_addr().unwrap());
         let gesehen = Arc::new(Mutex::new(Vec::new()));
@@ -637,12 +657,12 @@ mod tests {
     }
 
     /// Adresse, auf der nichts lauscht.
-    fn tote_basis() -> String {
+    pub(crate) fn tote_basis() -> String {
         let l = TcpListener::bind("127.0.0.1:0").unwrap();
         format!("http://{}", l.local_addr().unwrap())
     }
 
-    fn aktiv(dir: &Path) {
+    pub(crate) fn aktiv(dir: &Path) {
         sichere(
             dir,
             &Zustand {

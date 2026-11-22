@@ -327,6 +327,7 @@ import { regeln as buchRegeln, aktuell as buchAktuell, zahlen as buchZahlen, gib
 import { STAND as BUECHER_STAND, EINSTELLUNG as BUECHER_EINSTELLUNG } from "./rahmen/buecherzeit.js";
 import { befehl, istApp } from "./kern/dienste.js";
 import { PROFIL } from "./kern/speicher.js";
+import { notiereStand } from "./kern/testprotokoll.js";
 import { baueVorschauTopf, setzeZurueck as brieflaufFreigeben } from "./tagesbrief/anbindung.js";
 import { setzeBrief } from "./tagesbrief/brief.js";
 import { elternThemen, hakeAb, mitVoraussetzungen, setzeZurueck, gibFrei, aufgabeLesbar, ladeLernstand, luecken, echteDingeFuer, spieleFuer, alsNaechstes }
@@ -584,6 +585,7 @@ async function lernstand(spalte, offen) {
   const eingriff = async (tun, id) => {
     tun();
     speichere("lernplan", stand); await sofortSpeichern();
+    notiereStand(stand, "eltern");
     await neuZeichnen(id);
   };
 
@@ -1429,7 +1431,11 @@ async function tagesbrief(spalte) {
     probe.addEventListener("click", async () => {
       status.textContent = "Der Probebrief wird geschickt …";
       try { await befehl("tagesbrief_probebrief", { profil: PROFIL }); status.textContent = "Der Probebrief ist unterwegs."; }
-      catch { meldeFehler(status); }
+      catch (e) {
+        // 409: im Topf liegt noch nichts (heute nicht gespielt); dann hilft „später“ nicht, nur eine Runde.
+        if (/Status 409/.test(String(e))) status.textContent = "Heute wurde noch nicht gespielt. Nach der ersten Runde klappt der Probebrief.";
+        else meldeFehler(status);
+      }
     });
     const zeit = knopf("Uhrzeit ändern", { symbol: "uhr.svg" });
     const abbestellen = knopf("Abbestellen", { achtung: true });

@@ -27,6 +27,7 @@
 
 import { aufgabenVon, darstellbar, schwierigkeit, ZIEL_MS } from "./aufgabenarten.js";
 import { lade, speichere, sofortSpeichern, protokoll } from "./lernspiel.js";
+import { notiere, notiereStand, sendeProtokoll } from "./kern/testprotokoll.js";
 
 export const K = {
   ABSTAND: [0, 1, 3, 7, 21], // Wiedervorlage in Tagen je Fach
@@ -801,12 +802,14 @@ export function hakeAb(ctx, stand, ids, heute) {
     Object.assign(t, { z: "kann-ich", k: heute, stufe: "kopf", v: [], q: "eltern" });
     delete t.pb;
   }
+  notiere("eltern", { aktion: "abhaken", gewaehlt: ids, themen: gesetzt });
   return gesetzt;
 }
 
 // Thema zurücksetzen: Themen-Eintrag weg (auch Einführung und Freigabe), Aufgaben des Themas in Fach 0.
 // kk und g fallen weg, „kann ich“ muss neu erworben werden; h und ms bleiben als Verlauf.
 export function setzeZurueck(ctx, stand, themaId) {
+  notiere("eltern", { aktion: "zuruecksetzen", themen: [themaId] });
   delete stand.themen[themaId];
   for (const a of aufgabenDes(themaVon(ctx, themaId))) {
     const x = stand.aufgaben[a.key];
@@ -820,6 +823,7 @@ export function setzeZurueck(ctx, stand, themaId) {
 
 // Verborgenes Thema freigeben (kommt in Sicht; erfüllt die Voraussetzungen anderer Themen nicht)
 export function gibFrei(stand, themaId) {
+  notiere("eltern", { aktion: "freigeben", themen: [themaId] });
   const t = stand.themen[themaId] || (stand.themen[themaId] = {});
   t.frei = 1;
   return stand;
@@ -853,6 +857,7 @@ export async function merkeGeschichteGelesen(id, heute = echteUhr().heute) {
   if (!merkeSachthema(stand, "geschichten", id, heute)) return false;
   speichere(STAND_KEY, stand);
   await sofortSpeichern();
+  notiere("buch", { id, gelesen: true });
   meldeTagesbrief((m, ctx) => m.meldeGelesen(ctx, stand, id, { heute }));
   return true;
 }
@@ -901,11 +906,13 @@ export async function merkeBuchStand(id, wo, kapitelZahl, heute = echteUhr().heu
   const vorher = istObjekt(stand.buecher[id]) ? bereinigeBuchStand(stand.buecher[id]) : { fertig: [], am: {} };
   const alt = vorher.fertig;
   const b = bereinigeBuchStand({ ...wo, fertig: [...alt, ...(Array.isArray(wo?.fertig) ? wo.fertig : [])], am: vorher.am });
-  for (const k of b.fertig) if (!alt.includes(k)) b.am[k] = heute;   // neu fertig: Datum für das Erinnern mit Abstand
+  const neuFertig = b.fertig.filter((k) => !alt.includes(k));
+  for (const k of neuFertig) b.am[k] = heute;   // neu fertig: Datum für das Erinnern mit Abstand
   stand.buecher[id] = b;
   const erstmals = kapitelZahl > 0 && b.fertig.filter((k) => k < kapitelZahl).length >= kapitelZahl && merkeSachthema(stand, "geschichten", id, heute);
   speichere(STAND_KEY, stand);
   await sofortSpeichern();
+  if (neuFertig.length || erstmals) notiere("buch", { id, kapitelFertig: neuFertig, fertig: b.fertig, kapitelZahl, gelesen: erstmals });
   if (erstmals) meldeTagesbrief((m, ctx) => m.meldeGelesen(ctx, stand, id, { heute }));
 }
 
@@ -966,6 +973,7 @@ export async function merkeErinnert(id, kapitel, gestellt, heute = echteUhr().he
   const er = istObjekt(stand.erinnern) ? stand.erinnern : {};
   const schluessel = `${id}/${kapitel}`;
   const gezeigt = heuteGezeigt(er, heute);
+  notiere("erinnern", { id, kapitel, gestellt });
   stand.erinnern = { am: heute, heute: gezeigt.includes(schluessel) ? gezeigt : [...gezeigt, schluessel], gestellt: { ...(istObjekt(er.gestellt) ? er.gestellt : {}), ...(gestellt ? { [`${id}/${kapitel}`]: heute } : {}) } };
   speichere(STAND_KEY, stand);
   await sofortSpeichern();
@@ -1022,6 +1030,18 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
   // Vorgriff (Spiel hätte sonst nichts): das Thema wird dran wie ein neues Thema, mit Einführung
   const startet = modus === "thema" || modus === "vorgriff";
   const sitzung = neueSitzung(ctx, stand, spielId, { thema: themaId, modus }, { jetzt: uhr().jetzt, max, rnd });
+  // Test-Protokoll (docs/testprotokoll.md): nur echte Runden, nie die Vorschau der Eltern
+  const notiz = nurAnsehen ? () => {} : (/** @type {string} */ art, /** @type {object} */ daten) => notiere(art, { spiel: spielId, ...daten });
+  const zaehler = { antworten: 0, richtig: 0, hilfe: 0 };
+  if (!nurAnsehen) {
+    const z = zustaende(ctx, stand);
+    const kandidaten = Object.fromEntries(themenVon(ctx).filter((t) => bedient(ctx, spielId, t.id)).map((t) => [t.id, z[t.id] ?? null]));
+    notiz("runde-start", {
+      thema: themaId, modus, wunsch, neu, stufe: sitzung.stufe, probe: sitzung.probe?.length ?? 0, max: sitzung.max,
+      einfuehrungFaellig: startet && !!plan?.einfuehrung && !eintragVorher?.e, themaVorher: eintragVorher ? { ...eintragVorher } : null, kandidaten,
+    });
+    notiereStand(stand, `runde-start:${spielId}`);
+  }
   const r = {
     thema: plan ? { id: plan.id, name: plan.name, stufe: sitzung.probe ? "kopf" : sitzung.stufe, neu } : null,
     modus,
@@ -1032,16 +1052,25 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
       t.e = uhr().heute;
       r.einfuehrungFaellig = false;
       sichere();
+      notiz("einfuehrung", { thema: themaId });
     },
     /** Die Rundenzeit beginnt neu (nach der Einführung); ohne Aufruf zählt sie ab dem Start der Runde. */
     beginneZeit() { sitzung.start = uhr().jetzt; },
     naechste() {
       const { heute, jetzt } = uhr();
-      if (startet && themaId && stand.themen[themaId]?.z !== "dran") { startThema(stand, themaId, heute); sichere(); }
-      return naechstesAngebot(ctx, stand, sitzung, rnd, { jetzt, heute });
+      if (startet && themaId && stand.themen[themaId]?.z !== "dran") { startThema(stand, themaId, heute); sichere(); if (stand.themen[themaId]?.z === "dran") notiz("thema-start", { thema: themaId }); }
+      const angebot = naechstesAngebot(ctx, stand, sitzung, rnd, { jetzt, heute });
+      notiz("angebot", angebot
+        ? { key: angebot.ziel?.key ?? null, thema: angebot.ziel?.thema ?? null, stufe: angebot.stufe, nr: sitzung.gezeigt, auch: (angebot.auch ?? []).map((/** @type {any} */ a) => a?.key ?? a) }
+        : { key: null, nr: sitzung.gezeigt, grund: sitzung.ereignis?.typ === "gekonnt" ? "gekonnt" : "ende" });
+      return angebot;
     },
     melde(key, { ok, hilfe = 0, ms } = {}) {
       const ereignis = verbucheErgebnis(ctx, stand, sitzung, key, { ok, hilfe, ms, heute: uhr().heute, rnd });
+      zaehler.antworten++;
+      if (ok) zaehler.richtig++;
+      if (hilfe) zaehler.hilfe++;
+      notiz("antwort", { key, ok, hilfe, ms, stufe: sitzung.stufe, ereignis, aufgabe: stand.aufgaben?.[key] ? { ...stand.aufgaben[key] } : null });
       if (sachweltDesSpiels(ctx, spielId)) merkeSachthema(stand, "spiele", spielId, uhr().heute); // Elternbereich „Sachthemen“
       sichere();
       return ereignis;
@@ -1058,6 +1087,11 @@ export async function runde(spielId, { wunsch = null, max = null, ctx = null, uh
       const g = sitzung.ereignis?.typ === "gekonnt" ? themaVon(ctx, sitzung.ereignis.thema) : null;
       const gekonnt = g ? { id: g.id, name: text(g.name), sprich: text(g.sprich) || text(g.name) } : null;
       if (!nurAnsehen) meldeTagesbrief((m) => m.meldeRundenende(ctx, stand, { thema: themaId, gekonnt: gekonnt?.id ?? null, heute: uhr().heute }));
+      if (!nurAnsehen) {
+        notiz("runde-ende", { thema: themaId, modus, gezeigt: sitzung.gezeigt, ...zaehler, dauerMs: uhr().jetzt - sitzung.start, stufe: sitzung.stufe, gekonnt: gekonnt?.id ?? null, hinweisSpiel, themaNachher: themaId && stand.themen[themaId] ? { ...stand.themen[themaId] } : null });
+        notiereStand(stand, `runde-ende:${spielId}`);
+        sendeProtokoll();
+      }
       return { hinweisSpiel, gekonnt };
     },
   };

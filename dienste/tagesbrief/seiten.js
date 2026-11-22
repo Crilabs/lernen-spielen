@@ -14,6 +14,7 @@ export const datenschutzSeite = () => seite("Datenschutz", `<h1>Datenschutz</h1>
 <p>Der Tagesbrief der Lern-App schickt Ihnen einmal am Tag, was Ihr Kind gelernt hat.</p>
 <p><b>Was gespeichert wird:</b> Ihre E-Mail-Adresse und die weiterer Empfänger (höchstens vier je Familie, jede bestätigt), der Vorname des Kindes (wenn Sie ihn angeben), die gewünschte Uhrzeit und, bis zum Versand, die Lernereignisse des Tages.</p>
 <p><b>Wie lange:</b> Die Lernereignisse werden nach dem Versand gelöscht, spätestens nach 48 Stunden. Die zuletzt verschickten Anleitungen merkt sich der Dienst 14 Tage.</p>
+<p><b>Test-Protokoll:</b> Während der Erprobung schickt die App zusätzlich ein Protokoll des Spielens (welche Aufgaben, richtig oder falsch, wie lange, Lernstand) mit einer Gerätekennung, ohne Namen und Adressen. Es dient nur der Verbesserung der App und wird nach 90 Tagen gelöscht.</p>
 <p><b>Wer betreibt den Dienst:</b> Crilabs, lernen-spielen.crilabs.de.</p>
 <p><b>Abbestellen:</b> Jeder Brief enthält unten einen Link „Abbestellen“. Er entfernt nur Ihre Adresse; ist keine Adresse mehr übrig, werden alle Daten gelöscht.</p>`);
 

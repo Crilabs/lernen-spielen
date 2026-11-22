@@ -27,3 +27,5 @@ werkzeuge/verwaltung/.anhalten
 werkzeuge/verwaltung/ergebnisse/
 werkzeuge/verwaltung/protokolle/
 werkzeuge/verwaltung/vorgaben/
+# Test-Protokoll vom Server (npm run protokoll:holen, docs/testprotokoll.md)
+protokoll/
