@@ -22,10 +22,15 @@
 //              Satz dient mehreren Themen (nomen, verb, adjektiv). Spezifikation { art: "wortart", ziel: ["nomen"] }; `kopf` nennt die
 //              Wortarten, die auf der Stufe kopf zusätzlich Symbole tragen ({ ziel: ["verb"], kopf: ["verb", "nomen"] }).
 //              Sätze in spiele/woerter/wortarten.js.
+//   schreiben  "schreiben:o" / "schreiben:ziffer-4" / "schreiben:schwung-girlande"   daten { zeichen, laut, name, art, striche,
+//              punkte, baender, reihe }   (Zeichen mit dem Finger schreiben, Strichfolge; Selbst schreiben S18). striche: Linienzüge
+//              in Haus-Einheiten (ein Band 100 hoch), punkte: Tupfer (i). Spezifikation { art: "schreiben", zeichen: ["l", "i"] };
+//              Vorlagen in spiele/woerter/schriftzeichen.js. Schwünge zeigt das Spiel auf vorstellung und kopf als Reihe.
 
 import { WORTSCHAETZE, wortMit } from "./woerter/artikel.js";
 import { PERSONEN, PERSONEN_GRUNDFORM, VERBEN, VERBEN_PERSON, ENDUNG_VON, PRONOMEN_VON, formVon, verbMit, werVon } from "./woerter/verben.js";
 import { saetzeFuer, satzMit } from "./woerter/wortarten.js";
+import { aufgabenDaten, zeichenMit, zeichenSchwierigkeit } from "./woerter/schriftzeichen.js";
 
 const VERBFORM_ZIELE = ["endung", "pronomen", "grundform"];
 
@@ -38,6 +43,7 @@ export const ZIEL_MS = {
   artikel: 6000, // Annahme (Entwurf G09): Wort ansehen, Plättchen ziehen; darüber gilt der Artikel als nicht sicher
   verbform: 6000, // Annahme (Entwurf G02): Streifen ansehen, Plättchen ziehen oder die Form schreiben
   wortart: 12000, // Annahme (Entwurf G01): je Symbol etwa 4 s (ziehen und Probe), bis zu drei Symbole je Satz
+  schreiben: 8000, // Annahme (Entwurf S18): Zeichen ansehen, schreiben, Ela fährt; darüber gilt es als mühsam geschrieben
 };
 
 // Einmaleins: die Kernaufgaben (mal 1, 2, 5, 10) und die Reihen, deren Aufgaben alle zur eigenen Reihe gehören.
@@ -205,6 +211,10 @@ export function aufgabenVon(spec) {
         ? saetzeFuer(ziel[0]).map((s) => ({ key: `wortart:${ziel[0]}:${s.id}`, art: "wortart", daten: { satz: s.id, woerter: s.woerter, ziel, kopfZiel } }))
         : [];
     }
+    case "schreiben": {
+      const ids = Array.isArray(spec.zeichen) ? spec.zeichen : [];
+      return ids.map((id) => zeichenMit(id)).filter((z) => z !== null).map((z) => ({ key: `schreiben:${z.id}`, art: "schreiben", daten: aufgabenDaten(z) }));
+    }
     default:
       return [];
   }
@@ -232,6 +242,7 @@ export function schwierigkeit(aufgabe) {
   // verbform: ich und du verraten ihre Endung am Fürwort (0); er, sie, wir (1); ihr und sie (Mehrzahl) teilen die Endung (2)
   if (aufgabe.art === "verbform") return d.ziel === "grundform" ? (d.grundform.endsWith("eln") ? 2 : 1) : { ich: 0, du: 0, er: 1, sie: 1, wir: 1, ihr: 2, "sie-pl": 2 }[/** @type {"ich"} */ (d.person)] ?? 1;
   if (aufgabe.art === "wortart") return satzMit(d.satz)?.schwierigkeit ?? 1;
+  if (aufgabe.art === "schreiben") return zeichenSchwierigkeit(zeichenMit(d.zeichen) ?? { id: "", striche: [] });
   // mal: Kernaufgabe 0, eine Gruppe neben einer Kernaufgabe (3, 4, 6, 9) 1, zwei Gruppen daneben (7, 8) 2
   if (aufgabe.art === "mal") return KERN_FAKTOREN.includes(d.a) ? 0 : [7, 8].includes(d.a) ? 2 : 1;
   if (d.op === "plus") return Math.min(d.a, d.b) + ((d.a % 10) + (d.b % 10) >= 10 ? 5 : 0);
@@ -245,6 +256,7 @@ export function darstellbar(aufgabe, artSpec) {
   const d = aufgabe.daten;
   if (artSpec.zahlen && !(d.n >= artSpec.zahlen[0] && d.n <= artSpec.zahlen[1])) return false;
   if (artSpec.ziele && !artSpec.ziele.includes(d.ziel)) return false;
+  if (artSpec.zeichen && !artSpec.zeichen.includes(d.zeichen)) return false;
   if (artSpec.max !== undefined && d.raum > artSpec.max) return false;
   if (artSpec.reihen && !(d.b >= artSpec.reihen[0] && d.b <= artSpec.reihen[1])) return false;
   // zehner: nur Aufgaben mit einem ganzen Zehner (10 + x, c − 10, c − x mit c − x = 10); Stellentafel (M08)

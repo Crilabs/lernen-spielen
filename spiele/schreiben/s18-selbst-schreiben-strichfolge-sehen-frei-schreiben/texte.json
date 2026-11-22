@@ -1,0 +1,20 @@
+{
+ "hinweis": "Sätze von S18 Selbst schreiben, die aus Daten kommen: der Laut oder Name des Zeichens, das das Kind schreibt (Buchstabe, Ziffer als Zahlwort, Schwung mit seinem Namen). Erzeugt aus spiele/woerter/schriftzeichen.js, getestet in tests/spiele/schreiben/s18-selbst-schreiben-strichfolge-sehen-frei-schreiben.test.mjs. Alle übrigen festen Sätze stehen im Aufruf blase.sage in spiel.js.",
+ "aufgabe": {
+  "schwung-senkrecht": "Regen fällt.",
+  "schwung-waagerecht": "Die Straße.",
+  "schwung-kreis-linksherum": "Die Schnecke rollt.",
+  "schwung-girlande": "Schaukel.",
+  "schwung-arkade": "Brücken.",
+  "l": "l.",
+  "i": "i.",
+  "t": "t.",
+  "c": "c.",
+  "o": "o.",
+  "a": "a.",
+  "d": "d.",
+  "ziffer-1": "eins.",
+  "ziffer-4": "vier.",
+  "ziffer-7": "sieben."
+ }
+}

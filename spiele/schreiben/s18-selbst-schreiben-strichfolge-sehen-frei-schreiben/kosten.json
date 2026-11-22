@@ -1,0 +1,165 @@
+[
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefstand",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 978,
+  "einheit": "tokens",
+  "menge": 181342,
+  "notiz": "Spielbau pruefstand",
+  "cache_lesen": 83671,
+  "cache_schreiben": 96685
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "idee",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 26,
+  "ausgabe": 19976,
+  "einheit": "tokens",
+  "menge": 1054085,
+  "notiz": "Spielbau idee",
+  "cache_lesen": 925252,
+  "cache_schreiben": 108831
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefstand",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 1146,
+  "einheit": "tokens",
+  "menge": 181712,
+  "notiz": "Spielbau pruefstand",
+  "cache_lesen": 83687,
+  "cache_schreiben": 96871
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 50,
+  "ausgabe": 17515,
+  "einheit": "tokens",
+  "menge": 2501425,
+  "notiz": "Spielbau pruefung",
+  "cache_lesen": 2347616,
+  "cache_schreiben": 136244
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 20,
+  "ausgabe": 3102,
+  "einheit": "tokens",
+  "menge": 533479,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 355328,
+  "cache_schreiben": 175029
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "pruefstand",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 1073,
+  "einheit": "tokens",
+  "menge": 181497,
+  "notiz": "Spielbau pruefstand",
+  "cache_lesen": 83671,
+  "cache_schreiben": 96745
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 66,
+  "ausgabe": 16935,
+  "einheit": "tokens",
+  "menge": 2741803,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 2459587,
+  "cache_schreiben": 265215
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 268,
+  "ausgabe": 206168,
+  "einheit": "tokens",
+  "menge": 44475885,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 42107059,
+  "cache_schreiben": 2162390
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 12,
+  "ausgabe": 3950,
+  "einheit": "tokens",
+  "menge": 432223,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 286827,
+  "cache_schreiben": 141434
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 941,
+  "notiz": "npm run audio · ElevenLabs Livia, Abrechnung über das ElevenLabs-Abo"
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4732,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4732,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 412
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6104
+  }
+ },
+ {
+  "datum": "2026-11-18",
+  "phase": "geparkt",
+  "posten": "status",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "keine",
+  "menge": 0,
+  "notiz": "Freigabe nötig: Buchstabenhaus als festes Lernzeichen <ls-buchstabenhaus> in spiele/rahmen/ und neue Geste Freihand-Strich (ohne Tipp-Alternative; Enter lässt Ela Lenas Spur fahren, zählt nie als gekonnt)"
+ }
+]

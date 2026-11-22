@@ -616,6 +616,11 @@
    "h": "864aee9d30",
    "gehoert": true
   },
+  "a.": {
+   "datei": "livia/246791dceeb2.mp3",
+   "h": "b2bf6f362e",
+   "gehoert": false
+  },
   "Ab der dritten Woche spielen die Welpen miteinander. Sie raufen, rollen sich über den Boden und knabbern an Ohren und Pfoten. Das sieht wild aus. Aber beim Spielen lernen sie viel. Ist ein Welpe zu wild, knurrt die Mutter ihn an. Dann hält er inne und spielt sanfter weiter. So lernt jeder kleine Hund, wie fest er zubeißen darf. Und er lernt, die Sprache der anderen Hunde zu verstehen. Darum brauchen Welpen ihre Mutter und ihre Geschwister.": {
    "datei": "livia/9ac0aaf7274c.mp3",
    "hand": true,
@@ -1426,6 +1431,11 @@
    "h": "db2b499827",
    "gehoert": false
   },
+  "Bogen und Stab kannst du.": {
+   "datei": "livia/68485c8d2717.mp3",
+   "h": "99cb31d1d7",
+   "gehoert": false
+  },
   "Bogen-Ziffern": {
    "datei": "florian/7eecda04b1e6.mp3",
    "h": "f9bbd3f0fe",
@@ -1446,9 +1456,19 @@
    "h": "9ff1088bb3",
    "gehoert": false
   },
+  "Brücken kannst du.": {
+   "datei": "livia/cbfbcd215203.mp3",
+   "h": "86995c0dfa",
+   "gehoert": false
+  },
   "Brücken-Buchstaben": {
    "datei": "florian/b113893103e2.mp3",
    "h": "23cd180853",
+   "gehoert": false
+  },
+  "Brücken.": {
+   "datei": "livia/881e8adf9dab.mp3",
+   "h": "813f9a24e9",
    "gehoert": false
   },
   "Brückenbuchstaben": {
@@ -1481,6 +1501,11 @@
    "h": "20222f28d0",
    "gehoert": false
   },
+  "c.": {
+   "datei": "livia/fc287f3b466f.mp3",
+   "h": "dc7bd50057",
+   "gehoert": false
+  },
   "Chancen gezielt verändern": {
    "datei": "florian/9307d0653fd3.mp3",
    "h": "a3ebb1da00",
@@ -1494,6 +1519,11 @@
   "ck und tz bei kurzen Wörtern": {
    "datei": "florian/6b465f93f756.mp3",
    "h": "93db929f6a",
+   "gehoert": false
+  },
+  "d.": {
+   "datei": "livia/3b9d034caa01.mp3",
+   "h": "4969a950b0",
    "gehoert": false
   },
   "Da bringt eine Forscherin eine Kiste. Selin darf einen Knochen hochheben. Er ist schwer wie ein Stein. In Millionen Jahren ist er zu Stein geworden.": {
@@ -1744,6 +1774,11 @@
   "Das Hund Haus?": {
    "datei": "livia/ce5cd4b811e6.mp3",
    "h": "e0b0956c62",
+   "gehoert": false
+  },
+  "Das i kommt an das Schild.": {
+   "datei": "livia/3b0a8099c22a.mp3",
+   "h": "848671c266",
    "gehoert": false
   },
   "Das Ich-mag-Gedicht": {
@@ -3006,6 +3041,11 @@
    "h": "c2927ede0f",
    "gehoert": false
   },
+  "Der Zauberbogen kannst du.": {
+   "datei": "livia/9ac1c328f290.mp3",
+   "h": "64bd0136c3",
+   "gehoert": false
+  },
   "Der Zaun.": {
    "datei": "livia/330ef015fcf2.mp3",
    "h": "8a62fc3cbd",
@@ -4036,6 +4076,16 @@
    "h": "e59cbc51f6",
    "gehoert": false
   },
+  "Die Schnecke rollt kannst du.": {
+   "datei": "livia/e00cbdf074ac.mp3",
+   "h": "3678d0c65c",
+   "gehoert": false
+  },
+  "Die Schnecke rollt.": {
+   "datei": "livia/4eab452780bd.mp3",
+   "h": "3db9c61db0",
+   "gehoert": false
+  },
   "Die schönsten Wörter finden": {
    "datei": "florian/8918b84adb7e.mp3",
    "h": "09b35ac7f0",
@@ -4089,6 +4139,16 @@
   "Die Straße": {
    "datei": "florian/025ba0acb513.mp3",
    "h": "d9cbbd3192",
+   "gehoert": false
+  },
+  "Die Straße kannst du.": {
+   "datei": "livia/1fcba376371a.mp3",
+   "h": "72d47b0918",
+   "gehoert": false
+  },
+  "Die Straße.": {
+   "datei": "livia/2cd4a92b412b.mp3",
+   "h": "f32ded13ee",
    "gehoert": false
   },
   "Die Tasse steht auf dem Tisch.": {
@@ -4901,6 +4961,11 @@
    "h": "ffa65246a9",
    "gehoert": false
   },
+  "eins.": {
+   "datei": "livia/32592a771a71.mp3",
+   "h": "21fae480c1",
+   "gehoert": false
+  },
   "Eins.": {
    "datei": "florian/f2839bb99788.mp3",
    "h": "df8fe390ae",
@@ -4924,6 +4989,11 @@
   "Ela dreht die Teile um. Sie staunt: Der Stab bleibt genau so lang.": {
    "datei": "florian/074f2f8c80f4.mp3",
    "h": "607d1e34d4",
+   "gehoert": false
+  },
+  "Ela fährt nur, was du malst.": {
+   "datei": "livia/a0e3e0b0b61e.mp3",
+   "h": "73961b77c7",
    "gehoert": false
   },
   "Ela freut sich mit dir.": {
@@ -4960,6 +5030,11 @@
    "datei": "livia/c8ef017a19da.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Ela und Lena fahren Roller auf dem Hof.": {
+   "datei": "livia/af60f98a1d9b.mp3",
+   "h": "82e50dead1",
+   "gehoert": false
   },
   "Ela will mehr Perlen wegnehmen, als der kleine Stab hat.": {
    "datei": "florian/f943ceeafe97.mp3",
@@ -5826,6 +5901,11 @@
    "h": "0227aa03c0",
    "gehoert": false
   },
+  "Ganz rund kannst du.": {
+   "datei": "livia/48ca71ff9c03.mp3",
+   "h": "13c918834c",
+   "gehoert": false
+  },
   "Ganz schnell davonrennen": {
    "datei": "livia/cd29b8c2cb05.mp3",
    "h": "a165a90518",
@@ -6544,6 +6624,11 @@
   "hüpft.": {
    "datei": "livia/c2c03b641ade.mp3",
    "h": "8b1c872641",
+   "gehoert": false
+  },
+  "i.": {
+   "datei": "livia/9c269948ec16.mp3",
+   "h": "943c55f1c6",
    "gehoert": false
   },
   "Ich … bauen.": {
@@ -7561,6 +7646,11 @@
    "h": "c7cc6fd986",
    "gehoert": false
   },
+  "Ist deine Spur anders, fährt Lena mit.": {
+   "datei": "livia/bdcae7b714cc.mp3",
+   "h": "cc0078afe3",
+   "gehoert": false
+  },
   "Ist die Einladung komplett": {
    "datei": "florian/ffaff6ef6969.mp3",
    "h": "e21fca9184",
@@ -7726,6 +7816,11 @@
    "h": "410e65c69a",
    "gehoert": false
   },
+  "Jetzt fährt Lena nur auf Tipp vor.": {
+   "datei": "livia/49378dc99e9f.mp3",
+   "h": "bfa93e5b31",
+   "gehoert": false
+  },
   "Jetzt fehlt, wer es tut.": {
    "datei": "livia/bf6ddfb8889c.mp3",
    "h": "3dfdf54a82",
@@ -7750,6 +7845,11 @@
    "datei": "livia/96e7e987f4d1.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Jetzt hörst du nur den Laut.": {
+   "datei": "livia/d4798c3fca80.mp3",
+   "h": "56e5fb408f",
+   "gehoert": false
   },
   "Jetzt ist der Zehnerstab voll. Der Rest kommt dahinter.": {
    "datei": "florian/e114b98e34b2.mp3",
@@ -8226,6 +8326,11 @@
    "h": "e8a337780a",
    "gehoert": false
   },
+  "l.": {
+   "datei": "livia/b76f74f56a87.mp3",
+   "h": "6efa44b398",
+   "gehoert": false
+  },
   "Lageplan zeichnen": {
    "datei": "florian/dce80676da9e.mp3",
    "h": "0b9ab5ac7f",
@@ -8331,6 +8436,11 @@
    "h": "3bf8cf9b6a",
    "gehoert": false
   },
+  "Leg den Finger auf den großen Punkt.": {
+   "datei": "livia/be67a55258fc.mp3",
+   "h": "e40a0259e5",
+   "gehoert": false
+  },
   "Leg eine Zahl mit Bündeln und einzelnen Stiften.": {
    "datei": "florian/165784c26ece.mp3",
    "h": "c7eacb8dff",
@@ -8364,6 +8474,26 @@
   "Lena": {
    "datei": "florian/3dca01b08ef1.mp3",
    "h": "b0cdda9816",
+   "gehoert": false
+  },
+  "Lena fährt andersherum.": {
+   "datei": "livia/f67e0e9beaa1.mp3",
+   "h": "6d8b5b666b",
+   "gehoert": false
+  },
+  "Lena fährt langsam vor.": {
+   "datei": "livia/a792141d0de7.mp3",
+   "h": "e6dd92e689",
+   "gehoert": false
+  },
+  "Lena fährt zuerst den Stab.": {
+   "datei": "livia/b83d4d80f534.mp3",
+   "h": "58e506dcde",
+   "gehoert": false
+  },
+  "Lena fängt oben an.": {
+   "datei": "livia/373c4b1c0b37.mp3",
+   "h": "a7d52b6658",
    "gehoert": false
   },
   "Lena findet einen bunten Käfer.": {
@@ -8419,6 +8549,26 @@
   "Lena wischt die Perlen weg.": {
    "datei": "florian/496a62e65b59.mp3",
    "h": "260e4b6ec5",
+   "gehoert": false
+  },
+  "Lena zeigt, wo es losgeht.": {
+   "datei": "livia/44378fafc4a8.mp3",
+   "h": "fdb97940bf",
+   "gehoert": false
+  },
+  "Lenas Bogen liegt auf der anderen Seite.": {
+   "datei": "livia/cf62cadc5937.mp3",
+   "h": "037fcf6722",
+   "gehoert": false
+  },
+  "Lenas Roller malt eine Kreidespur.": {
+   "datei": "livia/1a9e160a447b.mp3",
+   "h": "64942ed970",
+   "gehoert": false
+  },
+  "Lenas Spur sieht anders aus.": {
+   "datei": "livia/9340cc87d763.mp3",
+   "h": "bff47b9623",
    "gehoert": false
   },
   "Lesen": {
@@ -9731,6 +9881,11 @@
    "h": "2d23ae6086",
    "gehoert": false
   },
+  "o.": {
+   "datei": "livia/9ddb7b19a5a3.mp3",
+   "h": "d1fb308596",
+   "gehoert": false
+  },
   "Oben am Oberschenkelknochen sitzt eine runde Kugel. Sie steckt in einer Pfanne im Becken und kann sich in viele Richtungen drehen.": {
    "datei": "livia/10b702950b45.mp3",
    "h": "6c7257afb3",
@@ -10111,6 +10266,11 @@
    "h": "5cd5707467",
    "gehoert": false
   },
+  "Probier es mit Kreide, Sand oder Stift.": {
+   "datei": "livia/d61a94f82bd2.mp3",
+   "h": "d878e7842a",
+   "gehoert": false
+  },
   "Probieren mit Tabelle": {
    "datei": "florian/cc76f1a19a11.mp3",
    "h": "1ad7d43c9c",
@@ -10319,6 +10479,16 @@
   "Regen fällt": {
    "datei": "florian/bef35c8f6e8a.mp3",
    "h": "3268a6c7f3",
+   "gehoert": false
+  },
+  "Regen fällt kannst du.": {
+   "datei": "livia/bb643915403c.mp3",
+   "h": "19b87dc847",
+   "gehoert": false
+  },
+  "Regen fällt.": {
+   "datei": "livia/03552d54cffb.mp3",
+   "h": "30f52c2bde",
    "gehoert": false
   },
   "Regen.": {
@@ -10591,6 +10761,11 @@
    "h": "67c107028b",
    "gehoert": false
   },
+  "Schaukel kannst du.": {
+   "datei": "livia/294422241333.mp3",
+   "h": "15f2a2d418",
+   "gehoert": false
+  },
   "Schaukel und Stab": {
    "datei": "florian/fe310b7149c6.mp3",
    "h": "9c7bd2a120",
@@ -10599,6 +10774,11 @@
   "Schaukel-Buchstaben": {
    "datei": "florian/659d15c7454c.mp3",
    "h": "e68b7120b3",
+   "gehoert": false
+  },
+  "Schaukel.": {
+   "datei": "livia/02b1a02ac1e6.mp3",
+   "h": "10ad51c2b3",
    "gehoert": false
   },
   "scheint.": {
@@ -10814,6 +10994,11 @@
   "Sekunden": {
    "datei": "florian/3655e933dceb.mp3",
    "h": "2eff07542c",
+   "gehoert": false
+  },
+  "Selbst schreiben": {
+   "datei": "livia/9ce3a8818033.mp3",
+   "h": "1d596f1eb2",
    "gehoert": false
   },
   "Selin fängt an zu malen. Sie stellt ihren Plateosaurus auf vier Beine. Die Forscherin legt eine Hand aus Stein daneben. Am Daumen sitzt eine große, krumme Kralle.": {
@@ -11096,6 +11281,11 @@
    "h": "6219d0e8c6",
    "gehoert": false
   },
+  "Sie setzt ab und macht den Punkt.": {
+   "datei": "livia/46114bdc04a8.mp3",
+   "h": "b388884f39",
+   "gehoert": false
+  },
   "Sie sind immer noch sehr selten": {
    "datei": "livia/df6313549bc3.mp3",
    "h": "adf97caa42",
@@ -11204,6 +11394,11 @@
   "Sieben und zehn.": {
    "datei": "florian/34ed14de2ba4.mp3",
    "h": "75b920670b",
+   "gehoert": false
+  },
+  "sieben.": {
+   "datei": "livia/e14bde252aa1.mp3",
+   "h": "6951c5958b",
    "gehoert": false
   },
   "Sieben.": {
@@ -11331,6 +11526,11 @@
    "h": "2b1f2344dd",
    "gehoert": false
   },
+  "So lernst du, wo ein i anfängt.": {
+   "datei": "livia/6c0fc90f33e8.mp3",
+   "h": "8d15c69a47",
+   "gehoert": false
+  },
   "So lernst du, Zahlen zu schreiben, die du hörst.": {
    "datei": "florian/33f530d3c2ee.mp3",
    "h": "3a6794f32f",
@@ -11451,9 +11651,19 @@
    "h": "27e0a85fa9",
    "gehoert": false
   },
+  "Stäbchen kannst du.": {
+   "datei": "livia/a3258cf84968.mp3",
+   "h": "ad09a0f56d",
+   "gehoert": false
+  },
   "Stäbchen mit Kreuz": {
    "datei": "florian/33cc5ae6120d.mp3",
    "h": "913888f4db",
+   "gehoert": false
+  },
+  "Stäbchen mit Kreuz kannst du.": {
+   "datei": "livia/c47f569b3a29.mp3",
+   "h": "3cca778d1a",
    "gehoert": false
   },
   "Standpunkt, Grund, Beispiel": {
@@ -11569,6 +11779,11 @@
   "Szenische Lesung": {
    "datei": "florian/9a5568061c55.mp3",
    "h": "1e58856b7a",
+   "gehoert": false
+  },
+  "t.": {
+   "datei": "livia/82358b9820d2.mp3",
+   "h": "e582456ff2",
    "gehoert": false
   },
   "Tabelle aus Text": {
@@ -12739,6 +12954,11 @@
   "Vier und zehn.": {
    "datei": "florian/18309d1aed60.mp3",
    "h": "f28fa985b7",
+   "gehoert": false
+  },
+  "vier.": {
+   "datei": "livia/a222aa9133d2.mp3",
+   "h": "f2e75c22ed",
    "gehoert": false
   },
   "Vier.": {
@@ -14506,6 +14726,11 @@
    "h": "9ecef69712",
    "gehoert": false
   },
+  "Zieh die Linie wie Lena.": {
+   "datei": "livia/b7714ae71c95.mp3",
+   "h": "495f31ce66",
+   "gehoert": false
+  },
   "Zieh Schuhe und Socken aus und schau dir deinen Fuß an. Hinten ist die runde Ferse, unten die Sohle. Vorn unter den Zehen liegt ein dickes Polster, der Ballen. Oben auf dem Fuß, wo die Schnürsenkel sitzen, ist der Spann. Manche sagen auch Rist dazu. Vorn sitzen fünf Zehen, ganz innen der große Zeh. Auch im Fuß stecken viele kleine Knochen. In Händen und Füßen zusammen steckt mehr als die Hälfte aller Knochen eines Menschen. Was glaubst du: Kannst du mit den Zehen einen Stift aufheben?": {
    "datei": "livia/f55e8ccfb131.mp3",
    "h": "f17f6acb41",
@@ -14514,6 +14739,11 @@
   "Ziffern aus Strichen": {
    "datei": "florian/6da251e3712d.mp3",
    "h": "3b76c5b17a",
+   "gehoert": false
+  },
+  "Ziffern aus Strichen kannst du.": {
+   "datei": "livia/af93469b6207.mp3",
+   "h": "5a4cc26de5",
    "gehoert": false
   },
   "Ziffern lesen": {
