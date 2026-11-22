@@ -528,6 +528,42 @@
    "datei": "grammatik/personalpronomen.md",
    "foto": "grammatik/bilder/personalpronomen.webp"
   },
+  "plus-bis-100": {
+   "fach": "mathe",
+   "name": "Plus bis 100",
+   "titel": "Zwei Preise im Kopf zusammen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Die Kasse rechnet"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Riesenschritt und Hüpfer"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-bis-100.md",
+   "foto": "mathe/bilder/plus-bis-100.webp"
+  },
+  "plus-bis-30": {
+   "fach": "mathe",
+   "name": "Plus bis 30",
+   "titel": "Erst den Zehner voll",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Punkte an den Bügel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Bis an den Schal"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-bis-30.md",
+   "foto": "mathe/bilder/plus-bis-30.webp"
+  },
   "plus-einer-ohne-uebergang-bis-100": {
    "fach": "mathe",
    "name": "Einer dazu ohne Übergang",
@@ -581,6 +617,24 @@
    "entwurf": false,
    "datei": "mathe/plus-zehner-bis-100.md",
    "foto": "mathe/bilder/plus-zehner-bis-100.webp"
+  },
+  "plus-zweistellig-mit-uebergang": {
+   "fach": "mathe",
+   "name": "Große Zahlen plus mit Übergang",
+   "titel": "Zehn Einer werden ein neuer Zehner",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zehn in ein Bündel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zehn Klatscher, ein Hüpfer"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-zweistellig-mit-uebergang.md",
+   "foto": "mathe/bilder/plus-zweistellig-mit-uebergang.webp"
   },
   "plus-zweistellig-ohne-uebergang": {
    "fach": "mathe",
