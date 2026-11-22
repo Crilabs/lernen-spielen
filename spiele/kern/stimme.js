@@ -159,7 +159,8 @@ function ladeAudioIndex() {
             );
           })
           .catch((e) => {
-            protokoll("Audio-Verzeichnis nicht geladen: " + e);
+            // Verlässt das Kind die Seite, bricht der Browser die offene Anfrage ab: kein Fehler der Datei.
+            if (!verlassen) protokoll("Audio-Verzeichnis nicht geladen: " + e);
             return new Map();
           });
   }
