@@ -678,5 +678,25 @@
   },
   "ki": true,
   "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "plus-bis-100.webp": {
+  "datum": "2026-11-22",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Die Kasse rechnet“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: einige Dinge, Zettel, Stift\nWhat happens: Schreibt Preise von einige Euro für die Dinge auf. Eine Person kauft einige Dinge, die andere ist die Kasse. Sagt vorher: Gibt es einen neuen Zehner? Die Kasse rechnet im Kopf: … Wer kauft, rechnet auf eigenem Weg nach. Ist es nicht gleich, rechnet zusammen. Tauscht. Nach einige Einkäufen ist Schluss.\nImportant: A few everyday household items (for example a book, a cup, a toy car, a ball) set out like a small play shop on a table, with blank paper slips and a pencil next to them. No writing, no numbers, no prices visible anywhere; the paper is empty.",
+  "usage": {
+   "input_tokens": 577,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 577
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2333
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
  }
 }

@@ -470,6 +470,24 @@
    "datei": "grammatik/personalpronomen.md",
    "foto": "grammatik/bilder/personalpronomen.webp"
   },
+  "plus-bis-100": {
+   "fach": "mathe",
+   "name": "Plus bis 100",
+   "titel": "Zwei Preise im Kopf zusammen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Die Kasse rechnet"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Riesenschritt und Hüpfer"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-bis-100.md",
+   "foto": "mathe/bilder/plus-bis-100.webp"
+  },
   "plus-bis-30": {
    "fach": "mathe",
    "name": "Plus bis 30",

@@ -5962,5 +5962,67 @@
   "thema": [
    "plus-zweistellig-mit-uebergang"
   ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 577,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 577,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 577
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2333
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 68,
+  "ausgabe": 37999,
+  "einheit": "tokens",
+  "menge": 3769300,
+  "notiz": "plus-bis-100, Recherche und Schreiben",
+  "cache_lesen": 3590191,
+  "cache_schreiben": 141042,
+  "themen": 1,
+  "thema": [
+   "plus-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 15426,
+  "einheit": "tokens",
+  "menge": 741423,
+  "notiz": "plus-bis-100, Prüfung Runde 1",
+  "cache_lesen": 636865,
+  "cache_schreiben": 89112,
+  "themen": 1,
+  "thema": [
+   "plus-bis-100"
+  ]
  }
 ]
