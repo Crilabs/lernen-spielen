@@ -53,13 +53,16 @@ test("Wer handelt: ich die eigene Hand, du Kofi oder Lena, er Timo, sie Ela, wir
   assert.ok(V.werVon("wir", "malen").length <= L.MAX_AUF_EINMAL);
 });
 
-test("passt (Endung): auf material nur die genaue Endung, sonst bei „sie“ -t und -en", () => {
+test("passt (Endung): die genaue Endung, bei „sie“ auf jeder Stufe -t und -en (das Wort sagt nicht, ob eine oder mehrere)", () => {
   const du = a("verbform:endung:malen:du");
   assert.deepEqual(L.plaettchenFuer(du), ["e", "st", "t", "en"]);
   assert.deepEqual(L.plaettchenFuer(du).map((e) => L.passt(du, e)), [false, true, false, false]);
   const sie = a("verbform:endung:malen:sie");
-  assert.deepEqual(L.plaettchenFuer(sie).map((e) => L.passt(sie, e, "material")), [false, false, true, false]);
-  assert.deepEqual(L.plaettchenFuer(sie).map((e) => L.passt(sie, e, "vorstellung")), [false, false, true, true]);
+  for (const stufe of ["material", "vorstellung", "kopf"]) {
+    assert.deepEqual(L.plaettchenFuer(sie).map((e) => L.passt(sie, e, stufe)), [false, false, true, true], stufe);
+    const siePl = a("verbform:endung:malen:sie-pl");
+    assert.deepEqual(L.plaettchenFuer(siePl).map((e) => L.passt(siePl, e, stufe)), [false, false, true, true], stufe);
+  }
   assert.deepEqual(L.plaettchenFuer(du).map((e) => L.passt(a("verbform:endung:malen:ihr"), e, "kopf")), [false, false, true, false]);
   assert.equal(L.richtigesPlaettchen(sie), "t");
 });
