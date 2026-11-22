@@ -430,6 +430,60 @@
    "datei": "grammatik/personalpronomen.md",
    "foto": "grammatik/bilder/personalpronomen.webp"
   },
+  "plus-einer-ohne-uebergang-bis-100": {
+   "fach": "mathe",
+   "name": "Einer dazu ohne Übergang",
+   "titel": "Ein paar dazu, der Zehner bleibt",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Wohin kommt das Lesezeichen?"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Klatschen dazu"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-einer-ohne-uebergang-bis-100.md",
+   "foto": "mathe/bilder/plus-einer-ohne-uebergang-bis-100.webp"
+  },
+  "plus-zehner-bis-100": {
+   "fach": "mathe",
+   "name": "Zehner dazu",
+   "titel": "Zehner dazu",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zehner ins Sparglas"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Das Klatschen bleibt"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-zehner-bis-100.md",
+   "foto": "mathe/bilder/plus-zehner-bis-100.webp"
+  },
+  "plus-zweistellig-ohne-uebergang": {
+   "fach": "mathe",
+   "name": "Große Zahlen plus ohne Übergang",
+   "titel": "Zwei große Zahlen zusammen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kleingeld zusammenlegen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Erst stampfen, dann klatschen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-zweistellig-ohne-uebergang.md",
+   "foto": "mathe/bilder/plus-zweistellig-ohne-uebergang.webp"
+  },
   "pronomen-statt-nomen": {
    "fach": "grammatik",
    "name": "Pronomen statt Nomen",
@@ -783,6 +837,24 @@
    "entwurf": false,
    "datei": "mathe/zehnerzahlen-bis-100.md",
    "foto": "mathe/bilder/zehnerzahlen-bis-100.webp"
+  },
+  "zehnerzahlen-plus-minus": {
+   "fach": "mathe",
+   "name": "Zehnerzahlen plus und minus",
+   "titel": "Zehner plus Zehner",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zehner im Geldbeutel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zehnerschritte im Flur"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zehnerzahlen-plus-minus.md",
+   "foto": "mathe/bilder/zehnerzahlen-plus-minus.webp"
   },
   "zerlegen-10": {
    "fach": "mathe",
