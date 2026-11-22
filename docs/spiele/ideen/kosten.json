@@ -134,5 +134,22 @@
   "thema": [
    "m01"
   ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "ideen",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 5993,
+  "einheit": "tokens",
+  "menge": 668734,
+  "notiz": "M14, Ideen",
+  "cache_lesen": 592400,
+  "cache_schreiben": 70323,
+  "themen": 1,
+  "thema": [
+   "m14"
+  ]
  }
 ]
