@@ -470,6 +470,24 @@
    "datei": "grammatik/personalpronomen.md",
    "foto": "grammatik/bilder/personalpronomen.webp"
   },
+  "plus-bis-30": {
+   "fach": "mathe",
+   "name": "Plus bis 30",
+   "titel": "Erst den Zehner voll",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Punkte an den Bügel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Bis an den Schal"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-bis-30.md",
+   "foto": "mathe/bilder/plus-bis-30.webp"
+  },
   "pronomen-statt-nomen": {
    "fach": "grammatik",
    "name": "Pronomen statt Nomen",
