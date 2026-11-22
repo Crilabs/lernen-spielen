@@ -66,6 +66,7 @@ async function neueSeite(browser, tb, stand) {
             if (!t.empfaenger.some((e) => e.bestaetigt)) { t.zustand = "aus"; return { familieGeloescht: true }; }
             return { ok: true };
           }
+          if (name === "tagesbrief_probebrief" && t.probeFehler) throw t.probeFehler;
           if (name === "tagesbrief_status") return { zustand: t.zustand, adresse: t.adresse, uhrzeit: t.uhrzeit };
           if (name === "tagesbrief_einrichten") { t.zustand = "wartet"; t.adresse = a.adresse; t.uhrzeit = a.uhrzeit; return "anfrage-1"; }
           if (name === "tagesbrief_einstellen") { t.uhrzeit = a.uhrzeit; return null; }
@@ -152,6 +153,16 @@ for (const typ of [chromium, webkit]) {
     await klick(seite, "Probebrief senden");
     await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("Der Probebrief ist unterwegs."));
     pruefe((await aufrufe(seite, "tagesbrief_probebrief")).length === 1, `${L} Probebrief ruft den Befehl`);
+    // Leerer Topf (heute nicht gespielt): der Dienst antwortet 409, die App sagt, was hilft
+    await seite.evaluate(() => { window.__tb.probeFehler = "Probebrief nicht möglich (Status 409)"; });
+    await klick(seite, "Probebrief senden");
+    await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("Heute wurde noch nicht gespielt."));
+    pruefe(true, `${L} Probebrief bei leerem Topf: Hinweis „Heute wurde noch nicht gespielt“`);
+    await seite.evaluate(() => { window.__tb.probeFehler = "Probebrief nicht möglich (Status 500)"; });
+    await klick(seite, "Probebrief senden");
+    await seite.waitForFunction(() => document.getElementById("inhalt").innerText.includes("Bitte später noch einmal versuchen."));
+    pruefe(true, `${L} Probebrief bei anderem Fehler: „später noch einmal“`);
+    await seite.evaluate(() => { delete window.__tb.probeFehler; });
 
     await klick(seite, "Uhrzeit ändern");
     await seite.fill('#inhalt .tb-felder input[name="uhrzeit"]', "19:30");

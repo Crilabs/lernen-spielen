@@ -55,6 +55,12 @@ Scheitert der Versand an einen Empfänger, wird nur dieser wiederholt (15 Minute
 Der Topf wird geleert, sobald alle bestätigten Empfänger den Brief haben oder ihre Versuche aufgebraucht sind (bekam ihn
 niemand, bleibt er bis morgen). Eine Speicherdatei aus der Zeit „eine Adresse je Topf“ (`adressen`) wird beim Start verworfen.
 
+## Test-Protokoll
+
+`POST /protokoll` (Bearer, `X-App`) nimmt das Test-Protokoll der App an und legt es als JSON-Zeilen unter
+`/var/lib/lernen-spielen/protokoll/<gerät>/<tag>.jsonl` ab, getrennt vom Topf; Löschung nach 90 Tagen. Format, Holen
+und Lesen: `docs/testprotokoll.md`.
+
 ## Probebrief
 
 `probe.js` sendet den Beispiel-Topf der Spec (Mila, Neunerreihe mit Foto) ohne Geräteanmeldung an genau die eine
