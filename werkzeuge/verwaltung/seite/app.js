@@ -413,7 +413,17 @@ function zeigeLernweg() {
   if (!neu) setzeBlick();
   else if (lwAusschnitte[schl]) { blick = { ...lwAusschnitte[schl] }; setzeBlick(); }
   else if (lw.knoten.some((n) => n.id === zustand.lernwegThema)) zentriere(zustand.lernwegThema);
-  else einpassen();
+  else anfang();
+}
+
+/** Start: lesbar am Anfang des Wegs (Klasse 1 links); passt das ganze Fach lesbar hinein, eingepasst. */
+function anfang() {
+  if (!lw) return;
+  const r = $("#lw-flaeche").getBoundingClientRect();
+  const s = 0.8;
+  if (lw.breite * s <= r.width - 40 && lw.hoehe * s <= r.height - 20) return einpassen();
+  blick = { s, x: 20, y: Math.min(10, r.height / 2 - (lw.hoehe * s) / 2) };
+  setzeBlick();
 }
 
 /** Hebt die Kette des gewählten Themas hervor und füllt das Feld rechts. */
