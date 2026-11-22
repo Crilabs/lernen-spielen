@@ -488,6 +488,24 @@
    "datei": "mathe/plus-bis-30.md",
    "foto": "mathe/bilder/plus-bis-30.webp"
   },
+  "plus-zweistellig-mit-uebergang": {
+   "fach": "mathe",
+   "name": "Große Zahlen plus mit Übergang",
+   "titel": "Zehn Einer werden ein neuer Zehner",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zehn in ein Bündel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zehn Klatscher, ein Hüpfer"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-zweistellig-mit-uebergang.md",
+   "foto": "mathe/bilder/plus-zweistellig-mit-uebergang.webp"
+  },
   "pronomen-statt-nomen": {
    "fach": "grammatik",
    "name": "Pronomen statt Nomen",
