@@ -14,6 +14,7 @@
     "schrift:ansehen": "node werkzeuge/schrift/ansehen.mjs",
     "echte-dinge": "node werkzeuge/echte-dinge/verzeichnis.mjs",
     "echte-dinge:brief-fotos": "node werkzeuge/echte-dinge/brief-fotos.mjs",
+    "echte-dinge:pdf": "node werkzeuge/echte-dinge/pdf.mjs",
     "verwaltung": "node werkzeuge/verwaltung/server.mjs"
   },
   "devDependencies": {
