@@ -19,7 +19,9 @@ const pruefe = (name, ok, was = "") => { if (!ok) fehler++; console.log(`${ok ? 
 const server = await starteServer(WURZEL);
 const basis = `http://127.0.0.1:${/** @type {any} */ (server.address()).port}/${SPIEL}`;
 const browser = await starteStumm(pw.chromium, {});
-for (const thema of ["nomen", "verb", "adjektiv"]) {
+// Themen-Ids aus dem Lernplan und die Wortart, deren Symbol dann auf dem Tablett liegen muss.
+const THEMEN = { namenwoerter: "nomen", tunwoerter: "verb" }; // G01 dient „Nomen und Verben“ (wiewoerter fällt auf Nomen zurück)
+for (const [thema, art] of Object.entries(THEMEN)) {
   for (const stufe of ["material", "vorstellung", "kopf"]) {
     const L = `${thema}/${stufe}`;
     const k = await browser.newContext({ viewport: { width: 1280, height: 800 } });
@@ -44,9 +46,12 @@ for (const thema of ["nomen", "verb", "adjektiv"]) {
       const proben = [...document.querySelectorAll(".kaestchen .probe.da")].map((e) => /** @type {HTMLElement} */ (e).textContent ?? "");
       const ueber = [...document.querySelectorAll(".kaestchen .wort, .kaestchen .probe")].filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent);
       const kasten = [...document.querySelectorAll(".kaestchen")].filter((e) => e.scrollWidth > e.clientWidth + 1).length;
-      return { woerter, proben, ueber, kasten, alleGross: [...woerter, ...proben].every((t) => t === gross(t)), gemischt: [...woerter, ...proben].filter((t) => /\p{Ll}/u.test(t)) };
+      const arten = [...document.querySelectorAll(".teil.symbol")].map((e) => /** @type {HTMLElement} */ (e).dataset.art);
+      // ß hat keinen Großbuchstaben im Spiel (bleibt ß); alles andere muss groß sein.
+      return { woerter, proben, ueber, kasten, arten, gemischt: [...woerter, ...proben].filter((t) => t !== gross(t)) };
     });
     const a = await lies();
+    pruefe(`${L}: Thema geladen (Symbol ${art} auf dem Tablett)`, a.arten.includes(art), JSON.stringify(a.arten));
     pruefe(`${L}: Kästchen nicht leer (${a.woerter.join(" ")})`, a.woerter.length > 0 && a.woerter.every((t) => t.length > 0));
     pruefe(`${L}: kein Kleinbuchstabe im Kästchen (nichts verrät das Nomen)`, a.gemischt.length === 0, JSON.stringify(a.gemischt));
     pruefe(`${L}: nichts läuft über`, a.ueber.length === 0 && a.kasten === 0, JSON.stringify(a));
