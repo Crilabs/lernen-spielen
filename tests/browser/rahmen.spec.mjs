@@ -627,7 +627,8 @@ async function pausenFrage(typ, name, basis) {
         if (sessionStorage.getItem("frage-gesetzt")) return;
         sessionStorage.setItem("frage-gesetzt", "1");
         localStorage.setItem("lernstand-kind-1-lernplan", JSON.stringify({ version: 1, themen: {}, aufgaben: {}, verlauf: [],
-          buecher: { wal: { kapitel: 1, seite: 0, fertig: [0], am: { 0: "2026-11-01" } } } }));
+          buecher: { wal: { kapitel: 1, seite: 0, fertig: [0], am: { 0: "2026-11-01" } } },
+          sachthemen: { geschichten: { wal: { am: "2026-11-01" } } } }));   // „Weißt du noch?“ erst nach dem ganzen Buch
       });
       const seite = await kontext.newPage();
       seite.on("pageerror", (e) => fehlerListe.push(`Seitenfehler: ${e.message}`));
