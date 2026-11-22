@@ -129,3 +129,53 @@ summary .zahl-z { min-width: 5.5em; text-align: right; font-variant-numeric: tab
 .ideen-karten button { align-self: flex-start; }
 @media (max-width: 1100px) { .ideen-karten { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .ideen-karten { grid-template-columns: 1fr; } }
+
+/* Lernweg (Spec 2026-11-22): je Fach alle Lernthemen mit Voraussetzungen, Farbe = Abdeckung */
+main:has(#lernweg:not([hidden])) { max-width: none; padding-bottom: 12px; }
+.lw-leiste { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin-bottom: 8px; }
+.lw-knoepfe { display: flex; gap: 4px; }
+.lw-knoepfe .zweit { padding: 3px 10px; }
+.lw-legende { display: inline-block; padding: 1px 8px; border-radius: 6px; border: 1.5px solid; font-size: 12px; white-space: nowrap; }
+.lw-legende.a-spiel { color: var(--fertig); background: var(--fertig-g); }
+.lw-legende.a-echte { color: var(--wartet); background: var(--wartet-g); }
+.lw-legende.a-fehlt { color: var(--fehlt); background: var(--fehlt-g); }
+.lw-legende.in-arbeit { border-style: dashed; }
+.lw-legende.in-arbeit:not(.a-spiel, .a-echte, .a-fehlt) { color: var(--leise); }
+.lw-flaeche { position: relative; height: calc(100vh - 160px); min-height: 420px; background: var(--flaeche); border: 1px solid var(--linie);
+  border-radius: 8px; overflow: hidden; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.lw-flaeche.zieht { cursor: grabbing; }
+#lw-svg { display: block; width: 100%; height: 100%; }
+.lw-band.k0 { fill: var(--grund); }
+.lw-band.k1 { fill: transparent; }
+.lw-band-text { fill: var(--leise); font-size: 14px; font-weight: 600; }
+.lw-spitze { fill: var(--leise); }
+.lw-kante { fill: none; stroke: var(--leise); stroke-opacity: .4; stroke-width: 1.2; }
+.lw-knoten { cursor: pointer; }
+.lw-knoten rect { stroke-width: 1.5; }
+.lw-knoten.a-spiel rect { fill: var(--fertig-g); stroke: var(--fertig); }
+.lw-knoten.a-echte rect { fill: var(--wartet-g); stroke: var(--wartet); }
+.lw-knoten.a-fehlt rect { fill: var(--fehlt-g); stroke: var(--fehlt); }
+.lw-knoten.in-arbeit rect { stroke-dasharray: 6 3; }
+.lw-knoten.stummel rect { fill: var(--flaeche); stroke: var(--leise); stroke-dasharray: 3 3; }
+.lw-knoten:hover rect { stroke-width: 2.5; }
+.lw-zelle { display: flex; align-items: center; height: 100%; padding: 0 9px; box-sizing: border-box; }
+.lw-name { font-size: 12px; line-height: 1.25; color: var(--text); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.stummel .lw-name { color: var(--leise); font-size: 11px; font-style: italic; -webkit-line-clamp: 1; }
+.lw-knoten.treffer rect { stroke: var(--auftrag); stroke-width: 3; }
+#lw-svg.fokus .lw-knoten:not(.an), #lw-svg.fokus .lw-kante:not(.an) { opacity: .13; }
+#lw-svg.fokus .lw-kante.an { stroke: var(--akzent); stroke-opacity: .9; stroke-width: 2; }
+.lw-knoten.gewaehlt rect { stroke: var(--akzent); stroke-width: 3.5; }
+.lw-feld { position: absolute; top: 10px; right: 10px; bottom: 10px; width: 330px; overflow: auto; background: var(--flaeche);
+  border: 1px solid var(--linie); border-radius: 8px; padding: 10px 14px; box-shadow: 0 6px 24px rgb(0 0 0 / .14); cursor: auto; user-select: text; -webkit-user-select: text; }
+.lw-feld h3 { margin: 4px 0 2px; font-size: 15px; padding-right: 60px; }
+.lw-feld h4 { margin: 12px 0 4px; font-size: 12px; color: var(--leise); font-weight: 600; }
+.lw-feld p { margin: 6px 0; }
+.lw-zu { position: absolute; top: 10px; right: 12px; }
+.lw-liste { list-style: none; padding: 0; margin: 0; }
+.lw-liste li { padding: 2px 0; }
+.lw-liste button { border: 0; background: none; padding: 0; color: var(--akzent); text-align: left; }
+.lw-liste button:hover { text-decoration: underline; }
+.lw-punkt { display: inline-block; width: 8px; height: 8px; border-radius: 50%; vertical-align: middle; }
+.lw-punkt.a-spiel { background: var(--fertig); }
+.lw-punkt.a-echte { background: var(--wartet); }
+.lw-punkt.a-fehlt { background: var(--fehlt); }

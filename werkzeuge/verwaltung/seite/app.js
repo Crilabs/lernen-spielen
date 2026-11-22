@@ -1,5 +1,7 @@
 // Seite der Verwaltung: liest /api/uebersicht und /api/auftraege, legt Aufträge an, steuert den Lauf.
 
+import { abdeckung, baueLernweg, kette } from "./lernweg.js";
+
 const $ = (s) => /** @type {HTMLElement} */ (document.querySelector(s));
 const eur = (n) => (n === null || n === undefined ? "–" : n.toLocaleString("de-DE", { style: "currency", currency: "EUR" }));
 const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -33,7 +35,7 @@ let U = /** @type {any} */ (null);
 let A = /** @type {any} */ ({ auftraege: [], laeuft: false });
 let gewaehlt = /** @type {string|null} */ (null);
 let protokollAb = 0;
-const zustand = { reiter: "spiele", fach: "", klasse: "", luecken: false, suche: "" };
+const zustand = { reiter: "spiele", fach: "", klasse: "", luecken: false, suche: "", lernwegFach: "mathe", lernwegThema: "" };
 try { Object.assign(zustand, JSON.parse(localStorage.getItem("verwaltung") ?? "{}")); } catch { /* ohne Speicher */ }
 // alte Reiter (bis 16.11.) auf die neuen abbilden
 zustand.reiter = ({ lernthemen: "spiele", sachthemen: "bibliothek" })[zustand.reiter] ?? zustand.reiter;
@@ -345,6 +347,210 @@ function zeigeKosten() {
     <p class="leise-text">Erfasst sind nur Kosten, die die Skills in kosten.json buchen; freie Sitzungen fehlen. Rechnung wie <code>npm run kosten</code>.</p>`;
 }
 
+// ---------- Lernweg (Spec 2026-11-22) ----------
+// Je Fach alle Lernthemen mit Pfeilen von der Voraussetzung zum Folgethema; Farbe = Abdeckung; Klick zeigt die Kette.
+
+const ABDECKUNG_TEXT = { spiel: "Spiel da", echte: "nur Mit echten Dingen", fehlt: "nichts" };
+/** @type {ReturnType<typeof baueLernweg>|null} */
+let lw = null;
+let lwSchluessel = "";
+let lwSuche = "";
+/** gemerkter Ausschnitt je Fach und Klasse */
+const lwAusschnitte = /** @type {Record<string, { s: number, x: number, y: number }>} */ ({});
+let blick = { s: 1, x: 0, y: 0 };
+const fachName = (id) => U.faecher.find((f) => f.id === id)?.name ?? id;
+const lernthema = (id) => U.lernthemen.find((t) => t.id === id);
+
+function zeigeLernweg() {
+  const fach = zustand.lernwegFach;
+  const schl = `${fach}/${zustand.klasse}`;
+  lw = baueLernweg(U.lernthemen, fach, zustand.klasse);
+  const lt = new Map(U.lernthemen.map((t) => [t.id, t]));
+  const zahl = { spiel: 0, echte: 0, fehlt: 0 };
+  let inArbeit = 0;
+  const baender = lw.baender.map((b, i) => `<rect class="lw-band k${i % 2}" x="${b.x}" y="0" width="${b.breite}" height="${lw?.hoehe}"/>
+    <text class="lw-band-text" x="${b.x + 12}" y="22">Klasse ${b.klasse}</text>`).join("");
+  const kanten = lw.kanten.map((k) => `<path class="lw-kante" data-k="${esc(k.von)}>${esc(k.nach)}" d="${k.d}" marker-end="url(#lw-pfeil)"/>`).join("");
+  const knoten = lw.knoten.map((n) => {
+    const t = lt.get(n.id);
+    let klasse = "lw-knoten", text = n.name;
+    if (n.stummel) { klasse += " stummel"; text = n.stummel === "fach" ? `aus ${fachName(n.strang)}: ${n.name}` : `aus Kl. ${n.klasse}: ${n.name}`; }
+    else {
+      const a = abdeckung(t, U.spiele);
+      zahl[a.art]++;
+      if (a.inArbeit) inArbeit++;
+      klasse += ` a-${a.art}${a.inArbeit ? " in-arbeit" : ""}`;
+    }
+    return `<g class="${klasse}" data-lw-id="${esc(n.id)}" transform="translate(${n.x},${n.y})">
+      <rect width="${n.b}" height="${n.h}" rx="7"/>
+      <foreignObject width="${n.b}" height="${n.h}"><div class="lw-zelle" xmlns="http://www.w3.org/1999/xhtml"><span class="lw-name">${esc(text)}</span></div></foreignObject>
+      <title>${esc(text)} · Kl. ${n.klasse} · ${esc(n.bereich)}</title></g>`;
+  }).join("");
+  $("#lw-blick").innerHTML = baender + kanten + knoten;
+  const echt = lw.knoten.filter((n) => !n.stummel).length;
+  $("#lw-leiste").innerHTML = `<b>${esc(fachName(fach))}</b><span class="leise-text">${echt} Lernthemen${zustand.klasse ? ` in Klasse ${esc(zustand.klasse)}` : ""}</span>
+    <span class="lw-legende a-spiel">${ABDECKUNG_TEXT.spiel} ${zahl.spiel}</span>
+    <span class="lw-legende a-echte">${ABDECKUNG_TEXT.echte} ${zahl.echte}</span>
+    <span class="lw-legende a-fehlt">${ABDECKUNG_TEXT.fehlt} ${zahl.fehlt}</span>
+    <span class="lw-legende in-arbeit">gestrichelt: beauftragt ${inArbeit}</span>
+    <span class="lw-knoepfe"><button class="zweit" data-lw="minus" title="kleiner">−</button><button class="zweit" data-lw="plus" title="größer">+</button>
+    <button class="zweit" data-lw="einpassen">einpassen</button></span>
+    <span class="leise-text">Ziehen verschiebt · ⌘ + Scrollen oder Zusammenziehen zoomt · Klick zeigt die Kette</span>`;
+
+  const neu = lwSchluessel !== schl;
+  lwSchluessel = schl;
+  const such = zustand.suche.toLowerCase();
+  const treffer = such ? lw.knoten.filter((n) => !n.stummel && (n.name.toLowerCase().includes(such) || n.id.includes(such))) : [];
+  document.querySelectorAll("#lw-blick .lw-knoten").forEach((g) => g.classList.toggle("treffer", treffer.some((n) => n.id === /** @type {HTMLElement} */ (g).dataset.lwId)));
+  if (such !== lwSuche) {
+    lwSuche = such;
+    if (treffer.length && !treffer.some((n) => n.id === zustand.lernwegThema)) zustand.lernwegThema = treffer[0].id;
+    markiereLernweg();
+    if (treffer.length) zentriere(zustand.lernwegThema);
+    return;
+  }
+  markiereLernweg();
+  if (!neu) setzeBlick();
+  else if (lwAusschnitte[schl]) { blick = { ...lwAusschnitte[schl] }; setzeBlick(); }
+  else if (lw.knoten.some((n) => n.id === zustand.lernwegThema)) zentriere(zustand.lernwegThema);
+  else einpassen();
+}
+
+/** Hebt die Kette des gewählten Themas hervor und füllt das Feld rechts. */
+function markiereLernweg() {
+  const id = zustand.lernwegThema;
+  const da = !!lw && lw.knoten.some((n) => n.id === id && !n.stummel);
+  const k = da && lw ? kette(lw, id) : null;
+  $("#lw-svg").classList.toggle("fokus", !!k);
+  document.querySelectorAll("#lw-blick .lw-knoten").forEach((g) => {
+    const gid = /** @type {HTMLElement} */ (g).dataset.lwId ?? "";
+    g.classList.toggle("an", !!k?.knoten.has(gid));
+    g.classList.toggle("gewaehlt", gid === id);
+  });
+  document.querySelectorAll("#lw-blick .lw-kante").forEach((p) => p.classList.toggle("an", !!k?.kanten.has(/** @type {HTMLElement} */ (p).dataset.k ?? "")));
+  const feld = $("#lw-feld");
+  feld.hidden = !da;
+  if (!da) return;
+  const t = lernthema(id);
+  const a = abdeckung(t, U.spiele);
+  const verweis = (x) => `<li><button data-lw-thema="${esc(x.id)}">${x.strang !== t.strang ? `<span class="leise-text">${esc(fachName(x.strang))}:</span> ` : ""}${esc(x.name)}</button>
+    <span class="leise-text">Kl. ${x.klasse}</span> <span class="lw-punkt a-${abdeckung(x, U.spiele).art}"></span></li>`;
+  const vorher = t.voraussetzungen.map(lernthema).filter(Boolean);
+  const nachher = U.lernthemen.filter((x) => x.voraussetzungen.includes(id));
+  const spiele = t.spiele.map((s) => U.spiele[s]).filter(Boolean);
+  feld.innerHTML = `<button class="lw-zu leise" data-lw="zu" title="schließen (Esc)">schließen</button>
+    <h3>${esc(t.name)}</h3>
+    <div class="leise-text">${esc(t.id)} · Kl. ${t.klasse} · ${esc(t.bereich)}</div>
+    ${t.ziel ? `<p>${esc(t.ziel)}</p>` : ""}
+    <h4>Abdeckung</h4>
+    <p><span class="lw-legende a-${a.art}${a.inArbeit ? " in-arbeit" : ""}">${ABDECKUNG_TEXT[a.art]}</span></p>
+    <ul class="lw-liste">${spiele.map((s) => `<li>${esc(s.id)} ${esc(s.name)} ${plakette(s.status)}</li>`).join("") || `<li class="leise-text">kein Spiel im Katalog</li>`}
+      <li>Mit echten Dingen ${plakette(t.echteDinge)}</li></ul>
+    <h4>Voraussetzungen (${vorher.length})</h4>
+    <ul class="lw-liste">${vorher.map(verweis).join("") || `<li class="leise-text">keine – ein Anfang</li>`}</ul>
+    <h4>Baut darauf auf (${nachher.length})</h4>
+    <ul class="lw-liste">${nachher.map(verweis).join("") || `<li class="leise-text">nichts – ein Ende des Wegs</li>`}</ul>`;
+}
+
+function setzeFokus(id) {
+  zustand.lernwegThema = id;
+  merke();
+  markiereLernweg();
+}
+
+/** Springt zu einem Thema, auch in ein anderes Fach oder eine andere Klasse. */
+function springe(id) {
+  const t = lernthema(id);
+  if (!t) return;
+  zustand.lernwegFach = t.strang;
+  if (zustand.klasse && String(t.klasse) !== zustand.klasse) {
+    zustand.klasse = String(t.klasse);
+    /** @type {HTMLSelectElement} */ ($("#f-klasse")).value = zustand.klasse;
+  }
+  zustand.lernwegThema = id;
+  merke();
+  zeige();
+  zentriere(id);
+}
+
+function setzeBlick() {
+  $("#lw-blick").setAttribute("transform", `translate(${blick.x},${blick.y}) scale(${blick.s})`);
+  lwAusschnitte[lwSchluessel] = { ...blick };
+}
+
+function einpassen() {
+  if (!lw) return;
+  const r = $("#lw-flaeche").getBoundingClientRect();
+  const s = Math.max(0.08, Math.min(1, (r.width - 40) / lw.breite, (r.height - 40) / lw.hoehe));
+  blick = { s, x: Math.max(20, (r.width - lw.breite * s) / 2), y: Math.max(10, (r.height - lw.hoehe * s) / 2) };
+  setzeBlick();
+}
+
+function zentriere(id) {
+  const n = lw?.knoten.find((x) => x.id === id);
+  if (!n) return;
+  const r = $("#lw-flaeche").getBoundingClientRect();
+  const feld = $("#lw-feld").hidden ? 0 : 340;
+  const s = Math.max(blick.s, 0.75);
+  blick = { s, x: (r.width - feld) / 2 - (n.x + n.b / 2) * s, y: r.height / 2 - (n.y + n.h / 2) * s };
+  setzeBlick();
+}
+
+function zoome(faktor, px, py) {
+  const s = Math.min(2, Math.max(0.08, blick.s * faktor));
+  blick = { s, x: px - (px - blick.x) * (s / blick.s), y: py - (py - blick.y) * (s / blick.s) };
+  setzeBlick();
+}
+
+function lwKnopf(was) {
+  const r = $("#lw-flaeche").getBoundingClientRect();
+  if (was === "einpassen") einpassen();
+  if (was === "plus") zoome(1.25, r.width / 2, r.height / 2);
+  if (was === "minus") zoome(0.8, r.width / 2, r.height / 2);
+  if (was === "zu") setzeFokus("");
+}
+
+{
+  const flaeche = $("#lw-flaeche");
+  let zug = /** @type {{ x: number, y: number, bx: number, by: number, bewegt: boolean }|null} */ (null);
+  flaeche.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0 || /** @type {HTMLElement} */ (e.target).closest("#lw-feld")) return;
+    zug = { x: e.clientX, y: e.clientY, bx: blick.x, by: blick.y, bewegt: false };
+    flaeche.setPointerCapture(e.pointerId);
+  });
+  flaeche.addEventListener("pointermove", (e) => {
+    if (!zug) return;
+    const dx = e.clientX - zug.x, dy = e.clientY - zug.y;
+    if (!zug.bewegt && Math.hypot(dx, dy) < 4) return;
+    zug.bewegt = true;
+    flaeche.classList.add("zieht");
+    blick = { ...blick, x: zug.bx + dx, y: zug.by + dy };
+    setzeBlick();
+  });
+  flaeche.addEventListener("pointerup", (e) => {
+    if (!zug) return;
+    const war = zug;
+    zug = null;
+    flaeche.classList.remove("zieht");
+    if (war.bewegt) return;
+    const g = /** @type {HTMLElement|null} */ (document.elementFromPoint(e.clientX, e.clientY)?.closest("[data-lw-id]") ?? null);
+    const id = g?.dataset.lwId ?? "";
+    if (g?.classList.contains("stummel")) springe(id);
+    else setzeFokus(id);
+  });
+  flaeche.addEventListener("pointercancel", () => { zug = null; flaeche.classList.remove("zieht"); });
+  flaeche.addEventListener("wheel", (e) => {
+    if (/** @type {HTMLElement} */ (e.target).closest("#lw-feld")) return;
+    e.preventDefault();
+    const r = flaeche.getBoundingClientRect();
+    if (e.ctrlKey || e.metaKey) zoome(Math.exp(-e.deltaY * 0.01), e.clientX - r.left, e.clientY - r.top);
+    else { blick = { ...blick, x: blick.x - e.deltaX, y: blick.y - e.deltaY }; setzeBlick(); }
+  }, { passive: false });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && zustand.reiter === "lernweg" && !document.querySelector("dialog[open]")) setzeFokus("");
+  });
+}
+
 // ---------- Kopf, Hinweise, Steuerung ----------
 
 function zeigeKopf() {
@@ -365,12 +571,19 @@ function zeigeKopf() {
 function zeige() {
   document.querySelectorAll("[data-reiter]").forEach((b) => b.setAttribute("aria-selected", String(/** @type {HTMLElement} */ (b).dataset.reiter === zustand.reiter)));
   document.querySelectorAll(".ansicht").forEach((s) => { /** @type {HTMLElement} */ (s).hidden = s.id !== zustand.reiter; });
-  $("#filter").hidden = !["spiele", "bibliothek"].includes(zustand.reiter);
-  /** @type {HTMLElement} */ ($("#f-fach").parentElement).hidden = zustand.reiter !== "spiele";
+  $("#filter").hidden = !["spiele", "bibliothek", "lernweg"].includes(zustand.reiter);
+  const imLernweg = zustand.reiter === "lernweg";
+  /** @type {HTMLElement} */ ($("#f-fach").parentElement).hidden = !["spiele", "lernweg"].includes(zustand.reiter);
+  // Der Lernweg zeigt immer genau ein Fach; „nur Lücken“ und Auf-/Zuklappen gibt es dort nicht
+  const fachWahl = /** @type {HTMLSelectElement} */ ($("#f-fach"));
+  fachWahl.options[0].hidden = imLernweg;
+  if (fachWahl.options.length > 1) fachWahl.value = imLernweg ? zustand.lernwegFach : zustand.fach;
+  document.querySelectorAll(".filter .umschalter, #alle-auf, #alle-zu").forEach((el) => { /** @type {HTMLElement} */ (el).hidden = imLernweg; });
   if (!U) return;
   zeigeKopf();
   if (zustand.reiter === "spiele") zeigeSpiele();
   if (zustand.reiter === "bibliothek") zeigeBibliothek();
+  if (zustand.reiter === "lernweg") zeigeLernweg();
   if (zustand.reiter === "auftraege") zeigeAuftraege();
   if (zustand.reiter === "ideen") zeigeIdeen();
   if (zustand.reiter === "proben") zeigeProben();
@@ -461,6 +674,8 @@ document.addEventListener("click", async (e) => {
       document.querySelectorAll("[data-luecken]").forEach((b) => b.setAttribute("aria-pressed", String(b === z)));
       zeige();
     }
+    else if (z.dataset.lwThema) springe(z.dataset.lwThema);
+    else if (z.dataset.lw) lwKnopf(z.dataset.lw);
     else if (z.dataset.auftrag) bestaetige(z.dataset.auftrag, z.dataset.ziel);
     else if (z.dataset.schritt) { A = { ...A, ...(await api(`/api/auftraege/${z.dataset.id}/${z.dataset.schritt}`, {})) }; await ladeAlles(); }
     else if (z.dataset.antwort) { await api(`/api/auftraege/${z.dataset.id}/antwort`, { text: z.dataset.antwort }); await ladeAlles(); }
@@ -498,7 +713,11 @@ document.addEventListener("submit", async (e) => {
   try { await api("/api/auftraege", { art: "frei", ziel: text }); await ladeAlles(); } catch (err) { $("#hinweis").textContent = /** @type {Error} */ (err).message; }
 });
 
-$("#f-fach").addEventListener("change", (e) => { zustand.fach = /** @type {HTMLSelectElement} */ (e.target).value; merke(); zeige(); });
+$("#f-fach").addEventListener("change", (e) => {
+  const wert = /** @type {HTMLSelectElement} */ (e.target).value;
+  if (zustand.reiter === "lernweg") zustand.lernwegFach = wert; else zustand.fach = wert;
+  merke(); zeige();
+});
 $("#f-klasse").addEventListener("change", (e) => { zustand.klasse = /** @type {HTMLSelectElement} */ (e.target).value; merke(); zeige(); });
 let suchTakt = 0;
 $("#f-suche").addEventListener("input", (e) => {
@@ -528,10 +747,7 @@ setInterval(async () => {
   } catch { /* Server kurz weg */ }
 }, 2500);
 
-ladeAlles().then(() => {
-  /** @type {HTMLSelectElement} */ ($("#f-fach")).value = zustand.fach;
-  zeige();
-}).catch((e) => { $("#hinweis").textContent = `Laden fehlgeschlagen: ${e.message}`; });
+ladeAlles().catch((e) => { $("#hinweis").textContent = `Laden fehlgeschlagen: ${e.message}`; });
 
 // Eigene Idee: Entwurf merken, damit das Nachladen ihn nicht löscht
 document.addEventListener("input", (e) => {
