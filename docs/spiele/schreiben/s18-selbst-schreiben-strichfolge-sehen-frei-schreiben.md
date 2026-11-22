@@ -58,3 +58,10 @@ Katalog S18 · Schreiben · `spiele/schreiben/s18-selbst-schreiben-strichfolge-s
 - Lena fährt ebenfalls Roller, ihre Kreide malt die Vorlage: so ist „vorgefahren“ dasselbe Ding wie die gepunktete Spur (§8).
 - Elas Tempo folgt dem Kind, aber gestaucht auf ≤ 3 s, auch bei ganzen Schwungzeilen (§1 Wirkung; Dauer ist hier nicht Lernziel).
 - Kreiseln bei Schleifen nur ab und zu als Freude-Variante, nicht bei jeder Schleife (§4 Abwechslung).
+
+## 12. Freigabe (Christian, 2026-11-22)
+- Geparkt am 2026-11-18 wegen zwei Fragen; beide freigegeben, das Spiel kommt als Probe nach `main`.
+- **Buchstabenhaus** ist festes Lernzeichen (grundsaetze-bilder.md D10).
+- **Freihand-Strich** ist freigegeben (bedienung.md §5), ohne Tipp-Alternative; Enter lässt Ela Lenas Spur fahren und zählt nie als gekonnt.
+- **Nur der Stift schreibt:** Im Schreibfeld zählen nur Stiftsignale (und die Maus am Computer); Finger und aufliegende Hand nicht. Ela, Lena und alle Knöpfe gehen mit dem Finger. Wo oben „Finger“ steht, gilt jetzt „Stift“; der Einführungssatz heißt „Setz den Stift auf den großen Punkt.“
+- Schulschrift des Kindes: SAS (für S20).

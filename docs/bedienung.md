@@ -127,18 +127,24 @@ Die Werte stehen nur in `grundsaetze-bilder.md` 6.2 (Anschauung: `docs/farbwelt.
 ---------------------------------------------------------------------------------------------------
 ## 5. Gesten
 
-- Im Spiel gibt es nur **Tippen** und **Ziehen**.
+- Im Spiel gibt es **Tippen** und **Ziehen**, in Schreibspielen dazu den **Freihand-Strich**.
+- **Freihand-Strich mit Aufzeichnung** (Christian 2026-11-22, mit S18 und S20): Das Kind schreibt im Schreibfeld;
+  aufgezeichnet werden Punkte, Reihenfolge und Absetzen. **Im Schreibfeld zählt nur der Stift**: Finger und eine
+  aufliegende Hand schreiben nicht mit (`spiele/schrift/stift.js`: `stiftFeld()` und `zaehltAlsStift()`; die Maus zählt
+  wie ein Stift, für Computer und Prüfstand). Tippt ein Finger allein ins Feld, erscheint dort kurz ein kleiner Stift,
+  ohne Satz. Alles außerhalb des Schreibfelds (Leiste, Hilfe, Pause, Beenden, Figuren wie Ela und Lena) geht weiter
+  mit dem Finger. Der Freihand-Strich hat keine Tipp-Alternative, denn Schreiben ist die Lernhandlung; mit der Tastatur
+  fährt die Vorlage, und das zählt nie als gekonnt.
 - **Jedes Ziehen hat eine Tipp-Alternative:** erst das Teil antippen (es hebt sich sichtbar an), dann
   das Ziel. Ein zweites Antippen des Teils legt es zurück.
 - Nicht verwendet werden Doppeltipp, Wischen, langes Drücken, Zwei-Finger-Gesten. Langes Drücken gibt es
   nur beim Zahnrad auf der Startseite (Zugang für Erwachsene).
 - Zoomen, Markieren, Kontextmenü und Ziehen von Bildern sind gesperrt (`sperreTouch()` aus
   `lernspiel.js`).
-- **Vorgemerkt (Spielkatalog §8, noch nicht freigegeben):** Freihand-Strich mit Aufzeichnung (S18, S20),
-  Drehgriff am angehobenen Teil und Drehpfeile an Körpern (Geometrie), Zurück im Lernfeld (R10, R12),
+- **Vorgemerkt (Spielkatalog §8, noch nicht freigegeben):** Drehgriff am angehobenen Teil und Drehpfeile an Körpern (Geometrie), Zurück im Lernfeld (R10, R12),
   Zwei-Personen-Ablauf am selben Gerät (M34, M56), Aufnahmeknopf (Z09, Z10, L18), Kopfhörer für links/rechts (Z01).
   Jede Eingabe wird im Plan des ersten Spiels entworfen, das sie braucht, mit diesem Plan freigegeben und dann
-  hier als Geste oder Baustein eingetragen. Bis dahin bleibt es bei Tippen und Ziehen.
+  hier als Geste oder Baustein eingetragen. Bis dahin bleibt es bei Tippen, Ziehen und dem Freihand-Strich.
 
 ---------------------------------------------------------------------------------------------------
 ## 6. Wie Bedienelemente reagieren

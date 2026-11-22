@@ -161,5 +161,16 @@
   "einheit": "keine",
   "menge": 0,
   "notiz": "Freigabe nötig: Buchstabenhaus als festes Lernzeichen <ls-buchstabenhaus> in spiele/rahmen/ und neue Geste Freihand-Strich (ohne Tipp-Alternative; Enter lässt Ela Lenas Spur fahren, zählt nie als gekonnt)"
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 36,
+  "notiz": "npm run audio · ElevenLabs Livia, Abrechnung über das ElevenLabs-Abo"
  }
 ]

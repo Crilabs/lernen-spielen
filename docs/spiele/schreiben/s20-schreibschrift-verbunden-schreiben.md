@@ -56,3 +56,11 @@ Katalog S20 · Schreiben · `spiele/schreiben/s20-schreibschrift-verbunden-schre
 - Platzwart/Nachbarin mit Postkarte nur gelegentlich als Witz, nicht bei jeder Aufgabe (§1 eine Wirkung, §7).
 - Foto entsteht, wenn der Stift 0,8 s oben bleibt, nicht sofort beim Abheben, damit i-Punkt, t-Strich und VA-Luftsprung möglich bleiben.
 - Blaue Stunde statt tiefer Nacht, damit Ela, Zelt und Leine erkennbar bleiben (§4 Ort, an dem man gern ist).
+
+## 12. Freigabe (Christian, 2026-11-22)
+- Geparkt am 2026-11-18 wegen drei Fragen; alle so freigegeben, wie sie oben stehen. Das Spiel kommt als Probe nach `main`.
+- **Lineatur mit Mittelband** ist festes Lernzeichen (grundsaetze-bilder.md D11), der **Freihand-Strich** steht in bedienung.md §5.
+- **Dunkler Himmel** als Lernfeld ist erlaubt (Ausnahme von „die Matte ist das Hellste“, nur weil die Spur leuchtet).
+- **Karte geändert** wie in §11 (Ela pustet und zündet nicht neu, Gast nur als Witz) ist angenommen.
+- **Nur der Stift schreibt:** Im Schreibfeld zählen nur Stiftsignale (und die Maus am Computer); Finger und aufliegende Hand nicht. Ela und alle Knöpfe gehen mit dem Finger. Wo oben „Stift oder Finger“ steht, gilt jetzt nur „Stift“.
+- Schulschrift des Kindes: **SAS**. Die VA bleibt angelegt, wird aber vorerst nicht gebaut.

@@ -1,6 +1,6 @@
 // S18 Selbst schreiben (Idee: docs/spiele/schreiben/s18-selbst-schreiben-strichfolge-sehen-frei-schreiben.md, Karte „Kreidebahn“).
 // Auf dem Schulhof ist ein Buchstabenhaus mit Kreide aufs Pflaster gemalt. Lena legt vor: Ihr Roller malt mit einem Kreidestück die
-// Spur (gepunktet, mit großem Startpunkt). Das Kind zieht den Schwung, den Buchstaben oder die Ziffer mit dem Finger in die Zeile.
+// Spur (gepunktet, mit großem Startpunkt). Das Kind zieht den Schwung, den Buchstaben oder die Ziffer mit dem Stift in die Zeile.
 // Ela fährt genau diese Linie ab, in der Reihenfolge und Richtung, wie sie gezogen wurde; das Zeichen fliegt an das Hof-Schild.
 // Stimmt es nicht, fährt Lena ihre Vorlage zugleich darauf, und man sieht, wo es anders losgeht (Gegenverkehr, anderer Bogen).
 //
@@ -27,6 +27,7 @@ import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
 import { aufgabenVon } from "../../aufgabenarten.js";
 import { zeichenMit } from "../../woerter/schriftzeichen.js";
 import { TIPP, saeubere } from "../../schrift/erkennen.js";
+import { stiftFeld, zaehltAlsStift } from "../../schrift/stift.js";
 import {
   BREITE, HOEHE, mitLineatur, vorlageImBlatt, startVon, satzZu, fahrplan, ortZu, begegnung, fahrtZeit, aufKind,
   pruefZug, pruefZuege, erkenne, bereit, laenge,
@@ -105,7 +106,7 @@ const einleitung = {
   oben: (/** @type {any} */ o) => blase.sage("Lena fängt oben an.", o),
   punkt: (/** @type {any} */ o) => blase.sage("Sie setzt ab und macht den Punkt.", o),
   ela: (/** @type {any} */ o) => blase.sage("Ela fährt nur, was du malst.", o),
-  finger: (/** @type {any} */ o) => blase.sage("Leg den Finger auf den großen Punkt.", o),
+  stift: (/** @type {any} */ o) => blase.sage("Setz den Stift auf den großen Punkt.", o),
   zieh: (/** @type {any} */ o) => blase.sage("Zieh die Linie wie Lena.", o),
   schild: (/** @type {any} */ o) => blase.sage("Das i kommt an das Schild.", o),
   mitfahren: (/** @type {any} */ o) => blase.sage("Ist deine Spur anders, fährt Lena mit.", o),
@@ -117,7 +118,7 @@ const einleitung = {
 /** Elternansicht (?eltern): beschreibend, von Stärken aus, kein Vergleich (3.3). @param {HTMLElement} feldEltern */
 function fuelleEltern(feldEltern) {
   feldEltern.innerHTML = `<p>Auf dem Schulhof ist ein Buchstabenhaus mit Kreide aufs Pflaster gemalt: oben das Dach, in der Mitte das
-    Erdgeschoss, unten der Keller. Ihr Kind schreibt mit dem Finger einen Schwung, einen Buchstaben oder eine Ziffer hinein. Ela
+    Erdgeschoss, unten der Keller. Ihr Kind schreibt mit dem Stift einen Schwung, einen Buchstaben oder eine Ziffer hinein. Ela
     fährt genau diese Linie mit dem Roller ab, in der Reihenfolge und Richtung, in der sie gezogen wurde, und das Zeichen kommt an
     das Hof-Schild. Lena legt vor: Ihr Roller malt die Strichfolge als gepunktete Spur mit einem großen Startpunkt.</p>
     <p>Geprüft werden Startpunkt, Richtung, Reihenfolge und grobe Form, nicht Schönheit, Strichdicke oder Tempo. Ist die Spur anders,
@@ -478,7 +479,7 @@ const B = {
   /** Die Vorlage im Blatt (Lenas Spur). @type {Punkt[][]} */ vor: [],
   frei: false,
   /** Die Striche des Kindes in Haus-Einheiten. @type {Punkt[][]} */ striche: [],
-  /** Der Strich, der gerade gezogen wird. @type {{ punkte: Punkt[], pfad: SVGPathElement } | null} */ offen: null,
+  /** Der Strich, der gerade gezogen wird. @type {{ punkte: Punkt[], pfad: SVGPathElement, zeiger: number } | null} */ offen: null,
   t0: 0,
   /** Wann der letzte Strich endete (ms, performance.now). */
   letzterEnde: 0,
@@ -1032,10 +1033,12 @@ function antwortWackel(el) {
   setTimeout(() => el.classList.remove("wackelt"), 450);
 }
 
-// --- Die Linie des Kindes: Finger oder Stift auf dem Blatt -----------------------------------------------------------
+// --- Die Linie des Kindes: der Stift auf dem Blatt (spiele/schrift/stift.js) ----------------------------------------
+// Nur Stiftsignale schreiben; eine aufliegende Hand oder ein Finger zählen nicht (Christian, 2026-11-22). Ela und Lena
+// sind eigene Elemente und gehen weiter mit dem Finger.
 /** @param {PointerEvent} e */
 function strichBeginnt(e) {
-  if (e.button > 0 || B.offen) return;
+  if (!zaehltAlsStift(e) || e.button > 0 || B.offen) return;
   // Tippt das Kind eine Folge weg, schreibt dieser Tipp nicht mit.
   if (B.lage !== "start" || performance.now() < B.ignoriereBis) return;
   if (B.imDaneben) beendeWirkung();
@@ -1048,14 +1051,14 @@ function strichBeginnt(e) {
   const p = vonClient(e.clientX, e.clientY);
   const pfad = svgEl("path", { d: pfadD([p]), fill: "none", stroke: TINTE, "stroke-width": 9, "stroke-linecap": "round", "stroke-linejoin": "round" });
   spurKind.append(pfad);
-  B.offen = { punkte: [p], pfad };
+  B.offen = { punkte: [p], pfad, zeiger: e.pointerId };
   if (!B.t0 || !B.striche.length) B.t0 = performance.now();
   try { zeile.setPointerCapture(e.pointerId); } catch { /* der Prüfstand sendet Ereignisse ohne echten Zeiger */ }
 }
 /** @param {PointerEvent} e */
 function strichLaeuft(e) {
   const o = B.offen;
-  if (!o) return;
+  if (!o || e.pointerId !== o.zeiger) return;
   const p = vonClient(e.clientX, e.clientY);
   const l = o.punkte[o.punkte.length - 1];
   if (Math.hypot(p[0] - l[0], p[1] - l[1]) < 1.2) return;
@@ -1065,7 +1068,7 @@ function strichLaeuft(e) {
 /** @param {PointerEvent} e */
 function strichEndet(e) {
   const o = B.offen;
-  if (!o) return;
+  if (!o || e.pointerId !== o.zeiger) return;
   strichLaeuft(e);
   B.offen = null;
   B.letzterEnde = performance.now();
@@ -1081,6 +1084,7 @@ function strichEndet(e) {
   if (l < TIPP) o.pfad.setAttribute("d", pfadD([[o.punkte[0][0], o.punkte[0][1]]]));
   B.offeneHand?.pruefe(false);
 }
+stiftFeld(zeile);
 zeile.addEventListener("pointerdown", strichBeginnt);
 zeile.addEventListener("pointermove", strichLaeuft);
 zeile.addEventListener("pointerup", strichEndet);
@@ -1094,12 +1098,12 @@ zeile.addEventListener("keydown", (e) => {
 ela.el.addEventListener("click", () => B.offeneHand?.pruefe(true));
 lena.el.addEventListener("click", () => B.offeneHand?.lenaVor());
 
-// --- Prüfstand: Striche wie ein Finger ziehen ------------------------------------------------------------------------
+// --- Prüfstand: Striche wie ein Stift ziehen -------------------------------------------------------------------------
 const warteMs = (/** @type {number} */ ms) => new Promise((ok) => setTimeout(ok, ms));
 
-/** Sendet Striche (Haus-Einheiten) als Zeigerereignisse auf das Blatt, wie ein Finger. @param {Punkt[][]} striche */
+/** Sendet Striche (Haus-Einheiten) als Zeigerereignisse auf das Blatt, wie ein Stift. @param {Punkt[][]} striche */
 async function schreibeStriche(striche) {
-  const o = { bubbles: true, composed: true, cancelable: true, pointerId: 7, isPrimary: true, pointerType: "touch", button: 0 };
+  const o = { bubbles: true, composed: true, cancelable: true, pointerId: 7, isPrimary: true, pointerType: "pen", button: 0 };
   for (const s of striche) {
     const pts = s.length === 1 ? [s[0], [s[0][0] + 0.2, s[0][1]]] : s;
     const c0 = nachClient(/** @type {Punkt} */ (pts[0]));
@@ -1132,7 +1136,7 @@ function dichter(striche) {
 // =====================================================================================================
 // EINFÜHRUNG im echten Spielbild (docs/spielbau.md §8, Idee §6)
 // =====================================================================================================
-// Eine kleine Geschichte am Beispiel i: Lena fährt vor und malt die Spur, das Kind legt den Finger auf den Startpunkt und schreibt
+// Eine kleine Geschichte am Beispiel i: Lena fährt vor und malt die Spur, das Kind setzt den Stift auf den Startpunkt und schreibt
 // selbst, Ela fährt, das i kommt an das Schild. Nicht gebucht.
 
 /** Die Einführung: Sätze, Hilfe und Zug für den Prüfstand (rahmen/einfuehrung-lauf.js). */
@@ -1174,7 +1178,7 @@ function einfuehrung(r) {
       await fahrt;
       ring([]);
       await satz(e.ela);
-      // Jetzt du: Finger auf den Startpunkt, dann die Linie ziehen.
+      // Jetzt du: Stift auf den Startpunkt, dann die Linie ziehen.
       demo.abbau();
       /** @type {() => void} */
       let getan = () => {};
@@ -1183,9 +1187,9 @@ function einfuehrung(r) {
       demo = du;
       ring([startEl]);
       const zug = { art: "schreiben", von: "#startpunkt", wie: "richtig" };
-      E.hilfe(() => satz(e.finger).then(() => satz(e.zieh)), { bis: geschrieben });
+      E.hilfe(() => satz(e.stift).then(() => satz(e.zieh)), { bis: geschrieben });
       const kind = E.kind(zug, geschrieben);
-      await satz(e.finger);
+      await satz(e.stift);
       await satz(e.zieh);
       await kind;
       ring([]);
@@ -1244,7 +1248,7 @@ meldePruefSchnittstelle({
   zuege: () => (stand.phase === "aufgabe" ? offeneAufgabe?.zuege() ?? [] : stand.phase === "pause" ? [WEITER] : stand.phase === "einfuehrung" ? [einfuehrungsZug()].filter(Boolean) : []),
   richtigerZug: () => (stand.phase === "aufgabe" ? offeneAufgabe?.richtigerZug() ?? null : stand.phase === "pause" ? WEITER : stand.phase === "einfuehrung" ? einfuehrungsZug() : null),
   orte: ORTE,
-  /** Die eigene Art „schreiben“: Striche wie ein Finger ziehen (richtig, rückwärts, gespiegelt); sonst wie die Vorgabe. @param {any} zug */
+  /** Die eigene Art „schreiben“: Striche wie ein Stift ziehen (richtig, rückwärts, gespiegelt); sonst wie die Vorgabe. @param {any} zug */
   async fuehreAus(zug) {
     if (zug.art !== "schreiben") return standardZug(zug);
     await schreibeStriche(dichter(pruefZug(B.vor, zug.wie ?? "richtig")));

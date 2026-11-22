@@ -1,5 +1,5 @@
 // S20 Leuchtschrift (Idee docs/spiele/schreiben/s20-schreibschrift-verbunden-schreiben.md).
-// Ela schreibt ein Wort mit der Wunderkerze in die obere Zeile des Nachthimmels, das Kind schreibt es mit Stift oder Finger in
+// Ela schreibt ein Wort mit der Wunderkerze in die obere Zeile des Nachthimmels, das Kind schreibt es mit dem Stift in
 // einem Zug in die untere. Die Spur leuchtet und sprüht Funken. Bleibt der Stift 0,8 s oben, macht die Kamera ein Foto, das
 // Wort fliegt an Elas Wäscheleine. Wo abgesetzt wurde, zeigt das Foto eine Lücke; Start, Drehrichtung und Band zeigt Elas Spur.
 //
@@ -29,6 +29,7 @@ import { schriftPfad } from "../../kern/einstellungen.js";
 import { schreibAus } from "../../aufgabenarten.js";
 import { kameraSvg } from "./raum.js";
 import * as P from "./logik.js";
+import { stiftFeld, zaehltAlsStift } from "../../schrift/stift.js";
 
 sperreTouch();
 
@@ -105,7 +106,7 @@ const einleitung = {
 /** Elternansicht (?eltern): beschreibend, von Stärken aus, kein Vergleich (3.3). @param {HTMLElement} feld */
 function fuelleEltern(feld) {
   feld.innerHTML = `<p>Es wird dunkel am Zeltplatz, und Ela schreibt mit einer Wunderkerze ein Wort in die obere Zeile des
-    Nachthimmels. Ihr Kind schreibt dasselbe Wort mit Stift oder Finger in die untere Zeile, in einem Zug, so wie man
+    Nachthimmels. Ihr Kind schreibt dasselbe Wort mit dem Stift in die untere Zeile, in einem Zug, so wie man
     verbunden schreibt. Solange der Stift aufliegt, leuchtet die Spur und sprüht Funken. Bleibt er danach kurz oben, macht
     die Kamera ein Foto, und das Wort hängt an Elas Wäscheleine.</p>
     <p>Gemessen wird nur, was man messen kann: ob mitten im Wort abgesetzt wurde, wo der Strich beginnt, in welche Richtung
@@ -875,7 +876,6 @@ const eingabe = {
   /** @type {{ punkte: Probe[], spur: Spur } | null} */ strich: null,
   /** @type {{ punkte: Probe[], spur: Spur }[]} */ striche: [],
   uhr: 0,
-  stift: 0,
   letztePing: 0,
   pingNr: 0,
   /** Wird am Ende eines Versuchs (Stift 0,8 s oben) mit den Strichen in Einheiten gerufen. @type {((striche: Probe[][]) => void) | null} */ beiVersuch: null,
@@ -894,11 +894,12 @@ function lokal(e) {
   return { x: e.clientX - r.left, y: e.clientY - r.top };
 }
 
+// Nur Stiftsignale schreiben; eine aufliegende Hand oder ein Finger zählen nicht (Christian, 2026-11-22,
+// spiele/schrift/stift.js). Ela und die Knöpfe sind eigene Elemente und gehen weiter mit dem Finger.
+stiftFeld(cv);
 cv.addEventListener("pointerdown", (e) => {
-  if (!eingabe.offen) return;
+  if (!eingabe.offen || !zaehltAlsStift(e)) return;
   const jetzt = performance.now();
-  if (e.pointerType === "pen") eingabe.stift = jetzt;
-  else if (e.pointerType === "touch" && jetzt - eingabe.stift < 1500) return; // Handballen neben dem Stift
   if (eingabe.aktiv !== null) return;
   const p = lokal(e);
   if (p.y < grenzeY()) {
@@ -1022,7 +1023,7 @@ async function schreibeSimuliert(wie) {
   const warte = (/** @type {number} */ ms) => new Promise((ok) => setTimeout(ok, ms));
   const id = 71 + Math.floor(Math.random() * 20);
   const ereignis = (/** @type {string} */ typ, /** @type {{ x: number, y: number }} */ c) => cv.dispatchEvent(new PointerEvent(typ, {
-    bubbles: true, cancelable: true, clientX: c.x, clientY: c.y, pointerId: id, pointerType: "mouse", isPrimary: true, buttons: typ === "pointerup" ? 0 : 1,
+    bubbles: true, cancelable: true, clientX: c.x, clientY: c.y, pointerId: id, pointerType: "pen", isPrimary: true, buttons: typ === "pointerup" ? 0 : 1,
   }));
   for (const [k, weg] of wege.entries()) {
     const q = weg.length > 1 ? weg : [weg[0], { x: weg[0].x + 3, y: weg[0].y + 3 }];
