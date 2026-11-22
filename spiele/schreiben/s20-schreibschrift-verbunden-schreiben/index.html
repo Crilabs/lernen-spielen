@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Leuchtschrift</title>
+<!-- S20 Leuchtschrift (Idee docs/spiele/schreiben/s20-schreibschrift-verbunden-schreiben.md). Ein Zeltplatz in der blauen Stunde
+     (raum.js): links Ela, mittig die dunkle Himmelsfläche mit der Lineatur, darüber die Wäscheleine, rechts die Kamera.
+     Ela schreibt ihr Wort in die obere Zeile, das Kind seins in die untere; die Spur leuchtet wie eine Wunderkerze.
+     Leiste, Blase, Hilfe und Pause an ihren festen Plätzen. -->
+<link rel="stylesheet" href="../../rahmen/seite.css">
+<style>
+  /* ===== SPIELWELT: der Zeltplatz. Alles in rem (1rem = Bildhöhe/108). ===== */
+  :root {
+    --foto-b: 30rem;           /* Leuchtfoto an der Leine: groß und lesbar (Seitenverhältnis wie die Zeichenfläche 640 × 300) */
+    --foto-h: 15rem;
+    --ela-hoehe: 44rem;
+  }
+  .welt { position: fixed; inset: 0; background: #0E1842; z-index: 0; }
+  .welt svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  .spielflaeche { overflow: visible; }
+  ls-blase { position: absolute; left: 3.4rem; top: 47rem; z-index: 7; }
+
+  /* Die Himmelsfläche: dunkel und glatt, damit die Spur das Hellste ist (Umkehr von §4, Idee §3). Flach, kein Schatten. */
+  .matte {
+    position: absolute; left: 42rem; right: 27rem; top: 26rem; bottom: 3rem; z-index: 3; padding: 0;
+    background: radial-gradient(130% 120% at 50% 36%, #1C2D68 0%, #121E4B 62%, #0E1840 100%);
+    border: var(--ls-kontur) solid #7F98D6; border-radius: var(--ls-radius-gross); overflow: hidden;
+    touch-action: none; user-select: none; -webkit-user-select: none;
+  }
+  .matte::before { inset: 1.3rem; border: 0.25rem dashed rgba(150, 175, 235, 0.22); }
+  #zeichen { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  .matte.wackelt { animation: wackel 0.4s ease-in-out; }
+  @keyframes wackel { 20% { transform: translateX(-0.8rem); } 55% { transform: translateX(0.7rem); } 85% { transform: translateX(-0.3rem); } }
+  /* Der Startpunkt im Sonnenring (Hilfe 2, Einführung): ein runder Ring, der Ring selbst ist .markiert aus seite.css. */
+  .startring { position: absolute; width: 7.2rem; height: 7.2rem; margin: -3.6rem 0 0 -3.6rem; border-radius: 50%; z-index: 5; pointer-events: none; }
+  .startring[hidden] { display: none; }
+
+  /* Wäscheleine mit zwei Pfosten; die Fotos hängen daran. */
+  .leine { position: absolute; left: 3rem; right: 3rem; top: 0.4rem; height: 12rem; z-index: 2; pointer-events: none; }
+  .leine svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
+  .pfosten { position: absolute; top: -0.4rem; width: 1.6rem; height: 88rem; background: linear-gradient(90deg, #A47F52 0 55%, #7C5C38 55%); border-radius: 0.8rem 0.8rem 0 0; z-index: 1; }
+  .pfosten.l { left: -1.6rem; }
+  .pfosten.r { right: -1.6rem; }
+  .foto {
+    position: absolute; left: 0; top: 0; width: var(--foto-b); height: calc(var(--foto-h) + 2.2rem); z-index: 6; pointer-events: none;
+    transform-origin: 50% 0; will-change: transform;
+  }
+  .foto .rahmen { position: absolute; inset: 1.1rem 0 0 0; background: #FFFCF7; border-radius: 0.7rem; padding: 0.7rem 0.7rem 2rem; box-sizing: border-box; box-shadow: 0 0.6rem 1.6rem rgba(5, 10, 35, 0.45); }
+  .foto canvas { width: 100%; height: 100%; display: block; background: #121E4B; border-radius: 0.3rem; }
+  .foto .klammer { position: absolute; left: 50%; top: 0; width: 1.8rem; height: 3.4rem; margin-left: -0.9rem; background: #D9A55B; border: 0.25rem solid #8A5A24; border-radius: 0.4rem; z-index: 1; }
+  .foto.gross .rahmen { padding: 0.7rem 0.7rem 2rem; }
+
+  /* Ela steht links neben der Himmelsfläche, auf der Wiese. Ihre Füße stehen unten im Feld (Anteil 0,907 der Höhe). */
+  .ela { position: absolute; left: 0.8rem; bottom: 1.6rem; height: var(--ela-hoehe); width: calc(var(--ela-hoehe) * 320 / 280); z-index: 4; pointer-events: none; transform-origin: 50% 90.7%; }
+  .ela .koerper { position: absolute; inset: 0; transform-origin: 50% 90.7%; will-change: transform; }
+  .ela svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .schatten { position: absolute; left: 7.4rem; bottom: 1.2rem; width: 22rem; height: 3.4rem; z-index: 3; pointer-events: none; }
+  .schatten::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgba(8, 16, 40, 0.38); }
+
+  /* Sonnenring der Einführung: eng um Ela bzw. den Kamerakörper (der Ring selbst ist .markiert aus seite.css). */
+  .ring { position: absolute; display: none; pointer-events: none; border-radius: 4rem; }
+  .ring.markiert { display: block; }
+  .ela .ring { left: 35%; top: 25%; width: 30%; height: 72%; }
+  .kamera .ring { left: 6%; top: 22%; width: 88%; height: 35%; border-radius: 2.6rem; }
+
+  /* Die Wunderkerze in Elas Hand (steckt später im Sand) und das Holzschild am Zelt (Stufe kopf). */
+  .kerze { position: absolute; left: 60%; top: 18rem; width: 1rem; height: 9rem; transform-origin: 50% 100%; transition: left 0.3s ease-out, top 0.3s ease-out, transform 0.3s ease-out; }
+  .ela.zeigt .kerze { left: 75%; top: 9.6rem; transform: rotate(52deg); }
+  .ela .kerze.sand, .ela.zeigt .kerze.sand { left: 68%; top: 33rem; transform: rotate(8deg) !important; transition-duration: 0.7s; }
+  .kerze .stab { position: absolute; left: 0.3rem; top: 1.2rem; width: 0.4rem; height: 7.8rem; background: #A9B4C8; border-radius: 0.2rem; }
+  .kerze .kopf { position: absolute; left: -0.6rem; top: -0.2rem; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: radial-gradient(circle, #FFF6D0 0 25%, rgba(255, 190, 80, 0.7) 45%, rgba(255, 190, 80, 0) 72%); }
+  .kerze.sand .kopf { opacity: 0.3; }
+  .kerze[hidden] { display: none; }
+  .schild {
+    position: absolute; left: 4rem; top: 28rem; width: 34rem; height: 15rem; z-index: 4; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(#C9A06E, #B98E5E); border: var(--ls-kontur) solid #6B4A26; border-radius: 1.6rem; color: #2B1B0C; pointer-events: none; font-size: 8.4rem;
+  }
+  .schild[hidden] { display: none; }
+  .schild span { font-size: inherit; font-weight: 700; line-height: 1; letter-spacing: 0.04em; }
+  /* Das Schild steht auf einem Pfosten hinter Ela. */
+  .schild::after { content: ""; position: absolute; left: 50%; top: 100%; width: 2.2rem; height: 42rem; margin-left: -1.1rem; background: linear-gradient(90deg, #A47F52 0 55%, #7C5C38 55%); z-index: -1; }
+
+  /* Die Kamera auf dem Stativ, rechts am Rand; das Foto, das noch bei ihr liegt, ragt aus ihrem Schlitz. */
+  .kamera { position: absolute; right: 2.6rem; bottom: 16.4rem; width: 21rem; height: 44rem; z-index: 4; pointer-events: none; transform-origin: 50% 70%; }
+  .kamera svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+  /* Pause: Sachmoment auf der Papierkarte. */
+  .sachmoment { display: grid; justify-items: center; gap: 3rem; max-width: 110rem; font-size: 4rem; text-align: center; }
+  .sachmoment p { margin: 0; }
+  .sachmoment .bildchen { display: flex; gap: 3rem; align-items: center; }
+  .sachmoment .bildchen svg { width: 30rem; height: 12rem; background: #121E4B; border-radius: var(--ls-radius-klein); }
+  .sachmoment .hinweis {
+    display: inline-flex; align-items: center; gap: 2.4rem; min-height: 11rem; padding: 1.6rem 4rem 1.6rem 1.6rem;
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: var(--ls-radius); background: var(--ls-papier);
+    box-shadow: var(--ls-schatten); color: var(--ls-tinte); font-weight: 700; text-decoration: none;
+  }
+  .sachmoment .hinweis img { width: 8rem; height: 8rem; }
+  .sachmoment .hinweis:active { transform: translateY(0.3rem); box-shadow: var(--ls-schatten-unten); }
+
+  .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
+  .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
+  .eltern p { max-width: 70ch; }
+  .eltern .beschreibung { margin: 0 0 3rem; color: var(--ls-tinte-weich); }
+  .eltern a { color: var(--ls-tinte); font-weight: 700; }
+
+  /* Schmale Bildschirme (4:3): Ela und Kamera rücken etwas zusammen. */
+  @media (max-aspect-ratio: 3/2) {
+    :root { --ela-hoehe: 38rem; }
+    .matte { left: 34rem; right: 22rem; }
+    .kamera { width: 17rem; height: 36rem; right: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+<div class="welt" id="welt" aria-hidden="true"></div>
+<script type="module">
+  import { raumSvg } from "./raum.js";
+  document.getElementById("welt").innerHTML = raumSvg();
+</script>
+
+<ls-leiste id="leiste" spiel="leuchtschrift" fach="schreiben" titel="Leuchtschrift" thema="">
+  <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
+  <ls-knopf slot="rechts" id="anleitung" symbol="buch.svg" name="Anleitung" hidden></ls-knopf>
+</ls-leiste>
+
+<div class="buehne">
+  <main class="spielflaeche" aria-label="Zeltplatz mit Himmelsfläche">
+    <ls-blase id="blase" ohne-text></ls-blase>
+    <div class="leine" id="leine" aria-hidden="true">
+      <div class="pfosten l"></div><div class="pfosten r"></div>
+      <svg id="seil" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 1.5 Q50 8.5 100 1.5" fill="none" stroke="#E7D7B8" stroke-width="0.5rem" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+    </div>
+    <section class="lernfeld matte" id="matte" aria-label="Himmelsfläche mit Lineatur">
+      <canvas id="zeichen" aria-label="Hier schreibst du das Wort"></canvas>
+      <div class="startring markiert" id="startring" hidden></div>
+    </section>
+    <div class="schild" id="schild" hidden aria-hidden="true"><span></span></div>
+    <div class="schatten" id="schatten" aria-hidden="true"></div>
+    <div class="ela" id="ela" aria-hidden="true"><div class="koerper" id="ela-koerper"></div><div class="ring" id="ela-ring"></div><div class="kerze" id="kerze"><i class="stab"></i><i class="kopf"></i></div></div>
+    <div class="kamera" id="kamera" aria-hidden="true"></div>
+  </main>
+</div>
+
+<ls-hilfe id="hilfe"></ls-hilfe>
+<ls-pause id="pause"><div class="sachmoment" id="sachmoment"></div></ls-pause>
+
+<script type="module" src="spiel.js"></script>
+</body>
+</html>

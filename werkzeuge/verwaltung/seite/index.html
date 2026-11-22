@@ -13,6 +13,7 @@
   <nav class="reiter" role="tablist">
     <button role="tab" data-reiter="spiele" aria-selected="true">Spiele</button>
     <button role="tab" data-reiter="bibliothek">Bibliothek</button>
+    <button role="tab" data-reiter="lernweg">Lernweg</button>
     <button role="tab" data-reiter="auftraege">Aufträge <span id="zahl-offen" class="zahl"></span></button>
     <button role="tab" data-reiter="ideen">Ideen <span id="zahl-ideen" class="zahl"></span></button>
     <button role="tab" data-reiter="proben">Proben <span id="zahl-proben" class="zahl"></span></button>
@@ -38,6 +39,16 @@
   <div id="hinweis"></div>
   <section id="spiele" class="ansicht"></section>
   <section id="bibliothek" class="ansicht" hidden></section>
+  <section id="lernweg" class="ansicht" hidden>
+    <div class="lw-leiste" id="lw-leiste"></div>
+    <div class="lw-flaeche" id="lw-flaeche">
+      <svg id="lw-svg" role="img" aria-label="Lernweg: Lernthemen mit ihren Voraussetzungen">
+        <defs><marker id="lw-pfeil" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="lw-spitze"/></marker></defs>
+        <g id="lw-blick"></g>
+      </svg>
+      <aside id="lw-feld" class="lw-feld" hidden></aside>
+    </div>
+  </section>
   <section id="auftraege" class="ansicht" hidden></section>
   <section id="ideen" class="ansicht" hidden></section>
   <section id="proben" class="ansicht" hidden></section>

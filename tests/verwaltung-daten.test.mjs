@@ -138,6 +138,14 @@ test("baueUebersicht: offener Ideen-Auftrag macht das Spiel „beauftragt“, er
   assert.equal(baueUebersicht(quellen(), [{ art: "ideen", ziel: "M01", status: "beantwortet" }]).spiele.M01.status, "geplant");
 });
 
+test("baueUebersicht: Lernthemen tragen ihre Voraussetzungen für den Lernweg", () => {
+  const q = quellen();
+  q.plan.themen[1].voraussetzungen = ["a"];
+  const u = baueUebersicht(q, []);
+  assert.deepEqual(u.lernthemen.find((t) => t.id === "b").voraussetzungen, ["a"]);
+  assert.deepEqual(u.lernthemen.find((t) => t.id === "a").voraussetzungen, []);
+});
+
 test("baueUebersicht: Lernthemen tragen Ziel, Beispiele und Zweck für die Ideen-Ansicht", () => {
   const u = baueUebersicht(liesQuellen(WURZEL), []);
   const mitZiel = u.lernthemen.find((t) => t.ziel);
