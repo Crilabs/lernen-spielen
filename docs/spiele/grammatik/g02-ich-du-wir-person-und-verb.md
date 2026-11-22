@@ -25,7 +25,8 @@ Katalog G02 · Grammatik · `spiele/grammatik/g02-ich-du-wir-person-und-verb/` �
 - **personalpronomen:** Streifen „▢ malen.“; material: Timo und Ela heben den Stift → „sie“. Daneben „ihr“: Kofi und Lena heben kurz den Stift. Hilfe 1: die Wartenden nicken einmal (nur Bild). Hilfe 2: Kärtchen „sie“.
 ## 5. Stufen
 - **material:** die Gemeinten heben vorher den Stift und schauen (du, ihr) oder sind über ihr Papier gebeugt (er, sie).
-- **vorstellung:** alle sitzen gleich still, Stifte liegen; nur der Streifen sagt, wer. „sie“: -t und -en zählen beide, die Szene tut, was die Form sagt (Ela allein oder Timo und Ela) **(Annahme)**.
+- **vorstellung:** alle sitzen gleich still, Stifte liegen; nur der Streifen sagt, wer.
+- **Endung nach „sie“ (alle Stufen):** -t und -en zählen beide, die Szene tut, was die Form sagt (Ela allein oder Timo und Ela). Das Wort „sie“ sagt nicht, ob eine oder mehrere gemeint sind (Christian 2026-11-22).
 - **kopf:** Streifen „du ▢“ – das Kind schreibt „malst“ über `<ls-tastatur>`; Plättchen liegen nicht da. Wirkung gleich.
 - Wechsel mitten in der Runde: die Runde legt die Stifte hin und setzt sich gerade (≤ 1,5 s), beim ersten Mal Mini-Einführung.
 ## 6. Alle Sätze wörtlich (Erzähler, dritte Person, ≤ 8 Wörter)
@@ -58,3 +59,6 @@ Katalog G02 · Grammatik · `spiele/grammatik/g02-ich-du-wir-person-und-verb/` �
 ## Antwort von Christian (2026-11-17)
 - Grundform kommt aus G02 heraus (eigenes Spiel oder G03). Endungsplättchen gilt als Lernzeichen D9 für alle Spiele.
 - Nach Anspielen: Plättchen beim Ziehen unsichtbar (Fehler in `ziehbar()` beheben, Browser-Test); keine Rahmen, Kästen, Bereichshintergründe – alles liegt auf einer Fläche, der Tisch ist lesbar ein Tisch.
+
+## Rückmeldung von Christian (2026-11-22)
+- „sie bau▢“: „sie baut“ und „sie bauen“ gehen beide; das Kind weiß nicht, dass nur eine gemeint ist. Umgesetzt: bei einer Endung nach „sie“ zählen auf jeder Stufe -t und -en.

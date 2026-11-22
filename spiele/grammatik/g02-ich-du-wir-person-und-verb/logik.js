@@ -47,15 +47,16 @@ export function personDerAntwort(a, antwort) {
 }
 
 /**
- * Passt das Plättchen? Die Sache urteilt. Auf der Stufe material gibt die Szene die Person vor (Ela allein oder Ela und
- * Timo): nur die genaue Antwort. Sonst zählt, ob die Form zur Person passt – bei „sie“ gehören -t und -en dazu, bei
- * einer Form wie „malt“ gehören er, sie und ihr dazu.
+ * Passt das Plättchen? Die Sache urteilt. Bei einer Endung nach „sie“ gehören auf jeder Stufe -t und -en dazu: Das Wort
+ * „sie“ sagt nicht, ob eine oder mehrere gemeint sind, und „sie malt“ wie „sie malen“ ist richtig; die Szene tut dann,
+ * was die Form sagt (Ela allein oder Timo und Ela). Bei Fürwörtern gibt auf der Stufe material die Szene die Person vor
+ * (wer den Stift hebt): nur das genaue Fürwort. Sonst zählt, ob die Form zur Person passt – zu „malt“ gehören er, sie und ihr.
  * @param {any} a @param {string} plaettchen @param {string} [stufe]
  */
 export function passt(a, plaettchen, stufe = "material") {
   const streng = stufe === "material";
   if (a.ziel === "endung") {
-    if (streng || a.pronomen !== "sie") return plaettchen === a.endung;
+    if (a.pronomen !== "sie") return plaettchen === a.endung;
     return plaettchen === "t" || plaettchen === "en";
   }
   if (!FUERWOERTER.includes(plaettchen)) return false;

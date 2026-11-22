@@ -143,11 +143,22 @@ test("Buchstand: fertige Kapitel gehen nie verloren (ein früher, leerer Stand �
 });
 
 // „Weißt du noch?“ (docs/geschichten.md §2b): Kapitelfragen mit Abstand, höchstens zwei am Tag (Bibliothek und Pause zusammen)
+test("Erinnern: erst, wenn das ganze Buch gelesen ist (Christian 2026-11-22), nicht schon nach einzelnen Kapiteln", async () => {
+  const ids = ["katzen"];
+  await L.merkeBuchStand("katzen", { kapitel: 1, seite: 0, fertig: [0] }, 3, "2026-11-10");
+  assert.equal(await L.ladeErinnerung(ids, "2026-11-12"), null, "nur Kapitel 1 gelesen: keine Frage");
+  await L.merkeBuchStand("katzen", { kapitel: 2, seite: 0, fertig: [0, 1] }, 3, "2026-11-12");
+  assert.equal(await L.ladeErinnerung(ids, "2026-11-14"), null, "zwei von drei Kapiteln: keine Frage");
+  await L.merkeBuchStand("katzen", { kapitel: 2, seite: 3, fertig: [0, 1, 2] }, 3, "2026-11-14");
+  assert.equal(await L.ladeErinnerung(ids, "2026-11-14"), null, "am Tag, an dem das Buch fertig wurde, noch nicht");
+  assert.deepEqual(await L.ladeErinnerung(ids, "2026-11-15"), { id: "katzen", kapitel: 0 }, "ab dem Tag danach");
+});
+
 test("Erinnern: Datum je fertigem Kapitel; erst ab dem Tag danach; zwei am Tag, keine doppelt; die am längsten nicht gestellte zuerst", async () => {
   const ids = ["katzen", "wal"];
-  await L.merkeBuchStand("katzen", { kapitel: 1, seite: 0, fertig: [0] }, 5, "2026-11-10");
-  await L.merkeBuchStand("katzen", { kapitel: 3, seite: 0, fertig: [0, 1, 2] }, 5, "2026-11-11");
-  assert.deepEqual(JSON.parse(speicher.get(SCHLUESSEL)).buecher.katzen.am, { 0: "2026-11-10", 1: "2026-11-11", 2: "2026-11-11" });
+  await L.merkeBuchStand("katzen", { kapitel: 1, seite: 0, fertig: [0] }, 3, "2026-11-09");
+  await L.merkeBuchStand("katzen", { kapitel: 2, seite: 0, fertig: [0, 1, 2] }, 3, "2026-11-10");
+  assert.deepEqual(JSON.parse(speicher.get(SCHLUESSEL)).buecher.katzen.am, { 0: "2026-11-09", 1: "2026-11-10", 2: "2026-11-10" });
   assert.equal(await L.ladeErinnerung(ids, "2026-11-10"), null, "am selben Tag noch nicht");
   assert.deepEqual(await L.ladeErinnerung(ids, "2026-11-11"), { id: "katzen", kapitel: 0 });
   assert.deepEqual(await L.ladeErinnerung(["wal"], "2026-11-12"), null, "nur Bücher mit Fragen");
@@ -160,7 +171,8 @@ test("Erinnern: Datum je fertigem Kapitel; erst ab dem Tag danach; zwei am Tag, 
 });
 
 test("Erinnern: alte Stände ohne Datum zählen als früher fertig", () => {
-  const stand = { buecher: { wal: { kapitel: 0, seite: 0, fertig: [2] } } };
+  const stand = { buecher: { wal: { kapitel: 0, seite: 0, fertig: [2] } }, sachthemen: { geschichten: { wal: {} } } };
   assert.deepEqual(L.naechsteErinnerung(stand, "2026-11-16", ["wal"]), { id: "wal", kapitel: 2 });
+  assert.equal(L.naechsteErinnerung({ buecher: stand.buecher }, "2026-11-16", ["wal"]), null, "Buch nicht als gelesen gemerkt: keine Frage");
   assert.equal(L.naechsteErinnerung({ ...stand, erinnern: { am: "2026-11-16" } }, "2026-11-16", ["wal"]), null, "alter Stand von heute: heute keine mehr");
 });
