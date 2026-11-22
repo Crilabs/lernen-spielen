@@ -148,6 +148,46 @@
    "datei": "mathe/einmaleins-sicher.md",
    "foto": "mathe/bilder/einmaleins-sicher.webp"
   },
+  "ergaenzen-bis-100": {
+   "fach": "mathe",
+   "name": "Ergänzen bis 100",
+   "titel": "Wie viel fehlt bis 100?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Ein Meter Schnur"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Trippeln und große Schritte"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Rückgeld beim Bäcker"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/ergaenzen-bis-100.md",
+   "foto": "mathe/bilder/ergaenzen-bis-100.webp"
+  },
+  "ergaenzen-zum-zehner": {
+   "fach": "mathe",
+   "name": "Bis zum nächsten Zehner",
+   "titel": "Bis zum nächsten Zehner",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Bügel wird voll"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Finger zeigen, Lücke hüpfen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/ergaenzen-zum-zehner.md",
+   "foto": "mathe/bilder/ergaenzen-zum-zehner.webp"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
@@ -505,6 +545,24 @@
    "entwurf": false,
    "datei": "mathe/plus-einer-ohne-uebergang-bis-100.md",
    "foto": "mathe/bilder/plus-einer-ohne-uebergang-bis-100.webp"
+  },
+  "plus-ueber-den-zehner-bis-100": {
+   "fach": "mathe",
+   "name": "Einer dazu über den Zehner",
+   "titel": "Über den Zehner hinaus",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Würfelweg auf dem Zollstock"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Hüpfen mit Zehnerstopp"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-ueber-den-zehner-bis-100.md",
+   "foto": "mathe/bilder/plus-ueber-den-zehner-bis-100.webp"
   },
   "plus-zehner-bis-100": {
    "fach": "mathe",
