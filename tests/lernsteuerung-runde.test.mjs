@@ -159,9 +159,9 @@ test("runde: hinweisSpiel null ohne neues Thema im anderen Spiel", async () => {
   assert.deepEqual(await r.ende(), { hinweisSpiel: null, gekonnt: null });
 });
 
-test("luecken-Skript: Ausgabe enthält 'ohne Spiel: Mengen bis 5 auf einen Blick'", () => {
+test("luecken-Skript: Ausgabe enthält 'ohne Spiel: Zehnerfeld: 5 und noch'", () => {
   const out = execFileSync(process.execPath, [fileURLToPath(new URL("../scripts/luecken.mjs", import.meta.url))], { encoding: "utf8" });
-  assert.match(out, /ohne Spiel: Mengen bis 5 auf einen Blick/);
+  assert.match(out, /ohne Spiel: Zehnerfeld: 5 und noch/);
 });
 
 // ---------- Befunde aus dem Gesamtreview ----------

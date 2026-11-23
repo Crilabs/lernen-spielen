@@ -55,6 +55,12 @@
       "text": "Ein Wort in einem Zug schreiben, Ela macht ein Leuchtfoto.",
       "beschreibung": "Das Kind schreibt Buchstaben und Wörter in Schreibschrift mit dem Stift in einem Zug in die Lineatur. Die Spur leuchtet wie eine Wunderkerze; hebt das Kind am Ende ab, macht die Kamera ein Foto, und das Wort hängt an Elas Leine. Wo abgesetzt wurde, zeigt das Foto eine Lücke; Startpunkt, Drehrichtung und Band zeigt Elas Vorlage daneben.",
       "arten": [{ "art": "schreibschrift", "stufen": ["material", "vorstellung", "kopf"] }],
+      "regal": null },
+    { "id": "blitzblick", "probe": true, "titel": "Blitzblick", "thema": "Mengen auf einen Blick", "kategorie": "mathe",
+      "symbol": "mathe/m04-blitzblick/symbol.svg", "datei": "mathe/m04-blitzblick/index.html",
+      "text": "Lichter blitzen kurz, Perlen schieben, Kofis Kette leuchtet.",
+      "beschreibung": "Glühwürmchen leuchten kurz im Zehnerfeld und schwirren dann durcheinander. Das Kind schiebt so viele Perlen auf Kofis Schnur, wie geleuchtet haben; die Schnur hat denselben Fünferbruch. Jedes Glühwürmchen setzt sich auf eine Perle: Fehlt eine, sucht eines; ist eine zu viel, bleibt sie dunkel.",
+      "arten": [{ "art": "menge", "zahlen": [1, 20], "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null }
   ]
 }

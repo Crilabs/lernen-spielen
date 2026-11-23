@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Blitzblick</title>
+<!-- M04 Blitzblick (Idee docs/spiele/mathe/m04-blitzblick.md). Kofis Zimmer am Abend (zimmer.js): auf der hellen Matte das
+     Glas mit dem Zehnerfeld (Glühwürmchen leuchten kurz auf, dann schwirren sie durcheinander) und davor Kofis Perlenschnur;
+     das Kind tippt die Perle, bis zu der geschoben wird (oder wischt dorthin). Auf der Stufe kopf tippt es die Ziffer, Kofi
+     schiebt. Über dem Fenster die Lichterschnur, an die Kofi seine Ketten hängt. Leiste, Blase, Hilfe und Pause an ihren Plätzen. -->
+<link rel="stylesheet" href="../../rahmen/seite.css">
+<style>
+  /* ===== SPIELWELT: Kofis Zimmer, die Matte mit Glas und Schnur. Alles in rem (1rem = Bildhöhe/108). ===== */
+  :root {
+    --kofi-hoehe: 58rem;       /* Feld der Figur (320 × 280); die Figur selbst ist etwa 48 rem hoch */
+    --zp: 11.4rem;              /* Abstand der Mulden im Glas */
+    --zr: 9rem;              /* Durchmesser einer Mulde */
+    --licht: 6rem;             /* Durchmesser eines Glühwürmchens */
+    --pitch: 10.6rem;          /* Abstand der Perlen auf der Schnur */
+    --perle: 8.8rem;           /* Durchmesser einer Perle */
+    --rutsch: 5.6rem;          /* So weit rutschen die gewählten Perlen zu Kofi */
+    --hell: 0;                 /* 0 (Abend) bis 1 (Zimmer hell): wächst mit jeder Kette */
+  }
+  .welt { background: linear-gradient(#EFE6EE 0 33rem, #EBD3A8 33rem); }
+  .welt svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  /* Abenddämmerung über Wand und Boden (nicht über der Matte): mit jeder Kette weicht sie. */
+  .welt .daemmer { position: absolute; inset: 0; background: linear-gradient(rgba(58, 58, 134, 0.3) 0 33rem, rgba(90, 60, 120, 0.08) 33rem); opacity: calc(1 - var(--hell)); transition: opacity 1.4s ease-out; }
+  .welt .fluegel { transform-box: fill-box; transform-origin: 100% 50%; }
+  .welt .fluegel-offen { transform: scaleX(0.18); }
+
+  .spielflaeche { overflow: visible; }
+  ls-blase { position: absolute; left: 2.4rem; top: 1.6rem; z-index: 7; }
+
+  /* Lichterschnur über dem Fenster: ein Faden quer über die Wand, daran hängen Kofis Ketten (an jedem Platz eine). */
+  .lichterschnur { position: absolute; left: 0; right: 0; top: 1.4rem; height: 13rem; z-index: 2; pointer-events: none; }
+  .lichterschnur .faden { position: absolute; left: 2rem; right: 2rem; top: 1.7rem; height: 0.36rem; border-radius: 0.2rem; background: var(--ls-tinte-weich); opacity: 0.75; }
+  /* Kleine Lämpchen an der Schnur, noch dunkel; leuchten tun Kofis Ketten. */
+  .lichterschnur .faden::after { content: ""; position: absolute; left: 0; right: 0; top: -0.5rem; height: 1.4rem; background: radial-gradient(circle, #F6D979 0 0.45rem, rgba(59, 42, 107, 0.7) 0.45rem 0.7rem, transparent 0.75rem) 0 0 / 8rem 1.4rem repeat-x; }
+  .lichterschnur .haken { position: absolute; top: 0.8rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 0.4rem solid var(--ls-tinte-weich); background: #F6ECDF; }
+  .kette { position: absolute; top: 2.1rem; width: 0; height: 0; transform-origin: 50% 0; }
+  .kette.verborgen { visibility: hidden; }
+  .kb {
+    position: absolute; width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2);
+    border-radius: 50%; background: var(--farbe); border: 0.3rem solid var(--ls-tinte); box-sizing: border-box;
+    box-shadow: 0 0 1.4rem 0.2rem color-mix(in srgb, var(--farbe) 75%, #FFF6B0);
+  }
+
+  /* Kofi steht links neben der Matte; die Schnur beginnt an seiner Hand und er verdeckt nichts. */
+  .figuren-vorn { position: fixed; top: 0; left: max(0rem, calc((100vw - 192rem) / 2)); width: min(100vw, 192rem); height: 108rem; z-index: 5; pointer-events: none; overflow: hidden; }
+  #figuren { position: fixed; inset: 0; z-index: 8; pointer-events: none; }
+  .kofi { position: absolute; left: 0; bottom: -4rem; height: var(--kofi-hoehe); width: calc(var(--kofi-hoehe) * 320 / 280); will-change: transform; }
+  .kofi > .koerper { width: 100%; height: 100%; transform-origin: 50% 90.7%; }
+  .kofi svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+  /* Die Matte: der helle Spieltisch im Lampenlicht, flach. Oben das Glas, darunter die Schnur (Stufe kopf: daneben die Tastatur). */
+  .matte {
+    position: absolute; left: 49rem; right: 3rem; top: 19.5rem; bottom: 14rem; z-index: 4;
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    padding: 8.6rem 3.6rem 3.4rem;
+  }
+  .matte > * { position: relative; z-index: 1; }
+
+  /* Das Glas: durchsichtig, im Boden die Mulden des Zehnerfelds (zwei mal fünf, Fünferbruch), darauf der Deckel. */
+  .glas { position: relative; padding: 2.4rem 2.6rem; border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 3.2rem; background: rgba(214, 235, 244, 0.55); transition: transform 0.8s cubic-bezier(0.3, 1.2, 0.4, 1); }
+  .glas::after { content: ""; position: absolute; left: 1.4rem; top: 2.4rem; bottom: 2.4rem; width: 0.9rem; border-radius: 0.5rem; background: rgba(255, 255, 255, 0.7); pointer-events: none; }
+  .felder { display: flex; flex-direction: column; gap: 2.2rem; }
+  .feld { display: grid; grid-template-columns: repeat(5, var(--zp)); grid-auto-rows: var(--zp); }
+  .mulde { position: relative; display: grid; place-items: center; }
+  .mulde::before { content: ""; width: var(--zr); height: var(--zr); border-radius: 50%; background: #CFE3EC; box-shadow: inset 0 0.4rem 0.6rem rgba(59, 42, 107, 0.28); }
+  .licht {
+    position: absolute; left: 50%; top: 50%; width: var(--licht); height: var(--licht); margin: calc(var(--licht) / -2) 0 0 calc(var(--licht) / -2);
+    border-radius: 50%; background: radial-gradient(circle, #FFFBD2 0 28%, #FFE680 52%, rgba(255, 214, 77, 0) 72%);
+    will-change: transform, translate; transition: opacity 0.25s;
+  }
+  .licht::after { content: ""; position: absolute; inset: 22%; border-radius: 50%; background: #FFF6B0; box-shadow: 0 0 1.2rem 0.5rem rgba(255, 230, 120, 0.95); }
+  .licht.schwirrt { opacity: 0.7; }
+  .licht.schwirrt::after { box-shadow: 0 0 0.9rem 0.3rem rgba(255, 230, 120, 0.7); }
+  .flug { position: absolute; left: 0; top: 0; z-index: 9; will-change: transform; pointer-events: none; }
+  .flug.licht { margin: 0; }
+  /* Der Deckel: ein Korkdeckel mit Griff; offen kippt er nach oben weg. */
+  .deckel {
+    position: absolute; left: 50%; top: -3.4rem; width: calc(100% - 2rem); height: 4.4rem; margin-left: calc(-50% + 1rem);
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 1.4rem; background: var(--ls-ahorn);
+    transform-origin: 50% 100%; transition: transform 0.32s cubic-bezier(0.3, 1.5, 0.5, 1); will-change: transform;
+  }
+  .deckel::after { content: ""; position: absolute; left: 50%; top: -2.6rem; width: 5rem; height: 2.6rem; margin-left: -2.5rem; border: var(--ls-kontur) solid var(--ls-tinte); border-bottom: 0; border-radius: 1.4rem 1.4rem 0 0; background: var(--ls-ahorn); }
+  .glas[data-deckel="offen"] .deckel { transform: translate(1.6rem, -5.4rem) rotate(-7deg); }
+
+  /* Kofis Schnur: eine Glasperlenschnur, 10 Perlen mit Lücke und Marke nach der fünften (bei 11 bis 20 zwei Schnüre). */
+  .schnuere { display: flex; flex-direction: column; gap: 1.6rem; touch-action: none; -webkit-user-select: none; user-select: none; }
+  .schnur { position: relative; display: flex; align-items: center; height: calc(var(--perle) + 1rem); }
+  .schnur::before { content: ""; position: absolute; left: -9rem; right: -3rem; top: 50%; height: 0.6rem; margin-top: -0.3rem; border-radius: 0.3rem; background: var(--ls-tinte-weich); }
+  .luecke { position: relative; flex: none; width: 4.2rem; height: 100%; }
+  .perle .marke { position: absolute; left: calc(-3.1rem - var(--ls-kontur)); top: calc(50% - var(--perle) * 0.55); width: 0.7rem; height: calc(var(--perle) * 1.1); border-radius: 0.35rem; background: var(--ls-tinte); pointer-events: none; }
+  .perle {
+    --farbe: #FFFFFF;
+    position: relative; flex: none; box-sizing: border-box; width: var(--perle); height: var(--perle); margin: 0 calc((var(--pitch) - var(--perle)) / 2); padding: 0;
+    border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 50%;
+    background: radial-gradient(circle at 36% 30%, #FFFFFF 0 11%, #E8F4F8 38%, #BFD8E3 100%);
+    cursor: pointer; touch-action: none; -webkit-tap-highlight-color: transparent;
+    transition: transform 0.3s cubic-bezier(0.3, 1.5, 0.5, 1), background-color 0.25s, box-shadow 0.25s;
+  }
+  .perle::before { content: ""; position: absolute; inset: -2.2rem -0.5rem; border-radius: 50%; }
+  .perle:focus-visible { outline: none; }
+  .perle.geschoben { transform: translateX(calc(-1 * var(--rutsch))); }
+  .perle.leuchtet { background: var(--farbe); box-shadow: 0 0 2.2rem 0.4rem color-mix(in srgb, var(--farbe) 70%, #FFF6B0); }
+  .perle.dunkel { background: radial-gradient(circle at 36% 30%, #B7BAD2 0 11%, #8A8EAD 42%, #6A6E90 100%); }
+  .perle.markiert, .perle.angehoben { transform: translateX(0) scale(1.06); }
+  .perle.geschoben.markiert { transform: translateX(calc(-1 * var(--rutsch))) scale(1.06); }
+  .perle.antippen::after { content: ""; position: absolute; inset: -1.6rem; border-radius: 50%; border: 0.7rem solid var(--ls-sonne); box-shadow: 0 0 0 0.3rem var(--ls-tinte); animation: tipp 0.5s ease-out 2; pointer-events: none; }
+  @keyframes tipp { from { transform: scale(1.4); opacity: 0; } to { transform: none; opacity: 1; } }
+  /* Stufe kopf: Kofi hält die Schnur, das Kind tippt nur die Ziffer. */
+  .matte[data-stufe="kopf"] .perle { pointer-events: none; cursor: default; }
+
+  /* Stufe kopf: Ziffernschild und Tastatur rechts neben dem Glas. */
+  .eingabe { position: absolute !important; right: 4rem; top: 3.4rem; display: none; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.8rem 2.4rem; max-width: 66rem; }
+  .eingabe ls-tastatur { flex: 0 0 100%; }
+  .matte[data-stufe="kopf"] .eingabe { display: flex; }
+  .matte[data-stufe="kopf"] .glas { transform: translateX(calc(-1 * var(--versatz, 24rem))); }
+  .schild { min-width: 14rem; height: 11rem; padding: 0 2rem; display: grid; place-items: center; box-sizing: border-box; border: var(--ls-kontur) solid var(--ls-tinte); border-radius: 1.6rem; background: #FFFDF6; font: 700 7rem/1 "Andika", sans-serif; color: var(--ls-tinte); }
+  .schild.sinkt { animation: sinkt 0.22s ease-out; }
+  @keyframes sinkt { from { transform: translateY(-1.6rem); opacity: 0.2; } to { transform: none; opacity: 1; } }
+  #fertig[hidden], #tastatur[hidden] { display: none; }
+
+  /* 11 bis 20: zwei Zehnerfelder, zwei Schnüre, alles etwas kleiner. */
+  .matte.zwanzig { --zp: 5.6rem; --zr: 4.4rem; --licht: 2.8rem; --perle: 6.4rem; --pitch: 9rem; padding-top: 6rem; }
+  .matte.zwanzig .felder { gap: 1.4rem; }
+  .matte.zwanzig .glas { padding: 1.6rem 2rem; }
+  .matte.zwanzig .schnuere { gap: 0.8rem; }
+
+  /* Etwas schmalere Bildschirme (16:10): kleineres Glas, damit in der Stufe kopf die Tastatur daneben Platz hat. */
+  @media (max-aspect-ratio: 17/10) {
+    :root { --zp: 9.4rem; --zr: 7.4rem; --licht: 5rem; }
+    .matte.zwanzig { --zp: 5.2rem; --zr: 4.1rem; --licht: 2.7rem; }
+  }
+  /* Schmale Bildschirme (4:3). */
+  @media (max-aspect-ratio: 3/2) {
+    :root { --kofi-hoehe: 46rem; --pitch: 8.8rem; --perle: 7.2rem; --rutsch: 4.6rem; --zp: 7.4rem; --zr: 5.6rem; --licht: 3.4rem; }
+    .matte { left: 36rem; right: 2rem; padding-left: 2.4rem; padding-right: 2.4rem; }
+    .matte.zwanzig { --pitch: 7.4rem; --perle: 5.4rem; --zp: 5rem; --zr: 4rem; --licht: 2.6rem; }
+    .eingabe { right: 2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .perle, .deckel, .glas, .welt .daemmer { transition: none; } .perle.antippen::after, .schild.sinkt { animation: none; } }
+
+  /* Pause: Sachmoment gibt es nicht (Christian, 2026-11-16: Weiter und Alle Spiele). */
+  .eltern { position: fixed; inset: 0; z-index: 200; overflow: auto; padding: 6rem 8rem; background: var(--ls-papier); }
+  .eltern h1 { margin: 0 0 3rem; font-size: 6rem; }
+  .eltern p { max-width: 70ch; }
+  .eltern .beschreibung { margin: 0 0 3rem; color: var(--ls-tinte-weich); }
+  .eltern a { color: var(--ls-tinte); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="welt" id="welt" aria-hidden="true"><div class="daemmer"></div></div>
+
+<ls-leiste id="leiste" spiel="blitzblick" fach="mathe" titel="Blitzblick" thema="">
+  <!-- Einführung im Spielbild wieder ansehen (docs/spielbau.md §8) -->
+  <ls-knopf slot="rechts" id="anleitung" symbol="buch.svg" name="Anleitung" hidden></ls-knopf>
+</ls-leiste>
+
+<div class="buehne">
+  <main class="spielflaeche" aria-label="Kofis Zimmer mit Glas und Perlenschnur">
+    <ls-blase id="blase" ohne-text></ls-blase>
+    <div class="lichterschnur" id="lichterschnur" aria-hidden="true"><div class="faden"></div></div>
+    <section class="lernfeld matte" id="matte" data-stufe="material" aria-label="Matte">
+      <div class="glas" id="glas" data-deckel="zu" aria-label="Glas mit Glühwürmchen" role="img">
+        <div class="felder" id="felder"></div>
+        <div class="deckel" id="deckel"></div>
+      </div>
+      <div class="schnuere" id="schnuere" role="group" aria-label="Kofis Perlenschnur"></div>
+      <div class="eingabe" id="eingabe">
+        <div class="schild" id="schild" aria-live="polite"></div>
+        <ls-knopf id="fertig" art="haupt" symbol="fertig.svg" wort="Fertig" stumm hidden></ls-knopf>
+        <ls-tastatur id="tastatur" tasten="123456789" zehn je-reihe="5"></ls-tastatur>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="figuren-vorn" aria-hidden="true">
+  <div class="kofi" id="kofi"><div class="koerper" id="kofi-koerper"></div></div>
+</div>
+<div id="figuren" aria-hidden="true"></div>
+
+<ls-hilfe id="hilfe"></ls-hilfe>
+<ls-pause id="pause"></ls-pause>
+<ls-gekonnt id="gekonnt"></ls-gekonnt>
+
+<script type="module" src="spiel.js"></script>
+</body>
+</html>
