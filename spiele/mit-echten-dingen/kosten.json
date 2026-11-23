@@ -5748,5 +5748,400 @@
   "thema": [
    "schwung-zickzack"
   ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 534,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "schreiben-mit-anlauttabelle.png",
+  "themen": 1,
+  "thema": [
+   "schreiben-mit-anlauttabelle"
+  ],
+  "usage": {
+   "input_tokens": 534,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 534
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2290
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 524,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "laute-am-wortanfang.png",
+  "themen": 1,
+  "thema": [
+   "laute-am-wortanfang"
+  ],
+  "usage": {
+   "input_tokens": 524,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 524
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2280
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 515,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "laute-in-mitte-und-ende.png",
+  "themen": 1,
+  "thema": [
+   "laute-in-mitte-und-ende"
+  ],
+  "usage": {
+   "input_tokens": 515,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 515
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2271
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 524,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ei-schreiben.png",
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ],
+  "usage": {
+   "input_tokens": 524,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 524
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2280
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 526,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "au-schreiben.png",
+  "themen": 1,
+  "thema": [
+   "au-schreiben"
+  ],
+  "usage": {
+   "input_tokens": 526,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 526
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2282
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 50,
+  "ausgabe": 23224,
+  "einheit": "tokens",
+  "menge": 2481589,
+  "notiz": "schreiben-mit-anlauttabelle, Recherche und Schreiben",
+  "cache_lesen": 2326944,
+  "cache_schreiben": 131371,
+  "themen": 1,
+  "thema": [
+   "schreiben-mit-anlauttabelle"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 52,
+  "ausgabe": 17235,
+  "einheit": "tokens",
+  "menge": 2343177,
+  "notiz": "laute-am-wortanfang, Recherche und Schreiben",
+  "cache_lesen": 2210216,
+  "cache_schreiben": 115674,
+  "themen": 1,
+  "thema": [
+   "laute-am-wortanfang"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 46,
+  "ausgabe": 15442,
+  "einheit": "tokens",
+  "menge": 2061400,
+  "notiz": "laute-in-mitte-und-ende, Recherche und Schreiben",
+  "cache_lesen": 1936910,
+  "cache_schreiben": 109002,
+  "themen": 1,
+  "thema": [
+   "laute-in-mitte-und-ende"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 12768,
+  "einheit": "tokens",
+  "menge": 2079575,
+  "notiz": "ei-schreiben, Recherche und Schreiben",
+  "cache_lesen": 1960827,
+  "cache_schreiben": 105932,
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 14860,
+  "einheit": "tokens",
+  "menge": 2225053,
+  "notiz": "au-schreiben, Recherche und Schreiben",
+  "cache_lesen": 2096269,
+  "cache_schreiben": 113876,
+  "themen": 1,
+  "thema": [
+   "au-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 8566,
+  "einheit": "tokens",
+  "menge": 645242,
+  "notiz": "schreiben-mit-anlauttabelle, Prüfung R1",
+  "cache_lesen": 561777,
+  "cache_schreiben": 74877,
+  "themen": 1,
+  "thema": [
+   "schreiben-mit-anlauttabelle"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 6949,
+  "einheit": "tokens",
+  "menge": 626473,
+  "notiz": "schreiben-mit-anlauttabelle, Prüfung R2",
+  "cache_lesen": 556363,
+  "cache_schreiben": 63143,
+  "themen": 1,
+  "thema": [
+   "schreiben-mit-anlauttabelle"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 7203,
+  "einheit": "tokens",
+  "menge": 519837,
+  "notiz": "laute-am-wortanfang, Prüfung R1",
+  "cache_lesen": 441848,
+  "cache_schreiben": 70768,
+  "themen": 1,
+  "thema": [
+   "laute-am-wortanfang"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 7551,
+  "einheit": "tokens",
+  "menge": 453080,
+  "notiz": "laute-am-wortanfang, Prüfung R2",
+  "cache_lesen": 402228,
+  "cache_schreiben": 43285,
+  "themen": 1,
+  "thema": [
+   "laute-am-wortanfang"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 9429,
+  "einheit": "tokens",
+  "menge": 455020,
+  "notiz": "laute-in-mitte-und-ende, Prüfung R1",
+  "cache_lesen": 376743,
+  "cache_schreiben": 68832,
+  "themen": 1,
+  "thema": [
+   "laute-in-mitte-und-ende"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 6309,
+  "einheit": "tokens",
+  "menge": 450344,
+  "notiz": "laute-in-mitte-und-ende, Prüfung R2",
+  "cache_lesen": 404624,
+  "cache_schreiben": 39395,
+  "themen": 1,
+  "thema": [
+   "laute-in-mitte-und-ende"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 8424,
+  "einheit": "tokens",
+  "menge": 609200,
+  "notiz": "ei-schreiben, Prüfung R1",
+  "cache_lesen": 528063,
+  "cache_schreiben": 72693,
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 7164,
+  "einheit": "tokens",
+  "menge": 605546,
+  "notiz": "ei-schreiben, Prüfung R2",
+  "cache_lesen": 556613,
+  "cache_schreiben": 41749,
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 6305,
+  "einheit": "tokens",
+  "menge": 598138,
+  "notiz": "ei-schreiben, Prüfung R3",
+  "cache_lesen": 550770,
+  "cache_schreiben": 41043,
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 7118,
+  "einheit": "tokens",
+  "menge": 664899,
+  "notiz": "au-schreiben, Prüfung R1",
+  "cache_lesen": 589431,
+  "cache_schreiben": 68328,
+  "themen": 1,
+  "thema": [
+   "au-schreiben"
+  ]
  }
 ]

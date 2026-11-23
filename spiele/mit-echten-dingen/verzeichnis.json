@@ -54,6 +54,24 @@
    "datei": "schreiben/adjektiv-in-nominalgruppe-klein.md",
    "foto": "schreiben/bilder/adjektiv-in-nominalgruppe-klein.webp"
   },
+  "au-schreiben": {
+   "fach": "schreiben",
+   "name": "au schreiben",
+   "titel": "au schreiben: ein Laut, zwei Buchstaben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Schatzzettel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Laute hüpfen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/au-schreiben.md",
+   "foto": "schreiben/bilder/au-schreiben.webp"
+  },
   "der-die-das": {
    "fach": "grammatik",
    "name": "der, die, das",
@@ -111,6 +129,24 @@
    "entwurf": false,
    "datei": "mathe/dreistellige-zahlen-lesen.md",
    "foto": "mathe/bilder/dreistellige-zahlen-lesen.webp"
+  },
+  "ei-schreiben": {
+   "fach": "schreiben",
+   "name": "ei schreiben",
+   "titel": "Den Laut wie bei Eis schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Einkaufszettel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "E-I-Hüpfen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/ei-schreiben.md",
+   "foto": "schreiben/bilder/ei-schreiben.webp"
   },
   "einmaleins-gemischt": {
    "fach": "mathe",
@@ -358,6 +394,42 @@
    "datei": "grammatik/grundform-verb.md",
    "foto": "grammatik/bilder/grundform-verb.webp"
   },
+  "laute-am-wortanfang": {
+   "fach": "schreiben",
+   "name": "Alle Laute am Anfang",
+   "titel": "Jeden Laut am Anfang schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Einkaufszettel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Laute hüpfen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/laute-am-wortanfang.md",
+   "foto": "schreiben/bilder/laute-am-wortanfang.webp"
+  },
+  "laute-in-mitte-und-ende": {
+   "fach": "schreiben",
+   "name": "Alle Laute in der Mitte und am Ende",
+   "titel": "Jeden Laut schreiben, auch in der Mitte und am Ende",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Einkaufszettel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Laut für Laut zum Zettel"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/laute-in-mitte-und-ende.md",
+   "foto": "schreiben/bilder/laute-in-mitte-und-ende.webp"
+  },
   "mehr-weniger-gleich-viele": {
    "fach": "mathe",
    "name": "Mehr, weniger, gleich viele",
@@ -523,6 +595,24 @@
    "entwurf": false,
    "datei": "grammatik/pronomen-statt-nomen.md",
    "foto": "grammatik/bilder/pronomen-statt-nomen.webp"
+  },
+  "schreiben-mit-anlauttabelle": {
+   "fach": "schreiben",
+   "name": "Schreiben mit der Anlauttabelle",
+   "titel": "Wörter selbst aufschreiben mit der Anlauttabelle",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Einkaufszettel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Ein Wort aus Dingen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/schreiben-mit-anlauttabelle.md",
+   "foto": "schreiben/bilder/schreiben-mit-anlauttabelle.webp"
   },
   "schwung-kreis-linksherum": {
    "fach": "schreiben",
