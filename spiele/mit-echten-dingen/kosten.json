@@ -5748,5 +5748,919 @@
   "thema": [
    "schwung-zickzack"
   ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 534,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "schreiben-mit-anlauttabelle.png",
+  "themen": 1,
+  "thema": [
+   "schreiben-mit-anlauttabelle"
+  ],
+  "usage": {
+   "input_tokens": 534,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 534
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2290
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 524,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "laute-am-wortanfang.png",
+  "themen": 1,
+  "thema": [
+   "laute-am-wortanfang"
+  ],
+  "usage": {
+   "input_tokens": 524,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 524
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2280
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 515,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "laute-in-mitte-und-ende.png",
+  "themen": 1,
+  "thema": [
+   "laute-in-mitte-und-ende"
+  ],
+  "usage": {
+   "input_tokens": 515,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 515
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2271
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 524,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ei-schreiben.png",
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ],
+  "usage": {
+   "input_tokens": 524,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 524
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2280
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 526,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "au-schreiben.png",
+  "themen": 1,
+  "thema": [
+   "au-schreiben"
+  ],
+  "usage": {
+   "input_tokens": 526,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 526
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2282
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 50,
+  "ausgabe": 23224,
+  "einheit": "tokens",
+  "menge": 2481589,
+  "notiz": "schreiben-mit-anlauttabelle, Recherche und Schreiben",
+  "cache_lesen": 2326944,
+  "cache_schreiben": 131371,
+  "themen": 1,
+  "thema": [
+   "schreiben-mit-anlauttabelle"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 52,
+  "ausgabe": 17235,
+  "einheit": "tokens",
+  "menge": 2343177,
+  "notiz": "laute-am-wortanfang, Recherche und Schreiben",
+  "cache_lesen": 2210216,
+  "cache_schreiben": 115674,
+  "themen": 1,
+  "thema": [
+   "laute-am-wortanfang"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 46,
+  "ausgabe": 15442,
+  "einheit": "tokens",
+  "menge": 2061400,
+  "notiz": "laute-in-mitte-und-ende, Recherche und Schreiben",
+  "cache_lesen": 1936910,
+  "cache_schreiben": 109002,
+  "themen": 1,
+  "thema": [
+   "laute-in-mitte-und-ende"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 12768,
+  "einheit": "tokens",
+  "menge": 2079575,
+  "notiz": "ei-schreiben, Recherche und Schreiben",
+  "cache_lesen": 1960827,
+  "cache_schreiben": 105932,
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 14860,
+  "einheit": "tokens",
+  "menge": 2225053,
+  "notiz": "au-schreiben, Recherche und Schreiben",
+  "cache_lesen": 2096269,
+  "cache_schreiben": 113876,
+  "themen": 1,
+  "thema": [
+   "au-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 8566,
+  "einheit": "tokens",
+  "menge": 645242,
+  "notiz": "schreiben-mit-anlauttabelle, Prüfung R1",
+  "cache_lesen": 561777,
+  "cache_schreiben": 74877,
+  "themen": 1,
+  "thema": [
+   "schreiben-mit-anlauttabelle"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 6949,
+  "einheit": "tokens",
+  "menge": 626473,
+  "notiz": "schreiben-mit-anlauttabelle, Prüfung R2",
+  "cache_lesen": 556363,
+  "cache_schreiben": 63143,
+  "themen": 1,
+  "thema": [
+   "schreiben-mit-anlauttabelle"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 7203,
+  "einheit": "tokens",
+  "menge": 519837,
+  "notiz": "laute-am-wortanfang, Prüfung R1",
+  "cache_lesen": 441848,
+  "cache_schreiben": 70768,
+  "themen": 1,
+  "thema": [
+   "laute-am-wortanfang"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 7551,
+  "einheit": "tokens",
+  "menge": 453080,
+  "notiz": "laute-am-wortanfang, Prüfung R2",
+  "cache_lesen": 402228,
+  "cache_schreiben": 43285,
+  "themen": 1,
+  "thema": [
+   "laute-am-wortanfang"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 9429,
+  "einheit": "tokens",
+  "menge": 455020,
+  "notiz": "laute-in-mitte-und-ende, Prüfung R1",
+  "cache_lesen": 376743,
+  "cache_schreiben": 68832,
+  "themen": 1,
+  "thema": [
+   "laute-in-mitte-und-ende"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 6309,
+  "einheit": "tokens",
+  "menge": 450344,
+  "notiz": "laute-in-mitte-und-ende, Prüfung R2",
+  "cache_lesen": 404624,
+  "cache_schreiben": 39395,
+  "themen": 1,
+  "thema": [
+   "laute-in-mitte-und-ende"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 8424,
+  "einheit": "tokens",
+  "menge": 609200,
+  "notiz": "ei-schreiben, Prüfung R1",
+  "cache_lesen": 528063,
+  "cache_schreiben": 72693,
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 7164,
+  "einheit": "tokens",
+  "menge": 605546,
+  "notiz": "ei-schreiben, Prüfung R2",
+  "cache_lesen": 556613,
+  "cache_schreiben": 41749,
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 6305,
+  "einheit": "tokens",
+  "menge": 598138,
+  "notiz": "ei-schreiben, Prüfung R3",
+  "cache_lesen": 550770,
+  "cache_schreiben": 41043,
+  "themen": 1,
+  "thema": [
+   "ei-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 7118,
+  "einheit": "tokens",
+  "menge": 664899,
+  "notiz": "au-schreiben, Prüfung R1",
+  "cache_lesen": 589431,
+  "cache_schreiben": 68328,
+  "themen": 1,
+  "thema": [
+   "au-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 15122,
+  "einheit": "tokens",
+  "menge": 2155587,
+  "notiz": "plus-0-und-1, Recherche und Schreiben",
+  "cache_lesen": 2024099,
+  "cache_schreiben": 116318,
+  "themen": 1,
+  "thema": [
+   "plus-0-und-1"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 46,
+  "ausgabe": 17017,
+  "einheit": "tokens",
+  "menge": 2086648,
+  "notiz": "plus-2-und-3, Recherche und Schreiben",
+  "cache_lesen": 1960850,
+  "cache_schreiben": 108735,
+  "themen": 1,
+  "thema": [
+   "plus-2-und-3"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 50,
+  "ausgabe": 18939,
+  "einheit": "tokens",
+  "menge": 2340649,
+  "notiz": "plus-mit-5, Recherche und Schreiben",
+  "cache_lesen": 2208318,
+  "cache_schreiben": 113342,
+  "themen": 1,
+  "thema": [
+   "plus-mit-5"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 54,
+  "ausgabe": 22894,
+  "einheit": "tokens",
+  "menge": 2687901,
+  "notiz": "tauschaufgaben-bis-10, Recherche und Schreiben",
+  "cache_lesen": 2537909,
+  "cache_schreiben": 127044,
+  "themen": 1,
+  "thema": [
+   "tauschaufgaben-bis-10"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 44,
+  "ausgabe": 19232,
+  "einheit": "tokens",
+  "menge": 2124527,
+  "notiz": "plus-bis-10-gemischt, Recherche und Schreiben",
+  "cache_lesen": 1981173,
+  "cache_schreiben": 124078,
+  "themen": 1,
+  "thema": [
+   "plus-bis-10-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 528,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-0-und-1.png",
+  "themen": 1,
+  "thema": [
+   "plus-0-und-1"
+  ],
+  "usage": {
+   "input_tokens": 528,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 528
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2284
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 506,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "tauschaufgaben-bis-10.png",
+  "themen": 1,
+  "thema": [
+   "tauschaufgaben-bis-10"
+  ],
+  "usage": {
+   "input_tokens": 506,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 506
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2262
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 499,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-bis-10-gemischt.png",
+  "themen": 1,
+  "thema": [
+   "plus-bis-10-gemischt"
+  ],
+  "usage": {
+   "input_tokens": 499,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 499
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2255
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 509,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-2-und-3.png",
+  "themen": 1,
+  "thema": [
+   "plus-2-und-3"
+  ],
+  "usage": {
+   "input_tokens": 509,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 509
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2265
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 540,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-mit-5.png",
+  "themen": 1,
+  "thema": [
+   "plus-mit-5"
+  ],
+  "usage": {
+   "input_tokens": 540,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 540
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2296
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 529,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-bis-10-gemischt.png",
+  "themen": 1,
+  "thema": [
+   "plus-bis-10-gemischt"
+  ],
+  "usage": {
+   "input_tokens": 529,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 529
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2285
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 8726,
+  "einheit": "tokens",
+  "menge": 760656,
+  "notiz": "plus-0-und-1, Prüfung Runde 1",
+  "cache_lesen": 666806,
+  "cache_schreiben": 85102,
+  "themen": 1,
+  "thema": [
+   "plus-0-und-1"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 13089,
+  "einheit": "tokens",
+  "menge": 675450,
+  "notiz": "plus-2-und-3, Prüfung Runde 1",
+  "cache_lesen": 567822,
+  "cache_schreiben": 94521,
+  "themen": 1,
+  "thema": [
+   "plus-2-und-3"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 11484,
+  "einheit": "tokens",
+  "menge": 845957,
+  "notiz": "plus-mit-5, Prüfung Runde 1",
+  "cache_lesen": 738848,
+  "cache_schreiben": 95603,
+  "themen": 1,
+  "thema": [
+   "plus-mit-5"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 9720,
+  "einheit": "tokens",
+  "menge": 614536,
+  "notiz": "tauschaufgaben-bis-10, Prüfung Runde 1",
+  "cache_lesen": 520885,
+  "cache_schreiben": 83913,
+  "themen": 1,
+  "thema": [
+   "tauschaufgaben-bis-10"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 12215,
+  "einheit": "tokens",
+  "menge": 863429,
+  "notiz": "plus-bis-10-gemischt, Prüfung Runde 1",
+  "cache_lesen": 756412,
+  "cache_schreiben": 94780,
+  "themen": 1,
+  "thema": [
+   "plus-bis-10-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 543,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-bis-10-gemischt.png",
+  "themen": 1,
+  "thema": [
+   "plus-bis-10-gemischt"
+  ],
+  "usage": {
+   "input_tokens": 543,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 543
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2299
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 8517,
+  "einheit": "tokens",
+  "menge": 596433,
+  "notiz": "tauschaufgaben-bis-10, Prüfung Runde 2",
+  "cache_lesen": 505846,
+  "cache_schreiben": 82052,
+  "themen": 1,
+  "thema": [
+   "tauschaufgaben-bis-10"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 10409,
+  "einheit": "tokens",
+  "menge": 603900,
+  "notiz": "plus-bis-10-gemischt, Prüfung Runde 2",
+  "cache_lesen": 509734,
+  "cache_schreiben": 83739,
+  "themen": 1,
+  "thema": [
+   "plus-bis-10-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 12980,
+  "einheit": "tokens",
+  "menge": 560427,
+  "notiz": "plus-2-und-3, Prüfung Runde 2",
+  "cache_lesen": 455356,
+  "cache_schreiben": 92075,
+  "themen": 1,
+  "thema": [
+   "plus-2-und-3"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 11362,
+  "einheit": "tokens",
+  "menge": 875164,
+  "notiz": "tauschaufgaben-bis-10, Prüfung Runde 3",
+  "cache_lesen": 776962,
+  "cache_schreiben": 86816,
+  "themen": 1,
+  "thema": [
+   "tauschaufgaben-bis-10"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 10755,
+  "einheit": "tokens",
+  "menge": 1017107,
+  "notiz": "tauschaufgaben-bis-10, Überarbeitung",
+  "cache_lesen": 990938,
+  "cache_schreiben": 15396,
+  "themen": 1,
+  "thema": [
+   "tauschaufgaben-bis-10"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 16898,
+  "einheit": "tokens",
+  "menge": 1671412,
+  "notiz": "plus-2-und-3, Überarbeitung",
+  "cache_lesen": 1522817,
+  "cache_schreiben": 131667,
+  "themen": 1,
+  "thema": [
+   "plus-2-und-3"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 16212,
+  "einheit": "tokens",
+  "menge": 1304593,
+  "notiz": "plus-bis-10-gemischt, Überarbeitung",
+  "cache_lesen": 1142525,
+  "cache_schreiben": 145834,
+  "themen": 1,
+  "thema": [
+   "plus-bis-10-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 22,
+  "ausgabe": 12928,
+  "einheit": "tokens",
+  "menge": 796246,
+  "notiz": "plus-bis-10-gemischt, Prüfung Runde 3",
+  "cache_lesen": 692467,
+  "cache_schreiben": 90829,
+  "themen": 1,
+  "thema": [
+   "plus-bis-10-gemischt"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 13503,
+  "einheit": "tokens",
+  "menge": 1008072,
+  "notiz": "plus-2-und-3, Prüfung Runde 3",
+  "cache_lesen": 903687,
+  "cache_schreiben": 90854,
+  "themen": 1,
+  "thema": [
+   "plus-2-und-3"
+  ]
  }
 ]

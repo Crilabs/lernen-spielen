@@ -1,0 +1,139 @@
+[
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 12709,
+  "einheit": "tokens",
+  "menge": 997624,
+  "notiz": "Spielbau pruefung",
+  "cache_lesen": 877669,
+  "cache_schreiben": 107222
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefstand",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 8,
+  "ausgabe": 878,
+  "einheit": "tokens",
+  "menge": 181261,
+  "notiz": "Spielbau pruefstand",
+  "cache_lesen": 83752,
+  "cache_schreiben": 96623
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 250,
+  "ausgabe": 167379,
+  "einheit": "tokens",
+  "menge": 38245968,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 35991972,
+  "cache_schreiben": 2086367
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "idee",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 34,
+  "ausgabe": 25845,
+  "einheit": "tokens",
+  "menge": 1374610,
+  "notiz": "Spielbau idee",
+  "cache_lesen": 1242265,
+  "cache_schreiben": 106466
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 12,
+  "ausgabe": 1573,
+  "einheit": "tokens",
+  "menge": 412098,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 284253,
+  "cache_schreiben": 126260
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "stimme",
+  "posten": "stimme",
+  "modell": "",
+  "eingabe": 0,
+  "ausgabe": 0,
+  "einheit": "zeichen",
+  "menge": 1826,
+  "notiz": "npm run audio · ElevenLabs Livia, Abrechnung über das ElevenLabs-Abo"
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4767,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4767,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 447
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6139
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 4861,
+  "ausgabe": 1372,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "spielbild.webp",
+  "usage": {
+   "input_tokens": 4861,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 541
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6233
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 2768,
+  "einheit": "tokens",
+  "menge": 1113421,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 1095848,
+  "cache_schreiben": 14777
+ }
+]

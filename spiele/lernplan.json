@@ -1224,7 +1224,7 @@
       "verwechslung": [
         "minus-0-1-alles-weg"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "paket", "thema": "plus-0-und-1" },
       "stufen": [
         "material",
         "vorstellung",
@@ -1253,7 +1253,7 @@
       "voraussetzungen": [
         "plus-0-und-1"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "paket", "thema": "plus-2-und-3" },
       "stufen": [
         "material",
         "vorstellung",
@@ -1284,7 +1284,7 @@
         "zerlegen-5",
         "plus-verstehen"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "paket", "thema": "plus-mit-5" },
       "stufen": [
         "material",
         "vorstellung",
@@ -1378,7 +1378,7 @@
       "voraussetzungen": [
         "plus-0-und-1"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "paket", "thema": "tauschaufgaben-bis-10" },
       "stufen": [
         "material",
         "vorstellung",
@@ -1415,7 +1415,7 @@
       "verwechslung": [
         "minus-bis-10-gemischt"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "paket", "thema": "plus-bis-10-gemischt" },
       "stufen": [
         "material",
         "vorstellung",
@@ -1449,7 +1449,7 @@
       "verwechslung": [
         "plus-0-und-1"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "paket", "thema": "minus-0-1-alles-weg" },
       "stufen": [
         "material",
         "vorstellung",
@@ -1549,7 +1549,7 @@
       "verwechslung": [
         "plus-bis-10-gemischt"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "paket", "thema": "minus-bis-10-gemischt" },
       "stufen": [
         "material",
         "vorstellung",
@@ -2705,7 +2705,7 @@
         "plus-uebergang-gemischt",
         "minus-uebergang-gemischt"
       ],
-      "aufgaben": null,
+      "aufgaben": { "art": "paket", "thema": "blitzrechnen-bis-20" },
       "stufen": [
         "vorstellung",
         "kopf"
@@ -6802,8 +6802,8 @@
         "Pumpe",
         "„Faust“: Wie viele Laute kommen nach dem au?"
       ],
-      "zweck": "Den Einkaufszettel für den Markt so schreiben, dass bei „Obst“ und „Senf“ kein Laut fehlt und die Verkäuferin alles findet.",
-      "eltern": "Lassen Sie Ihr Kind bei Wörtern wie „Senf“ oder „Obst“ für jeden Laut einmal in die Hand klatschen und dann nachzählen, ob alle aufgeschrieben sind."
+      "zweck": "Den Einkaufszettel für den Markt so schreiben, dass bei „Salz“ und „Senf“ kein Laut fehlt und die Verkäuferin alles findet.",
+      "eltern": "Lassen Sie Ihr Kind bei Wörtern wie „Senf“ oder „Salz“ für jeden Laut einmal in die Hand klatschen und dann nachzählen, ob alle aufgeschrieben sind."
     },
     {
       "id": "ei-schreiben",
