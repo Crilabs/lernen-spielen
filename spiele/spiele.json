@@ -27,7 +27,7 @@
       "arten": [{ "art": "zahlwort", "zahlen": [0, 20], "stufen": ["material", "vorstellung", "kopf"] }],
       "regal": null },
     { "id": "streifenbrett", "titel": "Streifenbrett", "thema": "Plus und Minus bis 20", "kategorie": "mathe",
-      "symbol": "mathe/m20-streifenbrett/symbol.svg", "datei": "mathe/m20-streifenbrett/index.html",
+      "symbol": "mathe/m20-streifenbrett/symbol.svg", "bild": "mathe/m20-streifenbrett/spielbild.webp", "datei": "mathe/m20-streifenbrett/index.html",
       "text": "Ergebnis tippen, Kofi rennt über den Perlensteg zur Insel.",
       "beschreibung": "Das Kind tippt das Ergebnis einer Plus- oder Minusaufgabe bis 20. Zwei Perlenstäbe legen sich als Steg aufs Wasser, und Kofi rennt so weit, wie die Zahl sagt. Stimmt sie, landet er auf der Insel; sonst zeigt der Steg, wo er wirklich endet.",
       "arten": [{ "art": "paket", "max": 20, "stufen": ["material", "vorstellung", "kopf"] }],

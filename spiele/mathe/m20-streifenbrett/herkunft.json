@@ -1,0 +1,20 @@
+{
+ "spielbild.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Create the key art (game card image) for a children's learning game, landscape format, based on the attached screenshots of the real game. Keep exactly what the game is: the same main character (same hair, clothes, face, body), the same playing field and objects, the same idea and colours of the learning material. Add nothing to the character that is not in the screenshots and in the character description below (no glasses, hearing aids, hats or jewellery of your own). Make it look plastic and attractive: soft three-dimensional, rounded shapes, gentle light and soft shadows, a little depth of field, like a polished illustration of a premium children's app – friendly, bright, calm, never scary. Show one lively moment of play (the character in motion, e.g. mid-jump), the playing field clearly recognisable. Absolutely no text, no letters, no words, no user interface, no buttons, no keypad, no logos. Digits only if they are part of the learning material itself, and then few and large. IMPORTANT: this image is only shown as a small thumbnail on a game card (about 300 pixels wide). Show only very few, large, simple elements: the character big and close, a short section of the playing field, a calm plain background. Leave out small objects, background scenery, fences, plants and fine details – everything must still read at thumbnail size. Nothing important at the very edges.\n\nWhat the game is (German description by the makers, follow it): Das Kind tippt das Ergebnis einer Plus- oder Minusaufgabe bis 20. Zwei Perlenstäbe legen sich als Steg aufs Wasser, und Kofi rennt so weit, wie die Zahl sagt. Stimmt sie, landet er auf der Insel; sonst zeigt der Steg, wo er wirklich endet.\n\nThe character (draw exactly like this, add nothing): Kofi: a slim boy with dark-brown skin and short black curls. He runs and jumps. No glasses, no hearing aids, no wheelchair.\n\nScreenshots: spielbild-1.png, spielbild-2.png, spielbild-3.png",
+  "usage": {
+   "input_tokens": 4767,
+   "input_tokens_details": {
+    "image_tokens": 4320,
+    "text_tokens": 447
+   },
+   "output_tokens": 1372,
+   "output_tokens_details": {
+    "image_tokens": 1372,
+    "text_tokens": 0
+   },
+   "total_tokens": 6139
+  }
+ }
+}
