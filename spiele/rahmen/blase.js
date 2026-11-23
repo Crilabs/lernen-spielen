@@ -2,6 +2,7 @@
 // Sprechblase des Erzählers: Papier mit Tinte-Kontur, großer Radius, ohne Zipfel (gehört keiner Figur).
 // Text links (Andika 3,6 rem, Tinte), kleiner Nebenknopf „Noch mal hören“ rechts. Flach: kein Schatten.
 // Das Spiel platziert den Host per CSS.
+// Attribut `versalien`: die sichtbare Blase (nur mit ohne-text) zeigt den Text in Versalien, ß bleibt ß (G01; gesprochen wird er unverändert).
 // Attribut `ohne-text` (Christian, 2026-11-15): keine sichtbare Blase, nur der runde Knopf „Noch mal hören“
 // (Größe bedien). Er erscheint erst, wenn es einen Satz gibt (Attribut `hat-text` am Host), und spricht den
 // zuletzt gesagten noch einmal; `sage(text)` spricht und merkt sich den Text. Der Text bleibt für Vorleser im
@@ -108,7 +109,7 @@ export class LsBlase extends HTMLElement {
     const nr = ++this._nr;
     clearTimeout(this._uhr);
     const kurz = zeigen && !!text && this.hasAttribute("ohne-text");
-    if (kurz) this.zeigeFeld.textContent = text;
+    if (kurz) this.zeigeFeld.textContent = this.hasAttribute("versalien") ? text.split("ß").map((t) => t.toUpperCase()).join("ß") : text;
     this.toggleAttribute("zeigt", kurz);
     const lesen = kurz ? new Promise((ok) => { this._uhr = setTimeout(ok, lesezeit(text)); }) : null;
     const gesagt = sprechen ? this.spricht(text, tempo) : Promise.resolve("still");

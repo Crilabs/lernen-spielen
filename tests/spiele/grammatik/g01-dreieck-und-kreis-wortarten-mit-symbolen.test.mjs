@@ -152,3 +152,19 @@ test("Hüpftöne steigen; Freude: nie zweimal dieselbe, Sprung frühestens nach 
   assert.equal(L.witz(5, false, lang, () => 0), "fast-umfallen");
   assert.equal(L.witz(5, false, SAETZE.find((x) => x.id === "hund-bellt").woerter, () => 0), null);
 });
+
+test("Versalien: G01 zeigt jedes Wort in Großbuchstaben, ß bleibt ß, Umlaute bleiben, die Wortdaten bleiben unverändert", () => {
+  assert.equal(L.versalien("Die Katze schläft"), "DIE KATZE SCHLÄFT");
+  assert.equal(L.versalien("der große"), "DER GROßE");
+  assert.equal(L.versalien("heiße"), "HEIßE");
+  assert.equal(L.versalien("über"), "ÜBER");
+  const alle = SAETZE.flatMap((s) => s.woerter.map((w) => w.wort));
+  assert.ok(alle.some((w) => w.includes("ß")), "die Daten enthalten ein Wort mit ß");
+  for (const w of alle) {
+    const v = L.versalien(w);
+    assert.ok(!/\p{Ll}/u.test(v.replaceAll("ß", "")), `${w} → ${v}`);
+    assert.equal(v.includes("ß"), w.includes("ß"), w);
+    assert.equal(v.length, w.length, w);
+  }
+  assert.ok(SAETZE.some((s) => s.woerter.some((w) => /^\p{Lu}/u.test(w.wort) && w.art !== "nomen") || s.woerter.some((w) => /^\p{Ll}/u.test(w.wort))), "Daten unverändert gemischt");
+});

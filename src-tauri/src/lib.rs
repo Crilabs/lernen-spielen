@@ -1,5 +1,6 @@
 mod lernstand;
 mod tagesbrief;
+mod testprotokoll;
 
 #[cfg(desktop)]
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -163,6 +164,41 @@ async fn tagesbrief_empfaenger_entfernen(
     .await
 }
 
+/// Test-Protokoll (docs/testprotokoll.md): hängt einen Eintrag an die Datei des Profils an.
+/// Absichtlich synchron: die Befehle laufen nacheinander, die Reihenfolge bleibt erhalten.
+#[tauri::command]
+fn testprotokoll_notieren(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+    eintrag: serde_json::Value,
+) -> Result<(), String> {
+    testprotokoll::notieren(&tagesbrief_dir(&app, profil.as_deref())?, &eintrag)
+}
+
+/// Test-Protokoll: sendet das Notierte (am Rundenende; sonst der Zeitgeber alle 5 Minuten).
+#[tauri::command]
+async fn testprotokoll_senden(
+    app: tauri::AppHandle,
+    profil: Option<String>,
+) -> Result<usize, String> {
+    let dir = tagesbrief_dir(&app, profil.as_deref())?;
+    tagesbrief_blockierend(move || testprotokoll::senden(&dir, tagesbrief::BASIS_URL)).await
+}
+
+/// Zeitgeber des Test-Protokolls: kurz nach dem Start, dann alle 5 Minuten für alle Profile.
+fn starte_testprotokoll_zeitgeber(app: &tauri::AppHandle) {
+    let Ok(wurzel) = app.path().app_data_dir().map(|d| d.join("tagesbrief")) else {
+        return;
+    };
+    std::thread::spawn(move || {
+        std::thread::sleep(std::time::Duration::from_secs(30));
+        loop {
+            testprotokoll::senden_alle(&wurzel, tagesbrief::BASIS_URL);
+            std::thread::sleep(std::time::Duration::from_secs(300));
+        }
+    });
+}
+
 /// Betriebssystem der App: "macos", "windows", "linux", "android" oder "ios".
 #[tauri::command]
 fn plattform() -> String {
@@ -318,6 +354,8 @@ pub fn run() {
         tagesbrief_empfaenger,
         tagesbrief_empfaenger_hinzufuegen,
         tagesbrief_empfaenger_entfernen,
+        testprotokoll_notieren,
+        testprotokoll_senden,
         plattform,
         kiosk_pause
     ]);
@@ -334,6 +372,8 @@ pub fn run() {
         tagesbrief_empfaenger,
         tagesbrief_empfaenger_hinzufuegen,
         tagesbrief_empfaenger_entfernen,
+        testprotokoll_notieren,
+        testprotokoll_senden,
         plattform
     ]);
     builder
@@ -354,6 +394,7 @@ pub fn run() {
             }
             app.handle().plugin(log.build())?;
             log::info!("Lernen Spielen {} gestartet", app.package_info().version);
+            starte_testprotokoll_zeitgeber(app.handle());
             // Fenster aus tauri.conf.json übernehmen, aber Navigation einschränken.
             let config = app.config().app.windows[0].clone();
             let _window = WebviewWindowBuilder::from_config(app.handle(), &config)?

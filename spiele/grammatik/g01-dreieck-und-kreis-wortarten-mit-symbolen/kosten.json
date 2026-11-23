@@ -265,5 +265,70 @@
   "notiz": "Spielbau Steuerung",
   "cache_lesen": 186665,
   "cache_schreiben": 74208
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bau",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 44,
+  "ausgabe": 15413,
+  "einheit": "tokens",
+  "menge": 1935948,
+  "notiz": "Spielbau bau",
+  "cache_lesen": 1819784,
+  "cache_schreiben": 100707
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 90,
+  "ausgabe": 25558,
+  "einheit": "tokens",
+  "menge": 5381313,
+  "notiz": "Spielbau pruefung",
+  "cache_lesen": 5202266,
+  "cache_schreiben": 153399
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 34,
+  "ausgabe": 13269,
+  "einheit": "tokens",
+  "menge": 1278017,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 1181078,
+  "cache_schreiben": 83636
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 8,
+  "ausgabe": 978,
+  "einheit": "tokens",
+  "menge": 401061,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 398063,
+  "cache_schreiben": 2012
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 80,
+  "ausgabe": 17746,
+  "einheit": "tokens",
+  "menge": 4925875,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 4778829,
+  "cache_schreiben": 129220
  }
 ]

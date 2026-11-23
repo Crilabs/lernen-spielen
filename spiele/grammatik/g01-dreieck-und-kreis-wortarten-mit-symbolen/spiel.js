@@ -29,7 +29,7 @@ import { starteSpielzeit, amRundenende, sage } from "../../rahmen/spielzeit.js";
 import { wortartAus } from "../../aufgabenarten.js";
 import { verbTeile } from "../../woerter/wortarten.js";
 import { bildSvg, hatBild } from "./bilder.js";
-import { plan, passt, richtigesKaestchen, probeKaesten, richtigText, falschText, probeKreide, bildWechsel, huepfTon, naechsteFreude, witz } from "./logik.js";
+import { versalien, plan, passt, richtigesKaestchen, probeKaesten, richtigText, falschText, probeKreide, bildWechsel, huepfTon, naechsteFreude, witz } from "./logik.js";
 
 sperreTouch();
 
@@ -151,7 +151,7 @@ function fuelleSachmoment(feld, ton) {
   zettel.className = "zettel";
   zettel.insertAdjacentHTML("beforeend", `<span><ls-wortart art="nomen"></ls-wortart></span><span><ls-wortart art="verb"></ls-wortart></span>`);
   const satz = document.createElement("p");
-  satz.textContent = "Schneidet Dreiecke und Kreise aus Papier aus.";
+  satz.textContent = versalien("Schneidet Dreiecke und Kreise aus Papier aus.");
   feld.append(zettel, satz);
   if (ton) sprich("Schneidet Dreiecke und Kreise aus Papier aus.");
 }
@@ -456,9 +456,9 @@ function leereReihe() {
 
 /** Das Wort im Kästchen; ein Verb mit Stamm und beweglicher Endung (die Probe klappt sie um). @param {any} w */
 function wortHtml(w) {
-  if (w.art !== "verb") return esc(w.wort);
+  if (w.art !== "verb") return esc(versalien(w.wort));
   const t = verbTeile(w);
-  return `<span class="stamm">${esc(t.stamm)}</span><span class="endung">${esc(t.t)}</span>`;
+  return `<span class="stamm">${esc(versalien(t.stamm))}</span><span class="endung">${esc(versalien(t.t))}</span>`;
 }
 
 /** Die Ziele der Symbole: nur die freien Kästchen, solange eine Aufgabe offen ist. */
@@ -543,14 +543,14 @@ function probeZeile(kasten, text) {
     z.classList.remove("da");
     return;
   }
-  z.textContent = text;
+  z.textContent = versalien(text);
   z.classList.add("da");
 }
 
 /** Das Wort im Kästchen in seine Grundform zurück (die Endung klappt wieder). @param {HTMLElement} kasten @param {any} w */
 function endungZurueck(kasten, w) {
   const e = kasten.querySelector(".endung");
-  if (e && w.art === "verb") e.textContent = verbTeile(w).t;
+  if (e && w.art === "verb") e.textContent = versalien(verbTeile(w).t);
 }
 
 /** Die Endung eines Verbs umklappen: erst weg, dann die neue (0,2 s). @param {Lauf} L @param {HTMLElement} kasten @param {string} neueEndung */
@@ -559,7 +559,7 @@ async function klappe(L, kasten, neueEndung) {
   if (!e) return;
   const { bewege } = mit(L);
   await bewege(e, [{ transform: "rotateX(0deg)" }, { transform: "rotateX(90deg)" }], 90, {}, { easing: "ease-in" });
-  e.textContent = neueEndung;
+  e.textContent = versalien(neueEndung);
   await bewege(e, [{ transform: "rotateX(-90deg)" }, { transform: "rotateX(0deg)" }], 110, { transform: "" }, { easing: "ease-out" });
 }
 

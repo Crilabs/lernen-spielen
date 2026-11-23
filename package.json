@@ -14,7 +14,9 @@
     "schrift:ansehen": "node werkzeuge/schrift/ansehen.mjs",
     "echte-dinge": "node werkzeuge/echte-dinge/verzeichnis.mjs",
     "echte-dinge:brief-fotos": "node werkzeuge/echte-dinge/brief-fotos.mjs",
-    "verwaltung": "node werkzeuge/verwaltung/server.mjs"
+    "verwaltung": "node werkzeuge/verwaltung/server.mjs",
+    "protokoll:holen": "node werkzeuge/protokoll/holen.mjs",
+    "protokoll:zeitachse": "node werkzeuge/protokoll/zeitachse.mjs"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",

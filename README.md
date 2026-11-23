@@ -44,7 +44,9 @@ Die frühere Web-Fassung mit PHP ist entfernt.
   Systemstimme. Regeln für gesprochene Texte: `docs/stimme.md`.
 - `spiele/symbole/` – SVG-Symbole (Kategorien, Spiele, Elternbereich).
 - `spiele/schrift/` – lokal eingebundene Schrift (keine Webzugriffe nötig).
-- `src-tauri/` – Rust-Hülle: Kiosk-Fenster, Lernstand lesen/schreiben, Logdatei, Updater, Installer-Konfiguration.
+- `src-tauri/` – Rust-Hülle: Kiosk-Fenster, Lernstand lesen/schreiben, Tagesbrief und Test-Protokoll, Logdatei, Updater,
+  Installer-Konfiguration.
+- `dienste/tagesbrief/` – Versanddienst auf dem Server (Tagesbrief, Test-Protokoll), siehe dessen README.
 - `tests/` – Node-Tests (`npm test`).
 - `kiosk/` – Prüfliste für die Abnahme am Windows-Rechner.
 - `release.sh`, `.github/workflows/release.yml` – Veröffentlichung.
@@ -112,6 +114,12 @@ Nach dem Update auf 1.0.0 beginnt das Kind mit leerem Lernstand (die alten Spiel
 Die App schreibt über `tauri-plugin-log` in den Log-Ordner der App. Nach der Plugin-Doku ist das unter
 Windows `%LOCALAPPDATA%\de.crilabs.lernen-spielen\logs\` (Dateiname nach dem App-Namen). Im Elternbereich gibt
 es zusätzlich das „Protokoll“.
+
+## Test-Protokoll
+
+Während der Erprobung schickt die App jeden Schritt des Spielens (Runden, Aufgaben, Antworten, Lernstände) an den
+Tagesbrief-Dienst. Holen und Lesen mit `npm run protokoll:holen` und `npm run protokoll:zeitachse`; Format und Weg der
+Daten in `docs/testprotokoll.md`.
 
 ## PIN vergessen
 

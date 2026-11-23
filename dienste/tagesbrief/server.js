@@ -7,6 +7,7 @@ import { setzeBrief } from "../../spiele/tagesbrief/brief.js";
 import { GRENZEN, TAG, erlaubt, raeumeAuf } from "./grenzen.js";
 import { WEITERES_GERAET, abgemeldetSeite, esc, zusaetzlichText, abmeldenFrage, bestaetigenFrage, bestaetigtSeite, datenschutzSeite, ungueltigSeite } from "./seiten.js";
 import { gueltigesEreignis } from "./pruefung.js";
+import { PROTOKOLL_TAGE, gueltigerEintrag, legeAb as legeProtokollAb, protokollOrdner, raeumeAuf as raeumeProtokolleAuf } from "./protokoll.js";
 import { berlinZeit, versendeFaellige } from "./versand.js";
 import { MAX_EMPFAENGER, NAME, bestaetigteEmpfaenger, briefTopf, hash, juengsteVerschickte, lade, legeAb, leererTopf, sichere, zufall } from "./speicher.js";
 
@@ -17,11 +18,12 @@ const UHRZEIT = /^([01]\d|2[0-3]):[0-5]\d$/;
 const KLEIN = 16 * 1024;
 
 /**
- * @param {{ port: number, datei: string, jetzt?: () => Date, sende: (mail: { an: string, betreff: string, html: string, text: string, foto?: string }) => Promise<void>, basis?: string, aus?: boolean }} optionen
+ * @param {{ port: number, datei: string, jetzt?: () => Date, sende: (mail: { an: string, betreff: string, html: string, text: string, foto?: string }) => Promise<void>, basis?: string, aus?: boolean, protokollTage?: number }} optionen
  * @returns {Promise<{ server: import("node:http").Server, stop: () => Promise<void>, pruefeFaellige: () => Promise<number> }>}
  */
-export async function starteDienst({ port, datei, jetzt = () => new Date(), sende, basis = "https://lernen-spielen.crilabs.de", aus = false }) {
+export async function starteDienst({ port, datei, jetzt = () => new Date(), sende, basis = "https://lernen-spielen.crilabs.de", aus = false, protokollTage = PROTOKOLL_TAGE }) {
   const daten = lade(datei);
+  const protokolle = protokollOrdner(datei);
   daten.gesperrt ??= [];
   let laeuft = false;
 
@@ -205,6 +207,21 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
     return 200;
   }
 
+  /** Test-Protokoll (docs/testprotokoll.md): Einträge des Geräts als JSON-Zeilen ablegen, getrennt vom Topf. */
+  async function protokollAnnehmen(/** @type {any} */ req, /** @type {any} */ res, /** @type {any} */ g) {
+    if (aus) return 503;
+    const text = await lies(req, GRENZEN.protokollBytesJePush);
+    if (text === null) { json(res, 413, { fehler: "zu-gross" }); return 413; }
+    const liste = parse(text);
+    if (!Array.isArray(liste)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
+    if (liste.length > GRENZEN.protokollEintraegeJePush) { json(res, 413, { fehler: "zu-viele" }); return 413; }
+    if (!liste.every(gueltigerEintrag)) { json(res, 400, { fehler: "ungueltig" }); return 400; }
+    if (!erlaubt(daten.zaehler, `protokoll:${g.h}`, GRENZEN.protokollJeGeraet, jetzt().getTime())) { speichern(); json(res, 429, { fehler: "zu-oft" }); return 429; }
+    legeProtokollAb(protokolle, g.h.slice(0, 12), liste, jetzt());
+    json(res, 200, { angenommen: liste.length });
+    return 200;
+  }
+
   async function einstellungen(/** @type {any} */ req, /** @type {any} */ res, /** @type {any} */ g) {
     const k = parse(await lies(req, KLEIN));
     if (!k || typeof k !== "object") { json(res, 400, { fehler: "ungueltig" }); return 400; }
@@ -329,12 +346,13 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
       else if (!seitenAufruf && req.headers["x-app"] !== APP_SCHLUESSEL) { json(res, 403, { fehler: "app" }); ergebnis = 403; }
       else if (weg === "POST /anmelden") ergebnis = await anmelden(req, res);
       else if (weg === "GET /status") ergebnis = status(url, res);
-      else if (["POST /ereignisse", "POST /einstellungen", "POST /probebrief", "DELETE /geraet", "POST /empfaenger", "GET /empfaenger", "DELETE /empfaenger"].includes(weg)) {
+      else if (["POST /ereignisse", "POST /protokoll", "POST /einstellungen", "POST /probebrief", "DELETE /geraet", "POST /empfaenger", "GET /empfaenger", "DELETE /empfaenger"].includes(weg)) {
         const g = gerät(req);
         h = g.h;
         if (g.status !== 200) { json(res, g.status, { fehler: g.status === 410 ? "abgemeldet" : "schluessel" }); ergebnis = g.status; }
         else if (gesperrt(g.h ?? "") && weg !== "DELETE /geraet") { json(res, 403, { fehler: "gesperrt" }); ergebnis = 403; }
         else if (weg === "POST /ereignisse") ergebnis = await ereignisse(req, res, g);
+        else if (weg === "POST /protokoll") ergebnis = await protokollAnnehmen(req, res, g);
         else if (weg === "POST /einstellungen") ergebnis = await einstellungen(req, res, g);
         else if (weg === "POST /probebrief") ergebnis = await probebrief(res, g);
         else if (weg === "POST /empfaenger") ergebnis = await empfaengerHinzufuegen(req, res, g);
@@ -351,7 +369,11 @@ export async function starteDienst({ port, datei, jetzt = () => new Date(), send
   });
 
   await new Promise((ok) => server.listen(port, "127.0.0.1", () => ok(undefined)));
-  const aufraeumen = setInterval(() => { raeumeAuf(daten.zaehler, jetzt().getTime()); speichern(); }, TAG / 24);
+  const aufraeumen = setInterval(() => {
+    raeumeAuf(daten.zaehler, jetzt().getTime());
+    speichern();
+    try { raeumeProtokolleAuf(protokolle, jetzt(), protokollTage); } catch { /* nächste Stunde wieder */ }
+  }, TAG / 24);
   aufraeumen.unref();
 
   return {
