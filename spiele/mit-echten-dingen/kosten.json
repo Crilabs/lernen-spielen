@@ -7034,5 +7034,388 @@
   "thema": [
    "endung-er"
   ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 556,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "mengen-5.png",
+  "themen": 1,
+  "thema": [
+   "mengen-5"
+  ],
+  "usage": {
+   "input_tokens": 556,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 556
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2312
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 582,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zehnerfeld-fuenf-und-noch.png",
+  "themen": 1,
+  "thema": [
+   "zehnerfeld-fuenf-und-noch"
+  ],
+  "usage": {
+   "input_tokens": 582,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 582
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2338
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 589,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zwanzigerfeld.png",
+  "themen": 1,
+  "thema": [
+   "zwanzigerfeld"
+  ],
+  "usage": {
+   "input_tokens": 589,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 589
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2345
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 562,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "menge-bild-ziffer.png",
+  "themen": 1,
+  "thema": [
+   "menge-bild-ziffer"
+  ],
+  "usage": {
+   "input_tokens": 562,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 562
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2318
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 570,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "menge-bild-ziffer.png",
+  "themen": 1,
+  "thema": [
+   "menge-bild-ziffer"
+  ],
+  "usage": {
+   "input_tokens": 570,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 570
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2326
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 613,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zahl-in-vielen-formen.png",
+  "themen": 1,
+  "thema": [
+   "zahl-in-vielen-formen"
+  ],
+  "usage": {
+   "input_tokens": 613,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 613
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2369
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 606,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zahl-in-vielen-formen.png",
+  "themen": 1,
+  "thema": [
+   "zahl-in-vielen-formen"
+  ],
+  "usage": {
+   "input_tokens": 606,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 606
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2362
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 44,
+  "ausgabe": 15191,
+  "einheit": "tokens",
+  "menge": 1964531,
+  "notiz": "mengen-5, Recherche und Schreiben",
+  "cache_lesen": 1835801,
+  "cache_schreiben": 113495,
+  "themen": 1,
+  "thema": [
+   "mengen-5"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 19450,
+  "einheit": "tokens",
+  "menge": 2155591,
+  "notiz": "zehnerfeld-fuenf-und-noch, Recherche und Schreiben",
+  "cache_lesen": 2020310,
+  "cache_schreiben": 115783,
+  "themen": 1,
+  "thema": [
+   "zehnerfeld-fuenf-und-noch"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 48,
+  "ausgabe": 20245,
+  "einheit": "tokens",
+  "menge": 2176679,
+  "notiz": "zwanzigerfeld, Recherche und Schreiben",
+  "cache_lesen": 2046989,
+  "cache_schreiben": 109397,
+  "themen": 1,
+  "thema": [
+   "zwanzigerfeld"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 42,
+  "ausgabe": 22237,
+  "einheit": "tokens",
+  "menge": 1816827,
+  "notiz": "menge-bild-ziffer, Recherche und Schreiben",
+  "cache_lesen": 1678618,
+  "cache_schreiben": 115930,
+  "themen": 1,
+  "thema": [
+   "menge-bild-ziffer"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 58,
+  "ausgabe": 19928,
+  "einheit": "tokens",
+  "menge": 2829251,
+  "notiz": "zahl-in-vielen-formen, Recherche und Schreiben",
+  "cache_lesen": 2687487,
+  "cache_schreiben": 121778,
+  "themen": 1,
+  "thema": [
+   "zahl-in-vielen-formen"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 6692,
+  "einheit": "tokens",
+  "menge": 575522,
+  "notiz": "mengen-5, Prüfung Runde 1",
+  "cache_lesen": 480005,
+  "cache_schreiben": 88809,
+  "themen": 1,
+  "thema": [
+   "mengen-5"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 6639,
+  "einheit": "tokens",
+  "menge": 533602,
+  "notiz": "zehnerfeld-fuenf-und-noch, Prüfung Runde 1",
+  "cache_lesen": 446688,
+  "cache_schreiben": 80259,
+  "themen": 1,
+  "thema": [
+   "zehnerfeld-fuenf-und-noch"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 7232,
+  "einheit": "tokens",
+  "menge": 885821,
+  "notiz": "zwanzigerfeld, Prüfung Runde 1",
+  "cache_lesen": 789517,
+  "cache_schreiben": 89048,
+  "themen": 1,
+  "thema": [
+   "zwanzigerfeld"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 9262,
+  "einheit": "tokens",
+  "menge": 721351,
+  "notiz": "menge-bild-ziffer, Prüfung Runde 1",
+  "cache_lesen": 629173,
+  "cache_schreiben": 82896,
+  "themen": 1,
+  "thema": [
+   "menge-bild-ziffer"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 7576,
+  "einheit": "tokens",
+  "menge": 618593,
+  "notiz": "zahl-in-vielen-formen, Prüfung Runde 1",
+  "cache_lesen": 521798,
+  "cache_schreiben": 89201,
+  "themen": 1,
+  "thema": [
+   "zahl-in-vielen-formen"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 9772,
+  "einheit": "tokens",
+  "menge": 827921,
+  "notiz": "zahl-in-vielen-formen, Prüfung Runde 2",
+  "cache_lesen": 768563,
+  "cache_schreiben": 49566,
+  "themen": 1,
+  "thema": [
+   "zahl-in-vielen-formen"
+  ]
  }
 ]

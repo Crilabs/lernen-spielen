@@ -738,5 +738,105 @@
   },
   "ki": true,
   "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "mengen-5.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Ein Teller unter dem Tuch“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: kleine Teller, ein Geschirrtuch, Apfelstücke\nWhat happens: Eine Person legt bis zu einige Stücke auf einen Teller und das Tuch darüber. Die andere hebt das Tuch an, schaut einmal hin und deckt wieder zu. Dann sagt sie in Ruhe, wie viele es sind und wie sie es sieht: … Nehmt das Tuch weg und prüft. Wer geschaut hat, bekommt den Teller. Dann tauscht ihr.\nImportant: Apple pieces gathered in a small bowl, not laid out as a countable group on the plate; the tea towel half covers an empty plate; at most one cropped hand.",
+  "usage": {
+   "input_tokens": 556,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 556
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2312
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "zehnerfeld-fuenf-und-noch.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Der Eierkarton“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: einen leeren Eierkarton für einige Eier, Kastanien oder kleine Kartoffeln\nWhat happens: Stellt den Karton offen hin. Eine Person schaut weg. Die andere füllt die obere Reihe ganz, dann unten von links einige Fächer. Die erste schaut hin und sagt: … Prüft unten. Oben zählt ihr nicht: Voll sind es einige. Tauscht. Mal sagt eine Person einige, die andere legt so viele. Schaut beim Kochen in den echten Eierkarton: Wie viele Eier sind noch da?\nImportant: An open, empty cardboard egg carton with two rows of five cups (ten cups) clearly visible; chestnuts gathered in a bowl next to it, not inside the carton; no eggs at all; at most one cropped hand.",
+  "usage": {
+   "input_tokens": 582,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 582
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2338
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "zwanzigerfeld.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „einige Eierkartons“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: einige leere Zehner-Eierkartons, einige große Nudeln. Keine rohen Eier.\nWhat happens: Stellt die Kartons offen nebeneinander. Jeder hat einige Reihen zu einige Mulden. Eine Person legt eine Zahl von einige, zum Beispiel einige: erst den linken Karton voll, im rechten erst eine Reihe, dann die andere. Die andere schaut hin und sagt ohne Zählen: … Dann tauscht ihr. Schaut zum Schluss nur in die Eierkartons im Kühlschrank. Sagt, wie viele Eier da sind.\nImportant: Two open, empty cardboard egg cartons for ten eggs each (two rows of five cups each), side by side; large pasta shells gathered in a bowl next to them, not inside the cartons; no eggs at all; at most one cropped hand.",
+  "usage": {
+   "input_tokens": 589,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 589
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2345
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "menge-bild-ziffer.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Würfeln und ziehen“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: ein Brettspiel mit Würfel\nWhat happens: Würfelt. Sagt die Zahl, ohne jeden Punkt zu zählen, und wie ihr sie seht: … Die andere Person zeigt die Zahl mit den Fingern. einige ist eine volle Hand. Zieht die Figur. Bei jedem Feld klappt ein Finger ein. Sind alle Finger eingeklappt, steht die Figur.\nImportant: A simple board game with a winding path of plain coloured fields (no numbers, no letters, no logos) and a few game pieces. The die is held loosely inside a cropped child's hand at the edge, fingers closed around it, so no pips are visible at all. No other die. Nothing countable in the centre.",
+  "usage": {
+   "input_tokens": 570,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 570
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2326
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "zahl-in-vielen-formen.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Den Tisch nach Bestellung decken“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: Teller, Gabeln, Löffel, Becher, einen Würfel, Zettel und Stift\nWhat happens: Eine Person weiß, wie viele mitessen, und bestellt jedes Ding anders. Teller: Der Würfel zeigt so viele Augen. Gabeln: Auf dem Zettel steht die Ziffer, zum Beispiel einige. Löffel: Darunter steht das Wort: einige. Becher: Die Zahl wird nur gesagt. Die andere Person deckt nach jeder Bestellung. Hat jeder Platz von allem eines? Sagt: …\nImportant: Cups stacked inside each other as one tower, plates as one tall stack, forks and spoons together in one jumbled heap; no row of separate cups or plates; one die lying at the side; a blank note paper and a pencil. No knives, no glass, no writing, no digits. Nothing countable in the centre.",
+  "usage": {
+   "input_tokens": 606,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 606
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2362
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
  }
 }

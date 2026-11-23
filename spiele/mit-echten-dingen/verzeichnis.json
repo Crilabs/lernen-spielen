@@ -502,6 +502,46 @@
    "datei": "mathe/mehr-weniger-gleich-viele.md",
    "foto": "mathe/bilder/mehr-weniger-gleich-viele.webp"
   },
+  "menge-bild-ziffer": {
+   "fach": "mathe",
+   "name": "Menge, Bild und Ziffer",
+   "titel": "Dieselbe Zahl auf Würfel, Fingern und Zettel",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Würfeln und ziehen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Würfeln und stampfen"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Brötchen beim Bäcker"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/menge-bild-ziffer.md",
+   "foto": "mathe/bilder/menge-bild-ziffer.webp"
+  },
+  "mengen-5": {
+   "fach": "mathe",
+   "name": "Mengen bis 5 auf einen Blick",
+   "titel": "Wie viele sind es, auf einen Blick?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Ein Teller unter dem Tuch"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Auf einen Blick im Haus"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/mengen-5.md",
+   "foto": "mathe/bilder/mengen-5.webp"
+  },
   "minus-zehner": {
    "fach": "mathe",
    "name": "Minus mit ganzen Zehnern",
@@ -1062,6 +1102,24 @@
    "datei": "mathe/zahl-darstellungen-bis-100.md",
    "foto": "mathe/bilder/zahl-darstellungen-bis-100.webp"
   },
+  "zahl-in-vielen-formen": {
+   "fach": "mathe",
+   "name": "Vier Gesichter einer Zahl",
+   "titel": "Dieselbe Zahl in vier Gesichtern",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Den Tisch nach Bestellung decken"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Alles, was zur Zahl passt"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zahl-in-vielen-formen.md",
+   "foto": "mathe/bilder/zahl-in-vielen-formen.webp"
+  },
   "zahlen-bis-20-schreiben": {
    "fach": "mathe",
    "name": "Zahlen 11 bis 20 schreiben",
@@ -1137,6 +1195,24 @@
    "entwurf": false,
    "datei": "mathe/zehner-und-einer-bis-20.md",
    "foto": "mathe/bilder/zehner-und-einer-bis-20.webp"
+  },
+  "zehnerfeld-fuenf-und-noch": {
+   "fach": "mathe",
+   "name": "Zehnerfeld: 5 und noch",
+   "titel": "Eine volle Reihe und noch einige",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Eierkarton"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Schuhe im Flur"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zehnerfeld-fuenf-und-noch.md",
+   "foto": "mathe/bilder/zehnerfeld-fuenf-und-noch.webp"
   },
   "zehnerreihe": {
    "fach": "mathe",
@@ -1397,6 +1473,24 @@
    "entwurf": false,
    "datei": "mathe/ziffern-lesen-bis-10.md",
    "foto": "mathe/bilder/ziffern-lesen-bis-10.webp"
+  },
+  "zwanzigerfeld": {
+   "fach": "mathe",
+   "name": "Zwanzigerfeld",
+   "titel": "Zehn und noch etwas auf einen Blick",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zwei Eierkartons"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Strecken und hocken"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zwanzigerfeld.md",
+   "foto": "mathe/bilder/zwanzigerfeld.webp"
   },
   "zweierreihe": {
    "fach": "mathe",
