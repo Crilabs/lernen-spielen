@@ -122,5 +122,18 @@
    },
    "total_tokens": 6233
   }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "steuerung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 2768,
+  "einheit": "tokens",
+  "menge": 1113421,
+  "notiz": "Spielbau Steuerung",
+  "cache_lesen": 1095848,
+  "cache_schreiben": 14777
  }
 ]
