@@ -470,6 +470,42 @@
    "datei": "grammatik/personalpronomen.md",
    "foto": "grammatik/bilder/personalpronomen.webp"
   },
+  "plus-0-und-1": {
+   "fach": "mathe",
+   "name": "Plus 0 und plus 1",
+   "titel": "Eins dazu oder keins dazu",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kerzen für den nächsten Geburtstag"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Eine Stufe oder stehen bleiben"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-0-und-1.md",
+   "foto": "mathe/bilder/plus-0-und-1.webp"
+  },
+  "plus-mit-5": {
+   "fach": "mathe",
+   "name": "Plus mit 5",
+   "titel": "Fünf und noch etwas dazu",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kleingeld für den Einkauf"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Ein Sprung und kleine Schritte"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-mit-5.md",
+   "foto": "mathe/bilder/plus-mit-5.webp"
+  },
   "pronomen-statt-nomen": {
    "fach": "grammatik",
    "name": "Pronomen statt Nomen",
