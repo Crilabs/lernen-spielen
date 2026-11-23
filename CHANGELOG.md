@@ -2,6 +2,19 @@
 
 ## Unveröffentlicht
 
+## v1.2.7
+
+- **Streifenbrett (neu, zur Probe):** Plus und Minus bis 20. Das Kind tippt das Ergebnis, und Kofi rennt über den Perlensteg zur Insel.
+- **Blitzblick (neu, zur Probe):** Mengen auf einen Blick. Lichter blitzen kurz auf, das Kind schiebt die Perlen, und Kofis Lichterkette leuchtet.
+- **Selbst schreiben (neu, zur Probe):** Schwünge, Buchstaben und Ziffern mit dem Stift auf der Kreidebahn im Schulhof, Ela fährt die Spur ab.
+- **Leuchtschrift (neu, zur Probe):** Ein Wort in Schreibschrift in einem Zug schreiben. Die Spur leuchtet, und Ela macht ein Foto davon.
+- **Schreiben nur mit dem Stift:** In „Selbst schreiben“ und „Leuchtschrift“ zählt nur der Stift, der Finger schreibt nicht mit.
+- **Dreieck und Kreis:** Alle Wörter stehen in Großbuchstaben, damit die Großschreibung das Nomen nicht verrät. Das Spiel ist weiter zur Probe.
+- **Ich, du, wir:** Bei „sie“ zählen die Endungen „-t“ und „-en“ auf jeder Stufe.
+- **„Weißt du noch?“:** Die Erinnerungsfrage kommt erst, wenn das ganze Buch gelesen ist.
+- **Test-Protokoll:** Während der Erprobung schickt die App den Spielfortschritt an den Tagesbrief-Dienst, damit sich nachvollziehen lässt, warum ein Thema kam und wo ein Spiel hängt.
+- **Mit echten Dingen:** neue Anleitungen zu Vorübungen der Schrift, lautgetreuem Schreiben mit der Anlauttabelle, „ei“ und „au“, Silben schwingen, Endungen „-e“, „-en“ und „-er“, Mengen bis 5, Zehner- und Zwanzigerfeld, mehr, weniger und gleich viele, gerade und ungerade, Plus bis 10 sowie Plus bis 100 mit Rechenwegen und Ergänzen.
+
 ## v1.2.6
 
 - **Ich, du, wir (neu):** Am Maltisch passt das Kind die Endung des Verbs an die Person an, mit Pronomen und Endungsplättchen.
