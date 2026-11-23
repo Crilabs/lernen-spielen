@@ -6662,5 +6662,377 @@
   "thema": [
    "plus-2-und-3"
   ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 536,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "silben-schwingen-beim-schreiben.png",
+  "themen": 1,
+  "thema": [
+   "silben-schwingen-beim-schreiben"
+  ],
+  "usage": {
+   "input_tokens": 536,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 536
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2292
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 540,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "silbe-hat-selbstlaut.png",
+  "themen": 1,
+  "thema": [
+   "silbe-hat-selbstlaut"
+  ],
+  "usage": {
+   "input_tokens": 540,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 540
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2296
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 526,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "endung-e.png",
+  "themen": 1,
+  "thema": [
+   "endung-e"
+  ],
+  "usage": {
+   "input_tokens": 526,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 526
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2282
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 531,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "endung-en.png",
+  "themen": 1,
+  "thema": [
+   "endung-en"
+  ],
+  "usage": {
+   "input_tokens": 531,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 531
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2287
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 530,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "endung-er.png",
+  "themen": 1,
+  "thema": [
+   "endung-er"
+  ],
+  "usage": {
+   "input_tokens": 530,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 530
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2286
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 572,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "endung-er.png",
+  "themen": 1,
+  "thema": [
+   "endung-er"
+  ],
+  "usage": {
+   "input_tokens": 572,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 572
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2328
+  }
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 54,
+  "ausgabe": 17705,
+  "einheit": "tokens",
+  "menge": 2608944,
+  "notiz": "silben-schwingen-beim-schreiben, Recherche und Schreiben",
+  "cache_lesen": 2463401,
+  "cache_schreiben": 127784,
+  "themen": 1,
+  "thema": [
+   "silben-schwingen-beim-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 46,
+  "ausgabe": 17534,
+  "einheit": "tokens",
+  "menge": 2012440,
+  "notiz": "silbe-hat-selbstlaut, Recherche und Schreiben",
+  "cache_lesen": 1884409,
+  "cache_schreiben": 110451,
+  "themen": 1,
+  "thema": [
+   "silbe-hat-selbstlaut"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 64,
+  "ausgabe": 18990,
+  "einheit": "tokens",
+  "menge": 2988349,
+  "notiz": "endung-e, Recherche und Schreiben",
+  "cache_lesen": 2732943,
+  "cache_schreiben": 236352,
+  "themen": 1,
+  "thema": [
+   "endung-e"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 54,
+  "ausgabe": 15669,
+  "einheit": "tokens",
+  "menge": 2615435,
+  "notiz": "endung-en, Recherche und Schreiben",
+  "cache_lesen": 2478001,
+  "cache_schreiben": 121711,
+  "themen": 1,
+  "thema": [
+   "endung-en"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 60,
+  "ausgabe": 20083,
+  "einheit": "tokens",
+  "menge": 2897554,
+  "notiz": "endung-er, Recherche und Schreiben",
+  "cache_lesen": 2632676,
+  "cache_schreiben": 244735,
+  "themen": 1,
+  "thema": [
+   "endung-er"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 12,
+  "ausgabe": 6678,
+  "einheit": "tokens",
+  "menge": 403895,
+  "notiz": "silben-schwingen-beim-schreiben, Prüfung R1",
+  "cache_lesen": 321225,
+  "cache_schreiben": 75980,
+  "themen": 1,
+  "thema": [
+   "silben-schwingen-beim-schreiben"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 6824,
+  "einheit": "tokens",
+  "menge": 466081,
+  "notiz": "silbe-hat-selbstlaut, Prüfung R1",
+  "cache_lesen": 388585,
+  "cache_schreiben": 70656,
+  "themen": 1,
+  "thema": [
+   "silbe-hat-selbstlaut"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 16,
+  "ausgabe": 6259,
+  "einheit": "tokens",
+  "menge": 497045,
+  "notiz": "endung-e, Prüfung R1",
+  "cache_lesen": 404294,
+  "cache_schreiben": 86476,
+  "themen": 1,
+  "thema": [
+   "endung-e"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 7922,
+  "einheit": "tokens",
+  "menge": 651026,
+  "notiz": "endung-en, Prüfung R1",
+  "cache_lesen": 565503,
+  "cache_schreiben": 77581,
+  "themen": 1,
+  "thema": [
+   "endung-en"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 8712,
+  "einheit": "tokens",
+  "menge": 467106,
+  "notiz": "endung-er, Prüfung R1",
+  "cache_lesen": 385667,
+  "cache_schreiben": 72713,
+  "themen": 1,
+  "thema": [
+   "endung-er"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 10,
+  "ausgabe": 5221,
+  "einheit": "tokens",
+  "menge": 316760,
+  "notiz": "endung-e, Prüfung R2",
+  "cache_lesen": 267603,
+  "cache_schreiben": 43926,
+  "themen": 1,
+  "thema": [
+   "endung-e"
+  ]
+ },
+ {
+  "datum": "2026-11-23",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 12,
+  "ausgabe": 6460,
+  "einheit": "tokens",
+  "menge": 382342,
+  "notiz": "endung-er, Prüfung R2",
+  "cache_lesen": 335223,
+  "cache_schreiben": 40647,
+  "themen": 1,
+  "thema": [
+   "endung-er"
+  ]
  }
 ]

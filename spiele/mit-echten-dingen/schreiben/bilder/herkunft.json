@@ -318,5 +318,105 @@
   },
   "ki": true,
   "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "silben-schwingen-beim-schreiben.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Die Packliste“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: Papier, einen Stift, die Tasche für die Ferien\nWhat happens: Überlegt, was in die Tasche soll, zum Beispiel die Badehose. Schwingt das Wort mit dem Arm, je Silbe ein Bogen: …. Einer schreibt. Schwingt langsam weiter und haltet nach jedem Bogen an, bis die Silbe ganz dasteht. Fahrt mit dem Finger Bögen unter das Wort und sprecht mit. Fehlt ein Stück, schwingt noch einmal. Packt die Badehose ein. Beim nächsten Ding schreibt der andere.",
+  "usage": {
+   "input_tokens": 536,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 536
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2292
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "silbe-hat-selbstlaut.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Der Wunschzettel fürs Essen“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: Zettel, Bleistift und Buntstift\nWhat happens: Einer schreibt einen Essenswunsch auf, zum Beispiel Rübe. Der andere liest genau vor, was dasteht: … klingt nicht wie Rübe. Schwingt das Wort zusammen: …. Zieht mit dem Buntstift unter jede Silbe einen Bogen. Sucht in jedem Bogen den Vokal. Fehlt einer: Welcher Vokal klingt hier? Schreibt ihn dazu. Der Zettel kommt an den Kühlschrank. Dann tauscht ihr.",
+  "usage": {
+   "input_tokens": 540,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 540
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2296
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "endung-e.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Der Laden mit Schildern“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: Papier, einen Stift, Gurke, Birne, Dose oder andere Dinge aus der Küche\nWhat happens: Die Dinge auf dem Tisch sind ein Laden. Einer verkauft, der andere kauft ein. Sprecht ein Ding deutlich bis zum Ende und schwingt die Silben: …. Wer verkauft, schreibt ein Schild dafür. Wer einkauft, liest das Schild laut, genau wie es dasteht. Klingt es wie …, kommt das E ans Ende. Dann tauscht ihr.",
+  "usage": {
+   "input_tokens": 526,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 526
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2282
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "endung-en.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Der Merkzettel“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: Papier, einen Stift\nWhat happens: Überlegt, was heute noch zu tun ist, zum Beispiel Tisch decken. Einer schreibt eine Sache auf den Zettel. Schwingt das Wort mit -en in Silben: …. Zeichnet unter jede Silbe einen Bogen. In jeden Bogen gehört ein Vokal. Steht im letzten Bogen bloß …, wie bei …, kommt das e dazu. Dann schreibt der andere. Hängt den Zettel auf und streicht durch, was erledigt ist.",
+  "usage": {
+   "input_tokens": 531,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 531
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2287
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
+ },
+ "endung-er.webp": {
+  "datum": "2026-11-23",
+  "modell": "gpt-image-2-5-sunburst",
+  "prompt": "Photorealistic photograph for a children's learning app (ages 6 to 9): the everyday things used in a short game that a child and an adult play together at home or outside. The things are the subject, not the people.\nNatural daylight, soft and friendly, true-to-life colours and proportions, sharp focus on the things, gentle background blur. A real, lived-in but tidy home (kitchen table, floor, hallway, stairs) or a calm street or park, matching the scene.\nShow the material ready to play with, as in a calm moment just before or during the game: large, clearly recognisable, close to the camera, few objects. Do NOT arrange things in countable rows or groups and do NOT show an exact number of anything; quantities are loose and natural (a small stack, a bowl, a basket, a handful). Small items (food, buttons, pasta, socks, pegs, cards) are still gathered together in one bowl, basket or loose heap, NOT yet distributed onto plates, places or rows; plates, cups or similar stand empty or stacked.\nPeople: at most a hand, a forearm or a foot at the edge of the picture, cropped, never a face, never a whole person. Skin tones natural and varied. No stereotyped clothing.\nEverything must be factually correct and safe: real everyday objects, correct anatomy of hands (five fingers), no knives, no stove, no fire, no small parts in a child's mouth, nothing dangerous.\nNo text, no letters, no numbers or digits anywhere (also not on dice faces in focus, clocks, books, packaging), no logos, no brands, no watermarks.\nSquare format (1:1), the things clearly visible and centred, nothing important at the edges, uncluttered composition.\n\nScene: A short game called „Schilder für Fächer und Kisten“ (German instructions below), played at a table at home.\nPhotograph the things this game is played with, ready to play, as described here (quantities intentionally left open):\nMaterial: Papier, einen Stift, Klebeband\nWhat happens: Sucht Dinge mit -er am Ende: Becher, Teller, Eimer. Habt ihr ein Tier, passt sein Futterschild: …. Sprecht das Wort wie immer: …. Dann sprecht es zum Schreiben, in Silben, mit e und r: …. Einer schreibt das Schild. Der andere zeigt auf die letzte Silbe: Stehen e und r da? Klebt das Schild an seinen Platz und tauscht.\nImportant: Neben Papier, Stift und Klebeband stehen ein leerer Becher und ein leerer Teller auf dem Tisch, für die die Schilder gedacht sind; das Papier ist noch unbeschrieben.",
+  "usage": {
+   "input_tokens": 572,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 572
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2328
+  },
+  "ki": true,
+  "geprueft": "Sichtprüfung beim Erzeugen (foto.mjs)"
  }
 }

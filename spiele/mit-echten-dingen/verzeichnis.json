@@ -184,6 +184,60 @@
    "datei": "mathe/einmaleins-sicher.md",
    "foto": "mathe/bilder/einmaleins-sicher.webp"
   },
+  "endung-e": {
+   "fach": "schreiben",
+   "name": "Endung -e",
+   "titel": "Das leise E am Ende schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Laden mit Schildern"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Großer Schritt, kleiner Schnipp"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/endung-e.md",
+   "foto": "schreiben/bilder/endung-e.webp"
+  },
+  "endung-en": {
+   "fach": "schreiben",
+   "name": "Endung -en",
+   "titel": "Die Endung -en: das e vor dem n",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Merkzettel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Großer Schritt, kleiner Schritt"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/endung-en.md",
+   "foto": "schreiben/bilder/endung-en.webp"
+  },
+  "endung-er": {
+   "fach": "schreiben",
+   "name": "Endung -er",
+   "titel": "Das -er am Wortende schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Schilder für Fächer und Kisten"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Die -er-Suche"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/endung-er.md",
+   "foto": "schreiben/bilder/endung-er.webp"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
@@ -774,6 +828,24 @@
    "datei": "mathe/siebenerreihe.md",
    "foto": "mathe/bilder/siebenerreihe.webp"
   },
+  "silbe-hat-selbstlaut": {
+   "fach": "schreiben",
+   "name": "Jede Silbe hat einen Vokal",
+   "titel": "In jeder Silbe steht ein Vokal",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Wunschzettel fürs Essen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Bögen hüpfen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/silbe-hat-selbstlaut.md",
+   "foto": "schreiben/bilder/silbe-hat-selbstlaut.webp"
+  },
   "silben-klatschen": {
    "fach": "lesen",
    "name": "Silben klatschen",
@@ -791,6 +863,24 @@
    "entwurf": false,
    "datei": "lesen/silben-klatschen.md",
    "foto": "lesen/bilder/silben-klatschen.webp"
+  },
+  "silben-schwingen-beim-schreiben": {
+   "fach": "schreiben",
+   "name": "Silben schwingen beim Schreiben",
+   "titel": "Lange Wörter Silbe für Silbe schreiben",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Die Packliste"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Schritt, Bogen, Silbe"
+    }
+   ],
+   "entwurf": false,
+   "datei": "schreiben/silben-schwingen-beim-schreiben.md",
+   "foto": "schreiben/bilder/silben-schwingen-beim-schreiben.webp"
   },
   "stifthaltung": {
    "fach": "schreiben",
