@@ -23,5 +23,5 @@
     "@tauri-apps/cli": "^2",
     "typescript": "^7.0.2"
   },
-  "version": "1.2.6"
+  "version": "1.2.7"
 }
