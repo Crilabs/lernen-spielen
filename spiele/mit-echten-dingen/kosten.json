@@ -7417,5 +7417,1194 @@
   "thema": [
    "zahl-in-vielen-formen"
   ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 568,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "schrittweise-rechenstrich.png",
+  "themen": 1,
+  "thema": [
+   "schrittweise-rechenstrich"
+  ],
+  "usage": {
+   "input_tokens": 568,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 568
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2324
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 594,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "stellenweise-rechnen.png",
+  "themen": 1,
+  "thema": [
+   "stellenweise-rechnen"
+  ],
+  "usage": {
+   "input_tokens": 594,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 594
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2350
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 591,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "hilfsaufgabe-plus-minus.png",
+  "themen": 1,
+  "thema": [
+   "hilfsaufgabe-plus-minus"
+  ],
+  "usage": {
+   "input_tokens": 591,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 591
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2347
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 11746,
+  "einheit": "tokens",
+  "menge": 540703,
+  "notiz": "schrittweise-rechenstrich, Prüfung Runde 1",
+  "cache_lesen": 446015,
+  "cache_schreiben": 82928,
+  "themen": 1,
+  "thema": [
+   "schrittweise-rechenstrich"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 14,
+  "ausgabe": 12671,
+  "einheit": "tokens",
+  "menge": 544920,
+  "notiz": "stellenweise-rechnen, Prüfung Runde 1",
+  "cache_lesen": 446818,
+  "cache_schreiben": 85417,
+  "themen": 1,
+  "thema": [
+   "stellenweise-rechnen"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 18,
+  "ausgabe": 15100,
+  "einheit": "tokens",
+  "menge": 677372,
+  "notiz": "hilfsaufgabe-plus-minus, Prüfung Runde 1",
+  "cache_lesen": 575872,
+  "cache_schreiben": 86382,
+  "themen": 1,
+  "thema": [
+   "hilfsaufgabe-plus-minus"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 11450,
+  "einheit": "tokens",
+  "menge": 833584,
+  "notiz": "schrittweise-rechenstrich, Prüfung Runde 2",
+  "cache_lesen": 734616,
+  "cache_schreiben": 87498,
+  "themen": 1,
+  "thema": [
+   "schrittweise-rechenstrich"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 12965,
+  "einheit": "tokens",
+  "menge": 1013015,
+  "notiz": "stellenweise-rechnen, Prüfung Runde 2",
+  "cache_lesen": 907318,
+  "cache_schreiben": 92708,
+  "themen": 1,
+  "thema": [
+   "stellenweise-rechnen"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 28,
+  "ausgabe": 13958,
+  "einheit": "tokens",
+  "menge": 1197875,
+  "notiz": "hilfsaufgabe-plus-minus, Prüfung Runde 2",
+  "cache_lesen": 1088097,
+  "cache_schreiben": 95792,
+  "themen": 1,
+  "thema": [
+   "hilfsaufgabe-plus-minus"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 136,
+  "ausgabe": 67309,
+  "einheit": "tokens",
+  "menge": 9964289,
+  "notiz": "schrittweise-rechenstrich, stellenweise-rechnen, hilfsaufgabe-plus-minus: Recherche, Schreiben, Überarbeitung, Steuerung",
+  "cache_lesen": 9671967,
+  "cache_schreiben": 224877,
+  "themen": 3,
+  "thema": [
+   "schrittweise-rechenstrich",
+   "stellenweise-rechnen",
+   "hilfsaufgabe-plus-minus"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 550,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-zweistellig-ohne-uebergang.png",
+  "themen": 1,
+  "thema": [
+   "plus-zweistellig-ohne-uebergang"
+  ],
+  "usage": {
+   "input_tokens": 550,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 550
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2306
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 534,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-einer-ohne-uebergang-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-einer-ohne-uebergang-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 534,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 534
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2290
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 512,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zehnerzahlen-plus-minus.png",
+  "themen": 1,
+  "thema": [
+   "zehnerzahlen-plus-minus"
+  ],
+  "usage": {
+   "input_tokens": 512,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 512
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2268
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 552,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-zehner-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-zehner-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 552,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 552
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2308
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 554,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zehnerzahlen-plus-minus.png",
+  "themen": 1,
+  "thema": [
+   "zehnerzahlen-plus-minus"
+  ],
+  "usage": {
+   "input_tokens": 554,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 554
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2310
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 596,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-zweistellig-ohne-uebergang.png",
+  "themen": 1,
+  "thema": [
+   "plus-zweistellig-ohne-uebergang"
+  ],
+  "usage": {
+   "input_tokens": 596,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 596
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2352
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 595,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "zehnerzahlen-plus-minus.png",
+  "themen": 1,
+  "thema": [
+   "zehnerzahlen-plus-minus"
+  ],
+  "usage": {
+   "input_tokens": 595,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 595
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2351
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 654,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-zehner-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-zehner-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 654,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 654
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2410
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 642,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-zweistellig-ohne-uebergang.png",
+  "themen": 1,
+  "thema": [
+   "plus-zweistellig-ohne-uebergang"
+  ],
+  "usage": {
+   "input_tokens": 642,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 642
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2398
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 24,
+  "ausgabe": 16692,
+  "einheit": "tokens",
+  "menge": 1042191,
+  "notiz": "plus-zehner-bis-100, Prüfung Runde 1",
+  "cache_lesen": 929298,
+  "cache_schreiben": 96177,
+  "themen": 1,
+  "thema": [
+   "plus-zehner-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 14,
+  "ausgabe": 12175,
+  "einheit": "tokens",
+  "menge": 509423,
+  "notiz": "plus-zehner-bis-100, Prüfung Runde 2",
+  "cache_lesen": 414843,
+  "cache_schreiben": 82391,
+  "themen": 1,
+  "thema": [
+   "plus-zehner-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 16,
+  "ausgabe": 16244,
+  "einheit": "tokens",
+  "menge": 759295,
+  "notiz": "plus-einer-ohne-uebergang-bis-100, Prüfung Runde 1",
+  "cache_lesen": 641361,
+  "cache_schreiben": 101674,
+  "themen": 1,
+  "thema": [
+   "plus-einer-ohne-uebergang-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 14,
+  "ausgabe": 12102,
+  "einheit": "tokens",
+  "menge": 650700,
+  "notiz": "zehnerzahlen-plus-minus, Prüfung Runde 1",
+  "cache_lesen": 540886,
+  "cache_schreiben": 97698,
+  "themen": 1,
+  "thema": [
+   "zehnerzahlen-plus-minus"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 14,
+  "ausgabe": 10367,
+  "einheit": "tokens",
+  "menge": 650879,
+  "notiz": "zehnerzahlen-plus-minus, Prüfung Runde 2",
+  "cache_lesen": 543088,
+  "cache_schreiben": 97410,
+  "themen": 1,
+  "thema": [
+   "zehnerzahlen-plus-minus"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 12,
+  "ausgabe": 11924,
+  "einheit": "tokens",
+  "menge": 537392,
+  "notiz": "plus-zweistellig-ohne-uebergang, Prüfung Runde 1",
+  "cache_lesen": 432497,
+  "cache_schreiben": 92959,
+  "themen": 1,
+  "thema": [
+   "plus-zweistellig-ohne-uebergang"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 138,
+  "ausgabe": 71812,
+  "einheit": "tokens",
+  "menge": 11646755,
+  "notiz": "4 Plus-Themen bis 100, Recherche, Schreiben, Überarbeitung, Steuerung",
+  "cache_lesen": 11322351,
+  "cache_schreiben": 252454,
+  "themen": 4,
+  "thema": [
+   "zehnerzahlen-plus-minus",
+   "plus-zehner-bis-100",
+   "plus-einer-ohne-uebergang-bis-100",
+   "plus-zweistellig-ohne-uebergang"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 546,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ergaenzen-zum-zehner.png",
+  "themen": 1,
+  "thema": [
+   "ergaenzen-zum-zehner"
+  ],
+  "usage": {
+   "input_tokens": 546,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 546
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2302
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 581,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ergaenzen-zum-zehner.png",
+  "themen": 1,
+  "thema": [
+   "ergaenzen-zum-zehner"
+  ],
+  "usage": {
+   "input_tokens": 581,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 581
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2337
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 16,
+  "ausgabe": 8951,
+  "einheit": "tokens",
+  "menge": 558866,
+  "notiz": "ergaenzen-zum-zehner, Prüfung Runde 1",
+  "cache_lesen": 469613,
+  "cache_schreiben": 80286,
+  "themen": 1,
+  "thema": [
+   "ergaenzen-zum-zehner"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 16,
+  "ausgabe": 11472,
+  "einheit": "tokens",
+  "menge": 590884,
+  "notiz": "ergaenzen-zum-zehner, Prüfung Runde 2",
+  "cache_lesen": 505821,
+  "cache_schreiben": 73575,
+  "themen": 1,
+  "thema": [
+   "ergaenzen-zum-zehner"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 564,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ergaenzen-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "ergaenzen-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 564,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 564
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2320
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 573,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "ergaenzen-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "ergaenzen-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 573,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 573
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2329
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 12,
+  "ausgabe": 14798,
+  "einheit": "tokens",
+  "menge": 515605,
+  "notiz": "ergaenzen-bis-100, Prüfung Runde 1",
+  "cache_lesen": 405243,
+  "cache_schreiben": 95552,
+  "themen": 1,
+  "thema": [
+   "ergaenzen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 19857,
+  "einheit": "tokens",
+  "menge": 843534,
+  "notiz": "ergaenzen-bis-100, Prüfung Runde 2",
+  "cache_lesen": 720627,
+  "cache_schreiben": 103032,
+  "themen": 1,
+  "thema": [
+   "ergaenzen-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 579,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-ueber-den-zehner-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 579,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 579
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2335
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 606,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-ueber-den-zehner-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 606,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 606
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2362
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 594,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-ueber-den-zehner-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 594,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 594
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2350
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 10,
+  "ausgabe": 7133,
+  "einheit": "tokens",
+  "menge": 345128,
+  "notiz": "plus-ueber-den-zehner-bis-100, Prüfung Runde 1",
+  "cache_lesen": 267747,
+  "cache_schreiben": 70238,
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 10810,
+  "einheit": "tokens",
+  "menge": 622979,
+  "notiz": "plus-ueber-den-zehner-bis-100, Prüfung Runde 2",
+  "cache_lesen": 537380,
+  "cache_schreiben": 74771,
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-sonnet-5-5",
+  "eingabe": 18,
+  "ausgabe": 13574,
+  "einheit": "tokens",
+  "menge": 633021,
+  "notiz": "plus-ueber-den-zehner-bis-100, Prüfung Runde 3",
+  "cache_lesen": 541664,
+  "cache_schreiben": 77765,
+  "themen": 1,
+  "thema": [
+   "plus-ueber-den-zehner-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 218,
+  "ausgabe": 88670,
+  "einheit": "tokens",
+  "menge": 20282751,
+  "notiz": "ergaenzen-zum-zehner, ergaenzen-bis-100, plus-ueber-den-zehner-bis-100: Recherche, Schreiben, Überarbeitung, Fotos, Steuerung",
+  "cache_lesen": 19921878,
+  "cache_schreiben": 271985,
+  "themen": 3,
+  "thema": [
+   "ergaenzen-zum-zehner",
+   "ergaenzen-bis-100",
+   "plus-ueber-den-zehner-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 529,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-bis-30.png",
+  "themen": 1,
+  "thema": [
+   "plus-bis-30"
+  ],
+  "usage": {
+   "input_tokens": 529,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 529
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2285
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 588,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-bis-30.png",
+  "themen": 1,
+  "thema": [
+   "plus-bis-30"
+  ],
+  "usage": {
+   "input_tokens": 588,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 588
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2344
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 572,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-bis-30.png",
+  "themen": 1,
+  "thema": [
+   "plus-bis-30"
+  ],
+  "usage": {
+   "input_tokens": 572,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 572
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2328
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 74,
+  "ausgabe": 34935,
+  "einheit": "tokens",
+  "menge": 4600952,
+  "notiz": "plus-bis-30, Recherche und Schreiben",
+  "cache_lesen": 4400294,
+  "cache_schreiben": 165649,
+  "themen": 1,
+  "thema": [
+   "plus-bis-30"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 15525,
+  "einheit": "tokens",
+  "menge": 919331,
+  "notiz": "plus-bis-30, Prüfung Runde 1",
+  "cache_lesen": 809815,
+  "cache_schreiben": 93967,
+  "themen": 1,
+  "thema": [
+   "plus-bis-30"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 18196,
+  "einheit": "tokens",
+  "menge": 1239996,
+  "notiz": "plus-bis-30, Prüfung Runde 2",
+  "cache_lesen": 1124302,
+  "cache_schreiben": 97468,
+  "themen": 1,
+  "thema": [
+   "plus-bis-30"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 24,
+  "ausgabe": 16744,
+  "einheit": "tokens",
+  "menge": 906290,
+  "notiz": "plus-bis-30, Prüfung Runde 3",
+  "cache_lesen": 798201,
+  "cache_schreiben": 91321,
+  "themen": 1,
+  "thema": [
+   "plus-bis-30"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 542,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-zweistellig-mit-uebergang.png",
+  "themen": 1,
+  "thema": [
+   "plus-zweistellig-mit-uebergang"
+  ],
+  "usage": {
+   "input_tokens": 542,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 542
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2298
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 74,
+  "ausgabe": 48772,
+  "einheit": "tokens",
+  "menge": 4928989,
+  "notiz": "plus-zweistellig-mit-uebergang, Recherche und Schreiben",
+  "cache_lesen": 4699535,
+  "cache_schreiben": 180608,
+  "themen": 1,
+  "thema": [
+   "plus-zweistellig-mit-uebergang"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 30,
+  "ausgabe": 14789,
+  "einheit": "tokens",
+  "menge": 1168979,
+  "notiz": "plus-zweistellig-mit-uebergang, Prüfung Runde 1",
+  "cache_lesen": 1069542,
+  "cache_schreiben": 84618,
+  "themen": 1,
+  "thema": [
+   "plus-zweistellig-mit-uebergang"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "bild",
+  "posten": "bild",
+  "modell": "gpt-image-2-5-sunburst",
+  "eingabe": 577,
+  "ausgabe": 1756,
+  "einheit": "bilder",
+  "menge": 1,
+  "notiz": "plus-bis-100.png",
+  "themen": 1,
+  "thema": [
+   "plus-bis-100"
+  ],
+  "usage": {
+   "input_tokens": 577,
+   "input_tokens_details": {
+    "image_tokens": 0,
+    "text_tokens": 577
+   },
+   "output_tokens": 1756,
+   "output_tokens_details": {
+    "image_tokens": 1756,
+    "text_tokens": 0
+   },
+   "total_tokens": 2333
+  }
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "schreiben",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 68,
+  "ausgabe": 37999,
+  "einheit": "tokens",
+  "menge": 3769300,
+  "notiz": "plus-bis-100, Recherche und Schreiben",
+  "cache_lesen": 3590191,
+  "cache_schreiben": 141042,
+  "themen": 1,
+  "thema": [
+   "plus-bis-100"
+  ]
+ },
+ {
+  "datum": "2026-11-22",
+  "phase": "pruefung",
+  "posten": "claude",
+  "modell": "claude-opus-5-5",
+  "eingabe": 20,
+  "ausgabe": 15426,
+  "einheit": "tokens",
+  "menge": 741423,
+  "notiz": "plus-bis-100, Prüfung Runde 1",
+  "cache_lesen": 636865,
+  "cache_schreiben": 89112,
+  "themen": 1,
+  "thema": [
+   "plus-bis-100"
+  ]
  }
 ]

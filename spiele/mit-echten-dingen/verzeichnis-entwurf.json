@@ -238,6 +238,46 @@
    "datei": "schreiben/endung-er.md",
    "foto": "schreiben/bilder/endung-er.webp"
   },
+  "ergaenzen-bis-100": {
+   "fach": "mathe",
+   "name": "Ergänzen bis 100",
+   "titel": "Wie viel fehlt bis 100?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Ein Meter Schnur"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Trippeln und große Schritte"
+    },
+    {
+     "situation": "unterwegs",
+     "name": "Rückgeld beim Bäcker"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/ergaenzen-bis-100.md",
+   "foto": "mathe/bilder/ergaenzen-bis-100.webp"
+  },
+  "ergaenzen-zum-zehner": {
+   "fach": "mathe",
+   "name": "Bis zum nächsten Zehner",
+   "titel": "Bis zum nächsten Zehner",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Der Bügel wird voll"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Finger zeigen, Lücke hüpfen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/ergaenzen-zum-zehner.md",
+   "foto": "mathe/bilder/ergaenzen-zum-zehner.webp"
+  },
   "fuenferreihe": {
    "fach": "mathe",
    "name": "Fünferreihe",
@@ -447,6 +487,24 @@
    "entwurf": false,
    "datei": "grammatik/grundform-verb.md",
    "foto": "grammatik/bilder/grundform-verb.webp"
+  },
+  "hilfsaufgabe-plus-minus": {
+   "fach": "mathe",
+   "name": "Mit dem Nachbarzehner rechnen",
+   "titel": "Rechnen mit dem Nachbarzehner",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Mit drei Zehnern bezahlen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Ein Sprung zu weit"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/hilfsaufgabe-plus-minus.md",
+   "foto": "mathe/bilder/hilfsaufgabe-plus-minus.webp"
   },
   "laute-am-wortanfang": {
    "fach": "schreiben",
@@ -690,6 +748,60 @@
    "datei": "mathe/plus-0-und-1.md",
    "foto": "mathe/bilder/plus-0-und-1.webp"
   },
+  "plus-bis-100": {
+   "fach": "mathe",
+   "name": "Plus bis 100",
+   "titel": "Zwei Preise im Kopf zusammen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Die Kasse rechnet"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Riesenschritt und Hüpfer"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-bis-100.md",
+   "foto": "mathe/bilder/plus-bis-100.webp"
+  },
+  "plus-bis-30": {
+   "fach": "mathe",
+   "name": "Plus bis 30",
+   "titel": "Erst den Zehner voll",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Punkte an den Bügel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Bis an den Schal"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-bis-30.md",
+   "foto": "mathe/bilder/plus-bis-30.webp"
+  },
+  "plus-einer-ohne-uebergang-bis-100": {
+   "fach": "mathe",
+   "name": "Einer dazu ohne Übergang",
+   "titel": "Ein paar dazu, der Zehner bleibt",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Wohin kommt das Lesezeichen?"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Klatschen dazu"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-einer-ohne-uebergang-bis-100.md",
+   "foto": "mathe/bilder/plus-einer-ohne-uebergang-bis-100.webp"
+  },
   "plus-mit-5": {
    "fach": "mathe",
    "name": "Plus mit 5",
@@ -707,6 +819,78 @@
    "entwurf": false,
    "datei": "mathe/plus-mit-5.md",
    "foto": "mathe/bilder/plus-mit-5.webp"
+  },
+  "plus-ueber-den-zehner-bis-100": {
+   "fach": "mathe",
+   "name": "Einer dazu über den Zehner",
+   "titel": "Über den Zehner hinaus",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Würfelweg auf dem Zollstock"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Hüpfen mit Zehnerstopp"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-ueber-den-zehner-bis-100.md",
+   "foto": "mathe/bilder/plus-ueber-den-zehner-bis-100.webp"
+  },
+  "plus-zehner-bis-100": {
+   "fach": "mathe",
+   "name": "Zehner dazu",
+   "titel": "Zehner dazu",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zehner ins Sparglas"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Das Klatschen bleibt"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-zehner-bis-100.md",
+   "foto": "mathe/bilder/plus-zehner-bis-100.webp"
+  },
+  "plus-zweistellig-mit-uebergang": {
+   "fach": "mathe",
+   "name": "Große Zahlen plus mit Übergang",
+   "titel": "Zehn Einer werden ein neuer Zehner",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zehn in ein Bündel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zehn Klatscher, ein Hüpfer"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-zweistellig-mit-uebergang.md",
+   "foto": "mathe/bilder/plus-zweistellig-mit-uebergang.webp"
+  },
+  "plus-zweistellig-ohne-uebergang": {
+   "fach": "mathe",
+   "name": "Große Zahlen plus ohne Übergang",
+   "titel": "Zwei große Zahlen zusammen",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kleingeld zusammenlegen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Erst stampfen, dann klatschen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/plus-zweistellig-ohne-uebergang.md",
+   "foto": "mathe/bilder/plus-zweistellig-ohne-uebergang.webp"
   },
   "pronomen-statt-nomen": {
    "fach": "grammatik",
@@ -743,6 +927,24 @@
    "entwurf": false,
    "datei": "schreiben/schreiben-mit-anlauttabelle.md",
    "foto": "schreiben/bilder/schreiben-mit-anlauttabelle.webp"
+  },
+  "schrittweise-rechenstrich": {
+   "fach": "mathe",
+   "name": "Schritt für Schritt am Rechenstrich",
+   "titel": "Erst die Zehner, dann die Einer",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Ein Lesezeichen für das Ziel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Große Sprünge, ein Hüpfer"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/schrittweise-rechenstrich.md",
+   "foto": "mathe/bilder/schrittweise-rechenstrich.webp"
   },
   "schwung-kreis-linksherum": {
    "fach": "schreiben",
@@ -921,6 +1123,24 @@
    "entwurf": false,
    "datei": "schreiben/silben-schwingen-beim-schreiben.md",
    "foto": "schreiben/bilder/silben-schwingen-beim-schreiben.webp"
+  },
+  "stellenweise-rechnen": {
+   "fach": "mathe",
+   "name": "Zehner extra, Einer extra",
+   "titel": "Zehner zu Zehnern, Einer zu Einern",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Kleingeld zusammenlegen"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Stampfen und Klatschen"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/stellenweise-rechnen.md",
+   "foto": "mathe/bilder/stellenweise-rechnen.webp"
   },
   "stifthaltung": {
    "fach": "schreiben",
@@ -1253,6 +1473,24 @@
    "entwurf": false,
    "datei": "mathe/zehnerzahlen-bis-100.md",
    "foto": "mathe/bilder/zehnerzahlen-bis-100.webp"
+  },
+  "zehnerzahlen-plus-minus": {
+   "fach": "mathe",
+   "name": "Zehnerzahlen plus und minus",
+   "titel": "Zehner plus Zehner",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Zehner im Geldbeutel"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Zehnerschritte im Flur"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/zehnerzahlen-plus-minus.md",
+   "foto": "mathe/bilder/zehnerzahlen-plus-minus.webp"
   },
   "zerlegen-10": {
    "fach": "mathe",

@@ -224,5 +224,9 @@ Rot → überarbeiten, höchstens 3 Runden; danach parken mit Befunden.
   Seite (`#ls-blatt`), misst und setzt es eine Schriftstufe kleiner, wenn es länger als eine Seite ist (passt es dann
   nicht, folgt eine zweite Seite; keine Form wird geteilt), und druckt über `drucke()` in `spiele/kern/geraet.js`
   (Fähigkeit `drucken`: Browser und Desktop ja, Android/iOS nein).
+- **Sammel-PDF mehrerer Themen (2026-11-22):** `npm run echte-dinge:pdf -- --ziel <datei.pdf> <thema-id> …`
+  (`werkzeuge/echte-dinge/pdf.mjs`, mit `NODE_PATH` auf ein Playwright außerhalb des Repos) ruft je Thema dasselbe
+  `druckeAnleitung()` im Headless-Chromium auf und fügt die Blätter mit `pdfunite` in der genannten Reihenfolge zusammen;
+  Themen ohne freigegebene Anleitung werden übersprungen und gemeldet.
 - **Skill:** `.claude/skills/mit-echten-dingen/SKILL.md` (Recherche → Ideen → Schreiben → Bild → Prüfung E1–E12 durch einen
   frischen Agenten → höchstens 3 Runden → Datei, Verzeichnis, Kosten in `spiele/mit-echten-dingen/kosten.json`).
