@@ -379,6 +379,7 @@ function baueSzene(n, stufe) {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "perle";
+      b.tabIndex = 0; // WebKit (Safari, macOS-Vorgabe) erreicht Knöpfe nur mit tabindex
       b.id = `perle-${s * SCHNUR + p}`;
       b.setAttribute("aria-label", `Perle ${s * SCHNUR + p + 1}`);
       // Die Marke nach der fünften Perle sitzt an der sechsten und rutscht mit ihr.
@@ -993,11 +994,11 @@ function stelleAufgabe(aufgabe, melde) {
     if (loesungGezeigt) lauf.then(() => (kopf ? markiereNaechste() : perleMarkieren(n)));
   };
 
-  if (!kopf) {
-    beiPerle = (k) => legeFest(k);
-  } else {
-    beiPerle = null;
-  }
+  // Die Bedienung der Schnur; nach der Anleitung (Einführung mitten in der Aufgabe) bindet sie sich neu.
+  const bindePerlen = () => {
+    beiPerle = kopf ? null : (k) => legeFest(k);
+  };
+  bindePerlen();
 
   /** @param {string} taste */
   const beiTaste = (taste) => {
@@ -1054,6 +1055,7 @@ function stelleAufgabe(aufgabe, melde) {
     async zeigeWieder() {
       baueSzene(n, stufe);
       zeigeAnfang();
+      if (!fertig) bindePerlen();
       if (hilfeGezeigt || loesungGezeigt) this.hilfe(loesungGezeigt ? 2 : 1);
     },
     /** @param {1 | 2} hilfeStufe */
