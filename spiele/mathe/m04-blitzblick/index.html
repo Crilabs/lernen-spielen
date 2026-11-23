@@ -101,7 +101,7 @@
     transition: transform 0.3s cubic-bezier(0.3, 1.5, 0.5, 1), background-color 0.25s, box-shadow 0.25s;
   }
   .perle::before { content: ""; position: absolute; inset: -2.2rem -0.5rem; border-radius: 50%; }
-  .perle:focus-visible { outline: none; }
+  .perle:focus-visible { outline: 0.8rem solid var(--ls-sonne); box-shadow: 0 0 0 1.1rem var(--ls-tinte); }
   .perle.geschoben { transform: translateX(calc(-1 * var(--rutsch))); }
   .perle.leuchtet { background: var(--farbe); box-shadow: 0 0 2.2rem 0.4rem color-mix(in srgb, var(--farbe) 70%, #FFF6B0); }
   .perle.dunkel { background: radial-gradient(circle at 36% 30%, #B7BAD2 0 11%, #8A8EAD 42%, #6A6E90 100%); }
