@@ -646,6 +646,21 @@
    "h": "5e9f58eb7a",
    "gehoert": true
   },
+  "Acht Glühwürmchen haben keine Perle.": {
+   "datei": "livia/91903b86bb0f.mp3",
+   "h": "e4ff6a60dd",
+   "gehoert": false
+  },
+  "Acht Glühwürmchen, acht Perlen.": {
+   "datei": "livia/8b8d873ed08a.mp3",
+   "h": "549b36c7fe",
+   "gehoert": false
+  },
+  "Acht Perlen bleiben dunkel.": {
+   "datei": "livia/6ee70bd20224.mp3",
+   "h": "d9c0524ac0",
+   "gehoert": false
+  },
   "Acht Perlen.": {
    "datei": "florian/a26ba183fa9d.mp3",
    "h": "ad467df35c",
@@ -681,6 +696,16 @@
    "h": "454c1f2552",
    "gehoert": false
   },
+  "Achtzehn Glühwürmchen haben keine Perle.": {
+   "datei": "livia/82dc61a138ee.mp3",
+   "h": "92a06d9cf8",
+   "gehoert": false
+  },
+  "Achtzehn Glühwürmchen, achtzehn Perlen.": {
+   "datei": "livia/be783be4654c.mp3",
+   "h": "0c4a334f1d",
+   "gehoert": false
+  },
   "Achtzehn minus acht ist zehn.": {
    "datei": "florian/51be0b3e8aff.mp3",
    "h": "234afb21ad",
@@ -699,6 +724,11 @@
   "Achtzehn minus zehn.": {
    "datei": "florian/f95ec82356f7.mp3",
    "h": "3154ece557",
+   "gehoert": false
+  },
+  "Achtzehn Perlen bleiben dunkel.": {
+   "datei": "livia/df4559f128cf.mp3",
+   "h": "030b3f85d7",
    "gehoert": false
   },
   "Achtzehn.": {
@@ -1176,6 +1206,11 @@
    "h": "c01d01f85a",
    "gehoert": false
   },
+  "Auf jede Perle setzt sich ein Glühwürmchen.": {
+   "datei": "livia/f14ad3e93a1b.mp3",
+   "h": "417f41f255",
+   "gehoert": false
+  },
   "Auf sein lautes Bellen": {
    "datei": "livia/da5693845445.mp3",
    "h": "c9a62c4570",
@@ -1509,6 +1544,11 @@
   "Blatt gestalten": {
    "datei": "florian/6484f488969c.mp3",
    "h": "5d069aeaf2",
+   "gehoert": false
+  },
+  "Blitzblick": {
+   "datei": "livia/87815d532178.mp3",
+   "h": "9085758694",
    "gehoert": false
   },
   "Blitzrechnen": {
@@ -4546,6 +4586,31 @@
    "h": "7ca157489b",
    "gehoert": false
   },
+  "Drei Glühwürmchen haben keine Perle.": {
+   "datei": "livia/ea78f35aff2c.mp3",
+   "h": "0f44396f4b",
+   "gehoert": false
+  },
+  "Drei Glühwürmchen, drei Perlen.": {
+   "datei": "livia/26051792e3a0.mp3",
+   "h": "60c209108d",
+   "gehoert": false
+  },
+  "Drei Lichter in einer Reihe.": {
+   "datei": "livia/1750c677a86c.mp3",
+   "h": "2f7f3cd995",
+   "gehoert": false
+  },
+  "Drei Perlen bleiben dunkel.": {
+   "datei": "livia/7fd19a60d102.mp3",
+   "h": "96aa3bacef",
+   "gehoert": false
+  },
+  "Drei Perlen rutschen zu ihm.": {
+   "datei": "livia/f30c2be83d4e.mp3",
+   "h": "74ea635a92",
+   "gehoert": false
+  },
   "Drei Perlen.": {
    "datei": "florian/5e364f74bc52.mp3",
    "h": "2ed8c57593",
@@ -4586,6 +4651,16 @@
    "h": "b780417828",
    "gehoert": false
   },
+  "Dreizehn Glühwürmchen haben keine Perle.": {
+   "datei": "livia/4ae6c568d35d.mp3",
+   "h": "ea73ff458e",
+   "gehoert": false
+  },
+  "Dreizehn Glühwürmchen, dreizehn Perlen.": {
+   "datei": "livia/f837c1d18485.mp3",
+   "h": "933ac98efd",
+   "gehoert": false
+  },
   "Dreizehn minus drei ist zehn.": {
    "datei": "florian/b4d4a51109ce.mp3",
    "h": "a760d35541",
@@ -4604,6 +4679,11 @@
   "Dreizehn minus zehn.": {
    "datei": "florian/f9b19217b73a.mp3",
    "h": "8e56794357",
+   "gehoert": false
+  },
+  "Dreizehn Perlen bleiben dunkel.": {
+   "datei": "livia/01f273574ef6.mp3",
+   "h": "5fa3cb52fc",
    "gehoert": false
   },
   "Dreizehn.": {
@@ -4801,6 +4881,11 @@
    "h": "7f76624e70",
    "gehoert": false
   },
+  "Du tippst die Zahl.": {
+   "datei": "livia/07996272391a.mp3",
+   "h": "7802303586",
+   "gehoert": false
+  },
   "Du tupfe.": {
    "datei": "livia/db637fb7034a.mp3",
    "h": "3abab4c9b2",
@@ -4916,6 +5001,16 @@
    "h": "fb4dec3782",
    "gehoert": false
   },
+  "Ein Glühwürmchen hat keine Perle.": {
+   "datei": "livia/112ee4a1b7c5.mp3",
+   "h": "ce855dce45",
+   "gehoert": false
+  },
+  "Ein Glühwürmchen, eine Perle.": {
+   "datei": "livia/55e76fa8af07.mp3",
+   "h": "c2dfb05336",
+   "gehoert": false
+  },
   "Ein großer, starker Bulle": {
    "datei": "livia/c30b189d35de.mp3",
    "h": "1444a9e3cf",
@@ -4940,6 +5035,11 @@
    "datei": "livia/010ef0f87758.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Ein Licht in einer Reihe.": {
+   "datei": "livia/70d83d46cbc5.mp3",
+   "h": "689a68bccb",
+   "gehoert": false
   },
   "Ein paar Monate sind vergangen. Das Kalb ist gewachsen und hat eine Speckschicht bekommen. Eines Tages schwimmt Mira los, immer weiter nach Süden. Ihr Kalb bleibt dicht an ihrer Seite. Sie schwimmen Tag und Nacht, Woche um Woche. Mira hat seit Monaten fast nichts gefressen. Trotzdem schwimmt sie weiter und weiter, an der langen Küste Australiens vorbei. Was glaubst du: Warum macht Mira diese weite Reise?": {
    "datei": "livia/57c6f68955f6.mp3",
@@ -5041,6 +5141,11 @@
    "h": "e45a4b0001",
    "gehoert": false
   },
+  "Eine Perle bleibt dunkel.": {
+   "datei": "livia/ffb051a98fc6.mp3",
+   "h": "8e416a9c57",
+   "gehoert": false
+  },
   "Eine Perle schläft bei Ela. Neun Perlen schlafen bei Kofi. Bei Kofi wird es eng.": {
    "datei": "livia/f8344ce7f180.mp3",
    "hand": true,
@@ -5105,6 +5210,31 @@
    "datei": "livia/9337410b6879.mp3",
    "hand": true,
    "gehoert": true
+  },
+  "Eine volle Reihe und noch drei.": {
+   "datei": "livia/a0f871b8e6ef.mp3",
+   "h": "396265816b",
+   "gehoert": false
+  },
+  "Eine volle Reihe und noch eins.": {
+   "datei": "livia/ea018512ba9e.mp3",
+   "h": "dbd1ad2e90",
+   "gehoert": false
+  },
+  "Eine volle Reihe und noch fünf.": {
+   "datei": "livia/df82dd124830.mp3",
+   "h": "aa305395dc",
+   "gehoert": false
+  },
+  "Eine volle Reihe und noch vier.": {
+   "datei": "livia/e0ecdba1b64e.mp3",
+   "h": "79d8874b1a",
+   "gehoert": false
+  },
+  "Eine volle Reihe und noch zwei.": {
+   "datei": "livia/d0acef6c9316.mp3",
+   "h": "10abc946d6",
+   "gehoert": false
   },
   "Eine zuckende Schwanzspitze ist ein frühes Stopp-Zeichen. Dann hört man auf und nimmt die Hand ruhig weg.": {
    "datei": "livia/5c110f45abe9.mp3",
@@ -5296,6 +5426,16 @@
    "hand": true,
    "gehoert": true
   },
+  "Elf Glühwürmchen haben keine Perle.": {
+   "datei": "livia/c9aabf01e51b.mp3",
+   "h": "8001ba36bc",
+   "gehoert": false
+  },
+  "Elf Glühwürmchen, elf Perlen.": {
+   "datei": "livia/a2dec51e09ee.mp3",
+   "h": "0eefeb1946",
+   "gehoert": false
+  },
   "Elf minus eins ist zehn.": {
    "datei": "florian/260c6442e9fc.mp3",
    "h": "26b6ccf74c",
@@ -5314,6 +5454,11 @@
   "Elf minus zehn.": {
    "datei": "florian/241afda8b738.mp3",
    "h": "b9c4d3ac52",
+   "gehoert": false
+  },
+  "Elf Perlen bleiben dunkel.": {
+   "datei": "livia/530f2f31151d.mp3",
+   "h": "78b0a372fb",
    "gehoert": false
   },
   "Elf.": {
@@ -5379,6 +5524,11 @@
   "Er … tupfen.": {
    "datei": "livia/9720b86946c3.mp3",
    "h": "5c8dc75ad9",
+   "gehoert": false
+  },
+  "Er bastelt daraus eine Leuchtkette.": {
+   "datei": "livia/e2d6d90c20c2.mp3",
+   "h": "3301bb96be",
    "gehoert": false
   },
   "Er baue.": {
@@ -5931,6 +6081,11 @@
    "h": "c3a9e11ed9",
    "gehoert": false
   },
+  "Fehlt eine Perle, sucht ein Glühwürmchen.": {
+   "datei": "livia/d8688fad7460.mp3",
+   "h": "7ff524d045",
+   "gehoert": false
+  },
   "Fertig": {
    "datei": "florian/708ad54eca23.mp3",
    "h": "2029acf332",
@@ -6056,6 +6211,26 @@
    "hand": true,
    "gehoert": true
   },
+  "Fünf Glühwürmchen haben keine Perle.": {
+   "datei": "livia/d742aae23a5c.mp3",
+   "h": "8139e45e36",
+   "gehoert": false
+  },
+  "Fünf Glühwürmchen, fünf Perlen.": {
+   "datei": "livia/7360f51d8a64.mp3",
+   "h": "3241105655",
+   "gehoert": false
+  },
+  "Fünf Lichter in einer Reihe.": {
+   "datei": "livia/cc86b3d11df8.mp3",
+   "h": "d220c2334f",
+   "gehoert": false
+  },
+  "Fünf Perlen bleiben dunkel.": {
+   "datei": "livia/0216226d0f9a.mp3",
+   "h": "7a7fe037c9",
+   "gehoert": false
+  },
   "Fünf Perlen.": {
    "datei": "florian/cbf1692d6b5a.mp3",
    "h": "4b0de295b8",
@@ -6081,6 +6256,16 @@
    "h": "f7673e93ef",
    "gehoert": false
   },
+  "Fünfzehn Glühwürmchen haben keine Perle.": {
+   "datei": "livia/ca72d8a3ab5b.mp3",
+   "h": "039d85ff14",
+   "gehoert": false
+  },
+  "Fünfzehn Glühwürmchen, fünfzehn Perlen.": {
+   "datei": "livia/8ffc8df90592.mp3",
+   "h": "76ec67f834",
+   "gehoert": false
+  },
   "Fünfzehn minus fünf ist zehn.": {
    "datei": "florian/52ac7b593cea.mp3",
    "h": "07376eab99",
@@ -6099,6 +6284,11 @@
   "Fünfzehn minus zehn.": {
    "datei": "florian/cadcdb2f8479.mp3",
    "h": "c29ac1e8ac",
+   "gehoert": false
+  },
+  "Fünfzehn Perlen bleiben dunkel.": {
+   "datei": "livia/85b37b087a93.mp3",
+   "h": "208b0fa7c3",
    "gehoert": false
   },
   "Fünfzehn.": {
@@ -6394,6 +6584,11 @@
   "Gleich große Gruppen": {
    "datei": "florian/cd0346a6acfa.mp3",
    "h": "3fdddcd8ee",
+   "gehoert": false
+  },
+  "Gleich hebt er kurz den Deckel.": {
+   "datei": "livia/f67ed5a1f418.mp3",
+   "h": "8b37c52d1d",
    "gehoert": false
   },
   "Gleich ist für heute Schluss.": {
@@ -8266,6 +8461,11 @@
    "h": "410e65c69a",
    "gehoert": false
   },
+  "Jetzt du. Tippe auf diese Perle.": {
+   "datei": "livia/4652b6f6b378.mp3",
+   "h": "f3ee116bcb",
+   "gehoert": false
+  },
   "Jetzt fährt Lena nur auf Tipp vor.": {
    "datei": "livia/49378dc99e9f.mp3",
    "h": "bfa93e5b31",
@@ -8686,9 +8886,19 @@
    "h": "df5e193f3f",
    "gehoert": false
   },
+  "Kofi hält jetzt die Schnur.": {
+   "datei": "livia/0646457ca9f3.mp3",
+   "h": "762467626e",
+   "gehoert": false
+  },
   "Kofi hat einen langen und einen kurzen Stab. Daraus baut er eine Brücke.": {
    "datei": "florian/d8a9ec31d454.mp3",
    "h": "3f781d7a94",
+   "gehoert": false
+  },
+  "Kofi hat Glühwürmchen in seinem Glas.": {
+   "datei": "livia/86150b63fa64.mp3",
+   "h": "efff2a4ddd",
    "gehoert": false
   },
   "Kofi hat Wörter auf den Hof gemalt.": {
@@ -8716,6 +8926,11 @@
    "h": "ffa007e79b",
    "gehoert": false
   },
+  "Kofi öffnet das Glas noch einmal.": {
+   "datei": "livia/5930e364e3fe.mp3",
+   "h": "21767f9fd8",
+   "gehoert": false
+  },
   "Kofi schaut dich an.": {
    "datei": "livia/956fbba23592.mp3",
    "h": "7e42e87e80",
@@ -8724,6 +8939,11 @@
   "Kofi springt über den kleinen Bach.": {
    "datei": "florian/d0067abd1974.mp3",
    "h": "4e94bf57a7",
+   "gehoert": false
+  },
+  "Kofi tippt auf die dritte Perle.": {
+   "datei": "livia/8d2d0d816ce8.mp3",
+   "h": "0d90bb1385",
    "gehoert": false
   },
   "Kofi zeigt auf das Wort.": {
@@ -10236,6 +10456,21 @@
    "h": "63866ef5e1",
    "gehoert": false
   },
+  "Neun Glühwürmchen haben keine Perle.": {
+   "datei": "livia/3ec83f505fd0.mp3",
+   "h": "62df67f2c0",
+   "gehoert": false
+  },
+  "Neun Glühwürmchen, neun Perlen.": {
+   "datei": "livia/0461745c02fb.mp3",
+   "h": "385f0d8a09",
+   "gehoert": false
+  },
+  "Neun Perlen bleiben dunkel.": {
+   "datei": "livia/c4f7c6d008fb.mp3",
+   "h": "930abc2180",
+   "gehoert": false
+  },
   "Neun Perlen.": {
    "datei": "florian/074173abbbb8.mp3",
    "h": "35cda2b410",
@@ -10261,6 +10496,16 @@
    "h": "b7bd90c40f",
    "gehoert": false
   },
+  "Neunzehn Glühwürmchen haben keine Perle.": {
+   "datei": "livia/ab328dd1c9ff.mp3",
+   "h": "01dd11984c",
+   "gehoert": false
+  },
+  "Neunzehn Glühwürmchen, neunzehn Perlen.": {
+   "datei": "livia/97e372d32be1.mp3",
+   "h": "9c56eeab7e",
+   "gehoert": false
+  },
   "Neunzehn minus neun ist zehn.": {
    "datei": "florian/10346467022c.mp3",
    "h": "345fec2386",
@@ -10279,6 +10524,11 @@
   "Neunzehn minus zehn.": {
    "datei": "florian/f676f4f53ba4.mp3",
    "h": "7ebb6dcd07",
+   "gehoert": false
+  },
+  "Neunzehn Perlen bleiben dunkel.": {
+   "datei": "livia/c1c9a5feaa6e.mp3",
+   "h": "bbb8582dc5",
    "gehoert": false
   },
   "Neunzehn.": {
@@ -10529,6 +10779,56 @@
   "Oben steht eine Aufgabe.": {
    "datei": "florian/75edd18160ca.mp3",
    "h": "5c29709919",
+   "gehoert": false
+  },
+  "Oben voll, unten acht.": {
+   "datei": "livia/9663389767d3.mp3",
+   "h": "946921a1fa",
+   "gehoert": false
+  },
+  "Oben voll, unten drei.": {
+   "datei": "livia/401ce0412b34.mp3",
+   "h": "1203544a8d",
+   "gehoert": false
+  },
+  "Oben voll, unten eins.": {
+   "datei": "livia/97e38fd758a9.mp3",
+   "h": "ccdc34fd05",
+   "gehoert": false
+  },
+  "Oben voll, unten fünf.": {
+   "datei": "livia/55b2a57810d9.mp3",
+   "h": "f871c58d49",
+   "gehoert": false
+  },
+  "Oben voll, unten neun.": {
+   "datei": "livia/698c86c79502.mp3",
+   "h": "ab7834664e",
+   "gehoert": false
+  },
+  "Oben voll, unten sechs.": {
+   "datei": "livia/17ecb2b2487c.mp3",
+   "h": "99118ee725",
+   "gehoert": false
+  },
+  "Oben voll, unten sieben.": {
+   "datei": "livia/4b2b18f0c20c.mp3",
+   "h": "06128b64bb",
+   "gehoert": false
+  },
+  "Oben voll, unten vier.": {
+   "datei": "livia/4621ffc32090.mp3",
+   "h": "dceccda44a",
+   "gehoert": false
+  },
+  "Oben voll, unten zehn.": {
+   "datei": "livia/a72f71bef46c.mp3",
+   "h": "37be547c4b",
+   "gehoert": false
+  },
+  "Oben voll, unten zwei.": {
+   "datei": "livia/5f2b616095fb.mp3",
+   "h": "c3689a8379",
    "gehoert": false
   },
   "Oben weiter": {
@@ -11466,6 +11766,11 @@
    "hand": true,
    "gehoert": true
   },
+  "Schau genau hin.": {
+   "datei": "livia/9091a713158f.mp3",
+   "h": "5a53b628aa",
+   "gehoert": false
+  },
   "Schau in einen Spiegel und mach ein staunendes Gesicht. Was bewegt sich? Die Augenbrauen gehen hoch, die Stirn bekommt Falten, der Mund geht auf. Jetzt lach einmal. Die Wangen heben sich, und neben den Augen entstehen kleine Fältchen. Und nun rümpf die Nase. In deinem Gesicht stecken mehr als vierzig kleine Muskeln. Sie bewegen Stirn, Augen, Nase und Mund. So zeigt dein Gesicht, ob du dich freust, staunst oder ärgerst. Ein Lächeln verstehen Menschen auf der ganzen Welt, ganz ohne Worte.": {
    "datei": "livia/636d1c4e26b7.mp3",
    "h": "37a1065332",
@@ -11676,6 +11981,21 @@
    "h": "98fd5f8db9",
    "gehoert": false
   },
+  "Sechs Glühwürmchen haben keine Perle.": {
+   "datei": "livia/20a79491ead1.mp3",
+   "h": "bbfff448d0",
+   "gehoert": false
+  },
+  "Sechs Glühwürmchen, sechs Perlen.": {
+   "datei": "livia/818ba97bece9.mp3",
+   "h": "01d5a0a861",
+   "gehoert": false
+  },
+  "Sechs Perlen bleiben dunkel.": {
+   "datei": "livia/06e84ed0eaa9.mp3",
+   "h": "9d51ee7764",
+   "gehoert": false
+  },
   "Sechs Perlen.": {
    "datei": "florian/da5e0aa5172c.mp3",
    "h": "9b8480cd59",
@@ -11706,6 +12026,16 @@
    "h": "f7abc951f0",
    "gehoert": false
   },
+  "Sechzehn Glühwürmchen haben keine Perle.": {
+   "datei": "livia/fc277eb827a7.mp3",
+   "h": "844ddbb4f6",
+   "gehoert": false
+  },
+  "Sechzehn Glühwürmchen, sechzehn Perlen.": {
+   "datei": "livia/a7969cda784f.mp3",
+   "h": "c913387924",
+   "gehoert": false
+  },
   "Sechzehn minus sechs ist zehn.": {
    "datei": "florian/329af715aede.mp3",
    "h": "be3d7306cb",
@@ -11724,6 +12054,11 @@
   "Sechzehn minus zehn.": {
    "datei": "florian/dd242f823496.mp3",
    "h": "371f899af5",
+   "gehoert": false
+  },
+  "Sechzehn Perlen bleiben dunkel.": {
+   "datei": "livia/005199f3e56f.mp3",
+   "h": "eaaa405973",
    "gehoert": false
   },
   "Sechzehn.": {
@@ -12151,6 +12486,21 @@
    "h": "3732f14f42",
    "gehoert": false
   },
+  "Sieben Glühwürmchen haben keine Perle.": {
+   "datei": "livia/24f718ad52a4.mp3",
+   "h": "04ca940810",
+   "gehoert": false
+  },
+  "Sieben Glühwürmchen, sieben Perlen.": {
+   "datei": "livia/a5d09423c6d9.mp3",
+   "h": "a669d6c65b",
+   "gehoert": false
+  },
+  "Sieben Perlen bleiben dunkel.": {
+   "datei": "livia/f52a791ee965.mp3",
+   "h": "5dd7e2a839",
+   "gehoert": false
+  },
   "Sieben Perlen.": {
    "datei": "florian/d5ad9780edc2.mp3",
    "h": "64021066d1",
@@ -12181,6 +12531,16 @@
    "h": "44da7ede56",
    "gehoert": false
   },
+  "Siebzehn Glühwürmchen haben keine Perle.": {
+   "datei": "livia/2bf5b6be050c.mp3",
+   "h": "43d6f97dd3",
+   "gehoert": false
+  },
+  "Siebzehn Glühwürmchen, siebzehn Perlen.": {
+   "datei": "livia/19963f9fdb8d.mp3",
+   "h": "7bedb92ce9",
+   "gehoert": false
+  },
   "Siebzehn minus sieben ist zehn.": {
    "datei": "florian/dcef8a0a40c1.mp3",
    "h": "f766795b6c",
@@ -12199,6 +12559,11 @@
   "Siebzehn minus zehn.": {
    "datei": "florian/72e11c8ad86f.mp3",
    "h": "bb72c38733",
+   "gehoert": false
+  },
+  "Siebzehn Perlen bleiben dunkel.": {
+   "datei": "livia/f3b9a6eaaeb9.mp3",
+   "h": "c23be17ef6",
    "gehoert": false
   },
   "Siebzehn.": {
@@ -12304,6 +12669,11 @@
   "So sagt man es wo": {
    "datei": "florian/99fff3144ba1.mp3",
    "h": "876214fb76",
+   "gehoert": false
+  },
+  "So siehst du Mengen auf einen Blick.": {
+   "datei": "livia/0a26c3064b9f.mp3",
+   "h": "7681cedfcf",
    "gehoert": false
   },
   "so, in einem Zug.": {
@@ -13346,6 +13716,11 @@
    "h": "15eb41b5b6",
    "gehoert": false
   },
+  "Tippe einfach auf eine andere Perle.": {
+   "datei": "livia/ec36f5a2a151.mp3",
+   "h": "e48b5fc306",
+   "gehoert": false
+  },
   "Tippst du eine andere Zahl?": {
    "datei": "florian/2f01c8dbe2c0.mp3",
    "h": "e62375ec6a",
@@ -13861,6 +14236,26 @@
    "hand": true,
    "gehoert": true
   },
+  "Vier Glühwürmchen haben keine Perle.": {
+   "datei": "livia/ccb2ba7445ca.mp3",
+   "h": "f8d9ca699b",
+   "gehoert": false
+  },
+  "Vier Glühwürmchen, vier Perlen.": {
+   "datei": "livia/d22ecbc03863.mp3",
+   "h": "cddc3fdd46",
+   "gehoert": false
+  },
+  "Vier Lichter in einer Reihe.": {
+   "datei": "livia/7e70f9ea934f.mp3",
+   "h": "afca65993a",
+   "gehoert": false
+  },
+  "Vier Perlen bleiben dunkel.": {
+   "datei": "livia/ea8e3b27d512.mp3",
+   "h": "9188019f50",
+   "gehoert": false
+  },
   "Vier Perlen.": {
    "datei": "florian/ab80ea9eb318.mp3",
    "h": "395281eaa5",
@@ -13896,6 +14291,16 @@
    "h": "15540b0ed6",
    "gehoert": false
   },
+  "Vierzehn Glühwürmchen haben keine Perle.": {
+   "datei": "livia/54752bd9d9c3.mp3",
+   "h": "5f4732f541",
+   "gehoert": false
+  },
+  "Vierzehn Glühwürmchen, vierzehn Perlen.": {
+   "datei": "livia/39e50a647c81.mp3",
+   "h": "d0cde6e82a",
+   "gehoert": false
+  },
   "Vierzehn minus vier ist zehn.": {
    "datei": "florian/0f2cc2bcaa23.mp3",
    "h": "fd5728706d",
@@ -13914,6 +14319,11 @@
   "Vierzehn minus zehn.": {
    "datei": "florian/54af58c3f1b6.mp3",
    "h": "ea36451b2f",
+   "gehoert": false
+  },
+  "Vierzehn Perlen bleiben dunkel.": {
+   "datei": "livia/6e16f10d15e9.mp3",
+   "h": "83ea56dd07",
    "gehoert": false
   },
   "Vierzehn.": {
@@ -15446,6 +15856,21 @@
    "h": "1711340b68",
    "gehoert": false
   },
+  "Zehn Glühwürmchen haben keine Perle.": {
+   "datei": "livia/9b2eb7775a16.mp3",
+   "h": "cbc20ef5d8",
+   "gehoert": false
+  },
+  "Zehn Glühwürmchen, zehn Perlen.": {
+   "datei": "livia/364b9bd7c253.mp3",
+   "h": "1af6612661",
+   "gehoert": false
+  },
+  "Zehn Perlen bleiben dunkel.": {
+   "datei": "livia/d880c0ac31b1.mp3",
+   "h": "2222549f9d",
+   "gehoert": false
+  },
   "Zehn plus acht ist achtzehn.": {
    "datei": "florian/6919f7b41b60.mp3",
    "h": "2c36d72cf6",
@@ -15871,6 +16296,11 @@
    "h": "f210e3e409",
    "gehoert": false
   },
+  "Zwanzig Glühwürmchen, zwanzig Perlen.": {
+   "datei": "livia/3b83a7a655cc.mp3",
+   "h": "8f07e3173b",
+   "gehoert": false
+  },
   "Zwanzig.": {
    "datei": "florian/e51f4a6a2b6a.mp3",
    "h": "d16583baf0",
@@ -15879,6 +16309,26 @@
   "Zwanzigerfeld": {
    "datei": "florian/577afda6fbb9.mp3",
    "h": "550ccb4db7",
+   "gehoert": false
+  },
+  "Zwei Glühwürmchen haben keine Perle.": {
+   "datei": "livia/20f37bbb4e18.mp3",
+   "h": "58dc5ac623",
+   "gehoert": false
+  },
+  "Zwei Glühwürmchen, zwei Perlen.": {
+   "datei": "livia/bab8cb76f6a1.mp3",
+   "h": "de1d76c970",
+   "gehoert": false
+  },
+  "Zwei Lichter in einer Reihe.": {
+   "datei": "livia/e5e521f49f81.mp3",
+   "h": "19d5d3357b",
+   "gehoert": false
+  },
+  "Zwei Perlen bleiben dunkel.": {
+   "datei": "livia/3a97f9f76295.mp3",
+   "h": "60e301b182",
    "gehoert": false
   },
   "Zwei Perlen.": {
@@ -15941,6 +16391,16 @@
    "h": "5d507dfbb3",
    "gehoert": false
   },
+  "Zwölf Glühwürmchen haben keine Perle.": {
+   "datei": "livia/e0379ccf82a9.mp3",
+   "h": "cfb72fb542",
+   "gehoert": false
+  },
+  "Zwölf Glühwürmchen, zwölf Perlen.": {
+   "datei": "livia/2c864eeb574a.mp3",
+   "h": "8cd6e51582",
+   "gehoert": false
+  },
   "Zwölf minus zehn ist zwei.": {
    "datei": "florian/4cb91c2524ca.mp3",
    "h": "38e3e5867f",
@@ -15959,6 +16419,11 @@
   "Zwölf minus zwei.": {
    "datei": "florian/268d81752194.mp3",
    "h": "2f95c176e2",
+   "gehoert": false
+  },
+  "Zwölf Perlen bleiben dunkel.": {
+   "datei": "livia/1168b005856c.mp3",
+   "h": "bbb41f2b2e",
    "gehoert": false
   },
   "Zwölf.": {
