@@ -2,8 +2,6 @@
 thema: gerade-ungerade-begruenden
 fach: mathe
 foto: bilder/gerade-ungerade-begruenden.webp
-entwurf: true
-geparkt: true
 quellen:
   - Mathematisches Argumentieren in der Grundschule fördern (Bausteine Entdecken, Beschreiben, Hinterfragen, Begründen; Sprachmuster „Das ist so, weil …“, „Wenn ich … verändere, dann …“), A. Bezold, Programm SINUS an Grundschulen, IPN Kiel, https://primakom.dzlm.de/primafiles/uploads/Dokumente/Arg_Handreichung_Mathe_Bezold.pdf, abgerufen 2026-11-17
   - Two Numbers Under the Microscope (Steckwürfel paarweise legen, Summe zweier ungerader Zahlen, am Beispiel begründen und dem Partner erklären: „Can you say what will happen every time …?“), NRICH, University of Cambridge, https://nrich.maths.org/8059, abgerufen 2026-11-17

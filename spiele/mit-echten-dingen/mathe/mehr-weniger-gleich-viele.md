@@ -2,8 +2,6 @@
 thema: mehr-weniger-gleich-viele
 fach: mathe
 foto: bilder/mehr-weniger-gleich-viele.webp
-entwurf: true
-geparkt: true
 quellen:
   - Mathematische Themen in Klasse 1, Mengen vergleichen (Eins-zu-Eins-Zuordnung; Anzahlvergleiche im Alltag, z. B. Teller, Gläser, Stühle), PIKAS, DZLM, https://pikas.dzlm.de/pikasfiles/uploads/upload/Material/lernen-auf-distanz/lad-mathematische-themen-klasse1-mengen-vergleichen.pdf, abgerufen 2026-11-17
   - Rechnenlernen im Zahlenraum 20+, Teilkompetenz Mengen und Zahlen vergleichen (erst handelnd gegenüberstellen, dann Eins-zu-Eins-Zuordnung, dann Abzählen), ISB Bayern, https://isb.bayern.de/fileadmin/user_upload/Foerderschulen/Geistige_Entwicklung/Rechnenlernen/Handouts/2_Mengenvergleich_Handout.pdf, abgerufen 2026-11-17

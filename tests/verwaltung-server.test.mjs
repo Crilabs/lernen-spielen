@@ -248,7 +248,7 @@ test("Server: Rückmeldung zu Buch und Echten Dingen; Schätzung je Bereich", ()
 test("Server: Rückmeldung zu Ungebautem ohne offenen Auftrag → 409, mit offenem Auftrag erlaubt", () => mitServer(async ({ sende }) => {
   assert.equal((await sende("/api/rueckmeldung", { bereich: "spiel", id: "R01", text: "x" })).status, 409);
   assert.equal((await sende("/api/rueckmeldung", { bereich: "buch", id: "kaninchen", text: "x" })).status, 409);
-  assert.equal((await sende("/api/rueckmeldung", { bereich: "echte-dinge", id: "mehr-weniger-gleich-viele", text: "x" })).status, 409);
+  assert.equal((await sende("/api/rueckmeldung", { bereich: "echte-dinge", id: "fermi-schaetzen", text: "x" })).status, 409);
   assert.equal((await sende("/api/rueckmeldung", { bereich: "spiel", id: "Z99", text: "x" })).status, 404);
   await sende("/api/auftraege", { art: "spiel", ziel: "R01" });
   const r = await sende("/api/rueckmeldung", { bereich: "spiel", id: "R01", text: "Rahmen weg" });

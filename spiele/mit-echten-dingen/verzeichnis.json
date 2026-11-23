@@ -202,6 +202,24 @@
    "datei": "mathe/gerade-ungerade.md",
    "foto": "mathe/bilder/gerade-ungerade.webp"
   },
+  "gerade-ungerade-begruenden": {
+   "fach": "mathe",
+   "name": "Gerade oder ungerade – warum?",
+   "titel": "Warum bleibt eins allein?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Ausflug zu zweit"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Füße auf die Paare"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/gerade-ungerade-begruenden.md",
+   "foto": "mathe/bilder/gerade-ungerade-begruenden.webp"
+  },
   "gerade-ungerade-bis-100": {
    "fach": "mathe",
    "name": "Gerade und ungerade bis 100",
@@ -339,6 +357,24 @@
    "entwurf": false,
    "datei": "grammatik/grundform-verb.md",
    "foto": "grammatik/bilder/grundform-verb.webp"
+  },
+  "mehr-weniger-gleich-viele": {
+   "fach": "mathe",
+   "name": "Mehr, weniger, gleich viele",
+   "titel": "Reicht es für alle?",
+   "formen": [
+    {
+     "situation": "tisch",
+     "name": "Teller für alle Plätze"
+    },
+    {
+     "situation": "bewegung",
+     "name": "Fehlt ein Schuh?"
+    }
+   ],
+   "entwurf": false,
+   "datei": "mathe/mehr-weniger-gleich-viele.md",
+   "foto": "mathe/bilder/mehr-weniger-gleich-viele.webp"
   },
   "minus-zehner": {
    "fach": "mathe",
